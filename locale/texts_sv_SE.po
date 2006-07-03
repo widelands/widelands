@@ -1,3 +1,4 @@
+# translation of texts_sv_SE.po to swedish
 # translation of texts_sv_SE.po to Swedish
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
@@ -8,9 +9,9 @@ msgstr ""
 "Project-Id-Version: texts_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-04-08 09:07+0200\n"
+"PO-Revision-Date: 2006-07-02 01:28+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: Swedish\n"
+"Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -583,8 +584,7 @@ msgstr ""
 
 #: ../txts/README:95
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
-"Var vänlig att bidra med tillräckligt med bakgrunds information. Berätta:"
+msgstr "Var vänlig att bidra med tillräckligt med bakgrunds information. Berätta:"
 
 #: ../txts/README:98
 msgid ""
@@ -676,11 +676,11 @@ msgstr ""
 
 #: ../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "LÄSMIG för Widelands Redigerare"
 
 #: ../txts/editor_readme:3
 msgid "README for the Editor"
-msgstr ""
+msgstr "LÄSMIG för redigeraren"
 
 #: ../txts/editor_readme:9
 msgid ""
@@ -708,7 +708,7 @@ msgstr ""
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr ""
+msgstr "F        Ändrar Fällskärm"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"
@@ -745,3 +745,4 @@ msgstr ""
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
+

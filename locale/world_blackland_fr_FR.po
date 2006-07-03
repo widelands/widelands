@@ -3,21 +3,19 @@
 # This file is distributed under the same license as the WIDELANDS package.
 # me <anubisnotdead@gmail.com>, 2006.
 # me <anubisnotdead@gmail.com>, 2006.
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-13 08:12+0100\n"
+"PO-Revision-Date: 2006-07-02 02:37+0200\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../worlds/blackland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -119,11 +117,11 @@ msgstr "The Widelands Development Team"
 
 #: ../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr ""
+msgstr "Le Pays Noir"
 
 #: ../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+msgstr "Ceci est le sombre, horrible et dangereux Pays Noir"
 
 #: ../worlds/blackland/resconf:4
 msgid "Coal"
@@ -148,3 +146,4 @@ msgstr "Eau"
 #: ../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Poisson"
+

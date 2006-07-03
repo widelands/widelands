@@ -1,3 +1,4 @@
+# translation of campaign_t02_sv_SE.po to swedish
 # translation of campaign_ank_sv_SE.po to Swedish
 # translation of campaign_ank_sv_SE.po to
 # This file is distributed under the same license as the PACKAGE package.
@@ -6,12 +7,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: campaign_ank_sv_SE\n"
+"Project-Id-Version: campaign_t02_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-04-06 19:32+0200\n"
+"PO-Revision-Date: 2006-07-02 01:19+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: Swedish\n"
+"Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +22,7 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:41 ../campaigns/t02.wmf/event:678
 #: ../campaigns/t02.wmf/event:793 ../campaigns/t02.wmf/event:807
 msgid "Thron speaks..."
-msgstr ""
+msgstr "Thron talar..."
 
 #: ../campaigns/t02.wmf/event:13
 msgid ""
@@ -84,7 +85,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:504
 msgid "Brave Boldreth steps aside you..."
-msgstr ""
+msgstr "Den modige Bodreth stiger fram bredvid dig..."
 
 #: ../campaigns/t02.wmf/event:506
 msgid ""
@@ -108,7 +109,7 @@ msgstr "Rådgivare"
 
 #: ../campaigns/t02.wmf/event:518
 msgid "Khantrukh joins the both of you"
-msgstr ""
+msgstr "Khantrukh sammansluter sig med er"
 
 #: ../campaigns/t02.wmf/event:520
 msgid ""
@@ -119,7 +120,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:532
 msgid "Boldreth jumps up."
-msgstr ""
+msgstr "Boldreth hoppar upp."
 
 #: ../campaigns/t02.wmf/event:534
 msgid ""
@@ -134,7 +135,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:546
 msgid "Khantrukh grumbles..."
-msgstr ""
+msgstr "Khantrukh mumlar..."
 
 #: ../campaigns/t02.wmf/event:548
 msgid " \"Old man? Disrespectful youth...\"</p>"
@@ -142,11 +143,11 @@ msgstr " \"Gamla gubbe? Dagens respektlösa ungdom...\"</p>"
 
 #: ../campaigns/t02.wmf/event:560
 msgid "Khantrukh nods satisfied."
-msgstr ""
+msgstr "Khantrukh nickar tillfredställande."
 
 #: ../campaigns/t02.wmf/event:562
 msgid " \"At least. These rocks should last for a while.\"</p>"
-msgstr ""
+msgstr " \"De här stenarna kommer åtminstonde räcka ett tag.\"</p>"
 
 #: ../campaigns/t02.wmf/event:575
 msgid "Boldreth exclaims..."
@@ -171,7 +172,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:589
 msgid "Boldreth laughs..."
-msgstr ""
+msgstr "Boldreth skrattar..."
 
 #: ../campaigns/t02.wmf/event:591
 msgid ""
@@ -181,7 +182,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:604
 msgid "Khantrukh interrupts..."
-msgstr ""
+msgstr "Khantrukh avbryter..."
 
 #: ../campaigns/t02.wmf/event:606
 msgid ""
@@ -193,7 +194,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:618
 msgid "Boldreth nods..."
-msgstr ""
+msgstr "Boldreth nickar..."
 
 #: ../campaigns/t02.wmf/event:620
 msgid ""
@@ -215,7 +216,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:633
 msgid "The elder laughs..."
-msgstr ""
+msgstr "Den Vise skrattar..."
 
 #: ../campaigns/t02.wmf/event:635
 msgid ""
@@ -235,7 +236,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:648
 msgid "Boldreth cheers up..."
-msgstr ""
+msgstr "Boldreth tröstar..."
 
 #: ../campaigns/t02.wmf/event:650
 msgid ""
@@ -246,7 +247,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:663
 msgid "Khantrukh gazes over the plains..."
-msgstr ""
+msgstr "Khantrukh blickar över slätterna..."
 
 #: ../campaigns/t02.wmf/event:665
 msgid ""
@@ -266,11 +267,11 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:681
 msgid "A beautiful morning..."
-msgstr ""
+msgstr "En härlig morgon..."
 
 #: ../campaigns/t02.wmf/event:692
 msgid "Boldreth remarks..."
-msgstr ""
+msgstr "Boldreth påpekar..."
 
 #: ../campaigns/t02.wmf/event:694
 msgid ""
@@ -290,7 +291,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:707
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "Khantrukh talar..."
 
 #: ../campaigns/t02.wmf/event:709
 msgid ""
@@ -323,7 +324,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:723
 msgid "Boldreth seems concerned..."
-msgstr ""
+msgstr "Boldreth verkar oroad..."
 
 #: ../campaigns/t02.wmf/event:725
 msgid ""
@@ -343,7 +344,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:738
 msgid "Boldreth smiles..."
-msgstr ""
+msgstr "Boldreth ler..."
 
 #: ../campaigns/t02.wmf/event:740
 msgid ""
@@ -367,7 +368,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:753
 msgid "Khantrukh steps in..."
-msgstr ""
+msgstr "Khantrukh stiger in..."
 
 #: ../campaigns/t02.wmf/event:755
 msgid ""
@@ -387,8 +388,9 @@ msgid ""
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:769
+#, fuzzy
 msgid "Khantrukh seems reliefed..."
-msgstr ""
+msgstr "Khantrukh verkar lättad..."
 
 #: ../campaigns/t02.wmf/event:771
 msgid ""
@@ -425,7 +427,7 @@ msgstr "En annan kall dag..."
 
 #: ../campaigns/t02.wmf/event:891
 msgid "Victory!"
-msgstr ""
+msgstr "Seger!"
 
 #: ../campaigns/t02.wmf/event:893
 msgid ""
@@ -533,3 +535,4 @@ msgid ""
 "<p>The third material necessary for improved buildings is reed, used to "
 "cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 msgstr ""
+

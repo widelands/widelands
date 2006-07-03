@@ -1,3 +1,4 @@
+# translation of world_blackland_sv_SE.po to swedish
 # translation of world_greenland_sv_SE.po to Swedish
 # Swedish translation of widelands.
 # Copyright (C) 2005 THE widelands'S COPYRIGHT HOLDER
@@ -8,12 +9,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: world_greenland_sv_SE\n"
+"Project-Id-Version: world_blackland_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-03-29 21:59+0200\n"
+"PO-Revision-Date: 2006-07-02 00:40+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -121,11 +122,11 @@ msgstr "Widelands utvecklingslag"
 
 #: ../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr ""
+msgstr "Svartland"
 
 #: ../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+msgstr "Detta är de gråa, hemska och farliga Svartland"
 
 #: ../worlds/blackland/resconf:4
 msgid "Coal"
@@ -150,3 +151,4 @@ msgstr "Vatten"
 #: ../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Fisk"
+

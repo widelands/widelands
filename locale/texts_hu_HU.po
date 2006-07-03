@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands\n"
+"Project-Id-Version: texts_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-14 15:07+0000\n"
+"PO-Revision-Date: 2006-05-19 20:31+0000\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -417,11 +417,15 @@ msgstr ""
 
 #: ../txts/README:1
 msgid "README"
-msgstr "OLVASSEL"
+msgstr "Használati utasítás"
 
 #: ../txts/README:5
 msgid "an open source strategy game"
-msgstr "egy szabad forráskódú statégiai játék"
+msgstr "Szabad forráskódú statégiai játék"
+
+#: ../txts/README:9 ../txts/editor_readme:6
+msgid "Introduction"
+msgstr "Program leírása:"
 
 #: ../txts/README:13
 msgid ""
@@ -433,17 +437,15 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you do."
 msgstr ""
-"Widelands egy stratégiai játék ami a Bluebyte Settlers II mintájára "
-"készült.\n"
+"A Widelands stratégiai játék a Bluebyte Settlers II mintájára készült.\n"
 "A játék egy kis területen indul, egy kevés nyersanyaggal. Az erőforrásokat "
-"felhasználva felépítheted a saját biridalmad. Ahhoz, hogy ezt elérd, fel "
-"kell építened a gazdasági infrasrtuktúrát és újabb területeket kell "
-"felderítened. Szembe kell nézned más népekkel is, akik szintén uralni "
-"akaráják a világot."
+"felhasználva felépítheted a saját birodalmad, ki kell építened a gazdasági "
+"infrasrtuktúrát. Ahogy egyre nagyobb területet foglalsz el, szembe kell "
+"nézned más népekkel is, akik szintén uralni akaráják a világot."
 
 #: ../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr "Ezen a weblapo nézhetsz utána a Widelands projectnek:"
+msgstr "Ezen a weblapon nézhetsz utána a Widelands projektnek:"
 
 #: ../txts/README:22
 msgid ""
@@ -469,12 +471,18 @@ msgid ""
 "can be obtained from http://www.libsdl.org/, SDL_image can be obtained from "
 "http://www.libsdl.org/projects/SDL_image/"
 msgstr ""
+"Widelands futtatásához szükséges az SDL és az SDL_image könyvtár. Windows "
+"kiadásban már benne vannak a könyvtárak. A legtöbb Linux disztribúcióhoz van "
+"előre lefordítot csomag, kérelek olvass utána a disztribúciód leírásában, "
+"hogyan kell telepíteni a könyvtárakat. Ha minden kötél szakad, lefordíthatod "
+"megadnak is. SDL letölthető az alábbi weblapról: http://libsdl.org, "
+"SDL_image beszerezhető innen: http://www.libsdl.org/projects/SDL_image/"
 
 #: ../txts/README:34
 msgid ""
 "Once everything is set up, just start the Widelands executable in order to "
 "run the game."
-msgstr ""
+msgstr "Miután mindent beállítottál, próbáld meg elindítani a játékot."
 
 #: ../txts/README:37
 msgid ""
@@ -483,12 +491,18 @@ msgid ""
 "working directory is set to the directory the Widelands executable resides "
 "in. On Linux, this is best done by launching Widelands through a shell: "
 msgstr ""
+"Ha a játék nem indul, pedig megfelelően telepítetted Widelands-et és a "
+"szükséges könyvtárakat is, kérlek ellnerőrizd, hogy a munkakönyvtár az a "
+"könyvtár legyen ahol a Widelands futtatható fájl van. Linuxon legegyszerűbb "
+"parancssorból indítani a játékot."
 
 #: ../txts/README:43
 msgid ""
 "On Windows, you will have to check the shortcut settings if you start "
 "Widelands via a shortcut."
 msgstr ""
+"Windowson ellenőrizned kell a parancsikon beállításait, ha parancsikonnal "
+"indítod a játékot."
 
 #: ../txts/README:48
 msgid "Status"
@@ -501,50 +515,54 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
+"Widelands mostanra játszható, de folyamatos fejlesztés alatt áll. Szükségünk "
+"van több önkéntesre. A te segítségedre (igen, hozzád beszélek) van "
+"szükségünk. Főleg grafikusok jelentkezését várjuk, hogy jobb játékká tegyük "
+"a Widelands-et."
 
 #: ../txts/README:57
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Billentyűzetparancsok"
 
 #: ../txts/README:61
 msgid "SPACE       Toggles build-help"
-msgstr ""
+msgstr "SPACE     Építési segítség megjelenítése"
 
 #: ../txts/README:63
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M               Térkép megjelenítése"
 
 #: ../txts/README:65
 msgid "C               Toggle census"
-msgstr ""
+msgstr "C               Épületek nevének megjelenítése"
 
 #: ../txts/README:67
 msgid "S               Toggle statistics"
-msgstr "S Statisztika megjelenítése"
+msgstr "S               Statisztika megjelenítése"
 
 #: ../txts/README:69
 msgid "F               Toggle Fullscreen"
-msgstr "F Teljes képernyő"
+msgstr "F               Teljesképernyő"
 
 #: ../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
-msgstr ""
+msgstr "PAGEUP            Játék sebességének növelése"
 
 #: ../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PAGEDOWN    Játék sebességének csökkentése"
 
 #: ../txts/README:77
 msgid "F5           Reveals the entire map"
-msgstr ""
+msgstr "F5           A teljes térkép megmutatása"
 
 #: ../txts/README:79
 msgid "F10         Quit the game immediately"
-msgstr "F10 Kilépés a játékból azonnal"
+msgstr "F10         Kilépés a játékból azonnal"
 
 #: ../txts/README:81
 msgid "F11         Take a screenshot"
-msgstr "F11 Kép készítése"
+msgstr "F11         Kép készítése"
 
 #: ../txts/README:86
 msgid "Reporting Bugs"
@@ -562,13 +580,13 @@ msgstr ""
 
 #: ../txts/README:95
 msgid "Please provide enough background information. Tell us:"
-msgstr "Kérlek írj le elegendő háttérinformációt:"
+msgstr "Kérlek adj meg elegendő háttérinformációt:"
 
 #: ../txts/README:98
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from CVS)"
-msgstr "-a Widelands mely verzióját használod, jelezd ha saját CVS fordítás"
+msgstr "-a Widelands mely verzióját használod, jelezd ha CVS fordítás"
 
 #: ../txts/README:100
 msgid "- how to reproduce the bug"
@@ -587,13 +605,13 @@ msgid ""
 msgstr ""
 "-ha lehetséges küld el egy becsomagolt (zip, gzip, bzip2) munkamenet "
 "felvételet,\n"
-" kivéve ha a hiba könnyedén reprodukálható. Mindig javasolt munkamanet "
+"kivéve ha a hiba könnyedén reprodukálható. Ha hiba történik javasolt mindig "
 "felvételt készíteni \n"
-"abban az esetben, ha hiba történik. További információt alább olvashatsz."
+"További információt alább olvashatsz."
 
 #: ../txts/README:109
 msgid "Creating a Session Record</p>"
-msgstr "Munkamenet felvétel készítése</p>"
+msgstr "Felvétel készítése</p>"
 
 #: ../txts/README:112
 msgid ""
@@ -602,7 +620,7 @@ msgid ""
 "is really helpful for debugging problems."
 msgstr ""
 "Widelands le tudja menteni az összes billentyűlenyomást és egér mozgást egy "
-"fájlba. Később le tudja játszani a játékot az elejétől a végéig. Ez nagyon "
+"fájlba. Így később lejátszhatod a játékot az elejétől a végéig. Ez nagyon "
 "hasznos segítség a hibakereséskor."
 
 #: ../txts/README:115
@@ -610,6 +628,8 @@ msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
+"Felvétel készítéséhez indítsd a játékot a --record paraméterrel. Linuxon "
+"egyszerűen csak írd be ezt a parancssorba: $ ./widelands --record=fájlnév.rec"
 
 #: ../txts/README:118
 msgid ""
@@ -619,12 +639,19 @@ msgid ""
 "should read something like c:\\games\\widelands\\widelands.exe. Change this "
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
+"Windowson készíthetsz egy parancsikont (jobb gomb a widelands.exe-re, aztán "
+"Parancsikon létrehozása). Ezután be kel állítani a parancsikont (jobb gomb a "
+"paracsikonra az asztalon, majd tulajdonságok). A cél könyvtárnak valahogy "
+"így kell kinéznie: c:\\games\\widelands\\widelands.exe. Változtasd meg ezt "
+"így: c:\\games\\widelands\\widelands.exe --record=fájlnév.rec."
 
 #: ../txts/README:121
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
 msgstr ""
+"A fájlnév.rec fájl lejátszása ugyan így történik, csupán --record helyett --"
+"playback paraméterrel kell indítani a játékot."
 
 #: ../txts/README:124
 msgid ""
@@ -634,9 +661,14 @@ msgid ""
 "change between versions. Session records are not intended to serve as demo "
 "files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
+"Megjegyzés: a felvétel fájl nem kompatibilis a különböző Widelands verziók "
+"között, mert a kezelőfelület és más alacsony szintű parancsok "
+"különbözhetnek. Ezt nem \"demo\"-k készítésére terveztük, főleg hibakeresési "
+"eszköz, ami segíti a beküldött hibajelentések tanulmányozását."
 
-#: ../txts/developers:3
-msgid "Devlopment"
+#: ../txts/developers:1
+#, fuzzy
+msgid "Development"
 msgstr "Fejlesztés"
 
 #: ../txts/editor_readme:1
@@ -647,10 +679,6 @@ msgstr "OLVASSEL a Widelands térképszerkesztőhöz"
 msgid "README for the Editor"
 msgstr "OLVASSEL a térképszerkesztőhöz"
 
-#: ../txts/editor_readme:6 ../txts/README:9
-msgid "Introduction"
-msgstr "Program leírása:"
-
 #: ../txts/editor_readme:9
 msgid ""
 "This Editor is intended for players who d like to design their own maps to "
@@ -658,6 +686,11 @@ msgid ""
 "and as the Editor becomes better and better this text  will also get longer "
 "and more complete. Probably it will also contain a little tutorial in a while"
 msgstr ""
+"A térképszerkesztő olyan felhasználóknak készült akik saját térképet "
+"szeretnének készíteni.\n"
+"Jeleleg még fejlesztés alatt áll, ahogy fejlődik úgy lesz e szöveg egyre "
+"hosszabb. Később valószínüleg itt lesz egy kis bevezető a szerkesztő "
+"használatáshoz."
 
 #: ../txts/editor_readme:13
 msgid "Keyboard shortcuts"
@@ -665,52 +698,52 @@ msgstr "Billentyűzetparancsok"
 
 #: ../txts/editor_readme:16
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "SPACE    Építési segítség megjelenítése"
 
 #: ../txts/editor_readme:18
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C               Épületek nevének megjelenítése"
 
 #: ../txts/editor_readme:20
 msgid "E        Toggles event menu"
-msgstr ""
+msgstr "E           Események beállításai"
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr ""
+msgstr "F           Teljesképernyő"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"
-msgstr ""
+msgstr "H           Főmenü megjelenítése"
 
 #: ../txts/editor_readme:26
 msgid "M        Toggles minimap"
-msgstr "M        Térkép megjelenítése"
+msgstr "M           Térkép megjelenítése"
 
 #: ../txts/editor_readme:28
 msgid "P        Toggles player menu"
-msgstr ""
+msgstr "P           Megjeleníti a játékos beállítási ablakot"
 
 #: ../txts/editor_readme:30
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T           Eszközök megjelenítése"
 
 #: ../txts/editor_readme:32
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L   Térkép betöltése"
 
 #: ../txts/editor_readme:34
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S   Térkép mentése"
 
 #: ../txts/editor_readme:36
 msgid "1-0      Changes tools size"
-msgstr ""
+msgstr "1-0         Megváltoztatja az eszköz méretét"
 
 #: ../txts/editor_readme:38
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr ""
+msgstr "SHIFT   Átvált az első alternatív eszközre"
 
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr ""
+msgstr "ALT       Átvált a második alternatív eszközre"
