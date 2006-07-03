@@ -178,14 +178,10 @@ const std::string FileSystem::AbsolutePath(const std::string path)
  */
 const std::string FileSystem::getWorkingDirectory()
 {
-#ifdef __WIN32__
-	Please implement me!
-#else
 	char cwd[PATH_MAX+1];
 	getcwd(cwd, PATH_MAX);
 
 	return std::string(cwd);
-#endif
 }
 
 /**
@@ -345,7 +341,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path)
 	===============================================*/
 
 	bool absolutewin32=false;
-	components=FS_Tokenize(path, '\\');
+	components=FS_Tokenize(path);
 	if (path[0]=='\\') //Is a backslash in path? If yes, the path is allready absolute.
 		absolutewin32=true;
 
