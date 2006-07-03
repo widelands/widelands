@@ -1,6 +1,6 @@
 [global]
 descname=_Grape
-help=
+help=These grapes are the basic for future, tasty wine.
 menu_pic=grape_menu.png
 queue_full_pic=grape_queue_full.png
 queue_empty_pic=grape_queue_empty.png
