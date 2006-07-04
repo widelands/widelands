@@ -1,6 +1,6 @@
 [global]
 descname=_Marble
-help= Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful columns.
+help= "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

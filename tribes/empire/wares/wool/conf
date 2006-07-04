@@ -1,12 +1,12 @@
 [global]
 descname=_ Wool
-help=Wool is used to make cloth.
+help="Wool is the hair of sheeps, which is used to make cloth."
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
 
 
-# Wool is the hair of sheeps, which is use for making cloth
+# Wool is the hair of sheeps, which is used to make cloth
 
 [idle]
 pics=idle.png
