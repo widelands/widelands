@@ -1,29 +1,28 @@
 # French translation of WIDELANDS.
-Copyright (C) 2006 THE WIDELANDS'S COPYRIGHT HOLDER
-This file is distributed under the same license as the WIDELANDS package.
-Emmanuel Andry <eandry@free.fr>, 2006.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-07-02 02:31+0200\n"
+"PO-Revision-Date: 2006-07-12 18:17+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
 
-#: ../tribes/empire/conf:28
+#: ../tribes/empire/conf:24
 msgid "The Widelands Development Team"
 msgstr "L'équipe de développement de Widelands"
 
-#: ../tribes/empire/conf:29
+#: ../tribes/empire/conf:25
 msgid "The Empire"
 msgstr "L'Empire"
 
-#: ../tribes/empire/conf:30
+#: ../tribes/empire/conf:26
 msgid "This is the culture of the roman Empire."
 msgstr "Voici la culture de l'Empire Romain"
 
@@ -100,7 +99,6 @@ msgid "Fisher Hut"
 msgstr "Hutte de Pêcheur"
 
 #: ../tribes/empire/buildings/forester/conf:2
-#, fuzzy
 #, fuzzy
 msgid "Forester Hut"
 msgstr "Sylviculteur"
@@ -492,4 +490,3 @@ msgstr "Tisserand"
 #: ../tribes/empire/buildings/wine-grower/conf:2
 msgid "Wine-Grower"
 msgstr "Vigneron"
-
