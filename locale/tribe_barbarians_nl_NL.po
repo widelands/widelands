@@ -1,33 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Dutch translation of Widelands.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Rob Snelders <programming@ertai.nl>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-06 20:45+0100\n"
+"PO-Revision-Date: 2006-08-05 14:22+0200\n"
 "Last-Translator: Rob Snelders <programming@ertai.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: Netherlands\n"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "Het Widelands Ontwikkelteam"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbaren"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "De machtige volken van het oosten!"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
@@ -51,6 +37,7 @@ msgid "Barrier"
 msgstr "Barrière"
 
 #: ../tribes/barbarians/buildings/battlearena/conf:2
+#, fuzzy
 msgid "Battle Arena"
 msgstr "Arena"
 
@@ -79,26 +66,32 @@ msgid "Construction Site"
 msgstr "Bouwplaats"
 
 #: ../tribes/barbarians/buildings/deep_coalmine/conf:2
+#, fuzzy
 msgid "Deep Coal Mine"
 msgstr "Diepe kolenmijn"
 
 #: ../tribes/barbarians/buildings/deep_goldmine/conf:2
+#, fuzzy
 msgid "Deep Gold Mine"
 msgstr "Diepe goudmijn"
 
 #: ../tribes/barbarians/buildings/deep_oremine/conf:2
+#, fuzzy
 msgid "Deep Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
 #: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
+#, fuzzy
 msgid "Deeper Coal Mine"
 msgstr "Diepe kolenmijn"
 
 #: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
+#, fuzzy
 msgid "Deeper Gold Mine"
 msgstr "Diepe goudmijn"
 
 #: ../tribes/barbarians/buildings/deeper_oremine/conf:2
+#, fuzzy
 msgid "Deeper Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
@@ -112,7 +105,7 @@ msgstr "Boerderij"
 
 #: ../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
-msgstr "Varens kweekplaats"
+msgstr "Varenkwekerij"
 
 #: ../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
@@ -120,7 +113,7 @@ msgstr "Vissershut"
 
 #: ../tribes/barbarians/buildings/fortress/conf:2
 msgid "Fortress"
-msgstr "Vesting"
+msgstr "Vestiging"
 
 #: ../tribes/barbarians/buildings/gamekeeper/conf:2
 msgid "Gamekeeper Hut"
@@ -136,7 +129,7 @@ msgstr "Granietmijn"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood hardener"
-msgstr "Hout verharder"
+msgstr "Houtverharder"
 
 #: ../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
@@ -162,9 +155,10 @@ msgstr "Houthakker"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
-msgstr "Metaalbewerkingsplaats"
+msgstr "Metaalbewerkerij"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
+#, fuzzy
 msgid "Micro brewery"
 msgstr "Kleine brouwerij"
 
@@ -182,7 +176,7 @@ msgstr "Boswachtershut"
 
 #: ../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
-msgstr "Schildwachthuis"
+msgstr "Wachtershuis"
 
 #: ../tribes/barbarians/buildings/smelting_works/conf:2
 msgid "Smelting Works"
@@ -220,7 +214,20 @@ msgstr "Weverij"
 msgid "Well"
 msgstr "Put"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "Het Widelands Ontwikkelteam"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbaren"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "De machtige volken van het oosten!"
+
 #: ../tribes/barbarians/wares/axe/conf:2
+#, fuzzy
 msgid "Axe"
 msgstr "Bijl"
 
@@ -229,6 +236,7 @@ msgid "Bakingtray"
 msgstr ""
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
+#, fuzzy
 msgid "Battle Axe"
 msgstr "Slagbijl"
 
@@ -241,10 +249,12 @@ msgid "Blackwood"
 msgstr ""
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
+#, fuzzy
 msgid "Broad Axe"
 msgstr "Brede bijl"
 
 #: ../tribes/barbarians/wares/bronzeaxe/conf:2
+#, fuzzy
 msgid "Bronze Axe"
 msgstr "Bronzen bijl"
 
@@ -313,6 +323,7 @@ msgid "Kitchen Tools"
 msgstr "Keukengerei"
 
 #: ../tribes/barbarians/wares/mask/conf:2
+#, fuzzy
 msgid "Mask"
 msgstr "Masker"
 
@@ -373,6 +384,7 @@ msgid "War Helmet"
 msgstr "Oorlogshelm"
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
+#, fuzzy
 msgid "Warriors Axe"
 msgstr "oorlogsbijl"
 
@@ -479,3 +491,4 @@ msgstr "Trainer"
 #: ../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Wever"
+

@@ -1,21 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Dutch translation of Widelands.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Rob Snelders <programming@ertai.nl>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-07 21:27+0100\n"
+"PO-Revision-Date: 2006-08-05 14:46+0200\n"
 "Last-Translator: Rob Snelders <programming@ertai.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: Netherlands\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
@@ -31,7 +29,7 @@ msgid ""
 msgstr ""
 "Het was maanden geleden, en nog steeds schuilen we in de oude en donkere "
 "bossen. Mijn strijders jagen overdag en liggen 's nachts wakker - luisterend "
-"naar de geluid van het wrede slachten dat van ver lang de oude bomen "
+"naar de geluid van het wrede slachten dat van ver langs de oude bomen "
 "weergalmt."
 
 #: ../campaigns/t01.wmf/event:15 ../campaigns/t01.wmf/event:32
@@ -55,7 +53,7 @@ msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the wardrums "
 "that haunt me even in my nightmares."
 msgstr ""
-"We zien de vernietigende vlammen, die ver weg Al'thunran verzwelgen. Het "
+"We zien hier de vernietigende vlammen, die ver weg Al'thunran verzwelgen. Het "
 "rode licht flitst in het donker en danst op het ritme van het oorlogsgeweld "
 "die zelfs in mijn nachtmerries op me jagen."
 
@@ -69,14 +67,13 @@ msgid ""
 msgstr ""
 
 #: ../campaigns/t01.wmf/event:64
-#, fuzzy
 msgid ""
 "As father told me, there will be times to fight and times to lay and wait, "
 "trying not to sleep or die before the right time comes. And so I do... wait."
 msgstr ""
 "Zoals mijn vader mij vertelde zijn er tijden om te vechten en tijden om "
 "rustig af te wachten, dan probeer je niet te slapen of dood te gaan voor de "
-"tijd rijp is. Dat doe ik nu... wachten."
+"tijd rijp is. En zodoende ben ik nu aan het.... wachten."
 
 #: ../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
@@ -311,8 +308,9 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/objective:24
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- Bouw een boswachtershut ten oosten van de Houthakkershut."
+msgstr "- Bouw een boswachtershut ten oosten van de Houthakker."
 
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
-msgstr "- Bouw twee steengroeves ten zuid-oosten van je hoofdkwartier"
+msgstr "- Bouw twee steengroeves ten zuid-westen van je hoofdkwartier"
+
