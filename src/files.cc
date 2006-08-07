@@ -399,11 +399,12 @@ FileSystem *FileSystem::CreateFromZip(std::string filename)
 */
 static const std::string getexename(const std::string argv0)
 {
-	static const char* const s_selfptr = "/proc/self/exe";
 	char buf[PATH_MAX]="";
 	int ret=0;
 
 #ifdef __linux__
+	static const char* const s_selfptr = "/proc/self/exe";
+
 	ret = readlink(s_selfptr, buf, sizeof(buf));
 	if (ret == -1) {
 		log("readlink(%s) failed: %s\n", s_selfptr, strerror(errno));
