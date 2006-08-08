@@ -229,3 +229,6 @@ tags: $(SRC) $(HEADERS)
 
 update up:
 	@cvs -q up -APd
+
+src/config.h: src/config.h.default
+	@cp src/config.h.default $@
