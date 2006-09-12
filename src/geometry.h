@@ -90,7 +90,7 @@ struct Vector {
 };
 
 
-
+typedef Sint16 coord_t;
 /**
  * Structure used to store map coordinates
  */
@@ -114,7 +114,7 @@ struct Coords {
 		}
 	};
 
-int x : 16, y : 16;
+	coord_t x, y;
 };
 
 

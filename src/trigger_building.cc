@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 #include "trigger_building.h"
 #include "util.h"
 
-static const int TRIGGER_VERSION = 1;
+static const int TRIGGER_VERSION = 2;
 
 /*
  * Init and cleanup
@@ -53,11 +53,15 @@ Trigger_Building::~Trigger_Building(void) {
  * File Read, File Write
  */
 void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
-   int version= s->get_safe_int( "version" );
+	const int version= s->get_safe_int("version");
 
-   if(version == TRIGGER_VERSION) {
-      m_pt.x = s->get_safe_int( "point_x" );
-      m_pt.y = s->get_safe_int( "point_y" );
+	if (1 <= version and version <= TRIGGER_VERSION) {
+		m_pt =
+			version == 1
+			?
+			Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
+			:
+			s->get_safe_Coords("point");
       set_area( s->get_safe_int( "area" ));
       int player = s->get_safe_int( "player" );
       set_player(player);
@@ -71,25 +75,12 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
 }
 
 void Trigger_Building::Write(Section* s) {
-   // the version
-   s->set_int("version", TRIGGER_VERSION );
-
-   // Point
-   s->set_int("point_x", m_pt.x);
-   s->set_int("point_y", m_pt.y);
-
-   // Area
-   s->set_int("area", get_area());
-
-   // Player
-   s->set_int("player", get_player());
-
-   // Count
-   s->set_int("count", get_building_count());
-
-   // Building
-   s->set_string( "building", m_building.c_str() );
-   // done
+	s->set_int   ("version",  TRIGGER_VERSION);
+	s->set_Coords("point",    m_pt);
+	s->set_int   ("area",     get_area());
+	s->set_int   ("player",   get_player());
+	s->set_int   ("count",    get_building_count());
+	s->set_string("building", m_building.c_str());
 }
 
 /*

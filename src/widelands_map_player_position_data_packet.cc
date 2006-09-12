@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include "widelands_map_player_position_data_packet.h"
 
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 /*
  * Destructor
@@ -41,26 +41,29 @@ void Widelands_Map_Player_Position_Data_Packet::Read(FileSystem* fs, Editor_Game
    Profile prof;
    prof.read( "player_position", 0, fs );
    Section* s = prof.get_section( "global" );
-   
-   // read packet version
-   int packet_version=s->get_int("packet_version");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   // read packet version
+	const int packet_version=s->get_int("packet_version");
+
+	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
       // Read all the positions
       // This could bring trouble if one player position
       // is not set (this is possible in the editor), is also
       // -1, -1
-      Map* map=egbase->get_map();
-
-      int i;
-      char buf[256];
-      for(i=1; i<=map->get_nrplayers(); i++) {
-         Coords c;
-         sprintf( buf, "player_%i_x", i);
-         c.x = s->get_int( buf ); 
-         sprintf( buf, "player_%i_y", i);
-         c.y = s->get_int( buf ); 
-         map->set_starting_pos(i,c);
+		Map & map = *egbase->get_map();
+		const ushort nrplayers = map.get_nrplayers();
+		for (ushort i = 1; i <= nrplayers; ++i) {
+			if (packet_version == 1) {
+				char buf_x[64], buf_y[64];
+				snprintf(buf_x, sizeof(buf_x), "player_%i_x", i);
+				snprintf(buf_y, sizeof(buf_y), "player_%i_y", i);
+				map.set_starting_pos
+					(i, Coords(s->get_int(buf_x), s->get_int(buf_y)));
+			} else {
+				char buf[64];
+				snprintf(buf, sizeof(buf), "player_%i", i);
+				map.set_starting_pos(i, s->get_Coords(buf));
+			}
       }
       return;
    }
@@ -74,20 +77,17 @@ void Widelands_Map_Player_Position_Data_Packet::Read(FileSystem* fs, Editor_Game
 void Widelands_Map_Player_Position_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    Profile prof;
    Section* s = prof.create_section("global");
-    
+
    // packet version
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
-   // Now, all positions in order, first x, then y
-   Map* map=egbase->get_map();
-   int i=0;
-   char buf[256];
-   for(i=1; i<=map->get_nrplayers(); i++) {
-      Coords c=map->get_starting_pos(i);
-      sprintf( buf, "player_%i_x", i);
-      s->set_int( buf, c.x ); 
-      sprintf( buf, "player_%i_y", i);
-      s->set_int( buf, c.y ); 
+	// Now, all positions in order
+	const Map & map = *egbase->get_map();
+	const ushort nrplayers = map.get_nrplayers();
+	for (ushort i = 1; i <= nrplayers; ++i) {
+		char buf[64];
+		snprintf(buf, sizeof(buf), "player_%i", i);
+		s->set_Coords(buf, map.get_starting_pos(i));
    }
 
    prof.write("player_position", false, fs );

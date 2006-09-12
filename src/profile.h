@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include "geometry.h"
 #include "types.h"
 #include <vector>
 
@@ -55,7 +56,7 @@ public:
 		char	*m_name;
 		char	*m_value;
 
-		Value(const char *nname, const char *nval);
+		Value(const char * const nname, const char * const nval);
 		Value(const Value &o);
 		~Value();
 
@@ -70,6 +71,7 @@ public:
 		float get_float() const;
 		bool get_bool() const;
 		const char *get_string() const;
+		Coords get_Coords() const;
 
 		void set_string(const char *value);
 	};
@@ -104,21 +106,28 @@ public:
 	float get_float(const char *name, float def = 0);
 	bool get_bool(const char *name, bool def = false);
 	const char *get_string(const char *name, const char *def = 0);
+	Coords get_Coords(const char * const name, const Coords def = Coords(-1, -1));
 
 	int get_safe_int(const char *name);
 	float get_safe_float(const char *name);
 	bool get_safe_bool(const char *name);
 	const char *get_safe_string(const char *name);
+	Coords get_safe_Coords(const char * const name);
 
 	const char *get_next_int(const char *name, int *value);
 	const char *get_next_float(const char *name, float *value);
 	const char *get_next_bool(const char *name, bool *value);
 	const char *get_next_string(const char *name, const char **value);
+	const char *get_next_Coords(const char * const name, Coords * const value);
 
 	void set_int(const char *name, int value, bool duplicate = false);
 	void set_float(const char *name, float value, bool duplicate = false);
 	void set_bool(const char *name, bool value, bool duplicate = false);
 	void set_string(const char *name, const char *string, bool duplicate = false);
+	void set_Coords
+		(const char * const name,
+		 const Coords value,
+		 const bool duplicate = false);
 
 	Value *create_val(const char *name, const char *value, bool duplicate = false);
 };

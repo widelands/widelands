@@ -27,7 +27,7 @@
 #include "map.h"
 #include "profile.h"
 
-static const int EVENT_VERSION = 1;
+static const int EVENT_VERSION = 2;
 
 /*
  * Init and cleanup
@@ -50,23 +50,23 @@ void Event_Move_View::reinitialize(Game* g) {
  * File Read, File Write
  */
 void Event_Move_View::Read(Section* s, Editor_Game_Base* egbase) {
-   int version=s->get_safe_int("version");
-   if(version == EVENT_VERSION) {
-      m_pt.x=s->get_safe_int("point_x");
-      m_pt.y=s->get_safe_int("point_y");
+	const int version = s->get_safe_int("version");
+
+	if (1 <= version and version <= EVENT_VERSION) {
+		m_pt =
+			version == 1
+			?
+			Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
+			:
+			s->get_safe_Coords("point");
       return;
    }
    throw wexception("Move View Event with unknown/unhandled version %i in map!\n", version);
 }
 
 void Event_Move_View::Write(Section* s, Editor_Game_Base *egbase) {
-   // the version
-   s->set_int("version", EVENT_VERSION);
-
-   // Point
-   s->set_int("point_x", m_pt.x);
-   s->set_int("point_y", m_pt.y);
-   // done
+	s->set_int   ("version", EVENT_VERSION);
+	s->set_Coords("point",   m_pt);
 }
 
 /*

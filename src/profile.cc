@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,19 +60,11 @@ Section::Value
 ==============================================================================
 */
 
-Section::Value::Value(const char *nname, const char *nval)
-{
-	m_used = false;
-	m_name = strdup(nname);
-	m_value = strdup(nval);
-}
+Section::Value::Value(const char * const nname, const char * const nval) :
+m_used(false), m_name(strdup(nname)), m_value(strdup(nval)) {}
 
-Section::Value::Value(const Section::Value &o)
-{
-	m_used = o.m_used;
-	m_name = strdup(o.m_name);
-	m_value = strdup(o.m_value);
-}
+Section::Value::Value(const Section::Value &o) :
+m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
 
 Section::Value::~Value()
 {
@@ -82,12 +74,13 @@ Section::Value::~Value()
 
 Section::Value &Section::Value::operator=(const Section::Value &o)
 {
-	free(m_name);
-	free(m_value);
-	m_used = o.m_used;
-	m_name = strdup(o.m_name);
-	m_value = strdup(o.m_value);
-
+	if (this != &o) {
+		free(m_name);
+		free(m_value);
+		m_used = o.m_used;
+		m_name = strdup(o.m_name);
+		m_value = strdup(o.m_value);
+	}
 	return *this;
 }
 
@@ -143,6 +136,22 @@ bool Section::Value::get_bool() const
 const char *Section::Value::get_string() const
 {
 	return m_value;
+}
+
+Coords Section::Value::get_Coords() const
+{
+	char * endp = m_value;
+	const long int x = strtol(endp, &endp, 0);
+	const long int y = strtol(endp, &endp, 0);
+	if
+		(x <= std::numeric_limits<coord_t>::min() or
+		 x >= std::numeric_limits<coord_t>::max() or
+		 y <= std::numeric_limits<coord_t>::min() or
+		 y >= std::numeric_limits<coord_t>::max() or
+		 *endp)
+		throw wexception("%s: '%s' is not a Coords", get_name(), m_value);
+
+	return Coords(x, y);
 }
 
 void Section::Value::set_string(const char *value)
@@ -342,6 +351,17 @@ const char *Section::get_safe_string(const char *name)
 	return v->get_string();
 }
 
+/** Section::get_safe_Coords(const char * const name)
+ *
+ * Return the key value as a Coords or throw an exception if the key
+ * doesn't exist
+ */
+Coords Section::get_safe_Coords(const char * const name) {
+	const Value * const v = get_val(name);
+	if (not v) throw wexception("[%s]: missing key '%s'", get_name(), name);
+	return v->get_Coords();
+}
+
 /** Section::get_int(const char *name, int def)
  *
  * Returns the integer value of the given key. Falls back to a default value
@@ -428,6 +448,22 @@ const char *Section::get_string(const char *name, const char *def)
 	return v->get_string();
 }
 
+/** Section::get_Coords(const char * const name, const Coords def)
+ *
+ * Returns the value of the given key. Falls back to a default value if the
+ * key is not found.
+ *
+ * Args: name	name of the key
+ *       def	fallback value
+ *
+ * Returns: the Coords value of the key
+ */
+Coords Section::get_Coords(const char * const name, Coords def) {
+	const Value * const v = get_val(name);
+	if (not v) return def;
+	return v->get_Coords();
+}
+
 /** Section::get_next_int(const char *name, int *value)
  *
  * Retrieve the next unused key with the given name as an integer.
@@ -503,6 +539,24 @@ const char *Section::get_next_string(const char *name, const char **value)
 	return v->get_name();
 }
 
+/** Section::get_next_Coords(const char * const name, Coords & value)
+ *
+ * Retrieve the next unused key with the given name as a Coords value.
+ *
+ * Args: name	name of the key, can be 0 to find all unused keys
+ *       value	value of the key is stored here
+ *
+ * Returns: the name of the key, or 0 if none has been found
+ */
+const char * Section::get_next_Coords
+(const char * const name, Coords * const value)
+{
+	const Value * const v = get_next_val(name);
+	if (not v) return 0;
+	if (value) *value = v->get_Coords();
+	return v->get_name();
+}
+
 /** Section::set_int(const char *name, int value, bool duplicate = false)
  *
  * Modifies/Creates the given key.
@@ -554,6 +608,21 @@ void Section::set_bool(const char *name, bool value, bool duplicate)
 void Section::set_string(const char *name, const char *string, bool duplicate)
 {
 	create_val(name, string, duplicate)->mark_used();
+}
+
+/** Section::set_Coords(const char * const name, const Coords value, const bool duplicate = false)
+ *
+ * Modifies/Creates the given key.
+ * If duplicate is true, a duplicate key will be created if the key already
+ * exists.
+ */
+void Section::set_Coords
+(const char * const name, const Coords value, const bool duplicate)
+{
+	char buf[64];
+
+	snprintf(buf, sizeof(buf), "%i %i", value.x, value.y);
+	create_val(name, buf, duplicate)->mark_used();
 }
 
 
