@@ -19,6 +19,7 @@
 
 #include <cstdarg>
 #include <cctype>
+#include <limits>
 #include <stdio.h>
 #include <string>
 
