@@ -165,7 +165,7 @@ void Editor_Player_Menu::update(void) {
       // Check if starting position is valid
       bool start_pos_valid=true;
       Coords start_pos=m_parent->get_map()->get_starting_pos(i+1);
-      if(start_pos.x==-1 && start_pos.y==-1) start_pos_valid=false;
+      if (start_pos.is_invalid()) start_pos_valid = false;
 
       if(!m_plr_names[i]) {
           m_plr_names[i]=new UIEdit_Box(this, posx, posy, 140, size, 0, i);
@@ -295,13 +295,13 @@ void Editor_Player_Menu::player_tribe_clicked(int n) {
 void Editor_Player_Menu::set_starting_pos_clicked(int n) {
    // jump to the current field
    Coords c=m_parent->get_map()->get_starting_pos(n);
-   if(c.x!= -1 && c.y!= -1) m_parent->move_view_to(c);
+   if (c.is_valid()) m_parent->move_view_to(c);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
    if(m_parent->get_editor()->get_player(n)) {
-      if(m_parent->get_map()->get_starting_pos(n) != Coords(-1,-1)) {
+      if (not m_parent->get_map()->get_starting_pos(n).is_invalid()) {
          BaseImmovable* imm = m_parent->get_map()->get_field(m_parent->get_map()->get_starting_pos(n))->get_immovable();
          if(imm && imm->get_type() == Map_Object::BUILDING) return;
       }
@@ -342,7 +342,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
    // Check if starting position is valid (was checked before
    // so must be true)
    Coords start_pos=m_parent->get_map()->get_starting_pos(n);
-   assert(start_pos.x!=-1 && start_pos.y!=-1);
+   assert(start_pos.is_valid());
 
    Editor* editor=m_parent->get_editor();
 

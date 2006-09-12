@@ -88,7 +88,7 @@ void Event_Unhide_Area::Write(Section* s, Editor_Game_Base *egbase) {
  * run the event
  */
 Event::State Event_Unhide_Area::run(Game* game) {
-   assert(m_pt.x!=-1 && m_pt.y!=-1);
+   assert(m_pt.is_valid());
    assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
 
    Player* player=game->get_player(m_player);

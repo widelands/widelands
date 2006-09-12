@@ -40,7 +40,7 @@ int Editor_Tool_Set_Starting_Pos_Callback(const TCoords c, void * data, int) {
 	for (unsigned short i = 1; i <= nrplayers; ++i) {
 		if (i == m_current_player) continue;
 		const Coords sp = map.get_starting_pos(i);
-		if (sp.x == -1 and sp.y == -1) continue;
+		if (sp.is_invalid()) continue;
 		if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) return 0;
 	}
 
@@ -82,7 +82,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
       // that there might be already a hq placed somewhere. This needs to be
       // deleted before a starting position change can occure
       if(ei->get_editor()->get_player(m_current_player)) {
-         if(ei->get_map()->get_starting_pos(m_current_player) != Coords(-1,-1)) {
+         if (not ei->get_map()->get_starting_pos(m_current_player).is_invalid()) {
             BaseImmovable* imm = ei->get_map()->get_field(ei->get_map()->get_starting_pos(m_current_player))->get_immovable();
             if(imm && imm->get_type() == Map_Object::BUILDING) return 1;
          }
@@ -100,7 +100,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
       if(Editor_Tool_Set_Starting_Pos_Callback(fc, map,0)) {
          // Remove old overlay if any
          Coords c=map->get_starting_pos(m_current_player);
-         if(c.x!=-1 && c.y!=-1)
+         if (c.is_valid())
             map->get_overlay_manager()->remove_overlay(c,picid);
 
          // Add new overlay

@@ -90,7 +90,7 @@ void Event_Conquer_Area::Write(Section* s, Editor_Game_Base *egbase) {
  * run the event
  */
 Event::State Event_Conquer_Area::run(Game* game) {
-   assert(m_pt.x!=-1 && m_pt.y!=-1);
+   assert(m_pt.is_valid());
    assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
 
    game->conquer_area_no_building(m_player, Coords(m_pt.x, m_pt.y), get_area());

@@ -102,6 +102,9 @@ struct Coords {
 		{return x == other.x and y == other.y;}
 	bool operator!=(const Coords other) const {return not (*this == other);}
 
+	bool is_valid  () const {return x != -1 and y != -1;}
+	bool is_invalid() const {return x == -1 and y == -1;}
+
 	/**
 	 * For use with standard containers.
 	 */

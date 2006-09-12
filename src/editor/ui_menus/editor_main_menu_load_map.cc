@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -298,7 +298,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          text+="_starting_pos.png";
          Coords fc=m_parent->get_map()->get_starting_pos(i);
 
-         if(fc.x==-1 && fc.y==-1) continue;
+         if (fc.is_invalid()) continue;
          int w, h;
          int picid=g_gr->get_picture( PicMod_Game,  text.c_str() );
          g_gr->get_picture_size(picid, &w, &h);

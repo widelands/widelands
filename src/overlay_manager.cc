@@ -176,7 +176,7 @@ void Overlay_Manager::register_overlay
    int hsx=hot_spot.x;
    int hsy=hot_spot.y;
 
-   if((hot_spot.x == -1) && (hot_spot.y == -1)) {
+	if (hot_spot.is_invalid()) {
       g_gr->get_picture_size(picid, &hsx, &hsy);
       hsx>>=1;
       hsy>>=1;

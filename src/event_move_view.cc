@@ -73,7 +73,7 @@ void Event_Move_View::Write(Section* s, Editor_Game_Base *egbase) {
  * check if trigger conditions are done
  */
 Event::State Event_Move_View::run(Game* game) {
-   assert(m_pt.x!=-1 && m_pt.y!=-1);
+   assert(m_pt.is_valid());
 
    Interactive_Base* iab=game->get_iabase();
    iab->move_view_to(m_pt);
