@@ -79,13 +79,13 @@ void Widelands_Map_Elemental_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
  * Write Function
  */
 void Widelands_Map_Elemental_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-  
+
    Profile prof;
    Section* s = prof.create_section( "global" );
 
    // Packet version
    s->set_int( "packet_version", CURRENT_PACKET_VERSION );
-   // Map Dimension   
+   // Map Dimension
    Map* map=egbase->get_map();
    s->set_int( "map_w", map->get_width());
    s->set_int( "map_h", map->get_height());

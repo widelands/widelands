@@ -417,4 +417,3 @@ Bob *Critter_Bob_Descr::create_object()
 {
 	return new Critter_Bob(this);
 }
-

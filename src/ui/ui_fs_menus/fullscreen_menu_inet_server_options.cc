@@ -52,4 +52,3 @@ Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions ()
 {
 }
-

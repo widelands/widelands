@@ -34,7 +34,7 @@ class Building_Statistics_Menu : public UIUniqueWindow {
       Building_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
       virtual ~Building_Statistics_Menu(void);
 
-      void think(void); 
+      void think(void);
       void draw(RenderTarget*);
 
    private:

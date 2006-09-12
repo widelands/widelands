@@ -198,4 +198,3 @@ void Event_Move_View_Option_Menu::update(void) {
    sprintf(buf, "%i", m_y);
    m_y_ta->set_text(buf);
 }
-

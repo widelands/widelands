@@ -55,7 +55,7 @@ public:
 
 	inline int get_subtype() const { return m_subtype; }
 	virtual int get_conquers(void) const { return m_conquers; }
-   
+
 private:
 	int	m_subtype;
 	int	m_conquers;		// HQs conquer
@@ -85,7 +85,7 @@ public:
 	void remove_wares(int id, int count);
    void insert_workers(int id, int count);
    void remove_workers(int id, int count);
-   
+
 	virtual bool fetch_from_flag(Game* g);
 
 	void mark_as_used (Game* g, int ware, Requeriments* r);
@@ -100,8 +100,8 @@ public:
 	int get_soldiers_passing (Game*, int, Requeriments*);
 	bool can_create_worker(Game *, int worker);
 	void create_worker(Game *, int worker);
-   
-   /// Military stuff 
+
+   /// Military stuff
    virtual bool has_soldiers();
    virtual void defend (Game*, Soldier*);
    virtual void conquered_by (Player*);
@@ -130,9 +130,9 @@ public:
 	virtual ~WarehouseSupply();
 
 	void set_economy(Economy* e);
-   
+
    void set_nrworkers( int i );
-   void set_nrwares( int i ); 
+   void set_nrwares( int i );
 
 
 	const WareList &get_wares() const { return m_wares; }

@@ -39,14 +39,14 @@
 #define PACKET_FLAG              11        // Scenario packet, non obligatory (but always present)
 #define PACKET_ROAD              12        // Scenario packet, non obligatory (but always present)
 #define PACKET_BUILDING          13        // Scenario packet, non obligatory (but always present)
-#define PACKET_WARE              14        // Scenario packet, non obligatory (but always present)   
+#define PACKET_WARE              14        // Scenario packet, non obligatory (but always present)
 
-#define PACKET_FLAGDATA          15        // Scenario packet, non obligatory 
+#define PACKET_FLAGDATA          15        // Scenario packet, non obligatory
 #define PACKET_ROADDATA          16        // Scenario packet, non obligatory
-#define PACKET_BUILDINGDATA      17        // Scenario packet, non obligatory 
-#define PACKET_WAREDATA          18        // Scenario packet, non obligatory 
-#define PACKET_BOBDATA           19        // Scenario packet, non obligatory 
-#define PACKET_IMMOVABLEDATA     20        // Scenario packet, non obligatory 
+#define PACKET_BUILDINGDATA      17        // Scenario packet, non obligatory
+#define PACKET_WAREDATA          18        // Scenario packet, non obligatory
+#define PACKET_BOBDATA           19        // Scenario packet, non obligatory
+#define PACKET_IMMOVABLEDATA     20        // Scenario packet, non obligatory
 
 #define PACKET_OWNED_FIELDS      21        // Scenario packet, non obligatory
 #define PACKET_SEEN_FIELDS       22        // Scenario packet, non obligatory
@@ -54,4 +54,3 @@
 #define PACKET_BATTLE            23        // Active battle, non obligatory
 #define PACKET_END_OF_MAP_DATA 254         // End of Map
 #endif
-

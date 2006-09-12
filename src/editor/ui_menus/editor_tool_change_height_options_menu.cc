@@ -140,5 +140,3 @@ void Editor_Tool_Change_Height_Options_Menu::update(void) {
    sprintf(buf, "%i", m_sht->get_set_to());
    m_set->set_text(buf);
 }
-
-

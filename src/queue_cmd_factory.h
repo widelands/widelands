@@ -33,4 +33,4 @@ class Queue_Cmd_Factory {
       static BaseCommand* create_correct_queue_command(uint id);
 };
 
-#endif 
+#endif

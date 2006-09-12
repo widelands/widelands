@@ -41,7 +41,7 @@ class UITable_Entry {
       const char* get_string(int);
       int  get_picid(void) { return m_picid; }
       void* get_user_data(void) { return m_user_data; }
-      
+
       void set_color( RGBColor col ) {
          m_use_clr = true;
          m_color = col;
@@ -63,13 +63,13 @@ class UITable_Entry {
 
 
 /**
- * This class defines a table like panel, 
- * whith columns and lines and all entrys can be seleted 
+ * This class defines a table like panel,
+ * whith columns and lines and all entrys can be seleted
  * by colums by clicking on the header-button
  */
 class UITable : public UIPanel {
    friend class UITable_Entry;
-   
+
 public: // DATA
    enum Type {
       STRING,
@@ -78,7 +78,7 @@ public: // DATA
       UP,
       DOWN
    };
-      
+
 public: // FUNCTIONS
 	UITable(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, Dir = DOWN);
 	~UITable();
@@ -96,7 +96,7 @@ public: // FUNCTIONS
    int  get_sort_colum(void) { return m_sort_column; }
    int  get_sort_direction(void) { return m_sort_direction; }
    void set_sort_direction(Dir dir) { m_sort_direction=dir; }
-   
+
    void sort(void);
    void remove_entry(int i);
 
@@ -134,7 +134,7 @@ private: // DATA
 	};
 	static const int ms_darken_value=-20;
    static const int DOUBLE_CLICK_INTERVAL=500; // half a second
-   
+
    std::vector<Column> m_columns;
    int                  m_max_pic_width;
    int                  m_lineheight;
@@ -146,11 +146,11 @@ private: // DATA
    int                  m_last_selection;  // for double clicks
    int                  m_sort_direction;
    int                  m_sort_column;
-   Dir                  m_default_sort_dir; 
+   Dir                  m_default_sort_dir;
 
 private: // FUNCTIONS
    void header_button_clicked(int);
-   void add_entry(UITable_Entry* t, bool); 
+   void add_entry(UITable_Entry* t, bool);
 	std::vector<UITable_Entry*>	m_entries;
 	void set_scrollpos(int pos);
 };

@@ -73,10 +73,10 @@ endif
 #  NO USER CHANGES BELOW THIS POINT											 #
 ####################################################################
 
-### 
-# 
+###
+#
 # COMPILE TIME configuration
-ifeq ($(USE_GGZ),YES) 
+ifeq ($(USE_GGZ),YES)
 ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
 ADD_LDFLAGS:=-lggzmod -lggzcore -lggz
 endif
@@ -172,14 +172,14 @@ all: makedirs tags $(OBJECT_DIR)/widelands
 	@echo "    Congratulations. Build seems to be completed without error."
 	@echo "    You can run the game now. just type: './widelands' and enjoy!"
 	@echo "    Comments go to widelands-public@lists.sf.net"
-	@echo     
+	@echo
 	@echo "            THE WIDELANDS DEVELOPMENT TEAM"
 
 clean:
 	@-rm -rf widelands
 	@-rm -rf *.da src/*.da
-	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o 
-	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d 
+	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o
+	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d
 	@-rm -rf $(OBJECT_DIR)/widelands
 	@-rm -rf *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
 

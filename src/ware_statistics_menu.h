@@ -33,7 +33,7 @@ class Ware_Statistics_Menu : public UIUniqueWindow {
       Ware_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
       virtual ~Ware_Statistics_Menu(void);
 
- 
+
    private:
       Interactive_Player* m_parent;
       WUIPlot_Area*       m_plot;

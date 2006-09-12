@@ -136,5 +136,3 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
    fw.Write( fs, "binary/immovable");
    // DONE
 }
-
-

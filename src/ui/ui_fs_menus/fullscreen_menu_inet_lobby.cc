@@ -245,4 +245,3 @@ void Fullscreen_Menu_InetLobby::disconnect( void ) {
    end_modal(0);
    return;
 }
-

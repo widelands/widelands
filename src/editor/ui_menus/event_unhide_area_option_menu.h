@@ -52,5 +52,3 @@ class Event_Unhide_Area_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

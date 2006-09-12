@@ -235,4 +235,3 @@ void General_Statistics_Menu::radiogroup_changed(int id) {
    }
    m_selected_information = id;
 };
-

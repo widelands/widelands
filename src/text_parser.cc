@@ -66,39 +66,39 @@ Text_Block::Text_Block(const Text_Block &src) {
 	m_font_face = src.m_font_face;
 	m_line_spacing = src.m_line_spacing;
       }
-      
+
 Text_Parser::Text_Parser(){
       }
-      
+
 Text_Parser::~Text_Parser(){
 }
-            
-void Text_Parser::parse(std::string *text, std::vector<Richtext_Block> *blocks, Varibale_Callback vcb, void* vcdata) {  
+
+void Text_Parser::parse(std::string *text, std::vector<Richtext_Block> *blocks, Varibale_Callback vcb, void* vcdata) {
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
-	while (more_richtext_blocks) {    
+	while (more_richtext_blocks) {
 		Richtext_Block new_richtext_block;
 		std::string unparsed_text = "";
 		std::string richtext_format = "";
-      
+
 		more_richtext_blocks = extract_format_block(text,&unparsed_text,&richtext_format,"<rt",">","</rt>");
 		parse_richtexttext_attributes(richtext_format,&new_richtext_block);
-      
+
 		std::vector<Text_Block> text_blocks;
-      
+
 		//Second while loop parses all textblocks of current richtext block
 		bool more_text_blocks = true;
 		while (more_text_blocks) {
 			std::string block_format = "";
 			std::string block_text = "";
 			Text_Block new_block;
-     
+
 			std::vector<std::string> words;
 			std::vector<uint> line_breaks;
-			
+
 			more_text_blocks = parse_textblock(&unparsed_text,&block_format,&words, &line_breaks,vcb,vcdata);
 			parse_text_attributes(block_format,&new_block);
-					
+
 			new_block.set_words(words);
 			new_block.set_line_breaks(line_breaks);
 			text_blocks.push_back(new_block);
@@ -110,7 +110,7 @@ void Text_Parser::parse(std::string *text, std::vector<Richtext_Block> *blocks, 
 
 bool Text_Parser::parse_textblock(std::string *block, std::string *block_format, std::vector<std::string> *words, std::vector<uint> *line_breaks, Varibale_Callback vcb, void* vcdata) {
 	std::string block_text = "";
-	
+
 	bool extract_more = extract_format_block(block,&block_text,block_format,"<p",">","</p>");
 
       // Serch for map variables
@@ -126,11 +126,11 @@ bool Text_Parser::parse_textblock(std::string *block, std::string *block_format,
             block_text.replace( offset, end-offset+1, str );
          }
       }
-      
+
 	//Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
 	split_words(block_text, &unwrapped_words);
-      
+
 	//Handle user defined line breaks, and save them
 	for(std::vector<std::string>::const_iterator it = unwrapped_words.begin(); it != unwrapped_words.end(); it++) {
 		std::string line = *it;
@@ -174,23 +174,23 @@ bool Text_Parser::extract_format_block(std::string *block, std::string *block_te
 		}
 		block->erase(0,format_begin_pos);
 	}
-	
+
 	block->erase(0,block_start.size());
 	if (block->substr(0,1) == " ")
 		block->erase(0,1);
-	
+
 	SSS_T format_end_pos = block->find(format_end);
 	if (format_end_pos == std::string::npos) {
 		return false;
 	}
-	
+
 	//Append block_format
 	block_format->erase();
 	block_format->append(block->substr(0,format_end_pos));
 
 	//Delete whole format block
 	block->erase(0,format_end_pos+format_end.size());
-	
+
 	//Find end of block
 	SSS_T block_end_pos = block->find(block_end);
 	if (block_end_pos == std::string::npos) {
@@ -200,8 +200,8 @@ bool Text_Parser::extract_format_block(std::string *block, std::string *block_te
 	block_text->erase();
 	block_text->append(block->substr(0,block_end_pos));
 	//block_text = new std::string(block->substr(0,block_end_pos));
-	
-	//Erase text including closing tag 
+
+	//Erase text including closing tag
 	block->erase(0,block_end_pos+block_end.size());
 	//Is something left
 	if (!block->size() || block->find(block_start) == std::string::npos)
@@ -268,7 +268,7 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 				element->set_line_spacing(atoi(val.c_str()));
          else if (key == "font-color") {
             SSS_T offset = 0;
-            if( val[0] == '#' ) 
+            if( val[0] == '#' )
                offset = 1;
             std::string r = "0x"+val.substr(offset,2);
             std::string g = "0x"+val.substr(offset+2,2);
@@ -298,4 +298,3 @@ Align Text_Parser::set_align(std::string align) {
    else
       return Align_Left;
 }
-

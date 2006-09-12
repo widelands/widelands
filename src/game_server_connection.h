@@ -31,7 +31,7 @@ class Game_Server_Protocol_Packet;
 
 /*
  * This class defines a connection to a widelands
- * game server. It is used to 
+ * game server. It is used to
  *  - connect to a game server
  *  - chat there, list games, users and so on...
  *  - send commands to the game server
@@ -49,7 +49,7 @@ class Game_Server_Connection {
       Game_Server_Connection(std::string host, uint port);
       ~Game_Server_Connection(void);
 
-      void connect(void); 
+      void connect(void);
 
       void send(Game_Server_Protocol_Packet*);
       void handle_data(void);
@@ -62,7 +62,7 @@ class Game_Server_Connection {
       void set_chat_message_handler(ChatMessage_Handler, void*);
       void set_critical_error_handler(CriticalError_Handler, void*);
       void set_disconnect_handler(Disconnet_Handler, void*);
-      
+
       // Call callback functions
       void server_message(std::string str);
       void user_entered(std::string str, std::string, uchar);
@@ -70,13 +70,13 @@ class Game_Server_Connection {
       void get_user_info( std::string, std::string, std::string);
       void chat_message( std::string, std::string, uchar );
       void critical_error(std::string str);
-      
-      // Set user data 
+
+      // Set user data
       void set_username(const char* name) { m_username = name; }
       const char* get_username(void) { return m_username.c_str(); }
       void set_group(const char* name) { m_group = name; }
       const char* get_group(void) { return m_group.c_str(); }
-      void set_room(const char* name); 
+      void set_room(const char* name);
       const char* get_room(void) { return m_room.c_str(); }
 
    private:
@@ -95,7 +95,7 @@ class Game_Server_Connection {
 
       // Callback functions
       ServerMessage_Handler m_smh;
-      void* m_smhd; 
+      void* m_smhd;
       UserEntered_Handler m_ueh;
       void* m_uehd;
       RoomInfo_Handler m_rih;

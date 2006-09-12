@@ -31,7 +31,7 @@ class Game_Preload_Data_Packet;
 
 /*
  * This class reads a complete state
- * of a game out to a file. 
+ * of a game out to a file.
  */
 class Game_Loader {
    public:
@@ -40,7 +40,7 @@ class Game_Loader {
 
       int preload_game(Game_Preload_Data_Packet*);
       int load_game(void);
-     
+
    private:
       FileSystem* m_fs;
       Game* m_game;

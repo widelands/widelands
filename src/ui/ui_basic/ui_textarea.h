@@ -56,4 +56,3 @@ private:
 };
 
 #endif // __S__TEXTAREA_H
-

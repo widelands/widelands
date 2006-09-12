@@ -339,5 +339,3 @@ void Editor_Objectives_Menu::insert_objective( MapObjective* var ) {
 
    m_table->sort();
 }
-
-

@@ -744,4 +744,3 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite(Building* buildi
 
 	// DONE
 }
-

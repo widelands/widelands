@@ -47,5 +47,3 @@ class Trigger_Null_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

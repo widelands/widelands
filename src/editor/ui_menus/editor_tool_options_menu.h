@@ -31,11 +31,10 @@ class Editor_Tool_Options_Menu : public UIUniqueWindow {
 
          inline Editor_Interactive* get_parent() { return m_parent; }
          void select_correct_tool(void) ;
-         
+
       private:
          int m_index;
          Editor_Interactive* m_parent;
 };
 
 #endif
-

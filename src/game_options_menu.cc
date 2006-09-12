@@ -168,5 +168,3 @@ GameOptionsMenu::~GameOptionsMenu
 GameOptionsMenu::~GameOptionsMenu()
 {
 }
-
-

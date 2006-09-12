@@ -782,4 +782,3 @@ void Cmd_EnemyFlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    fw->Unsigned8(number);
    fw->Unsigned8(type);
 }
-

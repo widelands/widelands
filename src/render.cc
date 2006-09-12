@@ -493,4 +493,3 @@ void AnimationGfx::encode( uchar plr, const RGBColor* plrclrs )
       frames.push_back( newsurface );
    }
 }
-

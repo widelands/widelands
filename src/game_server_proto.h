@@ -24,23 +24,23 @@
 
 /*
  * This file delivers all informations needed to understand
- * and implement the general game server protocol. 
+ * and implement the general game server protocol.
  *
  * The protocol consist of packages. Each package passes four
- * stages: 
+ * stages:
  *   1) senden by client or server, containing data of what to do
  *   2) executet by receiver
  *   3) receiver sends answer package
  *   4) sender executes answer package
  * Each package consits at least of the following data
- * 
+ *
  *  <2B packetsize><2B  id><2B INDEX><2B FLAGS><... packet data...>
- *                    a)      b) 
+ *                    a)      b)
  * The id defines which packet follows, the index is a simple index increasing with each
- * send packet. The Client starts with id 0, the server with id 0xffff + 1. Each wrap 
- * before they get into the other ones id space. 
- * Flags are currently only if this is a reply to a packet. 
- * 
+ * send packet. The Client starts with id 0, the server with id 0xffff + 1. Each wrap
+ * before they get into the other ones id space.
+ * Flags are currently only if this is a reply to a packet.
+ *
  * When a client connects to
  * a server it sends a hello package. This package also contains the ability of the client
  * (see the hello package source for more informations)
@@ -55,19 +55,19 @@
  */
 enum {
    GGSPP_CONNECT = 1,
-   GGSPP_HELLO = 2, 
+   GGSPP_HELLO = 2,
    GGSPP_USERENTERED = 3,
    GGSPP_GETROOMINFO = 4,
    GGSPP_GETUSERINFO = 5,
-  
+
    GGSPP_CHATMESSAGE = 6,
-   GGSPP_PING = 7, 
-   
+   GGSPP_PING = 7,
+
 
 
 
    GGSPP_GAMELIST = 8,
-   
+
    GGSPP_GAMESTARTED = 9,
    GGSPP_GAMEENDED = 10,
 
@@ -94,7 +94,7 @@ const static ushort GAME_SERVER_PORT = 8128;
 enum GSP_Flags {
    GSP_ANSWER = 1
 };
-   
+
 /*
  * Flag decoding
  */
@@ -111,7 +111,7 @@ const static uchar GSP_MINOR_VERSION = 0;
  *
  * Request (Client):
  *  <2B id><2B index><2B FLAGS> <2B Version> <Str Game Name>
- * Answer (Server): 
+ * Answer (Server):
  *  <2B id> <2B index> <2B FLAGS> <1B Answer> <2B Server Protocol Version>
  */
 enum CP_Answer {
@@ -158,7 +158,7 @@ const uchar UEP_ACK = 1;
  */
 enum RI_AnswerFlags {
    RI_ACK = 1,
-   RI_NONEXISTANT 
+   RI_NONEXISTANT
 };
 
 /*

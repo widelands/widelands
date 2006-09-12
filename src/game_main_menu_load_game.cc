@@ -233,5 +233,3 @@ bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
 
    return true;
 }
-
-

@@ -31,7 +31,7 @@ class UIListselect;
 // fullfilled scenario objectives.
 class GameObjectivesMenu : public UIUniqueWindow {
 public:
-	GameObjectivesMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Game* game); 
+	GameObjectivesMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Game* game);
 	virtual ~GameObjectivesMenu();
 
 private:

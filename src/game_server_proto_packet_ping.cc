@@ -56,4 +56,3 @@ void Game_Server_Protocol_Packet_Ping::recv(Game_Server_Connection*, Network_Buf
 void Game_Server_Protocol_Packet_Ping::write_reply( Network_Buffer* buf ) {
    buf->put_8(PING_ACK);
 }
-

@@ -27,7 +27,7 @@
 class UIEdit_Box;
 class UIMultiline_Textarea;
 class UIListselect;
-class Game_Server_Connection; 
+class Game_Server_Connection;
 
 /*
  * This class represents the 'lobby'. this is where the user can join games
@@ -47,18 +47,17 @@ class Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
       void chat_message(std::string user, std::string room, bool is_action);
       void critical_error( std::string str );
       void disconnect( void );
-      
+
 	private:
       Game_Server_Connection* m_gsc;
 		UIEdit_Box*	m_chatbox;
       UIMultiline_Textarea* m_chatarea;
       UIListselect* m_userlist;
       bool  m_disconnect_expected;
-      
+
    private:
       void changed( void );
       void clicked( int );
 };
 
 #endif
-

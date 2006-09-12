@@ -41,7 +41,7 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent, i
 {
    m_parent=parent;
    m_index=index;
-   
+
 	if (get_usedefaultpos())
 		move_to_mouse();
 }
@@ -58,8 +58,8 @@ Editor_Tool_Options_Menu::~Editor_Tool_Options_Menu()
 }
 
 /*
- * Selects the correct tool from the parent. 
- * This is needed when a selection was made in the 
+ * Selects the correct tool from the parent.
+ * This is needed when a selection was made in the
  * options menus
  */
 void Editor_Tool_Options_Menu::select_correct_tool(void) {

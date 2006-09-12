@@ -66,7 +66,7 @@ public:
 	inline uint get_menu_pic() { return m_menu_pic; }
 	inline uint get_pic_queue_full() { return m_pic_queue_full; }
 	inline uint get_pic_queue_empty() { return m_pic_queue_empty; }
-	
+
    inline const char *get_name() const { return m_name.c_str(); }
    inline const char *get_descname() const { return m_descname.c_str(); }
 

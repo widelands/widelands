@@ -23,18 +23,18 @@
 #include <string>
 #include "game_server_proto_packet.h"
 
-/* 
+/*
  * Ping. Checks if connection is alive
  */
 class Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
    public:
       Game_Server_Protocol_Packet_Ping(void);
       virtual ~Game_Server_Protocol_Packet_Ping();
-     
+
       virtual ushort get_id(void);
 
-      virtual void recv(Game_Server_Connection*, Network_Buffer* buffer); 
-      virtual void send(Network_Buffer* buffer) {} 
+      virtual void recv(Game_Server_Connection*, Network_Buffer* buffer);
+      virtual void send(Network_Buffer* buffer) {}
       virtual void write_reply(Network_Buffer*);
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) {}
 };

@@ -49,27 +49,27 @@ Game_Saver::~Game_Saver(void) {
 void Game_Saver::save(void) throw(wexception) {
    Game_Data_Packet* gp;
    Game_Map_Data_Packet* gmdp;
-  
+
    m_fs->EnsureDirectoryExists( "binary" );
 
    log("Game: Writing Preload Data ... ");
    gp = new Game_Preload_Data_Packet();
-   gp->Write(m_fs, m_game, 0); 
+   gp->Write(m_fs, m_game, 0);
    delete gp;
    log(" done\n");
 
    log("Game: Writing Game Class Data ... ");
    gp = new Game_Game_Class_Data_Packet();
-   gp->Write(m_fs, m_game, 0); 
+   gp->Write(m_fs, m_game, 0);
    delete gp;
    log(" done\n");
 
    log("Game: Writing Player Info ... ");
    gp = new Game_Player_Info_Data_Packet();
-   gp->Write(m_fs, m_game, 0); 
+   gp->Write(m_fs, m_game, 0);
    delete gp;
    log(" done\n");
-   
+
    log("Game: Writing Map Data!\n");
    gmdp = new Game_Map_Data_Packet();
    gmdp->Write(m_fs, m_game, 0);
@@ -78,25 +78,25 @@ void Game_Saver::save(void) throw(wexception) {
 
    log("Game: Writing Player Economies Info ... ");
    gp = new Game_Player_Economies_Data_Packet();
-   gp->Write(m_fs, m_game, mos); 
+   gp->Write(m_fs, m_game, mos);
    delete gp;
    log(" done\n");
-   
+
    log("Game: Writing Command Queue Data ... ");
    gp = new Game_Cmd_Queue_Data_Packet();
-   gp->Write(m_fs, m_game, mos); 
+   gp->Write(m_fs, m_game, mos);
    delete gp;
    log(" done\n");
- 
+
    log("Game: Writing Interactive Player Data ... ");
    gp = new Game_Interactive_Player_Data_Packet();
-   gp->Write(m_fs, m_game, mos); 
+   gp->Write(m_fs, m_game, mos);
    delete gp;
    log(" done\n");
 
    log("Game: Writing Computer Player Data ... ");
    gp = new Game_Computer_Player_Data_Packet();
-   gp->Write(m_fs, m_game, mos); 
+   gp->Write(m_fs, m_game, mos);
    delete gp;
    log(" done\n");
 

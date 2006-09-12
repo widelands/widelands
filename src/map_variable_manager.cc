@@ -93,4 +93,3 @@ void MapVariableManager::delete_variable( const char* name ) {
       }
    }
 }
-

@@ -40,7 +40,7 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       // For trigger referenecer
       virtual const char* get_type( void ) { return "Event:MessageBox"; }
       virtual const char* get_name( void ) { return Event::get_name(); }
-      
+
       // one liner functions
       const char* get_id(void) { return "message_box"; }
 
@@ -98,4 +98,3 @@ class Event_Message_Box : public Event, public TriggerReferencer {
 
 
 #endif
-

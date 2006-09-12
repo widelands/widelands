@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * This packet cares for the data of flags 
+ * This packet cares for the data of flags
  */
 class Widelands_Map_Flagdata_Data_Packet : public Widelands_Map_Data_Packet {
    public:
@@ -35,4 +35,3 @@ class Widelands_Map_Flagdata_Data_Packet : public Widelands_Map_Data_Packet {
 
 
 #endif
-

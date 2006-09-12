@@ -36,4 +36,3 @@ class Widelands_Map_Roaddata_Data_Packet : public Widelands_Map_Data_Packet {
 
 
 #endif
-

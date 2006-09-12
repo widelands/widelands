@@ -33,10 +33,10 @@ class Game;
 class TriggerConditional;
 
 /*
- * The Chain defined 
- * 
- * A eventchain is a succession of events, which are run 
- * in order as soon as the eventchains trigger conditional is 
+ * The Chain defined
+ *
+ * A eventchain is a succession of events, which are run
+ * in order as soon as the eventchains trigger conditional is
  * true.
  */
 class EventChain : public EventReferencer, public TriggerReferencer {
@@ -48,14 +48,14 @@ class EventChain : public EventReferencer, public TriggerReferencer {
          RUNNING,
          DONE,
       };
-      
+
    public:
-      EventChain( ) { 
+      EventChain( ) {
         m_repeating = false;
         m_trigconditional = 0;
         m_state = INIT;
         m_curevent = 0;
-      } 
+      }
       virtual ~EventChain( void ) { }
 
       const char* get_name( void ) { return m_name.c_str(); }
@@ -64,16 +64,16 @@ class EventChain : public EventReferencer, public TriggerReferencer {
       inline bool get_repeating( void ) { return m_repeating; }
       inline TriggerConditional* get_trigcond( void ) { return m_trigconditional; }
       inline void set_trigcond( TriggerConditional* t) { m_trigconditional = t; }
-     
+
       inline State get_state( void ) { return m_state; }
-      
+
       // Below is only good idea in editor
       void set_repeating( bool t ) { m_repeating = t; }
       uint get_nr_events( void ) { return m_events.size(); }
-      Event* get_event( uint i ) { assert( i < m_events.size()); return m_events[i]; } 
+      Event* get_event( uint i ) { assert( i < m_events.size()); return m_events[i]; }
       void clear_events( void );
       void add_event( Event* ev );
-     
+
 
       // Run this event queue
       State run( Game* g);
@@ -97,7 +97,7 @@ class Cmd_CheckEventChain :public BaseCommand {
     public:
    Cmd_CheckEventChain(void) : BaseCommand(0) { } // For savegame loading
 	Cmd_CheckEventChain (int, int);
-      
+
    // Write these commands to a file (for savegames)
    virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
    virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);

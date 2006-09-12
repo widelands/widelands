@@ -400,5 +400,3 @@ const char* UITable_Entry::get_string(int n) {
 
    return m_data[n].d_string.c_str();
 }
-
-

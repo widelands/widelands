@@ -178,4 +178,3 @@ void Fullscreen_Menu_LaunchGame::select_map()
 
 	refresh();
 }
-

@@ -37,9 +37,8 @@ class Widelands_Map_Immovable_Data_Packet : public Widelands_Map_Data_Packet {
       virtual void Read(FileSystem*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
       virtual void Write(FileSystem*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
 
-   private: 
+   private:
 };
 
 
 #endif
-

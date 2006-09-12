@@ -28,9 +28,9 @@
  * Destructor
  */
 Game_Map_Data_Packet::~Game_Map_Data_Packet(void) {
-   if(m_wms) 
+   if(m_wms)
       delete m_wms;
-   if(m_wml) 
+   if(m_wml)
       delete m_wml;
 }
 
@@ -42,9 +42,9 @@ void Game_Map_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Ob
       throw wexception("No map in this save game!\n");
 
    FileSystem* mapfs = fs->MakeSubFileSystem( "map" );
-   
+
    // Now Load the map as it would be a normal map saving
-   if(m_wml) 
+   if(m_wml)
       delete m_wml;
 
    m_wml = new Widelands_Map_Loader(mapfs, game->get_map());
@@ -62,9 +62,9 @@ void Game_Map_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Ob
  * Write Function
  */
 void Game_Map_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   
+
    FileSystem* mapfs = fs->CreateSubFileSystem( "map", FileSystem::FS_DIR );
-   
+
    // Now Write the map as it would be a normal map saving
    if(m_wms) delete m_wms;
    m_wms=new Widelands_Map_Saver(mapfs, game);

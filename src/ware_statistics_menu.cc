@@ -467,5 +467,3 @@ void Ware_Statistics_Menu::clicked(int id) {
 void Ware_Statistics_Menu::cb_changed_to(int id, bool what) {
    m_plot->show_plot(id,what);
 }
-
-

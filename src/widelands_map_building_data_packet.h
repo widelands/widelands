@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * This packet cares for the existance of buildings 
+ * This packet cares for the existance of buildings
  * on the map, the data is parsed somewhere else
  */
 class Widelands_Map_Building_Data_Packet : public Widelands_Map_Data_Packet {
@@ -36,4 +36,3 @@ class Widelands_Map_Building_Data_Packet : public Widelands_Map_Data_Packet {
 
 
 #endif
-

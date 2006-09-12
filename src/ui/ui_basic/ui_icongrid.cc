@@ -182,7 +182,7 @@ void UIIcon_Grid::draw(RenderTarget* dst)
 	if (highlight) {
       int w, h;
       g_fh->get_size(UI_FONT_SMALL,  m_items[m_highlight].descr.c_str(), &w, &h);
-      if(w>get_inner_w()) 
+      if(w>get_inner_w())
          set_inner_size(w, get_inner_h());
 		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, 1, get_h() - m_font_height, m_items[m_highlight].descr.c_str());
    }
@@ -318,4 +318,3 @@ bool UIIcon_Grid::handle_mouseclick(uint btn, bool down, int x, int y)
 
 	return true;
 }
-

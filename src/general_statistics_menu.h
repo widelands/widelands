@@ -35,7 +35,7 @@ class General_Statistics_Menu : public UIUniqueWindow {
       General_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
       virtual ~General_Statistics_Menu(void);
 
- 
+
    private:
       Interactive_Player* m_parent;
       WUIPlot_Area*       m_plot;

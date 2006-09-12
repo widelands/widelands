@@ -27,7 +27,7 @@
 class Editor_Game_Base;
 
 /*
- * This event is able to set a null trigger to a certain state 
+ * This event is able to set a null trigger to a certain state
  */
 class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
    public:
@@ -44,17 +44,17 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
       void Write(Section*, Editor_Game_Base*);
       void Read(Section*, Editor_Game_Base*);
 
-      inline void set_trigger( Trigger_Null* trig ) { 
+      inline void set_trigger( Trigger_Null* trig ) {
          if( m_trigger )
             unreference_trigger( m_trigger );
-         if( trig ) 
+         if( trig )
             reference_trigger( trig );
-         m_trigger=trig; 
+         m_trigger=trig;
       }
       inline Trigger_Null* get_trigger( void ) { return m_trigger; }
       inline void set_setto( bool t ) { m_setto = t; }
       inline bool get_setto( void ) { return m_setto; }
-     
+
       // For Trigger referencer
       const char* get_name( ) { return Event::get_name(); }
       const char* get_type() { return "Event Set Null Trigger"; }
@@ -66,4 +66,3 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
 
 
 #endif
-

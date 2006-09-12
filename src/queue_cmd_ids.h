@@ -22,7 +22,7 @@
 
 /*
  * This file contains the ids for the different
- * cmd_queue cmds. They are needed to save those 
+ * cmd_queue cmds. They are needed to save those
  * files to disk and (even more important) to load
  * them again.
  *
@@ -36,7 +36,7 @@
 #define QUEUE_CMD_FLAG                   2
 #define QUEUE_CMD_BUILDROAD              3
 #define QUEUE_CMD_FLAGACTION             4
-#define QUEUE_CMD_STOPBUILDING           5 
+#define QUEUE_CMD_STOPBUILDING           5
 #define QUEUE_CMD_ENHANCEBUILDING        6
 #define QUEUE_CMD_BULLDOZE               7
 #define QUEUE_CMD_CHANGETRAININGOPTIONS  8

@@ -29,9 +29,9 @@
  * The Map Variable Manager makes sure that variables
  * in the map are watched accordingly.
  *
- * A Map variable is a user defined type, which can be changed with 
- * triggers or events and displayed in strings. Also triggers can be 
- * run when variables are over a certain value. 
+ * A Map variable is a user defined type, which can be changed with
+ * triggers or events and displayed in strings. Also triggers can be
+ * run when variables are over a certain value.
  *
  * Variables are mostly for mission objectives - simple stuff (like how many
  * buildings of a type should be build before triggering) doesn't use variables
@@ -48,16 +48,16 @@ class MapVariable {
       };
 
    public:
-      MapVariable( bool t ) { m_delete_protected = t; } 
+      MapVariable( bool t ) { m_delete_protected = t; }
       virtual ~MapVariable( void ) { }
 
       inline bool is_delete_protected( void ) { return m_delete_protected; }
       inline const char* get_name( void ) { return m_name.c_str(); }
       inline void set_name( const char* name ) { m_name = name; }
-      
+
       virtual std::string get_string_representation( void ) = 0;
       virtual Type get_type( void ) = 0;
-      
+
    private:
       std::string   m_name;
       bool           m_delete_protected;
@@ -96,7 +96,7 @@ class String_MapVariable : public MapVariable {
 };
 
 /*
- * The manager himself. 
+ * The manager himself.
  * This is mainly a wrapper, the function
  * could have also been implemented directly in the map.
  *
@@ -117,7 +117,7 @@ class MapVariableManager {
        */
       Int_MapVariable* get_int_variable( const char* name );
       String_MapVariable* get_string_variable( const char* name );
-     
+
       /*
        * Get a variable
        */
@@ -128,8 +128,7 @@ class MapVariableManager {
       inline MapVariable* get_variable_by_nr( int i ) { assert(i < (int)m_variables.size()); return m_variables[i]; }
 
    private:
-      std::vector<MapVariable*>      m_variables; 
+      std::vector<MapVariable*>      m_variables;
 };
 
 #endif
-

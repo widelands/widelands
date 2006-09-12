@@ -131,4 +131,3 @@ void Main_Menu_Map_Options::changed(int id) {
 void Main_Menu_Map_Options::editbox_changed(void) {
    m_parent->get_map()->set_description(m_descr->get_text().c_str());
 }
-

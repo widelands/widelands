@@ -51,4 +51,3 @@ class Trigger_Time : public Trigger {
 };
 
 #endif
-

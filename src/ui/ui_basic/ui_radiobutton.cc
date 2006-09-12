@@ -139,4 +139,3 @@ void UIRadiogroup::set_state(int state)
 	changed.call();
 	changedto.call(state);
 }
-

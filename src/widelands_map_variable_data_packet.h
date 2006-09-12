@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * What map variables are there, what values do they have? 
+ * What map variables are there, what values do they have?
  */
 class Widelands_Map_Variable_Data_Packet : public Widelands_Map_Data_Packet {
    public:
@@ -35,4 +35,3 @@ class Widelands_Map_Variable_Data_Packet : public Widelands_Map_Data_Packet {
 
 
 #endif
-

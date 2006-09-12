@@ -194,7 +194,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             Section* s = prof->get_safe_section(cmd[1].c_str());
             act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
             building->add_animation(cmd[1].c_str(),act.iparam1);
-         } else 
+         } else
             act.iparam1 = building->get_animation(cmd[1].c_str());
 
 			if (cmd[1] == "idle")
@@ -277,8 +277,8 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.iparam1 = act.iparam2 = 0;
 
-			if ((cmd[1] == "hp") || (cmd[1] == "attack") || 
-				 (cmd[1] == "defense") || (cmd[1] == "evade")) 
+			if ((cmd[1] == "hp") || (cmd[1] == "attack") ||
+				 (cmd[1] == "defense") || (cmd[1] == "evade"))
 				act.sparam1 = cmd[1];
 			else
 				throw wexception ("check_soldier needs 'hp', 'attack', 'defense' or 'evade' parameter");
@@ -301,12 +301,12 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.iparam1 = act.iparam2 = 0;
 
-			if ((cmd[1] == "hp") || (cmd[1] == "attack") || 
-				 (cmd[1] == "defense") || (cmd[1] == "evade")) 
+			if ((cmd[1] == "hp") || (cmd[1] == "attack") ||
+				 (cmd[1] == "defense") || (cmd[1] == "evade"))
 			{
 				act.sparam1 = cmd[1];
-			} 
-			else 
+			}
+			else
 				throw wexception ("train needs 'hp', 'attack', 'defense' or 'evade' parameter");
 
 			int how_many=1;
@@ -328,17 +328,17 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 		} else if (cmd[0] == "playFX") {
 			if (cmd.size()<2 || cmd.size()>3)
 				throw wexception("Usage: play <sound_fx_name> [priority]");
-			
+
 			act.type = ProductionAction::actPlayFX;
-			
+
 			act.sparam1=cmd[1];
 			//TODO: check if fx exists, load fx, lots of other checks for aprameter correctness
 			if (cmd.size()==2)
 				act.iparam1=127;
 			else
 				act.iparam1=atoi(cmd[2].c_str());
-			
-			
+
+
 		} else
 			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
 
@@ -349,5 +349,3 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 	if (sprogram->get_num_values() != m_actions.size())
 		throw wexception("Line numbers appear to be wrong");
 }
-
-

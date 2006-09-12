@@ -49,4 +49,3 @@ class Editor_Player_Menu_Allowed_Buildings_Menu : public UIUniqueWindow {
 };
 
 #endif
-

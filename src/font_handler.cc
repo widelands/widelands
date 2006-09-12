@@ -719,4 +719,3 @@ void Font_Handler::unregister_variable_callback( ) {
 	m_varcallback = 0;
 	m_cbdata = 0;
 }
-

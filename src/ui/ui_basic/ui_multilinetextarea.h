@@ -81,7 +81,7 @@ class UIMultiline_Textarea : public UIPanel {
 		RGBColor       m_fcolor;
 		int				m_textheight;	///< total height of wrapped text, in pixels
 		int				m_textpos;		///< current scrolling position in pixels (0 is top)
-      
+
       inline int get_m_textpos(void) { return m_textpos; }
       void draw_scrollbar();
       int get_halign();

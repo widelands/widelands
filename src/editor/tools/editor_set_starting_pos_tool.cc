@@ -129,4 +129,3 @@ void Editor_Set_Starting_Pos_Tool::set_current_player(int i) {
       picsname+="_pos.png";
       m_current_fieldsel_pic=picsname;
 }
-

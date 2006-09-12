@@ -156,4 +156,3 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
 /* do nothing */
 void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int n, bool t) {
 }
-

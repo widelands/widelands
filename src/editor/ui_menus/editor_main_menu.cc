@@ -132,5 +132,3 @@ Unregister from the registry pointer
 Editor_Main_Menu::~Editor_Main_Menu()
 {
 }
-
-

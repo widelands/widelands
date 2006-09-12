@@ -54,4 +54,3 @@ class Editor_Increase_Height_Tool : public Editor_Tool {
 };
 
 #endif
-

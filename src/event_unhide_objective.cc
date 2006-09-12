@@ -89,5 +89,3 @@ Event::State Event_Unhide_Objective::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
-
-

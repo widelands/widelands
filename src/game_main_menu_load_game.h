@@ -43,9 +43,9 @@ class Game_Main_Menu_Load_Game : public UIUniqueWindow {
 
       void fill_list(void);
       bool load_game(std::string);
-      
+
       Interactive_Player* m_parent;
-      UITextarea* m_name, *m_gametime;   
+      UITextarea* m_name, *m_gametime;
       UIListselect* m_ls;
       filenameset_t m_gamefiles;
 

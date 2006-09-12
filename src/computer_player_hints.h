@@ -25,9 +25,9 @@ class Profile;
 class BuildingHints {
     public:
 	BuildingHints ();
-	
+
 	void parse (Profile*);
-	
+
 	const char*	get_need_map_resource() const { return need_map_resource; }
 
     private:
@@ -35,4 +35,3 @@ class BuildingHints {
 };
 
 #endif
-

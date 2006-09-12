@@ -88,4 +88,3 @@ void Game_Server_Protocol_Packet_ChatMessage::recv(Game_Server_Connection* gsc, 
 void Game_Server_Protocol_Packet_ChatMessage::write_reply( Network_Buffer* buf ) {
    buf->put_8( CM_ACK );
 }
-

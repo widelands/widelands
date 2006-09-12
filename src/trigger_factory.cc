@@ -114,4 +114,3 @@ Trigger_Descr* Trigger_Factory::get_trigger_descr( uint id ) {
 const uint Trigger_Factory::get_nr_of_available_triggers(void) {
    return nr_of_triggers;
 }
-

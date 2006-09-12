@@ -80,25 +80,25 @@ public:
 
    /**
       This methods are helper for use at configure this site.
-   */   
+   */
    void set_requeriments (Requeriments*);
    void  clear_requeriments ();
    Requeriments get_requeriments () { return m_soldier_requeriments; }
-   
+
    /*
       So, to set a new requeriment to the request you should do something like:
-      
+
          Requeriments new_req = ms->get_requeriments();
          new_req.set (atribute, min_value, max_value);
          new_req.set (atribute, min_value, max_value);
          ms->set_requeriments (&new_req);
-      
-   */   
-      
+
+   */
+
    /// Testing stuff
    int launch_attack(PlayerImmovable*, int);
    int can_launch_soldiers () { return m_soldiers.size() > 1; }
-   
+
    virtual bool has_soldiers() { return m_soldiers.size() > 0; }
    virtual void defend (Game*, Soldier*);
    virtual void conquered_by (Player*);

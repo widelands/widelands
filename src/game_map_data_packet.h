@@ -38,14 +38,14 @@ class Game_Map_Data_Packet : public Game_Data_Packet {
 
       virtual void Read(FileSystem*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
       virtual void Write(FileSystem*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
-   
+
       inline Widelands_Map_Map_Object_Saver* get_map_object_saver(void) { return m_mos; }
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }
 
-   private: 
+   private:
       Widelands_Map_Map_Object_Saver* m_mos;
       Widelands_Map_Map_Object_Loader* m_mol;
-      Widelands_Map_Saver* m_wms; 
+      Widelands_Map_Saver* m_wms;
       Widelands_Map_Loader* m_wml;
 
 };

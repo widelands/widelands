@@ -27,12 +27,12 @@
 class Trigger;
 
 /*
- * The Trigger Manager keeps all triggers 
+ * The Trigger Manager keeps all triggers
  * in order
  *
  */
 /*
- * The manager himself. 
+ * The manager himself.
  * This is mainly a wrapper, the function
  * could have also been implemented directly in the map.
  *
@@ -63,8 +63,7 @@ class MapTriggerManager {
       inline Trigger* get_trigger_by_nr( int i ) { assert(i < (int)m_triggers.size()); return m_triggers[i]; }
 
    private:
-      std::vector<Trigger*>      m_triggers; 
+      std::vector<Trigger*>      m_triggers;
 };
 
 #endif
-

@@ -57,10 +57,10 @@ void split_string(std::string in, std::vector<std::string>* plist, const char* s
  * remove spaces at the beginning or the end of a string
  */
 void remove_spaces(std::string* in) {
-  while(((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n') 
+  while(((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n')
       in->erase(0, 1);
 
-   while(((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n') 
+   while(((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n')
       in->erase(in->size()-1, 1);
 }
 
@@ -75,7 +75,7 @@ void log(const char *fmt, ...)
 {
 	char buf[2048];
 	va_list va;
-	
+
 	va_start(va, fmt);
 	vsnprintf(buf, sizeof(buf), fmt, va);
 	va_end(va);
@@ -118,4 +118,3 @@ void myassert(int line, const char* file, const char* condt) throw(wexception)
 	critical_error("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
 	throw wexception("Assertion %s:%i (%s) has been ignored", file, line, condt);
 }
-

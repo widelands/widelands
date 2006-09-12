@@ -27,7 +27,7 @@ class FileWrite;
 class Game;
 
 /*
- * Informations about the interactive player. Mostly scrollpos, 
+ * Informations about the interactive player. Mostly scrollpos,
  * player number and so on
  */
 class Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
@@ -37,7 +37,7 @@ class Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
       virtual void Read(FileSystem*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
       virtual void Write(FileSystem*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
 
-   private: 
+   private:
       void Read_Version1(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
 };
 

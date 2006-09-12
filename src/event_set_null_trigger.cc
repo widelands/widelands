@@ -94,5 +94,3 @@ Event::State Event_Set_Null_Trigger::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
-
-

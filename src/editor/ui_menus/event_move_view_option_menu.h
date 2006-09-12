@@ -53,5 +53,3 @@ class Event_Move_View_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

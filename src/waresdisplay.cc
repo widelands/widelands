@@ -209,4 +209,3 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 
 	g_fh->draw_string(dst, UI_FONT_ULTRASMALL, UI_FONT_SMALL_CLR,  x+WARE_MENU_PIC_W, y+WARE_MENU_PIC_H -4, buf, Align_Right);
 }
-

@@ -72,4 +72,3 @@ class Editor_Tool {
 };
 
 #endif
-

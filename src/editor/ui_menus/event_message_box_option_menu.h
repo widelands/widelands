@@ -77,5 +77,3 @@ class Event_Message_Box_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

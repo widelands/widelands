@@ -25,7 +25,7 @@
 #include "ui_panel.h"
 
 /*
- * A Plot Area is a simple 2D Plot, with the 
+ * A Plot Area is a simple 2D Plot, with the
  * X Axis as time (actually Minus Time)
  * and the Y Axis some Data
  */
@@ -34,14 +34,14 @@ class WUIPlot_Area : public UIPanel {
       enum TIME {
          TIME_15_MINS = 0,
          TIME_30_MINS,
-         TIME_ONE_HOUR, 
+         TIME_ONE_HOUR,
          TIME_TWO_HOURS,
          TIME_FOUR_HOURS,
          TIME_EIGHT_HOURS,
          TIME_16_HOURS,
       };
       enum PLOTMODE {
-         PLOTMODE_RELATIVE, // Always take the samples of some times together, 
+         PLOTMODE_RELATIVE, // Always take the samples of some times together,
                             // so that the graph is not completly zigg-zagged
          PLOTMODE_ABSOLUTE
       };
@@ -49,7 +49,7 @@ class WUIPlot_Area : public UIPanel {
    public:
       WUIPlot_Area(UIPanel* parent, int x, int y, int w, int h);
       ~WUIPlot_Area(void);
-      
+
       // Functions from the User Interface
       virtual void draw(RenderTarget* dst);
 
@@ -63,18 +63,17 @@ class WUIPlot_Area : public UIPanel {
 
       // set plotmode
       void set_plotmode( int id ) { m_plotmode = id; }
-      
+
    private:
       struct __plotdata {
          const std::vector<uint>* dataset;
          bool  showplot;
          RGBColor plotcolor;
       };
-      std::vector<__plotdata> m_plotdata; 
+      std::vector<__plotdata> m_plotdata;
       int m_time;  // How much do you want to list
-      int m_sample_rate; 
+      int m_sample_rate;
       int m_plotmode;
 };
 
-#endif 
-
+#endif

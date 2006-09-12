@@ -36,7 +36,7 @@ struct ProductionAction {
 		actAnimate, // sparam1 = activate this animation until timeout
 		actProduce, // sparem1 = ware to produce. the worker carries it outside
 		actCheck,   // sparam1 = check if the given input ware is available, iparam1 number to check for
-		actMine,    // sparam1 = resource, iparam1=how far to mine, iparam2=up to max mine, iparam3=chance below 
+		actMine,    // sparam1 = resource, iparam1=how far to mine, iparam2=up to max mine, iparam3=chance below
 		actCall,		// sparam1 = name of sub-program
 		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
 		actPlayFX,	//sparam1 = sound_fx_name to play
@@ -94,4 +94,3 @@ private:
 
 
 #endif
-

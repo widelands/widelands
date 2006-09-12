@@ -74,4 +74,3 @@ void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connectio
    std::string room = buf->get_string();
    gsc->get_user_info(m_username, game, room);
 }
-

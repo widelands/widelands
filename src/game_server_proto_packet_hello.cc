@@ -59,7 +59,7 @@ void Game_Server_Protocol_Packet_Hello::send(Network_Buffer* buffer) {
 void Game_Server_Protocol_Packet_Hello::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
 #ifdef DEBUG
    uchar retcode = buf->get_8();
-#else 
+#else
    buf->get_8();
 #endif
 
@@ -69,10 +69,9 @@ void Game_Server_Protocol_Packet_Hello::handle_reply(Game_Server_Connection* gsc
    std::string m_motd= buf->get_string();
 
    assert(retcode == USER_WELCOME); // no other code defined at the moment
-   
+
    gsc->set_username(m_name.c_str());
    gsc->set_group(m_group.c_str());
    gsc->set_room(m_room.c_str());
    gsc->server_message(m_motd);
 }
-

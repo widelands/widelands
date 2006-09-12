@@ -176,5 +176,3 @@ GameMainMenu::~GameMainMenu
 GameMainMenu::~GameMainMenu()
 {
 }
-
-

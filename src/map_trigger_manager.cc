@@ -28,7 +28,7 @@ MapTriggerManager::MapTriggerManager( void ) {
 }
 
 MapTriggerManager::~MapTriggerManager( void ) {
-   for( uint i = 0; i < m_triggers.size(); i++) 
+   for( uint i = 0; i < m_triggers.size(); i++)
       delete m_triggers[i];
    m_triggers.resize( 0 );
 }
@@ -38,7 +38,7 @@ MapTriggerManager::~MapTriggerManager( void ) {
  */
 bool MapTriggerManager::register_new_trigger( Trigger* mv ) {
    // check if this trigger is already known
-   if( get_trigger( mv->get_name() ) ) 
+   if( get_trigger( mv->get_name() ) )
          return 0;
 
    m_triggers.push_back( mv );
@@ -57,12 +57,12 @@ Trigger* MapTriggerManager::get_trigger( const char* name ) {
          break;
       }
    }
-   
+
    return retval;
 }
 
 /*
- * Remove a trigger 
+ * Remove a trigger
  */
 void MapTriggerManager::delete_trigger( const char* name ) {
    for( uint i = 0; i < m_triggers.size(); i++) {
@@ -83,12 +83,10 @@ void MapTriggerManager::delete_unreferenced_triggers( void ) {
    while( i < m_triggers.size() ) {
       Trigger* tr = m_triggers[i];
       if( tr->get_referencers().empty() ) {
-         delete_trigger(tr->get_name()); 
-         i = 0; 
-         continue; 
+         delete_trigger(tr->get_name());
+         i = 0;
+         continue;
       }
       ++i;
    }
 }
-
-

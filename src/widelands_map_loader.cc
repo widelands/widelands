@@ -60,7 +60,7 @@
 /*
  * Constructor
  */
-Widelands_Map_Loader::Widelands_Map_Loader(FileSystem* fs, Map* map) : 
+Widelands_Map_Loader::Widelands_Map_Loader(FileSystem* fs, Map* map) :
    Map_Loader("", map) {
    m_fs=fs;
    m_map=map;
@@ -83,7 +83,7 @@ Widelands_Map_Loader::~Widelands_Map_Loader(void) {
  */
 int Widelands_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
- 
+
    m_map->cleanup();
 
    // Load elemental data block
@@ -119,7 +119,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    m_map->get_world()->postload(egbase);
    m_map->set_size(m_map->m_width, m_map->m_height);
 
-   if(m_mol) 
+   if(m_mol)
       delete m_mol;
    m_mol=new Widelands_Map_Map_Object_Loader;
 
@@ -226,10 +226,10 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    delete dp;
    log("done!\n ");
 
-   // We always write the next few packets since it 
+   // We always write the next few packets since it
    // takes too much time looking if it really is needed
-   // !!!!!!!!!! NOTE  
-   // This packet must be before any building or road packet. So do not 
+   // !!!!!!!!!! NOTE
+   // This packet must be before any building or road packet. So do not
    // change this order without knowing what you do
    // EXISTENT PACKETS
    log("Reading Flag Data ... ");
@@ -257,7 +257,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    delete dp;
    log("done!\n ");
 
-   // DATA PACKETS 
+   // DATA PACKETS
    log("Reading Flagdata Data ... ");
    dp=new Widelands_Map_Flagdata_Data_Packet();
    dp->Read(m_fs, egbase, !scenario, m_mol);

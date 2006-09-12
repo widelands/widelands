@@ -32,7 +32,7 @@ class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
 
       enum {
          sp_skirmish,
-         sp_tutorial, 
+         sp_tutorial,
          sp_loadgame,
          sp_back
       };

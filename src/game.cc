@@ -537,4 +537,3 @@ void Game::send_player_enemyflagaction (Flag* flag, int action, int who_attacks,
 {
 	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), who_attacks, flag, action, who_attacks, num_soldiers, type));
 }
-

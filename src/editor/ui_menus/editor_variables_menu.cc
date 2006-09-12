@@ -421,5 +421,3 @@ void Editor_Variables_Menu::insert_variable( MapVariable* var ) {
 
    m_table->sort();
 }
-
-

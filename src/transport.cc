@@ -4621,4 +4621,3 @@ void Cmd_Call_Economy_Balance::Write(FileWrite* fw, Editor_Game_Base* egbase, Wi
    if(has_eco)
       fw->Unsigned16(plr->get_economy_number(m_economy));
 }
-

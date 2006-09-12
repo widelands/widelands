@@ -170,4 +170,3 @@ void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* e
 
    fw.Write( fs, "binary/battle" );
 }
-

@@ -186,4 +186,3 @@ void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egba
 
    // DONE
 }
-

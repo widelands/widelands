@@ -40,7 +40,7 @@ uint RNG::rand ()
 
     state0+=state1;
     state1+=state0;
-    
+
     // and return the next random number
     return state0 ^ state1;
 }
@@ -114,4 +114,3 @@ const uint rng_sbox[256]={
 	0xC4CBEF3D,	0xDD3A14AF,	0xC69B82FA,	0xC029B1BF,
 	0xEE51E8E4,	0x0493CB60,	0x572CC720,	0x8EEED424
 };
-

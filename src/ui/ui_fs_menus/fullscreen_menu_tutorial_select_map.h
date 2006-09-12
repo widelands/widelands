@@ -23,12 +23,12 @@
 #include "fullscreen_menu_base.h"
 
 /**
- * Fullscreen Menu for The Barbarians tutorial Mission 
+ * Fullscreen Menu for The Barbarians tutorial Mission
  */
 class Fullscreen_Menu_TutorialSelectMap : public Fullscreen_Menu_Base {
    public:
       Fullscreen_Menu_TutorialSelectMap();
-      
+
       const char* get_mapname(int code );
 };
 

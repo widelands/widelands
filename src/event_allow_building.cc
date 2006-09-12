@@ -109,5 +109,3 @@ Event::State Event_Allow_Building::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
-
-

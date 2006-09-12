@@ -40,7 +40,7 @@ class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
 
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
       TriggerConditional* get_trigcond( void ) { return m_given_cond; }
-      
+
    private:
       void clicked(int);
       void tl_selected(int);
@@ -60,5 +60,3 @@ class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
 };
 
 #endif
-
-

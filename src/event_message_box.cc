@@ -194,5 +194,3 @@ Event::State Event_Message_Box::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
-
-

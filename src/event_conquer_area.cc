@@ -98,5 +98,3 @@ Event::State Event_Conquer_Area::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
-
-

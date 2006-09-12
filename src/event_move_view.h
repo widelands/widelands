@@ -53,4 +53,3 @@ class Event_Move_View : public Event {
 
 
 #endif
-

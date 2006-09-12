@@ -37,7 +37,7 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 
 
    set_align(align);
-   
+
    m_cache_id = 0;
    m_cache_mode = Widget_Cache_New;
    m_textpos = 0;
@@ -151,7 +151,7 @@ void UIMultiline_Textarea::draw_scrollbar() {
       //update(0, 0, get_eff_w(), get_h());
       if( m_cache_id )
          g_fh->get_size_from_cache(m_cache_id,&m_width, &m_textheight);
-      
+
       if (setbottom || m_textpos > m_textheight - get_h())
          m_textpos = m_textheight - get_h();
       if (m_textpos < 0)

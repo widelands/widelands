@@ -62,7 +62,7 @@ public:
 	virtual void flush(int mod) = 0;
 	virtual uint get_picture(int mod, const char* fname) = 0;
    virtual void get_picture_size(uint pic, int* pw, int* ph) = 0;
-	virtual uint get_picture(int mod, Surface*, const char* name = 0 ) = 0; 
+	virtual uint get_picture(int mod, Surface*, const char* name = 0 ) = 0;
 	virtual void flush_picture(uint pic)=0;
    virtual void save_png(uint, FileWrite* )=0;
    virtual uint create_surface(int w, int h) = 0;

@@ -23,18 +23,18 @@
 #include <string>
 #include "game_server_proto_packet.h"
 
-/* 
- * Gets information about one room. 
+/*
+ * Gets information about one room.
  */
 class Game_Server_Protocol_Packet_GetRoomInfo : public Game_Server_Protocol_Packet {
    public:
       Game_Server_Protocol_Packet_GetRoomInfo( std::string room );
       virtual ~Game_Server_Protocol_Packet_GetRoomInfo();
-     
+
       virtual ushort get_id(void);
 
       virtual void recv(Game_Server_Connection*, Network_Buffer* buffer) { }
-      virtual void send(Network_Buffer* buffer); 
+      virtual void send(Network_Buffer* buffer);
       virtual void write_reply(Network_Buffer*) { }
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 
@@ -45,4 +45,4 @@ class Game_Server_Protocol_Packet_GetRoomInfo : public Game_Server_Protocol_Pack
 
 
 
-#endif 
+#endif

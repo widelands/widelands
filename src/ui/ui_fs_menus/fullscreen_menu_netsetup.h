@@ -44,12 +44,12 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 			HOSTGGZGAME,
 			JOINGGZGAME
 		};
-		
+
 		Fullscreen_Menu_NetSetup ();
 		~Fullscreen_Menu_NetSetup ();
 
 		virtual void think();
-	
+
 		bool get_host_address (ulong&, ushort&);
 		// return true if the selected or entered hostname is valid
 
@@ -57,7 +57,7 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		// return true if game should be played over GGZ
 
 		void fill(std::list<std::string> tables);
-	
+
 	private:
 		UIEdit_Box*		hostname;
 		UIEdit_Box*		playername;
@@ -65,15 +65,15 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		LAN_Game_Finder*	discovery;
 		UIButton*		networktype;
 		bool			internetgame;
-		
+
 		void game_selected (int);
-		
+
 		static void discovery_callback (int, const LAN_Open_Game*, void*);
 
 		void game_opened (const LAN_Open_Game*);
 		void game_closed (const LAN_Open_Game*);
 		void game_updated (const LAN_Open_Game*);
-		
+
 		void update_game_info (UITable_Entry*, const LAN_Game_Info&);
 
 		void toggle_networktype(int code);
@@ -83,4 +83,3 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 };
 
 #endif
-

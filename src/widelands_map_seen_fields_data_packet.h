@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * Which field is seen by who? 
+ * Which field is seen by who?
  *
  * This can only be used to define additional fields. Per default
  * all buildings see some area. You can not use this to hide
@@ -39,4 +39,3 @@ class Widelands_Map_Seen_Fields_Data_Packet : public Widelands_Map_Data_Packet {
 
 
 #endif
-

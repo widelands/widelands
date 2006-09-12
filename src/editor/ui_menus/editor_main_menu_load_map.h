@@ -65,4 +65,3 @@ class Main_Menu_Load_Map : public UIWindow {
 };
 
 #endif
-

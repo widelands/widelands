@@ -155,4 +155,3 @@ void Stock_Menu::fill_waredisplay_with_workers( void ) {
    }
    m_last_nreconomies = nrecos;
 }
-

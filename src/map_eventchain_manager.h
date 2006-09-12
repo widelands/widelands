@@ -33,7 +33,7 @@ class Event;
  */
 
 /*
- * The manager himself. 
+ * The manager himself.
  * This is mainly a wrapper, the function
  * could have also been implemented directly in the map.
  *
@@ -59,8 +59,7 @@ class MapEventChainManager {
       inline EventChain* get_eventchain_by_nr( int i ) { assert(i < (int)m_eventchains.size()); return m_eventchains[i]; }
 
    private:
-      std::vector<EventChain*>      m_eventchains; 
+      std::vector<EventChain*>      m_eventchains;
 };
 
 #endif
-

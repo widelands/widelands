@@ -514,4 +514,3 @@ void Map_Object::molog(const char* fmt, ...)
 
 	log("MO(%u): %s", m_serial, buf);
 }
-

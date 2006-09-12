@@ -737,4 +737,3 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 	free(bobs);
 	free(buildings);
 }
-

@@ -54,5 +54,3 @@ class Trigger_Building_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

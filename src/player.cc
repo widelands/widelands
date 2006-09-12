@@ -578,4 +578,3 @@ log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
          log("Player sent bad enemyflagaction = %i\n", action);
    }
 }
-

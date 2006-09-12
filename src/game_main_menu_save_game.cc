@@ -272,5 +272,3 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
 
    return true;
 }
-
-

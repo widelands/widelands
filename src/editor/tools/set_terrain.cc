@@ -96,5 +96,3 @@ int Set_Terrain::set_terrain(FCoords& fc, Map* map, Editor_Interactive* parent, 
    }
    return parent->get_fieldsel_radius()+max;
 }
-
-

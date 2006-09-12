@@ -23,7 +23,7 @@
 #include <string>
 #include "game_server_proto_packet.h"
 
-/* 
+/*
  * This is used to register a user on a game server
  * when he connects
  */
@@ -31,11 +31,11 @@ class Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
    public:
       Game_Server_Protocol_Packet_Hello(std::string name);
       virtual ~Game_Server_Protocol_Packet_Hello();
-     
+
       virtual ushort get_id(void);
 
       virtual void recv(Game_Server_Connection*, Network_Buffer* buffer) { }
-      virtual void send(Network_Buffer* buffer); 
+      virtual void send(Network_Buffer* buffer);
       virtual void write_reply(Network_Buffer*) { }
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 

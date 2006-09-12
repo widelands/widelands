@@ -49,4 +49,3 @@ class Trigger_Null : public Trigger {
 };
 
 #endif
-

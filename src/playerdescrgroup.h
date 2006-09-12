@@ -55,11 +55,11 @@ public:
 	void set_player_tribe(std::string str);
 	void set_player_name(std::string name);
 	void set_player_type(int);
-	
+
 private:
 	void toggle_playertype();
 	void toggle_playertribe();
-	
+
 	Game*		m_game;
 	int		m_plnum;
 
@@ -69,7 +69,7 @@ private:
 	changemode_t	m_allow_changes;
 
 	std::vector<std::string> m_tribes;
-	
+
 	UITextarea* m_plr_name;
 	UICheckbox* m_btnEnablePlayer;
 	UIButton* m_btnPlayerType;

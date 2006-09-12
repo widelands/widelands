@@ -52,14 +52,14 @@ class Main_Menu_Save_Map : public UIWindow {
 
       void fill_list(void);
       bool save_map(std::string, bool);
-      
+
       UIEdit_Box* m_editbox;
       UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
       UIMultiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
       UIListselect* m_ls;
       UIButton* m_ok_btn;
-      
+
       std::string m_basedir;
       std::string m_curdir;
       std::string m_parentdir;
@@ -67,4 +67,3 @@ class Main_Menu_Save_Map : public UIWindow {
 };
 
 #endif
-

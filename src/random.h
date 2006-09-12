@@ -27,11 +27,11 @@ extern const uint rng_sbox[256];
 class RNG {
     public:
 	RNG ();
-	
+
 	void seed (uint);
-	
+
 	uint rand ();
-	
+
     private:
 	uint	state0;
 	uint	state1;
@@ -40,4 +40,3 @@ class RNG {
 #define SIMPLE_RAND(x)	(((x)>>8) ^ rng_sbox[(x)&0xff])
 
 #endif
-

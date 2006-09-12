@@ -135,5 +135,3 @@ void GameChatMenu::clicked(int n) {
       m_editbox->set_text("");
    }
 }
-
-

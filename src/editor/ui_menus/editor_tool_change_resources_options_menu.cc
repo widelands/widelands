@@ -220,5 +220,3 @@ void Editor_Tool_Change_Resources_Options_Menu::update(void) {
       m_cur_selection->set_text("");
    m_cur_selection->set_pos((get_inner_w()-m_cur_selection->get_w())/2, get_inner_h()-20);
 }
-
-

@@ -49,4 +49,3 @@ class Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet 
 
 
 #endif
-

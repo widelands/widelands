@@ -4203,4 +4203,3 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 
 	return descr;
 }
-

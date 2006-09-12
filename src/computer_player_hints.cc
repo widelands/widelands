@@ -29,10 +29,10 @@ BuildingHints::BuildingHints ()
 void BuildingHints::parse (Profile* prof)
 {
 	const char* s;
-	
+
 	Section* hints=prof->get_section("aihints");
 	if (!hints) return;
-	
+
 	s=hints->get_string("need_map_resource");
 	if (s!=0)
 	    need_map_resource=strdup(s);

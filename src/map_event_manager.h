@@ -27,12 +27,12 @@
 class Event;
 
 /*
- * The Event Manager keeps all events 
+ * The Event Manager keeps all events
  * in order
  *
  */
 /*
- * The manager himself. 
+ * The manager himself.
  * This is mainly a wrapper, the function
  * could have also been implemented directly in the map.
  *
@@ -63,8 +63,7 @@ class MapEventManager {
       inline Event* get_event_by_nr( int i ) { assert(i < (int)m_events.size()); return m_events[i]; }
 
    private:
-      std::vector<Event*>      m_events; 
+      std::vector<Event*>      m_events;
 };
 
 #endif
-

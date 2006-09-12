@@ -25,7 +25,7 @@
 class Map_Object;
 
 /*
- * This class helps to 
+ * This class helps to
  *   - keep track of map objects on the map
  *   - translate Map_Object* Pointer into the index used in the saved file
  */
@@ -42,7 +42,7 @@ class Widelands_Map_Map_Object_Saver {
       uint get_object_file_index(Map_Object*);
 
       void mark_object_as_saved(Map_Object*);
-      
+
       // Information functions
       int get_nr_unsaved_objects(void);
       int get_nr_roads(void) { return m_nr_roads; }

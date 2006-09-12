@@ -58,14 +58,14 @@ BUILD=release
 ADD_LDFLAGS:=icon.o -lwsock32
 IMPLICIT_LIBINTL:=NO
 WINDRES = windres.exe
-icon.o: Widelands_win.rc 
+icon.o: Widelands_win.rc
 
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT											 #
 ####################################################################
 
 # COMPILE TIME configuration
-ifeq ($(USE_GGZ),YES) 
+ifeq ($(USE_GGZ),YES)
 ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
 ADD_LDFLAGS:=-lggzmod -lggzcore -lggz
 endif
@@ -142,8 +142,8 @@ all: makedirs tags $(OBJECT_DIR)/widelands
 clean:
 	@-rm -rf ../widelands
 	@-rm -rf *.da ../src/*.da
-	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o 
-	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d 
+	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o
+	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d
 	@-rm -rf $(OBJECT_DIR)/widelands
 	@-rm -rf *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
 
@@ -176,7 +176,7 @@ OBJ := $(patsubst ../src/%.cc,$(OBJECT_DIR)/%.o$,$(SRC))
 DEP := $(OBJ:.o=.d)
 
 makedirs:
-	# This part builds the icon.o-file, which is needed to support all 
+	# This part builds the icon.o-file, which is needed to support all
 	# the information, which is shown in property page of widelands.exe
 	# and of course for the icon.
 		$(WINDRES) -i Widelands_win.rc --input-format=rc -o icon.o -O coff

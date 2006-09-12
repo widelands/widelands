@@ -103,4 +103,3 @@ void UIProgress_Bar::draw(RenderTarget* dst)
 
 	g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, get_w() / 2, get_h() / 2, buf, Align_Center);
 }
-

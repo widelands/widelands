@@ -208,5 +208,3 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
 
    os->mark_object_as_saved(ware);
 }
-
-

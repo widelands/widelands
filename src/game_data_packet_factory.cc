@@ -42,4 +42,3 @@ Game_Data_Packet* Game_Data_Packet_Factory::create_correct_packet(ushort id) thr
     // never here
     return 0;
 }
-

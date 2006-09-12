@@ -53,5 +53,3 @@ class Event_Conquer_Area_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

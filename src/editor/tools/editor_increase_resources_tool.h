@@ -62,4 +62,3 @@ class Editor_Increase_Resources_Tool : public Editor_Tool {
 int Editor_Change_Resource_Tool_Callback(const TCoords, void *, int);
 
 #endif
-

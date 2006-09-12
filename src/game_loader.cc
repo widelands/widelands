@@ -36,7 +36,7 @@
 /*
  * Constructor
  */
-Game_Loader::Game_Loader(FileSystem* fs, Game* game) { 
+Game_Loader::Game_Loader(FileSystem* fs, Game* game) {
       m_game=game;
       m_fs=fs;
 }
@@ -52,35 +52,35 @@ Game_Loader::~Game_Loader(void) {
  */
 int Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
    // Load elemental data block
-   mp->Read(m_fs, m_game, 0); 
-   
+   mp->Read(m_fs, m_game, 0);
+
    return 0;
 }
 
 /*
- * Load the complete file 
+ * Load the complete file
  */
 int Game_Loader::load_game(void) {
    Game_Data_Packet* gp;
 
    log("Game: Reading Preload Data ... ");
    gp = new Game_Preload_Data_Packet();
-   gp->Read(m_fs, m_game, 0); 
+   gp->Read(m_fs, m_game, 0);
    delete gp;
    log(" done\n");
 
    log("Game: Reading Game Class Data ... ");
    gp = new Game_Game_Class_Data_Packet();
-   gp->Read(m_fs, m_game, 0); 
+   gp->Read(m_fs, m_game, 0);
    delete gp;
    log(" done\n");
 
    log("Game: Reading Player Info ... ");
    gp = new Game_Player_Info_Data_Packet();
-   gp->Read(m_fs, m_game, 0); 
+   gp->Read(m_fs, m_game, 0);
    delete gp;
    log(" done\n");
-   
+
    log("Game: Reading Map Data!\n");
    Game_Map_Data_Packet* gmdp = new Game_Map_Data_Packet();
    gmdp->Read(m_fs, m_game, 0);
@@ -89,25 +89,25 @@ int Game_Loader::load_game(void) {
 
    log("Game: Reading Player Economies Info ... ");
    gp = new Game_Player_Economies_Data_Packet();
-   gp->Read(m_fs, m_game, mol); 
+   gp->Read(m_fs, m_game, mol);
    delete gp;
    log(" done\n");
-   
+
    log("Game: Reading Command Queue Data ... ");
    gp = new Game_Cmd_Queue_Data_Packet();
-   gp->Read(m_fs, m_game, mol); 
+   gp->Read(m_fs, m_game, mol);
    delete gp;
    log(" done\n");
- 
+
    log("Game: Reading Interactive Player Data ... ");
    gp = new Game_Interactive_Player_Data_Packet();
-   gp->Read(m_fs, m_game, mol); 
+   gp->Read(m_fs, m_game, mol);
    delete gp;
    log(" done\n");
 
    log("Game: Reading Computer Player Data ... ");
    gp = new Game_Computer_Player_Data_Packet();
-   gp->Read(m_fs, m_game, mol); 
+   gp->Read(m_fs, m_game, mol);
    delete gp;
    log(" done\n");
 

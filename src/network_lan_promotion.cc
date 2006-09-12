@@ -245,4 +245,3 @@ void LAN_Game_Finder::set_callback (void (*cb)(int, const LAN_Open_Game*, void*)
     callback=cb;
     userdata=ud;
 }
-

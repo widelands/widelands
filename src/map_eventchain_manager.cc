@@ -28,7 +28,7 @@ MapEventChainManager::MapEventChainManager( void ) {
 }
 
 MapEventChainManager::~MapEventChainManager( void ) {
-   for( uint i = 0; i < m_eventchains.size(); i++) 
+   for( uint i = 0; i < m_eventchains.size(); i++)
       delete m_eventchains[i];
    m_eventchains.resize( 0 );
 }
@@ -38,7 +38,7 @@ MapEventChainManager::~MapEventChainManager( void ) {
  */
 bool MapEventChainManager::register_new_eventchain( EventChain* mv ) {
    // check if this eventchain is already known
-   if( get_eventchain( mv->get_name() ) ) 
+   if( get_eventchain( mv->get_name() ) )
          return 0;
 
    m_eventchains.push_back( mv );
@@ -57,12 +57,12 @@ EventChain* MapEventChainManager::get_eventchain( const char* name ) {
          break;
       }
    }
-   
+
    return retval;
 }
 
 /*
- * Remove a eventchain 
+ * Remove a eventchain
  */
 void MapEventChainManager::delete_eventchain( const char* name ) {
    for( uint i = 0; i < m_eventchains.size(); i++) {

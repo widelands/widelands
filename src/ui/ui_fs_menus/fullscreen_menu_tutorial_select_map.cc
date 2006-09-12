@@ -58,4 +58,3 @@ Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap()
 const char* Fullscreen_Menu_TutorialSelectMap::get_mapname( int code ) {
    return filenames[code-1];
 }
-

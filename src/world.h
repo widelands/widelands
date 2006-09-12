@@ -172,4 +172,3 @@ inline Terrain_Descr * World::get_terrain(const char * const name) {
 }
 
 #endif
-

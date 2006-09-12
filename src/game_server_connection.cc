@@ -41,7 +41,7 @@ Game_Server_Connection::Game_Server_Connection(std::string host, uint port) {
    m_smhd = 0;
 }
 
-/* 
+/*
  * Destructore
  */
 Game_Server_Connection::~Game_Server_Connection(void) {
@@ -54,15 +54,15 @@ Game_Server_Connection::~Game_Server_Connection(void) {
 }
 
 /*
- * Connect to the server, 
+ * Connect to the server,
  * throws wexception on error
  */
 void Game_Server_Connection::connect(void) {
    IPaddress myaddr;
 
-   // Connect to the server 
+   // Connect to the server
    SDLNet_ResolveHost (&myaddr, m_host.c_str(), m_port);
-   
+
    m_socket = SDLNet_TCP_Open(&myaddr);
 	if (m_socket==0)
 		throw wexception("Game_Server_Connection::connect: SDLNet_TCP_Open failed: %s", SDLNet_GetError());
@@ -72,20 +72,20 @@ void Game_Server_Connection::connect(void) {
    if( !m_socketset )
 		throw wexception("Game_Server_Connection::connect: SDLNet_AllocSocketSet failed: %s", SDLNet_GetError());
    SDLNet_TCP_AddSocket( m_socketset, m_socket );
-   
+
 }
 
 /*
  * Send this packet over the line
  */
 void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
-   ushort id = packet->get_id(); 
+   ushort id = packet->get_id();
    uint   index = m_last_packet_index++;
-   ushort flags = 0; 
-   
+   ushort flags = 0;
+
    if(m_last_packet_index > LAST_CLIENT_PACKET_INDEX) // Hopefully this wrap never occures
-      m_last_packet_index = FIRST_CLIENT_PACKET_INDEX; 
-  
+      m_last_packet_index = FIRST_CLIENT_PACKET_INDEX;
+
    // This packet is replied to
    m_pending_packets.insert(std::pair<uint,Game_Server_Protocol_Packet*>(index, packet));
 
@@ -94,7 +94,7 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
    buf.put_16(id);
    buf.put_32(index);
    buf.put_16(flags);
-   
+
    packet->send(&buf);
    buf.finish();
 
@@ -104,15 +104,15 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
 
 /*
  * Check if there is incomming data and if so, handle it
- * accordingly 
+ * accordingly
  */
 void Game_Server_Connection::handle_data( void ) {
-   // Check if data is available, 
+   // Check if data is available,
    // we only handle one packet per call
    if( SDLNet_CheckSockets( m_socketset, 0 ) > 0) {
       // There is data
-      
-      
+
+
       Network_Buffer buf;
       if(buf.fill( m_socket ) == -1) {
          // Upsy, no data. But rather a disconnect
@@ -120,7 +120,7 @@ void Game_Server_Connection::handle_data( void ) {
          return;
       }
 
-      log("Read %i bytes from the net!\n", buf.size()); 
+      log("Read %i bytes from the net!\n", buf.size());
       // Get the header
       ushort id = buf.get_16();
       uint   index = buf.get_32();
@@ -131,14 +131,14 @@ void Game_Server_Connection::handle_data( void ) {
             log("Game_Server_Connection: WARNING Unknown response packet with id %i, dropped\n", index);
             return;
          }
-         
+
          Game_Server_Protocol_Packet* pp = m_pending_packets[index];
 
          if( pp->get_id() != id)  {
             log("Game_Server_Connection: WARNING Response packet with wrong id (has: %i, should: %i), dropped\n", pp->get_id(), id);
             return;
          }
-       
+
          pp->handle_reply( this, &buf );
 
          delete pp;
@@ -176,17 +176,17 @@ void Game_Server_Connection::handle_data( void ) {
  * The room has changed, request informations about the room members
  */
 void Game_Server_Connection::set_room(const char* room) {
-   m_room = room; 
+   m_room = room;
    Game_Server_Protocol_Packet_GetRoomInfo* gri = new Game_Server_Protocol_Packet_GetRoomInfo(room);
    send(gri);
 }
 
-/* 
+/*
  * Callback stuff below
  */
 void Game_Server_Connection::set_server_message_handler(ServerMessage_Handler func, void* data) {
    m_smh = func;
-   m_smhd = data; 
+   m_smhd = data;
 }
 void Game_Server_Connection::server_message(std::string msg) {
    (*m_smh)(msg,m_smhd);
@@ -194,7 +194,7 @@ void Game_Server_Connection::server_message(std::string msg) {
 
 void Game_Server_Connection::set_user_entered_handler(UserEntered_Handler func, void* data) {
    m_ueh = func;
-   m_uehd = data; 
+   m_uehd = data;
 }
 void Game_Server_Connection::user_entered(std::string name, std::string room, uchar b) {
    (*m_ueh)(name,room,b,m_uehd);
@@ -202,7 +202,7 @@ void Game_Server_Connection::user_entered(std::string name, std::string room, uc
 
 void Game_Server_Connection::set_critical_error_handler(CriticalError_Handler func, void* data) {
    m_ceh= func;
-   m_cehd= data; 
+   m_cehd= data;
 }
 void Game_Server_Connection::critical_error(std::string msg) {
    (*m_ceh)(msg,m_cehd);

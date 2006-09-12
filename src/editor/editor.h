@@ -36,11 +36,10 @@ class Editor : public Editor_Game_Base {
 
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t) {}
 	virtual void player_field_notification (const FCoords&, losegain_t) {}
-	
+
       private:
          int m_realtime;
          Editor_Interactive* m_eia;
 };
 
 #endif // __S__EDITOR_H
-

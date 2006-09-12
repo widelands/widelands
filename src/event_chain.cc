@@ -176,5 +176,3 @@ void Cmd_CheckEventChain::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    // Now eventchain id
    fw->Unsigned16(m_eventchain_id);
 }
-
-

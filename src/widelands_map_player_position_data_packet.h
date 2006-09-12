@@ -35,4 +35,3 @@ class Widelands_Map_Player_Position_Data_Packet : public Widelands_Map_Data_Pack
 
 
 #endif
-

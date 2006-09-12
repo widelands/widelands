@@ -130,4 +130,3 @@ Event_Descr* Event_Factory::get_event_descr(uint id) {
 const uint Event_Factory::get_nr_of_available_events(void) {
    return nr_of_events;
 }
-

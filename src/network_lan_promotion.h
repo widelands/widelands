@@ -32,7 +32,7 @@ struct LAN_Game_Info {
     char		magic[6];
     unsigned char	version;
     unsigned char	state;
-    
+
     char		gameversion[32];
     char		hostname[32];
     char		map[32];
@@ -48,19 +48,19 @@ class LAN_Base {
     protected:
 	LAN_Base ();
 	~LAN_Base ();
-	
+
 	void bind (unsigned short);
-	
+
 	bool avail ();
-    
+
 	ssize_t recv (void*, size_t, sockaddr_in*);
-	
+
 	void send (const void*, size_t, const sockaddr_in*);
 	void broadcast (const void*, size_t, unsigned short);
-    
+
     private:
 	int			sock;
-	
+
 	std::list<in_addr_t>	broadcast_addresses;
 };
 
@@ -68,11 +68,11 @@ class LAN_Game_Promoter:LAN_Base {
     public:
 	LAN_Game_Promoter ();
 	~LAN_Game_Promoter ();
-	
+
 	void run ();
-	
+
 	void set_map (const char*);
-    
+
     private:
 	LAN_Game_Info	gameinfo;
 	bool		needupdate;
@@ -85,21 +85,20 @@ class LAN_Game_Finder:LAN_Base {
 	    GameClosed,
 	    GameUpdated
 	};
-	
+
 	LAN_Game_Finder ();
 	~LAN_Game_Finder ();
-	
+
 	void reset ();
 	void run ();
-	
+
 	void set_callback (void(*)(int, const LAN_Open_Game*, void*), void*);
-    
+
     private:
 	std::list<LAN_Open_Game*>	opengames;
-	
+
 	void (*callback) (int, const LAN_Open_Game*, void*);
 	void*				userdata;
 };
 
 #endif
-

@@ -31,7 +31,7 @@ class UICheckbox;
 
 class Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive*, int, Editor_Place_Immovable_Tool*, 
+      Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive*, int, Editor_Place_Immovable_Tool*,
 		                                         UIUniqueWindowRegistry*);
       virtual ~Editor_Tool_Place_Immovable_Options_Menu();
 

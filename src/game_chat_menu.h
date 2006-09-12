@@ -30,7 +30,7 @@ class UIMultiline_Textarea;
 // The GameChatMenu is a rather dumb window with lots of buttons
 class GameChatMenu : public UIUniqueWindow {
 public:
-	GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, NetGame* game); 
+	GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, NetGame* game);
 	virtual ~GameChatMenu();
 
    void  think( void );

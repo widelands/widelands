@@ -858,4 +858,3 @@ void Surface::draw_field(Rect& subwin, Field * const f, Field * const rf, Field 
 
 	unset_subwin();
 }
-

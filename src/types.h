@@ -27,9 +27,9 @@ typedef unsigned long ulong;
 
 
 enum tAttribute {
-    atrHP = 0,   
-    atrAttack,   
-    atrDefense,  
+    atrHP = 0,
+    atrAttack,
+    atrDefense,
     atrEvade,
     atrTotal = 100
 };

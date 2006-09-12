@@ -28,12 +28,12 @@
 class Game_Server_Connection;
 
 /*
- * This is the abstract base class 
+ * This is the abstract base class
  * of a Game Server Protocoll packet
  */
 class Game_Server_Protocol_Packet {
    public:
-      virtual ~Game_Server_Protocol_Packet(void) { } 
+      virtual ~Game_Server_Protocol_Packet(void) { }
 
       virtual ushort get_id(void) = 0;
 

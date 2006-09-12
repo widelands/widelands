@@ -49,5 +49,3 @@ int Editor_Place_Bob_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Inter
    }
    return parent->get_fieldsel_radius()+2;
 }
-
-

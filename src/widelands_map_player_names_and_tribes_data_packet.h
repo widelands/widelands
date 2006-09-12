@@ -38,4 +38,3 @@ class Widelands_Map_Player_Names_And_Tribes_Data_Packet : public Widelands_Map_D
 
 
 #endif
-

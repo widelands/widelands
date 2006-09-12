@@ -33,10 +33,9 @@ class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 		{ return playername->get_text(); }
 		const char* get_server_name()
 		{ return hostname->get_text(); }
-	   
+
 	private:
 		UIEdit_Box*	playername, *hostname;
 };
 
 #endif
-

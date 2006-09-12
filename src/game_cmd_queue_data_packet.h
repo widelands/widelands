@@ -36,7 +36,7 @@ class Game_Cmd_Queue_Data_Packet : public Game_Data_Packet {
 
       virtual void Read(FileSystem*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
       virtual void Write(FileSystem*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
-      
+
 };
 
 #endif

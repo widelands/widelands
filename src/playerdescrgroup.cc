@@ -205,4 +205,3 @@ void PlayerDescriptionGroup::set_player_type(int type)
       m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
 	}
 }
-

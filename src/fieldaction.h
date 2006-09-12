@@ -35,4 +35,3 @@ void show_bulldoze_confirm(Interactive_Base* player, Building* building, PlayerI
 //void show_attack_dialog((Interactive_Base* player, Building* building);
 
 #endif /* FIELDACTION_H */
-

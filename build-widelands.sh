@@ -6,7 +6,7 @@ if [ ! -e utils/scons.py ] ; then
 	cd -
 fi
 
-for i in $* ; do 
+for i in $* ; do
 	if [ "$i" = "--help" ] ; then
 		echo syntax: $0 [OPTIONS]
 		echo

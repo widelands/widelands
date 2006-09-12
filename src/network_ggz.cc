@@ -538,4 +538,3 @@ void NetGGZ::launch()
 	ggzcore_game_launch(game);
 #endif
 }
-

@@ -1228,5 +1228,3 @@ void Warehouse::conquered_by (Player* pl)
    molog ("destroying\n");
    cleanup(pl->get_game());
 }
-
-

@@ -25,7 +25,7 @@
 class Editor_Game_Base;
 
 /*
- * Allows/denies the player to build a certain building 
+ * Allows/denies the player to build a certain building
  */
 class Event_Allow_Building : public Event {
    public:
@@ -58,4 +58,3 @@ class Event_Allow_Building : public Event {
 
 
 #endif
-

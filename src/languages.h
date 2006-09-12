@@ -36,7 +36,7 @@ struct Languages {
 };
 
 
-/* 
+/*
  * Add your language below in alphabetical order ( as far as possible ). But keep
  * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
@@ -50,15 +50,15 @@ static Languages available_languages[NR_LANGUAGES] = {
    { "English", "en_EN" },
    { "Français", "fr_FR" },
    { "עברית", "he_HE" },
-   { "Magyar", "hu_HU" },   
-   { "Nederlands", "nl_NL" }, 
+   { "Magyar", "hu_HU" },
+   { "Nederlands", "nl_NL" },
    { "Polski", "pl_PL" },
    { "Русский", "ru_RU" },
    { "Suomi", "fi_FI" },
    { "Slovensky", "sk_SK" },
    { "Svenska", "sv_SE" },
 // EXTRACT END (leave this line untouched)
-}; 
+};
 #endif
 
 #endif // __S__LANGUAGES_H

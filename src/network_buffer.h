@@ -26,7 +26,7 @@
 #include "types.h"
 
 /*
- * A Network buffer is a specialisation which knows how 
+ * A Network buffer is a specialisation which knows how
  * to read and write data into a buffer to send it over the
  * network. Data is removed if not requested on read.
  */
@@ -36,20 +36,20 @@ class Network_Buffer {
       ~Network_Buffer(void);
 
       ushort size(void) { return m_buffer_len; }
-      
+
       uchar get_8(bool = true);
       ushort get_16(bool = true);
       uint get_32(bool = true);
       std::string get_string(bool = true);
-      
-      void put_8(uchar); 
-      void put_16(ushort); 
-      void put_32(uint); 
+
+      void put_8(uchar);
+      void put_16(ushort);
+      void put_32(uint);
       void put_string( std::string );
 
       // Return value must not be freed by user
       uchar* get_data() { return m_buffer; }
-      
+
       // Fill this network buffer with all the incoming data
       int fill(TCPsocket);
       void finish( void );

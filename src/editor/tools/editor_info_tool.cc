@@ -121,5 +121,3 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
 
    return 0;
 }
-
-

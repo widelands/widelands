@@ -72,7 +72,7 @@ WUIPlot_Area::WUIPlot_Area(UIPanel* parent, int x, int y, int w, int h) :
    UIPanel(parent, x, y, w, h) {
 
    m_time = TIME_ONE_HOUR;  // defaults to one hour
-   
+
    m_plotmode = PLOTMODE_ABSOLUTE;
 }
 
@@ -124,7 +124,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // draw yticks, one at full, one at half
    dst->draw_line(get_inner_w()-space_at_right, spacing, get_inner_w()-space_at_right-3, spacing, LINE_COLOR);
-   dst->draw_line(get_inner_w()-space_at_right, spacing + ((get_inner_h()-space_at_bottom)-spacing)/2, get_inner_w()-space_at_right-3, 
+   dst->draw_line(get_inner_w()-space_at_right, spacing + ((get_inner_h()-space_at_bottom)-spacing)/2, get_inner_w()-space_at_right-3,
          spacing + ((get_inner_h()-space_at_bottom)-spacing)/2, LINE_COLOR);
 
    uint max = 0;
@@ -133,7 +133,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
       for(uint i = 0; i < m_plotdata.size(); i++) {
          if(!m_plotdata[i].showplot) continue;
          for(uint l = 0; l < m_plotdata[i].dataset->size(); l++)
-            if( max < (*m_plotdata[i].dataset)[l]) 
+            if( max < (*m_plotdata[i].dataset)[l])
                max = (*m_plotdata[i].dataset)[l];
       }
    } else {
@@ -157,7 +157,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
       }
    }
 
-   // Print the maximal value 
+   // Print the maximal value
    sprintf(buf, "%i", max);
    int w, h;
    g_fh->get_size(UI_FONT_SMALL, buf, &w, &h, 0);
@@ -193,14 +193,14 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
       posx = get_inner_w()-space_at_right;
 
-      int lx = get_inner_w()-space_at_right; 
+      int lx = get_inner_w()-space_at_right;
       int ly = get_inner_h()-space_at_bottom;
       for(int i = dataset->size()-1; i > 0 && posx > spacing; i--) {
          int value = (*dataset)[i];
 
          int curx = (int)posx;
          int cury = get_inner_h()-space_at_bottom;
-         if(value) { 
+         if(value) {
             float length_y = yline_length / ((float)max / (float)value);
             cury -= (int)length_y;
          }
@@ -208,10 +208,10 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
          posx -= sub;
 
-         lx = curx; 
+         lx = curx;
          ly = cury;
       }
-   } 
+   }
 }
 
 /*
@@ -236,7 +236,7 @@ void WUIPlot_Area::show_plot( uint id, bool t ) {
 };
 
 /*
- * set time 
+ * set time
  */
 void WUIPlot_Area::set_time( int id ) {
    m_time = id;
@@ -246,6 +246,5 @@ void WUIPlot_Area::set_time( int id ) {
  * Set sample rate the data uses
  */
 void WUIPlot_Area::set_sample_rate( uint id ) {
-   m_sample_rate = id; 
+   m_sample_rate = id;
 }
-

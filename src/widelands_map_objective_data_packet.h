@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * What objectives are on this scenario map?  
+ * What objectives are on this scenario map?
  */
 class Widelands_Map_Objective_Data_Packet : public Widelands_Map_Data_Packet {
    public:
@@ -35,4 +35,3 @@ class Widelands_Map_Objective_Data_Packet : public Widelands_Map_Data_Packet {
 
 
 #endif
-

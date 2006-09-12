@@ -63,4 +63,3 @@ bool UIModal_Message_Box::handle_mouseclick(uint btn, bool down, int mx, int my)
    } else
       return false; // we're not dragable
 }
-

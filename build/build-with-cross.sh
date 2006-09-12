@@ -1,16 +1,16 @@
-#!/bin/sh 
+#!/bin/sh
 
 ./build1.sh
 
-echo 
+echo
 echo "Cross building for windows 32. Guessing, that everything is installed"
 echo "under /usr/local/cross-tools"
 echo "For infos about cross compiling check README-compiling.txt in the .. dir"
 
 cp widelands/widelands widelands/widelands.temp
 
-cd widelands 
-make clean 
+cd widelands
+make clean
 CROSS=YES BUILD=release make
 cd ..
 
@@ -36,4 +36,3 @@ Everything is done. you should now be able to pack things into archives!
 Have fun! :)
 
 EOF
-

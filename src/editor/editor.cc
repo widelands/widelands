@@ -104,4 +104,3 @@ void Editor::think() {
 
    g_gr->animate_maptextures(get_gametime());
 }
-

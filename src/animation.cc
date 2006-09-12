@@ -137,7 +137,7 @@ void AnimationManager::flush()
  *
  * Read in sound effects associated with the animation as well as the
  * framenumber on which the effect should be played
- * 
+ *
  * The animation resides in the given directory and is described by the given
  * section.
  *
@@ -266,13 +266,13 @@ const AnimationData* AnimationManager::get_animation(uint id) const
 void AnimationManager::trigger_soundfx(uint animation, uint framenumber, uint stereo_position)
 {
 	return;
-//temporarily disabled #fweber 30jan2006	
+//temporarily disabled #fweber 30jan2006
 	assert(animation>0 && animation<=m_animations.size()); //animation must not be zero!
-	
+
 	if ( m_animations[animation-1].sfx_cues.count(framenumber)!=0 ) {
 		std::string fxname;
 
-		fxname=m_animations[animation-1].sfx_cues[framenumber];	
+		fxname=m_animations[animation-1].sfx_cues[framenumber];
 		g_sound_handler.play_fx(fxname, stereo_position);
 	}
 }
@@ -351,7 +351,7 @@ void DirAnimations::parse(Bob_Descr* b, const char *directory, Profile *prof, co
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
 
       std::string anim_name=sectname;
-      
+
 		s = prof->get_section(sectname);
 		if (!s) {
 			if (!defaults)
@@ -364,4 +364,3 @@ void DirAnimations::parse(Bob_Descr* b, const char *directory, Profile *prof, co
       b->add_animation(anim_name.c_str(), m_animations[dir-1]);
    }
 }
-

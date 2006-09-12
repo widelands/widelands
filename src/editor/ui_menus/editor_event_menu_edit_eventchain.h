@@ -40,8 +40,8 @@ class Editor_Event_Menu_Edit_EventChain : public UIWindow {
       ~Editor_Event_Menu_Edit_EventChain();
 
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
-      void think( void ); 
-      
+      void think( void );
+
    private:
       void clicked(int);
       void tl_selected(int);
@@ -63,5 +63,3 @@ class Editor_Event_Menu_Edit_EventChain : public UIWindow {
 };
 
 #endif
-
-

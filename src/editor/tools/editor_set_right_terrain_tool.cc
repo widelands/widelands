@@ -19,4 +19,3 @@
 
 
 #include "editor_set_right_terrain_tool.h"
-

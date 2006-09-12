@@ -129,4 +129,3 @@ class MapObjectiveManager {
 };
 
 #endif
-

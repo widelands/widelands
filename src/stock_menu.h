@@ -28,7 +28,7 @@ class Interactive_Player;
 class Economy;
 
 /*
- * Shows statistics about all stocks currently in the game of 
+ * Shows statistics about all stocks currently in the game of
  * one player
  */
 class Stock_Menu : public UIUniqueWindow {
@@ -41,7 +41,7 @@ public:
 private:
    void clicked(int);
    void switch_page( void );
-   
+
 private:
 	WaresDisplay*			m_waresdisplay;
    Interactive_Player*  m_parent;

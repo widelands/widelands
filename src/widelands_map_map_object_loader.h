@@ -24,9 +24,9 @@ class Map_Object;
 class Editor_Game_Base;
 
 /*
- * This class helps to 
+ * This class helps to
  *   - keep track of map objects on the map (to be loaded)
- *   - translate file index pointers into Map_Objects 
+ *   - translate file index pointers into Map_Objects
  */
 typedef std::map<uint, Map_Object*> Reverse_Map_Object_Map;
 
@@ -44,7 +44,7 @@ class Widelands_Map_Map_Object_Loader {
       bool is_object_loaded(Map_Object* obj) { return m_loaded_obj[obj]; }
 
       void mark_object_as_loaded(Map_Object* obj);
-      
+
    private:
       std::map<Map_Object*, bool> m_loaded_obj;
       Reverse_Map_Object_Map m_objects;

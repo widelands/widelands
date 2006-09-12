@@ -131,4 +131,3 @@ private:
 extern Font_Handler* g_fh; // the default font
 
 #endif
-

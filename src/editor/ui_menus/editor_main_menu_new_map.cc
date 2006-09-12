@@ -161,5 +161,3 @@ Main_Menu_New_Map::~Main_Menu_New_Map()
 {
    delete m_worlds;
 }
-
-

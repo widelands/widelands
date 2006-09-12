@@ -43,4 +43,3 @@ class UIModal_Message_Box : public UIWindow {
 };
 
 #endif
-

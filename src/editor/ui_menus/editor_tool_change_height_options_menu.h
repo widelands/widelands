@@ -44,4 +44,3 @@ class Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
 };
 
 #endif
-

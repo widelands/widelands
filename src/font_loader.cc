@@ -119,4 +119,3 @@ Free resources.
 Font_Loader::~Font_Loader() {
 	clear_fonts();
 }
-

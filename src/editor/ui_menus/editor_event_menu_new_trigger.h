@@ -51,5 +51,3 @@ class Editor_Event_Menu_New_Trigger : public UIWindow {
 };
 
 #endif
-
-

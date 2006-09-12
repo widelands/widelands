@@ -63,7 +63,7 @@ uint Widelands_Map_Map_Object_Saver::register_object(Map_Object* obj) {
       case Map_Object::BOB: ++m_nr_bobs; break;
       default: throw wexception("Widelands_Map_Map_Object_Saver: Unknown MapObject type : %i\n", obj->get_type());
    }
-   
+
    assert(obj->get_file_serial());
 
    m_objects.insert(std::pair<Map_Object*, uint>(obj,obj->get_file_serial()));
@@ -79,9 +79,9 @@ uint Widelands_Map_Map_Object_Saver::register_object(Map_Object* obj) {
 uint Widelands_Map_Map_Object_Saver::get_object_file_index(Map_Object* obj) {
    // This check should rather be an assert(), but we get more information
    // from a throw and time's not soo much an issue here
-   if(!is_object_known(obj)) 
+   if(!is_object_known(obj))
       throw wexception("Widelands_Map_Map_Object_Saver::get_object_file_index(): Map Object %p (%i) is not known!\n", obj, obj->get_serial());
-   
+
    return m_objects[obj];
 }
 
@@ -89,7 +89,7 @@ uint Widelands_Map_Map_Object_Saver::get_object_file_index(Map_Object* obj) {
  * mark this object as saved
  */
 void Widelands_Map_Map_Object_Saver::mark_object_as_saved(Map_Object* obj) {
-   m_saved_obj[obj]=true;  
+   m_saved_obj[obj]=true;
 }
 
 /*
@@ -98,11 +98,9 @@ void Widelands_Map_Map_Object_Saver::mark_object_as_saved(Map_Object* obj) {
 int Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects(void) {
    std::map<Map_Object*,bool>::iterator i=m_saved_obj.begin();
    int retval=0;
-   while(i!=m_saved_obj.end()) { 
+   while(i!=m_saved_obj.end()) {
       if(!i->second) retval++;
       ++i;
    }
    return retval;
 }
-
-

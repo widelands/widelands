@@ -48,4 +48,3 @@ class Editor_Tool_Change_Resources_Options_Menu : public Editor_Tool_Options_Men
 };
 
 #endif
-

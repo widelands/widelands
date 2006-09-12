@@ -33,7 +33,7 @@ class Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
       Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive*, int, Editor_Place_Bob_Tool*,
 		                                         UIUniqueWindowRegistry*);
       virtual ~Editor_Tool_Place_Bob_Options_Menu();
-   
+
    private:
       std::vector<UICheckbox*> m_checkboxes;
       Editor_Place_Bob_Tool* m_pit;

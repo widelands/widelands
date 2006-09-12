@@ -19,4 +19,3 @@
 
 
 #include "editor_set_both_terrain_tool.h"
-

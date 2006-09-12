@@ -47,4 +47,3 @@ bool Fullscreen_Menu_Intro::handle_key(bool down, int code, char c)
 
 	return true;
 }
-

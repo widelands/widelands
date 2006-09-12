@@ -146,5 +146,3 @@ void Editor_Tool_Noise_Height_Options_Menu::button_clicked(int n) {
 
    update();
 }
-
-

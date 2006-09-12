@@ -7,7 +7,7 @@ Dependencies
 
 These are the libraries you need. You also need the headers and link libraries,
 for widelands makes direct use of them:
-   - SDL 
+   - SDL
    - SDL_mixer >= 1.2.6
    - SDL_image
    - SDL_net
@@ -52,7 +52,7 @@ under windows and compiling widelands.
  - check out a widelands CVS version or get a build source release
  - unpack it, edit the makefile user variables and run make
  - if there were no problems, you're done. start developing and commit your
-   changes   
+   changes
 
 compiling widelands using msvc 6
 --------------------------------
@@ -77,8 +77,8 @@ make reboots unnecessary, and therefore realising much more convinient.
    install them under /usr/local/cross-tools. Don't change this path, or
    you'll surely run into trouble.
  - get a sdl source tarball from www.libsdl.org, unpack it
- - get the scripts 
-   http://www.libsdl.org/extras/win32/cross/cross-configure.sh 
+ - get the scripts
+   http://www.libsdl.org/extras/win32/cross/cross-configure.sh
    http://www.libsdl.org/extras/win32/cross/cross-make.sh
    into the sdl source dir
  - run 'sh cross-configure.sh --disable-debug'
@@ -91,8 +91,6 @@ make reboots unnecessary, and therefore realising much more convinient.
      /usr/local/cross-tools/bin/i386-mingw32msvc-ranlib /usr/local/cross-tools/i386-mingw32msvc/lib/libSDLmain.a
  - get the widelands sources, edit the Makefile
  - set the var CROSS to YES
- - make clean && make 
+ - make clean && make
  - if everything went ok, the file widelands (without .exe) is a windows
    executable depending on nothing but SDL.dll
-
-

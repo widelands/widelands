@@ -59,4 +59,3 @@ class Event_Unhide_Area : public Event {
 
 
 #endif
-

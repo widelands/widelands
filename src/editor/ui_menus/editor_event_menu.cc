@@ -350,4 +350,3 @@ void Editor_Event_Menu::event_double_clicked(int n) {
 void Editor_Event_Menu::eventchain_double_clicked(int n) {
    clicked(8);
 }
-

@@ -56,4 +56,3 @@ class Main_Menu_Map_Options : public UIWindow {
 };
 
 #endif
-

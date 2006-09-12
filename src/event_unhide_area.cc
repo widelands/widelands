@@ -97,5 +97,3 @@ Event::State Event_Unhide_Area::run(Game* game) {
    m_state = DONE;
    return m_state;
 }
-
-

@@ -53,7 +53,7 @@ class Trigger_Building : public Trigger {
       void set_building(const char* b) { m_building=b; }
       void set_building_count(int n) { m_count=n; }
       int get_building_count(void) { return m_count; }
- 
+
    private:
       Coords m_pt;
       std::string m_building;
@@ -63,4 +63,3 @@ class Trigger_Building : public Trigger {
 };
 
 #endif
-

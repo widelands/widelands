@@ -55,5 +55,3 @@ class Event_Allow_Building_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

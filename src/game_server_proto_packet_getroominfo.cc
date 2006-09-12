@@ -80,4 +80,3 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    gsc->get_room_info( users );
 }
-

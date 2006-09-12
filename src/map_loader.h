@@ -43,8 +43,8 @@ class Map_Loader {
       enum Type {
          WLML, // Widelands Map Loader
          S2ML  // S2 Map Loader
-      }; 
-      
+      };
+
       Map_Loader(const char* filename, Map* map) { m_s=STATE_INIT; m_map=map; m_map->set_filename(filename); }
       virtual ~Map_Loader() { };
 

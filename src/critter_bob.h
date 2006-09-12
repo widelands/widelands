@@ -30,7 +30,7 @@ class Critter_BobProgram;
 //
 class Critter_Bob_Descr : public Bob_Descr {
 	typedef std::map<std::string, Critter_BobProgram*> ProgramMap;
-   
+
    public:
       Critter_Bob_Descr(const char *name, Tribe_Descr* tribe);
       virtual ~Critter_Bob_Descr(void) { }
@@ -72,10 +72,10 @@ public:
 private:
 	void roam_update(Game* g, State* state);
 	void roam_signal(Game* g, State* state);
-	
+
    void program_update(Game* g, State* state);
 	void program_signal(Game* g, State* state);
-	
+
 private:
    bool run_remove(Game* g, State* state, const Critter_BobAction* act);
 

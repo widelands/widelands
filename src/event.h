@@ -79,4 +79,3 @@ class Event {
  };
 
 #endif
-

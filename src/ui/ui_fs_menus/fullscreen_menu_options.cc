@@ -241,4 +241,3 @@ void Options_Ctrl::save_options(){
    g_sound_handler.set_disable_music( !opt.music );
    g_sound_handler.set_disable_fx( !opt.fx );
 }
-

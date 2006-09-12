@@ -50,7 +50,7 @@ void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
    assert (eg);
    assert (s1);
    assert (s2);
-   
+
    log ("Battle::init\n");
    Map_Object::init(eg);
    m_first = s1;
@@ -62,9 +62,9 @@ void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
 void Battle::init (Editor_Game_Base* eg)
 {
    assert (eg);
-   
+
    Map_Object::init(eg);
-   
+
    if (eg->is_game())
       m_next_assault = schedule_act ((Game*)eg, 1000); // Every round is 1000 ms
 }
@@ -74,10 +74,10 @@ void Battle::soldiers (Soldier* s1, Soldier* s2)
    assert (s1);
    assert (s2);
    log ("Battle::init\n");
-   
+
    m_first = s1;
    m_second = s2;
-  
+
 }
 
 
@@ -86,16 +86,16 @@ void Battle::cleanup (Editor_Game_Base* eg)
    log ("Battle::cleanup\n");
    m_first = 0;
    m_second = 0;
-   Map_Object::cleanup(eg); 
+   Map_Object::cleanup(eg);
 }
 
 void Battle::act (Game* g, uint data)
 {
    log ("Battle::act\n");
-   
+
    if (!g->is_game())
       return;
-   
+
    Soldier* attacker;
    Soldier* defender;
 
@@ -130,14 +130,14 @@ void Battle::act (Game* g, uint data)
       schedule_destroy (g);
       return;
    }
-   
+
    // Put attack animation
    //attacker->start_animation(g, "attack", 1000);
    uint hit = g->logic_rand() % 100;
 log (" hit=%d ", hit);
    if (hit > defender->get_evade())
    {
-      uint attack = attacker->get_min_attack() + 
+      uint attack = attacker->get_min_attack() +
             (g->logic_rand()% (attacker->get_max_attack()-attacker->get_min_attack()-1));
       uint defend = defender->get_defense();
       defend = (attack * defend) / 100;
@@ -145,7 +145,7 @@ log (" hit=%d ", hit);
 log (" attack(%d)=%d ", attacker->get_serial(), attack);
 log (" defense(%d)=%d ", defender->get_serial(), defend);
 log (" damage=%d\n", attack-defend);
-      
+
       defender->damage (attack-defend);
       // defender->start_animation(g, "defend", 1000);
    }
@@ -156,5 +156,3 @@ log (" evade(%d)=%d\n", defender->get_serial(), defender->get_evade());
    }
    m_next_assault = schedule_act(g, 1000);
 }
-
-

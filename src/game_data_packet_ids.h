@@ -36,4 +36,3 @@
 #define PACKET_END_OF_GAME_DATA        254
 
 #endif
-

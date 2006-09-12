@@ -47,7 +47,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read(FileSystem* fs, Edi
  * Pre Read function
  */
 void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileSystem* fs, Map* map, bool skip) {
-   
+
    Profile prof;
    prof.read( "player_names", 0, fs );
    Section* s = prof.get_section( "global" );
@@ -57,7 +57,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileSystem* fs,
 
    if(packet_version==CURRENT_PACKET_VERSION) {
      std::string name, tribe;
-     char buf[256]; 
+     char buf[256];
       int i;
       for(i=1; i<=map->get_nrplayers(); i++) {
          sprintf(buf, "player_%i", i );
@@ -72,7 +72,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileSystem* fs,
       return;
    }
    throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -80,14 +80,14 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileSystem* fs,
  * Write Function
  */
 void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   char buf[256]; 
-   
+   char buf[256];
+
    Profile prof;
    Section* s = prof.create_section("global");
-   
+
    // packet version
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
-   
+
    int i=0;
    Map* map=egbase->get_map();
    std::string name, tribe;
@@ -100,7 +100,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileSystem* fs, Ed
       s->set_string("name", name.c_str());
       s->set_string("tribe", tribe.c_str());
    }
-  
+
    prof.write("player_names", false, fs );
    // DONE
 }

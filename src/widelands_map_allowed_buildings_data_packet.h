@@ -36,4 +36,3 @@ class Widelands_Map_Allowed_Buildings_Data_Packet : public Widelands_Map_Data_Pa
 
 
 #endif
-

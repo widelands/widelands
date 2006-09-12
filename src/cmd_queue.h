@@ -45,8 +45,8 @@ class Widelands_Map_Map_Object_Loader;
 
 enum {
 	FLAGACTION_GEOLOGIST = 0,	// call a geologist
-   
-   
+
+
    ENEMYFLAGACTION_ATTACK = 10,   // Performs an attack
 };
 // ---------------------- END    OF CMDS ----------------------------------
@@ -66,16 +66,16 @@ class BaseCommand {
 		virtual ~BaseCommand ();
 
 		virtual void execute (Game*)=0;
-		
+
 		int get_duetime() const { return duetime; }
 		void set_duetime(int t) { duetime=t; }
-      
+
       // Write these commands to a file (for savegames)
       virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*)=0;
       virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)=0;
 
       virtual int get_id(void) = 0; // Get this command id
-      
+
       // Write commands for BaseCommand. Must be called from upper classes
       void BaseCmdWrite(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       void BaseCmdRead(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
@@ -88,7 +88,7 @@ class Cmd_Queue {
 	struct cmditem {
 		BaseCommand*	cmd;
 		unsigned long	serial;
-		
+
 		bool operator< (const cmditem& c) const
 		{
 			if (cmd->get_duetime()==c.cmd->get_duetime())

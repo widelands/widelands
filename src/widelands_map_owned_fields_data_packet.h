@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * Which field is owned by which player? 
+ * Which field is owned by which player?
  */
 class Widelands_Map_Owned_Fields_Data_Packet : public Widelands_Map_Data_Packet {
    public:
@@ -35,4 +35,3 @@ class Widelands_Map_Owned_Fields_Data_Packet : public Widelands_Map_Data_Packet 
 
 
 #endif
-

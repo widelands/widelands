@@ -78,5 +78,3 @@ int Editor_Decrease_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Edi
    }
    return parent->get_fieldsel_radius();
 }
-
-

@@ -59,4 +59,3 @@ class Event_Conquer_Area : public Event {
 
 
 #endif
-

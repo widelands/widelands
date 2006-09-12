@@ -326,4 +326,3 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    if(m_mos->get_nr_unsaved_objects())
       throw wexception("There are %i unsaved objects. This is a bug, please consider committing!\n", m_mos->get_nr_unsaved_objects());
 }
-

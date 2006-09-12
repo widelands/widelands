@@ -48,5 +48,3 @@ int Editor_Place_Immovable_Tool::handle_click_impl(FCoords& fc, Map* map, Editor
    }
    return parent->get_fieldsel_radius()+2;
 }
-
-

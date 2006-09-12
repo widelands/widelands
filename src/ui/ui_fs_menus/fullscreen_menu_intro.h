@@ -40,4 +40,3 @@ protected:
 };
 
 #endif // __S__INTRO_H
-

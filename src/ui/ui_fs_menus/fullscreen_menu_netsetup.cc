@@ -265,4 +265,3 @@ void Fullscreen_Menu_NetSetup::hostgame(int code)
 	if(NetGGZ::ref()->usedcore()) end_modal(HOSTGGZGAME);
 	else end_modal(HOSTGAME);
 }
-

@@ -1180,4 +1180,3 @@ void Computer_Player::construct_roads ()
 		}
 	}
 }
-

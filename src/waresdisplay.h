@@ -44,7 +44,7 @@ public:
       WORKER,
       WARE
    };
-   
+
 public:
 	WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player);
 	virtual ~WaresDisplay();
@@ -53,7 +53,7 @@ public:
 
    void add_warelist(const WareList*, wdType);
    void remove_all_warelists(void);
-   
+
 protected:
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock, bool);

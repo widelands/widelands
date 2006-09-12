@@ -40,7 +40,7 @@ Widelands_Map_Objective_Data_Packet::~Widelands_Map_Objective_Data_Packet(void) 
  * Read Function
  */
 void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-   if(skip) 
+   if(skip)
       return;
 
    Profile prof;
@@ -56,7 +56,7 @@ void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
 
    // read packet version
    int packet_version=s->get_int("packet_version");
-   
+
    if(packet_version==CURRENT_PACKET_VERSION) {
       while(( s = prof.get_next_section(0))) {
          MapObjective* o = new MapObjective();
@@ -67,10 +67,10 @@ void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
 
          const char* trigname = s->get_safe_string("trigger");
          Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( trigname );
-         if( !trig ) 
+         if( !trig )
             throw wexception("Unknown trigger referenced in Objective: %s\n", trigname );
          o->set_trigger( static_cast<Trigger_Null*>(trig) ); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
-         
+
          mom->register_new_objective( o );
       }
       return;
@@ -87,7 +87,7 @@ void Widelands_Map_Objective_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
 
    Profile prof;
    Section* s = prof.create_section("global");
-    
+
    // packet version
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
@@ -101,7 +101,7 @@ void Widelands_Map_Objective_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
       Trigger_Null* trig = o->get_trigger();
       assert( trig );
       s->set_string("trigger", trig->get_name());
-   }   
+   }
 
    prof.write("objective", false, fs );
 }

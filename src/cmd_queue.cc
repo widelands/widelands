@@ -135,4 +135,3 @@ void BaseCommand::BaseCmdRead(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map
    } else
       throw wexception("BaseCommand::BaseCmdRead: unknown version %i\n", version);
 }
-

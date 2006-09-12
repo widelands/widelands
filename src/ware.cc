@@ -305,4 +305,3 @@ bool operator!=(const WareList &wl1, const WareList &wl2)
 {
 	return !(wl1 == wl2);
 }
-

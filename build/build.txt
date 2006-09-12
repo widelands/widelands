@@ -57,4 +57,4 @@ II. Releasing
 
 3) Announce on Homepage
 
-4) Update Homepage, especially roadmap 
+4) Update Homepage, especially roadmap

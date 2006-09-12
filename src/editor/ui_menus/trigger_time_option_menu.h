@@ -52,5 +52,3 @@ class Trigger_Time_Option_Menu : public UIWindow {
 };
 
 #endif
-
-

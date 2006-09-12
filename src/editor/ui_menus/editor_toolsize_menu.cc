@@ -88,4 +88,3 @@ void Editor_Toolsize_Menu::button_clicked(int n) {
    sprintf(buf, "%s: %i", _("Current Size").c_str(), m_parent->get_fieldsel_radius()+1);
    m_textarea->set_text(buf);
 }
-

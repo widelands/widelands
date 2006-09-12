@@ -45,7 +45,7 @@ class Trigger_Factory {
 
       static Trigger_Descr* get_correct_trigger_descr(const char* id);
       static const uint get_nr_of_available_triggers(void);
-      static Trigger_Descr* get_trigger_descr( uint );  
+      static Trigger_Descr* get_trigger_descr( uint );
 };
 
 #endif
