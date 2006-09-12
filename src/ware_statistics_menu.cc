@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -340,11 +340,13 @@ Create all the buttons etc...
 ===============
 */
 Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,270,_("Ware Statistics")) {
-   m_parent = parent;
+:
+UIUniqueWindow(parent,registry,400,270,_("Ware Statistics")), m_parent(parent)
+{
 
    // First, we must decide about the size
-   int nr_wares = parent->get_player()->get_tribe()->get_nrwares();
+	const Descr_Maintainer<Building_Descr>::Index nr_wares =
+		parent->get_player()->get_tribe()->get_nr_wares();
    int wares_per_row = MIN_WARES_PER_LINE;
    while(nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
    int nr_rows = nr_wares % wares_per_row ?  ( nr_wares / wares_per_row ) + 1 : ( nr_wares / wares_per_row );

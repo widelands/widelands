@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by Widelands Development Team
+ * Copyright (C) 2003, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,27 +139,23 @@ Draw the wares.
 */
 void WaresDisplay::draw(RenderTarget* dst)
 {
-   int x, y;
-
-   x = 2;
-   y = 2;
-
-   int number = m_player->get_tribe()->get_nrwares();
+	int x = 2, y = 2;
+	const Tribe_Descr & tribe = *m_player->get_tribe();
+	ushort number = tribe.get_nr_wares();
    bool is_worker = false;
 
    if( m_type == WORKER ) {
-      number = m_player->get_tribe()->get_nrworkers();
+      number = tribe.get_nr_workers();
       is_worker = true;
    }
-   int totid=0;
-   for(int id = 0; id < number; id++, totid++)	{
+	for (ushort id = 0; id < number; ++id) {
       uint totalstock = 0;
       for( uint i = 0; i < m_warelists.size(); i++)
          totalstock += m_warelists[i]->stock(id);
 
       draw_ware(dst, x, y, id, totalstock, is_worker);
 
-      if (((totid+1) % WaresPerRow) != 0)
+      if (((id + 1) % WaresPerRow) != 0)
       {
          x += WARE_MENU_PIC_W + 3;
       }

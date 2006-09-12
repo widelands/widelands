@@ -453,7 +453,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* ac
    if(state->svar1 == "world") {
 	state->ivar2 = g->get_map()->get_world()->get_bob(bob.c_str());
    } else {
-	state->ivar2 = get_descr()->get_tribe()->get_bob(bob.c_str());
+	   state->ivar2 = get_descr()->get_tribe()->get_bob_index(bob.c_str());
    }
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", act->sparamv[idx].c_str());

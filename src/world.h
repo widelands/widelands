@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,7 +136,7 @@ class World
       inline const char* get_descr(void) { return hd.descr; }
 
       inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
-      inline Terrain_Descr* get_terrain(char* str ) { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
+	Terrain_Descr * get_terrain(const char * const name);
       inline int get_nr_terrains(void) { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
@@ -165,6 +165,11 @@ class World
       void parse_terrains();
       void parse_bobs();
 };
+
+inline Terrain_Descr * World::get_terrain(const char * const name) {
+	try {return ters.get(ters.get_index(name));}
+	catch (Descr_Maintainer<Terrain_Descr>::Nonexistent) {return 0;}
+}
 
 #endif
 

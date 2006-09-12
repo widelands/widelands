@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,15 +74,18 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
    m_rtl_button=b;
 
    // Fill the lists
-   Tribe_Descr* t=player->get_tribe();
-   int i;
-   for(i=0; i<t->get_nrbuildings(); i++) {
-      Building_Descr* b=t->get_building_descr(i);
-      if(!b->get_enhanced_building() && !b->get_buildable()) continue;
-      if(m_player->is_building_allowed(i))
-         m_allowed->add_entry(b->get_descname(), ((void*)(i)), false, b->get_buildicon());
-      else
-         m_forbidden->add_entry(b->get_descname(), ((void*)(i)), false, b->get_buildicon());
+	const Tribe_Descr & tribe = *player->get_tribe();
+	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
+		tribe.get_nr_buildings();
+	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i) {
+		const Building_Descr & building = *tribe.get_building_descr(i);
+      if (not building.get_enhanced_building() and not building.get_buildable())
+	      continue;
+		(m_player->is_building_allowed(i) ? m_allowed : m_forbidden)->add_entry
+			(building.get_descname(),
+			 (reinterpret_cast<void * const>(static_cast<const long>(i))),
+			 false,
+			 building.get_buildicon());
    }
    m_forbidden->sort();
    m_allowed->sort();

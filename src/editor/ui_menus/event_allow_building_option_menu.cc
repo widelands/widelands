@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,9 +56,11 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
 
    // Fill the building infos
    Tribe_Descr* tribe = m_parent->get_editor()->get_tribe(m_parent->get_map()->get_scenario_player_tribe(m_player).c_str());
-   int i=0;
    if(tribe) {
-      for(i=0; i<tribe->get_nrbuildings(); i++) {
+		const Descr_Maintainer<Building_Descr>::Index nr_buildings =
+			tribe->get_nr_buildings();
+		for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i)
+		{
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->get_name();

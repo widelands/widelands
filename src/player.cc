@@ -48,9 +48,10 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
    set_name(name);
 
    // Allow all buildings per default
-   int i;
-   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
-   for(i=0; i<m_tribe->get_nrbuildings(); i++)
+	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
+		m_tribe->get_nr_buildings();
+   m_allowed_buildings.resize(nr_buildings);
+	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i)
       m_allowed_buildings[i]=true;
 
    // Resize the visibility array, so that it is large enough
@@ -224,7 +225,7 @@ void Player::build(Coords c, int idx)
 	Building_Descr* descr;
 
 	// Validate building type
-	if (idx < 0 || idx >= get_tribe()->get_nrbuildings())
+	if (idx < 0 or idx >= get_tribe()->get_nr_buildings())
 		return;
 	descr = get_tribe()->get_building_descr(idx);
 
@@ -391,8 +392,8 @@ void Player::flagaction(Flag* flag, int action)
  * Disable or enable a building for a player
  */
 void Player::allow_building(int i, bool t) {
-   assert(m_tribe && i<m_tribe->get_nrbuildings());
-   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
+   assert(m_tribe && i < m_tribe->get_nr_buildings());
+   m_allowed_buildings.resize(m_tribe->get_nr_buildings());
 
    m_allowed_buildings[i]=t;
 }

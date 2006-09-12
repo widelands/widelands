@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -418,10 +418,12 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
       std::string resource;
       int amount;
 	   str1 >> resource >> amount;
-      int res=resources->get_index(resource.c_str());;
-      if(res==-1)
-         throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
-      m_default_resources=res;
+		try {m_default_resources = resources->get_index(resource.c_str());}
+		catch (Descr_Maintainer<Resource_Descr>::Nonexistent) {
+         throw wexception
+				("Terrain %s has valid resource %s which doesn't exist in world!\n",
+				 s->get_name(), resource.c_str());
+		}
       m_default_amount=amount;
    }
 
@@ -443,11 +445,16 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
       while(i<=str1.size()) {
          if(str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') { ++i; continue; }
          if(str1[i]==',' || i==str1.size()) {
-            int res=resources->get_index(curres.c_str());;
-            if(res==-1)
-               throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
-            m_valid_resources[cur_res++]=res;
-            curres="";
+	         try {
+		         m_valid_resources[cur_res] = resources->get_index(curres.c_str());
+		         ++cur_res;
+	         }
+	         catch (Descr_Maintainer<Resource_Descr>::Nonexistent) {
+		         throw wexception
+			         ("Terrain %s has valid resource %s which doesn't exist in world!\n",
+			          s->get_name(), curres.c_str());
+	         }
+	         curres="";
          } else {
             curres.append(1, str1[i]);
          }

@@ -429,18 +429,23 @@ void Warehouse::init(Editor_Game_Base* gg)
 	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
 		gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr());
 
-   m_supply->set_nrwares(get_owner()->get_tribe()->get_nrwares());
-   m_supply->set_nrworkers(get_owner()->get_tribe()->get_nrworkers());
+	const Tribe_Descr & tribe =  *get_owner()->get_tribe();
+	const Descr_Maintainer<Item_Ware_Descr>::Index nr_wares   =
+		tribe.get_nr_wares  ();
+	const Descr_Maintainer<Worker_Descr>   ::Index nr_workers =
+		tribe.get_nr_workers();
+	m_supply->set_nrwares  (nr_wares);
+	m_supply->set_nrworkers(nr_workers);
 
    if (gg->is_game()) {
-      for(int i = 0; i < get_owner()->get_tribe()->get_nrwares(); i++) {
+      for (Descr_Maintainer<Item_Ware_Descr>::Index i = 0; i < nr_wares; ++i) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
          req->set_idle(true);
 
          m_requests.push_back(req);
       }
-     for(int i = 0; i < get_owner()->get_tribe()->get_nrworkers(); i++) {
+      for(Descr_Maintainer<Worker_Descr>::Index i = 0; i < nr_workers; ++i) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
          req->set_idle(true);

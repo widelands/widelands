@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,10 +96,18 @@ void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbas
                      bob->set_position(egbase, Coords(x,y));
                      bob->init(egbase);
                   } else if(subtype==Bob::CRITTER) {
-                     int idx=tribe->get_bob(name.c_str());
-                     if(idx==-1)
-                        throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
-                     bob=egbase->create_bob(Coords(x,y),idx,tribe);
+	                  try {
+		                  egbase->create_bob
+			                  (Coords(x, y),
+			                   tribe->get_bob_index(name.c_str()),
+			                   tribe);
+	                  } catch (Descr_Maintainer<Bob_Descr>::Nonexistent) {
+		                  throw wexception
+			                  ("Map defines Bob %s, but tribe %s doesn't "
+			                   "deliver!\n",
+			                   name.c_str(),
+			                   owner.c_str());
+	                  }
                   }
                }
 

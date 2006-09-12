@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -497,27 +497,28 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 	BuildGrid* bbg_house[3] = { 0, 0, 0 };
 	BuildGrid* bbg_mine = 0;
 
-	Tribe_Descr* tribe = m_plr->get_tribe();
+	Tribe_Descr & tribe = *m_plr->get_tribe(); //  FIXME should be const
 
 	m_fastclick = false;
 
-	for(int id = 0; id < tribe->get_nrbuildings(); id++)
-		{
-		Building_Descr* descr = tribe->get_building_descr(id);
+	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
+		tribe.get_nr_buildings();
+	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i) {
+		const Building_Descr & descr = *tribe.get_building_descr(i);
 		BuildGrid** ppgrid;
 
 		// Some buildings cannot be built (i.e. construction site, HQ)
       // and not allowed buildings. The rules are different in editor
       // and game: enhanced buildings _are_ buildable in the editor
       if(m_iabase->get_egbase()->is_game()) {
-         if (!descr->get_buildable() || !m_plr->is_building_allowed(id))
+         if (not descr.get_buildable() or not m_plr->is_building_allowed(i))
             continue;
-      } else {
-         if(!descr->get_buildable() && !descr->get_enhanced_building()) continue;
-      }
+      } else if
+	      (not descr.get_buildable() and not descr.get_enhanced_building())
+	         continue;
 
 		// Figure out if we can build it here, and in which tab it belongs
-		if (descr->get_ismine())
+		if (descr.get_ismine())
 			{
 			if (!(buildcaps & BUILDCAPS_MINE))
 				continue;
@@ -526,7 +527,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 			}
 		else
 			{
-			int size = descr->get_size() - BaseImmovable::SMALL;
+			int size = descr.get_size() - BaseImmovable::SMALL;
 
 			if ((buildcaps & BUILDCAPS_SIZEMASK) < (size+1))
 				continue;
@@ -537,14 +538,14 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid)
 			{
-			*ppgrid = new BuildGrid(m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(m_tabpanel, &tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
 			(*ppgrid)->buildmouseout.set(this, &FieldActionWindow::building_icon_mouse_out);
 			(*ppgrid)->buildmousein.set(this, &FieldActionWindow::building_icon_mouse_in);
 			}
 
 		// Add it to the grid
-		(*ppgrid)->add(id);
+		(*ppgrid)->add(i);
 		}
 
 	// Add all necessary tabs

@@ -3326,17 +3326,27 @@ Economy::Economy
 Economy::~Economy
 ===============
 */
-Economy::Economy(Player *player)
+Economy::Economy(Player *player) :
+m_owner(player),
+m_rebuilding(false),
+m_request_timer(false),
+mpf_cycle(0)
 {
-	m_owner = player;
-	m_rebuilding = false;
-	m_request_timer = false;
-	mpf_cycle = 0;
-
-   m_worker_supplies.resize( player->get_tribe()->get_nrworkers() );
-   m_workers.set_nrwares( player->get_tribe()->get_nrworkers() );
-   m_ware_supplies.resize( player->get_tribe()->get_nrwares() );
-   m_wares.set_nrwares( player->get_tribe()->get_nrwares() );
+	{
+		const Tribe_Descr & tribe = *player->get_tribe();
+		{
+			const Descr_Maintainer<Worker_Descr>::Index nr_workers =
+				tribe.get_nr_workers();
+			m_worker_supplies.resize(nr_workers);
+			m_workers.set_nrwares   (nr_workers);
+		}
+		{
+			const Descr_Maintainer<Worker_Descr>::Index nr_wares =
+				tribe.get_nr_wares();
+			m_ware_supplies  .resize(nr_wares);
+			m_wares  .set_nrwares   (nr_wares);
+		}
+	}
 
    player->add_economy(this);
 }

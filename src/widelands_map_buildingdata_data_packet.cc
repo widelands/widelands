@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -246,8 +246,13 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse(Building* building, 
          assert(ol->is_object_known(id));
          // Worker might not yet be loaded so that get ware won't work
          // but make sure that such a worker exists in tribe
-         if(wh->get_owner()->get_tribe()->get_worker_index(name.c_str())==-1)
-            throw wexception("Unknown worker %s in incorporated workers in Widelands_Map_Buildingdata_Data_Packet!\n", name.c_str());
+	      try {wh->get_owner()->get_tribe()->get_worker_index(name.c_str());}
+	      catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
+            throw wexception
+			      ("Unknown worker %s in incorporated workers in "
+			       "Widelands_Map_Buildingdata_Data_Packet!\n",
+			       name.c_str());
+	      }
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          wh->sort_worker_in(egbase, name, w);
       }
