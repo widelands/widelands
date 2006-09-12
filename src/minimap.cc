@@ -86,8 +86,11 @@ Redraw the view of the map
 */
 void MiniMapView::draw(RenderTarget* dst)
 {
-   dst->renderminimap(m_player->get_egbase(), m_player->get_visibility(),
-			Coords(m_viewx - get_w()/2, m_viewy - get_h()/2), m_flags);
+	dst->renderminimap
+		(*m_player->get_egbase(),
+		 m_player->get_visibility(),
+		 Coords(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
+		 m_flags);
 
 /*
 	// draw the view pos marker

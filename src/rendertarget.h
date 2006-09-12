@@ -72,7 +72,12 @@ public:
 		 Point viewofs,
 		 const bool draw_all)
 		= 0;
-	virtual void renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpoint, uint flags) = 0;
+	virtual void renderminimap
+		(const Editor_Game_Base &,
+		 const std::vector<bool> * const visibility,
+		 Coords viewpoint,
+		 const uint flags)
+		= 0;
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plr) = 0;
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

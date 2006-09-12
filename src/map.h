@@ -829,6 +829,21 @@ inline void Map::get_brn(const FCoords f, FCoords * const o) const
 }
 
 
+inline void move_r(const uint mapwidth, FCoords & f) {
+	++f.x;
+	++f.field;
+	if (static_cast<uint>(f.x) == mapwidth) {f.x = 0; f.field -= mapwidth;}
+}
+
+inline void move_r(const uint mapwidth, FCoords & f, Map::Index & i) {
+	++f.x;
+	++f.field;
+	++i;
+	if (static_cast<uint>(f.x) == mapwidth)
+	{f.x = 0; f.field -= mapwidth; i -= mapwidth;}
+}
+
+
 /*
 class MapRegion
 ---------------

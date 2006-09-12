@@ -161,7 +161,12 @@ class Surface {
       void blit(Point dst, Surface* src, Rect srcrc);
       void fast_blit( Surface* src );
 
-      void draw_minimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Rect rc, Coords viewpt, uint flags);
+	void draw_minimap
+		(const Editor_Game_Base & egbase,
+		 const std::vector<bool> * const visibility,
+		 const Rect rc,
+		 const Coords viewpt,
+		 const uint flags);
 
 
       // sw16_terrain.cc
@@ -289,7 +294,11 @@ public:
 		 const std::vector<bool> * const visibility,
 		 Point viewofs,
 		 const bool draw_all);
-	virtual void renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpt, uint flags);
+	virtual void renderminimap
+		(const Editor_Game_Base &,
+		 const std::vector<bool> * const visibility,
+		 Coords viewpoint,
+		 const uint flags);
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plrclrs = 0);
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

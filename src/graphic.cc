@@ -558,21 +558,6 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 }
 
 
-inline void move_r(const uint mapwidth, FCoords & f) {
-	++f.x;
-	++f.field;
-	if (static_cast<uint>(f.x) == mapwidth) {f.x = 0; f.field -= mapwidth;}
-}
-
-inline void move_r(const uint mapwidth, FCoords & f, Map::Index & i) {
-	++f.x;
-	++f.field;
-	++i;
-	if (static_cast<uint>(f.x) == mapwidth)
-	{f.x = 0; f.field -= mapwidth; i -= mapwidth;}
-}
-
-
 /*
 ===============
 RenderTargetImpl::rendermap
@@ -992,18 +977,19 @@ The field at viewpt will be in the top-left corner of the window.
 flags specifies what information to display (see Minimap_XXX enums).
 ===============
 */
-void RenderTargetImpl::renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpt, uint flags)
+void RenderTargetImpl::renderminimap
+(const Editor_Game_Base & egbase,
+ const std::vector<bool> * const visibility,
+ Coords viewpt,
+ const uint flags)
 {
-	Rect rc;
-
-	// The entire clipping rect will be used for drawing
-	rc = m_rect;
 
 	// Calculate the field at the top-left corner of the clipping rect
 	viewpt.x -= m_offset.x;
 	viewpt.y -= m_offset.y;
 
-	m_surface->draw_minimap(egbase, visibility, rc, viewpt, flags);
+	//  The entire clipping rect will be used for drawing.
+	m_surface->draw_minimap(egbase, visibility, m_rect, viewpt, flags);
 }
 
 
