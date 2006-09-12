@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,14 +80,16 @@ public:
 	// This will allow us to plug another PRNG in here for game playbacks
 	// and other fancy stuff.
 	inline uint logic_rand() { return rng->rand(); }
-	
+
+	Coords random_location(const Coords center, uchar radius);
+
 	void logic_rand_seed (uint seed) { rng->seed (seed); }
 
 	int get_speed() const { return m_speed; }
 	void set_speed(int speed);
 
 	bool get_allow_cheats();
-	
+
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);
 	virtual void player_field_notification (const FCoords&, losegain_t);
 
@@ -120,12 +122,12 @@ private:
 	bool run (bool = false);
 
 	Map_Loader*	m_maploader;
-	
+
 	NetGame*	m_netgame;
-	
+
 	int		m_state;
 	int		m_speed;		// frametime multiplier
-	
+
 	RNG*		rng;
 
 	Interactive_Player*			ipl;
@@ -134,5 +136,12 @@ private:
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 };
+
+inline Coords Game::random_location(const Coords center, uchar radius) {
+	const ushort s = radius * 2 + 1;
+	return Coords
+		(center.x + logic_rand() % s - radius,
+		 center.y + logic_rand() % s - radius);
+}
 
 #endif // __S__GAME_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			split_string(string, &cmd, " \t\r\n");
 			if (!cmd.size())
 				continue;
-   
+
          // Find the appropriate parser
 			Critter_BobAction act;
 			uint mapidx;
@@ -134,7 +134,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 /*
 ==============================
 
-remove 
+remove
 
 Remove this critter
 
@@ -144,13 +144,13 @@ void Critter_BobProgram::parse_remove(Critter_BobAction* act, Parser* parser, co
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: remove");
-   
+
    act->function = &Critter_Bob::run_remove;
 }
 
 bool Critter_Bob::run_remove(Game* g, State* state, const Critter_BobAction* act)
 {
-	
+
 	state->ivar1++;
 	// Bye,bye cruel world
    schedule_destroy(g);
@@ -160,14 +160,14 @@ bool Critter_Bob::run_remove(Game* g, State* state, const Critter_BobAction* act
 
 /*
 ===========================================================================
- 
+
  CRITTER BOB DESCR
 
 ===========================================================================
 */
 
 /*
- * Constructor 
+ * Constructor
  */
 Critter_Bob_Descr::Critter_Bob_Descr(const char *name, Tribe_Descr* tribe)
 	: Bob_Descr(name, tribe)
@@ -204,10 +204,10 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
    // Read all walking animations.
 	// Default settings are in [walk]
 	char sectname[256];
-         
+
    // Pretty name
    m_descname = s->get_safe_string("descname");
-	
+
    snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
 	m_walk_anims.parse(this, directory, prof, sectname, prof->get_section("walk"), encdata);
 
@@ -376,17 +376,14 @@ void Critter_Bob::roam_update(Game* g, State* state)
 		set_signal("");
 
 	// alternately move and idle
-	if (state->ivar1)
-	{
-		// Pick a target at random
-		Coords dst;
-
-		dst.x = get_position().x + (g->logic_rand()%5) - 2;
-		dst.y = get_position().y + (g->logic_rand()%5) - 2;
-
-		//molog("[roam]: Try to move\n");
-
-		if (start_task_movepath(g, dst, 3, get_descr()->get_walk_anims())) {
+	if (state->ivar1) {
+		if
+			(start_task_movepath
+			 (g,
+			  g->random_location(get_position(), 2), //  Pick a target at random.
+			  3,
+			  get_descr()->get_walk_anims()))
+		{
 			state->ivar1 = 0;
 			return;
 		}

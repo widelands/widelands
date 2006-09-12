@@ -3273,15 +3273,14 @@ void Worker::fugitive_update(Game* g, State* state)
 		}
 	}
 
-	// just walk into a random direction
-	Coords dst;
-
 	molog("[fugitive]: wander randomly\n");
 
-	dst.x = get_position().x + (g->logic_rand()%11) - 5;
-	dst.y = get_position().y + (g->logic_rand()%11) - 5;
-
-	if (start_task_movepath(g, dst, 4, get_descr()->get_right_walk_anims(does_carry_ware())))
+	if
+		(start_task_movepath
+		 (g,
+		  g->random_location(get_position(), 5), //  Pick a target at random.
+		  4,
+		  get_descr()->get_right_walk_anims(does_carry_ware())))
 		return;
 
 	start_task_idle(g, get_descr()->get_animation("idle"), 50);
