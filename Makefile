@@ -211,18 +211,22 @@ HEADERS := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.h))
 OBJ := $(patsubst src/%.cc,$(OBJECT_DIR)/%.o$,$(SRC))
 DEP := $(OBJ:.o=.d)
 
+Q = @
+
 makedirs:
-	-mkdir -p $(OBJECT_DIR) $(patsubst src/%,$(OBJECT_DIR)/%,$(SUBDIRS))
+	$(Q)-mkdir -p $(OBJECT_DIR) $(patsubst src/%,$(OBJECT_DIR)/%,$(SUBDIRS))
 
 $(OBJECT_DIR)/widelands: $(OBJ)
-	$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
+	@echo "===> LD $@"
+	$(Q)$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
 
 -include $(DEP)
 
 $(OBJECT_DIR)/%.o: src/%.cc
-	$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
-	sed -e 's@^\(.*\)\.o:@\1.d \1.o:@' $@.d > $(OBJECT_DIR)/$*.d
-	rm $@.d
+	@echo "===> CXX $<"
+	$(Q)$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
+	$(Q)sed -e 's@^\(.*\)\.o:@\1.d \1.o:@' $@.d > $(OBJECT_DIR)/$*.d
+	$(Q)rm $@.d
 
 tags: $(SRC) $(HEADERS)
 	@ if [ -x $(CTAGS) ]; then $(CTAGS) $(SRC) $(HEADERS) 2>/dev/null|| true ; else true; fi
