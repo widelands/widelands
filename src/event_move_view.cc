@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ Event::State Event_Move_View::run(Game* game) {
    assert(m_pt.x!=-1 && m_pt.y!=-1);
 
    Interactive_Base* iab=game->get_iabase();
-   iab->move_view_to(m_pt.x, m_pt.y);
+   iab->move_view_to(m_pt);
 
    m_state = DONE;
    return m_state;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -943,7 +943,7 @@ void Warehouse_Window::clicked( int id ) {
       case 101:
       {
          // Goto button
-         m_parent->move_view_to(get_warehouse()->get_position().x, get_warehouse()->get_position().y);
+         m_parent->move_view_to(get_warehouse()->get_position());
          break;
       }
 

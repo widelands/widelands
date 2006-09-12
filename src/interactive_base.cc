@@ -319,10 +319,10 @@ Interactive_Base::move_view_to
 Move the mainview to the given position (in field coordinates)
 ===============
 */
-void Interactive_Base::move_view_to(int fx, int fy)
+void Interactive_Base::move_view_to(const Coords c)
 {
-	int x = fx * TRIANGLE_WIDTH;
-	int y = fy * TRIANGLE_HEIGHT;
+	int x = c.x * TRIANGLE_WIDTH;
+	int y = c.y * TRIANGLE_HEIGHT;
 
 	if (m_minimap.window)
 		m_mm->get_minimapview()->set_view_pos(x, y);

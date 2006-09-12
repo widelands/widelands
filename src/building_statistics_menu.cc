@@ -284,8 +284,7 @@ void Building_Statistics_Menu::clicked(int id) {
 
    validate_pointer(&m_last_building_index, vec.size());
 
-   if(found)
-      m_parent->move_view_to( vec[m_last_building_index].pos.x, vec[m_last_building_index].pos.y);
+	if (found) m_parent->move_view_to(vec[m_last_building_index].pos);
 }
 
 /*

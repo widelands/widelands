@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -311,8 +311,7 @@ bool Game::run(bool is_savegame)
          player->init(this, true);
 
          const Coords &c = get_map()->get_starting_pos(i);
-         if (player->get_type() == Player::playerLocal)
-            ipl->move_view_to(c.x, c.y);
+         if (player->get_type() == Player::playerLocal) ipl->move_view_to(c);
       }
 
       // Prepare the map, set default textures

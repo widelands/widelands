@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -295,8 +295,7 @@ void Editor_Player_Menu::player_tribe_clicked(int n) {
 void Editor_Player_Menu::set_starting_pos_clicked(int n) {
    // jump to the current field
    Coords c=m_parent->get_map()->get_starting_pos(n);
-   if(c.x!= -1 && c.y!= -1)
-      m_parent->move_view_to(c.x,c.y);
+   if(c.x!= -1 && c.y!= -1) m_parent->move_view_to(c);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be

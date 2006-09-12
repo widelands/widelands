@@ -76,7 +76,7 @@ class Interactive_Base : public UIPanel {
 		void set_fieldsel_freeze(bool yes);
       void set_fieldsel_radius(int n);
 
-      void move_view_to(int fx, int fy);
+	void move_view_to(const Coords);
 		void move_view_to_point(Point pos);
 		void warp_mouse_to_field(Coords c);
 
