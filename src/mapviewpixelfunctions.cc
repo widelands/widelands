@@ -264,9 +264,7 @@ Node_and_Triangle MapviewPixelFunctions::calc_node_and_triangle
 			pdx = (col_number + 1) * (TRIANGLE_WIDTH / 2) - x;
 			if (pdy * (TRIANGLE_WIDTH / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.
-				result.triangle.x = left_col;
-				result.triangle.y = row_number;
-				result.triangle.t = TCoords::R;
+				result.triangle = TCoords(Coords(left_col, row_number), TCoords::R);
 			} else {
 				Y_a =
 					screen_y_base
