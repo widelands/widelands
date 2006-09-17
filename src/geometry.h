@@ -110,14 +110,11 @@ struct Coords {
 	 */
 	struct ordering_functor {
 		bool operator()(const Coords a, const Coords b) const {
-			return
-			   *reinterpret_cast<const Uint32 * const>(&a)
-			   <
-			   *reinterpret_cast<const Uint32 * const>(&b);
+			return a.all < b.all;
 		}
 	};
 
-	coord_t x, y;
+	union {struct {coord_t x, y;}; Uint32 all;};
 };
 
 
