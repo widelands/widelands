@@ -363,17 +363,6 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
    m_file_serial = 0;
 }
 
-/*
-===============
-Map_Object::~Map_Object
-
-Cleanup an object.
-===============
-*/
-Map_Object::~Map_Object()
-{
-}
-
 
 /*
 ===============

@@ -52,7 +52,6 @@ class Tribe_Descr {
       };
 
       Tribe_Descr(const char* name);
-      ~Tribe_Descr(void);
 
       // Static function to check for tribes
       static bool exists_tribe(std::string);

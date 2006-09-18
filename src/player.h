@@ -59,7 +59,6 @@ class Player {
 		};
 
 		Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const char* name, const uchar *playercolor);
-		~Player(void);
 
 		inline Editor_Game_Base *get_game() const { return m_egbase; }
 		inline int get_type() const { return m_type; }

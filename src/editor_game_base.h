@@ -152,6 +152,10 @@ public:
       int  m_conquer_map[MAX_PLAYERS+1][MAX_X][MAX_Y]; // m_conquer_map[playernr][x][y] = [quantity of influence]
                                                          // The playernr 0 is the REAL OWNER
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
+
+private:
+	Editor_Game_Base & operator=(const Editor_Game_Base &);
+	Editor_Game_Base            (const Editor_Game_Base &);
 };
 
 extern const uchar g_playercolors[MAX_PLAYERS][12];

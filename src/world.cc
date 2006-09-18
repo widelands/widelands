@@ -183,11 +183,6 @@ World::World(const char* name)
 	}
 }
 
-World::~World(void)
-{
-
-}
-
 
 /*
 ===============

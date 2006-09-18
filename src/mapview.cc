@@ -46,18 +46,6 @@ Map_View::Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Ba
 
 /*
 ===============
-Map_View::~Map_View
-
-Cleanups
-===============
-*/
-Map_View::~Map_View(void)
-{
-}
-
-
-/*
-===============
 Map_View::warp_mouse_to_field
 
 Moves the mouse cursor so that it is directly above the given field

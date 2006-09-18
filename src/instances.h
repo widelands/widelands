@@ -80,6 +80,9 @@ private:
 
 	static uint			s_dyn_attribhigh;		// highest attribute ID used
 	static AttribMap	s_dyn_attribs;
+
+	Map_Object_Descr & operator=(const Map_Object_Descr &);
+	Map_Object_Descr            (const Map_Object_Descr &);
 };
 
 
@@ -166,7 +169,7 @@ public:
 
 protected:
 	Map_Object(Map_Object_Descr *descr);
-	virtual ~Map_Object(void);
+	virtual ~Map_Object() {}
 
 public:
 	virtual int get_type() = 0;
@@ -202,6 +205,10 @@ protected:
 	uint						m_serial;
 	uint						m_file_serial;
 	LogSink*					m_logsink;
+
+private:
+	Map_Object & operator=(const Map_Object &);
+	Map_Object            (const Map_Object &);
 };
 
 inline int get_reverse_dir(int dir) { return 1 + ((dir-1)+3)%6; }
@@ -216,7 +223,7 @@ class Object_Manager {
 
 public:
 	Object_Manager() { m_lastserial = m_last_file_serial = 0; }
-	~Object_Manager(void);
+	~Object_Manager();
 
 	void cleanup(Editor_Game_Base *g);
 
@@ -245,6 +252,9 @@ private:
 	uint m_lastserial;
 	uint m_last_file_serial;
    objmap_t m_objects;
+
+	Object_Manager & operator=(const Object_Manager &);
+	Object_Manager            (const Object_Manager &);
 };
 
 /** class Object_Ptr

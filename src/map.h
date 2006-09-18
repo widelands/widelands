@@ -374,6 +374,9 @@ private:
 
 	template<typename functorT>
 		void find_radius(const Coords, const uint radius, functorT &) const;
+
+	Map & operator=(const Map &);
+	Map            (const Map &);
 };
 
 // FindImmovable functor

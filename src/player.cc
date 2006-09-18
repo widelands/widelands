@@ -60,9 +60,6 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
    seen_fields.resize(1024*1024);
 }
 
-Player::~Player(void)
-{
-}
 
 /*
 ===============

@@ -68,10 +68,6 @@ Tribe_Descr::Tribe_Descr(const char* name)
 	}
 }
 
-Tribe_Descr::~Tribe_Descr(void)
-{
-}
-
 
 /*
 ===============

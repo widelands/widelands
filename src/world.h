@@ -122,7 +122,6 @@ class World
       };
 
       World(const char* name);
-		~World();
 
       // Check if a world really exists
       static bool exists_world(std::string);

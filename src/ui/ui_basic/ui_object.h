@@ -26,11 +26,17 @@
  */
 class UIObject {
 public:
+	UIObject() {}
+
 	// Yeah right... force a VMT so that MSVC++ gets the pointers-to-members
 	// right *sigh*
 	// OTOH, looking at the gcc assembly, gcc seems to use a less efficient
 	// pointer representation. Can anyone clear this up? -- Nicolai
 	virtual ~UIObject() { }
+
+private:
+	UIObject & operator=(const UIObject &);
+	UIObject            (const UIObject &);
 };
 
 #endif /* UI_OBJECT_H */

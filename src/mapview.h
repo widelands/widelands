@@ -39,7 +39,6 @@ class Map;
 class Map_View : public UIPanel {
 public:
 	Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Base *);
-	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
 	UISignal fieldclicked;
