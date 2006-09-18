@@ -323,7 +323,8 @@ void ConstructionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (g->is_game()) {
+	Game * const game = dynamic_cast<Game * const>(g);
+	if (game) {
 		uint i;
 
 		// TODO: figure out whether planing is necessary
@@ -345,7 +346,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 			m_work_steps += (*bc)[i].amount;
 		}
 
-		request_builder((Game*)g);
+		request_builder(game);
 
 		//TODO: should this fx be played for AI players too?
 		if ( get_owner()->get_type()==Player::playerLocal)

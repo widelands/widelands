@@ -364,6 +364,15 @@ bool Game::run(bool is_savegame)
 }
 
 
+void Game::do_conquer_area
+(const uchar playernr,
+ const Coords coords,
+ const int radius,
+ const bool conquer)
+{
+	Editor_Game_Base::do_conquer_area(playernr, coords, radius, conquer);
+	get_player(playernr)->set_area_seen(coords, radius+4, true);
+}
 
 /**
  * think() is called by the UI objects initiated during Game::run()
@@ -450,9 +459,17 @@ void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 /**
  * Cleanup for load
  */
-void Game::cleanup_for_load(bool t1, bool t2) {
-   Editor_Game_Base::cleanup_for_load(t1,t2);
-
+void Game::cleanup_for_load
+(const bool flush_graphics, const bool flush_animations)
+{
+	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
+	for
+		(std::vector<Tribe_Descr*>::iterator it = m_tribes.begin();
+		 it != m_tribes.end();
+		 ++it)
+		delete &*it;
+	m_tribes.resize(0);
+	get_cmdqueue()->flush();
    while(cpl.size()) {
       delete cpl[cpl.size()-1];
       cpl.pop_back();

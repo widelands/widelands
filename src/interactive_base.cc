@@ -252,7 +252,11 @@ Draw debug overlay when appropriate.
 */
 void Interactive_Base::draw_overlay(RenderTarget* dst)
 {
-   if(get_display_flag(dfDebug) || !get_egbase()->is_game()) {
+	if
+		(get_display_flag(dfDebug)
+		 or
+		 not dynamic_cast<const Game * const>(get_egbase()))
+	{
       // Show fsel coordinates
       char buf[100];
       Coords fsel = get_fieldsel_pos();
@@ -449,7 +453,12 @@ void Interactive_Base::start_build_road(Coords start, int player)
    m_road_build_player=player;
 
    // If we are a game, we obviously build for the Interactive Player
-   assert(!m_egbase->is_game() || (player==static_cast<Interactive_Player*>(this)->get_player_number()));
+   assert
+		(not dynamic_cast<const Game * const>(m_egbase)
+		 or
+		 player ==
+		 static_cast<const Interactive_Player * const>(this)->
+		 get_player_number());
 
 	roadb_add_overlay();
    m_mapview->need_complete_redraw();
@@ -494,10 +503,10 @@ void Interactive_Base::finish_build_road()
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
 		Path *path = new Path(*m_buildroad);
-      if(m_egbase->is_game()) {
-         // Build the path as requested
-	 static_cast<Game*>(m_egbase)->send_player_build_road (m_road_build_player, path);
-      } else {
+		Game * const game = dynamic_cast<Game * const>(m_egbase);
+		// Build the path as requested
+		if (game) game->send_player_build_road (m_road_build_player, path);
+		else {
          get_egbase()->get_player(m_road_build_player)->build_road(path);
          delete path;
       }

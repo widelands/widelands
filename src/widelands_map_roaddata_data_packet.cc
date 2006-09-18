@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,7 +115,7 @@ void Widelands_Map_Roaddata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
 
          bool request_exists=fr.Unsigned8();
          if(request_exists) {
-            if(egbase->is_game()) {
+            if (dynamic_cast<const Game * const>(egbase)) {
                r->m_carrier_request = new Request(r, 0,
                      &Road::request_carrier_callback, r, Request::WORKER);
                r->m_carrier_request->Read(&fr, egbase, ol);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,10 +107,8 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
             ware->m_transfer_nextstep=(Map_Object*)(0);
 
          // Do some kind of init
-         if(egbase->is_game()) {
-            Game* g=static_cast<Game*>(egbase);
-            ware->set_location(g, location);
-         }
+         Game * const game = dynamic_cast<Game * const>(egbase);
+         if (game) ware->set_location(game, location);
          ol->mark_object_as_loaded(ware);
          log("Loadede ware %p (descr is: %p)\n", ware, ware->m_ware_descr);
       }

@@ -97,12 +97,12 @@ in this function
 void Map_View::draw(RenderTarget* dst)
 {
    // Check if the view has changed in a game
-   if( m_intbase->get_egbase()->is_game()) {
-      bool viewchanged =
-      static_cast<Interactive_Player*>(m_intbase)->get_player()->has_view_changed();
-      if( viewchanged )
-         m_complete_redraw_needed = true;
-   }
+	if
+		(dynamic_cast<const Game * const>(m_intbase->get_egbase())
+		 and
+		 static_cast<Interactive_Player*>
+		 (m_intbase)->get_player()->has_view_changed())
+		m_complete_redraw_needed = true;
 
 	m_intbase->get_map()->get_overlay_manager()->load_graphics();
    dst->rendermap

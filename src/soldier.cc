@@ -475,11 +475,10 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_max_attack=get_descr()->get_max_attack();
 	m_defense=get_descr()->get_defense();
 	m_evade=get_descr()->get_evade();
-	if(gg->is_game()) {
-		Game* g= static_cast<Game*>(gg);
+	Game * const game = dynamic_cast<Game * const>(gg);
+	if (game) {
 		int range=get_descr()->get_max_hp()-get_descr()->get_min_hp();
-		int value=g->logic_rand() % range;
-		m_hp_max=value;
+		m_hp_max = game->logic_rand() % range;
 	}
 	m_hp_current=m_hp_max;
 
@@ -644,10 +643,8 @@ void Soldier::draw
  */
 void Soldier::start_animation (Editor_Game_Base* gg, std::string name, uint time)
 {
-   if (gg->is_game())
-   {
-      start_task_idle ((Game*)gg, get_descr()->get_rand_anim(name), time);
-   }
+	Game * const game = dynamic_cast<Game * const>(gg);
+	if (game) start_task_idle (game, get_descr()->get_rand_anim(name), time);
 }
 
 /**

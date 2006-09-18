@@ -176,8 +176,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite(Building* bui
       uint size=fr->Unsigned16();
       assert(cs->m_wares.size()>=size);
       for(uint i=size; i<cs->m_wares.size(); i++) {
-         if(egbase->is_game())
-            cs->m_wares[i]->cleanup(static_cast<Game*>(egbase));
+         Game * const game = dynamic_cast<Game * const>(egbase);
+         if (game) cs->m_wares[i]->cleanup(game);
          delete cs->m_wares[i];
       }
       cs->m_wares.resize(size);

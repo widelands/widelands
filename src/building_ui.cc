@@ -221,13 +221,11 @@ void BulldozeConfirm::bulldoze()
 	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
-      if(egbase->is_game()) {
-         // Game
-         Game* g=static_cast<Game*>(egbase);
-         g->send_player_bulldoze (todestroy);
+		Game * const game = dynamic_cast<Game * const>(egbase);
+		if (game) {
+			game->send_player_bulldoze (todestroy);
          m_iabase->need_complete_redraw();
-      } else {
-         // Editor
+		} else {// Editor
          Player* plr=todestroy->get_owner();
          plr->bulldoze(todestroy);
          m_iabase->need_complete_redraw();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,11 +29,11 @@ class Editor : public Editor_Game_Base {
          Editor();
          ~Editor();
 
-         bool is_game() { return false; }
          void think();
 
          void run();
 
+	Player * get_safe_player(const int n);
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t) {}
 	virtual void player_field_notification (const FCoords&, losegain_t) {}
 

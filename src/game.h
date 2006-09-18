@@ -69,8 +69,8 @@ public:
 
 	bool can_start();
 
-   // Cleanup for load
-   void cleanup_for_load(bool t1, bool t2);
+	void cleanup_for_load
+		(const bool flush_graphics = true, const bool flush_animations = true);
 
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
@@ -109,9 +109,6 @@ public:
 	void send_player_change_soldier_capacity(Building*, int);
 	void send_player_enemyflagaction (Flag*, int, int, int, int);
 
-	// is this base a game
-	inline bool is_game() { return true; }
-
    Interactive_Player* get_ipl(void) { return ipl; }
 
    // If this has a netgame, return it
@@ -120,6 +117,11 @@ public:
 private:
 	void init_player_controllers ();
 	bool run (bool = false);
+	void do_conquer_area
+		(const uchar playernr,
+		 const Coords coords,
+		 const int radius,
+		 const bool conquer);
 
 	Map_Loader*	m_maploader;
 

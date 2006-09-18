@@ -358,10 +358,6 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
          f->set_owned_by(0);
       }
    }
-	Player *player = get_player(playernr);
-
-	if(is_game()) // For editor all fields are visible and players don't manage view area at the moment (may change)
-		player->set_area_seen(coords, radius+4, true);
 
 	m_map->recalc_for_field_area(coords, radius);
 }
@@ -398,10 +394,9 @@ void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 	// Fix all immovables
 	for(std::set<PlayerImmovable*>::iterator it = burnset.begin(); it != burnset.end(); ++it)
 	{
-		if (is_game())
-			(*it)->schedule_destroy((Game*)this);
-		else
-			(*it)->remove(this);
+		Game * const game = dynamic_cast<Game * const>(this);
+		if (game) (*it)->schedule_destroy(game);
+		else      (*it)->remove(this);
 	}
 }
 
@@ -433,7 +428,11 @@ Note that AI player structures and the Interactive_Player are created when
 the game starts. Similar for remote players.
 ===============
 */
-void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const char* name)
+Player * Editor_Game_Base::add_player
+(const int plnum,
+ const int type,
+ const char * const tribe,
+ const char * const name)
 {
    assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 
@@ -452,7 +451,11 @@ void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const 
    if (i == m_tribes.size())
       m_tribes.push_back(new Tribe_Descr(tribe));
 
-   m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], name, g_playercolors[plnum-1]);
+   return
+		m_players[plnum-1]
+		=
+		new Player
+		(this, type, plnum, m_tribes[i], name, g_playercolors[plnum - 1]);
 }
 
 /*
@@ -525,7 +528,11 @@ void Editor_Game_Base::postload()
 				break;
 		}
 
-		if (pid <= MAX_PLAYERS || !is_game()) { // if this is editor, load the tribe anyways
+		if
+			(pid <= MAX_PLAYERS
+			 or
+			 not dynamic_cast<const Game * const>(this))
+		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			m_tribes[id]->postload(this);
 			id++;
@@ -686,8 +693,6 @@ Battle* Editor_Game_Base::create_battle ()
 
 /*
 ================
-Editor_Game_Base::get_save_player()
-
 Returns the correct player, creates it
 with the scenario data when he is not yet created
 This should only happen in the editor.
@@ -695,24 +700,7 @@ In the game, this is the same as get_player(). If it returns
 zero it means that this player is disabled in the game.
 ================
 */
-Player* Editor_Game_Base::get_safe_player(int n) {
-   Player* plr=get_player(n);
-   if(plr || is_game()) return plr;
-
-   if(!plr) {
-      // Create this player, but check that
-      // we are in the editor. In the game, all
-      // players are known from the beginning. In the
-      // case of savegames, players must be set up
-      // before this is ever called. Only in the editor
-      // players are not always initialized
-
-      assert(!is_game());
-      add_player(n, Player::playerLocal, get_map()->get_scenario_player_tribe(n).c_str(), get_map()->get_scenario_player_name(n).c_str());
-      get_player(n)->init(this, false);
-   }
-   return get_player(n);
-}
+Player * Editor_Game_Base::get_safe_player(const int n) {return get_player(n);}
 
 /*
 ===============
@@ -771,7 +759,9 @@ void Editor_Game_Base::remove_trackpointer(uint serial)
  *
  * make this object ready to load new data
  */
-void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animations) {
+void Editor_Game_Base::cleanup_for_load
+(const bool flush_graphics, const bool flush_animations)
+{
    // Clean all the stuff up, so we can load
    get_objects()->cleanup(this);
 
@@ -793,15 +783,6 @@ void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animatio
    m_map->cleanup();
 
    m_conquer_info.resize(0);
-
-   if(is_game()) {
-      for(uint i=0; i<m_tribes.size(); i++) {
-         delete m_tribes[i];
-      }
-      m_tribes.resize(0);
-
-      static_cast<Game*>(this)->get_cmdqueue()->flush();
-   }
 }
 
 /**

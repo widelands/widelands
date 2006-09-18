@@ -480,10 +480,9 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Ware
       if(endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
-      int i=0;
-      for(i=0;i<cur->second; i++) {
-         if(egbase->is_game()) {
-            Game* game=static_cast<Game*>(egbase);
+		for (int i = 0; i < cur->second; ++i) {
+			Game * const game = dynamic_cast<Game * const>(egbase);
+			if (game) {
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
             Soldier* soldier=static_cast<Soldier*>(soldierd->create(game, wh->get_owner(), wh, wh->get_position()));
             soldier->set_level(hplvl,attacklvl,defenselvl,evadelvl);

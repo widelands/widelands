@@ -65,8 +65,7 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
       set_area( s->get_safe_int( "area" ));
       int player = s->get_safe_int( "player" );
       set_player(player);
-      if(!egbase->is_game())
-         static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(player, this);
+		egbase->get_iabase()->reference_player_tribe(player, this);
       set_building_count( s->get_int( "count" ));
       set_building( s->get_safe_string( "building" ));
       return;

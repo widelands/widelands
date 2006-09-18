@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,8 +66,7 @@ void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
          // give a warning
          log("Conquer Area Event with illegal player orbuilding name: (Player: %i, Building: %s) deleted!\n", m_player, m_building.c_str());
       }
-      if(!egbase->is_game())
-         static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(player, this);
+		egbase->get_iabase()->reference_player_tribe(player, this);
       return;
    }
    throw wexception("Allow Building Event with unknown/unhandled version %i in map!\n", version);

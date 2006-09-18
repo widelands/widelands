@@ -247,12 +247,9 @@ void Bob::init(Editor_Game_Base* gg)
 
    m_sched_init_task = true;
 
-   if (gg->is_game()) {
-      Game* g=static_cast<Game*>(gg);
-
-		schedule_act(g, 1);
-   } else {
-      // In editor: play idle task forever
+	Game * const game = dynamic_cast<Game * const>(gg);
+	if (game) schedule_act(game, 1);
+	else {// In editor: play idle task forever
       set_animation(gg, get_descr()->get_animation("idle"));
    }
 }

@@ -62,17 +62,20 @@ class Editor_Game_Base {
 
       // Player commands
       void remove_player(int plnum);
-      void add_player(int plnum, int type, const char* tribe, const char* name);
+	Player * add_player
+		(const int plnum,
+		 const int type,
+		 const char * const tribe,
+		 const char * const name);
 	Player * get_player(const int n) const
 	{assert(n >= 1 and n <= MAX_PLAYERS); return m_players[n-1];}
-      Player* get_safe_player(int n);
-
-      virtual bool is_game() = 0;
+      virtual Player * get_safe_player(const int n);
 
       // loading stuff
       void postload();
       void load_graphics();
-      virtual void cleanup_for_load(bool flush_graphics=true, bool flush_animations=true);
+	virtual void cleanup_for_load
+		(const bool flush_graphics = true, const bool flush_animations = true);
 
       // warping stuff. instantly creating map_objects
       Building* warp_building(Coords, char owner, int idx);
@@ -115,6 +118,11 @@ class Editor_Game_Base {
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
+	virtual void do_conquer_area
+		(const uchar playernr,
+		 const Coords coords,
+		 const int radius,
+		 const bool conquer);
 
    private:
       struct Conquer_Info {
@@ -123,15 +131,15 @@ class Editor_Game_Base {
          ushort    area;
       };
       std::vector<Conquer_Info> m_conquer_info;
-      void do_conquer_area(uchar playernr, Coords coords, int radius, bool conquer);
 
-   private:
 		void cleanup_playerimmovables_area(Coords coords, int radius);
 
       int m_gametime;
       Player*							m_players[MAX_PLAYERS];
       Object_Manager*				m_objects;
+protected:
       std::vector<Tribe_Descr*>	m_tribes;
+private:
       Interactive_Base*          m_iabase;
       Map*								m_map;
 

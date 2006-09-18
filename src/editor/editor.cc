@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "map.h"
+#include "player.h"
 #include "world.h"
 #include "wlapplication.h"
 
@@ -103,4 +104,24 @@ void Editor::think() {
    *get_game_time_pointer()+=frametime;
 
    g_gr->animate_maptextures(get_gametime());
+}
+
+
+Player * Editor::get_safe_player(const int n) {
+	Player * result = get_player(n);
+	if (not result) {
+		// Create this player, but check that
+		// we are in the editor. In the game, all
+		// players are known from the beginning. In the
+		// case of savegames, players must be set up
+		// before this is ever called. Only in the editor
+		// players are not always initialized
+		result = add_player
+			(n,
+			 Player::playerLocal,
+			 get_map()->get_scenario_player_tribe(n).c_str(),
+			 get_map()->get_scenario_player_name(n).c_str());
+		result->init(this, false);
+	}
+	return result;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,8 +55,8 @@ void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
    Map_Object::init(eg);
    m_first = s1;
    m_second = s2;
-   if (eg->is_game())
-      m_next_assault = schedule_act ((Game*)eg, 1000); // Every round is 1000 ms
+	Game * const game = dynamic_cast<Game * const>(eg);
+	if (game) m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
 void Battle::init (Editor_Game_Base* eg)
@@ -65,8 +65,8 @@ void Battle::init (Editor_Game_Base* eg)
 
    Map_Object::init(eg);
 
-   if (eg->is_game())
-      m_next_assault = schedule_act ((Game*)eg, 1000); // Every round is 1000 ms
+	Game * const game = dynamic_cast<Game * const>(eg);
+	if (game) m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
 void Battle::soldiers (Soldier* s1, Soldier* s2)
@@ -93,8 +93,7 @@ void Battle::act (Game* g, uint data)
 {
    log ("Battle::act\n");
 
-   if (!g->is_game())
-      return;
+	if (not dynamic_cast<const Game * const>(g)) return;
 
    Soldier* attacker;
    Soldier* defender;

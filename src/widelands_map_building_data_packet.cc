@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,10 +91,13 @@ void Widelands_Map_Building_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
                assert(building);
 
                // Reference the players tribe if in editor
-               if(!egbase->is_game()) {
-                  assert(!skip);
-                  static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(owner, plr->get_tribe());
-               }
+               assert
+		            (not dynamic_cast<const Editor_Interactive * const>
+		             (egbase->get_iabase())
+		             or
+		             not skip);
+	            egbase->get_iabase()->reference_player_tribe
+		            (owner, plr->get_tribe());
                // and register it with the object loader for further loading
                ol->register_object(egbase, serial, building);
             }

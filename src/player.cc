@@ -356,33 +356,20 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag* flag, int action)
 {
-	Editor_Game_Base* eg = get_game();
-
-	if (!eg->is_game())
-		return;
-
-	Game* g = (Game*)eg;
-
-	// Additional security check
-	if (flag->get_owner() != this)
-		return;
-
-	switch(action) {
-	case FLAGACTION_GEOLOGIST:
-		{
-		int id = get_tribe()->get_worker_index("geologist");
-
-		if (id < 0) {
-			log("Tribe defines no geologist\n");
-			return;
+	Game * const game = dynamic_cast<Game * const>(get_game());
+	if (game and flag->get_owner() == this) {// Additional security check.
+		switch (action) {
+		case FLAGACTION_GEOLOGIST:
+			try {
+				flag->add_flag_job
+					(game, get_tribe()->get_worker_index("geologist"), "expedition");
+			} catch (Descr_Maintainer<Worker_Descr>::Nonexistent){
+				log("Tribe defines no geologist\n");
+			}
+			break;
+		default:
+			log("Player sent bad flagaction = %i\n", action);
 		}
-
-		flag->add_flag_job(g, id, "expedition");
-		return;
-		}
-
-	default:
-		log("Player sent bad flagaction = %i\n", action);
 	}
 }
 
@@ -501,19 +488,16 @@ Perform an action on the given enemy flag.
 */
 void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int type)
 {
-   Editor_Game_Base* eg = get_game();
-
    if (attacker != get_player_number())
       throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
 
-   if (!eg->is_game())
-      return;
+	Game * const game = dynamic_cast<Game * const>(get_game());
+	if (not game) return;
 
    assert (num >= 0);
 
 
-   Game* g = (Game*)eg;
-   Map* map = g->get_map();
+	Map * const map = game->get_map();
 
 log("++Player::EnemyFlagAction()\n");
    // Additional security check LOOK, if equal exit!!
@@ -525,11 +509,8 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
 
       case ENEMYFLAGACTION_ATTACK:
          {
-            int id = get_tribe()->get_worker_index("soldier");
-            uint i;
-
-            if (id < 0)
-            {
+	         try {get_tribe()->get_worker_index("soldier");}
+	         catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
                log("Tribe defines no soldier\n");
                return;
             }
@@ -546,30 +527,34 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
                return;
 
             /* Find all friendly MS */
-            for (i = 0; i < list.size(); i++)
+            for
+               (std::vector<ImmovableFound>::const_iterator it =
+                list.begin();
+                it != list.end();
+                ++it)
             {
-               BaseImmovable* imm = list[i].object;
-
-               if (imm->get_type() == Building::BUILDING &&
-                  ((PlayerImmovable*)imm)->get_owner() == this &&
-                  ((Building*)imm)->get_building_type() == Building::MILITARYSITE)
-                  {
-log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
-                     MilitarySite* ms = static_cast<MilitarySite*>(imm);
+               MilitarySite * const ms =
+                  dynamic_cast<MilitarySite * const>(it->object);
+               if (ms and ms->get_owner() == this) {
+                     log
+                        ("Player::EnemyFlagAction() MilitarySite %p found!\n",
+                         &*it);
                      ms_list.push_back (ms);
                  }
             }
 
             int launched = 0;
-            for (i = 0; i < ms_list.size(); i++)
+	         for
+		         (std::vector<MilitarySite *>::const_iterator it =
+		          ms_list.begin();
+		          it != ms_list.end();
+		          ++it)
             {
                if (launched >= num)
                   break;
 
-               if (ms_list[i]->can_launch_soldiers())
-               {
-                  launched += ms_list[i]->launch_attack(flag, type);
-               }
+	            if ((*it)->can_launch_soldiers())
+	               launched += (*it)->launch_attack(flag, type);
             }
             break;
          }

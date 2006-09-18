@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -162,14 +162,14 @@ void MilitarySite::init(Editor_Game_Base* g)
 log (">>MilitarySite::init()\n");
    ProductionSite::init(g);
 
-   if (g->is_game())
-   {
+	Game * const game = dynamic_cast<Game * const>(g);
+	if (game) {
       // Request soldiers
-      call_soldiers((Game *) g);
+		call_soldiers(game);
 
       //    Should schedule because all stuff related to healing and removing own
       // soldiers should be scheduled.
-      schedule_act((Game*)g, 1000);
+		schedule_act(game, 1000);
    }
 log ("<<MilitarySite::init()\n");
 }
@@ -350,7 +350,7 @@ void MilitarySite::act(Game* g, uint data)
 	// Maybe a new queueing system like MilitaryAct could be introduced.
    ProductionSite::act(g,data);
 
-   if (g->is_game ()) {
+	if (dynamic_cast<const Game * const>(g)) {
       uint total_heal = 0;
       uint numMedics = 0;	 // FIX THIS when medics were added
       uint i = 0;
@@ -399,9 +399,8 @@ Send the request for more soldiers if there are not full
  */
 void MilitarySite::call_soldiers(Game *g)
 {
-   if (g->is_game())
-      while(m_capacity > m_soldiers.size() + m_soldier_requests.size())
-         request_soldier(g);
+	while(m_capacity > m_soldiers.size() + m_soldier_requests.size())
+		request_soldier(g);
 }
 
 /*
@@ -413,12 +412,11 @@ Get out specied soldier from house.
  */
 void MilitarySite::drop_soldier (uint serial)
 {
-   Game* g = (Game *)get_owner()->get_game();
+	Game * const game = dynamic_cast<Game * const>(get_owner()->get_game());
 
 molog ("**Dropping soldier (%d)\n", serial);
 
-   if (g->is_game() && m_soldiers.size())
-   {
+	if (game and m_soldiers.size()) {
       int i = 0;
       Soldier* s = m_soldiers[i];
 
@@ -434,7 +432,7 @@ molog ("**Dropping soldier (%d)\n", serial);
       if ((s) && (s->get_serial() == serial))
       {
 molog ("**--Sodier localized!\n");
-         drop_soldier(g, i);
+         drop_soldier(game, i);
       }
       else
          molog ("--Soldier NOT localized!\n");
@@ -452,8 +450,6 @@ Use throught drop_soldier(int)
 
 void MilitarySite::drop_soldier (Game *g, int nr)
 {
-   if (g->is_game())
-   {
       Soldier *s;
 
       // Check if its out of bounds
@@ -478,7 +474,6 @@ void MilitarySite::drop_soldier (Game *g, int nr)
       s->reset_tasks (g);
       s->set_location (this);
       s->start_task_leavebuilding (g, true);
-   }
 }
 
 /*

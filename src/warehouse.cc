@@ -437,7 +437,8 @@ void Warehouse::init(Editor_Game_Base* gg)
 	m_supply->set_nrwares  (nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 
-   if (gg->is_game()) {
+	Game * const game = dynamic_cast<Game * const>(gg);
+	if (game) {
       for (Descr_Maintainer<Item_Ware_Descr>::Index i = 0; i < nr_wares; ++i) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
@@ -452,12 +453,8 @@ void Warehouse::init(Editor_Game_Base* gg)
 
          m_requests.push_back(req);
       }
-
-
-      Game* g=static_cast<Game*>(gg);
-
-      m_next_carrier_spawn = schedule_act(g, CARRIER_SPAWN_INTERVAL);
-      m_next_military_act = schedule_act(g, 1000);
+		m_next_carrier_spawn = schedule_act(game, CARRIER_SPAWN_INTERVAL);
+		m_next_military_act  = schedule_act(game, 1000);
    }
 }
 
@@ -471,8 +468,8 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base* gg)
 {
-   if(gg->is_game()) {
-      Game* g=static_cast<Game*>(gg);
+	Game * const game = dynamic_cast<Game * const>(gg);
+	if (game) {
 
       while(m_requests.size()) {
          Request* req = m_requests[m_requests.size()-1];
@@ -487,8 +484,7 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
          Worker* w=static_cast<Worker*>(m_incorporated_workers.begin()->get(gg));
          // If the game ends and this worker has been created before this warehouse, it might
          // already be deleted. So do not try and free him
-         if(w)
-            w->reset_tasks(g);
+         if (w) w->reset_tasks(game);
          m_incorporated_workers.erase(m_incorporated_workers.begin());
       }
    }

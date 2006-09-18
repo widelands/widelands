@@ -321,9 +321,10 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 		m_supply = 0;
 	}
 
-	if (g->is_game()) {
-		cancel_moving((Game*)g);
-		set_location((Game*)g, 0);
+	Game * const game = dynamic_cast<Game * const>(g);
+	if (game) {
+		cancel_moving(game);
+		set_location(game, 0);
 	}
 
 	//molog("  done\n");
@@ -1084,8 +1085,8 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 		m_item_filled--;
 		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
 
-		if (g->is_game())
-			wake_up_capacity_queue((Game*)g);
+		Game * const game = dynamic_cast<Game * const>(g);
+		if (game) wake_up_capacity_queue(game);
 
 		return;
 	}
@@ -1638,8 +1639,6 @@ void Road::init(Editor_Game_Base *gg)
 void Road::link_into_flags(Editor_Game_Base* gg) {
    assert(m_path.get_nsteps() >= 2);
 
-   Game* g = static_cast<Game*>(gg);
-
 	// Link into the flags (this will also set our economy)
 	int dir;
 
@@ -1655,23 +1654,18 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	Economy::check_merge(m_flags[FlagStart], m_flags[FlagEnd]);
 
 	// Mark Fields
-	mark_map(g);
+	mark_map(gg);
 
-   // Request Carrier (if game)
-   if(gg->is_game()) {
-      Game* g=static_cast<Game*>(gg);
-
-      Carrier* carrier = (Carrier*)m_carrier.get(g);
-
+	Game * const game = dynamic_cast<Game * const>(gg);
+	if (game) {
+		Carrier * const carrier =
+			static_cast<Carrier * const>(m_carrier.get(game));
       m_desire_carriers = 1;
-
-      if (!carrier) {
-         if (!m_carrier_request)
-            request_carrier(g);
-      } else {
+		if (not carrier) {if (not m_carrier_request) request_carrier(game);}
+		else {
          // This happens after a road split. Tell the carrier what's going on
          carrier->set_location(this);
-         carrier->update_task_road(g);
+         carrier->update_task_road(game);
       }
    }
 }
@@ -1785,9 +1779,10 @@ void Road::remove_worker(Worker *w)
 	if (carrier == w)
 		m_carrier = carrier = 0;
 
-	if (!carrier && !m_carrier_request && m_desire_carriers && g->is_game()) {
+	Game * const game = dynamic_cast<Game * const>(g);
+	if (not carrier and not m_carrier_request and m_desire_carriers and game) {
 		molog("Road::remove_worker: Request a new carrier\n");
-		request_carrier((Game*)g);
+		request_carrier(game);
 	}
 
 	PlayerImmovable::remove_worker(w);
@@ -1901,8 +1896,8 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
       }
 
       // Cause a worker update in any case
-      if(g->is_game())
-         w->send_signal(static_cast<Game*>(g), "road");
+	   Game * const game = dynamic_cast<Game * const>(g);
+	   if (game) w->send_signal(game, "road");
    }
 
    // Initialize the new road
@@ -1914,17 +1909,18 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
       (*it)->set_location(newroad);
 
    // Do the following only if in game
-   if(g->is_game()) {
+	Game * const game = dynamic_cast<Game * const>(g);
+	if (game) {
 
       // Request a new carrier for this road if necessary
       // This must be done _after_ the new road initializes, otherwise request
       // routing might not work correctly
       if (!m_carrier.get(g) && !m_carrier_request)
-         request_carrier(static_cast<Game*>(g));
+         request_carrier(game);
 
       // Make sure items waiting on the original endpoint flags are dealt with
       m_flags[FlagStart]->update_items(static_cast<Game*>(g), oldend);
-      oldend->update_items(static_cast<Game*>(g), m_flags[FlagStart]);
+      oldend->update_items(game, m_flags[FlagStart]);
    }
 }
 
@@ -2527,18 +2523,18 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
          uint what_is=fr->Unsigned8();
          uint reg=fr->Unsigned32();
          Transfer* trans=0;
-         if(egbase->is_game()) {
-            Game* g=static_cast<Game*>(egbase);
+         Game * const game = dynamic_cast<Game * const>(egbase);
+         if (game) {
             assert(mol->is_object_known(reg));
             if(what_is==WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
-               trans=new Transfer(g, this, ware);
+               trans = new Transfer(game, this, ware);
             } else if (what_is==WORKER){
                Worker* worker=static_cast<Worker*>(mol->get_object_by_file_index(reg));
-               trans=new Transfer(g, this, worker);
+               trans = new Transfer(game, this, worker);
             } else if (what_is==SOLDIER){
                Soldier* soldier=static_cast<Soldier*>(mol->get_object_by_file_index(reg));
-               trans=new Transfer(g, this, soldier);
+               trans = new Transfer(game, this, soldier);
             }
             trans->set_idle(fr->Unsigned8());
             m_transfers.push_back(trans);
@@ -4227,10 +4223,8 @@ Make sure the request timer is running.
 */
 void Economy::start_request_timer(int delta)
 {
-	if (!m_owner->get_game()->is_game())
-		return;
-
-	Game* game = (Game*)m_owner->get_game();
+	Game * const game = dynamic_cast<Game *const>(m_owner->get_game());
+	if (not game) return;
 
 	if (m_request_timer && m_request_timer_time - (game->get_gametime() + delta) <= 0)
 		return;
@@ -4508,20 +4502,17 @@ starting transfers for them.
 */
 void Economy::balance_requestsupply()
 {
-	Editor_Game_Base* egbase = m_owner->get_game();
-	Game* g;
 	RSPairStruct rsps;
 
    m_request_timer = false;
 
 	rsps.nexttimer = -1;
 
-	if (!egbase->is_game())
-		return;
+	Game *const game = dynamic_cast<Game * const>(m_owner->get_game());
+	if (not game) return;
 
-	g = (Game*)egbase;
 	// Try to fulfill non-idle Requests
-	process_requests(g, &rsps);
+	process_requests(game, &rsps);
 
 	// Now execute request/supply pairs
 	while(rsps.queue.size()) {
@@ -4540,10 +4531,14 @@ void Economy::balance_requestsupply()
 			continue;
 		}
 
-		log("HANDLE: %u -> %u, ware %i, priority %i\n", rsp.request->get_target(g)->get_serial(),
-				rsp.supply->get_position(g)->get_serial(), rsp.ware, rsp.priority);
+		log
+			("HANDLE: %u -> %u, ware %i, priority %i\n",
+			 rsp.request->get_target(game)->get_serial(),
+			 rsp.supply->get_position(game)->get_serial(),
+			 rsp.ware,
+			 rsp.priority);
 
-		rsp.request->start_transfer(g, rsp.supply);
+		rsp.request->start_transfer(game, rsp.supply);
 
 		// for multiple wares
 		if (rsp.request && have_request(rsp.request)) {

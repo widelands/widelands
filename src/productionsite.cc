@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -314,7 +314,8 @@ void ProductionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (g->is_game()) {
+	Game * const game = dynamic_cast<Game * const>(g);
+	if (game) {
 		// Request worker
 		if (!m_workers.size()) {
          std::vector<ProductionSite_Descr::Worker_Info>* info=get_descr()->get_workers();
@@ -322,7 +323,7 @@ void ProductionSite::init(Editor_Game_Base* g)
          int j;
          for(i=0; i<info->size(); i++)
             for(j=0; j< ((*info)[i]).how_many; j++)
-               request_worker((Game*)g, ((*info)[i]).name.c_str());
+               request_worker(game, ((*info)[i]).name.c_str());
       }
 
 		// Init input ware queues
