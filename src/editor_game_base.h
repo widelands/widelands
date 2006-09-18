@@ -149,7 +149,9 @@ private:
 #define MAX_X     512
 #define MAX_Y     512
 public:
-      int  m_conquer_map[MAX_PLAYERS+1][MAX_X][MAX_Y]; // m_conquer_map[playernr][x][y] = [quantity of influence]
+
+	// m_conquer_map[playernr][index] = [quantity of influence]
+	int  m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
                                                          // The playernr 0 is the REAL OWNER
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
 

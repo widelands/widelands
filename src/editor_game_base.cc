@@ -298,15 +298,13 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 {
 	MapRegion mr(m_map, coords, radius);
 	Field* f;
+	const uint mapwidth = m_map->get_width();
 
    while((f = mr.next()))
    {
-      Coords c;
-      int influence;
-
-      c = (Coords) m_map->get_fcoords(*f);
-
-      influence = calc_influence(c, coords, radius);
+      const Coords c = m_map->get_fcoords(*f);
+      const Map::Index index = Map::get_index(c, mapwidth);
+      const int influence = calc_influence(c, coords, radius);
 
          // This is for put a weight to every field, its equal to the next array:
          // 1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92, 106, 121, 137, 154, 172 ... 1+(x*(x-1)/2)
@@ -318,39 +316,42 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
       if(conquer)
       {
           // Adds the influence
-         m_conquer_map[playernr][c.x][c.y] += influence;
+         m_conquer_map[playernr][index] += influence;
 
             // Else, do the things that should be done
          if (f->get_owned_by() == playernr)
             continue;
 
-         if (!f->get_owned_by() && m_conquer_map[0][c.x][c.y] == playernr)
+         if (!f->get_owned_by() && m_conquer_map[0][index] == playernr)
          {
             f->set_owned_by(playernr);
-            m_conquer_map[0][c.x][c.y] = playernr;
+            m_conquer_map[0][index] = playernr;
             player_field_notification (m_map->get_fcoords(*f), GAIN);
             continue;
          }
 
            // See if we can get the own
 // BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
-         if (m_conquer_map[playernr][c.x][c.y] > m_conquer_map[f->get_owned_by()][c.x][c.y])
+         if
+            (m_conquer_map[playernr][index]
+             >
+             m_conquer_map[f->get_owned_by()][index])
          {
 	         player_field_notification (m_map->get_fcoords(*f), LOSE);
             f->set_owned_by (playernr);
-            m_conquer_map[0][c.x][c.y] = playernr;
+            m_conquer_map[0][index] = playernr;
             player_field_notification (m_map->get_fcoords(*f), GAIN);
          }
 // END : If you wanna to disable the dinamic conquer (by influences) , comment this block
       }
       else
       {
-         m_conquer_map[playernr][c.x][c.y] -= influence;
+         m_conquer_map[playernr][index] -= influence;
 
          if(f->get_owned_by() != playernr)
             continue;
 
-         m_conquer_map[0][c.x][c.y] = 0;
+         m_conquer_map[0][index] = 0;
 
             // ALWAYS set to 0. So is needed to call do_conquer_area with TRUE if you want to have the real
             // map of incluence
@@ -825,11 +826,9 @@ void Editor_Game_Base::make_influence_map ()
 {
    log("Making influence map\n");
 
-   Coords c;
-   int influence;
-
       // Clean influce maps
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
+   const uint mapwidth = m_map->get_width();
 
    for(uint i=0; i<m_conquer_info.size(); i++)
    {
@@ -839,9 +838,11 @@ void Editor_Game_Base::make_influence_map ()
 
       while((f = mr.next()))
       {
-         c = (Coords) m_map->get_fcoords(*f);
-         influence = calc_influence(c, m_conquer_info[i].middle_point, m_conquer_info[i].area);
-         m_conquer_map[m_conquer_info[i].player][c.x][c.y] += influence;
+         const Coords c = m_map->get_fcoords(*f);
+         const Map::Index index = Map::get_index(c, mapwidth);
+         m_conquer_map[m_conquer_info[i].player][index] +=
+            calc_influence
+            (c, m_conquer_info[i].middle_point, m_conquer_info[i].area);
       }
    }
 
@@ -854,16 +855,17 @@ void Editor_Game_Base::make_influence_map ()
          int best_value = 0;
          int npl = 1;
             // Find the most player influence over this position
+         const Map::Index index = Map::get_index(Coords(x, y), mapwidth);
          while (npl < MAX_PLAYERS)
          {
-            if (m_conquer_map[npl][x][y] > best_value)
+            if (m_conquer_map[npl][index] > best_value)
             {
-               best_value = m_conquer_map[npl][x][y];
+               best_value = m_conquer_map[npl][index];
                best_player = npl;
             }
             npl++;
          }
-         m_conquer_map[0][x][y] = best_player;
+         m_conquer_map[0][index] = best_player;
       }
    }
 }
