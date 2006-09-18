@@ -353,7 +353,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
       editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title(), m_plr_names[n-1]->get_text());
 
       p=editor->get_player(n);
-      p->init(m_parent->get_egbase(),false);
+      p->init(false);
    }
 
    // If the player is already created in the editor, this means

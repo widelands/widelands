@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ class Player {
       const char* get_name(void) { return m_name.c_str(); }
       void set_name(const char* str) { m_name=str; }
 
-		void init(Editor_Game_Base*, bool);
+		void init(const bool place_headquarters);
 
 		FieldCaps get_buildcaps(const Coords coords) const;
 

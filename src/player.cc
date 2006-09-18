@@ -24,6 +24,7 @@
 #include "transport.h"
 #include "trainingsite.h"
 #include "tribe.h"
+#include "warehouse.h"
 #include "wexception.h"
 #include "cmd_queue.h"
 #include "sound_handler.h"
@@ -68,27 +69,29 @@ Player::~Player(void)
 Player::init
 
 Prepare the player for in-game action
-
-we could use static cast to upcast our Editor_Game_Base object
-but instead, we let us pass the object once again
 ===============
 */
-void Player::init(Editor_Game_Base* game, bool hq)
-{
-	Map *map = game->get_map();
+void Player::init(const bool place_headquarters) {
+	const Map & map = *m_egbase->get_map();
 
-	seen_fields.resize(map->get_width()*map->get_height(), false);
+	seen_fields.resize(map.max_index(), false);
 
-	// place the HQ
-   if(hq) {
-      const Coords &c = map->get_starting_pos(m_plnum);
-      int idx = get_tribe()->get_building_index("headquarters");
-      if (idx < 0)
-         throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-      Warehouse *wh = (Warehouse *)game->warp_building(c, m_plnum, idx);
-
-      get_tribe()->load_warehouse_with_start_wares(game, wh);
-   }
+	if (place_headquarters) {
+		const Tribe_Descr & tribe = *m_tribe;
+		const int plnum = m_plnum;
+		Editor_Game_Base & game = *m_egbase;
+		try {
+			tribe.load_warehouse_with_start_wares
+				(game,
+				 *dynamic_cast<Warehouse * const>
+				 (game.warp_building
+				  (map.get_starting_pos(plnum),
+				   plnum,
+				   tribe.get_building_index("headquarters"))));
+		} catch (Descr_Maintainer<Building_Descr>::Nonexistent) {
+			throw wexception("Tribe %s lacks headquarters", tribe.get_name());
+		}
+	}
 }
 
 

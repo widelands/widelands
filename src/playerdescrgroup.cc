@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,7 +102,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	{
 		if (m_btnEnablePlayer->get_state()) {
 			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
-         m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+			m_game->get_player(m_plnum)->init(false); // Small initializes
       }
 
       const char* string = 0;
@@ -131,7 +131,7 @@ void PlayerDescriptionGroup::enable_player(bool on)
 
 	if (on) {
       m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
-      m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+		m_game->get_player(m_plnum)->init(false); // Small initializes
    } else
 		m_game->remove_player(m_plnum);
 
@@ -160,7 +160,7 @@ void PlayerDescriptionGroup::toggle_playertribe(void)
 	// set the player
 	m_game->remove_player(m_plnum);
 	m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
-   m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+	m_game->get_player(m_plnum)->init(false); // Small initializes
 }
 
 /*
@@ -175,7 +175,7 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
          // set the player
          m_game->remove_player(m_plnum);
          m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
-         m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+         m_game->get_player(m_plnum)->init(false); // Small initializes
          return;
       }
    }
@@ -202,6 +202,6 @@ void PlayerDescriptionGroup::set_player_type(int type)
 
 		m_game->remove_player (m_plnum);
 		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
-      m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+		m_game->get_player(m_plnum)->init(false); // Small initializes
 	}
 }

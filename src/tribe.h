@@ -119,7 +119,8 @@ class Tribe_Descr {
 		void postload(Editor_Game_Base*);
 		void load_graphics();
 
-      void load_warehouse_with_start_wares(Editor_Game_Base*, Warehouse*);
+	void load_warehouse_with_start_wares
+		(Editor_Game_Base &, Warehouse &) const;
 
    private:
       char m_name[30];
@@ -133,9 +134,10 @@ class Tribe_Descr {
       Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
       Descr_Maintainer<Bob_Descr> m_bobs;  // The player critters
 
-      std::map<std::string, int> m_startwares;
-      std::map<std::string, int> m_startworkers;
-      std::map<std::string, int> m_startsoldiers;
+	typedef std::map<std::string, int> starting_resources_map;
+	starting_resources_map m_startwares;
+	starting_resources_map m_startworkers;
+	starting_resources_map m_startsoldiers;
 
       // Parsing the tribe
 		EncodeData	m_default_encdata;

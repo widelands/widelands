@@ -450,21 +450,37 @@ This loads a warehouse with the given start wares as defined in
 the conf files
 ===========
 */
-void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Warehouse* wh) {
-   std::map<std::string, int>::iterator cur;
-
-   for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
-      wh->insert_wares(get_safe_ware_index((*cur).first.c_str()), (*cur).second);
-   }
-   for(cur=m_startworkers.begin(); cur!=m_startworkers.end(); cur++) {
-      wh->insert_workers(get_safe_worker_index((*cur).first.c_str()), (*cur).second);
-   }
-   for(cur=m_startsoldiers.begin(); cur!=m_startsoldiers.end(); cur++) {
+void Tribe_Descr::load_warehouse_with_start_wares
+(Editor_Game_Base & egbase, Warehouse & wh) const
+{
+	typedef starting_resources_map::const_iterator smit;
+	{
+		const smit startwares_end = m_startwares.end();
+		for (smit it = m_startwares.begin(); it != startwares_end; ++it)
+			wh.insert_wares
+			(get_safe_ware_index(it->first.c_str()), it->second);
+	}
+	{
+		const smit startworkers_end = m_startworkers.end();
+		for
+			(smit it = m_startworkers.begin();
+			 it != startworkers_end;
+			 ++it)
+			wh.insert_workers
+			(get_safe_worker_index(it->first.c_str()), it->second);
+	}
+	{
+		const smit startsoldiers_end = m_startsoldiers.end();
+		for
+			(smit it = m_startsoldiers.begin();
+			 it != startsoldiers_end;
+			 ++it)
+		{
       std::vector<std::string> list;
-      split_string(cur->first, &list, "/");
+		split_string(it->first, &list, "/");
 
       if(list.size()!=4)
-         throw wexception("Error in tribe (%s), startsoldier %s is not valid!", get_name(), cur->first.c_str());
+         throw wexception("Error in tribe (%s), startsoldier %s is not valid!", get_name(), it->first.c_str());
 
       char* endp;
       int hplvl=strtol(list[0].c_str(),&endp, 0);
@@ -480,17 +496,20 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Ware
       if(endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
-		for (int i = 0; i < cur->second; ++i) {
-			Game * const game = dynamic_cast<Game * const>(egbase);
+		for (int i = 0; i < it->second; ++i) {
+			Game * const game = dynamic_cast<Game * const>(&egbase);
 			if (game) {
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
-            Soldier* soldier=static_cast<Soldier*>(soldierd->create(game, wh->get_owner(), wh, wh->get_position()));
-            soldier->set_level(hplvl,attacklvl,defenselvl,evadelvl);
-            wh->incorporate_worker(game, soldier);
+				Soldier & soldier = static_cast<Soldier &>
+					(*soldierd->create
+					 (game, wh.get_owner(), &wh, wh.get_position()));
+            soldier.set_level(hplvl,attacklvl,defenselvl,evadelvl);
+				wh.incorporate_worker(game, &soldier);
          }
       }
       //TODO: What to do in editor
    }
+	}
 }
 
 

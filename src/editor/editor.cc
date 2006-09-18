@@ -121,7 +121,7 @@ Player * Editor::get_safe_player(const int n) {
 			 Player::playerLocal,
 			 get_map()->get_scenario_player_tribe(n).c_str(),
 			 get_map()->get_scenario_player_name(n).c_str());
-		result->init(this, false);
+		result->init(false);
 	}
 	return result;
 }

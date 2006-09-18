@@ -308,7 +308,7 @@ bool Game::run(bool is_savegame)
          if (!player)
             continue;
 
-         player->init(this, true);
+         player->init(true);
 
          const Coords &c = get_map()->get_starting_pos(i);
          if (player->get_type() == Player::playerLocal) ipl->move_view_to(c);

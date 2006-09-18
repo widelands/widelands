@@ -245,6 +245,7 @@ public:
 	typedef uint Index;
 	static Index get_index(const Coords c, const uint width);
 	Index get_index(const FCoords c) {return c.field - m_fields;}
+	Index max_index() const {return m_width * m_height;}
 	Field * get_field(const Index) const;
 	Field * get_field(const Coords) const;
 	const Field & get_field(const uint x, const uint y) const;
