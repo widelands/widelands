@@ -88,10 +88,10 @@ void Widelands_Map_Trigger_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		const Trigger & t = mtm.get_trigger_by_nr(i);
-      Section & s = *prof.create_section(t.get_name());
-      s.set_string("type", t.get_id());
-      s.set_bool  ("set",  t.is_set());
-      t.Write(s);
+		Section & s = *prof.create_section(t.get_name());
+		s.set_string("type", t.get_id());
+		s.set_bool  ("set",  t.is_set());
+		t.Write(s);
    }
 
    prof.write("trigger", false, fs );
