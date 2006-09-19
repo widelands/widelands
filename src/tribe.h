@@ -60,58 +60,30 @@ class Tribe_Descr {
 
       inline const char *get_name() const { return m_name; }
 
-	Descr_Maintainer<Bob_Descr>      ::Index get_nr_bobs      () const
-	{return m_bobs      .get_nitems();}
-	Descr_Maintainer<Building_Descr> ::Index get_nr_buildings () const
-	{return m_buildings .get_nitems();}
-	Descr_Maintainer<Immovable_Descr>::Index get_nr_immovables() const
-	{return m_immovables.get_nitems();}
-	Descr_Maintainer<Item_Ware_Descr>::Index get_nr_wares     () const
-	{return m_wares     .get_nitems();}
-	Descr_Maintainer<Worker_Descr>   ::Index get_nr_workers   () const
-	{return m_workers   .get_nitems();}
+		inline int get_nrworkers() { return m_workers.get_nitems(); }
+		Worker_Descr * get_worker_descr(const uint idx) const
+		{return m_workers.get(idx);}
+		int get_worker_index(const char * const name) const
+		{return m_workers.get_index(name);}
+		inline int get_nrwares() { return m_wares.get_nitems(); }
+		int get_safe_ware_index(const char * const name) const;
+		int get_ware_index(const char * const name) const
+		{return m_wares.get_index(name);}
+      inline Item_Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }
+		int get_safe_worker_index(const char * const name) const;
+      inline int get_nrbuildings() { return m_buildings.get_nitems(); }
+		int get_safe_building_index(const char *name);
+		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
+		inline Building_Descr *get_building_descr(uint idx) { return m_buildings.get(idx); }
+      inline int get_immovable_index(const char* l) { return m_immovables.get_index(l); }
+      inline int get_nr_immovables(void) { return m_immovables.get_nitems(); }
+		inline Immovable_Descr* get_immovable_descr(int index) { return m_immovables.get(index); }
+      inline int get_bob(const char* l) { return m_bobs.get_index(l); }
+		inline Bob_Descr* get_bob_descr(ushort index) { return m_bobs.get(index); }
+      inline int get_nr_bobs(void) { return m_bobs.get_nitems(); }
 
-	Bob_Descr       * get_bob_descr
-		(const Descr_Maintainer<Bob_Descr>      ::Index i) const
-	{return m_bobs      .get(i);}
-	Building_Descr  * get_building_descr
-		(const Descr_Maintainer<Building_Descr> ::Index i) const
-	{return m_buildings .get(i);}
-	Immovable_Descr * get_immovable_descr
-		(const Descr_Maintainer<Immovable_Descr>::Index i) const
-	{return m_immovables.get(i);}
-	Item_Ware_Descr * get_ware_descr
-		(const Descr_Maintainer<Item_Ware_Descr>::Index i) const
-	{return m_wares     .get(i);}
-	Worker_Descr    * get_worker_descr
-		(const Descr_Maintainer<Worker_Descr>   ::Index i) const
-	{return m_workers   .get(i);}
-
-	Descr_Maintainer<Bob_Descr>      ::Index
-		get_bob_index      (const char * const name) const
-	{return m_bobs     .get_index(name);}
-	Descr_Maintainer<Building_Descr> ::Index
-		get_building_index (const char * const name) const
-	{return m_buildings.get_index(name);}
-	Descr_Maintainer<Immovable_Descr>::Index
-		get_immovable_index(const char * const name) const
-	{return m_immovables.get_index(name);}
-	Descr_Maintainer<Item_Ware_Descr>::Index
-		get_ware_index     (const char * const name) const
-	{return m_wares     .get_index(name);}
-	Descr_Maintainer<Worker_Descr>   ::Index
-		get_worker_index   (const char * const name) const
-	{return m_workers   .get_index(name);}
-
-	Descr_Maintainer<Building_Descr> ::Index
-		get_safe_building_index(const char * const name) const;
-	Descr_Maintainer<Item_Ware_Descr>::Index
-		get_safe_ware_index    (const char * const name) const;
-	Descr_Maintainer<Worker_Descr>   ::Index
-		get_safe_worker_index  (const char * const name) const;
-
-	uint get_frontier_anim() const {return m_anim_frontier;}
-	uint get_flag_anim() const {return m_anim_flag;}
+      inline uint get_frontier_anim(void) { return m_anim_frontier; }
+		inline uint get_flag_anim(void) { return m_anim_flag; }
 
       int get_resource_indicator(Resource_Descr* res, uint amount);
 

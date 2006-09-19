@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -304,18 +304,10 @@ void Building_Statistics_Menu::update( void ) {
    m_selected = -1;
 
    // List all buildings
-	const Tribe_Descr & tribe = *m_parent->get_player()->get_tribe();
-	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-		tribe.get_nr_buildings();
-	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i) {
-		{
-			const char * const name = tribe.get_building_descr(i)->get_name();
-			if
-				(not strcmp(name, "constructionsite")
-				 or
-				 not strcmp(name, "headquarters"))
-				continue;
-		}
+   Tribe_Descr* tribe = m_parent->get_player()->get_tribe();
+   for(long i = 0; i < tribe->get_nrbuildings(); i++) {
+      if(!strcmp(tribe->get_building_descr(i)->get_name(), "constructionsite")) continue;
+      if(!strcmp(tribe->get_building_descr(i)->get_name(), "headquarters")) continue;
 
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
 
@@ -333,10 +325,7 @@ void Building_Statistics_Menu::update( void ) {
       // enabled
       if(!te) {
          if(! m_parent->get_player()->is_building_allowed(i) ) continue;
-         te = new UITable_Entry
-            (m_table,
-             reinterpret_cast<void * const>(static_cast<const long>(i)),
-             tribe.get_building_descr(i)->get_buildicon());
+         te = new UITable_Entry(m_table, (void*)i, tribe->get_building_descr(i)->get_buildicon());
       }
 
        int nr_owned=0;
@@ -360,7 +349,7 @@ void Building_Statistics_Menu::update( void ) {
           bool is_selected = (m_table->get_selection_index() != -1 &&  (long)(m_table->get_selection()) == i);
 
           if(is_selected) {
-             m_anim = tribe.get_building_descr(i)->get_ui_anim();
+             m_anim = tribe->get_building_descr(i)->get_ui_anim();
              m_selected = i;
              if(nr_owned)
                 for(uint i = 0; i < 2; i++)
@@ -378,7 +367,7 @@ void Building_Statistics_Menu::update( void ) {
 
           // Add new Table Entry
           char buffer[100];
-          te->set_string(0, tribe.get_building_descr(i)->get_descname());
+          te->set_string(0, tribe->get_building_descr(i)->get_descname() );
 
           // Product
           if(is_productionsite && nr_owned) {

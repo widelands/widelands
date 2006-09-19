@@ -73,10 +73,8 @@ void Computer_Player::late_initialization ()
 
 	log ("ComputerPlayer(%d): initializing\n", player_number);
 
-	const Descr_Maintainer<Item_Ware_Descr>::Index nr_wares =
-		tribe->get_nr_wares();
-	wares = new WareObserver[nr_wares];
-	for (Descr_Maintainer<Item_Ware_Descr>::Index i = 0; i < nr_wares; ++i) {
+	wares=new WareObserver[tribe->get_nrwares()];
+	for (int i=0; i<tribe->get_nrwares(); i++) {
 	    wares[i].producers=0;
 	    wares[i].consumers=0;
 	    wares[i].preciousness=0;
@@ -88,9 +86,7 @@ void Computer_Player::late_initialization ()
 	wares[tribe->get_safe_ware_index("blackwood")].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
-	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-		tribe->get_nr_buildings();
-	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i) {
+	for (int i=0; i<tribe->get_nrbuildings();i++) {
 		Building_Descr* bld=tribe->get_building_descr(i);
 		log ("ComputerPlayer(%d): I can build '%s', id is %d\n",player_number,bld->get_name(),i);
 

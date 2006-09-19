@@ -23,67 +23,101 @@
 #include "building.h"
 #include "ware.h"
 
-/**
- * This template is used to have a typesafe mainting class for Bob_Descr,
- * Worker_Descr and so on
+/*
+ * This template is used to have a type save mainting class for Bob_Descr, Worker_Descr
+ * and so on
  */
 template <class T> class Descr_Maintainer {
-public:
+   public:
+      Descr_Maintainer(void) { nitems=0; items=0; place_for=0; }
+      ~Descr_Maintainer(void) ;
 
-	typedef Uint16 Index;
+      T* exists(const char* name);
+      T* start_enum(void) { n=0; if(nitems) return items[0]; return NULL; }
+      T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
+      int add(T* item);
+      ushort get_nitems(void) const { return nitems; }
+      int get_index(const char * const name) const; // can return -1
+      void reserve(uint n) {
+         if(!items) {
+            items = (T**) malloc(sizeof(T*)*n);
+         } else {
+            items = (T**) realloc(items, sizeof(T*)*n);
+         }
+         place_for=n;
+      }
 
-	Descr_Maintainer() : nitems(0), place_for(0), items(0) {}
-	~Descr_Maintainer();
+      T * get(const int idx) const {
+         if (idx >= 0 and idx < static_cast<int>(nitems)) return items[idx];
+         else return 0;
+      }
 
-	T * exists(const char * const name) const;
-	Index get_nitems() const {return nitems;}
-
-	struct Nonexistent {};
-
-	Index add(T * const item) {
-		const Index result = nitems;
-		++nitems;
-		if (nitems >= place_for) reserve(nitems);
-		items[result] = item;
-		return result;
-	}
-
-	Index get_index(const char * const name) const {
-		for (Index i = 0; i < nitems; ++i)
-			if(not strcasecmp(name, items[i]->get_name())) return i;
-		throw Nonexistent();
-	}
-
-	void reserve(const Index n) {
-		items = static_cast<T * * const>(realloc(items, sizeof(T *) * n));
-		place_for = n;
-	}
-
-	T * get(const Index i) const {return i < nitems ? items[i] : 0;}
-
-private:
-	Index nitems;
-	Index place_for;
-	T** items;
-
-	Descr_Maintainer & operator=(const Descr_Maintainer &);
-	Descr_Maintainer            (const Descr_Maintainer &);
+   private:
+      uint place_for;
+      uint n;
+      uint nitems;
+      T** items;
 };
 
-//
-//returns elemt if it exists, 0 if it doesnt
-//
 template <class T>
-T* Descr_Maintainer<T>::exists(const char * const name) const {
-   for (Index i = 0; i < nitems; ++i) {
+int Descr_Maintainer<T>::get_index(const char * const name) const {
+
+   ushort i;
+   for(i=0; i<nitems; i++) {
+      if(!strcasecmp(name, items[i]->get_name())) return i;
+   }
+
+   return -1;
+}
+
+/*template <class T>
+T* Descr_Maintainer<T>::get(const char* name) {
+   uint i;
+
+   for(i=0; i<nitems; i++) {
       if(!strcasecmp(name, items[i]->get_name())) return items[i];
    }
-   return 0;
+
+   nitems++;
+   if(nitems==1) {
+      items=(T**) malloc(sizeof(T*)*nitems);
+   } else {
+      items=(T**) realloc(items, sizeof(T*)*nitems);
+   }
+   items[nitems-1]= new T(name);
+
+   return items[nitems-1];
+}*/
+
+template <class T>
+int Descr_Maintainer<T>::add(T* item) {
+   nitems++;
+   if(nitems>=place_for) {
+      reserve(nitems);
+   }
+   items[nitems-1]=item;
+	return nitems-1;
+}
+
+//
+//returns elemt if it exists, NULL if it doesnt
+//
+template <class T>
+T* Descr_Maintainer<T>::exists(const char* name) {
+   uint i;
+
+   for(i=0; i<nitems; i++) {
+      if(!strcasecmp(name, items[i]->get_name())) return items[i];
+   }
+   return NULL;
 }
 
 template <class T>
-Descr_Maintainer<T>::~Descr_Maintainer() {
-	for (Index i = 0; i < nitems; ++i) delete items[i];
+Descr_Maintainer<T>::~Descr_Maintainer(void) {
+   uint i;
+   for(i=0; i<nitems; i++) {
+      delete items[i];
+   }
    free(items);
 }
 

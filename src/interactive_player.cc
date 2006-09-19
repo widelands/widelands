@@ -213,31 +213,12 @@ void Interactive_Player::sample_statistics( void ) {
       for( uint j = 0; plr && j < plr->get_nr_economies(); j++) {
          Economy* eco = plr->get_economy_by_number( j );
 
-	      const Tribe_Descr & tribe = *plr->get_tribe();
-	      {
-		      const Descr_Maintainer<Item_Ware_Descr>::Index nr_wares =
-			      tribe.get_nr_wares();
-		      for
-			      (Descr_Maintainer<Item_Ware_Descr>::Index id = 0;
-			       id < nr_wares;
-			       ++id)
-			      wastock += eco->stock_ware(id);
-	      }
-	      {
-		      const Descr_Maintainer<Worker_Descr>::Index nr_workers =
-			      tribe.get_nr_workers();
-		      for
-			      (Descr_Maintainer<Worker_Descr>::Index id = 0;
-			       id < nr_workers;
-			       ++id)
-		      {
-			      if
-				      (plr->get_tribe()->get_worker_descr(id)->get_worker_type()
-				       ==
-				       Worker_Descr::CARRIER)
-				      continue;
-			      wostock += eco->stock_worker(id);
-		      }
+         for( int wareid = 0; wareid < plr->get_tribe()->get_nrwares(); wareid++)
+            wastock += eco->stock_ware( wareid );
+         for( int workerid = 0; workerid < plr->get_tribe()->get_nrworkers(); workerid++) {
+            if( plr->get_tribe()->get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER)
+               continue;
+            wostock += eco->stock_worker( workerid );
          }
       }
       nr_wares[ i ] = wastock;
@@ -361,17 +342,13 @@ void Interactive_Player::start()
 /*
  * A ware was produced
  */
-void Interactive_Player::ware_produced
-(const Descr_Maintainer<Item_Ware_Descr>::Index wareid)
-{
-	const Descr_Maintainer<Item_Ware_Descr>::Index nr_wares =
-		get_player()->get_tribe()->get_nr_wares();
-	if (m_ware_productions.size() != nr_wares) {
-		m_ware_productions  .resize(nr_wares);
-		m_current_statistics.resize(nr_wares);
+void Interactive_Player::ware_produced( uint wareid ) {
+   if( m_ware_productions.size() != (uint)get_player()->get_tribe()->get_nrwares() ) {
+      m_ware_productions.resize( get_player()->get_tribe()->get_nrwares() );
+      m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
    }
 
-	assert(wareid < nr_wares);
+   assert( wareid < (uint)get_player()->get_tribe()->get_nrwares() );
 
    m_current_statistics[wareid]++;
 }
@@ -382,11 +359,9 @@ void Interactive_Player::ware_produced
  * Set the next production period
  */
 void Interactive_Player::next_ware_production_period( void ) {
-	const Descr_Maintainer<Item_Ware_Descr>::Index nr_wares =
-		get_player()->get_tribe()->get_nr_wares();
-	if (m_ware_productions.size() != nr_wares) {
-		m_ware_productions  .resize(nr_wares);
-		m_current_statistics.resize(nr_wares);
+   if( m_ware_productions.size() != (uint)get_player()->get_tribe()->get_nrwares() ) {
+      m_ware_productions.resize( get_player()->get_tribe()->get_nrwares() );
+      m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
    }
 
    for(uint i = 0; i < m_ware_productions.size(); i++) {
@@ -607,16 +582,11 @@ void Interactive_Player::gain_immovable( PlayerImmovable* imm ) {
    } else
       name = b->get_name();
 
-	const Tribe_Descr & tribe = *get_player()->get_tribe();
-	{// Get the valid vector for this
-		const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-			tribe.get_nr_buildings();
-		if (m_building_stats.size() < nr_buildings)
-			m_building_stats.resize(nr_buildings);
-	}
+   // Get the valid vector for this
+   if( (int)m_building_stats.size() < get_player()->get_tribe()->get_nrbuildings())
+      m_building_stats.resize( get_player()->get_tribe()->get_nrbuildings());
 
-	std::vector<Building_Stats> & stat =
-		m_building_stats[tribe.get_building_index(name.c_str())];
+   std::vector<Building_Stats>& stat = m_building_stats[ get_player()->get_tribe()->get_building_index(name.c_str()) ];
 
    Building_Stats new_building;
    new_building.is_constructionsite = is_constructionsite;
@@ -637,16 +607,11 @@ void Interactive_Player::lose_immovable( PlayerImmovable* imm ) {
    } else
       name = b->get_name();
 
-	const Tribe_Descr & tribe = *get_player()->get_tribe();
-	{// Get the valid vector for this
-		const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-			tribe.get_nr_buildings();
-		if (m_building_stats.size() < nr_buildings)
-			m_building_stats.resize(nr_buildings);
-	}
+   // Get the valid vector for this
+   if( (int)m_building_stats.size() < get_player()->get_tribe()->get_nrbuildings())
+      m_building_stats.resize( get_player()->get_tribe()->get_nrbuildings());
 
-	std::vector<Building_Stats> & stat =
-		m_building_stats[tribe.get_building_index(name.c_str())];
+   std::vector<Building_Stats>& stat = m_building_stats[ get_player()->get_tribe()->get_building_index(name.c_str()) ];
 
    for( uint i = 0; i < stat.size(); i++ ) {
       if( stat[i].pos == b->get_position() ) {

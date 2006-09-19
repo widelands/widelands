@@ -157,7 +157,8 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 	   Section::Value* value;
 
       while((value=s->get_next_val(0))) {
-         if (not m_wares.exists(value->get_name()))
+         int idx = m_wares.get_index(value->get_name());
+         if(idx == -1)
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
          std::string name=value->get_name();
@@ -168,7 +169,8 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       s = prof.get_safe_section("startworkers");
       while((value=s->get_next_val(0))) {
          if(!strcmp(value->get_name(),"soldier")) continue; // Ignore soldiers here
-         if (not m_workers.exists(value->get_name()))
+         int idx = m_workers.get_index(value->get_name());
+         if(idx == -1)
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
          std::string name=value->get_name();
@@ -224,18 +226,15 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 	//  m_recursive_workarea_info from every building that can be reached through
 	//  at least 1 sequence of enhancement operations (including the empty
 	//  sequence).
-	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-		get_nr_buildings();
-	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i) {
+	for (int i = 0; i < m_buildings.get_nitems(); ++i) {
 		Workarea_Info & collected_info
 			= get_building_descr(i)->m_recursive_workarea_info;
-		std::set<Descr_Maintainer<Building_Descr>::Index> to_consider, considered;
+		std::set<int> to_consider, considered;
 		to_consider.insert(i);
 		while (not to_consider.empty()) {
-			const std::set<Descr_Maintainer<Building_Descr>::Index>::iterator
-				consider_now_iterator = to_consider.begin();
-			const Descr_Maintainer<Building_Descr>::Index consider_now =
-				*consider_now_iterator;
+			const std::set<int>::iterator consider_now_iterator
+				= to_consider.begin();
+			const int consider_now = *consider_now_iterator;
 			const Building_Descr & considered_building_descr
 				= *get_building_descr(consider_now);
 			to_consider.erase(consider_now_iterator);
@@ -246,27 +245,21 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 					*considered_building_descr.get_enhances_to();
 				for
 					(std::vector<char*>::const_iterator it = enhancements.begin();
-					 it != enhancements.end(); ++it)
-				{
-					try {
-						const Descr_Maintainer<Building_Descr>::Index index =
-							m_buildings.get_index(*it);
-						if (considered.find(index) == considered.end()) {
-							//  The building index has not been considered. Add it to
-							//  to_consider.
-							to_consider.insert(index);
-						}
+					 it != enhancements.end(); ++it) {
+					const int index = m_buildings.get_index(*it);
+					log
+						("Building %s (%i) enhances to %s (%i)\n",
+						 considered_building_descr.get_descname(), consider_now,
+						 *it, index);
+					if (index < 0) {
 						log
-							("Building %s (%i) enhances to %s (%i)\n",
-							 considered_building_descr.get_descname(), consider_now,
-							 *it,                                      index);
+							("        Warning: building %s (%i) does not exist\n",
+							 *it, index);
 					}
-					catch (Descr_Maintainer<Building_Descr>::Nonexistent) {
-						log
-							("WARNING: Building %s (%i) enhanches to %s, which does "
-							 "not exist!\n",
-							 considered_building_descr.get_descname(), consider_now,
-							 *it);
+					else if (considered.find(index) == considered.end()) {
+						//  The building index has not been considered. Add it to
+						//  to_consider.
+						to_consider.insert(index);
 					}
 				}
 			}
@@ -361,7 +354,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 		else
 			name = it->c_str();
 
-		if (wares->exists(name))
+		if (wares->get_index(name) >= 0)
 			log("Ware %s is already known in world init\n", it->c_str());
 
 		Item_Ware_Descr* descr = 0;
@@ -547,12 +540,10 @@ Find the best matching indicator for the given amount.
 int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
 {
    if(!res || !amount) {
-	   try {return get_immovable_index("resi_none");}
-	   catch (Descr_Maintainer<Resource_Descr>::Nonexistent) {
-		   throw wexception
-			   ("Tribe %s doesn't declare a resource indicator resi_none!\n",
-			    get_name());
-	   }
+      int idx=get_immovable_index("resi_none");
+      if(idx==-1)
+         throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", get_name());
+      return idx;
    }
 
    char buffer[256];
@@ -561,8 +552,8 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
    int num_indicators=0;
    while(true) {
       sprintf(buffer, "resi_%s%i", res->get_name(), i);
-	   try {get_immovable_index(buffer);}
-	   catch (Descr_Maintainer<Immovable_Descr>::Nonexistent) {break;}
+      if(get_immovable_index(buffer)==-1)
+         break;
       ++i;
       ++num_indicators;
    }
@@ -589,38 +580,33 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
 /*
  * Return the given ware or die trying
  */
-Descr_Maintainer<Item_Ware_Descr>::Index
-Tribe_Descr::get_safe_ware_index(const char * const name) const
-{
-	try {return get_ware_index(name);}
-	catch (Descr_Maintainer<Item_Ware_Descr>::Nonexistent) {
-		throw wexception
-			("Tribe_Descr::get_safe_ware_index: Unknown ware %s!", name);
-	}
+int Tribe_Descr::get_safe_ware_index(const char * const name) const {
+   int retval=get_ware_index(name);
+
+   if(retval==-1)
+      throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!", name);
+   return retval;
 }
 
 /*
  * Return the given worker or die trying
  */
-Descr_Maintainer<Worker_Descr>::Index
-Tribe_Descr::get_safe_worker_index(const char * const name) const
-{
-	try {return get_worker_index(name);}
-	catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
-		throw wexception
-			("Tribe_Descr::get_safe_worker_index: Unknown worker %s!", name);
-	}
+int Tribe_Descr::get_safe_worker_index(const char * const name) const {
+   int retval=get_worker_index(name);
+
+   if(retval==-1)
+      throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!", name);
+   return retval;
 }
 
 /*
  * Return the given building or die trying
  */
-Descr_Maintainer<Building_Descr>::Index
-Tribe_Descr::get_safe_building_index(const char * const name) const
-{
-	try {return get_building_index(name);}
-	catch (Descr_Maintainer<Building_Descr>::Nonexistent) {
-		throw wexception
-			("Tribe_Descr::get_safe_building_index: Unknown building %s!", name);
-	}
+int Tribe_Descr::get_safe_building_index(const char *name) {
+   int retval=get_building_index(name);
+
+   if(retval==-1)
+      throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!", name);
+   return retval;
 }
+

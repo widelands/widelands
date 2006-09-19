@@ -102,7 +102,7 @@ class Interactive_Player : public Interactive_Base {
       std::vector<bool>* get_visibility(void);
 
       // For ware production statistics (only needed for the interactive player)
-      void ware_produced(const Descr_Maintainer<Item_Ware_Descr>::Index id);
+      void ware_produced(uint id);
       void next_ware_production_period( void );
       const std::vector<uint>* get_ware_production_statistics( int ware );
 

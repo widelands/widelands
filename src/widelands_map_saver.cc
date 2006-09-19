@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,7 +83,7 @@ Widelands_Map_Saver::~Widelands_Map_Saver(void) {
 void Widelands_Map_Saver::save(void) throw(_wexception) {
 
    Widelands_Map_Data_Packet* dp;
-
+   
    if(m_mos)
       delete m_mos;
    m_mos=new Widelands_Map_Map_Object_Saver();
@@ -91,7 +91,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
    // The binary data is saved in an own directory
    // to keep it hidden from the poor debuggers
    m_fs->EnsureDirectoryExists( "binary" );
-
+   
    // MANDATORY PACKETS
    // Start with writing the map out, first Elemental data
    // PRELOAD DATA BEGIN
@@ -116,7 +116,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
    dp->Write(m_fs, m_egbase, m_mos);
    delete dp;
    log("done!\n ");
-
+   
    // and terrains
    log("Writing Terrain Data ... ");
    dp=new Widelands_Map_Terrain_Data_Packet();
@@ -170,7 +170,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       delete dp;
       log("done!\n ");
    }
-
+   
    // Events
 	if (map.get_mem().get_nr_events()) {
       log("Writing Event Data ... ");
@@ -179,7 +179,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       delete dp;
       log("done!\n ");
    }
-
+  
    // Event Chains
 	if (map.get_mecm().get_nr_eventchains()) {
       log("Writing Event Chain Data ... ");
@@ -194,10 +194,9 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
 	const int nr_players = map.get_nrplayers();
 	for (int i = 1; i <= nr_players; ++i) {
       Player* player=m_egbase->get_player(i);
+      int b=0;
       if(!player) continue;
-      const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-         player->get_tribe()->get_nr_buildings();
-      for (Descr_Maintainer<Building_Descr>::Index b = 0; b < nr_buildings; ++b)
+      for(b=0; b < player->get_tribe()->get_nrbuildings(); b++)
          if(player->is_building_allowed(b)) {
             write_allowed_buildings=true;
             break;
@@ -212,8 +211,8 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       log("done!\n ");
    }
 
-   // !!!!!!!!!! NOTE
-   // This packet must be before any building or road packet. So do not
+   // !!!!!!!!!! NOTE  
+   // This packet must be before any building or road packet. So do not 
    // change this order without knowing what you do
    // EXISTENT PACKETS
    log("Writing Flag Data ... ");
@@ -241,8 +240,8 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
    delete dp;
    log("done!\n ");
 
-   // DATA PACKETS
-   if(m_mos->get_nr_flags()) {
+   // DATA PACKETS 
+   if(m_mos->get_nr_flags()) {  
       log("Writing Flagdata Data ... ");
       dp=new Widelands_Map_Flagdata_Data_Packet();
       dp->Write(m_fs, m_egbase, m_mos);
@@ -250,7 +249,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       log("done!\n ");
    }
 
-   if(m_mos->get_nr_roads()) {
+   if(m_mos->get_nr_roads()) { 
       log("Writing Roaddata Data ... ");
       dp=new Widelands_Map_Roaddata_Data_Packet();
       dp->Write(m_fs, m_egbase, m_mos);
@@ -282,7 +281,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       dp->Write(m_fs, m_egbase, m_mos);
       delete dp;
       log("done!\n ");
-   }
+   } 
 
    if(m_mos->get_nr_immovables()) {
       log("Writing Immovabledata Data ... ");

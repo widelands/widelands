@@ -49,10 +49,9 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
    set_name(name);
 
    // Allow all buildings per default
-	const Descr_Maintainer<Building_Descr>::Index nr_buildings =
-		m_tribe->get_nr_buildings();
-   m_allowed_buildings.resize(nr_buildings);
-	for (Descr_Maintainer<Building_Descr>::Index i = 0; i < nr_buildings; ++i)
+   int i;
+   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
+   for(i=0; i<m_tribe->get_nrbuildings(); i++)
       m_allowed_buildings[i]=true;
 
    // Resize the visibility array, so that it is large enough
@@ -74,10 +73,10 @@ void Player::init(const bool place_headquarters) {
 	seen_fields.resize(map.max_index(), false);
 
 	if (place_headquarters) {
-		const Tribe_Descr & tribe = *m_tribe;
+		Tribe_Descr & tribe = *m_tribe;
 		const int plnum = m_plnum;
 		Editor_Game_Base & game = *m_egbase;
-		try {
+		//try {
 			tribe.load_warehouse_with_start_wares
 				(game,
 				 *dynamic_cast<Warehouse * const>
@@ -85,9 +84,9 @@ void Player::init(const bool place_headquarters) {
 				  (map.get_starting_pos(plnum),
 				   plnum,
 				   tribe.get_building_index("headquarters"))));
-		} catch (Descr_Maintainer<Building_Descr>::Nonexistent) {
-			throw wexception("Tribe %s lacks headquarters", tribe.get_name());
-		}
+		//} catch () {
+		//	throw wexception("Tribe %s lacks headquarters", tribe.get_name());
+		//}
 	}
 }
 
@@ -225,7 +224,7 @@ void Player::build(Coords c, int idx)
 	Building_Descr* descr;
 
 	// Validate building type
-	if (idx < 0 or idx >= get_tribe()->get_nr_buildings())
+	if (idx < 0 || idx >= get_tribe()->get_nrbuildings())
 		return;
 	descr = get_tribe()->get_building_descr(idx);
 
@@ -360,12 +359,12 @@ void Player::flagaction(Flag* flag, int action)
 	if (game and flag->get_owner() == this) {// Additional security check.
 		switch (action) {
 		case FLAGACTION_GEOLOGIST:
-			try {
+			//try {
 				flag->add_flag_job
 					(game, get_tribe()->get_worker_index("geologist"), "expedition");
-			} catch (Descr_Maintainer<Worker_Descr>::Nonexistent){
+/*			} catch (Descr_Maintainer<Worker_Descr>::Nonexistent){
 				log("Tribe defines no geologist\n");
-			}
+			}*/
 			break;
 		default:
 			log("Player sent bad flagaction = %i\n", action);
@@ -379,8 +378,8 @@ void Player::flagaction(Flag* flag, int action)
  * Disable or enable a building for a player
  */
 void Player::allow_building(int i, bool t) {
-   assert(m_tribe && i < m_tribe->get_nr_buildings());
-   m_allowed_buildings.resize(m_tribe->get_nr_buildings());
+   assert(m_tribe && i<m_tribe->get_nrbuildings());
+   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
 
    m_allowed_buildings[i]=t;
 }
@@ -509,11 +508,11 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
 
       case ENEMYFLAGACTION_ATTACK:
          {
-	         try {get_tribe()->get_worker_index("soldier");}
-	         catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
+	         /*try {*/get_tribe()->get_worker_index("soldier");//}
+/*	         catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
                log("Tribe defines no soldier\n");
                return;
-            }
+            }*/
             std::vector<ImmovableFound> list;
             std::vector<MilitarySite*> ms_list;
 

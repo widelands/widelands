@@ -90,7 +90,7 @@ void Game_Interactive_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widel
       ushort nr_wares = fr.Unsigned16();
       ushort nr_entries = fr.Unsigned16();
 
-      assert (nr_wares == game->get_player(game->get_ipl()->get_player_number())->get_tribe()->get_nr_wares());
+      assert ( nr_wares == game->get_player(game->get_ipl()->get_player_number())->get_tribe()->get_nrwares());
 
       plr->m_current_statistics.resize( nr_wares );
       plr->m_ware_productions.resize( nr_wares );
