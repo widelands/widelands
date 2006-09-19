@@ -30,13 +30,13 @@ class Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
    public:
       virtual ~Widelands_Map_Elemental_Data_Packet();
 
-      virtual void Read(FileSystem*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
-      virtual void Write(FileSystem*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
+      virtual void Read(FileSystem*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader* = 0) throw(_wexception);
+      virtual void Write(FileSystem*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver* = 0) throw(_wexception);
 
       // The following function prereads a given map without
       // the need of a properly configured Editor_Game_Base
       // object
-      void Pre_Read(FileSystem*, Map*) throw(wexception);
+      void Pre_Read(FileSystem*, Map*) throw(_wexception);
 
       inline uint get_version(void) { return m_version; }
 

@@ -265,6 +265,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path)
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
+        
 #ifndef __WIN32__
 	bool absolute=pathIsAbsolute(path);
 
@@ -297,21 +298,37 @@ std::string FileSystem::FS_CanonicalizeName(std::string path)
 	}
 
 	//clean up the path
-	for(i=components.begin(); i!=components.end(); i++) {
+	for(i=components.begin(); i!=components.end(); ) {
+        bool erase = false;
+        bool erase_prev = false;
+        
 		//remove empty components ("foo/bar//baz/")
-		if (i->empty()) components.erase(i);
-
+		if (i->empty()) erase = true;
+        
 		//remove single dot
-		if (*i==".") components.erase(i);
-
+		if (*i==".") erase = true;
+                
 		//remove double dot and the preceding component (if any)
 		if (*i=="..") {
-			if(i!=components.begin()) {
-				i--;
-				components.erase(i);
-			}
-			components.erase(i);
-		}
+			if(i!=components.begin())
+                erase_prev = true;
+            erase = true;
+        }
+        
+        std::vector<std::string>::iterator nexti = i;
+
+        if( erase_prev && erase ) {
+            components.erase( i-1, i+1);
+            i = components.begin();
+            continue;
+        }
+        if( erase ) {
+            components.erase( i );
+            i = components.begin();
+            continue;
+        }
+        
+        i++;
 	}
 
 	std::string canonpath="";
@@ -424,9 +441,15 @@ static const std::string getexename(const std::string argv0)
  */
 void setup_searchpaths(const std::string argv0)
 {
-	// first, try the data directory used in the last scons invocation
+	    
+#ifdef __APPLE__
+    // on mac, the default Data Dir ist Relative to the current directory
+    g_fs->AddFileSystem(FileSystem::CreateFromDirectory("Widelands.app/Contents/Resources/"));
+#else
+    // first, try the data directory used in the last scons invocation
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h
-
+#endif 
+    
 #ifndef __WIN32__
 	// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/games/widelands"));
@@ -434,9 +457,9 @@ void setup_searchpaths(const std::string argv0)
 	//TODO: is there a "default dir" for this on win32 ?
 #endif
 
-	// absolute fallback directory is the CWD
+    // absolute fallback directory is the CWD
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
-
+    
 	// the directory the executable is in is the default game data directory
 	std::string exename = getexename(argv0);
 	std::string::size_type slash = exename.rfind('/');

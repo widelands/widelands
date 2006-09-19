@@ -80,7 +80,7 @@ Widelands_Map_Saver::~Widelands_Map_Saver(void) {
 /*
  * save function
  */
-void Widelands_Map_Saver::save(void) throw(wexception) {
+void Widelands_Map_Saver::save(void) throw(_wexception) {
 
    Widelands_Map_Data_Packet* dp;
 

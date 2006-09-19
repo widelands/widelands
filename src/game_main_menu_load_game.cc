@@ -181,7 +181,7 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
          m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
          free(fname);
 
-      } catch(wexception& ) {
+      } catch(_wexception& ) {
          // we simply skip illegal entries
       }
       if( gl )

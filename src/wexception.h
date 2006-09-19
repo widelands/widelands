@@ -33,14 +33,19 @@
  * Stupid, simple exception class. It has the nice bonus that you can give it
  * sprintf()-style format strings
  */
-class wexception : public std::exception {
+class _wexception : public std::exception {
 	char m_string[256];
+    uint m_line;
+    const char* m_file;
 
 public:
-	explicit wexception(const char *fmt, ...) throw() PRINTF_FORMAT(2,3);
-	virtual ~wexception() throw();
+	explicit _wexception(const char* file, uint line, const char *fmt, ...) throw() PRINTF_FORMAT(4,5);
+	virtual ~_wexception() throw();
 
 	virtual const char *what() const throw();
 };
+
+#define wexception( ... ) _wexception( __FILE__, __LINE__, __VA_ARGS__ )
+
 
 #endif

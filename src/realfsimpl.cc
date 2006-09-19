@@ -38,8 +38,8 @@ RealFSImpl::RealFSImpl(std::string Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
 
-	//TODO:
-	m_root=Directory;
+	m_root = "";
+	m_root=FS_CanonicalizeName( Directory );
 }
 
 /**

@@ -35,7 +35,7 @@ Game_Player_Economies_Data_Packet::~Game_Player_Economies_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
    FileRead fr;
 
    fr.Open( fs, "binary/player_economies" );
@@ -79,7 +79,7 @@ void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelan
 /*
  * Write Function
  */
-void Game_Player_Economies_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+void Game_Player_Economies_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
    FileWrite fw;
 
    // Now packet version

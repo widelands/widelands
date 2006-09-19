@@ -37,7 +37,7 @@ Game_Map_Data_Packet::~Game_Map_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Map_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Game_Map_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
    if( !fs->FileExists( "map" ) || !fs->IsDirectory( "map" ))
       throw wexception("No map in this save game!\n");
 
@@ -61,7 +61,7 @@ void Game_Map_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Ob
 /*
  * Write Function
  */
-void Game_Map_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+void Game_Map_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
 
    FileSystem* mapfs = fs->CreateSubFileSystem( "map", FileSystem::FS_DIR );
 

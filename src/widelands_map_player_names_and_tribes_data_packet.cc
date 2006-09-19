@@ -39,7 +39,7 @@ Widelands_Map_Player_Names_And_Tribes_Data_Packet::~Widelands_Map_Player_Names_A
  *
  * this is a scenario packet, it might be that we have to skip it
  */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
    Pre_Read(fs, egbase->get_map(), skip);
 }
 
@@ -79,7 +79,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileSystem* fs,
 /*
  * Write Function
  */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
    char buf[256];
 
    Profile prof;

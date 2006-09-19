@@ -90,13 +90,16 @@ void log(const char *fmt, ...)
 /*
 ==============================================================================
 
-class wexception implementation
+class _wexception implementation
 
 ==============================================================================
 */
-
-wexception::wexception(const char *fmt, ...) throw()
+#undef wexception
+_wexception::_wexception(const char* file, uint line, const char *fmt, ...) throw()
 {
+    m_file = file; 
+    m_line = line; 
+    
 	va_list va;
 
 	va_start(va, fmt);
@@ -104,17 +107,23 @@ wexception::wexception(const char *fmt, ...) throw()
 	va_end(va);
 }
 
-wexception::~wexception() throw()
+_wexception::~_wexception() throw()
 {
 }
 
-const char *wexception::what() const throw()
+const char *_wexception::what() const throw()
 {
-	return m_string;
+    std::string returnval(m_file);
+    returnval += ':';
+    returnval += m_line;
+    returnval += " ";
+    returnval += m_string;
+    
+    return returnval.c_str();
 }
 
-void myassert(int line, const char* file, const char* condt) throw(wexception)
+void myassert(int line, const char* file, const char* condt) throw(_wexception)
 {
 	critical_error("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
-	throw wexception("Assertion %s:%i (%s) has been ignored", file, line, condt);
+	throw _wexception(__FILE__, __LINE__, "Assertion %s:%i (%s) has been ignored", file, line, condt);
 }

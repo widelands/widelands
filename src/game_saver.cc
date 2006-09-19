@@ -46,7 +46,7 @@ Game_Saver::~Game_Saver(void) {
 /*
  * The core save function
  */
-void Game_Saver::save(void) throw(wexception) {
+void Game_Saver::save(void) throw(_wexception) {
    Game_Data_Packet* gp;
    Game_Map_Data_Packet* gmdp;
 

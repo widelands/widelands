@@ -40,7 +40,7 @@ class Game_Saver {
       Game_Saver(FileSystem*, Game* game);
       ~Game_Saver(void);
 
-      void save(void) throw(wexception);
+      void save(void) throw(_wexception);
 
    private:
       FileSystem* m_fs;

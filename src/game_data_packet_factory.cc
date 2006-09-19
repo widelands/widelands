@@ -28,7 +28,7 @@
 #include "game_player_info_data_packet.h"
 
 
-Game_Data_Packet* Game_Data_Packet_Factory::create_correct_packet(ushort id) throw(wexception) {
+Game_Data_Packet* Game_Data_Packet_Factory::create_correct_packet(ushort id) throw(_wexception) {
     switch(id) {
        case PACKET_GAME_CLASS_DATA: return new Game_Game_Class_Data_Packet(); break;
        case PACKET_PLAYER_INFO_DATA: return new Game_Player_Info_Data_Packet(); break;

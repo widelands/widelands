@@ -268,7 +268,13 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 			return NULL;
 		}
 
+        // Note: SDL_RWFromFP is not available under windows
 		target = SDL_RWFromFP(f, 0);
+        if(!target) {
+            fclose(f);
+            log("SDL_RWFromFP failed miserably on %s: %s.\n",
+                tempfile, SDL_GetError());
+        }
 		buf = malloc(fr->GetSize());
 
 		if (buf == NULL) {
@@ -287,7 +293,6 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 		//remove the RWops on the tempfile
 		SDL_RWclose(target);
-		SDL_FreeRW(target);
 
 		fclose(f);
 

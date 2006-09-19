@@ -38,7 +38,7 @@ Widelands_Map_Owned_Fields_Data_Packet::~Widelands_Map_Owned_Fields_Data_Packet(
 /*
  * Read Function
  */
-void Widelands_Map_Owned_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Widelands_Map_Owned_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
    if( skip )
       return;
 
@@ -75,7 +75,7 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Ba
 /*
  * Write Function
  */
-void Widelands_Map_Owned_Fields_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+void Widelands_Map_Owned_Fields_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
    FileWrite fw;
 
    // Now packet version

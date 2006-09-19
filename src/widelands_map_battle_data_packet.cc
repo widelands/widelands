@@ -45,7 +45,7 @@ Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet(void)
 /*
  * Read Function
  */
-void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception)
+void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(_wexception)
 {
    if( skip )
       return;
@@ -108,7 +108,7 @@ void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* eg
  * Write Function.
  * This writes ALL the information about battles !
  */
-void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception)
+void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(_wexception)
 {
    FileWrite fw;
 

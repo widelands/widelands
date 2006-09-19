@@ -33,7 +33,7 @@ class Game_Data_Packet;
  */
 class Game_Data_Packet_Factory {
    public:
-      Game_Data_Packet* create_correct_packet(ushort id) throw(wexception);
+      Game_Data_Packet* create_correct_packet(ushort id) throw(_wexception);
 };
 
 

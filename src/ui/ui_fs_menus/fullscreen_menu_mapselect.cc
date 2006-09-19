@@ -244,7 +244,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
          }
          list->add_entry(map->get_name(), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  pic.c_str() ));
-      } catch(wexception& ) {
+      } catch(_wexception& ) {
          // we simply skip illegal entries
       }
       delete m_ml;

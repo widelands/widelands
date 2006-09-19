@@ -150,7 +150,7 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
          list->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
          free(fname);
 
-      } catch(wexception& ) {
+      } catch(_wexception& ) {
          // we simply skip illegal entries
       }
       if( gl )

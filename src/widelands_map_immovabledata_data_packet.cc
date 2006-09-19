@@ -43,7 +43,7 @@ Widelands_Map_Immovabledata_Data_Packet::~Widelands_Map_Immovabledata_Data_Packe
 /*
  * Read Function
  */
-void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(_wexception) {
    if( skip )
       return;
 
@@ -92,7 +92,7 @@ void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_B
 /*
  * Write Function
  */
-void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(_wexception) {
    FileWrite fw;
 
    // now packet version

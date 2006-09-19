@@ -50,7 +50,7 @@ extern "C"
 
 		return 0;
 	}
-	catch(wexception &e) {
+	catch(_wexception &e) {
 		cerr<<endl<<
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<

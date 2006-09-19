@@ -36,7 +36,7 @@ Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
+void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader* mol) throw(_wexception) {
    FileRead fr;
    fr.Open( fs, "binary/cmd_queue" );
 
@@ -85,7 +85,7 @@ void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_
 /*
  * Write Function
  */
-void Game_Cmd_Queue_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
+void Game_Cmd_Queue_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver* mos) throw(_wexception) {
    FileWrite fw;
 
    // Now packet version
