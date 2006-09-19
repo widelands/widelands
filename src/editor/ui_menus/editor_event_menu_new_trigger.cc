@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,7 +115,7 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
       // No trigger created, don't close us. let user choose other trigger
       return;
    }
-   m_parent->get_map()->get_mtm()->register_new_trigger(trig);
+	m_parent->get_map()->get_mtm().register_new_trigger(trig);
    end_modal(1);
    return;
 }

@@ -160,8 +160,10 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    delete dp;
    log("done!\n ");
 
+	const Map & map = *m_egbase->get_map();
+
    // Triggers
-   if(m_egbase->get_map()->get_mtm()->get_nr_triggers()) {
+	if (map.get_mtm().get_nr_triggers()) {
       log("Writing Trigger Data ... ");
       dp=new Widelands_Map_Trigger_Data_Packet();
       dp->Write(m_fs, m_egbase, m_mos);
@@ -170,7 +172,7 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    }
 
    // Events
-   if(m_egbase->get_map()->get_mem()->get_nr_events()) {
+	if (map.get_mem().get_nr_events()) {
       log("Writing Event Data ... ");
       dp=new Widelands_Map_Event_Data_Packet();
       dp->Write(m_fs, m_egbase, m_mos);
@@ -179,7 +181,7 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    }
 
    // Event Chains
-   if(m_egbase->get_map()->get_mecm()->get_nr_eventchains()) {
+	if (map.get_mecm().get_nr_eventchains()) {
       log("Writing Event Chain Data ... ");
       dp=new Widelands_Map_EventChain_Data_Packet();
       dp->Write(m_fs, m_egbase, m_mos);
@@ -189,8 +191,8 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
 
    // Allowed buildings
    bool write_allowed_buildings=false;
-   int i;
-   for(i=1; i<=m_egbase->get_map()->get_nrplayers(); i++) {
+	const int nr_players = map.get_nrplayers();
+	for (int i = 1; i <= nr_players; ++i) {
       Player* player=m_egbase->get_player(i);
       if(!player) continue;
       const Descr_Maintainer<Building_Descr>::Index nr_buildings =

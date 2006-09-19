@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,12 +51,12 @@ class MapVariable {
       MapVariable( bool t ) { m_delete_protected = t; }
       virtual ~MapVariable( void ) { }
 
-      inline bool is_delete_protected( void ) { return m_delete_protected; }
-      inline const char* get_name( void ) { return m_name.c_str(); }
+	bool is_delete_protected() const {return m_delete_protected;}
+	const char * get_name() const {return m_name.c_str();}
       inline void set_name( const char* name ) { m_name = name; }
 
-      virtual std::string get_string_representation( void ) = 0;
-      virtual Type get_type( void ) = 0;
+	virtual std::string get_string_representation() const = 0;
+	virtual Type get_type() const = 0;
 
    private:
       std::string   m_name;
@@ -67,11 +67,11 @@ class Int_MapVariable : public MapVariable {
    public:
       Int_MapVariable( bool t ) : MapVariable( t ) { m_value = 0; }
 
-      virtual Type get_type( void ) { return MVT_INT; }
+	Type get_type() const {return MVT_INT;}
 
-      long get_value( void ) { return m_value; }
+	long get_value() const {return m_value;}
       void set_value( long t ) { m_value = t; }
-      std::string get_string_representation( void ) {
+	std::string get_string_representation() const {
          char buffer[256];
          sprintf( buffer, "%li", m_value );
          return buffer;
@@ -85,11 +85,11 @@ class String_MapVariable : public MapVariable {
    public:
       String_MapVariable( bool t ) : MapVariable( t ) { m_value = ""; }
 
-      virtual Type get_type( void ) { return MVT_STRING; }
+	Type get_type() const {return MVT_STRING;}
 
-      const char* get_value( void ) { return m_value.c_str(); }
+	const char * get_value() const {return m_value.c_str();}
       void set_value( const char* t ) { m_value = t; }
-      std::string get_string_representation( void ) { return m_value; }
+	std::string get_string_representation() const {return m_value;}
 
    private:
       std::string            m_value;
@@ -124,11 +124,14 @@ class MapVariableManager {
       MapVariable* get_variable( const char* name );
       void delete_variable( const char* name );
 
-      inline int get_nr_variables( void ) { return m_variables.size(); }
-      inline MapVariable* get_variable_by_nr( int i ) { assert(i < (int)m_variables.size()); return m_variables[i]; }
+	typedef std::vector<MapVariable *> variable_vector;
+	typedef variable_vector::size_type Index;
+	Index get_nr_variables() const {return m_variables.size();}
+	MapVariable & get_variable_by_nr(const Index i) const
+	{assert(i < m_variables.size()); return *m_variables[i];}
 
    private:
-      std::vector<MapVariable*>      m_variables;
+	variable_vector      m_variables;
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,16 +56,14 @@ GameObjectivesMenu::GameObjectivesMenu(Interactive_Player *plr, UIUniqueWindowRe
 
    // Listselect with Objectives
    m_list = new UIListselect( this, spacing, posy, get_inner_w()-spacing*2, 60, Align_Left, false );
-   MapObjectiveManager* mom = game->get_map()->get_mom();
-   for( int i = 0; i < mom->get_nr_objectives(); i++) {
-      MapObjective* obj = mom->get_objective_by_nr( i );
-      if( !obj->get_is_visible())
-         continue;
-      if(obj->get_trigger()->is_set())
-         continue;
+	MapObjectiveManager & mom = game->get_map()->get_mom();
+	for (MapObjectiveManager::Index i = 0; i < mom.get_nr_objectives(); ++i) {
+		MapObjective & obj = mom.get_objective_by_nr(i);
+		if (not obj.get_is_visible()) continue;
+		if (obj.get_trigger()->is_set()) continue;
 
-      m_list->add_entry( obj->get_name(), obj);
-      if( obj->get_is_optional())
+		m_list->add_entry(obj.get_name(), &obj);
+		if (obj.get_is_optional())
          m_list->set_entry_color( m_list->get_nr_entries()-1, RGBColor(255,0,0));
    }
    m_list->selected.set( this, &GameObjectivesMenu::selected);

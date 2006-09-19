@@ -314,11 +314,11 @@ public:
     * Get the a manager for registering or removing
     * something
     */
-   inline MapVariableManager* get_mvm( void ) { return m_mvm; }
-   inline MapObjectiveManager* get_mom( void ) { return m_mom; }
-   inline MapEventChainManager* get_mecm( void ) { return m_mecm; }
-   inline MapTriggerManager* get_mtm( void ) { return m_mtm; }
-   inline MapEventManager* get_mem( void ) { return m_mem; }
+	MapVariableManager   & get_mvm () const {return *m_mvm;}
+	MapObjectiveManager  & get_mom () const {return *m_mom;}
+	MapEventChainManager & get_mecm() const {return *m_mecm;}
+	MapTriggerManager    & get_mtm () const {return *m_mtm;}
+	MapEventManager      & get_mem () const {return *m_mem;}
 
 
 private:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,13 +34,13 @@ class Event_Move_View : public Event {
       ~Event_Move_View();
 
       // one liner functions
-      const char* get_id(void) { return "move_view"; }
+	const char * get_id() const {return "move_view";}
 
       State run(Game*);
       virtual void reinitialize(Game*);
 
       // File Functions
-      void Write(Section*, Editor_Game_Base*);
+	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
       inline void set_coords(Coords pt) { m_pt=pt; }

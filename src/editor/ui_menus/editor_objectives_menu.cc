@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -205,10 +205,12 @@ Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UIUni
    m_trigger = new UITextarea( this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
 
    // Add all variables
-   MapObjectiveManager* mom = m_parent->get_egbase()->get_map()->get_mom();
-   for(int i = 0; i < mom->get_nr_objectives(); i++) {
-      insert_objective( mom->get_objective_by_nr( i ));
-   }
+	const MapObjectiveManager & mom =
+		m_parent->get_egbase()->get_map()->get_mom();
+	const MapObjectiveManager::Index nr_objectives = mom.get_nr_objectives();
+	for (MapObjectiveManager::Index i = 0; i < nr_objectives; ++i)
+		insert_objective(mom.get_objective_by_nr(i));
+
 
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
@@ -236,24 +238,20 @@ void Editor_Objectives_Menu::clicked( int n ) {
          // Get the a name
          char buffer[256];
 
-         int n = 1;
-         while( 1 ) {
-		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
-            if( !m_parent->get_egbase()->get_map()->get_mom()->get_objective( buffer ))
-               break;
-            ++n;
-         }
+         const Map & map = *m_parent->get_egbase()->get_map();
+         MapObjectiveManager & mom = map.get_mom();
+         for (uint n = 1; mom.get_objective(buffer); ++n) snprintf
+            (buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
          // Create a new objective
-         MapObjective* mo = new MapObjective;
-         mo->set_name( buffer );
-         m_parent->get_egbase()->get_map()->get_mom()->register_new_objective( mo );
+         MapObjective & mo = *new MapObjective;
+         mo.set_name(buffer);
+         mom.register_new_objective(&mo);
          // Create a null trigger for this
-         Trigger_Null* trig = new Trigger_Null();
-         trig->set_name( buffer );
-         mo->set_trigger( trig );
-         m_parent->get_egbase()->get_map()->get_mtm()->register_new_trigger( trig );
-
-         insert_objective( mo );
+         Trigger_Null & trigger = *new Trigger_Null();
+         trigger.set_name(buffer);
+         mo.set_trigger(&trigger);
+         map.get_mtm().register_new_trigger(&trigger);
+         insert_objective(mo);
       }
       // Fallthrough to edit
 
@@ -293,8 +291,8 @@ void Editor_Objectives_Menu::clicked( int n ) {
          }
 
 
-         m_parent->get_egbase()->get_map()->get_mtm()->delete_trigger( obj->get_trigger()->get_name() );
-         m_parent->get_egbase()->get_map()->get_mom()->delete_objective( obj->get_name() );
+         m_parent->get_egbase()->get_map()->get_mtm().delete_trigger(obj->get_trigger()->get_name());
+         m_parent->get_egbase()->get_map()->get_mom().delete_objective(obj->get_name());
          m_table->remove_entry( idx );
          m_table->sort();
 
@@ -330,12 +328,12 @@ void Editor_Objectives_Menu::table_dblclicked( int ) {
 /*
  * Insert this map variable into the table
  */
-void Editor_Objectives_Menu::insert_objective( MapObjective* var ) {
-   UITable_Entry* t = new UITable_Entry(m_table, var, -1, true);
+void Editor_Objectives_Menu::insert_objective(MapObjective & var) {
+	UITable_Entry & t = *new UITable_Entry(m_table, &var, -1, true);
 
-   t->set_string(0, var->get_name());
-   t->set_string(1, var->get_is_optional() ? "Yes" : "No");
-   t->set_string(2, var->get_is_visible() ? "Yes" : "No");
+	t.set_string(0, var.get_name());
+	t.set_string(1, var.get_is_optional() ? "Yes" : "No");
+	t.set_string(2, var.get_is_visible() ? "Yes" : "No");
 
    m_table->sort();
 }

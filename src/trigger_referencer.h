@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,8 @@ class Trigger;
 class TriggerReferencer {
    public:
       virtual ~TriggerReferencer() {}
-      virtual const char* get_type( void ) = 0;
-      virtual const char* get_name( void ) = 0;
+	virtual const char * get_type() const = 0;
+	virtual const char * get_name() const = 0;
 
       void reference_trigger( Trigger* );
       void unreference_trigger( Trigger* );

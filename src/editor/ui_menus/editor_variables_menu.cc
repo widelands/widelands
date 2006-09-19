@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,13 +97,9 @@ void New_Variable_Window::clicked(int i) {
 
    char buffer[256];
 
-   int n = 1;
-   while( 1 ) {
-	   snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
-      if( !m_parent->get_egbase()->get_map()->get_mvm()->get_variable( buffer ))
-         break;
-      ++n;
-   }
+	MapVariableManager & mvm = m_parent->get_egbase()->get_map()->get_mvm();
+	for (uint n = 1; mvm.get_variable(buffer); ++n)
+		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
 
    std::string name = buffer;
    switch( i ) {
@@ -111,7 +107,7 @@ void New_Variable_Window::clicked(int i) {
          // Integer
          m_variable = new Int_MapVariable( 0 );
          m_variable->set_name( buffer);
-         m_parent->get_egbase()->get_map()->get_mvm()->register_new_variable( m_variable );
+         mvm.register_new_variable(m_variable);
          end_modal(1);
          break;
 
@@ -119,7 +115,7 @@ void New_Variable_Window::clicked(int i) {
          // String
          m_variable = new String_MapVariable( 0 );
          m_variable->set_name( buffer);
-         m_parent->get_egbase()->get_map()->get_mvm()->register_new_variable( m_variable );
+         mvm.register_new_variable(m_variable);
          end_modal(1);
          break;
 
@@ -292,10 +288,11 @@ Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UIUniqu
    m_delete_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
 
    // Add all variables
-   MapVariableManager* mvm = m_parent->get_egbase()->get_map()->get_mvm();
-   for(int i = 0; i < mvm->get_nr_variables(); i++) {
-      insert_variable( mvm->get_variable_by_nr( i ));
-   }
+	const MapVariableManager & mvm =
+		m_parent->get_egbase()->get_map()->get_mvm();
+	const MapVariableManager::Index nr_variables = mvm.get_nr_variables();
+	for (MapVariableManager::Index i = 0; i < nr_variables; ++i)
+		insert_variable(mvm.get_variable_by_nr(i));
 
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
@@ -323,7 +320,7 @@ void Editor_Variables_Menu::clicked( int n ) {
          // Create a new variable
          New_Variable_Window* nvw = new New_Variable_Window( m_parent );
          if( nvw->run() ) {
-            insert_variable( nvw->get_variable() );
+            insert_variable(*nvw->get_variable());
             clicked(1);
          }
          delete nvw;
@@ -349,7 +346,7 @@ void Editor_Variables_Menu::clicked( int n ) {
          // Otherwise, delete button should be disabled
          assert( !mv->is_delete_protected());
 
-         m_parent->get_egbase()->get_map()->get_mvm()->delete_variable( mv->get_name() );
+         m_parent->get_egbase()->get_map()->get_mvm().delete_variable(mv->get_name());
          m_table->remove_entry( n );
          m_table->sort();
 
@@ -384,40 +381,41 @@ void Editor_Variables_Menu::table_dblclicked( int ) {
 /*
  * Insert this map variable into the table
  */
-void Editor_Variables_Menu::insert_variable( MapVariable* var ) {
+void Editor_Variables_Menu::insert_variable(MapVariable & var) {
    const char* pic = 0;
 
-   switch( var->get_type() ) {
+	const MapVariable::Type type = var.get_type();
+	switch (type) {
       case MapVariable::MVT_INT: pic = "pics/map_variable_int.png"; break;
       case MapVariable::MVT_STRING: pic = "pics/map_variable_string.png"; break;
       default: pic = "nothing";
    };
 
-   UITable_Entry* t = new UITable_Entry(m_table, var, g_gr->get_picture( PicMod_UI, pic ), true );
-   t->set_string(0, var->get_name());
+	UITable_Entry & t = *new UITable_Entry
+		(m_table, &var, g_gr->get_picture(PicMod_UI, pic), true);
+	t.set_string(0, var.get_name());
 
    std::string val;
 
-   switch( var->get_type() ) {
+	switch (type) {
       case MapVariable::MVT_INT:
       {
          char buffer[256];
-         snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable*>(var)->get_value());
+         snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable &>(var).get_value());
          val = buffer;
       }
       break;
 
       case MapVariable::MVT_STRING:
-      val = static_cast<String_MapVariable*>(var)->get_value();
+      val = static_cast<String_MapVariable &>(var).get_value();
       break;
 
       default: val = "";
    }
-   t->set_string(0, var->get_name());
-   t->set_string(1, val.c_str());
+	t.set_string(0, var.get_name());
+	t.set_string(1, val.c_str());
 
-   if( var->is_delete_protected())
-      t->set_color(RGBColor(255,0,0));
+	if (var.is_delete_protected()) t.set_color(RGBColor(255,0,0));
 
    m_table->sort();
 }

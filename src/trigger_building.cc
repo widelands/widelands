@@ -73,13 +73,13 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
    throw wexception("Building Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
-void Trigger_Building::Write(Section* s) {
-	s->set_int   ("version",  TRIGGER_VERSION);
-	s->set_Coords("point",    m_pt);
-	s->set_int   ("area",     get_area());
-	s->set_int   ("player",   get_player());
-	s->set_int   ("count",    get_building_count());
-	s->set_string("building", m_building.c_str());
+void Trigger_Building::Write(Section & s) const {
+	s.set_int   ("version",  TRIGGER_VERSION);
+	s.set_Coords("point",    m_pt);
+	s.set_int   ("area",     get_area());
+	s.set_int   ("player",   get_player());
+	s.set_int   ("count",    get_building_count());
+	s.set_string("building", m_building.c_str());
 }
 
 /*
@@ -112,11 +112,12 @@ void Trigger_Building::check_set_conditions(Game* game) {
    if(count>=m_count) set_trigger(true);
 
    // Set MapVariable inttemp
-   Int_MapVariable* inttemp = game->get_map()->get_mvm()->get_int_variable( "inttemp" );
+	MapVariableManager & mvm = game->get_map()->get_mvm();
+	Int_MapVariable * inttemp = mvm.get_int_variable("inttemp");
    if( !inttemp ) {
       inttemp = new Int_MapVariable( false );
       inttemp->set_name( "inttemp" );
-      game->get_map()->get_mvm()->register_new_variable( inttemp );
+      mvm.register_new_variable(inttemp);
    }
    inttemp->set_value( count );
 

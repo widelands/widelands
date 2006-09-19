@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,8 @@ void EventChain::add_event( Event* ev ) {
    ev->reference( this );
 }
 
+#include "cmd_check_eventchain.h"
+
 /*
  * Check trigger cmd
  */
@@ -94,7 +96,10 @@ void Cmd_CheckEventChain::execute (Game* g)
 
 	log("Event Chain: looking if check is needed for eventchain %i\n", m_eventchain_id);
 
-   if(m_eventchain_id >= g->get_map()->get_mecm()->get_nr_eventchains()) {
+	const Map & map = *g->get_map();
+	MapEventChainManager & mecm = map.get_mecm();
+	MapEventChainManager::Index nr_eventchains = mecm.get_nr_eventchains();
+	if (m_eventchain_id >= nr_eventchains) {
       // either we wrapped around the end of all eventchains
       // if so, restart. if there are no eventchains at all,
       // requeue in about 30 seconds to check if this state has changed
@@ -102,27 +107,23 @@ void Cmd_CheckEventChain::execute (Game* g)
       // of the game and should not harm at all, and 30seconds means nearly no CPU time
       // for non trigger games)
 
-      if (g->get_map()->get_mecm()->get_nr_eventchains())
-         m_eventchain_id=0;
-      else {
-         g->enqueue_command (
-               new Cmd_CheckEventChain(g->get_gametime() + 30000, -1));
-         return;
-      }
+		if (nr_eventchains) m_eventchain_id = 0;
+		else
+			return g->enqueue_command
+			(new Cmd_CheckEventChain(g->get_gametime() + 30000, -1));
    }
 
-	EventChain* evchain=g->get_map()->get_mecm()->get_eventchain_by_nr(m_eventchain_id);
-	assert( evchain );
+	EventChain & evchain = mecm.get_eventchain_by_nr(m_eventchain_id);
 
-   log("Eventchain %s is going to get checked!\n", evchain->get_name());
+	log("Eventchain %s is going to get checked!\n", evchain.get_name());
 
-   switch( evchain->get_state() ) {
+	switch (evchain.get_state()) {
       case EventChain::INIT:
       {
          // This is initialized, look if it needs running
-         if( evchain->get_trigcond()->eval( g ) ) {
+         if (evchain.get_trigcond()->eval(g)) {
             // Hooray, we can start the shit off
-            evchain->run( g );
+            evchain.run(g);
          }
       }
       break;
@@ -130,7 +131,7 @@ void Cmd_CheckEventChain::execute (Game* g)
       case EventChain::RUNNING:
       {
          // This chain is currently running. Continue to run it
-         evchain->run( g );
+         evchain.run(g);
       }
       break;
 
@@ -142,14 +143,15 @@ void Cmd_CheckEventChain::execute (Game* g)
       break;
    }
 
-   if( evchain->get_state() == EventChain::DONE ) {
-      g->get_map()->get_mecm()->delete_eventchain( evchain->get_name() );
-      g->get_map()->get_mem()->delete_unreferenced_events();
-      g->get_map()->get_mtm()->delete_unreferenced_triggers();
+	if (evchain.get_state() == EventChain::DONE) {
+		mecm.delete_eventchain(evchain.get_name());
+		nr_eventchains = mecm.get_nr_eventchains();
+		map.get_mem().delete_unreferenced_events();
+		map.get_mtm().delete_unreferenced_triggers();
    }
 
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds
-	int delay=g->get_map()->get_mecm()->get_nr_eventchains() ? 1000/g->get_map()->get_mecm()->get_nr_eventchains() : 30000;
+	const int delay = nr_eventchains ? 1000 / nr_eventchains : 30000;
    log("Queueing recheck in %i milli-seconds\n", delay);
 
    g->enqueue_command (new Cmd_CheckEventChain(g->get_gametime() + delay, m_eventchain_id));

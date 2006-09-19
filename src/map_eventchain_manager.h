@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,11 +55,14 @@ class MapEventChainManager {
       EventChain* get_eventchain( const char* name );
       void delete_eventchain( const char* name );
 
-      inline int get_nr_eventchains( void ) { return m_eventchains.size(); }
-      inline EventChain* get_eventchain_by_nr( int i ) { assert(i < (int)m_eventchains.size()); return m_eventchains[i]; }
+	typedef std::vector<EventChain *> eventchain_vector;
+	typedef eventchain_vector::size_type Index;
+	Index get_nr_eventchains() const {return m_eventchains.size();}
+	EventChain & get_eventchain_by_nr(const Index i) const
+	{assert(i < m_eventchains.size()); return *m_eventchains[i];}
 
    private:
-      std::vector<EventChain*>      m_eventchains;
+	eventchain_vector m_eventchains;
 };
 
 #endif

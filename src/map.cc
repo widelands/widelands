@@ -43,7 +43,7 @@ std::string g_MapVariableCallback( std::string str, void* data ) {
    if(!map)
       return (std::string("UNKNOWN:") + str ).c_str();
 
-   MapVariable* var = map->get_mvm()->get_variable(str.c_str());
+	MapVariable * const var = map->get_mvm().get_variable(str.c_str());
    if(!var)
       return (std::string("UNKNOWN:") + str ).c_str();
    else
@@ -394,12 +394,16 @@ void Map::cleanup(void) {
    delete m_mom;
    m_mom = new MapObjectiveManager();
 
-   while( get_mecm()->get_nr_eventchains() )
-      get_mecm()->delete_eventchain( get_mecm()->get_eventchain_by_nr( 0 )->get_name() );
-   get_mem()->delete_unreferenced_events();
-   get_mtm()->delete_unreferenced_triggers();
+	{
+		MapEventChainManager & mecm = *m_mecm;
+		while (mecm.get_nr_eventchains())
+			mecm.delete_eventchain(mecm.get_eventchain_by_nr(0).get_name());
+	}
+	m_mem->delete_unreferenced_events();
+	m_mtm->delete_unreferenced_triggers();
 
-   assert(!get_mtm()->get_nr_triggers() && !get_mem()->get_nr_events());
+	assert(m_mtm->get_nr_triggers() == 0);
+	assert(m_mem->get_nr_events  () == 0);
 
    delete m_mvm;
    m_mvm = new MapVariableManager();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
    int version=s->get_safe_int("version");
    if(version == EVENT_VERSION) {
       std::string name = s->get_safe_string("objective");
-      MapObjective* obj = egbase->get_map()->get_mom()->get_objective( name.c_str() );
+      MapObjective * const obj = egbase->get_map()->get_mom().get_objective(name.c_str());
       if( !obj ) {
          throw wexception("Unhide Objective event with unknown objecive %s in map!\n", name.c_str());
       }
@@ -66,16 +66,12 @@ void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
    throw wexception("Unhide Objective Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Unhide_Objective::Write(Section* s, Editor_Game_Base *egbase) {
+void Event_Unhide_Objective::Write(Section & s, const Editor_Game_Base &) const
+{
    assert( m_objective );
-
-   // the version
-   s->set_int("version", EVENT_VERSION);
-
-   // Point
-   s->set_string("objective", m_objective->get_name());
-   s->set_bool("dounhide", get_dounhide());
-   // done
+	s.set_int   ("version",  EVENT_VERSION);
+	s.set_string("objective", m_objective->get_name());
+	s.set_bool  ("dounhide",  get_dounhide());
 }
 
 /*

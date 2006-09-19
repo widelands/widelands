@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,8 @@ void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
       // might not be there
       return;
    }
-   MapObjectiveManager* mom = egbase->get_map()->get_mom();
+	MapObjectiveManager & mom = egbase->get_map()->get_mom();
+	MapTriggerManager   & mtm = egbase->get_map()->get_mtm();
 
    Section* s = prof.get_section( "global" );
 
@@ -66,12 +67,12 @@ void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
          o->set_is_optional( s->get_safe_bool("optional"));
 
          const char* trigname = s->get_safe_string("trigger");
-         Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( trigname );
+         Trigger * const trig = mtm.get_trigger(trigname);
          if( !trig )
             throw wexception("Unknown trigger referenced in Objective: %s\n", trigname );
          o->set_trigger( static_cast<Trigger_Null*>(trig) ); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
 
-         mom->register_new_objective( o );
+         mom.register_new_objective(o);
       }
       return;
    }
@@ -83,24 +84,21 @@ void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
  * Write Function
  */
 void Widelands_Map_Objective_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   MapObjectiveManager* mom = egbase->get_map()->get_mom();
-
    Profile prof;
-   Section* s = prof.create_section("global");
-
-   // packet version
-   s->set_int("packet_version", CURRENT_PACKET_VERSION);
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
    // Write all the objectives out
-   for(int i=0; i < mom->get_nr_objectives(); i++) {
-      MapObjective* o = mom->get_objective_by_nr(i);
-      s = prof.create_section( o->get_name() );
-      s->set_string("descr", o->get_descr() );
-      s->set_bool("visible", o->get_is_visible());
-      s->set_bool("optional", o->get_is_optional());
-      Trigger_Null* trig = o->get_trigger();
-      assert( trig );
-      s->set_string("trigger", trig->get_name());
+	const MapObjectiveManager & mom = egbase->get_map()->get_mom();
+	const MapObjectiveManager::Index nr_objectives =
+		mom.get_nr_objectives();
+	for (MapObjectiveManager::Index i = 0; i < nr_objectives; ++i) {
+		const MapObjective & o = mom.get_objective_by_nr(i);
+		Section & s = *prof.create_section(o.get_name());
+		s.set_string("descr",    o.get_descr());
+		s.set_bool  ("visible",  o.get_is_visible());
+		s.set_bool  ("optional", o.get_is_optional());
+		s.set_string("trigger",  o.get_trigger()->get_name());
    }
 
    prof.write("objective", false, fs );

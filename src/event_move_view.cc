@@ -64,9 +64,9 @@ void Event_Move_View::Read(Section* s, Editor_Game_Base* egbase) {
    throw wexception("Move View Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Move_View::Write(Section* s, Editor_Game_Base *egbase) {
-	s->set_int   ("version", EVENT_VERSION);
-	s->set_Coords("point",   m_pt);
+void Event_Move_View::Write(Section & s, const Editor_Game_Base &) const {
+	s.set_int   ("version", EVENT_VERSION);
+	s.set_Coords("point",   m_pt);
 }
 
 /*

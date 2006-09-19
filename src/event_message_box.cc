@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,9 +76,8 @@ void Event_Message_Box::set_nr_buttons(int i) {
    for(uint i=oldsize; i<m_buttons.size(); i++)
       m_buttons[i].trigger=0;
 }
-int Event_Message_Box::get_nr_buttons(void) {
-   return m_buttons.size();
-}
+
+
 void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t) {
    assert(i<get_nr_buttons());
    if(m_buttons[i].trigger==t) return;
@@ -132,7 +131,7 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
 
          if( trigger ) {
             sprintf( buf, "button_%02i_trigger", i );
-            Trigger* t =  egbase->get_map()->get_mtm()->get_trigger( s->get_safe_string( buf ) ); // Hopefully it is a null trigger
+            Trigger * const t = egbase->get_map()->get_mtm().get_trigger(s->get_safe_string(buf)); // Hopefully it is a null trigger
             set_button_trigger( i, static_cast<Trigger_Null*>(t));
          } else
             set_button_trigger( i, 0);
@@ -142,40 +141,28 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
    throw wexception("Unknown Version in Event_Message_Box::Read: %i\n", version );
 }
 
-void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
-    // Set Version
-    fs->set_int( "version", EVENT_VERSION );
+void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
+	s.set_int   ("version",           EVENT_VERSION);
+	s.set_string("text",              m_text.c_str());
+	s.set_string("window_title",      m_window_title.c_str());
+	s.set_bool  ("is_modal",          get_is_modal());
+	s.set_int   ("number_of_buttons", get_nr_buttons());
+	s.set_int   ("width",             get_w());
+	s.set_int   ("height",            get_h());
+	s.set_int   ("posx",              get_posx());
+	s.set_int   ("posy",              get_posy());
 
-    // Set Text
-    fs->set_string( "text", m_text.c_str() );
-
-    // Window Title
-    fs->set_string( "window_title", m_window_title.c_str() );
-
-    // is modal
-    fs->set_bool( "is_modal", get_is_modal());
-
-   // Number of buttons
-   fs->set_int( "number_of_buttons", get_nr_buttons());
-
-   // Dimension, positions
-   fs->set_int("width", get_w() );
-   fs->set_int("height", get_h() );
-   fs->set_int("posx", get_posx());
-   fs->set_int("posy", get_posy());
-
-   int i=0;
    char buf[256];
-   for(i=0; i<get_nr_buttons(); i++) {
+	for (int i=0; i < get_nr_buttons(); ++i) {
       sprintf( buf, "button_%02i_name", i );
-      fs->set_string( buf, m_buttons[i].name.c_str() );
+		s.set_string(buf, m_buttons[i].name.c_str());
 
 
       sprintf( buf, "button_%02i_has_trigger", i );
-      fs->set_bool( buf, m_buttons[i].trigger == 0 ? 0 : 1  );
+		s.set_bool(buf, m_buttons[i].trigger == 0 ? 0 : 1);
       if(m_buttons[i].trigger) {
          sprintf( buf, "button_%02i_trigger", i );
-         fs->set_string( buf, m_buttons[i].trigger->get_name() );
+			s.set_string(buf, m_buttons[i].trigger->get_name());
       }
    }
 }

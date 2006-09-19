@@ -18,6 +18,7 @@
  */
 
 #include "cmd_queue.h"
+#include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "event_chain.h"
 #include "interactive_player.h"
@@ -316,8 +317,8 @@ bool Game::run(bool is_savegame)
 
       // Prepare the map, set default textures
       get_map()->recalc_default_resources();
-      get_map()->get_mem()->delete_unreferenced_events();
-      get_map()->get_mtm()->delete_unreferenced_triggers();
+      get_map()->get_mem().delete_unreferenced_events();
+      get_map()->get_mtm().delete_unreferenced_triggers();
 
       // Finally, set the scenario names and tribes to represent
       // the correct names of the players

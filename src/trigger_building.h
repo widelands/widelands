@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,25 +34,25 @@ class Trigger_Building : public Trigger {
       ~Trigger_Building();
 
       // one liner functions
-      const char* get_id(void) { return "building"; }
+	const char * get_id() const {return "building";}
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
 
       // File Functions
-      void Write(Section*);
+	void Write(Section &) const;
       void Read(Section*, Editor_Game_Base*);
 
       inline void set_coords(Coords pt) { m_pt=pt; }
-      inline Coords get_coords(void) { return m_pt; }
-      inline int get_player(void) { return m_player; }
+	Coords get_coords() const {return m_pt;}
+	int get_player() const {return m_player;}
       inline void set_player(int i) { m_player=i; }
-      inline int get_area(void) { return m_area; }
+	int get_area() const {return m_area;}
       inline void set_area(int i) { m_area=i; }
-      const char* get_building(void) { return m_building.c_str(); }
+	const char* get_building() const {return m_building.c_str();}
       void set_building(const char* b) { m_building=b; }
       void set_building_count(int n) { m_count=n; }
-      int get_building_count(void) { return m_count; }
+	int get_building_count() const {return m_count;}
 
    private:
       Coords m_pt;

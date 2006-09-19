@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,7 @@ void Widelands_Map_Event_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egb
          else if( state == "done") e->m_state = Event::DONE;
 
          e->Read( s, egbase );
-         egbase->get_map()->get_mem()->register_new_event( e );
+         egbase->get_map()->get_mem().register_new_event(e);
       }
       return;
    }
@@ -81,22 +81,22 @@ void Widelands_Map_Event_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egb
  */
 void Widelands_Map_Event_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    Profile prof;
-   Section* s = prof.create_section( "global" );
-
-   s->set_int("packet_version", CURRENT_PACKET_VERSION );
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now write all the events
-   Map* map = egbase->get_map();
-   for(int i=0; i<map->get_mem()->get_nr_events(); i++) {
-      Event* e = map->get_mem()->get_event_by_nr(i);
-      s = prof.create_section( e->get_name());
-      s->set_string("type", e->get_id());
-      switch( e->m_state ) {
-         case Event::INIT: s->set_string("state", "init"); break;
-         case Event::RUNNING: s->set_string("state", "running"); break;
-         case Event::DONE: s->set_string("state", "done"); break;
+	const MapEventManager & mem = egbase->get_map()->get_mem();
+	const MapEventManager::Index nr_events = mem.get_nr_events();
+	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
+		const Event & e = mem.get_event_by_nr(i);
+		Section & s = *prof.create_section(e.get_name());
+		s.set_string("type", e.get_id());
+		switch (e.m_state) {
+		case Event::INIT:    s.set_string("state", "init");    break;
+		case Event::RUNNING: s.set_string("state", "running"); break;
+		case Event::DONE:    s.set_string("state", "done");    break;
       }
-      e->Write(s, egbase);
+		e.Write(s, *egbase);
    }
 
    prof.write("event", false, fs );

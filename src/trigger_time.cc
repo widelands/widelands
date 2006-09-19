@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,17 +54,10 @@ void Trigger_Time::Read(Section* s, Editor_Game_Base* ) {
    throw wexception("Time Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
-void Trigger_Time::Write(Section* s) {
-   // version
-   s->set_int( "version", TRIGGER_VERSION );
-
-   // Wait time
-   s->set_int( "wait_time", m_wait_time );
-
-   // Last start time
-   s->set_int( "last_start_time", m_last_start_time);
-
-   // done
+void Trigger_Time::Write(Section & s) const {
+	s.set_int("version",         TRIGGER_VERSION);
+	s.set_int("wait_time",       m_wait_time);
+	s.set_int("last_start_time", m_last_start_time);
 }
 
 /*

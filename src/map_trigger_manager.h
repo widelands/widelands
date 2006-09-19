@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,11 +59,14 @@ class MapTriggerManager {
       Trigger* get_trigger( const char* name );
       void delete_trigger( const char* name );
 
-      inline int get_nr_triggers( void ) { return m_triggers.size(); }
-      inline Trigger* get_trigger_by_nr( int i ) { assert(i < (int)m_triggers.size()); return m_triggers[i]; }
+	typedef std::vector<Trigger *> trigger_vector;
+	typedef trigger_vector::size_type Index;
+	Index get_nr_triggers() const {return m_triggers.size();}
+	Trigger & get_trigger_by_nr(const Index i) const
+	{assert(i < m_triggers.size()); return *m_triggers[i];}
 
    private:
-      std::vector<Trigger*>      m_triggers;
+	trigger_vector      m_triggers;
 };
 
 #endif

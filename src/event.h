@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,14 +53,14 @@ class Event {
       // virtual functions, implemented by the real events
       virtual State run( Game* )       = 0;
       virtual void reinitialize(Game*) = 0;             // can be overwritten to reintialize stuff in the child class
-      virtual const char* get_id(void)        = 0; // this function is needed to recreate the correct option window
+	virtual const char * get_id() const = 0; // this function is needed to recreate the correct option window
 
       // Functions needed by all
       void set_name(const char* name) { m_name = name; }
-      inline const char* get_name() { return m_name.c_str(); }
+	const char * get_name() const {return m_name.c_str();}
 
       // File functions, to save or load this event
-      virtual void Write(Section*, Editor_Game_Base*)=0;
+	virtual void Write(Section &, const Editor_Game_Base &) const = 0;
       virtual void Read(Section*, Editor_Game_Base*)=0;
 
       // Reference this event

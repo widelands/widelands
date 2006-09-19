@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,10 +35,13 @@
 #include "trigger_null.h"
 #include "util.h"
 
-Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
-   UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu").c_str()) {
-   m_parent=parent;
-   m_event=event;
+Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
+(Editor_Interactive* parent, Event_Message_Box* event)
+:
+UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu").c_str()),
+m_event(event),
+m_parent(parent)
+{
 
    // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, _("Message Box Event Options"), Align_Left);
@@ -131,11 +134,10 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
 
-   int i=0;
-   for(i=0; i<m_parent->get_map()->get_mtm()->get_nr_triggers(); i++) {
-      Trigger* trig=m_parent->get_map()->get_mtm()->get_trigger_by_nr(i);
-      std::string trigid = trig->get_id();
-      if( trigid =="null" )
+	const MapTriggerManager & mtm = m_parent->get_map()->get_mtm();
+	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
+	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
+		if (strcmp(mtm.get_trigger_by_nr(i).get_id(), "null") == 0)
          m_null_triggers.push_back(i);
    }
 
@@ -144,9 +146,9 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
       for(int j=0; j<((int)m_null_triggers.size()); j++) {
          // Get this triggers index
          int foundidx = -1;
-         for(int trigidx=0; trigidx < m_parent->get_map()->get_mtm()->get_nr_triggers(); trigidx++)
-            if(m_parent->get_map()->get_mtm()->get_trigger_by_nr(trigidx) == m_event->get_button_trigger(i)) {
-               foundidx = trigidx;
+         for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
+            if (&mtm.get_trigger_by_nr(x) == m_event->get_button_trigger(i)) {
+               foundidx = x;
                break;
             }
 
@@ -204,10 +206,16 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
                m_event->set_window_title( m_window_title->get_text() );
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
+            const MapTriggerManager & mtm =
+               m_parent->get_map()->get_mtm();
             for(int i=0; i<m_nr_buttons; i++) {
                m_event->set_button_name(i, m_buttons[i].name);
                if(m_buttons[i].trigger!=-1) {
-                  m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[i].trigger])));
+                  m_event->set_button_trigger
+                     (i,
+                      static_cast<Trigger_Null*>
+                      (&mtm.get_trigger_by_nr
+                       (m_null_triggers[m_buttons[i].trigger])));
                } else {
                   m_event->set_button_trigger(i, 0);
                }
@@ -284,7 +292,7 @@ void Event_Message_Box_Option_Menu::update(void) {
       if(m_buttons[m_ls_selected].trigger==-1)
          m_current_trigger_ta->set_text("none");
       else
-         m_current_trigger_ta->set_text( m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name());
+         m_current_trigger_ta->set_text( m_parent->get_map()->get_mtm().get_trigger_by_nr(m_null_triggers[m_buttons[m_ls_selected].trigger]).get_name());
    } else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;

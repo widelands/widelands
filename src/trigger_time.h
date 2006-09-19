@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,18 +32,18 @@ class Trigger_Time : public Trigger {
       ~Trigger_Time();
 
       // one liner functions
-      const char* get_id(void) { return "time"; }
+	const char * get_id() const {return "time";}
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
 
       // File Functions
-      void Write(Section*);
+	void Write(Section &) const;
       void Read(Section*, Editor_Game_Base*);
 
       inline void set_wait_time(int i) { m_wait_time=i; }
       inline void set_last_start_time(int i) { m_last_start_time = i; }
-      inline int get_wait_time(void) { return m_wait_time; }
+	int get_wait_time() const {return m_wait_time;}
 
    private:
       ulong m_wait_time; // in seconds

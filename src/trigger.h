@@ -43,7 +43,7 @@ class Trigger {
 
       // virtual functions, implemented by the real triggers
       virtual void check_set_conditions(Game*) = 0;
-      virtual const char* get_id(void) = 0; // this function is needed to recreate the correct option window
+	virtual const char * get_id() const = 0; // this function is needed to recreate the correct option window
 
       // Toggle the triggers state (if it isn't a one timer)
       // and give it a chance to reinitialize
@@ -51,11 +51,11 @@ class Trigger {
 
       // Functions needed by all
       void set_name(const char* name) { m_name=name; }
-      inline const char* get_name() { return m_name.c_str(); }
-      inline bool is_set(void) { return m_is_set; }
+	const char * get_name() const {return m_name.c_str();}
+	bool is_set() const {return m_is_set;}
 
       // File functions, to save or load this trigger
-      virtual void Write(Section*) = 0;
+	virtual void Write(Section &) const = 0;
       virtual void Read(Section*, Editor_Game_Base*) = 0;
 
       // Reference this event

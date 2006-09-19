@@ -79,11 +79,11 @@ void Event_Conquer_Area::Read(Section* s, Editor_Game_Base* egbase) {
 }
 
 
-void Event_Conquer_Area::Write(Section* s, Editor_Game_Base *egbase) {
-	s->set_int   ("version", EVENT_VERSION);
-	s->set_Coords("point",   m_pt);
-	s->set_int   ("area",    get_area());
-	s->set_int   ("player",  get_player());
+void Event_Conquer_Area::Write(Section & s, const Editor_Game_Base &) const {
+	s.set_int   ("version", EVENT_VERSION);
+	s.set_Coords("point",   m_pt);
+	s.set_int   ("area",    get_area());
+	s.set_int   ("player",  get_player());
 }
 
 /*

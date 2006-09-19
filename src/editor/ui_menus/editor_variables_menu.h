@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ class Editor_Variables_Menu : public UIUniqueWindow {
       UIButton           *m_delete_button;
 
    private:
-      void insert_variable( MapVariable* );
+	void insert_variable(MapVariable &);
       void clicked( int );
       void table_selected( int );
       void table_dblclicked( int );

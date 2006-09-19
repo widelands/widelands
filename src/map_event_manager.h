@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,11 +59,14 @@ class MapEventManager {
        */
       void delete_unreferenced_events( void );
 
-      inline int get_nr_events( void ) { return m_events.size(); }
-      inline Event* get_event_by_nr( int i ) { assert(i < (int)m_events.size()); return m_events[i]; }
+	typedef std::vector<Event *> event_vector;
+	typedef event_vector::size_type Index;
+	Index get_nr_events() const {return m_events.size();}
+	Event & get_event_by_nr(const Index i) const
+	{assert(i < m_events.size()); return *m_events[i];}
 
    private:
-      std::vector<Event*>      m_events;
+	event_vector m_events;
 };
 
 #endif

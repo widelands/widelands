@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,13 +35,13 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
       ~Event_Set_Null_Trigger();
 
       // one liner functions
-      const char* get_id(void) { return "set_null_trigger"; }
+	const char * get_id() const {return "set_null_trigger";}
 
       State run(Game*);
       virtual void reinitialize(Game*);
 
       // File Functions
-      void Write(Section*, Editor_Game_Base*);
+	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
       inline void set_trigger( Trigger_Null* trig ) {
@@ -53,11 +53,11 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
       }
       inline Trigger_Null* get_trigger( void ) { return m_trigger; }
       inline void set_setto( bool t ) { m_setto = t; }
-      inline bool get_setto( void ) { return m_setto; }
+	bool get_setto() const {return m_setto;}
 
       // For Trigger referencer
-      const char* get_name( ) { return Event::get_name(); }
-      const char* get_type() { return "Event Set Null Trigger"; }
+	const char* get_name() const {return Event::get_name();}
+	const char* get_type() const {return "Event Set Null Trigger";}
 
    private:
       Trigger_Null* m_trigger;

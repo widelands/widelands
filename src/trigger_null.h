@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,13 +32,13 @@ class Trigger_Null : public Trigger {
       ~Trigger_Null();
 
       // one liner functions
-      const char* get_id(void) { return "null"; }
+	const char * get_id() const {return "null";}
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
 
       // File Functions
-      void Write(Section*);
+	void Write(Section &) const;
       void Read(Section*, Editor_Game_Base*);
 
       void set_trigger_manually(bool t) { m_should_toggle=true; m_value=t; }

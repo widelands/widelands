@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,8 +58,8 @@ class EventChain : public EventReferencer, public TriggerReferencer {
       }
       virtual ~EventChain( void ) { }
 
-      const char* get_name( void ) { return m_name.c_str(); }
-      const char* get_type( void ) { return "EventChain"; }
+	const char * get_name() const {return m_name.c_str();}
+	const char * get_type() const {return "EventChain";}
       inline void set_name( const char* name ) { m_name = name; }
       inline bool get_repeating( void ) { return m_repeating; }
       inline TriggerConditional* get_trigcond( void ) { return m_trigconditional; }
@@ -82,30 +82,13 @@ class EventChain : public EventReferencer, public TriggerReferencer {
       std::string        m_name;
       bool                m_repeating;
       TriggerConditional* m_trigconditional;
-      std::vector<Event*> m_events;
+	typedef std::vector<Event*> event_vector;
+	event_vector m_events;
 
       // For running
       uint                m_curevent;
       State               m_state;
 
 };
-
-class Cmd_CheckEventChain :public BaseCommand {
-    private:
-	int m_eventchain_id;
-
-    public:
-   Cmd_CheckEventChain(void) : BaseCommand(0) { } // For savegame loading
-	Cmd_CheckEventChain (int, int);
-
-   // Write these commands to a file (for savegames)
-   virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-   virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-
-   virtual int get_id(void) { return QUEUE_CMD_CHECK_EVENTCHAIN; } // Get this command id
-
-	virtual void execute (Game*);
-};
-
 
 #endif

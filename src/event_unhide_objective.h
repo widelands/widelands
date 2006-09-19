@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,19 +34,19 @@ class Event_Unhide_Objective : public Event {
       ~Event_Unhide_Objective();
 
       // one liner functions
-      const char* get_id(void) { return "unhide_objective"; }
+	const char * get_id() const {return "unhide_objective";}
 
       State run(Game*);
       virtual void reinitialize(Game*);
 
       // File Functions
-      void Write(Section*, Editor_Game_Base*);
+	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
       inline void set_objective(MapObjective* objective) { m_objective=objective; }
       inline MapObjective* get_objective(void) { return m_objective; }
       inline void set_dounhide( bool t ) { m_dounhide=t; }
-      inline bool get_dounhide( void ) {  return m_dounhide; }
+	bool get_dounhide() const {return m_dounhide;}
 
    private:
       MapObjective* m_objective;

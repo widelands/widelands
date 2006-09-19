@@ -77,11 +77,11 @@ void Event_Unhide_Area::Read(Section* s, Editor_Game_Base* egbase) {
    throw wexception("Unhide Area Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Unhide_Area::Write(Section* s, Editor_Game_Base *egbase) {
-	s->set_int   ("version", EVENT_VERSION);
-	s->set_Coords("point",   m_pt);
-	s->set_int   ("area",    get_area());
-	s->set_int   ("player",  get_player());
+void Event_Unhide_Area::Write(Section & s, const Editor_Game_Base &) const {
+	s.set_int   ("version", EVENT_VERSION);
+	s.set_Coords("point",   m_pt);
+	s.set_int   ("area",    get_area());
+	s.set_int   ("player",  get_player());
 }
 
 /*

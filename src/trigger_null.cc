@@ -52,11 +52,8 @@ void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
    throw wexception("Null Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
-void Trigger_Null::Write(Section* s) {
-   // version
-   s->set_int( "version", TRIGGER_VERSION );
-   // done
-}
+void Trigger_Null::Write(Section & s) const
+{s.set_int("version", TRIGGER_VERSION);}
 
 /*
  * check if trigger conditions are done

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,10 @@
 #include "util.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
-   UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()) {
-
-   m_parent=parent;
-   m_event_chain = chain;
+UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
+m_parent(parent),
+m_event_chain(chain)
+{
 
    // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, _("Edit Event Chain Menu"), Align_Left);
@@ -113,9 +113,11 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    m_available_events=new UIListselect(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
-   for(int i=0; i < parent->get_egbase()->get_map()->get_mem()->get_nr_events(); i++) {
-      Event* ev = parent->get_egbase()->get_map()->get_mem()->get_event_by_nr(i);
-      m_available_events->add_entry( ev->get_name(), ev);
+	const MapEventManager & mem = parent->get_egbase()->get_map()->get_mem();
+	const MapEventManager::Index nr_events = mem.get_nr_events();
+	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
+		Event & ev = mem.get_event_by_nr(i);
+		m_available_events->add_entry(ev.get_name(), &ev);
    }
    m_available_events->sort();
 

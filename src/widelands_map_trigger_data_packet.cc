@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
          t->set_trigger( set );
          t->Read( s, egbase );
 
-         egbase->get_map()->get_mtm()->register_new_trigger( t );
+         egbase->get_map()->get_mtm().register_new_trigger( t );
       }
       return;
    }
@@ -80,18 +80,18 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
 void Widelands_Map_Trigger_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
 
    Profile prof;
-   Section* s = prof.create_section( "global" );
-
-   s->set_int("packet_version", CURRENT_PACKET_VERSION );
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now write all the triggers
-   Map* map = egbase->get_map();
-   for(int i=0; i<map->get_mtm()->get_nr_triggers(); i++) {
-      Trigger* t = map->get_mtm()->get_trigger_by_nr(i);
-      s = prof.create_section( t->get_name());
-      s->set_string("type", t->get_id());
-      s->set_bool("set", t->is_set());
-      t->Write(s);
+	const MapTriggerManager & mtm = egbase->get_map()->get_mtm();
+	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
+	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
+		const Trigger & t = mtm.get_trigger_by_nr(i);
+      Section & s = *prof.create_section(t.get_name());
+      s.set_string("type", t.get_id());
+      s.set_bool  ("set",  t.is_set());
+      t.Write(s);
    }
 
    prof.write("trigger", false, fs );

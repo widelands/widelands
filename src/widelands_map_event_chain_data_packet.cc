@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
                tok.token = TriggerConditional_Factory::TRIGGER;
                sprintf(buf, "conditional_element_%02i_data", i);
                std::string trigname = s->get_safe_string( buf );
-               Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( trigname.c_str() );
+               Trigger * const trig = egbase->get_map()->get_mtm().get_trigger(trigname.c_str());
                if( !trig )
                   throw wexception( "Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
                tok.data = trig;
@@ -122,7 +122,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
          for( uint i = 0; i < nr_events; i++) {
             sprintf(buf, "event_%02i", i);
             std::string evname = s->get_safe_string( buf );
-            Event* event = egbase->get_map()->get_mem()->get_event( evname.c_str() );
+            Event * const event = egbase->get_map()->get_mem().get_event(evname.c_str());
             if( !event )
                throw wexception( "Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
             e->add_event( event );
@@ -137,7 +137,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
          else if( state == "running") e->m_state = EventChain::RUNNING;
          else if( state == "done") e->m_state = EventChain::DONE;
 
-         egbase->get_map()->get_mecm()->register_new_eventchain( e );
+         egbase->get_map()->get_mecm().register_new_eventchain(e);
       }
       return;
    }
@@ -149,20 +149,20 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
  */
 void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    Profile prof;
-   Section* s = prof.create_section( "global" );
-
-   s->set_int("packet_version", CURRENT_PACKET_VERSION );
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now write all the event chains
-   Map* map = egbase->get_map();
-   for(int i=0; i<map->get_mecm()->get_nr_eventchains(); i++) {
-      EventChain* e = map->get_mecm()->get_eventchain_by_nr(i);
-      s = prof.create_section( e->get_name());
-
-      s->set_bool( "repeating", e->m_repeating );
-
-      std::vector< TriggerConditional_Factory::Token >* toklist =  e->m_trigconditional->get_infix_tokenlist();
-      s->set_int("nr_conditional_element", toklist->size());
+	const MapEventChainManager & mecm = egbase->get_map()->get_mecm();
+	const MapEventChainManager::Index nr_eventchains =
+		mecm.get_nr_eventchains();
+	for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
+		const EventChain & e = mecm.get_eventchain_by_nr(i);
+		Section & s = *prof.create_section(e.get_name());
+		s.set_bool("repeating", e.m_repeating);
+		std::vector< TriggerConditional_Factory::Token >* toklist =
+			e.m_trigconditional->get_infix_tokenlist();
+		s.set_int("nr_conditional_element", toklist->size());
       char buf[256];
       for( uint i = 0; i < toklist->size(); i++) {
          TriggerConditional_Factory::Token tok = (*toklist)[i];
@@ -173,33 +173,33 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
                break;
 
             case TriggerConditional_Factory::TRIGGER:
-               s->set_string( buf, "trigger");
+               s.set_string(buf, "trigger");
                sprintf(buf, "conditional_element_%02i_data", i);
-               s->set_string( buf, static_cast<Trigger*>(tok.data)->get_name());
+               s.set_string(buf, static_cast<Trigger*>(tok.data)->get_name());
                break;
 
             case TriggerConditional_Factory::RPAREN:
-               s->set_string( buf, ")");
+               s.set_string(buf, ")");
                break;
 
             case TriggerConditional_Factory::LPAREN:
-               s->set_string( buf, "(");
+               s.set_string(buf, "(");
                break;
 
             case TriggerConditional_Factory::XOR:
-               s->set_string( buf, "XOR");
+               s.set_string(buf, "XOR");
                break;
 
             case TriggerConditional_Factory::OR:
-               s->set_string( buf, "OR");
+               s.set_string(buf, "OR");
                break;
 
             case TriggerConditional_Factory::AND:
-               s->set_string( buf, "AND");
+               s.set_string(buf, "AND");
                break;
 
             case TriggerConditional_Factory::NOT:
-               s->set_string( buf, "NOT");
+               s.set_string(buf, "NOT");
                break;
          }
       }
@@ -207,20 +207,22 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
 
 
       // Events
-      s->set_int( "nr_events", e->m_events.size());
-      for( uint i = 0; i < e->m_events.size(); i++) {
+		const EventChain::event_vector::size_type size =
+			e.m_events.size();
+		s.set_int("nr_events", size);
+		for (EventChain::event_vector::size_type i = 0; i < size; ++i) {
          sprintf(buf, "event_%02i", i);
-         s->set_string( buf, e->m_events[i]->get_name());
+			s.set_string(buf, e.m_events[i]->get_name());
       }
 
       // Which is the current event
-      s->set_int( "current_event", e->m_curevent );
+		s.set_int("current_event", e.m_curevent);
 
       // State
-      switch( e->m_state ) {
-         case EventChain::INIT: s->set_string("state", "init"); break;
-         case EventChain::RUNNING: s->set_string("state", "running"); break;
-         case EventChain::DONE: s->set_string("state", "done"); break;
+		switch (e.m_state) {
+		case EventChain::INIT:    s.set_string("state", "init");    break;
+		case EventChain::RUNNING: s.set_string("state", "running"); break;
+		case EventChain::DONE:    s.set_string("state", "done");    break;
       }
    }
 

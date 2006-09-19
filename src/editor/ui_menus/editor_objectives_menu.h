@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ class Editor_Objectives_Menu : public UIUniqueWindow {
       UITextarea         *m_trigger;
 
    private:
-      void insert_objective( MapObjective* );
+	void insert_objective(MapObjective &);
       void clicked( int );
       void table_selected( int );
       void table_dblclicked( int );

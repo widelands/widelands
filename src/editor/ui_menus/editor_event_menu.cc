@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,30 +154,41 @@ Editor_Event_Menu::~Editor_Event_Menu()
  * update all lists and stuff
  */
 void Editor_Event_Menu::update(void) {
-   Trigger* trig=0;
-   m_trigger_list->clear();
-   int i=0;
-   for(i=0; i<m_parent->get_map()->get_mtm()->get_nr_triggers(); i++) {
-      trig=m_parent->get_map()->get_mtm()->get_trigger_by_nr(i);
-      m_trigger_list->add_entry( trig->get_name(), trig);
-      if( trig->get_referencers().empty() )
+	const Map & map = *m_parent->get_map();
+
+	m_trigger_list->clear();
+	{
+		const MapTriggerManager & mtm = map.get_mtm();
+		const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
+		for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
+			Trigger & trigger = mtm.get_trigger_by_nr(i);
+			m_trigger_list->add_entry(trigger.get_name(), &trigger);
+			if (trigger.get_referencers().empty() )
          m_trigger_list->set_entry_color( m_trigger_list->get_nr_entries()-1, RGBColor(255,0,0));
+		}
    }
 
-   Event* event=0;
    m_event_list->clear();
-   for(i=0; i<m_parent->get_map()->get_mem()->get_nr_events(); i++) {
-      event=m_parent->get_map()->get_mem()->get_event_by_nr(i);
-      m_event_list->add_entry( event->get_name(), event);
-      if( event->get_referencers().empty() )
+	{
+		const MapEventManager & mem = map.get_mem();
+		const MapEventManager::Index nr_events = mem.get_nr_events();
+		for (MapEventManager::Index i = 0; i < nr_events; ++i) {
+			Event & event = mem.get_event_by_nr(i);
+			m_event_list->add_entry(event.get_name(), &event);
+			if (event.get_referencers().empty())
          m_event_list->set_entry_color( m_event_list->get_nr_entries()-1, RGBColor(255,0,0));
+		}
    }
 
-   EventChain* evc=0;
    m_eventchain_list->clear();
-   for(i=0; i<m_parent->get_map()->get_mecm()->get_nr_eventchains(); i++) {
-      evc=m_parent->get_map()->get_mecm()->get_eventchain_by_nr(i);
-      m_eventchain_list->add_entry( evc->get_name(), evc);
+	{
+		const MapEventChainManager & mecm = map.get_mecm();
+		const MapEventChainManager::Index nr_eventchains =
+			mecm.get_nr_eventchains();
+		for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
+			EventChain & evc = mecm.get_eventchain_by_nr(i);
+			m_eventchain_list->add_entry(evc.get_name(), &evc);
+		}
    }
 
 
@@ -227,7 +238,7 @@ void Editor_Event_Menu::clicked(int id) {
          return;
       }
 
-      m_parent->get_map()->get_mem()->delete_event( event->get_name() );
+      m_parent->get_map()->get_mem().delete_event( event->get_name() );
       m_parent->unreference_player_tribe(0, event);  // Remove all references done by this event
       m_parent->set_need_save(true);
       update();
@@ -270,7 +281,7 @@ void Editor_Event_Menu::clicked(int id) {
          return;
       }
       m_parent->unreference_player_tribe(0, trig);  // Remove all references done by this trigger
-      m_parent->get_egbase()->get_map()->get_mtm()->delete_trigger( trig->get_name() );
+      m_parent->get_egbase()->get_map()->get_mtm().delete_trigger(trig->get_name());
       m_parent->set_need_save(true);
       update();
    } else if( id == 6) {
@@ -285,15 +296,16 @@ void Editor_Event_Menu::clicked(int id) {
          char buffer[256];
 
          int n = 1;
+         const Map & map = *m_parent->get_egbase()->get_map();
          while( 1 ) {
 		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
-            if( !m_parent->get_egbase()->get_map()->get_mecm()->get_eventchain( buffer ))
+            if (not map.get_mecm().get_eventchain(buffer))
                break;
             ++n;
          }
 
          ev->set_name( buffer );
-         m_parent->get_egbase()->get_map()->get_mecm()->register_new_eventchain( ev );
+         map.get_mecm().register_new_eventchain(ev);
 	 m_eventchain_list->add_entry( _("Unnamed").c_str(), ev, true);
          m_eventchain_list->sort();
       } else {
@@ -307,7 +319,7 @@ void Editor_Event_Menu::clicked(int id) {
    } else if( id == 7) {
       // Delete event chain
       EventChain* ev = static_cast<EventChain*>(m_eventchain_list->get_selection( ));
-      m_parent->get_egbase()->get_map()->get_mecm()->delete_eventchain( ev->get_name() );
+      m_parent->get_egbase()->get_map()->get_mecm().delete_eventchain(ev->get_name());
       m_eventchain_list->remove_entry( m_eventchain_list->get_selection_index() );
       m_btn_del_eventchain->set_enabled( false );
       m_btn_edit_eventchain->set_enabled( false );

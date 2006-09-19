@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,20 +64,20 @@ class MapObjective : public TriggerReferencer {
       }
 
 
-      inline const char* get_name( void ) { return m_name.c_str(); }
+	const char * get_name() const {return m_name.c_str();}
       inline void set_name( const char* name ) { m_name = name; }
-      inline const char* get_descr( void ) { return m_descr.c_str(); }
+	const char * get_descr() const {return m_descr.c_str();}
       inline void set_descr( const char* descr ) { m_descr = descr; }
-      inline bool get_is_visible( void ) { return m_is_visible; }
+	bool get_is_visible() const {return m_is_visible;}
       inline void set_is_visible( bool t ) { m_is_visible = t; }
-      inline bool get_is_optional( void ) { return m_is_optional; }
+	bool get_is_optional() const {return m_is_optional;}
 
       // For trigger referncer
-      const char* get_type( void ) { return "Map Objective"; }
+	const char * get_type() const {return "Map Objective";}
 
       // Get the trigger that is attached to this
       // Trigger is created by Editor or on load
-      inline Trigger_Null* get_trigger( void ) { return m_trigger; }
+	Trigger_Null * get_trigger() const {return m_trigger;}
 
       // Setting the values below is only a good idea in editor
       inline void set_trigger(Trigger_Null* tr) {
@@ -121,11 +121,14 @@ class MapObjectiveManager {
       MapObjective* get_objective( const char* name );
       void delete_objective( const char* name );
 
-      inline int get_nr_objectives( void ) { return m_objectives.size(); }
-      inline MapObjective* get_objective_by_nr( int i ) { assert(i < (int)m_objectives.size()); return m_objectives[i]; }
+	typedef std::vector<MapObjective *> objective_vector;
+	typedef objective_vector::size_type Index;
+	Index get_nr_objectives() const {return m_objectives.size();}
+	MapObjective & get_objective_by_nr(const Index i) const
+	{assert(i < m_objectives.size()); return *m_objectives[i];}
 
    private:
-      std::vector<MapObjective*>      m_objectives;
+	objective_vector m_objectives;
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,16 +33,16 @@ class Event_Allow_Building : public Event {
       ~Event_Allow_Building();
 
       // one liner functions
-      const char* get_id(void) { return "allow_building"; }
+	const char * get_id() const {return "allow_building";}
 
       State run(Game*);
       virtual void reinitialize(Game*);
 
       // File Functions
-      void Write(Section*, Editor_Game_Base*);
+	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
-      inline int get_player(void) { return m_player; }
+	int get_player() const {return m_player;}
       inline void set_player(int i) { m_player=i; }
       const char* get_building(void) { return m_building.c_str(); }
       void set_building(const char* b) { m_building=b; }

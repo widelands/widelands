@@ -72,20 +72,13 @@ void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
    throw wexception("Allow Building Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Allow_Building::Write(Section* s, Editor_Game_Base *egbase) {
-   // Now the version
-   s->set_int("version", EVENT_VERSION);
-
-   // Player
-   s->set_int("player", get_player());
-
-   // Building name
-   s->set_string("building", m_building.c_str());
-
-   // Allow or disallow
-   s->set_bool("allow", m_allow );
-
-   // done
+void Event_Allow_Building::Write
+(Section & s, const Editor_Game_Base &) const
+{
+	s.set_int   ("version",  EVENT_VERSION);
+	s.set_int   ("player",   get_player());
+	s.set_string("building", m_building.c_str());
+	s.set_bool  ("allow",    m_allow );
 }
 
 /*

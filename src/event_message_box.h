@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,37 +38,37 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       ~Event_Message_Box();
 
       // For trigger referenecer
-      virtual const char* get_type( void ) { return "Event:MessageBox"; }
-      virtual const char* get_name( void ) { return Event::get_name(); }
+	const char * get_type() const {return "Event:MessageBox";}
+	const char * get_name() const {return Event::get_name();}
 
       // one liner functions
-      const char* get_id(void) { return "message_box"; }
+	const char * get_id() const {return "message_box";}
 
       State run(Game*);
       virtual void reinitialize(Game*);
 
       // File Functions
-      void Write(Section*, Editor_Game_Base*);
+	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
       inline void set_text(const char* str) { m_text=str; }
-      inline const char* get_text(void) { return m_text.c_str(); }
+	const char * get_text() const {return m_text.c_str();}
       inline void set_window_title(const char* str) { m_window_title=str; }
-      inline const char* get_window_title(void) { return m_window_title.c_str(); }
+	const char * get_window_title() const {return m_window_title.c_str();}
       inline void set_is_modal(bool t) {  m_is_modal=t; }
-      inline bool get_is_modal(void) { return m_is_modal; }
+	bool get_is_modal() const {return m_is_modal;}
       inline void set_pos( int posx, int posy ) { m_posx=posx; m_posy=posy; }
-      inline int get_posx( void ) { return m_posx; }
-      inline int get_posy( void ) { return m_posy; }
+	int get_posx() const {return m_posx;}
+	int get_posy() const {return m_posy;}
       inline void set_dimensions( int w, int h ) { m_width = w; m_height = h; }
-      inline int get_w( void ) { return m_width; }
-      inline int get_h( void ) { return m_height; }
+	int get_w() const {return m_width;}
+	int get_h() const {return m_height;}
       void set_button_trigger(int i, Trigger_Null* t);
       Trigger_Null* get_button_trigger(int i);
       void set_button_name(int i, std::string);
       const char* get_button_name(int i);
       void set_nr_buttons(int i);
-      int get_nr_buttons(void);
+	int get_nr_buttons() const {return m_buttons.size();}
 
       enum {
          Right = 0,

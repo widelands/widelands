@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,12 +32,14 @@
 #include "trigger_conditional.h"
 #include "util.h"
 
-Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain) :
-   UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()) {
-
-   m_parent=parent;
-   m_given_cond = cond;
-   m_event_chain = chain;
+Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
+(Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain)
+:
+UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
+m_parent(parent),
+m_given_cond(cond),
+m_event_chain(chain)
+{
 
    // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, _("Edit Trigger Conditional Menu"), Align_Left);
@@ -112,9 +114,11 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    m_trigger_list=new UIListselect(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
-   for(int i=0; i < parent->get_egbase()->get_map()->get_mtm()->get_nr_triggers(); i++) {
-      Trigger* tr = parent->get_egbase()->get_map()->get_mtm()->get_trigger_by_nr(i);
-      m_trigger_list->add_entry( tr->get_name(), tr);
+	const MapTriggerManager & mtm = parent->get_egbase()->get_map()->get_mtm();
+	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
+	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
+		Trigger & tr = mtm.get_trigger_by_nr(i);
+		m_trigger_list->add_entry(tr.get_name(), &tr);
    }
    m_trigger_list->sort();
 

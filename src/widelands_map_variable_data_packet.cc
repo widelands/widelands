@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ void Widelands_Map_Variable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
       // might not be there
       return;
    }
-   MapVariableManager* mvm = egbase->get_map()->get_mvm();
+   MapVariableManager & mvm = egbase->get_map()->get_mvm();
 
    Section* s = prof.get_section( "global" );
 
@@ -63,12 +63,12 @@ void Widelands_Map_Variable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
             Int_MapVariable* v = new Int_MapVariable( s->get_safe_bool( "delete_protected" ) );
             v->set_name( s->get_name() );
             v->set_value( s->get_safe_int("value"));
-            mvm->register_new_variable( v );
+            mvm.register_new_variable(v);
          } else if( type == "string" ) {
             String_MapVariable* v = new String_MapVariable( s->get_safe_bool( "delete_protected" ) );
             v->set_name( s->get_name() );
             v->set_value( s->get_safe_string("value") );
-            mvm->register_new_variable( v );
+            mvm.register_new_variable(v);
          } else
             throw wexception("Unknown Map Variable type %s\n", type.c_str());
 
@@ -84,36 +84,34 @@ void Widelands_Map_Variable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
  * Write Function
  */
 void Widelands_Map_Variable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   MapVariableManager* mvm = egbase->get_map()->get_mvm();
-
    Profile prof;
-   Section* s = prof.create_section("global");
-
-   // packet version
-   s->set_int("packet_version", CURRENT_PACKET_VERSION);
+	prof.create_section("global")->set_int
+		("packet_version", CURRENT_PACKET_VERSION);
 
    // Now, all positions in order, first x, then y
-   for(int i=0; i < mvm->get_nr_variables(); i++) {
-      MapVariable* v = mvm->get_variable_by_nr(i);
-      s = prof.create_section( v->get_name() );
-      s->set_bool("delete_protected", v->is_delete_protected());
-      switch( v->get_type() ) {
+	const MapVariableManager & mvm = egbase->get_map()->get_mvm();
+	const MapVariableManager::Index nr_variables =
+		mvm.get_nr_variables();
+	for (MapVariableManager::Index i = 0; i < nr_variables; ++i) {
+		const MapVariable & v = mvm.get_variable_by_nr(i);
+      Section & s = *prof.create_section(v.get_name());
+      s.set_bool("delete_protected", v.is_delete_protected());
+		switch (v.get_type()) {
          case MapVariable::MVT_INT:
-         {
-            s->set_string("type", "int");
-            s->set_int("value", static_cast<Int_MapVariable*>(v)->get_value());
-         }
+			s.set_string("type", "int");
+			s.set_int("value", static_cast<const Int_MapVariable &>(v).get_value());
          break;
 
          case MapVariable::MVT_STRING:
-         {
-            s->set_string("type", "string");
-            s->set_string("value", static_cast<String_MapVariable*>(v)->get_value());
-         }
+			s.set_string("type", "string");
+			s.set_string("value", static_cast<const String_MapVariable &>(v).get_value());
          break;
 
          default:
-         throw wexception("Unknown Variable type in Widelands_Map_Variable_Data_Packet: %i\n", v->get_type());
+			throw wexception
+				("Unknown Variable type in Widelands_Map_Variable_Data_Packet: "
+				 "%i\n",
+				 v.get_type());
       }
    }
 
