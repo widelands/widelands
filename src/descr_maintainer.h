@@ -74,7 +74,7 @@ int Descr_Maintainer<T>::add(T* item) {
 }
 
 //
-//returns elemt if it exists, NULL if it doesnt
+//returns elemt if it exists, 0 if it doesnt
 //
 template <class T>
 T* Descr_Maintainer<T>::exists(const char* name) {
@@ -83,7 +83,7 @@ T* Descr_Maintainer<T>::exists(const char* name) {
    for(i=0; i<nitems; i++) {
       if(!strcasecmp(name, items[i]->get_name())) return items[i];
    }
-   return NULL;
+	return 0;
 }
 
 template <class T>
