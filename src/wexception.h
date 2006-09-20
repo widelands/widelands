@@ -20,6 +20,7 @@
 #ifndef WEXCEPTION_H
 #define WEXCEPTION_H
 
+#include <types.h>
 #include <exception>
 
 #ifdef __GNUC__
