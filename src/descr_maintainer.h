@@ -33,8 +33,6 @@ template <class T> class Descr_Maintainer {
       ~Descr_Maintainer(void) ;
 
       T* exists(const char* name);
-      T* start_enum(void) { n=0; if(nitems) return items[0]; return NULL; }
-      T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
       int add(T* item);
       ushort get_nitems(void) const { return nitems; }
       int get_index(const char * const name) const; // can return -1
@@ -50,7 +48,6 @@ template <class T> class Descr_Maintainer {
 
    private:
       uint place_for;
-      uint n;
       uint nitems;
       T** items;
 };
