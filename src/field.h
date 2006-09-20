@@ -99,7 +99,7 @@ public:
 		uchar all;
 		struct {
 			uchar owner_number : 7; /** 0 = neutral; otherwise: player number*/
-			bool  is_border    : 1;
+            uchar  is_border    : 1;
 		} parts;
 		bool operator==(const Owner_Info other) const {return all == other.all;}
 	};
