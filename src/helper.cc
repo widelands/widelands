@@ -113,9 +113,13 @@ _wexception::~_wexception() throw()
 
 const char *_wexception::what() const throw()
 {
+    char buffer[200]; 
+    
+    snprintf( buffer, sizeof(buffer), "%i", m_line);
+    
     std::string returnval(m_file);
     returnval += ':';
-    returnval += m_line;
+    returnval += buffer;
     returnval += " ";
     returnval += m_string;
     
