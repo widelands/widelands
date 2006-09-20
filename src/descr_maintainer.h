@@ -23,9 +23,9 @@
 #include "building.h"
 #include "ware.h"
 
-/*
- * This template is used to have a type save mainting class for Bob_Descr, Worker_Descr
- * and so on
+/**
+ * This template is used to have a typesafe maintaining class for Bob_Descr,
+ * Worker_Descr and so on.
  */
 template <class T> class Descr_Maintainer {
    public:
@@ -65,25 +65,6 @@ int Descr_Maintainer<T>::get_index(const char * const name) const {
 
    return -1;
 }
-
-/*template <class T>
-T* Descr_Maintainer<T>::get(const char* name) {
-   uint i;
-
-   for(i=0; i<nitems; i++) {
-      if(!strcasecmp(name, items[i]->get_name())) return items[i];
-   }
-
-   nitems++;
-   if(nitems==1) {
-      items=(T**) malloc(sizeof(T*)*nitems);
-   } else {
-      items=(T**) realloc(items, sizeof(T*)*nitems);
-   }
-   items[nitems-1]= new T(name);
-
-   return items[nitems-1];
-}*/
 
 template <class T>
 int Descr_Maintainer<T>::add(T* item) {
