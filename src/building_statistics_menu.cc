@@ -304,10 +304,11 @@ void Building_Statistics_Menu::update( void ) {
    m_selected = -1;
 
    // List all buildings
-   Tribe_Descr* tribe = m_parent->get_player()->get_tribe();
-   for(long i = 0; i < tribe->get_nrbuildings(); i++) {
-      if(!strcmp(tribe->get_building_descr(i)->get_name(), "constructionsite")) continue;
-      if(!strcmp(tribe->get_building_descr(i)->get_name(), "headquarters")) continue;
+   const Tribe_Descr* tribe = m_parent->get_player()->get_tribe();
+   for (long i = 0; i < tribe->get_nrbuildings(); i++) {
+			const char* const name = tribe->get_building_descr(i)->get_name();
+      if (strcmp(name, "constructionsite") == 0) continue;
+      if (strcmp(name, "headquarters")     == 0) continue;
 
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
 
@@ -397,8 +398,6 @@ void Building_Statistics_Menu::update( void ) {
           te->set_string(3, buffer);
           if(is_selected)
             m_build->set_text(buffer);
-
-
    }
 
    // Disable all buttons, if nothing to select

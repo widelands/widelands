@@ -71,10 +71,10 @@ class Tribe_Descr {
 		{return m_wares.get_index(name);}
       inline Item_Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }
 		int get_safe_worker_index(const char * const name) const;
-      inline int get_nrbuildings() { return m_buildings.get_nitems(); }
+		int get_nrbuildings() const { return m_buildings.get_nitems(); }
 		int get_safe_building_index(const char *name);
 		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
-		inline Building_Descr *get_building_descr(uint idx) { return m_buildings.get(idx); }
+		Building_Descr *get_building_descr(uint idx) const { return m_buildings.get(idx); }
       inline int get_immovable_index(const char* l) { return m_immovables.get_index(l); }
       inline int get_nr_immovables(void) { return m_immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return m_immovables.get(index); }
