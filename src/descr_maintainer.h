@@ -39,11 +39,7 @@ template <class T> class Descr_Maintainer {
       ushort get_nitems(void) const { return nitems; }
       int get_index(const char * const name) const; // can return -1
       void reserve(uint n) {
-         if(!items) {
-            items = (T**) malloc(sizeof(T*)*n);
-         } else {
-            items = (T**) realloc(items, sizeof(T*)*n);
-         }
+		items = static_cast<T * * const>(realloc(items, sizeof(T *) * n));
          place_for=n;
       }
 
