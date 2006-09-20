@@ -157,8 +157,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 	   Section::Value* value;
 
       while((value=s->get_next_val(0))) {
-         int idx = m_wares.get_index(value->get_name());
-         if(idx == -1)
+         if (not m_wares.exists(value->get_name()))
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
          std::string name=value->get_name();
@@ -169,8 +168,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       s = prof.get_safe_section("startworkers");
       while((value=s->get_next_val(0))) {
          if(!strcmp(value->get_name(),"soldier")) continue; // Ignore soldiers here
-         int idx = m_workers.get_index(value->get_name());
-         if(idx == -1)
+         if (not m_workers.exists(value->get_name()))
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
          std::string name=value->get_name();
@@ -354,7 +352,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 		else
 			name = it->c_str();
 
-		if (wares->get_index(name) >= 0)
+		if (wares->exists(name))
 			log("Ware %s is already known in world init\n", it->c_str());
 
 		Item_Ware_Descr* descr = 0;
