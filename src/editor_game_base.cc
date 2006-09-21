@@ -385,6 +385,17 @@ void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 		PlayerImmovable* imm = (PlayerImmovable*)immovables[i].object;
 		Coords f = immovables[i].coords;
 
+		//  Destroy all PlayerImmovables on borders and on fields not owned by
+		//  the PlayerImmovable's owner. Both of these rules can be tested at
+		//  once as long as player numbers are in the range 0 .. 127 and the
+		//  following assumption about the layout of Owner_Info holds:
+		assert(imm->get_owner()->get_player_number() < 128);
+		assert
+			(m_map->get_field(f)->get_owner_info().all
+			 ==
+			 m_map->get_field(f)->get_owned_by()
+			 +
+			 (m_map->get_field(f)->is_border() << 7));
 		if
 			(imm->get_owner()->get_player_number()
 			 !=
