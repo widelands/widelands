@@ -699,15 +699,11 @@ void RenderTargetImpl::rendermap
 				map.get_tln(r, &tr);
 				map.get_ln(r, &f);
 				bool r_is_border;
-				uchar f_owner_number = f.field->get_owner_info().parts.owner_number;
+				uchar f_owner_number = f.field->get_owned_by();
 				uchar r_owner_number;
-				{
-					const Field::Owner_Info r_owner_info = r.field->get_owner_info();
-					r_is_border = r_owner_info.parts.is_border;
-					r_owner_number = r_owner_info.parts.owner_number;
-				}
-				uchar br_owner_number =
-					br.field->get_owner_info().parts.owner_number;
+				r_is_border = r.field->is_border();
+				r_owner_number = r.field->get_owned_by();
+				uchar br_owner_number = br.field->get_owned_by();
 				bool  r_is_visible = not visibility or (*visibility) [r_index];
 				bool br_is_visible = not visibility or (*visibility)[br_index];
 				Point r_pos
@@ -728,19 +724,14 @@ void RenderTargetImpl::rendermap
 					move_r(mapwidth, tr);
 					move_r(mapwidth,  r,  r_index);
 					move_r(mapwidth, br, br_index);
-					const uchar tr_owner_number =
-						tr.field->get_owner_info().parts.owner_number;
+					const uchar tr_owner_number = tr.field->get_owned_by();
 					const bool f_is_border = r_is_border;
 					const uchar l_owner_number = f_owner_number;
 					const uchar bl_owner_number = br_owner_number;
 					f_owner_number = r_owner_number;
-					{
-						const Field::Owner_Info r_owner_info =
-							r.field->get_owner_info();
-						r_is_border = r_owner_info.parts.is_border;
-						r_owner_number = r_owner_info.parts.owner_number;
-					}
-					br_owner_number = br.field->get_owner_info().parts.owner_number;
+					r_is_border = r.field->is_border();
+					r_owner_number = r.field->get_owned_by();
+					br_owner_number = br.field->get_owned_by();
 					const bool f_is_visible = r_is_visible;
 					const bool bl_is_visible = br_is_visible;
 					r_is_visible = not visibility or (*visibility) [r_index];

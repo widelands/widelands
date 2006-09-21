@@ -371,42 +371,34 @@ Editor_Game_Base::cleanup_playerimmovables_area
 Make sure that buildings cannot exist outside their owner's territory.
 TODO: By now something goes wrong at unconquer_area and this function, because
 the game crashes a bit time after unconquer an area with some buildings.
+TODO: Document why there are 2 loops instead of destroying in the 1st.
 ===============
 */
 void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 {
 	std::vector<ImmovableFound> immovables;
 	std::set<PlayerImmovable*> burnset;
+	Map & map = *m_map;
 
 	// Find all immovables that need fixing
-	m_map->find_immovables(coords, radius, &immovables, FindImmovablePlayerImmovable());
+	map.find_immovables
+		(coords, radius, &immovables, FindImmovablePlayerImmovable());
 
-	for(uint i = 0; i < immovables.size(); ++i) {
-		PlayerImmovable* imm = (PlayerImmovable*)immovables[i].object;
-		Coords f = immovables[i].coords;
-
-		//  Destroy all PlayerImmovables on borders and on fields not owned by
-		//  the PlayerImmovable's owner. Both of these rules can be tested at
-		//  once as long as player numbers are in the range 0 .. 127 and the
-		//  following assumption about the layout of Owner_Info holds:
-		assert(imm->get_owner()->get_player_number() < 128);
-		assert
-			(m_map->get_field(f)->get_owner_info().all
-			 ==
-			 m_map->get_field(f)->get_owned_by()
-			 +
-			 (m_map->get_field(f)->is_border() << 7));
+	for
+		(std::vector<ImmovableFound>::const_iterator it = immovables.begin();
+		 it != immovables.end(); ++it) {
+			 PlayerImmovable & imm =
+				 *static_cast<PlayerImmovable * const>(it->object);
 		if
-			(imm->get_owner()->get_player_number()
-			 !=
-			 m_map->get_field(f)->get_owner_info().all)
-			burnset.insert(imm);
+			(not map.get_field(it->coords)->is_interior
+			 (imm.get_owner()->get_player_number()))
+			burnset.insert(&imm);
 	}
 
 	// Fix all immovables
+	Game * const game = dynamic_cast<Game * const>(this);
 	for(std::set<PlayerImmovable*>::iterator it = burnset.begin(); it != burnset.end(); ++it)
 	{
-		Game * const game = dynamic_cast<Game * const>(this);
 		if (game) (*it)->schedule_destroy(game);
 		else      (*it)->remove(this);
 	}

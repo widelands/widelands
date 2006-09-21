@@ -21,6 +21,8 @@
 #define __S__FIELD_H
 
 #include <cassert>
+#include "compile_assert.h"
+#include "constants.h"
 #include "types.h"
 
 #define MAX_FIELD_HEIGHT 60
@@ -94,16 +96,21 @@ class Field {
 	friend class Bob;
 	friend class BaseImmovable;
 
-public:
 	union Owner_Info {
 		uchar all;
 		struct {
-            uchar  is_border    : 1;
-            uchar owner_number : 7; /** 0 = neutral; otherwise: player number*/
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+			uchar owner_number : 7;
+			uchar is_border    : 1;
+#else
+			uchar is_border    : 1;
+			uchar owner_number : 7;
+#endif
 		} parts;
-		bool operator==(const Owner_Info other) const {return all == other.all;}
 	};
+	compile_assert(sizeof(Owner_Info) == 1);
 
+public:
 	enum Buildhelp_Index {
 		Buildhelp_Flag   = 0,
 		Buildhelp_Small  = 1,
@@ -149,10 +156,30 @@ public:
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }
 
-	void set_owned_by(const uchar n) {owner_info.parts.owner_number = n;}
-	uchar get_owned_by() const {return owner_info.parts.owner_number;}
-	Owner_Info get_owner_info() const {return owner_info;}
+	void set_owned_by(const uchar n)
+	{assert(n <= MAX_PLAYERS); owner_info.parts.owner_number = n;}
+	uchar get_owned_by() const{
+		assert(owner_info.parts.owner_number <= MAX_PLAYERS);
+		return owner_info.parts.owner_number;
+	}
 	bool is_border() const {return owner_info.parts.is_border;}
+
+	/**
+	 * Returns true when the field is owned by player_number and is not a border
+	 * field. This is fast; only one byte compare.
+	 *
+	 * player_number must be in the range 1 .. 127 or the behaviour is undefined
+	 */
+	bool is_interior(const uchar player_number) const {
+		assert(player_number > 0);
+		assert(player_number < 128);
+		assert
+			(owner_info.all
+			 ==
+			 owner_info.parts.owner_number + 128 * owner_info.parts.is_border);
+		return player_number == owner_info.all;
+	}
+		
 	void set_border(const bool b) {owner_info.parts.is_border = b;}
 
 	uchar get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
@@ -178,6 +205,6 @@ public:
     * But realize, most of the times you will need Map::set_field_height()*/
    inline void set_height(uchar h) { if((signed char)h<0) h=0; if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
 };
-
+compile_assert(sizeof(Field) == 24);
 
 #endif

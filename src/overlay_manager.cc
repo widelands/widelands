@@ -122,31 +122,26 @@ void Overlay_Manager::reset() {
 /*
  * Recalculates all calculatable overlays for fields
  */
-void Overlay_Manager::recalc_field_overlays
-(const FCoords fc, const FCoords * const neighbours)
-{
+void Overlay_Manager::recalc_field_overlays(const FCoords fc) {
 	Field::Buildhelp_Index index = Field::Buildhelp_None;
+	const FieldCaps caps =
+		m_callback
+		?
+		static_cast<FieldCaps>
+		(m_callback(fc, m_callback_data, m_callback_data_i))
+		:
+		fc.field->get_caps();
 
-	if (not fc.field->is_border()) {// Determine the buildhelp icon.
-		const FieldCaps caps =
-			m_callback
-			?
-			static_cast<FieldCaps>
-			(m_callback(fc, m_callback_data, m_callback_data_i))
-			:
-			fc.field->get_caps();
-
-		if (caps & BUILDCAPS_MINE)
-			index = Field::Buildhelp_Mine;
-		else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-			index = Field::Buildhelp_Big;
-		else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-			index = Field::Buildhelp_Medium;
-		else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-			index = Field::Buildhelp_Small;
-		else if (caps & BUILDCAPS_FLAG)
-			index = Field::Buildhelp_Flag;
-   }
+	if (caps & BUILDCAPS_MINE)
+		index = Field::Buildhelp_Mine;
+	else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
+		index = Field::Buildhelp_Big;
+	else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
+		index = Field::Buildhelp_Medium;
+	else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
+		index = Field::Buildhelp_Small;
+	else if (caps & BUILDCAPS_FLAG)
+		index = Field::Buildhelp_Flag;
 
 	fc.field->set_buildhelp_overlay_index(index);
 }

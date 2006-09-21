@@ -102,7 +102,7 @@ class Overlay_Manager {
       void show_buildhelp(bool t) { m_showbuildhelp= t; }
       void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; }
 
-	void recalc_field_overlays(const FCoords, const FCoords * const neighbours);
+	void recalc_field_overlays(const FCoords);
 
 	//  Road overlays are registered like normal overlays and removed like normal
 	//  overlays but they use are handled internally completly different. When a

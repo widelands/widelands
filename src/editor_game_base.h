@@ -67,8 +67,11 @@ class Editor_Game_Base {
 		 const int type,
 		 const char * const tribe,
 		 const char * const name);
-	Player * get_player(const int n) const
-	{assert(n >= 1 and n <= MAX_PLAYERS); return m_players[n-1];}
+	Player * get_player(const int n) const {
+		assert(n >= 1);
+		assert(n <= MAX_PLAYERS);
+		return m_players[n - 1];
+	}
       virtual Player * get_safe_player(const int n);
 
       // loading stuff

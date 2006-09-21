@@ -104,19 +104,16 @@ FieldCaps Player::get_buildcaps(const Coords coords) const {
 	uchar buildcaps = fc.field->get_caps();
 	const uchar player_number = m_plnum;
 
-	if (fc.field->get_owner_info().all != player_number) buildcaps = 0;
+	if (not fc.field->is_interior(player_number)) buildcaps = 0;
 
 	// Check if a building's flag can't be build due to ownership
 	else if (buildcaps & BUILDCAPS_BUILDINGMASK) {
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
-		if (flagcoords.field->get_owner_info().all != player_number)
+		if (not flagcoords.field->is_interior(player_number))
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
 	}
 
-	if (coords.x == 17 and coords.y == 17) log
-		("Player::get_buildcaps: (%i, %i): buildcaps = %i\n",
-		 coords.x, coords.y, buildcaps);
 	return static_cast<const FieldCaps>(buildcaps);
 }
 

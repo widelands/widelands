@@ -204,14 +204,9 @@ void Map::recalc_for_field_area(Coords coords, int radius)
    }
 
    // Now only recaluclate the overlays
-   FCoords neighbours[7];
    mr.init(this, coords, radius+2);
    while(mr.next(&c)) {
-      int i=0;
-      for(i=1; i<=6; i++) {
-         get_neighbour(c, i, &neighbours[i]);
-      }
-      get_overlay_manager()->recalc_field_overlays(c, neighbours);
+      get_overlay_manager()->recalc_field_overlays(c);
    }
 }
 
@@ -255,15 +250,9 @@ void Map::recalc_whole_map(void)
    }
 
    // Now only recaluclate the overlays
-   FCoords neighbours[7];
    for(y=0; y<m_height; y++) {
       for(uint x=0; x<m_width; x++) {
-         f = get_fcoords(Coords(x, y));
-         int i=0;
-         for(i=1; i<=6; i++) {
-            get_neighbour(f, i, &neighbours[i]);
-         }
-         get_overlay_manager()->recalc_field_overlays(f, neighbours);
+	      get_overlay_manager()->recalc_field_overlays(get_fcoords(Coords(x, y)));
       }
    }
 }
