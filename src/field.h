@@ -98,8 +98,8 @@ public:
 	union Owner_Info {
 		uchar all;
 		struct {
-			uchar owner_number : 7; /** 0 = neutral; otherwise: player number*/
             uchar  is_border    : 1;
+            uchar owner_number : 7; /** 0 = neutral; otherwise: player number*/
 		} parts;
 		bool operator==(const Owner_Info other) const {return all == other.all;}
 	};
