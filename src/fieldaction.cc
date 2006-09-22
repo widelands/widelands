@@ -393,7 +393,7 @@ void FieldActionWindow::add_buttons_auto()
       // There goes actions that can be done to non-owner fields ;)
    else
    {
-      add_buttons_attack ();
+      //add_buttons_attack (); FIXME disabled until attack works
 /*      BaseImmovable *imm = m_map->get_immovable(m_field);
       // The box with road-building buttons
       buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
