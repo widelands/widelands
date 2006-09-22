@@ -30,6 +30,7 @@
 #include "random.h"
 #include "songset.h"
 #include <vector>
+#include <unistd.h>
 
 using namespace std;
 

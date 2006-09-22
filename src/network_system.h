@@ -29,6 +29,7 @@
 #include <net/if.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <unistd.h>
 
 // be compatible to microsoft
 #define closesocket close
