@@ -205,6 +205,6 @@ public:
     * But realize, most of the times you will need Map::set_field_height()*/
    inline void set_height(uchar h) { if((signed char)h<0) h=0; if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
 };
-compile_assert(sizeof(Field) == 24);
+compile_assert(sizeof(Field) == 8 + 4 * sizeof(void *));
 
 #endif
