@@ -1105,8 +1105,6 @@ Push the given program onto the stack and schedule acting.
 */
 void ProductionSite::program_start(Game* g, std::string name)
 {
-	molog("ProductionSite: program start: %s\n", name.c_str());
-
 	State state;
 
 	state.program = get_descr()->get_program(name);
@@ -1133,8 +1131,6 @@ Post: No program is running, acting is scheduled.
 */
 void ProductionSite::program_end(Game* g, bool success)
 {
-	molog("ProductionSite: program ends (%s)\n", success ? "success" : "failure");
-
 	assert(m_program.size());
 
 	bool dostats = true;

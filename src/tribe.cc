@@ -245,10 +245,6 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 					(std::vector<char*>::const_iterator it = enhancements.begin();
 					 it != enhancements.end(); ++it) {
 					const int index = m_buildings.get_index(*it);
-					log
-						("Building %s (%i) enhances to %s (%i)\n",
-						 considered_building_descr.get_descname(), consider_now,
-						 *it, index);
 					if (index < 0) {
 						log
 							("        Warning: building %s (%i) does not exist\n",

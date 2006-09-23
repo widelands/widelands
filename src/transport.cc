@@ -1139,8 +1139,6 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	if (pi->nextstep == nextstep && pi->nextstep != m_always_call_for_flag)
 		return; // no update needed
 
-	molog("Flag::call_carrier(%u): Call\n", item->get_serial());
-
 	pi->nextstep = nextstep;
 	pi->pending = false;
 
@@ -2244,7 +2242,6 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 		}
 
 		if (m_route.get_nrsteps() >= 1) {
-			tlog("go to next flag\n");
 			return m_route.get_flag(m_game, 1);
 		}
 
@@ -2815,8 +2812,6 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// Begin the transfer of an item. The item itself is passive.
 			// launch_item() ensures the WareInstance is transported out of the warehouse
 			// Once it's on the flag, the flag code will decide what to do with it.
-			log("Request: start item transfer for %i\n", get_index());
-
 			WareInstance* item = supp->launch_item(g, get_index());
 
 			t = new Transfer(g, this, item);

@@ -857,7 +857,6 @@ void WorkerProgram::parse_animation(Worker_Descr* descr, WorkerAction* act, Pars
 
 bool Worker::run_animation(Game* g, State* state, const WorkerAction* act)
 {
-	molog("  Animation(%i, %i)\n", act->iparam1, act->iparam2);
 	set_animation(g, act->iparam1);
 
 	state->ivar1++;
@@ -2318,7 +2317,6 @@ void Worker::buildingwork_update(Game* g, State* state)
 	state->ivar1 = 1;
 
 	if (!((Building*)location)->get_building_work(g, this, success)) {
-		molog("[buildingwork]: Nothing to be done.\n");
 		set_animation(g, 0);
 		skip_act(g);
 	}
@@ -2422,8 +2420,6 @@ void Worker::return_update(Game* g, State* state)
 	if (pos)
 	{
 		if (pos == location) {
-			molog("[return]: Back home.\n");
-
 			set_animation(g, 0);
 			pop_task(g);
 			return;
@@ -3636,8 +3632,6 @@ void Carrier::road_update(Game* g, State* state)
 	if (m_acked_ware >= 0) {
 		if (state->ivar1)
 		{
-			molog("[road]: Go pick up item from %i\n", m_acked_ware);
-
 			state->ivar1 = 0;
 			start_task_transport(g, m_acked_ware);
 		}
@@ -3659,10 +3653,7 @@ void Carrier::road_update(Game* g, State* state)
 		return;
 
 	// Be bored. There's nothing good on TV, either.
-	molog("[road]: Idle.\n");
-
 	// TODO: idle animations
-
 	set_animation(g, get_descr()->get_animation("idle"));
 	skip_act(g); // wait until signal
 	state->ivar1 = 1; // we're available immediately after an idle phase
@@ -3791,7 +3782,6 @@ void Carrier::transport_update(Game* g, State* state)
 		if (start_task_walktoflag(g, state->ivar1))
 			return;
 
-		molog("[transport]: pick up from flag.\n");
 		m_acked_ware = -1;
 
 		flag = road->get_flag((Road::FlagId)state->ivar1);

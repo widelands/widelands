@@ -854,6 +854,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 			hole_radius = radius;
 		}
 
+#if 0
 		//  This is debug output.
 		//  Improvement suggestion: add to sign explanation window instead.
 		for
@@ -868,6 +869,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 				log("        %s\n", (*de).c_str());
 			}
 		}
+#endif
 
 	}
 }

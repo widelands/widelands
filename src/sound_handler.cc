@@ -343,9 +343,6 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 			m_fxs[fx_name] = new FXset();
 
 		m_fxs[fx_name]->add_fx(m);
-
-		log(("Loaded sound effect from \"" + filename +
-		     "\" for FXset \"" + fx_name + "\"\n").c_str());
 	} else {
 		char *msg = (char *) malloc(1024);
 		snprintf(msg, 1024, "Sound_Handler: loading sound effect \"%s\""
@@ -563,9 +560,6 @@ void Sound_Handler::register_song(const string dir, const string basename,
 				m_songs[basename] = new Songset();
 
 			m_songs[basename]->add_song(*i);
-
-			log(("Registered song from file \"" + *i +
-			     "\" for songset \"" + basename + "\"\n").c_str());
 		}
 	}
 }

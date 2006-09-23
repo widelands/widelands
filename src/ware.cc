@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -239,7 +239,6 @@ void WareList::remove(int id, int count)
 		return;
 
 	assert(id >= 0 && id < (int)m_wares.size());
-	log("WareList: Wanting to remove %i/%i wares of type (%i)\n", count, m_wares[id], id);
    assert(m_wares[id] >= count);
 	m_wares[id] -= count;
 }

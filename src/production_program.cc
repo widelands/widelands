@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,9 +154,6 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			//  "Always main worker is doing stuff"
 			const char * const main_worker_name
 				= (*building->get_workers())[0].name.c_str();
-			log
-				("Parsed production command 'worker (%s) %s'\n",
-				 main_worker_name, act.sparam1.c_str());
 			Tribe_Descr * tribe_descr = building->get_tribe();
 			const Workarea_Info & workarea_info
 				= tribe_descr->get_worker_descr
