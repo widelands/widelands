@@ -70,6 +70,8 @@ class Tribe_Descr {
 		int get_ware_index(const char * const name) const
 		{return m_wares.get_index(name);}
       inline Item_Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }
+ Item_Ware_Descr & get_ware_descr(const uint idx) const
+	{return *m_wares.get(idx);}
 		int get_safe_worker_index(const char * const name) const;
 		int get_nrbuildings() const { return m_buildings.get_nitems(); }
 		int get_safe_building_index(const char *name);

@@ -347,10 +347,10 @@ m_parent(&parent)
 {
    // First, we must decide about the size
 	const int nr_wares = parent.get_player()->get_tribe()->get_nrwares();
-   int wares_per_row = MIN_WARES_PER_LINE;
+	uint wares_per_row = MIN_WARES_PER_LINE;
    while(nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
-   int nr_rows = nr_wares % wares_per_row ?  ( nr_wares / wares_per_row ) + 1 : ( nr_wares / wares_per_row );
-
+	const uint nr_rows =
+		nr_wares / wares_per_row + (nr_wares % wares_per_row ? 1 : 0);
 
    int spacing=5;
    int offsx=spacing;
@@ -373,15 +373,23 @@ m_parent(&parent)
    int cur_ware = 0;
    int dposy = 0;
    posy += PLOT_HEIGHT+ 2*spacing;
-   for(int y = 0; y < nr_rows; y++) {
+	const Tribe_Descr & tribe = *parent.get_player()->get_tribe();
+	for (uint y = 0; y < nr_rows; ++y) {
       posx = spacing;
-      for(int x = 0; x < wares_per_row && cur_ware < nr_wares; x++, cur_ware++) {
-         WSM_Checkbox* cb = new WSM_Checkbox(this, posx, posy, cur_ware,
-               parent.get_player()->get_tribe()->get_ware_descr(cur_ware)->get_menu_pic(), colors[cur_ware]);
-         cb->changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
-         posx += cb->get_w() + spacing;
-         dposy = cb->get_h() + spacing;
-         set_inner_size(spacing + (cb->get_w() + spacing) *wares_per_row, get_inner_h());
+		for
+			(uint x = 0;
+			 x < wares_per_row and cur_ware < nr_wares;
+			 ++x, ++cur_ware)
+		{
+			const Item_Ware_Descr & ware = tribe.get_ware_descr(cur_ware);
+			WSM_Checkbox & cb = *new WSM_Checkbox
+				(this, posx, posy, cur_ware, ware.get_menu_pic(), colors[cur_ware]);
+			cb.set_tooltip(ware.get_descname());
+			cb.changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
+			posx += cb.get_w() + spacing;
+			dposy = cb.get_h() + spacing;
+			set_inner_size
+				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
          m_plot->register_plot_data(cur_ware, parent.get_ware_production_statistics(cur_ware), colors[cur_ware]);
       }
       posy += dposy;
@@ -416,9 +424,12 @@ m_parent(&parent)
 
    posy += 25 + spacing;
    posx = spacing;
-   b = new UIButton(this, posx, posy, 32, 32, 4, 100);
-   b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
+	{
+		UIButton & b = *new UIButton(this, posx, posy, 32, 32, 4, 100);
+		b.clickedid.set(this, &Ware_Statistics_Menu::clicked);
+		b.set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
+		b.set_tooltip(_("Help").c_str());
+	}
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
