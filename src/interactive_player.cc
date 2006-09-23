@@ -373,7 +373,9 @@ void Interactive_Player::next_ware_production_period( void ) {
 /*
  * Get current ware production statistics
  */
-const std::vector<uint>* Interactive_Player::get_ware_production_statistics( int ware ) {
+const std::vector<uint> * Interactive_Player::get_ware_production_statistics
+(const int ware) const
+{
    assert( ware < (int)m_ware_productions.size()) ;
 
    return &m_ware_productions[ware];

@@ -34,7 +34,6 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "filewrite.h"
 #include "game.h"
 #include "player.h"
-#include "rendertarget.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
@@ -86,13 +85,8 @@ IdleWareSupply::IdleWareSupply
 Initialize the Supply and update the economy.
 ===============
 */
-IdleWareSupply::IdleWareSupply(WareInstance* ware)
-{
-	m_ware = ware;
-	m_economy = 0;
-
-	set_economy(m_ware->get_economy());
-}
+IdleWareSupply::IdleWareSupply(WareInstance* ware) : m_ware(ware), m_economy(0)
+{set_economy(m_ware->get_economy());}
 
 
 /*
@@ -249,17 +243,14 @@ WareInstance IMPLEMENTATION
 WareInstance::WareInstance
 ===============
 */
-WareInstance::WareInstance(int ware, Item_Ware_Descr* descr)
-	: Map_Object(descr)
-{
-	m_economy = 0;
-
-	m_ware = ware;
-	m_ware_descr = descr;
-
-	m_transfer = 0;
-	m_supply = 0;
-}
+WareInstance::WareInstance(int ware, Item_Ware_Descr* descr) :
+Map_Object(descr),
+m_economy(0),
+m_ware(ware),
+m_ware_descr(descr),
+m_supply(0),
+m_transfer(0)
+{}
 
 
 /*
@@ -627,20 +618,15 @@ Flag::Flag
 Create the flag. Initially, it doesn't have any attachments.
 ===============
 */
-Flag::Flag()
-	: PlayerImmovable(&g_flag_descr)
-{
-	m_anim = 0;
-	m_building = 0;
-	for(int i = 0; i < 6; i++)
-		m_roads[i] = 0;
-
-	m_item_capacity = 8;
-	m_item_filled = 0;
-	m_items = new PendingItem[m_item_capacity];
-
-	m_always_call_for_flag = 0;
-}
+Flag::Flag() :
+PlayerImmovable(&g_flag_descr),
+m_anim(0),
+m_building(0),
+m_item_capacity(8),
+m_item_filled(0),
+m_items(new PendingItem[m_item_capacity]),
+m_always_call_for_flag(0)
+{for (uint i = 0; i < 6; ++i) m_roads[i] = 0;}
 
 
 /*
@@ -1351,55 +1337,6 @@ void Flag::flag_job_request_callback(Game* g, Request* rq, int ware, Worker* w, 
 
 
 /*
-===============
-Flag::draw
-
-Draw the flag.
-===============
-*/
-void Flag::draw
-(const Editor_Game_Base & game,
- RenderTarget & dst,
- const FCoords coords,
- const Point pos)
-{
-	static struct { int x, y; } ware_offsets[8] = {
-		{ -5,  1 },
-		{ -1,  3 },
-		{  3,  3 },
-		{  7,  1 },
-		{ -6, -3 },
-		{ -1, -2 },
-		{  3, -2 },
-		{  8, -3 }
-	};
-
-	int i;
-
-	dst.drawanim
-		(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, get_owner());
-
-	// Draw wares
-	for(i = 0; i < m_item_filled; i++) {
-		WareInstance* item = m_items[i].item;
-		Point warepos = pos;
-
-		if (i < 8) {
-			warepos.x += ware_offsets[i].x;
-			warepos.y += ware_offsets[i].y;
-		} else
-			warepos.y -= 6 + (i - 8) * 3;
-
-		dst.drawanim
-			(warepos.x, warepos.y,
-			 item->get_ware_descr()->get_animation("idle"),
-			 0,
-			 get_owner());
-	}
-}
-
-
-/*
 ==============================================================================
 
 Road IMPLEMENTATION
@@ -1939,19 +1876,6 @@ bool Road::notify_ware(Game* g, FlagId flagid)
 		return false;
 
 	return carrier->notify_ware(g, flagid);
-}
-
-
-/*
-===============
-Road::draw
-
-The road is drawn by the terrain renderer via marked fields.
-===============
-*/
-void Road::draw
-(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
-{
 }
 
 
@@ -3317,13 +3241,12 @@ Economy::Economy
 Economy::~Economy
 ===============
 */
-Economy::Economy(Player *player)
+Economy::Economy(Player *player) :
+m_owner(player),
+m_rebuilding(false),
+m_request_timer(false),
+mpf_cycle(0)
 {
-	m_owner = player;
-	m_rebuilding = false;
-	m_request_timer = false;
-	mpf_cycle = 0;
-
    m_worker_supplies.resize( player->get_tribe()->get_nrworkers() );
    m_workers.set_nrwares( player->get_tribe()->get_nrworkers() );
    m_ware_supplies.resize( player->get_tribe()->get_nrwares() );

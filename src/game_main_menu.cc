@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,7 @@ void GameMainMenu::clicked(int n) {
          if (m_windows->general_stats.window)
             delete m_windows->general_stats.window;
          else
-            new General_Statistics_Menu(m_player, &m_windows->general_stats);
+            new General_Statistics_Menu(*m_player, m_windows->general_stats);
          break;
 
       case 2:
@@ -120,7 +120,7 @@ void GameMainMenu::clicked(int n) {
          if (m_windows->ware_stats.window)
             delete m_windows->ware_stats.window;
          else
-            new Ware_Statistics_Menu(m_player, &m_windows->ware_stats);
+            new Ware_Statistics_Menu(*m_player, m_windows->ware_stats);
          break;
 
       case 3:
@@ -128,7 +128,7 @@ void GameMainMenu::clicked(int n) {
          if (m_windows->building_stats.window)
             delete m_windows->building_stats.window;
          else
-            new Building_Statistics_Menu(m_player, &m_windows->building_stats);
+            new Building_Statistics_Menu(*m_player, m_windows->building_stats);
          break;
 
       case 4:

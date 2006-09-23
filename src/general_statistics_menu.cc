@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,9 +52,12 @@ General_Statistics_Menu::General_Statistics_Menu
 Create all the buttons etc...
 ===============
 */
-General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,400,_("General Statistics")) {
-   m_parent = parent;
+General_Statistics_Menu::General_Statistics_Menu
+(Interactive_Player & parent, UIUniqueWindowRegistry & registry)
+:
+UIUniqueWindow(&parent,&registry, 400, 400, _("General Statistics")),
+m_parent(&parent)
+{
 
    uint offsy = 35;
    uint spacing = 5;
@@ -71,45 +74,48 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
    posy+=PLOT_HEIGHT+spacing+spacing;
 
-   for(uint i = 0; i < parent->get_general_statistics().size(); i++) {
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 0,
-            &(parent->get_general_statistics()[i].land_size)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 1,
-            &(parent->get_general_statistics()[i].nr_workers)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 2,
-            &(parent->get_general_statistics()[i].nr_buildings)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 3,
-            &(parent->get_general_statistics()[i].nr_wares)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 4,
-            &(parent->get_general_statistics()[i].productivity)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 5,
-            &(parent->get_general_statistics()[i].nr_kills)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 6,
-            &(parent->get_general_statistics()[i].miltary_strength)
-            , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      // Show area plot
-      if( parent->get_game()->get_player(i+1))
+	const Game & game = *parent.get_game();
+	const Interactive_Player::General_Stats_vector & genstats =
+		parent.get_general_statistics();
+	const Interactive_Player::General_Stats_vector::size_type
+		general_statistics_size = genstats.size();
+	for
+		(Interactive_Player::General_Stats_vector::size_type i = 0;
+		 i < general_statistics_size;
+		 ++i)
+	{
+		const uchar * colors = g_playercolors[i];
+		const RGBColor color(colors[9], colors[10], colors[11]);
+		m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 0, &genstats[i].land_size,        color);
+      m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 1, &genstats[i].nr_workers,       color);
+		m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 2, &genstats[i].nr_buildings,     color);
+      m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 3, &genstats[i].nr_wares,         color);
+		m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 4, &genstats[i].productivity,     color);
+		m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 5, &genstats[i].nr_kills,         color);
+		m_plot->register_plot_data
+			(i * NR_DIFFERENT_DATASETS + 6, &genstats[i].miltary_strength, color);
+		if (game.get_player(i + 1)) // Show area plot
          m_plot->show_plot(i*NR_DIFFERENT_DATASETS, 1);
    }
 
 
    // Buttons
    uint plr_in_game = 0;
-   for(uint i = 1; i <= parent->get_game()->get_map()->get_nrplayers(); i++)
-      if( parent->get_game()->get_player(i))
-         plr_in_game++;
+	const uint nr_players = game.get_map().get_nrplayers();
+	for (uint i = 1; i <= nr_players; ++i)
+		if (game.get_player(i)) ++plr_in_game;
 
    posx = spacing;
    int button_size = ( get_inner_w()- ( spacing* (plr_in_game+1) ) ) / plr_in_game;
-   for(uint i = 1; i <= parent->get_game()->get_map()->get_nrplayers(); i++) {
+	for (uint i = 1; i <= nr_players; ++i) {
       m_cbs[i] = 0;
-      if( !parent->get_game()->get_player(i) ) continue;
+		if (not game.get_player(i)) continue;
 
       char buffer[1024];
       sprintf(buffer, "pics/genstats_enable_plr_%02i.png", i);

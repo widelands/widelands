@@ -47,9 +47,12 @@ Building_Statistics_Menu::Building_Statistics_Menu
 Create all the buttons etc...
 ===============
 */
-Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,400,_("Building Statistics")) {
-   m_parent=parent;
+Building_Statistics_Menu::Building_Statistics_Menu
+(Interactive_Player & parent, UIUniqueWindowRegistry & registry)
+:
+UIUniqueWindow(&parent, &registry, 400, 400, _("Building Statistics")),
+m_parent(&parent)
+{
 
    // First, we must decide about the size
    int spacing=5;

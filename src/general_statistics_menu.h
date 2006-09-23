@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ class WUIPlot_Area;
 
 class General_Statistics_Menu : public UIUniqueWindow {
    public:
-      General_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
+	General_Statistics_Menu(Interactive_Player &, UIUniqueWindowRegistry &);
       virtual ~General_Statistics_Menu(void);
 
 

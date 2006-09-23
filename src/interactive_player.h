@@ -44,7 +44,8 @@ class Interactive_Player : public Interactive_Base {
          bool is_constructionsite;
          Coords pos;
       };
-      typedef std::vector<std::vector< Building_Stats > > BuildingStats ;
+	typedef std::vector<Building_Stats> Building_Stats_vector;
+	typedef std::vector<Building_Stats_vector> BuildingStats;
       struct General_Stats {
          std::vector< uint > land_size;
          std::vector< uint > nr_workers;
@@ -54,6 +55,7 @@ class Interactive_Player : public Interactive_Base {
          std::vector< uint > nr_kills;
          std::vector< uint > miltary_strength;
       };
+	typedef std::vector<General_Stats> General_Stats_vector;
 
       struct Game_Main_Menu_Windows {
          UIUniqueWindowRegistry loadgame;
@@ -104,13 +106,16 @@ class Interactive_Player : public Interactive_Base {
       // For ware production statistics (only needed for the interactive player)
       void ware_produced(uint id);
       void next_ware_production_period( void );
-      const std::vector<uint>* get_ware_production_statistics( int ware );
+	const std::vector<uint> * get_ware_production_statistics
+		(const int ware) const;
 
       // For statistics mainly, we keep track of buildings
       void gain_immovable(PlayerImmovable* );
       void lose_immovable(PlayerImmovable* );
-      const std::vector< Building_Stats >&  get_building_statistics( int i ) { return m_building_stats[i]; }
-      const std::vector< General_Stats>& get_general_statistics( void ) { return m_general_stats; }
+	const Building_Stats_vector & get_building_statistics(const int i) const
+	{return m_building_stats[i];}
+	const General_Stats_vector & get_general_statistics() const
+	{return m_general_stats;}
 
       // For load
       virtual void cleanup_for_load( void );
@@ -143,7 +148,7 @@ class Interactive_Player : public Interactive_Base {
       uint  m_last_stats_update;
 
       BuildingStats m_building_stats;
-      std::vector< General_Stats > m_general_stats;
+	General_Stats_vector m_general_stats;
 
       // Chat message stack
       std::vector< NetGame::Chat_Message > m_chatmsges;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -339,12 +339,14 @@ Ware_Statistics_Menu::Ware_Statistics_Menu
 Create all the buttons etc...
 ===============
 */
-Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,270,_("Ware Statistics")) {
-   m_parent = parent;
-
+Ware_Statistics_Menu::Ware_Statistics_Menu
+(Interactive_Player & parent, UIUniqueWindowRegistry & registry)
+:
+UIUniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
+m_parent(&parent)
+{
    // First, we must decide about the size
-   int nr_wares = parent->get_player()->get_tribe()->get_nrwares();
+	const int nr_wares = parent.get_player()->get_tribe()->get_nrwares();
    int wares_per_row = MIN_WARES_PER_LINE;
    while(nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
    int nr_rows = nr_wares % wares_per_row ?  ( nr_wares / wares_per_row ) + 1 : ( nr_wares / wares_per_row );
@@ -375,12 +377,12 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
       posx = spacing;
       for(int x = 0; x < wares_per_row && cur_ware < nr_wares; x++, cur_ware++) {
          WSM_Checkbox* cb = new WSM_Checkbox(this, posx, posy, cur_ware,
-               parent->get_player()->get_tribe()->get_ware_descr(cur_ware)->get_menu_pic(), colors[cur_ware]);
+               parent.get_player()->get_tribe()->get_ware_descr(cur_ware)->get_menu_pic(), colors[cur_ware]);
          cb->changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
          posx += cb->get_w() + spacing;
          dposy = cb->get_h() + spacing;
          set_inner_size(spacing + (cb->get_w() + spacing) *wares_per_row, get_inner_h());
-         m_plot->register_plot_data(cur_ware, parent->get_ware_production_statistics(cur_ware), colors[cur_ware]);
+         m_plot->register_plot_data(cur_ware, parent.get_ware_production_statistics(cur_ware), colors[cur_ware]);
       }
       posy += dposy;
    }
