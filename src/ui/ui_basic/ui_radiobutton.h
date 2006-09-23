@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,10 @@ public:
 	UISignal1<int> changedto;
    UISignal clicked; // clicked without things changed
 
-	int add_button(UIPanel* parent, int x, int y, uint picid = 0);
+	int add_button
+		(UIPanel * parent,
+		 const int x, const int y,
+		 const uint picid, const char * const tooltip = 0);
 
 	inline int get_state() const { return m_state; }
 	void set_state(int state);

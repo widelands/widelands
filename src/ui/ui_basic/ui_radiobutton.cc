@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,10 +113,14 @@ UIRadiogroup::~UIRadiogroup()
 Create a new radio button with the given attributes
 Returns the ID of the new button.
 */
-int UIRadiogroup::add_button(UIPanel *parent, int x, int y, uint picid)
+int UIRadiogroup::add_button
+(UIPanel * parent,
+ const int x, const int y,
+ const uint picid, const char * const tooltip)
 {
 	m_highestid++;
-	new UIRadiobutton(parent, x, y, picid, this, m_highestid);
+	(new UIRadiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip
+		(tooltip);
 	return m_highestid;
 }
 

@@ -943,10 +943,7 @@ void WLApplication::init_double_game ()
 /**
  * On SIGUSR1, allow ourselves to continue running
  */
-void WLApplication::signal_handler (int sig)
-{
-	may_run++;
-}
+void WLApplication::signal_handler(int) {may_run++;}
 
 /**
  * Kill the other instance when exiting
