@@ -196,7 +196,7 @@ public:
    void act_attack_weak();    /// Prepare to launch weakest soldiers
 
 private:
-   void add_tab(const char* picname, UIPanel* panel);
+	uint add_tab(const char* picname, UIPanel* panel);
    void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 
@@ -209,6 +209,7 @@ private:
 
 	UITab_Panel*	m_tabpanel;
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
+	uint m_best_tab;
 	int m_workarea_preview_job_id;
 	unsigned int workarea_cumulative_picid[number_of_workarea_pics + 1];
 
@@ -261,6 +262,7 @@ FieldActionWindow::FieldActionWindow
 	m_plr(plr),
 	m_map(iabase->get_egbase()->get_map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
+	m_best_tab(0),
 	m_workarea_preview_job_id(-1)
 {
 
@@ -332,7 +334,7 @@ void FieldActionWindow::init()
 
 	// Now force the mouse onto the first button
 	// TODO: should be on first tab button if we're building
-	set_mouse_pos(17, m_fastclick ? 51 : 17);
+	set_mouse_pos(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17);
 }
 
 
@@ -550,11 +552,11 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 
 	// Add all necessary tabs
 	for(int i = 0; i < 3; i++)
-		if (bbg_house[i])
-			add_tab(pic_tab_buildhouse[i], bbg_house[i]);
+		if (bbg_house[i]) m_tabpanel->activate
+			(m_best_tab = add_tab(pic_tab_buildhouse[i], bbg_house[i]));
 
-	if (bbg_mine)
-		add_tab(pic_tab_buildmine, bbg_mine);
+	if (bbg_mine) m_tabpanel->activate
+		(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine));
 }
 
 
@@ -587,10 +589,8 @@ FieldActionWindow::add_tab
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
-void FieldActionWindow::add_tab(const char* picname, UIPanel* panel)
-{
-	m_tabpanel->add(g_gr->get_picture(  PicMod_Game,  picname ), panel );
-}
+uint FieldActionWindow::add_tab(const char* picname, UIPanel* panel)
+{return m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname), panel);}
 
 
 /*
