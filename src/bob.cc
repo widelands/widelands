@@ -438,7 +438,7 @@ Bob::skip_act
 Explicitly state that we don't want to act.
 ===============
 */
-void Bob::skip_act(Game* g)
+void Bob::skip_act(Game *)
 {
 	if (!get_state()->task->signal)
 		throw wexception("MO(%u): %s calls skip_act(), but has no signal() function",
@@ -456,7 +456,7 @@ Explicitly state that we don't want to act, even if we cannot be awoken by a
 signal. Use with great care.
 ===============
 */
-void Bob::force_skip_act(Game* g)
+void Bob::force_skip_act(Game *)
 {
 	m_stack_dirty = false;
 	m_actid++;
@@ -473,7 +473,7 @@ push_task() itself does not call any functions of the task, so the caller can
 fill the state information with parameters for the task.
 ===============
 */
-void Bob::push_task(Game* g, Task* task)
+void Bob::push_task(Game *, Task * task)
 {
    State* state;
 
@@ -506,7 +506,7 @@ pop_task() itself does not call any parent task functions, but it sets a flag
 to make it happen.
 ===============
    */
-void Bob::pop_task(Game* g)
+void Bob::pop_task(Game *)
 {
    State* state = get_state();
 
@@ -625,9 +625,7 @@ Bob::init_auto_task
 Automatically select a task.
 ===============
 */
-void Bob::init_auto_task(Game* g)
-{
-}
+void Bob::init_auto_task(Game *) {}
 
 
 /*
@@ -690,10 +688,7 @@ void Bob::idle_update(Game* g, State* state)
 	state->ivar1 = 0;
 }
 
-void Bob::idle_signal(Game* g, State* state)
-{
-	pop_task(g);
-}
+void Bob::idle_signal(Game * g, State *) {pop_task(g);}
 
 
 /*
@@ -881,7 +876,7 @@ void Bob::movepath_update(Game* g, State* state)
 /*
  * movepath signal
  */
-void Bob::movepath_signal(Game* g, State* start) {
+void Bob::movepath_signal(Game * g, State *) {
    if(get_signal()=="interrupt_now") {
       // User requests an immediate interrupt.
       // Well, he better nows what he's doing
@@ -1071,10 +1066,7 @@ Bob::end_walk
 Call this from your task_act() function that was scheduled after start_walk().
 ===============
 */
-void Bob::end_walk(Game* g)
-{
-	m_walking = IDLE;
-}
+void Bob::end_walk(Game *) {m_walking = IDLE;}
 
 
 /*

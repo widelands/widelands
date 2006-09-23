@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -132,7 +132,9 @@ Event_Allow_Building_Option_Menu::~Event_Allow_Building_Option_Menu(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Event_Allow_Building_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Event_Allow_Building_Option_Menu::handle_mouseclick
+(uint btn, bool down, int, int)
+{
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;

@@ -174,7 +174,9 @@ Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Event_Message_Box_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Event_Message_Box_Option_Menu::handle_mouseclick
+(uint btn, bool down, int, int)
+{
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;
@@ -310,7 +312,7 @@ void Event_Message_Box_Option_Menu::ls_selected(int i) {
 /*
  * Button name edit box edited
  */
-void Event_Message_Box_Option_Menu::edit_box_edited(int i) {
+void Event_Message_Box_Option_Menu::edit_box_edited(int) {
    m_buttons[m_ls_selected].name= m_button_name->get_text() ;
    update();
 }

@@ -81,7 +81,7 @@ New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool New_Variable_Window::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool New_Variable_Window::handle_mouseclick(uint btn, bool down, int, int) {
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;
@@ -184,7 +184,7 @@ Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_E
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Edit_Variable_Window::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Edit_Variable_Window::handle_mouseclick(uint btn, bool down, int, int) {
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;

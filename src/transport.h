@@ -488,7 +488,7 @@ public:
 	Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type);
 	~Request();
 
-	PlayerImmovable* get_target(Game* g) { return m_target; }
+	PlayerImmovable * get_target(Game *) const {return m_target;}
 	int get_index() const { return m_index; }
    int get_type() const { return m_type; }
 	bool is_idle() const { return m_idle; }

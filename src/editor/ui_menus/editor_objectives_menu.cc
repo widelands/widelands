@@ -117,7 +117,7 @@ Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UITable
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Edit_Objective_Window::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Edit_Objective_Window::handle_mouseclick(uint btn, bool down, int, int) {
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;

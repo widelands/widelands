@@ -598,7 +598,7 @@ signal).
 Return false if there's nothing to be done.
 ===============
 */
-bool Building::get_building_work(Game* g, Worker* w, bool success)
+bool Building::get_building_work(Game *, Worker * w, bool)
 {
 	throw wexception("MO(%u): get_building_work() for unknown worker %u",
 		get_serial(), w->get_serial());
@@ -701,7 +701,7 @@ Return true if we can service that request (even if it is delayed), or false
 otherwise.
 ===============
 */
-bool Building::fetch_from_flag(Game* g)
+bool Building::fetch_from_flag(Game *)
 {
 	molog("TODO: Implement Building::fetch_from_flag\n");
 
@@ -745,7 +745,7 @@ Draw overlay help strings when enabled.
 void Building::draw_help
 (const Editor_Game_Base & game,
  RenderTarget & dst,
- const FCoords coords,
+ const FCoords,
  const Point pos)
 {
 	const uint dpyflags = game.get_iabase()->get_display_flags();
@@ -778,11 +778,8 @@ void Building::set_stop(bool stop) {
 	m_stop = stop;
 }
 
-void Building::conquered_by (Player* pl)
-{
-   molog ("Building::conquered_by - Building hasn't conquered code yet !\n");
-
-}
+void Building::conquered_by (Player *)
+{molog ("Building::conquered_by - Building hasn't conquered code yet !\n");}
 
 /**
  * Log basic infos

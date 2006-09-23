@@ -253,7 +253,7 @@ do_configure(config_h, conf, env)
 write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
 #load_configuration(conf)
 
-env.Append(CCFLAGS=['-pipe', '-Wall', '-Wno-comment'])
+env.Append(CCFLAGS=['-pipe', '-Wall', '-Wextra', '-Wno-comment'])
 #env.Append(LINKFLAGS='-lasprintf') #TODO: *check* for this instead of assuming it's there
 
 env=conf.Finish()

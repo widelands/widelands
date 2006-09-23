@@ -105,11 +105,11 @@ struct CheckStep {
 Some very simple default predicates (more predicates below Map).
 */
 struct FindImmovableAlwaysTrue : public FindImmovable {
-	virtual bool accept(BaseImmovable* imm) const { return true; }
+	virtual bool accept(BaseImmovable *) const {return true;}
    virtual ~FindImmovableAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAlwaysTrue : public FindBob {
-	virtual bool accept(Bob *imm) const { return true; }
+	virtual bool accept(Bob *) const {return true;}
    virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAttribute : public FindBob {

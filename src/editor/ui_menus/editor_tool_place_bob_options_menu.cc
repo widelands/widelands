@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -156,5 +156,4 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
 }
 
 /* do nothing */
-void Editor_Tool_Place_Bob_Options_Menu::do_nothing(int n, bool t) {
-}
+void Editor_Tool_Place_Bob_Options_Menu::do_nothing(int, bool) {}

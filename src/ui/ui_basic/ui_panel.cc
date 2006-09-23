@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ _flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
 _x(nx), _y(ny), _w(nw), _h(nh),
 _lborder(0), _rborder(0), _tborder(0), _bborder(0),
 _border_snap_distance(0), _panel_snap_distance(0),
-_use_tooltip(false)
+_tooltip(0)
 {
 	if (_parent) {
 		_next = _parent->_fchild;
@@ -97,6 +97,8 @@ UIPanel::~UIPanel()
 		else
 			_parent->_lchild = _prev;
 	}
+
+	free(_tooltip);
 }
 
 
@@ -158,7 +160,7 @@ int UIPanel::run()
 			{
 				while (lowest->_mousein)
 					lowest = lowest->_mousein;
-				if (lowest->use_tooltip())
+				if (lowest->get_tooltip())
 					draw_tooltip(rt, lowest);
 			}
 
@@ -319,17 +321,13 @@ void UIPanel::set_visible(bool on)
  * Redraw the panel. Note that all drawing coordinates are relative to the
  * inner area: you cannot overwrite the panel border in this function.
  */
-void UIPanel::draw(RenderTarget* dst)
-{
-}
+void UIPanel::draw(RenderTarget *) {}
 
 /**
  * [virtual]
  * Redraw the panel border.
  */
-void UIPanel::draw_border(RenderTarget* dst)
-{
-}
+void UIPanel::draw_border(RenderTarget *) {}
 
 
 /*
@@ -340,9 +338,7 @@ Draw overlays that appear over all child panels.
 This can be used e.g. for debug information.
 ===============
 */
-void UIPanel::draw_overlay(RenderTarget* dst)
-{
-}
+void UIPanel::draw_overlay(RenderTarget *) {}
 
 
 /**
@@ -395,7 +391,7 @@ void UIPanel::update_inner(int x, int y, int w, int h)
  * has been called explicitly. Otherwise, the contents of the panel are copied
  * from a cached Pic.
  */
-void UIPanel::set_cache(bool enable)
+void UIPanel::set_cache(bool)
 {
 /* Deactivated for now
 	if (enable)
@@ -477,9 +473,7 @@ void UIPanel::center_mouse()
  * position received in handle_mousemove may be negative while the mouse is
  * still inside the panel as far as handle_mousein is concerned.
  */
-void UIPanel::handle_mousein(bool inside)
-{
-}
+void UIPanel::handle_mousein(bool) {}
 
 /**
  * Called whenever the user clicks into the panel.
@@ -488,18 +482,13 @@ void UIPanel::handle_mousein(bool inside)
  *
  * Returns: true if the mouseclick was processed
  */
-bool UIPanel::handle_mouseclick(uint btn, bool down, int x, int y)
-{
-	return false;
-}
+bool UIPanel::handle_mouseclick(uint, bool, int, int) {return false;}
 
 /**
  * Called when the mouse is moved while inside the panel
  *
  */
-void UIPanel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
-{
-}
+void UIPanel::handle_mousemove(int, int, int, int, uint) {}
 
 /**
  * Receive a keypress or keyrelease event.
@@ -508,10 +497,7 @@ void UIPanel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
  *
  * Return true if you processed the key.
 */
-bool UIPanel::handle_key(bool down, int code, char c)
-{
-	return false;
-}
+bool UIPanel::handle_key(bool, int, char) {return false;}
 
 /**
  *
@@ -854,7 +840,7 @@ UIPanel *UIPanel::ui_trackmouse(int *x, int *y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void UIPanel::ui_mouseclick(bool down, int button, uint btns, int x, int y)
+void UIPanel::ui_mouseclick(bool down, int button, uint, int x, int y)
 {
 	UIPanel *p;
 
@@ -904,18 +890,9 @@ void UIPanel::ui_key(bool down, int code, char c)
 /**
  * Set the tooltip for the panel.
  */
-void UIPanel::set_tooltip(const char tooltip[255])
-{
-	snprintf(_tooltip, sizeof(_tooltip), "%s", tooltip);
-	_use_tooltip = true;
-}
-
-/**
- * Unset the tooltip for the panel.
- */
-void UIPanel::unset_tooltip()
-{
-	_use_tooltip = false;
+void UIPanel::set_tooltip(const char * const tooltip) {
+	free(_tooltip);
+	_tooltip = tooltip ? strdup(tooltip) : 0;
 }
 
 /** [private]

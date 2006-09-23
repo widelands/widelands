@@ -184,16 +184,13 @@ private:
 	bool _running;
 	int _retcode;
 
-	bool _use_tooltip;
-	char _tooltip[255];
+	char * _tooltip;
 
 	void draw_tooltip(RenderTarget* dst, UIPanel *lowest);
 
 public:
-	void set_tooltip(const char tooltip[255]);
-	void unset_tooltip();
-	inline char* get_tooltip(){return _tooltip;}
-	bool use_tooltip(){return _use_tooltip;}
+	void set_tooltip(const char * const);
+	char * get_tooltip() const {return _tooltip;}
 
 
 private:
