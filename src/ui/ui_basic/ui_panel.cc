@@ -891,8 +891,10 @@ void UIPanel::ui_key(bool down, int code, char c)
  * Set the tooltip for the panel.
  */
 void UIPanel::set_tooltip(const char * const tooltip) {
-	free(_tooltip);
-	_tooltip = tooltip ? strdup(tooltip) : 0;
+	if (tooltip != _tooltip) {
+		free(_tooltip);
+		_tooltip = tooltip ? strdup(tooltip) : 0;
+	}
 }
 
 /** [private]
