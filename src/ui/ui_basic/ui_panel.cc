@@ -925,7 +925,7 @@ void UIPanel::draw_tooltip(RenderTarget* dst, UIPanel *lowest)
 {
 	int tooltipX, tooltipY, tip_width, tip_height;
 
-	tooltipX = WLApplication::get()->get_mouse_y() + 20;
+	tooltipX = WLApplication::get()->get_mouse_x() + 20;
 	tooltipY = WLApplication::get()->get_mouse_y() + 25;
 
 	g_fh->get_size(UI_FONT_TOOLTIP, lowest->get_tooltip(), &tip_width, &tip_height, 0);
