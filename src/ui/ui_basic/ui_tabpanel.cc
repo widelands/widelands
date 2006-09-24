@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by Widelands Development Team
+ * Copyright (C) 2003, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,8 +97,7 @@ void UITab_Panel::set_snapparent(bool snapparent)
 /**
 Add a new tab
 */
-uint UITab_Panel::add(uint picid, UIPanel* panel)
-{
+uint UITab_Panel::add(uint picid, UIPanel* panel, const std::string & tooltip) {
 	assert(panel);
 	assert(panel->get_parent() == this);
 
@@ -106,6 +105,7 @@ uint UITab_Panel::add(uint picid, UIPanel* panel)
 	uint id;
 
 	t.picid = picid;
+	t.tooltip = tooltip;
 	t.panel = panel;
 
 	m_tabs.push_back(t);
@@ -205,8 +205,7 @@ void UITab_Panel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-void UITab_Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
-{
+void UITab_Panel::handle_mousemove(int x, int y, int, int, uint) {
 	int hl;
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)
@@ -221,6 +220,14 @@ void UITab_Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns
 
 	if (hl != m_highlight)
 		{
+		{
+			const char * t = 0;
+			if (hl >= 0) {
+				const std::string & str = m_tabs[hl].tooltip;
+				t = str.size() ? str.c_str() : 0;
+			}
+			set_tooltip(t);
+		}
 		if (m_highlight >= 0)
 			update(m_highlight*TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
 		if (hl >= 0)
@@ -234,8 +241,7 @@ void UITab_Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns
 /**
 Change the active tab if a tab button has been clicked
 */
-bool UITab_Panel::handle_mouseclick(uint btn, bool down, int x, int y)
-{
+bool UITab_Panel::handle_mouseclick(uint btn, bool, int x, int y) {
 	if (btn == 0) // left mouse button
 		{
 		int id;

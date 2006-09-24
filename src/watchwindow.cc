@@ -107,10 +107,12 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 	btn = new UIButton(this, 0, h - 34, 34, 34, 20);
 	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_watch_follow.png" ));
 	btn->clicked.set(this, &WatchWindow::toggle_tracking);
+	btn->set_tooltip(_("Follow").c_str());
 
 	btn = new UIButton(this, 34, h - 34, 34, 34, 21);
 	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_goto.png" ));
 	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
+	btn->set_tooltip(_("Center mainview on this").c_str());
 
 	if (m_single_window) {
 		for (int i=0;i<NUM_VIEWS;i++) {
@@ -123,6 +125,7 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 		btn = new UIButton(this, w-34, h - 34, 34, 34, 22);
 		btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_abort.png" ));
 		btn->clicked.set(this, &WatchWindow::close_cur_view);
+		btn->set_tooltip(_("Close").c_str());
 	}
 	m_mapview = new Map_View(this, 0, 0, 200, 166, parent);
 	m_mapview->fieldclicked.set(parent, &Interactive_Player::field_action);
@@ -221,7 +224,7 @@ void WatchWindow::toggle_buttons() {
 }
 
 //Draws the current view
-void WatchWindow::show_view(bool first) {
+void WatchWindow::show_view(bool) {
 	m_mapview->set_viewpoint(m_views[m_cur_index].view_point);
 	//Tracking turned of by default
 	//start_tracking(m_views[m_cur_index].view_point);
@@ -361,8 +364,7 @@ WatchWindow::stop_tracking_by_drag
 When the user drags the mapview, we stop tracking.
 ===============
 */
-void WatchWindow::stop_tracking_by_drag(int x, int y)
-{
+void WatchWindow::stop_tracking_by_drag(int, int) {
 	//Disable switching while dragging
 	if (m_mapview->is_dragging()) {
 		last_visit = m_game->get_gametime();

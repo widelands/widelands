@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -196,7 +196,10 @@ public:
    void act_attack_weak();    /// Prepare to launch weakest soldiers
 
 private:
-	uint add_tab(const char* picname, UIPanel* panel);
+	uint add_tab
+		(const char * picname,
+		 UIPanel * panel,
+		 const std::string & tooltip = std::string());
    void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 
@@ -226,6 +229,9 @@ static const char* const pic_tab_buildhouse[3] = {
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png"
 };
+static const char * const tooltip_tab_build[3] = //  FIXME mark for translation
+{"Build small buildings", "Build medium buildings", "Build large buildings",};
+
 static const char* const pic_tab_buildmine = "pics/menu_tab_buildmine.png";
 
 static const char* const pic_buildroad = "pics/menu_build_way.png";
@@ -430,11 +436,11 @@ void FieldActionWindow::add_buttons_auto()
 	if (buildbox && buildbox->get_nritems())
 		{
 		buildbox->resize();
-		add_tab(pic_tab_buildroad, buildbox);
+		add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
 		}
 
 	watchbox->resize();
-	add_tab(pic_tab_watch, watchbox);
+	add_tab(pic_tab_watch, watchbox, _("Watch"));
 }
 
 void FieldActionWindow::add_buttons_attack ()
@@ -484,7 +490,7 @@ void FieldActionWindow::add_buttons_attack ()
    if (attackbox && attackbox->get_nritems())
    {
       attackbox->resize();
-      add_tab(pic_tab_attack, attackbox);
+	   add_tab(pic_tab_attack, attackbox, _("Attack"));
    }
 }
 
@@ -553,10 +559,11 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 	// Add all necessary tabs
 	for(int i = 0; i < 3; i++)
 		if (bbg_house[i]) m_tabpanel->activate
-			(m_best_tab = add_tab(pic_tab_buildhouse[i], bbg_house[i]));
+			(m_best_tab = add_tab
+			 (pic_tab_buildhouse[i], bbg_house[i], tooltip_tab_build[i]));
 
 	if (bbg_mine) m_tabpanel->activate
-		(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine));
+		(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine, _("Build mines")));
 }
 
 
@@ -578,7 +585,7 @@ void FieldActionWindow::add_buttons_road(bool flag)
 
 	// Add the box as tab
 	buildbox->resize();
-	add_tab(pic_tab_buildroad, buildbox);
+	add_tab(pic_tab_buildroad, buildbox, _("Build road"));
 }
 
 
@@ -589,8 +596,12 @@ FieldActionWindow::add_tab
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
-uint FieldActionWindow::add_tab(const char* picname, UIPanel* panel)
-{return m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname), panel);}
+uint FieldActionWindow::add_tab
+(const char * picname, UIPanel * panel, const std::string & tooltip)
+{
+	return
+		m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname), panel, tooltip);
+}
 
 
 /*
@@ -814,7 +825,7 @@ FieldActionWindow::building_icon_mouse_out
 The mouse pointer has moved away from the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_out(long idx) {
+void FieldActionWindow::building_icon_mouse_out(long) {
 	if (m_workarea_preview_job_id != -1) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = -1;

@@ -606,13 +606,15 @@ void Building_Window::setup_capsbuttons()
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_start_stop);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  icon.c_str() ));
+		btn->set_tooltip(_("Stop").c_str());
 		x += 34;
 	}
 
    if(m_capscache & (1 << Building::PCap_Enhancable)) {
       const std::vector<char*>* buildings=m_building->get_enhances_to();
+      const Tribe_Descr & tribe = *m_player->get_player()->get_tribe();
       for(uint i=0; i<buildings->size(); i++) {
-         int id=m_player->get_player()->get_tribe()->get_building_index((*buildings)[i]);
+         int id = tribe.get_building_index((*buildings)[i]);
          if(id==-1)
             throw wexception("Should enhance to unknown building: %s\n", (*buildings)[i]);
 
@@ -622,9 +624,15 @@ void Building_Window::setup_capsbuttons()
             continue;
          }
 
-         UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4, id); // Button id == building id
-         btn->clickedid.set(this, &Building_Window::act_enhance);
-         btn->set_pic(m_player->get_player()->get_tribe()->get_building_descr(id)->get_buildicon());
+         UIButton & btn = *new UIButton(m_capsbuttons, x, 0, 34, 34, 4, id); // Button id == building id
+         btn.clickedid.set(this, &Building_Window::act_enhance);
+         const Building_Descr & building = *tribe.get_building_descr(id);
+         btn.set_pic(building.get_buildicon());
+         char buffer[128];
+         snprintf
+            (buffer, sizeof(buffer),
+             _("Enhance to %s").c_str(), building.get_descname());
+         btn.set_tooltip(buffer);
          x += 34;
       }
    }
@@ -633,6 +641,7 @@ void Building_Window::setup_capsbuttons()
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_bulldoze ));
+		btn->set_tooltip(_("Destroy").c_str());
 		x += 34;
 	}
 
@@ -640,6 +649,7 @@ void Building_Window::setup_capsbuttons()
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_debug);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_debug ));
+		btn->set_tooltip(_("Debug").c_str());
 		x += 34;
 	}
 
@@ -1206,6 +1216,7 @@ ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* p
    m_list_worker=new UIButton(box, 0,0,32,32,4,100);
    m_list_worker->set_pic(g_gr->get_picture( PicMod_Game,  pic_list_worker ));
    m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
+   m_list_worker->set_tooltip(_("Show worker listing").c_str());
    box->add(m_list_worker, UIBox::AlignLeft);
 
    return box;

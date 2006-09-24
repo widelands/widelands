@@ -91,38 +91,47 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b = new UIButton(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_menu.png" ));
+   b->set_tooltip(_("Menu").c_str());
 
    b = new UIButton(this, x+34, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_toggle_tool_menu.png" ));
+   b->set_tooltip(_("Tool").c_str());
 
    b = new UIButton(this, x+68, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_set_toolsize_menu.png" ));
+   b->set_tooltip(_("Toolsize").c_str());
 
    b = new UIButton(this, x+102, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_minimap);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_minimap.png" ));
+   b->set_tooltip(_("Minimap").c_str());
 
    b = new UIButton(this, x+136, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_buildhelp.png" ));
+   b->set_tooltip(_("Buildhelp").c_str());
 
    b = new UIButton(this, x+170, y, 34, 43, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_playermenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_player_menu.png" ));
+   b->set_tooltip(_("Players").c_str());
 
    b = new UIButton(this, x+204, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_eventmenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_event_menu.png" ));
+   b->set_tooltip(_("Events").c_str());
 
    b = new UIButton(this, x+238, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_variablesmenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_variables_menu.png" ));
+   b->set_tooltip(_("Variables").c_str());
 
    b = new UIButton(this, x+272, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_objectivesmenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_objectives_menu.png" ));
+   b->set_tooltip(_("Objectives").c_str());
 
 
    // Init Tools
@@ -358,7 +367,7 @@ Editor_Interactive::handle_key()
 Handles a keyboard event
 ===========
 */
-bool Editor_Interactive::handle_key(bool down, int code, char c) {
+bool Editor_Interactive::handle_key(bool down, int code, char) {
    if(code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
 
    if(down) {

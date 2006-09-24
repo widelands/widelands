@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by the Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 #include "types.h"
 #include "ui_panel.h"
 
+#include <string>
+
 /**
 Provides a tab view; every tab is a panel that can contain any number of
 sub-panels (such as buttons, other UITab_Panels, etc..) and an associated
@@ -42,7 +44,8 @@ public:
 	void set_snapparent(bool snapparent);
 	bool get_snapparent() const { return m_snapparent; }
 
-	uint add(uint picid, UIPanel* panel);
+	uint add
+		(uint picid, UIPanel* panel, const std::string & tooltip = std::string());
 
 	void activate(uint idx);
 
@@ -56,6 +59,7 @@ private:
 
 	struct Tab {
 		uint		picid;
+		std::string tooltip;
 		UIPanel*	panel;
 	};
 
