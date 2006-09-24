@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,7 +224,7 @@ void UITab_Panel::handle_mousemove(int x, int y, int, int, uint) {
 			const char * t = 0;
 			if (hl >= 0) {
 				const std::string & str = m_tabs[hl].tooltip;
-				t = str.size() ? str.c_str() : 0;
+				if (str.size()) t = str.c_str();
 			}
 			set_tooltip(t);
 		}

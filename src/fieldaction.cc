@@ -585,7 +585,7 @@ void FieldActionWindow::add_buttons_road(bool flag)
 
 	// Add the box as tab
 	buildbox->resize();
-	add_tab(pic_tab_buildroad, buildbox, _("Build road"));
+	add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
 }
 
 
