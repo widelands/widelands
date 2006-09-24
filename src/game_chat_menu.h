@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,29 +21,33 @@
 #define __S__GAME_CHAT_MENU_H
 
 #include "interactive_player.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_multilineeditbox.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 class NetGame;
-class UIMultiline_Editbox;
-class UIMultiline_Textarea;
 
 // The GameChatMenu is a rather dumb window with lots of buttons
 class GameChatMenu : public UIUniqueWindow {
 public:
-	GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, NetGame* game);
-	virtual ~GameChatMenu();
+	GameChatMenu(Interactive_Player &, UIUniqueWindowRegistry &, NetGame *);
 
    void  think( void );
 
 private:
-	Interactive_Player	*m_player;
-   UIMultiline_Editbox  *m_editbox;
-   UIMultiline_Textarea *m_chatbox;
-   NetGame              *m_netgame;
-
-private:
-   void clicked(int);
-   void cb_changed( bool );
+	Interactive_Player & m_player;
+	NetGame            * m_netgame;
+	UIMultiline_Textarea chatbox;
+	UIMultiline_Editbox  editbox;
+	UIButton             send;
+	UITextarea           show_as_overlays_label;
+	UICheckbox           show_as_overlays;
+	
+	void clicked_send(int);
+	void changed_show_as_overlays(bool);
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,9 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
-#include "constants.h"
-#include "error.h"
-#include "font_handler.h"
-#include "rendertarget.h"
-#include "sound_handler.h"
-#include "types.h"
 #include "ui_object.h"
+
+#include <cassert>
 
 class RenderTarget;
 

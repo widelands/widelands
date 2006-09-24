@@ -28,151 +28,86 @@
 #include "i18n.h"
 #include "interactive_player.h"
 #include "stock_menu.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
+#include "ui_unique_window.h"
 #include "ware_statistics_menu.h"
 
-/*
-==============================================================================
-
-GameMainMenu IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
 GameMainMenu::GameMainMenu
-
-Create all the buttons etc...
-===============
-*/
-GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows)
-	: UIUniqueWindow(plr, registry, 180, 160, _("Main Menu"))
+(Interactive_Player & plr,
+ UIUniqueWindowRegistry & registry,
+ Interactive_Player::Game_Main_Menu_Windows & windows)
+:
+UIUniqueWindow(&plr, &registry, 180, 160, _("Main Menu")),
+m_player      (plr),
+m_windows     (windows),
+general_stats (this, posx(0, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
+ware_stats    (this, posx(1, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
+building_stats(this, posx(2, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
+stock         (this, posx(3, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
+objectives    (this, posx(0, 2), posy(1, 3), buttonw(2), buttonh(3), 4),
+chat          (this, posx(1, 2), posy(1, 3), buttonw(2), buttonh(3), 4),
+options_menu  (this, posx(0, 1), posy(2, 3), buttonw(1), buttonh(3), 4)
 {
-   m_player=plr;
-   m_windows = windows;
+	general_stats .set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"));
+	ware_stats    .set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"));
+	building_stats.set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"));
+	stock.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"));
+	objectives    .set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png"));
+	chat.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_chat.png"));
+	options_menu  .set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_options_menu.png"));
+	
+	general_stats .clicked.set(this, &GameMainMenu::clicked_general_stats);
+	ware_stats    .clicked.set(this, &GameMainMenu::clicked_ware_stats);
+	building_stats.clicked.set(this, &GameMainMenu::clicked_building_stats);
+	stock         .clicked.set(this, &GameMainMenu::clicked_stock);
+	objectives    .clicked.set(this, &GameMainMenu::clicked_objectives);
+	chat          .clicked.set(this, &GameMainMenu::clicked_chat);
+	options_menu  .clicked.set(this, &GameMainMenu::clicked_options_menu);
+	
+	general_stats .set_tooltip(_("General statistics") .c_str());
+	ware_stats    .set_tooltip(_("Ware statistics")    .c_str());
+	building_stats.set_tooltip(_("Building statistics").c_str());
+	stock         .set_tooltip(_("Stock")              .c_str());
+	objectives    .set_tooltip(_("Objectives")         .c_str());
+	chat          .set_tooltip(_("Chat")               .c_str());
+	options_menu  .set_tooltip(_("Chat")               .c_str());
 
-
-   int spacing = 5;
-   int posy = 2*spacing;
-   int posx = 2*spacing;
-
-   // UIButtons
-   int buttonw = (get_inner_w()-7*spacing) / 4;
-   UIButton* b=new UIButton(this, posx, posy, buttonw, 34, 4, 1);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_general_stats.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx += buttonw + spacing;
-
-   b=new UIButton(this, posx, posy, buttonw, 34, 4, 2);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_ware_stats.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx += buttonw + spacing;
-
-   b=new UIButton(this, posx, posy, buttonw, 34, 4, 3);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_building_stats.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx += buttonw + spacing;
-
-   b=new UIButton(this, posx, posy, buttonw, 34, 4, 4);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_stock.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx = 2*spacing;
-   posy += 45;
-
-   buttonw = (get_inner_w()-5*spacing) / 2;
-   b=new UIButton(this, posx, posy, buttonw, 34, 4, 25);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_objectives.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx += buttonw + spacing;
-
-   b=new UIButton(this, posx, posy, buttonw, 34, 4, 30);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_chat.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx = 2*spacing;
-   posy += 45;
-
-   buttonw = (get_inner_w()-4*spacing);
-   b=new UIButton(this, posx, posy, buttonw, 34, 4, 50);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_options_menu.png" ));
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   posx = 2*spacing;
-   posy += 40;
-
-   set_inner_size(get_inner_w(), posy+5);
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-void GameMainMenu::clicked(int n) {
-   switch(n) {
-      case 1:
-         // General Statistics
-         if (m_windows->general_stats.window)
-            delete m_windows->general_stats.window;
-         else
-            new General_Statistics_Menu(*m_player, m_windows->general_stats);
-         break;
 
-      case 2:
-         // Wares statistics
-         if (m_windows->ware_stats.window)
-            delete m_windows->ware_stats.window;
-         else
-            new Ware_Statistics_Menu(*m_player, m_windows->ware_stats);
-         break;
-
-      case 3:
-         // Buildings statistics
-         if (m_windows->building_stats.window)
-            delete m_windows->building_stats.window;
-         else
-            new Building_Statistics_Menu(*m_player, m_windows->building_stats);
-         break;
-
-      case 4:
-         // Global Stock
-         if (m_windows->stock.window)
-            delete m_windows->stock.window;
-         else
-            new Stock_Menu(m_player, &m_windows->stock);
-         break;
-
-      case 25:
-         // Mission Objectives
-         if (m_windows->objectives.window)
-            delete m_windows->objectives.window;
-         else
-            new GameObjectivesMenu(m_player, &m_windows->objectives, m_player->get_game());
-         break;
-
-      case 30:
-         // Chat Window
-         if (m_windows->chat.window)
-            delete m_windows->chat.window;
-         else
-            new GameChatMenu(m_player, &m_windows->chat, m_player->get_game()->get_netgame());
-         break;
-
-      case 50:
-         // Options Menu
-         if (m_windows->options.window)
-            delete m_windows->options.window;
-         else
-            new GameOptionsMenu(m_player, &m_windows->options, m_windows);
-         break;
-
-      default:
-         break;
-   }
+void GameMainMenu::clicked_general_stats() {
+	if (m_windows.general_stats.window) delete m_windows.general_stats.window;
+	else new General_Statistics_Menu(m_player, m_windows.general_stats);
 }
-
-/*
-===============
-GameMainMenu::~GameMainMenu
-===============
-*/
-GameMainMenu::~GameMainMenu()
-{
+void GameMainMenu::clicked_ware_stats() {
+	if (m_windows.ware_stats.window) delete m_windows.ware_stats.window;
+	else new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
+}
+void GameMainMenu::clicked_building_stats() {
+	if (m_windows.building_stats.window) delete m_windows.building_stats.window;
+	else new Building_Statistics_Menu(m_player, m_windows.building_stats);
+}
+void GameMainMenu::clicked_stock() {
+	if (m_windows.stock.window) delete m_windows.stock.window;
+	else new Stock_Menu(m_player, m_windows.stock);
+}
+void GameMainMenu::clicked_objectives() {
+	if (m_windows.objectives.window) delete m_windows.objectives.window;
+	else new GameObjectivesMenu
+		(m_player, m_windows.objectives, *m_player.get_game());
+}
+void GameMainMenu::clicked_chat() {
+	if (m_windows.chat.window) delete m_windows.chat.window;
+	else new GameChatMenu
+			(m_player, m_windows.chat, m_player.get_game()->get_netgame());
+}
+void GameMainMenu::clicked_options_menu() {
+	if (m_windows.options.window) delete m_windows.options.window;
+	else new GameOptionsMenu(m_player, m_windows.options, m_windows);
 }

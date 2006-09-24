@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,18 +21,64 @@
 #define __S__GAME_MAIN_MENU_H
 
 #include "interactive_player.h"
-#include "ui_unique_window.h"
+#include "ui_button.h"
 
 // The GameMainMenu is a rather dumb window with lots of buttons
 class GameMainMenu : public UIUniqueWindow {
 public:
-	GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows);
-	virtual ~GameMainMenu();
+	GameMainMenu
+		(Interactive_Player &,
+		 UIUniqueWindowRegistry &,
+		 Interactive_Player::Game_Main_Menu_Windows &);
 
 private:
-	Interactive_Player	*m_player;
-   Interactive_Player::Game_Main_Menu_Windows* m_windows;
-   void clicked(int);
+	Interactive_Player                         & m_player;
+   Interactive_Player::Game_Main_Menu_Windows & m_windows;
+	UIButton general_stats;
+	UIButton ware_stats;
+	UIButton building_stats;
+	UIButton stock;
+	UIButton objectives;
+	UIButton chat;
+	UIButton options_menu;
+
+	/** Returns the horizontal/vertical spacing between buttons. */
+	uint hspacing() const {return 5;};
+	uint vspacing() const {return 5;};
+	
+	/** Returns the horizontal/vertical margin between edge and buttons. */
+	uint hmargin() const {return 2 * hspacing();}
+	uint vmargin() const {return 2 * vspacing();}
+	
+	/** Returns the width of a button in a row with nr_buttons buttons. */
+	uint buttonw(const uint nr_buttons) const
+	{return (get_inner_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;}
+
+	/** Returns the height of buttons in a window with nr_rows rows. */
+	uint buttonh(const uint nr_rows) const
+	{return (get_inner_h() - (nr_rows    + 3) * vspacing()) / nr_rows;}
+	
+	/**
+	 * Returns the x coordinate of the (left edge of) button number nr in a row
+	 * with nr_buttons buttons.
+	 */
+	uint posx(const uint nr, const uint nr_buttons) const
+	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
+	
+	/**
+	 * Returns the y coordinate of the (top edge of) a button in row number nr
+	 * in a dialog with nr_rows rows.
+	 */
+	uint posy(const uint nr, const uint nr_rows) const
+	{return vmargin() + nr * (buttonh(nr_rows) + vspacing());}
+	
+	void clicked_general_stats ();
+	void clicked_ware_stats    ();
+	void clicked_building_stats();
+	void clicked_stock         ();
+	void clicked_objectives    ();
+	void clicked_chat          ();
+	void clicked_options_menu  ();
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2005 by the Widelands Development Team
+ * Copyright (C) 2004-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 */
 
 #include <algorithm>
+#include "error.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "i18n.h"
@@ -982,7 +983,8 @@ void Cmd_NetCheckSync::execute (Game* g)
 	g->enqueue_command (new Cmd_NetCheckSync(get_duetime()+CHECK_SYNC_INTERVAL, netgame));
 }
 
-void Cmd_NetCheckSync::Write(FileWrite* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Saver* sv)
+void Cmd_NetCheckSync::Write
+(FileWrite *, Editor_Game_Base *, Widelands_Map_Map_Object_Saver *)
 {
 	// this command should not be written to a file
 	throw wexception("Cmd_NetCheckSync is not supposed to be written to a file");

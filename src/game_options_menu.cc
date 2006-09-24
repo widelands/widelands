@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,143 +28,139 @@
 #include "interactive_player.h"
 #include "sound_handler.h"
 #include "stock_menu.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
 #include "ware_statistics_menu.h"
 
-/*
-==============================================================================
-
-GameOptionsMenu IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
 GameOptionsMenu::GameOptionsMenu
-
-Create all the buttons etc...
-===============
-*/
-GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows)
-	: UIUniqueWindow(plr, registry, 102, 160, _("Options"))
+(Interactive_Player & plr,
+ UIUniqueWindowRegistry & registry,
+ Interactive_Player::Game_Main_Menu_Windows & windows)
+:
+UIUniqueWindow
+(&plr, &registry,
+ 102,
+ vmargin()
+ + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()) +
+ 35 + vspacing() + 35 +
+ vmargin(),
+ _("Options")),
+m_player(plr),
+m_windows(windows),
+readme
+(this, posx(0, 1),
+ vmargin() + 0 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ buttonw(1), 20, 4),
+license
+(this, posx(0, 1),
+ vmargin() + 1 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ buttonw(1), 20, 4),
+authors
+(this, posx(0, 1),
+ vmargin() + 2 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ buttonw(1), 20, 4),
+ingame_music
+(this, hmargin(),
+ vmargin() + 3 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing())),
+ingame_music_label
+(this, hmargin () + STATEBOX_WIDTH + hspacing(),
+ vmargin() + 3 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ _("Ingame Music")),
+ingame_sound
+(this, hmargin(),
+ vmargin() + 3 * (20 + vspacing()) + 1 * (STATEBOX_HEIGHT + vspacing())),
+ingame_sound_label
+(this, hmargin () + STATEBOX_WIDTH + hspacing(),
+ vmargin() + 3 * (20 + vspacing()) + 1 * (STATEBOX_HEIGHT + vspacing()),
+ _("Sound FX")),
+save_game
+(this, posx(0, 2),
+ vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()),
+ buttonw(2), 35, 4),
+load_game
+(this, posx(1, 2),
+ vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()),
+ buttonw(2), 35, 4),
+exit_game
+(this, posx(0, 1),
+ vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()) +
+ 35 + vspacing(),
+ buttonw(1), 35, 4)
 {
-   m_player=plr;
-   m_windows = windows;
+	readme .set_title(_("README") .c_str());
+	license.set_title(_("License").c_str());
+	authors.set_title(_("Authors").c_str());
 
-   // Caption
-   new UITextarea(this, 0, 5, get_inner_w(), 25, _("Options Menu"), Align_Center);
-   int posy = 35;
+	save_game.set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"));
+	load_game.set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_load_game.png"));
+	exit_game.set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"));
 
+	readme   .clicked.set(this, &GameOptionsMenu::clicked_readme);
+	license  .clicked.set(this, &GameOptionsMenu::clicked_license);
+	authors  .clicked.set(this, &GameOptionsMenu::clicked_authors);
+	save_game.clicked.set(this, &GameOptionsMenu::clicked_save_game);
+	load_game.clicked.set(this, &GameOptionsMenu::clicked_load_game);
+	exit_game.clicked.set(this, &GameOptionsMenu::clicked_exit_game);
+	
+	save_game.set_tooltip(_("Save game").c_str());
+	load_game.set_tooltip(_("Load game").c_str());
+	exit_game.set_tooltip(_("Exit game").c_str());
+	
+	ingame_music.changedto.set(this, &GameOptionsMenu::changed_ingame_music);
+	ingame_sound.changedto.set(this, &GameOptionsMenu::changed_ingame_sound);
+	
+	ingame_music.set_state(not g_sound_handler.get_disable_music());
+	ingame_sound.set_state(not g_sound_handler.get_disable_fx());
 
-   UIButton* b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 1);
-   b->set_title(_("README").c_str());
-   b->clickedid.set(this, &GameOptionsMenu::clicked);
-   posy += 25;
-
-   b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 2);
-   b->set_title(_("License").c_str());
-   b->clickedid.set(this, &GameOptionsMenu::clicked);
-   posy += 25;
-
-   b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 3);
-   b->set_title(_("Authors").c_str());
-   b->clickedid.set(this, &GameOptionsMenu::clicked);
-   posy += 25;
-
-   UICheckbox* cb = new UICheckbox(this, 5, posy);
-   cb->set_state(!g_sound_handler.get_disable_music());
-   cb->changedto.set(this, &GameOptionsMenu::disable_music_clicked);
-   UITextarea *t=new UITextarea(this, 30, posy+3, _("Ingame Music"));
-   posy += 25;
-   if (g_sound_handler.m_lock_audio_disabling) {
-   	cb->set_enabled(false);
+	if (g_sound_handler.m_lock_audio_disabling) {
+   	ingame_music.set_enabled(false);
+		ingame_sound.set_enabled(false);
    }
 
-   cb=new UICheckbox(this, 5, posy);
-   cb->set_state(!g_sound_handler.get_disable_fx());
-   cb->changedto.set(this, &GameOptionsMenu::disable_fx_clicked);
-   t=new UITextarea(this, 30, posy+3, _("Sound FX"));
-   posy += 25;
-   if (g_sound_handler.m_lock_audio_disabling) {
-		cb->set_enabled(false);
-   }
-
-   int buttonw = (get_inner_w()-3*5) / 2;
-   b=new UIButton(this, 5, posy, buttonw, 35, 4, 4);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_save_game.png" ));
-   b->clickedid.set(this, &GameOptionsMenu::clicked);
-
-   b=new UIButton(this, 10+buttonw, posy, buttonw, 35, 4, 5);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_load_game.png" ));
-   b->clickedid.set(this, &GameOptionsMenu::clicked);
-   posy += 45;
-
-   b=new UIButton(this, 5, posy, get_inner_w()-10, 35, 4, 6);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_exit_game.png" ));
-   b->clickedid.set(this, &GameOptionsMenu::clicked);
-   posy += 40;
-
-   set_inner_size(get_inner_w(), posy+5);
-
+	set_inner_size
+		(hmargin()
+		 + STATEBOX_WIDTH + hspacing() +
+		 std::max
+		 (get_inner_w(),
+		  std::max(ingame_music_label.get_w(), ingame_sound_label.get_w()))
+		 +
+		 hmargin(),
+		 get_inner_h());
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-void GameOptionsMenu::clicked(int n) {
-   switch(n) {
-      case 1:
-         // Readme
-         fileview_window(m_player, &m_windows->readme, "txts/README");
-         break;
 
-      case 2:
-         // License
-         fileview_window(m_player, &m_windows->licence, "txts/COPYING");
-         break;
+void GameOptionsMenu::clicked_readme()
+{fileview_window(&m_player, &m_windows.readme,  "txts/README");}
 
-      case 3:
-         // Authors
-         fileview_window(m_player, &m_windows->authors, "txts/developers");
-         break;
+void GameOptionsMenu::clicked_license()
+{fileview_window(&m_player, &m_windows.licence, "txts/COPYING");}
 
-      case 4:
-         // Save
-         new Game_Main_Menu_Save_Game(m_player, &m_windows->savegame);
-         die();
-         break;
+void GameOptionsMenu::clicked_authors()
+{fileview_window(&m_player, &m_windows.authors, "txts/developers");}
 
-      case 5:
-         // Load
-         new Game_Main_Menu_Load_Game(m_player, &m_windows->loadgame);
-         die();
-         break;
-
-      case 6:
-         // Exit Game
-         m_player->end_modal(0);
-         return;
-         break;
-   }
+void GameOptionsMenu::clicked_save_game() {
+	new Game_Main_Menu_Save_Game(&m_player, &m_windows.savegame);
+	die();
 }
+
+void GameOptionsMenu::clicked_load_game() {
+	new Game_Main_Menu_Load_Game(&m_player, &m_windows.loadgame);
+	die();
+}
+
+void GameOptionsMenu::clicked_exit_game() {m_player.end_modal(0);}
+
 
 /*
  * One of the checkboxes have been toggled
  */
-void GameOptionsMenu::disable_music_clicked( bool t ) {
+void GameOptionsMenu::changed_ingame_music(bool t) {
    g_sound_handler.set_disable_music( !t );
 }
 
-void GameOptionsMenu::disable_fx_clicked( bool t ) {
+void GameOptionsMenu::changed_ingame_sound(bool t) {
    g_sound_handler.set_disable_fx( !t );
-}
-
-/*
-===============
-GameOptionsMenu::~GameOptionsMenu
-===============
-*/
-GameOptionsMenu::~GameOptionsMenu()
-{
 }

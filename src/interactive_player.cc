@@ -399,10 +399,8 @@ Bring up or close the main menu
 */
 void Interactive_Player::main_menu_btn()
 {
-	if (m_mainmenu.window)
-		delete m_mainmenu.window;
-	else
-		new GameMainMenu(this, &m_mainmenu, &m_mainm_windows);
+	if (m_mainmenu.window) delete m_mainmenu.window;
+	else new GameMainMenu(*this, m_mainmenu, m_mainm_windows);
 }
 
 //

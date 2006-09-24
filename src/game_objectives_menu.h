@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,24 +21,22 @@
 #define __S__GAME_OBJECTIVE_MENU_H
 
 #include "interactive_player.h"
+#include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
 #include "ui_unique_window.h"
 
 class Game;
-class UIMultiline_Textarea;
-class UIListselect;
 
 // The GameObjectives Menu shows the not already
 // fullfilled scenario objectives.
 class GameObjectivesMenu : public UIUniqueWindow {
 public:
-	GameObjectivesMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Game* game);
-	virtual ~GameObjectivesMenu();
+	GameObjectivesMenu(Interactive_Player &, UIUniqueWindowRegistry &, Game &);
 
 private:
-   UIListselect         *m_list;
-   UIMultiline_Textarea *m_objectivetext;
+	UIListselect         list;
+	UIMultiline_Textarea objectivetext;
 
-private:
    void selected(int);
 };
 

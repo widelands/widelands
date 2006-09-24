@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
+#include "game.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"

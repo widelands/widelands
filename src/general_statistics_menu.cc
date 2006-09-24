@@ -18,6 +18,7 @@
  */
 
 #include "editor_game_base.h"
+#include "error.h"
 #include "general_statistics_menu.h"
 #include "i18n.h"
 #include "interactive_player.h"

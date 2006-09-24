@@ -21,6 +21,7 @@
 #include "battle.h"
 #include "building.h"
 #include "editor_game_base.h"
+#include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
 #include "instances.h"

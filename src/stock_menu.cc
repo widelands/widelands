@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,99 +17,62 @@
  *
  */
 
+#include "error.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "stock_menu.h"
 #include "transport.h"
-#include "ui_button.h"
-#include "waresdisplay.h"
 
-/*
-===============
 Stock_Menu::Stock_Menu
-
-Open the window, create the window buttons and add to the registry.
-===============
-*/
-Stock_Menu::Stock_Menu(Interactive_Player *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 640, 480, _("Stock"))
+(Interactive_Player & plr, UIUniqueWindowRegistry & registry)
+:
+UIUniqueWindow(&plr, &registry, 640, 480, _("Stock")),
+m_player(plr),
+waresdisplay(this, 0, 0, plr.get_game(), plr.get_player()),
+help        (this, 0, 0, buttonw(3),                  30, 4),
+switchpage  (this, 0, 0, buttonw(3) * 2 + hspacing(), 30, 4),
+current_page(Wares)
 {
-   m_parent = parent;
 
-	// Add wares display
-   m_waresdisplay = new WaresDisplay(this, 0, 0, parent->get_game(), parent->get_player());
-   // Add with wares
-   fill_waredisplay_with_wares();
+	help.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png"));
+	switchpage.set_pic
+		(g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"));
+	
+	help      .clickedid.set(this, &Stock_Menu::clicked_help);
+	switchpage.clickedid.set(this, &Stock_Menu::clicked_switch_page);
 
-   set_inner_size(m_waresdisplay->get_w(), 0);
-
-   int spacing = 5;
-   int nr_buttons = 4; // one more, turn page button is bigger
-   int button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
-   int posx = spacing;
-   int posy = m_waresdisplay->get_h() + spacing;
-   m_curpage = 0;
-
-
-   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 4, 100);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
-   b->clickedid.set(this, &Stock_Menu::clicked);
-   posx += button_w + spacing;
-   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 4, 1);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/warehousewindow_switchpage.png" ));
-   b->clickedid.set(this, &Stock_Menu::clicked);
-   posx += button_w*2 + 2*spacing;
-   posy += 25 + spacing;
-
-   set_inner_size(get_inner_w(), posy);
+	help      .set_tooltip(_("Help")        .c_str());
+	switchpage.set_tooltip(_("Show workers").c_str());
+	
+	fill_waredisplay_with_wares();
+	help      .set_pos(posx(0, 3), waresdisplay.get_h());
+	switchpage.set_pos(posx(1, 3), waresdisplay.get_h());
+	set_inner_size
+		(waresdisplay.get_w(), waresdisplay.get_h() + 30 + vmargin());
 }
 
 
-/*
-===============
-Stock_Menu::~Stock_Menu
+void Stock_Menu::clicked_help(int) {log("TODO: Implement help!\n");}
 
-Deinitialize, remove from registry
-===============
-*/
-Stock_Menu::~Stock_Menu()
-{
-}
-
-/*
- * A button has been clicked
- */
-void Stock_Menu::clicked( int id ) {
-   switch(id) {
-      case 100:
-      {
-         // Help
-         log("TODO: Implement help!\n");
-         break;
-      }
-
-      case 1:
-      {
-         // Switch page
-         switch_page();
-      }
-
-   }
-
-}
 
 /*
  * Switch to the next page, that is, show
  * wares -> workers -> soldier
  */
-void Stock_Menu::switch_page(void) {
-   if(m_curpage == 0) {
-      m_curpage = 1;
+void Stock_Menu::clicked_switch_page(int) {
+	switch (current_page) {
+	case Wares:
+		current_page = Workers;
       fill_waredisplay_with_workers();
-   } else if( m_curpage == 1) {
-      m_curpage = 0;
+		switchpage.set_tooltip(_("Show wares").c_str());
+		break;
+	case Workers:
+		current_page = Wares;
       fill_waredisplay_with_wares();
+		switchpage.set_tooltip(_("Show workers").c_str());
+		break;
+	default: assert(false);
    }
 }
 
@@ -122,36 +85,31 @@ Push the current wares status to the WaresDisplay.
 */
 void Stock_Menu::think()
 {
-      if(m_curpage == 0)
-         fill_waredisplay_with_wares();
-      else if(m_curpage == 1)
-         fill_waredisplay_with_workers();
+	switch (current_page) {
+	case Wares:   fill_waredisplay_with_wares  (); break;
+	case Workers: fill_waredisplay_with_workers(); break;
+	default: assert(false);
+	}
 }
 
 /*
  * Fills the waresdisplay with wares
  */
 void Stock_Menu::fill_waredisplay_with_wares( void ) {
-   m_waresdisplay->remove_all_warelists();
-
-   int nrecos = m_parent->get_player()->get_nr_economies();
-   for( int i = 0; i < nrecos; i++) {
-      Economy* eco = m_parent->get_player()->get_economy_by_number(i);
-      m_waresdisplay->add_warelist( &eco->get_wares(), WaresDisplay::WARE);
-   }
-   m_last_nreconomies = nrecos;
+	waresdisplay.remove_all_warelists();
+	const Player & player = *m_player.get_player();
+	const uint nrecos = player.get_nr_economies();
+	for (uint i = 0; i < nrecos; ++i) waresdisplay.add_warelist
+		(&player.get_economy_by_number(i)->get_wares(), WaresDisplay::WARE);
 }
 
 /*
  * Fill it with workers
  */
 void Stock_Menu::fill_waredisplay_with_workers( void ) {
-   m_waresdisplay->remove_all_warelists();
-
-   int nrecos = m_parent->get_player()->get_nr_economies();
-   for( int i = 0; i < nrecos; i++) {
-      Economy* eco = m_parent->get_player()->get_economy_by_number(i);
-      m_waresdisplay->add_warelist( &eco->get_workers(), WaresDisplay::WORKER);
-   }
-   m_last_nreconomies = nrecos;
+	waresdisplay.remove_all_warelists();
+	const Player & player = *m_player.get_player();
+	const uint nrecos = player.get_nr_economies();
+	for (uint i = 0; i < nrecos; ++i) waresdisplay.add_warelist
+		(&player.get_economy_by_number(i)->get_workers(), WaresDisplay::WORKER);
 }

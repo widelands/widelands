@@ -17,6 +17,7 @@
  *
  */
 
+#include "constants.h"
 #include "editor_main_menu_save_map_make_directory.h"
 #include "i18n.h"
 #include "ui_button.h"

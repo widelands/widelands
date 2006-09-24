@@ -17,6 +17,7 @@
  *
  */
 
+#include "error.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
@@ -41,7 +42,7 @@
 #define COLOR_BOX_HEIGHT 7
 
 static const RGBColor colors[] = {
-   RGBColor(   0, 210, 264),
+   RGBColor(   0, 210, 254),
    RGBColor( 255, 157,  74),
    RGBColor( 222,  97,  98),
    RGBColor( 115,  82, 157),

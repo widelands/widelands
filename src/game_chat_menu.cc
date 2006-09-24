@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,11 +26,6 @@
 #include "network.h"
 #include "player.h"
 #include "stock_menu.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_multilinetextarea.h"
-#include "ui_multilineeditbox.h"
-#include "ui_textarea.h"
 #include "util.h"
 
 #define CHAT_MSG_WAIT_TIME 1000
@@ -50,88 +45,74 @@ GameChatMenu::GameChatMenu
 Create all the buttons etc...
 ===============
 */
-GameChatMenu::GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, NetGame* netgame)
-	: UIUniqueWindow(plr, registry, 340, 160, _("Chat Menu"))
+GameChatMenu::GameChatMenu
+(Interactive_Player & plr,
+ UIUniqueWindowRegistry & registry,
+ NetGame * netgame)
+:
+UIUniqueWindow
+(&plr, &registry,
+ 340, 5 + 150 + 5 + 85 + 5 + STATEBOX_HEIGHT + 5,
+ _("Chat Menu")),
+m_player(plr),
+m_netgame(netgame),
+chatbox(this,  5,   5, get_inner_w() - 10,             150, "", Align_Left, 1),
+editbox(this,  5, 160, get_inner_w() - 10,              85, ""),
+send   (this,  5, 250,                 80, STATEBOX_HEIGHT, 4, 0),
+show_as_overlays_label
+(this,
+ 5 + 80 + 5, 250, 120, STATEBOX_HEIGHT,
+ _("Show messages as overlays:"), Align_CenterLeft),
+show_as_overlays(this, get_inner_w() - STATEBOX_WIDTH - 5, 250)
 {
-   m_player=plr;
-   m_netgame = netgame;
 
-   int spacing = 5;
-   int posy = 35;
+	send.set_title(_("Send").c_str());
 
-   // Caption
-   new UITextarea(this, 0, spacing, get_inner_w(), 20, _("Chat Menu"), Align_Center);
+	send            .clickedid.set(this, &GameChatMenu::clicked_send);
+	show_as_overlays.changedto.set
+		(this, &GameChatMenu::changed_show_as_overlays);
+	
+	show_as_overlays.set_state(m_player.show_chat_overlay());
 
-   // What has been said?
-   m_chatbox = new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-spacing*2, 150, "", Align_Left, 1);
-
-   posy += 150+spacing+spacing;
-   m_editbox = new UIMultiline_Editbox(this, spacing, posy, get_inner_w()-spacing*2, 85, "");
-   posy += 85 + spacing + spacing;
-
-   // Send button
-   UIButton* b = new UIButton(this, spacing, posy, 80, STATEBOX_HEIGHT, 4, 0);
-   b->set_title(_("Send").c_str());
-   b->clickedid.set(this, &GameChatMenu::clicked);
-
-   // Textbox
-   new UITextarea(this, 80+2*spacing, posy, 120, STATEBOX_HEIGHT, _("Show messages as overlays:"), Align_CenterLeft);
-   UICheckbox* cb = new UICheckbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
-
-   cb->set_state( m_player->show_chat_overlay() );
-   cb->changedto.set(this, &GameChatMenu::cb_changed);
-   posy += STATEBOX_HEIGHT + spacing;
-
-   set_inner_size(get_inner_w(), posy+5);
 	if (get_usedefaultpos())
 		center_to_parent();
 
    think();
 }
 
-/*
-===============
-GameChatMenu::~GameChatMenu
-===============
-*/
-GameChatMenu::~GameChatMenu()
-{
-}
 
 /*
  * think: updates the chat area
  */
 void GameChatMenu::think( void ) {
-
-   const std::vector<NetGame::Chat_Message>* msges = m_player->get_chatmsges();
+	const std::vector<NetGame::Chat_Message>* msges = m_player.get_chatmsges();
    std::string str;
 
    for( uint i = 0; i < msges->size(); i++) {
-      str += m_player->get_game()->get_player((*msges)[i].plrnum)->get_name();
+      str += m_player.get_game()->get_player((*msges)[i].plrnum)->get_name();
       str += ": ";
       str += (*msges)[i].msg;
       str += "\n";
    }
 
-   m_chatbox->set_text( str.c_str() );
+	chatbox.set_text(str.c_str());
 }
 
 /*
  * Checkbox has been changed
  */
-void GameChatMenu::cb_changed( bool t ) {
-   m_player->set_show_chat_overlay(t);
-}
+void GameChatMenu::changed_show_as_overlays(bool t)
+{m_player.set_show_chat_overlay(t);}
 
-void GameChatMenu::clicked(int n) {
-   std::string str = m_editbox->get_text();
+void GameChatMenu::clicked_send(int) {
+	std::string str = editbox.get_text();
 
    if( str.size() && m_netgame ) {
       NetGame::Chat_Message t;
 
-      t.plrnum = m_player->get_player_number();
+      t.plrnum = m_player.get_player_number();
       t.msg = str;
       m_netgame->send_chat_message( t );
-      m_editbox->set_text("");
+      editbox.set_text("");
    }
 }

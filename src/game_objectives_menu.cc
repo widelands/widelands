@@ -22,80 +22,41 @@
 #include "map_objective_manager.h"
 #include "player.h"
 #include "trigger_null.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_multilinetextarea.h"
-#include "ui_multilineeditbox.h"
-#include "ui_listselect.h"
-#include "ui_textarea.h"
 #include "util.h"
 
-/*
-==============================================================================
-
-GameObjectivesMenu IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
 GameObjectivesMenu::GameObjectivesMenu
-
-Create all the buttons etc...
-===============
-*/
-GameObjectivesMenu::GameObjectivesMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Game* game)
-	: UIUniqueWindow(plr, registry, 340, 160, _("Objectives Menu"))
+(Interactive_Player & plr, UIUniqueWindowRegistry & registry, Game & game)
+:
+UIUniqueWindow
+(&plr, &registry, 340, 5 + 60 + 5 + 150 + 5, _("Objectives Menu")),
+list         (this, 5,  5, get_inner_w() - 10,  60, Align_Left, false),
+objectivetext(this, 5, 70, get_inner_w() - 10, 150, "", Align_Left, 1)
 {
-   int spacing = 5;
-   int posy = 35;
-
-   // Caption
-   new UITextarea(this, 0, spacing, get_inner_w(), 20, _("Objectives Menu"), Align_Center);
-
    // Listselect with Objectives
-   m_list = new UIListselect( this, spacing, posy, get_inner_w()-spacing*2, 60, Align_Left, false );
-	MapObjectiveManager & mom = game->get_map()->get_mom();
+	MapObjectiveManager & mom = game.get_map()->get_mom();
 	for (MapObjectiveManager::Index i = 0; i < mom.get_nr_objectives(); ++i) {
 		MapObjective & obj = mom.get_objective_by_nr(i);
 		if (not obj.get_is_visible()) continue;
 		if (obj.get_trigger()->is_set()) continue;
 
-		m_list->add_entry(obj.get_name(), &obj);
-		if (obj.get_is_optional())
-         m_list->set_entry_color( m_list->get_nr_entries()-1, RGBColor(255,0,0));
+		list.add_entry(obj.get_name(), &obj);
+		if (obj.get_is_optional()) list.set_entry_color
+			(list.get_nr_entries() - 1, RGBColor(255,0,0));
    }
-   m_list->selected.set( this, &GameObjectivesMenu::selected);
-   posy += 60 + spacing;
-
-   // Objective Text
-   m_objectivetext = new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-spacing*2, 150, "", Align_Left, 1);
-   posy += 150+spacing+spacing;
+   list.selected.set(this, &GameObjectivesMenu::selected);
 
    // If any objectives, select the first one
-   if(m_list->get_nr_entries())
-      m_list->select(0);
+	if (list.get_nr_entries()) list.select(0);
 
-   set_inner_size(get_inner_w(), posy+5);
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-/*
-===============
-GameObjectivesMenu::~GameObjectivesMenu
-===============
-*/
-GameObjectivesMenu::~GameObjectivesMenu()
-{
-}
 
 /*
  * Something has been selected
  */
 void GameObjectivesMenu::selected( int t ) {
-   MapObjective* obj = (MapObjective*)m_list->get_entry(t);
-
-   m_objectivetext->set_text( obj->get_descr());
+	objectivetext.set_text
+		(static_cast<MapObjective * const>(list.get_entry(t))->get_descr());
 }

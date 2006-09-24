@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,21 +22,59 @@
 
 #include "interactive_player.h"
 #include "ui_checkbox.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
 class GameOptionsMenu : public UIUniqueWindow {
 public:
-	GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows);
-	virtual ~GameOptionsMenu();
+	GameOptionsMenu
+		(Interactive_Player &,
+		 UIUniqueWindowRegistry &,
+		 Interactive_Player::Game_Main_Menu_Windows &);
 
 private:
-	Interactive_Player	*m_player;
-   Interactive_Player::Game_Main_Menu_Windows* m_windows;
+	Interactive_Player	                      & m_player;
+	Interactive_Player::Game_Main_Menu_Windows & m_windows;
+	UIButton   readme;
+	UIButton   license;
+	UIButton   authors;
+	UICheckbox ingame_music;
+	UITextarea ingame_music_label;
+	UICheckbox ingame_sound;
+	UITextarea ingame_sound_label;
+	UIButton   save_game;
+	UIButton   load_game;
+	UIButton   exit_game;
+	
+	/** Returns the horizontal/vertical spacing between buttons. */
+	uint hspacing() const {return 5;};
+	uint vspacing() const {return 5;};
+	
+	/** Returns the horizontal/vertical margin between edge and buttons. */
+	uint hmargin() const {return 2 * hspacing();}
+	uint vmargin() const {return 2 * vspacing();}
+	
+	/** Returns the width of a button in a row with nr_buttons buttons. */
+	uint buttonw(const uint nr_buttons) const
+	{return (get_inner_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;}
+	
+	/**
+	 * Returns the x coordinate of the (left edge of) button number nr in a row
+	 * with nr_buttons buttons.
+	 */
+	uint posx(const uint nr, const uint nr_buttons) const
+	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
 
-   void disable_music_clicked( bool );
-   void disable_fx_clicked( bool );
-   void clicked(int);
+	void changed_ingame_music(bool);
+	void changed_ingame_sound(bool);
+	void clicked_readme   ();
+	void clicked_license  ();
+	void clicked_authors  ();
+	void clicked_save_game();
+	void clicked_load_game();
+	void clicked_exit_game();
 };
 
 #endif

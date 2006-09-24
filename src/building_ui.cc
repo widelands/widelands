@@ -312,26 +312,22 @@ WaresQueueDisplay::WaresQueueDisplay
 Initialize the panel.
 ===============
 */
-WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g)
-	: UIPanel(parent, x, y, 0, Height)
+WaresQueueDisplay::WaresQueueDisplay
+(UIPanel * parent, int x, int y, uint maxw, WaresQueue* queue, Game *)
+:
+UIPanel(parent, x, y, 0, Height),
+m_queue(queue),
+m_max_width(maxw),
+m_pic_background(g_gr->get_picture( PicMod_Game, pic_queue_background)),
+m_cache_size(queue->get_size()),
+m_cache_filled(queue->get_filled()),
+m_display_size(0)
 {
-	Item_Ware_Descr* waredescr;
-
-	m_queue = queue;
-	m_max_width = maxw;
-
-	waredescr = queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
-
-	set_tooltip(waredescr->get_descname());
-
-	m_pic_empty = waredescr->get_pic_queue_empty();
-	m_pic_full = waredescr->get_pic_queue_full();
-
-	m_cache_size = m_queue->get_size();
-	m_cache_filled = m_queue->get_filled();
-	m_display_size = 0;
-
-	m_pic_background = g_gr->get_picture( PicMod_Game,  pic_queue_background );
+	const Item_Ware_Descr & ware =
+		*queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
+	set_tooltip(ware.get_descname());
+	m_pic_empty = ware.get_pic_queue_empty();
+	m_pic_full  = ware.get_pic_queue_full ();
 
 	recalc_size();
 
