@@ -20,16 +20,17 @@
 #ifndef OPTIONSMENU_H
 #define OPTIONSMENU_H
 
-#define NUM_RESOLUTIONS		6
+#define NUM_RESOLUTIONS 6
 
 #include "fullscreen_menu_base.h"
-#include "types.h"
-#include "ui_checkbox.h"
-#include "ui_radiobutton.h"
-#include "ui_listselect.h"
+
+#include <string>
+#include <vector>
 
 class Fullscreen_Menu_Options;
 struct Section;
+struct UICheckbox;
+struct UIListselect;
 
 class Options_Ctrl {
 	public:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
 #define __S__INTRO_H
 
 #include "fullscreen_menu_base.h"
-#include "types.h"
-#include <SDL.h>
-#include <SDL_mixer.h>
 
 /**
  * Fullscreen Menu with Splash Screen (at the moment).

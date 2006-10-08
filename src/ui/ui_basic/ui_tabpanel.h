@@ -21,7 +21,6 @@
 #define included_ui_tabpanel_h
 
 #include <vector>
-#include "types.h"
 #include "ui_panel.h"
 
 #include <string>

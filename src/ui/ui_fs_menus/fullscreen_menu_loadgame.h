@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
-#include "ui_listselect.h"
 
 class Editor_Game_Base;
 class Game;
@@ -30,6 +29,7 @@ class Map;
 class Map_Loader;
 class RenderTarget;
 class UIButton;
+class UIListselect;
 class UIMultiline_Textarea;
 class UITextarea;
 

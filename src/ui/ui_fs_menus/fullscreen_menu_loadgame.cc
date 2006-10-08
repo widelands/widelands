@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "layeredfilesystem.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
+#include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 

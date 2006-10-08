@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #ifndef __S__MENUECOMMON_H
 #define __S__MENUECOMMON_H
 
-#include "types.h"
 #include "ui_panel.h"
 
 #define MENU_XRES	800   ///< Fullscreen Menu Width

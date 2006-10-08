@@ -21,7 +21,6 @@
 #define __S__MULTILINE_TEXTAREA_H
 
 #include <string>
-#include <list>
 #include "font_handler.h"
 #include "ui_panel.h"
 
