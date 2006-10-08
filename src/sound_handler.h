@@ -33,7 +33,6 @@
 
 struct FileRead;
 struct Game;
-struct Mix_Chunk;
 struct Songset;
 
 /// How many milliseconds in the past to consider for \ref Sound_Handler::play_or_not()
