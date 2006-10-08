@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,8 @@
 #ifndef __S__EDITOR_INCREASE_HEIGHT_TOOL_H
 #define __S__EDITOR_INCREASE_HEIGHT_TOOL_H
 
-#include "editor_tool.h"
-#include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
+#include "editor_set_height_tool.h"
 
 /*
 =============================

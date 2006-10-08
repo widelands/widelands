@@ -22,13 +22,8 @@
 
 #define MAX_TOOL_AREA 9
 
-#include <vector>
-#include "field.h"
-#include "geometry.h"
-
-class Coords;
+class FCoords;
 class Editor_Interactive;
-class Field;
 class Map;
 
 /*

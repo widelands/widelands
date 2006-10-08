@@ -20,10 +20,9 @@
 #ifndef __S__EDITOR_INCREASE_RESOURCES_TOOL_H
 #define __S__EDITOR_INCREASE_RESOURCES_TOOL_H
 
-#include <string>
-#include "editor_tool.h"
-#include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
+#include "editor_set_resources_tool.h"
+#include "geometry.h"
 
 class World;
 
