@@ -20,6 +20,7 @@
 #ifndef __S__CMD_CHECK_EVENTCHAIN_H
 #define __S__CMD_CHECK_EVENTCHAIN_H
 
+#include "cmd_queue.h"
 #include "map_eventchain_manager.h"
 
 class Cmd_CheckEventChain :public BaseCommand {

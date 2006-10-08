@@ -43,13 +43,12 @@ Event_Move_View::~Event_Move_View(void) {
 /*
  * reinitialize
  */
-void Event_Move_View::reinitialize(Game* g) {
-}
+void Event_Move_View::reinitialize(Game *) {}
 
 /*
  * File Read, File Write
  */
-void Event_Move_View::Read(Section* s, Editor_Game_Base* egbase) {
+void Event_Move_View::Read(Section * s, Editor_Game_Base *) {
 	const int version = s->get_safe_int("version");
 
 	if (1 <= version and version <= EVENT_VERSION) {

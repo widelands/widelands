@@ -20,8 +20,6 @@
 #ifndef FXSET_H
 #define FXSET_H
 
-#include <assert.h>
-#include <SDL.h>
 #include <SDL_mixer.h>
 #include <vector>
 

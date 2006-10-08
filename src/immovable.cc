@@ -635,7 +635,7 @@ coords is the field that draw() was called for.
 void Immovable::draw
 (const Editor_Game_Base & game,
  RenderTarget & dst,
- const FCoords coords,
+ const FCoords,
  const Point pos)
 {
 	if (!m_anim)
@@ -674,7 +674,7 @@ void ImmovableProgram::parse_animation(ImmovableAction* act, const ProgramParser
 		throw wexception("duration out of range (-1, 1..+inf) '%s'", cmd[2].c_str());
 }
 
-bool Immovable::run_animation(Game* g, bool killable, const ImmovableAction& action)
+bool Immovable::run_animation(Game* g, bool , const ImmovableAction & action)
 {
 	m_anim = action.iparam1;
 	m_animstart = g->get_gametime();
@@ -695,7 +695,10 @@ playFX <name>
 ===============
 */
 
-void ImmovableProgram::parse_playFX(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd)
+void ImmovableProgram::parse_playFX
+(ImmovableAction* act,
+ const ProgramParser *,
+ const std::vector<std::string> & cmd)
 {
 	if (cmd.size()<2 || cmd.size()>3)
 		throw wexception("Syntax: playFX <fxname> [priority]");
@@ -710,7 +713,7 @@ void ImmovableProgram::parse_playFX(ImmovableAction* act, const ProgramParser* p
 
 /** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
-bool Immovable::run_playFX(Game* g, bool killable, const ImmovableAction& action)
+bool Immovable::run_playFX(Game *, bool, const ImmovableAction & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 
@@ -727,8 +730,10 @@ transform <name of immovable>
 
 ===============
 */
-void ImmovableProgram::parse_transform(ImmovableAction* act, const ProgramParser* parser,
-															const std::vector<std::string>& cmd)
+void ImmovableProgram::parse_transform
+(ImmovableAction* act,
+ const ProgramParser *,
+ const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Syntax: transform [bob name]");
@@ -779,8 +784,10 @@ remove
 
 ===============
 */
-void ImmovableProgram::parse_remove(ImmovableAction* act, const ProgramParser* parser,
-																	const std::vector<std::string>& cmd)
+void ImmovableProgram::parse_remove
+(ImmovableAction * act,
+ const ProgramParser *,
+ const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Syntax: remove");
@@ -788,8 +795,7 @@ void ImmovableProgram::parse_remove(ImmovableAction* act, const ProgramParser* p
 	act->function = &Immovable::run_remove;
 }
 
-bool Immovable::run_remove(Game* g, bool killable, const ImmovableAction& action)
-{
+bool Immovable::run_remove(Game* g, bool killable, const ImmovableAction &) {
 	if (!killable) {
 		m_program_step = schedule_act(g, 1);
 		return true;

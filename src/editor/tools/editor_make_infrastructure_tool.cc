@@ -52,7 +52,9 @@ offer the correct user dialog and act accordingly.
 Obviously, this function ignores the fieldsel radius
 ===========
 */
-int Editor_Make_Infrastructure_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
+int Editor_Make_Infrastructure_Tool::handle_click_impl
+(FCoords &, Map *, Editor_Interactive * parent)
+{
 	// Special case for buildings
 /*	BaseImmovable *imm = m_game->get_map()->get_immovable(get_fieldsel_pos());
 

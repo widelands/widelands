@@ -21,9 +21,9 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
+#include "error.h"
+#include "types.h"
 #include "ui_object.h"
-
-#include <cassert>
 
 class RenderTarget;
 

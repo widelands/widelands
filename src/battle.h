@@ -20,7 +20,8 @@
 #define __S__WIDELANDS_BATTLE__H__
 
 #include "immovable.h"
-#include "soldier.h"
+
+struct Soldier;
 
 class Widelands_Map_Battle_Data_Packet;
 

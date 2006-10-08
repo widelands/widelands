@@ -46,8 +46,7 @@ Event_Unhide_Area::~Event_Unhide_Area(void) {
 /*
  * reinitialize
  */
-void Event_Unhide_Area::reinitialize(Game* g) {
-}
+void Event_Unhide_Area::reinitialize(Game *) {}
 
 /*
  * File Read, File Write

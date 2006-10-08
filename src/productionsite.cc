@@ -447,7 +447,7 @@ ProductionSite::request_worker
 Issue the worker requests
 ===============
 */
-void ProductionSite::request_worker(Game* g, const char* worker)
+void ProductionSite::request_worker(Game *, const char * worker)
 {
    assert(worker);
 
@@ -464,8 +464,8 @@ ProductionSite::request_worker_callback [static]
 Called when our worker arrives.
 ===============
 */
-void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware,
-	Worker* w, void* data)
+void ProductionSite::request_worker_callback
+(Game* g, Request* rq, int, Worker* w, void* data)
 {
 	ProductionSite* psite = (ProductionSite*)data;
 

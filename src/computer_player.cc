@@ -699,7 +699,8 @@ void Computer_Player::update_mineable_field (MineableField* field)
 	}
 }
 
-void Computer_Player::consider_productionsite_influence (BuildableField* field, const Coords& coord, const BuildingObserver& bo)
+void Computer_Player::consider_productionsite_influence
+(BuildableField * field, const Coords &, const BuildingObserver & bo)
 {
 	if (bo.need_trees)
 		field->tree_consumers_nearby++;
@@ -975,13 +976,12 @@ void Computer_Player::gain_field (const FCoords& fc)
 }
 
 // we don't use this - instead we check or fields regularly, see think()
-void Computer_Player::lose_field (const FCoords& fc)
-{
-}
+void Computer_Player::lose_field (const FCoords &) {}
 
 
 /* CheckStepRoadAI */
-bool CheckStepRoadAI::allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const
+bool CheckStepRoadAI::allowed
+(Map * map, FCoords, FCoords end, int, StepId id) const
 {
 	uchar endcaps = player->get_buildcaps(end);
 

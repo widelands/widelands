@@ -25,7 +25,6 @@
 #include <string>
 #include <vector>
 #include "constants.h"
-#include "descr_maintainer.h"
 #include "geometry.h"
 #include "types.h"
 
@@ -38,6 +37,7 @@ class Interactive_Base;
 class Map;
 class Object_Manager;
 class Player;
+class PlayerImmovable;
 class Tribe_Descr;
 
 class Editor_Game_Base {

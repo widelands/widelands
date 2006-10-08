@@ -127,5 +127,4 @@ void Trigger_Building::check_set_conditions(Game* game) {
 /*
  * Reset this trigger. This is only valid for non one timers
  */
-void Trigger_Building::reset_trigger(Game* game) {
-}
+void Trigger_Building::reset_trigger(Game *) {}

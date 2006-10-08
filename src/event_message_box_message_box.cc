@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,7 +87,8 @@ UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
  * we might be a modal, therefore, if we are, we delete ourself through end_modal()
  * otherwise through die()
  */
-bool Message_Box_Event_Message_Box::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Message_Box_Event_Message_Box::handle_mouseclick(uint btn, bool, int, int)
+{
    if(btn == MOUSE_RIGHT) {
       // We are not closable by right clicking
       // so that we are not closed by accidental scrolling

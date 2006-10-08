@@ -24,6 +24,7 @@
 #include "map.h"
 #include "rgbcolor.h"
 
+class Economy;
 class Game;
 class Path;
 class PlayerImmovable;

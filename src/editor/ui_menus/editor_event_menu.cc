@@ -337,15 +337,15 @@ void Editor_Event_Menu::clicked(int id) {
 /*
  * listbox was selected
  */
-void Editor_Event_Menu::trigger_list_selected(int i) {
+void Editor_Event_Menu::trigger_list_selected(int) {
    m_btn_del_trigger->set_enabled(true);
    m_btn_edit_trigger->set_enabled(true);
 }
-void Editor_Event_Menu::event_list_selected(int i) {
+void Editor_Event_Menu::event_list_selected(int) {
    m_btn_del_event->set_enabled(true);
    m_btn_edit_event->set_enabled(true);
 }
-void Editor_Event_Menu::eventchain_list_selected(int i) {
+void Editor_Event_Menu::eventchain_list_selected(int) {
    m_btn_del_eventchain->set_enabled(true);
    m_btn_edit_eventchain->set_enabled(true);
 }
@@ -353,12 +353,6 @@ void Editor_Event_Menu::eventchain_list_selected(int i) {
 /*
  * listbox was double clicked
  */
-void Editor_Event_Menu::trigger_double_clicked(int n) {
-   clicked(4);
-}
-void Editor_Event_Menu::event_double_clicked(int n) {
-   clicked(2);
-}
-void Editor_Event_Menu::eventchain_double_clicked(int n) {
-   clicked(8);
-}
+void Editor_Event_Menu::trigger_double_clicked   (int) {clicked(4);}
+void Editor_Event_Menu::event_double_clicked     (int) {clicked(2);}
+void Editor_Event_Menu::eventchain_double_clicked(int) {clicked(8);}

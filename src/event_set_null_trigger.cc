@@ -49,8 +49,7 @@ Event_Set_Null_Trigger::~Event_Set_Null_Trigger(void) {
 /*
  * reinitialize
  */
-void Event_Set_Null_Trigger::reinitialize(Game* g) {
-}
+void Event_Set_Null_Trigger::reinitialize(Game *) {}
 
 /*
  * File Read, File Write

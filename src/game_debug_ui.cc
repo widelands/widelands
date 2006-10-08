@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include <stdio.h>
 #include "bob.h"
+#include "building.h"
 #include "field.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -370,8 +371,7 @@ FieldDebugWindow::open_bob
 Open the bob debug window for the bob of the given index in the list
 ===============
 */
-void FieldDebugWindow::open_bob(int idx)
-{
+void FieldDebugWindow::open_bob(int) {
 	unsigned long serial = (unsigned long)m_ui_bobs->get_selection();
 
 	if (!serial)

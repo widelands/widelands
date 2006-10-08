@@ -160,7 +160,7 @@ void Main_Menu_Load_Map::clicked(int id) {
 /*
  * called when a item is selected
  */
-void Main_Menu_Load_Map::selected(int i) {
+void Main_Menu_Load_Map::selected(int) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
    m_ok_btn->set_enabled(true);

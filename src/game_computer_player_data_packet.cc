@@ -35,7 +35,9 @@ Game_Computer_Player_Data_Packet::~Game_Computer_Player_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Computer_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
+void Game_Computer_Player_Data_Packet::Read
+(FileSystem * fs, Game *, Widelands_Map_Map_Object_Loader *) throw(_wexception)
+{
    FileRead fr;
 
    fr.Open( fs, "binary/computer_player");
@@ -57,7 +59,9 @@ void Game_Computer_Player_Data_Packet::Read(FileSystem* fs, Game* game, Wideland
 /*
  * Write Function
  */
-void Game_Computer_Player_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
+void Game_Computer_Player_Data_Packet::Write
+(FileSystem * fs, Game *, Widelands_Map_Map_Object_Saver *) throw(_wexception)
+{
    FileWrite fw;
 
    // Now packet version

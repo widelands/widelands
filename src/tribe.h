@@ -24,9 +24,11 @@
 #include <vector>
 #include "animation.h"
 #include "bob.h"
+#include "building.h"
 #include "constants.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
+#include "ware.h"
 #include "worker.h"
 
 class Building_Descr;

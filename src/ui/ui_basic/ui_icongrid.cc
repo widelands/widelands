@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -265,8 +265,7 @@ void UIIcon_Grid::handle_mousein(bool inside)
 /**
 Update highlight under the mouse and send signals.
 */
-void UIIcon_Grid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
-{
+void UIIcon_Grid::handle_mousemove(int x, int y, int, int, uint) {
 	int hl = index_for_point(x, y);
 
 	if (hl != m_highlight) {

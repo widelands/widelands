@@ -990,6 +990,6 @@ void Cmd_NetCheckSync::Write
 	throw wexception("Cmd_NetCheckSync is not supposed to be written to a file");
 }
 
-void Cmd_NetCheckSync::Read(FileRead* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Loader* ld)
-{
-}
+void Cmd_NetCheckSync::Read
+(FileRead *, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
+{}

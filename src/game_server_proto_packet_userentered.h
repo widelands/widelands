@@ -33,7 +33,7 @@ class Game_Server_Protocol_Packet_UserEntered : public Game_Server_Protocol_Pack
 
       virtual ushort get_id(void);
 
-      virtual void send(Network_Buffer* buffer) { }
+	virtual void send(Network_Buffer *) {}
       virtual void recv(Game_Server_Connection*, Network_Buffer* buffer);
       virtual void write_reply(Network_Buffer* buffer);
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) { };

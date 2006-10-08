@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by the Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,11 @@
 #define include_waresdisplay_h
 
 #include "ui_panel.h"
-#include "ware.h"
 
 class Editor_Game_Base;
 class UITextarea;
 class Player;
+class WareList;
 
 /*
 class WaresDisplay

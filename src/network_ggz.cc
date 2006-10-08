@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2005 by the Widelands Development Team
+ * Copyright (C) 2004-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -191,8 +191,7 @@ const char *NetGGZ::ip()
 	return ip_address;
 }
 
-void NetGGZ::initcore(const char *hostname, const char *playername)
-{
+void NetGGZ::initcore(const char *, const char *) {
 #ifdef HAVE_GGZ
 	GGZOptions opt;
 	int ret;
@@ -315,8 +314,7 @@ GGZHookReturn NetGGZ::callback_game(unsigned id, const void *data, const void *u
 }
 #endif
 
-void NetGGZ::event_server(unsigned int id, const void *data)
-{
+void NetGGZ::event_server(unsigned int, const void *) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGameType *type;
@@ -394,8 +392,7 @@ void NetGGZ::event_server(unsigned int id, const void *data)
 #endif
 }
 
-void NetGGZ::event_room(unsigned int id, const void *data)
-{
+void NetGGZ::event_room(unsigned int, const void *) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	int i, num;
@@ -423,8 +420,7 @@ void NetGGZ::event_room(unsigned int id, const void *data)
 #endif
 }
 
-void NetGGZ::event_game(unsigned int id, const void *data)
-{
+void NetGGZ::event_game(unsigned int, const void *) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGame *game;
@@ -472,8 +468,7 @@ std::list<std::string> NetGGZ::tables()
 	return tablelist;
 }
 
-void NetGGZ::join(const char *tablename)
-{
+void NetGGZ::join(const char * ) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGameType *type;

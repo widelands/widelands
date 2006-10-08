@@ -172,8 +172,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options
 }
 
 /* do nothing */
-void Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing(int n, bool t) {
-}
+void Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing(int, bool) {}
 
 /*
 ===========

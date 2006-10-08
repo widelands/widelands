@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -211,8 +211,7 @@ void UITable::draw(RenderTarget* dst)
 /**
  * Handle mouse clicks: select the appropriate entry
  */
-bool UITable::handle_mouseclick(uint btn, bool down, int x, int y)
-{
+bool UITable::handle_mouseclick(uint btn, bool down, int, int y) {
    if (btn != 0) // only left-click
 		return false;
 

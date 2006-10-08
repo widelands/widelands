@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -347,7 +347,8 @@ void TrainingSite::request_soldier(Game * g)
  * When a soldier arrives, bring it into the fold
  */
 // this is a static method
-void TrainingSite::request_soldier_callback(Game * g, Request * rq, int ware, Worker * w, void *data)
+void TrainingSite::request_soldier_callback
+(Game * g, Request * rq, int, Worker * w, void * data)
 {
 	assert(g);
 	assert(rq);

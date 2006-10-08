@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -169,8 +169,7 @@ void UIStatebox::handle_mousein(bool inside)
 /**
  * Left-click: Toggle checkbox state
  */
-bool UIStatebox::handle_mouseclick(uint btn, bool down, int x, int y)
-{
+bool UIStatebox::handle_mouseclick(uint btn, bool down, int, int) {
 	if (btn != 0)
 		return false;
 

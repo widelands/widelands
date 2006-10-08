@@ -121,8 +121,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 	return true;
 }
 
-void Fullscreen_Menu_NetSetup::game_selected (int sel)
-{
+void Fullscreen_Menu_NetSetup::game_selected (int) {
 	LAN_Open_Game* game=(LAN_Open_Game*) (opengames->get_selection());
 
 	if(game) hostname->set_text (game->info.hostname);
@@ -151,9 +150,7 @@ void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game* game)
 	update_game_info (new UITable_Entry(opengames, (void*) game), game->info);
 }
 
-void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game* game)
-{
-}
+void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game *) {}
 
 void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game* game)
 {
@@ -193,8 +190,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 	}
 }
 
-void Fullscreen_Menu_NetSetup::toggle_networktype(int code)
-{
+void Fullscreen_Menu_NetSetup::toggle_networktype(int) {
 	if(internetgame)
 	{
 		NetGGZ::ref()->deinitcore();
@@ -245,8 +241,7 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 //	return internetgame;
 //}
 
-void Fullscreen_Menu_NetSetup::joingame(int code)
-{
+void Fullscreen_Menu_NetSetup::joingame(int) {
 	int index = opengames->get_selection_index();
 	if(index < 0) return;
 
@@ -260,8 +255,7 @@ void Fullscreen_Menu_NetSetup::joingame(int code)
 	else end_modal(JOINGAME);
 }
 
-void Fullscreen_Menu_NetSetup::hostgame(int code)
-{
+void Fullscreen_Menu_NetSetup::hostgame(int) {
 	if(NetGGZ::ref()->usedcore()) end_modal(HOSTGGZGAME);
 	else end_modal(HOSTGAME);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,13 @@ Widelands_Map_Immovabledata_Data_Packet::~Widelands_Map_Immovabledata_Data_Packe
 /*
  * Read Function
  */
-void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(_wexception) {
+void Widelands_Map_Immovabledata_Data_Packet::Read
+(FileSystem * fs,
+ Editor_Game_Base *,
+ bool skip,
+ Widelands_Map_Map_Object_Loader * ol)
+throw(_wexception)
+{
    if( skip )
       return;
 

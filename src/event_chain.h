@@ -22,10 +22,8 @@
 
 #include <string>
 #include <vector>
-#include "cmd_queue.h"
 #include "event_referencer.h"
 #include "error.h"
-#include "queue_cmd_ids.h"
 #include "trigger_referencer.h"
 
 class Event;

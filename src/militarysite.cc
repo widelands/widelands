@@ -284,8 +284,7 @@ MilitarySite::request_soldier
 Issue the soldier request
 ===============
 */
-void MilitarySite::request_soldier(Game* g)
-{
+void MilitarySite::request_soldier(Game *) {
    int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
    // TODO: This should be user-configurable through windows options (still nothing is done to support this)
@@ -307,8 +306,8 @@ MilitarySite::request_soldier_callback [static]
 Called when our soldier arrives.
 ===============
 */
-void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
-   Worker* w, void* data)
+void MilitarySite::request_soldier_callback
+(Game * g, Request * rq, int, Worker * w, void * data)
 {
 
    MilitarySite* msite = (MilitarySite*)data;

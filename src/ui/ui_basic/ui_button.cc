@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -207,8 +207,7 @@ void UIButton::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool UIButton::handle_mouseclick(uint btn, bool down, int x, int y)
-{
+bool UIButton::handle_mouseclick(uint btn, bool down, int, int) {
 	if (btn != 0) // only react on left button
 		return false;
 

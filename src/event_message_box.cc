@@ -64,8 +64,7 @@ Event_Message_Box::~Event_Message_Box(void) {
 /*
  * reinitialize
  */
-void Event_Message_Box::reinitialize(Game* g) {
-}
+void Event_Message_Box::reinitialize(Game *) {}
 
 /*
  * functions for button handling

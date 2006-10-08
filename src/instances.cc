@@ -459,9 +459,7 @@ Map_Object::act
 Called when a CMD_ACT triggers.
 ===============
 */
-void Map_Object::act(Game* g, uint data)
-{
-}
+void Map_Object::act(Game *, uint) {}
 
 
 /*

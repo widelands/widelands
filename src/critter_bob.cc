@@ -140,7 +140,8 @@ Remove this critter
 
 ==============================
 */
-void Critter_BobProgram::parse_remove(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void Critter_BobProgram::parse_remove
+(Critter_BobAction * act, Parser *, const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: remove");
@@ -148,7 +149,7 @@ void Critter_BobProgram::parse_remove(Critter_BobAction* act, Parser* parser, co
    act->function = &Critter_Bob::run_remove;
 }
 
-bool Critter_Bob::run_remove(Game* g, State* state, const Critter_BobAction* act)
+bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 {
 
 	state->ivar1++;
@@ -342,7 +343,7 @@ void Critter_Bob::program_update(Game* g, State* state)
 Critter_Bob::program_signal
 ===============
 */
-void Critter_Bob::program_signal(Game* g, State* state)
+void Critter_Bob::program_signal(Game * g, State *)
 {
 	molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 	pop_task(g);
@@ -402,9 +403,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 	}
 }
 
-void Critter_Bob::roam_signal(Game* g, State* state) {
-   pop_task(g);
-}
+void Critter_Bob::roam_signal(Game * g, State *) {pop_task(g);}
 
 void Critter_Bob::init_auto_task(Game* g)
 {

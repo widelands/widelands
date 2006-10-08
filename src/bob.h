@@ -20,7 +20,6 @@
 #ifndef __BOB_H
 #define __BOB_H
 
-#include <map>
 #include <string>
 #include "geometry.h"
 #include "instances.h"
@@ -28,10 +27,8 @@
 
 class Bob;
 class DirAnimations;
-class EncodeData;
 class Profile;
 class Route;
-class Request;
 class Transfer;
 class Tribe_Descr;
 

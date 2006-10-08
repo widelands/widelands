@@ -421,8 +421,7 @@ ConstructionSite::request_builder
 Issue a request for the builder.
 ===============
 */
-void ConstructionSite::request_builder(Game* g)
-{
+void ConstructionSite::request_builder(Game *) {
 	assert(!m_builder && !m_builder_request);
 
 	m_builder_request = new Request(this, get_owner()->get_tribe()->get_safe_worker_index("builder"),
@@ -437,7 +436,8 @@ ConstructionSite::request_builder_callback [static]
 Called by transfer code when the builder has arrived on site.
 ===============
 */
-void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+void ConstructionSite::request_builder_callback
+(Game * g, Request * rq, int, Worker * w, void * data)
 {
 	assert(w);
 
@@ -477,8 +477,7 @@ ConstructionSite::get_building_work
 Called by our builder to get instructions.
 ===============
 */
-bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
-{
+bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	assert(w == m_builder);
 
 	// Check if one step has completed
@@ -540,7 +539,8 @@ ConstructionSite::wares_queue_callback [static]
 Called by WaresQueue code when an item has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback(Game* g, WaresQueue* wq, int ware, void* data)
+void ConstructionSite::wares_queue_callback
+(Game * g, WaresQueue *, int, void * data)
 {
 	ConstructionSite* cs = (ConstructionSite*)data;
 

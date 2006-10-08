@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -368,8 +368,7 @@ inline void UIWindow::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-void UIWindow::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
-{
+void UIWindow::handle_mousemove(int mx, int my, int, int, uint) {
 	if (_dragging) {
 		const int mouse_x = get_x() + get_lborder() + mx;
 		const int mouse_y = get_y() + get_tborder() + my;

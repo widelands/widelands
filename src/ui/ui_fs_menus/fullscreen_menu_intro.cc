@@ -32,16 +32,14 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 {
 }
 
-bool Fullscreen_Menu_Intro::handle_mouseclick(uint btn, bool down, int x, int y)
-{
+bool Fullscreen_Menu_Intro::handle_mouseclick(uint, bool down, int, int) {
 	if (down)
 		end_modal(0);
 
 	return true;
 }
 
-bool Fullscreen_Menu_Intro::handle_key(bool down, int code, char c)
-{
+bool Fullscreen_Menu_Intro::handle_key(bool down, int code, char) {
 	if (down && code==SDLK_ESCAPE)
         	end_modal(0);
 

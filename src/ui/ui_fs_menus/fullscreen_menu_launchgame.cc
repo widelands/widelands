@@ -21,6 +21,7 @@
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
 #include "i18n.h"
+#include "instances.h"
 #include "player.h"
 #include "network.h"
 #include "map.h"

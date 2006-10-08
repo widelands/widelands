@@ -21,6 +21,7 @@
 #include "battle.h"
 #include "error.h"
 #include "game.h"
+#include "soldier.h"
 
 class Battle_Descr : public Map_Object_Descr
 {
@@ -89,8 +90,7 @@ void Battle::cleanup (Editor_Game_Base* eg)
    Map_Object::cleanup(eg);
 }
 
-void Battle::act (Game* g, uint data)
-{
+void Battle::act (Game * g, uint) {
    log ("Battle::act\n");
 
 	if (not dynamic_cast<const Game * const>(g)) return;

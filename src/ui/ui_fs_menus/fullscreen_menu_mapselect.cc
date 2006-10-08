@@ -140,8 +140,7 @@ void Fullscreen_Menu_MapSelect::ok()
    }
 }
 
-void Fullscreen_Menu_MapSelect::map_selected(int id)
-{
+void Fullscreen_Menu_MapSelect::map_selected(int) {
    const char* name=static_cast<const char*>(list->get_selection());
 
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
@@ -195,7 +194,7 @@ void Fullscreen_Menu_MapSelect::map_selected(int id)
 /*
  * listbox got double clicked
  */
-void Fullscreen_Menu_MapSelect::double_clicked(int i) {
+void Fullscreen_Menu_MapSelect::double_clicked(int) {
    // Ok
    ok();
 

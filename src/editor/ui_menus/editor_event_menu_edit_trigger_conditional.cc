@@ -168,7 +168,9 @@ Editor_Event_Menu_Edit_TriggerConditional::~Editor_Event_Menu_Edit_TriggerCondit
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouseclick
+(uint btn, bool down, int, int)
+{
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;
@@ -265,10 +267,10 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(int i) {
+void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(int) {
    m_insert_btn->set_enabled( true );
 }
-void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int i) {
+void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int) {
    m_mvdown_btn->set_enabled( true );
    m_mvup_btn->set_enabled( true );
    m_delete_btn->set_enabled( true );
@@ -277,11 +279,11 @@ void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int i) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(int i) {
+void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(int) {
    // insert clicked
    clicked( 20 );
 }
-void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(int i) {
+void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(int) {
    // Delete clicked
    clicked( 21 );
 }

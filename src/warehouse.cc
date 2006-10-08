@@ -221,10 +221,7 @@ WarehouseSupply::get_position
 Return the position of the Supply, i.e. the owning Warehouse.
 ===============
 */
-PlayerImmovable* WarehouseSupply::get_position(Game* g)
-{
-	return m_warehouse;
-}
+PlayerImmovable* WarehouseSupply::get_position(Game *) {return m_warehouse;}
 
 
 /*
@@ -247,10 +244,7 @@ WarehouseSupply::is_active
 Warehouse supplies are never active.
 ===============
 */
-bool WarehouseSupply::is_active(Game* g)
-{
-	return false;
-}
+bool WarehouseSupply::is_active(Game *) {return false;}
 
 
 /*
@@ -431,7 +425,7 @@ void Warehouse::init(Editor_Game_Base* gg)
 
    m_supply->set_nrwares(get_owner()->get_tribe()->get_nrwares());
    m_supply->set_nrworkers(get_owner()->get_tribe()->get_nrworkers());
-	
+
 	Game * const game = dynamic_cast<Game * const>(gg);
 	if (game) {
       for(int i = 0; i < get_owner()->get_tribe()->get_nrwares(); i++) {
@@ -971,8 +965,8 @@ Warehouse::idle_request_cb [static]
 Called when a transfer for one of the idle Requests completes.
 ===============
 */
-void Warehouse::idle_request_cb(Game* g, Request* rq, int ware, Worker* w,
-	void* data)
+void Warehouse::idle_request_cb
+(Game * g, Request *, int ware, Worker * w, void * data)
 {
 	Warehouse* wh = (Warehouse*)data;
 
@@ -1054,8 +1048,7 @@ log ("Warehouse::get_soldiers_passing :");
 Warehouse::can_create_worker
 ===============
 */
-bool Warehouse::can_create_worker(Game *g, int worker)
-{
+bool Warehouse::can_create_worker(Game *, int worker) {
 	Worker_Descr *w_desc = 0;
 
 	if (worker >= m_supply->get_workers().get_nrwareids()) {

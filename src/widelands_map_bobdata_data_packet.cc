@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -517,9 +517,11 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
    // DONE
 }
 
-void Widelands_Map_Bobdata_Data_Packet::write_critter_bob(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, Critter_Bob* critter) {
-   fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);
-}
+void Widelands_Map_Bobdata_Data_Packet::write_critter_bob
+(FileWrite * fw, Editor_Game_Base *,
+ Widelands_Map_Map_Object_Saver *,
+ Critter_Bob *)
+{fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);}
 
 void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, Worker* worker) {
    fw->Unsigned16(WORKER_BOB_PACKET_VERSION);

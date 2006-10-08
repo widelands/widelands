@@ -39,7 +39,7 @@ Fullscreen_Menu_LoadGame
 ==============================================================================
 */
 
-Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer)
+Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *, bool)
 	: Fullscreen_Menu_Base("choosemapmenu.jpg")
 {
 	// Text
@@ -85,8 +85,7 @@ void Fullscreen_Menu_LoadGame::ok()
    end_modal(1);
 }
 
-void Fullscreen_Menu_LoadGame::map_selected(int id)
-{
+void Fullscreen_Menu_LoadGame::map_selected(int) {
    const char* name=static_cast<const char*>(list->get_selection());
 
    if (name)
@@ -119,7 +118,7 @@ void Fullscreen_Menu_LoadGame::map_selected(int id)
 /*
  * listbox got double clicked
  */
-void Fullscreen_Menu_LoadGame::double_clicked(int i) {
+void Fullscreen_Menu_LoadGame::double_clicked(int) {
    // Ok
    ok();
 

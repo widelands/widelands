@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,15 +20,12 @@
 #ifndef __S__GAME_DATA_PACKET_H
 #define __S__GAME_DATA_PACKET_H
 
-#include "game_data_packet_ids.h"
-#include "map.h"
 #include "wexception.h"
-#include "widelands_map_map_object_saver.h"
-#include "widelands_map_map_object_loader.h"
 
 class FileSystem;
-class Editor_Game_Base;
 class Game;
+class Widelands_Map_Map_Object_Loader;
+class Widelands_Map_Map_Object_Saver;
 
 /*
 ========================================

@@ -76,8 +76,7 @@ Tribe_Descr::postload
 Load all logic data
 ===============
 */
-void Tribe_Descr::postload(Editor_Game_Base* g)
-{
+void Tribe_Descr::postload(Editor_Game_Base *) {
 	// TODO: move more loads to postload
 }
 

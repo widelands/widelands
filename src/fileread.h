@@ -20,10 +20,11 @@
 #ifndef FILEREAD_H
 #define FILEREAD_H
 
-#include <assert.h>
-#include "filesystem.h"
+#include "error.h"
 #include "machdep.h"
 #include "wexception.h"
+
+struct FileSystem;
 
 /**
  * FileRead can be used to read a file.

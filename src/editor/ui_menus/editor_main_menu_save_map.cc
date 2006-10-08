@@ -190,7 +190,7 @@ void Main_Menu_Save_Map::clicked(int id) {
 /*
  * called when a item is selected
  */
-void Main_Menu_Save_Map::selected(int i) {
+void Main_Menu_Save_Map::selected(int) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
    if(Widelands_Map_Loader::is_widelands_map(name)) {

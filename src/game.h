@@ -23,6 +23,11 @@
 #include "editor_game_base.h"
 #include "random.h"
 
+struct Flag;
+struct Cmd_Queue;
+struct Path;
+struct PlayerImmovable;
+
 #define WLGF_SUFFIX		".wgf"
 #define WLGF_MAGIC      "WLgf"
 

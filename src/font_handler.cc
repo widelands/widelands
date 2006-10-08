@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -152,8 +152,9 @@ uint Font_Handler::create_text_surface(TTF_Font* f, RGBColor fg, RGBColor bg,
 /*
  * This function renders a short (single line) text surface
  */
-SDL_Surface* Font_Handler::create_single_line_text_surface(TTF_Font* f, RGBColor fg, RGBColor bg,
-        std::string text, Align align, int caret) {
+SDL_Surface* Font_Handler::create_single_line_text_surface
+(TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align, int caret)
+{
 	// render this block in a SDL Surface
 	SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
 	SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };

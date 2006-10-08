@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "editor_delete_immovable_tool.h"
 #include "field.h"
+#include "immovable.h"
 #include "map.h"
 #include "editorinteractive.h"
 #include "editor.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@ void Trigger_Null::Write(Section & s) const
 /*
  * check if trigger conditions are done
  */
-void Trigger_Null::check_set_conditions(Game* game) {
+void Trigger_Null::check_set_conditions(Game *) {
    if(m_should_toggle)
       set_trigger(m_value);
 
@@ -68,7 +68,7 @@ void Trigger_Null::check_set_conditions(Game* game) {
 /*
  * Reset this trigger. This is only valid for non one timers
  */
-void Trigger_Null::reset_trigger(Game* game) {
+void Trigger_Null::reset_trigger(Game *) {
    m_should_toggle = false;
    m_value = false;
    set_trigger( false );

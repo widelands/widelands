@@ -77,8 +77,7 @@ Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Trigger_Null_Option_Menu::handle_mouseclick(uint btn, bool down, int, int)
-{
+bool Trigger_Null_Option_Menu::handle_mouseclick(uint btn, bool, int, int) {
    if(btn == MOUSE_RIGHT) {
       clicked(0);
       return true;

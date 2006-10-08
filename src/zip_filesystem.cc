@@ -1,5 +1,5 @@
 	/*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,9 +199,8 @@ FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type ) {
 /**
  * Remove a number of files
  */
-void ZipFilesystem::Unlink(std::string file) {
-   throw wexception("Unlinking doesn't work in a zip file!\n");
-}
+void ZipFilesystem::Unlink(std::string)
+{throw wexception("Unlinking doesn't work in a zip file!\n");}
 
 /**
  * Create this directory if it doesn't exist, throws an error
@@ -2123,8 +2122,7 @@ local void ziplocal_putValue_inmemory (void* dest, uLong x, int nbByte)
 /****************************************************************************/
 
 
-local uLong ziplocal_TmzDateToDosDate(const tm_zip* ptm, uLong dosDate)
-{
+local uLong ziplocal_TmzDateToDosDate(const tm_zip* ptm, uLong) {
     uLong year = (uLong)ptm->tm_year;
     if (year>1980)
         year-=1980;
@@ -2291,7 +2289,11 @@ local uLong ziplocal_SearchCentralDir(const zlib_filefunc_def* pzlib_filefunc_de
 #endif /* !NO_ADDFILEINEXISTINGZIP*/
 
 /************************************************************/
-extern zipFile ZEXPORT zipOpen2 ( const char* pathname, int append, zipcharpc* globalcomment, zlib_filefunc_def* pzlib_filefunc_def)
+extern zipFile ZEXPORT zipOpen2
+(const char * pathname,
+ int append,
+ zipcharpc *,
+ zlib_filefunc_def * pzlib_filefunc_def)
 {
     zip_internal ziinit;
     zip_internal* zi;
@@ -2457,12 +2459,23 @@ extern zipFile ZEXPORT zipOpen (const char* pathname, int append)
     return zipOpen2(pathname,append,NULL,NULL);
 }
 
-extern int ZEXPORT zipOpenNewFileInZip3 (zipFile file, const char* filename, const zip_fileinfo* zipfi,
-                                         const void* extrafield_local, uInt size_extrafield_local,
-                                         const void* extrafield_global, uInt size_extrafield_global,
-                                         const char* comment, int method, int level, int raw,
-                                         int windowBits, int memLevel, int strategy,
-                                         const char* password, uLong crcForCrypting)
+extern int ZEXPORT zipOpenNewFileInZip3
+(zipFile file,
+ const char * filename,
+ const zip_fileinfo * zipfi,
+ const void * extrafield_local,
+ uInt size_extrafield_local,
+ const void * extrafield_global,
+ uInt size_extrafield_global,
+ const char * comment,
+ int method,
+ int level,
+ int raw,
+ int windowBits,
+ int memLevel,
+ int strategy,
+ const char * password,
+ uLong)
 {
     zip_internal* zi;
     uInt size_filename;
@@ -2967,8 +2980,7 @@ int ZCALLBACK ferror_file_func OF((
    voidpf stream));
 
 
-voidpf ZCALLBACK fopen_file_func ( voidpf opaque, const char* filename, int mode)
-{
+voidpf ZCALLBACK fopen_file_func (voidpf, const char* filename, int mode) {
     FILE* file = NULL;
     const char* mode_fopen = NULL;
     if ((mode & ZLIB_FILEFUNC_MODE_READWRITEFILTER)==ZLIB_FILEFUNC_MODE_READ)
@@ -2986,29 +2998,27 @@ voidpf ZCALLBACK fopen_file_func ( voidpf opaque, const char* filename, int mode
 }
 
 
-uLong ZCALLBACK fread_file_func ( voidpf opaque, voidpf stream, void* buf, uLong size)
-{
+uLong ZCALLBACK fread_file_func (voidpf, voidpf stream, void* buf, uLong size) {
     uLong ret;
     ret = (uLong)fread(buf, 1, (size_t)size, (FILE *)stream);
     return ret;
 }
 
 
-uLong ZCALLBACK fwrite_file_func ( voidpf opaque, voidpf stream, const void* buf, uLong size)
+uLong ZCALLBACK fwrite_file_func (voidpf, voidpf stream, const void* buf, uLong size)
 {
     uLong ret;
     ret = (uLong)fwrite(buf, 1, (size_t)size, (FILE *)stream);
     return ret;
 }
 
-long ZCALLBACK ftell_file_func (voidpf opaque, voidpf stream)
-{
+long ZCALLBACK ftell_file_func (voidpf, voidpf stream) {
     long ret;
     ret = ftell((FILE *)stream);
     return ret;
 }
 
-long ZCALLBACK fseek_file_func (voidpf opaque, voidpf stream, uLong offset, int origin)
+long ZCALLBACK fseek_file_func (voidpf, voidpf stream, uLong offset, int origin)
 {
     int fseek_origin=0;
     long ret;
@@ -3030,15 +3040,13 @@ long ZCALLBACK fseek_file_func (voidpf opaque, voidpf stream, uLong offset, int 
     return ret;
 }
 
-int ZCALLBACK fclose_file_func ( voidpf opaque, voidpf stream)
-{
+int ZCALLBACK fclose_file_func (voidpf, voidpf stream) {
     int ret;
     ret = fclose((FILE *)stream);
     return ret;
 }
 
-int ZCALLBACK ferror_file_func (voidpf opaque, voidpf stream)
-{
+int ZCALLBACK ferror_file_func (voidpf, voidpf stream) {
     int ret;
     ret = ferror((FILE *)stream);
     return ret;

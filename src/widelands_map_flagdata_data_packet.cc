@@ -18,6 +18,7 @@
  */
 
 #include <map>
+#include "building.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"

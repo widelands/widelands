@@ -22,14 +22,11 @@
 
 #include <string>
 #include <map>
-#include "error.h"
-#include "trigger.h"
 
 class Game;
 class Section;
 class Editor_Game_Base;
 class EventReferencer;
-class Map;
 
 /*
  * Event is a in game event of some kind

@@ -38,7 +38,13 @@ Widelands_Map_Heights_Data_Packet::~Widelands_Map_Heights_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Heights_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
+void Widelands_Map_Heights_Data_Packet::Read
+(FileSystem * fs,
+ Editor_Game_Base * egbase,
+ bool,
+ Widelands_Map_Map_Object_Loader *)
+throw(_wexception)
+{
 
    FileRead fr;
    fr.Open( fs, "binary/heights");

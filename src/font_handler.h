@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,14 @@
 #ifndef __S__FONT_HANDLER_H
 #define __S__FONT_HANDLER_H
 
+#include "rgbcolor.h"
+
 #include <list>
+#include <string>
 #include <vector>
 #include <SDL_ttf.h>
-#include "font_loader.h"
 
+class Font_Loader;
 class RenderTarget;
 class Text_Block;
 

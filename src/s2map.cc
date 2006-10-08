@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -135,7 +135,7 @@ and places all the objects. From now on
 the Map* can't be set to another one.
 ===========
 */
-int S2_Map_Loader::load_map_complete(Editor_Game_Base* game, bool scenario) {
+int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
 
 
    // now, load the world, load the rest infos from the map

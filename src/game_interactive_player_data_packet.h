@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,6 @@
 #define __S__GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
 
 #include "game_data_packet.h"
-
-class FileRead;
-class FileWrite;
-class Game;
 
 /*
  * Informations about the interactive player. Mostly scrollpos,

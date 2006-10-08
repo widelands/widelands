@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -191,8 +191,7 @@ World::postload
 Load all logic game data now
 ===============
 */
-void World::postload(Editor_Game_Base* g)
-{
+void World::postload(Editor_Game_Base *) {
 	// TODO: move more loads to postload
 }
 

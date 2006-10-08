@@ -135,8 +135,7 @@ IdleSoldierSupply::get_amount
 It's just the one soldier.
 ===============
 */
-int IdleSoldierSupply::get_amount(Game* g, int ware)
-{
+int IdleSoldierSupply::get_amount(Game *, int ware) {
 	if (ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()))
 		return 1;
 
@@ -152,10 +151,7 @@ Idle soldiers are always active supplies, because they need to get into a
 Warehouse ASAP.
 ===============
 */
-bool IdleSoldierSupply::is_active(Game* g)
-{
-	return true;
-}
+bool IdleSoldierSupply::is_active(Game *) {return true;}
 
 
 /*
@@ -163,10 +159,8 @@ bool IdleSoldierSupply::is_active(Game* g)
 IdleSoldierSupply::launch_item
 ===============
 */
-WareInstance* IdleSoldierSupply::launch_item(Game* g, int ware)
-{
-	throw wexception("IdleSoldierSupply::launch_item() makes no sense.");
-}
+WareInstance* IdleSoldierSupply::launch_item(Game *, int)
+{throw wexception("IdleSoldierSupply::launch_item() makes no sense.");}
 
 
 /*
@@ -189,7 +183,8 @@ IdleSodlierSupply::launch_soldier
 No need to explicitly launch the soldier.
 ===============
 */
-Soldier* IdleSoldierSupply::launch_soldier(Game* g, int ware, Requeriments* req)
+Soldier * IdleSoldierSupply::launch_soldier
+(Game *, int ware, Requeriments * req)
 {
 	assert(ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()));
 
@@ -218,8 +213,7 @@ Soldier* IdleSoldierSupply::launch_soldier(Game* g, int ware, Requeriments* req)
 IdleSodlierSupply::mark_as_used
 ===============
 */
-void IdleSoldierSupply::mark_as_used(Game* g, int ware, Requeriments* req)
-{
+void IdleSoldierSupply::mark_as_used(Game *, int ware, Requeriments * req) {
 	assert(ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()));
 
 	if (req)
@@ -249,7 +243,8 @@ IdleSodlierSupply::get_passing_requeriments
 No need to explicitly launch the soldier.
 ===============
 */
-int IdleSoldierSupply::get_passing_requeriments(Game* g, int ware, Requeriments* req)
+int IdleSoldierSupply::get_passing_requeriments
+(Game *, int ware, Requeriments * req)
 {
 	assert(ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()));
 
@@ -546,11 +541,8 @@ uint Soldier::get_level(const tAttribute at)
 	throw wexception ("Soldier::get_level attribute not identified.)");
 }
 
-void Soldier::heal (const uint hp)
-{
-	// Ensures that we can only heal, don't hurt throught this method
-	assert (hp >= 0);
-
+// Unsignedness ensures that we can only heal, don't hurt throught this method.
+void Soldier::heal (const uint hp) {
    molog ("healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
 	m_hp_current += hp;
 

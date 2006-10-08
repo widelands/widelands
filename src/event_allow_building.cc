@@ -47,8 +47,7 @@ Event_Allow_Building::~Event_Allow_Building(void) {
 /*
  * reinitialize
  */
-void Event_Allow_Building::reinitialize(Game* g) {
-}
+void Event_Allow_Building::reinitialize(Game *) {}
 
 /*
  * File Read, File Write

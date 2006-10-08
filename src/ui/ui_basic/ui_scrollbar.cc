@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -376,8 +376,7 @@ bool UIScrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
 /**
 Move the knob while pressed.
 */
-void UIScrollbar::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
-{
+void UIScrollbar::handle_mousemove(int mx, int my, int, int, uint) {
 	if (m_pressed == Knob)
 	{
 		int pos = m_horizontal ? mx : my;

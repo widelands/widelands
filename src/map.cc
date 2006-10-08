@@ -709,8 +709,7 @@ struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob*>* list, const FindBob& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(const Map & map, const FCoords cur)
-	{
+	void operator()(const Map &, const FCoords cur) {
 		Bob *bob;
 
 		for(bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
@@ -796,8 +795,7 @@ struct FindImmovablesCallback {
 	FindImmovablesCallback(std::vector<ImmovableFound>* list, const FindImmovable& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(const Map & map, const FCoords cur)
-	{
+	void operator()(const Map &, const FCoords cur) {
 		BaseImmovable *imm = cur.field->get_immovable();
 
 		if (!imm)
@@ -882,8 +880,7 @@ struct FindFieldsCallback {
 	FindFieldsCallback(std::vector<Coords>* list, const FindField& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(const Map & map, const FCoords cur)
-	{
+	void operator()(const Map &, const FCoords cur) {
 		if (m_functor.accept(cur))
 		{
 			if (m_list)
@@ -2397,7 +2394,8 @@ CheckStep implementations
 CheckStepDefault
 ===============
 */
-bool CheckStepDefault::allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const
+bool CheckStepDefault::allowed
+(Map *, FCoords start, FCoords end, int, StepId) const
 {
 	uchar endcaps = end.field->get_caps();
 
@@ -2434,7 +2432,8 @@ bool CheckStepDefault::reachabledest(Map* map, FCoords dest) const
 CheckStepWalkOn
 ===============
 */
-bool CheckStepWalkOn::allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const
+bool CheckStepWalkOn::allowed
+(Map *, FCoords start, FCoords end, int, StepId id) const
 {
 	uchar startcaps = start.field->get_caps();
 	uchar endcaps = end.field->get_caps();
@@ -2459,8 +2458,7 @@ bool CheckStepWalkOn::allowed(Map* map, FCoords start, FCoords end, int dir, Ste
 	return false;
 }
 
-bool CheckStepWalkOn::reachabledest(Map* map, FCoords dest) const
-{
+bool CheckStepWalkOn::reachabledest(Map *, FCoords) const {
 	// Don't bother solving this.
 	return true;
 }
@@ -2471,7 +2469,8 @@ bool CheckStepWalkOn::reachabledest(Map* map, FCoords dest) const
 CheckStepRoad
 ===============
 */
-bool CheckStepRoad::allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const
+bool CheckStepRoad::allowed
+(Map* map, FCoords start, FCoords end, int, StepId id) const
 {
 	uchar endcaps = m_player->get_buildcaps(end);
 

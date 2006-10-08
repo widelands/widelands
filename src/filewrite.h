@@ -20,8 +20,9 @@
 #ifndef FILEWRITE_H
 #define FILEWRITE_H
 
-#include "filesystem.h"
 #include "machdep.h"
+
+struct FileSystem;
 
 /**
  * Mirror of \ref FileRead : all writes are first stored in a block of memory and finally

@@ -23,6 +23,7 @@
 #include "editor_tool.h"
 #include "editor_set_starting_pos_tool.h"
 #include "graphic.h"
+#include "immovable.h"
 #include "map.h"
 #include "overlay_manager.h"
 

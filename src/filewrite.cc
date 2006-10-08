@@ -18,6 +18,7 @@
  */
 
 #include "error.h"
+#include "filesystem.h"
 #include "filewrite.h"
 #include <stdarg.h>
 #include "wexception.h"

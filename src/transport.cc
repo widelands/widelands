@@ -152,10 +152,8 @@ PlayerImmovable* IdleWareSupply::get_position(Game* g)
 IdleWareSupply::get_amount
 ===============
 */
-int IdleWareSupply::get_amount(Game* g, int ware)
-{
-	return (ware == m_ware->get_ware()) ? 1 : 0;
-}
+int IdleWareSupply::get_amount(Game *, int ware)
+{return (ware == m_ware->get_ware()) ? 1 : 0;}
 
 
 /*
@@ -176,8 +174,7 @@ IdleWareSupply::launch_item
 The item is already "launched", so we only need to return it.
 ===============
 */
-WareInstance* IdleWareSupply::launch_item(Game* g, int ware)
-{
+WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
 	if (ware != m_ware->get_ware())
 		throw wexception("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 				m_ware->get_serial(), m_ware->get_ware(), ware);
@@ -191,10 +188,8 @@ WareInstance* IdleWareSupply::launch_item(Game* g, int ware)
 IdleWareSupply::launch_worker
 ===============
 */
-Worker* IdleWareSupply::launch_worker(Game* g, int ware)
-{
-	throw wexception("IdleWareSupply::launch_worker makes no sense");
-}
+Worker* IdleWareSupply::launch_worker(Game *, int)
+{throw wexception("IdleWareSupply::launch_worker makes no sense");}
 
 
 /*
@@ -202,10 +197,8 @@ Worker* IdleWareSupply::launch_worker(Game* g, int ware)
 IdleWareSupply::launch_soldier
 ===============
 */
-Soldier* IdleWareSupply::launch_soldier(Game* g, int ware, Requeriments* req)
-{
-	throw wexception("IdleWareSupply::launch_soldier makes no sense");
-}
+Soldier* IdleWareSupply::launch_soldier(Game *, int, Requeriments *)
+{throw wexception("IdleWareSupply::launch_soldier makes no sense");}
 
 
 /*
@@ -213,18 +206,15 @@ Soldier* IdleWareSupply::launch_soldier(Game* g, int ware, Requeriments* req)
 IdleWareSupply::get_passing_requeriments
 ===============
 */
-int IdleWareSupply::get_passing_requeriments(Game* g, int ware, Requeriments* req)
-{
-	throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");
-}
+int IdleWareSupply::get_passing_requeriments(Game *, int, Requeriments *)
+{throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");}
 
 /*
 ===============
 IdleWareSupply::get_passing_requeriments
 ===============
 */
-void IdleWareSupply::mark_as_used (Game* g, int ware, Requeriments* r)
-{
+void IdleWareSupply::mark_as_used (Game *, int, Requeriments *) {
 	// By now, wares have not need to have this method
 }
 
@@ -396,9 +386,7 @@ WareInstance::act
 Callback for the return-to-warehouse timer.
 ===============
 */
-void WareInstance::act(Game* g, uint data)
-{
-}
+void WareInstance::act(Game *, uint) {}
 
 
 /*
@@ -548,10 +536,7 @@ WareInstance::is_moving
 We are moving when there's a transfer, it's that simple.
 ===============
 */
-bool WareInstance::is_moving(Game* g)
-{
-	return m_transfer;
-}
+bool WareInstance::is_moving(Game *) {return m_transfer;}
 
 
 /*
@@ -562,8 +547,7 @@ Call this function if movement + potential request need to be cancelled for
 whatever reason.
 ===============
 */
-void WareInstance::cancel_moving(Game* g)
-{
+void WareInstance::cancel_moving(Game *) {
 	if (m_transfer) {
 		molog("WareInstance::cancel_moving() fails transfer.\n");
 
@@ -905,10 +889,8 @@ Flag::wait_for_capacity
 Signal the given bob by interrupting its task as soon as capacity becomes free.
 ===============
 */
-void Flag::wait_for_capacity(Game* g, Worker* bob)
-{
-	m_capacity_wait.push_back(bob);
-}
+void Flag::wait_for_capacity(Game *, Worker* bob)
+{m_capacity_wait.push_back(bob);}
 
 
 /*
@@ -942,8 +924,7 @@ Note: Due to fetch_from_flag() semantics, this function makes no sense for a
       building destination.
 ===============
 */
-bool Flag::has_pending_item(Game* g, Flag* dest)
-{
+bool Flag::has_pending_item(Game *, Flag * dest) {
 	int i;
 
 	for(i = 0; i < m_item_filled; i++) {
@@ -969,8 +950,7 @@ item.
 Returns true if an item is actually waiting for the carrier.
 ===============
 */
-bool Flag::ack_pending_item(Game* g, Flag* destflag)
-{
+bool Flag::ack_pending_item(Game *, Flag * destflag) {
 	int i;
 
 	for(i = 0; i < m_item_filled; i++) {
@@ -1294,8 +1274,7 @@ Add a new flag job to request the worker with the given ID, and to execute
 the given program once it's completed.
 ==============
 */
-void Flag::add_flag_job(Game* g, int workerware, std::string programname)
-{
+void Flag::add_flag_job(Game *, int workerware, std::string programname) {
 	FlagJob j;
 
 	j.request = new Request(this, workerware,
@@ -1314,7 +1293,8 @@ This function is called when one of the flag job workers arrives on
 the flag. Give him his job.
 ==============
 */
-void Flag::flag_job_request_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+void Flag::flag_job_request_callback
+(Game * g, Request * rq, int, Worker * w, void * data)
 {
 	Flag* flag = (Flag*)data;
 
@@ -1684,7 +1664,8 @@ Road::request_carrier_callback [static]
 The carrier has arrived successfully.
 ===============
 */
-void Road::request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+void Road::request_carrier_callback
+(Game * g, Request * rq, int, Worker * w, void * data)
 {
 	assert(w);
 
@@ -1733,10 +1714,7 @@ the new flag initializes. We remove markings to avoid interference with the
 flag.
 ===============
 */
-void Road::presplit(Editor_Game_Base *g, Coords split)
-{
-	unmark_map(g);
-}
+void Road::presplit(Editor_Game_Base * g, Coords) {unmark_map(g);}
 
 
 /*
@@ -2306,7 +2284,8 @@ bool Requeriments::check (int hp, int attack, int defense, int evade)
  * It's called problably by some request loader, militarysite or trainingsite loader.
  *
  */
-void Requeriments::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Requeriments::Read
+(FileRead * fr, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
 {
    uint version=fr->Unsigned16();
 
@@ -2337,7 +2316,9 @@ void Requeriments::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Ma
 /*
  * Write this requeriment to a file
  */
-void Requeriments::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Requeriments::Write
+(FileWrite * fw, Editor_Game_Base *, Widelands_Map_Map_Object_Saver *)
+{
    // First, write version
 	fw->Unsigned16(REQUERIMENTS_VERSION);
 
@@ -2817,8 +2798,7 @@ The calling code has already dealt with the worker/item.
 Re-open the request.
 ===============
 */
-void Request::transfer_fail(Game *g, Transfer* t)
-{
+void Request::transfer_fail(Game *, Transfer * t) {
 	bool wasopen = is_open();
 
 	t->m_soldier = 0;
@@ -3045,8 +3025,7 @@ Fix filled <= size and requests.
 You must call this after every call to set_*()
 ===============
 */
-void WaresQueue::update(Game* g)
-{
+void WaresQueue::update(Game *) {
 	assert(m_ware != -1);
 
 	if (m_filled > m_size) {
@@ -3093,7 +3072,8 @@ WaresQueue::request_callback [static]
 Called when an item arrives at the owning building.
 ===============
 */
-void WaresQueue::request_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+void WaresQueue::request_callback
+(Game * g, Request *, int ware, Worker * w, void * data)
 {
 	WaresQueue* wq = (WaresQueue*)data;
 
@@ -3951,8 +3931,7 @@ Economy::have_soldier_supply
 Return true if the given soldier_supply is registered with the economy.
 ===============
 */
-bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments* r)
-{
+bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments *) {
 	if (ware >= (int)m_worker_supplies.size())
 		return false;
 

@@ -45,8 +45,7 @@ Event_Conquer_Area::~Event_Conquer_Area(void) {
 /*
  * reinitialize
  */
-void Event_Conquer_Area::reinitialize(Game* g) {
-}
+void Event_Conquer_Area::reinitialize(Game *) {}
 
 /*
  * File Read, File Write

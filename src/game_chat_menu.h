@@ -20,7 +20,6 @@
 #ifndef __S__GAME_CHAT_MENU_H
 #define __S__GAME_CHAT_MENU_H
 
-#include "interactive_player.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_multilineeditbox.h"
@@ -28,6 +27,7 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 
+class Interactive_Player;
 class NetGame;
 
 // The GameChatMenu is a rather dumb window with lots of buttons
@@ -45,7 +45,7 @@ private:
 	UIButton             send;
 	UITextarea           show_as_overlays_label;
 	UICheckbox           show_as_overlays;
-	
+
 	void clicked_send(int);
 	void changed_show_as_overlays(bool);
 };

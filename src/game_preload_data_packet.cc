@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "game.h"
 #include "game_preload_data_packet.h"
+#include "map.h"
 #include "profile.h"
 
 #define CURRENT_PACKET_VERSION 1
@@ -32,7 +33,9 @@ Game_Preload_Data_Packet::~Game_Preload_Data_Packet(void) {
 /**
  * Read Function
  */
-void Game_Preload_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
+void Game_Preload_Data_Packet::Read
+(FileSystem * fs, Game *, Widelands_Map_Map_Object_Loader *) throw(_wexception)
+{
 
    Profile prof;
    prof.read( "preload", 0, fs );

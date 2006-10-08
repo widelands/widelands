@@ -45,8 +45,7 @@ Event_Unhide_Objective::~Event_Unhide_Objective(void) {
 /*
  * reinitialize
  */
-void Event_Unhide_Objective::reinitialize(Game* g) {
-}
+void Event_Unhide_Objective::reinitialize(Game *) {}
 
 /*
  * File Read, File Write
@@ -77,7 +76,7 @@ void Event_Unhide_Objective::Write(Section & s, const Editor_Game_Base &) const
 /*
  * check if trigger conditions are done
  */
-Event::State Event_Unhide_Objective::run(Game* game) {
+Event::State Event_Unhide_Objective::run(Game *) {
    assert( m_objective );
 
    m_objective->set_is_visible( get_dounhide());

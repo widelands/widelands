@@ -90,7 +90,9 @@ Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Editor_Event_Menu_New_Event::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Editor_Event_Menu_New_Event::handle_mouseclick
+(uint btn, bool down, int, int)
+{
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;
@@ -124,7 +126,7 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_New_Event::selected(int i) {
+void Editor_Event_Menu_New_Event::selected(int) {
    Event_Descr* d=static_cast<Event_Descr*>(m_event_list->get_selection());
    m_description->set_text(d->descr);
    m_ok_button->set_enabled(true);
@@ -133,7 +135,7 @@ void Editor_Event_Menu_New_Event::selected(int i) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_New_Event::double_clicked(int i) {
+void Editor_Event_Menu_New_Event::double_clicked(int) {
    // Ok
    clicked(1);
 }

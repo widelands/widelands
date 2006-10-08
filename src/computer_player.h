@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by The Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,9 @@
 
 #include "game.h"
 #include <list>
-#include <string>
 
+class BuildingHints;
+class Economy;
 class Player;
 class PlayerImmovable;
 class Tribe_Descr;

@@ -24,7 +24,7 @@
 void Flag::draw
 (const Editor_Game_Base & game,
  RenderTarget & dst,
- const FCoords coords,
+ const FCoords,
  const Point pos)
 {
 	static struct { int x, y; } ware_offsets[8] = {
@@ -37,10 +37,10 @@ void Flag::draw
 		{  3, -2 },
 		{  8, -3 }
 	};
-	
+
 	dst.drawanim
 		(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, get_owner());
-	
+
 	const uint item_filled = m_item_filled;
 	for (uint i = 0; i < item_filled; ++i) {// draw wares
 		Point warepos = pos;
