@@ -20,7 +20,6 @@
 #ifndef __WARE_DESCR_H
 #define __WARE_DESCR_H
 
-#include <map>
 #include <string>
 #include <vector>
 

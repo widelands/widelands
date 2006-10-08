@@ -27,6 +27,8 @@
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_bob_data_packet.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 #include "error.h"
 
 // VERSION 1:

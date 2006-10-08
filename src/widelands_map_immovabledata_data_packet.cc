@@ -30,6 +30,8 @@
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_immovabledata_data_packet.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 #include "error.h"
 
 #define CURRENT_PACKET_VERSION 1

@@ -20,14 +20,12 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
-#include "game.h"
-#include "graphic.h"
 #include <SDL.h>
 #include <map>
 #include <stdexcept>
 #include <string>
-#include <vector>
 
+class Game;
 class Journal;
 
 ///Thrown if a commandline parameter is faulty
@@ -44,9 +42,6 @@ struct InputCallback {
 	void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
 	void (*key)(bool down, int code, char c);
 };
-
-///the Graphic "singleton". \todo make into a real singleton
-extern Graphic *g_gr;
 
 /**
  * You know main functions, of course. This is the main class.

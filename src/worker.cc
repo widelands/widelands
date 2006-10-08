@@ -42,6 +42,7 @@
 #include "worker.h"
 #include "worker_program.h"
 #include "world.h"
+#include "worlddata.h"
 #include "sound_handler.h"
 
 Cmd_Incorporate::Cmd_Incorporate(int t, Worker* w) :

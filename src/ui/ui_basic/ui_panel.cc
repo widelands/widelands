@@ -17,7 +17,7 @@
  *
  */
 
-#include <cassert>
+#include "constants.h"
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"

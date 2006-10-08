@@ -20,6 +20,7 @@
 #include "editorinteractive.h"
 #include "editor_place_bob_tool.h"
 #include "editor_tool_place_bob_options_menu.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"

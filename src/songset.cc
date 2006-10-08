@@ -19,6 +19,7 @@
 
 
 #include "error.h"
+#include "fileread.h"
 #include "layeredfilesystem.h"
 #include "songset.h"
 #include "sound_handler.h"
@@ -102,14 +103,14 @@ Mix_Music *Songset::get_song()
 #warning Mix_LoadMUS_RW is not available under windows!!!
     // Hack for windows, works because cwd is directory where
     // executable is in
-	m_m = Mix_LoadMUS(filename.c_str());	 
+	m_m = Mix_LoadMUS(filename.c_str());
 
 #else
 #if NEW_SDL_MIXER == 1
 	m_m = Mix_LoadMUS_RW(m_rwops);
 
 #else
-#warning Please update your SDL_mixer library to at least version 1.2.6!!!    
+#warning Please update your SDL_mixer library to at least version 1.2.6!!!
     // We have to go the long way. We are pretty sure, we're not under windows
     // so we have a /tmp dir and mktemp (hopefully)
     // This solution is terribly slow, but we hope that there are only
@@ -117,11 +118,11 @@ Mix_Music *Songset::get_song()
     char tempfilebuf[256] = "/tmp/wl_tempmusic.XXXXXXXX";
     char* tempfile = tempfilebuf;
     tempfile = mktemp(tempfilebuf);
-    
+
     FILE* f = fopen( tempfile, "w" );
     fwrite( m_fr->Data(0), m_fr->GetSize(), 1, f);
     fclose( f );
-    
+
 	m_m = Mix_LoadMUS(tempfile);
 
 	//TODO: this should use a RWopsified version!

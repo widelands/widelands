@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005, 2006 by the Widelands Development Team
+ * Copyright (C) 2005-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,15 +24,17 @@
 #include "config.h"
 
 #include "fxset.h"
-#include "game.h"
 #include "geometry.h"
 #include <map>
 #include "random.h"
-#include "songset.h"
+#include <string>
 #include <vector>
 #include <unistd.h>
 
-using namespace std;
+struct FileRead;
+struct Game;
+struct Mix_Chunk;
+struct Songset;
 
 /// How many milliseconds in the past to consider for \ref Sound_Handler::play_or_not()
 #define SLIDING_WINDOW_SIZE 300000
@@ -180,19 +182,29 @@ public:
 	void read_config();
 	void load_system_sounds();
 
-	void load_fx(const string dir, const string basename,
-	             const bool recursive = false);
-	void play_fx(const string fx_name, Coords map_position=INVALID_POSITION,
-	             const uint priority=PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
-	void play_fx(const string fx_name, const int stereo_position,
-	             const uint priority=PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+	void load_fx
+		(const std::string dir,
+		 const std::string basename,
+		 const bool recursive = false);
+	void play_fx
+		(const std::string fx_name,
+		 Coords map_position = INVALID_POSITION,
+		 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+	void play_fx
+		(const std::string fx_name,
+		 const int stereo_position,
+		 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 
-	void register_song(const string dir, const string basename,
-	                   const bool recursive = false);
-	void start_music(const string songset_name, int fadein_ms = 0);
+	void register_song
+		(const std::string dir,
+		 const std::string basename,
+		 const bool recursive = false);
+	void start_music(const std::string songset_name, int fadein_ms = 0);
 	void stop_music(int fadeout_ms = 0);
-	void change_music(const string songset_name = "", int fadeout_ms = 0,
-	                  int fadein_ms = 0);
+	void change_music
+		(const std::string songset_name = "",
+		 int fadeout_ms = 0,
+		 int fadein_ms = 0);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
@@ -224,10 +236,12 @@ public:
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
-	void load_one_fx(const string filename, const string fx_name);
+	void load_one_fx(const std::string filename, const std::string fx_name);
 	int stereo_position(const Coords position);
-	bool play_or_not(const string fx_name,const int stereo_position,
-	                 const uint priority);
+	bool play_or_not
+		(const std::string fx_name,
+		 const int stereo_position,
+		 const uint priority);
 
 	/// Whether to disable background music
 	bool m_disable_music;
@@ -241,18 +255,18 @@ protected:
 	bool m_random_order;
 
 	/// A collection of songsets
-	map < string, Songset * >m_songs;
+	std::map<std::string, Songset *> m_songs;
 
 	/// A collection of effect sets
-	map < string, FXset * >m_fxs;
+	std::map<std::string, FXset *> m_fxs;
 
 	/// List of currently playing effects, and the channel each one is on
-	map<uint, string>m_active_fx;
+	std::map<uint, std::string> m_active_fx;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now
 	*/
-	string m_current_songset;
+	std::string m_current_songset;
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game

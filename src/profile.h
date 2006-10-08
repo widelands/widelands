@@ -26,7 +26,6 @@
 
 extern class Profile g_options;
 
-class Profile;
 class FileSystem;
 
 /*

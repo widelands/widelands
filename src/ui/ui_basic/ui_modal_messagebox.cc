@@ -17,6 +17,7 @@
  *
  */
 
+#include "constants.h"
 #include "ui_window.h"
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"

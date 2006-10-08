@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@
 #include "editor_set_starting_pos_tool.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_base.h"
 #include "keycodes.h"

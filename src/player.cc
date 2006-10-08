@@ -27,6 +27,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "cmd_queue.h"
+#include "soldier.h"
 #include "sound_handler.h"
 
 

@@ -22,6 +22,7 @@
 #include "error.h"
 #include "font_handler.h"
 #include "game.h"
+#include "graphic.h"
 #include "immovable.h"
 #include "interactive_base.h"
 #include "interactive_player.h"

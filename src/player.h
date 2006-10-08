@@ -25,10 +25,8 @@
 #include "rgbcolor.h"
 
 class Economy;
-class Game;
 class Path;
 class PlayerImmovable;
-class Road;
 class Soldier;
 class Flag;
 class Tribe_Descr;

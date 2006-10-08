@@ -17,6 +17,7 @@
  *
  */
 
+#include "error.h"
 #include "fxset.h"
 #include "sound_handler.h"
 

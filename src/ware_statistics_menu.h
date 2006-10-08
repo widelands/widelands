@@ -20,11 +20,9 @@
 #ifndef __S__WARE_STATISTICS_MENU_H
 #define __S__WARE_STATISTICS_MENU_H
 
-#include "filesystem.h"
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UITextarea;
 class UIButton;
 class WUIPlot_Area;
 

@@ -26,7 +26,6 @@
 #define PRINTF_FORMAT(b,c)
 #endif
 
-#include <set>
 #include <list>
 
 #include "immovable.h"

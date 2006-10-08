@@ -21,7 +21,6 @@
 #define __S__GAME_SERVER_PROTO_PACKET_H
 
 #include "types.h"
-#include <SDL_net.h>
 
 class Game_Server_Connection;
 class Network_Buffer;

@@ -22,10 +22,11 @@
 
 #include "config.h" //must be included before SDL_mixer.h!
 
-#include "fileread.h"
 #include <SDL_mixer.h>
 #include <string>
 #include <vector>
+
+struct FileRead;
 
 /** A collection of several pieces of music meant for the same situation.
  *

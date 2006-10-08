@@ -23,17 +23,13 @@
 #include "animation.h"
 #include "bob.h"
 #include "cmd_queue.h"
-#include <string>
-#include <vector>
 
 class Building;
 class Economy;
 class Flag;
-class Request;
 class Route;
 class Road;
 class PlayerImmovable;
-class Pic;
 class WareInstance;
 class Tribe_Descr;
 class IdleWorkerSupply;

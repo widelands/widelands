@@ -25,6 +25,7 @@
 #include "types.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
+#include "ui_textarea.h"
 #include "tribe.h"
 #include "wexception.h"
 

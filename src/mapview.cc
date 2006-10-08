@@ -17,6 +17,7 @@
  *
  */
 
+#include "graphic.h"
 #include "interactive_base.h"
 #include "interactive_player.h"
 #include "map.h"

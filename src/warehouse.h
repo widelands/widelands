@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,9 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include <map>
 #include "building.h"
 #include "transport.h"
 
-class Economy;
 class Editor_Game_Base;
 class Interactive_Player;
 class Profile;

@@ -20,7 +20,6 @@
 #ifndef __S__STOCK_MENU_H
 #define __S__STOCK_MENU_H
 
-#include <vector>
 #include "ui_button.h"
 #include "ui_unique_window.h"
 #include "waresdisplay.h"
@@ -47,30 +46,30 @@ private:
 	enum {Wares, Workers} current_page;
    void fill_waredisplay_with_wares(void);
    void fill_waredisplay_with_workers(void);
-	
+
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint hspacing() const {return 5;};
 	uint vspacing() const {return 5;};
-	
+
 	/** Returns the horizontal/vertical margin between edge and buttons. */
 	uint hmargin() const {return 2 * hspacing();}
 	uint vmargin() const {return 2 * vspacing();}
-	
+
 	/** Returns the width of a button in a row with nr_buttons buttons. */
 	uint buttonw(const uint nr_buttons) const {
 		return
 			(waresdisplay.get_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;
 	}
-	
+
 	/**
 	 * Returns the x coordinate of the (left edge of) button number nr in a row
 	 * with nr_buttons buttons.
 	 */
 	uint posx(const uint nr, const uint nr_buttons) const
 	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
-	
+
 	void clicked_help       (int);
-	void clicked_switch_page(int);	
+	void clicked_switch_page(int);
 };
 
 #endif

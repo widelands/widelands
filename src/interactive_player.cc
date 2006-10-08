@@ -25,6 +25,7 @@
 #include "font_handler.h"
 #include "game_loader.h"
 #include "game_main_menu.h"
+#include "graphic.h"
 #include "general_statistics_menu.h"
 #include "i18n.h"
 #include "interactive_player.h"

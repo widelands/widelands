@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
-#include "worlddata.h"
 
 class Section;
 class Editor_Game_Base;

@@ -33,9 +33,6 @@
 #include "rendertarget.h"
 #include "rgbcolor.h"
 
-class AnimationData;
-class EncodeData;
-
 SDL_Surface* LoadImage(std::string filename);
 
 /*

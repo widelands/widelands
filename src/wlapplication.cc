@@ -29,8 +29,10 @@
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
 #include "fullscreen_menu_tutorial_select_map.h"
+#include "game.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
+#include "graphic.h"
 #include "i18n.h"
 #include <iostream>
 #include "journal.h"
@@ -863,14 +865,19 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 	//With typos, this will create invalid config settings. They
 	//will be taken care of (==ignored) when saving the options
 
-	map<std::string, std::string>::const_iterator it;
-
-	for(it=m_commandline.begin();it!=m_commandline.end();++it) {
+	const std::map<std::string, std::string>::const_iterator commandline_end =
+		m_commandline.end();
+	for
+		(std::map<std::string, std::string>::const_iterator it =
+		 m_commandline.begin();
+		 it != commandline_end;
+		 ++it)
+	{
 		//TODO: barf here on unkown option; the list of known options
 		//TODO: needs to be centralized
 
-		g_options.pull_section("global")->create_val(it->first.c_str(),
-		      it->second.c_str());
+		g_options.pull_section("global")->create_val
+			(it->first.c_str(), it->second.c_str());
 	}
 }
 

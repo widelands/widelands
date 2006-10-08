@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "editor_set_both_terrain_tool.h"
 #include "editor_tool_set_terrain_options_menu.h"
 #include "editorinteractive.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
@@ -31,6 +32,7 @@
 #include "ui_checkbox.h"
 #include "wlapplication.h"
 #include "world.h"
+#include "worlddata.h"
 
 /*
 =================================================

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2006, 2006 by the Widelands Development Team
+ * Copyright (C) 2005-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include <errno.h>
 #include "error.h"
 #include "fileread.h"
+#include "game.h"
 #include "i18n.h"
 #include "interactive_base.h"
 #include "layeredfilesystem.h"
@@ -27,6 +28,7 @@
 #include "mapview.h"
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
+#include "songset.h"
 #include "sound_handler.h"
 
 #include <SDL.h>
@@ -170,8 +172,8 @@ void Sound_Handler::load_system_sounds()
  * \internal
  * \param recursive	Whether to recurse into subdirectories
 */
-void Sound_Handler::load_fx(const string dir, const string fxname,
-                            const bool recursive)
+void Sound_Handler::load_fx
+(const std::string dir, const std::string fxname, const bool recursive)
 {
 	filenameset_t dirs, files;
 	filenameset_t::const_iterator i;
@@ -324,7 +326,8 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
  * \note The complete audio file will be loaded into memory and stays there
  * until the game is finished.
 */
-void Sound_Handler::load_one_fx(const string filename, const string fx_name)
+void Sound_Handler::load_one_fx
+(const std::string filename, const std::string fx_name)
 {
 	FileRead fr;
 	Mix_Chunk *m;
@@ -399,8 +402,8 @@ int Sound_Handler::stereo_position(const Coords position)
  * (to avoid "sonic overload").
  * \todo What is the selection algorithm? cf class documentation
 */
-bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
-                                const uint priority)
+bool Sound_Handler::play_or_not
+(const std::string fx_name,const int stereo_position, const uint priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -427,9 +430,14 @@ bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
 
 	//find out if an fx called fx_name is already running
 	bool already_running=false;
-	map<uint, string>::iterator i;
-	for(i=m_active_fx.begin(); i!=m_active_fx.end(); ++i) {
-		if ((*i).second==fx_name) {
+	const std::map<uint, std::string>::const_iterator active_fx_end =
+		m_active_fx.end();
+	for
+		(std::map<uint, std::string>::const_iterator it = m_active_fx.begin();
+		 it != active_fx_end;
+		 ++it)
+	{
+		if (it->second == fx_name) {
 			already_running=true;
 			break;
 		}
@@ -468,8 +476,8 @@ bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
  * \param priority	How important is it that this FX actually gets played?
  *			(see \ref FXset::m_priority)
 */
-void Sound_Handler::play_fx(const string fx_name, Coords map_position,
-                            const uint priority)
+void Sound_Handler::play_fx
+(const std::string fx_name, Coords map_position, const uint priority)
 {
 	if (map_position == INVALID_POSITION) {
 		log("WARNING: play_fx(\"%s\") called without coordinates\n",
@@ -491,8 +499,8 @@ void Sound_Handler::play_fx(const string fx_name, Coords map_position,
  * \param priority		How important is it that this FX actually gets
  * 				played? (see \ref FXset::m_priority)
 */
-void Sound_Handler::play_fx(const string fx_name, const int stereo_position,
-                            const uint priority)
+void Sound_Handler::play_fx
+(const std::string fx_name, const int stereo_position, const uint priority)
 {
 	Mix_Chunk *m;
 	int chan;
@@ -540,8 +548,8 @@ void Sound_Handler::play_fx(const string fx_name, const int stereo_position,
  * (with any extension) is a directory, effects will be registered recursively.
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
 */
-void Sound_Handler::register_song(const string dir, const string basename,
-                                  const bool recursive)
+void Sound_Handler::register_song
+(const std::string dir, const std::string basename, const bool recursive)
 {
 	filenameset_t files;
 	filenameset_t::const_iterator i;
@@ -573,8 +581,7 @@ void Sound_Handler::register_song(const string dir, const string basename,
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
 */
-void Sound_Handler::start_music(const string songset_name, int fadein_ms)
-{
+void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
 	if (get_disable_music())
 		return;
 
@@ -626,12 +633,10 @@ void Sound_Handler::stop_music(int fadeout_ms)
  * If songset_name is empty, another song from the currently active songset will
  * be selected
 */
-void Sound_Handler::change_music(const string songset_name, int fadeout_ms,
-                                 int fadein_ms)
+void Sound_Handler::change_music
+(const std::string songset_name, int fadeout_ms, int fadein_ms)
 {
-	string s;
-
-	s = songset_name;
+	std::string s = songset_name;
 
 	if (s == "")
 		s = m_current_songset;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "editorinteractive.h"
 #include "editor_place_immovable_tool.h"
 #include "editor_tool_place_immovable_options_menu.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"

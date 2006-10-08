@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef TEXT_PARSER_H
 #define TEXT_PARSER_H
 
-#include <vector>
 #include "font_handler.h"
-
-class RGBColor;
 
 inline bool is_richtext(std::string text) {
    return (text.substr(0,3) == "<rt");

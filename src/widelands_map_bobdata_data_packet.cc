@@ -31,6 +31,8 @@
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_bobdata_data_packet.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 #include "worker.h"
 #include "worker_program.h"
 #include "error.h"
