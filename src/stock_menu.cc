@@ -18,6 +18,7 @@
  */
 
 #include "error.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
@@ -38,13 +39,13 @@ current_page(Wares)
 	help.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png"));
 	switchpage.set_pic
 		(g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"));
-	
+
 	help      .clickedid.set(this, &Stock_Menu::clicked_help);
 	switchpage.clickedid.set(this, &Stock_Menu::clicked_switch_page);
 
 	help      .set_tooltip(_("Help")        .c_str());
 	switchpage.set_tooltip(_("Show workers").c_str());
-	
+
 	fill_waredisplay_with_wares();
 	help      .set_pos(posx(0, 3), waresdisplay.get_h());
 	switchpage.set_pos(posx(1, 3), waresdisplay.get_h());

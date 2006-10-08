@@ -24,6 +24,8 @@
 #include "machdep.h"
 #include "wexception.h"
 
+#include <string>
+
 struct FileSystem;
 
 /**

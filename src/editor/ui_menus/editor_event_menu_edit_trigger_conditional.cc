@@ -20,6 +20,7 @@
 #include "editorinteractive.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
 #include "error.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "map_trigger_manager.h"

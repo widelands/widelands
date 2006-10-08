@@ -20,13 +20,11 @@
 #ifndef __S__OVERLAY_HANDLER_H
 #define __S__OVERLAY_HANDLER_H
 
-#include <string>
 #include <map>
 #include <limits>
-#include "types.h"
+#include "field.h"
 #include "geometry.h"
-#include "map.h"
-
+#include "types.h"
 
 /*
  * The Overlay Manager is responsible for the map overlays. He

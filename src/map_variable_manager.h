@@ -23,8 +23,6 @@
 #include "error.h"
 #include <string>
 
-#include "ui/ui_basic/ui_object.h" //just for i18n
-
 /*
  * The Map Variable Manager makes sure that variables
  * in the map are watched accordingly.

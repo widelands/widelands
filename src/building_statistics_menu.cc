@@ -21,6 +21,7 @@
 #include "building.h"
 #include "building_statistics_menu.h"
 #include "error.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"

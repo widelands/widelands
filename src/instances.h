@@ -20,18 +20,15 @@
 #ifndef __S__INSTANCE_H
 #define __S__INSTANCE_H
 
-#include <assert.h>
+#include "cmd_queue.h"
+#include "error.h"
+#include "types.h"
+
 #include <map>
 #include <string>
 #include <vector>
-#include "cmd_queue.h"
-#include "types.h"
 
-class Editor_Game_Base;
-class Game;
-class Object_Manager;
 class RenderTarget;
-class Animation;
 class Path;
 class Player;
 class UITab_Panel;

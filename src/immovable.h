@@ -26,9 +26,7 @@
 class Economy;
 class Flag;
 class Profile;
-class Request;
 class Tribe_Descr;
-class WaresQueue;
 class Worker;
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "editor_main_menu_save_map_make_directory.h"
 #include "error.h"
 #include "filesystem.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "layeredfilesystem.h"
 #include "profile.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include "graphic.h"
 #include "i18n.h"
 #include "trigger_time_option_menu.h"
 #include "trigger_time.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,9 +70,13 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem* fs, Map* map) thr
 /*
  * Read Function
  */
-void Widelands_Map_Elemental_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
-   Pre_Read(fs, egbase->get_map());
-}
+void Widelands_Map_Elemental_Data_Packet::Read
+(FileSystem * fs,
+ Editor_Game_Base * egbase,
+ bool,
+ Widelands_Map_Map_Object_Loader *)
+throw(_wexception)
+{Pre_Read(fs, egbase->get_map());}
 
 
 /*

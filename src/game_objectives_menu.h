@@ -20,12 +20,12 @@
 #ifndef __S__GAME_OBJECTIVE_MENU_H
 #define __S__GAME_OBJECTIVE_MENU_H
 
-#include "interactive_player.h"
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_unique_window.h"
 
 class Game;
+class Interactive_Player;
 
 // The GameObjectives Menu shows the not already
 // fullfilled scenario objectives.

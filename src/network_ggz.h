@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2005 by the Widelands Development Team
+ * Copyright (C) 2004-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,6 @@
 
 #include <list>
 #include <string>
-#include "wexception.h"
-#include "types.h"
 
 #ifdef USE_GGZ
 #define HAVE_GGZ 1

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2005 by the Widelands Development Team
+ * Copyright (C) 2004-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,10 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
-#include "constants.h"
-#include <list>
 #include <queue>
 #include <SDL_net.h>
 #include "types.h"
 #include <vector>
-#include "wexception.h"
 
 class Game;
 class PlayerCommand;

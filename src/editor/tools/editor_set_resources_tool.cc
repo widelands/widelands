@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
 #include "editor_set_resources_tool.h"
+#include "graphic.h"
 #include "map.h"
 #include "field.h"
 #include "editorinteractive.h"

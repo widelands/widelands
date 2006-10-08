@@ -25,6 +25,7 @@
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "stock_menu.h"
@@ -59,7 +60,7 @@ options_menu  (this, posx(0, 1), posy(2, 3), buttonw(1), buttonh(3), 4)
 	chat.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_chat.png"));
 	options_menu  .set_pic
 		(g_gr->get_picture(PicMod_Game, "pics/menu_options_menu.png"));
-	
+
 	general_stats .clicked.set(this, &GameMainMenu::clicked_general_stats);
 	ware_stats    .clicked.set(this, &GameMainMenu::clicked_ware_stats);
 	building_stats.clicked.set(this, &GameMainMenu::clicked_building_stats);
@@ -67,7 +68,7 @@ options_menu  (this, posx(0, 1), posy(2, 3), buttonw(1), buttonh(3), 4)
 	objectives    .clicked.set(this, &GameMainMenu::clicked_objectives);
 	chat          .clicked.set(this, &GameMainMenu::clicked_chat);
 	options_menu  .clicked.set(this, &GameMainMenu::clicked_options_menu);
-	
+
 	general_stats .set_tooltip(_("General statistics") .c_str());
 	ware_stats    .set_tooltip(_("Ware statistics")    .c_str());
 	building_stats.set_tooltip(_("Building statistics").c_str());

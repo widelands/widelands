@@ -23,6 +23,7 @@
 #include "error.h"
 #include "fieldaction.h"
 #include "game_debug_ui.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "overlay_manager.h"

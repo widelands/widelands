@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,8 @@
 #include "types.h"
 #include <SDL_net.h>
 
-#include "network_buffer.h"
-
 class Game_Server_Connection;
+class Network_Buffer;
 
 /*
  * This is the abstract base class
@@ -37,8 +36,8 @@ class Game_Server_Protocol_Packet {
 
       virtual ushort get_id(void) = 0;
 
-      virtual void recv(Game_Server_Connection*, Network_Buffer* buffer) = 0;
-      virtual void send(Network_Buffer* buffer) = 0;
+	virtual void recv(Game_Server_Connection*, Network_Buffer *) = 0;
+	virtual void send(Network_Buffer *) = 0;
       virtual void write_reply(Network_Buffer*) = 0;
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) = 0;
 };

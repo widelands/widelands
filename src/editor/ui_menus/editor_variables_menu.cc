@@ -20,6 +20,7 @@
 #include "editorinteractive.h"
 #include "editor_variables_menu.h"
 #include "error.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "map_variable_manager.h"

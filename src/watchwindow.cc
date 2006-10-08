@@ -19,6 +19,7 @@
 
 #include "bob.h"
 #include "game.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "map.h"

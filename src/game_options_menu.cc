@@ -24,6 +24,7 @@
 #include "game_main_menu_load_game.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "sound_handler.h"
@@ -102,14 +103,14 @@ exit_game
 	save_game.clicked.set(this, &GameOptionsMenu::clicked_save_game);
 	load_game.clicked.set(this, &GameOptionsMenu::clicked_load_game);
 	exit_game.clicked.set(this, &GameOptionsMenu::clicked_exit_game);
-	
+
 	save_game.set_tooltip(_("Save game").c_str());
 	load_game.set_tooltip(_("Load game").c_str());
 	exit_game.set_tooltip(_("Exit game").c_str());
-	
+
 	ingame_music.changedto.set(this, &GameOptionsMenu::changed_ingame_music);
 	ingame_sound.changedto.set(this, &GameOptionsMenu::changed_ingame_sound);
-	
+
 	ingame_music.set_state(not g_sound_handler.get_disable_music());
 	ingame_sound.set_state(not g_sound_handler.get_disable_fx());
 

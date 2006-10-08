@@ -21,7 +21,6 @@
 #define __S__EVENT_MANAGER_H
 
 #include "error.h"
-#include "event_chain.h"
 #include <string>
 
 class Event;

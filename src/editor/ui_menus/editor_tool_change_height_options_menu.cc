@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include "editor_tool_change_height_options_menu.h"
 #include "editorinteractive.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "ui_textarea.h"
 #include "ui_button.h"

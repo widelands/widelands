@@ -25,16 +25,9 @@
 #include "ui_signal.h"
 
 class Interactive_Base;
-class Game;
-class Map;
 
-/* class Map_View
- *
- * this implements a view of a map. it's used
- * to render a valid map on the screen
- *
- * Depends: class Map
- * 			g_gr
+/**
+ * Implements a view of a map. It is used to render a valid map on the screen.
  */
 class Map_View : public UIPanel {
 public:

@@ -21,10 +21,9 @@
 #define __S__EVENTCHAIN_MANAGER_H
 
 #include "error.h"
-#include "event_chain.h"
-#include <string>
 
 class Event;
+class EventChain;
 
 /*
  * The Eventchain Manager keeps all event chains

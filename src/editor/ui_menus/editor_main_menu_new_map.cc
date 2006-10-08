@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <vector>
 #include "editor_main_menu_new_map.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "ui_window.h"
 #include "ui_textarea.h"

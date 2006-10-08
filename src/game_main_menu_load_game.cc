@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,7 +123,7 @@ void Game_Main_Menu_Load_Game::clicked(int id) {
 /*
  * called when a item is selected
  */
-void Game_Main_Menu_Load_Game::selected(int i) {
+void Game_Main_Menu_Load_Game::selected(int) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );

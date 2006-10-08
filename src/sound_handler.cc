@@ -17,7 +17,6 @@
  *
  */
 
-#include <assert.h>
 #include <errno.h>
 #include "error.h"
 #include "fileread.h"
@@ -29,6 +28,8 @@
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
 #include "sound_handler.h"
+
+#include <SDL.h>
 
 #ifdef _WIN32
 #include <windows.h>

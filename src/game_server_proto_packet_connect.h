@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #ifndef __S__GAME_SERVER_PROTO_PACKET_CONNECT_H
 #define __S__GAME_SERVER_PROTO_PACKET_CONNECT_H
 
-#include <string>
 #include "game_server_proto_packet.h"
 
 /*
@@ -34,7 +33,7 @@ class Game_Server_Protocol_Packet_Connect : public Game_Server_Protocol_Packet {
       virtual ushort get_id(void);
 
 	virtual void recv(Game_Server_Connection *, Network_Buffer *) {}
-      virtual void send(Network_Buffer* buffer);
+	virtual void send(Network_Buffer *);
       virtual void write_reply(Network_Buffer*) { }
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 };

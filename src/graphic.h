@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,10 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
-#include "rgbcolor.h"
 #include "types.h"
 
 class RenderTarget;
 class FileWrite;
-class FileRead;
 class Surface;
 
 enum { // picture module flags

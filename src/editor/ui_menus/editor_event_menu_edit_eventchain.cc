@@ -24,6 +24,7 @@
 #include "error.h"
 #include "event.h"
 #include "event_chain.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "map_event_manager.h"

@@ -19,6 +19,7 @@
 
 #include <algorithm>
 #include "error.h"
+#include "event_chain.h"
 #include "layeredfilesystem.h"
 #include "map.h"
 #include "map_event_manager.h"

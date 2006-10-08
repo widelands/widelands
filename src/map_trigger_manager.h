@@ -21,8 +21,6 @@
 #define __S__TRIGGER_MANAGER_H
 
 #include "error.h"
-#include "event_chain.h"
-#include <string>
 
 class Trigger;
 

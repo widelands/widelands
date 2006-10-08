@@ -31,6 +31,7 @@ class.
 #include "error.h"
 #include "font_handler.h"
 #include "game_debug_ui.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "militarysite.h"

@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include "editor_tool_noise_height_options_menu.h"
 #include "editorinteractive.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "ui_button.h"
 #include "ui_textarea.h"

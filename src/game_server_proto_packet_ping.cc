@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "game_server_proto_packet_ping.h"
+#include "network_buffer.h"
 #include "util.h"
 #include "wexception.h"
 

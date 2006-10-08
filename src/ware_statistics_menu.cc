@@ -18,6 +18,7 @@
  */
 
 #include "error.h"
+#include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"

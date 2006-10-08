@@ -22,12 +22,11 @@
 
 #include "editor_game_base.h"
 #include "geometry.h"
-#include "graphic.h"
 #include "map.h"
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 
-class Editor_Game_Base;
+class CoordPath;
 class Map_View;
 class MiniMap;
 class MiniMapView;

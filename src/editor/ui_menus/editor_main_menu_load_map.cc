@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "graphic.h"
 #include "i18n.h"
 #include "layeredfilesystem.h"
 #include "ui_textarea.h"
