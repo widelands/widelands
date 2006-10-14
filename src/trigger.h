@@ -22,6 +22,9 @@
 
 #include <string>
 #include <map>
+#ifdef __WIN32__
+#include "error.h"
+#endif
 
 class Game;
 class Section;
