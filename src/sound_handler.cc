@@ -186,7 +186,7 @@ void Sound_Handler::load_fx
 
 	for (i = files.begin(); i != files.end(); ++i) {
 		assert(!g_fs->IsDirectory(*i));
-		load_one_fx(*i, fxname);
+		load_one_fx(i->c_str(), fxname);
 	}
 
 	if (recursive) {
@@ -327,14 +327,13 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
  * until the game is finished.
 */
 void Sound_Handler::load_one_fx
-(const std::string filename, const std::string fx_name)
+(const char * const filename, const std::string fx_name)
 {
 	FileRead fr;
 	Mix_Chunk *m;
 
-	if (!fr.TryOpen(g_fs, filename)) {
-		log("WARNING: Could not open %s for reading!\n",
-		    filename.c_str());
+	if (not fr.TryOpen(*g_fs, filename)) {
+		log("WARNING: Could not open %s for reading!\n", filename);
 		return;
 	}
 
@@ -349,9 +348,14 @@ void Sound_Handler::load_one_fx
 		m_fxs[fx_name]->add_fx(m);
 	} else {
 		char *msg = (char *) malloc(1024);
-		snprintf(msg, 1024, "Sound_Handler: loading sound effect \"%s\""
-		         " for FXset \"%s\" failed: %s\n",
-		         filename.c_str(), fx_name.c_str(), strerror(errno));
+		snprintf
+			(msg,
+			 1024,
+			 "Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" failed: "
+			 "%s\n",
+			 filename,
+			 fx_name.c_str(),
+			 strerror(errno));
 		log(msg);
 		free(msg);
 	}

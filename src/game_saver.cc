@@ -35,10 +35,7 @@
 /*
  * Game Saver, creation and destruction
  */
-Game_Saver::Game_Saver(FileSystem* fs, Game* game) {
-   m_fs=fs;
-   m_game=game;
-}
+Game_Saver::Game_Saver(FileSystem & fs, Game* game) : m_fs(fs), m_game(game) {}
 
 Game_Saver::~Game_Saver(void) {
 }
@@ -50,7 +47,7 @@ void Game_Saver::save(void) throw(_wexception) {
    Game_Data_Packet* gp;
    Game_Map_Data_Packet* gmdp;
 
-   m_fs->EnsureDirectoryExists( "binary" );
+	m_fs.EnsureDirectoryExists("binary");
 
    log("Game: Writing Preload Data ... ");
    gp = new Game_Preload_Data_Packet();

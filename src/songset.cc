@@ -92,7 +92,7 @@ Mix_Music *Songset::get_song()
 	}
 
 	//then open the new song
-	if (m_fr->TryOpen(g_fs, filename))
+	if (m_fr->TryOpen(*g_fs, filename.c_str()))
 		m_rwops = SDL_RWFromMem(m_fr->Data(0), m_fr->GetSize());
 	else
 		return NULL;

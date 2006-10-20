@@ -53,12 +53,11 @@ surface.
 Cannot return 0, throws an exception on error.
 ===============
 */
-SDL_Surface* LoadImage(std::string filename)
-{
+SDL_Surface* LoadImage(const char * const filename) {
 	FileRead fr;
 	SDL_Surface* surf;
 
-	fr.Open(g_fs, filename);
+	fr.Open(*g_fs, filename);
 
 	surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 	if (!surf)

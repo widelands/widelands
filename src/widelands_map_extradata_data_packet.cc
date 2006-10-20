@@ -37,7 +37,13 @@ Widelands_Map_Extradata_Data_Packet::~Widelands_Map_Extradata_Data_Packet(void)
 /**
  * Read Function
  */
-void Widelands_Map_Extradata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
+void Widelands_Map_Extradata_Data_Packet::Read
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ const bool skip,
+ Widelands_Map_Map_Object_Loader * const)
+throw (_wexception)
+{
    if( skip )
       return;
 
@@ -55,16 +61,16 @@ void Widelands_Map_Extradata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Nothing more. But read all pics
-      if( fs->FileExists("pics") && fs->IsDirectory("pics")) {
+		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
          filenameset_t pictures;
-         fs->FindFiles( "pics", "*", &pictures );
+			fs.FindFiles("pics", "*", &pictures);
          for(filenameset_t::iterator pname = pictures.begin(); pname != pictures.end(); pname++) {
-            if( fs->IsDirectory( (*pname).c_str())) // Might be some dir, maybe CVS
+				if (fs.IsDirectory((*pname).c_str())) // Might be some dir, maybe CVS
                continue;
 
             FileRead fr;
 
-         	fr.Open(fs, *pname);
+				fr.Open(fs, pname->c_str());
             SDL_Surface* surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
             if (!surf)
                continue; // Illegal pic. Skip it
@@ -94,7 +100,12 @@ void Widelands_Map_Extradata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
 /**
  * Write Function
  */
-void Widelands_Map_Extradata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
+void Widelands_Map_Extradata_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
+{
    Profile prof;
    Section* s = prof.create_section("global");
 
@@ -106,7 +117,7 @@ void Widelands_Map_Extradata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
       Map::Extradata_Info& edi = egbase->get_map()->m_extradatainfos[i];
       assert( edi.type == Map::Extradata_Info::PIC );
 
-      fs->EnsureDirectoryExists( "pics" );
+		fs.EnsureDirectoryExists("pics");
       FileWrite fw;
 
       g_gr->save_png( (ulong)edi.data, &fw );

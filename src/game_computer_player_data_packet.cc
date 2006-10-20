@@ -36,7 +36,8 @@ Game_Computer_Player_Data_Packet::~Game_Computer_Player_Data_Packet(void) {
  * Read Function
  */
 void Game_Computer_Player_Data_Packet::Read
-(FileSystem * fs, Game *, Widelands_Map_Map_Object_Loader *) throw(_wexception)
+(FileSystem & fs, Game *, Widelands_Map_Map_Object_Loader * const)
+throw (_wexception)
 {
    FileRead fr;
 
@@ -60,7 +61,8 @@ void Game_Computer_Player_Data_Packet::Read
  * Write Function
  */
 void Game_Computer_Player_Data_Packet::Write
-(FileSystem * fs, Game *, Widelands_Map_Map_Object_Saver *) throw(_wexception)
+(FileSystem & fs, Game *, Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
 {
    FileWrite fw;
 

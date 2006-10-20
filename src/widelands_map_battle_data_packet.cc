@@ -48,7 +48,12 @@ Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet(void)
 /*
  * Read Function
  */
-void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(_wexception)
+void Widelands_Map_Battle_Data_Packet::Read
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ const bool skip,
+ Widelands_Map_Map_Object_Loader * const ol)
+throw (_wexception)
 {
    if( skip )
       return;
@@ -86,8 +91,8 @@ void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* eg
          battle->m_last_try = last;
 
             // This may crash
-         Map_Object* s1 = mol->get_object_by_file_index (sol1);
-         Map_Object* s2 = mol->get_object_by_file_index (sol2);
+			Map_Object * const s1 = ol->get_object_by_file_index(sol1);
+			Map_Object * const s2 = ol->get_object_by_file_index(sol2);
 
          assert (s1);
          assert (s2);
@@ -96,7 +101,7 @@ void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* eg
          battle->soldiers((Soldier*)s1, (Soldier*)s2);
 
          // and register it with the object loader for further loading
-         mol->register_object(egbase, serial, battle);
+			ol->register_object(egbase, serial, battle);
       }
       if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
@@ -111,7 +116,11 @@ void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* eg
  * Write Function.
  * This writes ALL the information about battles !
  */
-void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(_wexception)
+void Widelands_Map_Battle_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const os)
+throw (_wexception)
 {
    FileWrite fw;
 
@@ -136,10 +145,8 @@ void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* e
 
       Battle* b = (Battle*) obj;
 
-      assert (!mos->is_object_known(b));
-      uint reg = mos->register_object(b);
-
-      fw.Unsigned32(reg);  // Something like serial ..
+		assert(not os->is_object_known(b));
+		fw.Unsigned32(os->register_object(b));  // Something like serial ..
 
          // Write time to next assault
       fw.Unsigned32(b->m_next_assault);
@@ -150,16 +157,16 @@ void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* e
          // And now, the serials of the soldiers !
       if (b->m_first)
       {
-         assert(mos->is_object_known(b->m_first));
-         fw.Unsigned32 (mos->get_object_file_index(b->m_first));
+			assert(os->is_object_known(b->m_first));
+			fw.Unsigned32(os->get_object_file_index(b->m_first));
       }
       else
          fw.Unsigned32 (0);
 
       if (b->m_second)
       {
-         assert(mos->is_object_known(b->m_second));
-         fw.Unsigned32(mos->get_object_file_index(b->m_second));
+			assert(os->is_object_known(b->m_second));
+			fw.Unsigned32(os->get_object_file_index(b->m_second));
       }
       else
          fw.Unsigned32 (0);

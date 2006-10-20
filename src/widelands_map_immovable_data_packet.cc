@@ -47,8 +47,14 @@ Widelands_Map_Immovable_Data_Packet::~Widelands_Map_Immovable_Data_Packet(void) 
 /*
  * Read Function
  */
-void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(_wexception) {
-   assert( mol );
+void Widelands_Map_Immovable_Data_Packet::Read
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ const bool skip,
+ Widelands_Map_Map_Object_Loader * const ol)
+throw (_wexception)
+{
+	assert(ol);
 
    FileRead fr;
    fr.Open( fs, "binary/immovable" );
@@ -68,7 +74,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
          int x=fr.Unsigned16();
          int y=fr.Unsigned16();
 
-         assert(!mol->is_object_known(reg));
+			assert(not ol->is_object_known(reg));
 
          if(owner!="world") {
             if(!skip) { // We do not load play immovables in normal maps
@@ -81,7 +87,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
                if(idx==-1)
                   throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name.c_str(), owner.c_str());
                Immovable* imm=egbase->create_immovable(Coords(x, y), idx, tribe);
-               mol->register_object(egbase, reg, imm);
+					ol->register_object(egbase, reg, imm);
             }
          } else {
             // World immovable
@@ -89,8 +95,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
             if(idx==-1)
                throw wexception("Unknown world immovable %s in map!\n", name.c_str());
             Immovable* imm=egbase->create_immovable(Coords(x, y), idx, 0);
-            if(!skip)
-               mol->register_object(egbase, reg, imm);
+				if (not skip) ol->register_object(egbase, reg, imm);
          }
       }
       return ;
@@ -101,7 +106,12 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
 /*
  * Write Function
  */
-void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(_wexception) {
+void Widelands_Map_Immovable_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const os)
+throw (_wexception)
+{
    FileWrite fw;
 
    // now packet version
@@ -117,10 +127,8 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
             Immovable* imm=static_cast<Immovable*>(immovable);
             Tribe_Descr* tribe=imm->get_owner_tribe();
 
-            assert(!mos->is_object_known(imm));
-            uint reg=mos->register_object(imm);
-
-            fw.Unsigned32(reg);
+				assert(not os->is_object_known(imm));
+				fw.Unsigned32(os->register_object(imm));
             if(!tribe)
                fw.CString("world");
             else

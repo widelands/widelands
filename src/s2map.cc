@@ -228,7 +228,7 @@ void S2_Map_Loader::load_s2mf_header()
 {
 	FileRead file;
 
-   file.Open(g_fs, m_filename);
+   file.Open(*g_fs, m_filename);
 
 	S2MapDescrHeader header;
 	memcpy(&header, file.Data(sizeof(header)), sizeof(header));
@@ -276,7 +276,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 	try
 	{
 		FileRead file;
-		file.Open(g_fs, m_filename);
+		file.Open(*g_fs, m_filename);
 
 		S2MapDescrHeader header;
 		memcpy(&header, file.Data(sizeof(header)), sizeof(header));

@@ -38,11 +38,11 @@ Widelands_Map_Player_Position_Data_Packet::~Widelands_Map_Player_Position_Data_P
  * Read Function
  */
 void Widelands_Map_Player_Position_Data_Packet::Read
-(FileSystem * fs,
+(FileSystem & fs,
  Editor_Game_Base * egbase,
- bool,
- Widelands_Map_Map_Object_Loader *)
-throw(_wexception)
+ const bool,
+ Widelands_Map_Map_Object_Loader * const)
+throw (_wexception)
 {
    Profile prof;
    prof.read( "player_position", 0, fs );
@@ -80,7 +80,12 @@ throw(_wexception)
 /*
  * Write Function
  */
-void Widelands_Map_Player_Position_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
+void Widelands_Map_Player_Position_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
+{
    Profile prof;
    Section* s = prof.create_section("global");
 

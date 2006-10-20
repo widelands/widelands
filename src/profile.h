@@ -21,12 +21,11 @@
 #define PROFILE_H
 
 #include "geometry.h"
+#include "layeredfilesystem.h"
 #include "types.h"
 #include <vector>
 
 extern class Profile g_options;
-
-class FileSystem;
 
 /*
 Represents one section inside the .ini-style file, basically as a list of
@@ -165,8 +164,14 @@ public:
 	void error(const char *fmt, ...) const;
 	void check_used();
 
-	void read(const char *filename, const char *global_section = 0, FileSystem* = 0);
-	void write(const char *filename, bool used_only = true, FileSystem* = 0);
+	void read
+		(const char * const filename,
+		 const char * const global_section = 0,
+		 FileSystem & = *g_fs);
+	void write
+		(const char * const filename,
+		 bool used_only = true,
+		 FileSystem & = *g_fs);
 
 	Section *get_section(const char *name);
 	Section *get_safe_section(const char *name);

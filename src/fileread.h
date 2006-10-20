@@ -43,8 +43,8 @@ class FileRead {
 		FileRead();
 		~FileRead();
 
-		void Open(FileSystem *fs, std::string fname);
-		bool TryOpen(FileSystem *fs, std::string fname);
+	void    Open(FileSystem &, const char * const filename);
+	bool TryOpen(FileSystem &, const char * const filename);
 		void Close();
 
 		inline int GetSize() const { return length; }

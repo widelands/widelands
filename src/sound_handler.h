@@ -235,7 +235,7 @@ public:
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
-	void load_one_fx(const std::string filename, const std::string fx_name);
+	void load_one_fx(const char * const filename, const std::string fx_name);
 	int stereo_position(const Coords position);
 	bool play_or_not
 		(const std::string fx_name,

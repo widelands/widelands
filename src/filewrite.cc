@@ -80,9 +80,9 @@ int FileWrite::GetByteCounter(void) {
  * is raised but the buffer remains intact (don't worry, it will be
  * cleared by the destructor).
  */
-void FileWrite::Write(FileSystem *fs, std::string filename)
+void FileWrite::Write(FileSystem & fs, const char * const filename)
 {
-	fs->Write(filename, data, length);
+	fs.Write(filename, data, length);
 
 	Clear();
 }
@@ -90,10 +90,10 @@ void FileWrite::Write(FileSystem *fs, std::string filename)
 /**
  * Same as Write, but returns falls if the write fails
  */
-bool FileWrite::TryWrite(FileSystem *fs, std::string filename)
+bool FileWrite::TryWrite(FileSystem  &fs, const char * const filename)
 {
 	try {
-		fs->Write(filename, data, length);
+		fs.Write(filename, data, length);
 	} catch(std::exception &e) {
 		log("%s\n", e.what());
 		return false;

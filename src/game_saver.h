@@ -36,13 +36,13 @@ class FileSystem;
 
 class Game_Saver {
    public:
-      Game_Saver(FileSystem*, Game* game);
+	Game_Saver(FileSystem &, Game* game);
       ~Game_Saver(void);
 
       void save(void) throw(_wexception);
 
    private:
-      FileSystem* m_fs;
+	FileSystem & m_fs;
       Game* m_game;
 };
 

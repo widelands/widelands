@@ -128,7 +128,7 @@ void Game_Main_Menu_Load_Game::selected(int) {
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
 
-   Game_Loader gl(fs, m_parent->get_game());
+	Game_Loader gl(*fs, m_parent->get_game());
    Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
 
@@ -169,12 +169,11 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
       const char *name = pname->c_str();
 
 
-      Game_Loader* gl = 0;
       FileSystem* fs = 0;
       try {
          fs = g_fs->MakeSubFileSystem( name );
-         gl = new Game_Loader(fs,m_parent->get_game());
-         gl->preload_game(&gpdp);
+			Game_Loader gl(*fs, m_parent->get_game());
+			gl.preload_game(&gpdp);
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
@@ -184,8 +183,6 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
-      if( gl )
-         delete gl;
       if( fs )
          delete fs;
    }
@@ -209,13 +206,12 @@ void Game_Main_Menu_Load_Game::edit_box_changed(void) {
  */
 bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
 
-   Game_Loader* gl = 0;
    FileSystem* fs = 0;
    try {
       fs = g_fs->MakeSubFileSystem( filename );
-      gl=new Game_Loader(fs, m_parent->get_game());
+		Game_Loader gl(*fs, m_parent->get_game());
       m_parent->get_game()->cleanup_for_load(true,true);
-      gl->load_game();
+		gl.load_game();
       m_parent->get_game()->postload();
       m_parent->get_game()->load_graphics();
    } catch(std::exception& exe) {
@@ -225,8 +221,6 @@ bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
       mbox->run();
       delete mbox;
    }
-   if( gl )
-      delete gl;
    if( fs )
       delete fs;
    die();

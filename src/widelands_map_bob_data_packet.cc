@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,13 @@ Widelands_Map_Bob_Data_Packet::~Widelands_Map_Bob_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(_wexception) {
+void Widelands_Map_Bob_Data_Packet::Read
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ const bool skip,
+ Widelands_Map_Map_Object_Loader * const ol)
+throw(_wexception)
+{
 
    FileRead fr;
    fr.Open( fs, "binary/bob" );
@@ -70,7 +76,7 @@ void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbas
                uchar subtype=fr.Unsigned8();
 
                uint reg=fr.Unsigned32();
-               assert(!mol->is_object_known(reg));
+					assert(not ol->is_object_known(reg));
 
                Bob* bob=0;
                if(subtype != Bob::CRITTER && subtype != Bob::WORKER)
@@ -108,8 +114,7 @@ void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbas
                assert(bob);
 
                // Register the bob for further loading
-               if(!skip)
-                  mol->register_object(egbase, reg, bob);
+					if (not skip) ol->register_object(egbase, reg, bob);
             }
          }
       }
@@ -123,10 +128,15 @@ void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbas
 /*
  * Write Function
  */
-void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(_wexception) {
+void Widelands_Map_Bob_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const os)
+throw (_wexception)
+{
    FileWrite fw;
 
-   assert(mos);
+	assert(os);
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
@@ -161,8 +171,8 @@ void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egba
 
             for(uint i=0;i<bobarr.size(); i++) {
                // write serial number
-               assert(!mos->is_object_known(bobarr[i])); // a bob can't be owned by two fields
-               uint reg=mos->register_object(bobarr[i]);
+					assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
+					const uint reg = os->register_object(bobarr[i]);
                // Write its owner
                std::string owner_tribe = bobarr[i]->get_descr()->get_owner_tribe() ? bobarr[i]->get_descr()->get_owner_tribe()->get_name() : "world";
                fw.CString(owner_tribe.c_str());

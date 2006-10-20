@@ -52,7 +52,7 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
    // we must keep this File Read open, otherwise the
    // following calls are crashing. do not know why...
 	FileRead* fr=new FileRead();
-   fr->Open(g_fs, filename);
+	fr->Open(*g_fs, filename.c_str());
 
    m_freads.push_back( fr );
 

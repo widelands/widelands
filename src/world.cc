@@ -360,7 +360,7 @@ bool World::exists_world(std::string worldname) {
    buf="worlds/" + worldname + "/conf";;
 
    FileRead f;
-   return f.TryOpen(g_fs, buf.c_str());
+	return f.TryOpen(*g_fs, buf.c_str());
 }
 
 /*

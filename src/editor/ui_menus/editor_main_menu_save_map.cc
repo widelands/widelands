@@ -347,9 +347,9 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       // Make a zipfile
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
    }
-   Widelands_Map_Saver* wms=new Widelands_Map_Saver(fs, m_parent->get_editor());
+	Widelands_Map_Saver wms(*fs, m_parent->get_editor());
    try {
-      wms->save();
+		wms.save();
       m_parent->set_need_save(false);
    } catch(std::exception& exe) {
       std::string s=_("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n");
@@ -358,7 +358,6 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       mbox->run();
       delete mbox;
    }
-   delete wms;
    delete fs;
    die();
 

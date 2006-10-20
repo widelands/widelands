@@ -122,7 +122,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
    set_map(map);
 
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
-   m_maploader = new Widelands_Map_Loader(fs, map);
+	m_maploader = new Widelands_Map_Loader(*fs, map);
 
     // Loading the locals for the campaign
         if( scenario )
@@ -199,10 +199,9 @@ bool Game::run_load_game(bool is_splayer) {
 
       FileSystem* fs = g_fs->MakeSubFileSystem( ssg->get_gamename());
 
-      Game_Loader* gl=new Game_Loader( fs, this);
-      gl->load_game();
+		Game_Loader gl(*fs, this);
+		gl.load_game();
       delete fs;
-      delete gl;
    }
 
    delete ssg;

@@ -41,7 +41,7 @@ debugability
 */
 class Widelands_Map_Saver {
    public:
-      Widelands_Map_Saver(FileSystem*, Editor_Game_Base*);
+	Widelands_Map_Saver(FileSystem &, Editor_Game_Base*);
       ~Widelands_Map_Saver(void);
 
       void save() throw(_wexception) ;
@@ -49,7 +49,7 @@ class Widelands_Map_Saver {
 
    private:
       Editor_Game_Base* m_egbase;
-      FileSystem* m_fs;
+	FileSystem & m_fs;
       Widelands_Map_Map_Object_Saver* m_mos;
 };
 

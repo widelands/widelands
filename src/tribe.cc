@@ -503,7 +503,7 @@ bool Tribe_Descr::exists_tribe(std::string name) {
    buf="tribes/" + name + "/conf";;
 
    FileRead f;
-   return f.TryOpen(g_fs, buf.c_str());
+	return f.TryOpen(*g_fs, buf.c_str());
 }
 
 /*

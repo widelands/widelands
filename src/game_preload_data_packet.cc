@@ -34,7 +34,8 @@ Game_Preload_Data_Packet::~Game_Preload_Data_Packet(void) {
  * Read Function
  */
 void Game_Preload_Data_Packet::Read
-(FileSystem * fs, Game *, Widelands_Map_Map_Object_Loader *) throw(_wexception)
+(FileSystem & fs, Game *, Widelands_Map_Map_Object_Loader * const)
+throw(_wexception)
 {
 
    Profile prof;
@@ -59,7 +60,10 @@ void Game_Preload_Data_Packet::Read
 /**
  * Write Function
  */
-void Game_Preload_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
+void Game_Preload_Data_Packet::Write
+(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
+{
 
    Profile prof;
    Section* s = prof.create_section( "global" );

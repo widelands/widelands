@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,13 @@ Widelands_Map_Seen_Fields_Data_Packet::~Widelands_Map_Seen_Fields_Data_Packet(vo
 /*
  * Read Function
  */
-void Widelands_Map_Seen_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(_wexception) {
+void Widelands_Map_Seen_Fields_Data_Packet::Read
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ const bool skip,
+ Widelands_Map_Map_Object_Loader * const)
+throw (_wexception)
+{
    if( skip )
       return;
 
@@ -80,7 +86,12 @@ void Widelands_Map_Seen_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Bas
 /*
  * Write Function
  */
-void Widelands_Map_Seen_Fields_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
+void Widelands_Map_Seen_Fields_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
+{
    FileWrite fw;
 
    // Now packet version

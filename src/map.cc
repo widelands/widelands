@@ -1681,7 +1681,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
    {
       try {
          FileSystem* fs = g_fs->MakeSubFileSystem( filename );
-         retval=new Widelands_Map_Loader(fs, this);
+			retval = new Widelands_Map_Loader(*fs, this);
       } catch( ... ) {
          // If this fails, it is an illegal file (maybe old plain binary map format)
       }

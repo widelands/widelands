@@ -45,23 +45,23 @@ FileRead::~FileRead()
  *
  * \todo error handling
  */
-void FileRead::Open(FileSystem *fs, std::string fname)
+void FileRead::Open(FileSystem & fs, const char * const filename)
 {
 	assert(!data);
 
-	data = fs->Load(fname, &length);
+	data = fs.Load(filename, &length);
 	filepos = 0;
 }
 
 /**
  * Works just like Open, but returns false when the load fails.
  */
-bool FileRead::TryOpen(FileSystem *fs, std::string fname)
+bool FileRead::TryOpen(FileSystem & fs, const char * const filename)
 {
 	assert(!data);
 
 	try {
-		data = fs->Load(fname, &length);
+		data = fs.Load(filename, &length);
 		filepos = 0;
 	} catch(std::exception &e) {
 		//log("%s\n", e.what());

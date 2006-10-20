@@ -35,7 +35,9 @@ Widelands_Map_Elemental_Data_Packet::~Widelands_Map_Elemental_Data_Packet(void) 
 /*
  * Preread function
  */
-void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem* fs, Map* map) throw(_wexception) {
+void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map* map)
+throw(_wexception)
+{
 
    Profile prof;
    prof.read( "elemental", 0, fs );
@@ -71,18 +73,23 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem* fs, Map* map) thr
  * Read Function
  */
 void Widelands_Map_Elemental_Data_Packet::Read
-(FileSystem * fs,
+(FileSystem & fs,
  Editor_Game_Base * egbase,
- bool,
- Widelands_Map_Map_Object_Loader *)
-throw(_wexception)
+ const bool,
+ Widelands_Map_Map_Object_Loader * const)
+throw (_wexception)
 {Pre_Read(fs, egbase->get_map());}
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Elemental_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(_wexception) {
+void Widelands_Map_Elemental_Data_Packet::Write
+(FileSystem & fs,
+ Editor_Game_Base* egbase,
+ Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
+{
 
    Profile prof;
    Section* s = prof.create_section( "global" );

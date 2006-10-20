@@ -40,8 +40,8 @@ class FileWrite {
 		FileWrite();
 		~FileWrite();
 
-		void Write(FileSystem *fs, std::string filename);
-		bool TryWrite(FileSystem *fs, std::string filename);
+	void    Write(FileSystem &, const char * const filename);
+	bool TryWrite(FileSystem &, const char * const filename);
 		void Clear();
 
 		void ResetByteCounter(void);

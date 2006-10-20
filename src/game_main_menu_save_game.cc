@@ -133,7 +133,7 @@ void Game_Main_Menu_Save_Game::selected(int) {
 
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
-   Game_Loader gl(fs, m_parent->get_game());
+	Game_Loader gl(*fs, m_parent->get_game());
    Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
 
@@ -178,11 +178,10 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
       const char *name = pname->c_str();
 
       FileSystem* fs = 0;
-      Game_Loader* gl = 0;
       try {
          fs = g_fs->MakeSubFileSystem( name );
-         gl = new Game_Loader( fs,m_parent->get_game());
-         gl->preload_game(&gpdp);
+			Game_Loader gl(*fs, m_parent->get_game());
+			gl.preload_game(&gpdp);
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
          m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
@@ -190,8 +189,6 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
-      if( gl )
-         delete gl;
       if( fs )
          delete fs;
    }
@@ -256,17 +253,14 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
    }
 
-   Game_Saver* gs=new Game_Saver(fs, m_parent->get_game());
-   try {
-      gs->save();
-   } catch(std::exception& exe) {
+	Game_Saver gs(*fs, m_parent->get_game());
+	try {gs.save();} catch(std::exception& exe) {
       std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
       UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::OK);
       mbox->run();
       delete mbox;
    }
-   delete gs;
    delete fs;
    die();
 

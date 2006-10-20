@@ -33,7 +33,7 @@
 #include "rendertarget.h"
 #include "rgbcolor.h"
 
-SDL_Surface* LoadImage(std::string filename);
+SDL_Surface* LoadImage(const char * const filename);
 
 /*
 class AnimationGfx

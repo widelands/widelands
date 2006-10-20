@@ -39,8 +39,19 @@ class Widelands_Map_Data_Packet {
    public:
       virtual ~Widelands_Map_Data_Packet() { m_skip=false; }
 
-      virtual void Read(FileSystem*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader* = 0) throw(_wexception) = 0;
-      virtual void Write(FileSystem*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver* = 0) throw(_wexception) = 0;
+	virtual void Read
+		(FileSystem &,
+		 Editor_Game_Base*,
+		 const bool,
+		 Widelands_Map_Map_Object_Loader * const = 0)
+		throw (_wexception)
+		= 0;
+	virtual void Write
+		(FileSystem &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Saver * const  = 0)
+		throw (_wexception)
+		= 0;
 
    private:
       bool m_skip;

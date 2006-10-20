@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,10 +36,8 @@
 /*
  * Constructor
  */
-Game_Loader::Game_Loader(FileSystem* fs, Game* game) {
-      m_game=game;
-      m_fs=fs;
-}
+Game_Loader::Game_Loader(FileSystem & fs, Game* game) : m_fs(fs), m_game(game)
+{}
 
 /*
  * Destructor

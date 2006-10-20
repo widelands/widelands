@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,10 @@ Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader* mol) throw(_wexception) {
+void Game_Cmd_Queue_Data_Packet::Read
+(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const ol)
+throw (_wexception)
+{
    FileRead fr;
    fr.Open( fs, "binary/cmd_queue" );
 
@@ -66,7 +69,7 @@ void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_
          uint packet_id=fr.Unsigned16();
          log("Creating queue command for id: %i (serial: %li) ... ", packet_id, item.serial);
          BaseCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-         cmd->Read(&fr, game, mol);
+			cmd->Read(&fr, game, ol);
          log("done\n");
 
          item.cmd=cmd;
@@ -85,7 +88,10 @@ void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_
 /*
  * Write Function
  */
-void Game_Cmd_Queue_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver* mos) throw(_wexception) {
+void Game_Cmd_Queue_Data_Packet::Write
+(FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const os)
+throw (_wexception)
+{
    FileWrite fw;
 
    // Now packet version
@@ -118,7 +124,7 @@ void Game_Cmd_Queue_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map
       fw.Unsigned16(p.top().cmd->get_id());
 
       // Now the command itself
-      p.top().cmd->Write(&fw, game, mos);
+		p.top().cmd->Write(&fw, game, os);
       // DONE: next command
       p.pop();
    }

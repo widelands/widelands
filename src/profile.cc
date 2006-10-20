@@ -830,14 +830,14 @@ inline char *setEndAt(char *str, char c)
  *
  * Args: filename	name of the source file
  */
-void Profile::read(const char *filename, const char *global_section, FileSystem* fs) {
+void Profile::read
+(const char * const filename,
+ const char * const global_section,
+ FileSystem & fs)
+{
 	try {
 		FileRead fr;
-
-		if( !fs )
-			fr.Open(g_fs, filename);
-		else
-			fr.Open(fs, filename);
+		fr.Open(fs, filename);
 
 		// line can become quite big. But this should be enough
 		const ushort LINESIZE = 1024*30;
@@ -965,7 +965,8 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
  * Writes all sections out to the given file.
  * If used_only is true, only used sections and keys are written to the file.
  */
-void Profile::write(const char *filename, bool used_only, FileSystem* fs)
+void Profile::write
+(const char * const filename, const bool used_only, FileSystem & fs)
 {
 	FileWrite fw;
 
@@ -996,10 +997,7 @@ void Profile::write(const char *filename, bool used_only, FileSystem* fs)
 		fw.Printf("\n");
 	}
 
-   if( !fs )
-      fw.Write(g_fs, filename);
-   else
-      fw.Write(fs, filename);
+	fw.Write(fs, filename);
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,12 +60,9 @@
 /*
  * Constructor
  */
-Widelands_Map_Loader::Widelands_Map_Loader(FileSystem* fs, Map* map) :
-   Map_Loader("", map) {
-   m_fs=fs;
-   m_map=map;
-   m_mol=0;
-}
+Widelands_Map_Loader::Widelands_Map_Loader(FileSystem & fs, Map* map) :
+Map_Loader("", map), m_fs(fs), m_mol(0)
+{}
 
 /*
  * Destructor
@@ -73,7 +70,7 @@ Widelands_Map_Loader::Widelands_Map_Loader(FileSystem* fs, Map* map) :
 Widelands_Map_Loader::~Widelands_Map_Loader(void) {
    if(m_mol)
       delete m_mol;
-   delete m_fs;
+   delete &m_fs;
 }
 
 /*
