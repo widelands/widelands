@@ -54,7 +54,8 @@ class Editor_Game_Base {
       Object_Manager * get_objects() const {return m_objects;}
 
       void unconquer_area(uchar playernr, Coords coords);
-      void conquer_area(uchar playernr, Coords coords, Building_Descr*);
+	void conquer_area
+		(const uchar playernr, const Coords, const Building_Descr*);
       void conquer_area_no_building(uchar playernr, Coords coords, int radius);
 
       // logic handler func
@@ -84,8 +85,9 @@ class Editor_Game_Base {
       Building* warp_building(Coords, char owner, int idx);
 		Building* warp_constructionsite(Coords c, char owner, int idx, int oldid=-1);
       Bob *create_bob(Coords c, int idx, Tribe_Descr* = 0);
-      Immovable* create_immovable(Coords c, int idx, Tribe_Descr*);
-		Immovable* create_immovable(Coords c, std::string name, Tribe_Descr*);
+	Immovable* create_immovable(const Coords c, int idx, const Tribe_Descr*);
+	Immovable* create_immovable
+		(const Coords c, const std::string & name, const Tribe_Descr*);
       Battle*    create_battle ();
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}

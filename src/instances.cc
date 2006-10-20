@@ -264,13 +264,12 @@ void Map_Object_Descr::add_animation(const char* name, uint anim) {
    m_anims.insert(std::pair<std::string,uint>(use_name,anim));
 
 }
-std::string Map_Object_Descr::get_animation_name(uint anim) {
-   std::map<std::string,uint>::iterator i=m_anims.begin();
-   while(i!=m_anims.end()) {
-      if(i->second==anim)
-         return i->first;
-      ++i;
-   }
+std::string Map_Object_Descr::get_animation_name(uint anim) const {
+	for
+		(std::map<std::string, uint>::const_iterator it = m_anims.begin();
+		 it != m_anims.end();
+		 ++it)
+		if (it->second == anim) return it->first;
    // Never here
    assert(0);
    return "";
@@ -284,8 +283,7 @@ Map_Object_Descr::has_attribute
 Search for the attribute in the attribute list
 ===============
 */
-bool Map_Object_Descr::has_attribute(uint attr)
-{
+bool Map_Object_Descr::has_attribute(uint attr) const throw () {
 	for(uint i = 0; i < m_attributes.size(); i++) {
 		if (m_attributes[i] == attr)
 			return true;
@@ -355,13 +353,9 @@ Map_Object::Map_Object
 Zero-initialize a map object
 ===============
 */
-Map_Object::Map_Object(Map_Object_Descr* descr)
-{
-	m_descr = descr;
-	m_serial = 0;
-	m_logsink = 0;
-   m_file_serial = 0;
-}
+Map_Object::Map_Object(const Map_Object_Descr* descr) :
+m_descr(descr), m_serial(0), m_file_serial(0), m_logsink(0)
+{}
 
 
 /*

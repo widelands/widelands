@@ -76,10 +76,10 @@ public:
 	WareInstance(int, Item_Ware_Descr*);
 	~WareInstance();
 
-	virtual int get_type();
+	virtual int get_type() const throw ();
 
 	Map_Object* get_location(Editor_Game_Base* g) { return m_location.get(g); }
-	Economy* get_economy() { return m_economy; }
+	Economy* get_economy() const throw () {return m_economy;}
 	int get_ware() const { return m_ware; }
 	Item_Ware_Descr* get_ware_descr() const { return m_ware_descr; }
 
@@ -154,9 +154,9 @@ public:
 
 	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords);
 
-	virtual int get_type();
-	virtual int get_size();
-	virtual bool get_passable();
+	virtual int  get_type    () const throw ();
+	virtual int  get_size    () const throw ();
+	virtual bool get_passable() const throw ();
 
 	virtual Flag *get_base_flag();
 
@@ -265,9 +265,9 @@ public:
 
 	inline Flag* get_flag(FlagId flag) const { return m_flags[flag]; }
 
-	virtual int get_type();
-	virtual int get_size();
-	virtual bool get_passable();
+	virtual int  get_type    () const throw ();
+	virtual int  get_size    () const throw ();
+	virtual bool get_passable() const throw ();
 
 	virtual Flag* get_base_flag();
 

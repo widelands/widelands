@@ -183,13 +183,17 @@ throw
 
             bool diranims=fr.Unsigned8();
             if(diranims) {
-               s->diranims=new DirAnimations();
-               s->diranims->overwrite_animation(1, bob->get_descr()->get_animation(fr.CString()));
-               s->diranims->overwrite_animation(2, bob->get_descr()->get_animation(fr.CString()));
-               s->diranims->overwrite_animation(3, bob->get_descr()->get_animation(fr.CString()));
-               s->diranims->overwrite_animation(4, bob->get_descr()->get_animation(fr.CString()));
-               s->diranims->overwrite_animation(5, bob->get_descr()->get_animation(fr.CString()));
-               s->diranims->overwrite_animation(6, bob->get_descr()->get_animation(fr.CString()));
+               const Bob_Descr & bob_descr = *bob->get_descr();
+               const uint anims[6] = {
+                  bob_descr.get_animation(fr.CString()),
+                  bob_descr.get_animation(fr.CString()),
+                  bob_descr.get_animation(fr.CString()),
+                  bob_descr.get_animation(fr.CString()),
+                  bob_descr.get_animation(fr.CString()),
+                  bob_descr.get_animation(fr.CString())
+               };
+               s->diranims = new DirAnimations
+                  (anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
             } else
                s->diranims=0;
 

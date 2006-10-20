@@ -38,12 +38,11 @@ public:
 	virtual bool is_only_production_site(void) { return false; }
 
 	virtual int get_conquers(void) const { return m_conquer_radius; }
-	inline  int get_max_number_of_soldiers(void) { return m_num_soldiers; }
-	inline  int get_max_number_of_medics(void) { return m_num_medics; }
-	inline  int get_heal_per_second(void) { return m_heal_per_second; }
-	inline  int get_heal_increase_per_medic(void) {
-		return m_heal_incr_per_medic;
-	}
+	int get_max_number_of_soldiers () const throw () {return m_num_soldiers;}
+	int get_max_number_of_medics   () const throw () {return m_num_medics;}
+	int get_heal_per_second        () const throw () {return m_heal_per_second;}
+	int get_heal_increase_per_medic() const throw ()
+	{return m_heal_incr_per_medic;}
 
 private:
 	int m_conquer_radius;

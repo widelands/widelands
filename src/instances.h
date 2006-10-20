@@ -42,20 +42,21 @@ class Map_Object;
 
 class Map_Object_Descr {
 public:
+	typedef Uint8 Index;
 	Map_Object_Descr(void) { }
    virtual ~Map_Object_Descr(void) {
       m_anims.clear();
    }
 
-   inline uint get_animation(const char* name) {
-      std::map<std::string,uint>::iterator i=m_anims.find(name);
+	uint get_animation(const char * const name) const {
+		std::map<std::string,uint>::const_iterator i = m_anims.find(name);
       assert(i!=m_anims.end());
       return i->second;
    }
 
-	bool has_attribute(uint attr);
+	bool has_attribute(uint attr) const throw ();
 
-   std::string get_animation_name(uint anim); // This is needed for save games and debug
+	std::string get_animation_name(const uint anim) const; // This is needed for save games and debug
 
 protected:
 	void add_attribute(uint attr);
@@ -109,7 +110,7 @@ Note that convenient creation functions are defined in class Game.
 // If you find a better way to do this that doesn't cost a virtual function or additional
 // member variable, go ahead
 #define MO_DESCR(type) \
-protected: inline type* get_descr() const { return static_cast<type*>(m_descr); }
+public: inline const type* get_descr() const {return static_cast<const type*>(m_descr);}
 
 // would be necessary for virtual inheritance stuff
 //#define MO_VIRTUAL_DESCR(type)
@@ -119,7 +120,7 @@ class Map_Object {
    friend class Object_Manager;
 	friend class Object_Ptr;
 
-	MO_DESCR(Map_Object_Descr)
+	MO_DESCR(Map_Object_Descr);
 
 public:
 	enum {
@@ -165,11 +166,11 @@ public:
    };
 
 protected:
-	Map_Object(Map_Object_Descr *descr);
+	Map_Object(const Map_Object_Descr *descr);
 	virtual ~Map_Object() {}
 
 public:
-	virtual int get_type() = 0;
+	virtual int get_type() const throw () = 0;
 
    inline uint get_file_serial(void) const { return m_file_serial; }
 	inline uint get_serial(void) const { return m_serial; }
@@ -198,7 +199,7 @@ protected:
 	void molog(const char* fmt, ...);
 
 protected:
-	Map_Object_Descr*		m_descr;
+	const Map_Object_Descr*		m_descr;
 	uint						m_serial;
 	uint						m_file_serial;
 	LogSink*					m_logsink;

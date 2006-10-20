@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,9 +38,9 @@ class Critter_Bob_Descr : public Bob_Descr {
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
       Bob *create_object();
 
-      inline bool is_swimming(void) { return m_swimming; }
-      inline DirAnimations* get_walk_anims(void) { return &m_walk_anims; }
-      inline const char* get_descname( void ) { return m_descname.c_str(); }
+	bool is_swimming() const throw () {return m_swimming;}
+	const DirAnimations* get_walk_anims() const throw () {return &m_walk_anims;}
+	const char* get_descname() const throw () {return m_descname.c_str();}
 
       const Critter_BobProgram* get_program(std::string name) const;
 
@@ -67,7 +67,7 @@ public:
 	virtual void init_auto_task(Game* g);
 
 	void start_task_program(Game* g, std::string name);
-   inline const char* get_descname( void ) { return get_descr()->get_descname(); }
+	const char * get_descname() const throw () {return get_descr()->get_descname();}
 
 private:
 	void roam_update(Game* g, State* state);

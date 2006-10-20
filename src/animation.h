@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,14 +89,20 @@ possible direction
 class Bob_Descr;
 class DirAnimations {
 public:
-	DirAnimations();
+	DirAnimations
+		(const uint dir1 = 0,
+		 const uint dir2 = 0,
+		 const uint dir3 = 0,
+		 const uint dir4 = 0,
+		 const uint dir5 = 0,
+		 const uint dir6 = 0);
 	~DirAnimations();
 
 	void parse(Bob_Descr* b, const char *directory, Profile *prof, const char *sectnametempl, Section *defaults = 0,
 	           const EncodeData *encdefaults = 0);
 
-	inline uint get_animation(int dir) { return m_animations[dir-1]; }
-   void overwrite_animation(int dir, uint id) { m_animations[dir-1]=id; } // For manual changing
+	uint get_animation(const int dir) const throw ()
+	{return m_animations[dir - 1];}
 
 private:
 	uint	m_animations[6];

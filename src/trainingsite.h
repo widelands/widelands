@@ -35,24 +35,15 @@ class TrainingSite_Descr:public ProductionSite_Descr {
 
 	virtual bool is_only_production_site(void) {
 		return true;
-	} inline int get_max_number_of_soldiers(void) {
-		return m_num_soldiers;
 	}
-	inline bool get_train_hp(void) {
-		return m_train_hp;
-	}
-	inline bool get_train_attack(void) {
-		return m_train_attack;
-	}
-	inline bool get_train_defense(void) {
-		return m_train_defense;
-	}
-	inline bool get_train_evade(void) {
-		return m_train_evade;
-	}
+	int get_max_number_of_soldiers() const throw () {return m_num_soldiers;}
+	bool get_train_hp     () const throw () {return m_train_hp;}
+	bool get_train_attack () const throw () {return m_train_attack;}
+	bool get_train_defense() const throw () {return m_train_defense;}
+	bool get_train_evade  () const throw () {return m_train_evade;}
 
-	int get_min_level(tAttribute);
-	int get_max_level(tAttribute);
+	int get_min_level(const tAttribute) const;
+	int get_max_level(const tAttribute) const;
       private:
 	/** Maximum number of soldiers for a training site*/
 	int m_num_soldiers;
@@ -127,9 +118,7 @@ class TrainingSite:public ProductionSite {
 		return &m_soldiers;
 	}
 
-	inline TrainingSite_Descr *get__descr() {
-		return get_descr();
-	}
+	const TrainingSite_Descr *get__descr() const throw () {return get_descr();}
 
 	virtual void drop_soldier(uint nr);
 	uint get_pri(enum tAttribute atr);

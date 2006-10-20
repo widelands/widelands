@@ -50,8 +50,8 @@ public:
 	BaseImmovable(Map_Object_Descr *descr);
 	virtual ~BaseImmovable();
 
-	virtual int get_size() = 0;
-	virtual bool get_passable() = 0;
+	virtual int  get_size    () const throw () = 0;
+	virtual bool get_passable() const throw () = 0;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 		= 0;
@@ -80,7 +80,7 @@ public:
 	~Immovable_Descr();
 
 	inline const char* get_name(void) const { return m_name; }
-	inline int get_size(void) const { return m_size; }
+	int get_size() const throw () {return m_size;}
    inline const char* get_picture(void) const { return m_picture.c_str(); }
 	const ImmovableProgram* get_program(std::string name) const;
 	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
@@ -91,7 +91,7 @@ public:
 	void parse_playFX(std::string directory, Profile* prof, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
-   inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
+	const Tribe_Descr* get_owner_tribe() const throw () {return m_owner_tribe;}
 
 protected:
    std::string m_picture;
@@ -116,9 +116,9 @@ public:
 
 	Coords get_position() const { return m_position; }
 
-	int get_type();
-	int get_size();
-	bool get_passable();
+	virtual int  get_type    () const throw ();
+	virtual int  get_size    () const throw ();
+	virtual bool get_passable() const throw ();
 	std::string get_name() const { return get_descr()->get_name(); }
 
 	void init(Editor_Game_Base *g);
@@ -130,7 +130,7 @@ public:
 
 	void switch_program(Game* g, std::string name);
 
-   inline Tribe_Descr* get_owner_tribe(void) { return get_descr()->get_owner_tribe(); }
+	const Tribe_Descr* get_owner_tribe() const throw () {return get_descr()->get_owner_tribe();}
 
 protected:
 	void set_program_animation(Editor_Game_Base* g);

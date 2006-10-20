@@ -494,20 +494,12 @@ Immovable::get_size
 Immovable::get_passable
 ===============
 */
-int Immovable::get_type()
-{
-	return IMMOVABLE;
-}
+int Immovable::get_type() const throw () {return IMMOVABLE;}
 
-int Immovable::get_size()
-{
-	return get_descr()->get_size();
-}
+int Immovable::get_size() const throw () {return get_descr()->get_size();}
 
-bool Immovable::get_passable()
-{
-	return get_descr()->get_size() < BIG;
-}
+bool Immovable::get_passable() const throw ()
+{return get_descr()->get_size() < BIG;}
 
 /*
 ===============
@@ -765,7 +757,7 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 	}
 
 
-   Tribe_Descr* tribe=0;
+	const Tribe_Descr* tribe=0;
 
    if(action.sparam2 != "world")
       tribe=get_descr()->get_owner_tribe(); // Not a world bob?

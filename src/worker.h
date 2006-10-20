@@ -82,21 +82,22 @@ class Worker_Descr : public Bob_Descr {
    inline bool get_buildable() { return m_buildable; }
    inline const BuildCost* get_buildcost() { return &m_buildcost; }
 
-   inline Tribe_Descr *get_tribe() { return m_tribe; }
-   inline std::string get_descname() const { return m_descname; }
+	Tribe_Descr *get_tribe() const throw () {return m_tribe;}
+	std::string get_descname() const throw () {return m_descname;}
    inline std::string get_helptext() const { return m_helptext; }
 
-   inline uint get_menu_pic() { return m_menu_pic; }
-   inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
-   inline DirAnimations *get_right_walk_anims(bool carries_ware) { if(carries_ware) return &m_walkload_anims; return &m_walk_anims; }
+	uint get_menu_pic() const throw () {return m_menu_pic;}
+	const DirAnimations *get_walk_anims() const throw () {return &m_walk_anims;}
+	const DirAnimations *get_right_walk_anims(const bool carries_ware) const throw ()
+	{return carries_ware ? &m_walkload_anims : &m_walk_anims;}
    const WorkerProgram* get_program(std::string name) const;
 
    virtual Worker_Type get_worker_type(void) const { return NORMAL; }
 
    // For leveling
-   inline int get_max_exp(void) { return m_max_experience; }
-   inline int get_min_exp(void) { return m_min_experience; }
-   const char* get_becomes(void) { return m_becomes.size() ? m_becomes.c_str() : 0; }
+	int get_max_exp() const throw () {return m_max_experience;}
+	int get_min_exp() const throw () {return m_min_experience;}
+	const char * get_becomes() const throw () {return m_becomes.size() ? m_becomes.c_str() : 0;}
 
    Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
 
@@ -134,10 +135,10 @@ class Worker : public Bob {
    virtual int get_bob_type() { return Bob::WORKER; }
 
    inline uint get_animation(const char* str) { return get_descr()->get_animation(str); }
-   inline uint get_menu_pic() const { return get_descr()->get_menu_pic(); }
-   const char* get_becomes(void) { return get_descr()->get_becomes(); }
-   inline Tribe_Descr *get_tribe() { return get_descr()->get_tribe(); }
-	std::string get_descname() const { return get_descr()->get_descname(); }
+	uint get_menu_pic() const throw() {return get_descr()->get_menu_pic();}
+	const char * get_becomes() const throw () {return get_descr()->get_becomes();}
+	Tribe_Descr *get_tribe() const throw () {return get_descr()->get_tribe();}
+	std::string get_descname() const throw () {return get_descr()->get_descname();}
 
    virtual uint get_movecaps();
 

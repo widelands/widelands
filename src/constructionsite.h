@@ -65,9 +65,9 @@ public:
 	virtual ~ConstructionSite();
 
    virtual int get_building_type(void) { return Building::CONSTRUCTIONSITE; }
-	virtual int get_size();
-	virtual uint get_playercaps();
-	virtual uint get_ui_anim();
+	virtual int get_size() const throw ();
+	virtual uint get_playercaps() const throw ();
+	virtual uint get_ui_anim() const;
 	virtual std::string get_census_string() const;
 	virtual std::string get_statistics_string();
 	uint get_built_per64k();

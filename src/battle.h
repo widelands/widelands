@@ -31,9 +31,9 @@ class Battle : public BaseImmovable
    public:
          Battle();
          ~Battle();
-      virtual int get_type () { return BATTLE; }
-      virtual int get_size () { return SMALL; }
-      virtual bool get_passable () { return false; }
+	virtual int  get_type    () const throw () {return BATTLE;}
+	virtual int  get_size    () const throw () {return SMALL;}
+	virtual bool get_passable() const throw () {return false;}
       virtual void draw
          (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
       {}

@@ -210,7 +210,9 @@ This conquers a given area because of a new (military) building
 that is set there.
 ===============
 */
-void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, Building_Descr* b) {
+void Editor_Game_Base::conquer_area
+(const uchar playernr, const Coords coords, const Building_Descr* b)
+{
    Conquer_Info ci;
    ci.player=playernr;
    ci.middle_point=coords;
@@ -658,7 +660,8 @@ but an immovable defined by the players tribe)
 Does not perform any placability checks.
 ===============
 */
-Immovable *Editor_Game_Base::create_immovable(Coords c, int idx, Tribe_Descr* tribe)
+Immovable *Editor_Game_Base::create_immovable
+(const Coords c, int idx, const Tribe_Descr* tribe)
 {
 	Immovable_Descr *descr;
 
@@ -671,7 +674,8 @@ Immovable *Editor_Game_Base::create_immovable(Coords c, int idx, Tribe_Descr* tr
 	return descr->create(this, c);
 }
 
-Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_Descr* tribe)
+Immovable* Editor_Game_Base::create_immovable
+(const Coords c, const std::string & name, const Tribe_Descr* tribe)
 {
 	int idx;
 

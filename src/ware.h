@@ -62,12 +62,12 @@ public:
 
 	virtual void load_graphics();
 
-	uint get_menu_pic       () const {return m_menu_pic;}
-	uint get_pic_queue_full () const {return m_pic_queue_full;}
-	uint get_pic_queue_empty() const {return m_pic_queue_empty;}
+	uint get_menu_pic       () const throw () {return m_menu_pic;}
+	uint get_pic_queue_full () const throw () {return m_pic_queue_full;}
+	uint get_pic_queue_empty() const throw () {return m_pic_queue_empty;}
 
-   inline const char *get_name() const { return m_name.c_str(); }
-   inline const char *get_descname() const { return m_descname.c_str(); }
+	const char * get_name    () const throw () {return m_name    .c_str();}
+	const char * get_descname() const throw () {return m_descname.c_str();}
 
 private:
 	void parse(const char *directory, Profile *prof);

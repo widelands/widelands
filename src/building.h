@@ -56,14 +56,14 @@ public:
 	virtual ~Building_Descr(void);
 
 	inline const char* get_name(void) const { return m_name; }
-	inline const char* get_descname() const { return m_descname; }
+	const char * get_descname() const throw () {return m_descname;}
 	inline bool get_buildable(void) const { return m_buildable; }
    inline bool get_enhanced_building(void) const { return m_enhanced_building; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
 	inline uint get_buildicon() const { return m_buildicon; }
-	inline int get_size(void) const { return m_size; }
+	int get_size() const throw () {return m_size;}
 	inline bool get_ismine() const { return m_mine; }
-   virtual uint get_ui_anim() { return get_animation("idle"); }
+	virtual uint get_ui_anim() const throw () {return get_animation("idle");}
 
 	inline bool get_stopable() const { return m_stopable;}
 	inline std::string get_stop_icon() const { return m_stop_icon;}
@@ -138,17 +138,17 @@ public:
 
    virtual int get_building_type()=0;
 
-	virtual int get_type();
-	virtual int get_size();
-	virtual bool get_passable();
-   virtual uint get_ui_anim();
+	virtual int  get_type    () const throw ();
+	virtual int  get_size    () const throw ();
+	virtual bool get_passable() const throw ();
+   virtual uint get_ui_anim () const;
 
 	virtual Flag* get_base_flag();
-	virtual uint get_playercaps();
-	virtual Coords get_position() const { return m_position; }
+	virtual uint get_playercaps() const throw ();
+	virtual Coords get_position() const throw () {return m_position;}
 
 	inline const char* get_name() { return get_descr()->get_name(); }
-	const char * get_descname() const {return get_descr()->get_descname();}
+	const char * get_descname() const throw () {return get_descr()->get_descname();}
 
 	virtual std::string get_census_string() const;
 	virtual std::string get_statistics_string();

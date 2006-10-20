@@ -134,8 +134,7 @@ Building *TrainingSite_Descr::create_object()
  * \param at	the attribute to investigate
  * \return	the minimum level to be attained at this site
  */
-int TrainingSite_Descr::get_min_level(tAttribute at)
-{
+int TrainingSite_Descr::get_min_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -155,8 +154,7 @@ int TrainingSite_Descr::get_min_level(tAttribute at)
  * \param at	the attribute to investigate
  * \return	the maximum level to be attained at this site
  */
-int TrainingSite_Descr::get_max_level(tAttribute at)
-{
+int TrainingSite_Descr::get_max_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;

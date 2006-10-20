@@ -361,20 +361,11 @@ Building::get_passable
 Building::get_base_flag
 ===============
 */
-int Building::get_type()
-{
-	return BUILDING;
-}
+int Building::get_type() const throw () {return BUILDING;}
 
-int Building::get_size()
-{
-	return get_descr()->get_size();
-}
+int Building::get_size() const throw () {return get_descr()->get_size();}
 
-bool Building::get_passable()
-{
-	return false;
-}
+bool Building::get_passable() const throw () {return false;}
 
 Flag* Building::get_base_flag()
 {
@@ -391,8 +382,7 @@ The bits are (1 << PCap_XXX).
 By default, all buildable buildings can be bulldozed.
 ===============
 */
-uint Building::get_playercaps()
-{
+uint Building::get_playercaps() const throw () {
 	uint caps = 0;
 
 	if (get_descr()->get_buildable() || get_descr()->get_enhanced_building())
@@ -547,10 +537,7 @@ Return the animation ID that is used for the building in UI items
 (the building UI, messages, etc..)
 ===============
 */
-uint Building::get_ui_anim()
-{
-	return get_descr()->get_ui_anim();
-}
+uint Building::get_ui_anim() const {return get_descr()->get_ui_anim();}
 
 
 /*

@@ -174,10 +174,7 @@ Bob::~Bob()
 Bob::get_type
 ===============
 */
-int Bob::get_type()
-{
-	return BOB;
-}
+int Bob::get_type() const throw () {return BOB;}
 
 
 /*
@@ -729,7 +726,13 @@ The task finishes once the goal has been reached. It may fail.
 only step defines how many steps should be taken, before this returns as a success
 ===============
 */
-bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *anims, bool forceonlast, int only_step)
+bool Bob::start_task_movepath
+(Game* g,
+ const Coords dest,
+ int persist,
+ const DirAnimations *anims,
+ const bool forceonlast,
+ const int only_step)
 {
 	Path* path = new Path;
 	State* state;
@@ -767,7 +770,12 @@ Bob::start_task_movepath
 Start moving along the given, precalculated path.
 ===============
 */
-void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims, bool forceonlast, int only_step)
+void Bob::start_task_movepath
+(Game* g,
+ const Path & path,
+ const DirAnimations *anims,
+ const bool forceonlast,
+ const int only_step)
 {
 	State* state;
 
@@ -795,7 +803,13 @@ Return true if a task has been started, or false if we already are on the given
 path index.
 ===============
 */
-bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnimations* anims, bool forceonlast, int only_step)
+bool Bob::start_task_movepath
+(Game* g,
+ const Path & origpath,
+ const int index,
+ const DirAnimations* anims,
+ const bool forceonlast,
+ const int only_step)
 {
 	CoordPath path(origpath);
 	int curidx = path.get_index(get_position());
@@ -908,8 +922,7 @@ Bob::start_task_forcemove
 Move into the given direction, without passability checks.
 ===============
 */
-void Bob::start_task_forcemove(Game *g, int dir, DirAnimations *anims)
-{
+void Bob::start_task_forcemove(Game *g, const int dir, const DirAnimations *anims) {
 	State* state;
 
 	push_task(g, &taskForcemove);

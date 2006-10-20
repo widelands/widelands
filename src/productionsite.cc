@@ -318,7 +318,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 	if (game) {
 		// Request worker
 		if (!m_workers.size()) {
-         std::vector<ProductionSite_Descr::Worker_Info>* info=get_descr()->get_workers();
+			const std::vector<ProductionSite_Descr::Worker_Info>* info=get_descr()->get_workers();
          uint i;
          int j;
          for(i=0; i<info->size(); i++)

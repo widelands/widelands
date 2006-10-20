@@ -65,7 +65,7 @@ public:
 	uint get_evade_level_pic  (const uint level) const
 	{assert(level <= m_max_evade_level);   return m_evade_pics  [level];}
 
-   uint get_rand_anim (std::string);
+	uint get_rand_anim(const char * const name) const;
 protected:
 	virtual Bob *create_object();
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
@@ -157,7 +157,8 @@ public:
 	{return get_descr()->get_evade_level_pic(m_evade_level);}
 
    /// Sets a random animation of desired type and start playing it
-   void start_animation (Editor_Game_Base*, std::string, uint);
+	void start_animation
+		(Editor_Game_Base*, const char * const name, const uint time);
 
 	/// Heal quantity of hit points instantly
 	void heal (const uint);

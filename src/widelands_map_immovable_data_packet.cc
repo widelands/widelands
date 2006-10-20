@@ -125,7 +125,7 @@ throw (_wexception)
          // We do not write player immovables
          if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
             Immovable* imm=static_cast<Immovable*>(immovable);
-            Tribe_Descr* tribe=imm->get_owner_tribe();
+				const Tribe_Descr* tribe=imm->get_owner_tribe();
 
 				assert(not os->is_object_known(imm));
 				fw.Unsigned32(os->register_object(imm));

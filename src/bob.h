@@ -110,7 +110,7 @@ public:
 		std::string		svar1;
 
 		Coords					coords;
-		DirAnimations*			diranims;
+		const DirAnimations*			diranims;
 		Path*						path;
 		Transfer*				transfer;
 		Route*					route;
@@ -125,7 +125,7 @@ public:
 	uint get_current_anim() const { return m_anim; }
 	int get_animstart() const { return m_animstart; }
 
-	virtual int get_type();
+	virtual int get_type() const throw ();
 	virtual int get_bob_type() = 0;
    virtual uint get_movecaps() { return 0; }
 	std::string get_name() const { return get_descr()->get_name(); }
@@ -160,10 +160,27 @@ public: // default tasks
 	void send_signal(Game*, std::string sig);
 
 	void start_task_idle(Game*, uint anim, int timeout);
-	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims, bool forceonlast = false, int only_step = -1);
-	void start_task_movepath(Game*, const Path &path, DirAnimations *anims, bool forceonlast = false, int only_step = -1);
-	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims, bool forceonlast = false, int only_step = -1);
-	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
+	bool start_task_movepath
+		(Game*,
+		 const Coords dest,
+		 const int persist,
+		 const DirAnimations *anims,
+		 const bool forceonlast = false,
+		 const int only_step = -1);
+	void start_task_movepath
+		(Game*,
+		 const Path & path,
+		 const DirAnimations *anims,
+		 const bool forceonlast = false,
+		 const int only_step = -1);
+	bool start_task_movepath
+		(Game* g,
+		 const Path & path,
+		 const int index,
+		 const DirAnimations* anims,
+		 const bool forceonlast = false,
+		 const int only_step = -1);
+	void start_task_forcemove(Game*, const int dir, const DirAnimations *anims);
 
 protected: // higher level handling (task-based)
 	inline State* get_state() { return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0; }

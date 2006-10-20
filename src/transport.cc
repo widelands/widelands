@@ -262,10 +262,7 @@ WareInstance::~WareInstance()
 WareInstance::get_type
 ===============
 */
-int WareInstance::get_type()
-{
-	return WARE;
-}
+int WareInstance::get_type() const throw () {return WARE;}
 
 
 /*
@@ -683,20 +680,11 @@ Flag::get_passable
 Flag::get_base_flag
 ===============
 */
-int Flag::get_type()
-{
-	return FLAG;
-}
+int Flag::get_type() const throw () {return FLAG;}
 
-int Flag::get_size()
-{
-	return SMALL;
-}
+int Flag::get_size() const throw () {return SMALL;}
 
-bool Flag::get_passable()
-{
-	return true;
-}
+bool Flag::get_passable() const throw () {return true;}
 
 Flag *Flag::get_base_flag()
 {
@@ -1395,20 +1383,11 @@ Road::get_passable
 Road::get_base_flag
 ===============
 */
-int Road::get_type()
-{
-	return ROAD;
-}
+int Road::get_type() const throw () {return ROAD;}
 
-int Road::get_size()
-{
-	return SMALL;
-}
+int Road::get_size() const throw () {return SMALL;}
 
-bool Road::get_passable()
-{
-	return true;
-}
+bool Road::get_passable() const throw () {return true;}
 
 Flag *Road::get_base_flag()
 {

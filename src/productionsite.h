@@ -63,7 +63,8 @@ public:
 		const EncodeData* encdata);
 	virtual Building* create_object();
 
-   std::vector<Worker_Info>* get_workers() { return &m_workers; }
+	const std::vector<Worker_Info>* get_workers() const throw ()
+	{return &m_workers;}
 	bool is_output(std::string name) const {
 		return m_output.find(name) != m_output.end();
 	}

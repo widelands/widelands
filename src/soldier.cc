@@ -417,12 +417,11 @@ void Soldier_Descr::load_graphics(void) {
 /**
  * Get random animation of specified type
  */
-uint Soldier_Descr::get_rand_anim(std::string name)
-{
+uint Soldier_Descr::get_rand_anim(const char * const name) const {
    // Todo: This is thought to get a random animation like attack_1 attack_2 attack_3 ...
    // Randimly trhought this method. By now only gets attack, but isn't very difficult
    // to remake allowing the attack_1 and so.
-   return get_animation(name.c_str());
+	return get_animation(name);
 }
 
 /**
@@ -633,7 +632,8 @@ void Soldier::draw
  *
  *
  */
-void Soldier::start_animation (Editor_Game_Base* gg, std::string name, uint time)
+void Soldier::start_animation
+(Editor_Game_Base* gg, const char * const name, const uint time)
 {
 	Game * const game = dynamic_cast<Game * const>(gg);
 	if (game) start_task_idle (game, get_descr()->get_rand_anim(name), time);

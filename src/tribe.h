@@ -79,9 +79,9 @@ class Tribe_Descr {
 	int get_building_index(const char * const name) const
 	{return m_buildings.get_index(name);}
 		Building_Descr *get_building_descr(uint idx) const { return m_buildings.get(idx); }
-      inline int get_immovable_index(const char* l) { return m_immovables.get_index(l); }
+      inline int get_immovable_index(const char* l) const { return m_immovables.get_index(l); }
       inline int get_nr_immovables(void) { return m_immovables.get_nitems(); }
-		inline Immovable_Descr* get_immovable_descr(int index) { return m_immovables.get(index); }
+		inline Immovable_Descr* get_immovable_descr(int index) const { return m_immovables.get(index); }
       inline int get_bob(const char* l) { return m_bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) { return m_bobs.get(index); }
       inline int get_nr_bobs(void) { return m_bobs.get_nitems(); }

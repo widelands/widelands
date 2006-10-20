@@ -131,10 +131,8 @@ ConstructionSite::get_size
 Override: construction size is always the same size as the building
 ===============
 */
-int ConstructionSite::get_size()
-{
-	return m_building->get_size();
-}
+int ConstructionSite::get_size() const throw ()
+{return m_building->get_size();}
 
 /*
  * Write infos over this constructionsite
@@ -177,8 +175,7 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-uint ConstructionSite::get_playercaps()
-{
+uint ConstructionSite::get_playercaps() const throw () {
 	uint caps = Building::get_playercaps();
 
 	caps |= 1 << PCap_Bulldoze;
@@ -195,10 +192,8 @@ Return the animation for the building that is in construction, as this
 should be more useful to the player.
 ===============
 */
-uint ConstructionSite::get_ui_anim()
-{
-	return get_building()->get_animation("idle");
-}
+uint ConstructionSite::get_ui_anim() const
+{return get_building()->get_animation("idle");}
 
 
 /*

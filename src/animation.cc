@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -291,8 +291,20 @@ DirAnimations::DirAnimations
 DirAnimations::~DirAnimations
 ===============
 */
-DirAnimations::DirAnimations()
+DirAnimations::DirAnimations
+(const uint dir1,
+ const uint dir2,
+ const uint dir3,
+ const uint dir4,
+ const uint dir5,
+ const uint dir6)
 {
+	m_animations[0] = dir1;
+	m_animations[1] = dir2;
+	m_animations[2] = dir3;
+	m_animations[3] = dir4;
+	m_animations[4] = dir5;
+	m_animations[5] = dir6;
 }
 
 DirAnimations::~DirAnimations()
