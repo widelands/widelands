@@ -246,6 +246,8 @@ public:
 	static Index get_index(const Coords c, const uint width);
 	Index get_index(const FCoords c) {return c.field - m_fields;}
 	Index max_index() const {return m_width * m_height;}
+	Field & operator[](const Index)  const;
+	Field & operator[](const Coords) const;
 	Field * get_field(const Index) const;
 	Field * get_field(const Coords) const;
 	const Field & get_field(const uint x, const uint y) const;
@@ -655,6 +657,10 @@ Field arithmetics
 
 inline Map::Index Map::get_index(const Coords c, const uint width)
 {return c.y * width + c.x;}
+
+inline Field & Map::operator[](const Index i) const {return m_fields[i];}
+inline Field & Map::operator[](const Coords c) const
+{return operator[](get_index(c, m_width));}
 
 inline Field * Map::get_field(const Index i) const {return &m_fields[i];}
 
