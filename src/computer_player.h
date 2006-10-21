@@ -160,7 +160,7 @@ class Computer_Player {
 
 		uchar				player_number;
 		Player*				player;
-		Tribe_Descr*			tribe;
+	const Tribe_Descr * tribe;
 
 		std::list<BuildingObserver>	buildings;
 		int				total_constructionsites;
