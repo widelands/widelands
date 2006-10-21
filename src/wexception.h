@@ -20,6 +20,7 @@
 #ifndef WEXCEPTION_H
 #define WEXCEPTION_H
 
+#include <string>
 #include <types.h>
 #include <exception>
 
@@ -35,14 +36,16 @@
  * sprintf()-style format strings
  */
 class _wexception : public std::exception {
-	char m_string[256];
-    uint m_line;
-    const char* m_file;
+	std::string m_what;
 
 public:
 	explicit _wexception(const char* file, uint line, const char *fmt, ...) throw() PRINTF_FORMAT(4,5);
 	virtual ~_wexception() throw();
 
+	/**
+    * The target of the returned pointer remains valid during the lifetime of
+	 * the _wexception object.
+	 */
 	virtual const char *what() const throw();
 };
 

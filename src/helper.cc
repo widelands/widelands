@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 #include <cstdarg>
 #include <iostream>
-#include <string>
+#include <sstream>
 #include <vector>
 
 #include "wexception.h"
@@ -97,34 +97,21 @@ class _wexception implementation
 #undef wexception
 _wexception::_wexception(const char* file, uint line, const char *fmt, ...) throw()
 {
-    m_file = file; 
-    m_line = line; 
-    
 	va_list va;
-
+	char buf[256];
 	va_start(va, fmt);
-	vsnprintf(m_string, sizeof(m_string), fmt, va);
+	vsnprintf(buf, sizeof(buf), fmt, va);
 	va_end(va);
+	std::ostringstream ost;
+	ost << file << ':' << line << ' ' << buf;
+	m_what = ost.str();
 }
 
 _wexception::~_wexception() throw()
 {
 }
 
-const char *_wexception::what() const throw()
-{
-    char buffer[200]; 
-    
-    snprintf( buffer, sizeof(buffer), "%i", m_line);
-    
-    std::string returnval(m_file);
-    returnval += ':';
-    returnval += buffer;
-    returnval += " ";
-    returnval += m_string;
-    
-    return returnval.c_str();
-}
+const char *_wexception::what() const throw() {return m_what.c_str();}
 
 void myassert(int line, const char* file, const char* condt) throw(_wexception)
 {
