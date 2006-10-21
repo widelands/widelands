@@ -60,7 +60,17 @@ class FileRead {
 		inline uint Unsigned32(int pos = -1) { return (uint)Little32(Deref32(Data(4, pos))); }
 		inline float Float(int pos = -1) { return LittleFloat(DerefFloat(Data(4, pos))); }
 		char *CString(int pos = -1);
-		bool ReadLine(char *buf, int buflen);
+
+	/**
+	 * This function copies characters from the file to the memory starting at
+	 * buf until it encounters a newline. The newline is not copied. The
+	 * characters including the newline are consumed.
+	 *
+	 * This function will not write to the memory at buf_end or beyond.
+	 *
+	 *  Requirement: buf < buf_end
+	 */
+	bool ReadLine(char *buf, const char * const buf_end);
 
 		void *Data(int bytes, int pos = -1) {
 			int i;

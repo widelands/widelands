@@ -132,35 +132,31 @@ char *FileRead::CString(int pos)
  *
  * Returns true on EOF condition.
  */
-bool FileRead::ReadLine(char *buf, int buflen)
-{
-	char *dst = buf;
-
+bool FileRead::ReadLine(char * buf, const char * const buf_end) {
+	assert(buf < buf_end);
 	assert(data);
 
 	if (filepos >= length)
 		return false;
 
-	while(filepos < length && buflen > 0) {
+	do {
+		if (buf == buf_end) {
+			buf[-1] = 0;
+			throw wexception("ReadLine: buffer overflow");
+		}
 		char c = ((char *)data)[filepos];
 		filepos++;
 
 		if (c == '\r') // not perfectly correct, but it should work
 			continue;
 		if (c == '\n') {
-			*dst++ = 0;
-			buflen--;
+			*buf = 0;
+			++buf;
 			break;
 		}
 
-		*dst++ = c;
-		buflen--;
-	}
-
-	if (!buflen && *(dst-1)) {
-		*(dst-1) = 0;
-		throw wexception("ReadLine: buffer overflow");
-	}
-
+		*buf = c;
+		++buf;
+	} while (filepos < length);
 	return true;
 }

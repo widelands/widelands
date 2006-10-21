@@ -840,8 +840,11 @@ void Profile::read
 		fr.Open(fs, filename);
 
 		// line can become quite big. But this should be enough
-		const ushort LINESIZE = 1024*30;
-		char* line = new char[LINESIZE];
+		//  Previously this was allocated with new and then simply leaked.
+		//  We (Valgrind and I) did not like that.
+		char buf[1024*30];
+		const char * const buf_end = buf + sizeof(buf);
+		char * line = buf;
 		char *p = 0;
 		uint linenr = 0;
 		Section *s = 0;
@@ -850,7 +853,7 @@ void Profile::read
 		std::string data;
 		std::string key;
 		bool translate_line = false;
-		while(fr.ReadLine(line, LINESIZE)) {
+		while(fr.ReadLine(line, buf_end)) {
 			linenr++;
 
 			if( !reading_multiline )
