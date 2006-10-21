@@ -75,7 +75,7 @@ options_menu  (this, posx(0, 1), posy(2, 3), buttonw(1), buttonh(3), 4)
 	stock         .set_tooltip(_("Stock")              .c_str());
 	objectives    .set_tooltip(_("Objectives")         .c_str());
 	chat          .set_tooltip(_("Chat")               .c_str());
-	options_menu  .set_tooltip(_("Chat")               .c_str());
+	options_menu  .set_tooltip(_("Options")            .c_str());
 
 	if (get_usedefaultpos())
 		center_to_parent();
