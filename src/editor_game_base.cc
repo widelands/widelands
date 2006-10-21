@@ -462,7 +462,7 @@ Player * Editor_Game_Base::add_player
 		m_players[plnum-1]
 		=
 		new Player
-		(this, type, plnum, m_tribes[i], name, g_playercolors[plnum - 1]);
+		(this, type, plnum, *m_tribes[i], name, g_playercolors[plnum - 1]);
 }
 
 /*
