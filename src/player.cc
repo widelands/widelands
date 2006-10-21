@@ -36,13 +36,20 @@
 // class Player
 //
 //
-Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const char* name, const uchar *playercolor)
+Player::Player
+(Editor_Game_Base* g,
+ const int type,
+ const int plnum,
+ const Tribe_Descr & tribe,
+ const char * const name,
+ const uchar * const playercolor)
+:
+m_see_all(false),
+m_egbase (g),
+m_type   (type),
+m_plnum  (plnum),
+m_tribe  (tribe)
 {
-   m_see_all = false;
-   m_type = type;
-	m_plnum = plnum;
-	m_tribe = tribe;
-	m_egbase = g;
 
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
@@ -51,8 +58,8 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
 
    // Allow all buildings per default
    int i;
-   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
-   for(i=0; i<m_tribe->get_nrbuildings(); i++)
+   m_allowed_buildings.resize(m_tribe.get_nrbuildings());
+   for(i=0; i<m_tribe.get_nrbuildings(); i++)
       m_allowed_buildings[i]=true;
 
    // Resize the visibility array, so that it is large enough
@@ -74,7 +81,7 @@ void Player::init(const bool place_headquarters) {
 	seen_fields.resize(map.max_index(), false);
 
 	if (place_headquarters) {
-		Tribe_Descr & tribe = *m_tribe;
+		const Tribe_Descr & tribe = m_tribe;
 		const int plnum = m_plnum;
 		Editor_Game_Base & game = *m_egbase;
 		//try {
@@ -376,8 +383,8 @@ void Player::flagaction(Flag* flag, int action)
  * Disable or enable a building for a player
  */
 void Player::allow_building(int i, bool t) {
-   assert(m_tribe && i<m_tribe->get_nrbuildings());
-   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
+	assert(i < m_tribe.get_nrbuildings());
+	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
 
    m_allowed_buildings[i]=t;
 }

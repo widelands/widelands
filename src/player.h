@@ -57,13 +57,20 @@ class Player {
 			playerAI
 		};
 
-		Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const char* name, const uchar *playercolor);
+		Player
+		(Editor_Game_Base* g,
+		 const int type,
+		 const int plnum,
+		 const Tribe_Descr & tribe,
+		 const char * const name,
+		 const uchar * const playercolor);
 
 		inline Editor_Game_Base *get_game() const { return m_egbase; }
 		inline int get_type() const { return m_type; }
 		inline int get_player_number() const { return m_plnum; }
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
-		inline Tribe_Descr *get_tribe() const { return m_tribe; }
+	const Tribe_Descr *get_tribe() const { return &m_tribe; }
+	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
       const char* get_name(void) { return m_name.c_str(); }
       void set_name(const char* str) { m_name=str; }
@@ -126,7 +133,7 @@ class Player {
 		bool           m_view_changed;
       int				m_type;
 		int				m_plnum;
-		Tribe_Descr*	m_tribe; // buildings, wares, workers, sciences
+		const Tribe_Descr & m_tribe; // buildings, wares, workers, sciences
 		RGBColor			m_playercolor[4];
 
 		std::vector<bool> seen_fields;
