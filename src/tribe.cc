@@ -595,7 +595,7 @@ int Tribe_Descr::get_safe_worker_index(const char * const name) const {
 /*
  * Return the given building or die trying
  */
-int Tribe_Descr::get_safe_building_index(const char *name) {
+int Tribe_Descr::get_safe_building_index(const char *name) const {
    int retval=get_building_index(name);
 
    if(retval==-1)
