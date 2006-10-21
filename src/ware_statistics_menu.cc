@@ -383,7 +383,7 @@ m_parent(&parent)
 			 x < wares_per_row and cur_ware < nr_wares;
 			 ++x, ++cur_ware)
 		{
-			const Item_Ware_Descr & ware = tribe.get_ware_descr(cur_ware);
+			const Item_Ware_Descr & ware = *tribe.get_ware_descr(cur_ware);
 			WSM_Checkbox & cb = *new WSM_Checkbox
 				(this, posx, posy, cur_ware, ware.get_menu_pic(), colors[cur_ware]);
 			cb.set_tooltip(ware.get_descname());
