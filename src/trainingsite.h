@@ -93,9 +93,9 @@ class TrainingSite:public ProductionSite {
 	 TrainingSite(TrainingSite_Descr * descr);
 	 virtual ~ TrainingSite();
 
-	virtual int get_building_type(void) {
-		return Building::TRAININGSITE;
-	} virtual std::string get_statistics_string();
+	virtual int get_building_type() const throw ()
+	{return Building::TRAININGSITE;}
+	virtual std::string get_statistics_string();
 
 	virtual void init(Editor_Game_Base * g);
 	virtual void cleanup(Editor_Game_Base * g);

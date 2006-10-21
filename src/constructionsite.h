@@ -64,7 +64,8 @@ public:
 	ConstructionSite(ConstructionSite_Descr* descr);
 	virtual ~ConstructionSite();
 
-   virtual int get_building_type(void) { return Building::CONSTRUCTIONSITE; }
+	virtual int get_building_type() const throw ()
+	{return Building::CONSTRUCTIONSITE;}
 	virtual int get_size() const throw ();
 	virtual uint get_playercaps() const throw ();
 	virtual uint get_ui_anim() const;

@@ -93,7 +93,8 @@ public:
 	virtual std::string get_statistics_string();
    char get_statistics_percent( void ) { return m_last_stat_percent; }
 
-   virtual int get_building_type(void) { return Building::PRODUCTIONSITE; }
+	virtual int get_building_type() const throw ()
+	{return Building::PRODUCTIONSITE;}
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
 	virtual void act(Game* g, uint data);

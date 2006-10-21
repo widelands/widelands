@@ -136,7 +136,7 @@ public:
 	Building(Building_Descr* descr);
 	virtual ~Building();
 
-   virtual int get_building_type()=0;
+	virtual int get_building_type() const throw () = 0;
 
 	virtual int  get_type    () const throw ();
 	virtual int  get_size    () const throw ();

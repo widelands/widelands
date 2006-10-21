@@ -69,7 +69,7 @@ public:
 	Warehouse(Warehouse_Descr *descr);
 	virtual ~Warehouse();
 
-   virtual int get_building_type(void) { return Building::WAREHOUSE; }
+	virtual int get_building_type() const throw () {return Building::WAREHOUSE;}
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
