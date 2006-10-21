@@ -54,15 +54,10 @@ throw (_wexception)
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Read all the heights
-      Map* map=egbase->get_map();
-
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
-            uchar h=fr.Unsigned8();
-            //         log("[Map Loader] Setting height of field (%i,%i) to %i\n", x, y, h);
-            map->get_field(Coords(x,y))->set_height(h);
-         }
-      }
+		Map & map = egbase->map();
+		const Map::Index max_index = map.max_index();
+		for (Map::Index i = 0; i < max_index; ++i)
+			map[i].set_height(fr.Unsigned8());
       return;
    }
    throw wexception("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n", packet_version);
@@ -86,12 +81,9 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now, all heights as unsigned chars in order
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         fw.Unsigned8(map->get_field(Coords(x,y))->get_height());
-      }
-   }
+	Map & map = egbase->map();
+	const Map::Index max_index = map.max_index();
+	for (Map::Index i = 0; i < max_index; ++i) fw.Unsigned8(map[i].get_height());
 
    fw.Write(fs,  "binary/heights");
 }
