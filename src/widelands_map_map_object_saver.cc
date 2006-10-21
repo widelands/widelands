@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,35 +23,29 @@
 #include "widelands_map_map_object_saver.h"
 #include "wexception.h"
 
-/*
- * constructor, destructor
- */
-Widelands_Map_Map_Object_Saver::Widelands_Map_Map_Object_Saver(void) {
-   m_nr_roads=0;
-   m_nr_flags=0;
-   m_nr_buildings=0;
-   m_nr_bobs=0;
-   m_nr_wares=0;
-   m_nr_immovables=0;
-}
-
-Widelands_Map_Map_Object_Saver::~Widelands_Map_Map_Object_Saver(void) {
-}
+Widelands_Map_Map_Object_Saver::Widelands_Map_Map_Object_Saver() :
+m_nr_roads     (0),
+m_nr_flags     (0),
+m_nr_buildings (0),
+m_nr_bobs      (0),
+m_nr_wares     (0),
+m_nr_immovables(0)
+{}
 
 
 /*
  * Returns true if this object has already been inserted
  */
-bool Widelands_Map_Map_Object_Saver::is_object_known(Map_Object* obj) {
-   Map_Object_Map::iterator i;
-   i=m_objects.find(obj);
-   return (i!=m_objects.end());
-}
+bool Widelands_Map_Map_Object_Saver::is_object_known
+(const Map_Object * const obj) const
+{return m_objects.find(obj) != m_objects.end();}
 
 /*
  * Registers this object as a new one
  */
-uint Widelands_Map_Map_Object_Saver::register_object(Map_Object* obj) {
+uint Widelands_Map_Map_Object_Saver::register_object
+(const Map_Object * const obj)
+{
    assert(!is_object_known(obj));
 
    switch(obj->get_type()) {
@@ -66,7 +60,7 @@ uint Widelands_Map_Map_Object_Saver::register_object(Map_Object* obj) {
 
    assert(obj->get_file_serial());
 
-   m_objects.insert(std::pair<Map_Object*, uint>(obj,obj->get_file_serial()));
+   m_objects.insert(std::pair<const Map_Object*, uint>(obj,obj->get_file_serial()));
    m_saved_obj[obj]=false;
 
    return obj->get_file_serial();
@@ -76,7 +70,9 @@ uint Widelands_Map_Map_Object_Saver::register_object(Map_Object* obj) {
  * Returns the file index for this map object. This is used on load
  * to regenerate the depencies between the objects
  */
-uint Widelands_Map_Map_Object_Saver::get_object_file_index(Map_Object* obj) {
+uint Widelands_Map_Map_Object_Saver::get_object_file_index
+(const Map_Object * const obj)
+{
    // This check should rather be an assert(), but we get more information
    // from a throw and time's not soo much an issue here
    if(!is_object_known(obj))
@@ -88,16 +84,16 @@ uint Widelands_Map_Map_Object_Saver::get_object_file_index(Map_Object* obj) {
 /*
  * mark this object as saved
  */
-void Widelands_Map_Map_Object_Saver::mark_object_as_saved(Map_Object* obj) {
-   m_saved_obj[obj]=true;
-}
+void Widelands_Map_Map_Object_Saver::mark_object_as_saved
+(const Map_Object * const obj)
+{m_saved_obj[obj] = true;}
 
 /*
  * Return the number of unsaved objects
  */
-int Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects(void) {
-   std::map<Map_Object*,bool>::iterator i=m_saved_obj.begin();
-   int retval=0;
+uint Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
+	std::map<const Map_Object *, bool>::const_iterator i = m_saved_obj.begin();
+	uint retval = 0;
    while(i!=m_saved_obj.end()) {
       if(!i->second) retval++;
       ++i;
