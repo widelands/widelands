@@ -454,13 +454,21 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 				}
 				else
 					text_pos.x = img_surf_w + h_space;
-				SDL_Surface* block_lines = join_sdl_surfaces(text_width_left, block_h, rend_lines, bg, richtext_it->get_text_align());
 
 				SDL_Surface* block_surface = create_empty_sdl_surface(wrap,(block_h > img_surf_h ? block_h : img_surf_h));
 				SDL_FillRect( block_surface, 0, SDL_MapRGB( block_surface->format,  107,87,55  )); // Set background to colorkey
 				SDL_BlitSurface(block_images,0,block_surface,&img_pos);
 
-				SDL_BlitSurface(block_lines,0,block_surface,&text_pos);
+				{
+					SDL_Surface * block_lines = join_sdl_surfaces
+						(text_width_left,
+						 block_h,
+						 rend_lines,
+						 bg,
+						 richtext_it->get_text_align());
+					SDL_BlitSurface(block_lines, 0, block_surface,&text_pos);
+					SDL_FreeSurface(block_lines);
+				}
 				rend_blocks.push_back(block_surface);
 
 				//If image is higher than text, set block height to image height
@@ -503,13 +511,17 @@ SDL_Surface* Font_Handler::create_empty_sdl_surface(uint w, uint h) {
 }
 
 //joins a vectror of surfaces in one big surface
-SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align, int spacing, bool vertical, bool keep_surfaces) {
-	int global_height = h + spacing * surfaces.size();
-
-	if (w == 0 || h == 0 || surfaces.size() == 0) {
-		return create_empty_sdl_surface(0,0);
-	}
-	SDL_Surface* global_surface = create_empty_sdl_surface(w,global_height);
+SDL_Surface * Font_Handler::join_sdl_surfaces
+(const uint w, const uint h,
+ const std::vector<SDL_Surface *> & surfaces,
+ const RGBColor bg,
+ const Align align,
+ const int spacing,
+ const bool vertical,
+ const bool keep_surfaces)
+{
+	SDL_Surface * global_surface = create_empty_sdl_surface
+		(h ? w : 0, w ? h + spacing * surfaces.size() : 0);
 	assert(global_surface);
 
 	SDL_FillRect( global_surface, 0, SDL_MapRGB( global_surface->format, bg.r(), bg.g(), bg.b()));

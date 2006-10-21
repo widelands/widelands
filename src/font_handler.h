@@ -125,7 +125,14 @@ private:
 	SDL_Surface* create_static_long_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int line_spacing = 0, int caret = -1);
 	SDL_Surface* create_single_line_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int caret = -1);
 	SDL_Surface* create_empty_sdl_surface(uint w, uint h);
-	SDL_Surface* join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align = Align_Left, int spacing = 0, bool vertical = false, bool keep_surfaces = false);
+	SDL_Surface* join_sdl_surfaces
+		(const uint w, const uint h,
+		 const std::vector<SDL_Surface *> & surfaces,
+		 const RGBColor bg,
+		 const Align align        = Align_Left,
+		 const int spacing        = 0,
+		 const bool vertical      = false,
+		 const bool keep_surfaces = false);
 	SDL_Surface* load_image(std::string file);
 	SDL_Surface* render_space(Text_Block &block, RGBColor bg, int style = TTF_STYLE_NORMAL);
 	void render_caret(TTF_Font *f, SDL_Surface *line, const std::string &text_caret_pos);
