@@ -71,7 +71,7 @@ throw (_wexception)
          for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
             Player* plr=egbase->get_player(i);
             if(!plr) continue;
-            Tribe_Descr* t=plr->get_tribe();
+            const Tribe_Descr* t=plr->get_tribe();
 
             int b;
             for(b=0; b<t->get_nrbuildings(); b++) {
@@ -85,7 +85,7 @@ throw (_wexception)
       for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
          Player* plr=egbase->get_safe_player(i);
          if(!plr) continue; // skip this player, is data can not be saved
-         Tribe_Descr* t;
+         const Tribe_Descr* t;
 
          assert(plr);
          t=plr->get_tribe();
@@ -132,7 +132,7 @@ throw (_wexception)
    for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
       Player* plr=egbase->get_player(i);
       if(!plr) continue; // skip this player, is data can not be saved
-      Tribe_Descr* t;
+      const Tribe_Descr* t;
       if( plr )
          t = plr->get_tribe();
       else
