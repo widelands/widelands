@@ -1047,9 +1047,10 @@ void show_field_action(Interactive_Base *iabase, Player* player, UIUniqueWindowR
 		case Map_Object::ROAD:
 			if (!(player->get_buildcaps(target) & BUILDCAPS_FLAG))
 				break;
-			if (dynamic_cast<const Game * const>(iabase->get_egbase()))
-				static_cast<Interactive_Player*>(iabase)->get_game()->
-				    send_player_build_flag(player->get_player_number(), target);
+			if
+				(Game * const game =
+				 dynamic_cast<Game * const>(iabase->get_egbase()))
+				game->send_player_build_flag(player->get_player_number(), target);
 
 		case Map_Object::FLAG:
 			iabase->finish_build_road();

@@ -93,8 +93,6 @@ void Battle::cleanup (Editor_Game_Base* eg)
 void Battle::act (Game * g, uint) {
    log ("Battle::act\n");
 
-	if (not dynamic_cast<const Game * const>(g)) return;
-
    Soldier* attacker;
    Soldier* defender;
 

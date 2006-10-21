@@ -349,7 +349,6 @@ void MilitarySite::act(Game* g, uint data)
 	// Maybe a new queueing system like MilitaryAct could be introduced.
    ProductionSite::act(g,data);
 
-	if (dynamic_cast<const Game * const>(g)) {
       uint total_heal = 0;
       uint numMedics = 0;	 // FIX THIS when medics were added
       uint i = 0;
@@ -380,7 +379,6 @@ void MilitarySite::act(Game* g, uint data)
          if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
             s->heal (total_heal);
             total_heal -=	(total_heal/3);
-         }
       }
    }
    call_soldiers(g);
