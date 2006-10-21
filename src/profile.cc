@@ -884,7 +884,7 @@ void Profile::read
 					char *eot = line+strlen(line)-1;
 					while( *eot != '"' && *eot != '\'') {
 						*eot = 0;
-						eot = line+strlen(line)-1;
+						--eot;
 					}
 					// NOTE: we leave the last '"' and do not remove them
 					tail = line;
