@@ -870,13 +870,13 @@ void Profile::read
 				if( reading_multiline ) {
 					// Note: comments are killed by walking backwards into the string
 					rtrim(p);
-					while( *line != '\'' && *line != '"' && strlen( line )) {
+					while ( *line != '\'' && *line != '"') {
+						if (*line == 0) throw wexception
+							("line %i: runaway multiline string", linenr);
 						if( *line == '_')
 							translate_line = true;
 						line++;
 					}
-					if(!strlen(line))
-						throw wexception("line %i: runaway multiline string", linenr);
 
 					// skip " or '
 					line++;
