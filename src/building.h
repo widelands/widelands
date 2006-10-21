@@ -147,7 +147,7 @@ public:
 	virtual uint get_playercaps() const throw ();
 	virtual Coords get_position() const throw () {return m_position;}
 
-	inline const char* get_name() { return get_descr()->get_name(); }
+	const char * get_name    () const throw () {return get_descr()->get_name();}
 	const char * get_descname() const throw () {return get_descr()->get_descname();}
 
 	virtual std::string get_census_string() const;
