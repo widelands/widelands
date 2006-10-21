@@ -591,7 +591,7 @@ void RenderTargetImpl::rendermap
 	// For each field, draw ground textures, then roads, then immovables
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
 
-	const Map & map = egbase.get_map();
+	const Map & map = egbase.map();
 	const Overlay_Manager & overlay_manager = map.get_overlay_manager();
 	const uint mapwidth = map.get_width();
 	int minfx, minfy;
@@ -629,9 +629,9 @@ void RenderTargetImpl::rendermap
 		map.normalize_coords(&r);
 		map.normalize_coords(&br);
 		Map::Index r_index = Map::get_index(r, mapwidth);
-		r.field = map.get_field(r_index);
+		r.field = &map[r_index];
 		Map::Index br_index = Map::get_index(br, mapwidth);
-		br.field = map.get_field(br_index);
+		br.field = &map[br_index];
 		FCoords tr, f;
 		map.get_tln(r, &tr);
 		map.get_ln(r, &f);
@@ -691,9 +691,9 @@ void RenderTargetImpl::rendermap
 				map.normalize_coords(&r);
 				map.normalize_coords(&br);
 				Map::Index r_index = Map::get_index(r, mapwidth);
-				r.field = map.get_field(r_index);
+				r.field = &map[r_index];
 				Map::Index br_index = Map::get_index(br, mapwidth);
-				br.field = map.get_field(br_index);
+				br.field = &map[br_index];
 				FCoords tr, f;
 				map.get_tln(r, &tr);
 				map.get_ln(r, &f);
@@ -835,8 +835,8 @@ void RenderTargetImpl::rendermap
 				map.normalize_coords(&b);
 
 				;//  Get field pointers.
-				r.field = map.get_field(r);
-				b.field = map.get_field(b);
+				r.field = &map[Map::get_index(r, mapwidth)];
+				b.field = &map[Map::get_index(b, mapwidth)];
 
 				int count = dx;
 
@@ -903,8 +903,8 @@ void RenderTargetImpl::rendermap
 				map.normalize_coords(&br);
 
 				//  Get field pointers.
-				f.field = map.get_field(f);
-				br.field = map.get_field(br);
+				f.field  = &map[Map::get_index(f,  mapwidth)];
+				br.field = &map[Map::get_index(br, mapwidth)];
 
 				int count = dx;
 				while (count--) {
