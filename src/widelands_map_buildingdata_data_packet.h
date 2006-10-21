@@ -22,7 +22,10 @@
 
 #include "widelands_map_data_packet.h"
 
-class Building;
+struct ConstructionSite;
+struct MilitarySite;
+struct TrainingSite;
+struct ProductionSite;
 
 /*
  * This cares for the data of buildings
@@ -44,16 +47,56 @@ class Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet 
 		throw (_wexception);
 
    private:
-      virtual void read_constructionsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-      virtual void read_warehouse(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-      virtual void read_militarysite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-		virtual void read_trainingsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-		virtual void read_productionsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-      virtual void write_constructionsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-      virtual void write_warehouse(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-      virtual void write_militarysite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-		virtual void write_trainingsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-		virtual void write_productionsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+	virtual void read_constructionsite
+		(ConstructionSite &,
+		 FileRead &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Loader * const);
+	virtual void read_warehouse
+		(Warehouse &,
+		 FileRead &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Loader * const);
+	virtual void read_militarysite
+		(MilitarySite &,
+		 FileRead &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Loader * const);
+	virtual void read_trainingsite
+		(TrainingSite &,
+		 FileRead &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Loader * const);
+	virtual void read_productionsite
+		(ProductionSite &,
+		 FileRead &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Loader * const);
+	virtual void write_constructionsite
+		(const ConstructionSite &,
+		 FileWrite &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Saver * const);
+	virtual void write_warehouse
+		(const Warehouse &,
+		 FileWrite &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Saver * const);
+	virtual void write_militarysite
+		(const MilitarySite &,
+		 FileWrite &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Saver * const);
+	virtual void write_trainingsite
+		(const TrainingSite &,
+		 FileWrite &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Saver * const);
+	virtual void write_productionsite
+		(const ProductionSite &,
+		 FileWrite &,
+		 Editor_Game_Base*,
+		 Widelands_Map_Map_Object_Saver * const);
 };
 
 
