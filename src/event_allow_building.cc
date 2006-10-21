@@ -90,7 +90,7 @@ Event::State Event_Allow_Building::run(Game* game) {
 
    assert(plr);
 
-   Tribe_Descr* tribe=plr->get_tribe();
+   const Tribe_Descr* tribe=plr->get_tribe();
    int index=tribe->get_building_index(m_building.c_str());
    if(index==-1)
       throw wexception("Event Allow Building asks for building: %s, which doesn't exist in tribe %s\n", m_building.c_str(), tribe->get_name());

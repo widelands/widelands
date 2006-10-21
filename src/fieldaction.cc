@@ -56,7 +56,11 @@ BuildGrid IMPLEMENTATION
 // The BuildGrid presents a selection of buildable buildings
 class BuildGrid : public UIIcon_Grid {
 public:
-	BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols);
+	BuildGrid
+		(UIPanel* parent,
+		 const Tribe_Descr & tribe,
+		 const int x, const int y,
+		 int cols);
 
 	UISignal1<long> buildclicked;
 	UISignal1<long> buildmouseout;
@@ -70,7 +74,7 @@ private:
 	void mouseinslot(int idx);
 
 private:
-	Tribe_Descr*		m_tribe;
+	const Tribe_Descr & m_tribe;
 };
 
 
@@ -81,11 +85,15 @@ BuildGrid::BuildGrid
 Initialize the grid
 ===============
 */
-BuildGrid::BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols)
-	: UIIcon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols)
+BuildGrid::BuildGrid
+(UIPanel* parent,
+ const Tribe_Descr & tribe,
+ const int x, const int y,
+ int cols)
+:
+UIIcon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
+m_tribe(tribe)
 {
-	m_tribe = tribe;
-
 	clicked.set(this, &BuildGrid::clickslot);
 	mouseout.set(this, &BuildGrid::mouseoutslot);
 	mousein.set(this, &BuildGrid::mouseinslot);
@@ -101,7 +109,7 @@ Add a new building to the list of buildable buildings
 */
 void BuildGrid::add(int id)
 {
-	Building_Descr* descr = m_tribe->get_building_descr(id);
+	Building_Descr* descr = m_tribe.get_building_descr(id);
 	uint picid = descr->get_buildicon();
 
 	UIIcon_Grid::add(picid, (void*)id, descr->get_descname());
@@ -507,13 +515,13 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 	BuildGrid* bbg_house[3] = { 0, 0, 0 };
 	BuildGrid* bbg_mine = 0;
 
-	Tribe_Descr* tribe = m_plr->get_tribe();
+	const Tribe_Descr & tribe = m_plr->tribe();
 
 	m_fastclick = false;
 
-	for(int id = 0; id < tribe->get_nrbuildings(); id++)
+	for(int id = 0; id < tribe.get_nrbuildings(); id++)
 	{
-		Building_Descr * descr = tribe->get_building_descr(id);
+		Building_Descr * descr = tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
 
 		// Some buildings cannot be built (i.e. construction site, HQ)

@@ -517,7 +517,9 @@ void Editor_Interactive::select_tool(int n, int which) {
  *  data is either a pointer to a trigger, event
  *  or a tribe (for buildings)
  */
-void Editor_Interactive::reference_player_tribe(int player, void *data) {
+void Editor_Interactive::reference_player_tribe
+(const int player, const void * const data)
+{
    assert(player>0 && player<=m_editor->get_map()->get_nrplayers());
 
    Player_References r;
@@ -531,7 +533,9 @@ void Editor_Interactive::reference_player_tribe(int player, void *data) {
  * unreference !once!, if referenced many times, this
  * will leace a reference
  */
-void Editor_Interactive::unreference_player_tribe(int player, void* data) {
+void Editor_Interactive::unreference_player_tribe
+(const int player, const void * const data)
+{
    assert(player>=0 && player<=m_editor->get_map()->get_nrplayers());
    assert(data);
 

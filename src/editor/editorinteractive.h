@@ -61,8 +61,8 @@ class Editor_Interactive : public Interactive_Base {
       void exit_editor();
 
       // reference functions
-      void reference_player_tribe(int, void*);
-      void unreference_player_tribe(int, void*);
+	void reference_player_tribe(const int, const void * const);
+	void unreference_player_tribe(const int, const void * const);
       bool is_player_tribe_referenced(int);
       void set_need_save(bool t) { m_need_save=t; }
 
@@ -80,7 +80,7 @@ class Editor_Interactive : public Interactive_Base {
       bool m_need_save;
       struct Player_References {
          int player;
-         void *object;
+         const void *object;
       };
       std::vector<Player_References> m_player_tribe_references;
       bool m_ctrl_down;

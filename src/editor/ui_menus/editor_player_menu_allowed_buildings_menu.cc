@@ -74,7 +74,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
    m_rtl_button=b;
 
    // Fill the lists
-   Tribe_Descr* t=player->get_tribe();
+	const Tribe_Descr* t=player->get_tribe();
    int i;
    for(i=0; i<t->get_nrbuildings(); i++) {
       Building_Descr* b=t->get_building_descr(i);
