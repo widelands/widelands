@@ -492,7 +492,7 @@ void ProductionSite::request_worker_callback
    if(psite->can_start_working()) {
       if(w!=psite->m_workers[0])
          psite->m_workers[0]->send_signal(g, "wakeup");
-      psite->m_workers[0]->start_task_buildingwork(g);
+      psite->m_workers[0]->start_task_buildingwork();
    }
 }
 
@@ -1039,7 +1039,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 
 	if (m_fetchfromflag) {
 		m_fetchfromflag--;
-		w->start_task_fetchfromflag(g);
+		w->start_task_fetchfromflag();
 		return true;
 	}
 
@@ -1056,7 +1056,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		if (action->type == ProductionAction::actWorker) {
 			if (state->phase == 0)
 			{
-				w->start_task_program(g, action->sparam1);
+				w->start_task_program(action->sparam1);
 				state->phase++;
 				return true;
 			}

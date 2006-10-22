@@ -426,7 +426,7 @@ private:
 class Supply : public Trackable {
 public:
 	virtual PlayerImmovable* get_position(Game* g) = 0;
-	virtual int get_amount(Game* g, int ware) = 0;
+	virtual int get_amount(const int ware) const = 0;
 	virtual bool is_active(Game* g) = 0;
 
 	virtual WareInstance* launch_item(Game* g, int ware) = 0;

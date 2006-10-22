@@ -63,7 +63,7 @@ public:
 
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int get_amount(Game* g, int ware);
+	virtual int get_amount(const int ware) const;
 	virtual bool is_active(Game* g);
 
 	virtual WareInstance* launch_item(Game* g, int ware);
@@ -152,7 +152,7 @@ PlayerImmovable* IdleWareSupply::get_position(Game* g)
 IdleWareSupply::get_amount
 ===============
 */
-int IdleWareSupply::get_amount(Game *, int ware)
+int IdleWareSupply::get_amount(const int ware) const
 {return (ware == m_ware->get_ware()) ? 1 : 0;}
 
 
@@ -1294,7 +1294,7 @@ void Flag::flag_job_request_callback
 
 		delete rq;
 
-		w->start_task_program(g, it->program);
+		w->start_task_program(it->program);
 
 		flag->m_flag_jobs.erase(it);
 		return;

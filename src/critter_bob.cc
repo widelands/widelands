@@ -298,15 +298,11 @@ Critter_Bob::start_task_program
 Start the given program.
 ===============
 */
-void Critter_Bob::start_task_program(Game* g, std::string name)
-{
-	State* state;
-
-	push_task(g, &taskProgram);
-
-	state = get_state();
-	state->program = get_descr()->get_program(name);
-	state->ivar1 = 0;
+void Critter_Bob::start_task_program(const std::string & name) {
+	push_task(taskProgram);
+	State & state = top_state();
+	state.program = get_descr()->get_program(name);
+	state.ivar1   = 0;
 }
 
 
@@ -326,7 +322,7 @@ void Critter_Bob::program_update(Game* g, State* state)
 
 		if (state->ivar1 >= program->get_size()) {
 			molog("  End of program\n");
-			pop_task(g);
+			pop_task();
 			return;
 		}
 
@@ -343,10 +339,9 @@ void Critter_Bob::program_update(Game* g, State* state)
 Critter_Bob::program_signal
 ===============
 */
-void Critter_Bob::program_signal(Game * g, State *)
-{
+void Critter_Bob::program_signal(Game *, State *) {
 	molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
-	pop_task(g);
+	pop_task();
 }
 
 
@@ -403,13 +398,11 @@ void Critter_Bob::roam_update(Game* g, State* state)
 	}
 }
 
-void Critter_Bob::roam_signal(Game * g, State *) {pop_task(g);}
+void Critter_Bob::roam_signal(Game *, State *) {pop_task();}
 
-void Critter_Bob::init_auto_task(Game* g)
-{
-	push_task(g, &taskRoam);
-
-	get_state()->ivar1 = 0;
+void Critter_Bob::init_auto_task(Game *) {
+	push_task(taskRoam);
+	top_state().ivar1 = 0;
 }
 
 Bob *Critter_Bob_Descr::create_object()

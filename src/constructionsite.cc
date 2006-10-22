@@ -384,7 +384,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
       if(g->get_objects()->object_still_available(m_builder)) {
          m_builder->reset_tasks((Game*)g);
          m_builder->set_location(bld);
-         m_builder->start_task_gowarehouse((Game*)g);
+         m_builder->start_task_gowarehouse();
       }
 	}
 }
@@ -443,7 +443,7 @@ void ConstructionSite::request_builder_callback
 	delete rq;
 	cs->m_builder_request = 0;
 
-	w->start_task_buildingwork(g);
+	w->start_task_buildingwork();
 }
 
 
@@ -495,7 +495,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	// Fetch items from flag
 	if (m_fetchfromflag) {
 		m_fetchfromflag--;
-		w->start_task_fetchfromflag(g);
+		w->start_task_fetchfromflag();
 		return true;
 	}
 

@@ -144,7 +144,7 @@ public:
 
 public: // Supply implementation
 	virtual PlayerImmovable* get_position(Game* g);
-	virtual int get_amount(Game* g, int ware);
+	virtual int get_amount(const int ware) const;
 	virtual bool is_active(Game* g);
 
 	virtual WareInstance* launch_item(Game* g, int ware);

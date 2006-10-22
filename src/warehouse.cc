@@ -231,10 +231,8 @@ WarehouseSupply::get_amount
 Return our stock of the given ware.
 ===============
 */
-int WarehouseSupply::get_amount(Game* g, int ware)
-{
-	return m_wares.stock(ware);
-}
+int WarehouseSupply::get_amount(const int ware) const
+{return m_wares.stock(ware);}
 
 
 /*
@@ -668,15 +666,13 @@ Launch a carrier to fetch an item from our flag.
 bool Warehouse::fetch_from_flag(Game* g)
 {
 	int carrierid;
-	Worker* worker;
 
 	carrierid = get_owner()->get_tribe()->get_safe_worker_index("carrier");
 
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
 
-	worker = launch_worker(g, carrierid);
-	worker->start_task_fetchfromflag(g);
+	launch_worker(g, carrierid)->start_task_fetchfromflag();
 
 	return true;
 }

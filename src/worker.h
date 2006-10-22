@@ -87,9 +87,10 @@ class Worker_Descr : public Bob_Descr {
    inline std::string get_helptext() const { return m_helptext; }
 
 	uint get_menu_pic() const throw () {return m_menu_pic;}
-	const DirAnimations *get_walk_anims() const throw () {return &m_walk_anims;}
-	const DirAnimations *get_right_walk_anims(const bool carries_ware) const throw ()
-	{return carries_ware ? &m_walkload_anims : &m_walk_anims;}
+	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
+	const DirAnimations & get_right_walk_anims(const bool carries_ware) const
+		throw ()
+	{return carries_ware ? m_walkload_anims : m_walk_anims;}
    const WorkerProgram* get_program(std::string name) const;
 
    virtual Worker_Type get_worker_type(void) const { return NORMAL; }
@@ -187,21 +188,22 @@ class Worker : public Bob {
    void start_task_transfer(Game* g, Transfer* t);
    void cancel_task_transfer(Game* g);
 
-   void start_task_buildingwork(Game* g);
+   void start_task_buildingwork();
    void update_task_buildingwork(Game* g);
 
    void start_task_return(Game* g, bool dropitem);
-   void start_task_program(Game* g, std::string name);
+	void start_task_program(const std::string & name);
 
-   virtual void start_task_gowarehouse(Game* g);
+   virtual void start_task_gowarehouse();
    void start_task_dropoff(Game* g, WareInstance* item);
-   void start_task_fetchfromflag(Game* g);
+	void start_task_fetchfromflag();
 
    bool start_task_waitforcapacity(Game* g, Flag* flag);
    void start_task_leavebuilding(Game* g, bool changelocation);
    void start_task_fugitive(Game* g);
 
-   void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
+	void start_task_geologist
+		(const int attempts, const int radius, const std::string & subcommand);
 
 
    private: // task details

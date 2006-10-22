@@ -39,7 +39,7 @@ class Critter_Bob_Descr : public Bob_Descr {
       Bob *create_object();
 
 	bool is_swimming() const throw () {return m_swimming;}
-	const DirAnimations* get_walk_anims() const throw () {return &m_walk_anims;}
+	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	const char* get_descname() const throw () {return m_descname.c_str();}
 
       const Critter_BobProgram* get_program(std::string name) const;
@@ -66,7 +66,7 @@ public:
 
 	virtual void init_auto_task(Game* g);
 
-	void start_task_program(Game* g, std::string name);
+	void start_task_program(const std::string & name);
 	const char * get_descname() const throw () {return get_descr()->get_descname();}
 
 private:

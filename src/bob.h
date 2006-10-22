@@ -102,7 +102,7 @@ public:
 	};
 
 	struct State {
-		Task*				task;
+		const Task * task;
 		int				ivar1;
 		int				ivar2;
 		int				ivar3;
@@ -136,8 +136,8 @@ public:
 
 	void schedule_destroy(Game* g);
 	void schedule_act(Game* g, uint tdelta);
-	void skip_act(Game* g);
-	void force_skip_act(Game* g);
+	void skip_act        ();
+	void force_skip_act  ();
 
 	Point calc_drawpos(const Editor_Game_Base &, const Point) const;
 	virtual void draw
@@ -164,31 +164,31 @@ public: // default tasks
 		(Game*,
 		 const Coords dest,
 		 const int persist,
-		 const DirAnimations *anims,
+		 const DirAnimations &,
 		 const bool forceonlast = false,
 		 const int only_step = -1);
 	void start_task_movepath
-		(Game*,
-		 const Path & path,
-		 const DirAnimations *anims,
+		(const Path &,
+		 const DirAnimations &,
 		 const bool forceonlast = false,
 		 const int only_step = -1);
 	bool start_task_movepath
-		(Game* g,
-		 const Path & path,
+		(const Path &,
 		 const int index,
-		 const DirAnimations* anims,
+		 const DirAnimations &,
 		 const bool forceonlast = false,
 		 const int only_step = -1);
-	void start_task_forcemove(Game*, const int dir, const DirAnimations *anims);
+	void start_task_forcemove(const int dir, const DirAnimations &);
 
 protected: // higher level handling (task-based)
 	inline State* get_state() { return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0; }
+	State & top_state()
+	{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
 	inline std::string get_signal() { return m_signal; }
 	State* get_state(Task* task);
 
-	void push_task(Game*, Task* task);
-	void pop_task(Game*);
+	void push_task(const Task & task);
+	void pop_task();
 	void set_signal(std::string sig);
 
 	virtual void init_auto_task(Game*);
@@ -197,7 +197,7 @@ protected: // low level animation and walking handling
 	void set_animation(Editor_Game_Base* g, uint anim);
 
 	int start_walk(Game* g, WalkingDir dir, uint anim, bool force = false);
-	void end_walk(Game* g);
+	void end_walk();
 	bool is_walking();
 
 private:

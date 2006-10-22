@@ -170,7 +170,7 @@ public:
 	bool is_marked ()	 const {return m_marked;}
 	void mark (const bool b) {m_marked = b;}
 public: // Worker-specific redefinitions
-   virtual void start_task_gowarehouse(Game* g);
+	virtual void start_task_gowarehouse();
 
       /// Task that move the soldier to a combat target flag position
    void start_task_launchattack(Game*, Flag*);
