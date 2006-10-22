@@ -59,7 +59,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    int posy=offsy;
    m_w=0; m_h=0;
    sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
-   m_width=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
+   m_width=new UITextarea(this, posx+spacing+20, posy, buf, Align_Left);
    UIButton* b = new UIButton(this, posx, posy, 20, 20, 1, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
@@ -69,7 +69,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    posy+=20+spacing+spacing;
 
    sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
-   m_height=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
+   m_height=new UITextarea(this, posx+spacing+20, posy, buf, Align_Left);
    b = new UIButton(this, posx, posy, 20, 20, 1, 2);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);

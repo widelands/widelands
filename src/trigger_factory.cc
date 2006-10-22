@@ -31,12 +31,14 @@
 #include "wexception.h"
 
 static const int nr_of_triggers=3;
-
+// Translations of names and/or description of triggers does not work with _("xxxxx").c_str() - it ends in queer asci-symbols
+// So I disabled it - Nasenbaer
+// ToDo make it translateable again
 Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
-	{ "time", _("Time Trigger").c_str(), _("This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events").c_str() },
-	{ "null", _("Null Trigger").c_str(), _("This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers").c_str() },
-	{ "building", _("Building Trigger").c_str(), _("This trigger gets set when a number of a building type of one player is available in an area.").c_str() },
-/*   { TRIGGER_OWN_AREA, _("Own Area Trigger"), _("This Trigger gets set when the configured field is owned by the configured player. If it isn't a one timer it unsets itself again when the area is no longer owned by the player and resets itselt when it is again") },*/
+	{ "time", "Time Trigger", "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events" },
+	{ "null", "Null Trigger", "This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers" },
+	{ "building", "Building Trigger", "This trigger gets set when a number of a building type of one player is available in an area." },
+/*   { TRIGGER_OWN_AREA, "Own Area Trigger"), "This Trigger gets set when the configured field is owned by the configured player. If it isn't a one timer it unsets itself again when the area is no longer owned by the player and resets itselt when it is again") },*/
 };
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,10 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UIUniqueW
 {
    m_parent=parent;
 
-   new UITextarea(this, 15, 5, _("Set Tool Size Menu"), Align_Left);
+   new UITextarea(this, 15, 0, _("Set Tool Size Menu"), Align_Left);
    char buf[250];
-   sprintf(buf, "Current Size: %i", m_parent->get_fieldsel_radius()+1);
-   m_textarea=new UITextarea(this, 25, 25, buf);
+   sprintf(buf, _("Current Size: %i").c_str(), m_parent->get_fieldsel_radius()+1);
+   m_textarea=new UITextarea(this, 25, 20, buf);
 
    int bx=60;
    UIButton* b = new UIButton(this, bx, 40, 20, 20, 0, 0);

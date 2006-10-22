@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,20 +50,20 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    const int height=20;
    int posx=offsx;
    int posy=offsy;
-   UITextarea* ta= new UITextarea(this, posx, posy+5, _("Map Name:"), Align_Left);
+   UITextarea* ta= new UITextarea(this, posx, posy-2, _("Map Name:"), Align_Left);
    m_name=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
    m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, _("Size:"));
-   m_size=new UITextarea(this, posx+ta->get_w()+spacing, posy+5, "512x512", Align_Left);
+   ta=new UITextarea(this, posx, posy-2, _("Size:"));
+   m_size=new UITextarea(this, posx+ta->get_w()+spacing, posy-2, "512x512", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, _("Nr Players:"));
-   m_nrplayers=new UITextarea(this, posx+ta->get_w()+spacing, posy+5, "4", Align_Left);
+   ta=new UITextarea(this, posx, posy-2, _("Nr Players:"));
+   m_nrplayers=new UITextarea(this, posx+ta->get_w()+spacing, posy-2, "1", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, _("World:"));
-   m_world=new UITextarea(this, posx+ta->get_w()+spacing, posy+5, "\"Greenland\"", Align_Left);
+   ta=new UITextarea(this, posx, posy-2, _("World:"));
+   m_world=new UITextarea(this, posx+ta->get_w()+spacing, posy-2, "\"Greenland\"", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, _("Author:"), Align_Left);
+   ta=new UITextarea(this, posx, posy-2, _("Author:"), Align_Left);
    m_author=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;

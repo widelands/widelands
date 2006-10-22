@@ -58,7 +58,7 @@ private:
 	
 	/** Returns the width of a button in a row with nr_buttons buttons. */
 	uint buttonw(const uint nr_buttons) const
-	{return (get_inner_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;}
+	{return (get_inner_w() * 1.45 - (nr_buttons + 3) * hspacing()) / nr_buttons;}
 	
 	/**
 	 * Returns the x coordinate of the (left edge of) button number nr in a row

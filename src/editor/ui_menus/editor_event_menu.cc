@@ -50,7 +50,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 560, 300, _("Event Menu"))
+	: UIUniqueWindow(parent, registry, 620, 400, _("Event Menu"))
 {
    m_parent=parent;
 
@@ -63,7 +63,7 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    const int spacing=5;
    int posx=offsx;
    int posy=offsy;
-   const int ls_width = 180;
+   const int ls_width = 200;
 
    // EventChain List
    new UITextarea(this, posx, offsy, _("Event Chains: "), Align_Left);
@@ -88,47 +88,47 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
 
    posy=get_inner_h()-30;
    posx=spacing;
-   UIButton* b=new UIButton(this, posx, posy, 80, 20, 4, 6);
+   UIButton* b=new UIButton(this, posx, posy, 90, 20, 4, 6);
    b->set_title(_("New Event Chain").c_str());
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
-   posx+=80+spacing;
-   m_btn_edit_eventchain=new UIButton(this, posx, posy, 45, 20, 0, 8);
+   posx+=90+spacing;
+   m_btn_edit_eventchain=new UIButton(this, posx, posy, 50, 20, 0, 8);
    m_btn_edit_eventchain->set_title(_("Edit").c_str());
    m_btn_edit_eventchain->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_eventchain->set_enabled(false);
-   posx+=45+spacing;
-   m_btn_del_eventchain=new UIButton(this, posx, posy, 45, 20, 0, 7);
+   posx+=50+spacing;
+   m_btn_del_eventchain=new UIButton(this, posx, posy, 50, 20, 0, 7);
    m_btn_del_eventchain->set_title(_("Del").c_str());
    m_btn_del_eventchain->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_eventchain->set_enabled(false);
 
    posx=spacing + ls_width + spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 4, 0);
+   b=new UIButton(this, posx, posy, 90, 20, 4, 0);
    b->set_title(_("New Event").c_str());
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
-   posx+=80+spacing;
-   m_btn_edit_event=new UIButton(this, posx, posy, 45, 20, 0, 2);
+   posx+=90+spacing;
+   m_btn_edit_event=new UIButton(this, posx, posy, 50, 20, 0, 2);
    m_btn_edit_event->set_title(_("Edit").c_str());
    m_btn_edit_event->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_event->set_enabled(false);
-   posx+=45+spacing;
-   m_btn_del_event=new UIButton(this, posx, posy, 45, 20, 0, 1);
+   posx+=50+spacing;
+   m_btn_del_event=new UIButton(this, posx, posy, 50, 20, 0, 1);
    m_btn_del_event->set_title(_("Del").c_str());
    m_btn_del_event->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_event->set_enabled(false);
 
 
    posx= 3* spacing + 2*ls_width;
-   b=new UIButton(this, posx, posy, 80, 20, 4, 3);
+   b=new UIButton(this, posx, posy, 90, 20, 4, 3);
    b->set_title(_("New Trigger").c_str());
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
-   posx+=80+spacing;
-   m_btn_edit_trigger=new UIButton(this, posx, posy, 45, 20, 0, 4);
+   posx+=90+spacing;
+   m_btn_edit_trigger=new UIButton(this, posx, posy, 50, 20, 0, 4);
    m_btn_edit_trigger->set_title(_("Edit").c_str());
    m_btn_edit_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_trigger->set_enabled(false);
-   posx+=45+spacing;
-   m_btn_del_trigger=new UIButton(this, posx, posy, 45, 20, 0, 5);
+   posx+=50+spacing;
+   m_btn_del_trigger=new UIButton(this, posx, posy, 50, 20, 0, 5);
    m_btn_del_trigger->set_title(_("Del").c_str());
    m_btn_del_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_trigger->set_enabled(false);
