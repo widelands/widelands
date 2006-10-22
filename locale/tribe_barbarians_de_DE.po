@@ -1,21 +1,24 @@
+# translation of tribe_barbarians_de_DE.po to German
 # Widelands tribe_barbarians po-File -> German.
 # Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 #
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
+# Philipp Niemann <widelands@azagtoth.de>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: tribe_barbarians_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-06-13 21:30+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-10-22 05:45+0200\n"
+"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: ../tribes/barbarians/conf:24
 msgid "The Widelands Development Team"
@@ -27,7 +30,7 @@ msgstr "Barbaren"
 
 #: ../tribes/barbarians/conf:26
 msgid "The mighty tribes of the east-lands!"
-msgstr "Die mächtigen Stämme des Ostens"
+msgstr "Die mächtigen Stämme des Ostens!"
 
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
@@ -75,7 +78,7 @@ msgstr "Kohlenmine"
 
 #: ../tribes/barbarians/buildings/constructionsite/conf:5
 msgid "Construction Site"
-msgstr "Bauplatz"
+msgstr "Baustelle"
 
 #: ../tribes/barbarians/buildings/deep_coalmine/conf:2
 msgid "Deep Coal Mine"
@@ -141,6 +144,11 @@ msgstr "Holzhärter"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmschmied"
+
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Jägerhütte"
@@ -148,6 +156,11 @@ msgstr "Jägerhütte"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Wirtshaus"
+
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Holzfäller"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -351,7 +364,7 @@ msgstr "Starkbier"
 
 #: ../tribes/barbarians/wares/thatchreed/conf:2
 msgid "Thatch Reed"
-msgstr "Schilf"
+msgstr "Dachschilf"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -421,11 +434,6 @@ msgstr "Wildhüter"
 msgid "Geologist"
 msgstr "Geologe"
 
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Helmschmied"
-
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jäger"
@@ -434,18 +442,13 @@ msgstr "Jäger"
 msgid "Innkeeper"
 msgstr "Wirt"
 
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Holzfäller"
-
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
 msgstr "Meisterschmied"
 
 #: ../tribes/barbarians/workers/master-brewer/conf:2
 msgid "Master Brewer"
-msgstr "Brauer Meister"
+msgstr "Braumeister"
 
 #: ../tribes/barbarians/workers/master-miner/conf:2
 msgid "Master Miner"
@@ -478,7 +481,3 @@ msgstr "Trainer"
 #: ../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Weber"
-
-#~ msgid "barbarians"
-#~ msgstr "Barbaren"
-

@@ -1,33 +1,36 @@
+# translation of tribe_empire_de_DE.po to German
 # Widelands tribe_barbarians po-File -> German.
 # Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 #
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
+# Philipp Niemann <widelands@azagtoth.de>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: tribe_empire_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-06-26 20:41+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-10-22 05:49+0200\n"
+"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+"X-Generator: KBabel 1.11.2\n"
 
-#: ../tribes/empire/conf:28
+#: ../tribes/empire/conf:24
 msgid "The Widelands Development Team"
 msgstr "Das Widelands Entwicklungsteam"
 
-#: ../tribes/empire/conf:29
+#: ../tribes/empire/conf:25
 msgid "The Empire"
 msgstr "Das Imperium"
 
-#: ../tribes/empire/conf:30
+#: ../tribes/empire/conf:26
 msgid "This is the culture of the roman Empire."
-msgstr "Dies ist die Kultur des römischen Imperiums"
+msgstr "Dies ist die Kultur des römischen Imperiums."
 
 #: ../tribes/empire/buildings/arena/conf:2
 msgid "Arena"
@@ -71,7 +74,7 @@ msgstr "Kolosseum"
 
 #: ../tribes/empire/buildings/constructionsite/conf:5
 msgid "Construction Site"
-msgstr "Bauplatz"
+msgstr "Baustelle"
 
 #: ../tribes/empire/buildings/deep_coalmine/conf:2
 msgid "Deep Coal Mine"
@@ -99,7 +102,7 @@ msgstr "Fischerhütte"
 
 #: ../tribes/empire/buildings/forester/conf:2
 msgid "Forester Hut"
-msgstr "Förster Hütte"
+msgstr "Försterhütte"
 
 #: ../tribes/empire/buildings/fortress/conf:2
 msgid "Fortress"
@@ -219,7 +222,7 @@ msgstr "Brot"
 
 #: ../tribes/empire/wares/chain_armour/conf:2
 msgid "Chain-Armour"
-msgstr "Ketten-Harnisch"
+msgstr "Kettenharnisch"
 
 #: ../tribes/empire/wares/cloth/conf:2
 msgid "Cloth"
@@ -315,7 +318,7 @@ msgstr "Spitzhacke"
 
 #: ../tribes/empire/wares/plate_armour/conf:2
 msgid "Plate-Armour"
-msgstr "Platten-Harnisch"
+msgstr "Plattenharnisch"
 
 #: ../tribes/empire/wares/ration/conf:2
 msgid "Ration"
@@ -343,7 +346,7 @@ msgstr "Stamm"
 
 #: ../tribes/empire/wares/war_lance/conf:2
 msgid "War-Lance"
-msgstr "Kriegs-Lanze"
+msgstr "Kriegslanze"
 
 #: ../tribes/empire/wares/water/conf:2
 msgid "Water"
@@ -363,7 +366,7 @@ msgstr "Holz"
 
 #: ../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
-msgstr "Holz-Lanze"
+msgstr "Holzlanze"
 
 #: ../tribes/empire/wares/wool/conf:2
 msgid "Wool"
@@ -476,4 +479,4 @@ msgstr "Weber"
 #: ../tribes/empire/workers/wine-grower/conf:2
 #: ../tribes/empire/buildings/wine-grower/conf:2
 msgid "Wine-Grower"
-msgstr "Wein-Bauer"
+msgstr "Winzer"

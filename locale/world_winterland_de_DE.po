@@ -119,8 +119,12 @@ msgid "Winterland"
 msgstr "Winterland"
 
 #: ../worlds/winterland/conf:4
-msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
-msgstr "Dies ist das weite, weiße und frostige Winterland, in dem die Nordmänner hausen."
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+"Dies ist das weite, weiße und frostige Winterland, in dem die Nordmänner "
+"hausen."
 
 #: ../worlds/winterland/resconf:4
 msgid "Coal"
@@ -145,4 +149,3 @@ msgstr "Wasser"
 #: ../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Fisch"
-
