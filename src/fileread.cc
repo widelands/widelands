@@ -56,18 +56,8 @@ void FileRead::Open(FileSystem & fs, const char * const filename)
 /**
  * Works just like Open, but returns false when the load fails.
  */
-bool FileRead::TryOpen(FileSystem & fs, const char * const filename)
-{
-	assert(!data);
-
-	try {
-		data = fs.Load(filename, &length);
-		filepos = 0;
-	} catch(std::exception &e) {
-		//log("%s\n", e.what());
-		return false;
-	}
-
+bool FileRead::TryOpen(FileSystem & fs, const char * const filename) {
+	try {Open(fs, filename);} catch (const std::exception & e) {return false;}
 	return true;
 }
 
