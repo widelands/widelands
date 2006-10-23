@@ -25,12 +25,7 @@
 #include "sound_handler.h"
 
 /// Prepare infrastructure for reading song files from disk
-Songset::Songset()
-{
-	m_fr = new FileRead();
-	m_rwops = NULL;
-	m_m = NULL;
-}
+Songset::Songset() : m_rwops(0), m_m(0) {}
 
 /// Close and delete all songs to avoid memory leaks.
 Songset::~Songset()
@@ -42,8 +37,6 @@ Songset::~Songset()
 
 	if (m_rwops)		//rwops might be NULL
 		SDL_FreeRW(m_rwops);
-
-	delete m_fr;
 }
 
 /** Append a song to the end of the songset
@@ -88,12 +81,12 @@ Mix_Music *Songset::get_song()
 
 	if (m_rwops) {		//rwops might be NULL
 		SDL_FreeRW(m_rwops);
-		m_fr->Close(); //just in case, no-op if already closed
+		m_fr.Close();
 	}
 
 	//then open the new song
-	if (m_fr->TryOpen(*g_fs, filename.c_str()))
-		m_rwops = SDL_RWFromMem(m_fr->Data(0), m_fr->GetSize());
+	if (m_fr.TryOpen(*g_fs, filename.c_str()))
+		m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize());
 	else
 		return NULL;
 
@@ -120,7 +113,7 @@ Mix_Music *Songset::get_song()
     tempfile = mktemp(tempfilebuf);
 
     FILE* f = fopen( tempfile, "w" );
-    fwrite( m_fr->Data(0), m_fr->GetSize(), 1, f);
+	fwrite(m_fr.Data(0), m_fr.GetSize(), 1, f);
     fclose( f );
 
 	m_m = Mix_LoadMUS(tempfile);

@@ -61,12 +61,12 @@ protected:
 	/// The current song
 	Mix_Music *m_m;
 
-	/** File reader object to fetch songs from disc when they start playing.
+	/** File reader object to fetch songs from disk when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
 	 * \sa m_rwops
 	 * \sa get_song()
 	 */
-	FileRead *m_fr;
+	FileRead m_fr;
 
 	/** RWops object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
