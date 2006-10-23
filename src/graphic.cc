@@ -1395,10 +1395,10 @@ Returns 0 (a null-picture) if the picture cannot be loaded.
 */
 uint GraphicImpl::get_picture(int mod, const char* fname )
 {
-	uint id;
+	std::vector<Picture>::size_type id;
 
-	// Check if the picture's already loaded
-	picmap_t::iterator it = m_picturemap.find(fname);
+	//  Check if the picture is already loaded.
+	const picmap_t::const_iterator it = m_picturemap.find(fname);
 
 	if (it != m_picturemap.end())
 	{
@@ -1419,26 +1419,23 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 			return 0;
 		}
 
-		// Fill in a free slot in the pictures array
-		Picture* pic;
-
-		id = find_free_picture();
-		pic = &m_pictures[id];
-
       // Convert the surface accordingly
 		SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp ); //  FIXME memory leak!
+		SDL_FreeSurface(bmp);
 
       if( !use_surface )
          throw wexception("GraphicImpl::get_picture(): no success in converting loaded surface!\n");
 
-      SDL_FreeSurface( bmp );
+		// Fill in a free slot in the pictures array
+		id = find_free_picture();
+		Picture & pic = m_pictures[id];
+		pic.mod       = 0; // will be filled in by caller
+		pic.u.fname   = strdup(fname); //  FIXME memory leak!
+		assert(pic.u.fname); //  FIXME no proper check for NULL return value!
+		pic.surface   = new Surface(); //  FIXME memory leak!
+		pic.surface->set_sdl_surface(use_surface);
 
-		pic->mod = 0; // will be filled in by caller
-		pic->u.fname = strdup(fname); //  FIXME memory leak!
-		pic->surface = new Surface(); //  FIXME memory leak!
-      pic->surface->set_sdl_surface( use_surface );
-
-		m_picturemap[pic->u.fname] = id;
+		m_picturemap[fname] = id;
    }
 
 	m_pictures[id].mod |= mod;
@@ -1448,15 +1445,14 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 
 uint GraphicImpl::get_picture(int mod, Surface* surf, const char* fname )
 {
-	uint id = find_free_picture();
-	Picture* pic = &m_pictures[id];
-   pic->mod = mod;
-   pic->surface = surf;
+	const std::vector<Picture>::size_type id = find_free_picture();
+	Picture & pic = m_pictures[id];
+   pic.mod       = mod;
+   pic.surface   = surf;
    if( fname ) {
-      pic->u.fname = strdup( fname );
-		m_picturemap[pic->u.fname] = id;
-   } else
-      pic->u.fname =  0;
+		pic.u.fname = strdup(fname);
+		m_picturemap[fname] = id;
+   } else pic.u.fname =  0;
 
 	return id;
 }
@@ -1496,17 +1492,17 @@ Note that surfaces do not belong to a module and must be freed explicitly.
 */
 uint GraphicImpl::create_surface(int w, int h)
 {
-	uint id = find_free_picture();
-	Picture* pic = &m_pictures[id];
 
    SDL_Surface* surf = SDL_CreateRGBSurface( SDL_SWSURFACE, w, h, m_screen.get_format()->BitsPerPixel,
          m_screen.get_format()->Rmask, m_screen.get_format()->Gmask, m_screen.get_format()->Bmask,
          m_screen.get_format()->Amask);
 
-	pic->mod = -1; // mark as surface
-	pic->surface = new Surface();
-   pic->surface->set_sdl_surface( surf );
-	pic->u.rendertarget = new RenderTargetImpl(pic->surface);
+	const std::vector<Picture>::size_type id = find_free_picture();
+	Picture & pic = m_pictures[id];
+	pic.mod       = -1; // mark as surface
+	pic.surface   = new Surface();
+	pic.surface->set_sdl_surface(surf);
+	pic.u.rendertarget = new RenderTargetImpl(pic.surface);
 
 	return id;
 }
@@ -1778,11 +1774,9 @@ Find a free picture slot and return it.
 */
 uint GraphicImpl::find_free_picture()
 {
-	uint id;
-
-	for(id = 1; id < m_pictures.size(); id++)
-		if (!m_pictures[id].mod)
-			return id;
+	const std::vector<Picture>::size_type pictures_size = m_pictures.size();
+	std::vector<Picture>::size_type id = 1;
+	for (; id < pictures_size; ++id) if (m_pictures[id].mod == 0) return id;
 
 	m_pictures.resize(id+1);
 

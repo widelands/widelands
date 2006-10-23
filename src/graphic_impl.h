@@ -363,8 +363,6 @@ private:
    // Static function for png writing
    static void m_png_write_function( png_structp, png_bytep, png_size_t );
 
-	uint find_free_picture();
-
 	struct Picture {
 		int		mod; // 0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
 		Surface*  surface;
@@ -376,7 +374,10 @@ private:
 
 		Picture() { surface = 0; mod = 0; u.fname = 0; }
 	};
-	typedef std::map<std::string, uint> picmap_t;
+
+	std::vector<Picture>::size_type find_free_picture();
+
+	typedef std::map<std::string, std::vector<Picture>::size_type> picmap_t;
 
 	Surface              m_screen;
 	RenderTargetImpl*		m_rendertarget;
