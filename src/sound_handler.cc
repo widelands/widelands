@@ -711,23 +711,19 @@ void Sound_Handler::music_finished_callback()
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
-	//special case for splashscreen: there, only one song is ever played
+	SDL_Event event;
 	if (g_sound_handler.m_current_songset == "intro") {
-		SDL_Event *e = new SDL_Event();
-
-		e->type = SDL_KEYDOWN;
-		e->key.state = SDL_PRESSED;
-		e->key.keysym.sym = SDLK_ESCAPE;
-		SDL_PushEvent(e);
+		//special case for splashscreen: there, only one song is ever played
+		event.type           = SDL_KEYDOWN;
+		event.key.state      = SDL_PRESSED;
+		event.key.keysym.sym = SDLK_ESCAPE;
 	} else {
 		//else just play the next song - see general description for
 		//further explanation
-		SDL_Event *e = new SDL_Event(); //  FIXME memory leak!
-
-		e->type = SDL_USEREVENT;
-		e->user.code = SOUND_HANDLER_CHANGE_MUSIC;
-		SDL_PushEvent(e);
+		event.type           = SDL_USEREVENT;
+		event.user.code      = SOUND_HANDLER_CHANGE_MUSIC;
 	}
+	SDL_PushEvent(&event);
 }
 
 /** Callback to notify \ref Sound_Handler that a sound effect has finished
