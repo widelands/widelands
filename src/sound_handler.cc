@@ -343,7 +343,7 @@ void Sound_Handler::load_one_fx
 		//make sure that requested FXset exists
 
 		if (m_fxs.count(fx_name) == 0)
-			m_fxs[fx_name] = new FXset();
+			m_fxs[fx_name] = new FXset(); //  FIXME memory leak!
 
 		m_fxs[fx_name]->add_fx(m);
 	} else {
@@ -570,7 +570,7 @@ void Sound_Handler::register_song
 			register_song(*i, basename, true);
 		} else {
 			if (m_songs.count(basename) == 0)
-				m_songs[basename] = new Songset();
+				m_songs[basename] = new Songset(); //  FIXME memory leak!
 
 			m_songs[basename]->add_song(*i);
 		}
@@ -722,7 +722,7 @@ void Sound_Handler::music_finished_callback()
 	} else {
 		//else just play the next song - see general description for
 		//further explanation
-		SDL_Event *e = new SDL_Event();
+		SDL_Event *e = new SDL_Event(); //  FIXME memory leak!
 
 		e->type = SDL_USEREVENT;
 		e->user.code = SOUND_HANDLER_CHANGE_MUSIC;

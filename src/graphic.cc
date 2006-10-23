@@ -1426,7 +1426,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 		pic = &m_pictures[id];
 
       // Convert the surface accordingly
-      SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp );
+		SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp ); //  FIXME memory leak!
 
       if( !use_surface )
          throw wexception("GraphicImpl::get_picture(): no success in converting loaded surface!\n");
@@ -1434,8 +1434,8 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
       SDL_FreeSurface( bmp );
 
 		pic->mod = 0; // will be filled in by caller
-		pic->u.fname = strdup(fname);
-		pic->surface = new Surface();
+		pic->u.fname = strdup(fname); //  FIXME memory leak!
+		pic->surface = new Surface(); //  FIXME memory leak!
       pic->surface->set_sdl_surface( use_surface );
 
 		m_picturemap[pic->u.fname] = id;

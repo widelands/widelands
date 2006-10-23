@@ -339,7 +339,7 @@ void *RealFSImpl::Load(std::string fname, int *length)
 		fseek(file, 0, SEEK_SET);
 
 		// allocate a buffer and read the entire file into it
-		data = malloc(size + 1);
+		data = malloc(size + 1); //  FIXME memory leak!
 		if (fread(data, size, 1, file) != 1)
 			throw wexception("Read failed for %s (%s)", fname.c_str(), fullname.c_str());
 		((char *)data)[size] = 0;

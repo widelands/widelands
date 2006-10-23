@@ -762,7 +762,7 @@ const bool WLApplication::init_hardware()
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
-	g_sound_handler.init();
+	g_sound_handler.init(); //  FIXME memory leak!
 
 	return true;
 }
