@@ -27,7 +27,7 @@
 #include "error.h"
 
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 /*
  * Destructor
@@ -59,28 +59,43 @@ throw (_wexception)
    // read packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      // Read all the seen_fields
-      Map* map=egbase->get_map();
-
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
-            ushort data=fr.Unsigned16();
-            if(!skip) {
-               for(uint i=0; i<egbase->get_map()->get_nrplayers(); i++) {
-                  Player* plr = egbase->get_player(i+1);
-                  if(plr)
-                     plr->set_area_seen(Coords(x,y), 0, data & ( 1 << i ));
-               }
-            }
-
-         }
-      }
-      return;
-   }
-   throw wexception("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %i\n", packet_version);
-
-   assert(0); // never here
+	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		compile_assert(MAX_PLAYERS < 32);
+		Map & map = egbase->map();
+		const Uint8 nr_players = map.get_nrplayers();
+		const Map::Index max_index = map.max_index();
+		if (skip) fr.Data
+			(max_index * (packet_version == 1 ? sizeof(Uint16) : sizeof(Uint32)));
+		else if (packet_version == 1) for (Map::Index i = 0; i < max_index; ++i) {
+			const Uint32 data = fr.Unsigned16();
+			for (Uint8 j = 0; j < nr_players;) {
+				const bool see = data & (1 << j);
+				++j;
+				if (Player * const player = egbase->get_player(j))
+					player->set_field_seen(i, see);
+				else if (see) log
+					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
+					 "%i, which does not exist, sees field %i.\n",
+					 j,
+					 i);
+			}
+		} else for (Map::Index i = 0; i < max_index; ++i) {
+			const Uint32 data = fr.Unsigned32();
+			for (Uint8 j = 0; j < nr_players;) {
+				const bool see = data & (1 << j);
+				++j;
+				if (Player * const player = egbase->get_player(j))
+					player->set_field_seen(i, see);
+				else if (see) log
+					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
+					 "%i, which does not exist, sees field %i.\n",
+					 j,
+					 i);
+			}
+		}
+	} else throw wexception
+		("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %i\n",
+		 packet_version);
 }
 
 /*
@@ -97,29 +112,19 @@ throw (_wexception)
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   /*
-    * Seen fields are written as followed. The map
-    * is passed, for each field it is checked if it
-    * is seen for every player. If it is, the players
-    * corresponding bit it set to true. The corresponding
-    * bit is  (1 << (PLAYER_NUMBER-1)). This is written
-    * out as Unsigned16 value, so if the allowed player
-    * number is sometime bigger than 16, this packet needs
-    * reworking
-    */
-   assert(MAX_PLAYERS < 16);
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         ushort data=0;
-         for(uint i=0; i<egbase->get_map()->get_nrplayers(); i++) {
-            Player* plr=egbase->get_player(i+1);
-            if(plr && plr->is_field_seen(Coords(x,y)))
-               data |= ( 1 << i );
-         }
-
-         fw.Unsigned16(data);
-      }
+	compile_assert(MAX_PLAYERS < 32);
+	Map & map = egbase->map();
+	const Uint8 nr_players = map.get_nrplayers();
+	const Map::Index max_index = map.max_index();
+	for (Map::Index i = 0; i < max_index; ++i) {
+		Uint32 data = 0;
+		for (Uint8 j = 0; j < nr_players;) {
+			const Uint8 player_index = j + 1;
+			if (const Player * const player = egbase->get_player(player_index))
+				data |= (player->is_field_seen(i) << j);
+			j = player_index;
+		}
+		fw.Unsigned32(data);
    }
 
    fw.Write( fs, "binary/seen_fields" );
