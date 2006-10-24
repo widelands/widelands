@@ -84,12 +84,15 @@ class Player {
       bool get_see_all(void) { return m_see_all; }
 
 		// See area
-		inline bool is_field_seen(int i) { if(m_see_all) return true; return seen_fields[i]; }
+	bool is_field_seen(const Map::Index i) const throw ()
+	{return m_see_all or seen_fields[i];}
 		inline bool is_field_seen(Coords c) { if(m_see_all) return true; return seen_fields[c.y*m_egbase->get_map()->get_width() + c.x]; }
 		inline bool is_field_seen(int x, int y) { if(m_see_all) return true; return is_field_seen(Coords(x, y)); }
 		inline std::vector<bool>* get_visibility() { if(m_see_all) return 0; return &seen_fields; }
       inline bool has_view_changed( void ) { bool t = m_view_changed; m_view_changed = false; return t; }
 
+	void set_field_seen(const Map::Index i, const bool seen) throw ()
+	{seen_fields[i] = seen;}
 		void set_area_seen(Coords c, uint area, bool on);
 
       // Allowed buildings
@@ -122,13 +125,6 @@ class Player {
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
 	private:
 		bool m_see_all;
-
-      // set functions
-		inline void set_field_seen(int i, bool t) { seen_fields[i]=t; }
-		inline void set_field_seen(Coords c, bool t) {
-			seen_fields[c.y*m_egbase->get_map()->get_width() + c.x]=t;
-		}
-
 		Editor_Game_Base*				m_egbase;
 		bool           m_view_changed;
       int				m_type;
