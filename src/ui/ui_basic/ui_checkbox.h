@@ -51,7 +51,7 @@ public:
 	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 
 private:
 	virtual void clicked() = 0;

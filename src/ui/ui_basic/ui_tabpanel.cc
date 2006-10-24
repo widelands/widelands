@@ -205,7 +205,7 @@ void UITab_Panel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-void UITab_Panel::handle_mousemove(int x, int y, int, int, uint) {
+void UITab_Panel::handle_mousemove(int x, int y, int, int) {
 	int hl;
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)
@@ -241,9 +241,8 @@ void UITab_Panel::handle_mousemove(int x, int y, int, int, uint) {
 /**
 Change the active tab if a tab button has been clicked
 */
-bool UITab_Panel::handle_mouseclick(uint btn, bool, int x, int y) {
-	if (btn == 0) // left mouse button
-		{
+bool UITab_Panel::handle_mouseclick(const Uint8 btn, const bool, int x, int y) {
+	if (btn == SDL_BUTTON_LEFT) {
 		int id;
 
 		if (y >= TP_BUTTON_HEIGHT)

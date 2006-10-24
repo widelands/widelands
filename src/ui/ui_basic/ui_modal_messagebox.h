@@ -38,7 +38,7 @@ class UIModal_Message_Box : public UIWindow {
       UIModal_Message_Box(UIPanel* parent, std::string caption, std::string text, MB_Type type);
       ~UIModal_Message_Box();
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 };
 
 #endif

@@ -169,9 +169,8 @@ void UIStatebox::handle_mousein(bool inside)
 /**
  * Left-click: Toggle checkbox state
  */
-bool UIStatebox::handle_mouseclick(uint btn, bool down, int, int) {
-	if (btn != 0)
-		return false;
+bool UIStatebox::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (down) {
 		if (m_enabled)

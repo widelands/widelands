@@ -61,7 +61,7 @@ public:
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
 
-	bool handle_mouseclick(uint btn, bool down, int mx, int my);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:

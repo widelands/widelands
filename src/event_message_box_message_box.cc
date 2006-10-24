@@ -87,9 +87,10 @@ UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
  * we might be a modal, therefore, if we are, we delete ourself through end_modal()
  * otherwise through die()
  */
-bool Message_Box_Event_Message_Box::handle_mouseclick(uint btn, bool, int, int)
+bool Message_Box_Event_Message_Box::handle_mouseclick
+(const Uint8 btn, const bool, int, int)
 {
-   if(btn == MOUSE_RIGHT) {
+	if (btn == SDL_BUTTON_RIGHT) {
       // We are not closable by right clicking
       // so that we are not closed by accidental scrolling
       return true;

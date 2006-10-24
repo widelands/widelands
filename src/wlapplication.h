@@ -38,9 +38,9 @@ public:
 
 // input
 struct InputCallback {
-	void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
-	void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
-	void (*key)(bool down, int code, char c);
+	void (*mouse_click)(const bool down, const Uint8 btn, int x, int y);
+	void (*mouse_move) (int x, int y, int xdiff, int ydiff);
+	void (*key)        (bool down, int code, char c);
 };
 
 /**
@@ -149,13 +149,11 @@ const bool should_die() {return m_should_die;}
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	const bool get_key_state(const int key) {return SDL_GetKeyState(0)[key];}
+	const bool get_key_state(const int key) const
+	{return SDL_GetKeyState(0)[key];}
 
 	//@{
 	void set_mouse_pos(const int x, const int y);
-
-	/// Which mouse buttons are or are not pressed?
-	const uint get_mouse_buttons() {return m_mouse_buttons;}
 
 	/// The mouse's current X coordinate
 	const int get_mouse_x() {return m_mouse_x;}
@@ -241,7 +239,6 @@ protected:
 
 	///Current state of the mouse buttons
 	///\todo Replace by direct calls to SDL functions???
-	uint		m_mouse_buttons;
 	int             m_mouse_x;              // mouse position seen by the outside
 	int		m_mouse_y;
 

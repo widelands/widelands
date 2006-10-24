@@ -38,7 +38,7 @@ class Editor_Event_Menu_Edit_EventChain : public UIWindow {
       Editor_Event_Menu_Edit_EventChain(Editor_Interactive*, EventChain* );
       ~Editor_Event_Menu_Edit_EventChain();
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
       void think( void );
 
    private:

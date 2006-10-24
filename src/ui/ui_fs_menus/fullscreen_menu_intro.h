@@ -32,7 +32,7 @@ public:
 	Fullscreen_Menu_Intro();
 
 protected:
-	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
+	virtual bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 	virtual bool handle_key(bool down, int code, char c);
 };
 

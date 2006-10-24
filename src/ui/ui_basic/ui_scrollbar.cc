@@ -335,41 +335,46 @@ void UIScrollbar::think()
 }
 
 
-bool UIScrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIScrollbar::handle_mouseclick
+(const Uint8 btn, const bool down, int x, int y)
 {
-	if (btn != 0) // only react on left button
-		return false;
+	bool result = false;
 
-	if (down)
-	{
-		m_pressed = get_area_for_point(x, y);
-		if (m_pressed != None) {
-			grab_mouse(true);
-
-			if (m_pressed != Knob)
-			{
-				action(m_pressed);
-				m_time_nextact = WLApplication::get()->get_time() + SCROLLBAR_AUTOREPEAT_DELAY;
+	switch (btn) {
+	case SDL_BUTTON_LEFT:
+		if (down) {
+			m_pressed = get_area_for_point(x, y);
+			if (m_pressed != None) {
+				grab_mouse(true);
+				if (m_pressed != Knob) {
+					action(m_pressed);
+					m_time_nextact =
+						WLApplication::get()->get_time() + SCROLLBAR_AUTOREPEAT_DELAY;
+				}
+				else m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
 			}
-			else
-			{
-				int grabpos = m_horizontal ? x : y;
-
-				m_knob_grabdelta = grabpos - get_knob_pos();
+		} else {
+			if (m_pressed != None) {
+				grab_mouse(false);
+				m_pressed = None;
 			}
 		}
+		result = true;
+		break;
+
+	case SDL_BUTTON_WHEELUP:
+		if (down) action(Minus);
+		result = true;
+		break;
+
+	case SDL_BUTTON_WHEELDOWN:
+		if (down) action(Plus);
+		result = true;
+		break;
 	}
-	else
-	{
-		if (m_pressed != None) {
-         grab_mouse(false);
-			m_pressed = None;
-      }
-   }
 
 	update(0, 0, get_w(), get_h());
-
-	return true;
+	return result;
 }
 
 

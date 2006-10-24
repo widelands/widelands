@@ -98,16 +98,21 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(const int argc, const char **argv):
-		m_commandline(std::map<std::string, std::string>()),
-		journal(0),
-		m_input_grab(false), m_mouse_swapped(false), m_mouse_speed(0.0),
-		m_mouse_buttons(0), m_mouse_x(0), m_mouse_y(0),
-		m_mouse_maxx(0), m_mouse_maxy(0), m_mouse_locked(0),
-		m_mouse_internal_x(0), m_mouse_internal_y(0),
-		m_mouse_internal_compx(0), m_mouse_internal_compy(0),
-		m_sdl_active(false), m_should_die(false),
-		m_gfx_w(0), m_gfx_h(0), m_gfx_fullscreen(false),
-		m_game(0)
+m_commandline(std::map<std::string, std::string>()),
+journal               (0),
+m_input_grab          (false),
+m_mouse_swapped       (false),
+m_mouse_speed         (0.0),
+m_mouse_x             (0),     m_mouse_y             (0),
+m_mouse_maxx          (0),     m_mouse_maxy          (0),
+m_mouse_locked        (0),
+m_mouse_internal_x    (0),     m_mouse_internal_y    (0),
+m_mouse_internal_compx(0),     m_mouse_internal_compy(0),
+m_sdl_active          (false),
+m_should_die          (false),
+m_gfx_w               (0),     m_gfx_h               (0),
+m_gfx_fullscreen      (false),
+m_game                (0)
 {
 	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"]=argv[0];
@@ -445,7 +450,6 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 	// Usual event queue
 	while(poll_event(&ev, !gotevents)) {
-		int button;
 
 		gotevents = true;
 
@@ -491,40 +495,29 @@ void WLApplication::handle_input(const InputCallback *cb)
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
-			button = ev.button.button-1;
 			if (m_mouse_swapped) {
-				if (button == MOUSE_LEFT) button = MOUSE_RIGHT;
-				else if (button == MOUSE_RIGHT) button = MOUSE_LEFT;
+				switch (ev.button.button) {
+				case SDL_BUTTON_LEFT:  ev.button.button = SDL_BUTTON_RIGHT; break;
+				case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
+				}
 			}
-
-			if (ev.type == SDL_MOUSEBUTTONDOWN)
-				//TODO: no bitshifting
-				m_mouse_buttons |= 1 << button;
-			else
-				//TODO: no bitshifting
-				m_mouse_buttons &= ~(1 << button);
-
 			if (cb && cb->mouse_click)
-				cb->mouse_click(ev.type == SDL_MOUSEBUTTONDOWN, button, m_mouse_buttons,
-				                (int)m_mouse_x, (int)m_mouse_y);
+				cb->mouse_click
+				(ev.type == SDL_MOUSEBUTTONDOWN,
+				 ev.button.button,
+				 ev.button.x, ev.button.y);
 			break;
 
-		case SDL_MOUSEMOTION: {
+		case SDL_MOUSEMOTION:
 				// All the interesting stuff is now in Sys_PollEvent()
-				int xdiff = ev.motion.xrel;
-				int ydiff = ev.motion.yrel;
 
 				m_mouse_x = ev.motion.x;
 				m_mouse_y = ev.motion.y;
 
-				if (!xdiff && !ydiff)
-					break;
-
-				if (cb && cb->mouse_move)
-					cb->mouse_move(m_mouse_buttons, m_mouse_x, m_mouse_y, xdiff, ydiff);
-
-				break;
-			}
+			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
+				cb->mouse_move
+					(ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
+			break;
 
 		case SDL_QUIT:
 			m_should_die = true;
@@ -688,7 +681,6 @@ const bool WLApplication::init_settings()
 	m_mouse_swapped = false;
 	m_mouse_locked = false;
 	m_mouse_speed = 1.0;
-	m_mouse_buttons = 0;
 	m_mouse_x = m_mouse_y = 0;
 	m_mouse_maxx = m_mouse_maxy = 0;
 	m_mouse_internal_x = m_mouse_internal_y = 0;

@@ -36,7 +36,7 @@ class Event_Move_View_Option_Menu : public UIWindow {
       Event_Move_View_Option_Menu(Editor_Interactive*, Event_Move_View*);
       ~Event_Move_View_Option_Menu();
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       void update(void);

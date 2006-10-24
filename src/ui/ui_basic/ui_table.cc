@@ -211,9 +211,8 @@ void UITable::draw(RenderTarget* dst)
 /**
  * Handle mouse clicks: select the appropriate entry
  */
-bool UITable::handle_mouseclick(uint btn, bool down, int, int y) {
-   if (btn != 0) // only left-click
-		return false;
+bool UITable::handle_mouseclick(const Uint8 btn, const bool down, int, int y) {
+	if (btn != SDL_BUTTON_LEFT) return false;
 
    if (down) {
 	   int time=WLApplication::get()->get_time();

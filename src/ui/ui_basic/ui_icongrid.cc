@@ -265,7 +265,7 @@ void UIIcon_Grid::handle_mousein(bool inside)
 /**
 Update highlight under the mouse and send signals.
 */
-void UIIcon_Grid::handle_mousemove(int x, int y, int, int, uint) {
+void UIIcon_Grid::handle_mousemove(int x, int y, int, int) {
 	int hl = index_for_point(x, y);
 
 	if (hl != m_highlight) {
@@ -283,12 +283,11 @@ void UIIcon_Grid::handle_mousemove(int x, int y, int, int, uint) {
 Left mouse down selects the building, left mouse up acknowledges and sends the
 signal.
 */
-bool UIIcon_Grid::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIIcon_Grid::handle_mouseclick(const Uint8 btn, const bool down, int x, int y)
 {
 	int hl;
 
-	if (btn != 0)
-		return false;
+	if (btn != SDL_BUTTON_LEFT) return false;
 
 	hl = index_for_point(x, y);
 

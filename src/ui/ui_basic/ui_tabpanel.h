@@ -53,8 +53,8 @@ private:
 	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
-	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
+	void handle_mousemove(int x, int y, int xdiff, int ydiff);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 
 	struct Tab {
 		uint		picid;

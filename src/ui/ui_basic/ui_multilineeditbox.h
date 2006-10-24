@@ -45,7 +45,7 @@ class UIMultiline_Editbox : public UIMultiline_Textarea {
       int get_maximum_chars(void) { return m_maxchars; }
 
       // Event functions
-      bool handle_mouseclick(uint btn, bool down, int x, int y);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
       bool handle_key(bool down, int code, char c);
       void set_text(const char* str);
 

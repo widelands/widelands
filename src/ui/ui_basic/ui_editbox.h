@@ -42,8 +42,8 @@ class UIEdit_Box : private UIButton {
      void set_maximum_chars(int n) { m_maxchars=n; }
      int get_maximum_chars(void) { return m_maxchars; }
 
-     bool handle_mouseclick(uint btn, bool down, int x, int y);
-     void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+     bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+     void handle_mousemove(int x, int y, int xdiff, int ydiff);
      bool handle_key(bool down, int code, char c);
      void handle_mousein(bool);
 

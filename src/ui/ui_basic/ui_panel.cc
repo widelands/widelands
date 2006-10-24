@@ -484,13 +484,13 @@ void UIPanel::handle_mousein(bool) {}
  *
  * Returns: true if the mouseclick was processed
  */
-bool UIPanel::handle_mouseclick(uint, bool, int, int) {return false;}
+bool UIPanel::handle_mouseclick(const Uint8, const bool, int, int) {return false;}
 
 /**
  * Called when the mouse is moved while inside the panel
  *
  */
-void UIPanel::handle_mousemove(int, int, int, int, uint) {}
+void UIPanel::handle_mousemove(int, int, int, int) {}
 
 /**
  * Receive a keypress or keyrelease event.
@@ -739,7 +739,7 @@ void UIPanel::do_mousein(bool inside)
  *
  * Returns: true, if the click was processed
  */
-bool UIPanel::do_mouseclick(uint btn, bool down, int x, int y)
+bool UIPanel::do_mouseclick(const Uint8 btn, const bool down, int x, int y)
 {
 	x -= _lborder;
 	y -= _tborder;
@@ -765,21 +765,17 @@ bool UIPanel::do_mouseclick(uint btn, bool down, int x, int y)
 /**
  * Propagate mouse movement to the appropriate panel.
  */
-void UIPanel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
-{
+void UIPanel::do_mousemove(int x, int y, int xdiff, int ydiff) {
 	x -= _lborder;
 	y -= _tborder;
 
-	if (_g_mousegrab == this)
-		handle_mousemove(x, y, xdiff, ydiff, btns);
+	if (_g_mousegrab == this) handle_mousemove(x, y, xdiff, ydiff);
 	else
 	{
 		UIPanel *child = get_mousein(x, y);
 
-		if (child)
-			child->do_mousemove(x-child->_x, y-child->_y, xdiff, ydiff, btns);
-		else
-			handle_mousemove(x, y, xdiff, ydiff, btns);
+		if (child) child->do_mousemove(x-child->_x, y-child->_y, xdiff, ydiff);
+		else          handle_mousemove(x,           y,           xdiff, ydiff);
 	}
 }
 
@@ -842,8 +838,7 @@ UIPanel *UIPanel::ui_trackmouse(int *x, int *y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void UIPanel::ui_mouseclick(bool down, int button, uint, int x, int y)
-{
+void UIPanel::ui_mouseclick(const bool down, const Uint8 button, int x, int y) {
 	UIPanel *p;
 
 	p = ui_trackmouse(&x, &y);
@@ -859,8 +854,7 @@ void UIPanel::ui_mouseclick(bool down, int button, uint, int x, int y)
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
-void UIPanel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
-{
+void UIPanel::ui_mousemove(int x, int y, int xdiff, int ydiff) {
 	if (!xdiff && !ydiff)
 		return;
 
@@ -876,7 +870,7 @@ void UIPanel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 	if (!p)
 		return;
 
-	p->do_mousemove(x, y, xdiff, ydiff, btns);
+	p->do_mousemove(x, y, xdiff, ydiff);
 }
 
 /**

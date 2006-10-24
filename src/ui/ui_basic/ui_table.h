@@ -118,7 +118,7 @@ public: // FUNCTIONS
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 
 private: // DATA
    struct Column {

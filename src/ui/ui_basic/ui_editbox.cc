@@ -59,8 +59,8 @@ UIEdit_Box::~UIEdit_Box(void) {
 /**
 the mouse was clicked on this editbox
 */
-bool UIEdit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
-   if(btn!=0) return false;
+bool UIEdit_Box::handle_mouseclick(const Uint8 btn, const bool down, int x, int y) {
+   if (btn!=0) return false;
 
    if(down && !m_keyboard_grabbed) {
       set_can_focus(true);
@@ -126,9 +126,9 @@ handles the mousemove for this panel.
 does not much, suppresses messages when the focus
 is received
 */
-void UIEdit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns) {
+void UIEdit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff) {
    if(m_keyboard_grabbed) return;
-   else UIButton::handle_mousemove(x,y,xdiff,ydiff,btns);
+	else UIButton::handle_mousemove(x, y, xdiff, ydiff);
 }
 
 /**

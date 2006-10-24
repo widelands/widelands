@@ -57,7 +57,7 @@ public:
 	// Drawing & event handling
 	void draw(RenderTarget* dst);
 
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 
    inline void set_flags(char flags) { m_flags = flags; }
 

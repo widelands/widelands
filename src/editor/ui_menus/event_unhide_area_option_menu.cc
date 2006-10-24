@@ -173,9 +173,9 @@ Event_Unhide_Area_Option_Menu::~Event_Unhide_Area_Option_Menu(void) {
  * we simulate a cancel click
  */
 bool Event_Unhide_Area_Option_Menu::handle_mouseclick
-(uint btn, bool down, int, int)
+(const Uint8 btn, const bool down, int, int)
 {
-   if(btn == MOUSE_RIGHT && down) {
+	if (btn == SDL_BUTTON_RIGHT and down) {
       clicked(0);
       return true;
    } else

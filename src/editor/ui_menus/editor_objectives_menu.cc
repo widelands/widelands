@@ -47,7 +47,7 @@ class Edit_Objective_Window : public UIWindow {
    public:
       Edit_Objective_Window(Editor_Interactive*, UITable_Entry*);
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       Editor_Interactive  *m_parent;
@@ -117,8 +117,8 @@ Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UITable
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Edit_Objective_Window::handle_mouseclick(uint btn, bool down, int, int) {
-   if(btn == MOUSE_RIGHT && down) {
+bool Edit_Objective_Window::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+   if (btn == SDL_BUTTON_RIGHT and down) {
       clicked(0);
       return true;
    } else

@@ -268,19 +268,20 @@ void UIWindow::draw_border(RenderTarget* dst)
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
+bool UIWindow::handle_mouseclick
+(const Uint8 btn, const bool down, int mx, int my)
 {
-   bool should_minimize =
-		   ((( WLApplication::get()->get_key_state(KEY_LCTRL) |
-		       WLApplication::get()->get_key_state(KEY_RCTRL) ) &&
-		     (btn == MOUSE_LEFT)) ||
-		    (btn == MOUSE_MIDDLE))
-		   && down;
-
-
-   if(should_minimize) {
+	const WLApplication & wla = *WLApplication::get();
+	if
+		(down
+		 and
+		 (((wla.get_key_state(KEY_LCTRL) | wla.get_key_state(KEY_RCTRL))
+		   and
+		   (btn == SDL_BUTTON_LEFT))
+		  or
+		  (btn == SDL_BUTTON_MIDDLE)))
       minimize(!is_minimized());
-   } else if (btn == MOUSE_LEFT) {
+	else if (btn == SDL_BUTTON_LEFT) {
 	   if (down) {
 			_dragging = true;
 			_drag_start_win_x = get_x();
@@ -293,7 +294,7 @@ bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 			_dragging = false;
 		}
 	}
-	else if (btn == MOUSE_RIGHT && down) {
+	else if (down and btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		delete this; // is this 100% safe?
 			    // no, at least provide a flag for making a

@@ -154,9 +154,9 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
 /*
  * handle mousclicks
  */
-bool UIMultiline_Editbox::handle_mouseclick(uint btn, bool down, int x, int y) {
+bool UIMultiline_Editbox::handle_mouseclick(const Uint8 btn, const bool down, int x, int y) {
    if(!down) return false;
-   if(btn==MOUSE_LEFT && !has_focus()) {
+	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
       focus();
       UIMultiline_Textarea::set_text(get_text().c_str());
       changed.call();

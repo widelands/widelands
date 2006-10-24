@@ -91,9 +91,9 @@ Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event(void) {
  * we simulate a cancel click
  */
 bool Editor_Event_Menu_New_Event::handle_mouseclick
-(uint btn, bool down, int, int)
+(const Uint8 btn, const bool down, int, int)
 {
-   if(btn == MOUSE_RIGHT && down) {
+	if (btn == SDL_BUTTON_RIGHT and down) {
       clicked(0);
       return true;
    } else

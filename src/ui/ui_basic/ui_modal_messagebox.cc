@@ -57,8 +57,8 @@ UIModal_Message_Box::~UIModal_Message_Box(void) {
  * on close (the caller must do this) instead
  * we call end_modal() with NO (=0)
  */
-bool UIModal_Message_Box::handle_mouseclick(uint btn, bool, int, int) {
-   if(btn == MOUSE_RIGHT) {
+bool UIModal_Message_Box::handle_mouseclick(const Uint8 btn, const bool, int, int) {
+	if (btn == SDL_BUTTON_RIGHT) {
       end_modal(0);
       return true;
    } else

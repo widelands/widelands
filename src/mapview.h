@@ -49,8 +49,8 @@ public:
 	void draw(RenderTarget* dst);
 
 	// Event handling
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
-	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	void handle_mousemove(int x, int y, int xdiff, int ydiff);
 
 	void track_fsel(int mx, int my);
    inline void need_complete_redraw( void ) { m_complete_redraw_needed = true; }

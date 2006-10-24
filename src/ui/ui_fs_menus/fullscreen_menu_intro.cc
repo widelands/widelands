@@ -34,7 +34,9 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 {
 }
 
-bool Fullscreen_Menu_Intro::handle_mouseclick(uint, bool down, int, int) {
+bool Fullscreen_Menu_Intro::handle_mouseclick
+(const Uint8, const bool down, int, int)
+{
 	if (down)
 		end_modal(0);
 

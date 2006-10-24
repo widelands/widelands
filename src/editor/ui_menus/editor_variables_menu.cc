@@ -41,7 +41,7 @@ class New_Variable_Window : public UIWindow {
    public:
       New_Variable_Window(Editor_Interactive*);
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
       MapVariable* get_variable( void ) { return m_variable; }
 
@@ -82,8 +82,8 @@ New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool New_Variable_Window::handle_mouseclick(uint btn, bool down, int, int) {
-   if(btn == MOUSE_RIGHT && down) {
+bool New_Variable_Window::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+	if (btn == SDL_BUTTON_RIGHT and down) {
       clicked(0);
       return true;
    } else
@@ -137,7 +137,7 @@ class Edit_Variable_Window : public UIWindow {
    public:
       Edit_Variable_Window(Editor_Interactive*, UITable_Entry*);
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       Editor_Interactive *m_parent;
@@ -185,8 +185,8 @@ Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_E
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Edit_Variable_Window::handle_mouseclick(uint btn, bool down, int, int) {
-   if(btn == MOUSE_RIGHT && down) {
+bool Edit_Variable_Window::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+	if (btn == SDL_BUTTON_RIGHT and down) {
       clicked(0);
       return true;
    } else

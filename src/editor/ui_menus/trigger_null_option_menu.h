@@ -35,7 +35,7 @@ class Trigger_Null_Option_Menu : public UIWindow {
       Trigger_Null_Option_Menu(Editor_Interactive*, Trigger_Null*);
       ~Trigger_Null_Option_Menu();
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       void clicked(int);

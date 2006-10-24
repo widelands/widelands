@@ -70,9 +70,9 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
  * handle mouseclick for a modal
  */
 bool Main_Menu_Save_Map_Make_Directory::handle_mouseclick
-(uint btn, bool down, int, int)
+(const Uint8 btn, const bool down, int, int)
 {
-   if(btn == MOUSE_RIGHT && down) {
+	if (btn == SDL_BUTTON_RIGHT and down) {
       clicked(0);
       return true;
    } else

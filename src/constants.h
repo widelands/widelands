@@ -103,17 +103,6 @@
  */
 #define SSS_T std::string::size_type
 
-/**
- * \todo use SDL constants instead
- * \todo bitshifting is not beautiful in cross platform code, use macro
- * SDL_BUTTON instead
- */
-enum { // use 1<<MOUSE_xxx for bitmasks
-   MOUSE_LEFT = 0,
-   MOUSE_MIDDLE,
-   MOUSE_RIGHT
-};
-
 /// Networking
 //@
 #define WIDELANDS_LAN_DISCOVERY_PORT	7394

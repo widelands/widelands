@@ -36,7 +36,7 @@ class Editor_Event_Menu_New_Trigger : public UIWindow {
       Editor_Event_Menu_New_Trigger(Editor_Interactive*);
       ~Editor_Event_Menu_New_Trigger();
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       void clicked(int);

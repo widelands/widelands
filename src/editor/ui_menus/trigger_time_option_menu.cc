@@ -160,8 +160,8 @@ Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Trigger_Time_Option_Menu::handle_mouseclick(uint btn, bool, int, int) {
-   if(btn == MOUSE_RIGHT) {
+bool Trigger_Time_Option_Menu::handle_mouseclick(const Uint8 btn, const bool, int, int) {
+   if (btn == SDL_BUTTON_RIGHT) {
       clicked(0);
       return true;
    } else

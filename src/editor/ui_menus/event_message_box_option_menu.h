@@ -42,7 +42,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       Event_Message_Box_Option_Menu(Editor_Interactive*, Event_Message_Box*);
       ~Event_Message_Box_Option_Menu();
 
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       static const int MAX_BUTTONS=4;

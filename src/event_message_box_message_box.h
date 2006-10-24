@@ -30,7 +30,7 @@ class Trigger_Null;
 class Message_Box_Event_Message_Box : public UIWindow {
    public:
       Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int, int, int, int);
-      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
 
    private:
       Game* m_game;

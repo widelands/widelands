@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by the Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,8 +74,8 @@ protected:
 	void update_for_index(int idx);
 
 	void handle_mousein(bool inside);
-	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
+	void handle_mousemove(int x, int y, int xdiff, int ydiff);
+	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 
 private:
 	struct Item {

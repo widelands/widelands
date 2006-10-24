@@ -25,6 +25,8 @@
 #include "types.h"
 #include "ui_object.h"
 
+#include <SDL_stdinc.h>
+
 class RenderTarget;
 
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
@@ -122,8 +124,8 @@ public:
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
-	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
-	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+	virtual bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff);
 	virtual bool handle_key(bool down, int code, char c);
 
 	void set_handle_mouse(bool yes);
@@ -158,8 +160,8 @@ private:
 
 	UIPanel *get_mousein(int x, int y);
 	void do_mousein(bool inside);
-	bool do_mouseclick(uint btn, bool down, int x, int y);
-	void do_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+	bool do_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	void do_mousemove(int x, int y, int xdiff, int ydiff);
 	bool do_key(bool down, int code, char c);
 
 	UIPanel *_parent;
@@ -191,8 +193,8 @@ public:
 
 private:
 	static UIPanel *ui_trackmouse(int *x, int *y);
-	static void ui_mouseclick(bool down, int button, uint btns, int x, int y);
-	static void ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff);
+	static void ui_mouseclick(const bool down, const Uint8 button, int x, int y);
+	static void ui_mousemove(int x, int y, int xdiff, int ydiff);
 	static void ui_key(bool down, int code, char c);
 
 	static UIPanel *_modal;

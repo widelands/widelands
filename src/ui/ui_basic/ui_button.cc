@@ -207,9 +207,8 @@ void UIButton::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool UIButton::handle_mouseclick(uint btn, bool down, int, int) {
-	if (btn != 0) // only react on left button
-		return false;
+bool UIButton::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (down && m_enabled) {
 		grab_mouse(true);

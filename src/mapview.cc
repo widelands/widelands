@@ -123,24 +123,21 @@ void Map_View::set_viewpoint(Point vp)
    m_complete_redraw_needed = true;
 }
 
-/** Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
- *
+/**
  * Mouseclicks on the map:
  * Right-click: enable/disable dragging
  * Left-click: field action window
  */
-bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
+bool Map_View::handle_mouseclick(const Uint8 btn, const bool down, int x, int y)
 {
-	if (btn == MOUSE_LEFT)
-	{
+	if (btn == SDL_BUTTON_LEFT) {
 		if (down) {
          track_fsel(x, y);
 
 			fieldclicked.call();
 		}
 	}
-	else if (btn == MOUSE_RIGHT)
-	{
+	else if (btn == SDL_BUTTON_RIGHT) {
 		if (down) {
 			m_dragging = true;
 			grab_mouse(true);
@@ -163,9 +160,9 @@ Map_View::handle_mousemove
 Scroll the view according to mouse movement.
 ===============
 */
-void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
+void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff)
 {
-   if (!(btns & (1<<MOUSE_RIGHT)))
+	if (not (SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_RIGHT)))
 		m_dragging = false;
 
 	if (m_dragging)

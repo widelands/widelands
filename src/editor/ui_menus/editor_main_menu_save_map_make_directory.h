@@ -36,7 +36,7 @@ class Main_Menu_Save_Map_Make_Directory : public UIWindow {
 
       const char* get_dirname(void) { return m_dirname.c_str(); }
 
-      bool handle_mouseclick(uint btn, bool down, int x, int y);
+      bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
 
    private:
       std::string m_dirname;

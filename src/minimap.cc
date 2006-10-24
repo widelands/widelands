@@ -112,10 +112,10 @@ MiniMapView::handle_mouseclick
 Left-click: warp the view point to the new position
 ===============
 */
-bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
+bool MiniMapView::handle_mouseclick
+(const Uint8 btn, const bool down, int x, int y)
 {
-	if (btn != 0)
-		return false;
+	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (down) {
 		Coords c;
