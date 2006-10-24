@@ -60,7 +60,7 @@ UIEdit_Box::~UIEdit_Box(void) {
 the mouse was clicked on this editbox
 */
 bool UIEdit_Box::handle_mouseclick(const Uint8 btn, const bool down, int x, int y) {
-   if (btn!=0) return false;
+	if (btn != SDL_BUTTON_LEFT) return false;
 
    if(down && !m_keyboard_grabbed) {
       set_can_focus(true);

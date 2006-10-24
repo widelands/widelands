@@ -369,7 +369,7 @@ inline void UIWindow::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-void UIWindow::handle_mousemove(int mx, int my, int, int, uint) {
+void UIWindow::handle_mousemove(int mx, int my, int, int) {
 	if (_dragging) {
 		const int mouse_x = get_x() + get_lborder() + mx;
 		const int mouse_y = get_y() + get_tborder() + my;
@@ -393,7 +393,7 @@ void UIWindow::handle_mousemove(int mx, int my, int, int, uint) {
 			const uchar bsnap = parent->get_border_snap_distance();
 
 			//  These are needed to prefer snapping a shorter distance over a
-			//  longer distance, when there are several thing to snap to.
+			//  longer distance, when there are several things to snap to.
 			uchar nearest_snap_distance_x = bsnap;
 			uchar nearest_snap_distance_y = bsnap;
 

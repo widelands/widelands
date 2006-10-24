@@ -3431,8 +3431,8 @@ void Worker::geologist_update(Game* g, State* state)
          Coords target;
 
          // is center a mountain piece?
-         bool is_center_mountain= (map->get_field(center)->get_terd()->get_is() & TERRAIN_MOUNTAIN) |
-            (map->get_field(center)->get_terr()->get_is() & TERRAIN_MOUNTAIN);
+         bool is_center_mountain= (map->get_field(center)->get_terd().get_is() & TERRAIN_MOUNTAIN) |
+            (map->get_field(center)->get_terr().get_is() & TERRAIN_MOUNTAIN);
          // Only run towards fields that are on a mountain (or not)
          // depending on position of center
          bool is_target_mountain;
@@ -3441,8 +3441,8 @@ void Worker::geologist_update(Game* g, State* state)
          do {
             molog("[geologist] Searching for a suitable field!\n");
             target = list[g->logic_rand() % list.size()];
-            is_target_mountain = (map->get_field(target)->get_terd()->get_is() & TERRAIN_MOUNTAIN) |
-               (map->get_field(target)->get_terr()->get_is() & TERRAIN_MOUNTAIN);
+            is_target_mountain = (map->get_field(target)->get_terd().get_is() & TERRAIN_MOUNTAIN) |
+               (map->get_field(target)->get_terr().get_is() & TERRAIN_MOUNTAIN);
             if(i==0) i=list.size();
             --i;
             --n;

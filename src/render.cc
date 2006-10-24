@@ -219,7 +219,7 @@ static inline ulong calc_minimap_color
 	{
 		pixelcolor =
 			get_graphicimpl()->
-			get_maptexture_data(f.field->get_terd()->get_texture())->
+			get_maptexture_data(f.field->get_terd().get_texture())->
 			get_minimap_color(f.field->get_brightness());
 	}
 

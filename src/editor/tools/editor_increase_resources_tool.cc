@@ -40,57 +40,26 @@ int Editor_Change_Resource_Tool_Callback(const TCoords c, void * data, int curre
 	FCoords f = FCoords(c, map.get_field(c));
 
    FCoords f1;
-   Terrain_Descr* terr, *terd;
    int count=0;
 
    // This field
-   terr=f.field->get_terr();
-   terd=f.field->get_terd();
-   bool is_valid_d = curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : 0;
-   bool is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_d)
-      count+=8;
-   else
-      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
-   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
-      count+=8;
-   else
-      count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
+	count += f.field->get_terr().resource_value(curres);
+	count += f.field->get_terd().resource_value(curres);
 
 
    // If one of the neighbours is unpassable, count its resource stronger
    // top left neigbour
    map.get_neighbour(f, Map_Object::WALK_NW, &f1);
-   terr=f1.field->get_terr();
-   terd=f1.field->get_terd();
-   is_valid_d = curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : 0;
-   is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_d)
-      count+=8;
-   else
-      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
-   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
-      count+=8;
-   else
-      count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
+	count += f1.field->get_terr().resource_value(curres);
+	count += f1.field->get_terd().resource_value(curres);
 
    // top right neigbour
    map.get_neighbour(f, Map_Object::WALK_NE, &f1);
-   terd=f1.field->get_terd();
-   is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
-      count+=8;
-   else
-      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
+	count += f1.field->get_terd().resource_value(curres);
 
    // left neighbour
    map.get_neighbour(f, Map_Object::WALK_W, &f1);
-   terr=f1.field->get_terr();
-   is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
-      count+=8;
-   else
-      count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
+	count += f1.field->get_terr().resource_value(curres);
 
    if(count<=3)
       return 0;

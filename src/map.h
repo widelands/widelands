@@ -198,6 +198,7 @@ public:
 	Uint8 get_nrplayers() const throw () {return m_nrplayers;}
 	uint get_width() const {return m_width;}
 	uint get_height() const {return m_height;}
+	World & world() const throw () {return *m_world;}
 	World * get_world() const {return m_world;}
    // The next few functions are only valid
    // when the map is loaded as an scenario.

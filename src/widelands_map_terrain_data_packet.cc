@@ -48,34 +48,40 @@ throw (_wexception)
    FileRead fr;
    fr.Open( fs, "binary/terrain");
 
-   Map* map=egbase->get_map();
-   World* world=map->get_world();
+	Map & map = egbase->map();
+	World & world = map.world();
 
    // first packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      int nr_terrains=fr.Unsigned16();
-      if(nr_terrains>world->get_nr_terrains()) throw wexception("Number of terrains in file (%i) is bigger than in world (%i)",
-            nr_terrains, world->get_nr_terrains());
+	if(packet_version==CURRENT_PACKET_VERSION) {
+		const Uint16 nr_terrains = fr.Unsigned16();
 
       // construct ids and map
-      std::map<uchar,Terrain_Descr*> smap;
-      char* buffer;
-      for(int i=0; i<nr_terrains; i++) {
-         int id=fr.Unsigned16();
-         buffer=fr.CString();
-         if(!world->get_terrain(buffer)) throw wexception("Terrain '%s' exists in map, not in world!", buffer);
-         smap[id]=world->get_terrain(buffer);
+		std::map<const Uint16, const Terrain_Descr *> smap;
+		for (Uint16 i = 0; i < nr_terrains; ++i) {
+			const Uint16       id   = fr.Unsigned16();
+         const char * const name = fr.CString   ();
+			const std::map<const Uint16, const Terrain_Descr *>::const_iterator
+				it = smap.find(id);
+			if (it != smap.end()) log
+				("Widelands_Map_Terrain_Data_Packet::Read: WARNING: Found "
+				 "duplicate terrain id %i: Previously defined as \"%s\", now as "
+				 "\"%s\".\n",
+				 id,
+				 it->second->get_name(),
+				 name);
+			if (not world.get_terrain(name)) throw wexception
+				("Terrain '%s' exists in map, not in world!", name);
+			smap[id] = world.get_terrain(name);
       }
 
       // Now get all the terrains
-		Map & map = egbase->map();
 		const Map::Index max_index = map.max_index();
 		for (Map::Index i = 0; i < max_index; ++i) {
 			Field & f = map[i];
-			f.set_terrainr(smap[fr.Unsigned8()]);
-			f.set_terraind(smap[fr.Unsigned8()]);
+			f.set_terrainr(*smap[fr.Unsigned8()]);
+			f.set_terraind(*smap[fr.Unsigned8()]);
       }
       return;
    }
@@ -102,26 +108,26 @@ throw (_wexception)
    // of the terrains at run time doens't matter.
    // This is slow like hell.
    // Write the number of terrains
-   World* world=egbase->get_map()->get_world();
-   int nr_ter=world->get_nr_terrains();
-   fw.Unsigned16(nr_ter);
+	const Map & map = egbase->map();
+	const World & world = map.world();
+	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
+   fw.Unsigned16(nr_terrains);
 
    // Write all terrain names and their id's
-   std::map<std::string,uchar> smap;
-   for(int i=0; i<nr_ter; i++) {
-      Terrain_Descr* ter=world->get_terrain(i);
-      smap[ter->get_name()]=i;
+	std::map<const char * const, Terrain_Descr::Index> smap;
+	for (Terrain_Descr::Index i = 0; i < nr_terrains; ++i) {
+		const char * const name = world.get_terrain(i)->get_name();
+		smap[name] = i;
       fw.Unsigned16(i);
-      fw.CString(ter->get_name());
+		fw.CString(name);
    }
 
    // Now, all terrains as unsigned chars in order
-	Map & map = egbase->map();
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		Field & f = map[i];
-		fw.Unsigned8(smap[f.get_terr()->get_name()]);
-		fw.Unsigned8(smap[f.get_terd()->get_name()]);
+		fw.Unsigned8(smap[f.get_terr().get_name()]);
+		fw.Unsigned8(smap[f.get_terd().get_name()]);
    }
 
    fw.Write( fs, "binary/terrain");

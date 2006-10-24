@@ -743,10 +743,10 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 	Surface* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
 	Surface* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
 
-	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
-	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr()->get_texture());
-	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd()->get_texture());
+	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr().get_texture());
+	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd().get_texture());
+	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr().get_texture());
+	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd().get_texture());
 
 	if( draw_all ) {
     		render_triangle<T> (dst, &r, &l, &br, rtex);

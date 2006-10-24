@@ -135,7 +135,7 @@ private:
 	/** how much has there been*/
 	uchar m_starting_res_amount;
 	uchar m_res_amount;
-	Terrain_Descr *terr, *terd;
+	const Terrain_Descr *terr, *terd;
 
 	/** linked list, \sa Bob::m_linknext*/
 	Bob* bobs;
@@ -145,10 +145,10 @@ public:
    inline uchar get_height() const { return height; }
 	FieldCaps get_caps() const {return caps;}
 
-   inline Terrain_Descr *get_terr() const { return terr; }
-   inline Terrain_Descr *get_terd() const { return terd; }
-   inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
-   inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
+	const Terrain_Descr & get_terr() const throw () {return *terr;}
+	const Terrain_Descr & get_terd() const throw () {return *terd;}
+	void set_terrainr(const Terrain_Descr & p) throw () {terr = &p;}
+	void set_terraind(const Terrain_Descr & p) throw () {terd = &p;}
 
 	inline Bob* get_first_bob(void) { return bobs; }
 	inline BaseImmovable* get_immovable() { return immovable; }
@@ -179,7 +179,7 @@ public:
 			 owner_info.parts.owner_number + 128 * owner_info.parts.is_border);
 		return player_number == owner_info.all;
 	}
-		
+
 	void set_border(const bool b) {owner_info.parts.is_border = b;}
 
 	uchar get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}

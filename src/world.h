@@ -22,6 +22,7 @@
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
+#include "worlddata.h"
 
 class Section;
 class Editor_Game_Base;
@@ -38,6 +39,7 @@ struct World_Descr_Header {
 
 class Resource_Descr {
 public:
+	typedef Uint8 Index;
 	Resource_Descr() { }
 	~Resource_Descr() { }
 
@@ -73,23 +75,31 @@ class Terrain_Descr {
    friend class World;
 
    public:
+	typedef Uint8 Index;
       Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>*);
       ~Terrain_Descr(void);
 
 		void load_graphics();
 
-      inline uint get_texture(void) { return m_texture; }
-      inline uchar get_is(void) { return m_is; }
-      inline const char* get_name() { return m_name; }
+	uint         get_texture() const throw () {return m_texture;}
+	uchar        get_is     () const throw () {return m_is;}
+	const char * get_name   () const throw () {return m_name;}
+	int resource_value(const Resource_Descr::Index resource) const throw () {
+		return
+			resource == get_default_resources() or is_resource_valid(resource) ?
+			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
+	}
 
-      inline bool is_resource_valid(int res) {
+	bool is_resource_valid(const int res) const throw () {
          int i=0;
          for(i=0; i<m_nr_valid_resources; i++)
             if(m_valid_resources[i]==res) return true;
          return false;
       }
-      inline int get_default_resources(void) { return m_default_resources; }
-      inline int get_default_resources_amount(void) { return m_default_amount; }
+	char get_default_resources() const
+		throw ()
+	{return m_default_resources;}
+	int get_default_resources_amount() const throw () {return m_default_amount;}
 
    private:
       char		m_name[30];
@@ -133,9 +143,9 @@ class World
       inline const char* get_author(void) { return hd.author; }
       inline const char* get_descr(void) { return hd.descr; }
 
-      inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
-      inline Terrain_Descr* get_terrain(char* str ) { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
-      inline int get_nr_terrains(void) { return ters.get_nitems(); }
+      inline Terrain_Descr* get_terrain(const uint i) const { assert(i<ters.get_nitems()); return ters.get(i); }
+      inline Terrain_Descr* get_terrain(const char * const str ) const { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
+      inline int get_nr_terrains(void) const { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
       inline int get_nr_bobs(void) { return bobs.get_nitems(); }

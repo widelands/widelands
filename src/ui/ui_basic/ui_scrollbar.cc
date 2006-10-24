@@ -381,7 +381,7 @@ bool UIScrollbar::handle_mouseclick
 /**
 Move the knob while pressed.
 */
-void UIScrollbar::handle_mousemove(int mx, int my, int, int, uint) {
+void UIScrollbar::handle_mousemove(int mx, int my, int, int) {
 	if (m_pressed == Knob)
 	{
 		int pos = m_horizontal ? mx : my;

@@ -275,54 +275,76 @@ void Map::recalc_default_resources(void) {
          if(f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
          std::map<int,int> m;
          int amount=0;
-         Terrain_Descr* terr, *terd;
-         int resd, resr;
 
          // This field
-         terr=f.field->get_terr();
-         terd=f.field->get_terd();
-         resd=terd->get_default_resources();
-         resr=terr->get_default_resources();
-         m[resd]++;
-         m[resr]++;
-         amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
+			{
+				const Terrain_Descr & terr = f.field->get_terr();
+				++m[terr.get_default_resources()];
+				amount += terr.get_default_resources_amount();
+			}
+			{
+				const Terrain_Descr & terd = f.field->get_terd();
+				++m[terd.get_default_resources()];
+				amount += terd.get_default_resources_amount();
+			}
 
          // If one of the neighbours is unpassable, count its resource stronger
          // top left neigbour
          get_neighbour(f, Map_Object::WALK_NW, &f1);
-         terr=f1.field->get_terr();
-         terd=f1.field->get_terd();
-         resd=terd->get_default_resources();
-         resr=terr->get_default_resources();
-         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1)
-            m[resd]+=3;
-         else
-            m[resd]++;
-         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1)
-            m[resr]+=3;
-         else
-            m[resr]++;
-         amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
+			{
+				const Terrain_Descr & terr = f1.field->get_terr();
+				const char resr =
+					terr.get_default_resources();
+				if
+					(terr.get_is() & TERRAIN_UNPASSABLE
+					 and
+					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+					m[resr] += 3;
+				else ++m[resr];
+				amount += terr.get_default_resources_amount();
+			}
+			{
+				const Terrain_Descr & terd = f1.field->get_terd();
+				const char resd =
+					terd.get_default_resources();
+				if
+					(terd.get_is() & TERRAIN_UNPASSABLE
+					 and
+					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+					m[resd] += 3;
+				else ++m[resd];
+				amount += terd.get_default_resources_amount();
+			}
 
          // top right neigbour
          get_neighbour(f, Map_Object::WALK_NE, &f1);
-         terd=f1.field->get_terd();
-         resd=terd->get_default_resources();
-         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1)
-            m[resd]+=3;
-         else
-            m[resd]++;
-         amount+=terd->get_default_resources_amount();
+			{
+				const Terrain_Descr & terd = f1.field->get_terd();
+				const char resd =
+					terd.get_default_resources();
+				if
+					(terd.get_is() & TERRAIN_UNPASSABLE
+					 and
+					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+					m[resd] += 3;
+				else ++m[resd];
+				amount += terd.get_default_resources_amount();
+			}
 
          // left neighbour
          get_neighbour(f, Map_Object::WALK_W, &f1);
-         terr=f1.field->get_terr();
-         resr=terr->get_default_resources();
-         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1)
-            m[resr]+=3;
-         else
-            m[resr]++;
-         amount+=terr->get_default_resources_amount();
+			{
+				const Terrain_Descr & terr = f1.field->get_terr();
+				const char resr =
+					terr.get_default_resources();
+				if
+					(terr.get_is() & TERRAIN_UNPASSABLE
+					 and
+					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+					m[resr] += 3;
+				else ++m[resr];
+				amount += terr.get_default_resources_amount();
+			}
 
          int lv=0;
          int res=0;
@@ -436,8 +458,8 @@ void Map::create_empty_map
 			FCoords coords = get_fcoords(Coords(x, y));
 
          coords.field->set_height(10);
-         coords.field->set_terraind(get_world()->get_terrain(static_cast<uint>(0)));
-         coords.field->set_terrainr(get_world()->get_terrain(static_cast<uint>(0)));
+         coords.field->set_terraind(*get_world()->get_terrain(static_cast<uint>(0)));
+         coords.field->set_terrainr(*get_world()->get_terrain(static_cast<uint>(0)));
       }
    }
    recalc_whole_map();
@@ -1049,26 +1071,26 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 	uchar cnt_water = 0;
 	uchar cnt_acid = 0;
 
-   if (f.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (f.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (ln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (tln.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (tln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (trn.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (f  .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (f  .field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (ln .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (tln.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (tln.field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (trn.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
 
-   if (f.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (f.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (ln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (tln.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (tln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (trn.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (f  .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (f  .field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (ln .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (tln.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (tln.field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (trn.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
 
-   if (f.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (f.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (ln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (tln.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (tln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (trn.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (f  .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (f  .field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (ln .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (tln.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (tln.field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (trn.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
 
 
    // 2) Passability
@@ -1153,40 +1175,40 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	int cnt_mountain = 0;
 	int cnt_dry = 0;
 
-	if (f.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (f.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (ln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (tln.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (tln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (trn.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (f  .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (f  .field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (ln .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (tln.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (tln.field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (trn.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
 
-	if (f.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (f.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (ln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (tln.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (tln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (trn.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (f  .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (f  .field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (ln .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (tln.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (tln.field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if (trn.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
 
-	if (f.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (f.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (ln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (tln.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (tln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (trn.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (f  .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (f  .field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (ln .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (tln.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (tln.field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if (trn.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
 
-	if (f.field->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (f.field->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (ln.field->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (tln.field->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (tln.field->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (trn.field->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+	if (f  .field->get_terr().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if (f  .field->get_terd().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if (ln .field->get_terr().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if (tln.field->get_terd().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if (tln.field->get_terr().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if (trn.field->get_terd().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
 
-	if (f.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (f.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (ln.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (tln.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (tln.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (trn.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
+	if (f  .field->get_terr().get_is() & TERRAIN_DRY)        ++cnt_dry;
+	if (f  .field->get_terd().get_is() & TERRAIN_DRY)        ++cnt_dry;
+	if (ln .field->get_terr().get_is() & TERRAIN_DRY)        ++cnt_dry;
+	if (tln.field->get_terd().get_is() & TERRAIN_DRY)        ++cnt_dry;
+	if (tln.field->get_terr().get_is() & TERRAIN_DRY)        ++cnt_dry;
+	if (trn.field->get_terd().get_is() & TERRAIN_DRY)        ++cnt_dry;
 
 	uchar caps = f.field->caps;
 
@@ -2099,9 +2121,9 @@ int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright)
    Terrain_Descr* ter=get_world()->get_terrain(terrain);
 
    if(tdown)
-      f->set_terraind(ter);
+      f->set_terraind(*ter);
    if(tright)
-      f->set_terrainr(ter);
+      f->set_terrainr(*ter);
 
    MapRegion mr;
 

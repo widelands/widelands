@@ -70,7 +70,7 @@ private:
 	void think();
 
 	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
-	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
+	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
 private:
 	bool		m_horizontal;

@@ -62,7 +62,7 @@ public:
 	void draw_border(RenderTarget* dst);
 
 	bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
-	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
+	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
 private:
 	void dock_left();

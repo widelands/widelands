@@ -84,16 +84,20 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    sprintf(buf1, _(" Roads: TODO!\n").c_str()); buf+=buf1;
 
    buf += "\n";
-   Terrain_Descr* ter=f->get_terr();
    sprintf(buf1, "%s\n", _("2) Right Terrain Info\n").c_str()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter->get_texture()); buf+=buf1;
+	{
+		const Terrain_Descr & ter = f->get_terr();
+		sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter.get_name()); buf+=buf1;
+		sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter.get_texture()); buf+=buf1;
+	}
 
    buf += "\n";
-   ter=f->get_terd();
    sprintf(buf1, "%s\n", _("3) Down Terrain Info\n").c_str()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter->get_texture()); buf+=buf1;
+	{
+		const Terrain_Descr & ter = f->get_terd();
+		sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter.get_name()); buf+=buf1;
+		sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter.get_texture()); buf+=buf1;
+	}
 
    buf += "\n";
    sprintf(buf1, "%s\n", _("4) Map Info").c_str()); buf+=buf1;

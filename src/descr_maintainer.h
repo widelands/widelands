@@ -29,6 +29,9 @@ template <class T> class Descr_Maintainer {
       Descr_Maintainer(void) { nitems=0; items=0; place_for=0; }
       ~Descr_Maintainer(void) ;
 
+	static typename T::Index invalid_index()
+	{return std::numeric_limits<typename T::Index>::max();}
+
       T* exists(const char* name);
       int add(T* item);
       ushort get_nitems(void) const { return nitems; }
