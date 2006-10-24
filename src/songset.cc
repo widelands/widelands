@@ -25,18 +25,16 @@
 #include "sound_handler.h"
 
 /// Prepare infrastructure for reading song files from disk
-Songset::Songset() : m_rwops(0), m_m(0) {}
+Songset::Songset() : m_m(0), m_rwops(0) {}
 
 /// Close and delete all songs to avoid memory leaks.
 Songset::~Songset()
 {
 	m_songs.clear();
 
-	if (m_m)		//m might be NULL
-		free(m_m);
+	free(m_m);
 
-	if (m_rwops)		//rwops might be NULL
-		SDL_FreeRW(m_rwops);
+	if (m_rwops) SDL_FreeRW(m_rwops);
 }
 
 /** Append a song to the end of the songset
@@ -54,7 +52,7 @@ void Songset::add_song(const std::string filename)
 /** Get a song from the songset. Depending on
  * \ref Sound_Handler::sound_random_order, the selection will either be random
  * or linear (after last song, will start again with first).
- * \return	a pointer to the chosen song; NULL if none was found, music is
+ * \return	a pointer to the chosen song; 0 if none was found, music is
  * 		disabled or an error occurred
  */
 Mix_Music *Songset::get_song()
@@ -63,7 +61,7 @@ Mix_Music *Songset::get_song()
 	std::string filename;
 
 	if (g_sound_handler.get_disable_music() || m_songs.empty())
-		return NULL;
+		return 0;
 
 	if (g_sound_handler.m_random_order) {
 		songnumber = g_sound_handler.m_rng.rand() % m_songs.size();
@@ -76,10 +74,9 @@ Mix_Music *Songset::get_song()
 	}
 
 	//first, close the previous song and remove it from memory
-	if (m_m)		//m might be NULL
-		free(m_m);
+	free(m_m);
 
-	if (m_rwops) {		//rwops might be NULL
+	if (m_rwops) {		//rwops might be 0
 		SDL_FreeRW(m_rwops);
 		m_fr.Close();
 	}
@@ -87,8 +84,7 @@ Mix_Music *Songset::get_song()
 	//then open the new song
 	if (m_fr.TryOpen(*g_fs, filename.c_str()))
 		m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize());
-	else
-		return NULL;
+	else return 0;
 
 	//TODO: review the #ifdef'ed blocks
 
