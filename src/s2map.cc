@@ -114,7 +114,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
       };
 
       for(int i=1; i<=m_map->get_nrplayers(); i++) {
-         m_map->set_scenario_player_tribe(i, "barbarians"); // TODO: here should be The Empire
+         m_map->set_scenario_player_tribe(i, "empires"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
          m_map->set_scenario_player_name(i, names[i-1]);
       }
    }
@@ -248,11 +248,12 @@ void S2_Map_Loader::load_s2mf_header()
 	m_map->set_name(header.name);
 	m_map->set_nrplayers(header.nplayers);
 	m_map->set_description(_("Bluebyte Settlers II Map. No comment defined!").c_str());
-
+    
+    // This is not the name, this is the directory of the world, so please do not translate it.
 	switch(header.uses_world) {
-		case 0: m_map->set_world_name(_("greenland").c_str()); break;
-		case 1: m_map->set_world_name(_("blackland").c_str()); break;
-		case 2: m_map->set_world_name(_("winterland").c_str()); break;
+		case 0: m_map->set_world_name("greenland"); break;
+		case 1: m_map->set_world_name("blackland"); break;
+		case 2: m_map->set_world_name("winterland"); break;
 	}
 }
 
