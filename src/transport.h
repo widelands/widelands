@@ -92,7 +92,7 @@ public:
 	void set_economy(Economy* e);
 
 	bool is_moving() const throw ();
-	void cancel_moving(Game* g);
+	void cancel_moving();
 
 	PlayerImmovable* get_next_move_step(Game* g);
 
@@ -569,24 +569,24 @@ public:
 	~WaresQueue();
 
 	int get_ware() const { return m_ware; }
-	int get_size() const { return m_size; }
-	int get_filled() const { return m_filled; }
-	int get_consume_interval() const { return m_consume_interval; }
+	uint get_size            () const throw () {return m_size;}
+	uint get_filled          () const throw () {return m_filled;}
+	uint get_consume_interval() const throw () {return m_consume_interval;}
 
-	void init(Game*, int ware, int size);
-	void cleanup(Game*);
-	void update(Game*);
+	void init(const int ware, const uint size);
+	void cleanup();
+	void update();
 
 	void set_callback(callback_t* fn, void* data);
 
 	void remove_from_economy(Economy* e);
 	void add_to_economy(Economy* e);
 
-	void set_size(int size);
-	void set_filled(int size);
-	void set_consume_interval(int time);
+	void set_size            (const uint) throw ();
+	void set_filled          (const uint) throw ();
+	void set_consume_interval(const uint) throw ();
 
-   Player* get_owner(void) { return m_owner->get_owner(); }
+	Player * get_owner() const throw () {return m_owner->get_owner();}
 
    // For savegames
    void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
@@ -598,9 +598,9 @@ private:
 private:
 	PlayerImmovable*	m_owner;
 	int					m_ware;		// ware ID
-	int					m_size;		// # of items that fit into the queue
-	int					m_filled;	// # of items that are currently in the queue
-	int					m_consume_interval; // time in ms between consumption at full speed
+	uint m_size;             // # of items that fit into the queue
+	uint m_filled;           // # of items that are currently in the queue
+	uint m_consume_interval; // time in ms between consumption at full speed
 	Request*				m_request;	// currently pending request
 
 	callback_t*			m_callback_fn;

@@ -297,9 +297,8 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 		m_supply = 0;
 	}
 
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) {
-		cancel_moving(game);
+	if (Game * const game = dynamic_cast<Game * const>(g)) {
+		cancel_moving();
 		set_location(game, 0);
 	}
 
@@ -405,7 +404,7 @@ void WareInstance::update(Game* g)
 
 	// Reset our state if we're not on location or outside an economy
 	if (!loc || !get_economy()) {
-		cancel_moving(g);
+		cancel_moving();
 		return;
 	}
 
@@ -446,7 +445,7 @@ void WareInstance::update(Game* g)
 			} else {
 				t->has_failed();
 
-				cancel_moving(g);
+				cancel_moving();
 				update(g);
 				return;
 			}
@@ -542,7 +541,7 @@ Call this function if movement + potential request need to be cancelled for
 whatever reason.
 ===============
 */
-void WareInstance::cancel_moving(Game *) {
+void WareInstance::cancel_moving() {
 	if (m_transfer) {
 		molog("WareInstance::cancel_moving() fails transfer.\n");
 
@@ -1100,7 +1099,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 		molog("Flag::call_carrier(%u): Tell building to fetch this item\n", item->get_serial());
 
 		if (!get_building()->fetch_from_flag(g)) {
-			pi->item->cancel_moving(g);
+			pi->item->cancel_moving();
 			pi->item->update(g);
 		}
 
@@ -1280,7 +1279,7 @@ the flag. Give him his job.
 ==============
 */
 void Flag::flag_job_request_callback
-(Game * g, Request * rq, int, Worker * w, void * data)
+(Game *, Request * rq, int, Worker * w, void * data)
 {
 	Flag* flag = (Flag*)data;
 
@@ -2959,15 +2958,14 @@ WaresQueue::init
 Initialize the queue. This also issues the first request, if necessary.
 ===============
 */
-void WaresQueue::init(Game* g, int ware, int size)
-{
+void WaresQueue::init(const int ware, const uint size) {
 	assert(m_ware == -1);
 
 	m_ware = ware;
 	m_size = size;
 	m_filled = 0;
 
-	update(g);
+	update();
 }
 
 
@@ -2978,8 +2976,7 @@ WaresQueue::cleanup
 Clear the queue appropriately.
 ===============
 */
-void WaresQueue::cleanup(Game* g)
-{
+void WaresQueue::cleanup() {
 	assert(m_ware != -1);
 
 	if (m_filled)
@@ -2988,7 +2985,7 @@ void WaresQueue::cleanup(Game* g)
 	m_filled = 0;
 	m_size = 0;
 
-	update(g);
+	update();
 
 	m_ware = -1;
 }
@@ -3002,7 +2999,7 @@ Fix filled <= size and requests.
 You must call this after every call to set_*()
 ===============
 */
-void WaresQueue::update(Game *) {
+void WaresQueue::update() {
 	assert(m_ware != -1);
 
 	if (m_filled > m_size) {
@@ -3060,7 +3057,7 @@ void WaresQueue::request_callback
 
 	// Update
 	wq->set_filled(wq->m_filled + 1);
-	wq->update(g);
+	wq->update();
 
 	if (wq->m_callback_fn)
 		(*wq->m_callback_fn)(g, wq, ware, wq->m_callback_data);
@@ -3110,13 +3107,9 @@ Change size and fill status of the queue.
 Important: that you must call update() after calling any of these functions.
 ===============
 */
-void WaresQueue::set_size(int size)
-{
-	m_size = size;
-}
+void WaresQueue::set_size(const uint size) throw () {m_size = size;}
 
-void WaresQueue::set_filled(int filled)
-{
+void WaresQueue::set_filled(const uint filled) throw() {
 	if (filled > m_filled)
 		m_owner->get_economy()->add_wares(m_ware, filled - m_filled);
 	else if (filled < m_filled)
@@ -3135,10 +3128,8 @@ is consuming at full speed.
 This interval is merely a hint for the Supply/Request balancing code.
 ===============
 */
-void WaresQueue::set_consume_interval(int time)
-{
-	m_consume_interval = time;
-}
+void WaresQueue::set_consume_interval(const uint time) throw ()
+{m_consume_interval = time;}
 
 /*
  * Read and write

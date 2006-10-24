@@ -336,7 +336,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq->init((Game*)g, get_owner()->get_tribe()->get_safe_ware_index((*bc)[i].name.c_str()), (*bc)[i].amount);
+			wq->init(get_owner()->get_tribe()->get_safe_ware_index((*bc)[i].name.c_str()), (*bc)[i].amount);
 
 			m_work_steps += (*bc)[i].amount;
 		}
@@ -368,7 +368,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 
 	// Cleanup the wares queues
 	for(uint i = 0; i < m_wares.size(); i++) {
-		m_wares[i]->cleanup((Game*)g);
+		m_wares[i]->cleanup();
 		delete m_wares[i];
 	}
 	m_wares.clear();
@@ -432,7 +432,7 @@ Called by transfer code when the builder has arrived on site.
 ===============
 */
 void ConstructionSite::request_builder_callback
-(Game * g, Request * rq, int, Worker * w, void * data)
+(Game *, Request * rq, int, Worker * w, void * data)
 {
 	assert(w);
 
@@ -513,7 +513,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 
 			wq->set_filled(wq->get_filled() - 1);
 			wq->set_size(wq->get_size() - 1);
-			wq->update(g);
+			wq->update();
 
 			m_working = true;
 			m_work_steptime = g->get_gametime() + CONSTRUCTIONSITE_STEP_TIME;

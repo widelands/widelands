@@ -335,7 +335,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 
 			m_input_queues.push_back(wq);
 			//wq->set_callback(&ConstructionSite::wares_queue_callback, this);
-			wq->init((Game*)g,
+			wq->init(
 				get_owner()->get_tribe()->get_safe_ware_index((*inputs)[i].get_ware()->get_name()),
 				(*inputs)[i].get_max());
 		}
@@ -407,7 +407,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 
    // Cleanup the wares queues
    for(uint i = 0; i < m_input_queues.size(); i++) {
-      m_input_queues[i]->cleanup((Game*)g);
+      m_input_queues[i]->cleanup();
       delete m_input_queues[i];
    }
    m_input_queues.clear();
@@ -598,11 +598,14 @@ void ProductionSite::program_act(Game* g)
                   if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
                            wares[j].c_str()) == 0) {
                      WaresQueue* wq = m_input_queues[i];
-                     if(wq->get_filled()>=action->iparam1)
+							if
+								(static_cast<const int>(wq->get_filled())
+								 >=
+								 action->iparam1)
                      {
                         // Okay
                         wq->set_filled(wq->get_filled()-action->iparam1);
-                        wq->update(g);
+								wq->update();
                         consumed=true;
                         break;
                      }
@@ -637,7 +640,10 @@ void ProductionSite::program_act(Game* g)
                   if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
                            wares[j].c_str()) == 0) {
                      WaresQueue* wq = m_input_queues[i];
-                     if(wq->get_filled()>=action->iparam1)
+							if
+								(static_cast<const int>(wq->get_filled())
+								 >=
+								 action->iparam1)
                      {
                         // okay, do nothing
                         molog("    okay\n");
