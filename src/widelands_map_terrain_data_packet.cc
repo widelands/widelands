@@ -70,17 +70,12 @@ throw (_wexception)
       }
 
       // Now get all the terrains
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
-            uchar terd;
-            uchar terr;
-            Field* f=map->get_field(Coords(x,y));
-            terr=fr.Unsigned8();
-            terd=fr.Unsigned8();
-           // log("[Map Loader] Setting terrain of (%i,%i) to '%s','%s'\n", x, y, smap[terr]->get_name(), smap[terd]->get_name());
-            f->set_terrainr(smap[terr]);
-            f->set_terraind(smap[terd]);
-         }
+		Map & map = egbase->map();
+		const Map::Index max_index = map.max_index();
+		for (Map::Index i = 0; i < max_index; ++i) {
+			Field & f = map[i];
+			f.set_terrainr(smap[fr.Unsigned8()]);
+			f.set_terraind(smap[fr.Unsigned8()]);
       }
       return;
    }
@@ -121,12 +116,12 @@ throw (_wexception)
    }
 
    // Now, all terrains as unsigned chars in order
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         fw.Unsigned8(smap[map->get_field(Coords(x,y))->get_terr()->get_name()]);
-         fw.Unsigned8(smap[map->get_field(Coords(x,y))->get_terd()->get_name()]);
-      }
+	Map & map = egbase->map();
+	const Map::Index max_index = map.max_index();
+	for (Map::Index i = 0; i < max_index; ++i) {
+		Field & f = map[i];
+		fw.Unsigned8(smap[f.get_terr()->get_name()]);
+		fw.Unsigned8(smap[f.get_terd()->get_name()]);
    }
 
    fw.Write( fs, "binary/terrain");
