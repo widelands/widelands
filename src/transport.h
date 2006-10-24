@@ -91,7 +91,7 @@ public:
 	void set_location(Editor_Game_Base* g, Map_Object* loc);
 	void set_economy(Economy* e);
 
-	bool is_moving(Game* g);
+	bool is_moving() const throw ();
 	void cancel_moving(Game* g);
 
 	PlayerImmovable* get_next_move_step(Game* g);
@@ -427,7 +427,7 @@ class Supply : public Trackable {
 public:
 	virtual PlayerImmovable* get_position(Game* g) = 0;
 	virtual int get_amount(const int ware) const = 0;
-	virtual bool is_active(Game* g) = 0;
+	virtual bool is_active() const throw () = 0;
 
 	virtual WareInstance* launch_item(Game* g, int ware) = 0;
 	virtual Worker* launch_worker(Game* g, int ware) = 0;

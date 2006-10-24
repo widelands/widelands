@@ -64,7 +64,7 @@ public:
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(const int ware) const;
-	virtual bool is_active(Game* g);
+	virtual bool is_active() const throw ();
 
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
@@ -161,10 +161,8 @@ int IdleWareSupply::get_amount(const int ware) const
 IdleWareSupply::is_active
 ===============
 */
-bool IdleWareSupply::is_active(Game* g)
-{
-	return !m_ware->is_moving(g);
-}
+bool IdleWareSupply::is_active()  const throw ()
+{return not m_ware->is_moving();}
 
 
 /*
@@ -533,7 +531,7 @@ WareInstance::is_moving
 We are moving when there's a transfer, it's that simple.
 ===============
 */
-bool WareInstance::is_moving(Game *) {return m_transfer;}
+bool WareInstance::is_moving() const throw () {return m_transfer;}
 
 
 /*
@@ -4133,7 +4131,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 		Route* route;
 
 		// idle requests only get active supplies
-		if (req->is_idle() && !supp->is_active(g))
+		if (req->is_idle() and not supp->is_active())
 			continue;
 
 		// Check requeriments
@@ -4229,7 +4227,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 			// for the request
 			idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
 
-			if (!supp->is_active(g)) {
+			if (not supp->is_active()) {
 				// If the building wouldn't have to idle, we wait with the request
 				if (idletime < -200) {
 					if (s->nexttimer < 0 || s->nexttimer > (-idletime))
@@ -4324,8 +4322,7 @@ void Economy::create_requested_workers(Game* g)
 				for(int i = 0; i < m_worker_supplies[index].get_nrsupplies(); i++) {
 					Supply* supp = m_worker_supplies[index].get_supply(i);
 
-					if (!supp->is_active(g))
-					{
+					if (not supp->is_active()) {
 						if (req->has_requeriments())
 						{
 							if (supp->get_passing_requeriments (g, index, req->get_requeriments()))

@@ -54,7 +54,7 @@ class IdleSoldierSupply : public Supply {
 	public:
 		virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(const int ware) const;
-		virtual bool is_active(Game* g);
+	virtual bool is_active() const throw ();
 
 		virtual WareInstance* launch_item(Game* g, int ware);
 		virtual Worker* launch_worker(Game* g, int ware);
@@ -151,7 +151,7 @@ Idle soldiers are always active supplies, because they need to get into a
 Warehouse ASAP.
 ===============
 */
-bool IdleSoldierSupply::is_active(Game *) {return true;}
+bool IdleSoldierSupply::is_active() const throw () {return true;}
 
 
 /*

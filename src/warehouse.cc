@@ -242,7 +242,7 @@ WarehouseSupply::is_active
 Warehouse supplies are never active.
 ===============
 */
-bool WarehouseSupply::is_active(Game *) {return false;}
+bool WarehouseSupply::is_active() const throw () {return false;}
 
 
 /*
