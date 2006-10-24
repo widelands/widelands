@@ -177,7 +177,7 @@ public:
    void recalc_for_field_area(Coords coords, int radius);
    void recalc_default_resources(void);
 
-	void set_nrplayers(const uint nrplayers);
+	void set_nrplayers(const Uint8 nrplayers);
 
 	void set_starting_pos(const uint plnum, const Coords);
 	Coords get_starting_pos(const uint plnum) const
@@ -195,7 +195,7 @@ public:
 	const char * get_name() const {return m_name;}
 	const char * get_description() const {return m_description;}
 	const char * get_world_name() const {return m_worldname;}
-	ushort get_nrplayers() const {return m_nrplayers;}
+	Uint8 get_nrplayers() const throw () {return m_nrplayers;}
 	uint get_width() const {return m_width;}
 	uint get_height() const {return m_height;}
 	World * get_world() const {return m_world;}
@@ -328,7 +328,7 @@ private:
 	void load_world();
 	void recalc_border(const FCoords);
 
-	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
+	Uint8             m_nrplayers; // # of players this map supports (!= Game's number of players)
 	uint		m_width;
 	uint		m_height;
 	char		m_filename[256];
@@ -866,6 +866,7 @@ next() returns false when no more fields are to be traversed.
 class MapRegion {
 public:
 	MapRegion() { }
+	MapRegion(const Map &, const Coords, const Uint16 radius);
 	MapRegion(const Map* map, Coords coords, uint radius) { init(map, coords, radius); }
 	~MapRegion() { }
 

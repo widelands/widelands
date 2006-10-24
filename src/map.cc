@@ -502,8 +502,7 @@ Change the number of players the map supports.
 Could happen multiple times in the map editor.
 ===============
 */
-void Map::set_nrplayers(const uint nrplayers)
-{
+void Map::set_nrplayers(const Uint8 nrplayers) {
 	if (!nrplayers) {
 		if (m_starting_pos)
 			free(m_starting_pos);
@@ -2738,6 +2737,10 @@ MapRegion IMPLEMENTATION
 
 ==============================================================================
 */
+
+MapRegion::MapRegion(const Map & map, const Coords c, const Uint16 radius) {
+	init(&map, c, radius);
+}
 
 /*
 ===============
