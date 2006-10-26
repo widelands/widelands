@@ -23,7 +23,10 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class UIListselect;
+class Event;
+class EventChain;
+class Trigger;
+template <typename T> struct UIListselect;
 class UIButton;
 
 /*
@@ -41,9 +44,9 @@ class Editor_Event_Menu : public UIUniqueWindow {
    private:
       Editor_Interactive *m_parent;
 
-      UIListselect   *m_event_list;
-      UIListselect   *m_eventchain_list;
-      UIListselect   *m_trigger_list;
+	UIListselect<Event      &> *m_event_list;
+	UIListselect<EventChain &> *m_eventchain_list;
+	UIListselect<Trigger    &> *m_trigger_list;
       UIButton       *m_btn_del_event;
       UIButton       *m_btn_edit_event;
       UIButton       *m_btn_del_trigger;
@@ -56,7 +59,15 @@ class Editor_Event_Menu : public UIUniqueWindow {
       void trigger_double_clicked(int);
       void event_double_clicked(int);
       void eventchain_double_clicked(int);
-      void clicked(int);
+	void clicked_new_event      ();
+	void clicked_del_event      ();
+	void clicked_edit_event     ();
+	void clicked_new_trigger    ();
+	void clicked_del_trigger    ();
+	void clicked_edit_trigger   ();
+	void clicked_new_eventchain ();
+	void clicked_del_eventchain ();
+	void clicked_edit_eventchain();
       void update();
 };
 

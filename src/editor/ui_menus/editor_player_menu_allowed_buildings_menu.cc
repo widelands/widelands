@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,13 +49,13 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
 
    // Allowed List
    new UITextarea(this, spacing, posy, get_inner_w()/2, 20, _("Allowed Buildings: "), Align_CenterLeft);
-   m_allowed=new UIListselect(this, spacing, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
+   m_allowed=new UIListselect<void *>(this, spacing, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
    m_allowed->selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
    m_allowed->double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
 
    // Forbidden List
    new UITextarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2, 20, _("Forbidden Buildings: "), Align_CenterLeft);
-   m_forbidden=new UIListselect(this, get_inner_w()/2+spacing+20, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
+   m_forbidden=new UIListselect<void *>(this, get_inner_w()/2+spacing+20, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
    m_forbidden->selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
    m_forbidden->double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
@@ -116,7 +116,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::~Editor_Player_Menu_Allowed_Buildings
  * UI Action callback functions
  */
 void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(int i) {
-   UIListselect* source, *target;
+	UIListselect<void *> * source, * target;
    bool set_to;
 
    if(i==0) {

@@ -48,14 +48,14 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
 
    // Event List
    new UITextarea(this, spacing, offsy, _("Available Events: "), Align_Left);
-   m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_event_list=new UIListselect<Event_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
    uint i=0;
    for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
-      Event_Descr* d=Event_Factory::get_event_descr(i);
-      m_event_list->add_entry(d->name, d);
+		Event_Descr & d = *Event_Factory::get_event_descr(i);
+		m_event_list->add_entry(d.name, d);
    }
    m_event_list->sort();
 
@@ -110,10 +110,9 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
       return;
    }
 
-   Event_Descr* d=static_cast<Event_Descr*>(m_event_list->get_selection());
    // Create new event
-   Event* event=
-      Event_Factory::make_event_with_option_dialog(d->id.c_str(), m_parent, 0);
+	Event * const event = Event_Factory::make_event_with_option_dialog
+		(m_event_list->get_selection().id.c_str(), m_parent, 0);
    if(!event) {
       // No event created, choose another, user
       return;
@@ -127,8 +126,7 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Event::selected(int) {
-   Event_Descr* d=static_cast<Event_Descr*>(m_event_list->get_selection());
-   m_description->set_text(d->descr);
+	m_description->set_text(m_event_list->get_selection().descr);
    m_ok_button->set_enabled(true);
 }
 

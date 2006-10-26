@@ -64,7 +64,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    int posy=offsy;
 
    // listselect
-   m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
+   m_ls=new UIListselect<const char * const>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Main_Menu_Save_Map::selected);
    m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked);
    // Filename editbox
@@ -247,7 +247,7 @@ void Main_Menu_Save_Map::fill_list(void) {
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
 	   m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
-      m_ls->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
+      m_ls->add_entry("<parent>", m_parentdir.c_str(), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
 
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
@@ -258,7 +258,7 @@ void Main_Menu_Save_Map::fill_list(void) {
       if(!g_fs->IsDirectory(name)) continue;
       if(Widelands_Map_Loader::is_widelands_map(name)) continue;
 
-      m_ls->add_entry(FileSystem::FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
+      m_ls->add_entry(FileSystem::FS_Filename(name), name, false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
 
    Map* map=new Map();
@@ -277,7 +277,7 @@ void Main_Menu_Save_Map::fill_list(void) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
          }
-	 m_ls->add_entry(FileSystem::FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  pic.c_str() ));
+	 m_ls->add_entry(FileSystem::FS_Filename(name), name, false, g_gr->get_picture( PicMod_Game,  pic.c_str() ));
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }

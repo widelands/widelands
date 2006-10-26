@@ -252,7 +252,7 @@ private:
 
 	UIMultiline_Textarea*	m_ui_field;
 	UIButton*					m_ui_immovable;
-	UIListselect*				m_ui_bobs;
+	UIListselect<void *> * m_ui_bobs;
 };
 
 
@@ -275,7 +275,7 @@ FieldDebugWindow::FieldDebugWindow(Interactive_Base* parent, Coords coords)
 	m_ui_immovable = new UIButton(this, 0, 80, 200, 24, 0);
 	m_ui_immovable->clicked.set(this, &FieldDebugWindow::open_immovable);
 
-	m_ui_bobs = new UIListselect(this, 0, 104, 200, 96);
+	m_ui_bobs = new UIListselect<void *>(this, 0, 104, 200, 96);
 	m_ui_bobs->selected.set(this, &FieldDebugWindow::open_bob);
 }
 

@@ -35,7 +35,8 @@ Args: parent	parent panel
       h
       align	alignment of text inside the UIListselect
 */
-UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
+UIListselect<void *>::UIListselect
+(UIPanel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
 	: UIPanel(parent, x, y, w, h)
 {
 	set_think(false);
@@ -74,18 +75,13 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 /**
 Free allocated resources
 */
-UIListselect::~UIListselect()
-{
-	m_scrollbar = 0;
-   clear();
-}
+UIListselect<void *>::~UIListselect() {m_scrollbar = 0; clear();}
 
 
 /**
 Remove all entries from the listselect
 */
-void UIListselect::clear()
-{
+void UIListselect<void *>::clear() {
 	for(uint i = 0; i < m_entries.size(); i++)
 		free(m_entries[i]);
 	m_entries.clear();
@@ -106,7 +102,11 @@ Args: name	name that will be displayed
       value	value returned by get_select()
       select if true, directly select the new entry
 */
-void UIListselect::add_entry(const char *name, void* value, bool select, int picid)
+void UIListselect<void *>::add_entry
+(const char * const name,
+ void * value,
+ const bool select,
+ const int picid)
 {
 	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
 
@@ -139,18 +139,23 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 /*
  * Switch two entries
  */
-void UIListselect::switch_entries( int n, int m ) {
-   if( n < 0 || m < 0) return;
-   if( n >= get_nr_entries() || m >= get_nr_entries()) return;
+void UIListselect<void *>::switch_entries(const uint m, const uint n) {
+	assert(m < get_nr_entries());
+	assert(n < get_nr_entries());
 
-   Entry* temp = m_entries[n];
-   m_entries[n] = m_entries[m];
-   m_entries[m] = temp;
+	std::swap(m_entries[m], m_entries[n]);
 
-   if( m_selection == n )
-      m_selection = m;
-   else if ( m_selection == m )
-      m_selection = n;
+	int selection = m_selection;
+	const int sm = m, sn = n;
+	const bool selected_m = selection == sm, selected_n = selection == sn;
+	if        (selected_m) {
+		selection = sn;
+		selected.call(sn);
+	} else if (selected_n) {
+		selection = sm;
+		selected.call(sm);
+	}
+	if (selected_m or selected_n) selected.call(m_selection = selection);
 }
 
 /*
@@ -160,7 +165,7 @@ void UIListselect::switch_entries( int n, int m ) {
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void UIListselect::sort(int gstart, int gend) {
+void UIListselect<void *>::sort(const int gstart, const int gend) {
    uint start=gstart;
    uint stop=gend;
    if(gstart==-1) start=0;
@@ -185,17 +190,14 @@ void UIListselect::sort(int gstart, int gend) {
 /**
 Set the list alignment (only horizontal alignment works)
 */
-void UIListselect::set_align(Align align)
-{
-	m_align = (Align)(align & Align_Horizontal);
-}
+void UIListselect<void *>::set_align(const Align align)
+{m_align = static_cast<const Align>(align & Align_Horizontal);}
 
 
 /**
 Scroll to the given position, in pixels.
 */
-void UIListselect::set_scrollpos(int i)
-{
+void UIListselect<void *>::set_scrollpos(const int i) {
 	m_scrollpos = i;
 
 	update(0, 0, get_eff_w(), get_h());
@@ -208,8 +210,7 @@ void UIListselect::set_scrollpos(int i)
  *
  * Args: i	the entry to select
  */
-void UIListselect::select(int i)
-{
+void UIListselect<void *>::select(const int i) {
 	if (m_selection == i)
 		return;
 
@@ -228,17 +229,14 @@ void UIListselect::select(int i)
 /**
 Return the total height (text + spacing) occupied by a single line
 */
-int UIListselect::get_lineheight()
-{
-	return m_lineheight+2;
-}
+int UIListselect<void *>::get_lineheight() const throw ()
+{return m_lineheight + 2;}
 
 
 /**
 Redraw the listselect box
 */
-void UIListselect::draw(RenderTarget* dst)
-{
+void UIListselect<void *>::draw(RenderTarget* dst) {
 	// draw text lines
 	int lineheight = get_lineheight();
 	int idx = m_scrollpos / lineheight;
@@ -293,7 +291,9 @@ void UIListselect::draw(RenderTarget* dst)
 /**
  * Handle mouse clicks: select the appropriate entry
  */
-bool UIListselect::handle_mouseclick(const Uint8 btn, const bool down, int, int y) {
+bool UIListselect<void *>::handle_mouseclick
+(const Uint8 btn, const bool down, int, int y)
+{
 	if (btn != SDL_BUTTON_LEFT) return false;
 
    if (down) {
@@ -324,13 +324,13 @@ bool UIListselect::handle_mouseclick(const Uint8 btn, const bool down, int, int 
 /*
  * Remove entry
  */
-void UIListselect::remove_entry(int i) {
-   if(i<0 || ((uint)i)>=m_entries.size()) return;
+void UIListselect<void *>::remove_entry(const uint i) {
+	assert(i < m_entries.size());
 
    free(m_entries[i]);
    m_entries.erase(m_entries.begin() + i);
-   if(m_selection==i)
-      m_selection=-1;
+	if (m_selection == static_cast<const int>(i))
+		selected.call(m_selection = -1);
 }
 
 /*
@@ -338,7 +338,7 @@ void UIListselect::remove_entry(int i) {
  * the first entry with this name. If none is found, nothing
  * is done
  */
-void UIListselect::remove_entry(const char *str ) {
+void UIListselect<void *>::remove_entry(const char * const str) {
    for(uint i=0; i<m_entries.size(); i++) {
       if(!strcmp(m_entries[i]->name,str)) {
          remove_entry(i);

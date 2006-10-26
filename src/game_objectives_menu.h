@@ -26,6 +26,7 @@
 
 class Game;
 class Interactive_Player;
+class MapObjective;
 
 // The GameObjectives Menu shows the not already
 // fullfilled scenario objectives.
@@ -34,7 +35,7 @@ public:
 	GameObjectivesMenu(Interactive_Player &, UIUniqueWindowRegistry &, Game &);
 
 private:
-	UIListselect         list;
+	UIListselect<MapObjective &>list;
 	UIMultiline_Textarea objectivetext;
 
    void selected(int);

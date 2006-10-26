@@ -105,7 +105,7 @@ m_parent(parent)
    m_button_name->changedid.set(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
    // Listbox for buttons
-   m_buttons_ls=new UIListselect(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, 80, Align_Left);
+   m_buttons_ls=new UIListselect<void *>(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, 80, Align_Left);
    m_buttons_ls->selected.set(this, &Event_Message_Box_Option_Menu::ls_selected);
 
    // Select trigger

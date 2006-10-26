@@ -86,7 +86,7 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
    m_chatbox->changed.set(this, &Fullscreen_Menu_InetLobby::changed);
 
    // User Listing
-   m_userlist = new UIListselect(this, (int)(get_inner_w()-get_inner_w()*0.25+5), 40, (int)(get_inner_w()*0.25-10), get_inner_h()-40-50, Align_Left);
+   m_userlist = new UIListselect<void *>(this, (int)(get_inner_w()-get_inner_w()*0.25+5), 40, (int)(get_inner_w()*0.25-10), get_inner_h()-40-50, Align_Left);
 
    // Buttons
    UIButton* b = new UIButton(this, (int)(get_inner_w()-get_inner_w()*0.25+5), get_inner_h()-45, 50, 25, 0, 0);

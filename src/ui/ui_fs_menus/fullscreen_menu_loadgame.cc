@@ -60,7 +60,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *, bool)
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new UIListselect(this, 15, 205, 455, 365);
+	list = new UIListselect<const char * const>(this, 15, 205, 455, 365);
 	list->selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
    list->double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
 
@@ -79,7 +79,7 @@ Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame()
 
 void Fullscreen_Menu_LoadGame::ok()
 {
-   std::string filename=static_cast<const char*>(list->get_selection());
+	std::string filename = list->get_selection();
 
    m_filename = filename;
 
@@ -87,7 +87,7 @@ void Fullscreen_Menu_LoadGame::ok()
 }
 
 void Fullscreen_Menu_LoadGame::map_selected(int) {
-   const char* name=static_cast<const char*>(list->get_selection());
+   const char* name = list->get_selection();
 
    if (name)
    {
@@ -146,7 +146,7 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
-         list->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
+			list->add_entry(fname, name);
          free(fname);
 
       } catch(_wexception& ) {

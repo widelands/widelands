@@ -26,7 +26,7 @@
 class Interactive_Player;
 class UIEdit_Box;
 class UITextarea;
-class UIListselect;
+template <typename T> struct UIListselect;
 class UIButton;
 
 
@@ -47,7 +47,7 @@ class Game_Main_Menu_Save_Game : public UIUniqueWindow {
       Interactive_Player* m_parent;
       UIEdit_Box* m_editbox;
       UITextarea* m_name, *m_gametime;
-      UIListselect* m_ls;
+	UIListselect<const char * const> * m_ls;
       filenameset_t m_gamefiles;
 
       UIButton* m_ok_btn;

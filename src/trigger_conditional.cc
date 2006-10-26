@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,9 @@
 #include "event_chain.h"
 #include "trigger.h"
 #include "trigger_conditional.h"
+
+const char * const TriggerConditional_Factory::operators[] =
+{"(", ")", "AND", "OR", "XOR", "NOT", "trigger"};
 
 /*
  * TriggerConditional_Factory
@@ -61,7 +64,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
          tempstack.pop_back(); // Pop the last left paranthesis
       } else if( vec[i].token == TRIGGER ) {
          postfix.push_back( vec[i] );
-      } else if( vec[i].token >= OPERATOR ) {
+      } else if( vec[i].token < TRIGGER ) {
          bool pushed = false;
          while( !pushed ) {
             if( !tempstack.size() ) {
@@ -74,7 +77,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
                pushed = true;
             } else {
                // Pop an operator
-               assert( tempstack.back().token >= OPERATOR);
+               assert( tempstack.back().token < TRIGGER);
                postfix.push_back( tempstack.back() );
                tempstack.pop_back();
             }

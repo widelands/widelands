@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 class Interactive_Player;
 class UIEdit_Box;
 class UITextarea;
-class UIListselect;
+template <typename T> struct UIListselect;
 class UIButton;
 
 
@@ -42,11 +42,11 @@ class Game_Main_Menu_Load_Game : public UIUniqueWindow {
       void double_clicked(int);
 
       void fill_list(void);
-      bool load_game(std::string);
+	bool load_game(const std::string & filename);
 
       Interactive_Player* m_parent;
       UITextarea* m_name, *m_gametime;
-      UIListselect* m_ls;
+	UIListselect<const char * const> * m_ls;
       filenameset_t m_gamefiles;
 
       UIButton* m_ok_btn;

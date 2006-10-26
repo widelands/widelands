@@ -23,7 +23,8 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIListselect;
+class Event_Descr;
+template <typename T> struct UIListselect;
 class UIMultiline_Textarea;
 class UIButton;
 
@@ -43,7 +44,7 @@ class Editor_Event_Menu_New_Event : public UIWindow {
       void selected(int);
       void double_clicked(int);
 
-      UIListselect* m_event_list;
+	UIListselect<Event_Descr &> * m_event_list;
       UIMultiline_Textarea* m_description;
       Editor_Interactive* m_parent;
       UIButton* m_ok_button;

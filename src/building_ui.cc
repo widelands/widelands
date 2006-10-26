@@ -1030,7 +1030,7 @@ class ProductionSite_Window_ListWorkerWindow : public UIWindow{
       Coords          m_ps_location;
       ProductionSite* m_ps;
       Interactive_Player* m_parent;
-      UIListselect* m_ls;
+	UIListselect<Worker &> * m_ls;
       UITextarea* m_type, *m_experience, *m_becomes;
 };
 
@@ -1054,7 +1054,7 @@ ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(I
    int posy=offsy;
 
    // listselect
-   m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
+   m_ls=new UIListselect<Worker &>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
 
    // the descriptive areas
    // Type
@@ -1111,11 +1111,14 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 
    uint i;
    for(i=0; i<workers->size(); i++) {
-      Worker* worker=(*workers)[i];
-      m_ls->add_entry(worker->get_descname().c_str(), worker, false,
-		                worker->get_menu_pic());
+		Worker & worker = *(*workers)[i];
+		m_ls->add_entry
+			(worker.get_descname().c_str(),
+			 worker,
+			 false,
+			 worker.get_menu_pic());
    }
-   if(m_ls->get_nr_entries()>m_last_select)
+	if (static_cast<const int>(m_ls->get_nr_entries()) > m_last_select)
       m_ls->select(m_last_select);
    else if(m_ls->get_nr_entries())
       m_ls->select(m_ls->get_nr_entries()-1);
@@ -1129,8 +1132,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 void ProductionSite_Window_ListWorkerWindow::update(void) {
    char buffer[250];
 
-   Worker* worker=static_cast<Worker*>(m_ls->get_selection());
-   if(worker) {
+	if (const Worker * const worker = &m_ls->get_selection()) { // FIXME always true!!
 
       sprintf(buffer, "%s", worker->get_descname().c_str());
       m_type->set_text(buffer);

@@ -126,7 +126,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
             m_resolutions.push_back(this_res);
       }
 
-	m_reslist = new UIListselect(this, 80, 110, 190, 150,Align_Left,true);
+	m_reslist = new UIListselect<void *>(this, 80, 110, 190, 150,Align_Left,true);
 	bool did_select_a_res=false;
 	for(uint i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
@@ -135,7 +135,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
       && m_resolutions[i].yres == opt.yres
       && m_resolutions[i].depth == opt.depth) ? true : false);
 		did_select_a_res|=selected;
-		m_reslist->add_entry(buf,NULL,selected);
+		m_reslist->add_entry(buf, 0 ,selected);
 	}
 	if (!did_select_a_res)
 		m_reslist->select(m_reslist->get_nr_entries()-1);
@@ -143,14 +143,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
    // Available locales
   	// In-game resolution
 	new UITextarea(this, MENU_XRES/2+85, 95, _("Language"), Align_VCenter);
-	m_language_list = new UIListselect(this, MENU_XRES/2 + 75, 110, 210, 150,Align_Left,true);
+	m_language_list = new UIListselect<std::string &>(this, MENU_XRES/2 + 75, 110, 210, 150,Align_Left,true);
    available_languages[0].name = _( "System default language" );
    for(uint i = 0; i < NR_LANGUAGES; i++) {
 		bool selected = false;
 	   if(  available_languages[i].abbrev == opt.language )
          selected = true;
       m_language_list->add_entry( available_languages[i].name.c_str(),
-            &available_languages[i].abbrev, selected);
+            available_languages[i].abbrev, selected);
 	}
 
 
@@ -184,7 +184,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	opt.show_warea = m_show_workarea_preview->get_state();
 	opt.snap_windows_only_when_overlapping = m_snap_windows_only_when_overlapping->get_state();
 	opt.dock_windows_to_edges = m_dock_windows_to_edges->get_state();
-	opt.language = ((std::string*)(m_language_list->get_selection()))->c_str();
+	opt.language = m_language_list->get_selection().c_str();
    opt.music = m_music->get_state();
    opt.fx = m_fx->get_state();
    return opt;

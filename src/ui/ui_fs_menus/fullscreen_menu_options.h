@@ -30,7 +30,7 @@
 class Fullscreen_Menu_Options;
 struct Section;
 struct UICheckbox;
-struct UIListselect;
+template <typename T> struct UIListselect;
 
 class Options_Ctrl {
 	public:
@@ -80,8 +80,8 @@ private:
 	UICheckbox* m_show_workarea_preview;
 	UICheckbox* m_snap_windows_only_when_overlapping;
 	UICheckbox* m_dock_windows_to_edges;
-	UIListselect* m_reslist;
-	UIListselect* m_language_list;
+	UIListselect<void *> * m_reslist;
+	UIListselect<std::string &> * m_language_list;
 
 	struct res {
 		int xres;

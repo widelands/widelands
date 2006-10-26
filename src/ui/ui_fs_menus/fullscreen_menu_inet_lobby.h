@@ -26,7 +26,7 @@
 
 class UIEdit_Box;
 class UIMultiline_Textarea;
-class UIListselect;
+template <typename T> struct UIListselect;
 class Game_Server_Connection;
 
 /*
@@ -52,7 +52,7 @@ class Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
       Game_Server_Connection* m_gsc;
 		UIEdit_Box*	m_chatbox;
       UIMultiline_Textarea* m_chatarea;
-      UIListselect* m_userlist;
+      UIListselect<void *> * m_userlist;
       bool  m_disconnect_expected;
 
    private:

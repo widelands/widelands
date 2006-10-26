@@ -23,7 +23,8 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIListselect;
+class Event;
+template <typename T> struct UIListselect;
 class UIButton;
 class UICheckbox;
 class UIEdit_Box;
@@ -42,14 +43,21 @@ class Editor_Event_Menu_Edit_EventChain : public UIWindow {
       void think( void );
 
    private:
-      void clicked(int);
+	void clicked_cancel                  ();
+	void clicked_ok                      ();
+	void clicked_new_event               ();
+	void clicked_edit_trigger_contitional();
+	void clicked_ins_event               ();
+	void clicked_del_event               ();
+	void clicked_move_up                 ();
+	void clicked_move_down               ();
       void tl_selected(int);
       void tl_double_clicked(int);
       void cs_selected(int);
       void cs_double_clicked(int);
 
-      UIListselect       *m_available_events;
-      UIListselect       *m_events;
+	UIListselect<Event &> *m_available_events;
+	UIListselect<Event &> *m_events;
       Editor_Interactive *m_parent;
       UIButton           *m_insert_btn;
       UIButton           *m_delete_btn;

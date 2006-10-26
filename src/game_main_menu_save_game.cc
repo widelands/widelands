@@ -55,7 +55,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    int posy=offsy;
 
    // listselect
-   m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
+   m_ls=new UIListselect<const char * const>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
    m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
    // Filename editbox
@@ -129,7 +129,7 @@ void Game_Main_Menu_Save_Game::clicked(int id) {
  * called when a item is selected
  */
 void Game_Main_Menu_Save_Game::selected(int) {
-   const char* name=static_cast<const char*>(m_ls->get_selection());
+	const char * const name = m_ls->get_selection();
 
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
@@ -184,7 +184,7 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
 			gl.preload_game(&gpdp);
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
-         m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
+			m_ls->add_entry(fname, name);
          free(fname);
       } catch(_wexception& ) {
          // we simply skip illegal entries

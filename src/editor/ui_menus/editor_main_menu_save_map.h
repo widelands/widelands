@@ -26,7 +26,7 @@
 class Editor_Interactive;
 class UIButton;
 class UIEdit_Box;
-class UIListselect;
+template <typename T> struct UIListselect;
 class UIMultiline_Textarea;
 class UITextarea;
 
@@ -57,7 +57,7 @@ class Main_Menu_Save_Map : public UIWindow {
       UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
       UIMultiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
-      UIListselect* m_ls;
+	UIListselect<const char * const> * m_ls;
       UIButton* m_ok_btn;
 
       std::string m_basedir;

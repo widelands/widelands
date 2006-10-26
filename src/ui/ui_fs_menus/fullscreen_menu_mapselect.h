@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ class Editor_Game_Base;
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	Editor_Game_Base		*egbase;
 
-	UIListselect *list;
+	UIListselect<const char * const> *list;
 	UITextarea *taname;
 	UITextarea *taauthor;
 	UITextarea *tasize;

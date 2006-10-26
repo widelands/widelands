@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "ui_unique_window.h"
 
 class Player;
-class UIListselect;
+template <typename T> struct UIListselect;
 class UIButton;
 
 /*
@@ -38,7 +38,7 @@ class Editor_Player_Menu_Allowed_Buildings_Menu : public UIUniqueWindow {
 
    private:
       Player* m_player;
-      UIListselect* m_allowed, *m_forbidden;
+      UIListselect<void *> * m_allowed, *m_forbidden;
       UIButton* m_rtl_button, *m_ltr_button;
       void allowed_selected(int);
       void forbidden_selected(int);

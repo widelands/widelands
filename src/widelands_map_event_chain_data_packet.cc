@@ -178,40 +178,10 @@ throw (_wexception)
       for( uint i = 0; i < toklist->size(); i++) {
          TriggerConditional_Factory::Token tok = (*toklist)[i];
          sprintf(buf, "conditional_element_%02i", i);
-         switch( tok.token ) {
-            case TriggerConditional_Factory::OPERATOR:
-               assert(0); // In a good world, this can't happen
-               break;
-
-            case TriggerConditional_Factory::TRIGGER:
-               s.set_string(buf, "trigger");
+			s.set_string(buf, TriggerConditional_Factory::operators[tok.token]);
+			if (tok.token == TriggerConditional_Factory::TRIGGER) {
                sprintf(buf, "conditional_element_%02i_data", i);
                s.set_string(buf, static_cast<Trigger*>(tok.data)->get_name());
-               break;
-
-            case TriggerConditional_Factory::RPAREN:
-               s.set_string(buf, ")");
-               break;
-
-            case TriggerConditional_Factory::LPAREN:
-               s.set_string(buf, "(");
-               break;
-
-            case TriggerConditional_Factory::XOR:
-               s.set_string(buf, "XOR");
-               break;
-
-            case TriggerConditional_Factory::OR:
-               s.set_string(buf, "OR");
-               break;
-
-            case TriggerConditional_Factory::AND:
-               s.set_string(buf, "AND");
-               break;
-
-            case TriggerConditional_Factory::NOT:
-               s.set_string(buf, "NOT");
-               break;
          }
       }
       delete toklist;

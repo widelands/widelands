@@ -52,7 +52,7 @@ Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* parent, U
    int posy=offsy;
 
    // listselect
-   m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
+   m_ls=new UIListselect<const char * const>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Game_Main_Menu_Load_Game::selected);
    m_ls->double_clicked.set(this, &Game_Main_Menu_Load_Game::double_clicked);
 
@@ -109,11 +109,9 @@ called when the ok button has been clicked
 void Game_Main_Menu_Load_Game::clicked(int id) {
    if(id==1) {
       // Ok
-      std::string filename=static_cast<const char*>(m_ls->get_selection());
 
       // Ok, load this map
-      if(load_game(filename))
-         die();
+		if (load_game(m_ls->get_selection())) die();
    } else if(id==0) {
       // Cancel
       die();
@@ -124,7 +122,7 @@ void Game_Main_Menu_Load_Game::clicked(int id) {
  * called when a item is selected
  */
 void Game_Main_Menu_Load_Game::selected(int) {
-   const char* name=static_cast<const char*>(m_ls->get_selection());
+	const char * const name = m_ls->get_selection();
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
 
@@ -177,7 +175,7 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
-         m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
+			m_ls->add_entry(fname, name);
          free(fname);
 
       } catch(_wexception& ) {
@@ -204,7 +202,7 @@ void Game_Main_Menu_Load_Game::edit_box_changed(void) {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
+bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 
    FileSystem* fs = 0;
    try {

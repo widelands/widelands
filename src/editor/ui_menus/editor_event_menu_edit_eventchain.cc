@@ -70,71 +70,71 @@ m_event_chain(chain)
 
    // Event List
    new UITextarea(this, posx, lsoffsy, _("Events: "), Align_Left);
-   m_events= new UIListselect(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+   m_events= new UIListselect<Event &>(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
    m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
    posx += ls_width + spacing;
 
    posy = 75;
-   UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, 10);
+   UIButton* b = new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title(_("Conditional").c_str());
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, 11);
+   b = new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title(_("New Event").c_str());
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_new_event);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, 20);
+   b = new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title("<-");
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_ins_event);
    posy += 20 + spacing + spacing;
    b->set_enabled( false );
    m_insert_btn = b;
-   b = new UIButton(this, posx, posy, 80, 20, 0, 21);
+   b = new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title(_("Delete").c_str());
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_del_event);
    b->set_enabled( false );
    m_delete_btn = b;
    posy += 20 + spacing + spacing + spacing;
 
-   b = new UIButton(this, posx+5, posy, 24, 24, 0, 30);
+   b = new UIButton(this, posx+5, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_up.png"));
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_move_up);
    b->set_enabled( false );
    m_mvup_btn = b;
-   b = new UIButton(this, posx+51, posy, 24, 24, 0, 31);
+   b = new UIButton(this, posx+51, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_down.png"));
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_move_down);
    b->set_enabled( false );
    m_mvdown_btn = b;
    posy += 24 + spacing + spacing;
 
    posx += 80 + spacing;
    new UITextarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
-   m_available_events=new UIListselect(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+   m_available_events=new UIListselect<Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
 	const MapEventManager & mem = parent->get_egbase()->get_map()->get_mem();
 	const MapEventManager::Index nr_events = mem.get_nr_events();
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
-		Event & ev = mem.get_event_by_nr(i);
-		m_available_events->add_entry(ev.get_name(), &ev);
+		Event & event = mem.get_event_by_nr(i);
+		m_available_events->add_entry(event.get_name(), event);
    }
    m_available_events->sort();
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 0, 1);
+   b=new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title(_("Ok").c_str());
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_ok);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 1, 0);
+   b=new UIButton(this, posx, posy, 80, 20, 1);
    b->set_title(_("Cancel").c_str());
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
+   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_cancel);
 
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
-      Event* ev = m_event_chain->get_event( i );
-      m_events->add_entry( ev->get_name(), ev );
+		Event & event = *m_event_chain->get_event(i);
+		m_events->add_entry(event.get_name(), event);
    }
 
    m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
@@ -159,7 +159,7 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mouseclick
 (const Uint8 btn, const bool down, int, int)
 {
 	if (btn & SDL_BUTTON_RIGHT and down) {
-      clicked(0);
+      clicked_cancel();
       return true;
    } else
       return false; // we're not dragable
@@ -170,23 +170,12 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mouseclick
  *
  * Maybe we have to simulate a click
  */
-void Editor_Event_Menu_Edit_EventChain::think( void ) {
-   if( m_edit_trigcond )
-      clicked( 10 );
-}
+void Editor_Event_Menu_Edit_EventChain::think()
+{if (m_edit_trigcond) clicked_edit_trigger_contitional();}
 
-/*
- * a button has been clicked
- */
-void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
-   if(!i) {
-      // Cancel has been clicked
-      end_modal(0);
-      return;
-   }
+void Editor_Event_Menu_Edit_EventChain::clicked_cancel() {end_modal(0);}
 
-   // ok
-   if(i == 1) {
+void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Name
       m_event_chain->set_name( m_name->get_text() );
       // Repeating
@@ -194,19 +183,17 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
       // Trigger Conditional is always updated
       // Events
       m_event_chain->clear_events();
-      for( int i = 0; i < m_events->get_nr_entries(); i++) {
-         m_event_chain->add_event( static_cast<Event*>(m_events->get_entry( i )));
-      }
+	const uint nr_events = m_events->get_nr_entries();
+	for (uint i = 0; i < nr_events; i++)
+		m_event_chain->add_event(&m_events->get_entry(i));
       end_modal(1);
-   }
+}
 
-   // new event
-   if( i == 11 ) {
+void Editor_Event_Menu_Edit_EventChain::clicked_new_event() {
       // TODO
-   }
+}
 
-   // Edit trigger condiditional
-   if( i == 10 ) {
+void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
       Editor_Event_Menu_Edit_TriggerConditional* menu = new Editor_Event_Menu_Edit_TriggerConditional( m_parent, m_event_chain->get_trigcond(), m_event_chain );
       int code = menu->run();
       if( code ) {
@@ -217,34 +204,36 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
          m_event_chain->set_trigcond( menu->get_trigcond() );
       }
       delete menu;
-   }
+}
 
-   // Insert event
-   if( i == 20 ) {
-      Event* ev = static_cast<Event*>(m_available_events->get_selection());
-      m_events->add_entry( ev->get_name(), ev, true);
-   }
 
-   // Delete a event
-   if( i == 21 ) {
+void Editor_Event_Menu_Edit_EventChain::clicked_ins_event() {
+	Event & event = m_available_events->get_selection();
+	m_events->add_entry(event.get_name(), event, true);
+}
+
+
+void Editor_Event_Menu_Edit_EventChain::clicked_del_event() {
       m_events->remove_entry( m_events->get_selection_index() );
       m_mvup_btn->set_enabled( false );
       m_mvdown_btn->set_enabled( false );
       m_delete_btn->set_enabled( false );
-   }
+}
 
-   // Move up
-   if( i == 30) {
-      int n = m_events->get_selection_index();
-      if( n != 0)
+
+void Editor_Event_Menu_Edit_EventChain::clicked_move_up() {
+	assert(m_events->has_selection());  //  Button should have been disabled.
+	const uint n = m_events->get_selection_index();
+	assert(n != 0);  //  Button should have been disabled.
          m_events->switch_entries( n, n - 1);
-   }
-   if( i == 31) {
-      int n = m_events->get_selection_index();
-      if( n != (m_events->get_nr_entries() - 1) )
+}
+
+
+void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
+	assert(m_events->has_selection());  //  Button should have been disabled.
+	const uint n = m_events->get_selection_index();
+	assert(n != m_events->get_nr_entries() - 1);  //  Button should have been disabled.
          m_events->switch_entries( n, n + 1);
-   }
-   return;
 }
 
 /*
@@ -262,11 +251,8 @@ void Editor_Event_Menu_Edit_EventChain::cs_selected(int) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(int) {
-   // insert clicked
-   clicked( 20 );
-}
-void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(int) {
-   // Delete clicked
-   clicked( 21 );
-}
+void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(int)
+{clicked_ins_event();}
+
+void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(int)
+{clicked_del_event();}

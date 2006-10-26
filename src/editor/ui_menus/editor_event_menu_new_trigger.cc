@@ -48,13 +48,13 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
 
    // Trigger List
    new UITextarea(this, spacing, offsy, _("Available Triggers: "), Align_Left);
-   m_trigger_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_trigger_list=new UIListselect<Trigger_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
    uint i=0;
    for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
-      Trigger_Descr* d=Trigger_Factory::get_trigger_descr(i);
-      m_trigger_list->add_entry(d->name, d);
+		Trigger_Descr & d = *Trigger_Factory::get_trigger_descr(i);
+		m_trigger_list->add_entry(d.name, d);
    }
    m_trigger_list->sort();
 
@@ -109,10 +109,9 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
       return;
    }
 
-   Trigger_Descr* d=static_cast<Trigger_Descr*>(m_trigger_list->get_selection());
    // Create new trigger
-   Trigger* trig=
-      Trigger_Factory::make_trigger_with_option_dialog(d->id.c_str(), m_parent, 0);
+	Trigger * const trig = Trigger_Factory::make_trigger_with_option_dialog
+		(m_trigger_list->get_selection().id.c_str(), m_parent, 0);
    if(!trig) {
       // No trigger created, don't close us. let user choose other trigger
       return;
@@ -126,8 +125,7 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Trigger::selected(int) {
-   Trigger_Descr* d=static_cast<Trigger_Descr*>(m_trigger_list->get_selection());
-   m_description->set_text(d->descr);
+	m_description->set_text(m_trigger_list->get_selection().descr);
    m_ok_button->set_enabled(true);
 }
 

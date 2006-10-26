@@ -29,7 +29,7 @@ class Map;
 class Map_Loader;
 class RenderTarget;
 class UIButton;
-class UIListselect;
+template <typename T> struct UIListselect;
 class UIMultiline_Textarea;
 class UITextarea;
 
@@ -39,7 +39,7 @@ class UITextarea;
 class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	Game* game;
 
-	UIListselect *list;
+	UIListselect<const char * const> *list;
 	UITextarea *tamapname;
 	UITextarea *tagametime;
 	UIButton *m_ok;

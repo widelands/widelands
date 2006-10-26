@@ -31,7 +31,7 @@ class UITextarea;
 class UIMultiline_Editbox;
 class UIEdit_Box;
 class UICheckbox;
-class UIListselect;
+template <typename T> struct UIListselect;
 
 /*
  * This is a modal box - The user must end this first
@@ -70,7 +70,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       int         m_ls_selected;
       UIMultiline_Editbox* m_text;
       UITextarea* m_current_trigger_ta;
-      UIListselect* m_buttons_ls;
+	UIListselect<void *> * m_buttons_ls;
 
       std::vector<int> m_null_triggers;
 };
