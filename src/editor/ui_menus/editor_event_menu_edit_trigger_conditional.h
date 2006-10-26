@@ -20,11 +20,11 @@
 #ifndef __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 #define __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 
-#include "trigger_conditional.h"
 #include "ui_window.h"
+#include "trigger_conditional.h"
 
 class Editor_Interactive;
-class EventChain;
+//class EventChain;
 template <typename T> struct UIListselect;
 class UIButton;
 class TriggerConditional;
@@ -42,20 +42,14 @@ class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
       TriggerConditional* get_trigcond( void ) { return m_given_cond; }
 
    private:
-	void clicked_cancel     ();
-	void clicked_ok         ();
-	void clicked_operator   (int i);
-	void clicked_ins_trigger();
-	void clicked_delete     ();
-	void clicked_move_up    ();
-	void clicked_move_down  ();
+      void clicked(int);
       void tl_selected(int);
       void tl_double_clicked(int);
       void cs_selected(int);
       void cs_double_clicked(int);
 
-	UIListselect<Trigger &> *m_trigger_list;
-	UIListselect<TriggerConditional_Factory::Token &> *m_construction;
+      UIListselect<Trigger                           &> *m_trigger_list;
+      UIListselect<TriggerConditional_Factory::Token &> *m_construction;
       Editor_Interactive *m_parent;
       UIButton           *m_insert_btn;
       UIButton           *m_delete_btn;

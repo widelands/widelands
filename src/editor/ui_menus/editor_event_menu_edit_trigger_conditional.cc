@@ -30,6 +30,7 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "trigger.h"
+#include "trigger_conditional.h"
 #include "util.h"
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
@@ -54,57 +55,57 @@ m_event_chain(chain)
 
    // Trigger List
    new UITextarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
-   m_construction= new UIListselect<TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+	m_construction= new UIListselect<TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_construction->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
    m_construction->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
    posx += ls_width + spacing;
 
    posy = 35;
-	UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::LPAREN);
-	b->set_title(TriggerConditional_Factory::operators[TriggerConditional_Factory::LPAREN]);
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
+   UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, 10);
+   b->set_title("(");
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::RPAREN);
-	b->set_title(TriggerConditional_Factory::operators[TriggerConditional_Factory::RPAREN]);
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 11);
+   b->set_title(")");
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::AND);
-	b->set_title(TriggerConditional_Factory::operators[TriggerConditional_Factory::AND]);
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 12);
+   b->set_title("AND");
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::OR);
-	b->set_title(TriggerConditional_Factory::operators[TriggerConditional_Factory::OR]);
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 13);
+   b->set_title("OR");
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::XOR);
-	b->set_title(TriggerConditional_Factory::operators[TriggerConditional_Factory::XOR]);
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 14);
+   b->set_title("XOR");
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::NOT);
-	b->set_title(TriggerConditional_Factory::operators[TriggerConditional_Factory::NOT]);
-   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 15);
+   b->set_title("NOT");
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 20);
    b->set_title("<-");
-   b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger);
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posy += 20 + spacing + spacing;
    b->set_enabled( false );
    m_insert_btn = b;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UIButton(this, posx, posy, 80, 20, 0, 21);
    b->set_title(_("Delete").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_delete);
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    b->set_enabled( false );
    m_delete_btn = b;
    posy += 20 + spacing + spacing + spacing;
 
-   b = new UIButton(this, posx+5, posy, 24, 24, 0);
+   b = new UIButton(this, posx+5, posy, 24, 24, 0, 30);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_up.png"));
-   b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up);
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    b->set_enabled( false );
    m_mvup_btn = b;
-   b = new UIButton(this, posx+51, posy, 24, 24, 0);
+   b = new UIButton(this, posx+51, posy, 24, 24, 0, 31);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_down.png"));
-   b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down);
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    b->set_enabled( false );
    m_mvdown_btn = b;
    posy += 24 + spacing + spacing;
@@ -124,28 +125,31 @@ m_event_chain(chain)
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 0);
+   b=new UIButton(this, posx, posy, 80, 20, 0, 1);
    b->set_title(_("Ok").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok);
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 1);
+   b=new UIButton(this, posx, posy, 80, 20, 1, 0);
    b->set_title(_("Cancel").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_cancel);
+   b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
 
    // Add conditional
    if( cond ) {
       std::vector< TriggerConditional_Factory::Token >* tokens = cond->get_infix_tokenlist( );
       for( uint i = 0; i < tokens->size(); i++) {
-			TriggerConditional_Factory::Token & t =
-				*new TriggerConditional_Factory::Token((*tokens)[i]);
-			assert(t.token <= TriggerConditional_Factory::TRIGGER);
-			m_construction->add_entry
-				(t.token == TriggerConditional_Factory::TRIGGER ?
-				 static_cast<const Trigger * const>(t.data)->get_name()
-				 :
-				 TriggerConditional_Factory::operators[t.token],
-				 t,
-				 true);
+         TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token( (*tokens)[i] );
+         std::string str;
+         switch( t.token ) {
+            case TriggerConditional_Factory::LPAREN: str = "("; break;
+            case TriggerConditional_Factory::RPAREN: str = ")"; break;
+            case TriggerConditional_Factory::AND: str = "AND"; break;
+            case TriggerConditional_Factory::OR: str = "OR"; break;
+            case TriggerConditional_Factory::XOR: str = "XOR"; break;
+            case TriggerConditional_Factory::NOT: str = "NOT"; break;
+            case TriggerConditional_Factory::TRIGGER: str = static_cast<Trigger*>(t.data)->get_name(); break;
+            default: assert( 0 ); break; // This is not possible
+         }
+         m_construction->add_entry(str.c_str(), t, true);
       }
    }
 
@@ -169,22 +173,29 @@ bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouseclick
 (const Uint8 btn, const bool down, int, int)
 {
 	if (btn == SDL_BUTTON_RIGHT and down) {
-		clicked_cancel();
+      clicked(0);
       return true;
    } else
       return false; // we're not dragable
 }
 
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_cancel() {end_modal(0);}
+/*
+ * a button has been clicked
+ */
+void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
+   if(!i) {
+      // Cancel has been clicked
+      end_modal(0);
+      return;
+   }
 
-
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
+   // ok
+   if(i == 1) {
       // construct token list
       std::vector<TriggerConditional_Factory::Token> tok;
 
-	const uint nr_entries = m_construction->get_nr_entries();
-	for (uint i = 0; i < nr_entries; ++i)
-		tok.push_back(m_construction->get_entry(i));
+      for(uint i = 0; i < m_construction->get_nr_entries(); i++)
+         tok.push_back(m_construction->get_entry(i));
 
       try {
          if( !tok.size() ) throw TriggerConditional_Factory::SyntaxError();
@@ -199,53 +210,55 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
          delete mb;
          return;
       }
-}
+   }
 
+   // One of the Operators
+   if( i >= 10 && i < 20) {
+      TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token();
+      t.data = 0;
+      std::string str;
+      switch( i ) {
+         case 10: t.token = TriggerConditional_Factory::LPAREN; str = "("; break;
+         case 11: t.token = TriggerConditional_Factory::RPAREN; str = ")"; break;
+         case 12: t.token = TriggerConditional_Factory::AND; str = "AND"; break;
+         case 13: t.token = TriggerConditional_Factory::OR; str = "OR"; break;
+         case 14: t.token = TriggerConditional_Factory::XOR; str = "XOR"; break;
+         case 15: t.token = TriggerConditional_Factory::NOT; str = "NOT"; break;
+      }
+      m_construction->add_entry(str.c_str(), t, true);
+   }
 
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator(int i) {
-	assert(i < TriggerConditional_Factory::TRIGGER);
-	TriggerConditional_Factory::Token & t =
-		*new TriggerConditional_Factory::Token();
-	t.data = 0;
-	t.token = static_cast<const TriggerConditional_Factory::TokenNames>(i);
-	m_construction->add_entry(TriggerConditional_Factory::operators[i], t, true);
-}
+   // Insert trigger
+   if( i == 20 ) {
+      Trigger & trigger = m_trigger_list->get_selection();
+      TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token();
+      t.data = &trigger;
+      t.token = TriggerConditional_Factory::TRIGGER;
+      m_construction->add_entry(trigger.get_name(), t, true);
+   }
 
+   // Delete a trigger
+   if( i == 21 ) {
+      delete &m_construction->get_selection();
 
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
-	log("Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger\n");
-	Trigger & trigger = m_trigger_list->get_selection();
-	TriggerConditional_Factory::Token & t =
-		*new TriggerConditional_Factory::Token();
-	t.data  = &trigger;
-	t.token = TriggerConditional_Factory::TRIGGER;
-	m_construction->add_entry(trigger.get_name(), t, true);
-}
-
-
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_delete() {
-	assert(m_construction->has_selection());
-	delete &m_construction->get_selection();
-	m_construction->remove_selection();
+      m_construction->remove_entry( m_construction->get_selection_index());
       m_mvup_btn->set_enabled( false );
       m_mvdown_btn->set_enabled( false );
       m_delete_btn->set_enabled( false );
    }
 
-
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up() {
-	assert(m_construction->has_selection());  //  Button should have been disabled.
+   // Move up
+   if( i == 30) {
       int n = m_construction->get_selection_index();
-	assert(n != 0);  //  Button should have been disabled.
+      if( n != 0)
          m_construction->switch_entries( n, n - 1);
-}
-
-
-void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
-	assert(m_construction->has_selection());  //  Button should have been disabled.
-	const uint n = m_construction->get_selection_index();
-	assert(n != (m_construction->get_nr_entries() - 1));  //  Button should have been disabled.
+   }
+   if( i == 31) {
+      int n = m_construction->get_selection_index();
+	   if( n != (static_cast<const int>(m_construction->get_nr_entries()) - 1) )
          m_construction->switch_entries( n, n + 1);
+   }
+   return;
 }
 
 /*
@@ -254,18 +267,20 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
 void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(int) {
    m_insert_btn->set_enabled( true );
 }
-void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int i) {
-	log("Editor_Event_Menu_Edit_TriggerConditional::cs_selected(%i)\n", i);
-	m_mvup_btn  ->set_enabled(i > 0);
-	m_mvdown_btn->set_enabled
-		(static_cast<const uint>(i) + 1 < m_construction->get_nr_entries());
+void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int) {
+   m_mvdown_btn->set_enabled( true );
+   m_mvup_btn->set_enabled( true );
    m_delete_btn->set_enabled( true );
 }
 
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(int)
-{clicked_ins_trigger();}
-void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(int)
-{clicked_delete();}
+void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(int) {
+   // insert clicked
+   clicked( 20 );
+}
+void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(int) {
+   // Delete clicked
+   clicked( 21 );
+}
