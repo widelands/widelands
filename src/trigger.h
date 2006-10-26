@@ -63,7 +63,9 @@ class Trigger {
       // Reference this event
       void reference( TriggerReferencer* ref );
       void unreference( TriggerReferencer* ref);
-      inline const std::map<TriggerReferencer*,uint>& get_referencers( void ) { return m_referencers; }
+	typedef std::map<TriggerReferencer *, uint> TriggerReferencerMap;
+	const TriggerReferencerMap & get_referencers() const throw ()
+	{return m_referencers;}
 
    protected:
       // This is only for child classes to toggle the trigger
@@ -72,7 +74,7 @@ class Trigger {
    private:
       std::string                m_name;
       bool                        m_is_set;
-      std::map<TriggerReferencer*,uint> m_referencers;
+	TriggerReferencerMap m_referencers;
 };
 
 #endif

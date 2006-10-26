@@ -66,7 +66,9 @@ class Event {
       // Reference this event
       void reference( EventReferencer* ref );
       void unreference( EventReferencer* ref);
-      inline const std::map<EventReferencer*,uint>& get_referencers( void ) { return m_referencers; }
+	typedef std::map<EventReferencer *, uint> EventReferencerMap;
+	inline const EventReferencerMap & get_referencers() const throw ()
+	{return m_referencers;}
 
       inline State get_state( void ) { return m_state; }
 
@@ -75,7 +77,7 @@ class Event {
 
    private:
       std::string                m_name;
-      std::map<EventReferencer*,uint> m_referencers;
+	EventReferencerMap m_referencers;
  };
 
 #endif
