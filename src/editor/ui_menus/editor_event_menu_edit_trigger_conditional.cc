@@ -207,6 +207,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator(int i) {
 	TriggerConditional_Factory::Token & t =
 		*new TriggerConditional_Factory::Token();
 	t.data = 0;
+	t.token = static_cast<const TriggerConditional_Factory::TokenNames>(i);
 	m_construction->add_entry(TriggerConditional_Factory::operators[i], t, true);
 }
 
@@ -256,7 +257,8 @@ void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(int) {
 void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int i) {
 	log("Editor_Event_Menu_Edit_TriggerConditional::cs_selected(%i)\n", i);
 	m_mvup_btn  ->set_enabled(i > 0);
-	m_mvdown_btn->set_enabled(i + 1 < m_construction->get_nr_entries());
+	m_mvdown_btn->set_enabled
+		(static_cast<const uint>(i) + 1 < m_construction->get_nr_entries());
    m_delete_btn->set_enabled( true );
 }
 

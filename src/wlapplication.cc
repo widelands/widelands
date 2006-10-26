@@ -43,6 +43,7 @@
 #include "sound_handler.h"
 #include <stdexcept>
 #include <string>
+#include "wexception.h"
 #include "wlapplication.h"
 
 #ifdef DEBUG

@@ -28,6 +28,7 @@
 #include "player.h"
 #include "profile.h"
 #include "tribe.h"
+#include "wexception.h"
 
 static const int EVENT_VERSION = 1;
 

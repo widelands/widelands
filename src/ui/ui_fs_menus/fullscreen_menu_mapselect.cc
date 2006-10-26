@@ -31,6 +31,7 @@
 #include "ui_checkbox.h"
 #include "widelands_map_loader.h"
 #include "s2map.h"
+#include "wexception.h"
 #include "widelands_map_loader.h"
 
 /*

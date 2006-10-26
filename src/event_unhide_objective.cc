@@ -27,6 +27,7 @@
 #include "map.h"
 #include "map_objective_manager.h"
 #include "profile.h"
+#include "wexception.h"
 
 static const int EVENT_VERSION = 1;
 

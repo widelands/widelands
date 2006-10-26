@@ -29,6 +29,7 @@
 #include "profile.h"
 #include "trigger_building.h"
 #include "util.h"
+#include "wexception.h"
 
 static const int TRIGGER_VERSION = 2;
 

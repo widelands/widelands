@@ -26,6 +26,7 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "profile.h"
+#include "wexception.h"
 
 static const int EVENT_VERSION = 2;
 
