@@ -46,18 +46,13 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
       } else if ( vec[i].token == RPAREN ) {
          // Right parenthesis, walk stack
          // append everything to our postfix notation
-         if( !tempstack.size()) {
-            // Mismatched parathesis
-            ALIVE();
-            log( "Missmatched parenthesis!\n");
-            throw SyntaxError();
-         }
-         while( tempstack.back().token != LPAREN) {
+			for (;;) {
             if( !tempstack.size()) { // Mismatched parathesis
                ALIVE();
                log( "Missmatched parenthesis!\n");
                throw SyntaxError();
             }
+				if (tempstack.back().token == LPAREN) break;
             postfix.push_back( tempstack.back() );
             tempstack.pop_back();
          }
