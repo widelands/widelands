@@ -42,7 +42,13 @@ class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
       TriggerConditional* get_trigcond( void ) { return m_given_cond; }
 
    private:
-      void clicked(int);
+	void clicked_cancel     ();
+	void clicked_ok         ();
+	void clicked_operator   (int i);
+	void clicked_ins_trigger();
+	void clicked_del_trigger();
+	void clicked_move_up    ();
+	void clicked_move_down  ();
       void tl_selected(int);
       void tl_double_clicked(int);
       void cs_selected(int);

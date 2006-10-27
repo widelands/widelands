@@ -18,13 +18,14 @@
  */
 
 
+#include "compile_assert.h"
 #include "error.h"
 #include "event_chain.h"
 #include "trigger.h"
 #include "trigger_conditional.h"
 
 const char * const TriggerConditional_Factory::operators[] =
-{"(", ")", "AND", "OR", "XOR", "NOT", "trigger"};
+{"NOT", "AND", "OR", "XOR", "(", ")", "trigger"};
 
 /*
  * TriggerConditional_Factory
@@ -39,13 +40,12 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
    std::vector<Token> tempstack;
    std::vector<Token> postfix;
 
-   for( uint i = 0; i < vec.size(); i++) {
-      if( vec[i].token == LPAREN ) {
-         // Left parenthesis, push to stack
-         tempstack.push_back( vec[i] );
-      } else if ( vec[i].token == RPAREN ) {
-         // Right parenthesis, walk stack
-         // append everything to our postfix notation
+	const std::vector<Token>::const_iterator vec_end = vec.end();
+	for
+		(std::vector<Token>::const_iterator it = vec.begin(); it != vec_end; ++it)
+		switch(const TokenNames token = it->token) {
+		case LPAREN: tempstack.push_back(*it); break;
+		case RPAREN: // append everything to our postfix notation
 			for (;;) {
             if( !tempstack.size()) { // Mismatched parathesis
                ALIVE();
@@ -57,33 +57,21 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
             tempstack.pop_back();
          }
          tempstack.pop_back(); // Pop the last left paranthesis
-      } else if( vec[i].token == TRIGGER ) {
-         postfix.push_back( vec[i] );
-      } else if( vec[i].token < TRIGGER ) {
-         bool pushed = false;
-         while( !pushed ) {
-            if( !tempstack.size() ) {
-               // If stack empty, push operator
-               tempstack.push_back( vec[i] );
-               pushed = true;
-            } else if( vec[i].token/10 > tempstack.back().token/10 )  {
-               // If precendence is higher, push operator
-               tempstack.push_back( vec[i] );
-               pushed = true;
-            } else {
-               // Pop an operator
-               assert( tempstack.back().token < TRIGGER);
-               postfix.push_back( tempstack.back() );
-               tempstack.pop_back();
-            }
+			break;
+		case TRIGGER: postfix.push_back(*it); break;
+		case NOT: case AND: case OR: case XOR:
+			compile_assert(NOT < AND); //  Ensure proper operator precedence.
+			compile_assert(AND < OR);  //
+			compile_assert(OR  < XOR); //
+			while (tempstack.size() and token > tempstack.back().token) {
+				assert(tempstack.back().token < TRIGGER); //  Is operator
+				postfix.push_back(tempstack.back());
+				tempstack.pop_back();
          }
-      } else {
-         // Decoding shot stupid things
-         ALIVE();
-         log( "Decoding shot supid things!\n");
-         throw SyntaxError();
+			tempstack.push_back(*it);
+			break;
+		default: assert(false);
       }
-   }
 
    // Unload all operators which are left on stack
    while( tempstack.size() ) {
@@ -108,51 +96,38 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
  */
 TriggerConditional* TriggerConditional_Factory::create_from_postfix( EventChain* evchain, const std::vector<Token>& vec ) {
    std::vector< TriggerConditional* > stk;
-
-   for( uint i = 0; i < vec.size(); i++) {
-      if( vec[i].token == TRIGGER) {
-         Trigger* trig = static_cast<Trigger*>( vec[i].data );
-         trig->reference( evchain );
-         stk.push_back( new TriggerConditional_Const( trig ));
-      } else if( vec[i].token >= XOR && vec[i].token <= NOT) {
-         // Operator
-         switch( vec[i].token ) {
-            case AND:
-            case OR:
-            case XOR:
-            {
-               TriggerConditional* r = stk.back(); stk.pop_back();
-               TriggerConditional* l = stk.back(); stk.pop_back();
-               if( vec[i].token == AND )
-                  stk.push_back( new TriggerAND( r, l ) );
-               else if( vec[i].token == OR )
-                  stk.push_back( new TriggerOR( r, l ) );
-               else if( vec[i].token == XOR )
-                  stk.push_back( new TriggerXOR( r, l ) );
-            }
-            break;
-
-            case NOT:
-            {
-               TriggerConditional* cond = stk.back(); stk.pop_back();
-               stk.push_back( new TriggerNOT( cond ));
-            }
-            break;
-
-            default:
-            // This shouldn't happen
-            assert( 0 );
-            break;
-         }
-      } else {
-         // Baaad thing
-         throw SyntaxError();
+	const std::vector<Token>::const_iterator vec_end = vec.end();
+	for
+		(std::vector<Token>::const_iterator it = vec.begin(); it != vec_end; ++it)
+		switch (const TokenNames token = it->token) {
+		case NOT: {
+			assert(stk.size());
+			TriggerConditional * & back = stk.back(); back = new TriggerNOT(back);
+		}
+			break;
+		case AND: case OR: case XOR: {
+			assert(stk.size() >= 2);
+			TriggerConditional * r = stk.back();
+			stk.pop_back();
+			TriggerConditional * & l = stk.back();
+			l = token == AND ?
+				new TriggerAND(r, l)
+				:
+				(token == OR ?
+				 static_cast<TriggerConditional * const>(new TriggerOR(r, l))
+				 :
+				 new TriggerXOR(r, l));
+		}
+			break;
+		case TRIGGER: {
+			Trigger & trigger = *static_cast<Trigger * const>(it->data);
+			trigger.reference(evchain);
+			stk.push_back(new TriggerConditional_Const(&trigger));
+		}
+			break;
+		default: assert(0);
       }
-   }
-
-   if( stk.size() != 1)
-      throw SyntaxError();
-
+	assert(stk.size() == 1);
    return stk.back();
 }
 

@@ -38,14 +38,13 @@ class TriggerConditional_Factory {
    public:
       // Note: these are ordered for easy precendence parsing
       enum TokenNames {
-         TRIGGER = 0,  // not an operator
-         OPERATOR = 1, // Everything over this is an operator
-         RPAREN = 11,
-         LPAREN = 12,
-         XOR = 40,
-         OR = 50,
-         AND = 60,
-         NOT = 70,
+		NOT,
+		AND,
+		OR,
+		XOR,
+		LPAREN,
+		RPAREN,
+		TRIGGER,  // not an operator
       };
 	static const char * const operators[];
       struct Token {
