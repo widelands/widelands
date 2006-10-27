@@ -148,13 +148,8 @@ void UIListselect<void *>::switch_entries(const uint m, const uint n) {
 	int selection = m_selection;
 	const int sm = m, sn = n;
 	const bool selected_m = selection == sm, selected_n = selection == sn;
-	if        (selected_m) {
-		selection = sn;
-		selected.call(sn);
-	} else if (selected_n) {
-		selection = sm;
-		selected.call(sm);
-	}
+	if      (selected_m) selection = sn;
+	else if (selected_n) selection = sm;
 	if (selected_m or selected_n) selected.call(m_selection = selection);
 }
 
