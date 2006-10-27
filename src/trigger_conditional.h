@@ -47,6 +47,7 @@ class TriggerConditional_Factory {
          AND = 60,
          NOT = 70,
       };
+	static const char * const operators[];
       struct Token {
          TokenNames token;
          void* data;
