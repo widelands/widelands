@@ -33,7 +33,6 @@ ifndef CROSS
 CROSS=NO
 endif
 
-# on some systems (BSD) this is named sdl12-config or so
 SDL_CONFIG:=sdl-config
 
 # ctags
