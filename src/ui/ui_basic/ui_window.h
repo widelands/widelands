@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,7 +61,8 @@ public:
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
 
-	bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
+	bool handle_mousepress  (const Uint8 btn, int mx, int my);
+	bool handle_mouserelease(const Uint8 btn, int mx, int my);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
 private:

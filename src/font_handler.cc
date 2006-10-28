@@ -248,7 +248,9 @@ void Font_Handler::render_caret(TTF_Font *f, SDL_Surface *line, const std::strin
 
 	TTF_SizeUTF8(f, text_caret_pos.c_str(), &caret_x, &caret_y);
 
-	Surface* caret_surf = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, "pics/caret.png" ));
+	Surface* caret_surf =
+		static_cast<const GraphicImpl * const>(g_gr)->get_picture_surface
+		(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
 	SDL_Surface* caret_surf_sdl = caret_surf->m_surface;
 
 	SDL_Rect r;
@@ -321,9 +323,13 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 				img_pos.x = img_surf_w;
 				img_pos.y = 0;
 
-				Surface* image = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, img_it->c_str() )); // Not Font, but game.
+				Surface* image =
+					static_cast<const GraphicImpl * const>(g_gr)->get_picture_surface
+					(g_gr->get_picture(PicMod_Game, img_it->c_str()));
+					// Not Font, but game.
 
-				img_surf_h = (img_surf_h < (int)image->get_h() ? image->get_h() : img_surf_h);
+				img_surf_h = img_surf_h < static_cast<const int>(image->get_h()) ?
+					image->get_h() : img_surf_h;
 				img_surf_w = img_surf_w + image->get_w();
 				rend_cur_images.push_back(image->m_surface);
 			}

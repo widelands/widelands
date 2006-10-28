@@ -68,7 +68,8 @@ template <typename T> struct UIListselect {
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 };
 
 template <> struct UIListselect<void *> : public UIPanel {
@@ -118,7 +119,8 @@ template <> struct UIListselect<void *> : public UIPanel {
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
 private:
    static const int DOUBLE_CLICK_INTERVAL=500; // half a second

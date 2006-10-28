@@ -194,8 +194,7 @@ bool Game::run_load_game(bool is_splayer) {
 
    if(code) {
       // We have to create an empty map, otherwise nothing will load properly
-      Map* map = new Map;
-      set_map(map);
+		set_map(new Map);
 
       FileSystem* fs = g_fs->MakeSubFileSystem( ssg->get_gamename());
 
@@ -251,8 +250,7 @@ bool Game::run_multi_player (NetGame* ng)
 
 void Game::load_map (const char* filename)
 {
-	Map* map=new Map();
-	m_maploader = map->get_correct_loader(filename);
+	m_maploader = (new Map())->get_correct_loader(filename);
 	assert (m_maploader!=0);
 	m_maploader->preload_map(0);
 	set_map (m_maploader->get_map());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,8 @@ public:
 	std::string get_name() const { return m_name; }
 	int get_size() const { return m_actions.size(); }
 	const Critter_BobAction* get_action(int idx) const {
-		assert(idx >= 0 && (uint)idx < m_actions.size());
+		assert(idx >= 0);
+		assert(static_cast<const uint>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 

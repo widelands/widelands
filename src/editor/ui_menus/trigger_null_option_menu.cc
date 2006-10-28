@@ -77,13 +77,15 @@ Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Trigger_Null_Option_Menu::handle_mouseclick(const Uint8 btn, const bool, int, int) {
+bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn == SDL_BUTTON_RIGHT) {
       clicked(0);
       return true;
    } else
       return false; // we're not dragable
 }
+bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8 btn, int, int)
+{return false;}
 
 /*
  * a button has been clicked

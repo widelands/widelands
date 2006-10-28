@@ -49,7 +49,7 @@ UIButton::UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint backgroun
 	m_pic_custom = 0;
    m_flat = flat;
 
-	m_clr_down.set(229, 161, 2);
+	m_clr_down = RGBColor(229, 161, 2);
 }
 
 
@@ -207,23 +207,29 @@ void UIButton::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool UIButton::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+bool UIButton::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	if (down && m_enabled) {
+	if (m_enabled) {
 		grab_mouse(true);
 		m_pressed = true;
-   } else {
-      if (m_pressed) {
-         grab_mouse(false);
-         if (m_highlighted && m_enabled) {
-				play_click();
-            clicked.call();
-            clickedid.call(m_id);
-         }
-         m_pressed = false;
-      }
    }
+	update(0, 0, get_w(), get_h());
+
+	return true;
+}
+bool UIButton::handle_mouserelease(const Uint8 btn, int, int) {
+	if (btn != SDL_BUTTON_LEFT) return false;
+
+	if (m_pressed) {
+		grab_mouse(false);
+		if (m_highlighted && m_enabled) {
+			play_click();
+			clicked.call();
+			clickedid.call(m_id);
+		}
+		m_pressed = false;
+	}
 	update(0, 0, get_w(), get_h());
 
 	return true;

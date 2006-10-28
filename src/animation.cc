@@ -76,7 +76,7 @@ void EncodeData::parse(Section *s)
 		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 			break;
 
-		plrclr[i].set(r, g, b);
+		plrclr[i] = RGBColor(r, g, b);
 	}
 
 	if (i == 4)

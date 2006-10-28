@@ -268,39 +268,36 @@ void UIWindow::draw_border(RenderTarget* dst)
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool UIWindow::handle_mouseclick
-(const Uint8 btn, const bool down, int mx, int my)
-{
+bool UIWindow::handle_mousepress(const Uint8 btn, int mx, int my) {
 	const WLApplication & wla = *WLApplication::get();
 	if
-		(down
-		 and
-		 (((wla.get_key_state(KEY_LCTRL) | wla.get_key_state(KEY_RCTRL))
-		   and
-		   (btn == SDL_BUTTON_LEFT))
-		  or
-		  (btn == SDL_BUTTON_MIDDLE)))
+		(((wla.get_key_state(KEY_LCTRL) | wla.get_key_state(KEY_RCTRL))
+		  and
+		  btn == SDL_BUTTON_LEFT)
+		 or
+		 btn == SDL_BUTTON_MIDDLE)
       minimize(!is_minimized());
 	else if (btn == SDL_BUTTON_LEFT) {
-	   if (down) {
 			_dragging = true;
 			_drag_start_win_x = get_x();
 			_drag_start_win_y = get_y();
 			_drag_start_mouse_x = get_x() + get_lborder() + mx;
 			_drag_start_mouse_y = get_y() + get_tborder() + my;
 			grab_mouse(true);
-		} else if (_dragging) {
-			grab_mouse(false);
-			_dragging = false;
-		}
 	}
-	else if (down and btn == SDL_BUTTON_RIGHT) {
+	else if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		delete this; // is this 100% safe?
 			    // no, at least provide a flag for making a
 			    // window unclosable and provide a callback
 	}
-
+	return true;
+}
+bool UIWindow::handle_mouserelease(const Uint8 btn, int mx, int my) {
+	if (btn == SDL_BUTTON_LEFT) {
+		grab_mouse(false);
+		_dragging = false;
+	}
 	return true;
 }
 

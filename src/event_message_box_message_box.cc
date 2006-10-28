@@ -82,13 +82,12 @@ UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
 
 /*
- * Handle mouseclick
+ * Handle mouse button events
  *
  * we might be a modal, therefore, if we are, we delete ourself through end_modal()
  * otherwise through die()
  */
-bool Message_Box_Event_Message_Box::handle_mouseclick
-(const Uint8 btn, const bool, int, int)
+bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
       // We are not closable by right clicking
@@ -97,6 +96,9 @@ bool Message_Box_Event_Message_Box::handle_mouseclick
    } else
       return false; // we're not dragable
 }
+bool Message_Box_Event_Message_Box::handle_mouserelease
+(const Uint8 btn, int x, int y)
+{return handle_mousepress(btn, x, y);}
 
 /*
  * clicked

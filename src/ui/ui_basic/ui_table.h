@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,8 @@ public: // FUNCTIONS
    inline int get_nr_columns(void) { return m_columns.size(); }
 
    void clear();
-   void set_sort_column(int col) { assert(((int)m_columns.size())>col); m_sort_column=col; }
+	void set_sort_column(const uint col) throw ()
+	{assert(m_columns.size() > col); m_sort_column = col;}
    int  get_sort_colum(void) { return m_sort_column; }
    int  get_sort_direction(void) { return m_sort_direction; }
    void set_sort_direction(Dir dir) { m_sort_direction=dir; }
@@ -104,7 +105,8 @@ public: // FUNCTIONS
 
 	int get_nr_entries(void) { return m_entries.size(); }
 	int get_selection_index(void) { return m_selection; }
-	UITable_Entry* get_entry(int n) { assert(((int)m_entries.size())>n); return m_entries[n]; }
+	UITable_Entry * get_entry(const uint n) const throw ()
+	{assert(m_entries.size() > n); return m_entries[n];}
 	UITable_Entry* find_entry(const void*);	// find by userdata
 
    void select(int i);
@@ -118,7 +120,8 @@ public: // FUNCTIONS
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
 private: // DATA
    struct Column {

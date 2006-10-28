@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,8 @@ class Event_Allow_Building_Option_Menu : public UIWindow {
       Event_Allow_Building_Option_Menu(Editor_Interactive*, Event_Allow_Building*);
       ~Event_Allow_Building_Option_Menu();
 
-      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
       void update(void);

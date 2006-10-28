@@ -155,15 +155,19 @@ Editor_Event_Menu_Edit_EventChain::~Editor_Event_Menu_Edit_EventChain(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Editor_Event_Menu_Edit_EventChain::handle_mouseclick
-(const Uint8 btn, const bool down, int, int)
+bool Editor_Event_Menu_Edit_EventChain::handle_mousepress
+(const Uint8 btn, int, int)
 {
-	if (btn & SDL_BUTTON_RIGHT and down) {
+	if (btn & SDL_BUTTON_RIGHT) {
       clicked_cancel();
       return true;
    } else
       return false; // we're not dragable
 }
+bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
+(const Uint8 btn, int, int)
+{return false;}
+
 
 /*
  * Think.

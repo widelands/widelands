@@ -38,7 +38,8 @@ class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
       Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive*, TriggerConditional*, EventChain*  );
       ~Editor_Event_Menu_Edit_TriggerConditional();
 
-      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
       TriggerConditional* get_trigcond( void ) { return m_given_cond; }
 
    private:

@@ -206,7 +206,7 @@ if env['build']=='release':
 	env.Append(LINKFLAGS='-s')
 
 if DEBUG:
-	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0'])
+	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0', '-fstack-protector-all'])
 else:
 	env.Append(CCFLAGS='-DNDEBUG')
 
@@ -253,7 +253,34 @@ do_configure(config_h, conf, env)
 write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
 #load_configuration(conf)
 
-env.Append(CCFLAGS=['-pipe', '-Wall', '-Wextra', '-Wno-comment'])
+env.Append(CCFLAGS=[
+	'-pipe',
+	'-Wall',
+	'-Wcast-align',
+	'-Wcast-qual',
+	'-Wconversion',
+	'-Wdisabled-optimization',
+	'-Wextra',
+#	'-Wfloat-equal',
+#	'-Wformat=2',
+	'-Winline',
+	'-Winvalid-pch',
+	'-Wmissing-format-attribute',
+	'-Wmissing-include-dirs',
+	'-Wmissing-noreturn',
+	'-Wnormalized=nfc',
+	'-Wold-style-cast',
+#	'-Wpadded',
+	'-Wpointer-arith',
+	'-Wconversion',
+	'-Wshadow',
+	'-Wstack-protector',
+	'-Wstrict-aliasing=2',
+#	'-Wunreachable-code',
+	'-Wunsafe-loop-optimizations',
+	'-Wwrite-strings',
+	'-Wno-comment'
+	])
 #env.Append(LINKFLAGS='-lasprintf') #TODO: *check* for this instead of assuming it's there
 
 env=conf.Finish()

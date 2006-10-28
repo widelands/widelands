@@ -492,7 +492,8 @@ public:
    int get_type() const { return m_type; }
 	bool is_idle() const { return m_idle; }
 	int get_count() const { return m_count; }
-	bool is_open() const { return m_idle || m_count > (int)m_transfers.size(); }
+	bool is_open() const
+	{return m_idle || m_count > static_cast<const int>(m_transfers.size());}
 	Economy* get_economy() const { return m_economy; }
 	int get_required_time();
 

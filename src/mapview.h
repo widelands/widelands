@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,8 @@ public:
 	void draw(RenderTarget* dst);
 
 	// Event handling
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff);
 
 	void track_fsel(int mx, int my);

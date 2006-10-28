@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ Change alignment of the textarea
 void UIMultiline_Textarea::set_align(Align align)
 {
    // don't allow vertical alignment as it doesn't make sense
-   m_align = (Align)(align & Align_Horizontal);
+   m_align = static_cast<const Align>(align & Align_Horizontal);
 }
 
 

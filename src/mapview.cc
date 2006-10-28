@@ -124,31 +124,30 @@ void Map_View::set_viewpoint(Point vp)
 }
 
 /**
- * Mouseclicks on the map:
- * Right-click: enable/disable dragging
- * Left-click: field action window
+ * Mousepressess and -releases on the map:
+ * Right-press:   enable  dragging
+ * Right-release: disable dragging
+ * Left-press:    field action window
  */
-bool Map_View::handle_mouseclick(const Uint8 btn, const bool down, int x, int y)
-{
+bool Map_View::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		if (down) {
          track_fsel(x, y);
 
 			fieldclicked.call();
-		}
 	}
 	else if (btn == SDL_BUTTON_RIGHT) {
-		if (down) {
 			m_dragging = true;
 			grab_mouse(true);
 			WLApplication::get()->set_mouse_lock(true);
-		} else if (m_dragging) {
+	}
+	return true;
+}
+bool Map_View::handle_mouserelease(const Uint8 btn, int, int) {
+	if (btn == SDL_BUTTON_RIGHT and m_dragging) {
 			WLApplication::get()->set_mouse_lock(false);
 			grab_mouse(false);
 			m_dragging = false;
-		}
 	}
-
 	return true;
 }
 

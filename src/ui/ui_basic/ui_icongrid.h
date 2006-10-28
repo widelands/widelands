@@ -75,7 +75,8 @@ protected:
 
 	void handle_mousein(bool inside);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff);
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
 private:
 	struct Item {

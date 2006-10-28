@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -152,18 +152,19 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
 }
 
 /*
- * handle mousclicks
+ * handle mousebutton events
  */
-bool UIMultiline_Editbox::handle_mouseclick(const Uint8 btn, const bool down, int x, int y) {
-   if(!down) return false;
+bool UIMultiline_Editbox::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
       focus();
       UIMultiline_Textarea::set_text(get_text().c_str());
       changed.call();
       return true;
    }
-   return UIMultiline_Textarea::handle_mouseclick(btn,down,x,y);
+	return UIMultiline_Textarea::handle_mousepress(btn, x, y);
 }
+bool UIMultiline_Editbox::handle_mouserelease(const Uint8, int, int)
+{return false;}
 
 /**
 Redraw the Editbox
@@ -172,8 +173,21 @@ void UIMultiline_Editbox::draw(RenderTarget* dst)
 {
    // make the whole area a bit darker
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
-   if (get_text().size()) {
-      g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(107,87,55), UIMultiline_Editbox::get_halign(), 0 - m_textpos, get_text().c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id, (has_focus() ? (int)m_cur_pos : -1)); //explicit cast is neccessary to avoid a compiler warning
+	if (get_text().size()) {
+		g_fh->draw_string
+			(dst,
+			 m_fontname,
+			 m_fontsize,
+			 m_fcolor,
+			 RGBColor(107,87,55),
+			 UIMultiline_Editbox::get_halign(),
+			 0 - m_textpos,
+			 get_text().c_str(),
+			 m_align,
+			 get_eff_w(),
+			 m_cache_mode,
+			 &m_cache_id,
+			 (has_focus() ? static_cast<const int>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
       m_cache_mode = Widget_Cache_Use;
    }
    UIMultiline_Textarea::draw_scrollbar();

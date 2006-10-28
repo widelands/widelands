@@ -38,7 +38,12 @@ public:
 
 // input
 struct InputCallback {
-	void (*mouse_click)(const bool down, const Uint8 btn, int x, int y);
+	void (*mouse_press)
+		(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
+		 int x, int y);      //  The coordinates of the mouse at press time.
+	void (*mouse_release)
+		(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
+		 int x, int y);      //  The coordinates of the mouse at release time.
 	void (*mouse_move) (int x, int y, int xdiff, int ydiff);
 	void (*key)        (bool down, int code, char c);
 };

@@ -55,9 +55,11 @@ class FileWrite {
 		inline void Signed8(char x, int pos = -1) { Data(&x, 1, pos); }
 		inline void Unsigned8(uchar x, int pos = -1) { Data(&x, 1, pos); }
 		inline void Signed16(short x, int pos = -1) { short y = Little16(x); Data(&y, 2, pos); }
-		inline void Unsigned16(ushort x, int pos = -1) { short y = Little16((short)x); Data(&y, 2, pos); }
+	void Unsigned16(ushort x, int pos = -1)
+	{const short y = Little16(static_cast<const short>(x)); Data(&y, 2, pos);}
 		inline void Signed32(int x, int pos = -1) { int y = Little32(x); Data(&y, 4, pos); }
-		inline void Unsigned32(uint x, int pos = -1) { int y = Little32((int)x); Data(&y, 4, pos); }
+	void Unsigned32(const uint x, const int pos = -1)
+	{const int y = Little32(static_cast<const int>(x)); Data(&y, 4, pos);}
 		inline void Float(float x, int pos = -1) { float y = LittleFloat(x); Data(&y, 4, pos); }
 		inline void CString(const char *x, int pos = -1) { Data(x, strlen(x)+1, pos); }
 };

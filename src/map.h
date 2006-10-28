@@ -681,13 +681,13 @@ inline void Map::normalize_coords(Coords * c) const
 	if (c->x < 0) {
 		do { c->x += m_width; } while(c->x < 0);
 	} else {
-		while(c->x >= (int)m_width) { c->x -= m_width; }
+		while(c->x >= static_cast<const int>(m_width)) {c->x -= m_width;}
 	}
 
 	if (c->y < 0) {
 		do { c->y += m_height; } while(c->y < 0);
 	} else {
-		while(c->y >= (int)m_height) { c->y -= m_height; }
+		while(c->y >= static_cast<const int>(m_height)) {c->y -= m_height;}
 	}
 }
 
@@ -728,7 +728,7 @@ inline void Map::get_rn(const Coords f, Coords * const o) const
 {
 	o->y = f.y;
 	o->x = f.x+1;
-	if (o->x >= (int)m_width) o->x = 0;
+	if (o->x >= static_cast<const int>(m_width)) o->x = 0;
 }
 
 inline void Map::get_rn(const FCoords f, FCoords * const o) const
@@ -736,7 +736,7 @@ inline void Map::get_rn(const FCoords f, FCoords * const o) const
 	o->y = f.y;
 	o->x = f.x+1;
 	o->field = f.field+1;
-	if (o->x >= (int)m_width) { o->x = 0; o->field -= m_width; }
+	if (o->x >= static_cast<const int>(m_width)) {o->x = 0; o->field -= m_width;}
 }
 
 // top-left: even: -1/-1  odd: 0/-1
@@ -770,7 +770,7 @@ inline void Map::get_trn(const Coords f, Coords * const o) const
 	o->x = f.x;
 	if (f.y & 1) {
 		(o->x)++;
-		if (o->x >= (int)m_width) { o->x = 0; }
+		if (o->x >= static_cast<const int>(m_width)) {o->x = 0;}
 	}
 	o->y = f.y-1;
 	if (o->y < 0) { o->y += m_height; }
@@ -783,7 +783,10 @@ inline void Map::get_trn(const FCoords f, FCoords * const o) const
 	if (f.y & 1) {
 		o->x++;
 		o->field++;
-		if (o->x >= (int)m_width) { o->x = 0; o->field -= m_width; }
+		if (o->x >= static_cast<const int>(m_width)) {
+			o->x = 0;
+			o->field -= m_width;
+		}
 	}
 	o->y = f.y - 1;
 	if (o->y < 0) { o->y += m_height; o->field += m_width*m_height; }
@@ -794,7 +797,7 @@ inline void Map::get_bln(const Coords f, Coords * const o) const
 {
 	o->y = f.y+1;
 	o->x = f.x;
-	if (o->y >= (int)m_height) { o->y = 0; }
+	if (o->y >= static_cast<const int>(m_height)) {o->y = 0;}
 	if (o->y & 1) {
 		(o->x)--;
 		if (o->x < 0) { o->x += m_width; }
@@ -806,7 +809,10 @@ inline void Map::get_bln(const FCoords f, FCoords * const o) const
 	o->y = f.y + 1;
 	o->x = f.x;
 	o->field = f.field + m_width;
-	if (o->y >= (int)m_height) { o->y = 0; o->field -= m_width*m_height; }
+	if (o->y >= static_cast<const int>(m_height)) {
+		o->y = 0;
+		o->field -= max_index();
+	}
 	if (o->y & 1) {
 		o->x--;
 		o->field--;
@@ -820,10 +826,10 @@ inline void Map::get_brn(const Coords f, Coords * const o) const
 	o->x = f.x;
 	if (f.y & 1) {
 		(o->x)++;
-		if (o->x >= (int)m_width) { o->x = 0; }
+		if (o->x >= static_cast<const int>(m_width)) {o->x = 0;}
 	}
 	o->y = f.y+1;
-	if (o->y >= (int)m_height) { o->y = 0; }
+	if (o->y >= static_cast<const int>(m_height)) {o->y = 0;}
 }
 
 inline void Map::get_brn(const FCoords f, FCoords * const o) const
@@ -833,10 +839,16 @@ inline void Map::get_brn(const FCoords f, FCoords * const o) const
 	if (f.y & 1) {
 		o->x++;
 		o->field++;
-		if (o->x >= (int)m_width) { o->x = 0; o->field -= m_width; }
+		if (o->x >= static_cast<const int>(m_width)) {
+			o->x = 0;
+			o->field -= m_width;
+		}
 	}
 	o->y = f.y+1;
-	if (o->y >= (int)m_height) { o->y = 0; o->field -= m_width*m_height; }
+	if (o->y >= static_cast<const int>(m_height)) {
+		o->y = 0;
+		o->field -= max_index();
+	}
 }
 
 

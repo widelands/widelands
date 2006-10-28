@@ -63,7 +63,7 @@ throw (_wexception)
                uchar r = fr.Unsigned8();
                uchar g = fr.Unsigned8();
                uchar b = fr.Unsigned8();
-               rgb[i].set(r,g,b);
+               rgb[i] = RGBColor(r, g, b);
             }
 
             std::string name = fr.CString();

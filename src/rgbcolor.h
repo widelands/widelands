@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Wide Lands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,39 +34,30 @@ COLOR HANDLING
 /*
 class RGBColor
 */
-class RGBColor {
-   SDL_Color m_color;
+struct RGBColor : protected SDL_Color {
 
 public:
 	inline RGBColor() { }
-	inline RGBColor(uchar r, uchar g, uchar b) {
-		m_color.r = r;
-      m_color.g = g;
-      m_color.b = b;
-	}
+	RGBColor(const Uint8 R, const Uint8 G, const Uint8 B) throw ()
+	{SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;}
 
-	inline void set(uchar r, uchar g, uchar b) {
-		m_color.r = r;
-      m_color.g = g;
-      m_color.b = b;
-	}
+// 	void set(const Uint8 R, const Uint8 G, const Uint8 B) {
+// 		m_color.r = r;
+//       m_color.g = g;
+//       m_color.b = b;
+// 	}
 
-	inline uchar r() const { return m_color.r; }
-	inline uchar g() const { return m_color.g; }
-	inline uchar b() const { return m_color.b; }
+	Uint8 r() const throw () {return SDL_Color::r;}
+	Uint8 g() const throw () {return SDL_Color::g;}
+	Uint8 b() const throw () {return SDL_Color::b;}
 
-	inline ulong map(SDL_PixelFormat* fmt) const {
-         return SDL_MapRGB(fmt, m_color.r, m_color.g, m_color.b);
-   }
-	inline void set(SDL_PixelFormat* fmt, ulong clr) {
-		SDL_GetRGB(clr, fmt, &m_color.r, &m_color.g, &m_color.b);
-	}
+	ulong map(SDL_PixelFormat * const fmt) const throw ()
+	{return SDL_MapRGB(fmt, r(), g(), b());}
+	void set(SDL_PixelFormat * const fmt, ulong clr) throw ()
+	{SDL_GetRGB(clr, fmt, &(SDL_Color::r), &(SDL_Color::g), &(SDL_Color::b));}
 
-   inline bool operator==(const RGBColor& colin) const {
-      return ( m_color.r  == colin.m_color.r &&
-            m_color.g == colin.m_color.g &&
-            m_color.b == colin.m_color.b );
-   }
+	bool operator==(const RGBColor & other) const throw ()
+	{return r() == other.r() and g() == other.g() and b() == other.b();}
 };
 
 #endif /* RGBCOLOR_H */

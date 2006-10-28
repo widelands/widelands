@@ -209,12 +209,11 @@ void UITable::draw(RenderTarget* dst)
 }
 
 /**
- * Handle mouse clicks: select the appropriate entry
+ * Handle mouse presses: select the appropriate entry
  */
-bool UITable::handle_mouseclick(const Uint8 btn, const bool down, int, int y) {
+bool UITable::handle_mousepress(const Uint8 btn, int, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-   if (down) {
 	   int time=WLApplication::get()->get_time();
 
       // This hick hack is needed if any of the
@@ -233,10 +232,11 @@ bool UITable::handle_mouseclick(const Uint8 btn, const bool down, int, int y) {
       if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1)
          double_clicked.call(m_selection);
 
-   }
 
 	return true;
 }
+bool UITable::handle_mouserelease(const Uint8 btn, int, int)
+{return btn == SDL_BUTTON_LEFT;}
 
 /**
  * Change the currently selected entry

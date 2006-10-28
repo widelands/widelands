@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,8 @@ public:
 	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
 private:
 	virtual void clicked() = 0;

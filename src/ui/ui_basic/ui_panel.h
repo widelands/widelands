@@ -124,7 +124,8 @@ public:
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
-	virtual bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	virtual bool handle_mousepress  (const Uint8 btn, int x, int y);
+	virtual bool handle_mouserelease(const Uint8 btn, int x, int y);
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff);
 	virtual bool handle_key(bool down, int code, char c);
 
@@ -160,7 +161,8 @@ private:
 
 	UIPanel *get_mousein(int x, int y);
 	void do_mousein(bool inside);
-	bool do_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool do_mousepress  (const Uint8 btn, int x, int y);
+	bool do_mouserelease(const Uint8 btn, int x, int y);
 	void do_mousemove(int x, int y, int xdiff, int ydiff);
 	bool do_key(bool down, int code, char c);
 
@@ -193,7 +195,8 @@ public:
 
 private:
 	static UIPanel *ui_trackmouse(int *x, int *y);
-	static void ui_mouseclick(const bool down, const Uint8 button, int x, int y);
+	static void ui_mousepress  (const Uint8 button, int x, int y);
+	static void ui_mouserelease(const Uint8 button, int x, int y);
 	static void ui_mousemove(int x, int y, int xdiff, int ydiff);
 	static void ui_key(bool down, int code, char c);
 

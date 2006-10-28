@@ -335,14 +335,11 @@ void UIScrollbar::think()
 }
 
 
-bool UIScrollbar::handle_mouseclick
-(const Uint8 btn, const bool down, int x, int y)
-{
+bool UIScrollbar::handle_mousepress(const Uint8 btn, int x, int y) {
 	bool result = false;
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT:
-		if (down) {
 			m_pressed = get_area_for_point(x, y);
 			if (m_pressed != None) {
 				grab_mouse(true);
@@ -353,22 +350,37 @@ bool UIScrollbar::handle_mouseclick
 				}
 				else m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
 			}
-		} else {
-			if (m_pressed != None) {
-				grab_mouse(false);
-				m_pressed = None;
-			}
-		}
 		result = true;
 		break;
 
 	case SDL_BUTTON_WHEELUP:
-		if (down) action(Minus);
+		action(Minus);
 		result = true;
 		break;
 
 	case SDL_BUTTON_WHEELDOWN:
-		if (down) action(Plus);
+		action(Plus);
+		result = true;
+		break;
+	}
+
+	update(0, 0, get_w(), get_h());
+	return result;
+}
+bool UIScrollbar::handle_mouserelease(const Uint8 btn, int, int) {
+	bool result = false;
+
+	switch (btn) {
+	case SDL_BUTTON_LEFT:
+		if (m_pressed != None) {grab_mouse(false); m_pressed = None;}
+		result = true;
+		break;
+
+	case SDL_BUTTON_WHEELUP:
+		result = true;
+		break;
+
+	case SDL_BUTTON_WHEELDOWN:
 		result = true;
 		break;
 	}

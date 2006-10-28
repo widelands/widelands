@@ -329,8 +329,14 @@ restart:
 					m_mouse_internal_y += ev->motion.yrel *
 					                      m_mouse_speed;
 
-					ev->motion.xrel = (int)m_mouse_internal_x - (int)xlast;
-					ev->motion.yrel = (int)m_mouse_internal_y - (int)ylast;
+					ev->motion.xrel =
+						static_cast<const int>(m_mouse_internal_x)
+						-
+						static_cast<const int>(xlast);
+					ev->motion.yrel =
+						static_cast<const int>(m_mouse_internal_y)
+						-
+						static_cast<const int>(ylast);
 
 					if (m_mouse_locked)
 					{
@@ -350,8 +356,8 @@ restart:
 							m_mouse_internal_y = m_mouse_maxy-1;
 					}
 
-					ev->motion.x = (int)m_mouse_internal_x;
-					ev->motion.y = (int)m_mouse_internal_y;
+					ev->motion.x = static_cast<const int>(m_mouse_internal_x);
+					ev->motion.y = static_cast<const int>(m_mouse_internal_y);
 				}
 				else
 				{
@@ -491,22 +497,33 @@ void WLApplication::handle_input(const InputCallback *cb)
 				if (c < 32 || c >= 128)
 					c = 0;
 
-				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, (char)c);
+				cb->key
+					(ev.type == SDL_KEYDOWN,
+					 ev.key.keysym.sym,
+					 static_cast<const char>(c));
 			}
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEBUTTONUP:
-			if (m_mouse_swapped) {
-				switch (ev.button.button) {
-				case SDL_BUTTON_LEFT:  ev.button.button = SDL_BUTTON_RIGHT; break;
-				case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
+			if (cb and cb->mouse_press) {
+				if (m_mouse_swapped) {
+					switch (ev.button.button) {
+					case SDL_BUTTON_LEFT: ev.button.button = SDL_BUTTON_RIGHT; break;
+					case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
+					}
 				}
+				cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
 			}
-			if (cb && cb->mouse_click)
-				cb->mouse_click
-				(ev.type == SDL_MOUSEBUTTONDOWN,
-				 ev.button.button,
-				 ev.button.x, ev.button.y);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (cb and cb->mouse_release) {
+				if (m_mouse_swapped) {
+					switch (ev.button.button) {
+					case SDL_BUTTON_LEFT: ev.button.button = SDL_BUTTON_RIGHT; break;
+					case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
+					}
+				}
+				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
+			}
 			break;
 
 		case SDL_MOUSEMOTION:

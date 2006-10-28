@@ -241,7 +241,7 @@ void UITab_Panel::handle_mousemove(int x, int y, int, int) {
 /**
 Change the active tab if a tab button has been clicked
 */
-bool UITab_Panel::handle_mouseclick(const Uint8 btn, const bool, int x, int y) {
+bool UITab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		int id;
 
@@ -260,3 +260,5 @@ bool UITab_Panel::handle_mouseclick(const Uint8 btn, const bool, int x, int y) {
 
 	return false;
 }
+bool UITab_Panel::handle_mouserelease(const Uint8, int, int)
+{return false;}

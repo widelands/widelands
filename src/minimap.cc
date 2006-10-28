@@ -109,15 +109,12 @@ void MiniMapView::draw(RenderTarget* dst)
 ===============
 MiniMapView::handle_mouseclick
 
-Left-click: warp the view point to the new position
+Left-press: warp the view point to the new position
 ===============
 */
-bool MiniMapView::handle_mouseclick
-(const Uint8 btn, const bool down, int x, int y)
-{
+bool MiniMapView::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	if (down) {
 		Coords c;
 
 		// calculates the coordinates corresponding to the mouse position
@@ -127,10 +124,11 @@ bool MiniMapView::handle_mouseclick
 		m_player->get_map()->normalize_coords(&c);
 
 		warpview.call(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
-	}
 
 	return true;
 }
+bool MiniMapView::handle_mouserelease(const Uint8 btn, int, int)
+{return btn == SDL_BUTTON_LEFT;}
 
 
 /*

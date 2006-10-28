@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,8 @@ class Trigger_Null;
 class Message_Box_Event_Message_Box : public UIWindow {
    public:
       Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int, int, int, int);
-      bool handle_mouseclick(const Uint8 btn, const bool down, int mx, int my);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
       Game* m_game;

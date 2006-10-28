@@ -77,7 +77,8 @@ public:
 	std::string get_name() const { return m_name; }
 	int get_size() const { return m_actions.size(); }
 	const ProductionAction* get_action(int idx) const {
-		assert(idx >= 0 && (uint)idx < m_actions.size());
+		assert(idx >= 0);
+		assert(static_cast<const uint>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 

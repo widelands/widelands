@@ -42,7 +42,7 @@ UIIcon_Grid::UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, ui
 	m_selected = -1;
 	m_font_height = 0;
 
-	m_selectbox_color.set(255, 255, 0);
+	m_selectbox_color = RGBColor(255, 255, 0);
 }
 
 
@@ -283,35 +283,32 @@ void UIIcon_Grid::handle_mousemove(int x, int y, int, int) {
 Left mouse down selects the building, left mouse up acknowledges and sends the
 signal.
 */
-bool UIIcon_Grid::handle_mouseclick(const Uint8 btn, const bool down, int x, int y)
-{
-	int hl;
-
+bool UIIcon_Grid::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	hl = index_for_point(x, y);
+	const int hl = index_for_point(x, y);
 
-	if (down)
-	{
-		if (hl >= 0) {
-			grab_mouse(true);
-			m_clicked = hl;
-		}
+	if (hl >= 0) {
+		grab_mouse(true);
+		m_clicked = hl;
 	}
-	else
-	{
-		if (m_clicked >= 0) {
-			grab_mouse(false);
 
-			if (hl == m_clicked) {
-				if (is_persistant())
-					set_selection(hl);
-				clicked.call(hl);
-				play_click();
-			}
+	return true;
+}
+bool UIIcon_Grid::handle_mouserelease(const Uint8 btn, int x, int y) {
+	if (btn != SDL_BUTTON_LEFT) return false;
 
-			m_clicked = -1;
+	const int hl = index_for_point(x, y);
+
+	if (m_clicked >= 0) {
+		grab_mouse(false);
+		if (hl == m_clicked) {
+			if (is_persistant())
+				set_selection(hl);
+			clicked.call(hl);
+			play_click();
 		}
+		m_clicked = -1;
 	}
 
 	return true;

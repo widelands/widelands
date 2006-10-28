@@ -44,27 +44,37 @@
 
 inline short Swap16(short x) {
 	short s;
-	((uchar *)&s)[0] = ((uchar *)&x)[1];
-	((uchar *)&s)[1] = ((uchar *)&x)[0];
+	reinterpret_cast<uchar * const>(&s)[0] =
+		reinterpret_cast<const uchar * const>(&x)[1];
+	reinterpret_cast<uchar * const>(&s)[1] =
+		reinterpret_cast<const uchar * const>(&x)[0];
 	return s;
 }
 
 inline int Swap32(int x) {
 	int s;
-	((uchar *)&s)[0] = ((uchar *)&x)[3];
-	((uchar *)&s)[1] = ((uchar *)&x)[2];
-	((uchar *)&s)[2] = ((uchar *)&x)[1];
-	((uchar *)&s)[3] = ((uchar *)&x)[0];
+	reinterpret_cast<uchar * const>(&s)[0] =
+		reinterpret_cast<const uchar * const>(&x)[3];
+	reinterpret_cast<uchar * const>(&s)[1] =
+		reinterpret_cast<const uchar * const>(&x)[2];
+	reinterpret_cast<uchar * const>(&s)[2] =
+		reinterpret_cast<const uchar * const>(&x)[1];
+	reinterpret_cast<uchar * const>(&s)[3] =
+		reinterpret_cast<const uchar * const>(&x)[0];
 	return s;
 }
 
 inline float SwapFloat(float x)
 {
 	float s;
-	((uchar *)&s)[0] = ((uchar *)&x)[3];
-	((uchar *)&s)[1] = ((uchar *)&x)[2];
-	((uchar *)&s)[2] = ((uchar *)&x)[1];
-	((uchar *)&s)[3] = ((uchar *)&x)[0];
+	reinterpret_cast<uchar * const>(&s)[0] =
+		reinterpret_cast<const uchar * const>(&x)[3];
+	reinterpret_cast<uchar * const>(&s)[1] =
+		reinterpret_cast<const uchar * const>(&x)[2];
+	reinterpret_cast<uchar * const>(&s)[2] =
+		reinterpret_cast<const uchar * const>(&x)[1];
+	reinterpret_cast<uchar * const>(&s)[3] =
+		reinterpret_cast<const uchar * const>(&x)[0];
 	return s;
 }
 

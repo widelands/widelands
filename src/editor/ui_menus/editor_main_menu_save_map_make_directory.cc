@@ -69,15 +69,18 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
 /*
  * handle mouseclick for a modal
  */
-bool Main_Menu_Save_Map_Make_Directory::handle_mouseclick
-(const Uint8 btn, const bool down, int, int)
+bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
+(const Uint8 btn, int, int)
 {
-	if (btn == SDL_BUTTON_RIGHT and down) {
+	if (btn == SDL_BUTTON_RIGHT) {
       clicked(0);
       return true;
    } else
       return false; // we're not dragable
 }
+bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
+(const Uint8 btn, int, int)
+{return false;}
 
 /*
  * Editbox changed

@@ -57,10 +57,12 @@ UIModal_Message_Box::~UIModal_Message_Box(void) {
  * on close (the caller must do this) instead
  * we call end_modal() with NO (=0)
  */
-bool UIModal_Message_Box::handle_mouseclick(const Uint8 btn, const bool, int, int) {
+bool UIModal_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn == SDL_BUTTON_RIGHT) {
       end_modal(0);
       return true;
    } else
       return false; // we're not dragable
 }
+bool UIModal_Message_Box::handle_mouserelease(const Uint8, int, int)
+{return false;}

@@ -61,8 +61,8 @@ UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
 	m_enabled = true;
 	m_state = false;
 
-	m_clr_highlight.set(100, 100, 80);
-	m_clr_state.set(229, 161, 2);
+	m_clr_highlight = RGBColor(100, 100, 80);
+	m_clr_state     = RGBColor(229, 161,  2);
 
    m_id=-1;
 }
@@ -169,16 +169,15 @@ void UIStatebox::handle_mousein(bool inside)
 /**
  * Left-click: Toggle checkbox state
  */
-bool UIStatebox::handle_mouseclick(const Uint8 btn, const bool down, int, int) {
+bool UIStatebox::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-	if (down) {
-		if (m_enabled)
-			clicked();
-	}
+	if (m_enabled) clicked();
 
 	return true;
 }
+bool UIStatebox::handle_mouserelease(const Uint8 btn, int, int)
+{return btn == SDL_BUTTON_LEFT;}
 
 
 /*

@@ -108,12 +108,13 @@ void UIListselect<void *>::add_entry
  const bool select,
  const int picid)
 {
-	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
+	Entry & e =
+		*static_cast<Entry * const>(malloc(sizeof(Entry) + strlen(name)));
 
-	e->value = value;
-   e->picid = picid;
-   e->use_clr = false;
-	strcpy(e->name, name);
+	e.value = value;
+	e.picid = picid;
+	e.use_clr = false;
+	strcpy(e.name, name);
 
    int entry_height=0;
    if(picid==-1) {
@@ -126,7 +127,7 @@ void UIListselect<void *>::add_entry
    }
    if(entry_height>m_lineheight) m_lineheight=entry_height;
 
-   m_entries.push_back(e);
+	m_entries.push_back(&e);
 
 	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
 
@@ -240,8 +241,7 @@ void UIListselect<void *>::draw(RenderTarget* dst) {
 
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
 
-	while(idx < (int)m_entries.size())
-		{
+	while (idx < static_cast<const int>(m_entries.size())) {
 		if (y >= get_h())
 			return;
 
@@ -285,14 +285,11 @@ void UIListselect<void *>::draw(RenderTarget* dst) {
 
 
 /**
- * Handle mouse clicks: select the appropriate entry
+ * Handle mouse presses: select the appropriate entry
  */
-bool UIListselect<void *>::handle_mouseclick
-(const Uint8 btn, const bool down, int, int y)
-{
+bool UIListselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-   if (down) {
 	   int time=WLApplication::get()->get_time();
 
       // This hick hack is needed if any of the
@@ -305,17 +302,17 @@ bool UIListselect<void *>::handle_mouseclick
 		play_click();
 
       y = (y + m_scrollpos) / get_lineheight();
-      if (y >= 0 && y < (int)m_entries.size())
-         select(y);
+	if (y >= 0 and y < static_cast<const int>(m_entries.size())) select(y);
 
       // check if doubleclicked
       if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1)
          double_clicked.call(m_selection);
 
-   }
 
 	return true;
 }
+bool UIListselect<void *>::handle_mouserelease(const Uint8 btn, int, int)
+{return btn == SDL_BUTTON_LEFT;}
 
 /*
  * Remove entry

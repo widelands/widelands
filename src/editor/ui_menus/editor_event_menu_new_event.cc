@@ -90,15 +90,18 @@ Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event(void) {
  * on close (the caller must do this) instead
  * we simulate a cancel click
  */
-bool Editor_Event_Menu_New_Event::handle_mouseclick
-(const Uint8 btn, const bool down, int, int)
+bool Editor_Event_Menu_New_Event::handle_mousepress
+(const Uint8 btn, int, int)
 {
-	if (btn == SDL_BUTTON_RIGHT and down) {
+	if (btn == SDL_BUTTON_RIGHT) {
       clicked(0);
       return true;
    } else
       return false; // we're not dragable
 }
+bool Editor_Event_Menu_New_Event::handle_mouserelease
+(const Uint8 btn, int, int)
+{return false;}
 
 /*
  * a button has been clicked

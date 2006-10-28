@@ -203,7 +203,11 @@ public:
     * Map's change_height does this
     * This function is not private, because the loader and an empty map creator will use them directly
     * But realize, most of the times you will need Map::set_field_height()*/
-   inline void set_height(uchar h) { if((signed char)h<0) h=0; if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
+	void set_height(uchar h) {
+		if (static_cast<const signed char>(h) < 0) h = 0;
+		if (h > MAX_FIELD_HEIGHT) h = MAX_FIELD_HEIGHT;
+		height = h;
+	}
 };
 compile_assert(sizeof(Field) == 8 + 4 * sizeof(void *));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,8 @@ class UIMultiline_Editbox : public UIMultiline_Textarea {
       int get_maximum_chars(void) { return m_maxchars; }
 
       // Event functions
-      bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
       bool handle_key(bool down, int code, char c);
       void set_text(const char* str);
 

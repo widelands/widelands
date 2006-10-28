@@ -110,7 +110,12 @@ class Surface {
       void force_disable_alpha( void ); // Needed if you want to blit directly to the screen by memcpy
       inline SDL_PixelFormat* get_format() { assert(m_surface); return m_surface->format; }
       inline ushort get_pitch( void ) { assert(m_surface); return m_surface->pitch; }
-      inline void* get_pixels( void ) { assert(m_surface); return (uchar*)m_surface->pixels + m_offsy*m_surface->pitch + m_offsx*m_surface->format->BytesPerPixel; }
+	void * get_pixels() {
+		assert(m_surface);
+		return
+			static_cast<uchar * const>(m_surface->pixels) +
+			m_offsy*m_surface->pitch + m_offsx*m_surface->format->BytesPerPixel;
+	}
 
       // Lock
       inline void lock( void ) { if( SDL_MUSTLOCK( m_surface )) SDL_LockSurface( m_surface ); }
@@ -123,12 +128,14 @@ class Surface {
          assert( x < get_w() && y < get_h() );
          assert( m_surface );
          // Locking not needed: reading only
-         uchar* pix = (uchar *)m_surface->pixels + y*m_surface->pitch + x*m_surface->format->BytesPerPixel;
+			const uchar * pix =
+				static_cast<const uchar * const>(m_surface->pixels) +
+				y * m_surface->pitch + x * m_surface->format->BytesPerPixel;
          switch( m_surface->format->BytesPerPixel ) {
             case 1: return (*pix);
-            case 2: return *((ushort*)(pix));
+            case 2: return *reinterpret_cast<const ushort * const>(pix);
             case 3:
-            case 4: return *((ulong*)(pix));
+            case 4: return *reinterpret_cast<const ulong * const>(pix);
          }
          assert(0);
          return 0; // Should never be here
@@ -140,11 +147,13 @@ class Surface {
          assert( m_surface );
          if( SDL_MUSTLOCK( m_surface ))
             SDL_LockSurface( m_surface );
-         uchar* pix = (uchar *)m_surface->pixels + y*m_surface->pitch + x*m_surface->format->BytesPerPixel;
+			uchar * pix =
+				static_cast<uchar * const>(m_surface->pixels) +
+				y * m_surface->pitch + x * m_surface->format->BytesPerPixel;
          switch( m_surface->format->BytesPerPixel ) {
-            case 1: (*pix) = (uchar)(clr); break;
-            case 2: *((ushort*)(pix)) = (ushort)(clr); break;
-            case 4: *((ulong*)(pix)) = clr; break;
+            case 1: (*pix) = static_cast<const uchar>(clr); break;
+            case 2: *reinterpret_cast<ushort * const>(pix) = static_cast<const ushort>(clr); break;
+            case 4: *reinterpret_cast<ulong * const>(pix) = clr; break;
          }
          if( SDL_MUSTLOCK( m_surface ))
             SDL_UnlockSurface( m_surface );

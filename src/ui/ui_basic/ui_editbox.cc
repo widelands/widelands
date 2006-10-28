@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by the Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,21 +59,22 @@ UIEdit_Box::~UIEdit_Box(void) {
 /**
 the mouse was clicked on this editbox
 */
-bool UIEdit_Box::handle_mouseclick(const Uint8 btn, const bool down, int x, int y) {
+bool UIEdit_Box::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-   if(down && !m_keyboard_grabbed) {
+	if (not m_keyboard_grabbed) {
       set_can_focus(true);
       grab_mouse(true);
-      UIButton::handle_mouseclick(btn, down, x, y);
+      UIButton::handle_mousepress(btn, x, y);
       focus();
       m_keyboard_grabbed=true;
       m_lasttext=m_text;
       return true;
    }
-   if(m_keyboard_grabbed) return true;
-   return false;
+	return m_keyboard_grabbed;
 }
+bool UIEdit_Box::handle_mouserelease(const Uint8 btn, int, int)
+{return btn == SDL_BUTTON_LEFT and m_keyboard_grabbed;}
 
 /**
 a key event must be handled
@@ -83,7 +84,7 @@ bool UIEdit_Box::handle_key(bool down, int code, char c) {
       switch(code) {
          case KEY_ESCAPE:
             set_text(m_lasttext.c_str());
-            UIButton::handle_mouseclick(0, false, 0, 0);
+            UIButton::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);
@@ -91,7 +92,7 @@ bool UIEdit_Box::handle_key(bool down, int code, char c) {
 
          case KEY_RETURN:
             m_lasttext=m_text;
-            UIButton::handle_mouseclick(0, false, 0, 0);
+            UIButton::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);

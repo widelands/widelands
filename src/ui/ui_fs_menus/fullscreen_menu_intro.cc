@@ -34,14 +34,13 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 {
 }
 
-bool Fullscreen_Menu_Intro::handle_mouseclick
-(const Uint8, const bool down, int, int)
-{
-	if (down)
+bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int, int) {
 		end_modal(0);
 
 	return true;
 }
+bool Fullscreen_Menu_Intro::handle_mouserelease(const Uint8, int, int)
+{return true;}
 
 bool Fullscreen_Menu_Intro::handle_key(bool down, int code, char) {
 	if (down && code==SDLK_ESCAPE)

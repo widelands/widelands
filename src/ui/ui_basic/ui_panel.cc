@@ -139,7 +139,8 @@ int UIPanel::run()
 	while(_running)
 	{
 		static InputCallback icb = {
-			UIPanel::ui_mouseclick,
+			UIPanel::ui_mousepress,
+			UIPanel::ui_mouserelease,
 			UIPanel::ui_mousemove,
 			UIPanel::ui_key
 		};
@@ -348,8 +349,9 @@ void UIPanel::draw_overlay(RenderTarget *) {}
  */
 void UIPanel::update(int x, int y, int w, int h)
 {
-	if (x >= (int)_w || x+w <= 0 ||
-	    y >= (int)_h || y+h <= 0)
+	if (x >= static_cast<const int>(_w) or x + w <= 0
+	    or
+	    y >= static_cast<const int>(_h) or y + h <= 0)
 		return;
 
 	_needdraw = true;
@@ -478,13 +480,14 @@ void UIPanel::center_mouse()
 void UIPanel::handle_mousein(bool) {}
 
 /**
- * Called whenever the user clicks into the panel.
+ * Called whenever the user presses or releases a mouse button in the panel.
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
  *
  * Returns: true if the mouseclick was processed
  */
-bool UIPanel::handle_mouseclick(const Uint8, const bool, int, int) {return false;}
+bool UIPanel::handle_mousepress  (const Uint8, int, int) {return false;}
+bool UIPanel::handle_mouserelease(const Uint8, int, int) {return false;}
 
 /**
  * Called when the mouse is moved while inside the panel
@@ -707,8 +710,10 @@ UIPanel *UIPanel::get_mousein(int x, int y)
 	for(child = _fchild; child; child = child->_next) {
 		if (!child->get_handle_mouse() || !child->get_visible())
 			continue;
-		if (x < child->_x+(int)child->_w && x >= child->_x &&
-		    y < child->_y+(int)child->_h && y >= child->_y)
+		if
+			(x < child->_x + static_cast<const int>(child->_w) and x >= child->_x
+			 and
+			 y < child->_y + static_cast<const int>(child->_h) and y >= child->_y)
 			break;
 	}
 
@@ -735,31 +740,33 @@ void UIPanel::do_mousein(bool inside)
 }
 
 /**
- * Propagate mouse clicks to the appropriate panel.
+ * Propagate mousepresses/-releases to the appropriate panel.
  *
  * Returns: true, if the click was processed
  */
-bool UIPanel::do_mouseclick(const Uint8 btn, const bool down, int x, int y)
-{
+bool UIPanel::do_mousepress(const Uint8 btn, int x, int y) {
 	x -= _lborder;
 	y -= _tborder;
 
-	if (down && (_flags & pf_top_on_click))
-		move_to_top();
+	if (_flags & pf_top_on_click) move_to_top();
 
-	if (_g_mousegrab == this)
-		return handle_mouseclick(btn, down, x, y);
-	else
-	{
-		UIPanel *child = get_mousein(x, y);
-
-		if (child) {
-			if (child->do_mouseclick(btn, down, x-child->_x, y-child->_y))
+	if (_g_mousegrab != this)
+		if (UIPanel * const child = get_mousein(x, y))
+			if (child->do_mousepress(btn, x - child->_x, y - child->_y))
 				return true;
-		}
 
-		return handle_mouseclick(btn, down, x, y);
-	}
+	return handle_mousepress(btn, x, y);
+}
+bool UIPanel::do_mouserelease(const Uint8 btn, int x, int y) {
+	x -= _lborder;
+	y -= _tborder;
+
+	if (_g_mousegrab != this)
+		if (UIPanel * const child = get_mousein(x, y))
+			if (child->do_mouserelease(btn, x - child->_x, y - child->_y))
+				return true;
+
+	return handle_mouserelease(btn, x, y);
 }
 
 /**
@@ -816,8 +823,10 @@ UIPanel *UIPanel::ui_trackmouse(int *x, int *y)
 		*y -= p->_tborder + p->_y;
 	}
 
-	if (*x >= 0 && *x < (int)mousein->_w &&
-	    *y >= 0 && *y < (int)mousein->_h)
+	if
+		(*x >= 0 and *x < static_cast<const int>(mousein->_w)
+		 and
+		 *y >= 0 and *y < static_cast<const int>(mousein->_h))
 		rcv = mousein;
 	else
 		mousein = 0;
@@ -838,14 +847,13 @@ UIPanel *UIPanel::ui_trackmouse(int *x, int *y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void UIPanel::ui_mouseclick(const bool down, const Uint8 button, int x, int y) {
-	UIPanel *p;
-
-	p = ui_trackmouse(&x, &y);
-	if (!p)
-		return;
-
-	p->do_mouseclick(button, down, x, y);
+void UIPanel::ui_mousepress(const Uint8 button, int x, int y) {
+	if (UIPanel * const p = ui_trackmouse(&x, &y))
+		p->do_mousepress(button, x, y);
+}
+void UIPanel::ui_mouserelease(const Uint8 button, int x, int y) {
+	if (UIPanel * const p = ui_trackmouse(&x, &y))
+		p->do_mouserelease(button, x, y);
 }
 
 /**

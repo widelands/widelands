@@ -69,7 +69,8 @@ private:
 	void draw(RenderTarget* dst);
 	void think();
 
-	bool handle_mouseclick(const Uint8 btn, const bool down, int x, int y);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
 private:
