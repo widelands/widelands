@@ -85,25 +85,25 @@ m_event_chain(chain)
    b->set_title("NOT");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0, 20);
+   b = new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title("<-");
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger);
    posy += 20 + spacing + spacing;
    b->set_enabled( false );
    m_insert_btn = b;
-   b = new UIButton(this, posx, posy, 80, 20, 0, 21);
+   b = new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title(_("Delete").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger);
    b->set_enabled( false );
    m_delete_btn = b;
    posy += 20 + spacing + spacing + spacing;
 
-   b = new UIButton(this, posx+5, posy, 24, 24, 0, 30);
+   b = new UIButton(this, posx+5, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_up.png"));
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up);
    b->set_enabled( false );
    m_mvup_btn = b;
-   b = new UIButton(this, posx+51, posy, 24, 24, 0, 31);
+   b = new UIButton(this, posx+51, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_down.png"));
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down);
    b->set_enabled( false );
@@ -125,11 +125,11 @@ m_event_chain(chain)
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 0, 1);
+   b=new UIButton(this, posx, posy, 80, 20, 0);
    b->set_title(_("Ok").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 1, 0);
+   b=new UIButton(this, posx, posy, 80, 20, 1);
    b->set_title(_("Cancel").c_str());
 	b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_cancel);
 
