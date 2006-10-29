@@ -206,7 +206,7 @@ if env['build']=='release':
 	env.Append(LINKFLAGS='-s')
 
 if DEBUG:
-	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0', '-fstack-protector-all'])
+	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0'])
 else:
 	env.Append(CCFLAGS='-DNDEBUG')
 
