@@ -61,6 +61,7 @@ public:
 	void free_children();
 
 	// Modal
+	static const int dying_code = -1;
 	int run();
 	void end_modal(int code);
 

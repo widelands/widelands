@@ -30,7 +30,7 @@ class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
    public:
       Fullscreen_Menu_SinglePlayer();
 
-	enum {New_Game, Tutorial_Campaign, Load_Game, Back};
+	enum {Back = dying_code, New_Game, Tutorial_Campaign, Load_Game};
 
 };
 

@@ -1086,6 +1086,10 @@ void WLApplication::mainmenu_singleplayer()
 			code = single_player_menu.run();
 		}
 
+		//  This is the code returned by UIPanel::run() when the panel is dying.
+		//  Make sure that the program exits when the window manager says so.
+		assert(Fullscreen_Menu_SinglePlayer::Back == UIPanel::dying_code);
+
 		switch(code) {
 		case Fullscreen_Menu_SinglePlayer::New_Game:
 			if (m_game->run_single_player())

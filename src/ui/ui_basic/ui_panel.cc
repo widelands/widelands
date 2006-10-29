@@ -136,6 +136,7 @@ int UIPanel::run()
 	_running = true;
 	start();
 	g_gr->update_fullscreen();
+	assert(_running); //  Testing if this ever gets changed by the any of the 2 function calls above.
 	while(_running)
 	{
 		static InputCallback icb = {
@@ -146,8 +147,7 @@ int UIPanel::run()
 		};
 
 		app->handle_input(&icb);
-		if (app->should_die())
-			end_modal(-1);
+		if (app->should_die()) end_modal(dying_code);
 
 		if (_flags & pf_think)
 			think();
