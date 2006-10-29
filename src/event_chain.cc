@@ -94,8 +94,6 @@ void Cmd_CheckEventChain::execute (Game* g)
 {
 	m_eventchain_id++;
 
-	log("Event Chain: looking if check is needed for eventchain %i\n", m_eventchain_id);
-
 	const Map & map = *g->get_map();
 	MapEventChainManager & mecm = map.get_mecm();
 	MapEventChainManager::Index nr_eventchains = mecm.get_nr_eventchains();
@@ -114,8 +112,6 @@ void Cmd_CheckEventChain::execute (Game* g)
    }
 
 	EventChain & evchain = mecm.get_eventchain_by_nr(m_eventchain_id);
-
-	log("Eventchain %s is going to get checked!\n", evchain.get_name());
 
 	switch (evchain.get_state()) {
       case EventChain::INIT:
@@ -152,7 +148,6 @@ void Cmd_CheckEventChain::execute (Game* g)
 
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds
 	const int delay = nr_eventchains ? 1000 / nr_eventchains : 30000;
-   log("Queueing recheck in %i milli-seconds\n", delay);
 
    g->enqueue_command (new Cmd_CheckEventChain(g->get_gametime() + delay, m_eventchain_id));
 }

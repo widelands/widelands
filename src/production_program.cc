@@ -155,27 +155,35 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			const char * const main_worker_name
 				= (*building->get_workers())[0].name.c_str();
 			Tribe_Descr * tribe_descr = building->get_tribe();
-			const Workarea_Info & workarea_info
+			const Workarea_Info & worker_workarea_info
 				= tribe_descr->get_worker_descr
 				(tribe_descr->get_safe_worker_index(main_worker_name))
 				->get_program(act.sparam1.c_str())->get_workarea_info();
-
+			const Workarea_Info::const_iterator worker_workarea_info_end =
+				worker_workarea_info.end();
+			Workarea_Info & building_workarea_info = building->m_workarea_info;
 			for
-				(Workarea_Info::const_iterator it = workarea_info.begin();
-				 it != workarea_info.end(); ++it) {
-				log("Radius: %i\n", it->first);
+				(Workarea_Info::const_iterator it = worker_workarea_info.begin();
+				 it != worker_workarea_info_end;
+				 ++it)
+			{
+				std::set<std::string> & building_radius_infos =
+					building_workarea_info[it->first];
 				const std::set<std::string> & descriptions = it->second;
+				const std::set<std::string>::const_iterator descriptions_end =
+					descriptions.end();
 				for
 					(std::set<std::string>::const_iterator de = descriptions.begin();
-					 de != descriptions.end(); ++de) {
-					log("        %s\n", (*de).c_str());
+					 de != descriptions_end;
+					 ++de)
+				{
 					std::string description = building->get_descname();
 					description += ' ';
 					description += m_name;
 					description += " worker ";
 					description += main_worker_name;
 					description += *de;
-					building->m_workarea_info[it->first].insert(description);
+					building_radius_infos.insert(description);
 				}
 			}
 		} else if (cmd[0] == "animation") {

@@ -289,14 +289,12 @@ void Editor_Interactive::field_clicked() {
  * click this field
  */
 void Editor_Interactive::set_fieldsel_pos(Coords c) {
+	Interactive_Base::set_fieldsel_pos(c);
 	if
 		(c != get_fieldsel_pos()
 		 and
 		 SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_LEFT))
-	{
-		Interactive_Base::set_fieldsel_pos(c);
       field_clicked();
-	}
 }
 
 /*

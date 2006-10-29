@@ -164,9 +164,9 @@ template <typename T> struct UIListselect<const T * const> : public UIListselect
 	void add_entry
 		(const char * const name,
 		 const T * const value,
-		 const bool select = false,
+		 const bool select_this = false,
 		 const int picid = -1)
-	{Base::add_entry(name, const_cast<T * const>(value), select, picid);}
+	{Base::add_entry(name, const_cast<T * const>(value), select_this, picid);}
 	const T * get_entry(const uint i) const throw ()
 	{return static_cast<const T * const>(Base::get_entry(i));}
 	const T * get_selection() const
@@ -204,9 +204,9 @@ template <class T> struct UIListselect<T &> : public UIListselect<void *> {
 	void add_entry
 		(const char * const name,
 		 T & value,
-		 const bool select = false,
+		 const bool select_this = false,
 		 const int picid = -1)
-	{Base::add_entry(name, &value, select, picid);}
+	{Base::add_entry(name, &value, select_this, picid);}
 	T & get_entry(const uint i) const throw ()
 	{return *static_cast<T * const>(Base::get_entry(i));}
 	T & get_selection() const
