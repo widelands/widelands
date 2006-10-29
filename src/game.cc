@@ -100,7 +100,7 @@ bool Game::can_start()
 		if (!get_player(i))
 			continue;
 
-		if (get_player(i)->get_type() == Player::playerLocal) {
+		if (get_player(i)->get_type() == Player::Local) {
 			if (local_num < 0)
 				local_num = i;
 			else
@@ -138,8 +138,11 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
     // We have to create the players here
    for( uint i = 1; i <= map->get_nrplayers(); i++)
-      add_player(i, i==1 ? Player::playerLocal : Player::playerAI,
-            map->get_scenario_player_tribe(i).c_str(), map->get_scenario_player_name(i).c_str());
+		add_player
+		(i,
+		 i == 1 ? Player::Local : Player::AI,
+		 map->get_scenario_player_tribe(i),
+		 map->get_scenario_player_name(i));
 
    init_player_controllers ();
 
@@ -261,10 +264,11 @@ void Game::init_player_controllers ()
 {
 	ipl=0;
 	for (int i=1; i<=get_map()->get_nrplayers(); i++)
-		if (get_player(i)!=0 && get_player(i)->get_type()==Player::playerLocal) {
+		if (const Player * const player = get_player(i))
+			if (player->get_type() == Player::Local) {
 		    ipl = new Interactive_Player(this, i);
 		    break;
-		}
+			}
 
 	assert (ipl!=0);
 
@@ -273,7 +277,7 @@ void Game::init_player_controllers ()
 
 	// set up computer controlled players
 	for (int i=1; i<=get_map()->get_nrplayers(); i++)
-		if (get_player(i)!=0 && get_player(i)->get_type()==Player::playerAI)
+		if (get_player(i) and get_player(i)->get_type() == Player::AI)
 			cpl.push_back (new Computer_Player(this,i));
 
 }
@@ -309,7 +313,7 @@ bool Game::run(bool is_savegame)
          player->init(true);
 
          const Coords &c = get_map()->get_starting_pos(i);
-         if (player->get_type() == Player::playerLocal) ipl->move_view_to(c);
+         if (player->get_type() == Player::Local) ipl->move_view_to(c);
       }
 
       // Prepare the map, set default textures
@@ -481,7 +485,7 @@ void Game::cleanup_for_load
  */
 void Game::send_player_command (PlayerCommand* pc)
 {
-	if (m_netgame!=0 && get_player(pc->get_sender())->get_type()==Player::playerLocal)
+	if (m_netgame and get_player(pc->get_sender())->get_type() == Player::Local)
 		m_netgame->send_player_command (pc);
 	else
 		enqueue_command (pc);

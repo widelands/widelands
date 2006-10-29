@@ -165,7 +165,7 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mousepress
       return false; // we're not dragable
 }
 bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
-(const Uint8 btn, int, int)
+(const Uint8, int, int)
 {return false;}
 
 

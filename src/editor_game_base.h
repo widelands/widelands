@@ -67,8 +67,8 @@ class Editor_Game_Base {
 	Player * add_player
 		(const int plnum,
 		 const int type,
-		 const char * const tribe,
-		 const char * const name);
+		 const std::string & tribe,
+		 const std::string & name);
 	Player * get_player(const int n) const {
 		assert(n >= 1);
 		assert(n <= MAX_PLAYERS);
@@ -103,7 +103,7 @@ class Editor_Game_Base {
 		void remove_trackpointer(uint serial);
 
       // Manually load a tribe into memory. Used by the editor
-      void manually_load_tribe(const char* tribe);
+	void manually_load_tribe(const std::string & tribe);
       // Get a tribe from the loaded list, when available
       Tribe_Descr * get_tribe(const char * const tribe) const;
 

@@ -245,11 +245,10 @@ if old != 0 this is an enhancement from an older building
 */
 Building* Building_Descr::create_constructionsite(Building_Descr* old)
 {
-	Building_Descr* descr =
-		m_tribe->get_building_descr(
-			m_tribe->get_building_index("constructionsite"));
-	if (!descr)
-		throw wexception("Tribe %s has no constructionsite", m_tribe->get_name());
+	if (Building_Descr * const descr =
+	    m_tribe->get_building_descr
+	    (m_tribe->get_building_index("constructionsite")))
+	{
 
 	ConstructionSite* csite = (ConstructionSite*)descr->create_object();
 	csite->set_building(this);
@@ -258,6 +257,8 @@ Building* Building_Descr::create_constructionsite(Building_Descr* old)
       csite->set_previous_building(old);
 
 	return csite;
+	} else throw wexception
+		("Tribe %s has no constructionsite", m_tribe->get_name().c_str());
 }
 
 

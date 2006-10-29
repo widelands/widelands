@@ -52,9 +52,9 @@ class Player {
 
 	public:
 		enum {
-			playerLocal = 0,
-			playerRemote,
-			playerAI
+			Local = 0,
+			Remote,
+			AI
 		};
 
 		Player
@@ -62,7 +62,7 @@ class Player {
 		 const int type,
 		 const int plnum,
 		 const Tribe_Descr & tribe,
-		 const char * const name,
+		 const std::string & name,
 		 const uchar * const playercolor);
 
 		inline Editor_Game_Base *get_game() const { return m_egbase; }
@@ -72,8 +72,8 @@ class Player {
 	const Tribe_Descr *get_tribe() const { return &m_tribe; }
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
-      const char* get_name(void) { return m_name.c_str(); }
-      void set_name(const char* str) { m_name=str; }
+	const std::string & get_name() const throw () {return m_name;}
+	void set_name(const std::string & name) {m_name = name;}
 
 		void init(const bool place_headquarters);
 

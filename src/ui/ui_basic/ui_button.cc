@@ -58,17 +58,6 @@ Free any resources associated with the button
 */
 UIButton::~UIButton()
 {
-	remove_title();
-}
-
-
-/**
-Remove any title the button currently carries.
-*/
-void UIButton::remove_title()
-{
-	m_pic_custom = 0;
-	m_title = "";
 }
 
 
@@ -77,7 +66,7 @@ Sets a new picture for the button.
 */
 void UIButton::set_pic(uint picid)
 {
-	remove_title();
+	m_title.clear();
 
 	m_pic_custom = picid;
 
@@ -88,11 +77,8 @@ void UIButton::set_pic(uint picid)
 /**
 Set a text title for the button
 */
-void UIButton::set_title(const char* title)
-{
-   remove_title();
-
-   if (title)
+void UIButton::set_title(const std::string & title) {
+	m_pic_custom = 0;
       m_title = title;
 
 

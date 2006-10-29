@@ -131,8 +131,7 @@ throw (_wexception)
 				fw.Unsigned32(os->register_object(imm));
             if(!tribe)
                fw.CString("world");
-            else
-               fw.CString(tribe->get_name());
+	         else fw.CString(tribe->get_name().c_str());
 
             fw.CString(imm->get_name().c_str());
             fw.Unsigned16(x);

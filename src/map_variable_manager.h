@@ -113,13 +113,13 @@ class MapVariableManager {
       /*
        * This prevents casting
        */
-      Int_MapVariable* get_int_variable( const char* name );
-      String_MapVariable* get_string_variable( const char* name );
+	Int_MapVariable    * get_int_variable   (const char * const name) const;
+	String_MapVariable * get_string_variable(const char * const name) const;
 
       /*
        * Get a variable
        */
-      MapVariable* get_variable( const char* name );
+	MapVariable* get_variable(const char * const name) const;
       void delete_variable( const char* name );
 
 	typedef std::vector<MapVariable *> variable_vector;

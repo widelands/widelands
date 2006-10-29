@@ -71,7 +71,7 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
    int posx=offsx;
    int posy=offsy;
 
-   Tribe_Descr::get_all_tribes(&m_tribes);
+	Tribe_Descr::get_all_tribenames(m_tribes);
 
    set_inner_size(375, 135);
    UITextarea* ta=new UITextarea(this, 0, 0, _("Player Options"), Align_Left);
@@ -350,7 +350,11 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
    if(!p) {
       // This player is unknown, register it, place a hq and reference the tribe
       // so that this tribe can not be changed
-      editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title(), m_plr_names[n-1]->get_text());
+		editor->add_player
+			(n,
+			 Player::Local,
+			 m_plr_set_tribes_buts[n - 1]->get_title(),
+			 m_plr_names[n - 1]->get_text());
 
       p=editor->get_player(n);
       p->init(false);

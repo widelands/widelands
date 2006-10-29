@@ -49,7 +49,8 @@ bool MapEventChainManager::register_new_eventchain( EventChain* mv ) {
 /*
  * Get eventchains
  */
-EventChain* MapEventChainManager::get_eventchain( const char* name ) {
+EventChain* MapEventChainManager::get_eventchain(const char * const name) const
+{
    uint i;
    EventChain* retval = 0;
    for( i = 0; i < m_eventchains.size(); i++) {

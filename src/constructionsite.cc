@@ -344,7 +344,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 		request_builder(game);
 
 		//TODO: should this fx be played for AI players too?
-		if ( get_owner()->get_type()==Player::playerLocal)
+		if (get_owner()->get_type() == Player::Local)
 			g_sound_handler.play_fx("create_construction_site", m_position, 255);
 	}
 }

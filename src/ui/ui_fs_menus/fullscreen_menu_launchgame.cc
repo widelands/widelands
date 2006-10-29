@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,8 +85,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 		    m_netgame->set_player_description_group (i, pdg);
 	}
 
-	if (m_netgame==0)
-		m_players[0]->set_player_type (Player::playerLocal);
+	if (not m_netgame) m_players[0]->set_player_type(Player::Local);
 
 	// Directly go selecting a map
 	if (m_netgame==0 || m_netgame->is_host())
@@ -157,7 +156,8 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			if (m_netgame->get_playernum()==i+1)
 				allow|=PlayerDescriptionGroup::CHANGE_TRIBE;
 
-			m_players[i]->allow_changes ((PlayerDescriptionGroup::changemode_t) allow);
+			m_players[i]->allow_changes
+				(static_cast<const PlayerDescriptionGroup::changemode_t>(allow));
 		}
 	}
 

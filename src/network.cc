@@ -250,7 +250,7 @@ void NetHost::update_map ()
 	for (unsigned int i=0;i<clients.size();i++)
 		serializer->send (clients[i].sock);
 
-	playerdescr[0]->set_player_type (Player::playerLocal);
+	playerdescr[0]->set_player_type (Player::Local);
 
 	send_player_info ();
 }
@@ -267,8 +267,7 @@ void NetHost::send_player_info ()
 		if ((pl=game->get_player(i+1))!=0) {
 			player_enabled|=1<<i;
 
-			if (pl->get_type()!=Player::playerAI)
-				player_human|=1<<i;
+			if (pl->get_type() != Player::AI) player_human |= 1 << i;
 		}
 
 	serializer->begin_packet ();
@@ -318,7 +317,7 @@ void NetHost::handle_network ()
 		Player* pl=0;
 
 		for (i=1;i<=MAX_PLAYERS;i++)
-			if ((pl=game->get_player(i))!=0 && pl->get_type()==Player::playerAI) break;
+			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI) break;
 
 		if (pl==0) {
 			// sorry, but there no room on this map for any more players
@@ -328,10 +327,9 @@ void NetHost::handle_network ()
 
 		SDLNet_TCP_AddSocket (sockset, sock);
 
-		const char* tribe=pl->get_tribe()->get_name();
-
 		game->remove_player (i);
-		game->add_player (i, Player::playerRemote, tribe, _("I have no name").c_str());
+		game->add_player
+			(i, Player::Remote, pl->get_tribe()->get_name(), _("I have no name"));
 
 		Client peer;
 		peer.sock=sock;
@@ -341,7 +339,7 @@ void NetHost::handle_network ()
 
 		players_changed=true;
 
-		playerdescr[i-1]->set_player_type (Player::playerRemote);
+		playerdescr[i-1]->set_player_type (Player::Remote);
 
 		serializer->begin_packet ();
 		serializer->putchar (NETCMD_HELLO);
@@ -692,7 +690,7 @@ void NetClient::handle_network ()
 				log ("Map '%s' selected\n", buffer);
 
 				game->load_map (buffer);
-				playerdescr[playernum-1]->set_player_type (Player::playerLocal);
+				playerdescr[playernum-1]->set_player_type (Player::Local);
 				launch_menu->refresh ();
 			}
 			break;
@@ -703,7 +701,8 @@ void NetClient::handle_network ()
 			for (i=0;i<MAX_PLAYERS;i++)
 			    if (i!=playernum-1)
 				if (player_enabled & (1<<i)) {
-				    playerdescr[i]->set_player_type ((player_human&(1<<i))?Player::playerRemote:Player::playerAI);
+					playerdescr[i]->set_player_type
+						(player_human & 1 << i ? Player::Remote : Player::AI);
 				    playerdescr[i]->enable_player (true);
 				}
 				else
@@ -817,11 +816,9 @@ void NetClient::syncreport (uint sync)
 
 void NetClient::disconnect ()
 {
-    int i;
-
-    for (i=1;i<=MAX_PLAYERS;i++)
-	if (game->get_player(i)!=0 && game->get_player(i)->get_type()==Player::playerRemote)
-	    disconnect_player (i);
+	for (uint i = 1; i <= MAX_PLAYERS; ++i)
+		if (const Player * const player = game->get_player(i))
+			 if (player->get_type() == Player::Remote) disconnect_player (i);
 
     // Since we are now independent of the host, we are not bound to network
     // time anymore (nor are we receiving NETCMD_ADVANCETIME packets).

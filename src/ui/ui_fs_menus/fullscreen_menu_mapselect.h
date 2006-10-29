@@ -57,7 +57,7 @@ public:
 	Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader**);
 	~Fullscreen_Menu_MapSelect();
 
-	const char *get_mapname() { return (const char*)list->get_selection(); }
+	const char * get_mapname() const throw () {return list->get_selection();}
 
 	void ok();
 	void map_selected(int id);

@@ -154,7 +154,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    // Load all tribes into memory
    std::vector<std::string> tribes;
-   Tribe_Descr::get_all_tribes(&tribes);
+	Tribe_Descr::get_all_tribenames(tribes);
    uint i=0;
    for(i=0; i<tribes.size(); i++)
       e->manually_load_tribe(tribes[i].c_str());

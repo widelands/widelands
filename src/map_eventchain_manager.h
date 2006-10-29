@@ -51,7 +51,7 @@ class MapEventChainManager {
       /*
        * Get a eventchain
        */
-      EventChain* get_eventchain( const char* name );
+	EventChain * get_eventchain(const char * const name) const;
       void delete_eventchain( const char* name );
 
 	typedef std::vector<EventChain *> eventchain_vector;

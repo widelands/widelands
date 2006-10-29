@@ -53,21 +53,27 @@ bool MapVariableManager::register_new_variable( MapVariable* mv ) {
 /*
  * Get variables
  */
-Int_MapVariable* MapVariableManager::get_int_variable( const char* name ) {
+Int_MapVariable * MapVariableManager::get_int_variable
+(const char * const name) const
+{
    MapVariable* v = get_variable( name );
    if( v && v->get_type() != MapVariable::MVT_INT)
       return 0;
 
    return static_cast<Int_MapVariable*>(v);
 }
-String_MapVariable* MapVariableManager::get_string_variable( const char* name ) {
+String_MapVariable * MapVariableManager::get_string_variable
+(const char * const name) const
+{
    MapVariable* v = get_variable( name );
    if( v && v->get_type() != MapVariable::MVT_STRING)
       return 0;
    return static_cast<String_MapVariable*>(v);
 }
 
-MapVariable* MapVariableManager::get_variable( const char* name ) {
+MapVariable* MapVariableManager::get_variable
+(const char * const name) const
+{
    uint i;
    MapVariable* retval = 0;
    for( i = 0; i < m_variables.size(); i++) {

@@ -830,7 +830,7 @@ Cleanup
 PlayerImmovable::~PlayerImmovable()
 {
 	if (m_workers.size())
-		log("Building::~Building: %i workers left!\n", (int)m_workers.size());
+		log("Building::~Building: %i workers left!\n", m_workers.size());
 }
 
 /*

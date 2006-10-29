@@ -41,7 +41,7 @@ Player::Player
  const int type,
  const int plnum,
  const Tribe_Descr & tribe,
- const char * const name,
+ const std::string & name,
  const uchar * const playercolor)
 :
 m_see_all(false),

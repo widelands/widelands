@@ -176,6 +176,17 @@ Critter_Bob_Descr::Critter_Bob_Descr(const char *name, Tribe_Descr* tribe)
 	m_swimming = 0;
 }
 
+
+Critter_Bob_Descr::~Critter_Bob_Descr() {
+	const ProgramMap::const_iterator programs_end = m_programs.end();
+	for
+		(ProgramMap::const_iterator it = m_programs.begin();
+		 it != programs_end;
+		 ++it)
+		delete it->second;
+}
+
+
 /*
 ===============
 Critter_Bob_Descr::get_program

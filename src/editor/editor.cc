@@ -118,9 +118,9 @@ Player * Editor::get_safe_player(const int n) {
 		// players are not always initialized
 		result = add_player
 			(n,
-			 Player::playerLocal,
-			 get_map()->get_scenario_player_tribe(n).c_str(),
-			 get_map()->get_scenario_player_name(n).c_str());
+			 Player::Local,
+			 get_map()->get_scenario_player_tribe(n),
+			 get_map()->get_scenario_player_name(n));
 		result->init(false);
 	}
 	return result;

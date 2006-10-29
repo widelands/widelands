@@ -118,7 +118,7 @@ class MapObjectiveManager {
       /*
        * Get a objective
        */
-      MapObjective* get_objective( const char* name );
+	MapObjective * get_objective(const char * const name) const;
       void delete_objective( const char* name );
 
 	typedef std::vector<MapObjective *> objective_vector;

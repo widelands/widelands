@@ -68,21 +68,21 @@ throw (_wexception)
 
             std::string name = fr.CString();
 
-            game->add_player(plnum, type, tribe.c_str(), name.c_str());
+            game->add_player(plnum, type, tribe, name);
             Player* plr = game->get_player(plnum);
             plr->set_see_all(see_all);
 
             for(uint i=0; i<4; i++)
                plr->m_playercolor[i] = rgb[i];
 
-            if(type == Player::playerLocal) {
+            if (type == Player::Local) {
                // The interactive player might still be in existance
                // we do not delete it then, we reuse it
                if(!game->ipl) {
                   game->ipl = new Interactive_Player(game, plnum);
                   game->set_iabase(game->ipl);
                }
-            } else if (type == Player::playerAI) {
+            } else if (type == Player::AI) {
                game->cpl.push_back(new Computer_Player(game,plnum));
             }
          }
@@ -126,7 +126,7 @@ throw (_wexception)
       fw.Signed32(plr->m_type);
       fw.Signed32(plr->m_plnum);
 
-		fw.CString(plr->m_tribe.get_name());
+		fw.CString(plr->m_tribe.get_name().c_str());
 
       for(uint i=0; i<4; i++) {
          fw.Unsigned8(plr->m_playercolor[i].r());

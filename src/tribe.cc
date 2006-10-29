@@ -39,19 +39,16 @@ using namespace std;
 //
 // Tribe_Descr class
 //
-Tribe_Descr::Tribe_Descr(const char* name)
-{
-	snprintf(m_name, sizeof(m_name), "%s", name);
-
+Tribe_Descr::Tribe_Descr(const std::string & name) : m_name(name) {
 	try
 	{
 		char directory[256];
 
       // Grab the localisation text domain
-      sprintf( directory, "tribe_%s", name );
+		sprintf( directory, "tribe_%s", name.c_str() );
       i18n::grab_textdomain( directory );
 
-		snprintf(directory, sizeof(directory), "tribes/%s", name);
+		snprintf(directory, sizeof(directory), "tribes/%s", name.c_str());
 
 		m_default_encdata.clear();
       parse_wares(directory);
@@ -63,9 +60,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
       i18n::release_textdomain( );
 	}
 	catch(std::exception &e)
-	{
-		throw wexception("Error loading tribe %s: %s", name, e.what());
-	}
+	{throw wexception("Error loading tribe %s: %s", name.c_str(), e.what());}
 }
 
 
@@ -461,8 +456,10 @@ void Tribe_Descr::load_warehouse_with_start_wares
       std::vector<std::string> list;
 		split_string(it->first, &list, "/");
 
-      if(list.size()!=4)
-         throw wexception("Error in tribe (%s), startsoldier %s is not valid!", get_name(), it->first.c_str());
+			if (list.size() != 4) throw wexception
+				("Error in tribe (%s), startsoldier %s is not valid!",
+				 get_name().c_str(),
+				 it->first.c_str());
 
       char* endp;
       int hplvl=strtol(list[0].c_str(),&endp, 0);
@@ -498,7 +495,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 /*
  * does this tribe exist?
  */
-bool Tribe_Descr::exists_tribe(std::string name) {
+bool Tribe_Descr::exists_tribe(const std::string & name) {
    std::string buf;
    buf="tribes/" + name + "/conf";;
 
@@ -509,17 +506,15 @@ bool Tribe_Descr::exists_tribe(std::string name) {
 /*
  * Returns all tribes that exists
  */
-void Tribe_Descr::get_all_tribes(std::vector<std::string>* retval) {
-   retval->resize(0);
+void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
+	assert(target.empty());
 
    // get all tribes
    filenameset_t m_tribes;
    g_fs->FindFiles("tribes", "*", &m_tribes);
    for(filenameset_t::iterator pname = m_tribes.begin(); pname != m_tribes.end(); pname++) {
-      std::string tribe=*pname;
-      tribe.erase(0,7); // remove 'tribes/'
-      if(Tribe_Descr::exists_tribe(tribe.c_str()))
-         retval->push_back(tribe);
+		const std::string name = pname->substr(7);
+		if (Tribe_Descr::exists_tribe(name)) target.push_back(name);
    }
 }
 
@@ -535,7 +530,7 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
    if(!res || !amount) {
       int idx=get_immovable_index("resi_none");
       if(idx==-1)
-         throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", get_name());
+	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", get_name().c_str());
       return idx;
    }
 
@@ -551,10 +546,10 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
       ++num_indicators;
    }
 
-   if(!num_indicators) {
-      // Upsy, no indicators for this resource
-      throw wexception("Tribe %s doesn't declar a resource indicator for resource %s!\n", get_name(), res->get_name());
-   }
+	if (not num_indicators) throw wexception
+		("Tribe %s doesn't declar a resource indicator for resource %s!\n",
+		 get_name().c_str(),
+		 res->get_name());
 
    uint bestmatch = (uint) (( static_cast<float>(amount)/res->get_max_amount() ) * num_indicators);
    if(((int)amount)<res->get_max_amount())

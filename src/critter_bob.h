@@ -33,7 +33,7 @@ class Critter_Bob_Descr : public Bob_Descr {
 
    public:
       Critter_Bob_Descr(const char *name, Tribe_Descr* tribe);
-      virtual ~Critter_Bob_Descr(void) { }
+	virtual ~Critter_Bob_Descr();
 
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
       Bob *create_object();

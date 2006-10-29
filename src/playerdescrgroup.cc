@@ -29,16 +29,16 @@
 #include "tribe.h"
 #include "wexception.h"
 
-static const char* default_names[MAX_PLAYERS+1] = {
-   "",
-   _("Player 1").c_str(),
-   _("Player 2").c_str(),
-   _("Player 3").c_str(),
-   _("Player 4").c_str(),
-   _("Player 5").c_str(),
-   _("Player 6").c_str(),
-   _("Player 7").c_str(),
-   _("Player 8").c_str(),
+static const std::string default_names[MAX_PLAYERS + 1] = {
+	"",
+	_("Player 1"),
+	_("Player 2"),
+	_("Player 3"),
+	_("Player 4"),
+	_("Player 5"),
+	_("Player 6"),
+	_("Player 7"),
+	_("Player 8"),
    };
 
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
@@ -55,7 +55,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_plnum = plnum;
 	m_allow_changes=CHANGE_EVERYTHING;
 	m_current_tribe=0;
-	m_playertype=Player::playerLocal; //just for initalization
+	m_playertype = Player::Local; //just for initalization
 
 	m_enabled = false;
 	set_visible(false);
@@ -73,10 +73,10 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, highlight?3:1);
 	m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
 
-	Tribe_Descr::get_all_tribes(&m_tribes);
+	Tribe_Descr::get_all_tribenames(m_tribes);
 	m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
 
-	set_player_type (Player::playerAI);
+	set_player_type(Player::AI);
 }
 
 /** PlayerDescriptionGroup::set_enabled(bool enable)
@@ -102,17 +102,17 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	else
 	{
 		if (m_btnEnablePlayer->get_state()) {
-			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+			assert(m_current_tribe < m_tribes.size());
+			m_game->add_player
+				(m_plnum,
+				 m_playertype,
+				 m_tribes[m_current_tribe],
+				 default_names[m_plnum]);
 			m_game->get_player(m_plnum)->init(false); // Small initializes
       }
 
-      const char* string = 0;
-		switch(m_playertype) {
-		case Player::playerLocal:
-			case Player::playerRemote: string = _("Human").c_str(); break;
-			case Player::playerAI: string = _("Computer").c_str(); break;
-		}
-		m_btnPlayerType->set_title(string);
+		m_btnPlayerType->set_title
+			(m_playertype == Player::AI ? _("Computer") : _("Human"));
 		m_btnPlayerType->set_visible(m_btnEnablePlayer->get_state());
 		m_btnPlayerTribe->set_visible(m_btnEnablePlayer->get_state());
 
@@ -131,7 +131,11 @@ void PlayerDescriptionGroup::enable_player(bool on)
 //	if (!(m_allow_changes&CHANGE_ENABLED)) return;
 
 	if (on) {
-      m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+		m_game->add_player
+			(m_plnum,
+			 m_playertype,
+			 m_tribes[m_current_tribe],
+			 default_names[m_plnum]);
 		m_game->get_player(m_plnum)->init(false); // Small initializes
    } else
 		m_game->remove_player(m_plnum);
@@ -160,7 +164,11 @@ void PlayerDescriptionGroup::toggle_playertribe(void)
 
 	// set the player
 	m_game->remove_player(m_plnum);
-	m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+	m_game->add_player
+		(m_plnum,
+		 m_playertype,
+		 m_tribes[m_current_tribe],
+		 default_names[m_plnum]);
 	m_game->get_player(m_plnum)->init(false); // Small initializes
 }
 
@@ -175,7 +183,11 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
          m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
          // set the player
          m_game->remove_player(m_plnum);
-         m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+			m_game->add_player
+				(m_plnum,
+				 m_playertype,
+				 m_tribes[m_current_tribe].c_str(),
+				 default_names[m_plnum]);
          m_game->get_player(m_plnum)->init(false); // Small initializes
          return;
       }
@@ -199,10 +211,14 @@ void PlayerDescriptionGroup::set_player_type(int type)
 	m_playertype=type;
 
 	if (m_enabled) {
-		m_btnPlayerType->set_title((type!=Player::playerAI)?_("Human").c_str():_("Computer").c_str());
+		m_btnPlayerType->set_title
+			(m_playertype == Player::AI ? _("Computer") : _("Human"));
 
 		m_game->remove_player (m_plnum);
-		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+		m_game->add_player
+			(m_plnum, m_playertype,
+			 m_tribes[m_current_tribe],
+			 default_names[m_plnum]);
 		m_game->get_player(m_plnum)->init(false); // Small initializes
 	}
 }

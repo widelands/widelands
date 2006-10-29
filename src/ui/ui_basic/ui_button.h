@@ -36,10 +36,9 @@ public:
 	UISignal clicked;
 	UISignal1<int> clickedid;
 
-	void remove_title();
 	void set_pic(uint picid);
-	void set_title(const char* title);
-   const char* get_title(void) { return m_title.c_str();  }
+	void set_title(const std::string &);
+	const std::string & get_title() const throw () {return m_title;}
 	void set_enabled(bool on);
 	bool is_snap_target() const {return true;}
 

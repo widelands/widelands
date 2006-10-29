@@ -121,16 +121,14 @@ Editor_Game_Base::~Editor_Game_Base() {
       if (m_players[i-1])
          remove_player(i);
 
-   if (m_map)
 		delete m_map;
 
-   for(i = 0; i < (int)m_tribes.size(); i++)
-		delete m_tribes[i];
-	m_tribes.resize(0);
-
-   m_battle_serials.resize(0);
-
-   memset (m_conquer_map, 0, sizeof (m_conquer_map));
+	const std::vector<Tribe_Descr*>::const_iterator tribes_end = m_tribes.end();
+	for
+		(std::vector<Tribe_Descr*>::const_iterator it = m_tribes.begin();
+		 it != tribes_end;
+		 ++it)
+		delete *it;
 }
 
 /*
@@ -438,8 +436,8 @@ the game starts. Similar for remote players.
 Player * Editor_Game_Base::add_player
 (const int plnum,
  const int type,
- const char * const tribe,
- const char * const name)
+ const std::string & tribe,
+ const std::string & name)
 {
    assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 
@@ -449,11 +447,10 @@ Player * Editor_Game_Base::add_player
    // Get the player's tribe
    uint i;
 
-   manually_load_tribe(tribe);
+	manually_load_tribe(tribe.c_str());
 
    for(i = 0; i < m_tribes.size(); i++)
-      if (!strcmp(m_tribes[i]->get_name(), tribe))
-         break;
+		if (m_tribes[i]->get_name() == tribe) break;
 
    if (i == m_tribes.size())
       m_tribes.push_back(new Tribe_Descr(tribe));
@@ -468,12 +465,11 @@ Player * Editor_Game_Base::add_player
 /*
  * Load the given tribe into structure
  */
-void Editor_Game_Base::manually_load_tribe(const char* tribe) {
+void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
 	uint i;
 
 	for(i = 0; i < m_tribes.size(); i++)
-		if (!strcmp(m_tribes[i]->get_name(), tribe))
-			break;
+		if (m_tribes[i]->get_name() == tribe) break;
 
 	if (i == m_tribes.size())
 		m_tribes.push_back(new Tribe_Descr(tribe));
@@ -485,7 +481,7 @@ void Editor_Game_Base::manually_load_tribe(const char* tribe) {
 Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
 	uint i;
    for(i = 0; i < m_tribes.size(); i++) {
-		if (!strcmp(m_tribes[i]->get_name(), tribe))
+		if (not strcmp(m_tribes[i]->get_name().c_str(), tribe))
 			return m_tribes[i];
    }
    return 0;
@@ -499,12 +495,10 @@ Replaces the current map with the given one. Ownership of the map is transferred
 to the Editor_Game_Base object.
 ===============
 */
-void Editor_Game_Base::set_map(Map* map)
-{
-	if (m_map)
+void Editor_Game_Base::set_map(Map * const new_map) {
 		delete m_map;
 
-   m_map = map;
+	m_map = new_map;
 
    // Register map_variable callback
    g_fh->register_variable_callback( g_MapVariableCallback, m_map);
@@ -570,8 +564,12 @@ void Editor_Game_Base::load_graphics()
 
 	m_map->load_graphics(); // especially loads world data
 
-	for(i = 0; i < (int)m_tribes.size(); i++)
-		m_tribes[i]->load_graphics();
+	const std::vector<Tribe_Descr*>::const_iterator tribes_end = m_tribes.end();
+	for
+		(std::vector<Tribe_Descr*>::const_iterator it = m_tribes.begin();
+		 it != tribes_end;
+		 ++it)
+		(*it)->load_graphics();
 
 	// TODO: load player graphics? (maybe)
 
@@ -687,7 +685,7 @@ Immovable* Editor_Game_Base::create_immovable
 
 	if (idx < 0)
 		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for %s",
-								c.x, c.y, name.c_str(), tribe ? tribe->get_name() : "world");
+								c.x, c.y, name.c_str(), tribe ? tribe->get_name().c_str() : "world");
 
 	return create_immovable(c, idx, tribe);
 }

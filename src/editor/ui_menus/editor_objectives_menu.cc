@@ -241,7 +241,7 @@ void Editor_Objectives_Menu::clicked( int n ) {
          // Get the a name
          char buffer[256];
 
-         const Map & map = *m_parent->get_egbase()->get_map();
+         Map & map = m_parent->get_egbase()->map();
          MapObjectiveManager & mom = map.get_mom();
          for (uint n = 1; mom.get_objective(buffer); ++n) snprintf
             (buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);

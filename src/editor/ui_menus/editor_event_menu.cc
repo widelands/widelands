@@ -314,7 +314,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
          char buffer[256];
 
          int n = 1;
-		const Map & map = m_parent->get_egbase()->map();
+		Map & map = m_parent->get_egbase()->map();
          while( 1 ) {
 		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))

@@ -47,7 +47,8 @@ bool MapObjectiveManager::register_new_objective( MapObjective* mv ) {
 /*
  * Get objectives
  */
-MapObjective* MapObjectiveManager::get_objective( const char* name ) {
+MapObjective* MapObjectiveManager::get_objective(const char * const name) const
+{
    uint i;
    MapObjective* retval = 0;
    for( i = 0; i < m_objectives.size(); i++) {

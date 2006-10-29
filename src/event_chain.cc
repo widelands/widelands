@@ -94,7 +94,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 {
 	m_eventchain_id++;
 
-	const Map & map = *g->get_map();
+	Map & map = g->map();
 	MapEventChainManager & mecm = map.get_mecm();
 	MapEventChainManager::Index nr_eventchains = mecm.get_nr_eventchains();
 	if (m_eventchain_id >= nr_eventchains) {

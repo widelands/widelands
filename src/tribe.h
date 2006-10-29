@@ -52,14 +52,14 @@ class Tribe_Descr {
          ERR_WRONGVERSION
       };
 
-      Tribe_Descr(const char* name);
+	Tribe_Descr(const std::string & name);
 
       // Static function to check for tribes
-      static bool exists_tribe(std::string);
-      static void get_all_tribes(std::vector<std::string>*);
+	static bool exists_tribe(const std::string & name);
+      static void get_all_tribenames(std::vector<std::string> &);
 
 
-      inline const char *get_name() const { return m_name; }
+	const std::string & get_name() const throw () {return m_name;}
 
 		inline int get_nrworkers() const { return m_workers.get_nitems(); }
 		Worker_Descr * get_worker_descr(const uint idx) const
@@ -96,7 +96,7 @@ class Tribe_Descr {
 		(Editor_Game_Base &, Warehouse &) const;
 
    private:
-      char m_name[30];
+	const std::string m_name;
 
       uint m_anim_frontier;
 		uint m_anim_flag;

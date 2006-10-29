@@ -157,7 +157,7 @@ void Fullscreen_Menu_MapSelect::map_selected(int) {
          assert(m_map);
 
          try {
-            *m_ml = m_map->get_correct_loader(get_mapname());
+	         *m_ml = m_map->get_correct_loader(get_mapname()); //  FIXME memory leak!
             (*m_ml)->preload_map(m_is_scenario);
 
             char buf[256];
@@ -238,7 +238,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
 
-      Map_Loader* m_ml = map->get_correct_loader(name);
+		Map_Loader* m_ml = map->get_correct_loader(name); //  FIXME Do not declare a local variable whose name begins with m_, especially not when it shadows a member!
       if(!m_ml) continue;
 
 		try {

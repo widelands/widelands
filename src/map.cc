@@ -142,9 +142,9 @@ Map::~Map()
       delete m_mecm;
       m_mecm = 0;
    }
-   if(m_mem) {
-      delete m_mem;
-      m_mem = 0;
+   if(m_mtm) {
+      delete m_mtm;
+      m_mtm = 0;
    }
    if(m_mem) {
       delete m_mem;
