@@ -34,19 +34,19 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	// UIButtons
 	UIButton* b;
 
-	b = new UIButton(this, 90, 220, 200, 26, 1, sp_skirmish);
+	b = new UIButton(this, 90, 220, 200, 26, 1, New_Game);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title(_("Single Map").c_str());
+	b->set_title(_("New Game").c_str());
 
-	b = new UIButton(this, 90, 260, 200, 26, 1, sp_tutorial);
+	b = new UIButton(this, 90, 260, 200, 26, 1, Tutorial_Campaign);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("Tutorial Campaign").c_str());
 
-	b = new UIButton(this, 90, 300, 200, 26, 1, sp_loadgame);
+	b = new UIButton(this, 90, 300, 200, 26, 1, Load_Game);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("Load Game").c_str());
 
-	b = new UIButton(this, 90, 400, 200, 26, 0, sp_back);
+	b = new UIButton(this, 90, 400, 200, 26, 0, Back);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("Back").c_str());
 }

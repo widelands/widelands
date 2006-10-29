@@ -434,7 +434,17 @@ restart:
 void WLApplication::handle_input(const InputCallback *cb)
 {
 	bool gotevents = false;
-	SDL_Event ev;
+	SDL_Event ev; //  Valgrind says:
+// Conditional jump or move depends on uninitialised value(s)
+// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
+// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
+// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
+// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
+// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool) (wlapplication.cc:309)
+// by 0x8252EB6: WLApplication::handle_input(InputCallback const*) (wlapplication.cc:459)
+// by 0x828B56E: UIPanel::run() (ui_panel.cc:148)
+// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
+// by 0x81427A6: main (main.cc:39)
 
 	NetGGZ::ref()->data();
 	NetGGZ::ref()->datacore();
@@ -1069,40 +1079,37 @@ void WLApplication::mainmenu_singleplayer()
 {
 	m_game = new Game;
 
-	bool done=false;
-	while(!done) {
-		Fullscreen_Menu_SinglePlayer *sp = new Fullscreen_Menu_SinglePlayer;
-		int code = sp->run();
-		delete sp;
+	for (bool done = false; not done;) {
+		int code;
+		{
+			Fullscreen_Menu_SinglePlayer single_player_menu;
+			code = single_player_menu.run();
+		}
 
 		switch(code) {
-		case Fullscreen_Menu_SinglePlayer::sp_skirmish:
+		case Fullscreen_Menu_SinglePlayer::New_Game:
 			if (m_game->run_single_player())
 				done=true;
 			break;
 
-		case Fullscreen_Menu_SinglePlayer::sp_loadgame:
+		case Fullscreen_Menu_SinglePlayer::Load_Game:
 			if (m_game->run_load_game(true))
 				done=true;
 			break;
 
-		case Fullscreen_Menu_SinglePlayer::sp_tutorial:
+		case Fullscreen_Menu_SinglePlayer::Tutorial_Campaign:
 			{
-				Fullscreen_Menu_TutorialSelectMap* sm = new Fullscreen_Menu_TutorialSelectMap;
-				int code = sm->run();
-				if(code) {
-					std::string mapname = sm->get_mapname( code );
-					delete sm;
-
-					bool run = m_game->run_splayer_map_direct( mapname.c_str(), true);
-					if(run)
-						done = true;
-					continue;
+				const char * filename = 0;
+				{
+					Fullscreen_Menu_TutorialSelectMap select_tutorial;
+					if (const uint i = select_tutorial.run())
+						filename = select_tutorial.get_mapname(i);
 				}
-				// Fallthrough if back was pressed
+				if (filename) m_game->run_splayer_map_direct(filename, true);
 			}
+			break;
 
-		case Fullscreen_Menu_SinglePlayer::sp_back:
+		case Fullscreen_Menu_SinglePlayer::Back:
 			done = true;
 			break;
 		}
