@@ -148,15 +148,15 @@ def CheckSDLVersionAtLeast(context, major, minor, micro, env):
 	return ret
 
 def CheckCompilerArgument(context, compiler_argument, env):
-	context.Message( 'Checking for %s ...' % compiler_argument)
+	context.Message( 'Trying to enable compiler argument %s ... ' % compiler_argument)
 	lastCCFLAGS = context.env['CCFLAGS']
 	context.env.Append(CCFLAGS = compiler_argument)
 	ret = context.TryLink("""int main(int argc, char **argv) {return 0;}
-""", ".cc")
+                              """, ".cc")
 	if not ret:
 		context.env.Replace(CCFLAGS = lastCCFLAGS)
 	context.Result( ret )
-	return ret
+	return
 ################################################################################
 
 #TODO: this can be dropped once we use scons-0.97
@@ -212,7 +212,7 @@ def do_configure(config_h_file, conf, env):
 		env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
 
 	if not conf.CheckParaguiConfig(env):
-		print 'Could not find paragui. That\'s no problem unless you\'re developer working on this.'
+		print 'Could not find paragui. That\'s no problem unless you\'re a developer working on this.'
 		#print 'Could not find paragui-config! Is paragui installed?'
 		#env.Exit(1)
 	else:
@@ -259,3 +259,29 @@ def do_configure(config_h_file, conf, env):
 		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
 
 	conf.CheckCompilerArgument('-fstack-protector-all', env)
+	conf.CheckCompilerArgument('-pipe', env)
+	conf.CheckCompilerArgument('-Wall', env)
+	conf.CheckCompilerArgument('-Wcast-align', env)
+	conf.CheckCompilerArgument('-Wcast-qual', env)
+	conf.CheckCompilerArgument('-Wconversion', env)
+	conf.CheckCompilerArgument('-Wdisabled-optimization', env)
+	conf.CheckCompilerArgument('-Wextra', env)
+	#conf.CheckCompilerArgument('-Wfloat-equal', env)
+	#conf.CheckCompilerArgument('-Wformat=2', env)
+	conf.CheckCompilerArgument('-Winline', env)
+	conf.CheckCompilerArgument('-Winvalid-pch', env)
+	#conf.CheckCompilerArgument('-Wmissing-format-attribute', env)
+	conf.CheckCompilerArgument('-Wmissing-include-dirs', env)
+	#conf.CheckCompilerArgument('-Wmissing-noreturn', env)
+	conf.CheckCompilerArgument('-Wno-comment', env)
+	conf.CheckCompilerArgument('-Wnormalized=nfc', env)
+	#conf.CheckCompilerArgument('-Wold-style-cast', env)
+	#conf.CheckCompilerArgument('-Wpadded', env)
+	conf.CheckCompilerArgument('-Wpointer-arith', env)
+	conf.CheckCompilerArgument('-Wunsafe-loop-optimizations', env)
+	#conf.CheckCompilerArgument('-Wshadow', env)
+	conf.CheckCompilerArgument('-Wstack-protector', env)
+	conf.CheckCompilerArgument('-Wstrict-aliasing=2', env)
+	#conf.CheckCompilerArgument('-Wunreachable-code', env)
+	conf.CheckCompilerArgument('-Wwrite-strings', env)
+

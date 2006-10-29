@@ -202,21 +202,26 @@ if env['build']=='profile':
 if env['build']=='release':
 	OPTIMIZE=1
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
+
+	# TODO: Those should be tested for existence
 	env.Append(CCFLAGS=['-finline-functions', '-ffast-math', '-funroll-loops'])
 	env.Append(CCFLAGS='-fexpensive-optimizations')
 	env.Append(LINKFLAGS='-s')
 
 if DEBUG:
+	# TODO: fmessage-length should be tested for existence
 	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0'])
 else:
 	env.Append(CCFLAGS='-DNDEBUG')
 
 if PROFILE:
+	#TODO: -fprofile-arcs should be tested for existence
 	env.Append(CCFLAGS=['-pg', '-fprofile-arcs'])
 	env.Append(LINKFLAGS=['-pg', '-fprofile-arcs'])
 
 if OPTIMIZE:
 	# heavy optimization
+	# TODO: Those should be tested for existence
 	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions
 	#                -ffast-math -funroll-loops -fexpensive-optimizations
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
@@ -254,34 +259,6 @@ do_configure(config_h, conf, env)
 write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
 #load_configuration(conf)
 
-env.Append(CCFLAGS=[
-	'-pipe',
-	'-Wall',
-	'-Wcast-align',
-	'-Wcast-qual',
-	'-Wconversion',
-	'-Wdisabled-optimization',
-	'-Wextra',
-#	'-Wfloat-equal',
-#	'-Wformat=2',
-	'-Winline',
-	'-Winvalid-pch',
-	'-Wmissing-format-attribute',
-	'-Wmissing-include-dirs',
-	'-Wmissing-noreturn',
-	'-Wnormalized=nfc',
-	'-Wold-style-cast',
-#	'-Wpadded',
-	'-Wpointer-arith',
-	'-Wconversion',
-	'-Wshadow',
-	'-Wstack-protector',
-	'-Wstrict-aliasing=2',
-#	'-Wunreachable-code',
-	'-Wunsafe-loop-optimizations',
-	'-Wwrite-strings',
-	'-Wno-comment'
-	])
 #env.Append(LINKFLAGS='-lasprintf') #TODO: *check* for this instead of assuming it's there
 
 env=conf.Finish()
