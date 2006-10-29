@@ -147,6 +147,16 @@ def CheckSDLVersionAtLeast(context, major, minor, micro, env):
 	context.Result( ret )
 	return ret
 
+def CheckCompilerArgument(context, compiler_argument, env):
+	context.Message( 'Checking for %s ...' % compiler_argument)
+	lastCCFLAGS = context.env['CCFLAGS']
+	context.env.Append(CCFLAGS = compiler_argument)
+	ret = context.TryLink("""int main(int argc, char **argv) {return 0;}
+""", ".cc")
+	if not ret:
+		context.env.Replace(CCFLAGS = lastCCFLAGS)
+	context.Result( ret )
+	return ret
 ################################################################################
 
 #TODO: this can be dropped once we use scons-0.97
@@ -247,3 +257,5 @@ def do_configure(config_h_file, conf, env):
 	else:
 		config_h_file.write("#define NEW_SDL_MIXER 0\n\n");
 		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
+
+	conf.CheckCompilerArgument('-fstack-protector-all', env)
