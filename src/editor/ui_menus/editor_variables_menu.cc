@@ -196,7 +196,7 @@ bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int, int) {
    } else
       return false; // we're not dragable
 }
-bool Edit_Variable_Window::handle_mouserelease(const Uint8 btn, int, int)
+bool Edit_Variable_Window::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*

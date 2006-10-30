@@ -84,7 +84,7 @@ bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int, int) {
    } else
       return false; // we're not dragable
 }
-bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8 btn, int, int)
+bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*

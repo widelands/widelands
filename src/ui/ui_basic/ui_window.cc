@@ -293,7 +293,7 @@ bool UIWindow::handle_mousepress(const Uint8 btn, int mx, int my) {
 	}
 	return true;
 }
-bool UIWindow::handle_mouserelease(const Uint8 btn, int mx, int my) {
+bool UIWindow::handle_mouserelease(const Uint8 btn, int, int) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
 		_dragging = false;

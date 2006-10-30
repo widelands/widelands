@@ -99,7 +99,7 @@ throw (_wexception)
             bool allowed = s->get_bool(name);
             int index=t->get_building_index(name);
             if(index==-1)
-               throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->get_name());
+               throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->get_name().c_str());
             plr->allow_building(index, allowed);
          }
       }

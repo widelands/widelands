@@ -143,7 +143,7 @@ bool Event_Allow_Building_Option_Menu::handle_mousepress
 
 }
 bool Event_Allow_Building_Option_Menu::handle_mouserelease
-(const Uint8 btn, int, int)
+(const Uint8, int, int)
 {return false;}
 
 /*

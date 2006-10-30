@@ -369,7 +369,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
       const Coords &c = m_parent->get_map()->get_starting_pos(p->get_player_number());
       int idx = p->get_tribe()->get_building_index("headquarters");
       if (idx < 0)
-         throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name());
+         throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name().c_str());
       m_parent->get_egbase()->warp_building(c, p->get_player_number(), idx);
 
       m_parent->reference_player_tribe(n, p->get_tribe());

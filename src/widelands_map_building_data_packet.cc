@@ -86,7 +86,7 @@ throw (_wexception)
                int index=plr->get_tribe()->get_building_index(name.c_str());
                if(index==-1)
                   throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
-                        name.c_str(), plr->get_tribe()->get_name());
+                        name.c_str(), plr->get_tribe()->get_name().c_str());
 
                // Now, create this Building, take extra special care for constructionsites
                Building* building=0;
