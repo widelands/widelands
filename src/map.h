@@ -196,8 +196,8 @@ public:
 	const char * get_description() const {return m_description;}
 	const char * get_world_name() const {return m_worldname;}
 	Uint8 get_nrplayers() const throw () {return m_nrplayers;}
-	uint get_width() const {return m_width;}
-	uint get_height() const {return m_height;}
+	Uint16 get_width   () const throw () {return m_width;}
+	Uint16 get_height  () const throw () {return m_height;}
 	World & world() const throw () {return *m_world;}
 	World * get_world() const {return m_world;}
    // The next few functions are only valid
@@ -317,11 +317,16 @@ public:
     * Get the a manager for registering or removing
     * something
     */
-	MapVariableManager   & get_mvm () const {return *m_mvm;}
-	MapObjectiveManager  & get_mom () const {return *m_mom;}
-	MapEventChainManager & get_mecm() const {return *m_mecm;}
-	MapTriggerManager    & get_mtm () const {return *m_mtm;}
-	MapEventManager      & get_mem () const {return *m_mem;}
+	const MapVariableManager   & get_mvm () const {return *m_mvm;}
+	MapVariableManager         & get_mvm ()       {return *m_mvm;}
+	const MapTriggerManager    & get_mtm () const {return *m_mtm;}
+	MapTriggerManager          & get_mtm ()       {return *m_mtm;}
+	const MapEventManager      & get_mem () const {return *m_mem;}
+	MapEventManager            & get_mem ()       {return *m_mem;}
+	const MapEventChainManager & get_mecm() const {return *m_mecm;}
+	MapEventChainManager       & get_mecm()       {return *m_mecm;}
+	const MapObjectiveManager  & get_mom () const {return *m_mom;}
+	MapObjectiveManager        & get_mom ()       {return *m_mom;}
 
 
 private:
@@ -329,9 +334,10 @@ private:
 	void load_world();
 	void recalc_border(const FCoords);
 
+	Uint16 m_pathcycle;
 	Uint8             m_nrplayers; // # of players this map supports (!= Game's number of players)
-	uint		m_width;
-	uint		m_height;
+	Uint16 m_width;
+	Uint16 m_height;
 	char		m_filename[256];
 	char		m_author[61];
 	char		m_name[61];
@@ -342,18 +348,17 @@ private:
 
 	Field*	m_fields;
 
-	ushort		m_pathcycle;
 	Pathfield*	m_pathfields;
    Overlay_Manager* m_overlay_manager;
 
    std::vector<std::string>  m_scenario_tribes; // only alloced when really needed
    std::vector<std::string>  m_scenario_names;
 
-   MapVariableManager*       m_mvm;           // The mapvariable manager makes sure for handling all the variables
-   MapObjectiveManager*      m_mom;           // The mapobjective manager lists all scenarios objectives.
-   MapEventChainManager*     m_mecm;           // The mapeventchain manager has a list of all event chains in this map
-   MapTriggerManager*        m_mtm;            // The maptrigger manager
-   MapEventManager*          m_mem;            // The mapevent manager
+	MapVariableManager*   m_mvm;  // The mapvariable manager makes sure for handling all the variables
+	MapTriggerManager*    m_mtm;  // The maptrigger manager
+	MapEventManager*      m_mem;  // The mapevent manager
+	MapEventChainManager* m_mecm; // The mapeventchain manager has a list of all event chains in this map
+	MapObjectiveManager*  m_mom;  // The mapobjective manager lists all scenarios objectives.
 
    struct Extradata_Info {
       enum Type {
@@ -637,8 +642,8 @@ public:
 	int get_index(Coords field) const;
 
 	void reverse();
-	void truncate(int after);
-	void starttrim(int before);
+	void truncate (const std::vector<char>::size_type after);
+	void starttrim(const std::vector<char>::size_type before);
 	void append(const Path &tail);
 	void append(const CoordPath &tail);
 

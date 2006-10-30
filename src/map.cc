@@ -40,15 +40,12 @@
  * Callback function for font renderer.
  */
 std::string g_MapVariableCallback( std::string str, void* data ) {
-   Map* map = (Map*)data;
-   if(!map)
-      return (std::string("UNKNOWN:") + str ).c_str();
-
-	MapVariable * const var = map->get_mvm().get_variable(str.c_str());
-   if(!var)
-      return (std::string("UNKNOWN:") + str ).c_str();
-   else
-      return var->get_string_representation();
+	if (const Map * const map = static_cast<const Map * const>(data))
+		if
+			(const MapVariable * const var =
+			 map->get_mvm().get_variable(str.c_str()))
+			return var->get_string_representation();
+	return (std::string("UNKNOWN:") + str).c_str();
 }
 
 /*
@@ -93,28 +90,23 @@ Map::Map
 Inits a clean, empty map
 ===============
 */
-Map::Map(void)
-{
- 	m_nrplayers = 0;
-	m_width = m_height = 0;
-	m_world=0;
-	m_pathcycle = 0;
-	m_fields = 0;
-	m_pathfields = 0;
-	m_starting_pos = 0;
-	m_world = 0;
+Map::Map() :
+m_pathcycle      (0),
+m_nrplayers      (0),
+m_width          (0),
+m_height         (0),
+m_world          (0),
+m_starting_pos   (0),
+m_fields         (0),
+m_pathfields     (0),
+m_overlay_manager(0),
 
-	m_overlay_manager=0;
-
-   m_mvm = new MapVariableManager();
-   m_mom = new MapObjectiveManager();
-   m_mecm = new MapEventChainManager();
-   m_mtm = new MapTriggerManager();
-   m_mem = new MapEventManager();
-
-	// Paranoia
-	cleanup();
-}
+m_mvm            (new MapVariableManager  ()),
+m_mtm            (new MapTriggerManager   ()),
+m_mem            (new MapEventManager     ()),
+m_mecm           (new MapEventChainManager()),
+m_mom            (new MapObjectiveManager ())
+{}
 
 /*
 ===============
@@ -2682,10 +2674,8 @@ CoordPath::truncate
 Truncate the path after the given number of steps
 ===============
 */
-void CoordPath::truncate(int after)
-{
-	assert(after >= 0);
-	assert((uint)after <= m_path.size());
+void CoordPath::truncate(const std::vector<char>::size_type after) {
+	assert(after <= m_path.size());
 
 	m_path.erase(m_path.begin()+after, m_path.end());
 	m_coords.erase(m_coords.begin()+after+1, m_coords.end());
@@ -2698,10 +2688,8 @@ CoordPath::starttrim
 Opposite of truncate: remove the first n steps of the path.
 ===============
 */
-void CoordPath::starttrim(int before)
-{
-	assert(before >= 0);
-	assert((uint)before <= m_path.size());
+void CoordPath::starttrim(const std::vector<char>::size_type before) {
+	assert(before <= m_path.size());
 
 	m_path.erase(m_path.begin(), m_path.begin()+before);
 	m_coords.erase(m_coords.begin(), m_coords.begin()+before);

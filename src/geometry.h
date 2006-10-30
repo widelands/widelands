@@ -23,6 +23,8 @@
 #include <cmath>
 #include <SDL_types.h>
 
+#include "compile_assert.h"
+
 struct Point {
 	Point() {}
 	Point(const int px, const int py) : x(px), y(py) {}
@@ -90,7 +92,9 @@ struct Vector {
 };
 
 
-typedef Sint16 coord_t;
+typedef Sint16 Coordinate;
+typedef Coordinate X_Coordinate;
+typedef Coordinate Y_Coordinate;
 /**
  * Structure used to store map coordinates
  */
@@ -114,8 +118,9 @@ struct Coords {
 		}
 	};
 
-	union {struct {coord_t x, y;}; Uint32 all;};
+	union {struct {X_Coordinate x; Y_Coordinate y;}; Uint32 all;};
 };
+compile_assert(sizeof(Coords) == 4);
 
 
 class Field;

@@ -145,10 +145,10 @@ Coords Section::Value::get_Coords() const
 	const long int x = strtol(endp, &endp, 0);
 	const long int y = strtol(endp, &endp, 0);
 	if
-		(x <= std::numeric_limits<coord_t>::min() or
-		 x >= std::numeric_limits<coord_t>::max() or
-		 y <= std::numeric_limits<coord_t>::min() or
-		 y >= std::numeric_limits<coord_t>::max() or
+		(x <  std::numeric_limits<X_Coordinate>::min() or
+		 x >= std::numeric_limits<X_Coordinate>::max() or
+		 y <  std::numeric_limits<Y_Coordinate>::min() or
+		 y >= std::numeric_limits<Y_Coordinate>::max() or
 		 *endp)
 		throw wexception("%s: '%s' is not a Coords", get_name(), m_value);
 
