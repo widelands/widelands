@@ -560,8 +560,6 @@ called after that has happened.
 */
 void Editor_Game_Base::load_graphics()
 {
-	int i;
-
 	m_map->load_graphics(); // especially loads world data
 
 	const std::vector<Tribe_Descr*>::const_iterator tribes_end = m_tribes.end();
