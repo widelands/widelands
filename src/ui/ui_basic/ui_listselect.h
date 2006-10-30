@@ -25,8 +25,9 @@
 #include "compile_assert.h"
 #include "font_handler.h"
 #include "ui_panel.h"
-#include "ui_scrollbar.h"
 #include "ui_signal.h"
+
+class UIScrollbar;
 
 /**
  * This class defines a list-select box.
@@ -147,7 +148,7 @@ private:
 	uint                  m_lineheight;
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
-	UIScrollbar           m_scrollbar;
+	UIScrollbar *         m_scrollbar;
 	uint                  m_scrollpos;	// in pixels
 	uint                  m_selection;
    int                  m_last_click_time;

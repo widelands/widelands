@@ -75,7 +75,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
 	uint width = 0, height = 0;
    for(int j=0; j<nr_bobs; j++) {
 		Bob_Descr* descr = get_parent()->get_map()->get_world()->get_bob_descr(j);
-		uint w,h;
+		uint w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
       if(w>width) width=w;

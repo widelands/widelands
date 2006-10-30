@@ -67,13 +67,13 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    if(resources_in_row*resources_in_row<nr_resources) { resources_in_row++; }
    int i=1;
 
-	uint w = 0, h = 0;
+	uint w     = 0, h      = 0;
 	uint width = 0, height = 0;
    for(i=0; i<nr_resources; i++) {
       Resource_Descr* res=parent->get_map()->get_world()->get_resource(i);
       std::string editor_pic=res->get_editor_pic(100000);
-	   const uint picid=g_gr->get_picture(PicMod_Game,  editor_pic.c_str());
-      g_gr->get_picture_size(picid, w, h);
+		const uint picid = g_gr->get_picture(PicMod_Game,  editor_pic.c_str());
+		g_gr->get_picture_size(picid, w, h);
       if(w>width) width=w;
       if(h>height) height=h;
    }

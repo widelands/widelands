@@ -22,6 +22,7 @@
 #include "rendertarget.h"
 #include "types.h"
 #include "ui_listselect.h"
+#include "ui_scrollbar.h"
 #include "wlapplication.h"
 
 /**
@@ -39,7 +40,7 @@ UIListselect<void *>::UIListselect
 :
 UIPanel(parent, x, y, w, h),
 m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
-m_scrollbar     (parent, x + get_w() - 24, y, 24, h, false),
+m_scrollbar     (new UIScrollbar(parent, x + get_w() - 24, y, 24, h, false)),
 m_scrollpos     (0),
 m_selection     (no_selection_index()),
 m_last_click_time(-10000),
@@ -50,9 +51,9 @@ m_show_check(show_check)
 
 	set_align(align);
 
-	m_scrollbar.moved.set(this, &UIListselect::set_scrollpos);
-	m_scrollbar.set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
-	m_scrollbar.set_steps(1);
+	m_scrollbar->moved.set(this, &UIListselect::set_scrollpos);
+	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
+	m_scrollbar->set_steps(1);
 
 	if (show_check) {
 		uint pic_h;
@@ -70,7 +71,7 @@ m_show_check(show_check)
 /**
 Free allocated resources
 */
-UIListselect<void *>::~UIListselect() {clear();}
+UIListselect<void *>::~UIListselect() {m_scrollbar = 0; clear();}
 
 
 /**
@@ -81,7 +82,7 @@ void UIListselect<void *>::clear() {
 		free(m_entries[i]);
 	m_entries.clear();
 
-	m_scrollbar.set_steps(1);
+	if (m_scrollbar) m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
 	m_selection = no_selection_index();
 	m_last_click_time = -10000;
@@ -123,7 +124,7 @@ void UIListselect<void *>::add_entry
 
 	m_entries.push_back(&e);
 
-	m_scrollbar.set_steps(m_entries.size() * get_lineheight() - get_h());
+	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
    if(select) {
