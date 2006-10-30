@@ -21,6 +21,7 @@
 #define GEOMETRY_H
 
 #include <cmath>
+#include <limits>
 #include <SDL_types.h>
 
 #include "compile_assert.h"
@@ -92,7 +93,7 @@ struct Vector {
 };
 
 
-typedef Sint16 Coordinate;
+typedef Uint16 Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;
 /**
@@ -106,8 +107,18 @@ struct Coords {
 		{return x == other.x and y == other.y;}
 	bool operator!=(const Coords other) const {return not (*this == other);}
 
-	bool is_valid  () const {return x != -1 and y != -1;}
-	bool is_invalid() const {return x == -1 and y == -1;}
+	bool is_valid  () const{
+		return
+			x != std::numeric_limits<X_Coordinate>::max()
+			and
+			y != std::numeric_limits<Y_Coordinate>::max();
+	}
+	bool is_invalid() const {
+		return
+			x == std::numeric_limits<X_Coordinate>::max()
+			and
+			y == std::numeric_limits<Y_Coordinate>::max();
+	}
 
 	/**
 	 * For use with standard containers.

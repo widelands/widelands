@@ -66,10 +66,13 @@ void Event_Conquer_Area::Read(Section* s, Editor_Game_Base* egbase) {
       int player= s->get_safe_int("player");
       set_player(player);
 
-      if(m_pt.x<0 || m_pt.y<0 || m_pt.x>=((int)egbase->get_map()->get_width()) || m_pt.y>=((int)egbase->get_map()->get_height()) || player<=0 || player>egbase->get_map()->get_nrplayers()) {
+		const Map & map = egbase->map();
+		if
+			(m_pt.x >= map.get_width() or m_pt.y >= map.get_height()
+			 or
+			 player <= 0 or map.get_nrplayers())
          // give a warning
          log("Conquer Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", m_pt.x, m_pt.y, player);
-      }
       return;
    }
 	throw wexception
