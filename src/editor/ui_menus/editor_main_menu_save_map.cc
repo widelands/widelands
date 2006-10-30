@@ -191,7 +191,7 @@ void Main_Menu_Save_Map::clicked(int id) {
 /*
  * called when a item is selected
  */
-void Main_Menu_Save_Map::selected(int) {
+void Main_Menu_Save_Map::selected(uint) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
    if(Widelands_Map_Loader::is_widelands_map(name)) {
@@ -232,9 +232,7 @@ void Main_Menu_Save_Map::selected(int) {
 /*
  * An Item has been doubleclicked
  */
-void Main_Menu_Save_Map::double_clicked(int) {
-   clicked(1);
-}
+void Main_Menu_Save_Map::double_clicked(uint) {clicked(1);}
 
 /*
  * fill the file list

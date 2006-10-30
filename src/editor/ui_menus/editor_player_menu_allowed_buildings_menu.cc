@@ -149,23 +149,23 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(int i) {
 /*
  * Listbox selected
  */
-void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected(int) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected(uint) {
    m_rtl_button->set_enabled(true);
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected(int) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected(uint) {
    m_ltr_button->set_enabled(true);
 }
 
 /*
  * Listbox doubleclicked
  */
-void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked(int) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked(uint) {
    // Left to right button
    clicked(0);
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked(int) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked(uint) {
    // Right to left clicked
    clicked(1);
 }

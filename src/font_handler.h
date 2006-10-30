@@ -74,7 +74,7 @@ public:
 	void draw_string(RenderTarget* dst, const std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, std::string text,Align align = Align_CenterLeft, int wrap = -1, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0, int caret = -1) ;
 	void get_size(std::string font, int size, std::string text, int *w, int *h, int wrap = -1);
 	int calc_linewidth(TTF_Font* f, std::string &text);
-	int get_fontheight(std::string font, int size);
+	uint get_fontheight(const std::string & name, const int size);
 	std::string remove_first_space(const std::string &text);
 	std::string word_wrap_text(TTF_Font* f, const std::string &unwrapped_text, int max_width);
 	std::string word_wrap_text(std::string font, int size, const std::string &unwrapped_text,int max_width);
@@ -85,7 +85,7 @@ public:
 	void flush_cache( void );
 	void delete_widget_cache(uint widget_cache_id);
 	void draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int dsty, std::string text, int wrap, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0);
-	void get_size_from_cache(uint widget_cache_id, int *w, int *h);
+	void get_size_from_cache(const uint widget_cache_id, uint & w, uint & h);
 
 	// Register a callback which is used whenever the tag <variable name="kljdf"> appears
 	void register_variable_callback( Varibale_Callback, void* cbdata );
@@ -98,8 +98,8 @@ private:
 		TTF_Font* f;
 		RGBColor fg;
 		RGBColor bg;
-		int      w;
-		int      h;
+		uint      w;
+		uint      h;
 
 		inline bool operator== (const _Cache_Infos& who) const {
 			return ( str == who.str &&

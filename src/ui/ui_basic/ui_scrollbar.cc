@@ -235,9 +235,8 @@ void UIScrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w,
 		pic = m_pic_plus;
 
 	if (pic) {
-		int cpw, cph;
-
-		g_gr->get_picture_size(pic, &cpw, &cph);
+		uint cpw, cph;
+		g_gr->get_picture_size(pic, cpw, cph);
 
 		dst->blit(x + (w - cpw)/2, y + (h - cph)/2, pic);
 	}

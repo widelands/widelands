@@ -170,8 +170,8 @@ void UITable::draw(RenderTarget* dst)
 
       // First draw pictures
       if(e->get_picid()!=-1) {
-         int w,h;
-         g_gr->get_picture_size(e->get_picid(), &w, &h);
+			uint w,h;
+			g_gr->get_picture_size(e->get_picid(), w, h);
          dst->blit(1, y + (get_lineheight()-h)/2, e->get_picid());
       }
 
@@ -263,8 +263,8 @@ void UITable::add_entry(UITable_Entry* e, bool do_select) {
    if(picid==-1) {
       entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
    } else {
-      int w,h;
-      g_gr->get_picture_size(picid, &w, &h);
+		uint w,h;
+		g_gr->get_picture_size(picid, w, h);
       entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);
       if(m_max_pic_width<w) m_max_pic_width=w;
    }

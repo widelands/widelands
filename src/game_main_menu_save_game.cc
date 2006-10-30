@@ -128,7 +128,7 @@ void Game_Main_Menu_Save_Game::clicked(int id) {
 /*
  * called when a item is selected
  */
-void Game_Main_Menu_Save_Game::selected(int) {
+void Game_Main_Menu_Save_Game::selected(uint) {
 	const char * const name = m_ls->get_selection();
 
 
@@ -161,9 +161,7 @@ void Game_Main_Menu_Save_Game::selected(int) {
 /*
  * An Item has been doubleclicked
  */
-void Game_Main_Menu_Save_Game::double_clicked(int) {
-   clicked(1);
-}
+void Game_Main_Menu_Save_Game::double_clicked(uint) {clicked(1);}
 
 /*
  * fill the file list

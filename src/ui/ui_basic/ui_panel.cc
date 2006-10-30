@@ -867,9 +867,8 @@ void UIPanel::ui_mousemove(int x, int y, int xdiff, int ydiff) {
 		return;
 
 	UIPanel *p;
-	int w, h;
-
-	g_gr->get_picture_size(s_default_cursor, &w, &h);
+	uint w, h;
+	g_gr->get_picture_size(s_default_cursor, w, h);
 
 	g_gr->update_rectangle(x-xdiff, y-ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);

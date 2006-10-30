@@ -119,9 +119,8 @@ void UIButton::draw(RenderTarget* dst)
 	// if we got a picture, draw it centered
 	if (m_pic_custom)
 		{
-		int cpw, cph;
-
-		g_gr->get_picture_size(m_pic_custom, &cpw, &cph);
+		uint cpw, cph;
+		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 
 		dst->blit((get_w() - cpw) >> 1, (get_h() - cph) >> 1, m_pic_custom);
 		}

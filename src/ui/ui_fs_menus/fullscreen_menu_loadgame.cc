@@ -86,7 +86,7 @@ void Fullscreen_Menu_LoadGame::ok()
    end_modal(1);
 }
 
-void Fullscreen_Menu_LoadGame::map_selected(int) {
+void Fullscreen_Menu_LoadGame::map_selected(uint) {
    const char* name = list->get_selection();
 
    if (name)
@@ -119,7 +119,7 @@ void Fullscreen_Menu_LoadGame::map_selected(int) {
 /*
  * listbox got double clicked
  */
-void Fullscreen_Menu_LoadGame::double_clicked(int) {
+void Fullscreen_Menu_LoadGame::double_clicked(uint) {
    // Ok
    ok();
 

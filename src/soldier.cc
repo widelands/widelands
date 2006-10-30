@@ -611,11 +611,11 @@ void Soldier::draw
 	const uint attackpic = get_attack_level_pic();
 	const uint defensepic = get_defense_level_pic();
 	const uint evadepic = get_evade_level_pic();
-   int hpw,hph,atw,ath,dew,deh,evw,evh;
-   g_gr->get_picture_size(hppic, &hpw, &hph);
-   g_gr->get_picture_size(attackpic, &atw, &ath);
-   g_gr->get_picture_size(defensepic, &dew, &deh);
-   g_gr->get_picture_size(evadepic, &evw, &evh);
+	uint hpw, hph, atw, ath, dew, deh, evw, evh;
+	g_gr->get_picture_size(hppic,      hpw, hph);
+	g_gr->get_picture_size(attackpic,  atw, ath);
+	g_gr->get_picture_size(defensepic, dew, deh);
+	g_gr->get_picture_size(evadepic,   evw, evh);
 
 	dst.blit(frame_beginning_x, frame_beginning_y - hph - ath, attackpic);
 	dst.blit

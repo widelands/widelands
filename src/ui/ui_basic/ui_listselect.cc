@@ -22,7 +22,6 @@
 #include "rendertarget.h"
 #include "types.h"
 #include "ui_listselect.h"
-#include "ui_scrollbar.h"
 #include "wlapplication.h"
 
 /**
@@ -37,33 +36,29 @@ Args: parent	parent panel
 */
 UIListselect<void *>::UIListselect
 (UIPanel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
-	: UIPanel(parent, x, y, w, h)
+:
+UIPanel(parent, x, y, w, h),
+m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
+m_scrollbar     (parent, x + get_w() - 24, y, 24, h, false),
+m_scrollpos     (0),
+m_selection     (no_selection_index()),
+m_last_click_time(-10000),
+m_last_selection(no_selection_index()),
+m_show_check(show_check)
 {
 	set_think(false);
 
 	set_align(align);
 
-	m_scrollpos = 0;
-	m_selection = -1;
+	m_scrollbar.moved.set(this, &UIListselect::set_scrollpos);
+	m_scrollbar.set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
+	m_scrollbar.set_steps(1);
 
-	m_scrollbar = new UIScrollbar(parent, x+get_w()-24, y, 24, h, false);
-	m_scrollbar->moved.set(this, &UIListselect::set_scrollpos);
-
-	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
-	m_scrollbar->set_steps(1);
-
-   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL);
-
-   m_last_click_time=-10000;
-   m_last_selection=-1;
-
-	m_show_check = show_check;
 	if (show_check) {
-		int pic_h;
+		uint pic_h;
 		m_check_picid = g_gr->get_picture( PicMod_Game,  "pics/list_selected.png" );
-		g_gr->get_picture_size(m_check_picid, &m_max_pic_width, &pic_h);
-		if (pic_h > m_lineheight)
-			m_lineheight = pic_h;
+		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
+		if (pic_h > m_lineheight) m_lineheight = pic_h;
 	}
 	else {
 		m_max_pic_width=0;
@@ -75,7 +70,7 @@ UIListselect<void *>::UIListselect
 /**
 Free allocated resources
 */
-UIListselect<void *>::~UIListselect() {m_scrollbar = 0; clear();}
+UIListselect<void *>::~UIListselect() {clear();}
 
 
 /**
@@ -86,12 +81,11 @@ void UIListselect<void *>::clear() {
 		free(m_entries[i]);
 	m_entries.clear();
 
-	if (m_scrollbar)
-		m_scrollbar->set_steps(1);
+	m_scrollbar.set_steps(1);
 	m_scrollpos = 0;
-	m_selection = -1;
+	m_selection = no_selection_index();
 	m_last_click_time = -10000;
-   m_last_selection = -1;
+   m_last_selection = no_selection_index();
 }
 
 
@@ -116,20 +110,20 @@ void UIListselect<void *>::add_entry
 	e.use_clr = false;
 	strcpy(e.name, name);
 
-   int entry_height=0;
+	uint entry_height = 0;
    if(picid==-1) {
       entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
    } else {
-      int w,h;
-      g_gr->get_picture_size(picid, &w, &h);
+		uint w, h;
+		g_gr->get_picture_size(picid, w, h);
       entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);
-      if(m_max_pic_width<w) m_max_pic_width=w;
+	   if (m_max_pic_width < w) m_max_pic_width = w;
    }
    if(entry_height>m_lineheight) m_lineheight=entry_height;
 
 	m_entries.push_back(&e);
 
-	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
+	m_scrollbar.set_steps(m_entries.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
    if(select) {
@@ -146,10 +140,10 @@ void UIListselect<void *>::switch_entries(const uint m, const uint n) {
 
 	std::swap(m_entries[m], m_entries[n]);
 
-	if (m_selection == (int)m) {
+	if (m_selection == m) {
 		m_selection = n;
 		selected.call(n);
-	} else if (m_selection == (int)n) {
+	} else if (m_selection == n) {
 		m_selection = m;
 		selected.call(m);
 	}
@@ -174,10 +168,8 @@ void UIListselect<void *>::sort(const int gstart, const int gend) {
          ei=m_entries[i];
          ej=m_entries[j];
          if(strcmp(ei->name, ej->name) > 0)  {
-            if(m_selection==((int)i))
-               m_selection=j;
-            else if(m_selection==((int)j))
-               m_selection=i;
+				if      (m_selection == i) m_selection = j;
+				else if (m_selection == j) m_selection = i;
             m_entries[i]=ej;
             m_entries[j]=ei;
          }
@@ -207,12 +199,12 @@ void UIListselect<void *>::set_scrollpos(const int i) {
  *
  * Args: i	the entry to select
  */
-void UIListselect<void *>::select(const int i) {
+void UIListselect<void *>::select(const uint i) {
 	if (m_selection == i)
 		return;
 
 	if (m_show_check) {
-		if (m_selection != -1)
+		if (m_selection != no_selection_index())
 			m_entries[m_selection]->picid = -1;
 		m_entries[i]->picid = m_check_picid;
 	}
@@ -235,13 +227,13 @@ Redraw the listselect box
 */
 void UIListselect<void *>::draw(RenderTarget* dst) {
 	// draw text lines
-	int lineheight = get_lineheight();
-	int idx = m_scrollpos / lineheight;
+	const uint lineheight = get_lineheight();
+	uint idx = m_scrollpos / lineheight;
 	int y = 1 + idx*lineheight - m_scrollpos;
 
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
 
-	while (idx < static_cast<const int>(m_entries.size())) {
+	while (idx < m_entries.size()) {
 		if (y >= get_h())
 			return;
 
@@ -274,8 +266,8 @@ void UIListselect<void *>::draw(RenderTarget* dst) {
 
       // Now draw pictures
       if(e->picid!=-1) {
-         int w,h;
-         g_gr->get_picture_size(e->picid, &w, &h);
+			uint w, h;
+			g_gr->get_picture_size(e->picid, w, h);
          dst->blit(1, y + (get_lineheight()-h)/2, e->picid);
       }
 		y += lineheight;
@@ -305,7 +297,12 @@ bool UIListselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 	if (y >= 0 and y < static_cast<const int>(m_entries.size())) select(y);
 
       // check if doubleclicked
-      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1)
+	if
+		(time-real_last_click_time < DOUBLE_CLICK_INTERVAL
+		 and
+		 m_last_selection == m_selection
+		 and
+		 m_selection != no_selection_index())
          double_clicked.call(m_selection);
 
 
@@ -322,8 +319,7 @@ void UIListselect<void *>::remove_entry(const uint i) {
 
    free(m_entries[i]);
    m_entries.erase(m_entries.begin() + i);
-	if (m_selection == static_cast<const int>(i))
-		selected.call(m_selection = -1);
+	if (m_selection == i) selected.call(m_selection = no_selection_index());
 }
 
 /*

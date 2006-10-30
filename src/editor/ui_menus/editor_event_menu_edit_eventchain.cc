@@ -243,10 +243,10 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_Edit_EventChain::tl_selected(int) {
+void Editor_Event_Menu_Edit_EventChain::tl_selected(uint) {
    m_insert_btn->set_enabled( true );
 }
-void Editor_Event_Menu_Edit_EventChain::cs_selected(int) {
+void Editor_Event_Menu_Edit_EventChain::cs_selected(uint) {
    m_mvdown_btn->set_enabled( true );
    m_mvup_btn->set_enabled( true );
    m_delete_btn->set_enabled( true );
@@ -255,8 +255,8 @@ void Editor_Event_Menu_Edit_EventChain::cs_selected(int) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(int)
+void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(uint)
 {clicked_ins_event();}
 
-void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(int)
+void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(uint)
 {clicked_del_event();}

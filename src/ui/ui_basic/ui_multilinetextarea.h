@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,8 +78,8 @@ class UIMultiline_Textarea : public UIPanel {
 		std::string    m_fontname;
 		int            m_fontsize;
 		RGBColor       m_fcolor;
-		int				m_textheight;	///< total height of wrapped text, in pixels
-		int				m_textpos;		///< current scrolling position in pixels (0 is top)
+		uint m_textheight;  ///< total height of wrapped text, in pixels
+		uint m_textpos;     ///< current scrolling position in pixels (0 is top)
 
       inline int get_m_textpos(void) { return m_textpos; }
       void draw_scrollbar();

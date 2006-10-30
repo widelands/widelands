@@ -89,8 +89,10 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          if(ter->get_is()!=check[checkfor]) { i++; continue; }
 
          // Create a surface for this
-         int picw, pich;
-         g_gr->get_picture_size(g_gr->get_picture( PicMod_Game,  g_gr->get_maptexture_picture(i) ), &picw, &pich);
+			uint picw, pich;
+			g_gr->get_picture_size
+				(g_gr->get_picture
+				 (PicMod_Game, g_gr->get_maptexture_picture(i)), picw, pich);
          uint surface=g_gr->create_surface(picw,pich);
 
          // Get the rendertarget for this
@@ -99,8 +101,10 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          // firts, blit the terrain texture
          target->blit(0,0,g_gr->get_picture( PicMod_Game,  g_gr->get_maptexture_picture(i) ));
 
-         int small_picw, small_pich;
-         g_gr->get_picture_size(g_gr->get_picture( PicMod_Game,  "pics/terrain_water.png" ), &small_picw, &small_pich);
+			uint small_picw, small_pich;
+			g_gr->get_picture_size
+				(g_gr->get_picture
+				 (PicMod_Game, "pics/terrain_water.png"), small_picw, small_pich);
 
          int pic_x=1;
          int pic_y=pich-small_pich-1;

@@ -139,7 +139,7 @@ private: // DATA
    static const int DOUBLE_CLICK_INTERVAL=500; // half a second
 
    std::vector<Column> m_columns;
-   int                  m_max_pic_width;
+	uint                m_max_pic_width;
    int                  m_lineheight;
 	Align						m_align;
 	UIScrollbar*		   m_scrollbar;

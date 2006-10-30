@@ -22,11 +22,11 @@
 #define __S__LISTSELECT_H
 
 #include <vector>
+#include "compile_assert.h"
 #include "font_handler.h"
 #include "ui_panel.h"
+#include "ui_scrollbar.h"
 #include "ui_signal.h"
-
-class UIScrollbar;
 
 /**
  * This class defines a list-select box.
@@ -35,15 +35,15 @@ template <typename T> struct UIListselect {
 	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
 	~UIListselect();
 
-	UISignal1<int> selected;
-   UISignal1<int> double_clicked;
+	UISignal1<uint> selected;
+   UISignal1<uint> double_clicked;
 
 	void clear();
 	void sort(const int start = -1, const int end=-1);
 	void add_entry
 		(const char * const name,
 		 T value,
-		 const bool select = false,
+		 const bool select_this = false,
 		 const int picid = -1);
 	void remove_entry(const uint i) const throw ();
 	void remove_entry(const char * const name);
@@ -55,9 +55,10 @@ template <typename T> struct UIListselect {
 
 	uint get_nr_entries() const throw ();
 	T get_entry(const uint i) const throw ();
-	int get_selection_index() const throw ();
+	uint no_selection_index() const throw ();
+	uint get_selection_index() const throw ();
 
-	void select(int i);
+	void select(const uint i);
 	bool has_selection() const throw ();
 	struct No_Selection {};
 	T get_selection() const throw (No_Selection);
@@ -76,15 +77,15 @@ template <> struct UIListselect<void *> : public UIPanel {
 	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
 	~UIListselect();
 
-	UISignal1<int> selected;
-	UISignal1<int> double_clicked;
+	UISignal1<uint> selected;
+	UISignal1<uint> double_clicked;
 
 	void clear();
 	void sort(const int start = -1, const int end=-1);
 	void add_entry
 		(const char * const name,
 		 void * value,
-		 const bool select = false,
+		 const bool select_this = false,
 		 const int picid = -1);
 	void remove_entry(const uint i);
 	void remove_entry(const char * const name);
@@ -102,17 +103,22 @@ template <> struct UIListselect<void *> : public UIPanel {
 	uint get_nr_entries() const throw () {return m_entries.size();}
 	void * get_entry(const uint i) const throw ()
 	{assert(i < m_entries.size()); return m_entries[i]->value;}
-	int get_selection_index() const throw () {return m_selection;}
+	uint no_selection_index() const throw ()
+	{return std::numeric_limits<uint>::max();}
+	uint get_selection_index() const throw () {return m_selection;}
 
-	void select(int i);
-	bool has_selection() const throw () {return m_selection >= 0;}
+	void select(const uint i);
+	bool has_selection() const throw ()
+	{return m_selection != no_selection_index();}
 	struct No_Selection {};
-	void * get_selection() const throw (No_Selection) {
-		if (m_selection < 0) throw No_Selection();
+	void * get_selection() const {
+		if (m_selection == no_selection_index()) throw No_Selection();
 		return m_entries[m_selection]->value;
 	}
-	void remove_selection()
-	{if (m_selection < 0) throw No_Selection(); remove_entry(m_selection);}
+	void remove_selection() throw (No_Selection) {
+		if (m_selection == no_selection_index()) throw No_Selection();
+		remove_entry(m_selection);
+	}
 
 	int get_lineheight() const throw ();
 	uint get_eff_w() const throw () {return get_w();}
@@ -137,15 +143,15 @@ private:
 		char		name[1];
 	};
 
-   int                  m_max_pic_width;
-   int                  m_lineheight;
+	uint                  m_max_pic_width;
+	uint                  m_lineheight;
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
-	UIScrollbar*		   m_scrollbar;
-	int						m_scrollpos;	// in pixels
-	int						m_selection;	// -1 when nothing is selected
+	UIScrollbar           m_scrollbar;
+	uint                  m_scrollpos;	// in pixels
+	uint                  m_selection;
    int                  m_last_click_time;
-   int                  m_last_selection;  // for double clicks
+	uint                  m_last_selection;  // for double clicks
 	bool						m_show_check;	//show a green arrow left of selected element
 	int						m_check_picid;
 };
@@ -211,6 +217,33 @@ template <class T> struct UIListselect<T &> : public UIListselect<void *> {
 	{return *static_cast<T * const>(Base::get_entry(i));}
 	T & get_selection() const
 	{return *static_cast<T * const>(Base::get_selection());}
+};
+
+compile_assert(sizeof(void *) == sizeof(uint));
+template <> struct UIListselect<uint> : public UIListselect<void *> {
+	typedef UIListselect<void *> Base;
+	UIListselect
+		(UIPanel * parent,
+		 int x, int y,
+		 uint w, uint h,
+		 Align align = Align_Left,
+		 bool show_check = false)
+		:
+		Base(parent, x, y, w, h, align, show_check) {}
+
+	void add_entry
+		(const char * const name,
+		 const uint value,
+		 const bool select_this = false,
+		 const int picid = -1)
+	{
+		Base::add_entry
+			(name, reinterpret_cast<void * const>(value), select_this, picid);
+	}
+	uint get_entry(const uint i) const throw ()
+	{return reinterpret_cast<const uint>(Base::get_entry(i));}
+	uint get_selection() const
+	{return reinterpret_cast<const uint>(Base::get_selection());}
 };
 
 #endif

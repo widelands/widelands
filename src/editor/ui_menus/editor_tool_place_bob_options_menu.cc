@@ -72,13 +72,12 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
    m_tabpanel->add(g_gr->get_picture( PicMod_Game,  "pics/menu_tab_buildbig.png"), box );
 
 
-   int width=0;
-   int height=0;
+	uint width = 0, height = 0;
    for(int j=0; j<nr_bobs; j++) {
-      int w,h;
 		Bob_Descr* descr = get_parent()->get_map()->get_world()->get_bob_descr(j);
-      g_gr->get_picture_size(
-            g_gr->get_picture(PicMod_Game, descr->get_picture()), &w, &h);
+		uint w,h;
+		g_gr->get_picture_size
+			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
       if(w>width) width=w;
       if(h>height) height=h;
    }

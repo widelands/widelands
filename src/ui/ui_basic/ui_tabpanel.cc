@@ -152,13 +152,12 @@ void UITab_Panel::draw(RenderTarget* dst)
 	// draw the buttons
 	for(idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH)
 		{
-		int cpw, cph;
-
 		if (m_highlight == (int)idx)
 			dst->brighten_rect(x, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT, MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
-		g_gr->get_picture_size(m_tabs[idx].picid, &cpw, &cph);
+		uint cpw, cph;
+		g_gr->get_picture_size(m_tabs[idx].picid, cpw, cph);
 
 		dst->blit(x + (TP_BUTTON_WIDTH - cpw)/2, (TP_BUTTON_HEIGHT - cph)/2, m_tabs[idx].picid);
 

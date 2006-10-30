@@ -161,8 +161,8 @@ void Main_Menu_Load_Map::clicked(int id) {
 /*
  * called when a item is selected
  */
-void Main_Menu_Load_Map::selected(int) {
-   const char* name=static_cast<const char*>(m_ls->get_selection());
+void Main_Menu_Load_Map::selected(uint) {
+	const char * const name = m_ls->get_selection();
 
    m_ok_btn->set_enabled(true);
 
@@ -198,9 +198,7 @@ void Main_Menu_Load_Map::selected(int) {
 /*
  * An Item has been doubleclicked
  */
-void Main_Menu_Load_Map::double_clicked(int) {
-   clicked(1);
-}
+void Main_Menu_Load_Map::double_clicked(uint) {clicked(1);}
 
 /*
  * fill the file list
@@ -300,9 +298,9 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          Coords fc=m_parent->get_map()->get_starting_pos(i);
 
          if (fc.is_invalid()) continue;
-         int w, h;
-         int picid=g_gr->get_picture( PicMod_Game,  text.c_str() );
-         g_gr->get_picture_size(picid, &w, &h);
+			uint w, h;
+			const uint picid=g_gr->get_picture(PicMod_Game,  text.c_str());
+			g_gr->get_picture_size(picid, w, h);
          // only register, when theres no building there
          BaseImmovable* imm = m_parent->get_map()->get_field(fc)->get_immovable();
          if(imm && imm->get_type() == Map_Object::BUILDING) continue;

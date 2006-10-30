@@ -41,9 +41,9 @@ UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
 {
 	if (picid)
 	{
-		int w, h;
+		uint w, h;
 
-		g_gr->get_picture_size(picid, &w, &h);
+		g_gr->get_picture_size(picid, w, h);
 		set_size(w, h);
 
 		m_custom_picture = true;
@@ -127,9 +127,9 @@ void UIStatebox::draw(RenderTarget* dst)
 	{
 		// center picture
       int xpos, ypos;
-      int w,h;
+		uint w, h;
 
-      g_gr->get_picture_size(m_pic_graphics, &w, &h);
+		g_gr->get_picture_size(m_pic_graphics, w, h);
 
       xpos=(get_inner_w()-w)/2;
       ypos=(get_inner_h()-h)/2;

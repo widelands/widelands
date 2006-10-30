@@ -146,9 +146,9 @@ void UIIcon_Grid::draw(RenderTarget* dst)
 	for(uint idx = 0; idx < m_items.size(); idx++)
 	{
 		uint picid = m_items[idx].picid;
-		int w, h;
+		uint w, h;
 
-		g_gr->get_picture_size(picid, &w, &h);
+		g_gr->get_picture_size(picid, w, h);
 
 		dst->blit(x + (m_cell_width-w)/2, y + (m_cell_height-h)/2, picid);
 

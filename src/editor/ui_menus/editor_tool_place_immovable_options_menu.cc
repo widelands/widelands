@@ -70,13 +70,12 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    m_tabpanel->add(g_gr->get_picture(  PicMod_Game,  "pics/menu_tab_buildbig.png"  ), box );
 
 
-   int width=0;
-   int height=0;
+	uint width = 0, height = 0;
    for(int j=0; j<nr_immovables; j++) {
-      int w,h;
+		uint w, h;
 		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(j);
-      g_gr->get_picture_size(
-            g_gr->get_picture(PicMod_Game, descr->get_picture()), &w, &h);
+		g_gr->get_picture_size
+			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
       if(w>width) width=w;
       if(h>height) height=h;
    }

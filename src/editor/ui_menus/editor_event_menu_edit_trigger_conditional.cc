@@ -249,11 +249,10 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(int) {
+void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint) {
    m_insert_btn->set_enabled( true );
 }
-void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int i) {
-	assert(i >= 0);
+void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint i) {
 	m_mvdown_btn->set_enabled
 		(static_cast<const uint>(i) + 1 < m_construction->get_nr_entries());
 	m_mvup_btn->set_enabled(i > 0);
@@ -263,7 +262,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(int i) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(int)
+void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(uint)
 {clicked_ins_trigger();}
-void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(int)
+void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(uint)
 {clicked_del_trigger();}

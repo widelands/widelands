@@ -60,9 +60,9 @@ public:
 	const char * get_mapname() const throw () {return list->get_selection();}
 
 	void ok();
-	void map_selected(int id);
+	void map_selected  (uint);
    void changed(bool);
-   void double_clicked(int);
+	void double_clicked(uint);
    void fill_list(void);
 
    std::string m_curdir;

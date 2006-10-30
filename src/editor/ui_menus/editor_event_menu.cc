@@ -355,15 +355,15 @@ void Editor_Event_Menu::clicked_edit_eventchain() {
 /*
  * listbox was selected
  */
-void Editor_Event_Menu::trigger_list_selected(int) {
+void Editor_Event_Menu::trigger_list_selected(uint) {
    m_btn_del_trigger->set_enabled(true);
    m_btn_edit_trigger->set_enabled(true);
 }
-void Editor_Event_Menu::event_list_selected(int) {
+void Editor_Event_Menu::event_list_selected(uint) {
    m_btn_del_event->set_enabled(true);
    m_btn_edit_event->set_enabled(true);
 }
-void Editor_Event_Menu::eventchain_list_selected(int) {
+void Editor_Event_Menu::eventchain_list_selected(uint) {
    m_btn_del_eventchain->set_enabled(true);
    m_btn_edit_eventchain->set_enabled(true);
 }
@@ -371,7 +371,7 @@ void Editor_Event_Menu::eventchain_list_selected(int) {
 /*
  * listbox was double clicked
  */
-void Editor_Event_Menu::trigger_double_clicked   (int) {clicked_edit_trigger();}
-void Editor_Event_Menu::event_double_clicked     (int) {clicked_edit_event();}
-void Editor_Event_Menu::eventchain_double_clicked(int)
+void Editor_Event_Menu::trigger_double_clicked(uint) {clicked_edit_trigger();}
+void Editor_Event_Menu::event_double_clicked  (uint) {clicked_edit_event  ();}
+void Editor_Event_Menu::eventchain_double_clicked(uint)
 {clicked_edit_eventchain();}

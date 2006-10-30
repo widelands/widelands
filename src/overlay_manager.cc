@@ -168,11 +168,11 @@ void Overlay_Manager::register_overlay
 
       } while (i->first == c);
    }
-   int hsx=hot_spot.x;
-   int hsy=hot_spot.y;
+	uint hsx = hot_spot.x;
+	uint hsy = hot_spot.y;
 
 	if (hot_spot.is_invalid()) {
-      g_gr->get_picture_size(picid, &hsx, &hsy);
+      g_gr->get_picture_size(picid, hsx, hsy);
       hsx>>=1;
       hsy>>=1;
    }
@@ -293,8 +293,8 @@ void Overlay_Manager::load_graphics() {
 	//  Special case for flag, which has a different formula for hotspot_y.
 	buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
 	{
-		int hotspot_x, hotspot_y;
-		g_gr->get_picture_size(buildhelp_info->picid, &hotspot_x, &hotspot_y);
+		uint hotspot_x, hotspot_y;
+		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
 		hotspot_x /= 2; hotspot_y -= 1;
 		buildhelp_info->hotspot_x = hotspot_x;
 		buildhelp_info->hotspot_y = hotspot_y;
@@ -306,8 +306,8 @@ void Overlay_Manager::load_graphics() {
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end) break;
 		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
-		int hotspot_x, hotspot_y;
-		g_gr->get_picture_size(buildhelp_info->picid, &hotspot_x, &hotspot_y);
+		uint hotspot_x, hotspot_y;
+		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
 		hotspot_x /= 2; hotspot_y /= 2;
 		buildhelp_info->hotspot_x = hotspot_x;
 		buildhelp_info->hotspot_y = hotspot_y;

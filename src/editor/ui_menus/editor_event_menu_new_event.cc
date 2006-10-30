@@ -99,8 +99,7 @@ bool Editor_Event_Menu_New_Event::handle_mousepress
    } else
       return false; // we're not dragable
 }
-bool Editor_Event_Menu_New_Event::handle_mouserelease
-(const Uint8 btn, int, int)
+bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
@@ -128,7 +127,7 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_New_Event::selected(int) {
+void Editor_Event_Menu_New_Event::selected(uint) {
 	m_description->set_text(m_event_list->get_selection().descr);
    m_ok_button->set_enabled(true);
 }
@@ -136,7 +135,7 @@ void Editor_Event_Menu_New_Event::selected(int) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_New_Event::double_clicked(int) {
+void Editor_Event_Menu_New_Event::double_clicked(uint) {
    // Ok
    clicked(1);
 }

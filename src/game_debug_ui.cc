@@ -244,7 +244,7 @@ public:
 	virtual void think();
 
 	void open_immovable();
-	void open_bob(int idx);
+	void open_bob(const uint idx);
 
 private:
 	Map*			m_map;
@@ -252,7 +252,7 @@ private:
 
 	UIMultiline_Textarea*	m_ui_field;
 	UIButton*					m_ui_immovable;
-	UIListselect<void *> * m_ui_bobs;
+	UIListselect<uint> * m_ui_bobs;
 };
 
 
@@ -275,7 +275,7 @@ FieldDebugWindow::FieldDebugWindow(Interactive_Base* parent, Coords coords)
 	m_ui_immovable = new UIButton(this, 0, 80, 200, 24, 0);
 	m_ui_immovable->clicked.set(this, &FieldDebugWindow::open_immovable);
 
-	m_ui_bobs = new UIListselect<void *>(this, 0, 104, 200, 96);
+	m_ui_bobs = new UIListselect<uint>(this, 0, 104, 200, 96);
 	m_ui_bobs->selected.set(this, &FieldDebugWindow::open_bob);
 }
 
@@ -343,7 +343,7 @@ void FieldDebugWindow::think()
 	m_map->find_bobs(m_coords, 0, &bobs);
 	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
 		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->get_name().c_str(), (*it)->get_serial());
-		m_ui_bobs->add_entry(buf, (void*)(*it)->get_serial());
+		m_ui_bobs->add_entry(buf, (*it)->get_serial());
 	}
 }
 
@@ -371,17 +371,14 @@ FieldDebugWindow::open_bob
 Open the bob debug window for the bob of the given index in the list
 ===============
 */
-void FieldDebugWindow::open_bob(int) {
-	unsigned long serial = (unsigned long)m_ui_bobs->get_selection();
-
-	if (!serial)
-		return;
-
-	Object_Manager* objmgr = get_iabase()->get_egbase()->get_objects();
-	Map_Object* object = objmgr->get_object(serial);
-
-	if (object)
-		show_mapobject_debug(get_iabase(), object);
+void FieldDebugWindow::open_bob(const uint) {
+	if
+		(const unsigned long serial =
+		 static_cast<const unsigned long>(m_ui_bobs->get_selection()))
+		if
+			(Map_Object * const object =
+			 get_iabase()->get_egbase()->get_objects()->get_object(serial))
+			show_mapobject_debug(get_iabase(), object);
 }
 
 

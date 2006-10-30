@@ -142,7 +142,7 @@ bool Event_Move_View_Option_Menu::handle_mousepress(const Uint8 btn, int, int) {
       return false; // we're not dragable
 
 }
-bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8 btn, int, int)
+bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*

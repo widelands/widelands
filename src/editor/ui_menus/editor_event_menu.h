@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,12 +53,12 @@ class Editor_Event_Menu : public UIUniqueWindow {
       UIButton       *m_btn_edit_trigger;
       UIButton       *m_btn_del_eventchain;
       UIButton       *m_btn_edit_eventchain;
-      void trigger_list_selected(int);
-      void event_list_selected(int);
-      void eventchain_list_selected(int);
-      void trigger_double_clicked(int);
-      void event_double_clicked(int);
-      void eventchain_double_clicked(int);
+	void trigger_list_selected    (uint);
+	void event_list_selected      (uint);
+	void eventchain_list_selected (uint);
+	void trigger_double_clicked   (uint);
+	void event_double_clicked     (uint);
+	void eventchain_double_clicked(uint);
 	void clicked_new_event      ();
 	void clicked_del_event      ();
 	void clicked_edit_event     ();

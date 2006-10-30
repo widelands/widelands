@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -196,9 +196,9 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 	}
 
    // Draw a background
-   int picid = g_gr->get_picture( PicMod_Game,  "pics/ware_list_bg.png" );
-   int w, h;
-   g_gr->get_picture_size(picid, &w, &h);
+	const uint picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
+	uint w, h;
+	g_gr->get_picture_size(picid, w, h);
 
    dst->blit(x, y, picid);
 

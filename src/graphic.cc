@@ -1466,7 +1466,7 @@ Stores the picture size in pw and ph.
 Throws an exception if the picture doesn't exist.
 ===============
 */
-void GraphicImpl::get_picture_size(uint pic, int* pw, int* ph)
+void GraphicImpl::get_picture_size(const uint pic, uint & w, uint & h)
 {
 	if (pic >= m_pictures.size() || !m_pictures[pic].mod)
 		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
@@ -1474,8 +1474,8 @@ void GraphicImpl::get_picture_size(uint pic, int* pw, int* ph)
 	Surface* bmp = m_pictures[pic].surface;
 
 
-	*pw = bmp->get_w();
-	*ph = bmp->get_h();
+	w = bmp->get_w();
+	h = bmp->get_h();
 }
 
 

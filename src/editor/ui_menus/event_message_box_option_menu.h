@@ -50,7 +50,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
 
       void update(void);
       void clicked(int);
-      void ls_selected(int);
+	void ls_selected    (uint);
       void edit_box_edited(int);
 
       Event_Message_Box* m_event;

@@ -38,7 +38,7 @@ private:
 	UIListselect<MapObjective &>list;
 	UIMultiline_Textarea objectivetext;
 
-   void selected(int);
+	void selected(uint);
 };
 
 #endif

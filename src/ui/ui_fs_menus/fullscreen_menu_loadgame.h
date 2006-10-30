@@ -54,8 +54,8 @@ public:
 	const char *get_gamename() { return m_filename.c_str(); }
 
 	void ok();
-	void map_selected(int id);
-   void double_clicked(int);
+	void map_selected  (uint);
+	void double_clicked(uint);
    void fill_list(void);
 };
 

@@ -41,12 +41,6 @@ public:
 	RGBColor(const Uint8 R, const Uint8 G, const Uint8 B) throw ()
 	{SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;}
 
-// 	void set(const Uint8 R, const Uint8 G, const Uint8 B) {
-// 		m_color.r = r;
-//       m_color.g = g;
-//       m_color.b = b;
-// 	}
-
 	Uint8 r() const throw () {return SDL_Color::r;}
 	Uint8 g() const throw () {return SDL_Color::g;}
 	Uint8 b() const throw () {return SDL_Color::b;}

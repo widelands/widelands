@@ -37,9 +37,9 @@ class Game_Main_Menu_Load_Game : public UIUniqueWindow {
 
    private:
       void clicked(int);
-      void selected(int);
+	void selected      (uint);
+	void double_clicked(uint);
       void edit_box_changed();
-      void double_clicked(int);
 
       void fill_list(void);
 	bool load_game(const std::string & filename);

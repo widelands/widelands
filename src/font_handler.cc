@@ -58,9 +58,13 @@ Font_Handler::~Font_Handler(void) {
 /*
  * Returns the height of the font, in pixels.
 */
-int Font_Handler::get_fontheight(std::string name, int size) {
+uint Font_Handler::get_fontheight(const std::string & name, const int size) {
 	TTF_Font* f = m_font_loader->get_font(name,size);
-	return TTF_FontHeight(f);;
+	const int fontheight = TTF_FontHeight(f);
+	if (fontheight < 0) throw wexception
+		("TTF_FontHeight returned a negative value, which does not have a known "
+		 "meaning.");
+	return fontheight;
 }
 
 /*
@@ -77,7 +81,7 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
                                std::string text, Align align, int wrap, Widget_Cache widget_cache, uint *widget_cache_id, int caret) {
 	TTF_Font* f = m_font_loader->get_font(font,size);
 	//Width and height of text, needed for alignment
-	int w,h;
+	uint w, h;
 	uint picid;
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
@@ -108,7 +112,7 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 			//not cached, create a new surface
 			ci.surface_id = create_text_surface(f, fg, bg, text, align, wrap);
 			// Now cache it
-			g_gr->get_picture_size( ci.surface_id, &ci.w, &ci.h);
+			g_gr->get_picture_size(ci.surface_id, ci.w, ci.h);
 			ci.f = f;
 			m_cache.push_front (ci);
 
@@ -124,7 +128,7 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 	}
 	//Widget gave us an explicit picid
 	else if (widget_cache == Widget_Cache_Use) {
-		g_gr->get_picture_size(*widget_cache_id,&w,&h);
+		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
 	//We need to (re)create the picid for the widget
@@ -132,7 +136,7 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 		if (widget_cache == Widget_Cache_Update)
 			g_gr->free_surface(*widget_cache_id);
 		*widget_cache_id = create_text_surface(f, fg, bg, text, align, wrap,caret);
-		g_gr->get_picture_size(*widget_cache_id,&w,&h);
+		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
 	do_align(align,&dstx,&dsty,w,h);
@@ -500,9 +504,9 @@ SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int styl
 }
 
 //gets size of picid
-void Font_Handler::get_size_from_cache(uint widget_cache_id, int *w, int *h) {
-	g_gr->get_picture_size(widget_cache_id,w,h);
-}
+void Font_Handler::get_size_from_cache
+(const uint widget_cache_id, uint & w, uint & h)
+{g_gr->get_picture_size(widget_cache_id, w, h);}
 
 //creates an empty sdl surface of given size
 SDL_Surface* Font_Handler::create_empty_sdl_surface(uint w, uint h) {

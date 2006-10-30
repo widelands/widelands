@@ -305,7 +305,7 @@ void Event_Message_Box_Option_Menu::update(void) {
 /*
  * Listbox got selected
  */
-void Event_Message_Box_Option_Menu::ls_selected(int i) {
+void Event_Message_Box_Option_Menu::ls_selected(uint i) {
    m_ls_selected=i;
    update();
 }

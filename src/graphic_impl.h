@@ -339,7 +339,7 @@ public:
 	// Pictures
 	virtual uint get_picture(int mod, const char* fname);
    virtual void flush_picture(uint pic);
-	virtual void get_picture_size(uint pic, int* pw, int* ph);
+	virtual void get_picture_size(const uint pic, uint & w, uint & h);
 	virtual uint create_surface(int w, int h);
 	virtual void free_surface(uint pic);
 	virtual RenderTarget* get_surface_renderer(uint pic);

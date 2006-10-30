@@ -37,9 +37,9 @@ class Game_Main_Menu_Save_Game : public UIUniqueWindow {
 
    private:
       void clicked(int);
-      void selected(int);
+	void selected      (uint);
+	void double_clicked(uint);
       void edit_box_changed();
-      void double_clicked(int);
 
       void fill_list(void);
       bool save_game(std::string, bool binary);

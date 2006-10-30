@@ -42,8 +42,8 @@ class Editor_Event_Menu_New_Event : public UIWindow {
 
    private:
       void clicked(int);
-      void selected(int);
-      void double_clicked(int);
+	void selected      (uint);
+	void double_clicked(uint);
 
 	UIListselect<Event_Descr &> * m_event_list;
       UIMultiline_Textarea* m_description;

@@ -40,10 +40,10 @@ class Editor_Player_Menu_Allowed_Buildings_Menu : public UIUniqueWindow {
       Player* m_player;
       UIListselect<void *> * m_allowed, *m_forbidden;
       UIButton* m_rtl_button, *m_ltr_button;
-      void allowed_selected(int);
-      void forbidden_selected(int);
-      void allowed_double_clicked(int);
-      void forbidden_double_clicked(int);
+	void allowed_selected        (uint);
+	void forbidden_selected      (uint);
+	void allowed_double_clicked  (uint);
+	void forbidden_double_clicked(uint);
       void clicked(int);
       void update();
 };

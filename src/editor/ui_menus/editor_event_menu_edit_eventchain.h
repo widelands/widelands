@@ -52,10 +52,10 @@ class Editor_Event_Menu_Edit_EventChain : public UIWindow {
 	void clicked_del_event               ();
 	void clicked_move_up                 ();
 	void clicked_move_down               ();
-      void tl_selected(int);
-      void tl_double_clicked(int);
-      void cs_selected(int);
-      void cs_double_clicked(int);
+	void tl_selected      (uint);
+	void tl_double_clicked(uint);
+	void cs_selected      (uint);
+	void cs_double_clicked(uint);
 
 	UIListselect<Event &> *m_available_events;
 	UIListselect<Event &> *m_events;
