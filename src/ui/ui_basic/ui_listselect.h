@@ -26,6 +26,7 @@
 #include "font_handler.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
+#include <limits>
 
 class UIScrollbar;
 
