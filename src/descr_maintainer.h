@@ -20,26 +20,24 @@
 #ifndef __S__DESCR_MAINTAINER_H
 #define __S__DESCR_MAINTAINER_H
 
+#include <limits>
+#include <stdexcept>
+
 /**
  * This template is used to have a typesafe maintaining class for Bob_Descr,
  * Worker_Descr and so on.
  */
-template <class T> class Descr_Maintainer {
-   public:
-      Descr_Maintainer(void) { nitems=0; items=0; place_for=0; }
-      ~Descr_Maintainer(void) ;
+template <class T> struct Descr_Maintainer {
+	Descr_Maintainer() : capacity(0), nitems(0), items(0) {}
+	~Descr_Maintainer();
 
 	static typename T::Index invalid_index()
 	{return std::numeric_limits<typename T::Index>::max();}
 
       T* exists(const char* name);
       int add(T* item);
-      ushort get_nitems(void) const { return nitems; }
+	typename T::Index get_nitems() const throw () {return nitems;}
       int get_index(const char * const name) const; // can return -1
-      void reserve(uint n) {
-		items = static_cast<T * * const>(realloc(items, sizeof(T *) * n));
-         place_for=n;
-      }
 
       T * get(const int idx) const {
          if (idx >= 0 and idx < static_cast<int>(nitems)) return items[idx];
@@ -47,17 +45,23 @@ template <class T> class Descr_Maintainer {
       }
 
    private:
-      uint place_for;
-      uint nitems;
-      T** items;
+	typename T::Index capacity;
+	typename T::Index nitems;
+	T * * items;
+
+	void reserve(const typename T::Index n) {
+		T * * const new_items =
+			static_cast<T * * const>(realloc(items, sizeof(T *) * n));
+		if (not new_items) throw std::bad_alloc();
+		items = new_items;
+		capacity = n;
+	}
 };
 
 template <class T>
 int Descr_Maintainer<T>::get_index(const char * const name) const {
-
-   ushort i;
-   for(i=0; i<nitems; i++) {
-      if(!strcasecmp(name, items[i]->get_name())) return i;
+   for(typename T::Index i = 0; i < nitems; ++i) {
+		if (not strcasecmp(name, items[i]->get_name())) return i;
    }
 
    return -1;
@@ -66,7 +70,7 @@ int Descr_Maintainer<T>::get_index(const char * const name) const {
 template <class T>
 int Descr_Maintainer<T>::add(T* item) {
    nitems++;
-   if(nitems>=place_for) {
+	if (nitems >= capacity) {
       reserve(nitems);
    }
    items[nitems-1]=item;
@@ -78,21 +82,14 @@ int Descr_Maintainer<T>::add(T* item) {
 //
 template <class T>
 T* Descr_Maintainer<T>::exists(const char* name) {
-   uint i;
-
-   for(i=0; i<nitems; i++) {
+	for (typename T::Index i = 0; i < nitems; ++i)
       if(!strcasecmp(name, items[i]->get_name())) return items[i];
-   }
 	return 0;
 }
 
-template <class T>
-Descr_Maintainer<T>::~Descr_Maintainer(void) {
-   uint i;
-   for(i=0; i<nitems; i++) {
-      delete items[i];
-   }
-   free(items);
+template<class T> Descr_Maintainer<T>::~Descr_Maintainer() {
+	for (typename T::Index i = 0; i < nitems; ++i) delete items[i];
+	free(items);
 }
 
 #endif
