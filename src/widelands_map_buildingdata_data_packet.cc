@@ -539,9 +539,9 @@ throw (_wexception)
 
             // Leave queue time
             fw.Unsigned16(building->m_leave_queue.size());
-            for(uint i=0; i<building->m_leave_queue.size(); i++) {
-               assert(os->is_object_known(building->m_leave_queue[i].get(egbase)));
-               fw.Unsigned32(os->get_object_file_index(building->m_leave_queue[i].get(egbase)));
+            for(uint idx=0; idx<building->m_leave_queue.size(); idx++) {
+               assert(os->is_object_known(building->m_leave_queue[idx].get(egbase)));
+               fw.Unsigned32(os->get_object_file_index(building->m_leave_queue[idx].get(egbase)));
             }
             fw.Unsigned32(building->m_leave_time);
             if(building->m_leave_allow.get(egbase)) {

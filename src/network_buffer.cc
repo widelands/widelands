@@ -80,8 +80,8 @@ std::string Network_Buffer::get_string(bool remove) {
 
    assert( remove ); // TODO: allow peeking also for string
 
-   uint size = get_16(1);
-   for(uint i=0; i<size; i++)
+   uint s = get_16(1);
+   for(uint i=0; i<s; i++)
       retval.append(1, get_16(1));
 
    return retval;
@@ -91,39 +91,39 @@ std::string Network_Buffer::get_string(bool remove) {
  * Put functions
  */
 void Network_Buffer::put_8( uchar val ) {
-   const uint size = 1;
+   const uint s = 1;
 
-   while( ( m_buffer_pointer + size ) >= m_buffer_real_len )
+   while( ( m_buffer_pointer + s ) >= m_buffer_real_len )
       grow_buffer();
 
    *((uchar*)(m_buffer+m_buffer_pointer)) = val;
 
-   m_buffer_pointer += size;
-   m_buffer_len += size;
+   m_buffer_pointer += s;
+   m_buffer_len += s;
 }
 
 void Network_Buffer::put_16( ushort val ) {
-   const uint size = 2;
+   const uint s = 2;
 
-   while( ( m_buffer_pointer + size ) >= m_buffer_real_len )
+   while( ( m_buffer_pointer + s ) >= m_buffer_real_len )
       grow_buffer();
 
    SDLNet_Write16( val, m_buffer+m_buffer_pointer );
 
-   m_buffer_pointer += size;
-   m_buffer_len += size;
+   m_buffer_pointer += s;
+   m_buffer_len += s;
 }
 
 void Network_Buffer::put_32( uint val ) {
-   const uint size = 4;
+   const uint s = 4;
 
-   while( ( m_buffer_pointer + size ) >= m_buffer_real_len )
+   while( ( m_buffer_pointer + s ) >= m_buffer_real_len )
       grow_buffer();
 
    SDLNet_Write32( val, m_buffer+m_buffer_pointer);
 
-   m_buffer_pointer += size;
-   m_buffer_len += size;
+   m_buffer_pointer += s;
+   m_buffer_len += s;
 }
 
 void Network_Buffer::put_string( std::string string ) {
@@ -149,25 +149,25 @@ int Network_Buffer::fill( TCPsocket sock ) {
    // we reset the data pointer
    m_buffer_pointer = 0;
 
-   uint size = get_16();
+   uint s = get_16();
 
-   // Check the size of the packet
-   while( ( m_buffer_pointer + size ) >= m_buffer_real_len )
+   // Check the s of the packet
+   while( ( m_buffer_pointer + s ) >= m_buffer_real_len )
       grow_buffer();
 
    // Get the rest of the packet
    // TODO: This should have some timeout variable, otherwise
    // the game can lock here (when some, but not all data arrives)
    uint received = 0;
-   while(received != size) {
-      uint retval = SDLNet_TCP_Recv(sock, m_buffer+m_buffer_pointer+received, size - received);
+   while(received != s) {
+      uint retval = SDLNet_TCP_Recv(sock, m_buffer+m_buffer_pointer+received, s - received);
 
       if(retval <= 0)
          throw wexception("Network_Buffer::fill: SDLNet_TCP_Recv brought up an error!: %s\n", SDLNet_GetError());
       received += retval;
    }
 
-   m_buffer_len += size;
+   m_buffer_len += s;
    return 0;
 }
 

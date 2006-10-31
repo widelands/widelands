@@ -205,7 +205,7 @@ throw
                start.x=fr.Unsigned16();
                start.y=fr.Unsigned16();
                Path* path=new Path(egbase->get_map(), start);
-               for(uint i=0; i<pathsteps; i++)
+               for(uint step=0; step<pathsteps; step++)
                   path->append(fr.Unsigned8());
                s->path=path;
             } else
@@ -227,21 +227,21 @@ throw
                   s->route->clear();
 
             if(route) {
-               Route* route;
+               Route* r;
                if(!s->route)
-                  route=new Route();
+                  r=new Route();
                else
-                  route=s->route;
-               route->m_totalcost=fr.Signed32();
+                  r=s->route;
+               r->m_totalcost=fr.Signed32();
                int nsteps=fr.Unsigned16();
-               for(int i=0; i<nsteps; i++) {
-                  int reg=fr.Unsigned32();
-                  assert(ol->is_object_known(reg));
-                  Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(reg));
-                  route->m_route.push_back(flag);
+               for(int step=0; step<nsteps; step++) {
+                  int idx=fr.Unsigned32();
+                  assert(ol->is_object_known(idx));
+                  Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(idx));
+                  r->m_route.push_back(flag);
                }
-               s->route=route;
-               route->verify(static_cast<Game*>(egbase));
+               s->route=r;
+               r->verify(static_cast<Game*>(egbase));
             } else
                s->route=0;
 
@@ -444,8 +444,8 @@ throw (_wexception)
 
             // Nr of States
             fw.Unsigned16(bob->m_stack.size());
-            for(uint i=0; i<bob->m_stack.size(); i++) {
-               Bob::State* s=&bob->m_stack[i];
+            for(uint index=0; index<bob->m_stack.size(); index++) {
+               Bob::State* s=&bob->m_stack[index];
 
                // Write name, enough to reconstruct the
                // Task structure
@@ -485,8 +485,8 @@ throw (_wexception)
                   Coords pstart=s->path->get_start();
                   fw.Unsigned16(pstart.x);
                   fw.Unsigned16(pstart.y);
-                  for(int i=0; i<s->path->get_nsteps(); i++)
-                     fw.Unsigned8(s->path->get_step(i));
+                  for(int idx=0; idx<s->path->get_nsteps(); idx++)
+                     fw.Unsigned8(s->path->get_step(idx));
                } else
                   fw.Unsigned16(0);
 
@@ -495,8 +495,8 @@ throw (_wexception)
                   fw.Unsigned8(1);
                   fw.Signed32(s->route->get_totalcost());
                   fw.Unsigned16(s->route->get_nrsteps());
-                  for(int i=0; i<s->route->get_nrsteps(); i++) {
-                     Flag* f=s->route->get_flag(egbase, i);
+                  for(int idx=0; idx<s->route->get_nrsteps(); idx++) {
+                     Flag* f=s->route->get_flag(egbase, idx);
                      assert(os->is_object_known(f));
                      fw.Unsigned32(os->get_object_file_index(f));
                   }

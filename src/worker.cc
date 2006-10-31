@@ -212,12 +212,12 @@ void WorkerProgram::parse_createitem
 	act->sparam1 = cmd[1];
 }
 
-bool Worker::run_createitem(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_createitem(Game* g, State* state, const WorkerAction* action)
 {
 	WareInstance* item;
 	int wareid;
 
-	molog("  CreateItem(%s)\n", act->sparam1.c_str());
+	molog("  CreateItem(%s)\n", action->sparam1.c_str());
 
 	item = fetch_carried_item(g);
 	if (item) {
@@ -225,7 +225,7 @@ bool Worker::run_createitem(Game* g, State* state, const WorkerAction* act)
 		item->schedule_destroy(g);
 	}
 
-	wareid = get_owner()->get_tribe()->get_safe_ware_index(act->sparam1.c_str());
+	wareid = get_owner()->get_tribe()->get_safe_ware_index(action->sparam1.c_str());
 	item = new WareInstance(wareid, get_owner()->get_tribe()->get_ware_descr(wareid));
 	item->init(g);
 
@@ -274,19 +274,19 @@ void WorkerProgram::parse_mine
 
 }
 
-bool Worker::run_mine(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 {
-   molog("  Mine(%s,%i)\n", act->sparam1.c_str(), act->iparam1);
+   molog("  Mine(%s,%i)\n", action->sparam1.c_str(), action->iparam1);
 
    Map* map = g->get_map();
    MapRegion mr;
    uchar res;
 
 
-   res=map->get_world()->get_resource(act->sparam1.c_str());
+   res=map->get_world()->get_resource(action->sparam1.c_str());
    if(static_cast<signed char>(res)==-1)
       throw wexception(" Worker::run_mine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
-            " with world!!\n",  act->sparam1.c_str());
+            " with world!!\n",  action->sparam1.c_str());
 
    // Select one of the fields randomly
    uint totalres = 0;
@@ -294,7 +294,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* act)
    int pick;
    Field* f;
 
-   mr.init(map, get_position(), act->iparam1);
+   mr.init(map, get_position(), action->iparam1);
 
    while((f = mr.next())) {
       uchar fres = f->get_resources();
@@ -329,7 +329,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* act)
    // Second pass through fields
    pick = g->logic_rand() % totalchance;
 
-   mr.init(map, get_position(), act->iparam1);
+   mr.init(map, get_position(), action->iparam1);
 
    while((f = mr.next())) {
       uchar fres = f->get_resources();
@@ -388,14 +388,14 @@ void WorkerProgram::parse_setdescription
 		act->sparamv.push_back(cmd[i]);
 }
 
-bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* action)
 {
-	int idx = g->logic_rand() % act->sparamv.size();
+	int idx = g->logic_rand() % action->sparamv.size();
 
-	molog("  SetDescription: %s\n", act->sparamv[idx].c_str());
+	molog("  SetDescription: %s\n", action->sparamv[idx].c_str());
 
    std::vector<std::string> list;
-   split_string(act->sparamv[idx], &list, ":");
+   split_string(action->sparamv[idx], &list, ":");
    std::string bob;
    if(list.size()==1) {
       state->svar1 = "world";
@@ -411,7 +411,7 @@ bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* act)
 	state->ivar2 = get_descr()->get_tribe()->get_immovable_index(bob.c_str());
    }
 	if (state->ivar2 < 0) {
-		molog("  WARNING: Unknown immovable %s\n", act->sparamv[idx].c_str());
+		molog("  WARNING: Unknown immovable %s\n", action->sparamv[idx].c_str());
 		set_signal("fail");
 		pop_task();
 		return true;
@@ -449,14 +449,14 @@ void WorkerProgram::parse_setbobdescription
 		act->sparamv.push_back(cmd[i]);
 }
 
-bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* action)
 {
-	int idx = g->logic_rand() % act->sparamv.size();
+	int idx = g->logic_rand() % action->sparamv.size();
 
-	molog("  SetBobDescription: %s\n", act->sparamv[idx].c_str());
+	molog("  SetBobDescription: %s\n", action->sparamv[idx].c_str());
 
    std::vector<std::string> list;
-   split_string(act->sparamv[idx], &list, ":");
+   split_string(action->sparamv[idx], &list, ":");
    std::string bob;
    if(list.size()==1) {
       state->svar1 = "world";
@@ -472,7 +472,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* ac
 	state->ivar2 = get_descr()->get_tribe()->get_bob(bob.c_str());
    }
 	if (state->ivar2 < 0) {
-		molog("  WARNING: Unknown bob %s\n", act->sparamv[idx].c_str());
+		molog("  WARNING: Unknown bob %s\n", action->sparamv[idx].c_str());
 		set_signal("fail");
 		pop_task();
 		return true;
@@ -545,12 +545,12 @@ void WorkerProgram::parse_findobject
 	m_workarea_info[act->iparam1].insert(" findobject");
 }
 
-bool Worker::run_findobject(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 {
    Coords pos = get_position();
    Map* map = g->get_map();
 
-   molog("  FindObject(%i, %i,%s)\n", act->iparam1, act->iparam2, act->sparam1.c_str());
+   molog("  FindObject(%i, %i,%s)\n", action->iparam1, action->iparam2, action->sparam1.c_str());
 
 
    PlayerImmovable* location = get_location(g);
@@ -566,13 +566,13 @@ bool Worker::run_findobject(Game* g, State* state, const WorkerAction* act)
    if (pos == owner->get_position())
       pos = owner->get_base_flag()->get_position();
 
-   if(act->sparam1=="immovable") {
+   if(action->sparam1=="immovable") {
       std::vector<ImmovableFound> list;
-      if (act->iparam2 < 0)
-         map->find_reachable_immovables(pos, act->iparam1, &list, cstep);
+      if (action->iparam2 < 0)
+         map->find_reachable_immovables(pos, action->iparam1, &list, cstep);
       else
-         map->find_reachable_immovables(pos, act->iparam1, &list, cstep,
-               FindImmovableAttribute(act->iparam2));
+         map->find_reachable_immovables(pos, action->iparam1, &list, cstep,
+               FindImmovableAttribute(action->iparam2));
 
       if (!list.size()) {
          set_signal("fail"); // no object found, cannot run program
@@ -585,12 +585,12 @@ bool Worker::run_findobject(Game* g, State* state, const WorkerAction* act)
       molog("  %i found\n", list.size());
    } else {
       std::vector<Bob*> list;
-      log("BOB: searching bob with attribute (%i)\n", act->iparam2);
-      if (act->iparam2 < 0)
-         map->find_reachable_bobs(pos, act->iparam1, &list, cstep);
+      log("BOB: searching bob with attribute (%i)\n", action->iparam2);
+      if (action->iparam2 < 0)
+         map->find_reachable_bobs(pos, action->iparam1, &list, cstep);
       else
-         map->find_reachable_bobs(pos, act->iparam1, &list, cstep,
-               FindBobAttribute(act->iparam2));
+         map->find_reachable_bobs(pos, action->iparam1, &list, cstep,
+               FindBobAttribute(action->iparam2));
 
       if (!list.size()) {
          set_signal("fail"); // no object found, cannot run program
@@ -674,16 +674,16 @@ void WorkerProgram::parse_findspace
 				{ 0, 0 }
 			};
 
-			int idx;
+			int index;
 
-			for(idx = 0; sizenames[idx].name; ++idx)
-				if (value == sizenames[idx].name)
+			for(index = 0; sizenames[index].name; ++index)
+				if (value == sizenames[index].name)
 					break;
 
-			if (!sizenames[idx].name)
+			if (!sizenames[index].name)
 				throw wexception("Bad findspace size '%s'", value.c_str());
 
-			act->iparam2 = sizenames[idx].val;
+			act->iparam2 = sizenames[index].val;
 		} else if(key == "resource") {
          act->sparam1 = value;
       } else
@@ -697,7 +697,7 @@ void WorkerProgram::parse_findspace
 	m_workarea_info[act->iparam1].insert(" findspace");
 }
 
-bool Worker::run_findspace(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
 {
 	std::vector<Coords> list;
 	Map* map = g->get_map();
@@ -706,16 +706,16 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* act)
    CheckStepDefault cstep(get_movecaps());
 
    int res=-1;
-   if(act->sparam1.size())
-     res=w->get_resource(act->sparam1.c_str());
+   if(action->sparam1.size())
+     res=w->get_resource(action->sparam1.c_str());
 
    int retval=0;
    if(res!=-1) {
-      retval=map->find_reachable_fields(get_position(), act->iparam1, &list, cstep,
-               FindFieldSizeResource((FindFieldSize::Size)act->iparam2,res));
+      retval=map->find_reachable_fields(get_position(), action->iparam1, &list, cstep,
+               FindFieldSizeResource((FindFieldSize::Size)action->iparam2,res));
    } else {
-      retval=map->find_reachable_fields(get_position(), act->iparam1, &list, cstep,
-               FindFieldSize((FindFieldSize::Size)act->iparam2));
+      retval=map->find_reachable_fields(get_position(), action->iparam1, &list, cstep,
+               FindFieldSize((FindFieldSize::Size)action->iparam2));
    }
 
    if(!retval) {
@@ -770,7 +770,7 @@ void WorkerProgram::parse_walk
 		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
 }
 
-bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_walk(Game* g, State* state, const WorkerAction* action)
 {
 	BaseImmovable* imm = g->get_map()->get_immovable(get_position());
 	Coords dest;
@@ -784,7 +784,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 
 	owner = (Building*)location;
 
-	molog("  Walk(%i)\n", act->iparam1);
+	molog("  Walk(%i)\n", action->iparam1);
 
 	// First of all, make sure we're outside
 	if (imm == owner) {
@@ -793,7 +793,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 	}
 
 	// Determine the coords we need to walk towards
-	switch(act->iparam1) {
+	switch(action->iparam1) {
 	case WorkerAction::walkObject:
 		{
 			Map_Object* obj = state->objvar1.get(g);
@@ -825,7 +825,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 		break;
 
 	default:
-		throw wexception("MO(%u): [actWalk]: bad act->iparam1 = %i", get_serial(), act->iparam1);
+		throw wexception("MO(%u): [actWalk]: bad action->iparam1 = %i", get_serial(), action->iparam1);
 	}
 
 	// If we've already reached our destination, that's cool
@@ -890,12 +890,12 @@ void WorkerProgram::parse_animation(Worker_Descr* descr, WorkerAction* act, Pars
 		throw wexception("animation duration must be positive");
 }
 
-bool Worker::run_animation(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_animation(Game* g, State* state, const WorkerAction* action)
 {
-	set_animation(g, act->iparam1);
+	set_animation(g, action->iparam1);
 
 	state->ivar1++;
-	schedule_act(g, act->iparam2);
+	schedule_act(g, action->iparam2);
 	return true;
 }
 
@@ -919,12 +919,12 @@ void WorkerProgram::parse_return
 	act->iparam1 = 1; // drop any item on our owner's flag
 }
 
-bool Worker::run_return(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_return(Game* g, State* state, const WorkerAction* action)
 {
-	molog("  Return(%i)\n", act->iparam1);
+	molog("  Return(%i)\n", action->iparam1);
 
 	state->ivar1++;
-	start_task_return(g, act->iparam1);
+	start_task_return(g, action->iparam1);
 	return true;
 }
 
@@ -953,11 +953,11 @@ void WorkerProgram::parse_object
 	act->sparam1 = cmd[1];
 }
 
-bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_object(Game* g, State* state, const WorkerAction* action)
 {
 	Map_Object* obj;
 
-	molog("  Object(%s)\n", act->sparam1.c_str());
+	molog("  Object(%s)\n", action->sparam1.c_str());
 
 	obj = state->objvar1.get(g);
 
@@ -971,17 +971,17 @@ bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
 	molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
 
 	if (obj->get_type() == IMMOVABLE)
-		((Immovable*)obj)->switch_program(g, act->sparam1);
+		((Immovable*)obj)->switch_program(g, action->sparam1);
    else if(obj->get_type() == BOB) {
       Bob* bob=((Bob*)(obj));
       if(bob->get_bob_type() == Bob::CRITTER) {
          Critter_Bob* crit= ((Critter_Bob*)bob);
          crit->send_signal(g, "interrupt_now");
-         crit->start_task_program(act->sparam1);
+         crit->start_task_program(action->sparam1);
       } else if((bob->get_type() == Bob::WORKER) || (bob->get_type() == Bob::SOLDIER)) {
          Worker* w= ((Worker*)bob);
          w->send_signal(g, "interrupt_now");
-         w->start_task_program(act->sparam1);
+         w->start_task_program(action->sparam1);
       } else
          throw wexception("MO(%i): [actObject]: bab bob type = %i", get_serial(), bob->get_bob_type());
    }
@@ -1132,7 +1132,7 @@ void WorkerProgram::parse_geologist
 	act->sparam1 = cmd[3];
 }
 
-bool Worker::run_geologist(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_geologist(Game* g, State* state, const WorkerAction* action)
 {
 	#ifdef DEBUG
 	PlayerImmovable* location = get_location(g);
@@ -1142,10 +1142,10 @@ bool Worker::run_geologist(Game* g, State* state, const WorkerAction* act)
 	assert(location->get_type() == FLAG);
 
 	molog("  Start Geologist (%i attempts, %i radius -> %s)\n",
-		act->iparam1, act->iparam2, act->sparam1.c_str());
+		action->iparam1, action->iparam2, action->sparam1.c_str());
 
 	state->ivar1++;
-	start_task_geologist(act->iparam1, act->iparam2, act->sparam1);
+	start_task_geologist(action->iparam1, action->iparam2, action->sparam1);
 	return true;
 }
 
@@ -1222,9 +1222,9 @@ void WorkerProgram::parse_playFX
 
 /** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
-bool Worker::run_playFX(Game* g, State* state, const WorkerAction* act)
+bool Worker::run_playFX(Game* g, State* state, const WorkerAction* action)
 {
-	g_sound_handler.play_fx(act->sparam1, get_position(), act->iparam1);
+	g_sound_handler.play_fx(action->sparam1, get_position(), action->iparam1);
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -2570,7 +2570,7 @@ Worker::program_update
 */
 void Worker::program_update(Game* g, State* state)
 {
-	const WorkerAction* act;
+	const WorkerAction* action;
 
 	for(;;)
 	{
@@ -2583,9 +2583,9 @@ void Worker::program_update(Game* g, State* state)
 			return;
 		}
 
-		act = program->get_action(state->ivar1);
+		action = program->get_action(state->ivar1);
 
-		if ((this->*(act->function))(g, state, act))
+		if ((this->*(action->function))(g, state, action))
 			return;
 	}
 }

@@ -62,6 +62,7 @@ bool LayeredFileSystem::IsWritable()
 
 /**
  * Add a new filesystem to the top of the stack
+ * \todo use FileSystem & instead of pointer, throw on failure
  */
 void LayeredFileSystem::AddFileSystem(FileSystem *fs)
 {

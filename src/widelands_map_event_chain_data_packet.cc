@@ -175,12 +175,12 @@ throw (_wexception)
 			e.m_trigconditional->get_infix_tokenlist();
 		s.set_int("nr_conditional_element", toklist->size());
       char buf[256];
-      for( uint i = 0; i < toklist->size(); i++) {
-         TriggerConditional_Factory::Token tok = (*toklist)[i];
-         sprintf(buf, "conditional_element_%02i", i);
+      for( uint t = 0; t < toklist->size(); t++) {
+         TriggerConditional_Factory::Token tok = (*toklist)[t];
+         sprintf(buf, "conditional_element_%02i", t);
 			s.set_string(buf, TriggerConditional_Factory::operators[tok.token]);
 			if (tok.token == TriggerConditional_Factory::TRIGGER) {
-               sprintf(buf, "conditional_element_%02i_data", i);
+               sprintf(buf, "conditional_element_%02i_data", t);
                s.set_string(buf, static_cast<Trigger*>(tok.data)->get_name());
          }
       }
@@ -191,9 +191,9 @@ throw (_wexception)
 		const EventChain::event_vector::size_type size =
 			e.m_events.size();
 		s.set_int("nr_events", size);
-		for (EventChain::event_vector::size_type i = 0; i < size; ++i) {
-         sprintf(buf, "event_%02i", i);
-			s.set_string(buf, e.m_events[i]->get_name());
+		for (EventChain::event_vector::size_type eventnum = 0; eventnum < size; ++eventnum) {
+         sprintf(buf, "event_%02i", eventnum);
+			s.set_string(buf, e.m_events[eventnum]->get_name());
       }
 
       // Which is the current event

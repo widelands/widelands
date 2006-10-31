@@ -118,11 +118,11 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
    assert(!get_map());
 
-   Map *map = new Map();
-   set_map(map);
+   Map *m = new Map();
+   set_map(m);
 
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
-	m_maploader = new Widelands_Map_Loader(*fs, map);
+	m_maploader = new Widelands_Map_Loader(*fs, m);
 
     // Loading the locals for the campaign
         if( scenario )
@@ -137,12 +137,12 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
         m_state = gs_running;
 
     // We have to create the players here
-   for( uint i = 1; i <= map->get_nrplayers(); i++)
+   for( uint i = 1; i <= m->get_nrplayers(); i++)
 		add_player
 		(i,
 		 i == 1 ? Player::Local : Player::AI,
-		 map->get_scenario_player_tribe(i),
-		 map->get_scenario_player_name(i));
+		 m->get_scenario_player_tribe(i),
+		 m->get_scenario_player_name(i));
 
    init_player_controllers ();
 

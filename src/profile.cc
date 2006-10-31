@@ -924,10 +924,10 @@ void Profile::read
 					if (*eot == '\'' || *eot == '\"') {
 						*eot = 0;
 						if( strlen( tail )) {
-							char *eot = tail+strlen(tail)-1;
-							if (*eot == '\'' || *eot == '\"') {
+							char *eot2 = tail+strlen(tail)-1;
+							if (*eot2 == '\'' || *eot2 == '\"') {
 								reading_multiline = false;
-								*eot = 0;
+								*eot2 = 0;
 							}
 						}
 					}

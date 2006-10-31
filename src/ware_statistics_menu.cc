@@ -426,12 +426,12 @@ m_parent(&parent)
 
    posy += 25 + spacing;
    posx = spacing;
-	{
-		UIButton & b = *new UIButton(this, posx, posy, 32, 32, 4, 100);
-		b.clickedid.set(this, &Ware_Statistics_Menu::clicked);
-		b.set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
-		b.set_tooltip(_("Help").c_str());
-	}
+
+	b = new UIButton(this, posx, posy, 32, 32, 4, 100);
+	b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
+	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
+	b->set_tooltip(_("Help").c_str());
+
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);

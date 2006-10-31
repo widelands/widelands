@@ -276,8 +276,8 @@ void NetHost::send_player_info ()
 	serializer->putchar (player_human);
 	serializer->end_packet ();
 
-	for (unsigned int i=0;i<clients.size();i++)
-		serializer->send (clients[i].sock);
+	for (uint j=0;j<clients.size();j++)
+		serializer->send (clients[j].sock);
 }
 
 // When the game starts, first shut down the server socket. No new connections are accepted then.

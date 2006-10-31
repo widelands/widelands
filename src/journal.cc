@@ -377,7 +377,7 @@ void Journal::record_event(SDL_Event *e)
 			break;
 		}
 	}
-	catch(std::ofstream::failure e){
+	catch(std::ofstream::failure f){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to write to record file. Recording deactivated.\n");
@@ -455,7 +455,7 @@ bool Journal::read_event(SDL_Event *e)
 
 		return haveevent;
 	}
-	catch(std::ifstream::failure e){
+ 	catch(std::ifstream::failure f){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");

@@ -20,11 +20,11 @@
 #include "journal_exceptions.h"
 #include <stdio.h> //TODO: find a replacement for sprintf
 
-Journalfile_error::Journalfile_error(const std::string filename) throw():
+Journalfile_error::Journalfile_error(const std::string _filename) throw():
 		std::runtime_error("Problem with journal file."),
-		filename(filename)
+		filename(_filename)
 {
-	sprintf(text, "Problem with journal file '%s'.", filename.c_str());
+	sprintf(text, "Problem with journal file '%s'.", _filename.c_str());
 }
 
 const char *Journalfile_error::what() const throw()
@@ -33,29 +33,29 @@ const char *Journalfile_error::what() const throw()
 }
 
 ///\todo Say _which_ magic number was found and which was expected
-BadMagic_error::BadMagic_error(const std::string filename) throw():
-		Journalfile_error(filename)
+BadMagic_error::BadMagic_error(const std::string _filename) throw():
+		Journalfile_error(_filename)
 {
 	sprintf(text, "Journal file '%s' starts with bad magic number.",
-	        filename.c_str());
+	        _filename.c_str());
 }
 
-BadRecord_error::BadRecord_error(const std::string filename,
-                                 const unsigned char code,
-                                 const unsigned char expectedcode) throw():
-		Journalfile_error(filename),
-		code(code), expectedcode(expectedcode)
+BadRecord_error::BadRecord_error(const std::string _filename,
+                                 const unsigned char _code,
+                                 const unsigned char _expectedcode) throw():
+		Journalfile_error(_filename),
+		code(_code), expectedcode(_expectedcode)
 {
 	sprintf(text, "Journal file '%s' contains record with type %i instead "
 	        "of the expected type %i.",
-	        filename.c_str(), code, expectedcode);
+	        _filename.c_str(), _code, _expectedcode);
 }
 
-BadEvent_error::BadEvent_error(const std::string filename, const unsigned char type) throw():
-		Journalfile_error(filename),
-		type(type)
+BadEvent_error::BadEvent_error(const std::string _filename, const unsigned char _type) throw():
+		Journalfile_error(_filename),
+		type(_type)
 {
 	sprintf(text, "Journal file '%s' contains record with unknown event "
 	        "type %i.",
-	        filename.c_str(), type);
+	        _filename.c_str(), _type);
 }

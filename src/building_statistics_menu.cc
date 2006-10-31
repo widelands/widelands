@@ -361,17 +361,17 @@ void Building_Statistics_Menu::update( void ) {
 			m_anim = tribe.get_building_descr(i)->get_ui_anim();
              m_selected = i;
              if(nr_owned)
-                for(uint i = 0; i < 2; i++)
-                   m_btn[i]->set_enabled(true);
+                for(uint j = 0; j < 2; j++)
+                   m_btn[j]->set_enabled(true);
              else
-                for(uint i = 0; i < 2; i++)
-                   m_btn[i]->set_enabled(false);
+                for(uint j = 0; j < 2; j++)
+                   m_btn[j]->set_enabled(false);
              if(nr_build)
-                for(uint i = 2; i < 4; i++)
-                   m_btn[i]->set_enabled(true);
+                for(uint j = 2; j < 4; j++)
+                   m_btn[j]->set_enabled(true);
              else
-                for(uint i = 2; i < 4; i++)
-                   m_btn[i]->set_enabled(false);
+                for(uint j = 2; j < 4; j++)
+                   m_btn[j]->set_enabled(false);
           }
 
           // Add new Table Entry
@@ -384,14 +384,14 @@ void Building_Statistics_Menu::update( void ) {
              snprintf(buffer, 100, "%i", percent );
              if( is_selected ) {
                 m_progbar->set_state ( percent );
-                for(uint i = 4; i < 6; i++)
-                   m_btn[i]->set_enabled(true);
+                for(uint j = 4; j < 6; j++)
+                   m_btn[j]->set_enabled(true);
              }
           } else {
              snprintf(buffer, 100, "-");
              if(is_selected)
-                for(uint i = 4; i < 6; i++)
-                   m_btn[i]->set_enabled(false);
+                for(uint j = 4; j < 6; j++)
+                   m_btn[j]->set_enabled(false);
           }
           te->set_string(1, buffer);
 
@@ -410,6 +410,6 @@ void Building_Statistics_Menu::update( void ) {
 
    // Disable all buttons, if nothing to select
    if(m_selected == -1)
-      for(uint i = 0; i < 6; i++)
-      m_btn[i]->set_enabled(false);
+      for(uint j = 0; j < 6; j++)
+      m_btn[j]->set_enabled(false);
 }

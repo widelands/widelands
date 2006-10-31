@@ -100,7 +100,7 @@ Args: name	name that will be displayed
 void UIListselect<void *>::add_entry
 (const char * const name,
  void * value,
- const bool select,
+ const bool sel,
  const int picid)
 {
 	Entry & e =
@@ -127,7 +127,7 @@ void UIListselect<void *>::add_entry
 	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
-   if(select) {
+   if(sel) {
       UIListselect::select( m_entries.size() - 1);
 	}
 }
@@ -158,13 +158,13 @@ void UIListselect<void *>::switch_entries(const uint m, const uint n) {
  * top of list and files at the bottom.
  */
 void UIListselect<void *>::sort(const int gstart, const int gend) {
-   uint start=gstart;
+   uint strt=gstart;
    uint stop=gend;
-   if(gstart==-1) start=0;
+   if(gstart==-1) strt=0;
    if(gend==-1) stop=m_entries.size();
 
    Entry *ei, *ej;
-   for(uint i=start; i<stop; i++)
+   for(uint i=strt; i<stop; i++)
       for(uint j=i; j<stop; j++) {
          ei=m_entries[i];
          ej=m_entries[j];

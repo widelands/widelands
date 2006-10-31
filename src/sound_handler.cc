@@ -407,7 +407,7 @@ int Sound_Handler::stereo_position(const Coords position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-(const std::string fx_name,const int stereo_position, const uint priority)
+(const std::string fx_name,const int stereo_pos, const uint priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -418,7 +418,7 @@ bool Sound_Handler::play_or_not
 
 	//TODO: what to do with fx that happen offscreen?
 	//TODO: reduce volume? reduce priority? other?
-	if (stereo_position == -1) {
+	if (stereo_pos == -1) {
 		return false;
 	}
 
@@ -504,12 +504,12 @@ void Sound_Handler::play_fx
  * 				played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(const std::string fx_name, const int stereo_position, const uint priority)
+(const std::string fx_name, const int stereo_pos, const uint priority)
 {
 	Mix_Chunk *m;
 	int chan;
 
-	assert(stereo_position >= -1 && stereo_position <= 254);
+	assert(stereo_pos >= -1 && stereo_pos <= 254);
 
 	if (get_disable_fx())
 		return;
@@ -521,7 +521,7 @@ void Sound_Handler::play_fx
 	}
 
 	//see if the FX should be played
-	if (!play_or_not(fx_name, stereo_position, priority))
+	if (!play_or_not(fx_name, stereo_pos, priority))
 		return;
 
 	//retrieve the fx
@@ -531,7 +531,7 @@ void Sound_Handler::play_fx
 	if (m) {
 		chan = Mix_PlayChannel(-1, m, 0);
 		//TODO: complain if this didn't work due to out-of-channels
-		Mix_SetPanning(chan,254-stereo_position, stereo_position);
+		Mix_SetPanning(chan,254-stereo_pos, stereo_pos);
 		m_active_fx[chan]=fx_name;
 	} else
 		log("Sound_Handler: sound effect \"%s\" exists but contains no "

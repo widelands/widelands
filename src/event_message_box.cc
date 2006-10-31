@@ -73,8 +73,8 @@ void Event_Message_Box::reinitialize(Game *) {}
 void Event_Message_Box::set_nr_buttons(int i) {
    int oldsize=m_buttons.size();
    m_buttons.resize(i);
-   for(uint i=oldsize; i<m_buttons.size(); i++)
-      m_buttons[i].trigger=0;
+   for(uint j=oldsize; j<m_buttons.size(); j++)
+      m_buttons[j].trigger=0;
 }
 
 

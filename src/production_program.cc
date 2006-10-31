@@ -252,17 +252,17 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			act.iparam1 = act.iparam2 = 0;
 
 			for(uint i = 1; i < cmd.size(); ++i) {
-				std::string name;
+				std::string cmdname;
 				int flag;
 				char c = cmd[i][0];
 
-				name = cmd[i].substr(1);
-				if (name == "catch")
+				cmdname = cmd[i].substr(1);
+				if (cmdname == "catch")
 					flag = ProductionAction::pfCatch;
-				else if (name == "nostats")
+				else if (cmdname == "nostats")
 					flag = ProductionAction::pfNoStats;
 				else
-					throw wexception("Unknown flag name '%s'", name.c_str());
+					throw wexception("Unknown flag cmdname '%s'", cmdname.c_str());
 
 				if (c == '+')
 					act.iparam1 |= flag;

@@ -77,12 +77,12 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
 	const Tribe_Descr* t=player->get_tribe();
    int i;
    for(i=0; i<t->get_nrbuildings(); i++) {
-      Building_Descr* b=t->get_building_descr(i);
-      if(!b->get_enhanced_building() && !b->get_buildable()) continue;
+      Building_Descr* descr=t->get_building_descr(i);
+      if(!descr->get_enhanced_building() && !descr->get_buildable()) continue;
       if(m_player->is_building_allowed(i))
-         m_allowed->add_entry(b->get_descname(), ((void*)(i)), false, b->get_buildicon());
+         m_allowed->add_entry(descr->get_descname(), ((void*)(i)), false, descr->get_buildicon());
       else
-         m_forbidden->add_entry(b->get_descname(), ((void*)(i)), false, b->get_buildicon());
+         m_forbidden->add_entry(descr->get_descname(), ((void*)(i)), false, descr->get_buildicon());
    }
    m_forbidden->sort();
    m_allowed->sort();

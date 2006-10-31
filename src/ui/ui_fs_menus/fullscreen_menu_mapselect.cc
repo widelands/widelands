@@ -238,27 +238,27 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
 
-		Map_Loader* m_ml = map->get_correct_loader(name); //  FIXME Do not declare a local variable whose name begins with m_, especially not when it shadows a member!
-      if(!m_ml) continue;
+		Map_Loader* ml = map->get_correct_loader(name); //  FIXME Do not declare a local variable whose name begins with m_, especially not when it shadows a member!
+      if(!ml) continue;
 
 		try {
-         m_ml->preload_map(true);
+         ml->preload_map(true);
 			assert
-				(dynamic_cast<const Widelands_Map_Loader * const>(m_ml)
+				(dynamic_cast<const Widelands_Map_Loader * const>(ml)
 				 or
-				 dynamic_cast<const        S2_Map_Loader * const>(m_ml));
+				 dynamic_cast<const        S2_Map_Loader * const>(ml));
 			list->add_entry
 				(map->get_name(),
 				 name,
 				 false,
 				 g_gr->get_picture
 				 (PicMod_Game,
-				  dynamic_cast<const Widelands_Map_Loader * const>(m_ml) ?
+				  dynamic_cast<const Widelands_Map_Loader * const>(ml) ?
 				  "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
-      delete m_ml;
+      delete ml;
 
    }
    delete map;

@@ -672,20 +672,20 @@ void RenderTargetImpl::rendermap
    m_surface->blit(Point( m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
 	{
-		const int dx = maxfx - minfx + 1;
-		int dy = maxfy - minfy + 1;
-		int linear_fy = minfy;
-		bool row_is_forward = linear_fy & 1;
-		int b_posy = linear_fy * TRIANGLE_HEIGHT - viewofs.y;
+		const int dx2 = maxfx - minfx + 1;
+		int dy2 = maxfy - minfy + 1;
+		int linear_fy2 = minfy;
+		bool row_is_forward2 = linear_fy2 & 1;
+		int b_posy2 = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
 
-		while(dy--) {
-			const int posy = b_posy;
-			b_posy += TRIANGLE_HEIGHT;
+		while(dy2--) {
+			const int posy = b_posy2;
+			b_posy2 += TRIANGLE_HEIGHT;
 
 			{//  Draw things on the node.
 				const int linear_fx = minfx;
-				FCoords r(linear_fx, linear_fy);
-				FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
+				FCoords r(linear_fx, linear_fy2);
+				FCoords br(linear_fx - (not row_is_forward2), linear_fy2 + 1);
 
 				// Calculate safe (bounded) field coordinates and get field pointers
 				map.normalize_coords(&r);
@@ -708,15 +708,15 @@ void RenderTargetImpl::rendermap
 				Point r_pos
 					(linear_fx * TRIANGLE_WIDTH
 					 +
-					 row_is_forward * (TRIANGLE_WIDTH / 2)
+					 row_is_forward2 * (TRIANGLE_WIDTH / 2)
 					 -
 					 viewofs.x,
 					 posy - r.field->get_height() * HEIGHT_FACTOR);
 				Point br_pos
 					(r_pos.x - TRIANGLE_WIDTH / 2,
-					 b_posy - br.field->get_height() * HEIGHT_FACTOR);
+					 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
-				int count = dx;
+				int count = dx2;
 				while (count--) {
 					const FCoords l = f, bl = br;
 					f = r;
@@ -741,7 +741,7 @@ void RenderTargetImpl::rendermap
 						 posy - r.field->get_height() * HEIGHT_FACTOR);
 					br_pos = Point
 						(br_pos.x + TRIANGLE_WIDTH,
-						 b_posy - br.field->get_height() * HEIGHT_FACTOR);
+						 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
 					//  Render border markes on and halfway between border nodes.
 					if (f_is_border) {
@@ -821,12 +821,12 @@ void RenderTargetImpl::rendermap
 			}
 			{//  Draw things on the R-triangle.
 				const int linear_fx = minfx;
-				FCoords r(linear_fx, linear_fy);
-				FCoords b(linear_fx - (not row_is_forward), linear_fy + 1);
+				FCoords r(linear_fx, linear_fy2);
+				FCoords b(linear_fx - (not row_is_forward2), linear_fy2 + 1);
 				int posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
-					(row_is_forward + 1) * (TRIANGLE_WIDTH / 2)
+					(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
 					-
 					viewofs.x;
 
@@ -838,7 +838,7 @@ void RenderTargetImpl::rendermap
 				r.field = &map[Map::get_index(r, mapwidth)];
 				b.field = &map[Map::get_index(b, mapwidth)];
 
-				int count = dx;
+				int count = dx2;
 
 				;//  One less iteration than for nodes and D-triangles.
 				while (--count) {
@@ -889,12 +889,12 @@ void RenderTargetImpl::rendermap
 			}
 			{//  Draw things on the D-triangle.
 				const int linear_fx = minfx;
-				FCoords f(linear_fx - 1, linear_fy);
-				FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
+				FCoords f(linear_fx - 1, linear_fy2);
+				FCoords br(linear_fx - (not row_is_forward2), linear_fy2 + 1);
 				int posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
-					row_is_forward * (TRIANGLE_WIDTH / 2)
+					row_is_forward2 * (TRIANGLE_WIDTH / 2)
 					-
 					viewofs.x;
 
@@ -906,7 +906,7 @@ void RenderTargetImpl::rendermap
 				f.field  = &map[Map::get_index(f,  mapwidth)];
 				br.field = &map[Map::get_index(br, mapwidth)];
 
-				int count = dx;
+				int count = dx2;
 				while (count--) {
 					const FCoords bl = br;
 					map.get_rn(f, &f);
@@ -949,8 +949,8 @@ void RenderTargetImpl::rendermap
 				}
 			}
 
-			++linear_fy;
-			row_is_forward = not row_is_forward;
+			++linear_fy2;
+			row_is_forward2 = not row_is_forward2;
 		}
 	}
 

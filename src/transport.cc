@@ -1749,13 +1749,13 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 
    for(std::vector<Worker*>::const_iterator it = workers.begin(); it != workers.end(); ++it) {
       Worker* w = *it;
-      int index = path.get_index(w->get_position());
+      int idx = path.get_index(w->get_position());
 
       // Careful! If the worker is currently inside the building at our
       // starting flag, we *must not* reassign him.
       // If he is in the building at our end flag or at the other road's
       // end flag, he can be reassigned to the other road.
-      if (index < 0)
+      if (idx < 0)
       {
          Map* map = g->get_map();
          BaseImmovable* imm = map->get_immovable(w->get_position());
@@ -1766,13 +1766,13 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
             g->get_map()->get_brn(w->get_position(), &pos);
 
             if (pos == path.get_start())
-               index = 0;
+               idx = 0;
          }
       }
 
-      molog("Split: check %u -> index %i\n", w->get_serial(), index);
+      molog("Split: check %u -> idx %i\n", w->get_serial(), idx);
 
-      if (index < 0)
+      if (idx < 0)
       {
          reassigned_workers.push_back(w);
 
@@ -2418,8 +2418,8 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
             m_transfers.push_back(trans);
 
 				// Requeriments
-				bool has_requeriments = fr->Unsigned8();
-				if (has_requeriments) {
+				bool has_requ = fr->Unsigned8();
+				if (has_requ) {
 					m_requeriments = new Requeriments();
 					m_requeriments->Read (fr, egbase, mol);
 				}

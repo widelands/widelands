@@ -1164,8 +1164,8 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
          molog("** Path length: %i\n", p->get_nsteps());
          molog("** Start: (%i,%i)\n", p->get_start().x, p->get_start().y);
          molog("** End: (%i,%i)\n", p->get_end().x, p->get_end().y);
-         for(int i=0; i<p->get_nsteps(); i++)
-            molog("** Step %i/%i: %i\n", i+1, p->get_nsteps(), p->get_step(i));
+         for(int j=0; j<p->get_nsteps(); j++)
+            molog("** Step %i/%i: %i\n", j+1, p->get_nsteps(), p->get_step(j));
       }
 		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);

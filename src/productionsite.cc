@@ -353,23 +353,21 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ProductionSite::set_economy(Economy* e)
 {
 	Economy* old = get_economy();
-	uint i;
 
 	if (old) {
-		for(i = 0; i < m_input_queues.size(); i++)
+		for(uint i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
 	Building::set_economy(e);
 	if (m_worker_requests.size()) {
-      uint i=0;
-      for(i=0; i<m_worker_requests.size(); i++)
+      for(uint i=0; i<m_worker_requests.size(); i++)
          if(m_worker_requests[i])
             m_worker_requests[i]->set_economy(e);
    }
 
    if (e) {
-		for(i = 0; i < m_input_queues.size(); i++)
+		for(uint i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->add_to_economy(e);
 	}
 }

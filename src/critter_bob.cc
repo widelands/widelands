@@ -324,7 +324,7 @@ Critter_Bob::program_update
 */
 void Critter_Bob::program_update(Game* g, State* state)
 {
-	const Critter_BobAction* act;
+	const Critter_BobAction* action;
 
 	for(;;)
 	{
@@ -337,9 +337,9 @@ void Critter_Bob::program_update(Game* g, State* state)
 			return;
 		}
 
-		act = program->get_action(state->ivar1);
+		action = program->get_action(state->ivar1);
 
-		if ((this->*(act->function))(g, state, act))
+		if ((this->*(action->function))(g, state, action))
 			return;
 	}
 }

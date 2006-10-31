@@ -175,58 +175,58 @@ std::ostream& operator<<(std::ostream& o, ChkSum& sum) {
 
    IMPORTANT: On some systems it is required that RESBUF is correctly
    aligned for a 32 bits value.  */
-void * ChkSum::md5_finish_ctx (md5_ctx* ctx, void* resbuf)
+void * ChkSum::md5_finish_ctx (md5_ctx* c, void* resbuf)
 {
   /* Take yet unprocessed bytes into account.  */
-  ulong bytes = ctx->buflen;
+  ulong bytes = c->buflen;
   ulong pad;
 
   /* Now count remaining bytes.  */
-  ctx->total[0] += bytes;
-  if (ctx->total[0] < bytes)
-    ++ctx->total[1];
+  c->total[0] += bytes;
+  if (c->total[0] < bytes)
+    ++c->total[1];
 
   pad = bytes >= 56 ? 64 + 56 - bytes : 56 - bytes;
-  memcpy (&ctx->buffer[bytes], fillbuf, pad);
+  memcpy (&c->buffer[bytes], fillbuf, pad);
 
   /* Put the 64-bit file length in *bits* at the end of the buffer.  */
-  *(ulong *) &ctx->buffer[bytes + pad] = (ctx->total[0] << 3);
-  *(ulong *) &ctx->buffer[bytes + pad + 4] = ((ctx->total[1] << 3) |
-							(ctx->total[0] >> 29));
+  *(ulong *) &c->buffer[bytes + pad] = (c->total[0] << 3);
+  *(ulong *) &c->buffer[bytes + pad + 4] = ((c->total[1] << 3) |
+							(c->total[0] >> 29));
 
   /* Process last bytes.  */
-  md5_process_block (ctx->buffer, bytes + pad + 8, ctx);
+  md5_process_block (c->buffer, bytes + pad + 8, c);
 
 
-  ((ulong *) resbuf)[0] = (ctx->A);
-  ((ulong *) resbuf)[1] = (ctx->B);
-  ((ulong *) resbuf)[2] = (ctx->C);
-  ((ulong *) resbuf)[3] = (ctx->D);
+  ((ulong *) resbuf)[0] = (c->A);
+  ((ulong *) resbuf)[1] = (c->B);
+  ((ulong *) resbuf)[2] = (c->C);
+  ((ulong *) resbuf)[3] = (c->D);
 
 
   return resbuf;
 }
 
 /* Processes some bytes in the internal buffer */
-void ChkSum::md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* ctx)
+void ChkSum::md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* c)
 {
   /* When we already have some bits in our internal buffer concatenate
      both inputs first.  */
-  if (ctx->buflen != 0)
+  if (c->buflen != 0)
     {
-      ulong left_over = ctx->buflen;
+      ulong left_over = c->buflen;
       ulong add = 128 - left_over > len ? len : 128 - left_over;
 
-      memcpy (&ctx->buffer[left_over], buffer, add);
-      ctx->buflen += add;
+      memcpy (&c->buffer[left_over], buffer, add);
+      c->buflen += add;
 
       if (left_over + add > 64)
 	{
-	  md5_process_block (ctx->buffer, (left_over + add) & ~63, ctx);
+	  md5_process_block (c->buffer, (left_over + add) & ~63, c);
 	  /* The regions in the following copy operation cannot overlap.  */
-	  memcpy (ctx->buffer, &ctx->buffer[(left_over + add) & ~63],
+	  memcpy (c->buffer, &c->buffer[(left_over + add) & ~63],
 		  (left_over + add) & 63);
-	  ctx->buflen = (left_over + add) & 63;
+	  c->buflen = (left_over + add) & 63;
 	}
 
       buffer = (const char *) buffer + add;
@@ -236,7 +236,7 @@ void ChkSum::md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* c
   /* Process available complete blocks.  */
   if (len > 64)
     {
-      md5_process_block (buffer, len & ~63, ctx);
+      md5_process_block (buffer, len & ~63, c);
       buffer = (const char *) buffer + (len & ~63);
       len &= 63;
     }
@@ -244,8 +244,8 @@ void ChkSum::md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* c
   /* Move remaining bytes in internal buffer.  */
   if (len > 0)
     {
-      memcpy (ctx->buffer, buffer, len);
-      ctx->buflen = len;
+      memcpy (c->buffer, buffer, len);
+      c->buflen = len;
     }
 }
 
@@ -263,23 +263,23 @@ void ChkSum::md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* c
    It is assumed that LEN % 64 == 0.  */
 
 void
-ChkSum::md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
+ChkSum::md5_process_block (const void* buffer, ulong len, md5_ctx* c)
 {
   ulong correct_words[16];
   const ulong *words = (ulong*) buffer;
   ulong nwords = len / sizeof (ulong);
   const ulong *endp = words + nwords;
-  ulong A = ctx->A;
-  ulong B = ctx->B;
-  ulong C = ctx->C;
-  ulong D = ctx->D;
+  ulong A = c->A;
+  ulong B = c->B;
+  ulong C = c->C;
+  ulong D = c->D;
 
   /* First increment the byte count.  RFC 1321 specifies the possible
      length of the file up to 2^64 bits.  Here we only compute the
      number of bytes.  Do a double word increment.  */
-  ctx->total[0] += len;
-  if (ctx->total[0] < len)
-    ++ctx->total[1];
+  c->total[0] += len;
+  if (c->total[0] < len)
+    ++c->total[1];
 
   /* Process all bytes in the buffer with 64 bytes in each round of
      the loop.  */
@@ -411,8 +411,8 @@ ChkSum::md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
     }
 
   /* Put checksum in context given as argument.  */
-  ctx->A = A;
-  ctx->B = B;
-  ctx->C = C;
-  ctx->D = D;
+  c->A = A;
+  c->B = B;
+  c->C = C;
+  c->D = D;
 }

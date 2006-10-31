@@ -26,10 +26,10 @@ RNG::RNG ()
     state1=0;
 }
 
-void RNG::seed (uint seed)
+void RNG::seed (uint s)
 {
     state0^=state1;
-    state1=SIMPLE_RAND(state1) + seed;
+    state1=SIMPLE_RAND(state1) + s;
 }
 
 uint RNG::rand ()

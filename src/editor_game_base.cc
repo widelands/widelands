@@ -379,10 +379,10 @@ void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 {
 	std::vector<ImmovableFound> immovables;
 	std::set<PlayerImmovable*> burnset;
-	Map & map = *m_map;
+	Map & m = *m_map;
 
 	// Find all immovables that need fixing
-	map.find_immovables
+	m.find_immovables
 		(coords, radius, &immovables, FindImmovablePlayerImmovable());
 
 	for
@@ -391,7 +391,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 			 PlayerImmovable & imm =
 				 *static_cast<PlayerImmovable * const>(it->object);
 		if
-			(not map.get_field(it->coords)->is_interior
+			(not m.get_field(it->coords)->is_interior
 			 (imm.get_owner()->get_player_number()))
 			burnset.insert(&imm);
 	}

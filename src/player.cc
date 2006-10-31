@@ -40,7 +40,7 @@ Player::Player
 (Editor_Game_Base* g,
  const int type,
  const int plnum,
- const Tribe_Descr & tribe,
+ const Tribe_Descr & tr,
  const std::string & name,
  const uchar * const playercolor)
 :
@@ -48,7 +48,7 @@ m_see_all(false),
 m_egbase (g),
 m_type   (type),
 m_plnum  (plnum),
-m_tribe  (tribe)
+m_tribe  (tr)
 {
 
 	for(int i = 0; i < 4; i++)
@@ -81,17 +81,17 @@ void Player::init(const bool place_headquarters) {
 	seen_fields.resize(map.max_index(), false);
 
 	if (place_headquarters) {
-		const Tribe_Descr & tribe = m_tribe;
+		const Tribe_Descr & trdesc = m_tribe;
 		const int plnum = m_plnum;
 		Editor_Game_Base & game = *m_egbase;
 		//try {
-			tribe.load_warehouse_with_start_wares
+			trdesc.load_warehouse_with_start_wares
 				(game,
 				 *dynamic_cast<Warehouse * const>
 				 (game.warp_building
 				  (map.get_starting_pos(plnum),
 				   plnum,
-				   tribe.get_building_index("headquarters"))));
+				   trdesc.get_building_index("headquarters"))));
 		//} catch () {
 		//	throw wexception("Tribe %s lacks headquarters", tribe.get_name());
 		//}

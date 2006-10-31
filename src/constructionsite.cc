@@ -598,12 +598,12 @@ void ConstructionSite::draw
    if(!anim_pic && m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead
-      int w, h;
-      int anim = m_prev_building->get_animation("build");
-      int nr_pics=g_gr->get_animation_nr_frames(anim);
-      g_gr->get_animation_size(anim, tanim, &w, &h);
-      int tanim = (nr_pics-1)*FRAME_LENGTH;
-      dst.drawanim(pos.x, pos.y, anim, tanim, get_owner());
+      int width, height;
+      int a = m_prev_building->get_animation("build");
+      int nr_pics2=g_gr->get_animation_nr_frames(a);
+      g_gr->get_animation_size(a, tanim, &width, &height);
+      int tanim2 = (nr_pics2-1)*FRAME_LENGTH;
+      dst.drawanim(pos.x, pos.y, a, tanim2, get_owner());
    }
 
 	dst.drawanimrect

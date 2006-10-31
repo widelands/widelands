@@ -63,10 +63,10 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
    m_needs_update=true;
 
    if(down) {
-      std::string m_text= g_fh->word_wrap_text(m_fontname,m_fontsize,get_text(),get_eff_w());
+      std::string txt= g_fh->word_wrap_text(m_fontname,m_fontsize,get_text(),get_eff_w());
       switch(code) {
          case KEY_BACKSPACE:
-            if(m_text.size() && m_cur_pos) {
+            if(txt.size() && m_cur_pos) {
                m_cur_pos--;
             } else {
                break;
@@ -74,9 +74,9 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
             // Fallthrough
 
          case KEY_DELETE:
-            if(m_text.size() && m_cur_pos<m_text.size()) {
-               m_text.erase(m_text.begin() + m_cur_pos);
-               UIMultiline_Textarea::set_text(m_text.c_str());
+            if(txt.size() && m_cur_pos<txt.size()) {
+               txt.erase(txt.begin() + m_cur_pos);
+               UIMultiline_Textarea::set_text(txt.c_str());
             }
             break;
 
@@ -87,24 +87,24 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
 
          case KEY_RIGHT:
             m_cur_pos+=1;
-            if(m_cur_pos>=m_text.size()) m_cur_pos=m_text.size();
+            if(m_cur_pos>=txt.size()) m_cur_pos=txt.size();
             break;
 
          case KEY_DOWN:
-            if(m_cur_pos<m_text.size()-1) {
+            if(m_cur_pos<txt.size()-1) {
                uint begin_of_line=m_cur_pos;
-               if(m_text[begin_of_line]=='\n') --begin_of_line;
-               while(begin_of_line>0 && m_text[begin_of_line]!='\n') --begin_of_line;
+               if(txt[begin_of_line]=='\n') --begin_of_line;
+               while(begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
                if(begin_of_line!=0) ++begin_of_line;
                uint begin_of_next_line=m_cur_pos;
-               while(m_text[begin_of_next_line]!='\n' && begin_of_next_line<m_text.size())
+               while(txt[begin_of_next_line]!='\n' && begin_of_next_line<txt.size())
                   ++begin_of_next_line;
-               if(begin_of_next_line==m_text.size())
+               if(begin_of_next_line==txt.size())
                   --begin_of_next_line;
                 else
                   ++begin_of_next_line;
                uint end_of_next_line=begin_of_next_line;
-               while(m_text[end_of_next_line]!='\n' && end_of_next_line<m_text.size())
+               while(txt[end_of_next_line]!='\n' && end_of_next_line<txt.size())
                   ++end_of_next_line;
                if(begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line)
                   m_cur_pos=end_of_next_line;
@@ -116,14 +116,14 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
          case KEY_UP:
             if(m_cur_pos>0) {
                uint begin_of_line=m_cur_pos;
-               if(m_text[begin_of_line]=='\n') --begin_of_line;
-               while(begin_of_line>0 && m_text[begin_of_line]!='\n') --begin_of_line;
+               if(txt[begin_of_line]=='\n') --begin_of_line;
+               while(begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
                if(begin_of_line!=0) ++begin_of_line;
                uint end_of_last_line=begin_of_line;
                if(begin_of_line!=0) --end_of_last_line;
                uint begin_of_lastline=end_of_last_line;
-               if(m_text[begin_of_lastline]=='\n') --begin_of_lastline;
-               while(begin_of_lastline>0 && m_text[begin_of_lastline]!='\n') --begin_of_lastline;
+               if(txt[begin_of_lastline]=='\n') --begin_of_lastline;
+               while(begin_of_lastline>0 && txt[begin_of_lastline]!='\n') --begin_of_lastline;
                if(begin_of_lastline!=0) ++begin_of_lastline;
                if(begin_of_lastline+(m_cur_pos-begin_of_line) > end_of_last_line)
                   m_cur_pos=end_of_last_line;
@@ -136,14 +136,14 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
             c='\n';
             // fallthrough
          default:
-            if(c && m_text.size()<m_maxchars) {
-               m_text.insert(m_cur_pos,1,c);
+            if(c && txt.size()<m_maxchars) {
+               txt.insert(m_cur_pos,1,c);
                m_cur_pos++;
             }
-            UIMultiline_Textarea::set_text(m_text.c_str());
+            UIMultiline_Textarea::set_text(txt.c_str());
             break;
       }
-      UIMultiline_Textarea::set_text(m_text.c_str());
+      UIMultiline_Textarea::set_text(txt.c_str());
       changed.call();
       return true;
    }

@@ -279,7 +279,7 @@ def do_configure(config_h_file, conf, env):
 	#conf.CheckCompilerArgument('-Wpadded', env)
 	conf.CheckCompilerArgument('-Wpointer-arith', env)
 	conf.CheckCompilerArgument('-Wunsafe-loop-optimizations', env)
-	#conf.CheckCompilerArgument('-Wshadow', env)
+	conf.CheckCompilerArgument('-Wshadow', env)
 	conf.CheckCompilerArgument('-Wstack-protector', env)
 	conf.CheckCompilerArgument('-Wstrict-aliasing=2', env)
 	#conf.CheckCompilerArgument('-Wunreachable-code', env)

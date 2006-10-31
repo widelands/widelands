@@ -60,11 +60,11 @@ and go for it
 void Editor::run() {
 
    // set empty map, defaults
-   Map* map=new Map;
-   map->create_empty_map();
+   Map* m=new Map;
+   m->create_empty_map();
 
 
-   set_map(map);
+   set_map(m);
 
    g_gr->flush(PicMod_Menu);
 

@@ -145,21 +145,21 @@ void Interactive_Player::sample_statistics( void ) {
    next_ware_production_period();
 
    // Update general stats
-   Map* map = get_game()->get_map();
-   std::vector< uint > land_size; land_size.resize( map->get_nrplayers() );
-   std::vector< uint > nr_buildings; nr_buildings.resize( map->get_nrplayers() );
-   std::vector< uint > nr_kills; nr_kills.resize( map->get_nrplayers() );
-   std::vector< uint > miltary_strength; miltary_strength.resize( map->get_nrplayers() );
-   std::vector< uint > nr_workers; nr_workers.resize( map->get_nrplayers() );
-   std::vector< uint > nr_wares; nr_wares.resize( map->get_nrplayers() );
-   std::vector< uint > productivity; productivity.resize( map->get_nrplayers() );
+   Map* m = get_game()->get_map();
+   std::vector< uint > land_size; land_size.resize( m->get_nrplayers() );
+   std::vector< uint > nr_buildings; nr_buildings.resize( m->get_nrplayers() );
+   std::vector< uint > nr_kills; nr_kills.resize( m->get_nrplayers() );
+   std::vector< uint > miltary_strength; miltary_strength.resize( m->get_nrplayers() );
+   std::vector< uint > nr_workers; nr_workers.resize( m->get_nrplayers() );
+   std::vector< uint > nr_wares; nr_wares.resize( m->get_nrplayers() );
+   std::vector< uint > productivity; productivity.resize( m->get_nrplayers() );
 
-   std::vector< uint > nr_production_sites; nr_production_sites.resize( map->get_nrplayers() );
+   std::vector< uint > nr_production_sites; nr_production_sites.resize( m->get_nrplayers() );
 
    // We walk the map, to gain all needed informations
-   for( ushort y = 0; y < map->get_height(); y++) {
-      for(ushort x = 0; x < map->get_width(); x++) {
-         Field* f = map->get_field( Coords( x, y ) );
+   for( ushort y = 0; y < m->get_height(); y++) {
+      for(ushort x = 0; x < m->get_width(); x++) {
+         Field* f = m->get_field( Coords( x, y ) );
 
          // First, ownership of this field
          if( f->get_owned_by() )
@@ -209,7 +209,7 @@ void Interactive_Player::sample_statistics( void ) {
    }
 
    // Number of workers / wares
-   for( uint i = 0; i < map->get_nrplayers(); i++) {
+   for( uint i = 0; i < m->get_nrplayers(); i++) {
       Player* plr = get_game()->get_player(i+1);
 
       uint wostock = 0;
@@ -231,14 +231,14 @@ void Interactive_Player::sample_statistics( void ) {
    }
 
    // Now, divide the statistics
-   for( uint i = 0; i < map->get_nrplayers(); i++) {
+   for( uint i = 0; i < m->get_nrplayers(); i++) {
       if( productivity[ i ] )
          productivity[ i ] /= nr_production_sites[ i ];
    }
 
    // Now, push this on the general statistics
-   m_general_stats.resize( map->get_nrplayers() );
-   for( uint i = 0; i < map->get_nrplayers(); i++) {
+   m_general_stats.resize( m->get_nrplayers() );
+   for( uint i = 0; i < m->get_nrplayers(); i++) {
       m_general_stats[i].land_size.push_back( land_size[i] );
       m_general_stats[i].nr_buildings.push_back( nr_buildings[i] );
       m_general_stats[i].nr_kills.push_back( nr_kills[i] );

@@ -211,16 +211,16 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
             m_event->set_nr_buttons(m_nr_buttons);
             const MapTriggerManager & mtm =
                m_parent->get_map()->get_mtm();
-            for(int i=0; i<m_nr_buttons; i++) {
-               m_event->set_button_name(i, m_buttons[i].name);
-               if(m_buttons[i].trigger!=-1) {
+            for(int b=0; b<m_nr_buttons; b++) {
+               m_event->set_button_name(b, m_buttons[b].name);
+               if(m_buttons[b].trigger!=-1) {
                   m_event->set_button_trigger
-                     (i,
+                     (b,
                       static_cast<Trigger_Null*>
                       (&mtm.get_trigger_by_nr
-                       (m_null_triggers[m_buttons[i].trigger])));
+                       (m_null_triggers[m_buttons[b].trigger])));
                } else {
-                  m_event->set_button_trigger(i, 0);
+                  m_event->set_button_trigger(b, 0);
                }
             }
             end_modal(1);

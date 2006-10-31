@@ -110,10 +110,10 @@ throw (_wexception)
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
          if(imm && imm->get_type()==Map_Object::FLAG) {
-            Flag* f=static_cast<Flag*>(imm);
-            for(int i=0; i<f->m_item_filled; i++) {
-               assert(!os->is_object_known(f->m_items[i].item));
-               ids.push_back(os->register_object(f->m_items[i].item));
+            Flag* fl=static_cast<Flag*>(imm);
+            for(int i=0; i<fl->m_item_filled; i++) {
+               assert(!os->is_object_known(fl->m_items[i].item));
+               ids.push_back(os->register_object(fl->m_items[i].item));
             }
          }
 

@@ -1130,9 +1130,10 @@ void WLApplication::mainmenu_multiplayer()
 {
 	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
+	int code;
 
 	if(NetGGZ::ref()->tables().size() > 0) ns->fill(NetGGZ::ref()->tables());
-	int code=ns->run();
+	code=ns->run();
 
 	if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
 		netgame=new NetHost();
@@ -1153,7 +1154,7 @@ void WLApplication::mainmenu_multiplayer()
 		netgame=new NetClient(&peer);
 	} else if(code==Fullscreen_Menu_NetSetup::INTERNETGAME) {
 		Fullscreen_Menu_InetServerOptions* igo = new Fullscreen_Menu_InetServerOptions();
-		int code=igo->run();
+		code=igo->run();
 
 		// Get informations here
 		std::string host = igo->get_server_name();

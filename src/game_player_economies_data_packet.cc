@@ -66,9 +66,9 @@ throw (_wexception)
             assert(flag);
             ecos[j]=flag->get_economy();
          }
-         for(uint i=0; i<ecos.size(); i++) {
-            plr->m_economies[i]=ecos[i];
-            ecos[i]->balance_requestsupply(); // Issue first balance
+         for(uint j=0; j<ecos.size(); j++) {
+            plr->m_economies[j]=ecos[j];
+            ecos[j]->balance_requestsupply(); // Issue first balance
          }
       }
 

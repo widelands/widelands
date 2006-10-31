@@ -447,10 +447,10 @@ Interactive_Base::start_build_road
 Begin building a road
 ===============
 */
-void Interactive_Base::start_build_road(Coords start, int player)
+void Interactive_Base::start_build_road(Coords _start, int player)
 {
 	// create an empty path
-	m_buildroad = new CoordPath(m_egbase->get_map(), start);
+	m_buildroad = new CoordPath(m_egbase->get_map(), _start);
 
    m_road_build_player=player;
 
@@ -543,12 +543,12 @@ bool Interactive_Base::append_build_road(Coords field)
 	}
 
 	// Find a path to the clicked-on field
-	Map *map = m_egbase->get_map();
+	Map *m = m_egbase->get_map();
 	Path path;
 	CheckStepRoad cstep(m_egbase->get_player(m_road_build_player), MOVECAPS_WALK, &m_buildroad->get_coords());
 
 	if
-		(map->findpath
+		(m->findpath
 		 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
 		 <
 		 0)
@@ -620,7 +620,7 @@ void Interactive_Base::roadb_add_overlay()
 
 	//log("Add overlay\n");
 
-	Map* map = m_egbase->get_map();
+	Map* m = m_egbase->get_map();
 
 	// preview of the road
    assert(!m_jobid);
@@ -630,7 +630,7 @@ void Interactive_Base::roadb_add_overlay()
 		Coords c = m_buildroad->get_coords()[idx];
 
 		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
-			map->get_neighbour(c, dir, &c);
+			m->get_neighbour(c, dir, &c);
 			dir = get_reverse_dir(dir);
 		}
 
@@ -642,7 +642,7 @@ void Interactive_Base::roadb_add_overlay()
 	}
 
 	// build hints
-	FCoords endpos = map->get_fcoords(m_buildroad->get_end());
+	FCoords endpos = m->get_fcoords(m_buildroad->get_end());
 
    assert(!m_road_buildhelp_overlay_jobid);
    m_road_buildhelp_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
@@ -650,13 +650,13 @@ void Interactive_Base::roadb_add_overlay()
 		FCoords neighb;
 		int caps;
 
-		map->get_neighbour(endpos, dir, &neighb);
+		m->get_neighbour(endpos, dir, &neighb);
 		caps = m_egbase->get_player(m_road_build_player)->get_buildcaps(neighb);
 
 		if (!(caps & MOVECAPS_WALK))
 			continue; // need to be able to walk there
 
-		BaseImmovable *imm = map->get_immovable(neighb); // can't build on robusts
+		BaseImmovable *imm = m->get_immovable(neighb); // can't build on robusts
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
 			if (!(imm->get_type() == Map_Object::FLAG ||
 					(imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))

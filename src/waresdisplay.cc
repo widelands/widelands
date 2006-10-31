@@ -186,8 +186,8 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 	// Get the picture
 	if (worker)
 	{
-		Worker_Descr* worker = m_player->get_tribe()->get_worker_descr(id);
-		pic = worker->get_menu_pic();
+		Worker_Descr* w = m_player->get_tribe()->get_worker_descr(id);
+		pic = w->get_menu_pic();
 	}
 	else
 	{

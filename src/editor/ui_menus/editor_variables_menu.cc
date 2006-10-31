@@ -347,14 +347,14 @@ void Editor_Variables_Menu::clicked( int n ) {
       case 2:
       {
          // Delete selected variable
-         int n =  m_table->get_selection_index();
-         MapVariable* mv = static_cast<MapVariable*>( m_table->get_entry( n )->get_user_data() );
+         int idx =  m_table->get_selection_index();
+         MapVariable* mv = static_cast<MapVariable*>( m_table->get_entry( idx )->get_user_data() );
 
          // Otherwise, delete button should be disabled
          assert( !mv->is_delete_protected());
 
          m_parent->get_egbase()->get_map()->get_mvm().delete_variable(mv->get_name());
-         m_table->remove_entry( n );
+         m_table->remove_entry( idx );
          m_table->sort();
 
          m_edit_button->set_enabled( false );

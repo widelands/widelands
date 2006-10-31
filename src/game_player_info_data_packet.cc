@@ -59,11 +59,11 @@ throw (_wexception)
 
             RGBColor rgb[4];
 
-            for(uint i=0; i<4; i++) {
+            for(uint j=0; j<4; j++) {
                uchar r = fr.Unsigned8();
                uchar g = fr.Unsigned8();
                uchar b = fr.Unsigned8();
-               rgb[i] = RGBColor(r, g, b);
+               rgb[j] = RGBColor(r, g, b);
             }
 
             std::string name = fr.CString();
@@ -72,8 +72,8 @@ throw (_wexception)
             Player* plr = game->get_player(plnum);
             plr->set_see_all(see_all);
 
-            for(uint i=0; i<4; i++)
-               plr->m_playercolor[i] = rgb[i];
+            for(uint j=0; j<4; j++)
+               plr->m_playercolor[i] = rgb[j];
 
             if (type == Player::Local) {
                // The interactive player might still be in existance
@@ -128,10 +128,10 @@ throw (_wexception)
 
 		fw.CString(plr->m_tribe.get_name().c_str());
 
-      for(uint i=0; i<4; i++) {
-         fw.Unsigned8(plr->m_playercolor[i].r());
-         fw.Unsigned8(plr->m_playercolor[i].g());
-         fw.Unsigned8(plr->m_playercolor[i].b());
+      for(uint j=0; j<4; j++) {
+         fw.Unsigned8(plr->m_playercolor[j].r());
+         fw.Unsigned8(plr->m_playercolor[j].g());
+         fw.Unsigned8(plr->m_playercolor[j].b());
       }
 
 		// Seen fields is in a map packet

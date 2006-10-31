@@ -330,19 +330,19 @@ void UITable::sort(void) {
 
    assert(m_columns[m_sort_column].type==STRING);
 
-   int start, stop, it;
+   int begin, stop, it;
    if(get_sort_direction()==DOWN) {
-      start=0;
+      begin=0;
       stop=m_entries.size();
       it=1;
    } else {
-      start=m_entries.size()-1;
+      begin=m_entries.size()-1;
       stop=-1;
       it=-1;
    }
 
    UITable_Entry *ei, *ej;
-   for(int i=start; i!=stop; i+=it)
+   for(int i=begin; i!=stop; i+=it)
       for(int j=i; j!=stop; j+=it) {
          ei=m_entries[i];
          ej=m_entries[j];
