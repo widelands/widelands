@@ -244,7 +244,7 @@ protected:
 
 	///Current state of the mouse buttons
 	///\todo Replace by direct calls to SDL functions???
-	int             m_mouse_x;              // mouse position seen by the outside
+	int      m_mouse_x;              // mouse position seen by the outside
 	int		m_mouse_y;
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_w
@@ -268,10 +268,6 @@ protected:
 
 	int		m_mouse_internal_compy;
 	//@}
-
-	///Whether the SDL has been activated successfully
-	///\todo Replace with \ref SDL_WasInit()
-	bool		m_sdl_active;
 
 	///true if an external entity wants us to quit
 	bool		m_should_die;

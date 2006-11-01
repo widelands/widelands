@@ -109,7 +109,6 @@ m_mouse_maxx          (0),     m_mouse_maxy          (0),
 m_mouse_locked        (0),
 m_mouse_internal_x    (0),     m_mouse_internal_y    (0),
 m_mouse_internal_compx(0),     m_mouse_internal_compy(0),
-m_sdl_active          (false),
 m_should_die          (false),
 m_gfx_w               (0),     m_gfx_h               (0),
 m_gfx_fullscreen      (false),
@@ -771,8 +770,7 @@ const bool WLApplication::init_hardware()
 	if (SDL_Init(sdl_flags) == -1) {
 		//TODO: that's not handled yet!
 		throw wexception("Failed to initialize SDL: %s", SDL_GetError());
-	} else
-		m_sdl_active=true;
+	}
 
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_EnableUNICODE(1); // useful for e.g. chat messages
@@ -802,7 +800,6 @@ void WLApplication::shutdown_hardware()
 	init_graphics(0, 0, 0, false);
 
 	SDL_Quit();
-	m_sdl_active = false;
 }
 
 /**
