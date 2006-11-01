@@ -21,77 +21,67 @@
 #define MINIMAP_H
 
 
-#include "ui_panel.h"
-#include "ui_signal.h"
+#include "ui_button.h"
 #include "ui_unique_window.h"
 
 class Interactive_Base;
-class MiniMapView;
 
-enum {
-   Minimap_Terrain = 1,       // display terrain
-   Minimap_PlayerColor = 2,   // color of owner
-   Minimap_Flags = 4,         // show flags
-   Minimap_Roads = 8,         // show roads
-   Minimap_Buildings = 16,    // show buildings
-};
+struct MiniMap : public UIUniqueWindow {
+	MiniMap(Interactive_Base & parent, UIUniqueWindowRegistry *);
 
-/** class MiniMapView
- *
- * MiniMapView is the panel that represents the pure representation of the
- * map, without any borders or gadgets.
- *
- * If the size of MiniMapView is not the same as the size of the map itself,
- * it will either show a subset of the map, or it will show the map more than
- * once.
- * The minimap always centers around the current viewpoint.
- */
-class MiniMapView : public UIPanel {
-public:
-	MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactive_Base *plr);
+	UISignal2<int, int> warpview;
 
-	UISignal2<int,int> warpview;
+	void set_view_pos(const int x, const int y) throw ()
+	{m_view.set_view_pos(x, y);}
 
-	void set_view_pos(int x, int y);
-
-	// Drawing & event handling
-	void draw(RenderTarget* dst);
-
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
-	bool handle_mouserelease(const Uint8 btn, int x, int y);
-
-   inline void set_flags(char flags) { m_flags = flags; }
+	enum {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16};
 
 private:
-	Interactive_Base*	m_player;
-	int					m_viewx, m_viewy;
-	uint					m_pic_map_spot;
-   char 					m_flags;
-};
+	void toggle(int);
 
+	/**
+	 * MiniMapView is the panel that represents the pure representation of the
+	 * map, without any borders or gadgets.
+	 *
+	 * If the size of MiniMapView is not the same as the size of the map itself,
+	 * it will either show a subset of the map, or it will show the map more than
+	 * once.
+	 * The minimap always centers around the current viewpoint.
+	 */
+	struct View : public UIPanel {
+		View
+			(UIPanel & parent,
+			 const  int x, const  int y,
+			 const uint w, const uint h,
+			 Interactive_Base &);
 
-/* class MiniMap
- *
- * Provide a minimap view (eventually with all sorts of gadgets, e.g.
- * show/hide buildings)
- */
-class MiniMap : public UIUniqueWindow {
-public:
-	MiniMap(Interactive_Base *parent, UIUniqueWindowRegistry *reg);
-	~MiniMap();
+		void set_view_pos(const int x, const int y);
 
-   inline MiniMapView* get_minimapview(void) { return m_view; }
+		void draw(RenderTarget* dst);
 
-   //void toggle_MapFlags(char new_flag);
-   void toggle_color();
-   void toggle_ownedBy();
-   void toggle_flags();
-   void toggle_roads();
-   void toggle_buildings();
+		bool handle_mousepress  (const Uint8 btn, int x, int y);
+		bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-private:
-	MiniMapView		*m_view;
-   char 				m_flags;
+	private:
+		Interactive_Base & m_iabase;
+		int                m_viewx, m_viewy;
+		uint               m_pic_map_spot;
+	public:
+		char flags;
+	};
+
+	uint number_of_buttons_per_row() const throw ();
+	uint number_of_button_rows    () const throw ();
+	uint but_w                    () const throw ();
+	uint but_h                    () const throw ();
+
+	View     m_view;
+	UIButton button_terrn;
+	UIButton button_owner;
+	UIButton button_flags;
+	UIButton button_roads;
+	UIButton button_bldns;
+   char     m_flags;
 };
 
 #endif /* MINIMAP_H */

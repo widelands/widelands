@@ -295,7 +295,7 @@ void Interactive_Base::mainview_move(int x, int y)
       if (y >= maxy) y -= maxy;
 
 
-      m_mm->get_minimapview()->set_view_pos(x, y);
+      m_mm->set_view_pos(x, y);
    }
 }
 
@@ -330,8 +330,7 @@ void Interactive_Base::move_view_to(const Coords c)
 	int x = c.x * TRIANGLE_WIDTH;
 	int y = c.y * TRIANGLE_HEIGHT;
 
-	if (m_minimap.window)
-		m_mm->get_minimapview()->set_view_pos(x, y);
+	if (m_minimap.window) m_mm->set_view_pos(x, y);
 
 	x -= get_mapview()->get_w()>>1;
 	if (x < 0) x += m_egbase->get_map()->get_width() * TRIANGLE_WIDTH;
@@ -350,8 +349,7 @@ Center the mainview on the given position (in pixels)
 */
 void Interactive_Base::move_view_to_point(Point pos)
 {
-	if (m_minimap.window)
-		m_mm->get_minimapview()->set_view_pos(pos.x, pos.y);
+	if (m_minimap.window) m_mm->set_view_pos(pos.x, pos.y);
 
 	get_mapview()->set_viewpoint(pos - Point(get_mapview()->get_w()/2, get_mapview()->get_h()/2));
 }
@@ -381,9 +379,8 @@ void Interactive_Base::toggle_minimap() {
 		delete m_minimap.window;
    }
 	else {
-		m_mm = new MiniMap(this, &m_minimap);
-      m_mm->get_minimapview()->warpview.set(this,
-            &Interactive_Base::minimap_warp);
+		m_mm = new MiniMap(*this, &m_minimap);
+		m_mm->warpview.set(this, &Interactive_Base::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
 		Point p = get_mapview()->get_viewpoint();

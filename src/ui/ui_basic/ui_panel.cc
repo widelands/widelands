@@ -48,8 +48,7 @@ _parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
 _flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
 _x(nx), _y(ny), _w(nw), _h(nh),
 _lborder(0), _rborder(0), _tborder(0), _bborder(0),
-_border_snap_distance(0), _panel_snap_distance(0),
-_tooltip(0)
+_border_snap_distance(0), _panel_snap_distance(0)
 {
 	if (_parent) {
 		_next = _parent->_fchild;
@@ -99,8 +98,6 @@ UIPanel::~UIPanel()
 		else
 			_parent->_lchild = _prev;
 	}
-
-	free(_tooltip);
 }
 
 
@@ -163,8 +160,7 @@ int UIPanel::run()
 			{
 				while (lowest->_mousein)
 					lowest = lowest->_mousein;
-				if (lowest->get_tooltip())
-					draw_tooltip(rt, lowest);
+				if (lowest->tooltip().size()) draw_tooltip(rt, lowest);
 			}
 
 			g_gr->refresh();
@@ -893,12 +889,7 @@ void UIPanel::ui_key(bool down, int code, char c)
 /**
  * Set the tooltip for the panel.
  */
-void UIPanel::set_tooltip(const char * const tooltip) {
-	if (tooltip != _tooltip) {
-		free(_tooltip);
-		_tooltip = tooltip ? strdup(tooltip) : 0;
-	}
-}
+void UIPanel::set_tooltip(const std::string & text) {_tooltip = text;}
 
 /** [private]
  * Draw the tooltip.
@@ -910,11 +901,17 @@ void UIPanel::draw_tooltip(RenderTarget* dst, UIPanel *lowest)
 	tooltipX = WLApplication::get()->get_mouse_x() + 20;
 	tooltipY = WLApplication::get()->get_mouse_y() + 25;
 
-	g_fh->get_size(UI_FONT_TOOLTIP, lowest->get_tooltip(), &tip_width, &tip_height, 0);
+	g_fh->get_size(UI_FONT_TOOLTIP, lowest->tooltip(), &tip_width, &tip_height, 0);
 	tip_width += 4;
 	tip_height += 4;
 
 	dst->fill_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(230,200,50));
 	dst->draw_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(0,0,0));
-	g_fh->draw_string(dst, UI_FONT_TOOLTIP, UI_FONT_TOOLTIP_CLR, tooltipX, tooltipY, lowest->get_tooltip(), Align_Left);
+	g_fh->draw_string
+		(dst,
+		 UI_FONT_TOOLTIP,
+		 UI_FONT_TOOLTIP_CLR,
+		 tooltipX, tooltipY,
+		 lowest->tooltip(),
+		 Align_Left);
 }

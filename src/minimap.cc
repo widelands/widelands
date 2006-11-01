@@ -26,7 +26,6 @@
 #include "mapviewpixelconstants.h"
 #include "minimap.h"
 #include "rendertarget.h"
-#include "ui_button.h"
 
 /*
 ==============================================================================
@@ -44,21 +43,21 @@ MiniMapView::MiniMapView
 Initialize the minimap object
 ===============
 */
-MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactive_Base *plr)
-	: UIPanel(parent, x, y, 10, 10)
+MiniMap::View::View
+(UIPanel & parent,
+ const  int x, const  int y,
+ const uint w, const uint h,
+ Interactive_Base & iabase)
+:
+UIPanel       (&parent, x, y, 10, 10),
+m_iabase      (iabase),
+m_viewx       (0),
+m_viewy       (0),
+m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
+flags         (MiniMap::Terrn)
 {
-	m_player = plr;
-	m_viewx = m_viewy = 0;
-   m_flags = Minimap_Terrain;
-
-	m_pic_map_spot = g_gr->get_picture( PicMod_Game,  "pics/map_spot.png" );
-
-   if (!w)
-		w = m_player->get_map()->get_width();
-   if (!h)
-		h = m_player->get_map()->get_height();
-
-   set_size(w, h);
+	const Map & map = *iabase.get_map();
+	set_size(w ? w : map.get_width(), h ? h : map.get_height());
 }
 
 
@@ -69,7 +68,7 @@ MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactiv
  * Args: x	new view point coordinates, in screen coordinates
  *       y
  */
-void MiniMapView::set_view_pos(int x, int y)
+void MiniMap::View::set_view_pos(const int x, const int y)
 {
 	m_viewx = x / TRIANGLE_WIDTH;
 	m_viewy = y / TRIANGLE_HEIGHT;
@@ -84,13 +83,13 @@ MiniMapView::draw
 Redraw the view of the map
 ===============
 */
-void MiniMapView::draw(RenderTarget* dst)
+void MiniMap::View::draw(RenderTarget* dst)
 {
 	dst->renderminimap
-		(*m_player->get_egbase(),
-		 m_player->get_visibility(),
+		(*m_iabase.get_egbase(),
+		 m_iabase.get_visibility(),
 		 Coords(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
-		 m_flags);
+		 flags);
 
 /*
 	// draw the view pos marker
@@ -112,7 +111,7 @@ MiniMapView::handle_mouseclick
 Left-press: warp the view point to the new position
 ===============
 */
-bool MiniMapView::handle_mousepress(const Uint8 btn, int x, int y) {
+bool MiniMap::View::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 		Coords c;
@@ -121,13 +120,15 @@ bool MiniMapView::handle_mousepress(const Uint8 btn, int x, int y) {
       c.x = m_viewx + 1 - (get_w() / 2) + x;
       c.y = m_viewy + 1 - (get_h() / 2) + y;
 
-		m_player->get_map()->normalize_coords(&c);
+	m_iabase.get_map()->normalize_coords(&c);
 
-		warpview.call(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
+	assert(dynamic_cast<const MiniMap * const>(get_parent()));
+	static_cast<const MiniMap * const>(get_parent())->warpview.call
+		(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;
 }
-bool MiniMapView::handle_mouserelease(const Uint8 btn, int, int)
+bool MiniMap::View::handle_mouserelease(const Uint8 btn, int, int)
 {return btn == SDL_BUTTON_LEFT;}
 
 
@@ -152,119 +153,51 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-MiniMap::MiniMap(Interactive_Base *plr, UIUniqueWindowRegistry *reg)
-	: UIUniqueWindow(plr, reg, 10, 10, _("Map"))
+inline uint MiniMap::number_of_buttons_per_row() const throw () {return 3;}
+inline uint MiniMap::number_of_button_rows    () const throw () {return 2;}
+inline uint MiniMap::but_w() const throw ()
+{return m_view.get_w() / number_of_buttons_per_row();}
+inline uint MiniMap::but_h() const throw () {return 20;}
+MiniMap::MiniMap(Interactive_Base & iabase, UIUniqueWindowRegistry * registry)
+:
+UIUniqueWindow(&iabase, registry, 0, 0, _("Map")),
+m_view(*this, 0, 0, 0, 0, iabase),
+button_terrn
+(this, but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Terrn),
+button_owner
+(this, but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Owner),
+button_flags
+(this, but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Flags),
+button_roads
+(this, but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(), 0, Roads),
+button_bldns
+(this, but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(), 0, Bldns)
 {
-	m_view = new MiniMapView(this, 0, 0, 0, 0, plr);
-   int button_width = (int) (m_view->get_w()/3);
-   int button_height = 20;
+	button_terrn.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"));
+	button_owner.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_owner.png"));
+	button_flags.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_flags.png"));
+	button_roads.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.png"));
+	button_bldns.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"));
 
-	m_flags = Minimap_Terrain;
-//	m_view->warpview.set(&warpview, &UISignal2<int,int>::call);
+	button_terrn.set_tooltip(_("Terrain"));
+	button_owner.set_tooltip(_("Owner"));
+	button_flags.set_tooltip(_("Flags"));
+	button_roads.set_tooltip(_("Roads"));
+	button_bldns.set_tooltip(_("Buildings"));
 
-	set_inner_size(m_view->get_w(), m_view->get_h() + 2 * button_height);
+	button_terrn.clickedid.set(this, &MiniMap::toggle);
+	button_owner.clickedid.set(this, &MiniMap::toggle);
+	button_flags.clickedid.set(this, &MiniMap::toggle);
+	button_roads.clickedid.set(this, &MiniMap::toggle);
+	button_bldns.clickedid.set(this, &MiniMap::toggle);
 
-	//set_cache(false); // testing
+	set_inner_size
+		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
 
-	UIButton* b=new UIButton(this, 0, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_color.png" ));
-	//b->set_title(_("col"));
-	b->clicked.set(this, &MiniMap::toggle_color);
-
-	b=new UIButton(this, button_width, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_ownedBy.png" ));
-	//b->set_title(_("own"));
-	b->clicked.set(this, &MiniMap::toggle_ownedBy);
-
-	b=new UIButton(this, 2*button_width, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_flags.png" ));
-	//b->set_title(_("Flags"));
-	b->clicked.set(this, &MiniMap::toggle_flags);
-
-	b=new UIButton(this, 0, m_view->get_h()+button_height, button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_roads.png" ));
-	//b->set_title(_("Roads"));
-	b->clicked.set(this, &MiniMap::toggle_roads);
-
-	b=new UIButton(this, button_width, m_view->get_h()+button_height, button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_building.png" ));
-	//b->set_title(_("Buildings"));
-	b->clicked.set(this, &MiniMap::toggle_buildings);
-
-	if (get_usedefaultpos())
-		center_to_parent();
+	if (get_usedefaultpos()) center_to_parent();
 }
 
-/*
-===============
-MiniMap::toggle_color
 
-Toggles "show Map Color"
-===============
-*/
-void MiniMap::toggle_color()
-{
-   m_flags = m_flags ^ Minimap_Terrain;
-   m_view->set_flags(m_flags );
-}
+//MiniMap::~MiniMap() {}
 
-/*
-===============
-MiniMap::toggle_ownedBy
-
-Toggles "show by who the land is owned"
-===============
-*/
-void MiniMap::toggle_ownedBy()
-{
-   m_flags = m_flags ^ Minimap_PlayerColor;
-   m_view->set_flags(m_flags );
-}
-
-/*
-===============
-MiniMap::toggle_flags
-
-Toggles "show flags
-===============
-*/
-void MiniMap::toggle_flags()
-{
-   m_flags = m_flags ^ Minimap_Flags;
-   m_view->set_flags(m_flags );
-}
-
-/*
-===============
-MiniMap::toggle_roads
-
-Toggles "show roads"
-===============
-*/
-void MiniMap::toggle_roads()
-{
-   m_flags = m_flags ^ Minimap_Roads;
-   m_view->set_flags(m_flags );
-}
-
-/*
-===============
-MiniMap::toggle_buildings
-
-Toggels "show buildings"
-===============
-*/
-void MiniMap::toggle_buildings()
-{
-   m_flags = m_flags ^ Minimap_Buildings;
-   m_view->set_flags(m_flags );
-}
-
-/** MiniMap::~MiniMap()
- *
- * Cleanup the minimap; unregister from the registry pointer
- */
-MiniMap::~MiniMap()
-{
-   delete m_view;
-}
+void MiniMap::toggle(int button) {m_view.flags ^= button;log("MiniMap::toggle: button = %i, m_view.flags = %i\n", button, m_view.flags);}

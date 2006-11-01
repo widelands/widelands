@@ -29,7 +29,6 @@
 class CoordPath;
 class Map_View;
 class MiniMap;
-class MiniMapView;
 
 /** class Interactive_Base
  *

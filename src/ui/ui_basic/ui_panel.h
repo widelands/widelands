@@ -27,6 +27,8 @@
 
 #include <SDL_stdinc.h>
 
+#include <string>
+
 class RenderTarget;
 
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
@@ -185,13 +187,13 @@ private:
 	bool _running;
 	int _retcode;
 
-	char * _tooltip;
+	std::string _tooltip;
 
 	void draw_tooltip(RenderTarget* dst, UIPanel *lowest);
 
 public:
-	void set_tooltip(const char * const);
-	char * get_tooltip() const {return _tooltip;}
+	void set_tooltip(const std::string &);
+	const std::string & tooltip() const throw () {return _tooltip;}
 
 
 private:

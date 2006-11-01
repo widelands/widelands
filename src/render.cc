@@ -215,15 +215,14 @@ static inline ulong calc_minimap_color
 {
 	ulong pixelcolor = 0;
 
-	if (flags & Minimap_Terrain)
-	{
+	if (flags & MiniMap::Terrn) {
 		pixelcolor =
 			get_graphicimpl()->
 			get_maptexture_data(f.field->get_terd().get_texture())->
 			get_minimap_color(f.field->get_brightness());
 	}
 
-	if (flags & Minimap_PlayerColor) { //  show owner
+	if (flags & MiniMap::Owner) {
 		if (f.field->get_owned_by() > 0) { //  If owned, get the player's color...
 			const RGBColor * const playercolors =
 				egbase.get_player(f.field->get_owned_by())->get_playercolor();
@@ -236,17 +235,17 @@ static inline ulong calc_minimap_color
 		}
 	}
 
-	if (flags & Minimap_Roads) { // show roads
+	if (flags & MiniMap::Roads) {
 		if (map.find_immovables(f, 0, 0, FindImmovableType(Map_Object::ROAD)))
 			pixelcolor = blend_color(fmt, pixelcolor, 255, 255, 255 );
 	}
 
-	if (flags & Minimap_Flags) { // show flags
+	if (flags & MiniMap::Flags) {
 		if (map.find_immovables(f, 0, 0, FindImmovableType(Map_Object::FLAG)))
 			pixelcolor = SDL_MapRGB( fmt, 255, 255, 255 );
 	}
 
-	if (flags & Minimap_Buildings) { // show buildings
+	if (flags & MiniMap::Bldns) {
 		if (map.find_immovables(f, 0, 0, FindImmovableType(Map_Object::BUILDING)))
 			pixelcolor = SDL_MapRGB( fmt, 255, 255, 255 );
 	}

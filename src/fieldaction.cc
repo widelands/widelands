@@ -208,7 +208,7 @@ private:
 	uint add_tab
 		(const char * picname,
 		 UIPanel * panel,
-		 const std::string & tooltip = std::string());
+		 const std::string & tooltip_text = std::string());
    void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 
@@ -606,10 +606,10 @@ Convenience function: Adds a new tab to the main tab panel
 ===============
 */
 uint FieldActionWindow::add_tab
-(const char * picname, UIPanel * panel, const std::string & tooltip)
+(const char * picname, UIPanel * panel, const std::string & tooltip_text)
 {
-	return
-		m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname), panel, tooltip);
+	return m_tabpanel->add
+		(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
 }
 
 
