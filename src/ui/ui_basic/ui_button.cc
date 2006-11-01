@@ -122,7 +122,10 @@ void UIButton::draw(RenderTarget* dst)
 		uint cpw, cph;
 		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 
-		dst->blit((get_w() - cpw) >> 1, (get_h() - cph) >> 1, m_pic_custom);
+		dst->blit
+			((get_w() - static_cast<const int>(cpw)) / 2,
+			 (get_h() - static_cast<const int>(cph)) / 2,
+			 m_pic_custom);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
 		{

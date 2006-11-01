@@ -198,6 +198,4 @@ button_bldns
 }
 
 
-//MiniMap::~MiniMap() {}
-
-void MiniMap::toggle(int button) {m_view.flags ^= button;log("MiniMap::toggle: button = %i, m_view.flags = %i\n", button, m_view.flags);}
+void MiniMap::toggle(int button) {m_view.flags ^= button;}
