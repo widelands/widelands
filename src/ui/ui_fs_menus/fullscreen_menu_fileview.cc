@@ -74,7 +74,7 @@ TextViewWindow
 ==============================================================================
 */
 
-FileViewWindow : public UI::UniqueWindow {
+struct FileViewWindow : public UI::UniqueWindow {
 	FileViewWindow
 		(UI::Panel * parent,
 		 UI::UniqueWindow::Registry * reg,

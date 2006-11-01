@@ -27,6 +27,9 @@
 #include "layeredfilesystem.h"
 #include "realfsimpl.h"
 #include <string>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <vector>
 #include "zip_filesystem.h"
 
@@ -386,6 +389,27 @@ const char *FileSystem::FS_Filename(const char* buf) {
 		--i;
 	}
 	return buf;
+}
+
+/**
+ * Create a filesystem from a zipfile or a real directory
+ * \todo Catch FileType_error in all users
+ */
+FileSystem *FileSystem::Create(std::string root) throw(FileType_error)
+{
+	struct stat statinfo;
+
+	stat(root.c_str(), &statinfo);
+
+	if(S_ISDIR(statinfo.st_mode)) {
+		return new RealFSImpl(root);
+	}
+
+	if(S_ISREG(statinfo.st_mode)) {
+		return new ZipFilesystem(root);
+	}
+
+	throw FileType_error("Can't create virtual filesystem from ", root);
 }
 
 /**

@@ -328,7 +328,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 
 		// Init input ware queues
 		const std::vector<Input>* inputs =
-			((ProductionSite_Descr*)get_descr())->get_inputs();
+			const_cast<ProductionSite_Descr*>(get_descr())->get_inputs();
 
 		for(uint i = 0; i < inputs->size(); i++) {
 			WaresQueue* wq = new WaresQueue(this);

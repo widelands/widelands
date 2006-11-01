@@ -20,6 +20,7 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
+#include "filesystem_exceptions.h"
 #include <set>
 #include <string>
 #include <stdexcept>
@@ -57,6 +58,7 @@ public:
 	virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
 	virtual void Unlink( std::string ) = 0;
 
+	static FileSystem *Create(std::string root) throw(FileType_error);
 	static FileSystem *CreateFromDirectory(std::string directory);
 	static FileSystem *CreateFromZip(std::string file);
 
@@ -79,19 +81,12 @@ protected:
 	///To get a filesystem, use the Create methods
 	FileSystem();
 
-	/**How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
-	 * \warning This is should \e not contain filesep!
-	 * \todo make protected */
+	///How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
+	///\warning This is should \e not contain filesep!
 	std::string m_root;
 
 	///Character used to separate filename components
-	///\todo make protected
 	char m_filesep;
-};
-
-class FileNotFound_error : public std::runtime_error {
-public:
-	FileNotFound_error(std::string s) : std::runtime_error(s) {}
 };
 
 #endif

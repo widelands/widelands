@@ -147,7 +147,9 @@ void Fullscreen_Menu_NetSetup::update_game_info (UI::Table_Entry* entry, const L
 
 void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game* game)
 {
-	update_game_info (new UI::Table_Entry(opengames, (void*) game), game->info);
+	update_game_info (new UI::Table_Entry(opengames,
+			                                (void*) const_cast<LAN_Open_Game*>(game)),
+	                  game->info);
 }
 
 void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game *) {}

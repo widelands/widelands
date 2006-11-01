@@ -143,7 +143,7 @@ void *LayeredFileSystem::Load(std::string fname, int *length)
 		return (*it)->Load(fname, length);
 	}
 
-	throw FileNotFound_error(fname);
+	throw FileNotFound_error("Could not find file", fname);
 }
 
 

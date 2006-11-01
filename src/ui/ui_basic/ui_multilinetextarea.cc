@@ -155,8 +155,6 @@ void Multiline_Textarea::draw_scrollbar() {
 
       if (setbottom || m_textpos > m_textheight - get_h())
          m_textpos = m_textheight - get_h();
-      if (m_textpos < 0)
-         m_textpos = 0;
 
       m_scrollbar->set_steps(m_textheight - get_h());
       m_scrollbar->set_pos(m_textpos);

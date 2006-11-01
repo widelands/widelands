@@ -29,6 +29,8 @@ SConscript('ui/ui_fs_menus/SConscript')
 
 INDENTLIST=[
 	'filesystem.h',
+	'filesystem_exceptions.h',
+	'filesystem_exceptions.cc',
 	'files.cc',
 	'fxset.h',
 	'fxset.cc',
