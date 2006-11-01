@@ -33,41 +33,41 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
 Create all the buttons etc...
 ===============
 */
-Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu(UIPanel *parent, Player* player, UIUniqueWindowRegistry* registry)
-   : UIUniqueWindow(parent, registry, 540, 400, _("Allowed Buildings"))
+Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu(UI::Panel *parent, Player* player, UI::UniqueWindow::Registry* registry)
+   : UI::UniqueWindow(parent, registry, 540, 400, _("Allowed Buildings"))
 {
    m_player=player;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Allowed Buildings Menu"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Allowed Buildings Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
-   // UIButtons
+   // UI::Buttons
    const int offsy=30;
    const int spacing=3;
    int posy=offsy;
 
    // Allowed List
-   new UITextarea(this, spacing, posy, get_inner_w()/2, 20, _("Allowed Buildings: "), Align_CenterLeft);
-   m_allowed=new UIListselect<void *>(this, spacing, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
+   new UI::Textarea(this, spacing, posy, get_inner_w()/2, 20, _("Allowed Buildings: "), Align_CenterLeft);
+   m_allowed=new UI::Listselect<void *>(this, spacing, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
    m_allowed->selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
    m_allowed->double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
 
    // Forbidden List
-   new UITextarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2, 20, _("Forbidden Buildings: "), Align_CenterLeft);
-   m_forbidden=new UIListselect<void *>(this, get_inner_w()/2+spacing+20, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
+   new UI::Textarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2, 20, _("Forbidden Buildings: "), Align_CenterLeft);
+   m_forbidden=new UI::Listselect<void *>(this, get_inner_w()/2+spacing+20, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
    m_forbidden->selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
    m_forbidden->double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
    // Left to right button
-   UIButton* b=new UIButton(this, get_inner_w()/2-20, posy+30, 40, 20, 1, 0);
+   UI::Button* b=new UI::Button(this, get_inner_w()/2-20, posy+30, 40, 20, 1, 0);
    b->clickedid.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::clicked);
    b->set_title("->");
    b->set_enabled(false);
    m_ltr_button=b;
 
    // Right to left button
-   b=new UIButton(this, get_inner_w()/2-20, posy+55, 40, 20, 1, 1);
+   b=new UI::Button(this, get_inner_w()/2-20, posy+55, 40, 20, 1, 1);
    b->clickedid.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::clicked);
    b->set_title("<-");
    b->set_enabled(false);
@@ -93,7 +93,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
 ===============
 Editor_Player_Menu_Allowed_Buildings_Menu::update()
 
-Updates all UITextareas in the UIWindow to represent currently
+Updates all UI::Textareas in the UI::Window to represent currently
 set values
 ==============
 */
@@ -116,7 +116,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::~Editor_Player_Menu_Allowed_Buildings
  * UI Action callback functions
  */
 void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(int i) {
-	UIListselect<void *> * source, * target;
+	UI::Listselect<void *> * source, * target;
    bool set_to;
 
    if(i==0) {

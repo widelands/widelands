@@ -48,7 +48,7 @@ constructor
 ===========
 */
 Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive* parent, int index,
-		Editor_Place_Immovable_Tool* pit, UIUniqueWindowRegistry* registry) :
+		Editor_Place_Immovable_Tool* pit, UI::UniqueWindow::Registry* registry) :
    Editor_Tool_Options_Menu(parent, index, registry, _("Immovable Bobs Menu").c_str()) {
    const int max_items_in_tab=6;
 
@@ -64,9 +64,9 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    if(immovables_in_row>max_items_in_tab) immovables_in_row=max_items_in_tab;
 
 
-   UITab_Panel* m_tabpanel=new UITab_Panel(this, 0, 0, 1);
+   UI::Tab_Panel* m_tabpanel=new UI::Tab_Panel(this, 0, 0, 1);
    m_tabpanel->set_snapparent(true);
-   UIBox* box=new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+   UI::Box* box=new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
    m_tabpanel->add(g_gr->get_picture(  PicMod_Game,  "pics/menu_tab_buildbig.png"  ), box );
 
 
@@ -92,12 +92,12 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
          ypos=ystart;
          xpos=xstart;
          box->resize();
-         box=new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+         box=new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
          m_tabpanel->add(g_gr->get_picture(  PicMod_Game,  "pics/menu_tab_buildbig.png"  ), box );
       }
 
 		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(i);
-      UICheckbox* cb= new UICheckbox(box, xpos, ypos,
+      UI::Checkbox* cb= new UI::Checkbox(box, xpos, ypos,
             g_gr->get_picture( PicMod_Game,  descr->get_picture() ));
 
       cb->set_size(width, height);

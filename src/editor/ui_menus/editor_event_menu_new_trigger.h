@@ -24,16 +24,17 @@
 
 class Editor_Interactive;
 class Trigger_Descr;
-template <typename T> struct UIListselect;
-class UIMultiline_Textarea;
-class UIButton;
+namespace UI {
+template <typename T> struct Listselect;
+struct Multiline_Textarea;
+struct Button;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Editor_Event_Menu_New_Trigger : public UIWindow {
-   public:
+struct Editor_Event_Menu_New_Trigger : public UI::Window {
       Editor_Event_Menu_New_Trigger(Editor_Interactive*);
       ~Editor_Event_Menu_New_Trigger();
 
@@ -45,10 +46,10 @@ class Editor_Event_Menu_New_Trigger : public UIWindow {
 	void selected      (uint);
 	void double_clicked(uint);
 
-	UIListselect<Trigger_Descr &> * m_trigger_list;
-      UIMultiline_Textarea* m_description;
+	UI::Listselect<Trigger_Descr &> * m_trigger_list;
+      UI::Multiline_Textarea* m_description;
       Editor_Interactive* m_parent;
-      UIButton* m_ok_button;
+      UI::Button* m_ok_button;
 };
 
 #endif

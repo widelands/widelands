@@ -23,23 +23,24 @@
 #include "ui_unique_window.h"
 
 class Player;
-template <typename T> struct UIListselect;
-class UIButton;
+namespace UI {
+template <typename T> struct Listselect;
+struct Button;
+};
 
 /*
  * Let's the user choose which buildings should be available
  * for this player for this scenario. Used to throttle AI and
  * to advance technology slowly through the missions
  */
-class Editor_Player_Menu_Allowed_Buildings_Menu : public UIUniqueWindow {
-   public:
-      Editor_Player_Menu_Allowed_Buildings_Menu(UIPanel* parent, Player* player, UIUniqueWindowRegistry* );
+struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
+      Editor_Player_Menu_Allowed_Buildings_Menu(UI::Panel* parent, Player* player, UI::UniqueWindow::Registry* );
       virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
 
    private:
       Player* m_player;
-      UIListselect<void *> * m_allowed, *m_forbidden;
-      UIButton* m_rtl_button, *m_ltr_button;
+      UI::Listselect<void *> * m_allowed, *m_forbidden;
+      UI::Button* m_rtl_button, *m_ltr_button;
 	void allowed_selected        (uint);
 	void forbidden_selected      (uint);
 	void allowed_double_clicked  (uint);

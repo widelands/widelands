@@ -26,10 +26,10 @@
 
 class Interactive_Base;
 
-struct MiniMap : public UIUniqueWindow {
-	MiniMap(Interactive_Base & parent, UIUniqueWindowRegistry *);
+struct MiniMap : public UI::UniqueWindow {
+	MiniMap(Interactive_Base & parent, UI::UniqueWindow::Registry *);
 
-	UISignal2<int, int> warpview;
+	UI::Signal2<int, int> warpview;
 
 	void set_view_pos(const int x, const int y) throw ()
 	{m_view.set_view_pos(x, y);}
@@ -48,9 +48,9 @@ private:
 	 * once.
 	 * The minimap always centers around the current viewpoint.
 	 */
-	struct View : public UIPanel {
+	struct View : public UI::Panel {
 		View
-			(UIPanel & parent,
+			(UI::Panel & parent,
 			 const  int x, const  int y,
 			 const uint w, const uint h,
 			 Interactive_Base &);
@@ -76,11 +76,11 @@ private:
 	uint but_h                    () const throw ();
 
 	View     m_view;
-	UIButton button_terrn;
-	UIButton button_owner;
-	UIButton button_flags;
-	UIButton button_roads;
-	UIButton button_bldns;
+	UI::Button button_terrn;
+	UI::Button button_owner;
+	UI::Button button_flags;
+	UI::Button button_roads;
+	UI::Button button_bldns;
    char     m_flags;
 };
 

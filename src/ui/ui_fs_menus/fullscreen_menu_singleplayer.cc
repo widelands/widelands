@@ -28,25 +28,25 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter);
+   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 90, 220, 200, 26, 1, New_Game);
+	b = new UI::Button(this, 90, 220, 200, 26, 1, New_Game);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("New Game").c_str());
 
-	b = new UIButton(this, 90, 260, 200, 26, 1, Tutorial_Campaign);
+	b = new UI::Button(this, 90, 260, 200, 26, 1, Tutorial_Campaign);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("Tutorial Campaign").c_str());
 
-	b = new UIButton(this, 90, 300, 200, 26, 1, Load_Game);
+	b = new UI::Button(this, 90, 300, 200, 26, 1, Load_Game);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("Load Game").c_str());
 
-	b = new UIButton(this, 90, 400, 200, 26, 0, Back);
+	b = new UI::Button(this, 90, 400, 200, 26, 0, Back);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title(_("Back").c_str());
 }

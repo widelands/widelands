@@ -24,9 +24,10 @@
 #include "types.h"
 #include "ui_panel.h"
 
+namespace UI {
 /**
  *
- * UIWindows are cached by default.
+ * Windows are cached by default.
  *
  * The graphics (see m_pic_*) are used in the following manner: (Example)
  *
@@ -44,10 +45,9 @@
  * the window is only the caption bar, nothing inside. Another click on this bar resizes the window again
  */
 
-class UIWindow : public UIPanel {
-public:
-	UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title);
-	~UIWindow();
+struct Window : public Panel {
+	Window(Panel *parent, int x, int y, uint w, uint h, const char *title);
+	~Window();
 
 	void set_title(const char *text);
 
@@ -84,6 +84,7 @@ private:
 	uint	m_pic_top;
 	uint	m_pic_bottom;
 	uint	m_pic_background;
+};
 };
 
 #endif

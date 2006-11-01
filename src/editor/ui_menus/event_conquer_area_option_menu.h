@@ -24,16 +24,17 @@
 
 class Editor_Interactive;
 class Event_Conquer_Area;
-class UIEdit_Box;
-class UICheckbox;
-class UITextarea;
+namespace UI {
+struct Edit_Box;
+struct Checkbox;
+struct Textarea;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Event_Conquer_Area_Option_Menu : public UIWindow {
-   public:
+struct Event_Conquer_Area_Option_Menu : public UI::Window {
       Event_Conquer_Area_Option_Menu(Editor_Interactive*, Event_Conquer_Area*);
       ~Event_Conquer_Area_Option_Menu();
 
@@ -46,9 +47,9 @@ class Event_Conquer_Area_Option_Menu : public UIWindow {
 
       Event_Conquer_Area* m_event;
       Editor_Interactive* m_parent;
-      UITextarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
-      UICheckbox *m_enable;
-      UIEdit_Box* m_name;
+      UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
+      UI::Checkbox *m_enable;
+      UI::Edit_Box* m_name;
       int         m_x, m_y, m_player, m_area;
 };
 

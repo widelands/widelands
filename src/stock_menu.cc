@@ -26,9 +26,9 @@
 #include "transport.h"
 
 Stock_Menu::Stock_Menu
-(Interactive_Player & plr, UIUniqueWindowRegistry & registry)
+(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
-UIUniqueWindow(&plr, &registry, 640, 480, _("Stock")),
+UI::UniqueWindow(&plr, &registry, 640, 480, _("Stock")),
 m_player(plr),
 waresdisplay(this, 0, 0, plr.get_game(), plr.get_player()),
 help        (this, 0, 0, buttonw(3),                  30, 4),

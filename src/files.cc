@@ -476,7 +476,7 @@ void setup_searchpaths(const std::string argv0)
 	}
 
 	// finally, the user's config directory
-	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
+	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
 #ifndef	__WIN32__
 	std::string path;
 	char *buf=getenv("HOME"); //do not use GetHomedir() to not accidentally create ./.widelands

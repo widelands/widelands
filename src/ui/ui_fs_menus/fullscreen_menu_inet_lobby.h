@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,9 +24,11 @@
 #include <vector>
 #include "fullscreen_menu_base.h"
 
-class UIEdit_Box;
-class UIMultiline_Textarea;
-template <typename T> struct UIListselect;
+namespace UI {
+struct Edit_Box;
+struct Multiline_Textarea;
+template <typename T> struct Listselect;
+};
 class Game_Server_Connection;
 
 /*
@@ -50,9 +52,9 @@ class Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 
 	private:
       Game_Server_Connection* m_gsc;
-		UIEdit_Box*	m_chatbox;
-      UIMultiline_Textarea* m_chatarea;
-      UIListselect<void *> * m_userlist;
+		UI::Edit_Box*	m_chatbox;
+      UI::Multiline_Textarea* m_chatarea;
+      UI::Listselect<void *> * m_userlist;
       bool  m_disconnect_expected;
 
    private:

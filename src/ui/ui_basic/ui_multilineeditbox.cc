@@ -29,12 +29,13 @@
 #include "error.h"
 #include "wlapplication.h"
 
+namespace UI {
 /**
 Initialize a edibox that supports multiline strings.
 */
-UIMultiline_Editbox::UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, uint h,
+Multiline_Editbox::Multiline_Editbox(Panel *parent, int x, int y, uint w, uint h,
                                        const char *text)
-   : UIMultiline_Textarea(parent, x, y, w, h, text, Align_Left, true) {
+   : Multiline_Textarea(parent, x, y, w, h, text, Align_Left, true) {
    m_maxchars=0xffff;
 
    set_scrollmode(ScrollLog);
@@ -51,14 +52,14 @@ UIMultiline_Editbox::UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, 
 /**
 Free allocated resources
 */
-UIMultiline_Editbox::~UIMultiline_Editbox() {
+Multiline_Editbox::~Multiline_Editbox() {
    changed.call();
 }
 
 /**
 a key event must be handled
 */
-bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
+bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
    m_needs_update=true;
 
@@ -76,7 +77,7 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
          case KEY_DELETE:
             if(txt.size() && m_cur_pos<txt.size()) {
                txt.erase(txt.begin() + m_cur_pos);
-               UIMultiline_Textarea::set_text(txt.c_str());
+               Multiline_Textarea::set_text(txt.c_str());
             }
             break;
 
@@ -140,10 +141,10 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
                txt.insert(m_cur_pos,1,c);
                m_cur_pos++;
             }
-            UIMultiline_Textarea::set_text(txt.c_str());
+            Multiline_Textarea::set_text(txt.c_str());
             break;
       }
-      UIMultiline_Textarea::set_text(txt.c_str());
+      Multiline_Textarea::set_text(txt.c_str());
       changed.call();
       return true;
    }
@@ -154,22 +155,22 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
 /*
  * handle mousebutton events
  */
-bool UIMultiline_Editbox::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
       focus();
-      UIMultiline_Textarea::set_text(get_text().c_str());
+      Multiline_Textarea::set_text(get_text().c_str());
       changed.call();
       return true;
    }
-	return UIMultiline_Textarea::handle_mousepress(btn, x, y);
+	return Multiline_Textarea::handle_mousepress(btn, x, y);
 }
-bool UIMultiline_Editbox::handle_mouserelease(const Uint8, int, int)
+bool Multiline_Editbox::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /**
 Redraw the Editbox
 */
-void UIMultiline_Editbox::draw(RenderTarget* dst)
+void Multiline_Editbox::draw(RenderTarget* dst)
 {
    // make the whole area a bit darker
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
@@ -180,7 +181,7 @@ void UIMultiline_Editbox::draw(RenderTarget* dst)
 			 m_fontsize,
 			 m_fcolor,
 			 RGBColor(107,87,55),
-			 UIMultiline_Editbox::get_halign(),
+			 Multiline_Editbox::get_halign(),
 			 0 - m_textpos,
 			 get_text().c_str(),
 			 m_align,
@@ -190,19 +191,20 @@ void UIMultiline_Editbox::draw(RenderTarget* dst)
 			 (has_focus() ? static_cast<const int>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
       m_cache_mode = Widget_Cache_Use;
    }
-   UIMultiline_Textarea::draw_scrollbar();
+   Multiline_Textarea::draw_scrollbar();
 }
 
 /*
  * Set text function needs to take care of the current
  * position
  */
-void UIMultiline_Editbox::set_text(const char* str) {
+void Multiline_Editbox::set_text(const char* str) {
    if(strlen(str))
       m_cur_pos=strlen(str);
    else
       m_cur_pos=0;
 
-   UIMultiline_Textarea::set_text(str);
+   Multiline_Textarea::set_text(str);
 
 }
+};

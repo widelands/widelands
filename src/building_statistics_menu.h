@@ -23,29 +23,30 @@
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UIButton;
-class UIProgress_Bar;
-class UITextarea;
-class UITable;
+namespace UI {
+struct Button;
+struct Progress_Bar;
+struct Textarea;
+struct Table;
+};
 
-class Building_Statistics_Menu : public UIUniqueWindow {
-   public:
-	Building_Statistics_Menu(Interactive_Player &, UIUniqueWindowRegistry &);
+struct Building_Statistics_Menu : public UI::UniqueWindow {
+	Building_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
       virtual ~Building_Statistics_Menu(void);
 
       void think(void);
       void draw(RenderTarget*);
 
    private:
-      UITable*            m_table;
+      UI::Table*            m_table;
       Interactive_Player* m_parent;
-      UIProgress_Bar*     m_progbar;
-      UITextarea*         m_owned, *m_build;
+      UI::Progress_Bar*     m_progbar;
+      UI::Textarea*         m_owned, *m_build;
       uint                m_anim;
       uint                m_lastupdate;
       uint                m_end_of_table_y;
       int                 m_selected;
-      UIButton*           m_btn[6];
+      UI::Button*           m_btn[6];
       int                 m_last_building_index;
 
    private:

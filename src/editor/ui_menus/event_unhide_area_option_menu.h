@@ -24,15 +24,16 @@
 
 class Editor_Interactive;
 class Event_Unhide_Area;
-class UIEdit_Box;
-class UITextarea;
+namespace UI {
+struct Edit_Box;
+struct Textarea;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Event_Unhide_Area_Option_Menu : public UIWindow {
-   public:
+struct Event_Unhide_Area_Option_Menu : public UI::Window {
       Event_Unhide_Area_Option_Menu(Editor_Interactive*, Event_Unhide_Area*);
       ~Event_Unhide_Area_Option_Menu();
 
@@ -45,8 +46,8 @@ class Event_Unhide_Area_Option_Menu : public UIWindow {
 
       Event_Unhide_Area* m_event;
       Editor_Interactive* m_parent;
-      UITextarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
-      UIEdit_Box* m_name;
+      UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
+      UI::Edit_Box* m_name;
       int         m_x, m_y, m_player, m_area;
 };
 

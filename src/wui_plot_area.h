@@ -29,7 +29,7 @@
  * X Axis as time (actually Minus Time)
  * and the Y Axis some Data
  */
-class WUIPlot_Area : public UIPanel {
+class WUIPlot_Area : public UI::Panel {
    public:
       enum TIME {
          TIME_15_MINS = 0,
@@ -47,7 +47,7 @@ class WUIPlot_Area : public UIPanel {
       };
 
    public:
-      WUIPlot_Area(UIPanel* parent, int x, int y, int w, int h);
+      WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h);
       ~WUIPlot_Area(void);
 
       // Functions from the User Interface

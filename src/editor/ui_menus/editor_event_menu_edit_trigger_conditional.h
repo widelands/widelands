@@ -24,17 +24,17 @@
 #include "trigger_conditional.h"
 
 class Editor_Interactive;
-//class EventChain;
-template <typename T> struct UIListselect;
-class UIButton;
 class TriggerConditional;
+namespace UI {
+template <typename T> struct Listselect;
+struct Button;
+}
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
-   public:
+struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
       Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive*, TriggerConditional*, EventChain*  );
       ~Editor_Event_Menu_Edit_TriggerConditional();
 
@@ -55,13 +55,13 @@ class Editor_Event_Menu_Edit_TriggerConditional : public UIWindow {
 	void cs_selected        (uint);
 	void cs_double_clicked  (uint);
 
-      UIListselect<Trigger                           &> *m_trigger_list;
-      UIListselect<TriggerConditional_Factory::Token &> *m_construction;
+      UI::Listselect<Trigger                           &> *m_trigger_list;
+      UI::Listselect<TriggerConditional_Factory::Token &> *m_construction;
       Editor_Interactive *m_parent;
-      UIButton           *m_insert_btn;
-      UIButton           *m_delete_btn;
-      UIButton           *m_mvup_btn;
-      UIButton           *m_mvdown_btn;
+      UI::Button           *m_insert_btn;
+      UI::Button           *m_delete_btn;
+      UI::Button           *m_mvup_btn;
+      UI::Button           *m_mvdown_btn;
       TriggerConditional *m_given_cond;
       EventChain         *m_event_chain;
 };

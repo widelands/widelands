@@ -44,31 +44,31 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *, bool)
 	: Fullscreen_Menu_Base("choosemapmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, _("Choose saved game!"), Align_HCenter);
+   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 90, _("Choose saved game!"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 570, 505, 200, 26, 0, 0);
+	b = new UI::Button(this, 570, 505, 200, 26, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_LoadGame::end_modal);
 	b->set_title("Back");
 
-	m_ok = new UIButton(this, 570, 535, 200, 26, 2, 0);
+	m_ok = new UI::Button(this, 570, 535, 200, 26, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LoadGame::ok);
 	m_ok->set_title(_("OK").c_str());
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new UIListselect<const char * const>(this, 15, 205, 455, 365);
+	list = new UI::Listselect<const char * const>(this, 15, 205, 455, 365);
 	list->selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
    list->double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
 
 	// Info fields
-	new UITextarea(this, 560, 205, _("Map Name:"), Align_Right);
-	tamapname = new UITextarea(this, 570, 205, "");
-	new UITextarea(this, 560, 225, _("Gametime:"), Align_Right);
-	tagametime = new UITextarea(this, 570, 225, "");
+	new UI::Textarea(this, 560, 205, _("Map Name:"), Align_Right);
+	tamapname = new UI::Textarea(this, 570, 205, "");
+	new UI::Textarea(this, 560, 225, _("Gametime:"), Align_Right);
+	tagametime = new UI::Textarea(this, 570, 225, "");
 
    fill_list();
 }

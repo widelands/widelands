@@ -26,24 +26,25 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class UITextarea;
-class UIEdit_Box;
-class UIButton;
+namespace UI {
+struct Textarea;
+struct Edit_Box;
+struct Button;
+};
 
-class Editor_Player_Menu : public UIUniqueWindow {
-   public:
-      Editor_Player_Menu(Editor_Interactive*, Editor_Interactive::Editor_Tools*, int spt_tool_index, int make_infrs_tindex, UIUniqueWindowRegistry*);
+struct Editor_Player_Menu : public UI::UniqueWindow {
+      Editor_Player_Menu(Editor_Interactive*, Editor_Interactive::Editor_Tools*, int spt_tool_index, int make_infrs_tindex, UI::UniqueWindow::Registry*);
       virtual ~Editor_Player_Menu() { }
 
    private:
-      UIUniqueWindowRegistry m_allow_buildings_menu;
+      UI::UniqueWindow::Registry m_allow_buildings_menu;
       Editor_Interactive* m_parent;
-      UITextarea *m_nr_of_players_ta;
-      UIEdit_Box* m_plr_names[MAX_PLAYERS];
-      UIButton* m_plr_allowed_buildings[MAX_PLAYERS];
-      UIButton* m_plr_make_infrastructure_buts[MAX_PLAYERS];
-      UIButton* m_plr_set_pos_buts[MAX_PLAYERS];
-      UIButton* m_plr_set_tribes_buts[MAX_PLAYERS];
+      UI::Textarea *m_nr_of_players_ta;
+      UI::Edit_Box* m_plr_names[MAX_PLAYERS];
+      UI::Button* m_plr_allowed_buildings[MAX_PLAYERS];
+      UI::Button* m_plr_make_infrastructure_buts[MAX_PLAYERS];
+      UI::Button* m_plr_set_pos_buts[MAX_PLAYERS];
+      UI::Button* m_plr_set_tribes_buts[MAX_PLAYERS];
       std::vector<std::string> m_tribes;
 
       Editor_Interactive::Editor_Tools* m_tools;

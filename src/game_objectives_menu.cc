@@ -25,9 +25,9 @@
 #include "util.h"
 
 GameObjectivesMenu::GameObjectivesMenu
-(Interactive_Player & plr, UIUniqueWindowRegistry & registry, Game & game)
+(Interactive_Player & plr, UI::UniqueWindow::Registry & registry, Game & game)
 :
-UIUniqueWindow
+UI::UniqueWindow
 (&plr, &registry, 340, 5 + 60 + 5 + 150 + 5, _("Objectives Menu")),
 list         (this, 5,  5, get_inner_w() - 10,  60, Align_Left, false),
 objectivetext(this, 5, 70, get_inner_w() - 10, 150, "", Align_Left, 1)

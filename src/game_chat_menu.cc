@@ -47,10 +47,10 @@ Create all the buttons etc...
 */
 GameChatMenu::GameChatMenu
 (Interactive_Player & plr,
- UIUniqueWindowRegistry & registry,
+ UI::UniqueWindow::Registry & registry,
  NetGame * netgame)
 :
-UIUniqueWindow
+UI::UniqueWindow
 (&plr, &registry,
  340, 5 + 150 + 5 + 85 + 5 + STATEBOX_HEIGHT + 5,
  _("Chat Menu")),

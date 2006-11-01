@@ -23,12 +23,12 @@
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UIButton;
+class UI::Button;
 class WUIPlot_Area;
 
-class Ware_Statistics_Menu : public UIUniqueWindow {
+class Ware_Statistics_Menu : public UI::UniqueWindow {
    public:
-	Ware_Statistics_Menu(Interactive_Player &, UIUniqueWindowRegistry &);
+	Ware_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
       virtual ~Ware_Statistics_Menu(void);
 
 

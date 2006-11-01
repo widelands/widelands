@@ -54,17 +54,17 @@ BuildGrid IMPLEMENTATION
 
 
 // The BuildGrid presents a selection of buildable buildings
-class BuildGrid : public UIIcon_Grid {
+class BuildGrid : public UI::Icon_Grid {
 public:
 	BuildGrid
-		(UIPanel* parent,
+		(UI::Panel* parent,
 		 const Tribe_Descr & tribe,
 		 const int x, const int y,
 		 int cols);
 
-	UISignal1<long> buildclicked;
-	UISignal1<long> buildmouseout;
-	UISignal1<long> buildmousein;
+	UI::Signal1<long> buildclicked;
+	UI::Signal1<long> buildmouseout;
+	UI::Signal1<long> buildmousein;
 
 	void add(int id);
 
@@ -86,12 +86,12 @@ Initialize the grid
 ===============
 */
 BuildGrid::BuildGrid
-(UIPanel* parent,
+(UI::Panel* parent,
  const Tribe_Descr & tribe,
  const int x, const int y,
  int cols)
 :
-UIIcon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
+UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
 m_tribe(tribe)
 {
 	clicked.set(this, &BuildGrid::clickslot);
@@ -112,7 +112,7 @@ void BuildGrid::add(int id)
 	Building_Descr* descr = m_tribe.get_building_descr(id);
 	uint picid = descr->get_buildicon();
 
-	UIIcon_Grid::add(picid, (void*)id, descr->get_descname());
+	UI::Icon_Grid::add(picid, (void*)id, descr->get_descname());
 }
 
 
@@ -173,9 +173,9 @@ FieldActionWindow IMPLEMENTATION
 ==============================================================================
 */
 static const size_t number_of_workarea_pics = 3;
-class FieldActionWindow : public UIUniqueWindow {
+class FieldActionWindow : public UI::UniqueWindow {
 public:
-	FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry);
+	FieldActionWindow(Interactive_Base *iabase, Player* plr, UI::UniqueWindow::Registry *registry);
 	~FieldActionWindow();
 
 	void init();
@@ -207,9 +207,9 @@ public:
 private:
 	uint add_tab
 		(const char * picname,
-		 UIPanel * panel,
+		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
-   void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
+   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 
 	Interactive_Base    *m_iabase;
@@ -219,14 +219,14 @@ private:
 
 	FCoords		m_field;
 
-	UITab_Panel*	m_tabpanel;
+	UI::Tab_Panel*	m_tabpanel;
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 	uint m_best_tab;
 	int m_workarea_preview_job_id;
 	unsigned int workarea_cumulative_picid[number_of_workarea_pics + 1];
 
    /// Variables to use with attack dialog
-   UITextarea* m_text_attackers;
+   UI::Textarea* m_text_attackers;
    uint     m_attackers;      // 0 - Number of available soldiers.
    int      m_attackers_type; // STRONGEST - WEAKEST ...
 };
@@ -271,8 +271,8 @@ Initialize a field action window, creating the appropriate buttons.
 ===============
 */
 FieldActionWindow::FieldActionWindow
-(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry) :
-	UIUniqueWindow(iabase, registry, 68, 34, _("Action")),
+(Interactive_Base *iabase, Player* plr, UI::UniqueWindow::Registry *registry) :
+	UI::UniqueWindow(iabase, registry, 68, 34, _("Action")),
 	m_iabase(iabase),
 	m_plr(plr),
 	m_map(iabase->get_egbase()->get_map()),
@@ -287,7 +287,7 @@ FieldActionWindow::FieldActionWindow
 	iabase->set_fieldsel_freeze(true);
 
 	//
-	m_tabpanel = new UITab_Panel(this, 0, 0, 1);
+	m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
 	m_tabpanel->set_snapparent(true);
    m_text_attackers = 0;
 
@@ -332,7 +332,7 @@ void FieldActionWindow::init()
 {
 	m_tabpanel->resize();
 
-	center_to_parent(); // override UIUniqueWindow position
+	center_to_parent(); // override UI::UniqueWindow position
 
 	// Move the window away from the current mouse position, i.e.
 	// where the field is, to allow better view
@@ -362,10 +362,10 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto()
 {
-	UIBox* buildbox = 0;
-	UIBox* watchbox;
+	UI::Box* buildbox = 0;
+	UI::Box* watchbox;
 
-	watchbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+	watchbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_plr->get_player_number()) {
@@ -373,7 +373,7 @@ void FieldActionWindow::add_buttons_auto()
 		BaseImmovable *imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
-		buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+		buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 		if (imm && imm->get_type() == Map_Object::FLAG)
 		{
@@ -413,7 +413,7 @@ void FieldActionWindow::add_buttons_auto()
       //add_buttons_attack (); FIXME disabled until attack works
 /*      BaseImmovable *imm = m_map->get_immovable(m_field);
       // The box with road-building buttons
-      buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+      buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
       if (imm && imm->get_type() == Map_Object::FLAG)
       {
@@ -454,7 +454,7 @@ void FieldActionWindow::add_buttons_auto()
 
 void FieldActionWindow::add_buttons_attack ()
 {
-   UIBox* attackbox = 0;
+   UI::Box* attackbox = 0;
 
       // Add attack button
    if (m_field.field->get_owned_by() != m_plr->get_player_number())
@@ -463,7 +463,7 @@ void FieldActionWindow::add_buttons_attack ()
       BaseImmovable *imm = m_map->get_immovable(m_field);
 
          // The box with attack buttons
-      attackbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+      attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
       if (imm && imm->get_type() == Map_Object::BUILDING)
       {
@@ -481,8 +481,8 @@ void FieldActionWindow::add_buttons_attack ()
             m_attackers_type = STRONGEST;
             add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less);
 
-            m_text_attackers = new UITextarea(attackbox, 90, 0, "000/000", Align_Center);
-            attackbox->add(m_text_attackers, UIBox::AlignTop);
+            m_text_attackers = new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
+            attackbox->add(m_text_attackers, UI::Box::AlignTop);
 
             add_button(attackbox, pic_attack_more, &FieldActionWindow::act_attack_more);
 
@@ -585,7 +585,7 @@ Buttons used during road building: Set flag here and Abort
 */
 void FieldActionWindow::add_buttons_road(bool flag)
 {
-	UIBox* buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+	UI::Box* buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	if (flag)
 		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
@@ -606,7 +606,7 @@ Convenience function: Adds a new tab to the main tab panel
 ===============
 */
 uint FieldActionWindow::add_tab
-(const char * picname, UIPanel * panel, const std::string & tooltip_text)
+(const char * picname, UI::Panel * panel, const std::string & tooltip_text)
 {
 	return m_tabpanel->add
 		(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
@@ -618,13 +618,13 @@ uint FieldActionWindow::add_tab
 FieldActionWindow::add_button
 ===============
 */
-void FieldActionWindow::add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)())
+void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)())
 {
-	UIButton *b = new UIButton(box, 0, 0, 34, 34, 2);
+	UI::Button *b = new UI::Button(box, 0, 0, 34, 34, 2);
 	b->clicked.set(this, fn);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  picname ));
 
-	box->add(b, UIBox::AlignTop);
+	box->add(b, UI::Box::AlignTop);
 }
 
 /*
@@ -995,7 +995,7 @@ Perform a field action (other than building options).
 Bring up a field action window or continue road building.
 ===============
 */
-void show_field_action(Interactive_Base *iabase, Player* player, UIUniqueWindowRegistry *registry)
+void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindow::Registry *registry)
 {
 	FieldActionWindow *faw;
 

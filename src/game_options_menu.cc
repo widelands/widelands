@@ -33,10 +33,10 @@
 
 GameOptionsMenu::GameOptionsMenu
 (Interactive_Player & plr,
- UIUniqueWindowRegistry & registry,
+ UI::UniqueWindow::Registry & registry,
  Interactive_Player::Game_Main_Menu_Windows & windows)
 :
-UIUniqueWindow
+UI::UniqueWindow
 (&plr, &registry,
  102,
  vmargin()

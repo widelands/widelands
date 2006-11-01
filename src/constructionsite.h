@@ -93,8 +93,8 @@ public:
    void log_general_info(Editor_Game_Base* egbase);
 
 protected:
-	virtual UIWindow* create_options_window(Interactive_Player* plr,
-		UIWindow** registry);
+	virtual UI::Window* create_options_window(Interactive_Player* plr,
+		UI::Window** registry);
 
 	void request_builder(Game* g);
 	static void request_builder_callback(Game* g, Request* rq, int ware,

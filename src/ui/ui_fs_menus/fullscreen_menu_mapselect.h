@@ -24,13 +24,14 @@
 #include "fullscreen_menu_base.h"
 #include "ui_listselect.h"
 
+class Editor_Game_Base;
 class Map;
 class Map_Loader;
-class UIButton;
-class UIMultiline_Textarea;
-class UITextarea;
-class Map_Loader;
-class Editor_Game_Base;
+namespace UI {
+struct Button;
+struct Multiline_Textarea;
+struct Textarea;
+};
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
@@ -38,14 +39,14 @@ class Editor_Game_Base;
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	Editor_Game_Base		*egbase;
 
-	UIListselect<const char * const> *list;
-	UITextarea *taname;
-	UITextarea *taauthor;
-	UITextarea *tasize;
-	UITextarea *taworld;
-	UITextarea *tanplayers;
-	UIMultiline_Textarea *tadescr;
-	UIButton *m_ok;
+	UI::Listselect<const char * const> *list;
+	UI::Textarea *taname;
+	UI::Textarea *taauthor;
+	UI::Textarea *tasize;
+	UI::Textarea *taworld;
+	UI::Textarea *tanplayers;
+	UI::Multiline_Textarea *tadescr;
+	UI::Button *m_ok;
 
 	filenameset_t	m_mapfiles;
 

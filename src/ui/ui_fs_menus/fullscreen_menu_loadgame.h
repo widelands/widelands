@@ -28,10 +28,12 @@ class Game;
 class Map;
 class Map_Loader;
 class RenderTarget;
-class UIButton;
-template <typename T> struct UIListselect;
-class UIMultiline_Textarea;
-class UITextarea;
+namespace UI {
+struct Button;
+template <typename T> struct Listselect;
+struct Multiline_Textarea;
+struct Textarea;
+};
 
 /**
  * Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu
@@ -39,10 +41,10 @@ class UITextarea;
 class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	Game* game;
 
-	UIListselect<const char * const> *list;
-	UITextarea *tamapname;
-	UITextarea *tagametime;
-	UIButton *m_ok;
+	UI::Listselect<const char * const> *list;
+	UI::Textarea *tamapname;
+	UI::Textarea *tagametime;
+	UI::Button *m_ok;
    std::string m_filename;
 
 	filenameset_t	m_gamefiles;

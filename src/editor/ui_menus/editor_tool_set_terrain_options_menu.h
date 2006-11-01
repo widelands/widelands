@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,22 +25,23 @@
 
 class Editor_Interactive;
 class Editor_Set_Both_Terrain_Tool;
-class UITextarea;
-class UICheckbox;
+namespace UI {
+struct Textarea;
+struct Checkbox;
+};
 
-class Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Menu {
-   public:
+struct Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Menu {
       Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive*, int, Editor_Set_Both_Terrain_Tool*,
-		                                          UIUniqueWindowRegistry* );
+		                                          UI::UniqueWindow::Registry* );
       virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu() ;
 
    private:
       std::vector<uint> m_surfaces;
-      UITextarea* m_textarea;
+      UI::Textarea* m_textarea;
       Editor_Set_Both_Terrain_Tool* m_sbt;
       void selected(int,bool);
       void do_nothing(int,bool);
-      std::vector<UICheckbox*> m_checkboxes;
+      std::vector<UI::Checkbox*> m_checkboxes;
 };
 
 

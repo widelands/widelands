@@ -22,32 +22,33 @@
 
 #include "ui_window.h"
 
-class UIPanel;
-class UIUniqueWindow;
-
-struct UIUniqueWindowRegistry {
-   UIUniqueWindow*	window;
-   int				x, y;
-
-   inline UIUniqueWindowRegistry() : window(0), x(-1), y(-1) { }
-   ~UIUniqueWindowRegistry();
-};
+namespace UI {
+struct Panel;
 
 
 /**
   can only be created once, when it is requested to
   open a second one, it will implicitly kill the old one
   */
-class UIUniqueWindow : public UIWindow {
-   public:
-      UIUniqueWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, int w, int h, std::string title);
-      virtual ~UIUniqueWindow();
+struct UniqueWindow : public Window {
+
+	struct Registry {
+		UniqueWindow * window;
+		int x, y;
+
+		Registry() : window(0), x(-1), y(-1) { }
+		~Registry();
+	};
+
+      UniqueWindow(Panel* parent, Registry* reg, int w, int h, std::string title);
+      virtual ~UniqueWindow();
 
       inline bool get_usedefaultpos() { return m_usedefaultpos; }
 
    private:
-      UIUniqueWindowRegistry*	m_registry;
+	Registry * m_registry;
       bool							m_usedefaultpos;
+};
 };
 
 #endif

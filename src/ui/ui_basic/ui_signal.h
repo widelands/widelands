@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,27 +22,28 @@
 
 #include "ui_object.h"
 
+namespace UI {
 /**
  * Provides a hook for callback function.
- * This is exactly what register_func used to provide but for UIPanel
+ * This is exactly what register_func used to provide but for Panel
  * member functions and with better type checking.
  *
  * Use as:
- *		UISignal signal;
- *		UISignal1<int> signal1;
+ *		Signal signal;
+ *		Signal1<int> signal1;
  *
  *		foo->signal.set(this, &MyClass::Handler);
  *		signal.call();
  *		signal1.call(some_int);
  */
-class UISignal : public UIObject {
-	typedef void (UIObject::*fnT)();
-	UIObject *_obj;
+class Signal : public Object {
+	typedef void (Object::*fnT)();
+	Object *_obj;
 	fnT _fn;
 public:
-	UISignal() { _obj = 0; _fn = 0; }
+	Signal() { _obj = 0; _fn = 0; }
 	template<class T>
-	void set(UIObject *p, void (T::*f)()) {
+		void set(Object *p, void (T::*f)()) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
@@ -53,17 +54,17 @@ public:
 };
 
 /**
- * See UISignal
+ * See Signal
  */
 template<class T1>
-class UISignal1 : public UIObject {
-	typedef void (UIObject::*fnT)(T1);
-	UIObject *_obj;
+class Signal1 : public Object {
+	typedef void (Object::*fnT)(T1);
+	Object *_obj;
 	fnT _fn;
 public:
-	UISignal1() { _obj = 0; _fn = 0; }
+	Signal1() { _obj = 0; _fn = 0; }
 	template<class T>
-	void set(UIObject *p, void (T::*f)(T1)) {
+	void set(Object *p, void (T::*f)(T1)) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
@@ -74,17 +75,17 @@ public:
 };
 
 /*
- * See UISignal
+ * See Signal
  */
 template<class T1, class T2>
-class UISignal2 : public UIObject {
-	typedef void (UIObject::*fnT)(T1, T2);
-	UIObject *_obj;
+class Signal2 : public Object {
+	typedef void (Object::*fnT)(T1, T2);
+	Object *_obj;
 	fnT _fn;
 public:
-	UISignal2() { _obj = 0; _fn = 0; }
+	Signal2() { _obj = 0; _fn = 0; }
 	template<class T>
-	void set(UIObject *p, void (T::*f)(T1, T2)) {
+	void set(Object * p, void (T::*f)(T1, T2)) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
@@ -92,6 +93,7 @@ public:
       _fn = 0;
    }
    inline void call(T1 t1, T2 t2) { if (_fn) (_obj->*_fn)(t1, t2); }
+};
 };
 
 #endif /* UI_SIGNAL_H */

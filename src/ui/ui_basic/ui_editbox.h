@@ -23,19 +23,19 @@
 #include <string>
 #include "ui_button.h"
 
+namespace UI {
 /**
 a editbox can be clicked, then the user can change
 it's text (title). When return is pressed, the
 editbox is unfocused, the keyboard released and
 a callback function is called
 */
-class UIEdit_Box : private UIButton {
-   public:
-     UIEdit_Box(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id);
-     virtual ~UIEdit_Box();
+struct Edit_Box : private Button {
+     Edit_Box(Panel *parent, int x, int y, uint w, uint h, uint background, int id);
+     virtual ~Edit_Box();
 
-     UISignal changed;
-     UISignal1<int> changedid;
+     Signal changed;
+     Signal1<int> changedid;
 
      inline const char* get_text() { return m_lasttext.c_str(); }
      void set_text(const char* text) { m_lasttext=m_text=text; set_title(text); }
@@ -53,6 +53,7 @@ class UIEdit_Box : private UIButton {
      uint m_maxchars;
      std::string m_text, m_lasttext;
      int m_id;
+};
 };
 
 #endif // included_ui_editbox_h

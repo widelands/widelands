@@ -29,7 +29,7 @@ class Flag;
 class Interactive_Player;
 class Tribe_Descr;
 class Profile;
-class UIWindow;
+namespace UI {struct Window;};
 struct EncodeData;
 
 class Building;
@@ -198,11 +198,11 @@ protected:
 	void draw_help
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
-	virtual UIWindow* create_options_window(Interactive_Player* plr,
-		UIWindow** registry) = 0;
+	virtual UI::Window* create_options_window(Interactive_Player* plr,
+		UI::Window** registry) = 0;
 
 protected:
-	UIWindow* m_optionswindow;
+	UI::Window* m_optionswindow;
 	Coords    m_position;
 	Flag*     m_flag;
 

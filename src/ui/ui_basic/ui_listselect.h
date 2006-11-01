@@ -28,17 +28,18 @@
 #include "ui_signal.h"
 #include <limits>
 
-class UIScrollbar;
+namespace UI {
+struct Scrollbar;
 
 /**
  * This class defines a list-select box.
  */
-template <typename T> struct UIListselect {
-	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
-	~UIListselect();
+template <typename T> struct Listselect {
+	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
+	~Listselect();
 
-	UISignal1<uint> selected;
-   UISignal1<uint> double_clicked;
+	Signal1<uint> selected;
+   Signal1<uint> double_clicked;
 
 	void clear();
 	void sort(const int start = -1, const int end=-1);
@@ -75,12 +76,12 @@ template <typename T> struct UIListselect {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 };
 
-template <> struct UIListselect<void *> : public UIPanel {
-	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
-	~UIListselect();
+template <> struct Listselect<void *> : public Panel {
+	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
+	~Listselect();
 
-	UISignal1<uint> selected;
-	UISignal1<uint> double_clicked;
+	Signal1<uint> selected;
+	Signal1<uint> double_clicked;
 
 	void clear();
 	void sort(const int start = -1, const int end=-1);
@@ -149,7 +150,7 @@ private:
 	uint                  m_lineheight;
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
-	UIScrollbar *         m_scrollbar;
+	Scrollbar *         m_scrollbar;
 	uint                  m_scrollpos;	// in pixels
 	uint                  m_selection;
    int                  m_last_click_time;
@@ -158,10 +159,10 @@ private:
 	int						m_check_picid;
 };
 
-template <typename T> struct UIListselect<const T * const> : public UIListselect<void *> {
-	typedef UIListselect<void *> Base;
-	UIListselect
-		(UIPanel * parent,
+template <typename T> struct Listselect<const T * const> : public Listselect<void *> {
+	typedef Listselect<void *> Base;
+	Listselect
+		(Panel * parent,
 		 int x, int y,
 		 uint w, uint h,
 		 Align align = Align_Left,
@@ -181,10 +182,10 @@ template <typename T> struct UIListselect<const T * const> : public UIListselect
 	{return static_cast<const T * const>(Base::get_selection());}
 };
 
-template <class T> struct UIListselect<T * const> : public UIListselect<void *> {
-	typedef UIListselect<void *> Base;
-	UIListselect
-		(UIPanel * parent,
+template <class T> struct Listselect<T * const> : public Listselect<void *> {
+	typedef Listselect<void *> Base;
+	Listselect
+		(Panel * parent,
 		 int x, int y,
 		 uint w, uint h,
 		 Align align = Align_Left,
@@ -198,10 +199,10 @@ template <class T> struct UIListselect<T * const> : public UIListselect<void *> 
 	{return static_cast<T * const>(Base::get_selection());}
 };
 
-template <class T> struct UIListselect<T &> : public UIListselect<void *> {
-	typedef UIListselect<void *> Base;
-	UIListselect
-		(UIPanel * parent,
+template <class T> struct Listselect<T &> : public Listselect<void *> {
+	typedef Listselect<void *> Base;
+	Listselect
+		(Panel * parent,
 		 int x, int y,
 		 uint w, uint h,
 		 Align align = Align_Left,
@@ -222,10 +223,10 @@ template <class T> struct UIListselect<T &> : public UIListselect<void *> {
 };
 
 compile_assert(sizeof(void *) == sizeof(uint));
-template <> struct UIListselect<uint> : public UIListselect<void *> {
-	typedef UIListselect<void *> Base;
-	UIListselect
-		(UIPanel * parent,
+template <> struct Listselect<uint> : public Listselect<void *> {
+	typedef Listselect<void *> Base;
+	Listselect
+		(Panel * parent,
 		 int x, int y,
 		 uint w, uint h,
 		 Align align = Align_Left,
@@ -246,6 +247,7 @@ template <> struct UIListselect<uint> : public UIListselect<void *> {
 	{return reinterpret_cast<const uint>(Base::get_entry(i));}
 	uint get_selection() const
 	{return reinterpret_cast<const uint>(Base::get_selection());}
+};
 };
 
 #endif

@@ -26,18 +26,19 @@
 #include "ui_signal.h"
 
 class Game;
-class UIButton;
-class UICheckbox;
-class UIPanel;
-class UITextarea;
+namespace UI {
+struct Button;
+struct Checkbox;
+struct Panel;
+struct Textarea;
+};
 
 /** class PlayerDescriptionGroup
  *
  * - checkbox to enable/disable player
  * - button to switch between: Human, Remote, AI
  */
-class PlayerDescriptionGroup : public UIPanel {
-public:
+struct PlayerDescriptionGroup : public UI::Panel {
 	enum changemode_t {
 		CHANGE_NOTHING=0,
 		CHANGE_ENABLED=1,
@@ -45,9 +46,9 @@ public:
 		CHANGE_EVERYTHING=3
 	};
 
-	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum, bool highlight=false);
+	PlayerDescriptionGroup(UI::Panel* parent, int x, int y, Game* game, int plnum, bool highlight=false);
 
-	UISignal changed;
+	UI::Signal changed;
 
 	void set_enabled(bool enable);
 	void allow_changes(changemode_t);
@@ -70,10 +71,10 @@ private:
 
 	std::vector<std::string> m_tribes;
 
-	UITextarea* m_plr_name;
-	UICheckbox* m_btnEnablePlayer;
-	UIButton* m_btnPlayerType;
-	UIButton* m_btnPlayerTribe;
+	UI::Textarea* m_plr_name;
+	UI::Checkbox* m_btnEnablePlayer;
+	UI::Button* m_btnPlayerType;
+	UI::Button* m_btnPlayerTribe;
 };
 
 

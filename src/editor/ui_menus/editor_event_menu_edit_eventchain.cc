@@ -39,13 +39,13 @@
 #include "util.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
-UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
+UI::Window(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
 m_parent(parent),
 m_event_chain(chain)
 {
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Edit Event Chain Menu"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Edit Event Chain Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -56,53 +56,53 @@ m_event_chain(chain)
    const int ls_width = 200;
 
    // Name
-   new UITextarea( this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
-   m_name = new UIEdit_Box( this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+   new UI::Textarea( this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
+   m_name = new UI::Edit_Box( this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
    m_name->set_text( m_event_chain->get_name() );
    posy += 20 + spacing;
 
    // More then once
-   new UITextarea( this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
-   m_morethanonce = new UICheckbox( this, posx, posy );
+   new UI::Textarea( this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
+   m_morethanonce = new UI::Checkbox( this, posx, posy );
    m_morethanonce->set_state( m_event_chain->get_repeating() );
    posy += STATEBOX_HEIGHT + spacing;
    const int lsoffsy = posy;
 
    // Event List
-   new UITextarea(this, posx, lsoffsy, _("Events: "), Align_Left);
-   m_events= new UIListselect<Event &>(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+   new UI::Textarea(this, posx, lsoffsy, _("Events: "), Align_Left);
+   m_events= new UI::Listselect<Event &>(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
    m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
    posx += ls_width + spacing;
 
    posy = 75;
-   UIButton* b = new UIButton(this, posx, posy, 80, 20, 0);
+   UI::Button* b = new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title(_("Conditional").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title(_("New Event").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_new_event);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title("<-");
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_ins_event);
    posy += 20 + spacing + spacing;
    b->set_enabled( false );
    m_insert_btn = b;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title(_("Delete").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_del_event);
    b->set_enabled( false );
    m_delete_btn = b;
    posy += 20 + spacing + spacing + spacing;
 
-   b = new UIButton(this, posx+5, posy, 24, 24, 0);
+   b = new UI::Button(this, posx+5, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_up.png"));
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_move_up);
    b->set_enabled( false );
    m_mvup_btn = b;
-   b = new UIButton(this, posx+51, posy, 24, 24, 0);
+   b = new UI::Button(this, posx+51, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_down.png"));
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_move_down);
    b->set_enabled( false );
@@ -110,8 +110,8 @@ m_event_chain(chain)
    posy += 24 + spacing + spacing;
 
    posx += 80 + spacing;
-   new UITextarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
-   m_available_events=new UIListselect<Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
+   new UI::Textarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
+   m_available_events=new UI::Listselect<Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
 	const MapEventManager & mem = parent->get_egbase()->get_map()->get_mem();
@@ -124,11 +124,11 @@ m_event_chain(chain)
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 0);
+   b=new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title(_("Ok").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_ok);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 1);
+   b=new UI::Button(this, posx, posy, 80, 20, 1);
    b->set_title(_("Cancel").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_cancel);
 

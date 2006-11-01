@@ -33,11 +33,11 @@
 #include "error.h"
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* parent) :
-   UIWindow(parent, 0, 0, 400, 240, _("New Event").c_str()) {
+   UI::Window(parent, 0, 0, 400, 240, _("New Event").c_str()) {
   m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("New Event Menu"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("New Event Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -47,8 +47,8 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
    int posy=offsy;
 
    // Event List
-   new UITextarea(this, spacing, offsy, _("Available Events: "), Align_Left);
-   m_event_list=new UIListselect<Event_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   new UI::Textarea(this, spacing, offsy, _("Available Events: "), Align_Left);
+   m_event_list=new UI::Listselect<Event_Descr &>(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
@@ -60,17 +60,17 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
    m_event_list->sort();
 
    // Descr List
-   new UITextarea(this, (get_inner_w()/2)+spacing, offsy, _("Description: "), Align_Left);
-   m_description=new UIMultiline_Textarea(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55, "", Align_Left);
+   new UI::Textarea(this, (get_inner_w()/2)+spacing, offsy, _("Description: "), Align_Left);
+   m_description=new UI::Multiline_Textarea(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55, "", Align_Left);
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   m_ok_button=new UIButton(this, posx, posy, 80, 20, 0, 1);
+   m_ok_button=new UI::Button(this, posx, posy, 80, 20, 0, 1);
    m_ok_button->set_title(_("Ok").c_str());
    m_ok_button->clickedid.set(this, &Editor_Event_Menu_New_Event::clicked);
    m_ok_button->set_enabled(0);
    posx=(get_inner_w()/2)+spacing;
-   UIButton* b=new UIButton(this, posx, posy, 80, 20, 1, 0);
+   UI::Button* b=new UI::Button(this, posx, posy, 80, 20, 1, 0);
    b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_New_Event::clicked);
 

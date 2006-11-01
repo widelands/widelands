@@ -24,7 +24,8 @@
 #include "font_handler.h"
 #include "ui_panel.h"
 
-class UIScrollbar;
+namespace UI {
+struct Scrollbar;
 
 /**
  * This defines a non responsive (to clicks) text area, where a text
@@ -35,17 +36,16 @@ class UIScrollbar;
  * entire text whenever the textarea is drawn, this is a trade-off which greatly
  * simplifies this class.
  */
-class UIMultiline_Textarea : public UIPanel {
-   public:
+struct Multiline_Textarea : public Panel {
       enum ScrollMode {
          ScrollNormal = 0,    ///< (default) only explicit or forced scrolling
          ScrollLog = 1,       ///< follow the bottom of the text
       };
 
    public:
-      UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w, uint h, const char *text,
+      Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
             Align align = Align_Left, bool always_show_scrollbar = false);
-      ~UIMultiline_Textarea();
+      ~Multiline_Textarea();
 
       std::string get_text() const { return m_text; }
       ScrollMode get_scrollmode() const { return m_scrollmode; }
@@ -68,7 +68,7 @@ class UIMultiline_Textarea : public UIPanel {
 
    private:
 		std::string		m_text;
-		UIScrollbar*	m_scrollbar;
+		Scrollbar*	m_scrollbar;
 		ScrollMode     m_scrollmode;
 
    protected:
@@ -84,6 +84,7 @@ class UIMultiline_Textarea : public UIPanel {
       inline int get_m_textpos(void) { return m_textpos; }
       void draw_scrollbar();
       int get_halign();
+};
 };
 
 #endif // __S__MULTILINE_TEXTAREA_H

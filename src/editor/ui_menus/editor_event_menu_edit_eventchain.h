@@ -24,18 +24,19 @@
 
 class Editor_Interactive;
 class Event;
-template <typename T> struct UIListselect;
-class UIButton;
-class UICheckbox;
-class UIEdit_Box;
 class EventChain;
+namespace UI {
+template <typename T> struct Listselect;
+struct Button;
+struct Checkbox;
+struct Edit_Box;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Editor_Event_Menu_Edit_EventChain : public UIWindow {
-   public:
+struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
       Editor_Event_Menu_Edit_EventChain(Editor_Interactive*, EventChain* );
       ~Editor_Event_Menu_Edit_EventChain();
 
@@ -57,15 +58,15 @@ class Editor_Event_Menu_Edit_EventChain : public UIWindow {
 	void cs_selected      (uint);
 	void cs_double_clicked(uint);
 
-	UIListselect<Event &> *m_available_events;
-	UIListselect<Event &> *m_events;
+	UI::Listselect<Event &> *m_available_events;
+	UI::Listselect<Event &> *m_events;
       Editor_Interactive *m_parent;
-      UIButton           *m_insert_btn;
-      UIButton           *m_delete_btn;
-      UIButton           *m_mvup_btn;
-      UIButton           *m_mvdown_btn;
-      UICheckbox         *m_morethanonce;
-      UIEdit_Box         *m_name;
+      UI::Button           *m_insert_btn;
+      UI::Button           *m_delete_btn;
+      UI::Button           *m_mvup_btn;
+      UI::Button           *m_mvdown_btn;
+      UI::Checkbox         *m_morethanonce;
+      UI::Edit_Box         *m_name;
       EventChain         *m_event_chain;
       bool                m_edit_trigcond;
 };

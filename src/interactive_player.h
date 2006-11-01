@@ -26,8 +26,10 @@
 #include "network.h" // For chat
 
 class Player;
-class UIMultiline_Textarea;
-class UITextarea;
+namespace UI {
+struct Multiline_Textarea;
+struct Textarea;
+};
 
 /** class Interactive_Player
  *
@@ -58,22 +60,22 @@ class Interactive_Player : public Interactive_Base {
 	typedef std::vector<General_Stats> General_Stats_vector;
 
       struct Game_Main_Menu_Windows {
-         UIUniqueWindowRegistry loadgame;
-         UIUniqueWindowRegistry savegame;
-         UIUniqueWindowRegistry readme;
-         UIUniqueWindowRegistry keys;
-         UIUniqueWindowRegistry authors;
-         UIUniqueWindowRegistry licence;
-         UIUniqueWindowRegistry options;
+         UI::UniqueWindow::Registry loadgame;
+         UI::UniqueWindow::Registry savegame;
+         UI::UniqueWindow::Registry readme;
+         UI::UniqueWindow::Registry keys;
+         UI::UniqueWindow::Registry authors;
+         UI::UniqueWindow::Registry licence;
+         UI::UniqueWindow::Registry options;
 
-         UIUniqueWindowRegistry building_stats;
-         UIUniqueWindowRegistry general_stats;
-         UIUniqueWindowRegistry ware_stats;
-         UIUniqueWindowRegistry stock;
+         UI::UniqueWindow::Registry building_stats;
+         UI::UniqueWindow::Registry general_stats;
+         UI::UniqueWindow::Registry ware_stats;
+         UI::UniqueWindow::Registry stock;
 
-         UIUniqueWindowRegistry mission_objectives;
-         UIUniqueWindowRegistry chat;
-         UIUniqueWindowRegistry objectives;
+         UI::UniqueWindow::Registry mission_objectives;
+         UI::UniqueWindow::Registry chat;
+         UI::UniqueWindow::Registry objectives;
       };
 
    public:
@@ -135,12 +137,12 @@ class Interactive_Player : public Interactive_Base {
       Game*		m_game;
       uchar		m_player_number;
 
-      UITextarea*	m_label_speed;
-      UIMultiline_Textarea*	m_chat_messages;
-      UITextarea*	m_type_message;
+      UI::Textarea*	m_label_speed;
+      UI::Multiline_Textarea*	m_chat_messages;
+      UI::Textarea*	m_type_message;
 
-      UIUniqueWindowRegistry	m_mainmenu;
-      UIUniqueWindowRegistry	m_fieldaction;
+      UI::UniqueWindow::Registry	m_mainmenu;
+      UI::UniqueWindow::Registry	m_fieldaction;
       Game_Main_Menu_Windows  m_mainm_windows;
 
       std::vector<uint> m_current_statistics;

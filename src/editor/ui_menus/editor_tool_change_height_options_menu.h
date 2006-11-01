@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,18 +26,17 @@ class Editor_Interactive;
 class Editor_Increase_Height_Tool;
 class Editor_Decrease_Height_Tool;
 class Editor_Set_Height_Tool;
-class UITextarea;
+namespace UI {struct Textarea;};
 
-class Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
-   public:
+struct Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
       Editor_Tool_Change_Height_Options_Menu(Editor_Interactive*, int, Editor_Increase_Height_Tool*,
-            UIUniqueWindowRegistry*);
+            UI::UniqueWindow::Registry*);
       ~Editor_Tool_Change_Height_Options_Menu() { }
 
    private:
       void clicked(int);
       void update(void);
-      UITextarea* m_increase, *m_set;
+      UI::Textarea* m_increase, *m_set;
       Editor_Increase_Height_Tool* m_iht;
       Editor_Decrease_Height_Tool* m_dht;
       Editor_Set_Height_Tool* m_sht;

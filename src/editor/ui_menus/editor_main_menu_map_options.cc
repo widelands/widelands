@@ -35,39 +35,39 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
-	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, _("Map Options").c_str())
+	: UI::Window(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, _("Map Options").c_str())
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("New Map Options"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("New Map Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
-   // UIButtons
+   // UI::Buttons
    const int offsx=5;
    const int offsy=30;
    const int spacing=3;
    const int height=20;
    int posx=offsx;
    int posy=offsy;
-   UITextarea* ta= new UITextarea(this, posx, posy-2, _("Map Name:"), Align_Left);
-   m_name=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
+   UI::Textarea* ta= new UI::Textarea(this, posx, posy-2, _("Map Name:"), Align_Left);
+   m_name=new UI::Edit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
    m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy-2, _("Size:"));
-   m_size=new UITextarea(this, posx+ta->get_w()+spacing, posy-2, "512x512", Align_Left);
+   ta=new UI::Textarea(this, posx, posy-2, _("Size:"));
+   m_size=new UI::Textarea(this, posx+ta->get_w()+spacing, posy-2, "512x512", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy-2, _("Nr Players:"));
-   m_nrplayers=new UITextarea(this, posx+ta->get_w()+spacing, posy-2, "1", Align_Left);
+   ta=new UI::Textarea(this, posx, posy-2, _("Nr Players:"));
+   m_nrplayers=new UI::Textarea(this, posx+ta->get_w()+spacing, posy-2, "1", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy-2, _("World:"));
-   m_world=new UITextarea(this, posx+ta->get_w()+spacing, posy-2, "\"Greenland\"", Align_Left);
+   ta=new UI::Textarea(this, posx, posy-2, _("World:"));
+   m_world=new UI::Textarea(this, posx+ta->get_w()+spacing, posy-2, "\"Greenland\"", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy-2, _("Author:"), Align_Left);
-   m_author=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
+   ta=new UI::Textarea(this, posx, posy-2, _("Author:"), Align_Left);
+   m_author=new UI::Edit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, _("Nothing defined!").c_str());
+   m_descr=new UI::Multiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, _("Nothing defined!").c_str());
    m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
    update();
 }
@@ -76,7 +76,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
 ===============
 Main_Menu_Map_Options::update()
 
-Updates all UITextareas in the UIWindow to represent currently
+Updates all UI::Textareas in the UI::Window to represent currently
 set values
 ==============
 */

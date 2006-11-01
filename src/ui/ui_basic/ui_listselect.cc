@@ -25,22 +25,23 @@
 #include "ui_scrollbar.h"
 #include "wlapplication.h"
 
+namespace UI {
 /**
 Initialize a list select panel
 
 Args: parent	parent panel
-      x		coordinates of the UIListselect
+      x		coordinates of the Listselect
       y
-      w		dimensions, in pixels, of the UIListselect
+      w		dimensions, in pixels, of the Listselect
       h
-      align	alignment of text inside the UIListselect
+      align	alignment of text inside the Listselect
 */
-UIListselect<void *>::UIListselect
-(UIPanel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
+Listselect<void *>::Listselect
+(Panel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
 :
-UIPanel(parent, x, y, w, h),
+Panel(parent, x, y, w, h),
 m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
-m_scrollbar     (new UIScrollbar(parent, x + get_w() - 24, y, 24, h, false)),
+m_scrollbar     (new Scrollbar(parent, x + get_w() - 24, y, 24, h, false)),
 m_scrollpos     (0),
 m_selection     (no_selection_index()),
 m_last_click_time(-10000),
@@ -51,7 +52,7 @@ m_show_check(show_check)
 
 	set_align(align);
 
-	m_scrollbar->moved.set(this, &UIListselect::set_scrollpos);
+	m_scrollbar->moved.set(this, &Listselect::set_scrollpos);
 	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar->set_steps(1);
 
@@ -71,13 +72,13 @@ m_show_check(show_check)
 /**
 Free allocated resources
 */
-UIListselect<void *>::~UIListselect() {m_scrollbar = 0; clear();}
+Listselect<void *>::~Listselect() {m_scrollbar = 0; clear();}
 
 
 /**
 Remove all entries from the listselect
 */
-void UIListselect<void *>::clear() {
+void Listselect<void *>::clear() {
 	for(uint i = 0; i < m_entries.size(); i++)
 		free(m_entries[i]);
 	m_entries.clear();
@@ -97,7 +98,7 @@ Args: name	name that will be displayed
       value	value returned by get_select()
       select if true, directly select the new entry
 */
-void UIListselect<void *>::add_entry
+void Listselect<void *>::add_entry
 (const char * const name,
  void * value,
  const bool sel,
@@ -128,14 +129,14 @@ void UIListselect<void *>::add_entry
 
 	update(0, 0, get_eff_w(), get_h());
    if(sel) {
-      UIListselect::select( m_entries.size() - 1);
+      Listselect::select( m_entries.size() - 1);
 	}
 }
 
 /*
  * Switch two entries
  */
-void UIListselect<void *>::switch_entries(const uint m, const uint n) {
+void Listselect<void *>::switch_entries(const uint m, const uint n) {
 	assert(m < get_nr_entries());
 	assert(n < get_nr_entries());
 
@@ -157,7 +158,7 @@ void UIListselect<void *>::switch_entries(const uint m, const uint n) {
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void UIListselect<void *>::sort(const int gstart, const int gend) {
+void Listselect<void *>::sort(const int gstart, const int gend) {
    uint strt=gstart;
    uint stop=gend;
    if(gstart==-1) strt=0;
@@ -180,14 +181,14 @@ void UIListselect<void *>::sort(const int gstart, const int gend) {
 /**
 Set the list alignment (only horizontal alignment works)
 */
-void UIListselect<void *>::set_align(const Align align)
+void Listselect<void *>::set_align(const Align align)
 {m_align = static_cast<const Align>(align & Align_Horizontal);}
 
 
 /**
 Scroll to the given position, in pixels.
 */
-void UIListselect<void *>::set_scrollpos(const int i) {
+void Listselect<void *>::set_scrollpos(const int i) {
 	m_scrollpos = i;
 
 	update(0, 0, get_eff_w(), get_h());
@@ -200,7 +201,7 @@ void UIListselect<void *>::set_scrollpos(const int i) {
  *
  * Args: i	the entry to select
  */
-void UIListselect<void *>::select(const uint i) {
+void Listselect<void *>::select(const uint i) {
 	if (m_selection == i)
 		return;
 
@@ -219,14 +220,14 @@ void UIListselect<void *>::select(const uint i) {
 /**
 Return the total height (text + spacing) occupied by a single line
 */
-int UIListselect<void *>::get_lineheight() const throw ()
+int Listselect<void *>::get_lineheight() const throw ()
 {return m_lineheight + 2;}
 
 
 /**
 Redraw the listselect box
 */
-void UIListselect<void *>::draw(RenderTarget* dst) {
+void Listselect<void *>::draw(RenderTarget* dst) {
 	// draw text lines
 	const uint lineheight = get_lineheight();
 	uint idx = m_scrollpos / lineheight;
@@ -280,7 +281,7 @@ void UIListselect<void *>::draw(RenderTarget* dst) {
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool UIListselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
+bool Listselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	   int time=WLApplication::get()->get_time();
@@ -309,13 +310,13 @@ bool UIListselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 
 	return true;
 }
-bool UIListselect<void *>::handle_mouserelease(const Uint8 btn, int, int)
+bool Listselect<void *>::handle_mouserelease(const Uint8 btn, int, int)
 {return btn == SDL_BUTTON_LEFT;}
 
 /*
  * Remove entry
  */
-void UIListselect<void *>::remove_entry(const uint i) {
+void Listselect<void *>::remove_entry(const uint i) {
 	assert(i < m_entries.size());
 
    free(m_entries[i]);
@@ -328,7 +329,7 @@ void UIListselect<void *>::remove_entry(const uint i) {
  * the first entry with this name. If none is found, nothing
  * is done
  */
-void UIListselect<void *>::remove_entry(const char * const str) {
+void Listselect<void *>::remove_entry(const char * const str) {
    for(uint i=0; i<m_entries.size(); i++) {
       if(!strcmp(m_entries[i]->name,str)) {
          remove_entry(i);
@@ -336,3 +337,4 @@ void UIListselect<void *>::remove_entry(const char * const str) {
       }
    }
 }
+};

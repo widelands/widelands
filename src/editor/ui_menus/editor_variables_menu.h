@@ -23,9 +23,11 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class UIButton;
-class UITable;
 class MapVariable;
+namespace UI {
+struct Button;
+struct Table;
+};
 
 /*
 =============================
@@ -34,16 +36,15 @@ class Editor_Variables_Menu
 
 =============================
 */
-class Editor_Variables_Menu : public UIUniqueWindow {
-   public:
-      Editor_Variables_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
+struct Editor_Variables_Menu : public UI::UniqueWindow {
+      Editor_Variables_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Variables_Menu();
 
    private:
       Editor_Interactive *m_parent;
-      UITable            *m_table;
-      UIButton           *m_edit_button;
-      UIButton           *m_delete_button;
+      UI::Table            *m_table;
+      UI::Button           *m_edit_button;
+      UI::Button           *m_delete_button;
 
    private:
 	void insert_variable(MapVariable &);

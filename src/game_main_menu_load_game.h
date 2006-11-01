@@ -24,15 +24,15 @@
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UIEdit_Box;
-class UITextarea;
-template <typename T> struct UIListselect;
-class UIButton;
+namespace UI {
+struct Edit_Box;
+struct Textarea;
+template <typename T> struct Listselect;
+struct Button;
+};
 
-
-class Game_Main_Menu_Load_Game : public UIUniqueWindow {
-   public:
-      Game_Main_Menu_Load_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
+struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
+      Game_Main_Menu_Load_Game(Interactive_Player* plr, UI::UniqueWindow::Registry* registry) ;
       virtual ~Game_Main_Menu_Load_Game(void);
 
    private:
@@ -45,11 +45,11 @@ class Game_Main_Menu_Load_Game : public UIUniqueWindow {
 	bool load_game(const std::string & filename);
 
       Interactive_Player* m_parent;
-      UITextarea* m_name, *m_gametime;
-	UIListselect<const char * const> * m_ls;
+	UI::Textarea * m_name, * m_gametime;
+	UI::Listselect<const char * const> * m_ls;
       filenameset_t m_gamefiles;
 
-      UIButton* m_ok_btn;
+	UI::Button * m_ok_btn;
       std::string m_basedir;
       std::string m_curdir;
       std::string m_parentdir;

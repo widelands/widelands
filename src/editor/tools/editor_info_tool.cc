@@ -42,8 +42,8 @@ show a simple info dialog with infos about this field
 ===========
 */
 int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive* parent) {
-   UIWindow* w = new UIWindow(parent, 30, 30, 400, 200, _("Field Information").c_str());
-   UIMultiline_Textarea* multiline_textarea = new UIMultiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
+   UI::Window* w = new UI::Window(parent, 30, 30, 400, 200, _("Field Information").c_str());
+   UI::Multiline_Textarea* multiline_textarea = new UI::Multiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
 
    Field* f=fc.field;
 

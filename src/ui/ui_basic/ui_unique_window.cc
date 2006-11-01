@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include <cassert>
 #include "ui_unique_window.h"
 
+namespace UI {
 /*
 ==============================================================================
 
@@ -32,7 +33,7 @@ UniqueWindow IMPLEMENTATION
 /**
 In order to avoid dangling pointers, we need to kill our contained window here.
 */
-UIUniqueWindowRegistry::~UIUniqueWindowRegistry()
+UniqueWindow::Registry::~Registry()
 {
 	if (window)
 		delete window;
@@ -42,8 +43,8 @@ UIUniqueWindowRegistry::~UIUniqueWindowRegistry()
 /**
 Register, position according to the registry information.
 */
-UIUniqueWindow::UIUniqueWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, int w, int h, std::string title)
-	: UIWindow(parent, 0, 0, w, h, title.c_str())
+UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int w, int h, std::string title)
+	: Window(parent, 0, 0, w, h, title.c_str())
 {
 	m_registry = reg;
 	m_usedefaultpos = true;
@@ -65,7 +66,7 @@ UIUniqueWindow::UIUniqueWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, int
 /**
 Unregister, save latest position.
 */
-UIUniqueWindow::~UIUniqueWindow()
+UniqueWindow::~UniqueWindow()
 {
 	if (m_registry) {
 		assert(m_registry->window == this);
@@ -75,3 +76,4 @@ UIUniqueWindow::~UIUniqueWindow()
 		m_registry->y = get_y();
 	}
 }
+};

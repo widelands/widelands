@@ -53,8 +53,8 @@ Create all the buttons etc...
 ===============
 */
 Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
-      Editor_Interactive::Editor_Tools* tools, int spt_tool_index, int make_infrs_tindex, UIUniqueWindowRegistry* registry)
-   : UIUniqueWindow(parent, registry, 340, 400, _("Player Options"))
+      Editor_Interactive::Editor_Tools* tools, int spt_tool_index, int make_infrs_tindex, UI::UniqueWindow::Registry* registry)
+   : UI::UniqueWindow(parent, registry, 340, 400, _("Player Options"))
 {
    // Initialisation
    m_parent=parent;
@@ -74,19 +74,19 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
 	Tribe_Descr::get_all_tribenames(m_tribes);
 
    set_inner_size(375, 135);
-   UITextarea* ta=new UITextarea(this, 0, 0, _("Player Options"), Align_Left);
+   UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Player Options"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   ta=new UITextarea(this, 0, 0, _("Number of Players"), Align_Left);
+   ta=new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+width;
-   UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
+   UI::Button* b=new UI::Button(this, posx, posy, width, height, 1, 0);
    b->clickedid.set(this, &Editor_Player_Menu::button_clicked);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
+   b=new UI::Button(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
    b->clickedid.set(this, &Editor_Player_Menu::button_clicked);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
-   m_nr_of_players_ta=new UITextarea(this, 0, 0, "5", Align_Left);
+   m_nr_of_players_ta=new UI::Textarea(this, 0, 0, "5", Align_Left);
    m_nr_of_players_ta->set_pos((get_inner_w()-m_nr_of_players_ta->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
 
@@ -168,14 +168,14 @@ void Editor_Player_Menu::update(void) {
       if (start_pos.is_invalid()) start_pos_valid = false;
 
       if(!m_plr_names[i]) {
-          m_plr_names[i]=new UIEdit_Box(this, posx, posy, 140, size, 0, i);
+          m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
           posx+=140+spacing;
           m_plr_names[i]->set_text(m_parent->get_map()->get_scenario_player_name(i+1).c_str());
       }
 
       if(!m_plr_set_tribes_buts[i]) {
-         m_plr_set_tribes_buts[i]=new UIButton(this, posx, posy, 140, size, 0, i);
+         m_plr_set_tribes_buts[i]=new UI::Button(this, posx, posy, 140, size, 0, i);
          posx+=140+spacing;
          m_plr_set_tribes_buts[i]->clickedid.set(this, &Editor_Player_Menu::player_tribe_clicked);
       }
@@ -188,7 +188,7 @@ void Editor_Player_Menu::update(void) {
 
       // Set Starting pos button
       if(!m_plr_set_pos_buts[i]) {
-          m_plr_set_pos_buts[i]=new UIButton(this, posx, posy, size, size, 0, i+1);
+          m_plr_set_pos_buts[i]=new UI::Button(this, posx, posy, size, size, 0, i+1);
           m_plr_set_pos_buts[i]->clickedid.set(this, &Editor_Player_Menu::set_starting_pos_clicked);
           posx+=size+spacing;
       }
@@ -199,7 +199,7 @@ void Editor_Player_Menu::update(void) {
       m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture( PicMod_Game,  text.c_str() ));
       // Build infrastructure but
       if(!m_plr_make_infrastructure_buts[i]) {
-         m_plr_make_infrastructure_buts[i]=new UIButton(this, posx, posy, size, size, 0, i+1);
+         m_plr_make_infrastructure_buts[i]=new UI::Button(this, posx, posy, size, size, 0, i+1);
          m_plr_make_infrastructure_buts[i]->clickedid.set(this, &Editor_Player_Menu::make_infrastructure_clicked);
          posx+=size+spacing;
       }
@@ -207,7 +207,7 @@ void Editor_Player_Menu::update(void) {
       m_plr_make_infrastructure_buts[i]->set_title("I"); // TODO: come up with a picture for this
       // Allowed buildings
       if(!m_plr_allowed_buildings[i]) {
-         m_plr_allowed_buildings[i]=new UIButton(this, posx, posy, size, size, 0, i+1);
+         m_plr_allowed_buildings[i]=new UI::Button(this, posx, posy, size, size, 0, i+1);
          m_plr_allowed_buildings[i]->clickedid.set(this, &Editor_Player_Menu::allowed_buildings_clicked);
          posx+=size+spacing;
       }
@@ -254,7 +254,7 @@ void Editor_Player_Menu::button_clicked(int n) {
          m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
          m_parent->set_need_save(true);
       } else {
-         UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, _("Error!"), _("Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"), UIModal_Message_Box::OK);
+         UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), _("Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"), UI::Modal_Message_Box::OK);
          mmb->run();
          delete mmb;
       }
@@ -269,7 +269,7 @@ void Editor_Player_Menu::button_clicked(int n) {
 void Editor_Player_Menu::player_tribe_clicked(int n) {
    // Tribe button has been clicked
    if(!m_parent->is_player_tribe_referenced(n+1)) {
-      UIButton* but=m_plr_set_tribes_buts[n];
+      UI::Button* but=m_plr_set_tribes_buts[n];
       std::string t= but->get_title();
       if(!Tribe_Descr::exists_tribe(t))
          throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
@@ -281,7 +281,7 @@ void Editor_Player_Menu::player_tribe_clicked(int n) {
       m_parent->get_map()->set_scenario_player_tribe(n+1,t);
       m_parent->set_need_save(true);
    } else {
-      UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, _("Error!"), _("Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"), UIModal_Message_Box::OK);
+      UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), _("Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"), UI::Modal_Message_Box::OK);
       mmb->run();
       delete mmb;
    }

@@ -33,12 +33,12 @@
 #include "util.h"
 
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive* parent, Event_Unhide_Area* event) :
-   UIWindow(parent, 0, 0, 180, 280, _("Event Option Menu").c_str()) {
+   UI::Window(parent, 0, 0, 180, 280, _("Event Option Menu").c_str()) {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Unhide Area Event Options"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Unhide Area Event Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    Coords pt=event->get_coords();
@@ -54,104 +54,104 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
 
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+   m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
    m_name->set_text( event->get_name() );
    posy+=20+spacing;
 
    // Set Field Buttons
-   new UITextarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
+   new UI::Textarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
    posy+=20+spacing;
    // X
-   UIButton* b=new UIButton(this, spacing+20, posy, 20, 20, 0, 3);
+   UI::Button* b=new UI::Button(this, spacing+20, posy, 20, 20, 0, 3);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+20, posy+40, 20, 20, 0, 4);
+   b=new UI::Button(this, spacing+20, posy+40, 20, 20, 0, 4);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+40, posy, 20, 20, 0, 5);
+   b=new UI::Button(this, spacing+40, posy, 20, 20, 0, 5);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+40, posy+40, 20, 20, 0, 6);
+   b=new UI::Button(this, spacing+40, posy+40, 20, 20, 0, 6);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+60, posy, 20, 20, 0, 7);
+   b=new UI::Button(this, spacing+60, posy, 20, 20, 0, 7);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+60, posy+40, 20, 20, 0, 8);
+   b=new UI::Button(this, spacing+60, posy+40, 20, 20, 0, 8);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   new UITextarea(this, spacing+20, posy+20, 20, 20, "X: ", Align_CenterLeft);
-   m_x_ta=new UITextarea(this, spacing+40, posy+20, 20, 20, "X: ", Align_CenterLeft);
+   new UI::Textarea(this, spacing+20, posy+20, 20, 20, "X: ", Align_CenterLeft);
+   m_x_ta=new UI::Textarea(this, spacing+40, posy+20, 20, 20, "X: ", Align_CenterLeft);
 
    // Y
    int oldspacing=spacing;
    spacing=get_inner_w()/2+spacing;
-   b=new UIButton(this, spacing, posy, 20, 20, 0, 9);
+   b=new UI::Button(this, spacing, posy, 20, 20, 0, 9);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing, posy+40, 20, 20, 0, 10);
+   b=new UI::Button(this, spacing, posy+40, 20, 20, 0, 10);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+20, posy, 20, 20, 0, 11);
+   b=new UI::Button(this, spacing+20, posy, 20, 20, 0, 11);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+20, posy+40, 20, 20, 0, 12);
+   b=new UI::Button(this, spacing+20, posy+40, 20, 20, 0, 12);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+40, posy, 20, 20, 0, 13);
+   b=new UI::Button(this, spacing+40, posy, 20, 20, 0, 13);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+40, posy+40, 20, 20, 0, 14);
+   b=new UI::Button(this, spacing+40, posy+40, 20, 20, 0, 14);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   new UITextarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
-   m_y_ta=new UITextarea(this, spacing+20, posy+20, 20, 20, "Y: ", Align_CenterLeft);
+   new UI::Textarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
+   m_y_ta=new UI::Textarea(this, spacing+20, posy+20, 20, 20, "Y: ", Align_CenterLeft);
    spacing=oldspacing;
 
    // Player
    posy+=60+spacing;
-   new UITextarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
-   m_player_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
-   b=new UIButton(this, spacing+90, posy, 20, 20, 0, 15);
+   new UI::Textarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
+   m_player_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
+   b=new UI::Button(this, spacing+90, posy, 20, 20, 0, 15);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+110, posy, 20, 20, 0, 16);
+   b=new UI::Button(this, spacing+110, posy, 20, 20, 0, 16);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
 
    // Area
    posy+=20+spacing;
-   new UITextarea(this, spacing, posy+20, 70, 20, _("Area: "), Align_CenterLeft);
-   b=new UIButton(this, spacing+70, posy, 20, 20, 0, 17);
+   new UI::Textarea(this, spacing, posy+20, 70, 20, _("Area: "), Align_CenterLeft);
+   b=new UI::Button(this, spacing+70, posy, 20, 20, 0, 17);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+70, posy+40, 20, 20, 0, 18);
+   b=new UI::Button(this, spacing+70, posy+40, 20, 20, 0, 18);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+90, posy, 20, 20, 0, 19);
+   b=new UI::Button(this, spacing+90, posy, 20, 20, 0, 19);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+90, posy+40, 20, 20, 0, 20);
+   b=new UI::Button(this, spacing+90, posy+40, 20, 20, 0, 20);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+110, posy, 20, 20, 0, 21);
+   b=new UI::Button(this, spacing+110, posy, 20, 20, 0, 21);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   b=new UIButton(this, spacing+110, posy+40, 20, 20, 0, 22);
+   b=new UI::Button(this, spacing+110, posy+40, 20, 20, 0, 22);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   m_area_ta=new UITextarea(this, spacing+90, posy+20, 20, 20, "2", Align_Center);
+   m_area_ta=new UI::Textarea(this, spacing+90, posy+20, 20, 20, "2", Align_Center);
 
 
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-20-spacing;
-   b=new UIButton(this, posx, posy, 60, 20, 0, 1);
+   b=new UI::Button(this, posx, posy, 60, 20, 0, 1);
    b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 60, 20, 1, 0);
+   b=new UI::Button(this, posx, posy, 60, 20, 1, 0);
    b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
 

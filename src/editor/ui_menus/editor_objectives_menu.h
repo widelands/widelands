@@ -23,10 +23,12 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class UIButton;
-class UITable;
-class UITextarea;
 class MapObjective;
+namespace UI {
+struct Button;
+struct Table;
+struct Textarea;
+};
 
 /*
 =============================
@@ -35,17 +37,16 @@ class Editor_Objectives_Menu
 
 =============================
 */
-class Editor_Objectives_Menu : public UIUniqueWindow {
-   public:
-      Editor_Objectives_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
+struct Editor_Objectives_Menu : public UI::UniqueWindow {
+      Editor_Objectives_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Objectives_Menu();
 
    private:
       Editor_Interactive *m_parent;
-      UITable            *m_table;
-      UIButton           *m_edit_button;
-      UIButton           *m_delete_button;
-      UITextarea         *m_trigger;
+      UI::Table            *m_table;
+      UI::Button           *m_edit_button;
+      UI::Button           *m_delete_button;
+      UI::Textarea         *m_trigger;
 
    private:
 	void insert_objective(MapObjective &);

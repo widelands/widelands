@@ -47,43 +47,43 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 {
 
 	// Menu title
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, _("General Options"), Align_HCenter);
+	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 30, _("General Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 410, 530, 190, 24, 0, om_cancel);
+	b = new UI::Button(this, 410, 530, 190, 24, 0, om_cancel);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
 	b->set_title(_("Cancel").c_str());
 
-	b = new UIButton(this, 200, 530, 190, 24, 2, om_ok);
+	b = new UI::Button(this, 200, 530, 190, 24, 2, om_ok);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
 	b->set_title(_("Apply").c_str());
 
 	// Fullscreen mode
-	m_fullscreen = new UICheckbox(this, 300, 110);
+	m_fullscreen = new UI::Checkbox(this, 300, 110);
 	m_fullscreen->set_state(opt.fullscreen);
-	new UITextarea(this, 325, 120, _("Fullscreen"), Align_VCenter);
+	new UI::Textarea(this, 325, 120, _("Fullscreen"), Align_VCenter);
 
 	// input grab
-	m_inputgrab = new UICheckbox(this, 300, 140);
+	m_inputgrab = new UI::Checkbox(this, 300, 140);
 	m_inputgrab->set_state(opt.inputgrab);
-	new UITextarea(this, 325, 150, _("Grab Input"), Align_VCenter);
+	new UI::Textarea(this, 325, 150, _("Grab Input"), Align_VCenter);
 
 	// Music
-	m_music = new UICheckbox(this, 300, 170);
+	m_music = new UI::Checkbox(this, 300, 170);
 	m_music->set_state(opt.music);
-	new UITextarea(this, 325, 180, _("Enable Music"),
+	new UI::Textarea(this, 325, 180, _("Enable Music"),
 	               Align_VCenter);
 	if (g_sound_handler.m_lock_audio_disabling) {
 		m_music->set_enabled(false);
 	}
 
 	// Sound FX
-	m_fx = new UICheckbox(this, 300, 200);
+	m_fx = new UI::Checkbox(this, 300, 200);
 	m_fx->set_state(opt.fx);
-	new UITextarea(this, 325, 210, _("Enable Sound"),
+	new UI::Textarea(this, 325, 210, _("Enable Sound"),
 	               Align_VCenter);
 	if (g_sound_handler.m_lock_audio_disabling) {
 		m_fx->set_enabled(false);
@@ -91,7 +91,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 
 
 	// In-game resolution
-	new UITextarea(this, 85, 95, _("In-game resolution"), Align_VCenter);
+	new UI::Textarea(this, 85, 95, _("In-game resolution"), Align_VCenter);
 
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
@@ -126,7 +126,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
             m_resolutions.push_back(this_res);
       }
 
-	m_reslist = new UIListselect<void *>(this, 80, 110, 190, 150,Align_Left,true);
+	m_reslist = new UI::Listselect<void *>(this, 80, 110, 190, 150,Align_Left,true);
 	bool did_select_a_res=false;
 	for(uint i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
@@ -142,8 +142,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 
    // Available locales
   	// In-game resolution
-	new UITextarea(this, MENU_XRES/2+85, 95, _("Language"), Align_VCenter);
-	m_language_list = new UIListselect<std::string &>(this, MENU_XRES/2 + 75, 110, 210, 150,Align_Left,true);
+	new UI::Textarea(this, MENU_XRES/2+85, 95, _("Language"), Align_VCenter);
+	m_language_list = new UI::Listselect<std::string &>(this, MENU_XRES/2 + 75, 110, 210, 150,Align_Left,true);
    available_languages[0].name = _( "System default language" );
    for(uint i = 0; i < NR_LANGUAGES; i++) {
 		bool selected = false;
@@ -154,22 +154,22 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	}
 
 
-	title= new UITextarea(this, MENU_XRES/2, 300, _("In-game Options"), Align_HCenter);
+	title= new UI::Textarea(this, MENU_XRES/2, 300, _("In-game Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
    // Toggle Options
-	m_single_watchwin = new UICheckbox(this,85,365);
+	m_single_watchwin = new UI::Checkbox(this,85,365);
 	m_single_watchwin->set_state(opt.single_watchwin);
-	new UITextarea(this,110,375,_("Use single Watchwindow Mode"), Align_VCenter);
-	m_show_workarea_preview= new UICheckbox(this,85,395);
+	new UI::Textarea(this,110,375,_("Use single Watchwindow Mode"), Align_VCenter);
+	m_show_workarea_preview= new UI::Checkbox(this,85,395);
 	m_show_workarea_preview->set_state(opt.show_warea);
-	new UITextarea(this,110,405,_("Show buildings area preview"), Align_VCenter);
-	m_snap_windows_only_when_overlapping = new UICheckbox(this,85,425);
+	new UI::Textarea(this,110,405,_("Show buildings area preview"), Align_VCenter);
+	m_snap_windows_only_when_overlapping = new UI::Checkbox(this,85,425);
 	m_snap_windows_only_when_overlapping->set_state(opt.snap_windows_only_when_overlapping);
-	new UITextarea(this,110,435,_("Snap windows only when overlapping"), Align_VCenter);
-	m_dock_windows_to_edges = new UICheckbox(this,85,455);
+	new UI::Textarea(this,110,435,_("Snap windows only when overlapping"), Align_VCenter);
+	m_dock_windows_to_edges = new UI::Checkbox(this,85,455);
 	m_dock_windows_to_edges->set_state(opt.dock_windows_to_edges);
-	new UITextarea(this,110,465,_("Dock windows to edges"), Align_VCenter);
+	new UI::Textarea(this,110,465,_("Dock windows to edges"), Align_VCenter);
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {

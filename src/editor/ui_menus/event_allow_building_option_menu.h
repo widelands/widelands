@@ -26,16 +26,17 @@
 
 class Editor_Interactive;
 class Event_Allow_Building;
-class UIEdit_Box;
-class UICheckbox;
-class UITextarea;
+namespace UI {
+struct Edit_Box;
+struct Checkbox;
+struct Textarea;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Event_Allow_Building_Option_Menu : public UIWindow {
-   public:
+struct Event_Allow_Building_Option_Menu : public UI::Window {
       Event_Allow_Building_Option_Menu(Editor_Interactive*, Event_Allow_Building*);
       ~Event_Allow_Building_Option_Menu();
 
@@ -48,9 +49,9 @@ class Event_Allow_Building_Option_Menu : public UIWindow {
 
       Event_Allow_Building* m_event;
       Editor_Interactive* m_parent;
-      UITextarea *m_player_ta, *m_building_ta;
-      UICheckbox* m_allow;
-      UIEdit_Box* m_name;
+      UI::Textarea *m_player_ta, *m_building_ta;
+      UI::Checkbox* m_allow;
+      UI::Edit_Box* m_name;
       int         m_player, m_building;
       std::vector<std::string> m_buildings;
 };

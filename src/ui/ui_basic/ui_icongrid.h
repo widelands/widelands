@@ -28,6 +28,7 @@
 #include "ui_panel.h"
 #include "ui_signal.h"
 
+namespace UI {
 /**
 Arranges clickable pictures of common size in a regular grid.
 
@@ -35,11 +36,10 @@ Arrangement can be horizontal (pictures fill the grid from left to right, top
 to bottom) or vertical (pictures fill the grid from top to bottom, then left to
 right).
 
-An UIIcon_Grid can be persistant, which means that one of the pictures can be
+An Icon_Grid can be persistant, which means that one of the pictures can be
 the currently selected picture. This picture is highlighted all the time.
 */
-class UIIcon_Grid : public UIPanel {
-public:
+struct Icon_Grid : public Panel {
 	enum {
 		Grid_Horizontal = 0,
 		Grid_Vertical = 1,
@@ -49,11 +49,11 @@ public:
 	};
 
 public:
-	UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
+	Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
 
-	UISignal1<int> clicked;
-	UISignal1<int> mouseout;
-	UISignal1<int> mousein;
+	Signal1<int> clicked;
+	Signal1<int> mouseout;
+	Signal1<int> mousein;
 
 	bool is_persistant() const { return m_flags & Grid_Persistant; }
 	uint get_orientation() const { return m_flags & Grid_Orientation_Mask; }
@@ -98,6 +98,7 @@ private:
 	std::vector<Item>	m_items;
 
 	RGBColor		m_selectbox_color;
+};
 };
 
 #endif // included_ui_icongrid_h

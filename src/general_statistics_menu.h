@@ -24,24 +24,25 @@
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UICheckbox;
-class UIRadiogroup;
-class UITextarea;
-class UIButton;
+namespace UI {
+struct Checkbox;
+struct Radiogroup;
+struct Textarea;
+struct Button;
+};
 class WUIPlot_Area;
 
-class General_Statistics_Menu : public UIUniqueWindow {
-   public:
-	General_Statistics_Menu(Interactive_Player &, UIUniqueWindowRegistry &);
+struct General_Statistics_Menu : public UI::UniqueWindow {
+	General_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
       virtual ~General_Statistics_Menu(void);
 
 
    private:
       Interactive_Player* m_parent;
       WUIPlot_Area*       m_plot;
-      UIRadiogroup*       m_radiogroup;
+      UI::Radiogroup*       m_radiogroup;
       int                 m_selected_information;
-      UICheckbox*         m_cbs[MAX_PLAYERS];
+      UI::Checkbox*         m_cbs[MAX_PLAYERS];
 
    private:
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,20 +27,19 @@ class Editor_Interactive;
 class Editor_Increase_Resources_Tool;
 class Editor_Decrease_Resources_Tool;
 class Editor_Set_Resources_Tool;
-class UITextarea;
+namespace UI {struct Textarea;};
 
-class Editor_Tool_Change_Resources_Options_Menu : public Editor_Tool_Options_Menu {
-   public:
+struct Editor_Tool_Change_Resources_Options_Menu : public Editor_Tool_Options_Menu {
       Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive*, int, Editor_Increase_Resources_Tool*,
-            UIUniqueWindowRegistry*);
+            UI::UniqueWindow::Registry*);
       ~Editor_Tool_Change_Resources_Options_Menu() { delete m_radiogroup; }
 
    private:
       void selected(void);
       void clicked(int);
       void update(void);
-      UITextarea* m_increase, *m_set, *m_cur_selection;
-      UIRadiogroup* m_radiogroup;
+      UI::Textarea* m_increase, *m_set, *m_cur_selection;
+      UI::Radiogroup* m_radiogroup;
       Editor_Increase_Resources_Tool* m_irt;
       Editor_Decrease_Resources_Tool* m_drt;
       Editor_Set_Resources_Tool* m_srt;

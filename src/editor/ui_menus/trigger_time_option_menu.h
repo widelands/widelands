@@ -23,17 +23,18 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIButton;
 class Trigger_Time;
-class UITextarea;
-class UIEdit_Box;
+namespace UI {
+struct Button;
+struct Textarea;
+struct Edit_Box;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Trigger_Time_Option_Menu : public UIWindow {
-   public:
+struct Trigger_Time_Option_Menu : public UI::Window {
       Trigger_Time_Option_Menu(Editor_Interactive*, Trigger_Time*);
       ~Trigger_Time_Option_Menu();
 
@@ -46,8 +47,8 @@ class Trigger_Time_Option_Menu : public UIWindow {
 
       Trigger_Time* m_trigger;
       Editor_Interactive* m_parent;
-      UIEdit_Box* m_name;
-      UITextarea* m_textareas[6];
+      UI::Edit_Box* m_name;
+      UI::Textarea* m_textareas[6];
       int         m_values[6];
 };
 

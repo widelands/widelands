@@ -22,6 +22,7 @@
 #include "types.h"
 #include "ui_checkbox.h"
 
+namespace UI {
 /*
 ==============================================================================
 
@@ -36,8 +37,8 @@ Stateboxes start out enabled and unchecked.
 If picid is non-zero, the given picture is used instead of the normal checkbox
 graphics.
 */
-UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
-	: UIPanel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
+Statebox::Statebox(Panel *parent, int x, int y, uint picid)
+	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
 {
 	if (picid)
 	{
@@ -71,7 +72,7 @@ UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
 /**
 Clean up resources
 */
-UIStatebox::~UIStatebox()
+Statebox::~Statebox()
 {
 }
 
@@ -82,7 +83,7 @@ UIStatebox::~UIStatebox()
  *
  * Args: enabled	true if the checkbox should be enabled, false otherwise
  */
-void UIStatebox::set_enabled(bool enabled)
+void Statebox::set_enabled(bool enabled)
 {
 	m_enabled = enabled;
 
@@ -105,7 +106,7 @@ void UIStatebox::set_enabled(bool enabled)
  *
  * Args: on		true if the checkbox should be checked
  */
-void UIStatebox::set_state(bool on)
+void Statebox::set_state(bool on)
 {
 	if (on == m_state)
 		return;
@@ -121,7 +122,7 @@ void UIStatebox::set_state(bool on)
 /**
 Redraw the entire checkbox
 */
-void UIStatebox::draw(RenderTarget* dst)
+void Statebox::draw(RenderTarget* dst)
 {
 	if (m_custom_picture)
 	{
@@ -159,7 +160,7 @@ void UIStatebox::draw(RenderTarget* dst)
 /**
  * Highlight the checkbox when the mouse moves into it
  */
-void UIStatebox::handle_mousein(bool inside)
+void Statebox::handle_mousein(bool inside)
 {
 	m_highlighted = inside;
 	update(0, 0, get_w(), get_h());
@@ -169,14 +170,14 @@ void UIStatebox::handle_mousein(bool inside)
 /**
  * Left-click: Toggle checkbox state
  */
-bool UIStatebox::handle_mousepress(const Uint8 btn, int, int) {
+bool Statebox::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_enabled) clicked();
 
 	return true;
 }
-bool UIStatebox::handle_mouserelease(const Uint8 btn, int, int)
+bool Statebox::handle_mouserelease(const Uint8 btn, int, int)
 {return btn == SDL_BUTTON_LEFT;}
 
 
@@ -191,8 +192,9 @@ Checkbox
 /**
  * Toggle the checkbox state
  */
-void UICheckbox::clicked()
+void Checkbox::clicked()
 {
 	set_state(!get_state());
 	play_click();
 }
+};

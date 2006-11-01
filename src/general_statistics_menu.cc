@@ -55,9 +55,9 @@ Create all the buttons etc...
 ===============
 */
 General_Statistics_Menu::General_Statistics_Menu
-(Interactive_Player & parent, UIUniqueWindowRegistry & registry)
+(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
-UIUniqueWindow(&parent,&registry, 400, 400, _("General Statistics")),
+UI::UniqueWindow(&parent,&registry, 400, 400, _("General Statistics")),
 m_parent(&parent)
 {
 
@@ -67,7 +67,7 @@ m_parent(&parent)
    uint posy = offsy;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("General Statistics"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("General Statistics"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // Plotter
@@ -121,7 +121,7 @@ m_parent(&parent)
 
       char buffer[1024];
       sprintf(buffer, "pics/genstats_enable_plr_%02i.png", i);
-      UICheckbox* cb = new UICheckbox(this, posx, posy, g_gr->get_picture( PicMod_Game,  buffer ));
+      UI::Checkbox* cb = new UI::Checkbox(this, posx, posy, g_gr->get_picture( PicMod_Game,  buffer ));
       cb->set_size(button_size, 25);
       cb->set_id(i);
       cb->set_state(1);
@@ -134,7 +134,7 @@ m_parent(&parent)
    posy += 25+spacing+spacing;
 
    // Below, Radiobuttons for what to display
-   m_radiogroup = new UIRadiogroup();
+   m_radiogroup = new UI::Radiogroup();
    button_size = ( get_inner_w()-(spacing*8) ) / 7;
    m_radiogroup->add_button
 		(this,
@@ -187,39 +187,39 @@ m_parent(&parent)
    button_size = ( get_inner_w()-(spacing*5) ) / 4;
    posx = spacing;
    posy +=spacing+spacing;
-   UIButton *b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_15_MINS);
+   UI::Button *b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_15_MINS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("15 m").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_30_MINS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_30_MINS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("30 m").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_ONE_HOUR);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_ONE_HOUR);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("1 h").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_TWO_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_TWO_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("2 h").c_str());
 
    posy += 25 + spacing;
    posx = spacing;
-	b = new UIButton(this, posx, posy, 32, 32, 4, 100);
+	b = new UI::Button(this, posx, posy, 32, 32, 4, 100);
 	b->clickedid.set(this, &General_Statistics_Menu::clicked);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png"));
 	b->set_tooltip(_("Help").c_str());
 
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("4 h").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_EIGHT_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_EIGHT_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("8 h").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_16_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_16_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_title(_("16 h").c_str());
    posx += button_size+spacing;

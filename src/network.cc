@@ -84,20 +84,20 @@ class Cmd_NetCheckSync:public BaseCommand {
 };
 
 
-class NetStatusWindow:public UIWindow {
+class NetStatusWindow:public UI::Window {
     public:
-	NetStatusWindow (UIPanel*);
+	NetStatusWindow (UI::Panel*);
 
 	void add_player (int);
 	void set_ready (int);
 
     private:
 	struct Entry {
-		UITable_Entry*	entry;
+		UI::Table_Entry*	entry;
 		int		plnum;
 	};
 
-	UITable*		table;
+	UI::Table*		table;
 
 	std::vector<Entry>	entries;
 };
@@ -827,12 +827,12 @@ void NetClient::disconnect ()
 
 /*** class NetStatusWindow ***/
 
-NetStatusWindow::NetStatusWindow (UIPanel* parent)
-	:UIWindow(parent, 0, 0, 256, 192, _("Starting network game").c_str())
+NetStatusWindow::NetStatusWindow (UI::Panel* parent)
+	:UI::Window(parent, 0, 0, 256, 192, _("Starting network game").c_str())
 {
-    table=new UITable(this, 0, 0, 256, 192);
-    table->add_column (_("Player").c_str(), UITable::STRING, 192);
-    table->add_column (_("Status").c_str(), UITable::STRING, 64);
+    table=new UI::Table(this, 0, 0, 256, 192);
+    table->add_column (_("Player").c_str(), UI::Table::STRING, 192);
+    table->add_column (_("Status").c_str(), UI::Table::STRING, 64);
 }
 
 void NetStatusWindow::add_player (int num)
@@ -843,7 +843,7 @@ void NetStatusWindow::add_player (int num)
     snprintf (buffer, 64, "%s %d", _("Player").c_str(), num);
 
     entry.plnum=num;
-    entry.entry=new UITable_Entry(table, 0);
+    entry.entry=new UI::Table_Entry(table, 0);
     entry.entry->set_string (0, buffer);
     entry.entry->set_string (1, _("Waiting").c_str());
 

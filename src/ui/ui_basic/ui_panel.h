@@ -34,15 +34,15 @@ class RenderTarget;
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
 #define MOUSE_OVER_BRIGHT_FACTOR 15
 
+namespace UI {
 /**
- * UIPanel is a basic rectangular UI element.
+ * Panel is a basic rectangular UI element.
  * The outer rectangle is defined by (_x,_y,_w,_h) and encloses the entire panel,
  * including both border and inner area/rectangle.
  * The inner rectangle is the outer rectangle minus the border sizes.
  * Child panel coordinates are always relative to the inner rectangle.
  */
-class UIPanel : public UIObject {
-public:
+struct Panel : public Object {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
@@ -55,10 +55,10 @@ public:
 		pf_dock_windows_to_edges = 256, ///< children should snap to the edges of this panel
 	};
 
-	UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, const uint nh);
-	virtual ~UIPanel();
+	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
+	virtual ~Panel();
 
-	inline UIPanel *get_parent() const { return _parent; }
+	inline Panel *get_parent() const { return _parent; }
 
 	void free_children();
 
@@ -89,7 +89,7 @@ public:
 	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
 	void set_dock_windows_to_edges(const bool on = true);
 	void set_inner_size(uint nw, uint nh);
-	void fit_inner(UIPanel* inner);
+	void fit_inner(Panel* inner);
 	void set_border(uint l, uint r, uint t, uint b);
 
 	inline uint get_lborder() const { return _lborder; }
@@ -100,10 +100,10 @@ public:
 	inline int get_inner_w() const { return _w-(_lborder+_rborder); }
 	inline int get_inner_h() const { return _h-(_tborder+_bborder); }
 
-	const UIPanel * get_next_sibling () const {return _next;}
-	const UIPanel * get_prev_sibling () const {return _prev;}
-	const UIPanel * get_first_child  () const {return _fchild;}
-	const UIPanel * get_last_child   () const {return _lchild;}
+	const Panel * get_next_sibling () const {return _next;}
+	const Panel * get_prev_sibling () const {return _prev;}
+	const Panel * get_first_child  () const {return _fchild;}
+	const Panel * get_last_child   () const {return _lchild;}
 
 	void move_to_top();
 
@@ -162,18 +162,18 @@ private:
 
 	void do_draw(RenderTarget* dst);
 
-	UIPanel *get_mousein(int x, int y);
+	Panel *get_mousein(int x, int y);
 	void do_mousein(bool inside);
 	bool do_mousepress  (const Uint8 btn, int x, int y);
 	bool do_mouserelease(const Uint8 btn, int x, int y);
 	void do_mousemove(int x, int y, int xdiff, int ydiff);
 	bool do_key(bool down, int code, char c);
 
-	UIPanel *_parent;
-	UIPanel *_next, *_prev;
-	UIPanel *_fchild, *_lchild; // first, last child
-	UIPanel *_mousein; // child panel the mouse is in
-	UIPanel *_focus; // keyboard focus
+	Panel *_parent;
+	Panel *_next, *_prev;
+	Panel *_fchild, *_lchild; // first, last child
+	Panel *_mousein; // child panel the mouse is in
+	Panel *_focus; // keyboard focus
 
 	uint _flags;
 	uint _cache;
@@ -189,7 +189,7 @@ private:
 
 	std::string _tooltip;
 
-	void draw_tooltip(RenderTarget* dst, UIPanel *lowest);
+	void draw_tooltip(RenderTarget* dst, Panel *lowest);
 
 public:
 	void set_tooltip(const std::string &);
@@ -197,25 +197,26 @@ public:
 
 
 private:
-	static UIPanel *ui_trackmouse(int *x, int *y);
+	static Panel *ui_trackmouse(int *x, int *y);
 	static void ui_mousepress  (const Uint8 button, int x, int y);
 	static void ui_mouserelease(const Uint8 button, int x, int y);
 	static void ui_mousemove(int x, int y, int xdiff, int ydiff);
 	static void ui_key(bool down, int code, char c);
 
-	static UIPanel *_modal;
-	static UIPanel *_g_mousegrab;
-	static UIPanel *_g_mousein;
+	static Panel *_modal;
+	static Panel *_g_mousegrab;
+	static Panel *_g_mousein;
 	static uint s_default_cursor;
 };
 
-inline void UIPanel::set_snap_windows_only_when_overlapping(const bool on) {
+inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
 	_flags &= ~pf_snap_windows_only_when_overlapping;
 	if (on) _flags |= pf_snap_windows_only_when_overlapping;
 }
-inline void UIPanel::set_dock_windows_to_edges(const bool on) {
+inline void Panel::set_dock_windows_to_edges(const bool on) {
 	_flags &= ~pf_dock_windows_to_edges;
 	if (on) _flags |= pf_dock_windows_to_edges;
 }
+};
 
 #endif

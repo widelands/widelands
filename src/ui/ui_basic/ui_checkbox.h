@@ -27,18 +27,18 @@
 #define STATEBOX_WIDTH 20
 #define STATEBOX_HEIGHT 20
 
+namespace UI {
 /**
  * Virtual base class providing a box that can be checked or unchecked.
- * Serves as base for UICheckbox and UIRadiobutton.
+ * Serves as base for Checkbox and Radiobutton.
  */
-class UIStatebox : public UIPanel {
-public:
-	UIStatebox(UIPanel *parent, int x, int y, uint picid = 0);
-	~UIStatebox();
+struct Statebox : public Panel {
+	Statebox(Panel *parent, int x, int y, uint picid = 0);
+	~Statebox();
 
-	UISignal changed;
-	UISignal1<bool> changedto;
-   UISignal2<int,bool> changedtoid;
+	Signal changed;
+	Signal1<bool> changedto;
+   Signal2<int,bool> changedtoid;
 
 	void set_enabled(bool enabled);
 
@@ -74,16 +74,16 @@ private:
 /**
  * A checkbox is a simplistic panel which consists of just a small box which
  * can be either checked (on) or unchecked (off)
- * A checkbox only differs from a UIStatebox in that clicking on it toggles the
+ * A checkbox only differs from a Statebox in that clicking on it toggles the
  * state
 */
-class UICheckbox : public UIStatebox {
+class Checkbox : public Statebox {
 public:
-	UICheckbox(UIPanel *parent, int x, int y, int picid=0) : UIStatebox(parent, x, y, picid) { }
+	Checkbox(Panel *parent, int x, int y, int picid=0) : Statebox(parent, x, y, picid) { }
 
 private:
 	void clicked();
 };
-
+};
 
 #endif // included_ui_checkbox_h

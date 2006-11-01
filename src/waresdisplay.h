@@ -23,7 +23,7 @@
 #include "ui_panel.h"
 
 class Editor_Game_Base;
-class UITextarea;
+class UI::Textarea;
 class Player;
 class WareList;
 
@@ -32,7 +32,7 @@ class WaresDisplay
 ------------------
 Panel that displays the contents of a WareList.
 */
-class WaresDisplay : public UIPanel {
+class WaresDisplay : public UI::Panel {
 public:
 	enum {
 		Width = 136,	// 5*24 (5 wares icons) + space in between
@@ -46,7 +46,7 @@ public:
    };
 
 public:
-	WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player);
+	WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player);
 	virtual ~WaresDisplay();
 
    void handle_mousemove(int x, int y, int xdiff, int ydiff);
@@ -59,7 +59,7 @@ protected:
 	virtual void draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock, bool);
 
 private:
-	UITextarea*       m_curware;
+	UI::Textarea*       m_curware;
    Editor_Game_Base*	m_game;
 	Player*				m_player;
    wdType            m_type;

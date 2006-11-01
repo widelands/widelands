@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,19 +25,20 @@
 
 class Editor_Interactive;
 class Editor_Place_Bob_Tool;
-class UITextarea;
-class UICheckbox;
+namespace UI {
+struct Textarea;
+struct Checkbox;
+};
 
-class Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
-   public:
+struct Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
       Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive*, int, Editor_Place_Bob_Tool*,
-		                                         UIUniqueWindowRegistry*);
+		                                         UI::UniqueWindow::Registry*);
       virtual ~Editor_Tool_Place_Bob_Options_Menu();
 
    private:
-      std::vector<UICheckbox*> m_checkboxes;
+      std::vector<UI::Checkbox*> m_checkboxes;
       Editor_Place_Bob_Tool* m_pit;
-      UITextarea* m_name;
+      UI::Textarea* m_name;
       void clicked(int, bool);
       void do_nothing(int, bool);
 };

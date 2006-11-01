@@ -26,6 +26,7 @@
 #include "keycodes.h"
 #include "wlapplication.h"
 
+namespace UI {
 //  Widht the horizontal border grapichs must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
 
@@ -60,8 +61,8 @@
  *       h
  *       title	string to display in the window title
  */
-UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title) :
-UIPanel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
+Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title) :
+Panel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
 _small(false), _dragging(false),
 _docked_left(false), _docked_right(false), _docked_bottom(false),
 _drag_start_win_x(0), _drag_start_win_y(0), _drag_start_mouse_x(0), _drag_start_mouse_y(0),
@@ -84,7 +85,7 @@ m_pic_background(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
  *
  * Resource cleanup
  */
-UIWindow::~UIWindow()
+Window::~Window()
 {
 }
 
@@ -92,7 +93,7 @@ UIWindow::~UIWindow()
 /**
  * Replace the current title with a new one
 */
-void UIWindow::set_title(const char *text)
+void Window::set_title(const char *text)
 {
 	m_title = text;
 	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
@@ -102,14 +103,14 @@ void UIWindow::set_title(const char *text)
 Move the window so that it is under the mouse cursor.
 Ensure that the window doesn't move out of the screen.
 */
-void UIWindow::move_to_mouse()
+void Window::move_to_mouse()
 {
 	int px, py;
 
 	px = get_mouse_x() - get_w()/2;
 	py = get_mouse_y() - get_h()/2;
 
-	UIPanel *parent = get_parent();
+	Panel *parent = get_parent();
 	if (parent) {
 		if (px < 0)
 			px = 0;
@@ -129,9 +130,9 @@ void UIWindow::move_to_mouse()
 /**
 Move the window so that it is centered wrt the parent.
 */
-void UIWindow::center_to_parent()
+void Window::center_to_parent()
 {
-	UIPanel* parent = get_parent();
+	Panel* parent = get_parent();
 
 	assert(parent);
 
@@ -142,7 +143,7 @@ void UIWindow::center_to_parent()
 /**
 Redraw the window frame and background
 */
-void UIWindow::draw_border(RenderTarget* dst)
+void Window::draw_border(RenderTarget* dst)
 {
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
 	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
@@ -268,7 +269,7 @@ void UIWindow::draw_border(RenderTarget* dst)
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool UIWindow::handle_mousepress(const Uint8 btn, int mx, int my) {
+bool Window::handle_mousepress(const Uint8 btn, int mx, int my) {
 	const WLApplication & wla = *WLApplication::get();
 	if
 		(((wla.get_key_state(KEY_LCTRL) | wla.get_key_state(KEY_RCTRL))
@@ -293,7 +294,7 @@ bool UIWindow::handle_mousepress(const Uint8 btn, int mx, int my) {
 	}
 	return true;
 }
-bool UIWindow::handle_mouserelease(const Uint8 btn, int, int) {
+bool Window::handle_mouserelease(const Uint8 btn, int, int) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
 		_dragging = false;
@@ -304,7 +305,7 @@ bool UIWindow::handle_mouserelease(const Uint8 btn, int, int) {
 /*
  * minimize this window
  */
-void UIWindow::minimize(bool t) {
+void Window::minimize(bool t) {
    if(t==_small) return;
 
    if(_small) {
@@ -318,7 +319,7 @@ void UIWindow::minimize(bool t) {
    }
 }
 
-inline void UIWindow::dock_left() {
+inline void Window::dock_left() {
 	assert(not _docked_left);
 	_docked_left = true;
 	set_size(get_inner_w() + get_rborder(), get_h());
@@ -326,35 +327,35 @@ inline void UIWindow::dock_left() {
 	assert(get_lborder() == 0);
 }
 
-inline void UIWindow::undock_left() {
+inline void Window::undock_left() {
 	assert(_docked_left);
 	_docked_left = false;
 	set_size(VT_B_PIXMAP_THICKNESS + get_inner_w() + get_rborder(), get_h());
 	set_border(VT_B_PIXMAP_THICKNESS, get_rborder(), get_tborder(), get_bborder());
 }
 
-inline void UIWindow::dock_right() {
+inline void Window::dock_right() {
 	assert(not _docked_right);
 	_docked_right = true;
 	set_size(get_lborder() + get_inner_w(), get_h());
 	set_border(get_lborder(), 0, get_tborder(), get_bborder());
 }
 
-inline void UIWindow::undock_right() {
+inline void Window::undock_right() {
 	assert(_docked_right);
 	_docked_right = false;
 	set_size(get_lborder() + get_inner_w() + VT_B_PIXMAP_THICKNESS, get_h());
 	set_border(get_lborder(), VT_B_PIXMAP_THICKNESS, get_tborder(), get_bborder());
 }
 
-inline void UIWindow::dock_bottom() {
+inline void Window::dock_bottom() {
 	assert(not _docked_bottom);
 	_docked_bottom = true;
 	set_size(get_w(), get_tborder() + get_inner_h());
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
 }
 
-inline void UIWindow::undock_bottom() {
+inline void Window::undock_bottom() {
 	assert(_docked_bottom);
 	_docked_bottom = false;
 	set_size(get_w(), get_tborder() + get_inner_h() + BT_B_PIXMAP_THICKNESS);
@@ -366,14 +367,14 @@ inline void UIWindow::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-void UIWindow::handle_mousemove(int mx, int my, int, int) {
+void Window::handle_mousemove(int mx, int my, int, int) {
 	if (_dragging) {
 		const int mouse_x = get_x() + get_lborder() + mx;
 		const int mouse_y = get_y() + get_tborder() + my;
 		int left = std::max(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
 		int top  = std::max(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
 		int new_left = left, new_top = top;
-		const UIPanel * const parent = get_parent();
+		const Panel * const parent = get_parent();
 
 		if (parent) {
 			const int w = get_w();
@@ -427,12 +428,12 @@ void UIWindow::handle_mousemove(int mx, int my, int, int) {
 				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
 			}
 
-			{//  Snap to other UIPanels.
+			{//  Snap to other Panels.
 				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
 				const int right = left + w, bot = top + h;
 
 				for
-					(const UIPanel * snap_target = parent->get_first_child();
+					(const Panel * snap_target = parent->get_first_child();
 					 snap_target;
 					 snap_target = snap_target->get_next_sibling())
 				{
@@ -514,3 +515,4 @@ void UIWindow::handle_mousemove(int mx, int my, int, int) {
 		set_pos(new_left, new_top);
 	}
 }
+};

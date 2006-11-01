@@ -25,11 +25,12 @@
 #include "font_handler.h"
 #include "constants.h"
 
+namespace UI {
 /**
 Initialize the grid
 */
-UIIcon_Grid::UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, uint flags, int cols)
-	: UIPanel(parent, x, y, 0, 0)
+Icon_Grid::Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols)
+	: Panel(parent, x, y, 0, 0)
 {
 	m_flags = flags;
 	m_columns = cols;
@@ -50,7 +51,7 @@ UIIcon_Grid::UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, ui
 Add a new icon to the list and resize appropriately.
 Returns the index of the newly added icon.
 */
-int UIIcon_Grid::add(uint picid, void* data, std::string descr)
+int Icon_Grid::add(uint picid, void* data, std::string descr)
 {
 	Item it;
 
@@ -91,7 +92,7 @@ int UIIcon_Grid::add(uint picid, void* data, std::string descr)
 /**
 Returns the user-defined data of the icon with the given index.
 */
-void* UIIcon_Grid::get_data(int idx)
+void* Icon_Grid::get_data(int idx)
 {
 	assert((uint)idx < m_items.size());
 
@@ -102,7 +103,7 @@ void* UIIcon_Grid::get_data(int idx)
 /**
 Set the currently selected icon for persistant grids.
 */
-void UIIcon_Grid::set_selection(int idx)
+void Icon_Grid::set_selection(int idx)
 {
 	assert(is_persistant());
 	assert((uint)idx < m_items.size());
@@ -118,7 +119,7 @@ void UIIcon_Grid::set_selection(int idx)
 /**
 Change the color of the selection box (default is yellow).
 */
-void UIIcon_Grid::set_selectbox_color(RGBColor clr)
+void Icon_Grid::set_selectbox_color(RGBColor clr)
 {
 	m_selectbox_color = clr;
 }
@@ -127,7 +128,7 @@ void UIIcon_Grid::set_selectbox_color(RGBColor clr)
 /**
 Draw the building symbols
 */
-void UIIcon_Grid::draw(RenderTarget* dst)
+void Icon_Grid::draw(RenderTarget* dst)
 {
 	int x, y;
 	bool highlight = false;
@@ -189,10 +190,10 @@ void UIIcon_Grid::draw(RenderTarget* dst)
 }
 
 /**
-Return the item index for a given point inside the UIIcon_Grid.
+Return the item index for a given point inside the Icon_Grid.
 Returns -1 if no item is below the point.
 */
-int UIIcon_Grid::index_for_point(int x, int y)
+int Icon_Grid::index_for_point(int x, int y)
 {
 	int w = m_cell_width;
 	int h = m_cell_height;
@@ -217,7 +218,7 @@ int UIIcon_Grid::index_for_point(int x, int y)
 /**
 Calculate the upper left corner of the cell with the given index.
 */
-void UIIcon_Grid::get_cell_position(int idx, int* px, int* py)
+void Icon_Grid::get_cell_position(int idx, int* px, int* py)
 {
 	if (get_orientation() == Grid_Horizontal)
 	{
@@ -235,7 +236,7 @@ void UIIcon_Grid::get_cell_position(int idx, int* px, int* py)
 /**
 Issue an update() call for the cell with the given idx.
 */
-void UIIcon_Grid::update_for_index(int idx)
+void Icon_Grid::update_for_index(int idx)
 {
 	if (idx >= 0 && idx < (int)m_items.size()) {
 		int x, y;
@@ -249,7 +250,7 @@ void UIIcon_Grid::update_for_index(int idx)
 /**
 Turn highlight off when the mouse leaves the grid
 */
-void UIIcon_Grid::handle_mousein(bool inside)
+void Icon_Grid::handle_mousein(bool inside)
 {
 	if (!inside) {
 		if (m_highlight != -1) {
@@ -265,7 +266,7 @@ void UIIcon_Grid::handle_mousein(bool inside)
 /**
 Update highlight under the mouse and send signals.
 */
-void UIIcon_Grid::handle_mousemove(int x, int y, int, int) {
+void Icon_Grid::handle_mousemove(int x, int y, int, int) {
 	int hl = index_for_point(x, y);
 
 	if (hl != m_highlight) {
@@ -283,7 +284,7 @@ void UIIcon_Grid::handle_mousemove(int x, int y, int, int) {
 Left mouse down selects the building, left mouse up acknowledges and sends the
 signal.
 */
-bool UIIcon_Grid::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Icon_Grid::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	const int hl = index_for_point(x, y);
@@ -295,7 +296,7 @@ bool UIIcon_Grid::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	return true;
 }
-bool UIIcon_Grid::handle_mouserelease(const Uint8 btn, int x, int y) {
+bool Icon_Grid::handle_mouserelease(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	const int hl = index_for_point(x, y);
@@ -313,3 +314,4 @@ bool UIIcon_Grid::handle_mouserelease(const Uint8 btn, int x, int y) {
 
 	return true;
 }
+};

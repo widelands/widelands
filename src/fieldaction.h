@@ -23,10 +23,10 @@
 class Building;
 class PlayerImmovable;
 class Interactive_Base;
-struct UIUniqueWindowRegistry;
+struct UI::UniqueWindow::Registry;
 
 // fieldaction.cc
-void show_field_action(Interactive_Base *parent, Player* player, UIUniqueWindowRegistry* registry);
+void show_field_action(Interactive_Base *parent, Player* player, UI::UniqueWindow::Registry* registry);
 
 // building_ui.cc
 void show_bulldoze_confirm(Interactive_Base* player, Building* building, PlayerImmovable* todestroy);

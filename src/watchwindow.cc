@@ -50,13 +50,13 @@ struct WatchWindowView {
 	Object_Ptr tracking;		// if non-null, we're tracking a Bob
 };
 
-class WatchWindow : public UIWindow {
+class WatchWindow : public UI::Window {
 public:
 	WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window=false);
 	~WatchWindow();
 
-	UISignal1<Point> warp_mainview;
-   UISignal         closed;
+	UI::Signal1<Point> warp_mainview;
+   UI::Signal         closed;
 
 	void start_tracking(Point pos);
 	void toggle_tracking();
@@ -82,7 +82,7 @@ private:
 	uint last_visit;
 	int m_cur_index;
 	std::vector<WatchWindowView> m_views;
-	UIButton* m_view_btns[NUM_VIEWS];
+	UI::Button* m_view_btns[NUM_VIEWS];
 };
 
 
@@ -96,34 +96,34 @@ Initialize a watch window.
 ===============
 */
 WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window)
-	: UIWindow(parent, x, y, w, h, _("Watch").c_str())
+	: UI::Window(parent, x, y, w, h, _("Watch").c_str())
 {
-	UIButton* btn;
+	UI::Button* btn;
 
 	m_game = parent->get_game();
 	last_visit = m_game->get_gametime();
 	m_single_window = single_window;
 
-	// UIButtons
-	btn = new UIButton(this, 0, h - 34, 34, 34, 20);
+	// UI::Buttons
+	btn = new UI::Button(this, 0, h - 34, 34, 34, 20);
 	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_watch_follow.png" ));
 	btn->clicked.set(this, &WatchWindow::toggle_tracking);
 	btn->set_tooltip(_("Follow").c_str());
 
-	btn = new UIButton(this, 34, h - 34, 34, 34, 21);
+	btn = new UI::Button(this, 34, h - 34, 34, 34, 21);
 	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_goto.png" ));
 	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
 	btn->set_tooltip(_("Center mainview on this").c_str());
 
 	if (m_single_window) {
 		for (int i=0;i<NUM_VIEWS;i++) {
-			btn = new UIButton(this, 74 + (17 * i), 200 - 34, 17, 34, 0, i);
+			btn = new UI::Button(this, 74 + (17 * i), 200 - 34, 17, 34, 0, i);
 			btn->set_title("-");
 			btn->clickedid.set(this, &WatchWindow::set_view);
 			m_view_btns[i] = btn;
 		}
 
-		btn = new UIButton(this, w-34, h - 34, 34, 34, 22);
+		btn = new UI::Button(this, w-34, h - 34, 34, 34, 22);
 		btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_abort.png" ));
 		btn->clicked.set(this, &WatchWindow::close_cur_view);
 		btn->set_tooltip(_("Close").c_str());
@@ -330,7 +330,7 @@ Update the mapview if we're tracking something.
 */
 void WatchWindow::think()
 {
-	UIWindow::think();
+	UI::Window::think();
 
 	Map_Object* obj = m_views[m_cur_index].tracking.get(m_game);
 

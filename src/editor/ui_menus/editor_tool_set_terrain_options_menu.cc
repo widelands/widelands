@@ -50,7 +50,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent, int index,
-						Editor_Set_Both_Terrain_Tool* sbt, UIUniqueWindowRegistry *registry)
+						Editor_Set_Both_Terrain_Tool* sbt, UI::UniqueWindow::Registry *registry)
 	: Editor_Tool_Options_Menu(parent, index, registry, _("Terrain Select").c_str())
 {
    m_sbt=sbt;
@@ -138,7 +138,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          // Save this surface, so we can free it later on
          m_surfaces.push_back(surface);
 
-         UICheckbox* cb=new UICheckbox(this, xpos , ypos, surface);
+         UI::Checkbox* cb=new UI::Checkbox(this, xpos , ypos, surface);
 
          cb->set_size(TEXTURE_W+1, TEXTURE_H+1);
          cb->set_id(i-1);
@@ -153,7 +153,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    }
    ypos+=TEXTURE_H+1+space+5;
 
-   UITextarea* ta=new UITextarea(this, 0, 5, _("Choose Terrain Menu"), Align_Left);
+   UI::Textarea* ta=new UI::Textarea(this, 0, 5, _("Choose Terrain Menu"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
 
@@ -166,7 +166,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          --j;
       }
    }
-   m_textarea=new UITextarea(this, 5, get_inner_h()-25, get_inner_w()-10, 20, buf, Align_Center);
+   m_textarea=new UI::Textarea(this, 5, get_inner_h()-25, get_inner_w()-10, 20, buf, Align_Center);
 }
 
 /*

@@ -24,14 +24,13 @@
 
 class Editor_Interactive;
 class Trigger_Null;
-class UIEdit_Box;
+namespace UI {struct Edit_Box;};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Trigger_Null_Option_Menu : public UIWindow {
-   public:
+struct Trigger_Null_Option_Menu : public UI::Window {
       Trigger_Null_Option_Menu(Editor_Interactive*, Trigger_Null*);
       ~Trigger_Null_Option_Menu();
 
@@ -43,7 +42,7 @@ class Trigger_Null_Option_Menu : public UIWindow {
 
       Trigger_Null* m_trigger;
       Editor_Interactive* m_parent;
-      UIEdit_Box* m_name;
+      UI::Edit_Box* m_name;
 };
 
 #endif

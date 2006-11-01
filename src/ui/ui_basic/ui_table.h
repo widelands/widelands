@@ -27,14 +27,14 @@
 #include "ui_signal.h"
 
 
-class UIButton;
-class UIScrollbar;
-class UITable;
+namespace UI {
+struct Button;
+struct Scrollbar;
+struct Table;
 
-class UITable_Entry {
-   public:
-      UITable_Entry(UITable*, void*, int picid=-1, bool select = false);
-      ~UITable_Entry(void);
+struct Table_Entry {
+      Table_Entry(Table*, void*, int picid=-1, bool select = false);
+      ~Table_Entry(void);
 
       // Data Functions
       void set_string(int, const char*);
@@ -67,8 +67,8 @@ class UITable_Entry {
  * whith columns and lines and all entrys can be seleted
  * by colums by clicking on the header-button
  */
-class UITable : public UIPanel {
-   friend class UITable_Entry;
+class Table : public Panel {
+   friend class Table_Entry;
 
 public: // DATA
    enum Type {
@@ -80,11 +80,11 @@ public: // DATA
    };
 
 public: // FUNCTIONS
-	UITable(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, Dir = DOWN);
-	~UITable();
+	Table(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, Dir = DOWN);
+	~Table();
 
-	UISignal1<int> selected;
-   UISignal1<int> double_clicked;
+	Signal1<int> selected;
+   Signal1<int> double_clicked;
 
    void add_column(const char*, Type, int);
 
@@ -105,9 +105,9 @@ public: // FUNCTIONS
 
 	int get_nr_entries(void) { return m_entries.size(); }
 	int get_selection_index(void) { return m_selection; }
-	UITable_Entry * get_entry(const uint n) const throw ()
+	Table_Entry * get_entry(const uint n) const throw ()
 	{assert(m_entries.size() > n); return m_entries[n];}
-	UITable_Entry* find_entry(const void*);	// find by userdata
+	Table_Entry* find_entry(const void*);	// find by userdata
 
    void select(int i);
 	inline void *get_selection() {
@@ -127,7 +127,7 @@ private: // DATA
    struct Column {
       std::string name;
       Type type;
-      UIButton* btn;
+      Button* btn;
    };
 
    struct Entry {
@@ -142,7 +142,7 @@ private: // DATA
 	uint                m_max_pic_width;
    int                  m_lineheight;
 	Align						m_align;
-	UIScrollbar*		   m_scrollbar;
+	Scrollbar*		   m_scrollbar;
 	int						m_scrollpos;	// in pixels
 	int						m_selection;	// -1 when nothing is selected
    int                  m_last_click_time;
@@ -153,9 +153,10 @@ private: // DATA
 
 private: // FUNCTIONS
    void header_button_clicked(int);
-   void add_entry(UITable_Entry* t, bool);
-	std::vector<UITable_Entry*>	m_entries;
+   void add_entry(Table_Entry* t, bool);
+	std::vector<Table_Entry*>	m_entries;
 	void set_scrollpos(int pos);
+};
 };
 
 #endif

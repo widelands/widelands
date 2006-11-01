@@ -24,9 +24,8 @@
 
 class Editor_Interactive;
 
-class Editor_Tool_Options_Menu : public UIUniqueWindow {
-      public:
-         Editor_Tool_Options_Menu(Editor_Interactive*, int index, UIUniqueWindowRegistry*, const char* title);
+struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
+         Editor_Tool_Options_Menu(Editor_Interactive*, int index, UI::UniqueWindow::Registry*, const char* title);
          ~Editor_Tool_Options_Menu();
 
          inline Editor_Interactive* get_parent() { return m_parent; }

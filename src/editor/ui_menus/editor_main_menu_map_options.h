@@ -23,8 +23,10 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIEdit_Box;
-class UIMultiline_Editbox;
+namespace UI {
+class Edit_Box;
+class Multiline_Editbox;
+};
 
 /*
 =================================================
@@ -37,8 +39,7 @@ author, name and description
 
 =================================================
 */
-class Main_Menu_Map_Options : public UIWindow {
-   public:
+struct Main_Menu_Map_Options : public UI::Window {
       Main_Menu_Map_Options(Editor_Interactive*);
       virtual ~Main_Menu_Map_Options();
 
@@ -46,9 +47,9 @@ class Main_Menu_Map_Options : public UIWindow {
       void changed(int);
       void editbox_changed(void);
       Editor_Interactive  *m_parent;
-      UIMultiline_Editbox* m_descr;
-      UITextarea* m_world, *m_nrplayers, *m_size;
-      UIEdit_Box* m_name, *m_author;
+      UI::Multiline_Editbox* m_descr;
+      UI::Textarea* m_world, *m_nrplayers, *m_size;
+      UI::Edit_Box* m_name, *m_author;
       void update();
 };
 

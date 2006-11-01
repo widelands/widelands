@@ -31,7 +31,7 @@
 class RenderTarget;
 class Path;
 class Player;
-class UITab_Panel;
+namespace UI {struct Tab_Panel;};
 
 
 //
@@ -186,7 +186,7 @@ public:
 	virtual void act(Game*, uint data);
 
 	// implementation is in game_debug_ui.cc
-	virtual void create_debug_panels(Editor_Game_Base* egbase, UITab_Panel* tabs);
+	virtual void create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs);
 
 	LogSink* get_logsink() { return m_logsink; }
 	void set_logsink(LogSink* sink);

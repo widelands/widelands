@@ -46,25 +46,25 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 	m_ml=ml;
 
 	// Title
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter);
+	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 550, 450, 200, 26, 0, 0);
+	b = new UI::Button(this, 550, 450, 200, 26, 0, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back_clicked);
 	b->set_title(_("Back").c_str());
 
-	m_ok = new UIButton(this, 550, 480, 200, 26, 2, 1);
+	m_ok = new UI::Button(this, 550, 480, 200, 26, 2, 1);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LaunchGame::start_clicked);
 	m_ok->set_title(_("Start game").c_str());
 	m_ok->set_enabled(false);
 	m_ok->set_visible(m_netgame==0 || m_netgame->is_host());
 
 	// Map selection fields
-	m_mapname = new UITextarea(this, 650, 250, "(no map)", Align_HCenter);
-	b = new UIButton(this, 550, 280, 200, 26, 1, 0);
+	m_mapname = new UI::Textarea(this, 650, 250, "(no map)", Align_HCenter);
+	b = new UI::Button(this, 550, 280, 200, 26, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
 	b->set_title(_("Select map").c_str());
 	b->set_enabled (m_netgame==0 || m_netgame->is_host());

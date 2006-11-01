@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,10 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UITextarea;
-class UIButton;
+namespace UI {
+struct Textarea;
+struct Button;
+};
 
 /*
 =================================================
@@ -39,15 +41,14 @@ things like size, world ....
 
 =================================================
 */
-class Main_Menu_New_Map : public UIWindow {
-   public:
+struct Main_Menu_New_Map : public UI::Window {
       Main_Menu_New_Map(Editor_Interactive*);
       virtual ~Main_Menu_New_Map();
 
    private:
       Editor_Interactive *m_parent;
-      UITextarea *m_width, *m_height;
-      UIButton* m_world;
+      UI::Textarea *m_width, *m_height;
+      UI::Button* m_world;
       int m_w, m_h;
       uint m_currentworld;
       std::vector<std::string>* m_worlds;

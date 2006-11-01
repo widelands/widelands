@@ -36,7 +36,7 @@ class MiniMap;
  * to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-class Interactive_Base : public UIPanel {
+class Interactive_Base : public UI::Panel {
    friend class Game_Interactive_Player_Data_Packet;
    friend class Sound_Handler;
 
@@ -127,7 +127,7 @@ class Interactive_Base : public UIPanel {
       CoordPath		*m_buildroad; // path for the new road
       int      m_road_build_player;
 
-      UIUniqueWindowRegistry m_minimap;
+      UI::UniqueWindow::Registry m_minimap;
 
    protected:
       void toggle_minimap(void);

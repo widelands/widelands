@@ -29,8 +29,10 @@
 
 class Fullscreen_Menu_Options;
 struct Section;
-struct UICheckbox;
-template <typename T> struct UIListselect;
+namespace UI {
+struct Checkbox;
+template <typename T> struct Listselect;
+};
 
 class Options_Ctrl {
 	public:
@@ -72,16 +74,16 @@ public:
    };
 
 private:
-	UICheckbox*	m_fullscreen;
-	UICheckbox*	m_inputgrab;
-	UICheckbox*	m_music;
-	UICheckbox*	m_fx;
-	UICheckbox* m_single_watchwin;
-	UICheckbox* m_show_workarea_preview;
-	UICheckbox* m_snap_windows_only_when_overlapping;
-	UICheckbox* m_dock_windows_to_edges;
-	UIListselect<void *> * m_reslist;
-	UIListselect<std::string &> * m_language_list;
+	UI::Checkbox*	m_fullscreen;
+	UI::Checkbox*	m_inputgrab;
+	UI::Checkbox*	m_music;
+	UI::Checkbox*	m_fx;
+	UI::Checkbox* m_single_watchwin;
+	UI::Checkbox* m_show_workarea_preview;
+	UI::Checkbox* m_snap_windows_only_when_overlapping;
+	UI::Checkbox* m_dock_windows_to_edges;
+	UI::Listselect<void *> * m_reslist;
+	UI::Listselect<std::string &> * m_language_list;
 
 	struct res {
 		int xres;

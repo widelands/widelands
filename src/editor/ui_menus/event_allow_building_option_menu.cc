@@ -36,12 +36,12 @@
 #include "util.h"
 
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
-   UIWindow(parent, 0, 0, 200, 280, _("Event Option Menu").c_str()) {
+   UI::Window(parent, 0, 0, 200, 280, _("Event Option Menu").c_str()) {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Allow Building Event Options"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Allow Building Event Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    m_player=m_event->get_player();
@@ -69,48 +69,48 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    }
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+   m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
    m_name->set_text( event->get_name() );
    posy+=20+spacing;
 
    // Player
-   new UITextarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
-   m_player_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
-   UIButton* b=new UIButton(this, spacing+90, posy, 20, 20, 0, 15);
+   new UI::Textarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
+   m_player_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
+   UI::Button* b=new UI::Button(this, spacing+90, posy, 20, 20, 0, 15);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
-   b=new UIButton(this, spacing+110, posy, 20, 20, 0, 16);
+   b=new UI::Button(this, spacing+110, posy, 20, 20, 0, 16);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posy+=20+spacing;
 
    // Building
-   new UITextarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
-   b=new UIButton(this, spacing+70, posy, 20, 20, 0, 23);
+   new UI::Textarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
+   b=new UI::Button(this, spacing+70, posy, 20, 20, 0, 23);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
-   b=new UIButton(this, spacing+90, posy, 20, 20, 0, 24);
+   b=new UI::Button(this, spacing+90, posy, 20, 20, 0, 24);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posy+=20+spacing;
-   m_building_ta=new UITextarea(this, 0, posy, get_inner_w(), 20, _("Headquarters"), Align_Center);
+   m_building_ta=new UI::Textarea(this, 0, posy, get_inner_w(), 20, _("Headquarters"), Align_Center);
    posy+=20+spacing;
 
    // Enable
-   new UITextarea(this, spacing, posy, 150, 20, _("Allow Building: "), Align_CenterLeft);
-   m_allow=new UICheckbox(this, spacing+150, posy);
+   new UI::Textarea(this, spacing, posy, 150, 20, _("Allow Building: "), Align_CenterLeft);
+   m_allow=new UI::Checkbox(this, spacing+150, posy);
    m_allow->set_state(m_event->get_allow());
    posy+=20+spacing;
 
    // Ok/Cancel Buttons
    posy+=spacing; // Extra space
    posx=(get_inner_w()/2)-60-spacing;
-   b=new UIButton(this, posx, posy, 60, 20, 0, 1);
+   b=new UI::Button(this, posx, posy, 60, 20, 0, 1);
    b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 60, 20, 1, 0);
+   b=new UI::Button(this, posx, posy, 60, 20, 1, 0);
    b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
 

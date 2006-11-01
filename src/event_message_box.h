@@ -27,7 +27,7 @@
 
 class Trigger_Null;
 class Editor_Game_Base;
-class UIPanel;
+namespace UI {struct Panel;};
 
 /*
  * This event shows a message box
@@ -90,7 +90,7 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       bool m_is_modal;
 
       std::vector<Button_Descr> m_buttons;
-      UIPanel*      m_window;
+      UI::Panel*      m_window;
       int  m_posx, m_posy;
       int  m_width, m_height;
 };

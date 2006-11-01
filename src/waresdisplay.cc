@@ -45,15 +45,15 @@ WaresDisplay::WaresDisplay
 Initialize the wares display
 ===============
 */
-WaresDisplay::WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player)
-	: UIPanel(parent, x, y, Width, 0)
+WaresDisplay::WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player)
+	: UI::Panel(parent, x, y, Width, 0)
 {
 
 	m_game = game;
 	m_player = player;
 
    set_size(Width, 100);
-   m_curware = new UITextarea(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Testtext"), Align_Center);
+   m_curware = new UI::Textarea(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Testtext"), Align_Center);
 }
 
 

@@ -51,13 +51,13 @@ Editor_Event_Menu::Editor_Event_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 620, 400, _("Event Menu"))
+Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+	: UI::UniqueWindow(parent, registry, 620, 400, _("Event Menu"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Event Menu"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Event Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -68,69 +68,69 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    const int ls_width = 200;
 
    // EventChain List
-   new UITextarea(this, posx, offsy, _("Event Chains: "), Align_Left);
-   m_eventchain_list=new UIListselect<EventChain &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+   new UI::Textarea(this, posx, offsy, _("Event Chains: "), Align_Left);
+   m_eventchain_list=new UI::Listselect<EventChain &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_eventchain_list->selected.set(this, &Editor_Event_Menu::eventchain_list_selected);
    m_eventchain_list->double_clicked.set(this, &Editor_Event_Menu::eventchain_double_clicked);
    posx += ls_width + spacing;
 
    // Event List
-   new UITextarea(this, posx, offsy, _("Registered Events: "), Align_Left);
-   m_event_list=new UIListselect<Event &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
+   new UI::Textarea(this, posx, offsy, _("Registered Events: "), Align_Left);
+   m_event_list=new UI::Listselect<Event &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu::event_double_clicked);
    posx += ls_width + spacing;
 
    // Trigger List
-   new UITextarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
-   m_trigger_list=new UIListselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
+   new UI::Textarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
+   m_trigger_list=new UI::Listselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu::trigger_list_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu::trigger_double_clicked);
    posx += ls_width + spacing;
 
    posy=get_inner_h()-30;
    posx=spacing;
-   UIButton* b=new UIButton(this, posx, posy, 90, 20, 4);
+   UI::Button* b=new UI::Button(this, posx, posy, 90, 20, 4);
    b->set_title(_("New Event Chain").c_str());
    b->clicked.set(this, &Editor_Event_Menu::clicked_new_eventchain);
    posx+=90+spacing;
-   m_btn_edit_eventchain=new UIButton(this, posx, posy, 50, 20, 0);
+   m_btn_edit_eventchain=new UI::Button(this, posx, posy, 50, 20, 0);
    m_btn_edit_eventchain->set_title(_("Edit").c_str());
    m_btn_edit_eventchain->clicked.set(this, &Editor_Event_Menu::clicked_edit_eventchain);
    m_btn_edit_eventchain->set_enabled(false);
    posx+=50+spacing;
-   m_btn_del_eventchain=new UIButton(this, posx, posy, 50, 20, 0);
+   m_btn_del_eventchain=new UI::Button(this, posx, posy, 50, 20, 0);
    m_btn_del_eventchain->set_title(_("Del").c_str());
    m_btn_del_eventchain->clicked.set(this, &Editor_Event_Menu::clicked_del_eventchain);
    m_btn_del_eventchain->set_enabled(false);
 
    posx=spacing + ls_width + spacing;
-   b=new UIButton(this, posx, posy, 90, 20, 4);
+   b=new UI::Button(this, posx, posy, 90, 20, 4);
    b->set_title(_("New Event").c_str());
    b->clicked.set(this, &Editor_Event_Menu::clicked_new_event);
    posx+=90+spacing;
-   m_btn_edit_event=new UIButton(this, posx, posy, 50, 20, 0);
+   m_btn_edit_event=new UI::Button(this, posx, posy, 50, 20, 0);
    m_btn_edit_event->set_title(_("Edit").c_str());
    m_btn_edit_event->clicked.set(this, &Editor_Event_Menu::clicked_edit_event);
    m_btn_edit_event->set_enabled(false);
    posx+=50+spacing;
-   m_btn_del_event=new UIButton(this, posx, posy, 50, 20, 0);
+   m_btn_del_event=new UI::Button(this, posx, posy, 50, 20, 0);
    m_btn_del_event->set_title(_("Del").c_str());
    m_btn_del_event->clicked.set(this, &Editor_Event_Menu::clicked_del_event);
    m_btn_del_event->set_enabled(false);
 
 
    posx= 3* spacing + 2*ls_width;
-   b=new UIButton(this, posx, posy, 90, 20, 4);
+   b=new UI::Button(this, posx, posy, 90, 20, 4);
    b->set_title(_("New Trigger").c_str());
    b->clicked.set(this, &Editor_Event_Menu::clicked_new_trigger);
    posx+=90+spacing;
-   m_btn_edit_trigger=new UIButton(this, posx, posy, 50, 20, 0);
+   m_btn_edit_trigger=new UI::Button(this, posx, posy, 50, 20, 0);
    m_btn_edit_trigger->set_title(_("Edit").c_str());
    m_btn_edit_trigger->clicked.set(this, &Editor_Event_Menu::clicked_edit_trigger);
    m_btn_edit_trigger->set_enabled(false);
    posx+=50+spacing;
-   m_btn_del_trigger=new UIButton(this, posx, posy, 50, 20, 0);
+   m_btn_del_trigger=new UI::Button(this, posx, posy, 50, 20, 0);
    m_btn_del_trigger->set_title(_("Del").c_str());
    m_btn_del_trigger->clicked.set(this, &Editor_Event_Menu::clicked_del_trigger);
    m_btn_del_trigger->set_enabled(false);
@@ -239,7 +239,7 @@ void Editor_Event_Menu::clicked_del_event() {
 			 it != event_referencers_end;
 			 ++it)
 			s << it->first->get_type() << ':' << it->first->get_name() << '\n';
-		UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, _("Error!"), s.str(), UIModal_Message_Box::OK);
+		UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
          mmb->run();
          delete mmb;
          return;
@@ -286,8 +286,8 @@ void Editor_Event_Menu::clicked_del_trigger() {
 			 it != trigger_referencers_end;
 			 ++it)
 			s << it->first->get_type() << ':' << it->first->get_name() << '\n';
-		UIModal_Message_Box messagebox
-			(m_parent, _("Error!"), s.str(), UIModal_Message_Box::OK);
+		UI::Modal_Message_Box messagebox
+			(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
 		messagebox.run();
 	}
 }

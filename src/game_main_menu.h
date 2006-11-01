@@ -24,23 +24,23 @@
 #include "ui_button.h"
 
 // The GameMainMenu is a rather dumb window with lots of buttons
-class GameMainMenu : public UIUniqueWindow {
+class GameMainMenu : public UI::UniqueWindow {
 public:
 	GameMainMenu
 		(Interactive_Player &,
-		 UIUniqueWindowRegistry &,
+		 UI::UniqueWindow::Registry &,
 		 Interactive_Player::Game_Main_Menu_Windows &);
 
 private:
 	Interactive_Player                         & m_player;
    Interactive_Player::Game_Main_Menu_Windows & m_windows;
-	UIButton general_stats;
-	UIButton ware_stats;
-	UIButton building_stats;
-	UIButton stock;
-	UIButton objectives;
-	UIButton chat;
-	UIButton options_menu;
+	UI::Button general_stats;
+	UI::Button ware_stats;
+	UI::Button building_stats;
+	UI::Button stock;
+	UI::Button objectives;
+	UI::Button chat;
+	UI::Button options_menu;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint hspacing() const {return 5;};

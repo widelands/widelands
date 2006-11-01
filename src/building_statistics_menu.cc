@@ -50,9 +50,9 @@ Create all the buttons etc...
 ===============
 */
 Building_Statistics_Menu::Building_Statistics_Menu
-(Interactive_Player & parent, UIUniqueWindowRegistry & registry)
+(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
-UIUniqueWindow(&parent, &registry, 400, 400, _("Building Statistics")),
+UI::UniqueWindow(&parent, &registry, 400, 400, _("Building Statistics")),
 m_parent(&parent)
 {
 
@@ -64,15 +64,15 @@ m_parent(&parent)
    int posy=offsy;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Building Statistics"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Building Statistics"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // Building list
-   m_table=new UITable(this, (get_inner_w()-BUILDING_LIST_WIDTH)/2, offsy, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT, Align_Left, UITable::UP);
-   m_table->add_column(_("Name").c_str(), UITable::STRING, 160);
-   m_table->add_column(_("Prod").c_str(), UITable::STRING, 40);
-   m_table->add_column(_("Owned").c_str(), UITable::STRING, 40);
-   m_table->add_column(_("Build").c_str(), UITable::STRING, 40);
+   m_table=new UI::Table(this, (get_inner_w()-BUILDING_LIST_WIDTH)/2, offsy, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT, Align_Left, UI::Table::UP);
+   m_table->add_column(_("Name").c_str(), UI::Table::STRING, 160);
+   m_table->add_column(_("Prod").c_str(), UI::Table::STRING, 40);
+   m_table->add_column(_("Owned").c_str(), UI::Table::STRING, 40);
+   m_table->add_column(_("Build").c_str(), UI::Table::STRING, 40);
    m_table->selected.set(this, &Building_Statistics_Menu::table_changed);
 
    posy += BUILDING_LIST_HEIGHT + 2*spacing;
@@ -82,51 +82,51 @@ m_parent(&parent)
    posx = get_inner_w() / 4 + spacing;
 
    // Toggle when to run button
-   UITextarea* ta = new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("Total Productivity: "), Align_CenterLeft );
-   m_progbar = new UIProgress_Bar(this, posx + ta->get_w() + spacing, posy, get_inner_w() - ( posx + ta->get_w() + spacing) - spacing, 24, UIProgress_Bar::Horizontal);
+   UI::Textarea* ta = new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Total Productivity: "), Align_CenterLeft );
+   m_progbar = new UI::Progress_Bar(this, posx + ta->get_w() + spacing, posy, get_inner_w() - ( posx + ta->get_w() + spacing) - spacing, 24, UI::Progress_Bar::Horizontal);
    m_progbar->set_total(100);
    posy += 25;
 
    // owned
-   new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
-   m_owned = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
-   UIButton* b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 4, 0);
+   new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
+   m_owned = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
+   UI::Button* b = new UI::Button(this, get_inner_w()-58, posy, 24, 24, 4, 0);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[0] = b;
-   b = new UIButton(this, get_inner_w()-29, posy, 24, 24, 4, 1);
+   b = new UI::Button(this, get_inner_w()-29, posy, 24, 24, 4, 1);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
    m_btn[1] = b;
    posy += 25;
 
    // build
-   new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
-   m_build = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
-   b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 4, 2);
+   new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
+   m_build = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
+   b = new UI::Button(this, get_inner_w()-58, posy, 24, 24, 4, 2);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[2] = b;
-   b = new UIButton(this, get_inner_w()-29, posy, 24, 24, 4, 3);
+   b = new UI::Button(this, get_inner_w()-29, posy, 24, 24, 4, 3);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[3] = b;
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
    posy += 25;
 
    // Jump to unproductive
-   new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("Jump to unproductive: "), Align_CenterLeft);
-   b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 4, 4);
+   new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Jump to unproductive: "), Align_CenterLeft);
+   b = new UI::Button(this, get_inner_w()-58, posy, 24, 24, 4, 4);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[4] = b;
-   b = new UIButton(this, get_inner_w()-29, posy, 24, 24, 4, 5);
+   b = new UI::Button(this, get_inner_w()-29, posy, 24, 24, 4, 5);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
    m_btn[5] = b;
    posy += 25;
 
    // TODO: help button
-   b = new UIButton(this, spacing, get_inner_w()-37, 32, 32, 4, 100);
+   b = new UI::Button(this, spacing, get_inner_w()-37, 32, 32, 4, 100);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
 
@@ -175,7 +175,7 @@ void Building_Statistics_Menu::draw(RenderTarget* dst) {
    }
 
 	// Draw all the panels etc. above the background
-	UIWindow::draw(dst);
+	UI::Window::draw(dst);
 }
 
 /*
@@ -318,9 +318,9 @@ void Building_Statistics_Menu::update( void ) {
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
 
       // walk all entries, add new ones if needed
-      UITable_Entry* te = 0;
+      UI::Table_Entry* te = 0;
       for( int l = 0; l< m_table->get_nr_entries(); l++) {
-         UITable_Entry* entr = m_table->get_entry(l);
+         UI::Table_Entry* entr = m_table->get_entry(l);
          if( (long)entr->get_user_data() == i) {
             te = entr;
             break;
@@ -331,7 +331,7 @@ void Building_Statistics_Menu::update( void ) {
       // enabled
       if(!te) {
          if(! m_parent->get_player()->is_building_allowed(i) ) continue;
-			te = new UITable_Entry
+			te = new UI::Table_Entry
 				(m_table,
 				 reinterpret_cast<void * const>(i),
 				 tribe.get_building_descr(i)->get_buildicon());

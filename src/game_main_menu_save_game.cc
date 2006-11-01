@@ -40,12 +40,12 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 Create all the buttons etc...
 ===============
 */
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,270,_("Save Game")) {
+Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
+  : UI::UniqueWindow(parent,registry,400,270,_("Save Game")) {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Save Game"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Save Game"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -55,35 +55,35 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    int posy=offsy;
 
    // listselect
-   m_ls=new UIListselect<const char * const>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
+   m_ls=new UI::Listselect<const char * const>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
    m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
    // Filename editbox
-   m_editbox=new UIEdit_Box(this, posx, posy+get_inner_h()-spacing-offsy-60+3, get_inner_w()/2-spacing, 20, 1, 0);
+   m_editbox=new UI::Edit_Box(this, posx, posy+get_inner_h()-spacing-offsy-60+3, get_inner_w()/2-spacing, 20, 1, 0);
    m_editbox->changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
 
    // the descriptive areas
    // Name
    posx=get_inner_w()/2+spacing;
    posy+=20;
-   new UITextarea(this, posx, posy, 150, 20, _("Map Name: "), Align_CenterLeft);
-   m_name=new UITextarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
+   new UI::Textarea(this, posx, posy, 150, 20, _("Map Name: "), Align_CenterLeft);
+   m_name=new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Author
-   new UITextarea(this, posx, posy, 150, 20, _("Game Time: "), Align_CenterLeft);
-   m_gametime=new UITextarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
+   new UI::Textarea(this, posx, posy, 150, 20, _("Game Time: "), Align_CenterLeft);
+   m_gametime=new UI::Textarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-   UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
+   UI::Button* but= new UI::Button(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
    but->set_title(_("OK").c_str());
    but->set_enabled(false);
    m_ok_btn=but;
-   but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
+   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
    but->set_title(_("Cancel").c_str());
 
@@ -233,7 +233,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
       std::string s=_("A File with the name ");
       s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" already exists. Overwrite?");
-      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::YESNO);
+      UI::Modal_Message_Box* mbox= new UI::Modal_Message_Box(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::YESNO);
       bool retval=mbox->run();
       delete mbox;
       if(!retval)
@@ -255,7 +255,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
 	try {gs.save();} catch(std::exception& exe) {
       std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
-      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::OK);
+      UI::Modal_Message_Box* mbox= new UI::Modal_Message_Box(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
       mbox->run();
       delete mbox;
    }

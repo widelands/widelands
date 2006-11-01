@@ -24,11 +24,13 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIButton;
-class UIEdit_Box;
-template <typename T> struct UIListselect;
-class UIMultiline_Textarea;
-class UITextarea;
+namespace UI {
+struct Button;
+struct Edit_Box;
+template <typename T> struct Listselect;
+struct Multiline_Textarea;
+struct Textarea;
+};
 
 /*
 =================================================
@@ -39,8 +41,7 @@ Choose a filename and save your brand new created map
 
 =================================================
 */
-class Main_Menu_Save_Map : public UIWindow {
-   public:
+struct Main_Menu_Save_Map : public UI::Window {
       Main_Menu_Save_Map(Editor_Interactive*);
       virtual ~Main_Menu_Save_Map();
 
@@ -53,12 +54,12 @@ class Main_Menu_Save_Map : public UIWindow {
       void fill_list(void);
       bool save_map(std::string, bool);
 
-      UIEdit_Box* m_editbox;
-      UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
-      UIMultiline_Textarea* m_descr;
+	UI::Edit_Box * m_editbox;
+	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
+	UI::Multiline_Textarea * m_descr;
       Editor_Interactive *m_parent;
-	UIListselect<const char * const> * m_ls;
-      UIButton* m_ok_btn;
+	UI::Listselect<const char * const> * m_ls;
+      UI::Button* m_ok_btn;
 
       std::string m_basedir;
       std::string m_curdir;

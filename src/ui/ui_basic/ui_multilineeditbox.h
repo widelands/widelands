@@ -23,7 +23,8 @@
 #include "ui_multilinetextarea.h"
 #include "ui_signal.h"
 
-class UIScrollbar;
+namespace UI {
+struct Scrollbar;
 
 /*
  * This behaves like a editbox, but looks like
@@ -31,13 +32,12 @@ class UIScrollbar;
  *
  * Shitf + del or Shift + backspace deletes all text
  */
-class UIMultiline_Editbox : public UIMultiline_Textarea {
-   public:
-      UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, uint h, const char *text);
-      ~UIMultiline_Editbox();
+struct Multiline_Editbox : public Multiline_Textarea {
+      Multiline_Editbox(Panel *parent, int x, int y, uint w, uint h, const char *text);
+      ~Multiline_Editbox();
 
       // Changed event
-      UISignal changed;
+      Signal changed;
 
       // Drawing and event handlers
       void draw(RenderTarget* dst);
@@ -57,6 +57,7 @@ class UIMultiline_Editbox : public UIMultiline_Textarea {
       uint m_line_pos;
       uint m_maxchars;
       bool m_needs_update;
+};
 };
 
 #endif // __S__MULTILINE_EDITBOX_H

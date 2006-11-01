@@ -48,8 +48,8 @@ void PlayerDescriptionGroup::allow_changes(changemode_t t) {
    m_btnPlayerTribe->set_enabled(t & CHANGE_TRIBE);
 }
 
-PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum, bool highlight)
-	: UIPanel(parent, x, y, 450, 20)
+PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* parent, int x, int y, Game* game, int plnum, bool highlight)
+	: UI::Panel(parent, x, y, 450, 20)
 {
 	m_game = game;
 	m_plnum = plnum;
@@ -61,16 +61,16 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	set_visible(false);
 
 	// create sub-panels
-	m_plr_name=new UITextarea(this, 0, 0, 100, 20, _("Player 1"), Align_Left);
+	m_plr_name=new UI::Textarea(this, 0, 0, 100, 20, _("Player 1"), Align_Left);
 
-	m_btnEnablePlayer = new UICheckbox(this, 88, 0);
+	m_btnEnablePlayer = new UI::Checkbox(this, 88, 0);
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 
-	m_btnPlayerType = new UIButton(this, 116, 0, 120, 20, highlight?3:1);
+	m_btnPlayerType = new UI::Button(this, 116, 0, 120, 20, highlight?3:1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
 
-	m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, highlight?3:1);
+	m_btnPlayerTribe = new UI::Button(this, 244, 0, 120, 20, highlight?3:1);
 	m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
 
 	Tribe_Descr::get_all_tribenames(m_tribes);

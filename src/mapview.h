@@ -29,12 +29,12 @@ class Interactive_Base;
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
-class Map_View : public UIPanel {
+class Map_View : public UI::Panel {
 public:
-	Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Base *);
+	Map_View(UI::Panel *parent, int x, int y, uint w, uint h, Interactive_Base *);
 
-	UISignal2<int,int> warpview; // x/y in screen coordinates
-	UISignal fieldclicked;
+	UI::Signal2<int,int> warpview; // x/y in screen coordinates
+	UI::Signal fieldclicked;
 
 	void warp_mouse_to_field(Coords c);
 

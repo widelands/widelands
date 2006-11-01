@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,16 +24,16 @@
 #include "font_handler.h"
 #include "ui_panel.h"
 
+namespace UI {
 /**
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
  */
-class UITextarea : public UIPanel {
-public:
-	UITextarea(UIPanel *parent, int x, int y, std::string text, Align align = Align_Left);
-	UITextarea(UIPanel *parent, int x, int y, int w, int h, std::string text,
+struct Textarea : public Panel {
+	Textarea(Panel *parent, int x, int y, std::string text, Align align = Align_Left);
+	Textarea(Panel *parent, int x, int y, int w, int h, std::string text,
 			   Align align = Align_Left, bool multiline = false);
-	~UITextarea();
+	~Textarea();
 
 	void set_text(std::string text);
 	void set_align(Align align);
@@ -53,6 +53,7 @@ private:
    std::string    m_fontname;
    int            m_fontsize;
    RGBColor       m_fcolor;
+};
 };
 
 #endif // __S__TEXTAREA_H

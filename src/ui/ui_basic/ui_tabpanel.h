@@ -25,18 +25,18 @@
 
 #include <string>
 
+namespace UI {
 /**
 Provides a tab view; every tab is a panel that can contain any number of
-sub-panels (such as buttons, other UITab_Panels, etc..) and an associated
+sub-panels (such as buttons, other Tab_Panels, etc..) and an associated
 picture.
 The picture is displayed as a button the user can click to bring the panel
 to the top.
 
-The UIPanels you add() to the UITab_Panel must be children of the UITab_Panel.
+The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
-class UITab_Panel : public UIPanel {
-public:
-	UITab_Panel(UIPanel* parent, int x, int y, uint background);
+struct Tab_Panel : public Panel {
+	Tab_Panel(Panel* parent, int x, int y, uint background);
 
 	void resize();
 
@@ -44,7 +44,7 @@ public:
 	bool get_snapparent() const { return m_snapparent; }
 
 	uint add
-		(uint picid, UIPanel* panel, const std::string & tooltip = std::string());
+		(uint picid, Panel* panel, const std::string & tooltip = std::string());
 
 	void activate(uint idx);
 
@@ -60,7 +60,7 @@ private:
 	struct Tab {
 		uint		picid;
 		std::string tooltip;
-		UIPanel*	panel;
+		Panel*	panel;
 	};
 
 	std::vector<Tab>	m_tabs;
@@ -71,6 +71,6 @@ private:
 
 	uint					m_pic_background; ///< picture used to draw background
 };
-
+};
 
 #endif // included_ui_tabpanel_h

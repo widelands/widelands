@@ -90,36 +90,36 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
-	UIButton *b;
+	UI::Button *b;
 
 	/* temp (should be toggle messages)
-	b = new UIButton(this, x, y, 34, 34, 2);
+	b = new UI::Button(this, x, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::exit_game_btn);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_exit_game.png" ));
 	b->set_tooltip(_("Exit game").c_str());
 	// temp */
 
-	b = new UIButton(this, x+34, y, 34, 34, 2);
+	b = new UI::Button(this, x+34, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::main_menu_btn);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_menu.png" ));
 	b->set_tooltip(_("Menu").c_str());
 
-	b = new UIButton(this, x+68, y, 34, 34, 2);
+	b = new UI::Button(this, x+68, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_minimap);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_minimap.png" ));
 	b->set_tooltip(_("Minimap").c_str());
 
-	b = new UIButton(this, x+102, y, 34, 34, 2);
+	b = new UI::Button(this, x+102, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_buildhelp.png" ));
 	b->set_tooltip(_("Buildhelp").c_str());
 
 	// Speed info
-	m_label_speed = new UITextarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
+	m_label_speed = new UI::Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
 
    // Chat Messages
-   m_chat_messages = new UIMultiline_Textarea(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft);
-   m_type_message = new UITextarea(this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft);
+   m_chat_messages = new UI::Multiline_Textarea(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft);
+   m_type_message = new UI::Textarea(this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft);
    m_last_stats_update = 0;
 
    m_is_typing_msg = false;

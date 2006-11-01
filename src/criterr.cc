@@ -46,7 +46,7 @@ enum {
 	ce_exit
 };
 
-class Critical_Error : public UIPanel {
+class Critical_Error : public UI::Panel {
 public:
 	Critical_Error(const char *text);
 
@@ -57,27 +57,27 @@ public:
 };
 
 Critical_Error::Critical_Error(const char *text)
-	: UIPanel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
+	: UI::Panel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
 {
 	// Text
-	new UITextarea(this, g_gr->get_xres()/2, 150, _("!! CRITICAL ERROR !!"), Align_HCenter);
-	new UITextarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
+	new UI::Textarea(this, g_gr->get_xres()/2, 150, _("!! CRITICAL ERROR !!"), Align_HCenter);
+	new UI::Textarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
 
-	// UIButtons
-	UIButton *b;
+	// UI::Buttons
+	UI::Button *b;
 
-	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
+	b = new UI::Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
 	b->clicked.set(this, &Critical_Error::exit);
 	b->set_title(_("Exit").c_str());
 
-	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
+	b = new UI::Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
 	b->clickedid.set(this, &Critical_Error::end_modal);
 	b->set_title(_("!! Continue execution !!").c_str());
 
 	Section *s = g_options.pull_section("global");
 
 	if(s->get_bool("coredump", false)) {
-		b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-100, 174, 24, 1);
+		b = new UI::Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-100, 174, 24, 1);
 		b->clicked.set(this, &Critical_Error::crash);
 		b->set_title(_("Crash").c_str());
 	}

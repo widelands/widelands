@@ -117,8 +117,8 @@ public:
       throw wexception ("ProductionSite::get_soldiers makes no sense");
    }
 protected:
-	virtual UIWindow* create_options_window(Interactive_Player* plr,
-		UIWindow** registry);
+	virtual UI::Window* create_options_window(Interactive_Player* plr,
+		UI::Window** registry);
 
 protected:
 	struct State {

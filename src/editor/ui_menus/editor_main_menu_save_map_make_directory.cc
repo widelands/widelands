@@ -28,10 +28,10 @@
 /*
  * Create this
  */
-Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* parent, const char* dirname) :
-  UIWindow(parent, 0, 0, 230, 120, _("Make Directory").c_str()) {
+Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UI::Panel* parent, const char* dirname) :
+  UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str()) {
      // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Make Directory"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Make Directory"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -41,11 +41,11 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
    int posy=offsy;
 
    // Command
-   new UITextarea(this, spacing, posy, _("Enter Directory Name: "), Align_Left);
+   new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "), Align_Left);
    posy+=20+spacing;
 
    // Filename editbox
-   m_edit=new UIEdit_Box(this, spacing, posy, get_inner_w()-2*spacing, 20, 1, 0);
+   m_edit=new UI::Edit_Box(this, spacing, posy, get_inner_w()-2*spacing, 20, 1, 0);
    m_edit->set_text(dirname);
    m_dirname=dirname;
    m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);
@@ -53,13 +53,13 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-   UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
+   UI::Button* but= new UI::Button(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
    but->set_title(_("OK").c_str());
    if(!m_dirname.size())
       but->set_enabled(false);
    m_ok_button=but;
-   but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
+   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
    but->set_title(_("Cancel").c_str());
 

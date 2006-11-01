@@ -33,21 +33,21 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 160, 65, _("Toolsize Menu"))
+Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+	: UI::UniqueWindow(parent, registry, 160, 65, _("Toolsize Menu"))
 {
    m_parent=parent;
 
-   new UITextarea(this, 15, 0, _("Set Tool Size Menu"), Align_Left);
+   new UI::Textarea(this, 15, 0, _("Set Tool Size Menu"), Align_Left);
    char buf[250];
    sprintf(buf, _("Current Size: %i").c_str(), m_parent->get_fieldsel_radius()+1);
-   m_textarea=new UITextarea(this, 25, 20, buf);
+   m_textarea=new UI::Textarea(this, 25, 20, buf);
 
    int bx=60;
-   UIButton* b = new UIButton(this, bx, 40, 20, 20, 0, 0);
+   UI::Button* b = new UI::Button(this, bx, 40, 20, 20, 0, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
-   b=new UIButton(this, bx+20, 40, 20, 20, 0, 1);
+   b=new UI::Button(this, bx+20, 40, 20, 20, 0, 1);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
 

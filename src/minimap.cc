@@ -44,12 +44,12 @@ Initialize the minimap object
 ===============
 */
 MiniMap::View::View
-(UIPanel & parent,
+(UI::Panel & parent,
  const  int x, const  int y,
  const uint w, const uint h,
  Interactive_Base & iabase)
 :
-UIPanel       (&parent, x, y, 10, 10),
+UI::Panel       (&parent, x, y, 10, 10),
 m_iabase      (iabase),
 m_viewx       (0),
 m_viewy       (0),
@@ -158,9 +158,9 @@ inline uint MiniMap::number_of_button_rows    () const throw () {return 2;}
 inline uint MiniMap::but_w() const throw ()
 {return m_view.get_w() / number_of_buttons_per_row();}
 inline uint MiniMap::but_h() const throw () {return 20;}
-MiniMap::MiniMap(Interactive_Base & iabase, UIUniqueWindowRegistry * registry)
+MiniMap::MiniMap(Interactive_Base & iabase, UI::UniqueWindow::Registry * registry)
 :
-UIUniqueWindow(&iabase, registry, 0, 0, _("Map")),
+UI::UniqueWindow(&iabase, registry, 0, 0, _("Map")),
 m_view(*this, 0, 0, 0, 0, iabase),
 button_terrn
 (this, but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Terrn),

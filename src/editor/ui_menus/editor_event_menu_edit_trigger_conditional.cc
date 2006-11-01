@@ -36,14 +36,14 @@
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
 (Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain)
 :
-UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
+UI::Window(parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()),
 m_parent(parent),
 m_given_cond(cond),
 m_event_chain(chain)
 {
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Edit Trigger Conditional Menu"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Edit Trigger Conditional Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -54,56 +54,56 @@ m_event_chain(chain)
    const int ls_width = 180;
 
    // Trigger List
-   new UITextarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
-	m_construction= new UIListselect<TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+   new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
+	m_construction= new UI::Listselect<TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_construction->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
    m_construction->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
    posx += ls_width + spacing;
 
    posy = 35;
-	UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::LPAREN);
+	UI::Button* b = new UI::Button(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::LPAREN);
    b->set_title("(");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing;
-	b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::RPAREN);
+	b = new UI::Button(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::RPAREN);
    b->set_title(")");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing;
-	b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::AND);
+	b = new UI::Button(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::AND);
    b->set_title("AND");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing;
-	b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::OR);
+	b = new UI::Button(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::OR);
    b->set_title("OR");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing;
-	b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::XOR);
+	b = new UI::Button(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::XOR);
    b->set_title("XOR");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing;
-	b = new UIButton(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::NOT);
+	b = new UI::Button(this, posx, posy, 80, 20, 0, TriggerConditional_Factory::NOT);
    b->set_title("NOT");
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator);
    posy += 20 + spacing + spacing;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title("<-");
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger);
    posy += 20 + spacing + spacing;
    b->set_enabled( false );
    m_insert_btn = b;
-   b = new UIButton(this, posx, posy, 80, 20, 0);
+   b = new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title(_("Delete").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger);
    b->set_enabled( false );
    m_delete_btn = b;
    posy += 20 + spacing + spacing + spacing;
 
-   b = new UIButton(this, posx+5, posy, 24, 24, 0);
+   b = new UI::Button(this, posx+5, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_up.png"));
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up);
    b->set_enabled( false );
    m_mvup_btn = b;
-   b = new UIButton(this, posx+51, posy, 24, 24, 0);
+   b = new UI::Button(this, posx+51, posy, 24, 24, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_down.png"));
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down);
    b->set_enabled( false );
@@ -111,8 +111,8 @@ m_event_chain(chain)
    posy += 24 + spacing + spacing;
 
    posx += 80 + spacing;
-   new UITextarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
-   m_trigger_list=new UIListselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
+   new UI::Textarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
+   m_trigger_list=new UI::Listselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
 	const MapTriggerManager & mtm = parent->get_egbase()->get_map()->get_mtm();
@@ -125,11 +125,11 @@ m_event_chain(chain)
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 0);
+   b=new UI::Button(this, posx, posy, 80, 20, 0);
    b->set_title(_("Ok").c_str());
    b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 1);
+   b=new UI::Button(this, posx, posy, 80, 20, 1);
    b->set_title(_("Cancel").c_str());
 	b->clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked_cancel);
 
@@ -196,8 +196,8 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
          m_given_cond = cond;
          end_modal( 1 );
       } catch(  TriggerConditional_Factory::SyntaxError err ) {
-         UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Syntax Error"), _("Your conditional contains at least one syntax error. Please correct!\n"),
-               UIModal_Message_Box::OK);
+         UI::Modal_Message_Box* mb = new UI::Modal_Message_Box(m_parent, _("Syntax Error"), _("Your conditional contains at least one syntax error. Please correct!\n"),
+               UI::Modal_Message_Box::OK);
          mb->run();
          delete mb;
          return;

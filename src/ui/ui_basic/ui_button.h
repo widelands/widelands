@@ -25,16 +25,16 @@
 #include "ui_panel.h"
 #include "ui_signal.h"
 
+namespace UI {
 /**
  * This defines a button.
  */
-class UIButton : public UIPanel {
-public:
-	UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id = 0, bool flat = false);
-	~UIButton();
+struct Button : public Panel {
+	Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id = 0, bool flat = false);
+	~Button();
 
-	UISignal clicked;
-	UISignal1<int> clickedid;
+	Signal clicked;
+	Signal1<int> clickedid;
 
 	void set_pic(uint picid);
 	void set_title(const std::string &);
@@ -62,6 +62,7 @@ private:
 	uint		m_pic_custom; // custom icon on the button
 
 	RGBColor	m_clr_down;		// color of border while a flat button is "down"
+};
 };
 
 #endif

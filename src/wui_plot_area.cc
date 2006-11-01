@@ -68,8 +68,8 @@ static const uint time_in_ms[] = {
 /*
  * Constructor
  */
-WUIPlot_Area::WUIPlot_Area(UIPanel* parent, int x, int y, int w, int h) :
-   UIPanel(parent, x, y, w, h) {
+WUIPlot_Area::WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h) :
+   UI::Panel(parent, x, y, w, h) {
 
    m_time = TIME_ONE_HOUR;  // defaults to one hour
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,15 +21,16 @@
 #include "constants.h"
 #include "graphic.h"
 
+namespace UI {
 /**
-  Initialize a UITextarea. For non-multiline textareas, the dimensions are set
+  Initialize a Textarea. For non-multiline textareas, the dimensions are set
   automatically, depending on the text.
   For multiline textareas, only the height and vertical position is adjusted
-  automatically. A multiline UITextarea differs from a UIMultiline_Textarea in that
+  automatically. A multiline Textarea differs from a Multiline_Textarea in that
   Multiline_Textarea provides scrollbars.
   */
-   UITextarea::UITextarea(UIPanel *parent, int x, int y, std::string text, Align align)
-: UIPanel(parent, x, y, 0, 0)
+   Textarea::Textarea(Panel *parent, int x, int y, std::string text, Align align)
+: Panel(parent, x, y, 0, 0)
 {
    set_handle_mouse(false);
    set_think(false);
@@ -42,8 +43,8 @@
    set_text(text);
 }
 
-   UITextarea::UITextarea(UIPanel *parent, int x, int y, int w, int h, std::string text, Align align, bool multiline)
-: UIPanel(parent, x, y, w, h)
+   Textarea::Textarea(Panel *parent, int x, int y, int w, int h, std::string text, Align align, bool multiline)
+: Panel(parent, x, y, w, h)
 {
    set_handle_mouse(false);
    set_think(false);
@@ -59,15 +60,15 @@
 /**
   Free allocated resources
   */
-UITextarea::~UITextarea()
+Textarea::~Textarea()
 {
 }
 
 
 /**
-  Set the text of the UITextarea. Size is automatically adjusted
+  Set the text of the Textarea. Size is automatically adjusted
   */
-void UITextarea::set_text(std::string text)
+void Textarea::set_text(std::string text)
 {
    collapse(); // collapse() implicitly updates
 
@@ -79,7 +80,7 @@ void UITextarea::set_text(std::string text)
 /**
   Change the alignment
   */
-void UITextarea::set_align(Align align)
+void Textarea::set_align(Align align)
 {
    collapse();
    m_align = align;
@@ -88,9 +89,9 @@ void UITextarea::set_align(Align align)
 
 
 /**
-  Redraw the UITextarea
+  Redraw the Textarea
   */
-void UITextarea::draw(RenderTarget* dst)
+void Textarea::draw(RenderTarget* dst)
 {
    if (m_text.length())
    {
@@ -112,9 +113,9 @@ void UITextarea::draw(RenderTarget* dst)
 
 
 /**
-  Reduce the UITextarea to size 0x0 without messing up the alignment
+  Reduce the Textarea to size 0x0 without messing up the alignment
   */
-void UITextarea::collapse()
+void Textarea::collapse()
 {
    int x = get_x();
    int y = get_y();
@@ -140,9 +141,9 @@ void UITextarea::collapse()
 
 
 /**
-  Expand the size of the UITextarea until it fits the size of the text
+  Expand the size of the Textarea until it fits the size of the text
   */
-void UITextarea::expand()
+void Textarea::expand()
 {
    if (!m_text.length())
       return;
@@ -169,3 +170,4 @@ void UITextarea::expand()
    set_pos(x, y);
    set_size(m_multiline ? get_w() : w, h);
 }
+};

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by Widelands Development Team
+ * Copyright (C) 2004, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,11 +25,12 @@
 #include "ui_progressbar.h"
 #include "constants.h"
 
+namespace UI {
 /**
 Initialize the progress bar.
 */
-UIProgress_Bar::UIProgress_Bar(UIPanel* parent, int x, int y, int w, int h, uint orientation)
-	: UIPanel(parent, x, y, w, h)
+Progress_Bar::Progress_Bar(Panel* parent, int x, int y, int w, int h, uint orientation)
+	: Panel(parent, x, y, w, h)
 {
 	m_orientation = orientation;
 
@@ -41,7 +42,7 @@ UIProgress_Bar::UIProgress_Bar(UIPanel* parent, int x, int y, int w, int h, uint
 /**
 Set the current state of progress.
 */
-void UIProgress_Bar::set_state(uint state)
+void Progress_Bar::set_state(uint state)
 {
 	m_state = state;
 
@@ -52,7 +53,7 @@ void UIProgress_Bar::set_state(uint state)
 /**
 Set the maximum state
 */
-void UIProgress_Bar::set_total(uint total)
+void Progress_Bar::set_total(uint total)
 {
 	m_total = total;
 
@@ -63,7 +64,7 @@ void UIProgress_Bar::set_total(uint total)
 /**
 Draw the progressbar.
 */
-void UIProgress_Bar::draw(RenderTarget* dst)
+void Progress_Bar::draw(RenderTarget* dst)
 {
 	RGBColor color;
 	float percent = (float)m_state / m_total;
@@ -103,3 +104,4 @@ void UIProgress_Bar::draw(RenderTarget* dst)
 
 	g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, get_w() / 2, get_h() / 2, buf, Align_Center);
 }
+};

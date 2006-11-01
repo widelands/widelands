@@ -43,7 +43,7 @@ class Editor_Make_Infrastructure_Tool : public Editor_Tool {
 
    private:
       int m_player;
-      UIUniqueWindowRegistry m_registry;
+      UI::UniqueWindow::Registry m_registry;
 };
 
 int Editor_Make_Infrastructure_Tool_Callback(const TCoords, void *, int);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,14 @@
 
 #include "ui_panel.h"
 
+namespace UI {
 /**
 A very simple panel that displays progress or productivity in percent,
 graphically enhanced with a coloured bar.
 
 The actual state of progress
 */
-class UIProgress_Bar : public UIPanel {
-public:
+struct Progress_Bar : public Panel {
 	enum {
 		Horizontal = 0,		///< from left to right
 		Vertical = 1,			///< from bottom to top
@@ -39,7 +39,7 @@ public:
 	};
 
 public:
-	UIProgress_Bar(UIPanel* parent, int x, int y, int w, int h, uint orientation);
+	Progress_Bar(Panel* parent, int x, int y, int w, int h, uint orientation);
 
 	uint get_state() { return m_state; }
 	void set_state(uint state);
@@ -54,6 +54,6 @@ private:
 	uint	m_state;				///< m_state is [0..m_total]
 	uint	m_total;				///< maximum progress
 };
-
+};
 
 #endif // included_ui_progressbar_h

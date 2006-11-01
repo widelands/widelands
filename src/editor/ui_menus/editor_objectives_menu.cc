@@ -43,27 +43,26 @@
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Edit_Objective_Window : public UIWindow {
-   public:
-      Edit_Objective_Window(Editor_Interactive*, UITable_Entry*);
+struct Edit_Objective_Window : public UI::Window {
+      Edit_Objective_Window(Editor_Interactive*, UI::Table_Entry*);
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
       Editor_Interactive  *m_parent;
-      UITable_Entry       *m_te;
-      UIEdit_Box          *m_name;
-      UIMultiline_Editbox *m_descr;
-      UICheckbox          *m_visible;
-      UICheckbox          *m_optional;
+      UI::Table_Entry       *m_te;
+      UI::Edit_Box          *m_name;
+      UI::Multiline_Editbox *m_descr;
+      UI::Checkbox          *m_visible;
+      UI::Checkbox          *m_optional;
 
    private:
       void clicked( int );
 };
 
-Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UITable_Entry* te)
-	: UIWindow(parent, 0, 0, 250, 85, _("Edit Objective").c_str()) {
+Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UI::Table_Entry* te)
+	: UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()) {
 
    m_parent=parent;
    m_te = te;
@@ -74,34 +73,34 @@ Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UITable
    MapObjective* obj = static_cast<MapObjective*>(te->get_user_data());
 
    // What type
-   new UITextarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
-   m_name = new UIEdit_Box( this, 120, 5, 120, 20, 0, 0);
+   new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
+   m_name = new UI::Edit_Box( this, 120, 5, 120, 20, 0, 0);
    m_name->set_text( obj->get_name() );
    posy += 20 + spacing;
 
-   new UITextarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
-   m_visible = new UICheckbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
+   new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
+   m_visible = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
    m_visible->set_state( obj->get_is_visible() );
    posy += STATEBOX_HEIGHT+ spacing;
 
-   new UITextarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Optional Objective: "), Align_CenterLeft);
-   m_optional = new UICheckbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
+   new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Optional Objective: "), Align_CenterLeft);
+   m_optional = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
    m_optional->set_state( obj->get_is_optional() );
    posy += STATEBOX_HEIGHT+ spacing;
 
    // Multiline editbox
-   new UITextarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Objective text: "), Align_CenterLeft);
+   new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Objective text: "), Align_CenterLeft);
    posy += 20 + spacing;
 
    const int editbox_height = 140;
-   m_descr = new UIMultiline_Editbox(this, 5, posy, get_inner_w()-2*spacing, editbox_height, obj->get_descr() );
+   m_descr = new UI::Multiline_Editbox(this, 5, posy, get_inner_w()-2*spacing, editbox_height, obj->get_descr() );
    posy+= editbox_height + spacing + spacing;
 
    // back button
-   UIButton* b = new UIButton( this, get_inner_w()/2-80-spacing, posy, 80, 20, 1, 0);
+   UI::Button* b = new UI::Button( this, get_inner_w()/2-80-spacing, posy, 80, 20, 1, 0);
    b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Edit_Objective_Window::clicked);
-   b = new UIButton( this, get_inner_w()/2 + spacing, posy, 80, 20, 1, 1);
+   b = new UI::Button( this, get_inner_w()/2 + spacing, posy, 80, 20, 1, 1);
    b->set_title(_("Back").c_str());
    b->clickedid.set(this, &Edit_Objective_Window::clicked);
    posy += 20 + spacing;
@@ -167,45 +166,45 @@ Editor_Objectives_Menu::Editor_Objectives_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 410, 330, _("Objectives Menu"))
+Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+	: UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Objectives Menu"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Objectives Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int spacing=5;
-   m_table = new UITable(this, 5, 25, get_inner_w()-2*spacing, get_inner_h() - 60);
-   m_table->add_column(_("Name").c_str(), UITable::STRING, 270);
-   m_table->add_column(_("Optional").c_str(), UITable::STRING, 70);
-   m_table->add_column(_("Visible").c_str(), UITable::STRING, 60);
+   m_table = new UI::Table(this, 5, 25, get_inner_w()-2*spacing, get_inner_h() - 60);
+   m_table->add_column(_("Name").c_str(), UI::Table::STRING, 270);
+   m_table->add_column(_("Optional").c_str(), UI::Table::STRING, 70);
+   m_table->add_column(_("Visible").c_str(), UI::Table::STRING, 60);
    m_table->selected.set(this, &Editor_Objectives_Menu::table_selected);
    m_table->double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
 
    // Buttons
    int posx=spacing;
 
-   UIButton* nbutton = new UIButton( this, spacing, get_inner_h() - 30, 60, 20, 0, 0);
+   UI::Button* nbutton = new UI::Button( this, spacing, get_inner_h() - 30, 60, 20, 0, 0);
    nbutton->set_title(_("New").c_str());
    nbutton->clickedid.set(this, &Editor_Objectives_Menu::clicked);
    posx += 60 + spacing;
-   m_edit_button = new UIButton( this, posx, get_inner_h() - 30, 60, 20, 0, 1);
+   m_edit_button = new UI::Button( this, posx, get_inner_h() - 30, 60, 20, 0, 1);
    m_edit_button->set_title(_("Edit").c_str());
    m_edit_button->set_enabled(false);
    m_edit_button->clickedid.set(this, &Editor_Objectives_Menu::clicked);
    posx += 60 + spacing;
-   m_delete_button = new UIButton( this, posx, get_inner_h() - 30, 60, 20, 0, 2);
+   m_delete_button = new UI::Button( this, posx, get_inner_h() - 30, 60, 20, 0, 2);
    m_delete_button->set_title(_("Delete").c_str());
    m_delete_button->set_enabled(false);
    m_delete_button->clickedid.set(this, &Editor_Objectives_Menu::clicked);
    posx += 60 + spacing;
 
    // Trigger name
-   new UITextarea( this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
+   new UI::Textarea( this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
    posx += 45 + spacing;
-   m_trigger = new UITextarea( this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
+   m_trigger = new UI::Textarea( this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
 
    // Add all variables
 	const MapObjectiveManager & mom =
@@ -287,7 +286,7 @@ void Editor_Objectives_Menu::clicked( int n ) {
                str += i->first->get_name();
                str += " ";
             }
-            UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, _("Error!"), str.c_str(), UIModal_Message_Box::OK);
+            UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
             mmb->run();
             delete mmb;
             return;
@@ -332,7 +331,7 @@ void Editor_Objectives_Menu::table_dblclicked( int ) {
  * Insert this map variable into the table
  */
 void Editor_Objectives_Menu::insert_objective(MapObjective & var) {
-	UITable_Entry & t = *new UITable_Entry(m_table, &var, -1, true);
+	UI::Table_Entry & t = *new UI::Table_Entry(m_table, &var, -1, true);
 
 	t.set_string(0, var.get_name());
 	t.set_string(1, var.get_is_optional() ? "Yes" : "No");

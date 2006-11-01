@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 
 class Editor_Interactive;
-class UITextarea;
+namespace UI {struct Textarea;};
 
 
 /*
@@ -38,16 +38,15 @@ Here, you can select the tool you wish to use the next time
 =============================
 */
 
-class Editor_Toolsize_Menu : public UIUniqueWindow {
-   public:
-      Editor_Toolsize_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
+struct Editor_Toolsize_Menu : public UI::UniqueWindow {
+      Editor_Toolsize_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Toolsize_Menu();
 
    private:
       void button_clicked(int);
 
       Editor_Interactive* m_parent;
-      UITextarea* m_textarea;
+      UI::Textarea* m_textarea;
 };
 
 

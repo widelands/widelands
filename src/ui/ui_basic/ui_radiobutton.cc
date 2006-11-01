@@ -21,6 +21,7 @@
 #include "ui_checkbox.h"
 #include "ui_radiobutton.h"
 
+namespace UI {
 /*
 ==============================================================================
 
@@ -29,26 +30,25 @@ Radiobutton
 ==============================================================================
 */
 
-class UIRadiobutton : public UIStatebox {
-	friend class UIRadiogroup;
+struct Radiobutton : public Statebox {
+	friend class Radiogroup;
 
-public:
-	UIRadiobutton(UIPanel *parent, int x, int y, uint picid, UIRadiogroup *group, int id);
-	~UIRadiobutton();
+	Radiobutton(Panel *parent, int x, int y, uint picid, Radiogroup *group, int id);
+	~Radiobutton();
 
 private:
 	void clicked();
 
-	UIRadiobutton*	m_nextbtn;
-	UIRadiogroup*		m_group;
+	Radiobutton*	m_nextbtn;
+	Radiogroup*		m_group;
 	int				m_id;
 };
 
 /**
 Initialize the radiobutton and link it into the group's linked list
 */
-UIRadiobutton::UIRadiobutton(UIPanel *parent, int x, int y, uint picid, UIRadiogroup *group, int id)
-	: UIStatebox(parent, x, y, picid)
+Radiobutton::Radiobutton(Panel *parent, int x, int y, uint picid, Radiogroup *group, int id)
+	: Statebox(parent, x, y, picid)
 {
 	m_group = group;
 	m_id = id;
@@ -60,9 +60,9 @@ UIRadiobutton::UIRadiobutton(UIPanel *parent, int x, int y, uint picid, UIRadiog
 /**
  * Unlink the radiobutton from its group
  */
-UIRadiobutton::~UIRadiobutton()
+Radiobutton::~Radiobutton()
 {
-	for(UIRadiobutton **pp = &m_group->m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
+	for(Radiobutton **pp = &m_group->m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
 		if (*pp == this) {
 			*pp = m_nextbtn;
 			break;
@@ -74,7 +74,7 @@ UIRadiobutton::~UIRadiobutton()
  * Inform the radiogroup about the click; the group is responsible of setting
  * button states.
  */
-void UIRadiobutton::clicked()
+void Radiobutton::clicked()
 {
    m_group->set_state(m_id);
 	play_click();
@@ -92,7 +92,7 @@ Radiogroup
 /**
  * Initialize an empty radiogroup
  */
-UIRadiogroup::UIRadiogroup()
+Radiogroup::Radiogroup()
 {
 	m_buttons = 0;
 	m_highestid = -1;
@@ -102,7 +102,7 @@ UIRadiogroup::UIRadiogroup()
 /**
  * Free all associated buttons.
  */
-UIRadiogroup::~UIRadiogroup()
+Radiogroup::~Radiogroup()
 {
 	while(m_buttons)
 		delete m_buttons;
@@ -113,13 +113,13 @@ UIRadiogroup::~UIRadiogroup()
 Create a new radio button with the given attributes
 Returns the ID of the new button.
 */
-int UIRadiogroup::add_button
-(UIPanel * parent,
+int Radiogroup::add_button
+(Panel * parent,
  const int x, const int y,
  const uint picid, const char * const tooltip)
 {
 	m_highestid++;
-	(new UIRadiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip
+	(new Radiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip
 		(tooltip);
 	return m_highestid;
 }
@@ -130,16 +130,17 @@ int UIRadiogroup::add_button
  *
  * Args: state	the ID of the checked button (-1 means don't check any button)
  */
-void UIRadiogroup::set_state(int state)
+void Radiogroup::set_state(int state)
 {
 	if (state == m_state) {
       clicked.call();
 		return;
    }
 
-	for(UIRadiobutton *btn = m_buttons; btn; btn = btn->m_nextbtn)
+	for(Radiobutton *btn = m_buttons; btn; btn = btn->m_nextbtn)
 		btn->set_state(btn->m_id == state);
 	m_state = state;
 	changed.call();
 	changedto.call(state);
 }
+};

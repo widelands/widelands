@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "ui_unique_window.h"
 #include "editorinteractive.h"
 
-class UIRadiogroup;
+namespace UI {struct Radiogroup;};
 
 /*
 =============================
@@ -35,16 +35,15 @@ Here, you can select the tool you wish to use the next time
 
 =============================
 */
-class Editor_Tool_Menu : public UIUniqueWindow {
-   public:
-      Editor_Tool_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, Editor_Interactive::Editor_Tools*, std::vector<UIUniqueWindowRegistry>* );
+struct Editor_Tool_Menu : public UI::UniqueWindow {
+      Editor_Tool_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*, Editor_Interactive::Editor_Tools*, std::vector<UI::UniqueWindow::Registry>* );
       virtual ~Editor_Tool_Menu();
 
    private:
-      std::vector<UIUniqueWindowRegistry>* m_options_menus;
+      std::vector<UI::UniqueWindow::Registry>* m_options_menus;
       Editor_Interactive::Editor_Tools* m_tools;
       Editor_Interactive* m_parent;
-      UIRadiogroup* m_radioselect;
+      UI::Radiogroup* m_radioselect;
 
       void changed_to(void);
 };

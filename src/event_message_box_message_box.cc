@@ -35,11 +35,11 @@
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Game* game, Event_Message_Box* event,
       int gposx, int gposy, int w, int h) :
-UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
+UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
    m_game = game;
 
-   UIMultiline_Textarea* m_text=0;
+   UI::Multiline_Textarea* m_text=0;
    int spacing=5;
    int offsy=5;
    int offsx=spacing;
@@ -47,7 +47,7 @@ UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
    int posy=offsy;
 
    set_inner_size(w,h);
-   m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
+   m_text=new UI::Multiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
    if(m_text)
       m_text->set_text( event->get_text());
@@ -57,13 +57,13 @@ UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
    int space=get_inner_w()-2*spacing;
    space-=but_width*event->get_nr_buttons();
    space/=event->get_nr_buttons()+1;
-   UIButton* b;
+   UI::Button* b;
    posx=spacing;
    posy=get_inner_h()-30;
    m_trigger.resize(event->get_nr_buttons());
    for(int i=0; i<event->get_nr_buttons(); i++) {
       posx+=space;
-      b=new UIButton(this, posx, posy, but_width, 20, 0, i);
+      b=new UI::Button(this, posx, posy, but_width, 20, 0, i);
       posx+=but_width;
       b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
       b->set_title( event->get_button_name(i) );

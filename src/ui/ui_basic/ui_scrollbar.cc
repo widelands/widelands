@@ -24,6 +24,7 @@
 #include "ui_scrollbar.h"
 #include "wlapplication.h"
 
+namespace UI {
 #define SCROLLBAR_AUTOREPEAT_DELAY	200
 #define SCROLLBAR_AUTOREPEAT_TICK	50
 
@@ -39,8 +40,8 @@ Scrollbar
 /**
 Initialize the scrollbar using default values.
 */
-UIScrollbar::UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool horiz)
-	: UIPanel(parent, x, y, w, h)
+Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
+	: Panel(parent, x, y, w, h)
 {
 	m_horizontal = horiz;
 
@@ -74,7 +75,7 @@ UIScrollbar::UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool hor
 /**
 Change the number of steps of the scrollbar.
 */
-void UIScrollbar::set_steps(int steps)
+void Scrollbar::set_steps(int steps)
 {
 	if (steps < 1)
 		steps = 1;
@@ -91,7 +92,7 @@ void UIScrollbar::set_steps(int steps)
 /**
 Change the number of steps a pageup/down will scroll.
 */
-void UIScrollbar::set_pagesize(int pagesize)
+void Scrollbar::set_pagesize(int pagesize)
 {
 	if (pagesize < 1)
 		pagesize = 1;
@@ -103,7 +104,7 @@ void UIScrollbar::set_pagesize(int pagesize)
 /**
 Change the current scrolling position.
 */
-void UIScrollbar::set_pos(int pos)
+void Scrollbar::set_pos(int pos)
 {
 	if (pos < 0)
 		pos = 0;
@@ -123,7 +124,7 @@ void UIScrollbar::set_pos(int pos)
 /**
 Scrollbar::get_area_for_point
 */
-UIScrollbar::Area UIScrollbar::get_area_for_point(int x, int y)
+Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
 {
 	int extent;
 	int knob;
@@ -165,7 +166,7 @@ UIScrollbar::Area UIScrollbar::get_area_for_point(int x, int y)
 /**
 Return the center of the knob, in pixels, depending on the current position.
 */
-int UIScrollbar::get_knob_pos()
+int Scrollbar::get_knob_pos()
 {
 	int extent;
 
@@ -183,7 +184,7 @@ int UIScrollbar::get_knob_pos()
 /**
 Change the position according to knob movement.
 */
-void UIScrollbar::set_knob_pos(int pos)
+void Scrollbar::set_knob_pos(int pos)
 {
 	int extent;
 
@@ -203,7 +204,7 @@ void UIScrollbar::set_knob_pos(int pos)
 /**
 Perform the action for klicking on the given area.
 */
-void UIScrollbar::action(Area area)
+void Scrollbar::action(Area area)
 {
 	int diff;
 	int pos;
@@ -221,7 +222,7 @@ void UIScrollbar::action(Area area)
 }
 
 
-void UIScrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h)
+void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h)
 {
 	uint pic;
 
@@ -273,7 +274,7 @@ void UIScrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w,
 }
 
 
-void UIScrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h)
+void Scrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h)
 {
 	dst->tile(x, y, w, h, m_pic_background, get_x()+x, get_y()+y);
 
@@ -285,7 +286,7 @@ void UIScrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, i
 /**
 Draw the scrollbar.
 */
-void UIScrollbar::draw(RenderTarget* dst)
+void Scrollbar::draw(RenderTarget* dst)
 {
 	uint knobpos = get_knob_pos();
 
@@ -315,9 +316,9 @@ void UIScrollbar::draw(RenderTarget* dst)
 /**
 Check for possible auto-repeat scrolling.
 */
-void UIScrollbar::think()
+void Scrollbar::think()
 {
-	UIPanel::think();
+	Panel::think();
 
 	if (m_pressed == None || m_pressed == Knob)
 		return;
@@ -334,7 +335,7 @@ void UIScrollbar::think()
 }
 
 
-bool UIScrollbar::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Scrollbar::handle_mousepress(const Uint8 btn, int x, int y) {
 	bool result = false;
 
 	switch (btn) {
@@ -366,7 +367,7 @@ bool UIScrollbar::handle_mousepress(const Uint8 btn, int x, int y) {
 	update(0, 0, get_w(), get_h());
 	return result;
 }
-bool UIScrollbar::handle_mouserelease(const Uint8 btn, int, int) {
+bool Scrollbar::handle_mouserelease(const Uint8 btn, int, int) {
 	bool result = false;
 
 	switch (btn) {
@@ -392,7 +393,7 @@ bool UIScrollbar::handle_mouserelease(const Uint8 btn, int, int) {
 /**
 Move the knob while pressed.
 */
-void UIScrollbar::handle_mousemove(int mx, int my, int, int) {
+void Scrollbar::handle_mousemove(int mx, int my, int, int) {
 	if (m_pressed == Knob)
 	{
 		int pos = m_horizontal ? mx : my;
@@ -400,3 +401,4 @@ void UIScrollbar::handle_mousemove(int mx, int my, int, int) {
 		set_knob_pos(pos - m_knob_grabdelta);
 	}
 }
+};

@@ -53,7 +53,7 @@ Initialize
 ===============
 */
 Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
-  UIPanel(0, 0, 0, get_xres(), get_yres())
+  UI::Panel(0, 0, 0, get_xres(), get_yres())
 {
 	{
 		Section & s = *g_options.pull_section("global");
@@ -241,7 +241,7 @@ void Interactive_Base::think()
 	g_gr->update_fullscreen();
 
 	// some of the UI windows need to think()
-	UIPanel::think();
+	UI::Panel::think();
 }
 
 

@@ -36,48 +36,48 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	discovery->set_callback (discovery_callback, this);
 
 	// Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 120, _("Begin Network Game"), Align_HCenter);
+	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 120, _("Begin Network Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 90, 220, 200, 26, 1, JOINGAME);
+	b = new UI::Button(this, 90, 220, 200, 26, 1, JOINGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::joingame);
 	b->set_title(_("Join a Game").c_str());
 
-	b = new UIButton(this, 90, 260, 200, 26, 1, HOSTGAME);
+	b = new UI::Button(this, 90, 260, 200, 26, 1, HOSTGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::hostgame);
 	b->set_title(_("Host a New Game").c_str());
 
-	b = new UIButton(this, 90, 300, 200, 26, 1, INTERNETGAME);
+	b = new UI::Button(this, 90, 300, 200, 26, 1, INTERNETGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title(_("Play in Internet").c_str());
 
-	b = new UIButton(this, 90, 340, 200, 26, 0, CANCEL);
+	b = new UI::Button(this, 90, 340, 200, 26, 0, CANCEL);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title(_("Back").c_str());
 
 	// Hostname
-	hostname=new UIEdit_Box(this, 310, 220, 200, 26, 2, 0);
+	hostname=new UI::Edit_Box(this, 310, 220, 200, 26, 2, 0);
 	hostname->changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
 	hostname->set_text("localhost");
 
 	// Player
-	playername=new UIEdit_Box(this, 310, 260, 200, 26, 2, 0);
+	playername=new UI::Edit_Box(this, 310, 260, 200, 26, 2, 0);
 	playername->set_text(_("nobody").c_str());
 
 	// LAN or GGZ game
-	networktype = new UIButton(this, 550, 220, 150, 26, 0, -1);
+	networktype = new UI::Button(this, 550, 220, 150, 26, 0, -1);
 	networktype->clickedid.set(this, &Fullscreen_Menu_NetSetup::toggle_networktype);
 	networktype->set_title(_("LAN games").c_str());
 	internetgame = false;
 
 	// List of open games in local network
-	opengames=new UITable(this, 310, 300, 390, 180);
-	opengames->add_column (_("Host").c_str(), UITable::STRING, 150);
-	opengames->add_column (_("Map").c_str(), UITable::STRING, 150);
-	opengames->add_column (_("State").c_str(), UITable::STRING, 90);
+	opengames=new UI::Table(this, 310, 300, 390, 180);
+	opengames->add_column (_("Host").c_str(), UI::Table::STRING, 150);
+	opengames->add_column (_("Map").c_str(), UI::Table::STRING, 150);
+	opengames->add_column (_("State").c_str(), UI::Table::STRING, 90);
 	opengames->selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 }
 
@@ -127,7 +127,7 @@ void Fullscreen_Menu_NetSetup::game_selected (int) {
 	if(game) hostname->set_text (game->info.hostname);
 }
 
-void Fullscreen_Menu_NetSetup::update_game_info (UITable_Entry* entry, const LAN_Game_Info& info)
+void Fullscreen_Menu_NetSetup::update_game_info (UI::Table_Entry* entry, const LAN_Game_Info& info)
 {
 	entry->set_string (0, info.hostname);
 	entry->set_string (1, info.map);
@@ -147,14 +147,14 @@ void Fullscreen_Menu_NetSetup::update_game_info (UITable_Entry* entry, const LAN
 
 void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game* game)
 {
-	update_game_info (new UITable_Entry(opengames, (void*) game), game->info);
+	update_game_info (new UI::Table_Entry(opengames, (void*) game), game->info);
 }
 
 void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game *) {}
 
 void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game* game)
 {
-	UITable_Entry* entry=opengames->find_entry(game);
+	UI::Table_Entry* entry=opengames->find_entry(game);
 
 	if (entry!=0)
 	    update_game_info (entry, game->info);
@@ -186,7 +186,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 		strncpy(info.hostname, "(ggz)", sizeof(info.hostname));
 		strncpy(info.map, (*it).c_str(), sizeof(info.map));
 		info.state = LAN_GAME_OPEN;
-		update_game_info (new UITable_Entry(opengames, (void*) NULL), info);
+		update_game_info (new UI::Table_Entry(opengames, (void*) NULL), info);
 	}
 }
 
@@ -247,7 +247,7 @@ void Fullscreen_Menu_NetSetup::joingame(int) {
 
 	if(NetGGZ::ref()->usedcore())
 	{
-		UITable_Entry *entry = opengames->get_entry(index);
+		UI::Table_Entry *entry = opengames->get_entry(index);
 		if(!entry) return;
 		NetGGZ::ref()->join(entry->get_string(1));
 		end_modal(JOINGGZGAME);

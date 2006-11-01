@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,23 +20,24 @@
 #ifndef UI_OBJECT_H
 #define UI_OBJECT_H
 
+namespace UI {
 /**
  * Serves as a base class for UI related objects. The only purpose is
  * to provide the base class for signal function pointers.
  */
-class UIObject {
-public:
-	UIObject() {}
+struct Object {
+	Object() {}
 
 	// Yeah right... force a VMT so that MSVC++ gets the pointers-to-members
 	// right *sigh*
 	// OTOH, looking at the gcc assembly, gcc seems to use a less efficient
 	// pointer representation. Can anyone clear this up? -- Nicolai
-	virtual ~UIObject() { }
+	virtual ~Object() {}
 
 private:
-	UIObject & operator=(const UIObject &);
-	UIObject            (const UIObject &);
+	Object & operator=(const Object &);
+	Object            (const Object &);
+};
 };
 
 #endif /* UI_OBJECT_H */

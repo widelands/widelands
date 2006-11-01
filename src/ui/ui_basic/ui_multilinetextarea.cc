@@ -25,12 +25,13 @@
 #include "graphic.h"
 #include "text_parser.h"
 
+namespace UI {
 /**
 Initialize a textarea that supports multiline strings.
 */
-UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w, uint h,
+Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
                                        const char *text, Align align, bool always_show_scrollbar)
-   : UIPanel(parent, x, y, w - 24, h)
+   : Panel(parent, x, y, w - 24, h)
 {
    set_handle_mouse(false);
    set_think(false);
@@ -44,8 +45,8 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
    m_textheight = 0;
    m_scrollmode = ScrollNormal;
 
-   m_scrollbar = new UIScrollbar(parent, x+get_w(), y, 24, h, false);
-   m_scrollbar->moved.set(this, &UIMultiline_Textarea::set_scrollpos);
+   m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
+   m_scrollbar->moved.set(this, &Multiline_Textarea::set_scrollpos);
 
    m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_BIG));
    m_scrollbar->set_steps(1);
@@ -63,7 +64,7 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 /**
 Free allocated resources
 */
-UIMultiline_Textarea::~UIMultiline_Textarea() {
+Multiline_Textarea::~Multiline_Textarea() {
    if (m_cache_id)
       g_fh->delete_widget_cache(m_cache_id);
 }
@@ -73,7 +74,7 @@ UIMultiline_Textarea::~UIMultiline_Textarea() {
 Replace the current text with a new one.
 Fix up scrolling state if necessary.
 */
-void UIMultiline_Textarea::set_text(const char *text)
+void Multiline_Textarea::set_text(const char *text)
 {
    if (!text) {
       // Clear the field
@@ -93,7 +94,7 @@ void UIMultiline_Textarea::set_text(const char *text)
 /**
 Change alignment of the textarea
 */
-void UIMultiline_Textarea::set_align(Align align)
+void Multiline_Textarea::set_align(Align align)
 {
    // don't allow vertical alignment as it doesn't make sense
    m_align = static_cast<const Align>(align & Align_Horizontal);
@@ -103,7 +104,7 @@ void UIMultiline_Textarea::set_align(Align align)
 /**
 Scroll to the given position.
 */
-void UIMultiline_Textarea::set_scrollpos(int pixels)
+void Multiline_Textarea::set_scrollpos(int pixels)
 {
    m_textpos = pixels;
 
@@ -115,7 +116,7 @@ void UIMultiline_Textarea::set_scrollpos(int pixels)
 Change the scroll mode. This will not change the current scroll position;
 it only affects the behaviour of set_text().
 */
-void UIMultiline_Textarea::set_scrollmode(ScrollMode mode)
+void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 {
    m_scrollmode = mode;
 }
@@ -124,7 +125,7 @@ void UIMultiline_Textarea::set_scrollmode(ScrollMode mode)
 /**
 Redraw the textarea
 */
-void UIMultiline_Textarea::draw(RenderTarget* dst)
+void Multiline_Textarea::draw(RenderTarget* dst)
 {
    if (m_text.length())
    {
@@ -138,7 +139,7 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
    }
 }
 
-void UIMultiline_Textarea::draw_scrollbar() {
+void Multiline_Textarea::draw_scrollbar() {
    if (m_cache_mode != Widget_Cache_Use ) {
       bool setbottom = false;
 
@@ -162,7 +163,7 @@ void UIMultiline_Textarea::draw_scrollbar() {
    }
 }
 
-int UIMultiline_Textarea::get_halign() {
+int Multiline_Textarea::get_halign() {
    int x = 0;
    // Only HAlignment allowed
    if (m_align & Align_HCenter)
@@ -171,3 +172,4 @@ int UIMultiline_Textarea::get_halign() {
       x += get_w();
    return x;
 }
+};

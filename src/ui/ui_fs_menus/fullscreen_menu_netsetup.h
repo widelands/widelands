@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,10 +25,12 @@
 
 #include "fullscreen_menu_base.h"
 
-class UIEdit_Box;
-class UITable;
-class UITable_Entry;
-class UIButton;
+namespace UI {
+struct Edit_Box;
+struct Table;
+struct Table_Entry;
+struct Button;
+};
 
 class LAN_Game_Finder;
 class LAN_Open_Game;
@@ -59,11 +61,11 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		void fill(std::list<std::string> tables);
 
 	private:
-		UIEdit_Box*		hostname;
-		UIEdit_Box*		playername;
-		UITable*		opengames;
+		UI::Edit_Box*		hostname;
+		UI::Edit_Box*		playername;
+		UI::Table*		opengames;
 		LAN_Game_Finder*	discovery;
-		UIButton*		networktype;
+		UI::Button*		networktype;
 		bool			internetgame;
 
 		void game_selected (int);
@@ -74,7 +76,7 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		void game_closed (const LAN_Open_Game*);
 		void game_updated (const LAN_Open_Game*);
 
-		void update_game_info (UITable_Entry*, const LAN_Game_Info&);
+		void update_game_info (UI::Table_Entry*, const LAN_Game_Info&);
 
 		void toggle_networktype(int code);
 		void toggle_hostname();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by the Widelands Development Team
+ * Copyright (C) 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,13 +23,13 @@
 #include <vector>
 #include "ui_panel.h"
 
+namespace UI {
 /**
 A layouting panel that holds a number of child panels.
-The UIPanels you add to the UIBox must be children of the UIBox.
-The UIBox automatically resizes itself and positions the added children.
+The Panels you add to the Box must be children of the Box.
+The Box automatically resizes itself and positions the added children.
 */
-class UIBox : public UIPanel {
-public:
+struct Box : public Panel {
 	enum {
 		Horizontal = 0,
 		Vertical = 1,
@@ -41,13 +41,13 @@ public:
 		AlignBottom = 2,
 	};
 public:
-	UIBox(UIPanel* parent, int x, int y, uint orientation);
+	Box(Panel* parent, int x, int y, uint orientation);
 
 	void resize();
 
 	int get_nritems() const { return m_items.size(); }
 
-	void add(UIPanel* panel, uint align);
+	void add(Panel* panel, uint align);
 	void add_space(uint space);
 
 private:
@@ -65,7 +65,7 @@ private:
 
 		union {
 			struct {
-				UIPanel*	panel;
+				Panel*	panel;
 				uint		align;
 			} panel;
 			uint		space;
@@ -76,6 +76,6 @@ private:
 
 	std::vector<Item>	m_items;
 };
-
+};
 
 #endif // included_ui_box_h

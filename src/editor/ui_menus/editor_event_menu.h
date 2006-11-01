@@ -26,8 +26,10 @@ class Editor_Interactive;
 class Event;
 class EventChain;
 class Trigger;
-template <typename T> struct UIListselect;
-class UIButton;
+namespace UI {
+struct Button;
+template <typename T> struct Listselect;
+};
 
 /*
 =============================
@@ -36,23 +38,22 @@ class Editor_Event_Menu
 
 =============================
 */
-class Editor_Event_Menu : public UIUniqueWindow {
-   public:
-      Editor_Event_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
+struct Editor_Event_Menu : public UI::UniqueWindow {
+      Editor_Event_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Event_Menu();
 
    private:
       Editor_Interactive *m_parent;
 
-	UIListselect<Event      &> *m_event_list;
-	UIListselect<EventChain &> *m_eventchain_list;
-	UIListselect<Trigger    &> *m_trigger_list;
-      UIButton       *m_btn_del_event;
-      UIButton       *m_btn_edit_event;
-      UIButton       *m_btn_del_trigger;
-      UIButton       *m_btn_edit_trigger;
-      UIButton       *m_btn_del_eventchain;
-      UIButton       *m_btn_edit_eventchain;
+	UI::Listselect<Event      &> *m_event_list;
+	UI::Listselect<EventChain &> *m_eventchain_list;
+	UI::Listselect<Trigger    &> *m_trigger_list;
+      UI::Button       *m_btn_del_event;
+      UI::Button       *m_btn_edit_event;
+      UI::Button       *m_btn_del_trigger;
+      UI::Button       *m_btn_edit_trigger;
+      UI::Button       *m_btn_del_eventchain;
+      UI::Button       *m_btn_edit_eventchain;
 	void trigger_list_selected    (uint);
 	void event_list_selected      (uint);
 	void eventchain_list_selected (uint);

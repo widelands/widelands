@@ -22,6 +22,7 @@
 
 #include "ui_window.h"
 
+namespace UI {
 /*
 ==========================
 
@@ -29,17 +30,17 @@ Shows a modal messagebox, user must click something
 
 ==========================
 */
-class UIModal_Message_Box : public UIWindow {
-   public:
+struct Modal_Message_Box : public Window {
       enum MB_Type {
          OK,
          YESNO
       };
-      UIModal_Message_Box(UIPanel* parent, std::string caption, std::string text, MB_Type type);
-      ~UIModal_Message_Box();
+      Modal_Message_Box(Panel* parent, std::string caption, std::string text, MB_Type type);
+      ~Modal_Message_Box();
 
 	bool handle_mousepress  (const Uint8 btn, int mx, int my);
 	bool handle_mouserelease(const Uint8 btn, int mx, int my);
+};
 };
 
 #endif

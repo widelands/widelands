@@ -39,7 +39,7 @@ Fullscreen_Menu_Base
  * Args: bgpic	name of the background picture
  */
 Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
-	: UIPanel(0, 0, 0, MENU_XRES, MENU_YRES)
+	: UI::Panel(0, 0, 0, MENU_XRES, MENU_YRES)
 {
 	// Switch graphics mode if necessary
 	Section *s = g_options.pull_section("global");

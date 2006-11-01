@@ -23,27 +23,27 @@
 #include "types.h"
 #include "ui_signal.h"
 
-class UIPanel;
+namespace UI {
+struct Panel;
 
 /**
  * A group of radiobuttons. At most one of them is checked at any time.
  * State is -1 if none is checked, otherwise it's the index of the checked button.
  */
-class UIRadiobutton;
+struct Radiobutton;
 
-class UIRadiogroup {
-	friend class UIRadiobutton;
+struct Radiogroup {
+	friend class Radiobutton;
 
-public:
-	UIRadiogroup();
-	~UIRadiogroup();
+	Radiogroup();
+	~Radiogroup();
 
-	UISignal changed;
-	UISignal1<int> changedto;
-   UISignal clicked; // clicked without things changed
+	Signal changed;
+	Signal1<int> changedto;
+   Signal clicked; // clicked without things changed
 
 	int add_button
-		(UIPanel * parent,
+		(Panel * parent,
 		 const int x, const int y,
 		 const uint picid, const char * const tooltip = 0);
 
@@ -51,9 +51,10 @@ public:
 	void set_state(int state);
 
 private:
-	UIRadiobutton*	m_buttons; // linked list of buttons (not sorted)
+	Radiobutton*	m_buttons; // linked list of buttons (not sorted)
 	int				m_highestid;
 	int				m_state; // -1: none
+};
 };
 
 #endif

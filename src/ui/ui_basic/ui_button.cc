@@ -25,11 +25,12 @@
 #include "error.h"
 #include "constants.h"
 
+namespace UI {
 /**
-Initialize a UIButton
+Initialize a Button
 */
-UIButton::UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
-	: UIPanel(parent, x, y, w, h)
+Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
+	: Panel(parent, x, y, w, h)
 {
 	set_think(false);
 
@@ -56,7 +57,7 @@ UIButton::UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint backgroun
 /**
 Free any resources associated with the button
 */
-UIButton::~UIButton()
+Button::~Button()
 {
 }
 
@@ -64,7 +65,7 @@ UIButton::~UIButton()
 /**
 Sets a new picture for the button.
 */
-void UIButton::set_pic(uint picid)
+void Button::set_pic(uint picid)
 {
 	m_title.clear();
 
@@ -77,7 +78,7 @@ void UIButton::set_pic(uint picid)
 /**
 Set a text title for the button
 */
-void UIButton::set_title(const std::string & title) {
+void Button::set_title(const std::string & title) {
 	m_pic_custom = 0;
       m_title = title;
 
@@ -90,7 +91,7 @@ void UIButton::set_title(const std::string & title) {
 Enable/Disable the button (disabled buttons can't be clicked).
 Buttons are enabled by default
 */
-void UIButton::set_enabled(bool on)
+void Button::set_enabled(bool on)
 {
 	// disabled buttons should look different...
 	if (on)
@@ -107,7 +108,7 @@ void UIButton::set_enabled(bool on)
 /**
 Redraw the button
 */
-void UIButton::draw(RenderTarget* dst)
+void Button::draw(RenderTarget* dst)
 {
 	// Draw the background
 	if(!m_flat)
@@ -171,7 +172,7 @@ void UIButton::draw(RenderTarget* dst)
    }
 	else
 	{
-      // UIButton is flat, do not draw borders, instead, if it is pressed, draw
+      // Button is flat, do not draw borders, instead, if it is pressed, draw
       // a box around it
 		if (m_pressed && m_highlighted)
 			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_down);
@@ -182,7 +183,7 @@ void UIButton::draw(RenderTarget* dst)
 /**
 Update highlighted status
 */
-void UIButton::handle_mousein(bool inside)
+void Button::handle_mousein(bool inside)
 {
 	if (inside && m_enabled)
 		m_highlighted = true;
@@ -195,7 +196,7 @@ void UIButton::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool UIButton::handle_mousepress(const Uint8 btn, int, int) {
+bool Button::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_enabled) {
@@ -206,7 +207,7 @@ bool UIButton::handle_mousepress(const Uint8 btn, int, int) {
 
 	return true;
 }
-bool UIButton::handle_mouserelease(const Uint8 btn, int, int) {
+bool Button::handle_mouserelease(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_pressed) {
@@ -222,3 +223,4 @@ bool UIButton::handle_mouserelease(const Uint8 btn, int, int) {
 
 	return true;
 }
+};

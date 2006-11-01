@@ -74,22 +74,22 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
    m_disconnect_expected = false;
 
    // Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 10, _("Lobby"), Align_HCenter);
+	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 10, _("Lobby"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// Chat area
-   m_chatarea = new UIMultiline_Textarea(this, 5, 40, (int)(get_inner_w()*0.75)-5, get_inner_h()-40-50, 0, Align_Left, 1);
-   m_chatarea->set_scrollmode(UIMultiline_Textarea::ScrollLog);
+   m_chatarea = new UI::Multiline_Textarea(this, 5, 40, (int)(get_inner_w()*0.75)-5, get_inner_h()-40-50, 0, Align_Left, 1);
+   m_chatarea->set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 
    // Chat editbox
-   m_chatbox = new UIEdit_Box(this, 5, get_inner_h()-45, (int)(get_inner_w()*0.75)-5, 25, 0, 1);
+   m_chatbox = new UI::Edit_Box(this, 5, get_inner_h()-45, (int)(get_inner_w()*0.75)-5, 25, 0, 1);
    m_chatbox->changed.set(this, &Fullscreen_Menu_InetLobby::changed);
 
    // User Listing
-   m_userlist = new UIListselect<void *>(this, (int)(get_inner_w()-get_inner_w()*0.25+5), 40, (int)(get_inner_w()*0.25-10), get_inner_h()-40-50, Align_Left);
+   m_userlist = new UI::Listselect<void *>(this, (int)(get_inner_w()-get_inner_w()*0.25+5), 40, (int)(get_inner_w()*0.25-10), get_inner_h()-40-50, Align_Left);
 
    // Buttons
-   UIButton* b = new UIButton(this, (int)(get_inner_w()-get_inner_w()*0.25+5), get_inner_h()-45, 50, 25, 0, 0);
+   UI::Button* b = new UI::Button(this, (int)(get_inner_w()-get_inner_w()*0.25+5), get_inner_h()-45, 50, 25, 0, 0);
    b->set_title(_("Back").c_str());
    b->clickedid.set(this, &Fullscreen_Menu_InetLobby::clicked);
 
@@ -227,7 +227,7 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
  * message
  */
 void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
-   UIModal_Message_Box* mmb = new UIModal_Message_Box(this, _("Critical Connection Error!"), str, UIModal_Message_Box::OK);
+   UI::Modal_Message_Box* mmb = new UI::Modal_Message_Box(this, _("Critical Connection Error!"), str, UI::Modal_Message_Box::OK);
    mmb->run();
    m_disconnect_expected = true;
    delete mmb;
@@ -238,7 +238,7 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
  */
 void Fullscreen_Menu_InetLobby::disconnect( void ) {
    if(!m_disconnect_expected) {
-      UIModal_Message_Box* mmb = new UIModal_Message_Box(this, _("Critical Connection Error!"), _("Server disconnected unexpectedly!"), UIModal_Message_Box::OK);
+      UI::Modal_Message_Box* mmb = new UI::Modal_Message_Box(this, _("Critical Connection Error!"), _("Server disconnected unexpectedly!"), UI::Modal_Message_Box::OK);
       mmb->run();
       delete mmb;
    }

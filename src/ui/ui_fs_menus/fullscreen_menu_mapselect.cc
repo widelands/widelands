@@ -54,45 +54,45 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
    *m_ml=0;
 
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 110, _("Choose your map!"), Align_HCenter);
+   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 110, _("Choose your map!"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
    // Checkbox
-   UITextarea* ta=new UITextarea(this, MENU_XRES-300, 180, _("Load Map as scenario: "), Align_VCenter);
-   UICheckbox* cb=new UICheckbox(this, (ta->get_x()+ta->get_w()+10), 170);
+   UI::Textarea* ta=new UI::Textarea(this, MENU_XRES-300, 180, _("Load Map as scenario: "), Align_VCenter);
+   UI::Checkbox* cb=new UI::Checkbox(this, (ta->get_x()+ta->get_w()+10), 170);
    cb->changedto.set(this, &Fullscreen_Menu_MapSelect::changed);
    cb->set_state(m_is_scenario);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 570, 505, 200, 26, 0, 0);
+	b = new UI::Button(this, 570, 505, 200, 26, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_MapSelect::end_modal);
 	b->set_title(_("Back").c_str());
 
-	m_ok = new UIButton(this, 570, 535, 200, 26, 2, 0);
+	m_ok = new UI::Button(this, 570, 535, 200, 26, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_MapSelect::ok);
 	m_ok->set_title(_("OK").c_str());
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new UIListselect<const char * const>(this, 15, 205, 455, 365);
+	list = new UI::Listselect<const char * const>(this, 15, 205, 455, 365);
 	list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
    list->double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
 	// Info fields
-	new UITextarea(this, 560, 205, _("Name:"), Align_Right);
-	taname = new UITextarea(this, 570, 205, "");
-	new UITextarea(this, 560, 225, _("Author:"), Align_Right);
-	taauthor = new UITextarea(this, 570, 225, "");
-	new UITextarea(this, 560, 245, _("Size:"), Align_Right);
-	tasize = new UITextarea(this, 570, 245, "");
-	new UITextarea(this, 560, 265, _("World:"), Align_Right);
-	taworld = new UITextarea(this, 570, 265, "");
-	new UITextarea(this, 560, 285, _("Players:"), Align_Right);
-	tanplayers = new UITextarea(this, 570, 285, "");
-	new UITextarea(this, 560, 305, _("Descr:"), Align_Right);
-	tadescr = new UIMultiline_Textarea(this, 570, 305, 200, 190, "");
+	new UI::Textarea(this, 560, 205, _("Name:"), Align_Right);
+	taname = new UI::Textarea(this, 570, 205, "");
+	new UI::Textarea(this, 560, 225, _("Author:"), Align_Right);
+	taauthor = new UI::Textarea(this, 570, 225, "");
+	new UI::Textarea(this, 560, 245, _("Size:"), Align_Right);
+	tasize = new UI::Textarea(this, 570, 245, "");
+	new UI::Textarea(this, 560, 265, _("World:"), Align_Right);
+	taworld = new UI::Textarea(this, 570, 265, "");
+	new UI::Textarea(this, 560, 285, _("Players:"), Align_Right);
+	tanplayers = new UI::Textarea(this, 570, 285, "");
+	new UI::Textarea(this, 560, 305, _("Descr:"), Align_Right);
+	tadescr = new UI::Multiline_Textarea(this, 570, 305, 200, 190, "");
 
    m_basedir="maps";
    m_curdir="maps";

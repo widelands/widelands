@@ -30,11 +30,11 @@
 #include "util.h"
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
-   UIWindow(parent, 0, 0, 164, 100, _("Trigger Option Menu").c_str()) {
+   UI::Window(parent, 0, 0, 164, 100, _("Trigger Option Menu").c_str()) {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Null Trigger Options"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Null Trigger Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -45,18 +45,18 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, T
 
    m_trigger=trigger;
 
-   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
-   m_name=new UIEdit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
+   new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+   m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
    m_name->set_text( trigger->get_name() );
 
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy+=20+spacing;
-   UIButton* b=new UIButton(this, posx, posy, 60, 20, 0, 1);
+   UI::Button* b=new UI::Button(this, posx, posy, 60, 20, 0, 1);
    b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Trigger_Null_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 60, 20, 1, 0);
+   b=new UI::Button(this, posx, posy, 60, 20, 1, 0);
    b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Trigger_Null_Option_Menu::clicked);
 

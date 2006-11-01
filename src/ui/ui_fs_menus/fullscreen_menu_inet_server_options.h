@@ -35,7 +35,7 @@ class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 		{ return hostname->get_text(); }
 
 	private:
-		UIEdit_Box*	playername, *hostname;
+		UI::Edit_Box*	playername, *hostname;
 };
 
 #endif

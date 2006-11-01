@@ -34,10 +34,10 @@
 
 GameMainMenu::GameMainMenu
 (Interactive_Player & plr,
- UIUniqueWindowRegistry & registry,
+ UI::UniqueWindow::Registry & registry,
  Interactive_Player::Game_Main_Menu_Windows & windows)
 :
-UIUniqueWindow(&plr, &registry, 180, 160, _("Main Menu")),
+UI::UniqueWindow(&plr, &registry, 180, 160, _("Main Menu")),
 m_player      (plr),
 m_windows     (windows),
 general_stats (this, posx(0, 4), posy(0, 3), buttonw(4), buttonh(3), 4),

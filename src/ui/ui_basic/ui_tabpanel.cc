@@ -24,6 +24,7 @@
 #include "ui_tabpanel.h"
 
 
+namespace UI {
 #define TP_BUTTON_WIDTH			34
 #define TP_BUTTON_HEIGHT		34
 
@@ -31,10 +32,10 @@
 
 
 /**
-Initialize an empty UITab_Panel
+Initialize an empty Tab_Panel
 */
-UITab_Panel::UITab_Panel(UIPanel* parent, int x, int y, uint background)
-	: UIPanel(parent, x, y, 0, 0)
+Tab_Panel::Tab_Panel(Panel* parent, int x, int y, uint background)
+	: Panel(parent, x, y, 0, 0)
 {
 	m_active = 0;
 	m_snapparent = false;
@@ -56,7 +57,7 @@ Resize according to number of tabs and the size of the currently visible
 contents.
 Resize the parent if snapparent is enabled.
 */
-void UITab_Panel::resize()
+void Tab_Panel::resize()
 {
 	int w;
 	int h;
@@ -68,7 +69,7 @@ void UITab_Panel::resize()
 	// size of contents
 	if (m_active < m_tabs.size())
 		{
-		UIPanel* panel = m_tabs[m_active].panel;
+		Panel* panel = m_tabs[m_active].panel;
 
 		if (panel->get_w() > w)
 			w = panel->get_w();
@@ -85,10 +86,10 @@ void UITab_Panel::resize()
 
 /**
 If snapparent is enabled, the parent window will be adjusted to the size of the
-Tab_Panel whenever the UITab_Panel's size changes.
+Tab_Panel whenever the Tab_Panel's size changes.
 The default for snapparent behaviour is off.
 */
-void UITab_Panel::set_snapparent(bool snapparent)
+void Tab_Panel::set_snapparent(bool snapparent)
 {
 	m_snapparent = snapparent;
 }
@@ -97,7 +98,8 @@ void UITab_Panel::set_snapparent(bool snapparent)
 /**
 Add a new tab
 */
-uint UITab_Panel::add(uint picid, UIPanel* panel, const std::string & tooltip) {
+uint Tab_Panel::add(uint picid, Panel* panel, const std::string & tooltip_text)
+{
 	assert(panel);
 	assert(panel->get_parent() == this);
 
@@ -105,7 +107,7 @@ uint UITab_Panel::add(uint picid, UIPanel* panel, const std::string & tooltip) {
 	uint id;
 
 	t.picid = picid;
-	t.tooltip = tooltip;
+	t.tooltip = tooltip_text;
 	t.panel = panel;
 
 	m_tabs.push_back(t);
@@ -121,7 +123,7 @@ uint UITab_Panel::add(uint picid, UIPanel* panel, const std::string & tooltip) {
 /**
 Make a different tab the currently active tab.
 */
-void UITab_Panel::activate(uint idx)
+void Tab_Panel::activate(uint idx)
 {
 	if (m_active < m_tabs.size())
 		m_tabs[m_active].panel->set_visible(false);
@@ -137,7 +139,7 @@ void UITab_Panel::activate(uint idx)
 /**
 Draw the buttons and the tab
 */
-void UITab_Panel::draw(RenderTarget* dst)
+void Tab_Panel::draw(RenderTarget* dst)
 {
 	uint idx;
 	int x;
@@ -190,7 +192,7 @@ void UITab_Panel::draw(RenderTarget* dst)
 /**
 Cancel all highlights when the mouse leaves the panel
 */
-void UITab_Panel::handle_mousein(bool inside)
+void Tab_Panel::handle_mousein(bool inside)
 {
 	if (!inside && m_highlight >= 0)
 		{
@@ -204,7 +206,7 @@ void UITab_Panel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-void UITab_Panel::handle_mousemove(int x, int y, int, int) {
+void Tab_Panel::handle_mousemove(int x, int y, int, int) {
 	int hl;
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)
@@ -240,7 +242,7 @@ void UITab_Panel::handle_mousemove(int x, int y, int, int) {
 /**
 Change the active tab if a tab button has been clicked
 */
-bool UITab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Tab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		int id;
 
@@ -259,5 +261,6 @@ bool UITab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	return false;
 }
-bool UITab_Panel::handle_mouserelease(const Uint8, int, int)
+bool Tab_Panel::handle_mouserelease(const Uint8, int, int)
 {return false;}
+};

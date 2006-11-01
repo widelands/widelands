@@ -23,16 +23,17 @@
 #include <string>
 #include "ui_window.h"
 
-class UIEdit_Box;
-class UIButton;
+namespace UI {
+struct Edit_Box;
+struct Button;
+};
 
 /*
  * Show a small modal dialog allowing the user to enter
  * a directory name to be created
  */
-class Main_Menu_Save_Map_Make_Directory : public UIWindow {
-   public:
-      Main_Menu_Save_Map_Make_Directory(UIPanel*, const char*);
+struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
+      Main_Menu_Save_Map_Make_Directory(UI::Panel*, const char*);
 
       const char* get_dirname(void) { return m_dirname.c_str(); }
 
@@ -41,8 +42,8 @@ class Main_Menu_Save_Map_Make_Directory : public UIWindow {
 
    private:
       std::string m_dirname;
-      UIEdit_Box* m_edit;
-      UIButton* m_ok_button;
+      UI::Edit_Box* m_edit;
+      UI::Button* m_ok_button;
       void edit_changed(void);
       void clicked(int);
 };

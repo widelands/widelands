@@ -33,15 +33,14 @@ this represents the main menu
 
 =============================
 */
-class Editor_Main_Menu : public UIUniqueWindow {
-   public:
-      Editor_Main_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
+struct Editor_Main_Menu : public UI::UniqueWindow {
+      Editor_Main_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Main_Menu();
 
    private:
       Editor_Interactive *m_parent;
 
-		UIUniqueWindowRegistry		m_window_readme;
+	UI::UniqueWindow::Registry m_window_readme;
 
       void exit_btn();
       void load_btn();

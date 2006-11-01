@@ -23,12 +23,12 @@
 #include "ui_panel.h"
 #include "ui_signal.h"
 
-/** class UIScrollbar
+namespace UI {
+/** class Scrollbar
  *
  * This class provides a scrollbar
  */
-class UIScrollbar : public UIPanel {
-public:
+struct Scrollbar : public Panel {
 	enum Area {
 		None,
 		Minus,
@@ -43,9 +43,9 @@ public:
 	};
 
 public:
-	UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool horiz);
+	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
 
-	UISignal1<int> moved;
+	Signal1<int> moved;
 
 	void set_steps(int steps);
 	void set_pagesize(int pagesize);
@@ -89,6 +89,7 @@ private:
 	uint		m_pic_plus;		///< right/down
 	uint		m_pic_background;
 	uint		m_pic_buttons;
+};
 };
 
 #endif // __S__SCROLLBAR_H

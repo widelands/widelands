@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,18 +42,18 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
    i18n::release_textdomain();
 
    // Text view
-	mlta=new UIMultiline_Textarea(this, 30, 170, 735, 330, text.c_str());
+	mlta=new UI::Multiline_Textarea(this, 30, 170, 735, 330, text.c_str());
    mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
    // Menu title
-   UITextarea* ta= new UITextarea(this, 50, 50, title, Align_Left);
+   UI::Textarea* ta= new UI::Textarea(this, 50, 50, title, Align_Left);
    ta->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 100);
 
 	// Close button
-	UIButton *b;
+	UI::Button *b;
 
-	b = new UIButton(this, 300, 545, 200, 26, 0);
+	b = new UI::Button(this, 300, 545, 200, 26, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TextView::end_modal);
 	b->set_title(_("Close").c_str());
 }
@@ -74,13 +74,15 @@ TextViewWindow
 ==============================================================================
 */
 
-class FileViewWindow : public UIUniqueWindow {
-public:
-	FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename);
+FileViewWindow : public UI::UniqueWindow {
+	FileViewWindow
+		(UI::Panel * parent,
+		 UI::UniqueWindow::Registry * reg,
+		 std::string filename);
 };
 
-FileViewWindow::FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename)
-	: UIUniqueWindow(parent, reg, 0, 0, "")
+FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
+	: UI::UniqueWindow(parent, reg, 0, 0, "")
 {
 	i18n::grab_textdomain( "texts" );
 
@@ -93,7 +95,7 @@ FileViewWindow::FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std
 
    set_title(title.c_str());
 
-	UIMultiline_Textarea* mlta=new UIMultiline_Textarea(this, 0, 0, 560, 240, text.c_str());
+	UI::Multiline_Textarea* mlta=new UI::Multiline_Textarea(this, 0, 0, 560, 240, text.c_str());
    mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
@@ -110,7 +112,7 @@ fileview_screen
 Display the contents of a text file in a scrollable window.
 ===============
 */
-void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename)
+void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
 {
    new FileViewWindow(parent, reg, filename);
 }

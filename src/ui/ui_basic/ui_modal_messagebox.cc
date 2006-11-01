@@ -25,29 +25,30 @@
 #include "graphic.h"
 #include "wlapplication.h"
 
-UIModal_Message_Box::UIModal_Message_Box(UIPanel* parent, std::string caption, std::string text, MB_Type type) :
-   UIWindow(parent, 0, 0, 20, 20, caption.c_str()) {
+namespace UI {
+Modal_Message_Box::Modal_Message_Box(Panel* parent, std::string caption, std::string text, MB_Type type) :
+   Window(parent, 0, 0, 20, 20, caption.c_str()) {
 
    set_inner_size(320, 160);
    set_pos((parent->get_inner_w()-320)/2, (parent->get_inner_h()-100)/2);
 
-   new UIMultiline_Textarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
+   new Multiline_Textarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
 
    if(type==OK) {
-      UIButton* but= new UIButton(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 0);
-      but->clickedid.set(this, &UIModal_Message_Box::end_modal);
+      Button* but= new Button(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 0);
+      but->clickedid.set(this, &Modal_Message_Box::end_modal);
       but->set_title("OK");
    } else if(type==YESNO) {
-      UIButton* but= new UIButton(this, ((get_inner_w()/2)-60)/2, get_inner_h()-30, 60, 20, 0, 1);
-      but->clickedid.set(this, &UIModal_Message_Box::end_modal);
+      Button* but= new Button(this, ((get_inner_w()/2)-60)/2, get_inner_h()-30, 60, 20, 0, 1);
+      but->clickedid.set(this, &Modal_Message_Box::end_modal);
       but->set_title("YES");
-      but= new UIButton(this, ((get_inner_w()/2)-60)/2+get_inner_w()/2, get_inner_h()-30, 60, 20, 1, 0);
-      but->clickedid.set(this, &UIModal_Message_Box::end_modal);
+      but= new Button(this, ((get_inner_w()/2)-60)/2+get_inner_w()/2, get_inner_h()-30, 60, 20, 1, 0);
+      but->clickedid.set(this, &Modal_Message_Box::end_modal);
       but->set_title("NO");
    }
 }
 
-UIModal_Message_Box::~UIModal_Message_Box(void) {
+Modal_Message_Box::~Modal_Message_Box(void) {
 }
 
 /*
@@ -57,12 +58,13 @@ UIModal_Message_Box::~UIModal_Message_Box(void) {
  * on close (the caller must do this) instead
  * we call end_modal() with NO (=0)
  */
-bool UIModal_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
+bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn == SDL_BUTTON_RIGHT) {
       end_modal(0);
       return true;
    } else
       return false; // we're not dragable
 }
-bool UIModal_Message_Box::handle_mouserelease(const Uint8, int, int)
+bool Modal_Message_Box::handle_mouserelease(const Uint8, int, int)
 {return false;}
+};

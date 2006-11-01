@@ -26,15 +26,16 @@
 
 class Editor_Interactive;
 class Trigger_Building;
-class UIEdit_Box;
-class UITextarea;
+namespace UI {
+struct Edit_Box;
+struct Textarea;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Trigger_Building_Option_Menu : public UIWindow {
-   public:
+struct Trigger_Building_Option_Menu : public UI::Window {
       Trigger_Building_Option_Menu(Editor_Interactive*, Trigger_Building*);
       ~Trigger_Building_Option_Menu();
 
@@ -47,8 +48,8 @@ class Trigger_Building_Option_Menu : public UIWindow {
 
       Trigger_Building* m_trigger;
       Editor_Interactive* m_parent;
-      UITextarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta, *m_count_ta, *m_building_ta;
-      UIEdit_Box* m_name;
+      UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta, *m_count_ta, *m_building_ta;
+      UI::Edit_Box* m_name;
       int         m_x, m_y, m_player, m_area, m_count, m_building;
       std::vector<std::string> m_buildings;
 };

@@ -121,7 +121,7 @@ class BulldozeConfirm
 ---------------------
 Confirm the bulldoze request for a building.
 */
-class BulldozeConfirm : public UIWindow {
+class BulldozeConfirm : public UI::Window {
 public:
 	BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy = 0);
 	virtual ~BulldozeConfirm();
@@ -149,9 +149,9 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy)
-	: UIWindow(parent, 0, 0, 160, 90, _("Destroy building?").c_str())
+	: UI::Window(parent, 0, 0, 160, 90, _("Destroy building?").c_str())
 {
-	UIButton* btn;
+	UI::Button* btn;
 	std::string text;
 
 	m_iabase = parent;
@@ -165,13 +165,13 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, P
 	text = _("Do you really want to destroy this ");
 	text += building->get_name();
 	text += "?";
-	new UITextarea(this, 0, 0, 160, 44, text, Align_Center, true);
+	new UI::Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
 
-	btn = new UIButton(this, 6, 50, 60, 34, 4);
+	btn = new UI::Button(this, 6, 50, 60, 34, 4);
 	btn->clicked.set(this, &BulldozeConfirm::bulldoze);
 	btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_ok ));
 
-	btn = new UIButton(this, 94, 50, 60, 34, 4);
+	btn = new UI::Button(this, 94, 50, 60, 34, 4);
 	btn->clicked.set(this, &BulldozeConfirm::die);
 	btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_cancel ));
 
@@ -267,7 +267,7 @@ class WaresQueueDisplay
 This passive class displays the status of a WaresQueue.
 It updates itself automatically through think().
 */
-class WaresQueueDisplay : public UIPanel {
+class WaresQueueDisplay : public UI::Panel {
 public:
 	enum {
 		CellWidth = 24,
@@ -284,7 +284,7 @@ public:
 	};
 
 public:
-	WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g);
+	WaresQueueDisplay(UI::Panel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -314,9 +314,9 @@ Initialize the panel.
 ===============
 */
 WaresQueueDisplay::WaresQueueDisplay
-(UIPanel * parent, int x, int y, uint maxw, WaresQueue* queue, Game *)
+(UI::Panel * parent, int x, int y, uint maxw, WaresQueue* queue, Game *)
 :
-UIPanel(parent, x, y, 0, Height),
+UI::Panel(parent, x, y, 0, Height),
 m_queue(queue),
 m_max_width(maxw),
 m_pic_background(g_gr->get_picture( PicMod_Game, pic_queue_background)),
@@ -444,7 +444,7 @@ class Building_Window
 ---------------------
 Baseclass providing common tools for building windows.
 */
-class Building_Window : public UIWindow {
+class Building_Window : public UI::Window {
 	friend class TrainingSite_Window;
 	friend class MilitarySite_Window;
 public:
@@ -453,7 +453,7 @@ public:
 	};
 
 public:
-	Building_Window(Interactive_Player* parent, Building* building, UIWindow** registry);
+	Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry);
 	virtual ~Building_Window();
 
 	Interactive_Player* get_player() { return m_player; }
@@ -462,7 +462,7 @@ public:
 	virtual void draw(RenderTarget* dst);
 	virtual void think();
 
-	UIPanel* create_capsbuttons(UIPanel* parent);
+	UI::Panel* create_capsbuttons(UI::Panel* parent);
 
 protected:
 	void setup_capsbuttons();
@@ -475,11 +475,11 @@ protected:
 	void act_change_soldier_capacity(int);
 
 private:
-	UIWindow**				m_registry;
+	UI::Window**				m_registry;
 	Interactive_Player*	m_player;
 	Building*				m_building;
 
-	UIPanel*	m_capsbuttons;		// UIPanel that contains capabilities buttons
+	UI::Panel*	m_capsbuttons;		// UI::Panel that contains capabilities buttons
 	uint		m_capscache;		// capabilities that were last used in setting up the caps panel
 };
 
@@ -491,8 +491,8 @@ Building_Window::Building_Window
 Create the window, add it to the registry.
 ===============
 */
-Building_Window::Building_Window(Interactive_Player* parent, Building* building, UIWindow** registry)
-	: UIWindow(parent, 0, 0, Width, 0, building->get_descname())
+Building_Window::Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry)
+	: UI::Window(parent, 0, 0, Width, 0, building->get_descname())
 {
 	m_registry = registry;
 	if (*m_registry)
@@ -538,7 +538,7 @@ void Building_Window::draw(RenderTarget* dst)
 	dst->drawanim(get_inner_w() / 2, get_inner_h() / 2, anim, 0, 0);
 
 	// Draw all the panels etc. above the background
-	UIWindow::draw(dst);
+	UI::Window::draw(dst);
 }
 
 
@@ -556,7 +556,7 @@ void Building_Window::think()
 			setup_capsbuttons();
 	}
 
-	UIWindow::think();
+	UI::Window::think();
 }
 
 
@@ -568,12 +568,12 @@ Create the capsbuttons panel with the given parent window, set it up and return
 it.
 ===============
 */
-UIPanel* Building_Window::create_capsbuttons(UIPanel* parent)
+UI::Panel* Building_Window::create_capsbuttons(UI::Panel* parent)
 {
 	if (m_capsbuttons)
 		delete m_capsbuttons;
 
-	m_capsbuttons = new UIPanel(parent, 0, 0, Width, 34);
+	m_capsbuttons = new UI::Panel(parent, 0, 0, Width, 34);
 	setup_capsbuttons();
 
 	return m_capsbuttons;
@@ -604,7 +604,7 @@ void Building_Window::setup_capsbuttons()
 			icon = m_building->get_continue_icon();
 		else
 			icon = m_building->get_stop_icon();
-		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
+		UI::Button* btn = new UI::Button(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_start_stop);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  icon.c_str() ));
 		btn->set_tooltip(_("Stop").c_str());
@@ -625,7 +625,7 @@ void Building_Window::setup_capsbuttons()
             continue;
          }
 
-         UIButton & btn = *new UIButton(m_capsbuttons, x, 0, 34, 34, 4, id); // Button id == building id
+         UI::Button & btn = *new UI::Button(m_capsbuttons, x, 0, 34, 34, 4, id); // Button id == building id
          btn.clickedid.set(this, &Building_Window::act_enhance);
          const Building_Descr & building = *tribe.get_building_descr(id);
          btn.set_pic(building.get_buildicon());
@@ -639,7 +639,7 @@ void Building_Window::setup_capsbuttons()
    }
 
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
-		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
+		UI::Button* btn = new UI::Button(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_bulldoze ));
 		btn->set_tooltip(_("Destroy").c_str());
@@ -647,7 +647,7 @@ void Building_Window::setup_capsbuttons()
 	}
 
 	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
-		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
+		UI::Button* btn = new UI::Button(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_debug);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_debug ));
 		btn->set_tooltip(_("Debug").c_str());
@@ -753,7 +753,7 @@ ConstructionSite UI IMPLEMENTATION
 
 class ConstructionSite_Window : public Building_Window {
 public:
-	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, UIWindow** registry);
+	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, UI::Window** registry);
 	virtual ~ConstructionSite_Window();
 
 	ConstructionSite* get_constructionsize() { return (ConstructionSite*)get_building(); }
@@ -761,7 +761,7 @@ public:
 	virtual void think();
 
 private:
-	UIProgress_Bar*	m_progress;
+	UI::Progress_Bar*	m_progress;
 };
 
 
@@ -773,16 +773,16 @@ Create the window and its panels
 ===============
 */
 ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs,
-                                                 UIWindow** registry)
+                                                 UI::Window** registry)
 	: Building_Window(parent, cs, registry)
 {
-	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
+	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	m_progress = new UIProgress_Bar(box, 0, 0, UIProgress_Bar::DefaultWidth, UIProgress_Bar::DefaultHeight,
-							UIProgress_Bar::Horizontal);
+	m_progress = new UI::Progress_Bar(box, 0, 0, UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
+							UI::Progress_Bar::Horizontal);
 	m_progress->set_total(1 << 16);
-	box->add(m_progress, UIBox::AlignCenter);
+	box->add(m_progress, UI::Box::AlignCenter);
 
 	box->add_space(8);
 
@@ -792,13 +792,13 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
 					cs->get_waresqueue(i), parent->get_game());
 
-		box->add(wqd, UIBox::AlignLeft);
+		box->add(wqd, UI::Box::AlignLeft);
 	}
 
 	box->add_space(8);
 
 	// Add the caps button
-	box->add(create_capsbuttons(box), UIBox::AlignCenter);
+	box->add(create_capsbuttons(box), UI::Box::AlignCenter);
 
 	fit_inner(box);
 }
@@ -838,7 +838,7 @@ ConstructionSite::create_options_window
 Create the status window describing the construction site.
 ===============
 */
-UIWindow *ConstructionSite::create_options_window(Interactive_Player *plr, UIWindow **registry)
+UI::Window *ConstructionSite::create_options_window(Interactive_Player *plr, UI::Window **registry)
 {
 	return new ConstructionSite_Window(plr, this, registry);
 }
@@ -854,7 +854,7 @@ Warehouse UI IMPLEMENTATION
 
 class Warehouse_Window : public Building_Window {
 public:
-	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UIWindow **registry);
+	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry);
 	virtual ~Warehouse_Window();
 
 	Warehouse* get_warehouse() { return (Warehouse*)get_building(); }
@@ -878,7 +878,7 @@ Warehouse_Window::Warehouse_Window
 Open the window, create the window buttons and add to the registry.
 ===============
 */
-Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UIWindow **registry)
+Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry)
 	: Building_Window(parent, wh, registry)
 {
    m_parent = parent;
@@ -897,15 +897,15 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    m_curpage = 0;
 
 
-   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 4, 100);
+   UI::Button* b = new UI::Button(this, posx, posy, button_w, 25, 4, 100);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
    b->clickedid.set(this, &Warehouse_Window::clicked);
    posx += button_w + spacing;
-   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 4, 1);
+   b = new UI::Button(this, posx, posy, button_w*2+spacing, 25, 4, 1);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/warehousewindow_switchpage.png" ));
    b->clickedid.set(this, &Warehouse_Window::clicked);
    posx += button_w*2 + 2*spacing;
-   b = new UIButton(this, posx, posy, button_w, 25, 4, 101);
+   b = new UI::Button(this, posx, posy, button_w, 25, 4, 101);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_goto.png" ));
    b->clickedid.set(this, &Warehouse_Window::clicked);
    posx += button_w + spacing;
@@ -913,7 +913,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 
 	// Add caps buttons
    posx = 0;
-   UIPanel* caps = create_capsbuttons(this);
+   UI::Panel* caps = create_capsbuttons(this);
    caps->set_pos(spacing, posy);
    if( caps->get_h() )
       posy += caps->get_h() + spacing;
@@ -999,7 +999,7 @@ Warehouse::create_options_window
 Create the warehouse information window
 ===============
 */
-UIWindow *Warehouse::create_options_window(Interactive_Player *plr, UIWindow **registry)
+UI::Window *Warehouse::create_options_window(Interactive_Player *plr, UI::Window **registry)
 {
 	return new Warehouse_Window(plr, this, registry);
 }
@@ -1016,7 +1016,7 @@ ProductionSite UI IMPLEMENTATION
 /*
  * ProductionSite_Window_ListWorkerWindow
  */
-class ProductionSite_Window_ListWorkerWindow : public UIWindow{
+class ProductionSite_Window_ListWorkerWindow : public UI::Window{
    public:
       ProductionSite_Window_ListWorkerWindow(Interactive_Player*, ProductionSite* ps);
       virtual ~ProductionSite_Window_ListWorkerWindow();
@@ -1030,21 +1030,21 @@ class ProductionSite_Window_ListWorkerWindow : public UIWindow{
       Coords          m_ps_location;
       ProductionSite* m_ps;
       Interactive_Player* m_parent;
-	UIListselect<Worker &> * m_ls;
-      UITextarea* m_type, *m_experience, *m_becomes;
+	UI::Listselect<Worker &> * m_ls;
+      UI::Textarea* m_type, *m_experience, *m_becomes;
 };
 
 /*
  * Constructor
  */
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)
-	: UIWindow(parent, 0, 0, 320, 125, _("Worker Listing").c_str()) {
+	: UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str()) {
    m_ps=ps;
    m_ps_location=ps->get_position();
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Worker Listing"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Worker Listing"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -1054,24 +1054,24 @@ ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(I
    int posy=offsy;
 
    // listselect
-   m_ls=new UIListselect<Worker &>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
+   m_ls=new UI::Listselect<Worker &>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
 
    // the descriptive areas
    // Type
    posx=get_inner_w()/2+spacing;
-   new UITextarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
-   m_type=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+   new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
+   m_type=new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Experience
-   new UITextarea(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
-   m_experience=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+   new UI::Textarea(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
+   m_experience=new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // is working to become
-   new UITextarea(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
+   new UI::Textarea(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
    posy+=20;
-   m_becomes=new UITextarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
+   m_becomes=new UI::Textarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    center_to_parent();
@@ -1097,7 +1097,7 @@ void ProductionSite_Window_ListWorkerWindow::think(void) {
    }
 
    fill_list();
-   UIWindow::think();
+   UI::Window::think();
 }
 
 /*
@@ -1155,7 +1155,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
 
 class ProductionSite_Window : public Building_Window {
 public:
-	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UIWindow** registry);
+	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry);
 	virtual ~ProductionSite_Window();
 
 	inline ProductionSite* get_productionsite() { return (ProductionSite*)get_building(); }
@@ -1164,13 +1164,13 @@ public:
 
 private:
    Interactive_Player* m_parent;
-   UIWindow** m_reg;
-	UIButton* m_list_worker;
+   UI::Window** m_reg;
+	UI::Button* m_list_worker;
 public:
    void list_worker_clicked(void);
-	UIButton* get_list_button() { return m_list_worker; }
+	UI::Button* get_list_button() { return m_list_worker; }
 protected:
-   UIBox* create_production_box(UIPanel* ptr, ProductionSite* ps);
+   UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
 };
 
 
@@ -1181,13 +1181,13 @@ ProductionSite_Window::ProductionSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UIWindow** registry)
+ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry)
 	: Building_Window(parent, ps, registry)
 {
    m_parent=parent;
    m_reg=registry;
 
-   UIBox* prod_box = 0;
+   UI::Box* prod_box = 0;
    if (ps->get_building_type() == Building::PRODUCTIONSITE)
    {
        prod_box = create_production_box (this, ps);
@@ -1195,10 +1195,10 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
    }
 }
 
-UIBox*
-ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* ps)
+UI::Box*
+ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite* ps)
 {
-   UIBox* box = new UIBox (parent, 0, 0, UIBox::Vertical);
+   UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical);
 
    // Add the wares queue
    std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
@@ -1207,20 +1207,20 @@ ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* p
       WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
             (*warequeues)[i], m_parent->get_game());
 
-      box->add(wqd, UIBox::AlignLeft);
+      box->add(wqd, UI::Box::AlignLeft);
    }
 
    box->add_space(8);
 
       // Add caps buttons
-   box->add(create_capsbuttons(box), UIBox::AlignCenter);
+   box->add(create_capsbuttons(box), UI::Box::AlignCenter);
 
       // Add list worker button
-   m_list_worker=new UIButton(box, 0,0,32,32,4,100);
+   m_list_worker=new UI::Button(box, 0,0,32,32,4,100);
    m_list_worker->set_pic(g_gr->get_picture( PicMod_Game,  pic_list_worker ));
    m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
    m_list_worker->set_tooltip(_("Show worker listing").c_str());
-   box->add(m_list_worker, UIBox::AlignLeft);
+   box->add(m_list_worker, UI::Box::AlignLeft);
 
    return box;
 }
@@ -1266,7 +1266,7 @@ ProductionSite::create_options_window
 Create the production site information window.
 ===============
 */
-UIWindow* ProductionSite::create_options_window(Interactive_Player* plr, UIWindow** registry)
+UI::Window* ProductionSite::create_options_window(Interactive_Player* plr, UI::Window** registry)
 {
 	return new ProductionSite_Window(plr, this, registry);
 }
@@ -1282,7 +1282,7 @@ MilitarySite UI IMPLEMENTATION
 
 class MilitarySite_Window : public Building_Window {
 public:
-	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry);
+	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry);
 	virtual ~MilitarySite_Window();
 
 	inline MilitarySite* get_militarysite() { return (MilitarySite*)get_building(); }
@@ -1296,9 +1296,9 @@ private:
 
    Coords          m_ms_location;
    Interactive_Player* m_parent;
-   UIWindow** m_reg;
-   UITable* m_table;
-	UITextarea		*m_capacity;
+   UI::Window** m_reg;
+   UI::Table* m_table;
+	UI::Textarea		*m_capacity;
 };
 
 
@@ -1309,52 +1309,52 @@ MilitarySite_Window::MilitarySite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry)
+MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry)
 	: Building_Window(parent, ps, registry)
 {
    m_parent=parent;
    m_reg=registry;
    m_ms_location=ps->get_position();
 
-	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
+	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
    // Soldiers view
-	m_table=new UITable(box, 0, 0, 360, 200, Align_Left, UITable::UP);
-	m_table->add_column(_("Name").c_str(), UITable::STRING, 100);
-	m_table->add_column(_("HP").c_str(), UITable::STRING, 40);
-	m_table->add_column(_("AT").c_str(), UITable::STRING, 40);
-	m_table->add_column(_("DE").c_str(), UITable::STRING, 40);
-	m_table->add_column(_("EV").c_str(), UITable::STRING, 40);
-	m_table->add_column(_("Level").c_str(), UITable::STRING, 100); // enough space for scrollbar
+	m_table=new UI::Table(box, 0, 0, 360, 200, Align_Left, UI::Table::UP);
+	m_table->add_column(_("Name").c_str(), UI::Table::STRING, 100);
+	m_table->add_column(_("HP").c_str(), UI::Table::STRING, 40);
+	m_table->add_column(_("AT").c_str(), UI::Table::STRING, 40);
+	m_table->add_column(_("DE").c_str(), UI::Table::STRING, 40);
+	m_table->add_column(_("EV").c_str(), UI::Table::STRING, 40);
+	m_table->add_column(_("Level").c_str(), UI::Table::STRING, 100); // enough space for scrollbar
 
-   box->add(m_table, UIBox::AlignCenter);
+   box->add(m_table, UI::Box::AlignCenter);
 
 	// Add drop soldier button
-	UIButton* b = new UIButton (box, 0, 0, 360, 32, 4, 100);
+	UI::Button* b = new UI::Button (box, 0, 0, 360, 32, 4, 100);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
 	b->clicked.set(this, &MilitarySite_Window::drop_button_clicked);
 	box->add_space(8);
-	box->add (b, UIBox::AlignLeft);
+	box->add (b, UI::Box::AlignLeft);
 	box->add_space(8);
 
-	UIPanel* pan = new UIPanel(box, 0, 34, Width+100, 34);
+	UI::Panel* pan = new UI::Panel(box, 0, 34, Width+100, 34);
 
 	// Add the caps button
 	create_capsbuttons(pan);
 
-		new UITextarea (pan, 70, 11, _("Capacity"), Align_Left);
+		new UI::Textarea (pan, 70, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
-	b = new UIButton (pan, 140, 4, 24, 24, 4, 2);
+	b = new UI::Button (pan, 140, 4, 24, 24, 4, 2);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_down);
 	b = 0;
-	b = new UIButton (pan, 188, 4, 24, 24, 4, 3);
+	b = new UI::Button (pan, 188, 4, 24, 24, 4, 3);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_up);
 	b = 0;
-	m_capacity =new UITextarea (pan, 170, 11, "XX", Align_Center);
+	m_capacity =new UI::Textarea (pan, 170, 11, "XX", Align_Center);
 
-	box->add(pan, UIBox::AlignLeft);
+	box->add(pan, UI::Box::AlignLeft);
 
 
    fit_inner(box);
@@ -1414,7 +1414,7 @@ void MilitarySite_Window::update(void) {
 
    for(i=0; i<soldiers->size(); i++) {
       Soldier* s=((*soldiers)[i]);
-      UITable_Entry* e=0;
+      UI::Table_Entry* e=0;
       for(sel=0; sel<m_table->get_nr_entries(); sel++) {
          if(m_table->get_entry(sel)->get_user_data()==s) {
             // Soldier already in list
@@ -1423,7 +1423,7 @@ void MilitarySite_Window::update(void) {
          }
       }
       if(!e) // add new
-         e= new UITable_Entry(m_table, s);
+         e= new UI::Table_Entry(m_table, s);
 
 		e->set_string(0, s->get_descname().c_str());
       sprintf(buf, "%i / %i", s->get_hp_level(), s->get_max_hp_level());
@@ -1472,7 +1472,7 @@ MilitarySite::create_options_window
 Create the production site information window.
 ===============
 */
-UIWindow* MilitarySite::create_options_window(Interactive_Player* plr, UIWindow** registry)
+UI::Window* MilitarySite::create_options_window(Interactive_Player* plr, UI::Window** registry)
 {
 	return new MilitarySite_Window(plr, this, registry);
 }
@@ -1482,7 +1482,7 @@ UIWindow* MilitarySite::create_options_window(Interactive_Player* plr, UIWindow*
 	TrainingSite_Options_Window Implementation
 ====================
 */
-class TrainingSite_Options_Window : public UIWindow {
+class TrainingSite_Options_Window : public UI::Window {
 public:
 	TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps);
 	virtual ~TrainingSite_Options_Window();
@@ -1507,8 +1507,8 @@ private:
 
 	Coords			m_ms_location;
 	Interactive_Player* m_parent;
-	UIWindow** 		m_reg;
-	UITextarea		*m_style_train,
+	UI::Window** 		m_reg;
+	UI::Textarea		*m_style_train,
 					*m_hp_pri,
 					*m_attack_pri,
 					*m_defense_pri,
@@ -1517,7 +1517,7 @@ private:
 };
 
 TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
-	: UIWindow(parent, 0, 0, 320, 125, _("Training Options").c_str()) {
+	: UI::Window(parent, 0, 0, 320, 125, _("Training Options").c_str()) {
 
 	int _bs = 22;
 	int _cn = 20;
@@ -1535,21 +1535,21 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 
 	// TODO: Put the capacity buttons here.
 
-	UIButton *btn;
+	UI::Button *btn;
 
 	// Add switch training mode button
-	btn = new UIButton (this, _cb, _bs, 105, _bs, 4, 1);
+	btn = new UI::Button (this, _cb, _bs, 105, _bs, 4, 1);
 	btn->clicked.set(this, &TrainingSite_Options_Window::heros_clicked);
 	btn = 0;
 
-	new UITextarea(this, _cn - 15, _bs + 2, _("Training mode : "), Align_Left);
-	m_style_train = new UITextarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
+	new UI::Textarea(this, _cn - 15, _bs + 2, _("Training mode : "), Align_Left);
+	m_style_train = new UI::Textarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
 
 
-	m_hp_pri			= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*2, "XX", Align_Center);
-	m_attack_pri	= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*3, "XX", Align_Center);
-	m_defense_pri	= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*4, "XX", Align_Center);
-	m_evade_pri		= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*5, "XX", Align_Center);
+	m_hp_pri			= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*2, "XX", Align_Center);
+	m_attack_pri	= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*3, "XX", Align_Center);
+	m_defense_pri	= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*4, "XX", Align_Center);
+	m_evade_pri		= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*5, "XX", Align_Center);
 
 	m_hp_pri->set_visible(false);
 	m_attack_pri->set_visible(false);
@@ -1559,54 +1559,54 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	// Add priority buttons for every attribute
 	if (ps->get__descr()->get_train_hp()) {
 		// HP buttons
-		btn = new UIButton (this,  _cb, 2*(_bs+2), _bs, _bs, 4, 2);
+		btn = new UI::Button (this,  _cb, 2*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::down_hp_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 2*(_bs+2), _bs, _bs, 4, 3);
+		btn = new UI::Button (this, _cb+2*_bs, 2*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_hp_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*2, _("Hit Points"), Align_Left);
+		new UI::Textarea (this, _cn, (3+_bs)*2, _("Hit Points"), Align_Left);
 		m_hp_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_attack()) {
 		// Attack buttons
-		btn = new UIButton (this, _cb, 3*(_bs+2), _bs, _bs, 4, 2);
+		btn = new UI::Button (this, _cb, 3*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::down_attack_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 3*(_bs+2), _bs, _bs, 4, 3);
+		btn = new UI::Button (this, _cb+2*_bs, 3*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_attack_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*3, _("Attack"), Align_Left);
+		new UI::Textarea (this, _cn, (3+_bs)*3, _("Attack"), Align_Left);
 		m_attack_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_defense()) {
 		// Defense buttons
-		btn = new UIButton (this, _cb, 4*(_bs+2), _bs, _bs, 4, 2);
+		btn = new UI::Button (this, _cb, 4*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this,&TrainingSite_Options_Window::down_defense_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 4*(_bs+2), _bs, _bs, 4, 3);
+		btn = new UI::Button (this, _cb+2*_bs, 4*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this,&TrainingSite_Options_Window::up_defense_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*4, _("Defense"), Align_Left);
+		new UI::Textarea (this, _cn, (3+_bs)*4, _("Defense"), Align_Left);
 		m_defense_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_evade()) {
 		// Evade buttons
-		btn = new UIButton (this, _cb, 5*(_bs+2), _bs, _bs, 4, 2);
+		btn = new UI::Button (this, _cb, 5*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::down_evade_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 5*(_bs+2), _bs, _bs, 4, 3);
+		btn = new UI::Button (this, _cb+2*_bs, 5*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_evade_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*5, _("Evade"), Align_Left);
+		new UI::Textarea (this, _cn, (3+_bs)*5, _("Evade"), Align_Left);
 		m_evade_pri->set_visible(true);
 	}
 
@@ -1678,7 +1678,7 @@ TrainingSite UI IMPLEMENTATION
 
 class TrainingSite_Window : public ProductionSite_Window {
 public:
-	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UIWindow** registry);
+	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UI::Window** registry);
 	virtual ~TrainingSite_Window();
 
 	inline TrainingSite* get_trainingsite() { return (TrainingSite*)get_building(); }
@@ -1688,21 +1688,21 @@ public:
 	void drop_button_clicked ();
 	void soldier_capacity_up () { act_change_soldier_capacity (1); }
 	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
-   UIBox* create_military_box (UIPanel*);
+   UI::Box* create_military_box (UI::Panel*);
 private:
 	void update();
 
-   void add_tab(const char* picname, UIPanel* panel);
-//   void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
+   void add_tab(const char* picname, UI::Panel* panel);
+//   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)());
 
    Coords              m_ms_location;
    Interactive_Player* m_parent;
-   UIWindow**          m_reg;
-   UITable*            m_table;
-   UIButton*           m_drop_button;
-   UITextarea*         m_capacity;
+   UI::Window**          m_reg;
+   UI::Table*            m_table;
+   UI::Button*           m_drop_button;
+   UI::Textarea*         m_capacity;
 
-   UITab_Panel*         m_tabpanel;
+   UI::Tab_Panel*         m_tabpanel;
 
 };
 
@@ -1714,24 +1714,24 @@ TrainingSite_Window::TrainingSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ms, UIWindow** registry)
+TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ms, UI::Window** registry)
 	: ProductionSite_Window(parent, ms, registry)
 {
    m_parent = parent;
    m_reg = registry;
    m_ms_location = ms->get_position ();
 
-   m_tabpanel = new UITab_Panel(this, 0, 0, 1);
+   m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
    m_tabpanel->set_snapparent(true);
 
       // Training Box (wares and buttons related to they)
-   UIBox* prod_box = create_production_box (m_tabpanel, ms);
+   UI::Box* prod_box = create_production_box (m_tabpanel, ms);
    prod_box->resize();
    add_tab(pic_tab_training, prod_box);
 
       // Military Box (Soldiers and buttons related to they)
       // Training Box (wares and buttons related to they)
-   UIBox* train_box = create_military_box (m_tabpanel);
+   UI::Box* train_box = create_military_box (m_tabpanel);
    train_box->resize();
    add_tab(pic_tab_military, train_box);
 
@@ -1751,45 +1751,45 @@ TrainingSite_Window::~TrainingSite_Window()
 {
 }
 
-UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
+UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 {
-   UIBox* sold_box = new UIBox (panel, 0, 0, UIBox::Vertical);
+   UI::Box* sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
 
       // Soldiers view
-   m_table=new UITable(sold_box, 0, 0, 360, 200, Align_Left, UITable::UP);
-   m_table->add_column(_("Name").c_str(), UITable::STRING, 100);
-   m_table->add_column(_("HP").c_str(), UITable::STRING, 40);
-   m_table->add_column(_("AT").c_str(), UITable::STRING, 40);
-   m_table->add_column(_("DE").c_str(), UITable::STRING, 40);
-   m_table->add_column(_("EV").c_str(), UITable::STRING, 40);
-   m_table->add_column(_("Level").c_str(), UITable::STRING, 100); // enough space for scrollbar
+   m_table=new UI::Table(sold_box, 0, 0, 360, 200, Align_Left, UI::Table::UP);
+   m_table->add_column(_("Name").c_str(), UI::Table::STRING, 100);
+   m_table->add_column(_("HP").c_str(), UI::Table::STRING, 40);
+   m_table->add_column(_("AT").c_str(), UI::Table::STRING, 40);
+   m_table->add_column(_("DE").c_str(), UI::Table::STRING, 40);
+   m_table->add_column(_("EV").c_str(), UI::Table::STRING, 40);
+   m_table->add_column(_("Level").c_str(), UI::Table::STRING, 100); // enough space for scrollbar
    sold_box->add (m_table, Align_Left);
 
       // Add drop soldier button
-   UIButton* b = new UIButton (sold_box, 0, 0, 360, 32, 4, 100);
+   UI::Button* b = new UI::Button (sold_box, 0, 0, 360, 32, 4, 100);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
    b->clicked.set (this, &TrainingSite_Window::drop_button_clicked);
    sold_box->add (b, Align_Left);
 
       // Add TrainingSite Options and Capacity  buttons
-   UIBox* box = new UIBox (sold_box, 0, 0, UIBox::Horizontal);
-   b = new UIButton(box, 32, 0, 32,32, 4,100);
+   UI::Box* box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
+   b = new UI::Button(box, 32, 0, 32,32, 4,100);
    b->set_pic(g_gr->get_picture( PicMod_Game,  pic_train_options ));
    b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
    box->add (b, Align_Top);
 
-   box->add (new UITextarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
+   box->add (new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
       // Capacity buttons
-   b = new UIButton (box, 70, 4, 24, 24, 4, 2);
+   b = new UI::Button (box, 70, 4, 24, 24, 4, 2);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_down_train ));
    b->clicked.set (this, &TrainingSite_Window::soldier_capacity_down);
    box->add (b, Align_Top);
    b = 0;
 
-   m_capacity = new UITextarea (box, 0, 11, _("xx"), Align_Center);
+   m_capacity = new UI::Textarea (box, 0, 11, _("xx"), Align_Center);
    box->add (m_capacity, Align_Top);
 
-   b = new UIButton (box, 118, 4, 24, 24, 4, 3);
+   b = new UI::Button (box, 118, 4, 24, 24, 4, 3);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_up_train ));
    b->clicked.set (this, &TrainingSite_Window::soldier_capacity_up);
    box->add (b, Align_Top);
@@ -1806,7 +1806,7 @@ TrainingSite_Window::add_tab
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
-void TrainingSite_Window::add_tab(const char* picname, UIPanel* panel)
+void TrainingSite_Window::add_tab(const char* picname, UI::Panel* panel)
 {
 	m_tabpanel->add(g_gr->get_picture(   PicMod_Game,   picname ), panel );
 }
@@ -1852,7 +1852,7 @@ void TrainingSite_Window::update(void) {
 
 	for(i=0; i<soldiers->size(); i++) {
 		Soldier* s=((*soldiers)[i]);
-		UITable_Entry* e=0;
+		UI::Table_Entry* e=0;
 		for(sel=0; sel<m_table->get_nr_entries(); sel++) {
 			if(m_table->get_entry(sel)->get_user_data()==s) {
 				// Soldier already in list
@@ -1861,7 +1861,7 @@ void TrainingSite_Window::update(void) {
 			}
 		}
 		if(!e) // add new
-			e= new UITable_Entry(m_table, s);
+			e= new UI::Table_Entry(m_table, s);
 		int hl	= s->get_hp_level(),
 			mhl	= s->get_max_hp_level(),
 			al	= s->get_attack_level(),
@@ -1941,7 +1941,7 @@ TrainingSite::create_options_window
 Create the training site information window.
 ===============
 */
-UIWindow* TrainingSite::create_options_window(Interactive_Player* plr, UIWindow** registry)
+UI::Window* TrainingSite::create_options_window(Interactive_Player* plr, UI::Window** registry)
 {
 	return new TrainingSite_Window(plr, this, registry);
 }

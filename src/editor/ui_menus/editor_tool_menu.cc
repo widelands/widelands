@@ -45,15 +45,15 @@ Editor_Tool_Menu::Editor_Tool_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry,
-                                   Editor_Interactive::Editor_Tools* tools, std::vector<UIUniqueWindowRegistry>* options)
-	: UIUniqueWindow(parent, registry, 350, 400, _("Tool Menu"))
+Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry,
+                                   Editor_Interactive::Editor_Tools* tools, std::vector<UI::UniqueWindow::Registry>* options)
+	: UI::UniqueWindow(parent, registry, 350, 400, _("Tool Menu"))
 {
    m_tools=tools;
    m_parent=parent;
    m_options_menus=options;
 
-   // UIButtons
+   // UI::Buttons
    const int offsx=5;
    const int offsy=30;
    const int spacing=5;
@@ -64,7 +64,7 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
 
 
    int num_tools=6;
-   m_radioselect=new UIRadiogroup();
+   m_radioselect=new UI::Radiogroup();
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_change_height.png" ));
    posx+=width+spacing;
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_noise_height.png" ));
@@ -79,7 +79,7 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
 
    set_inner_size(offsx+(width+spacing)*num_tools, offsy+(height+spacing));
 
-   UITextarea* ta=new UITextarea(this, 0, 0, _("Tool Menu"));
+   UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Tool Menu"));
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
    m_radioselect->set_state(parent->get_selected_tool()-1);
@@ -128,7 +128,7 @@ void Editor_Tool_Menu::changed_to(void) {
    // Select tool
    m_parent->select_tool(index, 0);
 
-   UIWindow* w=(*m_options_menus)[index].window;
+   UI::Window* w=(*m_options_menus)[index].window;
    bool create_window=false;
    if(w) {
       // There is already a window. If it is small,

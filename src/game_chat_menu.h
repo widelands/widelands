@@ -31,20 +31,20 @@ class Interactive_Player;
 class NetGame;
 
 // The GameChatMenu is a rather dumb window with lots of buttons
-class GameChatMenu : public UIUniqueWindow {
+class GameChatMenu : public UI::UniqueWindow {
 public:
-	GameChatMenu(Interactive_Player &, UIUniqueWindowRegistry &, NetGame *);
+	GameChatMenu(Interactive_Player &, UI::UniqueWindow::Registry &, NetGame *);
 
    void  think( void );
 
 private:
 	Interactive_Player & m_player;
 	NetGame            * m_netgame;
-	UIMultiline_Textarea chatbox;
-	UIMultiline_Editbox  editbox;
-	UIButton             send;
-	UITextarea           show_as_overlays_label;
-	UICheckbox           show_as_overlays;
+	UI::Multiline_Textarea chatbox;
+	UI::Multiline_Editbox  editbox;
+	UI::Button             send;
+	UI::Textarea           show_as_overlays_label;
+	UI::Checkbox           show_as_overlays;
 
 	void clicked_send(int);
 	void changed_show_as_overlays(bool);

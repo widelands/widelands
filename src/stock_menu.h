@@ -32,17 +32,17 @@ class Economy;
  * Shows statistics about all stocks currently in the game of
  * one player
  */
-class Stock_Menu : public UIUniqueWindow {
+class Stock_Menu : public UI::UniqueWindow {
 public:
-	Stock_Menu(Interactive_Player &, UIUniqueWindowRegistry &);
+	Stock_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
 
 	virtual void think();
 
 private:
 	Interactive_Player &  m_player;
 	WaresDisplay          waresdisplay;
-	UIButton              help;
-	UIButton              switchpage;
+	UI::Button              help;
+	UI::Button              switchpage;
 	enum {Wares, Workers} current_page;
    void fill_waredisplay_with_wares(void);
    void fill_waredisplay_with_workers(void);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,27 +20,30 @@
 #ifndef __S__FILE_VIEW_SCREEN_H
 #define __S__FILE_VIEW_SCREEN_H
 
-#include <string>
 #include "fullscreen_menu_base.h"
 
-class UIMultiline_Textarea;
-class UIPanel;
-struct UIUniqueWindowRegistry;
+#include "ui_unique_window.h"
 
-void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename);
+#include <string>
+
+namespace UI {
+struct Multiline_Textarea;
+struct Panel;
+};
+
+void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename);
 
 /**
  * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.
 */
-class Fullscreen_Menu_TextView : public Fullscreen_Menu_Base {
-public:
+struct Fullscreen_Menu_TextView : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_TextView(std::string filename);
 
 protected:
    void set_text(std::string text);
 
 private:
-   UIMultiline_Textarea* mlta;
+   UI::Multiline_Textarea* mlta;
 };
 
 /**

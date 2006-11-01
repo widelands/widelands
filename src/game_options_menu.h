@@ -27,26 +27,26 @@
 #include "ui_unique_window.h"
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
-class GameOptionsMenu : public UIUniqueWindow {
+class GameOptionsMenu : public UI::UniqueWindow {
 public:
 	GameOptionsMenu
 		(Interactive_Player &,
-		 UIUniqueWindowRegistry &,
+		 UI::UniqueWindow::Registry &,
 		 Interactive_Player::Game_Main_Menu_Windows &);
 
 private:
 	Interactive_Player	                      & m_player;
 	Interactive_Player::Game_Main_Menu_Windows & m_windows;
-	UIButton   readme;
-	UIButton   license;
-	UIButton   authors;
-	UICheckbox ingame_music;
-	UITextarea ingame_music_label;
-	UICheckbox ingame_sound;
-	UITextarea ingame_sound_label;
-	UIButton   save_game;
-	UIButton   load_game;
-	UIButton   exit_game;
+	UI::Button   readme;
+	UI::Button   license;
+	UI::Button   authors;
+	UI::Checkbox ingame_music;
+	UI::Textarea ingame_music_label;
+	UI::Checkbox ingame_sound;
+	UI::Textarea ingame_sound_label;
+	UI::Button   save_game;
+	UI::Button   load_game;
+	UI::Button   exit_game;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint hspacing() const {return 5;};

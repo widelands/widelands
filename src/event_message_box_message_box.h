@@ -27,7 +27,7 @@ class Trigger_Null;
 #include <vector>
 #include "ui_window.h"
 
-class Message_Box_Event_Message_Box : public UIWindow {
+class Message_Box_Event_Message_Box : public UI::Window {
    public:
       Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int, int, int, int);
 	bool handle_mousepress  (const Uint8 btn, int x, int y);

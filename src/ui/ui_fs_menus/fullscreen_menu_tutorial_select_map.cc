@@ -36,21 +36,21 @@ Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 45, _("Tutorial Campaign: A new Kingdom"), Align_HCenter);
+   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 45, _("Tutorial Campaign: A new Kingdom"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
-	// UIButtons
-	UIButton* b;
+	// UI::Buttons
+	UI::Button* b;
 
-	b = new UIButton(this, 80, 100, 640, 26, 1, 1);
+	b = new UI::Button(this, 80, 100, 640, 26, 1, 1);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
 	b->set_title(_("Mission 1: Eyes in the Darkness - Game Basics").c_str());
 
-	b = new UIButton(this, 80, 130, 640, 26, 1, 2);
+	b = new UI::Button(this, 80, 130, 640, 26, 1, 2);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
 	b->set_title(_("Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions").c_str());
 
-	b = new UIButton(this, (get_inner_w()-160)/2, get_inner_h()-80, 160, 26, 0, 0);
+	b = new UI::Button(this, (get_inner_w()-160)/2, get_inner_h()-80, 160, 26, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
 	b->set_title(_("Back").c_str());
 }

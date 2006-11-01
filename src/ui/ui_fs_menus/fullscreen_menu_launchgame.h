@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,11 @@
 class Game;
 class NetGame;
 class PlayerDescriptionGroup;
-class UIButton;
-class UITextarea;
 class Map_Loader;
+namespace UI {
+class Button;
+class Textarea;
+};
 
 /**
  * Fullscreen menu to select map and to set map options.
@@ -39,8 +41,8 @@ class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	NetGame*		m_netgame;
 	Map_Loader**		m_ml;
 
-	UIButton*		m_ok;
-	UITextarea*		m_mapname;
+	UI::Button*		m_ok;
+	UI::Textarea*		m_mapname;
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
 
 	bool                    m_is_scenario;

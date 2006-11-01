@@ -26,18 +26,19 @@
 #include "ui_table.h"
 #include "wlapplication.h"
 
+namespace UI {
 /**
 Initialize a panel
 
 Args: parent	parent panel
-      x		coordinates of the UITable
+      x		coordinates of the Table
       y
-      w		dimensions, in pixels, of the UITable
+      w		dimensions, in pixels, of the Table
       h
-      align	alignment of text inside the UITable
+      align	alignment of text inside the Table
 */
-UITable::UITable(UIPanel *parent, int x, int y, uint w, uint h, Align align, Dir def_dir)
-	: UIPanel(parent, x, y, w, h)
+Table::Table(Panel *parent, int x, int y, uint w, uint h, Align align, Dir def_dir)
+	: Panel(parent, x, y, w, h)
 {
 	set_think(false);
 
@@ -64,7 +65,7 @@ UITable::UITable(UIPanel *parent, int x, int y, uint w, uint h, Align align, Dir
 /**
 Free allocated resources
 */
-UITable::~UITable()
+Table::~Table()
 {
 	m_scrollbar = 0;
    clear();
@@ -73,15 +74,15 @@ UITable::~UITable()
 /*
  * Add a new colum to this table
  */
-void UITable::add_column(const char* name, Type type, int w) {
+void Table::add_column(const char* name, Type type, int w) {
    uint i=0;
    int complete_width=0;
    for(i=0; i<m_columns.size(); i++) {
       assert(m_columns[i].btn);
       complete_width+=m_columns[i].btn->get_w();
    }
-   UIButton* btn=new UIButton(this, complete_width, 0, w, 15, 3, m_columns.size());
-   btn->clickedid.set(this, &UITable::header_button_clicked);
+   Button* btn=new Button(this, complete_width, 0, w, 15, 3, m_columns.size());
+   btn->clickedid.set(this, &Table::header_button_clicked);
    btn->set_title(name);
 
    Column c = {
@@ -89,14 +90,14 @@ void UITable::add_column(const char* name, Type type, int w) {
    };
    m_columns.push_back(c);
    if(!m_scrollbar) {
-      m_scrollbar=new UIScrollbar(get_parent(), get_x()+get_w()-24, get_y()+m_columns[0].btn->get_h(), 24, get_h()-m_columns[0].btn->get_h(), false);
-      m_scrollbar->moved.set(this, &UITable::set_scrollpos);
+      m_scrollbar=new Scrollbar(get_parent(), get_x()+get_w()-24, get_y()+m_columns[0].btn->get_h(), 24, get_h()-m_columns[0].btn->get_h(), false);
+      m_scrollbar->moved.set(this, &Table::set_scrollpos);
       m_scrollbar->set_steps(1);
    }
 
 }
 
-UITable_Entry* UITable::find_entry (const void* userdata)
+Table_Entry* Table::find_entry (const void* userdata)
 {
     unsigned int i;
 
@@ -110,7 +111,7 @@ UITable_Entry* UITable::find_entry (const void* userdata)
 /*
  * A header button has been clicked
  */
-void UITable::header_button_clicked(int n) {
+void Table::header_button_clicked(int n) {
    if(get_sort_colum()==n) {
       // Change sort direction
       if(get_sort_direction()==UP)
@@ -130,7 +131,7 @@ void UITable::header_button_clicked(int n) {
 /**
 Remove all entries from the table
 */
-void UITable::clear()
+void Table::clear()
 {
 	for(uint i = 0; i < m_entries.size(); i++)
 		delete m_entries[i];
@@ -147,7 +148,7 @@ void UITable::clear()
 /**
 Redraw the table
 */
-void UITable::draw(RenderTarget* dst)
+void Table::draw(RenderTarget* dst)
 {
    // draw text lines
    int lineheight = get_lineheight();
@@ -161,7 +162,7 @@ void UITable::draw(RenderTarget* dst)
       if (y >= get_h())
          return;
 
-      UITable_Entry* e = m_entries[idx];
+      Table_Entry* e = m_entries[idx];
 
       if (idx == m_selection) {
          // dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
@@ -211,7 +212,7 @@ void UITable::draw(RenderTarget* dst)
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool UITable::handle_mousepress(const Uint8 btn, int, int y) {
+bool Table::handle_mousepress(const Uint8 btn, int, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	   int time=WLApplication::get()->get_time();
@@ -235,7 +236,7 @@ bool UITable::handle_mousepress(const Uint8 btn, int, int y) {
 
 	return true;
 }
-bool UITable::handle_mouserelease(const Uint8 btn, int, int)
+bool Table::handle_mouserelease(const Uint8 btn, int, int)
 {return btn == SDL_BUTTON_LEFT;}
 
 /**
@@ -243,7 +244,7 @@ bool UITable::handle_mouserelease(const Uint8 btn, int, int)
  *
  * Args: i	the entry to select
  */
-void UITable::select(int i)
+void Table::select(int i)
 {
 	if (m_selection == i)
 		return;
@@ -257,7 +258,7 @@ void UITable::select(int i)
 /**
 Add a new entry to the table.
 */
-void UITable::add_entry(UITable_Entry* e, bool do_select) {
+void Table::add_entry(Table_Entry* e, bool do_select) {
    int entry_height=0;
    int picid=e->get_picid();
    if(picid==-1) {
@@ -283,7 +284,7 @@ void UITable::add_entry(UITable_Entry* e, bool do_select) {
 /**
 Scroll to the given position, in pixels.
 */
-void UITable::set_scrollpos(int i)
+void Table::set_scrollpos(int i)
 {
 	m_scrollpos = i;
 
@@ -293,7 +294,7 @@ void UITable::set_scrollpos(int i)
 /**
 Set the list alignment (only horizontal alignment works)
 */
-void UITable::set_align(Align align)
+void Table::set_align(Align align)
 {
 	m_align = (Align)(align & Align_Horizontal);
 }
@@ -302,7 +303,7 @@ void UITable::set_align(Align align)
 /**
 Return the total height (text + spacing) occupied by a single line
 */
-int UITable::get_lineheight()
+int Table::get_lineheight()
 {
 	return m_lineheight+2;
 }
@@ -310,7 +311,7 @@ int UITable::get_lineheight()
 /*
  * Remove entry
  */
-void UITable::remove_entry(int i) {
+void Table::remove_entry(int i) {
    if(i<0 || ((uint)i)>=m_entries.size()) return;
 
    delete(m_entries[i]);
@@ -326,7 +327,7 @@ void UITable::remove_entry(int i) {
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void UITable::sort(void) {
+void Table::sort(void) {
 
    assert(m_columns[m_sort_column].type==STRING);
 
@@ -341,7 +342,7 @@ void UITable::sort(void) {
       it=-1;
    }
 
-   UITable_Entry *ei, *ej;
+   Table_Entry *ei, *ej;
    for(int i=begin; i!=stop; i+=it)
       for(int j=i; j!=stop; j+=it) {
          ei=m_entries[i];
@@ -369,7 +370,7 @@ Table Entry
 /*
  * constructor
  */
-UITable_Entry::UITable_Entry(UITable* table, void* data, int picid, bool select) {
+Table_Entry::Table_Entry(Table* table, void* data, int picid, bool select) {
    m_picid=picid;
    m_user_data=data;
    m_data.resize(table->get_nr_columns());
@@ -382,19 +383,20 @@ UITable_Entry::UITable_Entry(UITable* table, void* data, int picid, bool select)
 /*
  * destructor
  */
-UITable_Entry::~UITable_Entry(void) {
+Table_Entry::~Table_Entry(void) {
 }
 
 /*
  * Set,get string
  */
-void UITable_Entry::set_string(int n, const char* str) {
+void Table_Entry::set_string(int n, const char* str) {
    assert(((uint)n)<m_data.size());
 
    m_data[n].d_string=str;
 }
-const char* UITable_Entry::get_string(int n) {
+const char* Table_Entry::get_string(int n) {
    assert(((uint)n)<m_data.size());
 
    return m_data[n].d_string.c_str();
 }
+};

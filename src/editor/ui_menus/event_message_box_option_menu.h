@@ -25,20 +25,21 @@
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIButton;
 class Event_Message_Box;
-class UITextarea;
-class UIMultiline_Editbox;
-class UIEdit_Box;
-class UICheckbox;
-template <typename T> struct UIListselect;
+namespace UI {
+struct Button;
+struct Edit_Box;
+struct Checkbox;
+template <typename T> struct Listselect;
+struct Multiline_Editbox;
+struct Textarea;
+};
 
 /*
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Event_Message_Box_Option_Menu : public UIWindow {
-   public:
+struct Event_Message_Box_Option_Menu : public UI::Window {
       Event_Message_Box_Option_Menu(Editor_Interactive*, Event_Message_Box*);
       ~Event_Message_Box_Option_Menu();
 
@@ -61,17 +62,17 @@ class Event_Message_Box_Option_Menu : public UIWindow {
          int trigger;
       } m_buttons[MAX_BUTTONS];
 
-      UICheckbox* m_is_modal;
-      UIEdit_Box* m_caption;
-      UIEdit_Box* m_name;
-      UIEdit_Box* m_window_title;
-      UIEdit_Box* m_button_name;
-      UITextarea* m_nr_buttons_ta;
+      UI::Checkbox* m_is_modal;
+      UI::Edit_Box* m_caption;
+      UI::Edit_Box* m_name;
+      UI::Edit_Box* m_window_title;
+      UI::Edit_Box* m_button_name;
+      UI::Textarea* m_nr_buttons_ta;
       int         m_nr_buttons;
       int         m_ls_selected;
-      UIMultiline_Editbox* m_text;
-      UITextarea* m_current_trigger_ta;
-	UIListselect<void *> * m_buttons_ls;
+      UI::Multiline_Editbox* m_text;
+      UI::Textarea* m_current_trigger_ta;
+	UI::Listselect<void *> * m_buttons_ls;
 
       std::vector<int> m_null_triggers;
 };

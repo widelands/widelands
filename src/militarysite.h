@@ -104,8 +104,8 @@ public:
    virtual void conquered_by (Player*);
 
 protected:
-	virtual UIWindow* create_options_window(Interactive_Player* plr,
-		UIWindow** registry);
+	virtual UI::Window* create_options_window(Interactive_Player* plr,
+		UI::Window** registry);
 
 private:
 	void request_soldier(Game* g);

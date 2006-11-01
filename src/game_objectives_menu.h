@@ -30,13 +30,13 @@ class MapObjective;
 
 // The GameObjectives Menu shows the not already
 // fullfilled scenario objectives.
-class GameObjectivesMenu : public UIUniqueWindow {
+class GameObjectivesMenu : public UI::UniqueWindow {
 public:
-	GameObjectivesMenu(Interactive_Player &, UIUniqueWindowRegistry &, Game &);
+	GameObjectivesMenu(Interactive_Player &, UI::UniqueWindow::Registry &, Game &);
 
 private:
-	UIListselect<MapObjective &>list;
-	UIMultiline_Textarea objectivetext;
+	UI::Listselect<MapObjective &>list;
+	UI::Multiline_Textarea objectivetext;
 
 	void selected(uint);
 };

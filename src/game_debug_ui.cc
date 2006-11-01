@@ -42,9 +42,9 @@ MapObjectDebugPanel
 ==============================================================================
 */
 
-class MapObjectDebugPanel : public UIPanel, public Map_Object::LogSink {
+class MapObjectDebugPanel : public UI::Panel, public Map_Object::LogSink {
 public:
-	MapObjectDebugPanel(UIPanel* parent, Editor_Game_Base* egbase, Map_Object* obj);
+	MapObjectDebugPanel(UI::Panel* parent, Editor_Game_Base* egbase, Map_Object* obj);
 	~MapObjectDebugPanel();
 
 	virtual void log(std::string str);
@@ -53,7 +53,7 @@ private:
 	Editor_Game_Base*		m_egbase;
 	Object_Ptr				m_object;
 
-	UIMultiline_Textarea*	m_log;
+	UI::Multiline_Textarea*	m_log;
 };
 
 
@@ -64,14 +64,14 @@ MapObjectDebugPanel::MapObjectDebugPanel
 Initialize logging.
 ===============
 */
-MapObjectDebugPanel::MapObjectDebugPanel(UIPanel* parent, Editor_Game_Base* egbase, Map_Object* obj)
-	: UIPanel(parent, 0, 0, 280, 150)
+MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel* parent, Editor_Game_Base* egbase, Map_Object* obj)
+	: UI::Panel(parent, 0, 0, 280, 150)
 {
 	m_egbase = egbase;
 	m_object = obj;
 
-	m_log = new UIMultiline_Textarea(this, 0, 0, 280, 150, "");
-	m_log->set_scrollmode(UIMultiline_Textarea::ScrollLog);
+	m_log = new UI::Multiline_Textarea(this, 0, 0, 280, 150, "");
+	m_log->set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 
 	obj->set_logsink(this);
 }
@@ -117,7 +117,7 @@ UI headers in the game logic code (same reason why we have a separate
 building_ui.cc).
 ===============
 */
-void Map_Object::create_debug_panels(Editor_Game_Base* egbase, UITab_Panel* tabs)
+void Map_Object::create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs)
 {
 	tabs->add(g_gr->get_picture( PicMod_Game,  "pics/menu_debug.png" ),
 			new MapObjectDebugPanel(tabs, egbase, this));
@@ -139,7 +139,7 @@ The map object debug window is basically just a simple container for tabs
 that are provided by the map object itself via the virtual function
 collect_debug_tabs().
 */
-class MapObjectDebugWindow : public UIWindow {
+class MapObjectDebugWindow : public UI::Window {
 public:
 	MapObjectDebugWindow(Interactive_Base* parent, Map_Object* obj);
 
@@ -151,7 +151,7 @@ private:
    bool           m_log_general_info;
 	Object_Ptr		m_object;
 	uint				m_serial;
-	UITab_Panel*	m_tabs;
+	UI::Tab_Panel*	m_tabs;
 };
 
 
@@ -164,7 +164,7 @@ Create the window
 ===============
 */
 MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object* obj)
-	: UIWindow(parent, 0, 0, 100, 100, "")
+	: UI::Window(parent, 0, 0, 100, 100, "")
 {
 	char buf[128];
 
@@ -174,7 +174,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object*
 	snprintf(buf, sizeof(buf), "%u", m_serial);
 	set_title(buf);
 
-	m_tabs = new UITab_Panel(this, 0, 0, 1);
+	m_tabs = new UI::Tab_Panel(this, 0, 0, 1);
 
 	obj->create_debug_panels(parent->get_egbase(), m_tabs);
 
@@ -209,7 +209,7 @@ void MapObjectDebugWindow::think()
 		return;
 	}
 
-	UIWindow::think();
+	UI::Window::think();
 }
 
 
@@ -234,7 +234,7 @@ FieldDebugWindow
 ==============================================================================
 */
 
-class FieldDebugWindow : public UIWindow {
+class FieldDebugWindow : public UI::Window {
 public:
 	FieldDebugWindow(Interactive_Base* parent, Coords coords);
 	~FieldDebugWindow();
@@ -250,9 +250,9 @@ private:
 	Map*			m_map;
 	FCoords		m_coords;
 
-	UIMultiline_Textarea*	m_ui_field;
-	UIButton*					m_ui_immovable;
-	UIListselect<uint> * m_ui_bobs;
+	UI::Multiline_Textarea*	m_ui_field;
+	UI::Button*					m_ui_immovable;
+	UI::Listselect<uint> * m_ui_bobs;
 };
 
 
@@ -264,18 +264,18 @@ Initialize the field debug window.
 ===============
 */
 FieldDebugWindow::FieldDebugWindow(Interactive_Base* parent, Coords coords)
-	: UIWindow(parent, 0, 0, 200, 200, _("Debug Field").c_str())
+	: UI::Window(parent, 0, 0, 200, 200, _("Debug Field").c_str())
 {
 	m_map = parent->get_map();
 	m_coords = m_map->get_fcoords(coords);
 
 	// Setup child panels
-	m_ui_field = new UIMultiline_Textarea(this, 0, 0, 200, 80, "");
+	m_ui_field = new UI::Multiline_Textarea(this, 0, 0, 200, 80, "");
 
-	m_ui_immovable = new UIButton(this, 0, 80, 200, 24, 0);
+	m_ui_immovable = new UI::Button(this, 0, 80, 200, 24, 0);
 	m_ui_immovable->clicked.set(this, &FieldDebugWindow::open_immovable);
 
-	m_ui_bobs = new UIListselect<uint>(this, 0, 104, 200, 96);
+	m_ui_bobs = new UI::Listselect<uint>(this, 0, 104, 200, 96);
 	m_ui_bobs->selected.set(this, &FieldDebugWindow::open_bob);
 }
 
@@ -303,7 +303,7 @@ void FieldDebugWindow::think()
 	std::string str;
 	char buf[512];
 
-	UIWindow::think();
+	UI::Window::think();
 
 	// Select information about the field itself
 	str = "";

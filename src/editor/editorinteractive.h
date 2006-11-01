@@ -90,13 +90,13 @@ class Editor_Interactive : public Interactive_Base {
 
       // UI ownings
       Editor* m_editor;
-      UIUniqueWindowRegistry m_toolmenu;
-      UIUniqueWindowRegistry m_toolsizemenu;
-      UIUniqueWindowRegistry m_playermenu;
-      UIUniqueWindowRegistry m_mainmenu;
-      UIUniqueWindowRegistry m_eventmenu;
-      UIUniqueWindowRegistry m_variablesmenu;
-      UIUniqueWindowRegistry m_objectivesmenu;
-      std::vector<UIUniqueWindowRegistry> m_options_menus;
+      UI::UniqueWindow::Registry m_toolmenu;
+      UI::UniqueWindow::Registry m_toolsizemenu;
+      UI::UniqueWindow::Registry m_playermenu;
+      UI::UniqueWindow::Registry m_mainmenu;
+      UI::UniqueWindow::Registry m_eventmenu;
+      UI::UniqueWindow::Registry m_variablesmenu;
+      UI::UniqueWindow::Registry m_objectivesmenu;
+      std::vector<UI::UniqueWindow::Registry> m_options_menus;
 };
 #endif // __S__EDITOR_H

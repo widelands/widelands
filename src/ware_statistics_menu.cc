@@ -296,9 +296,9 @@ static const RGBColor colors[] = {
  * a small rectangle on it with the color
  * of the graph and it needs a picture
  */
-class WSM_Checkbox : public UICheckbox {
+class WSM_Checkbox : public UI::Checkbox {
    public:
-      WSM_Checkbox(UIPanel* parent, int x, int y, int id, uint picid, RGBColor color);
+      WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint picid, RGBColor color);
 
       virtual void draw(RenderTarget* dst);
 
@@ -310,8 +310,8 @@ class WSM_Checkbox : public UICheckbox {
 /*
  * Constructor
  */
-WSM_Checkbox::WSM_Checkbox(UIPanel* parent, int x, int y, int id, uint picid, RGBColor color) :
-   UICheckbox(parent, x, y, g_gr->get_picture( PicMod_Game,  WARES_DISPLAY_BG )) {
+WSM_Checkbox::WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint picid, RGBColor color) :
+   UI::Checkbox(parent, x, y, g_gr->get_picture( PicMod_Game,  WARES_DISPLAY_BG )) {
 
    m_pic = picid;
    set_id(id);
@@ -323,7 +323,7 @@ WSM_Checkbox::WSM_Checkbox(UIPanel* parent, int x, int y, int id, uint picid, RG
  */
 void WSM_Checkbox::draw(RenderTarget* dst) {
    // First, draw normal
-   UICheckbox::draw(dst);
+   UI::Checkbox::draw(dst);
 
    // Now, draw a small box with the color
    dst->fill_rect(1, 1, get_inner_w()-1, COLOR_BOX_HEIGHT-2, m_color);
@@ -342,9 +342,9 @@ Create all the buttons etc...
 ===============
 */
 Ware_Statistics_Menu::Ware_Statistics_Menu
-(Interactive_Player & parent, UIUniqueWindowRegistry & registry)
+(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
-UIUniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
+UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
    // First, we must decide about the size
@@ -400,7 +400,7 @@ m_parent(&parent)
    m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Ware Statistics"), Align_Left);
+   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Ware Statistics"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
 
@@ -408,40 +408,40 @@ m_parent(&parent)
    int button_size = ( get_inner_w()-(spacing*5) ) / 4;
    posx = spacing;
    posy +=spacing+spacing;
-   UIButton *b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_15_MINS);
+   UI::Button *b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_15_MINS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("15 m").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_30_MINS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_30_MINS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("30 m").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_ONE_HOUR);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_ONE_HOUR);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("1 h").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_TWO_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_TWO_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("2 h").c_str());
 
    posy += 25 + spacing;
    posx = spacing;
 
-	b = new UIButton(this, posx, posy, 32, 32, 4, 100);
+	b = new UI::Button(this, posx, posy, 32, 32, 4, 100);
 	b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
 	b->set_tooltip(_("Help").c_str());
 
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("4 h").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_EIGHT_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_EIGHT_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("8 h").c_str());
    posx += button_size+spacing;
-   b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_16_HOURS);
+   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_16_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_title(_("16 h").c_str());
    posx += button_size+spacing;

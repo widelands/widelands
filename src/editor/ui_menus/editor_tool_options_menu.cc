@@ -36,8 +36,8 @@ constructor
 ===========
 */
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent, int index,
-													UIUniqueWindowRegistry* registry, const char* title) :
-   UIUniqueWindow(parent, registry, 100, 100, title)
+													UI::UniqueWindow::Registry* registry, const char* title) :
+   UI::UniqueWindow(parent, registry, 100, 100, title)
 {
    m_parent=parent;
    m_index=index;

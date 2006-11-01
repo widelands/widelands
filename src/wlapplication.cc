@@ -200,7 +200,7 @@ WLApplication::~WLApplication()
 /**
  * The main loop. Plain and Simple.
  *
- * \todo Refactor the whole mainloop out of class \ref UIPanel into here.
+ * \todo Refactor the whole mainloop out of class \ref UI::Panel into here.
  * In the future: push the first event on the event queue, then keep
  * dispatching events until it is time to quit.
  */
@@ -442,7 +442,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 // by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
 // by 0x8252545: WLApplication::poll_event(SDL_Event*, bool) (wlapplication.cc:309)
 // by 0x8252EB6: WLApplication::handle_input(InputCallback const*) (wlapplication.cc:459)
-// by 0x828B56E: UIPanel::run() (ui_panel.cc:148)
+// by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
 // by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
 // by 0x81427A6: main (main.cc:39)
 
@@ -1086,9 +1086,9 @@ void WLApplication::mainmenu_singleplayer()
 			code = single_player_menu.run();
 		}
 
-		//  This is the code returned by UIPanel::run() when the panel is dying.
+		//  This is the code returned by UI::Panel::run() when the panel is dying.
 		//  Make sure that the program exits when the window manager says so.
-		assert(Fullscreen_Menu_SinglePlayer::Back == UIPanel::dying_code);
+		assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
 
 		switch(code) {
 		case Fullscreen_Menu_SinglePlayer::New_Game:

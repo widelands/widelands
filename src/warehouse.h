@@ -104,7 +104,7 @@ public:
    virtual void defend (Game*, Soldier*);
    virtual void conquered_by (Player*);
 protected:
-	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
+	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);
 
 private:
 	static void idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void* data);
