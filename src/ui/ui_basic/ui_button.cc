@@ -116,15 +116,15 @@ void UIButton::draw(RenderTarget* dst)
 	if (m_enabled && m_highlighted)
 		dst->brighten_rect(0, 0, get_w(), get_h(), MOUSE_OVER_BRIGHT_FACTOR);
 
-	// if we got a picture, draw it centered
-	if (m_pic_custom)
-		{
+	if (m_pic_custom) {// if we got a picture, draw it centered
 		uint cpw, cph;
 		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 
+		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
+		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
 		dst->blit
-			((get_w() - static_cast<const int>(cpw)) / 2,
-			 (get_h() - static_cast<const int>(cph)) / 2,
+			(get_w() - static_cast<const int>(cpw) >> 1,
+			 get_h() - static_cast<const int>(cph) >> 1,
 			 m_pic_custom);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
