@@ -154,7 +154,7 @@ int UIPanel::run()
 
 			forefather->do_draw(rt);
 
-			rt->blit(app->get_mouse_x(), app->get_mouse_y(), s_default_cursor);
+			rt->blit(app->get_mouse_x()-3, app->get_mouse_y()-7, s_default_cursor);
 
 			if (UIPanel *lowest = _mousein)
 			{
