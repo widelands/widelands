@@ -222,8 +222,8 @@ template <class T> struct Listselect<T &> : public Listselect<void *> {
 	{return *static_cast<T * const>(Base::get_selection());}
 };
 
-compile_assert(sizeof(void *) == sizeof(uint));
-template <> struct Listselect<uint> : public Listselect<void *> {
+compile_assert(sizeof(void *) == sizeof(ulong));
+template <> struct Listselect<ulong> : public Listselect<void *> {
 	typedef Listselect<void *> Base;
 	Listselect
 		(Panel * parent,
@@ -236,7 +236,7 @@ template <> struct Listselect<uint> : public Listselect<void *> {
 
 	void add_entry
 		(const char * const name,
-		 const uint value,
+		 const ulong value,
 		 const bool select_this = false,
 		 const int picid = -1)
 	{
@@ -244,9 +244,9 @@ template <> struct Listselect<uint> : public Listselect<void *> {
 			(name, reinterpret_cast<void * const>(value), select_this, picid);
 	}
 	uint get_entry(const uint i) const throw ()
-	{return reinterpret_cast<const uint>(Base::get_entry(i));}
+	{return reinterpret_cast<const ulong>(Base::get_entry(i));}
 	uint get_selection() const
-	{return reinterpret_cast<const uint>(Base::get_selection());}
+	{return reinterpret_cast<const ulong>(Base::get_selection());}
 };
 };
 
