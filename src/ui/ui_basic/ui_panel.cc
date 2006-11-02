@@ -49,7 +49,8 @@ _parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
 _flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
 _x(nx), _y(ny), _w(nw), _h(nh),
 _lborder(0), _rborder(0), _tborder(0), _bborder(0),
-_border_snap_distance(0), _panel_snap_distance(0)
+_border_snap_distance(0), _panel_snap_distance(0),
+_tooltip(0)
 {
 	if (_parent) {
 		_next = _parent->_fchild;
@@ -99,6 +100,8 @@ Panel::~Panel()
 		else
 			_parent->_lchild = _prev;
 	}
+
+	free(_tooltip);
 }
 
 
@@ -161,7 +164,7 @@ int Panel::run()
 			{
 				while (lowest->_mousein)
 					lowest = lowest->_mousein;
-				if (lowest->tooltip().size()) draw_tooltip(rt, lowest);
+				if (lowest->tooltip()) draw_tooltip(rt, lowest);
 			}
 
 			g_gr->refresh();
@@ -890,7 +893,12 @@ void Panel::ui_key(bool down, int code, char c)
 /**
  * Set the tooltip for the panel.
  */
-void Panel::set_tooltip(const std::string & text) {_tooltip = text;}
+void Panel::set_tooltip(const char * const text) {
+	if (_tooltip != text) {
+		free(_tooltip);
+		_tooltip = text ? strdup(text) : 0;
+	}
+}
 
 /** [private]
  * Draw the tooltip.

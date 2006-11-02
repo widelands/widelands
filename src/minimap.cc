@@ -179,11 +179,11 @@ button_bldns
 	button_roads.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.png"));
 	button_bldns.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"));
 
-	button_terrn.set_tooltip(_("Terrain"));
-	button_owner.set_tooltip(_("Owner"));
-	button_flags.set_tooltip(_("Flags"));
-	button_roads.set_tooltip(_("Roads"));
-	button_bldns.set_tooltip(_("Buildings"));
+	button_terrn.set_tooltip(_("Terrain")  .c_str());
+	button_owner.set_tooltip(_("Owner")    .c_str());
+	button_flags.set_tooltip(_("Flags")    .c_str());
+	button_roads.set_tooltip(_("Roads")    .c_str());
+	button_bldns.set_tooltip(_("Buildings").c_str());
 
 	button_terrn.clickedid.set(this, &MiniMap::toggle);
 	button_owner.clickedid.set(this, &MiniMap::toggle);
