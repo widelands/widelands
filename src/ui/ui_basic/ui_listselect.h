@@ -33,6 +33,11 @@ struct Scrollbar;
 
 /**
  * This class defines a list-select box.
+ *
+ * T is the type of the list item and can be
+ * 1. a reference type,
+ * 2. a pointer type or
+ * 3. uintptr_t.
  */
 template <typename T> struct Listselect {
 	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
@@ -58,7 +63,7 @@ template <typename T> struct Listselect {
 
 	uint get_nr_entries() const throw ();
 	T get_entry(const uint i) const throw ();
-	uint no_selection_index() const throw ();
+	static uint no_selection_index() throw ();
 	uint get_selection_index() const throw ();
 
 	void select(const uint i);
@@ -106,7 +111,7 @@ template <> struct Listselect<void *> : public Panel {
 	uint get_nr_entries() const throw () {return m_entries.size();}
 	void * get_entry(const uint i) const throw ()
 	{assert(i < m_entries.size()); return m_entries[i]->value;}
-	uint no_selection_index() const throw ()
+	static uint no_selection_index() throw ()
 	{return std::numeric_limits<uint>::max();}
 	uint get_selection_index() const throw () {return m_selection;}
 
@@ -222,8 +227,8 @@ template <class T> struct Listselect<T &> : public Listselect<void *> {
 	{return *static_cast<T * const>(Base::get_selection());}
 };
 
-compile_assert(sizeof(void *) == sizeof(ulong));
-template <> struct Listselect<ulong> : public Listselect<void *> {
+compile_assert(sizeof(void *) == sizeof(uintptr_t));
+template <> struct Listselect<uintptr_t> : public Listselect<void *> {
 	typedef Listselect<void *> Base;
 	Listselect
 		(Panel * parent,
@@ -236,7 +241,7 @@ template <> struct Listselect<ulong> : public Listselect<void *> {
 
 	void add_entry
 		(const char * const name,
-		 const ulong value,
+		 const uintptr_t value,
 		 const bool select_this = false,
 		 const int picid = -1)
 	{
@@ -244,9 +249,9 @@ template <> struct Listselect<ulong> : public Listselect<void *> {
 			(name, reinterpret_cast<void * const>(value), select_this, picid);
 	}
 	uint get_entry(const uint i) const throw ()
-	{return reinterpret_cast<const ulong>(Base::get_entry(i));}
+	{return reinterpret_cast<const uintptr_t>(Base::get_entry(i));}
 	uint get_selection() const
-	{return reinterpret_cast<const ulong>(Base::get_selection());}
+	{return reinterpret_cast<const uintptr_t>(Base::get_selection());}
 };
 };
 

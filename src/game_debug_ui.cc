@@ -244,7 +244,7 @@ public:
 	virtual void think();
 
 	void open_immovable();
-	void open_bob(const uint idx);
+	void open_bob(const uint index);
 
 private:
 	Map*			m_map;
@@ -252,7 +252,7 @@ private:
 
 	UI::Multiline_Textarea*	m_ui_field;
 	UI::Button*					m_ui_immovable;
-	UI::Listselect<ulong> * m_ui_bobs;
+	UI::Listselect<uintptr_t> * m_ui_bobs;
 };
 
 
@@ -275,7 +275,7 @@ FieldDebugWindow::FieldDebugWindow(Interactive_Base* parent, Coords coords)
 	m_ui_immovable = new UI::Button(this, 0, 80, 200, 24, 0);
 	m_ui_immovable->clicked.set(this, &FieldDebugWindow::open_immovable);
 
-	m_ui_bobs = new UI::Listselect<ulong>(this, 0, 104, 200, 96);
+	m_ui_bobs = new UI::Listselect<uintptr_t>(this, 0, 104, 200, 96);
 	m_ui_bobs->selected.set(this, &FieldDebugWindow::open_bob);
 }
 
@@ -371,10 +371,11 @@ FieldDebugWindow::open_bob
 Open the bob debug window for the bob of the given index in the list
 ===============
 */
-void FieldDebugWindow::open_bob(const uint) {
-	if (const ulong serial = m_ui_bobs->get_selection()) if
+void FieldDebugWindow::open_bob(const uint index) {
+	if (index != UI::Listselect<uintptr_t>::no_selection_index()) if
 		(Map_Object * const object =
-		 get_iabase()->get_egbase()->get_objects()->get_object(serial))
+		 get_iabase()->get_egbase()->get_objects()->get_object
+		 (m_ui_bobs->get_selection()))
 		show_mapobject_debug(get_iabase(), object);
 }
 
