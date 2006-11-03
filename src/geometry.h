@@ -109,15 +109,15 @@ struct Coords {
 
 	bool is_valid  () const{
 		return
-			x != std::numeric_limits<X_Coordinate>::max()
-			and
-			y != std::numeric_limits<Y_Coordinate>::max();
+		   x != std::numeric_limits<X_Coordinate>::max()
+		   and
+		   y != std::numeric_limits<Y_Coordinate>::max();
 	}
 	bool is_invalid() const {
 		return
-			x == std::numeric_limits<X_Coordinate>::max()
-			and
-			y == std::numeric_limits<Y_Coordinate>::max();
+		   x == std::numeric_limits<X_Coordinate>::max()
+		   and
+		   y == std::numeric_limits<Y_Coordinate>::max();
 	}
 
 	/**

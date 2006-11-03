@@ -90,8 +90,8 @@ Mix_Music *Songset::get_song()
 
 #ifdef __WIN32__
 #warning Mix_LoadMUS_RW is not available under windows!!!
-    // Hack for windows, works because cwd is directory where
-    // executable is in
+	// Hack for windows, works because cwd is directory where
+	// executable is in
 	m_m = Mix_LoadMUS(filename.c_str());
 
 #else
@@ -100,17 +100,17 @@ Mix_Music *Songset::get_song()
 
 #else
 #warning Please update your SDL_mixer library to at least version 1.2.6!!!
-    // We have to go the long way. We are pretty sure, we're not under windows
-    // so we have a /tmp dir and mktemp (hopefully)
-    // This solution is terribly slow, but we hope that there are only
-    // a few sound musics around
-    char tempfilebuf[256] = "/tmp/wl_tempmusic.XXXXXXXX";
-    char* tempfile = tempfilebuf;
-    tempfile = mktemp(tempfilebuf);
+	// We have to go the long way. We are pretty sure, we're not under windows
+	// so we have a /tmp dir and mktemp (hopefully)
+	// This solution is terribly slow, but we hope that there are only
+	// a few sound musics around
+	char tempfilebuf[256] = "/tmp/wl_tempmusic.XXXXXXXX";
+	char* tempfile = tempfilebuf;
+	tempfile = mktemp(tempfilebuf);
 
-    FILE* f = fopen( tempfile, "w" );
+	FILE* f = fopen( tempfile, "w" );
 	fwrite(m_fr.Data(0), m_fr.GetSize(), 1, f);
-    fclose( f );
+	fclose( f );
 
 	m_m = Mix_LoadMUS(tempfile);
 

@@ -302,8 +302,8 @@ std::string FileSystem::FS_CanonicalizeName(std::string path)
 
 	//clean up the path
 	for(i=components.begin(); i!=components.end(); ) {
-        bool erase = false;
-        bool erase_prev = false;
+		bool erase = false;
+		bool erase_prev = false;
 
 		//remove empty components ("foo/bar//baz/")
 		if (i->empty()) erase = true;
@@ -314,24 +314,24 @@ std::string FileSystem::FS_CanonicalizeName(std::string path)
 		//remove double dot and the preceding component (if any)
 		if (*i=="..") {
 			if(i!=components.begin())
-                erase_prev = true;
-            erase = true;
-        }
+				erase_prev = true;
+			erase = true;
+		}
 
-        std::vector<std::string>::iterator nexti = i;
+		std::vector<std::string>::iterator nexti = i;
 
-        if( erase_prev && erase ) {
-            components.erase( i-1, i+1);
-            i = components.begin();
-            continue;
-        }
-        if( erase ) {
-            components.erase( i );
-            i = components.begin();
-            continue;
-        }
+		if( erase_prev && erase ) {
+			components.erase( i-1, i+1);
+			i = components.begin();
+			continue;
+		}
+		if( erase ) {
+			components.erase( i );
+			i = components.begin();
+			continue;
+		}
 
-        i++;
+		i++;
 	}
 
 	std::string canonpath="";
@@ -394,38 +394,43 @@ const char *FileSystem::FS_Filename(const char* buf) {
 /**
  * Create a filesystem from a zipfile or a real directory
  * \todo Catch FileType_error in all users
+ * \todo Check for existence before doing anything with the file/dir
+ * \todo Catch FileNotFound_error in all users
+ * \throw FileNotFound_error if root does not exist, is some kind of special file,
+ * loops around (via symlinks) or is too long for the OS/filesystem
+ * \throw FileAccessDenied_error if the OS denies access (of course ;-)
+ * \throw FileTypeError if root is neither a directory or regular file
+ * \todo throw FileTypeError if root is not a zipfile (exception from ZipFilesystem)
  */
-FileSystem *FileSystem::Create(std::string root) throw(FileType_error)
+FileSystem *FileSystem::Create(std::string root) throw(FileType_error,
+      FileNotFound_error,
+      FileAccessDenied_error)
 {
 	struct stat statinfo;
 
-	stat(root.c_str(), &statinfo);
+	if (stat(root.c_str(), &statinfo) == -1) {
+		if ( errno==EBADF ||
+		      errno==ENOENT ||
+		      errno==ENOTDIR ||
+		      errno==ELOOP ||
+		      errno==ENAMETOOLONG )
+		{
+			throw FileNotFound_error("FileSystem::Create", root);
+		}
+		if ( errno==EACCES ) {
+			throw FileAccessDenied_error("FileSystem::Create", root);
+		}
+	}
 
 	if(S_ISDIR(statinfo.st_mode)) {
 		return new RealFSImpl(root);
 	}
-
 	if(S_ISREG(statinfo.st_mode)) {
 		return new ZipFilesystem(root);
 	}
 
-	throw FileType_error("Can't create virtual filesystem from ", root);
-}
-
-/**
- * Create a filesystem to access the given directory as served by the OS
- */
-FileSystem *FileSystem::CreateFromDirectory(std::string directory)
-{
-	return new RealFSImpl(directory);
-}
-
-/**
- * Create a filesystem from a zip file
- */
-FileSystem *FileSystem::CreateFromZip(std::string filename)
-{
-	return new ZipFilesystem( filename );
+	throw FileType_error("FileSystem::Create", root,
+								"cannot create virtual filesystem from file/directory");
 }
 
 /**
@@ -458,27 +463,54 @@ static const std::string getexename(const std::string argv0)
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
  * \todo This belongs into WLApplication
+ * \todo Handle exception FileType_error
  */
 void setup_searchpaths(const std::string argv0)
 {
-
+	try {
 #ifdef __APPLE__
-    // on mac, the default Data Dir ist Relative to the current directory
-    g_fs->AddFileSystem(FileSystem::CreateFromDirectory("Widelands.app/Contents/Resources/"));
+		// on mac, the default Data Dir ist Relative to the current directory
+		g_fs->AddFileSystem(FileSystem::Create("Widelands.app/Contents/Resources/"));
 #else
-    // first, try the data directory used in the last scons invocation
-	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h
+		// first, try the data directory used in the last scons invocation
+		g_fs->AddFileSystem(FileSystem::Create(INSTALL_DATADIR)); //see config.h
 #endif
+	}
+	catch (FileNotFound_error e) {}
+	catch (FileAccessDenied_error e) {
+		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+	}
+	catch (FileType_error e) {
+		//TODO: handle me
+	}
 
+	try {
 #ifndef __WIN32__
-	// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
-	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/games/widelands"));
+		// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
+		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #else
-	//TODO: is there a "default dir" for this on win32 ?
+		//TODO: is there a "default dir" for this on win32 ?
 #endif
+	}
+	catch (FileNotFound_error e) {}
+	catch (FileAccessDenied_error e) {
+		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+	}
+	catch (FileType_error e) {
+		//TODO: handle me
+	}
 
-    // absolute fallback directory is the CWD
-	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
+	try {
+		// absolute fallback directory is the CWD
+		g_fs->AddFileSystem(FileSystem::Create("."));
+	}
+	catch (FileNotFound_error e) {}
+	catch (FileAccessDenied_error e) {
+		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+	}
+	catch (FileType_error e) {
+		//TODO: handle me
+	}
 
 	// the directory the executable is in is the default game data directory
 	std::string exename = getexename(argv0);
@@ -491,11 +523,20 @@ void setup_searchpaths(const std::string argv0)
 	if (slash != std::string::npos) {
 		exename.erase(slash);
 		if (exename != ".") {
-			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
+			try {
+				g_fs->AddFileSystem(FileSystem::Create(exename));
 #ifdef USE_DATAFILE
-			exename.append ("/widelands.dat");
-			g_fs->AddFileSystem(new Datafile(exename.c_str()));
+				exename.append ("/widelands.dat");
+				g_fs->AddFileSystem(new Datafile(exename.c_str()));
 #endif
+			}
+			catch (FileNotFound_error e) {}
+			catch (FileAccessDenied_error e) {
+				log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+			}
+			catch (FileType_error e) {
+				//TODO: handle me
+			}
 		}
 	}
 
@@ -508,7 +549,16 @@ void setup_searchpaths(const std::string argv0)
 	if (buf) { // who knows, maybe the user's homeless
 		path = std::string(buf) + "/.widelands";
 		mkdir(path.c_str(), 0x1FF);
-		g_fs->AddFileSystem(FileSystem::CreateFromDirectory(path.c_str()));
+		try {
+			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
+		}
+		catch (FileNotFound_error e) {}
+		catch (FileAccessDenied_error e) {
+			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+		}
+		catch (FileType_error e) {
+			//TODO: handle me
+		}
 	} else {
 		//TODO: complain
 	}

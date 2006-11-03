@@ -455,7 +455,7 @@ bool Journal::read_event(SDL_Event *e)
 
 		return haveevent;
 	}
- 	catch(std::ifstream::failure f){
+	catch(std::ifstream::failure f){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");

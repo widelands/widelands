@@ -182,28 +182,28 @@ public:
 	void load_system_sounds();
 
 	void load_fx
-		(const std::string dir,
-		 const std::string basename,
-		 const bool recursive = false);
+	(const std::string dir,
+	 const std::string basename,
+	 const bool recursive = false);
 	void play_fx
-		(const std::string fx_name,
-		 Coords map_position = INVALID_POSITION,
-		 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+	(const std::string fx_name,
+	 Coords map_position = INVALID_POSITION,
+	 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx
-		(const std::string fx_name,
-		 const int stereo_position,
-		 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+	(const std::string fx_name,
+	 const int stereo_position,
+	 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 
 	void register_song
-		(const std::string dir,
-		 const std::string basename,
-		 const bool recursive = false);
+	(const std::string dir,
+	 const std::string basename,
+	 const bool recursive = false);
 	void start_music(const std::string songset_name, int fadein_ms = 0);
 	void stop_music(int fadeout_ms = 0);
 	void change_music
-		(const std::string songset_name = "",
-		 int fadeout_ms = 0,
-		 int fadein_ms = 0);
+	(const std::string songset_name = "",
+	 int fadeout_ms = 0,
+	 int fadein_ms = 0);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
@@ -238,9 +238,9 @@ protected:
 	void load_one_fx(const char * const filename, const std::string fx_name);
 	int stereo_position(const Coords position);
 	bool play_or_not
-		(const std::string fx_name,
-		 const int stereo_position,
-		 const uint priority);
+	(const std::string fx_name,
+	 const int stereo_position,
+	 const uint priority);
 
 	/// Whether to disable background music
 	bool m_disable_music;

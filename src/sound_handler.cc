@@ -271,13 +271,13 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 			return NULL;
 		}
 
-        // Note: SDL_RWFromFP is not available under windows
+		// Note: SDL_RWFromFP is not available under windows
 		target = SDL_RWFromFP(f, 0);
-        if(!target) {
-            fclose(f);
-            log("SDL_RWFromFP failed miserably on %s: %s.\n",
-                tempfile, SDL_GetError());
-        }
+		if(!target) {
+			fclose(f);
+			log("SDL_RWFromFP failed miserably on %s: %s.\n",
+			    tempfile, SDL_GetError());
+		}
 		buf = malloc(fr->GetSize());
 
 		if (buf == NULL) {
@@ -349,13 +349,13 @@ void Sound_Handler::load_one_fx
 	} else {
 		char *msg = (char *) malloc(1024);
 		snprintf
-			(msg,
-			 1024,
-			 "Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" failed: "
-			 "%s\n",
-			 filename,
-			 fx_name.c_str(),
-			 strerror(errno));
+		(msg,
+		 1024,
+		 "Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" failed: "
+		 "%s\n",
+		 filename,
+		 fx_name.c_str(),
+		 strerror(errno));
 		log(msg);
 		free(msg);
 	}
@@ -435,11 +435,11 @@ bool Sound_Handler::play_or_not
 	//find out if an fx called fx_name is already running
 	bool already_running=false;
 	const std::map<uint, std::string>::const_iterator active_fx_end =
-		m_active_fx.end();
+	   m_active_fx.end();
 	for
-		(std::map<uint, std::string>::const_iterator it = m_active_fx.begin();
-		 it != active_fx_end;
-		 ++it)
+	(std::map<uint, std::string>::const_iterator it = m_active_fx.begin();
+	      it != active_fx_end;
+	      ++it)
 	{
 		if (it->second == fx_name) {
 			already_running=true;

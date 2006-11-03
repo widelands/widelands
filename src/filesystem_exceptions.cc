@@ -18,26 +18,40 @@
  */
 
 #include "filesystem_exceptions.h"
-#include <stdio.h>
 
-FileNotFound_error::FileNotFound_error(std::string s, std::string _filename) throw()
-	: std::runtime_error(s), filename(_filename)
+File_error::File_error(const std::string thrower, const std::string filename, const std::string message)
+throw() : std::runtime_error(""),
+		m_thrower(thrower), m_filename(filename), m_message(message)
+{}
+
+const char *File_error::what() const throw()
 {
-	sprintf(text, "Could not find '%s'.", _filename.c_str());
+	std::string text=m_thrower+": "+m_message+": "+m_filename;
+
+	return text.c_str();
 }
 
-const char *FileNotFound_error::what() const throw()
-{
-	return text;
-}
+FileNotFound_error::FileNotFound_error(const std::string thrower, const std::string filename, const std::string message)
+throw() : File_error(thrower, filename, message)
+{}
 
-FileType_error::FileType_error(std::string s, std::string _filename) throw()
-	: std::runtime_error(s), filename(_filename)
-{
-	sprintf(text, "Wrong filetype: '%s'.", _filename.c_str());
-}
+FileType_error::FileType_error(std::string thrower, std::string filename, const std::string message)
+throw() : File_error(thrower, filename, message)
+{}
 
-const char *FileType_error::what() const throw()
+FileAccessDenied_error::FileAccessDenied_error(std::string thrower, std::string filename, const std::string message)
+throw() : File_error(thrower, filename, message)
+{}
+
+ZipFile_error::ZipFile_error(const std::string thrower, const std::string filename, const std::string zipfilename, const std::string message)
+throw() : File_error(thrower, filename, message),
+		m_zipfilename(zipfilename)
+{}
+
+const char *ZipFile_error::what() const throw()
 {
-	return text;
+	std::string text=m_thrower+": "+m_message+": "+m_filename+
+	                 " (in zipfile "+m_zipfilename+")";
+
+	return text.c_str();
 }

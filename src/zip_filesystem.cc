@@ -19,6 +19,7 @@
 
 #include <string>
 #include "error.h"
+#include "filesystem_exceptions.h"
 #include "zip_filesystem.h"
 #include "wexception.h"
 
@@ -181,11 +182,14 @@ FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path ) {
 /**
  * Make a new Subfilesystem in this
  */
-FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type ) {
+FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
+throw(ZipFile_error)
+{
    assert( !FileExists( path ));
 
    if( type != FS_DIR )
-      throw wexception("Tried to make a ZipFilesystem in a Zip file. Not supported!\n");
+		throw ZipFile_error("ZipFilesystem::CreateSubFileSystem", path, m_zipfilename,
+							     "can't create new ZipFilesystem inside a zipfile");
 
    EnsureDirectoryExists( path );
 
@@ -199,8 +203,11 @@ FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type ) {
 /**
  * Remove a number of files
  */
-void ZipFilesystem::Unlink(std::string)
-{throw wexception("Unlinking doesn't work in a zip file!\n");}
+void ZipFilesystem::Unlink(std::string filename) throw(ZipFile_error)
+{
+	throw ZipFile_error("ZipFilesystem::Unlink", filename, m_zipfilename,
+				   		  "unlinking is not supported inside zipfiles");
+}
 
 /**
  * Create this directory if it doesn't exist, throws an error
@@ -253,9 +260,11 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
  * Throws an exception if the file couldn't be opened.
  */
 void *ZipFilesystem::Load(std::string fname, int *length)
+throw(ZipFile_error)
 {
    if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
-			throw wexception("Couldn't open %s in zipfile (%s)", fname.c_str(), m_zipfilename.c_str());
+			throw ZipFile_error("ZipFilesystem::Load", fname, m_zipfilename,
+								  "couldn't open file from zipfile");
 
    char buffer[1024];
    int len;
@@ -343,7 +352,7 @@ void ZipFilesystem::m_OpenZip( void ) {
 /**
  * Open a zipfile for extraction
  */
-void ZipFilesystem::m_OpenUnzip( void ) {
+void ZipFilesystem::m_OpenUnzip( void ) throw(FileType_error) {
    if( m_state == STATE_UNZIPPPING )
       return;
 
@@ -351,7 +360,8 @@ void ZipFilesystem::m_OpenUnzip( void ) {
 
    m_unzipfile = unzOpen( m_zipfilename.c_str() );
    if( !m_unzipfile )
-      throw wexception("Couldn't open %s as zipfile!\n", m_zipfilename.c_str());
+      throw FileType_error("ZipFilesystem::m_OpenUnzip", m_zipfilename,
+								   "not a .zip file");
 
    m_state = STATE_UNZIPPPING;
 }

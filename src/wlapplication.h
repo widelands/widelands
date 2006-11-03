@@ -39,11 +39,11 @@ public:
 // input
 struct InputCallback {
 	void (*mouse_press)
-		(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
-		 int x, int y);      //  The coordinates of the mouse at press time.
+	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
+	 int x, int y);      //  The coordinates of the mouse at press time.
 	void (*mouse_release)
-		(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
-		 int x, int y);      //  The coordinates of the mouse at release time.
+	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
+	 int x, int y);      //  The coordinates of the mouse at release time.
 	void (*mouse_move) (int x, int y, int xdiff, int ydiff);
 	void (*key)        (bool down, int code, char c);
 };
@@ -155,7 +155,7 @@ const bool should_die() {return m_should_die;}
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
 	const bool get_key_state(const int key) const
-	{return SDL_GetKeyState(0)[key];}
+		{return SDL_GetKeyState(0)[key];}
 
 	//@{
 	void set_mouse_pos(const int x, const int y);

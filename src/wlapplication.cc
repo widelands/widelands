@@ -99,20 +99,20 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(const int argc, const char **argv):
-m_commandline(std::map<std::string, std::string>()),
-journal               (0),
-m_input_grab          (false),
-m_mouse_swapped       (false),
-m_mouse_speed         (0.0),
-m_mouse_x             (0),     m_mouse_y             (0),
-m_mouse_maxx          (0),     m_mouse_maxy          (0),
-m_mouse_locked        (0),
-m_mouse_internal_x    (0),     m_mouse_internal_y    (0),
-m_mouse_internal_compx(0),     m_mouse_internal_compy(0),
-m_should_die          (false),
-m_gfx_w               (0),     m_gfx_h               (0),
-m_gfx_fullscreen      (false),
-m_game                (0)
+		m_commandline(std::map<std::string, std::string>()),
+		journal               (0),
+		m_input_grab          (false),
+		m_mouse_swapped       (false),
+		m_mouse_speed         (0.0),
+		m_mouse_x             (0),     m_mouse_y             (0),
+		m_mouse_maxx          (0),     m_mouse_maxy          (0),
+		m_mouse_locked        (0),
+		m_mouse_internal_x    (0),     m_mouse_internal_y    (0),
+		m_mouse_internal_compx(0),     m_mouse_internal_compy(0),
+		m_should_die          (false),
+		m_gfx_w               (0),     m_gfx_h               (0),
+		m_gfx_fullscreen      (false),
+		m_game                (0)
 {
 	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"]=argv[0];
@@ -329,13 +329,13 @@ restart:
 					                      m_mouse_speed;
 
 					ev->motion.xrel =
-						static_cast<const int>(m_mouse_internal_x)
-						-
-						static_cast<const int>(xlast);
+					   static_cast<const int>(m_mouse_internal_x)
+					   -
+					   static_cast<const int>(xlast);
 					ev->motion.yrel =
-						static_cast<const int>(m_mouse_internal_y)
-						-
-						static_cast<const int>(ylast);
+					   static_cast<const int>(m_mouse_internal_y)
+					   -
+					   static_cast<const int>(ylast);
 
 					if (m_mouse_locked)
 					{
@@ -434,16 +434,16 @@ void WLApplication::handle_input(const InputCallback *cb)
 {
 	bool gotevents = false;
 	SDL_Event ev; //  Valgrind says:
-// Conditional jump or move depends on uninitialised value(s)
-// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
-// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
-// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
-// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
-// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool) (wlapplication.cc:309)
-// by 0x8252EB6: WLApplication::handle_input(InputCallback const*) (wlapplication.cc:459)
-// by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
-// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
-// by 0x81427A6: main (main.cc:39)
+	// Conditional jump or move depends on uninitialised value(s)
+	// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
+	// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
+	// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
+	// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
+	// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool) (wlapplication.cc:309)
+	// by 0x8252EB6: WLApplication::handle_input(InputCallback const*) (wlapplication.cc:459)
+	// by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
+	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
+	// by 0x81427A6: main (main.cc:39)
 
 	NetGGZ::ref()->data();
 	NetGGZ::ref()->datacore();
@@ -507,9 +507,9 @@ void WLApplication::handle_input(const InputCallback *cb)
 					c = 0;
 
 				cb->key
-					(ev.type == SDL_KEYDOWN,
-					 ev.key.keysym.sym,
-					 static_cast<const char>(c));
+				(ev.type == SDL_KEYDOWN,
+				 ev.key.keysym.sym,
+				 static_cast<const char>(c));
 			}
 			break;
 		case SDL_MOUSEBUTTONDOWN:
@@ -536,14 +536,14 @@ void WLApplication::handle_input(const InputCallback *cb)
 			break;
 
 		case SDL_MOUSEMOTION:
-				// All the interesting stuff is now in Sys_PollEvent()
+			// All the interesting stuff is now in Sys_PollEvent()
 
-				m_mouse_x = ev.motion.x;
-				m_mouse_y = ev.motion.y;
+			m_mouse_x = ev.motion.x;
+			m_mouse_y = ev.motion.y;
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
 				cb->mouse_move
-					(ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
+				(ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
 			break;
 
 		case SDL_QUIT:
@@ -883,18 +883,18 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 	//will be taken care of (==ignored) when saving the options
 
 	const std::map<std::string, std::string>::const_iterator commandline_end =
-		m_commandline.end();
+	   m_commandline.end();
 	for
-		(std::map<std::string, std::string>::const_iterator it =
-		 m_commandline.begin();
-		 it != commandline_end;
-		 ++it)
+	(std::map<std::string, std::string>::const_iterator it =
+	         m_commandline.begin();
+	      it != commandline_end;
+	      ++it)
 	{
 		//TODO: barf here on unkown option; the list of known options
 		//TODO: needs to be centralized
 
 		g_options.pull_section("global")->create_val
-			(it->first.c_str(), it->second.c_str());
+		(it->first.c_str(), it->second.c_str());
 	}
 }
 

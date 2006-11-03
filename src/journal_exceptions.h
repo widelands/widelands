@@ -31,6 +31,7 @@
  * be ignored.
  *
  * \todo add offset into journal file if applicable
+ * \todo Replace with File*_error where appropriate
  */
 class Journalfile_error : public std::runtime_error {
 public:

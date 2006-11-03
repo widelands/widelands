@@ -58,9 +58,8 @@ public:
 	virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
 	virtual void Unlink( std::string ) = 0;
 
-	static FileSystem *Create(std::string root) throw(FileType_error);
-	static FileSystem *CreateFromDirectory(std::string directory);
-	static FileSystem *CreateFromZip(std::string file);
+	static FileSystem *Create(std::string root)
+	throw(FileType_error, FileNotFound_error, FileAccessDenied_error);
 
 	virtual void listSubdirs()=0;
 

@@ -37,14 +37,17 @@ public:
    virtual bool IsDirectory(std::string path) ;
 	virtual bool FileExists(std::string path) ;
 
-	virtual void *Load(std::string fname, int *length) ;
+	virtual void *Load(std::string fname, int *length)
+			throw (ZipFile_error);
 	virtual void Write(std::string fname, void *data, int length) ;
    virtual void EnsureDirectoryExists(std::string dirname) ;
    virtual void MakeDirectory(std::string dirname) ;
 
    virtual FileSystem*  MakeSubFileSystem( std::string dirname );
-   virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type );
-   virtual void Unlink( std::string ) ;
+   virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type )
+			throw(ZipFile_error);
+   virtual void Unlink( std::string filename )
+			throw(ZipFile_error);
 
 public:
 	static FileSystem *CreateFromDirectory(std::string directory);
@@ -52,7 +55,7 @@ public:
 	void listSubdirs() {printf("%s\n", m_basename.c_str());}
 
 private:
-   void m_OpenUnzip( void );
+   void m_OpenUnzip( void ) throw (FileType_error);
    void m_OpenZip( void );
    void m_Close( void );
 

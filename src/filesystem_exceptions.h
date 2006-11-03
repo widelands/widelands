@@ -22,26 +22,75 @@
 
 #include <stdexcept>
 
-class FileNotFound_error : public std::runtime_error {
+/**
+ * Generic problem when dealing with a file or directory
+ */
+class File_error : public std::runtime_error {
 public:
-	explicit FileNotFound_error(std::string s, std::string _filename) throw();
-	virtual ~FileNotFound_error() throw() {}
-
+	explicit File_error(const std::string thrower,
+	                    const std::string filename,
+	                    const std::string message="problem with file/directory")
+	throw();
+	virtual ~File_error() throw() {}
 	virtual const char *what() const throw();
 
-	char *text;
-	std::string filename;
+	std::string m_thrower;
+	std::string m_filename;
+	std::string m_message;
 };
 
-class FileType_error : public std::runtime_error {
+/**
+ * A file/directory could not be found. Either it really does not exist or there
+ * are problems with the path, e.g. loops or nonexistent path components
+ */
+class FileNotFound_error : public File_error {
 public:
-	explicit FileType_error(std::string s, std::string _filename) throw();
-	virtual ~FileType_error() throw() {}
+	explicit FileNotFound_error(const std::string thrower,
+	                            const std::string filename,
+	                            const std::string message="could not find file/directory")
+	throw();
+	virtual ~FileNotFound_error() throw() {}
+};
 
+/**
+ * The file/directory is of an unexpected type. Reasons can be given via message
+ */
+class FileType_error : public File_error {
+public:
+	explicit FileType_error(const std::string thrower,
+	                        const std::string filename,
+	                        const std::string message="file/directory has wrong type")
+	throw();
+	virtual ~FileType_error() throw() {}
+};
+
+/**
+ * The operating system denied access to the file/directory in question
+ */
+class FileAccessDenied_error : public File_error {
+public:
+	explicit FileAccessDenied_error(const std::string thrower,
+	                                const std::string filename,
+	                                const std::string message="access denied on file/directory")
+	throw();
+	virtual ~FileAccessDenied_error() throw() {}
+};
+
+/**
+ * Generic problem when working \e inside a zipfile.
+ * Problems with the zipfile itself should throw File*_error
+ */
+class ZipFile_error : public File_error {
+public:
+	explicit ZipFile_error(const std::string thrower,
+	                       const std::string filename,
+	                       const std::string zipfilename,
+	                       const std::string message="problem with file/directory")
+	throw();
+	virtual ~ZipFile_error() throw() {}
 	virtual const char *what() const throw();
 
-	char *text;
-	std::string filename;
+	std::string m_zipfilename;
 };
 
 #endif
