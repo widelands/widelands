@@ -20,6 +20,7 @@
 #include <string>
 #include "error.h"
 #include "filesystem_exceptions.h"
+#include "zip_exceptions.h"
 #include "zip_filesystem.h"
 #include "wexception.h"
 
@@ -62,11 +63,12 @@ bool ZipFilesystem::IsWritable()
 }
 
 /**
- * Returns the number of files found, and stores the filenames (without the pathname) in the results.
- * There doesn't seem to be an even remotely cross-platform way of
- * doing this
+ * Returns the number of files found, and stores the filenames (without the
+ * pathname) in the results. There doesn't seem to be an even remotely
+ * cross-platform way of doing this
  */
-int ZipFilesystem::FindFiles(std::string path, std::string pattern, filenameset_t *results)
+int ZipFilesystem::FindFiles(std::string path, std::string pattern,
+									  filenameset_t *results)
 {
    m_OpenUnzip();
 
@@ -83,11 +85,14 @@ int ZipFilesystem::FindFiles(std::string path, std::string pattern, filenameset_
    unz_file_info file_info;
    char filename_inzip[256];
    while(1) {
-      unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),NULL,0,NULL,0);
+      unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
+									 sizeof(filename_inzip),NULL,0,NULL,0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
       std::string filename = FS_Filename( complete_filename.c_str() );
-      std::string filepath = complete_filename.substr( 0, complete_filename.size()-filename.size());
+      std::string filepath = complete_filename.substr( 0,
+																		 complete_filename.size()-
+																				 filename.size());
 
       //TODO: sth. strange is going on wrt the leading slash! This is just an ugly
       //workaround and does not solve the real problem (which remains undiscovered)
@@ -122,7 +127,8 @@ bool ZipFilesystem::FileExists(std::string path)
       path = '/' + path;
 
    while(1) {
-      unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),NULL,0,NULL,0);
+      unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
+									 sizeof(filename_inzip),NULL,0,NULL,0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
       if( complete_filename[ complete_filename.size() - 1 ] == '/' )
@@ -153,7 +159,8 @@ bool ZipFilesystem::IsDirectory(std::string path)
    unz_file_info file_info;
    char filename_inzip[256];
 
-   unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),NULL,0,NULL,0);
+   unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
+								 sizeof(filename_inzip),NULL,0,NULL,0);
 
    if( filename_inzip[ strlen( filename_inzip ) - 1 ] == '/' ) {
       return true;
@@ -181,16 +188,18 @@ FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path ) {
 
 /**
  * Make a new Subfilesystem in this
- * \todo should throw a descendant of std::logic_error
+ * \todo type should be recognized automatically, \see Filesystem::Create
+ * \throw ZipOperation_error
  */
 FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
-throw(ZipFile_error)
 {
    assert( !FileExists( path ));
 
    if( type != FS_DIR )
-		throw ZipFile_error("ZipFilesystem::CreateSubFileSystem", path, m_zipfilename,
-							     "can't create new ZipFilesystem inside a zipfile");
+		throw (ZipOperation_error("ZipFilesystem::CreateSubFileSystem",
+										 path, m_zipfilename,
+										 "can't create ZipFilesystem inside another ZipFilesystem")
+				);
 
    EnsureDirectoryExists( path );
 
@@ -203,12 +212,13 @@ throw(ZipFile_error)
 }
 /**
  * Remove a number of files
- * \todo should throw a descendant of std::logic_error
+ * \throw ZipOperation_error
  */
-void ZipFilesystem::Unlink(std::string filename) throw(ZipFile_error)
+void ZipFilesystem::Unlink(std::string filename)
 {
-	throw ZipFile_error("ZipFilesystem::Unlink", filename, m_zipfilename,
-				   		  "unlinking is not supported inside zipfiles");
+	throw (ZipOperation_error("ZipFilesystem::Unlink", filename, m_zipfilename,
+				   		  "unlinking is not supported inside zipfiles")
+			);
 }
 
 /**
@@ -259,14 +269,14 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
 
 /**
  * Read the given file into alloced memory; called by FileRead::Open.
- * Throws an exception if the file couldn't be opened.
+ * \throw FileNotFound_error if the file couldn't be opened.
  */
 void *ZipFilesystem::Load(std::string fname, int *length)
-throw(ZipFile_error)
 {
    if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
-			throw ZipFile_error("ZipFilesystem::Load", fname, m_zipfilename,
-								  "couldn't open file from zipfile");
+			throw FileNotFound_error("ZipFilesystem::Load", fname,
+											 "couldn't open file (from zipfile "
+													 +m_zipfilename+")");
 
    char buffer[1024];
    int len;
@@ -353,8 +363,9 @@ void ZipFilesystem::m_OpenZip( void ) {
 
 /**
  * Open a zipfile for extraction
+ * \throw FileType_error
  */
-void ZipFilesystem::m_OpenUnzip( void ) throw(FileType_error) {
+void ZipFilesystem::m_OpenUnzip( void ) {
    if( m_state == STATE_UNZIPPPING )
       return;
 

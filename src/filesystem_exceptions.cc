@@ -19,8 +19,9 @@
 
 #include "filesystem_exceptions.h"
 
-File_error::File_error(const std::string thrower, const std::string filename, const std::string message)
-throw() : std::runtime_error(""),
+File_error::File_error(const std::string thrower, const std::string filename,
+                       const std::string message) throw()
+		: std::runtime_error(""),
 		m_thrower(thrower), m_filename(filename), m_message(message)
 {
 	m_what_message=m_thrower+": "+m_message+": "+m_filename;
@@ -31,21 +32,20 @@ const char *File_error::what() const throw()
 	return m_what_message.c_str();
 }
 
-FileNotFound_error::FileNotFound_error(const std::string thrower, const std::string filename, const std::string message)
-throw() : File_error(thrower, filename, message)
+FileNotFound_error::FileNotFound_error(const std::string thrower,
+                                       const std::string filename,
+                                       const std::string message) throw()
+		: File_error(thrower, filename, message)
 {}
 
-FileType_error::FileType_error(std::string thrower, std::string filename, const std::string message)
-throw() : File_error(thrower, filename, message)
+FileType_error::FileType_error(const std::string thrower,
+                               const std::string filename,
+                               const std::string message) throw()
+		: File_error(thrower, filename, message)
 {}
 
-FileAccessDenied_error::FileAccessDenied_error(std::string thrower, std::string filename, const std::string message)
-throw() : File_error(thrower, filename, message)
+FileAccessDenied_error::FileAccessDenied_error(const std::string thrower,
+      const std::string filename,
+      const std::string message) throw()
+		: File_error(thrower, filename, message)
 {}
-
-ZipFile_error::ZipFile_error(const std::string thrower, const std::string filename, const std::string zipfilename, const std::string message)
-throw() : File_error(thrower, filename, message), m_zipfilename(zipfilename)
-{
-	m_what_message=m_thrower+": "+m_message+": "+m_filename+
-			" (in zipfile "+m_zipfilename+")";
-}

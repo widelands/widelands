@@ -50,6 +50,8 @@ INDENTLIST=[
 	'sound_handler.cc',
 	'wlapplication.h',
 	'wlapplication.cc',
+	'zip_exceptions.h',
+	'zip_exceptions.cc',
 	]
 indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)

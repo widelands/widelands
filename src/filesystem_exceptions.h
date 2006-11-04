@@ -77,20 +77,4 @@ public:
 	throw();
 };
 
-/**
- * Generic problem when working \e inside a zipfile.
- * Problems with the zipfile itself should throw File*_error
- */
-class ZipFile_error : public File_error {
-public:
-	explicit ZipFile_error(const std::string thrower,
-	                       const std::string filename,
-	                       const std::string zipfilename,
-	                       const std::string message="problem with file or directory")
-	throw();
-	virtual ~ZipFile_error() throw() {}
-
-	std::string m_zipfilename;
-};
-
 #endif

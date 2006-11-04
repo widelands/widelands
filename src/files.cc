@@ -31,6 +31,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <vector>
+#include "zip_exceptions.h"
 #include "zip_filesystem.h"
 
 #ifdef USE_DATAFILE
@@ -432,7 +433,7 @@ FileSystem *FileSystem::Create(std::string root) throw(FileType_error,
 	}
 
 	throw FileType_error("FileSystem::Create", root,
-								"cannot create virtual filesystem from file/directory");
+	                     "cannot create virtual filesystem from file or directory");
 }
 
 /**
