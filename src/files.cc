@@ -412,7 +412,9 @@ FileSystem *FileSystem::Create(std::string root) throw(FileType_error,
 		if ( errno==EBADF ||
 		      errno==ENOENT ||
 		      errno==ENOTDIR ||
-		      errno==ELOOP ||
+#ifdef ELOOP
+		      errno==ELOOP || //MinGW does not support ELOOP (yet)
+#endif
 		      errno==ENAMETOOLONG )
 		{
 			throw FileNotFound_error("FileSystem::Create", root);
@@ -464,6 +466,7 @@ static const std::string getexename(const std::string argv0)
  * Sets the filelocators default searchpaths (partly OS specific)
  * \todo This belongs into WLApplication
  * \todo Handle exception FileType_error
+ * \todo Handle case when \e no data can be found
  */
 void setup_searchpaths(const std::string argv0)
 {
@@ -489,7 +492,7 @@ void setup_searchpaths(const std::string argv0)
 		// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #else
-		//TODO: is there a "default dir" for this on win32 ?
+		//TODO: is there a "default dir" for this on win32 and mac ?
 #endif
 	}
 	catch (FileNotFound_error e) {}
@@ -511,6 +514,8 @@ void setup_searchpaths(const std::string argv0)
 	catch (FileType_error e) {
 		//TODO: handle me
 	}
+
+	//TODO: what if all the searching failed? Bail out!
 
 	// the directory the executable is in is the default game data directory
 	std::string exename = getexename(argv0);
