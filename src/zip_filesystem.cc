@@ -181,6 +181,7 @@ FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path ) {
 
 /**
  * Make a new Subfilesystem in this
+ * \todo should throw a descendant of std::logic_error
  */
 FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
 throw(ZipFile_error)
@@ -202,6 +203,7 @@ throw(ZipFile_error)
 }
 /**
  * Remove a number of files
+ * \todo should throw a descendant of std::logic_error
  */
 void ZipFilesystem::Unlink(std::string filename) throw(ZipFile_error)
 {

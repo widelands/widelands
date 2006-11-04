@@ -22,13 +22,13 @@
 File_error::File_error(const std::string thrower, const std::string filename, const std::string message)
 throw() : std::runtime_error(""),
 		m_thrower(thrower), m_filename(filename), m_message(message)
-{}
+{
+	m_what_message=m_thrower+": "+m_message+": "+m_filename;
+}
 
 const char *File_error::what() const throw()
 {
-	std::string text=m_thrower+": "+m_message+": "+m_filename;
-
-	return text.c_str();
+	return m_what_message.c_str();
 }
 
 FileNotFound_error::FileNotFound_error(const std::string thrower, const std::string filename, const std::string message)
@@ -44,14 +44,8 @@ throw() : File_error(thrower, filename, message)
 {}
 
 ZipFile_error::ZipFile_error(const std::string thrower, const std::string filename, const std::string zipfilename, const std::string message)
-throw() : File_error(thrower, filename, message),
-		m_zipfilename(zipfilename)
-{}
-
-const char *ZipFile_error::what() const throw()
+throw() : File_error(thrower, filename, message), m_zipfilename(zipfilename)
 {
-	std::string text=m_thrower+": "+m_message+": "+m_filename+
-	                 " (in zipfile "+m_zipfilename+")";
-
-	return text.c_str();
+	m_what_message=m_thrower+": "+m_message+": "+m_filename+
+			" (in zipfile "+m_zipfilename+")";
 }

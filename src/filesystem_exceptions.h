@@ -32,11 +32,15 @@ public:
 	                    const std::string message="problem with file/directory")
 	throw();
 	virtual ~File_error() throw() {}
+
 	virtual const char *what() const throw();
 
 	std::string m_thrower;
 	std::string m_filename;
 	std::string m_message;
+
+protected:
+	std::string m_what_message;
 };
 
 /**
@@ -47,9 +51,8 @@ class FileNotFound_error : public File_error {
 public:
 	explicit FileNotFound_error(const std::string thrower,
 	                            const std::string filename,
-	                            const std::string message="could not find file/directory")
+	                            const std::string message="could not find file or directory")
 	throw();
-	virtual ~FileNotFound_error() throw() {}
 };
 
 /**
@@ -59,9 +62,8 @@ class FileType_error : public File_error {
 public:
 	explicit FileType_error(const std::string thrower,
 	                        const std::string filename,
-	                        const std::string message="file/directory has wrong type")
+	                        const std::string message="file or directory has wrong type")
 	throw();
-	virtual ~FileType_error() throw() {}
 };
 
 /**
@@ -71,9 +73,8 @@ class FileAccessDenied_error : public File_error {
 public:
 	explicit FileAccessDenied_error(const std::string thrower,
 	                                const std::string filename,
-	                                const std::string message="access denied on file/directory")
+	                                const std::string message="access denied on file or directory")
 	throw();
-	virtual ~FileAccessDenied_error() throw() {}
 };
 
 /**
@@ -85,10 +86,9 @@ public:
 	explicit ZipFile_error(const std::string thrower,
 	                       const std::string filename,
 	                       const std::string zipfilename,
-	                       const std::string message="problem with file/directory")
+	                       const std::string message="problem with file or directory")
 	throw();
 	virtual ~ZipFile_error() throw() {}
-	virtual const char *what() const throw();
 
 	std::string m_zipfilename;
 };
