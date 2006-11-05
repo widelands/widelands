@@ -18,6 +18,7 @@
  */
 
 #include "editor.h"
+#include <errno.h>
 #include "error.h"
 #include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
@@ -43,6 +44,8 @@
 #include "sound_handler.h"
 #include <stdexcept>
 #include <string>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include "wexception.h"
 #include "wlapplication.h"
 
@@ -58,6 +61,140 @@ volatile int WLApplication::may_run=0;
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::cout;
 using std::endl;
+
+/**
+ * Read the actual name of the executable from /proc
+ *
+ * \todo is exename still neccessary, now that BINDIR can be seen from config.h?
+ *       same question for slash/backslash detection, it's trivial with scons
+*/
+const std::string WLApplication::getexename(const std::string argv0)
+{
+	char buf[PATH_MAX]="";
+	int ret=0;
+
+#ifdef __linux__
+	static const char* const s_selfptr = "/proc/self/exe";
+
+	ret = readlink(s_selfptr, buf, sizeof(buf));
+	if (ret == -1) {
+		log("readlink(%s) failed: %s\n", s_selfptr, strerror(errno));
+		return "";
+	}
+#endif
+
+	if (ret>0)
+		return std::string(buf, ret);
+	else
+		return argv0;
+}
+
+/**
+ * Sets the filelocators default searchpaths (partly OS specific)
+ * \todo Handle exception FileType_error
+ * \todo Handle case when \e no data can be found
+ */
+void WLApplication::setup_searchpaths(const std::string argv0)
+{
+	try {
+#ifdef __APPLE__
+		// on mac, the default Data Dir ist Relative to the current directory
+		g_fs->AddFileSystem(FileSystem::Create("Widelands.app/Contents/Resources/"));
+#else
+		// first, try the data directory used in the last scons invocation
+		g_fs->AddFileSystem(FileSystem::Create(INSTALL_DATADIR)); //see config.h
+#endif
+	}
+	catch (FileNotFound_error e) {}
+	catch (FileAccessDenied_error e) {
+		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+	}
+	catch (FileType_error e) {
+		//TODO: handle me
+	}
+
+	try {
+#ifndef __WIN32__
+		// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
+		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
+#else
+		//TODO: is there a "default dir" for this on win32 and mac ?
+#endif
+	}
+	catch (FileNotFound_error e) {}
+	catch (FileAccessDenied_error e) {
+		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+	}
+	catch (FileType_error e) {
+		//TODO: handle me
+	}
+
+	try {
+		// absolute fallback directory is the CWD
+		g_fs->AddFileSystem(FileSystem::Create("."));
+	}
+	catch (FileNotFound_error e) {}
+	catch (FileAccessDenied_error e) {
+		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+	}
+	catch (FileType_error e) {
+		//TODO: handle me
+	}
+
+	//TODO: what if all the searching failed? Bail out!
+
+	// the directory the executable is in is the default game data directory
+	std::string exename = getexename(argv0);
+	std::string::size_type slash = exename.rfind('/');
+	std::string::size_type backslash = exename.rfind('\\');
+
+	if (backslash != std::string::npos && (slash == std::string::npos || backslash > slash))
+		slash = backslash;
+
+	if (slash != std::string::npos) {
+		exename.erase(slash);
+		if (exename != ".") {
+			try {
+				g_fs->AddFileSystem(FileSystem::Create(exename));
+#ifdef USE_DATAFILE
+				exename.append ("/widelands.dat");
+				g_fs->AddFileSystem(new Datafile(exename.c_str()));
+#endif
+			}
+			catch (FileNotFound_error e) {}
+			catch (FileAccessDenied_error e) {
+				log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+			}
+			catch (FileType_error e) {
+				//TODO: handle me
+			}
+		}
+	}
+
+	// finally, the user's config directory
+	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
+#ifndef	__WIN32__
+	std::string path;
+	char *buf=getenv("HOME"); //do not use GetHomedir() to not accidentally create ./.widelands
+
+	if (buf) { // who knows, maybe the user's homeless
+		path = std::string(buf) + "/.widelands";
+		mkdir(path.c_str(), 0x1FF);
+		try {
+			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
+		}
+		catch (FileNotFound_error e) {}
+		catch (FileAccessDenied_error e) {
+			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+		}
+		catch (FileType_error e) {
+			//TODO: handle me
+		}
+	} else {
+		//TODO: complain
+	}
+#endif
+}
 
 WLApplication *WLApplication::the_singleton=0;
 

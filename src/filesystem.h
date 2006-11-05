@@ -28,8 +28,6 @@
 
 typedef std::set<std::string> filenameset_t;
 
-void setup_searchpaths(const std::string argv0);
-
 /**
  * FileSystem is a base class representing certain filesystem operations.
  */

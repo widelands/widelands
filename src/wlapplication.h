@@ -59,7 +59,7 @@ struct InputCallback {
  * actual graphics work is done by \ref class Graphic).
  *
  * Equally important, the main event loop is chugging along in this class. [not
- * yet but soon #fweber4mar2006]
+ * yet but some time in the future #fweber5nov2006]
  *
  * \par WLApplication is a singleton
  *
@@ -84,11 +84,11 @@ struct InputCallback {
  * These measures \e guarantee that there are no stray WLApplication objects
  * floating around by accident.
  *
- * For testing purposes, we can spawn a second thread with widelands running in
+ * For testing purposes, we can spawn a second process with widelands running in
  * it (see \ref init_double_game() ). The fact that WLApplication is a singleton
- * is not touched by this: threads start out as a byte exact memory copy, so
- * the two instances can't know (except for fork()'s return value) that they are
- * (or are not) a primary thread. Each WLApplication singleton really *is* a
+ * is not touched by this: the processes start out as a byte exact memory copy,
+ * so the two instances can't know (except for fork()'s return value) that they
+ * are (or are not) a primary thread. Each WLApplication singleton really *is* a
  * singleton - inside it's own process.
  *
  * \par Session recording and playback
@@ -225,6 +225,9 @@ protected:
 	void shutdown_hardware();
 
 	void parse_command_line() throw(Parameter_error);
+
+	static const std::string getexename(const std::string argv0);
+	void setup_searchpaths(const std::string argv0);
 
 	///The commandline, conveniently repackaged
 	std::map<std::string, std::string> m_commandline;
