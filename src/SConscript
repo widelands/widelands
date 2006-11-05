@@ -35,6 +35,8 @@ INDENTLIST=[
 	'fxset.h',
 	'fxset.cc',
 	'geometry.h',
+	'helper.h',
+	'helper.cc',
 	'journal.h',
 	'journal.cc',
 	'journal_exceptions.h',

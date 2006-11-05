@@ -38,9 +38,9 @@ public:
 	explicit Journalfile_error(const std::string filename) throw();
 	virtual ~Journalfile_error() throw() {}
 
-	virtual const char *what() const throw();
+	virtual const char *what() const throw() {return text.c_str();}
 
-	char *text;
+	std::string text;
 	std::string filename;
 };
 

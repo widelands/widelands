@@ -63,38 +63,11 @@ using std::cout;
 using std::endl;
 
 /**
- * Read the actual name of the executable from /proc
- *
- * \todo is exename still neccessary, now that BINDIR can be seen from config.h?
- *       same question for slash/backslash detection, it's trivial with scons
-*/
-const std::string WLApplication::getexename(const std::string argv0)
-{
-	char buf[PATH_MAX]="";
-	int ret=0;
-
-#ifdef __linux__
-	static const char* const s_selfptr = "/proc/self/exe";
-
-	ret = readlink(s_selfptr, buf, sizeof(buf));
-	if (ret == -1) {
-		log("readlink(%s) failed: %s\n", s_selfptr, strerror(errno));
-		return "";
-	}
-#endif
-
-	if (ret>0)
-		return std::string(buf, ret);
-	else
-		return argv0;
-}
-
-/**
  * Sets the filelocators default searchpaths (partly OS specific)
  * \todo Handle exception FileType_error
  * \todo Handle case when \e no data can be found
  */
-void WLApplication::setup_searchpaths(const std::string argv0)
+void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
 #ifdef __APPLE__
@@ -144,21 +117,20 @@ void WLApplication::setup_searchpaths(const std::string argv0)
 	//TODO: what if all the searching failed? Bail out!
 
 	// the directory the executable is in is the default game data directory
-	std::string exename = getexename(argv0);
-	std::string::size_type slash = exename.rfind('/');
-	std::string::size_type backslash = exename.rfind('\\');
+	std::string::size_type slash = argv0.rfind('/');
+	std::string::size_type backslash = argv0.rfind('\\');
 
 	if (backslash != std::string::npos && (slash == std::string::npos || backslash > slash))
 		slash = backslash;
 
 	if (slash != std::string::npos) {
-		exename.erase(slash);
-		if (exename != ".") {
+		argv0.erase(slash);
+		if (argv0 != ".") {
 			try {
-				g_fs->AddFileSystem(FileSystem::Create(exename));
+				g_fs->AddFileSystem(FileSystem::Create(argv0));
 #ifdef USE_DATAFILE
-				exename.append ("/widelands.dat");
-				g_fs->AddFileSystem(new Datafile(exename.c_str()));
+				argv0.append ("/widelands.dat");
+				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
 #endif
 			}
 			catch (FileNotFound_error e) {}

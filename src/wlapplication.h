@@ -226,8 +226,7 @@ protected:
 
 	void parse_command_line() throw(Parameter_error);
 
-	static const std::string getexename(const std::string argv0);
-	void setup_searchpaths(const std::string argv0);
+	void setup_searchpaths(std::string argv0);
 
 	///The commandline, conveniently repackaged
 	std::map<std::string, std::string> m_commandline;

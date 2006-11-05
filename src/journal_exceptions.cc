@@ -17,27 +17,21 @@
  *
  */
 
+#include "helper.h"
 #include "journal_exceptions.h"
-#include <stdio.h> //TODO: find a replacement for sprintf
 
 Journalfile_error::Journalfile_error(const std::string _filename) throw():
 		std::runtime_error("Problem with journal file."),
 		filename(_filename)
 {
-	sprintf(text, "Problem with journal file '%s'.", _filename.c_str());
-}
-
-const char *Journalfile_error::what() const throw()
-{
-	return text;
+	text="Problem with journal file "+_filename;
 }
 
 ///\todo Say _which_ magic number was found and which was expected
 BadMagic_error::BadMagic_error(const std::string _filename) throw():
 		Journalfile_error(_filename)
 {
-	sprintf(text, "Journal file '%s' starts with bad magic number.",
-	        _filename.c_str());
+	text="Journal file "+_filename+" starts with bad magic number";
 }
 
 BadRecord_error::BadRecord_error(const std::string _filename,
@@ -46,16 +40,15 @@ BadRecord_error::BadRecord_error(const std::string _filename,
 		Journalfile_error(_filename),
 		code(_code), expectedcode(_expectedcode)
 {
-	sprintf(text, "Journal file '%s' contains record with type %i instead "
-	        "of the expected type %i.",
-	        _filename.c_str(), _code, _expectedcode);
+	text="Journal file "+_filename+" contains record with type "+
+			toString(_code)+" instead of the expected type "+
+			toString(_expectedcode);
 }
 
-BadEvent_error::BadEvent_error(const std::string _filename, const unsigned char _type) throw():
-		Journalfile_error(_filename),
-		type(_type)
+BadEvent_error::BadEvent_error(const std::string _filename,
+                               const unsigned char _type) throw()
+	: Journalfile_error(_filename), type(_type)
 {
-	sprintf(text, "Journal file '%s' contains record with unknown event "
-	        "type %i.",
-	        _filename.c_str(), _type);
+	text="Journal file '"+_filename+"' contains record with unknown event type "+
+			toString(_type);
 }

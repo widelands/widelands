@@ -25,15 +25,13 @@
 #include "wexception.h"
 #include "error.h"
 
+//TODO: move wexception code into it's own file
+
 using std::cout;
 
-/*
-===============
-split_string
-
-Split a string by whitespace.
-===============
-*/
+/**
+ * split a string by whitespace
+ */
 void split_string(std::string in, std::vector<std::string>* plist, const char* separators)
 {
 	std::string::size_type pos, endpos;
@@ -53,7 +51,7 @@ void split_string(std::string in, std::vector<std::string>* plist, const char* s
 	}
 }
 
-/*
+/**
  * remove spaces at the beginning or the end of a string
  */
 void remove_spaces(std::string* in) {
@@ -64,13 +62,9 @@ void remove_spaces(std::string* in) {
       in->erase(in->size()-1, 1);
 }
 
-/*
-===============
-log
-
-Print a formatted log messages to cout.
-===============
-*/
+/**
+ * print a formatted log messages to cout.
+ */
 void log(const char *fmt, ...)
 {
 	char buf[2048];
@@ -80,7 +74,7 @@ void log(const char *fmt, ...)
 	vsnprintf(buf, sizeof(buf), fmt, va);
 	va_end(va);
 
-	// use iostreams instead of vprintf because other parts of Widelands use iostreams
+	//TODO: use iostreams instead of vprintf because other parts of Widelands use iostreams
 	cout << buf;
 	cout.flush();
 }
