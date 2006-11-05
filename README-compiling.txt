@@ -7,7 +7,7 @@ Dependencies
 
 These are the libraries you need. You also need the headers and link libraries,
 for widelands makes direct use of them:
-   - SDL
+   - SDL >= 1.2.8
    - SDL_mixer >= 1.2.6
    - SDL_image
    - SDL_net
