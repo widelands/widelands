@@ -1,0 +1,81 @@
+/*
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+ 
+#ifndef __S__WIDELANDS_ATTACK_CTRL_H
+#define __S__WIDELANDS_ATTACK_CTRL_H
+
+#include <vector>
+
+class Game;
+class Flag;
+class MilitarySite;
+class Soldier;
+class Coords;
+
+
+void getCloseMilitarySites(Game* game, Flag* flag, int player, std::vector<MilitarySite*>* militarySites);
+uint getMaxAttackSoldiers(Game* game, Flag* flag, int player);
+
+class AttackController {
+   public:
+      AttackController(Game* game, Flag* flag, int attacker, int defender);
+      ~AttackController();
+      void launchAttack(uint nrAttackers);
+      
+      void moveToReached(Soldier* soldier);
+      void soldierDied(Soldier* soldier);
+      void soldierWon(Soldier* soldier);
+      
+      inline int getAttackingPlayer() { return attackingPlayer; };
+      inline int getDefendingPlayer() { return defendingPlayer; };
+      inline Flag* getFlag() { return flag; };
+      inline Game* getGame() { return game; };
+   private:
+      struct BattleSoldier {
+         Soldier* soldier;
+         MilitarySite* origin;
+         Coords* battleGround;
+         bool attacker;
+         bool arrived;
+         bool fighting;
+      };
+      
+      bool battleGroundOccupied(Coords* coords);
+      void calcBattleGround(BattleSoldier*, int);
+      
+      void launchAllSoldiers(bool attackers, int nrLaunch);
+      void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers);
+      bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
+      
+      bool startBattle(Soldier*, bool);
+      void removeSoldier(Soldier*);
+      uint getBattleSoldierIndex(Soldier*);
+      bool opponentsLeft(Soldier* soldier);
+      
+      std::vector<BattleSoldier> involvedSoldiers;
+      std::vector<MilitarySite*> involvedMilitarySites;
+      int attackingPlayer;
+      int defendingPlayer;
+      uint totallyLaunched;
+      Flag* flag;
+      Game* game;
+   
+};
+
+#endif
