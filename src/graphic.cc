@@ -1772,8 +1772,7 @@ GraphicImpl::find_free_picture
 Find a free picture slot and return it.
 ===============
 */
-uint GraphicImpl::find_free_picture()
-{
+std::vector<GraphicImpl::Picture>::size_type GraphicImpl::find_free_picture() {
 	const std::vector<Picture>::size_type pictures_size = m_pictures.size();
 	std::vector<Picture>::size_type id = 1;
 	for (; id < pictures_size; ++id) if (m_pictures[id].mod == 0) return id;

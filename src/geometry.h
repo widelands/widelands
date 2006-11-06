@@ -101,7 +101,7 @@ typedef Coordinate Y_Coordinate;
  */
 struct Coords {
 	Coords() { }
-	Coords(const int nx, const int ny) : x(nx), y(ny) { }
+	Coords(const X_Coordinate nx, const Y_Coordinate ny) : x(nx), y(ny) {}
 
 	bool operator==(const Coords other) const
 		{return x == other.x and y == other.y;}
