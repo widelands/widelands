@@ -211,13 +211,14 @@ def do_configure(config_h_file, conf, env):
 	else:
 		env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
 
-	if not conf.CheckParaguiConfig(env):
-		print 'Could not find paragui. That\'s no problem unless you\'re a developer working on this.'
-		#print 'Could not find paragui-config! Is paragui installed?'
-		#env.Exit(1)
-	else:
-		env.ParseConfig(env['paraguiconfig']+' --libs --cflags')
-		config_h_file.write("#define HAS_PARAGUI\n\n");
+	#disabled until somebody(=me) finds time and courage to actually work on this #fweber
+	#if not conf.CheckParaguiConfig(env):
+	#	print 'Could not find paragui. That\'s no problem unless you\'re a developer working on this.'
+	#	#print 'Could not find paragui-config! Is paragui installed?'
+	#	#env.Exit(1)
+	#else:
+	#	env.ParseConfig(env['paraguiconfig']+' --libs --cflags')
+	#	config_h_file.write("#define HAS_PARAGUI\n\n");
 
 	if not conf.CheckLibWithHeader('z', header='zlib.h', language='C', autoadd=1):
 		print 'Could not find the zlib library! Is it installed?'
