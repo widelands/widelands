@@ -244,7 +244,7 @@ public:
 
 	// Field logic
 	typedef uint Index;
-	static Index get_index(const Coords c, const uint width);
+	static Index get_index(const Coords c, const X_Coordinate width);
 	Index get_index(const FCoords c) {return c.field - m_fields;}
 	Index max_index() const {return m_width * m_height;}
 	Field & operator[](const Index)  const;
@@ -336,8 +336,8 @@ private:
 
 	Uint16 m_pathcycle;
 	Uint8             m_nrplayers; // # of players this map supports (!= Game's number of players)
-	Uint16 m_width;
-	Uint16 m_height;
+	X_Coordinate m_width;
+	Y_Coordinate m_height;
 	char		m_filename[256];
 	char		m_author[61];
 	char		m_name[61];
@@ -661,7 +661,7 @@ Field arithmetics
 ==============================================================================
 */
 
-inline Map::Index Map::get_index(const Coords c, const uint width)
+inline Map::Index Map::get_index(const Coords c, const X_Coordinate width)
 {return c.y * width + c.x;}
 
 inline Field & Map::operator[](const Index i) const {return m_fields[i];}
@@ -682,7 +682,12 @@ inline FCoords Map::get_fcoords(const Coords c) const
 }
 
 inline void Map::normalize_coords(Coords * c) const
-{c->x %= m_width; c->y %= m_height;}
+{
+	while (c->x < 0)         c->x += m_width;
+	while (c->x >= m_width)  c->x -= m_width;
+	while (c->y < 0)         c->y += m_height;
+	while (c->y >= m_height) c->y -= m_height;
+}
 
 
 /**
@@ -704,106 +709,132 @@ inline FCoords Map::get_fcoords(Field & f) const {
  */
 inline void Map::get_ln(const Coords f, Coords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->y = f.y;
 	o->x = (f.x ? f.x : m_width) - 1;
+	assert(0 <= o->x);
+	assert(0 <= o->y);
 	assert(o->x < m_width);
 	assert(o->y < m_height);
 }
 
 inline void Map::get_ln(const FCoords f, FCoords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= f.field);
+	assert            (f.field < m_fields + max_index());
 	o->y = f.y;
 	o->x = f.x-1;
 	o->field = f.field-1;
-	if (o->x == std::numeric_limits<X_Coordinate>::max()) {
+	if (o->x == -1) {
 		o->x = m_width - 1;
 		o->field += m_width;
 	}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= o->field);
+	assert            (o->field < m_fields + max_index());
 }
 
 inline void Map::get_rn(const Coords f, Coords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->y = f.y;
 	o->x = f.x+1;
 	if (o->x == m_width) o->x = 0;
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
 }
 
 inline void Map::get_rn(const FCoords f, FCoords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= f.field);
+	assert            (f.field < m_fields + max_index());
 	o->y = f.y;
 	o->x = f.x+1;
 	o->field = f.field+1;
 	if (o->x == m_width) {o->x = 0; o->field -= m_width;}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= o->field);
+	assert            (o->field < m_fields + max_index());
 }
 
 // top-left: even: -1/-1  odd: 0/-1
 inline void Map::get_tln(const Coords f, Coords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->y = f.y-1;
 	o->x = f.x;
 	if (o->y & 1) {
-		if (o->y == std::numeric_limits<Y_Coordinate>::max()) o->y = m_height - 1;
+		if (o->y == -1) o->y = m_height - 1;
 		o->x = (o->x ? o->x : m_width) - 1;
 	}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
 }
 
 inline void Map::get_tln(const FCoords f, FCoords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= f.field);
+	assert            (f.field < m_fields + max_index());
 	o->y = f.y-1;
 	o->x = f.x;
 	o->field = f.field - m_width;
 	if (o->y & 1) {
-		if (o->y == std::numeric_limits<Y_Coordinate>::max()) {
+		if (o->y == -1) {
 			o->y = m_height - 1;
 			o->field += max_index();
 		}
 		o->x--;
 		o->field--;
-		if (o->x == std::numeric_limits<X_Coordinate>::max()) {
+		if (o->x == -1) {
 			o->x = m_width - 1;
 			o->field += m_width;
 		}
 	}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= o->field);
+	assert            (o->field < m_fields + max_index());
 }
 
 // top-right: even: 0/-1  odd: +1/-1
 inline void Map::get_trn(const Coords f, Coords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->x = f.x;
 	if (f.y & 1) {
@@ -811,16 +842,20 @@ inline void Map::get_trn(const Coords f, Coords * const o) const
 		if (o->x == m_width) o->x = 0;
 	}
 	o->y = (f.y ? f.y : m_height) - 1;
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
 }
 
 inline void Map::get_trn(const FCoords f, FCoords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= f.field);
+	assert            (f.field < m_fields + max_index());
 	o->x = f.x;
 	o->field = f.field - m_width;
 	if (f.y & 1) {
@@ -832,35 +867,43 @@ inline void Map::get_trn(const FCoords f, FCoords * const o) const
 		}
 	}
 	o->y = f.y - 1;
-	if (o->y == std::numeric_limits<Y_Coordinate>::max()) {
+	if (o->y == -1) {
 		o->y = m_height - 1;
 		o->field += max_index();
 	}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= o->field);
+	assert            (o->field < m_fields + max_index());
 }
 
 // bottom-left: even: -1/+1  odd: 0/+1
 inline void Map::get_bln(const Coords f, Coords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->y = f.y+1;
 	o->x = f.x;
 	if (o->y == m_height) o->y = 0;
 	if (o->y & 1) o->x = (o->x ? o->x : m_width) - 1;
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
 }
 
 inline void Map::get_bln(const FCoords f, FCoords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= f.field);
+	assert            (f.field < m_fields + max_index());
 	o->y = f.y + 1;
 	o->x = f.x;
 	o->field = f.field + m_width;
@@ -871,21 +914,25 @@ inline void Map::get_bln(const FCoords f, FCoords * const o) const
 	if (o->y & 1) {
 		o->x--;
 		o->field--;
-		if (o->x == std::numeric_limits<X_Coordinate>::max()) {
+		if (o->x == -1) {
 			o->x = m_width - 1;
 			o->field += m_width;
 		}
 	}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= o->field);
+	assert            (o->field < m_fields + max_index());
 }
 
 // bottom-right: even: 0/+1  odd: +1/+1
 inline void Map::get_brn(const Coords f, Coords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->x = f.x;
 	if (f.y & 1) {
@@ -894,16 +941,20 @@ inline void Map::get_brn(const Coords f, Coords * const o) const
 	}
 	o->y = f.y+1;
 	if (o->y == m_height) o->y = 0;
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
 }
 
 inline void Map::get_brn(const FCoords f, FCoords * const o) const
 {
+	assert(0 <= f.x);
 	assert(f.x < m_width);
+	assert(0 <= f.y);
 	assert(f.y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= f.field);
+	assert            (f.field < m_fields + max_index());
 	o->x = f.x;
 	o->field = f.field + m_width;
 	if (f.y & 1) {
@@ -919,14 +970,16 @@ inline void Map::get_brn(const FCoords f, FCoords * const o) const
 		o->y = 0;
 		o->field -= max_index();
 	}
+	assert(0 <= o->x);
 	assert(o->x < m_width);
+	assert(0 <= o->y);
 	assert(o->y < m_height);
-	assert(f.field >= m_fields);
-	assert(f.field < m_fields + max_index());
+	assert(m_fields <= o->field);
+	assert            (o->field < m_fields + max_index());
 }
 
 
-inline void move_r(const uint mapwidth, FCoords & f) {
+inline void move_r(const X_Coordinate mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;
@@ -934,13 +987,12 @@ inline void move_r(const uint mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 }
 
-inline void move_r(const uint mapwidth, FCoords & f, Map::Index & i) {
+inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;
 	++i;
-	if (f.x == mapwidth)
-	{f.x = 0; f.field -= mapwidth; i -= mapwidth;}
+	if (f.x == mapwidth) {f.x = 0; f.field -= mapwidth; i -= mapwidth;}
 	assert(f.x < mapwidth);
 }
 

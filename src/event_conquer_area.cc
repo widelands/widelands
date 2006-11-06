@@ -68,9 +68,11 @@ void Event_Conquer_Area::Read(Section* s, Editor_Game_Base* egbase) {
 
 		const Map & map = egbase->map();
 		if
-			(m_pt.x >= map.get_width() or m_pt.y >= map.get_height()
+			(m_pt.x < 0 or m_pt.x >= map.get_width ()
 			 or
-			 player <= 0 or map.get_nrplayers())
+			 m_pt.y < 0 or m_pt.y >= map.get_height()
+			 or
+			 player <= 0 or player > map.get_nrplayers())
          // give a warning
          log("Conquer Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", m_pt.x, m_pt.y, player);
       return;

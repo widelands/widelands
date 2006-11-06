@@ -93,7 +93,7 @@ struct Vector {
 };
 
 
-typedef Uint16 Coordinate;
+typedef Sint16 Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;
 /**
@@ -107,18 +107,8 @@ struct Coords {
 		{return x == other.x and y == other.y;}
 	bool operator!=(const Coords other) const {return not (*this == other);}
 
-	bool is_valid  () const{
-		return
-		   x != std::numeric_limits<X_Coordinate>::max()
-		   and
-		   y != std::numeric_limits<Y_Coordinate>::max();
-	}
-	bool is_invalid() const {
-		return
-		   x == std::numeric_limits<X_Coordinate>::max()
-		   and
-		   y == std::numeric_limits<Y_Coordinate>::max();
-	}
+	bool is_valid  () const throw () {return x != -1 and y != -1;}
+	bool is_invalid() const throw () {return x == -1 and y == -1;}
 
 	/**
 	 * For use with standard containers.

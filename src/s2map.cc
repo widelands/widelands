@@ -271,8 +271,6 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 	uchar *buildings = 0;
 
 	uchar *pc;
-   uint x=0;
-   uint y=0;
 
 	try
 	{
@@ -291,33 +289,35 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		// The header must already have been processed
 		assert(m_map->m_world);
 		assert(m_map->m_fields);
-		assert((int)m_map->m_width == header.w && (int)m_map->m_height == header.h);
+		const X_Coordinate mapwidth  = m_map->get_width ();
+		const Y_Coordinate mapheight = m_map->get_height();
+		assert(mapwidth  == header.w);
+		assert(mapheight == header.h);
 
 		////           S E C T I O N    1 : H E I G H T S
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section Heights not found");
 
 		Field *f = m_map->m_fields;
 		pc = section;
-		for(y=0; y<m_map->get_height(); y++) {
-			for(x=0; x<m_map->get_width(); x++, f++, pc++)
+		for (Y_Coordinate y = 0; y < mapheight; ++y)
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
 				f->set_height(*pc);
-		}
 		free(section);
 		section = 0;
 
 		////				S E C T I O N		2: Landscape
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section Landscape not found");
 
 		f = m_map->m_fields;
 		pc = section;
-		for(y=0; y<m_map->get_height(); y++) {
-			for(x=0; x<m_map->get_width(); x++, f++, pc++) {
+		for (Y_Coordinate y = 0; y < mapheight; ++y)
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
 				switch((int)c) {
@@ -346,21 +346,20 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 				f->set_terraind(*m_map->m_world->get_terrain(c));
 			}
-		}
 		free(section);
 		section = 0;
 
 
 		// S E C T I O N 3  -------- LANDSCAPE 2
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section Landscape 2 not found");
 
 		f = m_map->m_fields;
 		pc = section;
-		for(y=0; y<m_map->get_height(); y++) {
-			for(x=0; x<m_map->get_width(); x++, f++, pc++) {
+		for (Y_Coordinate y = 0; y < mapheight; ++y)
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
 				switch((int)c) {
@@ -389,14 +388,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 				f->set_terrainr(*m_map->m_world->get_terrain(c));
 			}
-		}
 		free(section);
 		section = 0;
 
 
 		// S E C T I O N 4  -------- UNKNOWN !!! Skip
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section UNKNOWN not found");
 		free(section);
@@ -404,7 +402,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		// S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		// New section??
-		bobs = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		bobs = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!bobs)
 			throw wexception("Section 5 (bobs) not found");
 
@@ -420,14 +418,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		//      bob == 6 green
 		//      bob == 6 orange
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 6 not found");
 
-		uint i=0;
-		for(y=0; y<m_map->get_height(); y++) {
-			i=y*m_map->get_width();
-			for(x=0; x<m_map->get_width(); x++, i++) {
+		for (Y_Coordinate y = 0; y < mapheight; ++y) {
+			uint i = y * mapwidth;
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				// ignore everything but HQs
 				if(section[i]==0x80) {
 					if (bobs[i] < m_map->get_nrplayers())
@@ -446,13 +443,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		// 0x05 == duck
 		// 0x06 == sheep
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 7 (animals) not found");
 
-		for(y=0; y<m_map->get_height(); y++) {
-			i=y*m_map->get_width();
-			for(x=0; x<m_map->get_width(); x++, i++) {
+		for (Y_Coordinate y = 0; y < mapheight; ++y) {
+			uint i = y * mapwidth;
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				const char *bobname = 0;
 
 				// ignore everything but HQs
@@ -484,7 +481,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		// S E C T I O N 8  --------UNKNOWN
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 8 (unknown) not found");
 		free(section);
@@ -502,13 +499,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		// 0x68 == trees
 		// 0x78 == no buildings
 		// New section??
-		buildings = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		buildings = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!buildings)
 			throw wexception("Section 9 (buildings) not found");
 
 		// S E C T I O N 10  -------- UNKNOWN
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 10 (unknown) not found");
 		free(section);
@@ -520,7 +517,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		//  But this points don't make sense....
 		//  We skip it.
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 11 (unknown) not found");
 		free(section);
@@ -536,7 +533,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		// 0x41-47 == cowl 1-7
 		// 0x59-5f == stones 1-7
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 12 (resources) not found");
 
@@ -544,8 +541,8 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		pc = section;
       std::string res;
       int amount=0;
-		for(y=0; y<m_map->get_height(); y++) {
-			for(x=0; x<m_map->get_width(); x++, f++, pc++) {
+		for (Y_Coordinate y = 0; y < mapheight; ++y)
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 
 				switch(c & 0xF8) {
@@ -566,7 +563,6 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
             f->set_resources(nres,real_amount);
             f->set_starting_res_amount(real_amount);
 			}
-		}
 
 		free(section);
 		section = 0;
@@ -577,7 +573,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		// ?? for what is that ??
 		// Skip
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 13 (unknown) not found");
 		free(section);
@@ -592,7 +588,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		//  fe == killing field (lava)
 		//
 		// New section??
-		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
+		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 14 (island id) not found");
 		free(section);
@@ -601,12 +597,14 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		file.Close();
 
 		uchar c;
-		for(y=0; y<m_map->get_height(); y++) {
-			for(x=0; x<m_map->get_width(); x++) {
+		for (Y_Coordinate y = 0; y < mapheight; ++y)
+			for (X_Coordinate x = 0; x < mapwidth; ++x) {
 				const char *bobname = 0;
 
-				c=bobs[y*m_map->get_width() + x];
-				if(buildings[y*m_map->get_width() +x]==0x78) {
+				const Coords location(x, y);
+				const Map::Index index = Map::get_index(location, mapwidth);
+				c = bobs[index];
+				if (buildings[index] == 0x78) {
 					switch(c) {
 						case BOB_STONE1: bobname = "stones1"; break;
 						case BOB_STONE2: bobname = "stones2"; break;
@@ -722,7 +720,6 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					game->create_immovable(Coords(x, y), idx, 0);
 				}
 			}
-		}
 	}
 	catch(...)
 	{

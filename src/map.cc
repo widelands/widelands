@@ -221,10 +221,9 @@ void Map::recalc_whole_map(void)
    // Post process the map in the necessary two passes to calculate
    // brightness and building caps
    FCoords f;
-   uint y;
 
-   for(y=0; y<m_height; y++) {
-      for(uint x=0; x<m_width; x++) {
+	for (Y_Coordinate y = 0; y < m_height; ++y)
+		for (X_Coordinate x = 0; x < m_width; ++x) {
          int area;
 
          f = get_fcoords(Coords(x, y));
@@ -233,21 +232,17 @@ void Map::recalc_whole_map(void)
          recalc_border(f);
          recalc_fieldcaps_pass1(f);
       }
-   }
 
-   for(y=0; y<m_height; y++) {
-      for(uint x=0; x<m_width; x++) {
+	for (Y_Coordinate y = 0; y < m_height; ++y)
+		for (X_Coordinate x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
          recalc_fieldcaps_pass2(f);
       }
-   }
 
    // Now only recaluclate the overlays
-   for(y=0; y<m_height; y++) {
-      for(uint x=0; x<m_width; x++) {
+	for (Y_Coordinate y = 0; y < m_height; ++y)
+		for (X_Coordinate x = 0; x < m_width; ++x)
 	      get_overlay_manager()->recalc_field_overlays(get_fcoords(Coords(x, y)));
-      }
-   }
 }
 
 /*
@@ -258,9 +253,8 @@ void Map::recalc_whole_map(void)
  * are not shown.
  */
 void Map::recalc_default_resources(void) {
-   uint x,y;
-   for(y=0; y<m_height; y++) {
-      for(x=0; x<m_width; x++) {
+	for (Y_Coordinate y = 0; y < m_height; ++y)
+		for (X_Coordinate x = 0; x < m_width; ++x) {
          FCoords f,f1;
          f=get_fcoords(Coords(x,y));
          // only on unset fields
@@ -359,7 +353,6 @@ void Map::recalc_default_resources(void) {
          }
 
       }
-   }
 }
 
 /*
@@ -1405,7 +1398,7 @@ int Map::calc_distance(const Coords a, const Coords b) const
 
 	dist = abs(dy);
 
-	if (dist >= m_width) // no need to worry about x movement at all
+	if (static_cast<const X_Coordinate>(dist) >= m_width) // no need to worry about x movement at all
 		return dist;
 
 	// [lx..rx] is the x-range we can cover simply by walking vertically

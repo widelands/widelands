@@ -88,8 +88,13 @@ void Trigger_Building::Write(Section & s) const {
  */
 void Trigger_Building::check_set_conditions(Game* game) {
 	const Map & map = game->map();
-	if (m_pt.x >= map.get_width() or m_pt.y >= map.get_height()) return;
-   if(m_player<=0 || m_player>MAX_PLAYERS) return;
+	if
+		(m_pt.x < 0 or m_pt.x >= map.get_width ()
+		 or
+		 m_pt.y < 0 or m_pt.y >= map.get_height()
+		 or
+		 m_player <= 0 or m_player > MAX_PLAYERS)
+		return;
 
    MapRegion mrc(game->get_map(), m_pt, m_area);
 
