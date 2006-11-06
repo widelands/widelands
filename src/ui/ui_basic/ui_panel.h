@@ -25,7 +25,7 @@
 #include "types.h"
 #include "ui_object.h"
 
-#include <SDL_stdinc.h>
+#include <SDL_types.h>
 
 class RenderTarget;
 
