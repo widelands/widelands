@@ -38,6 +38,7 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "watchwindow.h"
+#include "attack_controller.h"
 
 class Building_Descr;
 
@@ -203,6 +204,7 @@ public:
    void act_attack_less();    /// Decrease the number of soldiers to be launched
    void act_attack_strong();  /// Prepare to launch strongest soldiers
    void act_attack_weak();    /// Prepare to launch weakest soldiers
+   uint get_max_attackers();  /// Total number of attackers available for a specific enemy flag
 
 private:
 	uint add_tab
@@ -410,7 +412,7 @@ void FieldActionWindow::add_buttons_auto()
       // There goes actions that can be done to non-owner fields ;)
    else
    {
-      //add_buttons_attack (); FIXME disabled until attack works
+      add_buttons_attack (); //FIXME disabled until attack works
 /*      BaseImmovable *imm = m_map->get_immovable(m_field);
       // The box with road-building buttons
       buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
@@ -480,7 +482,7 @@ void FieldActionWindow::add_buttons_attack ()
             m_attackers = 0;
             m_attackers_type = STRONGEST;
             add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less);
-
+            
             m_text_attackers = new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
             attackbox->add(m_text_attackers, UI::Box::AlignTop);
 
@@ -946,26 +948,28 @@ void FieldActionWindow::act_attack ()
    okdialog();
 }
 
-void FieldActionWindow::act_attack_more()
-{
-   // TODO: Recalculate the number of available soldiers
+void FieldActionWindow::act_attack_more() {
    char buf[20];
-   uint available = 99;
-
+   uint available = get_max_attackers();
+   
    if (m_attackers < available)
       m_attackers ++;
    else
       m_attackers = available;
 
-   sprintf(buf, "%d/%d", m_attackers, available);
+   sprintf(buf, "%d/%d", m_attackers, available );
    m_text_attackers->set_text (buf);
 }
 
-void FieldActionWindow::act_attack_less()
-{
-   // TODO: Recalculate the number of available soldiers
+uint FieldActionWindow::get_max_attackers() {
+   BaseImmovable *imm = m_map->get_immovable(m_field);
+   Flag *flag = (Flag*)((Building*)imm)->get_base_flag();
+   return getMaxAttackSoldiers(dynamic_cast<Game*>(m_iabase->get_egbase()),flag,m_plr->get_player_number());
+}
+
+void FieldActionWindow::act_attack_less() {
    char buf[20];
-   uint available = 99;
+   uint available = get_max_attackers();
 
    if (m_attackers > 0)
       m_attackers --;

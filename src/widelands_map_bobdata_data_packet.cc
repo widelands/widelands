@@ -156,9 +156,8 @@ throw
             else if(taskname=="geologist") task=&Worker::taskGeologist;
             else if(taskname=="road") task=&Carrier::taskRoad;
             else if(taskname=="transport") task=&Carrier::taskTransport;
-            else if(taskname=="launchattack") task=&Soldier::taskLaunchAttack;
-            else if(taskname=="defendbuilding") task=&Soldier::taskDefendBuilding;
-            else if(taskname=="waitforassault") task=&Soldier::taskWaitForAssault;
+            else if(taskname=="moveToBattle") task=&Soldier::taskMoveToBattle;
+            else if(taskname=="moveHome") task=&Soldier::taskMoveHome;
             else if(taskname=="") continue; // Skip task
             else
                throw wexception("Unknown task %s in file!\n", taskname.c_str());

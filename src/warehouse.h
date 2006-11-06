@@ -101,7 +101,6 @@ public:
 
    /// Military stuff
    virtual bool has_soldiers();
-   virtual void defend (Game*, Soldier*);
    virtual void conquered_by (Player*);
 protected:
 	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);

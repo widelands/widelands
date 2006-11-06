@@ -1154,52 +1154,6 @@ bool Warehouse::has_soldiers()
 	return false;
 }
 
-void Warehouse::defend (Game* g, Soldier* s)
-{
-   assert(s);
-   molog ("[Warehouse] We are under attack of %d!\n", s->get_serial());
-
-   Worker_Descr* workerdescr;
-   Soldier* soldier;
-
-   workerdescr = get_owner()->get_tribe()->get_worker_descr (
-                     get_owner()->get_tribe()->get_safe_worker_index ("soldier"));
-
-   // Look if we got one in stock of soldiers
-   std::string name=workerdescr->get_name();
-   std::vector<Object_Ptr>::iterator i;
-   for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
-   {
-      if(static_cast<Worker*>(i->get(g))->get_name()==name)
-      {
-         soldier = static_cast<Soldier*>(i->get(g));
-         break;
-      }
-   }
-
-   if (i != m_incorporated_workers.end())
-   {
-      // TODO: Here may be extra checks
-      for(i = m_incorporated_workers.begin(); i != m_incorporated_workers.end(); i++)
-      {
-         if(static_cast<Worker*>(i->get(g))->get_name() == name)
-         {
-            soldier = static_cast<Soldier*>(i->get(g));
-            if (soldier->is_marked ())
-               continue;
-
-            soldier->mark(true);
-            soldier->reset_tasks (g);
-            soldier->set_location (this);
-            soldier->start_task_defendbuilding (g, this, s);
-            break;
-         }
-      }
-      if (i == m_incorporated_workers.end())
-         s->send_signal(g, "fail");
-   }
-}
-
 // A warhouse couldn't be conquered, this building is destroyed ...
 void Warehouse::conquered_by (Player* pl)
 {

@@ -27,6 +27,8 @@
 #define STRONGEST 1
 
 class Editor_Game_Base;
+class AttackController;
+class RGBColor;
 
 #define HP_FRAMECOLOR RGBColor(255,255,255)
 
@@ -64,6 +66,8 @@ public:
 	{assert(level <= m_max_defense_level); return m_defense_pics[level];}
 	uint get_evade_level_pic  (const uint level) const
 	{assert(level <= m_max_evade_level);   return m_evade_pics  [level];}
+   
+   
 
 	uint get_rand_anim(const char * const name) const;
 protected:
@@ -121,7 +125,7 @@ public:
 	uint get_hp_level     () const {return m_hp_level;}
 	uint get_attack_level () const {return m_attack_level;}
 	uint get_defense_level() const {return m_defense_level;}
-	uint get_evade_level  () const {return m_evade_level;}
+	uint get_evade_level  () const {return m_evade_level;} 
 
 public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
@@ -172,39 +176,23 @@ public:
 public: // Worker-specific redefinitions
 	virtual void start_task_gowarehouse();
 
-      /// Task that move the soldier to a combat target flag position
-   void start_task_launchattack(Game*, Flag*);
-
-      /// Starts fighting against soldier
-   void start_task_defendbuilding(Game*, Building*, Bob*);
-
-      /// Starts loops fighting till bulding is empty
-   bool start_task_waitforassault(Game*, Building*);
-
-      /// Enter on selected building, changing his own !!
-   void start_task_conquerbuilding (Game*, Building*);
-
+   void startTaskMoveToBattle(Game*, Flag*, Coords);
+   void startTaskMoveHome(Game*);
+   
    void log_general_info(Editor_Game_Base* egbase);
+   
+   inline void set_attack_ctrl(AttackController* ctrl) { m_attack_ctrl = ctrl; };
+   
 private:
-   void  launchattack_update (Game*, State*);
-   void  launchattack_signal (Game*, State*);
-
-   void  waitforassault_update (Game*, State*);
-   void  waitforassault_signal (Game*, State*);
-
-   void defendbuilding_update (Game*, State*);
-   void defendbuilding_signal (Game*, State*);
-/*
-   void  conquerbuilding_update (Game*, State*);
-   void  conquerbuilding_signal (Game*, State*);*/
-
+   void moveToBattleUpdate (Game*, State*);
+   void moveToBattleSignal (Game*, State*);
+   
+   void moveHomeUpdate (Game*, State*);
+   void moveHomeSignal (Game*, State*);
 protected:
-   static Task taskLaunchAttack;    // Handle all the attack
-   static Task taskWaitForAssault;  // Wait while the building isn't empty
-//    static Task taskConquerBuilding;
-
-      // Defending stuff tasks
-   static Task taskDefendBuilding;  // Defend the building under attack!!
+   static Task taskMoveToBattle;
+   static Task taskMoveHome;
+   
 private:
    // Private data
    uint m_hp_current;
@@ -220,6 +208,8 @@ private:
    uint m_evade_level;
 
 	bool	m_marked;
+
+   AttackController* m_attack_ctrl;
 };
 
 

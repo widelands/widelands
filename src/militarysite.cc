@@ -89,8 +89,7 @@ MilitarySite_Descr::create_object
 Create a new building of this type
 ===============
 */
-Building* MilitarySite_Descr::create_object()
-{
+Building* MilitarySite_Descr::create_object() {
 	return new MilitarySite(this);
 }
 
@@ -113,6 +112,7 @@ MilitarySite::MilitarySite(MilitarySite_Descr* descr)
 {
 	m_didconquer = false;
 	m_capacity = descr->get_max_number_of_soldiers();
+	m_in_battle = false;
 }
 
 
@@ -381,7 +381,8 @@ void MilitarySite::act(Game* g, uint data)
             total_heal -=	(total_heal/3);
       }
    }
-   call_soldiers(g);
+   if (!m_in_battle)
+      call_soldiers(g);
 
       // Schedule the next wakeup at 1 second
    schedule_act (g, 1000);
@@ -525,101 +526,26 @@ void MilitarySite::change_soldier_capacity(int how)
    }
 }
 
-/// Type : STRONGEST - WEAKEST
-int MilitarySite::launch_attack(PlayerImmovable* p_imm, int type)
-{
-   uint launched = 0;
-   int i = 0;
-   Soldier* s = 0;
-
-   assert (p_imm->get_type() == FLAG);
-   Flag* flag = (Flag*) p_imm;
-   Game* g = (Game*) get_owner()->get_game();
-
-   if (!m_soldiers.size())
-      return 0;
-
-   switch (type)
-   {
-      case STRONGEST:
-         for (uint j = 0; j < m_soldiers.size(); j++)
-            if (! m_soldiers[j]->is_marked())
-               if (m_soldiers[i]->get_level (atrTotal) < m_soldiers[j]->get_level (atrTotal))
-                  i = j;
-         break;
-      case WEAKEST:
-         for (uint j = 0; j < m_soldiers.size(); j++)
-            if (! m_soldiers[j]->is_marked())
-               if (m_soldiers[i]->get_level (atrTotal) > m_soldiers[j]->get_level (atrTotal))
-                  i = j;
-         break;
-      default:
-         throw wexception ("Unkown type of attack (%d)", type);
-   }
-
-   s = m_soldiers[i];
-
-   if (s)
-   {
-      if (s->is_marked())
-         return 0;
-
-molog("Launching soldier %d\n", s->get_serial());
-      s->mark(true);
-      s->reset_tasks(g);
-      s->set_location(this);
-      s->start_task_launchattack(g, flag);
-      m_soldiers[i] = m_soldiers[m_soldiers.size() - 1];
-      m_soldiers.pop_back();
-      launched++;
-   }
-   return launched;
+void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldiers) {
+   g->conquer_area(get_owner()->get_player_number(),get_position(),get_descr());
+   m_didconquer = true;
+   m_soldiers.insert(m_soldiers.begin(),soldiers->begin(),soldiers->end());
+   /*for(uint i=0; i<soldiers->size(); i++)
+      m_soldiers.push_back((*soldies)[i]);*/
 }
 
-//*** TESTING STUFF ***////
-void MilitarySite::defend (Game* g, Soldier* s)
-{
-   assert(s);
-   uint i = 0, J = 9999;
-   molog ("[MilitarySite] We are under attack of %d!\n", s->get_serial());
-   assert(m_soldiers.size() > 0);
+MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
+   //NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
+   cleanup(g);
+   get_base_flag()->schedule_destroy(g);
+   MilitarySite* newMs = (MilitarySite*)((MilitarySite_Descr*)m_descr)->create(g, winner, m_position, false);
+   return newMs;
 
-// TODO: Here may be extra checks
-   for (i = 0; i < m_soldiers.size(); ++i)
-   {
-      Soldier* so = m_soldiers[i];
-
-      if (!so)
-         continue;
-
-      if (so->is_marked())
-         continue;
-
-      so->mark(true);
-      so->reset_tasks(g);
-      so->set_location(this);
-      so->start_task_defendbuilding (g, this, s);
-      J=0;
-      break;
-   }
-   if (J == 9999)
-      s->send_signal(g, "fail");
-   else
-      call_soldiers(g);
-}
-
-void MilitarySite::conquered_by (Player* who)
-{
-//schedule_destroy((Game*)get_owner()->get_game());
-  // Ensures that all is correct
-   assert (who);
-   assert (get_owner());
-
-      // Getting game
-   Game* g = (Game*)get_owner()->get_game();
-
-   // Release worker
-   molog("[Conquered MilitarySite]: Releasing Workers\n");
+   //IMPLEMENTATION FOR OVERTAKING EXISITING BUILDING
+   //FIXME: Coorect implementation, someone with deeper knowledge needs
+   //to look into this.
+  /* log("starting to change owner...\n");
+    // Release worker
    if (m_soldier_requests.size())
    {
       for (uint i = 0; i < m_soldier_requests.size(); i++)
@@ -629,24 +555,52 @@ void MilitarySite::conquered_by (Player* who)
       }
       m_soldier_requests.resize(0);
    }
+   log("removed all soldier requests.\n");
+   uint i;
+   for(i=0; i < m_soldiers.size(); i++)
+   {
+      Soldier* s = m_soldiers[i];
 
+      m_soldiers[i] = 0;
+      if(g->get_objects()->object_still_available(s))
+         s->set_location(0);
+   }
+   log("removed all remainig soldiers\n");
+   
+   if (m_didconquer)
+	  g->unconquer_area(get_owner()->get_player_number(), get_position());
+   
    Flag* f = get_base_flag();
-   assert (f);
-
-      //  Destroy roads
-   molog ("[Donquered - MilitarySite] : Destroying roads\n");
+   
+   //  Destroy roads
+   log ("[Donquered - MilitarySite] : Destroying roads\n");
    if (f->get_road(WALK_NE)) f->detach_road(WALK_NE);
    if (f->get_road(WALK_E))  f->detach_road(WALK_E);
    if (f->get_road(WALK_SE)) f->detach_road(WALK_SE);
    if (f->get_road(WALK_W))  f->detach_road(WALK_W);
    if (f->get_road(WALK_SW)) f->detach_road(WALK_SW);
+   log("destroyed roads...\n");
+   
+   get_economy()->remove_flag(f);
+   log("removed flag from economy\n");
+   
+   set_owner(who);
+   log("owner of building set\n");
+   
+   f->set_owner(who);
+   log("owner of flag set\n");
+  
+   who->get_economy_by_number(who->get_player_number())->add_flag(f);
+   log("flag added economy\n");
+   
+   g->conquer_area(get_owner()->get_player_number(),get_position(), get_descr());
+   
+   // unconquer land
 
-     // Destroying (at future will be )
-   //f->schedule_destroy(g);
-   schedule_destroy(g);
+   
+   //g->unconquer_area(get_owner()->get_player_number(), get_position());
 
-
-/*
+/* ORIGINAL CODE FOLLOWS
    // unconquer land
    if (m_didconquer)
       g->unconquer_area(get_owner()->get_player_number(), get_position());
@@ -700,4 +654,23 @@ void MilitarySite::clear_requeriments ()
 {
    Requeriments R;
    m_soldier_requeriments = R;
+}
+
+uint MilitarySite::nr_not_marked_soldiers() {
+   if (m_soldiers.size() <= 0) {
+      return 0;
+   }
+   uint nr_soldiers = 0;
+   for (uint i = 0; (uint) i < m_soldiers.size(); i++) {
+      if (!m_soldiers[i]->is_marked())
+         nr_soldiers++;
+   }
+   return nr_soldiers;
+}
+
+uint MilitarySite::nr_attack_soldiers() {
+   uint not_marked = nr_not_marked_soldiers();
+   if(not_marked > 1)
+      return not_marked-1;
+   return 0;
 }

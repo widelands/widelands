@@ -34,6 +34,7 @@
 #include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "attack_controller.h"
 
 
 /*
@@ -593,13 +594,18 @@ void Soldier::draw
 	// Draw the actual bar
 	const float percent = static_cast<float>(m_hp_current) / m_hp_max;
 	const int energy_width = static_cast<int>(percent * (frame_width - 2));
-	RGBColor color;
-   if (percent <= 0.15)
+	//FIXME:
+   //Draw bar in playercolor, should be removed when soldier is correctly painted
+   RGBColor color(get_owner()->get_playercolor()->r(),
+                  get_owner()->get_playercolor()->g(),
+                  get_owner()->get_playercolor()->b()
+                 );
+   /*if (percent <= 0.15)
 		color = RGBColor(255, 0, 0);
 	else if (percent <= 0.5)
 		color = RGBColor(255, 255, 0);
 	else
-		color = RGBColor(17,192,17);
+		color = RGBColor(17,192,17);*/
 	dst.fill_rect
 		(frame_beginning_x + 1, frame_beginning_y + 1,
 		 energy_width, frame_height - 2,
@@ -656,33 +662,18 @@ void Soldier::start_task_gowarehouse() {
 	m_supply = (IdleWorkerSupply*) new IdleSoldierSupply(this);
 }
 
-/**
- * LaunchAttack task
- *
- *
- */
-
-Bob::Task Soldier::taskLaunchAttack = {
-   "launchattack",
-
-   (Bob::Ptr)&Soldier::launchattack_update,
-   (Bob::Ptr)&Soldier::launchattack_signal,
+Bob::Task Soldier::taskMoveToBattle = {
+   "moveToBattle",
+   (Bob::Ptr)&Soldier::moveToBattleUpdate,
+   (Bob::Ptr)&Soldier::moveToBattleSignal,
    0,
 };
 
-/**
- * soldier::start_task_launchattack
- */
-void Soldier::start_task_launchattack(Game* g, Flag* f)
-{
+void Soldier::startTaskMoveToBattle(Game* g, Flag* f, Coords coords) {
    assert (f);
 
-   if (f->get_owner() == get_owner())
-      return;
-
-
-log ("Soldier::start_task_launchattack\n");
-   push_task(taskLaunchAttack);
+   log ("Soldier::startTaskMoveToBattle\n");
+   push_task(taskMoveToBattle);
 
    State* s = get_state();
 
@@ -690,46 +681,15 @@ log ("Soldier::start_task_launchattack\n");
    s->ivar1 = 1;
    s->ivar2 = 0;     // Not requested to attack (used by signal 'combat')
    s->objvar1 = get_location(g);   // objvar1 is the owner flag (where is attached the FRIEND military site)
-   s->coords = f->get_position(); // Destination
+   s->coords = coords; // Destination
 }
 
-
-/**
- * soldier::launchattack_update
- */
-void Soldier::launchattack_update (Game* g, State* state)
-{
-   std::string signal = get_signal();
-
-molog("[launchattack]: Task Updated %d\n", __LINE__);
-
-/*   if (signal == "combat" || state->ivar2 == 1)
-   {
-      molog("[launchattack] Combat requested for '%s'\n", signal.c_str());
-      set_signal("");
-      state->ivar2 = 1;
-      molog("[launchattack] Combat not found, continue with launchattack\n");
-      state->ivar2 = 0;
-   }
-   if (signal == "fail")
-   {
-      molog("[launchattack]: Caught signal '%s'\n", signal.c_str());
-      set_signal("");
-   }
-   else if (signal.size())
-   {
-      molog("[launchattack]: Interrupted by signal '%s'\n", signal.c_str());
-      pop_task();
-      return;
-   }*/
-
-   // See if it's at building and drop of it
-   if (state->ivar1 == 1)
-   {
+void Soldier::moveToBattleUpdate(Game* g, State* state) {
+   // See if soldier is at building and drop of it
+   if (state->ivar1 == 1) {
       BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
-      if (position && position->get_type() == BUILDING)
-      {
+      if (position && position->get_type() == BUILDING) {
          // We are in our building, try to exit
          if (start_task_waitforcapacity(g, (Flag*)get_location(g)->get_base_flag()))
             return;
@@ -738,365 +698,82 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
          return;
       }
    }
-
-   // Ensures that the owner of this is the base flag of the militarysite that launchs the attack
-   Map* map = g->get_map();
-   PlayerImmovable* location = get_location(g);
-   Flag* owner;
-
-   assert(location);
-   assert(location->get_type() == FLAG);
-
-   owner = (Flag*)location;
-
-   if (state->ivar1 > 0)
-   {
-      Flag* f_target;
-      Coords c_target;
-
-      location = (PlayerImmovable*) map->get_immovable(state->coords);
-
-      assert (location);
-      assert (location->get_type() == FLAG);
-
-      f_target = (Flag*) location;
-      c_target = f_target->get_position();
-
-         // Time to return home (in future, time to enter enemu house)
-      if (get_position() == c_target)
-      {
-         Building* bs = f_target->get_building();
-            // If there are enemy soldiers, time to kill they !!!
-         if (start_task_waitforassault(g, bs))
-            return;
-
-            // Now, this soldier will enter to the house!
-         if (bs->get_owner() == get_owner())
-         {
-            state->ivar1 = 0;
-            schedule_act (g, 10);
-            return;
-         }
-         molog ("Hey\n");
-         bs->conquered_by (get_owner());
-         molog ("Hey\n");
-         state->ivar1 = 0;       // This makes return to home flag
-         schedule_act(g, 50);    // Waits a little before trying to enter to the house
+   else {
+      if (get_position() == state->coords) {
+         if (state->ivar1 != 3)
+            m_attack_ctrl->moveToReached(this);
+         state->ivar1 = 3;
+         start_task_idle(g,get_descr()->get_animation("idle"),1000);
          return;
       }
-
-      // Move towards enemy flag
-		if
-			(not start_task_movepath
-			 (g,
-			  c_target,
-			  0,
-			  get_descr()->get_right_walk_anims(does_carry_ware())))
-      {
-         molog("[launchattack]: Couldn't find path to enemy flag!\n");
+      if (!start_task_movepath(g,state->coords,0,get_descr()->get_right_walk_anims(does_carry_ware()))) {
+         molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
          set_signal("fail");
-         mark(false);   // Now can be healed
+         mark(false);
          pop_task();
          return;
       }
-      else
-         return;
-   }
-
-   // Return to friend owner flag
-   if (get_position() == owner->get_position())
-   {
-      molog("[launchattack]: We are on home!\n");
-      mark(false);   // Now can be healed
-      pop_task();
-      return;
-   }
-
-   molog ("[launchattack]: Return home\n");
-	if
-		(not start_task_movepath
-		 (g,
-		  owner->get_position(),
-		  0,
-		  get_descr()->get_right_walk_anims(does_carry_ware())))
-   {
-      molog("[launchattack]: Couldn't find path home\n");
-      set_signal("fail");
-      mark(false);   // Now can be healed
-      pop_task();
-      return;
    }
 }
 
-void Soldier::launchattack_signal (Game* g, State* state)
-{
-   std::string signal = get_signal ();
-
-   molog ("[LaunchAttack] Interrupted by signal '%s'\n", signal.c_str());
-   set_signal("");
-   mark(false);   // Now can be healed
-   state->ivar1 = 0;
-   launchattack_update(g, state);
-   //pop_task();
-}
-
-/**
- * WaitForAssault task
- *
- *
- */
-
-Bob::Task Soldier::taskWaitForAssault = {
-   "waitforassault",
-
-   (Bob::Ptr)&Soldier::waitforassault_update,
-   (Bob::Ptr)&Soldier::waitforassault_signal,
-   0,
-};
-
-/**
- * soldier::start_task_waitforassault (building)
- *
- * Returns true if is needed to wait.
- */
-bool Soldier::start_task_waitforassault (Game* g, Building* b)
-{
-   assert (g);
-   if (!b)
-      return false;
-   assert (b);
-
-   if (!b->has_soldiers())
-      return false;
-
-   push_task(taskWaitForAssault);
-
-   State* s = get_state();
-
-   s->objvar1 = b;
-  return true;
-}
-
-void Soldier::waitforassault_update (Game* g, State* state)
-{
-   Map_Object* imm = state->objvar1.get(g);
-
-   assert (imm);
-   assert (imm->get_type() == BUILDING);
-
-   Building* b = (Building*) imm;
-
-   if (!b->has_soldiers())
-   {
-      MilitarySite* ms = (MilitarySite*) b;
-      molog("[waitforassault]: House %i (%p) empty of soldiers.\n", ms->get_serial(), ms);
-      if (ms->get_owner() == get_owner())
-      {
-         pop_task();
-         return;
-      }
-      ms->conquered_by (get_owner());
-      molog("[waitforassault]: House %i (%p) empty of soldiers.\n", ms->get_serial(), ms);
-      pop_task();
-      return;
-   }
-   else
-   {
-      switch (b->get_building_type())
-      {
-         case Building::MILITARYSITE:
-            {
-               MilitarySite* ms = (MilitarySite*) b;
-                  // This should launch a soldier to defend the house !
-               skip_act();
-               ms->defend(g, this);
-               break;
-            }
-         case Building::WAREHOUSE:
-            {
-               Warehouse* wh = (Warehouse*) b;
-                  // This should launch a soldier to defend the house !
-               skip_act();
-               wh->defend(g, this);
-               break;
-            }
-         default:
-            molog("[waitforassault] Nothing to do with this building!!\n");
-				pop_task();
-            send_signal(g, "fail");
-            break;;
-      }
-      return;
-   }
-
-   schedule_act(g, 50);
-   return;
-}
-
-void Soldier::waitforassault_signal (Game* g, State* state)
-{
+void Soldier::moveToBattleSignal(Game* g, State* s) {
    std::string signal = get_signal();
-
-   if (signal == "end_combat")
-   {
-      molog("[WaitForAssault] Caught signal '%s' (Waking up!)\n", signal.c_str());
-      set_signal("");
-      waitforassault_update(g, state);
+   set_signal("");
+   
+   log("moveToBattleSignal got signal: %s",signal.c_str());
+   
+   if (signal == "won_battle") {
+      m_attack_ctrl->soldierWon(this);
       return;
    }
-   else if (signal == "die")
-   {
-      molog ("[WaitForAssault] Caught signal '%s' (Death!)\n", signal.c_str());
-      schedule_destroy(g);
-      pop_task();
+   else if (signal == "die") {
+      m_attack_ctrl->soldierDied(this);
       return;
    }
-   else  if (signal.size() > 0)
-   {
-      molog ("[WaitForAssault] : Interrupted by signal '%s'\n", signal.c_str());
+   else if (signal == "return_home") {
       pop_task();
+      startTaskMoveHome(g);
+      return;
    }
 }
 
-/**
- * DefendBuilding task
- *
- *
- */
+Bob::Task Soldier::taskMoveHome = {
+   "moveHome",
 
-Bob::Task Soldier::taskDefendBuilding = {
-   "defendbuilding",
-
-   (Bob::Ptr)&Soldier::defendbuilding_update,
-   (Bob::Ptr)&Soldier::defendbuilding_signal,
+   (Bob::Ptr)&Soldier::moveHomeUpdate,
+   (Bob::Ptr)&Soldier::moveHomeSignal,
    0,
 };
 
-void Soldier::start_task_defendbuilding (Game* g, Building* b, Bob* enemy)
-{
-   molog ("Soldier: start_task_defendbuilding\n");
-   assert (b);
-   assert (enemy);
-   assert (((Building*) get_location(g)) == b);
+void Soldier::startTaskMoveHome(Game* g) {
+   log ("Soldier::startTaskMoveHome\n");
+   push_task(taskMoveHome);
 
-   push_task(taskDefendBuilding);
-   mark(true);             // This is for prevent to heal soldiers out of the building
    State* s = get_state();
    s->ivar1 = 1;
-   s->ivar2 = b->get_serial();
-   s->objvar1 =  enemy;
-
+   s->ivar2 = 0;
+   s->objvar1 = get_location(g);
 }
 
-void Soldier::defendbuilding_update (Game* g, State* state)
-{
-   if (get_current_hitpoints() < 1)
-   {
-      molog ("[DefendBuilding] : Ohh! I'm deading!!\n");
-      set_location(0);
-      schedule_destroy (g);
-      pop_task();
-      schedule_act(g, 100);
+void Soldier::moveHomeUpdate(Game* g, State* state) {
+   // Move home
+   if (state->ivar1 == 1) {
+      state->ivar1 = 2;
+      start_task_return(g,false);
       return;
    }
-
-   if (state->ivar1 == 4)
-   {
-      pop_task();   // We finally finish this task
-      start_task_idle(g, 0, -1); // Bind the soldier to the MS, and hide him of the map
-      mark(false);   // Now the soldier can be healed
-      return;
+   else {
+      start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+      mark (false);              // can be healed now
    }
-      // 1-. Exit of this MS
-   if (state->ivar1 == 1)
-   {
-      BaseImmovable* position = g->get_map()->get_immovable(get_position());
-
-      if (position && position->get_type() == BUILDING)
-      {
-         // We are in our building, try to exit
-         if (start_task_waitforcapacity(g, (Flag*)get_location(g)->get_base_flag()))
-            return;
-         state->ivar1 = 2;
-         start_task_leavebuilding (g, 0);
-         return;
-      }
-   }
-
-   // 2-. Create a BattleField with this soldier and attach emeny soldier
-   if (state->ivar1 == 2)
-   {
-      PlayerImmovable* imm = (PlayerImmovable*)state->objvar1.get(g);
-      Soldier* s;
-
-      assert (imm);
-      s = (Soldier*) imm;
-
-         // Starts real combat!!
-      Battle* battle = g->create_battle();
-      battle->soldiers (this, s);
-      skip_act();
-      return;
-   }
-
-     // Here at least the soldier has ended of fighting (with this, the soldier will be healed)
-   mark(false);
-
-   if (state->ivar1 == 3)
-   {
-      // Now return home building !
-
-      // Get the building
-      Building* build = (Building*)g->get_objects()->get_object(state->ivar2);
-      if (build)
-      {
-         molog ("[DefendBuilding] Returning home (%d)\n", state->ivar2);
-         state->ivar1 = 4; // Next time  Idle !
-         set_location(build);
-         start_task_return(g, false);
-         return;
-      }
-      else
-      {
-         molog ("[DefendBuilding] Home (%d) doesn't exists!\n", state->ivar2);
-         pop_task();
-         return;
-      }
-
-   }
-
-   molog("[DefendBuilding] End of function reached\n");
-   pop_task();
 }
 
-void Soldier::defendbuilding_signal (Game* g, State* state)
-{
+void Soldier::moveHomeSignal(Game* g, State* s) {
    std::string signal = get_signal();
-   if (signal == "end_combat")
-   {
-      molog("[DefendBuilding] : Caught signal '%s'\n", signal.c_str());
-      set_signal("");
-      state->ivar1 = 3;
-      defendbuilding_update(g, state);
-   }
-   else if (signal == "die")
-   {
-      molog("[DefendBuilding] : Caught signal '%s'\n", signal.c_str());
-
-        // Better to add here a start_task_die (usefull too for use at fugitive task)
-      state->ivar1 = 5;
-      schedule_destroy(g);
-      schedule_act(g, 5000);
-      return;
-   }
-   else
-   {
-      molog("[DefendBuilding] Interrupted by signal '%s'\n");
-      pop_task();
-      mark(false);
-   }
+   set_signal("");
+   
+   log("moveToSignal got signal, don't know what to do with it.: %s",signal.c_str());
 }
-
 
 void Soldier::log_general_info(Editor_Game_Base* egbase)
 {

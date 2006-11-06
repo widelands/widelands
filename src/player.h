@@ -30,6 +30,7 @@ class PlayerImmovable;
 class Soldier;
 class Flag;
 class Tribe_Descr;
+class AttackController;
 
 /** class Player
  *
@@ -64,6 +65,7 @@ class Player {
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
 		 const uchar * const playercolor);
+      ~Player(); 
 
 		inline Editor_Game_Base *get_game() const { return m_egbase; }
 		inline int get_type() const { return m_type; }
@@ -123,6 +125,7 @@ class Player {
       void change_training_options(PlayerImmovable* imm, int atr, int val);
          // Launch an attack
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
+      void remove_attack(AttackController* attack);
 	private:
 		bool m_see_all;
 		Editor_Game_Base*				m_egbase;
@@ -135,6 +138,7 @@ class Player {
 		std::vector<bool> seen_fields;
       std::vector<bool> m_allowed_buildings;
       std::vector<Economy*> m_economies;
+      std::vector<AttackController*> m_attacks;
       std::string    m_name; // Player name
 };
 

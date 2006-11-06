@@ -69,8 +69,8 @@ public:
 	virtual void act(Game* g, uint data);
 
 	virtual void set_economy(Economy* e);
-
-    virtual std::vector<Soldier*>* get_soldiers(void) { return &m_soldiers; }
+   virtual std::vector<Soldier*>* get_soldiers(void) { return &m_soldiers; }
+   
 
 	int	get_capacity() { return m_capacity; }
 	// Overload of building functions
@@ -96,12 +96,14 @@ public:
    */
 
    /// Testing stuff
-   int launch_attack(PlayerImmovable*, int);
-   int can_launch_soldiers () { return m_soldiers.size() > 1; }
+   uint nr_not_marked_soldiers();
+   uint nr_attack_soldiers();
+   inline void set_in_battle(bool in_battle) { m_in_battle = in_battle;};
+   
 
    virtual bool has_soldiers() { return m_soldiers.size() > 0; }
-   virtual void defend (Game*, Soldier*);
-   virtual void conquered_by (Player*);
+   virtual MilitarySite* conquered_by (Game*,Player*);
+   virtual void init_after_conquering (Game* g, std::vector<Soldier*>* soldiers);
 
 protected:
 	virtual UI::Window* create_options_window(Interactive_Player* plr,
@@ -121,6 +123,7 @@ private:
 	std::vector<Soldier*> m_soldiers;
 	bool		m_didconquer;
 	uint		m_capacity;
+	bool     m_in_battle;
 };
 
 #endif

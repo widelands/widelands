@@ -96,6 +96,9 @@ void Battle::act (Game * g, uint) {
    Soldier* attacker;
    Soldier* defender;
 
+   attacker = m_second;
+   defender = m_first;
+
    m_last_try = !m_last_try;
    if (m_last_try)
    {
@@ -112,7 +115,8 @@ void Battle::act (Game * g, uint) {
    if (attacker->get_current_hitpoints() < 1)
    {
       attacker->send_signal(g, "die");
-      defender->send_signal(g, "end_combat");
+      defender->send_signal(g, "won_battle");
+      
       m_first = 0;
       m_second = 0;
       schedule_destroy (g);
@@ -121,7 +125,8 @@ void Battle::act (Game * g, uint) {
    if (defender->get_current_hitpoints() < 1)
    {
       defender->send_signal(g, "die");
-      attacker->send_signal(g, "end_combat");
+      attacker->send_signal(g, "won_battle");
+      
       m_first = 0;
       m_second = 0;
       schedule_destroy (g);
@@ -131,7 +136,8 @@ void Battle::act (Game * g, uint) {
    // Put attack animation
    //attacker->start_animation(g, "attack", 1000);
    uint hit = g->logic_rand() % 100;
-log (" hit=%d ", hit);
+   log (" hit=%d ", hit);
+   //FIXME: correct implementaion
    if (hit > defender->get_evade())
    {
       uint attack = attacker->get_min_attack() +

@@ -29,6 +29,7 @@
 #include "cmd_queue.h"
 #include "soldier.h"
 #include "sound_handler.h"
+#include "attack_controller.h"
 
 
 //
@@ -67,7 +68,11 @@ m_tribe  (tr)
    seen_fields.resize(1024*1024);
 }
 
-
+Player::~Player() {
+   while(m_attacks.size()) {
+      m_attacks.erase(m_attacks.begin());
+   }
+}
 /*
 ===============
 Player::init
@@ -483,6 +488,19 @@ void Player::change_soldier_capacity (PlayerImmovable* imm, int val) {
 	}
 }
 
+void Player::remove_attack(AttackController* attack) {
+   for(uint i=0;i<m_attacks.size();i++) {
+      if (m_attacks[i] == attack) {
+      	delete m_attacks[i];
+      	if (i < (m_attacks.size()-1)) {
+      	  m_attacks[i] = m_attacks[m_attacks.size() - 1];
+      	}
+			m_attacks.pop_back();
+			return;
+      }
+   }
+
+}
 
 /*
 ===============
@@ -514,53 +532,17 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
 
       case ENEMYFLAGACTION_ATTACK:
          {
-	         /*try {*/get_tribe()->get_worker_index("soldier");//}
-/*	         catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
-               log("Tribe defines no soldier\n");
-               return;
-            }*/
-            std::vector<ImmovableFound> list;
-            std::vector<MilitarySite*> ms_list;
-
-	         map->find_reachable_immovables
-		         (flag->get_position(),
-		          25,
-		          &list,
-		          CheckStepWalkOn(MOVECAPS_WALK, false));
-
-            if (!list.size())
-               return;
-
-            /* Find all friendly MS */
-            for
-               (std::vector<ImmovableFound>::const_iterator it =
-                list.begin();
-                it != list.end();
-                ++it)
-            {
-               MilitarySite * const ms =
-                  dynamic_cast<MilitarySite * const>(it->object);
-               if (ms and ms->get_owner() == this) {
-                     log
-                        ("Player::EnemyFlagAction() MilitarySite %p found!\n",
-                         &*it);
-                     ms_list.push_back (ms);
-                 }
+            for(uint i=0;i<m_attacks.size();i++) {
+               if (m_attacks[i]->getFlag() == flag) {
+                  m_attacks[i]->launchAttack((uint)num);
+                  return;
+               }
             }
-
-            int launched = 0;
-	         for
-		         (std::vector<MilitarySite *>::const_iterator it =
-		          ms_list.begin();
-		          it != ms_list.end();
-		          ++it)
-            {
-               if (launched >= num)
-                  break;
-
-	            if ((*it)->can_launch_soldiers())
-	               launched += (*it)->launch_attack(flag, type);
-            }
+            
+            AttackController* attackCtrl = new AttackController(game,flag,attacker,flag->get_owner()->get_player_number());
+            attackCtrl->launchAttack((uint)num);
+            m_attacks.push_back(attackCtrl);
+            
             break;
          }
 
