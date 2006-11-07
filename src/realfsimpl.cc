@@ -134,6 +134,7 @@ int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
+ * \todo Can this be rewritten to just using exceptions? Should it?
  */
 bool RealFSImpl::FileExists(std::string path)
 {

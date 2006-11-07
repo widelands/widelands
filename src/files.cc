@@ -190,16 +190,20 @@ const std::string FileSystem::getWorkingDirectory()
 
 /**
  * \return An existing directory where temporary files can be put
- * \todo win32 ?
- * \todo Make sure the directory exists
+ * \todo Is there a temp directory on win32? Where?
  */
 const std::string FileSystem::getTempDirectory()
 {
+	const char *tmpdir;
 #ifdef __WIN32__
-	return ".";
+	tmpdir=".";
 #else
-	return "/tmp";
+	tmpdir="/tmp";
 #endif
+	if(!FileExists(tmpdir))
+		throw FileNotFound_error("FileSystem::getTempDirectory", tmpdir);
+
+	return tmpdir;
 }
 
 /// \todo Write homedir detection for non-getenv-systems

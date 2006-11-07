@@ -30,6 +30,7 @@ typedef std::set<std::string> filenameset_t;
 
 /**
  * FileSystem is a base class representing certain filesystem operations.
+ * \todo const correctness
  */
 class FileSystem {
 public:

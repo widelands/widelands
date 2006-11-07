@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include <string>
 
+/// \todo const correctness
 class RealFSImpl : public FileSystem {
 public:
 	RealFSImpl(std::string Directory);
