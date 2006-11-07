@@ -40,6 +40,8 @@
   #include <windows.h>
   #include <io.h>
   #define stat _stat
+  #include <sys/stat.h>
+  #include <types.h>
 #else
   #include <glob.h>
   #include <sys/stat.h>

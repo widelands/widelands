@@ -21,6 +21,7 @@
 #define __S__WIDELANDS_ATTACK_CTRL_H
 
 #include <vector>
+#include <types.h>
 
 class Game;
 class Flag;
