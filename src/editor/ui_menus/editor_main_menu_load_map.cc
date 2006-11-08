@@ -289,8 +289,8 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
       // Now update all the visualisations
       // Player positions
       std::string text;
-      int i=0;
-      for(i=1; i<=m_parent->get_map()->get_nrplayers(); i++) {
+		Map & map = *m_map;
+		for (Uint8 i = 1; i <= map.get_nrplayers(); ++i) {
          text="pics/editor_player_";
          text+=static_cast<char>(((i)/10) + 0x30);
          text+=static_cast<char>(((i)%10) + 0x30);
@@ -311,21 +311,25 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
       /* Resources. we do not calculate default resources, therefore we do
        * not expect to meet them here. */
-      uint x,y;
-      for(y=0; y<m_map->get_height(); y++) {
-         for(x=0; x<m_map->get_width(); x++) {
-            Field *f=m_map->get_field(Coords(x,y));
-            int res=f->get_resources();
-            int amount=f->get_resources_amount();
-            std::string immname="";
-            if(amount)
-               immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount);
-            if(immname!="") {
-               int picid=g_gr->get_picture( PicMod_Game,  immname.c_str() );
-               m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
+		const World & world = map.world();
+		Overlay_Manager & overlay_manager = map.overlay_manager();
+		const X_Coordinate mapwidth  = map.get_width ();
+		const Y_Coordinate mapheight = map.get_height();
+		Map::Index i = 0;
+		for (Y_Coordinate y = 0; y < mapheight; ++y)
+			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
+				Field f = map[i];
+				const uchar res    = f.get_resources       ();
+				const uchar amount = f.get_resources_amount();
+				if (f.get_resources_amount()) {
+					const std::string & immname =
+						world.get_resource(res)->get_editor_pic(amount);
+					if (immname.size()) overlay_manager.register_overlay
+						(Coords(x, y),
+						 g_gr->get_picture(PicMod_Game, immname.c_str()),
+						 4);
             }
          }
-      }
 
       // Tell the interactive that the map is saved and all
       m_parent->set_need_save(false);
