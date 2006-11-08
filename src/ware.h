@@ -98,8 +98,6 @@ public:
 	WareList();
 	~WareList();
 
-	WareList &operator=(const WareList &wl);
-
 	void clear();
 
 	inline int get_nrwareids() const { return m_wares.size(); } // highest possible ware id

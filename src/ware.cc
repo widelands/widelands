@@ -171,18 +171,6 @@ WareList::~WareList()
 	}
 }
 
-/*
-===============
-WareList::operator=
-
-Assignment operator
-===============
-*/
-WareList &WareList::operator=(const WareList &wl)
-{
-	m_wares = wl.m_wares;
-	return *this;
-}
 
 /*
 ===============
