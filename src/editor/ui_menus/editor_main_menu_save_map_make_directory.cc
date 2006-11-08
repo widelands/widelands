@@ -79,7 +79,7 @@ bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
       return false; // we're not dragable
 }
 bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
-(const Uint8 btn, int, int)
+(const Uint8, int, int)
 {return false;}
 
 /*
