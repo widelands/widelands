@@ -154,7 +154,7 @@ class World
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
       inline uchar get_resource(const char* l) { return m_resources.get_index(l); }
-		inline Resource_Descr* get_resource(int res)
+	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
 		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
       inline int get_nr_resources(void) { return m_resources.get_nitems(); }
 
