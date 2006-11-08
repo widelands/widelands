@@ -519,9 +519,6 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int 
 
    assert (num >= 0);
 
-
-	Map * const map = game->get_map();
-
 log("++Player::EnemyFlagAction()\n");
    // Additional security check LOOK, if equal exit!!
    if (flag->get_owner() == this)
@@ -538,11 +535,11 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
                   return;
                }
             }
-            
+
             AttackController* attackCtrl = new AttackController(game,flag,attacker,flag->get_owner()->get_player_number());
             attackCtrl->launchAttack((uint)num);
             m_attacks.push_back(attackCtrl);
-            
+
             break;
          }
 
