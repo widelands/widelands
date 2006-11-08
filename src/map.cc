@@ -2605,7 +2605,6 @@ Assign from a path, calculating coordinates as needed.
 */
 CoordPath& CoordPath::operator=(const Path& path)
 {
-	assert(this != &path);
 	m_coords.clear();
 	m_path.clear();
 
