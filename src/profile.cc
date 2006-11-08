@@ -221,11 +221,13 @@ void Section::mark_used()
  */
 void Section::check_used()
 {
-	for(Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
-		if (!v->is_used())
-			m_profile->error("Section [%s], key '%s' not used (did you spell the name correctly?)",
-				              get_name(), v->get_name());
-	}
+	const Value_list::const_iterator values_end = m_values.end();
+	for
+		(Value_list::const_iterator it = m_values.begin(); it != values_end; ++it)
+		if (not it->is_used()) m_profile->error
+			("Section [%s], key '%s' not used (did you spell the name correctly?)",
+			 get_name(),
+			 it->get_name());
 }
 
 /** Section::get_val(const char *name)
