@@ -161,6 +161,8 @@ public:
    // For overlays
    inline Overlay_Manager* get_overlay_manager() { return m_overlay_manager; }
 	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
+	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
+	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
    // For loading
    Map_Loader* get_correct_loader(const char*);
@@ -255,7 +257,7 @@ public:
 	FCoords get_fcoords(const Coords) const;
 	void normalize_coords(Coords *) const;
 	FCoords get_fcoords(Field &) const;
-	void get_coords(Field & f, Coords & c) const {c = get_fcoords(f);}
+	void get_coords(Field & f, Coords & c) const;
 
 	int calc_distance(const Coords, const Coords) const;
 	int is_neighbour(const Coords, const Coords) const;
@@ -697,6 +699,7 @@ inline FCoords Map::get_fcoords(Field & f) const {
 	const int i = &f - m_fields;
 	return FCoords(i % m_width, i / m_width, &f);
 }
+inline void Map::get_coords(Field & f, Coords & c) const {c = get_fcoords(f);}
 
 
 /** get_ln, get_rn, get_tln, get_trn, get_bln, get_brn
