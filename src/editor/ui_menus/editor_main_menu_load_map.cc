@@ -319,11 +319,9 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 		for (Y_Coordinate y = 0; y < mapheight; ++y)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				Field f = map[i];
-				const uchar res    = f.get_resources       ();
-				const uchar amount = f.get_resources_amount();
-				if (f.get_resources_amount()) {
+				if (const uchar amount = f.get_resources_amount()) {
 					const std::string & immname =
-						world.get_resource(res)->get_editor_pic(amount);
+						world.get_resource(f.get_resources())->get_editor_pic(amount);
 					if (immname.size()) overlay_manager.register_overlay
 						(Coords(x, y),
 						 g_gr->get_picture(PicMod_Game, immname.c_str()),
