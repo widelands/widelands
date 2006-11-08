@@ -38,16 +38,6 @@ public:
 	                            const std::string message="problem during zipfile operation")
 	throw();
 	virtual ~ZipOperation_error() throw() {}
-
-	virtual const char *what() const throw();
-
-	std::string m_thrower;
-	std::string m_filename;
-	std::string m_zipfilename;
-	std::string m_message;
-
-protected:
-	std::string m_what_message;
 };
 
 #endif

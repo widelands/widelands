@@ -23,15 +23,8 @@ ZipOperation_error::ZipOperation_error(const std::string thrower,
                                        const std::string filename,
                                        const std::string zipfilename,
                                        const std::string message) throw()
-		: std::logic_error(""),
-		m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename),
-		m_message(message)
-{
-	m_what_message=m_thrower+": "+m_message+" (working on '"+m_filename+
-	               "' in zipfile '"+m_zipfilename+"')";
-}
-
-const char *ZipOperation_error::what() const throw()
-{
-	return m_what_message.c_str();
-}
+:
+std::logic_error
+(thrower + ": " + message + " (working on '" + filename + "' in zipfile '" +
+ zipfilename + "')")
+{}
