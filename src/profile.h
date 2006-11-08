@@ -83,11 +83,11 @@ private:
 	Value_list	m_values;
 
 public:
-	Section(Profile *prof, const char *name);
-	Section(const Section &o);
+	Section(Profile * const, const char * const name);
+	Section(const Section &);
 	~Section();
 
-	Section &operator=(const Section &o);
+	Section & operator=(const Section &);
 
 	Value *get_val(const char *name);
 	Value *get_next_val(const char *name);

@@ -174,34 +174,27 @@ const char *Section::get_name() const {
 	return m_section_name;
 }
 
-Section::Section(Profile *prof, const char *name)
-{
-	m_profile = prof;
-	m_used = false;
-	m_section_name = strdup(name);
-}
+Section::Section(Profile * const prof, const char * const name) :
+m_profile(prof), m_used(false), m_section_name(strdup(name)) {}
 
-Section::Section(const Section &o)
-{
-	m_section_name = 0;
-	*this = o;
-}
+Section::Section(const Section & o) :
+m_profile     (o.m_profile),
+m_used        (o.m_used),
+m_section_name(strdup(o.m_section_name)),
+m_values      (o.m_values)
+{assert(this != &o);}
 
-Section::~Section()
-{
-	if (m_section_name)
-		free(m_section_name);
-}
+Section::~Section() {free(m_section_name);}
 
-Section &Section::operator=(const Section &o)
-{
-	if (m_section_name)
+Section &Section::operator=(const Section & o) {
+	if (this != &o) {
 		free(m_section_name);
 
-	m_profile = o.m_profile;
-	m_used = o.m_used;
-	m_section_name = strdup(o.m_section_name);
-	m_values = o.m_values;
+		m_profile      = o.m_profile;
+		m_used         = o.m_used;
+		m_section_name = strdup(o.m_section_name);
+		m_values       = o.m_values;
+	}
 
 	return *this;
 }
