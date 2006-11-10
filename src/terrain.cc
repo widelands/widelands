@@ -52,10 +52,8 @@ Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
 
 	memcpy(palette, pal, sizeof(palette));
 
-   if( fmt->BytesPerPixel == 2)
-      colormap=malloc(sizeof(ushort)*65536);
-   else if( fmt->BytesPerPixel == 4)
-      colormap=malloc(sizeof(ulong)*65536);
+	assert(fmt->BytesPerPixel == 2 or fmt->BytesPerPixel == 4);
+	colormap = malloc(fmt->BytesPerPixel * 65536);
 
 //    log ("Creating color map\n");
 	for (i=0;i<256;i++)
@@ -71,10 +69,11 @@ Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
          if (g>255) g=255;
          if (b>255) b=255;
 
-         if( fmt->BytesPerPixel == 2)
-            ((ushort*)colormap)[(j<<8) | i]= (ushort)SDL_MapRGB( fmt, r, g, b );
-         else if( fmt->BytesPerPixel == 4)
-            ((ulong*)colormap)[(j<<8) | i]= (ulong)SDL_MapRGB( fmt, r, g, b );
+			const Uint32 value = SDL_MapRGB(fmt, r, g, b);
+			if (fmt->BytesPerPixel == 2)
+				static_cast<Uint16 * const>(colormap)[(j << 8) | i] = value;
+			else
+				static_cast<Uint32 * const>(colormap)[(j << 8) | i] = value;
 		}
 }
 
@@ -233,15 +232,16 @@ Texture::get_minimap_color
 Return the basic terrain colour to be used in the minimap.
 ===============
 */
-ulong Texture::get_minimap_color(char shade)
-{
+Uint32 Texture::get_minimap_color(const char shade) {
 	uchar clr = m_pixels[0]; // just use the top-left pixel
 	uint table = (uchar)shade;
 
-   if( is_32bit )
-      return ((ulong*)m_colormap->get_colormap())[clr | (table << 8)];
-   else
-      return ((ushort*)m_colormap->get_colormap())[clr | (table << 8)];
+	return is_32bit ?
+		static_cast<const Uint32 * const>(m_colormap->get_colormap())
+		[clr | (table << 8)]
+		:
+		static_cast<const Uint16 * const>(m_colormap->get_colormap())
+		[clr | (table << 8)];
 }
 
 
@@ -845,11 +845,11 @@ void Surface::draw_field(Rect& subwin, Field * const f, Field * const rf, Field 
 
 	switch (get_format()->BytesPerPixel) {
 	    case 2:
-		draw_field_int<ushort>
+		draw_field_int<Uint16>
 		    (this, f, rf, fl, rfl, lf, ft, posx, rposx, posy, blposx, rblposx, blposy, roads, darken, draw_all);
 		break;
 	    case 4:
-		draw_field_int<ulong>
+		draw_field_int<Uint32>
 		    (this, f, rf, fl, rfl, lf, ft, posx, rposx, posy, blposx, rblposx, blposy, roads, darken, draw_all);
 		break;
 	    default:

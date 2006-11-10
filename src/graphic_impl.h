@@ -122,42 +122,44 @@ class Surface {
       inline void unlock( void ) { if( SDL_MUSTLOCK( m_surface )) SDL_UnlockSurface( m_surface ); }
 
       // For the slowest: Indirect pixel access
-      inline ulong get_pixel( uint x, uint y ) {
+	inline ulong get_pixel(uint x, uint y) {
          x+= m_offsx;
          y+= m_offsy;
          assert( x < get_w() && y < get_h() );
          assert( m_surface );
          // Locking not needed: reading only
-			const uchar * pix =
-				static_cast<const uchar * const>(m_surface->pixels) +
-				y * m_surface->pitch + x * m_surface->format->BytesPerPixel;
-         switch( m_surface->format->BytesPerPixel ) {
-            case 1: return (*pix);
-            case 2: return *reinterpret_cast<const ushort * const>(pix);
-            case 3:
-            case 4: return *reinterpret_cast<const ulong * const>(pix);
-         }
+		const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
+		Uint8 * const pix =
+			static_cast<Uint8 * const>(m_surface->pixels) +
+			y * m_surface->pitch + x * bytes_per_pixel;
+		switch (bytes_per_pixel) {
+		case 2: return *reinterpret_cast<const Uint16 * const>(pix);
+		case 4: return *reinterpret_cast<const Uint32 * const>(pix);
+		}
          assert(0);
          return 0; // Should never be here
-      }
-      inline void set_pixel( uint x, uint y, ulong clr) {
+	}
+	inline void set_pixel(uint x, uint y, const Uint32 clr) {
          x+= m_offsx;
          y+= m_offsy;
          assert( x < get_w() && y < get_h() );
          assert( m_surface );
          if( SDL_MUSTLOCK( m_surface ))
             SDL_LockSurface( m_surface );
-			uchar * pix =
-				static_cast<uchar * const>(m_surface->pixels) +
-				y * m_surface->pitch + x * m_surface->format->BytesPerPixel;
-         switch( m_surface->format->BytesPerPixel ) {
-            case 1: (*pix) = static_cast<const uchar>(clr); break;
-            case 2: *reinterpret_cast<ushort * const>(pix) = static_cast<const ushort>(clr); break;
-            case 4: *reinterpret_cast<ulong * const>(pix) = clr; break;
-         }
+		const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
+		Uint8 * const pix =
+			static_cast<Uint8 * const>(m_surface->pixels) +
+			y * m_surface->pitch + x * bytes_per_pixel;
+		switch (bytes_per_pixel) {
+		case 2:
+			*reinterpret_cast<Uint16 * const>(pix) =
+				static_cast<const Uint16>(clr);
+			break;
+		case 4: *reinterpret_cast<Uint32 * const>(pix) = clr; break;
+		}
          if( SDL_MUSTLOCK( m_surface ))
             SDL_UnlockSurface( m_surface );
-      }
+	}
 
       void clear();
       void draw_rect(Rect rc, RGBColor clr);
@@ -243,7 +245,7 @@ public:
 	unsigned char* get_curpixels() const { return m_curframe; }
 	void* get_colormap () const { return m_colormap->get_colormap(); }
 
-	ulong get_minimap_color(char shade);
+	Uint32 get_minimap_color(const char shade);
 
 	void animate(uint time);
    inline void reset_was_animated( void ) { m_was_animated = false; }
