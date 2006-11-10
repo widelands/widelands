@@ -25,6 +25,8 @@
 #include "constants.h"
 #include "types.h"
 
+#include <limits>
+
 #define MAX_FIELD_HEIGHT 60
 #define MAX_FIELD_HEIGHT_DIFF 5
 
@@ -96,20 +98,6 @@ class Field {
 	friend class Bob;
 	friend class BaseImmovable;
 
-	union Owner_Info {
-		uchar all;
-		struct {
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-			uchar owner_number : 7;
-			uchar is_border    : 1;
-#else
-			uchar is_border    : 1;
-			uchar owner_number : 7;
-#endif
-		} parts;
-	};
-	compile_assert(sizeof(Owner_Info) == 1);
-
 public:
 	enum Buildhelp_Index {
 		Buildhelp_Flag   = 0,
@@ -128,7 +116,38 @@ private:
 	Buildhelp_Index buildhelp_overlay_index : 3;
 	uchar           roads                   : 6;
 
-	Owner_Info owner_info;
+	/**
+	 * A field can be selected in one of 2 selections. This allows the user to
+	 * use selection tools to select a set of fields and then perform a command
+	 * on those fields.
+	 *
+	 * Selections can be edited with some operations. A selection can be
+	 * 1. inverted,
+	 * 2. unioned with the other selection,
+	 * 3. intersected with the other selection or
+	 * 4. differenced with the other selection.
+	 *
+	 * Each field can be owned by a player.
+	 * The 2 highest bits are selected_a and selected_b.
+	 * The next highest bit is the border bit.
+	 * The low bits are the player number of the owner.
+	 */
+	typedef Player_Number Owner_Info_and_Selections_Type;
+	static const uchar Selection_B_Bit =
+		std::numeric_limits<Owner_Info_and_Selections_Type>::digits - 1;
+	static const uchar Selection_A_Bit = Selection_B_Bit - 1;
+	static const uchar Border_Bit      = Selection_A_Bit - 1;
+	static const Owner_Info_and_Selections_Type Selection_B_Bitmask =
+		1 << Selection_B_Bit;
+	static const Owner_Info_and_Selections_Type Selection_A_Bitmask =
+		1 << Selection_A_Bit;
+	static const Owner_Info_and_Selections_Type Border_Bitmask = 1 << Border_Bit;
+	static const Owner_Info_and_Selections_Type Player_Number_Bitmask =
+		Border_Bitmask - 1;
+	static const Owner_Info_and_Selections_Type Owner_Info_Bitmask =
+		Player_Number_Bitmask + Border_Bitmask;
+	compile_assert(MAX_PLAYERS <= Player_Number_Bitmask);
+	Owner_Info_and_Selections_Type owner_info_and_selections;
 
 	uchar m_resources;
 
@@ -156,31 +175,42 @@ public:
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }
 
-	void set_owned_by(const uchar n)
-	{assert(n <= MAX_PLAYERS); owner_info.parts.owner_number = n;}
-	uchar get_owned_by() const{
-		assert(owner_info.parts.owner_number <= MAX_PLAYERS);
-		return owner_info.parts.owner_number;
+	/**
+	 * Does not change the border bit of this or neighbouring fileds. That must
+	 * be done separately.
+	 */
+	void set_owned_by(const Player_Number n) throw () {
+		assert(n <= MAX_PLAYERS);
+		owner_info_and_selections =
+			n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
-	bool is_border() const {return owner_info.parts.is_border;}
+
+	Player_Number get_owned_by() const throw () {
+		assert
+			((owner_info_and_selections & Player_Number_Bitmask) <= MAX_PLAYERS);
+		return owner_info_and_selections & Player_Number_Bitmask;
+	}
+	bool is_border() const throw ()
+	{return owner_info_and_selections & Border_Bitmask;}
 
 	/**
 	 * Returns true when the field is owned by player_number and is not a border
-	 * field. This is fast; only one byte compare.
+	 * field. This is fast; only one compare (and a mask because the byte is
+	 * shared with selection).
 	 *
-	 * player_number must be in the range 1 .. 127 or the behaviour is undefined
+	 * player_number must be in the range 1 .. Player_Number_Bitmask or the
+	 * behaviour is undefined
 	 */
-	bool is_interior(const uchar player_number) const {
-		assert(player_number > 0);
-		assert(player_number < 128);
-		assert
-			(owner_info.all
-			 ==
-			 owner_info.parts.owner_number + 128 * owner_info.parts.is_border);
-		return player_number == owner_info.all;
+	bool is_interior(const Player_Number player_number) const throw () {
+		assert(0 < player_number);
+		assert    (player_number <= Player_Number_Bitmask);
+		return player_number == (owner_info_and_selections & Owner_Info_Bitmask);
 	}
 
-	void set_border(const bool b) {owner_info.parts.is_border = b;}
+	void set_border(const bool b) throw () {
+		owner_info_and_selections =
+			owner_info_and_selections & ~Border_Bitmask | b << Border_Bit;
+	}
 
 	uchar get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
 	void set_buildhelp_overlay_index(const Buildhelp_Index i)
