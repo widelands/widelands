@@ -145,8 +145,7 @@ Map::~Map()
 }
 
 void Map::recalc_border(const FCoords fc) {
-	const uchar owner = fc.field->get_owned_by();
-	if (owner) {
+	if (const Player_Number owner = fc.field->get_owned_by()) {
 		//  A node that is owned by a player and has a neighbour that is not owned
 		//  by that player is a border node.
 		for (uchar i = 1; i <= 6; ++i) {
@@ -175,6 +174,10 @@ and recalcs the interactive player's overlay.
 */
 void Map::recalc_for_field_area(Coords coords, int radius)
 {
+	assert(0 <= coords.x);
+	assert(coords.x < m_width);
+	assert(0 <= coords.y);
+	assert(coords.y < m_height);
    assert(m_overlay_manager);
 
    MapRegion mr;
@@ -2754,6 +2757,10 @@ Initialize the region.
 */
 void MapRegion::init(const Map* map, Coords coords, uint radius)
 {
+	assert(0 <= coords.x);
+	assert(coords.x < map->get_width());
+	assert(0 <= coords.y);
+	assert(coords.y < map->get_height());
 	m_map = map;
 	m_phase = phaseUpper;
 	m_radius = radius;

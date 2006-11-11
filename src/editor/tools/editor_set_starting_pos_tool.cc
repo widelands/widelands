@@ -70,6 +70,10 @@ Editor_Set_Starting_Pos_Tool::~Editor_Set_Starting_Pos_Tool() {
  * click
  */
 int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* ei) {
+	assert(0 <= fc.x);
+	assert(fc.x < map->get_width());
+	assert(0 <= fc.y);
+	assert(fc.y < map->get_height());
    if(m_current_player) {
       if(map->get_nrplayers()<m_current_player) {
          // mmh, my current player is not valid
@@ -110,9 +114,6 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
          // And set new player pos
          map->set_starting_pos(m_current_player, fc);
 
-         // Now recalc neeed areas
-         map->recalc_for_field_area(c,MIN_PLACE_AROUND_PLAYERS);
-         map->recalc_for_field_area(fc,MIN_PLACE_AROUND_PLAYERS);
       }
    }
    return 1;
