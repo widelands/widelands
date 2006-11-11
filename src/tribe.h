@@ -95,9 +95,9 @@ class Tribe_Descr {
 	void load_warehouse_with_start_wares
 		(Editor_Game_Base &, Warehouse &) const;
 
-   private:
+ 
 	const std::string m_name;
-
+  private:
       uint m_anim_frontier;
 		uint m_anim_flag;
 

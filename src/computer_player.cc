@@ -79,11 +79,29 @@ void Computer_Player::late_initialization ()
 	    wares[i].consumers=0;
 	    wares[i].preciousness=0;
 	}
+/*=====================*/
+// Tribe specific stuff
+// ToDo: This should be defined in tribes "conf-file"
+	const char* quarry="quarry";
+	const char* lumberjack="lumberjack";
+	const char* ranger="ranger";
 
+if(tribe->m_name=="barbarians"){
 	wares[tribe->get_safe_ware_index("trunk")].preciousness=4;
 	wares[tribe->get_safe_ware_index("raw_stone")].preciousness=3;
 	wares[tribe->get_safe_ware_index("grindstone")].preciousness=2;
 	wares[tribe->get_safe_ware_index("blackwood")].preciousness=1;
+}
+else{
+if(tribe->m_name=="empire"){
+	wares[tribe->get_safe_ware_index("trunk")].preciousness=4;
+	wares[tribe->get_safe_ware_index("stone")].preciousness=3;
+	wares[tribe->get_safe_ware_index("wood")].preciousness=2;
+	wares[tribe->get_safe_ware_index("marble")].preciousness=1;
+ranger="forester";
+	}
+}
+/*=====================*/
 
 	// collect information about which buildings our tribe can construct
 	for (int i=0; i<tribe->get_nrbuildings();i++) {
@@ -108,13 +126,13 @@ void Computer_Player::late_initialization ()
 		bo.need_stones=false;
 
 		// FIXME: define these properties in the building's conf file
-		if (!strcmp(bld->get_name(), "quarry"))
+		if (!strcmp(bld->get_name(), quarry))
 		    bo.need_stones=true;
 
-		if (!strcmp(bld->get_name(), "lumberjack"))
+		if (!strcmp(bld->get_name(), lumberjack))
 		    bo.need_trees=true;
 
-		if (!strcmp(bld->get_name(), "ranger"))
+		if (!strcmp(bld->get_name(), ranger))
 		    bo.production_hint=tribe->get_safe_ware_index("trunk");
 
 		if (typeid(*bld)==typeid(ConstructionSite_Descr)) {
