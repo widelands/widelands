@@ -340,10 +340,10 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
    FileSystem* fs = 0;
    if( !binary ) {
    // Make a filesystem out of this
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_DIR );
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::DIR );
    } else {
       // Make a zipfile
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
    }
 	Widelands_Map_Saver wms(*fs, m_parent->get_editor());
    try {

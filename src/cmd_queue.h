@@ -21,7 +21,6 @@
 #define __S__CMD_QUEUE_H
 
 #include <queue>
-#include "filesystem.h"
 #include "queue_cmd_ids.h"
 
 class FileRead;

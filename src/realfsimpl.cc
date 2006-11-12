@@ -33,7 +33,7 @@
 /**
  * Initialize the real file-system
  */
-RealFSImpl::RealFSImpl(std::string Directory)
+RealFSImpl::RealFSImpl(const std::string Directory)
 		: m_directory(Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
@@ -52,7 +52,7 @@ RealFSImpl::~RealFSImpl()
 {
 }
 
-void RealFSImpl::listSubdirs()
+void RealFSImpl::listSubdirs() const
 {
 	printf("%s\n", m_directory.c_str());
 }
@@ -61,9 +61,12 @@ void RealFSImpl::listSubdirs()
  *
  * Return true if this directory is writable.
  */
-bool RealFSImpl::IsWritable()
+const bool RealFSImpl::IsWritable() const
 {
 	return true; // should be checked in constructor
+
+	//fweber: no, should be checked here, because the ondisk state might have
+	//changed since then
 }
 
 /**
@@ -73,7 +76,9 @@ bool RealFSImpl::IsWritable()
  */
 #ifdef _WIN32
 // note: the Win32 version may be broken, feel free to fix it
-int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
+const int RealFSImpl::FindFiles(std::string path,
+										  const std::string pattern,
+										  filenameset_t *results)
 {
 	std::string buf;
 	struct _finddata_t c_file;
@@ -100,7 +105,9 @@ int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *
 	return results->size();
 }
 #else
-int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
+const int RealFSImpl::FindFiles(std::string path,
+										  const std::string pattern,
+										  filenameset_t *results)
 {
 	std::string buf;
 	glob_t gl;
@@ -136,7 +143,7 @@ int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *
  * \e can't exist then)
  * \todo Can this be rewritten to just using exceptions? Should it?
  */
-bool RealFSImpl::FileExists(std::string path)
+const bool RealFSImpl::FileExists(const std::string path)
 {
 	struct stat st;
 
@@ -151,7 +158,7 @@ bool RealFSImpl::FileExists(std::string path)
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
  */
-bool RealFSImpl::IsDirectory(std::string path)
+const bool RealFSImpl::IsDirectory(const std::string path)
 {
 	struct stat st;
 
@@ -166,7 +173,8 @@ bool RealFSImpl::IsDirectory(std::string path)
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
+FileSystem* RealFSImpl::MakeSubFileSystem(const std::string path)
+{
 	assert( FileExists( path )); //TODO: throw an exception instead
 	std::string fullname;
 
@@ -183,7 +191,9 @@ FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
+FileSystem* RealFSImpl::CreateSubFileSystem(const std::string path,
+														   const Type fs)
+{
 	if( FileExists( path ))
 		throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
 
@@ -191,7 +201,7 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
 
 	fullname=FS_CanonicalizeName(path);
 
-	if( fs == FileSystem::FS_DIR ) {
+	if( fs == FileSystem::DIR ) {
 		EnsureDirectoryExists( path );
 		return new RealFSImpl( fullname );
 	} else {
@@ -203,7 +213,8 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
 /**
  * Remove a number of files
  */
-void RealFSImpl::Unlink(std::string file) {
+void RealFSImpl::Unlink(const std::string file)
+{
 	if( !FileExists( file ))
 		return;
 
@@ -216,7 +227,8 @@ void RealFSImpl::Unlink(std::string file) {
 /**
  * remove directory or file
  */
-void RealFSImpl::m_unlink_file( std::string file ) {
+void RealFSImpl::m_unlink_file(const std::string file)
+{
 	assert( FileExists( file ));  //TODO: throw an exception instead
 	assert(!IsDirectory( file )); //TODO: throw an exception instead
 
@@ -231,7 +243,8 @@ void RealFSImpl::m_unlink_file( std::string file ) {
 #endif
 }
 
-void RealFSImpl::m_unlink_directory( std::string file ) {
+void RealFSImpl::m_unlink_directory(const std::string file)
+{
 	assert( FileExists( file ));
 	assert( IsDirectory( file ));
 
@@ -270,7 +283,8 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void RealFSImpl::EnsureDirectoryExists(std::string dirname) {
+void RealFSImpl::EnsureDirectoryExists(const std::string dirname)
+{
 	if(FileExists(dirname)) {
 		if(IsDirectory(dirname)) return; // ok, dir is already there
 	}
@@ -285,7 +299,8 @@ void RealFSImpl::EnsureDirectoryExists(std::string dirname) {
  * MakeDirectory("onedir/otherdir/onemoredir") will fail
  * if either ondir or otherdir is missing
  */
-void RealFSImpl::MakeDirectory(std::string dirname) {
+void RealFSImpl::MakeDirectory(const std::string dirname)
+{
 	if(FileExists(dirname))
 		throw wexception("A File with the name %s already exists\n", dirname.c_str());
 
@@ -307,7 +322,7 @@ void RealFSImpl::MakeDirectory(std::string dirname) {
  * Read the given file into alloced memory; called by FileRead::Open.
  * Throws an exception if the file couldn't be opened.
  */
-void *RealFSImpl::Load(std::string fname, int *length)
+void *RealFSImpl::Load(const std::string fname, int * const length)
 {
 	std::string fullname;
 	FILE *file=0;
@@ -369,7 +384,8 @@ void *RealFSImpl::Load(std::string fname, int *length)
  * Write the given block of memory to the repository.
  * Throws an exception if it fails.
  */
-void RealFSImpl::Write(std::string fname, void *data, int length)
+void RealFSImpl::Write(const std::string fname, const void * const data,
+							  const int length)
 {
 	std::string fullname;
 	FILE *f;

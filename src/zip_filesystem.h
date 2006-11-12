@@ -27,29 +27,32 @@
 
 class ZipFilesystem : public FileSystem {
 public:
-   ZipFilesystem( std::string );
+   ZipFilesystem(const std::string);
 	virtual ~ZipFilesystem();
 
-	virtual bool IsWritable();
+	virtual const bool IsWritable() const;
 
-	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) ;
+	virtual const int FindFiles(std::string path, const std::string pattern,
+										 filenameset_t *results);
 
-   virtual bool IsDirectory(std::string path) ;
-	virtual bool FileExists(std::string path) ;
+   virtual const bool IsDirectory(std::string path);
+	virtual const bool FileExists(std::string path);
 
-	virtual void *Load(std::string fname, int *length);
-	virtual void Write(std::string fname, void *data, int length) ;
-   virtual void EnsureDirectoryExists(std::string dirname) ;
-   virtual void MakeDirectory(std::string dirname) ;
+	virtual void *Load(const std::string fname, int * const length);
+	virtual void Write(const std::string fname, const void * const data,
+							 const int length);
+   virtual void EnsureDirectoryExists(const std::string dirname);
+   virtual void MakeDirectory(const std::string dirname);
 
-   virtual FileSystem*  MakeSubFileSystem( std::string dirname );
-   virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type );
-   virtual void Unlink( std::string filename );
+   virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
+   virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
+														  const Type );
+   virtual void Unlink(const std::string filename);
 
 public:
-	static FileSystem *CreateFromDirectory(std::string directory);
+	static FileSystem *CreateFromDirectory(const std::string directory);
 
-	void listSubdirs() {printf("%s\n", m_basename.c_str());}
+	void listSubdirs() const {printf("%s\n", m_basename.c_str());}
 
 private:
    void m_OpenUnzip( void );

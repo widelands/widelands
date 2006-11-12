@@ -17,6 +17,7 @@
  *
  */
 
+#include "filesystem.h"
 #include "game.h"
 #include "game_loader.h"
 #include "game_main_menu_load_game.h"
@@ -156,7 +157,10 @@ void Game_Main_Menu_Load_Game::double_clicked(uint) {clicked(1);}
 /**
  * fill the file list
  */
-void Game_Main_Menu_Load_Game::fill_list(void) {
+void Game_Main_Menu_Load_Game::fill_list(void)
+{
+	filenameset_t m_gamefiles;
+
    // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
 

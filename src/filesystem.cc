@@ -64,7 +64,7 @@ FileSystem::FileSystem()
 /**
  * Append extension (e.g. ".foo") to the filename if it doesn't already have an extension
  */
-char *FileSystem::FS_AutoExtension(char *buf, int bufsize, const char *ext)
+const char *FileSystem::FS_AutoExtension(char * const buf, const int bufsize, const char *ext)
 {
 	char *dot;
 	char *p;
@@ -92,7 +92,7 @@ char *FileSystem::FS_AutoExtension(char *buf, int bufsize, const char *ext)
 /**
  * Strip the extension (if any) from the filename
  */
-char *FileSystem::FS_StripExtension(char *fname)
+const char *FileSystem::FS_StripExtension(char * const fname)
 {
 	char *p;
 	char *dot = 0;
@@ -115,7 +115,7 @@ char *FileSystem::FS_StripExtension(char *fname)
  * Basically concatenates the two strings, but removes the filename part
  * of basefile (if any)
  */
-char *FileSystem::FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename)
+const char *FileSystem::FS_RelativePath(char *buf, const int buflen, const char *basefile, const char *filename)
 {
 	const char *p;
 	int endbase;
@@ -147,7 +147,7 @@ char *FileSystem::FS_RelativePath(char *buf, int buflen, const char *basefile, c
  * \param path A file or directory name
  * \return True if ref path is absolute
  */
-const bool FileSystem::pathIsAbsolute(const std::string path)
+const bool FileSystem::pathIsAbsolute(const std::string path) const
 {
 	if (path.substr(0,m_root.size())!=m_root)
 		return false;
@@ -163,7 +163,7 @@ const bool FileSystem::pathIsAbsolute(const std::string path)
  * \param path A path that might or might not be absolute
  * \return An absolute path
  */
-const std::string FileSystem::AbsolutePath(const std::string path)
+const std::string FileSystem::AbsolutePath(const std::string path) const
 {
 	if (pathIsAbsolute(path))
 		return path;
@@ -180,7 +180,7 @@ const std::string FileSystem::AbsolutePath(const std::string path)
 /**
  * \return The process' current working directory
  */
-const std::string FileSystem::getWorkingDirectory()
+const std::string FileSystem::getWorkingDirectory() const
 {
 	char cwd[PATH_MAX+1];
 	getcwd(cwd, PATH_MAX);
@@ -237,7 +237,7 @@ std::string FileSystem::GetHomedir()
  *
  * \todo This does not really belong into a filesystem class
  */
-std::vector<std::string> FileSystem::FS_Tokenize(std::string path)
+const std::vector<std::string> FileSystem::FS_Tokenize(const std::string path) const
 {
 	std::vector<std::string> components;
 	SSS_T pos;  //start of token
@@ -269,7 +269,7 @@ std::vector<std::string> FileSystem::FS_Tokenize(std::string path)
  *
  * \todo Enable non-Unix paths
  */
-std::string FileSystem::FS_CanonicalizeName(std::string path)
+const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;

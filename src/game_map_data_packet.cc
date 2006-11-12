@@ -70,7 +70,7 @@ void Game_Map_Data_Packet::Write
 throw (_wexception)
 {
 
-	FileSystem * const mapfs = fs.CreateSubFileSystem("map", FileSystem::FS_DIR);
+	FileSystem * const mapfs = fs.CreateSubFileSystem("map", FileSystem::DIR);
 
    // Now Write the map as it would be a normal map saving
    if(m_wms) delete m_wms;

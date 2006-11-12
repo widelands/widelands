@@ -20,10 +20,10 @@
 #ifndef __S__GAME_MAIN_MENU_LOAD_GAME_H
 #define __S__GAME_MAIN_MENU_LOAD_GAME_H
 
-#include "filesystem.h"
 #include "ui_unique_window.h"
 
 class Interactive_Player;
+
 namespace UI {
 struct Edit_Box;
 struct Textarea;
@@ -47,7 +47,6 @@ struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
       Interactive_Player* m_parent;
 	UI::Textarea * m_name, * m_gametime;
 	UI::Listselect<const char * const> * m_ls;
-      filenameset_t m_gamefiles;
 
 	UI::Button * m_ok_btn;
       std::string m_basedir;

@@ -26,30 +26,34 @@
 /// \todo const correctness
 class RealFSImpl : public FileSystem {
 public:
-	RealFSImpl(std::string Directory);
+	RealFSImpl(const std::string Directory);
 	~RealFSImpl();
 
-	virtual bool IsWritable();
+	virtual const bool IsWritable() const;
 
-	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
+	virtual const int FindFiles(std::string path,
+										 const std::string pattern,
+										 filenameset_t *results);
 
-	virtual bool FileExists(std::string path);
-	virtual bool IsDirectory(std::string path);
-	virtual void EnsureDirectoryExists(std::string dirname);
-	virtual void MakeDirectory(std::string dirname);
+	virtual const bool FileExists(const std::string path);
+	virtual const bool IsDirectory(const std::string path);
+	virtual void EnsureDirectoryExists(const std::string dirname);
+	virtual void MakeDirectory(const std::string dirname);
 
-	virtual void *Load(std::string fname, int *length);
-	virtual void Write(std::string fname, void *data, int length);
+	virtual void *Load(const std::string fname, int * const length);
+	virtual void Write(const std::string fname, const void * const data,
+							 const int length);
 
-	virtual FileSystem* MakeSubFileSystem( std::string dirname );
-	virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
-	virtual void Unlink(std::string file);
+	virtual FileSystem* MakeSubFileSystem(const std::string dirname);
+	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
+														 const Type);
+	virtual void Unlink(const std::string file);
 
-	virtual void listSubdirs();
+	virtual void listSubdirs() const;
 
 private:
-	void m_unlink_directory( std::string file );
-	void m_unlink_file( std::string file );
+	void m_unlink_directory(const std::string file);
+	void m_unlink_file(const std::string file);
 
 	std::string m_directory;
 };

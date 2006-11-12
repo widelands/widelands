@@ -31,39 +31,46 @@
  * overrides on a per-user-basis, nested .zip files acting as Quake-like paks
  * and so on.
  *
- * \note Only the top-most writable filesystem is written to. A typical
+ * Only the top-most writable filesystem is written to. A typical
  * stack would look like this in real-life:
  *
  * ~/.widelands/
- * /where/they/installed/widelands/  <-- this is the directory that the executable is in
- * $CWD  <-- the current-working directory; this is useful for debugging, when the executable
- * isn't in the root of the game-data directory
+ * /where/they/installed/widelands/  <-- this is the directory that the
+ * executable is in
+ *
+ * $CWD  <-- the current-working directory; this is useful for debugging, when
+ * the executable isn't in the root of the game-data directory
  */
 class LayeredFileSystem : public FileSystem {
 public:
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 
-	virtual void AddFileSystem(FileSystem *fs);
+	virtual void AddFileSystem(FileSystem * const fs);
 
-	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth); // Overwritten from LayeredFileSystem
-	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results); // overwritten from FileSystem
+	virtual const int FindFiles(std::string path, const std::string pattern,
+										 filenameset_t *results,
+										 int depth);
+	virtual const int FindFiles(std::string path, const std::string pattern,
+										 filenameset_t *results);
 
-	virtual bool IsWritable();
+	virtual const bool IsWritable() const;
 
-	virtual bool FileExists(std::string path);
-	virtual bool IsDirectory(std::string path);
-	virtual void EnsureDirectoryExists(std::string dirname);
-	virtual void MakeDirectory(std::string dirname);
+	virtual const bool FileExists(const std::string path);
+	virtual const bool IsDirectory(std::string path);
+	virtual void EnsureDirectoryExists(const std::string dirname);
+	virtual void MakeDirectory(const std::string dirname);
 
-	virtual void *Load(std::string fname, int *length);
-	virtual void Write(std::string fname, void *data, int length);
+	virtual void *Load(const std::string fname, int * const length);
+	virtual void Write(const std::string fname, const void * const data,
+							 const int length);
 
-	virtual FileSystem* MakeSubFileSystem( std::string dirname );
-	virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
-	virtual void Unlink(std::string file);
+	virtual FileSystem* MakeSubFileSystem(const std::string dirname);
+	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
+														 const Type);
+	virtual void Unlink(const std::string file);
 
-	virtual void listSubdirs();
+	virtual void listSubdirs() const;
 
 private:
 	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;

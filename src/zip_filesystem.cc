@@ -35,7 +35,7 @@ ZipFilesystem IMPLEMENTATION
 /**
  * Initialize the real file-system
  */
-ZipFilesystem::ZipFilesystem(std::string zipfile)
+ZipFilesystem::ZipFilesystem(const std::string zipfile)
 {
    m_basename = FS_Filename( zipfile.c_str() );
    m_zipfilename = zipfile;
@@ -57,7 +57,7 @@ ZipFilesystem::~ZipFilesystem()
 /**
  * Return true if this directory is writable.
  */
-bool ZipFilesystem::IsWritable()
+const bool ZipFilesystem::IsWritable() const
 {
 	return true; // should be checked in constructor
 }
@@ -67,8 +67,9 @@ bool ZipFilesystem::IsWritable()
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-int ZipFilesystem::FindFiles(std::string path, std::string pattern,
-									  filenameset_t *results)
+const int ZipFilesystem::FindFiles(std::string path,
+											  const std::string pattern,
+											  filenameset_t *results)
 {
    m_OpenUnzip();
 
@@ -111,7 +112,7 @@ int ZipFilesystem::FindFiles(std::string path, std::string pattern,
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::FileExists(std::string path)
+const bool ZipFilesystem::FileExists(std::string path)
 {
    try {
       m_OpenUnzip();
@@ -149,7 +150,7 @@ bool ZipFilesystem::FileExists(std::string path)
  * Returns true if the given file is a directory, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::IsDirectory(std::string path)
+const bool ZipFilesystem::IsDirectory(const std::string path)
 {
 
    if( !FileExists( path )) {
@@ -172,7 +173,8 @@ bool ZipFilesystem::IsDirectory(std::string path)
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path ) {
+FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path )
+{
    m_OpenUnzip();
 
    assert( FileExists( path ));
@@ -195,7 +197,7 @@ FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
 {
    assert( !FileExists( path ));
 
-   if( type != FS_DIR )
+   if( type != FileSystem::DIR )
 		throw (ZipOperation_error("ZipFilesystem::CreateSubFileSystem",
 										 path, m_zipfilename,
 										 "can't create ZipFilesystem inside another ZipFilesystem")
@@ -214,7 +216,7 @@ FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
  * Remove a number of files
  * \throw ZipOperation_error
  */
-void ZipFilesystem::Unlink(std::string filename)
+void ZipFilesystem::Unlink(const std::string filename)
 {
 	throw (ZipOperation_error("ZipFilesystem::Unlink", filename, m_zipfilename,
 				   		  "unlinking is not supported inside zipfiles")
@@ -225,7 +227,8 @@ void ZipFilesystem::Unlink(std::string filename)
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void ZipFilesystem::EnsureDirectoryExists(std::string dirname) {
+void ZipFilesystem::EnsureDirectoryExists(const std::string dirname)
+{
    if( FileExists( dirname ) && IsDirectory( dirname ))
       return;
 
@@ -271,7 +274,7 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
  * Read the given file into alloced memory; called by FileRead::Open.
  * \throw FileNotFound_error if the file couldn't be opened.
  */
-void *ZipFilesystem::Load(std::string fname, int *length)
+void *ZipFilesystem::Load(std::string fname, int * const length)
 {
    if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
 			throw FileNotFound_error("ZipFilesystem::Load", fname,
@@ -300,7 +303,8 @@ void *ZipFilesystem::Load(std::string fname, int *length)
  * Write the given block of memory to the repository.
  * Throws an exception if it fails.
  */
-void ZipFilesystem::Write(std::string fname, void *data, int length)
+void ZipFilesystem::Write(const std::string fname, const void * const data,
+								  const int length)
 {
    m_OpenZip();
 

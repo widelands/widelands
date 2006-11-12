@@ -17,6 +17,7 @@
  *
  */
 
+#include "filesystem.h"
 #include "constants.h"
 #include "game.h"
 #include "game_loader.h"
@@ -167,6 +168,8 @@ void Game_Main_Menu_Save_Game::double_clicked(uint) {clicked(1);}
  * fill the file list
  */
 void Game_Main_Menu_Save_Game::fill_list(void) {
+	filenameset_t m_gamefiles;
+
    // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
 
@@ -246,9 +249,9 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    // Make a filesystem out of this
    FileSystem* fs = 0;
    if( !binary ) {
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_DIR );
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::DIR );
    } else {
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
    }
 
 	Game_Saver gs(*fs, m_parent->get_game());

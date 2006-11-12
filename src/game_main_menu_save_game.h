@@ -20,7 +20,6 @@
 #ifndef __S__GAME_MAIN_MENU_SAVE_GAME_H
 #define __S__GAME_MAIN_MENU_SAVE_GAME_H
 
-#include "filesystem.h"
 #include "ui_unique_window.h"
 
 class Interactive_Player;
@@ -48,7 +47,6 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       UI::Edit_Box* m_editbox;
       UI::Textarea* m_name, *m_gametime;
 	UI::Listselect<const char * const> * m_ls;
-      filenameset_t m_gamefiles;
 
       UI::Button* m_ok_btn;
       std::string m_basedir;

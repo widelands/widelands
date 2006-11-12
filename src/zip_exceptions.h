@@ -26,7 +26,7 @@
  * Zip specific problems when working \e inside a zipfile.
  *
  * Problems with the zipfile itself or normal file operations should throw
- * File_error or one of it's descendants with an appropriate message. E.g.: *
+ * File_error or one of it's descendants with an appropriate message. E.g.:
  * throw FileNotFound_error("ZipFilesystem::Load", fname,
  * "couldn't open file (from zipfile "+m_zipfilename+")");
  */

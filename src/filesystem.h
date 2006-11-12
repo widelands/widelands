@@ -29,49 +29,52 @@
 typedef std::set<std::string> filenameset_t;
 
 /**
- * FileSystem is a base class representing certain filesystem operations.
+ * FileSystem is an abstract base class representing certain filesystem operations.
  * \todo const correctness
  */
 class FileSystem {
 public:
 	enum Type {
-	   FS_DIR,
-	   FS_ZIP
+	   DIR,
+	   ZIP
 	};
 
 	virtual ~FileSystem() { }
 
-	virtual bool IsWritable() = 0;
+	virtual const bool IsWritable() const = 0;
 
-	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;
+	virtual const int FindFiles(std::string path, const std::string pattern,
+										filenameset_t *results) = 0;
 
-	virtual bool IsDirectory(std::string path) = 0;
-	virtual bool FileExists(std::string path) = 0;
+	virtual const bool IsDirectory(std::string path) = 0;
+	virtual const bool FileExists(const std::string path) = 0;
 
-	virtual void *Load(std::string fname, int *length) = 0;
-	virtual void Write(std::string fname, void *data, int length) = 0;
-	virtual void EnsureDirectoryExists(std::string dirname) = 0;
-	virtual void MakeDirectory(std::string dirname) = 0;
+	virtual void *Load(const std::string fname, int * const length) = 0;
+	virtual void Write(const std::string fname, const void * const data,
+							 const int length) = 0;
+	virtual void EnsureDirectoryExists(const std::string dirname) = 0;
+	virtual void MakeDirectory(const std::string dirname) = 0;
 
-	virtual FileSystem*  MakeSubFileSystem( std::string dirname ) = 0;
-	virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
-	virtual void Unlink( std::string ) = 0;
+	virtual FileSystem*  MakeSubFileSystem( const std::string dirname ) = 0;
+	virtual FileSystem*  CreateSubFileSystem( const std::string dirname,
+															const Type ) = 0;
+	virtual void Unlink( const std::string ) = 0;
 
-	static FileSystem *Create(std::string root)
+	static FileSystem *Create(const std::string root)
 	throw(FileType_error, FileNotFound_error, FileAccessDenied_error);
 
-	virtual void listSubdirs()=0;
+	virtual void listSubdirs() const = 0;
 
 	// basic path/filename manipulation
-	const std::string getWorkingDirectory();
+	const std::string getWorkingDirectory() const;
 	const std::string getTempDirectory();
-	std::string FS_CanonicalizeName(std::string path);
-	static char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
-	static char *FS_StripExtension(char *fname);
-	static char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
-	const bool pathIsAbsolute(const std::string path);
-	const std::string AbsolutePath(const std::string path);
-	std::vector<std::string> FS_Tokenize(std::string path);
+	const std::string FS_CanonicalizeName(const std::string path) const;
+	static const char *FS_AutoExtension(char * const buf, const int bufsize, const char *ext);
+	static const char *FS_StripExtension(char * const fname);
+	static const char *FS_RelativePath(char *buf, const int buflen, const char *basefile, const char *filename);
+	const bool pathIsAbsolute(const std::string path) const;
+	const std::string AbsolutePath(const std::string path) const;
+	const std::vector<std::string> FS_Tokenize(const std::string path) const;
 	static const char *FS_Filename(const char* buf);
 	static std::string GetHomedir();
 
