@@ -22,7 +22,7 @@
 #include "filewrite.h"
 #include "i18n.h"
 #include <iostream>
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "map.h"
 #include "map_loader.h"
 #include "s2map.h"

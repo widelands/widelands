@@ -26,7 +26,7 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "player.h"
 #include "profile.h"
 #include "queue_cmd_ids.h"

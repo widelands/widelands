@@ -69,7 +69,8 @@ public:
 	const std::string getWorkingDirectory() const;
 	const std::string getTempDirectory();
 	const std::string FS_CanonicalizeName(const std::string path) const;
-	static const char *FS_AutoExtension(char * const buf, const int bufsize, const char *ext);
+	static const std::string AutoExtension(const std::string filename,
+														  const std::string extension);
 	static const char *FS_StripExtension(char * const fname);
 	static const char *FS_RelativePath(char *buf, const int buflen, const char *basefile, const char *filename);
 	const bool pathIsAbsolute(const std::string path) const;

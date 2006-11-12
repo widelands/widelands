@@ -26,7 +26,7 @@
 #include "game_saver.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "profile.h"
 #include "ui_button.h"
 #include "ui_editbox.h"

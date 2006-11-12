@@ -25,7 +25,7 @@
 #include "game_loader.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"

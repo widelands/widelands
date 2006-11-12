@@ -23,7 +23,7 @@
 #include "font_loader.h"
 #include "graphic.h"
 #include <iostream>
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "rgbcolor.h"
 #include <SDL_ttf.h>
 #include <string>

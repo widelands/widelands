@@ -31,7 +31,7 @@ Management classes and functions of the 16-bit software renderer.
 #include "map.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "tribe.h"

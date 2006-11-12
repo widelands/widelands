@@ -20,7 +20,7 @@
 #include <algorithm>
 #include "error.h"
 #include "event_chain.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"

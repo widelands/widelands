@@ -28,7 +28,6 @@
 #include "fileread.h"
 #include "filewrite.h"
 #include "i18n.h"
-#include "layeredfilesystem.h"
 #include "profile.h"
 #include "wexception.h"
 #include "wlapplication.h"

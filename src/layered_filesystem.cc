@@ -17,7 +17,7 @@
  *
  */
 
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "wexception.h"
 
 LayeredFileSystem *g_fs;

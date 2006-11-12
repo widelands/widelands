@@ -28,7 +28,7 @@
 #include "game_loader.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "map_event_manager.h"
 #include "map_trigger_manager.h"
 #include "network.h"

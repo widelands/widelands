@@ -24,8 +24,8 @@
 #include <errno.h>
 #include "error.h"
 #include "filesystem.h"
-#include "layeredfilesystem.h"
-#include "realfsimpl.h"
+#include "layered_filesystem.h"
+#include "disk_filesystem.h"
 #include <string>
 #include <unistd.h>
 #include <vector>
@@ -62,31 +62,23 @@ FileSystem::FileSystem()
 }
 
 /**
- * Append extension (e.g. ".foo") to the filename if it doesn't already have an extension
+ * Append extension (e.g. ".foo") to the filename if it is'nt already there
+ * \param filename The filename to possibly be extended
+ * \param extension The extension to append, without leading dot (unless you
+ * want to consecutive dots, that is)
  */
-const char *FileSystem::FS_AutoExtension(char * const buf, const int bufsize, const char *ext)
+const std::string FileSystem::AutoExtension(const std::string filename,
+													 const std::string extension)
 {
-	char *dot;
-	char *p;
-	int extlen;
+	const SSS_T suffix_length=extension.size()+1;
+	const SSS_T startpos=filename.size()-suffix_length;
 
-	dot = 0;
-
-	for(p = buf; *p; p++) {
-		if (*p == '/' || *p == '\\')
-			dot = 0;
-		else if (*p == '.')
-			dot = p;
+	if (filename.substr(startpos, suffix_length) != "."+extension)
+	{
+		return filename+"."+extension;
 	}
 
-	if (!dot) {
-		extlen = strlen(ext);
-
-		if (p - buf + extlen < bufsize)
-			memcpy(p, ext, extlen + 1);
-	}
-
-	return buf;
+	return filename;
 }
 
 /**
@@ -195,11 +187,13 @@ const std::string FileSystem::getWorkingDirectory() const
 const std::string FileSystem::getTempDirectory()
 {
 	const char *tmpdir;
+
 #ifdef __WIN32__
 	tmpdir=".";
 #else
 	tmpdir="/tmp";
 #endif
+
 	if(!FileExists(tmpdir))
 		throw FileNotFound_error("FileSystem::getTempDirectory", tmpdir);
 

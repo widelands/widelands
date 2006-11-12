@@ -20,7 +20,7 @@
 
 #include "error.h"
 #include "fileread.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "songset.h"
 #include "sound_handler.h"
 

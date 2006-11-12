@@ -23,7 +23,7 @@
 #include "error.h"
 #include "fileread.h"
 #include "i18n.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "graphic.h"
 #include "profile.h"
 #include "util.h"

@@ -24,7 +24,7 @@ Rendering functions of the 16-bit software renderer.
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "map.h"
 #include "minimap.h"
 #include "player.h"

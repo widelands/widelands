@@ -23,7 +23,7 @@
 #include "fileread.h"
 #include "game.h"
 #include "i18n.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "profile.h"
 #include "soldier.h"
 #include "tribe.h"

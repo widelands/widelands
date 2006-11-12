@@ -25,7 +25,7 @@
 #include "game_preload_data_packet.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_listselect.h"

@@ -21,30 +21,31 @@
 #define PROFILE_H
 
 #include "geometry.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h" //TODO: as soon as g_fs is not needed anymore, this can be changed to filesystem.h
 #include "types.h"
 #include <vector>
 
 extern class Profile g_options;
+class FileSystem;
 
-/*
-Represents one section inside the .ini-style file, basically as a list of
-key-value pairs.
-
-get_string:
-Returns the value of the first key with the given name. If the key isn't found,
-def is returned.
-
-get_int, get_bool, get_float convert the value string to the desired type.
-
-get_safe_*:
-Like above, but throw an exception if the key doesn't exist.
-
-get_next_*:
-Returns the name of the next key of the given name. You can pass name == 0 to
-retrieve any unused key. Value::used is used to determine which key is next.
-The value of the key is stored in the second parameter.
-*/
+/**
+ * Represents one section inside the .ini-style file, basically as a list of
+ * key-value pairs.
+ *
+ * get_string:
+ * Returns the value of the first key with the given name. If the key isn't found,
+ * def is returned.
+ *
+ * get_int, get_bool, get_float convert the value string to the desired type.
+ *
+ * get_safe_*:
+ * Like above, but throw an exception if the key doesn't exist.
+ *
+ * get_next_*:
+ * Returns the name of the next key of the given name. You can pass name == 0 to
+ * retrieve any unused key. Value::used is used to determine which key is next.
+ * The value of the key is stored in the second parameter.
+ */
 class Section {
 	friend class Profile;
 
@@ -130,20 +131,20 @@ public:
 	Value *create_val(const char *name, const char *value, bool duplicate = false);
 };
 
-/*
-Parses an .ini-style file into sections and key-value pairs.
-The destructor prints out warnings if a section or value hasn't been used.
-
-get_section:
-Returns the first section of the given name (or 0 if none exist).
-
-get_safe_section:
-Like get_section, but throws an exception if the section doesn't exist.
-
-get_next_section:
-Returns the next unused section of the given name, or 0 if all sections
-have been used. name can be 0 to retrieve any remaining sections.
-*/
+/**
+ * Parses an .ini-style file into sections and key-value pairs.
+ * The destructor prints out warnings if a section or value hasn't been used.
+ *
+ * get_section:
+ * Returns the first section of the given name (or 0 if none exist).
+ *
+ * get_safe_section:
+ * Like get_section, but throws an exception if the section doesn't exist.
+ *
+ * get_next_section:
+ * Returns the next unused section of the given name, or 0 if all sections
+ * have been used. name can be 0 to retrieve any remaining sections.
+ */
 class Profile {
 	typedef std::vector<Section> Section_list;
 

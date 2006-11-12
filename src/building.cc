@@ -28,7 +28,7 @@
 #include "game.h"
 #include "graphic.h"
 #include "interactive_base.h"
-#include "layeredfilesystem.h"
+#include "layered_filesystem.h"
 #include "map.h"
 #include "militarysite.h"
 #include "player.h"

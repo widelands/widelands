@@ -19,7 +19,7 @@
 
 #include <assert.h>
 #include <errno.h>
-#include "realfsimpl.h"
+#include "disk_filesystem.h"
 #include <sys/stat.h>
 #include "wexception.h"
 #include "zip_filesystem.h"
