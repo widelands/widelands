@@ -27,20 +27,21 @@
  */
 class File_error : public std::runtime_error {
 public:
-	explicit File_error(const std::string thrower,
-	                    const std::string filename,
-	                    const std::string message="problem with file/directory")
-	throw();
-	virtual ~File_error() throw() {}
+	explicit File_error(const std::string & thrower,
+	                    const std::string & filename,
+	                    const std::string & message="problem with file/directory")
+			throw()
+	: std::runtime_error(thrower+": "+message+": "+filename),
+	m_thrower(thrower),
+	m_filename(filename),
+	m_message(message)
+	{}
 
-	virtual const char *what() const throw();
+	virtual ~File_error() throw() {}
 
 	std::string m_thrower;
 	std::string m_filename;
 	std::string m_message;
-
-protected:
-	std::string m_what_message;
 };
 
 /**
@@ -49,10 +50,12 @@ protected:
  */
 class FileNotFound_error : public File_error {
 public:
-	explicit FileNotFound_error(const std::string thrower,
-	                            const std::string filename,
-	                            const std::string message="could not find file or directory")
-	throw();
+	explicit FileNotFound_error(const std::string & thrower,
+	                            const std::string & filename,
+	                            const std::string & message="could not find file or directory")
+	throw()
+	:File_error(thrower, filename, message)
+	{}
 };
 
 /**
@@ -60,10 +63,12 @@ public:
  */
 class FileType_error : public File_error {
 public:
-	explicit FileType_error(const std::string thrower,
-	                        const std::string filename,
-	                        const std::string message="file or directory has wrong type")
-	throw();
+	explicit FileType_error(const std::string & thrower,
+	                        const std::string & filename,
+	                        const std::string & message="file or directory has wrong type")
+	throw()
+	:File_error(thrower, filename, message)
+	{}
 };
 
 /**
@@ -71,10 +76,12 @@ public:
  */
 class FileAccessDenied_error : public File_error {
 public:
-	explicit FileAccessDenied_error(const std::string thrower,
-	                                const std::string filename,
-	                                const std::string message="access denied on file or directory")
-	throw();
+	explicit FileAccessDenied_error(const std::string & thrower,
+	                                const std::string & filename,
+	                                const std::string & message="access denied on file or directory")
+	throw()
+	:File_error(thrower, filename, message)
+	{}
 };
 
 #endif

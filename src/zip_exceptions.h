@@ -32,12 +32,20 @@
  */
 class ZipOperation_error : public std::logic_error {
 public:
-	explicit ZipOperation_error(const std::string thrower,
-	                            const std::string filename,
-	                            const std::string zipfilename,
-	                            const std::string message="problem during zipfile operation")
-	throw();
+	explicit ZipOperation_error(const std::string & thrower,
+	                            const std::string & filename,
+	                            const std::string & zipfilename,
+	                            const std::string & message="problem during zipfile operation")
+	throw()
+	: std::logic_error(thrower + ": " + message + " (working on '" + filename +
+												 "' in zipfile '" + zipfilename + "')")
+	{}
+
 	virtual ~ZipOperation_error() throw() {}
+
+	std::string thrower;
+	std::string filename;
+	std::string zipfilename;
 };
 
 #endif
