@@ -135,7 +135,7 @@ class Interactive_Player : public Interactive_Base {
 
    private:
       Game*		m_game;
-      uchar		m_player_number;
+	Player_Number m_player_number;
 
       UI::Textarea*	m_label_speed;
       UI::Multiline_Textarea*	m_chat_messages;
