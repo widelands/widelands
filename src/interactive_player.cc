@@ -497,6 +497,10 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
          g_gr->toggle_fullscreen();
       return true;
 
+	case KEY_HOME:
+		if (down) move_view_to(m_game->map().get_starting_pos(m_player_number));
+		return true;
+
 	case KEY_PAGEUP:
 		if (down) {
 			int speed = m_game->get_speed();
