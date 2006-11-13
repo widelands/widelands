@@ -86,6 +86,7 @@ m_ok
  2,
  &Fullscreen_Menu_MapSelect::ok, this,
  _("OK"),
+ std::string(),
  false),
 
 m_ml         (ml),

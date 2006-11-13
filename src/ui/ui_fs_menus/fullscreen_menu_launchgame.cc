@@ -58,6 +58,7 @@ m_ok
  2,
  &Fullscreen_Menu_LaunchGame::start_clicked, this,
  _("Start game"),
+ std::string(),
  false),
 
 	// Map selection fields
