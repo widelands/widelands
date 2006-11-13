@@ -88,13 +88,10 @@ void Statebox::set_enabled(bool enabled)
 	m_enabled = enabled;
 
 	if (!m_custom_picture) {
-		if (m_enabled) {
-			m_pic_graphics = g_gr->get_picture(PicMod_UI,
-			                                   "pics/checkbox_light.png");
-		} else {
-			m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.png");
-			m_highlighted = false;
-		}
+		m_pic_graphics = g_gr->get_picture
+			(PicMod_UI,
+			 m_enabled ? "pics/checkbox_light_new.png" : "pics/checkbox.png");
+		m_highlighted &= m_enabled;
 	}
 
 	update(0, 0, get_w(), get_h());
