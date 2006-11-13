@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,22 @@
 
 #include "fullscreen_menu_base.h"
 
+#include "ui_button.h"
+#include "ui_textarea.h"
+
 /**
  * Fullscreen Menu for The Barbarians tutorial Mission
  */
-class Fullscreen_Menu_TutorialSelectMap : public Fullscreen_Menu_Base {
-   public:
+struct Fullscreen_Menu_TutorialSelectMap : public Fullscreen_Menu_Base {
       Fullscreen_Menu_TutorialSelectMap();
 
       const char* get_mapname(int code );
+
+private:
+	UI::Textarea                                         title;
+	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> mission_1;
+	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> mission_2;
+	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> back;
 };
 
 #endif // __S__TUTSELECTMAP_H

@@ -38,14 +38,10 @@
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
 (Editor_Interactive* parent, Event_Message_Box* event)
 :
-UI::Window(parent, 0, 0, 430, 400, _("Event Option Menu").c_str()),
+UI::Window(parent, 0, 0, 430, 400, _("Message Box Event Options").c_str()),
 m_event(event),
 m_parent(parent)
 {
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Message Box Event Options"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
    const int offsy=25;
@@ -90,13 +86,24 @@ m_parent(parent)
 
    // Nur Buttons
    new UI::Textarea(this, spacing, posy, 130, 20, _("Number of Buttons: "), Align_CenterLeft);
-   UI::Button* b=new UI::Button(this, spacing+140, posy, 20, 20, 0, 2);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
-   m_nr_buttons_ta=new UI::Textarea(this, spacing+160+spacing, posy,15,20,"1", Align_CenterLeft);
-   b=new UI::Button(this, spacing+175+spacing, posy, 20, 20, 0, 3);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
+
+	new UI::Button<Event_Message_Box_Option_Menu>
+		(this,
+		 spacing + 140, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease,
+		 this);
+
+	m_nr_buttons_ta=new UI::Textarea(this, spacing+160+spacing, posy,15,20,"1", Align_CenterLeft);
+
+	new UI::Button<Event_Message_Box_Option_Menu>
+		(this,
+		 spacing + 175 + spacing, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase,
+		 this);
 
    // Button name
    posy+=20+spacing;
@@ -111,12 +118,20 @@ m_parent(parent)
    // Select trigger
    posy+=20+spacing;
    new UI::Textarea(this, spacing, posy, 100, 20, _("Select Trigger: "), Align_CenterLeft);
-   b=new UI::Button(this, spacing+110, posy, 20, 20, 0, 4);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
-   b=new UI::Button(this, spacing+130+spacing, posy, 20, 20, 0, 5);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
+
+	new UI::Button<Event_Message_Box_Option_Menu>
+		(this,
+		 spacing + 110, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease, this);
+
+	new UI::Button<Event_Message_Box_Option_Menu>
+		(this,
+		 spacing + 130 + spacing, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_increase, this);
 
    // Current Trigger
    posy+=20+spacing;
@@ -126,13 +141,18 @@ m_parent(parent)
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-30;
-   b=new UI::Button(this, posx, posy, 60, 20, 0, 1);
-   b->set_title(_("Ok").c_str());
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
+	new UI::Button<Event_Message_Box_Option_Menu>
+		(this,
+		 posx, posy, 60, 20, 0,
+		 &Event_Message_Box_Option_Menu::clicked_ok, this,
+		 _("Ok"));
    posx=(get_inner_w()/2)+spacing;
-   b=new UI::Button(this, posx, posy, 60, 20, 1, 0);
-   b->set_title(_("Cancel").c_str());
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
+	new UI::IDButton<Event_Message_Box_Option_Menu, int>
+		(this,
+		 posx, posy, 60, 20,
+		 1,
+		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
+		 _("Cancel"));
 
 	const MapTriggerManager & mtm = m_parent->get_map()->get_mtm();
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
@@ -173,34 +193,15 @@ Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu(void) {
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
 bool Event_Message_Box_Option_Menu::handle_mousepress(const Uint8 btn, int, int)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
-/*
- * a button has been clicked
- */
-void Event_Message_Box_Option_Menu::clicked(int i) {
-   switch(i) {
-      case 0:
-         {
-            // Cancel has been clicked
-            end_modal(0);
-            return;
-         }
-         break;
 
-      case 1:
-         {
-            // ok button
+void Event_Message_Box_Option_Menu::clicked_ok() {
             if(m_name->get_text())
                m_event->set_name( m_name->get_text() );
             if(m_text->get_text().c_str())
@@ -225,48 +226,37 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
             }
             end_modal(1);
             return;
-         }
-         break;
+}
 
-      case 2:
-         {
-            // Number of buttons: down
+
+void Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease() {
             m_nr_buttons--;
             if(m_nr_buttons<1) m_nr_buttons=1;
             update();
-         }
-         break;
+}
 
-      case 3:
-         {
-            // Number of buttons up
+
+void Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase() {
             m_nr_buttons++;
             if(m_nr_buttons>MAX_BUTTONS) m_nr_buttons=MAX_BUTTONS;
             update();
-         }
-         break;
+}
 
-      case 4:
-         {
-            // Trigger sel, down
+
+void Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease() {
             m_buttons[m_ls_selected].trigger--;
             if(m_buttons[m_ls_selected].trigger<-1) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
             update();
-         }
-         break;
+}
 
 
-      case 5:
-         {
-            // Trigger sel, up
+void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
             m_buttons[m_ls_selected].trigger++;
             if(m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
                m_buttons[m_ls_selected].trigger=-1;
             update();
-         }
-         break;
-   }
 }
+
 
 /*
  * update function: update all UI elements

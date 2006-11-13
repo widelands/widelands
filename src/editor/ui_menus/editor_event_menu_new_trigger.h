@@ -27,7 +27,7 @@ class Trigger_Descr;
 namespace UI {
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
-struct Button;
+template <typename T> struct Button;
 };
 
 /*
@@ -42,14 +42,14 @@ struct Editor_Event_Menu_New_Trigger : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
-      void clicked(int);
+	void clicked_ok();
 	void selected      (uint);
 	void double_clicked(uint);
 
 	UI::Listselect<Trigger_Descr &> * m_trigger_list;
       UI::Multiline_Textarea* m_description;
       Editor_Interactive* m_parent;
-      UI::Button* m_ok_button;
+	UI::Button<Editor_Event_Menu_New_Trigger> * m_ok_button;
 };
 
 #endif

@@ -25,10 +25,10 @@
 class Interactive_Player;
 
 namespace UI {
+template <typename T> struct Button;
 struct Edit_Box;
 struct Textarea;
 template <typename T> struct Listselect;
-struct Button;
 };
 
 struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
@@ -36,7 +36,8 @@ struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
       virtual ~Game_Main_Menu_Load_Game(void);
 
    private:
-      void clicked(int);
+	void clicked_ok    ();
+	void clicked_cancel();
 	void selected      (uint);
 	void double_clicked(uint);
       void edit_box_changed();
@@ -48,7 +49,7 @@ struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
 	UI::Textarea * m_name, * m_gametime;
 	UI::Listselect<const char * const> * m_ls;
 
-	UI::Button * m_ok_btn;
+	UI::Button<Game_Main_Menu_Load_Game> * m_ok_btn;
       std::string m_basedir;
       std::string m_curdir;
       std::string m_parentdir;

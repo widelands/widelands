@@ -151,7 +151,6 @@ confirm building destruction when the building's base flag is removed.
 BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy)
 	: UI::Window(parent, 0, 0, 160, 90, _("Destroy building?").c_str())
 {
-	UI::Button* btn;
 	std::string text;
 
 	m_iabase = parent;
@@ -167,15 +166,20 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, P
 	text += "?";
 	new UI::Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
 
-	btn = new UI::Button(this, 6, 50, 60, 34, 4);
-	btn->clicked.set(this, &BulldozeConfirm::bulldoze);
-	btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_ok ));
+	new UI::Button<BulldozeConfirm>
+		(this,
+		 6, 50, 60, 34,
+		 4,
+		 g_gr->get_picture(PicMod_Game, pic_ok),
+		 &BulldozeConfirm::bulldoze, this);
 
-	btn = new UI::Button(this, 94, 50, 60, 34, 4);
-	btn->clicked.set(this, &BulldozeConfirm::die);
-	btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_cancel ));
-
-	btn->center_mouse();
+	(new UI::Button<BulldozeConfirm>
+	 (this,
+	  94, 50, 60, 34,
+	  4,
+	  g_gr->get_picture(PicMod_Game, pic_cancel),
+	  &BulldozeConfirm::die, this))
+	 ->center_mouse();
 }
 
 
@@ -470,7 +474,7 @@ protected:
 	void act_bulldoze();
 	void act_debug();
 	void act_start_stop();
-   void act_enhance(int);
+	void act_enhance(const Building_Descr::Index);
    void act_drop_soldier(uint);
 	void act_change_soldier_capacity(int);
 
@@ -604,10 +608,13 @@ void Building_Window::setup_capsbuttons()
 			icon = m_building->get_continue_icon();
 		else
 			icon = m_building->get_stop_icon();
-		UI::Button* btn = new UI::Button(m_capsbuttons, x, 0, 34, 34, 4);
-		btn->clicked.set(this, &Building_Window::act_start_stop);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  icon.c_str() ));
-		btn->set_tooltip(_("Stop").c_str());
+		new UI::Button<Building_Window>
+			(m_capsbuttons,
+			 x, 0, 34, 34,
+			 4,
+			 g_gr->get_picture(PicMod_Game, icon.c_str()),
+			 &Building_Window::act_start_stop, this,
+			 _("Stop"));
 		x += 34;
 	}
 
@@ -625,32 +632,41 @@ void Building_Window::setup_capsbuttons()
             continue;
          }
 
-         UI::Button & btn = *new UI::Button(m_capsbuttons, x, 0, 34, 34, 4, id); // Button id == building id
-         btn.clickedid.set(this, &Building_Window::act_enhance);
          const Building_Descr & building = *tribe.get_building_descr(id);
-         btn.set_pic(building.get_buildicon());
          char buffer[128];
          snprintf
             (buffer, sizeof(buffer),
              _("Enhance to %s").c_str(), building.get_descname());
-         btn.set_tooltip(buffer);
+			new UI::IDButton<Building_Window, Building_Descr::Index>
+				(m_capsbuttons,
+				 x, 0, 34, 34,
+				 4,
+				 building.get_buildicon(),
+				 &Building_Window::act_enhance, this, id, // Button id = building id
+				 buffer);
          x += 34;
       }
    }
 
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
-		UI::Button* btn = new UI::Button(m_capsbuttons, x, 0, 34, 34, 4);
-		btn->clicked.set(this, &Building_Window::act_bulldoze);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_bulldoze ));
-		btn->set_tooltip(_("Destroy").c_str());
+		new UI::Button<Building_Window>
+			(m_capsbuttons,
+			 x, 0, 34, 34,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_bulldoze),
+			 &Building_Window::act_bulldoze, this,
+			 _("Destroy"));
 		x += 34;
 	}
 
 	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
-		UI::Button* btn = new UI::Button(m_capsbuttons, x, 0, 34, 34, 4);
-		btn->clicked.set(this, &Building_Window::act_debug);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_debug ));
-		btn->set_tooltip(_("Debug").c_str());
+		new UI::Button<Building_Window>
+			(m_capsbuttons,
+			 x, 0, 34, 34,
+			 4,
+			 g_gr->get_picture(PicMod_Game,  pic_debug),
+			 &Building_Window::act_debug, this,
+			 _("Debug"));
 		x += 34;
 	}
 
@@ -689,7 +705,7 @@ Building_Window::act_bulldoze
 Callback for bulldozing request
 ===============
 */
-void Building_Window::act_enhance(int id)
+void Building_Window::act_enhance(const Building_Descr::Index id)
 {
 	Game* g = m_player->get_game();
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
@@ -862,8 +878,9 @@ public:
 	virtual void think();
 
 private:
-   void clicked(int);
-   void switch_page( void );
+	void clicked_help      ();
+	void clicked_switchpage();
+	void clicked_goto      ();
 
 private:
 	WaresDisplay*			m_waresdisplay;
@@ -897,17 +914,31 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    m_curpage = 0;
 
 
-   UI::Button* b = new UI::Button(this, posx, posy, button_w, 25, 4, 100);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
-   b->clickedid.set(this, &Warehouse_Window::clicked);
+	new UI::Button<Warehouse_Window>
+		(this,
+		 posx, posy, button_w, 25,
+		 4,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+		 &Warehouse_Window::clicked_help, this);
+
    posx += button_w + spacing;
-   b = new UI::Button(this, posx, posy, button_w*2+spacing, 25, 4, 1);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/warehousewindow_switchpage.png" ));
-   b->clickedid.set(this, &Warehouse_Window::clicked);
+
+   new UI::Button<Warehouse_Window>
+		(this,
+		 posx, posy, button_w * 2 + spacing, 25,
+		 4,
+		 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
+		 &Warehouse_Window::clicked_switchpage, this);
+
    posx += button_w*2 + 2*spacing;
-   b = new UI::Button(this, posx, posy, button_w, 25, 4, 101);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_goto.png" ));
-   b->clickedid.set(this, &Warehouse_Window::clicked);
+
+	new UI::Button<Warehouse_Window>
+		(this,
+		 posx, posy, button_w, 25,
+		 4,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
+		 &Warehouse_Window::clicked_goto, this);
+
    posx += button_w + spacing;
    posy += 25 + spacing;
 
@@ -933,40 +964,21 @@ Warehouse_Window::~Warehouse_Window()
 {
 }
 
-/*
- * A button has been clicked
- */
-void Warehouse_Window::clicked( int id ) {
-   switch(id) {
-      case 100:
-      {
-         // Help
+void Warehouse_Window::clicked_help() {
          log("TODO: Implement help!\n");
-         break;
-      }
-
-      case 101:
-      {
-         // Goto button
-         m_parent->move_view_to(get_warehouse()->get_position());
-         break;
-      }
-
-      case 1:
-      {
-         // Switch page
-         switch_page();
-      }
-
-   }
-
 }
+
+
+void Warehouse_Window::clicked_goto() {
+         m_parent->move_view_to(get_warehouse()->get_position());
+}
+
 
 /*
  * Switch to the next page, that is, show
  * wares -> workers -> soldier
  */
-void Warehouse_Window::switch_page(void) {
+void Warehouse_Window::clicked_switchpage() {
    if(m_curpage == 0) {
       // Showing wares, should show workers
       m_waresdisplay->remove_all_warelists();
@@ -1165,10 +1177,8 @@ public:
 private:
    Interactive_Player* m_parent;
    UI::Window** m_reg;
-	UI::Button* m_list_worker;
 public:
    void list_worker_clicked(void);
-	UI::Button* get_list_button() { return m_list_worker; }
 protected:
    UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
 };
@@ -1216,11 +1226,15 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
    box->add(create_capsbuttons(box), UI::Box::AlignCenter);
 
       // Add list worker button
-   m_list_worker=new UI::Button(box, 0,0,32,32,4,100);
-   m_list_worker->set_pic(g_gr->get_picture( PicMod_Game,  pic_list_worker ));
-   m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
-   m_list_worker->set_tooltip(_("Show worker listing").c_str());
-   box->add(m_list_worker, UI::Box::AlignLeft);
+   box->add
+		(new UI::Button<ProductionSite_Window>
+		 (box,
+		  0, 0, 32, 32,
+		  4,
+		  g_gr->get_picture(PicMod_Game,  pic_list_worker),
+		  &ProductionSite_Window::list_worker_clicked, this,
+		  _("Show worker listing")),
+		 UI::Box::AlignLeft);
 
    return box;
 }
@@ -1330,11 +1344,15 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
    box->add(m_table, UI::Box::AlignCenter);
 
 	// Add drop soldier button
-	UI::Button* b = new UI::Button (box, 0, 0, 360, 32, 4, 100);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
-	b->clicked.set(this, &MilitarySite_Window::drop_button_clicked);
 	box->add_space(8);
-	box->add (b, UI::Box::AlignLeft);
+	box->add
+		(new UI::Button<MilitarySite_Window>
+		 (box,
+		  0, 0, 360, 32,
+		  4,
+		  g_gr->get_picture(PicMod_Game, pic_drop_soldier),
+		  &MilitarySite_Window::drop_button_clicked, this),
+		 UI::Box::AlignLeft);
 	box->add_space(8);
 
 	UI::Panel* pan = new UI::Panel(box, 0, 34, Width+100, 34);
@@ -1344,14 +1362,18 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
 		new UI::Textarea (pan, 70, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
-	b = new UI::Button (pan, 140, 4, 24, 24, 4, 2);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
-	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_down);
-	b = 0;
-	b = new UI::Button (pan, 188, 4, 24, 24, 4, 3);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
-	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_up);
-	b = 0;
+	new UI::Button<MilitarySite_Window>
+		(pan,
+		 140, 4, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_Game, pic_down_train),
+		 &MilitarySite_Window::soldier_capacity_down, this);
+	new UI::Button<MilitarySite_Window>
+		(pan,
+		 188, 4, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_Game, pic_up_train),
+		 &MilitarySite_Window::soldier_capacity_up, this);
 	m_capacity =new UI::Textarea (pan, 170, 11, "XX", Align_Center);
 
 	box->add(pan, UI::Box::AlignLeft);
@@ -1535,12 +1557,13 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 
 	// TODO: Put the capacity buttons here.
 
-	UI::Button *btn;
-
 	// Add switch training mode button
-	btn = new UI::Button (this, _cb, _bs, 105, _bs, 4, 1);
-	btn->clicked.set(this, &TrainingSite_Options_Window::heros_clicked);
-	btn = 0;
+	new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb, _bs, 105, _bs,
+			 4,
+			 0, // FIXME icon?
+			 &TrainingSite_Options_Window::heros_clicked, this);
 
 	new UI::Textarea(this, _cn - 15, _bs + 2, _("Training mode : "), Align_Left);
 	m_style_train = new UI::Textarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
@@ -1559,53 +1582,70 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	// Add priority buttons for every attribute
 	if (ps->get__descr()->get_train_hp()) {
 		// HP buttons
-		btn = new UI::Button (this,  _cb, 2*(_bs+2), _bs, _bs, 4, 2);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
-		btn->clicked.set(this, &TrainingSite_Options_Window::down_hp_clicked);
-		btn = 0;
-		btn = new UI::Button (this, _cb+2*_bs, 2*(_bs+2), _bs, _bs, 4, 3);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
-		btn->clicked.set(this, &TrainingSite_Options_Window::up_hp_clicked);
-		btn = 0;
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb, 2 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_down_train),
+			 &TrainingSite_Options_Window::down_hp_clicked, this);
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb + 2 * _bs, 2 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_up_train),
+			 &TrainingSite_Options_Window::up_hp_clicked, this);
 		new UI::Textarea (this, _cn, (3+_bs)*2, _("Hit Points"), Align_Left);
 		m_hp_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_attack()) {
 		// Attack buttons
-		btn = new UI::Button (this, _cb, 3*(_bs+2), _bs, _bs, 4, 2);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
-		btn->clicked.set(this, &TrainingSite_Options_Window::down_attack_clicked);
-		btn = 0;
-		btn = new UI::Button (this, _cb+2*_bs, 3*(_bs+2), _bs, _bs, 4, 3);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
-		btn->clicked.set(this, &TrainingSite_Options_Window::up_attack_clicked);
-		btn = 0;
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb, 3 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_down_train),
+			 &TrainingSite_Options_Window::down_attack_clicked, this);
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb + 2 * _bs, 3 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_up_train),
+			 &TrainingSite_Options_Window::up_attack_clicked, this);
 		new UI::Textarea (this, _cn, (3+_bs)*3, _("Attack"), Align_Left);
 		m_attack_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_defense()) {
 		// Defense buttons
-		btn = new UI::Button (this, _cb, 4*(_bs+2), _bs, _bs, 4, 2);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
-		btn->clicked.set(this,&TrainingSite_Options_Window::down_defense_clicked);
-		btn = 0;
-		btn = new UI::Button (this, _cb+2*_bs, 4*(_bs+2), _bs, _bs, 4, 3);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
-		btn->clicked.set(this,&TrainingSite_Options_Window::up_defense_clicked);
-		btn = 0;
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb, 4 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_down_train),
+			 &TrainingSite_Options_Window::down_defense_clicked, this);
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb + 2 * _bs, 4 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_up_train),
+			 &TrainingSite_Options_Window::up_defense_clicked, this);
 		new UI::Textarea (this, _cn, (3+_bs)*4, _("Defense"), Align_Left);
 		m_defense_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_evade()) {
 		// Evade buttons
-		btn = new UI::Button (this, _cb, 5*(_bs+2), _bs, _bs, 4, 2);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
-		btn->clicked.set(this, &TrainingSite_Options_Window::down_evade_clicked);
-		btn = 0;
-		btn = new UI::Button (this, _cb+2*_bs, 5*(_bs+2), _bs, _bs, 4, 3);
-		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
-		btn->clicked.set(this, &TrainingSite_Options_Window::up_evade_clicked);
-		btn = 0;
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb, 5 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_down_train),
+			 &TrainingSite_Options_Window::down_evade_clicked, this);
+		new UI::Button<TrainingSite_Options_Window>
+			(this,
+			 _cb + 2 * _bs,
+			 5 * (_bs + 2), _bs, _bs,
+			 4,
+			 g_gr->get_picture(PicMod_Game, pic_up_train),
+			 &TrainingSite_Options_Window::up_evade_clicked, this);
 		new UI::Textarea (this, _cn, (3+_bs)*5, _("Evade"), Align_Left);
 		m_evade_pri->set_visible(true);
 	}
@@ -1699,7 +1739,6 @@ private:
    Interactive_Player* m_parent;
    UI::Window**          m_reg;
    UI::Table*            m_table;
-   UI::Button*           m_drop_button;
    UI::Textarea*         m_capacity;
 
    UI::Tab_Panel*         m_tabpanel;
@@ -1766,34 +1805,48 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
    sold_box->add (m_table, Align_Left);
 
       // Add drop soldier button
-   UI::Button* b = new UI::Button (sold_box, 0, 0, 360, 32, 4, 100);
-   b->set_pic (g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
-   b->clicked.set (this, &TrainingSite_Window::drop_button_clicked);
-   sold_box->add (b, Align_Left);
+   sold_box->add
+		(new UI::Button<TrainingSite_Window>
+		 (sold_box,
+		  0, 0, 360, 32,
+		  4,
+		  g_gr->get_picture(PicMod_Game, pic_drop_soldier),
+		  &TrainingSite_Window::drop_button_clicked, this),
+		 Align_Left);
 
       // Add TrainingSite Options and Capacity  buttons
    UI::Box* box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
-   b = new UI::Button(box, 32, 0, 32,32, 4,100);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  pic_train_options ));
-   b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
-   box->add (b, Align_Top);
+   box->add
+		(new UI::Button<TrainingSite_Window>
+		 (box,
+		  32, 0, 32,32,
+		  4,
+		  g_gr->get_picture(PicMod_Game, pic_train_options),
+		  &TrainingSite_Window::options_button_clicked, this),
+		 Align_Top);
 
    box->add (new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
       // Capacity buttons
-   b = new UI::Button (box, 70, 4, 24, 24, 4, 2);
-   b->set_pic (g_gr->get_picture( PicMod_Game,  pic_down_train ));
-   b->clicked.set (this, &TrainingSite_Window::soldier_capacity_down);
-   box->add (b, Align_Top);
-   b = 0;
+	box->add
+		(new UI::Button<TrainingSite_Window>
+		 (box,
+		  70, 4, 24, 24,
+		  4,
+		  g_gr->get_picture(PicMod_Game, pic_down_train),
+		  &TrainingSite_Window::soldier_capacity_down, this),
+		 Align_Top);
 
    m_capacity = new UI::Textarea (box, 0, 11, _("xx"), Align_Center);
    box->add (m_capacity, Align_Top);
 
-   b = new UI::Button (box, 118, 4, 24, 24, 4, 3);
-   b->set_pic (g_gr->get_picture( PicMod_Game,  pic_up_train ));
-   b->clicked.set (this, &TrainingSite_Window::soldier_capacity_up);
-   box->add (b, Align_Top);
-   b = 0;
+	box->add
+		(new UI::Button<TrainingSite_Window>
+		 (box,
+		  118, 4, 24, 24,
+		  4,
+		  g_gr->get_picture(PicMod_Game, pic_up_train),
+		  &TrainingSite_Window::soldier_capacity_up, this),
+		 Align_Top);
    sold_box->add (box, Align_Left);
 
    return sold_box;

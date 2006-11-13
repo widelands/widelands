@@ -45,6 +45,7 @@ struct Event_Allow_Building_Option_Menu : public UI::Window {
 
    private:
       void update(void);
+	void clicked_ok();
       void clicked(int);
 
       Event_Allow_Building* m_event;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,32 +21,41 @@
 #include "error.h"
 #include "fullscreen_menu_singleplayer.h"
 #include "i18n.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
 
-Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
-	: Fullscreen_Menu_Base("singleplmenu.jpg")
-{
+Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :
+Fullscreen_Menu_Base("singleplmenu.jpg"),
+
 	// Text
-   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+title(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter),
 
 	// UI::Buttons
-	UI::Button* b;
 
-	b = new UI::Button(this, 90, 220, 200, 26, 1, New_Game);
-	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title(_("New Game").c_str());
+new_game
+(this,
+ 90, 220, 200, 26,
+ 1,
+ &Fullscreen_Menu_SinglePlayer::end_modal, this, New_Game,
+ _("New Game")),
 
-	b = new UI::Button(this, 90, 260, 200, 26, 1, Tutorial_Campaign);
-	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title(_("Tutorial Campaign").c_str());
+load_game
+(this,
+ 90, 260, 200, 26,
+ 1,
+ &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
+ _("Load Game")),
 
-	b = new UI::Button(this, 90, 300, 200, 26, 1, Load_Game);
-	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title(_("Load Game").c_str());
+tutorial
+(this,
+ 90, 300, 200, 26,
+ 1,
+ &Fullscreen_Menu_SinglePlayer::end_modal, this, Tutorial_Campaign,
+ _("Tutorial Campaign")),
 
-	b = new UI::Button(this, 90, 400, 200, 26, 0, Back);
-	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title(_("Back").c_str());
-}
+back
+(this,
+ 90, 400, 200, 26,
+ 0,
+ &Fullscreen_Menu_SinglePlayer::end_modal, this, Back,
+ _("Back"))
+
+{title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}

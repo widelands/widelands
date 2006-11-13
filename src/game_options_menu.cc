@@ -46,18 +46,34 @@ UI::UniqueWindow
  _("Options")),
 m_player(plr),
 m_windows(windows),
+
 readme
-(this, posx(0, 1),
+(this,
+ posx(0, 1),
  vmargin() + 0 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
- buttonw(1), 20, 4),
+ buttonw(1), 20,
+ 4,
+ &GameOptionsMenu::clicked_readme, this,
+ _("README")),
+
 license
-(this, posx(0, 1),
+(this,
+ posx(0, 1),
  vmargin() + 1 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
- buttonw(1), 20, 4),
+ buttonw(1), 20,
+ 4,
+ &GameOptionsMenu::clicked_license, this,
+ _("License")),
+
 authors
-(this, posx(0, 1),
+(this,
+ posx(0, 1),
  vmargin() + 2 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
- buttonw(1), 20, 4),
+ buttonw(1), 20,
+ 4,
+ &GameOptionsMenu::clicked_authors, this,
+ _("Authors")),
+
 ingame_music
 (this, hmargin(),
  vmargin() + 3 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing())),
@@ -72,42 +88,39 @@ ingame_sound_label
 (this, hmargin () + STATEBOX_WIDTH + hspacing(),
  vmargin() + 3 * (20 + vspacing()) + 1 * (STATEBOX_HEIGHT + vspacing()),
  _("Sound FX")),
+
 save_game
-(this, posx(0, 2),
+(this,
+ posx(0, 2),
  vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()),
- buttonw(2), 35, 4),
+ buttonw(2), 35,
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
+ &GameOptionsMenu::clicked_save_game, this,
+ _("Save game")),
+
 load_game
-(this, posx(1, 2),
+(this,
+ posx(1, 2),
  vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()),
- buttonw(2), 35, 4),
+ buttonw(2), 35,
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_load_game.png"),
+ &GameOptionsMenu::clicked_load_game, this,
+ _("Load game")),
+
 exit_game
-(this, posx(0, 1),
+(this,
+ posx(0, 1),
  vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()) +
  35 + vspacing(),
- buttonw(1), 35, 4)
+ buttonw(1), 35,
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
+ &GameOptionsMenu::clicked_exit_game, this,
+ _("Exit game"))
+
 {
-	readme .set_title(_("README") .c_str());
-	license.set_title(_("License").c_str());
-	authors.set_title(_("Authors").c_str());
-
-	save_game.set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"));
-	load_game.set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_load_game.png"));
-	exit_game.set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"));
-
-	readme   .clicked.set(this, &GameOptionsMenu::clicked_readme);
-	license  .clicked.set(this, &GameOptionsMenu::clicked_license);
-	authors  .clicked.set(this, &GameOptionsMenu::clicked_authors);
-	save_game.clicked.set(this, &GameOptionsMenu::clicked_save_game);
-	load_game.clicked.set(this, &GameOptionsMenu::clicked_load_game);
-	exit_game.clicked.set(this, &GameOptionsMenu::clicked_exit_game);
-
-	save_game.set_tooltip(_("Save game").c_str());
-	load_game.set_tooltip(_("Load game").c_str());
-	exit_game.set_tooltip(_("Exit game").c_str());
-
 	ingame_music.changedto.set(this, &GameOptionsMenu::changed_ingame_music);
 	ingame_sound.changedto.set(this, &GameOptionsMenu::changed_ingame_sound);
 

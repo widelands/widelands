@@ -42,11 +42,11 @@ private:
 	NetGame            * m_netgame;
 	UI::Multiline_Textarea chatbox;
 	UI::Multiline_Editbox  editbox;
-	UI::Button             send;
+	UI::Button<GameChatMenu> send;
 	UI::Textarea           show_as_overlays_label;
 	UI::Checkbox           show_as_overlays;
 
-	void clicked_send(int);
+	void clicked_send();
 	void changed_show_as_overlays(bool);
 };
 

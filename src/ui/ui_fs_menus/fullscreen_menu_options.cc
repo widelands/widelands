@@ -27,10 +27,6 @@
 #include "languages.h"
 #include "profile.h"
 #include "sound_handler.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_textarea.h"
-#include "ui_listselect.h"
 #include "wlapplication.h"
 
 /*
@@ -43,55 +39,86 @@ Fullscreen_Menu_Options
 
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
-	: Fullscreen_Menu_Base("optionsmenu.jpg")
-{
-
-	// Menu title
-	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 30, _("General Options"), Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+:
+Fullscreen_Menu_Base("optionsmenu.jpg"),
 
 	// UI::Buttons
-	UI::Button* b;
 
-	b = new UI::Button(this, 410, 530, 190, 24, 0, om_cancel);
-	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
-	b->set_title(_("Cancel").c_str());
+m_cancel
+(this,
+ 410, 530, 190, 24,
+ 0,
+ &Fullscreen_Menu_Options::end_modal, this, om_cancel,
+ _("Cancel")),
 
-	b = new UI::Button(this, 200, 530, 190, 24, 2, om_ok);
-	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
-	b->set_title(_("Apply").c_str());
+m_apply
+(this,
+ 200, 530, 190, 24,
+ 2,
+ &Fullscreen_Menu_Options::end_modal, this, om_ok,
+ _("Apply")),
+
+	// Menu title
+m_title(this, MENU_XRES / 2, 30, _("General Options"), Align_HCenter),
 
 	// Fullscreen mode
-	m_fullscreen = new UI::Checkbox(this, 300, 110);
-	m_fullscreen->set_state(opt.fullscreen);
-	new UI::Textarea(this, 325, 120, _("Fullscreen"), Align_VCenter);
+m_fullscreen(this, 300, 110),
+m_label_fullscreen(this, 325, 120, _("Fullscreen"), Align_VCenter),
 
 	// input grab
-	m_inputgrab = new UI::Checkbox(this, 300, 140);
-	m_inputgrab->set_state(opt.inputgrab);
-	new UI::Textarea(this, 325, 150, _("Grab Input"), Align_VCenter);
+m_inputgrab(this, 300, 140),
+m_label_inputgrab(this, 325, 150, _("Grab Input"), Align_VCenter),
 
 	// Music
-	m_music = new UI::Checkbox(this, 300, 170);
-	m_music->set_state(opt.music);
-	new UI::Textarea(this, 325, 180, _("Enable Music"),
-	               Align_VCenter);
-	if (g_sound_handler.m_lock_audio_disabling) {
-		m_music->set_enabled(false);
-	}
+m_music(this, 300, 170),
+m_label_music(this, 325, 180, _("Enable Music"), Align_VCenter),
 
 	// Sound FX
-	m_fx = new UI::Checkbox(this, 300, 200);
-	m_fx->set_state(opt.fx);
-	new UI::Textarea(this, 325, 210, _("Enable Sound"),
-	               Align_VCenter);
-	if (g_sound_handler.m_lock_audio_disabling) {
-		m_fx->set_enabled(false);
-	}
-
+m_fx(this, 300, 200),
+m_label_fx(this, 325, 210, _("Enable Sound"), Align_VCenter),
 
 	// In-game resolution
-	new UI::Textarea(this, 85, 95, _("In-game resolution"), Align_VCenter);
+m_reslist(this, 80, 110, 190, 150, Align_Left, true),
+m_label_resolution(this, 85, 95, _("In-game resolution"), Align_VCenter),
+
+   // Available locales
+m_label_language(this, MENU_XRES / 2 + 85, 95, _("Language"), Align_VCenter),
+m_language_list(this, MENU_XRES / 2 + 75, 110, 210, 150,Align_Left,true),
+
+m_label_game_options
+(this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
+
+   // Toggle Options
+
+m_single_watchwin(this,85,365),
+m_label_single_watchwin
+(this, 110, 375, _("Use single Watchwindow Mode"), Align_VCenter),
+
+m_show_workarea_preview(this, 85, 395),
+m_label_show_workarea_preview
+(this, 110, 405, _("Show buildings area preview"), Align_VCenter),
+
+m_snap_windows_only_when_overlapping(this, 85, 425),
+m_label_snap_windows_only_when_overlapping
+(this, 110, 435, _("Snap windows only when overlapping"), Align_VCenter),
+
+m_dock_windows_to_edges(this, 85, 455),
+m_label_dock_windows_to_edges
+(this,110,465,_("Dock windows to edges"), Align_VCenter)
+
+{
+	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_fullscreen.set_state(opt.fullscreen);
+	m_inputgrab .set_state(opt.inputgrab);
+	m_music     .set_state(opt.music);
+	m_music.set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_fx        .set_state(opt.fx);
+	m_fx   .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_single_watchwin                   .set_state(opt.single_watchwin);
+	m_show_workarea_preview             .set_state(opt.show_warea);
+	m_snap_windows_only_when_overlapping.set_state
+		(opt.snap_windows_only_when_overlapping);
+	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
 
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
@@ -126,67 +153,45 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
             m_resolutions.push_back(this_res);
       }
 
-	m_reslist = new UI::Listselect<void *>(this, 80, 110, 190, 150,Align_Left,true);
 	bool did_select_a_res=false;
 	for(uint i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
-		bool selected = ((m_resolutions[i].xres == opt.xres
-      && m_resolutions[i].yres == opt.yres
-      && m_resolutions[i].depth == opt.depth) ? true : false);
+		const bool selected =
+			m_resolutions[i].xres  == opt.xres and
+			m_resolutions[i].yres  == opt.yres and
+			m_resolutions[i].depth == opt.depth;
 		did_select_a_res|=selected;
-		m_reslist->add_entry(buf, 0 ,selected);
+		m_reslist.add_entry(buf, 0 ,selected);
 	}
-	if (!did_select_a_res)
-		m_reslist->select(m_reslist->get_nr_entries()-1);
+	if (not did_select_a_res) m_reslist.select(m_reslist.get_nr_entries() - 1);
 
-   // Available locales
-  	// In-game resolution
-	new UI::Textarea(this, MENU_XRES/2+85, 95, _("Language"), Align_VCenter);
-	m_language_list = new UI::Listselect<std::string &>(this, MENU_XRES/2 + 75, 110, 210, 150,Align_Left,true);
    available_languages[0].name = _( "System default language" );
-   for(uint i = 0; i < NR_LANGUAGES; i++) {
-		bool selected = false;
-	   if(  available_languages[i].abbrev == opt.language )
-         selected = true;
-      m_language_list->add_entry( available_languages[i].name.c_str(),
-            available_languages[i].abbrev, selected);
-	}
+	for (uint i = 0; i < NR_LANGUAGES; ++i) m_language_list.add_entry
+		(available_languages[i].name.c_str(),
+		 available_languages[i].abbrev,
+		 available_languages[i].abbrev == opt.language);
 
 
-	title= new UI::Textarea(this, MENU_XRES/2, 300, _("In-game Options"), Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-
-   // Toggle Options
-	m_single_watchwin = new UI::Checkbox(this,85,365);
-	m_single_watchwin->set_state(opt.single_watchwin);
-	new UI::Textarea(this,110,375,_("Use single Watchwindow Mode"), Align_VCenter);
-	m_show_workarea_preview= new UI::Checkbox(this,85,395);
-	m_show_workarea_preview->set_state(opt.show_warea);
-	new UI::Textarea(this,110,405,_("Show buildings area preview"), Align_VCenter);
-	m_snap_windows_only_when_overlapping = new UI::Checkbox(this,85,425);
-	m_snap_windows_only_when_overlapping->set_state(opt.snap_windows_only_when_overlapping);
-	new UI::Textarea(this,110,435,_("Snap windows only when overlapping"), Align_VCenter);
-	m_dock_windows_to_edges = new UI::Checkbox(this,85,455);
-	m_dock_windows_to_edges->set_state(opt.dock_windows_to_edges);
-	new UI::Textarea(this,110,465,_("Dock windows to edges"), Align_VCenter);
+	m_label_game_options.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
-	Options_Ctrl::Options_Struct opt;
-	int res_index = m_reslist->get_selection_index();
-	opt.xres = m_resolutions[res_index].xres;
-	opt.yres = m_resolutions[res_index].yres;
-	opt.depth = m_resolutions[res_index].depth;
-	opt.fullscreen = m_fullscreen->get_state();
-	opt.inputgrab = m_inputgrab->get_state();
-	opt.single_watchwin = m_single_watchwin->get_state();
-	opt.show_warea = m_show_workarea_preview->get_state();
-	opt.snap_windows_only_when_overlapping = m_snap_windows_only_when_overlapping->get_state();
-	opt.dock_windows_to_edges = m_dock_windows_to_edges->get_state();
-	opt.language = m_language_list->get_selection().c_str();
-   opt.music = m_music->get_state();
-   opt.fx = m_fx->get_state();
+	const uint res_index = m_reslist.get_selection_index();
+	Options_Ctrl::Options_Struct opt = {
+		m_resolutions[res_index].xres,
+		m_resolutions[res_index].yres,
+		m_resolutions[res_index].depth,
+		m_inputgrab                         .get_state    (),
+		m_fullscreen                        .get_state    (),
+		m_single_watchwin                   .get_state    (),
+		m_show_workarea_preview             .get_state    (),
+		m_snap_windows_only_when_overlapping.get_state    (),
+		m_dock_windows_to_edges             .get_state    (),
+		m_music                             .get_state    (),
+		m_fx                                .get_state    (),
+		m_language_list                     .get_selection()
+	};
    return opt;
 }
 

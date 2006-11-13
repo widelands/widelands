@@ -29,11 +29,8 @@
  * Create this
  */
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UI::Panel* parent, const char* dirname) :
-  UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str()) {
-     // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Make Directory"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
+UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str())
+{
    int spacing=5;
    int offsx=spacing;
    int offsy=30;
@@ -53,31 +50,33 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UI::Panel* 
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-   UI::Button* but= new UI::Button(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
-   but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
-   but->set_title(_("OK").c_str());
-   if(!m_dirname.size())
-      but->set_enabled(false);
-   m_ok_button=but;
-   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
-   but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
-   but->set_title(_("Cancel").c_str());
+
+	m_ok_button = new UI::IDButton<Main_Menu_Save_Map_Make_Directory, int>
+		(this,
+		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 0,
+		 &Main_Menu_Save_Map_Make_Directory::end_modal, this, 1,
+		 _("OK"),
+		 std::string(),
+		 m_dirname.size());
+
+	new UI::IDButton<Main_Menu_Save_Map_Make_Directory, int>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 1,
+		 &Main_Menu_Save_Map_Make_Directory::end_modal, this, 0,
+	  _("Cancel"));
 
    center_to_parent();
 }
 
 /*
  * handle mouseclick for a modal
+ * We are not draggable.
  */
 bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
 (const Uint8 btn, int, int)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
 (const Uint8, int, int)
 {return false;}
@@ -91,11 +90,4 @@ void Main_Menu_Save_Map_Make_Directory::edit_changed(void) {
       m_ok_button->set_enabled(true);
       m_dirname=text;
    }
-}
-
-/*
- * Button has been clicked
- */
-void Main_Menu_Save_Map_Make_Directory::clicked(int i) {
-   end_modal(i);
 }

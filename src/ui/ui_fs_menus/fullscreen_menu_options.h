@@ -23,16 +23,16 @@
 #define NUM_RESOLUTIONS 6
 
 #include "fullscreen_menu_base.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_listselect.h"
+#include "ui_textarea.h"
 
 #include <string>
 #include <vector>
 
 class Fullscreen_Menu_Options;
 struct Section;
-namespace UI {
-struct Checkbox;
-template <typename T> struct Listselect;
-};
 
 class Options_Ctrl {
 	public:
@@ -74,16 +74,29 @@ public:
    };
 
 private:
-	UI::Checkbox*	m_fullscreen;
-	UI::Checkbox*	m_inputgrab;
-	UI::Checkbox*	m_music;
-	UI::Checkbox*	m_fx;
-	UI::Checkbox* m_single_watchwin;
-	UI::Checkbox* m_show_workarea_preview;
-	UI::Checkbox* m_snap_windows_only_when_overlapping;
-	UI::Checkbox* m_dock_windows_to_edges;
-	UI::Listselect<void *> * m_reslist;
-	UI::Listselect<std::string &> * m_language_list;
+	UI::IDButton<Fullscreen_Menu_Options, int> m_cancel, m_apply;
+	UI::Textarea                      m_title;
+	UI::Checkbox                      m_fullscreen;
+	UI::Textarea                      m_label_fullscreen;
+	UI::Checkbox                      m_inputgrab;
+	UI::Textarea                      m_label_inputgrab;
+	UI::Checkbox                      m_music;
+	UI::Textarea                      m_label_music;
+	UI::Checkbox                      m_fx;
+	UI::Textarea                      m_label_fx;
+	UI::Listselect<void *>            m_reslist;
+	UI::Textarea                      m_label_resolution;
+	UI::Textarea                      m_label_language;
+	UI::Listselect<std::string &>     m_language_list;
+	UI::Textarea                      m_label_game_options;
+	UI::Checkbox                      m_single_watchwin;
+	UI::Textarea                      m_label_single_watchwin;
+	UI::Checkbox                      m_show_workarea_preview;
+	UI::Textarea                      m_label_show_workarea_preview;
+	UI::Checkbox                      m_snap_windows_only_when_overlapping;
+	UI::Textarea                      m_label_snap_windows_only_when_overlapping;
+	UI::Checkbox                      m_dock_windows_to_edges;
+	UI::Textarea                      m_label_dock_windows_to_edges;
 
 	struct res {
 		int xres;

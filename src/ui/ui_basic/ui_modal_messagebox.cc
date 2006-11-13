@@ -26,25 +26,41 @@
 #include "wlapplication.h"
 
 namespace UI {
-Modal_Message_Box::Modal_Message_Box(Panel* parent, std::string caption, std::string text, MB_Type type) :
-   Window(parent, 0, 0, 20, 20, caption.c_str()) {
+Modal_Message_Box::Modal_Message_Box
+	(Panel * const parent,
+	 const std::string & caption,
+	 const std::string & text,
+	 const MB_Type type)
+	:
+	Window(parent, 0, 0, 20, 20, caption.c_str())
+{
 
    set_inner_size(320, 160);
    set_pos((parent->get_inner_w()-320)/2, (parent->get_inner_h()-100)/2);
 
    new Multiline_Textarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
 
-   if(type==OK) {
-      Button* but= new Button(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 0);
-      but->clickedid.set(this, &Modal_Message_Box::end_modal);
-      but->set_title("OK");
-   } else if(type==YESNO) {
-      Button* but= new Button(this, ((get_inner_w()/2)-60)/2, get_inner_h()-30, 60, 20, 0, 1);
-      but->clickedid.set(this, &Modal_Message_Box::end_modal);
-      but->set_title("YES");
-      but= new Button(this, ((get_inner_w()/2)-60)/2+get_inner_w()/2, get_inner_h()-30, 60, 20, 1, 0);
-      but->clickedid.set(this, &Modal_Message_Box::end_modal);
-      but->set_title("NO");
+	if (type == OK) {
+		new IDButton<Modal_Message_Box, int>
+			(this,
+			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
+			 0,
+			 &Modal_Message_Box::end_modal, this, 0,
+			 "OK");
+	} else if (type == YESNO) {
+		new IDButton<Modal_Message_Box, int>
+			(this,
+			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
+			 0,
+			 &Modal_Message_Box::end_modal, this, 1,
+			 "Yes");
+		new IDButton<Modal_Message_Box, int>
+			(this,
+			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
+			 60, 20,
+			 1,
+			 &Modal_Message_Box::end_modal, this, 0,
+			 "No");
    }
 }
 
@@ -57,14 +73,10 @@ Modal_Message_Box::~Modal_Message_Box(void) {
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we call end_modal() with NO (=0)
+ * We are not draggable.
  */
-bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
-	if (btn == SDL_BUTTON_RIGHT) {
-      end_modal(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int, int)
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Modal_Message_Box::handle_mouserelease(const Uint8, int, int)
 {return false;}
 };

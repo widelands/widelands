@@ -37,16 +37,16 @@ public:
 private:
 	Interactive_Player	                      & m_player;
 	Interactive_Player::Game_Main_Menu_Windows & m_windows;
-	UI::Button   readme;
-	UI::Button   license;
-	UI::Button   authors;
+	UI::Button<GameOptionsMenu> readme;
+	UI::Button<GameOptionsMenu> license;
+	UI::Button<GameOptionsMenu> authors;
 	UI::Checkbox ingame_music;
 	UI::Textarea ingame_music_label;
 	UI::Checkbox ingame_sound;
 	UI::Textarea ingame_sound_label;
-	UI::Button   save_game;
-	UI::Button   load_game;
-	UI::Button   exit_game;
+	UI::Button<GameOptionsMenu> save_game;
+	UI::Button<GameOptionsMenu> load_game;
+	UI::Button<GameOptionsMenu> exit_game;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint hspacing() const {return 5;};

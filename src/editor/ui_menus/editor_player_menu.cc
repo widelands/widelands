@@ -74,18 +74,26 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
 	Tribe_Descr::get_all_tribenames(m_tribes);
 
    set_inner_size(375, 135);
-   UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Player Options"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   ta=new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
+	UI::Textarea * ta =
+		new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+width;
-   UI::Button* b=new UI::Button(this, posx, posy, width, height, 1, 0);
-   b->clickedid.set(this, &Editor_Player_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b=new UI::Button(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
-   b->clickedid.set(this, &Editor_Player_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
+
+	new UI::IDButton<Editor_Player_Menu, const Sint8>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Editor_Player_Menu::clicked_up_down, this, 1);
+
+	new UI::IDButton<Editor_Player_Menu, const Sint8>
+		(this,
+		 get_inner_w() - spacing - width, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Editor_Player_Menu::clicked_up_down, this, -1);
+
    m_nr_of_players_ta=new UI::Textarea(this, 0, 0, "5", Align_Left);
    m_nr_of_players_ta->set_pos((get_inner_w()-m_nr_of_players_ta->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
@@ -175,9 +183,14 @@ void Editor_Player_Menu::update(void) {
       }
 
       if(!m_plr_set_tribes_buts[i]) {
-         m_plr_set_tribes_buts[i]=new UI::Button(this, posx, posy, 140, size, 0, i);
+			m_plr_set_tribes_buts[i] =
+				new UI::IDButton<Editor_Player_Menu, const Player_Number>
+				(this,
+				 posx, posy, 140, size,
+				 0,
+				 &Editor_Player_Menu::player_tribe_clicked, this, i,
+				 std::string());
          posx+=140+spacing;
-         m_plr_set_tribes_buts[i]->clickedid.set(this, &Editor_Player_Menu::player_tribe_clicked);
       }
       if(m_parent->get_map()->get_scenario_player_tribe(i+1)!="<undefined>")
          m_plr_set_tribes_buts[i]->set_title(m_parent->get_map()->get_scenario_player_tribe(i+1).c_str());
@@ -188,8 +201,14 @@ void Editor_Player_Menu::update(void) {
 
       // Set Starting pos button
       if(!m_plr_set_pos_buts[i]) {
-          m_plr_set_pos_buts[i]=new UI::Button(this, posx, posy, size, size, 0, i+1);
-          m_plr_set_pos_buts[i]->clickedid.set(this, &Editor_Player_Menu::set_starting_pos_clicked);
+			m_plr_set_pos_buts[i] =
+				new UI::IDButton<Editor_Player_Menu, const Player_Number>
+				(this,
+				 posx, posy, size, size,
+				 0,
+				 0, //  set below
+				 &Editor_Player_Menu::set_starting_pos_clicked, this, i + 1,
+				 std::string());
           posx+=size+spacing;
       }
       text="pics/fsel_editor_set_player_";
@@ -199,20 +218,32 @@ void Editor_Player_Menu::update(void) {
       m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture( PicMod_Game,  text.c_str() ));
       // Build infrastructure but
       if(!m_plr_make_infrastructure_buts[i]) {
-         m_plr_make_infrastructure_buts[i]=new UI::Button(this, posx, posy, size, size, 0, i+1);
-         m_plr_make_infrastructure_buts[i]->clickedid.set(this, &Editor_Player_Menu::make_infrastructure_clicked);
+			m_plr_make_infrastructure_buts[i] =
+				new UI::IDButton<Editor_Player_Menu, const Player_Number>
+				(this,
+				 posx, posy, size, size,
+				 0,
+				 &Editor_Player_Menu::make_infrastructure_clicked, this, i + 1,
+				 _("I"), //  TODO come up with a picture for this
+				 _("Make infrastructure"));
          posx+=size+spacing;
       }
-      m_plr_make_infrastructure_buts[i]->set_enabled(0); // TODO enable this again: ->set_enabled(start_pos_valid)
-      m_plr_make_infrastructure_buts[i]->set_title("I"); // TODO: come up with a picture for this
+		m_plr_make_infrastructure_buts[i]->set_enabled(start_pos_valid);
+
       // Allowed buildings
       if(!m_plr_allowed_buildings[i]) {
-         m_plr_allowed_buildings[i]=new UI::Button(this, posx, posy, size, size, 0, i+1);
-         m_plr_allowed_buildings[i]->clickedid.set(this, &Editor_Player_Menu::allowed_buildings_clicked);
+			m_plr_allowed_buildings[i] =
+				new UI::IDButton<Editor_Player_Menu, const Player_Number>
+				(this,
+				 posx, posy, size, size,
+				 0,
+				 &Editor_Player_Menu::allowed_buildings_clicked, this, i + 1,
+				 _("B"), //  TODO come up with a picture for this
+				 _("Allow/forbid buildidngs"),
+				start_pos_valid);
          posx+=size+spacing;
       }
-      m_plr_allowed_buildings[i]->set_enabled(0); // TODO enable this again: ->set_enabled(start_pos_valid)
-      m_plr_allowed_buildings[i]->set_title("B"); // TODO: come up with a picture for this
+	   m_plr_allowed_buildings[i]->set_enabled(start_pos_valid);
 
       posx=spacing;
       posy+=size+spacing;
@@ -222,16 +253,15 @@ void Editor_Player_Menu::update(void) {
 
 /*
 ==============
-Editor_Player_Menu::button_clicked()
+Editor_Player_Menu::clicked_up_down()
 
 called when a button is clicked
 ==============
 */
-void Editor_Player_Menu::button_clicked(int n) {
+void Editor_Player_Menu::clicked_up_down(Sint8 change) {
    int nr_players=m_parent->get_map()->get_nrplayers();
    // Up down button
-   if(n==0) ++nr_players;
-   if(n==1) --nr_players;
+	nr_players += change;
    if(nr_players<1) nr_players=1;
    if(nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
    if(nr_players>m_parent->get_map()->get_nrplayers()) {
@@ -266,11 +296,10 @@ void Editor_Player_Menu::button_clicked(int n) {
 /*
  * Player Tribe Button clicked
  */
-void Editor_Player_Menu::player_tribe_clicked(int n) {
+void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
    // Tribe button has been clicked
    if(!m_parent->is_player_tribe_referenced(n+1)) {
-      UI::Button* but=m_plr_set_tribes_buts[n];
-      std::string t= but->get_title();
+      std::string t = m_plr_set_tribes_buts[n]->get_title();
       if(!Tribe_Descr::exists_tribe(t))
          throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
       uint i;
@@ -292,7 +321,7 @@ void Editor_Player_Menu::player_tribe_clicked(int n) {
 /*
  * Set Current Start Position button selected
  */
-void Editor_Player_Menu::set_starting_pos_clicked(int n) {
+void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    // jump to the current field
    Coords c=m_parent->get_map()->get_starting_pos(n);
    if (c.is_valid()) m_parent->move_view_to(c);
@@ -338,7 +367,7 @@ void Editor_Player_Menu::name_changed(int m) {
 /*
  * Make infrastructure button clicked
  */
-void Editor_Player_Menu::make_infrastructure_clicked(int n) {
+void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
    // Check if starting position is valid (was checked before
    // so must be true)
    Coords start_pos=m_parent->get_map()->get_starting_pos(n);
@@ -394,7 +423,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
 /*
  * Allowed building button clicked
  */
-void Editor_Player_Menu::allowed_buildings_clicked(int n) {
+void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
 
    Editor* editor=m_parent->get_editor();
 

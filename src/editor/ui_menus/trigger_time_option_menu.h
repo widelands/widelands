@@ -25,7 +25,7 @@
 class Editor_Interactive;
 class Trigger_Time;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 struct Textarea;
 struct Edit_Box;
 };
@@ -42,6 +42,7 @@ struct Trigger_Time_Option_Menu : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
+	void clicked_ok();
       void clicked(int);
       void update(void);
 

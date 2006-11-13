@@ -34,22 +34,22 @@ public:
 private:
 	Interactive_Player                         & m_player;
    Interactive_Player::Game_Main_Menu_Windows & m_windows;
-	UI::Button general_stats;
-	UI::Button ware_stats;
-	UI::Button building_stats;
-	UI::Button stock;
-	UI::Button objectives;
-	UI::Button chat;
-	UI::Button options_menu;
+	UI::Button<GameMainMenu> general_stats;
+	UI::Button<GameMainMenu> ware_stats;
+	UI::Button<GameMainMenu> building_stats;
+	UI::Button<GameMainMenu> stock;
+	UI::Button<GameMainMenu> objectives;
+	UI::Button<GameMainMenu> chat;
+	UI::Button<GameMainMenu> options_menu;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint hspacing() const {return 5;};
 	uint vspacing() const {return 5;};
-	
+
 	/** Returns the horizontal/vertical margin between edge and buttons. */
 	uint hmargin() const {return 2 * hspacing();}
 	uint vmargin() const {return 2 * vspacing();}
-	
+
 	/** Returns the width of a button in a row with nr_buttons buttons. */
 	uint buttonw(const uint nr_buttons) const
 	{return (get_inner_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;}
@@ -57,21 +57,21 @@ private:
 	/** Returns the height of buttons in a window with nr_rows rows. */
 	uint buttonh(const uint nr_rows) const
 	{return (get_inner_h() - (nr_rows    + 3) * vspacing()) / nr_rows;}
-	
+
 	/**
 	 * Returns the x coordinate of the (left edge of) button number nr in a row
 	 * with nr_buttons buttons.
 	 */
 	uint posx(const uint nr, const uint nr_buttons) const
 	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
-	
+
 	/**
 	 * Returns the y coordinate of the (top edge of) a button in row number nr
 	 * in a dialog with nr_rows rows.
 	 */
 	uint posy(const uint nr, const uint nr_rows) const
 	{return vmargin() + nr * (buttonh(nr_rows) + vspacing());}
-	
+
 	void clicked_general_stats ();
 	void clicked_ware_stats    ();
 	void clicked_building_stats();

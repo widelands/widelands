@@ -25,7 +25,7 @@
 class Editor_Interactive;
 class MapObjective;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 struct Table;
 struct Textarea;
 };
@@ -44,13 +44,16 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
    private:
       Editor_Interactive *m_parent;
       UI::Table            *m_table;
-      UI::Button           *m_edit_button;
-      UI::Button           *m_delete_button;
+	UI::Button<Editor_Objectives_Menu> * m_edit_button;
+	UI::Button<Editor_Objectives_Menu> * m_delete_button;
       UI::Textarea         *m_trigger;
 
    private:
 	void insert_objective(MapObjective &);
-      void clicked( int );
+	void clicked_ok  ();
+	void clicked_new ();
+	void clicked_edit();
+	void clicked_del ();
       void table_selected( int );
       void table_dblclicked( int );
 };

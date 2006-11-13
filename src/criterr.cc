@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,32 +54,44 @@ public:
 	void crash();
 
 	void draw(RenderTarget* dst);
+private:
+	UI::Textarea title, message;
+	UI::Button<Critical_Error> exit_button;
+	UI::IDButton<Critical_Error, int> continue_button;
+
 };
 
-Critical_Error::Critical_Error(const char *text)
-	: UI::Panel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
-{
+Critical_Error::Critical_Error(const char *text) :
+UI::Panel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+
 	// Text
-	new UI::Textarea(this, g_gr->get_xres()/2, 150, _("!! CRITICAL ERROR !!"), Align_HCenter);
-	new UI::Textarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
+title
+(this, g_gr->get_xres() / 2, 150, _("!! CRITICAL ERROR !!"), Align_HCenter),
+message(this, g_gr->get_xres() / 2, 200, text, Align_HCenter),
 
 	// UI::Buttons
-	UI::Button *b;
+exit_button
+(this,
+ g_gr->get_xres() / 2 - 85, g_gr->get_yres() - 200, 174, 24,
+ 1,
+ &Critical_Error::exit, this,
+ _("Exit")),
 
-	b = new UI::Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
-	b->clicked.set(this, &Critical_Error::exit);
-	b->set_title(_("Exit").c_str());
+continue_button
+(this,
+ g_gr->get_xres() / 2 - 85, g_gr->get_yres() - 250, 174, 24,
+ 1,
+ &Critical_Error::end_modal, this, 0,
+ _("!! Continue execution !!"))
 
-	b = new UI::Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
-	b->clickedid.set(this, &Critical_Error::end_modal);
-	b->set_title(_("!! Continue execution !!").c_str());
-
-	Section *s = g_options.pull_section("global");
-
-	if(s->get_bool("coredump", false)) {
-		b = new UI::Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-100, 174, 24, 1);
-		b->clicked.set(this, &Critical_Error::crash);
-		b->set_title(_("Crash").c_str());
+{
+	if (g_options.pull_section("global")->get_bool("coredump", false)) {
+		new UI::Button<Critical_Error>
+			(this,
+			 g_gr->get_xres() / 2 - 85, g_gr->get_yres() - 100, 174, 24,
+			 1,
+			 &Critical_Error::crash, this,
+			 _("Crash"));
 	}
 }
 

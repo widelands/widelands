@@ -77,12 +77,14 @@ protected:
 
 private:
 	Game*				m_game;
-	Map_View*		m_mapview;
+	Map_View                         m_mapview;
 	bool m_single_window;
 	uint last_visit;
 	int m_cur_index;
+	UI::Button<WatchWindow>          m_follow;
+	UI::Button<WatchWindow>          m_goto;
 	std::vector<WatchWindowView> m_views;
-	UI::Button* m_view_btns[NUM_VIEWS];
+	UI::IDButton<WatchWindow, int> * m_view_btns[NUM_VIEWS];
 };
 
 
@@ -96,41 +98,51 @@ Initialize a watch window.
 ===============
 */
 WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window)
-	: UI::Window(parent, x, y, w, h, _("Watch").c_str())
-{
-	UI::Button* btn;
-
-	m_game = parent->get_game();
-	last_visit = m_game->get_gametime();
-	m_single_window = single_window;
+:
+UI::Window(parent, x, y, w, h, _("Watch").c_str()),
+m_game(parent->get_game()),
+m_mapview(this, 0, 0, 200, 166, parent),
+m_single_window(single_window),
+last_visit(m_game->get_gametime()),
 
 	// UI::Buttons
-	btn = new UI::Button(this, 0, h - 34, 34, 34, 20);
-	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_watch_follow.png" ));
-	btn->clicked.set(this, &WatchWindow::toggle_tracking);
-	btn->set_tooltip(_("Follow").c_str());
 
-	btn = new UI::Button(this, 34, h - 34, 34, 34, 21);
-	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_goto.png" ));
-	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
-	btn->set_tooltip(_("Center mainview on this").c_str());
+m_follow
+(this,
+ 0, h - 34, 34, 34,
+ 20,
+ g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
+ &WatchWindow::toggle_tracking, this,
+ _("Follow")),
 
+m_goto
+(this,
+ 34, h - 34, 34, 34,
+ 21,
+ g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
+ &WatchWindow::act_mainview_goto, this,
+ _("Center mainview on this"))
+
+{
 	if (m_single_window) {
-		for (int i=0;i<NUM_VIEWS;i++) {
-			btn = new UI::Button(this, 74 + (17 * i), 200 - 34, 17, 34, 0, i);
-			btn->set_title("-");
-			btn->clickedid.set(this, &WatchWindow::set_view);
-			m_view_btns[i] = btn;
-		}
+		for (Uint8 i = 0; i < NUM_VIEWS; ++i)
+			m_view_btns[i] = new UI::IDButton<WatchWindow, int>
+				(this,
+				 74 + (17 * i), 200 - 34, 17, 34,
+				 0,
+				 &WatchWindow::set_view, this, i,
+				 "-");
 
-		btn = new UI::Button(this, w-34, h - 34, 34, 34, 22);
-		btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_abort.png" ));
-		btn->clicked.set(this, &WatchWindow::close_cur_view);
-		btn->set_tooltip(_("Close").c_str());
+		new UI::Button<WatchWindow>
+			(this,
+			 w - 34, h - 34, 34, 34,
+			 22,
+			 g_gr->get_picture(PicMod_UI, "pics/menu_abort.png"),
+			 &WatchWindow::close_cur_view, this,
+			 _("Close"));
 	}
-	m_mapview = new Map_View(this, 0, 0, 200, 166, parent);
-	m_mapview->fieldclicked.set(parent, &Interactive_Player::field_action);
-	m_mapview->warpview.set(this, &WatchWindow::stop_tracking_by_drag);
+	m_mapview.fieldclicked.set(parent, &Interactive_Player::field_action);
+	m_mapview.warpview.set(this, &WatchWindow::stop_tracking_by_drag);
 	warp_mainview.set(parent, &Interactive_Base::move_view_to_point);
 
 	add_view(coords);
@@ -158,8 +170,8 @@ Point WatchWindow::calc_coords(Coords coords) {
 	int vx = coords.x * TRIANGLE_WIDTH;
 	int vy = coords.y * TRIANGLE_HEIGHT;
 
-	Point p (vx - m_mapview->get_w()/2, vy - m_mapview->get_h()/2);
-	return p;
+
+	return Point(vx - m_mapview.get_w() / 2, vy - m_mapview.get_h() / 2);
 }
 
 //Switch to next view
@@ -184,9 +196,8 @@ void WatchWindow::set_view(int index) {
 }
 
 //Saves the coordinates of a view if it was already shown (and possibly moved)
-void WatchWindow::save_coords() {
-	m_views[m_cur_index].view_point = m_mapview->get_viewpoint();
-}
+void WatchWindow::save_coords()
+{m_views[m_cur_index].view_point = m_mapview.get_viewpoint();}
 
 //Closes current view and disables button
 void WatchWindow::close_cur_view() {
@@ -226,7 +237,7 @@ void WatchWindow::toggle_buttons() {
 
 //Draws the current view
 void WatchWindow::show_view(bool) {
-	m_mapview->set_viewpoint(m_views[m_cur_index].view_point);
+	m_mapview.set_viewpoint(m_views[m_cur_index].view_point);
 	//Tracking turned of by default
 	//start_tracking(m_views[m_cur_index].view_point);
 }
@@ -299,10 +310,10 @@ void WatchWindow::toggle_tracking()
 
 	if (obj)
 		m_views[m_cur_index].tracking = 0;
-	else {
-		start_tracking(m_mapview->get_viewpoint() +
-					Point(m_mapview->get_w()/2, m_mapview->get_h()/2));
-	}
+	else start_tracking
+		(m_mapview.get_viewpoint()
+		 +
+		 Point(m_mapview.get_w() / 2, m_mapview.get_h() / 2));
 }
 
 
@@ -313,11 +324,11 @@ WatchWindow::act_mainview_goto
 Cause the main mapview to jump to our current position.
 ===============
 */
-void WatchWindow::act_mainview_goto()
-{
-	Point p = m_mapview->get_viewpoint() + Point(m_mapview->get_w()/2, m_mapview->get_h()/2);
-
-	warp_mainview.call(p);
+void WatchWindow::act_mainview_goto() {
+	warp_mainview.call
+		(m_mapview.get_viewpoint()
+		 +
+		 Point(m_mapview.get_w() / 2, m_mapview.get_h() / 2));
 }
 
 
@@ -350,11 +361,12 @@ void WatchWindow::think()
 			(*m_game->get_map(), bob->get_position(), pos.x, pos.y);
 		pos = bob->calc_drawpos(*m_game, pos);
 
-		m_mapview->set_viewpoint(pos - Point(m_mapview->get_w()/2, m_mapview->get_h()/2));
+		m_mapview.set_viewpoint
+			(pos - Point(m_mapview.get_w() / 2, m_mapview.get_h() / 2));
 	}
 
    // make sure that the view gets updated
-   m_mapview->need_complete_redraw();
+	m_mapview.need_complete_redraw();
 }
 
 
@@ -367,7 +379,7 @@ When the user drags the mapview, we stop tracking.
 */
 void WatchWindow::stop_tracking_by_drag(int, int) {
 	//Disable switching while dragging
-	if (m_mapview->is_dragging()) {
+	if (m_mapview.is_dragging()) {
 		last_visit = m_game->get_gametime();
 		m_views[m_cur_index].tracking = 0;
 	}

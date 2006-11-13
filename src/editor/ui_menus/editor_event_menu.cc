@@ -52,14 +52,10 @@ Create all the buttons etc...
 ===============
 */
 Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
-	: UI::UniqueWindow(parent, registry, 620, 400, _("Event Menu"))
+:
+UI::UniqueWindow(parent, registry, 620, 400, _("Event Menu")),
+m_parent        (parent)
 {
-   m_parent=parent;
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Event Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    const int offsx=5;
    const int offsy=25;
    const int spacing=5;
@@ -90,50 +86,97 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UI::UniqueWindo
 
    posy=get_inner_h()-30;
    posx=spacing;
-   UI::Button* b=new UI::Button(this, posx, posy, 90, 20, 4);
-   b->set_title(_("New Event Chain").c_str());
-   b->clicked.set(this, &Editor_Event_Menu::clicked_new_eventchain);
+
+	new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 90, 20, 4,
+		 &Editor_Event_Menu::clicked_new_eventchain, this,
+		 _("New Event Chain"));
+
    posx+=90+spacing;
-   m_btn_edit_eventchain=new UI::Button(this, posx, posy, 50, 20, 0);
-   m_btn_edit_eventchain->set_title(_("Edit").c_str());
-   m_btn_edit_eventchain->clicked.set(this, &Editor_Event_Menu::clicked_edit_eventchain);
-   m_btn_edit_eventchain->set_enabled(false);
+
+	m_btn_edit_eventchain = new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 50, 20,
+		 0,
+		 &Editor_Event_Menu::clicked_edit_eventchain, this,
+		 _("Edit"),
+		 std::string(),
+		 false);
+
    posx+=50+spacing;
-   m_btn_del_eventchain=new UI::Button(this, posx, posy, 50, 20, 0);
-   m_btn_del_eventchain->set_title(_("Del").c_str());
-   m_btn_del_eventchain->clicked.set(this, &Editor_Event_Menu::clicked_del_eventchain);
-   m_btn_del_eventchain->set_enabled(false);
+
+	m_btn_del_eventchain = new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 50, 20,
+		 0,
+		 &Editor_Event_Menu::clicked_del_eventchain, this,
+		 _("Del"),
+		 std::string(),
+		 false);
 
    posx=spacing + ls_width + spacing;
-   b=new UI::Button(this, posx, posy, 90, 20, 4);
-   b->set_title(_("New Event").c_str());
-   b->clicked.set(this, &Editor_Event_Menu::clicked_new_event);
+
+	new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 90, 20,
+		 4,
+		 &Editor_Event_Menu::clicked_new_event, this,
+		 _("New Event"));
+
    posx+=90+spacing;
-   m_btn_edit_event=new UI::Button(this, posx, posy, 50, 20, 0);
-   m_btn_edit_event->set_title(_("Edit").c_str());
-   m_btn_edit_event->clicked.set(this, &Editor_Event_Menu::clicked_edit_event);
-   m_btn_edit_event->set_enabled(false);
+
+	m_btn_edit_event = new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 50, 20,
+		 0,
+		 &Editor_Event_Menu::clicked_edit_event, this,
+		 _("Edit"),
+		 std::string(),
+		 false);
+
    posx+=50+spacing;
-   m_btn_del_event=new UI::Button(this, posx, posy, 50, 20, 0);
-   m_btn_del_event->set_title(_("Del").c_str());
-   m_btn_del_event->clicked.set(this, &Editor_Event_Menu::clicked_del_event);
-   m_btn_del_event->set_enabled(false);
+
+	m_btn_del_event = new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 50, 20,
+		 0,
+		 &Editor_Event_Menu::clicked_del_event, this,
+		 _("Del"),
+		 std::string(),
+		 false);
 
 
    posx= 3* spacing + 2*ls_width;
-   b=new UI::Button(this, posx, posy, 90, 20, 4);
-   b->set_title(_("New Trigger").c_str());
-   b->clicked.set(this, &Editor_Event_Menu::clicked_new_trigger);
+
+	new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 90, 20,
+		 4,
+		 &Editor_Event_Menu::clicked_new_trigger, this,
+		 _("New Trigger"));
+
    posx+=90+spacing;
-   m_btn_edit_trigger=new UI::Button(this, posx, posy, 50, 20, 0);
-   m_btn_edit_trigger->set_title(_("Edit").c_str());
-   m_btn_edit_trigger->clicked.set(this, &Editor_Event_Menu::clicked_edit_trigger);
-   m_btn_edit_trigger->set_enabled(false);
+
+	m_btn_edit_trigger = new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 50, 20,
+		 0,
+		 &Editor_Event_Menu::clicked_edit_trigger, this,
+		 _("Edit"),
+		 std::string(),
+		 false);
+
    posx+=50+spacing;
-   m_btn_del_trigger=new UI::Button(this, posx, posy, 50, 20, 0);
-   m_btn_del_trigger->set_title(_("Del").c_str());
-   m_btn_del_trigger->clicked.set(this, &Editor_Event_Menu::clicked_del_trigger);
-   m_btn_del_trigger->set_enabled(false);
+
+	m_btn_del_trigger = new UI::Button<Editor_Event_Menu>
+		(this,
+		 posx, posy, 50, 20,
+		 0,
+		 &Editor_Event_Menu::clicked_del_trigger, this,
+		 _("Del"),
+		 std::string(),
+		 false);
 
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())

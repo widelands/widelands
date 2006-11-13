@@ -28,7 +28,7 @@
 
 
 namespace UI {
-struct Button;
+template <typename T, typename ID> struct IDButton;
 struct Scrollbar;
 struct Table;
 
@@ -69,6 +69,7 @@ struct Table_Entry {
  */
 class Table : public Panel {
    friend class Table_Entry;
+	struct Column;
 
 public: // DATA
    enum Type {
@@ -92,9 +93,10 @@ public: // FUNCTIONS
    inline int get_nr_columns(void) { return m_columns.size(); }
 
    void clear();
-	void set_sort_column(const uint col) throw ()
+	typedef std::vector<Column> Columns;
+	void set_sort_column(const Columns::size_type col) throw ()
 	{assert(m_columns.size() > col); m_sort_column = col;}
-   int  get_sort_colum(void) { return m_sort_column; }
+	Columns::size_type get_sort_colum() const throw () {return m_sort_column;}
    int  get_sort_direction(void) { return m_sort_direction; }
    void set_sort_direction(Dir dir) { m_sort_direction=dir; }
 
@@ -127,7 +129,7 @@ private: // DATA
    struct Column {
       std::string name;
       Type type;
-      Button* btn;
+		IDButton<Table, Columns::size_type> * btn;
    };
 
    struct Entry {
@@ -138,7 +140,7 @@ private: // DATA
 	static const int ms_darken_value=-20;
    static const int DOUBLE_CLICK_INTERVAL=500; // half a second
 
-   std::vector<Column> m_columns;
+	Columns m_columns;
 	uint                m_max_pic_width;
    int                  m_lineheight;
 	Align						m_align;
@@ -148,11 +150,11 @@ private: // DATA
    int                  m_last_click_time;
    int                  m_last_selection;  // for double clicks
    int                  m_sort_direction;
-   int                  m_sort_column;
+	Columns::size_type m_sort_column;
    Dir                  m_default_sort_dir;
 
 private: // FUNCTIONS
-   void header_button_clicked(int);
+	void header_button_clicked(Columns::size_type);
    void add_entry(Table_Entry* t, bool);
 	std::vector<Table_Entry*>	m_entries;
 	void set_scrollpos(int pos);

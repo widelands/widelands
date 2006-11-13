@@ -22,16 +22,12 @@
 
 #include <string>
 #include <vector>
-#include "ui_panel.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
 #include "ui_signal.h"
+#include "ui_textarea.h"
 
 class Game;
-namespace UI {
-struct Button;
-struct Checkbox;
-struct Panel;
-struct Textarea;
-};
 
 /** class PlayerDescriptionGroup
  *
@@ -71,10 +67,10 @@ private:
 
 	std::vector<std::string> m_tribes;
 
-	UI::Textarea* m_plr_name;
-	UI::Checkbox* m_btnEnablePlayer;
-	UI::Button* m_btnPlayerType;
-	UI::Button* m_btnPlayerTribe;
+	UI::Textarea                       m_plr_name;
+	UI::Checkbox                       m_btnEnablePlayer;
+	UI::Button<PlayerDescriptionGroup> m_btnPlayerType;
+	UI::Button<PlayerDescriptionGroup> m_btnPlayerTribe;
 };
 
 

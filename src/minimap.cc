@@ -162,35 +162,48 @@ MiniMap::MiniMap(Interactive_Base & iabase, UI::UniqueWindow::Registry * registr
 :
 UI::UniqueWindow(&iabase, registry, 0, 0, _("Map")),
 m_view(*this, 0, 0, 0, 0, iabase),
+
 button_terrn
-(this, but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Terrn),
+(this,
+ but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
+ &MiniMap::toggle, this, Terrn,
+ _("Terrain")),
+
 button_owner
-(this, but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Owner),
+(this,
+ but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
+ &MiniMap::toggle, this, Owner,
+ _("Owner")),
+
 button_flags
-(this, but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(), 0, Flags),
+(this,
+ but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
+ &MiniMap::toggle, this, Flags,
+ _("Flags")),
+
 button_roads
-(this, but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(), 0, Roads),
+(this,
+ but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
+ &MiniMap::toggle, this, Roads,
+ _("Roads")),
+
 button_bldns
-(this, but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(), 0, Bldns)
+(this,
+ but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
+ &MiniMap::toggle, this, Bldns,
+ _("Buildings"))
+
 {
-	button_terrn.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"));
-	button_owner.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_owner.png"));
-	button_flags.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_flags.png"));
-	button_roads.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.png"));
-	button_bldns.set_pic(g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"));
-
-	button_terrn.set_tooltip(_("Terrain")  .c_str());
-	button_owner.set_tooltip(_("Owner")    .c_str());
-	button_flags.set_tooltip(_("Flags")    .c_str());
-	button_roads.set_tooltip(_("Roads")    .c_str());
-	button_bldns.set_tooltip(_("Buildings").c_str());
-
-	button_terrn.clickedid.set(this, &MiniMap::toggle);
-	button_owner.clickedid.set(this, &MiniMap::toggle);
-	button_flags.clickedid.set(this, &MiniMap::toggle);
-	button_roads.clickedid.set(this, &MiniMap::toggle);
-	button_bldns.clickedid.set(this, &MiniMap::toggle);
-
 	set_inner_size
 		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
 
@@ -198,4 +211,4 @@ button_bldns
 }
 
 
-void MiniMap::toggle(int button) {m_view.flags ^= button;}
+void MiniMap::toggle(Layers button) {m_view.flags ^= button;}

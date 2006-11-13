@@ -36,7 +36,7 @@ struct Editor_Tool_Change_Resources_Options_Menu : public Editor_Tool_Options_Me
 
    private:
       void selected(void);
-      void clicked(int);
+	void clicked(const Uint8);
       void update(void);
       UI::Textarea* m_increase, *m_set, *m_cur_selection;
       UI::Radiogroup* m_radiogroup;

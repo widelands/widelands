@@ -48,32 +48,45 @@ struct New_Variable_Window : public UI::Window {
    private:
       Editor_Interactive* m_parent;
       MapVariable* m_variable;
+	enum Variable_Type {Integer_Type, String_Type};
+	UI::IDButton<New_Variable_Window, const Variable_Type> button_integer;
+	UI::IDButton<New_Variable_Window, const Variable_Type> button_string;
+	UI::IDButton<New_Variable_Window, int>                 button_back;
 
    private:
-      void clicked( int );
+	void clicked_new(const Variable_Type);
 };
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
-		UI::Window(parent, 0, 0, 135, 55, _("New Variable").c_str()) {
+UI::Window(parent, 0, 0, 135, 55, _("New Variable").c_str()),
 
-   m_parent = parent;
-   m_variable = 0;
+m_parent(parent),
+m_variable(0),
 
    // What type
-   UI::Button* b = new UI::Button( this, 5, 5, 60, 20, 0, 0);
-   b->set_title(_("Integer").c_str());
-   b->clickedid.set(this, &New_Variable_Window::clicked);
-   b = new UI::Button( this, 70, 5, 60, 20, 0, 1);
-   b->set_title(_("String").c_str());
-   b->clickedid.set(this, &New_Variable_Window::clicked);
 
-   // back button
-   b = new UI::Button( this, (get_inner_w()-80)/2, 30, 80, 20, 1, 2);
-   b->set_title(_("Back").c_str());
-   b->clickedid.set(this, &New_Variable_Window::clicked);
+button_integer
+(this,
+ 5, 5, 60, 20,
+ 0,
+ &New_Variable_Window::clicked_new, this, Integer_Type,
+ _("Integer")),
 
-   center_to_parent();
-}
+button_string
+(this,
+ 70, 5, 60, 20,
+ 0,
+ &New_Variable_Window::clicked_new, this, String_Type,
+ _("String")),
+
+button_back
+(this,
+ (get_inner_w() - 80) / 2, 30, 80, 20,
+ 1,
+ &New_Variable_Window::end_modal, this, 0,
+ _("Back"))
+
+{center_to_parent();}
 
 /*
  * Handle mouseclick
@@ -81,21 +94,17 @@ New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
-bool New_Variable_Window::handle_mousepress(const Uint8 btn, int, int) {
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+bool New_Variable_Window::handle_mousepress(const Uint8 btn, int, int)
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool New_Variable_Window::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
  * a button has been clicked
  */
-void New_Variable_Window::clicked(int i) {
+void New_Variable_Window::clicked_new(const Variable_Type i) {
    // Get the a name
 
    char buffer[256];
@@ -105,29 +114,19 @@ void New_Variable_Window::clicked(int i) {
 		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
 
    std::string name = buffer;
-   switch( i ) {
-      case 0:
-         // Integer
+	switch (i) {
+	case Integer_Type:
          m_variable = new Int_MapVariable( 0 );
-         m_variable->set_name( buffer);
-         mvm.register_new_variable(m_variable);
-         end_modal(1);
          break;
 
-      case 1:
-         // String
+	case String_Type:
          m_variable = new String_MapVariable( 0 );
-         m_variable->set_name( buffer);
-         mvm.register_new_variable(m_variable);
-         end_modal(1);
-         break;
-
-      case 2:
-         // back
-         end_modal(0);
          break;
    }
 
+	m_variable->set_name(buffer);
+	mvm.register_new_variable(m_variable);
+	end_modal(1);
    return;
 }
 
@@ -135,8 +134,7 @@ void New_Variable_Window::clicked(int i) {
  * This is a modal box - The user must end this first
  * before it can return
  */
-class Edit_Variable_Window : public UI::Window {
-   public:
+struct Edit_Variable_Window : public UI::Window {
       Edit_Variable_Window(Editor_Interactive*, UI::Table_Entry*);
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
@@ -145,39 +143,50 @@ class Edit_Variable_Window : public UI::Window {
    private:
       Editor_Interactive *m_parent;
       UI::Table_Entry      *m_te;
-      UI::Edit_Box         *m_name;
-      UI::Edit_Box         *m_val;
+	UI::Textarea                            m_label_name;
+	UI::Edit_Box                            m_name;
+	UI::Textarea                            m_label_value;
+	UI::Edit_Box                            m_value;
+	UI::Button<Edit_Variable_Window>        m_ok;
+	UI::IDButton<Edit_Variable_Window, int> m_back;
 
    private:
-      void clicked( int );
+	void clicked_ok();
 };
 
+#define spacing 5
+
 Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UI::Table_Entry* te)
-	: UI::Window(parent, 0, 0, 250, 85, _("Edit Variable").c_str()) {
+:
+UI::Window(parent, 0, 0, 250, 85, _("Edit Variable").c_str()),
 
-   m_parent=parent;
-   m_te = te;
-
-   int spacing = 5;
+m_parent(parent),
+m_te(te),
 
    // What type
-   new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
-   m_name = new UI::Edit_Box( this, 120, 5, 120, 20, 0, 0);
-   m_name->set_text(m_te->get_string(0));
+m_label_name(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft),
+m_name(this, 120, 5, 120, 20, 0, 0),
 
-   new UI::Textarea(this, 5, 30, 120, 20, _("Value"), Align_CenterLeft);
-   m_val = new UI::Edit_Box( this, 120, 35, 120, 20, 0, 0);
-   m_val->set_text(m_te->get_string(1));
+m_label_value(this, 5, 30, 120, 20, _("Value"), Align_CenterLeft),
+m_value(this, 120, 35, 120, 20, 0, 0),
 
-   // back button
-   UI::Button* b = new UI::Button( this, get_inner_w()/2-80-spacing, 60, 80, 20, 1, 0);
-   b->set_title(_("Ok").c_str());
-   b->clickedid.set(this, &Edit_Variable_Window::clicked);
-   b = new UI::Button( this, get_inner_w()/2 + spacing, 60, 80, 20, 1, 1);
-   b->set_title(_("Back").c_str());
-   b->clickedid.set(this, &Edit_Variable_Window::clicked);
+m_ok
+(this,
+ get_inner_w() / 2 - 80 - spacing, 60, 80, 20,
+ 1,
+ &Edit_Variable_Window::clicked_ok, this,
+ _("Ok")),
+m_back
+(this,
+ get_inner_w() / 2 + spacing, 60, 80, 20,
+ 1,
+ &Edit_Variable_Window::end_modal, this, 0,
+ _("Back"))
 
 
+{
+	m_name .set_text(m_te->get_string(0));
+	m_value.set_text(m_te->get_string(1));
    center_to_parent();
 }
 
@@ -187,30 +196,18 @@ Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UI::Table
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
-bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int, int) {
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int, int)
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Edit_Variable_Window::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
  * a button has been clicked
  */
-void Edit_Variable_Window::clicked(int i) {
+void Edit_Variable_Window::clicked_ok() {
    // Get the a name
-
-   if( i )  {
-      // Back
-      end_modal(0);
-      return;
-   }
-
-   // Ok
 
    // Extract value
    MapVariable* var = static_cast<MapVariable*>(m_te->get_user_data());
@@ -219,14 +216,18 @@ void Edit_Variable_Window::clicked(int i) {
       case MapVariable::MVT_INT:
       {
          char* endp;
-         long ivar = strtol(m_val->get_text(), &endp, 0);
+			const long ivar = strtol(m_value.get_text(), &endp, 0);
 
          if (endp && *endp) {
             char buffer[1024];
-	    snprintf(buffer, sizeof(buffer), "%s %s", m_val->get_text(), _("is not a valid integer!").c_str());
-            UI::Modal_Message_Box* mb = new UI::Modal_Message_Box(m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
-            mb->run();
-            delete mb;
+				snprintf
+					(buffer, sizeof(buffer),
+					 "%s %s",
+					 m_value.get_text(),
+					 _("is not a valid integer!").c_str());
+				UI::Modal_Message_Box mb
+					(m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
+            mb.run();
             return;
          }
          char buffer[256];
@@ -239,13 +240,14 @@ void Edit_Variable_Window::clicked(int i) {
 
       case MapVariable::MVT_STRING:
       {
-         static_cast<String_MapVariable*>(var)->set_value( m_val->get_text() );
-         m_te->set_string(1, m_val->get_text() );
+			static_cast<String_MapVariable * const>(var)
+				->set_value(m_value.get_text());
+			m_te->set_string(1, m_value.get_text());
       }
       break;
    }
 
-   var->set_name( m_name->get_text() );
+	var->set_name(m_name.get_text());
    m_te->set_string(0, var->get_name() );
 
    end_modal(1);
@@ -259,18 +261,41 @@ Editor_Variables_Menu::Editor_Variables_Menu
 Create all the buttons etc...
 ===============
 */
+#define spacing 5
 Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
-	: UI::UniqueWindow(parent, registry, 410, 330, _("Variables Menu"))
-{
-   m_parent=parent;
+:
+UI::UniqueWindow(parent, registry, 410, 330, _("Variables Menu")),
+m_parent(parent),
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Variables Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
+m_button_new
+(this,
+ get_inner_w() / 2 - 180 - spacing, get_inner_h() - 30, 120, 20,
+ 0,
+ &Editor_Variables_Menu::clicked_new, this,
+ _("New")),
+
+ m_button_edit
+(this,
+ get_inner_w() / 2 - 60, get_inner_h() - 30, 120, 20,
+ 0,
+ &Editor_Variables_Menu::clicked_edit, this,
+ _("Edit"),
+ std::string(),
+ false),
+
+m_button_del
+(this,
+ get_inner_w() / 2 + 60 + spacing, get_inner_h() - 30, 120, 20,
+ 0,
+ &Editor_Variables_Menu::clicked_del, this,
+ _("Delete"),
+ std::string(),
+ false)
+
+{
 
    const int offsx=5;
    const int offsy=25;
-   const int spacing=5;
    int posx=offsx;
    int posy=offsy;
 
@@ -279,19 +304,6 @@ Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UI::Uni
    m_table->add_column(_("Value").c_str(), UI::Table::STRING, 100);
    m_table->selected.set(this, &Editor_Variables_Menu::table_selected);
    m_table->double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
-
-   // Buttons
-   UI::Button* nbutton = new UI::Button( this, get_inner_w()/2 - 180 - spacing, get_inner_h() - 30, 120, 20, 0, 0);
-   nbutton->set_title(_("New").c_str());
-   nbutton->clickedid.set(this, &Editor_Variables_Menu::clicked);
-   m_edit_button = new UI::Button( this, get_inner_w()/2 - 60, get_inner_h() - 30, 120, 20, 0, 1);
-   m_edit_button->set_title(_("Edit").c_str());
-   m_edit_button->set_enabled(false);
-   m_edit_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
-   m_delete_button = new UI::Button( this, get_inner_w()/2 + 60 + spacing, get_inner_h() - 30, 120, 20, 0, 2);
-   m_delete_button->set_title(_("Delete").c_str());
-   m_delete_button->set_enabled(false);
-   m_delete_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
 
    // Add all variables
 	const MapVariableManager & mvm =
@@ -319,33 +331,19 @@ Editor_Variables_Menu::~Editor_Variables_Menu()
 /*
  * A Button has been clicked
  */
-void Editor_Variables_Menu::clicked( int n ) {
-   switch( n ) {
-      case 0:
-      {
-         // Create a new variable
-         New_Variable_Window* nvw = new New_Variable_Window( m_parent );
-         if( nvw->run() ) {
-            insert_variable(*nvw->get_variable());
-            clicked(1);
-         }
-         delete nvw;
-      }
-      break;
-
-      case 1:
-      {
-         // Edit selected variable
-         Edit_Variable_Window* evw = new Edit_Variable_Window( m_parent, m_table->get_entry(m_table->get_selection_index()) );
-         if( evw->run() )
-            m_table->sort();
-         delete evw;
-      }
-      break;
-
-      case 2:
-      {
-         // Delete selected variable
+void Editor_Variables_Menu::clicked_new() {
+	New_Variable_Window nvw(m_parent);
+	if (nvw.run()) {
+		insert_variable(*nvw.get_variable());
+		clicked_edit();
+	}
+}
+void Editor_Variables_Menu::clicked_edit() {
+	Edit_Variable_Window evw
+		(m_parent, m_table->get_entry(m_table->get_selection_index()));
+	if (evw.run()) m_table->sort();
+}
+void Editor_Variables_Menu::clicked_del()      {
          int idx =  m_table->get_selection_index();
          MapVariable* mv = static_cast<MapVariable*>( m_table->get_entry( idx )->get_user_data() );
 
@@ -356,33 +354,26 @@ void Editor_Variables_Menu::clicked( int n ) {
          m_table->remove_entry( idx );
          m_table->sort();
 
-         m_edit_button->set_enabled( false );
-         m_delete_button->set_enabled( false );
-      }
-      break;
-
-   }
+	m_button_edit.set_enabled(false);
+	m_button_del .set_enabled(false);
 }
 
 /*
  * The table has been selected
  */
 void Editor_Variables_Menu::table_selected( int n ) {
-   m_edit_button->set_enabled( true );
+	m_button_edit.set_enabled(true);
 
-   if( !static_cast<MapVariable*>(m_table->get_entry( n )->get_user_data())->is_delete_protected())
-      m_delete_button->set_enabled( true );
-   else
-      m_delete_button->set_enabled( false );
+	m_button_del.set_enabled
+		(not static_cast<const MapVariable * const>
+		 (m_table->get_entry(n)->get_user_data())
+		 ->is_delete_protected());
 }
 
 /*
  * Table has been doubleclicked
  */
-void Editor_Variables_Menu::table_dblclicked( int ) {
-   // like a click on edit
-   clicked( 1 );
-}
+void Editor_Variables_Menu::table_dblclicked(int) {clicked_edit();}
 
 /*
  * Insert this map variable into the table

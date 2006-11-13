@@ -22,18 +22,17 @@
 
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 
 class Editor_Game_Base;
 class Game;
 class Map;
 class Map_Loader;
 class RenderTarget;
-namespace UI {
-struct Button;
-template <typename T> struct Listselect;
-struct Multiline_Textarea;
-struct Textarea;
-};
 
 /**
  * Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu
@@ -41,10 +40,14 @@ struct Textarea;
 class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	Game* game;
 
-	UI::Listselect<const char * const> *list;
-	UI::Textarea *tamapname;
-	UI::Textarea *tagametime;
-	UI::Button *m_ok;
+	UI::IDButton<Fullscreen_Menu_LoadGame, int> back;
+	UI::Button<Fullscreen_Menu_LoadGame>        m_ok;
+	UI::Listselect<const char * const>          list;
+	UI::Textarea                                title;
+	UI::Textarea                                label_mapname;
+	UI::Textarea                                tamapname;
+	UI::Textarea                                label_gametime;
+	UI::Textarea                                tagametime;
    std::string m_filename;
 
 	filenameset_t	m_gamefiles;
@@ -55,7 +58,7 @@ public:
 
 	const char *get_gamename() { return m_filename.c_str(); }
 
-	void ok();
+	void clicked_ok();
 	void map_selected  (uint);
 	void double_clicked(uint);
    void fill_list(void);

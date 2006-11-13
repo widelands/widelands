@@ -42,6 +42,7 @@ struct Event_Move_View_Option_Menu : public UI::Window {
 
    private:
       void update(void);
+	void clicked_ok();
       void clicked(int);
 
       Event_Move_View* m_event;

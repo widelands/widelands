@@ -40,46 +40,64 @@ GameMainMenu::GameMainMenu
 UI::UniqueWindow(&plr, &registry, 180, 160, _("Main Menu")),
 m_player      (plr),
 m_windows     (windows),
-general_stats (this, posx(0, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
-ware_stats    (this, posx(1, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
-building_stats(this, posx(2, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
-stock         (this, posx(3, 4), posy(0, 3), buttonw(4), buttonh(3), 4),
-objectives    (this, posx(0, 2), posy(1, 3), buttonw(2), buttonh(3), 4),
-chat          (this, posx(1, 2), posy(1, 3), buttonw(2), buttonh(3), 4),
-options_menu  (this, posx(0, 1), posy(2, 3), buttonw(1), buttonh(3), 4)
-{
-	general_stats .set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"));
-	ware_stats    .set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"));
-	building_stats.set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"));
-	stock.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"));
-	objectives    .set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png"));
-	chat.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_chat.png"));
-	options_menu  .set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/menu_options_menu.png"));
 
-	general_stats .clicked.set(this, &GameMainMenu::clicked_general_stats);
-	ware_stats    .clicked.set(this, &GameMainMenu::clicked_ware_stats);
-	building_stats.clicked.set(this, &GameMainMenu::clicked_building_stats);
-	stock         .clicked.set(this, &GameMainMenu::clicked_stock);
-	objectives    .clicked.set(this, &GameMainMenu::clicked_objectives);
-	chat          .clicked.set(this, &GameMainMenu::clicked_chat);
-	options_menu  .clicked.set(this, &GameMainMenu::clicked_options_menu);
+general_stats
+(this,
+ posx(0, 4), posy(0, 3), buttonw(4), buttonh(3),
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
+ &GameMainMenu::clicked_general_stats, this,
+ _("General statistics")),
 
-	general_stats .set_tooltip(_("General statistics") .c_str());
-	ware_stats    .set_tooltip(_("Ware statistics")    .c_str());
-	building_stats.set_tooltip(_("Building statistics").c_str());
-	stock         .set_tooltip(_("Stock")              .c_str());
-	objectives    .set_tooltip(_("Objectives")         .c_str());
-	chat          .set_tooltip(_("Chat")               .c_str());
-	options_menu  .set_tooltip(_("Options")            .c_str());
+ware_stats
+(this,
+ posx(1, 4), posy(0, 3), buttonw(4), buttonh(3),
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
+ &GameMainMenu::clicked_ware_stats, this,
+ _("Ware statistics")),
 
-	if (get_usedefaultpos())
-		center_to_parent();
-}
+building_stats
+(this,
+ posx(2, 4), posy(0, 3), buttonw(4), buttonh(3),
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
+ &GameMainMenu::clicked_building_stats, this,
+ _("Building statistics")),
+
+stock
+(this,
+ posx(3, 4), posy(0, 3), buttonw(4), buttonh(3),
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
+ &GameMainMenu::clicked_stock, this,
+ _("Stock")),
+
+objectives
+(this,
+ posx(0, 2), posy(1, 3), buttonw(2), buttonh(3),
+ 4,
+	g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png"),
+ &GameMainMenu::clicked_objectives, this,
+ _("Objectives")),
+
+chat
+(this,
+ posx(1, 2), posy(1, 3), buttonw(2), buttonh(3),
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_chat.png"),
+ &GameMainMenu::clicked_chat, this,
+ _("Chat")),
+
+options_menu
+(this,
+ posx(0, 1), posy(2, 3), buttonw(1), buttonh(3),
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_options_menu.png"),
+ &GameMainMenu::clicked_options_menu, this,
+ _("Options"))
+
+{if (get_usedefaultpos()) center_to_parent();}
 
 
 void GameMainMenu::clicked_general_stats() {

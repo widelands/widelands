@@ -20,19 +20,18 @@
 #ifndef __S__NETSETUP_H
 #define __S__NETSETUP_H
 
+#include "network_lan_promotion.h"
+
+#include "ui_button.h"
+#include "ui_textarea.h"
+#include "ui_editbox.h"
+#include "ui_table.h"
+
 #include <list>
 #include <string>
 
 #include "fullscreen_menu_base.h"
 
-namespace UI {
-struct Edit_Box;
-struct Table;
-struct Table_Entry;
-struct Button;
-};
-
-class LAN_Game_Finder;
 class LAN_Open_Game;
 struct LAN_Game_Info;
 
@@ -48,7 +47,6 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		};
 
 		Fullscreen_Menu_NetSetup ();
-		~Fullscreen_Menu_NetSetup ();
 
 		virtual void think();
 
@@ -61,11 +59,16 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		void fill(std::list<std::string> tables);
 
 	private:
-		UI::Edit_Box*		hostname;
-		UI::Edit_Box*		playername;
-		UI::Table*		opengames;
-		LAN_Game_Finder*	discovery;
-		UI::Button*		networktype;
+	UI::Textarea                                title;
+	UI::Button<Fullscreen_Menu_NetSetup>        joingame;
+	UI::Button<Fullscreen_Menu_NetSetup>        hostgame;
+	UI::IDButton<Fullscreen_Menu_NetSetup, int> playinternet;
+	UI::IDButton<Fullscreen_Menu_NetSetup, int> back;
+	UI::Edit_Box                                hostname;
+	UI::Edit_Box                                playername;
+	UI::Table                                   opengames;
+	LAN_Game_Finder                             discovery;
+	UI::Button<Fullscreen_Menu_NetSetup>        networktype;
 		bool			internetgame;
 
 		void game_selected (int);
@@ -78,10 +81,10 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 
 		void update_game_info (UI::Table_Entry*, const LAN_Game_Info&);
 
-		void toggle_networktype(int code);
+	void toggle_networktype();
 		void toggle_hostname();
-		void joingame(int code);
-		void hostgame(int code);
+	void clicked_joingame();
+	void clicked_hostgame();
 };
 
 #endif

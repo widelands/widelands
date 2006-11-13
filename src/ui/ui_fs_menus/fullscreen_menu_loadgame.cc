@@ -26,11 +26,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
 
 /*
 ==============================================================================
@@ -40,36 +35,42 @@ Fullscreen_Menu_LoadGame
 ==============================================================================
 */
 
-Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *, bool)
-	: Fullscreen_Menu_Base("choosemapmenu.jpg")
-{
-	// Text
-   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 90, _("Choose saved game!"), Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *, bool) :
+Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 	// UI::Buttons
-	UI::Button* b;
 
-	b = new UI::Button(this, 570, 505, 200, 26, 0, 0);
-	b->clickedid.set(this, &Fullscreen_Menu_LoadGame::end_modal);
-	b->set_title("Back");
+back
+(this,
+ 570, 505, 200, 26,
+ 0,
+ &Fullscreen_Menu_LoadGame::end_modal, this, 0,
+ _("Back")),
 
-	m_ok = new UI::Button(this, 570, 535, 200, 26, 2, 0);
-	m_ok->clicked.set(this, &Fullscreen_Menu_LoadGame::ok);
-	m_ok->set_title(_("OK").c_str());
-	m_ok->set_enabled(false);
+m_ok
+(this,
+ 570, 535, 200, 26,
+ 2,
+ &Fullscreen_Menu_LoadGame::clicked_ok, this,
+ _("OK"),
+ std::string(),
+ false),
 
 	// Create the list area
-	list = new UI::Listselect<const char * const>(this, 15, 205, 455, 365);
-	list->selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
-   list->double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
+list(this, 15, 205, 455, 365),
 
-	// Info fields
-	new UI::Textarea(this, 560, 205, _("Map Name:"), Align_Right);
-	tamapname = new UI::Textarea(this, 570, 205, "");
-	new UI::Textarea(this, 560, 225, _("Gametime:"), Align_Right);
-	tagametime = new UI::Textarea(this, 570, 225, "");
+title(this, MENU_XRES / 2, 90, _("Choose saved game!"), Align_HCenter),
 
+// Info fields
+label_mapname (this, 560, 205, _("Map Name:"), Align_Right),
+tamapname     (this, 570, 205, ""),
+label_gametime(this, 560, 225, _("Gametime:"), Align_Right),
+tagametime    (this, 570, 225, "")
+
+{
+	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	list.selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
+	list.double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
    fill_list();
 }
 
@@ -77,27 +78,21 @@ Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame()
 {
 }
 
-void Fullscreen_Menu_LoadGame::ok()
+void Fullscreen_Menu_LoadGame::clicked_ok()
 {
-	std::string filename = list->get_selection();
-
-   m_filename = filename;
-
+   m_filename = list.get_selection();
    end_modal(1);
 }
 
 void Fullscreen_Menu_LoadGame::map_selected(uint) {
-   const char* name = list->get_selection();
-
-   if (name)
-   {
+	if (const char * const name = list.get_selection()) {
       FileSystem* fs = g_fs->MakeSubFileSystem( name );
 		Game_Loader gl(*fs, game);
       Game_Preload_Data_Packet gpdp;
       gl.preload_game(&gpdp); // This has worked before, no problem
 
-      m_ok->set_enabled(true);
-      tamapname->set_text(gpdp.get_mapname());
+		m_ok.set_enabled(true);
+		tamapname.set_text(gpdp.get_mapname());
 
       char buf[200];
       uint gametime = gpdp.get_gametime();
@@ -107,12 +102,12 @@ void Fullscreen_Menu_LoadGame::map_selected(uint) {
       int minutes = gametime / 60000;
 
       sprintf(buf, "%02i:%02i", hours, minutes);
-      tagametime->set_text(buf);
+		tagametime.set_text(buf);
 
       delete fs;
    } else {
-      tamapname->set_text("");
-      tagametime->set_text("");
+		tamapname .set_text("");
+		tagametime.set_text("");
    }
 }
 
@@ -121,7 +116,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint) {
  */
 void Fullscreen_Menu_LoadGame::double_clicked(uint) {
    // Ok
-   ok();
+   clicked_ok();
 
 }
 
@@ -146,7 +141,7 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
-			list->add_entry(fname, name);
+			list.add_entry(fname, name);
          free(fname);
 
       } catch(_wexception& ) {
@@ -156,6 +151,5 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
          delete fs;
    }
 
-   if(list->get_nr_entries())
-      list->select(0);
+	if (list.get_nr_entries()) list.select(0);
 }

@@ -43,6 +43,7 @@ struct Event_Conquer_Area_Option_Menu : public UI::Window {
 
    private:
       void update(void);
+	void clicked_ok();
       void clicked(int);
 
       Event_Conquer_Area* m_event;

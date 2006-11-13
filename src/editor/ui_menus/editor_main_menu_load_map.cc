@@ -103,15 +103,21 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    posx=5;
    posy=get_inner_h()-30;
 
-   UI::Button* but= new UI::Button(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
-   but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
-   but->set_title(_("OK").c_str());
-   m_ok_btn=but;
-   but->set_enabled(false);
-   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
-   but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
-   but->set_title(_("Cancel").c_str());
+	m_ok_btn = new UI::Button<Main_Menu_Load_Map>
+		(this,
+		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 0,
+		 &Main_Menu_Load_Map::clicked_ok, this,
+		 _("OK"),
+		 std::string(),
+		 false);
 
+	new UI::Button<Main_Menu_Load_Map>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 1,
+		 &Main_Menu_Load_Map::die, this,
+		 _("Cancel"));
 
    m_basedir="maps";
    m_curdir="maps";
@@ -138,9 +144,7 @@ Main_Menu_Load_Map::~Main_Menu_Load_Map()
 called when the ok button has been clicked
 ===========
 */
-void Main_Menu_Load_Map::clicked(int id) {
-   if(id==1) {
-      // Ok
+void Main_Menu_Load_Map::clicked_ok() {
 		std::string filename(m_ls->get_selection());
 
       if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename)) {
@@ -152,10 +156,6 @@ void Main_Menu_Load_Map::clicked(int id) {
          load_map(filename);
          die();
       }
-   } else {
-      // Cancel
-      die();
-   }
 }
 
 /*
@@ -198,7 +198,7 @@ void Main_Menu_Load_Map::selected(uint) {
 /*
  * An Item has been doubleclicked
  */
-void Main_Menu_Load_Map::double_clicked(uint) {clicked(1);}
+void Main_Menu_Load_Map::double_clicked(uint) {clicked_ok();}
 
 /*
  * fill the file list

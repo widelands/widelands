@@ -41,8 +41,8 @@ public:
 private:
 	Interactive_Player &  m_player;
 	WaresDisplay          waresdisplay;
-	UI::Button              help;
-	UI::Button              switchpage;
+	UI::Button<Stock_Menu> help;
+	UI::Button<Stock_Menu> switchpage;
 	enum {Wares, Workers} current_page;
    void fill_waredisplay_with_wares(void);
    void fill_waredisplay_with_workers(void);
@@ -68,8 +68,8 @@ private:
 	uint posx(const uint nr, const uint nr_buttons) const
 	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
 
-	void clicked_help       (int);
-	void clicked_switch_page(int);
+	void clicked_help       ();
+	void clicked_switch_page();
 };
 
 #endif

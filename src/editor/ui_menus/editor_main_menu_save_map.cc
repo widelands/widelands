@@ -108,17 +108,29 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-   UI::Button* but= new UI::Button(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
-   but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title(_("OK").c_str());
-   but->set_enabled(false);
-   m_ok_btn=but;
-   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
-   but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title(_("Cancel").c_str());
-   but= new UI::Button(this, spacing, posy, 120, 20, 1, 2);
-   but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title(_("Make Directory").c_str());
+
+	m_ok_btn = new UI::Button<Main_Menu_Save_Map>
+		(this,
+		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 0,
+		 &Main_Menu_Save_Map::clicked_ok, this,
+		 _("OK"),
+		 std::string(),
+		 false);
+
+	new UI::Button<Main_Menu_Save_Map>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 1,
+		 &Main_Menu_Save_Map::die, this,
+		 _("Cancel"));
+
+	new UI::Button<Main_Menu_Save_Map>
+		(this,
+		 spacing, posy, 120, 20,
+		 1,
+		 &Main_Menu_Save_Map::clicked_make_directory, this,
+		 _("Make Directory"));
 
 
    m_basedir="maps";
@@ -146,9 +158,7 @@ Main_Menu_Save_Map::~Main_Menu_Save_Map()
 called when the ok button has been clicked
 ===========
 */
-void Main_Menu_Save_Map::clicked(int id) {
-   if(id==1) {
-      // Ok
+void Main_Menu_Save_Map::clicked_ok() {
       std::string filename=m_editbox->get_text();
 
       if(filename=="") {
@@ -166,26 +176,20 @@ void Main_Menu_Save_Map::clicked(int id) {
          if(save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
             die();
       }
-   } else if(id==0) {
-      // Cancel
-      die();
-   } else if(id==2) {
-      // Make directory
-	   Main_Menu_Save_Map_Make_Directory* md=new Main_Menu_Save_Map_Make_Directory(this, _("unnamed").c_str());
-      if(md->run()) {
+}
+void Main_Menu_Save_Map::clicked_make_directory() {
+	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed").c_str());
+	if(md.run()) {
          g_fs->EnsureDirectoryExists(m_basedir);
          // Create directory
-         std::string dirname=md->get_dirname();
          std::string fullname=m_curdir;
          fullname+="/";
-         fullname+=dirname;
+		fullname += md.get_dirname();
          g_fs->MakeDirectory(fullname);
          m_ls->clear();
          m_mapfiles.clear();
          fill_list();
       }
-      delete md;
-   }
 }
 
 /*
@@ -232,7 +236,7 @@ void Main_Menu_Save_Map::selected(uint) {
 /*
  * An Item has been doubleclicked
  */
-void Main_Menu_Save_Map::double_clicked(uint) {clicked(1);}
+void Main_Menu_Save_Map::double_clicked(uint) {clicked_ok();}
 
 /*
  * fill the file list

@@ -22,16 +22,15 @@
 
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
+#include "ui_checkbox.h"
+#include "ui_button.h"
 #include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 
 class Editor_Game_Base;
 class Map;
 class Map_Loader;
-namespace UI {
-struct Button;
-struct Multiline_Textarea;
-struct Textarea;
-};
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
@@ -39,14 +38,24 @@ struct Textarea;
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	Editor_Game_Base		*egbase;
 
-	UI::Listselect<const char * const> *list;
-	UI::Textarea *taname;
-	UI::Textarea *taauthor;
-	UI::Textarea *tasize;
-	UI::Textarea *taworld;
-	UI::Textarea *tanplayers;
-	UI::Multiline_Textarea *tadescr;
-	UI::Button *m_ok;
+	UI::Textarea                                 title;
+	UI::Textarea                                 label_load_map_as_scenario;
+	UI::Checkbox                                 load_map_as_scenario;
+	UI::Listselect<const char * const>           list;
+	UI::Textarea                                 label_name;
+	UI::Textarea                                 taname;
+	UI::Textarea                                 label_author;
+	UI::Textarea                                 taauthor;
+	UI::Textarea                                 label_size;
+	UI::Textarea                                 tasize;
+	UI::Textarea                                 label_world;
+	UI::Textarea                                 taworld;
+	UI::Textarea                                 label_nplayers;
+	UI::Textarea                                 tanplayers;
+	UI::Textarea                                 label_descr;
+	UI::Multiline_Textarea                       tadescr;
+	UI::IDButton<Fullscreen_Menu_MapSelect, int> back;
+	UI::Button<Fullscreen_Menu_MapSelect>        m_ok;
 
 	filenameset_t	m_mapfiles;
 
@@ -58,7 +67,7 @@ public:
 	Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader**);
 	~Fullscreen_Menu_MapSelect();
 
-	const char * get_mapname() const throw () {return list->get_selection();}
+	const char * get_mapname() const throw () {return list.get_selection();}
 
 	void ok();
 	void map_selected  (uint);

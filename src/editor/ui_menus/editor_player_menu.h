@@ -20,16 +20,19 @@
 #ifndef __S__EDITOR_PLAYER_MENU_H
 #define __S__EDITOR_PLAYER_MENU_H
 
+#include "constants.h"
+#include "types.h"
+
+#include "ui_unique_window.h"
+
 #include <string>
 #include <vector>
-#include "constants.h"
-#include "ui_unique_window.h"
 
 class Editor_Interactive;
 namespace UI {
 struct Textarea;
 struct Edit_Box;
-struct Button;
+template <typename T, typename ID> struct IDButton;
 };
 
 struct Editor_Player_Menu : public UI::UniqueWindow {
@@ -41,10 +44,11 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
       Editor_Interactive* m_parent;
       UI::Textarea *m_nr_of_players_ta;
       UI::Edit_Box* m_plr_names[MAX_PLAYERS];
-      UI::Button* m_plr_allowed_buildings[MAX_PLAYERS];
-      UI::Button* m_plr_make_infrastructure_buts[MAX_PLAYERS];
-      UI::Button* m_plr_set_pos_buts[MAX_PLAYERS];
-      UI::Button* m_plr_set_tribes_buts[MAX_PLAYERS];
+	UI::IDButton<Editor_Player_Menu, const Player_Number>
+		* m_plr_allowed_buildings       [MAX_PLAYERS],
+		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
+		* m_plr_set_pos_buts            [MAX_PLAYERS],
+		* m_plr_set_tribes_buts         [MAX_PLAYERS];
       std::vector<std::string> m_tribes;
 
       Editor_Interactive::Editor_Tools* m_tools;
@@ -53,12 +57,12 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
 
       int m_posy;
 
-      void name_changed(int);
-      void button_clicked(int);
-      void player_tribe_clicked(int);
-      void set_starting_pos_clicked(int);
-      void make_infrastructure_clicked(int);
-      void allowed_buildings_clicked(int);
+	void name_changed(int);
+	void clicked_up_down            (const Sint8 change);
+	void player_tribe_clicked       (const Uint8);
+	void set_starting_pos_clicked   (const Uint8);
+	void make_infrastructure_clicked(const Uint8);
+	void allowed_buildings_clicked  (const Uint8);
       void update();
       void think();
 };

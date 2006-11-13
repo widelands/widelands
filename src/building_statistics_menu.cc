@@ -90,45 +90,69 @@ m_parent(&parent)
    // owned
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
    m_owned = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
-   UI::Button* b = new UI::Button(this, get_inner_w()-58, posy, 24, 24, 4, 0);
-   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   m_btn[0] = b;
-   b = new UI::Button(this, get_inner_w()-29, posy, 24, 24, 4, 1);
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
-   m_btn[1] = b;
+
+	m_btn[0] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+		(this,
+		 get_inner_w() - 58, posy, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+		 &Building_Statistics_Menu::clicked_jump, this, Prev_Owned);
+
+	m_btn[1] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+		(this,
+		 get_inner_w() - 29, posy, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+		 &Building_Statistics_Menu::clicked_jump, this, Next_Owned);
+
    posy += 25;
 
    // build
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
    m_build = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
-   b = new UI::Button(this, get_inner_w()-58, posy, 24, 24, 4, 2);
-   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   m_btn[2] = b;
-   b = new UI::Button(this, get_inner_w()-29, posy, 24, 24, 4, 3);
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   m_btn[3] = b;
-   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
+
+	m_btn[2] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+		(this,
+		 get_inner_w() - 58, posy, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+		 &Building_Statistics_Menu::clicked_jump, this, Prev_Construction);
+
+	m_btn[3] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+		(this,
+		 get_inner_w() - 29, posy, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+		 &Building_Statistics_Menu::clicked_jump, this, Next_Construction);
+
    posy += 25;
 
    // Jump to unproductive
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Jump to unproductive: "), Align_CenterLeft);
-   b = new UI::Button(this, get_inner_w()-58, posy, 24, 24, 4, 4);
-   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   m_btn[4] = b;
-   b = new UI::Button(this, get_inner_w()-29, posy, 24, 24, 4, 5);
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
-   m_btn[5] = b;
+
+	m_btn[4] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+		(this,
+		 get_inner_w() - 58, posy, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+		 &Building_Statistics_Menu::clicked_jump, this, Prev_Unproductive);
+
+	m_btn[5] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+		(this,
+		 get_inner_w() - 29, posy, 24, 24,
+		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+		 &Building_Statistics_Menu::clicked_jump, this, Next_Unproductive);
+
    posy += 25;
 
    // TODO: help button
-   b = new UI::Button(this, spacing, get_inner_w()-37, 32, 32, 4, 100);
-   b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
+	new UI::Button<Building_Statistics_Menu>
+		(this,
+		 spacing, get_inner_w() - 37, 32, 32,
+		 0,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+		 &Building_Statistics_Menu::clicked_help, this);
 
    m_lastupdate = m_parent->get_game()->get_gametime();
    m_anim = 0;
@@ -195,29 +219,28 @@ int Building_Statistics_Menu::validate_pointer(int* id, int size) {
 called when the ok button has been clicked
 ===========
 */
-void Building_Statistics_Menu::clicked(int id) {
-   if(id == 100) {
+void Building_Statistics_Menu::clicked_help() {
       log("TODO: help not implemented\n");
-      return;
-   }
+}
 
 
+void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
    const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(m_selected);
 
    bool found = true; // We think, we always find a proper building
 
-   switch(id) {
-      case 0:
+	switch (id) {
+	case Prev_Owned:
          /* jump prev building */
          m_last_building_index--;
          break;
 
-      case 1:
+	case Next_Owned:
          /* Jump next building */
          m_last_building_index++;
          break;
 
-      case 2:
+	case Prev_Construction:
          /* Jump to prev constructionsite */
          {
             int curindex = m_last_building_index;
@@ -226,7 +249,7 @@ void Building_Statistics_Menu::clicked(int id) {
          }
          break;
 
-      case 3:
+	case Next_Construction:
          /* Jump to next constructionsite */
          {
             int curindex = m_last_building_index;
@@ -235,8 +258,7 @@ void Building_Statistics_Menu::clicked(int id) {
          }
          break;
 
-      case 4:
-         /* Jump to prev unproductive */
+	case Prev_Unproductive:
          {
             int curindex = m_last_building_index;
             found = false;
@@ -259,8 +281,7 @@ void Building_Statistics_Menu::clicked(int id) {
          }
          break;
 
-      case 5:
-         /* Jump to prev unproductive */
+	case Next_Unproductive:
          {
             int curindex = m_last_building_index;
             found = false;

@@ -34,10 +34,10 @@ struct MiniMap : public UI::UniqueWindow {
 	void set_view_pos(const int x, const int y) throw ()
 	{m_view.set_view_pos(x, y);}
 
-	enum {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16};
+	enum Layers {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16};
 
 private:
-	void toggle(int);
+	void toggle(Layers);
 
 	/**
 	 * MiniMapView is the panel that represents the pure representation of the
@@ -76,11 +76,11 @@ private:
 	uint but_h                    () const throw ();
 
 	View     m_view;
-	UI::Button button_terrn;
-	UI::Button button_owner;
-	UI::Button button_flags;
-	UI::Button button_roads;
-	UI::Button button_bldns;
+	UI::IDButton<MiniMap, Layers> button_terrn;
+	UI::IDButton<MiniMap, Layers> button_owner;
+	UI::IDButton<MiniMap, Layers> button_flags;
+	UI::IDButton<MiniMap, Layers> button_roads;
+	UI::IDButton<MiniMap, Layers> button_bldns;
    char     m_flags;
 };
 

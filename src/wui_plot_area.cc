@@ -238,9 +238,7 @@ void WUIPlot_Area::show_plot( uint id, bool t ) {
 /*
  * set time
  */
-void WUIPlot_Area::set_time( int id ) {
-   m_time = id;
-}
+void WUIPlot_Area::set_time(TIME id) {m_time = id;}
 
 /*
  * Set sample rate the data uses

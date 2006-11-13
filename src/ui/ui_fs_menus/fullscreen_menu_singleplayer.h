@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,16 +22,24 @@
 
 #include "fullscreen_menu_base.h"
 
+#include "ui_button.h"
+#include "ui_textarea.h"
+
 /**
  * Fullscreen Menu for SinglePlayer.
  * Here you select what game you want to play.
  */
-class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
-   public:
+struct Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
       Fullscreen_Menu_SinglePlayer();
 
 	enum {Back = dying_code, New_Game, Tutorial_Campaign, Load_Game};
 
+private:
+	UI::Textarea                                    title;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> new_game;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> load_game;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> tutorial;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> back;
 };
 
 #endif // __S__SINGLEPMENUE_H

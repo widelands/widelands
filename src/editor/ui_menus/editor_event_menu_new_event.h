@@ -25,7 +25,7 @@
 class Editor_Interactive;
 class Event_Descr;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
 };
@@ -42,14 +42,14 @@ struct Editor_Event_Menu_New_Event : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
-      void clicked(int);
+	void clicked_ok();
 	void selected      (uint);
 	void double_clicked(uint);
 
 	UI::Listselect<Event_Descr &> * m_event_list;
 	UI::Multiline_Textarea        * m_description;
       Editor_Interactive* m_parent;
-	UI::Button                    * m_ok_button;
+	UI::Button<Editor_Event_Menu_New_Event> * m_ok_button;
 };
 
 #endif

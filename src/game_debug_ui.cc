@@ -236,7 +236,7 @@ FieldDebugWindow
 
 class FieldDebugWindow : public UI::Window {
 public:
-	FieldDebugWindow(Interactive_Base* parent, Coords coords);
+	FieldDebugWindow(Interactive_Base & parent, const Coords);
 	~FieldDebugWindow();
 
 	Interactive_Base* get_iabase() { return (Interactive_Base*)get_parent(); }
@@ -247,12 +247,12 @@ public:
 	void open_bob(const uint index);
 
 private:
-	Map*			m_map;
+	Map &                        m_map;
 	FCoords		m_coords;
 
-	UI::Multiline_Textarea*	m_ui_field;
-	UI::Button*					m_ui_immovable;
-	UI::Listselect<uintptr_t> * m_ui_bobs;
+	UI::Multiline_Textarea       m_ui_field;
+	UI::Button<FieldDebugWindow> m_ui_immovable;
+	UI::Listselect<uintptr_t>    m_ui_bobs;
 };
 
 
@@ -263,21 +263,26 @@ FieldDebugWindow::FieldDebugWindow
 Initialize the field debug window.
 ===============
 */
-FieldDebugWindow::FieldDebugWindow(Interactive_Base* parent, Coords coords)
-	: UI::Window(parent, 0, 0, 200, 200, _("Debug Field").c_str())
-{
-	m_map = parent->get_map();
-	m_coords = m_map->get_fcoords(coords);
+FieldDebugWindow::FieldDebugWindow
+(Interactive_Base & parent, const Coords coords)
+:
+UI::Window(&parent, 0, 0, 200, 200, _("Debug Field").c_str()),
+m_map     (parent.map()),
+m_coords  (m_map.get_fcoords(coords)),
 
 	// Setup child panels
-	m_ui_field = new UI::Multiline_Textarea(this, 0, 0, 200, 80, "");
+m_ui_field(this, 0, 0, 200, 80, ""),
 
-	m_ui_immovable = new UI::Button(this, 0, 80, 200, 24, 0);
-	m_ui_immovable->clicked.set(this, &FieldDebugWindow::open_immovable);
+m_ui_immovable
+(this,
+ 0, 80, 200, 24,
+ 0,
+ &FieldDebugWindow::open_immovable, this,
+ ""),
 
-	m_ui_bobs = new UI::Listselect<uintptr_t>(this, 0, 104, 200, 96);
-	m_ui_bobs->selected.set(this, &FieldDebugWindow::open_bob);
-}
+m_ui_bobs(this, 0, 104, 200, 96)
+
+{m_ui_bobs.selected.set(this, &FieldDebugWindow::open_bob);}
 
 
 /*
@@ -311,7 +316,7 @@ void FieldDebugWindow::think()
 		 m_coords.x, m_coords.y, _("height:").c_str(), m_coords.field->get_height());
 	str += buf;
 
-	m_ui_field->set_text(str.c_str());
+	m_ui_field.set_text(str.c_str());
 
 	// Immovable information
 	BaseImmovable* imm = m_coords.field->get_immovable();
@@ -328,22 +333,22 @@ void FieldDebugWindow::think()
 		}
 
 		snprintf(buf, sizeof(buf), "%s (%u)", name.c_str(), imm->get_serial());
-		m_ui_immovable->set_title(buf);
-		m_ui_immovable->set_enabled(true);
+		m_ui_immovable.set_title(buf);
+		m_ui_immovable.set_enabled(true);
 	} else {
-		m_ui_immovable->set_title("no immovable");
-		m_ui_immovable->set_enabled(false);
+		m_ui_immovable.set_title("no immovable");
+		m_ui_immovable.set_enabled(false);
 	}
 
 	// Bobs information
 	std::vector<Bob*> bobs;
 
-	m_ui_bobs->clear();
+	m_ui_bobs.clear();
 
-	m_map->find_bobs(m_coords, 0, &bobs);
+	m_map.find_bobs(m_coords, 0, &bobs);
 	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
 		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->get_name().c_str(), (*it)->get_serial());
-		m_ui_bobs->add_entry(buf, (*it)->get_serial());
+		m_ui_bobs.add_entry(buf, (*it)->get_serial());
 	}
 }
 
@@ -375,7 +380,7 @@ void FieldDebugWindow::open_bob(const uint index) {
 	if (index != UI::Listselect<uintptr_t>::no_selection_index()) if
 		(Map_Object * const object =
 		 get_iabase()->get_egbase()->get_objects()->get_object
-		 (m_ui_bobs->get_selection()))
+		 (m_ui_bobs.get_selection()))
 		show_mapobject_debug(get_iabase(), object);
 }
 
@@ -388,6 +393,4 @@ Open a debug window for the given field.
 ===============
 */
 void show_field_debug(Interactive_Base *parent, Coords coords)
-{
-	new FieldDebugWindow(parent, coords);
-}
+{new FieldDebugWindow(*parent, coords);}

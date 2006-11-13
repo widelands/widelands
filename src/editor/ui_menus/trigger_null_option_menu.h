@@ -38,7 +38,7 @@ struct Trigger_Null_Option_Menu : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
-      void clicked(int);
+	void clicked_ok();
 
       Trigger_Null* m_trigger;
       Editor_Interactive* m_parent;

@@ -29,7 +29,7 @@ struct Edit_Box;
 template <typename T> struct Listselect;
 struct Textarea;
 struct Multiline_Textarea;
-struct Button;
+template <typename T> struct Button;
 };
 
 /*
@@ -46,7 +46,7 @@ struct Main_Menu_Load_Map : public UI::Window {
       virtual ~Main_Menu_Load_Map();
 
    private:
-      void clicked(int);
+	void clicked_ok();
 	void selected      (uint);
 	void double_clicked(uint);
 
@@ -57,7 +57,7 @@ struct Main_Menu_Load_Map : public UI::Window {
       UI::Multiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
 	UI::Listselect<const char * const> * m_ls;
-      UI::Button* m_ok_btn;
+	UI::Button<Main_Menu_Load_Map> * m_ok_btn;
 
       std::string m_basedir;
       std::string m_curdir;

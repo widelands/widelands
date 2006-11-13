@@ -35,7 +35,11 @@ struct Modal_Message_Box : public Window {
          OK,
          YESNO
       };
-      Modal_Message_Box(Panel* parent, std::string caption, std::string text, MB_Type type);
+	Modal_Message_Box
+		(Panel * const parent,
+		 const std::string & caption,
+		 const std::string & text,
+		 const MB_Type);
       ~Modal_Message_Box();
 
 	bool handle_mousepress  (const Uint8 btn, int mx, int my);

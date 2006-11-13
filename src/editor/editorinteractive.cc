@@ -87,52 +87,78 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    // user interface buttons
    int x = (get_w() - (7*34)) >> 1;
    int y = get_h() - 34;
-   UI::Button *b;
 
-   b = new UI::Button(this, x, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_menu.png" ));
-   b->set_tooltip(_("Menu").c_str());
+	new UI::Button<Editor_Interactive>
+		(this,
+		 x, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png"),
+		 &Editor_Interactive::toggle_mainmenu, this,
+		 _("Menu"));
 
-   b = new UI::Button(this, x+34, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_toggle_tool_menu.png" ));
-   b->set_tooltip(_("Tool").c_str());
+	new UI::Button<Editor_Interactive>
+		(this,
+		 x + 34, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.png"),
+		 &Editor_Interactive::tool_menu_btn, this,
+		 _("Tool"));
 
-   b = new UI::Button(this, x+68, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_set_toolsize_menu.png" ));
-   b->set_tooltip(_("Toolsize").c_str());
+	new UI::Button<Editor_Interactive>
+		(this,
+		 x + 68, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/editor_menu_set_toolsize_menu.png"),
+		 &Editor_Interactive::toolsize_menu_btn, this,
+		 _("Toolsize"));
 
-   b = new UI::Button(this, x+102, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_minimap);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_minimap.png" ));
-   b->set_tooltip(_("Minimap").c_str());
+	new UI::Button<Editor_Interactive>
+		(this,
+		 x + 102, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
+		 &Editor_Interactive::toggle_minimap, this,
+		 _("Minimap"));
 
-   b = new UI::Button(this, x+136, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_buildhelp.png" ));
-   b->set_tooltip(_("Buildhelp").c_str());
+   new UI::Button<Editor_Interactive>
+		(this,
+		 x + 136, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
+		 &Editor_Interactive::toggle_buildhelp, this,
+		 _("Buildhelp"));
 
-   b = new UI::Button(this, x+170, y, 34, 43, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_playermenu);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_player_menu.png" ));
-   b->set_tooltip(_("Players").c_str());
+	new UI::Button<Editor_Interactive>
+		(this,
+		 x + 170, y, 34, 43,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/editor_menu_player_menu.png"),
+		 &Editor_Interactive::toggle_playermenu, this,
+		 _("Players"));
 
-   b = new UI::Button(this, x+204, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_eventmenu);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_event_menu.png" ));
-   b->set_tooltip(_("Events").c_str());
+   new UI::Button<Editor_Interactive>
+		(this,
+		 x + 204, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_event_menu.png"),
+		 &Editor_Interactive::toggle_eventmenu, this,
+		 _("Events"));
 
-   b = new UI::Button(this, x+238, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_variablesmenu);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_variables_menu.png" ));
-   b->set_tooltip(_("Variables").c_str());
+   new UI::Button<Editor_Interactive>
+		(this,
+		 x + 238, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_variables_menu.png"),
+		 &Editor_Interactive::toggle_variablesmenu, this,
+		 _("Variables"));
 
-   b = new UI::Button(this, x+272, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_objectivesmenu);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_objectives_menu.png" ));
-   b->set_tooltip(_("Objectives").c_str());
+	new UI::Button<Editor_Interactive>
+		(this,
+		 x + 272, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_objectives_menu.png"),
+		 &Editor_Interactive::toggle_objectivesmenu, this,
+		 _("Objectives"));
 
 
    // Init Tools

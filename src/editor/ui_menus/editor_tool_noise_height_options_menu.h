@@ -22,6 +22,8 @@
 
 #include "editor_tool_options_menu.h"
 
+#include "ui_button.h"
+
 class Editor_Interactive;
 class Editor_Noise_Height_Tool;
 namespace UI {struct Textarea;};
@@ -34,7 +36,11 @@ struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
       UI::Textarea* m_textarea_lower;
       UI::Textarea* m_textarea_upper;
       UI::Textarea* m_set;
-      Editor_Noise_Height_Tool* m_nht;
+	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_lower_increase;
+	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_lower_decrease;
+	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_upper_increase;
+	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_upper_decrease;
+	Editor_Noise_Height_Tool* m_nht;
 
       void button_clicked(int);
       void update();

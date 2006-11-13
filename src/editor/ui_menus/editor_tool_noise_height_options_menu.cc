@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "ui_button.h"
 #include "ui_textarea.h"
 #include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
@@ -45,26 +44,44 @@ Create all the buttons etc...
 */
 Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent, int index,
 				Editor_Noise_Height_Tool* nht, UI::UniqueWindow::Registry* registry)
-	: Editor_Tool_Options_Menu(parent, index, registry, _("Noise Height Options").c_str())
+:
+Editor_Tool_Options_Menu
+(parent, index, registry, _("Noise Height Options").c_str()),
+
+m_lower_increase
+(this,
+ 30, 40, 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+ &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 0),
+
+m_lower_decrease
+(this,
+ 50, 40, 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+ &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 1),
+
+m_upper_increase
+(this,
+ 130, 40, 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+ &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 2),
+
+m_upper_decrease
+(this,
+ 150, 40, 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+ &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 3)
+
 {
    char buf[250];
    sprintf(buf, "%s: %i", _("Minimum").c_str(), 10);
    m_textarea_lower=new UI::Textarea(this, 10, 25, buf);
    sprintf(buf, "%s: %i", _("Maximum").c_str(), 10);
    m_textarea_upper=new UI::Textarea(this, 105, 25, buf);
-
-   UI::Button* b = new UI::Button(this, 30, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b=new UI::Button(this, 50, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b=new UI::Button(this, 130, 40, 20, 20, 0, 2);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b=new UI::Button(this, 150, 40, 20, 20, 0, 3);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
 
    set_inner_size(200, 115);
 
@@ -81,12 +98,20 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
 
    m_set=new UI::Textarea(this, 0, 0, "99", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
-   b=new UI::Button(this, m_set->get_x()-width-spacing, posy, width, height, 1, 4);
-   b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b=new UI::Button(this, m_set->get_x()+m_set->get_w()+spacing, posy, width, height, 1, 5);
-   b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
+
+	new UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int>
+		(this,
+		 m_set->get_x() - width - spacing, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 4);
+
+	new UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int>
+		(this,
+		 m_set->get_x() + m_set->get_w() + spacing, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 5);
 
    m_nht=nht;
 

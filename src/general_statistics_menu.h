@@ -27,8 +27,6 @@ class Interactive_Player;
 namespace UI {
 struct Checkbox;
 struct Radiogroup;
-struct Textarea;
-struct Button;
 };
 class WUIPlot_Area;
 
@@ -46,7 +44,7 @@ struct General_Statistics_Menu : public UI::UniqueWindow {
 
    private:
 
-      void clicked(int);
+	void clicked_help();
       void cb_changed_to(int, bool);
       void radiogroup_changed(int);
 };

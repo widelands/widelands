@@ -74,14 +74,19 @@ UniqueWindow(parent,registry,400,270,_("Load Game")) {
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-	UI::Button * but= new UI::Button(this, get_inner_w() / 2 - spacing - 80, posy, 80, 20, 4, 1);
-   but->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
-   but->set_title(_("OK").c_str());
-   but->set_enabled(false);
-   m_ok_btn=but;
-   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
-   but->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
-   but->set_title(_("Cancel").c_str());
+	m_ok_btn = new UI::Button<Game_Main_Menu_Load_Game>
+		(this,
+		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 4,
+		 &Game_Main_Menu_Load_Game::clicked_ok, this,
+		 _("OK"),
+		 false);
+   new UI::Button<Game_Main_Menu_Load_Game>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 4,
+		 &Game_Main_Menu_Load_Game::clicked_cancel, this,
+		 _("Cancel"));
 
    m_basedir="ssave";
    m_curdir="ssave";
@@ -103,21 +108,13 @@ Game_Main_Menu_Load_Game::~Game_Main_Menu_Load_Game()
 {
 }
 
-/*
-===========
-called when the ok button has been clicked
-===========
-*/
-void Game_Main_Menu_Load_Game::clicked(int id) {
-   if(id==1) {
-      // Ok
 
-      // Ok, load this map
+void Game_Main_Menu_Load_Game::clicked_ok() {
 		if (load_game(m_ls->get_selection())) die();
-   } else if(id==0) {
-      // Cancel
+}
+
+void Game_Main_Menu_Load_Game::clicked_cancel() {
       die();
-   }
 }
 
 /*
@@ -152,7 +149,7 @@ void Game_Main_Menu_Load_Game::selected(uint) {
 /*
  * An Item has been doubleclicked
  */
-void Game_Main_Menu_Load_Game::double_clicked(uint) {clicked(1);}
+void Game_Main_Menu_Load_Game::double_clicked(uint) {clicked_ok();}
 
 /**
  * fill the file list

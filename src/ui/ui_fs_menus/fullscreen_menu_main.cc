@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #include "error.h"
 #include "fullscreen_menu_main.h"
 #include "i18n.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
 
 /*
 ==============================================================================
@@ -32,41 +30,63 @@ Fullscreen_Menu_Main
 ==============================================================================
 */
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
-	: Fullscreen_Menu_Base("mainmenu.jpg")
-{
+:
+Fullscreen_Menu_Base("mainmenu.jpg"),
 	// UI::Buttons
-	UI::Button *b;
 
-	b = new UI::Button(this, 100, 140, 220, 26, 3, mm_singleplayer);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("Single Player").c_str());
+singleplayer
+(this,
+ 100, 140, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_singleplayer,
+ _("Single Player")),
 
-	b = new UI::Button(this, 100, 180, 220, 26, 3, mm_multiplayer);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("Multi Player").c_str());
+multiplayer
+(this,
+ 100, 180, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_multiplayer,
+ _("Multi Player")),
 
-	b = new UI::Button(this, 100, 220, 220, 26, 3, mm_options);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("Options").c_str());
+options
+(this,
+ 100, 220, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_options,
+ _("Options")),
 
-	b = new UI::Button(this, 100, 260, 220, 26, 3, mm_editor);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("Editor").c_str());
+editor
+(this,
+ 100, 260, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_editor,
+ _("Editor")),
 
-	b = new UI::Button(this, 100, 300, 220, 26, 3, mm_readme);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("View Readme").c_str());
+readme
+(this,
+ 100, 300, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_readme,
+ _("View Readme")),
 
-	b = new UI::Button(this, 100, 340, 220, 26, 3, mm_license);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("License").c_str());
+license
+(this,
+ 100, 340, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_license,
+ _("License")),
 
-
-	b = new UI::Button(this, 100, 400, 220, 26, 3, mm_exit);
-	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
-	b->set_title(_("Exit Game").c_str());
+exit
+(this,
+ 100, 400, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_exit,
+ _("Exit Game")),
 
 	// Text
-	new UI::Textarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
-	new UI::Textarea(this, 15, MENU_YRES-29, _("(C) 2002-2006 by the Widelands Development Team"), Align_TopLeft);
-}
+version(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right),
+copyright
+(this,
+ 15, MENU_YRES - 29,
+ _("(C) 2002-2006 by the Widelands Development Team"), Align_TopLeft)
+{}

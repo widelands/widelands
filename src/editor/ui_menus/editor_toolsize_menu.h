@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_TOOLSIZE_MENU_H
 #define __S__EDITOR_TOOLSIZE_MENU_H
 
+#include "ui_button.h"
 #include "ui_unique_window.h"
 
 
@@ -43,10 +44,11 @@ struct Editor_Toolsize_Menu : public UI::UniqueWindow {
       virtual ~Editor_Toolsize_Menu();
 
    private:
-      void button_clicked(int);
+	void change_radius(const bool increase);
 
       Editor_Interactive* m_parent;
       UI::Textarea* m_textarea;
+	UI::IDButton<Editor_Toolsize_Menu, const bool> m_increase, m_decrease;
 };
 
 

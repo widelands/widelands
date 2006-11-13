@@ -30,7 +30,7 @@ it's text (title). When return is pressed, the
 editbox is unfocused, the keyboard released and
 a callback function is called
 */
-struct Edit_Box : private Button {
+struct Edit_Box : private Basic_Button {
      Edit_Box(Panel *parent, int x, int y, uint w, uint h, uint background, int id);
      virtual ~Edit_Box();
 
@@ -47,6 +47,9 @@ struct Edit_Box : private Button {
      void handle_mousemove(int x, int y, int xdiff, int ydiff);
      bool handle_key(bool down, int code, char c);
      void handle_mousein(bool);
+
+protected:
+	void send_signal_clicked() const {};
 
    private:
      bool m_keyboard_grabbed;

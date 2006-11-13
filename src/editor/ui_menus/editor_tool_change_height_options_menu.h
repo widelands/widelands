@@ -34,7 +34,7 @@ struct Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu 
       ~Editor_Tool_Change_Height_Options_Menu() { }
 
    private:
-      void clicked(int);
+	void clicked(const Uint8);
       void update(void);
       UI::Textarea* m_increase, *m_set;
       Editor_Increase_Height_Tool* m_iht;

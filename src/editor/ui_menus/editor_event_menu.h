@@ -27,7 +27,7 @@ class Event;
 class EventChain;
 class Trigger;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 template <typename T> struct Listselect;
 };
 
@@ -48,12 +48,12 @@ struct Editor_Event_Menu : public UI::UniqueWindow {
 	UI::Listselect<Event      &> *m_event_list;
 	UI::Listselect<EventChain &> *m_eventchain_list;
 	UI::Listselect<Trigger    &> *m_trigger_list;
-      UI::Button       *m_btn_del_event;
-      UI::Button       *m_btn_edit_event;
-      UI::Button       *m_btn_del_trigger;
-      UI::Button       *m_btn_edit_trigger;
-      UI::Button       *m_btn_del_eventchain;
-      UI::Button       *m_btn_edit_eventchain;
+	UI::Button<Editor_Event_Menu> * m_btn_del_event;
+	UI::Button<Editor_Event_Menu> * m_btn_edit_event;
+	UI::Button<Editor_Event_Menu> * m_btn_del_trigger;
+	UI::Button<Editor_Event_Menu> * m_btn_edit_trigger;
+	UI::Button<Editor_Event_Menu> * m_btn_del_eventchain;
+	UI::Button<Editor_Event_Menu> * m_btn_edit_eventchain;
 	void trigger_list_selected    (uint);
 	void event_list_selected      (uint);
 	void eventchain_list_selected (uint);

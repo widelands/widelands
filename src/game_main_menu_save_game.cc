@@ -42,13 +42,11 @@ Create all the buttons etc...
 ===============
 */
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
-  : UI::UniqueWindow(parent,registry,400,270,_("Save Game")) {
-   m_parent=parent;
+:
+UI::UniqueWindow(parent,registry,400,270,_("Save Game")),
+m_parent(parent)
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Save Game"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
+{
    int spacing=5;
    int offsx=spacing;
    int offsy=30;
@@ -79,14 +77,19 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-   UI::Button* but= new UI::Button(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
-   but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
-   but->set_title(_("OK").c_str());
-   but->set_enabled(false);
-   m_ok_btn=but;
-   but= new UI::Button(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
-   but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
-   but->set_title(_("Cancel").c_str());
+	m_ok_btn = new UI::Button<Game_Main_Menu_Save_Game>
+		(this,
+		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 4,
+		 &Game_Main_Menu_Save_Game::clicked_ok, this,
+		 _("OK"),
+		 false);
+	new UI::Button<Game_Main_Menu_Save_Game>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 4,
+		 &Game_Main_Menu_Save_Game::die, this,
+		 _("Cancel"));
 
    m_basedir="ssave";
    m_curdir="ssave";
@@ -113,17 +116,11 @@ Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game()
 called when the ok button has been clicked
 ===========
 */
-void Game_Main_Menu_Save_Game::clicked(int id) {
-   if(id==1) {
-      // Ok
+void Game_Main_Menu_Save_Game::clicked_ok() {
       std::string filename=m_editbox->get_text();
 
       if(save_game(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
          die();
-   } else if(id==0) {
-      // Cancel
-      die();
-   }
 }
 
 /*
@@ -162,7 +159,7 @@ void Game_Main_Menu_Save_Game::selected(uint) {
 /*
  * An Item has been doubleclicked
  */
-void Game_Main_Menu_Save_Game::double_clicked(uint) {clicked(1);}
+void Game_Main_Menu_Save_Game::double_clicked(uint) {clicked_ok();}
 
 /*
  * fill the file list

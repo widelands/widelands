@@ -26,8 +26,8 @@
 
 class Editor_Interactive;
 namespace UI {
+template <typename T, typename ID> struct IDButton;
 struct Textarea;
-struct Button;
 };
 
 /*
@@ -48,12 +48,13 @@ struct Main_Menu_New_Map : public UI::Window {
    private:
       Editor_Interactive *m_parent;
       UI::Textarea *m_width, *m_height;
-      UI::Button* m_world;
+	UI::IDButton<Main_Menu_New_Map, int> * m_world;
       int m_w, m_h;
       uint m_currentworld;
       std::vector<std::string>* m_worlds;
 
-      void button_clicked(int);
+	void button_clicked(int);
+	void clicked_create_map();
 };
 
 #endif

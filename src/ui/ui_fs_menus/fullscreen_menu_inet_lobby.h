@@ -59,7 +59,7 @@ class Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 
    private:
       void changed( void );
-      void clicked( int );
+	void clicked_back();
 };
 
 #endif

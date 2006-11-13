@@ -54,7 +54,7 @@ class WUIPlot_Area : public UI::Panel {
       virtual void draw(RenderTarget* dst);
 
       // Set the time
-      void set_time(int id);
+	void set_time(TIME);
       void set_sample_rate(uint id); // in milliseconds
 
       // set what to plot

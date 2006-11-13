@@ -622,11 +622,14 @@ FieldActionWindow::add_button
 */
 void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)())
 {
-	UI::Button *b = new UI::Button(box, 0, 0, 34, 34, 2);
-	b->clicked.set(this, fn);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  picname ));
-
-	box->add(b, UI::Box::AlignTop);
+	box->add
+		(new UI::Button<FieldActionWindow>
+		 (box,
+		  0, 0, 34, 34,
+		  2,
+		  g_gr->get_picture(PicMod_Game, picname),
+		  fn, this),
+		 UI::Box::AlignTop);
 }
 
 /*

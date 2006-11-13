@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,23 @@
 #define __S__MAINMENUE_H
 
 #include "fullscreen_menu_base.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
 */
 class Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
+	UI::IDButton<Fullscreen_Menu_Main, int> singleplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int> multiplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int> options;
+	UI::IDButton<Fullscreen_Menu_Main, int> editor;
+	UI::IDButton<Fullscreen_Menu_Main, int> readme;
+	UI::IDButton<Fullscreen_Menu_Main, int> license;
+	UI::IDButton<Fullscreen_Menu_Main, int> exit;
+	UI::Textarea                            version;
+	UI::Textarea                            copyright;
 public:
 	Fullscreen_Menu_Main();
    enum {

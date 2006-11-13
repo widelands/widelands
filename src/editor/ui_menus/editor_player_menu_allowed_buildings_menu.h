@@ -20,13 +20,12 @@
 #ifndef __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 #define __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
+#include "ui_button.h"
+#include "ui_listselect.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 class Player;
-namespace UI {
-template <typename T> struct Listselect;
-struct Button;
-};
 
 /*
  * Let's the user choose which buildings should be available
@@ -39,13 +38,15 @@ struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
 
    private:
       Player* m_player;
-      UI::Listselect<void *> * m_allowed, *m_forbidden;
-      UI::Button* m_rtl_button, *m_ltr_button;
+	UI::Textarea              m_allowed_label, m_forbidden_label;
+	UI::Listselect<uintptr_t> m_allowed,       m_forbidden;
+	UI::IDButton<Editor_Player_Menu_Allowed_Buildings_Menu, const bool>
+		m_forbid_button, m_allow_button;
 	void allowed_selected        (uint);
 	void forbidden_selected      (uint);
 	void allowed_double_clicked  (uint);
 	void forbidden_double_clicked(uint);
-      void clicked(int);
+	void clicked                 (const bool allow);
       void update();
 };
 

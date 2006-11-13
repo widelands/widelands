@@ -33,8 +33,21 @@ class Edit_Box
 /**
 constructor
 */
-Edit_Box::Edit_Box(Panel* parent, int x, int y, uint w, uint h, uint background, int id) :
-   Button(parent, x, y, w, h, background, id) {
+Edit_Box::Edit_Box
+	(Panel * const parent,
+	 const int x, const int y, const uint w, const uint h,
+	 const uint background,
+	 const int id)
+	:
+	Basic_Button
+	(parent,
+	 x, y, w, h,
+	 true, false,
+	 background,
+	 0,
+	 "",
+	 "")
+{
 
    set_think(false);
 
@@ -66,7 +79,7 @@ bool Edit_Box::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (not m_keyboard_grabbed) {
       set_can_focus(true);
       grab_mouse(true);
-      Button::handle_mousepress(btn, x, y);
+		Basic_Button::handle_mousepress(btn, x, y);
       focus();
       m_keyboard_grabbed=true;
       m_lasttext=m_text;
@@ -85,7 +98,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
       switch(code) {
          case KEY_ESCAPE:
             set_text(m_lasttext.c_str());
-            Button::handle_mouserelease(0, 0, 0);
+			Basic_Button::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);
@@ -93,7 +106,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
 
          case KEY_RETURN:
             m_lasttext=m_text;
-            Button::handle_mouserelease(0, 0, 0);
+			Basic_Button::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);
@@ -130,7 +143,7 @@ is received
 */
 void Edit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff) {
    if(m_keyboard_grabbed) return;
-	else Button::handle_mousemove(x, y, xdiff, ydiff);
+	else Basic_Button::handle_mousemove(x, y, xdiff, ydiff);
 }
 
 /**
@@ -139,6 +152,6 @@ Hides a mouseout event from the underlying button
 */
 void Edit_Box::handle_mousein(bool inside) {
    if(m_keyboard_grabbed) return;
-   Button::handle_mousein(inside);
+   Basic_Button::handle_mousein(inside);
 }
 };

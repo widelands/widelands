@@ -20,14 +20,12 @@
 #ifndef __S__EDITOR_VARIABLES_MENU_H
 #define __S__EDITOR_VARIABLES_MENU_H
 
+#include "ui_button.h"
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
 class MapVariable;
-namespace UI {
-struct Button;
-struct Table;
-};
+namespace UI {struct Table;};
 
 /*
 =============================
@@ -43,12 +41,15 @@ struct Editor_Variables_Menu : public UI::UniqueWindow {
    private:
       Editor_Interactive *m_parent;
       UI::Table            *m_table;
-      UI::Button           *m_edit_button;
-      UI::Button           *m_delete_button;
+	UI::Button<Editor_Variables_Menu> m_button_new;
+	UI::Button<Editor_Variables_Menu> m_button_edit;
+	UI::Button<Editor_Variables_Menu> m_button_del;
 
    private:
 	void insert_variable(MapVariable &);
-      void clicked( int );
+	void clicked_new ();
+	void clicked_edit();
+	void clicked_del ();
       void table_selected( int );
       void table_dblclicked( int );
 };

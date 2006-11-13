@@ -31,21 +31,23 @@ Stock_Menu::Stock_Menu
 UI::UniqueWindow(&plr, &registry, 640, 480, _("Stock")),
 m_player(plr),
 waresdisplay(this, 0, 0, plr.get_game(), plr.get_player()),
-help        (this, 0, 0, buttonw(3),                  30, 4),
-switchpage  (this, 0, 0, buttonw(3) * 2 + hspacing(), 30, 4),
+
+help
+(this,
+ 0, 0, buttonw(3),                  30,
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+ &Stock_Menu::clicked_help, this),
+
+switchpage
+(this,
+ 0, 0, buttonw(3) * 2 + hspacing(), 30,
+ 4,
+ g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
+ &Stock_Menu::clicked_switch_page, this),
 current_page(Wares)
+
 {
-
-	help.set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png"));
-	switchpage.set_pic
-		(g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"));
-
-	help      .clickedid.set(this, &Stock_Menu::clicked_help);
-	switchpage.clickedid.set(this, &Stock_Menu::clicked_switch_page);
-
-	help      .set_tooltip(_("Help")        .c_str());
-	switchpage.set_tooltip(_("Show workers").c_str());
-
 	fill_waredisplay_with_wares();
 	help      .set_pos(posx(0, 3), waresdisplay.get_h());
 	switchpage.set_pos(posx(1, 3), waresdisplay.get_h());
@@ -54,14 +56,14 @@ current_page(Wares)
 }
 
 
-void Stock_Menu::clicked_help(int) {log("TODO: Implement help!\n");}
+void Stock_Menu::clicked_help() {log("TODO: Implement help!\n");}
 
 
 /*
  * Switch to the next page, that is, show
  * wares -> workers -> soldier
  */
-void Stock_Menu::clicked_switch_page(int) {
+void Stock_Menu::clicked_switch_page() {
 	switch (current_page) {
 	case Wares:
 		current_page = Workers;

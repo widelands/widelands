@@ -90,7 +90,6 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
-	UI::Button *b;
 
 	/* temp (should be toggle messages)
 	b = new UI::Button(this, x, y, 34, 34, 2);
@@ -99,20 +98,29 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	b->set_tooltip(_("Exit game").c_str());
 	// temp */
 
-	b = new UI::Button(this, x+34, y, 34, 34, 2);
-	b->clicked.set(this, &Interactive_Player::main_menu_btn);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_menu.png" ));
-	b->set_tooltip(_("Menu").c_str());
+	new UI::Button<Interactive_Player>
+		(this,
+		 x + 34, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png"),
+		 &Interactive_Player::main_menu_btn, this,
+		 _("Menu"));
 
-	b = new UI::Button(this, x+68, y, 34, 34, 2);
-	b->clicked.set(this, &Interactive_Player::toggle_minimap);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_minimap.png" ));
-	b->set_tooltip(_("Minimap").c_str());
+	new UI::Button<Interactive_Player>
+		(this,
+		 x + 68, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
+		 &Interactive_Player::toggle_minimap, this,
+		 _("Minimap"));
 
-	b = new UI::Button(this, x+102, y, 34, 34, 2);
-	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_buildhelp.png" ));
-	b->set_tooltip(_("Buildhelp").c_str());
+	new UI::Button<Interactive_Player>
+		(this,
+		 x + 102, y, 34, 34,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
+		 &Interactive_Player::toggle_buildhelp, this,
+		 _("Buildhelp"));
 
 	// Speed info
 	m_label_speed = new UI::Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);

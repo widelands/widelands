@@ -35,20 +35,16 @@
 #include "ui_window.h"
 #include "util.h"
 
+#define spacing 5
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
-   UI::Window(parent, 0, 0, 200, 280, _("Event Option Menu").c_str()) {
-   m_parent=parent;
-   m_event=event;
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Allow Building Event Options"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
-   m_player=m_event->get_player();
-   m_building=-1;
+UI::Window(parent, 0, 0, 200, 280, _("Allow Building Event Options").c_str()),
+m_event(event),
+m_parent(parent),
+m_player(m_event->get_player()),
+m_building(-1) //  FIXME negative value!
+{
    const int offsx=5;
    const int offsy=25;
-   int spacing=5;
    int posx=offsx;
    int posy=offsy;
 
@@ -77,22 +73,40 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    // Player
    new UI::Textarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
    m_player_ta=new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
-   UI::Button* b=new UI::Button(this, spacing+90, posy, 20, 20, 0, 15);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
-   b=new UI::Button(this, spacing+110, posy, 20, 20, 0, 16);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
+
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+		(this,
+		 spacing + 90, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Event_Allow_Building_Option_Menu::clicked, this, 15);
+
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+		(this,
+		 spacing + 110, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Event_Allow_Building_Option_Menu::clicked, this, 16);
+
    posy+=20+spacing;
 
    // Building
    new UI::Textarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
-   b=new UI::Button(this, spacing+70, posy, 20, 20, 0, 23);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
-   b=new UI::Button(this, spacing+90, posy, 20, 20, 0, 24);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
+
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+		(this,
+		 spacing + 70, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Event_Allow_Building_Option_Menu::clicked, this, 23);
+
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+		(this,
+		 spacing + 90, posy, 20, 20,
+		 0,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Event_Allow_Building_Option_Menu::clicked, this, 24);
+
    posy+=20+spacing;
    m_building_ta=new UI::Textarea(this, 0, posy, get_inner_w(), 20, _("Headquarters"), Align_Center);
    posy+=20+spacing;
@@ -106,13 +120,22 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    // Ok/Cancel Buttons
    posy+=spacing; // Extra space
    posx=(get_inner_w()/2)-60-spacing;
-   b=new UI::Button(this, posx, posy, 60, 20, 0, 1);
-   b->set_title(_("Ok").c_str());
-   b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
+
+	new UI::Button<Event_Allow_Building_Option_Menu>
+		(this,
+		 posx, posy, 60, 20,
+		 0,
+		 &Event_Allow_Building_Option_Menu::clicked_ok, this,
+		 _("Ok"));
+
    posx=(get_inner_w()/2)+spacing;
-   b=new UI::Button(this, posx, posy, 60, 20, 1, 0);
-   b->set_title(_("Cancel").c_str());
-   b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
+
+	new UI::IDButton<Event_Allow_Building_Option_Menu, int>
+		(this,
+		 posx, posy, 60, 20,
+		 1,
+		 &Event_Allow_Building_Option_Menu::end_modal, this, 0,
+		 _("Cancel"));
 
    set_inner_size(get_inner_w(), posy+20+spacing);
    center_to_parent();
@@ -131,37 +154,17 @@ Event_Allow_Building_Option_Menu::~Event_Allow_Building_Option_Menu(void) {
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
 bool Event_Allow_Building_Option_Menu::handle_mousepress
 (const Uint8 btn, int, int)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-
-}
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Event_Allow_Building_Option_Menu::handle_mouserelease
 (const Uint8, int, int)
 {return false;}
 
-/*
- * a button has been clicked
- */
-void Event_Allow_Building_Option_Menu::clicked(int i) {
-   switch(i) {
-      case 0:
-         {
-            // Cancel has been clicked
-            end_modal(0);
-            return;
-         }
-         break;
 
-      case 1:
-         {
-            // ok button
+void Event_Allow_Building_Option_Menu::clicked_ok() {
             if(m_name->get_text())
                m_event->set_name( m_name->get_text() );
             if(m_event->get_player()!=m_player && m_event->get_player()!=-1)
@@ -174,10 +177,11 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
             m_event->set_allow(m_allow->get_state());
             m_parent->set_need_save(true);
             end_modal(1);
-            return;
-         }
-         break;
+}
 
+
+void Event_Allow_Building_Option_Menu::clicked(int i) {
+   switch(i) {
       case 15: m_player++; break;
       case 16: m_player--; break;
 

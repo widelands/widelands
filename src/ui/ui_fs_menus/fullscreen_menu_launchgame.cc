@@ -26,8 +26,6 @@
 #include "network.h"
 #include "map.h"
 #include "playerdescrgroup.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
 
 /*
 ==============================================================================
@@ -38,38 +36,48 @@ Fullscreen_Menu_LaunchGame
 */
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map_Loader** ml)
-	: Fullscreen_Menu_Base("launchgamemenu.jpg")
-{
-	m_game = g;
-	m_netgame = ng;
-	m_is_scenario = false;
-	m_ml=ml;
+:
+Fullscreen_Menu_Base("launchgamemenu.jpg"),
+m_game(g),
+m_netgame(ng),
+m_ml(ml),
 
 	// Title
-	UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter);
-	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+title(this, MENU_XRES/2, 120, _("Launch Game"), Align_HCenter),
 
-	// UI::Buttons
-	UI::Button* b;
+back
+(this,
+ 550, 450, 200, 26,
+ 0,
+ &Fullscreen_Menu_LaunchGame::back_clicked, this,
+ _("Back")),
 
-	b = new UI::Button(this, 550, 450, 200, 26, 0, 0);
-	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back_clicked);
-	b->set_title(_("Back").c_str());
-
-	m_ok = new UI::Button(this, 550, 480, 200, 26, 2, 1);
-	m_ok->clicked.set(this, &Fullscreen_Menu_LaunchGame::start_clicked);
-	m_ok->set_title(_("Start game").c_str());
-	m_ok->set_enabled(false);
-	m_ok->set_visible(m_netgame==0 || m_netgame->is_host());
+m_ok
+(this,
+ 550, 480, 200, 26,
+ 2,
+ &Fullscreen_Menu_LaunchGame::start_clicked, this,
+ _("Start game"),
+ false),
 
 	// Map selection fields
-	m_mapname = new UI::Textarea(this, 650, 250, "(no map)", Align_HCenter);
-	b = new UI::Button(this, 550, 280, 200, 26, 1, 0);
-	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
-	b->set_title(_("Select map").c_str());
-	b->set_enabled (m_netgame==0 || m_netgame->is_host());
+m_mapname(this, 650, 250, "(no map)", Align_HCenter),
+m_select_map
+(this,
+ 550, 280, 200, 26,
+ 1,
+ &Fullscreen_Menu_LaunchGame::select_map, this,
+ _("Select map"),
+ std::string(),
+ not ng or ng->is_host()),
 
-	// Player settings
+
+m_is_scenario(false)
+
+{
+	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	m_ok.set_visible(not ng or ng->is_host());
+// Player settings
 	int i;
 	int y;
 
@@ -124,11 +132,10 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	// update the mapname
 	if (map)
 	{
-		m_mapname->set_text(map->get_name());
+		m_mapname.set_text(map->get_name());
 		maxplayers = map->get_nrplayers();
 	}
-	else
-		m_mapname->set_text(_("(no map)"));
+	else m_mapname.set_text(_("(no map)"));
 
 	// update the player description groups
 	for(int i = 0; i < MAX_PLAYERS; i++) {
@@ -161,7 +168,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		}
 	}
 
-	m_ok->set_enabled(m_game->can_start());
+	m_ok.set_enabled(m_game->can_start());
 }
 
 void Fullscreen_Menu_LaunchGame::select_map()

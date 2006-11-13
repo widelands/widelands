@@ -24,7 +24,7 @@
 
 class Interactive_Player;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 struct Edit_Box;
 template <typename T> struct Listselect;
 struct Textarea;
@@ -35,7 +35,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       virtual ~Game_Main_Menu_Save_Game(void);
 
    private:
-      void clicked(int);
+	void clicked_ok    ();
 	void selected      (uint);
 	void double_clicked(uint);
       void edit_box_changed();
@@ -48,7 +48,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       UI::Textarea* m_name, *m_gametime;
 	UI::Listselect<const char * const> * m_ls;
 
-      UI::Button* m_ok_btn;
+	UI::Button<Game_Main_Menu_Save_Game> * m_ok_btn;
       std::string m_basedir;
       std::string m_curdir;
       std::string m_parentdir;

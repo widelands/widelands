@@ -21,7 +21,9 @@
 #define __S__INET_SERVER_OPTIONS_H
 
 #include "fullscreen_menu_base.h"
+#include "ui_button.h"
 #include "ui_editbox.h"
+#include "ui_textarea.h"
 
 
 class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
@@ -30,12 +32,16 @@ class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 		~Fullscreen_Menu_InetServerOptions ();
 
 		const char* get_player_name()
-		{ return playername->get_text(); }
+	{return playername.get_text();}
 		const char* get_server_name()
-		{ return hostname->get_text(); }
+	{return hostname.get_text();}
 
 	private:
-		UI::Edit_Box*	playername, *hostname;
+	UI::Textarea                                         title;
+	UI::IDButton<Fullscreen_Menu_InetServerOptions, int> rungame;
+	UI::IDButton<Fullscreen_Menu_InetServerOptions, int> back;
+	UI::Edit_Box                                         playername;
+	UI::Edit_Box                                         hostname;
 };
 
 #endif

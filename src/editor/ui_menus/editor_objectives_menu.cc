@@ -58,15 +58,15 @@ struct Edit_Objective_Window : public UI::Window {
       UI::Checkbox          *m_optional;
 
    private:
-      void clicked( int );
+	void clicked_ok();
 };
 
 Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UI::Table_Entry* te)
-	: UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()) {
-
-   m_parent=parent;
-   m_te = te;
-
+:
+UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()),
+m_parent  (parent),
+m_te      (te)
+{
    int spacing = 5;
    int posy = 5;
 
@@ -96,13 +96,20 @@ Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UI::Tab
    m_descr = new UI::Multiline_Editbox(this, 5, posy, get_inner_w()-2*spacing, editbox_height, obj->get_descr() );
    posy+= editbox_height + spacing + spacing;
 
-   // back button
-   UI::Button* b = new UI::Button( this, get_inner_w()/2-80-spacing, posy, 80, 20, 1, 0);
-   b->set_title(_("Ok").c_str());
-   b->clickedid.set(this, &Edit_Objective_Window::clicked);
-   b = new UI::Button( this, get_inner_w()/2 + spacing, posy, 80, 20, 1, 1);
-   b->set_title(_("Back").c_str());
-   b->clickedid.set(this, &Edit_Objective_Window::clicked);
+	new UI::Button<Edit_Objective_Window>
+		(this,
+		 get_inner_w() / 2 - 80 - spacing, posy, 80, 20,
+		 1,
+		 &Edit_Objective_Window::clicked_ok, this,
+		 _("Ok"));
+
+	new UI::IDButton<Edit_Objective_Window, int>
+		(this,
+		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 1,
+		 &Edit_Objective_Window::end_modal, this, 0,
+		 _("Back"));
+
    posy += 20 + spacing;
 
    set_inner_size( get_inner_w(), posy);
@@ -116,31 +123,17 @@ Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UI::Tab
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
-bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int, int) {
-   if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int, int)
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Edit_Objective_Window::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
  * a button has been clicked
  */
-void Edit_Objective_Window::clicked(int i) {
-   // Get the a name
-
-   if( i )  {
-      // Back
-      end_modal(0);
-      return;
-   }
-
-   // Ok
-
+void Edit_Objective_Window::clicked_ok() {
    // Extract value
    MapObjective* obj = static_cast<MapObjective*>(m_te->get_user_data());
 
@@ -186,19 +179,35 @@ Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UI::U
    // Buttons
    int posx=spacing;
 
-   UI::Button* nbutton = new UI::Button( this, spacing, get_inner_h() - 30, 60, 20, 0, 0);
-   nbutton->set_title(_("New").c_str());
-   nbutton->clickedid.set(this, &Editor_Objectives_Menu::clicked);
+   new UI::Button<Editor_Objectives_Menu>
+		(this,
+		 spacing, get_inner_h() - 30, 60, 20,
+		 0,
+		 &Editor_Objectives_Menu::clicked_new, this,
+		 _("New"));
+
    posx += 60 + spacing;
-   m_edit_button = new UI::Button( this, posx, get_inner_h() - 30, 60, 20, 0, 1);
-   m_edit_button->set_title(_("Edit").c_str());
-   m_edit_button->set_enabled(false);
-   m_edit_button->clickedid.set(this, &Editor_Objectives_Menu::clicked);
+
+	m_edit_button = new UI::Button<Editor_Objectives_Menu>
+		(this,
+		 posx, get_inner_h() - 30, 60, 20,
+		 0,
+		 &Editor_Objectives_Menu::clicked_edit, this,
+		 _("Edit"),
+		 std::string(),
+		 false);
+
    posx += 60 + spacing;
-   m_delete_button = new UI::Button( this, posx, get_inner_h() - 30, 60, 20, 0, 2);
-   m_delete_button->set_title(_("Delete").c_str());
-   m_delete_button->set_enabled(false);
-   m_delete_button->clickedid.set(this, &Editor_Objectives_Menu::clicked);
+
+	m_delete_button = new UI::Button<Editor_Objectives_Menu>
+		(this,
+		 posx, get_inner_h() - 30, 60, 20,
+		 0,
+		 &Editor_Objectives_Menu::clicked_del, this,
+		 _("Delete"),
+		 std::string(),
+		 false);
+
    posx += 60 + spacing;
 
    // Trigger name
@@ -233,10 +242,7 @@ Editor_Objectives_Menu::~Editor_Objectives_Menu()
 /*
  * A Button has been clicked
  */
-void Editor_Objectives_Menu::clicked( int n ) {
-   switch( n ) {
-      case 0:
-      {
+void Editor_Objectives_Menu::clicked_new() {
          // Get the a name
          char buffer[256];
 
@@ -254,11 +260,10 @@ void Editor_Objectives_Menu::clicked( int n ) {
          mo.set_trigger(&trigger);
          map.get_mtm().register_new_trigger(&trigger);
          insert_objective(mo);
-      }
-      // Fallthrough to edit
+	   clicked_edit();// Fallthrough to edit
+}
 
-      case 1:
-      {
+void Editor_Objectives_Menu::clicked_edit() {
          // Edit selected variable
          Edit_Objective_Window* evw = new Edit_Objective_Window( m_parent, m_table->get_entry(m_table->get_selection_index()) );
          if( evw->run() ) {
@@ -268,11 +273,9 @@ void Editor_Objectives_Menu::clicked( int n ) {
                   ->get_trigger()->get_name()) ;
          }
          delete evw;
-      }
-      break;
+}
 
-      case 2:
-      {
+void Editor_Objectives_Menu::clicked_del() {
          // Delete selected objective
          int idx = m_table->get_selection_index();
          MapObjective* obj = static_cast<MapObjective*>(m_table->get_entry( idx )->get_user_data());
@@ -300,12 +303,8 @@ void Editor_Objectives_Menu::clicked( int n ) {
 
          m_edit_button->set_enabled( false );
          m_delete_button->set_enabled( false );
-
-      }
-      break;
-
-   }
 }
+
 
 /*
  * The table has been selected
@@ -322,10 +321,7 @@ void Editor_Objectives_Menu::table_selected( int n ) {
 /*
  * Table has been doubleclicked
  */
-void Editor_Objectives_Menu::table_dblclicked( int ) {
-   // like a click on edit
-   clicked( 1 );
-}
+void Editor_Objectives_Menu::table_dblclicked(int) {clicked_edit();}
 
 /*
  * Insert this map variable into the table

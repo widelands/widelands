@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,39 +51,68 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UI::UniqueWindow:
    int posx=offsx;
    int posy=offsy;
 
-   UI::Button* b=new UI::Button(this, posx, posy, width, height, 1);
-   b->set_title(_("New Map").c_str());
-   b->clicked.set(this, &Editor_Main_Menu::new_map_btn);
+	new UI::Button<Editor_Main_Menu>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 &Editor_Main_Menu::new_map_btn, this,
+		 _("New Map"));
+
    posy+=height+spacing;
 
    posy+=spacing;
-   b=new UI::Button(this, posx, posy, width, height, 1);
-   b->set_title(_("Load Map").c_str());
-   b->clicked.set(this, &Editor_Main_Menu::load_btn);
+
+	new UI::Button<Editor_Main_Menu>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 &Editor_Main_Menu::load_btn, this,
+		 _("Load Map"));
+
    posy+=height+spacing;
 
    posy+=spacing;
-   b=new UI::Button(this, posx, posy, width, height, 1);
-   b->set_title(_("Save Map").c_str());
-   b->clicked.set(this, &Editor_Main_Menu::save_btn);
+
+	new UI::Button<Editor_Main_Menu>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 &Editor_Main_Menu::save_btn, this,
+		 _("Save Map"));
+
    posy+=height+spacing;
 
    posy+=spacing;
-   b=new UI::Button(this, posx, posy, width, height, 1);
-   b->set_title(_("Map Options").c_str());
-   b->clicked.set(this, &Editor_Main_Menu::map_options_btn);
+
+	new UI::Button<Editor_Main_Menu>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 &Editor_Main_Menu::map_options_btn, this,
+		 _("Map Options"));
+
    posy+=height+spacing;
 
    posy+=spacing;
-   b=new UI::Button(this, posx, posy, width, height, 1);
-   b->set_title(_("View Readme").c_str());
-   b->clicked.set(this, &Editor_Main_Menu::readme_btn);
+
+	new UI::Button<Editor_Main_Menu>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 &Editor_Main_Menu::readme_btn, this,
+		 _("View Readme"));
+
    posy+=height+spacing;
 
    posy+=spacing+(height+spacing);
-   b=new UI::Button(this, posx, posy, width, height, 0);
-   b->set_title(_("Exit Editor").c_str());
-   b->clicked.set(this, &Editor_Main_Menu::exit_btn);
+
+	new UI::Button<Editor_Main_Menu>
+		(this,
+		 posx, posy, width, height,
+		 0,
+		 &Editor_Main_Menu::exit_btn, this,
+		 _("Exit Editor"));
+
    posy+=height+spacing;
 
 	// Put in the default position, if necessary

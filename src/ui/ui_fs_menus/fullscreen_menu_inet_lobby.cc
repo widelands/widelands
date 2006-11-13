@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,9 +89,12 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
    m_userlist = new UI::Listselect<void *>(this, (int)(get_inner_w()-get_inner_w()*0.25+5), 40, (int)(get_inner_w()*0.25-10), get_inner_h()-40-50, Align_Left);
 
    // Buttons
-   UI::Button* b = new UI::Button(this, (int)(get_inner_w()-get_inner_w()*0.25+5), get_inner_h()-45, 50, 25, 0, 0);
-   b->set_title(_("Back").c_str());
-   b->clickedid.set(this, &Fullscreen_Menu_InetLobby::clicked);
+	new UI::Button<Fullscreen_Menu_InetLobby>
+		(this,
+		 get_inner_w() - get_inner_w() / 4 + 5, get_inner_h() - 45, 50, 25,
+		 0,
+		 &Fullscreen_Menu_InetLobby::clicked_back, this,
+		 _("Back"));
 
    m_gsc = gsc;
    gsc->set_server_message_handler(&::server_message, this);
@@ -135,9 +138,9 @@ void Fullscreen_Menu_InetLobby::changed( void ) {
 /*
  * A button has been clicked
  */
-void Fullscreen_Menu_InetLobby::clicked( int n ) {
+void Fullscreen_Menu_InetLobby::clicked_back() {
    // TODO: shut down connection gracefully
-   end_modal(n);
+   end_modal(0);
 }
 
 /*

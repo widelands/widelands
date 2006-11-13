@@ -44,13 +44,17 @@ uint Panel::s_default_cursor = 0;
 /**
  * Initialize a panel, link it into the parent's queue.
  */
-Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh) :
+Panel::Panel
+	(Panel * const nparent,
+	 const int nx, const int ny, const uint nw, const uint nh,
+	 const std::string & tooltip_text)
+	:
 _parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
 _flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
 _x(nx), _y(ny), _w(nw), _h(nh),
 _lborder(0), _rborder(0), _tborder(0), _bborder(0),
 _border_snap_distance(0), _panel_snap_distance(0),
-_tooltip(0)
+	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
 {
 	if (_parent) {
 		_next = _parent->_fchild;

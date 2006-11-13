@@ -81,12 +81,16 @@ void Table::add_column(const char* name, Type type, int w) {
       assert(m_columns[i].btn);
       complete_width+=m_columns[i].btn->get_w();
    }
-   Button* btn=new Button(this, complete_width, 0, w, 15, 3, m_columns.size());
-   btn->clickedid.set(this, &Table::header_button_clicked);
-   btn->set_title(name);
 
    Column c = {
-      name, type, btn
+		name,
+		type,
+		new IDButton<Table, Columns::size_type>
+		   (this,
+		    complete_width, 0, w, 15,
+		    3,
+		    &Table::header_button_clicked, this, m_columns.size(),
+		    name)
    };
    m_columns.push_back(c);
    if(!m_scrollbar) {
@@ -111,7 +115,7 @@ Table_Entry* Table::find_entry (const void* userdata)
 /*
  * A header button has been clicked
  */
-void Table::header_button_clicked(int n) {
+void Table::header_button_clicked(Columns::size_type n) {
    if(get_sort_colum()==n) {
       // Change sort direction
       if(get_sort_direction()==UP)

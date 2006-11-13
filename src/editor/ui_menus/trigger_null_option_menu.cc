@@ -30,13 +30,9 @@
 #include "util.h"
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
-   UI::Window(parent, 0, 0, 164, 100, _("Trigger Option Menu").c_str()) {
-   m_parent=parent;
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Null Trigger Options"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
+UI::Window(parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
+m_parent(parent)
+{
    const int offsx=5;
    const int offsy=25;
    const int spacing=5;
@@ -52,13 +48,21 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, T
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy+=20+spacing;
-   UI::Button* b=new UI::Button(this, posx, posy, 60, 20, 0, 1);
-   b->set_title(_("Ok").c_str());
-   b->clickedid.set(this, &Trigger_Null_Option_Menu::clicked);
+	new UI::Button<Trigger_Null_Option_Menu>
+		(this,
+		 posx, posy, 60, 20,
+		 0,
+		 &Trigger_Null_Option_Menu::clicked_ok, this,
+		 _("Ok"));
+
    posx=(get_inner_w()/2)+spacing;
-   b=new UI::Button(this, posx, posy, 60, 20, 1, 0);
-   b->set_title(_("Cancel").c_str());
-   b->clickedid.set(this, &Trigger_Null_Option_Menu::clicked);
+
+	new UI::IDButton<Trigger_Null_Option_Menu, int>
+		(this,
+		 posx, posy, 60, 20,
+		 1,
+		 &Trigger_Null_Option_Menu::end_modal, this, 0,
+		 _("Cancel"));
 
    set_inner_size(get_inner_w(), posy+20+spacing);
    center_to_parent();
@@ -76,30 +80,18 @@ Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu(void) {
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
- */
-bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int, int) {
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+ * We are not draggable.
+*/
+bool Trigger_Null_Option_Menu::handle_mousepress(const Uint8 btn, int, int)
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
  * a button has been clicked
  */
-void Trigger_Null_Option_Menu::clicked(int i) {
-   if(!i) {
-      // Cancel has been clicked
-      end_modal(0);
-      return;
-   } else if(i==1) {
-      // ok button
+void Trigger_Null_Option_Menu::clicked_ok() {
       if(m_name->get_text())
          m_trigger->set_name(m_name->get_text() );
       end_modal(1);
-      return;
-   }
 }

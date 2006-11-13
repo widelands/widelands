@@ -27,14 +27,30 @@
 
 namespace UI {
 /**
-Initialize a Button
+Initialize a Basic_Button
 */
-Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
-	: Panel(parent, x, y, w, h)
+Basic_Button::Basic_Button
+	(Panel * const parent,
+	 const int x, const int y, const uint w, const uint h,
+	 const bool enabled, const bool flat,
+	 const uint background_picture_id,
+	 const uint foreground_picture_id,
+	 const std::string & title_text,
+	 const std::string & tooltip_text)
+	:
+	Panel           (parent, x, y, w, h, tooltip_text),
+	m_highlighted   (false),
+	m_pressed       (false),
+	m_enabled       (enabled),
+	m_flat          (flat),
+	m_title         (title_text),
+	m_pic_background(background_picture_id),
+	m_pic_custom    (foreground_picture_id),
+	m_clr_down      (229, 161, 2)
 {
 	set_think(false);
 
-	switch(background) {
+	switch (background_picture_id) {
 	default:
 	case 0: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but0.png" ); break;
 	case 1: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but1.png" ); break;
@@ -43,29 +59,13 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 	case 4: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but4.png" ); break;
 	}
 
-	m_id = id;
-	m_highlighted = m_pressed = false;
-	m_enabled = true;
-
-	m_pic_custom = 0;
-   m_flat = flat;
-
-	m_clr_down = RGBColor(229, 161, 2);
 }
 
 
 /**
-Free any resources associated with the button
+Sets a new picture for the Basic_Button.
 */
-Button::~Button()
-{
-}
-
-
-/**
-Sets a new picture for the button.
-*/
-void Button::set_pic(uint picid)
+void Basic_Button::set_pic(uint picid)
 {
 	m_title.clear();
 
@@ -76,9 +76,9 @@ void Button::set_pic(uint picid)
 
 
 /**
-Set a text title for the button
+Set a text title for the Basic_Button
 */
-void Button::set_title(const std::string & title) {
+void Basic_Button::set_title(const std::string & title) {
 	m_pic_custom = 0;
       m_title = title;
 
@@ -91,7 +91,7 @@ void Button::set_title(const std::string & title) {
 Enable/Disable the button (disabled buttons can't be clicked).
 Buttons are enabled by default
 */
-void Button::set_enabled(bool on)
+void Basic_Button::set_enabled(bool on)
 {
 	// disabled buttons should look different...
 	if (on)
@@ -108,7 +108,7 @@ void Button::set_enabled(bool on)
 /**
 Redraw the button
 */
-void Button::draw(RenderTarget* dst)
+void Basic_Button::draw(RenderTarget* dst)
 {
 	// Draw the background
 	if(!m_flat)
@@ -183,7 +183,7 @@ void Button::draw(RenderTarget* dst)
 /**
 Update highlighted status
 */
-void Button::handle_mousein(bool inside)
+void Basic_Button::handle_mousein(bool inside)
 {
 	if (inside && m_enabled)
 		m_highlighted = true;
@@ -196,7 +196,7 @@ void Button::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool Button::handle_mousepress(const Uint8 btn, int, int) {
+bool Basic_Button::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_enabled) {
@@ -207,15 +207,14 @@ bool Button::handle_mousepress(const Uint8 btn, int, int) {
 
 	return true;
 }
-bool Button::handle_mouserelease(const Uint8 btn, int, int) {
+bool Basic_Button::handle_mouserelease(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (m_pressed) {
 		grab_mouse(false);
 		if (m_highlighted && m_enabled) {
 			play_click();
-			clicked.call();
-			clickedid.call(m_id);
+			send_signal_clicked();
 		}
 		m_pressed = false;
 	}

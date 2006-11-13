@@ -57,16 +57,18 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
    int space=get_inner_w()-2*spacing;
    space-=but_width*event->get_nr_buttons();
    space/=event->get_nr_buttons()+1;
-   UI::Button* b;
    posx=spacing;
    posy=get_inner_h()-30;
    m_trigger.resize(event->get_nr_buttons());
    for(int i=0; i<event->get_nr_buttons(); i++) {
       posx+=space;
-      b=new UI::Button(this, posx, posy, but_width, 20, 0, i);
+		new UI::IDButton<Message_Box_Event_Message_Box, int>
+			(this,
+			 posx, posy, but_width, 20,
+			 0,
+			 &Message_Box_Event_Message_Box::clicked, this, i,
+			 event->get_button_name(i));
       posx+=but_width;
-      b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
-      b->set_title( event->get_button_name(i) );
       m_trigger[i]=event->get_button_trigger(i);
    }
 
@@ -86,16 +88,12 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
  *
  * we might be a modal, therefore, if we are, we delete ourself through end_modal()
  * otherwise through die()
+ * We are not closable by right clicking so that we are not closed by accidental
+ * scrolling.
+ * We are not draggable.
  */
 bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-      // We are not closable by right clicking
-      // so that we are not closed by accidental scrolling
-      return true;
-   } else
-      return false; // we're not dragable
-}
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Message_Box_Event_Message_Box::handle_mouserelease
 (const Uint8 btn, int x, int y)
 {return handle_mousepress(btn, x, y);}

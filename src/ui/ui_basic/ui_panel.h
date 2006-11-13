@@ -53,7 +53,10 @@ struct Panel : public Object {
 		pf_dock_windows_to_edges = 256, ///< children should snap to the edges of this panel
 	};
 
-	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
+	Panel
+		(Panel * const nparent,
+		 const int nx, const int ny, const uint nw, const uint nh,
+		 const std::string & tooltip_text = std::string());
 	virtual ~Panel();
 
 	inline Panel *get_parent() const { return _parent; }

@@ -22,15 +22,13 @@
 
 #include "constants.h"
 #include "fullscreen_menu_base.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 
 class Game;
 class NetGame;
 class PlayerDescriptionGroup;
 class Map_Loader;
-namespace UI {
-class Button;
-class Textarea;
-};
 
 /**
  * Fullscreen menu to select map and to set map options.
@@ -41,8 +39,11 @@ class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	NetGame*		m_netgame;
 	Map_Loader**		m_ml;
 
-	UI::Button*		m_ok;
-	UI::Textarea*		m_mapname;
+	UI::Textarea                           title;
+	UI::Button<Fullscreen_Menu_LaunchGame> back;
+	UI::Button<Fullscreen_Menu_LaunchGame> m_ok;
+	UI::Textarea                           m_mapname;
+	UI::Button<Fullscreen_Menu_LaunchGame> m_select_map;
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
 
 	bool                    m_is_scenario;

@@ -44,10 +44,6 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 {
    m_parent=parent;
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("New Map Options"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    // UI::Buttons
    char buf[250];
    const int offsx=5;
@@ -60,22 +56,40 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    m_w=0; m_h=0;
    sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
    m_width=new UI::Textarea(this, posx+spacing+20, posy, buf, Align_Left);
-   UI::Button* b = new UI::Button(this, posx, posy, 20, 20, 1, 0);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
-   b = new UI::Button(this, get_inner_w()-spacing-20, posy, 20, 20, 1, 1);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
-   posy+=20+spacing+spacing;
+
+	new UI::IDButton<Main_Menu_New_Map, int>
+		(this,
+		 posx, posy, 20, 20,
+		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Main_Menu_New_Map::button_clicked, this, 0);
+
+	new UI::IDButton<Main_Menu_New_Map, int>
+		(this,
+		 get_inner_w()-spacing - 20, posy, 20, 20,
+		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Main_Menu_New_Map::button_clicked, this, 1);
+
+	posy+=20+spacing+spacing;
 
    sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
    m_height=new UI::Textarea(this, posx+spacing+20, posy, buf, Align_Left);
-   b = new UI::Button(this, posx, posy, 20, 20, 1, 2);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
-   b = new UI::Button(this, get_inner_w()-spacing-20, posy, 20, 20, 1, 3);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
+
+	new UI::IDButton<Main_Menu_New_Map, int>
+		(this,
+		 posx, posy, 20, 20,
+		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Main_Menu_New_Map::button_clicked, this, 2);
+
+	new UI::IDButton<Main_Menu_New_Map, int>
+		(this,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Main_Menu_New_Map::button_clicked, this, 3);
+
    posy+=20+spacing+spacing;
 
    // get all worlds
@@ -84,14 +98,23 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 
    assert(m_worlds->size());
    m_currentworld=0;
-   m_world=new UI::Button(this, posx, posy, width, height, 1, 4);
-   m_world->set_title((*m_worlds)[m_currentworld].c_str());
-   m_world->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
-   posy+=height+spacing+spacing+spacing;
 
-   b=new UI::Button(this, posx, posy, width, height, 0, 5);
-   b->set_title(_("Create Map").c_str());
-   b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
+	m_world = new UI::IDButton<Main_Menu_New_Map, int>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 &Main_Menu_New_Map::button_clicked, this, 4,
+		 (*m_worlds)[m_currentworld]);
+
+	posy+=height+spacing+spacing+spacing;
+
+	new UI::Button<Main_Menu_New_Map>
+		 (this,
+		  posx, posy, width, height,
+		  0,
+		  &Main_Menu_New_Map::clicked_create_map, this,
+		  _("Create Map"));
+
    posy+=height+spacing;
 
 
@@ -116,28 +139,6 @@ void Main_Menu_New_Map::button_clicked(int n) {
               if(m_currentworld==m_worlds->size()) m_currentworld=0;
               m_world->set_title((*m_worlds)[m_currentworld].c_str());
               break;
-      case 5:
-              {
-                 Map* m_map=m_parent->get_egbase()->get_map();
-                 // Clean all the stuff up, so we can load
-                 m_parent->get_editor()->cleanup_for_load(true, false);
-
-                 m_map->create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
-
-                 // Postload the world which provides all the immovables found on a map
-                 m_map->get_world()->postload(m_parent->get_editor());
-
-                 m_parent->get_editor()->postload();
-                 m_parent->get_editor()->load_graphics();
-
-                 m_map->recalc_whole_map();
-
-                 m_parent->set_need_save(true);
-                 m_parent->need_complete_redraw();
-
-                 die();
-                 return ;
-              }
    }
 
    char buf[200];
@@ -150,6 +151,28 @@ void Main_Menu_New_Map::button_clicked(int n) {
    sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
    m_height->set_text(buf);
 }
+
+void Main_Menu_New_Map::clicked_create_map() {
+	Map & map = m_parent->get_egbase()->map();
+	// Clean all the stuff up, so we can load
+	m_parent->get_editor()->cleanup_for_load(true, false);
+
+	map.create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
+
+	// Postload the world which provides all the immovables found on a map
+	map.get_world()->postload(m_parent->get_editor());
+
+	m_parent->get_editor()->postload();
+	m_parent->get_editor()->load_graphics();
+
+	map.recalc_whole_map();
+
+	m_parent->set_need_save(true);
+	m_parent->need_complete_redraw();
+
+	die();
+}
+
 
 /*
 ===============

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "error.h"
 #include "fullscreen_menu_tutorial_select_map.h"
 #include "i18n.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
 #include "constants.h"
 
 static const char* filenames[] = {
@@ -32,28 +30,38 @@ static const char* filenames[] = {
 /*
  * Array with file names for this mission
  */
-Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap()
-	: Fullscreen_Menu_Base("singleplmenu.jpg")
-{
+Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap() :
+Fullscreen_Menu_Base("singleplmenu.jpg"),
+
 	// Text
-   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 45, _("Tutorial Campaign: A new Kingdom"), Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+title
+(this, MENU_XRES / 2, 45, _("Tutorial Campaign: A new Kingdom"), Align_HCenter),
 
 	// UI::Buttons
-	UI::Button* b;
 
-	b = new UI::Button(this, 80, 100, 640, 26, 1, 1);
-	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
-	b->set_title(_("Mission 1: Eyes in the Darkness - Game Basics").c_str());
+mission_1
+(this,
+ 80, 100, 640, 26,
+ 1,
+ &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 1,
+ _("Mission 1: Eyes in the Darkness - Game Basics")),
 
-	b = new UI::Button(this, 80, 130, 640, 26, 1, 2);
-	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
-	b->set_title(_("Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions").c_str());
+mission_2
+(this,
+ 80, 130, 640, 26,
+ 1,
+ &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 2,
+ _("Mission 2: A Place to call Home - Mining, Expanding, Advanced "
+   "Productions")),
 
-	b = new UI::Button(this, (get_inner_w()-160)/2, get_inner_h()-80, 160, 26, 0, 0);
-	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
-	b->set_title(_("Back").c_str());
-}
+back
+(this,
+ (get_inner_w() - 160) / 2, get_inner_h() - 80, 160, 26,
+ 0,
+ &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 0,
+ _("Back"))
+
+{title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}
 
 const char* Fullscreen_Menu_TutorialSelectMap::get_mapname( int code ) {
    return filenames[code-1];

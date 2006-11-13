@@ -25,7 +25,7 @@
 
 class Editor_Interactive;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 struct Edit_Box;
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
@@ -46,7 +46,8 @@ struct Main_Menu_Save_Map : public UI::Window {
       virtual ~Main_Menu_Save_Map();
 
    private:
-      void clicked(int);
+	void clicked_ok            ();
+	void clicked_make_directory();
 	void selected      (uint);
 	void double_clicked(uint);
       void edit_box_changed();
@@ -59,7 +60,7 @@ struct Main_Menu_Save_Map : public UI::Window {
 	UI::Multiline_Textarea * m_descr;
       Editor_Interactive *m_parent;
 	UI::Listselect<const char * const> * m_ls;
-      UI::Button* m_ok_btn;
+	UI::Button<Main_Menu_Save_Map> * m_ok_btn;
 
       std::string m_basedir;
       std::string m_curdir;

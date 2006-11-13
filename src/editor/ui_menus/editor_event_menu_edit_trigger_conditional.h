@@ -27,7 +27,7 @@ class Editor_Interactive;
 class TriggerConditional;
 namespace UI {
 template <typename T> struct Listselect;
-struct Button;
+template <typename T> struct Button;
 }
 
 /*
@@ -45,7 +45,7 @@ struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
    private:
 	void clicked_cancel     ();
 	void clicked_ok         ();
-	void clicked_operator   (int i);
+	void clicked_operator   (const TriggerConditional_Factory::TokenNames);
 	void clicked_ins_trigger();
 	void clicked_del_trigger();
 	void clicked_move_up    ();
@@ -58,10 +58,10 @@ struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
       UI::Listselect<Trigger                           &> *m_trigger_list;
       UI::Listselect<TriggerConditional_Factory::Token &> *m_construction;
       Editor_Interactive *m_parent;
-      UI::Button           *m_insert_btn;
-      UI::Button           *m_delete_btn;
-      UI::Button           *m_mvup_btn;
-      UI::Button           *m_mvdown_btn;
+	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
+	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
+	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;
+	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvdown_btn;
       TriggerConditional *m_given_cond;
       EventChain         *m_event_chain;
 };

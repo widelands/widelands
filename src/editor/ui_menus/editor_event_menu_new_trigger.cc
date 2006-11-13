@@ -33,12 +33,9 @@
 #include "error.h"
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
-   UI::Window(parent, 0, 0, 400, 240, _("New Trigger").c_str()) {
-  m_parent=parent;
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("New Trigger Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
+UI::Window(parent, 0, 0, 400, 240, _("New Trigger").c_str()),
+m_parent(parent)
+{
 
    const int offsx=5;
    const int offsy=25;
@@ -64,14 +61,24 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   m_ok_button=new UI::Button(this, posx, posy, 80, 20, 0, 1);
-   m_ok_button->set_title(_("Ok").c_str());
-   m_ok_button->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
-   m_ok_button->set_enabled(0);
-   posx=(get_inner_w()/2)+spacing;
-   UI::Button* b=new UI::Button(this, posx, posy, 80, 20, 1, 0);
-   b->set_title(_("Cancel").c_str());
-   b->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
+
+	m_ok_button = new UI::Button<Editor_Event_Menu_New_Trigger>
+		(this,
+		 posx, posy, 80, 20,
+		 0,
+		 &Editor_Event_Menu_New_Trigger::clicked_ok, this,
+		 _("Ok"),
+		 std::string(),
+		 false);
+
+	posx=(get_inner_w()/2)+spacing;
+
+	new UI::IDButton<Editor_Event_Menu_New_Trigger, int>
+		(this,
+		 posx, posy, 80, 20,
+		 1,
+		 &Editor_Event_Menu_New_Trigger::end_modal, this, 0,
+		 _("Cancel"));
 
    center_to_parent();
 }
@@ -88,29 +95,18 @@ Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger(void) {
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
 bool Editor_Event_Menu_New_Trigger::handle_mousepress
 (const Uint8 btn, int, int)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-      clicked(0);
-      return true;
-   } else
-      return false; // we're not dragable
-}
+{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Editor_Event_Menu_New_Trigger::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
  * a button has been clicked
  */
-void Editor_Event_Menu_New_Trigger::clicked(int i) {
-   if(!i) {
-      // Cancel has been clicked
-      end_modal(0);
-      return;
-   }
-
+void Editor_Event_Menu_New_Trigger::clicked_ok() {
    // Create new trigger
 	Trigger * const trig = Trigger_Factory::make_trigger_with_option_dialog
 		(m_trigger_list->get_selection().id.c_str(), m_parent, 0);
@@ -134,7 +130,4 @@ void Editor_Event_Menu_New_Trigger::selected(uint) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_New_Trigger::double_clicked(uint) {
-   // Ok
-   clicked(1);
-}
+void Editor_Event_Menu_New_Trigger::double_clicked(uint) {clicked_ok();}

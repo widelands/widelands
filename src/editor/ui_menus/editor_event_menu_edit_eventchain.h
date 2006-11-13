@@ -27,7 +27,7 @@ class Event;
 class EventChain;
 namespace UI {
 template <typename T> struct Listselect;
-struct Button;
+template <typename T> struct Button;
 struct Checkbox;
 struct Edit_Box;
 };
@@ -45,7 +45,6 @@ struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
       void think( void );
 
    private:
-	void clicked_cancel                  ();
 	void clicked_ok                      ();
 	void clicked_new_event               ();
 	void clicked_edit_trigger_contitional();
@@ -61,10 +60,10 @@ struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
 	UI::Listselect<Event &> *m_available_events;
 	UI::Listselect<Event &> *m_events;
       Editor_Interactive *m_parent;
-      UI::Button           *m_insert_btn;
-      UI::Button           *m_delete_btn;
-      UI::Button           *m_mvup_btn;
-      UI::Button           *m_mvdown_btn;
+	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_insert_btn;
+	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
+	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;
+	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvdown_btn;
       UI::Checkbox         *m_morethanonce;
       UI::Edit_Box         *m_name;
       EventChain         *m_event_chain;

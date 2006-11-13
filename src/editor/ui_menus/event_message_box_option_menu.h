@@ -27,7 +27,7 @@
 class Editor_Interactive;
 class Event_Message_Box;
 namespace UI {
-struct Button;
+template <typename T> struct Button;
 struct Edit_Box;
 struct Checkbox;
 template <typename T> struct Listselect;
@@ -50,7 +50,11 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
       static const int MAX_BUTTONS=4;
 
       void update(void);
-      void clicked(int);
+	void clicked_ok                        ();
+	void clicked_number_of_buttons_decrease();
+	void clicked_number_of_buttons_increase();
+	void clicked_trigger_sel_decrease      ();
+	void clicked_trigger_sel_increase      ();
 	void ls_selected    (uint);
       void edit_box_edited(int);
 

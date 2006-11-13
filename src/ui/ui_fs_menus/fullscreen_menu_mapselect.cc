@@ -25,10 +25,6 @@
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "map.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_multilinetextarea.h"
-#include "ui_checkbox.h"
 #include "widelands_map_loader.h"
 #include "s2map.h"
 #include "wexception.h"
@@ -44,59 +40,70 @@ Fullscreen_Menu_MapSelect
 
 
 Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader** ml)
-	: Fullscreen_Menu_Base("choosemapmenu.jpg")
-{
-	egbase = g;
-   m_map = new Map;
-   m_is_scenario = false;
-   m_ml=ml;
-   if(*m_ml) delete *m_ml;
-   *m_ml=0;
+:
+Fullscreen_Menu_Base("choosemapmenu.jpg"),
+egbase(g),
 
 	// Text
-   UI::Textarea* title= new UI::Textarea(this, MENU_XRES/2, 110, _("Choose your map!"), Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+title(this, MENU_XRES / 2, 110, _("Choose your map!"), Align_HCenter),
 
    // Checkbox
-   UI::Textarea* ta=new UI::Textarea(this, MENU_XRES-300, 180, _("Load Map as scenario: "), Align_VCenter);
-   UI::Checkbox* cb=new UI::Checkbox(this, (ta->get_x()+ta->get_w()+10), 170);
-   cb->changedto.set(this, &Fullscreen_Menu_MapSelect::changed);
-   cb->set_state(m_is_scenario);
+label_load_map_as_scenario
+(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter),
+load_map_as_scenario
+(this,
+ label_load_map_as_scenario.get_x() + label_load_map_as_scenario.get_w() + 10,
+ 170),
 
-	// UI::Buttons
-	UI::Button* b;
-
-	b = new UI::Button(this, 570, 505, 200, 26, 0, 0);
-	b->clickedid.set(this, &Fullscreen_Menu_MapSelect::end_modal);
-	b->set_title(_("Back").c_str());
-
-	m_ok = new UI::Button(this, 570, 535, 200, 26, 2, 0);
-	m_ok->clicked.set(this, &Fullscreen_Menu_MapSelect::ok);
-	m_ok->set_title(_("OK").c_str());
-	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new UI::Listselect<const char * const>(this, 15, 205, 455, 365);
-	list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
-   list->double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+list(this, 15, 205, 455, 365),
 
 	// Info fields
-	new UI::Textarea(this, 560, 205, _("Name:"), Align_Right);
-	taname = new UI::Textarea(this, 570, 205, "");
-	new UI::Textarea(this, 560, 225, _("Author:"), Align_Right);
-	taauthor = new UI::Textarea(this, 570, 225, "");
-	new UI::Textarea(this, 560, 245, _("Size:"), Align_Right);
-	tasize = new UI::Textarea(this, 570, 245, "");
-	new UI::Textarea(this, 560, 265, _("World:"), Align_Right);
-	taworld = new UI::Textarea(this, 570, 265, "");
-	new UI::Textarea(this, 560, 285, _("Players:"), Align_Right);
-	tanplayers = new UI::Textarea(this, 570, 285, "");
-	new UI::Textarea(this, 560, 305, _("Descr:"), Align_Right);
-	tadescr = new UI::Multiline_Textarea(this, 570, 305, 200, 190, "");
+label_name    (this, 560, 205, _("Name:"),    Align_Right),
+taname        (this, 570, 205, ""),
+label_author  (this, 560, 225, _("Author:"),  Align_Right),
+taauthor      (this, 570, 225, ""),
+label_size    (this, 560, 245, _("Size:"),    Align_Right),
+tasize        (this, 570, 245, ""),
+label_world   (this, 560, 265, _("World:"),   Align_Right),
+taworld       (this, 570, 265, ""),
+label_nplayers(this, 560, 285, _("Players:"), Align_Right),
+tanplayers    (this, 570, 285, ""),
+label_descr   (this, 560, 305, _("Descr:"),   Align_Right),
+tadescr       (this, 570, 305, 200, 190, ""),
 
-   m_basedir="maps";
-   m_curdir="maps";
+back
+(this,
+ 570, 505, 200, 26,
+ 0,
+ &Fullscreen_Menu_MapSelect::end_modal, this, 0,
+ _("Back")),
 
+m_ok
+(this,
+ 570, 535, 200, 26,
+ 2,
+ &Fullscreen_Menu_MapSelect::ok, this,
+ _("OK"),
+ false),
+
+m_ml         (ml),
+m_map        (new Map),
+m_is_scenario(false),
+
+m_curdir ("maps"),
+m_basedir("maps")
+
+{
+	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	load_map_as_scenario.changedto.set
+		(this, &Fullscreen_Menu_MapSelect::changed);
+	load_map_as_scenario.set_state(m_is_scenario);
+	list.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
+	list.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+	delete *m_ml;
+	*m_ml=0;
    fill_list();
 }
 
@@ -118,11 +125,11 @@ void Fullscreen_Menu_MapSelect::changed(bool t) {
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	const std::string filename = list->get_selection();
+	const std::string filename = list.get_selection();
 
    if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename )) {
 	   m_curdir=g_fs->FS_CanonicalizeName(filename);
-      list->clear();
+		list.clear();
       m_mapfiles.clear();
       fill_list();
    } else {
@@ -143,7 +150,7 @@ void Fullscreen_Menu_MapSelect::ok()
 }
 
 void Fullscreen_Menu_MapSelect::map_selected(uint) {
-	const char * const name = list->get_selection();
+	const char * const name = list.get_selection();
 
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       // No directory
@@ -161,34 +168,34 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
             (*m_ml)->preload_map(m_is_scenario);
 
             char buf[256];
-            taname->set_text(m_map->get_name());
-            taauthor->set_text(m_map->get_author());
+				taname    .set_text(m_map->get_name());
+				taauthor  .set_text(m_map->get_author());
             sprintf(buf, "%-4ix%4i", m_map->get_width(), m_map->get_height());
-            tasize->set_text(buf);
+				tasize    .set_text(buf);
             sprintf(buf, "%i", m_map->get_nrplayers());
-            tanplayers->set_text(buf);
-            tadescr->set_text(m_map->get_description());
-            taworld->set_text(m_map->get_world_name());
-            m_ok->set_enabled(true);
+				tanplayers.set_text(buf);
+				tadescr   .set_text(m_map->get_description());
+				taworld   .set_text(m_map->get_world_name());
+				m_ok.set_enabled(true);
          } catch(std::exception& e) {
             log("Failed to load map %s: %s\n", get_mapname(), e.what());
 
-            taname->set_text("(bad map file)");
-            taauthor->set_text("");
-            tasize->set_text("");
-            tanplayers->set_text("");
-            tadescr->set_text("");
-            taworld->set_text("");
-            m_ok->set_enabled(false);
+				taname    .set_text("(bad map file)");
+				taauthor  .set_text("");
+				tasize    .set_text("");
+				tanplayers.set_text("");
+				tadescr   .set_text("");
+				taworld   .set_text("");
+				m_ok.set_enabled(false);
          }
       } else {
          // Directory
-         taname->set_text("(bad map file)");
-         taauthor->set_text("");
-         tasize->set_text("");
-         tanplayers->set_text("");
-         tadescr->set_text("");
-         taworld->set_text("");
+			taname    .set_text("(bad map file)");
+			taauthor  .set_text("");
+			tasize    .set_text("");
+			tanplayers.set_text("");
+			tadescr   .set_text("");
+			taworld   .set_text("");
       }
    }
 }
@@ -214,7 +221,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
 	   m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
-		list->add_entry
+		list.add_entry
 			("<parent>",
 			 m_parentdir.c_str(),
 			 false,
@@ -230,7 +237,11 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       if(!g_fs->IsDirectory(name)) continue;
       if(Widelands_Map_Loader::is_widelands_map( name )) continue;
 
-      list->add_entry(FileSystem::FS_Filename(name), name, false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
+		list.add_entry
+			(FileSystem::FS_Filename(name),
+			 name,
+			 false,
+			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
       ++ndirs;
    }
 
@@ -247,7 +258,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 				(dynamic_cast<const Widelands_Map_Loader * const>(ml)
 				 or
 				 dynamic_cast<const        S2_Map_Loader * const>(ml));
-			list->add_entry
+			list.add_entry
 				(map->get_name(),
 				 name,
 				 false,
@@ -263,9 +274,8 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
    }
    delete map;
 
-   list->sort(0, ndirs);
-   list->sort(ndirs);
+	list.sort(0, ndirs);
+	list.sort(ndirs);
 
-   if(list->get_nr_entries())
-      list->select(0);
+	if (list.get_nr_entries()) list.select(0);
 }

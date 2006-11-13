@@ -51,11 +51,12 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
    ta->set_pos((get_inner_w()-ta->get_w())/2, 100);
 
 	// Close button
-	UI::Button *b;
-
-	b = new UI::Button(this, 300, 545, 200, 26, 0);
-	b->clickedid.set(this, &Fullscreen_Menu_TextView::end_modal);
-	b->set_title(_("Close").c_str());
+	new UI::IDButton<Fullscreen_Menu_TextView, int>
+		(this,
+		 300, 545, 200, 26,
+		 0,
+		 &Fullscreen_Menu_TextView::end_modal, this, 0,
+		 _("Close"));
 }
 
 void Fullscreen_Menu_TextView::set_text(std::string text) {

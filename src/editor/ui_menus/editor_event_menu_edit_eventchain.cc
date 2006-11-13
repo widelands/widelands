@@ -43,11 +43,6 @@ UI::Window(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),
 m_parent(parent),
 m_event_chain(chain)
 {
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Edit Event Chain Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    const int offsx=5;
    const int offsy=25;
    const int spacing=5;
@@ -76,37 +71,66 @@ m_event_chain(chain)
    posx += ls_width + spacing;
 
    posy = 75;
-   UI::Button* b = new UI::Button(this, posx, posy, 80, 20, 0);
-   b->set_title(_("Conditional").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional);
-   posy += 20 + spacing + spacing;
-   b = new UI::Button(this, posx, posy, 80, 20, 0);
-   b->set_title(_("New Event").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_new_event);
-   posy += 20 + spacing + spacing;
-   b = new UI::Button(this, posx, posy, 80, 20, 0);
-   b->set_title("<-");
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_ins_event);
-   posy += 20 + spacing + spacing;
-   b->set_enabled( false );
-   m_insert_btn = b;
-   b = new UI::Button(this, posx, posy, 80, 20, 0);
-   b->set_title(_("Delete").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_del_event);
-   b->set_enabled( false );
-   m_delete_btn = b;
-   posy += 20 + spacing + spacing + spacing;
 
-   b = new UI::Button(this, posx+5, posy, 24, 24, 0);
-   b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_up.png"));
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_move_up);
-   b->set_enabled( false );
-   m_mvup_btn = b;
-   b = new UI::Button(this, posx+51, posy, 24, 24, 0);
-   b->set_pic(g_gr->get_picture( PicMod_UI, "pics/scrollbar_down.png"));
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_move_down);
-   b->set_enabled( false );
-   m_mvdown_btn = b;
+	new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx, posy, 80, 20,
+		 0,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional,
+		 this,
+		 _("Conditional"));
+
+	posy += 20 + spacing + spacing;
+
+	new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx, posy, 80, 20,
+		 0,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_new_event, this,
+		 _("New Event"));
+
+   posy += 20 + spacing + spacing;
+
+	m_insert_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx, posy, 80, 20,
+		 0,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_ins_event, this,
+		 "<-",
+		 _("Insert"),
+		 false);
+
+   posy += 20 + spacing + spacing;
+
+	m_delete_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx, posy, 80, 20,
+		 0,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_del_event, this,
+		 _("Delete"),
+		 std::string(),
+		 false);
+
+	posy += 20 + spacing + spacing + spacing;
+
+	m_mvup_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx + 5, posy, 24, 24,
+		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Editor_Event_Menu_Edit_EventChain::clicked_move_up, this,
+		 _("Up"),
+		 false);
+
+	m_mvdown_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx + 51, posy, 24, 24,
+		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Editor_Event_Menu_Edit_EventChain::clicked_move_down, this,
+		 std::string(),
+		 false);
+
    posy += 24 + spacing + spacing;
 
    posx += 80 + spacing;
@@ -124,13 +148,22 @@ m_event_chain(chain)
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   b=new UI::Button(this, posx, posy, 80, 20, 0);
-   b->set_title(_("Ok").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_ok);
-   posx=(get_inner_w()/2)+spacing;
-   b=new UI::Button(this, posx, posy, 80, 20, 1);
-   b->set_title(_("Cancel").c_str());
-   b->clicked.set(this, &Editor_Event_Menu_Edit_EventChain::clicked_cancel);
+
+	new UI::Button<Editor_Event_Menu_Edit_EventChain>
+		(this,
+		 posx, posy, 80, 20,
+		 0,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_ok, this,
+		 _("Ok"));
+
+	posx=(get_inner_w()/2)+spacing;
+
+	new UI::IDButton<Editor_Event_Menu_Edit_EventChain, int>
+		(this,
+		 posx, posy, 80, 20,
+		 1,
+		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
+		 _("Cancel"));
 
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
 		Event & event = *m_event_chain->get_event(i);
@@ -149,21 +182,16 @@ Editor_Event_Menu_Edit_EventChain::~Editor_Event_Menu_Edit_EventChain(void) {
 }
 
 /*
- * Handle mouseclick
+ * Handle mousepress/-release
  *
  * we're a modal, therefore we can not delete ourself
  * on close (the caller must do this) instead
  * we simulate a cancel click
+ * We are not draggable.
  */
 bool Editor_Event_Menu_Edit_EventChain::handle_mousepress
 (const Uint8 btn, int, int)
-{
-	if (btn & SDL_BUTTON_RIGHT) {
-      clicked_cancel();
-      return true;
-   } else
-      return false; // we're not dragable
-}
+{if (btn & SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
 bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
 (const Uint8, int, int)
 {return false;}
@@ -176,8 +204,6 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
  */
 void Editor_Event_Menu_Edit_EventChain::think()
 {if (m_edit_trigcond) clicked_edit_trigger_contitional();}
-
-void Editor_Event_Menu_Edit_EventChain::clicked_cancel() {end_modal(0);}
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Name

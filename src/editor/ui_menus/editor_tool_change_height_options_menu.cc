@@ -44,7 +44,9 @@ constructor
 */
 Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Height_Tool* iht, UI::UniqueWindow::Registry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, _("Height Tools Options").c_str()) {
+Editor_Tool_Options_Menu
+(parent, index, registry, _("Height Tools Options").c_str())
+{
 
    m_iht=iht;
    m_dht=iht->get_dht();
@@ -65,25 +67,40 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    ta=new UI::Textarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+width;
-   UI::Button* b=new UI::Button(this, posx, posy, width, height, 1, 0);
-   b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b=new UI::Button(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
-   b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
-   m_increase=new UI::Textarea(this, 0, 0, "5", Align_Left);
+
+	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 0);
+
+	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
+		(this,
+		 get_inner_w() - spacing - width, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 1);
+
+	m_increase=new UI::Textarea(this, 0, 0, "5", Align_Left);
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
 
    ta=new UI::Textarea(this, 0, 0, _("Set Value"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=width+spacing;
-   b=new UI::Button(this, posx, posy, width, height, 1, 2);
-   b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
-   b=new UI::Button(this, get_inner_w()-spacing-width, posy, width, height, 1, 3);
-   b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
+	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
+		(this,
+		 posx, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 2);
+	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
+		(this,
+		 get_inner_w() - spacing - width, posy, width, height,
+		 1,
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 3);
    m_set=new UI::Textarea(this, 0, 0, "5", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    posy+=width+spacing;
@@ -98,7 +115,7 @@ Editor_Tool_Change_Height_Options_Menu::clicked()
 called when one button is clicked
 ===========
 */
-void Editor_Tool_Change_Height_Options_Menu::clicked(int n) {
+void Editor_Tool_Change_Height_Options_Menu::clicked(const Uint8 n) {
    int increase=m_iht->get_changed_by();
    int set=m_sht->get_set_to();
 

@@ -23,7 +23,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "ui_textarea.h"
-#include "ui_button.h"
 #include "editor_tool.h"
 
 /*
@@ -34,22 +33,29 @@ Create all the buttons etc...
 ===============
 */
 Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
-	: UI::UniqueWindow(parent, registry, 160, 65, _("Toolsize Menu"))
-{
-   m_parent=parent;
+:
+UI::UniqueWindow(parent, registry, 160, 65, _("Toolsize Menu")),
+m_parent(parent),
 
-   new UI::Textarea(this, 15, 0, _("Set Tool Size Menu"), Align_Left);
+m_increase
+(this,
+ 60, 40, 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+ &Editor_Toolsize_Menu::change_radius, this, true),
+
+m_decrease
+(this,
+ 80, 40, 20, 20,
+ 0,
+ g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+ &Editor_Toolsize_Menu::change_radius, this, false)
+
+{
+
    char buf[250];
    sprintf(buf, _("Current Size: %i").c_str(), m_parent->get_fieldsel_radius()+1);
    m_textarea=new UI::Textarea(this, 25, 20, buf);
-
-   int bx=60;
-   UI::Button* b = new UI::Button(this, bx, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
-   b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
-   b=new UI::Button(this, bx+20, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
-   b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -74,12 +80,12 @@ called, when one of the up/down buttons is pressed
 id: 0 is up, 1 is down
 ===========
 */
-void Editor_Toolsize_Menu::button_clicked(int n) {
+void Editor_Toolsize_Menu::change_radius(const bool increase) {
    int val=m_parent->get_fieldsel_radius();
-   if(n==0) {
+	if (increase) {
       ++val;
       if(val>MAX_TOOL_AREA) val=MAX_TOOL_AREA;
-   } else if(n==1) {
+	} else {
       --val;
       if(val<0) val=0;
    }

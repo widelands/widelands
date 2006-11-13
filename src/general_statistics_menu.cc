@@ -187,41 +187,78 @@ m_parent(&parent)
    button_size = ( get_inner_w()-(spacing*5) ) / 4;
    posx = spacing;
    posy +=spacing+spacing;
-   UI::Button *b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_15_MINS);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("15 m").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_15_MINS,
+		 _("15 m"));
+
    posx += button_size+spacing;
-   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_30_MINS);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("30 m").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_30_MINS,
+		 _("30 m"));
+
    posx += button_size+spacing;
-   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_ONE_HOUR);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("1 h").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_ONE_HOUR,
+		 _("1 h"));
+
    posx += button_size+spacing;
-   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_TWO_HOURS);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("2 h").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_TWO_HOURS,
+		 _("2 h"));
 
    posy += 25 + spacing;
    posx = spacing;
-	b = new UI::Button(this, posx, posy, 32, 32, 4, 100);
-	b->clickedid.set(this, &General_Statistics_Menu::clicked);
-	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png"));
-	b->set_tooltip(_("Help").c_str());
+
+	new UI::Button<General_Statistics_Menu>
+		(this,
+		 posx, posy, 32, 32,
+		 4,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+		 &General_Statistics_Menu::clicked_help, this,
+		 _("Help"));
 
    posx += button_size+spacing;
-   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("4 h").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
+		 _("4 h"));
    posx += button_size+spacing;
-   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_EIGHT_HOURS);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("8 h").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
+		 _("8 h"));
+
    posx += button_size+spacing;
-   b = new UI::Button(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_16_HOURS);
-   b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title(_("16 h").c_str());
+
+	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+		(this,
+		 posx, posy, button_size, 25,
+		 4,
+		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_16_HOURS,
+		 _("16 h"));
+
    posx += button_size+spacing;
    posy += 32+spacing;
 
@@ -245,13 +282,10 @@ General_Statistics_Menu::~General_Statistics_Menu()
 called when the help button was clicked
 ===========
 */
-void General_Statistics_Menu::clicked(int id) {
-   if(id == 100) {
+void General_Statistics_Menu::clicked_help() {
       log("TODO: help not implemented\n");
-   } else
-      m_plot->set_time(id);
-
 }
+
 
 /*
  * Cb has been changed to this state

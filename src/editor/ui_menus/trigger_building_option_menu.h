@@ -44,6 +44,7 @@ struct Trigger_Building_Option_Menu : public UI::Window {
 
    private:
       void update(void);
+	void clicked_ok();
       void clicked(int);
 
       Trigger_Building* m_trigger;

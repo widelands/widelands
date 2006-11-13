@@ -23,7 +23,6 @@
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UI::Button;
 class WUIPlot_Area;
 
 class Ware_Statistics_Menu : public UI::UniqueWindow {
@@ -37,7 +36,7 @@ class Ware_Statistics_Menu : public UI::UniqueWindow {
       WUIPlot_Area*       m_plot;
 
    private:
-      void clicked(int);
+	void clicked_help();
       void cb_changed_to(int, bool);
 };
 

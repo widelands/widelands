@@ -58,7 +58,14 @@ m_player(plr),
 m_netgame(netgame),
 chatbox(this,  5,   5, get_inner_w() - 10,             150, "", Align_Left, 1),
 editbox(this,  5, 160, get_inner_w() - 10,              85, ""),
-send   (this,  5, 250,                 80, STATEBOX_HEIGHT, 4, 0),
+
+send
+(this,
+ 5, 250, 80, STATEBOX_HEIGHT,
+ 4,
+ &GameChatMenu::clicked_send, this,
+ _("Send")),
+
 show_as_overlays_label
 (this,
  5 + 80 + 5, 250, 120, STATEBOX_HEIGHT,
@@ -66,12 +73,9 @@ show_as_overlays_label
 show_as_overlays(this, get_inner_w() - STATEBOX_WIDTH - 5, 250)
 {
 
-	send.set_title(_("Send").c_str());
-
-	send            .clickedid.set(this, &GameChatMenu::clicked_send);
 	show_as_overlays.changedto.set
 		(this, &GameChatMenu::changed_show_as_overlays);
-	
+
 	show_as_overlays.set_state(m_player.show_chat_overlay());
 
 	if (get_usedefaultpos())
@@ -104,7 +108,7 @@ void GameChatMenu::think( void ) {
 void GameChatMenu::changed_show_as_overlays(bool t)
 {m_player.set_show_chat_overlay(t);}
 
-void GameChatMenu::clicked_send(int) {
+void GameChatMenu::clicked_send() {
 	std::string str = editbox.get_text();
 
    if( str.size() && m_netgame ) {
