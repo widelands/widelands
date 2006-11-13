@@ -269,7 +269,7 @@ def do_configure(config_h_file, conf, env):
 	conf.CheckCompilerArgument('-Wextra', env)
 	#conf.CheckCompilerArgument('-Wfloat-equal', env)
 	#conf.CheckCompilerArgument('-Wformat=2', env)
-	conf.CheckCompilerArgument('-Winline', env)
+	#conf.CheckCompilerArgument('-Winline', env)
 	conf.CheckCompilerArgument('-Winvalid-pch', env)
 	#conf.CheckCompilerArgument('-Wmissing-format-attribute', env)
 	conf.CheckCompilerArgument('-Wmissing-include-dirs', env)
