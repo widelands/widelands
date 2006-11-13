@@ -62,6 +62,7 @@ extern "C"
 
 		return 1;
 	}
+#if 0
 	catch(std::exception &e) {
 		cerr<<endl<<
 		"Caught exception (of type '"<<typeid(e).name()<<
@@ -84,4 +85,5 @@ extern "C"
 
 		return 1;
 	}
+#endif
 }
