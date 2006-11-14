@@ -1,4 +1,4 @@
-﻿# translation of widelands_ru_RU.po to russian
+# translation of widelands_ru_RU.po to russian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-11 18:18+0100\n"
+"POT-Creation-Date: 2006-11-14 11:16+0100\n"
 "PO-Revision-Date: 2006-06-09 00:13+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
@@ -17,371 +17,530 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: KBabel 1.10.2\n"
 
+#: ../src/trigger_time.cc:36
+msgid "Time Trigger"
+msgstr "Временной тригер"
+
+#: ../src/trigger_null.cc:34
+msgid "Null Trigger"
+msgstr "Нулевой тригер"
+
+#: ../src/trainingsite.cc:215
+msgid "Resting"
+msgstr "Отдых"
+
+#: ../src/trainingsite.cc:217
+msgid "Not Working"
+msgstr "Не работает"
+
+#: ../src/event_set_null_trigger.cc:39
+msgid "Set Null Trigger"
+msgstr "Установить нулевой тригер"
+
+#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
+msgid "Move View"
+msgstr "Вид в движении"
+
+#: ../src/event_allow_building.cc:39
+msgid "Allow Building"
+msgstr "Можно строить"
+
+#: ../src/map_variable_manager.cc:30
+msgid "Next scenario"
+msgstr "Сследующий сценарий"
+
+#: ../src/map_variable_manager.cc:31 ../src/map.cc:441
+msgid "<undefined>"
+msgstr "<undefined>"
+
+#: ../src/game_objectives_menu.cc:31
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:163
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:168
+msgid "Objectives Menu"
+msgstr "Меню заданий"
+
+#: ../src/productionsite.cc:232
+msgid "(not occupied)"
+msgstr "(не занято)"
+
+#: ../src/productionsite.cc:272
+msgid "UP"
+msgstr "ВВЕРХ"
+
+#: ../src/productionsite.cc:274
+msgid "DOWN"
+msgstr "ВНИЗ"
+
+#: ../src/waresdisplay.cc:56
+msgid "Testtext"
+msgstr "Тест"
+
+#: ../src/event_message_box.cc:41
+msgid "Message Box"
+msgstr "Окно сообщений"
+
+#: ../src/event_message_box.cc:42
+msgid "No text defined"
+msgstr "Текст не поределен"
+
+#: ../src/event_message_box.cc:43
+msgid "Window Title"
+msgstr "Заголовок окна"
+
+#: ../src/event_message_box.cc:49
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:54
+msgid "Continue"
+msgstr "Продолжить"
+
+#: ../src/network.cc:332
+msgid "I have no name"
+msgstr "У меня нет имени"
+
+#: ../src/network.cc:831
+msgid "Starting network game"
+msgstr "Начать сетевую игру"
+
+#: ../src/network.cc:834 ../src/network.cc:843
+msgid "Player"
+msgstr "Игрок"
+
+#: ../src/network.cc:835
+msgid "Status"
+msgstr "Статус"
+
+#: ../src/network.cc:848
+msgid "Waiting"
+msgstr "Ожидание"
+
+#: ../src/network.cc:859
+msgid "Ready"
+msgstr "Готов"
+
+#: ../src/constructionsite.cc:223
+msgid "built"
+msgstr "построено"
+
+#: ../src/event_conquer_area.cc:36
+msgid "Conquer Area"
+msgstr "Захваченные земли"
+
+#: ../src/event_unhide_area.cc:37
+msgid "Unhide Area"
+msgstr "Зона обозрения"
+
+#: ../src/militarysite.cc:145
+#, c-format
+msgid "%d soldier (+%d)"
+msgid_plural "%d soldiers (+%d)"
+msgstr[0] "%d солдаты (+%d)"
+msgstr[1] "%d солдаты (+%d)"
+
+#: ../src/militarysite.cc:147
+#, c-format
+msgid "%d soldier"
+msgid_plural "%d soldiers"
+msgstr[0] "%d солдаты"
+msgstr[1] "%d солдаты"
+
+#: ../src/trigger_building.cc:40
+msgid "Building Trigger"
+msgstr "Создать тригер"
+
+#: ../src/trigger_building.cc:47
+msgid "<unset>"
+msgstr "<unset>"
+
+#: ../src/game_server_proto_packet_getroominfo.cc:66
+#, c-format
+msgid "The Room %s is currently not logged in or unknown to the server.\n"
+msgstr "Запись %s не была использована для входа или неизвестна серверу.\n"
+
+#: ../src/game_server_proto_packet_connect.cc:72
+#, c-format
+msgid ""
+"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+"Server runs %i.%02i\n"
+msgstr ""
+"Сервер сообщает об ошибке соединения. Ваш протокол (%i.%02i) слишком стар. "
+"Сервер использует %i.%02i\n"
+
+#: ../src/game_server_proto_packet_connect.cc:78
+#, c-format
+msgid "Server is full!\n"
+msgstr "Сервер переполнен!\n"
+
+#: ../src/game_server_proto_packet_connect.cc:83
+#, c-format
+msgid "This server doesn't serve widelands!\n"
+msgstr "Этот сервер не поддерживает widelands!\n"
+
+#: ../src/game_server_proto_packet_getuserinfo.cc:66
+#, c-format
+msgid "The User %s is currently not logged in or unknown to the server.\n"
+msgstr "Пользователь %s не вошел или неизвестен для сервера.\n"
+
+#: ../src/game_server_proto_packet_chatmessage.cc:69
+#, c-format
+msgid ""
+"Server replied illegally to ChatMessage package. Should have sent %i but "
+"sent %i. Ignored"
+msgstr ""
+"Ответ сервера не верен для пакета ChatMessag. Отправлялось %i, но было "
+"откравлено %i. Проигнорировано"
+
+#: ../src/ware.cc:72 ../src/worker.cc:1559
+msgid "Doh... someone forgot the help text!"
+msgstr "Ох... кто-то забыл текстовую справку!"
+
+#: ../src/map.cc:437
+msgid "No Name"
+msgstr "Без имени"
+
+#: ../src/map.cc:438 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:145
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: ../src/map.cc:439
+msgid "no description defined"
+msgstr "нет описания"
+
+#: ../src/map.cc:442 ../src/playerdescrgroup.cc:34
+#: ../src/playerdescrgroup.cc:62
+msgid "Player 1"
+msgstr "Игрок 1"
+
+#: ../src/profile.cc:1005
+msgid "Usage: "
+msgstr "Использование:"
+
+#: ../src/s2map.cc:250
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr "Карта от Bluebyte Settlers II. Комментариев нет!"
+
 #: ../src/building_statistics_menu.cc:55 ../src/building_statistics_menu.cc:67
 msgid "Building Statistics"
-msgstr "Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ° Ð·Ð´Ð°Ð½Ð¸Ñ"
+msgstr "Статистика здания"
 
-#: ../src/building_statistics_menu.cc:72 ../src/building_ui.cc:1323
-#: ../src/building_ui.cc:1760
+#: ../src/building_statistics_menu.cc:72 ../src/building_ui.cc:1337
+#: ../src/building_ui.cc:1799
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:76
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:180
-#: ../src/editor/ui_menus/editor_variables_menu.cc:164
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:173
+#: ../src/editor/ui_menus/editor_variables_menu.cc:167
 #: ../src/editor/tools/editor_info_tool.cc:90
 #: ../src/editor/tools/editor_info_tool.cc:98
 #: ../src/editor/tools/editor_info_tool.cc:104
 #: ../src/editor/tools/editor_info_tool.cc:113
 msgid "Name"
-msgstr "Ð˜Ð¼Ñ"
+msgstr "Имя"
 
 #: ../src/building_statistics_menu.cc:73
 msgid "Prod"
-msgstr "ÐŸÑ€Ð¾Ð´ÑƒÐºÑ†Ð¸Ñ"
+msgstr "Продукция"
 
 #: ../src/building_statistics_menu.cc:74
 msgid "Owned"
-msgstr "Ð—Ð°Ð½ÑÑ‚Ð¾"
+msgstr "Занято"
 
 #: ../src/building_statistics_menu.cc:75
 msgid "Build"
-msgstr "Ð¡Ñ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ"
+msgstr "Строить"
 
 #: ../src/building_statistics_menu.cc:85
 msgid "Total Productivity: "
-msgstr "ÐžÐ±Ñ‰Ð°Ñ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ:"
+msgstr "Общая производительность:"
 
 #: ../src/building_statistics_menu.cc:91
 msgid "Owned: "
-msgstr "Ð’Ð»Ð°Ð´ÐµÐ»ÐµÑ†: "
+msgstr "Владелец: "
 
-#: ../src/building_statistics_menu.cc:104
+#: ../src/building_statistics_menu.cc:111
 msgid "In Build: "
-msgstr "Ð¡Ñ‚Ñ€Ð¾Ð¸Ñ‚ÑÑ: "
+msgstr "Строится: "
 
-#: ../src/building_statistics_menu.cc:117
+#: ../src/building_statistics_menu.cc:131
 msgid "Jump to unproductive: "
-msgstr "ÐŸÐµÑ€ÐµÐ¹Ñ‚Ð¸ Ðº Ð½ÐµÑ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰ÐµÐ¼Ñƒ:"
+msgstr "Перейти к неработающему:"
 
 #: ../src/building_ui.cc:152
 msgid "Destroy building?"
-msgstr "Ð£Ð½Ð¸Ñ‡Ñ‚Ð¾Ð¶Ð¸Ñ‚ÑŒ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ?"
+msgstr "Уничтожить строение?"
 
-#: ../src/building_ui.cc:165
+#: ../src/building_ui.cc:164
 msgid "Do you really want to destroy this "
-msgstr "Ð’Ñ‹ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ½Ð¸Ñ‡Ñ‚Ð¾Ð¶Ð¸Ñ‚ÑŒ ÑÑ‚Ð¾ "
+msgstr "Вы действительно хотите уничтожить это "
 
-#: ../src/building_ui.cc:610
+#: ../src/building_ui.cc:617
 #, fuzzy
 msgid "Stop"
-msgstr "Ð‘Ñ€ÐµÐ²Ð½Ð¾"
+msgstr "Бревно"
 
-#: ../src/building_ui.cc:635
+#: ../src/building_ui.cc:639
 #, c-format
 msgid "Enhance to %s"
 msgstr ""
 
-#: ../src/building_ui.cc:645
+#: ../src/building_ui.cc:658
 #, fuzzy
 msgid "Destroy"
-msgstr "ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ"
+msgstr "Описание"
 
-#: ../src/building_ui.cc:653
+#: ../src/building_ui.cc:669
 #, fuzzy
 msgid "Debug"
-msgstr "ÐžÑ‚Ð»Ð°Ð´Ð¾Ñ‡Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ðµ"
+msgstr "Отладочное поле"
 
-#: ../src/building_ui.cc:1041 ../src/building_ui.cc:1047
+#: ../src/building_ui.cc:1053 ../src/building_ui.cc:1059
 msgid "Worker Listing"
-msgstr "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ¾Ð²"
+msgstr "Список работников"
 
-#: ../src/building_ui.cc:1062
+#: ../src/building_ui.cc:1074
 msgid "Type: "
-msgstr "Ð¢Ð¸Ð¿:"
+msgstr "Тип:"
 
-#: ../src/building_ui.cc:1067
+#: ../src/building_ui.cc:1079
 msgid "Experience: "
-msgstr "ÐžÐ¿Ñ‹Ñ‚:"
+msgstr "Опыт:"
 
-#: ../src/building_ui.cc:1072
+#: ../src/building_ui.cc:1084
 msgid "Trying to become: "
-msgstr "ÐŸÐ¾Ð¿Ñ‹Ñ‚Ð°Ñ‚ÑŒÑÑ Ð½Ð°Ñ‡Ð°Ñ‚ÑŒ: "
+msgstr "Попытаться начать: "
 
-#: ../src/building_ui.cc:1222
+#: ../src/building_ui.cc:1236
 #, fuzzy
 msgid "Show worker listing"
-msgstr "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ¾Ð²"
+msgstr "Список работников"
 
-#: ../src/building_ui.cc:1324 ../src/building_ui.cc:1761
+#: ../src/building_ui.cc:1338 ../src/building_ui.cc:1800
 msgid "HP"
-msgstr "Ð£Ð”"
+msgstr "УД"
 
-#: ../src/building_ui.cc:1325 ../src/building_ui.cc:1762
+#: ../src/building_ui.cc:1339 ../src/building_ui.cc:1801
 msgid "AT"
 msgstr "AT"
 
-#: ../src/building_ui.cc:1326 ../src/building_ui.cc:1763
+#: ../src/building_ui.cc:1340 ../src/building_ui.cc:1802
 msgid "DE"
-msgstr "Ð—Ð©"
+msgstr "ЗЩ"
 
-#: ../src/building_ui.cc:1327 ../src/building_ui.cc:1764
+#: ../src/building_ui.cc:1341 ../src/building_ui.cc:1803
 msgid "EV"
-msgstr "ÐžÐ¢"
+msgstr "ОТ"
 
-#: ../src/building_ui.cc:1328 ../src/building_ui.cc:1765
+#: ../src/building_ui.cc:1342 ../src/building_ui.cc:1804
 msgid "Level"
-msgstr "Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ"
+msgstr "Уровень"
 
-#: ../src/building_ui.cc:1345 ../src/building_ui.cc:1781
+#: ../src/building_ui.cc:1363 ../src/building_ui.cc:1828
 msgid "Capacity"
-msgstr "ÐžÐ±ÑŠÐµÐ¼"
+msgstr "Объем"
 
-#: ../src/building_ui.cc:1520
+#: ../src/building_ui.cc:1542
 msgid "Training Options"
-msgstr "ÐžÐ¿Ñ†Ð¸Ð¸ Ñ‚Ñ€ÐµÐ½Ð¸Ñ€Ð¾Ð²ÐºÐ¸"
+msgstr "Опции тренировки"
 
-#: ../src/building_ui.cc:1545
+#: ../src/building_ui.cc:1568
 msgid "Training mode : "
-msgstr "Ð ÐµÐ¶Ð¸Ð¼ Ñ‚Ñ€ÐµÐ½Ð¸Ñ€Ð¾Ð²ÐºÐ¸:"
+msgstr "Режим тренировки:"
 
-#: ../src/building_ui.cc:1546
+#: ../src/building_ui.cc:1569
 msgid "Balanced"
-msgstr "Ð¡Ð±Ð°Ð»Ð°Ð½ÑÐ¸Ñ€Ð¾Ð²Ð°Ð½Ð¾"
+msgstr "Сбалансировано"
 
-#: ../src/building_ui.cc:1570
+#: ../src/building_ui.cc:1597
 msgid "Hit Points"
-msgstr "Ð£Ð´Ð°Ñ€Ñ‹"
+msgstr "Удары"
 
-#: ../src/building_ui.cc:1583 ../src/fieldaction.cc:504
+#: ../src/building_ui.cc:1614 ../src/fieldaction.cc:504
 msgid "Attack"
-msgstr "ÐÑ‚Ð°ÐºÐ°"
+msgstr "Атака"
 
-#: ../src/building_ui.cc:1596
+#: ../src/building_ui.cc:1631
 msgid "Defense"
-msgstr "Ð—Ð°Ñ‰Ð¸Ñ‚Ð°"
-
-#: ../src/building_ui.cc:1609
-msgid "Evade"
-msgstr "ÐžÑ‚ÑÑ‚ÑƒÐ¿Ð¸Ñ‚ÑŒ"
+msgstr "Защита"
 
 #: ../src/building_ui.cc:1649
+msgid "Evade"
+msgstr "Отступить"
+
+#: ../src/building_ui.cc:1689
 msgid "Make heroes"
-msgstr "Ð¡Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ð³ÐµÑ€Ð¾Ñ"
+msgstr "Сделать героя"
 
-#: ../src/building_ui.cc:1651
+#: ../src/building_ui.cc:1691
 msgid "Balanced army"
-msgstr "Ð¡Ð±Ð°Ð»Ð°Ð½ÑÐ¸Ñ€Ð¾Ð²Ð°Ð½Ð°Ñ Ð°Ñ€Ð¼Ð¸Ñ"
+msgstr "Сбалансированая армия"
 
-#: ../src/building_ui.cc:1789
+#: ../src/building_ui.cc:1839
 msgid "xx"
 msgstr "xx"
 
-#: ../src/constructionsite.cc:223
-msgid "built"
-msgstr "Ð¿Ð¾ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¾"
-
-#: ../src/criterr.cc:63
+#: ../src/criterr.cc:69
 msgid "!! CRITICAL ERROR !!"
-msgstr "!! ÐšÐ Ð˜Ð¢Ð˜Ð§Ð•Ð¡ÐšÐÐ¯ ÐžÐ¨Ð˜Ð‘ÐšÐ !!"
+msgstr "!! КРИТИЧЕСКАЯ ОШИБКА !!"
 
-#: ../src/criterr.cc:71
+#: ../src/criterr.cc:78
 msgid "Exit"
-msgstr "Ð’Ñ‹Ñ…Ð¾Ð´"
+msgstr "Выход"
 
-#: ../src/criterr.cc:75
+#: ../src/criterr.cc:85
 msgid "!! Continue execution !!"
-msgstr "!! ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ !!"
+msgstr "!! Продолжить выполнение !!"
 
-#: ../src/criterr.cc:82
+#: ../src/criterr.cc:94
 msgid "Crash"
-msgstr "ÐžÐ±Ð²Ð°Ð»"
+msgstr "Обвал"
 
-#: ../src/criterr.cc:121
+#: ../src/criterr.cc:133
 msgid "Widelands"
-msgstr "Ð‘Ð¾Ð»ÑŒÑˆÐ¸Ðµ Ð·ÐµÐ¼Ð»Ð¸ (Widelands)"
-
-#: ../src/event_allow_building.cc:39
-msgid "Allow Building"
-msgstr "ÐœÐ¾Ð¶Ð½Ð¾ ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ"
-
-#: ../src/event_conquer_area.cc:36
-msgid "Conquer Area"
-msgstr "Ð—Ð°Ñ…Ð²Ð°Ñ‡ÐµÐ½Ð½Ñ‹Ðµ Ð·ÐµÐ¼Ð»Ð¸"
-
-#: ../src/event_message_box.cc:41
-msgid "Message Box"
-msgstr "ÐžÐºÐ½Ð¾ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹"
-
-#: ../src/event_message_box.cc:42
-msgid "No text defined"
-msgstr "Ð¢ÐµÐºÑÑ‚ Ð½Ðµ Ð¿Ð¾Ñ€ÐµÐ´ÐµÐ»ÐµÐ½"
-
-#: ../src/event_message_box.cc:43
-msgid "Window Title"
-msgstr "Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¾ÐºÐ½Ð°"
-
-#: ../src/event_message_box.cc:49
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:58
-msgid "Continue"
-msgstr "ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ"
-
-#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
-msgid "Move View"
-msgstr "Ð’Ð¸Ð´ Ð² Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ð¸"
-
-#: ../src/event_set_null_trigger.cc:39
-msgid "Set Null Trigger"
-msgstr "Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð½ÑƒÐ»ÐµÐ²Ð¾Ð¹ Ñ‚Ñ€Ð¸Ð³ÐµÑ€"
-
-#: ../src/event_unhide_area.cc:37
-msgid "Unhide Area"
-msgstr "Ð—Ð¾Ð½Ð° Ð¾Ð±Ð¾Ð·Ñ€ÐµÐ½Ð¸Ñ"
+msgstr "Большие земли (Widelands)"
 
 #: ../src/fieldaction.cc:277
 msgid "Action"
-msgstr "Ð”ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ"
+msgstr "Действие"
 
 #: ../src/fieldaction.cc:450 ../src/fieldaction.cc:599
 #, fuzzy
 msgid "Build roads"
-msgstr "Ð¡Ñ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ"
+msgstr "Строить"
 
-#: ../src/fieldaction.cc:454 ../src/watchwindow.cc:99
+#: ../src/fieldaction.cc:454 ../src/watchwindow.cc:102
 msgid "Watch"
-msgstr "ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€"
+msgstr "Просмотр"
 
 #: ../src/fieldaction.cc:577
 #, fuzzy
 msgid "Build mines"
-msgstr "Ð¡Ñ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ: "
+msgstr "Строение: "
 
 #: ../src/game_chat_menu.cc:56
 msgid "Chat Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ"
+msgstr "Меню общения"
 
-#: ../src/game_chat_menu.cc:65
-msgid "Show messages as overlays:"
-msgstr "ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ Ð¿Ð¾Ð²ÐµÑ€Ñ…"
-
-#: ../src/game_chat_menu.cc:69
+#: ../src/game_chat_menu.cc:67
 msgid "Send"
-msgstr "ÐŸÐ¾ÑÐ»Ð°Ñ‚ÑŒ"
+msgstr "Послать"
 
-#: ../src/game_debug_ui.cc:267
+#: ../src/game_chat_menu.cc:72
+msgid "Show messages as overlays:"
+msgstr "Показывать сообщения поверх"
+
+#: ../src/game_debug_ui.cc:269
 msgid "Debug Field"
-msgstr "ÐžÑ‚Ð»Ð°Ð´Ð¾Ñ‡Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ðµ"
+msgstr "Отладочное поле"
 
-#: ../src/game_debug_ui.cc:311
+#: ../src/game_debug_ui.cc:316
 msgid "height:"
-msgstr "Ð²Ñ‹ÑÐ¾Ñ‚Ð°:"
+msgstr "высота:"
 
 #: ../src/game_main_menu.cc:40 ../src/editor/ui_menus/editor_main_menu.cc:41
 msgid "Main Menu"
-msgstr "Ð“Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ"
+msgstr "Главное меню"
 
-#: ../src/game_main_menu.cc:72
+#: ../src/game_main_menu.cc:50
 #, fuzzy
 msgid "General statistics"
-msgstr "ÐžÐ±Ñ‰Ð°Ñ ÑÑ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ°"
+msgstr "Общая статистика"
 
-#: ../src/game_main_menu.cc:73
+#: ../src/game_main_menu.cc:58
 #, fuzzy
 msgid "Ware statistics"
-msgstr "Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ° Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð²"
+msgstr "Статистика товаров"
 
-#: ../src/game_main_menu.cc:74
+#: ../src/game_main_menu.cc:66
 #, fuzzy
 msgid "Building statistics"
-msgstr "Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ° Ð·Ð´Ð°Ð½Ð¸Ñ"
+msgstr "Статистика здания"
 
-#: ../src/game_main_menu.cc:75 ../src/stock_menu.cc:31
+#: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
 msgid "Stock"
-msgstr "Ð‘Ñ€ÐµÐ²Ð½Ð¾"
+msgstr "Бревно"
 
-#: ../src/game_main_menu.cc:76 ../src/editor/editorinteractive.cc:135
+#: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:161
 #, fuzzy
 msgid "Objectives"
-msgstr "ÐœÐµÐ½ÑŽ Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹"
+msgstr "Меню заданий"
 
-#: ../src/game_main_menu.cc:77
+#: ../src/game_main_menu.cc:90
 #, fuzzy
 msgid "Chat"
-msgstr "ÐœÐµÐ½ÑŽ Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ"
+msgstr "Меню общения"
 
-#: ../src/game_main_menu.cc:78 ../src/game_options_menu.cc:46
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:50
+#: ../src/game_main_menu.cc:98 ../src/game_options_menu.cc:46
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
 msgid "Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°"
+msgstr "Настройка"
 
-#: ../src/game_main_menu_load_game.cc:42 ../src/game_main_menu_load_game.cc:46
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
+#: ../src/game_main_menu_load_game.cc:43 ../src/game_main_menu_load_game.cc:47
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
 msgid "Load Game"
-msgstr "Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
+msgstr "Загрузить игру"
 
-#: ../src/game_main_menu_load_game.cc:64 ../src/game_main_menu_save_game.cc:69
+#: ../src/game_main_menu_load_game.cc:65 ../src/game_main_menu_save_game.cc:68
 msgid "Map Name: "
-msgstr "Ð˜Ð¼Ñ ÐºÐ°Ñ€Ñ‚Ñ‹:"
+msgstr "Имя карты:"
 
-#: ../src/game_main_menu_load_game.cc:69 ../src/game_main_menu_save_game.cc:74
+#: ../src/game_main_menu_load_game.cc:70 ../src/game_main_menu_save_game.cc:73
 msgid "Game Time: "
-msgstr "Ð’Ñ€ÐµÐ¼Ñ Ð¸Ð³Ñ€Ñ‹:"
+msgstr "Время игры:"
 
-#: ../src/game_main_menu_load_game.cc:78 ../src/game_main_menu_save_game.cc:83
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:108
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:113
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:58
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:59
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:75
+#: ../src/game_main_menu_load_game.cc:82 ../src/game_main_menu_save_game.cc:85
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:55
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:117
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:111
 msgid "OK"
 msgstr "OK"
 
-#: ../src/game_main_menu_load_game.cc:83 ../src/game_main_menu_save_game.cc:88
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:73
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:199
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:143
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:155
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:74
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:60
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:113
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:117
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:158
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:114
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:134
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:118
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:132
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:64
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:133
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+#: ../src/game_main_menu_load_game.cc:89 ../src/game_main_menu_save_game.cc:92
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:82
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:305
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:209
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:126
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:81
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../src/editor/ui_menus/trigger_null_option_menu.cc:65
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:120
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:138
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:155
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:246
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:172
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:209
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:244
 msgid "Cancel"
-msgstr "ÐžÑ‚Ð¼ÐµÐ½Ð°"
+msgstr "Отмена"
 
-#: ../src/game_main_menu_load_game.cc:215
+#: ../src/game_main_menu_load_game.cc:216
 msgid ""
 "Game Loading Error!\n"
 "Reason given:\n"
 msgstr ""
-"ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¸Ð³Ñ€Ñ‹!\n"
-"ÐŸÑ€Ð¸Ñ‡Ð¸Ð½Ð°:\n"
+"Ошибка загрузки игры!\n"
+"Причина:\n"
 
-#: ../src/game_main_menu_load_game.cc:217
+#: ../src/game_main_menu_load_game.cc:218
 msgid "Load Game Error!!"
-msgstr "ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¸Ð³Ñ€Ñ‹!!"
+msgstr "Ошибка загрузки игры!!"
 
-#: ../src/game_main_menu_save_game.cc:44 ../src/game_main_menu_save_game.cc:48
+#: ../src/game_main_menu_save_game.cc:46
 msgid "Save Game"
-msgstr "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
+msgstr "Сохранить игру"
 
 #: ../src/game_main_menu_save_game.cc:233
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:327
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:331
 msgid "A File with the name "
-msgstr "Ð¤Ð°Ð¹Ð» Ñ Ñ‚Ð°ÐºÐ¸Ð¼ Ð¸Ð¼ÐµÐ½ÐµÐ¼"
+msgstr "Файл с таким именем"
 
 #: ../src/game_main_menu_save_game.cc:235
 msgid " already exists. Overwrite?"
-msgstr "ÑƒÐ¶Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚. ÐŸÐµÑ€ÐµÐ¿Ð¸ÑÐ°Ñ‚ÑŒ?"
+msgstr "уже существует. Переписать?"
 
 #: ../src/game_main_menu_save_game.cc:236
 #: ../src/game_main_menu_save_game.cc:258
 msgid "Save Game Error!!"
-msgstr "ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð¸Ð³Ñ€Ñ‹!!"
+msgstr "Ошибка записи игры!!"
 
 #: ../src/game_main_menu_save_game.cc:256
 msgid ""
@@ -390,94 +549,50 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
-"ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð¸Ð³Ñ€Ñ‹!\n"
-"Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð» Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ð¾Ð²Ñ€ÐµÐ¶Ð´ÐµÐ½!\n"
+"Ошибка записи игры!\n"
+"Сохраненный файл может быть поврежден!\n"
 "\n"
-"ÐŸÑ€Ð¸Ñ‡Ð¸Ð½Ð°:\n"
+"Причина:\n"
 
-#: ../src/game_objectives_menu.cc:31
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:170
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:175
-msgid "Objectives Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹"
-
-#: ../src/game_options_menu.cc:67
-msgid "Ingame Music"
-msgstr "ÐœÑƒÐ·Ñ‹ÐºÐ° Ð² Ð¸Ð³Ñ€Ðµ"
-
-#: ../src/game_options_menu.cc:74
-msgid "Sound FX"
-msgstr "Ð—Ð²ÑƒÐº FX"
-
-#: ../src/game_options_menu.cc:89
+#: ../src/game_options_menu.cc:57
 msgid "README"
-msgstr "ÐŸÐ ÐžÐ§Ð¢Ð˜"
+msgstr "ПРОЧТИ"
+
+#: ../src/game_options_menu.cc:66
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
+msgid "License"
+msgstr "Лензия"
+
+#: ../src/game_options_menu.cc:75
+msgid "Authors"
+msgstr "Авторы"
+
+#: ../src/game_options_menu.cc:83
+msgid "Ingame Music"
+msgstr "Музыка в игре"
 
 #: ../src/game_options_menu.cc:90
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:62
-msgid "License"
-msgstr "Ð›ÐµÐ½Ð·Ð¸Ñ"
+msgid "Sound FX"
+msgstr "Звук FX"
 
-#: ../src/game_options_menu.cc:91
-msgid "Authors"
-msgstr "ÐÐ²Ñ‚Ð¾Ñ€Ñ‹"
-
-#: ../src/game_options_menu.cc:107
+#: ../src/game_options_menu.cc:100
 #, fuzzy
 msgid "Save game"
-msgstr "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
+msgstr "Сохранить игру"
 
-#: ../src/game_options_menu.cc:108
+#: ../src/game_options_menu.cc:110
 #, fuzzy
 msgid "Load game"
-msgstr "Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
+msgstr "Загрузить игру"
 
-#: ../src/game_options_menu.cc:109
+#: ../src/game_options_menu.cc:121
 #, fuzzy
 msgid "Exit game"
-msgstr "Ð’Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¸Ð³Ñ€Ñ‹"
-
-#: ../src/game_server_proto_packet_chatmessage.cc:69
-#, c-format
-msgid ""
-"Server replied illegally to ChatMessage package. Should have sent %i but "
-"sent %i. Ignored"
-msgstr ""
-"ÐžÑ‚Ð²ÐµÑ‚ ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ðµ Ð²ÐµÑ€ÐµÐ½ Ð´Ð»Ñ Ð¿Ð°ÐºÐµÑ‚Ð° ChatMessag. ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐ»Ð¾ÑÑŒ %i, Ð½Ð¾ Ð±Ñ‹Ð»Ð¾ "
-"Ð¾Ñ‚ÐºÑ€Ð°Ð²Ð»ÐµÐ½Ð¾ %i. ÐŸÑ€Ð¾Ð¸Ð³Ð½Ð¾Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¾"
-
-#: ../src/game_server_proto_packet_connect.cc:72
-#, c-format
-msgid ""
-"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
-"Server runs %i.%02i\n"
-msgstr ""
-"Ð¡ÐµÑ€Ð²ÐµÑ€ ÑÐ¾Ð¾Ð±Ñ‰Ð°ÐµÑ‚ Ð¾Ð± Ð¾ÑˆÐ¸Ð±ÐºÐµ ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ. Ð’Ð°Ñˆ Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð» (%i.%02i) ÑÐ»Ð¸ÑˆÐºÐ¾Ð¼ ÑÑ‚Ð°Ñ€. "
-"Ð¡ÐµÑ€Ð²ÐµÑ€ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ %i.%02i\n"
-
-#: ../src/game_server_proto_packet_connect.cc:78
-#, c-format
-msgid "Server is full!\n"
-msgstr "Ð¡ÐµÑ€Ð²ÐµÑ€ Ð¿ÐµÑ€ÐµÐ¿Ð¾Ð»Ð½ÐµÐ½!\n"
-
-#: ../src/game_server_proto_packet_connect.cc:83
-#, c-format
-msgid "This server doesn't serve widelands!\n"
-msgstr "Ð­Ñ‚Ð¾Ñ‚ ÑÐµÑ€Ð²ÐµÑ€ Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÐµÑ‚ widelands!\n"
-
-#: ../src/game_server_proto_packet_getroominfo.cc:66
-#, c-format
-msgid "The Room %s is currently not logged in or unknown to the server.\n"
-msgstr "Ð—Ð°Ð¿Ð¸ÑÑŒ %s Ð½Ðµ Ð±Ñ‹Ð»Ð° Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð° Ð´Ð»Ñ Ð²Ñ…Ð¾Ð´Ð° Ð¸Ð»Ð¸ Ð½ÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ñƒ.\n"
-
-#: ../src/game_server_proto_packet_getuserinfo.cc:66
-#, c-format
-msgid "The User %s is currently not logged in or unknown to the server.\n"
-msgstr "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ %s Ð½Ðµ Ð²Ð¾ÑˆÐµÐ» Ð¸Ð»Ð¸ Ð½ÐµÐ¸Ð·Ð²ÐµÑÑ‚ÐµÐ½ Ð´Ð»Ñ ÑÐµÑ€Ð²ÐµÑ€Ð°.\n"
+msgstr "Выход из игры"
 
 #: ../src/general_statistics_menu.cc:60 ../src/general_statistics_menu.cc:70
 msgid "General Statistics"
-msgstr "ÐžÐ±Ñ‰Ð°Ñ ÑÑ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ°"
+msgstr "Общая статистика"
 
 #: ../src/general_statistics_menu.cc:143
 msgid "Land"
@@ -486,12 +601,12 @@ msgstr ""
 #: ../src/general_statistics_menu.cc:149
 #, fuzzy
 msgid "Workers"
-msgstr "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ¾Ð²"
+msgstr "Список работников"
 
-#: ../src/general_statistics_menu.cc:155 ../src/minimap.cc:186
+#: ../src/general_statistics_menu.cc:155 ../src/minimap.cc:204
 #, fuzzy
 msgid "Buildings"
-msgstr "Ð¡Ñ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ: "
+msgstr "Строение: "
 
 #: ../src/general_statistics_menu.cc:161
 msgid "Wares"
@@ -500,7 +615,7 @@ msgstr ""
 #: ../src/general_statistics_menu.cc:167
 #, fuzzy
 msgid "Productivity"
-msgstr "ÐžÐ±Ñ‰Ð°Ñ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ:"
+msgstr "Общая производительность:"
 
 #: ../src/general_statistics_menu.cc:173
 msgid "Kills"
@@ -510,978 +625,1118 @@ msgstr ""
 msgid "Military"
 msgstr ""
 
-#: ../src/general_statistics_menu.cc:192 ../src/ware_statistics_menu.cc:413
-msgid "15 m"
-msgstr "15 Ð¼Ð¸Ð½."
-
 #: ../src/general_statistics_menu.cc:196 ../src/ware_statistics_menu.cc:417
+msgid "15 m"
+msgstr "15 мин."
+
+#: ../src/general_statistics_menu.cc:205 ../src/ware_statistics_menu.cc:426
 msgid "30 m"
-msgstr "30 Ð¼Ð¸Ð½."
+msgstr "30 мин."
 
-#: ../src/general_statistics_menu.cc:200 ../src/ware_statistics_menu.cc:421
+#: ../src/general_statistics_menu.cc:214 ../src/ware_statistics_menu.cc:435
 msgid "1 h"
-msgstr "1 Ñ‡."
+msgstr "1 ч."
 
-#: ../src/general_statistics_menu.cc:204 ../src/ware_statistics_menu.cc:425
+#: ../src/general_statistics_menu.cc:223 ../src/ware_statistics_menu.cc:444
 msgid "2 h"
-msgstr "2 Ñ‡."
+msgstr "2 ч."
 
-#: ../src/general_statistics_menu.cc:211 ../src/stock_menu.cc:46
-#: ../src/ware_statistics_menu.cc:433
+#: ../src/general_statistics_menu.cc:234 ../src/ware_statistics_menu.cc:455
 msgid "Help"
 msgstr ""
 
-#: ../src/general_statistics_menu.cc:216 ../src/ware_statistics_menu.cc:438
+#: ../src/general_statistics_menu.cc:243 ../src/ware_statistics_menu.cc:464
 msgid "4 h"
-msgstr "3 Ñ‡."
+msgstr "3 ч."
 
-#: ../src/general_statistics_menu.cc:220 ../src/ware_statistics_menu.cc:442
+#: ../src/general_statistics_menu.cc:251 ../src/ware_statistics_menu.cc:473
 msgid "8 h"
-msgstr "8 Ñ‡."
+msgstr "8 ч."
 
-#: ../src/general_statistics_menu.cc:224 ../src/ware_statistics_menu.cc:446
+#: ../src/general_statistics_menu.cc:260 ../src/ware_statistics_menu.cc:482
 msgid "16 h"
-msgstr "16 Ñ‡."
+msgstr "16 ч."
 
-#: ../src/interactive_player.cc:105 ../src/editor/editorinteractive.cc:95
+#: ../src/interactive_player.cc:107 ../src/editor/editorinteractive.cc:97
 #, fuzzy
 msgid "Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ"
+msgstr "Меню общения"
 
-#: ../src/interactive_player.cc:110 ../src/editor/editorinteractive.cc:110
+#: ../src/interactive_player.cc:115 ../src/editor/editorinteractive.cc:121
 #, fuzzy
 msgid "Minimap"
-msgstr "ÐœÐ¸Ð½Ð¸Ð¼ÑƒÐ¼"
+msgstr "Минимум"
 
-#: ../src/interactive_player.cc:115 ../src/editor/editorinteractive.cc:115
+#: ../src/interactive_player.cc:123 ../src/editor/editorinteractive.cc:129
 #, fuzzy
 msgid "Buildhelp"
-msgstr "Ð¡Ñ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ"
+msgstr "Строить"
 
-#: ../src/interactive_player.cc:271
+#: ../src/interactive_player.cc:279
 msgid "PAUSE"
-msgstr "Ð ÐÐ£Ð—Ð"
+msgstr "РАУЗА"
 
-#: ../src/interactive_player.cc:316
+#: ../src/interactive_player.cc:324
 msgid "Message: "
-msgstr "Ð¡Ð¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ:"
+msgstr "Сообщение:"
 
-#: ../src/map.cc:434
-msgid "No Name"
-msgstr "Ð‘ÐµÐ· Ð¸Ð¼ÐµÐ½Ð¸"
-
-#: ../src/map.cc:435 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:143
-msgid "Unknown"
-msgstr "ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð¾"
-
-#: ../src/map.cc:436
-msgid "no description defined"
-msgstr "Ð½ÐµÑ‚ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ"
-
-#: ../src/map.cc:438 ../src/map_variable_manager.cc:31
-msgid "<undefined>"
-msgstr "<undefined>"
-
-#: ../src/map.cc:439 ../src/playerdescrgroup.cc:34
-#: ../src/playerdescrgroup.cc:64
-msgid "Player 1"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 1"
-
-#: ../src/map_variable_manager.cc:30
-msgid "Next scenario"
-msgstr "Ð¡ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹ ÑÑ†ÐµÐ½Ð°Ñ€Ð¸Ð¹"
-
-#: ../src/militarysite.cc:145
-#, c-format
-msgid "%d soldier (+%d)"
-msgid_plural "%d soldiers (+%d)"
-msgstr[0] "%d ÑÐ¾Ð»Ð´Ð°Ñ‚Ñ‹ (+%d)"
-msgstr[1] "%d ÑÐ¾Ð»Ð´Ð°Ñ‚Ñ‹ (+%d)"
-
-#: ../src/militarysite.cc:147
-#, c-format
-msgid "%d soldier"
-msgid_plural "%d soldiers"
-msgstr[0] "%d ÑÐ¾Ð»Ð´Ð°Ñ‚Ñ‹"
-msgstr[1] "%d ÑÐ¾Ð»Ð´Ð°Ñ‚Ñ‹"
-
-#: ../src/minimap.cc:163 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
+#: ../src/minimap.cc:163 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
 msgid "Map"
-msgstr "ÐšÐ°Ñ€Ñ‚Ð°"
+msgstr "Карта"
 
-#: ../src/minimap.cc:182
+#: ../src/minimap.cc:172
 #, fuzzy
 msgid "Terrain"
-msgstr "Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ñ‚Ð¸Ð¿ Ð¼ÐµÑÑ‚Ð½Ð¾ÑÑ‚Ð¸"
+msgstr "Выбрать тип местности"
 
-#: ../src/minimap.cc:183
+#: ../src/minimap.cc:180
 #, fuzzy
 msgid "Owner"
-msgstr "Ð—Ð°Ð½ÑÑ‚Ð¾"
+msgstr "Занято"
 
-#: ../src/minimap.cc:184
+#: ../src/minimap.cc:188
 #, fuzzy
 msgid "Flags"
-msgstr "Ñ„Ð»Ð°Ð³"
+msgstr "флаг"
 
-#: ../src/minimap.cc:185
+#: ../src/minimap.cc:196
 #, fuzzy
 msgid "Roads"
-msgstr "Ð“Ð¾Ñ‚Ð¾Ð²"
-
-#: ../src/network.cc:332
-msgid "I have no name"
-msgstr "Ð£ Ð¼ÐµÐ½Ñ Ð½ÐµÑ‚ Ð¸Ð¼ÐµÐ½Ð¸"
-
-#: ../src/network.cc:831
-msgid "Starting network game"
-msgstr "ÐÐ°Ñ‡Ð°Ñ‚ÑŒ ÑÐµÑ‚ÐµÐ²ÑƒÑŽ Ð¸Ð³Ñ€Ñƒ"
-
-#: ../src/network.cc:834 ../src/network.cc:843
-msgid "Player"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº"
-
-#: ../src/network.cc:835
-msgid "Status"
-msgstr "Ð¡Ñ‚Ð°Ñ‚ÑƒÑ"
-
-#: ../src/network.cc:848
-msgid "Waiting"
-msgstr "ÐžÐ¶Ð¸Ð´Ð°Ð½Ð¸Ðµ"
-
-#: ../src/network.cc:859
-msgid "Ready"
-msgstr "Ð“Ð¾Ñ‚Ð¾Ð²"
+msgstr "Готов"
 
 #: ../src/playerdescrgroup.cc:35
 msgid "Player 2"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 2"
+msgstr "Игрок 2"
 
 #: ../src/playerdescrgroup.cc:36
 msgid "Player 3"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 3"
+msgstr "Игрок 3"
 
 #: ../src/playerdescrgroup.cc:37
 msgid "Player 4"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 4"
+msgstr "Игрок 4"
 
 #: ../src/playerdescrgroup.cc:38
 msgid "Player 5"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 5"
+msgstr "Игрок 5"
 
 #: ../src/playerdescrgroup.cc:39
 msgid "Player 6"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 6"
+msgstr "Игрок 6"
 
 #: ../src/playerdescrgroup.cc:40
 msgid "Player 7"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 7"
+msgstr "Игрок 7"
 
 #: ../src/playerdescrgroup.cc:41
 msgid "Player 8"
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº 8"
+msgstr "Игрок 8"
 
-#: ../src/playerdescrgroup.cc:115 ../src/playerdescrgroup.cc:215
+#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
 msgid "Computer"
-msgstr "ÐšÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€"
+msgstr "Компьютер"
 
-#: ../src/playerdescrgroup.cc:115 ../src/playerdescrgroup.cc:215
+#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
 msgid "Human"
-msgstr "Ð§ÐµÐ»Ð¾Ð²ÐµÐº"
+msgstr "Человек"
 
-#: ../src/productionsite.cc:232
-msgid "(not occupied)"
-msgstr "(Ð½Ðµ Ð·Ð°Ð½ÑÑ‚Ð¾)"
-
-#: ../src/productionsite.cc:272
-msgid "UP"
-msgstr "Ð’Ð’Ð•Ð Ð¥"
-
-#: ../src/productionsite.cc:274
-msgid "DOWN"
-msgstr "Ð’ÐÐ˜Ð—"
-
-#: ../src/profile.cc:1006
-msgid "Usage: "
-msgstr "Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ:"
-
-#: ../src/s2map.cc:250
-msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "ÐšÐ°Ñ€Ñ‚Ð° Ð¾Ñ‚ Bluebyte Settlers II. ÐšÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸ÐµÐ² Ð½ÐµÑ‚!"
-
-#: ../src/stock_menu.cc:47 ../src/stock_menu.cc:74
-msgid "Show workers"
-msgstr ""
-
-#: ../src/stock_menu.cc:69
+#: ../src/stock_menu.cc:71
 msgid "Show wares"
 msgstr ""
 
-#: ../src/trainingsite.cc:215
-msgid "Resting"
-msgstr "ÐžÑ‚Ð´Ñ‹Ñ…"
-
-#: ../src/trainingsite.cc:217
-msgid "Not Working"
-msgstr "ÐÐµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚"
-
-#: ../src/trigger_building.cc:40
-msgid "Building Trigger"
-msgstr "Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ñ‚Ñ€Ð¸Ð³ÐµÑ€"
-
-#: ../src/trigger_building.cc:47
-msgid "<unset>"
-msgstr "<unset>"
-
-#: ../src/trigger_null.cc:34
-msgid "Null Trigger"
-msgstr "ÐÑƒÐ»ÐµÐ²Ð¾Ð¹ Ñ‚Ñ€Ð¸Ð³ÐµÑ€"
-
-#: ../src/trigger_time.cc:36
-msgid "Time Trigger"
-msgstr "Ð’Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ Ñ‚Ñ€Ð¸Ð³ÐµÑ€"
-
-#: ../src/ware.cc:72 ../src/worker.cc:1559
-msgid "Doh... someone forgot the help text!"
-msgstr "ÐžÑ…... ÐºÑ‚Ð¾-Ñ‚Ð¾ Ð·Ð°Ð±Ñ‹Ð» Ñ‚ÐµÐºÑÑ‚Ð¾Ð²ÑƒÑŽ ÑÐ¿Ñ€Ð°Ð²ÐºÑƒ!"
+#: ../src/stock_menu.cc:76
+msgid "Show workers"
+msgstr ""
 
 #: ../src/ware_statistics_menu.cc:347 ../src/ware_statistics_menu.cc:403
 msgid "Ware Statistics"
-msgstr "Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ° Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð²"
+msgstr "Статистика товаров"
 
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Ð¢ÐµÑÑ‚"
-
-#: ../src/watchwindow.cc:111
+#: ../src/watchwindow.cc:116
 msgid "Follow"
 msgstr ""
 
-#: ../src/watchwindow.cc:116
+#: ../src/watchwindow.cc:124
 msgid "Center mainview on this"
 msgstr ""
 
-#: ../src/watchwindow.cc:129
-#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:58
+#: ../src/watchwindow.cc:142
+#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:59
 msgid "Close"
-msgstr "Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ"
-
-#: ../src/editor/editorinteractive.cc:100
-#, fuzzy
-msgid "Tool"
-msgstr "ÐœÐµÐ½ÑŽ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²"
+msgstr "Закрыть"
 
 #: ../src/editor/editorinteractive.cc:105
 #, fuzzy
-msgid "Toolsize"
-msgstr "ÐœÐµÐ½ÑŽ Ñ€Ð°Ð·Ð¼ÐµÑ€Ð° Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²"
+msgid "Tool"
+msgstr "Меню инструментов"
 
-#: ../src/editor/editorinteractive.cc:120
+#: ../src/editor/editorinteractive.cc:113
+#, fuzzy
+msgid "Toolsize"
+msgstr "Меню размера инструментов"
+
+#: ../src/editor/editorinteractive.cc:137
 #, fuzzy
 msgid "Players"
-msgstr "Ð˜Ð³Ñ€Ð¾ÐºÐ¸:"
+msgstr "Игроки:"
 
-#: ../src/editor/editorinteractive.cc:125
+#: ../src/editor/editorinteractive.cc:145
 #, fuzzy
 msgid "Events"
-msgstr "Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ñ:"
+msgstr "События:"
 
-#: ../src/editor/editorinteractive.cc:130
+#: ../src/editor/editorinteractive.cc:153
 #, fuzzy
 msgid "Variables"
-msgstr "ÐŸÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ"
+msgstr "Переменная"
 
-#: ../src/editor/editorinteractive.cc:203
+#: ../src/editor/editorinteractive.cc:229
 msgid "Map unsaved"
-msgstr "ÐšÐ°Ñ€Ñ‚Ð° Ð½Ðµ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð°"
+msgstr "Карта не сохранена"
 
-#: ../src/editor/editorinteractive.cc:203
+#: ../src/editor/editorinteractive.cc:229
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr "ÐšÐ°Ñ€Ñ‚Ð° Ð½Ðµ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð°, Ð²Ñ‹ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð²Ñ‹Ð¹Ñ‚Ð¸?"
+msgstr "Карта не сохранена, вы действительно хотите выйти?"
 
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:59
+msgid "Apply"
+msgstr "Применить"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
+msgid "General Options"
+msgstr "Общие Настройки"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+msgid "Fullscreen"
+msgstr "Во весь экран"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
+msgid "Grab Input"
+msgstr "Захват ввода"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
+msgid "Enable Music"
+msgstr "Музыка"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
+msgid "Enable Sound"
+msgstr "Звук"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
+msgid "In-game resolution"
+msgstr "Разрешение в игре"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:85
+msgid "Language"
+msgstr "Язык"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:89
+msgid "In-game Options"
+msgstr "Настройки Игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:95
+msgid "Use single Watchwindow Mode"
+msgstr "Использовать оконный режим "
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
+msgid "Show buildings area preview"
+msgstr "Показать предпросмотр зоны строений"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:103
+msgid "Snap windows only when overlapping"
+msgstr "Выравнивать окна только при наложении"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:107
+msgid "Dock windows to edges"
+msgstr "привязать окна к краям"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:169
+msgid "System default language"
+msgstr "Язык системы по умолчанию"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:46
+msgid "Launch Game"
+msgstr "Запустить игру"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:53
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:45
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:60
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:62
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:59
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:48
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:81
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:97
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:111
+#: ../src/editor/ui_menus/editor_variables_menu.cc:87
+#: ../src/editor/ui_menus/editor_variables_menu.cc:184
+msgid "Back"
+msgstr "Назад"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:60
+msgid "Start game"
+msgstr "Запустить игру"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:71
+msgid "Select map"
+msgstr "Выбрать карту"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:139
+msgid "(no map)"
+msgstr "(нет карты)"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:151
+#: ../src/editor/ui_menus/editor_player_menu.cc:271
+msgid "Player "
+msgstr "Игрок "
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
+msgid "Internet Options"
+msgstr "Настройки Интернет"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:38
+msgid "Run Game"
+msgstr "Запустить игру"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:55
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
+msgid "nobody"
+msgstr "никого"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
+msgid "Begin Network Game"
+msgstr "Начать сетевую игру"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
+msgid "Join a Game"
+msgstr "Присоединиться к игре"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:46
+msgid "Host a New Game"
+msgstr "Запустить сервер новой игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:53
+msgid "Play in Internet"
+msgstr "Игра в Интернет"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:77
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:223
+msgid "LAN games"
+msgstr "Игры в Сети LAN"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:86
+msgid "Host"
+msgstr "Сервер"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:88
+msgid "State"
+msgstr "Состояние"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
+msgid "Open"
+msgstr "Открыть"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:142
+msgid "Closed"
+msgstr "Закрыто"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:216
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:238
+msgid "GGZ games"
+msgstr "GGZ игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:38
+msgid "Tutorial Campaign: A new Kingdom"
+msgstr "Обучающая компания: Новой Королевство"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:47
+msgid "Mission 1: Eyes in the Darkness - Game Basics"
+msgstr "Миссия 1: Глаза во тьме - Основы игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:54
+msgid ""
+"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgstr ""
+"Миссия 2: Место что мы назовем домом - Шахты, Расширение границ, Продвинутое "
+"производство"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:29
+msgid "Single Player Menu"
+msgstr "Меню Одиночной игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
+#, fuzzy
+msgid "New Game"
+msgstr "Сохранить игру"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
+msgid "Tutorial Campaign"
+msgstr "Обучающая компания"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:62
+msgid "Choose saved game!"
+msgstr "Выберите сохраненную игру!"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:65
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:53
+msgid "Map Name:"
+msgstr "Имя Карты:"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:67
+msgid "Gametime:"
+msgstr "Время игры: "
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:48
+msgid "Choose your map!"
+msgstr "Выберите вашу карту!"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:52
+msgid "Load Map as scenario: "
+msgstr "Загрузить карту как сценарий: "
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:63
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:73
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:56
+#: ../src/editor/ui_menus/trigger_null_option_menu.cc:44
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:68
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:62
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:55
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:50
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:53
+msgid "Name:"
+msgstr "Имя:"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:65
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:66
+msgid "Author:"
+msgstr "Автор:"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:67
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:57
+msgid "Size:"
+msgstr "Размер:"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:69
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:63
+msgid "World:"
+msgstr "Мир: "
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:71
+msgid "Players:"
+msgstr "Игроки:"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:73
+msgid "Descr:"
+msgstr "Описание:"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "Один Игрок"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Многопользовательская"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Editor"
+msgstr "Редактор"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:70
+#: ../src/editor/ui_menus/editor_main_menu.cc:103
+msgid "View Readme"
+msgstr "Прочти меня!"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "Exit Game"
+msgstr "Выход из игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+msgid "(C) 2002-2006 by the Widelands Development Team"
+msgstr "(C) 2002-2006 by the Widelands Development Team"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
+msgid "Lobby"
+msgstr "Lobby "
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
+#, c-format
+msgid "User %s is using \"%s\" in room \"%s\"\n"
+msgstr "Пользователь %s использует  \"%s\" под записью \"%s\"\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
+#, c-format
+msgid "User %s has entered the room %s !\n"
+msgstr "Пользователь %s вошел под именем %s !\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
+#, c-format
+msgid "User %s has left the room %s !\n"
+msgstr "Пользователь %s вышел из записи %s !\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:233
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
+msgid "Critical Connection Error!"
+msgstr "Критическа ошибка соединения!"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
+msgid "Server disconnected unexpectedly!"
+msgstr "Сервер неожиданно отключился!"
+
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
 #: ../src/editor/ui_menus/editor_event_menu.cc:125
-msgid "New Trigger"
-msgstr "ÐÐ¾Ð²Ñ‹Ð¹ Ð¢Ñ€Ð¸Ð³ÐµÑ€"
+msgid "New Event"
+msgstr "Новое событие"
 
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:40
-msgid "New Trigger Menu"
-msgstr "ÐÐ¾Ð²Ð¾Ðµ Ð¼ÐµÐ½ÑŽ Ð¢Ñ€Ð¸Ð³ÐµÑ€Ð°"
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:47
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:137
+msgid "Available Events: "
+msgstr "Доступные события: "
 
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:50
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:114
-msgid "Available Triggers: "
-msgstr "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ Ð¢Ñ€Ð¸Ð³ÐµÑ€Ñ‹: "
-
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:62
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:63
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:60
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:59
 msgid "Description: "
-msgstr "ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ: "
+msgstr "Описание: "
 
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:68
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:101
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:195
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:139
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:151
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:69
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:71
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:297
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:200
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:70
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:157
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:56
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:113
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:154
-#: ../src/editor/ui_menus/editor_variables_menu.cc:174
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:110
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:130
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:128
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:129
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:129
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:148
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:104
+#: ../src/editor/ui_menus/editor_variables_menu.cc:178
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:237
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:163
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:200
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:235
 msgid "Ok"
 msgstr "Ok"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:55
+#: ../src/editor/ui_menus/editor_main_menu.cc:59
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
 msgid "New Map"
-msgstr "ÐÐ¾Ð²Ð°Ñ ÐšÐ°Ñ€Ñ‚Ð°"
+msgstr "Новая Карта"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:61
+#: ../src/editor/ui_menus/editor_main_menu.cc:70
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:51
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:56
 msgid "Load Map"
-msgstr "Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÐšÐ°Ñ€Ñ‚Ñƒ"
+msgstr "Загрузить Карту"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:67
+#: ../src/editor/ui_menus/editor_main_menu.cc:81
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:57
 msgid "Save Map"
-msgstr "Ð—Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ ÐšÐ°Ñ€Ñ‚Ñƒ"
+msgstr "Записать Карту"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:73
+#: ../src/editor/ui_menus/editor_main_menu.cc:92
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:38
 msgid "Map Options"
-msgstr "ÐžÐ¿Ñ†Ð¸Ð¸ ÐºÐ°Ñ€Ñ‚Ñ‹"
+msgstr "Опции карты"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:79
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:58
-msgid "View Readme"
-msgstr "ÐŸÑ€Ð¾Ñ‡Ñ‚Ð¸ Ð¼ÐµÐ½Ñ!"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:85
+#: ../src/editor/ui_menus/editor_main_menu.cc:114
 msgid "Exit Editor"
-msgstr "Ð’Ñ‹Ñ…Ð¾Ð´"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:48
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:43
-msgid "New Map Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÐÐ¾Ð²Ð¾Ð¹ ÐºÐ°Ñ€Ñ‚Ñ‹"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:61
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:148
-msgid "Width"
-msgstr "Ð¨Ð¸Ñ€Ð¸Ð½Ð°"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:71
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:150
-#: ../src/editor/tools/editor_info_tool.cc:55
-msgid "Height"
-msgstr "Ð’Ñ‹ÑÐ¾Ñ‚Ð°"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:93
-msgid "Create Map"
-msgstr "Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ ÐšÐ°Ñ€Ñ‚Ñƒ"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:65
-msgid "Edit Objective"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð—Ð°Ð´Ð°Ð½Ð¸Ñ"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:81
-msgid "Visible at Begin: "
-msgstr "ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð·Ð¸Ñ‚ÑŒ Ð² Ð½Ð°Ñ‡Ð°Ð»Ðµ:"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:86
-msgid "Optional Objective: "
-msgstr "ÐÐµÐ¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:92
-msgid "Objective text: "
-msgstr "Ð¢ÐµÐºÑÑ‚ Ð—Ð°Ð´Ð°Ð½Ð¸Ñ: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:104
-#: ../src/editor/ui_menus/editor_variables_menu.cc:72
-#: ../src/editor/ui_menus/editor_variables_menu.cc:177
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:42
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:93
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:55
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:51
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:57
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:59
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:71
-msgid "Back"
-msgstr "ÐÐ°Ð·Ð°Ð´"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:181
-msgid "Optional"
-msgstr "ÐžÐ¿Ñ†Ð¸Ð¾Ð½Ð½Ð¾"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:182
-msgid "Visible"
-msgstr "ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð·Ð¸Ñ‚ÑŒ"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:190
-#: ../src/editor/ui_menus/editor_variables_menu.cc:285
-msgid "New"
-msgstr "ÐÐ¾Ð²Ñ‹Ð¹"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:194
-#: ../src/editor/ui_menus/editor_variables_menu.cc:288
-#: ../src/editor/ui_menus/editor_event_menu.cc:98
-#: ../src/editor/ui_menus/editor_event_menu.cc:113
-#: ../src/editor/ui_menus/editor_event_menu.cc:129
-msgid "Edit"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:199
-#: ../src/editor/ui_menus/editor_variables_menu.cc:292
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:94
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:95
-msgid "Delete"
-msgstr "Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:205
-msgid "Trigger: "
-msgstr "Ð¢Ñ€Ð¸Ð³ÐµÑ€: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:246
-#: ../src/editor/ui_menus/editor_variables_menu.cc:105
-#: ../src/editor/ui_menus/editor_event_menu.cc:319
-#: ../src/editor/ui_menus/editor_event_menu.cc:327
-msgid "Unnamed"
-msgstr "Ð‘ÐµÐ· Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ñ"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:281
-msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "ÐÐµ Ð¼Ð¾Ð³Ñƒ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ, Ð¿Ð¾Ñ‚Ð¾Ð¼Ñƒ Ñ‡Ñ‚Ð¾ ÐµÐ³Ð¾ Ñ‚Ñ€Ð¸Ð³ÐµÑ€ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:289
-#: ../src/editor/ui_menus/editor_player_menu.cc:257
-#: ../src/editor/ui_menus/editor_player_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:242
-#: ../src/editor/ui_menus/editor_event_menu.cc:290
-msgid "Error!"
-msgstr "ÐžÑˆÐ¸Ð±ÐºÐ°!"
+msgstr "Выход"
 
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:39
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:34
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
-msgid "Trigger Option Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¢Ñ€Ð¸Ð³ÐµÑ€Ð°"
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:44
 msgid "Building Trigger Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¢Ñ€Ð¸Ð³ÐµÑ€Ð° ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ"
+msgstr "Настройки Тригера строения"
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:77
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:60
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:57
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:48
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:54
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:60
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:72
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:66
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:84
-msgid "Name:"
-msgstr "Ð˜Ð¼Ñ:"
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:83
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:114
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:117
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:78
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:79
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:74
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:162
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:160
 msgid "Player: "
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº: "
+msgstr "Игрок: "
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:94
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:89
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:99
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:94
 msgid "Building: "
-msgstr "Ð¡Ñ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ: "
+msgstr "Строение: "
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:102
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:97
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:116
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:111
 msgid "Headquarters"
-msgstr "Ð¨Ñ‚Ð°Ð±"
+msgstr "Штаб"
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:106
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:120
 msgid "How many: "
-msgstr "Ð¡ÐºÐ¾Ð»ÑŒÐºÐ¾: "
+msgstr "Сколько: "
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:117
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:63
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:60
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:66
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:140
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:61
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:56
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:59
 msgid "Current position: "
-msgstr "Ð¢ÐµÐºÑƒÑ‰Ð°Ñ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ: "
+msgstr "Текущая позиция: "
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:168
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:125
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:128
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:241
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:181
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:179
 msgid "Area: "
-msgstr "ÐžÐ±Ð»Ð°ÑÑ‚ÑŒ: "
+msgstr "Область: "
 
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:315
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:200
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:401
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:204
 msgid "<invalid player tribe>"
 msgstr "<invalid player tribe>"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
-#: ../src/editor/ui_menus/editor_player_menu.cc:77
-msgid "Player Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð˜Ð³Ñ€Ð¾ÐºÐ°"
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:34
+msgid "Trigger Option Menu"
+msgstr "Меню настройки Тригера"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:80
-#: ../src/editor/tools/editor_info_tool.cc:108
-msgid "Number of Players"
-msgstr "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð²"
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:57
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:149
+msgid "Width"
+msgstr "Ширина"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:241
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:143
-msgid "Player "
-msgstr "Ð˜Ð³Ñ€Ð¾Ðº "
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:76
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:151
+#: ../src/editor/tools/editor_info_tool.cc:55
+msgid "Height"
+msgstr "Высота"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:257
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend of this player and try again"
-msgstr ""
-"ÐÐµ Ð¼Ð¾Ð³Ñƒ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ð¾ÐºÐ°. ÐÐ° Ð½ÐµÐ³Ð¾ ÑÑÑ‹Ð»Ð°ÑŽÑ‚ÑÑ Ð¸Ð· Ð´Ñ€ÑƒÐ³Ð¾Ð³Ð¾ Ð¼ÐµÑÑ‚Ð°. Ð£Ð´Ð°Ð»Ð¸Ñ‚Ðµ Ð²ÑÐµ "
-"ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ, bobs, Ñ‚Ñ€Ð¸Ð³ÐµÑ€Ñ‹ Ð¸ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ, Ð·Ð°Ð²Ð¸ÑÑÑ‰Ð¸Ðµ Ð¾Ñ‚ ÑÑ‚Ð¾Ð³Ð¾ Ð¸Ð³Ñ€Ð¾ÐºÐ° Ð¸ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ"
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:116
+msgid "Create Map"
+msgstr "Создать Карту"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:284
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"ÐÐµ Ð¼Ð¾Ð³Ñƒ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¿Ð»ÐµÐ¼Ñ Ð¸Ð³Ñ€Ð¾ÐºÐ°. ÐÐ° Ð½ÐµÐ³Ð¾ ÑÑÑ‹Ð»Ð°ÑŽÑ‚ÑÑ Ð¸Ð· Ð´Ñ€ÑƒÐ³Ð¾Ð³Ð¾ Ð¼ÐµÑÑ‚Ð°. Ð£Ð´Ð°Ð»Ð¸Ñ‚Ðµ "
-"Ð²ÑÐµ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ, bobs, Ñ‚Ñ€Ð¸Ð³ÐµÑ€Ñ‹ Ð¸ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ, Ð·Ð°Ð²Ð¸ÑÑÑ‰Ð¸Ðµ Ð¾Ñ‚ ÑÑ‚Ð¾Ð³Ð¾ Ð¸Ð³Ñ€Ð¾ÐºÐ° Ð¸ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ"
-
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:38
-msgid "Time Trigger Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð³Ð¾ Ñ‚Ñ€Ð¸Ð³ÐµÑ€Ð°"
-
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:36
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:36
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:38
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:39
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:41
-msgid "Event Option Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:41
-msgid "Unhide Area Event Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÑÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
-#: ../src/editor/ui_menus/editor_event_menu.cc:109
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:84
-msgid "New Event"
-msgstr "ÐÐ¾Ð²Ð¾Ðµ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:40
-msgid "New Event Menu"
-msgstr "ÐÐ¾Ð²Ð¾Ðµ Ð¼ÐµÐ½ÑŽ Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:50
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:113
-msgid "Available Events: "
-msgstr "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ: "
-
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:52
-msgid "Bobs Menu"
-msgstr "ÐœÐµÐ½ÑŽ Bobs"
-
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:37
-msgid "Null Trigger Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð½ÑƒÐ»ÐµÐ²Ð¾Ð³Ð¾ Ñ‚Ñ€Ð¸Ð³ÐµÑ€Ð°"
-
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:74
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:78
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:59
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:54
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:74
 msgid "Name: "
-msgstr "Ð˜Ð¼Ñ: "
+msgstr "Имя: "
 
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:79
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:83
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:79
 msgid "Author: "
-msgstr "ÐÐ²Ñ‚Ð¾Ñ€: "
+msgstr "Автор: "
 
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:88
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 msgid "Size: "
-msgstr "Ð Ð°Ð·Ð¼ÐµÑ€: "
+msgstr "Размер: "
 
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:89
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:93
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:89
 msgid "World: "
-msgstr "ÐœÐ¸Ñ€: "
+msgstr "Мир: "
 
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:94
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:98
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:94
 msgid "Players: "
-msgstr "Ð˜Ð³Ñ€Ð¾ÐºÐ¸:"
+msgstr "Игроки:"
 
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:100
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:104
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:100
 msgid "Descr: "
-msgstr "ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ: "
+msgstr "Описание: "
 
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:41
-msgid "Move View Event Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹ Ð¾ÐºÐ½Ð° Ð¾Ð±Ð·Ð¾Ñ€Ð°"
-
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:44
-msgid "Conquer Area Event Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ Ð·Ð°Ñ…Ð²Ð°Ñ‚Ð° Ñ‚ÐµÑ€Ñ€Ð¸Ñ‚Ð¾Ñ€Ð¸Ð¸"
-
-#: ../src/editor/ui_menus/editor_tool_menu.cc:50
-#: ../src/editor/ui_menus/editor_tool_menu.cc:82
-msgid "Tool Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:57
-msgid "New Variable"
-msgstr "ÐÐ¾Ð²Ð°Ñ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:64
-msgid "Integer"
-msgstr "Integer"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:67
-msgid "String"
-msgstr "String"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:156
-msgid "Edit Variable"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐŸÐµÑ€ÐµÐ¼ÐµÐ½Ð½ÑƒÑŽ"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:168
-#: ../src/editor/ui_menus/editor_variables_menu.cc:279
-msgid "Value"
-msgstr "Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:226
-msgid "is not a valid integer!"
-msgstr "Ð½Ðµ Ð²ÐµÑ€Ð½Ð¾Ðµ Ñ†ÐµÐ»Ð¾Ðµ!"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:227
-msgid "Parse error!"
-msgstr "Ð“Ñ€Ð°Ð¼Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°!"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:263
-#: ../src/editor/ui_menus/editor_variables_menu.cc:268
-msgid "Variables Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:278
-msgid "Variable"
-msgstr "ÐŸÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð°Ñ"
-
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:44
-msgid "Allow Building Event Options"
-msgstr "Ð Ð°Ð·Ñ€ÐµÑˆÐ¸Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹ Ð´Ð»Ñ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:101
-msgid "Allow Building: "
-msgstr "Ð Ð°Ð·Ñ€ÐµÑˆÐ¸Ñ‚ÑŒ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:47
-msgid "Message Box Event Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð¾ÐºÐ½Ð° ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:59
-msgid "Button 1"
-msgstr "ÐšÐ½Ð¾Ð¿ÐºÐ° 1"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:60
-msgid "Button 2"
-msgstr "ÐšÐ½Ð¾Ð¿ÐºÐ° 2"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:61
-msgid "Button 3"
-msgstr "ÐšÐ½Ð¾Ð¿ÐºÐ° 3"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:72
-msgid "Is Modal: "
-msgstr "ÐœÐ¾Ð´Ð°Ð»ÑŒÐ½Ð¾Ðµ: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:79
-msgid "Window Title:"
-msgstr "Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¾ÐºÐ½Ð°: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:85
-msgid "Text:"
-msgstr "Ð¢ÐµÐºÑÑ‚: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:92
-msgid "Number of Buttons: "
-msgstr "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ½Ð¾Ð¿Ð¾Ðº: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:103
-msgid "Button Name: "
-msgstr "Ð˜Ð¼Ñ ÐºÐ½Ð¾Ð¿ÐºÐ¸: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:113
-msgid "Select Trigger: "
-msgstr "Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ð¢Ñ€Ð¸Ð³ÐµÑ€: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:123
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:160
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:210
-msgid "Current: "
-msgstr "Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:124
-msgid "No trigger selected!"
-msgstr "Ð¢Ñ€Ð¸Ð³ÐµÑ€ Ð½Ðµ Ð²Ñ‹Ð±Ñ€Ð°Ð½!"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:55
-#: ../src/editor/ui_menus/editor_event_menu.cc:60
-msgid "Event Menu"
-msgstr "ÐœÐµÐ½ÑŽ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:71
-msgid "Event Chains: "
-msgstr "Ð¦ÐµÐ¿Ð¾Ñ‡ÐºÐ° ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹:"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:78
-msgid "Registered Events: "
-msgstr "Ð—Ð°Ñ€ÐµÐ³ÐµÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ:"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:85
-msgid "Registered Triggers"
-msgstr "Ð—Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð¢Ñ€Ð¸Ð³ÐµÑ€Ñ‹"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:94
-msgid "New Event Chain"
-msgstr "ÐÐ¾Ð²Ð°Ñ Ñ†ÐµÐ¿Ð¾Ñ‡ÐºÐ° ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:103
-#: ../src/editor/ui_menus/editor_event_menu.cc:118
-#: ../src/editor/ui_menus/editor_event_menu.cc:134
-msgid "Del"
-msgstr "Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:233
-msgid "Can't delete Event. It is in use by "
-msgstr "ÐÐµ Ð¼Ð¾Ð³Ñƒ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ. ÐžÐ½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ "
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:280
-msgid "Can't delete Trigger. It is in use by "
-msgstr "ÐÐµ Ð¼Ð¾Ð³Ñƒ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒÐ¢Ñ€Ð¸Ð³ÐµÑ€. ÐžÐ½ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ "
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:53
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:68
-msgid "Map Name:"
-msgstr "Ð˜Ð¼Ñ ÐšÐ°Ñ€Ñ‚Ñ‹:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:57
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
-msgid "Size:"
-msgstr "Ð Ð°Ð·Ð¼ÐµÑ€:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:60
-msgid "Nr Players:"
-msgstr "ÐšÐ¾Ð»-Ð²Ð¾ Ð˜Ð³Ñ€Ð¾ÐºÐ¾Ð²:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:63
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:90
-msgid "World:"
-msgstr "ÐœÐ¸Ñ€: "
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:66
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:86
-msgid "Author:"
-msgstr "ÐÐ²Ñ‚Ð¾Ñ€:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:70
-msgid "Nothing defined!"
-msgstr "ÐÐ¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¾!"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:121
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:133
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:34
 msgid "Make Directory"
-msgstr "Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³"
+msgstr "Создать Каталог"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:174
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:181
 msgid "unnamed"
-msgstr "ÐÐµÑ‚ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ñ"
+msgstr "Нет названия"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:329
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:333
 msgid " exists already. Overwrite?"
-msgstr " ÑƒÐ¶Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚. Ð—Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð¿Ð¾Ð²ÐµÑ€Ñ…?"
+msgstr " уже существует. Записать поверх?"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:330
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:355
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:334
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:359
 msgid "Save Map Error!!"
-msgstr "ÐžÑˆÐ¸Ð±ÐºÐ° Ð—Ð°Ð¿Ð¸ÑÐ¸ ÐšÐ°Ñ€Ñ‚Ñ‹!!"
+msgstr "Ошибка Записи Карты!!"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:353
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:357
 msgid ""
 "Map Saving Error!\n"
 "Saved Map-File may be corrupt!\n"
 "\n"
 "Reason given:\n"
 msgstr ""
-"ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð¿Ð¸ÑÐ¸ ÐºÐ°Ñ€Ñ‚Ñ‹!\n"
-"Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð½Ð°Ñ ÐºÐ°Ñ€Ñ‚Ð° Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ð¾Ð²Ñ€ÐµÐ¶Ð´ÐµÐ½Ð°!\n"
+"Ошибка записи карты!\n"
+"Сохраненная карта может быть повреждена!\n"
 "\n"
-"ÐŸÑ€Ð¸Ñ‡Ð¸Ð½Ð°:\n"
+"Причина:\n"
 
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:54
-msgid "Terrain Select"
-msgstr "Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ñ‚Ð¸Ð¿ Ð¼ÐµÑÑ‚Ð½Ð¾ÑÑ‚Ð¸"
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
+#: ../src/editor/ui_menus/editor_event_menu.cc:157
+msgid "New Trigger"
+msgstr "Новый Тригер"
 
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
-msgid "Choose Terrain Menu"
-msgstr "Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ð¼ÐµÐ½ÑŽ Ñ‚Ð¸Ð¿Ð° Ð¼ÐµÑÑ‚Ð½Ð¾ÑÑ‚Ð¸"
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:180
+msgid "Available Triggers: "
+msgstr "Доступные Тригеры: "
 
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:52
-msgid "Immovable Bobs Menu"
-msgstr "ÐÐµÐ¿ÐµÑ€ÐµÐ¼ÐµÑ‰Ð°ÐµÐ¼Ð¾Ðµ Ð¼ÐµÐ½ÑŽ Bobs"
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:52
+msgid "Bobs Menu"
+msgstr "Меню Bobs"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:42
 msgid "Edit Event Chain"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ†ÐµÐ¿Ð¾Ñ‡ÐºÑƒ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
+msgstr "Редактировать цепочку событий"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
-msgid "Edit Event Chain Menu"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼ÐµÐ½ÑŽ Ñ†ÐµÐ¿Ð¾Ñ‡ÐºÐ¸ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:65
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:60
 msgid "Runs multiple times"
-msgstr "Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÑ‚ Ð½ÐµÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ñ€Ð°Ð·"
+msgstr "Запускает несколько раз"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:72
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:67
 msgid "Events: "
-msgstr "Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ñ:"
+msgstr "События:"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:80
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:81
 msgid "Conditional"
-msgstr "Ð£ÑÐ»Ð¾Ð²Ð½Ñ‹Ð¹"
+msgstr "Условный"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:44
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:100
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:143
+#, fuzzy
+msgid "Insert"
+msgstr "<unset>"
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:110
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:207
+#: ../src/editor/ui_menus/editor_variables_menu.cc:291
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:153
+msgid "Delete"
+msgstr "Удалить"
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:122
+msgid "Up"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
-msgstr "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð˜Ð¼Ñ ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³Ð°"
+msgstr "Введите Имя Каталога"
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:37
-msgid "Allowed Buildings"
-msgstr "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ"
+#: ../src/editor/ui_menus/editor_event_menu.cc:56
+msgid "Event Menu"
+msgstr "Меню событий"
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:42
-msgid "Allowed Buildings Menu"
-msgstr "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ð¹"
+#: ../src/editor/ui_menus/editor_event_menu.cc:67
+msgid "Event Chains: "
+msgstr "Цепочка событий:"
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:51
-msgid "Allowed Buildings: "
-msgstr "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ: "
+#: ../src/editor/ui_menus/editor_event_menu.cc:74
+msgid "Registered Events: "
+msgstr "Зарегестрированные события:"
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
-msgid "Forbidden Buildings: "
-msgstr "Ð—Ð°Ð¿Ñ€ÐµÑ‰ÐµÐ½Ð½Ñ‹Ðµ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ: "
+#: ../src/editor/ui_menus/editor_event_menu.cc:81
+msgid "Registered Triggers"
+msgstr "Зарегистрированные Тригеры"
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:94
+msgid "New Event Chain"
+msgstr "Новая цепочка событий"
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:103
+#: ../src/editor/ui_menus/editor_event_menu.cc:134
+#: ../src/editor/ui_menus/editor_event_menu.cc:166
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:196
+#: ../src/editor/ui_menus/editor_variables_menu.cc:282
+msgid "Edit"
+msgstr "Редактировать"
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:114
+#: ../src/editor/ui_menus/editor_event_menu.cc:145
+#: ../src/editor/ui_menus/editor_event_menu.cc:177
+msgid "Del"
+msgstr "Удалить"
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:276
+msgid "Can't delete Event. It is in use by "
+msgstr "Не могу удалить событие. Оно используется "
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:285
+#: ../src/editor/ui_menus/editor_event_menu.cc:333
+#: ../src/editor/ui_menus/editor_player_menu.cc:287
+#: ../src/editor/ui_menus/editor_player_menu.cc:313
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:292
+msgid "Error!"
+msgstr "Ошибка!"
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:323
+msgid "Can't delete Trigger. It is in use by "
+msgstr "Не могу удалитьТригер. Он используется "
+
+#: ../src/editor/ui_menus/editor_event_menu.cc:362
+#: ../src/editor/ui_menus/editor_event_menu.cc:370
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:252
+#: ../src/editor/ui_menus/editor_variables_menu.cc:114
+msgid "Unnamed"
+msgstr "Без названия"
+
+#: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
+msgid "Null Trigger Options"
+msgstr "Настройки нулевого тригера"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:37
 msgid "Toolsize Menu"
-msgstr "ÐœÐµÐ½ÑŽ Ñ€Ð°Ð·Ð¼ÐµÑ€Ð° Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²"
+msgstr "Меню размера инструментов"
 
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:41
-msgid "Set Tool Size Menu"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¼ÐµÐ½ÑŽ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²"
-
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:43
+#: ../src/editor/ui_menus/editor_toolsize_menu.cc:57
 #, fuzzy, c-format
 msgid "Current Size: %i"
-msgstr "Ð¢ÐµÐºÑ‰Ð¸Ð¹ Ð Ð°Ð·Ð¼ÐµÑ€"
+msgstr "Текщий Размер"
 
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:89
+#: ../src/editor/ui_menus/editor_toolsize_menu.cc:95
 msgid "Current Size"
-msgstr "Ð¢ÐµÐºÑ‰Ð¸Ð¹ Ð Ð°Ð·Ð¼ÐµÑ€"
+msgstr "Текщий Размер"
 
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:47
-msgid "Height Tools Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹"
+#: ../src/editor/ui_menus/editor_player_menu.cc:57
+msgid "Player Options"
+msgstr "Настройки Игрока"
 
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:62
-msgid "Height Tool Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð° Ð²Ñ‹ÑÐ¾Ñ‚Ñ‹"
+#: ../src/editor/ui_menus/editor_player_menu.cc:79
+#: ../src/editor/tools/editor_info_tool.cc:108
+msgid "Number of Players"
+msgstr "Количество игроков"
 
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:65
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:94
-msgid "In/Decrease Value"
-msgstr "Ð£Ð²ÐµÐ»Ð¸Ñ‡Ð¸Ñ‚ÑŒ/Ð£Ð¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ"
+#: ../src/editor/ui_menus/editor_player_menu.cc:227
+msgid "I"
+msgstr ""
 
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:78
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:107
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:78
-msgid "Set Value"
-msgstr "Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ"
+#: ../src/editor/ui_menus/editor_player_menu.cc:228
+#, fuzzy
+msgid "Make infrastructure"
+msgstr "Создать Каталог"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+msgid "B"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:242
+#, fuzzy
+msgid "Allow/forbid buildidngs"
+msgstr "Доступные строения"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:287
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend of this player and try again"
+msgstr ""
+"Не могу удалить игрока. На него ссылаются из другого места. Удалите все "
+"строения, bobs, тригеры и события, зависящие от этого игрока и повторите"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:313
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Не могу изменить племя игрока. На него ссылаются из другого места. Удалите "
+"все строения, bobs, тригеры и события, зависящие от этого игрока и повторите"
+
+#: ../src/editor/ui_menus/editor_tool_menu.cc:50
+#: ../src/editor/ui_menus/editor_tool_menu.cc:82
+msgid "Tool Menu"
+msgstr "Меню инструментов"
+
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:40
+msgid "Allow Building Event Options"
+msgstr "Разрешить настройки событий для строений"
+
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:115
+msgid "Allow Building: "
+msgstr "Разрешить строение: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:41
+msgid "Message Box Event Options"
+msgstr "Настройка окна событий"
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:55
+msgid "Button 1"
+msgstr "Кнопка 1"
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:56
+msgid "Button 2"
+msgstr "Кнопка 2"
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:57
+msgid "Button 3"
+msgstr "Кнопка 3"
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:68
+msgid "Is Modal: "
+msgstr "Модальное: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:75
+msgid "Window Title:"
+msgstr "Заголовок окна: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:81
+msgid "Text:"
+msgstr "Текст: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:88
+msgid "Number of Buttons: "
+msgstr "Количество кнопок: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:110
+msgid "Button Name: "
+msgstr "Имя кнопки: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:120
+msgid "Select Trigger: "
+msgstr "Выбрать Тригер: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:138
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:160
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:210
+msgid "Current: "
+msgstr "Текущий: "
+
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:139
+msgid "No trigger selected!"
+msgstr "Тригер не выбран!"
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:66
+msgid "Edit Objective"
+msgstr "Редактировать Задания"
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:81
+msgid "Visible at Begin: "
+msgstr "Отобразить в начале:"
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:86
+msgid "Optional Objective: "
+msgstr "Необязательно задание: "
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:92
+msgid "Objective text: "
+msgstr "Текст Задания: "
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:174
+msgid "Optional"
+msgstr "Опционно"
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:175
+msgid "Visible"
+msgstr "Отобразить"
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:187
+#: ../src/editor/ui_menus/editor_variables_menu.cc:275
+msgid "New"
+msgstr "Новый"
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:214
+msgid "Trigger: "
+msgstr "Тригер: "
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:284
+msgid "Can't delete Objective, because it's trigger is in use by "
+msgstr "Не могу удалить задание, потому что его тригер используется "
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:61
+msgid "New Variable"
+msgstr "Новая переменная"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:73
+msgid "Integer"
+msgstr "Integer"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:80
+msgid "String"
+msgstr "String"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:161
+msgid "Edit Variable"
+msgstr "Редактировать Переменную"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:170
+#: ../src/editor/ui_menus/editor_variables_menu.cc:304
+msgid "Value"
+msgstr "Значение"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:227
+msgid "is not a valid integer!"
+msgstr "не верное целое!"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:229
+msgid "Parse error!"
+msgstr "Грамматическая ошибка!"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:267
+msgid "Variables Menu"
+msgstr "Меню переменных"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:303
+msgid "Variable"
+msgstr "Переменная"
+
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:43
+msgid "New Map Options"
+msgstr "Настройки Новой карты"
+
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:60
+msgid "Nr Players:"
+msgstr "Кол-во Игроков:"
+
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:70
+msgid "Nothing defined!"
+msgstr "Ничего не определено!"
+
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:38
+msgid "Conquer Area Event Options"
+msgstr "Настройка события захвата территории"
+
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:54
+msgid "Terrain Select"
+msgstr "Выбрать тип местности"
+
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
+msgid "Choose Terrain Menu"
+msgstr "Выбрать меню типа местности"
+
+#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:52
+msgid "Immovable Bobs Menu"
+msgstr "Неперемещаемое меню Bobs"
+
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:36
+msgid "Move View Event Options"
+msgstr "Настройки событий окна обзора"
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:52
 msgid "Resources Tools Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð ÐµÑÑƒÑ€ÑÐ¾Ð²"
+msgstr "Настройки Ресурсов"
 
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:91
+#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:92
 msgid "Resources Tool Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ñ€ÐµÑÑƒÑ€ÑÐ°"
+msgstr "Настройка ресурса"
 
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:120
+#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:95
+#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:67
+msgid "In/Decrease Value"
+msgstr "Увеличить/Уменьшить значение"
+
+#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:118
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:95
+#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:89
+msgid "Set Value"
+msgstr "Установить значение"
+
+#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:141
 msgid "Current Selection"
-msgstr "Ð¢ÐµÐºÑƒÑ‰ÐµÐµ Ð²Ñ‹Ð´ÐµÐ»ÐµÐ½Ð¸Ðµ"
+msgstr "Текущее выделение"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:48
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:49
 msgid "Noise Height Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° ÑƒÑ€Ð¾Ð²Ð½Ñ ÑˆÑƒÐ¼Ð°"
+msgstr "Настройка уровня шума"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:51
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:107
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:81
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
 msgid "Minimum"
-msgstr "ÐœÐ¸Ð½Ð¸Ð¼ÑƒÐ¼"
+msgstr "Минимум"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:53
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:109
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:83
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:134
 msgid "Maximum"
-msgstr "ÐœÐ°ÐºÑÐ¸Ð¼ÑƒÐ¼"
+msgstr "Максимум"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:71
+#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:88
 msgid "Noise Height Tool Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð° ÑƒÑ€Ð¾Ð²Ð½Ñ ÑˆÑƒÐ¼Ð°"
+msgstr "Настройка инструмента уровня шума"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:39
 msgid "Edit Trigger Conditional"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑƒÑÐ»Ð¾Ð²Ð½Ð¹ Ð¢Ñ€Ð¸Ð³ÐµÑ€"
+msgstr "Редактировать условнй Тригер"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:46
 msgid "Edit Trigger Conditional Menu"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼ÐµÐ½ÑŽ ÑƒÑÐ»Ð¾Ð²Ð½Ð¾Ð³Ð¾ Ð¢Ñ€Ð¸Ð³ÐµÑ€Ð°"
+msgstr "Редактировать меню условного Тригера"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:57
 msgid "Trigger Conditional: "
-msgstr "Ð£ÑÐ»Ð¾Ð²Ð½Ñ‹Ð¹ Ð¢Ñ€Ð¸Ð³ÐµÑ€: "
+msgstr "Условный Тригер: "
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:199
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:73
+msgid "("
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:85
+msgid ")"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:97
+msgid "AND"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:109
+msgid "OR"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:121
+msgid "XOR"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:133
+msgid "NOT"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:142
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:96
+msgid "<-"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
 msgid "Syntax Error"
-msgstr "Ð¡Ð¸Ð½Ñ‚Ð°ÐºÑÐ¸Ñ‡ÐµÑÐºÐ°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°"
+msgstr "Синтаксическая ошибка"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:199
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
 msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr ""
-"Ð’Ð°ÑˆÐµ ÑƒÑÐ»Ð¾Ð²Ð¸Ðµ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð¿Ð¾ ÐºÑ€Ð°Ð¹Ð½Ðµ Ð¼ÐµÑ€Ðµ Ð¾Ð´Ð½Ñƒ ÑÐ¸Ð½Ñ‚Ð°ÐºÑÐ¸Ñ‡ÐµÑÐºÑƒÑŽ Ð¾ÑˆÐ¸Ð±ÐºÑƒ. ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° "
-"Ð¸ÑÐ¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ!\n"
+"Ваше условие содержит по крайне мере одну синтаксическую ошибку. Пожалуйста "
+"исправьте!\n"
+
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:36
+msgid "Unhide Area Event Options"
+msgstr "Настройки скрытия области"
+
+#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:48
+msgid "Height Tools Options"
+msgstr "Настройки инструментов высоты"
+
+#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:64
+msgid "Height Tool Options"
+msgstr "Настройки инструмента высоты"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
+msgid "Allowed Buildings"
+msgstr "Доступные строения"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:59
+#, fuzzy
+msgid "Allowed Buildings:"
+msgstr "Доступные строения: "
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
+#, fuzzy
+msgid "Forbidden Buildings:"
+msgstr "Запрещенные строения: "
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:86
+msgid "Forbid"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
+msgid "Allow"
+msgstr ""
 
 #: ../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
-msgstr "Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¿Ð¾Ð»Ðµ"
+msgstr "Информация о поле"
 
 #: ../src/editor/tools/editor_info_tool.cc:53
 msgid "1) Field Infos"
-msgstr "1) Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¿Ð¾Ð»Ðµ"
+msgstr "1) Информация о поле"
 
 #: ../src/editor/tools/editor_info_tool.cc:54
 msgid "Coordinates"
-msgstr "ÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹"
+msgstr "Координаты"
 
 #: ../src/editor/tools/editor_info_tool.cc:56
 msgid " Caps: "
@@ -1489,43 +1744,43 @@ msgstr " Caps: "
 
 #: ../src/editor/tools/editor_info_tool.cc:58
 msgid "small"
-msgstr "Ð¼Ð°Ð»Ñ‹Ð¹"
+msgstr "малый"
 
 #: ../src/editor/tools/editor_info_tool.cc:59
 msgid "medium"
-msgstr "ÑÑ€ÐµÐ´Ð½Ð¸Ð¹"
+msgstr "средний"
 
 #: ../src/editor/tools/editor_info_tool.cc:60
 msgid "big"
-msgstr "Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹"
+msgstr "большой"
 
 #: ../src/editor/tools/editor_info_tool.cc:63
 msgid " flag"
-msgstr "Ñ„Ð»Ð°Ð³"
+msgstr "флаг"
 
 #: ../src/editor/tools/editor_info_tool.cc:64
 msgid " mine"
-msgstr " Ñ€ÑƒÐ´Ð½Ð¸Ðº"
+msgstr " рудник"
 
 #: ../src/editor/tools/editor_info_tool.cc:65
 msgid " port"
-msgstr " Ð¿Ð¾Ñ€Ñ‚"
+msgstr " порт"
 
 #: ../src/editor/tools/editor_info_tool.cc:66
 msgid " walk"
-msgstr " Ð¸Ð´Ñ‚Ð¸"
+msgstr " идти"
 
 #: ../src/editor/tools/editor_info_tool.cc:67
 msgid " swim"
-msgstr " Ð¿Ð»Ñ‹Ñ‚ÑŒ"
+msgstr " плыть"
 
 #: ../src/editor/tools/editor_info_tool.cc:69
 msgid "Owned by"
-msgstr "ÐŸÑ€Ð¸Ð½Ð°Ð´Ð»ÐµÐ¶Ð¸Ñ‚ "
+msgstr "Принадлежит "
 
 #: ../src/editor/tools/editor_info_tool.cc:70
 msgid "Has base immovable"
-msgstr "ÐÐµÐ»ÑŒÐ·Ñ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð½ÑƒÑ‚ÑŒ"
+msgstr "Нельзя передвинуть"
 
 #: ../src/editor/tools/editor_info_tool.cc:71
 msgid "Has bobs"
@@ -1534,377 +1789,171 @@ msgstr "Has bobs"
 #: ../src/editor/tools/editor_info_tool.cc:75
 #, c-format
 msgid " Has resources: No\n"
-msgstr "Ð•ÑÑ‚ÑŒ Ñ€ÐµÑÑƒÑ€ÑÑ‹: ÐÐµÑ‚\n"
+msgstr "Есть ресурсы: Нет\n"
 
 #: ../src/editor/tools/editor_info_tool.cc:77
 msgid "Has resources: Yes"
-msgstr "Ð•ÑÑ‚ÑŒ Ñ€ÐµÑÑƒÑ€ÑÑ‹: Ð”Ð°"
+msgstr "Есть ресурсы: Да"
 
 #: ../src/editor/tools/editor_info_tool.cc:77
 msgid "amount of"
-msgstr "ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾"
+msgstr "количество"
 
 #: ../src/editor/tools/editor_info_tool.cc:81
 msgid "Start resources amount"
-msgstr "ÐÐ°Ñ‡Ð°Ð»ÑŒÐ½Ð¾Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€ÐµÑÑƒÑ€ÑÐ¾Ð²"
+msgstr "Начальное количество ресурсов"
 
 #: ../src/editor/tools/editor_info_tool.cc:84
 #, c-format
 msgid " Roads: TODO!\n"
-msgstr "Ð”Ð¾Ñ€Ð¾Ð³Ð¸: Ð¡Ð”Ð•Ð›ÐÐ¢Ð¬!\n"
+msgstr "Дороги: СДЕЛАТЬ!\n"
 
 #: ../src/editor/tools/editor_info_tool.cc:87
 msgid "2) Right Terrain Info\n"
-msgstr "2) Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¼ÐµÑÑ‚Ð½Ð¾ÑÑ‚Ð¸ ÑÐ¿Ñ€Ð°Ð²Ð°\n"
+msgstr "2) Информация о местности справа\n"
 
 #: ../src/editor/tools/editor_info_tool.cc:91
 #: ../src/editor/tools/editor_info_tool.cc:99
 msgid "Texture Number"
-msgstr "ÐÐ¾Ð¼ÐµÑ€ Ñ‚ÐµÐºÑÑ‚ÑƒÑ€Ñ‹"
+msgstr "Номер текстуры"
 
 #: ../src/editor/tools/editor_info_tool.cc:95
 msgid "3) Down Terrain Info\n"
-msgstr "3) Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¼ÐµÑÑ‚Ð½Ð¾ÑÑ‚Ð¸ Ð½Ð¸Ð¶Ðµ\n"
+msgstr "3) Информация о местности ниже\n"
 
 #: ../src/editor/tools/editor_info_tool.cc:103
 msgid "4) Map Info"
-msgstr "4) Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ ÐºÐ°Ñ€Ñ‚Ðµ"
+msgstr "4) Информация о карте"
 
 #: ../src/editor/tools/editor_info_tool.cc:105
 msgid "Size"
-msgstr "Ð Ð°Ð·Ð¼ÐµÑ€"
+msgstr "Размер"
 
 #: ../src/editor/tools/editor_info_tool.cc:106
 #: ../src/editor/tools/editor_info_tool.cc:114
 msgid "Author"
-msgstr "ÐÐ²Ñ‚Ð¾Ñ€"
+msgstr "Автор"
 
 #: ../src/editor/tools/editor_info_tool.cc:107
 #: ../src/editor/tools/editor_info_tool.cc:115
 msgid "Descr"
-msgstr "ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ"
+msgstr "Описание"
 
 #: ../src/editor/tools/editor_info_tool.cc:109
 msgid " TODO: more information (number of resources, number of terrains...)"
 msgstr ""
-"Ð¡Ð”Ð•Ð›ÐÐ¢Ð¬: Ð±Ð¾Ð»ÑŒÑˆÐµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ (ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€ÐµÑÑƒÑ€ÑÐ¾Ð², ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚Ð¸Ð¿Ð¾Ð² "
-"Ð¼ÐµÑÑ‚Ð½Ð¾ÑÑ‚Ð¸...)"
+"СДЕЛАТЬ: больше информации (количество ресурсов, количество типов "
+"местности...)"
 
 #: ../src/editor/tools/editor_info_tool.cc:112
 msgid "5) World Info"
-msgstr "5) Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ ÐœÐ¸Ñ€Ðµ"
+msgstr "5) Информация о Мире"
 
 #: ../src/editor/tools/editor_info_tool.cc:116
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
-msgstr " Ð¡Ð”Ð•Ð›ÐÐ¢Ð¬ - Ð‘Ð¾Ð»ÑŒÑˆÐµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ (Ð§Ð¸ÑÐ»Ð¾ bobs/Ñ‡Ð¸ÑÐ»Ð¾ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð²...)\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:30
-msgid "Internet Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:38
-msgid "Run Game"
-msgstr "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:49
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:68
-msgid "nobody"
-msgstr "Ð½Ð¸ÐºÐ¾Ð³Ð¾"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "ÐžÐ´Ð¸Ð½ Ð˜Ð³Ñ€Ð¾Ðº"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:46
-msgid "Multi Player"
-msgstr "ÐœÐ½Ð¾Ð³Ð¾Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÐ°Ñ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:54
-msgid "Editor"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:67
-msgid "Exit Game"
-msgstr "Ð’Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¸Ð³Ñ€Ñ‹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:71
-msgid "(C) 2002-2006 by the Widelands Development Team"
-msgstr "(C) 2002-2006 by the Widelands Development Team"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
-msgid "Lobby"
-msgstr "Lobby "
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:178
-#, c-format
-msgid "User %s is using \"%s\" in room \"%s\"\n"
-msgstr "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ %s Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚  \"%s\" Ð¿Ð¾Ð´ Ð·Ð°Ð¿Ð¸ÑÑŒÑŽ \"%s\"\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:215
-#, c-format
-msgid "User %s has entered the room %s !\n"
-msgstr "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ %s Ð²Ð¾ÑˆÐµÐ» Ð¿Ð¾Ð´ Ð¸Ð¼ÐµÐ½ÐµÐ¼ %s !\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:215
-#, c-format
-msgid "User %s has left the room %s !\n"
-msgstr "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ %s Ð²Ñ‹ÑˆÐµÐ» Ð¸Ð· Ð·Ð°Ð¿Ð¸ÑÐ¸ %s !\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:230
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:241
-msgid "Critical Connection Error!"
-msgstr "ÐšÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ° Ð¾ÑˆÐ¸Ð±ÐºÐ° ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:241
-msgid "Server disconnected unexpectedly!"
-msgstr "Ð¡ÐµÑ€Ð²ÐµÑ€ Ð½ÐµÐ¾Ð¶Ð¸Ð´Ð°Ð½Ð½Ð¾ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡Ð¸Ð»ÑÑ!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:47
-msgid "Choose saved game!"
-msgstr "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð½ÑƒÑŽ Ð¸Ð³Ñ€Ñƒ!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:70
-msgid "Gametime:"
-msgstr "Ð’Ñ€ÐµÐ¼Ñ Ð¸Ð³Ñ€Ñ‹: "
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:39
-msgid "Tutorial Campaign: A new Kingdom"
-msgstr "ÐžÐ±ÑƒÑ‡Ð°ÑŽÑ‰Ð°Ñ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ñ: ÐÐ¾Ð²Ð¾Ð¹ ÐšÐ¾Ñ€Ð¾Ð»ÐµÐ²ÑÑ‚Ð²Ð¾"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:47
-msgid "Mission 1: Eyes in the Darkness - Game Basics"
-msgstr "ÐœÐ¸ÑÑÐ¸Ñ 1: Ð“Ð»Ð°Ð·Ð° Ð²Ð¾ Ñ‚ÑŒÐ¼Ðµ - ÐžÑÐ½Ð¾Ð²Ñ‹ Ð¸Ð³Ñ€Ñ‹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:51
-msgid ""
-"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
-msgstr ""
-"ÐœÐ¸ÑÑÐ¸Ñ 2: ÐœÐµÑÑ‚Ð¾ Ñ‡Ñ‚Ð¾ Ð¼Ñ‹ Ð½Ð°Ð·Ð¾Ð²ÐµÐ¼ Ð´Ð¾Ð¼Ð¾Ð¼ - Ð¨Ð°Ñ…Ñ‚Ñ‹, Ð Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð¸Ðµ Ð³Ñ€Ð°Ð½Ð¸Ñ†, ÐŸÑ€Ð¾Ð´Ð²Ð¸Ð½ÑƒÑ‚Ð¾Ðµ "
-"Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:31
-msgid "Single Player Menu"
-msgstr "ÐœÐµÐ½ÑŽ ÐžÐ´Ð¸Ð½Ð¾Ñ‡Ð½Ð¾Ð¹ Ð¸Ð³Ñ€Ñ‹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:39
-#, fuzzy
-msgid "New Game"
-msgstr "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:43
-msgid "Tutorial Campaign"
-msgstr "ÐžÐ±ÑƒÑ‡Ð°ÑŽÑ‰Ð°Ñ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ñ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:49
-msgid "Launch Game"
-msgstr "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:61
-msgid "Start game"
-msgstr "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ð¸Ð³Ñ€Ñƒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:69
-msgid "Select map"
-msgstr "Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ñƒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:131
-msgid "(no map)"
-msgstr "(Ð½ÐµÑ‚ ÐºÐ°Ñ€Ñ‚Ñ‹)"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
-msgid "Begin Network Game"
-msgstr "ÐÐ°Ñ‡Ð°Ñ‚ÑŒ ÑÐµÑ‚ÐµÐ²ÑƒÑŽ Ð¸Ð³Ñ€Ñƒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:47
-msgid "Join a Game"
-msgstr "ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð¸Ð³Ñ€Ðµ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:51
-msgid "Host a New Game"
-msgstr "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ ÑÐµÑ€Ð²ÐµÑ€ Ð½Ð¾Ð²Ð¾Ð¹ Ð¸Ð³Ñ€Ñ‹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:55
-msgid "Play in Internet"
-msgstr "Ð˜Ð³Ñ€Ð° Ð² Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:73
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:221
-msgid "LAN games"
-msgstr "Ð˜Ð³Ñ€Ñ‹ Ð² Ð¡ÐµÑ‚Ð¸ LAN"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:78
-msgid "Host"
-msgstr "Ð¡ÐµÑ€Ð²ÐµÑ€"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:80
-msgid "State"
-msgstr "Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:137
-msgid "Open"
-msgstr "ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
-msgid "Closed"
-msgstr "Ð—Ð°ÐºÑ€Ñ‹Ñ‚Ð¾"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:214
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:236
-msgid "GGZ games"
-msgstr "GGZ Ð¸Ð³Ñ€Ñ‹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:57
-msgid "Choose your map!"
-msgstr "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð²Ð°ÑˆÑƒ ÐºÐ°Ñ€Ñ‚Ñƒ!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:61
-msgid "Load Map as scenario: "
-msgstr "Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ñƒ ÐºÐ°Ðº ÑÑ†ÐµÐ½Ð°Ñ€Ð¸Ð¹: "
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:92
-msgid "Players:"
-msgstr "Ð˜Ð³Ñ€Ð¾ÐºÐ¸:"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:94
-msgid "Descr:"
-msgstr "ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ:"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:50
-msgid "General Options"
-msgstr "ÐžÐ±Ñ‰Ð¸Ðµ ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
-msgid "Apply"
-msgstr "ÐŸÑ€Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:67
-msgid "Fullscreen"
-msgstr "Ð’Ð¾ Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:72
-msgid "Grab Input"
-msgstr "Ð—Ð°Ñ…Ð²Ð°Ñ‚ Ð²Ð²Ð¾Ð´Ð°"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:77
-msgid "Enable Music"
-msgstr "ÐœÑƒÐ·Ñ‹ÐºÐ°"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:86
-msgid "Enable Sound"
-msgstr "Ð—Ð²ÑƒÐº"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:94
-msgid "In-game resolution"
-msgstr "Ð Ð°Ð·Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ Ð² Ð¸Ð³Ñ€Ðµ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:145
-msgid "Language"
-msgstr "Ð¯Ð·Ñ‹Ðº"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:147
-msgid "System default language"
-msgstr "Ð¯Ð·Ñ‹Ðº ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:157
-msgid "In-game Options"
-msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð˜Ð³Ñ€Ñ‹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:163
-msgid "Use single Watchwindow Mode"
-msgstr "Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð¾ÐºÐ¾Ð½Ð½Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼ "
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:166
-msgid "Show buildings area preview"
-msgstr "ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð¿Ñ€ÐµÐ´Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ð·Ð¾Ð½Ñ‹ ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ð¹"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:169
-msgid "Snap windows only when overlapping"
-msgstr "Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ñ‚ÑŒ Ð¾ÐºÐ½Ð° Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:172
-msgid "Dock windows to edges"
-msgstr "Ð¿Ñ€Ð¸Ð²ÑÐ·Ð°Ñ‚ÑŒ Ð¾ÐºÐ½Ð° Ðº ÐºÑ€Ð°ÑÐ¼"
+msgstr " СДЕЛАТЬ - Больше информации (Число bobs/число товаров...)\n"
 
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
-msgstr "ÐÐµÑ‚ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ"
+msgstr "Нет описания"
+
+#~ msgid "New Trigger Menu"
+#~ msgstr "Новое меню Тригера"
+
+#~ msgid "Time Trigger Options"
+#~ msgstr "Настройки временного тригера"
+
+#~ msgid "Event Option Menu"
+#~ msgstr "Меню настроек событий"
+
+#~ msgid "New Event Menu"
+#~ msgstr "Новое меню Событий"
+
+#~ msgid "Edit Event Chain Menu"
+#~ msgstr "Редактировать меню цепочки событий"
+
+#~ msgid "Allowed Buildings Menu"
+#~ msgstr "Доступное меню строений"
+
+#~ msgid "Set Tool Size Menu"
+#~ msgstr "Настроить размер меню инструментов"
 
 #~ msgid ""
 #~ "This Trigger waits a certain time before it is true. It can be configured "
 #~ "to constantly restart itself when the wait time is over for repeating "
 #~ "events"
 #~ msgstr ""
-#~ "Ð­Ñ‚Ð¾Ñ‚ Ð¢Ñ€Ð¸Ð³ÐµÑ€ Ð¶Ð´ÐµÑ‚ Ð½ÐµÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð²Ñ€ÐµÐ¼Ñ Ð¿ÐµÑ€ÐµÐ´ Ð¿ÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸ÐµÐ¼ Ð² true. ÐžÐ½ Ð¼Ð¾Ð¶ÐµÑ‚ "
-#~ "Ð±Ñ‹Ñ‚ÑŒ ÑÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð¸Ñ€Ð¾Ð²Ð°Ð½ Ð´Ð»Ñ Ð¿Ð¾ÑÑ‚Ð¾ÑÐ½Ð½Ð¾Ð³Ð¾ Ð¿ÐµÑ€ÐµÐ·Ð°Ð¿ÑƒÑÐºÐ° ÑÐ°Ð¼Ð¾Ð³Ð¾ ÑÐµÐ±Ñ ÐºÐ¾Ð³Ð´Ð° Ð²Ñ€ÐµÐ¼Ñ "
-#~ "Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ Ð·Ð°ÐºÐ°Ð½Ñ‡Ð¸Ð²Ð°ÐµÑ‚ÑÑ Ð´Ð»Ñ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑŽÑ‰Ð¸Ñ…ÑÑ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹"
+#~ "Этот Тригер ждет некоторое время перед переключением в true. Он может "
+#~ "быть сконфигурирован для постоянного перезапуска самого себя когда время "
+#~ "ожидания заканчивается для повторяющихся событий"
 
 #~ msgid ""
 #~ "This Trigger never changes its state by itself. It is useful to pass it "
 #~ "to some event which changes triggers"
 #~ msgstr ""
-#~ "Ð­Ñ‚Ð¾Ñ‚ Ð¢Ñ€Ð¸Ð³ÐµÑ€ Ð½Ð¸ÐºÐ¾Ð³Ð´Ð° Ð½Ðµ Ð¸Ð·Ð¼ÐµÐ½ÑÐµÑ‚ ÑÐ²Ð¾Ðµ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ ÑÐ°Ð¼Ð¾ÑÑ‚Ð¾ÑÑ‚ÐµÐ»ÑŒÐ½Ð¾. ÐžÐ½ Ð¿Ð¾Ð»ÐµÐ·ÐµÐ½ "
-#~ "Ð´Ð»Ñ Ð² ÑÐ¾Ð±Ñ‹Ñ‚Ð¸ÑÑ…, Ð¸Ð·Ð¼ÐµÐ½ÑÑŽÑ‰Ð¸Ñ… ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ñ‚Ñ€Ð¸Ð³ÐµÑ€Ð¾Ð²"
+#~ "Этот Тригер никогда не изменяет свое состояние самостоятельно. Он полезен "
+#~ "для в событиях, изменяющих состояние тригеров"
 
 #~ msgid ""
 #~ "This trigger gets set when a number of a building type of one player is "
 #~ "available in an area."
 #~ msgstr ""
-#~ "Ð­Ñ‚Ð¾Ñ‚ Ñ‚Ñ€Ð¸Ð³ÐµÑ€ Ð½Ð°Ñ‡Ð¸Ð½Ð°ÐµÑ‚ Ð¸Ð·Ð¼ÐµÐ½ÑÑ‚ÑŒÑÑ, ÐºÐ¾Ð³Ð´Ð° Ð² Ð´Ð°Ð½Ð½Ð¾Ð¹ Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð¾Ð´Ð¸Ð½ Ð¸Ð· Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð² "
-#~ "Ð¼Ð¾Ð¶ÐµÑ‚ ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ Ð·Ð´Ð°Ð½Ð¸Ñ."
+#~ "Этот тригер начинает изменяться, когда в данной области один из игроков "
+#~ "может строить здания."
 
 #~ msgid "greenland"
-#~ msgstr "Ð»ÑƒÐ³Ð°"
+#~ msgstr "луга"
 
 #~ msgid "blackland"
-#~ msgstr "Ñ‡ÐµÑ€Ð½Ñ‹Ðµ Ð·ÐµÐ¼Ð»Ð¸"
+#~ msgstr "черные земли"
 
 #~ msgid "winterland"
-#~ msgstr "Ð¼ÐµÑ€Ð·Ð»Ð¾Ñ‚Ð°"
+#~ msgstr "мерзлота"
 
 #~ msgid ""
 #~ "This Event shows a messagebox. The user can choose to make it modal/non-"
 #~ "modal and to add a picture. Events can be assigned to each button to use "
 #~ "this as a Choose Dialog for the user"
 #~ msgstr ""
-#~ "Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ñ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÑŽÑ‚ÑÑ Ð² Ð¾ÐºÐ½Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹. ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð¼Ð¾Ð¶ÐµÑ‚ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ ÑÑ‚Ð¾ "
-#~ "Ð¾ÐºÐ½Ð¾ Ð¼Ð¾Ð´Ð°Ð»ÑŒÐ½Ñ‹Ð¼/Ð½ÐµÐ¼Ð¾Ð´Ð°Ð»ÑŒÐ½Ñ‹Ð¼ Ð¸ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ. Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ñ Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ "
-#~ "ÑÐ²ÑÐ·Ð°Ð½Ñ‹ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸ Ð´Ð»Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð² Ð”Ð¸Ð°Ð»Ð¾Ð³Ðµ Ð’Ñ‹Ð±Ð¾Ñ€Ð° Ð´Ð»Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ."
+#~ "События показываются в окне сообщений. Пользователь может сделать это "
+#~ "окно модальным/немодальным и добавить картинку. События могут быть "
+#~ "связаны с кнопками для использования в Диалоге Выбора для пользователя."
 
 #~ msgid "This Event centers the Players View on a certain field"
-#~ msgstr "Ð­Ñ‚Ð¾ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ Ñ†ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÐµÑ‚ ÑÐºÑ€Ð°Ð½ Ð½Ð° Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¼ Ð¿Ð¾Ð»Ðµ"
+#~ msgstr "Это событие центрирует экран на текущем поле"
 
 #~ msgid ""
 #~ "This Event makes a user definable part of the map visible for a "
 #~ "selectable user"
 #~ msgstr ""
-#~ "Ð­Ñ‚Ð¾ Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ðµ Ð´ÐµÐ»Ð°ÐµÑ‚ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð½ÑƒÑŽ Ñ‡Ð°ÑÑ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ñ‹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð²Ð¸Ð´Ð¸Ð¼Ð¾Ð¹ Ð´Ð»Ñ "
-#~ "Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ"
+#~ "Это Событие делает определенную часть карты пользователя видимой для "
+#~ "выбранного пользователя"
 
 #~ msgid ""
 #~ "This Event conquers a user definable part of the map for one player if "
 #~ "there isn't a player already there"
 #~ msgstr ""
-#~ "Ð­Ñ‚Ð¾ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ Ð·Ð°Ñ…Ð²Ð°Ñ‚Ñ‹Ð²Ð°ÐµÑ‚ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð½ÑƒÑŽ Ñ‡Ð°ÑÑ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ñ‹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð´Ð»Ñ Ð¾Ð´Ð½Ð¾Ð³Ð¾ "
-#~ "Ð¸Ð³Ñ€Ð¾ÐºÐ°, ÐµÑÐ»Ð¸ Ñ‚Ð°Ð¼ ÐµÑ‰Ðµ Ð½ÐµÑ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ°"
+#~ "Это событие захватывает определенную часть карты пользователя для одного "
+#~ "игрока, если там еще нет игрока"
 
 #~ msgid ""
 #~ "Allows/Disables a certain building for a player so that it can be build "
 #~ "or it can't any longer"
 #~ msgstr ""
-#~ "Ð Ð°Ð·Ñ€ÐµÑˆÐ°ÐµÑ‚/Ð·Ð°Ð¿Ñ€ÐµÑ‰Ð°ÐµÑ‚ Ñ‚ÐµÐºÑƒÑ‰ÐµÐµ ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð¾ Ð´Ð»Ñ Ð¸Ð³Ñ€Ð¾ÐºÐ°, Ñ‚Ð°Ðº Ñ‡Ñ‚Ð¾ Ð¾Ð½ Ð¼Ð¾Ð¶ÐµÑ‚ "
-#~ "Ð¸Ð»Ð¸ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ."
+#~ "Разрешает/запрещает текущее строительство для игрока, так что он может "
+#~ "или не может строить."
 
 #~ msgid "Manually set a Null Trigger to a given value"
-#~ msgstr "Ð’Ñ€ÑƒÑ‡Ð½ÑƒÑŽ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð² Ð½ÑƒÐ»ÐµÐ²Ð¾Ð¹ Ñ‚Ñ€Ð¸Ð³ÐµÑ€ Ð´Ð°Ð½Ð½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ"
+#~ msgstr "Вручную установить в нулевой тригер данное значение"
 
 #~ msgid "Single Map"
-#~ msgstr "ÐžÑ‚Ð´ÐµÐ»ÑŒÐ½Ð°Ñ ÐšÐ°Ñ€Ñ‚Ð°"
+#~ msgstr "Отдельная Карта"
 
 #~ msgid "Unhide Objective"
-#~ msgstr "ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ"
+#~ msgstr "Показать задание"
 
 #~ msgid "Hide or unhide an objective so that the player can see it"
-#~ msgstr "Ð¡Ð¿Ñ€Ð°Ñ‚ÑÑ‚ÑŒ Ð¸Ð»Ð¸ Ð¿Ð¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ"
+#~ msgstr "Спратять или показать задания"
 
 #~ msgid "Options Menu"
-#~ msgstr "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸"
+#~ msgstr "Настройки"
