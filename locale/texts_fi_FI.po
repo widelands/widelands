@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -15,19 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../txts/COPYING:1
+#: ../txts/copying:1
 msgid "License"
 msgstr ""
 
-#: ../txts/COPYING:3
+#: ../txts/copying:3
 msgid "GNU general public licence"
 msgstr ""
 
-#: ../txts/COPYING:6
-msgid "Version 2, June 1991</p>"
+#: ../txts/copying:6
+msgid "Version 2, June 1991<br></p></rt>"
 msgstr ""
 
-#: ../txts/COPYING:9
+#: ../txts/copying:8
 msgid ""
 "Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
 "Suite 330, Boston, MA  02111-1307  USA<br>Everyone is permitted to copy and "
@@ -35,11 +35,11 @@ msgid ""
 "allowed.<br>"
 msgstr ""
 
-#: ../txts/COPYING:12
+#: ../txts/copying:11
 msgid "Preamble"
 msgstr ""
 
-#: ../txts/COPYING:16
+#: ../txts/copying:14
 msgid ""
 "The licenses for most software are designed to take away your freedom to "
 "share and change it. By contrast, the GNU General Public License is intended "
@@ -77,13 +77,13 @@ msgid ""
 "terms and conditions for copying, distribution and modification follow.<br>"
 msgstr ""
 
-#: ../txts/COPYING:19
+#: ../txts/copying:17
 msgid ""
 "GNU general public license terms and conditions for copying, distribution "
 "and modification"
 msgstr ""
 
-#: ../txts/COPYING:22
+#: ../txts/copying:20
 msgid ""
 "0. This License applies to any program or other work which contains a notice "
 "placed by the copyright holder saying it may be distributed under the terms "
@@ -101,7 +101,7 @@ msgid ""
 "what the Program does.<br>"
 msgstr ""
 
-#: ../txts/COPYING:24
+#: ../txts/copying:22
 msgid ""
 "1. You may copy and distribute verbatim copies of the Program's source code "
 "as you receive it, in any medium, provided that you conspicuously and "
@@ -113,7 +113,7 @@ msgid ""
 "option offer warranty protection in exchange for a fee.<br>"
 msgstr ""
 
-#: ../txts/COPYING:26
+#: ../txts/copying:24
 msgid ""
 "2. You may modify your copy or copies of the Program or any portion of it, "
 "thus forming a work based on the Program, and copy and distribute such "
@@ -135,7 +135,7 @@ msgid ""
 "print an announcement.)"
 msgstr ""
 
-#: ../txts/COPYING:29
+#: ../txts/copying:27
 msgid ""
 "These requirements apply to the modified work as a whole. If identifiable "
 "sections of that work are not derived from the Program, and can be "
@@ -154,7 +154,7 @@ msgid ""
 "medium does not bring the other work under the scope of this License."
 msgstr ""
 
-#: ../txts/COPYING:32
+#: ../txts/copying:30
 msgid ""
 "3. You may copy and distribute the Program (or a work based on it, under "
 "Section 2) in object code or executable form under the terms of Sections 1 "
@@ -174,7 +174,7 @@ msgid ""
 "above.)"
 msgstr ""
 
-#: ../txts/COPYING:35
+#: ../txts/copying:33
 msgid ""
 "The source code for a work means the preferred form of the work for making "
 "modifications to it.  For an executable work, complete source code means all "
@@ -187,7 +187,7 @@ msgid ""
 "component itself accompanies the executable."
 msgstr ""
 
-#: ../txts/COPYING:38
+#: ../txts/copying:36
 msgid ""
 "If distribution of executable or object code is made by offering access to "
 "copy from a designated place, then offering equivalent access to copy the "
@@ -196,7 +196,7 @@ msgid ""
 "object code."
 msgstr ""
 
-#: ../txts/COPYING:41
+#: ../txts/copying:39
 msgid ""
 "4. You may not copy, modify, sublicense, or distribute the Program except as "
 "expressly provided under this License.  Any attempt otherwise to copy, "
@@ -206,7 +206,7 @@ msgid ""
 "terminated so long as such parties remain in full compliance."
 msgstr ""
 
-#: ../txts/COPYING:44
+#: ../txts/copying:42
 msgid ""
 "5. You are not required to accept this License, since you have not signed "
 "it.  However, nothing else grants you permission to modify or distribute the "
@@ -217,7 +217,7 @@ msgid ""
 "distributing or modifying the Program or works based on it."
 msgstr ""
 
-#: ../txts/COPYING:47
+#: ../txts/copying:45
 msgid ""
 "6. Each time you redistribute the Program (or any work based on the "
 "Program), the recipient automatically receives a license from the original "
@@ -227,7 +227,7 @@ msgid ""
 "for enforcing compliance by third parties to this License."
 msgstr ""
 
-#: ../txts/COPYING:50
+#: ../txts/copying:48
 msgid ""
 "7. If, as a consequence of a court judgment or allegation of patent "
 "infringement or for any other reason (not limited to patent issues), "
@@ -243,14 +243,14 @@ msgid ""
 "Program."
 msgstr ""
 
-#: ../txts/COPYING:53
+#: ../txts/copying:51
 msgid ""
 "If any portion of this section is held invalid or unenforceable under any "
 "particular circumstance, the balance of the section is intended to apply and "
 "the section as a whole is intended to apply in other circumstances."
 msgstr ""
 
-#: ../txts/COPYING:56
+#: ../txts/copying:54
 msgid ""
 "It is not the purpose of this section to induce you to infringe any patents "
 "or other property right claims or to contest validity of any such claims; "
@@ -263,13 +263,13 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../txts/COPYING:59
+#: ../txts/copying:57
 msgid ""
 "This section is intended to make thoroughly clear what is believed to be a "
 "consequence of the rest of this License."
 msgstr ""
 
-#: ../txts/COPYING:62
+#: ../txts/copying:60
 msgid ""
 "8. If the distribution and/or use of the Program is restricted in certain "
 "countries either by patents or by copyrighted interfaces, the original "
@@ -280,7 +280,7 @@ msgid ""
 "written in the body of this License."
 msgstr ""
 
-#: ../txts/COPYING:65
+#: ../txts/copying:63
 msgid ""
 "9. The Free Software Foundation may publish revised and/or new versions of "
 "the General Public License from time to time.  Such new versions will be "
@@ -294,7 +294,7 @@ msgid ""
 "by the Free Software Foundation."
 msgstr ""
 
-#: ../txts/COPYING:68
+#: ../txts/copying:66
 msgid ""
 "10. If you wish to incorporate parts of the Program into other free programs "
 "whose distribution conditions are different, write to the author to ask for "
@@ -305,11 +305,11 @@ msgid ""
 "promoting the sharing and reuse of software generally."
 msgstr ""
 
-#: ../txts/COPYING:72
+#: ../txts/copying:70
 msgid "No warranty"
 msgstr ""
 
-#: ../txts/COPYING:75
+#: ../txts/copying:74
 msgid ""
 "11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR "
 "THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN "
@@ -322,7 +322,7 @@ msgid ""
 "CORRECTION."
 msgstr ""
 
-#: ../txts/COPYING:78
+#: ../txts/copying:77
 msgid ""
 "12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING "
 "WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR "
@@ -335,22 +335,22 @@ msgid ""
 "POSSIBILITY OF SUCH DAMAGES."
 msgstr ""
 
-#: ../txts/COPYING:83
+#: ../txts/copying:82
 msgid "End of Terms and Conditions"
 msgstr ""
 
-#: ../txts/COPYING:86
+#: ../txts/copying:86
 msgid "How to Apply These Terms to Your New Programs"
 msgstr ""
 
-#: ../txts/COPYING:89
+#: ../txts/copying:90
 msgid ""
 "If you develop a new program, and you want it to be of the greatest possible "
 "use to the public, the best way to achieve this is to make it free software "
 "which everyone can redistribute and change under these terms."
 msgstr ""
 
-#: ../txts/COPYING:92
+#: ../txts/copying:93
 msgid ""
 "To do so, attach the following notices to the program.  It is safest to "
 "attach them to the start of each source file to most effectively convey the "
@@ -358,7 +358,7 @@ msgid ""
 "and a pointer to where the full notice is found."
 msgstr ""
 
-#: ../txts/COPYING:95
+#: ../txts/copying:96
 msgid ""
 "<one line to give the program's name and a brief idea of what it does."
 "><br>Copyright (C) <year>  <name of author><br><br>This program is free "
@@ -375,7 +375,7 @@ msgid ""
 "contact you by electronic and paper mail."
 msgstr ""
 
-#: ../txts/COPYING:97
+#: ../txts/copying:98
 msgid ""
 "If the program is interactive, make it output a short notice like "
 "this<br>when it starts in an interactive mode:<br><br>Gnomovision version "
@@ -385,7 +385,7 @@ msgid ""
 "for details."
 msgstr ""
 
-#: ../txts/COPYING:99
+#: ../txts/copying:100
 msgid ""
 "The hypothetical commands `show w' and `show c' should show the appropriate "
 "parts of the General Public License.  Of course, the commands you use may be "
@@ -396,7 +396,7 @@ msgid ""
 "sample; alter the names:"
 msgstr ""
 
-#: ../txts/COPYING:101
+#: ../txts/copying:102
 msgid ""
 "Yoyodyne, Inc., hereby disclaims all copyright interest in the "
 "program<br>`Gnomovision' (which makes passes at compilers) written by James "
@@ -404,7 +404,7 @@ msgid ""
 "Vice"
 msgstr ""
 
-#: ../txts/COPYING:103
+#: ../txts/copying:104
 msgid ""
 "This General Public License does not permit incorporating your program into "
 "proprietary programs.  If your program is a subroutine library, you may "
@@ -413,211 +413,8 @@ msgid ""
 "License instead of this License."
 msgstr ""
 
-#: ../txts/README:1
-msgid "README"
-msgstr ""
-
-#: ../txts/README:5
-msgid "an open source strategy game"
-msgstr ""
-
-#: ../txts/README:9 ../txts/editor_readme:6
-msgid "Introduction"
-msgstr ""
-
-#: ../txts/README:13
-msgid ""
-"Widelands is a strategy game aiming for gameplay similar to Settlers II by "
-"BlueByte.<br>In this game, you start out on a small piece of land with "
-"nothing more thana few of useful resources. Using those, you can build "
-"yourself an empire with many thousands of inhabitants. On your way towards "
-"this goal, you will have to build up an economic infrastructure, explore the "
-"lands around you and face enemies who are trying to rule the world just like "
-"you do."
-msgstr ""
-
-#: ../txts/README:16
-msgid "Check out the Widelands project homepage:"
-msgstr ""
-
-#: ../txts/README:22
-msgid ""
-"Widelands is licensed under the GNU General Public License (GPL). For more "
-"information, see the file 'COPYING' or select the License button from the "
-"main menu."
-msgstr ""
-
-#: ../txts/README:27
-msgid "Running the game"
-msgstr ""
-
-#: ../txts/README:31
-msgid ""
-"Widelands requires the SDL and SDL_image libraries to operate. Windows "
-"versions of these libraries are included in the binary release. Most Linux "
-"distributions offer precompiled packages for both libraries as well; please "
-"refer to your distribution documentation to find out how to install them if "
-"necessary. When all else fails, you can still compile them from source. SDL "
-"can be obtained from http://www.libsdl.org/, SDL_image can be obtained from "
-"http://www.libsdl.org/projects/SDL_image/"
-msgstr ""
-
-#: ../txts/README:34
-msgid ""
-"Once everything is set up, just start the Widelands executable in order to "
-"run the game."
-msgstr ""
-
-#: ../txts/README:37
-msgid ""
-"If the game fails to start right away even though both Widelands and the "
-"required libraries are properly installed, please make sure that the program "
-"working directory is set to the directory the Widelands executable resides "
-"in. On Linux, this is best done by launching Widelands through a shell: "
-msgstr ""
-
-#: ../txts/README:43
-msgid ""
-"On Windows, you will have to check the shortcut settings if you start "
-"Widelands via a shortcut."
-msgstr ""
-
-#: ../txts/README:48
-msgid "Status"
-msgstr ""
-
-#: ../txts/README:52
-msgid ""
-"Widelands is now on the step of being playable, but to become more playable "
-"volunteers are needed. Your contributions (yes, I'm talking to you) are "
-"required, especially in the area of graphics, to make Widelands a better "
-"game."
-msgstr ""
-
-#: ../txts/README:57
-msgid "Keyboard shortcuts (in-game)"
-msgstr ""
-
-#: ../txts/README:61
-msgid "SPACE       Toggles build-help"
-msgstr ""
-
-#: ../txts/README:63
-msgid "M               Toggle minimap"
-msgstr ""
-
-#: ../txts/README:65
-msgid "C               Toggle census"
-msgstr ""
-
-#: ../txts/README:67
-msgid "S               Toggle statistics"
-msgstr ""
-
-#: ../txts/README:69
-msgid "F               Toggle Fullscreen"
-msgstr ""
-
-#: ../txts/README:72
-msgid "PAGEUP         Increase gamespeed"
-msgstr ""
-
-#: ../txts/README:74
-msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
-
-#: ../txts/README:77
-msgid "F5           Reveals the entire map"
-msgstr ""
-
-#: ../txts/README:79
-msgid "F10         Quit the game immediately"
-msgstr ""
-
-#: ../txts/README:81
-msgid "F11         Take a screenshot"
-msgstr ""
-
-#: ../txts/README:86
-msgid "Reporting Bugs"
-msgstr ""
-
-#: ../txts/README:90
-msgid ""
-"If you want to report bugs, please send your report to the mailing list, "
-"<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
-"page:"
-msgstr ""
-
-#: ../txts/README:95
-msgid "Please provide enough background information. Tell us:"
-msgstr ""
-
-#: ../txts/README:98
-msgid ""
-"- what version of Widelands did you use (i.e. the build number, or whether "
-"it's<br>a custom compile from CVS)"
-msgstr ""
-
-#: ../txts/README:100
-msgid "- how to reproduce the bug"
-msgstr ""
-
-#: ../txts/README:102
-msgid "- which map you were playing"
-msgstr ""
-
-#: ../txts/README:104
-msgid ""
-"- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
-"the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
-"record<br>your sessions in case a bug surfaces. For more explanation, see "
-"below."
-msgstr ""
-
-#: ../txts/README:109
-msgid "Creating a Session Record</p>"
-msgstr ""
-
-#: ../txts/README:112
-msgid ""
-"Widelands can record all your keypresses and mouse movements to a file. It "
-"can then replay an entire session from starting the game to exiting it. This "
-"is really helpful for debugging problems."
-msgstr ""
-
-#: ../txts/README:115
-msgid ""
-"To create a session record, start the game with the --record parameter. On "
-"Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
-msgstr ""
-
-#: ../txts/README:118
-msgid ""
-"On Windows, create a shortcut to the file widelands.exe (right-click on "
-"widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
-"click on the newly created shortcut and choose Properties). The Target field "
-"should read something like c:\\games\\widelands\\widelands.exe. Change this "
-"to c:\\games\\widelands\\widelands.exe --record=filename.rec."
-msgstr ""
-
-#: ../txts/README:121
-msgid ""
-"A binary file called filename.rec will be created. To play it back, perform "
-"the same steps as outlined above, but replace --record with --playback."
-msgstr ""
-
-#: ../txts/README:124
-msgid ""
-"Note that while recorded files are platform independent, they generally "
-"won't work across different versions of Widelands, because the user "
-"interface and the order in which low-level functions can be called may "
-"change between versions. Session records are not intended to serve as demo "
-"files; they are mostly a debugging tool which helps us to track down bugs."
-msgstr ""
-
-#: ../txts/developers:3
-msgid "Devlopment"
+#: ../txts/developers:1
+msgid "Development"
 msgstr ""
 
 #: ../txts/editor_readme:1
@@ -626,6 +423,10 @@ msgstr ""
 
 #: ../txts/editor_readme:3
 msgid "README for the Editor"
+msgstr ""
+
+#: ../txts/editor_readme:6 ../txts/readme:9
+msgid "Introduction"
 msgstr ""
 
 #: ../txts/editor_readme:9
@@ -690,4 +491,182 @@ msgstr ""
 
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
+msgstr ""
+
+#: ../txts/readme:1
+msgid "README"
+msgstr ""
+
+#: ../txts/readme:5
+msgid "an open source strategy game"
+msgstr ""
+
+#: ../txts/readme:13
+msgid ""
+"Widelands is a strategy game aiming for gameplay similar to Settlers II by "
+"BlueByte.<br>In this game, you start out on a small piece of land with "
+"nothing more than a few of useful resources. Using those, you can build "
+"yourself an empire with many thousands of inhabitants. On your way towards "
+"this goal, you will have to build up an economic infrastructure, explore the "
+"lands around you and face enemies who are trying to rule the world just like "
+"you do."
+msgstr ""
+
+#: ../txts/readme:16
+msgid "Check out the Widelands project homepage:"
+msgstr ""
+
+#: ../txts/readme:22
+msgid ""
+"Widelands is licensed under the GNU General Public License (GPL). For more "
+"information, see the file 'COPYING' or select the License button from the "
+"main menu."
+msgstr ""
+
+#: ../txts/readme:27
+msgid "Status"
+msgstr ""
+
+#: ../txts/readme:31
+msgid ""
+"Widelands is now on the step of being playable, but to become more playable "
+"volunteers are needed. Your contributions (yes, I'm talking to you) are "
+"required, especially in the area of graphics, to make Widelands a better "
+"game."
+msgstr ""
+
+#: ../txts/readme:36
+msgid "Keyboard shortcuts (in-game)"
+msgstr ""
+
+#: ../txts/readme:40
+msgid "SPACE       Toggles build-help"
+msgstr ""
+
+#: ../txts/readme:42
+msgid "M               Toggle minimap"
+msgstr ""
+
+#: ../txts/readme:44
+msgid "C               Toggle census"
+msgstr ""
+
+#: ../txts/readme:46
+msgid "S               Toggle statistics"
+msgstr ""
+
+#: ../txts/readme:48
+msgid "F               Toggle Fullscreen"
+msgstr ""
+
+#: ../txts/readme:50
+msgid "Home        Center main mapview on starting location"
+msgstr ""
+
+#: ../txts/readme:53
+msgid "PAGEUP         Increase gamespeed"
+msgstr ""
+
+#: ../txts/readme:55
+msgid "PAGEDOWN    Decrease gamespeed"
+msgstr ""
+
+#: ../txts/readme:58
+msgid "F5           Reveals the entire map (only in debug-builds)"
+msgstr ""
+
+#: ../txts/readme:60
+msgid "F10         Quit the game immediately"
+msgstr ""
+
+#: ../txts/readme:62
+msgid "F11         Take a screenshot"
+msgstr ""
+
+#: ../txts/readme:67
+msgid "Online Help"
+msgstr ""
+
+#: ../txts/readme:71
+msgid ""
+"If you need documentation or help for Widelands or the Widelands Editor, be "
+"sure to visit our homepage. You can find an up to date online help at:"
+msgstr ""
+
+#: ../txts/readme:79
+msgid "Reporting Bugs"
+msgstr ""
+
+#: ../txts/readme:83
+msgid ""
+"If you want to report bugs, please send your report to the mailing list, "
+"<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
+"page:"
+msgstr ""
+
+#: ../txts/readme:88
+msgid "Please provide enough background information. Tell us:"
+msgstr ""
+
+#: ../txts/readme:91
+msgid ""
+"- what version of Widelands did you use (i.e. the build number, or whether "
+"it's<br>a custom compile from SVN)"
+msgstr ""
+
+#: ../txts/readme:93
+msgid "- how to reproduce the bug"
+msgstr ""
+
+#: ../txts/readme:95
+msgid "- which map you were playing"
+msgstr ""
+
+#: ../txts/readme:97
+msgid ""
+"- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
+"the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
+"record<br>your sessions in case a bug surfaces. For more explanation, see "
+"below."
+msgstr ""
+
+#: ../txts/readme:102
+msgid "Creating a Session Record</p>"
+msgstr ""
+
+#: ../txts/readme:105
+msgid ""
+"Widelands can record all your keypresses and mouse movements to a file. It "
+"can then replay an entire session from starting the game to exiting it. This "
+"is really helpful for debugging problems."
+msgstr ""
+
+#: ../txts/readme:108
+msgid ""
+"To create a session record, start the game with the --record parameter. On "
+"Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
+msgstr ""
+
+#: ../txts/readme:111
+msgid ""
+"On Windows, create a shortcut to the file widelands.exe (right-click on "
+"widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
+"click on the newly created shortcut and choose Properties). The Target field "
+"should read something like c:\\games\\widelands\\widelands.exe. Change this "
+"to c:\\games\\widelands\\widelands.exe --record=filename.rec."
+msgstr ""
+
+#: ../txts/readme:114
+msgid ""
+"A binary file called filename.rec will be created. To play it back, perform "
+"the same steps as outlined above, but replace --record with --playback."
+msgstr ""
+
+#: ../txts/readme:117
+msgid ""
+"Note that while recorded files are platform independent, they generally "
+"won't work across different versions of Widelands, because the user "
+"interface and the order in which low-level functions can be called may "
+"change between versions. Session records are not intended to serve as demo "
+"files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
