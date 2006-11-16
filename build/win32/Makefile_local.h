@@ -8,10 +8,10 @@
 
 
 #### Buildtype ####
-BUILD=release
+#BUILD=release
 #Build=debug-no-parachute
-#Build=debug-slow
+Build=debug-slow
 #Build=debug
 
-#### Locales (define to "yes" if locales may be build) ####
-Buildcat:=no
+#### Version #### // Needed for 'make dist'
+Version=SVN
