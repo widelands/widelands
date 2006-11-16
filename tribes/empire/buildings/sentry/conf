@@ -6,14 +6,14 @@ size=small
 buildable=yes
 buildicon=sentry_build.png
 heal_per_second=2
-conquers=6
+conquers=7
 max_soldiers=2
 max_medics=0
 heal_increase_per_medic=0
 enhanced_building=true
 
 [buildcost]
-wood=2
+wood=1
 trunk=1
 stone=1
 

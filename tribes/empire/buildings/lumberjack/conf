@@ -14,8 +14,8 @@ program=work
 
 
 [buildcost]
-trunk=1
-wood=2
+trunk=2
+wood=1
 
 [idle]
 pics=lumberjack_i_??.png  

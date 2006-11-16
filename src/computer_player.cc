@@ -79,29 +79,39 @@ void Computer_Player::late_initialization ()
 	    wares[i].consumers=0;
 	    wares[i].preciousness=0;
 	}
-/*=====================*/
+
 // Tribe specific stuff
 // ToDo: This should be defined in tribes "conf-file"
+
+//These buildings might be named different in differnt tribes
 	const char* quarry="quarry";
 	const char* lumberjack="lumberjack";
 	const char* ranger="ranger";
+	const char* granitmine="granitmine";
 
-if(tribe->m_name=="barbarians"){
-	wares[tribe->get_safe_ware_index("trunk")].preciousness=4;
-	wares[tribe->get_safe_ware_index("raw_stone")].preciousness=3;
-	wares[tribe->get_safe_ware_index("grindstone")].preciousness=2;
-	wares[tribe->get_safe_ware_index("blackwood")].preciousness=1;
-}
-else{
+//Safe-ware, listed after preciousness
+	const char* ware1="trunk";
+	const char* ware2="raw_stone";
+	const char* ware3="blackwood";
+	const char* ware4="grindstone";
+
+/*=====================*/
+//Here comes the empire
 if(tribe->m_name=="empire"){
-	wares[tribe->get_safe_ware_index("trunk")].preciousness=4;
-	wares[tribe->get_safe_ware_index("stone")].preciousness=3;
-	wares[tribe->get_safe_ware_index("wood")].preciousness=2;
-	wares[tribe->get_safe_ware_index("marble")].preciousness=1;
+ware1="stone";
+ware2="trunk";
+ware3="wood";
+ware4="marble";
+
 ranger="forester";
-	}
+granitmine="marblemine";
 }
 /*=====================*/
+
+	wares[tribe->get_safe_ware_index(ware1)].preciousness=4;
+	wares[tribe->get_safe_ware_index(ware2)].preciousness=3;
+	wares[tribe->get_safe_ware_index(ware3)].preciousness=2;
+	wares[tribe->get_safe_ware_index(ware4)].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
 	for (int i=0; i<tribe->get_nrbuildings();i++) {
@@ -127,6 +137,9 @@ ranger="forester";
 
 		// FIXME: define these properties in the building's conf file
 		if (!strcmp(bld->get_name(), quarry))
+		    bo.need_stones=true;
+
+		if (!strcmp(bld->get_name(), granitmine))
 		    bo.need_stones=true;
 
 		if (!strcmp(bld->get_name(), lumberjack))

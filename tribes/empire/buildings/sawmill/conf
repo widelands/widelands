@@ -23,9 +23,9 @@ trunk=16
 
 
 [buildcost]
-stone=2
-wood=2
-marble=1
+trunk=2
+stone=1
+wood=1
 
 [idle]
 pics=sawmill_i_??.png  # ???

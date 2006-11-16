@@ -11,7 +11,7 @@ program=work
 [buildcost]
 trunk=1
 wood=1
-stone=2
+stone=1
 
 [work]
 0=sleep 17000		# sleep the given amount of time

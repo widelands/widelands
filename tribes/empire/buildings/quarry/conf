@@ -29,8 +29,8 @@ worker=stonemason
 2=worker cut_marble
 
 [buildcost]
-wood=2
-stone=1
+trunk=2
+wood=1
 
 [idle]
 pics=quarry_i_??.png  # ???
