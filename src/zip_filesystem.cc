@@ -277,9 +277,11 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
 void *ZipFilesystem::Load(std::string fname, int * const length)
 {
    if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
-			throw FileNotFound_error("ZipFilesystem::Load", fname,
-											 "couldn't open file (from zipfile "
-													 +m_zipfilename+")");
+		throw ZipOperation_error
+			("ZipFilesystem::Load",
+			 fname,
+			 m_zipfilename,
+			 "couldn't open file from zipfile");
 
    char buffer[1024];
    int len;
