@@ -1116,8 +1116,7 @@ void ProductionSite_Window_ListWorkerWindow::think(void) {
  * fill list()
  */
 void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
-   int m_last_select=m_ls->get_selection_index();
-   if(m_last_select==-1) m_last_select=0;
+	const uint m_last_select = m_ls->get_selection_index();
    m_ls->clear();
    std::vector<Worker*>* workers=m_ps->get_workers();
 
@@ -1130,7 +1129,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 			 false,
 			 worker.get_menu_pic());
    }
-	if (static_cast<const int>(m_ls->get_nr_entries()) > m_last_select)
+	if (m_ls->get_nr_entries() > m_last_select)
       m_ls->select(m_last_select);
    else if(m_ls->get_nr_entries())
       m_ls->select(m_ls->get_nr_entries()-1);
@@ -1144,15 +1143,26 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 void ProductionSite_Window_ListWorkerWindow::update(void) {
    char buffer[250];
 
-	if (const Worker * const worker = &m_ls->get_selection()) { // FIXME always true!!
-
-      sprintf(buffer, "%s", worker->get_descname().c_str());
+	if (m_ls->has_selection()) {
+		const Worker & worker = m_ls->get_selection();
+		sprintf(buffer, "%s", worker.get_descname().c_str());
       m_type->set_text(buffer);
 
-      if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
-         sprintf(buffer, "%i/%i", worker->get_current_experience(), worker->get_needed_experience());
+		if
+			(worker.get_current_experience() != -1
+			 and
+			 worker.get_needed_experience () != -1)
+		{
+			sprintf
+				(buffer,
+				 "%i/%i",
+				 worker.get_current_experience(),
+				 worker.get_needed_experience());
          m_experience->set_text(buffer);
-	 sprintf(buffer, "%s", i18n::translate(worker->get_becomes()).c_str()); //don't use _() ! Would tag "worker->get_becomes" for translation !
+			sprintf
+				(buffer,
+				 "%s",
+				 i18n::translate(worker.get_becomes()).c_str()); //don't use _() ! Would tag "worker->get_becomes" for translation !
          m_becomes->set_text(buffer);
       } else {
          m_experience->set_text("");
