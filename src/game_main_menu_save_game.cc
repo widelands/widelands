@@ -83,6 +83,7 @@ m_parent(parent)
 		 4,
 		 &Game_Main_Menu_Save_Game::clicked_ok, this,
 		 _("OK"),
+		 std::string(),
 		 false);
 	new UI::Button<Game_Main_Menu_Save_Game>
 		(this,

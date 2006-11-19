@@ -80,6 +80,7 @@ UniqueWindow(parent,registry,400,270,_("Load Game")) {
 		 4,
 		 &Game_Main_Menu_Load_Game::clicked_ok, this,
 		 _("OK"),
+		 std::string(),
 		 false);
    new UI::Button<Game_Main_Menu_Load_Game>
 		(this,
