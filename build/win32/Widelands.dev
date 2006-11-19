@@ -97,7 +97,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=build_id.h
+FileName=..\..\src\build_id.h
 CompileCpp=1
 Folder=Options and Preferences
 Compile=1

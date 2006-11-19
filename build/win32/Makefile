@@ -196,5 +196,5 @@ tags: $(SRC) $(HEADERS)
 win32tool:
 	@echo "===> Creating icon.o for win32"
 	@$(WINDRES) -i Widelands_win.rc --input-format=rc -o icon.o -O coff
-	@-rm -rf ../../src/config.h ../../src/build_id.h
-	@cp -r ./config.h ./build_id.h ../../src
+	@-rm -rf ../../src/config.h
+	@cp -r ./config.h ../../src
