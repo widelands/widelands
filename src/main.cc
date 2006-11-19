@@ -42,7 +42,7 @@ extern "C"
 
 		return 0;
 	}
-	catch(Parameter_error &e) {
+	catch(Parameter_error &e) { //handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
 		if(g_app)

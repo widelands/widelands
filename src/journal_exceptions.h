@@ -31,7 +31,9 @@
  * be ignored.
  *
  * \todo add offset into journal file if applicable
- * \todo Replace with File*_error where appropriate
+ * \todo Rework as proposed by Erik, see filesystem_exceptions.h. Before that:
+ * Replace with File*_error where appropriate, migrate from runtime_error to
+ * logic_error (?)
  */
 class Journalfile_error : public std::runtime_error {
 public:

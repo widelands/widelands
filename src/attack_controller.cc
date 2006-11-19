@@ -65,11 +65,12 @@ uint getMaxAttackSoldiers(Game* game, Flag* flag, int player) {
    return maxAttackSoldiers;
 }
 
-AttackController::AttackController(Game* game, Flag* flag, int attacker, int defender) {
-   this->game = game;
-   this->flag = flag;
-   this->attackingPlayer = attacker;
-   this->defendingPlayer = defender;
+AttackController::AttackController(Game* _game, Flag* _flag, int _attacker,
+											  int _defender) {
+   this->game = _game;
+   this->flag = _flag;
+   this->attackingPlayer = _attacker;
+   this->defendingPlayer = _defender;
    this->totallyLaunched = 0;
 }
 
