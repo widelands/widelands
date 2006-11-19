@@ -427,58 +427,11 @@ restart:
 				ev->motion.yrel += m_mouse_internal_compy;
 				m_mouse_internal_compx=m_mouse_internal_compy=0;
 
-				if (m_input_grab)
-				{
-					float xlast = m_mouse_internal_x;
-					float ylast = m_mouse_internal_y;
+				if (m_mouse_locked) {
+					set_mouse_pos(m_mouse_x, m_mouse_y);
 
-					m_mouse_internal_x += ev->motion.xrel *
-					                      m_mouse_speed;
-					m_mouse_internal_y += ev->motion.yrel *
-					                      m_mouse_speed;
-
-					ev->motion.xrel =
-					   static_cast<const int>(m_mouse_internal_x)
-					   -
-					   static_cast<const int>(xlast);
-					ev->motion.yrel =
-					   static_cast<const int>(m_mouse_internal_y)
-					   -
-					   static_cast<const int>(ylast);
-
-					if (m_mouse_locked)
-					{
-						// mouse is locked; so don't move the cursor
-						m_mouse_internal_x = xlast;
-						m_mouse_internal_y = ylast;
-					}
-					else
-					{
-						if (m_mouse_internal_x < 0)
-							m_mouse_internal_x = 0;
-						else if (m_mouse_internal_x >= m_mouse_maxx-1)
-							m_mouse_internal_x = m_mouse_maxx-1;
-						if (m_mouse_internal_y < 0)
-							m_mouse_internal_y = 0;
-						else if (m_mouse_internal_y >= m_mouse_maxy-1)
-							m_mouse_internal_y = m_mouse_maxy-1;
-					}
-
-					ev->motion.x = static_cast<const int>(m_mouse_internal_x);
-					ev->motion.y = static_cast<const int>(m_mouse_internal_y);
-				}
-				else
-				{
-					int xlast = m_mouse_x;
-					int ylast = m_mouse_y;
-
-					if (m_mouse_locked)
-					{
-						set_mouse_pos(xlast, ylast);
-
-						ev->motion.x = xlast;
-						ev->motion.y = ylast;
-					}
+					ev->motion.x = m_mouse_x;
+					ev->motion.y = m_mouse_y;
 				}
 
 				break;
@@ -687,7 +640,6 @@ void WLApplication::set_mouse_pos(int x, int y)
 	m_mouse_internal_x = x;
 	m_mouse_internal_y = y;
 
-	if (!m_input_grab)
 		do_warp_mouse(x, y); // sync mouse positions
 }
 
@@ -1183,7 +1135,6 @@ void WLApplication::mainmenu()
  */
 void WLApplication::mainmenu_singleplayer()
 {
-	m_game = new Game;
 
 	for (bool done = false; not done;) {
 		int code;
@@ -1195,6 +1146,10 @@ void WLApplication::mainmenu_singleplayer()
 		//  This is the code returned by UI::Panel::run() when the panel is dying.
 		//  Make sure that the program exits when the window manager says so.
 		assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
+
+		if (code == Fullscreen_Menu_SinglePlayer::Back) break;
+
+		m_game = new Game;
 
 		switch(code) {
 		case Fullscreen_Menu_SinglePlayer::New_Game:
@@ -1218,15 +1173,12 @@ void WLApplication::mainmenu_singleplayer()
 				if (filename) m_game->run_splayer_map_direct(filename, true);
 			}
 			break;
-
-		case Fullscreen_Menu_SinglePlayer::Back:
-			done = true;
-			break;
 		}
+
+		delete m_game;
+		m_game = 0;
 	}
 
-	delete m_game;
-	m_game=0;
 }
 
 /**
