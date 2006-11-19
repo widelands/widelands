@@ -27,6 +27,8 @@
 
 #include <SDL_types.h>
 
+#include <string>
+
 class RenderTarget;
 
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
