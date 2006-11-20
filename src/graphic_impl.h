@@ -133,7 +133,9 @@ class Surface {
 			static_cast<Uint8 * const>(m_surface->pixels) +
 			y * m_surface->pitch + x * bytes_per_pixel;
 		switch (bytes_per_pixel) {
+		case 1: return *pix; //  Maybe needed for save_png.
 		case 2: return *reinterpret_cast<const Uint16 * const>(pix);
+		case 3: //  Needed for save_png.
 		case 4: return *reinterpret_cast<const Uint32 * const>(pix);
 		}
          assert(0);
