@@ -68,6 +68,7 @@ public:
 
 	const char * get_name    () const throw () {return m_name    .c_str();}
 	const char * get_descname() const throw () {return m_descname.c_str();}
+	const char * get_helptext() const throw () {return m_helptext.c_str();}
 
 private:
 	void parse(const char *directory, Profile *prof);

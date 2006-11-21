@@ -89,6 +89,7 @@ class Interactive_Player : public Interactive_Base {
 		void exit_game_btn();
 		void main_menu_btn();
 		void toggle_buildhelp();
+		void open_encyclopedia();
 
 		void field_action();
 
@@ -108,7 +109,7 @@ class Interactive_Player : public Interactive_Base {
       // For ware production statistics (only needed for the interactive player)
       void ware_produced(uint id);
       void next_ware_production_period( void );
-	const std::vector<uint> * get_ware_production_statistics
+      const std::vector<uint> * get_ware_production_statistics
 		(const int ware) const;
 
       // For statistics mainly, we keep track of buildings
@@ -143,6 +144,7 @@ class Interactive_Player : public Interactive_Base {
 
       UI::UniqueWindow::Registry	m_mainmenu;
       UI::UniqueWindow::Registry	m_fieldaction;
+      UI::UniqueWindow::Registry	m_encyclopedia;
       Game_Main_Menu_Windows  m_mainm_windows;
 
       std::vector<uint> m_current_statistics;
@@ -150,7 +152,7 @@ class Interactive_Player : public Interactive_Base {
       uint  m_last_stats_update;
 
       BuildingStats m_building_stats;
-	General_Stats_vector m_general_stats;
+      General_Stats_vector m_general_stats;
 
       // Chat message stack
       std::vector< NetGame::Chat_Message > m_chatmsges;

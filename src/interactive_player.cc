@@ -48,6 +48,7 @@
 #include "util.h"
 #include "ware_statistics_menu.h"
 #include "wlapplication.h"
+#include "encyclopedia_window.h"
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 
@@ -121,6 +122,14 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
 		 &Interactive_Player::toggle_buildhelp, this,
 		 _("Buildhelp"));
+	
+	new UI::Button<Interactive_Player>
+      (this,
+       x + 136, y, 34, 34,
+	    2,
+	    g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ),
+	    &Interactive_Player::open_encyclopedia, this,
+	    _("Tribe's ware encyclopedia"));
 
 	// Speed info
 	m_label_speed = new UI::Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
@@ -422,6 +431,15 @@ void Interactive_Player::main_menu_btn()
 void Interactive_Player::toggle_buildhelp(void)
 {
    get_map()->get_overlay_manager()->toggle_buildhelp();
+}
+
+//
+// Shows wares encyclopedia for wares
+//
+void Interactive_Player::open_encyclopedia(void)
+{
+	if (m_encyclopedia.window) delete m_encyclopedia.window;
+	else new EncyclopediaWindow(*this, m_encyclopedia);
 }
 
 /*
