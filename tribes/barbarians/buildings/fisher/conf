@@ -5,6 +5,7 @@ size=small
 buildable=yes
 buildicon=fisher_build.png
 worker=fisher
+output=fish
 
 program=work
 

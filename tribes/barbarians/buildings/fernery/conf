@@ -7,6 +7,8 @@ buildable=yes
 buildicon=fernery_build.png
 worker=ferner  
 stopable=yes
+output=flax
+output=reed
 
 program=work
 program=plantflax
@@ -78,4 +80,3 @@ shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
 
-[

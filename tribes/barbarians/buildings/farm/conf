@@ -5,6 +5,7 @@ soundfx=farm_animal
 type=production		# basic type (warehouse, production, military)
 size=big
 buildable=yes
+output=wheat
 buildicon=farm_build.png
 worker=farmer
 stopable=yes

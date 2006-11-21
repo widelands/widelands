@@ -7,6 +7,7 @@ buildable=yes
 buildicon=hunter_build.png
 worker=hunter
 program=work
+output=meat
 
 [work]
 0=sleep 35000		
