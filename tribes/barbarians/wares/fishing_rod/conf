@@ -1,6 +1,6 @@
 [global]
 descname=_Fishing Rod
-help=
+help=_Fishing rods are needed by barbarian fishers, to catch fish.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

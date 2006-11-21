@@ -1,6 +1,6 @@
 [global]
 descname=_Snack
-help=A bit bigger, for the advanced minors will need a big hap.
+help=_A bit bigger, for the advanced minors will need a big hap.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

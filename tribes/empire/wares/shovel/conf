@@ -1,6 +1,6 @@
 [global]
 descname=_Shovel
-help=The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metallworks.
+help=_The shovel is needed for proper handling of plants. Therefore the forester use it. It is produced by the carpenter.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

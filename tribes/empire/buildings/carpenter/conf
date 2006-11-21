@@ -5,6 +5,7 @@ size=medium
 buildable=yes 
 buildicon=carpenter_build.png
 worker=carpenter
+output=axe
 output=bakingtray
 output=fire_tongs
 output=fishing_rod
@@ -28,6 +29,13 @@ program=produce_shovel
 program=produce_hunting_spear
 program=produce_basket
 program=produce_saw
+program=produce_axe
+
+[buildcost]
+trunk=1
+stone=2
+marble=2
+marblecolumn=1
 
 [inputs]
 iron=8
@@ -45,6 +53,7 @@ trunk=8
 8=call produce_shovel
 9=call produce_hunting_spear
 10=call produce_basket
+11=call produce_axe
 
 [produce_bakingtray]
 0=set +catch
@@ -156,11 +165,15 @@ trunk=8
 6=animation working 35000
 7=produce saw 
 
-[buildcost]
-trunk=1
-stone=2
-marble=2
-marblecolumn=1
+[produce_axe]
+0=set +catch
+1=sleep 32000
+2=check trunk 
+3=check iron
+4=consume iron
+5=consume trunk
+6=animation working 35000
+7=produce axe 
 
 [idle]
 pics=carpenter_i_??.png 

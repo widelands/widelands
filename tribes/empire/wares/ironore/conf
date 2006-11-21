@@ -1,6 +1,6 @@
 [global]
 descname=_Ironore
-help=This is the red ironore.
+help=_This is the red ironore.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

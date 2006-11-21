@@ -1,6 +1,6 @@
 [global]
 descname=_ Thatch Reed
-help=Thatcher Reed is used to make roofs of buildings waterproof.
+help=_Thatcher Reed is used to make roofs of buildings waterproof.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

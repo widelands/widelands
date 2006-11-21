@@ -1,6 +1,6 @@
 [global]
 descname=_Broad Axe
-help=Warriors with a fundamental fighting knowledge gain a broadaxe. It is produced in the axefactory.
+help=_Warriors with a fundamental fighting knowledge gain a broadaxe. It is produced in the axefactory.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

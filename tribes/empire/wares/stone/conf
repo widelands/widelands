@@ -1,6 +1,6 @@
 [global]
 descname=_Stones
-help= "Stones and wood are the basic build ware of the Empire"
+help=_Stones and wood are the basic build ware of the Empire.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

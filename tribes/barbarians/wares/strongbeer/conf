@@ -1,6 +1,6 @@
 [global]
 descname=_Strong Beer
-help=Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale.
+help=_Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

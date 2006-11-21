@@ -1,6 +1,6 @@
 [global]
 descname=_Gold
-help=Gold is the most valuable of all metalls; only very important things are garnished with it.
+help=_Gold is the most valuable of all metalls; only very important things are garnished with it.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

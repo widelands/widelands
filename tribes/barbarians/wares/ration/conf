@@ -1,6 +1,6 @@
 [global]
 descname=_Ration
-help=A small bite to keep miners strong and working.
+help=_A small bite to keep miners strong and working.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

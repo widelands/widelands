@@ -8,7 +8,7 @@ buildable=yes
 buildicon=farm_build.png
 worker=farmer
 stopable=yes
-
+output=wheat
 program=work
 program=plant
 program=harvest

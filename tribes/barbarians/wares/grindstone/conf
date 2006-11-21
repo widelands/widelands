@@ -1,6 +1,6 @@
 [global]
 descname=_Grindstone
-help=Raw stone can be enhanced to grind stone which delivers solid, non burning build material.
+help=_Raw stone can be enhanced to grind stone which delivers solid, non burning build material.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

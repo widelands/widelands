@@ -7,7 +7,7 @@ buildable=yes
 buildicon=wine-grower_build.png
 worker=wine-grower
 stopable=yes
-
+output=grape
 program=work
 program=plantwine
 program=harvestwine

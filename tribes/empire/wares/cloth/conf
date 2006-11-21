@@ -1,6 +1,6 @@
 [global]
 descname=_Cloth
-help=no help for you
+help=_Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

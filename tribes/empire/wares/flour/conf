@@ -1,6 +1,6 @@
 [global]
 descname=_Flour
-help=
+help=_Flour is produced out of wheat and is needed for the tasty Empire bread.
 menu_pic=flour_menu.png
 queue_full_pic=flour_queue_full.png
 queue_empty_pic=flour_queue_empty.png

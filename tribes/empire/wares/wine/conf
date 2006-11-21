@@ -1,6 +1,6 @@
 [global]
 descname=_ Wine
-help="This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
+help=_This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

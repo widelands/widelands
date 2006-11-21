@@ -1,6 +1,6 @@
 [global]
 descname=_Lance
-help="This wooden lance has an iron top."
+help=_This wooden lance has an iron spike.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

@@ -1,6 +1,6 @@
 [global]
 descname=_Scythe
-help=The Scythe is the tool of the farmers. It is produced in the metallworks.
+help=_The Scythe is the tool of the farmers. It is produced in the metallworks.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

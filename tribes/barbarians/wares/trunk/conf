@@ -1,6 +1,6 @@
 [global]
 descname=_Trunk
-help=Trunks are the primary build ware of the barbarians.
+help=_Trunks are the primary build ware of the barbarians.
 menu_pic=trunk_menu.png
 queue_full_pic=trunk_queue_full.png
 queue_empty_pic=trunk_queue_empty.png
