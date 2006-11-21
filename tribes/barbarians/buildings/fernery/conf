@@ -8,7 +8,6 @@ buildicon=fernery_build.png
 worker=ferner  
 stopable=yes
 output=flax
-output=reed
 
 program=work
 program=plantflax
