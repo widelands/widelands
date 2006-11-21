@@ -38,24 +38,24 @@
 #define WINDOW_WIDTH	600
 #define WINDOW_HEIGHT 550
 
-EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr,UI::UniqueWindow::Registry& registry) : 
+EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr,UI::UniqueWindow::Registry& registry) :
 UI::UniqueWindow(&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware encyclopedia")), interactivePlayer(plr) {
-   
+
    waresTable=new UI::Table(this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250, Align_Left, UI::Table::UP);
    waresTable->add_column(_("Ware").c_str(), UI::Table::STRING, WINDOW_WIDTH);
    waresTable->selected.set(this, &EncyclopediaWindow::wareSelected);
-   
+
    descrTxt = new UI::Multiline_Textarea(this,5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "", Align_Left);
-   
+
 	prodSitesTable = new UI::Table(this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140, Align_Left, UI::Table::UP);
 	prodSitesTable->add_column(_("Is Produced by").c_str(), UI::Table::STRING, 240);
 	prodSitesTable->selected.set(this, &EncyclopediaWindow::prodSiteSelected);
-	
+
 	condTable = new UI::Table(this, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140, Align_Left, UI::Table::UP);
    condTable->add_column(_("Needs Ware").c_str(), UI::Table::STRING, 240);
-   
+
    fillWaresTable();
-   
+
    if (get_usedefaultpos())
 		center_to_parent();
 }
@@ -78,26 +78,26 @@ void EncyclopediaWindow::wareSelected(int selectedRow) {
    const Tribe_Descr* tribe = interactivePlayer.get_player()->get_tribe();
    int index = reinterpret_cast<int>(waresTable->get_entry(selectedRow)->get_user_data());
    Item_Ware_Descr* ware = tribe->get_ware_descr(index);
-   
+
    descrTxt->set_text(ware->get_helptext());
-   
+
    prodSitesTable->clear();
    condTable->clear();
-   
+
    int i;
    log("Encyclopedia: searching ware: %s\n",ware->get_name());
    bool found = false;
-   
+
    for (i = 0; i < tribe->get_nrbuildings(); ++i) {
       Building_Descr* curBuilding = tribe->get_building_descr((uint)i);
-      
+
       const char * const name = curBuilding->get_name();
       if (strcmp(name, "constructionsite") == 0) continue;
       if (strcmp(name, "headquarters")     == 0) continue;
-      
+
       if (typeid(*curBuilding)==typeid(ProductionSite_Descr)) {
          ProductionSite_Descr* curProdSite = (ProductionSite_Descr*) curBuilding;
-         
+
          std::set<std::string>::iterator it = curProdSite->get_outputs()->find(ware->get_name());
          if (it != curProdSite->get_outputs()->end()) {
             log("Encyclopedia: ware found ware at: %s\n",curProdSite->get_descname());
@@ -109,7 +109,7 @@ void EncyclopediaWindow::wareSelected(int selectedRow) {
    }
    if (found)
       prodSitesTable->select(0);
-   
+
 }
 
 void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
@@ -123,5 +123,5 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
       UI::Table_Entry* tableEntry = new UI::Table_Entry(condTable,reinterpret_cast<void * const>(i),inputs[i].get_ware()->get_menu_pic());
       tableEntry->set_string(0,inputs[i].get_ware()->get_descname());
    }
-   
+
 }
