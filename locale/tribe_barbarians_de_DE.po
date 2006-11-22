@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-11-21 19:54+0100\n"
+"PO-Revision-Date: 2006-11-22 19:13+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -232,6 +232,10 @@ msgid ""
 "are equipped with this basic weapon, but also the lumberjack is using the "
 "same modell."
 msgstr ""
+"Die Axt ist die Basis-Waffe der Barbaren. Jeder Krieger hat mit einer "
+"solchen Axt angefangen, bevor er später noch bessere Äxte erhalten hat. "
+"Gleichzeitig dient sie dem Holzfäller als präzises Werkzeug. Die Axt wird in "
+"der Schmiede gefertigt."
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
@@ -253,6 +257,9 @@ msgid ""
 "produce. Only trained warriors are able to yield such a weapon. It is "
 "produce in the Axefactory."
 msgstr ""
+"Dies ist die zweitgefährlichste Waffe, die die Barbaren produzieren. Nur "
+"sehr erfahrene Krieger wissen, wie man eine solch schöne Axt führt. "
+"Produziert wird sie in der Axtfabrik."
 
 #: ../tribes/barbarians/wares/beer/conf:2
 msgid "Beer"
@@ -275,6 +282,8 @@ msgid ""
 "Fire-hardened wood, hard as iron and can not burn, used for military "
 "buildings."
 msgstr ""
+"Feuer gehärtetes Holz, ist schwer brennbar und ähnelt der Härte eines "
+"Steines. Daher wird es besonders für militärische Gebäude benutzt."
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
@@ -285,6 +294,8 @@ msgid ""
 "Warriors with a fundamental fighting knowledge gain a broadaxe. It is "
 "produced in the axefactory."
 msgstr ""
+"Krieger mit einiger Kampf-Erfahrung erhalten die Breitaxt. Sie wird in der "
+"Axtfabrik hergestellt."
 
 #: ../tribes/barbarians/wares/bronzeaxe/conf:2
 msgid "Bronze Axe"
@@ -296,6 +307,10 @@ msgid ""
 "damage, but it's durability is not the best. Only skilled warriors can use "
 "this. Produced in the axefactory."
 msgstr ""
+"Die Bronzeaxt wird als schwer zu führende Waffe gesehen: Sie macht zwar viel "
+"Schaden, doch das auch nur, wenn der Krieger weiß wie sie zu führen ist. "
+"Daher können nur erfahrene Krieger diese Axt führen. Produziert wird sie, "
+"wie alle anderen Kriegsäxte, in der Axtfabrik."
 
 #: ../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
@@ -349,7 +364,7 @@ msgstr "Fisch"
 msgid ""
 "Besides pittabread and meat, fish is also a food deliverer for the "
 "barbarians."
-msgstr ""
+msgstr "Neben Brot und Fleisch essen Barbaren auch gerne mal etwas Fisch."
 
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
@@ -358,6 +373,8 @@ msgstr "Angel"
 #: ../tribes/barbarians/wares/fishing_rod/conf:3
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
 msgstr ""
+"Angeln werden vom Fischer benutzt um Fische zu fangen. Sie werden in der "
+"Schmiede hergestellt."
 
 #: ../tribes/barbarians/wares/flax/conf:2
 msgid "Flax"
@@ -366,6 +383,8 @@ msgstr "Flachs"
 #: ../tribes/barbarians/wares/flax/conf:3
 msgid "Flax is a beautiful flower, which are used to make cloth."
 msgstr ""
+"Flachs ist eine schöne Blume, dessen Stengel zur Herstellung von Stoff "
+"verwendet wird."
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -376,6 +395,8 @@ msgid ""
 "Gold is the most valuable of all metalls; only very important things are "
 "garnished with it."
 msgstr ""
+"Gold ist das wertvollste Metall der Barbaren. Es wird nur für besonders "
+"wichtige Sachen verwendet."
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
@@ -383,7 +404,7 @@ msgstr "Golderz"
 
 #: ../tribes/barbarians/wares/goldstone/conf:3
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Dies ist gelb schimmerndes Golderz."
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
@@ -394,6 +415,8 @@ msgid ""
 "Raw stone can be enhanced to grind stone which delivers solid, non burning "
 "build material."
 msgstr ""
+"Felsen können zu Mörtel weiterverarbeitet werden, welcher als unbrennbares "
+"und gut formbares Material geschätzt wird."
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -405,6 +428,9 @@ msgid ""
 "the blacksmiths and the helmsmiths. Make sure you always got some in "
 "reserve! Build at the metalworks."
 msgstr ""
+"Der Hammer ist das wichtigste Werkzeug. Er wird vom Geologen, vom "
+"Bauarbeiter, vom Schreiner und von den Schmieden benötigt, daher solltest du "
+"immer ein paar auf Lager haben. Hergestellt wird er in der Schmiede."
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
@@ -412,7 +438,7 @@ msgstr "Helm"
 
 #: ../tribes/barbarians/wares/helm/conf:3
 msgid "Basic defence of a warrior"
-msgstr ""
+msgstr "Der Basis-Schutz der Soldaten."
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
@@ -423,6 +449,8 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metallworks."
 msgstr ""
+"Dieser Speer ist leicht genug um geworfen zu werden und doch schwer genug um "
+"ein Tier sofort zu töten. Er wird nur von Jägern benutzt."
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
@@ -430,7 +458,7 @@ msgstr "Eisen"
 
 #: ../tribes/barbarians/wares/iron/conf:3
 msgid "Weapons and Tools are made of iron."
-msgstr ""
+msgstr "Waffen und Werkzeuge werden aus Eisen gefertigt."
 
 #: ../tribes/barbarians/wares/ironore/conf:2
 msgid "Ironore"
@@ -438,7 +466,7 @@ msgstr "Eisenerz"
 
 #: ../tribes/barbarians/wares/ironore/conf:3
 msgid "This is the red ironore."
-msgstr ""
+msgstr "Dies ist rotes Eisen."
 
 #: ../tribes/barbarians/wares/kitchen_tools/conf:2
 msgid "Kitchen Tools"
@@ -447,6 +475,8 @@ msgstr "Küchengerät"
 #: ../tribes/barbarians/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchentools?"
 msgstr ""
+"Wie sollten unsere Köche Mahlzeiten oder Rationen produzieren, wenn sie "
+"keine Küchengeräte hätten?"
 
 #: ../tribes/barbarians/wares/mask/conf:2
 msgid "Mask"
@@ -454,7 +484,7 @@ msgstr "Maske"
 
 #: ../tribes/barbarians/wares/mask/conf:3
 msgid "An enhanced version of the helm."
-msgstr ""
+msgstr "Eine verbesserte Version des Helms."
 
 #: ../tribes/barbarians/wares/meal/conf:2
 msgid "Meal"
@@ -462,7 +492,7 @@ msgstr "Mahlzeit"
 
 #: ../tribes/barbarians/wares/meal/conf:3
 msgid "A real meal which satisfies all miners needs"
-msgstr ""
+msgstr "Eine richtige Mahlzeit, die einen jeden Bergarbeiter glücklich stellt."
 
 #: ../tribes/barbarians/wares/meat/conf:2
 msgid "Meat"
@@ -474,6 +504,9 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
+"Fleisch ist voller Energie, daher wird es in Gaststätten und Tavernen "
+"verwendet um leckere und gehaltvolle Essen für die Bergarbeiter und Soldaten "
+"herzustellen."
 
 #: ../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
@@ -484,6 +517,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metallworks."
 msgstr ""
+"Die Spitzhacke wird vom Steinmetz und vom Bergarbeiter benutzt. Sie wird in "
+"der Schmiede hergestellt."
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pittabread"
@@ -493,6 +528,8 @@ msgstr "Fladenbrot"
 msgid ""
 "The barbarian backers are best in making this flat and tasty pittabread."
 msgstr ""
+"Die barbarischen Bäcker sind weit dafür bekannt, dass sie dieses flache, "
+"leckere Fladenbrot herstellen können."
 
 #: ../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
@@ -501,6 +538,7 @@ msgstr "Ration"
 #: ../tribes/barbarians/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
 msgstr ""
+"Eine kleiner Happen, um die Bergarbeiter für die schwere Arbeit zu stärken."
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
@@ -508,7 +546,7 @@ msgstr "Felsen"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:3
 msgid "Raw Stones are the secondary build ware of the barbarians"
-msgstr ""
+msgstr "Felsen stellen den zweitwichtigsten Baustoff der Barbaren da."
 
 #: ../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
@@ -518,6 +556,7 @@ msgstr "Sense"
 msgid ""
 "The Scythe is the tool of the farmers. It is produced in the metallworks."
 msgstr ""
+"Die Sense ist das Werkzeug des Bauern. Sie wird in der Schmiede gefertigt."
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
@@ -529,6 +568,9 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axefactory."
 msgstr ""
+"Echte Krieger empfinden die Kriegsaxt als erste richtige Waffe. Nachdem sie "
+"gelernt haben eine normale Axt zu führen, dürfen sie diese gefährlichere, "
+"schwerere und schärfere Axt führen. Hergestellt wird sie in der Axtfabrik."
 
 #: ../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
@@ -539,6 +581,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metallworks."
 msgstr ""
+"Die Schaufel wird für den Umgang mit Pflanzen benötigt, daher wird sie vom "
+"Förster benutzt. Sie wird in der Schmiede hergestellt."
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
@@ -547,6 +591,8 @@ msgstr "Snack"
 #: ../tribes/barbarians/wares/snack/conf:3
 msgid "A bit bigger, for the advanced minors will need a big hap."
 msgstr ""
+"Ein bischen größer als die Ration, da erfahrene Bergarbeiter auch etwas mehr "
+"verlangen."
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
@@ -557,6 +603,9 @@ msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
 "of the barbarians is in this ale."
 msgstr ""
+"Nur dieses starke Bier wird von den alten Kriegern der Barbaren akzeptiert. "
+"Manche behaupten gar, dass der Grund für die Stärke und Tapferkeit der "
+"Barbaren in diesem Getränk liegt."
 
 #: ../tribes/barbarians/wares/thatchreed/conf:2
 msgid "Thatch Reed"
@@ -565,6 +614,8 @@ msgstr "Dachschilf"
 #: ../tribes/barbarians/wares/thatchreed/conf:3
 msgid "Thatcher Reed is used to make roofs of buildings waterproof."
 msgstr ""
+"Schilf wird verwendet, um die Dächer der größeren Gebäude der Barbaren zu "
+"decken."
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -572,7 +623,7 @@ msgstr "Stamm"
 
 #: ../tribes/barbarians/wares/trunk/conf:3
 msgid "Trunks are the primary build ware of the barbarians."
-msgstr ""
+msgstr "Stämme stellen den Basis-Baustoff des Imperiums da."
 
 #: ../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
@@ -580,7 +631,7 @@ msgstr "Kriegshelm"
 
 #: ../tribes/barbarians/wares/warhelmet/conf:3
 msgid "An enhanced mask, for barbarian warriors."
-msgstr ""
+msgstr "Eine edlere Maske, für die Krieger der Barbaren."
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
 msgid "Warriors Axe"
@@ -592,6 +643,9 @@ msgid ""
 "ever were able to handle those huge and powerfull axes. Build at the "
 "axefactory."
 msgstr ""
+"Die Kriegeraxt ist die gefährlichste Waffen der Barbaren. Nur sehr wenige "
+"starke und erfahrene Krieger wagen diese gefährliche Waffe zu führen. Sie "
+"wird in der Axtfabrik hergestellt."
 
 #: ../tribes/barbarians/wares/water/conf:2
 msgid "Water"
@@ -602,6 +656,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer or to grind stones."
 msgstr ""
+"Wasser ist die Basis des Lebens. Dieses Wasser wird für viele Sachen "
+"benutzt, sei es für Brot, für Bier oder um Mörtel zu erstellen."
 
 #: ../tribes/barbarians/wares/wheat/conf:2
 msgid "Wheat"

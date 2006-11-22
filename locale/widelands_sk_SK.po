@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-14 11:16+0100\n"
+"POT-Creation-Date: 2006-11-22 17:38+0100\n"
 "PO-Revision-Date: 2006-03-03 14:09+0100\n"
 "Last-Translator: Ike <ike@zoznam.sk>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -13,81 +13,126 @@ msgstr ""
 "X-Poedit-Country: czech republic\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../src/trigger_time.cc:36
-msgid "Time Trigger"
-msgstr "Časová spúšť"
+#: ../src/ware.cc:72 ../src/worker.cc:1559
+msgid "Doh... someone forgot the help text!"
+msgstr "Ups... niekto tu zabudol na help!"
 
-#: ../src/trigger_null.cc:34
-msgid "Null Trigger"
-msgstr "Nulová spúšť"
+#: ../src/map.cc:437
+msgid "No Name"
+msgstr "Bez mena"
 
-#: ../src/trainingsite.cc:215
-msgid "Resting"
-msgstr "Odpočíva"
+#: ../src/map.cc:438 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:145
+msgid "Unknown"
+msgstr "neznámy"
 
-#: ../src/trainingsite.cc:217
-msgid "Not Working"
-msgstr "Nepracuje"
+#: ../src/map.cc:439
+msgid "no description defined"
+msgstr "nepopísaný"
 
-#: ../src/event_set_null_trigger.cc:39
+#: ../src/map.cc:441 ../src/map_variable_manager.cc:31
+msgid "<undefined>"
+msgstr "<nedefinovaný>"
+
+#: ../src/map.cc:442 ../src/playerdescrgroup.cc:34
+#: ../src/playerdescrgroup.cc:62
+msgid "Player 1"
+msgstr "Hráč 1"
+
+#: ../src/minimap.cc:163 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
+msgid "Map"
+msgstr "Mapa"
+
+#: ../src/minimap.cc:172
 #, fuzzy
-msgid "Set Null Trigger"
-msgstr "Nastav Nul Trigger"
+msgid "Terrain"
+msgstr "Výber terénu"
 
-#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
-msgid "Move View"
-msgstr "Posuň pohlad"
+#: ../src/minimap.cc:180
+#, fuzzy
+msgid "Owner"
+msgstr "Vlastnené"
 
-#: ../src/event_allow_building.cc:39
-msgid "Allow Building"
-msgstr "Povol stavbu"
+#: ../src/minimap.cc:188
+#, fuzzy
+msgid "Flags"
+msgstr "vlajka"
+
+#: ../src/minimap.cc:196
+#, fuzzy
+msgid "Roads"
+msgstr "Pripravený"
+
+#: ../src/minimap.cc:204 ../src/general_statistics_menu.cc:155
+#, fuzzy
+msgid "Buildings"
+msgstr "Budova:"
+
+#: ../src/criterr.cc:69
+msgid "!! CRITICAL ERROR !!"
+msgstr "!! Kritická chyba !!"
+
+#: ../src/criterr.cc:78
+msgid "Exit"
+msgstr "Exit"
+
+#: ../src/criterr.cc:85
+msgid "!! Continue execution !!"
+msgstr "!! Pokračuj ďalej !!"
+
+#: ../src/criterr.cc:94
+msgid "Crash"
+msgstr "Havária"
+
+#: ../src/criterr.cc:133
+msgid "Widelands"
+msgstr "Widelands"
+
+#: ../src/profile.cc:1005
+msgid "Usage: "
+msgstr "Vyťaženie"
+
+#: ../src/fieldaction.cc:277
+msgid "Action"
+msgstr "Akcia"
+
+#: ../src/fieldaction.cc:450 ../src/fieldaction.cc:599
+#, fuzzy
+msgid "Build roads"
+msgstr "Verzia"
+
+#: ../src/fieldaction.cc:454 ../src/watchwindow.cc:102
+msgid "Watch"
+msgstr "Sledovanie"
+
+#: ../src/fieldaction.cc:504 ../src/building_ui.cc:1624
+msgid "Attack"
+msgstr "AT - Útok"
+
+#: ../src/fieldaction.cc:577
+#, fuzzy
+msgid "Build mines"
+msgstr "Budova:"
 
 #: ../src/map_variable_manager.cc:30
 msgid "Next scenario"
 msgstr "Ďalší scenár"
 
-#: ../src/map_variable_manager.cc:31 ../src/map.cc:441
-msgid "<undefined>"
-msgstr "<nedefinovaný>"
+#: ../src/s2map.cc:250
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
 
-#: ../src/game_objectives_menu.cc:31
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:163
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:168
-msgid "Objectives Menu"
-msgstr "Menu cieľov"
+#: ../src/watchwindow.cc:116
+msgid "Follow"
+msgstr ""
 
-#: ../src/productionsite.cc:232
-msgid "(not occupied)"
-msgstr "(voľný)"
+#: ../src/watchwindow.cc:124
+msgid "Center mainview on this"
+msgstr ""
 
-#: ../src/productionsite.cc:272
-msgid "UP"
-msgstr "Hore"
-
-#: ../src/productionsite.cc:274
-msgid "DOWN"
-msgstr "Dole"
-
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Testtext"
-
-#: ../src/event_message_box.cc:41
-msgid "Message Box"
-msgstr "Správa"
-
-#: ../src/event_message_box.cc:42
-msgid "No text defined"
-msgstr "Nedefinovaný text"
-
-#: ../src/event_message_box.cc:43
-msgid "Window Title"
-msgstr "Popis okna"
-
-#: ../src/event_message_box.cc:49
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:54
-msgid "Continue"
-msgstr "Pokračuj"
+#: ../src/watchwindow.cc:142
+#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:59
+msgid "Close"
+msgstr "Zavrieť"
 
 #: ../src/network.cc:332
 msgid "I have no name"
@@ -113,482 +158,6 @@ msgstr "Čaká"
 msgid "Ready"
 msgstr "Pripravený"
 
-#: ../src/constructionsite.cc:223
-msgid "built"
-msgstr "postavené"
-
-#: ../src/event_conquer_area.cc:36
-msgid "Conquer Area"
-msgstr "Oblasť výbojov"
-
-#: ../src/event_unhide_area.cc:37
-msgid "Unhide Area"
-msgstr "Odkry oblasť"
-
-#: ../src/militarysite.cc:145
-#, c-format
-msgid "%d soldier (+%d)"
-msgid_plural "%d soldiers (+%d)"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../src/militarysite.cc:147
-#, c-format
-msgid "%d soldier"
-msgid_plural "%d soldiers"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../src/trigger_building.cc:40
-msgid "Building Trigger"
-msgstr "Stavebná spúšť"
-
-#: ../src/trigger_building.cc:47
-msgid "<unset>"
-msgstr "<nenastavené>"
-
-#: ../src/game_server_proto_packet_getroominfo.cc:66
-#, c-format
-msgid "The Room %s is currently not logged in or unknown to the server.\n"
-msgstr ""
-"Miestnosť %s nie je v súčasnosti zaznamenaná alebo ju server nenašiel.\n"
-
-#: ../src/game_server_proto_packet_connect.cc:72
-#, c-format
-msgid ""
-"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
-"Server runs %i.%02i\n"
-msgstr ""
-"Server spôsobil chybu pripojenia. Váš protokol (%i.%02i) je zastaralý, "
-"Server používa %i.%02i\n"
-
-#: ../src/game_server_proto_packet_connect.cc:78
-#, c-format
-msgid "Server is full!\n"
-msgstr "Server je plný!\n"
-
-#: ../src/game_server_proto_packet_connect.cc:83
-#, c-format
-msgid "This server doesn't serve widelands!\n"
-msgstr "Tento server neposkytuje Widelands!\n"
-
-#: ../src/game_server_proto_packet_getuserinfo.cc:66
-#, c-format
-msgid "The User %s is currently not logged in or unknown to the server.\n"
-msgstr ""
-"Uživateľ %s nie je v súčasnosti zaznamenaný alebo ho server nenašiell.\n"
-
-#: ../src/game_server_proto_packet_chatmessage.cc:69
-#, c-format
-msgid ""
-"Server replied illegally to ChatMessage package. Should have sent %i but "
-"sent %i. Ignored"
-msgstr ""
-"Server odpovedal nesprávne na packet správy. Mal poslať %i ale poslal %i. "
-"Ignorujem to."
-
-#: ../src/ware.cc:72 ../src/worker.cc:1559
-msgid "Doh... someone forgot the help text!"
-msgstr "Ups... niekto tu zabudol na help!"
-
-#: ../src/map.cc:437
-msgid "No Name"
-msgstr "Bez mena"
-
-#: ../src/map.cc:438 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:145
-msgid "Unknown"
-msgstr "neznámy"
-
-#: ../src/map.cc:439
-msgid "no description defined"
-msgstr "nepopísaný"
-
-#: ../src/map.cc:442 ../src/playerdescrgroup.cc:34
-#: ../src/playerdescrgroup.cc:62
-msgid "Player 1"
-msgstr "Hráč 1"
-
-#: ../src/profile.cc:1005
-msgid "Usage: "
-msgstr "Vyťaženie"
-
-#: ../src/s2map.cc:250
-msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
-
-#: ../src/building_statistics_menu.cc:55 ../src/building_statistics_menu.cc:67
-msgid "Building Statistics"
-msgstr "Štatistika stavby"
-
-#: ../src/building_statistics_menu.cc:72 ../src/building_ui.cc:1337
-#: ../src/building_ui.cc:1799
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:76
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:173
-#: ../src/editor/ui_menus/editor_variables_menu.cc:167
-#: ../src/editor/tools/editor_info_tool.cc:90
-#: ../src/editor/tools/editor_info_tool.cc:98
-#: ../src/editor/tools/editor_info_tool.cc:104
-#: ../src/editor/tools/editor_info_tool.cc:113
-msgid "Name"
-msgstr "Meno"
-
-#: ../src/building_statistics_menu.cc:73
-msgid "Prod"
-msgstr "Produkcia"
-
-#: ../src/building_statistics_menu.cc:74
-msgid "Owned"
-msgstr "Vlastnené"
-
-#: ../src/building_statistics_menu.cc:75
-msgid "Build"
-msgstr "Verzia"
-
-#: ../src/building_statistics_menu.cc:85
-msgid "Total Productivity: "
-msgstr "Celková produktivita:"
-
-#: ../src/building_statistics_menu.cc:91
-msgid "Owned: "
-msgstr "Vlastnené:"
-
-#: ../src/building_statistics_menu.cc:111
-msgid "In Build: "
-msgstr "Vo výstavbe:"
-
-#: ../src/building_statistics_menu.cc:131
-msgid "Jump to unproductive: "
-msgstr "Skok na neproduktívne:"
-
-#: ../src/building_ui.cc:152
-msgid "Destroy building?"
-msgstr "Zničiť budovu?"
-
-#: ../src/building_ui.cc:164
-msgid "Do you really want to destroy this "
-msgstr "Chceš naozaj zničiť túto"
-
-#: ../src/building_ui.cc:617
-#, fuzzy
-msgid "Stop"
-msgstr "Zásoby"
-
-#: ../src/building_ui.cc:639
-#, c-format
-msgid "Enhance to %s"
-msgstr ""
-
-#: ../src/building_ui.cc:658
-#, fuzzy
-msgid "Destroy"
-msgstr "Popis"
-
-#: ../src/building_ui.cc:669
-#, fuzzy
-msgid "Debug"
-msgstr "Opravné políčko"
-
-#: ../src/building_ui.cc:1053 ../src/building_ui.cc:1059
-msgid "Worker Listing"
-msgstr "Zoznam pracovníkov"
-
-#: ../src/building_ui.cc:1074
-msgid "Type: "
-msgstr "Typ:"
-
-#: ../src/building_ui.cc:1079
-msgid "Experience: "
-msgstr "Skúsenosti:"
-
-#: ../src/building_ui.cc:1084
-msgid "Trying to become: "
-msgstr "Môže sa stať:"
-
-#: ../src/building_ui.cc:1236
-#, fuzzy
-msgid "Show worker listing"
-msgstr "Zoznam pracovníkov"
-
-#: ../src/building_ui.cc:1338 ../src/building_ui.cc:1800
-msgid "HP"
-msgstr "HP"
-
-#: ../src/building_ui.cc:1339 ../src/building_ui.cc:1801
-msgid "AT"
-msgstr "AT"
-
-#: ../src/building_ui.cc:1340 ../src/building_ui.cc:1802
-msgid "DE"
-msgstr "DE"
-
-#: ../src/building_ui.cc:1341 ../src/building_ui.cc:1803
-msgid "EV"
-msgstr "EV"
-
-#: ../src/building_ui.cc:1342 ../src/building_ui.cc:1804
-msgid "Level"
-msgstr "Úroveň"
-
-#: ../src/building_ui.cc:1363 ../src/building_ui.cc:1828
-msgid "Capacity"
-msgstr "Kapacita"
-
-#: ../src/building_ui.cc:1542
-msgid "Training Options"
-msgstr "Možnosti tréningu"
-
-#: ../src/building_ui.cc:1568
-msgid "Training mode : "
-msgstr "Tréningový mód:"
-
-#: ../src/building_ui.cc:1569
-msgid "Balanced"
-msgstr "Vyrovnaný"
-
-#: ../src/building_ui.cc:1597
-msgid "Hit Points"
-msgstr "HP - Zdravie"
-
-#: ../src/building_ui.cc:1614 ../src/fieldaction.cc:504
-msgid "Attack"
-msgstr "AT - Útok"
-
-#: ../src/building_ui.cc:1631
-msgid "Defense"
-msgstr "DE - Obrana"
-
-#: ../src/building_ui.cc:1649
-msgid "Evade"
-msgstr "EV - Obratnosť"
-
-#: ../src/building_ui.cc:1689
-msgid "Make heroes"
-msgstr "Vytvor hrdinov"
-
-#: ../src/building_ui.cc:1691
-msgid "Balanced army"
-msgstr "Vyrovnané sily"
-
-#: ../src/building_ui.cc:1839
-msgid "xx"
-msgstr "xx"
-
-#: ../src/criterr.cc:69
-msgid "!! CRITICAL ERROR !!"
-msgstr "!! Kritická chyba !!"
-
-#: ../src/criterr.cc:78
-msgid "Exit"
-msgstr "Exit"
-
-#: ../src/criterr.cc:85
-msgid "!! Continue execution !!"
-msgstr "!! Pokračuj ďalej !!"
-
-#: ../src/criterr.cc:94
-msgid "Crash"
-msgstr "Havária"
-
-#: ../src/criterr.cc:133
-msgid "Widelands"
-msgstr "Widelands"
-
-#: ../src/fieldaction.cc:277
-msgid "Action"
-msgstr "Akcia"
-
-#: ../src/fieldaction.cc:450 ../src/fieldaction.cc:599
-#, fuzzy
-msgid "Build roads"
-msgstr "Verzia"
-
-#: ../src/fieldaction.cc:454 ../src/watchwindow.cc:102
-msgid "Watch"
-msgstr "Sledovanie"
-
-#: ../src/fieldaction.cc:577
-#, fuzzy
-msgid "Build mines"
-msgstr "Budova:"
-
-#: ../src/game_chat_menu.cc:56
-msgid "Chat Menu"
-msgstr "Chat menu"
-
-#: ../src/game_chat_menu.cc:67
-msgid "Send"
-msgstr "Odoslať"
-
-#: ../src/game_chat_menu.cc:72
-msgid "Show messages as overlays:"
-msgstr "Zobraziť správy ako prekrytie:"
-
-#: ../src/game_debug_ui.cc:269
-msgid "Debug Field"
-msgstr "Opravné políčko"
-
-#: ../src/game_debug_ui.cc:316
-msgid "height:"
-msgstr "výška:"
-
-#: ../src/game_main_menu.cc:40 ../src/editor/ui_menus/editor_main_menu.cc:41
-msgid "Main Menu"
-msgstr "Hlavné menu"
-
-#: ../src/game_main_menu.cc:50
-#, fuzzy
-msgid "General statistics"
-msgstr "Všeobecná štatistika"
-
-#: ../src/game_main_menu.cc:58
-#, fuzzy
-msgid "Ware statistics"
-msgstr "Bojová štatistika"
-
-#: ../src/game_main_menu.cc:66
-#, fuzzy
-msgid "Building statistics"
-msgstr "Štatistika stavby"
-
-#: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
-msgid "Stock"
-msgstr "Zásoby"
-
-#: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:161
-#, fuzzy
-msgid "Objectives"
-msgstr "Menu cieľov"
-
-#: ../src/game_main_menu.cc:90
-#, fuzzy
-msgid "Chat"
-msgstr "Chat menu"
-
-#: ../src/game_main_menu.cc:98 ../src/game_options_menu.cc:46
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
-msgid "Options"
-msgstr "Nastavenia"
-
-#: ../src/game_main_menu_load_game.cc:43 ../src/game_main_menu_load_game.cc:47
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
-msgid "Load Game"
-msgstr "Nahraj hru"
-
-#: ../src/game_main_menu_load_game.cc:65 ../src/game_main_menu_save_game.cc:68
-msgid "Map Name: "
-msgstr "Meno many:"
-
-#: ../src/game_main_menu_load_game.cc:70 ../src/game_main_menu_save_game.cc:73
-msgid "Game Time: "
-msgstr "Herný čas:"
-
-#: ../src/game_main_menu_load_game.cc:82 ../src/game_main_menu_save_game.cc:85
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:55
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:117
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:111
-msgid "OK"
-msgstr "OK"
-
-#: ../src/game_main_menu_load_game.cc:89 ../src/game_main_menu_save_game.cc:92
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:82
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:305
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:209
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:126
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:81
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:65
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:120
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:138
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:155
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:246
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:172
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:209
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:244
-msgid "Cancel"
-msgstr "Zrušiť"
-
-#: ../src/game_main_menu_load_game.cc:216
-msgid ""
-"Game Loading Error!\n"
-"Reason given:\n"
-msgstr ""
-"Chyba pri otváraní hry!\n"
-"Dôvod:\n"
-
-#: ../src/game_main_menu_load_game.cc:218
-msgid "Load Game Error!!"
-msgstr "Chyba otváranie hry!!"
-
-#: ../src/game_main_menu_save_game.cc:46
-msgid "Save Game"
-msgstr "Uložiť hru"
-
-#: ../src/game_main_menu_save_game.cc:233
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:331
-msgid "A File with the name "
-msgstr "Súbor s menom"
-
-#: ../src/game_main_menu_save_game.cc:235
-msgid " already exists. Overwrite?"
-msgstr "už existuje. Nahradiť?"
-
-#: ../src/game_main_menu_save_game.cc:236
-#: ../src/game_main_menu_save_game.cc:258
-msgid "Save Game Error!!"
-msgstr "Chyba pri ukladaní hry!!"
-
-#: ../src/game_main_menu_save_game.cc:256
-msgid ""
-"Game Saving Error!\n"
-"Saved Game-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-"Chyba pri ukladaní hry!\n"
-"Uložená hra môže byť poškodená!\n"
-"\n"
-"Dôvod:\n"
-
-#: ../src/game_options_menu.cc:57
-msgid "README"
-msgstr "ČÍTAJMA"
-
-#: ../src/game_options_menu.cc:66
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
-msgid "License"
-msgstr "Licencia"
-
-#: ../src/game_options_menu.cc:75
-msgid "Authors"
-msgstr "Autori"
-
-#: ../src/game_options_menu.cc:83
-msgid "Ingame Music"
-msgstr "Hudba"
-
-#: ../src/game_options_menu.cc:90
-msgid "Sound FX"
-msgstr "Zvuk"
-
-#: ../src/game_options_menu.cc:100
-#, fuzzy
-msgid "Save game"
-msgstr "Uložiť hru"
-
-#: ../src/game_options_menu.cc:110
-#, fuzzy
-msgid "Load game"
-msgstr "Nahraj hru"
-
-#: ../src/game_options_menu.cc:121
-#, fuzzy
-msgid "Exit game"
-msgstr "Opusti hru"
-
 #: ../src/general_statistics_menu.cc:60 ../src/general_statistics_menu.cc:70
 msgid "General Statistics"
 msgstr "Všeobecná štatistika"
@@ -601,11 +170,6 @@ msgstr ""
 #, fuzzy
 msgid "Workers"
 msgstr "Zoznam pracovníkov"
-
-#: ../src/general_statistics_menu.cc:155 ../src/minimap.cc:204
-#, fuzzy
-msgid "Buildings"
-msgstr "Budova:"
 
 #: ../src/general_statistics_menu.cc:161
 msgid "Wares"
@@ -656,52 +220,166 @@ msgstr "8 h"
 msgid "16 h"
 msgstr "16 h"
 
-#: ../src/interactive_player.cc:107 ../src/editor/editorinteractive.cc:97
+#: ../src/game_server_proto_packet_getuserinfo.cc:66
+#, c-format
+msgid "The User %s is currently not logged in or unknown to the server.\n"
+msgstr ""
+"Uživateľ %s nie je v súčasnosti zaznamenaný alebo ho server nenašiell.\n"
+
+#: ../src/stock_menu.cc:31 ../src/game_main_menu.cc:74
+msgid "Stock"
+msgstr "Zásoby"
+
+#: ../src/stock_menu.cc:71
+msgid "Show wares"
+msgstr ""
+
+#: ../src/stock_menu.cc:76
+msgid "Show workers"
+msgstr ""
+
+#: ../src/game_objectives_menu.cc:31
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:163
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:168
+msgid "Objectives Menu"
+msgstr "Menu cieľov"
+
+#: ../src/productionsite.cc:232
+msgid "(not occupied)"
+msgstr "(voľný)"
+
+#: ../src/productionsite.cc:272
+msgid "UP"
+msgstr "Hore"
+
+#: ../src/productionsite.cc:274
+msgid "DOWN"
+msgstr "Dole"
+
+#: ../src/waresdisplay.cc:56
+msgid "Testtext"
+msgstr "Testtext"
+
+#: ../src/trigger_null.cc:34
+msgid "Null Trigger"
+msgstr "Nulová spúšť"
+
+#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
+msgid "Move View"
+msgstr "Posuň pohlad"
+
+#: ../src/game_main_menu_save_game.cc:46
+msgid "Save Game"
+msgstr "Uložiť hru"
+
+#: ../src/game_main_menu_save_game.cc:68 ../src/game_main_menu_load_game.cc:65
+msgid "Map Name: "
+msgstr "Meno many:"
+
+#: ../src/game_main_menu_save_game.cc:73 ../src/game_main_menu_load_game.cc:70
+msgid "Game Time: "
+msgstr "Herný čas:"
+
+#: ../src/game_main_menu_save_game.cc:85 ../src/game_main_menu_load_game.cc:82
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:55
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:117
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:111
+msgid "OK"
+msgstr "OK"
+
+#: ../src/game_main_menu_save_game.cc:93 ../src/game_main_menu_load_game.cc:90
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:82
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:305
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:209
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:126
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:81
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../src/editor/ui_menus/trigger_null_option_menu.cc:65
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:120
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:138
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:155
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:246
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:172
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:209
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:244
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: ../src/game_main_menu_save_game.cc:234
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:331
+msgid "A File with the name "
+msgstr "Súbor s menom"
+
+#: ../src/game_main_menu_save_game.cc:236
+msgid " already exists. Overwrite?"
+msgstr "už existuje. Nahradiť?"
+
+#: ../src/game_main_menu_save_game.cc:237
+#: ../src/game_main_menu_save_game.cc:259
+msgid "Save Game Error!!"
+msgstr "Chyba pri ukladaní hry!!"
+
+#: ../src/game_main_menu_save_game.cc:257
+msgid ""
+"Game Saving Error!\n"
+"Saved Game-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+"Chyba pri ukladaní hry!\n"
+"Uložená hra môže byť poškodená!\n"
+"\n"
+"Dôvod:\n"
+
+#: ../src/event_set_null_trigger.cc:39
 #, fuzzy
-msgid "Menu"
-msgstr "Chat menu"
+msgid "Set Null Trigger"
+msgstr "Nastav Nul Trigger"
 
-#: ../src/interactive_player.cc:115 ../src/editor/editorinteractive.cc:121
+#: ../src/game_options_menu.cc:46 ../src/game_main_menu.cc:98
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
+msgid "Options"
+msgstr "Nastavenia"
+
+#: ../src/game_options_menu.cc:57
+msgid "README"
+msgstr "ČÍTAJMA"
+
+#: ../src/game_options_menu.cc:66
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
+msgid "License"
+msgstr "Licencia"
+
+#: ../src/game_options_menu.cc:75
+msgid "Authors"
+msgstr "Autori"
+
+#: ../src/game_options_menu.cc:83
+msgid "Ingame Music"
+msgstr "Hudba"
+
+#: ../src/game_options_menu.cc:90
+msgid "Sound FX"
+msgstr "Zvuk"
+
+#: ../src/game_options_menu.cc:100
 #, fuzzy
-msgid "Minimap"
-msgstr "Minimum"
+msgid "Save game"
+msgstr "Uložiť hru"
 
-#: ../src/interactive_player.cc:123 ../src/editor/editorinteractive.cc:129
+#: ../src/game_options_menu.cc:110
 #, fuzzy
-msgid "Buildhelp"
-msgstr "Verzia"
+msgid "Load game"
+msgstr "Nahraj hru"
 
-#: ../src/interactive_player.cc:279
-msgid "PAUSE"
-msgstr "Pauza"
-
-#: ../src/interactive_player.cc:324
-msgid "Message: "
-msgstr "Správa:"
-
-#: ../src/minimap.cc:163 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
-msgid "Map"
-msgstr "Mapa"
-
-#: ../src/minimap.cc:172
+#: ../src/game_options_menu.cc:121
 #, fuzzy
-msgid "Terrain"
-msgstr "Výber terénu"
-
-#: ../src/minimap.cc:180
-#, fuzzy
-msgid "Owner"
-msgstr "Vlastnené"
-
-#: ../src/minimap.cc:188
-#, fuzzy
-msgid "Flags"
-msgstr "vlajka"
-
-#: ../src/minimap.cc:196
-#, fuzzy
-msgid "Roads"
-msgstr "Pripravený"
+msgid "Exit game"
+msgstr "Opusti hru"
 
 #: ../src/playerdescrgroup.cc:35
 msgid "Player 2"
@@ -739,30 +417,372 @@ msgstr "Počítač"
 msgid "Human"
 msgstr "Človek"
 
-#: ../src/stock_menu.cc:71
-msgid "Show wares"
+#: ../src/event_unhide_area.cc:37
+msgid "Unhide Area"
+msgstr "Odkry oblasť"
+
+#: ../src/event_allow_building.cc:39
+msgid "Allow Building"
+msgstr "Povol stavbu"
+
+#: ../src/trainingsite.cc:215
+msgid "Resting"
+msgstr "Odpočíva"
+
+#: ../src/trainingsite.cc:217
+msgid "Not Working"
+msgstr "Nepracuje"
+
+#: ../src/game_debug_ui.cc:269
+msgid "Debug Field"
+msgstr "Opravné políčko"
+
+#: ../src/game_debug_ui.cc:316
+msgid "height:"
+msgstr "výška:"
+
+#: ../src/event_message_box.cc:41
+msgid "Message Box"
+msgstr "Správa"
+
+#: ../src/event_message_box.cc:42
+msgid "No text defined"
+msgstr "Nedefinovaný text"
+
+#: ../src/event_message_box.cc:43
+msgid "Window Title"
+msgstr "Popis okna"
+
+#: ../src/event_message_box.cc:49
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:54
+msgid "Continue"
+msgstr "Pokračuj"
+
+#: ../src/constructionsite.cc:223
+msgid "built"
+msgstr "postavené"
+
+#: ../src/building_ui.cc:152
+msgid "Destroy building?"
+msgstr "Zničiť budovu?"
+
+#: ../src/building_ui.cc:164
+msgid "Do you really want to destroy this "
+msgstr "Chceš naozaj zničiť túto"
+
+#: ../src/building_ui.cc:617
+#, fuzzy
+msgid "Stop"
+msgstr "Zásoby"
+
+#: ../src/building_ui.cc:639
+#, c-format
+msgid "Enhance to %s"
 msgstr ""
 
-#: ../src/stock_menu.cc:76
-msgid "Show workers"
-msgstr ""
+#: ../src/building_ui.cc:658
+#, fuzzy
+msgid "Destroy"
+msgstr "Popis"
+
+#: ../src/building_ui.cc:669
+#, fuzzy
+msgid "Debug"
+msgstr "Opravné políčko"
+
+#: ../src/building_ui.cc:1053 ../src/building_ui.cc:1059
+msgid "Worker Listing"
+msgstr "Zoznam pracovníkov"
+
+#: ../src/building_ui.cc:1074
+msgid "Type: "
+msgstr "Typ:"
+
+#: ../src/building_ui.cc:1079
+msgid "Experience: "
+msgstr "Skúsenosti:"
+
+#: ../src/building_ui.cc:1084
+msgid "Trying to become: "
+msgstr "Môže sa stať:"
+
+#: ../src/building_ui.cc:1246
+#, fuzzy
+msgid "Show worker listing"
+msgstr "Zoznam pracovníkov"
+
+#: ../src/building_ui.cc:1347 ../src/building_ui.cc:1809
+#: ../src/building_statistics_menu.cc:72
+#: ../src/editor/tools/editor_info_tool.cc:90
+#: ../src/editor/tools/editor_info_tool.cc:98
+#: ../src/editor/tools/editor_info_tool.cc:104
+#: ../src/editor/tools/editor_info_tool.cc:113
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:76
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:173
+#: ../src/editor/ui_menus/editor_variables_menu.cc:167
+msgid "Name"
+msgstr "Meno"
+
+#: ../src/building_ui.cc:1348 ../src/building_ui.cc:1810
+msgid "HP"
+msgstr "HP"
+
+#: ../src/building_ui.cc:1349 ../src/building_ui.cc:1811
+msgid "AT"
+msgstr "AT"
+
+#: ../src/building_ui.cc:1350 ../src/building_ui.cc:1812
+msgid "DE"
+msgstr "DE"
+
+#: ../src/building_ui.cc:1351 ../src/building_ui.cc:1813
+msgid "EV"
+msgstr "EV"
+
+#: ../src/building_ui.cc:1352 ../src/building_ui.cc:1814
+msgid "Level"
+msgstr "Úroveň"
+
+#: ../src/building_ui.cc:1373 ../src/building_ui.cc:1838
+msgid "Capacity"
+msgstr "Kapacita"
+
+#: ../src/building_ui.cc:1552
+msgid "Training Options"
+msgstr "Možnosti tréningu"
+
+#: ../src/building_ui.cc:1578
+msgid "Training mode : "
+msgstr "Tréningový mód:"
+
+#: ../src/building_ui.cc:1579
+msgid "Balanced"
+msgstr "Vyrovnaný"
+
+#: ../src/building_ui.cc:1607
+msgid "Hit Points"
+msgstr "HP - Zdravie"
+
+#: ../src/building_ui.cc:1641
+msgid "Defense"
+msgstr "DE - Obrana"
+
+#: ../src/building_ui.cc:1659
+msgid "Evade"
+msgstr "EV - Obratnosť"
+
+#: ../src/building_ui.cc:1699
+msgid "Make heroes"
+msgstr "Vytvor hrdinov"
+
+#: ../src/building_ui.cc:1701
+msgid "Balanced army"
+msgstr "Vyrovnané sily"
+
+#: ../src/building_ui.cc:1849
+msgid "xx"
+msgstr "xx"
 
 #: ../src/ware_statistics_menu.cc:347 ../src/ware_statistics_menu.cc:403
 msgid "Ware Statistics"
 msgstr "Bojová štatistika"
 
-#: ../src/watchwindow.cc:116
-msgid "Follow"
+#: ../src/trigger_time.cc:36
+msgid "Time Trigger"
+msgstr "Časová spúšť"
+
+#: ../src/interactive_player.cc:108 ../src/editor/editorinteractive.cc:97
+#, fuzzy
+msgid "Menu"
+msgstr "Chat menu"
+
+#: ../src/interactive_player.cc:116 ../src/editor/editorinteractive.cc:121
+#, fuzzy
+msgid "Minimap"
+msgstr "Minimum"
+
+#: ../src/interactive_player.cc:124 ../src/editor/editorinteractive.cc:129
+#, fuzzy
+msgid "Buildhelp"
+msgstr "Verzia"
+
+#: ../src/interactive_player.cc:132
+msgid "Tribe's ware encyclopedia"
 msgstr ""
 
-#: ../src/watchwindow.cc:124
-msgid "Center mainview on this"
+#: ../src/interactive_player.cc:288
+msgid "PAUSE"
+msgstr "Pauza"
+
+#: ../src/interactive_player.cc:333
+msgid "Message: "
+msgstr "Správa:"
+
+#: ../src/trigger_building.cc:40
+msgid "Building Trigger"
+msgstr "Stavebná spúšť"
+
+#: ../src/trigger_building.cc:47
+msgid "<unset>"
+msgstr "<nenastavené>"
+
+#: ../src/game_main_menu.cc:40 ../src/editor/ui_menus/editor_main_menu.cc:41
+msgid "Main Menu"
+msgstr "Hlavné menu"
+
+#: ../src/game_main_menu.cc:50
+#, fuzzy
+msgid "General statistics"
+msgstr "Všeobecná štatistika"
+
+#: ../src/game_main_menu.cc:58
+#, fuzzy
+msgid "Ware statistics"
+msgstr "Bojová štatistika"
+
+#: ../src/game_main_menu.cc:66
+#, fuzzy
+msgid "Building statistics"
+msgstr "Štatistika stavby"
+
+#: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:161
+#, fuzzy
+msgid "Objectives"
+msgstr "Menu cieľov"
+
+#: ../src/game_main_menu.cc:90
+#, fuzzy
+msgid "Chat"
+msgstr "Chat menu"
+
+#: ../src/game_chat_menu.cc:56
+msgid "Chat Menu"
+msgstr "Chat menu"
+
+#: ../src/game_chat_menu.cc:67
+msgid "Send"
+msgstr "Odoslať"
+
+#: ../src/game_chat_menu.cc:72
+msgid "Show messages as overlays:"
+msgstr "Zobraziť správy ako prekrytie:"
+
+#: ../src/game_main_menu_load_game.cc:43 ../src/game_main_menu_load_game.cc:47
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
+msgid "Load Game"
+msgstr "Nahraj hru"
+
+#: ../src/game_main_menu_load_game.cc:217
+msgid ""
+"Game Loading Error!\n"
+"Reason given:\n"
+msgstr ""
+"Chyba pri otváraní hry!\n"
+"Dôvod:\n"
+
+#: ../src/game_main_menu_load_game.cc:219
+msgid "Load Game Error!!"
+msgstr "Chyba otváranie hry!!"
+
+#: ../src/event_conquer_area.cc:36
+msgid "Conquer Area"
+msgstr "Oblasť výbojov"
+
+#: ../src/militarysite.cc:145
+#, c-format
+msgid "%d soldier (+%d)"
+msgid_plural "%d soldiers (+%d)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/militarysite.cc:147
+#, c-format
+msgid "%d soldier"
+msgid_plural "%d soldiers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/game_server_proto_packet_connect.cc:72
+#, c-format
+msgid ""
+"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+"Server runs %i.%02i\n"
+msgstr ""
+"Server spôsobil chybu pripojenia. Váš protokol (%i.%02i) je zastaralý, "
+"Server používa %i.%02i\n"
+
+#: ../src/game_server_proto_packet_connect.cc:78
+#, c-format
+msgid "Server is full!\n"
+msgstr "Server je plný!\n"
+
+#: ../src/game_server_proto_packet_connect.cc:83
+#, c-format
+msgid "This server doesn't serve widelands!\n"
+msgstr "Tento server neposkytuje Widelands!\n"
+
+#: ../src/game_server_proto_packet_getroominfo.cc:66
+#, c-format
+msgid "The Room %s is currently not logged in or unknown to the server.\n"
+msgstr ""
+"Miestnosť %s nie je v súčasnosti zaznamenaná alebo ju server nenašiel.\n"
+
+#: ../src/building_statistics_menu.cc:55 ../src/building_statistics_menu.cc:67
+msgid "Building Statistics"
+msgstr "Štatistika stavby"
+
+#: ../src/building_statistics_menu.cc:73
+msgid "Prod"
+msgstr "Produkcia"
+
+#: ../src/building_statistics_menu.cc:74
+msgid "Owned"
+msgstr "Vlastnené"
+
+#: ../src/building_statistics_menu.cc:75
+msgid "Build"
+msgstr "Verzia"
+
+#: ../src/building_statistics_menu.cc:85
+msgid "Total Productivity: "
+msgstr "Celková produktivita:"
+
+#: ../src/building_statistics_menu.cc:91
+msgid "Owned: "
+msgstr "Vlastnené:"
+
+#: ../src/building_statistics_menu.cc:111
+msgid "In Build: "
+msgstr "Vo výstavbe:"
+
+#: ../src/building_statistics_menu.cc:131
+msgid "Jump to unproductive: "
+msgstr "Skok na neproduktívne:"
+
+#: ../src/game_server_proto_packet_chatmessage.cc:69
+#, c-format
+msgid ""
+"Server replied illegally to ChatMessage package. Should have sent %i but "
+"sent %i. Ignored"
+msgstr ""
+"Server odpovedal nesprávne na packet správy. Mal poslať %i ale poslal %i. "
+"Ignorujem to."
+
+#: ../src/encyclopedia_window.cc:42
+msgid "Tribe ware encyclopedia"
 msgstr ""
 
-#: ../src/watchwindow.cc:142
-#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:59
-msgid "Close"
-msgstr "Zavrieť"
+#: ../src/encyclopedia_window.cc:45
+msgid "Ware"
+msgstr ""
+
+#: ../src/encyclopedia_window.cc:51
+msgid "Is Produced by"
+msgstr ""
+
+#: ../src/encyclopedia_window.cc:55
+msgid "Needs Ware"
+msgstr ""
 
 #: ../src/editor/editorinteractive.cc:105
 #, fuzzy
@@ -1078,6 +1098,143 @@ msgstr "Kritická chyba spojení!"
 msgid "Server disconnected unexpectedly!"
 msgstr "Server sa nečakane odpojil!"
 
+#: ../src/editor/tools/editor_info_tool.cc:45
+msgid "Field Information"
+msgstr "Informácie o poli"
+
+#: ../src/editor/tools/editor_info_tool.cc:53
+msgid "1) Field Infos"
+msgstr "1) Informácie o poli"
+
+#: ../src/editor/tools/editor_info_tool.cc:54
+msgid "Coordinates"
+msgstr "Súradnice"
+
+#: ../src/editor/tools/editor_info_tool.cc:55
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:76
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:151
+msgid "Height"
+msgstr "Výška"
+
+#: ../src/editor/tools/editor_info_tool.cc:56
+msgid " Caps: "
+msgstr "Kapacity:"
+
+#: ../src/editor/tools/editor_info_tool.cc:58
+msgid "small"
+msgstr "malá"
+
+#: ../src/editor/tools/editor_info_tool.cc:59
+msgid "medium"
+msgstr "stredná"
+
+#: ../src/editor/tools/editor_info_tool.cc:60
+msgid "big"
+msgstr "veľká"
+
+#: ../src/editor/tools/editor_info_tool.cc:63
+msgid " flag"
+msgstr "vlajka"
+
+#: ../src/editor/tools/editor_info_tool.cc:64
+msgid " mine"
+msgstr "baňa"
+
+#: ../src/editor/tools/editor_info_tool.cc:65
+msgid " port"
+msgstr "prístav"
+
+#: ../src/editor/tools/editor_info_tool.cc:66
+msgid " walk"
+msgstr "chôdza"
+
+#: ../src/editor/tools/editor_info_tool.cc:67
+msgid " swim"
+msgstr "plávanie"
+
+#: ../src/editor/tools/editor_info_tool.cc:69
+msgid "Owned by"
+msgstr "Vlastnené"
+
+#: ../src/editor/tools/editor_info_tool.cc:70
+msgid "Has base immovable"
+msgstr "má pevnú základňu"
+
+#: ../src/editor/tools/editor_info_tool.cc:71
+#, fuzzy
+msgid "Has bobs"
+msgstr "má boby"
+
+#: ../src/editor/tools/editor_info_tool.cc:75
+#, c-format
+msgid " Has resources: No\n"
+msgstr "má zdroje: Nie\n"
+
+#: ../src/editor/tools/editor_info_tool.cc:77
+msgid "Has resources: Yes"
+msgstr "má zdroje: Áno"
+
+#: ../src/editor/tools/editor_info_tool.cc:77
+msgid "amount of"
+msgstr "počet"
+
+#: ../src/editor/tools/editor_info_tool.cc:81
+msgid "Start resources amount"
+msgstr "Množstvo zdrojov na začiatku"
+
+#: ../src/editor/tools/editor_info_tool.cc:84
+#, c-format
+msgid " Roads: TODO!\n"
+msgstr "Cesty: k dorobeniu!\n"
+
+#: ../src/editor/tools/editor_info_tool.cc:87
+msgid "2) Right Terrain Info\n"
+msgstr "2) Informácie o teréne napravo\n"
+
+#: ../src/editor/tools/editor_info_tool.cc:91
+#: ../src/editor/tools/editor_info_tool.cc:99
+msgid "Texture Number"
+msgstr "Číslo textúry"
+
+#: ../src/editor/tools/editor_info_tool.cc:95
+msgid "3) Down Terrain Info\n"
+msgstr "3) Informácie o teréne dole\n"
+
+#: ../src/editor/tools/editor_info_tool.cc:103
+msgid "4) Map Info"
+msgstr "4) Informácie o mape"
+
+#: ../src/editor/tools/editor_info_tool.cc:105
+msgid "Size"
+msgstr "Veľkosť"
+
+#: ../src/editor/tools/editor_info_tool.cc:106
+#: ../src/editor/tools/editor_info_tool.cc:114
+msgid "Author"
+msgstr "Autor"
+
+#: ../src/editor/tools/editor_info_tool.cc:107
+#: ../src/editor/tools/editor_info_tool.cc:115
+msgid "Descr"
+msgstr "Popis"
+
+#: ../src/editor/tools/editor_info_tool.cc:108
+#: ../src/editor/ui_menus/editor_player_menu.cc:79
+msgid "Number of Players"
+msgstr "Počet hráčov"
+
+#: ../src/editor/tools/editor_info_tool.cc:109
+msgid " TODO: more information (number of resources, number of terrains...)"
+msgstr "K dorobeniu: viac informácií (množstvo zdrojov, počet terénov...)"
+
+#: ../src/editor/tools/editor_info_tool.cc:112
+msgid "5) World Info"
+msgstr "5) Informácie o svete"
+
+#: ../src/editor/tools/editor_info_tool.cc:116
+msgid " TODO -- More information (Number of bobs/number of wares...)\n"
+msgstr "K dopracovaniu -- Viac informácií (počet bobov/počet tovarov...)\n"
+
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
 #: ../src/editor/ui_menus/editor_event_menu.cc:125
@@ -1188,12 +1345,6 @@ msgstr "Menu voľby spúšte"
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:149
 msgid "Width"
 msgstr "Šírka"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:76
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:151
-#: ../src/editor/tools/editor_info_tool.cc:55
-msgid "Height"
-msgstr "Výška"
 
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:116
 msgid "Create Map"
@@ -1388,11 +1539,6 @@ msgstr "Súčasná veľkosť"
 #: ../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Player Options"
 msgstr "Volby hráča"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:79
-#: ../src/editor/tools/editor_info_tool.cc:108
-msgid "Number of Players"
-msgstr "Počet hráčov"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:227
 msgid "I"
@@ -1720,132 +1866,6 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
 msgid "Allow"
 msgstr ""
-
-#: ../src/editor/tools/editor_info_tool.cc:45
-msgid "Field Information"
-msgstr "Informácie o poli"
-
-#: ../src/editor/tools/editor_info_tool.cc:53
-msgid "1) Field Infos"
-msgstr "1) Informácie o poli"
-
-#: ../src/editor/tools/editor_info_tool.cc:54
-msgid "Coordinates"
-msgstr "Súradnice"
-
-#: ../src/editor/tools/editor_info_tool.cc:56
-msgid " Caps: "
-msgstr "Kapacity:"
-
-#: ../src/editor/tools/editor_info_tool.cc:58
-msgid "small"
-msgstr "malá"
-
-#: ../src/editor/tools/editor_info_tool.cc:59
-msgid "medium"
-msgstr "stredná"
-
-#: ../src/editor/tools/editor_info_tool.cc:60
-msgid "big"
-msgstr "veľká"
-
-#: ../src/editor/tools/editor_info_tool.cc:63
-msgid " flag"
-msgstr "vlajka"
-
-#: ../src/editor/tools/editor_info_tool.cc:64
-msgid " mine"
-msgstr "baňa"
-
-#: ../src/editor/tools/editor_info_tool.cc:65
-msgid " port"
-msgstr "prístav"
-
-#: ../src/editor/tools/editor_info_tool.cc:66
-msgid " walk"
-msgstr "chôdza"
-
-#: ../src/editor/tools/editor_info_tool.cc:67
-msgid " swim"
-msgstr "plávanie"
-
-#: ../src/editor/tools/editor_info_tool.cc:69
-msgid "Owned by"
-msgstr "Vlastnené"
-
-#: ../src/editor/tools/editor_info_tool.cc:70
-msgid "Has base immovable"
-msgstr "má pevnú základňu"
-
-#: ../src/editor/tools/editor_info_tool.cc:71
-#, fuzzy
-msgid "Has bobs"
-msgstr "má boby"
-
-#: ../src/editor/tools/editor_info_tool.cc:75
-#, c-format
-msgid " Has resources: No\n"
-msgstr "má zdroje: Nie\n"
-
-#: ../src/editor/tools/editor_info_tool.cc:77
-msgid "Has resources: Yes"
-msgstr "má zdroje: Áno"
-
-#: ../src/editor/tools/editor_info_tool.cc:77
-msgid "amount of"
-msgstr "počet"
-
-#: ../src/editor/tools/editor_info_tool.cc:81
-msgid "Start resources amount"
-msgstr "Množstvo zdrojov na začiatku"
-
-#: ../src/editor/tools/editor_info_tool.cc:84
-#, c-format
-msgid " Roads: TODO!\n"
-msgstr "Cesty: k dorobeniu!\n"
-
-#: ../src/editor/tools/editor_info_tool.cc:87
-msgid "2) Right Terrain Info\n"
-msgstr "2) Informácie o teréne napravo\n"
-
-#: ../src/editor/tools/editor_info_tool.cc:91
-#: ../src/editor/tools/editor_info_tool.cc:99
-msgid "Texture Number"
-msgstr "Číslo textúry"
-
-#: ../src/editor/tools/editor_info_tool.cc:95
-msgid "3) Down Terrain Info\n"
-msgstr "3) Informácie o teréne dole\n"
-
-#: ../src/editor/tools/editor_info_tool.cc:103
-msgid "4) Map Info"
-msgstr "4) Informácie o mape"
-
-#: ../src/editor/tools/editor_info_tool.cc:105
-msgid "Size"
-msgstr "Veľkosť"
-
-#: ../src/editor/tools/editor_info_tool.cc:106
-#: ../src/editor/tools/editor_info_tool.cc:114
-msgid "Author"
-msgstr "Autor"
-
-#: ../src/editor/tools/editor_info_tool.cc:107
-#: ../src/editor/tools/editor_info_tool.cc:115
-msgid "Descr"
-msgstr "Popis"
-
-#: ../src/editor/tools/editor_info_tool.cc:109
-msgid " TODO: more information (number of resources, number of terrains...)"
-msgstr "K dorobeniu: viac informácií (množstvo zdrojov, počet terénov...)"
-
-#: ../src/editor/tools/editor_info_tool.cc:112
-msgid "5) World Info"
-msgstr "5) Informácie o svete"
-
-#: ../src/editor/tools/editor_info_tool.cc:116
-msgid " TODO -- More information (Number of bobs/number of wares...)\n"
-msgstr "K dopracovaniu -- Viac informácií (počet bobov/počet tovarov...)\n"
 
 #: ../src/map_objective_manager.h:58
 msgid "no descr"

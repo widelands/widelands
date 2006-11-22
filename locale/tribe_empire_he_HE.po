@@ -303,8 +303,7 @@ msgid "Fish"
 msgstr ""
 
 #: ../tribes/empire/wares/fish/conf:3
-msgid ""
-"Besides bread and meat, fish is also a food deliverer for the barbarians."
+msgid "Besides bread and meat, fish is also a food deliverer for the Empire."
 msgstr ""
 
 #: ../tribes/empire/wares/fishing_rod/conf:2
