@@ -58,7 +58,7 @@ ADD_LDFLAGS:=icon.o -lwsock32
 WINDRES = windres.exe
 icon.o: Widelands_win.rc
 
--include Makefile.local
+-include Makefile_local.h
 
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT											 #

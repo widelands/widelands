@@ -191,7 +191,7 @@ const char *NetGGZ::ip()
 	return ip_address;
 }
 
-void NetGGZ::initcore(const char *, const char *) {
+void NetGGZ::initcore(const char *hostname, const char *playername) {
 #ifdef HAVE_GGZ
 	GGZOptions opt;
 	int ret;
@@ -314,7 +314,7 @@ GGZHookReturn NetGGZ::callback_game(unsigned id, const void *data, const void *u
 }
 #endif
 
-void NetGGZ::event_server(unsigned int, const void *) {
+void NetGGZ::event_server(unsigned int id, const void *data) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGameType *type;
@@ -392,7 +392,7 @@ void NetGGZ::event_server(unsigned int, const void *) {
 #endif
 }
 
-void NetGGZ::event_room(unsigned int, const void *) {
+void NetGGZ::event_room(unsigned int id, const void *data) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	int i, num;
@@ -420,7 +420,7 @@ void NetGGZ::event_room(unsigned int, const void *) {
 #endif
 }
 
-void NetGGZ::event_game(unsigned int, const void *) {
+void NetGGZ::event_game(unsigned int id, const void *data) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGame *game;
@@ -468,7 +468,7 @@ std::list<std::string> NetGGZ::tables()
 	return tablelist;
 }
 
-void NetGGZ::join(const char * ) {
+void NetGGZ::join(const char *tablename ) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGameType *type;

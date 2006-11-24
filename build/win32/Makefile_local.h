@@ -15,3 +15,6 @@ Build=debug-slow
 
 #### Version #### // Needed for 'make dist'
 Version=SVN
+
+#### GGZ-Build ####
+USE_GGZ=YES
