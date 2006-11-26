@@ -58,6 +58,8 @@ volatile int WLApplication::may_run=0;
 #endif // WIN32
 #endif // DEBUG
 
+int editor_commandline=0; // Enable the User to start the Editor directly.
+
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::cout;
 using std::endl;
@@ -314,6 +316,8 @@ WLApplication::~WLApplication()
  */
 void WLApplication::run()
 {
+    if(editor_commandline==0){ //Normal startup (User did not type 'widelands --editor' in commandline)
+                              
 	g_sound_handler.start_music("intro");
 
 	Fullscreen_Menu_Intro *intro=new Fullscreen_Menu_Intro;
@@ -345,6 +349,15 @@ void WLApplication::run()
 
 	g_sound_handler.change_music("menu", 1000);
 	mainmenu();
+    
+    } // if(editor_commandline==0)
+    else{ // if(editor_commandline==1) - Directly start the Editor
+        g_sound_handler.start_music("ingame");
+  		Editor* e=new Editor();
+		e->run();
+		delete e;
+        }
+    
 	g_sound_handler.stop_music(500);
 
 	return;
@@ -890,7 +903,6 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 		m_commandline.erase("nozip");
 	}
 
-
 	if(m_commandline.count("double")>0) {
 		#ifdef DEBUG
 		#ifndef __WIN32__
@@ -905,7 +917,12 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 		<<endl;
 		#endif
 
-		m_commandline.erase("nozip");
+		m_commandline.erase("double");
+	}
+	
+		if(m_commandline.count("editor")>0) {
+		editor_commandline=1;
+		m_commandline.erase("editor");
 	}
 
 	//Note: it should be possible to record and playback at the same time,
@@ -979,6 +996,8 @@ void WLApplication::show_usage()
 	<<" --ggz                Starts game as GGZ Gaming Zone client (don't use!)"<<endl
 	<<" --nosound            Starts the game with sound disabled"<<endl
 	<<" --nozip              Do not save files as binary zip archives."<<endl
+	<<endl
+	<<" --editor             Directly starts the Widelands editor."<<endl
 	<<endl
 #ifdef DEBUG
 #ifndef __WIN32__
@@ -1071,8 +1090,8 @@ void WLApplication::yield_double_game()
  * Run the main menu
  */
 void WLApplication::mainmenu()
-{
-	bool done=false;
+{                             
+    bool done=false;
 
 	while(!done) {
 		unsigned char code;
