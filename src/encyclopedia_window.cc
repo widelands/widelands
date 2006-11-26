@@ -76,7 +76,8 @@ void EncyclopediaWindow::fillWaresTable() {
 
 void EncyclopediaWindow::wareSelected(int selectedRow) {
    const Tribe_Descr* tribe = interactivePlayer.get_player()->get_tribe();
-   int index = reinterpret_cast<int>(waresTable->get_entry(selectedRow)->get_user_data());
+	const uintptr_t index = reinterpret_cast<const uintptr_t>
+		(waresTable->get_entry(selectedRow)->get_user_data());
    Item_Ware_Descr* ware = tribe->get_ware_descr(index);
 
    descrTxt->set_text(ware->get_helptext());
@@ -115,7 +116,8 @@ void EncyclopediaWindow::wareSelected(int selectedRow) {
 void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
    condTable->clear();
    const Tribe_Descr* tribe = interactivePlayer.get_player()->get_tribe();
-   int index = reinterpret_cast<int>(prodSitesTable->get_entry(selectedRow)->get_user_data());
+	const uintptr_t index = reinterpret_cast<const uintptr_t>
+		(prodSitesTable->get_entry(selectedRow)->get_user_data());
    ProductionSite_Descr* curProdSite = (ProductionSite_Descr*)tribe->get_building_descr(index);
    std::vector<Input> inputs = *curProdSite->get_inputs();
    uint i;
