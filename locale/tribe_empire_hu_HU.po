@@ -533,7 +533,7 @@ msgstr "Harci lándzsa"
 
 #: ../tribes/empire/wares/war_lance/conf:3
 msgid ""
-"This is the best and sharpest weapon, the romans blacksmith create for their "
+"This is the best and sharpest weapon, the romans weaponsmith create for their "
 "warriors"
 msgstr ""
 

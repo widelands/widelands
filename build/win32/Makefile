@@ -54,7 +54,6 @@ endif
 TARGET:=native
 VERSION:=build10
 
-ADD_LDFLAGS:=icon.o -lwsock32
 WINDRES = windres.exe
 icon.o: Widelands_win.rc
 
@@ -67,7 +66,7 @@ icon.o: Widelands_win.rc
 # COMPILE TIME configuration
 ifeq ($(USE_GGZ),YES)
 ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
-ADD_LDFLAGS:=-lggzmod -lggzcore -lggz
+ADD_LDFLAGS:=-lggzmod -lggzcore -lggz -lexpat
 endif
 
 
@@ -132,7 +131,7 @@ endif
 OBJECT_DIR:=../../src/$(TARGET)-$(BUILD)
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
-LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) icon.o $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net -lwsock32
 
 ##############################################################################
 # Building
