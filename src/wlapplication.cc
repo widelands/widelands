@@ -828,6 +828,8 @@ void WLApplication::shutdown_settings()
 /**
  * Start the hardware: switch to graphics mode, start sound handler
  *
+ * \pre The locale must be known before calling this
+ *
  * \return true if there were no fatal errors that prevent the game from running
  */
 const bool WLApplication::init_hardware()

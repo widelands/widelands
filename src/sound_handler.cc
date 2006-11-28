@@ -38,8 +38,8 @@
 #endif
 
 /** The global \ref Sound_Handler object
- * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
- * command line option
+ * The sound handler is a static object because otherwise it'd be quite
+ * difficult to pass the --nosound command line option
  */
 Sound_Handler g_sound_handler;
 
@@ -49,24 +49,28 @@ Sound_Handler g_sound_handler;
  * intialization cannot take place.
  * \sa Sound_Handler::init()
 */
-Sound_Handler::Sound_Handler()
-{
-	m_nosound = false;
-	m_disable_music = false;
-	m_disable_fx = false;
-	m_lock_audio_disabling = false;
-	m_random_order = true;
-	m_current_songset = "";
-}
+Sound_Handler::Sound_Handler():
+	m_nosound(false),
+	m_lock_audio_disabling(false),
+	m_disable_music(false),
+	m_disable_fx(false),
+	m_random_order(true),
+	m_current_songset("")
+{}
 
 /** Housekeeping: unset hooks. Audio data will be freed automagically by the
- *\ref Songset and \ref FXset destructors
+ *\ref Songset and \ref FXset destructors, but not the {song|fx}sets themselves
 */
 Sound_Handler::~Sound_Handler()
 {
+	m_fxs.clear();
+	m_songs.clear();
 }
 
 /** The real intialization for Sound_Handler.
+ *
+ * \pre The locale must be known before calling this
+ * 
  * \see Sound_Handler::Sound_Handler()
 */
 void Sound_Handler::init()
@@ -113,7 +117,10 @@ void Sound_Handler::shutdown()
 	Mix_CloseAudio();
 }
 
-/// Read the main config file, load background music and systemwide sound fx
+/** Read the main config file, load background music and systemwide sound fx
+ *
+ * \pre The locale must be known before calling this
+ */
 void Sound_Handler::read_config()
 {
 	Section *s;
@@ -343,7 +350,7 @@ void Sound_Handler::load_one_fx
 		//make sure that requested FXset exists
 
 		if (m_fxs.count(fx_name) == 0)
-			m_fxs[fx_name] = new FXset(); //  FIXME memory leak!
+			m_fxs[fx_name] = new FXset();
 
 		m_fxs[fx_name]->add_fx(m);
 	} else {
@@ -570,7 +577,7 @@ void Sound_Handler::register_song
 			register_song(*i, basename, true);
 		} else {
 			if (m_songs.count(basename) == 0)
-				m_songs[basename] = new Songset(); //  FIXME memory leak!
+				m_songs[basename] = new Songset();
 
 			m_songs[basename]->add_song(*i);
 		}

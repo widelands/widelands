@@ -808,7 +808,7 @@ inline void Map::get_tln(const FCoords f, FCoords * const o) const
 	assert(0 <= f.y);
 	assert(f.y < m_height);
 	assert(m_fields <= f.field);
-	assert            (f.field < m_fields + max_index());
+	assert(f.field < m_fields + max_index());
 	o->y = f.y-1;
 	o->x = f.x;
 	o->field = f.field - m_width;
