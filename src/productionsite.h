@@ -71,6 +71,7 @@ public:
 	const std::set<std::string>* get_outputs() const { return &m_output; }
 	const std::vector<Input>* get_inputs() const { return &m_inputs; }
 	const ProductionProgram* get_program(std::string name) const;
+	const ProgramMap& get_all_programs() { return m_programs; };
 
 	virtual bool is_only_production_site(void) { return true; }
 

@@ -20,6 +20,8 @@
 #ifndef __S__ENCYCLOPEDIA_WINDOW_H
 #define __S__ENCYCLOPEDIA_WINDOW_H
 
+#include <string>
+
 #include "encyclopedia_window.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -28,6 +30,15 @@
 #include "ui_unique_window.h"
 #include "ui_table.h"
 #include "ui_multilinetextarea.h"
+
+class Item_Ware_Descr;
+class Tribe_Descr;
+
+struct WareCondition {
+   int amount;
+   bool isGrouped;
+   int groupId;
+};
 
 class EncyclopediaWindow : public UI::UniqueWindow {
    public:
@@ -39,8 +50,11 @@ class EncyclopediaWindow : public UI::UniqueWindow {
 	  UI::Table* prodSitesTable;
 	  UI::Table* condTable;
 	  UI::Multiline_Textarea* descrTxt;
+	  const Item_Ware_Descr* selectedWare;
+	  const Tribe_Descr* tribe;
 	  void fillWaresTable();
 	  void wareSelected(int);
 	  void prodSiteSelected(int);
+	  void createCondTableEntry(int index, std::string wareName, bool consumed, WareCondition* wareCondition);
 };
 #endif

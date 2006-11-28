@@ -18,6 +18,7 @@
  */
 
 #include <set>
+#include <map>
 #include <vector>
 #include <string>
 #include <typeinfo>
@@ -34,13 +35,16 @@
 #include "player.h"
 #include "building.h"
 #include "productionsite.h"
+#include "production_program.h"
+#include "helper.h"
 
 #define WINDOW_WIDTH	600
 #define WINDOW_HEIGHT 550
 
 EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr,UI::UniqueWindow::Registry& registry) :
 UI::UniqueWindow(&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware encyclopedia")), interactivePlayer(plr) {
-
+   tribe = interactivePlayer.get_player()->get_tribe();
+   
    waresTable=new UI::Table(this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250, Align_Left, UI::Table::UP);
    waresTable->add_column(_("Ware").c_str(), UI::Table::STRING, WINDOW_WIDTH);
    waresTable->selected.set(this, &EncyclopediaWindow::wareSelected);
@@ -52,8 +56,10 @@ UI::UniqueWindow(&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware enc
 	prodSitesTable->selected.set(this, &EncyclopediaWindow::prodSiteSelected);
 
 	condTable = new UI::Table(this, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140, Align_Left, UI::Table::UP);
-   condTable->add_column(_("Needs Ware").c_str(), UI::Table::STRING, 240);
-
+   condTable->add_column(_("Needs Ware").c_str(), UI::Table::STRING, 140); //was 240
+   condTable->add_column(_("Consumed").c_str(),UI::Table::STRING,80);
+   condTable->add_column(_("Group").c_str(),UI::Table::STRING,70);
+   
    fillWaresTable();
 
    if (get_usedefaultpos())
@@ -64,7 +70,6 @@ EncyclopediaWindow::~EncyclopediaWindow() {
 }
 
 void EncyclopediaWindow::fillWaresTable() {
-   const Tribe_Descr* tribe = interactivePlayer.get_player()->get_tribe();
    int nrWares = tribe->get_nrwares();
    int i;
    for (i=0;i<nrWares;i++) {
@@ -75,18 +80,18 @@ void EncyclopediaWindow::fillWaresTable() {
 }
 
 void EncyclopediaWindow::wareSelected(int selectedRow) {
-   const Tribe_Descr* tribe = interactivePlayer.get_player()->get_tribe();
+   this->tribe = interactivePlayer.get_player()->get_tribe();
 	const uintptr_t index = reinterpret_cast<const uintptr_t>
 		(waresTable->get_entry(selectedRow)->get_user_data());
-   Item_Ware_Descr* ware = tribe->get_ware_descr(index);
+   
+   this->selectedWare = tribe->get_ware_descr(index);
 
-   descrTxt->set_text(ware->get_helptext());
+   descrTxt->set_text(selectedWare->get_helptext());
 
    prodSitesTable->clear();
    condTable->clear();
 
    int i;
-   log("Encyclopedia: searching ware: %s\n",ware->get_name());
    bool found = false;
 
    for (i = 0; i < tribe->get_nrbuildings(); ++i) {
@@ -98,10 +103,9 @@ void EncyclopediaWindow::wareSelected(int selectedRow) {
 
       if (typeid(*curBuilding)==typeid(ProductionSite_Descr)) {
          ProductionSite_Descr* curProdSite = (ProductionSite_Descr*) curBuilding;
-
-         std::set<std::string>::iterator it = curProdSite->get_outputs()->find(ware->get_name());
+         
+         std::set<std::string>::iterator it = curProdSite->get_outputs()->find(selectedWare->get_name());
          if (it != curProdSite->get_outputs()->end()) {
-            log("Encyclopedia: ware found ware at: %s\n",curProdSite->get_descname());
             UI::Table_Entry* tableEntry = new UI::Table_Entry(prodSitesTable,reinterpret_cast<void * const>(i),curProdSite->get_buildicon());
             tableEntry->set_string(0,curProdSite->get_descname());
             found = true;
@@ -115,15 +119,110 @@ void EncyclopediaWindow::wareSelected(int selectedRow) {
 
 void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
    condTable->clear();
-   const Tribe_Descr* tribe = interactivePlayer.get_player()->get_tribe();
 	const uintptr_t index = reinterpret_cast<const uintptr_t>
 		(prodSitesTable->get_entry(selectedRow)->get_user_data());
    ProductionSite_Descr* curProdSite = (ProductionSite_Descr*)tribe->get_building_descr(index);
-   std::vector<Input> inputs = *curProdSite->get_inputs();
+   
+   std::map<std::string, ProductionProgram*> map = curProdSite->get_all_programs();
+  
+   std::string programName = "produce_";
+   programName += selectedWare->get_name();
+   std::map<std::string, ProductionProgram*>::iterator programIt = map.find(programName);
+   
    uint i;
-   for (i=0;i<inputs.size();i++) {
-      UI::Table_Entry* tableEntry = new UI::Table_Entry(condTable,reinterpret_cast<void * const>(i),inputs[i].get_ware()->get_menu_pic());
-      tableEntry->set_string(0,inputs[i].get_ware()->get_descname());
+   
+   if (programIt == map.end()) {
+      programIt = map.find("work");
+   }
+   
+   if (programIt != map.end()) {
+      std::vector<ProductionAction> actions = programIt->second->get_all_actions();
+      
+      std::map<std::string,WareCondition> waresConsumed;
+      std::map<std::string,WareCondition> waresChecked;
+      
+      int group = 0;
+     
+      for (i=0; i<actions.size(); i++) {
+         //some actions are noted as "consume ware1,ware2"
+         std::vector<std::string> splitWares;
+         split_string(actions[i].sparam1,&splitWares,",");
+         
+         bool isGrouped = false;
+         
+         if (splitWares.size() > 1 && actions[i].type == ProductionAction::actCheck) {
+            isGrouped = true;
+            group++;
+         }
+         
+         uint j;
+         if (actions[i].type == ProductionAction::actConsume) {
+            for (j=0;j<splitWares.size();j++) {
+               WareCondition wc = {
+                  actions[i].iparam1,
+                  isGrouped,
+                  group
+               };
+               waresConsumed[splitWares[j]] = wc;
+            }
+         }
+         else if (actions[i].type == ProductionAction::actCheck) {
+            for (j=0;j<splitWares.size();j++) {
+               WareCondition wc = {
+                  actions[i].iparam1,
+                  isGrouped,
+                  group
+               };
+               waresChecked[splitWares[j]] = wc;
+            }
+         }
+      }
+      
+      i = 0;
+      for (std::map<std::string,WareCondition>::iterator waresCheckedIt=waresChecked.begin(); 
+            waresCheckedIt!=waresChecked.end(); waresCheckedIt++) {
+            
+         std::map<std::string,WareCondition>::iterator waresConsumedIt = waresConsumed.find(waresCheckedIt->first);
+         createCondTableEntry(i,waresCheckedIt->first.c_str(),(waresConsumedIt != waresConsumed.end()),&waresCheckedIt->second);
+         
+         if (waresConsumedIt != waresConsumed.end()) {
+            waresConsumed.erase(waresConsumedIt);
+         }
+         i++;
+      }
+      
+      for (std::map<std::string,WareCondition>::iterator waresConsumedIt=waresConsumed.begin(); 
+            waresConsumedIt!=waresConsumed.end(); waresConsumedIt++) {
+         
+         createCondTableEntry(i,waresConsumedIt->first.c_str(),true,&waresConsumedIt->second);
+         i++;
+      }
    }
 
+}
+
+void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, bool consumed, WareCondition* wareCondition) {
+   Item_Ware_Descr* curWare = tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
+   
+   UI::Table_Entry* tableEntry = new UI::Table_Entry(condTable,reinterpret_cast<void * const>(index),curWare->get_menu_pic());
+   std::string rowText = curWare->get_descname();
+   std::string consumeAmount = "0";
+   std::string groupId = "";
+   
+   if (consumed) {
+      char buf[5];
+      snprintf(buf, sizeof(buf), "%i", wareCondition->amount);
+      consumeAmount = buf;
+   }
+   
+   if (wareCondition->isGrouped) {
+      int k;
+      for (k=0;k<wareCondition->groupId;k++) {
+         groupId+="*";
+      }
+   }
+   
+   tableEntry->set_string(0,rowText.c_str());
+   tableEntry->set_string(1,consumeAmount.c_str());
+   tableEntry->set_string(2,groupId.c_str());
 }

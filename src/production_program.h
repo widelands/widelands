@@ -81,6 +81,8 @@ public:
 		assert(static_cast<const uint>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
+	
+	const std::vector<ProductionAction>& get_all_actions() { return m_actions;};
 
 	void parse(std::string directory, Profile* prof, std::string name,
 		ProductionSite_Descr* building, const EncodeData* encdata);
