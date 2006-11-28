@@ -132,6 +132,12 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
    uint i;
    
    if (programIt == map.end()) {
+      programName = "smelt_";
+      programName+= selectedWare->get_name();
+      programIt = map.find(programName);
+   }
+   
+   if (programIt == map.end()) {
       programIt = map.find("work");
    }
    
@@ -141,7 +147,8 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
       std::map<std::string,WareCondition> waresConsumed;
       std::map<std::string,WareCondition> waresChecked;
       
-      int group = 0;
+      int consumeGroup = 0;
+      int checkGroup = 0;
      
       for (i=0; i<actions.size(); i++) {
          //some actions are noted as "consume ware1,ware2"
@@ -150,9 +157,12 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
          
          bool isGrouped = false;
          
-         if (splitWares.size() > 1 && actions[i].type == ProductionAction::actCheck) {
+         if (splitWares.size() > 1) {
             isGrouped = true;
-            group++;
+            if (actions[i].type == ProductionAction::actCheck)
+               checkGroup++;
+            else if (actions[i].type == ProductionAction::actConsume)
+               consumeGroup++;
          }
          
          uint j;
@@ -161,7 +171,7 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
                WareCondition wc = {
                   actions[i].iparam1,
                   isGrouped,
-                  group
+                  consumeGroup
                };
                waresConsumed[splitWares[j]] = wc;
             }
@@ -171,7 +181,7 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
                WareCondition wc = {
                   actions[i].iparam1,
                   isGrouped,
-                  group
+                  checkGroup
                };
                waresChecked[splitWares[j]] = wc;
             }
