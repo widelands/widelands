@@ -1,9 +1,9 @@
 [global]
-descname=_ Metallworks
+descname=_ Metalworks
 type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=yes 
-buildicon=metallworks_build.png
+buildicon=metalworks_build.png
 worker=blacksmith
 output=bakingtray
 output=fire_tongs
@@ -139,7 +139,7 @@ grindstone=1
 thatchreed=1
 
 [idle]
-pics=metallworks_i_??.png 
+pics=metalworks_i_??.png 
 hot_spot_x=45
 hot_spot_y=65
 clrkey_r=255
@@ -150,7 +150,7 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=metallworks_i_??.png 
+pics=metalworks_i_??.png 
 hot_spot_x=45
 hot_spot_y=65
 clrkey_r=255
@@ -161,7 +161,7 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=metallworks_i_??.png 
+pics=metalworks_i_??.png 
 hot_spot_x=45
 hot_spot_y=65
 clrkey_r=255

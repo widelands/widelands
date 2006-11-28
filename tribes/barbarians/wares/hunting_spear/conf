@@ -1,6 +1,6 @@
 [global]
 descname=_Hunting Spear
-help=_This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metallworks.
+help=_This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metalworks.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
