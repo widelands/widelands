@@ -11,7 +11,7 @@ output=wood
 soundfx=sawmill
 
 [inputs]
-trunk=16
+trunk=8
 
 [work]
 0=sleep 16500       # much more faster than barbarians hardener

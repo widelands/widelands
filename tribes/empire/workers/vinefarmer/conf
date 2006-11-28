@@ -1,17 +1,17 @@
 [global]
-descname=_Wine-Grower
+descname=_Vinefarmer
 help=Grows Wine
 type=generic
 menu_pic=menu.png
-program=plantwine
-program=harvestwine
+program=plantvine
+program=harvestvine
 
 [buildcost]
 carrier=1
 shovel=1
 basket=1
 
-[plantwine]
+[plantvine]
 0=setdescription tribe:wine0                    # Set a random immovable description
 1=findspace size:any radius:1			        # Find space for the description within the given radius
 2=walk coords								    # Walk to the target coordinates
@@ -20,7 +20,7 @@ basket=1
 5=animation idle 500						    # Wait a while
 6=return										# Go back home
 
-[harvestwine]
+[harvestvine]
 0=findobject attrib:grown_wine radius:2	        # find an object matching the given criteria, put it into the object slot
 1=walk object								    # walk to the object in the object slot
 2=animation idle 10000				            # play an animation 

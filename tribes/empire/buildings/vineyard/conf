@@ -1,0 +1,47 @@
+[global]
+descname=_ Vineyard		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes
+buildicon=vineyard_build.png
+worker=vinefarmer
+stopable=yes
+output=grape
+program=work
+program=plantvine
+program=harvestvine
+
+[work]
+0=set +nostats	# ending this program has no effect on statistics
+1=call plantvine
+2=call harvestvine
+
+[plantwine]
+0=set +catch	# failure of this program will be caught
+1=sleep 20000	# sleep the given amount of time
+2=worker plantvine	# cause the worker to run the 'plantwine' program
+
+[harvestwine]
+0=set +catch
+1=sleep 5000		# sleep the given amount of time
+2=worker harvestvine	# cause the worker to run the 'harvestwine' program
+
+
+[buildcost]
+wood=2
+stone=1
+marble=2
+marblecolumn=2
+
+[idle]
+pics=vineyard_i_??.png  # ???
+hot_spot_x=74
+hot_spot_y=84
+
+[build]
+pics=vineyard_b_??.png  # ???
+hot_spot_x=74
+hot_spot_y=84
+
+
