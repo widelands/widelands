@@ -16,10 +16,8 @@ msgstr ""
 msgid "Bunny"
 msgstr "Zajíc"
 
-#: ../worlds/greenland/bobs/bush1/conf:1
-#: ../worlds/greenland/bobs/bush2/conf:1
-#: ../worlds/greenland/bobs/bush3/conf:1
-#: ../worlds/greenland/bobs/bush4/conf:1
+#: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
+#: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
 #: ../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Keř"
@@ -101,14 +99,10 @@ msgstr "Menhiry"
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../worlds/greenland/bobs/tree1/conf:4
-#: ../worlds/greenland/bobs/tree2/conf:4
-#: ../worlds/greenland/bobs/tree3/conf:4
-#: ../worlds/greenland/bobs/tree4/conf:4
-#: ../worlds/greenland/bobs/tree5/conf:4
-#: ../worlds/greenland/bobs/tree6/conf:4
-#: ../worlds/greenland/bobs/tree7/conf:4
-#: ../worlds/greenland/bobs/tree8/conf:4
+#: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
+#: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
+#: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
+#: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Stromy"
 
@@ -147,4 +141,3 @@ msgstr "Voda"
 #: ../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Ryba"
-

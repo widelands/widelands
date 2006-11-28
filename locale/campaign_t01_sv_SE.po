@@ -42,10 +42,11 @@ msgstr "Sagan börjar..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "Nästa"
 
@@ -163,10 +164,6 @@ msgstr ""
 "mellan flaggorna framför bägge byggnaderna. Försök att få en så kort och "
 "jämn väg som möjligt."
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Uppdrag3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh talar..."
@@ -217,10 +214,6 @@ msgstr ""
 "nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, "
 "kan du klicka direkt på destinationen så byggs hela vägen på en gång."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Uppdrag5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh nickar..."
@@ -264,10 +257,6 @@ msgstr ""
 "befästningar vi snart kan bli tvingade att bygga? Och - som en gåva av ödet "
 "- där är förträfliga stenblock i närheten...\"<br><br>-- NYTT MÅL--<br> - "
 "Bygg två Stenhuggare sydväst om ditt huvudkvarter."
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Uppdrag7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -349,7 +338,10 @@ msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may "
 "continue if you wish. Otherwise, move on to the next mission."
-msgstr "Mycket bra gjort, hövding. Vi har nu allt för att möta vintern och kan förbereda oss för kommande strider.<br><br>SEGER!<br><br> Du kan fortsätta spela om du vill. Annars kan du fortsätta med nästa uppdrag."
+msgstr ""
+"Mycket bra gjort, hövding. Vi har nu allt för att möta vintern och kan "
+"förbereda oss för kommande strider.<br><br>SEGER!<br><br> Du kan fortsätta "
+"spela om du vill. Annars kan du fortsätta med nästa uppdrag."
 
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
@@ -368,7 +360,18 @@ msgid ""
 "part of the road and must choose the next direction then. Build a road "
 "between the flags in front of the two buildings. Try to keep it short and "
 "even."
-msgstr "- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar dig var en liten byggnad - som en skogshuggare - kan byggas.<br>- bygg en skogshuggare vid den röda pricken direkt till höger om ditt huvudkvarter genom att klicka på den och välja skogshuggare.<br>- Bygg en väg mellan skogshuggare och ditt huvudkvarter. Du gör det genom att klicka på flaggan framför någon av byggnaderna och sen väg knappen. Runt flaggan borde det dyka upp symboler, som visar hur brant vägen är i den riktningen. Ju brantare väg, desto svårare är det för ditt folk att gå på den. När du klickar på en sådan symbol bygger du en del av vägen och måste sen välja nästa riktning. Bygg en väg mellan flaggorna framför de två byggnaderna. Försök att få den så kort och jämn som möjligt."
+msgstr ""
+"- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar dig "
+"var en liten byggnad - som en skogshuggare - kan byggas.<br>- bygg en "
+"skogshuggare vid den röda pricken direkt till höger om ditt huvudkvarter "
+"genom att klicka på den och välja skogshuggare.<br>- Bygg en väg mellan "
+"skogshuggare och ditt huvudkvarter. Du gör det genom att klicka på flaggan "
+"framför någon av byggnaderna och sen väg knappen. Runt flaggan borde det "
+"dyka upp symboler, som visar hur brant vägen är i den riktningen. Ju "
+"brantare väg, desto svårare är det för ditt folk att gå på den. När du "
+"klickar på en sådan symbol bygger du en del av vägen och måste sen välja "
+"nästa riktning. Bygg en väg mellan flaggorna framför de två byggnaderna. "
+"Försök att få den så kort och jämn som möjligt."
 
 #: ../campaigns/t01.wmf/objective:16
 msgid ""
@@ -382,7 +385,16 @@ msgid ""
 "road. Connect said flag with the new Lumberjack afterwards. Note that, "
 "instead of building a road step by step, you may also directly click at the "
 "destination to build the entire road at once."
-msgstr "- Där är en flaggsymbol mitt på vägen du just byggt. Genom att klicka på den och sedan på flaggknappen placerar du en flagga där, och därigenom fördelar du bördan mellan två transportörer. När mycket varor ska transporteras mellan två punkter, flertalet flaggor mellan dem gör att det går fortare, och där igenom förbättrar du din infrastruktur. Placera en flagga mitt på vägen.<br>- Bygg en skogshuggare direkt söderut om flaggan du som du ska sätta på vägen. Förbind flaggan med den nya skogshuggaren efteråt. Notera att i stället för att bygga en väg bit för bit, så kan du istället klicka direkt på destinationen för att bygga hela vägen i ett svep."
+msgstr ""
+"- Där är en flaggsymbol mitt på vägen du just byggt. Genom att klicka på den "
+"och sedan på flaggknappen placerar du en flagga där, och därigenom fördelar "
+"du bördan mellan två transportörer. När mycket varor ska transporteras "
+"mellan två punkter, flertalet flaggor mellan dem gör att det går fortare, "
+"och där igenom förbättrar du din infrastruktur. Placera en flagga mitt på "
+"vägen.<br>- Bygg en skogshuggare direkt söderut om flaggan du som du ska "
+"sätta på vägen. Förbind flaggan med den nya skogshuggaren efteråt. Notera "
+"att i stället för att bygga en väg bit för bit, så kan du istället klicka "
+"direkt på destinationen för att bygga hela vägen i ett svep."
 
 #: ../campaigns/t01.wmf/objective:24
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
@@ -392,3 +404,11 @@ msgstr "- Bygg en Skogsplanterare öster om Skogshuggaren."
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr "- Bygg två Stenhuggare sydväst om ditt Huvudkvarter."
 
+#~ msgid "Order3"
+#~ msgstr "Uppdrag3"
+
+#~ msgid "Order5"
+#~ msgstr "Uppdrag5"
+
+#~ msgid "Order7"
+#~ msgstr "Uppdrag7"

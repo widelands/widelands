@@ -36,10 +36,11 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr ""
 
@@ -120,10 +121,6 @@ msgid ""
 "keep it short and even."
 msgstr ""
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr ""
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr ""
@@ -157,10 +154,6 @@ msgid ""
 "the entire road at once."
 msgstr ""
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr ""
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr ""
@@ -189,10 +182,6 @@ msgid ""
 "what fortifications we might be forced to build very soon? And - like a gift "
 "of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW "
 "OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
-msgstr ""
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
 msgstr ""
 
 #: ../campaigns/t01.wmf/event:610

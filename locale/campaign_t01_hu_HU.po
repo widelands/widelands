@@ -40,10 +40,11 @@ msgstr "A történet elkezdődik..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -160,10 +161,6 @@ msgstr ""
 "egy szimbólumra az út egy darabja elkészül. Kösd össze a ét épület előtti "
 "zászlót. Próbáld a lehető legrövidebb utat kiépíteni."
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Feladat3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh:"
@@ -215,10 +212,6 @@ msgstr ""
 "szükséges lépésről lépésre felépíteni elég a célra kattintani, hogy "
 "elkészítsd az egész utat."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Feladat5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh biccent..."
@@ -266,10 +259,6 @@ msgstr ""
 "\n"
 "--ÚJ FELADAT--\n"
 "-Építs két kőbányát délnyugatra a főhadiszállástól."
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Feladat7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -414,3 +403,12 @@ msgstr "- Építs egy erdészkunyhót keletre a favágókunyhótól."
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr "- Építs két kőfejtőt délnyugatra a főhadiszállásodtól."
+
+#~ msgid "Order3"
+#~ msgstr "Feladat3"
+
+#~ msgid "Order5"
+#~ msgstr "Feladat5"
+
+#~ msgid "Order7"
+#~ msgstr "Feladat7"

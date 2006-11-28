@@ -32,6 +32,11 @@ msgstr "A Római Birodalom kultúrája."
 msgid "Arena"
 msgstr "Aréna"
 
+#: ../tribes/empire/buildings/armoursmith/conf:2
+#: ../tribes/empire/workers/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr "Páncélkészítő"
+
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
 msgstr "Pékség"
@@ -121,6 +126,11 @@ msgstr "Vadászkonyhó"
 msgid "Inn"
 msgstr "Vendéglő"
 
+#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Favágó"
+
 #: ../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"
 msgstr "Márvány bánya"
@@ -161,6 +171,11 @@ msgstr "Birkafarm"
 msgid "Smelting Works"
 msgstr "Vasolvasztó"
 
+#: ../tribes/empire/buildings/stonemason/conf:2
+#: ../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kőfaragó"
+
 #: ../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Kocsma"
@@ -173,6 +188,11 @@ msgstr "Torony"
 msgid "Trainingscamp"
 msgstr "Edzőtábor"
 
+#: ../tribes/empire/buildings/vineyard/conf:2
+#, fuzzy
+msgid "Vineyard"
+msgstr "Bányász"
+
 #: ../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
 msgstr ""
@@ -180,6 +200,11 @@ msgstr ""
 #: ../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Raktár"
+
+#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/weaponsmith/conf:2
+msgid "Weaponsmith"
+msgstr "Fegyverkészítő"
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -332,7 +357,7 @@ msgstr "Arany"
 
 #: ../tribes/empire/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 
@@ -519,6 +544,10 @@ msgstr ""
 msgid "Stones"
 msgstr "Kő"
 
+#: ../tribes/empire/wares/stone/conf:3 ../tribes/empire/wares/wood/conf:3
+msgid "Stones and wood are the basic build ware of the Empire."
+msgstr ""
+
 #: ../tribes/empire/wares/trunk/conf:2
 msgid "Trunk"
 msgstr "Farönk"
@@ -533,8 +562,8 @@ msgstr "Harci lándzsa"
 
 #: ../tribes/empire/wares/war_lance/conf:3
 msgid ""
-"This is the best and sharpest weapon, the romans weaponsmith create for their "
-"warriors"
+"This is the best and sharpest weapon, the romans weaponsmith create for "
+"their warriors"
 msgstr ""
 
 #: ../tribes/empire/wares/water/conf:2
@@ -571,10 +600,6 @@ msgstr ""
 msgid "Wood"
 msgstr "Fa"
 
-#: ../tribes/empire/wares/wood/conf:3 ../tribes/empire/wares/stone/conf:3
-msgid "Stones and wood are the basic build ware of the Empire."
-msgstr ""
-
 #: ../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
 msgstr "Falándzsa"
@@ -591,11 +616,6 @@ msgstr "Gyapjú"
 #: ../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr ""
-
-#: ../tribes/empire/workers/armoursmith/conf:2
-#: ../tribes/empire/buildings/armoursmith/conf:2
-msgid "Armoursmith"
-msgstr "Páncélkészítő"
 
 #: ../tribes/empire/workers/baker/conf:2
 msgid "Baker"
@@ -649,11 +669,6 @@ msgstr "Vadász"
 msgid "Innkeeper"
 msgstr "Kocsmáros"
 
-#: ../tribes/empire/workers/lumberjack/conf:2
-#: ../tribes/empire/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Favágó"
-
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Mester bányász"
@@ -678,25 +693,18 @@ msgstr "Olvasztómunkás"
 msgid "Soldier"
 msgstr "Harcos"
 
-#: ../tribes/empire/workers/stonemason/conf:2
-#: ../tribes/empire/buildings/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Kőfaragó"
-
 #: ../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Edző"
 
-#: ../tribes/empire/workers/weaponsmith/conf:2
-#: ../tribes/empire/buildings/weaponsmith/conf:2
-msgid "Weaponsmith"
-msgstr "Fegyverkészítő"
+#: ../tribes/empire/workers/vinefarmer/conf:2
+#, fuzzy
+msgid "Vinefarmer"
+msgstr "Földmőves"
 
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Takács"
 
-#: ../tribes/empire/workers/wine-grower/conf:2
-#: ../tribes/empire/buildings/wine-grower/conf:2
-msgid "Wine-Grower"
-msgstr "Szőlő termelő"
+#~ msgid "Wine-Grower"
+#~ msgstr "Szőlő termelő"

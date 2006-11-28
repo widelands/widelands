@@ -6,7 +6,7 @@ msgstr ""
 "sirver Exp $\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-01-19 16:13+0100\n"
+"PO-Revision-Date: 2006-11-28 19:30+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -155,8 +155,8 @@ msgstr "Majatalo"
 msgid "Lumberjack"
 msgstr "Puunhakkaaja"
 
-#: ../tribes/barbarians/buildings/metallworks/conf:2
-msgid "Metallworks"
+#: ../tribes/barbarians/buildings/metalworks/conf:2
+msgid "Metalworks"
 msgstr "Metallipaja"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
@@ -233,7 +233,7 @@ msgstr ""
 #: ../tribes/barbarians/wares/bakingtray/conf:3
 msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced in the metallworks like all tools."
+"produced in the metalworks like all tools."
 msgstr ""
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
@@ -323,7 +323,7 @@ msgstr ""
 #: ../tribes/barbarians/wares/fire_tongs/conf:3
 msgid ""
 "The fire tongs are the tool of the smelter, working in the Smelting works. "
-"Produced in the smelting works."
+"Produced in the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/fish/conf:2
@@ -358,7 +358,7 @@ msgstr "Kulta"
 
 #: ../tribes/barbarians/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 
@@ -406,7 +406,7 @@ msgstr "Metsästysseiväs"
 #: ../tribes/barbarians/wares/hunting_spear/conf:3
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters. Produced in the metallworks."
+"in one blow. It is only used by the hunters. Produced in the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/iron/conf:2
@@ -467,7 +467,7 @@ msgstr "Poimi"
 #: ../tribes/barbarians/wares/pick/conf:3
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
-"metallworks."
+"metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
@@ -501,7 +501,7 @@ msgstr "Viikate"
 
 #: ../tribes/barbarians/wares/scythe/conf:3
 msgid ""
-"The Scythe is the tool of the farmers. It is produced in the metallworks."
+"The Scythe is the tool of the farmers. It is produced in the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
@@ -522,7 +522,7 @@ msgstr "Lapio"
 #: ../tribes/barbarians/wares/shovel/conf:3
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
-"the ranger use it. Build at the metallworks."
+"the ranger use it. Build at the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/snack/conf:2
@@ -530,7 +530,7 @@ msgid "Snack"
 msgstr ""
 
 #: ../tribes/barbarians/wares/snack/conf:3
-msgid "A bit bigger, for the advanced minors will need a big hap."
+msgid "A bit bigger, for the advanced minors will need a big morsel."
 msgstr ""
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
@@ -691,7 +691,6 @@ msgid "Trainer"
 msgstr "Valmentaja"
 
 #: ../tribes/barbarians/workers/weaver/conf:2
-#, fuzzy
 msgid "Weaver"
 msgstr "Vettä"
 

@@ -23,8 +23,8 @@ msgstr "Lapin"
 msgid "Bush"
 msgstr "Buisson"
 
-#: ../worlds/desert/bobs/cactus3/conf:1 ../worlds/desert/bobs/cactus2/conf:1
-#: ../worlds/desert/bobs/cactus1/conf:1 ../worlds/desert/bobs/cactus4/conf:1
+#: ../worlds/desert/bobs/cactus1/conf:1 ../worlds/desert/bobs/cactus2/conf:1
+#: ../worlds/desert/bobs/cactus3/conf:1 ../worlds/desert/bobs/cactus4/conf:1
 msgid "Cactus"
 msgstr "Cactus"
 
@@ -101,8 +101,8 @@ msgid "Palm"
 msgstr "Palmier"
 
 #: ../worlds/desert/bobs/tree2/conf:4 ../worlds/desert/bobs/tree3/conf:4
-#: ../worlds/desert/bobs/tree7/conf:4 ../worlds/desert/bobs/tree5/conf:4
-#: ../worlds/desert/bobs/tree6/conf:4 ../worlds/desert/bobs/tree4/conf:4
+#: ../worlds/desert/bobs/tree4/conf:4 ../worlds/desert/bobs/tree5/conf:4
+#: ../worlds/desert/bobs/tree6/conf:4 ../worlds/desert/bobs/tree7/conf:4
 #: ../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Arbre"

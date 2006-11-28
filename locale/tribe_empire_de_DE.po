@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tribe_empire_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-11-22 18:47+0100\n"
+"PO-Revision-Date: 2006-11-28 19:35+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,11 @@ msgstr "Dies ist die Kultur des römischen Imperiums."
 #: ../tribes/empire/buildings/arena/conf:2
 msgid "Arena"
 msgstr "Arena"
+
+#: ../tribes/empire/buildings/armoursmith/conf:2
+#: ../tribes/empire/workers/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr "Rüstungsschmied"
 
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
@@ -124,6 +129,11 @@ msgstr "Jägerhütte"
 msgid "Inn"
 msgstr "Wirtshaus"
 
+#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Holzfäller"
+
 #: ../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"
 msgstr "Marmormine"
@@ -164,6 +174,11 @@ msgstr "Schäferei"
 msgid "Smelting Works"
 msgstr "Hochofen"
 
+#: ../tribes/empire/buildings/stonemason/conf:2
+#: ../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Steinmetz"
+
 #: ../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Taverne"
@@ -176,6 +191,10 @@ msgstr "Turm"
 msgid "Trainingscamp"
 msgstr "Trainingslager"
 
+#: ../tribes/empire/buildings/vineyard/conf:2
+msgid "Vineyard"
+msgstr "Weinhof"
+
 #: ../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
 msgstr "Winzerei"
@@ -183,6 +202,11 @@ msgstr "Winzerei"
 #: ../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Warenlager"
+
+#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/weaponsmith/conf:2
+msgid "Weaponsmith"
+msgstr "Waffenschmied"
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -352,7 +376,7 @@ msgstr "Gold"
 
 #: ../tribes/empire/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 "Gold ist das wertvollste Metal des Imperiums. Es wird nur für besonders "
@@ -564,6 +588,10 @@ msgstr ""
 msgid "Stones"
 msgstr "Steine"
 
+#: ../tribes/empire/wares/stone/conf:3 ../tribes/empire/wares/wood/conf:3
+msgid "Stones and wood are the basic build ware of the Empire."
+msgstr "Steine und Holz sind die Grundbaustoffe im Imperium."
+
 #: ../tribes/empire/wares/trunk/conf:2
 msgid "Trunk"
 msgstr "Stamm"
@@ -578,8 +606,8 @@ msgstr "Kriegslanze"
 
 #: ../tribes/empire/wares/war_lance/conf:3
 msgid ""
-"This is the best and sharpest weapon, the romans weaponsmith create for their "
-"warriors"
+"This is the best and sharpest weapon, the romans weaponsmith create for "
+"their warriors"
 msgstr ""
 "Dies ist die beste und schärfste Waffe, die die imperialen Schmiede für ihre "
 "Krieger produzieren."
@@ -624,10 +652,6 @@ msgstr ""
 msgid "Wood"
 msgstr "Holz"
 
-#: ../tribes/empire/wares/wood/conf:3 ../tribes/empire/wares/stone/conf:3
-msgid "Stones and wood are the basic build ware of the Empire."
-msgstr "Steine und Holz sind die Grundbaustoffe im Imperium."
-
 #: ../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
 msgstr "Holzlanze"
@@ -647,11 +671,6 @@ msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr ""
 "Wolle ist das Haar von Schaffen. Imperiale Webereien benutzen sie um Stoffe "
 "zu erstellen."
-
-#: ../tribes/empire/workers/armoursmith/conf:2
-#: ../tribes/empire/buildings/armoursmith/conf:2
-msgid "Armoursmith"
-msgstr "Rüstungsschmied"
 
 #: ../tribes/empire/workers/baker/conf:2
 msgid "Baker"
@@ -705,11 +724,6 @@ msgstr "Jäger"
 msgid "Innkeeper"
 msgstr "Wirt"
 
-#: ../tribes/empire/workers/lumberjack/conf:2
-#: ../tribes/empire/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Holzfäller"
-
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Bergwerksmeister"
@@ -734,25 +748,17 @@ msgstr "Hüttenarbeiter"
 msgid "Soldier"
 msgstr "Soldat"
 
-#: ../tribes/empire/workers/stonemason/conf:2
-#: ../tribes/empire/buildings/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Steinmetz"
-
 #: ../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../tribes/empire/workers/weaponsmith/conf:2
-#: ../tribes/empire/buildings/weaponsmith/conf:2
-msgid "Weaponsmith"
-msgstr "Waffenschmied"
+#: ../tribes/empire/workers/vinefarmer/conf:2
+msgid "Vinefarmer"
+msgstr "Weinbauer"
 
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Weber"
 
-#: ../tribes/empire/workers/wine-grower/conf:2
-#: ../tribes/empire/buildings/wine-grower/conf:2
-msgid "Wine-Grower"
-msgstr "Wein-Bauer"
+#~ msgid "Wine-Grower"
+#~ msgstr "Wein-Bauer"

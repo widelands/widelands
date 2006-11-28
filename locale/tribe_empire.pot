@@ -31,6 +31,11 @@ msgstr ""
 msgid "Arena"
 msgstr ""
 
+#: ../tribes/empire/buildings/armoursmith/conf:2
+#: ../tribes/empire/workers/armoursmith/conf:2
+msgid "Armoursmith"
+msgstr ""
+
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
 msgstr ""
@@ -119,6 +124,11 @@ msgstr ""
 msgid "Inn"
 msgstr ""
 
+#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr ""
+
 #: ../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"
 msgstr ""
@@ -159,6 +169,11 @@ msgstr ""
 msgid "Smelting Works"
 msgstr ""
 
+#: ../tribes/empire/buildings/stonemason/conf:2
+#: ../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr ""
+
 #: ../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr ""
@@ -171,12 +186,21 @@ msgstr ""
 msgid "Trainingscamp"
 msgstr ""
 
+#: ../tribes/empire/buildings/vineyard/conf:2
+msgid "Vineyard"
+msgstr ""
+
 #: ../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
 msgstr ""
 
 #: ../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
+msgstr ""
+
+#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/weaponsmith/conf:2
+msgid "Weaponsmith"
 msgstr ""
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
@@ -312,7 +336,7 @@ msgid "Gold"
 msgstr ""
 
 #: ../tribes/empire/wares/gold/conf:3
-msgid "Gold is the most valuable of all metalls; only very important things are garnished with it."
+msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
 msgstr ""
 
 #: ../tribes/empire/wares/goldstone/conf:2
@@ -479,6 +503,11 @@ msgstr ""
 msgid "Stones"
 msgstr ""
 
+#: ../tribes/empire/wares/stone/conf:3
+#: ../tribes/empire/wares/wood/conf:3
+msgid "Stones and wood are the basic build ware of the Empire."
+msgstr ""
+
 #: ../tribes/empire/wares/trunk/conf:2
 msgid "Trunk"
 msgstr ""
@@ -523,11 +552,6 @@ msgstr ""
 msgid "Wood"
 msgstr ""
 
-#: ../tribes/empire/wares/wood/conf:3
-#: ../tribes/empire/wares/stone/conf:3
-msgid "Stones and wood are the basic build ware of the Empire."
-msgstr ""
-
 #: ../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
 msgstr ""
@@ -542,11 +566,6 @@ msgstr ""
 
 #: ../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
-msgstr ""
-
-#: ../tribes/empire/workers/armoursmith/conf:2
-#: ../tribes/empire/buildings/armoursmith/conf:2
-msgid "Armoursmith"
 msgstr ""
 
 #: ../tribes/empire/workers/baker/conf:2
@@ -601,11 +620,6 @@ msgstr ""
 msgid "Innkeeper"
 msgstr ""
 
-#: ../tribes/empire/workers/lumberjack/conf:2
-#: ../tribes/empire/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr ""
-
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr ""
@@ -630,26 +644,15 @@ msgstr ""
 msgid "Soldier"
 msgstr ""
 
-#: ../tribes/empire/workers/stonemason/conf:2
-#: ../tribes/empire/buildings/stonemason/conf:2
-msgid "Stonemason"
-msgstr ""
-
 #: ../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr ""
 
-#: ../tribes/empire/workers/weaponsmith/conf:2
-#: ../tribes/empire/buildings/weaponsmith/conf:2
-msgid "Weaponsmith"
+#: ../tribes/empire/workers/vinefarmer/conf:2
+msgid "Vinefarmer"
 msgstr ""
 
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
-msgstr ""
-
-#: ../tribes/empire/workers/wine-grower/conf:2
-#: ../tribes/empire/buildings/wine-grower/conf:2
-msgid "Wine-Grower"
 msgstr ""
 

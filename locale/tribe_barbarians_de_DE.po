@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-11-22 19:13+0100\n"
+"PO-Revision-Date: 2006-11-28 19:29+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -162,8 +162,8 @@ msgstr "Wirtshaus"
 msgid "Lumberjack"
 msgstr "Holzfäller"
 
-#: ../tribes/barbarians/buildings/metallworks/conf:2
-msgid "Metallworks"
+#: ../tribes/barbarians/buildings/metalworks/conf:2
+msgid "Metalworks"
 msgstr "Schmiede"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
@@ -244,7 +244,7 @@ msgstr "Backblech"
 #: ../tribes/barbarians/wares/bakingtray/conf:3
 msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced in the metallworks like all tools."
+"produced in the metalworks like all tools."
 msgstr "Das Backblech ist das Werkzeug des Bäckers."
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
@@ -353,7 +353,7 @@ msgstr "Feuerzange"
 #: ../tribes/barbarians/wares/fire_tongs/conf:3
 msgid ""
 "The fire tongs are the tool of the smelter, working in the Smelting works. "
-"Produced in the smelting works."
+"Produced in the metalworks."
 msgstr "Die Feuerzange ist das Werkzeug des Hüttenarbeiters."
 
 #: ../tribes/barbarians/wares/fish/conf:2
@@ -392,7 +392,7 @@ msgstr "Gold"
 
 #: ../tribes/barbarians/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 "Gold ist das wertvollste Metall der Barbaren. Es wird nur für besonders "
@@ -447,7 +447,7 @@ msgstr "Jagdspeer"
 #: ../tribes/barbarians/wares/hunting_spear/conf:3
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters. Produced in the metallworks."
+"in one blow. It is only used by the hunters. Produced in the metalworks."
 msgstr ""
 "Dieser Speer ist leicht genug um geworfen zu werden und doch schwer genug um "
 "ein Tier sofort zu töten. Er wird nur von Jägern benutzt."
@@ -515,7 +515,7 @@ msgstr "Spitzhacke"
 #: ../tribes/barbarians/wares/pick/conf:3
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
-"metallworks."
+"metalworks."
 msgstr ""
 "Die Spitzhacke wird vom Steinmetz und vom Bergarbeiter benutzt. Sie wird in "
 "der Schmiede hergestellt."
@@ -554,7 +554,7 @@ msgstr "Sense"
 
 #: ../tribes/barbarians/wares/scythe/conf:3
 msgid ""
-"The Scythe is the tool of the farmers. It is produced in the metallworks."
+"The Scythe is the tool of the farmers. It is produced in the metalworks."
 msgstr ""
 "Die Sense ist das Werkzeug des Bauern. Sie wird in der Schmiede gefertigt."
 
@@ -579,7 +579,7 @@ msgstr "Schaufel"
 #: ../tribes/barbarians/wares/shovel/conf:3
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
-"the ranger use it. Build at the metallworks."
+"the ranger use it. Build at the metalworks."
 msgstr ""
 "Die Schaufel wird für den Umgang mit Pflanzen benötigt, daher wird sie vom "
 "Förster benutzt. Sie wird in der Schmiede hergestellt."
@@ -589,7 +589,7 @@ msgid "Snack"
 msgstr "Snack"
 
 #: ../tribes/barbarians/wares/snack/conf:3
-msgid "A bit bigger, for the advanced minors will need a big hap."
+msgid "A bit bigger, for the advanced minors will need a big morsel."
 msgstr ""
 "Ein bischen größer als die Ration, da erfahrene Bergarbeiter auch etwas mehr "
 "verlangen."

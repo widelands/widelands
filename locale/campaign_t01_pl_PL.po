@@ -44,10 +44,11 @@ msgstr "Opowieść kontynuuje bieg..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -165,10 +166,6 @@ msgstr ""
 "musisz następnie wybrać kolejny kierunek. Zbuduj drogę pomiędzy flagami "
 "przed dwoma budynkami. Spróbuj utrzymać ją jak najkrótszą i najgładszą."
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Rozkaz3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh mówi..."
@@ -219,10 +216,6 @@ msgstr ""
 "znajdzie się przy nowej Chatce drwala. Zauważ, że zamiast budować drogę po "
 "kawałku, możesz bezpośrednio połączyć flagi i zbudować drogę od razu."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Rozkaz5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh skinął głową..."
@@ -268,10 +261,6 @@ msgstr ""
 "będziemy musieli wznieść w przyszłości? Cudownym zrządzeniem losu kamienie "
 "znajdują się niedaleko...\"<br><br>--NOWE CELE--<br>- Zbuduj dwa "
 "Kamieniołomy na południowy zachód od Kwatery głównej."
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Rozkaz7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -392,3 +381,12 @@ msgstr ""
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr ""
+
+#~ msgid "Order3"
+#~ msgstr "Rozkaz3"
+
+#~ msgid "Order5"
+#~ msgstr "Rozkaz5"
+
+#~ msgid "Order7"
+#~ msgstr "Rozkaz7"

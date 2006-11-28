@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
@@ -40,10 +40,11 @@ msgstr "Het verhaal begint..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -53,9 +54,9 @@ msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the wardrums "
 "that haunt me even in my nightmares."
 msgstr ""
-"We zien hier de vernietigende vlammen, die ver weg Al'thunran verzwelgen. Het "
-"rode licht flitst in het donker en danst op het ritme van het oorlogsgeweld "
-"die zelfs in mijn nachtmerries op me jagen."
+"We zien hier de vernietigende vlammen, die ver weg Al'thunran verzwelgen. "
+"Het rode licht flitst in het donker en danst op het ritme van het "
+"oorlogsgeweld die zelfs in mijn nachtmerries op me jagen."
 
 #: ../campaigns/t01.wmf/event:47
 msgid ""
@@ -132,10 +133,6 @@ msgid ""
 "keep it short and even."
 msgstr ""
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Order3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh spreekt..."
@@ -169,10 +166,6 @@ msgid ""
 "the entire road at once."
 msgstr ""
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Order5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh knikt..."
@@ -202,10 +195,6 @@ msgid ""
 "of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW "
 "OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
 msgstr ""
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Order7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -314,3 +303,11 @@ msgstr "- Bouw een boswachtershut ten oosten van de Houthakker."
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr "- Bouw twee steengroeves ten zuid-westen van je hoofdkwartier"
 
+#~ msgid "Order3"
+#~ msgstr "Order3"
+
+#~ msgid "Order5"
+#~ msgstr "Order5"
+
+#~ msgid "Order7"
+#~ msgstr "Order7"

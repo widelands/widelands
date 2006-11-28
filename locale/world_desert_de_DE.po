@@ -19,20 +19,20 @@ msgstr ""
 msgid "Bunny"
 msgstr "Hase"
 
-#: ../worlds/desert/bobs/bush5/conf:1 ../worlds/desert/bobs/bush4/conf:1
-#: ../worlds/desert/bobs/bush1/conf:1
+#: ../worlds/desert/bobs/bush1/conf:1 ../worlds/desert/bobs/bush4/conf:1
+#: ../worlds/desert/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Busch"
 
-#: ../worlds/desert/bobs/cactus4/conf:1 ../worlds/desert/bobs/cactus3/conf:1
-#: ../worlds/desert/bobs/cactus2/conf:1 ../worlds/desert/bobs/cactus1/conf:1
+#: ../worlds/desert/bobs/cactus1/conf:1 ../worlds/desert/bobs/cactus2/conf:1
+#: ../worlds/desert/bobs/cactus3/conf:1 ../worlds/desert/bobs/cactus4/conf:1
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../worlds/desert/bobs/deadtree4/conf:1
-#: ../worlds/desert/bobs/deadtree3/conf:1
-#: ../worlds/desert/bobs/deadtree2/conf:1
 #: ../worlds/desert/bobs/deadtree1/conf:1
+#: ../worlds/desert/bobs/deadtree2/conf:1
+#: ../worlds/desert/bobs/deadtree3/conf:1
+#: ../worlds/desert/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Toter Baum"
 
@@ -48,25 +48,25 @@ msgstr "Ente"
 msgid "Desert Fox"
 msgstr "Wüstenfuchs"
 
-#: ../worlds/desert/bobs/grass3/conf:1 ../worlds/desert/bobs/grass2/conf:1
-#: ../worlds/desert/bobs/grass1/conf:1
+#: ../worlds/desert/bobs/grass1/conf:1 ../worlds/desert/bobs/grass2/conf:1
+#: ../worlds/desert/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Gras"
 
-#: ../worlds/desert/bobs/mushroom2/conf:1
 #: ../worlds/desert/bobs/mushroom1/conf:1
+#: ../worlds/desert/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Pilz"
 
-#: ../worlds/desert/bobs/pebble6/conf:1 ../worlds/desert/bobs/pebble5/conf:1
-#: ../worlds/desert/bobs/pebble4/conf:1 ../worlds/desert/bobs/pebble3/conf:1
-#: ../worlds/desert/bobs/pebble2/conf:1 ../worlds/desert/bobs/pebble1/conf:1
+#: ../worlds/desert/bobs/pebble1/conf:1 ../worlds/desert/bobs/pebble2/conf:1
+#: ../worlds/desert/bobs/pebble3/conf:1 ../worlds/desert/bobs/pebble4/conf:1
+#: ../worlds/desert/bobs/pebble5/conf:1 ../worlds/desert/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Kieselsteine"
 
-#: ../worlds/desert/bobs/ruin5/conf:1 ../worlds/desert/bobs/ruin4/conf:1
-#: ../worlds/desert/bobs/ruin3/conf:1 ../worlds/desert/bobs/ruin2/conf:1
-#: ../worlds/desert/bobs/ruin1/conf:1
+#: ../worlds/desert/bobs/ruin1/conf:1 ../worlds/desert/bobs/ruin2/conf:1
+#: ../worlds/desert/bobs/ruin3/conf:1 ../worlds/desert/bobs/ruin4/conf:1
+#: ../worlds/desert/bobs/ruin5/conf:1
 msgid "ruins"
 msgstr "Ruine"
 
@@ -74,9 +74,9 @@ msgstr "Ruine"
 msgid "Sheep"
 msgstr "Schaf"
 
-#: ../worlds/desert/bobs/skeleton3/conf:1
-#: ../worlds/desert/bobs/skeleton2/conf:1
 #: ../worlds/desert/bobs/skeleton1/conf:1
+#: ../worlds/desert/bobs/skeleton2/conf:1
+#: ../worlds/desert/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Skelett"
 
@@ -84,16 +84,16 @@ msgstr "Skelett"
 msgid "Shell"
 msgstr "Muschel"
 
-#: ../worlds/desert/bobs/sstones7/conf:1 ../worlds/desert/bobs/sstones6/conf:1
-#: ../worlds/desert/bobs/sstones5/conf:1 ../worlds/desert/bobs/sstones4/conf:1
-#: ../worlds/desert/bobs/sstones3/conf:1 ../worlds/desert/bobs/sstones2/conf:1
-#: ../worlds/desert/bobs/sstones1/conf:1
+#: ../worlds/desert/bobs/sstones1/conf:1 ../worlds/desert/bobs/sstones2/conf:1
+#: ../worlds/desert/bobs/sstones3/conf:1 ../worlds/desert/bobs/sstones4/conf:1
+#: ../worlds/desert/bobs/sstones5/conf:1 ../worlds/desert/bobs/sstones6/conf:1
+#: ../worlds/desert/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Stehender Stein"
 
-#: ../worlds/desert/bobs/stones6/conf:1 ../worlds/desert/bobs/stones5/conf:1
-#: ../worlds/desert/bobs/stones4/conf:1 ../worlds/desert/bobs/stones3/conf:1
-#: ../worlds/desert/bobs/stones2/conf:1 ../worlds/desert/bobs/stones1/conf:1
+#: ../worlds/desert/bobs/stones1/conf:1 ../worlds/desert/bobs/stones2/conf:1
+#: ../worlds/desert/bobs/stones3/conf:1 ../worlds/desert/bobs/stones4/conf:1
+#: ../worlds/desert/bobs/stones5/conf:1 ../worlds/desert/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Steine"
 
@@ -101,10 +101,10 @@ msgstr "Steine"
 msgid "Palm"
 msgstr "Palme"
 
-#: ../worlds/desert/bobs/tree8/conf:4 ../worlds/desert/bobs/tree7/conf:4
-#: ../worlds/desert/bobs/tree6/conf:4 ../worlds/desert/bobs/tree5/conf:4
-#: ../worlds/desert/bobs/tree4/conf:4 ../worlds/desert/bobs/tree3/conf:4
-#: ../worlds/desert/bobs/tree2/conf:4
+#: ../worlds/desert/bobs/tree2/conf:4 ../worlds/desert/bobs/tree3/conf:4
+#: ../worlds/desert/bobs/tree4/conf:4 ../worlds/desert/bobs/tree5/conf:4
+#: ../worlds/desert/bobs/tree6/conf:4 ../worlds/desert/bobs/tree7/conf:4
+#: ../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Baum"
 

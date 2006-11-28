@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../worlds/winterland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -123,8 +123,8 @@ msgid ""
 "These are the white, wide and frosty winterlands, in which the Northmen "
 "dwell."
 msgstr ""
-"Dit zijn de eindeloze, witte en bevroren winterlanden, waarin de Noorderlingen "
-"leven."
+"Dit zijn de eindeloze, witte en bevroren winterlanden, waarin de "
+"Noorderlingen leven."
 
 #: ../worlds/winterland/resconf:4
 msgid "Coal"
@@ -149,4 +149,3 @@ msgstr "Water"
 #: ../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Vis"
-

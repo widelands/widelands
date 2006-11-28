@@ -40,8 +40,11 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465
 #: ../campaigns/t01.wmf/event:484
+#: ../campaigns/t01.wmf/event:503
 #: ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542
 #: ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581
 #: ../campaigns/t01.wmf/event:619
 #: ../campaigns/t01.wmf/event:638
 #: ../campaigns/t01.wmf/event:657
@@ -96,10 +99,6 @@ msgstr ""
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 msgstr ""
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr ""
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr ""
@@ -116,10 +115,6 @@ msgstr ""
 msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 msgstr ""
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr ""
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr ""
@@ -134,10 +129,6 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:572
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
-msgstr ""
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
 msgstr ""
 
 #: ../campaigns/t01.wmf/event:610

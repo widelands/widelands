@@ -28,6 +28,12 @@ msgstr ""
 msgid "Arena"
 msgstr ""
 
+#: ../tribes/empire/buildings/armoursmith/conf:2
+#: ../tribes/empire/workers/armoursmith/conf:2
+#, fuzzy
+msgid "Armoursmith"
+msgstr "Zbrojár"
+
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
 msgstr "Pekáreň"
@@ -121,6 +127,11 @@ msgstr "Poľovník"
 msgid "Inn"
 msgstr "Krčma"
 
+#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Drevorúbač"
+
 #: ../tribes/empire/buildings/marblemine/conf:2
 #, fuzzy
 msgid "Marble Mine"
@@ -163,6 +174,11 @@ msgstr ""
 msgid "Smelting Works"
 msgstr "Zlievareň"
 
+#: ../tribes/empire/buildings/stonemason/conf:2
+#: ../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kamennár"
+
 #: ../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Kuchyňa"
@@ -175,6 +191,11 @@ msgstr ""
 msgid "Trainingscamp"
 msgstr "Výcvikový tábor"
 
+#: ../tribes/empire/buildings/vineyard/conf:2
+#, fuzzy
+msgid "Vineyard"
+msgstr "Baník"
+
 #: ../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
 msgstr ""
@@ -182,6 +203,12 @@ msgstr ""
 #: ../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Sklad"
+
+#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/weaponsmith/conf:2
+#, fuzzy
+msgid "Weaponsmith"
+msgstr "Zbrojár"
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
 #, fuzzy
@@ -336,7 +363,7 @@ msgstr "Zlato"
 
 #: ../tribes/empire/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 
@@ -524,6 +551,10 @@ msgstr ""
 msgid "Stones"
 msgstr "Kamennár"
 
+#: ../tribes/empire/wares/stone/conf:3 ../tribes/empire/wares/wood/conf:3
+msgid "Stones and wood are the basic build ware of the Empire."
+msgstr ""
+
 #: ../tribes/empire/wares/trunk/conf:2
 msgid "Trunk"
 msgstr "Kmeň"
@@ -538,8 +569,8 @@ msgstr ""
 
 #: ../tribes/empire/wares/war_lance/conf:3
 msgid ""
-"This is the best and sharpest weapon, the romans weaponsmith create for their "
-"warriors"
+"This is the best and sharpest weapon, the romans weaponsmith create for "
+"their warriors"
 msgstr ""
 
 #: ../tribes/empire/wares/water/conf:2
@@ -577,10 +608,6 @@ msgstr ""
 msgid "Wood"
 msgstr ""
 
-#: ../tribes/empire/wares/wood/conf:3 ../tribes/empire/wares/stone/conf:3
-msgid "Stones and wood are the basic build ware of the Empire."
-msgstr ""
-
 #: ../tribes/empire/wares/wood_lance/conf:2
 #, fuzzy
 msgid "Wood Lance"
@@ -598,12 +625,6 @@ msgstr ""
 #: ../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr ""
-
-#: ../tribes/empire/workers/armoursmith/conf:2
-#: ../tribes/empire/buildings/armoursmith/conf:2
-#, fuzzy
-msgid "Armoursmith"
-msgstr "Zbrojár"
 
 #: ../tribes/empire/workers/baker/conf:2
 msgid "Baker"
@@ -658,11 +679,6 @@ msgstr "Polovník"
 msgid "Innkeeper"
 msgstr "Krčmár"
 
-#: ../tribes/empire/workers/lumberjack/conf:2
-#: ../tribes/empire/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Drevorúbač"
-
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Majster banník"
@@ -688,27 +704,16 @@ msgstr "Zlievač"
 msgid "Soldier"
 msgstr "Vojak"
 
-#: ../tribes/empire/workers/stonemason/conf:2
-#: ../tribes/empire/buildings/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Kamennár"
-
 #: ../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Tréner"
 
-#: ../tribes/empire/workers/weaponsmith/conf:2
-#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/vinefarmer/conf:2
 #, fuzzy
-msgid "Weaponsmith"
-msgstr "Zbrojár"
+msgid "Vinefarmer"
+msgstr "Farmár"
 
 #: ../tribes/empire/workers/weaver/conf:2
 #, fuzzy
 msgid "Weaver"
 msgstr "Voda"
-
-#: ../tribes/empire/workers/wine-grower/conf:2
-#: ../tribes/empire/buildings/wine-grower/conf:2
-msgid "Wine-Grower"
-msgstr ""

@@ -43,10 +43,11 @@ msgstr "Der Anfang der Geschichte..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -175,10 +176,6 @@ msgstr ""
 "Straße zwischen den beiden Flaggen der beiden Gebäude und versuch sie "
 "möglichst eben zu halten."
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Auftrag 3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh sagt..."
@@ -230,10 +227,6 @@ msgstr ""
 "Straßenbauknopf einer Flagge aus und klicke dann auf das Ziel, um die "
 "gesamte Straße in einem Rutsch zu bauen."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Auftrag 5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh nickt..."
@@ -279,10 +272,6 @@ msgstr ""
 "müssen? Und - wie ein Geschenk der Götter - gibt es tatsächlich große Felsen "
 "in unmittelbarer Nähe.\"<br><br>--NEUES ZIEL--<br>- Baue zwei Steinbrüche im "
 "Südwesten Deines Hauptquartiers auf."
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Auftrag 7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -438,3 +427,12 @@ msgid "- Build two Quarries south-west of your headquarters."
 msgstr ""
 "- Baue zwei Steinmetze in die Nähe der Felsen im Südwesten Deines "
 "Hauptquartiers."
+
+#~ msgid "Order3"
+#~ msgstr "Auftrag 3"
+
+#~ msgid "Order5"
+#~ msgstr "Auftrag 5"
+
+#~ msgid "Order7"
+#~ msgstr "Auftrag 7"

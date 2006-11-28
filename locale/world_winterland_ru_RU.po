@@ -20,18 +20,18 @@ msgstr ""
 msgid "Bunny"
 msgstr "Кролик"
 
-#: ../worlds/winterland/bobs/bush5/conf:1
-#: ../worlds/winterland/bobs/bush4/conf:1
-#: ../worlds/winterland/bobs/bush3/conf:1
-#: ../worlds/winterland/bobs/bush2/conf:1
 #: ../worlds/winterland/bobs/bush1/conf:1
+#: ../worlds/winterland/bobs/bush2/conf:1
+#: ../worlds/winterland/bobs/bush3/conf:1
+#: ../worlds/winterland/bobs/bush4/conf:1
+#: ../worlds/winterland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Куст"
 
-#: ../worlds/winterland/bobs/deadtree4/conf:1
-#: ../worlds/winterland/bobs/deadtree3/conf:1
-#: ../worlds/winterland/bobs/deadtree2/conf:1
 #: ../worlds/winterland/bobs/deadtree1/conf:1
+#: ../worlds/winterland/bobs/deadtree2/conf:1
+#: ../worlds/winterland/bobs/deadtree3/conf:1
+#: ../worlds/winterland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Сухостой "
 
@@ -47,23 +47,23 @@ msgstr "Утка "
 msgid "Fox"
 msgstr "Лиса "
 
-#: ../worlds/winterland/bobs/grass3/conf:1
-#: ../worlds/winterland/bobs/grass2/conf:1
 #: ../worlds/winterland/bobs/grass1/conf:1
+#: ../worlds/winterland/bobs/grass2/conf:1
+#: ../worlds/winterland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Трава"
 
-#: ../worlds/winterland/bobs/mushroom2/conf:1
 #: ../worlds/winterland/bobs/mushroom1/conf:1
+#: ../worlds/winterland/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Гриб"
 
-#: ../worlds/winterland/bobs/pebble6/conf:1
-#: ../worlds/winterland/bobs/pebble5/conf:1
-#: ../worlds/winterland/bobs/pebble4/conf:1
-#: ../worlds/winterland/bobs/pebble3/conf:1
-#: ../worlds/winterland/bobs/pebble2/conf:1
 #: ../worlds/winterland/bobs/pebble1/conf:1
+#: ../worlds/winterland/bobs/pebble2/conf:1
+#: ../worlds/winterland/bobs/pebble3/conf:1
+#: ../worlds/winterland/bobs/pebble4/conf:1
+#: ../worlds/winterland/bobs/pebble5/conf:1
+#: ../worlds/winterland/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Галька"
 
@@ -75,39 +75,39 @@ msgstr "Мох"
 msgid "Sheep"
 msgstr "Овца"
 
-#: ../worlds/winterland/bobs/skeleton3/conf:1
-#: ../worlds/winterland/bobs/skeleton2/conf:1
 #: ../worlds/winterland/bobs/skeleton1/conf:1
+#: ../worlds/winterland/bobs/skeleton2/conf:1
+#: ../worlds/winterland/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Скелет"
 
-#: ../worlds/winterland/bobs/sstones7/conf:1
-#: ../worlds/winterland/bobs/sstones6/conf:1
-#: ../worlds/winterland/bobs/sstones5/conf:1
-#: ../worlds/winterland/bobs/sstones4/conf:1
-#: ../worlds/winterland/bobs/sstones3/conf:1
-#: ../worlds/winterland/bobs/sstones2/conf:1
 #: ../worlds/winterland/bobs/sstones1/conf:1
+#: ../worlds/winterland/bobs/sstones2/conf:1
+#: ../worlds/winterland/bobs/sstones3/conf:1
+#: ../worlds/winterland/bobs/sstones4/conf:1
+#: ../worlds/winterland/bobs/sstones5/conf:1
+#: ../worlds/winterland/bobs/sstones6/conf:1
+#: ../worlds/winterland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Скалы"
 
-#: ../worlds/winterland/bobs/stones6/conf:1
-#: ../worlds/winterland/bobs/stones5/conf:1
-#: ../worlds/winterland/bobs/stones4/conf:1
-#: ../worlds/winterland/bobs/stones3/conf:1
-#: ../worlds/winterland/bobs/stones2/conf:1
 #: ../worlds/winterland/bobs/stones1/conf:1
+#: ../worlds/winterland/bobs/stones2/conf:1
+#: ../worlds/winterland/bobs/stones3/conf:1
+#: ../worlds/winterland/bobs/stones4/conf:1
+#: ../worlds/winterland/bobs/stones5/conf:1
+#: ../worlds/winterland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Камни"
 
-#: ../worlds/winterland/bobs/tree8/conf:4
-#: ../worlds/winterland/bobs/tree7/conf:4
-#: ../worlds/winterland/bobs/tree6/conf:4
-#: ../worlds/winterland/bobs/tree5/conf:4
-#: ../worlds/winterland/bobs/tree4/conf:4
-#: ../worlds/winterland/bobs/tree3/conf:4
-#: ../worlds/winterland/bobs/tree2/conf:4
 #: ../worlds/winterland/bobs/tree1/conf:4
+#: ../worlds/winterland/bobs/tree2/conf:4
+#: ../worlds/winterland/bobs/tree3/conf:4
+#: ../worlds/winterland/bobs/tree4/conf:4
+#: ../worlds/winterland/bobs/tree5/conf:4
+#: ../worlds/winterland/bobs/tree6/conf:4
+#: ../worlds/winterland/bobs/tree7/conf:4
+#: ../worlds/winterland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Дерево"
 
@@ -123,7 +123,8 @@ msgstr "Арктика"
 msgid ""
 "These are the white, wide and frosty winterlands, in which the Northmen "
 "dwell."
-msgstr "Это белые, огромные и холодные арктические земли, в которых живут Норманы."
+msgstr ""
+"Это белые, огромные и холодные арктические земли, в которых живут Норманы."
 
 #: ../worlds/winterland/resconf:4
 msgid "Coal"
@@ -148,4 +149,3 @@ msgstr "Вода"
 #: ../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Рыба"
-

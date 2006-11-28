@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Widelands 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-08-05 14:22+0200\n"
-"Last-Translator: Rob Snelders <programming@ertai.nl>\n"
+"PO-Revision-Date: 2006-11-28 19:32+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,6 @@ msgid "Wildboar"
 msgstr "Everzwijn"
 
 #: ../tribes/barbarians/buildings/axefactory/conf:2
-#, fuzzy
 msgid "Axefactory"
 msgstr "Bijlfabriek"
 
@@ -49,7 +48,6 @@ msgid "Barrier"
 msgstr "Barrière"
 
 #: ../tribes/barbarians/buildings/battlearena/conf:2
-#, fuzzy
 msgid "Battle Arena"
 msgstr "Arena"
 
@@ -78,32 +76,26 @@ msgid "Construction Site"
 msgstr "Bouwplaats"
 
 #: ../tribes/barbarians/buildings/deep_coalmine/conf:2
-#, fuzzy
 msgid "Deep Coal Mine"
 msgstr "Diepe kolenmijn"
 
 #: ../tribes/barbarians/buildings/deep_goldmine/conf:2
-#, fuzzy
 msgid "Deep Gold Mine"
 msgstr "Diepe goudmijn"
 
 #: ../tribes/barbarians/buildings/deep_oremine/conf:2
-#, fuzzy
 msgid "Deep Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
 #: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
-#, fuzzy
 msgid "Deeper Coal Mine"
 msgstr "Diepe kolenmijn"
 
 #: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
-#, fuzzy
 msgid "Deeper Gold Mine"
 msgstr "Diepe goudmijn"
 
 #: ../tribes/barbarians/buildings/deeper_oremine/conf:2
-#, fuzzy
 msgid "Deeper Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
@@ -165,12 +157,11 @@ msgstr "Herberg"
 msgid "Lumberjack"
 msgstr "Houthakker"
 
-#: ../tribes/barbarians/buildings/metallworks/conf:2
-msgid "Metallworks"
+#: ../tribes/barbarians/buildings/metalworks/conf:2
+msgid "Metalworks"
 msgstr "Metaalbewerkerij"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
-#, fuzzy
 msgid "Micro brewery"
 msgstr "Kleine brouwerij"
 
@@ -227,7 +218,6 @@ msgid "Well"
 msgstr "Put"
 
 #: ../tribes/barbarians/wares/axe/conf:2
-#, fuzzy
 msgid "Axe"
 msgstr "Bijl"
 
@@ -245,11 +235,10 @@ msgstr ""
 #: ../tribes/barbarians/wares/bakingtray/conf:3
 msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced in the metallworks like all tools."
+"produced in the metalworks like all tools."
 msgstr ""
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
-#, fuzzy
 msgid "Battle Axe"
 msgstr "Slagbijl"
 
@@ -281,7 +270,6 @@ msgid ""
 msgstr ""
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
-#, fuzzy
 msgid "Broad Axe"
 msgstr "Brede bijl"
 
@@ -292,7 +280,6 @@ msgid ""
 msgstr ""
 
 #: ../tribes/barbarians/wares/bronzeaxe/conf:2
-#, fuzzy
 msgid "Bronze Axe"
 msgstr "Bronzen bijl"
 
@@ -338,7 +325,7 @@ msgstr ""
 #: ../tribes/barbarians/wares/fire_tongs/conf:3
 msgid ""
 "The fire tongs are the tool of the smelter, working in the Smelting works. "
-"Produced in the smelting works."
+"Produced in the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/fish/conf:2
@@ -373,7 +360,7 @@ msgstr "Goud"
 
 #: ../tribes/barbarians/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 
@@ -421,7 +408,7 @@ msgstr "Jagersspeer"
 #: ../tribes/barbarians/wares/hunting_spear/conf:3
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters. Produced in the metallworks."
+"in one blow. It is only used by the hunters. Produced in the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/iron/conf:2
@@ -449,7 +436,6 @@ msgid "How to create a meal, snack or ration, if there are no kitchentools?"
 msgstr ""
 
 #: ../tribes/barbarians/wares/mask/conf:2
-#, fuzzy
 msgid "Mask"
 msgstr "Masker"
 
@@ -483,7 +469,7 @@ msgstr "Punthouweel"
 #: ../tribes/barbarians/wares/pick/conf:3
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
-"metallworks."
+"metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
@@ -517,7 +503,7 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/scythe/conf:3
 msgid ""
-"The Scythe is the tool of the farmers. It is produced in the metallworks."
+"The Scythe is the tool of the farmers. It is produced in the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
@@ -538,7 +524,7 @@ msgstr "Schop"
 #: ../tribes/barbarians/wares/shovel/conf:3
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
-"the ranger use it. Build at the metallworks."
+"the ranger use it. Build at the metalworks."
 msgstr ""
 
 #: ../tribes/barbarians/wares/snack/conf:2
@@ -546,7 +532,7 @@ msgid "Snack"
 msgstr "Hapje"
 
 #: ../tribes/barbarians/wares/snack/conf:3
-msgid "A bit bigger, for the advanced minors will need a big hap."
+msgid "A bit bigger, for the advanced minors will need a big morsel."
 msgstr ""
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
@@ -584,7 +570,6 @@ msgid "An enhanced mask, for barbarian warriors."
 msgstr ""
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
-#, fuzzy
 msgid "Warriors Axe"
 msgstr "oorlogsbijl"
 

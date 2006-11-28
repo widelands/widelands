@@ -30,6 +30,12 @@ msgstr "Voici la culture de l'Empire Romain"
 msgid "Arena"
 msgstr "Arène"
 
+#: ../tribes/empire/buildings/armoursmith/conf:2
+#: ../tribes/empire/workers/armoursmith/conf:2
+#, fuzzy
+msgid "Armoursmith"
+msgstr "Forgeron d'armure"
+
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
 msgstr "Boulangerie"
@@ -123,6 +129,11 @@ msgstr "Hutte de Chasseur"
 msgid "Inn"
 msgstr "Auberge"
 
+#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Bûcheron"
+
 #: ../tribes/empire/buildings/marblemine/conf:2
 #, fuzzy
 msgid "Marble Mine"
@@ -165,6 +176,11 @@ msgstr "Ferme à mouton"
 msgid "Smelting Works"
 msgstr "Fonderie"
 
+#: ../tribes/empire/buildings/stonemason/conf:2
+#: ../tribes/empire/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Tailleur de Pierres"
+
 #: ../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Taverne"
@@ -177,6 +193,11 @@ msgstr "Tour"
 msgid "Trainingscamp"
 msgstr "Camp d'entraînement"
 
+#: ../tribes/empire/buildings/vineyard/conf:2
+#, fuzzy
+msgid "Vineyard"
+msgstr "Mineur"
+
 #: ../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
 msgstr "Vigne"
@@ -184,6 +205,12 @@ msgstr "Vigne"
 #: ../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Entrepôt"
+
+#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/weaponsmith/conf:2
+#, fuzzy
+msgid "Weaponsmith"
+msgstr "Forgeron d'arme"
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -337,7 +364,7 @@ msgstr "Or"
 
 #: ../tribes/empire/wares/gold/conf:3
 msgid ""
-"Gold is the most valuable of all metalls; only very important things are "
+"Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
 
@@ -526,6 +553,10 @@ msgstr ""
 msgid "Stones"
 msgstr "Pierres"
 
+#: ../tribes/empire/wares/stone/conf:3 ../tribes/empire/wares/wood/conf:3
+msgid "Stones and wood are the basic build ware of the Empire."
+msgstr ""
+
 #: ../tribes/empire/wares/trunk/conf:2
 msgid "Trunk"
 msgstr "Tronc"
@@ -540,8 +571,8 @@ msgstr "Lance de Guerre"
 
 #: ../tribes/empire/wares/war_lance/conf:3
 msgid ""
-"This is the best and sharpest weapon, the romans weaponsmith create for their "
-"warriors"
+"This is the best and sharpest weapon, the romans weaponsmith create for "
+"their warriors"
 msgstr ""
 
 #: ../tribes/empire/wares/water/conf:2
@@ -579,10 +610,6 @@ msgstr ""
 msgid "Wood"
 msgstr "Bois"
 
-#: ../tribes/empire/wares/wood/conf:3 ../tribes/empire/wares/stone/conf:3
-msgid "Stones and wood are the basic build ware of the Empire."
-msgstr ""
-
 #: ../tribes/empire/wares/wood_lance/conf:2
 #, fuzzy
 msgid "Wood Lance"
@@ -600,12 +627,6 @@ msgstr "Laine"
 #: ../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr ""
-
-#: ../tribes/empire/workers/armoursmith/conf:2
-#: ../tribes/empire/buildings/armoursmith/conf:2
-#, fuzzy
-msgid "Armoursmith"
-msgstr "Forgeron d'armure"
 
 #: ../tribes/empire/workers/baker/conf:2
 msgid "Baker"
@@ -660,11 +681,6 @@ msgstr "Chasseur"
 msgid "Innkeeper"
 msgstr "Aubergiste"
 
-#: ../tribes/empire/workers/lumberjack/conf:2
-#: ../tribes/empire/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Bûcheron"
-
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Maître Mineur"
@@ -690,26 +706,18 @@ msgstr "Haut Fourneau"
 msgid "Soldier"
 msgstr "Soldat"
 
-#: ../tribes/empire/workers/stonemason/conf:2
-#: ../tribes/empire/buildings/stonemason/conf:2
-msgid "Stonemason"
-msgstr "Tailleur de Pierres"
-
 #: ../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Entraîneur"
 
-#: ../tribes/empire/workers/weaponsmith/conf:2
-#: ../tribes/empire/buildings/weaponsmith/conf:2
+#: ../tribes/empire/workers/vinefarmer/conf:2
 #, fuzzy
-msgid "Weaponsmith"
-msgstr "Forgeron d'arme"
+msgid "Vinefarmer"
+msgstr "Vigne"
 
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Tisserand"
 
-#: ../tribes/empire/workers/wine-grower/conf:2
-#: ../tribes/empire/buildings/wine-grower/conf:2
-msgid "Wine-Grower"
-msgstr "Vigneron"
+#~ msgid "Wine-Grower"
+#~ msgstr "Vigneron"

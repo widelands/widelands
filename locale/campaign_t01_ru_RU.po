@@ -40,10 +40,11 @@ msgstr "История начинается..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -154,10 +155,6 @@ msgstr ""
 "построите часть дороги и сможете выбрать следующее направление. Стройте "
 "дороги между флагами двух зданий. Старайтесь делать их короткими и ровными."
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Задание3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Хантрух говорит..."
@@ -206,10 +203,6 @@ msgstr ""
 "можете просто щелкнуть в месте назначения, чтобы автоматически построить "
 "дорогу."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Задание5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Хантрух кивнул..."
@@ -253,10 +246,6 @@ msgstr ""
 "какие укрепления в скором времени нам придется возвести. И, как подарок "
 "судьбы, рядом с этим местом находятся большие каменные скалы...\"<br><br>--"
 "НОВОЕ ЗАДАНИЕ--<br>- Постройте две Каменоломни на юго-западе от вашего штаба."
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Задание7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -402,3 +391,12 @@ msgstr "- постройте Хижину лесничего на востоке
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr "- Постройте две каменоломни на Юго-западе от Штаба."
+
+#~ msgid "Order3"
+#~ msgstr "Задание3"
+
+#~ msgid "Order5"
+#~ msgstr "Задание5"
+
+#~ msgid "Order7"
+#~ msgstr "Задание7"

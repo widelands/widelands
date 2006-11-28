@@ -40,10 +40,11 @@ msgstr "L'histoire commence..."
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "D'accord"
 
@@ -163,10 +164,6 @@ msgstr ""
 "une route entre les drapeaux devant les deux bâtiments. Essayez de le faire "
 "court et simple.       "
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Ordre3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh parle..."
@@ -219,10 +216,6 @@ msgstr ""
 "cliquer sur le drapeau de destination pour construire la route d'un seul "
 "coup."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Ordre5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh·acquiesce..."
@@ -269,10 +262,6 @@ msgstr ""
 "tel un cadeau du destin - il y a beaucoup de rochers tout près...»<br><br>--"
 "NOUVEAUX OBJECTIFS--<br>- Construisez deux carrières au sud ouest de votre "
 "Quartier Général. "
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Ordre7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -424,3 +413,12 @@ msgstr "- Construisez une hutte de garde forestier à l'est du bûcheron."
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr "- Construisez deux carrières au sud ouest de votre quartier général."
+
+#~ msgid "Order3"
+#~ msgstr "Ordre3"
+
+#~ msgid "Order5"
+#~ msgstr "Ordre5"
+
+#~ msgid "Order7"
+#~ msgstr "Ordre7"
