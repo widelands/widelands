@@ -254,10 +254,12 @@ protected:
 	bool m_random_order;
 
 	/// A collection of songsets
-	std::map<std::string, Songset *> m_songs;
+	typedef std::map<std::string, Songset *> Songset_map;
+	Songset_map m_songs;
 
 	/// A collection of effect sets
-	std::map<std::string, FXset *> m_fxs;
+	typedef std::map<std::string, FXset *> FXset_map;
+	FXset_map m_fxs;
 
 	/// List of currently playing effects, and the channel each one is on
 	std::map<uint, std::string> m_active_fx;

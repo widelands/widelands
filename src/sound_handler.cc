@@ -63,14 +63,25 @@ Sound_Handler::Sound_Handler():
 */
 Sound_Handler::~Sound_Handler()
 {
-	m_fxs.clear();
-	m_songs.clear();
+	{
+		const FXset_map::const_iterator fxs_end = m_fxs.end();
+		for (FXset_map::const_iterator it = m_fxs.begin(); it != fxs_end; ++it)
+			delete it->second;
+	}
+	{
+		const Songset_map::const_iterator songs_end = m_songs.end();
+		for
+			(Songset_map::const_iterator it = m_songs.begin();
+			 it != songs_end;
+			 ++it)
+			delete it->second;
+	}
 }
 
 /** The real intialization for Sound_Handler.
  *
  * \pre The locale must be known before calling this
- * 
+ *
  * \see Sound_Handler::Sound_Handler()
 */
 void Sound_Handler::init()
