@@ -138,6 +138,12 @@ void EncyclopediaWindow::prodSiteSelected(int selectedRow) {
    }
    
    if (programIt == map.end()) {
+      programName = "prog_";
+      programName+= selectedWare->get_name();
+      programIt = map.find(programName);
+   }
+   
+   if (programIt == map.end()) {
       programIt = map.find("work");
    }
    
