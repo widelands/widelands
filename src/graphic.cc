@@ -1204,6 +1204,7 @@ GraphicImpl::~GraphicImpl()
    }
 
 	delete m_rendertarget;
+	flush(-1);
 }
 
 /*
@@ -1324,7 +1325,7 @@ void GraphicImpl::refresh()
 GraphicImpl::flush
 
 Remove all resources (currently pictures) from the given modules.
-If mod is 0, all pictures are flushed.
+If mod is 0, all pictures are flushed. FIXME  this seems to be wrong - sigra
 ===============
 */
 void GraphicImpl::flush(int mod)
@@ -1420,7 +1421,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 		}
 
       // Convert the surface accordingly
-		SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp ); //  FIXME memory leak!
+		SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp );
 		SDL_FreeSurface(bmp);
 
       if( !use_surface )
@@ -1430,9 +1431,9 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 		id = find_free_picture();
 		Picture & pic = m_pictures[id];
 		pic.mod       = 0; // will be filled in by caller
-		pic.u.fname   = strdup(fname); //  FIXME memory leak!
+		pic.u.fname   = strdup(fname);
 		assert(pic.u.fname); //  FIXME no proper check for NULL return value!
-		pic.surface   = new Surface(); //  FIXME memory leak!
+		pic.surface   = new Surface();
 		pic.surface->set_sdl_surface(use_surface);
 
 		m_picturemap[fname] = id;
