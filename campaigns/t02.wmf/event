@@ -264,7 +264,7 @@ type=allow_building
 state=init
 version=1
 player=1
-building=metallworks
+building=metalworks
 allow=false
 
 [Disable Building 29]
