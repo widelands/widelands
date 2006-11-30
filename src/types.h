@@ -20,6 +20,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+//TODO: use SDL types instead
 typedef unsigned char uchar;
 typedef unsigned short ushort;
 typedef unsigned int uint;

@@ -42,7 +42,6 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
-#include "wlapplication.h"
 
 static const int BUILDING_LEAVE_INTERVAL = 1000;
 

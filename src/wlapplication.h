@@ -20,7 +20,8 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
-#include <SDL.h>
+#include <SDL_events.h>
+#include <SDL_types.h>
 #include <map>
 #include <stdexcept>
 #include <string>

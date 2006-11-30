@@ -739,7 +739,7 @@ void Sound_Handler::music_finished_callback()
 		//else just play the next song - see general description for
 		//further explanation
 		event.type           = SDL_USEREVENT;
-		event.user.code      = SOUND_HANDLER_CHANGE_MUSIC;
+		event.user.code      = CHANGE_MUSIC;
 	}
 	SDL_PushEvent(&event);
 }

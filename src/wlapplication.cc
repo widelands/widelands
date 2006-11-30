@@ -17,6 +17,7 @@
  *
  */
 
+#include "constants.h"
 #include "editor.h"
 #include <errno.h>
 #include "error.h"
@@ -371,7 +372,7 @@ void WLApplication::run()
 		//get an event from the queue; on empty queue, create an idle event
 		if (SDL_PollEvent(&e)==0) {
 			e.type=SDL_USEREVENT;
-			e.user.code=19;
+			e.user.code=IDLE;
 			SDL_PushEvent(&e);
 			//TODO: handle error
 		}
@@ -391,10 +392,10 @@ void WLApplication::run()
 			break;
 		case SDL_USEREVENT:
 			switch(e.user.code) {
-			case /*WLEVENT_IDLE*/19:
+			case IDLE:
 				//perhaps sleep a little?
 				break;
-			case Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC:
+			case CHANGE_MUSIC:
 				g_sound_handler.change_music();
 				break;
 			}
@@ -449,7 +450,7 @@ restart:
 
 				break;
 			case SDL_USEREVENT:
-				if (ev->user.code==Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC)
+				if (ev->user.code==CHANGE_MUSIC)
 					g_sound_handler.change_music();
 
 				break;
@@ -653,7 +654,7 @@ void WLApplication::set_mouse_pos(int x, int y)
 	m_mouse_internal_x = x;
 	m_mouse_internal_y = y;
 
-		do_warp_mouse(x, y); // sync mouse positions
+	do_warp_mouse(x, y); // sync mouse positions
 }
 
 /**

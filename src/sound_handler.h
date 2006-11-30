@@ -35,7 +35,8 @@ struct FileRead;
 struct Game;
 struct Songset;
 
-/// How many milliseconds in the past to consider for \ref Sound_Handler::play_or_not()
+/// How many milliseconds in the past to consider for
+/// \ref Sound_Handler::play_or_not()
 #define SLIDING_WINDOW_SIZE 300000
 
 /// Non-existent 'positions'(=logical map coordinates) with special meaning
@@ -169,10 +170,6 @@ class Sound_Handler
 	friend class Songset;
 	friend class FXset;
 public:
-	/// Constants for event loop interaction
-	//// \sa "Usage of callbacks" TODO: how do I get this link?
-	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
-
 	Sound_Handler();
 	~Sound_Handler();
 

@@ -98,16 +98,24 @@
 
 /** Shorthand because the original is a lot to type \e and harder to read.
  * Use #define and not typedef so that we don't need to #include<string> here.
- * This would cause <string> to included in every constants.h "user" - instead
- * of every SSS_T user.
+ * This would cause <string> to be included in every constants.h "user" ...
+ * instead of just every SSS_T user.
  */
 #define SSS_T std::string::size_type
 
 /// Networking
-//@
+//@{
 #define WIDELANDS_LAN_DISCOVERY_PORT	7394
 #define WIDELANDS_LAN_PROMOTION_PORT	7395
 #define WIDELANDS_PORT			7396
+//@}
+
+/// Constants for user-defined SDL events that get handled by SDL's mainloop
+//@{
+enum {
+	IDLE,
+	CHANGE_MUSIC
+};
 //@}
 
 #endif

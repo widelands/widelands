@@ -27,13 +27,8 @@ class Editor_Game_Base;
 class Widelands_Map_Map_Object_Loader;
 class Widelands_Map_Map_Object_Saver;
 
-/*
-========================================
-
-This class represents a data packet in a widelands
-map file. it is an abstract base class
-
-========================================
+/** This class represents a data packet in a widelands map file. it is an
+ * abstract base class
 */
 class Widelands_Map_Data_Packet {
    public:
