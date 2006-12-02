@@ -1,21 +1,21 @@
-# translation of widelands_pl_PL.po to Polish
+# translation of widelands_pl_PL.po to polish
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# 
+#
 # Endrju <endrjux@gmail.com>, 2005.
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands\n"
+"Project-Id-Version: widelands_pl_PL\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-11-22 17:38+0100\n"
-"PO-Revision-Date: 2006-05-04 19:41+0200\n"
+"PO-Revision-Date: 2006-12-01 21:49+0100\n"
 "Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"Language-Team: polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2);\n"
 
@@ -49,29 +49,24 @@ msgid "Map"
 msgstr "Mapa"
 
 #: ../src/minimap.cc:172
-#, fuzzy
 msgid "Terrain"
-msgstr "Wybór terenu"
+msgstr "Teren"
 
 #: ../src/minimap.cc:180
-#, fuzzy
 msgid "Owner"
-msgstr "Posiadane"
+msgstr "Posiadacz"
 
 #: ../src/minimap.cc:188
-#, fuzzy
 msgid "Flags"
-msgstr " flaga"
+msgstr "Flagi"
 
 #: ../src/minimap.cc:196
-#, fuzzy
 msgid "Roads"
-msgstr "Gotowy"
+msgstr "Drogi"
 
 #: ../src/minimap.cc:204 ../src/general_statistics_menu.cc:155
-#, fuzzy
 msgid "Buildings"
-msgstr "Budynek: "
+msgstr "Budynki"
 
 #: ../src/criterr.cc:69
 msgid "!! CRITICAL ERROR !!"
@@ -102,9 +97,8 @@ msgid "Action"
 msgstr "Akcja"
 
 #: ../src/fieldaction.cc:450 ../src/fieldaction.cc:599
-#, fuzzy
 msgid "Build roads"
-msgstr "Budowa"
+msgstr "Buduj drogi"
 
 #: ../src/fieldaction.cc:454 ../src/watchwindow.cc:102
 msgid "Watch"
@@ -115,9 +109,8 @@ msgid "Attack"
 msgstr "Atak"
 
 #: ../src/fieldaction.cc:577
-#, fuzzy
 msgid "Build mines"
-msgstr "Budynek: "
+msgstr "Buduj kopalnie"
 
 #: ../src/map_variable_manager.cc:30
 msgid "Next scenario"
@@ -129,11 +122,11 @@ msgstr "Mapa z Bluebyte Settlers II. Brak komentarza"
 
 #: ../src/watchwindow.cc:116
 msgid "Follow"
-msgstr ""
+msgstr "Podążaj"
 
 #: ../src/watchwindow.cc:124
 msgid "Center mainview on this"
-msgstr ""
+msgstr "Wycentruj ekran na tym"
 
 #: ../src/watchwindow.cc:142
 #: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:59
@@ -170,29 +163,27 @@ msgstr "Statystyki generalne"
 
 #: ../src/general_statistics_menu.cc:143
 msgid "Land"
-msgstr ""
+msgstr "Ziemia"
 
 #: ../src/general_statistics_menu.cc:149
-#, fuzzy
 msgid "Workers"
 msgstr "Pracownicy"
 
 #: ../src/general_statistics_menu.cc:161
 msgid "Wares"
-msgstr ""
+msgstr "Towary"
 
 #: ../src/general_statistics_menu.cc:167
-#, fuzzy
 msgid "Productivity"
-msgstr "Produktywność:"
+msgstr "Produktywność"
 
 #: ../src/general_statistics_menu.cc:173
 msgid "Kills"
-msgstr ""
+msgstr "Zabici"
 
 #: ../src/general_statistics_menu.cc:179
 msgid "Military"
-msgstr ""
+msgstr "Militarnych"
 
 #: ../src/general_statistics_menu.cc:196 ../src/ware_statistics_menu.cc:417
 msgid "15 m"
@@ -212,7 +203,7 @@ msgstr "2 h"
 
 #: ../src/general_statistics_menu.cc:234 ../src/ware_statistics_menu.cc:455
 msgid "Help"
-msgstr ""
+msgstr "Pomoc"
 
 #: ../src/general_statistics_menu.cc:243 ../src/ware_statistics_menu.cc:464
 msgid "4 h"
@@ -237,11 +228,11 @@ msgstr "Zapasy"
 
 #: ../src/stock_menu.cc:71
 msgid "Show wares"
-msgstr ""
+msgstr "Pokaż towary"
 
 #: ../src/stock_menu.cc:76
 msgid "Show workers"
-msgstr ""
+msgstr "Pokaż pracowników"
 
 #: ../src/game_objectives_menu.cc:31
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:163
@@ -251,7 +242,7 @@ msgstr "Menu celów"
 
 #: ../src/productionsite.cc:232
 msgid "(not occupied)"
-msgstr ""
+msgstr "(niezamieszkały)"
 
 #: ../src/productionsite.cc:272
 msgid "UP"
@@ -371,17 +362,14 @@ msgid "Sound FX"
 msgstr "Dźwięki"
 
 #: ../src/game_options_menu.cc:100
-#, fuzzy
 msgid "Save game"
 msgstr "Zapisz grę"
 
 #: ../src/game_options_menu.cc:110
-#, fuzzy
 msgid "Load game"
 msgstr "Wczytaj grę"
 
 #: ../src/game_options_menu.cc:121
-#, fuzzy
 msgid "Exit game"
 msgstr "Opuść grę"
 
@@ -475,24 +463,21 @@ msgid "Do you really want to destroy this "
 msgstr "Czy na pewno chcesz to zniszczyć?"
 
 #: ../src/building_ui.cc:617
-#, fuzzy
 msgid "Stop"
-msgstr "Zapasy"
+msgstr "Stop"
 
 #: ../src/building_ui.cc:639
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "Ulepsz do %s"
 
 #: ../src/building_ui.cc:658
-#, fuzzy
 msgid "Destroy"
-msgstr "Opis"
+msgstr "Zniszcz"
 
 #: ../src/building_ui.cc:669
-#, fuzzy
 msgid "Debug"
-msgstr "Pole usuwania błędów"
+msgstr "Debug"
 
 #: ../src/building_ui.cc:1053 ../src/building_ui.cc:1059
 msgid "Worker Listing"
@@ -511,9 +496,8 @@ msgid "Trying to become: "
 msgstr "Chce być:"
 
 #: ../src/building_ui.cc:1246
-#, fuzzy
 msgid "Show worker listing"
-msgstr "Pracownicy"
+msgstr "Pokaż listę pracowników"
 
 #: ../src/building_ui.cc:1347 ../src/building_ui.cc:1809
 #: ../src/building_statistics_menu.cc:72
@@ -596,23 +580,20 @@ msgid "Time Trigger"
 msgstr "Wyzwalacz czasowy"
 
 #: ../src/interactive_player.cc:108 ../src/editor/editorinteractive.cc:97
-#, fuzzy
 msgid "Menu"
-msgstr "Chat Menu"
+msgstr "Menu"
 
 #: ../src/interactive_player.cc:116 ../src/editor/editorinteractive.cc:121
-#, fuzzy
 msgid "Minimap"
-msgstr "Minimum"
+msgstr "Mini-mapa"
 
 #: ../src/interactive_player.cc:124 ../src/editor/editorinteractive.cc:129
-#, fuzzy
 msgid "Buildhelp"
-msgstr "Budowa"
+msgstr "Pomoc budowy"
 
 #: ../src/interactive_player.cc:132
 msgid "Tribe's ware encyclopedia"
-msgstr ""
+msgstr "Encyklopedia towarów"
 
 #: ../src/interactive_player.cc:288
 msgid "PAUSE"
@@ -635,29 +616,24 @@ msgid "Main Menu"
 msgstr "Menu główne"
 
 #: ../src/game_main_menu.cc:50
-#, fuzzy
 msgid "General statistics"
 msgstr "Statystyki generalne"
 
 #: ../src/game_main_menu.cc:58
-#, fuzzy
 msgid "Ware statistics"
-msgstr "Statystyki magazynu"
+msgstr "Statystyki towarów"
 
 #: ../src/game_main_menu.cc:66
-#, fuzzy
 msgid "Building statistics"
 msgstr "Statystyki budynku"
 
 #: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:161
-#, fuzzy
 msgid "Objectives"
-msgstr "Menu celów"
+msgstr "Cele"
 
 #: ../src/game_main_menu.cc:90
-#, fuzzy
 msgid "Chat"
-msgstr "Chat Menu"
+msgstr "Chat"
 
 #: ../src/game_chat_menu.cc:56
 msgid "Chat Menu"
@@ -693,18 +669,18 @@ msgid "Conquer Area"
 msgstr "Pole bitwy"
 
 #: ../src/militarysite.cc:145
-#, fuzzy, c-format
+#, c-format
 msgid "%d soldier (+%d)"
 msgid_plural "%d soldiers (+%d)"
-msgstr[0] "%d żołnierzy (+%d)"
+msgstr[0] "%d żołnierz (+%d)"
 msgstr[1] "%d żołnierzy (+%d)"
 msgstr[2] "%d żołnierzy (+%d)"
 
 #: ../src/militarysite.cc:147
-#, fuzzy, c-format
+#, c-format
 msgid "%d soldier"
 msgid_plural "%d soldiers"
-msgstr[0] "%d żołnierzy"
+msgstr[0] "%d żołnierz"
 msgstr[1] "%d żołnierzy"
 msgstr[2] "%d żołnierzy"
 
@@ -775,44 +751,39 @@ msgstr ""
 
 #: ../src/encyclopedia_window.cc:42
 msgid "Tribe ware encyclopedia"
-msgstr ""
+msgstr "Encyklopedia towarów"
 
 #: ../src/encyclopedia_window.cc:45
 msgid "Ware"
-msgstr ""
+msgstr "Towar"
 
 #: ../src/encyclopedia_window.cc:51
 msgid "Is Produced by"
-msgstr ""
+msgstr "Produkowany przez"
 
 #: ../src/encyclopedia_window.cc:55
 msgid "Needs Ware"
-msgstr ""
+msgstr "Potrzebuje towaru"
 
 #: ../src/editor/editorinteractive.cc:105
-#, fuzzy
 msgid "Tool"
-msgstr "Menu narzędzi"
+msgstr "Narzędzie"
 
 #: ../src/editor/editorinteractive.cc:113
-#, fuzzy
 msgid "Toolsize"
-msgstr "Rozmiar pędzla"
+msgstr "Rozmiar narzędzia"
 
 #: ../src/editor/editorinteractive.cc:137
-#, fuzzy
 msgid "Players"
-msgstr "Gracze: "
+msgstr "Gracze"
 
 #: ../src/editor/editorinteractive.cc:145
-#, fuzzy
 msgid "Events"
-msgstr "Zdarzenia: "
+msgstr "Zdarzenia"
 
 #: ../src/editor/editorinteractive.cc:153
-#, fuzzy
 msgid "Variables"
-msgstr "Zmienna"
+msgstr "Zmienne"
 
 #: ../src/editor/editorinteractive.cc:229
 msgid "Map unsaved"
@@ -868,11 +839,11 @@ msgstr "Pokaż widok obszarów budynków"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:103
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "Chwytaj okna tylko gdy nachodzą"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:107
 msgid "Dock windows to edges"
-msgstr ""
+msgstr "Chwytaj okna do brzegów"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:169
 msgid "System default language"
@@ -987,9 +958,8 @@ msgid "Single Player Menu"
 msgstr "Menu pojedynczego gracza"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
-#, fuzzy
 msgid "New Game"
-msgstr "Zapisz grę"
+msgstr "Nowa gra"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
 msgid "Tutorial Campaign"
@@ -1073,9 +1043,8 @@ msgid "Exit Game"
 msgstr "Opuść grę"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-#, fuzzy
 msgid "(C) 2002-2006 by the Widelands Development Team"
-msgstr "(C) 2002-2005 zespół rozwojowy Widelands"
+msgstr "(C) 2002-2006 Zespół Rozwojowy Widelands"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
@@ -1449,9 +1418,8 @@ msgstr "Warunki"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:100
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:143
-#, fuzzy
 msgid "Insert"
-msgstr "<nieustawiony>"
+msgstr "Wstaw"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:110
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:207
@@ -1462,7 +1430,7 @@ msgstr "Usuń"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:122
 msgid "Up"
-msgstr ""
+msgstr "Góra"
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
@@ -1534,9 +1502,9 @@ msgid "Toolsize Menu"
 msgstr "Rozmiar pędzla"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:57
-#, fuzzy, c-format
+#, c-format
 msgid "Current Size: %i"
-msgstr "Obecny rozmiar"
+msgstr "Obecny rozmiar: %i"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:95
 msgid "Current Size"
@@ -1548,21 +1516,19 @@ msgstr "Opcje gracza"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:227
 msgid "I"
-msgstr ""
+msgstr "|"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:228
-#, fuzzy
 msgid "Make infrastructure"
-msgstr "Stwórz katalog"
+msgstr "Stwórz infrastrukturę"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:241
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:242
-#, fuzzy
 msgid "Allow/forbid buildidngs"
-msgstr "Dozwolone budynki"
+msgstr "Dozów/zabroń budynków"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:287
 msgid ""
@@ -1776,7 +1742,7 @@ msgstr "Obecnie wybrane"
 
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:49
 msgid "Noise Height Options"
-msgstr "Poziom dźwięku"
+msgstr "Muldy"
 
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:81
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
@@ -1806,32 +1772,32 @@ msgstr "Warunek wyzwalacza: "
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:73
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:85
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:97
 msgid "AND"
-msgstr ""
+msgstr "I"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:109
 msgid "OR"
-msgstr ""
+msgstr "LUB"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:121
 msgid "XOR"
-msgstr ""
+msgstr "XOR"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:133
 msgid "NOT"
-msgstr ""
+msgstr "NIE"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:142
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:96
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
 msgid "Syntax Error"
@@ -1859,130 +1825,21 @@ msgid "Allowed Buildings"
 msgstr "Dozwolone budynki"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:59
-#, fuzzy
 msgid "Allowed Buildings:"
-msgstr "Dozwolone budynki: "
+msgstr "Dozwolone budynki:"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
-#, fuzzy
 msgid "Forbidden Buildings:"
-msgstr "Zabronione budynki: "
+msgstr "Zabronione budynki:"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:86
 msgid "Forbid"
-msgstr ""
+msgstr "Zabroń"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
 msgid "Allow"
-msgstr ""
+msgstr "Dozwól"
 
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr "brak opisu"
-
-#~ msgid "New Trigger Menu"
-#~ msgstr "Nowy wyzwalacz"
-
-#~ msgid "Time Trigger Options"
-#~ msgstr "Opcje czasu"
-
-#~ msgid "Event Option Menu"
-#~ msgstr "Menu opcji zdarzenia"
-
-#~ msgid "New Event Menu"
-#~ msgstr "Nowege zdarzenie"
-
-#~ msgid "Edit Event Chain Menu"
-#~ msgstr "Edycja łańcucha zdarzeń"
-
-#~ msgid "Allowed Buildings Menu"
-#~ msgstr "Menu dozwolonych budynków"
-
-#~ msgid "Set Tool Size Menu"
-#~ msgstr "Menu rozmiaru narzędzia"
-
-#~ msgid ""
-#~ "This Trigger waits a certain time before it is true. It can be configured "
-#~ "to constantly restart itself when the wait time is over for repeating "
-#~ "events"
-#~ msgstr ""
-#~ "Ten wyzwalacz odczekuje podany czas zanim będzie włączony. Może też być "
-#~ "skonfigurowany aby się zrestartował dla zapętlonych zdarzeń."
-
-#~ msgid ""
-#~ "This Trigger never changes its state by itself. It is useful to pass it "
-#~ "to some event which changes triggers"
-#~ msgstr ""
-#~ "Ten wyzwalacz nigdy nie zmienia stanu sam. Jest za to przydatny aby "
-#~ "przekierować zdarzenie do konkretnych wyzwalaczy"
-
-#~ msgid ""
-#~ "This trigger gets set when a number of a building type of one player is "
-#~ "available in an area."
-#~ msgstr ""
-#~ "Ten wyzwalacz ustawia się, gdy liczba typów budynków gracza jest "
-#~ "dopuszczalna w terenie."
-
-#~ msgid "greenland"
-#~ msgstr "tereny trawiaste"
-
-#~ msgid "blackland"
-#~ msgstr "czarne ziemie"
-
-#~ msgid "winterland"
-#~ msgstr "śnieżnie ziemie"
-
-#~ msgid ""
-#~ "This Event shows a messagebox. The user can choose to make it modal/non-"
-#~ "modal and to add a picture. Events can be assigned to each button to use "
-#~ "this as a Choose Dialog for the user"
-#~ msgstr ""
-#~ "To wydarzenie pokazuje okienko. Użytkownik może wybrać, czy utworzyć je "
-#~ "modalne czy nie oraz czy dodać obrazek. Wydarzenie mogą być przypisane do "
-#~ "każdego przycisku aby użyć tego jako Dialogu Wyboru."
-
-#~ msgid "This Event centers the Players View on a certain field"
-#~ msgstr "To wydarzenie centruje ekran na konkretnym polu"
-
-#~ msgid ""
-#~ "This Event makes a user definable part of the map visible for a "
-#~ "selectable user"
-#~ msgstr ""
-#~ "To wydarzenie tworzy definiowany przez użytkownika obszar mapy widoczny "
-#~ "dla wybranego gracza"
-
-#~ msgid ""
-#~ "This Event conquers a user definable part of the map for one player if "
-#~ "there isn't a player already there"
-#~ msgstr ""
-#~ "To wydarzenie podbija wybraną przez użytkownika część mapy dla jednego "
-#~ "gracza jeżeli nie ma tam żadnego innego gracza"
-
-#~ msgid ""
-#~ "Allows/Disables a certain building for a player so that it can be build "
-#~ "or it can't any longer"
-#~ msgstr "Pozwól/zabroń budować konkretnego budynku graczowi"
-
-#~ msgid "Manually set a Null Trigger to a given value"
-#~ msgstr "Samemu ustaw pusty wyzwalacz dla podanej wartości"
-
-#~ msgid "Single Map"
-#~ msgstr "Jedna mapa"
-
-#~ msgid "Unhide Objective"
-#~ msgstr "Odkryj cel"
-
-#~ msgid "Hide or unhide an objective so that the player can see it"
-#~ msgstr "Odkryj lub zakryj cel"
-
-#~ msgid "Options Menu"
-#~ msgstr "Menu opcji"
-
-#~ msgid "constructionsite"
-#~ msgstr "plac budowy"
-
-#~ msgid "headquarters"
-#~ msgstr "kwatera główna"
-
-#~ msgid "Editor Main Menu"
-#~ msgstr "Menu główne edytora"

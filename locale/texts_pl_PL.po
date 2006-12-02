@@ -1,21 +1,20 @@
 # translation of texts_pl_PL.po to polish
-# translation of texts_pl_PL.po to Polish
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2005.
-# 
+# This file is distributed under the same license as the Widelands package.
+# Copyright (C) 2002 The Widelands Development Team.
+#
+# Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: texts_pl_PL\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-19 21:14+0100\n"
+"PO-Revision-Date: 2006-12-01 21:20+0100\n"
 "Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
 "Language-Team: polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -157,6 +156,23 @@ msgid ""
 "having been made by running the Program). Whether that is true depends on "
 "what the Program does.<br>"
 msgstr ""
+"0. Niniejsza Licencja dotyczy programów i innych prac, na których "
+"umieszczona jest pochodząca od właściciela praw autorskich informacja, że "
+"dany program lub praca może być rozpowszechniana na warunkach niniejszej "
+"Powszechnej Licencji Publicznej. Używane poniżej słowo \"Program\" oznacza "
+"właśnie takie programy lub prace, zaś określenie \"praca oparta na Programie"
+"\" dotyczy albo Programu, albo pochodzącej od niego pracy w rozumieniu prawa "
+"autorskiego, to jest pracy zawierającej Program lub jego część dosłowną, "
+"bądź zmodyfikowaną i/lub przełożoną na inny język. (W dalszym ciągu "
+"niniejszego, pojęcie przekładu włącza się bez ograniczeń do terminu "
+"\"modyfikacja\"). Do każdego licencjobiorcy będziemy zwracać się \"per Ty\"."
+"<br>Niniejsza Licencja nie obejmuje działań innych niż kopiowanie, "
+"rozprowadzanie i modyfikowanie - nie mieszczą się one w jej zakresie. "
+"Czynność używania Programu nie jest poddana ograniczeniom, a produkty "
+"uzyskane z Programu objęte są Licencją tylko wtedy, gdy ich treść stanowi "
+"pracę opartą na Programie (niezależnie od stworzenia jej przy użyciu "
+"Programu). To, czy fakt taki jest prawdą, zależy od tego, co dany Program "
+"wykonuje.<br>"
 
 #: ../txts/COPYING:22
 msgid ""
@@ -306,6 +322,15 @@ msgid ""
 "and so on) of the operating system on which the executable runs, unless that "
 "component itself accompanies the executable."
 msgstr ""
+"Określenie kod źródłowy dla pracy oznacza formę pracy preferowaną dla "
+"wprowadzania do niej modyfikacji. Dla wykonanej pracy, kompletny kod "
+"źródłowy oznacza cały kod źródłowy wszystkich modułów, wszelkie sprzężone z "
+"nią pośredniczące pliki opisujące oraz zbiory komend stosowane do sterowania "
+"kompilacją i instalowaniem programów. Niemniej jednak, jako wyjątek "
+"specjalny, dystrybuowany (w formie źródłowej albo binarnej) kod źródłowy nie "
+"musi obejmować niczego, co jest normalnie rozprowadzane przy pomocy głównych "
+"komponentów (kompilator, jądro itd.) systemu operacyjnego, na którym pracuje "
+"część wykonywalna, o ile sam taki komponent towarzyszy tej części."
 
 #: ../txts/COPYING:36
 msgid ""
@@ -315,16 +340,7 @@ msgid ""
 "even though third parties are notcompelled to copy the source along with the "
 "object code."
 msgstr ""
-"Określenie kod źródłowy dla pracy oznacza formę pracy preferowaną dla "
-"wprowadzania do niej modyfikacji. Dla wykonanej pracy, kompletny kod "
-"źródłowy oznacza cały kod źródłowy wszystkich modułów, wszelkie sprzężone z "
-"nią pośredniczące pliki opisujące oraz zbiory komend stosowane do sterowania "
-"kompilacją i instalowaniem programów. Niemniej jednak, jako wyjątek "
-"specjalny, dystrybuowany (w formie źródłowej albo binarnej) kod źródłowy nie "
-"musi obejmować niczego, co jest normalnie rozprowadzane przy pomocy głównych "
-"komponentów (kompilator, jądro itd.) systemu operacyjnego, na którym pracuje "
-"część wykonywalna, o ile sam taki komponent towarzyszy tej części.<br>Jeśli "
-"dystrybucja części wykonywalnej albo kodu wynikowego realizowana jest "
+"Jeśli dystrybucja części wykonywalnej albo kodu wynikowego realizowana jest "
 "poprzez oferowanie dostępu do kopii z wyznaczonego miejsca, to oferowanie "
 "równoważnego dostępu dla kopiowania kodu źródłowego z tego samego miejsca "
 "liczy się jako rozpowszechnianie kodu źródłowego, nawet gdy strony trzecie "
@@ -774,7 +790,7 @@ msgstr "F               przełącza tryb pełnoekranowy"
 
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
-msgstr ""
+msgstr "Home        Centruje mapę na pozycji startowej"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
@@ -798,13 +814,16 @@ msgstr "F11         zapisuje zrzut ekranu"
 
 #: ../txts/README:67
 msgid "Online Help"
-msgstr ""
+msgstr "Pomoc on-line"
 
 #: ../txts/README:71
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Jeżeli potrzebujesz dokumentacji lub pomocy dla Widelands albo Edytora "
+"Widelands odwiedź naszą stronę internetową. Aktualną pomoc on-line "
+"znajdziesz pod adresem:"
 
 #: ../txts/README:79
 msgid "Reporting Bugs"
@@ -911,7 +930,6 @@ msgstr ""
 "ich celem jest ułatwienie wykrywania błędów."
 
 #: ../txts/developers:1
-#, fuzzy
 msgid "Development"
 msgstr "Rozwój"
 

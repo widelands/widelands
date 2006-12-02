@@ -1,21 +1,20 @@
-# translation of campaign_ank_pl_PL.po to Polish
+# translation of campaign_t02_pl_PL.po to polish
 # This file is distributed under the same license as the Widelands package.
 # Copyright (C) 2002 The Widelands Development Team.
-#
 #
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands\n"
+"Project-Id-Version: campaign_t02_pl_PL\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-04 19:25+0200\n"
+"PO-Revision-Date: 2006-11-26 20:46+0100\n"
 "Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"Language-Team: polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2);\n"
 
@@ -34,10 +33,17 @@ msgid ""
 "between the trees, the symbol of unity and peace among our kin became the "
 "wedge that drives us apart.\" "
 msgstr ""
+" \"Wojna trwa dalej. Coraz więcej naszych sióstr i braci ucieka przed wojna "
+"trwającą w stolicy pod drzewami. To co opowiadają o czynach naszych bliskich "
+"jest bardzo smutne. Spędziłem noce leżąc bez odpoczynku bardziej zmęczony "
+"niż kiedykolwiek myślałem że można być. Zawsze kiedy zamykam oczy widze las, "
+"zasadzony przez mojego ojca, stojący w płomieniach. Tron pomiędzy drzewami, "
+"symbol zjednoczenia i pokoju w naszym rodzie, stał się klinem który nas "
+"rozdzielił\" "
 
 #: ../campaigns/t02.wmf/event:14
 msgid "The Story goes on..."
-msgstr "Opowieść idzie dalej..."
+msgstr "Opowieść biegnie dalej..."
 
 #: ../campaigns/t02.wmf/event:17 ../campaigns/t02.wmf/event:30
 #: ../campaigns/t02.wmf/event:43 ../campaigns/t02.wmf/event:506
@@ -66,6 +72,15 @@ msgid ""
 "slaughtering, unless... is this it? As father told me? Rise against whoever "
 "threatens our very existance may it even be one of your blood or mind?\" "
 msgstr ""
+" \"Dzisiaj moi myśliwi przynieśli mężczyznę, kobietę i małe dziecko, którzy "
+"chowali się w lesie próbując uciec od wojny, nienawiści i zemsty która "
+"szalała pośród plemion walczących jak w dawnych czasach kiedy byliśmy niczym "
+"więcej jak tylko bestiami kierowanymi przez instynkty. Żaden z moich braci "
+"nigdy nie odzyska i nie utrzyma kontroli nad drewnianym tronem, żadne z "
+"plemion nie będzie na tyle silne, by zawładnąć innym. Tej rzezi nie będzie "
+"końca chyba że... czy to jest to? Jak powiedział mi ojciec? Powstań przeciw "
+"komukolwiek, kto zagraża naszemu istnieniu, pozwól temu być szaleństwem w "
+"myślach\" "
 
 #: ../campaigns/t02.wmf/event:27 ../campaigns/t02.wmf/event:40
 msgid "The Story continues..."
@@ -82,10 +97,18 @@ msgid ""
 "live and think united a new home, replacing what is now lost to us? Until we "
 "can return to the place we once called our home...\" "
 msgstr ""
+" \"Boldreth wygląda na jeszcze bardziej rozdartego niż wcześniej. Moi "
+"kompani podupadli na duchu, ponieważ zbliża się zima a my wciąż mieszkamy w "
+"niczym więcej jak tylko barakach. Nie chciałem zostać w tej dziczy na tak "
+"długo - ale nie myślałem też, że moi bracia pogrążą się w tej nieczułej "
+"wojnie na tak długo.<br>Może to już czas abyśmy poczuli się tutaj bardziej "
+"komfortowo. Może to już czas aby dać tym, którzy wciąż myślą zjednoczeni "
+"nowy dom, zastępując to co teraz utracili? Przynajmniej dopóki nie możemy "
+"wrócić do miejsca które kiedyś nazywalismy domem...\" "
 
 #: ../campaigns/t02.wmf/event:499
 msgid "Brave Boldreth steps aside you..."
-msgstr ""
+msgstr "Dzielny Boldreth kroczy koło Ciebie..."
 
 #: ../campaigns/t02.wmf/event:501
 msgid ""
@@ -94,6 +117,10 @@ msgid ""
 "return to Al'thunran. Too long have we waited while our brethren fought on "
 "the battlefield, and our axes and swords have turned rusty over time.\"</p>"
 msgstr ""
+" \"Czyli zamierzasz przygotować nas do dłuższego pobytu w lesie, wodzu? "
+"Widzę w tym mądrość, ale moje serce żąda triumfalnego powrotu do Al'thunran. "
+"Zbyt długo czekaliśmy aż nasi bracia będą walczyć a nasze topory i miecze "
+"pokryły się rdzą.\"</p>"
 
 #: ../campaigns/t02.wmf/event:503 ../campaigns/t02.wmf/event:518
 #: ../campaigns/t02.wmf/event:533 ../campaigns/t02.wmf/event:548
@@ -105,11 +132,11 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:754 ../campaigns/t02.wmf/event:770
 #: ../campaigns/t02.wmf/event:786
 msgid "Advisor"
-msgstr ""
+msgstr "Doradca "
 
 #: ../campaigns/t02.wmf/event:514
 msgid "Khantrukh joins the both of you"
-msgstr ""
+msgstr "Khantrukh dołącza do was"
 
 #: ../campaigns/t02.wmf/event:516
 msgid ""
@@ -117,10 +144,13 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools and it is only a matter of little time before they are all gone.\"</p>"
 msgstr ""
+" \"Przepraszam wodzu, ale mam ważny powód aby z Tobą porozmawiać. Skały "
+"niedaleko naszego obozu znikają bardzo szybko pod narzędziami naszych "
+"kamieniarzy i to kwestia dni kiedy znikną zupełnie.\"</p>"
 
 #: ../campaigns/t02.wmf/event:529
 msgid "Boldreth jumps up."
-msgstr ""
+msgstr "Boldreth podskakuje."
 
 #: ../campaigns/t02.wmf/event:531
 msgid ""
@@ -132,20 +162,24 @@ msgid ""
 "Sentries and Strongholds) to expand your territory. Get to the rocks north-"
 "east from you and build a Quarry there.</p>"
 msgstr ""
+" \"Może nie jest to zadanie warte żołnieży, ale zawsze coś do roboty! Wodzu, "
+"co powiesz na to, abym zabrał paru wypoczętych wojowników i wybrał się "
+"bliżej do wielkiej góry Kal'mavrath - może znajdziemy jakieś skały aby "
+"zadowolić starca?\" <br><br>--NOWE CELE--<br>- zbuduj budynki militarne (jak "
+"sStrażnice i Twierdze) aby powiększyć swoje terytorium. Dotrzyj do skał na "
+"północnym zachódzie i zbuduj tam Kamieniołom"
 
 #: ../campaigns/t02.wmf/event:544
-#, fuzzy
 msgid "Khantrukh grumbles..."
-msgstr "Khantrukh mówi..."
+msgstr "Khantrukh narzeka..."
 
 #: ../campaigns/t02.wmf/event:546
 msgid " \"Old man? Disrespectful youth...\"</p>"
-msgstr " \"Stary człowiek? Nonszalancki młodzieniaszek...\"</p>"
+msgstr " \"Starzec? Nonszalancki młodzieniaszek...\"</p>"
 
 #: ../campaigns/t02.wmf/event:559
-#, fuzzy
 msgid "Khantrukh nods satisfied."
-msgstr "Khantrukh skinął głową..."
+msgstr "Khantrukh skinął zadowolony."
 
 #: ../campaigns/t02.wmf/event:561
 msgid " \"At least. These rocks should last for a while.\"</p>"
@@ -153,7 +187,7 @@ msgstr " \"Nareszcie. Te kamienie powinny wystarczyć na chwilę.\"</p>"
 
 #: ../campaigns/t02.wmf/event:575
 msgid "Boldreth exclaims..."
-msgstr ""
+msgstr "Boldreth wyjaśnia..."
 
 #: ../campaigns/t02.wmf/event:577
 msgid ""
@@ -171,21 +205,35 @@ msgid ""
 "granit<br>Mines may only be built on mountain terrain. Suitable places for "
 "mines are displayed with a light grey dot.</p>"
 msgstr ""
+" \"Tylko spójrz! Wielka góra Kal'mavrath! Zastanawiam się jakie skarby "
+"natury kryją się pośród majestatycznych grani!<br>Nadszedł czas aby "
+"starszyzna na coś się przydała. Pozwól mi posłać kogoś z tych, którzy "
+"rozumią język skał aby odkryć sekrety góry!\"<br><br>--NOWE CELE--<br>- "
+"Kiedy klikniesz na flagę, możesz posłać tam geologa. Jeżeli flaga znajduje "
+"się w górach, będzieszukał rud, w przeciwnym wypadku będzie szukał wody. "
+"Postaw flagę na wschodniej grani góry (oczywiście na skalistym terenie, nie "
+"na łące) i wyślij tam Geologa. Wybuduj odpowiednią kopalnie dla wszystkich "
+"rodzajów rud jakie tam znajdzie:<br>Czarny - węgiel<br>Czerwony - ruda "
+"żelaza<br>Żółty - złoto<br>Szary - granit<br>Kopalnie mogą być budowanie "
+"tylko na skalistym terenie. Odpowiednie miejsca są oznaczone jasnoszarą "
+"kropką.</p>"
 
 #: ../campaigns/t02.wmf/event:590
 msgid "Boldreth laughs..."
-msgstr ""
+msgstr "Bolderth się śmieje..."
 
 #: ../campaigns/t02.wmf/event:592
 msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for! It might even be enough to -\"</p>"
 msgstr ""
+" \"Na brodę Chat'Karutha! To jest wspaniałe! Tylko wyobraźcie sobie do czego "
+"możemy wykorzystać ten węgiel i rudę żelaza! To może wystarczyć nawet do-\"</"
+"p>"
 
 #: ../campaigns/t02.wmf/event:606
-#, fuzzy
 msgid "Khantrukh interrupts..."
-msgstr "Khantrukh kontynuuje..."
+msgstr "Khantrukh przerywa..."
 
 #: ../campaigns/t02.wmf/event:608
 msgid ""
@@ -194,11 +242,14 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not prove easy.\"</p>"
 msgstr ""
+" \"To prawda, ale powinniśmy zając sie tym później, obecnie inne przeszkody "
+"są ważniejsze. Górnicy z pewnością będą żądać więcej pożywienia żeby "
+"pracować wysoko w tych zimnych górach. Zapewnienie tych dostaw może nie być "
+"proste.\"</p>"
 
 #: ../campaigns/t02.wmf/event:621
-#, fuzzy
 msgid "Boldreth nods..."
-msgstr "Khantrukh skinął głową..."
+msgstr "Boldreth skinął głową..."
 
 #: ../campaigns/t02.wmf/event:623
 msgid ""
@@ -207,6 +258,10 @@ msgid ""
 "them. And, of course, the people would cheer to a new tavern - hey, we might "
 "call it 'Thron's Pride' or so if you want!\"<br><br>"
 msgstr ""
+" \"Tutaj muszę przyznać ci rację, starcze.<br>Wygląda na to że w lesie jest "
+"całkiem sporo zwierząt- może powinniśmy po prostu zapolować na większą "
+"liczbę. I oczywiście ludzie będą się cieszyć z nowej Tawerny. Hej! Może "
+"powinniśmy ją nazwać Dumą Tronu lub podobnie jeśli sobie życzysz!\"<br><br>"
 
 #: ../campaigns/t02.wmf/event:624
 msgid ""
@@ -219,9 +274,8 @@ msgid ""
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:637
-#, fuzzy
 msgid "The elder laughs..."
-msgstr "Starszy mówi..."
+msgstr "Starszy się śmieje..."
 
 #: ../campaigns/t02.wmf/event:639
 msgid ""
@@ -241,7 +295,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:653
 msgid "Boldreth cheers up..."
-msgstr ""
+msgstr "Boldreth się rozweselił..."
 
 #: ../campaigns/t02.wmf/event:655
 msgid ""
@@ -251,9 +305,8 @@ msgid ""
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:669
-#, fuzzy
 msgid "Khantrukh gazes over the plains..."
-msgstr "Khantrukh kontynuuje..."
+msgstr "Khantrukh spogląda na plany..."
 
 #: ../campaigns/t02.wmf/event:671
 msgid ""
@@ -276,9 +329,8 @@ msgid "A beautiful morning..."
 msgstr "Piękny poranek..."
 
 #: ../campaigns/t02.wmf/event:700
-#, fuzzy
 msgid "Boldreth remarks..."
-msgstr "Starzec zauważa..."
+msgstr "Boldreth zauważa..."
 
 #: ../campaigns/t02.wmf/event:702
 msgid ""
@@ -331,7 +383,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:733
 msgid "Boldreth seems concerned..."
-msgstr ""
+msgstr "Boldreth wygląda na zainteresowanego..."
 
 #: ../campaigns/t02.wmf/event:735
 msgid ""
@@ -351,7 +403,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:749
 msgid "Boldreth smiles..."
-msgstr ""
+msgstr "Boldreth się uśmiecha..."
 
 #: ../campaigns/t02.wmf/event:751
 msgid ""
@@ -374,9 +426,8 @@ msgid ""
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:765
-#, fuzzy
 msgid "Khantrukh steps in..."
-msgstr "Khantrukh mówi..."
+msgstr "Khantrukh się wtrąca..."
 
 #: ../campaigns/t02.wmf/event:767
 msgid ""
@@ -396,9 +447,8 @@ msgid ""
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:782
-#, fuzzy
 msgid "Khantrukh seems reliefed..."
-msgstr "Khantrukh mówi..."
+msgstr "Khantrukh odetchnął z ulgą..."
 
 #: ../campaigns/t02.wmf/event:784
 msgid ""

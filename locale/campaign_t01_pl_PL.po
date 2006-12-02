@@ -1,17 +1,16 @@
-# translation of campaign_ank_pl_PL.po to Polish
+# translation of campaign_t01_pl_PL.po to polish
 # This file is distributed under the same license as the Widelands package.
 # Copyright (C) 2002 The Widelands Development Team.
-#
 #
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands\n"
+"Project-Id-Version: campaign_t01_pl_PL\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-04 19:25+0200\n"
+"PO-Revision-Date: 2006-07-17 13:30+0200\n"
 "Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"Language-Team: polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,15 +30,14 @@ msgid ""
 "My warriors hunt at day and lay awake at night - listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
-"Minęły miesiące a my wziąż chronimy się tam gdzie las jest stary i ciemny. "
-"Moi wojownicy polują za dnia i leżą przytomni w nocy, nasłuchując dźwięków "
+"Minęły miesiące a my wciąż chronimy się tam gdzie las jest stary i ciemny. "
+"Moi wojownicy polują za dnia i nie śpią w nocy, nasłuchując dźwięków "
 "okrutnej rzezi nadchodzących z daleka spośród drzew."
 
 #: ../campaigns/t01.wmf/event:15 ../campaigns/t01.wmf/event:32
 #: ../campaigns/t01.wmf/event:49 ../campaigns/t01.wmf/event:66
-#, fuzzy
 msgid "The Story begins..."
-msgstr "Opowieść kontynuuje bieg..."
+msgstr "Opowieść się rozpoczyna..."
 
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
@@ -59,8 +57,8 @@ msgid ""
 "that haunt me even in my nightmares."
 msgstr ""
 "Widzimy szalejące płomienie trawiące Al'thunran kilometry stąd. Czerwone "
-"światła rozbłyskują w ciemności i tańczą do rytmu wojenny bębnów które "
-"nawiedzają mnie nawet w moich koszmarach."
+"światła rozbłyskują w ciemności i tańczą do rytmu wojennych bębnów które "
+"nawiedzają mnie w koszmarach."
 
 #: ../campaigns/t01.wmf/event:47
 msgid ""
@@ -71,46 +69,43 @@ msgid ""
 "greed or despair destroy our bonds as well"
 msgstr ""
 "Prochy mojego ojca spoczywają spokojnie w ziemi którą oczyścił z "
-"bezsensownego rozlewu krwi który pewnego dnia miał u nas "
-"miejsce<br>Boldreth, mój lojalny towarzysz i przyjaciel jest źródłem mojego "
-"pokoju w tych ciemnych czasach. Podtrzymuje mojego ducha i przytomnych "
-"wojowników aby nie pozwolić by żądza lub rozpacz zniszczyły nasze kości."
+"bezsensownego rozlewu krwi jaki pewnego dnia miał tu miejsce.<br>Boldreth, "
+"mój lojalny towarzysz i przyjaciel, jest mi źródłem pokoju w tych ciemnych "
+"czasach. Podtrzymuje mojego ducha jak i dusze wojowników, by żądza lub "
+"rozpacz nie wkradła się w nasze serca."
 
 #: ../campaigns/t01.wmf/event:64
 msgid ""
 "As father told me, there will be times to fight and times to lay and wait, "
 "trying not to sleep or die before the right time comes. And so I do... wait."
 msgstr ""
-"Jak powiedział mi ojciec, będą czasy walki i czasy leżenia i czekania "
-"próbując nie zasnąć lub umrzeć, zanim przyjdą właściwe czasy. I to robię... "
-"czekam."
+"Jak powiedział mi ojciec, będą czasy walki i czasy odpoczynku i czekania aby "
+"nie zasnąć lub umrzeć, zanim przyjdą czasy właściwe. I to robię... czekam."
 
 #: ../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
 msgstr "Stary człowiek zbliża się do Ciebie.."
 
 #: ../campaigns/t01.wmf/event:456
-#, fuzzy
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my council through these darkened days.\" "
 msgstr ""
-"Chwała wodzu! Mam na imię Khantrukh, widziałem już wiele zim... Proszę, "
-"pozwól mi pomóc Tobie moją radą w te ciemne dni.\" "
+" \"Chwała wodzu! Mam na imię Khantrukh, przeżyłem na tym świecie już wiele "
+"lat... Proszę, pozwól mi pomóc sobie moją radą w te ciemne dni.\""
 
 #: ../campaigns/t01.wmf/event:458 ../campaigns/t01.wmf/event:477
 #: ../campaigns/t01.wmf/event:496 ../campaigns/t01.wmf/event:516
 #: ../campaigns/t01.wmf/event:535 ../campaigns/t01.wmf/event:555
 #: ../campaigns/t01.wmf/event:574
 msgid "Advisor"
-msgstr ""
+msgstr "Doradca"
 
 #: ../campaigns/t01.wmf/event:473
 msgid "Khantrukh continues..."
 msgstr "Khantrukh kontynuuje..."
 
 #: ../campaigns/t01.wmf/event:475
-#, fuzzy
 msgid ""
 " \"None but the gods know how long we have to remain hidden here. The "
 "warriors hope we may march back gloriously any day now, but I strongly doubt "
@@ -123,23 +118,22 @@ msgid ""
 "directly right of your headquarters by clicking at it and selecting a "
 "Lumberjack."
 msgstr ""
-"Nikt tylko Bogowie wiedzą jak długo mamy pozostać tu, w ukryciu. Wojownicy "
-"mają nadzieje, że mogą powrócić chwalebnie w jakimkolwiek dniu, ale wątpię, "
-"że to się stanie niebawem. Dni już robią się co raz krótsze i zimniejsze..."
-"<br>Powinniśmy się przygotować jeżeli mamy przetrwać zimę w tych niemiłych "
-"krainach. Wierzę, że wschodnia część obozu znalazła parę miejsc, gdzie można "
-"wznieść chatki drwala.\"<br><br>--NOWE CELE--<br>- naciśnij SPACJĘ aby "
+" \"Tylko Bogowie wiedzą jak długo mamy pozostać tu, w ukryciu. Wojownicy "
+"mają nadzieje, że będą mogli powrócić chwalebnie w któryś dzień, ale wątpię, "
+"że stanie się to niebawem. Dni już teraz robią się co raz to krótsze i "
+"zimniejsze...<br>Powinniśmy się przygotować jeżeli mamy przetrwać zimę w "
+"tych niemiłych krainach. Sądzę że wschodnia część obozu będzie idealna by "
+"wznieść chatki drwala .\"<br><br>--NOWE CELE--<br>- naciśnij SPACJĘ aby "
 "zobaczyć gdzie możesz budować. Czerwone kropki wskazują gdzie mogą być "
-"budowane małe budynki jak Drwal,<br>- zbuduj Chatkę drwala na czerwonej "
-"kropce zaraz obok Kwatery głównej, klikając na niej i wybierając Chatkę "
-"drwala"
+"budowane małe budynki jak Drwal.<br>- zbuduj Chatkę drwala na czerwonej "
+"kropce zaraz na prawo od Kwatery głównej, klikając na niej i wybierając "
+"Chatkę drwala."
 
 #: ../campaigns/t01.wmf/event:492
 msgid "The elder remarks..."
 msgstr "Starzec zauważa..."
 
 #: ../campaigns/t01.wmf/event:494
-#, fuzzy
 msgid ""
 " \"Obviously, it would be too draining for our people to walk all the way to "
 "the Lumberjack through the wilderness. We will have to make a path between "
@@ -154,24 +148,24 @@ msgid ""
 "then. Build a road between the flags in front of the two buildings. Try to "
 "keep it short and even."
 msgstr ""
-"Oczywiście, nikt nie będzie chciał przebijać się przez dzicz w drodze do "
-"Chatki drwala. Musimy stworzyć drogę łączącą nasza siedzibę z Chatką.  Nie "
-"trudno zgadnąć, że każdy będzie zadowolony z możliwości krótkiej i gładkiej "
-"drogi - drewno będzie na pewno wystarczająco mocne.\"<br><br>--NOWE CELE--"
-"<br>- Zbuduj drogę pomiędzy Kwatrą Główną a Chatką drwala. Zrobisz to "
-"klikając na flagę przy budynku a następnie na przycisku drogi. Dookoła flagi "
-"pojawią się symbole pokazujące jak stroma będzie droga w tym kierunku. Im "
-"droga bardziej stroma, tym Twoim ludziom będzie trudniej po niej chodzić. "
-"Kiedy klikniesz na jeden z symboli wybudujesz w tym kierunku kawałek drogi i "
-"musisz następnie wybrać kolejny kierunek. Zbuduj drogę pomiędzy flagami "
-"przed dwoma budynkami. Spróbuj utrzymać ją jak najkrótszą i najgładszą."
+" \"Oczywiście, nikt nie będzie chciał przebijać się przez dzicz w drodze do "
+"Chatki. Musimy stworzyć drogę łączącą nasza siedzibę z budynkiem. Nie trudno "
+"odgadnąć, że każdy będzie zadowolony z możliwości poruszania się po krótkiej "
+"i prostejdrodze - drewno będzie na pewno wystarczająco mocne.\"<br><br>--"
+"NOWE CELE--<br>- Zbuduj drogę pomiędzy Kwatrą Główną a Chatką drwala. "
+"Zrobisz to klikając na flagę przy budynku a następnie na przycisku drogi. "
+"Dookoła flagi pojawią się symbole pokazujące jak stroma będzie droga w tym "
+"kierunku. Im droga bardziej stroma, tym Twoim ludziom będzie trudniej po "
+"niej chodzić. Kiedy klikniesz na jeden z symboli wybudujesz w tym kierunku "
+"kawałek drogi a  następnie musisz wybrać kolejny kierunek. Zbuduj drogę "
+"pomiędzy flagami przed tymi dwoma budynkami. Spróbuj utrzymać ją jak "
+"najkrótszą i jak najprostszą."
 
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh mówi..."
 
 #: ../campaigns/t01.wmf/event:514
-#, fuzzy
 msgid ""
 " \"There is an old saying: 'A burden divided is easier to endure.' A "
 "crossroad on the way between our site and the lumberjack would ease the work "
@@ -183,21 +177,20 @@ msgid ""
 "make them get faster to their destination, thus improving your "
 "infrastructure. Place a flag in the mid of the road."
 msgstr ""
-"Jest stare powiedzenie: \"Podzielony ciężar łatwiej nosić.\" Skrzyżowanie na "
-"drodze pomiędzy nami a Chatką drwala ułatwi drogę naszym robotnikom. "
-"\"<br><br>--NOWE CELE--<br>- Po wskazaniu myszką drogi, zobaczysz symbol "
-"flagi. Kiedy na niego klikniesz a następnie klikniesz przycisk z flagą, "
-"umieścisz w tym miejscu właśnie taką flagę. Droga podzieli się pomiędzy "
-"dwóch robotników co przyspieszy transport w przypadku potrzeby przenoszenie "
-"dużej ilości  surowców, a to generalnie polepszy Twoją infrastrukturę. Ustaw "
-"flagę na środku drogi."
+" \"Jest stare powiedzenie: \"Podzielony ciężar łatwiej jest nosić.\" "
+"Skrzyżowanie na drodze pomiędzy nami a Chatką drwala ułatwi drogę naszym "
+"robotnikom. \"<br><br>--NOWE CELE--<br>- Na drodze zauważ symbol flagi. "
+"Kiedy na niego klikniesz a następnie klikniesz przycisk z flagą, umieścisz w "
+"tym miejscu właśnie flagę. Droga podzieli się pomiędzy dwóch robotników co "
+"przyspieszy transport w przypadku potrzeby przenoszenie dużej ilości  "
+"surowców, co w efekcie polepszy Twoją infrastrukturę. Ustaw flagę na środku "
+"drogi."
 
 #: ../campaigns/t01.wmf/event:531
 msgid "The old man looks to the sky..."
 msgstr "Stary człowiek patrzy w niebo..."
 
 #: ../campaigns/t01.wmf/event:533
-#, fuzzy
 msgid ""
 " \"The northern winds tell us, the coming winter will be a long and cruel "
 "one. One Lumberjack will not be enough to still the needs of our people. "
@@ -208,9 +201,9 @@ msgid ""
 "road step by step, you may also directly click at the destination to build "
 "the entire road at once."
 msgstr ""
-"Północne wiatry zapowiadają, że nadchodząca zima będzie długa i sroga. Jedna "
-"Chatka drwala nie zaspokoi naszych potrzeb. Więcej drzew czeka na nasze "
-"topory na południe d nowego skrzyżowania - postawmy tam nową Chatkę drwala!"
+" \"Północne wiatry zapowiadają, że nadchodząca zima będzie długa i sroga. "
+"Jedna Chatka drwala nie zaspokoi naszych potrzeb. Drzewa czekają na nasze "
+"topory na południe od nowego skrzyżowania - postawmy tam nową Chatkę drwala!"
 "\"<br><br>--NOWE CELE--<br>- Postaw Chatkę drwala dokładnie na południe od "
 "flagi którą miałeś umieścić na drodze. Połącz wspomnianą flagę z tą która "
 "znajdzie się przy nowej Chatce drwala. Zauważ, że zamiast budować drogę po "
@@ -221,7 +214,6 @@ msgid "Khantrukh nods..."
 msgstr "Khantrukh skinął głową..."
 
 #: ../campaigns/t01.wmf/event:553
-#, fuzzy
 msgid ""
 " \"Of course, if we intended to build a bigger settlement much more "
 "Lumberjacks would be advisable, but this should do for now.<br>But never "
@@ -231,20 +223,19 @@ msgid ""
 "Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--"
 "<br>- Build a Ranger's Hut to the east of the first Lumberjack."
 msgstr ""
-"Oczywiście, jeżeli chcemy wznieść większe osiedle, będzie potrzebne dużo "
+" \"Oczywiście, jeżeli chcemy wznieść większe osiedle, będzie potrzebne dużo "
 "więcej Chatek Drwala, ale na teraz ta ilość powinna wystarczyć.<br>Nigdy nie "
 "zapomnij, że te lasy to dziedzictwo powierzone nam przez naszych przodków. "
-"Musimy pamiętać, żeby zawsze je szanować. Co zabierzemy, musimy zwrócić "
-"spowrotem.<br>Tak więc aby zastąpić ścięte drzewa, musimy wznieść Chatkę "
-"leśnika możliwie najbliżej Drwala.\"<br><br>--NOWE CELE--<br>- Zbuduj Chatkę "
-"leśnika na wschód od pierwszej Chatki drwala."
+"Musisz pamiętać, żeby zawsze je szanować: co zabierzemy, musimy i zwrócić "
+"spowrotem.<br>Tak więc, aby zastąpić ścięte drzewa, musimy wznieść Chatkę "
+"leśnika możliwie jak najbliżej Drwala.\"<br><br>--NOWE CELE--<br>- Zbuduj "
+"Chatkę leśnika na wschód od pierwszej Chatki drwala."
 
 #: ../campaigns/t01.wmf/event:570
 msgid "The elder speaks..."
 msgstr "Starszy mówi..."
 
 #: ../campaigns/t01.wmf/event:572
-#, fuzzy
 msgid ""
 " \"I am well aware, chieftain, that neither you nor your warriors have the "
 "desire to stay in this forsaken place for long. But even so, our war to "
@@ -254,8 +245,8 @@ msgid ""
 "of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW "
 "OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
 msgstr ""
-"Zdaje sobie sprawę, wodzu, że ani Ty ani Twoi wojownicy nie pragną zostać w "
-"tym opuszczonym miejscu na dłużej. Mimo to nasza wojna aby przebić się z "
+" \"Zdaje sobie sprawę, wodzu, że ani Ty ani Twoi wojownicy nie pragną zostać "
+"w tym opuszczonym miejscu na dłużej. Mimo to nasza bitwa aby przebić się z "
 "powrotem do domu może potrwać długo i mądrze było by się przygotować. "
 "Sugeruję abyśmy nazbierali kamienia na później - kto wie jakie fortyfikacje "
 "będziemy musieli wznieść w przyszłości? Cudownym zrządzeniem losu kamienie "
@@ -270,14 +261,13 @@ msgid ""
 "reminder why we must return in the end."
 msgstr ""
 "Kolejnej bezsennej nocy poszedłem na wzgórze i spojrzałem na północ. Ogień "
-"wciąż szalał pochłaniająć dziedzictwo mego ojca<br>Jest on stałym "
+"wciąż szalał pochłaniająć dziedzictwo mego ojca<br>Jest stałym "
 "przypomnieniem dlaczego musimy się tutaj ukrywać.<br>I stałym "
-"przypomnieniem, dlaczego musimy wrócić na końcu."
+"przypomnieniem, dlaczego musimy w końcu wrócić."
 
 #: ../campaigns/t01.wmf/event:612
-#, fuzzy
 msgid "In the night..."
-msgstr "Pewnej nocy podczas pełni..."
+msgstr "W nocy..."
 
 #: ../campaigns/t01.wmf/event:629
 msgid ""
@@ -289,12 +279,13 @@ msgid ""
 msgstr ""
 "Jeszcze raz wybrałem się na grobowiec mojego ojca do upiornego lasku u stóp "
 "iglicy Kal'mavrath. Stałem tam i nie czułem nic po za upływającymi godzinami "
-"i deszczem lejącym się z ciemnego nieba...<br>Czułem tak jak gdyby było to "
-"pożegnanie. Pierwszy raz pomyślałem, co przyszłość może kryć dla mnie..."
+"i deszczem lejącym się z ciemnego nieba...<br>Czułem, jak gdyby to "
+"byłopożegnanie. Pierwszy raz zastanowiłem się, co przyszłość może kryć dla "
+"mnie..."
 
 #: ../campaigns/t01.wmf/event:631
 msgid "At the grave"
-msgstr ""
+msgstr "Nad grobem"
 
 #: ../campaigns/t01.wmf/event:648
 msgid ""
@@ -306,16 +297,15 @@ msgid ""
 "return would cause both on our and the other side..."
 msgstr ""
 "Jakiś czas temu Boldreth przyszedł do mnie i poradził mi, aby przenieść się "
-"w jakieś miejsce bliżej domu. Po to, żeby uderzyć zaraz kiedy wojska mojego "
-"brata dadzą znak.<br>Spojrzałem jednak na fortece i wciąż widzę czarny dym "
-"unoszący się do nieba i wiem- jest jeszcze za wcześnie i to na co mamy "
-"nadzieje nie stanie się jeszcze teraz. Może on ciągle ma rację, ale boje "
-"się. że rozlew krwi nastąpi bo obu stronach..."
+"w jakieś miejsce bliżej domu, po to, żeby uderzyć zaraz kiedy wojska mojego "
+"brata dadzą znak.<br>Spojrzałem jednak na fortece gdzie wciąż widać czarny "
+"dym unoszący się do nieba, więc wiem- jest jeszcze za wcześnie i to na co "
+"mamy nadzieje nie stanie się jeszcze teraz. Może on ma rację, ale boje się. "
+"że rozlew krwi nastąpi bo obu stronach..."
 
 #: ../campaigns/t01.wmf/event:650
-#, fuzzy
 msgid "The other day..."
-msgstr "Kolejny zimny dzień..."
+msgstr "Kolejny dzień..."
 
 #: ../campaigns/t01.wmf/event:667
 msgid ""
@@ -324,10 +314,14 @@ msgid ""
 "taking place in Al'thunran.<br>I hereby renew my oath - I will stop this "
 "madness at any cost!"
 msgstr ""
+"Dzisiaj moi wojownicy znaleźli starego człowieka, który wędrował chory i "
+"poraniony przez ciemny las. Przerażeni słuchaliśmy kiedy opowiadał o "
+"okrucieństwach mających miejsce w Al\"thunran.<br>Niniejszym odnawiam moją "
+"przysięgę - zatrzymam to szaleństwo nie ważne jakim kosztem!"
 
 #: ../campaigns/t01.wmf/event:669
 msgid "Another evening..."
-msgstr ""
+msgstr "Kolejny wieczór..."
 
 #: ../campaigns/t01.wmf/event:712
 msgid "Victory!"
@@ -339,11 +333,13 @@ msgid ""
 "may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may "
 "continue if you wish. Otherwise, move on to the next mission."
 msgstr ""
+"Dobra robota Wodzu. Mamy teraz wszystko co potrzebne by stawić czoła zimie i "
+"możemy się przygotować na czekające nas bitwy..<br><br>ZWYCIĘSTWO!<br><br> "
+"Możesz kontynuować grę jeżeli chcesz lub przejść do kolejnej misji."
 
 #: ../campaigns/t01.wmf/event:716
-#, fuzzy
 msgid "Mission Complete"
-msgstr "Misja wykonana!"
+msgstr "Misja zakończona"
 
 #: ../campaigns/t01.wmf/objective:8
 msgid ""
@@ -359,6 +355,17 @@ msgid ""
 "between the flags in front of the two buildings. Try to keep it short and "
 "even."
 msgstr ""
+"- naciśnij SPACJĘ aby zobaczyć gdzie możesz budować. Czerwone kropki "
+"wskazują gdzie mogą być budowane małe budynki jak Drwal.<br>- zbuduj Chatkę "
+"drwala na czerwonej kropce zaraz na prawo od Kwatery głównej, klikając na "
+"niej i wybierając Chatkę drwala.<br>- Zbuduj drogę pomiędzy Kwatrą Główną a "
+"Chatką drwala. Zrobisz to klikając na flagę przy budynku a następnie na "
+"przycisku drogi. Dookoła flagi pojawią się symbole pokazujące jak stroma "
+"będzie droga w tym kierunku. Im droga bardziej stroma, tym Twoim ludziom "
+"będzie trudniej po niej chodzić. Kiedy klikniesz na jeden z symboli "
+"wybudujesz w tym kierunku kawałek drogi a  następnie musisz wybrać kolejny "
+"kierunek. Zbuduj drogę pomiędzy flagami przed tymi dwoma budynkami. Spróbuj "
+"utrzymać ją jak najkrótszą i jak najprostszą."
 
 #: ../campaigns/t01.wmf/objective:16
 msgid ""
@@ -373,20 +380,29 @@ msgid ""
 "instead of building a road step by step, you may also directly click at the "
 "destination to build the entire road at once."
 msgstr ""
+"- Na drodze zauważ symbol flagi. Kiedy na niego klikniesz a następnie "
+"klikniesz przycisk z flagą, umieścisz w tym miejscu właśnie flagę. Droga "
+"podzieli się pomiędzy dwóch robotników co przyspieszy transport w przypadku "
+"potrzeby przenoszenie dużej ilości  surowców, co w efekcie polepszy Twoją "
+"infrastrukturę. Ustaw flagę na środku drogi.<br>- Postaw Chatkę drwala "
+"dokładnie na południe od flagi którą miałeś umieścić na drodze. Połącz "
+"wspomnianą flagę z tą która znajdzie się przy nowej Chatce drwala. Zauważ, "
+"że zamiast budować drogę po kawałku, możesz bezpośrednio połączyć flagi i "
+"zbudować drogę od razu."
 
 #: ../campaigns/t01.wmf/objective:24
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr ""
+msgstr "- Zbuduj Chatkę Leśnika na wschód od pierwszego Drwala."
 
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
-msgstr ""
+msgstr "- Zbuduj dwa Kamieniołomy na południowy zachód od Kwatery głównej."
 
 #~ msgid "Order3"
-#~ msgstr "Rozkaz3"
+#~ msgstr "Rozkaz 3"
 
 #~ msgid "Order5"
-#~ msgstr "Rozkaz5"
+#~ msgstr "Rozkaz 5"
 
 #~ msgid "Order7"
-#~ msgstr "Rozkaz7"
+#~ msgstr "Rozkaz 7"
