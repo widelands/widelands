@@ -398,8 +398,7 @@ int Sound_Handler::stereo_position(const Coords position)
 	Interactive_Base *ia;
 
 	assert(m_the_game);
-	assert(position!=NO_POSITION);
-	assert(position!=INVALID_POSITION);
+	assert(position.is_valid());
 
 	ia = m_the_game->get_iabase();
 	assert(ia);
@@ -499,19 +498,8 @@ bool Sound_Handler::play_or_not
  *			(see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(const std::string fx_name, Coords map_position, const uint priority)
-{
-	if (map_position == INVALID_POSITION) {
-		log("WARNING: play_fx(\"%s\") called without coordinates\n",
-		    fx_name.c_str());
-		map_position = NO_POSITION;
-	}
-
-	if (map_position == NO_POSITION)
-		play_fx(fx_name, 128, priority);
-	else
-		play_fx(fx_name, stereo_position(map_position), priority);
-}
+(const std::string & fx_name, const Coords map_position, const uint priority)
+{play_fx(fx_name, stereo_position(map_position), priority);}
 
 /** \overload
  * \param fx_name		The identifying name of the sound effect, see
@@ -524,10 +512,8 @@ void Sound_Handler::play_fx
 void Sound_Handler::play_fx
 (const std::string fx_name, const int stereo_pos, const uint priority)
 {
-	Mix_Chunk *m;
-	int chan;
-
-	assert(stereo_pos >= -1 && stereo_pos <= 254);
+	assert(stereo_pos >= -1);
+	assert(stereo_pos <= 254);
 
 	if (get_disable_fx())
 		return;
@@ -542,12 +528,9 @@ void Sound_Handler::play_fx
 	if (!play_or_not(fx_name, stereo_pos, priority))
 		return;
 
-	//retrieve the fx
-	m = m_fxs[fx_name]->get_fx();
-
-	//and play it if it's valid
-	if (m) {
-		chan = Mix_PlayChannel(-1, m, 0);
+	//  retrieve the fx and play it if it's valid
+	if (Mix_Chunk * const m = m_fxs[fx_name]->get_fx()) {
+		const int chan = Mix_PlayChannel(-1, m, 0);
 		//TODO: complain if this didn't work due to out-of-channels
 		Mix_SetPanning(chan,254-stereo_pos, stereo_pos);
 		m_active_fx[chan]=fx_name;

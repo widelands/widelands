@@ -39,14 +39,6 @@ struct Songset;
 /// \ref Sound_Handler::play_or_not()
 #define SLIDING_WINDOW_SIZE 300000
 
-/// Non-existent 'positions'(=logical map coordinates) with special meaning
-//@{
-/// Explicit "no position given on purpose"
-#define NO_POSITION Coords(-1,-1)
-/// No position given (by accident?); like a NULL pointer
-#define INVALID_POSITION Coords(-2,-2)
-//@}
-
 extern class Sound_Handler g_sound_handler;
 
 /** The 'sound server' for Widelands.
@@ -183,8 +175,8 @@ public:
 	 const std::string basename,
 	 const bool recursive = false);
 	void play_fx
-	(const std::string fx_name,
-	 Coords map_position = INVALID_POSITION,
+	(const std::string & fx_name,
+	 const Coords map_position,
 	 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx
 	(const std::string fx_name,
