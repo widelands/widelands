@@ -227,10 +227,9 @@ void Map::recalc_whole_map(void)
 
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
-         int area;
-
          f = get_fcoords(Coords(x, y));
-         check_neighbour_heights(f,&area);
+			uint radius;
+			check_neighbour_heights(f, radius);
          recalc_brightness(f);
          recalc_border(f);
          recalc_fieldcaps_pass1(f);
@@ -2155,10 +2154,9 @@ int Map::change_field_height(Coords coords, int by)
 
    height+=by;
    coordinates.field->set_height(height);
-   int radius=0;
+   uint radius = 2;
 
-   check_neighbour_heights(coordinates, &radius);
-   radius += 2;
+   check_neighbour_heights(coordinates, radius);
 
    recalc_for_field_area(coordinates, radius);
 
@@ -2176,52 +2174,37 @@ accordingly.
 The radius of modified fields is stored in *area.
 =============
 */
-void Map::check_neighbour_heights(FCoords coords, int* area)
+void Map::check_neighbour_heights(FCoords coords, uint & area)
 {
    int height = coords.field->get_height();
-   int diff;
    bool check[6] = { false, false, false, false, false, false };
 
+	const FCoords n[6] = {
+		tl_n(coords),
+		tr_n(coords),
+		l_n (coords),
+		r_n (coords),
+		bl_n(coords),
+		br_n(coords)
+	};
 
-   FCoords tln, trn, ln, rn, bln, brn;
+	for (Uint8 i = 0; i < 6; ++i) {
+		Field & f = *n[i].field;
+		const int diff = height - f.get_height();
+		if (diff > MAX_FIELD_HEIGHT_DIFF) {
+			++area;
+			f.set_height(height-MAX_FIELD_HEIGHT_DIFF);
+			check[i] = true;
+		}
+		if (diff < -MAX_FIELD_HEIGHT_DIFF) {
+			++area;
+			f.set_height(height+MAX_FIELD_HEIGHT_DIFF);
+			check[i] = true;
+		}
+	}
 
-   get_tln(coords, &tln);
-   get_trn(coords, &trn);
-   get_ln(coords, &ln);
-   get_rn(coords, &rn);
-   get_bln(coords, &bln);
-   get_brn(coords, &brn);
-
-   diff=height-tln.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; tln.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[0]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; tln.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[0]=true; }
-
-   diff=height-trn.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; trn.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[1]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; trn.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[1]=true; }
-
-   diff=height-ln.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; ln.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[2]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; ln.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[2]=true; }
-
-   diff=height-rn.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; rn.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[3]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; rn.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[3]=true; }
-
-   diff=height-bln.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; bln.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[4]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; bln.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[4]=true; }
-
-   diff=height-brn.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; brn.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[5]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; brn.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[5]=true; }
-
-   if(check[0]) check_neighbour_heights(tln, area);
-   if(check[1]) check_neighbour_heights(trn, area);
-   if(check[2]) check_neighbour_heights(ln, area);
-   if(check[3]) check_neighbour_heights(rn, area);
-   if(check[4]) check_neighbour_heights(bln, area);
-   if(check[5]) check_neighbour_heights(brn, area);
+	for (Uint8 i = 0; i < 6; ++i)
+		if (check[i]) check_neighbour_heights(n[i], area);
 }
 
 
