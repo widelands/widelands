@@ -1711,9 +1711,6 @@ class StarQueue {
 	std::vector<Map::Pathfield*> m_data;
 
 public:
-	StarQueue() { }
-	~StarQueue() { }
-
 	void flush() { m_data.clear(); }
 
 	// Return the best node and readjust the tree
