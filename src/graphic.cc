@@ -1784,22 +1784,6 @@ std::vector<GraphicImpl::Picture>::size_type GraphicImpl::find_free_picture() {
 }
 
 /*
- * GraphicImpl::flush_picture(int)
- */
-void GraphicImpl::flush_picture(uint pic_index) {
-   Picture* pic = &m_pictures[pic_index];
-
-
-   if (pic->u.fname) {
-      m_picturemap.erase(pic->u.fname);
-      free(pic->u.fname);
-      pic->u.fname=0;
-   }
-   delete pic->surface;
-   pic->surface = 0;
-}
-
-/*
  * Save and load pictures
  */
 void GraphicImpl::m_png_write_function( png_structp png_ptr, png_bytep data, png_size_t length ) {
