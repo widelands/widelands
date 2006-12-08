@@ -697,8 +697,6 @@ Battle* Editor_Game_Base::create_battle ()
    return b;
 }
 
-//TODO: continue heare!
-/*DIE DIE DIE */
 void Editor_Game_Base::create_attack_controller(Flag* flag,int attacker, int defender, uint num) {
    uint i;
    for (i=0;i<m_attack_serials.size();i++) {
