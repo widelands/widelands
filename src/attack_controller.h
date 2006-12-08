@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <types.h>
+#include "immovable.h"
 
 class Game;
 class Flag;
@@ -33,11 +34,20 @@ class Coords;
 void getCloseMilitarySites(Game* game, Flag* flag, int player, std::vector<MilitarySite*>* militarySites);
 uint getMaxAttackSoldiers(Game* game, Flag* flag, int player);
 
-class AttackController {
+class AttackController : public BaseImmovable {
    public:
       AttackController(Game* game, Flag* flag, int attacker, int defender);
       ~AttackController();
       void launchAttack(uint nrAttackers);
+      
+      //Methods inherited by BaseImmovable
+      virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
+      virtual int  get_size    () const throw () {return SMALL;}
+      virtual bool get_passable() const throw () {return false;}
+      virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point){}
+      virtual void act (Game*, uint);
+      virtual void cleanup (Editor_Game_Base*);
+      //end inherited
       
       void moveToReached(Soldier* soldier);
       void soldierDied(Soldier* soldier);

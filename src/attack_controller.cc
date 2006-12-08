@@ -28,6 +28,7 @@
 #include "geometry.h"
 #include "instances.h"
 #include "battle.h"
+#include "immovable.h"
 
 void getCloseMilitarySites(Game* game, Flag* flag, int player, std::vector<MilitarySite*>* militarySites) {
    Map* const map = game->get_map();
@@ -65,8 +66,20 @@ uint getMaxAttackSoldiers(Game* game, Flag* flag, int player) {
    return maxAttackSoldiers;
 }
 
-AttackController::AttackController(Game* _game, Flag* _flag, int _attacker,
-											  int _defender) {
+class AttackControllerDescr : public Map_Object_Descr
+{
+   public:
+      AttackControllerDescr() { }
+      ~AttackControllerDescr() { }
+};
+
+AttackControllerDescr globalAttackControllerDescr;
+
+AttackController::AttackController(Game* _game, Flag* _flag, int _attacker, int _defender) : 
+BaseImmovable(&globalAttackControllerDescr)  {
+   
+   Map_Object::init(_game);
+   
    this->game = _game;
    this->flag = _flag;
    this->attackingPlayer = _attacker;
@@ -76,6 +89,18 @@ AttackController::AttackController(Game* _game, Flag* _flag, int _attacker,
 
 AttackController::~AttackController() {
 }
+
+//Methods inherited by BaseImmovable
+void AttackController::act (Game*, uint) {
+   schedule_act(game, 10000); // Check every 10sec if the battle is deadlocked
+}
+
+void AttackController::cleanup (Editor_Game_Base* eg)
+{
+   log ("AttackController::cleanup\n");
+   Map_Object::cleanup(eg);
+}
+//end inherited
 
 void AttackController::launchAttack(uint nrAttackers) {
    launchAllSoldiers(true,nrAttackers);
@@ -213,8 +238,8 @@ void AttackController::soldierWon(Soldier* soldier) {
       involvedSoldiers[i].soldier->send_signal(game,"return_home");
    }
    
-   log("battle finished.\n");
-   game->get_player(attackingPlayer)->remove_attack(this);
+   log("battle finished. removing attack controller.\n");
+   game->remove_attack_controller(this->get_serial());
 }
 
 bool AttackController::startBattle(Soldier* soldier, bool isArrived) {

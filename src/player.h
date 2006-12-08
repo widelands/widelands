@@ -125,7 +125,6 @@ class Player {
       void change_training_options(PlayerImmovable* imm, int atr, int val);
          // Launch an attack
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
-      void remove_attack(AttackController* attack);
 	private:
 		bool m_see_all;
 		Editor_Game_Base*				m_egbase;
@@ -138,7 +137,6 @@ class Player {
 		std::vector<bool> seen_fields;
       std::vector<bool> m_allowed_buildings;
       std::vector<Economy*> m_economies;
-      std::vector<AttackController*> m_attacks;
       std::string    m_name; // Player name
 };
 

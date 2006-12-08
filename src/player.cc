@@ -69,9 +69,6 @@ m_tribe  (tr)
 }
 
 Player::~Player() {
-   while(m_attacks.size()) {
-      m_attacks.erase(m_attacks.begin());
-   }
 }
 /*
 ===============
@@ -488,20 +485,6 @@ void Player::change_soldier_capacity (PlayerImmovable* imm, int val) {
 	}
 }
 
-void Player::remove_attack(AttackController* attack) {
-   for(uint i=0;i<m_attacks.size();i++) {
-      if (m_attacks[i] == attack) {
-      	delete m_attacks[i];
-      	if (i < (m_attacks.size()-1)) {
-      	  m_attacks[i] = m_attacks[m_attacks.size() - 1];
-      	}
-			m_attacks.pop_back();
-			return;
-      }
-   }
-
-}
-
 /*
 ===============
 Player::enemyflagaction
@@ -529,17 +512,7 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
 
       case ENEMYFLAGACTION_ATTACK:
          {
-            for(uint i=0;i<m_attacks.size();i++) {
-               if (m_attacks[i]->getFlag() == flag) {
-                  m_attacks[i]->launchAttack((uint)num);
-                  return;
-               }
-            }
-
-            AttackController* attackCtrl = new AttackController(game,flag,attacker,flag->get_owner()->get_player_number());
-            attackCtrl->launchAttack((uint)num);
-            m_attacks.push_back(attackCtrl);
-
+            game->create_attack_controller(flag,attacker,flag->get_owner()->get_player_number(),(uint)num);
             break;
          }
 
