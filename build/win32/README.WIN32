@@ -1,0 +1,4 @@
+This subfolder contains the DevC++-project-file "Widelands.dev"
+-> For coding and compiling widelands via Bloodshed's DevCpp (http://www.Bloodshed.net)
+and the InnoSetup-file "Widelands.iss"
+-> For packing your compiled Widelands-version in an installable InnoSetup-file (http://www.jrsoftware.org)

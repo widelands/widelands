@@ -36,10 +36,11 @@ msgstr "Príbeh začína"
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
 #: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
-#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
-#: ../campaigns/t01.wmf/event:723
+#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
+#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
+#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
+#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -153,10 +154,6 @@ msgstr ""
 "musíš vyberať ďalší smer. Postav cestu medzi vlajkami pred budovami. Skús ju "
 "postaviť krátku a rovnú."
 
-#: ../campaigns/t01.wmf/event:503
-msgid "Order3"
-msgstr "Úloha 3"
-
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Hovorí Khantrukh..."
@@ -205,10 +202,6 @@ msgstr ""
 "drevorúbačom. Všimni si, že miesto stavania cesty kúsok po kúsku, môžeš "
 "postaviť celú cestu naraz kliknutím na cieľovú vlajku."
 
-#: ../campaigns/t01.wmf/event:542
-msgid "Order5"
-msgstr "Úloha 5"
-
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh prikyvuje..."
@@ -252,10 +245,6 @@ msgstr ""
 "budeme musieť čoskoro postaviť? Ako dar z neba sú tieto skaly hneď vedľa... "
 "- \"<br><br>-- Nová úloha --<br>- postav dva kameňolomy juhozápadne od "
 "základne."
-
-#: ../campaigns/t01.wmf/event:581
-msgid "Order7"
-msgstr "Úloha 7 "
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -398,3 +387,12 @@ msgstr "- postav chatu horára (vysádzač) na východ od drevorúbača."
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr "- postav dva kameňolomy juhozápadne od základne."
+
+#~ msgid "Order3"
+#~ msgstr "Úloha 3"
+
+#~ msgid "Order5"
+#~ msgstr "Úloha 5"
+
+#~ msgid "Order7"
+#~ msgstr "Úloha 7 "
