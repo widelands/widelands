@@ -85,7 +85,7 @@ def parse_conf(env, output):
 
 def parse_cli(env):
 	if env['use_ggz']:
-		env.Append(CCFLAGS='-DGGZ')
+		env.Append(CCFLAGS='-DUSE_GGZ')
 		env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
 
 	if env['cross']:

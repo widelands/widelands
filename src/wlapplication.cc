@@ -996,7 +996,9 @@ void WLApplication::show_usage()
 	<<endl
 	<<" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL"<<endl
 	<<endl
+#ifdef USE_GGZ
 	<<" --ggz                Starts game as GGZ Gaming Zone client (don't use!)"<<endl
+#endif
 	<<" --nosound            Starts the game with sound disabled"<<endl
 	<<" --nozip              Do not save files as binary zip archives."<<endl
 	<<endl

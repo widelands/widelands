@@ -29,7 +29,7 @@ static GGZServer *ggzserver = 0;
 NetGGZ::NetGGZ()
 {
 	use_ggz = false;
-	fd = -1;
+	m_fd = -1;
 	channelfd = -1;
 	gamefd = -1;
 	ip_address = NULL;
@@ -94,13 +94,16 @@ bool NetGGZ::connect()
 }
 
 #ifdef HAVE_GGZ
-void NetGGZ::ggzmod_server(GGZMod *mod, GGZModEvent e, const void *data)
+void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 {
 	log("GGZ ## ggzmod_server\n");
-	int fd = *(int*)data;
-	ggzobj->fd = fd;
-	log("GGZ ## got fd: %i\n", fd);
-	ggzmod_set_state(mod, GGZMOD_STATE_PLAYING);
+	if(e == GGZMOD_EVENT_SERVER)
+	{
+		int fd = *(int*)cbdata;
+		ggzobj->m_fd = fd;
+		log("GGZ ## got fd: %i\n", fd);
+		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
+	}
 }
 #endif
 
@@ -108,19 +111,22 @@ void NetGGZ::data()
 {
 #ifdef HAVE_GGZ
 	int op;
-	char *ip;
+	char *ipstring;
 	char *greeter;
 	int greeterversion;
 	char ipaddress[17];
+	int fd;
 
 	if(!used()) return;
 
+	fd = m_fd;
 	struct timeval timeout;
 	timeout.tv_sec = 0;
 	timeout.tv_usec = 0;
 	fd_set fdset;
 	FD_ZERO(&fdset);
 	FD_SET(fd, &fdset);
+
 	int ret = select(fd + 1, &fdset, NULL, NULL, &timeout);
 	if(ret <= 0) return;
 	log("GGZ ## select() returns: %i for fd %i\n", ret, fd);
@@ -151,10 +157,10 @@ void NetGGZ::data()
 			ggz_write_string(fd, ipaddress);
 			break;
 		case op_broadcast_ip:
-			ggz_read_string_alloc(fd, &ip);
-			log("GGZ ## ip broadcast: '%s'\n", ip);
-			ip_address = ggz_strdup(ip);
-			ggz_free(ip);
+			ggz_read_string_alloc(fd, &ipstring);
+			log("GGZ ## ip broadcast: '%s'\n", ipstring);
+			ip_address = ggz_strdup(ipstring);
+			ggz_free(ipstring);
 			break;
 		default:
 			log("GGZ ## opcode unknown!\n");
@@ -285,36 +291,36 @@ void NetGGZ::datacore()
 }
 
 #ifdef HAVE_GGZ
-GGZHookReturn NetGGZ::callback_server(unsigned id, const void *data, const void *user)
+GGZHookReturn NetGGZ::callback_server(unsigned id, const void *cbdata, const void *user)
 {
 	log("GGZCORE ## callback: %i\n", id);
-	ggzobj->event_server(id, data);
+	ggzobj->event_server(id, cbdata);
 
 	return GGZ_HOOK_OK;
 }
 #endif
 
 #ifdef HAVE_GGZ
-GGZHookReturn NetGGZ::callback_room(unsigned id, const void *data, const void *user)
+GGZHookReturn NetGGZ::callback_room(unsigned id, const void *cbdata, const void *user)
 {
 	log("GGZCORE/room ## callback: %i\n", id);
-	ggzobj->event_room(id, data);
+	ggzobj->event_room(id, cbdata);
 
 	return GGZ_HOOK_OK;
 }
 #endif
 
 #ifdef HAVE_GGZ
-GGZHookReturn NetGGZ::callback_game(unsigned id, const void *data, const void *user)
+GGZHookReturn NetGGZ::callback_game(unsigned id, const void *cbdata, const void *user)
 {
 	log("GGZCORE/game ## callback: %i\n", id);
-	ggzobj->event_game(id, data);
+	ggzobj->event_game(id, cbdata);
 
 	return GGZ_HOOK_OK;
 }
 #endif
 
-void NetGGZ::event_server(unsigned int id, const void *data) {
+void NetGGZ::event_server(unsigned int id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGameType *type;
@@ -354,7 +360,11 @@ void NetGGZ::event_server(unsigned int id, const void *data) {
 				{
 					if(!strcmp(ggzcore_gametype_get_name(type), "Widelands"))
 					{
+#if GGZCORE_VERSION_MICRO < 14
 						ggzcore_server_join_room(ggzserver, i);
+#else
+						ggzcore_server_join_room(ggzserver, room);
+#endif
 						joined = 1;
 						break;
 					}
@@ -385,14 +395,14 @@ void NetGGZ::event_server(unsigned int id, const void *data) {
 		case GGZ_CHANNEL_FAIL:
 		case GGZ_NET_ERROR:
 		case GGZ_PROTOCOL_ERROR:
-			log("GGZCORE ## -- error! (%s) :(\n", (char*)data);
+			log("GGZCORE ## -- error! (%s) :(\n", (char*)cbdata);
 			ggzcore_login = false;
 			break;
 	}
 #endif
 }
 
-void NetGGZ::event_room(unsigned int id, const void *data) {
+void NetGGZ::event_room(unsigned int id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	int i, num;
@@ -420,7 +430,7 @@ void NetGGZ::event_room(unsigned int id, const void *data) {
 #endif
 }
 
-void NetGGZ::event_game(unsigned int id, const void *data) {
+void NetGGZ::event_game(unsigned int id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGame *game;
@@ -457,7 +467,7 @@ void NetGGZ::event_game(unsigned int id, const void *data) {
 			break;
 		case GGZ_GAME_LAUNCH_FAIL:
 		case GGZ_GAME_NEGOTIATE_FAIL:
-			log("GGZCORE/game ## -- error! (%s) :(\n", (char*)data);
+			log("GGZCORE/game ## -- error! (%s) :(\n", (char*)cbdata);
 			break;
 	}
 #endif
