@@ -163,7 +163,7 @@ void Main_Menu_Save_Map::clicked_ok() {
 
       if(filename=="") {
          // Maybe a dir is selected
-         filename=static_cast<const char*>(m_ls->get_selection());
+			filename = m_ls->get_selected();
       }
 
       if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
@@ -196,7 +196,7 @@ void Main_Menu_Save_Map::clicked_make_directory() {
  * called when a item is selected
  */
 void Main_Menu_Save_Map::selected(uint) {
-   const char* name=static_cast<const char*>(m_ls->get_selection());
+   const char * const name = m_ls->get_selected();
 
    if(Widelands_Map_Loader::is_widelands_map(name)) {
       Map* map=new Map();
@@ -247,12 +247,20 @@ void Main_Menu_Save_Map::fill_list(void) {
 
    // First, we add all directorys
    // We manually add the parent directory
-   if(m_curdir!=m_basedir) {
+	if (m_curdir != m_basedir) {
 	   m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
-      m_ls->add_entry("<parent>", m_parentdir.c_str(), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
+		m_ls->add
+			("<parent>",
+			 m_parentdir.c_str(),
+			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
    }
 
-   for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
+	for
+		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		 pname != mapfiles_end;
+		 ++pname)
+	{
       const char *name = pname->c_str();
       if(!strcmp(FileSystem::FS_Filename(name),".")) continue;
       if(!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
@@ -260,26 +268,36 @@ void Main_Menu_Save_Map::fill_list(void) {
       if(!g_fs->IsDirectory(name)) continue;
       if(Widelands_Map_Loader::is_widelands_map(name)) continue;
 
-      m_ls->add_entry(FileSystem::FS_Filename(name), name, false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
+		m_ls->add
+			(FileSystem::FS_Filename(name),
+			 name,
+			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
    }
 
    Map* map=new Map();
 
-   for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+	for
+		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		 pname != mapfiles_end;
+		 ++pname)
+	{
       const char *name = pname->c_str();
 
       Map_Loader* m_ml = map->get_correct_loader(name);
       if(!m_ml) continue;
       if(m_ml->get_type()==Map_Loader::S2ML) continue; // we do not list s2 files since we only write wlmf
 
-      try {
+		try {
          m_ml->preload_map(true);
          std::string pic="";
          switch(m_ml->get_type()) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
          }
-	 m_ls->add_entry(FileSystem::FS_Filename(name), name, false, g_gr->get_picture( PicMod_Game,  pic.c_str() ));
+			m_ls->add
+				(FileSystem::FS_Filename(name),
+				 name,
+				 g_gr->get_picture(PicMod_Game, pic.c_str()));
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
@@ -288,8 +306,7 @@ void Main_Menu_Save_Map::fill_list(void) {
    }
    delete map;
 
-   if(m_ls->get_nr_entries())
-      m_ls->select(0);
+	if (m_ls->size()) m_ls->select(0);
 }
 
 /*

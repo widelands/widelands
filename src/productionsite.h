@@ -46,11 +46,10 @@ class WaresQueue;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-class ProductionSite_Descr : public Building_Descr {
+struct ProductionSite_Descr : public Building_Descr {
    friend class ProductionProgram; // To add animations
    typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
-public:
    struct Worker_Info {
       std::string name;
       int how_many;
@@ -71,7 +70,7 @@ public:
 	const std::set<std::string>* get_outputs() const { return &m_output; }
 	const std::vector<Input>* get_inputs() const { return &m_inputs; }
 	const ProductionProgram* get_program(std::string name) const;
-	const ProgramMap& get_all_programs() { return m_programs; };
+	const ProgramMap & get_all_programs() const throw () {return m_programs;}
 
 	virtual bool is_only_production_site(void) { return true; }
 
@@ -114,9 +113,8 @@ public:
       return &m_workers;
    }
 
-   virtual std::vector<Soldier*>* get_soldiers(void) {
-      throw wexception ("ProductionSite::get_soldiers makes no sense");
-   }
+	virtual const std::vector<Soldier *> & get_soldiers() const
+	{throw wexception ("ProductionSite::get_soldiers makes no sense");}
 protected:
 	virtual UI::Window* create_options_window(Interactive_Player* plr,
 		UI::Window** registry);

@@ -1116,23 +1116,17 @@ void ProductionSite_Window_ListWorkerWindow::think(void) {
  * fill list()
  */
 void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
-	const uint m_last_select = m_ls->get_selection_index();
+	const uint m_last_select = m_ls->selection_index();
    m_ls->clear();
    std::vector<Worker*>* workers=m_ps->get_workers();
 
    uint i;
    for(i=0; i<workers->size(); i++) {
 		Worker & worker = *(*workers)[i];
-		m_ls->add_entry
-			(worker.get_descname().c_str(),
-			 worker,
-			 false,
-			 worker.get_menu_pic());
+		m_ls->add(worker.get_descname().c_str(), worker, worker.get_menu_pic());
    }
-	if (m_ls->get_nr_entries() > m_last_select)
-      m_ls->select(m_last_select);
-   else if(m_ls->get_nr_entries())
-      m_ls->select(m_ls->get_nr_entries()-1);
+	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
+	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
 
    update();
 }
@@ -1144,7 +1138,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
    char buffer[250];
 
 	if (m_ls->has_selection()) {
-		const Worker & worker = m_ls->get_selection();
+		const Worker & worker = m_ls->get_selected();
 		sprintf(buffer, "%s", worker.get_descname().c_str());
       m_type->set_text(buffer);
 
@@ -1321,7 +1315,7 @@ private:
    Coords          m_ms_location;
    Interactive_Player* m_parent;
    UI::Window** m_reg;
-   UI::Table* m_table;
+   UI::Table<Soldier &> * m_table;
 	UI::Textarea		*m_capacity;
 };
 
@@ -1343,13 +1337,13 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
    // Soldiers view
-	m_table=new UI::Table(box, 0, 0, 360, 200, Align_Left, UI::Table::UP);
-	m_table->add_column(_("Name").c_str(), UI::Table::STRING, 100);
-	m_table->add_column(_("HP").c_str(), UI::Table::STRING, 40);
-	m_table->add_column(_("AT").c_str(), UI::Table::STRING, 40);
-	m_table->add_column(_("DE").c_str(), UI::Table::STRING, 40);
-	m_table->add_column(_("EV").c_str(), UI::Table::STRING, 40);
-	m_table->add_column(_("Level").c_str(), UI::Table::STRING, 100); // enough space for scrollbar
+	m_table=new UI::Table<Soldier &>(box, 0, 0, 360, 200);
+	m_table->add_column(_("Name"),  100);
+	m_table->add_column(_("HP"),     40);
+	m_table->add_column(_("AT"),     40);
+	m_table->add_column(_("DE"),     40);
+	m_table->add_column(_("EV"),     40);
+	m_table->add_column(_("Level"), 100); // enough space for scrollbar
 
    box->add(m_table, UI::Box::AlignCenter);
 
@@ -1431,45 +1425,36 @@ void MilitarySite_Window::think()
 MilitarySite_Window::update()
 
 Update the listselect, maybe there are new
+FIXME What if a soldier has been removed and another added? This needs review.
 soldiers
 =============
 */
 void MilitarySite_Window::update(void) {
-   std::vector<Soldier*>* soldiers=get_militarysite()->get_soldiers();
+	const std::vector<Soldier *> & soldiers = get_militarysite()->get_soldiers();
 
-   uint i;
-   int sel;
    char buf[200];
-	if (soldiers->size() < (uint) m_table->get_nr_entries())
-		for (i = 0; (int) i < m_table->get_nr_entries(); i++)
-			m_table->remove_entry(0);
+	if (soldiers.size() < m_table->size()) m_table->clear();
 
-   for(i=0; i<soldiers->size(); i++) {
-      Soldier* s=((*soldiers)[i]);
-      UI::Table_Entry* e=0;
-      for(sel=0; sel<m_table->get_nr_entries(); sel++) {
-         if(m_table->get_entry(sel)->get_user_data()==s) {
-            // Soldier already in list
-            e=m_table->get_entry(sel);
-            break;
-         }
-      }
-      if(!e) // add new
-         e= new UI::Table_Entry(m_table, s);
-
-		e->set_string(0, s->get_descname().c_str());
-      sprintf(buf, "%i / %i", s->get_hp_level(), s->get_max_hp_level());
-      e->set_string(1, buf);
-      sprintf(buf, "%i / %i", s->get_attack_level(), s->get_max_attack_level());
-      e->set_string(2, buf);
-      sprintf(buf, "%i / %i", s->get_defense_level(), s->get_max_defense_level());
-      e->set_string(3, buf);
-      sprintf(buf, "%i / %i", s->get_evade_level(), s->get_max_evade_level());
-      e->set_string(4, buf);
-      sprintf(buf, "%i / %i", s->get_evade_level()+s->get_attack_level()+ s->get_defense_level()+s->get_hp_level(),
-            s->get_max_evade_level()+s->get_max_defense_level()+s->get_max_attack_level()+s->get_max_hp_level());
-      e->set_string(5, buf);
-   }
+	for (uint i = 0; i < soldiers.size(); ++i) {
+		Soldier & s = *soldiers[i] ;
+		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
+		if (not er)                          er = &m_table->add(s);
+		const uint hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
+		const uint al = s.get_attack_level (), mal = s.get_max_attack_level ();
+		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
+		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
+		er->set_string(0, s.get_name());
+		sprintf(buf, "%i / %i", hl, mhl);
+		er->set_string(1, buf);
+		sprintf(buf, "%i / %i", al, mal);
+		er->set_string(2, buf);
+		sprintf(buf, "%i / %i", dl, mdl);
+		er->set_string(3, buf);
+		sprintf(buf, "%i / %i", el, mel);
+		er->set_string(4, buf);
+		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
+		er->set_string(5, buf);
+	}
    m_table->sort();
 
 	std::string str;
@@ -1480,21 +1465,11 @@ void MilitarySite_Window::update(void) {
 
 void MilitarySite_Window::drop_button_clicked() {
 	assert(*m_reg== this);
-	 std::vector<Soldier*>* soldiers=get_militarysite()->get_soldiers();
-	 Soldier* s = 0;
-
-	int sel = m_table->get_selection_index();
-	int i;
-
-	if ((sel < 0) || (sel >= (int)soldiers->size()))
-		return;
-	 for (i = 0; i < (int) soldiers->size(); i++) {
-		  s=((*soldiers)[i]);
-		  if (m_table->get_entry(sel)->get_user_data() == s)
-				break;
-	 }
-	 assert(i < (int) soldiers->size());
-	 act_drop_soldier (s->get_serial());
+	if //  FIXME should be assert
+		(m_table->selection_index()
+		 <
+		 get_militarysite()->get_soldiers().size())
+		act_drop_soldier(m_table->get_selected().get_serial());
 }
 
 /*
@@ -1726,8 +1701,7 @@ TrainingSite UI IMPLEMENTATION
 ==============================================================================
 */
 
-class TrainingSite_Window : public ProductionSite_Window {
-public:
+struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UI::Window** registry);
 	virtual ~TrainingSite_Window();
 
@@ -1748,7 +1722,7 @@ private:
    Coords              m_ms_location;
    Interactive_Player* m_parent;
    UI::Window**          m_reg;
-   UI::Table*            m_table;
+   UI::Table<Soldier &> * m_table;
    UI::Textarea*         m_capacity;
 
    UI::Tab_Panel*         m_tabpanel;
@@ -1805,13 +1779,13 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
    UI::Box* sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
 
       // Soldiers view
-   m_table=new UI::Table(sold_box, 0, 0, 360, 200, Align_Left, UI::Table::UP);
-   m_table->add_column(_("Name").c_str(), UI::Table::STRING, 100);
-   m_table->add_column(_("HP").c_str(), UI::Table::STRING, 40);
-   m_table->add_column(_("AT").c_str(), UI::Table::STRING, 40);
-   m_table->add_column(_("DE").c_str(), UI::Table::STRING, 40);
-   m_table->add_column(_("EV").c_str(), UI::Table::STRING, 40);
-   m_table->add_column(_("Level").c_str(), UI::Table::STRING, 100); // enough space for scrollbar
+	m_table = new UI::Table<Soldier &>(sold_box, 0, 0, 360, 200);
+	m_table->add_column(_("Name"),  100);
+	m_table->add_column(_("HP"),     40);
+	m_table->add_column(_("AT"),     40);
+	m_table->add_column(_("DE"),     40);
+	m_table->add_column(_("EV"),     40);
+	m_table->add_column(_("Level"), 100); // enough space for scrollbar
    sold_box->add (m_table, Align_Left);
 
       // Add drop soldier button
@@ -1901,50 +1875,34 @@ void TrainingSite_Window::think()
 TrainingSite_Window::update()
 
 Update the listselect, maybe there are new soldiers
+FIXME What if a soldier have been removed and another added? This needs review.
 =============
 */
 void TrainingSite_Window::update(void) {
-	std::vector<Soldier*>* soldiers=get_trainingsite()->get_soldiers();
+	const std::vector<Soldier*> & soldiers = get_trainingsite()->get_soldiers();
 
-	uint i;
-	int sel;
 	char buf[200];
-	if (soldiers->size() != (uint) m_table->get_nr_entries())
-		for (i = 0; (int) i < m_table->get_nr_entries(); i++)
-			m_table->remove_entry(0);
+	if (soldiers.size() != m_table->size()) m_table->clear();
 
-	for(i=0; i<soldiers->size(); i++) {
-		Soldier* s=((*soldiers)[i]);
-		UI::Table_Entry* e=0;
-		for(sel=0; sel<m_table->get_nr_entries(); sel++) {
-			if(m_table->get_entry(sel)->get_user_data()==s) {
-				// Soldier already in list
-				e=m_table->get_entry(sel);
-				break;
-			}
-		}
-		if(!e) // add new
-			e= new UI::Table_Entry(m_table, s);
-		int hl	= s->get_hp_level(),
-			mhl	= s->get_max_hp_level(),
-			al	= s->get_attack_level(),
-			mal	= s->get_max_attack_level(),
-			dl	= s->get_defense_level(),
-			mdl	= s->get_max_defense_level(),
-			el	= s->get_evade_level(),
-			mel	= s->get_max_evade_level();
-
-		e->set_string(0, s->get_name().c_str());
+	for (uint i = 0; i < soldiers.size(); ++i) {
+		Soldier & s = *soldiers[i] ;
+		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
+		if (not er)                           er = &m_table->add(s);
+		const uint hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
+		const uint al = s.get_attack_level (), mal = s.get_max_attack_level ();
+		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
+		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
+		er->set_string(0, s.get_name());
 		sprintf(buf, "%i / %i", hl, mhl);
-		e->set_string(1, buf);
+		er->set_string(1, buf);
 		sprintf(buf, "%i / %i", al, mal);
-		e->set_string(2, buf);
+		er->set_string(2, buf);
 		sprintf(buf, "%i / %i", dl, mdl);
-		e->set_string(3, buf);
+		er->set_string(3, buf);
 		sprintf(buf, "%i / %i", el, mel);
-		e->set_string(4, buf);
+		er->set_string(4, buf);
 		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
-		e->set_string(5, buf);
+		er->set_string(5, buf);
 	}
 	m_table->sort();
 
@@ -1979,22 +1937,11 @@ soldier from this training site.
 */
 void TrainingSite_Window::drop_button_clicked() {
 	 assert(*m_reg== this);
-	 std::vector<Soldier*>* soldiers=get_trainingsite()->get_soldiers();
-
-	 int sel = m_table->get_selection_index();
-	 int i;
-
-	 if ((sel < 0) || (sel >= (int)soldiers->size()))
-		  return;
-
-	 for (i = 0; i < (int) soldiers->size(); i++) {
-		  Soldier* s=((*soldiers)[i]);
-		  if (m_table->get_entry(sel)->get_user_data() == s)
-			  break;
-	 }
-
-	 assert(i < (int) soldiers->size());
-	 act_drop_soldier ((*soldiers)[i]->get_serial());
+	if
+		(m_table->selection_index()
+		 <
+		 get_trainingsite()->get_soldiers().size())
+		act_drop_soldier(m_table->get_selected().get_serial());
 }
 
 /*

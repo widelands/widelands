@@ -16,10 +16,13 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
- 
+
 #ifndef __S__WIDELANDS_ATTACK_CTRL_H
 #define __S__WIDELANDS_ATTACK_CTRL_H
 
+#include "instances.h"
+
+#include <set>
 #include <vector>
 #include <types.h>
 #include "immovable.h"
@@ -39,7 +42,7 @@ class AttackController : public BaseImmovable {
       AttackController(Game* game, Flag* flag, int attacker, int defender);
       ~AttackController();
       void launchAttack(uint nrAttackers);
-      
+
       //Methods inherited by BaseImmovable
       virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
       virtual int  get_size    () const throw () {return SMALL;}
@@ -52,7 +55,7 @@ class AttackController : public BaseImmovable {
       void moveToReached(Soldier* soldier);
       void soldierDied(Soldier* soldier);
       void soldierWon(Soldier* soldier);
-      
+
       inline int getAttackingPlayer() { return attackingPlayer; };
       inline int getDefendingPlayer() { return defendingPlayer; };
       inline Flag* getFlag() { return flag; };
@@ -66,27 +69,27 @@ class AttackController : public BaseImmovable {
          bool arrived;
          bool fighting;
       };
-      
+
       bool battleGroundOccupied(Coords* coords);
       void calcBattleGround(BattleSoldier*, int);
-      
+
       void launchAllSoldiers(bool attackers, int nrLaunch);
       void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers);
       bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
-      
+
       bool startBattle(Soldier*, bool);
       void removeSoldier(Soldier*);
       uint getBattleSoldierIndex(Soldier*);
       bool opponentsLeft(Soldier* soldier);
-      
+
       std::vector<BattleSoldier> involvedSoldiers;
-      std::vector<MilitarySite*> involvedMilitarySites;
+	std::set<Object_Ptr> involvedMilitarySites;
       int attackingPlayer;
       int defendingPlayer;
       uint totallyLaunched;
       Flag* flag;
       Game* game;
-   
+
 };
 
 #endif

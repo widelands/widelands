@@ -80,12 +80,12 @@ Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame()
 
 void Fullscreen_Menu_LoadGame::clicked_ok()
 {
-   m_filename = list.get_selection();
+	m_filename = list.get_selected();
    end_modal(1);
 }
 
 void Fullscreen_Menu_LoadGame::map_selected(uint) {
-	if (const char * const name = list.get_selection()) {
+	if (const char * const name = list.get_selected()) {
       FileSystem* fs = g_fs->MakeSubFileSystem( name );
 		Game_Loader gl(*fs, game);
       Game_Preload_Data_Packet gpdp;
@@ -141,7 +141,7 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
-			list.add_entry(fname, name);
+			list.add(fname, name);
          free(fname);
 
       } catch(_wexception& ) {
@@ -151,5 +151,5 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
          delete fs;
    }
 
-	if (list.get_nr_entries()) list.select(0);
+	if (list.size()) list.select(0);
 }

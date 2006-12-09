@@ -114,9 +114,8 @@ class TrainingSite:public ProductionSite {
 
 	virtual void set_economy(Economy * e);
 
-	virtual std::vector < Soldier * >*get_soldiers(void) {
-		return &m_soldiers;
-	}
+	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
+	{return m_soldiers;}
 
 	const TrainingSite_Descr *get__descr() const throw () {return get_descr();}
 

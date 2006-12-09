@@ -329,10 +329,8 @@ void Player::enhance_building(PlayerImmovable* imm, int id) {
       std::vector<Worker*> m_workers = workers;
       std::vector<Soldier*> m_soldiers;
 
-      if( b->has_soldiers() ) {
-         const std::vector<Soldier*>* soldier =  ((ProductionSite*)b)->get_soldiers();
-         m_soldiers = *soldier;
-      }
+		if (b->has_soldiers())
+			m_soldiers = static_cast<ProductionSite * const>(b)->get_soldiers();
 
       b->remove(get_game()); // No fire or stuff
 

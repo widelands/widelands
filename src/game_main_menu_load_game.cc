@@ -110,9 +110,8 @@ Game_Main_Menu_Load_Game::~Game_Main_Menu_Load_Game()
 }
 
 
-void Game_Main_Menu_Load_Game::clicked_ok() {
-		if (load_game(m_ls->get_selection())) die();
-}
+void Game_Main_Menu_Load_Game::clicked_ok()
+{if (load_game(m_ls->get_selected())) die();}
 
 void Game_Main_Menu_Load_Game::clicked_cancel() {
       die();
@@ -122,7 +121,7 @@ void Game_Main_Menu_Load_Game::clicked_cancel() {
  * called when a item is selected
  */
 void Game_Main_Menu_Load_Game::selected(uint) {
-	const char * const name = m_ls->get_selection();
+	const char * const name = m_ls->get_selected();
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
 
@@ -176,7 +175,7 @@ void Game_Main_Menu_Load_Game::fill_list(void)
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));
 	 FileSystem::FS_StripExtension(fname);
-			m_ls->add_entry(fname, name);
+			m_ls->add(fname, name);
          free(fname);
 
       } catch(_wexception& ) {
@@ -186,8 +185,7 @@ void Game_Main_Menu_Load_Game::fill_list(void)
          delete fs;
    }
 
-   if(m_ls->get_nr_entries())
-      m_ls->select(0);
+	if (m_ls->size()) m_ls->select(0);
 }
 
 /*

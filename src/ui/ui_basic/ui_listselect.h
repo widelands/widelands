@@ -34,12 +34,12 @@ struct Scrollbar;
 /**
  * This class defines a list-select box.
  *
- * T is the type of the list item and can be
+ * Entry can be
  * 1. a reference type,
  * 2. a pointer type or
  * 3. uintptr_t.
  */
-template <typename T> struct Listselect {
+template <typename Entry> struct Listselect {
 	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
 	~Listselect();
 
@@ -47,33 +47,35 @@ template <typename T> struct Listselect {
    Signal1<uint> double_clicked;
 
 	void clear();
-	void sort(const int start = -1, const int end=-1);
-	void add_entry
+	void sort(const uint Begin = 0, uint End = std::numeric_limits<uint>::max());
+	void add
 		(const char * const name,
-		 T value,
-		 const bool select_this = false,
-		 const int picid = -1);
-	void remove_entry(const uint i) const throw ();
-	void remove_entry(const char * const name);
+		 Entry value,
+		 const int picid = -1,
+		 const bool select_this = false);
+	void remove(const uint i) const throw ();
+	void remove(const char * const name);
 
 	void switch_entries(const uint, const uint);
 
 	void set_entry_color(const uint n, const RGBColor) throw ();
 	void set_align(const Align);
 
-	uint get_nr_entries() const throw ();
-	T get_entry(const uint i) const throw ();
+	uint size() const throw ();
+	Entry operator[](const uint i) const throw ();
 	static uint no_selection_index() throw ();
-	uint get_selection_index() const throw ();
+	uint selection_index() const throw ();
 
 	void select(const uint i);
 	bool has_selection() const throw ();
 	struct No_Selection {};
-	T get_selection() const throw (No_Selection);
-	void remove_selection() const throw (No_Selection);
+	Entry get_selected() const throw (No_Selection);
+	void remove_selected() const throw (No_Selection);
 
-	int get_lineheight() const throw ();
-	uint get_eff_w() const throw ();
+	///  Return the total height (text + spacing) occupied by a single line.
+	uint get_lineheight() const throw ();
+
+	uint get_eff_w     () const throw ();
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
@@ -89,47 +91,48 @@ template <> struct Listselect<void *> : public Panel {
 	Signal1<uint> double_clicked;
 
 	void clear();
-	void sort(const int start = -1, const int end=-1);
-	void add_entry
+	void sort
+		(const uint Begin = 0, const uint End = std::numeric_limits<uint>::max());
+	void add
 		(const char * const name,
-		 void * value,
-		 const bool select_this = false,
-		 const int picid = -1);
-	void remove_entry(const uint i);
-	void remove_entry(const char * const name);
+		 void * entry,
+		 const int picid = -1,
+		 const bool select_this = false);
+	void remove(const uint i);
+	void remove(const char * const name);
 
 	void switch_entries(const uint, const uint);
 
 	void set_entry_color(const uint n, const RGBColor col) throw () {
-		assert( n < m_entries.size() );
-		m_entries[n]->use_clr = true;
-		m_entries[n]->clr = col;
+		assert( n < m_entry_records.size() );
+		m_entry_records[n]->use_clr = true;
+		m_entry_records[n]->clr     = col;
 	}
 
 	void set_align(const Align);
 
-	uint get_nr_entries() const throw () {return m_entries.size();}
-	void * get_entry(const uint i) const throw ()
-	{assert(i < m_entries.size()); return m_entries[i]->value;}
+	uint size() const throw () {return m_entry_records.size();}
+	void * operator[](const uint i) const throw ()
+	{assert(i < m_entry_records.size()); return m_entry_records[i]->entry();}
 	static uint no_selection_index() throw ()
 	{return std::numeric_limits<uint>::max();}
-	uint get_selection_index() const throw () {return m_selection;}
+	uint selection_index() const throw () {return m_selection;}
 
 	void select(const uint i);
 	bool has_selection() const throw ()
 	{return m_selection != no_selection_index();}
 	struct No_Selection {};
-	void * get_selection() const {
+	void * get_selected() const {
 		if (m_selection == no_selection_index()) throw No_Selection();
-		return m_entries[m_selection]->value;
+		return m_entry_records[m_selection]->entry();
 	}
-	void remove_selection() throw (No_Selection) {
+	void remove_selected() throw (No_Selection) {
 		if (m_selection == no_selection_index()) throw No_Selection();
-		remove_entry(m_selection);
+		remove(m_selection);
 	}
 
-	int get_lineheight() const throw ();
-	uint get_eff_w() const throw () {return get_w();}
+	uint get_lineheight() const throw () {return m_lineheight + 2;}
+	uint get_eff_w     () const throw () {return get_w();}
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
@@ -143,8 +146,10 @@ private:
 private:
 	static const int ms_darken_value=-20;
 
-   struct Entry {
-		void*		value;
+	struct Entry_Record {
+		void * entry() const throw () {return m_entry;}
+
+		void *   m_entry;
       bool     use_clr;
       RGBColor clr;
       int      picid;
@@ -154,7 +159,8 @@ private:
 	uint                  m_max_pic_width;
 	uint                  m_lineheight;
 	Align						m_align;
-	std::vector<Entry*>	m_entries;
+	typedef std::vector<Entry_Record *> Entry_Record_vector;
+	Entry_Record_vector m_entry_records;
 	Scrollbar *         m_scrollbar;
 	uint                  m_scrollpos;	// in pixels
 	uint                  m_selection;
@@ -164,7 +170,9 @@ private:
 	int						m_check_picid;
 };
 
-template <typename T> struct Listselect<const T * const> : public Listselect<void *> {
+template <typename Entry>
+	struct Listselect<const Entry * const> : public Listselect<void *>
+{
 	typedef Listselect<void *> Base;
 	Listselect
 		(Panel * parent,
@@ -172,22 +180,24 @@ template <typename T> struct Listselect<const T * const> : public Listselect<voi
 		 uint w, uint h,
 		 Align align = Align_Left,
 		 bool show_check = false)
-		:
-		Base(parent, x, y, w, h, align, show_check) {}
+		: Base(parent, x, y, w, h, align, show_check)
+	{}
 
-	void add_entry
+	void add
 		(const char * const name,
-		 const T * const value,
-		 const bool select_this = false,
-		 const int picid = -1)
-	{Base::add_entry(name, const_cast<T * const>(value), select_this, picid);}
-	const T * get_entry(const uint i) const throw ()
-	{return static_cast<const T * const>(Base::get_entry(i));}
-	const T * get_selection() const
-	{return static_cast<const T * const>(Base::get_selection());}
+		 const Entry * const entry,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{Base::add(name, const_cast<Entry * const>(entry), picid, select_this);}
+	const Entry * operator[](const uint i) const throw ()
+	{return static_cast<const Entry * const>(Base::operator[](i));}
+	const Entry * get_selected() const
+	{return static_cast<const Entry * const>(Base::get_selected());}
 };
 
-template <class T> struct Listselect<T * const> : public Listselect<void *> {
+template <typename Entry>
+	struct Listselect<Entry * const> : public Listselect<void *>
+{
 	typedef Listselect<void *> Base;
 	Listselect
 		(Panel * parent,
@@ -195,16 +205,17 @@ template <class T> struct Listselect<T * const> : public Listselect<void *> {
 		 uint w, uint h,
 		 Align align = Align_Left,
 		 bool show_check = false)
-		:
-		Base(parent, x, y, w, h, align, show_check) {}
+		: Base(parent, x, y, w, h, align, show_check)
+	{}
 
-	T * get_entry(const uint i) const throw ()
-	{return static_cast<T * const>(Base::get_entry(i));}
-	T * get_selection() const
-	{return static_cast<T * const>(Base::get_selection());}
+	Entry * operator[](const uint i) const throw ()
+	{return static_cast<Entry * const>(Base::operator[](i));}
+	Entry * get_selected() const
+	{return static_cast<Entry * const>(Base::get_selected());}
 };
 
-template <class T> struct Listselect<T &> : public Listselect<void *> {
+template <typename Entry> struct Listselect<Entry &> : public Listselect<void *>
+{
 	typedef Listselect<void *> Base;
 	Listselect
 		(Panel * parent,
@@ -212,19 +223,19 @@ template <class T> struct Listselect<T &> : public Listselect<void *> {
 		 uint w, uint h,
 		 Align align = Align_Left,
 		 bool show_check = false)
-		:
-		Base(parent, x, y, w, h, align, show_check) {}
+		: Base(parent, x, y, w, h, align, show_check)
+	{}
 
-	void add_entry
+	void add
 		(const char * const name,
-		 T & value,
-		 const bool select_this = false,
-		 const int picid = -1)
-	{Base::add_entry(name, &value, select_this, picid);}
-	T & get_entry(const uint i) const throw ()
-	{return *static_cast<T * const>(Base::get_entry(i));}
-	T & get_selection() const
-	{return *static_cast<T * const>(Base::get_selection());}
+		 Entry & value,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{Base::add(name, &value, picid, select_this);}
+	Entry & operator[](const uint i) const throw ()
+	{return *static_cast<Entry * const>(Base::operator[](i));}
+	Entry & get_selected() const
+	{return *static_cast<Entry * const>(Base::get_selected());}
 };
 
 compile_assert(sizeof(void *) == sizeof(uintptr_t));
@@ -236,22 +247,22 @@ template <> struct Listselect<uintptr_t> : public Listselect<void *> {
 		 uint w, uint h,
 		 Align align = Align_Left,
 		 bool show_check = false)
-		:
-		Base(parent, x, y, w, h, align, show_check) {}
+		: Base(parent, x, y, w, h, align, show_check)
+	{}
 
-	void add_entry
+	void add
 		(const char * const name,
 		 const uintptr_t value,
-		 const bool select_this = false,
-		 const int picid = -1)
+		 const int picid = -1,
+		 const bool select_this = false)
 	{
-		Base::add_entry
-			(name, reinterpret_cast<void * const>(value), select_this, picid);
+		Base::add
+			(name, reinterpret_cast<void * const>(value), picid, select_this);
 	}
-	uint get_entry(const uint i) const throw ()
-	{return reinterpret_cast<const uintptr_t>(Base::get_entry(i));}
-	uint get_selection() const
-	{return reinterpret_cast<const uintptr_t>(Base::get_selection());}
+	uint operator[](const uint i) const throw ()
+	{return reinterpret_cast<const uintptr_t>(Base::operator[](i));}
+	uint get_selected() const
+	{return reinterpret_cast<const uintptr_t>(Base::get_selected());}
 };
 };
 

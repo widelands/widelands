@@ -39,14 +39,14 @@ objectivetext(this, 5, 70, get_inner_w() - 10, 150, "", Align_Left, 1)
 		if (not obj.get_is_visible()) continue;
 		if (obj.get_trigger()->is_set()) continue;
 
-		list.add_entry(obj.get_name(), obj);
+		list.add(obj.get_name(), obj);
 		if (obj.get_is_optional()) list.set_entry_color
-			(list.get_nr_entries() - 1, RGBColor(255,0,0));
+			(list.size() - 1, RGBColor(255,0,0));
    }
    list.selected.set(this, &GameObjectivesMenu::selected);
 
    // If any objectives, select the first one
-	if (list.get_nr_entries()) list.select(0);
+	if (list.size()) list.select(0);
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -57,4 +57,4 @@ objectivetext(this, 5, 70, get_inner_w() - 10, 150, "", Align_Left, 1)
  * Something has been selected
  */
 void GameObjectivesMenu::selected(uint t)
-{objectivetext.set_text(list.get_entry(t).get_descr());}
+{objectivetext.set_text(list[t].get_descr());}

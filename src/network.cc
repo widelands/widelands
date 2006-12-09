@@ -93,11 +93,11 @@ class NetStatusWindow:public UI::Window {
 
     private:
 	struct Entry {
-		UI::Table_Entry*	entry;
+		UI::Table<void *>::Entry_Record * entry;
 		int		plnum;
 	};
 
-	UI::Table*		table;
+	UI::Table<void *> table;
 
 	std::vector<Entry>	entries;
 };
@@ -827,25 +827,23 @@ void NetClient::disconnect ()
 
 /*** class NetStatusWindow ***/
 
-NetStatusWindow::NetStatusWindow (UI::Panel* parent)
-	:UI::Window(parent, 0, 0, 256, 192, _("Starting network game").c_str())
+NetStatusWindow::NetStatusWindow (UI::Panel* parent) :
+UI::Window(parent, 0, 0, 256, 192, _("Starting network game").c_str()),
+table(this, 0, 0, 256, 192)
 {
-    table=new UI::Table(this, 0, 0, 256, 192);
-    table->add_column (_("Player").c_str(), UI::Table::STRING, 192);
-    table->add_column (_("Status").c_str(), UI::Table::STRING, 64);
+	table.add_column (_("Player"), 192);
+	table.add_column (_("Status"),  64);
 }
 
 void NetStatusWindow::add_player (int num)
 {
     char buffer[64];
-    Entry entry;
 
     snprintf (buffer, 64, "%s %d", _("Player").c_str(), num);
 
-    entry.plnum=num;
-    entry.entry=new UI::Table_Entry(table, 0);
-    entry.entry->set_string (0, buffer);
-    entry.entry->set_string (1, _("Waiting").c_str());
+	Entry entry = {&table.add(), num};
+	entry.entry->set_string (0, buffer);
+	entry.entry->set_string (1, _("Waiting"));
 
     entries.push_back (entry);
 }
@@ -855,8 +853,7 @@ void NetStatusWindow::set_ready (int num)
     unsigned int i;
 
     for (i=0;i<entries.size();i++)
-	if (entries[i].plnum==num)
-		    entries[i].entry->set_string (1, _("Ready").c_str());
+	if (entries[i].plnum == num) entries[i].entry->set_string (1, _("Ready"));
 }
 
 /*** class Serializer ***/

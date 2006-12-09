@@ -20,13 +20,15 @@
 #ifndef __S__BUILDING_STATISTICS_MENU_H
 #define __S__BUILDING_STATISTICS_MENU_H
 
+#include "ui_table.h"
 #include "ui_unique_window.h"
+
+struct Building_Descr;
 class Interactive_Player;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 struct Progress_Bar;
 struct Textarea;
-struct Table;
 };
 
 struct Building_Statistics_Menu : public UI::UniqueWindow {
@@ -43,21 +45,20 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 		Prev_Unproductive, Next_Unproductive
 	};
 
-      UI::Table*            m_table;
       Interactive_Player* m_parent;
+	UI::Table<const uintptr_t> m_table;
       UI::Progress_Bar*     m_progbar;
       UI::Textarea*         m_owned, *m_build;
       uint                m_anim;
       uint                m_lastupdate;
       uint                m_end_of_table_y;
-      int                 m_selected;
 	UI::IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
       int                 m_last_building_index;
 
    private:
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
-      void table_changed(int);
+	void table_changed(uint);
       void update();
       int validate_pointer(int*,int);
 };

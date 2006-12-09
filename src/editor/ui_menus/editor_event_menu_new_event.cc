@@ -52,7 +52,7 @@ m_parent(parent)
    uint i=0;
    for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
 		Event_Descr & d = *Event_Factory::get_event_descr(i);
-		m_event_list->add_entry(d.name, d);
+		m_event_list->add(d.name, d);
    }
    m_event_list->sort();
 
@@ -110,7 +110,7 @@ bool Editor_Event_Menu_New_Event::handle_mouserelease(const Uint8, int, int)
 void Editor_Event_Menu_New_Event::clicked_ok() {
    // Create new event
 	Event * const event = Event_Factory::make_event_with_option_dialog
-		(m_event_list->get_selection().id.c_str(), m_parent, 0);
+		(m_event_list->get_selected().id.c_str(), m_parent, 0);
    if(!event) {
       // No event created, choose another, user
       return;
@@ -124,7 +124,7 @@ void Editor_Event_Menu_New_Event::clicked_ok() {
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Event::selected(uint) {
-	m_description->set_text(m_event_list->get_selection().descr);
+	m_description->set_text(m_event_list->get_selected().descr);
    m_ok_button->set_enabled(true);
 }
 

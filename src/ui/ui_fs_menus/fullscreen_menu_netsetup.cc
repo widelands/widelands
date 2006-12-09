@@ -83,9 +83,9 @@ internetgame(false)
 	hostname  .changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
 	hostname  .set_text("localhost");
 	playername.set_text(_("nobody").c_str());
-	opengames .add_column(_("Host").c_str(), UI::Table::STRING, 150);
-	opengames .add_column(_("Map").c_str(), UI::Table::STRING, 150);
-	opengames .add_column(_("State").c_str(), UI::Table::STRING, 90);
+	opengames .add_column(_("Host"), 150);
+	opengames .add_column(_("Map"),  150);
+	opengames .add_column(_("State"), 90);
 	opengames .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 	discovery .set_callback (discovery_callback, this);
 }
@@ -101,13 +101,13 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 {
 	const char * const host = hostname.get_text();
 
-	for (int i = 0; i <opengames.get_nr_entries(); ++i) {
-		const LAN_Open_Game * game = static_cast<const LAN_Open_Game * const>
-			(opengames.get_entry(i)->get_user_data());
+	const uint opengames_size = opengames.size();
+	for (uint i = 0; i < opengames_size; ++i) {
+		const LAN_Open_Game & game = *opengames[i];
 
-	    if (!strcmp(game->info.hostname, host)) {
-		addr=game->address;
-		port=game->port;
+		if (not strcmp(game.info.hostname, host)) {
+			addr = game.address;
+			port = game.port;
 		return true;
 	    }
 	}
@@ -122,46 +122,36 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 	return true;
 }
 
-void Fullscreen_Menu_NetSetup::game_selected (int) {
-	if
-		(const LAN_Open_Game * const game =
-		 static_cast<const LAN_Open_Game * const>(opengames.get_selection()))
+void Fullscreen_Menu_NetSetup::game_selected (uint) {
+	if (const LAN_Open_Game * const game = opengames.get_selected())
 		hostname.set_text(game->info.hostname);
 }
 
-void Fullscreen_Menu_NetSetup::update_game_info (UI::Table_Entry* entry, const LAN_Game_Info& info)
+void Fullscreen_Menu_NetSetup::update_game_info
+(UI::Table<const LAN_Open_Game * const>::Entry_Record & er,
+ const LAN_Game_Info & info)
 {
-	entry->set_string (0, info.hostname);
-	entry->set_string (1, info.map);
+	er.set_string (0, info.hostname);
+	er.set_string (1, info.map);
 
 	switch (info.state) {
-	    case LAN_GAME_OPEN:
-		    entry->set_string (2, _("Open").c_str());
-		break;
-	    case LAN_GAME_CLOSED:
-		    entry->set_string (2, _("Closed").c_str());
-		break;
-	    default:
-		    entry->set_string (2, _("Unknown").c_str());
-		break;
+	case LAN_GAME_OPEN:   er.set_string(2, _("Open"));   break;
+	case LAN_GAME_CLOSED: er.set_string(2, _("Closed")); break;
+	default:              er.set_string(2, _("Unknown"));
 	}
 }
 
-void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game* game)
-{
-	update_game_info
-		(new UI::Table_Entry
-		 (&opengames,
-		  const_cast<LAN_Open_Game*>(game)),
-		 game->info);
-}
+void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game * game)
+{update_game_info(opengames.add(game), game->info);}
 
 void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game *) {}
 
-void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game* game)
+void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game * game)
 {
-	if (UI::Table_Entry * const entry = opengames.find_entry(game))
-	    update_game_info (entry, game->info);
+	if
+		(UI::Table<const LAN_Open_Game * const>::Entry_Record * const er =
+		 opengames.find(game))
+		update_game_info(*er, game->info);
 }
 
 void Fullscreen_Menu_NetSetup::discovery_callback (int type, const LAN_Open_Game* game, void* userdata)
@@ -190,7 +180,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 		strncpy(info.hostname, "(ggz)", sizeof(info.hostname));
 		strncpy(info.map, (*it).c_str(), sizeof(info.map));
 		info.state = LAN_GAME_OPEN;
-		update_game_info(new UI::Table_Entry(&opengames, (void*) NULL), info);
+		update_game_info(opengames.add(), info);
 	}
 }
 
@@ -246,14 +236,10 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 //}
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
-	const int index = opengames.get_selection_index();
-	if(index < 0) return;
-
 	if(NetGGZ::ref()->usedcore())
 	{
-		UI::Table_Entry *entry = opengames.get_entry(index);
-		if(!entry) return;
-		NetGGZ::ref()->join(entry->get_string(1));
+		NetGGZ::ref()->join
+			(opengames.get_selected_record().get_string(1).c_str());
 		end_modal(JOINGGZGAME);
 	}
 	else end_modal(JOINGAME);

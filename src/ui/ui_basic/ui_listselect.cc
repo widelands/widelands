@@ -79,9 +79,14 @@ Listselect<void *>::~Listselect() {m_scrollbar = 0; clear();}
 Remove all entries from the listselect
 */
 void Listselect<void *>::clear() {
-	for(uint i = 0; i < m_entries.size(); i++)
-		free(m_entries[i]);
-	m_entries.clear();
+	const Entry_Record_vector::const_iterator entry_records_end =
+		m_entry_records.end();
+	for
+		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
+		 it != entry_records_end;
+		 ++it)
+		delete *it;
+	m_entry_records.clear();
 
 	if (m_scrollbar) m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
@@ -98,19 +103,19 @@ Args: name	name that will be displayed
       value	value returned by get_select()
       select if true, directly select the new entry
 */
-void Listselect<void *>::add_entry
+void Listselect<void *>::add
 (const char * const name,
- void * value,
- const bool sel,
- const int picid)
+ void * entry,
+ const int picid,
+ const bool sel)
 {
-	Entry & e =
-		*static_cast<Entry * const>(malloc(sizeof(Entry) + strlen(name)));
+	Entry_Record & er = *static_cast<Entry_Record * const>
+		(malloc(sizeof(Entry_Record) + strlen(name)));
 
-	e.value = value;
-	e.picid = picid;
-	e.use_clr = false;
-	strcpy(e.name, name);
+	er.m_entry = entry;
+	er.picid = picid;
+	er.use_clr = false;
+	strcpy(er.name, name);
 
 	uint entry_height = 0;
    if(picid==-1) {
@@ -123,13 +128,13 @@ void Listselect<void *>::add_entry
    }
    if(entry_height>m_lineheight) m_lineheight=entry_height;
 
-	m_entries.push_back(&e);
+	m_entry_records.push_back(&er);
 
-	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
+	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
    if(sel) {
-      Listselect::select( m_entries.size() - 1);
+      Listselect::select( m_entry_records.size() - 1);
 	}
 }
 
@@ -137,10 +142,10 @@ void Listselect<void *>::add_entry
  * Switch two entries
  */
 void Listselect<void *>::switch_entries(const uint m, const uint n) {
-	assert(m < get_nr_entries());
-	assert(n < get_nr_entries());
+	assert(m < size());
+	assert(n < size());
 
-	std::swap(m_entries[m], m_entries[n]);
+	std::swap(m_entry_records[m], m_entry_records[n]);
 
 	if (m_selection == m) {
 		m_selection = n;
@@ -158,24 +163,18 @@ void Listselect<void *>::switch_entries(const uint m, const uint n) {
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void Listselect<void *>::sort(const int gstart, const int gend) {
-   uint strt=gstart;
-   uint stop=gend;
-   if(gstart==-1) strt=0;
-   if(gend==-1) stop=m_entries.size();
-
-   Entry *ei, *ej;
-   for(uint i=strt; i<stop; i++)
-      for(uint j=i; j<stop; j++) {
-         ei=m_entries[i];
-         ej=m_entries[j];
-         if(strcmp(ei->name, ej->name) > 0)  {
-				if      (m_selection == i) m_selection = j;
-				else if (m_selection == j) m_selection = i;
-            m_entries[i]=ej;
-            m_entries[j]=ei;
-         }
-      }
+void Listselect<void *>::sort(const uint Begin, uint End) {
+	if (End > size()) End = size();
+	for (uint i = Begin; i < End; ++i) for (uint j = i; j < End; ++j) {
+		Entry_Record * const eri = m_entry_records[i];
+		Entry_Record * const erj = m_entry_records[j];
+		if (strcmp(eri->name, erj->name) > 0)  {
+			if      (m_selection == i) m_selection = j;
+			else if (m_selection == j) m_selection = i;
+			m_entry_records[i]=erj;
+			m_entry_records[j]=eri;
+		}
+	}
 }
 
 /**
@@ -207,21 +206,14 @@ void Listselect<void *>::select(const uint i) {
 
 	if (m_show_check) {
 		if (m_selection != no_selection_index())
-			m_entries[m_selection]->picid = -1;
-		m_entries[i]->picid = m_check_picid;
+			m_entry_records[m_selection]->picid = -1;
+		m_entry_records[i]->picid = m_check_picid;
 	}
 	m_selection = i;
 
 	selected.call(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
-
-
-/**
-Return the total height (text + spacing) occupied by a single line
-*/
-int Listselect<void *>::get_lineheight() const throw ()
-{return m_lineheight + 2;}
 
 
 /**
@@ -235,11 +227,11 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
 
-	while (idx < m_entries.size()) {
+	while (idx < m_entry_records.size()) {
 		if (y >= get_h())
 			return;
 
-		Entry* e = m_entries[idx];
+		const Entry_Record & er = *m_entry_records[idx];
 
 		if (idx == m_selection) {
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
@@ -259,18 +251,23 @@ void Listselect<void *>::draw(RenderTarget* dst) {
             x=1;
       }
 
-      RGBColor col = UI_FONT_CLR_FG;
-      if( e->use_clr )
-         col = e->clr;
+		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
       // Horizontal center the string
-		g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(107,87,55), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
+		g_fh->draw_string
+			(dst,
+			 UI_FONT_SMALL,
+			 col,
+			 RGBColor(107,87,55),
+			 x, y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2,
+			 er.name, m_align,
+			 -1);
 
       // Now draw pictures
-      if(e->picid!=-1) {
+		if (er.picid != -1) {
 			uint w, h;
-			g_gr->get_picture_size(e->picid, w, h);
-         dst->blit(1, y + (get_lineheight()-h)/2, e->picid);
+			g_gr->get_picture_size(er.picid, w, h);
+			dst->blit(1, y + (get_lineheight()-h)/2, er.picid);
       }
 		y += lineheight;
 		idx++;
@@ -296,7 +293,7 @@ bool Listselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 		play_click();
 
       y = (y + m_scrollpos) / get_lineheight();
-	if (y >= 0 and y < static_cast<const int>(m_entries.size())) select(y);
+	if (y >= 0 and y < static_cast<const int>(m_entry_records.size())) select(y);
 
       // check if doubleclicked
 	if
@@ -316,11 +313,11 @@ bool Listselect<void *>::handle_mouserelease(const Uint8 btn, int, int)
 /*
  * Remove entry
  */
-void Listselect<void *>::remove_entry(const uint i) {
-	assert(i < m_entries.size());
+void Listselect<void *>::remove(const uint i) {
+	assert(i < m_entry_records.size());
 
-   free(m_entries[i]);
-   m_entries.erase(m_entries.begin() + i);
+   free(m_entry_records[i]);
+   m_entry_records.erase(m_entry_records.begin() + i);
 	if (m_selection == i) selected.call(m_selection = no_selection_index());
 }
 
@@ -329,10 +326,10 @@ void Listselect<void *>::remove_entry(const uint i) {
  * the first entry with this name. If none is found, nothing
  * is done
  */
-void Listselect<void *>::remove_entry(const char * const str) {
-   for(uint i=0; i<m_entries.size(); i++) {
-      if(!strcmp(m_entries[i]->name,str)) {
-         remove_entry(i);
+void Listselect<void *>::remove(const char * const str) {
+   for(uint i=0; i<m_entry_records.size(); i++) {
+      if(!strcmp(m_entry_records[i]->name,str)) {
+			remove(i);
          return;
       }
    }

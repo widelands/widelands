@@ -26,6 +26,7 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "ui_listselect.h"
 #include "ui_window.h"
 #include "ui_unique_window.h"
 #include "ui_table.h"
@@ -46,15 +47,15 @@ class EncyclopediaWindow : public UI::UniqueWindow {
 	  ~EncyclopediaWindow();
    private:
 	  Interactive_Player& interactivePlayer;
-	  UI::Table* waresTable;
-	  UI::Table* prodSitesTable;
-	  UI::Table* condTable;
-	  UI::Multiline_Textarea* descrTxt;
+	UI::Listselect<uintptr_t> wares;
+	UI::Listselect<uintptr_t> prodSites;
+	UI::Table     <uintptr_t> condTable;
+	UI::Multiline_Textarea    descrTxt;
 	  const Item_Ware_Descr* selectedWare;
 	  const Tribe_Descr* tribe;
-	  void fillWaresTable();
-	  void wareSelected(int);
-	  void prodSiteSelected(int);
+	void fillWares();
+	void wareSelected(uint);
+	void prodSiteSelected(uint);
 	  void createCondTableEntry(int index, std::string wareName, bool consumed, WareCondition* wareCondition);
 };
 #endif

@@ -33,7 +33,6 @@
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"
 #include "ui_multilineeditbox.h"
-#include "ui_table.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
@@ -44,14 +43,16 @@
  * before it can return
  */
 struct Edit_Objective_Window : public UI::Window {
-      Edit_Objective_Window(Editor_Interactive*, UI::Table_Entry*);
+	Edit_Objective_Window
+		(Editor_Interactive * const parent,
+		 UI::Table<MapObjective &>::Entry_Record &);
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
       Editor_Interactive  *m_parent;
-      UI::Table_Entry       *m_te;
+	UI::Table<MapObjective &>::Entry_Record & m_te;
       UI::Edit_Box          *m_name;
       UI::Multiline_Editbox *m_descr;
       UI::Checkbox          *m_visible;
@@ -61,7 +62,9 @@ struct Edit_Objective_Window : public UI::Window {
 	void clicked_ok();
 };
 
-Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UI::Table_Entry* te)
+Edit_Objective_Window::Edit_Objective_Window
+(Editor_Interactive * const parent,
+ UI::Table<MapObjective &>::Entry_Record & te)
 :
 UI::Window(parent, 0, 0, 250, 85, _("Edit Objective").c_str()),
 m_parent  (parent),
@@ -70,22 +73,22 @@ m_te      (te)
    int spacing = 5;
    int posy = 5;
 
-   MapObjective* obj = static_cast<MapObjective*>(te->get_user_data());
+	MapObjective & obj = UI::Table<MapObjective &>::get(te);
 
    // What type
    new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
    m_name = new UI::Edit_Box( this, 120, 5, 120, 20, 0, 0);
-   m_name->set_text( obj->get_name() );
+	m_name->set_text(obj.get_name());
    posy += 20 + spacing;
 
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
    m_visible = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
-   m_visible->set_state( obj->get_is_visible() );
+	m_visible->set_state(obj.get_is_visible());
    posy += STATEBOX_HEIGHT+ spacing;
 
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Optional Objective: "), Align_CenterLeft);
    m_optional = new UI::Checkbox(this, get_inner_w() - STATEBOX_WIDTH - spacing, posy);
-   m_optional->set_state( obj->get_is_optional() );
+	m_optional->set_state(obj.get_is_optional());
    posy += STATEBOX_HEIGHT+ spacing;
 
    // Multiline editbox
@@ -93,7 +96,10 @@ m_te      (te)
    posy += 20 + spacing;
 
    const int editbox_height = 140;
-   m_descr = new UI::Multiline_Editbox(this, 5, posy, get_inner_w()-2*spacing, editbox_height, obj->get_descr() );
+	m_descr = new UI::Multiline_Editbox
+		(this,
+		 5, posy, get_inner_w() - 2 * spacing, editbox_height,
+		 obj.get_descr());
    posy+= editbox_height + spacing + spacing;
 
 	new UI::Button<Edit_Objective_Window>
@@ -135,18 +141,18 @@ bool Edit_Objective_Window::handle_mouserelease(const Uint8, int, int)
  */
 void Edit_Objective_Window::clicked_ok() {
    // Extract value
-   MapObjective* obj = static_cast<MapObjective*>(m_te->get_user_data());
+	MapObjective & obj = UI::Table<MapObjective &>::get(m_te);
 
-   obj->set_name( m_name->get_text());
-   obj->set_is_optional( m_optional->get_state() );
-   obj->set_is_visible( m_visible->get_state() );
-   obj->set_descr( m_descr->get_text().c_str() );
-   m_te->set_string(0, obj->get_name());
-   m_te->set_string(1, obj->get_is_optional() ? "Yes" : "No");
-   m_te->set_string(2, obj->get_is_visible() ? "Yes" : "No");
+	obj.set_name( m_name->get_text());
+	obj.set_is_optional( m_optional->get_state() );
+	obj.set_is_visible( m_visible->get_state() );
+	obj.set_descr( m_descr->get_text().c_str() );
+	m_te.set_string(0, obj.get_name());
+	m_te.set_string(1, obj.get_is_optional() ? "Yes" : "No");
+	m_te.set_string(2, obj.get_is_visible() ? "Yes" : "No");
 
    // Set the triggers name
-   obj->get_trigger()->set_name( m_name->get_text() );
+	obj.get_trigger()->set_name(m_name->get_text());
 
    end_modal(1);
 }
@@ -159,22 +165,23 @@ Editor_Objectives_Menu::Editor_Objectives_Menu
 Create all the buttons etc...
 ===============
 */
+#define spacing 5
 Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
-	: UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu"))
+:
+UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu")),
+m_parent(parent),
+m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 {
-   m_parent=parent;
 
    // Caption
    UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Objectives Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
-   const int spacing=5;
-   m_table = new UI::Table(this, 5, 25, get_inner_w()-2*spacing, get_inner_h() - 60);
-   m_table->add_column(_("Name").c_str(), UI::Table::STRING, 270);
-   m_table->add_column(_("Optional").c_str(), UI::Table::STRING, 70);
-   m_table->add_column(_("Visible").c_str(), UI::Table::STRING, 60);
-   m_table->selected.set(this, &Editor_Objectives_Menu::table_selected);
-   m_table->double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
+	m_table.add_column(_("Name"),    270);
+	m_table.add_column(_("Optional"), 70);
+	m_table.add_column(_("Visible"),  60);
+	m_table.selected.set(this, &Editor_Objectives_Menu::table_selected);
+	m_table.double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
 
    // Buttons
    int posx=spacing;
@@ -265,41 +272,37 @@ void Editor_Objectives_Menu::clicked_new() {
 
 void Editor_Objectives_Menu::clicked_edit() {
          // Edit selected variable
-         Edit_Objective_Window* evw = new Edit_Objective_Window( m_parent, m_table->get_entry(m_table->get_selection_index()) );
-         if( evw->run() ) {
-            m_table->sort();
-            m_trigger->set_text(
-                  static_cast<MapObjective*>(m_table->get_entry(m_table->get_selection_index())->get_user_data())
-                  ->get_trigger()->get_name()) ;
+	Edit_Objective_Window evw(m_parent, m_table.get_selected_record());
+	if (evw.run()) {
+		m_table.sort();
+		m_trigger->set_text(m_table.get_selected().get_trigger()->get_name());
          }
-         delete evw;
 }
 
 void Editor_Objectives_Menu::clicked_del() {
          // Delete selected objective
-         int idx = m_table->get_selection_index();
-         MapObjective* obj = static_cast<MapObjective*>(m_table->get_entry( idx )->get_user_data());
+	MapObjective & obj = m_table.get_selected();
 
-         if( !obj->get_trigger()->get_referencers().empty()) {
+	if (not obj.get_trigger()->get_referencers().empty()) {
             std::string str=_("Can't delete Objective, because it's trigger is in use by ");
-            std::map<TriggerReferencer*,uint>::const_iterator i = obj->get_trigger()->get_referencers().begin();
-            while( i != obj->get_trigger()->get_referencers().end() ) {
+		std::map<TriggerReferencer*,uint>::const_iterator i =
+			obj.get_trigger()->get_referencers().begin();
+		while (i != obj.get_trigger()->get_referencers().end()) {
                str += i->first->get_type();
                str += ":";
                str += i->first->get_name();
                str += " ";
             }
-            UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
-            mmb->run();
-            delete mmb;
+		UI::Modal_Message_Box mmb
+			(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
+		mmb.run();
             return;
          }
 
-
-         m_parent->get_egbase()->get_map()->get_mtm().delete_trigger(obj->get_trigger()->get_name());
-         m_parent->get_egbase()->get_map()->get_mom().delete_objective(obj->get_name());
-         m_table->remove_entry( idx );
-         m_table->sort();
+	Map & map = m_parent->get_egbase()->map();
+	map.get_mtm().delete_trigger(obj.get_trigger()->get_name());
+	map.get_mom().delete_objective(obj.get_name());
+	m_table.remove_selected();
 
          m_edit_button->set_enabled( false );
          m_delete_button->set_enabled( false );
@@ -309,29 +312,28 @@ void Editor_Objectives_Menu::clicked_del() {
 /*
  * The table has been selected
  */
-void Editor_Objectives_Menu::table_selected( int n ) {
+void Editor_Objectives_Menu::table_selected(uint n) {
    m_edit_button->set_enabled( true );
    m_delete_button->set_enabled( true );
 
-   MapObjective* obj = static_cast<MapObjective*>(m_table->get_entry( n )->get_user_data());
    // Baad stuff will happen, if trigger got deleted
-   m_trigger->set_text( obj->get_trigger()->get_name());
+	m_trigger->set_text(m_table[n].get_trigger()->get_name());
 }
 
 /*
  * Table has been doubleclicked
  */
-void Editor_Objectives_Menu::table_dblclicked(int) {clicked_edit();}
+void Editor_Objectives_Menu::table_dblclicked(uint) {clicked_edit();}
 
 /*
  * Insert this map variable into the table
  */
 void Editor_Objectives_Menu::insert_objective(MapObjective & var) {
-	UI::Table_Entry & t = *new UI::Table_Entry(m_table, &var, -1, true);
+	UI::Table<MapObjective &>::Entry_Record & t = m_table.add(var, -1, true);
 
 	t.set_string(0, var.get_name());
 	t.set_string(1, var.get_is_optional() ? "Yes" : "No");
 	t.set_string(2, var.get_is_visible() ? "Yes" : "No");
 
-   m_table->sort();
+   m_table.sort();
 }

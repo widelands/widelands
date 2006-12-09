@@ -110,8 +110,8 @@ m_allow_button
 		Building_Descr & building = *tribe.get_building_descr(i);
 		if (not building.get_enhanced_building() and not building.get_buildable())
 			continue;
-		(m_player->is_building_allowed(i) ? m_allowed : m_forbidden).add_entry
-			(building.get_descname(), i, false, building.get_buildicon());
+		(m_player->is_building_allowed(i) ? m_allowed : m_forbidden).add
+			(building.get_descname(), i, building.get_buildicon());
    }
 	m_forbidden.sort();
 	m_allowed  .sort();
@@ -150,18 +150,17 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 	UI::Listselect<uintptr_t> & target = allow ? m_allowed : m_forbidden;
 
 	assert //  The button should have been disabled if nothing is selected.
-		(source.get_selection_index()
+		(source.selection_index()
 		 !=
 		 UI::Listselect<uintptr_t>::no_selection_index());
 
-	const Building_Descr::Index building_index = source.get_selection();
-	source.remove_selection();
+	const Building_Descr::Index building_index = source.get_selected();
+	source.remove_selected();
 	const Building_Descr & building =
 		*m_player->tribe().get_building_descr(building_index);
-	target.add_entry
+	target.add
 		(building.get_descname(),
 		 building_index,
-		 false,
 		 building.get_buildicon());
 	target.sort();
 	m_player->allow_building(building_index, allow);

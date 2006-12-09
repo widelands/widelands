@@ -126,7 +126,7 @@ void Fullscreen_Menu_MapSelect::changed(bool t) {
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	const std::string filename = list.get_selection();
+	const std::string filename = list.get_selected();
 
    if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename )) {
 	   m_curdir=g_fs->FS_CanonicalizeName(filename);
@@ -151,7 +151,7 @@ void Fullscreen_Menu_MapSelect::ok()
 }
 
 void Fullscreen_Menu_MapSelect::map_selected(uint) {
-	const char * const name = list.get_selection();
+	const char * const name = list.get_selected();
 
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       // No directory
@@ -222,10 +222,9 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
 	   m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
-		list.add_entry
+		list.add
 			("<parent>",
 			 m_parentdir.c_str(),
-			 false,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
       ++ndirs;
    }
@@ -238,10 +237,9 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       if(!g_fs->IsDirectory(name)) continue;
       if(Widelands_Map_Loader::is_widelands_map( name )) continue;
 
-		list.add_entry
+		list.add
 			(FileSystem::FS_Filename(name),
 			 name,
-			 false,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
       ++ndirs;
    }
@@ -259,10 +257,9 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 				(dynamic_cast<const Widelands_Map_Loader * const>(ml)
 				 or
 				 dynamic_cast<const        S2_Map_Loader * const>(ml));
-			list.add_entry
+			list.add
 				(map->get_name(),
 				 name,
-				 false,
 				 g_gr->get_picture
 				 (PicMod_Game,
 				  dynamic_cast<const Widelands_Map_Loader * const>(ml) ?
@@ -278,5 +275,5 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 	list.sort(0, ndirs);
 	list.sort(ndirs);
 
-	if (list.get_nr_entries()) list.select(0);
+	if (list.size()) list.select(0);
 }

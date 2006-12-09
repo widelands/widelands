@@ -30,7 +30,6 @@
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_progressbar.h"
-#include "ui_table.h"
 #include "ui_textarea.h"
 #include "tribe.h"
 #include "wui_plot_area.h"
@@ -53,7 +52,13 @@ Building_Statistics_Menu::Building_Statistics_Menu
 (Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&parent, &registry, 400, 400, _("Building Statistics")),
-m_parent(&parent)
+m_parent(&parent),
+
+m_table
+(this,
+ (get_inner_w() - BUILDING_LIST_WIDTH) / 2, 30,
+ BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT)
+
 {
 
    // First, we must decide about the size
@@ -63,17 +68,12 @@ m_parent(&parent)
    int posx=offsx;
    int posy=offsy;
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Building Statistics"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    // Building list
-   m_table=new UI::Table(this, (get_inner_w()-BUILDING_LIST_WIDTH)/2, offsy, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT, Align_Left, UI::Table::UP);
-   m_table->add_column(_("Name").c_str(), UI::Table::STRING, 160);
-   m_table->add_column(_("Prod").c_str(), UI::Table::STRING, 40);
-   m_table->add_column(_("Owned").c_str(), UI::Table::STRING, 40);
-   m_table->add_column(_("Build").c_str(), UI::Table::STRING, 40);
-   m_table->selected.set(this, &Building_Statistics_Menu::table_changed);
+	m_table.add_column(_("Name"), 160);
+	m_table.add_column(_("Prod"),  40);
+	m_table.add_column(_("Owned"), 40);
+	m_table.add_column(_("Build"), 40);
+   m_table.selected.set(this, &Building_Statistics_Menu::table_changed);
 
    posy += BUILDING_LIST_HEIGHT + 2*spacing;
    m_end_of_table_y = posy;
@@ -91,19 +91,23 @@ m_parent(&parent)
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
    m_owned = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
 
-	m_btn[0] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Prev_Owned] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 get_inner_w() - 58, posy, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-		 &Building_Statistics_Menu::clicked_jump, this, Prev_Owned);
+		 &Building_Statistics_Menu::clicked_jump, this, Prev_Owned,
+		 _("Snow previous"),
+		 false);
 
-	m_btn[1] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Next_Owned] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 get_inner_w() - 29, posy, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-		 &Building_Statistics_Menu::clicked_jump, this, Next_Owned);
+		 &Building_Statistics_Menu::clicked_jump, this, Next_Owned,
+		 _("Snow next"),
+		 false);
 
    posy += 25;
 
@@ -111,38 +115,46 @@ m_parent(&parent)
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
    m_build = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
 
-	m_btn[2] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Prev_Construction] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 get_inner_w() - 58, posy, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-		 &Building_Statistics_Menu::clicked_jump, this, Prev_Construction);
+		 &Building_Statistics_Menu::clicked_jump, this, Prev_Construction,
+		 _("Snow previous"),
+		 false);
 
-	m_btn[3] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Next_Construction] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 get_inner_w() - 29, posy, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-		 &Building_Statistics_Menu::clicked_jump, this, Next_Construction);
+		 &Building_Statistics_Menu::clicked_jump, this, Next_Construction,
+		 _("Snow next"),
+		 false);
 
    posy += 25;
 
    // Jump to unproductive
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Jump to unproductive: "), Align_CenterLeft);
 
-	m_btn[4] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Prev_Unproductive] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 get_inner_w() - 58, posy, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-		 &Building_Statistics_Menu::clicked_jump, this, Prev_Unproductive);
+		 &Building_Statistics_Menu::clicked_jump, this, Prev_Unproductive,
+		 _("Snow previous"),
+		 false);
 
-	m_btn[5] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Next_Unproductive] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 get_inner_w() - 29, posy, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-		 &Building_Statistics_Menu::clicked_jump, this, Next_Unproductive);
+		 &Building_Statistics_Menu::clicked_jump, this, Next_Unproductive,
+		 _("Snow next"),
+		 false);
 
    posy += 25;
 
@@ -225,7 +237,9 @@ void Building_Statistics_Menu::clicked_help() {
 
 
 void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
-   const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(m_selected);
+	assert(m_table.has_selection());
+	const std::vector<Interactive_Player::Building_Stats> & vec =
+		m_parent->get_building_statistics(m_table.get_selected());
 
    bool found = true; // We think, we always find a proper building
 
@@ -316,9 +330,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 /*
  * The table has been selected
  */
-void Building_Statistics_Menu::table_changed( int ) {
-   update();
-}
+void Building_Statistics_Menu::table_changed(uint) {update();}
 
 /*
  * Update table
@@ -327,23 +339,25 @@ void Building_Statistics_Menu::update( void ) {
    m_owned->set_text("");
    m_build->set_text("");
    m_progbar->set_state(0);
-   m_selected = -1;
 
    // List all buildings
 	const Tribe_Descr & tribe = *m_parent->get_player()->get_tribe();
-	for (long i = 0; i < tribe.get_nrbuildings(); ++i) {
-		const char * const name = tribe.get_building_descr(i)->get_name();
+	const Map         & map   = m_parent->get_game()->map();
+	for (Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {
+		const Building_Descr & building = *tribe.get_building_descr(i);
+		const char * const name = building.get_name();
       if (strcmp(name, "constructionsite") == 0) continue;
       if (strcmp(name, "headquarters")     == 0) continue;
 
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
 
       // walk all entries, add new ones if needed
-      UI::Table_Entry* te = 0;
-      for( int l = 0; l< m_table->get_nr_entries(); l++) {
-         UI::Table_Entry* entr = m_table->get_entry(l);
-         if( (long)entr->get_user_data() == i) {
-            te = entr;
+		UI::Table<const uintptr_t>::Entry_Record * te = 0;
+		const uint table_size = m_table.size();
+		for (uint l = 0; l < table_size; ++l) {
+			UI::Table<const uintptr_t>::Entry_Record & er = m_table.get_record(l);
+			if (UI::Table<const uintptr_t>::get(er) == i) {
+				te = &er;
             break;
          }
       }
@@ -352,85 +366,83 @@ void Building_Statistics_Menu::update( void ) {
       // enabled
       if(!te) {
          if(! m_parent->get_player()->is_building_allowed(i) ) continue;
-			te = new UI::Table_Entry
-				(m_table,
-				 reinterpret_cast<void * const>(i),
-				 tribe.get_building_descr(i)->get_buildicon());
+			te = &m_table.add(i, building.get_buildicon());
       }
 
-       int nr_owned=0;
-          int nr_build=0;
-          int total_prod=0;
-          bool is_productionsite = 0;
-          for(uint l = 0; l < vec.size(); l++) {
-             if( vec[l].is_constructionsite ) nr_build++;
-             else {
-                nr_owned++;
-                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[l].pos)->get_immovable());
-                if( b->get_building_type() == Building::PRODUCTIONSITE) {
-                   total_prod += ((ProductionSite*)b)->get_statistics_percent();
-                   is_productionsite = true;
-                }
+		uint nr_owned   = 0;
+		uint nr_build   = 0;
+		uint total_prod = 0;
+		const ProductionSite_Descr * const productionsite =
+			dynamic_cast<const ProductionSite_Descr * const>(&building);
+		for (uint l = 0; l < vec.size(); ++l) {
+			if (vec[l].is_constructionsite) ++nr_build;
+			else {
+				++nr_owned;
+				if (productionsite) total_prod +=
+					dynamic_cast<ProductionSite &>
+					(*map.get_field(vec[l].pos)->get_immovable())
+					.get_statistics_percent();
 
              }
           }
 
           // Is this entry selected?
-          bool is_selected = (m_table->get_selection_index() != -1 &&  (long)(m_table->get_selection()) == i);
+		const bool is_selected =
+			m_table.has_selection() and m_table.get_selected() == i;
 
-          if(is_selected) {
-			m_anim = tribe.get_building_descr(i)->get_ui_anim();
-             m_selected = i;
-             if(nr_owned)
-                for(uint j = 0; j < 2; j++)
-                   m_btn[j]->set_enabled(true);
-             else
-                for(uint j = 0; j < 2; j++)
-                   m_btn[j]->set_enabled(false);
-             if(nr_build)
-                for(uint j = 2; j < 4; j++)
-                   m_btn[j]->set_enabled(true);
-             else
-                for(uint j = 2; j < 4; j++)
-                   m_btn[j]->set_enabled(false);
-          }
+		if (is_selected) {
+			m_anim = building.get_ui_anim();
+			m_btn[Prev_Owned]       ->set_enabled(nr_owned);
+			m_btn[Next_Owned]       ->set_enabled(nr_owned);
+			m_btn[Prev_Construction]->set_enabled(nr_build);
+			m_btn[Next_Construction]->set_enabled(nr_build);
+		}
 
           // Add new Table Entry
           char buffer[100];
-		te->set_string(0, tribe.get_building_descr(i)->get_descname());
+		te->set_string(0, building.get_descname());
 
           // Product
-          if(is_productionsite && nr_owned) {
-             int percent = (int)((float)total_prod / (float) nr_owned);
-             snprintf(buffer, 100, "%i", percent );
-             if( is_selected ) {
-                m_progbar->set_state ( percent );
-                for(uint j = 4; j < 6; j++)
-                   m_btn[j]->set_enabled(true);
-             }
-          } else {
-             snprintf(buffer, 100, "-");
-             if(is_selected)
-                for(uint j = 4; j < 6; j++)
-                   m_btn[j]->set_enabled(false);
-          }
+		if (productionsite and nr_owned) {
+			const uint percent = static_cast<const uint>
+				(static_cast<const float>(total_prod)
+				 /
+				 static_cast<const float>(nr_owned));
+			snprintf(buffer, sizeof(buffer), "%i", percent );
+			if (is_selected)  {
+				m_progbar->set_state(percent);
+				m_btn[Prev_Unproductive]->set_enabled(true);
+				m_btn[Next_Unproductive]->set_enabled(true);
+			}
+		} else {
+			snprintf(buffer, sizeof(buffer), "-");
+			if (is_selected) {
+				m_btn[Prev_Unproductive]->set_enabled(false);
+				m_btn[Next_Unproductive]->set_enabled(false);
+			}
+		}
           te->set_string(1, buffer);
 
           // Number of this buildings
-          snprintf(buffer, 100, "%i", nr_owned);
+		snprintf(buffer, sizeof(buffer), "%i", nr_owned);
           te->set_string(2, buffer);
           if(is_selected)
             m_owned->set_text(buffer);
 
           // Number of currently builds
-          snprintf(buffer, 100, "%i", nr_build);
+		snprintf(buffer, sizeof(buffer), "%i", nr_build);
           te->set_string(3, buffer);
           if(is_selected)
             m_build->set_text(buffer);
    }
 
    // Disable all buttons, if nothing to select
-   if(m_selected == -1)
-      for(uint j = 0; j < 6; j++)
-      m_btn[j]->set_enabled(false);
+	if (not m_table.has_selection()) {
+      m_btn[Prev_Owned]       ->set_enabled(false);
+      m_btn[Next_Owned]       ->set_enabled(false);
+      m_btn[Prev_Construction]->set_enabled(false);
+      m_btn[Next_Construction]->set_enabled(false);
+      m_btn[Prev_Unproductive]->set_enabled(false);
+      m_btn[Next_Unproductive]->set_enabled(false);
+	}
 }

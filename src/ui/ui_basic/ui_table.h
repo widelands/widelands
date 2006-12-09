@@ -23,122 +23,194 @@
 
 #include <vector>
 #include "font_handler.h"
-#include "ui_panel.h"
+#include "ui_button.h"
 #include "ui_signal.h"
 
+#include "compile_assert.h"
 
 namespace UI {
-template <typename T, typename ID> struct IDButton;
 struct Scrollbar;
-struct Table;
-
-struct Table_Entry {
-      Table_Entry(Table*, void*, int picid=-1, bool select = false);
-      ~Table_Entry(void);
-
-      // Data Functions
-      void set_string(int, const char*);
-      const char* get_string(int);
-      int  get_picid(void) { return m_picid; }
-      void* get_user_data(void) { return m_user_data; }
-
-      void set_color( RGBColor col ) {
-         m_use_clr = true;
-         m_color = col;
-      }
-
-      inline bool use_color( void ) { return m_use_clr; }
-      inline RGBColor get_color( void ) { return m_color; }
-
-   private:
-      struct _data {
-         std::string d_string;
-      };
-      std::vector<_data> m_data;
-      void*    m_user_data;
-      int      m_picid;
-      bool     m_use_clr;
-      RGBColor m_color;
-};
-
 
 /**
- * This class defines a table like panel,
- * whith columns and lines and all entrys can be seleted
- * by colums by clicking on the header-button
+ * A table whith columns and lines. The entriess can be sorted by colums by
+ * clicking on the column header button.
+ *
+ * Entry can be
+ * 1. a reference type,
+ * 2. a pointer type or
+ * 3. uintptr_t.
  */
-class Table : public Panel {
-   friend class Table_Entry;
-	struct Column;
+template<typename Entry> struct Table {
 
-public: // DATA
-   enum Type {
-      STRING,
-   };
-   enum Dir {
-      UP,
-      DOWN
-   };
+	struct Entry_Record {
+		Entry_Record(Entry entry, int picid = -1);
 
-public: // FUNCTIONS
-	Table(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, Dir = DOWN);
+      // Data Functions
+		void set_string(uint column, const std::string &);
+		std::string & get_string(uint column) const;
+		int  get_picid() const throw ();
+		Entry entry() const throw ();
+		void set_color(const RGBColor);
+
+		bool     use_color() const throw ();
+		RGBColor get_color() const throw ();
+
+	};
+
+	Table(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, const bool up = false);
 	~Table();
 
-	Signal1<int> selected;
-   Signal1<int> double_clicked;
+	Signal1<uint> selected;
+	Signal1<uint> double_clicked;
 
-   void add_column(const char*, Type, int);
+	void add_column(const std::string & name, const uint width);
 
-   // Information functions
-   inline int get_nr_columns(void) { return m_columns.size(); }
+	uint get_nr_columns() const throw ();
 
    void clear();
-	typedef std::vector<Column> Columns;
-	void set_sort_column(const Columns::size_type col) throw ()
-	{assert(m_columns.size() > col); m_sort_column = col;}
-	Columns::size_type get_sort_colum() const throw () {return m_sort_column;}
-   int  get_sort_direction(void) { return m_sort_direction; }
-   void set_sort_direction(Dir dir) { m_sort_direction=dir; }
+	void set_sort_column(const uint col) throw ();
+	uint get_sort_colum() const throw ();
+	bool get_sort_descending() const throw ();
 
-   void sort(void);
-   void remove_entry(int i);
+	void sort(const uint Begin = 0, uint End = std::numeric_limits<uint>::max());
+   void remove(const uint i);
 
 	void set_align(Align align);
 
-	int get_nr_entries(void) { return m_entries.size(); }
-	int get_selection_index(void) { return m_selection; }
-	Table_Entry * get_entry(const uint n) const throw ()
-	{assert(m_entries.size() > n); return m_entries[n];}
-	Table_Entry* find_entry(const void*);	// find by userdata
+	Entry_Record & add
+		(void * const entry,
+		 const int picid = -1,
+		 const bool select_this = false);
 
-   void select(int i);
-	inline void *get_selection() {
-		if (m_selection < 0) return 0;
-		return m_entries[m_selection]->get_user_data();
+	uint size() const throw ();
+	Entry operator[](const uint i) const throw ();
+	static uint no_selection_index() throw ();
+	bool has_selection() const throw ();
+	uint selection_index() const throw ();
+	Entry_Record & get_record(const uint n) const throw ();
+	static Entry get(const Entry_Record &);
+	Entry_Record * find(const Entry) const throw ();
+
+   void select(const uint);
+	struct No_Selection {};
+	Entry_Record & get_selected_record() const;
+	Entry get_selected() const;
+
+	///  Return the total height (text + spacing) occupied by a single line.
+	uint get_lineheight() const throw ();
+
+	uint get_eff_w     () const throw ();
+
+	// Drawing and event handling
+	void draw(RenderTarget* dst);
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+	bool handle_mouserelease(const Uint8 btn, int x, int y);
+};
+
+template <> struct Table<void *> : public Panel {
+
+	struct Entry_Record {
+		Entry_Record(void * const entry, int picid = -1);
+
+      // Data Functions
+		void set_string(uint column, const std::string &);
+		const std::string & get_string(const uint column) const;
+		int  get_picid() const throw () {return m_picid;}
+		void * entry() const throw () {return m_entry;}
+		void set_color(const  RGBColor c) {
+			use_clr = true;
+			clr = c;
+		}
+
+		bool     use_color() const throw () {return use_clr;}
+		RGBColor get_color() const throw () {return clr;}
+
+	private:
+		friend struct Table<void *>;
+		void *   m_entry;
+		bool     use_clr;
+		RGBColor clr;
+		int      m_picid;
+		struct _data {std::string d_string;};
+      std::vector<_data> m_data;
+	};
+
+public:
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false);
+	~Table();
+
+	Signal1<uint> selected;
+	Signal1<uint> double_clicked;
+
+	void add_column(const std::string & name, const uint width);
+
+	uint get_nr_columns() const throw () {return m_columns.size();}
+
+   void clear();
+	void set_sort_column(const uint col) throw ()
+	{assert(col < m_columns.size()); m_sort_column = col;}
+	uint get_sort_colum() const throw () {return m_sort_column;}
+	bool  get_sort_descending() const throw () {return m_sort_descending;}
+	void set_sort_descending(const bool descending) throw ()
+	{m_sort_descending = descending;}
+
+	void sort(const uint Begin = 0, uint End = std::numeric_limits<uint>::max());
+   void remove(const uint index);
+
+	void set_align(Align align);
+
+	Entry_Record & add
+		(void * const entry = 0, const int picid = -1, const bool select = false);
+
+	uint size() const throw () {return m_entry_records.size();}
+	void * operator[](const uint i) const throw ()
+	{assert(i < m_entry_records.size()); return m_entry_records[i]->entry();}
+	static uint no_selection_index() throw ()
+	{return std::numeric_limits<uint>::max();}
+	bool has_selection() const throw ()
+	{return m_selection != no_selection_index();}
+	uint selection_index() const throw () {return m_selection;}
+	Entry_Record & get_record(const uint n) const throw ()
+	{assert(n < m_entry_records.size()); return *m_entry_records[n];}
+	static void * get(const Entry_Record & er) throw ()
+	{return er.entry();}
+	Entry_Record * find(const void * entry) const throw ();
+
+   void select(const uint);
+	struct No_Selection {};
+	Entry_Record & get_selected_record() const {
+		if (m_selection == no_selection_index()) throw No_Selection();
+		return *m_entry_records[m_selection];
 	}
+	void remove_selected() throw (No_Selection) {
+		if (m_selection == no_selection_index()) throw No_Selection();
+		remove(m_selection);
+	}
+	void * get_selected() const throw (No_Selection)
+	{return get_selected_record().entry();};
 
-	int get_lineheight();
-	inline uint get_eff_w() { return get_w(); }
+	uint get_lineheight() const throw () {return m_lineheight + 2;}
+	uint get_eff_w     () const throw () {return get_w();}
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-private: // DATA
+private:
+	struct Column;
+	typedef std::vector<Column> Columns;
    struct Column {
       std::string name;
-      Type type;
 		IDButton<Table, Columns::size_type> * btn;
    };
 
-   struct Entry {
-		void*		value;
-      int      picid;
-		char		name[1];
-	};
 	static const int ms_darken_value=-20;
-   static const int DOUBLE_CLICK_INTERVAL=500; // half a second
+	static const int DOUBLE_CLICK_INTERVAL=500; // half a second //  FIXME such values should not be defined separately for a particular widget type. They should be defined in one place for the whole UI or even better, a variable that is read from system settings (.kde/share/config/kdeglobals:DoubleClickInterval=...)
 
 	Columns m_columns;
 	uint                m_max_pic_width;
@@ -146,18 +218,173 @@ private: // DATA
 	Align						m_align;
 	Scrollbar*		   m_scrollbar;
 	int						m_scrollpos;	// in pixels
-	int						m_selection;	// -1 when nothing is selected
+	uint               m_selection;
    int                  m_last_click_time;
-   int                  m_last_selection;  // for double clicks
-   int                  m_sort_direction;
+	uint                  m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
-   Dir                  m_default_sort_dir;
+	bool               m_sort_descending;
 
-private: // FUNCTIONS
-	void header_button_clicked(Columns::size_type);
-   void add_entry(Table_Entry* t, bool);
-	std::vector<Table_Entry*>	m_entries;
+	void header_button_clicked(const Columns::size_type);
+	typedef std::vector<Entry_Record *> Entry_Record_vector;
+	Entry_Record_vector m_entry_records;
 	void set_scrollpos(int pos);
+};
+
+template <typename Entry>
+	struct Table<const Entry * const> : public Table<void *>
+{
+	typedef Table<void *> Base;
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false)
+		: Base(parent, x, y, w, h, align, descending)
+	{}
+
+	Entry_Record & add
+		(const Entry * const entry = 0,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{
+		return
+			Base::add(const_cast<Entry * const>(entry), picid, select_this);
+	}
+
+	const Entry * operator[](const uint i) const throw ()
+	{return static_cast<const Entry * const>(Base::operator[](i));}
+
+	static const Entry * const get(const Entry_Record & er)
+	{return static_cast<const Entry * const>(er.entry());}
+
+	const Entry * const get_selected() const
+	{return static_cast<const Entry * const>(Base::get_selected());}
+};
+
+template <typename Entry> struct Table<Entry * const> : public Table<void *> {
+	typedef Table<void *> Base;
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false)
+		: Base(parent, x, y, w, h, align, descending)
+	{}
+
+	Entry_Record & add
+		(Entry * const entry = 0,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{return Base::add(entry, picid, select_this);}
+
+	Entry * operator[](const uint i) const throw ()
+	{return static_cast<Entry * const>(Base::operator[](i));}
+
+	static Entry * const get(const Entry_Record & er)
+	{return static_cast<Entry * const>(er.entry());}
+
+	Entry * const get_selected() const
+	{return static_cast<Entry * const>(Base::get_selected());}
+};
+
+template <typename Entry> struct Table<const Entry &> : public Table<void *> {
+	typedef Table<void *> Base;
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false)
+		: Base(parent, x, y, w, h, align, descending)
+	{}
+
+	Entry_Record & add
+		(const Entry & entry,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{return Base::add(&const_cast<Entry &>(entry), picid, select_this);}
+
+	const Entry & operator[](const uint i) const throw ()
+	{return *static_cast<const Entry * const>(Base::operator[](i));}
+
+	static const Entry & get(const Entry_Record & er)
+	{return *static_cast<const Entry * const>(er.entry());}
+
+	Entry_Record * find(const Entry & entry) const throw ()
+	{return Base::find(&entry);}
+
+	const Entry & get_selected() const
+	{return *static_cast<const Entry * const>(Base::get_selected());}
+};
+
+template <typename Entry> struct Table<Entry &> : public Table<void *> {
+	typedef Table<void *> Base;
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false)
+		: Base(parent, x, y, w, h, align, descending)
+	{}
+
+	Entry_Record & add
+		(Entry & entry,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{return Base::add(&entry, picid, select_this);}
+
+	Entry & operator[](const uint i) const throw ()
+	{return *static_cast<Entry * const>(Base::operator[](i));}
+
+	static Entry & get(const Entry_Record & er)
+	{return *static_cast<Entry * const>(er.entry());}
+
+	Entry_Record * find(Entry & entry) const throw ()
+	{return Base::find(&entry);}
+
+	Entry & get_selected() const
+	{return *static_cast<Entry * const>(Base::get_selected());}
+};
+
+compile_assert(sizeof(void *) == sizeof(uintptr_t));
+template <> struct Table<uintptr_t> : public Table<void *> {
+	typedef Table<void *> Base;
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false)
+		: Base(parent, x, y, w, h, align, descending)
+	{}
+
+	Entry_Record & add
+		(const uintptr_t entry,
+		 const int picid = -1,
+		 const bool select_this = false)
+	{
+		return Base::add
+			(reinterpret_cast<void * const>(entry), picid, select_this);
+	}
+
+	uintptr_t operator[](const uint i) const throw ()
+	{return reinterpret_cast<const uintptr_t>(Base::operator[](i));}
+	static uintptr_t get(const Entry_Record & er)
+	{return reinterpret_cast<const uintptr_t>(er.entry());}
+
+	Entry_Record * find(const uintptr_t entry) const throw ()
+	{return Base::find(reinterpret_cast<const void * const>(entry));}
+
+	uintptr_t get_selected() const
+	{return reinterpret_cast<const uintptr_t>(Base::get_selected());}
+};
+template <> struct Table<const uintptr_t> : public Table<uintptr_t> {
+	typedef Table<uintptr_t> Base;
+	Table
+		(Panel * parent,
+		 int x, int y, uint w, uint h,
+		 Align align = Align_Left,
+		 const bool descending = false)
+		: Table<uintptr_t>(parent, x, y, w, h, align, descending)
+	{}
 };
 };
 

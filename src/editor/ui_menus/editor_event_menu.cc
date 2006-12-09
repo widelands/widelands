@@ -207,9 +207,9 @@ void Editor_Event_Menu::update(void) {
 		const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 		for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 			Trigger & trigger = mtm.get_trigger_by_nr(i);
-			m_trigger_list->add_entry(trigger.get_name(), trigger);
-			if (trigger.get_referencers().empty())
-         m_trigger_list->set_entry_color( m_trigger_list->get_nr_entries()-1, RGBColor(255,0,0));
+			m_trigger_list->add(trigger.get_name(), trigger);
+			if (trigger.get_referencers().empty()) m_trigger_list->set_entry_color
+				(m_trigger_list->size() - 1, RGBColor(255,0,0));
 		}
    }
 
@@ -219,9 +219,9 @@ void Editor_Event_Menu::update(void) {
 		const MapEventManager::Index nr_events = mem.get_nr_events();
 		for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 			Event & event = mem.get_event_by_nr(i);
-			m_event_list->add_entry(event.get_name(), event);
-			if (event.get_referencers().empty())
-         m_event_list->set_entry_color( m_event_list->get_nr_entries()-1, RGBColor(255,0,0));
+			m_event_list->add(event.get_name(), event);
+			if (event.get_referencers().empty()) m_event_list->set_entry_color
+				(m_event_list->size()-1, RGBColor(255,0,0));
 		}
    }
 
@@ -232,7 +232,7 @@ void Editor_Event_Menu::update(void) {
 			mecm.get_nr_eventchains();
 		for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
 			EventChain & evc = mecm.get_eventchain_by_nr(i);
-			m_eventchain_list->add_entry(evc.get_name(), evc);
+			m_eventchain_list->add(evc.get_name(), evc);
 		}
    }
 
@@ -264,7 +264,7 @@ void Editor_Event_Menu::clicked_new_event() {
 
 
 void Editor_Event_Menu::clicked_del_event() {
-	const Event & event = m_event_list->get_selection();
+	const Event & event = m_event_list->get_selected();
 	const Event::EventReferencerMap & event_referencers =
 		event.get_referencers();
 	if (event_referencers.empty()) {
@@ -292,7 +292,7 @@ void Editor_Event_Menu::clicked_del_event() {
 
 
 void Editor_Event_Menu::clicked_edit_event() {
-	Event & event = m_event_list->get_selection();
+	Event & event = m_event_list->get_selected();
 	Event_Factory::make_event_with_option_dialog
 		(event.get_id(), m_parent, &event);
       update();
@@ -311,7 +311,7 @@ void Editor_Event_Menu::clicked_new_trigger() {
 
 
 void Editor_Event_Menu::clicked_del_trigger() {
-	Trigger & trigger = m_trigger_list->get_selection();
+	Trigger & trigger = m_trigger_list->get_selected();
 	const Trigger::TriggerReferencerMap & trigger_referencers =
 		trigger.get_referencers();
 	if (trigger_referencers.empty()) {
@@ -337,7 +337,7 @@ void Editor_Event_Menu::clicked_del_trigger() {
 
 
 void Editor_Event_Menu::clicked_edit_trigger() {
-	Trigger & trigger = m_trigger_list->get_selection();
+	Trigger & trigger = m_trigger_list->get_selected();
 	Trigger_Factory::make_trigger_with_option_dialog
 		(trigger.get_id(), m_parent, &trigger);
       m_parent->set_need_save(true);
@@ -367,7 +367,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
          ev->set_name( buffer );
          map.get_mecm().register_new_eventchain(ev);
-	 m_eventchain_list->add_entry( _("Unnamed").c_str(), *ev, true);
+			m_eventchain_list->add(_("Unnamed").c_str(), *ev, -1, true);
          m_eventchain_list->sort();
       } else {
          // TriggerConditional was not accepted. Remove this EventChain straithly.
@@ -381,8 +381,8 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
 void Editor_Event_Menu::clicked_del_eventchain() {
 	m_parent->get_egbase()->get_map()->get_mecm().delete_eventchain
-		(m_eventchain_list->get_selection().get_name());
-      m_eventchain_list->remove_entry( m_eventchain_list->get_selection_index() );
+		(m_eventchain_list->get_selected().get_name());
+	m_eventchain_list->remove_selected();
       m_btn_del_eventchain->set_enabled( false );
       m_btn_edit_eventchain->set_enabled( false );
       update();
@@ -390,7 +390,8 @@ void Editor_Event_Menu::clicked_del_eventchain() {
 
 
 void Editor_Event_Menu::clicked_edit_eventchain() {
-	Editor_Event_Menu_Edit_EventChain menu(m_parent, &m_eventchain_list->get_selection());
+	Editor_Event_Menu_Edit_EventChain menu
+		(m_parent, &m_eventchain_list->get_selected());
 	menu.run();
       update();
 }

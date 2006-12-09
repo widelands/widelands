@@ -20,13 +20,14 @@
 #ifndef __S__EDITOR_OBJECTIVES_MENU_H
 #define __S__EDITOR_OBJECTIVES_MENU_H
 
+#include "ui_table.h"
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
 class MapObjective;
 namespace UI {
 template <typename T> struct Button;
-struct Table;
+template <typename T> struct Table;
 struct Textarea;
 };
 
@@ -43,7 +44,7 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
 
    private:
       Editor_Interactive *m_parent;
-      UI::Table            *m_table;
+	UI::Table<MapObjective &>            m_table;
 	UI::Button<Editor_Objectives_Menu> * m_edit_button;
 	UI::Button<Editor_Objectives_Menu> * m_delete_button;
       UI::Textarea         *m_trigger;
@@ -54,8 +55,8 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
 	void clicked_new ();
 	void clicked_edit();
 	void clicked_del ();
-      void table_selected( int );
-      void table_dblclicked( int );
+	void table_selected  (uint);
+	void table_dblclicked(uint);
 };
 
 

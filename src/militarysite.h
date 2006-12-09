@@ -69,8 +69,8 @@ public:
 	virtual void act(Game* g, uint data);
 
 	virtual void set_economy(Economy* e);
-   virtual std::vector<Soldier*>* get_soldiers(void) { return &m_soldiers; }
-   
+	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
+	{return m_soldiers;}
 
 	int	get_capacity() { return m_capacity; }
 	// Overload of building functions
@@ -99,7 +99,6 @@ public:
    uint nr_not_marked_soldiers();
    uint nr_attack_soldiers();
    inline void set_in_battle(bool in_battle) { m_in_battle = in_battle;};
-   
 
    virtual bool has_soldiers() { return m_soldiers.size() > 0; }
    virtual MilitarySite* conquered_by (Game*,Player*);

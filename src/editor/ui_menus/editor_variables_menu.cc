@@ -27,7 +27,6 @@
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"
-#include "ui_table.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
@@ -135,20 +134,21 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
  * before it can return
  */
 struct Edit_Variable_Window : public UI::Window {
-      Edit_Variable_Window(Editor_Interactive*, UI::Table_Entry*);
+	Edit_Variable_Window
+		(Editor_Interactive &, UI::Table<MapVariable &>::Entry_Record &);
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
    private:
-      Editor_Interactive *m_parent;
-      UI::Table_Entry      *m_te;
-	UI::Textarea                            m_label_name;
-	UI::Edit_Box                            m_name;
-	UI::Textarea                            m_label_value;
-	UI::Edit_Box                            m_value;
-	UI::Button<Edit_Variable_Window>        m_ok;
-	UI::IDButton<Edit_Variable_Window, int> m_back;
+	Editor_Interactive                     & m_parent;
+	UI::Table<MapVariable &>::Entry_Record & m_te;
+	UI::Textarea                             m_label_name;
+	UI::Edit_Box                             m_name;
+	UI::Textarea                             m_label_value;
+	UI::Edit_Box                             m_value;
+	UI::Button<Edit_Variable_Window>         m_ok;
+	UI::IDButton<Edit_Variable_Window, int>  m_back;
 
    private:
 	void clicked_ok();
@@ -156,9 +156,10 @@ struct Edit_Variable_Window : public UI::Window {
 
 #define spacing 5
 
-Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UI::Table_Entry* te)
+Edit_Variable_Window::Edit_Variable_Window
+(Editor_Interactive & parent, UI::Table<MapVariable &>::Entry_Record & te)
 :
-UI::Window(parent, 0, 0, 250, 85, _("Edit Variable").c_str()),
+UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable").c_str()),
 
 m_parent(parent),
 m_te(te),
@@ -185,8 +186,8 @@ m_back
 
 
 {
-	m_name .set_text(m_te->get_string(0));
-	m_value.set_text(m_te->get_string(1));
+	m_name .set_text(m_te.get_string(0).c_str());
+	m_value.set_text(m_te.get_string(1).c_str());
    center_to_parent();
 }
 
@@ -210,9 +211,9 @@ void Edit_Variable_Window::clicked_ok() {
    // Get the a name
 
    // Extract value
-   MapVariable* var = static_cast<MapVariable*>(m_te->get_user_data());
+	MapVariable & var = UI::Table<MapVariable &>::get(m_te);
 
-   switch( var->get_type() ) {
+	switch (var.get_type()) {
       case MapVariable::MVT_INT:
       {
          char* endp;
@@ -226,29 +227,28 @@ void Edit_Variable_Window::clicked_ok() {
 					 m_value.get_text(),
 					 _("is not a valid integer!").c_str());
 				UI::Modal_Message_Box mb
-					(m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
+					(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
             mb.run();
             return;
          }
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%li", ivar);
 
-         static_cast<Int_MapVariable*>(var)->set_value( ivar );
-         m_te->set_string(1, buffer );
+			static_cast<Int_MapVariable &>(var).set_value(ivar);
+			m_te.set_string(1, buffer);
       }
       break;
 
       case MapVariable::MVT_STRING:
       {
-			static_cast<String_MapVariable * const>(var)
-				->set_value(m_value.get_text());
-			m_te->set_string(1, m_value.get_text());
+			static_cast<String_MapVariable &>(var).set_value(m_value.get_text());
+			m_te.set_string(1, m_value.get_text());
       }
       break;
    }
 
-	var->set_name(m_name.get_text());
-   m_te->set_string(0, var->get_name() );
+	var.set_name(m_name.get_text());
+	m_te.set_string(0, var.get_name());
 
    end_modal(1);
 }
@@ -266,6 +266,9 @@ Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UI::Uni
 :
 UI::UniqueWindow(parent, registry, 410, 330, _("Variables Menu")),
 m_parent(parent),
+
+m_table
+(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60),
 
 m_button_new
 (this,
@@ -294,16 +297,10 @@ m_button_del
 
 {
 
-   const int offsx=5;
-   const int offsy=25;
-   int posx=offsx;
-   int posy=offsy;
-
-   m_table = new UI::Table(this, posx, posy, get_inner_w()-2*spacing, get_inner_h() - 60);
-   m_table->add_column(_("Variable").c_str(), UI::Table::STRING, 300);
-   m_table->add_column(_("Value").c_str(), UI::Table::STRING, 100);
-   m_table->selected.set(this, &Editor_Variables_Menu::table_selected);
-   m_table->double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
+	m_table.add_column(_("Variable"), 300);
+	m_table.add_column(_("Value"),    100);
+   m_table.selected.set(this, &Editor_Variables_Menu::table_selected);
+   m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
    // Add all variables
 	const MapVariableManager & mvm =
@@ -339,20 +336,17 @@ void Editor_Variables_Menu::clicked_new() {
 	}
 }
 void Editor_Variables_Menu::clicked_edit() {
-	Edit_Variable_Window evw
-		(m_parent, m_table->get_entry(m_table->get_selection_index()));
-	if (evw.run()) m_table->sort();
+	Edit_Variable_Window evw(*m_parent, m_table.get_selected_record());
+	if (evw.run()) m_table.sort();
 }
 void Editor_Variables_Menu::clicked_del()      {
-         int idx =  m_table->get_selection_index();
-         MapVariable* mv = static_cast<MapVariable*>( m_table->get_entry( idx )->get_user_data() );
+	MapVariable & mv = m_table.get_selected();
 
          // Otherwise, delete button should be disabled
-         assert( !mv->is_delete_protected());
+	assert(not mv.is_delete_protected());
 
-         m_parent->get_egbase()->get_map()->get_mvm().delete_variable(mv->get_name());
-         m_table->remove_entry( idx );
-         m_table->sort();
+	m_parent->get_egbase()->map().get_mvm().delete_variable(mv.get_name());
+	m_table.remove_selected();
 
 	m_button_edit.set_enabled(false);
 	m_button_del .set_enabled(false);
@@ -361,19 +355,17 @@ void Editor_Variables_Menu::clicked_del()      {
 /*
  * The table has been selected
  */
-void Editor_Variables_Menu::table_selected( int n ) {
+void Editor_Variables_Menu::table_selected(uint n) {
+	assert(n < UI::Table<MapVariable &>::no_selection_index());
 	m_button_edit.set_enabled(true);
 
-	m_button_del.set_enabled
-		(not static_cast<const MapVariable * const>
-		 (m_table->get_entry(n)->get_user_data())
-		 ->is_delete_protected());
+	m_button_del.set_enabled(m_table[n].is_delete_protected());
 }
 
 /*
  * Table has been doubleclicked
  */
-void Editor_Variables_Menu::table_dblclicked(int) {clicked_edit();}
+void Editor_Variables_Menu::table_dblclicked(uint) {clicked_edit();}
 
 /*
  * Insert this map variable into the table
@@ -388,8 +380,8 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
       default: pic = "nothing";
    };
 
-	UI::Table_Entry & t = *new UI::Table_Entry
-		(m_table, &var, g_gr->get_picture(PicMod_UI, pic), true);
+	UI::Table<MapVariable &>::Entry_Record & t = m_table.add
+		(var, g_gr->get_picture(PicMod_UI, pic), true);
 	t.set_string(0, var.get_name());
 
    std::string val;
@@ -414,5 +406,5 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
 
 	if (var.is_delete_protected()) t.set_color(RGBColor(255,0,0));
 
-   m_table->sort();
+	m_table.sort();
 }

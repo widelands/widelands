@@ -272,7 +272,7 @@ void Event_Message_Box_Option_Menu::update(void) {
    m_buttons_ls->clear();
    int i;
    for(i=0; i<m_nr_buttons; i++)
-      m_buttons_ls->add_entry( m_buttons[i].name.c_str(), 0);
+		m_buttons_ls->add(m_buttons[i].name.c_str(), 0);
 
    std::string text;
    text.append(1,static_cast<uchar>(m_nr_buttons+0x30));

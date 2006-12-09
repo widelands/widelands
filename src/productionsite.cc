@@ -822,58 +822,51 @@ void ProductionSite::program_act(Game* g)
 			return;
 		case ProductionAction::actCheckSoldier:
 			{
-				bool found = false;
-				std::vector<Soldier*> *soldiers;
+				const std::vector<Soldier *> & soldiers = get_soldiers();
+				const std::vector<Soldier *>::const_iterator soldiers_end =
+					soldiers.end();
 
 				molog ("  Checking soldier (%s) level %d)\n",
 					action->sparam1.c_str(), action->iparam1);
 
-
-				if (get_soldiers() == 0)
-					throw wexception ("ProductionAction::program_act found actCheckSoldier and there isn't a trainery!!");
-
-				soldiers = get_soldiers();
-
-      	   for(uint i=0; i < (*soldiers).size(); i++) {
-				   if (action->sparam1 == "hp") {
-	         	   if((*soldiers)[i]->get_hp_level() == (uint) action->iparam1) {
-							// okay, do nothing
-                 		molog("    okay\n");
-	                  found=true;
+				for
+					(std::vector<Soldier *>::const_iterator it = soldiers.begin();
+					 ;
+					 ++it)
+				{
+					if (it == soldiers_end) {
+						molog("   Checking failed, program restart\n");
+						program_end(g, false);
+						return;
+					}
+					if (action->sparam1 == "hp") {
+						if
+							((*it)->get_hp_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
    		            break;
-      	 	      }
-         	  	}
-				   if (action->sparam1 == "attack") {
-	         	   if((*soldiers)[i]->get_attack_level() == (uint) action->iparam1) {
-							// okay, do nothing
-							molog("    okay\n");
-	                  found=true;
+					} else if (action->sparam1 == "attack") {
+						if
+						   ((*it)->get_attack_level()
+						    ==
+						    static_cast<const uint>(action->iparam1))
 							break;
-      	 	      }
-         	  	}
-				   if (action->sparam1 == "defense") {
-	         	   if((*soldiers)[i]->get_defense_level() == (uint) action->iparam1) {
-							// okay, do nothing
-                 		molog("    okay\n");
-	                  found=true;
+					} else if (action->sparam1 == "defense") {
+						if
+							((*it)->get_defense_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
    		            break;
-      	 	      }
-         	  	}
-				   if (action->sparam1 == "evade") {
-	         	   if((*soldiers)[i]->get_evade_level() == (uint) action->iparam1) {
-							// okay, do nothing
-                 		molog("    okay\n");
-	                  found=true;
+					} else if (action->sparam1 == "evade") {
+						if
+							((*it)->get_evade_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
    		            break;
-      	 	      }
          	  	}
 				}
+				molog("    okay\n"); // okay, do nothing
 
-	         if(!found) {
-	            molog("   Checking failed, program restart\n");
-   	         program_end(g, false);
-      	      return;
-         	}
 	         molog("  Check done!\n");
 
 				program_step();
@@ -883,72 +876,62 @@ void ProductionSite::program_act(Game* g)
 			}
 		case ProductionAction::actTrain:
 			{
-				bool found = false;
-				uint i;
-				std::vector<Soldier*> *soldiers;
+				const std::vector<Soldier *> & soldiers = get_soldiers();
+				const std::vector<Soldier *>::const_iterator soldiers_end =
+					soldiers.end();
+				std::vector<Soldier *>::const_iterator it = soldiers.begin();
 
 				molog ("  Training soldier's %s (%d to %d)",
 					action->sparam1.c_str(),action->iparam1, action->iparam2);
 
 
 
-				if (get_soldiers() == 0)
-					throw wexception ("ProductionAction::program_act found actTrain and there isn't a trainery!!");
-
-				soldiers = get_soldiers();
-
-      	   for(i=0; i < (*soldiers).size(); i++) {
-				   if (action->sparam1 == "hp") {
-	         	   if((*soldiers)[i]->get_hp_level() == (uint) action->iparam1) {
-							// okay, do nothing
-                 		molog("    okay\n");
-	                  found=true;
+				for (;; ++it) {
+					if (it == soldiers_end) {
+						molog("   ¡¡Training failed!!, program restart\n");
+						program_end(g, false);
+						return;
+					}
+					if (action->sparam1 == "hp") {
+						if
+							((*it)->get_hp_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
    		            break;
-      	 	      }
-         	  	}
-				   if (action->sparam1 == "attack") {
-	         	   if((*soldiers)[i]->get_attack_level() == (uint) action->iparam1) {
-							// okay, do nothing
-							molog("    okay\n");
-	                  found=true;
+					} else if (action->sparam1 == "attack") {
+						if
+							((*it)->get_attack_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
 							break;
-      	 	      }
-         	  	}
-				   if (action->sparam1 == "defense") {
-	         	   if((*soldiers)[i]->get_defense_level() == (uint) action->iparam1) {
-							// okay, do nothing
-                 		molog("    okay\n");
-	                  found=true;
+					} else if (action->sparam1 == "defense") {
+						if
+							((*it)->get_defense_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
    		            break;
-      	 	      }
-         	  	}
-				   if (action->sparam1 == "evade") {
-	         	   if((*soldiers)[i]->get_evade_level() == (uint) action->iparam1) {
-							// okay, do nothing
-                 		molog("    okay\n");
-	                  found=true;
+					} else if (action->sparam1 == "evade") {
+						if
+							((*it)->get_evade_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
    		            break;
-      	 	      }
          	  	}
 				}
+				molog("    okay\n"); // okay, do nothing
 
-	         if(!found) {
-	            molog("   ¡¡Training failed!!, program restart\n");
-   	         program_end(g, false);
-      	      return;
-         	}
 				try {
 					if (action->sparam1 == "hp")
-						(*soldiers)[i]->set_hp_level (action->iparam2);
+						(*it)->set_hp_level (action->iparam2);
 
-					if (action->sparam1 == "attack")
-						(*soldiers)[i]->set_attack_level (action->iparam2);
+					else if (action->sparam1 == "attack")
+						(*it)->set_attack_level (action->iparam2);
 
-					if (action->sparam1 == "defense")
-						(*soldiers)[i]->set_defense_level (action->iparam2);
+					else if (action->sparam1 == "defense")
+						(*it)->set_defense_level (action->iparam2);
 
-					if (action->sparam1 == "evade")
-						(*soldiers)[i]->set_evade_level (action->iparam2);
+					else if (action->sparam1 == "evade")
+						(*it)->set_evade_level (action->iparam2);
 
 				} catch (...) {
 					throw wexception ("Fail training soldier!!\n");

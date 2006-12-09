@@ -162,14 +162,15 @@ m_label_dock_windows_to_edges
 			m_resolutions[i].yres  == opt.yres and
 			m_resolutions[i].depth == opt.depth;
 		did_select_a_res|=selected;
-		m_reslist.add_entry(buf, 0 ,selected);
+		m_reslist.add(buf, 0, -1, selected);
 	}
-	if (not did_select_a_res) m_reslist.select(m_reslist.get_nr_entries() - 1);
+	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
 
    available_languages[0].name = _( "System default language" );
-	for (uint i = 0; i < NR_LANGUAGES; ++i) m_language_list.add_entry
+	for (uint i = 0; i < NR_LANGUAGES; ++i) m_language_list.add
 		(available_languages[i].name.c_str(),
 		 available_languages[i].abbrev,
+		 -1, //  FIXME this should be a flag
 		 available_languages[i].abbrev == opt.language);
 
 
@@ -177,20 +178,20 @@ m_label_dock_windows_to_edges
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
-	const uint res_index = m_reslist.get_selection_index();
+	const uint res_index = m_reslist.selection_index();
 	Options_Ctrl::Options_Struct opt = {
 		m_resolutions[res_index].xres,
 		m_resolutions[res_index].yres,
 		m_resolutions[res_index].depth,
-		m_inputgrab                         .get_state    (),
-		m_fullscreen                        .get_state    (),
-		m_single_watchwin                   .get_state    (),
-		m_show_workarea_preview             .get_state    (),
-		m_snap_windows_only_when_overlapping.get_state    (),
-		m_dock_windows_to_edges             .get_state    (),
-		m_music                             .get_state    (),
-		m_fx                                .get_state    (),
-		m_language_list                     .get_selection()
+		m_inputgrab                         .get_state   (),
+		m_fullscreen                        .get_state   (),
+		m_single_watchwin                   .get_state   (),
+		m_show_workarea_preview             .get_state   (),
+		m_snap_windows_only_when_overlapping.get_state   (),
+		m_dock_windows_to_edges             .get_state   (),
+		m_music                             .get_state   (),
+		m_fx                                .get_state   (),
+		m_language_list                     .get_selected()
 	};
    return opt;
 }

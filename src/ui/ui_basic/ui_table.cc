@@ -37,57 +37,62 @@ Args: parent	parent panel
       h
       align	alignment of text inside the Table
 */
-Table::Table(Panel *parent, int x, int y, uint w, uint h, Align align, Dir def_dir)
-	: Panel(parent, x, y, w, h)
+Table<void *>::Table
+	(Panel * const parent,
+	 int x, int y, uint w, uint h,
+	 const Align align,
+	 const bool descending)
+:
+	Panel             (parent, x, y, w, h),
+	m_max_pic_width   (0),
+	m_lineheight      (g_fh->get_fontheight(UI_FONT_SMALL)),
+	m_scrollbar       (0),
+	m_scrollpos       (0),
+	m_selection       (no_selection_index()),
+	m_last_click_time (-10000),
+	m_last_selection  (no_selection_index()),
+	m_sort_column     (0),
+	m_sort_descending  (descending)
+
 {
 	set_think(false);
 
 	set_align(align);
-
-	m_scrollpos = 0;
-	m_selection = -1;
-
-	m_scrollbar = 0;
-
-   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL);
-
-   m_max_pic_width=0;
-   m_last_click_time=-10000;
-   m_last_selection=-1;
-
-   m_default_sort_dir = def_dir;
-   m_sort_direction = m_default_sort_dir;
-   m_sort_column = 0;
-
 }
 
 
 /**
 Free allocated resources
 */
-Table::~Table()
+Table<void *>::~Table()
 {
-	m_scrollbar = 0;
-   clear();
+	const Entry_Record_vector::const_iterator entry_records_end =
+		m_entry_records.end();
+	for
+		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
+		 it != entry_records_end;
+		 ++it)
+		delete *it;
 }
 
 /*
  * Add a new colum to this table
  */
-void Table::add_column(const char* name, Type type, int w) {
-   uint i=0;
-   int complete_width=0;
-   for(i=0; i<m_columns.size(); i++) {
-      assert(m_columns[i].btn);
-      complete_width+=m_columns[i].btn->get_w();
-   }
+void Table<void *>::add_column(const std::string & name, const uint width) {
+
+	//  If there would be existing entries, they would not get the new column.
+	assert(size() == 0);
+
+	uint complete_width = 0;
+	const Columns::const_iterator columns_end = m_columns.end();
+	for (Columns::const_iterator it = m_columns.begin(); it != columns_end; ++it)
+		complete_width += it->btn->get_w();
 
    Column c = {
 		name,
-		type,
 		new IDButton<Table, Columns::size_type>
 		   (this,
-		    complete_width, 0, w, 15,
+		    complete_width, 0, width, 15,
 		    3,
 		    &Table::header_button_clicked, this, m_columns.size(),
 		    name)
@@ -101,13 +106,16 @@ void Table::add_column(const char* name, Type type, int w) {
 
 }
 
-Table_Entry* Table::find_entry (const void* userdata)
+Table<void *>::Entry_Record * Table<void *>::find
+	(const void * const entry) const
+	throw ()
 {
-    unsigned int i;
-
-    for (i=0; i<m_entries.size(); i++)
-	if (m_entries[i]->get_user_data()==userdata)
-	    return m_entries[i];
+	const Entry_Record_vector::const_iterator entries_end = m_entry_records.end();
+	for
+		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
+		 it != entries_end;
+		 ++it)
+		if ((*it)->entry() == entry) return *it;
 
     return 0;
 }
@@ -115,19 +123,15 @@ Table_Entry* Table::find_entry (const void* userdata)
 /*
  * A header button has been clicked
  */
-void Table::header_button_clicked(Columns::size_type n) {
+void Table<void *>::header_button_clicked(Columns::size_type n) {
    if(get_sort_colum()==n) {
       // Change sort direction
-      if(get_sort_direction()==UP)
-         set_sort_direction(DOWN);
-      else
-         set_sort_direction(UP);
+		set_sort_descending(not get_sort_descending());
       sort();
       return;
    }
 
    set_sort_column(n);
-   set_sort_direction(m_default_sort_dir);
    sort();
    return;
 }
@@ -135,38 +139,42 @@ void Table::header_button_clicked(Columns::size_type n) {
 /**
 Remove all entries from the table
 */
-void Table::clear()
+void Table<void *>::clear()
 {
-	for(uint i = 0; i < m_entries.size(); i++)
-		delete m_entries[i];
-   m_entries.clear();
+	const Entry_Record_vector::const_iterator entry_records_end =
+		m_entry_records.end();
+	for
+		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
+		 it != entry_records_end;
+		 ++it)
+		delete *it;
+	m_entry_records.clear();
 
 	if (m_scrollbar)
 		m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
-	m_selection = -1;
+	m_selection = no_selection_index();
 	m_last_click_time = -10000;
-   m_last_selection = -1;
+	m_last_selection = no_selection_index();
 }
 
 /**
 Redraw the table
 */
-void Table::draw(RenderTarget* dst)
+void Table<void *>::draw(RenderTarget * dst)
 {
    // draw text lines
    int lineheight = get_lineheight();
-   int idx = m_scrollpos / lineheight;
+	uint idx = m_scrollpos / lineheight;
    int y = 1 + idx*lineheight - m_scrollpos + m_columns[0].btn->get_h();
 
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
 
-   while(idx < (int)m_entries.size())
-   {
+	while (idx < m_entry_records.size()) {
       if (y >= get_h())
          return;
 
-      Table_Entry* e = m_entries[idx];
+		const Entry_Record & er = *m_entry_records[idx];
 
       if (idx == m_selection) {
          // dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
@@ -174,20 +182,17 @@ void Table::draw(RenderTarget* dst)
       }
 
       // First draw pictures
-      if(e->get_picid()!=-1) {
+		if (er.get_picid() != -1) {
 			uint w,h;
-			g_gr->get_picture_size(e->get_picid(), w, h);
-         dst->blit(1, y + (get_lineheight()-h)/2, e->get_picid());
+			g_gr->get_picture_size(er.get_picid(), w, h);
+			dst->blit(1, y + (get_lineheight() - h) / 2, er.get_picid());
       }
 
-      RGBColor col = UI_FONT_CLR_FG;
-      if( e->use_color() )
-         col = e->get_color();
+		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
-      int i=0;
       int curx=0;
       int curw;
-      for(i=0; i<get_nr_columns(); i++) {
+		for (uint i = 0; i < get_nr_columns(); ++i) {
          curw=m_columns[i].btn->get_w();
          int x;
          if (m_align & Align_Right)
@@ -203,7 +208,15 @@ void Table::draw(RenderTarget* dst)
          }
 
          // Horizontal center the string
-         g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(107,87,55), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->get_string(i), m_align, -1);
+			g_fh->draw_string
+				(dst,
+				 UI_FONT_SMALL,
+				 col,
+				 RGBColor(107, 87, 55),
+				 x,
+				 y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2,
+				 er.get_string(i), m_align,
+				 -1);
 
          curx+=curw;
       }
@@ -216,7 +229,7 @@ void Table::draw(RenderTarget* dst)
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table::handle_mousepress(const Uint8 btn, int, int y) {
+bool Table<void *>::handle_mousepress(const Uint8 btn, int, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	   int time=WLApplication::get()->get_time();
@@ -230,17 +243,21 @@ bool Table::handle_mousepress(const Uint8 btn, int, int y) {
       m_last_click_time=time;
 
       y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
-      if (y >= 0 && y < (int)m_entries.size())
+      if (y >= 0 && y < (int)m_entry_records.size())
          select(y);
 
       // check if doubleclicked
-      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1)
+	if
+		(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
+		 and
+		 m_last_selection == m_selection
+		 and m_selection != no_selection_index())
          double_clicked.call(m_selection);
 
 
 	return true;
 }
-bool Table::handle_mouserelease(const Uint8 btn, int, int)
+bool Table<void *>::handle_mouserelease(const Uint8 btn, int, int)
 {return btn == SDL_BUTTON_LEFT;}
 
 /**
@@ -248,7 +265,7 @@ bool Table::handle_mouserelease(const Uint8 btn, int, int)
  *
  * Args: i	the entry to select
  */
-void Table::select(int i)
+void Table<void *>::select(const uint i)
 {
 	if (m_selection == i)
 		return;
@@ -262,33 +279,35 @@ void Table::select(int i)
 /**
 Add a new entry to the table.
 */
-void Table::add_entry(Table_Entry* e, bool do_select) {
-   int entry_height=0;
-   int picid=e->get_picid();
-   if(picid==-1) {
-      entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
-   } else {
-		uint w,h;
+Table<void *>::Entry_Record & Table<void *>::add
+	(void * const entry, const int picid, const bool do_select)
+{
+   int entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
+   if (picid != -1) {
+		uint w, h;
 		g_gr->get_picture_size(picid, w, h);
-      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);
+	   entry_height = std::max<uint>(entry_height, h);
       if(m_max_pic_width<w) m_max_pic_width=w;
    }
    if(entry_height>m_lineheight) m_lineheight=entry_height;
 
-   m_entries.push_back(e);
+	Entry_Record & result = *new Entry_Record(entry, picid);
+	m_entry_records.push_back(&result);
+	result.m_data.resize(get_nr_columns());
 
-	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2 ));
+	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2 ));
 
    if( do_select )
-      select( m_entries.size() - 1 );
+      select( m_entry_records.size() - 1 );
 
    update(0, 0, get_eff_w(), get_h());
+	return result;
 }
 
 /**
 Scroll to the given position, in pixels.
 */
-void Table::set_scrollpos(int i)
+void Table<void *>::set_scrollpos(int i)
 {
 	m_scrollpos = i;
 
@@ -298,109 +317,72 @@ void Table::set_scrollpos(int i)
 /**
 Set the list alignment (only horizontal alignment works)
 */
-void Table::set_align(Align align)
+void Table<void *>::set_align(Align align)
 {
 	m_align = (Align)(align & Align_Horizontal);
 }
 
 
-/**
-Return the total height (text + spacing) occupied by a single line
-*/
-int Table::get_lineheight()
-{
-	return m_lineheight+2;
+void Table<void *>::remove(const uint i) {
+	assert(i < m_entry_records.size());
+
+	const Entry_Record_vector::iterator it = m_entry_records.begin() + i;
+	delete *it;
+	m_entry_records.erase(it);
+	if (m_selection == i) m_selection = no_selection_index();
 }
 
 /*
- * Remove entry
- */
-void Table::remove_entry(int i) {
-   if(i<0 || ((uint)i)>=m_entries.size()) return;
-
-   delete(m_entries[i]);
-   m_entries.erase(m_entries.begin() + i);
-   if(m_selection==i)
-      m_selection=-1;
-}
-
-/*
- * Sort the listbox alphabetically. make sure that the current selection stays
+ * Sort the table alphabetically. make sure that the current selection stays
  * valid (though it might scroll out of visibility).
  * start and end defines the beginning and the end of a subarea to
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void Table::sort(void) {
-
-   assert(m_columns[m_sort_column].type==STRING);
-
-   int begin, stop, it;
-   if(get_sort_direction()==DOWN) {
-      begin=0;
-      stop=m_entries.size();
-      it=1;
-   } else {
-      begin=m_entries.size()-1;
-      stop=-1;
-      it=-1;
-   }
-
-   Table_Entry *ei, *ej;
-   for(int i=begin; i!=stop; i+=it)
-      for(int j=i; j!=stop; j+=it) {
-         ei=m_entries[i];
-         ej=m_entries[j];
-         // Only strings are sorted at the moment
-         if(strcmp(ei->get_string(m_sort_column), ej->get_string(m_sort_column)) > 0)  {
-            if(m_selection==((int)i))
-               m_selection=j;
-            else if(m_selection==((int)j))
-               m_selection=i;
-            m_entries[i]=ej;
-            m_entries[j]=ei;
-         }
-      }
+void Table<void *>::sort(const uint Begin, uint End) {
+	assert(m_sort_column < m_columns.size());
+	if (End > size()) End = size();
+	if (get_sort_descending())
+		for (uint i = Begin; i != End; ++i) for (uint j = i; j != End; ++j) {
+			Entry_Record * const eri = m_entry_records[i];
+			Entry_Record * const erj = m_entry_records[j];
+			if (eri->get_string(m_sort_column) > erj->get_string(m_sort_column)) {
+				if      (m_selection == i) m_selection = j;
+				else if (m_selection == j) m_selection = i;
+				m_entry_records[i]=erj;
+				m_entry_records[j]=eri;
+			}
+		}
+	else
+		for (uint i = Begin; i != End; ++i) for (uint j = i; j != End; ++j) {
+			Entry_Record * const eri = m_entry_records[i];
+			Entry_Record * const erj = m_entry_records[j];
+			if (eri->get_string(m_sort_column) < erj->get_string(m_sort_column)) {
+				if      (m_selection == i) m_selection = j;
+				else if (m_selection == j) m_selection = i;
+				m_entry_records[i]=erj;
+				m_entry_records[j]=eri;
+			}
+		}
 }
 
-/*
-=================================
 
-Table Entry
+Table<void *>::Entry_Record::Entry_Record(void * const e, const int picid) :
+	m_entry(e), use_clr(false), m_picid(picid)
+{}
 
-=================================
-*/
+void Table<void *>::Entry_Record::set_string
+	(const uint column, const std::string & str)
+{
+	assert(column < m_data.size());
 
-/*
- * constructor
- */
-Table_Entry::Table_Entry(Table* table, void* data, int picid, bool select) {
-   m_picid=picid;
-   m_user_data=data;
-   m_data.resize(table->get_nr_columns());
-
-   m_use_clr = false;
-
-   table->add_entry(this, select);
+   m_data[column].d_string = str;
 }
+const std::string & Table<void *>::Entry_Record::get_string
+	(const uint column) const
+{
+	assert(column < m_data.size());
 
-/*
- * destructor
- */
-Table_Entry::~Table_Entry(void) {
-}
-
-/*
- * Set,get string
- */
-void Table_Entry::set_string(int n, const char* str) {
-   assert(((uint)n)<m_data.size());
-
-   m_data[n].d_string=str;
-}
-const char* Table_Entry::get_string(int n) {
-   assert(((uint)n)<m_data.size());
-
-   return m_data[n].d_string.c_str();
+	return m_data[column].d_string;
 }
 };

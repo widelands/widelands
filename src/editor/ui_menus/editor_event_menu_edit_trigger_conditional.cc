@@ -185,7 +185,7 @@ m_event_chain(chain)
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		Trigger & tr = mtm.get_trigger_by_nr(i);
-		m_trigger_list->add_entry(tr.get_name(), tr);
+		m_trigger_list->add(tr.get_name(), tr);
    }
    m_trigger_list->sort();
 
@@ -214,12 +214,13 @@ m_event_chain(chain)
       for( uint i = 0; i < tokens->size(); i++) {
          TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token( (*tokens)[i] );
 	      assert(t.token <= TriggerConditional_Factory::TRIGGER);
-	      m_construction->add_entry
+			m_construction->add
 		      (t.token == TriggerConditional_Factory::TRIGGER ?
 		       static_cast<Trigger * const>(t.data)->get_name()
 		       :
 		       TriggerConditional_Factory::operators[t.token],
 		       t,
+				 -1,
 		       true);
       }
    }
@@ -253,8 +254,9 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
       // construct token list
       std::vector<TriggerConditional_Factory::Token> tok;
 
-      for(uint i = 0; i < m_construction->get_nr_entries(); i++)
-         tok.push_back(m_construction->get_entry(i));
+	const uint construction_size = m_construction->size();
+	for(uint i = 0; i < construction_size; ++i)
+		tok.push_back((*m_construction)[i]);
 
       try {
          if( !tok.size() ) throw TriggerConditional_Factory::SyntaxError();
@@ -278,23 +280,23 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator
 	assert(i <= TriggerConditional_Factory::TRIGGER);
       TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token();
       t.data = 0;
-	m_construction->add_entry(TriggerConditional_Factory::operators[i], t, true);
+	m_construction->add(TriggerConditional_Factory::operators[i], t, -1, true);
 }
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
-      Trigger & trigger = m_trigger_list->get_selection();
+	Trigger & trigger = m_trigger_list->get_selected();
       TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token();
       t.data = &trigger;
       t.token = TriggerConditional_Factory::TRIGGER;
-      m_construction->add_entry(trigger.get_name(), t, true);
+	m_construction->add(trigger.get_name(), t, -1, true);
    }
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger() {
-      delete &m_construction->get_selection();
+	delete &m_construction->get_selected();
 
-      m_construction->remove_entry( m_construction->get_selection_index());
+	m_construction->remove_selected();
       m_mvup_btn->set_enabled( false );
       m_mvdown_btn->set_enabled( false );
       m_delete_btn->set_enabled( false );
@@ -303,14 +305,14 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger() {
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up() {
 	assert(m_construction->has_selection()); //  Button should be disabled.
-	const int n = m_construction->get_selection_index();
+	const int n = m_construction->selection_index();
 	assert(n > 0); //  Button should be disabled.
 	m_construction->switch_entries(n, n - 1);
 }
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
 	assert(m_construction->has_selection()); //  Button should be disabled.
-	const uint n = m_construction->get_selection_index();
-	assert(n + 1 < m_construction->get_nr_entries()); //  Button should be disabled.
+	const uint n = m_construction->selection_index();
+	assert(n + 1 < m_construction->size()); //  Button should be disabled.
 	m_construction->switch_entries(n, n + 1);
 }
 
@@ -321,8 +323,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint) {
    m_insert_btn->set_enabled( true );
 }
 void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint i) {
-	m_mvdown_btn->set_enabled
-		(static_cast<const uint>(i) + 1 < m_construction->get_nr_entries());
+	m_mvdown_btn->set_enabled(i + 1 < m_construction->size());
 	m_mvup_btn->set_enabled(i > 0);
    m_delete_btn->set_enabled( true );
 }

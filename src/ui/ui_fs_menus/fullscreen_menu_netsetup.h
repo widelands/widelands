@@ -66,12 +66,12 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	UI::IDButton<Fullscreen_Menu_NetSetup, int> back;
 	UI::Edit_Box                                hostname;
 	UI::Edit_Box                                playername;
-	UI::Table                                   opengames;
+	UI::Table<const LAN_Open_Game * const>      opengames;
 	LAN_Game_Finder                             discovery;
 	UI::Button<Fullscreen_Menu_NetSetup>        networktype;
 		bool			internetgame;
 
-		void game_selected (int);
+	void game_selected (uint);
 
 		static void discovery_callback (int, const LAN_Open_Game*, void*);
 
@@ -79,7 +79,9 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		void game_closed (const LAN_Open_Game*);
 		void game_updated (const LAN_Open_Game*);
 
-		void update_game_info (UI::Table_Entry*, const LAN_Game_Info&);
+	void update_game_info
+		(UI::Table<const LAN_Open_Game * const>::Entry_Record &,
+		 const LAN_Game_Info &);
 
 	void toggle_networktype();
 		void toggle_hostname();

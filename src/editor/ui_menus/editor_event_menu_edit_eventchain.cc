@@ -142,7 +142,7 @@ m_event_chain(chain)
 	const MapEventManager::Index nr_events = mem.get_nr_events();
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 		Event & event = mem.get_event_by_nr(i);
-		m_available_events->add_entry(event.get_name(), event);
+		m_available_events->add(event.get_name(), event);
    }
    m_available_events->sort();
 
@@ -167,7 +167,7 @@ m_event_chain(chain)
 
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
 		Event & event = *m_event_chain->get_event(i);
-		m_events->add_entry(event.get_name(), event);
+		m_events->add(event.get_name(), event);
    }
 
    m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
@@ -213,9 +213,9 @@ void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Trigger Conditional is always updated
       // Events
       m_event_chain->clear_events();
-	const uint nr_events = m_events->get_nr_entries();
+	const uint nr_events = m_events->size();
 	for (uint i = 0; i < nr_events; i++)
-		m_event_chain->add_event(&m_events->get_entry(i));
+		m_event_chain->add_event(&(*m_events)[i]);
       end_modal(1);
 }
 
@@ -238,13 +238,13 @@ void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ins_event() {
-	Event & event = m_available_events->get_selection();
-	m_events->add_entry(event.get_name(), event, true);
+	Event & event = m_available_events->get_selected();
+	m_events->add(event.get_name(), event, -1, true);
 }
 
 
 void Editor_Event_Menu_Edit_EventChain::clicked_del_event() {
-      m_events->remove_entry( m_events->get_selection_index() );
+	m_events->remove_selected();
       m_mvup_btn->set_enabled( false );
       m_mvdown_btn->set_enabled( false );
       m_delete_btn->set_enabled( false );
@@ -253,7 +253,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_del_event() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_move_up() {
 	assert(m_events->has_selection());  //  Button should have been disabled.
-	const uint n = m_events->get_selection_index();
+	const uint n = m_events->selection_index();
 	assert(n != 0);  //  Button should have been disabled.
          m_events->switch_entries( n, n - 1);
 }
@@ -261,8 +261,8 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_up() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
 	assert(m_events->has_selection());  //  Button should have been disabled.
-	const uint n = m_events->get_selection_index();
-	assert(n != m_events->get_nr_entries() - 1);  //  Button should have been disabled.
+	const uint n = m_events->selection_index();
+	assert(n < m_events->size() - 1);  //  Button should have been disabled.
          m_events->switch_entries( n, n + 1);
 }
 

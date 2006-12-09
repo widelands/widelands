@@ -164,7 +164,7 @@ void Fullscreen_Menu_InetLobby::room_info( std::vector<std::string > users ) {
    for(uint i = 0; i < users.size(); i++ ) {
       if(users[i] == m_gsc->get_username()) continue;
       std::string name = users[i];
-      m_userlist->add_entry(name.c_str(), 0);
+		m_userlist->add(name.c_str(), 0);
       // Get User Informations
       Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(users[i]);
       m_gsc->send(gui);
@@ -208,10 +208,10 @@ void Fullscreen_Menu_InetLobby::chat_message( std::string user, std::string msg,
 void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groom, bool enters ) {
    std::string name = gname;
 
-   if( enters && groom == m_gsc->get_room() )
-      m_userlist->add_entry(name.c_str(), 0);
-   if( !enters && groom == m_gsc->get_room() )
-      m_userlist->remove_entry(name.c_str());
+	if (groom == m_gsc->get_room()) {
+		if (enters) m_userlist->add   (name.c_str(), 0);
+		else        m_userlist->remove(name.c_str());
+	}
 
    m_userlist->sort();
 
