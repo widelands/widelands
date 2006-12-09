@@ -44,10 +44,8 @@ back
  &Fullscreen_Menu_InetServerOptions::end_modal, this, 0,
  _("Back")),
 
-	// Hostname
-hostname(this, 288, 210, 174, 24, 2, 0),
-	// Player
-playername(this, 288, 240, 174, 24, 2, 0)
+playername(this, 288, 240, 174, 24, 2, 0),
+hostname  (this, 288, 210, 174, 24, 2, 0)
 
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
