@@ -1747,13 +1747,13 @@ TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSit
    m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
    m_tabpanel->set_snapparent(true);
 
-      // Training Box (wares and buttons related to they)
+	// Training Box (wares and buttons related to them)
    UI::Box* prod_box = create_production_box (m_tabpanel, ms);
    prod_box->resize();
    add_tab(pic_tab_training, prod_box);
 
-      // Military Box (Soldiers and buttons related to they)
-      // Training Box (wares and buttons related to they)
+	// Military Box (Soldiers and buttons related to them)
+	// Training Box (wares and buttons related to them)
    UI::Box* train_box = create_military_box (m_tabpanel);
    train_box->resize();
    add_tab(pic_tab_military, train_box);

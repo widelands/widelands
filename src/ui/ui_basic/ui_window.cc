@@ -27,7 +27,7 @@
 #include "wlapplication.h"
 
 namespace UI {
-//  Widht the horizontal border grapichs must have.
+//  Width the horizontal border grapichs must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
 
 //  Height the top border must have
@@ -41,7 +41,7 @@ namespace UI {
 
 #define HZ_B_MIDDLE_PIXMAP_LEN (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
 
-//  Width/height the vertical border grapichs must have.
+//  Width/height the vertical border graphics must have.
 #define VT_B_PIXMAP_THICKNESS 20
 #define VT_B_TOTAL_PIXMAP_LEN 100
 
