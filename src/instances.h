@@ -24,6 +24,8 @@
 #include "error.h"
 #include "types.h"
 
+#include <SDL_types.h>
+
 #include <map>
 #include <string>
 #include <vector>
@@ -275,6 +277,9 @@ public:
 	// (would be _really_ nice)
 	Map_Object * get(const Editor_Game_Base * const g);
 	const Map_Object * get(const Editor_Game_Base * const g) const;
+
+	bool operator<(const Object_Ptr other) const throw ()
+	{return m_serial < other.m_serial;}
 
 private:
 	uint m_serial;
