@@ -90,12 +90,12 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_fsd.fieldsel_pos.x=0;
    m_fsd.fieldsel_pos.y=0;
-   m_fsd.fieldsel_jobid=0;
+	m_fsd.fieldsel_jobid = Overlay_Manager::Job_Id::Null();
    m_fsd.fieldsel_pic=g_gr->get_picture( PicMod_Game,  "pics/fsel.png" );
    m_fsd.fieldsel_radius=0;
 
-   m_road_buildhelp_overlay_jobid=0;
-   m_jobid=0;
+   m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
+   m_jobid = Overlay_Manager::Job_Id::Null();
 	m_buildroad = false;
    m_road_build_player=0;
 }
@@ -128,7 +128,7 @@ Change the field selection. Does not honour the freeze!
 void Interactive_Base::set_fieldsel_pos(Coords c)
 {
    // Remove old fieldsel pointer
-   if(m_fsd.fieldsel_jobid)
+   if (not m_fsd.fieldsel_jobid.isNull())
       get_map()->get_overlay_manager()->remove_overlay(m_fsd.fieldsel_jobid);
 	m_fsd.fieldsel_jobid= get_map()->get_overlay_manager()->get_a_job_id();
    m_fsd.fieldsel_pos=c;
@@ -620,7 +620,7 @@ void Interactive_Base::roadb_add_overlay()
 	Map* m = m_egbase->get_map();
 
 	// preview of the road
-   assert(!m_jobid);
+	assert(m_jobid.isNull());
    m_jobid=get_map()->get_overlay_manager()->get_a_job_id();
 	for(int idx = 0; idx < m_buildroad->get_nsteps(); idx++)	{
 		uchar dir = m_buildroad->get_step(idx);
@@ -641,7 +641,7 @@ void Interactive_Base::roadb_add_overlay()
 	// build hints
 	FCoords endpos = m->get_fcoords(m_buildroad->get_end());
 
-   assert(!m_road_buildhelp_overlay_jobid);
+	assert(m_road_buildhelp_overlay_jobid.isNull());
    m_road_buildhelp_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
 	for(int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
@@ -700,12 +700,12 @@ void Interactive_Base::roadb_remove_overlay()
 	//log("Remove overlay\n");
 
    // preview of the road
-   if(m_jobid)
+	if (not m_jobid.isNull())
        get_map()->get_overlay_manager()->remove_road_overlay(m_jobid);
-   m_jobid=0;
+	m_jobid = Overlay_Manager::Job_Id::Null();
 
 	// build hints
-   if(m_road_buildhelp_overlay_jobid)
+	if (not m_road_buildhelp_overlay_jobid.isNull())
       get_map()->get_overlay_manager()->remove_overlay(m_road_buildhelp_overlay_jobid);
-   m_road_buildhelp_overlay_jobid=0;
+	m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
 }

@@ -224,7 +224,7 @@ private:
 	UI::Tab_Panel*	m_tabpanel;
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 	uint m_best_tab;
-	int m_workarea_preview_job_id;
+	Overlay_Manager::Job_Id m_workarea_preview_job_id;
 	unsigned int workarea_cumulative_picid[number_of_workarea_pics + 1];
 
    /// Variables to use with attack dialog
@@ -280,7 +280,7 @@ FieldActionWindow::FieldActionWindow
 	m_map(iabase->get_egbase()->get_map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_best_tab(0),
-	m_workarea_preview_job_id(-1)
+	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null())
 {
 
 	Field *f = m_map->get_field(iabase->get_fieldsel_pos());
@@ -311,7 +311,7 @@ Free allocated resources, remove from registry.
 */
 FieldActionWindow::~FieldActionWindow()
 {
-	if (m_workarea_preview_job_id != -1)
+	if (not m_workarea_preview_job_id.isNull())
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_fieldsel_freeze(false);
    if (m_text_attackers)
@@ -840,9 +840,9 @@ The mouse pointer has moved away from the icon for the building with the index i
 ===============
 */
 void FieldActionWindow::building_icon_mouse_out(long) {
-	if (m_workarea_preview_job_id != -1) {
+	if (not m_workarea_preview_job_id.isNull()) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
-		m_workarea_preview_job_id = -1;
+		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
 	}
 }
 

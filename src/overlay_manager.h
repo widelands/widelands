@@ -21,7 +21,6 @@
 #define __S__OVERLAY_HANDLER_H
 
 #include <map>
-#include <limits>
 #include "field.h"
 #include "geometry.h"
 #include "types.h"
@@ -33,7 +32,6 @@
  *     for a field he draws them accordingly
  *   - If nothing was registered for this field, the Overlay Manager
  *     automatically returns
- *        - borders
  *        - buildhelp (if activated)
  *
  *   Advantages are:
@@ -50,20 +48,29 @@
  *     the jobid can be given to the register function, whenever
  *     the job is finished or canceld, a simple remove_overlay
  *     with the jobid can be called and all overlays created in the
- *     job are removed. This is usefull for interactive road building.
+ *     job are removed. This is useful for interactive road building.
  */
 #define MAX_OVERLAYS_PER_NODE 5
 #define MAX_OVERLAYS_PER_TRIANGLE 3
 typedef int (*Overlay_Callback_Function)(const TCoords, void*, int);
-class Overlay_Manager {
-   public:
+struct Overlay_Manager {
+	struct Job_Id { //  Boxing
+		static Job_Id Null() throw ()//  Constant value for no job.
+		{Job_Id result; result.id = 0; return result;}
+		bool isNull() const throw () {return *this == Null();}
+	private:
+		friend class Overlay_Manager;
+		Job_Id operator++() throw () {++id; return *this;}
+		bool operator==(const Job_Id other) const throw ()
+		{return id == other.id;}
+		uint id;
+	};
       struct Overlay_Info {
          int picid;
          int hotspot_x;
          int hotspot_y;
       };
 
-   public:
       Overlay_Manager();
 
 	void reset();
@@ -73,9 +80,21 @@ class Overlay_Manager {
          m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1;
       }
 
-	int get_a_job_id() {
-		if (++m_current_job_id >= std::numeric_limits<int>::max())
-			m_current_job_id = 1000;
+	//  Get a job id that is hopefully unused. This function is guaranteed to
+	//  never return Job_Id::Null(). All other values are valid and may be returned.
+	//  The first call can return any valid value. Other calls increment the
+	//  value that was returned in the last call. If the result is Job_Id::Null() it
+	//  is incremented again. Then the result is returned. Since Job_Id is
+	//  modular, it can wrap around. This means that the function can return a
+	//  value that it has returned before. If that job id is still in use, the
+	//  logic will fail, since the overlay manager will consider all jobs with a
+	//  certain job id as the same job. Therefore a call to
+	//  remove_overlay(const Job_Id) will remove all overlays that were added
+	//  during any job with that id. But the range of Job_Id should be large
+	//  enough to ensure that this will not be a problem in practice.
+	Job_Id get_a_job_id() {
+		++m_current_job_id;
+		if (m_current_job_id == Job_Id::Null()) ++m_current_job_id;
 		return m_current_job_id;
 	}
 
@@ -86,12 +105,12 @@ class Overlay_Manager {
 		 const int picid,
 		 const int level,
 		 const Coords hot_spot = Coords(-1,-1),
-		 const int jobid = 0);
+		 const Job_Id jobid = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays
 	void remove_overlay(const TCoords, const int picid = -1);
 
-	void remove_overlay(const int jobid); //  remove by jobid
+	void remove_overlay(const Job_Id jobid);
 
 	unsigned char get_overlays(const FCoords c, Overlay_Info * const) const;
 	unsigned char get_overlays
@@ -107,9 +126,9 @@ class Overlay_Manager {
 	//  road overlay information is requested the same data as for a field is
 	//  returned (a uchar which needs to be ANDed).
 	void register_road_overlay
-		(const Coords, const uchar where, const int jobid = -1);
+		(const Coords, const uchar where, const Job_Id jobid = Job_Id::Null());
 	void remove_road_overlay(const Coords);
-	void remove_road_overlay(const int jobid);
+	void remove_road_overlay(const Job_Id jobid);
 	uchar get_road_overlay(const Coords c) const {
 		Registered_Road_Overlays_Map::const_iterator it = m_road_overlays.find(c);
 		if (it != m_road_overlays.end()) return it->second.where;
@@ -117,10 +136,9 @@ class Overlay_Manager {
 	}
 
    private:
-      // this is always sorted by (y<<8)+x. a unique coordinate which is sortable
 	struct Registered_Overlays {
 		Registered_Overlays
-			(const int Jobid,
+			(const Job_Id Jobid,
 			 const int Picid,
 			 const int Hotspot_x,
 			 const int Hotspot_y,
@@ -132,17 +150,17 @@ class Overlay_Manager {
 			hotspot_y(Hotspot_y),
 			level(Level)
 		{}
-		int jobid;
+		Job_Id jobid;
 		int picid;
 		int hotspot_x;
 		int hotspot_y;
 		int level;
 	};
 
-      struct Registered_Road_Overlays {
-         int jobid;
-         uchar where;
-      };
+	struct Registered_Road_Overlays {
+		Job_Id jobid;
+		uchar where;
+	};
 
 	typedef
 		std::map<const Coords, Registered_Road_Overlays, Coords::ordering_functor>
@@ -164,7 +182,10 @@ class Overlay_Manager {
       // since we only care for map stuff, not for player stuff or editor issues
       void *m_callback_data;
       int m_callback_data_i;
-	int m_current_job_id;
+
+	//  No need to initialize m_current_job_id (see comment for get_a_job_id).
+	Job_Id m_current_job_id;
+
 };
 
 

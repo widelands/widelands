@@ -30,8 +30,8 @@
 Overlay_Manager::Overlay_Manager() :
 m_are_graphics_loaded(false),
 m_showbuildhelp(false),
-m_callback(0),
-m_current_job_id(1000) // don't start with 0
+m_callback(0)
+//  No need to initialize m_current_job_id (see comment for get_a_job_id).
 {}
 
 
@@ -154,7 +154,7 @@ void Overlay_Manager::register_overlay
  const int picid,
  const int level,
  const Coords hot_spot,
- const int jobid)
+ const Job_Id jobid)
 {
 	assert(c.t <= 2);
 	assert(level!=5); // level == 5 is undefined behavior
@@ -227,7 +227,7 @@ void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
 /*
  * remove all overlays with this jobid
  */
-void Overlay_Manager::remove_overlay(const int jobid) {
+void Overlay_Manager::remove_overlay(const Job_Id jobid) {
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
 		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();) {
@@ -240,7 +240,7 @@ void Overlay_Manager::remove_overlay(const int jobid) {
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay
-(const Coords c, const uchar where, const int jobid)
+(const Coords c, const uchar where, const Job_Id jobid)
 {
 	const Registered_Road_Overlays overlay = {jobid, where};
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
@@ -261,7 +261,7 @@ void Overlay_Manager::remove_road_overlay(const Coords c) {
 /*
  * remove all overlays with this jobid
  */
-void Overlay_Manager::remove_road_overlay(int jobid) {
+void Overlay_Manager::remove_road_overlay(const Job_Id jobid) {
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.begin();
 	const Registered_Road_Overlays_Map::const_iterator end =
 		m_road_overlays.end();

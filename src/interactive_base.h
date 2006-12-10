@@ -23,6 +23,7 @@
 #include "editor_game_base.h"
 #include "geometry.h"
 #include "map.h"
+#include "overlay_manager.h"
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 
@@ -113,7 +114,7 @@ class Interactive_Base : public UI::Panel {
          Coords            fieldsel_pos;
          int               fieldsel_radius;
          int               fieldsel_pic;
-         int               fieldsel_jobid;
+		Overlay_Manager::Job_Id fieldsel_jobid;
       } m_fsd;
 
 		uint					m_display_flags;
@@ -122,8 +123,8 @@ class Interactive_Base : public UI::Panel {
 		uint					m_frametime;			// in millseconds
 		uint					m_avg_usframetime;	// in microseconds!
 
-      int      m_jobid;
-      int      m_road_buildhelp_overlay_jobid;
+	Overlay_Manager::Job_Id m_jobid;
+	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
       CoordPath		*m_buildroad; // path for the new road
       int      m_road_build_player;
 
