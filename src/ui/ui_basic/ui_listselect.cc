@@ -85,7 +85,7 @@ void Listselect<void *>::clear() {
 		(Entry_Record_vector::const_iterator it = m_entry_records.begin();
 		 it != entry_records_end;
 		 ++it)
-		delete *it;
+		free(*it);
 	m_entry_records.clear();
 
 	if (m_scrollbar) m_scrollbar->set_steps(1);
