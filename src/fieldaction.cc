@@ -296,7 +296,7 @@ FieldActionWindow::FieldActionWindow
 	m_fastclick = true;
 	for (unsigned int i = 1; i <= number_of_workarea_pics; ++i) {
 		char filename[30];
-		snprintf(filename, 30, "pics/workarea%icumulative.png", i);
+		snprintf(filename, sizeof(filename), "pics/workarea%icumulative.png", i);
 		workarea_cumulative_picid[i]
 			= g_gr->get_picture( PicMod_Game,  filename );
 	}
@@ -482,7 +482,7 @@ void FieldActionWindow::add_buttons_attack ()
             m_attackers = 0;
             m_attackers_type = STRONGEST;
             add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less);
-            
+
             m_text_attackers = new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
             attackbox->add(m_text_attackers, UI::Box::AlignTop);
 
@@ -954,7 +954,7 @@ void FieldActionWindow::act_attack ()
 void FieldActionWindow::act_attack_more() {
    char buf[20];
    uint available = get_max_attackers();
-   
+
    if (m_attackers < available)
       m_attackers ++;
    else
