@@ -317,7 +317,6 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 			std::vector<SDL_Surface*> rend_cur_words;
 			std::vector<SDL_Surface*> rend_cur_images;
 
-			SDL_Surface *block_images = 0;
 			int img_surf_h = 0;
 			int img_surf_w = 0;
 
@@ -337,9 +336,17 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 				img_surf_w = img_surf_w + image->get_w();
 				rend_cur_images.push_back(image->m_surface);
 			}
-			if (rend_cur_images.size()) {
-				block_images = join_sdl_surfaces(img_surf_w,img_surf_h,rend_cur_images,bg,Align_Left,0,true,true);
-			}
+			SDL_Surface * const block_images = rend_cur_images.size() ?
+				join_sdl_surfaces
+				(img_surf_w, img_surf_h,
+				 rend_cur_images,
+				 bg,
+				 Align_Left,
+				 0,
+				 true,
+				 true)
+				:
+				0;
 
 			//Width that's left for text in this richtext block
 			int h_space = 3;
@@ -488,6 +495,7 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 
 				rend_lines.clear();
 			}
+			SDL_FreeSurface(block_images);
 		}
 		SDL_Surface* global_surface = join_sdl_surfaces(wrap, global_h, rend_blocks, bg);
 		picid = convert_sdl_surface(global_surface);
