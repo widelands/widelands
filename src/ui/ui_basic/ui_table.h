@@ -25,6 +25,7 @@
 #include "font_handler.h"
 #include "ui_button.h"
 #include "ui_signal.h"
+#include <limits>
 
 #include "compile_assert.h"
 
