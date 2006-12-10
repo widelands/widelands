@@ -23,7 +23,7 @@
 
 #include <vector>
 #include "font_handler.h"
-#include "ui_button.h"
+#include "ui_panel.h"
 #include "ui_signal.h"
 #include <limits>
 
@@ -31,6 +31,7 @@
 
 namespace UI {
 struct Scrollbar;
+template <typename T, typename ID> struct IDButton;
 
 /**
  * A table whith columns and lines. The entriess can be sorted by colums by
