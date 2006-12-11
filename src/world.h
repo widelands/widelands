@@ -139,9 +139,9 @@ class World
 		void postload(Editor_Game_Base*);
 		void load_graphics();
 
-      inline const char* get_name(void) { return hd.name; }
-      inline const char* get_author(void) { return hd.author; }
-      inline const char* get_descr(void) { return hd.descr; }
+	const char * get_name  () const throw () {return hd.name;}
+	const char * get_author() const throw () {return hd.author;}
+	const char * get_descr () const throw () {return hd.descr;}
 
       inline Terrain_Descr* get_terrain(const uint i) const { assert(i<ters.get_nitems()); return ters.get(i); }
       inline Terrain_Descr* get_terrain(const char * const str ) const { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
