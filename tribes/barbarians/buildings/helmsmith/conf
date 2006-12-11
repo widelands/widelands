@@ -67,8 +67,8 @@ thatchreed=3
 
 [idle]
 pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hot_spot_x=45
+hot_spot_y=65
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -78,8 +78,8 @@ shadowclr_b=0
 
 [build]
 pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hot_spot_x=45
+hot_spot_y=65
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -89,8 +89,8 @@ shadowclr_b=0
 
 [working]
 pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hot_spot_x=45
+hot_spot_y=65
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0

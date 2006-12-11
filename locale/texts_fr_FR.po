@@ -1,20 +1,18 @@
-# French translation of PACKAGE.
-# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# me <anubisnotdead@gmail.com>, 2006.
-#
+# French translation of WIDELANDS.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: WIDELANDS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-11-14 13:23+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
-"Language-Team: French\n"
+"PO-Revision-Date: 2006-12-10 21:33+0100\n"
+"Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
+"Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
 
 #: ../txts/COPYING:1
 msgid "License"
@@ -25,9 +23,8 @@ msgid "GNU general public licence"
 msgstr "GNU general public licence"
 
 #: ../txts/COPYING:6
-#, fuzzy
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr "Version 2, Juin 1991</p>"
+msgstr "Version 2, Juin 1991<br></p></rt>"
 
 #: ../txts/COPYING:8
 msgid ""
@@ -724,7 +721,6 @@ msgid "an open source strategy game"
 msgstr "Un jeu de stratégie open-source"
 
 #: ../txts/README:13
-#, fuzzy
 msgid ""
 "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
 "BlueByte.<br>In this game, you start out on a small piece of land with "
@@ -734,9 +730,9 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you do."
 msgstr ""
-"Widelands est un jeu de stratégie avec un gameplay similaire à celui de "
+"Widelands est un jeu de stratégie avec un style de jeu similaire à celui de "
 "Settlers II. <br>Dans ce jeu, vous commencez avec un petit territoire fort "
-"peu pourvu en ressources. En les utilisant, vous pourrez contruire votre "
+"peu pourvu en ressources. En les utilisant, vous pourrez construire votre "
 "propre empire de plusieurs milliers d'habitants. Sur votre parcours, vous "
 "aurez à mettre en place une infrastructure économique, explorer les "
 "territoires alentours et affronter les ennemis qui tentent, comme vous, de "
@@ -799,6 +795,7 @@ msgstr "F               Basculer en plein écran"
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
 msgstr ""
+"Home       Centrer la vue principale de la carte sur l'emplacement de départ"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
@@ -809,9 +806,10 @@ msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "PAGEDOWN    Diminuer la vitesse du jeu"
 
 #: ../txts/README:58
-#, fuzzy
 msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr "F5           Révéler entièrement la carte"
+msgstr ""
+"F5           Révéler entièrement la carte (seulement si compilé pour le "
+"déboguage) "
 
 #: ../txts/README:60
 msgid "F10         Quit the game immediately"
@@ -823,13 +821,16 @@ msgstr "F11         Prendre une capture d'écran"
 
 #: ../txts/README:67
 msgid "Online Help"
-msgstr ""
+msgstr "Aide en Ligne"
 
 #: ../txts/README:71
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Si vous avez besoin de documentation ou d'aide sur Widelands ou l'éditeur de "
+"Widelands, visitez notre page web. Vous pouvez trouver une aide en ligne à "
+"jour sur :"
 
 #: ../txts/README:79
 msgid "Reporting Bugs"
@@ -850,7 +851,6 @@ msgid "Please provide enough background information. Tell us:"
 msgstr "Veuillez fournir le contexte du problème. Dites nous:"
 
 #: ../txts/README:91
-#, fuzzy
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
@@ -939,9 +939,8 @@ msgstr ""
 "permettent de déceler les bugs."
 
 #: ../txts/developers:1
-#, fuzzy
 msgid "Development"
-msgstr "Developpement"
+msgstr "Développement"
 
 #: ../txts/editor_readme:1
 msgid "README for the Widelands Editor"

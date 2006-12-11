@@ -1,20 +1,17 @@
 # French translation of WIDELANDS.
-Copyright (C) 2006 THE WIDELANDS'S COPYRIGHT HOLDER
-This file is distributed under the same license as the WIDELANDS package.
-me <anubisnotdead@gmail.com>, 2006.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-11-22 17:38+0100\n"
-"PO-Revision-Date: 2006-12-02 20:41+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"PO-Revision-Date: 2006-12-10 21:03+0100\n"
+"Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: ../src/ware.cc:72 ../src/worker.cc:1559
 msgid "Doh... someone forgot the help text!"
@@ -46,27 +43,22 @@ msgid "Map"
 msgstr "Carte"
 
 #: ../src/minimap.cc:172
-#, fuzzy
 msgid "Terrain"
 msgstr "S�lection du terrain"
 
 #: ../src/minimap.cc:180
-#, fuzzy
 msgid "Owner"
 msgstr "Possesseur"
 
 #: ../src/minimap.cc:188
-#, fuzzy
 msgid "Flags"
 msgstr "Drapeaux"
 
 #: ../src/minimap.cc:196
-#, fuzzy
 msgid "Roads"
 msgstr "Routes"
 
 #: ../src/minimap.cc:204 ../src/general_statistics_menu.cc:155
-#, fuzzy
 msgid "Buildings"
 msgstr "B�timents"
 
@@ -99,7 +91,6 @@ msgid "Action"
 msgstr "Action"
 
 #: ../src/fieldaction.cc:450 ../src/fieldaction.cc:599
-#, fuzzy
 msgid "Build roads"
 msgstr "Construire des routes"
 
@@ -112,7 +103,6 @@ msgid "Attack"
 msgstr "Attaque"
 
 #: ../src/fieldaction.cc:577
-#, fuzzy
 msgid "Build mines"
 msgstr "Construire des mines"
 
@@ -170,16 +160,14 @@ msgid "Land"
 msgstr "Terrain"
 
 #: ../src/general_statistics_menu.cc:149
-#, fuzzy
 msgid "Workers"
 msgstr "Liste des travailleurs"
 
 #: ../src/general_statistics_menu.cc:161
 msgid "Wares"
-msgstr "Marchandises"
+msgstr "Ressources"
 
 #: ../src/general_statistics_menu.cc:167
-#, fuzzy
 msgid "Productivity"
 msgstr "Productivit�"
 
@@ -235,7 +223,7 @@ msgstr "Stock"
 
 #: ../src/stock_menu.cc:71
 msgid "Show wares"
-msgstr "Montrer les Marchandises "
+msgstr "Montrer les Ressources"
 
 #: ../src/stock_menu.cc:76
 msgid "Show workers"
@@ -369,17 +357,14 @@ msgid "Sound FX"
 msgstr "Effets Sonores"
 
 #: ../src/game_options_menu.cc:100
-#, fuzzy
 msgid "Save game"
 msgstr "Enregistrer la partie"
 
 #: ../src/game_options_menu.cc:110
-#, fuzzy
 msgid "Load game"
 msgstr "Charger une partie"
 
 #: ../src/game_options_menu.cc:121
-#, fuzzy
 msgid "Exit game"
 msgstr "Quitter le Jeu"
 
@@ -473,7 +458,6 @@ msgid "Do you really want to destroy this "
 msgstr "Etes-vous s�r de vouloir d�truire cela ?"
 
 #: ../src/building_ui.cc:617
-#, fuzzy
 msgid "Stop"
 msgstr "Arr�ter"
 
@@ -483,12 +467,10 @@ msgid "Enhance to %s"
 msgstr "Am�liorer en %s"
 
 #: ../src/building_ui.cc:658
-#, fuzzy
 msgid "Destroy"
 msgstr "D�truire"
 
 #: ../src/building_ui.cc:669
-#, fuzzy
 msgid "Debug"
 msgstr "Champ de debug"
 
@@ -509,7 +491,6 @@ msgid "Trying to become: "
 msgstr "Essaie de devenir:"
 
 #: ../src/building_ui.cc:1246
-#, fuzzy
 msgid "Show worker listing"
 msgstr "Liste des travailleurs"
 
@@ -587,30 +568,27 @@ msgstr "xx"
 
 #: ../src/ware_statistics_menu.cc:347 ../src/ware_statistics_menu.cc:403
 msgid "Ware Statistics"
-msgstr "Statistiques des marchandises"
+msgstr "Statistiques des ressources"
 
 #: ../src/trigger_time.cc:36
 msgid "Time Trigger"
 msgstr "T�che temporelle"
 
 #: ../src/interactive_player.cc:108 ../src/editor/editorinteractive.cc:97
-#, fuzzy
 msgid "Menu"
 msgstr "Menu"
 
 #: ../src/interactive_player.cc:116 ../src/editor/editorinteractive.cc:121
-#, fuzzy
 msgid "Minimap"
 msgstr "Minicarte"
 
 #: ../src/interactive_player.cc:124 ../src/editor/editorinteractive.cc:129
-#, fuzzy
 msgid "Buildhelp"
 msgstr "Aide de construction"
 
 #: ../src/interactive_player.cc:132
 msgid "Tribe's ware encyclopedia"
-msgstr "Encyclop�die des Marchandises de la Tribu"
+msgstr "Encyclop�die des Ressources de la Tribu"
 
 #: ../src/interactive_player.cc:288
 msgid "PAUSE"
@@ -633,27 +611,22 @@ msgid "Main Menu"
 msgstr "Menu Principal"
 
 #: ../src/game_main_menu.cc:50
-#, fuzzy
 msgid "General statistics"
 msgstr "Statistiques g�n�rales"
 
 #: ../src/game_main_menu.cc:58
-#, fuzzy
 msgid "Ware statistics"
-msgstr "Statistiques des marchandises"
+msgstr "Statistiques des ressources"
 
 #: ../src/game_main_menu.cc:66
-#, fuzzy
 msgid "Building statistics"
 msgstr "Statistiques de Construction"
 
 #: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:161
-#, fuzzy
 msgid "Objectives"
 msgstr "Objectifs"
 
 #: ../src/game_main_menu.cc:90
-#, fuzzy
 msgid "Chat"
 msgstr "Dialogue Chat"
 
@@ -770,11 +743,11 @@ msgstr "Le serveur a mal r�pondu. Aurait d� envoy� %i mais a envoy� %i. Ignor�"
 
 #: ../src/encyclopedia_window.cc:42
 msgid "Tribe ware encyclopedia"
-msgstr "Encyclop�die des Marchandises de la Tribu"
+msgstr "Encyclop�die des Ressources de la Tribu"
 
 #: ../src/encyclopedia_window.cc:45
 msgid "Ware"
-msgstr "Marchandise"
+msgstr "Ressource"
 
 #: ../src/encyclopedia_window.cc:51
 msgid "Is Produced by"
@@ -782,30 +755,25 @@ msgstr "est produit par"
 
 #: ../src/encyclopedia_window.cc:55
 msgid "Needs Ware"
-msgstr "N�cessite Marchandise"
+msgstr "N�cessite Ressource"
 
 #: ../src/editor/editorinteractive.cc:105
-#, fuzzy
 msgid "Tool"
 msgstr "Outil"
 
 #: ../src/editor/editorinteractive.cc:113
-#, fuzzy
 msgid "Toolsize"
 msgstr "Taille Outils"
 
 #: ../src/editor/editorinteractive.cc:137
-#, fuzzy
 msgid "Players"
 msgstr "Joueurs "
 
 #: ../src/editor/editorinteractive.cc:145
-#, fuzzy
 msgid "Events"
 msgstr "Ev�nements"
 
 #: ../src/editor/editorinteractive.cc:153
-#, fuzzy
 msgid "Variables"
 msgstr "Variables"
 
@@ -983,7 +951,6 @@ msgid "Single Player Menu"
 msgstr "Menu Solo"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
-#, fuzzy
 msgid "New Game"
 msgstr "Nouvelle partie"
 
@@ -1446,7 +1413,6 @@ msgstr "Conditionnel"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:100
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:143
-#, fuzzy
 msgid "Insert"
 msgstr "Ins�rer"
 
@@ -1531,9 +1497,9 @@ msgid "Toolsize Menu"
 msgstr "Menu Outils de Taille"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:57
-#, fuzzy, c-format
+#, c-format
 msgid "Current Size: %i"
-msgstr "Taille Courante:  %i"
+msgstr "Taille Actuelle :  %i"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:95
 msgid "Current Size"
@@ -1548,7 +1514,6 @@ msgid "I"
 msgstr "I"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:228
-#, fuzzy
 msgid "Make infrastructure"
 msgstr "Cr�er une infrastructure"
 
@@ -1557,7 +1522,6 @@ msgid "B"
 msgstr "B"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:242
-#, fuzzy
 msgid "Allow/forbid buildidngs"
 msgstr "Autoriser/interdire des B�timents"
 
@@ -1857,12 +1821,10 @@ msgid "Allowed Buildings"
 msgstr "B�timents autoris�s"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:59
-#, fuzzy
 msgid "Allowed Buildings:"
 msgstr "B�timents autoris�s :"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
-#, fuzzy
 msgid "Forbidden Buildings:"
 msgstr "B�timents Interdits :"
 
@@ -1878,6 +1840,27 @@ msgstr "Autorise"
 msgid "no descr"
 msgstr "Pas de description"
 
+#~ msgid "New Trigger Menu"
+#~ msgstr "Menu Nouvelle Tâche"
+
+#~ msgid "Time Trigger Options"
+#~ msgstr "Options tâches temporelles"
+
+#~ msgid "Event Option Menu"
+#~ msgstr "Menu Option des événements"
+
+#~ msgid "New Event Menu"
+#~ msgstr "Menu Nouvel Evenement"
+
+#~ msgid "Edit Event Chain Menu"
+#~ msgstr "Menu d'édition de suite des événements"
+
+#~ msgid "Allowed Buildings Menu"
+#~ msgstr "Menu des bâtiments autorisés"
+
+#~ msgid "Set Tool Size Menu"
+#~ msgstr "Menu taille des outils"
+
 #~ msgid ""
 #~ "This Trigger waits a certain time before it is true. It can be configured "
 #~ "to constantly restart itself when the wait time is over for repeating "
@@ -1886,50 +1869,84 @@ msgstr "Pas de description"
 #~ "Cet tâche n'est vraie qu'après un certain temps. Elle peut être "
 #~ "configurée pour constamment redémarrer quand le temps d'attente est "
 #~ "terminé pour les événements répétitifs."
+
 #~ msgid ""
 #~ "This Trigger never changes its state by itself. It is useful to pass it "
 #~ "to some event which changes triggers"
 #~ msgstr ""
 #~ "Cette tâche ne change jamais d'état par elle-même. Elle est utile pour "
 #~ "les événements déclenchants."
+
 #~ msgid ""
 #~ "This trigger gets set when a number of a building type of one player is "
 #~ "available in an area."
 #~ msgstr ""
-#~ "Cette tâche se déclenche quand un certain nombre de bâtiments d'un joueur "
-#~ "est disponible dans une zone."
+#~ "Cette tâche se déclenche quand un certain nombre de bâtiments d'un "
+#~ "joueur est disponible dans une zone."
+
+#~ msgid "greenland"
+#~ msgstr "greenland"
+
+#~ msgid "blackland"
+#~ msgstr "blackland"
+
+#~ msgid "winterland"
+#~ msgstr "winterland"
+
 #~ msgid ""
 #~ "This Event shows a messagebox. The user can choose to make it modal/non-"
 #~ "modal and to add a picture. Events can be assigned to each button to use "
 #~ "this as a Choose Dialog for the user"
 #~ msgstr ""
-#~ "Cet événement affiche une boîte de dialogue. L'utilisateur peut choisir "
-#~ "d'en faire une fenêtre modale/non-modale et d'ajouter une image. Des "
-#~ "événements peuvent être associés à chaque bouton afin de l'utiliser comme "
-#~ "une fenêtre d'options pour l'utilisateur."
+#~ "Cet événement affiche une boîte de dialogue. L'utilisateur peut "
+#~ "choisir d'en faire une fenêtre modale/non-modale et d'ajouter une image. "
+#~ "Des événements peuvent être associés à chaque bouton afin de "
+#~ "l'utiliser comme une fenêtre d'options pour l'utilisateur."
+
 #~ msgid "This Event centers the Players View on a certain field"
 #~ msgstr "Cet événement centre la caméra sur une zone donnée"
+
 #~ msgid ""
 #~ "This Event makes a user definable part of the map visible for a "
 #~ "selectable user"
 #~ msgstr ""
 #~ "Cet événement permet de révéler une partie de la carte à un joueur "
 #~ "sélectionné."
+
 #~ msgid ""
 #~ "This Event conquers a user definable part of the map for one player if "
 #~ "there isn't a player already there"
 #~ msgstr ""
-#~ "Cet événement conquiert une zone définie par l'utilisateur à un joueur "
-#~ "pas encore présent."
+#~ "Cet événement conquiert une zone définie par l'utilisateur à un "
+#~ "joueur pas encore présent."
+
 #~ msgid ""
 #~ "Allows/Disables a certain building for a player so that it can be build "
 #~ "or it can't any longer"
 #~ msgstr ""
-#~ "Autorise/Interdit un bâtiment pour un joueur de manière à ce que l'on ne "
-#~ "puisse pas ou plus le construire"
+#~ "Autorise/Interdit un bâtiment pour un joueur de manière à ce que l'on "
+#~ "ne puisse pas ou plus le construire"
+
 #~ msgid "Manually set a Null Trigger to a given value"
 #~ msgstr "Définir manuellement un événement nul à une certaine valeur"
+
+#~ msgid "Single Map"
+#~ msgstr "Carte Solo"
+
 #~ msgid "Unhide Objective"
 #~ msgstr "Afficher l'objectif"
+
 #~ msgid "Hide or unhide an objective so that the player can see it"
 #~ msgstr "Afficher ou masquer un objectif pour que le joueur puisse le voir"
+
+#~ msgid "Options Menu"
+#~ msgstr "Menu Options"
+
+#~ msgid "Editor Main Menu"
+#~ msgstr "Menu Prinicipal de l'Ã©diteur"
+
+#~ msgid "constructionsite"
+#~ msgstr "SiteDeContruction"
+
+#~ msgid "headquarters"
+#~ msgstr "QuartierGÃ©nÃ©ral"
