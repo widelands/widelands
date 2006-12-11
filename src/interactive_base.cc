@@ -29,6 +29,8 @@
 #include "keycodes.h"
 #include "map.h"
 #include "mapview.h"
+#include "mapviewpixelconstants.h"
+#include "mapviewpixelfunctions.h"
 #include "minimap.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
@@ -71,7 +73,10 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 		m_show_workarea_preview = s.get_bool("workareapreview", false);
 	}
 
-   m_fsd.fieldsel_freeze = false;
+	//  Having this in the initializer list (before Sys_InitGraphics) will given
+	//  funny results.
+	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png"),
+
    m_egbase=g;
 
    m_display_flags = 0;
@@ -87,12 +92,6 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_mapview=0;
    m_mm=0;
-
-   m_fsd.fieldsel_pos.x=0;
-   m_fsd.fieldsel_pos.y=0;
-	m_fsd.fieldsel_jobid = Overlay_Manager::Job_Id::Null();
-   m_fsd.fieldsel_pic=g_gr->get_picture( PicMod_Game,  "pics/fsel.png" );
-   m_fsd.fieldsel_radius=0;
 
    m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
    m_jobid = Overlay_Manager::Job_Id::Null();
@@ -120,58 +119,54 @@ void Interactive_Base::need_complete_redraw( void ) {
    m_mapview->need_complete_redraw();
 }
 
-/*
-===============
-Change the field selection. Does not honour the freeze!
-===============
-*/
-void Interactive_Base::set_fieldsel_pos(Coords c)
+void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 {
-   // Remove old fieldsel pointer
-   if (not m_fsd.fieldsel_jobid.isNull())
-      get_map()->get_overlay_manager()->remove_overlay(m_fsd.fieldsel_jobid);
-	m_fsd.fieldsel_jobid= get_map()->get_overlay_manager()->get_a_job_id();
-   m_fsd.fieldsel_pos=c;
-   // register fieldsel overlay position
-   MapRegion mr(get_map(), c, m_fsd.fieldsel_radius);
-   FCoords fc;
-   while(mr.next(&fc)) {
-      get_map()->get_overlay_manager()->register_overlay(fc, m_fsd.fieldsel_pic, 7, Coords(-1,-1), m_fsd.fieldsel_jobid);
-   }
+	Overlay_Manager & overlay_manager = map().overlay_manager();
+
+	// Remove old sel pointer
+	if (not m_sel.jobid.isNull()) overlay_manager.remove_overlay(m_sel.jobid);
+	const Overlay_Manager::Job_Id jobid =
+		m_sel.jobid = overlay_manager.get_a_job_id();
+
+	m_sel.pos = center;
+
+   // register sel overlay position
+	if (m_sel.triangles) {
+		assert(center.triangle.t == TCoords::D or center.triangle.t == TCoords::R);
+		MapTriangleRegion mtr(map(), center.triangle, m_sel.radius);
+		TCoords tc;
+		while (mtr.next(tc)) overlay_manager.register_overlay
+			(tc, m_sel.pic, 7, Coords(-1, -1), jobid);
+	} else {
+		MapRegion mr(map(), center.node, m_sel.radius);
+		FCoords fc;
+		while (mr.next(fc)) overlay_manager.register_overlay
+			(fc, m_sel.pic, 7, Coords(-1, -1), jobid);
+	}
+
 }
 
 /*
- * Set the current fieldsel selection radius.
+ * Set the current sel selection radius.
  */
-void Interactive_Base::set_fieldsel_radius(int n) {
-   m_fsd.fieldsel_radius=n;
-   set_fieldsel_pos(get_fieldsel_pos()); // redraw
+void Interactive_Base::set_sel_radius(const uint n) {
+	if (n != m_sel.radius) {
+		m_sel.radius = n;
+		set_sel_pos(get_sel_pos()); //  redraw
+	}
 }
 
 /*
  *  [ protected functions ]
  *
- * Set/Unset fieldsel picture
+ * Set/Unset sel picture
  */
-void Interactive_Base::set_fieldsel_picture(const char* file) {
-   m_fsd.fieldsel_pic=g_gr->get_picture( PicMod_Game,  file );
-   set_fieldsel_pos(get_fieldsel_pos()); // redraw
+void Interactive_Base::set_sel_picture(const char * const file) {
+   m_sel.pic = g_gr->get_picture(PicMod_Game, file);
+   set_sel_pos(get_sel_pos()); //  redraw
 }
-void Interactive_Base::unset_fieldsel_picture(void) {
-   set_fieldsel_picture("pics/fsel.png");
-}
-
-
-/*
-===============
-Interactive_Base::set_fieldsel_freeze
-
-Field selection is frozen while the field action dialog is visible
-===============
-*/
-void Interactive_Base::set_fieldsel_freeze(bool yes)
-{
-	m_fsd.fieldsel_freeze = yes;
+void Interactive_Base::unset_sel_picture(void) {
+   set_sel_picture("pics/fsel.png");
 }
 
 
@@ -259,12 +254,15 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 		 or
 		 not dynamic_cast<const Game * const>(get_egbase()))
 	{
-      // Show fsel coordinates
+      // Show sel coordinates
       char buf[100];
-      Coords fsel = get_fieldsel_pos();
 
-      sprintf(buf, "%3i %3i", fsel.x, fsel.y);
-      g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf, Align_Left);
+	   snprintf(buf, 100, "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
+	   g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf, Align_Left);
+	   assert(m_sel.pos.triangle.t < 2);
+	   const char * const triangle_string[] = {"down", "right"};
+	   snprintf(buf, 100, "%3i %3i %s", m_sel.pos.triangle.x, m_sel.pos.triangle.y, triangle_string[m_sel.pos.triangle.t]);
+	   g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 25, buf, Align_Left);
    }
 
    if (get_display_flag(dfDebug))
@@ -273,7 +271,7 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
       char buf[100];
 		sprintf(buf, "%5.1f fps (avg: %5.1f fps)",
 				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  75, 5, buf, Align_Left);
+		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, 85, 5, buf, Align_Left);
 	}
 }
 

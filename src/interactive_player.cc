@@ -122,7 +122,7 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
 		 &Interactive_Player::toggle_buildhelp, this,
 		 _("Buildhelp"));
-	
+
 	new UI::Button<Interactive_Player>
       (this,
        x + 136, y, 34, 34,
@@ -451,11 +451,10 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	if (!get_player()->is_field_seen(get_fieldsel_pos()))
-		return;
+	if (not get_player()->is_field_seen(get_sel_pos().node)) return;
 
 	// Special case for buildings
-	BaseImmovable *imm = m_game->get_map()->get_immovable(get_fieldsel_pos());
+	BaseImmovable * const imm = m_game->get_map()->get_immovable(get_sel_pos().node);
 
 	if (imm && imm->get_type() == Map_Object::BUILDING) {
 		Building *building = (Building *)imm;

@@ -21,6 +21,7 @@
 #define __S__FIELD_H
 
 #include <cassert>
+#include "geometry.h"
 #include "compile_assert.h"
 #include "constants.h"
 #include "types.h"
@@ -98,6 +99,17 @@ class Field {
 	friend class Bob;
 	friend class BaseImmovable;
 
+	struct Triangle {
+
+		/**
+		 * This could be a terrain-type index instead. It could be for example 1
+		 * byte instead the 4 bytes currently used by the pointer. That would
+		 * save 3 bytes for each triangle, which is 384 kiB on a 256 * 256 map.
+		 */
+		const Terrain_Descr * terrain_type;
+
+	};
+
 public:
 	enum Buildhelp_Index {
 		Buildhelp_Flag   = 0,
@@ -154,7 +166,9 @@ private:
 	/** how much has there been*/
 	uchar m_starting_res_amount;
 	uchar m_res_amount;
-	const Terrain_Descr *terr, *terd;
+
+	/**  Indexed by TCoords::TriangleIndex.*/
+	Triangle triangles[2];
 
 	/** linked list, \sa Bob::m_linknext*/
 	Bob* bobs;
@@ -164,10 +178,17 @@ public:
    inline uchar get_height() const { return height; }
 	FieldCaps get_caps() const {return caps;}
 
-	const Terrain_Descr & get_terr() const throw () {return *terr;}
-	const Terrain_Descr & get_terd() const throw () {return *terd;}
-	void set_terrainr(const Terrain_Descr & p) throw () {terr = &p;}
-	void set_terraind(const Terrain_Descr & p) throw () {terd = &p;}
+	const Terrain_Descr & get_terr() const throw ()
+	{return *triangles[TCoords::R].terrain_type;}
+	const Terrain_Descr & get_terd() const throw ()
+	{return *triangles[TCoords::D].terrain_type;}
+	void set_terrain(const TCoords::TriangleIndex t, const Terrain_Descr & p)
+		throw ()
+	{triangles[t]         .terrain_type = &p;}
+	void set_terrainr(const Terrain_Descr & p) throw ()
+	{triangles[TCoords::R].terrain_type = &p;}
+	void set_terraind(const Terrain_Descr & p) throw ()
+	{triangles[TCoords::D].terrain_type = &p;}
 
 	inline Bob* get_first_bob(void) { return bobs; }
 	inline BaseImmovable* get_immovable() { return immovable; }

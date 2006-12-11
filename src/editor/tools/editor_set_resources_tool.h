@@ -31,12 +31,12 @@ this decreases the resources of a field by a value
 */
 class Editor_Set_Resources_Tool : public Editor_Tool {
    public:
-      Editor_Set_Resources_Tool() : Editor_Tool(this,this) { m_set_to=0; m_cur_res=0; }
+	Editor_Set_Resources_Tool() : m_cur_res(0), m_set_to(0) {}
       virtual ~Editor_Set_Resources_Tool() { }
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-
-      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_set_resources.png"; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel_editor_set_resources.png";}
 
       inline int get_set_to(void) { return m_set_to; }
       inline void set_set_to(int n) { m_set_to=n; }

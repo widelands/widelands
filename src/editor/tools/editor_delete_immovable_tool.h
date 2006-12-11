@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,11 +31,11 @@ this deletes immovables from the map
 */
 class Editor_Delete_Immovable_Tool : public Editor_Tool {
    public:
-      Editor_Delete_Immovable_Tool() : Editor_Tool(this,this) { }
       ~Editor_Delete_Immovable_Tool() { }
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_delete.png"; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel_editor_delete.png";}
 };
 
 #endif

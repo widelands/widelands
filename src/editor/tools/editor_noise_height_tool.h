@@ -31,13 +31,13 @@ this decreases the height of a field by a value
 */
 class Editor_Noise_Height_Tool : public Editor_Tool {
    public:
-      Editor_Noise_Height_Tool(Editor_Set_Height_Tool* sht) :
-        Editor_Tool(sht,sht) { m_upper_value=14; m_lower_value=10; m_sht=sht; }
+	Editor_Noise_Height_Tool(Editor_Set_Height_Tool * const sht) :
+	Editor_Tool(sht, sht), m_sht(sht), m_upper_value(14), m_lower_value(10) {}
       virtual ~Editor_Noise_Height_Tool() { m_third=m_second=0; } // don't delete this, somone else will care
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-
-      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_noise_height.png"; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel_editor_noise_height.png";}
 
       inline Editor_Set_Height_Tool* get_sht(void) { return m_sht; }
 

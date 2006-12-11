@@ -18,7 +18,7 @@
  */
 
 
-#include "editor_set_both_terrain_tool.h"
+#include "editor_set_terrain_tool.h"
 #include "editor_tool_set_terrain_options_menu.h"
 #include "editorinteractive.h"
 #include "graphic.h"
@@ -49,8 +49,11 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent, int index,
-						Editor_Set_Both_Terrain_Tool* sbt, UI::UniqueWindow::Registry *registry)
+Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu
+(Editor_Interactive * parent,
+ int index,
+ Editor_Set_Terrain_Tool * sbt,
+ UI::UniqueWindow::Registry * registry)
 	: Editor_Tool_Options_Menu(parent, index, registry, _("Terrain Select").c_str())
 {
    m_sbt=sbt;
@@ -59,7 +62,8 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    const int xstart=5;
    const int ystart=25;
    const int yend=25;
-   int nr_textures=get_parent()->get_map()->get_world()->get_nr_terrains();
+	World & world = *get_parent()->get_map()->get_world();
+   const int nr_textures = world.get_nr_terrains();
    int textures_in_row=(int)(sqrt((float)nr_textures));
    if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
 
@@ -85,8 +89,11 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
       while(i<=nr_textures) {
          if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
          // Get Terrain
-         Terrain_Descr* ter=get_parent()->get_map()->get_world()->get_terrain(i-1);
-         if(ter->get_is()!=check[checkfor]) { i++; continue; }
+         const uchar ter_is = world.get_terrain(i - 1)->get_is();
+         if (ter_is != check[checkfor]) {
+            ++i;
+            continue;
+         }
 
          // Create a surface for this
 			uint picw, pich;
@@ -110,27 +117,27 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          int pic_y=pich-small_pich-1;
 
          // Check is green
-         if(ter->get_is()==0) {
+	      if (ter_is == 0) {
             target->blit(pic_x,pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_green.png" ));
             pic_x+=small_picw+1;
          }
-         else if(ter->get_is()&TERRAIN_WATER) {
+	      else if (ter_is & TERRAIN_WATER) {
             target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_water.png" ));
             pic_x+=small_picw+1;
          }
-         else if(ter->get_is()&TERRAIN_MOUNTAIN) {
+	      else if (ter_is & TERRAIN_MOUNTAIN) {
             target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_mountain.png" ));
             pic_x+=small_picw+1;
          }
-         else if(ter->get_is()&TERRAIN_ACID) {
+	      else if (ter_is & TERRAIN_ACID) {
             target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_dead.png" ));
             pic_x+=small_picw+1;
          }
-         else if(ter->get_is()&TERRAIN_UNPASSABLE) {
+	      else if (ter_is & TERRAIN_UNPASSABLE) {
             target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_unpassable.png" ));
             pic_x+=small_picw+1;
          }
-         else if(ter->get_is()&TERRAIN_DRY) {
+	      else if (ter_is & TERRAIN_DRY) {
             target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_dry.png" ));
             pic_x+=small_picw+1;
          }
@@ -161,7 +168,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    int j=m_sbt->get_nr_enabled();
    for(int i=0; j; i++) {
       if(m_sbt->is_enabled(i)) {
-         buf+=get_parent()->get_map()->get_world()->get_terrain(i)->get_name();
+         buf += world.get_terrain(i)->get_name();
          buf+=" ";
          --j;
       }
@@ -208,10 +215,11 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
    select_correct_tool();
 
    std::string buf=_("Current: ");
+	World & world = *get_parent()->get_map()->get_world();
    int j=m_sbt->get_nr_enabled();
    for(int i=0; j; i++) {
       if(m_sbt->is_enabled(i)) {
-         buf+=get_parent()->get_map()->get_world()->get_terrain(i)->get_name();
+         buf += world.get_terrain(i)->get_name();
          buf+=" ";
          --j;
       }

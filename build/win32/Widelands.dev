@@ -3857,7 +3857,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit382]
-FileName=..\..\src\editor\tools\editor_set_both_terrain_tool.cc
+FileName=..\..\src\editor\tools\editor_set_terrain_tool.cc
 CompileCpp=1
 Folder=editor/tools
 Compile=1
@@ -3867,27 +3867,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit383]
-FileName=..\..\src\editor\tools\editor_set_both_terrain_tool.h
-CompileCpp=1
-Folder=editor/tools
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit384]
-FileName=..\..\src\editor\tools\editor_set_down_terrain_tool.cc
-CompileCpp=1
-Folder=editor/tools
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit385]
-FileName=..\..\src\editor\tools\editor_set_down_terrain_tool.h
+FileName=..\..\src\editor\tools\editor_set_terrain_tool.h
 CompileCpp=1
 Folder=editor/tools
 Compile=1
@@ -3928,26 +3908,6 @@ BuildCmd=
 
 [Unit389]
 FileName=..\..\src\editor\tools\editor_set_resources_tool.h
-CompileCpp=1
-Folder=editor/tools
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit390]
-FileName=..\..\src\editor\tools\editor_set_right_terrain_tool.cc
-CompileCpp=1
-Folder=editor/tools
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit391]
-FileName=..\..\src\editor\tools\editor_set_right_terrain_tool.h
 CompileCpp=1
 Folder=editor/tools
 Compile=1

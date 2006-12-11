@@ -36,8 +36,9 @@ class Editor_Place_Immovable_Tool : public Editor_Tool, public MultiSelect {
       }
       ~Editor_Place_Immovable_Tool() { }
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_place_immovable.png"; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel_editor_place_immovable.png";}
 };
 
 #endif

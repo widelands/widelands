@@ -96,16 +96,15 @@ void Trigger_Building::check_set_conditions(Game* game) {
 		 m_player <= 0 or m_player > MAX_PLAYERS)
 		return;
 
-   MapRegion mrc(game->get_map(), m_pt, m_area);
 
    int count=0;
-   FCoords f;
-   while(mrc.next(&f)) {
-      BaseImmovable* imm=f.field->get_immovable();
-      if(!imm) continue;
-      if(imm->get_type()!=Map_Object::BUILDING) continue;
+	MapRegion mr(game->map(), m_pt, m_area);
+	FCoords fc;
+	while (mr.next(fc)) if
+		(const Building * const b =
+		 dynamic_cast<const Building * const>(fc.field->get_immovable()))
+	{
 
-      Building* b=static_cast<Building*>(imm);
       if(b->get_owner()!=game->get_player(m_player)) continue;
       std::string name=b->get_name();
       if(name != m_building) continue;

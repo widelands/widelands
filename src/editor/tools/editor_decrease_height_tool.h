@@ -31,12 +31,12 @@ this decreases the height of a field by a value
 */
 class Editor_Decrease_Height_Tool : public Editor_Tool {
    public:
-      Editor_Decrease_Height_Tool() : Editor_Tool(this,this) { m_changed_by=1; }
+	Editor_Decrease_Height_Tool() : m_changed_by(1) {}
       virtual ~Editor_Decrease_Height_Tool() { }
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-
-      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_decrease_height.png"; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel_editor_decrease_height.png";}
 
       inline int get_changed_by(void) { return m_changed_by; }
       inline void set_changed_by(int n) { m_changed_by=n; }

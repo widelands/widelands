@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,5 +17,19 @@
  *
  */
 
+#ifndef __S__EDITOR_SET_TERRAIN_TOOL
+#define __S__EDITOR_SET_TERRAIN_TOOL
 
-#include "editor_set_down_terrain_tool.h"
+#include "editor_tool.h"
+#include "multi_select.h"
+
+class Editor_Set_Terrain_Tool : public Editor_Tool, public MultiSelect {
+   public:
+	virtual ~Editor_Set_Terrain_Tool() {}
+
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw () {return "pics/fsel.png";}
+	bool operates_on_triangles() const throw () {return true;};
+};
+
+#endif // __S__EDITOR_SET_TERRAIN_TOOL

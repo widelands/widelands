@@ -32,20 +32,20 @@ choses an object to place randomly from all enabled
 and places this on the current field
 ===========
 */
-int Editor_Place_Immovable_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
-   if(!get_nr_enabled()) return parent->get_fieldsel_radius();
-
-   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
-   Coords c;
-
-   while(mrc.next(&c)) {
-      Field *f = parent->get_map()->get_field(c);
-      if (f->get_immovable()) {
-         if(f->get_immovable()->get_size() != BaseImmovable::NONE)
+int Editor_Place_Immovable_Tool::handle_click_impl
+(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+{
+	const int radius = parent.get_sel_radius();
+	if (not get_nr_enabled()) return radius;
+	MapRegion mr(map, center.node, radius);
+	FCoords fc;
+	while (mr.next(fc)) {
+		if (fc.field->get_immovable()) {
+			if (fc.field->get_immovable()->get_size() != BaseImmovable::NONE)
             continue;
       }
 
-		parent->get_editor()->create_immovable(c, get_random_enabled(), 0);
+		parent.get_editor()->create_immovable(fc, get_random_enabled(), 0);
    }
-   return parent->get_fieldsel_radius()+2;
+   return radius + 2;
 }

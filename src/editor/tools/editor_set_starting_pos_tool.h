@@ -43,15 +43,15 @@ class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
       Editor_Set_Starting_Pos_Tool();
       virtual ~Editor_Set_Starting_Pos_Tool();
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-
-      virtual const char* get_fsel_impl(void) { if(m_current_fieldsel_pic.size()) return m_current_fieldsel_pic.c_str(); return 0; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return m_current_sel_pic.size() ? m_current_sel_pic.c_str() : 0;}
 
       // tool functions
       void set_current_player(int i);
 
    private:
-      std::string m_current_fieldsel_pic;
+      std::string m_current_sel_pic;
 };
 
 int Editor_Tool_Set_Starting_Pos_Callback(const TCoords, void *, int);

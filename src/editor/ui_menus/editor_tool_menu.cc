@@ -32,7 +32,7 @@
 #include "editor_decrease_height_tool.h"
 #include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
-#include "editor_set_both_terrain_tool.h"
+#include "editor_set_terrain_tool.h"
 #include "editor_place_bob_tool.h"
 #include "editor_tool_change_resources_options_menu.h"
 #include "editor_increase_resources_tool.h"
@@ -159,7 +159,7 @@ void Editor_Tool_Menu::changed_to(void) {
 
          case 2:
             new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent, index,
-                  static_cast<Editor_Set_Both_Terrain_Tool*>(m_tools->tools[index]),
+                  static_cast<Editor_Set_Terrain_Tool*>(m_tools->tools[index]),
                   &((*m_options_menus)[index]));
             break;
 

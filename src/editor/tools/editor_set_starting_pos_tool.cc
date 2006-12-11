@@ -18,12 +18,12 @@
  */
 
 #include <string>
+#include "building.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_tool.h"
 #include "editor_set_starting_pos_tool.h"
 #include "graphic.h"
-#include "immovable.h"
 #include "map.h"
 #include "overlay_manager.h"
 
@@ -55,10 +55,9 @@ int Editor_Tool_Set_Starting_Pos_Callback(const TCoords c, void * data, int) {
 /*
  * Constructor
  */
-Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool() : Editor_Tool(this,this) {
-   m_current_fieldsel_pic="";
-   m_current_player=0;
- }
+Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool() :
+m_current_sel_pic("")
+{m_current_player = 0;}
 
 /*
  * Destructor
@@ -69,29 +68,34 @@ Editor_Set_Starting_Pos_Tool::~Editor_Set_Starting_Pos_Tool() {
 /*
  * click
  */
-int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* ei) {
-	assert(0 <= fc.x);
-	assert(fc.x < map->get_width());
-	assert(0 <= fc.y);
-	assert(fc.y < map->get_height());
-   if(m_current_player) {
-      if(map->get_nrplayers()<m_current_player) {
+int Editor_Set_Starting_Pos_Tool::handle_click_impl
+(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+{
+	assert(0 <= center.node.x);
+	assert(center.node.x < map.get_width());
+	assert(0 <= center.node.y);
+	assert(center.node.y < map.get_height());
+	if (m_current_player) {
+		if (map.get_nrplayers() < m_current_player) {
          // mmh, my current player is not valid
          // maybe the user has loaded a new map while this tool
          // was activated. we set the new player to a valid one. The
-         // fsel pointer is the only thing that stays wrong, but this is not important
+			// sel pointer is the only thing that stays wrong, but this is not
+			// important
          m_current_player=1;
       }
+
+		const Coords starting_pos = map.get_starting_pos(m_current_player);
 
       // If the player is already created in the editor, this means
       // that there might be already a hq placed somewhere. This needs to be
       // deleted before a starting position change can occure
-      if(ei->get_editor()->get_player(m_current_player)) {
-         if (not ei->get_map()->get_starting_pos(m_current_player).is_invalid()) {
-            BaseImmovable* imm = ei->get_map()->get_field(ei->get_map()->get_starting_pos(m_current_player))->get_immovable();
-            if(imm && imm->get_type() == Map_Object::BUILDING) return 1;
-         }
-      }
+		if (parent.get_editor()->get_player(m_current_player))
+			if (not starting_pos.is_invalid())
+				if
+					(dynamic_cast<Building * const>
+					 (map.get_field(starting_pos)->get_immovable()))
+					return 1;
 
       std::string picsname="pics/editor_player_";
       picsname+=static_cast<char>((m_current_player/10) + 0x30);
@@ -102,17 +106,18 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
 		g_gr->get_picture_size(picid, w, h);
 
       // check if field is valid
-      if(Editor_Tool_Set_Starting_Pos_Callback(fc, map,0)) {
+		if(Editor_Tool_Set_Starting_Pos_Callback(starting_pos, &map, 0)) {
+			Overlay_Manager & overlay_manager = map.overlay_manager();
          // Remove old overlay if any
-         Coords c=map->get_starting_pos(m_current_player);
-         if (c.is_valid())
-            map->get_overlay_manager()->remove_overlay(c,picid);
+			if (starting_pos.is_valid())
+				overlay_manager.remove_overlay(starting_pos, picid);
 
          // Add new overlay
-         map->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
+			overlay_manager.register_overlay
+				(center.node, picid, 8, Coords(w / 2,STARTING_POS_HOTSPOT_Y));
 
          // And set new player pos
-         map->set_starting_pos(m_current_player, fc);
+			map.set_starting_pos(m_current_player, center.node);
 
       }
    }
@@ -129,5 +134,5 @@ void Editor_Set_Starting_Pos_Tool::set_current_player(int i) {
       picsname+=static_cast<char>((m_current_player/10) + 0x30);
       picsname+=static_cast<char>((m_current_player%10) + 0x30);
       picsname+="_pos.png";
-      m_current_fieldsel_pic=picsname;
+      m_current_sel_pic = picsname;
 }

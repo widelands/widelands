@@ -131,7 +131,7 @@ void Map_View::set_viewpoint(Point vp)
  */
 bool Map_View::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT) {
-         track_fsel(x, y);
+		track_sel(x, y);
 
 			fieldclicked.call();
 	}
@@ -166,8 +166,7 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff)
 		set_rel_viewpoint(Point(xdiff, ydiff));
 	}
 
-	if (!m_intbase->get_fieldsel_freeze())
-		track_fsel(x, y);
+	if (not m_intbase->get_sel_freeze()) track_sel(x, y);
 
 	g_gr->update_fullscreen();
 }
@@ -175,19 +174,15 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff)
 
 /*
 ===============
-Map_View::track_fsel(int mx, int my)
+Map_View::track_sel(int mx, int my)
 
-Move the fsel to the given mouse position.
-Does not honour fieldsel freeze.
+Move the sel to the given mouse position.
+Does not honour sel freeze.
 ===============
 */
-void Map_View::track_fsel(int mx, int my)
+void Map_View::track_sel(int mx, int my)
 {
-	FCoords fsel;
-
-	Coords c = MapviewPixelFunctions::calc_node_and_triangle
-		(*m_intbase->get_map(), m_viewpoint.x + mx, m_viewpoint.y + my).node;
-	fsel = FCoords(c, m_intbase->get_map()->get_field(c));
-	// Apply the new fieldsel
-	m_intbase->set_fieldsel_pos(fsel);
+	m_intbase->set_sel_pos
+		(MapviewPixelFunctions::calc_node_and_triangle
+		 (m_intbase->map(), m_viewpoint.x + mx, m_viewpoint.y + my));
 }

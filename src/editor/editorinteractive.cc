@@ -34,9 +34,7 @@
 #include "editor_place_immovable_tool.h"
 #include "editor_place_bob_tool.h"
 #include "editor_player_menu.h"
-#include "editor_set_both_terrain_tool.h"
-#include "editor_set_down_terrain_tool.h"
-#include "editor_set_right_terrain_tool.h"
+#include "editor_set_terrain_tool.h"
 #include "editor_set_starting_pos_tool.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
@@ -168,7 +166,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    Editor_Set_Height_Tool* sht=new Editor_Set_Height_Tool();
    tools.tools.push_back(new Editor_Increase_Height_Tool(new Editor_Decrease_Height_Tool(), sht));
    tools.tools.push_back(new Editor_Noise_Height_Tool(sht));
-   tools.tools.push_back(new Editor_Set_Both_Terrain_Tool(new Editor_Set_Down_Terrain_Tool(), new Editor_Set_Right_Terrain_Tool()));
+   tools.tools.push_back(new Editor_Set_Terrain_Tool());
    tools.tools.push_back(new Editor_Place_Immovable_Tool(new Editor_Delete_Immovable_Tool()));
    tools.tools.push_back(new Editor_Set_Starting_Pos_Tool());
    tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
@@ -201,7 +199,7 @@ Editor_Interactive::~Editor_Interactive() {
       delete tools.tools.back();
       tools.tools.pop_back();
    }
-   unset_fieldsel_picture(); // reset default fsel
+   unset_sel_picture(); // reset default sel
 }
 
 /*
@@ -302,22 +300,21 @@ the function of the currently selected tool
 ===========
 */
 void Editor_Interactive::field_clicked() {
-   Map* m=get_map();
-   FCoords cords(get_fieldsel_pos(), m->get_field(get_fieldsel_pos()));
-   tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
+	tools.tools[tools.current_tool_index]
+		->handle_click(tools.use_tool, map(), get_sel_pos(), *this);
    get_mapview()->need_complete_redraw();
    set_need_save(true);
 }
 
 /*
- * Set the current fieldsel position and, if
+ * Set the current sel position and, if
  * a tool is selected and the first mouse button is pressed
  * click this field
  */
-void Editor_Interactive::set_fieldsel_pos(Coords c) {
-	Interactive_Base::set_fieldsel_pos(c);
+void Editor_Interactive::set_sel_pos(const Node_and_Triangle sel) {
+	Interactive_Base::set_sel_pos(sel);
 	if
-		(c != get_fieldsel_pos()
+		(sel != get_sel_pos()
 		 and
 		 SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_LEFT))
       field_clicked();
@@ -401,36 +398,36 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
    if(down) {
       // only on down events
       switch(code) {
-                  // Fieldsel radius
+			// Sel radius
          case KEY_1:
-            set_fieldsel_radius(0);
+			set_sel_radius(0);
             return true;
          case KEY_2:
-            set_fieldsel_radius(1);
+			set_sel_radius(1);
             return true;
          case KEY_3:
-            set_fieldsel_radius(2);
+			set_sel_radius(2);
             return true;
          case KEY_4:
-            set_fieldsel_radius(3);
+			set_sel_radius(3);
             return true;
          case KEY_5:
-            set_fieldsel_radius(4);
+			set_sel_radius(4);
             return true;
          case KEY_6:
-            set_fieldsel_radius(5);
+			set_sel_radius(5);
             return true;
          case KEY_7:
-            set_fieldsel_radius(6);
+			set_sel_radius(6);
             return true;
          case KEY_8:
-            set_fieldsel_radius(7);
+			set_sel_radius(7);
             return true;
          case KEY_9:
-            set_fieldsel_radius(8);
+			set_sel_radius(8);
             return true;
          case KEY_0:
-            set_fieldsel_radius(9);
+			set_sel_radius(9);
             return true;
 
          case KEY_LSHIFT:
@@ -526,16 +523,17 @@ void Editor_Interactive::select_tool(int n, int which) {
    if(which==0 && n!=tools.current_tool_index) {
       // A new tool has been selected. Remove all
       // registered overlay callback functions
-      get_map()->get_overlay_manager()->register_overlay_callback_function(0,0);
-      get_map()->recalc_whole_map();
+		map().overlay_manager().register_overlay_callback_function(0, 0);
+		map().recalc_whole_map();
 
    }
    tools.current_tool_index=n;
    tools.use_tool=which;
 
-   const char* fselpic= tools.tools[n]->get_fsel(which);
-   if(!fselpic) unset_fieldsel_picture();
-   else set_fieldsel_picture(fselpic);
+   const char* selpic= tools.tools[n]->get_sel(which);
+   if (not selpic) unset_sel_picture();
+   else              set_sel_picture(selpic);
+	set_sel_triangles(tools.tools[n]->operates_on_triangles());
 }
 
 /*

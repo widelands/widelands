@@ -62,18 +62,13 @@
 		BF22DDA20A5FB72B00D0292B /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB930A5FB72A00D0292B /* editor_place_bob_tool.h */; };
 		BF22DDA30A5FB72B00D0292B /* editor_place_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB940A5FB72A00D0292B /* editor_place_immovable_tool.cc */; };
 		BF22DDA40A5FB72B00D0292B /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB950A5FB72A00D0292B /* editor_place_immovable_tool.h */; };
-		BF22DDA50A5FB72B00D0292B /* editor_set_both_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB960A5FB72A00D0292B /* editor_set_both_terrain_tool.cc */; };
-		BF22DDA60A5FB72B00D0292B /* editor_set_both_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB970A5FB72A00D0292B /* editor_set_both_terrain_tool.h */; };
-		BF22DDA70A5FB72B00D0292B /* editor_set_down_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB980A5FB72A00D0292B /* editor_set_down_terrain_tool.cc */; };
-		BF22DDA80A5FB72B00D0292B /* editor_set_down_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB990A5FB72A00D0292B /* editor_set_down_terrain_tool.h */; };
-		BF22DDA90A5FB72B00D0292B /* editor_set_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB9A0A5FB72A00D0292B /* editor_set_height_tool.cc */; };
 		BF22DDAA0A5FB72B00D0292B /* editor_set_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB9B0A5FB72A00D0292B /* editor_set_height_tool.h */; };
 		BF22DDAB0A5FB72B00D0292B /* editor_set_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB9C0A5FB72A00D0292B /* editor_set_resources_tool.cc */; };
 		BF22DDAC0A5FB72B00D0292B /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB9D0A5FB72A00D0292B /* editor_set_resources_tool.h */; };
-		BF22DDAD0A5FB72B00D0292B /* editor_set_right_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB9E0A5FB72A00D0292B /* editor_set_right_terrain_tool.cc */; };
-		BF22DDAE0A5FB72B00D0292B /* editor_set_right_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB9F0A5FB72A00D0292B /* editor_set_right_terrain_tool.h */; };
 		BF22DDAF0A5FB72B00D0292B /* editor_set_starting_pos_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA00A5FB72A00D0292B /* editor_set_starting_pos_tool.cc */; };
 		BF22DDB00A5FB72B00D0292B /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA10A5FB72A00D0292B /* editor_set_starting_pos_tool.h */; };
+		BF22DDA60A5FB72B00D0292B /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB970A5FB72A00D0292B /* editor_set_terrain_tool.h */; };
+		BF22DDA70A5FB72B00D0292B /* editor_set_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB980A5FB72A00D0292B /* editor_set_terrain_tool.cc */; };
 		BF22DDB10A5FB72B00D0292B /* editor_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA20A5FB72A00D0292B /* editor_tool.h */; };
 		BF22DDB20A5FB72B00D0292B /* multi_select.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA30A5FB72A00D0292B /* multi_select.h */; };
 		BF22DDB40A5FB72B00D0292B /* set_terrain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA50A5FB72A00D0292B /* set_terrain.cc */; };
@@ -589,12 +584,10 @@
 				BF22DDA00A5FB72B00D0292B /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDA20A5FB72B00D0292B /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDA40A5FB72B00D0292B /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDA60A5FB72B00D0292B /* editor_set_both_terrain_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDA80A5FB72B00D0292B /* editor_set_down_terrain_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDAA0A5FB72B00D0292B /* editor_set_height_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDAC0A5FB72B00D0292B /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDAE0A5FB72B00D0292B /* editor_set_right_terrain_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDB00A5FB72B00D0292B /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */,
+				BF22DDA60A5FB72B00D0292B /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDB10A5FB72B00D0292B /* editor_tool.h in Copy Frameworks into .app bundle */,
 				BF22DDB20A5FB72B00D0292B /* multi_select.h in Copy Frameworks into .app bundle */,
 				BF22DDB50A5FB72B00D0292B /* set_terrain.h in Copy Frameworks into .app bundle */,
@@ -902,18 +895,14 @@
 		BF22DB930A5FB72A00D0292B /* editor_place_bob_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_place_bob_tool.h; sourceTree = "<group>"; };
 		BF22DB940A5FB72A00D0292B /* editor_place_immovable_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_place_immovable_tool.cc; sourceTree = "<group>"; };
 		BF22DB950A5FB72A00D0292B /* editor_place_immovable_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_place_immovable_tool.h; sourceTree = "<group>"; };
-		BF22DB960A5FB72A00D0292B /* editor_set_both_terrain_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_both_terrain_tool.cc; sourceTree = "<group>"; };
-		BF22DB970A5FB72A00D0292B /* editor_set_both_terrain_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_both_terrain_tool.h; sourceTree = "<group>"; };
-		BF22DB980A5FB72A00D0292B /* editor_set_down_terrain_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_down_terrain_tool.cc; sourceTree = "<group>"; };
-		BF22DB990A5FB72A00D0292B /* editor_set_down_terrain_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_down_terrain_tool.h; sourceTree = "<group>"; };
 		BF22DB9A0A5FB72A00D0292B /* editor_set_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_height_tool.cc; sourceTree = "<group>"; };
 		BF22DB9B0A5FB72A00D0292B /* editor_set_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_height_tool.h; sourceTree = "<group>"; };
 		BF22DB9C0A5FB72A00D0292B /* editor_set_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_resources_tool.cc; sourceTree = "<group>"; };
 		BF22DB9D0A5FB72A00D0292B /* editor_set_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_resources_tool.h; sourceTree = "<group>"; };
-		BF22DB9E0A5FB72A00D0292B /* editor_set_right_terrain_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_right_terrain_tool.cc; sourceTree = "<group>"; };
-		BF22DB9F0A5FB72A00D0292B /* editor_set_right_terrain_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_right_terrain_tool.h; sourceTree = "<group>"; };
 		BF22DBA00A5FB72A00D0292B /* editor_set_starting_pos_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_starting_pos_tool.cc; sourceTree = "<group>"; };
 		BF22DBA10A5FB72A00D0292B /* editor_set_starting_pos_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_starting_pos_tool.h; sourceTree = "<group>"; };
+		BF22DB960A5FB72A00D0292B /* editor_set_terrain_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_terrain_tool.cc; sourceTree = "<group>"; };
+		BF22DB970A5FB72A00D0292B /* editor_set_terrain_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_terrain_tool.h; sourceTree = "<group>"; };
 		BF22DBA20A5FB72A00D0292B /* editor_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_tool.h; sourceTree = "<group>"; };
 		BF22DBA30A5FB72A00D0292B /* multi_select.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = multi_select.h; sourceTree = "<group>"; };
 		BF22DBA50A5FB72A00D0292B /* set_terrain.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = set_terrain.cc; sourceTree = "<group>"; };
@@ -1900,18 +1889,14 @@
 				BF22DB930A5FB72A00D0292B /* editor_place_bob_tool.h */,
 				BF22DB940A5FB72A00D0292B /* editor_place_immovable_tool.cc */,
 				BF22DB950A5FB72A00D0292B /* editor_place_immovable_tool.h */,
-				BF22DB960A5FB72A00D0292B /* editor_set_both_terrain_tool.cc */,
-				BF22DB970A5FB72A00D0292B /* editor_set_both_terrain_tool.h */,
-				BF22DB980A5FB72A00D0292B /* editor_set_down_terrain_tool.cc */,
-				BF22DB990A5FB72A00D0292B /* editor_set_down_terrain_tool.h */,
 				BF22DB9A0A5FB72A00D0292B /* editor_set_height_tool.cc */,
 				BF22DB9B0A5FB72A00D0292B /* editor_set_height_tool.h */,
 				BF22DB9C0A5FB72A00D0292B /* editor_set_resources_tool.cc */,
 				BF22DB9D0A5FB72A00D0292B /* editor_set_resources_tool.h */,
-				BF22DB9E0A5FB72A00D0292B /* editor_set_right_terrain_tool.cc */,
-				BF22DB9F0A5FB72A00D0292B /* editor_set_right_terrain_tool.h */,
 				BF22DBA00A5FB72A00D0292B /* editor_set_starting_pos_tool.cc */,
 				BF22DBA10A5FB72A00D0292B /* editor_set_starting_pos_tool.h */,
+				BF22DB960A5FB72A00D0292B /* editor_set_terrain_tool.cc */,
+				BF22DB970A5FB72A00D0292B /* editor_set_terrain_tool.h */,
 				BF22DBA20A5FB72A00D0292B /* editor_tool.h */,
 				BF22DBA30A5FB72A00D0292B /* multi_select.h */,
 				BF22DBA50A5FB72A00D0292B /* set_terrain.cc */,
@@ -2212,12 +2197,10 @@
 				BF22DD9F0A5FB72B00D0292B /* editor_noise_height_tool.cc in Sources */,
 				BF22DDA10A5FB72B00D0292B /* editor_place_bob_tool.cc in Sources */,
 				BF22DDA30A5FB72B00D0292B /* editor_place_immovable_tool.cc in Sources */,
-				BF22DDA50A5FB72B00D0292B /* editor_set_both_terrain_tool.cc in Sources */,
-				BF22DDA70A5FB72B00D0292B /* editor_set_down_terrain_tool.cc in Sources */,
 				BF22DDA90A5FB72B00D0292B /* editor_set_height_tool.cc in Sources */,
 				BF22DDAB0A5FB72B00D0292B /* editor_set_resources_tool.cc in Sources */,
-				BF22DDAD0A5FB72B00D0292B /* editor_set_right_terrain_tool.cc in Sources */,
 				BF22DDAF0A5FB72B00D0292B /* editor_set_starting_pos_tool.cc in Sources */,
+				BF22DDA50A5FB72B00D0292B /* editor_set_terrain_tool.cc in Sources */,
 				BF22DDB40A5FB72B00D0292B /* set_terrain.cc in Sources */,
 				BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */,
 				BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */,

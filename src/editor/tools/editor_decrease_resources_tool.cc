@@ -44,40 +44,45 @@ decrease the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
-int Editor_Decrease_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
-   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
-   FCoords c;
-
-   while(mrc.next(&c)) {
-      Field* f=map->get_field(c);
-
-      int res=f->get_resources();
-      int amount=f->get_resources_amount();
+int Editor_Decrease_Resources_Tool::handle_click_impl
+(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+{
+	const int radius = parent.get_sel_radius();
+	MapRegion mr(map, center.node, radius);
+	FCoords fc;
+	while (mr.next(fc)) {
+		int res    =fc.field->get_resources();
+		int amount =fc.field->get_resources_amount();
 
       amount-=m_changed_by;
       if(amount<0) amount=0;
 
 
-      if((res==m_cur_res) && Editor_Change_Resource_Tool_Callback(c,map,m_cur_res)) {
+		if
+			(res == m_cur_res
+			 and
+			 Editor_Change_Resource_Tool_Callback(fc, &map, m_cur_res))
+		{
 			int picid;
          // Ok, we're doing something. First remove the current overlays
          std::string str;
-         str=map->get_world()->get_resource(res)->get_editor_pic(f->get_resources_amount());
+			str = map.world().get_resource(res)->get_editor_pic
+				(fc.field->get_resources_amount());
          picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
-         map->get_overlay_manager()->remove_overlay(c,picid);
+			map.get_overlay_manager()->remove_overlay(fc, picid);
          if(!amount) {
-            f->set_resources(0,0);
-            f->set_starting_res_amount(0);
+				fc.field->set_resources(0,0);
+				fc.field->set_starting_res_amount(0);
          } else {
-            f->set_resources(m_cur_res,amount);
-            f->set_starting_res_amount(amount);
+				fc.field->set_resources(m_cur_res,amount);
+				fc.field->set_starting_res_amount(amount);
             // set new overlay
-            str=map->get_world()->get_resource(m_cur_res)->get_editor_pic(amount);
+				str = map.world().get_resource(m_cur_res)->get_editor_pic(amount);
             picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
-            map->get_overlay_manager()->register_overlay(c,picid,4);
-            map->recalc_for_field_area(c,0);
+				map.get_overlay_manager()->register_overlay(fc, picid, 4);
+				map.recalc_for_field_area(fc, 0);
          }
       }
    }
-   return parent->get_fieldsel_radius();
+	return radius;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,15 +36,14 @@ Editor_Increase_Height_Tool::handle_click_impl()
 
 ===========
 */
-int Editor_Increase_Height_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
-   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
-	Coords c;
-
-   int max, i;
-   max=0;
-   while(mrc.next(&c)) {
-      i=map->change_field_height(c, m_changed_by);
-      if(i>max) max=i;
-   }
-   return parent->get_fieldsel_radius()+max;
+int Editor_Increase_Height_Tool::handle_click_impl
+(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+{
+	const int radius = parent.get_sel_radius();
+	int max = 0;
+	MapRegion mr(map, center.node, radius);
+	FCoords fc;
+	while (mr.next(fc))
+		max = std::max(max, map.change_field_height(fc, m_changed_by));
+	return radius + max;
 }

@@ -690,13 +690,12 @@ void ProductionSite::program_act(Game* g)
 
 		case ProductionAction::actMine:
       {
-         Map* map = g->get_map();
-         MapRegion mr;
+         Map & map = *g->get_map();
          uchar res;
 
          molog("  Mine '%s'", action->sparam1.c_str());
 
-         res=map->get_world()->get_resource(action->sparam1.c_str());
+         res = map.get_world()->get_resource(action->sparam1.c_str());
          if(static_cast<signed char>(res)==-1)
             throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
                   " with world!!\n",  action->sparam1.c_str());
@@ -706,38 +705,39 @@ void ProductionSite::program_act(Game* g)
          uint totalchance = 0;
          uint totalstart = 0;
          int pick;
-         Field* f;
 
-         mr.init(map, get_position(), action->iparam1);
+	      {
+		      MapRegion mr(map, get_position(), action->iparam1);
+				FCoords fc;
+		      while (mr.next(fc)) {
+			      uchar fres        = fc.field->get_resources();
+			      uint amount       = fc.field->get_resources_amount();
+			      uint start_amount = fc.field->get_starting_res_amount();
 
-         while((f = mr.next())) {
-            uchar fres = f->get_resources();
-            uint amount = f->get_resources_amount();
-            uint start_amount = f->get_starting_res_amount();
+			      // In the future, we might want to support amount = 0 for
+			      // fields that can produce an infinite amount of resources.
+			      // Rather -1 or something similar. not 0
+			      if (fres != res) {
+				      amount = 0;
+				      start_amount=0;
+			      }
 
-            // In the future, we might want to support amount = 0 for
-            // fields that can produce an infinite amount of resources.
-            // Rather -1 or something similar. not 0
-            if (fres != res) {
-               amount = 0;
-               start_amount=0;
-            }
+			      totalres += amount;
+			      totalstart += start_amount;
+			      totalchance += 8 * amount;
 
-            totalres += amount;
-            totalstart += start_amount;
-            totalchance += 8 * amount;
-
-            // Add penalty for fields that are running out
-            if (amount == 0)
-               // we already know it's completely empty, so punish is less
-               totalchance += 1;
-            else if (amount <= 2)
-               totalchance += 6;
-            else if (amount <= 4)
-               totalchance += 4;
-            else if (amount <= 6)
-               totalchance += 2;
-         }
+			      // Add penalty for fields that are running out
+			      if (amount == 0)
+				      // we already know it's completely empty, so punish is less
+				      totalchance += 1;
+			      else if (amount <= 2)
+				      totalchance += 6;
+			      else if (amount <= 4)
+				      totalchance += 4;
+			      else if (amount <= 6)
+				      totalchance += 2;
+		      }
+	      }
 
          // how much is digged
          int digged_percentage=100;
@@ -758,25 +758,27 @@ void ProductionSite::program_act(Game* g)
             // Second pass through fields
             pick = g->logic_rand() % totalchance;
 
-            mr.init(map, get_position(), action->iparam1);
+	         {
+		         MapRegion mr(map, get_position(), action->iparam1);
+					FCoords fc;
+		         while (mr.next(fc)) {
+						uchar fres  = fc.field->get_resources();
+						uint amount = fc.field->get_resources_amount();;
 
-            while((f = mr.next())) {
-               uchar fres = f->get_resources();
-               uint amount = f->get_resources_amount();;
+			         if (fres != res)
+				         amount = 0;
 
-               if (fres != res)
-                  amount = 0;
+			         pick -= 8*amount;
+			         if (pick < 0) {
+				         assert(amount > 0);
 
-               pick -= 8*amount;
-               if (pick < 0) {
-                  assert(amount > 0);
+				         --amount;
 
-                  amount--;
-
-                  f->set_resources(res,amount);
-                  break;
-               }
-            }
+							fc.field->set_resources(res,amount);
+				         break;
+			         }
+		         }
+	         }
 
             if (pick >= 0) {
                molog("  Not successful this time\n");

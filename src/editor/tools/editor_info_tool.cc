@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,17 +41,25 @@ Editor_Info_Tool::handle_click()
 show a simple info dialog with infos about this field
 ===========
 */
-int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive* parent) {
-   UI::Window* w = new UI::Window(parent, 30, 30, 400, 200, _("Field Information").c_str());
+int Editor_Info_Tool::handle_click_impl
+(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+{
+	UI::Window * w =
+		new UI::Window(&parent, 30, 30, 400, 200, _("Field Information").c_str());
    UI::Multiline_Textarea* multiline_textarea = new UI::Multiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
 
-   Field* f=fc.field;
+	Field * const f = map.get_field(center.node);
 
    std::string buf;
    char buf1[1024];
 
    sprintf(buf1, "%s\n", _("1) Field Infos").c_str()); buf+=buf1;
-   sprintf(buf1, " %s (%i/%i)\n", _("Coordinates").c_str(), fc.x, fc.y); buf+=buf1;
+	sprintf
+		(buf1,
+		 " %s (%i/%i)\n",
+		 _("Coordinates").c_str(),
+		 center.node.x, center.node.y);
+	buf += buf1;
    sprintf(buf1, " %s %i\n", _("Height").c_str(), f->get_height()); buf+=buf1;
    buf+=_(" Caps: ");
    switch((f->get_caps() & BUILDCAPS_SIZEMASK)) {
@@ -74,7 +82,7 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    if(res==0 && amount==0) {
 	   sprintf(buf1, _(" Has resources: No\n").c_str());
    } else {
-	   sprintf(buf1, " %s, %i %s '%s'\n", _("Has resources: Yes").c_str(), amount, _("amount of").c_str(), map->get_world()->get_resource(res)->get_name());
+	   sprintf(buf1, " %s, %i %s '%s'\n", _("Has resources: Yes").c_str(), amount, _("amount of").c_str(), map.get_world()->get_resource(res)->get_name());
    }
    buf+=buf1;
 
@@ -101,18 +109,22 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
 
    buf += "\n";
    sprintf(buf1, "%s\n", _("4) Map Info").c_str()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name").c_str(), map->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %ix%i\n", _("Size").c_str(), map->get_width(), map->get_height()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Author").c_str(), map->get_author()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Descr").c_str(), map->get_description()); buf+=buf1;
-   sprintf(buf1, " %s: %i\n", _("Number of Players").c_str(), map->get_nrplayers()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Name").c_str(), map.get_name()); buf+=buf1;
+   sprintf(buf1, " %s: %ix%i\n", _("Size").c_str(), map.get_width(), map.get_height()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Author").c_str(), map.get_author()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Descr").c_str(), map.get_description()); buf+=buf1;
+   sprintf(buf1, " %s: %i\n", _("Number of Players").c_str(), map.get_nrplayers()); buf+=buf1;
    sprintf(buf1, " %s\n", _(" TODO: more information (number of resources, number of terrains...)").c_str()); buf+=buf1;
 
    buf += "\n";
+	const World & world = map.world();
    sprintf(buf1, "%s\n", _("5) World Info").c_str()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name").c_str(), map->get_world()->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Author").c_str(), map->get_world()->get_author()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Descr").c_str(), map->get_world()->get_descr()); buf+=buf1;
+	sprintf(buf1, " %s: %s\n", _("Name").c_str(), world.get_name());
+	buf += buf1;
+	sprintf(buf1, " %s: %s\n", _("Author").c_str(), world.get_author());
+	buf += buf1;
+	sprintf(buf1, " %s: %s\n", _("Descr").c_str(), world.get_descr());
+	buf += buf1;
    sprintf(buf1, " %s\n", _(" TODO -- More information (Number of bobs/number of wares...)\n").c_str()); buf+=buf1;
 
    buf += "\n";

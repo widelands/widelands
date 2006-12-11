@@ -54,7 +54,7 @@ m_decrease
 {
 
    char buf[250];
-   sprintf(buf, _("Current Size: %i").c_str(), m_parent->get_fieldsel_radius()+1);
+	sprintf(buf, _("Current Size: %i").c_str(), m_parent->get_sel_radius() + 1);
    m_textarea=new UI::Textarea(this, 25, 20, buf);
 
 	if (get_usedefaultpos())
@@ -81,7 +81,7 @@ id: 0 is up, 1 is down
 ===========
 */
 void Editor_Toolsize_Menu::change_radius(const bool increase) {
-   int val=m_parent->get_fieldsel_radius();
+   int val=m_parent->get_sel_radius();
 	if (increase) {
       ++val;
       if(val>MAX_TOOL_AREA) val=MAX_TOOL_AREA;
@@ -89,9 +89,13 @@ void Editor_Toolsize_Menu::change_radius(const bool increase) {
       --val;
       if(val<0) val=0;
    }
-   m_parent->set_fieldsel_radius(val);
+   m_parent->set_sel_radius(val);
 
    char buf[250];
-   sprintf(buf, "%s: %i", _("Current Size").c_str(), m_parent->get_fieldsel_radius()+1);
+	sprintf
+		(buf,
+		 "%s: %i",
+		 _("Current Size").c_str(),
+		 m_parent->get_sel_radius() + 1);
    m_textarea->set_text(buf);
 }

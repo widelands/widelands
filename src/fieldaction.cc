@@ -283,10 +283,10 @@ FieldActionWindow::FieldActionWindow
 	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null())
 {
 
-	Field *f = m_map->get_field(iabase->get_fieldsel_pos());
-	m_field = FCoords(iabase->get_fieldsel_pos(), f);
+	const Coords c = iabase->get_sel_pos().node;
+	m_field = FCoords(c, m_map->get_field(c));
 
-	iabase->set_fieldsel_freeze(true);
+	iabase->set_sel_freeze(true);
 
 	//
 	m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
@@ -313,7 +313,7 @@ FieldActionWindow::~FieldActionWindow()
 {
 	if (not m_workarea_preview_job_id.isNull())
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
-	m_iabase->set_fieldsel_freeze(false);
+	m_iabase->set_sel_freeze(false);
    if (m_text_attackers)
    {
       delete m_text_attackers;
@@ -1023,7 +1023,7 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 
 	// we're building a road right now
 	Map *map = iabase->get_egbase()->get_map();
-	Coords target = iabase->get_fieldsel_pos();
+	const Coords target = iabase->get_sel_pos().node;
 
 	// if user clicked on the same field again, build a flag
 	if (target == iabase->get_build_road_end()) {

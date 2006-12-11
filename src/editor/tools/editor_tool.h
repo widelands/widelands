@@ -22,6 +22,8 @@
 
 #define MAX_TOOL_AREA 9
 
+#include "geometry.h"
+
 class FCoords;
 class Editor_Interactive;
 class Map;
@@ -46,21 +48,23 @@ class Editor_Tool {
          if(m_third && m_third!=this) { delete m_third; m_third=0; }
       }
 
-      int handle_click(int n, FCoords& f , Map* m, Editor_Interactive* parent) {
-         if(n==0) return this->handle_click_impl(f,m,parent);
-         if(n==1) return m_second->handle_click_impl(f,m,parent);
-         if(n==2) return m_third->handle_click_impl(f,m,parent);
+	int handle_click(int n, Map & map, const Node_and_Triangle center, Editor_Interactive & parent) {
+         if(n==0) return this->handle_click_impl(map, center, parent);
+         if(n==1) return m_second->handle_click_impl(map, center, parent);
+         if(n==2) return m_third->handle_click_impl(map, center, parent);
          return 0;
       }
-      const char* get_fsel(int n) {
-         if(n==0) return this->get_fsel_impl();
-         if(n==1) return m_second->get_fsel_impl();
-         if(n==2) return m_third->get_fsel_impl();
+      const char* get_sel(int n) {
+         if(n==0) return this->get_sel_impl();
+         if(n==1) return m_second->get_sel_impl();
+         if(n==2) return m_third->get_sel_impl();
          return 0;
       }
 
-      virtual int handle_click_impl(FCoords& f, Map* m, Editor_Interactive* parent) = 0;
-      virtual const char* get_fsel_impl(void) = 0;
+	virtual int handle_click_impl
+		(Map &, const Node_and_Triangle, Editor_Interactive & parent) = 0;
+	virtual const char * get_sel_impl() const throw () = 0;
+	virtual bool operates_on_triangles() const {return false;};
 
    protected:
       Editor_Tool* m_second, *m_third;

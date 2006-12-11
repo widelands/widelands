@@ -24,6 +24,7 @@
 #include <vector>
 #include "field.h"
 #include "geometry.h"
+#include "world.h"
 
 class BaseImmovable;
 class FileRead;
@@ -290,15 +291,6 @@ public:
 	void get_neighbour(const  Coords, const int dir,  Coords * const) const;
 	void get_neighbour(const FCoords, const int dir, FCoords * const) const;
 
-	// Field/screen coordinates
-	FCoords calc_coords(Point pos);
-	void normalize_pix(Point* p);
-	int calc_pix_distance(Point a, Point b);
-	inline void get_basepix(const Coords fc, int *px, int *py);
-	inline void get_pix(const FCoords fc, int *px, int *py);
-	inline void get_pix(const Coords c, int *px, int *py);
-	inline void get_save_pix(const Coords c, int *px, int *py);
-
 	// Pathfinding
 	int findpath
 		(Coords instart,
@@ -319,7 +311,7 @@ public:
 	int set_field_height(const Coords, const int height);
 
 	// change terrain of a field, recalculate buildcaps
-   int change_field_terrain(Coords coords, int terrain, bool tdown, bool tright);
+	int change_terrain(const TCoords, const Terrain_Descr::Index terrain);
 
    /*
     * Get the a manager for registering or removing
@@ -1166,15 +1158,9 @@ next() returns false when no more fields are to be traversed.
 */
 class MapRegion {
 public:
-	MapRegion() { }
 	MapRegion(const Map &, const Coords, const Uint16 radius);
-	MapRegion(const Map* map, Coords coords, uint radius) { init(map, coords, radius); }
-	~MapRegion() { }
 
-	void init(const Map* map, Coords coords, uint radius);
-	bool next(FCoords* fc);
-	bool next(Coords* c);
-	Field* next();
+	bool next(FCoords & fc);
 
 private:
 	enum Phase {
@@ -1183,7 +1169,7 @@ private:
 		phaseLower,		// lower half
 	};
 
-	const Map*		m_map;
+	const Map & m_map;
 	Phase		m_phase;
 	uint		m_radius;		// radius of area
 	uint		m_row;			// # of rows completed in this phase

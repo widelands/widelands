@@ -69,12 +69,20 @@ class Interactive_Base : public UI::Panel {
       // logic handler func
       void think();
 
-		inline const Coords &get_fieldsel_pos() const { return m_fsd.fieldsel_pos; }
-		inline bool get_fieldsel_freeze() const { return m_fsd.fieldsel_freeze; }
-      inline int get_fieldsel_radius(void) { return m_fsd.fieldsel_radius; }
-		virtual void set_fieldsel_pos(Coords c);
-		void set_fieldsel_freeze(bool yes);
-      void set_fieldsel_radius(int n);
+	const Node_and_Triangle & get_sel_pos() const {return m_sel.pos;}
+	bool get_sel_freeze() const {return m_sel.freeze;}
+
+	/**
+	 * sel_triangles determines wether the mouse pointer selects triangles.
+	 * (False meas that it selects nodes.)
+	 */
+	bool get_sel_triangles() const throw () {return m_sel.triangles;}
+	void set_sel_triangles(const bool yes) throw () {m_sel.triangles = yes;}
+
+	uint get_sel_radius() const throw () {return m_sel.radius;}
+	virtual void set_sel_pos(const Node_and_Triangle);
+	void set_sel_freeze(const bool yes) throw () {m_sel.freeze = yes;}
+	void set_sel_radius(const uint n);
 
 	void move_view_to(const Coords);
 		void move_view_to_point(Point pos);
@@ -109,13 +117,25 @@ class Interactive_Base : public UI::Panel {
       Map_View* m_mapview;
       MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
-      struct FieldSel_Data {
-         bool		         fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-         Coords            fieldsel_pos;
-         int               fieldsel_radius;
-         int               fieldsel_pic;
-		Overlay_Manager::Job_Id fieldsel_jobid;
-      } m_fsd;
+	struct Sel_Data {
+		Sel_Data
+			(const bool Freeze = false, const bool Triangles = false,
+			 const Node_and_Triangle Pos         =
+			 Node_and_Triangle(Coords(0, 0), TCoords(Coords(0, 0), TCoords::D)),
+			 const uint Radius                   = 0,
+			 const int Pic                       = 0,
+			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
+			:
+			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
+			pic(Pic), jobid(Jobid)
+		{}
+		bool              freeze; // don't change m_sel even if mouse moves
+		bool              triangles; //  otherwise nodes
+		Node_and_Triangle pos;
+		uint              radius;
+		int               pic;
+		Overlay_Manager::Job_Id jobid;
+	} m_sel;
 
 		uint					m_display_flags;
 
@@ -141,8 +161,8 @@ class Interactive_Base : public UI::Panel {
 
 		virtual void draw_overlay(RenderTarget* dst);
 
-      void unset_fieldsel_picture();
-      void set_fieldsel_picture(const char*);
+      void unset_sel_picture();
+      void set_sel_picture(const char * const);
 };
 
 

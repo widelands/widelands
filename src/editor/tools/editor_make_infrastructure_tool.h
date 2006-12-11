@@ -38,8 +38,9 @@ class Editor_Make_Infrastructure_Tool : public Editor_Tool {
       void set_player(int n) { m_player=n; }
       int  get_player(void)  { return m_player; }
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-      virtual const char* get_fsel_impl(void) { return "pics/fsel.png"; } // Standart fsel icon, most complex tool of all
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
 
    private:
       int m_player;

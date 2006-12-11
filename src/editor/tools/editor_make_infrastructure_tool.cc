@@ -36,8 +36,8 @@ int Editor_Make_Infrastructure_Tool_Callback
 		get_buildcaps(c);
 }
 
-Editor_Make_Infrastructure_Tool::Editor_Make_Infrastructure_Tool() :
-Editor_Tool(), m_player(1) {}
+Editor_Make_Infrastructure_Tool::Editor_Make_Infrastructure_Tool() : m_player(1)
+{}
 
 Editor_Make_Infrastructure_Tool::~Editor_Make_Infrastructure_Tool() {}
 
@@ -49,14 +49,14 @@ Editor_Make_Infrastructure_Tool::handle_click_impl()
 This is the most complex of all tool functions: check where was clicked,
 offer the correct user dialog and act accordingly.
 
-Obviously, this function ignores the fieldsel radius
+Obviously, this function ignores the sel radius
 ===========
 */
 int Editor_Make_Infrastructure_Tool::handle_click_impl
-(FCoords &, Map *, Editor_Interactive * parent)
+(Map &, const Node_and_Triangle, Editor_Interactive & parent)
 {
 	// Special case for buildings
-/*	BaseImmovable *imm = m_game->get_map()->get_immovable(get_fieldsel_pos());
+/*	BaseImmovable * const imm = map.get_immovable(get_sel_pos());
 
 
 	if (imm && imm->get_type() == Map_Object::BUILDING) {
@@ -65,6 +65,6 @@ int Editor_Make_Infrastructure_Tool::handle_click_impl
 	}
 */
 
-   show_field_action(parent, parent->get_editor()->get_player(m_player), &m_registry);
+   show_field_action(&parent, parent.get_editor()->get_player(m_player), &m_registry);
    return 5; // Not really needed, since Player Immovables are taken care of while placing on map
 }

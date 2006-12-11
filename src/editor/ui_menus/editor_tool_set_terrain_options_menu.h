@@ -24,21 +24,24 @@
 #include "editor_tool_options_menu.h"
 
 class Editor_Interactive;
-class Editor_Set_Both_Terrain_Tool;
+class Editor_Set_Terrain_Tool;
 namespace UI {
 struct Textarea;
 struct Checkbox;
 };
 
 struct Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Menu {
-      Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive*, int, Editor_Set_Both_Terrain_Tool*,
-		                                          UI::UniqueWindow::Registry* );
+	Editor_Tool_Set_Terrain_Tool_Options_Menu
+		(Editor_Interactive *,
+		 int,
+		 Editor_Set_Terrain_Tool *,
+		 UI::UniqueWindow::Registry *);
       virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu() ;
 
    private:
       std::vector<uint> m_surfaces;
       UI::Textarea* m_textarea;
-      Editor_Set_Both_Terrain_Tool* m_sbt;
+      Editor_Set_Terrain_Tool * m_sbt;
       void selected(int,bool);
       void do_nothing(int,bool);
       std::vector<UI::Checkbox*> m_checkboxes;

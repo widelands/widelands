@@ -32,7 +32,6 @@
 #include "s2map.h"
 #include <stdio.h>
 #include "widelands_map_loader.h"
-#include "world.h"
 #include "worlddata.h"
 #include "wexception.h"
 
@@ -180,30 +179,28 @@ void Map::recalc_for_field_area(Coords coords, int radius)
 	assert(coords.y < m_height);
    assert(m_overlay_manager);
 
-   MapRegion mr;
-   FCoords c;
+	{ //  First pass.
+		MapRegion mr(*this, coords, radius + 2);
+		FCoords fc;
+		while (mr.next(fc)) {
+			recalc_brightness     (fc);
+			recalc_border         (fc);
+			recalc_fieldcaps_pass1(fc);
+		}
+	}
 
-   // First pass
-   mr.init(this, coords, radius+2);
+	{ //  Second pass.
+		MapRegion mr(*this, coords, radius + 2);
+		FCoords fc;
+		while (mr.next(fc)) recalc_fieldcaps_pass2(fc);
+	}
 
-   while(mr.next(&c)) {
-      recalc_brightness(c);
-      recalc_border(c);
-      recalc_fieldcaps_pass1(c);
-   }
-
-
-   // Second pass
-   mr.init(this, coords, radius+2);
-   while(mr.next(&c)) {
-      recalc_fieldcaps_pass2(c);
-   }
-
-   // Now only recaluclate the overlays
-   mr.init(this, coords, radius+2);
-   while(mr.next(&c)) {
-      get_overlay_manager()->recalc_field_overlays(c);
-   }
+	{ //  Now only recaluclate the overlays.
+		MapRegion mr(*this, coords, radius + 2);
+		FCoords fc;
+		Overlay_Manager & om = overlay_manager();
+		while (mr.next(fc)) om.recalc_field_overlays(fc);
+	}
 }
 
 
@@ -699,11 +696,9 @@ template<typename functorT>
 void Map::find_radius
 (const Coords coord, const uint radius, functorT & functor) const
 {
-	MapRegion mr(this, coord, radius);
-	FCoords c;
-
-	while(mr.next(&c))
-		functor(*this, c);
+	MapRegion mr(*this, coord, radius);
+	FCoords fc;
+	while (mr.next(fc)) functor(*this, fc);
 }
 
 
@@ -2087,7 +2082,7 @@ bool Map::can_reach_by_water(const Coords field) const
 
 /*
 ===========
-changes the given field terrain to another one.
+changes the given triangle's terrain.
 this happens in the editor and might happen in the game
 too if some kind of land increasement is implemented (like
 drying swamps).
@@ -2096,21 +2091,8 @@ The fieldcaps need to be recalculated
 returns the radius of changes (which are always 2)
 ===========
 */
-int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright)
-{
-   assert(tdown || tright);
-
-   Field* f=get_field(c);
-
-   Terrain_Descr* ter=get_world()->get_terrain(terrain);
-
-   if(tdown)
-      f->set_terraind(*ter);
-   if(tright)
-      f->set_terrainr(*ter);
-
-   MapRegion mr;
-
+int Map::change_terrain(const TCoords c, const Terrain_Descr::Index terrain) {
+	get_field(c)->set_terrain(c.t, *get_world()->get_terrain(terrain));
    recalc_for_field_area(c,2);
 
    return 2;
@@ -2724,34 +2706,16 @@ MapRegion IMPLEMENTATION
 ==============================================================================
 */
 
-MapRegion::MapRegion(const Map & map, const Coords c, const Uint16 radius) {
-	init(&map, c, radius);
-}
-
-/*
-===============
-MapRegion::init
-
-Initialize the region.
-===============
-*/
-void MapRegion::init(const Map* map, Coords coords, uint radius)
+MapRegion::MapRegion(const Map & map, Coords coords, const Uint16 radius) :
+m_map     (map),
+m_phase   (phaseUpper),
+m_radius  (radius),
+m_row     (0),
+m_rowwidth(radius + 1),
+m_rowpos  (0),
+m_left    (map.get_fcoords(coords))
 {
-	assert(0 <= coords.x);
-	assert(coords.x < map->get_width());
-	assert(0 <= coords.y);
-	assert(coords.y < map->get_height());
-	m_map = map;
-	m_phase = phaseUpper;
-	m_radius = radius;
-
-	m_row = 0;
-	m_rowwidth = radius+1;
-	m_rowpos = 0;
-
-	m_left = map->get_fcoords(coords);
-	for(uint i = 0; i < radius; ++i)
-		map->get_tln(m_left, &m_left);
+	for (Uint16 i = 0; i < radius; ++i) map.get_tln(m_left, &m_left);
 
 	m_next = m_left;
 }
@@ -2766,18 +2730,15 @@ I hope this results in slightly better cache behaviour than other algorithms
 (e.g. one could also walk concentric "circles"/hexagons).
 ===============
 */
-bool MapRegion::next(FCoords* fc)
+bool MapRegion::next(FCoords & fc)
 {
 	if (m_phase == phaseNone)
 		return false;
 
-	*fc = m_next;
+	fc = m_next;
 
 	m_rowpos++;
-	if (m_rowpos < m_rowwidth)
-	{
-		m_map->get_rn(m_next, &m_next);
-	}
+	if (m_rowpos < m_rowwidth) m_map.get_rn(m_next, &m_next);
 	else
 	{
 		m_row++;
@@ -2792,7 +2753,7 @@ bool MapRegion::next(FCoords* fc)
 
 		if (m_phase == phaseUpper)
 		{
-			m_map->get_bln(m_left, &m_left);
+			m_map.get_bln(m_left, &m_left);
 			m_rowwidth++;
 		}
 		else
@@ -2803,7 +2764,7 @@ bool MapRegion::next(FCoords* fc)
 				return true; // early out
 			}
 
-			m_map->get_brn(m_left, &m_left);
+			m_map.get_brn(m_left, &m_left);
 			m_rowwidth--;
 		}
 
@@ -2814,34 +2775,6 @@ bool MapRegion::next(FCoords* fc)
 	return true;
 }
 
-
-/*
-===============
-MapRegion::next
-
-Call the main algorithm and filter out the data we're interested in.
-===============
-*/
-bool MapRegion::next(Coords* c)
-{
-	FCoords fc;
-
-	if (!next(&fc))
-		return false;
-
-	*c = fc;
-	return true;
-}
-
-Field* MapRegion::next()
-{
-	FCoords fc;
-
-	if (!next(&fc))
-		return 0;
-
-	return fc.field;
-}
 
 /*
 ==============================================================================

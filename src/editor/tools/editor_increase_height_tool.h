@@ -32,13 +32,13 @@ this increases the height of a field by a value
 */
 class Editor_Increase_Height_Tool : public Editor_Tool {
    public:
-      Editor_Increase_Height_Tool(Editor_Decrease_Height_Tool* dht, Editor_Set_Height_Tool* sht)
-        : Editor_Tool(dht, sht) { m_changed_by=1; m_dht=dht; m_sht=sht; }
+	Editor_Increase_Height_Tool(Editor_Decrease_Height_Tool * const dht, Editor_Set_Height_Tool * const sht) :
+	Editor_Tool(dht, sht), m_dht(dht), m_sht(sht), m_changed_by(1) {}
       virtual ~Editor_Increase_Height_Tool() {  }
 
-      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
-
-      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_increase_height.png"; }
+	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	const char * get_sel_impl() const throw ()
+	{return "pics/fsel_editor_increase_height.png";}
 
       inline int get_changed_by(void) { return m_changed_by; }
       inline void set_changed_by(int n) { m_changed_by=n; }

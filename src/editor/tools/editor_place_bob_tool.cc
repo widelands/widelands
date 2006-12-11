@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,20 +32,18 @@ choses an object to place randomly from all enabled
 and places this on the current field
 ===========
 */
-int Editor_Place_Bob_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
-   if(!get_nr_enabled()) return parent->get_fieldsel_radius();
-
-   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
-   Coords c;
-
-   while(mrc.next(&c)) {
-      Field *f = parent->get_map()->get_field(c);
-      Bob* bob;
-      if ((bob=f->get_first_bob())) {
+int Editor_Place_Bob_Tool::handle_click_impl
+(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+{
+	const int radius = parent.get_sel_radius();
+	if (not get_nr_enabled()) return radius;
+	MapRegion mr(map, center.node, radius);
+   FCoords fc;
+	while (mr.next(fc)) {
+		if (Bob * const bob = fc.field->get_first_bob())
          // There is already a bob. Remove it first
-         bob->remove(parent->get_editor());
-      }
-      parent->get_editor()->create_bob(c, get_random_enabled());
+         bob->remove(parent.get_editor());
+		parent.get_editor()->create_bob(fc, get_random_enabled());
    }
-   return parent->get_fieldsel_radius()+2;
+   return radius + 2;
 }

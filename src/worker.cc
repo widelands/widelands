@@ -278,12 +278,10 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 {
    molog("  Mine(%s,%i)\n", action->sparam1.c_str(), action->iparam1);
 
-   Map* map = g->get_map();
-   MapRegion mr;
-   uchar res;
+	Map & map = *g->get_map();
 
-
-   res=map->get_world()->get_resource(action->sparam1.c_str());
+	const Resource_Descr::Index res =
+		map.get_world()->get_resource(action->sparam1.c_str());
    if(static_cast<signed char>(res)==-1)
       throw wexception(" Worker::run_mine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
             " with world!!\n",  action->sparam1.c_str());
@@ -292,13 +290,12 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    uint totalres = 0;
    uint totalchance = 0;
    int pick;
-   Field* f;
-
-   mr.init(map, get_position(), action->iparam1);
-
-   while((f = mr.next())) {
-      uchar fres = f->get_resources();
-      uint amount = f->get_resources_amount();
+	{
+		MapRegion mr(map, get_position(), action->iparam1);
+		FCoords fc;
+		while (mr.next(fc)) {
+			uchar fres  = fc.field->get_resources();
+			uint amount = fc.field->get_resources_amount();
 
       // In the future, we might want to support amount = 0 for
       // fields that can produce an infinite amount of resources.
@@ -320,6 +317,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
       else if (amount <= 6)
          totalchance += 2;
    }
+	}
 
    if (totalres == 0) {
       molog("  Run out of resources\n");
@@ -329,11 +327,12 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    // Second pass through fields
    pick = g->logic_rand() % totalchance;
 
-   mr.init(map, get_position(), action->iparam1);
-
-   while((f = mr.next())) {
-      uchar fres = f->get_resources();
-      uint amount = f->get_resources_amount();;
+	{
+		MapRegion mr(map, get_position(), action->iparam1);
+		FCoords fc;
+		while (mr.next(fc)) {
+			uchar fres  = fc.field->get_resources();
+			uint amount = fc.field->get_resources_amount();;
 
       if (fres != res)
          amount = 0;
@@ -344,10 +343,11 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 
          amount--;
 
-         f->set_resources(res,amount);
+			fc.field->set_resources(res,amount);
          break;
       }
    }
+	}
 
    if (pick >= 0) {
       molog("  Not successful this time\n");
