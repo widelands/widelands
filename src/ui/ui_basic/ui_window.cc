@@ -101,29 +101,42 @@ void Window::set_title(const char *text)
 
 /**
 Move the window so that it is under the mouse cursor.
-Ensure that the window doesn't move out of the screen.
 */
-void Window::move_to_mouse()
-{
-	int px, py;
+void Window::move_to_mouse() {
+	set_pos(get_mouse_x() - get_w() / 2, get_mouse_y() - get_h() / 2);
+	move_inside_parent();
+}
 
-	px = get_mouse_x() - get_w()/2;
-	py = get_mouse_y() - get_h()/2;
 
-	Panel *parent = get_parent();
-	if (parent) {
-		if (px < 0)
+/**
+Move the window so that it is inside the parent panel.
+We need this, because move_to_mouse is called before the window is resized.
+If configured, hang the border off the edge of the panel.
+*/
+void Window::move_inside_parent() {
+	if (Panel * const parent = get_parent()) {
+		int px = get_x();
+		int py = get_y();
+		if (px < 0) {
 			px = 0;
-		if (px+(int)get_w() > parent->get_inner_w())
+			if (parent->get_dock_windows_to_edges() and not _docked_left)
+				dock_left();
+		} else if (px + static_cast<const int>(get_w()) > parent->get_inner_w()) {
 			px = parent->get_inner_w() - get_w();
-
-		if (py < 0)
-			py = 0;
-		if (py+(int)get_h() > parent->get_inner_h())
+			if (parent->get_dock_windows_to_edges() and not _docked_right)
+				dock_right();
+		}
+		if (py < 0) py = 0;
+		else if (py + static_cast<const int>(get_h()) > parent->get_inner_h()) {
 			py = parent->get_inner_h() - get_h();
+			if (parent->get_dock_windows_to_edges() and not _docked_bottom)
+				dock_bottom();
+		}
+		if      (_docked_left)   px = 0;
+		else if (_docked_right)  px = parent->get_inner_w() - get_w();
+		if      (_docked_bottom) py = parent->get_inner_h() - get_h();
+		set_pos(px, py);
 	}
-
-	set_pos(px, py);
 }
 
 
@@ -381,8 +394,8 @@ void Window::handle_mousemove(int mx, int my, int, int) {
 			const int h = get_h();
 			const int max_x = parent->get_inner_w();
 			const int max_y = parent->get_inner_h();
-			assert(w <= max_x);
-			assert(h <= max_y);
+			assert(w <= max_x); //  These assertions will fail when having too
+			assert(h <= max_y); //  low resolution and opening a large window.
 			int max_x_minus_w = max_x - w;
 			int max_y_minus_h = max_y - h;
 			left = std::min(max_x_minus_w, left);

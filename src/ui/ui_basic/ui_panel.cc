@@ -250,6 +250,11 @@ void Panel::set_pos(const int nx, const int ny)
 }
 
 /**
+Do nothing
+*/
+void Panel::move_inside_parent() {}
+
+/**
  * Set the size of the inner area (total area minus border)
  */
 void Panel::set_inner_size(uint nw, uint nh)

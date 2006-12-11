@@ -153,6 +153,8 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, P
 {
 	std::string text;
 
+	center_to_parent();
+
 	m_iabase = parent;
 	m_building = building;
 
@@ -817,6 +819,7 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	box->add(create_capsbuttons(box), UI::Box::AlignCenter);
 
 	fit_inner(box);
+	move_inside_parent();
 }
 
 
@@ -950,6 +953,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
       posy += caps->get_h() + spacing;
 
    set_inner_size(get_inner_w(), posy);
+   move_inside_parent();
 }
 
 
@@ -1206,6 +1210,7 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
    {
        prod_box = create_production_box (this, ps);
       fit_inner(prod_box);
+      move_inside_parent();
    }
 }
 
@@ -1384,6 +1389,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
 
    fit_inner(box);
+   move_inside_parent();
 }
 
 
@@ -1539,6 +1545,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	m_evade_pri = 0;
 
 	set_inner_size(250, _bs*9);
+	move_inside_parent();
 
 	// TODO: Put the capacity buttons here.
 

@@ -79,8 +79,10 @@ void Tab_Panel::resize()
 	set_size(w, h);
 
 	// adjust parent's size, if necessary
-	if (m_snapparent)
+	if (m_snapparent) {
 		get_parent()->set_inner_size(w, h);
+		get_parent()->move_inside_parent();
+	}
 }
 
 

@@ -52,6 +52,7 @@ struct Window : public Panel {
 	void set_title(const char *text);
 
 	void move_to_mouse();
+	virtual void move_inside_parent();
 	void center_to_parent();
 
    inline bool is_minimized(void) { return _small; }

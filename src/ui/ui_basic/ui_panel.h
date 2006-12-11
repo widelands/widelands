@@ -76,6 +76,7 @@ struct Panel : public Object {
 	// Geometry
 	void set_size(const uint nw, const uint nh);
 	void set_pos(const int nx, const int ny);
+	virtual void move_inside_parent();
 
 	inline int get_x() const { return _x; }
 	inline int get_y() const { return _y; }
