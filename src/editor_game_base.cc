@@ -692,24 +692,30 @@ Battle* Editor_Game_Base::create_battle ()
    return b;
 }
 
-void Editor_Game_Base::create_attack_controller(Flag* flag,int attacker, int defender, uint num) {
+AttackController* Editor_Game_Base::create_attack_controller(Flag* flag,int attacker, int defender, uint num) {
    uint i;
    for (i=0;i<m_attack_serials.size();i++) {
       AttackController* curCtrl = (AttackController*)this->get_objects()->get_object(m_attack_serials[i]);
       if (curCtrl->getFlag() == flag) {
          curCtrl->launchAttack(num);
-         return;
+         return curCtrl;
       }
    }
 
    AttackController* ctrl = new AttackController((Game*)this,flag,attacker,defender);
    ctrl->launchAttack(num);
    m_attack_serials.push_back(ctrl->get_serial());
+   return ctrl;
+}
+
+AttackController* Editor_Game_Base::create_attack_controller() {
+   AttackController* ctrl = new AttackController((Game*)this);
+   m_attack_serials.push_back(ctrl->get_serial());
+   return ctrl;
 }
 
 void Editor_Game_Base::remove_attack_controller(uint serial) {
-   uint i;
-   for(i=0;i<m_attack_serials.size();i++) {
+   for(uint i=0;i<m_attack_serials.size();i++) {
       if (m_attack_serials[i] == serial) {
          log("Editor_Game_Base: Destroying battle with serial %i \n",serial);
       	AttackController* curCtrl = (AttackController*)this->get_objects()->get_object(serial);

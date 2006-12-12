@@ -28,6 +28,7 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_attack_controller_data_packet.h"
 #include "widelands_map_battle_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
@@ -310,6 +311,13 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
    dp->Write(m_fs, m_egbase, m_mos);
    delete dp;
    log("done!\n ");
+   
+   //This should be done after loading of soldiers and military sites
+   log("Writing Attack Controller Data ... ");
+   dp=new Widelands_Map_Attack_Controller_Data_Packet();
+   dp->Write(m_fs,m_egbase,m_mos);
+   delete dp;
+   log("done\n");
 
    log("Writing Variable Data ... ");
    dp=new Widelands_Map_Variable_Data_Packet();

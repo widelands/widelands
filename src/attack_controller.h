@@ -32,14 +32,18 @@ class Flag;
 class MilitarySite;
 class Soldier;
 class Coords;
+class Widelands_Map_Attack_Controller_Data_Packet;
 
 
 void getCloseMilitarySites(Game* game, Flag* flag, int player, std::vector<MilitarySite*>* militarySites);
 uint getMaxAttackSoldiers(Game* game, Flag* flag, int player);
 
 class AttackController : public BaseImmovable {
+   friend class Widelands_Map_Attack_Controller_Data_Packet;
+   
    public:
       AttackController(Game* game, Flag* flag, int attacker, int defender);
+      AttackController(Game* game);
       ~AttackController();
       void launchAttack(uint nrAttackers);
 
@@ -83,7 +87,8 @@ class AttackController : public BaseImmovable {
       bool opponentsLeft(Soldier* soldier);
 
       std::vector<BattleSoldier> involvedSoldiers;
-	std::set<Object_Ptr> involvedMilitarySites;
+      std::set<Object_Ptr> involvedMilitarySites;
+      
       int attackingPlayer;
       int defendingPlayer;
       uint totallyLaunched;

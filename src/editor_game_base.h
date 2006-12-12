@@ -40,6 +40,7 @@ class Player;
 class PlayerImmovable;
 class Tribe_Descr;
 class Flag;
+class AttackController;
 
 class Editor_Game_Base {
    friend class Interactive_Base;
@@ -91,8 +92,10 @@ class Editor_Game_Base {
 	Immovable* create_immovable
 		(const Coords c, const std::string & name, const Tribe_Descr*);
       Battle*    create_battle ();
-      void create_attack_controller(Flag* flag,int attacker, int defender, uint num);
+      AttackController* create_attack_controller(Flag* flag,int attacker, int defender, uint num);
+      AttackController* create_attack_controller();
       void remove_attack_controller(uint serial);
+      std::vector<uint> get_attack_controller_serials() const {return m_attack_serials;}
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}
 	int get_gametime() const {return m_gametime;}
@@ -163,7 +166,7 @@ public:
 	int  m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
                                                          // The playernr 0 is the REAL OWNER
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
-      std::vector<int>           m_attack_serials; 
+      std::vector<uint>           m_attack_serials; 
 
 private:
 	Editor_Game_Base & operator=(const Editor_Game_Base &);

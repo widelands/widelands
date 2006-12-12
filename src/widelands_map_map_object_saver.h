@@ -50,6 +50,10 @@ class Widelands_Map_Map_Object_Saver {
 	uint get_nr_wares          () const throw () {return m_nr_wares;}
 	uint get_nr_bobs           () const throw () {return m_nr_bobs;}
 	uint get_nr_immovables     () const throw () {return m_nr_immovables;}
+	uint get_nr_battles        () const throw () {return m_nr_battles;}
+	uint get_nr_attack_controllers() const throw () {return m_nr_attack_controllers;}
+
+
 
 	bool is_object_saved(const Map_Object * const obj) throw ()
 	{return m_saved_obj[obj];}
@@ -58,7 +62,7 @@ class Widelands_Map_Map_Object_Saver {
 	std::map<const Map_Object *, bool> m_saved_obj;
       Map_Object_Map m_objects;
       uint m_nr_roads, m_nr_flags, m_nr_buildings, m_nr_bobs,
-           m_nr_wares, m_nr_immovables;
+           m_nr_wares, m_nr_immovables, m_nr_battles, m_nr_attack_controllers;
 };
 
 

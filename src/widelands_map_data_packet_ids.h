@@ -52,5 +52,6 @@
 #define PACKET_SEEN_FIELDS       22        // Scenario packet, non obligatory
 
 #define PACKET_BATTLE            23        // Active battle, non obligatory
+#define PACKET_ATTACK_CONTROLLER 24        // Active attack controller, non obligatory
 #define PACKET_END_OF_MAP_DATA 254         // End of Map
 #endif

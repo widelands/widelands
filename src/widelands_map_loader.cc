@@ -24,6 +24,7 @@
 #include "player.h"
 #include "tribe.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_attack_controller_data_packet.h"
 #include "widelands_map_battle_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
@@ -310,6 +311,13 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
    log("Reading Battle Data ... ");
    dp=new Widelands_Map_Battle_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+   
+   //This should be done after loading of soldiers and military sites
+   log("Reading Attack Controller Data ... ");
+   dp=new Widelands_Map_Attack_Controller_Data_Packet();
    dp->Read(m_fs, egbase, !scenario, m_mol);
    delete dp;
    log("done!\n ");
