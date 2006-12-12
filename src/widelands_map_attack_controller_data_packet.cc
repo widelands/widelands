@@ -74,7 +74,6 @@ throw (_wexception)
          ol->register_object(egbase, serial, ctrl);
          
          uint flagFilePos = fr.Unsigned32();
-         log("Loggi: searching for a flag with serial %i\n",flagFilePos);
          
          Flag* flag = (Flag*) ol->get_object_by_file_index(flagFilePos);
          assert(flag);
@@ -151,7 +150,6 @@ throw (_wexception) {
       //save the flag against which the attack is launched
       assert(os->is_object_known(ctrl->flag));
       uint flagFilePos = os->get_object_file_index(ctrl->flag);
-      log("Loggi: WRITING a flag with serial %i for ATTACK CONTROLLER\n",flagFilePos);
       fw.Unsigned32(flagFilePos);
       
       fw.Unsigned32(ctrl->attackingPlayer);
