@@ -71,8 +71,6 @@
 		BF22DDA70A5FB72B00D0292B /* editor_set_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB980A5FB72A00D0292B /* editor_set_terrain_tool.cc */; };
 		BF22DDB10A5FB72B00D0292B /* editor_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA20A5FB72A00D0292B /* editor_tool.h */; };
 		BF22DDB20A5FB72B00D0292B /* multi_select.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA30A5FB72A00D0292B /* multi_select.h */; };
-		BF22DDB40A5FB72B00D0292B /* set_terrain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA50A5FB72A00D0292B /* set_terrain.cc */; };
-		BF22DDB50A5FB72B00D0292B /* set_terrain.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA60A5FB72A00D0292B /* set_terrain.h */; };
 		BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */; };
 		BF22DDB70A5FB72B00D0292B /* editor_event_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA90A5FB72B00D0292B /* editor_event_menu.h */; };
 		BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBAA0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc */; };

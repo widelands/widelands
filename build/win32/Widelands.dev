@@ -3956,26 +3956,6 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit396]
-FileName=..\..\src\editor\tools\set_terrain.cc
-CompileCpp=1
-Folder=editor/tools
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit397]
-FileName=..\..\src\editor\tools\set_terrain.h
-CompileCpp=1
-Folder=editor/tools
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit398]
 FileName=..\..\src\editor\ui_menus\editor_event_menu.cc
 CompileCpp=1
