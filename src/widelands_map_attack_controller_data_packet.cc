@@ -71,8 +71,6 @@ throw (_wexception)
          AttackController* ctrl = egbase->create_attack_controller();
          
          uint serial = fr.Unsigned32();
-         ol->register_object(egbase, serial, ctrl);
-         
          uint flagFilePos = fr.Unsigned32();
          
          Flag* flag = (Flag*) ol->get_object_by_file_index(flagFilePos);
