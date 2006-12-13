@@ -25,8 +25,8 @@ thatchreed=2
 
 [idle]
 pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hot_spot_x=35
+hot_spot_y=85
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -35,9 +35,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=b_??.png  # ???
+hot_spot_x=35
+hot_spot_y=85
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -46,9 +46,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=w_??.png  # ???
+hot_spot_x=35
+hot_spot_y=85
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -56,4 +56,3 @@ shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 
-[

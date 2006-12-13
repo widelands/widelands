@@ -77,7 +77,7 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
+pics=b_??.png  # ???
 hot_spot_x=45
 hot_spot_y=65
 clrkey_r=255
@@ -88,7 +88,7 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
+pics=w_??.png  # ???
 hot_spot_x=45
 hot_spot_y=65
 clrkey_r=255
