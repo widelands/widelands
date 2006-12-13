@@ -26,6 +26,7 @@
 #include "ui_object.h"
 
 #include <SDL_types.h>
+#include <stdint.h> //  Because old version of SDL_types.h do not include this.
 
 #include <string>
 
