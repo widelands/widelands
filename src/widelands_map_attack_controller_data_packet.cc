@@ -80,6 +80,7 @@ throw (_wexception)
          ctrl->attackingPlayer = fr.Unsigned32();
          ctrl->defendingPlayer = fr.Unsigned32();
          ctrl->totallyLaunched = fr.Unsigned32();
+         ctrl->attackedMsEmpty = fr.Unsigned8();
          
          uint numBs = fr.Unsigned32();
          
@@ -152,7 +153,8 @@ throw (_wexception) {
       
       fw.Unsigned32(ctrl->attackingPlayer);
       fw.Unsigned32(ctrl->defendingPlayer);
-      fw.Unsigned32(ctrl->totallyLaunched); 
+      fw.Unsigned32(ctrl->totallyLaunched);
+      fw.Unsigned8(ctrl->attackedMsEmpty);
       
       //write battle soldier structure of involved soldiers
       fw.Unsigned32(ctrl->involvedSoldiers.size());
@@ -181,6 +183,7 @@ throw (_wexception) {
          assert(os->is_object_known(ms));
          fw.Unsigned32(os->get_object_file_index(ms));
       }
+
       os->mark_object_as_saved(ctrl);
    }
    
