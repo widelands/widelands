@@ -79,6 +79,7 @@ AttackController::AttackController(Game* _game) :
 BaseImmovable(&globalAttackControllerDescr)  {
    Map_Object::init(_game);
    this->game = _game;
+   this->attackedMsEmpty = false;
 }
 
 AttackController::AttackController(Game* _game, Flag* _flag, int _attacker, int _defender) : 
@@ -91,6 +92,8 @@ BaseImmovable(&globalAttackControllerDescr)  {
    this->attackingPlayer = _attacker;
    this->defendingPlayer = _defender;
    this->totallyLaunched = 0;
+   this->attackedMsEmpty = false;
+   
 }
 
 AttackController::~AttackController() {
@@ -111,18 +114,24 @@ void AttackController::cleanup (Editor_Game_Base* eg)
 void AttackController::launchAttack(uint nrAttackers) {
    launchAllSoldiers(true,nrAttackers);
    //always try to launch two more defenders than attackers
-   launchAllSoldiers(false,nrAttackers+2);
+   if (!launchAllSoldiers(false,nrAttackers+2)) {
+      attackedMsEmpty = true;
+   }
 }
 
-void AttackController::launchAllSoldiers(bool attackers, int max) {
+bool AttackController::launchAllSoldiers(bool attackers, int max) {
    std::vector<MilitarySite*> militarySites;
    getCloseMilitarySites(game,flag,(attackers ? attackingPlayer : defendingPlayer),&militarySites);
-
+   
+   bool launchedSoldier = false;
+   
    for (std::vector<MilitarySite*>::const_iterator it=militarySites.begin();it != militarySites.end();++it) {
       uint soldiersOfMs = (*it)->nr_attack_soldiers();
       uint nrLaunch = ((max > -1) && (soldiersOfMs > (uint)max) ? (uint)max : soldiersOfMs);
 		if (nrLaunch == 0) continue;
-
+		
+		launchedSoldier = true;
+		
       launchSoldiersOfMilitarySite(*it,nrLaunch,attackers);
 
       if (max > -1) {
@@ -132,6 +141,7 @@ void AttackController::launchAllSoldiers(bool attackers, int max) {
       }
 
    }
+   return launchedSoldier;
 }
 
 void AttackController::launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers) {
@@ -183,7 +193,12 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 }
 
 void AttackController::moveToReached(Soldier* soldier) {
-   startBattle(soldier,true);
+   if (this->attackedMsEmpty) {
+      soldierWon(soldier);
+   }
+   else {
+      startBattle(soldier,true);
+   }
    log("Soldier %dP reached flag.\n",soldier->get_serial());
 }
 

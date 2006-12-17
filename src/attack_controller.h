@@ -77,7 +77,7 @@ class AttackController : public BaseImmovable {
       bool battleGroundOccupied(Coords* coords);
       void calcBattleGround(BattleSoldier*, int);
 
-      void launchAllSoldiers(bool attackers, int nrLaunch);
+      bool launchAllSoldiers(bool attackers, int nrLaunch);
       void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers);
       bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
 
@@ -92,6 +92,7 @@ class AttackController : public BaseImmovable {
       int attackingPlayer;
       int defendingPlayer;
       uint totallyLaunched;
+      bool attackedMsEmpty;
       Flag* flag;
       Game* game;
 
