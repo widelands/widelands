@@ -110,7 +110,7 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 		}
 		else {
 			//not cached, create a new surface
-			ci.surface_id = create_text_surface(f, fg, bg, text, align, wrap);
+			ci.surface_id = create_text_surface(f, fg, bg, text, align, wrap, caret);
 			// Now cache it
 			g_gr->get_picture_size(ci.surface_id, ci.w, ci.h);
 			ci.f = f;

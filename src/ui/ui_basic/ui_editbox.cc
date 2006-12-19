@@ -60,6 +60,7 @@ Edit_Box::Edit_Box
 
    set_handle_mouse(true);
    set_can_focus(true);
+   set_draw_caret(true);
 }
 
 /**

@@ -46,7 +46,8 @@ Basic_Button::Basic_Button
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
-	m_clr_down      (229, 161, 2)
+	m_clr_down      (229, 161, 2),
+	m_draw_caret	 (false)
 {
 	set_think(false);
 
@@ -131,7 +132,7 @@ void Basic_Button::draw(RenderTarget* dst)
 	else if (m_title.length()) // otherwise draw the title string centered
 		{
 		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, get_w()>>1, get_h()>>1,
-		                    m_title.c_str(), Align_Center);
+		                    m_title.c_str(), Align_Center, -1, Widget_Cache_None, 0, (m_draw_caret ? m_title.length() : -1));
 		}
 
 	// draw border

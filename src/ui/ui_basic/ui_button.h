@@ -43,6 +43,7 @@ struct Basic_Button : public Panel {
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 	void set_enabled(bool on);
+	void set_draw_caret(bool draw_caret) { m_draw_caret = draw_caret;}
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
@@ -67,6 +68,7 @@ private:
 	uint		m_pic_custom; // custom icon on the button
 
 	RGBColor	m_clr_down;		// color of border while a flat button is "down"
+	bool 		m_draw_caret;
 };
 
 /**
