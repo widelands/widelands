@@ -118,4 +118,6 @@ enum {
 };
 //@}
 
+#define NUMBER_OF_WORKAREA_PICS 3U
+
 #endif

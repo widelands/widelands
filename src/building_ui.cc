@@ -475,6 +475,7 @@ protected:
 
 	void act_bulldoze();
 	void act_debug();
+	void toggle_workarea();
 	void act_start_stop();
 	void act_enhance(const Building_Descr::Index);
    void act_drop_soldier(uint);
@@ -486,7 +487,10 @@ private:
 	Building*				m_building;
 
 	UI::Panel*	m_capsbuttons;		// UI::Panel that contains capabilities buttons
+	UI::Button<Building_Window> * m_toggle_workarea;
 	uint		m_capscache;		// capabilities that were last used in setting up the caps panel
+	Overlay_Manager::Job_Id m_workarea_job_id;
+	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS + 1];
 };
 
 
@@ -498,7 +502,9 @@ Create the window, add it to the registry.
 ===============
 */
 Building_Window::Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry)
-	: UI::Window(parent, 0, 0, Width, 0, building->get_descname())
+:
+UI::Window(parent, 0, 0, Width, 0, building->get_descname()),
+m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
 	m_registry = registry;
 	if (*m_registry)
@@ -514,6 +520,14 @@ Building_Window::Building_Window(Interactive_Player* parent, Building* building,
 	move_to_mouse();
 
 	set_think(true);
+
+	for (unsigned int i = 1; i <= NUMBER_OF_WORKAREA_PICS; ++i) {
+		char filename[30];
+		snprintf(filename, sizeof(filename), "pics/workarea%icumulative.png", i);
+		workarea_cumulative_picid[i]
+			= g_gr->get_picture( PicMod_Game,  filename );
+	}
+
 }
 
 
@@ -526,6 +540,9 @@ Add to registry
 */
 Building_Window::~Building_Window()
 {
+	if (not m_workarea_job_id.isNull())
+		static_cast<Interactive_Player * const>(get_parent())
+		->map().overlay_manager().remove_overlay(m_workarea_job_id);
 	*m_registry = 0;
 }
 
@@ -661,6 +678,17 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
+	if (m_building->get_descr()->m_recursive_workarea_info.size()) {
+		m_toggle_workarea = new UI::Button<Building_Window>
+			(m_capsbuttons,
+			 x, 0, 34, 34,
+			 4,
+			 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
+			 &Building_Window::toggle_workarea, this,
+			 _("Show workarea"));
+		x += 34;
+	}
+
 	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
 		new UI::Button<Building_Window>
 			(m_capsbuttons,
@@ -758,6 +786,43 @@ Callback for debug window
 void Building_Window::act_debug()
 {
 	show_mapobject_debug(m_player, m_building);
+}
+
+
+void Building_Window::toggle_workarea() {
+	Map & map = static_cast<Interactive_Player * const>(get_parent())->map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	if (m_workarea_job_id.isNull()) {
+		const Coords position = m_building->get_position();
+		m_workarea_job_id = overlay_manager.get_a_job_id();
+		const Workarea_Info & workarea_info =
+			m_building->get_descr()->m_recursive_workarea_info;
+		m_workarea_job_id = overlay_manager.get_a_job_id();
+		unsigned int hole_radius = 0;
+		Workarea_Info::const_iterator it = workarea_info.begin();
+		for
+			(unsigned int i =
+				 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+			 i > 0; --i, ++it)
+		{
+			const unsigned int radius = it->first;
+			MapHollowRegion workarea
+				= MapHollowRegion(map, position, radius, hole_radius);
+			Coords c;
+			while (workarea.next(c)) overlay_manager.register_overlay
+				(c,
+				 workarea_cumulative_picid[i],
+				 0,
+				 Coords(-1, -1),
+				 m_workarea_job_id);
+			hole_radius = radius;
+		}
+		m_toggle_workarea->set_tooltip(_("Hide workarea").c_str());
+	} else {
+		overlay_manager.remove_overlay(m_workarea_job_id);
+		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
+		m_toggle_workarea->set_tooltip(_("Show workarea").c_str());
+	}
 }
 
 
@@ -1364,26 +1429,26 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 		 UI::Box::AlignLeft);
 	box->add_space(8);
 
-	UI::Panel* pan = new UI::Panel(box, 0, 34, Width+100, 34);
+	UI::Panel* pan = new UI::Panel(box, 0, 34, Width + 134, 34);
 
 	// Add the caps button
 	create_capsbuttons(pan);
 
-		new UI::Textarea (pan, 70, 11, _("Capacity"), Align_Left);
+		new UI::Textarea (pan, 104, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
 	new UI::Button<MilitarySite_Window>
 		(pan,
-		 140, 4, 24, 24,
+		 174, 4, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_Game, pic_down_train),
 		 &MilitarySite_Window::soldier_capacity_down, this);
 	new UI::Button<MilitarySite_Window>
 		(pan,
-		 188, 4, 24, 24,
+		 222, 4, 24, 24,
 		 4,
 		 g_gr->get_picture(PicMod_Game, pic_up_train),
 		 &MilitarySite_Window::soldier_capacity_up, this);
-	m_capacity =new UI::Textarea (pan, 170, 11, "XX", Align_Center);
+	m_capacity =new UI::Textarea (pan, 204, 11, "XX", Align_Center);
 
 	box->add(pan, UI::Box::AlignLeft);
 

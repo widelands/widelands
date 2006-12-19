@@ -173,7 +173,6 @@ FieldActionWindow IMPLEMENTATION
 
 ==============================================================================
 */
-static const size_t number_of_workarea_pics = 3;
 class FieldActionWindow : public UI::UniqueWindow {
 public:
 	FieldActionWindow(Interactive_Base *iabase, Player* plr, UI::UniqueWindow::Registry *registry);
@@ -225,7 +224,7 @@ private:
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 	uint m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	unsigned int workarea_cumulative_picid[number_of_workarea_pics + 1];
+	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS + 1];
 
    /// Variables to use with attack dialog
    UI::Textarea* m_text_attackers;
@@ -294,7 +293,7 @@ FieldActionWindow::FieldActionWindow
    m_text_attackers = 0;
 
 	m_fastclick = true;
-	for (unsigned int i = 1; i <= number_of_workarea_pics; ++i) {
+	for (unsigned int i = 1; i <= NUMBER_OF_WORKAREA_PICS; ++i) {
 		char filename[30];
 		snprintf(filename, sizeof(filename), "pics/workarea%icumulative.png", i);
 		workarea_cumulative_picid[i]
@@ -863,7 +862,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(unsigned int i =
-				 std::min(workarea_info.size(), number_of_workarea_pics);
+				 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
 			 i > 0; --i, ++it) {
 			const unsigned int radius = it->first;
 			hole_radius = radius;
