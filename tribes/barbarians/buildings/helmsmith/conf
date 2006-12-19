@@ -66,9 +66,9 @@ grindstone=2
 thatchreed=3
 
 [idle]
-pics=i_??.png  # ???
+pics=helmsmith_i_??.png  # ???
 hot_spot_x=45
-hot_spot_y=65
+hot_spot_y=85
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -77,9 +77,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=b_??.png  # ???
+pics=helmsmith_b_??.png  # ???
 hot_spot_x=45
-hot_spot_y=65
+hot_spot_y=85
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -88,9 +88,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=w_??.png  # ???
+pics=helmsmith_w_??.png  # ???
 hot_spot_x=45
-hot_spot_y=65
+hot_spot_y=85
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
