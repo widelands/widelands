@@ -133,8 +133,9 @@ msgstr "Djuruppfödar stuga"
 msgid "Gold Mine"
 msgstr "Guldgruva"
 
-#: ../tribes/barbarians/buildings/granitmine/conf:2
-msgid "Granit Mine"
+#: ../tribes/barbarians/buildings/granitemine/conf:2
+#, fuzzy
+msgid "Granite Mine"
 msgstr "Stengruva"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2

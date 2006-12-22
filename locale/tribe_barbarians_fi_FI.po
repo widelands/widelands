@@ -125,8 +125,9 @@ msgstr ""
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../tribes/barbarians/buildings/granitmine/conf:2
-msgid "Granit Mine"
+#: ../tribes/barbarians/buildings/granitemine/conf:2
+#, fuzzy
+msgid "Granite Mine"
 msgstr "Graniittikaivos"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2

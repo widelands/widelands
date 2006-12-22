@@ -129,8 +129,9 @@ msgstr "Hutte de Garde-Chasse"
 msgid "Gold Mine"
 msgstr "Mine d'or"
 
-#: ../tribes/barbarians/buildings/granitmine/conf:2
-msgid "Granit Mine"
+#: ../tribes/barbarians/buildings/granitemine/conf:2
+#, fuzzy
+msgid "Granite Mine"
 msgstr "Mine de Granit"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2

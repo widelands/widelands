@@ -127,8 +127,8 @@ msgstr ""
 msgid "Gold Mine"
 msgstr ""
 
-#: ../tribes/barbarians/buildings/granitmine/conf:2
-msgid "Granit Mine"
+#: ../tribes/barbarians/buildings/granitemine/conf:2
+msgid "Granite Mine"
 msgstr ""
 
 #: ../tribes/barbarians/buildings/hardener/conf:2

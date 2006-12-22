@@ -124,8 +124,9 @@ msgstr "Hajný"
 msgid "Gold Mine"
 msgstr "Zlatý důl"
 
-#: ../tribes/barbarians/buildings/granitmine/conf:2
-msgid "Granit Mine"
+#: ../tribes/barbarians/buildings/granitemine/conf:2
+#, fuzzy
+msgid "Granite Mine"
 msgstr "Žulový důl"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
