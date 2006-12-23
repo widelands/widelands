@@ -30,7 +30,7 @@
 float MapviewPixelFunctions::calc_brightness
 (const int l, const int r, const int tl, const int tr, const int bl, const int br)
 {
-	static Vector sun_vect = Vector(V3, -V3, -V3);	// |sun_vect| = 1
+	static Vector sun_vect = Vector(V3, -V3, -V3); //  |sun_vect| = 1
 
 	Vector normal;
 
@@ -39,8 +39,8 @@ float MapviewPixelFunctions::calc_brightness
 // but hey, results say i'm good at guessing :)
 // perhaps i'll paint an explanation for this someday
 // florian
-#define COS60	0.5
-#define SIN60	0.86603
+#define COS60 0.5
+#define SIN60 0.86603
 #ifdef _MSC_VER
 // don't warn me about fuckin float conversion i know what i'm doing
 #pragma warning(disable:4244)

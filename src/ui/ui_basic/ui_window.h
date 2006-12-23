@@ -33,13 +33,14 @@ namespace UI {
  *
  *  <--20leftmostpixel_of_top--><60Pixels as often as possible to reach window with from top><20rightmost pixel of top>
  *  ^
- *  20 topmost pixels of l_border                                      <--- > same for r_border
- *  as often as needed: 60 pixels of l_border								  <--- > same for r_border
- *  20 bottom pixels of l_border													  <--- > same for r_borde
+ *  20 topmost pixels of l_border                       <--- > same for r_border
+ *  as often as needed: 60 pixels of l_border           <--- > same for r_border
+ *  20 bottom pixels of l_border                        <--- > same for r_border
  *  <--20leftmostpixel_of_bot--><60Pixels as often as possible to reach window with from bot><20rightmost pixel of bot>
  *
- * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
- * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
+ * So: the l_border and the r_border pics MUST have a height of 100, while the
+ *     width must be 20 and the top and bot pics MUST have a width of 100, while
+ *     the height must be 20
  *
  * A click with the middle mouse button (or STRG+LClick) minimizes a window. Minimize means, that
  * the window is only the caption bar, nothing inside. Another click on this bar resizes the window again
@@ -78,13 +79,13 @@ private:
 	bool _dragging, _docked_left, _docked_right, _docked_bottom;
 	int _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;
 
-	std::string		m_title;
+	std::string m_title;
 
-	uint	m_pic_lborder;
-	uint	m_pic_rborder;
-	uint	m_pic_top;
-	uint	m_pic_bottom;
-	uint	m_pic_background;
+	uint        m_pic_lborder;
+	uint        m_pic_rborder;
+	uint        m_pic_top;
+	uint        m_pic_bottom;
+	uint        m_pic_background;
 };
 };
 

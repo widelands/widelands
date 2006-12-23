@@ -22,8 +22,8 @@
 
 #include "ui_panel.h"
 
-#define MENU_XRES	800   ///< Fullscreen Menu Width
-#define MENU_YRES	600   ///< Fullscreen Menu Height
+#define MENU_XRES 800 ///< Fullscreen Menu Width
+#define MENU_YRES 600 ///< Fullscreen Menu Height
 
 /// Base class for all Fullscreen menus
 /**
@@ -32,7 +32,7 @@
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
 class Fullscreen_Menu_Base : public UI::Panel {
-	uint	m_pic_background;
+	uint m_pic_background;
 
 public:
 	Fullscreen_Menu_Base(const char *bgpic);

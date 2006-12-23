@@ -79,11 +79,10 @@ m_is_scenario(false)
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	m_ok.set_visible(not ng or ng->is_host());
 // Player settings
-	int i;
 	int y;
 
 	y = 250;
-	for(i = 1; i <= MAX_PLAYERS; i++)	{ // players start with 1, not 0
+	for (uint i = 1; i <= MAX_PLAYERS; ++i) {
 		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup(this, 50, y, m_game, i, m_netgame && m_netgame->get_playernum()==i);
 		pdg->changed.set(this, &Fullscreen_Menu_LaunchGame::refresh);
 

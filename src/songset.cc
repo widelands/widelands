@@ -38,7 +38,7 @@ Songset::~Songset()
 }
 
 /** Append a song to the end of the songset
- * \param filename	The song to append
+ * \param filename  the song to append
  * \note The \ref current_song will unconditionally be set to the songset's
  * first song. If you do not want to disturb the (linear) playback order then
  * \ref register_song() all songs before you start playing
@@ -52,8 +52,8 @@ void Songset::add_song(const std::string filename)
 /** Get a song from the songset. Depending on
  * \ref Sound_Handler::sound_random_order, the selection will either be random
  * or linear (after last song, will start again with first).
- * \return	a pointer to the chosen song; 0 if none was found, music is
- * 		disabled or an error occurred
+ * \return  a pointer to the chosen song; 0 if none was found, music is disabled
+ *          or an error occurred
  */
 Mix_Music *Songset::get_song()
 {
@@ -76,7 +76,7 @@ Mix_Music *Songset::get_song()
 	//first, close the previous song and remove it from memory
 	free(m_m);
 
-	if (m_rwops) {		//rwops might be 0
+	if (m_rwops) {//  rwops might be 0
 		SDL_FreeRW(m_rwops);
 		m_fr.Close();
 	}

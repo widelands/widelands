@@ -51,7 +51,7 @@
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
 #define CURRENT_MILITARYSITE_PACKET_VERSION     2
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   1
-#define CURRENT_TRAININGSITE_PACKET_VERSION		1
+#define CURRENT_TRAININGSITE_PACKET_VERSION     1
 
 /*
  * Destructor
@@ -306,7 +306,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
       // read the version
       uint version=fr.Unsigned16();
 
-      if(version==CURRENT_MILITARYSITE_PACKET_VERSION) {
+	if (version == CURRENT_MILITARYSITE_PACKET_VERSION) {
          // Read productionsite
 		read_productionsite(militarysite, fr, egbase, ol);
 
@@ -315,7 +315,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
 
 			for(uint i=0; i<militarysite.m_soldier_requests.size(); i++)
 	         delete militarysite.m_soldier_requests[i];
-      	militarysite.m_soldier_requests.resize(nr_requests);
+		militarysite.m_soldier_requests.resize(nr_requests);
 
 			for(uint i=0; i<nr_requests; i++) {
 				Request & req = *new Request
@@ -326,7 +326,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
 					 Request::SOLDIER);
 				req.Read(&fr, egbase, ol);
 				militarysite.m_soldier_requests[i] = &req;
-      	}
+			}
 
          // Soldier
          uint nr_soldiers = fr.Unsigned16();
@@ -805,13 +805,13 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
    // Write for productionsite
    write_productionsite(trainingsite, fw, egbase, os);
 
-   	// Requests
+	//  requests
    fw.Unsigned16(trainingsite.m_soldier_requests.size());
    for(uint i=0; i<trainingsite.m_soldier_requests.size(); i++)
       trainingsite.m_soldier_requests[i]->Write(&fw,egbase,os);
 
 
-   	// Soldiers
+	//  soldiers
    fw.Unsigned16(trainingsite.m_soldiers.size());
    for(uint i=0; i<trainingsite.m_soldiers.size(); i++) {
       assert(os->is_object_known(trainingsite.m_soldiers[i]));

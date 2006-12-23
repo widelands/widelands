@@ -38,8 +38,8 @@ class Trackable {
 	friend class BaseTrackPtr;
 
 	class Tracker {
-		uint			m_refcount;
-		Trackable*	m_ptr;
+		uint        m_refcount;
+		Trackable * m_ptr;
 
 	public:
 		Tracker(Trackable* p) : m_refcount(0), m_ptr(p) { }
@@ -72,7 +72,7 @@ public:
 	virtual ~Trackable() { m_tracker->clear(); }
 
 private:
-	Tracker*		m_tracker;
+	Tracker * m_tracker;
 };
 
 
@@ -83,7 +83,7 @@ TrackPtr is a template that derives from BaseTrackPtr and provides a
 type-safe interface.
 */
 class BaseTrackPtr {
-	mutable Trackable::Tracker*	m_tracker;
+	mutable Trackable::Tracker * m_tracker;
 
 protected:
 	BaseTrackPtr() : m_tracker(0) { }

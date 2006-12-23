@@ -147,16 +147,16 @@ class Editor_Game_Base {
 		void cleanup_playerimmovables_area(Coords coords, int radius);
 
       int m_gametime;
-      Player*							m_players[MAX_PLAYERS];
-      Object_Manager*				m_objects;
+	Player                   * m_players[MAX_PLAYERS];
+	Object_Manager           * m_objects;
 protected:
-      std::vector<Tribe_Descr*>	m_tribes;
+	std::vector<Tribe_Descr *> m_tribes;
 private:
-      Interactive_Base*          m_iabase;
-      Map*								m_map;
+	Interactive_Base         * m_iabase;
+	Map                      * m_map;
 
-		uint								m_lasttrackserial;
-		std::map<uint, void*>		m_trackpointers;
+	uint                       m_lasttrackserial;
+	std::map<uint, void *>     m_trackpointers;
       // I know that this fucks, ideas ?
 #define MAX_X     512
 #define MAX_Y     512
@@ -166,7 +166,7 @@ public:
 	int  m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
                                                          // The playernr 0 is the REAL OWNER
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
-      std::vector<uint>           m_attack_serials; 
+	std::vector<uint>          m_attack_serials;
 
 private:
 	Editor_Game_Base & operator=(const Editor_Game_Base &);

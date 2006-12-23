@@ -25,10 +25,11 @@
 
 
 namespace UI {
-#define TP_BUTTON_WIDTH			34
-#define TP_BUTTON_HEIGHT		34
+#define TP_BUTTON_WIDTH     34
+#define TP_BUTTON_HEIGHT    34
 
-#define TP_SEPARATOR_HEIGHT	4	// height of the bar separating buttons and tab contents
+//  height of the bar separating buttons and tab contents
+#define TP_SEPARATOR_HEIGHT  4
 
 
 /**

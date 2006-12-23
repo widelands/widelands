@@ -30,12 +30,12 @@ namespace UI {
 /**
 Initialize a panel
 
-Args: parent	parent panel
-      x		coordinates of the Table
+Args: parent  parent panel
+      x       coordinates of the Table
       y
-      w		dimensions, in pixels, of the Table
+      w       dimensions, in pixels, of the Table
       h
-      align	alignment of text inside the Table
+      align   alignment of text inside the Table
 */
 Table<void *>::Table
 	(Panel * const parent,
@@ -263,7 +263,7 @@ bool Table<void *>::handle_mouserelease(const Uint8 btn, int, int)
 /**
  * Change the currently selected entry
  *
- * Args: i	the entry to select
+ * Args: i  the entry to select
  */
 void Table<void *>::select(const uint i)
 {

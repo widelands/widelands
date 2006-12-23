@@ -59,11 +59,11 @@ class NetGGZ {
 		op_broadcast_ip = 4
 	};
 
- 	void initcore(const char *hostname, const char *playername);
- 	void deinitcore();
+	void   initcore(const char * hostname, const char * playername);
+	void deinitcore();
 	bool usedcore();
 	void datacore();
- 	void launch();
+	void launch    ();
 	void join(const char *tablename);
 
     private:

@@ -55,9 +55,10 @@ TrainingSite_Descr::~TrainingSite_Descr()
 
 /**
  * Parse the additional information necessary for miltary buildings
- * \param directory	where to find the description file
- * \param prof		the configuration profile to read
- * \param encdata 	defaults for building animations' color codes (e.g. keycolor, shadow color). \sa EncodeData::parse()
+ * \param directory  where to find the description file
+ * \param prof       the configuration profile to read
+ * \param encdata    defaults for building animations' color codes (e.g.
+ *                   keycolor, shadow color). \sa EncodeData::parse()
  * \todo Is the encdata stuff still valid with the new transparent-png support?
  */
 void TrainingSite_Descr::parse(const char *directory, Profile * prof, const EncodeData * encdata)
@@ -73,7 +74,7 @@ void TrainingSite_Descr::parse(const char *directory, Profile * prof, const Enco
 	sglobal = prof->get_section("global");
 	//TODO: what if there is no global section? can this happen?
 
-	m_stopable = true;	//(defaults to false)
+	m_stopable = true; // (defaults to false)
 	m_num_soldiers = sglobal->get_safe_int("max_soldiers");
 
 	trainable = sglobal->get_safe_string("train");
@@ -122,7 +123,7 @@ void TrainingSite_Descr::parse(const char *directory, Profile * prof, const Enco
 
 /**
  * Create a new training site
- * \return	The new training site
+ * \return  the new training site
  */
 Building *TrainingSite_Descr::create_object()
 {
@@ -131,8 +132,8 @@ Building *TrainingSite_Descr::create_object()
 
 /**
  * Returns the minimum level to which this building can downgrade a specified attribute
- * \param at	the attribute to investigate
- * \return	the minimum level to be attained at this site
+ * \param at  the attribute to investigate
+ * \return  the minimum level to be attained at this site
  */
 int TrainingSite_Descr::get_min_level(const tAttribute at) const {
 	switch (at) {
@@ -151,8 +152,8 @@ int TrainingSite_Descr::get_min_level(const tAttribute at) const {
 
 /**
  * Returns the maximum level to which this building can upgrade a specified attribute
- * \param at	the attribute to investigate
- * \return	the maximum level to be attained at this site
+ * \param at  the attribute to investigate
+ * \return  the maximum level to be attained at this site
  */
 int TrainingSite_Descr::get_max_level(const tAttribute at) const {
 	switch (at) {
@@ -202,7 +203,7 @@ TrainingSite::~TrainingSite()
 
 /**
  * Retrieve the training program that is currently running.
- * \return	The name of the current program
+ * \return  the name of the current program
  */
 std::string TrainingSite::get_statistics_string()
 {
@@ -231,7 +232,7 @@ void TrainingSite::init(Editor_Game_Base * g)
 
 /**
  * Change the economy this site belongs to.
- * \par e	The new economy. Can be zero, because unconnected buildings have no economy
+ * \par e  The new economy. Can be 0 (unconnected buildings have no economy).
  * \note the worker (but not the soldiers) is dealt with in the PlayerImmovable code.
  */
 void TrainingSite::set_economy(Economy * e)
@@ -332,7 +333,9 @@ void TrainingSite::request_soldier(Game * g)
 		totalmax += get_descr()->get_max_level(atrHP);
 		r->set(atrHP, get_descr()->get_min_level(atrHP), get_descr()->get_max_level(atrHP));
 	}
-	r->set(atrTotal, totalmin, totalmax - 1);	// To make sure that fully trained soldiers are not requested
+
+	//  To make sure that fully trained soldiers are not requested.
+	r->set(atrTotal, totalmin, totalmax - 1);
 
 	req->set_requeriments(r);
 
@@ -371,7 +374,10 @@ void TrainingSite::request_soldier_callback
 
 	tsite->m_soldiers.push_back(s);
 	tsite->m_total_soldiers = tsite->m_soldiers.size() + tsite->m_soldier_requests.size();
-	s->start_task_idle(g, 0, -1);	// bind the worker into this house, hide him on the map
+
+	//  bind the worker into this house, hide him on the map
+	s->start_task_idle(g, 0, -1);
+
 	s->mark(false);
 }
 
@@ -527,7 +533,7 @@ void TrainingSite::act(Game * g, uint data)
 			start_animation(g, get_descr()->get_animation("idle"));
 		}
 
-		program_act(g);	// this will do the actual training
+		program_act(g); //  this will do the actual training
 	}
 }
 
@@ -556,7 +562,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 		split_string(m_list_upgrades[i], &str, "_");
 
 		molog(m_list_upgrades[i].c_str());
-		assert(str.size() == 2);	// upgrade what
+		assert(str.size() == 2); //  upgrade what
 
 		if (str[1] == "hp")
 			attrib = atrHP;
@@ -747,7 +753,7 @@ void TrainingSite::add_pri(tAttribute atr)
 
 /**
  * Lower the given priority and make sure that the total of all priority points is >=2
- * \par atr	The priority to lower
+ * \par atr  the priority to lower
  */
 void TrainingSite::sub_pri(tAttribute atr)
 {
@@ -780,7 +786,7 @@ void TrainingSite::sub_pri(tAttribute atr)
 /**
  * Change the soldier capacity at the trainingsite.
  * \post Minimum and maximum capacity will be observed.
- * \param how	number to add/subtract from the current capacity
+ * \param how  number to add/subtract from the current capacity
  * \note Unlike the influence-defining military buildings, a training site can actually be empty of soldiers.
  *
  */
@@ -820,7 +826,7 @@ void TrainingSite::change_soldier_capacity(int how)
 
 /**
  * Get a list of possible upgrades ordered by priority. This list is used in
- * \par g	the curent game object
+ * \par g  the curent game object
  * \sa find_and_start_next_program()
  * \return n/a, the output is in \ref m_list_upgrades
  */
@@ -903,8 +909,8 @@ void TrainingSite::calc_list_upgrades(Game * g)
 
 /**
  * Start a training program
- * \param g	The current game object
- * \param name	The program to start
+ * \param game  the current game object
+ * \param name  the program to start
  */
 void TrainingSite::program_start(Game * g, std::string name)
 {
@@ -918,8 +924,8 @@ void TrainingSite::program_start(Game * g, std::string name)
 /**
  * Clean up after the end of a training program and find the next program that should
  * be run at this training site
- * \param g		The current game object
- * \param success	Whether the program was finished successfully
+ * \param game     the current game object
+ * \param success  whether the program was finished successfully
  */
 void TrainingSite::program_end(Game * g, bool success)
 {

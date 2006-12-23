@@ -39,7 +39,10 @@ struct Scrollbar : public Panel {
 	};
 
 	enum {
-		Size = 24,	///< default width for vertical scrollbars, height for horizontal scrollbars
+		/**
+		 * default width for vertical scrollbars, height for horizontal scrollbars
+		 */
+		Size = 24,
 	};
 
 public:
@@ -74,21 +77,21 @@ private:
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
 private:
-	bool		m_horizontal;
+	bool m_horizontal;
    bool     m_force_draw; // draw this scrollbar, even if it can't do anything
 
-	uint		m_pos;		///< from 0 to m_range - 1
-	uint		m_pagesize;
-	uint		m_steps;
+	uint m_pos;            ///< from 0 to m_range - 1
+	uint m_pagesize;
+	uint m_steps;
 
-	Area		m_pressed;			///< area that the user clicked on (None if mouse is up)
-	int		m_time_nextact;
-	int		m_knob_grabdelta;	///< only while m_pressed == Knob
+	Area m_pressed;        ///< area that the user clicked on (None if mouse is up)
+	int  m_time_nextact;
+	int  m_knob_grabdelta; ///< only while m_pressed == Knob
 
-	uint		m_pic_minus;	///< left/up
-	uint		m_pic_plus;		///< right/down
-	uint		m_pic_background;
-	uint		m_pic_buttons;
+	uint m_pic_minus;      ///< left/up
+	uint m_pic_plus;       ///< right/down
+	uint m_pic_background;
+	uint m_pic_buttons;
 };
 };
 

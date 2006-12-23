@@ -90,27 +90,27 @@ class NetGame {
 		PH_SETUP,
 		PH_PREGAME,
 		PH_INGAME
-	}		phase;
+	}                            phase;
 
-	Game*		game;
+	Game                       * game;
 
-	int		playernum;
-	ulong    net_game_time;
+	int                          playernum;
+	ulong                        net_game_time;
 
-	uint		common_rand_seed;
+	uint                         common_rand_seed;
 
-	bool		players_changed;
+	bool                         players_changed;
 
-	uchar		player_enabled;
-	uchar		player_human;
-	uchar		player_ready;
+	uchar                        player_enabled;
+	uchar                        player_human;
+	uchar                        player_ready;
 
-	PlayerDescriptionGroup*	playerdescr[MAX_PLAYERS];
-	Fullscreen_Menu_LaunchGame*	launch_menu;
+	PlayerDescriptionGroup     * playerdescr[MAX_PLAYERS];
+	Fullscreen_Menu_LaunchGame * launch_menu;
 
-	NetStatusWindow*		statuswnd;
+	NetStatusWindow            * statuswnd;
 
-	std::queue<Chat_Message>	chat_msg_queue;
+	std::queue<Chat_Message>     chat_msg_queue;
 };
 
 class NetHost:public NetGame {
@@ -137,31 +137,31 @@ class NetHost:public NetGame {
 	void update_network_delay ();
 
 	struct Client {
-		TCPsocket		sock;
-		Deserializer*		deserializer;
-		int			playernum;
-		std::queue<uint>	syncreports;
-		ulong			lag;
+		TCPsocket        sock;
+		Deserializer   * deserializer;
+		int              playernum;
+		std::queue<uint> syncreports;
+		ulong            lag;
 	};
 
-	LAN_Game_Promoter*		promoter;
+	LAN_Game_Promoter         * promoter;
 
-	TCPsocket			svsock;
-	SDLNet_SocketSet		sockset;
+	TCPsocket                   svsock;
+	SDLNet_SocketSet            sockset;
 
-	std::queue<PlayerCommand*>	cmds;
-	std::vector<Client>		clients;
+	std::queue<PlayerCommand *> cmds;
+	std::vector<Client>         clients;
 
-	Serializer*			serializer;
+	Serializer                * serializer;
 
-	std::queue<uint>		mysyncreports;
+	std::queue<uint>            mysyncreports;
 
-	ulong				net_delay;
-	ulong				net_delay_history[8];
+	ulong                       net_delay;
+	ulong                       net_delay_history[8];
 
-	ulong				next_ping_due;
-	ulong				last_ping_sent;
-	uint				pongs_received;
+	ulong                       next_ping_due;
+	ulong                       last_ping_sent;
+	uint                        pongs_received;
 };
 
 class NetClient:public NetGame {
@@ -182,11 +182,11 @@ class NetClient:public NetGame {
     private:
 	void disconnect ();
 
-	TCPsocket			sock;
-	SDLNet_SocketSet		sockset;
+	TCPsocket        sock;
+	SDLNet_SocketSet sockset;
 
-	Serializer*			serializer;
-	Deserializer*			deserializer;
+	Serializer     * serializer;
+	Deserializer   * deserializer;
 };
 
 class Serializer {
@@ -221,7 +221,7 @@ class Serializer {
 	void putstr (const char*);
 
     private:
-	std::vector<unsigned char>	buffer;
+	std::vector<unsigned char> buffer;
 };
 
 class Deserializer {
@@ -249,7 +249,7 @@ class Deserializer {
 	void getstr (char*, int);
 
     private:
-	std::queue<unsigned char>	queue;
+	std::queue<unsigned char> queue;
 };
 
 #endif

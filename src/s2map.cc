@@ -199,16 +199,16 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
    uchar *section = (uchar *)malloc(dw * dh);
 
 	try {
-	   int y;
-   	for(y = 0; y < height; y++) {
+		int y = 0;
+		for (; y < height; ++y) {
 			uchar *ptr = (uchar*)file->Data(width);
 			memcpy(section + y*width, ptr, width);
-      	file->Data(dw-width); // skip the alignment junk
+			file->Data(dw - width); //  skip the alignment junk
 	   }
-   	while(y < dh) {
+		while (y < dh) {
 			file->Data(dw); // more alignment junk
 	      y++;
-   	}
+		}
 	} catch(...) {
 		free(section);
 		throw;
@@ -308,7 +308,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		free(section);
 		section = 0;
 
-		////				S E C T I O N		2: Landscape
+		////           S E C T I O N    2 : Landscape
 		// New section??
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)

@@ -47,9 +47,9 @@ private:
 	void collapse();
 	void expand();
 
-	std::string		m_text;
-	Align				m_align;
-	bool				m_multiline;
+	std::string m_text;
+	Align       m_align;
+	bool        m_multiline;
    std::string    m_fontname;
    int            m_fontsize;
    RGBColor       m_fcolor;

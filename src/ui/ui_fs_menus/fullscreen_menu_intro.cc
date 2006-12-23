@@ -43,8 +43,7 @@ bool Fullscreen_Menu_Intro::handle_mouserelease(const Uint8, int, int)
 {return true;}
 
 bool Fullscreen_Menu_Intro::handle_key(bool down, int code, char) {
-	if (down && code==SDLK_ESCAPE)
-        	end_modal(0);
+	if (down and code == SDLK_ESCAPE) end_modal(0);
 
 	return true;
 }

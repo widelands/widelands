@@ -27,25 +27,25 @@ struct Critter_BobAction {
 	typedef bool (Critter_Bob::*execute_t)(Game* g, Bob::State* state, const Critter_BobAction* act);
 
 	enum {
-		walkObject,			// walk to objvar1
-		walkCoords,			// walk to coords
+		walkObject, //  walk to objvar1
+		walkCoords, //  walk to coords
 	};
 
-	execute_t		function;
-	int				iparam1;
-	int				iparam2;
-	std::string		sparam1;
+	execute_t                function;
+	int                      iparam1;
+	int                      iparam2;
+	std::string              sparam1;
 
-	std::vector<std::string>	sparamv;
+	std::vector<std::string> sparamv;
 };
 
 class Critter_BobProgram : public BobProgramBase {
 public:
 	struct Parser {
-		Critter_Bob_Descr*		descr;
-		std::string			directory;
-		Profile*				prof;
-      const EncodeData* encdata;
+		Critter_Bob_Descr * descr;
+		std::string         directory;
+		Profile           * prof;
+      const EncodeData  * encdata;
 	};
 
 	typedef void (Critter_BobProgram::*parse_t)(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
@@ -66,19 +66,19 @@ public:
 
 private:
 	struct ParseMap {
-		const char*		name;
-		parse_t			function;
+		const char * name;
+		parse_t      function;
 	};
 
 private:
 	void parse_remove(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
 
 private:
-	std::string						m_name;
-	std::vector<Critter_BobAction>	m_actions;
+	std::string                    m_name;
+	std::vector<Critter_BobAction> m_actions;
 
 private:
-	static const ParseMap		s_parsemap[];
+	static const ParseMap          s_parsemap[];
 };
 
 

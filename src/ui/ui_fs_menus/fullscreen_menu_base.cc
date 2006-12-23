@@ -36,7 +36,7 @@ Fullscreen_Menu_Base
  *
  * Initialize a pre-game menu
  *
- * Args: bgpic	name of the background picture
+ * Args: bgpic  name of the background picture
  */
 Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	: UI::Panel(0, 0, 0, MENU_XRES, MENU_YRES)

@@ -52,8 +52,8 @@ the game starts.
 Note that multiple tribes can define a worker with the same name. The different
 "version" of a worker must perform the same job, but they can look differently.
 */
-#define WARE_MENU_PIC_W		24
-#define WARE_MENU_PIC_H		24
+#define WARE_MENU_PIC_W  24
+#define WARE_MENU_PIC_H  24
 
 class Item_Ware_Descr : public Map_Object_Descr {
 public:
@@ -74,17 +74,17 @@ private:
 	void parse(const char *directory, Profile *prof);
 
 private:
-   std::string    m_name;
-   std::string		m_descname;
-	std::string		m_helptext;
-	std::string		m_menu_pic_fname;
-	std::string		m_pic_queue_full_fname;
-	std::string		m_pic_queue_empty_fname;
+	std::string m_name;
+	std::string m_descname;
+	std::string m_helptext;
+	std::string m_menu_pic_fname;
+	std::string m_pic_queue_full_fname;
+	std::string m_pic_queue_empty_fname;
 
-	uint				m_menu_pic;
+	uint        m_menu_pic;
 
-	uint				m_pic_queue_full;
-	uint				m_pic_queue_empty;
+	uint        m_pic_queue_full;
+	uint        m_pic_queue_empty;
 
 public:
 	static Item_Ware_Descr* create_from_dir(const char* name, const char* directory);
@@ -112,7 +112,7 @@ public:
    void set_nrwares( int i ) { assert(m_wares.size()==0); m_wares.resize(i, 0); }
 
 private:
-	std::vector<int>	m_wares;
+	std::vector<int> m_wares;
 
 	friend bool operator==(const WareList &wl1, const WareList &wl2);
 };

@@ -81,7 +81,7 @@ Statebox::~Statebox()
  * Set the enabled state of the checkbox. A disabled checkbox cannot be clicked
  * and is somewhat darker to tell it apart from enabled ones.
  *
- * Args: enabled	true if the checkbox should be enabled, false otherwise
+ * Args: enabled  true if the checkbox should be enabled, false otherwise
  */
 void Statebox::set_enabled(bool enabled)
 {
@@ -101,7 +101,7 @@ void Statebox::set_enabled(bool enabled)
 /**
  * Changes the state of the checkbox.
  *
- * Args: on		true if the checkbox should be checked
+ * Args: on  true if the checkbox should be checked
  */
 void Statebox::set_state(bool on)
 {

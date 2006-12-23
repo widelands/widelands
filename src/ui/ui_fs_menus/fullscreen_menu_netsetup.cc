@@ -230,10 +230,7 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 	}
 }
 
-//bool Fullscreen_Menu_NetSetup::is_internetgame()
-//{
-//	return internetgame;
-//}
+//bool Fullscreen_Menu_NetSetup::is_internetgame() {return internetgame;}
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
 	if(NetGGZ::ref()->usedcore())

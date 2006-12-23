@@ -32,19 +32,19 @@ class Profile;
 
 // Additional parameters for op parsing routines
 struct ProgramParser {
-	Immovable_Descr*		descr;
-	std::string				directory;
-	Profile* 				prof;
+	Immovable_Descr * descr;
+	std::string       directory;
+	Profile         * prof;
 };
 
 // One action of a program
 struct ImmovableAction {
 	typedef bool (Immovable::*execute_t)(Game* g, bool killable, const ImmovableAction& action);
 
-	execute_t	function;
-	int			iparam1;
-	int			iparam2;
-	std::string	sparam1;
+	execute_t   function;
+	int         iparam1;
+	int         iparam2;
+	std::string sparam1;
    std::string sparam2;
 };
 
@@ -71,16 +71,16 @@ private:
 
 private:
 	struct ParseMap {
-		const char*	name;
-		parse_t		function;
+		const char * name;
+		parse_t      function;
 	};
 
 private:
-	std::string							m_name;
-	std::vector<ImmovableAction>	m_actions;
+	std::string                  m_name;
+	std::vector<ImmovableAction> m_actions;
 
 private:
-	static const ParseMap			s_parsemap[];
+	static const ParseMap        s_parsemap[];
 };
 
 #endif // __S__IMMOVABLE_PROGRAM_H

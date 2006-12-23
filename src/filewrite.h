@@ -30,11 +30,11 @@ struct FileSystem;
  */
 class FileWrite {
 	public:
-		void	*data;
-		int	length;
-		int	maxsize;
-		int	filepos;
-		int   counter;
+	void * data;
+	int    length;
+	int    maxsize;
+	int    filepos;
+	int    counter;
 
 	public:
 		FileWrite();

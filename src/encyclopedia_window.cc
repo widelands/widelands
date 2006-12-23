@@ -38,7 +38,7 @@
 #include "production_program.h"
 #include "helper.h"
 
-#define WINDOW_WIDTH	600
+#define WINDOW_WIDTH  600
 #define WINDOW_HEIGHT 550
 
 EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr,UI::UniqueWindow::Registry& registry) :

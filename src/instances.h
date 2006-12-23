@@ -68,7 +68,7 @@ protected:
 
 
 private:
-	std::vector<uint>	m_attributes;
+	std::vector<uint>           m_attributes;
    std::map<std::string,uint> m_anims;
 
 
@@ -78,8 +78,8 @@ public:
 private:
 	typedef std::map<std::string, uint> AttribMap;
 
-	static uint			s_dyn_attribhigh;		// highest attribute ID used
-	static AttribMap	s_dyn_attribs;
+	static uint        s_dyn_attribhigh; //  highest attribute ID used
+	static AttribMap   s_dyn_attribs;
 
 	Map_Object_Descr & operator=(const Map_Object_Descr &);
 	Map_Object_Descr            (const Map_Object_Descr &);
@@ -126,9 +126,9 @@ class Map_Object {
 
 public:
 	enum {
-		BOB,			// class Bob
+		BOB,  //  class Bob
 
-		WARE,			// class WareInstance
+		WARE, //  class WareInstance
 
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
@@ -143,11 +143,11 @@ public:
 	// Some default, globally valid, attributes.
 	// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
 	enum Attribute {
-		WAREHOUSE = 1,		// assume BUILDING
+		WAREHOUSE        = 1, //  assume BUILDING
 		CONSTRUCTIONSITE, // assume BUILDING
-      WORKER,				// assume BOB
-		SOLDIER,				// assume WORKER
-		RESI,					// resource indicator, assume IMMOVABLE
+      WORKER,               //  assume BOB
+		SOLDIER,              //  assume WORKER
+		RESI,                 //  resource indicator, assume IMMOVABLE
 
 		HIGHEST_FIXED_ATTRIBUTE
 	};
@@ -202,10 +202,10 @@ protected:
 	void molog(const char* fmt, ...);
 
 protected:
-	const Map_Object_Descr*		m_descr;
-	uint						m_serial;
-	uint						m_file_serial;
-	LogSink*					m_logsink;
+	const Map_Object_Descr * m_descr;
+	uint                     m_serial;
+	uint                     m_file_serial;
+	LogSink                * m_logsink;
 
 private:
 	Map_Object & operator=(const Map_Object &);

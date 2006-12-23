@@ -82,8 +82,9 @@ class TrainingSite_Descr:public ProductionSite_Descr {
  * A building to change soldiers' abilities.
  * Soldiers can gain hitpoints, or experience in attack, defense and evasion.
  *
- * \note A training site does not change influence areas. If you lose the surrounding strongholds, the
- *	 training site will burn even if it contains soldiers!
+ * \note  A training site does not change influence areas. If you lose the
+ *        surrounding strongholds, the training site will burn even if it
+ *        contains soldiers!
  */
 class TrainingSite:public ProductionSite {
 	friend class Widelands_Map_Buildingdata_Data_Packet;

@@ -67,14 +67,17 @@ struct Multiline_Textarea : public Panel {
       inline RGBColor& get_font_clr() { return m_fcolor; }
 
    private:
-		std::string		m_text;
-		Scrollbar*	m_scrollbar;
+	std::string  m_text;
+	Scrollbar  * m_scrollbar;
 		ScrollMode     m_scrollmode;
 
    protected:
-		Align				m_align;
-		uint				m_cache_id;		///picid of the whole textarea surface
-		Widget_Cache   m_cache_mode; 	///set to Widget_Cache_Update if the whole textarea has to be rebuild
+	Align        m_align;
+	uint         m_cache_id; ///picid of the whole textarea surface
+
+	///set to Widget_Cache_Update if the whole textarea has to be rebuild
+	Widget_Cache m_cache_mode;
+
 		std::string    m_fontname;
 		int            m_fontsize;
 		RGBColor       m_fcolor;

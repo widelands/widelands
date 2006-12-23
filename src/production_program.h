@@ -33,12 +33,12 @@ struct ProductionAction {
 		actWorker,  // sparam1 = worker program to run
 		actConsume, // sparam1 = consume this ware, has to be an input, iparam1 number to consume
 		actAnimate, // sparam1 = activate this animation until timeout
-		actProduce, // sparem1 = ware to produce. the worker carries it outside
+		actProduce, // sparam1 = ware to produce. the worker carries it outside
 		actCheck,   // sparam1 = check if the given input ware is available, iparam1 number to check for
 		actMine,    // sparam1 = resource, iparam1=how far to mine, iparam2=up to max mine, iparam3=chance below
-		actCall,		// sparam1 = name of sub-program
-		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
-		actPlayFX,	//sparam1 = sound_fx_name to play
+		actCall,    // sparam1 = name of sub-program
+		actSet,     // iparam1 = flags to set, iparam2 = flags to unset
+		actPlayFX,  // sparam1 = sound_fx_name to play
 
 		// This is ONLY for Training Porpouses!
       actCheckSoldier, // sparam = attribute asking to, iparam1 = level requested
@@ -61,7 +61,7 @@ struct ProductionAction {
 	int         iparam1;
 	int         iparam2;
 	int         iparam3;
-	std::string	sparam1;
+	std::string sparam1;
 };
 
 
@@ -81,7 +81,7 @@ public:
 		assert(static_cast<const uint>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
-	
+
 	const std::vector<ProductionAction>& get_all_actions() { return m_actions;};
 
 	void parse(std::string directory, Profile* prof, std::string name,

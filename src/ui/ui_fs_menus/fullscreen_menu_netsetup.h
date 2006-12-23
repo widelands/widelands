@@ -69,7 +69,7 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	UI::Table<const LAN_Open_Game * const>      opengames;
 	LAN_Game_Finder                             discovery;
 	UI::Button<Fullscreen_Menu_NetSetup>        networktype;
-		bool			internetgame;
+	bool                                        internetgame;
 
 	void game_selected (uint);
 

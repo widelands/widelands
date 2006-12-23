@@ -24,7 +24,7 @@
 #include <SDL.h>
 
 /** Create an FXset and set it's \ref m_priority
- * \param[in] prio	The desired priority (optional)
+ * \param[in] prio  The desired priority (optional)
  */
 FXset::FXset(Uint8 prio)
 {
@@ -46,8 +46,8 @@ FXset::~FXset()
 }
 
 /** Append a sound effect to the end of the fxset
- * \param[in] fx	The sound fx to append
- * \param[in] prio	Set previous \ref m_priority to new value (optional)
+ * \param[in] fx    The sound fx to append
+ * \param[in] prio  Set previous \ref m_priority to new value (optional)
  */
 void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 {
@@ -59,7 +59,7 @@ void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually
  * given out is determined at random
- * \return	a pointer to the chosen effect; NULL if sound effects are
+ * \return  a pointer to the chosen effect; NULL if sound effects are
  * disabled or no fx is registered
  */
 Mix_Chunk *FXset::get_fx()

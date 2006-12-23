@@ -45,9 +45,9 @@ class Critter_Bob_Descr : public Bob_Descr {
       const Critter_BobProgram* get_program(std::string name) const;
 
    private:
-      std::string    m_descname;
-		DirAnimations	m_walk_anims;
-      bool				m_swimming;
+	std::string   m_descname;
+	DirAnimations m_walk_anims;
+	bool          m_swimming;
       ProgramMap     m_programs;
 };
 

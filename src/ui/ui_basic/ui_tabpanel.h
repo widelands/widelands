@@ -58,18 +58,18 @@ private:
 	void handle_mousein(bool inside);
 
 	struct Tab {
-		uint		picid;
+		uint        picid;
 		std::string tooltip;
-		Panel*	panel;
+		Panel     * panel;
 	};
 
-	std::vector<Tab>	m_tabs;
-	uint					m_active; ///< index of the currently active tab
-	bool					m_snapparent; ///< if true, resize parent to fit this panel
+	std::vector<Tab> m_tabs;
+	uint             m_active;         ///< index of the currently active tab
+	bool             m_snapparent; ///< if true, resize parent to fit this panel
 
-	int					m_highlight; ///< index of the highlighted button
+	int              m_highlight;      ///< index of the highlighted button
 
-	uint					m_pic_background; ///< picture used to draw background
+	uint             m_pic_background; ///< picture used to draw background
 };
 };
 

@@ -27,19 +27,19 @@
 #include "types.h"
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-#define Little16(x)		(x)
-#define Little32(x)		(x)
-#define LittleFloat(x)		(x)
-#define Big16(x)		Swap16((x))
-#define Big32(x)		Swap32((x))
-#define BigFloat(x)		SwapFloat((x))
+#define Little16(x)    (x)
+#define Little32(x)    (x)
+#define LittleFloat(x) (x)
+#define Big16(x)       Swap16(x)
+#define Big32(x)       Swap32(x)
+#define BigFloat(x)    SwapFloat(x)
 #else
-#define Little16(x)		Swap16((x))
-#define Little32(x)		Swap32((x))
-#define LittleFloat(x)		SwapFloat((x))
-#define Big16(x)		(x)
-#define Big32(x)		(x)
-#define BigFloat(x)		(x)
+#define Little16(x)    Swap16(x)
+#define Little32(x)    Swap32(x)
+#define LittleFloat(x) SwapFloat(x)
+#define Big16(x)       (x)
+#define Big32(x)       (x)
+#define BigFloat(x)    (x)
 #endif
 
 inline short Swap16(short x) {

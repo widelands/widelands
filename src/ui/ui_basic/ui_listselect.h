@@ -153,21 +153,21 @@ private:
       bool     use_clr;
       RGBColor clr;
       int      picid;
-		char		name[1];
+		char     name[1];
 	};
 
 	uint                  m_max_pic_width;
 	uint                  m_lineheight;
-	Align						m_align;
+	Align               m_align;
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
 	Entry_Record_vector m_entry_records;
 	Scrollbar *         m_scrollbar;
-	uint                  m_scrollpos;	// in pixels
+	uint                m_scrollpos;         //  in pixels
 	uint                  m_selection;
    int                  m_last_click_time;
 	uint                  m_last_selection;  // for double clicks
-	bool						m_show_check;	//show a green arrow left of selected element
-	int						m_check_picid;
+	bool m_show_check; //  show a green arrow left of selected element
+	int                 m_check_picid;
 };
 
 template <typename Entry>

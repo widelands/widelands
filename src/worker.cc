@@ -90,22 +90,22 @@ class WorkerProgram
 */
 
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
-	{ "mine",		      &WorkerProgram::parse_mine },
-	{ "createitem",		&WorkerProgram::parse_createitem },
-	{ "setdescription",	&WorkerProgram::parse_setdescription },
-	{ "setbobdescription", &WorkerProgram::parse_setbobdescription },
-	{ "findobject",		&WorkerProgram::parse_findobject },
-	{ "findspace",			&WorkerProgram::parse_findspace },
-	{ "walk",				&WorkerProgram::parse_walk },
-	{ "animation",			&WorkerProgram::parse_animation },
-	{ "return",				&WorkerProgram::parse_return },
-	{ "object",				&WorkerProgram::parse_object },
-	{ "plant",				&WorkerProgram::parse_plant },
-   { "create_bob",		&WorkerProgram::parse_create_bob },
-	{ "removeobject",		&WorkerProgram::parse_removeobject },
-	{ "geologist",			&WorkerProgram::parse_geologist },
-	{ "geologist-find",	&WorkerProgram::parse_geologist_find },
-	{ "playFX",		&WorkerProgram::parse_playFX },
+	{"mine",              &WorkerProgram::parse_mine},
+	{"createitem",        &WorkerProgram::parse_createitem},
+	{"setdescription",    &WorkerProgram::parse_setdescription},
+	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
+	{"findobject",        &WorkerProgram::parse_findobject},
+	{"findspace",         &WorkerProgram::parse_findspace},
+	{"walk",              &WorkerProgram::parse_walk},
+	{"animation",         &WorkerProgram::parse_animation},
+	{"return",            &WorkerProgram::parse_return},
+	{"object",            &WorkerProgram::parse_object},
+	{"plant",             &WorkerProgram::parse_plant},
+	{"create_bob",        &WorkerProgram::parse_create_bob},
+	{"removeobject",      &WorkerProgram::parse_removeobject},
+	{"geologist",         &WorkerProgram::parse_geologist},
+	{"geologist-find",    &WorkerProgram::parse_geologist_find},
+	{"playFX",            &WorkerProgram::parse_playFX},
 
 	{ 0, 0 }
 };
@@ -664,13 +664,13 @@ void WorkerProgram::parse_findspace
 				const char* name;
 				int val;
 			} sizenames[] = {
-				{ "any",		FindFieldSize::sizeAny },
-				{ "build",	FindFieldSize::sizeBuild },
-				{ "small",	FindFieldSize::sizeSmall },
-				{ "medium",	FindFieldSize::sizeMedium },
-				{ "big",		FindFieldSize::sizeBig },
-				{ "mine",	FindFieldSize::sizeMine },
-				{ "port",	FindFieldSize::sizePort },
+				{"any",    FindFieldSize::sizeAny},
+				{"build",  FindFieldSize::sizeBuild},
+				{"small",  FindFieldSize::sizeSmall},
+				{"medium", FindFieldSize::sizeMedium},
+				{"big",    FindFieldSize::sizeBig},
+				{"mine",   FindFieldSize::sizeMine},
+				{"port",   FindFieldSize::sizePort},
 				{ 0, 0 }
 			};
 
@@ -744,8 +744,8 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
 walk <where>
 
 Walk to a previously selected destination. where can be one of:
-	object	Walk to a previously found and selected object
-	coords	Walk to a previously found and selected field/coordinate
+	object  walk to a previously found and selected object
+	coords  walk to a previously found and selected field/coordinate
 
 iparam1 = walkXXX
 
@@ -1178,7 +1178,7 @@ bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
 
 	if (imm && imm->get_size() > BaseImmovable::NONE)
 	{
-//		NoLog("  Field is no longer empty\n");
+		//NoLog("  Field is no longer empty\n");
 	}
 	else
 	{
@@ -1194,7 +1194,7 @@ bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
          idx = get_descr()->get_tribe()->get_resource_indicator(0, 0); // not detectable
       }
 
-//		NoLog("  Resource: %02X -> plant indicator '%s'\n", res, get_descr()->get_tribe()->get_immovable_descr(idx)->get_name());
+		//NoLog("  Resource: %02X -> plant indicator '%s'\n", res, get_descr()->get_tribe()->get_immovable_descr(idx)->get_name());
 
 		g->create_immovable(position, idx, get_descr()->get_tribe());
 	}
@@ -1260,8 +1260,8 @@ public:
 	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r);
 	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
-	Worker*		m_worker;
-	Economy*		m_economy;
+	Worker  * m_worker;
+	Economy * m_economy;
 };
 
 
@@ -1558,7 +1558,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	m_descname = sglobal->get_string("descname", get_name());
 	m_helptext = sglobal->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
-	snprintf(buf, sizeof(buf),	"%s_menu.png", get_name());
+	snprintf(buf, sizeof(buf), "%s_menu.png", get_name());
 	string = sglobal->get_string("menu_pic", buf);
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);
@@ -1588,8 +1588,8 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
       m_walkload_anims.parse(this, directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
 
    // Read the sound effects
-   while (sglobal->get_next_string("soundfx", &string))
-   	g_sound_handler.load_fx(directory, string);
+	while (sglobal->get_next_string("soundfx", &string))
+		g_sound_handler.load_fx(directory, string);
 
    // Read the becomes and experience
    m_becomes = sglobal->get_string("becomes","");
@@ -1905,7 +1905,7 @@ the warehouse he is standing on.
 void Worker::schedule_incorporate(Game* g)
 {
 	g->get_cmdqueue()->enqueue (new Cmd_Incorporate(g->get_gametime(), this));
-//	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_INCORPORATE, m_serial);
+	//g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_INCORPORATE, m_serial);
 	force_skip_act();
 }
 

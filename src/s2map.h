@@ -24,13 +24,13 @@
 
 struct S2MapDescrHeader {
 		  char   magic[10]; // "WORLD_V1.0"
-		  char 	name[20];
-		  short 	w;
-		  short	h;
-		  char 	uses_world; // 0 = green, 1 =black, 2 = winter
-		  char	nplayers;
-		  char 	author[26];
-		  char 	bulk[2290]; // unknown
+	char  name  [20];
+	short w;
+	short h;
+	char  uses_world; // 0 = green, 1 =black, 2 = winter
+	char  nplayers;
+	char  author[26];
+	char  bulk[2290]; // unknown
 } /* size 2352 */;
 
 // MILLIONS of Definitions
@@ -55,16 +55,16 @@ struct S2MapDescrHeader {
 #define BOB_SKELETON2        0x8
 #define BOB_SKELETON3         0x21
 
-#define BOB_STANDING_STONES1	0x18
-#define BOB_STANDING_STONES2	0x19
-#define BOB_STANDING_STONES3	0x1a
-#define BOB_STANDING_STONES4	0x1b
-#define BOB_STANDING_STONES5	0x1c
-#define BOB_STANDING_STONES6	0x1d
-#define BOB_STANDING_STONES7	0x1e
+#define BOB_STANDING_STONES1 0x18
+#define BOB_STANDING_STONES2 0x19
+#define BOB_STANDING_STONES3 0x1a
+#define BOB_STANDING_STONES4 0x1b
+#define BOB_STANDING_STONES5 0x1c
+#define BOB_STANDING_STONES6 0x1d
+#define BOB_STANDING_STONES7 0x1e
 
-#define BOB_MUSHROOM1		 0x01
-#define BOB_MUSHROOM2		 0x22
+#define BOB_MUSHROOM1        0x01
+#define BOB_MUSHROOM2        0x22
 
 #define BOB_PEBBLE1          0x2
 #define BOB_PEBBLE2          0x3
@@ -129,9 +129,9 @@ struct S2MapDescrHeader {
 #define BOB_TREE31          0x36
 #define BOB_TREE32          0x37
 
-#define BOB_GRASS1			0xe
-#define BOB_GRASS2			0x14
-#define BOB_GRASS3			0xf
+#define BOB_GRASS1          0x0e
+#define BOB_GRASS2          0x14
+#define BOB_GRASS3          0x0f
 
 
 class S2_Map_Loader : public Map_Loader {

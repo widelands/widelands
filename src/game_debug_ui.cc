@@ -50,10 +50,10 @@ public:
 	virtual void log(std::string str);
 
 private:
-	Editor_Game_Base*		m_egbase;
-	Object_Ptr				m_object;
+	Editor_Game_Base       * m_egbase;
+	Object_Ptr               m_object;
 
-	UI::Multiline_Textarea*	m_log;
+	UI::Multiline_Textarea * m_log;
 };
 
 
@@ -149,9 +149,9 @@ public:
 
 private:
    bool           m_log_general_info;
-	Object_Ptr		m_object;
-	uint				m_serial;
-	UI::Tab_Panel*	m_tabs;
+	Object_Ptr      m_object;
+	uint            m_serial;
+	UI::Tab_Panel * m_tabs;
 };
 
 
@@ -248,7 +248,7 @@ public:
 
 private:
 	Map &                        m_map;
-	FCoords		m_coords;
+	FCoords                      m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
 	UI::Button<FieldDebugWindow> m_ui_immovable;

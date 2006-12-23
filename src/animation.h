@@ -30,8 +30,8 @@ class Profile;
 class Section;
 
 struct EncodeData {
-	bool		hasplrclrs;
-	RGBColor	plrclr[4];
+	bool     hasplrclrs;
+	RGBColor plrclr[4];
 
 	void clear();
 	void parse(Section *s);
@@ -76,7 +76,7 @@ public: // for use by the graphics subsystem
 	void trigger_soundfx(uint animation, uint framenumber, uint stereo_position);
 
 private:
-	std::vector<AnimationData>	m_animations;
+	std::vector<AnimationData> m_animations;
 };
 
 
@@ -105,7 +105,7 @@ public:
 	{return m_animations[dir - 1];}
 
 private:
-	uint	m_animations[6];
+	uint m_animations[6];
 };
 
 extern AnimationManager g_anim;

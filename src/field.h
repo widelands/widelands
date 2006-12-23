@@ -81,7 +81,7 @@ enum Roads {
 	Road_Water = 3,
 	Road_Mask = 3,
 
-	Road_East = 0,	// shift values
+	Road_East      = 0, //  shift values
 	Road_SouthEast = 2,
 	Road_SouthWest = 4,
 };

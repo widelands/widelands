@@ -32,7 +32,7 @@
 #include "computer_player.h"
 #include "computer_player_hints.h"
 
-#define FIELD_UPDATE_INTERVAL	1000
+#define FIELD_UPDATE_INTERVAL 1000
 
 class CheckStepRoadAI : public CheckStep {
 public:
@@ -47,9 +47,9 @@ public:
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 //private:
-	Player*		player;
-	uchar		movecaps;
-	bool		openend;
+	Player * player;
+	uchar    movecaps;
+	bool     openend;
 };
 
 Computer_Player::Computer_Player (Game *g, uchar pid)
@@ -355,13 +355,14 @@ void Computer_Player::think ()
 	    construct_roads ();
 	}
 
-/*	if (!economies.empty() && inhibit_road_building<=game->get_gametime()) {
+#if 0
+	if (!economies.empty() && inhibit_road_building<=game->get_gametime()) {
 		EconomyObserver* eco=economies.front();
 
 		bool finish=false;
 
 		// try to connect to another economy
-    		if (economies.size()>1)
+		if (economies.size() > 1)
 		    finish=connect_flag_to_another_economy(eco->flags.front());
 
 		if (!finish)
@@ -377,7 +378,8 @@ void Computer_Player::think ()
 
 		if (finish)
 		    return;
-	}*/
+	}
+#endif
 
 	// force a split on roads that are extremely long
 	// note that having too many flags causes a loss of building capabilities
@@ -759,7 +761,7 @@ void Computer_Player::gain_building (Building* b)
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
 		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction++;
-	    	total_constructionsites++;
+		++total_constructionsites;
 	}
 	else {
 		bo.cnt_built++;
@@ -770,7 +772,7 @@ void Computer_Player::gain_building (Building* b)
 			productionsites.back().bo=&bo;
 
 			for (unsigned int i=0;i<bo.outputs.size();i++)
-		    		wares[bo.outputs[i]].producers++;
+				++wares[bo.outputs[i]].producers;
 
 			for (unsigned int i=0;i<bo.inputs.size();i++)
 				wares[bo.inputs[i]].consumers++;
@@ -877,9 +879,9 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 }
 
 struct NearFlag {
-    Flag*	flag;
-    long	cost;
-    long	distance;
+	Flag * flag;
+	long   cost;
+	long   distance;
 
     NearFlag (Flag* f, long c, long d)
     { flag=f; cost=c; distance=d; }
@@ -905,7 +907,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 	queue.push (NearFlag(flag, 0, 0));
 
 	while (!queue.empty()) {
-    	    std::vector<NearFlag>::iterator f=find(nearflags.begin(), nearflags.end(), queue.top().flag);
+		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
 	    if (f!=nearflags.end()) {
 		queue.pop ();
 		continue;
@@ -926,7 +928,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 		    endflag=road->get_flag(Road::FlagEnd);
 
 		long dist=map->calc_distance(flag->get_position(), endflag->get_position());
-		if (dist>16)	// out of range
+		if (dist > 16) //  out of range
 		    continue;
 
 		queue.push (NearFlag(endflag, nf.cost+road->get_path().get_nsteps(), dist));
@@ -1019,10 +1021,10 @@ bool CheckStepRoadAI::allowed
 	// Calculate cost and passability
 	if (!(endcaps & movecaps)) {
 		return false;
-//		uchar startcaps = player->get_buildcaps(start);
+		//uchar startcaps = player->get_buildcaps(start);
 
-//		if (!((endcaps & MOVECAPS_WALK) && (startcaps & movecaps & MOVECAPS_SWIM)))
-//			return false;
+		//if (!((endcaps & MOVECAPS_WALK) && (startcaps & movecaps & MOVECAPS_SWIM)))
+			//return false;
 	}
 
 	// Check for blocking immovables
@@ -1057,14 +1059,14 @@ bool CheckStepRoadAI::reachabledest(Map* map, FCoords dest) const
 }
 
 struct WalkableSpot {
-	Coords	coords;
-	bool	hasflag;
+	Coords coords;
+	bool   hasflag;
 
-	int	cost;
-	void*	eco;
+	int    cost;
+	void * eco;
 
-	short	from;
-	short	neighbours[6];
+	short  from;
+	short  neighbours[6];
 };
 
 void Computer_Player::construct_roads ()
@@ -1145,12 +1147,11 @@ void Computer_Player::construct_roads ()
 	    WalkableSpot &from=spots[queue.front()];
 	    queue.pop();
 
-	    for (i=0;i<6;i++)
-		if (from.neighbours[i]>=0) {
+		for (i = 0; i < 6; ++i) if (from.neighbours[i] >= 0) {
 		    WalkableSpot &to=spots[from.neighbours[i]];
 
-		    if (to.cost<0) {
-    			to.cost=from.cost+1;
+			if (to.cost < 0) {
+				to.cost = from.cost + 1;
 			to.eco=from.eco;
 			to.from=&from - &spots.front();
 
@@ -1158,7 +1159,7 @@ void Computer_Player::construct_roads ()
 			continue;
 		    }
 
-		    if (from.eco!=to.eco && to.cost>0) {
+			if (from.eco != to.eco and to.cost > 0) {
 			std::list<Coords> pc;
 			bool hasflag;
 
@@ -1188,9 +1189,9 @@ void Computer_Player::construct_roads ()
 
 			log ("Computer_Player(%d): New road has length %d\n", player_number, pc.size());
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++)
-			    log ("Computer_Player: (%d,%d)\n", c->x, c->y);
+				log ("Computer_Player: (%d,%d)\n", c->x, c->y);
 
-	    		Path* path=new Path(map, pc.front());
+				Path * const path = new Path(map, pc.front());
 			pc.pop_front();
 
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++) {

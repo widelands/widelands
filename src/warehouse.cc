@@ -742,11 +742,14 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 		if(static_cast<Worker*>(i->get(g))->get_name()==name)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
-			if ((!r) || (r->check (	soldier->get_level(atrHP),
-					soldier->get_level(atrAttack),
-					soldier->get_level(atrDefense),
-					soldier->get_level(atrEvade))
-							))
+			if
+				(not r
+				 or
+				 r->check
+				 (soldier->get_level(atrHP),
+				  soldier->get_level(atrAttack),
+				  soldier->get_level(atrDefense),
+				  soldier->get_level(atrEvade)))
 				break;
 			else
 				continue;
@@ -801,11 +804,14 @@ void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
 			soldier = static_cast<Soldier*>(i->get(g));
 			if (!soldier->is_marked())
 			{
-				if ((!r) || (r->check (	soldier->get_level(atrHP),
-										soldier->get_level(atrAttack),
-										soldier->get_level(atrDefense),
-										soldier->get_level(atrEvade)))
-					)
+				if
+					(not r
+					 or
+					 r->check
+					 (soldier->get_level(atrHP),
+					  soldier->get_level(atrAttack),
+					  soldier->get_level(atrDefense),
+					  soldier->get_level(atrEvade)))
 					break;
 				else
 					continue;
@@ -1015,10 +1021,12 @@ log ("Warehouse::get_soldiers_passing :");
 			{
 				if (r)
 				{
-					if (r->check (	soldier->get_level(atrHP),
-										soldier->get_level(atrAttack),
-										soldier->get_level(atrDefense),
-										soldier->get_level(atrEvade)))
+					if
+						(r->check
+						 (soldier->get_level(atrHP),
+						  soldier->get_level(atrAttack),
+						  soldier->get_level(atrDefense),
+						  soldier->get_level(atrEvade)))
 					{
 						log ("+");
 						number++;

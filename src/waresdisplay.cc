@@ -152,7 +152,7 @@ void WaresDisplay::draw(RenderTarget* dst)
       is_worker = true;
    }
    int totid=0;
-   for(int id = 0; id < number; id++, totid++)	{
+	for (int id = 0; id < number; ++id, ++totid) {
       uint totalstock = 0;
       for( uint i = 0; i < m_warelists.size(); i++)
          totalstock += m_warelists[i]->stock(id);

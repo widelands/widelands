@@ -718,12 +718,10 @@ void Editor_Game_Base::remove_attack_controller(uint serial) {
    for(uint i=0;i<m_attack_serials.size();i++) {
       if (m_attack_serials[i] == serial) {
          log("Editor_Game_Base: Destroying battle with serial %i \n",serial);
-      	AttackController* curCtrl = (AttackController*)this->get_objects()->get_object(serial);
-      	curCtrl->destroy(this);
+			static_cast<AttackController * const>(this->get_objects()->get_object(serial))->destroy(this);
 
-      	if (i < (m_attack_serials.size()-1)) {
-      	  m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];
-      	}
+			if (i < m_attack_serials.size() - 1)
+				m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];
 			m_attack_serials.pop_back();
 			return;
       }

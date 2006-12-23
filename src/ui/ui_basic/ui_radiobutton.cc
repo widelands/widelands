@@ -39,9 +39,9 @@ struct Radiobutton : public Statebox {
 private:
 	void clicked();
 
-	Radiobutton*	m_nextbtn;
-	Radiogroup*		m_group;
-	int				m_id;
+	Radiobutton * m_nextbtn;
+	Radiogroup  * m_group;
+	int           m_id;
 };
 
 /**
@@ -128,7 +128,7 @@ int Radiogroup::add_button
 /**
  * Change the state and set button states to reflect the change.
  *
- * Args: state	the ID of the checked button (-1 means don't check any button)
+ * Args: state  the ID of the checked button (-1 means don't check any button)
  */
 void Radiogroup::set_state(int state)
 {

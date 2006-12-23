@@ -41,7 +41,7 @@ For more information, see the Map::recalc_* functions.
 class BaseImmovable : public Map_Object {
 public:
 	enum {
-		NONE,			// not robust
+		NONE,   //  not robust
 		SMALL,
 		MEDIUM,
 		BIG
@@ -95,11 +95,11 @@ public:
 
 protected:
    std::string m_picture;
-   char			m_name[30];
-	int			m_size;
-	EncodeData	m_default_encodedata;
+	char          m_name[30];
+	int           m_size;
+	EncodeData    m_default_encodedata;
 
-	ProgramMap		m_programs;
+	ProgramMap    m_programs;
    Tribe_Descr*            m_owner_tribe;       // or zero if this is a world immovable
 };
 
@@ -143,14 +143,14 @@ private:
 	bool run_playFX(Game* g, bool killable, const ImmovableAction& action);
 
 protected:
-	Coords		m_position;
+	Coords                   m_position;
 
-	uint			m_anim;
-	int			m_animstart;
+	uint                     m_anim;
+	int                      m_animstart;
 
-	const ImmovableProgram*	m_program;
-	uint							m_program_ptr;			// index of next instruction to execute
-	int							m_program_step;		// time of next step
+	const ImmovableProgram * m_program;
+	uint m_program_ptr; //  index of next instruction to execute
+	int                      m_program_step; //  time of next step
 };
 
 
@@ -188,10 +188,10 @@ protected:
 	virtual void cleanup(Editor_Game_Base *g);
 
 private:
-	Player		*m_owner;
-	Economy		*m_economy;
+	Player              * m_owner;
+	Economy             * m_economy;
 
-	std::vector<Worker*>	m_workers;
+	std::vector<Worker *> m_workers;
 };
 
 

@@ -65,8 +65,7 @@ flags         (MiniMap::Terrn)
  *
  * Set the view point marker to a new position.
  *
- * Args: x	new view point coordinates, in screen coordinates
- *       y
+ * Args: x, y  new view point coordinates, in screen coordinates
  */
 void MiniMap::View::set_view_pos(const int x, const int y)
 {

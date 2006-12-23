@@ -28,10 +28,10 @@ inline bool is_richtext(std::string text) {
 
 class Text_Block {
    public:
-   	Text_Block();
-   	Text_Block(const Text_Block &src);
+	Text_Block();
+	Text_Block(const Text_Block & src);
 
-   	inline void set_font_size(int font_size) { m_font_size = font_size;};
+	void set_font_size(const int font_size) throw () {m_font_size = font_size;};
 		inline int get_font_size() { return m_font_size; };
 
 		inline void set_font_color(RGBColor font_color){ m_font_color = font_color;};
@@ -47,18 +47,20 @@ class Text_Block {
 		inline std::string get_font_decoration(){ return m_font_decoration; };
 
 		inline void set_font_face(std::string font_face) { m_font_face = font_face; };
-   	inline std::string get_font_face() { return m_font_face; };
+	std::string get_font_face() const throw () {return m_font_face;};
 
-   	inline void set_line_spacing(int line_spacing) { m_line_spacing = line_spacing; };
-   	inline int get_line_spacing() { return m_line_spacing; };
+	void set_line_spacing(const int line_spacing) throw ()
+	{m_line_spacing = line_spacing;};
+	int get_line_spacing() const throw () {return m_line_spacing;};
 
-   	inline void set_words(std::vector<std::string> words) { m_words = words; };
-   	inline std::vector<std::string> get_words() { return m_words; };
+	void set_words(const std::vector<std::string> & words) {m_words = words;};
+	const std::vector<std::string> & get_words() const throw () {return m_words;};
 
-   	inline void set_line_breaks(std::vector<uint> line_breaks) { m_line_breaks = line_breaks; };
-   	inline std::vector<uint> get_line_breaks() { return m_line_breaks; };
+	void set_line_breaks(const std::vector<uint> & line_breaks)
+	{m_line_breaks = line_breaks;};
+	const std::vector<uint> & get_line_breaks() const throw () {return m_line_breaks;};
    private:
-   	int m_font_size;
+	int                      m_font_size;
 		RGBColor m_font_color;
 		std::string m_font_weight;
 		std::string m_font_style;
@@ -85,7 +87,7 @@ class Richtext_Block {
 
 		inline void set_text_blocks(std::vector<Text_Block> text_blocks) { m_text_blocks = text_blocks;};
 		inline std::vector<Text_Block> get_text_blocks() { return m_text_blocks; };
-  	private:
+private:
 		std::vector<std::string> m_images;
 		std::vector<Text_Block> m_text_blocks;
 		Align m_image_align;

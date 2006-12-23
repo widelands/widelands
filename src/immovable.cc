@@ -116,10 +116,10 @@ ImmovableProgram IMPLEMENTATION
 
 // Command name -> parser function mapping
 const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
-	{ "animation",		&ImmovableProgram::parse_animation },
-	{ "transform",		&ImmovableProgram::parse_transform },
-	{ "remove",			&ImmovableProgram::parse_remove },
-	{ "playFX",			&ImmovableProgram::parse_playFX },
+	{"animation", &ImmovableProgram::parse_animation},
+	{"transform", &ImmovableProgram::parse_transform},
+	{"remove",    &ImmovableProgram::parse_remove},
+	{"playFX",    &ImmovableProgram::parse_playFX},
 
 	{ 0, 0 }
 };
@@ -901,7 +901,7 @@ void PlayerImmovable::set_owner(Player *owner)
 {
 	// Change these asserts once you've made really sure that changing owners
 	// works (necessary for military building)
-/*	   THIS IS A TEST
+	/*THIS IS A TEST
    assert(!m_owner);
 	assert(owner);*/
 

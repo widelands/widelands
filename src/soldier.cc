@@ -64,8 +64,8 @@ class IdleSoldierSupply : public Supply {
 		virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r);
 		virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 	private:
-		Soldier*		m_soldier;
-		Economy*		m_economy;
+	Soldier * m_soldier;
+	Economy * m_economy;
 };
 
 
@@ -719,9 +719,9 @@ void Soldier::moveToBattleUpdate(Game* g, State* state) {
 void Soldier::moveToBattleSignal(Game* g, State* s) {
    std::string signal = get_signal();
    set_signal("");
-   
+
    log("moveToBattleSignal got signal: %s",signal.c_str());
-   
+
    if (signal == "won_battle") {
       m_attack_ctrl->soldierWon(this);
       return;
@@ -771,7 +771,7 @@ void Soldier::moveHomeUpdate(Game* g, State* state) {
 void Soldier::moveHomeSignal(Game* g, State* s) {
    std::string signal = get_signal();
    set_signal("");
-   
+
    log("moveToSignal got signal, don't know what to do with it.: %s",signal.c_str());
 }
 

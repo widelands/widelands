@@ -184,11 +184,11 @@ void Sound_Handler::load_system_sounds()
  * lumberjack_timber_00.ogg.de_DE
  *
  * \param dir        The directory where the audio files reside
- * \param basename	Name from which filenames will be formed
+ * \param basename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
  * \internal
- * \param recursive	Whether to recurse into subdirectories
+ * \param recursive  Whether to recurse into subdirectories
 */
 void Sound_Handler::load_fx
 (const std::string dir, const std::string fxname, const bool recursive)
@@ -232,8 +232,8 @@ void Sound_Handler::load_fx
  * RWops (that are available on every platform) to create a tempfile that
  * Mix_LoadWAV can read from.
  *
- * \param fr	Pointer to a FileRead RWops with the
- * \return	a pointer to the loaded sample; NULL if any error ocurred
+ * \param fr  Pointer to a FileRead RWops with the
+ * \return   a pointer to the loaded sample; NULL if any error ocurred
  * \note This should be phased out when RWops support in Mix_LoadWAV has been
  * available for a sufficiently long time
 */
@@ -264,10 +264,11 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		// Get the temp path.
 		GetTempPath(1024, lpPathBuffer);
 		// Create a temporary file.
-		GetTempFileName(lpPathBuffer,	// directory for tmp files
-		                "widelands",	// temp file name prefix
-		                0,	// create unique name
-		                szTempName);	// buffer for name
+		GetTempFileName
+			(lpPathBuffer, //  directory for tmp files
+			 "widelands",  //  temp file name prefix
+			 0,            //  create unique name
+			 szTempName);  //  buffer for name
 		tempfile = szTempName;
 #else
 		//manpage recommends a minimum suffix length of 6
@@ -337,8 +338,8 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 }
 
 /** Add exactly one file to the given fxset.
- * \param filename	The effect to be loaded
- * \param fx_name	The fxset to add the file to
+ * \param filename  the effect to be loaded
+ * \param fx_name   the fxset to add the file to
  * The file format must be ogg. Otherwise this call will complain and
  * not load the file.
  * \note The complete audio file will be loaded into memory and stays there
@@ -381,7 +382,7 @@ void Sound_Handler::load_one_fx
 
 /** Calculate  the position of an effect in relation to the visible part of the
  * screen.
- * \param position	Where the event happened (map coordinates)
+ * \param position  where the event happened (map coordinates)
  * \return position in widelands' game window: left=0, right=254, not in
  * viewport = -1
  * \note This function can also be used to check whether a logical coordinate is
@@ -492,22 +493,21 @@ bool Sound_Handler::play_or_not
 
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
  * must have been loaded before with \ref load_fx.
- * \param fx_name	The identifying name of the sound effect, see \ref load_fx
+ * \param fx_name  The identifying name of the sound effect, see \ref load_fx .
  * \param map_position  Map coordinates where the event takes place
- * \param priority	How important is it that this FX actually gets played?
- *			(see \ref FXset::m_priority)
+ * \param priority      How important is it that this FX actually gets played?
+ *         (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
 (const std::string & fx_name, const Coords map_position, const uint priority)
 {play_fx(fx_name, stereo_position(map_position), priority);}
 
 /** \overload
- * \param fx_name		The identifying name of the sound effect, see
- * 				\ref load_fx
- * \param stereo_position	position in widelands' game window, see
- * 				\ref stereo_position
- * \param priority		How important is it that this FX actually gets
- * 				played? (see \ref FXset::m_priority)
+ * \param fx_name  The identifying name of the sound effect, see \ref load_fx .
+ * \param stereo_position  position in widelands' game window, see
+ *                         \ref stereo_position
+ * \param priority         How important is it that this FX actually gets
+ *                         played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
 (const std::string fx_name, const int stereo_pos, const uint priority)
@@ -541,10 +541,10 @@ void Sound_Handler::play_fx
 
 /** Load a background song. One "song" can consist of several audio files named
  * FILE_XX.ogg, where XX is between 00 and 99.
- * \param dir		The directory where the audio files reside
- * \param basename	Name from which filenames will be formed
- * 			(BASENAME_XX.ogg); also the name used with \ref play_fx
- * \param recursive	\internal Used for traversing subdirectories
+ * \param dir        The directory where the audio files reside.
+ * \param basename   Name from which filenames will be formed
+ *                   (BASENAME_XX.ogg); also the name used with \ref play_fx .
+ * \param recursive  \internal Used for traversing subdirectories
  * This just registers the song, actual loading takes place when
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
@@ -579,9 +579,9 @@ void Sound_Handler::register_song
 }
 
 /** Start playing a songset.
- * \param songset_name	The songset to play a song from
- * \param fadein_ms	Song will fade from 0% to 100% during fadein_ms
- * 			milliseconds starting from now
+ * \param songset_name  The songset to play a song from.
+ * \param fadein_ms     Song will fade from 0% to 100% during fadein_ms
+ *                      milliseconds starting from now.
  * \note When calling start_music() while music is still fading out from
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
@@ -590,8 +590,7 @@ void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
 	if (get_disable_music())
 		return;
 
-	if (fadein_ms == 0)
-		fadein_ms = 50;	//avoid clicks
+	if (fadein_ms == 0) fadein_ms = 50; //  avoid clicks
 
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
@@ -622,8 +621,7 @@ void Sound_Handler::stop_music(int fadeout_ms)
 	if (get_disable_music())
 		return;
 
-	if (fadeout_ms == 0)
-		fadeout_ms = 50;	//avoid clicks
+	if (fadeout_ms == 0) fadeout_ms = 50; //  avoid clicks
 
 	Mix_FadeOutMusic(fadeout_ms);
 }
@@ -631,10 +629,10 @@ void Sound_Handler::stop_music(int fadeout_ms)
 /** Play an other piece of music.
  * This is a member function provided for convenience. It is a wrapper around
  * \ref start_music and \ref stop_music.
- * \param fadeout_ms	Old song will fade from 100% to 0% during fadeout_ms
- * 			milliseconds starting from now
- * \param fadein_ms	New song will fade from 0% to 100% during fadein_ms
- * 			milliseconds starting from now
+ * \param fadeout_ms  Old song will fade from 100% to 0% during fadeout_ms
+ *                    milliseconds starting from now.
+ * \param fadein_ms   New song will fade from 0% to 100% during fadein_ms
+ *                    milliseconds starting from now.
  * If songset_name is empty, another song from the currently active songset will
  * be selected
 */

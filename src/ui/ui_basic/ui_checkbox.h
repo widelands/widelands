@@ -57,17 +57,17 @@ struct Statebox : public Panel {
 private:
 	virtual void clicked() = 0;
 
-   int   m_id;
+   int      m_id;
 
-	bool	m_custom_picture;		///< the statebox displays a custom picture
-	uint	m_pic_graphics;
+	bool     m_custom_picture; ///< the statebox displays a custom picture
+	uint     m_pic_graphics;
 
-	bool	m_highlighted;
-	bool	m_enabled; ///< true if the checkbox can be clicked
-	bool	m_state; ///< true if the box is checked
+	bool     m_highlighted;
+	bool     m_enabled;        ///< true if the checkbox can be clicked
+	bool     m_state;          ///< true if the box is checked
 
-	RGBColor	m_clr_state;		///< color of border when checked (custom picture only)
-	RGBColor	m_clr_highlight;	///< color of border when highlighted
+	RGBColor m_clr_state; ///< color of border when checked (custom picture only)
+	RGBColor m_clr_highlight;  ///< color of border when highlighted
 };
 
 

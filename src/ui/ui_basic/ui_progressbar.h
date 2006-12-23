@@ -31,8 +31,8 @@ The actual state of progress
 */
 struct Progress_Bar : public Panel {
 	enum {
-		Horizontal = 0,		///< from left to right
-		Vertical = 1,			///< from bottom to top
+		Horizontal = 0, ///< from left to right
+		Vertical   = 1, ///< from bottom to top
 
 		DefaultWidth = 100,
 		DefaultHeight = 24,
@@ -50,9 +50,9 @@ protected:
 	virtual void draw(RenderTarget* dst);
 
 private:
-	uint	m_orientation;
-	uint	m_state;				///< m_state is [0..m_total]
-	uint	m_total;				///< maximum progress
+	uint m_orientation;
+	uint m_state; ///< m_state is [0..m_total]
+	uint m_total; ///< maximum progress
 };
 };
 

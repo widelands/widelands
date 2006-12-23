@@ -95,7 +95,7 @@ void Player::init(const bool place_headquarters) {
 				   plnum,
 				   trdesc.get_building_index("headquarters"))));
 		//} catch () {
-		//	throw wexception("Tribe %s lacks headquarters", tribe.get_name());
+			//throw wexception("Tribe %s lacks headquarters", tribe.get_name());
 		//}
 	}
 }
@@ -367,7 +367,7 @@ void Player::flagaction(Flag* flag, int action)
 			//try {
 				flag->add_flag_job
 					(game, get_tribe()->get_worker_index("geologist"), "expedition");
-/*			} catch (Descr_Maintainer<Worker_Descr>::Nonexistent){
+			/*} catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
 				log("Tribe defines no geologist\n");
 			}*/
 			break;

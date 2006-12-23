@@ -36,13 +36,13 @@ Initialize
 ===============
 */
 Map_View::Map_View(UI::Panel *parent, int x, int y, uint w, uint h, Interactive_Base *player)
-	: UI::Panel(parent, x, y, w, h)
-{
-	m_intbase = player;
-	m_viewpoint.x = m_viewpoint.y = 0;
-	m_dragging = false;
-   	m_complete_redraw_needed = true;
-}
+:
+UI::Panel               (parent, x, y, w, h),
+m_intbase               (player),
+m_viewpoint             (Point(0, 0)),
+m_dragging              (false),
+m_complete_redraw_needed(true)
+{}
 
 
 /*

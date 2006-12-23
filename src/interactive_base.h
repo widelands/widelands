@@ -43,9 +43,9 @@ class Interactive_Base : public UI::Panel {
 
    public:
 		enum {
-			dfShowCensus = 1,				// show census report on buildings
-			dfShowStatistics = 2,		// show statistics report on buildings
-			dfDebug = 4,					// general debugging info
+			dfShowCensus     = 1, //  show census report on buildings
+			dfShowStatistics = 2, //  show statistics report on buildings
+			dfDebug          = 4, //  general debugging info
 		};
 
 	public:
@@ -137,15 +137,15 @@ class Interactive_Base : public UI::Panel {
 		Overlay_Manager::Job_Id jobid;
 	} m_sel;
 
-		uint					m_display_flags;
+	uint m_display_flags;
 
-		uint					m_lastframe;			// system time (milliseconds)
-		uint					m_frametime;			// in millseconds
-		uint					m_avg_usframetime;	// in microseconds!
+	uint                    m_lastframe;         //  system time (milliseconds)
+	uint                    m_frametime;         //  in millseconds
+	uint                    m_avg_usframetime;   //  in microseconds!
 
 	Overlay_Manager::Job_Id m_jobid;
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
-      CoordPath		*m_buildroad; // path for the new road
+	CoordPath             * m_buildroad;         //  path for the new road
       int      m_road_build_player;
 
       UI::UniqueWindow::Registry m_minimap;

@@ -68,7 +68,7 @@ protected:
 	virtual Bob *create_object() = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
-	char	m_name[30];
+	char          m_name[30];
    std::string m_picture;
    EncodeData  m_default_encodedata;
    Tribe_Descr* m_owner_tribe;
@@ -102,19 +102,19 @@ public:
 	};
 
 	struct State {
-		const Task * task;
-		int				ivar1;
-		int				ivar2;
-		int				ivar3;
-		Object_Ptr		objvar1;
-		std::string		svar1;
+		const Task           * task;
+		int                    ivar1;
+		int                    ivar2;
+		int                    ivar3;
+		Object_Ptr             objvar1;
+		std::string            svar1;
 
-		Coords					coords;
-		const DirAnimations*			diranims;
-		Path*						path;
-		Transfer*				transfer;
-		Route*					route;
-		const BobProgramBase*	         program; // Pointer to current programm class
+		Coords                 coords;
+		const DirAnimations  * diranims;
+		Path                 * path;
+		Transfer             * transfer;
+		Route                * route;
+		const BobProgramBase * program; //  pointer to current programm class
 	};
 
 protected:
@@ -215,26 +215,26 @@ private:
 	static Task taskForcemove;
 
 private:
-	Player*		m_owner; // can be 0
+	Player *           m_owner; //  can be 0
 
-	FCoords		m_position; // where are we right now?
-	Bob*			m_linknext; // next object on this field
-	Bob**			m_linkpprev;
+	FCoords            m_position; //  where are we right now?
+	Bob *              m_linknext; //  next object on this field
+	Bob * *            m_linkpprev;
 
-	uint			m_actid; // CMD_ACT counter, used to eliminate spurious act()s
+	uint m_actid; //  CMD_ACT counter, used to eliminate spurious act()s
 
-	uint			m_anim;
-	int			m_animstart; // gametime when the animation was started
+	uint               m_anim;
+	int                m_animstart; //  gametime when the animation was started
 
-	WalkingDir	m_walking;
-	int			m_walkstart; // start and end time used for interpolation
-	int			m_walkend;
+	WalkingDir         m_walking;
+	int                m_walkstart; //  start and end time used for interpolation
+	int                m_walkend;
 
 	// Task framework variables
-	std::vector<State>	m_stack;
-	bool						m_stack_dirty;
-	bool						m_sched_init_task;	// if init_auto_task was scheduled
-	std::string				m_signal;
+	std::vector<State> m_stack;
+	bool               m_stack_dirty;
+	bool               m_sched_init_task; //  if init_auto_task was scheduled
+	std::string        m_signal;
 };
 
 #endif

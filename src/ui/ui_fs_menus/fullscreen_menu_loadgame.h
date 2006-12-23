@@ -50,7 +50,7 @@ class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	UI::Textarea                                tagametime;
    std::string m_filename;
 
-	filenameset_t	m_gamefiles;
+	filenameset_t                               m_gamefiles;
 
 public:
 	Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer);

@@ -35,9 +35,9 @@ struct FileSystem;
  */
 class FileRead {
 	public:
-		void	*data;
-		int	filepos;
-		int	length;
+	void * data;
+	int    filepos;
+	int    length;
 
 	public:
 		FileRead();

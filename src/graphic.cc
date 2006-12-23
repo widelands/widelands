@@ -1307,13 +1307,10 @@ Bring the screen uptodate.
 */
 void GraphicImpl::refresh()
 {
-//	if (m_update_fullscreen)
+	//if (m_update_fullscreen)
    m_screen.update();
 
-//	else
-//		{
-//		SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);
-//		}
+	//else SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);
 
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;

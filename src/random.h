@@ -33,10 +33,10 @@ class RNG {
 	uint rand ();
 
     private:
-	uint	state0;
-	uint	state1;
+	uint state0;
+	uint state1;
 };
 
-#define SIMPLE_RAND(x)	(((x)>>8) ^ rng_sbox[(x)&0xff])
+#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x) & 0xff])
 
 #endif

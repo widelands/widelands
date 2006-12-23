@@ -32,33 +32,33 @@
 #define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
 #endif
 
-#define WLTF_VERSION			PACK_VERSION(1,0)
+#define WLTF_VERSION     PACK_VERSION(1,0)
 
-#define SITDIG       	   0
-#define SEARCHER	         1
-#define GROWER	            2
-#define PLANTER	         3
-#define SCIENTIST	         4
-#define SOLDIER	         5
-#define SPEC_DEF_CARRIER	6
-#define SPEC_ADD_CARRIER	7
-#define SPEC_BUILDER	      8
-#define SPEC_PLANER	      9
-#define SPEC_EXPLORER	   10
-#define SPEC_GEOLOGIST     11
+#define SITDIG            0
+#define SEARCHER          1
+#define GROWER            2
+#define PLANTER           3
+#define SCIENTIST         4
+#define SOLDIER           5
+#define SPEC_DEF_CARRIER  6
+#define SPEC_ADD_CARRIER  7
+#define SPEC_BUILDER      8
+#define SPEC_PLANER       9
+#define SPEC_EXPLORER    10
+#define SPEC_GEOLOGIST   11
 
-#define SIT       			0
-#define SIT_PRODU_WORKER	1
-#define DIG			         2
-#define SEARCH			      3
-#define GROW			      4
-#define PLANT			      5
-#define SCIENCE			   6
-#define MILITARY			   7
-#define CANNON			      8
-#define SPEC_HQ			   9
-#define SPEC_STORE		   10
-#define SPEC_PORT			   11
+#define SIT               0
+#define SIT_PRODU_WORKER  1
+#define DIG               2
+#define SEARCH            3
+#define GROW              4
+#define PLANT             5
+#define SCIENCE           6
+#define MILITARY          7
+#define CANNON            8
+#define SPEC_HQ           9
+#define SPEC_STORE       10
+#define SPEC_PORT        11
 #define SPEC_DOCKYARD      12
 
 #define FRONTIER_W     10

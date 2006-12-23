@@ -135,7 +135,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
  */
 void PlayerDescriptionGroup::enable_player(bool on)
 {
-//	if (!(m_allow_changes&CHANGE_ENABLED)) return;
+	//if (not (m_allow_changes & CHANGE_ENABLED)) return;
 
 	if (on) {
 		m_game->add_player

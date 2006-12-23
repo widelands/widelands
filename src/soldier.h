@@ -66,8 +66,8 @@ public:
 	{assert(level <= m_max_defense_level); return m_defense_pics[level];}
 	uint get_evade_level_pic  (const uint level) const
 	{assert(level <= m_max_evade_level);   return m_evade_pics  [level];}
-   
-   
+
+
 
 	uint get_rand_anim(const char * const name) const;
 protected:
@@ -125,7 +125,7 @@ public:
 	uint get_hp_level     () const {return m_hp_level;}
 	uint get_attack_level () const {return m_attack_level;}
 	uint get_defense_level() const {return m_defense_level;}
-	uint get_evade_level  () const {return m_evade_level;} 
+	uint get_evade_level  () const throw () {return m_evade_level;}
 
 public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
@@ -171,28 +171,28 @@ public:
 	void damage (const uint);
 
 	///  This are used to control Requests (only called by Warehouse)
-	bool is_marked ()	 const {return m_marked;}
+	bool is_marked () const throw () {return m_marked;}
 	void mark (const bool b) {m_marked = b;}
 public: // Worker-specific redefinitions
 	virtual void start_task_gowarehouse();
 
    void startTaskMoveToBattle(Game*, Flag*, Coords);
    void startTaskMoveHome(Game*);
-   
+
    void log_general_info(Editor_Game_Base* egbase);
-   
+
    inline void set_attack_ctrl(AttackController* ctrl) { m_attack_ctrl = ctrl; };
-   
+
 private:
    void moveToBattleUpdate (Game*, State*);
    void moveToBattleSignal (Game*, State*);
-   
+
    void moveHomeUpdate (Game*, State*);
    void moveHomeSignal (Game*, State*);
 protected:
    static Task taskMoveToBattle;
    static Task taskMoveHome;
-   
+
 private:
    // Private data
    uint m_hp_current;
@@ -207,7 +207,7 @@ private:
    uint m_defense_level;
    uint m_evade_level;
 
-	bool	m_marked;
+	bool m_marked;
 
    AttackController* m_attack_ctrl;
 };

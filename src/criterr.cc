@@ -111,8 +111,8 @@ void Critical_Error::crash()
  *
  * this is a critical error in the program. It will quite surely die.
  *
- * Args:	str			String to give to the user
- * Returns:	nothing, but may die (through exit())
+ * Args: str  String to give to the user
+ * Returns: nothing, but may die (through exit())
  */
 void critical_error(const char* str, ...)
 {

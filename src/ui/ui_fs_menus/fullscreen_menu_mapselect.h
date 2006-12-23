@@ -36,7 +36,7 @@ class Map_Loader;
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
-	Editor_Game_Base		*egbase;
+	Editor_Game_Base                           * egbase;
 
 	UI::Textarea                                 title;
 	UI::Textarea                                 label_load_map_as_scenario;
@@ -57,9 +57,9 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	UI::IDButton<Fullscreen_Menu_MapSelect, int> back;
 	UI::Button<Fullscreen_Menu_MapSelect>        m_ok;
 
-	filenameset_t	m_mapfiles;
+	filenameset_t                                m_mapfiles;
 
-	Map_Loader**		m_ml;
+	Map_Loader *                               * m_ml;
 	Map*              m_map;
    bool              m_is_scenario;
 

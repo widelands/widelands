@@ -53,8 +53,8 @@ EncodeData::parse
 
 Parse color codes from section, the following keys are currently known:
 
-clrkey_[r,g,b]		Color key
-shadowclr_[r,g,b]	color for shadow pixels
+clrkey_[r,g,b]     color key
+shadowclr_[r,g,b]  color for shadow pixels
 ===============
 */
 void EncodeData::parse(Section *s)
@@ -145,14 +145,14 @@ void AnimationManager::flush()
  * section.
  *
  * This function looks for pictures in this order:
- * 	key 'pics', if present
- * 	picnametempl, if not null
- * 	<sectionname>_??.bmp
+ *    key 'pics', if present
+ *    picnametempl, if not null
+ *    <sectionname>_??.bmp
  *
- * \param directory	which directory to look in for image and sound files
- * \param s		conffile section to search for data on this animation
- * \param picnametempl	a template for the picture names
- * \param encdefaults	default values for player colors, see \ref EncodeData
+ * \param directory     which directory to look in for image and sound files
+ * \param s             conffile section to search for data on this animation
+ * \param picnametempl  a template for the picture names
+ * \param encdefaults   default values for player colors, see \ref EncodeData
 */
 uint AnimationManager::get(const char *directory, Section *s, const char *picnametempl,
 	                        const EncodeData *encdefaults)
@@ -255,8 +255,8 @@ const AnimationData* AnimationManager::get_animation(uint id) const
  * try to play it. This is used to have sound effects that are tightly synchronized
  * to an animation, for example when a geologist is shown hammering on rocks.
  *
- * \par animation	The animation to check.
- * \par framenumber	The framenumber currently on display
+ * \par animation    The animation to check.
+ * \par framenumber  The framenumber currently on display.
  *
  * \note uint animation is an ID number that starts at 1, not a vector index that starts at 0 !
  *

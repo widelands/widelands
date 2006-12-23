@@ -66,11 +66,11 @@ Map IMPLEMENTATION
  * structure
  */
 struct Map::Pathfield {
-	int		heap_index;		// index of this field in heap, for backlinking
-	int		real_cost;		// true cost up to this field
-	int		estim_cost;		// estimated cost till goal
-	ushort	cycle;
-	uchar		backlink;		// how we got here (Map_Object::WALK_*)
+	int    heap_index; //  index of this field in heap, for backlinking
+	int    real_cost;  //  true cost up to this field
+	int    estim_cost; //  estimated cost till goal
+	ushort cycle;
+	uchar  backlink;   //  how we got here (Map_Object::WALK_*)
 
 	inline int cost() { return real_cost + estim_cost; }
 };
@@ -363,7 +363,7 @@ go back to your initial state
 ===============
 */
 void Map::cleanup(void) {
- 	m_nrplayers = 0;
+	m_nrplayers = 0;
 	m_width = m_height = 0;
    m_world=0;
 	m_pathcycle = 0;
@@ -729,9 +729,9 @@ struct FindBobsCallback {
 		}
 	}
 
-	std::vector<Bob*>*	m_list;
-	const FindBob&			m_functor;
-	uint						m_found;
+	std::vector<Bob *> * m_list;
+	const FindBob      & m_functor;
+	uint                 m_found;
 };
 
 
@@ -817,9 +817,9 @@ struct FindImmovablesCallback {
 		}
 	}
 
-	std::vector<ImmovableFound>*	m_list;
-	const FindImmovable&				m_functor;
-	uint									m_found;
+	std::vector<ImmovableFound> * m_list;
+	const FindImmovable         & m_functor;
+	uint                          m_found;
 };
 
 
@@ -894,9 +894,9 @@ struct FindFieldsCallback {
 		}
 	}
 
-	std::vector<Coords>*	m_list;
-	const FindField&		m_functor;
-	uint						m_found;
+	std::vector<Coords> * m_list;
+	const FindField     & m_functor;
+	uint                  m_found;
 };
 
 
@@ -1243,7 +1243,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 		switch(obj->get_size()) {
 		case BaseImmovable::SMALL:
 			if (dist == 1) {
-		 		if (building > BUILDCAPS_MEDIUM) {
+				if (building > BUILDCAPS_MEDIUM) {
 					// a flag to the bottom-right does not reduce building size (obvious)
 					// additionally, roads going top-right and left from a big building's
 					// flag should be allowed
@@ -1507,9 +1507,9 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 }
 
 
-#define BASE_COST_PER_FIELD		1800
-#define SLOPE_COST_FACTOR			0.02
-#define SLOPE_COST_STEPS			8
+#define BASE_COST_PER_FIELD 1800
+#define SLOPE_COST_FACTOR      0.02
+#define SLOPE_COST_STEPS       8
 
 /*
 ===============
@@ -1542,8 +1542,8 @@ base = 1.0 - d(0)
 Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
 ===============
 */
-#define CALC_COST_D(slope)		(SLOPE_COST_FACTOR * ((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1) * 0.5)
-#define CALC_COST_BASE			(1.0 - CALC_COST_D(0))
+#define CALC_COST_D(slope) (SLOPE_COST_FACTOR * ((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1) * 0.5)
+#define CALC_COST_BASE     (1.0 - CALC_COST_D(0))
 
 static inline float calc_cost_d(int slope)
 {
@@ -1910,7 +1910,7 @@ int Map::findpath
 	normalize_coords(&inend);
 
 	start = FCoords(instart, get_field(instart));
-	end =	FCoords(inend, get_field(inend));
+	end   = FCoords(inend,   get_field(inend));
 
 	path.m_path.clear();
 
@@ -2288,13 +2288,13 @@ bool FindFieldSize::accept(FCoords coord) const
 
 	switch(m_size) {
 	default:
-	case sizeAny:		return true;
-	case sizeBuild:	return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
-	case sizeMine:		return (fieldcaps & BUILDCAPS_MINE);
-	case sizePort:		return (fieldcaps & BUILDCAPS_PORT);
-	case sizeSmall:	return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
-	case sizeMedium:	return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
-	case sizeBig:		return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
+	case sizeAny:    return true;
+	case sizeBuild:  return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
+	case sizeMine:   return (fieldcaps & BUILDCAPS_MINE);
+	case sizePort:   return (fieldcaps & BUILDCAPS_PORT);
+	case sizeSmall:  return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
+	case sizeMedium: return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
+	case sizeBig:    return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	}
 }
 
@@ -2678,7 +2678,7 @@ void CoordPath::append(const Path &tail)
 	// debug
 	//log("CoordPath; start %i %i\n", m_coords[0].x, m_coords[0].y);
 	//for(uint i = 0; i < m_path.size(); i++)
-	//	log("  %i -> %i %i\n", m_path[i], m_coords[i+1].x, m_coords[i+1].y);
+	//log("  %i -> %i %i\n", m_path[i], m_coords[i+1].x, m_coords[i+1].y);
 }
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,9 +105,9 @@
 
 /// Networking
 //@{
-#define WIDELANDS_LAN_DISCOVERY_PORT	7394
-#define WIDELANDS_LAN_PROMOTION_PORT	7395
-#define WIDELANDS_PORT			7396
+#define WIDELANDS_LAN_DISCOVERY_PORT 7394
+#define WIDELANDS_LAN_PROMOTION_PORT 7395
+#define WIDELANDS_PORT               7396
 //@}
 
 /// Constants for user-defined SDL events that get handled by SDL's mainloop

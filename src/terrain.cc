@@ -278,9 +278,9 @@ static inline void get_horiz_linearcomb (int u1, int u2, int v1, int v2, float& 
 {
 	float det;
 
-	det=u1*v2 - u2*v1;	// determinant of (u v)
+	det = u1 * v2 - u2 * v1; //  determinant of (u v)
 
-	lambda=v2/det;		// by Cramer's rule
+	lambda = v2 / det;       //  by Cramer's rule
 	mu=-u2/det;
 }
 
@@ -345,7 +345,7 @@ void render_top_triangle (Surface *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
 
-            			*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
 
 				b+=db;
 				tx+=dtx;
@@ -426,7 +426,7 @@ void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Ver
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
 
-            			*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+				*scanline++ = texcolormap[texpixels[texel] | ((b >> 8) & 0xFF00)];
 
 				b+=db;
 				tx+=dtx;
@@ -505,11 +505,11 @@ void render_triangle (Surface* dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *te
     special case then.
 */
 
-#define DITHER_WIDTH		4
+#define DITHER_WIDTH      4
 // DITHER_WIDTH must be a power of two
 
-#define DITHER_RAND_MASK	(DITHER_WIDTH*2-1)
-#define DITHER_RAND_SHIFT	(16/DITHER_WIDTH)
+#define DITHER_RAND_MASK  (DITHER_WIDTH * 2 - 1)
+#define DITHER_RAND_SHIFT  (16 / DITHER_WIDTH)
 
 template<typename T>
 void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Texture* ttex, Texture* btex)
@@ -556,7 +556,7 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
 					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-                			*pix=tcolormap[tpixels[texel] | ((b>>8) & 0xFF00)];
+					*pix = tcolormap[tpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
 
 				tx0+=dty;
@@ -569,7 +569,7 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
 					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-                			*pix=bcolormap[bpixels[texel] | ((b>>8) & 0xFF00)];
+					*pix = bcolormap[bpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
 
 				tx0+=dty;
@@ -630,8 +630,8 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
 					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-                			*pix=lcolormap[lpixels[texel] | ((b>>8) & 0xFF00)];
-        			}
+					*pix = lcolormap[lpixels[texel] | ((b >> 8) & 0xFF00)];
+				}
 
 				tx0+=dty;
 				ty0-=dtx;
@@ -643,8 +643,8 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
 					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-            				*pix=rcolormap[rpixels[texel] | ((b>>8) & 0xFF00)];
-        			}
+					*pix = rcolormap[rpixels[texel] | ((b >> 8) & 0xFF00)];
+				}
 
 				tx0+=dty;
 				ty0-=dtx;
@@ -686,9 +686,9 @@ void render_road_horiz(Surface* dst, const Point& start, const Point& end, Surfa
 			if (y < 0 || y >= dsth)
 				continue;
 
-        		T* dpix = (T*)((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
-        		T* spix = (T*)((uchar*)src->get_pixels() + i*src->get_pitch()) + sx;
-        		*dpix = *spix;
+			T * const dpix = reinterpret_cast<T * const>(static_cast<uchar * const>(dst->get_pixels()) + y * dst->get_pitch()) +  x;
+			T * const spix = reinterpret_cast<T * const>(static_cast<uchar * const>(src->get_pixels()) + i * src->get_pitch()) + sx;
+			*dpix = *spix;
 		}
 	}
 }
@@ -713,20 +713,32 @@ void render_road_vert(Surface* dst, const Point& start, const Point& end, Surfac
 				continue;
 
 
-        		T* dpix = (T*)((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
-        		T* spix = (T*)((uchar*)src->get_pixels() + sy*src->get_pitch()) + i;
-        		*dpix = *spix;
+			T * const dpix = reinterpret_cast<T * const>(static_cast<uchar *>(dst->get_pixels()) +  y * dst->get_pitch()) + x;
+			T * const spix = reinterpret_cast<T * const>(static_cast<uchar *>(src->get_pixels()) + sy * src->get_pitch()) + i;
+			*dpix = *spix;
 		}
 	}
 }
 
 
 template<typename T>
-void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-		    Field * const lf, Field * const ft,
-	    	    const int posx, const int rposx, const int posy,
-	    	    const int blposx, const int rblposx, const int blposy,
-	    	    uchar roads, uchar darken, bool draw_all)
+void draw_field_int
+(Surface * dst,
+ Field * const f,
+ Field * const rf,
+ Field * const fl,
+ Field * const rfl,
+ Field * const lf,
+ Field * const ft,
+ const int     posx,
+ const int     rposx,
+ const int     posy,
+ const int     blposx,
+ const int     rblposx,
+ const int     blposy,
+ uchar         roads,
+ uchar         darken,
+ bool          draw_all)
 {
 	Vertex r, l, br, bl;
 
@@ -749,7 +761,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd().get_texture());
 
 	if( draw_all ) {
-    		render_triangle<T> (dst, &r, &l, &br, rtex);
+		render_triangle<T> (dst, &r, &l,  &br, rtex);
 		render_triangle<T> (dst, &l, &br, &bl, btex);
 	} else {
 		if( rtex->was_animated())
@@ -771,8 +783,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 				case Road_Busy:
 					render_road_horiz<T> (dst, l, r, rt_busy);
 					break;
-        			default:
-					assert(0); break; // never here
+			default: assert(false); break; //  never here
 			}
 		}
 		else {

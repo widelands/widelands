@@ -233,7 +233,7 @@ void Section::check_used()
  *
  * Returns the Value associated with the given keyname.
  *
- * Args: name	name of the key
+ * Args: name  name of the key
  *
  * Returns: Pointer to the Value struct; 0 if the key doesn't exist.
  */
@@ -253,7 +253,7 @@ Section::Value *Section::get_val(const char *name)
  *
  * Returns the first unused value associated with the given keyname.
  *
- * Args: name	name of the key; can be 0 to find any key
+ * Args: name  name of the key; can be 0 to find any key
  *
  * Returns: Pointer to the Value struct; 0 if no more key-value pairs are found
  */
@@ -362,8 +362,8 @@ Coords Section::get_safe_Coords(const char * const name) {
  * Returns the integer value of the given key. Falls back to a default value
  * if the key is not found.
  *
- * Args: name	name of the key
- *       def	fallback value
+ * Args: name  name of the key
+ *       def   fallback value
  *
  * Returns: the integer value of the key
  */
@@ -405,8 +405,8 @@ float Section::get_float(const char *name, float def)
  * Returns the boolean value of the given key. Falls back to a default value
  * if the key is not found.
  *
- * Args: name	name of the key
- *       def	fallback value
+ * Args: name  name of the key
+ *       def   fallback value
  *
  * Returns: the boolean value of the key
  */
@@ -429,8 +429,8 @@ bool Section::get_bool(const char *name, bool def)
  * Returns the value of the given key. Falls back to a default value if the
  * key is not found.
  *
- * Args: name	name of the key
- *       def	fallback value
+ * Args: name  name of the key
+ *       def   fallback value
  *
  * Returns: the string associated with the key; never returns 0 if the key
  *          has been found
@@ -448,8 +448,8 @@ const char *Section::get_string(const char *name, const char *def)
  * Returns the value of the given key. Falls back to a default value if the
  * key is not found.
  *
- * Args: name	name of the key
- *       def	fallback value
+ * Args: name  name of the key
+ *       def   fallback value
  *
  * Returns: the Coords value of the key
  */
@@ -463,8 +463,8 @@ Coords Section::get_Coords(const char * const name, Coords def) {
  *
  * Retrieve the next unused key with the given name as an integer.
  *
- * Args: name	name of the key, can be 0 to find all unused keys
- *       value	value of the key is stored here
+ * Args: name   name of the key, can be 0 to find all unused keys
+ *       value  value of the key is stored here
  *
  * Returns: the name of the key, or 0 if none has been found
  */
@@ -498,8 +498,8 @@ const char *Section::get_next_float(const char *name, float *value)
  *
  * Retrieve the next unused key with the given name as a boolean value.
  *
- * Args: name	name of the key, can be 0 to find all unused keys
- *       value	value of the key is stored here
+ * Args: name   name of the key, can be 0 to find all unused keys
+ *       value  value of the key is stored here
  *
  * Returns: the name of the key, or 0 if none has been found
  */
@@ -518,8 +518,8 @@ const char *Section::get_next_bool(const char *name, bool *value)
  *
  * Retrieve the next unused key with the given name.
  *
- * \param name	name of the key, can be 0 to find all unused keys
- * \param value	value of the key is stored here
+ * \param name   name of the key, can be 0 to find all unused keys
+ * \param value  value of the key is stored here
  *
  * \return the name of the key, or 0 if none has been found
  */
@@ -538,8 +538,8 @@ const char *Section::get_next_string(const char *name, const char **value)
  *
  * Retrieve the next unused key with the given name as a Coords value.
  *
- * Args: name	name of the key, can be 0 to find all unused keys
- *       value	value of the key is stored here
+ * Args: name   name of the key, can be 0 to find all unused keys
+ *       value  value of the key is stored here
  *
  * Returns: the name of the key, or 0 if none has been found
  */
@@ -699,7 +699,7 @@ void Profile::check_used()
  *
  * Retrieve the first section of the given name and mark it used.
  *
- * Args: name	name of the section
+ * Args: name  name of the section
  *
  * Returns: pointer to the section (or 0 if the section doesn't exist)
  */
@@ -745,7 +745,7 @@ Section *Profile::pull_section(const char *name)
  *
  * Retrieve the next unused section of the given name and mark it used.
  *
- * Args: name	name of the section; can be 0 to retrieve any unused section
+ * Args: name  name of the section; can be 0 to retrieve any unused section
  *
  * Returns: pointer to the section (or 0 if the section doesn't exist)
  */
@@ -822,7 +822,7 @@ inline char *setEndAt(char *str, char c)
  * Parses an ini-style file into sections and key values. If a section or
  * key name occurs multiple times, an additional entry is created.
  *
- * Args: filename	name of the source file
+ * Args: filename  name of the source file
  */
 void Profile::read
 (const char * const filename,

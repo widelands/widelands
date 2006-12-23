@@ -50,9 +50,9 @@ class Widelands_Map_Map_Object_Saver;
 
 
 struct Neighbour {
-	Flag	*flag;
-	Road	*road;
-	int	cost;
+	Flag * flag;
+	Road * road;
+	int    cost;
 };
 typedef std::vector<Neighbour> Neighbour_list;
 
@@ -100,14 +100,14 @@ public:
 	void cancel_transfer(Game* g);
 
 private:
-	Object_Ptr			m_location;
-	Economy*				m_economy;
-	int					m_ware;
-	Item_Ware_Descr*	m_ware_descr;
+	Object_Ptr        m_location;
+	Economy         * m_economy;
+	int               m_ware;
+	Item_Ware_Descr * m_ware_descr;
 
-	IdleWareSupply*	m_supply;
-	Transfer*			m_transfer;
-	Object_Ptr			m_transfer_nextstep; // cached PlayerImmovable, can be 0
+	IdleWareSupply  * m_supply;
+	Transfer*         m_transfer;
+	Object_Ptr        m_transfer_nextstep; //  cached PlayerImmovable, can be 0
 
 private:
 };
@@ -138,14 +138,14 @@ class Flag : public PlayerImmovable {
 
 private:
 	struct PendingItem {
-		WareInstance*		item;			// the item itself
-		bool					pending;		// if the item is pending
-		PlayerImmovable*	nextstep;	// next step that this item is sent to
+		WareInstance    * item;     //  the item itself
+		bool              pending;  //  if the item is pending
+		PlayerImmovable * nextstep; //  next step that this item is sent to
 	};
 
 	struct FlagJob {
-		Request*		request;
-		std::string	program;
+		Request *   request;
+		std::string program;
 	};
 
 public:
@@ -203,31 +203,32 @@ protected:
 	static void flag_job_request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 private:
-	Coords			m_position;
-	uint				m_anim;
-	int				m_animstart;
+	Coords                  m_position;
+	uint                    m_anim;
+	int                     m_animstart;
 
-	Building			*m_building;		// attached building (replaces road WALK_NW)
-	Road*				m_roads[6];			// Map_Object::WALK_xx-1 as index
-	int				m_items_pending[6];
+	Building * m_building; //  attached building (replaces road WALK_NW)
+	Road                  * m_roads[6];      //  Map_Object::WALK_xx - 1 as index
+	int                     m_items_pending[6];
 
-	int				m_item_capacity;	// size of m_items array
-	int				m_item_filled;		// number of items currently on the flag
-	PendingItem*	m_items;				// items currently on the flag
+	int                     m_item_capacity; //  size of m_items array
+	int m_item_filled; //  number of items currently on the flag
+	PendingItem           * m_items;         //  items currently on the flag
 
-	Flag*				m_always_call_for_flag;	// call_carrier() will always call a carrier when
-														// the destination is the given flag
+	//  call_carrier() will always call a carrier when the destination is the
+	//  given flag
+	Flag                  * m_always_call_for_flag;
 
-	std::vector<Object_Ptr>	m_capacity_wait;	// workers waiting for capacity
+	std::vector<Object_Ptr> m_capacity_wait; //  workers waiting for capacity
 
-	std::list<FlagJob>	m_flag_jobs;
+	std::list<FlagJob>      m_flag_jobs;
 
 	// The following are only used during pathfinding
-	uint				mpf_cycle;
-	int				mpf_heapindex;
-	int				mpf_realcost;	// real cost of getting to this flag
-	Flag*				mpf_backlink;	// flag where we came from
-	int				mpf_estimate;	// estimate of cost to destination
+	uint                    mpf_cycle;
+	int                     mpf_heapindex;
+	int                     mpf_realcost; //  real cost of getting to this flag
+	Flag                  * mpf_backlink; //  flag where we came from
+	int                     mpf_estimate; //  estimate of cost to destination
 
 	inline int cost() const { return mpf_realcost+mpf_estimate; }
 };
@@ -301,16 +302,21 @@ protected:
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
-	int		m_type;			// use Field::Road_XXX
-	Flag*		m_flags[2];		// start and end flag
-	int		m_flagidx[2];	// index of this road in the flag's road array
-	int		m_cost[2];		// cost for walking this road (0 = from start to end, 1 = from end to start)
-	Path		m_path;			// path goes from start to end
-	int		m_idle_index;	// index into path where carriers should idle
+	int        m_type;       //  use Field::Road_XXX
+	Flag     * m_flags  [2]; //  start and end flag
+	int        m_flagidx[2]; //  index of this road in the flag's road array
 
-	uint			m_desire_carriers;	// total # of carriers we want (currently limited to 0 or 1)
-	Object_Ptr	m_carrier;				// our carrier
-	Request*		m_carrier_request;
+	//  cost for walking this road (0 = from start to end, 1 = from end to start)
+	int        m_cost   [2];
+
+	Path       m_path;       //  path goes from start to end
+	int        m_idle_index; //  index into path where carriers should idle
+
+	//  total # of carriers we want (currently limited to 0 or 1)
+	uint       m_desire_carriers;
+
+	Object_Ptr m_carrier;    //  our carrier
+	Request *  m_carrier_request;
 };
 
 
@@ -337,8 +343,8 @@ public:
 	void truncate(int count);
 
 private:
-	int				m_totalcost;
-	std::vector<Object_Ptr>		m_route;	// includes start and end flags
+	int                     m_totalcost;
+	std::vector<Object_Ptr> m_route; //  includes start and end flags
 };
 
 
@@ -377,21 +383,21 @@ private:
 	void tlog(const char* fmt, ...) PRINTF_FORMAT(2,3);
 
 private:
-	Game*				m_game;
-	Request*			m_request;
-	WareInstance*	m_item;			// non-null if ware is an item
-	Worker*			m_worker;		// non-null if ware is a worker
-	Soldier*			m_soldier;		// non-null if ware is a soldier
-	Route				m_route;
+	Game         * m_game;
+	Request      * m_request;
+	WareInstance * m_item;    //  non-null if ware is an item
+	Worker       * m_worker;  //  non-null if ware is a worker
+	Soldier      * m_soldier; //  non-null if ware is a soldier
+	Route          m_route;
 
-	bool				m_idle;		// an idle transfer can be fail()ed if the item feels like it
+	bool m_idle; //  an idle transfer can be fail()ed if the item feels like it
 };
 
 
 class Requeriments
 {
 public:
-		Requeriments ();	// Init to allow all
+	Requeriments (); //  init to allow all
 
 	void set (tAttribute at, int min, int max);
 
@@ -455,7 +461,7 @@ public:
 	inline Supply* get_supply(int idx) const { return m_supplies[idx]; }
 
 private:
-	std::vector<Supply*>	m_supplies;
+	std::vector<Supply *> m_supplies;
 };
 
 
@@ -535,21 +541,21 @@ private:
 	typedef std::vector<Transfer*> TransferList;
 
    Type              m_type;
-	PlayerImmovable*	m_target;	// who requested it?
-	Economy*				m_economy;
-	int					m_index;		// the index of the ware descr
-	bool					m_idle;
-	int					m_count;		// how many do we need in total
+	PlayerImmovable * m_target;            //  who requested it?
+	Economy         * m_economy;
+	int               m_index;             //  the index of the ware descr
+	bool              m_idle;
+	int               m_count;             //  how many do we need in total
 
-	callback_t		m_callbackfn;		// called on request success
-	void*				m_callbackdata;
+	callback_t        m_callbackfn;        //  called on request success
+	void            * m_callbackdata;
 
-	int				m_required_time;	// when do we need the first ware (can be in the past)
-	int				m_required_interval;	// time between items
+	int m_required_time; //  when do we need the first ware (can be in the past)
+	int               m_required_interval; //  time between items
 
-	TransferList	m_transfers;	// maximum size is m_count
+	TransferList      m_transfers;         //  maximum size is m_count
 
-	Requeriments*	m_requeriments;	// Soldier requeriments
+	Requeriments    * m_requeriments;      //  soldier requeriments
 };
 
 
@@ -597,15 +603,15 @@ private:
 	static void request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 private:
-	PlayerImmovable*	m_owner;
-	int					m_ware;		// ware ID
+	PlayerImmovable * m_owner;
+	int               m_ware; //  ware ID
 	uint m_size;             // # of items that fit into the queue
 	uint m_filled;           // # of items that are currently in the queue
 	uint m_consume_interval; // time in ms between consumption at full speed
-	Request*				m_request;	// currently pending request
+	Request         * m_request; //  currently pending request
 
-	callback_t*			m_callback_fn;
-	void*					m_callback_data;
+	callback_t      * m_callback_fn;
+	void            * m_callback_data;
 };
 
 
@@ -690,23 +696,25 @@ private:
 private:
 	typedef std::vector<Request*> RequestList;
 
-	Player*	m_owner;
-	uint		m_trackserial;
-	bool		m_rebuilding;	// true while rebuilding Economies (i.e. during split/merge)
+	Player*   m_owner;
+	uint      m_trackserial;
 
-	std::vector<Flag*>		m_flags;
-	WareList						m_wares;		// virtual storage with all wares in this Economy
-	WareList						m_workers;		// virtual storage with all wares in this Economy
-	std::vector<Warehouse*>	m_warehouses;
+	//  true while rebuilding Economies (i.e. during split/merge)
+	bool m_rebuilding;
 
-	RequestList						m_requests; // requests
-	std::vector<SupplyList>		m_ware_supplies; // supplies by ware id
-	std::vector<SupplyList>		m_worker_supplies; // supplies by ware id
+	std::vector<Flag *>      m_flags;
+	WareList m_wares;     //  virtual storage with all wares in this Economy
+	WareList m_workers;   //  virtual storage with all wares in this Economy
+	std::vector<Warehouse *> m_warehouses;
 
-	bool		m_request_timer;	// true if we started the request timer
-	int		m_request_timer_time;
+	RequestList              m_requests; // requests
+	std::vector<SupplyList>  m_ware_supplies; // supplies by ware id
+	std::vector<SupplyList>  m_worker_supplies; // supplies by ware id
 
-	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
+	bool m_request_timer; //  true if we started the request timer
+	int                      m_request_timer_time;
+
+	uint mpf_cycle;       //  pathfinding cycle, see Flag::mpf_cycle
 };
 
 class Cmd_Call_Economy_Balance : public BaseCommand {

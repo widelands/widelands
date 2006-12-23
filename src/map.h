@@ -38,10 +38,10 @@ class MapEventChainManager;
 class MapTriggerManager;
 class Map;
 class Map_Loader;
-#define WLMF_SUFFIX		".wmf"
+#define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX     ".swd"
 
-#define S2MF_MAGIC		"WORLD_V1.0"
+#define S2MF_MAGIC  "WORLD_V1.0"
 
 
 const ushort NUMBER_OF_MAP_DIMENSIONS=29;
@@ -56,8 +56,8 @@ class Immovable;
 
 
 struct ImmovableFound {
-	BaseImmovable	*object;
-	Coords			coords;
+	BaseImmovable * object;
+	Coords          coords;
 };
 
 /*
@@ -86,9 +86,9 @@ struct FindField {
 };
 struct CheckStep {
 	enum StepId {
-		stepNormal,		// normal step treatment
-		stepFirst,		// first step of a path
-		stepLast,		// last step of a path
+		stepNormal, //  normal step treatment
+		stepFirst,  //  first step of a path
+		stepLast,   //  last step of a path
 	};
 
 	// Return true if moving from start to end (single step in the given
@@ -149,8 +149,11 @@ class Map {
 
 public:
 	enum { // flags for findpath()
-		fpBidiCost = 1,		// use bidirection cost instead of normal cost calculations
-									// should be used for road building
+
+		//  use bidirection cost instead of normal cost calculations
+		//  should be used for road building
+		fpBidiCost = 1,
+
 	};
 
 public:
@@ -338,17 +341,17 @@ private:
 	Uint8             m_nrplayers; // # of players this map supports (!= Game's number of players)
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
-	char		m_filename[256];
-	char		m_author[61];
-	char		m_name[61];
-	char		m_description[1024];
-	char		m_worldname[1024];
-	World*	m_world;				// world type
-	Coords*	m_starting_pos;	// players' starting positions
+	char        m_filename    [256];
+	char        m_author       [61];
+	char        m_name         [61];
+	char        m_description[1024];
+	char        m_worldname  [1024];
+	World     * m_world;           //  world type
+	Coords    * m_starting_pos;    //  players' starting positions
 
-	Field*	m_fields;
+	Field     * m_fields;
 
-	Pathfield*	m_pathfields;
+	Pathfield * m_pathfields;
    Overlay_Manager* m_overlay_manager;
 
    std::vector<std::string>  m_scenario_tribes; // only alloced when really needed
@@ -438,8 +441,8 @@ struct FindFieldAnd : public FindField {
 	virtual bool accept(FCoords coord) const;
 
 	struct Subfunctor {
-		bool					negate;
-		const FindField*	findfield;
+		bool              negate;
+		const FindField * findfield;
 	};
 
 	std::vector<Subfunctor> m_subfunctors;
@@ -448,13 +451,13 @@ struct FindFieldAnd : public FindField {
 // Accepts fields based on what can be built there
 struct FindFieldSize : public FindField {
 	enum Size {
-		sizeAny = 0,	// any field not occupied by a robust immovable
-		sizeBuild,		// any field we can build on (flag or building)
-		sizeSmall,		// at least small size
+		sizeAny    = 0,   //  any field not occupied by a robust immovable
+		sizeBuild,        //  any field we can build on (flag or building)
+		sizeSmall,        //  at least small size
 		sizeMedium,
 		sizeBig,
-		sizeMine,		// can build a mine on this field
-		sizePort,		// can build a port on this field
+		sizeMine,         //  can build a mine on this field
+		sizePort,         //  can build a port on this field
 	};
 
 	FindFieldSize(Size size) : m_size(size) { }
@@ -479,10 +482,10 @@ struct FindFieldSizeResource : public FindFieldSize {
 // Accepts fields based on the size of immovables on the field
 struct FindFieldImmovableSize : public FindField {
 	enum {
-		sizeNone		= (1 << 0),
-		sizeSmall	= (1 << 1),
-		sizeMedium	= (1 << 2),
-		sizeBig		= (1 << 3)
+		sizeNone   = 1 << 0,
+		sizeSmall  = 1 << 1,
+		sizeMedium = 1 << 2,
+		sizeBig    = 1 << 3
 	};
 
 	FindFieldImmovableSize(uint sizes) : m_sizes(sizes) { }
@@ -533,7 +536,7 @@ public:
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	uchar	m_movecaps;
+	uchar m_movecaps;
 };
 
 
@@ -553,8 +556,8 @@ public:
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	uchar	m_movecaps;
-	bool	m_onlyend;
+	uchar m_movecaps;
+	bool  m_onlyend;
 };
 
 
@@ -578,9 +581,9 @@ public:
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	Player*							m_player;
-	uchar								m_movecaps;
-	const std::vector<Coords>*	m_forbidden;
+	Player                    * m_player;
+	uchar                       m_movecaps;
+	const std::vector<Coords> * m_forbidden;
 };
 
 
@@ -648,9 +651,9 @@ public:
 	void append(const CoordPath &tail);
 
 private:
-	Map *m_map;
-	std::vector<char> m_path;			// directions
-	std::vector<Coords> m_coords;		// m_coords.size() == m_path.size()+1
+	Map                * m_map;
+	std::vector<char>    m_path;   //  directions
+	std::vector<Coords>  m_coords; //  m_coords.size() == m_path.size() + 1
 };
 
 /*
@@ -1164,20 +1167,20 @@ public:
 
 private:
 	enum Phase {
-		phaseNone,		// not initialized or completed
-		phaseUpper,		// upper half
-		phaseLower,		// lower half
+		phaseNone,  //  completed
+		phaseUpper, //  upper half
+		phaseLower, //  lower half
 	};
 
 	const Map & m_map;
-	Phase		m_phase;
-	uint		m_radius;		// radius of area
-	uint		m_row;			// # of rows completed in this phase
-	uint		m_rowwidth;		// # of fields to return per row
-	uint		m_rowpos;		// # of fields we have returned in this row
+	Phase       m_phase;
+	uint        m_radius;   //  radius of area
+	uint        m_row;      //  number of rows completed in this phase
+	uint        m_rowwidth; //  number of fields to return per row
+	uint        m_rowpos;   //  number of fields we have returned in this row
 
-	FCoords	m_left;			// left-most field of current row
-	FCoords	m_next;			// next field to return
+	FCoords     m_left;     //  left-most field of current row
+	FCoords     m_next;     //  next field to return
 };
 
 /*

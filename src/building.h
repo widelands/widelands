@@ -102,7 +102,7 @@ private:
 	bool         m_mine;
 	std::vector<char*> m_enhances_to;     // building to enhance to or 0
 	bool         m_enhanced_building; // if it is one, it is bulldozable
-	BuildingHints*	m_hints;	// hints (knowledge) for computer players
+	BuildingHints     * m_hints; //  hints (knowledge) for computer players
 
 public:
 	static Building_Descr* create_from_dir(Tribe_Descr* tribe,
@@ -176,8 +176,8 @@ public:
 
     // Use on military and training sites
    virtual void drop_soldier(uint) { };
-	virtual	void soldier_capacity_up ()		{ }
-	virtual	void soldier_capacity_down ()	{ }
+	virtual void soldier_capacity_up   () {}
+	virtual void soldier_capacity_down () {}
 
     // Use on training sites only
    virtual void change_train_priority(uint, int) { };

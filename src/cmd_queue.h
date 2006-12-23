@@ -43,7 +43,7 @@ class Widelands_Map_Map_Object_Loader;
 
 
 enum {
-	FLAGACTION_GEOLOGIST = 0,	// call a geologist
+	FLAGACTION_GEOLOGIST   =  0, //  call a geologist
 
 
    ENEMYFLAGACTION_ATTACK = 10,   // Performs an attack
@@ -85,8 +85,8 @@ class Cmd_Queue {
    friend class Game_Cmd_Queue_Data_Packet;
 
 	struct cmditem {
-		BaseCommand*	cmd;
-		unsigned long	serial;
+		BaseCommand * cmd;
+		unsigned long serial;
 
 		bool operator< (const cmditem& c) const
 		{
@@ -107,9 +107,9 @@ class Cmd_Queue {
    void flush(void); // delete all commands in the queue now
 
    private:
-	Game*				m_game;
-	std::priority_queue<cmditem>	m_cmds;
-	unsigned long			nextserial;
+	Game *                       m_game;
+	std::priority_queue<cmditem> m_cmds;
+	unsigned long                nextserial;
 };
 
 #endif // __S__CMD_QUEUE_H

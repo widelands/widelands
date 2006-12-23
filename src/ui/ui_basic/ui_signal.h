@@ -29,12 +29,12 @@ namespace UI {
  * member functions and with better type checking.
  *
  * Use as:
- *		Signal signal;
- *		Signal1<int> signal1;
+ *      Signal signal;
+ *      Signal1<int> signal1;
  *
- *		foo->signal.set(this, &MyClass::Handler);
- *		signal.call();
- *		signal1.call(some_int);
+ *      foo->signal.set(this, &MyClass::Handler);
+ *      signal.call();
+ *      signal1.call(some_int);
  */
 class Signal : public Object {
 	typedef void (Object::*fnT)();

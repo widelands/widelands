@@ -3,7 +3,7 @@
  *
  * Thanks to Ulrich Drepper for the md5sum example code
  *
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ const unsigned char ChkSum::fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
  * Default Constructor
  *
  * Args: none
- * Ret:	none
+ * Ret: none
  */
 ChkSum::ChkSum(void) {
 		  can_handle_data=1;
@@ -63,8 +63,8 @@ ChkSum::~ChkSum(void) {
  * buffers it, and when the buffer is full calculates
  * one MD5 block.
  *
- * Args: 	data 		data to compute chksum for
- * 			length	len of data
+ * Args: data    data to compute chksum for
+ *       length  length of data
  */
 void ChkSum::pass_data(const void* data, uint length) {
 		  if(can_handle_data==0) return; // this checksum is finished! don't touch it
@@ -88,7 +88,8 @@ void ChkSum::pass_data(const void* data, uint length) {
 /*
                 memcpy(buf, (const char*) (data)+(BLOCKSIZE-nread), length-(BLOCKSIZE-nread));
 					 nread=length-(BLOCKSIZE-nread);
-*/		  }
+*/
+			}
 
 }
 
@@ -98,7 +99,7 @@ void ChkSum::pass_data(const void* data, uint length) {
  * This function finishes the checksum. after this, calls
  * to pass_data get ignored
  *
- * Args:	none
+ * Args: none
  */
 void ChkSum::finish_chksum(void) {
 		  can_handle_data=0;
@@ -112,7 +113,7 @@ void ChkSum::finish_chksum(void) {
 
 /** Overloaded == operator
  *
- * Args: sum1,sum2 	sums to check to
+ * Args: sum1, sum2  sums to check to
  * returns: true if match, fales otherwise
  */
 bool operator==(ChkSum& sum1, ChkSum& sum2) {
@@ -131,8 +132,8 @@ bool operator==(ChkSum& sum1, ChkSum& sum2) {
 
 /** Opverloaded == operator
  *
- * Args: buf	buf to check to
- * 		sum1	sum to check to
+ * Args: buf   buf to check to
+ *       sum1  sum to check to
  * returns: true if match, false otherwise
  */
 bool operator==(ChkSum& sum1, const void* buf) {
@@ -150,7 +151,7 @@ bool operator==(ChkSum& sum1, const void* buf) {
 }
 
 std::ostream& operator<<(std::ostream& o, ChkSum& sum) {
-		  uchar	*buf=(uchar*) sum.get_chksum();
+	uchar * const buf = reinterpret_cast<uchar * const>(sum.get_chksum());
 		  if(!buf) {
 					 o << "(inval)";
 		  } else {
@@ -298,15 +299,13 @@ ChkSum::md5_process_block (const void* buffer, ulong len, md5_ctx* c)
 	 before the computation.  To reduce the work for the next steps
 	 we store the swapped words in the array CORRECT_WORDS.  */
 
-#define OP(a, b, c, d, s, T)						\
-      do								\
-        {								\
-	  a += FF (b, c, d) + (*cwp++ = (*words)) + T;		\
-	  ++words;							\
-	  CYCLIC (a, s);						\
-	  a += b;							\
-        }								\
-      while (0)
+#define OP(a, b, c, d, s, T)                       \
+	do {                                            \
+		a += FF (b, c, d) + (*cwp++ = (*words)) + T; \
+		++words;                                     \
+		CYCLIC (a, s);                               \
+		a += b;                                      \
+	} while (0)
 
       /* It is unfortunate that C does not provide an operator for
 	 cyclic rotation.  Hope the C compiler is smart enough.  */
@@ -340,14 +339,12 @@ ChkSum::md5_process_block (const void* buffer, ulong len, md5_ctx* c)
 	 in CORRECT_WORDS.  Redefine the macro to take an additional first
 	 argument specifying the function to use.  */
 #undef OP
-#define OP(f, a, b, c, d, k, s, T)					\
-      do 								\
-	{								\
-	  a += f (b, c, d) + correct_words[k] + T;			\
-	  CYCLIC (a, s);						\
-	  a += b;							\
-	}								\
-      while (0)
+#define OP(f, a, b, c, d, k, s, T)             \
+	do {                                        \
+		a += f (b, c, d) + correct_words[k] + T; \
+		CYCLIC (a, s);                           \
+		a += b;                                  \
+	} while (0)
 
       /* Round 2.  */
       OP (FG, A, B, C, D,  1,  5, 0xf61e2562);

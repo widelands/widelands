@@ -72,11 +72,11 @@ public:
 	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
 	{return m_soldiers;}
 
-	int	get_capacity() { return m_capacity; }
+	uint get_capacity () const throw () {return m_capacity;}
 	// Overload of building functions
    virtual void drop_soldier (uint serial);
-	virtual void soldier_capacity_up ()		{ change_soldier_capacity(1); }
-	virtual void soldier_capacity_down ()	{ change_soldier_capacity(-1); }
+	virtual void soldier_capacity_up   () {change_soldier_capacity  (1);}
+	virtual void soldier_capacity_down () {change_soldier_capacity (-1);}
 
    /**
       This methods are helper for use at configure this site.
@@ -120,8 +120,8 @@ private:
 	Requeriments m_soldier_requeriments;
 	std::vector<Request*> m_soldier_requests;
 	std::vector<Soldier*> m_soldiers;
-	bool		m_didconquer;
-	uint		m_capacity;
+	bool                   m_didconquer;
+	uint                   m_capacity;
 	bool     m_in_battle;
 };
 

@@ -558,7 +558,7 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
    sprintf(buffer, "resi_%s%i", res->get_name(), bestmatch);
 
 	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
-	//	res->get_name(), buffer, amount);
+	//res->get_name(), buffer, amount);
 
 
 

@@ -47,7 +47,7 @@ WatchWindow
 struct WatchWindowView {
 	Point view_point;
 	Interactive_Player *parent;
-	Object_Ptr tracking;		// if non-null, we're tracking a Bob
+	Object_Ptr tracking; //  if non-null, we're tracking a Bob
 };
 
 class WatchWindow : public UI::Window {
@@ -76,7 +76,7 @@ protected:
 	void stop_tracking_by_drag(int x, int y);
 
 private:
-	Game*				m_game;
+	Game                           * m_game;
 	Map_View                         m_mapview;
 	bool m_single_window;
 	uint last_visit;

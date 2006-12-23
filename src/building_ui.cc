@@ -132,9 +132,9 @@ private:
 	void bulldoze();
 
 private:
-	Interactive_Base*	   m_iabase;
-	Object_Ptr				m_building;
-	Object_Ptr				m_todestroy;
+	Interactive_Base * m_iabase;
+	Object_Ptr         m_building;
+	Object_Ptr         m_todestroy;
 };
 
 
@@ -300,15 +300,15 @@ private:
 	void recalc_size();
 
 private:
-	WaresQueue*		m_queue;
-	uint				m_max_width;
-	uint				m_pic_empty;
-	uint				m_pic_full;
-	uint				m_pic_background;
+	WaresQueue * m_queue;
+	uint         m_max_width;
+	uint         m_pic_empty;
+	uint         m_pic_full;
+	uint         m_pic_background;
 
-	uint				m_cache_size;
-	uint				m_cache_filled;
-	uint				m_display_size;
+	uint         m_cache_size;
+	uint         m_cache_filled;
+	uint         m_display_size;
 };
 
 
@@ -455,7 +455,7 @@ class Building_Window : public UI::Window {
 	friend class MilitarySite_Window;
 public:
 	enum {
-		Width = 136		// 4*34, 4 normally sized buttons
+		Width = 4 * 34 //  4 normally sized buttons
 	};
 
 public:
@@ -482,13 +482,16 @@ protected:
 	void act_change_soldier_capacity(int);
 
 private:
-	UI::Window**				m_registry;
-	Interactive_Player*	m_player;
-	Building*				m_building;
+	UI::Window *                * m_registry;
+	Interactive_Player          * m_player;
+	Building                    * m_building;
 
-	UI::Panel*	m_capsbuttons;		// UI::Panel that contains capabilities buttons
+	UI::Panel * m_capsbuttons; //  UI::Panel that contains capabilities buttons
 	UI::Button<Building_Window> * m_toggle_workarea;
-	uint		m_capscache;		// capabilities that were last used in setting up the caps panel
+
+	//  capabilities that were last used in setting up the caps panel
+	uint m_capscache;
+
 	Overlay_Manager::Job_Id m_workarea_job_id;
 	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS + 1];
 };
@@ -844,7 +847,7 @@ public:
 	virtual void think();
 
 private:
-	UI::Progress_Bar*	m_progress;
+	UI::Progress_Bar * m_progress;
 };
 
 
@@ -951,7 +954,7 @@ private:
 	void clicked_goto      ();
 
 private:
-	WaresDisplay*			m_waresdisplay;
+	WaresDisplay       * m_waresdisplay;
    Interactive_Player*  m_parent;
    int                  m_curpage;
 };
@@ -1386,7 +1389,7 @@ private:
    Interactive_Player* m_parent;
    UI::Window** m_reg;
    UI::Table<Soldier &> * m_table;
-	UI::Textarea		*m_capacity;
+	UI::Textarea         * m_capacity;
 };
 
 
@@ -1569,29 +1572,29 @@ public:
 
 	void think();
 private:
-	void heros_clicked ()			{ get_trainingsite()->switch_heros(); }
-	void up_hp_clicked ()			{ act_change_priority(atrHP, 1); }
-	void up_attack_clicked()		{ act_change_priority(atrAttack, 1); }
-	void up_defense_clicked()		{ act_change_priority(atrDefense, 1); }
-	void up_evade_clicked()			{ act_change_priority(atrEvade, 1); }
-	void down_hp_clicked ()			{ act_change_priority(atrHP, -1); }
-	void down_attack_clicked()		{ act_change_priority(atrAttack, -1); }
-	void down_defense_clicked()		{ act_change_priority(atrDefense, -1); }
-	void down_evade_clicked()		{ act_change_priority(atrEvade, -1); }
+	void heros_clicked        () {get_trainingsite ()->switch_heros ();}
+	void up_hp_clicked        () {act_change_priority (atrHP,       1);}
+	void up_attack_clicked    () {act_change_priority (atrAttack,   1);}
+	void up_defense_clicked   () {act_change_priority (atrDefense,  1);}
+	void up_evade_clicked     () {act_change_priority (atrEvade,    1);}
+	void down_hp_clicked      () {act_change_priority (atrHP,      -1);}
+	void down_attack_clicked  () {act_change_priority (atrAttack,  -1);}
+	void down_defense_clicked () {act_change_priority (atrDefense, -1);}
+	void down_evade_clicked   () {act_change_priority (atrEvade,   -1);}
 
 	void act_change_priority (int atr, int how);
 
 	void update();
 
-	Coords			m_ms_location;
+	Coords               m_ms_location;
 	Interactive_Player* m_parent;
-	UI::Window** 		m_reg;
-	UI::Textarea		*m_style_train,
-					*m_hp_pri,
-					*m_attack_pri,
-					*m_defense_pri,
-					*m_evade_pri;
-	TrainingSite	*m_trainingsite;
+	UI::Window *       * m_reg;
+	UI::Textarea       * m_style_train;
+	UI::Textarea       * m_hp_pri;
+	UI::Textarea       * m_attack_pri;
+	UI::Textarea       * m_defense_pri;
+	UI::Textarea       * m_evade_pri;
+	TrainingSite       * m_trainingsite;
 };
 
 TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
@@ -1626,10 +1629,10 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	m_style_train = new UI::Textarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
 
 
-	m_hp_pri			= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*2, "XX", Align_Center);
-	m_attack_pri	= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*3, "XX", Align_Center);
-	m_defense_pri	= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*4, "XX", Align_Center);
-	m_evade_pri		= new UI::Textarea (this, _cb+3*_bs/2, 3+(3+_bs)*5, "XX", Align_Center);
+	m_hp_pri      = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 2, "XX", Align_Center);
+	m_attack_pri  = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 3, "XX", Align_Center);
+	m_defense_pri = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 4, "XX", Align_Center);
+	m_evade_pri   = new UI::Textarea (this, _cb + 3 * _bs / 2, 3 + (3 + _bs) * 5, "XX", Align_Center);
 
 	m_hp_pri->set_visible(false);
 	m_attack_pri->set_visible(false);
@@ -1724,7 +1727,7 @@ void TrainingSite_Options_Window::act_change_priority (int atr, int val) {
 
 void TrainingSite_Options_Window::think()
 {
-//	Building_Window::think();
+	//Building_Window::think();
 
 	BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
 	if(imm->get_type()!=Map_Object::BUILDING

@@ -106,22 +106,22 @@ class Worker_Descr : public Bob_Descr {
    virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
    static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
 
-   Tribe_Descr*	m_tribe;
-   std::string		m_descname;			// Descriptive name
-   std::string		m_helptext;			// Short (tooltip-like) help text
-   char*				m_menu_pic_fname;
-   uint				m_menu_pic;
-   DirAnimations	m_walk_anims;
-   DirAnimations	m_walkload_anims;
+	Tribe_Descr * m_tribe;
+	std::string   m_descname; //  descriptive name
+	std::string   m_helptext; //  short (tooltip-like) help text
+	char        * m_menu_pic_fname;
+	uint          m_menu_pic;
+	DirAnimations m_walk_anims;
+	DirAnimations m_walkload_anims;
    bool        m_buildable;
    BuildCost      m_buildcost;
    int            m_max_experience, m_min_experience;
    std::string    m_becomes;
-   ProgramMap		m_programs;
+	ProgramMap    m_programs;
 };
 
 class Worker : public Bob {
-   friend class Soldier;		// Allow access to m_supply
+	friend class Soldier; //  allow access to m_supply
    friend class WorkerProgram;
    friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 
@@ -273,11 +273,11 @@ class Worker : public Bob {
    bool run_playFX(Game* g, State* state, const WorkerAction* act);
 
    private:
-   Object_Ptr			m_location;			// meta location of the worker, a PlayerImmovable
-   Economy*				m_economy;			// Economy this worker is registered in
-   Object_Ptr			m_carried_item;	// Item we are carrying
-   IdleWorkerSupply*	m_supply;			// supply while gowarehouse and not transfer
-//   Supply*				m_supply;			// supply while gowarehouse and not transfer
+	Object_Ptr m_location; //  meta location of the worker, a PlayerImmovable
+	Economy          * m_economy;      //  economy this worker is registered in
+	Object_Ptr         m_carried_item; //  item we are carrying
+	IdleWorkerSupply * m_supply;  // supply while gowarehouse and not transfer
+	//Supply           * m_supply;         // supply while gowarehouse and not transfer
    int               m_needed_exp;     // experience for next level
    int               m_current_exp;    // current experience
 };
@@ -333,7 +333,9 @@ class Carrier : public Worker {
    static Task taskTransport;
 
    private:
-   int	m_acked_ware;	// -1: no ware acked; 0/1: acked ware for start/end flag of road
+
+	//  -1: no ware acked; 0/1: acked ware for start/end flag of road
+	int m_acked_ware;
 };
 
 class Cmd_Incorporate:public BaseCommand {

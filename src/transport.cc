@@ -73,8 +73,8 @@ public: // implementation of Supply
 	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r);
 	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
-	WareInstance*		m_ware;
-	Economy*				m_economy;
+	WareInstance * m_ware;
+	Economy      * m_economy;
 };
 
 
@@ -1364,8 +1364,9 @@ Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const 
 	Road *r = new Road();
 	r->set_owner(start->get_owner());
 	r->m_type = type;
-	r->m_flags[FlagStart] = start;	// m_flagidx is set when attach_road() is called, i.e. in init()
+	r->m_flags[FlagStart] = start;
 	r->m_flags[FlagEnd] = end;
+	// m_flagidx is set when attach_road() is called, i.e. in init()
 	r->set_path(g, path);
 	r->init(g);
 
@@ -2017,7 +2018,7 @@ Transfer::~Transfer()
 	{
 		assert(!m_soldier);
 		if(m_game->get_objects()->object_still_available(m_item))
-		   	m_item->cancel_transfer(m_game);
+			m_item->cancel_transfer(m_game);
 	}
 	else if (m_soldier)
 	{
@@ -2215,19 +2216,24 @@ void Requeriments::set (tAttribute at, int min, int max)
 {
 	switch (at)
 	{
-		case atrHP:			m_hp.min = min;
+	case atrHP:
+		m_hp.min = min;
 								m_hp.max = max;
 								break;
-		case atrAttack:	m_attack.min = min;
+	case atrAttack:
+		m_attack.min = min;
 								m_attack.max = max;
 								break;
-		case atrDefense:	m_defense.min = min;
+	case atrDefense:
+		m_defense.min = min;
 								m_defense.max = max;
 								break;
-		case atrEvade:		m_evade.min = min;
+	case atrEvade:
+		m_evade.min = min;
 								m_evade.max = max;
 								break;
-		case atrTotal:		m_total.min = min;
+	case atrTotal:
+		m_total.min = min;
 								m_total.max = max;
 								break;
 		default:
@@ -2467,7 +2473,7 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    for(i=0; i<m_transfers.size(); i++) {
       Transfer* trans=m_transfers[i];
       // Is this a ware (or a worker)
-     	fw->Unsigned8(m_type);
+		fw->Unsigned8(m_type);
       // Write ware/worker
       if(trans->m_item) {
          assert(mos->is_object_known(trans->m_item));
@@ -2483,7 +2489,7 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
       fw->Unsigned8(trans->is_idle());
 
 		// Requeriments
-//		fw->Unsigned8(m_requeriments ? true: false);
+		//fw->Unsigned8(m_requeriments ? true: false);
 
 		if (m_requeriments) {
 			fw->Unsigned8(true);
@@ -4048,7 +4054,7 @@ void Economy::do_split(Flag *f)
 		remove_flag(f);
 		e->add_flag(f);
 
-		//	check all neighbours; if they aren't in the new economy yet, add them
+		//  check all neighbours; if they aren't in the new economy yet, add them
 		// to the list (note: roads and buildings are reassigned via Flag::set_economy)
 		Neighbour_list neighbours;
 		f->get_neighbours(&neighbours);
@@ -4090,8 +4096,14 @@ void Economy::start_request_timer(int delta)
 	m_request_timer_time = game->get_gametime() + delta;
    cq->enqueue (new Cmd_Call_Economy_Balance(m_request_timer_time, m_owner->get_player_number(), this));
 
-//	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
-//					(long)(&Economy::request_timer_cb), m_trackserial, 0);
+#if 0
+	cq->queue
+		(m_request_timer_time,
+		 SENDER_MAPOBJECT, CMD_CALL,
+		 static_cast<const long>(&Economy::request_timer_cb),
+		 m_trackserial,
+		 0);
+#endif
 }
 
 
@@ -4148,7 +4160,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 			continue;
 		}
 
-//		supp->mark_as_used(g, req->get_index(), req->get_requeriments());
+		//supp->mark_as_used(g, req->get_index(), req->get_requeriments());
 		// cost_cutoff guarantuees us that the route is better than what we have
 		best_supply = supp;
 		best_route = route;
@@ -4167,10 +4179,10 @@ struct RequestSupplyPair {
    bool                 is_item;
    bool                 is_worker;
    bool                 is_soldier;
-	int						ware;
-	TrackPtr<Request>		request;
-	TrackPtr<Supply>		supply;
-	int						priority;
+	int               ware;
+	TrackPtr<Request> request;
+	TrackPtr<Supply>  supply;
+	int               priority;
 
 	struct Compare {
 		bool operator()(const RequestSupplyPair& p1, const RequestSupplyPair& p2) {
@@ -4183,8 +4195,8 @@ typedef std::priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>,
 				RequestSupplyPair::Compare> RSPairQueue;
 
 struct RSPairStruct {
-	RSPairQueue		queue;
-	int				nexttimer;
+	RSPairQueue queue;
+	int         nexttimer;
 };
 
 
@@ -4263,9 +4275,9 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 
 		switch (req->get_type())
 		{
-			case Request::WARE:		rsp.is_item = true; break;
-			case Request::WORKER:	rsp.is_worker = true; break;
-			case Request::SOLDIER:	rsp.is_soldier = true; break;
+		case Request::WARE:    rsp.is_item    = true; break;
+		case Request::WORKER:  rsp.is_worker  = true; break;
+		case Request::SOLDIER: rsp.is_soldier = true; break;
 		}
 
 		rsp.ware = req->get_index();
@@ -4335,7 +4347,7 @@ void Economy::create_requested_workers(Game* g)
 						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
 log("Economy::process_request-- Created a '%s' needed\n", w_desc->get_name());
 							m_warehouses[n_wh]->create_worker(g, index);
-//							break;
+							//break;
 						} // if (m_warehouses[n_wh]
 						n_wh++;
 					} // while (n_wh < get_nr_warehouses())

@@ -218,9 +218,11 @@ FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
  */
 void ZipFilesystem::Unlink(const std::string filename)
 {
-	throw (ZipOperation_error("ZipFilesystem::Unlink", filename, m_zipfilename,
-				   		  "unlinking is not supported inside zipfiles")
-			);
+	throw ZipOperation_error
+		("ZipFilesystem::Unlink",
+		 filename,
+		 m_zipfilename,
+		 "unlinking is not supported inside zipfiles");
 }
 
 /**

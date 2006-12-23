@@ -47,7 +47,7 @@ Basic_Button::Basic_Button
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_clr_down      (229, 161, 2),
-	m_draw_caret	 (false)
+	m_draw_caret    (false)
 {
 	set_think(false);
 

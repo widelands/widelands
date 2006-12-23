@@ -35,7 +35,7 @@ Panel that displays the contents of a WareList.
 class WaresDisplay : public UI::Panel {
 public:
 	enum {
-		Width = 136,	// 5*24 (5 wares icons) + space in between
+		Width = 5 * 24 + 4 * 4, //  (5 wares icons) + space in between
 
 		WaresPerRow = 5,
 	};
@@ -60,8 +60,8 @@ protected:
 
 private:
 	UI::Textarea*       m_curware;
-   Editor_Game_Base*	m_game;
-	Player*				m_player;
+   Editor_Game_Base            * m_game;
+	Player                      * m_player;
    wdType            m_type;
    std::vector< const WareList* > m_warelists;
 };

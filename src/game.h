@@ -28,7 +28,7 @@ struct Cmd_Queue;
 struct Path;
 struct PlayerImmovable;
 
-#define WLGF_SUFFIX		".wgf"
+#define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
 /** class Game
@@ -38,10 +38,10 @@ struct PlayerImmovable;
  * final statistics screen(s).
  */
 enum {
-	gs_none = 0,	// not connected, nothing
-	gs_menu,			// in the setup menu(s)
-	gs_paused,		// in-game but paused
-	gs_running		// in-game
+	gs_none    = 0, //  not connected, nothing
+	gs_menu,        //  in the setup menu(s)
+	gs_paused,      //  in-game but paused
+	gs_running      //  in-game
 };
 
 class Player;
@@ -128,18 +128,18 @@ private:
 		 const int radius,
 		 const bool conquer);
 
-	Map_Loader*	m_maploader;
+	Map_Loader                   * m_maploader;
 
-	NetGame*	m_netgame;
+	NetGame                      * m_netgame;
 
-	int		m_state;
-	int		m_speed;		// frametime multiplier
+	int                            m_state;
+	int                            m_speed; //  frametime multiplier
 
-	RNG*		rng;
+	RNG                          * rng;
 
-	Interactive_Player*			ipl;
-	std::vector<Computer_Player*>		cpl;
- 	Cmd_Queue*				cmdqueue;
+	Interactive_Player           * ipl;
+	std::vector<Computer_Player *> cpl;
+	Cmd_Queue                    * cmdqueue;
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 };

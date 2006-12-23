@@ -55,8 +55,8 @@ public:
 
 private:
 	struct Indicator {
-		std::string		bobname;
-		int				upperlimit;
+		std::string bobname;
+		int         upperlimit;
 	};
    struct Editor_Pic {
       std::string    picname;
@@ -65,9 +65,9 @@ private:
 
    bool                    m_is_detectable;
    int                     m_max_amount;
-	std::string					m_name;
-	std::string					m_descrname;
-	std::vector<Editor_Pic>	m_editor_pics;
+	std::string             m_name;
+	std::string             m_descrname;
+	std::vector<Editor_Pic> m_editor_pics;
 };
 
 class Terrain_Descr {
@@ -102,16 +102,16 @@ class Terrain_Descr {
 	int get_default_resources_amount() const throw () {return m_default_amount;}
 
    private:
-      char		m_name[30];
-		char*		m_picnametempl;
-		uint		m_frametime;
-      uchar		m_is;
+	char    m_name[30];
+	char  * m_picnametempl;
+	uint    m_frametime;
+	uchar   m_is;
 
       uchar*   m_valid_resources;
       uchar    m_nr_valid_resources;
       char     m_default_resources;
       int      m_default_amount;
-		uint		m_texture; // renderer's texture
+	uint    m_texture; //  renderer's texture
 };
 
 /** class World
@@ -159,13 +159,13 @@ class World
       inline int get_nr_resources(void) { return m_resources.get_nitems(); }
 
    private:
-		std::string				m_basedir;	// base directory, where the main conf file resides
-      World_Descr_Header	hd;
+	std::string m_basedir; //  base directory, where the main conf file resides
+	World_Descr_Header                hd;
 
       Descr_Maintainer<Bob_Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;
       Descr_Maintainer<Terrain_Descr> ters;
-		Descr_Maintainer<Resource_Descr>	m_resources;
+	Descr_Maintainer<Resource_Descr>  m_resources;
 
       // Functions
       void parse_root_conf(const char *name);

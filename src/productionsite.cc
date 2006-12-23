@@ -846,26 +846,26 @@ void ProductionSite::program_act(Game* g)
 							((*it)->get_hp_level()
 							 ==
 							 static_cast<const uint>(action->iparam1))
-   		            break;
+							break;
 					} else if (action->sparam1 == "attack") {
 						if
-						   ((*it)->get_attack_level()
-						    ==
-						    static_cast<const uint>(action->iparam1))
+							((*it)->get_attack_level()
+							 ==
+							 static_cast<const uint>(action->iparam1))
 							break;
 					} else if (action->sparam1 == "defense") {
 						if
 							((*it)->get_defense_level()
 							 ==
 							 static_cast<const uint>(action->iparam1))
-   		            break;
+							break;
 					} else if (action->sparam1 == "evade") {
 						if
 							((*it)->get_evade_level()
 							 ==
 							 static_cast<const uint>(action->iparam1))
-   		            break;
-         	  	}
+							break;
+					}
 				}
 				molog("    okay\n"); // okay, do nothing
 
@@ -899,7 +899,7 @@ void ProductionSite::program_act(Game* g)
 							((*it)->get_hp_level()
 							 ==
 							 static_cast<const uint>(action->iparam1))
-   		            break;
+							break;
 					} else if (action->sparam1 == "attack") {
 						if
 							((*it)->get_attack_level()
@@ -911,14 +911,14 @@ void ProductionSite::program_act(Game* g)
 							((*it)->get_defense_level()
 							 ==
 							 static_cast<const uint>(action->iparam1))
-   		            break;
+							break;
 					} else if (action->sparam1 == "evade") {
 						if
 							((*it)->get_evade_level()
 							 ==
 							 static_cast<const uint>(action->iparam1))
-   		            break;
-         	  	}
+							break;
+					}
 				}
 				molog("    okay\n"); // okay, do nothing
 

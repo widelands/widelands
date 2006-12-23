@@ -399,9 +399,10 @@ void Game::think(void)
 			int max_frametime=m_netgame->get_max_frametime();
 
 			if (frametime>max_frametime)
-			    frametime=max_frametime;	// wait for the next server message
+				frametime = max_frametime; //  wait for the next server message
 			else if (max_frametime-frametime>500)
-			    frametime+=(max_frametime-frametime)/2;	// we are too long behind network time, so hurry a little
+				//  we are too long behind network time, so hurry a little
+				frametime += (max_frametime - frametime) / 2;
 		}
 		else
 			frametime *= get_speed();

@@ -80,24 +80,31 @@ protected:
 
 private:
 	struct Item {
-		uint		picid;
-		void*		data;
-		std::string	descr;
+		uint        picid;
+		void      * data;
+		std::string descr;
 	};
 
-	uint	m_flags;
-	int	m_columns;		///< max # of columns (or rows, depending on orientation) in the grid
-	int	m_highlight;	///< currently highlight (mouseover) icon idx (-1 = no highlight)
-	int	m_clicked;		///< icon that was clicked (only while LMB is down)
-	int	m_selected;		///< currently selected (persistant) icon idx (-1 = no selection)
+	uint   m_flags;
 
-	int	m_cell_width;	///< size of one cell
-	int	m_cell_height;
-	int	m_font_height;
+	 ///< max # of columns (or rows, depending on orientation) in the grid
+	int m_columns;
 
-	std::vector<Item>	m_items;
+	///< currently highlight (mouseover) icon idx (-1 = no highlight)
+	int m_highlight;
 
-	RGBColor		m_selectbox_color;
+	int m_clicked; ///< icon that was clicked (only while LMB is down)
+
+	///< currently selected (persistant) icon idx (-1 = no selection)
+	int m_selected;
+
+	int               m_cell_width; ///< size of one cell
+	int               m_cell_height;
+	int               m_font_height;
+
+	std::vector<Item> m_items;
+
+	RGBColor          m_selectbox_color;
 };
 };
 

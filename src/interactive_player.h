@@ -135,16 +135,16 @@ class Interactive_Player : public Interactive_Base {
       };
 
    private:
-      Game*		m_game;
+	Game                     * m_game;
 	Player_Number m_player_number;
 
-      UI::Textarea*	m_label_speed;
-      UI::Multiline_Textarea*	m_chat_messages;
-      UI::Textarea*	m_type_message;
+	UI::Textarea             * m_label_speed;
+	UI::Multiline_Textarea   * m_chat_messages;
+	UI::Textarea             * m_type_message;
 
-      UI::UniqueWindow::Registry	m_mainmenu;
-      UI::UniqueWindow::Registry	m_fieldaction;
-      UI::UniqueWindow::Registry	m_encyclopedia;
+	UI::UniqueWindow::Registry m_mainmenu;
+	UI::UniqueWindow::Registry m_fieldaction;
+	UI::UniqueWindow::Registry m_encyclopedia;
       Game_Main_Menu_Windows  m_mainm_windows;
 
       std::vector<uint> m_current_statistics;

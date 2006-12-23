@@ -148,7 +148,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 
 	// finally, the user's config directory
 	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
-#ifndef	__WIN32__
+#ifndef __WIN32__
 	std::string path;
 	char *buf=getenv("HOME"); //do not use GetHomedir() to not accidentally create ./.widelands
 
@@ -318,7 +318,7 @@ WLApplication::~WLApplication()
 void WLApplication::run()
 {
     if(editor_commandline==0){ //Normal startup (User did not type 'widelands --editor' in commandline)
-                              
+
 	g_sound_handler.start_music("intro");
 
 	Fullscreen_Menu_Intro *intro=new Fullscreen_Menu_Intro;
@@ -350,15 +350,15 @@ void WLApplication::run()
 
 	g_sound_handler.change_music("menu", 1000);
 	mainmenu();
-    
+
     } // if(editor_commandline==0)
-    else{ // if(editor_commandline==1) - Directly start the Editor
+	else { //  if (editor_commandline == 1) - Directly start the Editor
         g_sound_handler.start_music("ingame");
-  		Editor* e=new Editor();
+		Editor * const e = new Editor(); //  Local variable does not work (sig11).
 		e->run();
 		delete e;
         }
-    
+
 	g_sound_handler.stop_music(500);
 
 	return;
@@ -922,7 +922,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 
 		m_commandline.erase("double");
 	}
-	
+
 		if(m_commandline.count("editor")>0) {
 		editor_commandline=1;
 		m_commandline.erase("editor");
@@ -1095,7 +1095,7 @@ void WLApplication::yield_double_game()
  * Run the main menu
  */
 void WLApplication::mainmenu()
-{                             
+{
     bool done=false;
 
 	while(!done) {

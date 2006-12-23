@@ -121,10 +121,10 @@ protected:
 
 protected:
 	struct State {
-		const ProductionProgram* program;	// currently running program
-		int                      ip;			// instruction pointer
-		int                      phase;		// micro-step index (instruction dependent)
-		uint                     flags;		// pfXXX flags
+		const ProductionProgram * program; //  currently running program
+		int  ip;    //  instruction pointer
+		int  phase; //  micro-step index (instruction dependent)
+		uint flags; //  pfXXX flags
 	};
 
 	void request_worker(Game* g, const char* worker );
@@ -148,9 +148,9 @@ protected:  // TrainingSite must have access to this stuff
 
 	int m_fetchfromflag; // # of items to fetch from flag
 
-	std::vector<State>       m_program;			// program stack
+	std::vector<State>        m_program;       //  program stack
 	bool                     m_program_timer; // execute next instruction based on pointer
-	int                      m_program_time;	// timer time
+	int                       m_program_time;  //  timer time
 	int                      m_post_timer;    // Time to schedule after ends
 
 	std::vector<WaresQueue*> m_input_queues; //  input queues for all inputs

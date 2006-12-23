@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by The Widelands Development Team
+ * Copyright (C) 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,11 @@ class BuildingHints {
 
 	void parse (Profile*);
 
-	const char*	get_need_map_resource() const { return need_map_resource; }
+	const char * get_need_map_resource() const throw ()
+	{return need_map_resource;}
 
     private:
-	char*	need_map_resource;
+	char * need_map_resource;
 };
 
 #endif

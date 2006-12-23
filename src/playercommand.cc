@@ -458,7 +458,7 @@ void Cmd_EnhanceBuilding::execute (Game* g)
 	Map_Object* obj = g->get_objects()->get_object(serial);
 
 	if (obj && obj->get_type() >= Map_Object::BUILDING)
-    		player->enhance_building(static_cast<PlayerImmovable*>(obj), id);
+		player->enhance_building(static_cast<PlayerImmovable * const>(obj), id);
 }
 
 void Cmd_EnhanceBuilding::serialize (Serializer* ser)

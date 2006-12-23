@@ -95,7 +95,7 @@ class Tribe_Descr {
 	void load_warehouse_with_start_wares
 		(Editor_Game_Base &, Warehouse &) const;
 
- 
+
 	const std::string m_name;
   private:
       uint m_anim_frontier;
@@ -113,7 +113,7 @@ class Tribe_Descr {
 	starting_resources_map m_startsoldiers;
 
       // Parsing the tribe
-		EncodeData	m_default_encdata;
+	EncodeData m_default_encdata;
 
 		void parse_root_conf(const char *directory);
 		void parse_buildings(const char *directory);

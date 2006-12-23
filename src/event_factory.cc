@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
 	{ "allow_building", "Allow Building", "Allows/Disables a certain building for a player so that it can be build or it can't any longer" },
 	{ "set_null_trigger", "Set Null Trigger", "Manually set a Null Trigger to a given value" },
   // TODO: Events below are not creatable in the editor. Make UI Windows for them
-// 	{ "unhide_objective", "Unhide Objective", "Hide or unhide an objective so that the player can see it" },
+	//{"unhide_objective", "Unhide Objective", "Hide or unhide an objective so that the player can see it" },
 };
 
 /*

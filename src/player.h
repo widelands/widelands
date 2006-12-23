@@ -65,7 +65,7 @@ class Player {
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
 		 const uchar * const playercolor);
-      ~Player(); 
+      ~Player();
 
 		inline Editor_Game_Base *get_game() const { return m_egbase; }
 		inline int get_type() const { return m_type; }
@@ -127,12 +127,12 @@ class Player {
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
 	private:
 		bool m_see_all;
-		Editor_Game_Base*				m_egbase;
+	Editor_Game_Base     * m_egbase;
 		bool           m_view_changed;
-      int				m_type;
-		int				m_plnum;
+	int                    m_type;
+	int                    m_plnum;
 		const Tribe_Descr & m_tribe; // buildings, wares, workers, sciences
-		RGBColor			m_playercolor[4];
+	RGBColor               m_playercolor[4];
 
 		std::vector<bool> seen_fields;
       std::vector<bool> m_allowed_buildings;

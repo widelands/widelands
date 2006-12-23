@@ -141,8 +141,8 @@ std::string Resource_Descr::get_editor_pic(uint amount) {
 		}
 	}
 
-//	noLog("Resource(%s): Editor_Pic '%s' for amount = %u\n",
-//		m_name.c_str(), m_editor_pics[bestmatch].picname.c_str(), amount);
+	//noLog("Resource(%s): Editor_Pic '%s' for amount = %u\n",
+	//m_name.c_str(), m_editor_pics[bestmatch].picname.c_str(), amount);
 
 	return m_editor_pics[bestmatch].picname;
 }
@@ -390,23 +390,21 @@ Terrain_Descr
 */
 
 Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources)
+:
+m_texture           (0),
+m_frametime         (FRAME_LENGTH),
+m_picnametempl      (0),
+m_valid_resources   (0),
+m_nr_valid_resources(0),
+m_default_resources (-1),
+m_default_amount    (0)
 {
-	const char *str;
-
-	// Set some defaults
-	m_texture = 0;
- 	m_frametime = FRAME_LENGTH;
-	m_picnametempl = 0;
-   m_valid_resources = 0;
-   m_nr_valid_resources = 0;
-   m_default_resources=-1;
-   m_default_amount=0;
 
 	// Read configuration
 	snprintf(m_name, sizeof(m_name), "%s", s->get_name());
 
 	// Parse the default resource
-   str = s->get_string("def_resources", 0);
+	const char * str = s->get_string("def_resources", 0);
 	if (str) {
       std::istringstream str1(str);
       std::string resource;

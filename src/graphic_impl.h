@@ -202,7 +202,7 @@ class Colormap {
 
 private:
 	SDL_Color palette[256];
-	void* colormap;	// maps 8 bit color and brightness value to the shaded color
+	void * colormap; // maps 8 bit color and brightness value to the shaded color
 		// NOTE: brightness is currently 8 bits. Restricting brightness
 		// to 64 or less shades would greatly reduce the size of this
 		// table, and thus improve memory cache impact inside the renderer.
@@ -228,12 +228,12 @@ public:
 */
 class Texture {
 private:
-	Colormap*			m_colormap;
-	uint					m_nrframes;
-	unsigned char*		m_pixels;
-	uint					m_frametime;
-	unsigned char*		m_curframe;
-   std::string			m_texture_picture;
+	Colormap      * m_colormap;
+	uint            m_nrframes;
+	unsigned char * m_pixels;
+	uint            m_frametime;
+	unsigned char * m_curframe;
+	std::string     m_texture_picture;
    bool              is_32bit;
    bool              m_was_animated;
 
@@ -269,9 +269,9 @@ The 16-bit software renderer implementation of the RenderTarget interface
 */
 class RenderTargetImpl : public RenderTarget {
 	Surface* m_ground_surface; // only needed, when this is a mapview
-   Surface*	m_surface;		// the target surface
-	Rect		m_rect;			// the current clip rectangle
-	Point		m_offset;		// drawing offset
+	Surface * m_surface;        //  the target surface
+	Rect      m_rect;           //  the current clip rectangle
+	Point     m_offset;         //  drawing offset
 
 public:
 	RenderTargetImpl(Surface* bmp);
@@ -376,12 +376,12 @@ private:
    static void m_png_write_function( png_structp, png_bytep, png_size_t );
 
 	struct Picture {
-		int		mod; // 0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
+		int mod; //  0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
 		Surface*  surface;
 
 		union {
-			char*					fname;
-			RenderTargetImpl*	rendertarget;
+			char             * fname;
+			RenderTargetImpl * rendertarget;
 		} u;
 
 		Picture() { surface = 0; mod = 0; u.fname = 0; }
@@ -391,18 +391,18 @@ private:
 
 	typedef std::map<std::string, std::vector<Picture>::size_type> picmap_t;
 
-	Surface              m_screen;
-	RenderTargetImpl*		m_rendertarget;
-   SDL_Rect					m_update_rects[MAX_RECTS];
-	int						m_nr_update_rects;
-	bool						m_update_fullscreen;
+	Surface                     m_screen;
+	RenderTargetImpl          * m_rendertarget;
+	SDL_Rect                    m_update_rects[MAX_RECTS];
+	int                         m_nr_update_rects;
+	bool                        m_update_fullscreen;
 
-	std::vector<Picture>	m_pictures;
-	picmap_t					m_picturemap; // hash of filename/picture ID pairs
+	std::vector<Picture>        m_pictures;
+	picmap_t m_picturemap; //  hash of filename/picture ID pairs
 
-   Road_Textures*        m_roadtextures;
-	std::vector<Texture*>		m_maptextures;
-	std::vector<AnimationGfx*>	m_animations;
+   Road_Textures*       m_roadtextures;
+	std::vector<Texture      *> m_maptextures;
+	std::vector<AnimationGfx *> m_animations;
 };
 
 #define get_graphicimpl() (static_cast<GraphicImpl*>(g_gr))

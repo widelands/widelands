@@ -56,7 +56,7 @@ int Editor_Make_Infrastructure_Tool::handle_click_impl
 (Map &, const Node_and_Triangle, Editor_Interactive & parent)
 {
 	// Special case for buildings
-/*	BaseImmovable * const imm = map.get_immovable(get_sel_pos());
+	/*BaseImmovable * const imm = map.get_immovable(get_sel_pos());
 
 
 	if (imm && imm->get_type() == Map_Object::BUILDING) {

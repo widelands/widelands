@@ -51,9 +51,9 @@ class Section {
 
 public:
 	struct Value {
-		bool	m_used;
-		char	*m_name;
-		char	*m_value;
+		bool   m_used;
+		char * m_name;
+		char * m_value;
 
 		Value(const char * const nname, const char * const nval);
 		Value(const Value &o);
@@ -78,10 +78,10 @@ public:
 	typedef std::vector<Value> Value_list;
 
 private:
-	Profile*		m_profile;
-	bool			m_used;
-	char*			m_section_name;
-	Value_list	m_values;
+	Profile  * m_profile;
+	bool       m_used;
+	char     * m_section_name;
+	Value_list m_values;
 
 public:
 	Section(Profile * const, const char * const name);

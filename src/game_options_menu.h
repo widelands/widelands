@@ -35,7 +35,7 @@ public:
 		 Interactive_Player::Game_Main_Menu_Windows &);
 
 private:
-	Interactive_Player	                      & m_player;
+	Interactive_Player                         & m_player;
 	Interactive_Player::Game_Main_Menu_Windows & m_windows;
 	UI::Button<GameOptionsMenu> readme;
 	UI::Button<GameOptionsMenu> license;

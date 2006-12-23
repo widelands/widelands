@@ -200,7 +200,7 @@ void MilitarySite::set_economy(Economy* e)
 			m_input_queues[i]->add_to_economy(e);
 	}
 	*/
-/*	Economy* old = get_economy();
+	/*Economy* old = get_economy();
 
 	if (old) {
 		for (uint i = 0; i < m_soldier_requests.size(); i++) {
@@ -291,7 +291,12 @@ void MilitarySite::request_soldier(Game *) {
    Requeriments* r = new Requeriments();
    *r = m_soldier_requeriments;
 
-   Request* req = new Request(this,	soldierid, &MilitarySite::request_soldier_callback, this, Request::SOLDIER);
+	Request * req = new Request
+		(this,
+		 soldierid,
+		 &MilitarySite::request_soldier_callback,
+		 this,
+		 Request::SOLDIER);
    req->set_requeriments (r);
 
    m_soldier_requests.push_back (req);
@@ -350,7 +355,7 @@ void MilitarySite::act(Game* g, uint data)
    ProductionSite::act(g,data);
 
       uint total_heal = 0;
-      uint numMedics = 0;	 // FIX THIS when medics were added
+	uint numMedics = 0; // FIX THIS when medics were added
       uint i = 0;
       Soldier* s;
 
@@ -378,7 +383,7 @@ void MilitarySite::act(Game* g, uint data)
             // I don't like this 'healing' method, but I don't have any idea to do differently ...
          if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
             s->heal (total_heal);
-            total_heal -=	(total_heal/3);
+				total_heal -= total_heal / 3;
       }
    }
    if (!m_in_battle)
@@ -566,12 +571,12 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
          s->set_location(0);
    }
    log("removed all remainig soldiers\n");
-   
+
    if (m_didconquer)
 	  g->unconquer_area(get_owner()->get_player_number(), get_position());
-   
+
    Flag* f = get_base_flag();
-   
+
    //  Destroy roads
    log ("[Donquered - MilitarySite] : Destroying roads\n");
    if (f->get_road(WALK_NE)) f->detach_road(WALK_NE);
@@ -580,24 +585,24 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
    if (f->get_road(WALK_W))  f->detach_road(WALK_W);
    if (f->get_road(WALK_SW)) f->detach_road(WALK_SW);
    log("destroyed roads...\n");
-   
+
    get_economy()->remove_flag(f);
    log("removed flag from economy\n");
-   
+
    set_owner(who);
    log("owner of building set\n");
-   
+
    f->set_owner(who);
    log("owner of flag set\n");
-  
+
    who->get_economy_by_number(who->get_player_number())->add_flag(f);
    log("flag added economy\n");
-   
+
    g->conquer_area(get_owner()->get_player_number(),get_position(), get_descr());
-   
+
    // unconquer land
 
-   
+
    //g->unconquer_area(get_owner()->get_player_number(), get_position());
 
 /* ORIGINAL CODE FOLLOWS

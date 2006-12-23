@@ -29,12 +29,12 @@ namespace UI {
 /**
 Initialize a list select panel
 
-Args: parent	parent panel
-      x		coordinates of the Listselect
+Args: parent  parent panel
+      x       coordinates of the Listselect
       y
-      w		dimensions, in pixels, of the Listselect
+      w       dimensions, in pixels, of the Listselect
       h
-      align	alignment of text inside the Listselect
+      align   alignment of text inside the Listselect
 */
 Listselect<void *>::Listselect
 (Panel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
@@ -99,9 +99,9 @@ void Listselect<void *>::clear() {
 /**
 Add a new entry to the listselect.
 
-Args: name	name that will be displayed
-      value	value returned by get_select()
-      select if true, directly select the new entry
+Args: name   name that will be displayed
+      entry  value returned by get_select()
+      sel    if true, directly select the new entry
 */
 void Listselect<void *>::add
 (const char * const name,
@@ -198,7 +198,7 @@ void Listselect<void *>::set_scrollpos(const int i) {
  *
  * Change the currently selected entry
  *
- * Args: i	the entry to select
+ * Args: i  the entry to select
  */
 void Listselect<void *>::select(const uint i) {
 	if (m_selection == i)

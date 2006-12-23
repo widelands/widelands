@@ -55,8 +55,8 @@ public:
 	virtual int get_conquers(void) const { return m_conquers; }
 
 private:
-	int	m_subtype;
-	int	m_conquers;		// HQs conquer
+	int m_subtype;
+	int m_conquers; //  HQs conquer
 };
 
 
@@ -110,11 +110,11 @@ private:
    void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
 
 private:
-	WarehouseSupply*			m_supply;
-	std::vector<Request*>	m_requests; // one idle request per ware type
+	WarehouseSupply       * m_supply;
+	std::vector<Request *>  m_requests; // one idle request per ware type
    std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
-	int m_next_carrier_spawn;		// time of next carrier growth
-   int m_next_military_act;      // time of next military action
+	int                     m_next_carrier_spawn; //  time of next carrier growth
+   int                     m_next_military_act; // time of next military action
 };
 
 /*
@@ -153,10 +153,10 @@ public: // Supply implementation
 	virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r);
 	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
-	Economy*		m_economy;
-	WareList		m_wares;
-	WareList		m_workers;	// We use this to keep the soldiers
-	Warehouse*	m_warehouse;
+	Economy   * m_economy;
+	WareList    m_wares;
+	WareList    m_workers; //  we use this to keep the soldiers
+	Warehouse * m_warehouse;
 };
 
 #endif

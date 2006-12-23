@@ -61,20 +61,20 @@ private:
 			ItemSpace
 		};
 
-		Type		type;
+		Type type;
 
 		union {
 			struct {
-				Panel*	panel;
-				uint		align;
+				Panel * panel;
+				uint    align;
 			} panel;
-			uint		space;
+			uint space;
 		} u;
 	};
 
-	uint	m_orientation;
+	uint              m_orientation;
 
-	std::vector<Item>	m_items;
+	std::vector<Item> m_items;
 };
 };
 

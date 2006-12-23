@@ -54,12 +54,13 @@ namespace UI {
 /**
  * Initialize a framed window.
  *
- * Args: parent	parent panel
- *       x		coordinates of the window relative to the parent (refers to outer rect!)
+ * Args: parent  parent panel
+ *       x       coordinates of the window relative to the parent (refers to
+ *               outer rect!)
  *       y
- *       w		size of the inner rectangle of the window
+ *       w       size of the inner rectangle of the window
  *       h
- *       title	string to display in the window title
+ *       title   string to display in the window title
  */
 Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title) :
 Panel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),

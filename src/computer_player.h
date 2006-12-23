@@ -60,22 +60,22 @@ class Computer_Player {
 		bool improve_roads (Flag*);
 
 		struct BuildableField {
-			FCoords			coords;
+		FCoords       coords;
 
-			long			next_update_due;
+		long          next_update_due;
 
-			bool			reachable;
-			bool			preferred;
-			bool			avoid_military;
+		bool          reachable;
+		bool          preferred;
+		bool          avoid_military;
 
-			unsigned char		unowned_land_nearby;
+		unsigned char unowned_land_nearby;
 
-			unsigned char		trees_nearby;
-			unsigned char		stones_nearby;
-			unsigned char		tree_consumers_nearby;
-			unsigned char		stone_consumers_nearby;
+		unsigned char trees_nearby;
+		unsigned char stones_nearby;
+		unsigned char tree_consumers_nearby;
+		unsigned char stone_consumers_nearby;
 
-			short			military_influence;
+		short         military_influence;
 
 			BuildableField (const FCoords& fc)
 			{
@@ -90,14 +90,14 @@ class Computer_Player {
 		};
 
 		struct MineableField {
-			FCoords		coords;
+		FCoords coords;
 
-			long		next_update_due;
+		long    next_update_due;
 
-			bool		reachable;
-			bool		preferred;
+		bool    reachable;
+		bool    preferred;
 
-			int		mines_nearby;
+		int     mines_nearby;
 
 			MineableField (const FCoords& fc)
 			{
@@ -107,80 +107,80 @@ class Computer_Player {
 		};
 
 		struct EconomyObserver {
-			Economy*		economy;
-			std::list<Flag*>	flags;
+		Economy         * economy;
+		std::list<Flag *> flags;
 
 			EconomyObserver (Economy* e) { economy=e; }
 		};
 
 		struct BuildingObserver {
-			const char*		name;
-			int			id;
-			const Building_Descr*	desc;
-			const BuildingHints*	hints;
+		const char                        * name;
+		int                                 id;
+		const Building_Descr              * desc;
+		const BuildingHints               * hints;
 
-			enum {
+		enum {
 				BORING,
 				CONSTRUCTIONSITE,
 				PRODUCTIONSITE,
 				MILITARYSITE,
 				MINE
-			}			type;
+		}                                   type;
 
-			bool			is_buildable;
+		bool                                is_buildable;
 
-			bool			need_trees;
-			bool			need_stones;
+		bool                                need_trees;
+		bool                                need_stones;
 
-			std::vector<short>	inputs;
-			std::vector<short>	outputs;
-			short			production_hint;
+		std::vector<short>                  inputs;
+		std::vector<short>                  outputs;
+		short                               production_hint;
 
-			int			cnt_built;
-			int			cnt_under_construction;
+		int                                 cnt_built;
+		int                                 cnt_under_construction;
 
 			int get_total_count()
 			{ return cnt_built + cnt_under_construction; }
 		};
 
 		struct ProductionSiteObserver {
-			ProductionSite*		site;
-			BuildingObserver*	bo;
+		ProductionSite   * site;
+		BuildingObserver * bo;
 		};
 
 		struct WareObserver {
-			uchar		producers;
-			uchar		consumers;
-			uchar		preciousness;
+		uchar producers;
+		uchar consumers;
+		uchar preciousness;
 		};
 
-		Game*				game;
-		World*				world;
-		Map*				map;
+	Game                            * game;
+	World                           * world;
+	Map                             * map;
 
-		uchar				player_number;
-		Player*				player;
-	const Tribe_Descr * tribe;
+	uchar                             player_number;
+	Player                          * player;
+	const Tribe_Descr               * tribe;
 
-		std::list<BuildingObserver>	buildings;
-		int				total_constructionsites;
+	std::list<BuildingObserver>       buildings;
+	int                               total_constructionsites;
 
-		std::list<FCoords>		unusable_fields;
-		std::list<BuildableField*>	buildable_fields;
-		std::list<MineableField*>	mineable_fields;
-		std::list<Flag*>		new_flags;
-		std::list<Road*>		roads;
-		std::list<EconomyObserver*>	economies;
-		std::list<ProductionSiteObserver>	productionsites;
+	std::list<FCoords>                unusable_fields;
+	std::list<BuildableField *>       buildable_fields;
+	std::list<MineableField *>        mineable_fields;
+	std::list<Flag *>                 new_flags;
+	std::list<Road *>                 roads;
+	std::list<EconomyObserver *>      economies;
+	std::list<ProductionSiteObserver> productionsites;
 
-		WareObserver*			wares;
+	WareObserver*         wares;
 
 		EconomyObserver* get_economy_observer (Economy*);
 
-		long				next_road_due;
-		long				next_construction_due;
-		long				next_productionsite_check_due;
-		long				inhibit_road_building;
+	long                              next_road_due;
+	long                              next_construction_due;
+	long                              next_productionsite_check_due;
+	long                              inhibit_road_building;
 
 		void late_initialization ();
 

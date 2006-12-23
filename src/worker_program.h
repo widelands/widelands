@@ -33,24 +33,24 @@ struct WorkerAction {
 	typedef bool (Worker::*execute_t)(Game* g, Bob::State* state, const WorkerAction* act);
 
 	enum {
-		walkObject,			// walk to objvar1
-		walkCoords,			// walk to coords
+		walkObject, //  walk to objvar1
+		walkCoords, //  walk to coords
 	};
 
-	execute_t		function;
-	int				iparam1;
-	int				iparam2;
-	std::string		sparam1;
+	execute_t                function;
+	int                      iparam1;
+	int                      iparam2;
+	std::string              sparam1;
 
-	std::vector<std::string>	sparamv;
+	std::vector<std::string> sparamv;
 };
 
 class WorkerProgram : public BobProgramBase {
 public:
 	struct Parser {
-		Worker_Descr*		descr;
-		std::string			directory;
-		Profile*				prof;
+		Worker_Descr     * descr;
+		std::string        directory;
+		Profile          * prof;
       const EncodeData* encdata;
 	};
 
@@ -74,8 +74,8 @@ public:
 private:
 	Workarea_Info m_workarea_info;
 	struct ParseMap {
-		const char*		name;
-		parse_t			function;
+		const char * name;
+		parse_t      function;
 	};
 
 private:
@@ -97,11 +97,11 @@ private:
 	void parse_playFX(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 
 private:
-	std::string						m_name;
-	std::vector<WorkerAction>	m_actions;
+	std::string               m_name;
+	std::vector<WorkerAction> m_actions;
 
 private:
-	static const ParseMap		s_parsemap[];
+	static const ParseMap     s_parsemap[];
 };
 
 

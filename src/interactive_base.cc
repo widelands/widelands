@@ -620,7 +620,7 @@ void Interactive_Base::roadb_add_overlay()
 	// preview of the road
 	assert(m_jobid.isNull());
    m_jobid=get_map()->get_overlay_manager()->get_a_job_id();
-	for(int idx = 0; idx < m_buildroad->get_nsteps(); idx++)	{
+	for (int idx = 0; idx < m_buildroad->get_nsteps(); ++idx) {
 		uchar dir = m_buildroad->get_step(idx);
 		Coords c = m_buildroad->get_coords()[idx];
 

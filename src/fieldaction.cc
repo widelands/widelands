@@ -50,8 +50,8 @@ BuildGrid IMPLEMENTATION
 ==============================================================================
 */
 
-#define BG_CELL_WIDTH		34 // extents of one cell
-#define BG_CELL_HEIGHT		34
+#define BG_CELL_WIDTH  34 // extents of one cell
+#define BG_CELL_HEIGHT 34
 
 
 // The BuildGrid presents a selection of buildable buildings
@@ -215,13 +215,13 @@ private:
 
 	Interactive_Base    *m_iabase;
    Player              *m_plr;
-	Map				     *m_map;
+	Map              * m_map;
 	Overlay_Manager & m_overlay_manager;
 
-	FCoords		m_field;
+	FCoords            m_field;
 
-	UI::Tab_Panel*	m_tabpanel;
-	bool			m_fastclick; // if true, put the mouse over first button in first tab
+	UI::Tab_Panel    * m_tabpanel;
+	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
 	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS + 1];

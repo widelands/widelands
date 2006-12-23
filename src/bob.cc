@@ -541,7 +541,7 @@ Sets the signal string and calls the current task's signal function, if any.
 */
 void Bob::send_signal(Game* g, std::string sig)
 {
-	assert(sig.size());	// use set_signal() for signal removal
+	assert(sig.size()); //  use set_signal() for signal removal
 
 	m_signal = sig;
 
@@ -692,8 +692,8 @@ Bob::Task Bob::taskMovepath = {
 	"movepath",
 
 	&Bob::movepath_update,
-	&Bob::movepath_signal,		// lazy signal handling, only act on one signal
-	0,		// mask
+	&Bob::movepath_signal, //  lazy signal handling, only act on one signal
+	0,                     //  mask
 };
 
 /*

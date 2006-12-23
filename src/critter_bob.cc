@@ -36,24 +36,25 @@ class WorkerProgram
 */
 
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
-/*	{ "mine",		      &Critter_BobProgram::parse_mine },
-	{ "createitem",		&Critter_BobProgram::parse_createitem },
-	{ "setdescription",	&Critter_BobProgram::parse_setdescription },
-	{ "setbobdescription", &Critter_BobProgram::parse_setbobdescription },
-	{ "findobject",		&Critter_BobProgram::parse_findobject },
-	{ "findspace",			&Critter_BobProgram::parse_findspace },
-	{ "walk",				&Critter_BobProgram::parse_walk },
-	{ "animation",			&Critter_BobProgram::parse_animation },
-	{ "return",				&Critter_BobProgram::parse_return },
-	{ "object",				&Critter_BobProgram::parse_object },
-	{ "plant",				&Critter_BobProgram::parse_plant },
-   { "create_bob",		&Critter_BobProgram::parse_create_bob },
-	{ "removeobject",		&Critter_BobProgram::parse_removeobject },
-	{ "geologist",			&Critter_BobProgram::parse_geologist },
-	{ "geologist-find",	&Critter_BobProgram::parse_geologist_find },
-*/
-	{ "remove",	&Critter_BobProgram::parse_remove},
-	{ 0, 0 }
+#if 0
+	{"mine",              &Critter_BobProgram::parse_mine},
+	{"createitem",        &Critter_BobProgram::parse_createitem},
+	{"setdescription",    &Critter_BobProgram::parse_setdescription},
+	{"setbobdescription", &Critter_BobProgram::parse_setbobdescription},
+	{"findobject",        &Critter_BobProgram::parse_findobject},
+	{"findspace",         &Critter_BobProgram::parse_findspace},
+	{"walk",              &Critter_BobProgram::parse_walk},
+	{"animation",         &Critter_BobProgram::parse_animation},
+	{"return",            &Critter_BobProgram::parse_return},
+	{"object",            &Critter_BobProgram::parse_object},
+	{"plant",             &Critter_BobProgram::parse_plant},
+   {"create_bob",        &Critter_BobProgram::parse_create_bob},
+	{"removeobject",      &Critter_BobProgram::parse_removeobject},
+	{"geologist",         &Critter_BobProgram::parse_geologist},
+	{"geologist-find",    &Critter_BobProgram::parse_geologist_find},
+#endif
+	{"remove",            &Critter_BobProgram::parse_remove},
+	{0,                   0}
 };
 
 

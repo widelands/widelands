@@ -217,9 +217,9 @@ private:
 	Columns m_columns;
 	uint                m_max_pic_width;
    int                  m_lineheight;
-	Align						m_align;
-	Scrollbar*		   m_scrollbar;
-	int						m_scrollpos;	// in pixels
+	Align              m_align;
+	Scrollbar        * m_scrollbar;
+	int                m_scrollpos; //  in pixels
 	uint               m_selection;
    int                  m_last_click_time;
 	uint                  m_last_selection;  // for double clicks

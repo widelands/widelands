@@ -57,18 +57,18 @@ protected:
 	virtual void send_signal_clicked() const = 0;
 
 private:
-	bool	m_highlighted; // mouse is over the button
-	bool	m_pressed;
-	bool	m_enabled;
-   bool	m_flat;
+	bool        m_highlighted;    //  mouse is over the button
+	bool        m_pressed;
+	bool        m_enabled;
+	bool        m_flat;
 
-	std::string		m_title;		// title string used when _mypic == 0
+	std::string m_title;          //  title string used when _mypic == 0
 
-	uint		m_pic_background; // background texture (picture ID)
-	uint		m_pic_custom; // custom icon on the button
+	uint        m_pic_background; //  background texture (picture ID)
+	uint        m_pic_custom;     //  custom icon on the button
 
-	RGBColor	m_clr_down;		// color of border while a flat button is "down"
-	bool 		m_draw_caret;
+	RGBColor    m_clr_down; //  color of border while a flat button is "down"
+	bool        m_draw_caret;
 };
 
 /**

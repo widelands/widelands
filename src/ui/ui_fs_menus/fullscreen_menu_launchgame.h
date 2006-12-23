@@ -35,9 +35,9 @@ class Map_Loader;
  */
 class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
     private:
-	Game*			m_game;
-	NetGame*		m_netgame;
-	Map_Loader**		m_ml;
+	Game                                 * m_game;
+	NetGame                              * m_netgame;
+	Map_Loader *                         * m_ml;
 
 	UI::Textarea                           title;
 	UI::Button<Fullscreen_Menu_LaunchGame> back;

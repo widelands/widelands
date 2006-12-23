@@ -41,10 +41,10 @@
 #include "ui_window.h"
 #include "wexception.h"
 
-#define CHECK_SYNC_INTERVAL	2000
-#define	DELAY_PROBE_INTERVAL	10000
-#define MINIMUM_NETWORK_DELAY	10	/* to avoid unneccessary network congestion */
-#define INITIAL_NETWORK_DELAY	500
+#define CHECK_SYNC_INTERVAL     2000
+#define   DELAY_PROBE_INTERVAL 10000
+#define MINIMUM_NETWORK_DELAY     10 // to avoid unneccessary network congestion
+#define INITIAL_NETWORK_DELAY    500
 
 
 enum {
@@ -69,7 +69,7 @@ enum {
 
 class Cmd_NetCheckSync:public BaseCommand {
     private:
-	NetGame*	netgame;
+	NetGame * netgame;
 
     public:
 	Cmd_NetCheckSync (int dt, NetGame* ng) : BaseCommand (dt) { netgame=ng; }
@@ -94,12 +94,12 @@ class NetStatusWindow:public UI::Window {
     private:
 	struct Entry {
 		UI::Table<void *>::Entry_Record * entry;
-		int		plnum;
+		int                               plnum;
 	};
 
 	UI::Table<void *> table;
 
-	std::vector<Entry>	entries;
+	std::vector<Entry> entries;
 };
 
 /* A note on simulation timing:
@@ -434,7 +434,7 @@ void NetHost::handle_network ()
 				{
 					char buffer[256];
 					Chat_Message msg;
-//					uchar plrnum =  clients[i].deserializer->getchar();
+					//uchar plrnum =  clients[i].deserializer->getchar();
 
 					clients[i].deserializer->getstr (buffer, 256);
 
@@ -497,7 +497,7 @@ void NetHost::handle_network ()
 		serializer->putchar (NETCMD_PING);
 		serializer->end_packet ();
 
-    		// send the packet to all peers
+		//  send the packet to all peers
 		for (i=0;i<clients.size();i++) {
 			serializer->send (clients[i].sock);
 
@@ -574,7 +574,7 @@ void NetHost::send_game_message (const char* msg)
 {
 	Chat_Message cm;
 
-	cm.plrnum=0;	// not a player but 'the game'
+	cm.plrnum = 0; //  not a player but 'the game'
 	cm.msg=msg;
 
 	send_chat_message_int (cm);
@@ -672,7 +672,7 @@ void NetClient::handle_network ()
 	}
 
 	while (deserializer->avail())
-	        switch (deserializer->getchar()) {
+		switch (deserializer->getchar()) {
 		    case NETCMD_DISCONNECT:
 			SDLNet_TCP_DelSocket (sockset, sock);
 			SDLNet_TCP_Close (sock);
@@ -736,7 +736,7 @@ void NetClient::handle_network ()
 
 			phase=PH_INGAME;
 			break;
-		    case NETCMD_PING:	// got a ping, reply with a pong
+		case NETCMD_PING: //  got a ping, reply with a pong
 			serializer->begin_packet ();
 			serializer->putchar (NETCMD_PONG);
 			serializer->end_packet ();
@@ -763,11 +763,11 @@ void NetClient::handle_network ()
 				Chat_Message msg;
 
 				player=deserializer->getchar();
-            			deserializer->getstr (buffer, 256);
+				deserializer->getstr (buffer, 256);
 
-        			msg.plrnum=player;
-        			msg.msg=buffer;
-        			chat_msg_queue.push (msg);
+				msg.plrnum = player;
+				msg.msg    = buffer;
+				chat_msg_queue.push (msg);
 			}
 			break;
 		    default:
@@ -794,7 +794,7 @@ void NetClient::send_chat_message (Chat_Message msg)
 
 // don't send player number because we cannot send a chat message
 // from someone else (other than us)
-//	serializer->putchar(msg.plrnum);
+	//serializer->putchar(msg.plrnum);
 
 	serializer->putstr (msg.msg.c_str());
 	serializer->end_packet ();
@@ -869,7 +869,7 @@ Serializer::~Serializer ()
 void Serializer::begin_packet ()
 {
 	buffer.clear ();
-	buffer.push_back (0);	// this will finally be the length of the packet
+	buffer.push_back (0); //  this will finally be the length of the packet
 	buffer.push_back (0);
 }
 
@@ -917,7 +917,7 @@ int Deserializer::read_packet (TCPsocket sock)
 		return -1;
 
 	length=(buffer[0]<<8) | buffer[1];
-	length-=2;	// subtract 2 bytes for the length field
+	length -= 2; //  subtract 2 bytes for the length field
 
 	assert (length>=0);
 

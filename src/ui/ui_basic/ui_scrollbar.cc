@@ -25,8 +25,8 @@
 #include "wlapplication.h"
 
 namespace UI {
-#define SCROLLBAR_AUTOREPEAT_DELAY	200
-#define SCROLLBAR_AUTOREPEAT_TICK	50
+#define SCROLLBAR_AUTOREPEAT_DELAY 200
+#define SCROLLBAR_AUTOREPEAT_TICK   50
 
 /*
 ==============================================================================

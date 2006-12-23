@@ -51,9 +51,9 @@ struct Radiogroup {
 	void set_state(int state);
 
 private:
-	Radiobutton*	m_buttons; // linked list of buttons (not sorted)
-	int				m_highestid;
-	int				m_state; // -1: none
+	Radiobutton * m_buttons; //  linked list of buttons (not sorted)
+	int           m_highestid;
+	int           m_state;   //  -1: none
 };
 };
 

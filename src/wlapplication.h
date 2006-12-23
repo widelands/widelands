@@ -237,53 +237,53 @@ protected:
 
 	/// Mouse handling
 	//@{
-	bool		m_input_grab;		// config options
+	bool   m_input_grab; //  config options
 
 	///True if left and right mouse button should be swapped
-	bool		m_mouse_swapped;
+	bool   m_mouse_swapped;
 
 	///The (internal) mouse speed
-	float		m_mouse_speed;
+	float  m_mouse_speed;
 
 	///Current state of the mouse buttons
 	///\todo Replace by direct calls to SDL functions???
-	int      m_mouse_x;              // mouse position seen by the outside
-	int		m_mouse_y;
+	int    m_mouse_x; //  mouse position seen by the outside
+	int    m_mouse_y;
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_w
 	///\todo Remove this in favour of m_gfx_w?
-	int		m_mouse_maxx;
+	int    m_mouse_maxx;
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_y
 	///\todo Remove this in favour of m_gfx_y?
-	int		m_mouse_maxy;
-	bool		m_mouse_locked;
+	int    m_mouse_maxy;
+	bool   m_mouse_locked;
 
 	///the internal mouse position (sub-pixel accuracy for use with mouse
 	///speed)
-	float           m_mouse_internal_x;
+	float  m_mouse_internal_x;
 
 	///the internal mouse position (sub-pixel accuracy for use with mouse
 	///speed)
-	float		m_mouse_internal_y;
+	float  m_mouse_internal_y;
 
-	int		m_mouse_internal_compx;
+	int    m_mouse_internal_compx;
 
-	int		m_mouse_internal_compy;
+	int    m_mouse_internal_compy;
 	//@}
 
 	///true if an external entity wants us to quit
-	bool		m_should_die;
+	bool   m_should_die;
 
 	///The Widelands window's width in pixels
-	int		m_gfx_w;
+	int    m_gfx_w;
 
 	///The Widelands window's height in pixels
-	int		m_gfx_h;
+	int    m_gfx_h;
 
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window
-	bool		m_gfx_fullscreen;
+	bool   m_gfx_fullscreen;
 
 	///The game that is currently being played (or NULL, if in main menu)
 	Game *m_game;

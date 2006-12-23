@@ -71,7 +71,7 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 	m_descname = global->get_string("descname", get_name());
 	m_helptext = global->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
-	snprintf(buf, sizeof(buf),	"%s_menu.png", get_name());
+	snprintf(buf, sizeof(buf), "%s_menu.png", get_name());
 	string = global->get_string("menu_pic", buf);
 	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
 	m_menu_pic_fname = buf;

@@ -519,7 +519,7 @@ bool Panel::handle_key(bool, int, char) {return false;}
  * Default is enabled. Note that when mouse handling is disabled, child panels
  * don't receive mouse events either.
  *
- * Args: yes	true if the panel should receive mouse events
+ * Args: yes  true if the panel should receive mouse events
  */
 void Panel::set_handle_mouse(bool yes)
 {
@@ -552,9 +552,8 @@ void Panel::grab_mouse(bool grab)
 void Panel::set_can_focus(bool yes)
 {
 
-	if (yes) {
-		_flags |= pf_can_focus;
-   }	else {
+	if (yes) _flags |= pf_can_focus;
+   else {
 		_flags &= ~pf_can_focus;
 
 		if (_parent && _parent->_focus == this)
@@ -586,7 +585,7 @@ void Panel::focus()
  * Enables/Disables calling think() during the event loop.
  * The default is enabled.
  *
- * Args: yes	true if the panel's think function should be called
+ * Args: yes  true if the panel's think function should be called
  */
 void Panel::set_think(bool yes)
 {
