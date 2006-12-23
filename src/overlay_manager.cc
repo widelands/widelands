@@ -160,13 +160,13 @@ void Overlay_Manager::register_overlay
 	assert(level!=5); // level == 5 is undefined behavior
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
-   if (overlay_map.count(c)) {
-	   Registered_Overlays_Map::const_iterator i = overlay_map.lower_bound(c);
-      do {
-         if(i->second.picid==picid) return;
-         ++i;
-
-      } while (i->first == c);
+	for
+		(Registered_Overlays_Map::iterator it = overlay_map.find(c);
+		 it != overlay_map.end();
+		 ++it)
+	{
+		if (it->second.picid == picid) {it->second.jobids.insert(jobid); return;}
+		if (it->first != c) break;
    }
 	uint hsx = hot_spot.x;
 	uint hsy = hot_spot.y;
@@ -231,7 +231,8 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
 		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();) {
-			if (it->second.jobid == jobid) j->erase(it++); //  This is necessary!
+			it->second.jobids.erase(jobid);
+			if (it->second.jobids.empty()) j->erase(it++); //  This is necessary!
 			else ++it;
 		}
 }

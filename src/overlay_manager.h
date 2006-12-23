@@ -25,6 +25,8 @@
 #include "geometry.h"
 #include "types.h"
 
+#include <set>
+
 /*
  * The Overlay Manager is responsible for the map overlays. He
  * manages overlays in the following way:
@@ -58,6 +60,7 @@ struct Overlay_Manager {
 		static Job_Id Null() throw ()//  Constant value for no job.
 		{Job_Id result; result.id = 0; return result;}
 		bool isNull() const throw () {return *this == Null();}
+		bool operator<(const Job_Id other) const throw () {return id < other.id;}
 	private:
 		friend class Overlay_Manager;
 		Job_Id operator++() throw () {++id; return *this;}
@@ -144,13 +147,12 @@ struct Overlay_Manager {
 			 const int Hotspot_y,
 			 const int Level)
 			:
-			jobid(Jobid),
 			picid(Picid),
 			hotspot_x(Hotspot_x),
 			hotspot_y(Hotspot_y),
 			level(Level)
-		{}
-		Job_Id jobid;
+		{jobids.insert(Jobid);}
+		std::set<Job_Id> jobids;
 		int picid;
 		int hotspot_x;
 		int hotspot_y;
