@@ -224,7 +224,7 @@ type=allow_building
 state=init
 version=1
 player=1
-building=granitmine
+building=granitemine
 allow=false
 
 [Disable Building 24]
@@ -379,12 +379,12 @@ player=1
 building=goldmine
 allow=true
 
-[Enable Granit Mine]
+[Enable Granite Mine]
 type=allow_building
 state=init
 version=1
 player=1
-building=granitmine
+building=granitemine
 allow=true
 
 [Enable Hunter]
@@ -574,7 +574,7 @@ version=1
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth exclaims..."
 "</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
-_" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granit<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
+_" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 "</rt>""
 window_title=_Advisor
 is_modal=true

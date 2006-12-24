@@ -254,7 +254,7 @@ type=allow_building
 state=init
 version=1
 player=1
-building=granitmine
+building=granitemine
 allow=false
 
 [Disable Building 24]

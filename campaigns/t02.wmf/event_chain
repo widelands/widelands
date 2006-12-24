@@ -94,7 +94,7 @@ event_01=Unhide Build Mines
 event_02=Enable Coal Mine
 event_03=Enable Ore Mine
 event_04=Enable Gold Mine
-event_05=Enable Granit Mine
+event_05=Enable Granite Mine
 current_event=0
 state=init
 

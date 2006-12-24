@@ -13,7 +13,7 @@ trigger=Mission Quarry
 
 [Build Mines]
 descr=_""<rt>"
-_"<p>When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granit<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
+_"<p>When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 "</rt>""
 visible=false
 optional=false
