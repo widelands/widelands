@@ -56,7 +56,8 @@ class ChkSum {
 					 ~ChkSum(void);
 					 void pass_data(const void*, uint);
 					 void finish_chksum(void);
-					 ulong* get_chksum(void) const { if(can_handle_data) return 0; return (ulong*)sum; }
+	const ulong * get_chksum() const throw ()
+	{return can_handle_data ? 0 : reinterpret_cast<const ulong * const>(sum);}
 
 
 		  private:
@@ -89,8 +90,8 @@ class ChkSum {
 };
 
 // operator overloading
-bool operator==(ChkSum&, ChkSum&);
-bool operator==(ChkSum&, const void*);
-std::ostream& operator<<(std::ostream&, ChkSum&);
+bool operator==(const ChkSum &, const ChkSum &) throw ();
+bool operator==(const ChkSum &, const void * const) throw ();
+std::ostream & operator<<(std::ostream &, const ChkSum &);
 
 #endif /* __S__MD5_H */

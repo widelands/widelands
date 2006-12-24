@@ -116,9 +116,9 @@ void ChkSum::finish_chksum(void) {
  * Args: sum1, sum2  sums to check to
  * returns: true if match, fales otherwise
  */
-bool operator==(ChkSum& sum1, ChkSum& sum2) {
-		  ulong* buf1=sum1.get_chksum();
-		  ulong* buf2=sum2.get_chksum();
+bool operator==(const ChkSum & sum1, const ChkSum & sum2) throw () {
+	const ulong * const buf1 = sum1.get_chksum();
+	const ulong * const buf2 = sum2.get_chksum();
 
 		  if(!buf1 || !buf2) return false;
 
@@ -136,9 +136,9 @@ bool operator==(ChkSum& sum1, ChkSum& sum2) {
  *       sum1  sum to check to
  * returns: true if match, false otherwise
  */
-bool operator==(ChkSum& sum1, const void* buf) {
-		  ulong* buf1=sum1.get_chksum();
-		  ulong* buf2=(ulong*) buf;
+bool operator==(const ChkSum & sum1, const void * const buf) throw () {
+	const ulong * const buf1 = sum1.get_chksum();
+	const ulong * const buf2 = static_cast<const ulong * const>(buf);
 
 		  if(!buf1 || !buf2) return false;
 
@@ -150,8 +150,9 @@ bool operator==(ChkSum& sum1, const void* buf) {
 		  return false;
 }
 
-std::ostream& operator<<(std::ostream& o, ChkSum& sum) {
-	uchar * const buf = reinterpret_cast<uchar * const>(sum.get_chksum());
+std::ostream & operator<<(std::ostream & o, const ChkSum & sum) {
+	const uchar * const buf =
+		reinterpret_cast<const uchar * const>(sum.get_chksum());
 		  if(!buf) {
 					 o << "(inval)";
 		  } else {
