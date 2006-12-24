@@ -669,9 +669,7 @@ Bob::Task Soldier::taskMoveToBattle = {
    0,
 };
 
-void Soldier::startTaskMoveToBattle(Game* g, Flag* f, Coords coords) {
-   assert (f);
-
+void Soldier::startTaskMoveToBattle(Game * g, Flag *, Coords coords) {
    log ("Soldier::startTaskMoveToBattle\n");
    push_task(taskMoveToBattle);
 
@@ -716,7 +714,7 @@ void Soldier::moveToBattleUpdate(Game* g, State* state) {
    }
 }
 
-void Soldier::moveToBattleSignal(Game* g, State* s) {
+void Soldier::moveToBattleSignal(Game * g, State *) {
    std::string signal = get_signal();
    set_signal("");
 
@@ -768,7 +766,7 @@ void Soldier::moveHomeUpdate(Game* g, State* state) {
    }
 }
 
-void Soldier::moveHomeSignal(Game* g, State* s) {
+void Soldier::moveHomeSignal(Game *, State *) {
    std::string signal = get_signal();
    set_signal("");
 

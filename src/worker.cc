@@ -3618,10 +3618,7 @@ Carrier::start_task_road
 Work on the given road, assume the location is correct.
 ===============
 */
-void Carrier::start_task_road(Game* g, Road* road)
-{
-	assert(get_location(g) == road);
-
+void Carrier::start_task_road() {
 	push_task(taskRoad);
 
 	get_state()->ivar1 = 0;
@@ -3662,7 +3659,7 @@ void Carrier::road_update(Game* g, State* state)
 		if (state->ivar1)
 		{
 			state->ivar1 = 0;
-			start_task_transport(g, m_acked_ware);
+			start_task_transport(m_acked_ware);
 		}
 		else
 		{
@@ -3741,11 +3738,8 @@ Carrier::start_task_transport
 Begin the transport task.
 ===============
 */
-void Carrier::start_task_transport(Game* g, int fromflag)
-{
+void Carrier::start_task_transport(int fromflag) {
 	State* state;
-
-	assert(!get_carried_item(g));
 
 	push_task(taskTransport);
 

@@ -301,10 +301,7 @@ void TrainingSite::remove_worker(Worker* w)
 /**
  * Request exactly one soldier
  */
-void TrainingSite::request_soldier(Game * g)
-{
-	assert(g);
-
+void TrainingSite::request_soldier(Game *) {
 	int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
 	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
@@ -830,16 +827,13 @@ void TrainingSite::change_soldier_capacity(int how)
  * \sa find_and_start_next_program()
  * \return n/a, the output is in \ref m_list_upgrades
  */
-void TrainingSite::calc_list_upgrades(Game * g)
-{
+void TrainingSite::calc_list_upgrades(Game *) {
 	int higher;
 	int r_hp = m_pri_hp;
 	int r_attack = m_pri_attack;
 	int r_defense = m_pri_defense;
 	int r_evade = m_pri_evade;
 	std::vector < std::string > list;
-
-	assert(g);
 
 	if (!get_descr()->get_train_hp())
 		r_hp = 0;

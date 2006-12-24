@@ -67,9 +67,14 @@ const bool ZipFilesystem::IsWritable() const
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-const int ZipFilesystem::FindFiles(std::string path,
-											  const std::string pattern,
-											  filenameset_t *results)
+const int ZipFilesystem::FindFiles
+(std::string path,
+ const std::string
+#ifndef NDEBUG
+ pattern
+#endif
+ ,
+ filenameset_t * results)
 {
    m_OpenUnzip();
 
@@ -260,12 +265,22 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
       dirname += '/';
 
    std::string complete_file = m_basename + '/' + dirname;
-   int err = zipOpenNewFileInZip3(m_zipfile, complete_file.c_str(), &zi,
-         NULL,0,NULL,0,NULL /* comment*/,
-         Z_DEFLATED,
-         Z_BEST_COMPRESSION,0,
-         -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
-         0, 0);
+#ifndef NDEBUG
+	int err =
+#endif
+		zipOpenNewFileInZip3
+		(m_zipfile,
+		 complete_file.c_str(),
+		 &zi,
+		 NULL, 0, NULL, 0, NULL /* comment*/,
+		 Z_DEFLATED,
+		 Z_BEST_COMPRESSION,
+		 0,
+		 -MAX_WBITS,
+		 DEF_MEM_LEVEL,
+		 Z_DEFAULT_STRATEGY,
+		 0,
+		 0);
    assert( err == ZIP_OK );
 
    // CloseFile

@@ -489,7 +489,7 @@ Player::enemyflagaction
 Perform an action on the given enemy flag.
 ===============
 */
-void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int type)
+void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 {
    if (attacker != get_player_number())
       throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());

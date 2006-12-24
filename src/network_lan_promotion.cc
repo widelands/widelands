@@ -52,7 +52,9 @@ LAN_Base::LAN_Base ()
 	if (ioctl(sock, SIOCGIFBRDADDR, &ifr) < 0)
 	    continue;
 
-	broadcast_addresses.push_back (((sockaddr_in*) &ifr.ifr_broadaddr)->sin_addr.s_addr);
+		broadcast_addresses.push_back
+			(reinterpret_cast<sockaddr_in * const>(&ifr.ifr_broadaddr)
+			 ->sin_addr.s_addr);
     }
 
     if_freenameindex (ifnames);
@@ -75,7 +77,7 @@ void LAN_Base::bind (unsigned short port)
     addr.sin_addr.s_addr=INADDR_ANY;
     addr.sin_port=htons(port);
 
-    ::bind (sock, (sockaddr*) &addr, sizeof(addr));
+	::bind (sock, reinterpret_cast<sockaddr * const>(&addr), sizeof(addr));
 }
 
 bool LAN_Base::avail ()
@@ -114,7 +116,13 @@ void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
 	addr.sin_addr.s_addr=*i;
 	addr.sin_port=htons(port);
 
-	sendto (sock, (const DATATYPE) buf, len, 0, (const sockaddr*) &addr, sizeof(addr));
+		sendto
+			(sock,
+			 static_cast<const DATATYPE>(buf),
+			 len,
+			 0,
+			 reinterpret_cast<const sockaddr * const>(&addr),
+			 sizeof(addr));
     }
 }
 

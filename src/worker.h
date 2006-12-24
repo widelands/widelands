@@ -312,9 +312,9 @@ class Carrier : public Worker {
    public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
 
-   void start_task_road(Game* g, Road* road);
+   void start_task_road();
    void update_task_road(Game* g);
-   void start_task_transport(Game* g, int fromflag);
+	void start_task_transport(int fromflag);
    bool start_task_walktoflag(Game* g, int flag, bool offset = false);
 
    private:

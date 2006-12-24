@@ -1625,8 +1625,7 @@ Only call this if the road can handle a new carrier, and if no request has been
 issued.
 ===============
 */
-void Road::request_carrier(Game* g)
-{
+void Road::request_carrier(Game * g) {
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
 	m_carrier_request = new Request(this, get_owner()->get_tribe()->get_safe_worker_index("carrier"),
@@ -1642,7 +1641,7 @@ The carrier has arrived successfully.
 ===============
 */
 void Road::request_carrier_callback
-(Game * g, Request * rq, int, Worker * w, void * data)
+(Game *, Request * rq, int, Worker * w, void * data)
 {
 	assert(w);
 
@@ -1653,7 +1652,7 @@ void Road::request_carrier_callback
 	road->m_carrier_request = 0;
 
 	road->m_carrier = carrier;
-	carrier->start_task_road(g, road);
+	carrier->start_task_road();
 }
 
 

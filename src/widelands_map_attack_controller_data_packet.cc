@@ -69,30 +69,30 @@ throw (_wexception)
       uint nrControllers = fr.Unsigned32();
       for (uint i=0;i<nrControllers;i++) {
          AttackController* ctrl = egbase->create_attack_controller();
-         
-         uint serial = fr.Unsigned32();
+
+         fr.Unsigned32();
          uint flagFilePos = fr.Unsigned32();
-         
+
          Flag* flag = (Flag*) ol->get_object_by_file_index(flagFilePos);
          assert(flag);
-         
+
          ctrl->flag = flag;
          ctrl->attackingPlayer = fr.Unsigned32();
          ctrl->defendingPlayer = fr.Unsigned32();
          ctrl->totallyLaunched = fr.Unsigned32();
          ctrl->attackedMsEmpty = fr.Unsigned8();
-         
+
          uint numBs = fr.Unsigned32();
-         
+
          for (uint j=0;j<numBs;j++) {
             Soldier* soldier = (Soldier*) ol->get_object_by_file_index(fr.Unsigned32());
             assert(soldier);
-            
+
             MilitarySite* origin = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
             assert(origin);
-            
+
             Coords* battleGround = new Coords(fr.Unsigned32(),fr.Unsigned32());
-            
+
             AttackController::BattleSoldier bs = {
                soldier,
                origin,
@@ -104,7 +104,7 @@ throw (_wexception)
             ctrl->involvedSoldiers.push_back(bs);
             soldier->set_attack_ctrl(ctrl);
          }
-         
+
          uint numInMs = fr.Unsigned32();
          for (uint j=0;j<numInMs;j++) {
             MilitarySite* ms = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
@@ -112,7 +112,7 @@ throw (_wexception)
             ctrl->involvedMilitarySites.insert(ms);
             ms->set_in_battle(true);
          }
-         
+
       }
       if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Attack_Controller_Data_Packet : Couldn't find 0xffffffff.");
@@ -135,47 +135,47 @@ throw (_wexception) {
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
-   
+
    std::vector<uint> serials = egbase->get_attack_controller_serials();
-   
+
    fw.Unsigned32(serials.size());
-   
+
    for (uint i=0;i<serials.size();i++) {
       AttackController* ctrl = (AttackController*)egbase->get_objects()->get_object(serials[i]);
       assert(not os->is_object_known(ctrl));
-      
+
       fw.Unsigned32(os->register_object(ctrl));  // Something like serial ..
-      
+
       //save the flag against which the attack is launched
       assert(os->is_object_known(ctrl->flag));
       uint flagFilePos = os->get_object_file_index(ctrl->flag);
       fw.Unsigned32(flagFilePos);
-      
+
       fw.Unsigned32(ctrl->attackingPlayer);
       fw.Unsigned32(ctrl->defendingPlayer);
       fw.Unsigned32(ctrl->totallyLaunched);
       fw.Unsigned8(ctrl->attackedMsEmpty);
-      
+
       //write battle soldier structure of involved soldiers
       fw.Unsigned32(ctrl->involvedSoldiers.size());
 
       for (uint j=0;j<ctrl->involvedSoldiers.size();j++) {
          AttackController::BattleSoldier bs = ctrl->involvedSoldiers[j];
-         
+
          assert(os->is_object_known(bs.soldier));
 			fw.Unsigned32(os->get_object_file_index(bs.soldier));
-			
+
 			assert(os->is_object_known(bs.origin));
 			fw.Unsigned32(os->get_object_file_index(bs.origin));
-			
+
 			fw.Unsigned32(bs.battleGround->x);
 			fw.Unsigned32(bs.battleGround->y);
-			
+
 			fw.Unsigned8(bs.attacker);
 			fw.Unsigned8(bs.arrived);
 			fw.Unsigned8(bs.fighting);
       }
-      
+
       //write involved military sites
       fw.Unsigned32(ctrl->involvedMilitarySites.size());
       for (std::set<Object_Ptr>::iterator it=ctrl->involvedMilitarySites.begin();it!=ctrl->involvedMilitarySites.end();it++) {
@@ -186,7 +186,7 @@ throw (_wexception) {
 
       os->mark_object_as_saved(ctrl);
    }
-   
+
    fw.Unsigned32(0xffffffff);
    fw.Write( fs, "binary/attackcontroller" );
 }
