@@ -391,13 +391,13 @@ Terrain_Descr
 
 Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources)
 :
-m_texture           (0),
-m_frametime         (FRAME_LENGTH),
 m_picnametempl      (0),
+m_frametime         (FRAME_LENGTH),
 m_valid_resources   (0),
 m_nr_valid_resources(0),
 m_default_resources (-1),
-m_default_amount    (0)
+m_default_amount    (0),
+m_texture           (0)
 {
 
 	// Read configuration
