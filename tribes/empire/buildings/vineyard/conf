@@ -17,12 +17,12 @@ program=harvestvine
 1=call plantvine
 2=call harvestvine
 
-[plantwine]
+[plantvine]
 0=set +catch	# failure of this program will be caught
 1=sleep 20000	# sleep the given amount of time
 2=worker plantvine	# cause the worker to run the 'plantwine' program
 
-[harvestwine]
+[harvestvine]
 0=set +catch
 1=sleep 5000		# sleep the given amount of time
 2=worker harvestvine	# cause the worker to run the 'harvestwine' program
