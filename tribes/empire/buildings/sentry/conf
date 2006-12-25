@@ -1,5 +1,5 @@
 [global]
-descname=_ Sentry 
+descname=_ Sentry
 
 type=military		# basic type (warehouse, production, military)
 size=small
@@ -18,12 +18,11 @@ trunk=1
 stone=1
 
 [idle]
-pics=sentry_i_??.png  
+pics=sentry_i_??.png
 hot_spot_x=40
 hot_spot_y=63
 
 [build]
-pics=sentry_i_??.png  
+pics=sentry_i_??.png
 hot_spot_x=40
 hot_spot_y=63
-
