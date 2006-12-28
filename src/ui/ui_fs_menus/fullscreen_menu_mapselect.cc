@@ -117,7 +117,7 @@ Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
    }
 }
 
-/*
+    /*
  * Gets called when the Checkbox changes
  */
 void Fullscreen_Menu_MapSelect::changed(bool t) {
@@ -167,7 +167,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
          try {
 	         *m_ml = m_map->get_correct_loader(get_mapname()); //  FIXME memory leak!
             (*m_ml)->preload_map(m_is_scenario);
-
+            m_map->set_filename(name);
             char buf[256];
 				taname    .set_text(m_map->get_name());
 				taauthor  .set_text(m_map->get_author());

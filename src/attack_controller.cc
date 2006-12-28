@@ -237,7 +237,7 @@ void AttackController::soldierWon(Soldier* soldier) {
 
    if (involvedSoldiers[idx].attacker) {
       log("attackers won, destroying building.\n");
-      game->send_player_bulldoze(flag);
+      flag->get_building()->destroy(game);
 
       /*MilitarySite* opponentMs = (MilitarySite*)flag->get_building();
       MilitarySite* newMs = opponentMs->conquered_by(game,game->get_player(attackingPlayer));
