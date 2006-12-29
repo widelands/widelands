@@ -77,8 +77,8 @@ const bool RealFSImpl::IsWritable() const
 #ifdef _WIN32
 // note: the Win32 version may be broken, feel free to fix it
 const int RealFSImpl::FindFiles(std::string path,
-										  const std::string pattern,
-										  filenameset_t *results)
+                                const std::string pattern,
+                                filenameset_t *results)
 {
 	std::string buf;
 	struct _finddata_t c_file;
@@ -192,7 +192,7 @@ FileSystem* RealFSImpl::MakeSubFileSystem(const std::string path)
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* RealFSImpl::CreateSubFileSystem(const std::string path,
-														   const Type fs)
+      const Type fs)
 {
 	if( FileExists( path ))
 		throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
@@ -385,7 +385,7 @@ void *RealFSImpl::Load(const std::string fname, int * const length)
  * Throws an exception if it fails.
  */
 void RealFSImpl::Write(const std::string fname, const void * const data,
-							  const int length)
+                       const int length)
 {
 	std::string fullname;
 	FILE *f;

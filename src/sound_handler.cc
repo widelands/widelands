@@ -50,12 +50,12 @@ Sound_Handler g_sound_handler;
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
-	m_nosound(false),
-	m_lock_audio_disabling(false),
-	m_disable_music(false),
-	m_disable_fx(false),
-	m_random_order(true),
-	m_current_songset("")
+		m_nosound(false),
+		m_lock_audio_disabling(false),
+		m_disable_music(false),
+		m_disable_fx(false),
+		m_random_order(true),
+		m_current_songset("")
 {}
 
 /** Housekeeping: unset hooks. Audio data will be freed automagically by the
@@ -71,9 +71,9 @@ Sound_Handler::~Sound_Handler()
 	{
 		const Songset_map::const_iterator songs_end = m_songs.end();
 		for
-			(Songset_map::const_iterator it = m_songs.begin();
-			 it != songs_end;
-			 ++it)
+		(Songset_map::const_iterator it = m_songs.begin();
+		      it != songs_end;
+		      ++it)
 			delete it->second;
 	}
 }
@@ -265,10 +265,10 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		GetTempPath(1024, lpPathBuffer);
 		// Create a temporary file.
 		GetTempFileName
-			(lpPathBuffer, //  directory for tmp files
-			 "widelands",  //  temp file name prefix
-			 0,            //  create unique name
-			 szTempName);  //  buffer for name
+		(lpPathBuffer, //  directory for tmp files
+		 "widelands",  //  temp file name prefix
+		 0,            //  create unique name
+		 szTempName);  //  buffer for name
 		tempfile = szTempName;
 #else
 		//manpage recommends a minimum suffix length of 6

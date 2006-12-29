@@ -37,9 +37,9 @@ public:
 	                            const std::string & zipfilename,
 	                            const std::string & message="problem during zipfile operation")
 	throw()
-	: std::logic_error(thrower + ": " + message + " (working on '" + filename +
-												 "' in zipfile '" + zipfilename + "')"),
-	m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename)
+			: std::logic_error(thrower + ": " + message + " (working on '" + filename +
+			                   "' in zipfile '" + zipfilename + "')"),
+			m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename)
 	{}
 
 	virtual ~ZipOperation_error() throw() {}

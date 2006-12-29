@@ -317,47 +317,47 @@ WLApplication::~WLApplication()
  */
 void WLApplication::run()
 {
-    if(editor_commandline==0){ //Normal startup (User did not type 'widelands --editor' in commandline)
+	if(editor_commandline==0){ //Normal startup (User did not type 'widelands --editor' in commandline)
 
-	g_sound_handler.start_music("intro");
+		g_sound_handler.start_music("intro");
 
-	Fullscreen_Menu_Intro *intro=new Fullscreen_Menu_Intro;
-	intro->run();
-	delete intro;
+		Fullscreen_Menu_Intro *intro=new Fullscreen_Menu_Intro;
+		intro->run();
+		delete intro;
 
-	//TODO: what does this do? where does it belong? read up on GGZ! #fweber
-	if(NetGGZ::ref()->used())
-	{
-		if(NetGGZ::ref()->connect())
+		//TODO: what does this do? where does it belong? read up on GGZ! #fweber
+		if(NetGGZ::ref()->used())
 		{
-			NetGame *netgame;
-
-			if(NetGGZ::ref()->host()) netgame = new NetHost();
-			else
+			if(NetGGZ::ref()->connect())
 			{
-				while(!NetGGZ::ref()->ip())
-					NetGGZ::ref()->data();
+				NetGame *netgame;
 
-				IPaddress peer;
-				SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(),
-				                    WIDELANDS_PORT);
-				netgame = new NetClient(&peer);
+				if(NetGGZ::ref()->host()) netgame = new NetHost();
+				else
+				{
+					while(!NetGGZ::ref()->ip())
+						NetGGZ::ref()->data();
+
+					IPaddress peer;
+					SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(),
+					                    WIDELANDS_PORT);
+					netgame = new NetClient(&peer);
+				}
+				netgame->run();
+				delete netgame;
 			}
-			netgame->run();
-			delete netgame;
 		}
-	}
 
-	g_sound_handler.change_music("menu", 1000);
-	mainmenu();
+		g_sound_handler.change_music("menu", 1000);
+		mainmenu();
 
-    } // if(editor_commandline==0)
+	} // if(editor_commandline==0)
 	else { //  if (editor_commandline == 1) - Directly start the Editor
-        g_sound_handler.start_music("ingame");
+		g_sound_handler.start_music("ingame");
 		Editor * const e = new Editor(); //  Local variable does not work (sig11).
 		e->run();
 		delete e;
-        }
+	}
 
 	g_sound_handler.stop_music(500);
 
@@ -923,7 +923,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 		m_commandline.erase("double");
 	}
 
-		if(m_commandline.count("editor")>0) {
+	if(m_commandline.count("editor")>0) {
 		editor_commandline=1;
 		m_commandline.erase("editor");
 	}
@@ -1096,7 +1096,7 @@ void WLApplication::yield_double_game()
  */
 void WLApplication::mainmenu()
 {
-    bool done=false;
+	bool done=false;
 
 	while(!done) {
 		unsigned char code;

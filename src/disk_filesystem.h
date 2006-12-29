@@ -32,8 +32,8 @@ public:
 	virtual const bool IsWritable() const;
 
 	virtual const int FindFiles(std::string path,
-										 const std::string pattern,
-										 filenameset_t *results);
+	                            const std::string pattern,
+	                            filenameset_t *results);
 
 	virtual const bool FileExists(const std::string path);
 	virtual const bool IsDirectory(const std::string path);
@@ -42,11 +42,11 @@ public:
 
 	virtual void *Load(const std::string fname, int * const length);
 	virtual void Write(const std::string fname, const void * const data,
-							 const int length);
+	                   const int length);
 
 	virtual FileSystem* MakeSubFileSystem(const std::string dirname);
 	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
-														 const Type);
+	                                        const Type);
 	virtual void Unlink(const std::string file);
 
 	virtual void listSubdirs() const;

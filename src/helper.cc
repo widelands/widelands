@@ -55,11 +55,11 @@ void split_string(std::string in, std::vector<std::string>* plist, const char* s
  * remove spaces at the beginning or the end of a string
  */
 void remove_spaces(std::string* in) {
-  while(((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n')
-      in->erase(0, 1);
+	while(((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n')
+		in->erase(0, 1);
 
-   while(((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n')
-      in->erase(in->size()-1, 1);
+	while(((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n')
+		in->erase(in->size()-1, 1);
 }
 
 /**

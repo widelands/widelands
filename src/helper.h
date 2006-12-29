@@ -32,10 +32,10 @@
  * \author AssafLavie on http://www.experts-exchange.com
  */
 template<typename T> T stringTo(const std::string& s) {
-  std::istringstream iss(s);
-  T x;
-  iss >> x;
-  return x;
+	std::istringstream iss(s);
+	T x;
+	iss >> x;
+	return x;
 }
 
 /**
@@ -49,9 +49,9 @@ template<typename T> T stringTo(const std::string& s) {
  * \author AssafLavie on http://www.experts-exchange.com
  */
 template<typename T> std::string toString(const T& x) {
-  std::ostringstream oss;
-  oss << x;
-  return oss.str();
+	std::ostringstream oss;
+	oss << x;
+	return oss.str();
 }
 
 void split_string(std::string in, std::vector<std::string>* plist, const char* separators);

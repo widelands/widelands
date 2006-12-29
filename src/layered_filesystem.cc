@@ -78,16 +78,16 @@ void LayeredFileSystem::AddFileSystem(FileSystem * const fs)
  * Returns the number of files found.
  */
 const int LayeredFileSystem::FindFiles(std::string path,
-													const std::string pattern,
-													filenameset_t *results,
-													int depth)
+                                       const std::string pattern,
+                                       filenameset_t *results,
+                                       int depth)
 {
 	int i=0;
 	if(!depth)
 		depth=10000; // Wow, if you have so many filesystem you're my hero
 
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			(it != m_filesystems.rend()) && (i<depth); it++, i++)
+	      (it != m_filesystems.rend()) && (i<depth); it++, i++)
 	{
 		filenameset_t files;
 		(*it)->FindFiles(path, pattern, &files);
@@ -95,7 +95,7 @@ const int LayeredFileSystem::FindFiles(std::string path,
 		// need to workaround MSVC++6 issues
 		//results->insert(files.begin(), files.end());
 		for(filenameset_t::iterator fnit = files.begin();
-				  fnit != files.end(); fnit++)
+		      fnit != files.end(); fnit++)
 			results->insert(*fnit);
 	}
 
@@ -103,8 +103,8 @@ const int LayeredFileSystem::FindFiles(std::string path,
 }
 
 const int LayeredFileSystem::FindFiles(std::string path,
-													const std::string pattern,
-													filenameset_t *results)
+                                       const std::string pattern,
+                                       filenameset_t *results)
 {
 	return FindFiles(path,pattern,results,0);
 }
@@ -115,7 +115,7 @@ const int LayeredFileSystem::FindFiles(std::string path,
 const bool LayeredFileSystem::FileExists(const std::string path)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if ((*it)->FileExists(path))
 			return true;
@@ -148,7 +148,7 @@ const bool LayeredFileSystem::IsDirectory(const std::string path)
 void *LayeredFileSystem::Load(std::string fname, int * const length)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->FileExists(fname))
 			continue;
@@ -165,10 +165,10 @@ void *LayeredFileSystem::Load(std::string fname, int * const length)
  * Throws an exception if it fails.
  */
 void LayeredFileSystem::Write(const std::string fname, const void * const data,
-										const int length)
+                              const int length)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->IsWritable())
 			continue;
@@ -186,7 +186,7 @@ void LayeredFileSystem::Write(const std::string fname, const void * const data,
 void LayeredFileSystem::MakeDirectory(const std::string dirname)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->IsWritable())
 			continue;
@@ -204,7 +204,7 @@ void LayeredFileSystem::MakeDirectory(const std::string dirname)
 void LayeredFileSystem::EnsureDirectoryExists(const std::string dirname)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->IsWritable())
 			continue;
@@ -222,7 +222,7 @@ void LayeredFileSystem::EnsureDirectoryExists(const std::string dirname)
 FileSystem* LayeredFileSystem::MakeSubFileSystem(const std::string dirname)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->IsWritable())
 			continue;
@@ -240,10 +240,10 @@ FileSystem* LayeredFileSystem::MakeSubFileSystem(const std::string dirname)
  * Create a new subfilesystem
  */
 FileSystem* LayeredFileSystem::CreateSubFileSystem(const std::string dirname,
-		                                             const Type type)
+      const Type type)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->IsWritable())
 			continue;
@@ -263,7 +263,7 @@ void LayeredFileSystem::Unlink(const std::string file)
 		return;
 
 	for(FileSystem_rit it = m_filesystems.rbegin();
-			it != m_filesystems.rend(); it++)
+	      it != m_filesystems.rend(); it++)
 	{
 		if (!(*it)->IsWritable())
 			continue;

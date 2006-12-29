@@ -30,11 +30,11 @@ public:
 	explicit File_error(const std::string & thrower,
 	                    const std::string & filename,
 	                    const std::string & message="problem with file/directory")
-			throw()
-	: std::runtime_error(thrower+": "+message+": "+filename),
-	m_thrower(thrower),
-	m_filename(filename),
-	m_message(message)
+	throw()
+			: std::runtime_error(thrower+": "+message+": "+filename),
+			m_thrower(thrower),
+			m_filename(filename),
+			m_message(message)
 	{}
 
 	virtual ~File_error() throw() {}
@@ -54,7 +54,7 @@ public:
 	                            const std::string & filename,
 	                            const std::string & message="could not find file or directory")
 	throw()
-	:File_error(thrower, filename, message)
+			:File_error(thrower, filename, message)
 	{}
 };
 
@@ -67,7 +67,7 @@ public:
 	                        const std::string & filename,
 	                        const std::string & message="file or directory has wrong type")
 	throw()
-	:File_error(thrower, filename, message)
+			:File_error(thrower, filename, message)
 	{}
 };
 
@@ -80,7 +80,7 @@ public:
 	                                const std::string & filename,
 	                                const std::string & message="access denied on file or directory")
 	throw()
-	:File_error(thrower, filename, message)
+			:File_error(thrower, filename, message)
 	{}
 };
 

@@ -32,8 +32,6 @@ INDENTLIST=[
 	'disk_filesystem.cc',
 	'filesystem.h',
 	'filesystem_exceptions.h',
-	'filesystem_exceptions.cc',
-	'files.cc',
 	'fxset.h',
 	'fxset.cc',
 	'geometry.h',
@@ -53,7 +51,6 @@ INDENTLIST=[
 	'wlapplication.h',
 	'wlapplication.cc',
 	'zip_exceptions.h',
-	'zip_exceptions.cc',
 	]
 indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)

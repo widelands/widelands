@@ -44,20 +44,20 @@ public:
 	virtual const bool IsWritable() const = 0;
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
-										filenameset_t *results) = 0;
+	                            filenameset_t *results) = 0;
 
 	virtual const bool IsDirectory(std::string path) = 0;
 	virtual const bool FileExists(const std::string path) = 0;
 
 	virtual void *Load(const std::string fname, int * const length) = 0;
 	virtual void Write(const std::string fname, const void * const data,
-							 const int length) = 0;
+	                   const int length) = 0;
 	virtual void EnsureDirectoryExists(const std::string dirname) = 0;
 	virtual void MakeDirectory(const std::string dirname) = 0;
 
 	virtual FileSystem*  MakeSubFileSystem( const std::string dirname ) = 0;
 	virtual FileSystem*  CreateSubFileSystem( const std::string dirname,
-															const Type ) = 0;
+	      const Type ) = 0;
 	virtual void Unlink( const std::string ) = 0;
 
 	static FileSystem *Create(const std::string root)
@@ -70,7 +70,7 @@ public:
 	const std::string getTempDirectory();
 	const std::string FS_CanonicalizeName(const std::string path) const;
 	static const std::string AutoExtension(const std::string filename,
-														  const std::string extension);
+	                                       const std::string extension);
 	static const char *FS_StripExtension(char * const fname);
 	static const char *FS_RelativePath(char *buf, const int buflen, const char *basefile, const char *filename);
 	const bool pathIsAbsolute(const std::string path) const;

@@ -41,14 +41,14 @@ BadRecord_error::BadRecord_error(const std::string _filename,
 		code(_code), expectedcode(_expectedcode)
 {
 	text="Journal file "+_filename+" contains record with type "+
-			toString(_code)+" instead of the expected type "+
-			toString(_expectedcode);
+	     toString(_code)+" instead of the expected type "+
+	     toString(_expectedcode);
 }
 
 BadEvent_error::BadEvent_error(const std::string _filename,
                                const unsigned char _type) throw()
-	: Journalfile_error(_filename), type(_type)
+		: Journalfile_error(_filename), type(_type)
 {
 	text="Journal file '"+_filename+"' contains record with unknown event type "+
-			toString(_type);
+	     toString(_type);
 }
