@@ -133,33 +133,15 @@ cloth=2
 [idle]
 pics=trainingscamp_i_??.png  # ???
 hot_spot_x=82
-hot_spot_y=88
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0  
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_y=105
 
 [working]
-pics=trainingscamp_i_??.png  # ???
+pics=trainingscamp_i_??.png  # should be changed to working animation, as soon as it exists
 hot_spot_x=82
-hot_spot_y=88
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0  
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_y=105
 
 [build]
-pics=trainingscamp_i_??.png  # ???
+pics=trainingscamp_i_??.png  # should be changed to building animation, as soon as it exists
 hot_spot_x=82
-hot_spot_y=88
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0   
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_y=105
 

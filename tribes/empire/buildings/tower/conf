@@ -18,11 +18,12 @@ stone=4
 marblecolumn=2
 
 [idle]
-pics=build.png  
+pics=tower_i_??.png  
 hot_spot_x=55
 hot_spot_y=85
 
 [build]
-pics=build.png  
+pics=tower_i_??.png  
 hot_spot_x=55
 hot_spot_y=85
+
