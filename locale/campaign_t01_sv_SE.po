@@ -1,10 +1,8 @@
 # translation of campaign_t01_sv_SE.po to swedish
-# translation of campaign_ank_sv_SE.po to Swedish
-# translation of campaign_ank_sv_SE.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER, 2006.
 # Fredrik Pettersson <luno@iaofredde.net>, 2006.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: campaign_t01_sv_SE\n"
@@ -17,6 +15,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
+
+#: ../campaigns/t01.wmf/objective:8
+msgid ""
+"- press SPACE to see where you can build. The red spots show you, where a "
+"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
+"at the red spot directly right of your headquarters by clicking at it and "
+"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
+"Lumberjack. You do so by clicking the flag of either building and then the "
+"road-button. Around the flag should appear symbols, showing how steep the "
+"way in this direction would be. The steepier the way, the harder it will be "
+"for your people to walk on it. When you click such a symbol, you build a "
+"part of the road and must choose the next direction then. Build a road "
+"between the flags in front of the two buildings. Try to keep it short and "
+"even."
+msgstr ""
+"- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar dig "
+"var en liten byggnad - som en skogshuggare - kan byggas.<br>- bygg en "
+"skogshuggare vid den röda pricken direkt till höger om ditt huvudkvarter "
+"genom att klicka på den och välja skogshuggare.<br>- Bygg en väg mellan "
+"skogshuggare och ditt huvudkvarter. Du gör det genom att klicka på flaggan "
+"framför någon av byggnaderna och sen väg knappen. Runt flaggan borde det "
+"dyka upp symboler, som visar hur brant vägen är i den riktningen. Ju "
+"brantare väg, desto svårare är det för ditt folk att gå på den. När du "
+"klickar på en sådan symbol bygger du en del av vägen och måste sen välja "
+"nästa riktning. Bygg en väg mellan flaggorna framför de två byggnaderna. "
+"Försök att få den så kort och jämn som möjligt."
+
+#: ../campaigns/t01.wmf/objective:16
+msgid ""
+"- There is a flag symbol in the mid of the way you just built. By clicking "
+"it and, in the consecutively opening menu, clicking the flag-button, you "
+"place a flag there, thus splitting the work of carrying the wood between two "
+"carriers. When much wares are being transported between two points, "
+"additional flags in between make them get faster to their destination, thus "
+"improving your infrastructure. Place a flag in the mid of the road.<br>- "
+"Place a Lumberjack directly south of the flag you are about to place on the "
+"road. Connect said flag with the new Lumberjack afterwards. Note that, "
+"instead of building a road step by step, you may also directly click at the "
+"destination to build the entire road at once."
+msgstr ""
+"- Där är en flaggsymbol mitt på vägen du just byggt. Genom att klicka på den "
+"och sedan på flaggknappen placerar du en flagga där, och därigenom fördelar "
+"du bördan mellan två transportörer. När mycket varor ska transporteras "
+"mellan två punkter, flertalet flaggor mellan dem gör att det går fortare, "
+"och där igenom förbättrar du din infrastruktur. Placera en flagga mitt på "
+"vägen.<br>- Bygg en skogshuggare direkt söderut om flaggan du som du ska "
+"sätta på vägen. Förbind flaggan med den nya skogshuggaren efteråt. Notera "
+"att i stället för att bygga en väg bit för bit, så kan du istället klicka "
+"direkt på destinationen för att bygga hela vägen i ett svep."
+
+#: ../campaigns/t01.wmf/objective:24
+msgid "- Build a Ranger's Hut to the east of the Lumberjack."
+msgstr "- Bygg en Skogsplanterare öster om Skogshuggaren."
+
+#: ../campaigns/t01.wmf/objective:32
+msgid "- Build two Quarries south-west of your headquarters."
+msgstr "- Bygg två Stenhuggare sydväst om ditt Huvudkvarter."
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
@@ -132,7 +187,6 @@ msgstr ""
 "ditt huvudkvarter genom att trycka på den och välja skogshuggare."
 
 #: ../campaigns/t01.wmf/event:492
-#, fuzzy
 msgid "The elder remarks..."
 msgstr "Den vise påpekar..."
 
@@ -346,63 +400,6 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Uppdrag Slutfört"
-
-#: ../campaigns/t01.wmf/objective:8
-msgid ""
-"- press SPACE to see where you can build. The red spots show you, where a "
-"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
-"at the red spot directly right of your headquarters by clicking at it and "
-"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
-"Lumberjack. You do so by clicking the flag of either building and then the "
-"road-button. Around the flag should appear symbols, showing how steep the "
-"way in this direction would be. The steepier the way, the harder it will be "
-"for your people to walk on it. When you click such a symbol, you build a "
-"part of the road and must choose the next direction then. Build a road "
-"between the flags in front of the two buildings. Try to keep it short and "
-"even."
-msgstr ""
-"- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar dig "
-"var en liten byggnad - som en skogshuggare - kan byggas.<br>- bygg en "
-"skogshuggare vid den röda pricken direkt till höger om ditt huvudkvarter "
-"genom att klicka på den och välja skogshuggare.<br>- Bygg en väg mellan "
-"skogshuggare och ditt huvudkvarter. Du gör det genom att klicka på flaggan "
-"framför någon av byggnaderna och sen väg knappen. Runt flaggan borde det "
-"dyka upp symboler, som visar hur brant vägen är i den riktningen. Ju "
-"brantare väg, desto svårare är det för ditt folk att gå på den. När du "
-"klickar på en sådan symbol bygger du en del av vägen och måste sen välja "
-"nästa riktning. Bygg en väg mellan flaggorna framför de två byggnaderna. "
-"Försök att få den så kort och jämn som möjligt."
-
-#: ../campaigns/t01.wmf/objective:16
-msgid ""
-"- There is a flag symbol in the mid of the way you just built. By clicking "
-"it and, in the consecutively opening menu, clicking the flag-button, you "
-"place a flag there, thus splitting the work of carrying the wood between two "
-"carriers. When much wares are being transported between two points, "
-"additional flags in between make them get faster to their destination, thus "
-"improving your infrastructure. Place a flag in the mid of the road.<br>- "
-"Place a Lumberjack directly south of the flag you are about to place on the "
-"road. Connect said flag with the new Lumberjack afterwards. Note that, "
-"instead of building a road step by step, you may also directly click at the "
-"destination to build the entire road at once."
-msgstr ""
-"- Där är en flaggsymbol mitt på vägen du just byggt. Genom att klicka på den "
-"och sedan på flaggknappen placerar du en flagga där, och därigenom fördelar "
-"du bördan mellan två transportörer. När mycket varor ska transporteras "
-"mellan två punkter, flertalet flaggor mellan dem gör att det går fortare, "
-"och där igenom förbättrar du din infrastruktur. Placera en flagga mitt på "
-"vägen.<br>- Bygg en skogshuggare direkt söderut om flaggan du som du ska "
-"sätta på vägen. Förbind flaggan med den nya skogshuggaren efteråt. Notera "
-"att i stället för att bygga en väg bit för bit, så kan du istället klicka "
-"direkt på destinationen för att bygga hela vägen i ett svep."
-
-#: ../campaigns/t01.wmf/objective:24
-msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- Bygg en Skogsplanterare öster om Skogshuggaren."
-
-#: ../campaigns/t01.wmf/objective:32
-msgid "- Build two Quarries south-west of your headquarters."
-msgstr "- Bygg två Stenhuggare sydväst om ditt Huvudkvarter."
 
 #~ msgid "Order3"
 #~ msgstr "Uppdrag3"

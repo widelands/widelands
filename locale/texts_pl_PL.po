@@ -1,7 +1,7 @@
 # translation of texts_pl_PL.po to polish
 # This file is distributed under the same license as the Widelands package.
 # Copyright (C) 2002 The Widelands Development Team.
-#
+# 
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""

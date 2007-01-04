@@ -1,5 +1,5 @@
 # Widelands - Finnish language
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: $Id: world_greenland_fi_FI.po,v 1.1 2005/11/12 17:57:35 "

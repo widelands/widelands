@@ -1,6 +1,6 @@
 # French translation of WIDELANDS.
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"

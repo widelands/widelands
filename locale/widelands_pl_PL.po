@@ -1,14 +1,14 @@
 # translation of widelands_pl_PL.po to polish
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-#
+# 
 # Endrju <endrjux@gmail.com>, 2005.
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands_pl_PL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-22 17:38+0100\n"
+"POT-Creation-Date: 2007-01-04 10:53+0100\n"
 "PO-Revision-Date: 2006-12-01 21:49+0100\n"
 "Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
 "Language-Team: polish <pl@li.org>\n"
@@ -19,54 +19,33 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/ware.cc:72 ../src/worker.cc:1559
-msgid "Doh... someone forgot the help text!"
-msgstr "...ktoś zapomniał tekstu pomocy!"
+#: ../src/s2map.cc:250
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr "Mapa z Bluebyte Settlers II. Brak komentarza"
 
-#: ../src/map.cc:437
-msgid "No Name"
-msgstr "Bez nazwy"
+#: ../src/network.cc:332
+msgid "I have no name"
+msgstr "Nie mam nazwy"
 
-#: ../src/map.cc:438 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:145
-msgid "Unknown"
-msgstr "Nieznany"
+#: ../src/network.cc:831
+msgid "Starting network game"
+msgstr "Rozpoczynanie gry sieciowej"
 
-#: ../src/map.cc:439
-msgid "no description defined"
-msgstr "brak zdefiniowanego opisu"
+#: ../src/network.cc:834 ../src/network.cc:842
+msgid "Player"
+msgstr "Gracz"
 
-#: ../src/map.cc:441 ../src/map_variable_manager.cc:31
-msgid "<undefined>"
-msgstr "<brak>"
+#: ../src/network.cc:835
+msgid "Status"
+msgstr "Status"
 
-#: ../src/map.cc:442 ../src/playerdescrgroup.cc:34
-#: ../src/playerdescrgroup.cc:62
-msgid "Player 1"
-msgstr "Gracz 1"
+#: ../src/network.cc:846
+msgid "Waiting"
+msgstr "Oczekiwanie"
 
-#: ../src/minimap.cc:163 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
-msgid "Map"
-msgstr "Mapa"
-
-#: ../src/minimap.cc:172
-msgid "Terrain"
-msgstr "Teren"
-
-#: ../src/minimap.cc:180
-msgid "Owner"
-msgstr "Posiadacz"
-
-#: ../src/minimap.cc:188
-msgid "Flags"
-msgstr "Flagi"
-
-#: ../src/minimap.cc:196
-msgid "Roads"
-msgstr "Drogi"
-
-#: ../src/minimap.cc:204 ../src/general_statistics_menu.cc:155
-msgid "Buildings"
-msgstr "Budynki"
+#: ../src/network.cc:856
+msgid "Ready"
+msgstr "Gotowy"
 
 #: ../src/criterr.cc:69
 msgid "!! CRITICAL ERROR !!"
@@ -88,74 +67,62 @@ msgstr "Ruina"
 msgid "Widelands"
 msgstr "Widelands"
 
-#: ../src/profile.cc:1005
-msgid "Usage: "
-msgstr "Użycie:"
+#: ../src/map.cc:433
+msgid "No Name"
+msgstr "Bez nazwy"
 
-#: ../src/fieldaction.cc:277
-msgid "Action"
-msgstr "Akcja"
+#: ../src/map.cc:434 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
+msgid "Unknown"
+msgstr "Nieznany"
 
-#: ../src/fieldaction.cc:450 ../src/fieldaction.cc:599
-msgid "Build roads"
-msgstr "Buduj drogi"
+#: ../src/map.cc:435
+msgid "no description defined"
+msgstr "brak zdefiniowanego opisu"
 
-#: ../src/fieldaction.cc:454 ../src/watchwindow.cc:102
-msgid "Watch"
-msgstr "Obserwuj"
+#: ../src/map.cc:437 ../src/map_variable_manager.cc:31
+msgid "<undefined>"
+msgstr "<brak>"
 
-#: ../src/fieldaction.cc:504 ../src/building_ui.cc:1624
-msgid "Attack"
-msgstr "Atak"
+#: ../src/map.cc:438 ../src/playerdescrgroup.cc:34
+#: ../src/playerdescrgroup.cc:62
+msgid "Player 1"
+msgstr "Gracz 1"
 
-#: ../src/fieldaction.cc:577
-msgid "Build mines"
-msgstr "Buduj kopalnie"
+#: ../src/worker.cc:1559 ../src/ware.cc:72
+msgid "Doh... someone forgot the help text!"
+msgstr "...ktoś zapomniał tekstu pomocy!"
 
 #: ../src/map_variable_manager.cc:30
 msgid "Next scenario"
 msgstr "Następny scenariusz"
 
-#: ../src/s2map.cc:250
-msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Mapa z Bluebyte Settlers II. Brak komentarza"
+#: ../src/profile.cc:1005
+msgid "Usage: "
+msgstr "Użycie:"
 
-#: ../src/watchwindow.cc:116
-msgid "Follow"
-msgstr "Podążaj"
+#: ../src/minimap.cc:162 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
+msgid "Map"
+msgstr "Mapa"
 
-#: ../src/watchwindow.cc:124
-msgid "Center mainview on this"
-msgstr "Wycentruj ekran na tym"
+#: ../src/minimap.cc:171
+msgid "Terrain"
+msgstr "Teren"
 
-#: ../src/watchwindow.cc:142
-#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:59
-msgid "Close"
-msgstr "Zamknij"
+#: ../src/minimap.cc:179
+msgid "Owner"
+msgstr "Posiadacz"
 
-#: ../src/network.cc:332
-msgid "I have no name"
-msgstr "Nie mam nazwy"
+#: ../src/minimap.cc:187
+msgid "Flags"
+msgstr "Flagi"
 
-#: ../src/network.cc:831
-msgid "Starting network game"
-msgstr "Rozpoczynanie gry sieciowej"
+#: ../src/minimap.cc:195
+msgid "Roads"
+msgstr "Drogi"
 
-#: ../src/network.cc:834 ../src/network.cc:843
-msgid "Player"
-msgstr "Gracz"
-
-#: ../src/network.cc:835
-msgid "Status"
-msgstr "Status"
-
-#: ../src/network.cc:848
-msgid "Waiting"
-msgstr "Oczekiwanie"
-
-#: ../src/network.cc:859
-msgid "Ready"
-msgstr "Gotowy"
+#: ../src/minimap.cc:203 ../src/general_statistics_menu.cc:155
+msgid "Buildings"
+msgstr "Budynki"
 
 #: ../src/general_statistics_menu.cc:60 ../src/general_statistics_menu.cc:70
 msgid "General Statistics"
@@ -217,6 +184,23 @@ msgstr "8 h"
 msgid "16 h"
 msgstr "16 h"
 
+#: ../src/watchwindow.cc:102 ../src/fieldaction.cc:453
+msgid "Watch"
+msgstr "Obserwuj"
+
+#: ../src/watchwindow.cc:116
+msgid "Follow"
+msgstr "Podążaj"
+
+#: ../src/watchwindow.cc:124
+msgid "Center mainview on this"
+msgstr "Wycentruj ekran na tym"
+
+#: ../src/watchwindow.cc:142
+#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:59
+msgid "Close"
+msgstr "Zamknij"
+
 #: ../src/game_server_proto_packet_getuserinfo.cc:66
 #, c-format
 msgid "The User %s is currently not logged in or unknown to the server.\n"
@@ -234,11 +218,242 @@ msgstr "Pokaż towary"
 msgid "Show workers"
 msgstr "Pokaż pracowników"
 
+#: ../src/building_statistics_menu.cc:54
+msgid "Building Statistics"
+msgstr "Statystyki budynku"
+
+#: ../src/building_statistics_menu.cc:72 ../src/building_ui.cc:1414
+#: ../src/building_ui.cc:1858 ../src/editor/tools/editor_info_tool.cc:98
+#: ../src/editor/tools/editor_info_tool.cc:106
+#: ../src/editor/tools/editor_info_tool.cc:112
+#: ../src/editor/tools/editor_info_tool.cc:122
+#: ../src/editor/ui_menus/editor_variables_menu.cc:168
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:79
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:180
+msgid "Name"
+msgstr "Nazwa"
+
+#: ../src/building_statistics_menu.cc:73
+msgid "Prod"
+msgstr "Szturchnij"
+
+#: ../src/building_statistics_menu.cc:74
+msgid "Owned"
+msgstr "Posiadane"
+
+#: ../src/building_statistics_menu.cc:75
+msgid "Build"
+msgstr "Budowa"
+
+#: ../src/building_statistics_menu.cc:85
+msgid "Total Productivity: "
+msgstr "Produktywność:"
+
+#: ../src/building_statistics_menu.cc:91
+msgid "Owned: "
+msgstr "Posiadany:"
+
+#: ../src/building_statistics_menu.cc:100
+#: ../src/building_statistics_menu.cc:124
+#: ../src/building_statistics_menu.cc:147
+#, fuzzy
+msgid "Snow previous"
+msgstr "Pokaż towary"
+
+#: ../src/building_statistics_menu.cc:109
+#: ../src/building_statistics_menu.cc:133
+#: ../src/building_statistics_menu.cc:156
+msgid "Snow next"
+msgstr ""
+
+#: ../src/building_statistics_menu.cc:115
+msgid "In Build: "
+msgstr "W budowie:"
+
+#: ../src/building_statistics_menu.cc:139
+msgid "Jump to unproductive: "
+msgstr "Do nieproduktywnego"
+
+#: ../src/encyclopedia_window.cc:47
+msgid "Tribe ware encyclopedia"
+msgstr "Encyklopedia towarów"
+
+#: ../src/encyclopedia_window.cc:67
+msgid "Needs Ware"
+msgstr "Potrzebuje towaru"
+
+#: ../src/encyclopedia_window.cc:68
+#, fuzzy
+msgid "Consumed"
+msgstr "Zamknięty"
+
+#: ../src/encyclopedia_window.cc:69
+msgid "Group"
+msgstr ""
+
+#: ../src/building_ui.cc:152
+msgid "Destroy building?"
+msgstr "Zburzyć?"
+
+#: ../src/building_ui.cc:166
+msgid "Do you really want to destroy this "
+msgstr "Czy na pewno chcesz to zniszczyć?"
+
+#: ../src/building_ui.cc:639
+msgid "Stop"
+msgstr "Stop"
+
+#: ../src/building_ui.cc:661
+#, c-format
+msgid "Enhance to %s"
+msgstr "Ulepsz do %s"
+
+#: ../src/building_ui.cc:680
+msgid "Destroy"
+msgstr "Zniszcz"
+
+#: ../src/building_ui.cc:691 ../src/building_ui.cc:827
+#, fuzzy
+msgid "Show workarea"
+msgstr "Pokaż pracowników"
+
+#: ../src/building_ui.cc:702
+msgid "Debug"
+msgstr "Debug"
+
+#: ../src/building_ui.cc:823
+msgid "Hide workarea"
+msgstr ""
+
+#: ../src/building_ui.cc:1125 ../src/building_ui.cc:1131
+msgid "Worker Listing"
+msgstr "Pracownicy"
+
+#: ../src/building_ui.cc:1146
+msgid "Type: "
+msgstr "Typ:"
+
+#: ../src/building_ui.cc:1151
+msgid "Experience: "
+msgstr "Doświadczenie:"
+
+#: ../src/building_ui.cc:1156
+msgid "Trying to become: "
+msgstr "Chce być:"
+
+#: ../src/building_ui.cc:1313
+msgid "Show worker listing"
+msgstr "Pokaż listę pracowników"
+
+#: ../src/building_ui.cc:1415 ../src/building_ui.cc:1859
+msgid "HP"
+msgstr "HP"
+
+#: ../src/building_ui.cc:1416 ../src/building_ui.cc:1860
+msgid "AT"
+msgstr "AT"
+
+#: ../src/building_ui.cc:1417 ../src/building_ui.cc:1861
+msgid "DE"
+msgstr "DE"
+
+#: ../src/building_ui.cc:1418 ../src/building_ui.cc:1862
+msgid "EV"
+msgstr "EV"
+
+#: ../src/building_ui.cc:1419 ../src/building_ui.cc:1863
+msgid "Level"
+msgstr "Poziom"
+
+#: ../src/building_ui.cc:1440 ../src/building_ui.cc:1887
+msgid "Capacity"
+msgstr "Pojemność"
+
+#: ../src/building_ui.cc:1601
+msgid "Training Options"
+msgstr "Opcje treningu"
+
+#: ../src/building_ui.cc:1628
+msgid "Training mode : "
+msgstr "Ustawienie treningu:"
+
+#: ../src/building_ui.cc:1629
+msgid "Balanced"
+msgstr "zrównoważony"
+
+#: ../src/building_ui.cc:1657
+msgid "Hit Points"
+msgstr "Punkty uderzeń"
+
+#: ../src/building_ui.cc:1674 ../src/fieldaction.cc:503
+msgid "Attack"
+msgstr "Atak"
+
+#: ../src/building_ui.cc:1691
+msgid "Defense"
+msgstr "Obrona"
+
+#: ../src/building_ui.cc:1709
+msgid "Evade"
+msgstr "Wymykanie"
+
+#: ../src/building_ui.cc:1749
+msgid "Make heroes"
+msgstr "Uczyń herosa"
+
+#: ../src/building_ui.cc:1751
+msgid "Balanced army"
+msgstr "Zbilansowana armia"
+
+#: ../src/building_ui.cc:1898
+msgid "xx"
+msgstr "xx"
+
+#: ../src/trigger_null.cc:34
+msgid "Null Trigger"
+msgstr "Pusty wyzwalacz"
+
+#: ../src/trainingsite.cc:216
+msgid "Resting"
+msgstr "Odpoczywa"
+
+#: ../src/trainingsite.cc:218
+msgid "Not Working"
+msgstr "Nie pracuje"
+
+#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
+msgid "Move View"
+msgstr "Przesuń widok"
+
 #: ../src/game_objectives_menu.cc:31
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:163
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:168
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:171
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:177
 msgid "Objectives Menu"
 msgstr "Menu celów"
+
+#: ../src/interactive_player.cc:108 ../src/editor/editorinteractive.cc:95
+msgid "Menu"
+msgstr "Menu"
+
+#: ../src/interactive_player.cc:116 ../src/editor/editorinteractive.cc:119
+msgid "Minimap"
+msgstr "Mini-mapa"
+
+#: ../src/interactive_player.cc:124 ../src/editor/editorinteractive.cc:127
+msgid "Buildhelp"
+msgstr "Pomoc budowy"
+
+#: ../src/interactive_player.cc:132
+msgid "Tribe's ware encyclopedia"
+msgstr "Encyklopedia towarów"
+
+#: ../src/interactive_player.cc:288
+msgid "PAUSE"
+msgstr "PAUZA"
+
+#: ../src/interactive_player.cc:333
+msgid "Message: "
+msgstr "Wiadomość: "
 
 #: ../src/productionsite.cc:232
 msgid "(not occupied)"
@@ -252,88 +467,93 @@ msgstr "Góra"
 msgid "DOWN"
 msgstr "Dół"
 
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Teksttestowy"
-
-#: ../src/trigger_null.cc:34
-msgid "Null Trigger"
-msgstr "Pusty wyzwalacz"
-
-#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
-msgid "Move View"
-msgstr "Przesuń widok"
-
-#: ../src/game_main_menu_save_game.cc:46
-msgid "Save Game"
-msgstr "Zapisz grę"
-
-#: ../src/game_main_menu_save_game.cc:68 ../src/game_main_menu_load_game.cc:65
-msgid "Map Name: "
-msgstr "Nazwa mapy:"
-
-#: ../src/game_main_menu_save_game.cc:73 ../src/game_main_menu_load_game.cc:70
-msgid "Game Time: "
-msgstr "Czas gry:"
-
-#: ../src/game_main_menu_save_game.cc:85 ../src/game_main_menu_load_game.cc:82
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:55
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:117
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:111
-msgid "OK"
-msgstr "OK"
-
-#: ../src/game_main_menu_save_game.cc:93 ../src/game_main_menu_load_game.cc:90
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:82
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:305
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:209
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:126
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:81
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:65
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:120
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:138
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:155
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:246
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:172
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:209
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:244
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: ../src/game_main_menu_save_game.cc:234
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:331
-msgid "A File with the name "
-msgstr "Plik z tą nazwa "
-
-#: ../src/game_main_menu_save_game.cc:236
-msgid " already exists. Overwrite?"
-msgstr " już istnieje. Nadpisać?"
-
-#: ../src/game_main_menu_save_game.cc:237
-#: ../src/game_main_menu_save_game.cc:259
-msgid "Save Game Error!!"
-msgstr "Błąd zapisywania gry!"
-
-#: ../src/game_main_menu_save_game.cc:257
-msgid ""
-"Game Saving Error!\n"
-"Saved Game-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-"Błąd zapisywania!\n"
-"Plik zapisu może być uszkodzony!\n"
-"\n"
-"Przyczyna:\n"
-
 #: ../src/event_set_null_trigger.cc:39
 msgid "Set Null Trigger"
 msgstr "Ustaw pusty wyzwalacz"
+
+#: ../src/game_debug_ui.cc:269
+msgid "Debug Field"
+msgstr "Pole usuwania błędów"
+
+#: ../src/game_debug_ui.cc:316
+msgid "height:"
+msgstr "wysokość:"
+
+#: ../src/event_unhide_area.cc:37
+msgid "Unhide Area"
+msgstr "Odkryj teren"
+
+#: ../src/militarysite.cc:145
+#, c-format
+msgid "%d soldier (+%d)"
+msgid_plural "%d soldiers (+%d)"
+msgstr[0] "%d żołnierz (+%d)"
+msgstr[1] "%d żołnierzy (+%d)"
+msgstr[2] "%d żołnierzy (+%d)"
+
+#: ../src/militarysite.cc:147
+#, c-format
+msgid "%d soldier"
+msgid_plural "%d soldiers"
+msgstr[0] "%d żołnierz"
+msgstr[1] "%d żołnierzy"
+msgstr[2] "%d żołnierzy"
+
+#: ../src/event_allow_building.cc:39
+msgid "Allow Building"
+msgstr "Pozwól budynkowi"
+
+#: ../src/playerdescrgroup.cc:35
+msgid "Player 2"
+msgstr "Gracz 2"
+
+#: ../src/playerdescrgroup.cc:36
+msgid "Player 3"
+msgstr "Gracz 3"
+
+#: ../src/playerdescrgroup.cc:37
+msgid "Player 4"
+msgstr "Gracz 4"
+
+#: ../src/playerdescrgroup.cc:38
+msgid "Player 5"
+msgstr "Gracz 5"
+
+#: ../src/playerdescrgroup.cc:39
+msgid "Player 6"
+msgstr "Gracz 6"
+
+#: ../src/playerdescrgroup.cc:40
+msgid "Player 7"
+msgstr "Gracz 7"
+
+#: ../src/playerdescrgroup.cc:41
+msgid "Player 8"
+msgstr "Gracz 9"
+
+#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
+msgid "Computer"
+msgstr "Komputer"
+
+#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
+msgid "Human"
+msgstr "Człowiek"
+
+#: ../src/fieldaction.cc:276
+msgid "Action"
+msgstr "Akcja"
+
+#: ../src/fieldaction.cc:449 ../src/fieldaction.cc:598
+msgid "Build roads"
+msgstr "Buduj drogi"
+
+#: ../src/fieldaction.cc:576
+msgid "Build mines"
+msgstr "Buduj kopalnie"
+
+#: ../src/waresdisplay.cc:56
+msgid "Testtext"
+msgstr "Teksttestowy"
 
 #: ../src/game_options_menu.cc:46 ../src/game_main_menu.cc:98
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
@@ -373,66 +593,6 @@ msgstr "Wczytaj grę"
 msgid "Exit game"
 msgstr "Opuść grę"
 
-#: ../src/playerdescrgroup.cc:35
-msgid "Player 2"
-msgstr "Gracz 2"
-
-#: ../src/playerdescrgroup.cc:36
-msgid "Player 3"
-msgstr "Gracz 3"
-
-#: ../src/playerdescrgroup.cc:37
-msgid "Player 4"
-msgstr "Gracz 4"
-
-#: ../src/playerdescrgroup.cc:38
-msgid "Player 5"
-msgstr "Gracz 5"
-
-#: ../src/playerdescrgroup.cc:39
-msgid "Player 6"
-msgstr "Gracz 6"
-
-#: ../src/playerdescrgroup.cc:40
-msgid "Player 7"
-msgstr "Gracz 7"
-
-#: ../src/playerdescrgroup.cc:41
-msgid "Player 8"
-msgstr "Gracz 9"
-
-#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
-msgid "Computer"
-msgstr "Komputer"
-
-#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
-msgid "Human"
-msgstr "Człowiek"
-
-#: ../src/event_unhide_area.cc:37
-msgid "Unhide Area"
-msgstr "Odkryj teren"
-
-#: ../src/event_allow_building.cc:39
-msgid "Allow Building"
-msgstr "Pozwól budynkowi"
-
-#: ../src/trainingsite.cc:215
-msgid "Resting"
-msgstr "Odpoczywa"
-
-#: ../src/trainingsite.cc:217
-msgid "Not Working"
-msgstr "Nie pracuje"
-
-#: ../src/game_debug_ui.cc:269
-msgid "Debug Field"
-msgstr "Pole usuwania błędów"
-
-#: ../src/game_debug_ui.cc:316
-msgid "height:"
-msgstr "wysokość:"
-
 #: ../src/event_message_box.cc:41
 msgid "Message Box"
 msgstr "Informacja"
@@ -454,122 +614,13 @@ msgstr "Kontynuuj"
 msgid "built"
 msgstr "odbudować"
 
-#: ../src/building_ui.cc:152
-msgid "Destroy building?"
-msgstr "Zburzyć?"
+#: ../src/trigger_building.cc:40
+msgid "Building Trigger"
+msgstr "Wyzwalacz budowania"
 
-#: ../src/building_ui.cc:164
-msgid "Do you really want to destroy this "
-msgstr "Czy na pewno chcesz to zniszczyć?"
-
-#: ../src/building_ui.cc:617
-msgid "Stop"
-msgstr "Stop"
-
-#: ../src/building_ui.cc:639
-#, c-format
-msgid "Enhance to %s"
-msgstr "Ulepsz do %s"
-
-#: ../src/building_ui.cc:658
-msgid "Destroy"
-msgstr "Zniszcz"
-
-#: ../src/building_ui.cc:669
-msgid "Debug"
-msgstr "Debug"
-
-#: ../src/building_ui.cc:1053 ../src/building_ui.cc:1059
-msgid "Worker Listing"
-msgstr "Pracownicy"
-
-#: ../src/building_ui.cc:1074
-msgid "Type: "
-msgstr "Typ:"
-
-#: ../src/building_ui.cc:1079
-msgid "Experience: "
-msgstr "Doświadczenie:"
-
-#: ../src/building_ui.cc:1084
-msgid "Trying to become: "
-msgstr "Chce być:"
-
-#: ../src/building_ui.cc:1246
-msgid "Show worker listing"
-msgstr "Pokaż listę pracowników"
-
-#: ../src/building_ui.cc:1347 ../src/building_ui.cc:1809
-#: ../src/building_statistics_menu.cc:72
-#: ../src/editor/tools/editor_info_tool.cc:90
-#: ../src/editor/tools/editor_info_tool.cc:98
-#: ../src/editor/tools/editor_info_tool.cc:104
-#: ../src/editor/tools/editor_info_tool.cc:113
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:76
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:173
-#: ../src/editor/ui_menus/editor_variables_menu.cc:167
-msgid "Name"
-msgstr "Nazwa"
-
-#: ../src/building_ui.cc:1348 ../src/building_ui.cc:1810
-msgid "HP"
-msgstr "HP"
-
-#: ../src/building_ui.cc:1349 ../src/building_ui.cc:1811
-msgid "AT"
-msgstr "AT"
-
-#: ../src/building_ui.cc:1350 ../src/building_ui.cc:1812
-msgid "DE"
-msgstr "DE"
-
-#: ../src/building_ui.cc:1351 ../src/building_ui.cc:1813
-msgid "EV"
-msgstr "EV"
-
-#: ../src/building_ui.cc:1352 ../src/building_ui.cc:1814
-msgid "Level"
-msgstr "Poziom"
-
-#: ../src/building_ui.cc:1373 ../src/building_ui.cc:1838
-msgid "Capacity"
-msgstr "Pojemność"
-
-#: ../src/building_ui.cc:1552
-msgid "Training Options"
-msgstr "Opcje treningu"
-
-#: ../src/building_ui.cc:1578
-msgid "Training mode : "
-msgstr "Ustawienie treningu:"
-
-#: ../src/building_ui.cc:1579
-msgid "Balanced"
-msgstr "zrównoważony"
-
-#: ../src/building_ui.cc:1607
-msgid "Hit Points"
-msgstr "Punkty uderzeń"
-
-#: ../src/building_ui.cc:1641
-msgid "Defense"
-msgstr "Obrona"
-
-#: ../src/building_ui.cc:1659
-msgid "Evade"
-msgstr "Wymykanie"
-
-#: ../src/building_ui.cc:1699
-msgid "Make heroes"
-msgstr "Uczyń herosa"
-
-#: ../src/building_ui.cc:1701
-msgid "Balanced army"
-msgstr "Zbilansowana armia"
-
-#: ../src/building_ui.cc:1849
-msgid "xx"
-msgstr "xx"
+#: ../src/trigger_building.cc:47
+msgid "<unset>"
+msgstr "<nieustawiony>"
 
 #: ../src/ware_statistics_menu.cc:347 ../src/ware_statistics_menu.cc:403
 msgid "Ware Statistics"
@@ -578,38 +629,6 @@ msgstr "Statystyki magazynu"
 #: ../src/trigger_time.cc:36
 msgid "Time Trigger"
 msgstr "Wyzwalacz czasowy"
-
-#: ../src/interactive_player.cc:108 ../src/editor/editorinteractive.cc:97
-msgid "Menu"
-msgstr "Menu"
-
-#: ../src/interactive_player.cc:116 ../src/editor/editorinteractive.cc:121
-msgid "Minimap"
-msgstr "Mini-mapa"
-
-#: ../src/interactive_player.cc:124 ../src/editor/editorinteractive.cc:129
-msgid "Buildhelp"
-msgstr "Pomoc budowy"
-
-#: ../src/interactive_player.cc:132
-msgid "Tribe's ware encyclopedia"
-msgstr "Encyklopedia towarów"
-
-#: ../src/interactive_player.cc:288
-msgid "PAUSE"
-msgstr "PAUZA"
-
-#: ../src/interactive_player.cc:333
-msgid "Message: "
-msgstr "Wiadomość: "
-
-#: ../src/trigger_building.cc:40
-msgid "Building Trigger"
-msgstr "Wyzwalacz budowania"
-
-#: ../src/trigger_building.cc:47
-msgid "<unset>"
-msgstr "<nieustawiony>"
 
 #: ../src/game_main_menu.cc:40 ../src/editor/ui_menus/editor_main_menu.cc:41
 msgid "Main Menu"
@@ -627,7 +646,7 @@ msgstr "Statystyki towarów"
 msgid "Building statistics"
 msgstr "Statystyki budynku"
 
-#: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:161
+#: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:159
 msgid "Objectives"
 msgstr "Cele"
 
@@ -647,42 +666,76 @@ msgstr "Wyślij"
 msgid "Show messages as overlays:"
 msgstr "Pokaż wiadomość jako nakrycie:"
 
-#: ../src/game_main_menu_load_game.cc:43 ../src/game_main_menu_load_game.cc:47
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
-msgid "Load Game"
-msgstr "Wczytaj grę"
+#: ../src/game_main_menu_save_game.cc:46
+msgid "Save Game"
+msgstr "Zapisz grę"
 
-#: ../src/game_main_menu_load_game.cc:217
+#: ../src/game_main_menu_save_game.cc:68 ../src/game_main_menu_load_game.cc:65
+msgid "Map Name: "
+msgstr "Nazwa mapy:"
+
+#: ../src/game_main_menu_save_game.cc:73 ../src/game_main_menu_load_game.cc:70
+msgid "Game Time: "
+msgstr "Czas gry:"
+
+#: ../src/game_main_menu_save_game.cc:85 ../src/game_main_menu_load_game.cc:82
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:55
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:117
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:111
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
+msgid "OK"
+msgstr "OK"
+
+#: ../src/game_main_menu_save_game.cc:93 ../src/game_main_menu_load_game.cc:90
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:126
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:305
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:209
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:81
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:120
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../src/editor/ui_menus/trigger_null_option_menu.cc:65
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:155
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:138
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:246
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:82
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:172
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:244
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:209
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: ../src/game_main_menu_save_game.cc:233
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:348
+msgid "A File with the name "
+msgstr "Plik z tą nazwa "
+
+#: ../src/game_main_menu_save_game.cc:235
+msgid " already exists. Overwrite?"
+msgstr " już istnieje. Nadpisać?"
+
+#: ../src/game_main_menu_save_game.cc:236
+#: ../src/game_main_menu_save_game.cc:258
+msgid "Save Game Error!!"
+msgstr "Błąd zapisywania gry!"
+
+#: ../src/game_main_menu_save_game.cc:256
 msgid ""
-"Game Loading Error!\n"
+"Game Saving Error!\n"
+"Saved Game-File may be corrupt!\n"
+"\n"
 "Reason given:\n"
 msgstr ""
-"Błąd ładowania!\n"
+"Błąd zapisywania!\n"
+"Plik zapisu może być uszkodzony!\n"
+"\n"
 "Przyczyna:\n"
-
-#: ../src/game_main_menu_load_game.cc:219
-msgid "Load Game Error!!"
-msgstr "Błąd ładowania gry!"
 
 #: ../src/event_conquer_area.cc:36
 msgid "Conquer Area"
 msgstr "Pole bitwy"
-
-#: ../src/militarysite.cc:145
-#, c-format
-msgid "%d soldier (+%d)"
-msgid_plural "%d soldiers (+%d)"
-msgstr[0] "%d żołnierz (+%d)"
-msgstr[1] "%d żołnierzy (+%d)"
-msgstr[2] "%d żołnierzy (+%d)"
-
-#: ../src/militarysite.cc:147
-#, c-format
-msgid "%d soldier"
-msgid_plural "%d soldiers"
-msgstr[0] "%d żołnierz"
-msgstr[1] "%d żołnierzy"
-msgstr[2] "%d żołnierzy"
 
 #: ../src/game_server_proto_packet_connect.cc:72
 #, c-format
@@ -708,38 +761,6 @@ msgstr "Serwer nie obsługuje Widelands!\n"
 msgid "The Room %s is currently not logged in or unknown to the server.\n"
 msgstr "Pokój %s jest obecnie nie zalogowany lub nieznany dla serwera.\n"
 
-#: ../src/building_statistics_menu.cc:55 ../src/building_statistics_menu.cc:67
-msgid "Building Statistics"
-msgstr "Statystyki budynku"
-
-#: ../src/building_statistics_menu.cc:73
-msgid "Prod"
-msgstr "Szturchnij"
-
-#: ../src/building_statistics_menu.cc:74
-msgid "Owned"
-msgstr "Posiadane"
-
-#: ../src/building_statistics_menu.cc:75
-msgid "Build"
-msgstr "Budowa"
-
-#: ../src/building_statistics_menu.cc:85
-msgid "Total Productivity: "
-msgstr "Produktywność:"
-
-#: ../src/building_statistics_menu.cc:91
-msgid "Owned: "
-msgstr "Posiadany:"
-
-#: ../src/building_statistics_menu.cc:111
-msgid "In Build: "
-msgstr "W budowie:"
-
-#: ../src/building_statistics_menu.cc:131
-msgid "Jump to unproductive: "
-msgstr "Do nieproduktywnego"
-
 #: ../src/game_server_proto_packet_chatmessage.cc:69
 #, c-format
 msgid ""
@@ -749,49 +770,92 @@ msgstr ""
 "Serwer błędnie odpowiedział na pakiet chatu. Powinien wysłać %i ale wysłał %"
 "i. Zignorowano."
 
-#: ../src/encyclopedia_window.cc:42
-msgid "Tribe ware encyclopedia"
-msgstr "Encyklopedia towarów"
+#: ../src/game_main_menu_load_game.cc:43 ../src/game_main_menu_load_game.cc:47
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
+msgid "Load Game"
+msgstr "Wczytaj grę"
 
-#: ../src/encyclopedia_window.cc:45
-msgid "Ware"
-msgstr "Towar"
+#: ../src/game_main_menu_load_game.cc:215
+msgid ""
+"Game Loading Error!\n"
+"Reason given:\n"
+msgstr ""
+"Błąd ładowania!\n"
+"Przyczyna:\n"
 
-#: ../src/encyclopedia_window.cc:51
-msgid "Is Produced by"
-msgstr "Produkowany przez"
+#: ../src/game_main_menu_load_game.cc:217
+msgid "Load Game Error!!"
+msgstr "Błąd ładowania gry!"
 
-#: ../src/encyclopedia_window.cc:55
-msgid "Needs Ware"
-msgstr "Potrzebuje towaru"
-
-#: ../src/editor/editorinteractive.cc:105
+#: ../src/editor/editorinteractive.cc:103
 msgid "Tool"
 msgstr "Narzędzie"
 
-#: ../src/editor/editorinteractive.cc:113
+#: ../src/editor/editorinteractive.cc:111
 msgid "Toolsize"
 msgstr "Rozmiar narzędzia"
 
-#: ../src/editor/editorinteractive.cc:137
+#: ../src/editor/editorinteractive.cc:135
 msgid "Players"
 msgstr "Gracze"
 
-#: ../src/editor/editorinteractive.cc:145
+#: ../src/editor/editorinteractive.cc:143
 msgid "Events"
 msgstr "Zdarzenia"
 
-#: ../src/editor/editorinteractive.cc:153
+#: ../src/editor/editorinteractive.cc:151
 msgid "Variables"
 msgstr "Zmienne"
 
-#: ../src/editor/editorinteractive.cc:229
+#: ../src/editor/editorinteractive.cc:227
 msgid "Map unsaved"
 msgstr "Mapa niezapisana"
 
-#: ../src/editor/editorinteractive.cc:229
+#: ../src/editor/editorinteractive.cc:227
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Mapa nie jest zapisana, czy na pewno chcesz wyjść?"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
+msgid "Lobby"
+msgstr "Lobby"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:97
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:48
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:80
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:59
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:60
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:81
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:53
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:45
+#: ../src/editor/ui_menus/editor_variables_menu.cc:86
+#: ../src/editor/ui_menus/editor_variables_menu.cc:185
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:117
+msgid "Back"
+msgstr "Powrót"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
+#, c-format
+msgid "User %s is using \"%s\" in room \"%s\"\n"
+msgstr "Użytkownik %s używa \"%s\" w pokoju \"%s\"\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
+#, c-format
+msgid "User %s has entered the room %s !\n"
+msgstr "Użytkownik %s wszedł do pokoju %s !\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
+#, c-format
+msgid "User %s has left the room %s !\n"
+msgstr "Użytkownik %s opuścił pokój %s !\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:233
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
+msgid "Critical Connection Error!"
+msgstr "Krytyczny błąd połączenia!"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
+msgid "Server disconnected unexpectedly!"
+msgstr "Serwer niespodziewanie się rozłączył!"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:59
 msgid "Apply"
@@ -849,53 +913,54 @@ msgstr "Chwytaj okna do brzegów"
 msgid "System default language"
 msgstr "Ustaw język domyślny"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:46
-msgid "Launch Game"
-msgstr "Uruchom grę"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:62
+msgid "Choose saved game!"
+msgstr "Wybierz zapisany stan gry!"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:53
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:45
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:60
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:62
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:59
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:48
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:81
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:97
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:111
-#: ../src/editor/ui_menus/editor_variables_menu.cc:87
-#: ../src/editor/ui_menus/editor_variables_menu.cc:184
-msgid "Back"
-msgstr "Powrót"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:65
+#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:53
+msgid "Map Name:"
+msgstr "Nazwa mapy: "
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:60
-msgid "Start game"
-msgstr "Rozpocznij grę"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:67
+msgid "Gametime:"
+msgstr "Czas gry:"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:71
-msgid "Select map"
-msgstr "Wybierz mapę"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:41
+msgid "Tutorial Campaign: A new Kingdom"
+msgstr "Samouczek kampanii: Nowe królestwo"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:139
-msgid "(no map)"
-msgstr "(żadna)"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:50
+msgid "Mission 1: Eyes in the Darkness - Game Basics"
+msgstr "Misja 1: Oczy w ciemności - podstawy gry"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:151
-#: ../src/editor/ui_menus/editor_player_menu.cc:271
-msgid "Player "
-msgstr "Gracz"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:57
+msgid ""
+"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgstr ""
+"Misja 2: Miejsce nazwane domem - Kopalnie, ekspansja, zaawansowana produkcja"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
-msgid "Internet Options"
-msgstr "Opcje internetu"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:64
+#, fuzzy
+msgid "Empire Tutorial Campaign"
+msgstr "Samouczek kampanii"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:38
-msgid "Run Game"
-msgstr "Uruchom grę"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:73
+msgid "Empire 1: The Strands of Malac' Mor"
+msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:55
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
-msgid "nobody"
-msgstr "nikt"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:29
+msgid "Single Player Menu"
+msgstr "Menu pojedynczego gracza"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
+msgid "New Game"
+msgstr "Nowa gra"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
+#, fuzzy
+msgid "Campaigns"
+msgstr "Samouczek kampanii"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
 msgid "Begin Network Game"
@@ -914,9 +979,14 @@ msgid "Play in Internet"
 msgstr "Graj w internecie"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:77
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:223
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:213
 msgid "LAN games"
 msgstr "Gry na LAN-ie"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:53
+msgid "nobody"
+msgstr "nikt"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:86
 msgid "Host"
@@ -926,57 +996,18 @@ msgstr "Host"
 msgid "State"
 msgstr "Status"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:138
 msgid "Open"
 msgstr "Otwarty"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:142
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
 msgid "Closed"
 msgstr "Zamknięty"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:216
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:238
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:206
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:228
 msgid "GGZ games"
 msgstr "Gry GGZ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:38
-msgid "Tutorial Campaign: A new Kingdom"
-msgstr "Samouczek kampanii: Nowe królestwo"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:47
-msgid "Mission 1: Eyes in the Darkness - Game Basics"
-msgstr "Misja 1: Oczy w ciemności - podstawy gry"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:54
-msgid ""
-"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
-msgstr ""
-"Misja 2: Miejsce nazwane domem - Kopalnie, ekspansja, zaawansowana produkcja"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:29
-msgid "Single Player Menu"
-msgstr "Menu pojedynczego gracza"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
-msgid "New Game"
-msgstr "Nowa gra"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
-msgid "Tutorial Campaign"
-msgstr "Samouczek kampanii"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:62
-msgid "Choose saved game!"
-msgstr "Wybierz zapisany stan gry!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:65
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:53
-msgid "Map Name:"
-msgstr "Nazwa mapy: "
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:67
-msgid "Gametime:"
-msgstr "Czas gry:"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:48
 msgid "Choose your map!"
@@ -990,8 +1021,8 @@ msgstr "Wczytaj mapę jako scenariusz: "
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:73
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:56
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:44
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:68
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:62
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:68
 #: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:55
 #: ../src/editor/ui_menus/event_move_view_option_menu.cc:50
 #: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:53
@@ -1046,202 +1077,237 @@ msgstr "Opuść grę"
 msgid "(C) 2002-2006 by the Widelands Development Team"
 msgstr "(C) 2002-2006 Zespół Rozwojowy Widelands"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
-msgid "Lobby"
-msgstr "Lobby"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:46
+msgid "Launch Game"
+msgstr "Uruchom grę"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
-#, c-format
-msgid "User %s is using \"%s\" in room \"%s\"\n"
-msgstr "Użytkownik %s używa \"%s\" w pokoju \"%s\"\n"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:60
+msgid "Start game"
+msgstr "Rozpocznij grę"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
-#, c-format
-msgid "User %s has entered the room %s !\n"
-msgstr "Użytkownik %s wszedł do pokoju %s !\n"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:71
+msgid "Select map"
+msgstr "Wybierz mapę"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
-#, c-format
-msgid "User %s has left the room %s !\n"
-msgstr "Użytkownik %s opuścił pokój %s !\n"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:138
+msgid "(no map)"
+msgstr "(żadna)"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:233
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
-msgid "Critical Connection Error!"
-msgstr "Krytyczny błąd połączenia!"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
+#: ../src/editor/ui_menus/editor_player_menu.cc:271
+msgid "Player "
+msgstr "Gracz"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
-msgid "Server disconnected unexpectedly!"
-msgstr "Serwer niespodziewanie się rozłączył!"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
+msgid "Internet Options"
+msgstr "Opcje internetu"
 
-#: ../src/editor/tools/editor_info_tool.cc:45
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:38
+msgid "Run Game"
+msgstr "Uruchom grę"
+
+#: ../src/editor/tools/editor_info_tool.cc:48
 msgid "Field Information"
 msgstr "Informacje o polu"
 
-#: ../src/editor/tools/editor_info_tool.cc:53
+#: ../src/editor/tools/editor_info_tool.cc:56
 msgid "1) Field Infos"
 msgstr "1) Informacje o polu"
 
-#: ../src/editor/tools/editor_info_tool.cc:54
+#: ../src/editor/tools/editor_info_tool.cc:60
 msgid "Coordinates"
 msgstr "Koordynaty"
 
-#: ../src/editor/tools/editor_info_tool.cc:55
+#: ../src/editor/tools/editor_info_tool.cc:63
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:76
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:151
 msgid "Height"
 msgstr "Wysokość"
 
-#: ../src/editor/tools/editor_info_tool.cc:56
+#: ../src/editor/tools/editor_info_tool.cc:64
 msgid " Caps: "
 msgstr "Możliwości:"
 
-#: ../src/editor/tools/editor_info_tool.cc:58
+#: ../src/editor/tools/editor_info_tool.cc:66
 msgid "small"
 msgstr "mały"
 
-#: ../src/editor/tools/editor_info_tool.cc:59
+#: ../src/editor/tools/editor_info_tool.cc:67
 msgid "medium"
 msgstr "średni"
 
-#: ../src/editor/tools/editor_info_tool.cc:60
+#: ../src/editor/tools/editor_info_tool.cc:68
 msgid "big"
 msgstr "duży"
 
-#: ../src/editor/tools/editor_info_tool.cc:63
+#: ../src/editor/tools/editor_info_tool.cc:71
 msgid " flag"
 msgstr " flaga"
 
-#: ../src/editor/tools/editor_info_tool.cc:64
+#: ../src/editor/tools/editor_info_tool.cc:72
 msgid " mine"
 msgstr " kopalnia"
 
-#: ../src/editor/tools/editor_info_tool.cc:65
+#: ../src/editor/tools/editor_info_tool.cc:73
 msgid " port"
 msgstr "port"
 
-#: ../src/editor/tools/editor_info_tool.cc:66
+#: ../src/editor/tools/editor_info_tool.cc:74
 msgid " walk"
 msgstr "idź"
 
-#: ../src/editor/tools/editor_info_tool.cc:67
+#: ../src/editor/tools/editor_info_tool.cc:75
 msgid " swim"
 msgstr "płyń"
 
-#: ../src/editor/tools/editor_info_tool.cc:69
+#: ../src/editor/tools/editor_info_tool.cc:77
 msgid "Owned by"
 msgstr "Posiadane przez"
 
-#: ../src/editor/tools/editor_info_tool.cc:70
+#: ../src/editor/tools/editor_info_tool.cc:78
 msgid "Has base immovable"
 msgstr "Jest nieruchomy"
 
-#: ../src/editor/tools/editor_info_tool.cc:71
+#: ../src/editor/tools/editor_info_tool.cc:79
 msgid "Has bobs"
 msgstr "Has bobs:"
 
-#: ../src/editor/tools/editor_info_tool.cc:75
+#: ../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid " Has resources: No\n"
 msgstr " Posiada surowce: Nie\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:77
+#: ../src/editor/tools/editor_info_tool.cc:85
 msgid "Has resources: Yes"
 msgstr " Posiada surowce: Tak"
 
-#: ../src/editor/tools/editor_info_tool.cc:77
+#: ../src/editor/tools/editor_info_tool.cc:85
 msgid "amount of"
 msgstr "ilość"
 
-#: ../src/editor/tools/editor_info_tool.cc:81
+#: ../src/editor/tools/editor_info_tool.cc:89
 msgid "Start resources amount"
 msgstr "Ilość początkowych surowców"
 
-#: ../src/editor/tools/editor_info_tool.cc:84
+#: ../src/editor/tools/editor_info_tool.cc:92
 #, c-format
 msgid " Roads: TODO!\n"
 msgstr " Drogi: DOZROBIENIA!\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:87
+#: ../src/editor/tools/editor_info_tool.cc:95
 msgid "2) Right Terrain Info\n"
 msgstr "2) Informacje o terenie\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:91
 #: ../src/editor/tools/editor_info_tool.cc:99
+#: ../src/editor/tools/editor_info_tool.cc:107
 msgid "Texture Number"
 msgstr "Numer tekstury"
 
-#: ../src/editor/tools/editor_info_tool.cc:95
+#: ../src/editor/tools/editor_info_tool.cc:103
 msgid "3) Down Terrain Info\n"
 msgstr "3) Informacje o terenie\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:103
+#: ../src/editor/tools/editor_info_tool.cc:111
 msgid "4) Map Info"
 msgstr "4) Informacje o mapie"
 
-#: ../src/editor/tools/editor_info_tool.cc:105
+#: ../src/editor/tools/editor_info_tool.cc:113
 msgid "Size"
 msgstr "Rozmiar"
 
-#: ../src/editor/tools/editor_info_tool.cc:106
 #: ../src/editor/tools/editor_info_tool.cc:114
+#: ../src/editor/tools/editor_info_tool.cc:124
 msgid "Author"
 msgstr "Autor"
 
-#: ../src/editor/tools/editor_info_tool.cc:107
 #: ../src/editor/tools/editor_info_tool.cc:115
+#: ../src/editor/tools/editor_info_tool.cc:126
 msgid "Descr"
 msgstr "Opis"
 
-#: ../src/editor/tools/editor_info_tool.cc:108
+#: ../src/editor/tools/editor_info_tool.cc:116
 #: ../src/editor/ui_menus/editor_player_menu.cc:79
 msgid "Number of Players"
 msgstr "Ilość graczy"
 
-#: ../src/editor/tools/editor_info_tool.cc:109
+#: ../src/editor/tools/editor_info_tool.cc:117
 msgid " TODO: more information (number of resources, number of terrains...)"
 msgstr " DOZROBIENIA: więcej informacji (liczba surowców, liczba terenów...)"
 
-#: ../src/editor/tools/editor_info_tool.cc:112
+#: ../src/editor/tools/editor_info_tool.cc:121
 msgid "5) World Info"
 msgstr "5) Informacje o świecie"
 
-#: ../src/editor/tools/editor_info_tool.cc:116
+#: ../src/editor/tools/editor_info_tool.cc:128
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
 msgstr " DOZROBIENIA -- więcej informacji (liczba produktów/bobs(?)...)\n"
 
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
-#: ../src/editor/ui_menus/editor_event_menu.cc:125
-msgid "New Event"
-msgstr "Nowe"
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:52
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:57
+#: ../src/editor/ui_menus/editor_main_menu.cc:81
+msgid "Save Map"
+msgstr "Zapisz mapę"
 
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:47
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:137
-msgid "Available Events: "
-msgstr "Dostępne zdarzenia: "
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:78
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:54
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:74
+msgid "Name: "
+msgstr "Nazwa: "
 
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:60
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:59
-msgid "Description: "
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:83
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:79
+msgid "Author: "
+msgstr "Autor: "
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:88
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:84
+msgid "Size: "
+msgstr "Rozmiar: "
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:93
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:89
+msgid "World: "
+msgstr "Światy: "
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:98
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:94
+msgid "Players: "
+msgstr "Gracze: "
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:104
+#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:100
+msgid "Descr: "
 msgstr "Opis: "
 
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:71
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:297
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:200
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:70
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:157
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:56
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:129
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:148
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:104
-#: ../src/editor/ui_menus/editor_variables_menu.cc:178
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:237
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:163
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:200
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:235
-msgid "Ok"
-msgstr "OK"
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:133
+#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
+msgid "Make Directory"
+msgstr "Stwórz katalog"
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:181
+msgid "unnamed"
+msgstr "nienazwany"
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:350
+msgid " exists already. Overwrite?"
+msgstr " już istnieje. Nadpisać?"
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:351
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:376
+msgid "Save Map Error!!"
+msgstr "Błąd zapisywania mapy!"
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:374
+msgid ""
+"Map Saving Error!\n"
+"Saved Map-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+"Błąd zapisywania mapy!\n"
+"Plik zapisanej mapy może być uszkodzony!\n"
+"\n"
+"Przyczyna:\n"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:59
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
@@ -1253,12 +1319,6 @@ msgstr "Nowa mapa"
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:56
 msgid "Load Map"
 msgstr "Wczytaj mapę"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:81
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:52
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:57
-msgid "Save Map"
-msgstr "Zapisz mapę"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:92
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:38
@@ -1307,98 +1367,27 @@ msgstr "Obecna pozycja: "
 msgid "Area: "
 msgstr "Teren: "
 
+#: ../src/editor/ui_menus/trigger_building_option_menu.cc:297
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:157
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:200
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:70
+#: ../src/editor/ui_menus/editor_variables_menu.cc:179
+#: ../src/editor/ui_menus/trigger_null_option_menu.cc:56
+#: ../src/editor/ui_menus/event_message_box_option_menu.cc:148
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:129
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:110
+#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:237
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:71
+#: ../src/editor/ui_menus/event_move_view_option_menu.cc:163
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:235
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:200
+msgid "Ok"
+msgstr "OK"
+
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:401
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:204
 msgid "<invalid player tribe>"
 msgstr "<błędna rasa gracza>"
-
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:34
-msgid "Trigger Option Menu"
-msgstr "Menu opcji wyzwalaczy"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:57
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:149
-msgid "Width"
-msgstr "Długość"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:116
-msgid "Create Map"
-msgstr "Stwórz mapę"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:78
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:54
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:74
-msgid "Name: "
-msgstr "Nazwa: "
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:83
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:79
-msgid "Author: "
-msgstr "Autor: "
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:88
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:84
-msgid "Size: "
-msgstr "Rozmiar: "
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:93
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:89
-msgid "World: "
-msgstr "Światy: "
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:98
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:94
-msgid "Players: "
-msgstr "Gracze: "
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:104
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:100
-msgid "Descr: "
-msgstr "Opis: "
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:133
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
-msgid "Make Directory"
-msgstr "Stwórz katalog"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:181
-msgid "unnamed"
-msgstr "nienazwany"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:333
-msgid " exists already. Overwrite?"
-msgstr " już istnieje. Nadpisać?"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:334
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:359
-msgid "Save Map Error!!"
-msgstr "Błąd zapisywania mapy!"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:357
-msgid ""
-"Map Saving Error!\n"
-"Saved Map-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-"Błąd zapisywania mapy!\n"
-"Plik zapisanej mapy może być uszkodzony!\n"
-"\n"
-"Przyczyna:\n"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
-#: ../src/editor/ui_menus/editor_event_menu.cc:157
-msgid "New Trigger"
-msgstr "Nowy"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:180
-msgid "Available Triggers: "
-msgstr "Dostępne wyzwalacze"
-
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:52
-msgid "Bobs Menu"
-msgstr "Menu zwierząt"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:42
 msgid "Edit Event Chain"
@@ -1416,14 +1405,20 @@ msgstr "Zdarzenia: "
 msgid "Conditional"
 msgstr "Warunki"
 
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
+#: ../src/editor/ui_menus/editor_event_menu.cc:125
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
+msgid "New Event"
+msgstr "Nowe"
+
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:100
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:143
 msgid "Insert"
 msgstr "Wstaw"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:110
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:207
-#: ../src/editor/ui_menus/editor_variables_menu.cc:291
+#: ../src/editor/ui_menus/editor_variables_menu.cc:294
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:214
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:153
 msgid "Delete"
 msgstr "Usuń"
@@ -1432,9 +1427,121 @@ msgstr "Usuń"
 msgid "Up"
 msgstr "Góra"
 
+#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:137
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:47
+msgid "Available Events: "
+msgstr "Dostępne zdarzenia: "
+
+#: ../src/editor/ui_menus/trigger_time_option_menu.cc:34
+msgid "Trigger Option Menu"
+msgstr "Menu opcji wyzwalaczy"
+
+#: ../src/editor/ui_menus/editor_toolsize_menu.cc:37
+msgid "Toolsize Menu"
+msgstr "Rozmiar pędzla"
+
+#: ../src/editor/ui_menus/editor_toolsize_menu.cc:57
+#, c-format
+msgid "Current Size: %i"
+msgstr "Obecny rozmiar: %i"
+
+#: ../src/editor/ui_menus/editor_toolsize_menu.cc:98
+msgid "Current Size"
+msgstr "Obecny rozmiar"
+
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:57
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:149
+msgid "Width"
+msgstr "Długość"
+
+#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:116
+msgid "Create Map"
+msgstr "Stwórz mapę"
+
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
+#: ../src/editor/ui_menus/editor_event_menu.cc:157
+msgid "New Trigger"
+msgstr "Nowy"
+
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:180
+msgid "Available Triggers: "
+msgstr "Dostępne wyzwalacze"
+
+#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:59
+#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:60
+msgid "Description: "
+msgstr "Opis: "
+
+#: ../src/editor/ui_menus/editor_tool_menu.cc:50
+#: ../src/editor/ui_menus/editor_tool_menu.cc:82
+msgid "Tool Menu"
+msgstr "Menu narzędzi"
+
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:52
+msgid "Bobs Menu"
+msgstr "Menu zwierząt"
+
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
 msgstr "Wpisz nazwę katalogu: "
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:60
+msgid "New Variable"
+msgstr "Nowa zmienna"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:72
+msgid "Integer"
+msgstr "Liczba"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:79
+msgid "String"
+msgstr "Tekst"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:113
+#: ../src/editor/ui_menus/editor_event_menu.cc:362
+#: ../src/editor/ui_menus/editor_event_menu.cc:370
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:259
+msgid "Unnamed"
+msgstr "Nie nazwany"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:162
+msgid "Edit Variable"
+msgstr "Edytuj zmienną"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:171
+#: ../src/editor/ui_menus/editor_variables_menu.cc:301
+msgid "Value"
+msgstr "Wartość"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:228
+msgid "is not a valid integer!"
+msgstr "nie jest poprawną liczbą!"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:230
+msgid "Parse error!"
+msgstr "Błąd parsowania!"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:267
+msgid "Variables Menu"
+msgstr "Menu zmiennych"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:278
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:194
+msgid "New"
+msgstr "Nowy"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:285
+#: ../src/editor/ui_menus/editor_event_menu.cc:103
+#: ../src/editor/ui_menus/editor_event_menu.cc:134
+#: ../src/editor/ui_menus/editor_event_menu.cc:166
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:203
+msgid "Edit"
+msgstr "Edytuj"
+
+#: ../src/editor/ui_menus/editor_variables_menu.cc:300
+msgid "Variable"
+msgstr "Zmienna"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1456,14 +1563,6 @@ msgstr "Zarejestrowane wyzwalacze"
 msgid "New Event Chain"
 msgstr "Nowy"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:103
-#: ../src/editor/ui_menus/editor_event_menu.cc:134
-#: ../src/editor/ui_menus/editor_event_menu.cc:166
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:196
-#: ../src/editor/ui_menus/editor_variables_menu.cc:282
-msgid "Edit"
-msgstr "Edytuj"
-
 #: ../src/editor/ui_menus/editor_event_menu.cc:114
 #: ../src/editor/ui_menus/editor_event_menu.cc:145
 #: ../src/editor/ui_menus/editor_event_menu.cc:177
@@ -1478,7 +1577,7 @@ msgstr "Nie można usunąć zdarzenia. Jest używane przez "
 #: ../src/editor/ui_menus/editor_event_menu.cc:333
 #: ../src/editor/ui_menus/editor_player_menu.cc:287
 #: ../src/editor/ui_menus/editor_player_menu.cc:313
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:292
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:297
 msgid "Error!"
 msgstr "Błąd!"
 
@@ -1486,80 +1585,9 @@ msgstr "Błąd!"
 msgid "Can't delete Trigger. It is in use by "
 msgstr "Nie można usunąć wyzwalacza. Jest używany przez "
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:362
-#: ../src/editor/ui_menus/editor_event_menu.cc:370
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:252
-#: ../src/editor/ui_menus/editor_variables_menu.cc:114
-msgid "Unnamed"
-msgstr "Nie nazwany"
-
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
 msgid "Null Trigger Options"
 msgstr "Pusty wyzwalacz"
-
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:37
-msgid "Toolsize Menu"
-msgstr "Rozmiar pędzla"
-
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:57
-#, c-format
-msgid "Current Size: %i"
-msgstr "Obecny rozmiar: %i"
-
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:95
-msgid "Current Size"
-msgstr "Obecny rozmiar"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
-msgid "Player Options"
-msgstr "Opcje gracza"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:227
-msgid "I"
-msgstr "|"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:228
-msgid "Make infrastructure"
-msgstr "Stwórz infrastrukturę"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:241
-msgid "B"
-msgstr "B"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:242
-msgid "Allow/forbid buildidngs"
-msgstr "Dozów/zabroń budynków"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:287
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend of this player and try again"
-msgstr ""
-"Nie można usunąć gracza. Jest on zdefiniowany w jakimś miejscu. Usuń "
-"wszystkie budynki, bobs(?), wyzwalacze i zdarzenia które są zależne od tego "
-"gracza i spróbuj ponownie"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:313
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Nie można zmienić rasy gracza. Jest ona zdefiniowana w jakimś miejscu. Usuń "
-"wszystkie budynki, bobs(?), wyzwalacze i zdarzenia które są zależne od tego "
-"gracza i spróbuj ponownie"
-
-#: ../src/editor/ui_menus/editor_tool_menu.cc:50
-#: ../src/editor/ui_menus/editor_tool_menu.cc:82
-msgid "Tool Menu"
-msgstr "Menu narzędzi"
-
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:40
-msgid "Allow Building Event Options"
-msgstr "Opcje dozwalania budynku"
-
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:115
-msgid "Allow Building: "
-msgstr "Dozwól budynek: "
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:41
 msgid "Message Box Event Options"
@@ -1602,8 +1630,8 @@ msgid "Select Trigger: "
 msgstr "Wybierz wyzwalacz: "
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:138
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:160
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:210
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:167
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:217
 msgid "Current: "
 msgstr "Wybrane: "
 
@@ -1611,79 +1639,91 @@ msgstr "Wybrane: "
 msgid "No trigger selected!"
 msgstr "Nie wybrano wyzwalacza!"
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:66
+#: ../src/editor/ui_menus/editor_player_menu.cc:57
+msgid "Player Options"
+msgstr "Opcje gracza"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:227
+msgid "I"
+msgstr "|"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:228
+msgid "Make infrastructure"
+msgstr "Stwórz infrastrukturę"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+msgid "B"
+msgstr "B"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:242
+msgid "Allow/forbid buildidngs"
+msgstr "Dozów/zabroń budynków"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:287
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend of this player and try again"
+msgstr ""
+"Nie można usunąć gracza. Jest on zdefiniowany w jakimś miejscu. Usuń "
+"wszystkie budynki, bobs(?), wyzwalacze i zdarzenia które są zależne od tego "
+"gracza i spróbuj ponownie"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:313
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Nie można zmienić rasy gracza. Jest ona zdefiniowana w jakimś miejscu. Usuń "
+"wszystkie budynki, bobs(?), wyzwalacze i zdarzenia które są zależne od tego "
+"gracza i spróbuj ponownie"
+
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:57
+msgid "Terrain Select"
+msgstr "Wybór terenu"
+
+#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:163
+msgid "Choose Terrain Menu"
+msgstr "Wybierz rodzaj terenu:"
+
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:40
+msgid "Allow Building Event Options"
+msgstr "Opcje dozwalania budynku"
+
+#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:115
+msgid "Allow Building: "
+msgstr "Dozwól budynek: "
+
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:69
 msgid "Edit Objective"
 msgstr "Edytuj cel"
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:81
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:84
 msgid "Visible at Begin: "
 msgstr "Widoczny na początku: "
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:86
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:89
 msgid "Optional Objective: "
 msgstr "Opcjonalny cel: "
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:92
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:95
 msgid "Objective text: "
 msgstr "Tekst celu: "
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:174
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:181
 msgid "Optional"
 msgstr "Opcjonalny"
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:175
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:182
 msgid "Visible"
 msgstr "Widoczny"
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:187
-#: ../src/editor/ui_menus/editor_variables_menu.cc:275
-msgid "New"
-msgstr "Nowy"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:214
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:221
 msgid "Trigger: "
 msgstr "Wyzwalacz: "
 
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:284
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:287
 msgid "Can't delete Objective, because it's trigger is in use by "
 msgstr "Nie można usunąć celu, ponieważ jego wyzwalacz jest używany przez "
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:61
-msgid "New Variable"
-msgstr "Nowa zmienna"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:73
-msgid "Integer"
-msgstr "Liczba"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:80
-msgid "String"
-msgstr "Tekst"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:161
-msgid "Edit Variable"
-msgstr "Edytuj zmienną"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:170
-#: ../src/editor/ui_menus/editor_variables_menu.cc:304
-msgid "Value"
-msgstr "Wartość"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:227
-msgid "is not a valid integer!"
-msgstr "nie jest poprawną liczbą!"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:229
-msgid "Parse error!"
-msgstr "Błąd parsowania!"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:267
-msgid "Variables Menu"
-msgstr "Menu zmiennych"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:303
-msgid "Variable"
-msgstr "Zmienna"
 
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:43
 msgid "New Map Options"
@@ -1700,14 +1740,6 @@ msgstr "Nic nie zdefiniowano!"
 #: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:38
 msgid "Conquer Area Event Options"
 msgstr "Podbijanie terenu"
-
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:54
-msgid "Terrain Select"
-msgstr "Wybór terenu"
-
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
-msgid "Choose Terrain Menu"
-msgstr "Wybierz rodzaj terenu:"
 
 #: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:52
 msgid "Immovable Bobs Menu"
@@ -1758,6 +1790,43 @@ msgstr "Maksimum"
 msgid "Noise Height Tool Options"
 msgstr "Opcje"
 
+#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:36
+msgid "Unhide Area Event Options"
+msgstr "Odsłanianie obszaru"
+
+#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:48
+msgid "Height Tools Options"
+msgstr "Narzędzie poziomów"
+
+#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:64
+msgid "Height Tool Options"
+msgstr "Opcje"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
+msgid "Allowed Buildings"
+msgstr "Dozwolone budynki"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:59
+msgid "Allowed Buildings:"
+msgstr "Dozwolone budynki:"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
+msgid "Forbidden Buildings:"
+msgstr "Zabronione budynki:"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:86
+msgid "Forbid"
+msgstr "Zabroń"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:96
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:142
+msgid "<-"
+msgstr "<-"
+
+#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
+msgid "Allow"
+msgstr "Dozwól"
+
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:39
 msgid "Edit Trigger Conditional"
 msgstr "Edytuj warunek wyzwalacza"
@@ -1794,52 +1863,21 @@ msgstr "XOR"
 msgid "NOT"
 msgstr "NIE"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:142
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:96
-msgid "<-"
-msgstr "<-"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:268
 msgid "Syntax Error"
 msgstr "Błąd składni"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
+#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:268
 msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr ""
 "Twój warunek ma co najmniej jeden błąd składniowy. Proszę, popraw go.\n"
 
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:36
-msgid "Unhide Area Event Options"
-msgstr "Odsłanianie obszaru"
-
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:48
-msgid "Height Tools Options"
-msgstr "Narzędzie poziomów"
-
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:64
-msgid "Height Tool Options"
-msgstr "Opcje"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
-msgid "Allowed Buildings"
-msgstr "Dozwolone budynki"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:59
-msgid "Allowed Buildings:"
-msgstr "Dozwolone budynki:"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
-msgid "Forbidden Buildings:"
-msgstr "Zabronione budynki:"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:86
-msgid "Forbid"
-msgstr "Zabroń"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
-msgid "Allow"
-msgstr "Dozwól"
-
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr "brak opisu"
+
+#~ msgid "Ware"
+#~ msgstr "Towar"
+
+#~ msgid "Is Produced by"
+#~ msgstr "Produkowany przez"

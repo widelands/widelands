@@ -1,7 +1,7 @@
 # translation of campaign_t01_pl_PL.po to polish
 # This file is distributed under the same license as the Widelands package.
 # Copyright (C) 2002 The Widelands Development Team.
-#
+# 
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
@@ -17,6 +17,63 @@ msgstr ""
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../campaigns/t01.wmf/objective:8
+msgid ""
+"- press SPACE to see where you can build. The red spots show you, where a "
+"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
+"at the red spot directly right of your headquarters by clicking at it and "
+"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
+"Lumberjack. You do so by clicking the flag of either building and then the "
+"road-button. Around the flag should appear symbols, showing how steep the "
+"way in this direction would be. The steepier the way, the harder it will be "
+"for your people to walk on it. When you click such a symbol, you build a "
+"part of the road and must choose the next direction then. Build a road "
+"between the flags in front of the two buildings. Try to keep it short and "
+"even."
+msgstr ""
+"- naciśnij SPACJĘ aby zobaczyć gdzie możesz budować. Czerwone kropki "
+"wskazują gdzie mogą być budowane małe budynki jak Drwal.<br>- zbuduj Chatkę "
+"drwala na czerwonej kropce zaraz na prawo od Kwatery głównej, klikając na "
+"niej i wybierając Chatkę drwala.<br>- Zbuduj drogę pomiędzy Kwatrą Główną a "
+"Chatką drwala. Zrobisz to klikając na flagę przy budynku a następnie na "
+"przycisku drogi. Dookoła flagi pojawią się symbole pokazujące jak stroma "
+"będzie droga w tym kierunku. Im droga bardziej stroma, tym Twoim ludziom "
+"będzie trudniej po niej chodzić. Kiedy klikniesz na jeden z symboli "
+"wybudujesz w tym kierunku kawałek drogi a  następnie musisz wybrać kolejny "
+"kierunek. Zbuduj drogę pomiędzy flagami przed tymi dwoma budynkami. Spróbuj "
+"utrzymać ją jak najkrótszą i jak najprostszą."
+
+#: ../campaigns/t01.wmf/objective:16
+msgid ""
+"- There is a flag symbol in the mid of the way you just built. By clicking "
+"it and, in the consecutively opening menu, clicking the flag-button, you "
+"place a flag there, thus splitting the work of carrying the wood between two "
+"carriers. When much wares are being transported between two points, "
+"additional flags in between make them get faster to their destination, thus "
+"improving your infrastructure. Place a flag in the mid of the road.<br>- "
+"Place a Lumberjack directly south of the flag you are about to place on the "
+"road. Connect said flag with the new Lumberjack afterwards. Note that, "
+"instead of building a road step by step, you may also directly click at the "
+"destination to build the entire road at once."
+msgstr ""
+"- Na drodze zauważ symbol flagi. Kiedy na niego klikniesz a następnie "
+"klikniesz przycisk z flagą, umieścisz w tym miejscu właśnie flagę. Droga "
+"podzieli się pomiędzy dwóch robotników co przyspieszy transport w przypadku "
+"potrzeby przenoszenie dużej ilości  surowców, co w efekcie polepszy Twoją "
+"infrastrukturę. Ustaw flagę na środku drogi.<br>- Postaw Chatkę drwala "
+"dokładnie na południe od flagi którą miałeś umieścić na drodze. Połącz "
+"wspomnianą flagę z tą która znajdzie się przy nowej Chatce drwala. Zauważ, "
+"że zamiast budować drogę po kawałku, możesz bezpośrednio połączyć flagi i "
+"zbudować drogę od razu."
+
+#: ../campaigns/t01.wmf/objective:24
+msgid "- Build a Ranger's Hut to the east of the Lumberjack."
+msgstr "- Zbuduj Chatkę Leśnika na wschód od pierwszego Drwala."
+
+#: ../campaigns/t01.wmf/objective:32
+msgid "- Build two Quarries south-west of your headquarters."
+msgstr "- Zbuduj dwa Kamieniołomy na południowy zachód od Kwatery głównej."
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
@@ -340,63 +397,6 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Misja zakończona"
-
-#: ../campaigns/t01.wmf/objective:8
-msgid ""
-"- press SPACE to see where you can build. The red spots show you, where a "
-"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
-"at the red spot directly right of your headquarters by clicking at it and "
-"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
-"Lumberjack. You do so by clicking the flag of either building and then the "
-"road-button. Around the flag should appear symbols, showing how steep the "
-"way in this direction would be. The steepier the way, the harder it will be "
-"for your people to walk on it. When you click such a symbol, you build a "
-"part of the road and must choose the next direction then. Build a road "
-"between the flags in front of the two buildings. Try to keep it short and "
-"even."
-msgstr ""
-"- naciśnij SPACJĘ aby zobaczyć gdzie możesz budować. Czerwone kropki "
-"wskazują gdzie mogą być budowane małe budynki jak Drwal.<br>- zbuduj Chatkę "
-"drwala na czerwonej kropce zaraz na prawo od Kwatery głównej, klikając na "
-"niej i wybierając Chatkę drwala.<br>- Zbuduj drogę pomiędzy Kwatrą Główną a "
-"Chatką drwala. Zrobisz to klikając na flagę przy budynku a następnie na "
-"przycisku drogi. Dookoła flagi pojawią się symbole pokazujące jak stroma "
-"będzie droga w tym kierunku. Im droga bardziej stroma, tym Twoim ludziom "
-"będzie trudniej po niej chodzić. Kiedy klikniesz na jeden z symboli "
-"wybudujesz w tym kierunku kawałek drogi a  następnie musisz wybrać kolejny "
-"kierunek. Zbuduj drogę pomiędzy flagami przed tymi dwoma budynkami. Spróbuj "
-"utrzymać ją jak najkrótszą i jak najprostszą."
-
-#: ../campaigns/t01.wmf/objective:16
-msgid ""
-"- There is a flag symbol in the mid of the way you just built. By clicking "
-"it and, in the consecutively opening menu, clicking the flag-button, you "
-"place a flag there, thus splitting the work of carrying the wood between two "
-"carriers. When much wares are being transported between two points, "
-"additional flags in between make them get faster to their destination, thus "
-"improving your infrastructure. Place a flag in the mid of the road.<br>- "
-"Place a Lumberjack directly south of the flag you are about to place on the "
-"road. Connect said flag with the new Lumberjack afterwards. Note that, "
-"instead of building a road step by step, you may also directly click at the "
-"destination to build the entire road at once."
-msgstr ""
-"- Na drodze zauważ symbol flagi. Kiedy na niego klikniesz a następnie "
-"klikniesz przycisk z flagą, umieścisz w tym miejscu właśnie flagę. Droga "
-"podzieli się pomiędzy dwóch robotników co przyspieszy transport w przypadku "
-"potrzeby przenoszenie dużej ilości  surowców, co w efekcie polepszy Twoją "
-"infrastrukturę. Ustaw flagę na środku drogi.<br>- Postaw Chatkę drwala "
-"dokładnie na południe od flagi którą miałeś umieścić na drodze. Połącz "
-"wspomnianą flagę z tą która znajdzie się przy nowej Chatce drwala. Zauważ, "
-"że zamiast budować drogę po kawałku, możesz bezpośrednio połączyć flagi i "
-"zbudować drogę od razu."
-
-#: ../campaigns/t01.wmf/objective:24
-msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- Zbuduj Chatkę Leśnika na wschód od pierwszego Drwala."
-
-#: ../campaigns/t01.wmf/objective:32
-msgid "- Build two Quarries south-west of your headquarters."
-msgstr "- Zbuduj dwa Kamieniołomy na południowy zachód od Kwatery głównej."
 
 #~ msgid "Order3"
 #~ msgstr "Rozkaz 3"

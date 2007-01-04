@@ -2,7 +2,7 @@
 # Widelands texts po-File -> German.
 # Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-#
+# 
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 # Philipp Niemann <widelands@azagtoth.de>, 2006.
 msgid ""

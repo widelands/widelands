@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: world_desert_ru_RU\n"

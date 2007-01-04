@@ -2,7 +2,7 @@
 # Widelands campaign_ank po-File -> German.
 # Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-#
+# 
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 # Philipp Niemann <widelands@azagtoth.de>, 2006.
 msgid ""
@@ -17,6 +17,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
+
+#: ../campaigns/t01.wmf/objective:8
+msgid ""
+"- press SPACE to see where you can build. The red spots show you, where a "
+"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
+"at the red spot directly right of your headquarters by clicking at it and "
+"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
+"Lumberjack. You do so by clicking the flag of either building and then the "
+"road-button. Around the flag should appear symbols, showing how steep the "
+"way in this direction would be. The steepier the way, the harder it will be "
+"for your people to walk on it. When you click such a symbol, you build a "
+"part of the road and must choose the next direction then. Build a road "
+"between the flags in front of the two buildings. Try to keep it short and "
+"even."
+msgstr ""
+"- Drücke die Leertaste, um zu sehen wo Du bauen kannst. Die roten Punkte "
+"zeigen Dir, wo Du ein kleines Gebäude, wie zum Beispiel einen Holzfäller, "
+"bauen kannst. <br>- Baue einen Holzfäller, indem Du auf den roten Punkt "
+"rechts Deines Hauptquartiers klickst und den Holzfäller auswählst.<br>- Baue "
+"eine Straße zwischen Deinem Hauptquartier und dem Holzfäller. Dies kannst Du "
+"machen, indem Du auf die Flagge eines der Gebäude klickst und den "
+"Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, "
+"die aufzeigen wie steil der Weg in diese Richtung wäre. Je steiler der Weg "
+"ist, desto schwerer wird es für Deine Leute, auf ihm zu laufen. Wenn Du nun "
+"eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann "
+"die nächste Richtung angeben. Baue eine Straße zwischen den Flaggen der "
+"beiden Gebäude und versuche, sie möglichst eben zu halten."
+
+#: ../campaigns/t01.wmf/objective:16
+msgid ""
+"- There is a flag symbol in the mid of the way you just built. By clicking "
+"it and, in the consecutively opening menu, clicking the flag-button, you "
+"place a flag there, thus splitting the work of carrying the wood between two "
+"carriers. When much wares are being transported between two points, "
+"additional flags in between make them get faster to their destination, thus "
+"improving your infrastructure. Place a flag in the mid of the road.<br>- "
+"Place a Lumberjack directly south of the flag you are about to place on the "
+"road. Connect said flag with the new Lumberjack afterwards. Note that, "
+"instead of building a road step by step, you may also directly click at the "
+"destination to build the entire road at once."
+msgstr ""
+"- Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. "
+"Wenn Du es anklickst und im sich öffnenden Menü das Flaggensymbol wählst, "
+"setzt Du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei "
+"Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden ist "
+"es sinnvoll Flaggen hinzuzufügen, da der Transport so viel schneller voran "
+"geht. Setze eine Flagge auf die Mitte der Straße.<br>- Baue einen weiteren "
+"Holzfäller südlich der Flagge die Du eben gesetzt hast. Danach verbinde den "
+"neuen Holzfäller mit dieser Flagge. Du kannst die Straße automatisch bauen "
+"lassen, anstatt Stück für Stück vorzugeben. Wähle wieder den Straßenbauknopf "
+"einer Flagge aus und klicke dann auf das Ziel, um die gesamte Straße zu "
+"bauen."
+
+#: ../campaigns/t01.wmf/objective:24
+msgid "- Build a Ranger's Hut to the east of the Lumberjack."
+msgstr "- Baue ein Forsthaus östlich des ersten Holzfällers."
+
+#: ../campaigns/t01.wmf/objective:32
+msgid "- Build two Quarries south-west of your headquarters."
+msgstr ""
+"- Baue zwei Steinmetze in die Nähe der Felsen im Südwesten Deines "
+"Hauptquartiers."
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
@@ -365,68 +427,6 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Mission komplett"
-
-#: ../campaigns/t01.wmf/objective:8
-msgid ""
-"- press SPACE to see where you can build. The red spots show you, where a "
-"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
-"at the red spot directly right of your headquarters by clicking at it and "
-"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
-"Lumberjack. You do so by clicking the flag of either building and then the "
-"road-button. Around the flag should appear symbols, showing how steep the "
-"way in this direction would be. The steepier the way, the harder it will be "
-"for your people to walk on it. When you click such a symbol, you build a "
-"part of the road and must choose the next direction then. Build a road "
-"between the flags in front of the two buildings. Try to keep it short and "
-"even."
-msgstr ""
-"- Drücke die Leertaste, um zu sehen wo Du bauen kannst. Die roten Punkte "
-"zeigen Dir, wo Du ein kleines Gebäude, wie zum Beispiel einen Holzfäller, "
-"bauen kannst. <br>- Baue einen Holzfäller, indem Du auf den roten Punkt "
-"rechts Deines Hauptquartiers klickst und den Holzfäller auswählst.<br>- Baue "
-"eine Straße zwischen Deinem Hauptquartier und dem Holzfäller. Dies kannst Du "
-"machen, indem Du auf die Flagge eines der Gebäude klickst und den "
-"Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, "
-"die aufzeigen wie steil der Weg in diese Richtung wäre. Je steiler der Weg "
-"ist, desto schwerer wird es für Deine Leute, auf ihm zu laufen. Wenn Du nun "
-"eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann "
-"die nächste Richtung angeben. Baue eine Straße zwischen den Flaggen der "
-"beiden Gebäude und versuche, sie möglichst eben zu halten."
-
-#: ../campaigns/t01.wmf/objective:16
-msgid ""
-"- There is a flag symbol in the mid of the way you just built. By clicking "
-"it and, in the consecutively opening menu, clicking the flag-button, you "
-"place a flag there, thus splitting the work of carrying the wood between two "
-"carriers. When much wares are being transported between two points, "
-"additional flags in between make them get faster to their destination, thus "
-"improving your infrastructure. Place a flag in the mid of the road.<br>- "
-"Place a Lumberjack directly south of the flag you are about to place on the "
-"road. Connect said flag with the new Lumberjack afterwards. Note that, "
-"instead of building a road step by step, you may also directly click at the "
-"destination to build the entire road at once."
-msgstr ""
-"- Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. "
-"Wenn Du es anklickst und im sich öffnenden Menü das Flaggensymbol wählst, "
-"setzt Du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei "
-"Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden ist "
-"es sinnvoll Flaggen hinzuzufügen, da der Transport so viel schneller voran "
-"geht. Setze eine Flagge auf die Mitte der Straße.<br>- Baue einen weiteren "
-"Holzfäller südlich der Flagge die Du eben gesetzt hast. Danach verbinde den "
-"neuen Holzfäller mit dieser Flagge. Du kannst die Straße automatisch bauen "
-"lassen, anstatt Stück für Stück vorzugeben. Wähle wieder den Straßenbauknopf "
-"einer Flagge aus und klicke dann auf das Ziel, um die gesamte Straße zu "
-"bauen."
-
-#: ../campaigns/t01.wmf/objective:24
-msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- Baue ein Forsthaus östlich des ersten Holzfällers."
-
-#: ../campaigns/t01.wmf/objective:32
-msgid "- Build two Quarries south-west of your headquarters."
-msgstr ""
-"- Baue zwei Steinmetze in die Nähe der Felsen im Südwesten Deines "
-"Hauptquartiers."
 
 #~ msgid "Order3"
 #~ msgstr "Auftrag 3"

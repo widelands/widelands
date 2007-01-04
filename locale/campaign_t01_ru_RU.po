@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: campaign_t01_ru_RU\n"
@@ -15,6 +15,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
+
+#: ../campaigns/t01.wmf/objective:8
+msgid ""
+"- press SPACE to see where you can build. The red spots show you, where a "
+"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
+"at the red spot directly right of your headquarters by clicking at it and "
+"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
+"Lumberjack. You do so by clicking the flag of either building and then the "
+"road-button. Around the flag should appear symbols, showing how steep the "
+"way in this direction would be. The steepier the way, the harder it will be "
+"for your people to walk on it. When you click such a symbol, you build a "
+"part of the road and must choose the next direction then. Build a road "
+"between the flags in front of the two buildings. Try to keep it short and "
+"even."
+msgstr ""
+"- нажмите Пробел, чтобы посмотреть где можно строить. Красные точки "
+"показывают места для строительсва малых зданий - типа хижин.<br>- постройте "
+"Хижину дровосека, щелкнув на красной точке около вашего штаба и выбрав в "
+"окне Хижину дровосека.<br>- Постройте дорогу между штабом и Хижиной "
+"дровосека. Вы можете сделать это, щелкнув на флаге около строения, а затем "
+"на кнопке дороги. Вокруг флага появятся значки, показывающие крутизну "
+"ландшафта в каждом направлении. Чем круче дорога, тем труднее Носильщикам "
+"идти по ней. При щелчке на одном из символов создается часть дороги и должны "
+"выбрать следующее направление. Стройте дороги между флагами зданий. "
+"Старайтесь строить короткие и ровные дороги."
+
+#: ../campaigns/t01.wmf/objective:16
+msgid ""
+"- There is a flag symbol in the mid of the way you just built. By clicking "
+"it and, in the consecutively opening menu, clicking the flag-button, you "
+"place a flag there, thus splitting the work of carrying the wood between two "
+"carriers. When much wares are being transported between two points, "
+"additional flags in between make them get faster to their destination, thus "
+"improving your infrastructure. Place a flag in the mid of the road.<br>- "
+"Place a Lumberjack directly south of the flag you are about to place on the "
+"road. Connect said flag with the new Lumberjack afterwards. Note that, "
+"instead of building a road step by step, you may also directly click at the "
+"destination to build the entire road at once."
+msgstr ""
+"- На дороге между зданиями находится значок флага. Щелкнув на нем, а в "
+"появившемся меню на кнопке флага, вы поместите в этом месте флаг, что "
+"разобъет дорогу на две части и разделит работу по переноске дерева между "
+"двумя носильщиками. При транспортировке множества грузов между двумя "
+"точками, дополнительный флаги между ними ускоряют доставку, что улучшает всю "
+"инфраструктуру. Размещайте флаги в середине дороги.<br>- Поместите Хижину "
+"дровосека по южную сторону от флага, созданного на дороге. Соедините флаг с "
+"новой Хижиной дровосека. Заметьте, что вместо пошагового строительства "
+"дороги вы может сразу щелкнуть левой кнопкой мыши в пункте назначения и "
+"дорога будет проложена автоматически."
+
+#: ../campaigns/t01.wmf/objective:24
+msgid "- Build a Ranger's Hut to the east of the Lumberjack."
+msgstr "- постройте Хижину лесничего на востоке от Хижины дровосека."
+
+#: ../campaigns/t01.wmf/objective:32
+msgid "- Build two Quarries south-west of your headquarters."
+msgstr "- Постройте две каменоломни на Юго-западе от Штаба."
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
@@ -334,63 +391,6 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Миссия завершена"
-
-#: ../campaigns/t01.wmf/objective:8
-msgid ""
-"- press SPACE to see where you can build. The red spots show you, where a "
-"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
-"at the red spot directly right of your headquarters by clicking at it and "
-"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
-"Lumberjack. You do so by clicking the flag of either building and then the "
-"road-button. Around the flag should appear symbols, showing how steep the "
-"way in this direction would be. The steepier the way, the harder it will be "
-"for your people to walk on it. When you click such a symbol, you build a "
-"part of the road and must choose the next direction then. Build a road "
-"between the flags in front of the two buildings. Try to keep it short and "
-"even."
-msgstr ""
-"- нажмите Пробел, чтобы посмотреть где можно строить. Красные точки "
-"показывают места для строительсва малых зданий - типа хижин.<br>- постройте "
-"Хижину дровосека, щелкнув на красной точке около вашего штаба и выбрав в "
-"окне Хижину дровосека.<br>- Постройте дорогу между штабом и Хижиной "
-"дровосека. Вы можете сделать это, щелкнув на флаге около строения, а затем "
-"на кнопке дороги. Вокруг флага появятся значки, показывающие крутизну "
-"ландшафта в каждом направлении. Чем круче дорога, тем труднее Носильщикам "
-"идти по ней. При щелчке на одном из символов создается часть дороги и должны "
-"выбрать следующее направление. Стройте дороги между флагами зданий. "
-"Старайтесь строить короткие и ровные дороги."
-
-#: ../campaigns/t01.wmf/objective:16
-msgid ""
-"- There is a flag symbol in the mid of the way you just built. By clicking "
-"it and, in the consecutively opening menu, clicking the flag-button, you "
-"place a flag there, thus splitting the work of carrying the wood between two "
-"carriers. When much wares are being transported between two points, "
-"additional flags in between make them get faster to their destination, thus "
-"improving your infrastructure. Place a flag in the mid of the road.<br>- "
-"Place a Lumberjack directly south of the flag you are about to place on the "
-"road. Connect said flag with the new Lumberjack afterwards. Note that, "
-"instead of building a road step by step, you may also directly click at the "
-"destination to build the entire road at once."
-msgstr ""
-"- На дороге между зданиями находится значок флага. Щелкнув на нем, а в "
-"появившемся меню на кнопке флага, вы поместите в этом месте флаг, что "
-"разобъет дорогу на две части и разделит работу по переноске дерева между "
-"двумя носильщиками. При транспортировке множества грузов между двумя "
-"точками, дополнительный флаги между ними ускоряют доставку, что улучшает всю "
-"инфраструктуру. Размещайте флаги в середине дороги.<br>- Поместите Хижину "
-"дровосека по южную сторону от флага, созданного на дороге. Соедините флаг с "
-"новой Хижиной дровосека. Заметьте, что вместо пошагового строительства "
-"дороги вы может сразу щелкнуть левой кнопкой мыши в пункте назначения и "
-"дорога будет проложена автоматически."
-
-#: ../campaigns/t01.wmf/objective:24
-msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- постройте Хижину лесничего на востоке от Хижины дровосека."
-
-#: ../campaigns/t01.wmf/objective:32
-msgid "- Build two Quarries south-west of your headquarters."
-msgstr "- Постройте две каменоломни на Юго-западе от Штаба."
 
 #~ msgid "Order3"
 #~ msgstr "Задание3"
