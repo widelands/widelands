@@ -1,0 +1,163 @@
+# Automatically created by Widelands svnbuild
+
+[global]
+packet_version=1
+
+[Beginning]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Start Trigger
+nr_events=6
+event_00=Goto Darkness
+event_01=Diary page 1
+event_02=Show Sea
+event_03=Diary page 2
+event_04=Goto Home
+event_05=Diary page 3
+current_event=0
+state=init
+
+[Disable Buildings]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Start Trigger
+nr_events=43
+event_00=Disable Building 01
+event_01=Disable Building 02
+event_02=Disable Building 03
+event_03=Disable Building 04
+event_04=Disable Building 05
+event_05=Disable Building 06
+event_06=Disable Building 07
+event_07=Disable Building 08
+event_08=Disable Building 09
+event_09=Disable Building 10
+event_10=Disable Building 11
+event_11=Disable Building 12
+event_12=Disable Building 13
+event_13=Disable Building 14
+event_14=Disable Building 15
+event_15=Disable Building 16
+event_16=Disable Building 17
+event_17=Disable Building 18
+event_18=Disable Building 19
+event_19=Disable Building 20
+event_20=Disable Building 21
+event_21=Disable Building 22
+event_22=Disable Building 23
+event_23=Disable Building 24
+event_24=Disable Building 25
+event_25=Disable Building 26
+event_26=Disable Building 27
+event_27=Disable Building 28
+event_28=Disable Building 29
+event_29=Disable Building 30
+event_30=Disable Building 31
+event_31=Disable Building 32
+event_32=Disable Building 33
+event_33=Disable Building 34
+event_34=Disable Building 35
+event_35=Disable Building 36
+event_36=Disable Building 37
+event_37=Disable Building 38
+event_38=Disable Building 39
+event_39=Disable Building 40
+event_40=Disable Building 41
+event_41=Disable Building 42
+event_42=Disable Building 43
+current_event=0
+state=init
+
+[Visitor 1]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Message Barracks
+nr_events=4
+event_00=Saledus 1
+event_01=Goto Forest
+event_02=Enable Barracks
+event_03=Unhide Objective 1 - Barracks
+current_event=0
+state=init
+
+[Baracks Complete]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Barracks complete
+nr_events=6
+event_00=Goto Forest
+event_01=Saledus 2
+event_02=Unhide Objective 2 - Lumberjack
+event_03=Enable Lumberjack
+event_04=Goto Home
+event_05=Amalea 1
+current_event=0
+state=init
+
+[Lumberjack Complete]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Lumberjack complete
+nr_events=4
+event_00=Goto Home
+event_01=Amalea 2
+event_02=Unhide Objective 3 - Sawmill
+event_03=Enable Sawmill
+current_event=0
+state=init
+
+[Sawmill Complete]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Sawmill complete
+nr_events=4
+event_00=Goto Home
+event_01=Amalea 3
+event_02=Unhide Objective 4 - Forester
+event_03=Enable Forester
+current_event=0
+state=init
+
+[Forester Complete]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Forester complete
+nr_events=4
+event_00=Goto Home
+event_01=Saledus 3
+event_02=Unhide Objective 5 - Quarry
+event_03=Enable Quarry
+current_event=0
+state=init
+
+[Quarry Complete]
+repeating=false
+nr_conditional_element=1
+conditional_element_00=trigger
+conditional_element_00_data=Quarry complete
+nr_events=2
+event_00=Goto Home
+event_01=Saledus 4
+current_event=0
+state=init
+
+[End]
+repeating=false
+nr_conditional_element=3
+conditional_element_00=trigger
+conditional_element_00_data=End Trigger
+conditional_element_01=AND
+conditional_element_02=trigger
+conditional_element_02_data=Quarry complete
+nr_events=1
+event_00=Diary page 4
+current_event=0
+state=init
+

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ tutorial
  90, 300, 200, 26,
  1,
  &Fullscreen_Menu_SinglePlayer::end_modal, this, Tutorial_Campaign,
- _("Tutorial Campaign")),
+ _("Campaigns")),
 
 back
 (this,

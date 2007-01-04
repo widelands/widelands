@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 static const char* filenames[] = {
    "campaigns/t01.wmf",
    "campaigns/t02.wmf",
+   "campaigns/emp01.wmf",
 };
 
 /*
@@ -32,6 +33,8 @@ static const char* filenames[] = {
  */
 Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap() :
 Fullscreen_Menu_Base("singleplmenu.jpg"),
+
+// Barbarian Tutorials
 
 	// Text
 title
@@ -53,6 +56,21 @@ mission_2
  &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 2,
  _("Mission 2: A Place to call Home - Mining, Expanding, Advanced "
    "Productions")),
+
+// Empire Tutorials
+
+	// Text
+title2
+(this, MENU_XRES / 2, 300, _("Empire Tutorial Campaign"), Align_HCenter),
+
+	// UI::Buttons
+
+empire_1
+(this,
+ 80, 350, 640, 26,
+ 1,
+ &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 3,
+ _("Empire 1: The Strands of Malac' Mor")),
 
 back
 (this,

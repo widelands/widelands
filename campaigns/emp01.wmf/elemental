@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvsbuild
+
+[global]
+packet_version=1
+map_w=64
+map_h=64
+nr_players=1
+world=desert
+name=_"Empire Tutorial1 - The strands of Malac' Mor"
+author=Nasenbaer
+descr=_"First mission of the Empire campaign"
+

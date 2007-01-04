@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,8 @@ private:
 	UI::Textarea                                         title;
 	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> mission_1;
 	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> mission_2;
+	UI::Textarea                                         title2;
+	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> empire_1;
 	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> back;
 };
 
