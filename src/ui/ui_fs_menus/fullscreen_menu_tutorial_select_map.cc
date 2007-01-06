@@ -79,7 +79,8 @@ back
  &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 0,
  _("Back"))
 
-{title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}
+{title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+title2.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);}
 
 const char* Fullscreen_Menu_TutorialSelectMap::get_mapname( int code ) {
    return filenames[code-1];
