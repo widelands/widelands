@@ -20,9 +20,7 @@
 #ifndef MACHDEP_H
 #define MACHDEP_H
 
-#ifdef __WIN32__
 #include <string>
-#endif
 #include <SDL_endian.h>
 #include "types.h"
 
