@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -236,7 +236,7 @@ Return the completion "percentage", where 2^16 = completely built,
 */
 uint ConstructionSite::get_built_per64k()
 {
-	uint time = get_owner()->get_game()->get_gametime();
+	const uint time = owner().egbase().get_gametime();
 	uint thisstep = m_working ? (CONSTRUCTIONSITE_STEP_TIME - m_work_steptime + time) : 0;
 	uint total;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,13 +39,14 @@ int Editor_Place_Immovable_Tool::handle_click_impl
 	if (not get_nr_enabled()) return radius;
 	MapRegion mr(map, center.node, radius);
 	FCoords fc;
+	Editor & editor = parent.editor();
 	while (mr.next(fc)) {
 		if (fc.field->get_immovable()) {
 			if (fc.field->get_immovable()->get_size() != BaseImmovable::NONE)
             continue;
       }
 
-		parent.get_editor()->create_immovable(fc, get_random_enabled(), 0);
+		editor.create_immovable(fc, get_random_enabled(), 0);
    }
    return radius + 2;
 }

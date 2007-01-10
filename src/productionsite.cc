@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -323,7 +323,7 @@ void ProductionSite::init(Editor_Game_Base* g)
          int j;
          for(i=0; i<info->size(); i++)
             for(j=0; j< ((*info)[i]).how_many; j++)
-               request_worker(game, ((*info)[i]).name.c_str());
+					request_worker(((*info)[i]).name.c_str());
       }
 
 		// Init input ware queues
@@ -428,7 +428,7 @@ void ProductionSite::remove_worker(Worker* w)
    for(i=0; i<m_workers.size(); i++) {
       if (m_workers[i] == w) {
          m_workers[i] = 0;
-         request_worker((Game*)get_owner()->get_game(), w->get_name().c_str());
+			request_worker(w->get_name().c_str());
          m_workers.erase(m_workers.begin() + i);
          break;
       }
@@ -445,11 +445,10 @@ ProductionSite::request_worker
 Issue the worker requests
 ===============
 */
-void ProductionSite::request_worker(Game *, const char * worker)
-{
-   assert(worker);
+void ProductionSite::request_worker(const char * const worker_name) {
+	assert(worker_name);
 
-   int wareid = get_owner()->get_tribe()->get_safe_worker_index(worker);
+	int wareid = owner().tribe().get_safe_worker_index(worker_name);
 
    m_worker_requests.push_back(new Request(this, wareid, &ProductionSite::request_worker_callback, this, Request::WORKER));
 }

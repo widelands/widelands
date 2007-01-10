@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -204,7 +204,7 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	Editor_Game_Base* egbase = m_iabase->get_egbase();
+	Editor_Game_Base * const egbase = &m_iabase->egbase();
 	Building* building = (Building*)m_building.get(egbase);
 	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
@@ -223,7 +223,7 @@ Issue the CMD_BULLDOZE command for this building.
 */
 void BulldozeConfirm::bulldoze()
 {
-	Editor_Game_Base* egbase = m_iabase->get_egbase();
+	Editor_Game_Base * const egbase = &m_iabase->egbase();
 	Building* building = (Building*)m_building.get(egbase);
 	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
@@ -545,7 +545,7 @@ Building_Window::~Building_Window()
 {
 	if (not m_workarea_job_id.isNull())
 		static_cast<Interactive_Player * const>(get_parent())
-		->map().overlay_manager().remove_overlay(m_workarea_job_id);
+		->egbase().map().overlay_manager().remove_overlay(m_workarea_job_id);
 	*m_registry = 0;
 }
 
@@ -793,7 +793,8 @@ void Building_Window::act_debug()
 
 
 void Building_Window::toggle_workarea() {
-	Map & map = static_cast<Interactive_Player * const>(get_parent())->map();
+	Map & map =
+		static_cast<Interactive_Player * const>(get_parent())->egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id.isNull()) {
 		const Coords position = m_building->get_position();
@@ -1172,9 +1173,13 @@ ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow(
  * think()
  */
 void ProductionSite_Window_ListWorkerWindow::think(void) {
-   BaseImmovable* imm=m_parent->get_map()->get_field(m_ps_location)->get_immovable();
-   if(imm->get_type()!=Map_Object::BUILDING
-         || static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+	const BaseImmovable * const base_immovable =
+		m_parent->egbase().map()[m_ps_location].get_immovable();
+	if
+		(not dynamic_cast<const Building * const>(base_immovable)
+		 or
+		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+	{
       // The Productionsite has been removed. Die quickly.
       die();
       return;
@@ -1484,9 +1489,13 @@ void MilitarySite_Window::think()
 {
 	Building_Window::think();
 
-   BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
-   if(imm->get_type()!=Map_Object::BUILDING
-         || static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+	const BaseImmovable * const base_immovable =
+		m_parent->egbase().map()[m_ms_location].get_immovable();
+	if
+		(not dynamic_cast<const Building * const>(base_immovable)
+		 or
+		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+	{
       // The Site has been removed. Die quickly.
       die();
       return;
@@ -1729,9 +1738,13 @@ void TrainingSite_Options_Window::think()
 {
 	//Building_Window::think();
 
-	BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
-	if(imm->get_type()!=Map_Object::BUILDING
-			|| static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+	const BaseImmovable * const base_immovable =
+		m_parent->egbase().map()[m_ms_location].get_immovable();
+	if
+		(not dynamic_cast<const Building * const>(base_immovable)
+		 or
+		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+	{
 		// The Site has been removed. Die quickly.
 		die();
 		return;
@@ -1935,9 +1948,13 @@ void TrainingSite_Window::think()
 {
 	Building_Window::think();
 
-	BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
-	if(imm->get_type()!=Map_Object::BUILDING
-		|| static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+	const BaseImmovable * const base_immovable =
+		m_parent->egbase().map()[m_ms_location].get_immovable();
+	if
+		(not dynamic_cast<const Building * const>(base_immovable)
+		 or
+		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+	{
 		// The Site has been removed. Die quickly.
 		die();
 		return;

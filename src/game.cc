@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -263,11 +263,12 @@ void Game::load_map (const char* filename)
 void Game::init_player_controllers ()
 {
 	ipl=0;
-	for (int i=1; i<=get_map()->get_nrplayers(); i++)
-		if (const Player * const player = get_player(i))
-			if (player->get_type() == Player::Local) {
-		    ipl = new Interactive_Player(this, i);
-		    break;
+	const Player_Number nr_players = map().get_nrplayers();
+	for (Player_Number i = 1; i <= nr_players; ++i)
+		if (const Player * const p = get_player(i))
+			if (p->get_type() == Player::Local) {
+				ipl = new Interactive_Player(*this, i);
+				break;
 			}
 
 	assert (ipl!=0);
@@ -276,9 +277,9 @@ void Game::init_player_controllers ()
 	set_iabase(ipl);
 
 	// set up computer controlled players
-	for (int i=1; i<=get_map()->get_nrplayers(); i++)
+	for (Player_Number i = 1; i <= nr_players; ++i)
 		if (get_player(i) and get_player(i)->get_type() == Player::AI)
-			cpl.push_back (new Computer_Player(this,i));
+			cpl.push_back (new Computer_Player(*this, i));
 
 }
 
@@ -513,7 +514,7 @@ void Game::send_player_build_flag (int pid, const Coords& coords)
 	send_player_command (new Cmd_BuildFlag(get_gametime(), pid, coords));
 }
 
-void Game::send_player_build_road (int pid, Path* path)
+void Game::send_player_build_road (int pid, Path & path)
 {
 	send_player_command (new Cmd_BuildRoad(get_gametime(), pid, path));
 }
@@ -553,7 +554,12 @@ void Game::send_player_change_soldier_capacity (Building* b, int val)
 }
 
 /////////////////////// TESTING STUFF
-void Game::send_player_enemyflagaction (Flag* flag, int action, int who_attacks, int num_soldiers, int type)
+void Game::send_player_enemyflagaction
+(const Flag * const flag,
+ const int action,
+ const Player_Number who_attacks,
+ const int num_soldiers,
+ const int type)
 {
 	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), who_attacks, flag, action, who_attacks, num_soldiers, type));
 }

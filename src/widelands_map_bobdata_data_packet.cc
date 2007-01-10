@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -203,9 +202,9 @@ throw
                Coords start;
                start.x=fr.Unsigned16();
                start.y=fr.Unsigned16();
-               Path* path=new Path(egbase->get_map(), start);
+					Path * const path = new Path(start);
                for(uint step=0; step<pathsteps; step++)
-                  path->append(fr.Unsigned8());
+						path->append(egbase->map(), fr.Unsigned8());
                s->path=path;
             } else
                s->path=0;
@@ -479,13 +478,18 @@ throw (_wexception)
                   fw.Unsigned8(0);
 
                // Path
-               if(s->path) {
-                  fw.Unsigned16(s->path->get_nsteps());
-                  Coords pstart=s->path->get_start();
+					if (const Path * const path = s->path) {
+						const Path::Step_Vector::size_type nr_steps =
+							s->path->get_nsteps();
+						fw.Unsigned16(nr_steps);
+						const Coords pstart =path->get_start();
                   fw.Unsigned16(pstart.x);
                   fw.Unsigned16(pstart.y);
-                  for(int idx=0; idx<s->path->get_nsteps(); idx++)
-                     fw.Unsigned8(s->path->get_step(idx));
+						for
+							(Path::Step_Vector::size_type idx = 0;
+							 idx < nr_steps;
+							 ++idx)
+							fw.Unsigned8((*path)[idx]);
                } else
                   fw.Unsigned16(0);
 

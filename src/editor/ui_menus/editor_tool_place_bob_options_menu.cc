@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,8 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
    const int xstart=5;
    const int ystart=15;
    const int yend=15;
-   int nr_bobs=get_parent()->get_map()->get_world()->get_nr_bobs();
+	const World & world = get_parent()->egbase().map().world();
+   int nr_bobs = world.get_nr_bobs();
    int bobs_in_row=(int)(sqrt((float)nr_bobs));
    if(bobs_in_row*bobs_in_row<nr_bobs) { bobs_in_row++; }
    if(bobs_in_row>max_items_in_tab) bobs_in_row=max_items_in_tab;
@@ -74,7 +75,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
 
 	uint width = 0, height = 0;
    for(int j=0; j<nr_bobs; j++) {
-		Bob_Descr* descr = get_parent()->get_map()->get_world()->get_bob_descr(j);
+		Bob_Descr * const descr = world.get_bob_descr(j);
 		uint w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
@@ -98,7 +99,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
          m_tabpanel->add(g_gr->get_picture( PicMod_Game,  "pics/menu_tab_buildbig.png"), box );
       }
 
-		Bob_Descr* descr = get_parent()->get_map()->get_world()->get_bob_descr(i);
+		Bob_Descr * const descr = world.get_bob_descr(i);
       UI::Checkbox* cb= new UI::Checkbox(box, xpos, ypos,
             g_gr->get_picture( PicMod_Game,  descr->get_picture() ));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ class Player {
 		};
 
 		Player
-		(Editor_Game_Base* g,
+		(Editor_Game_Base &,
 		 const int type,
 		 const int plnum,
 		 const Tribe_Descr & tribe,
@@ -67,7 +67,8 @@ class Player {
 		 const uchar * const playercolor);
       ~Player();
 
-		inline Editor_Game_Base *get_game() const { return m_egbase; }
+	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
+	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 		inline int get_type() const { return m_type; }
 		inline int get_player_number() const { return m_plnum; }
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
@@ -88,7 +89,8 @@ class Player {
 		// See area
 	bool is_field_seen(const Map::Index i) const throw ()
 	{return m_see_all or seen_fields[i];}
-		inline bool is_field_seen(Coords c) { if(m_see_all) return true; return seen_fields[c.y*m_egbase->get_map()->get_width() + c.x]; }
+	bool is_field_seen(const Coords c) const throw ()
+	{return is_field_seen(Map::get_index(c, egbase().map().get_width()));}
 		inline bool is_field_seen(int x, int y) { if(m_see_all) return true; return is_field_seen(Coords(x, y)); }
 		inline std::vector<bool>* get_visibility() { if(m_see_all) return 0; return &seen_fields; }
       inline bool has_view_changed( void ) { bool t = m_view_changed; m_view_changed = false; return t; }
@@ -104,7 +106,7 @@ class Player {
 		// Player commands
 		// Only to be called indirectly via CmdQueue
 		void build_flag(Coords c);
-		void build_road(const Path *path);
+	void build_road(const Path & path);
 		void build(Coords c, int idx);
 		void bulldoze(PlayerImmovable* imm);
 		void flagaction(Flag* flag, int action);
@@ -127,7 +129,7 @@ class Player {
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
 	private:
 		bool m_see_all;
-	Editor_Game_Base     * m_egbase;
+	Editor_Game_Base     & m_egbase;
 		bool           m_view_changed;
 	int                    m_type;
 	int                    m_plnum;

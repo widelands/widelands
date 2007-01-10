@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -907,7 +907,8 @@ void PlayerImmovable::set_owner(Player *owner)
 
 	m_owner = owner;
 
-	m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::GAIN);
+	m_owner->egbase().player_immovable_notification
+		(this, Editor_Game_Base::GAIN);
 }
 
 /*
@@ -935,8 +936,8 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
       if(g->get_objects()->object_still_available(m_workers[0]))
             m_workers[0]->set_location(0);
 
-	if (m_owner!=0)
-		m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::LOSE);
+	if (m_owner) m_owner->egbase().player_immovable_notification
+		(this, Editor_Game_Base::LOSE);
 
 	BaseImmovable::cleanup(g);
 }

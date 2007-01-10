@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,8 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    const int xstart=5;
    const int ystart=15;
    const int yend=15;
-   int nr_immovables=get_parent()->get_map()->get_world()->get_nr_immovables();
+	const World & world = get_parent()->egbase().map().world();
+   int nr_immovables = world.get_nr_immovables();
    int immovables_in_row=(int)(sqrt((float)nr_immovables));
    if(immovables_in_row*immovables_in_row<nr_immovables) { immovables_in_row++; }
    if(immovables_in_row>max_items_in_tab) immovables_in_row=max_items_in_tab;
@@ -73,7 +74,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
 	uint width = 0, height = 0;
    for(int j=0; j<nr_immovables; j++) {
 		uint w, h;
-		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(j);
+		Immovable_Descr* descr = world.get_immovable_descr(j);
 		g_gr->get_picture_size
 			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
       if(w>width) width=w;
@@ -96,7 +97,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
          m_tabpanel->add(g_gr->get_picture(  PicMod_Game,  "pics/menu_tab_buildbig.png"  ), box );
       }
 
-		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(i);
+		Immovable_Descr* descr = world.get_immovable_descr(i);
       UI::Checkbox* cb= new UI::Checkbox(box, xpos, ypos,
             g_gr->get_picture( PicMod_Game,  descr->get_picture() ));
 

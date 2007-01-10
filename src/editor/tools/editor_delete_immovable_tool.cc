@@ -48,7 +48,7 @@ int Editor_Delete_Immovable_Tool::handle_click_impl
 	while (mr.next(fc))
 		if (BaseImmovable * const mim = fc.field->get_immovable()) {
          if(mim->get_type()!=Map_Object::IMMOVABLE) continue; // Delete no buildings or stuff
-			mim->remove(parent.get_editor());
+			mim->remove(&parent.editor());
       }
    return radius + 2;
 }

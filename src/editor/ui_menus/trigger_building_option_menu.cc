@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,10 +56,13 @@ m_parent  (parent)
    if(m_player<1) m_player=1;
 
    // Fill the building infos
-   Tribe_Descr* tribe = m_parent->get_editor()->get_tribe(m_parent->get_map()->get_scenario_player_tribe(m_player).c_str());
+	;
    int i=0;
-   if(tribe) {
-      for(i=0; i<tribe->get_nrbuildings(); i++) {
+	if
+		(const Tribe_Descr * const tribe = m_parent->editor().get_tribe
+		 (m_parent->egbase().map().get_scenario_player_tribe(m_player).c_str()))
+	{
+	   for(i=0; i<tribe->get_nrbuildings(); i++) {
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->get_name();
@@ -386,11 +389,15 @@ void Trigger_Building_Option_Menu::clicked(int i) {
 void Trigger_Building_Option_Menu::update(void) {
    if(m_x<0) m_x=0;
    if(m_y<0) m_y=0;
-   if(m_x>=((int)m_parent->get_map()->get_width())) m_x=m_parent->get_map()->get_width()-1;
-   if(m_y>=((int)m_parent->get_map()->get_height())) m_y=m_parent->get_map()->get_height()-1;
+	const Map & map = m_parent->egbase().map();
+	const X_Coordinate mapwidth  = map.get_width ();
+	const Y_Coordinate mapheight = map.get_height();
+	if (m_x >= static_cast<const int>(mapwidth))  m_x = mapwidth  - 1;
+	if (m_y >= static_cast<const int>(mapheight)) m_y = mapheight - 1;
 
    if(m_player<=0) m_player=1;
-   if(m_player>m_parent->get_map()->get_nrplayers()) m_player=m_parent->get_map()->get_nrplayers();
+	const Player_Number nr_players = map.get_nrplayers();
+	if (m_player > nr_players) m_player = nr_players;
 
    if(m_area<1) m_area=1;
    if(m_count<1) m_count=1;

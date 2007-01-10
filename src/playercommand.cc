@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -248,18 +248,16 @@ void Cmd_BuildFlag::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map
 }
 /*** class Cmd_BuildRoad ***/
 
-Cmd_BuildRoad::Cmd_BuildRoad (int t, int p, Path* pa):PlayerCommand(t,p)
-{
-	path=pa;
-	start=path->get_start();
-	nsteps=path->get_nsteps();
-	steps=0;
-}
+Cmd_BuildRoad::Cmd_BuildRoad (int t, int p, Path & pa) :
+PlayerCommand(t, p),
+path         (&pa),
+start        (pa.get_start()),
+nsteps       (pa.get_nsteps()),
+steps        (0)
+{}
 
 Cmd_BuildRoad::Cmd_BuildRoad (Deserializer* des):PlayerCommand (0, des->getchar())
 {
-	int i;
-
 	start.x=des->getshort();
 	start.y=des->getshort();
 	nsteps=des->getshort();
@@ -268,7 +266,7 @@ Cmd_BuildRoad::Cmd_BuildRoad (Deserializer* des):PlayerCommand (0, des->getchar(
 	path=0;
 	steps=new char[nsteps];
 
-	for (i=0;i<nsteps;i++)
+	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 	    steps[i]=des->getchar();
 }
 
@@ -286,13 +284,13 @@ void Cmd_BuildRoad::execute (Game* g)
 	if (path==0) {
 		assert (steps!=0);
 
-		path=new Path(g->get_map(), start);
-		for (int i=0; i<nsteps; i++)
-			path->append (steps[i]);
+		path = new Path(start);
+		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+			path->append (g->map(), steps[i]);
 	}
 
 	Player *player = g->get_player(get_sender());
-	player->build_road(path);
+	player->build_road(*path);
 }
 
 void Cmd_BuildRoad::serialize (Serializer* ser)
@@ -305,8 +303,8 @@ void Cmd_BuildRoad::serialize (Serializer* ser)
 
 	assert (path!=0 || steps!=0);
 
-	for (int i=0;i<nsteps;i++)
-		ser->putchar (path ? path->get_step(i) : steps[i]);
+	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+		ser->putchar (path ? (*path)[i] : steps[i]);
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
 void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
@@ -321,7 +319,7 @@ void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_M
       nsteps=fr->Unsigned16();
       steps= new char[nsteps];
 
-      for (int i=0;i<nsteps;i++)
+		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
          steps[i]=fr->Unsigned8();
    } else
       throw wexception("Unknown version in Cmd_BuildRoad::Read: %i", version);
@@ -337,8 +335,8 @@ void Cmd_BuildRoad::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map
 
    // Now nsteps
    fw->Unsigned16(nsteps);
-	for (int i=0;i<nsteps;i++)
-		fw->Unsigned8(path ? path->get_step(i) : steps[i]);
+	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+		fw->Unsigned8(path ? (*path)[i] : steps[i]);
 }
 /*** Cmd_FlagAction ***/
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -181,7 +181,7 @@ m_event_chain(chain)
    m_trigger_list=new UI::Listselect<Trigger &>(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
-	const MapTriggerManager & mtm = parent->get_egbase()->get_map()->get_mtm();
+	const MapTriggerManager & mtm = parent->egbase().map().get_mtm();
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		Trigger & tr = mtm.get_trigger_by_nr(i);

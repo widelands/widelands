@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -138,7 +138,7 @@ class TrainingSite:public ProductionSite {
 	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);
 
       private:
-	void request_soldier(Game * g);
+	void request_soldier();
 	static void request_soldier_callback(Game * g, Request * rq, int ware, Worker * w, void *data);
 
 	void program_start(Game * g, std::string name);
@@ -146,7 +146,7 @@ class TrainingSite:public ProductionSite {
 	void find_and_start_next_program(Game * g);
 	void calc_list_upgrades(Game * g);
 
-	void call_soldiers(Game * g);
+	void call_soldiers();
 	void drop_soldier(Game * g, uint nr);
 	void drop_unupgradable_soldiers(Game * g);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -162,10 +162,9 @@ void MilitarySite::init(Editor_Game_Base* g)
 log (">>MilitarySite::init()\n");
    ProductionSite::init(g);
 
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(g)) {
       // Request soldiers
-		call_soldiers(game);
+		call_soldiers();
 
       //    Should schedule because all stuff related to healing and removing own
       // soldiers should be scheduled.
@@ -284,7 +283,7 @@ MilitarySite::request_soldier
 Issue the soldier request
 ===============
 */
-void MilitarySite::request_soldier(Game *) {
+void MilitarySite::request_soldier() {
    int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
    // TODO: This should be user-configurable through windows options (still nothing is done to support this)
@@ -386,8 +385,7 @@ void MilitarySite::act(Game* g, uint data)
 				total_heal -= total_heal / 3;
       }
    }
-   if (!m_in_battle)
-      call_soldiers(g);
+	if (not m_in_battle) call_soldiers();
 
       // Schedule the next wakeup at 1 second
    schedule_act (g, 1000);
@@ -400,10 +398,9 @@ MilitarySite::call_soldiers
 Send the request for more soldiers if there are not full
 ===============
  */
-void MilitarySite::call_soldiers(Game *g)
-{
-	while(m_capacity > m_soldiers.size() + m_soldier_requests.size())
-		request_soldier(g);
+void MilitarySite::call_soldiers() {
+	while (m_capacity > m_soldiers.size() + m_soldier_requests.size())
+		request_soldier();
 }
 
 /*
@@ -415,11 +412,10 @@ Get out specied soldier from house.
  */
 void MilitarySite::drop_soldier (uint serial)
 {
-	Game * const game = dynamic_cast<Game * const>(get_owner()->get_game());
-
 molog ("**Dropping soldier (%d)\n", serial);
 
-	if (game and m_soldiers.size()) {
+	if (Game * const game = dynamic_cast<Game * const>(&owner().egbase()))
+		if (m_soldiers.size()) {
       int i = 0;
       Soldier* s = m_soldiers[i];
 
@@ -470,7 +466,7 @@ void MilitarySite::drop_soldier (Game *g, int nr)
       m_soldiers.pop_back();
 
          // Call more soldiers if are enought space
-      call_soldiers (g);
+	call_soldiers ();
 
          // Walk the soldier home safely
       s->mark (false);
@@ -496,7 +492,7 @@ void MilitarySite::change_soldier_capacity(int how)
 
          if (m_capacity > (uint) get_descr()->get_max_number_of_soldiers())
             m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
-         call_soldiers((Game*)get_owner()->get_game());
+			call_soldiers();
       }
       else
       {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,6 +122,7 @@ struct FindBobAttribute : public FindBob {
    virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
+typedef char Direction;
 
 /** class Map
  *
@@ -291,8 +292,9 @@ public:
 	void get_brn(const FCoords, FCoords * const) const;
 	FCoords br_n(const FCoords) const;
 
-	void get_neighbour(const  Coords, const int dir,  Coords * const) const;
-	void get_neighbour(const FCoords, const int dir, FCoords * const) const;
+	void get_neighbour(const Coords, const Direction dir, Coords * const) const;
+	void get_neighbour
+		(const FCoords, const Direction dir, FCoords * const) const;
 
 	// Pathfinding
 	int findpath
@@ -598,61 +600,55 @@ class Path {
 	friend class Map;
 
 public:
-	Path() { m_map = 0; }
-	Path(Map *map, Coords c) : m_map(map), m_start(c), m_end(c) { }
+	Path() {}
+	Path(Coords c) : m_start(c), m_end(c) { }
 	Path(CoordPath &o);
 
 	void reverse();
 
-	inline Map *get_map() const { return m_map; }
+	Coords get_start() const throw () {return m_start;}
+	Coords get_end  () const throw () {return m_end;}
 
-	inline bool is_valid() const { return m_map; }
-	inline const Coords &get_start() const { return m_start; }
-	inline const Coords &get_end() const { return m_end; }
+	typedef std::vector<Direction> Step_Vector;
+	Step_Vector::size_type get_nsteps() const throw () {return m_path.size();}
+	Direction operator[](const Step_Vector::size_type i) const throw ()
+	{assert(i < m_path.size()); return m_path[m_path.size() - i - 1];}
 
-	inline int get_nsteps() const { return m_path.size(); }
-	inline char get_step(int idx) const { return m_path[m_path.size()-idx-1]; }
-
-	void append(int dir);
+	void append(const Map & map, const Direction dir);
 
 private:
-	Map *m_map;
 	Coords m_start;
 	Coords m_end;
-	std::vector<char> m_path;
+	Step_Vector m_path;
 };
 
 // CoordPath is an extended path that also caches related Coords
 class CoordPath {
 public:
-	CoordPath() { m_map = 0; }
-	CoordPath(Map *map, Coords c) : m_map(map) { m_coords.push_back(c); }
-	CoordPath(const Path &path);
+	CoordPath() {}
+	CoordPath(Coords c) {m_coords.push_back(c);}
+	CoordPath(const Map & map, const Path & path);
 
-	CoordPath& operator=(const Path& path);
-
-	inline Map *get_map() const { return m_map; }
-	inline bool is_valid() const { return m_map; }
-
-	inline const Coords &get_start() const { return m_coords.front(); }
-	inline const Coords &get_end() const { return m_coords.back(); }
+	Coords get_start() const throw () {return m_coords.front();}
+	Coords get_end  () const throw () {return m_coords.back ();}
 	inline const std::vector<Coords> &get_coords() const { return m_coords; }
 
-	inline int get_nsteps() const { return m_path.size(); }
-	inline char get_step(int idx) const { return m_path[idx]; }
-	inline const std::vector<char> &get_steps() const { return m_path; }
+	typedef std::vector<Direction> Step_Vector;
+	Step_Vector::size_type get_nsteps() const throw () {return m_path.size();}
+	Direction operator[](const Step_Vector::size_type i) const throw ()
+	{assert(i < m_path.size()); return m_path[i];}
+	const Step_Vector & steps() const throw () {return m_path;}
 
 	int get_index(Coords field) const;
 
 	void reverse();
 	void truncate (const std::vector<char>::size_type after);
 	void starttrim(const std::vector<char>::size_type before);
-	void append(const Path &tail);
+	void append(const Map & map, const Path & tail);
 	void append(const CoordPath &tail);
 
 private:
-	Map                * m_map;
-	std::vector<char>    m_path;   //  directions
+	Step_Vector          m_path;   //  directions
 	std::vector<Coords>  m_coords; //  m_coords.size() == m_path.size() + 1
 };
 

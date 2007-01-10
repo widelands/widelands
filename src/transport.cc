@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1440,14 +1440,15 @@ void Road::mark_map(Editor_Game_Base *g)
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
 
-	for(int steps = 0; steps <= m_path.get_nsteps(); steps++) {
+	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			set_position(g, curf);
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
-			int dir = get_reverse_dir(m_path.get_step(steps-1));
-			int rdir = 2*(dir - Map_Object::WALK_E);
+			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
+			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, m_type);
@@ -1455,8 +1456,8 @@ void Road::mark_map(Editor_Game_Base *g)
 
 		// mark the road that leads away from this field
 		if (steps < m_path.get_nsteps()) {
-			int dir = m_path.get_step(steps);
-			int rdir = 2*(dir - Map_Object::WALK_E);
+			const Direction dir  = m_path[steps];
+			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, m_type);
@@ -1478,14 +1479,15 @@ void Road::unmark_map(Editor_Game_Base *g)
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
 
-	for(int steps = 0; steps <= m_path.get_nsteps(); steps++) {
+	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(g, curf);
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
-			int dir = get_reverse_dir(m_path.get_step(steps-1));
-			int rdir = 2*(dir - Map_Object::WALK_E);
+			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
+			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, Road_None);
@@ -1493,8 +1495,8 @@ void Road::unmark_map(Editor_Game_Base *g)
 
 		// mark the road that leads away from this field
 		if (steps < m_path.get_nsteps()) {
-			int dir = m_path.get_step(steps);
-			int rdir = 2*(dir - Map_Object::WALK_E);
+			const Direction  dir = m_path[steps];
+			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, Road_None);
@@ -1532,14 +1534,16 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
    assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
-	int dir;
 
-	dir = m_path.get_step(0);
+	{
+		const Direction dir = m_path[0];
 	m_flags[FlagStart]->attach_road(dir, this);
 	m_flagidx[FlagStart] = dir;
+	}
 
 
-	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
+	const Direction dir =
+		get_reverse_dir(m_path[m_path.get_nsteps() - 1]);
 	m_flags[FlagEnd]->attach_road(dir, this);
 	m_flagidx[FlagEnd] = dir;
 
@@ -1548,8 +1552,7 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	// Mark Fields
 	mark_map(gg);
 
-	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(gg)) {
 		Carrier * const carrier =
 			static_cast<Carrier * const>(m_carrier.get(game));
       m_desire_carriers = 1;
@@ -1665,13 +1668,13 @@ If we lost our carrier, re-request it.
 */
 void Road::remove_worker(Worker *w)
 {
-	Editor_Game_Base* g = get_owner()->get_game();
-	Carrier* carrier = (Carrier*)m_carrier.get(g);
+	Editor_Game_Base & egbase = owner().egbase();
+	Carrier* carrier = dynamic_cast<Carrier * const>(m_carrier.get(&egbase));
 
 	if (carrier == w)
 		m_carrier = carrier = 0;
 
-	Game * const game = dynamic_cast<Game * const>(g);
+	Game * const game = dynamic_cast<Game * const>(&egbase);
 	if (not carrier and not m_carrier_request and m_desire_carriers and game) {
 		molog("Road::remove_worker: Request a new carrier\n");
 		request_carrier(game);
@@ -1706,17 +1709,17 @@ be created to span [new flag...end]
 void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 {
    Flag *oldend = m_flags[FlagEnd];
-   int dir;
 
    // detach from end
    m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
 
    // build our new path and the new road's path
-   CoordPath path(m_path);
+	CoordPath path(g->map(), m_path);
    CoordPath secondpath(path);
    int index = path.get_index(flag->get_position());
 
-   assert(index > 0 && index < path.get_nsteps()-1);
+	assert(index > 0);
+	assert(static_cast<const uint>(index) < path.get_nsteps() - 1);
 
    path.truncate(index);
    secondpath.starttrim(index);
@@ -1725,7 +1728,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
    m_flags[FlagEnd] = flag;
    set_path(g, path);
 
-   dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
+	const Direction dir = get_reverse_dir(m_path[m_path.get_nsteps() - 1]);
    m_flags[FlagEnd]->attach_road(dir, this);
    m_flagidx[FlagEnd] = dir;
 
@@ -2345,7 +2348,7 @@ Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbda
 	m_idle = false;
 
 	m_count = 1;
-	m_required_time = target->get_owner()->get_game()->get_gametime();
+	m_required_time = target->owner().egbase().get_gametime();
 	m_required_interval = 0;
 
 	m_callbackfn = cbfn;
@@ -2549,7 +2552,8 @@ Can be in the past, indicating that we have been idling, waiting for the ware.
 */
 int Request::get_required_time()
 {
-	return get_base_required_time(m_economy->get_owner()->get_game(), m_transfers.size());
+	return
+		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
 }
 
 
@@ -3469,7 +3473,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 	assert(start->get_economy() == this);
 	assert(end->get_economy() == this);
 
-	Map *map = get_owner()->get_game()->get_map();
+	Map & map = owner().egbase().map();
 
 	// advance the path-finding cycle
 	mpf_cycle++;
@@ -3486,7 +3490,8 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 	start->mpf_cycle = mpf_cycle;
 	start->mpf_backlink = 0;
 	start->mpf_realcost = 0;
-	start->mpf_estimate = map->calc_cost_estimate(start->get_position(), end->get_position());
+	start->mpf_estimate = map.calc_cost_estimate
+		(start->get_position(), end->get_position());
 
 	Open.push(start);
 
@@ -3516,7 +3521,8 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 				// add to open list
 				neighbour->mpf_cycle = mpf_cycle;
 				neighbour->mpf_realcost = cost;
-				neighbour->mpf_estimate = map->calc_cost_estimate(neighbour->get_position(), end->get_position());
+				neighbour->mpf_estimate = map.calc_cost_estimate
+					(neighbour->get_position(), end->get_position());
 				neighbour->mpf_backlink = current;
 				Open.push(neighbour);
 			} else if (neighbour->cost() > cost+neighbour->mpf_estimate) {
@@ -3767,15 +3773,15 @@ void Economy::add_request(Request* req)
    if(req->get_type()==Request::WORKER) {
       log("%p: add_request(%p) for worker %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
-            req->get_target((Game*)get_owner()->get_game())->get_serial());
+            req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
    } else if(req->get_type()==Request::SOLDIER) {
       log("%p: add_request(%p) for soldier %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
-            req->get_target((Game*)get_owner()->get_game())->get_serial());
+            req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
    } else if (req->get_type()==Request::WARE){
       log("%p: add_request(%p) for ware %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_ware_descr(req->get_index())->get_descname(),
-            req->get_target((Game*)get_owner()->get_game())->get_serial());
+            req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
    }
 
 	m_requests.push_back(req);
@@ -4083,10 +4089,10 @@ Make sure the request timer is running.
 */
 void Economy::start_request_timer(int delta)
 {
-	Game * const game = dynamic_cast<Game *const>(m_owner->get_game());
-	if (not game) return;
+	if (Game * const game = dynamic_cast<Game * const>(&m_owner->egbase())) {
+		const int gametime = game->get_gametime();
 
-	if (m_request_timer && m_request_timer_time - (game->get_gametime() + delta) <= 0)
+		if (m_request_timer and m_request_timer_time - (gametime + delta) <= 0)
 		return;
 
 	Cmd_Queue* cq = game->get_cmdqueue();
@@ -4103,6 +4109,7 @@ void Economy::start_request_timer(int delta)
 		 m_trackserial,
 		 0);
 #endif
+	}
 }
 
 
@@ -4373,8 +4380,7 @@ void Economy::balance_requestsupply()
 
 	rsps.nexttimer = -1;
 
-	Game *const game = dynamic_cast<Game * const>(m_owner->get_game());
-	if (not game) return;
+	if (Game *const game = dynamic_cast<Game * const>(&m_owner->egbase())) {
 
 	// Try to fulfill non-idle Requests
 	process_requests(game, &rsps);
@@ -4416,6 +4422,7 @@ void Economy::balance_requestsupply()
 	if (rsps.nexttimer > 0) {
 		log("  nexttimer: %i\n", rsps.nexttimer);
 		start_request_timer(rsps.nexttimer);
+	}
 	}
 }
 

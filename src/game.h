@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,14 +105,19 @@ public:
 	void send_player_bulldoze (PlayerImmovable*);
 	void send_player_build (int, const Coords&, int);
 	void send_player_build_flag (int, const Coords&);
-	void send_player_build_road (int, Path*);
+	void send_player_build_road (int, Path &);
 	void send_player_flagaction (Flag*, int);
 	void send_player_start_stop_building (Building*);
 	void send_player_enhance_building (Building*, int);
    void send_player_change_training_options(Building*, int, int);
    void send_player_drop_soldier(Building*, int);
 	void send_player_change_soldier_capacity(Building*, int);
-	void send_player_enemyflagaction (Flag*, int, int, int, int);
+	void send_player_enemyflagaction
+		(const Flag * const,
+		 const int action,
+		 const Player_Number,
+		 const int num_soldiers,
+		 const int type);
 
    Interactive_Player* get_ipl(void) { return ipl; }
 

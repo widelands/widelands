@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,7 +115,7 @@ void Editor_Event_Menu_New_Event::clicked_ok() {
       // No event created, choose another, user
       return;
    }
-	m_parent->get_map()->get_mem().register_new_event(event);
+	m_parent->egbase().map().get_mem().register_new_event(event);
    end_modal(1);
    return;
 }

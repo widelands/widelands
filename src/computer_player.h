@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,10 @@ class PlayerImmovable;
 class Tribe_Descr;
 class Road;
 class ProductionSite;
-class World;
 
 class Computer_Player {
 	public:
-		Computer_Player (Game *g, uchar pln);
+	Computer_Player(Game &, const Player_Number);
 		~Computer_Player ();
 
 		void think ();
@@ -45,9 +44,10 @@ class Computer_Player {
 		void gain_field (const FCoords&);
 		void lose_field (const FCoords&);
 
-		inline Game *get_game() { return game; }
+	const Game & game() const throw () {return m_game;}
+	Game       & game()       throw () {return m_game;}
 		inline uchar get_player_number(void) { return player_number; }
-		inline Player *get_player() { assert(game); return game->get_player(player_number) ; }
+	Player * get_player() const {return game().get_player(player_number);}
 
 	private:
 		void gain_building (Building*);
@@ -154,11 +154,8 @@ class Computer_Player {
 		uchar preciousness;
 		};
 
-	Game                            * game;
-	World                           * world;
-	Map                             * map;
-
-	uchar                             player_number;
+	Game                            & m_game;
+	const Player_Number               player_number;
 	Player                          * player;
 	const Tribe_Descr               * tribe;
 

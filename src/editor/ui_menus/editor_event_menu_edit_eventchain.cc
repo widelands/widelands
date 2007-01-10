@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -138,7 +138,7 @@ m_event_chain(chain)
    m_available_events=new UI::Listselect<Event &>(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
-	const MapEventManager & mem = parent->get_egbase()->get_map()->get_mem();
+	const MapEventManager & mem = parent->egbase().map().get_mem();
 	const MapEventManager::Index nr_events = mem.get_nr_events();
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 		Event & event = mem.get_event_by_nr(i);

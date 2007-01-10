@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,38 +30,52 @@
 #include "battle.h"
 #include "immovable.h"
 
-void getCloseMilitarySites(Game* game, Flag* flag, int player, std::vector<MilitarySite*>* militarySites) {
-   Map* const map = game->get_map();
+void getCloseMilitarySites
+(const Game & game,
+ const Flag & flag,
+ const Player_Number player,
+ std::set<MilitarySite *> & militarySites)
+{
+	Map & map = game.map();
 
    std::vector<ImmovableFound> immovables;
 
-   map->find_reachable_immovables(flag->get_position(),25,&immovables,CheckStepWalkOn(MOVECAPS_WALK, false));
+	map.find_reachable_immovables
+		(flag.get_position(),
+		 25,
+		 &immovables,
+		 CheckStepWalkOn(MOVECAPS_WALK, false));
 
    if (!immovables.size())
       return;
 
    /* Find all friendly MS */
    for (std::vector<ImmovableFound>::const_iterator it=immovables.begin();it != immovables.end();++it) {
-      MilitarySite* const ms = dynamic_cast<MilitarySite * const>(it->object);
-      if (ms and ms->get_owner()->get_player_number() == player) {
-         std::vector<MilitarySite*>::iterator alreadyIn = find(militarySites->begin(),militarySites->end(),ms);
-         if (alreadyIn == militarySites->end()) {
-            militarySites->insert(militarySites->begin(),ms);
+		if
+			(MilitarySite * const ms =
+			 dynamic_cast<MilitarySite * const>(it->object))
+			if (ms->owner().get_player_number() == player) {
+				militarySites.insert(ms);
             log("getCloseMilitarySite(): military site at: %i,%i\n",ms->get_base_flag()->get_position().x,ms->get_base_flag()->get_position().y);
          }
-      }
    }
 }
 
-uint getMaxAttackSoldiers(Game* game, Flag* flag, int player) {
+uint getMaxAttackSoldiers
+(const Game & game, const Flag & flag, const Player_Number player)
+{
    uint maxAttackSoldiers = 0;
 
-   std::vector<MilitarySite*> militarySites;
-   getCloseMilitarySites(game,flag,player,&militarySites);
+	std::set<MilitarySite *> militarySites;
+	getCloseMilitarySites(game, flag, player, militarySites);
 
-   for (std::vector<MilitarySite*>::const_iterator it=militarySites.begin();it != militarySites.end();++it) {
+	const std::set<MilitarySite *>::const_iterator militarySites_end =
+		militarySites.end();
+	for
+		(std::set<MilitarySite *>::const_iterator it = militarySites.begin();
+		 it != militarySites_end;
+		 ++it)
       maxAttackSoldiers+= (*it)->nr_attack_soldiers();
-   }
    log("Got %i attackers available for attack.\n",maxAttackSoldiers);
    return maxAttackSoldiers;
 }
@@ -75,25 +89,25 @@ class AttackControllerDescr : public Map_Object_Descr
 
 AttackControllerDescr globalAttackControllerDescr;
 
-AttackController::AttackController(Game* _game) : 
+AttackController::AttackController(Game* _game) :
 BaseImmovable(&globalAttackControllerDescr)  {
    Map_Object::init(_game);
    this->game = _game;
    this->attackedMsEmpty = false;
 }
 
-AttackController::AttackController(Game* _game, Flag* _flag, int _attacker, int _defender) : 
+AttackController::AttackController(Game* _game, Flag* _flag, int _attacker, int _defender) :
 BaseImmovable(&globalAttackControllerDescr)  {
-   
+
    Map_Object::init(_game);
-   
+
    this->game = _game;
    this->flag = _flag;
    this->attackingPlayer = _attacker;
    this->defendingPlayer = _defender;
    this->totallyLaunched = 0;
    this->attackedMsEmpty = false;
-   
+
 }
 
 AttackController::~AttackController() {
@@ -120,18 +134,28 @@ void AttackController::launchAttack(uint nrAttackers) {
 }
 
 bool AttackController::launchAllSoldiers(bool attackers, int max) {
-   std::vector<MilitarySite*> militarySites;
-   getCloseMilitarySites(game,flag,(attackers ? attackingPlayer : defendingPlayer),&militarySites);
-   
+	std::set<MilitarySite *> militarySites;
+	getCloseMilitarySites
+		(*game,
+		 *flag,
+		 (attackers ? attackingPlayer : defendingPlayer),
+		 militarySites);
+
    bool launchedSoldier = false;
-   
-   for (std::vector<MilitarySite*>::const_iterator it=militarySites.begin();it != militarySites.end();++it) {
+
+	const std::set<MilitarySite *>::const_iterator militarySites_end =
+		militarySites.end();
+	for
+		(std::set<MilitarySite *>::const_iterator it = militarySites.begin();
+		 it != militarySites_end;
+		 ++it)
+	{
       uint soldiersOfMs = (*it)->nr_attack_soldiers();
       uint nrLaunch = ((max > -1) && (soldiersOfMs > (uint)max) ? (uint)max : soldiersOfMs);
 		if (nrLaunch == 0) continue;
-		
+
 		launchedSoldier = true;
-		
+
       launchSoldiersOfMilitarySite(*it,nrLaunch,attackers);
 
       if (max > -1) {

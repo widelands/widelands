@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,8 @@ Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c
    const int xstart=5;
    const int ystart=15;
    const int yend=15;
-   int nr_resources=get_parent()->get_map()->get_world()->get_nr_resources();
+	const World & world = parent->egbase().map().world();
+   int nr_resources = world.get_nr_resources();
    int resources_in_row=(int)(sqrt((float)nr_resources));
    if(resources_in_row*resources_in_row<nr_resources) { resources_in_row++; }
    int i=1;
@@ -71,7 +72,7 @@ Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c
 	uint w     = 0, h      = 0;
 	uint width = 0, height = 0;
    for(i=0; i<nr_resources; i++) {
-      Resource_Descr* res=parent->get_map()->get_world()->get_resource(i);
+		Resource_Descr * const res = world.get_resource(i);
       std::string editor_pic=res->get_editor_pic(100000);
 		const uint picid = g_gr->get_picture(PicMod_Game,  editor_pic.c_str());
 		g_gr->get_picture_size(picid, w, h);
@@ -149,7 +150,7 @@ Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c
    m_radiogroup->clicked.set(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
 
    while(i<nr_resources) {
-      Resource_Descr* res=parent->get_map()->get_world()->get_resource(i);
+		Resource_Descr * const res = world.get_resource(i);
       if(cur_x==resources_in_row) { cur_x=0; posy+=height+1+space; posx=xstart; }
 
       std::string editor_pic=res->get_editor_pic(100000);
@@ -213,8 +214,10 @@ void Editor_Tool_Change_Resources_Options_Menu::selected(void) {
    m_irt->set_cur_res(n);
    m_drt->set_cur_res(n);
 
-   m_parent->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Change_Resource_Tool_Callback, static_cast<void*>(m_parent->get_map()), n);
-   m_parent->get_map()->recalc_whole_map();
+	Map & map = m_parent->egbase().map();
+	map.overlay_manager().register_overlay_callback_function
+		(&Editor_Change_Resource_Tool_Callback, static_cast<void *>(&map), n);
+	map.recalc_whole_map();
    select_correct_tool();
 
    update();
@@ -235,9 +238,11 @@ void Editor_Tool_Change_Resources_Options_Menu::update(void) {
    m_set->set_text(buf);
 
    int cursel=m_srt->get_cur_res();
-   if(cursel)
-      m_cur_selection->set_text(m_parent->get_map()->get_world()->get_resource(m_srt->get_cur_res())->get_name());
-   else
-      m_cur_selection->set_text("");
+	m_cur_selection->set_text
+		(cursel ?
+		 m_parent->egbase().map().world().get_resource
+		 (m_srt->get_cur_res())->get_name()
+		 :
+		 "");
    m_cur_selection->set_pos((get_inner_w()-m_cur_selection->get_w())/2, get_inner_h()-20);
 }

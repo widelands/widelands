@@ -223,8 +223,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
    m_trigger = new UI::Textarea( this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
 
    // Add all variables
-	const MapObjectiveManager & mom =
-		m_parent->get_egbase()->get_map()->get_mom();
+	const MapObjectiveManager & mom = m_parent->egbase().map().get_mom();
 	const MapObjectiveManager::Index nr_objectives = mom.get_nr_objectives();
 	for (MapObjectiveManager::Index i = 0; i < nr_objectives; ++i)
 		insert_objective(mom.get_objective_by_nr(i));
@@ -253,7 +252,7 @@ void Editor_Objectives_Menu::clicked_new() {
          // Get the a name
          char buffer[256];
 
-         Map & map = m_parent->get_egbase()->map();
+	Map & map = m_parent->egbase().map();
          MapObjectiveManager & mom = map.get_mom();
          for (uint b = 1; mom.get_objective(buffer); ++b) snprintf
             (buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), b);
@@ -299,7 +298,7 @@ void Editor_Objectives_Menu::clicked_del() {
             return;
          }
 
-	Map & map = m_parent->get_egbase()->map();
+	Map & map = m_parent->egbase().map();
 	map.get_mtm().delete_trigger(obj.get_trigger()->get_name());
 	map.get_mom().delete_objective(obj.get_name());
 	m_table.remove_selected();

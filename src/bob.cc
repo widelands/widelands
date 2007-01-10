@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -782,13 +782,14 @@ path index.
 ===============
 */
 bool Bob::start_task_movepath
-(const Path & origpath,
+(const Map & map,
+ const Path & origpath,
  const int index,
  const DirAnimations & anims,
  const bool forceonlast,
  const int only_step)
 {
-	CoordPath path(origpath);
+	CoordPath path(map, origpath);
 	int curidx = path.get_index(get_position());
 
 	if (curidx == -1)
@@ -833,8 +834,16 @@ void Bob::movepath_update(Game* g, State* state)
 		return;
 	}
 
-	if (!state->path || state->ivar1 >= state->path->get_nsteps()) {
-		assert(!state->path || m_position == state->path->get_end());
+	assert(state->ivar1 >= 0);
+	const Path * const path = state->path;
+	if
+		(not path
+		 or
+		 static_cast<const Path::Step_Vector::size_type>(state->ivar1)
+		 >=
+		 path->get_nsteps())
+	{
+		assert(not path or m_position == path->get_end());
       pop_task(); // success
 		return;
 	} else if(state->ivar1==state->ivar3) {
@@ -845,10 +854,15 @@ void Bob::movepath_update(Game* g, State* state)
       return;
    }
 
-	char dir = state->path->get_step(state->ivar1);
+	const Direction dir = (*path)[state->ivar1];
 	bool forcemove = false;
 
-	if (state->ivar2 && (state->ivar1+1) == state->path->get_nsteps())
+	if
+		(state->ivar2
+		 and
+		 static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1
+		 ==
+		 path->get_nsteps())
 		forcemove = true;
 
 	int tdelta = start_walk(g, (WalkingDir)dir, state->diranims->get_animation(dir), forcemove);
@@ -1159,13 +1173,14 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
 		molog("* coords: (%i,%i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
 		molog("* diranims: %p\n",  m_stack[i].diranims);
 		molog("* path: %p\n",  m_stack[i].path);
-      if(m_stack[i].path) {
-         Path* p=m_stack[i].path;
-         molog("** Path length: %i\n", p->get_nsteps());
-         molog("** Start: (%i,%i)\n", p->get_start().x, p->get_start().y);
-         molog("** End: (%i,%i)\n", p->get_end().x, p->get_end().y);
-         for(int j=0; j<p->get_nsteps(); j++)
-            molog("** Step %i/%i: %i\n", j+1, p->get_nsteps(), p->get_step(j));
+		if (m_stack[i].path) {
+			const Path & path = *m_stack[i].path;
+			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+			molog("** Path length: %i\n", nr_steps);
+			molog("** Start: (%i,%i)\n", path.get_start().x, path.get_start().y);
+			molog("** End: (%i,%i)\n", path.get_end().x, path.get_end().y);
+			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
+				molog("** Step %i/%i: %i\n", j + 1, nr_steps, path[j]);
       }
 		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);

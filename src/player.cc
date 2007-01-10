@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,18 +38,18 @@
 //
 //
 Player::Player
-(Editor_Game_Base* g,
+(Editor_Game_Base  & the_egbase,
  const int type,
  const int plnum,
- const Tribe_Descr & tr,
+ const Tribe_Descr & the_tribe,
  const std::string & name,
  const uchar * const playercolor)
 :
 m_see_all(false),
-m_egbase (g),
+m_egbase (the_egbase),
 m_type   (type),
 m_plnum  (plnum),
-m_tribe  (tr)
+m_tribe  (the_tribe)
 {
 
 	for(int i = 0; i < 4; i++)
@@ -78,23 +78,22 @@ Prepare the player for in-game action
 ===============
 */
 void Player::init(const bool place_headquarters) {
-	const Map & map = *m_egbase->get_map();
+	const Map & map = egbase().map();
 
 	seen_fields.resize(map.max_index(), false);
 
 	if (place_headquarters) {
 		const Tribe_Descr & trdesc = m_tribe;
 		const int plnum = m_plnum;
-		Editor_Game_Base & game = *m_egbase;
 		//try {
 			trdesc.load_warehouse_with_start_wares
-				(game,
+				(egbase(),
 				 *dynamic_cast<Warehouse * const>
-				 (game.warp_building
+				 (egbase().warp_building
 				  (map.get_starting_pos(plnum),
 				   plnum,
 				   trdesc.get_building_index("headquarters"))));
-		//} catch () {
+		//} catch (const Descr_Maintainer<Building_Descr>::Nonexistent) {
 			//throw wexception("Tribe %s lacks headquarters", tribe.get_name());
 		//}
 	}
@@ -109,7 +108,7 @@ Return filtered buildcaps that take the player's territory into account.
 ===============
 */
 FieldCaps Player::get_buildcaps(const Coords coords) const {
-	const Map & map = *m_egbase->get_map();
+	const Map & map = egbase().map();
 	const FCoords fc = map.get_fcoords(coords);
 	uchar buildcaps = fc.field->get_caps();
 	const uchar player_number = m_plnum;
@@ -137,7 +136,7 @@ Mark the given area as (un)seen
 */
 void Player::set_area_seen(Coords center, uint area, bool on)
 {
-	const Map & map = m_egbase->map();
+	const Map & map = egbase().map();
 	const uint mapwidth = map.get_width();
 	MapRegion mr(map, center, area);
 	FCoords fc;
@@ -158,8 +157,7 @@ void Player::build_flag(Coords c)
 {
 	int buildcaps = get_buildcaps(c);
 
-	if (buildcaps & BUILDCAPS_FLAG)
-		Flag::create(m_egbase, this, c);
+	if (buildcaps & BUILDCAPS_FLAG) Flag::create(&m_egbase, this, c);
 }
 
 
@@ -174,20 +172,18 @@ Note: the diagnostic log messages aren't exactly errors. They might happen
 in some situations over the network.
 ===============
 */
-void Player::build_road(const Path *path)
-{
-	Map *map = m_egbase->get_map();
-	BaseImmovable *imm;
+void Player::build_road(const Path & path) {
+	Map & map = egbase().map();
 	Flag *start, *end;
 
-	imm = map->get_immovable(path->get_start());
+	BaseImmovable * imm = map.get_immovable(path.get_start());
 	if (!imm || imm->get_type() != Map_Object::FLAG) {
 		log("%i: building road, missed start flag\n", get_player_number());
 		return;
 	}
 	start = (Flag *)imm;
 
-	imm = map->get_immovable(path->get_end());
+	imm = map.get_immovable(path.get_end());
 	if (!imm || imm->get_type() != Map_Object::FLAG) {
 		log("%i: building road, missed end flag\n", get_player_number());
 		return;
@@ -195,13 +191,14 @@ void Player::build_road(const Path *path)
 	end = (Flag *)imm;
 
 	// Verify ownership of the path
-	Coords coords = path->get_start();
+	Coords coords = path.get_start();
 
-	for(int i = 0; i < path->get_nsteps()-1; i++) {
-		int dir = path->get_step(i);
-		map->get_neighbour(coords, dir, &coords);
+	const int laststep = path.get_nsteps() - 1;
+	for (int i = 0; i < laststep; ++i) {
+		const Direction dir = path[i];
+		map.get_neighbour(coords, dir, &coords);
 
-		imm = map->get_immovable(coords);
+		imm = map.get_immovable(coords);
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
 			log("%i: building road, small immovable in the way, type=%d\n", get_player_number(), imm->get_type());
 			return;
@@ -214,7 +211,7 @@ void Player::build_road(const Path *path)
 	}
 
 	// fine, we can build the road
-	Road::create(m_egbase, Road_Normal, start, end, *path);
+	Road::create(&m_egbase, Road_Normal, start, end, path);
 }
 
 
@@ -240,7 +237,7 @@ void Player::build(Coords c, int idx)
 
 
 	// Validate build position
-	get_game()->get_map()->normalize_coords(&c);
+	egbase().map().normalize_coords(&c);
 	buildcaps = get_buildcaps(c);
 
 	if (descr->get_ismine())
@@ -254,7 +251,7 @@ void Player::build(Coords c, int idx)
 			return;
 		}
 
-	get_game()->warp_constructionsite(c, m_plnum, idx);
+	egbase().warp_constructionsite(c, m_plnum, idx);
 }
 
 
@@ -298,7 +295,7 @@ void Player::bulldoze(PlayerImmovable* imm)
 	}
 
 	// Now destroy it
-	imm->destroy(get_game());
+	imm->destroy(&egbase());
 }
 
 void Player::start_stop_building(PlayerImmovable* imm) {
@@ -326,27 +323,38 @@ void Player::enhance_building(PlayerImmovable* imm, int id) {
       // Get workers and soldiers
       const std::vector<Worker*>& workers =  b->get_workers();
       std::vector<Worker*> m_workers = workers;
-      std::vector<Soldier*> m_soldiers;
+	const std::vector<Soldier *> soldiers = b->has_soldiers() ?
+		dynamic_cast<ProductionSite &>(*b).get_soldiers()
+		:
+		std::vector<Soldier *>();
 
-		if (b->has_soldiers())
-			m_soldiers = static_cast<ProductionSite * const>(b)->get_soldiers();
+	b->remove(&egbase()); //  no fire or stuff
 
-      b->remove(get_game()); // No fire or stuff
+	egbase().warp_constructionsite(c, m_plnum, id, cur_id);
 
-      get_game()->warp_constructionsite(c, m_plnum, id, cur_id);
-
+	Game & game = dynamic_cast<Game &>(egbase());
       // Reassign the workers
-      for( uint i = 0; i < m_workers.size(); i++) {
-         Worker* w = m_workers[i];
-         w->set_location( (Building*)(get_game()->get_map()->get_field(c)->get_immovable()));
-         w->reset_tasks( static_cast<Game*>( get_game() ) );
+	const std::vector<Worker *>::const_iterator workers_end = workers.end();
+	for
+		(std::vector<Worker *>::const_iterator it = workers.begin();
+		 it != workers_end;
+		 ++it)
+	{
+		Worker & worker = **it;
+		worker.set_location(b);
+		worker.reset_tasks(&game);
       }
       // Reassign the soldier
-      for( uint i = 0; i < m_soldiers.size(); i++) {
-         Worker* w = m_soldiers[i];
-         w->set_location( (Building*)(get_game()->get_map()->get_field(c)->get_immovable()));
-         w->reset_tasks( static_cast<Game*>( get_game() ) );
-      }
+	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
+	for
+		(std::vector<Soldier *>::const_iterator it = soldiers.begin();
+		 it != soldiers_end;
+		 ++it)
+	{
+		Soldier & soldier = **it;
+		soldier.set_location(b);
+		soldier.reset_tasks(&game);
+	}
    }
 }
 
@@ -360,8 +368,8 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag* flag, int action)
 {
-	Game * const game = dynamic_cast<Game * const>(get_game());
-	if (game and flag->get_owner() == this) {// Additional security check.
+	if (Game * const game = dynamic_cast<Game * const>(&egbase()))
+		if (flag->get_owner() == this) {// Additional security check.
 		switch (action) {
 		case FLAGACTION_GEOLOGIST:
 			//try {
@@ -494,8 +502,7 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
    if (attacker != get_player_number())
       throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
 
-	Game * const game = dynamic_cast<Game * const>(get_game());
-	if (not game) return;
+	if (Game * const game = dynamic_cast<Game * const>(&egbase())) {
 
    assert (num >= 0);
 
@@ -515,5 +522,6 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
 
       default:
          log("Player sent bad enemyflagaction = %i\n", action);
+		}
    }
 }

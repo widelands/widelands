@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,17 +153,18 @@ void Main_Menu_New_Map::button_clicked(int n) {
 }
 
 void Main_Menu_New_Map::clicked_create_map() {
-	Map & map = m_parent->get_egbase()->map();
+	Map & map = m_parent->egbase().map();
+	Editor & editor = m_parent->editor();
 	// Clean all the stuff up, so we can load
-	m_parent->get_editor()->cleanup_for_load(true, false);
+	editor.cleanup_for_load(true, false);
 
 	map.create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
 
 	// Postload the world which provides all the immovables found on a map
-	map.get_world()->postload(m_parent->get_editor());
+	map.get_world()->postload(&editor);
 
-	m_parent->get_editor()->postload();
-	m_parent->get_editor()->load_graphics();
+	editor.postload     ();
+	editor.load_graphics();
 
 	map.recalc_whole_map();
 

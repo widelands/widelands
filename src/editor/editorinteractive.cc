@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,8 +65,9 @@ Editor_Interactive::Editor_Interactive()
 construct editor sourroundings
 ==========
 */
-Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
-   m_editor = e;
+Editor_Interactive::Editor_Interactive(Editor & e) :
+Interactive_Base(e), m_editor(e)
+{
 
    // Disable debug. it is no use for editor
 #ifndef DEBUG
@@ -77,7 +78,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    // The mapview. watch the map!!!
    Map_View* mm;
-   mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
+	mm = new Map_View(this, 0, 0, get_w(), get_h(), *this);
    mm->warpview.set(this, &Editor_Interactive::mainview_move);
    mm->fieldclicked.set(this, &Editor_Interactive::field_clicked);
    set_mapview(mm);
@@ -181,7 +182,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 	Tribe_Descr::get_all_tribenames(tribes);
    uint i=0;
    for(i=0; i<tribes.size(); i++)
-      e->manually_load_tribe(tribes[i].c_str());
+		e.manually_load_tribe(tribes[i].c_str());
 
    m_need_save=false;
    m_ctrl_down=false;
@@ -210,9 +211,7 @@ Called just before the game starts, after postload, init and gfxload
 ===============
 */
 void Editor_Interactive::start()
-{
-   get_map()->get_overlay_manager()->show_buildhelp(true);
-}
+{egbase().map().overlay_manager().show_buildhelp(true);}
 
 /*
 ===========
@@ -301,7 +300,7 @@ the function of the currently selected tool
 */
 void Editor_Interactive::field_clicked() {
 	tools.tools[tools.current_tool_index]
-		->handle_click(tools.use_tool, map(), get_sel_pos(), *this);
+		->handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
    get_mapview()->need_complete_redraw();
    set_need_save(true);
 }
@@ -328,9 +327,7 @@ toggles the buildhelp on the map
 ===========
 */
 void Editor_Interactive::toggle_buildhelp(void)
-{
-   get_map()->get_overlay_manager()->toggle_buildhelp();
-}
+{egbase().map().overlay_manager().toggle_buildhelp();}
 
 /*
 ===============
@@ -521,10 +518,11 @@ select a new tool
 */
 void Editor_Interactive::select_tool(int n, int which) {
    if(which==0 && n!=tools.current_tool_index) {
+		Map & map = egbase().map();
       // A new tool has been selected. Remove all
       // registered overlay callback functions
-		map().overlay_manager().register_overlay_callback_function(0, 0);
-		map().recalc_whole_map();
+		map.overlay_manager().register_overlay_callback_function(0, 0);
+		map.recalc_whole_map();
 
    }
    tools.current_tool_index=n;
@@ -543,9 +541,10 @@ void Editor_Interactive::select_tool(int n, int which) {
  *  or a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
-(const int player, const void * const data)
+(const Player_Number player, const void * const data)
 {
-   assert(player>0 && player<=m_editor->get_map()->get_nrplayers());
+	assert(0 < player);
+	assert    (player <= m_editor.map().get_nrplayers());
 
    Player_References r;
    r.player=player;
@@ -559,9 +558,9 @@ void Editor_Interactive::reference_player_tribe
  * will leace a reference
  */
 void Editor_Interactive::unreference_player_tribe
-(const int player, const void * const data)
+(const Player_Number player, const void * const data)
 {
-   assert(player>=0 && player<=m_editor->get_map()->get_nrplayers());
+	assert(player <= m_editor.map().get_nrplayers());
    assert(data);
 
    int i=0;
@@ -581,7 +580,8 @@ void Editor_Interactive::unreference_player_tribe
 }
 
 bool Editor_Interactive::is_player_tribe_referenced(int player) {
-   assert(player>0 && player<=m_editor->get_map()->get_nrplayers());
+	assert(0 < player);
+	assert    (player <= m_editor.map().get_nrplayers());
 
    uint i=0;
    for(i=0; i<m_player_tribe_references.size(); i++)

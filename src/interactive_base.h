@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,14 +49,12 @@ class Interactive_Base : public UI::Panel {
 		};
 
 	public:
-		Interactive_Base(Editor_Game_Base* g);
+	Interactive_Base(Editor_Game_Base &);
 		virtual ~Interactive_Base(void);
 
-      inline Map* get_map() { return m_egbase->get_map(); }
-	const Map & map() const {return *m_egbase->get_map();}
-	Map & map() {return *m_egbase->get_map();}
+	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
+	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	virtual void reference_player_tribe(const int, const void * const) {}
-		inline Editor_Game_Base* get_egbase() { return m_egbase; }
       void need_complete_redraw( void );
 
 		static int get_xres();
@@ -103,9 +101,9 @@ class Interactive_Base : public UI::Panel {
 		void abort_build_road();
 		void finish_build_road();
 		bool append_build_road(Coords field);
-		const Coords &get_build_road_start();
-		const Coords &get_build_road_end();
-		int get_build_road_end_dir();
+	Coords    get_build_road_start  () const throw ();
+	Coords    get_build_road_end    () const throw ();
+	Direction get_build_road_end_dir() const throw ();
 
       // for loading
       virtual void cleanup_for_load() { };
@@ -116,7 +114,7 @@ class Interactive_Base : public UI::Panel {
 
       Map_View* m_mapview;
       MiniMap* m_mm;
-      Editor_Game_Base* m_egbase;
+	Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data
 			(const bool Freeze = false, const bool Triangles = false,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ void Editor::run() {
 
    g_gr->flush(PicMod_Menu);
 
-   m_eia = new Editor_Interactive(this);
+	m_eia = new Editor_Interactive(*this);
    // inform base, that we have something interactive
    set_iabase(m_eia);
 

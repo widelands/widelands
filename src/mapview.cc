@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,8 @@ Map_View::Map_View
 Initialize
 ===============
 */
-Map_View::Map_View(UI::Panel *parent, int x, int y, uint w, uint h, Interactive_Base *player)
+Map_View::Map_View
+(UI::Panel * parent, int x, int y, uint w, uint h, Interactive_Base & player)
 :
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),
@@ -55,8 +56,8 @@ Moves the mouse cursor so that it is directly above the given field
 void Map_View::warp_mouse_to_field(Coords c)
 {
 	int x, y;
-
-	MapviewPixelFunctions::get_save_pix(m_intbase->map(), c, x, y);
+	const Map & map = intbase().egbase().map();
+	MapviewPixelFunctions::get_save_pix(map, c, x, y);
 	x -= m_viewpoint.x;
 	y -= m_viewpoint.y;
 
@@ -67,8 +68,10 @@ void Map_View::warp_mouse_to_field(Coords c)
       return;
    }
 
-   if(x<=0) { warp_mouse_to_field(Coords(c.x+m_intbase->get_map()->get_width(),c.y)); return; }
-   if(y<=0) { warp_mouse_to_field(Coords(c.x, c.y+m_intbase->get_map()->get_height())); return; }
+	if (x <= 0)
+	{warp_mouse_to_field(Coords(c.x + map.get_width (), c.y)); return;}
+	if (y <= 0)
+	{warp_mouse_to_field(Coords(c.x, c.y + map.get_height())); return;}
 
    set_mouse_pos(x, y);
 }
@@ -85,18 +88,19 @@ in this function
 */
 void Map_View::draw(RenderTarget* dst)
 {
+	Editor_Game_Base & egbase = intbase().egbase();
    // Check if the view has changed in a game
 	if
-		(dynamic_cast<const Game * const>(m_intbase->get_egbase())
+		(dynamic_cast<const Game * const>(&egbase)
 		 and
-		 static_cast<Interactive_Player*>
-		 (m_intbase)->get_player()->has_view_changed())
+		 dynamic_cast<Interactive_Player &>(intbase())
+		 .get_player()->has_view_changed())
 		m_complete_redraw_needed = true;
 
-	m_intbase->get_map()->get_overlay_manager()->load_graphics();
+	egbase.map().overlay_manager().load_graphics();
    dst->rendermap
-		(*m_intbase->get_egbase(),
-		 m_intbase->get_visibility(),
+		(egbase,
+		 intbase().get_visibility(),
 		 m_viewpoint,
 		 m_complete_redraw_needed);
    m_complete_redraw_needed = false;
@@ -115,7 +119,7 @@ void Map_View::set_viewpoint(Point vp)
 	if (vp == m_viewpoint)
 		return;
 
-	MapviewPixelFunctions::normalize_pix(m_intbase->map(), vp);
+	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), vp);
 	m_viewpoint = vp;
 
 	warpview.call(m_viewpoint.x, m_viewpoint.y);
@@ -166,7 +170,7 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff)
 		set_rel_viewpoint(Point(xdiff, ydiff));
 	}
 
-	if (not m_intbase->get_sel_freeze()) track_sel(x, y);
+	if (not intbase().get_sel_freeze()) track_sel(x, y);
 
 	g_gr->update_fullscreen();
 }
@@ -182,7 +186,7 @@ Does not honour sel freeze.
 */
 void Map_View::track_sel(int mx, int my)
 {
-	m_intbase->set_sel_pos
+	m_intbase.set_sel_pos
 		(MapviewPixelFunctions::calc_node_and_triangle
-		 (m_intbase->map(), m_viewpoint.x + mx, m_viewpoint.y + my));
+		 (intbase().egbase().map(), m_viewpoint.x + mx, m_viewpoint.y + my));
 }

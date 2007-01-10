@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "building.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
@@ -274,23 +275,23 @@ void Main_Menu_Load_Map::fill_list(void) {
  * Load map complete
  */
 void Main_Menu_Load_Map::load_map(std::string filename) {
-   Map* m_map=m_parent->get_editor()->get_map();
+	Map & map = m_parent->editor().map();
 
    if(filename!="") {
-      m_parent->get_editor()->cleanup_for_load(true, false);
+		m_parent->editor().cleanup_for_load(true, false);
 
-      Map_Loader* ml = m_map->get_correct_loader(filename.c_str());
+		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
 //      try {
          //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
          ml->preload_map(true);
 
-         ml->load_map_complete(m_parent->get_editor(), true);
+		ml->load_map_complete(&m_parent->editor(), true);
 /*      }  catch(std::exception& exe) {
          // This really shoudn't fail since maps are already preloaded (in map preview)
          // and therefore valid, but if it does, a valid map must be displayed, therefore
          // we create an empty one from scratch
-         m_parent->get_editor()->cleanup_for_load(true, false);
+			m_parent->editor().cleanup_for_load(true, false);
          m_map->create_empty_map();
 
          std::string s="Map Loading Error!\n\nReason given:\n";
@@ -300,30 +301,28 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          delete mbox;
       }
 */
-      m_parent->get_editor()->postload();
-      m_parent->get_editor()->load_graphics();
+		m_parent->editor().postload();
+		m_parent->editor().load_graphics();
 
       // Now update all the visualisations
       // Player positions
       std::string text;
-		Map & map = *m_map;
 		for (Uint8 i = 1; i <= map.get_nrplayers(); ++i) {
          text="pics/editor_player_";
          text+=static_cast<char>(((i)/10) + 0x30);
          text+=static_cast<char>(((i)%10) + 0x30);
          text+="_starting_pos.png";
-         Coords fc=m_parent->get_map()->get_starting_pos(i);
+			const Coords fc = map.get_starting_pos(i);
 
          if (fc.is_invalid()) continue;
 			uint w, h;
 			const uint picid=g_gr->get_picture(PicMod_Game,  text.c_str());
 			g_gr->get_picture_size(picid, w, h);
          // only register, when theres no building there
-         BaseImmovable* imm = m_parent->get_map()->get_field(fc)->get_immovable();
-         if(imm && imm->get_type() == Map_Object::BUILDING) continue;
-
          // no building, place overlay
-         m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
+			if (not dynamic_cast<const Building * const>(map[fc].get_immovable()))
+				map.overlay_manager().register_overlay
+				(fc,picid, 8, Coords(w / 2, STARTING_POS_HOTSPOT_Y));
       }
 
       /* Resources. we do not calculate default resources, therefore we do

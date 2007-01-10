@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,7 +199,7 @@ Editor_Event_Menu::~Editor_Event_Menu()
  * update all lists and stuff
  */
 void Editor_Event_Menu::update(void) {
-	const Map & map = *m_parent->get_map();
+	const Map & map = m_parent->egbase().map();
 
 	m_trigger_list->clear();
 	{
@@ -268,7 +268,7 @@ void Editor_Event_Menu::clicked_del_event() {
 	const Event::EventReferencerMap & event_referencers =
 		event.get_referencers();
 	if (event_referencers.empty()) {
-		m_parent->get_map()->get_mem().delete_event(event.get_name());
+		m_parent->egbase().map().get_mem().delete_event(event.get_name());
 		m_parent->unreference_player_tribe(0, &event);  // Remove all references done by this event
       m_parent->set_need_save(true);
       update();
@@ -316,7 +316,7 @@ void Editor_Event_Menu::clicked_del_trigger() {
 		trigger.get_referencers();
 	if (trigger_referencers.empty()) {
 		m_parent->unreference_player_tribe(0, &trigger);  // Remove all references done by this trigger
-		m_parent->get_egbase()->get_map()->get_mtm().delete_trigger(trigger.get_name());
+		m_parent->egbase().map().get_mtm().delete_trigger(trigger.get_name());
       m_parent->set_need_save(true);
       update();
 	} else {
@@ -357,7 +357,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
          char buffer[256];
 
          int n = 1;
-		Map & map = m_parent->get_egbase()->map();
+		Map & map = m_parent->egbase().map();
          while( 1 ) {
 		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))
@@ -380,7 +380,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
 
 void Editor_Event_Menu::clicked_del_eventchain() {
-	m_parent->get_egbase()->get_map()->get_mecm().delete_eventchain
+	m_parent->egbase().map().get_mecm().delete_eventchain
 		(m_eventchain_list->get_selected().get_name());
 	m_eventchain_list->remove_selected();
       m_btn_del_eventchain->set_enabled( false );

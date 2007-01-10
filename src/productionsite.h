@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,7 +127,7 @@ protected:
 		uint flags; //  pfXXX flags
 	};
 
-	void request_worker(Game* g, const char* worker );
+	void request_worker(const char * const worker_name);
 	static void request_worker_callback(Game* g, Request* rq, int ware,
 		Worker* w, void* data);
 

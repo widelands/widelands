@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,7 +108,7 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
 
    char buffer[256];
 
-	MapVariableManager & mvm = m_parent->get_egbase()->get_map()->get_mvm();
+	MapVariableManager & mvm = m_parent->egbase().map().get_mvm();
 	for (uint n = 1; mvm.get_variable(buffer); ++n)
 		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
 
@@ -303,8 +303,7 @@ m_button_del
    m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
    // Add all variables
-	const MapVariableManager & mvm =
-		m_parent->get_egbase()->get_map()->get_mvm();
+	const MapVariableManager & mvm = m_parent->egbase().map().get_mvm();
 	const MapVariableManager::Index nr_variables = mvm.get_nr_variables();
 	for (MapVariableManager::Index i = 0; i < nr_variables; ++i)
 		insert_variable(mvm.get_variable_by_nr(i));
@@ -345,7 +344,7 @@ void Editor_Variables_Menu::clicked_del()      {
          // Otherwise, delete button should be disabled
 	assert(not mv.is_delete_protected());
 
-	m_parent->get_egbase()->map().get_mvm().delete_variable(mv.get_name());
+	m_parent->egbase().map().get_mvm().delete_variable(mv.get_name());
 	m_table.remove_selected();
 
 	m_button_edit.set_enabled(false);

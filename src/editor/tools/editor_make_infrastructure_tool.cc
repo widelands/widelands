@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,6 +65,7 @@ int Editor_Make_Infrastructure_Tool::handle_click_impl
 	}
 */
 
-   show_field_action(&parent, parent.get_editor()->get_player(m_player), &m_registry);
+	show_field_action
+		(&parent, parent.editor().get_player(m_player), &m_registry);
    return 5; // Not really needed, since Player Immovables are taken care of while placing on map
 }

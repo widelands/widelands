@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,17 +81,17 @@ set values
 ==============
 */
 void Main_Menu_Map_Options::update(void) {
-   Map* map=m_parent->get_map();
+	const Map & map = m_parent->egbase().map();
 
    char buf[200];
-   sprintf(buf, "%ix%i", map->get_width(), map->get_height());
+	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
    m_size->set_text(buf);
-   m_author->set_text(map->get_author());
-   m_name->set_text(map->get_name());
-   sprintf(buf, "%i", map->get_nrplayers());
+	m_author->set_text(map.get_author());
+	m_name  ->set_text(map.get_name());
+	sprintf(buf, "%i", map.get_nrplayers());
    m_nrplayers->set_text(buf);
-   m_world->set_text(map->get_world_name());
-   m_descr->set_text(map->get_description());
+	m_world ->set_text(map.get_world_name());
+	m_descr ->set_text(map.get_description());
 }
 
 
@@ -117,10 +117,10 @@ called when one of the editboxes are changed
 void Main_Menu_Map_Options::changed(int id) {
    if(id==0) {
       // name
-      m_parent->get_map()->set_name(m_name->get_text());
+		m_parent->egbase().map().set_name(m_name->get_text());
    } else if(id==1) {
       // author
-      m_parent->get_map()->set_author(m_author->get_text());
+		m_parent->egbase().map().set_author(m_author->get_text());
    }
    update();
 }
@@ -128,6 +128,5 @@ void Main_Menu_Map_Options::changed(int id) {
 /*
  * called when the editbox has changed
  */
-void Main_Menu_Map_Options::editbox_changed(void) {
-   m_parent->get_map()->set_description(m_descr->get_text().c_str());
-}
+void Main_Menu_Map_Options::editbox_changed()
+{m_parent->egbase().map().set_description(m_descr->get_text().c_str());}

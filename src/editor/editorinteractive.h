@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,12 +30,12 @@ class Editor_Tool;
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */
-class Editor_Interactive : public Interactive_Base {
-   public:
-      Editor_Interactive(Editor*);
+struct Editor_Interactive : public Interactive_Base {
+	Editor_Interactive(Editor &);
       ~Editor_Interactive();
 
-      inline Editor* get_editor(void) { return m_editor; }
+	const Editor & editor() const throw () {return m_editor;}
+	Editor       & editor()       throw () {return m_editor;}
 
       // leaf functions from base class
       void start();
@@ -61,8 +61,8 @@ class Editor_Interactive : public Interactive_Base {
       void exit_editor();
 
       // reference functions
-	void reference_player_tribe(const int, const void * const);
-	void unreference_player_tribe(const int, const void * const);
+	void   reference_player_tribe(const Player_Number, const void * const);
+	void unreference_player_tribe(const Player_Number, const void * const);
       bool is_player_tribe_referenced(int);
       void set_need_save(bool t) { m_need_save=t; }
 
@@ -89,7 +89,7 @@ class Editor_Interactive : public Interactive_Base {
       Editor_Tools tools;
 
       // UI ownings
-      Editor* m_editor;
+	Editor & m_editor;
       UI::UniqueWindow::Registry m_toolmenu;
       UI::UniqueWindow::Registry m_toolsizemenu;
       UI::UniqueWindow::Registry m_playermenu;

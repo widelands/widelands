@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,8 +54,8 @@ Interactive_Base::Interactive_Base
 Initialize
 ===============
 */
-Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
-  UI::Panel(0, 0, 0, get_xres(), get_yres())
+Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
+: UI::Panel(0, 0, 0, get_xres(), get_yres()), m_egbase(the_egbase)
 {
 	{
 		Section & s = *g_options.pull_section("global");
@@ -76,8 +76,6 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	//  Having this in the initializer list (before Sys_InitGraphics) will given
 	//  funny results.
 	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png"),
-
-   m_egbase=g;
 
    m_display_flags = 0;
 
@@ -121,7 +119,8 @@ void Interactive_Base::need_complete_redraw( void ) {
 
 void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 {
-	Overlay_Manager & overlay_manager = map().overlay_manager();
+	Map & map = egbase().map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
 
 	// Remove old sel pointer
 	if (not m_sel.jobid.isNull()) overlay_manager.remove_overlay(m_sel.jobid);
@@ -133,12 +132,12 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
    // register sel overlay position
 	if (m_sel.triangles) {
 		assert(center.triangle.t == TCoords::D or center.triangle.t == TCoords::R);
-		MapTriangleRegion mtr(map(), center.triangle, m_sel.radius);
+		MapTriangleRegion mtr(map, center.triangle, m_sel.radius);
 		TCoords tc;
 		while (mtr.next(tc)) overlay_manager.register_overlay
 			(tc, m_sel.pic, 7, Coords(-1, -1), jobid);
 	} else {
-		MapRegion mr(map(), center.node, m_sel.radius);
+		MapRegion mr(map, center.node, m_sel.radius);
 		FCoords fc;
 		while (mr.next(fc)) overlay_manager.register_overlay
 			(fc, m_sel.pic, 7, Coords(-1, -1), jobid);
@@ -224,7 +223,7 @@ void Interactive_Base::think()
 
    // Call game logic here
    // The game advances
-	m_egbase->think();
+	egbase().think();
 
    // Update everythink so and so many milliseconds, to make sure the whole
    // screen is synced ( another user may have done something, and the screen was
@@ -252,7 +251,7 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 	if
 		(get_display_flag(dfDebug)
 		 or
-		 not dynamic_cast<const Game * const>(get_egbase()))
+		 not dynamic_cast<const Game * const>(&egbase()))
 	{
       // Show sel coordinates
       char buf[100];
@@ -284,8 +283,9 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 void Interactive_Base::mainview_move(int x, int y)
 {
    if (m_minimap.window) {
-	   const int maxx = MapviewPixelFunctions::get_map_end_screen_x(map());
-	   const int maxy = MapviewPixelFunctions::get_map_end_screen_y(map());
+		const Map & map = egbase().map();
+		const int maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
+		const int maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
 
       x += get_mapview()->get_w()>>1;
       if (x >= maxx) x -= maxx;
@@ -309,9 +309,10 @@ Warps the main mapview position to the clicked location.
 void Interactive_Base::minimap_warp(int x, int y)
 {
 	x -= get_mapview()->get_w()>>1;
-	if (x < 0) x += m_egbase->get_map()->get_width() * TRIANGLE_WIDTH;
 	y -= get_mapview()->get_h()>>1;
-	if (y < 0) y += m_egbase->get_map()->get_height() * TRIANGLE_HEIGHT;
+	const Map & map = egbase().map();
+	if (x < 0) x += map.get_width () * TRIANGLE_WIDTH;
+	if (y < 0) y += map.get_height() * TRIANGLE_HEIGHT;
 	get_mapview()->set_viewpoint(Point(x, y));
 }
 
@@ -330,11 +331,7 @@ void Interactive_Base::move_view_to(const Coords c)
 
 	if (m_minimap.window) m_mm->set_view_pos(x, y);
 
-	x -= get_mapview()->get_w()>>1;
-	if (x < 0) x += m_egbase->get_map()->get_width() * TRIANGLE_WIDTH;
-	y -= get_mapview()->get_h()>>1;
-	if (y < 0) y += m_egbase->get_map()->get_height() * TRIANGLE_HEIGHT;
-	get_mapview()->set_viewpoint(Point(x, y));
+	minimap_warp(x, y);
 }
 
 
@@ -445,13 +442,14 @@ Begin building a road
 void Interactive_Base::start_build_road(Coords _start, int player)
 {
 	// create an empty path
-	m_buildroad = new CoordPath(m_egbase->get_map(), _start);
+	assert(not m_buildroad);
+	m_buildroad = new CoordPath(_start);
 
    m_road_build_player=player;
 
    // If we are a game, we obviously build for the Interactive Player
    assert
-		(not dynamic_cast<const Game * const>(m_egbase)
+		(not dynamic_cast<const Game * const>(&m_egbase)
 		 or
 		 player ==
 		 static_cast<const Interactive_Player * const>(this)->
@@ -499,13 +497,13 @@ void Interactive_Base::finish_build_road()
 
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
-		Path *path = new Path(*m_buildroad);
-		Game * const game = dynamic_cast<Game * const>(m_egbase);
+		Path & path = *new Path(*m_buildroad);
 		// Build the path as requested
-		if (game) game->send_player_build_road (m_road_build_player, path);
+		if (Game * const game = dynamic_cast<Game * const>(&m_egbase))
+			game->send_player_build_road (m_road_build_player, path);
 		else {
-         get_egbase()->get_player(m_road_build_player)->build_road(path);
-         delete path;
+			egbase().get_player(m_road_build_player)->build_road(path);
+			delete &path;
       }
 	}
 
@@ -538,19 +536,22 @@ bool Interactive_Base::append_build_road(Coords field)
 	}
 
 	// Find a path to the clicked-on field
-	Map *m = m_egbase->get_map();
+	Map & map = egbase().map();
 	Path path;
-	CheckStepRoad cstep(m_egbase->get_player(m_road_build_player), MOVECAPS_WALK, &m_buildroad->get_coords());
+	CheckStepRoad cstep
+		(m_egbase.get_player(m_road_build_player),
+		 MOVECAPS_WALK,
+		 &m_buildroad->get_coords());
 
 	if
-		(m->findpath
+		(map.findpath
 		 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
 		 <
 		 0)
 		return false; // couldn't find a path
 
 	roadb_remove_overlay();
-	m_buildroad->append(path);
+	m_buildroad->append(map, path);
 	roadb_add_overlay();
    m_mapview->need_complete_redraw();
 
@@ -564,8 +565,7 @@ Interactive_Base::get_build_road_start
 Return the current road-building startpoint
 ===============
 */
-const Coords &Interactive_Base::get_build_road_start()
-{
+Coords Interactive_Base::get_build_road_start() const throw () {
 	assert(m_buildroad);
 
 	return m_buildroad->get_start();
@@ -578,8 +578,7 @@ Interactive_Base::get_build_road_end
 Return the current road-building endpoint
 ===============
 */
-const Coords &Interactive_Base::get_build_road_end()
-{
+Coords Interactive_Base::get_build_road_end() const throw () {
 	assert(m_buildroad);
 
 	return m_buildroad->get_end();
@@ -592,14 +591,13 @@ Interactive_Base::get_build_road_end_dir
 Return the direction of the last step
 ===============
 */
-int Interactive_Base::get_build_road_end_dir()
-{
+Direction Interactive_Base::get_build_road_end_dir() const throw () {
 	assert(m_buildroad);
 
 	if (!m_buildroad->get_nsteps())
 		return 0;
 
-	return m_buildroad->get_step(m_buildroad->get_nsteps()-1);
+	return (*m_buildroad)[m_buildroad->get_nsteps() - 1];
 }
 
 /*
@@ -615,43 +613,46 @@ void Interactive_Base::roadb_add_overlay()
 
 	//log("Add overlay\n");
 
-	Map* m = m_egbase->get_map();
+	Map & map = egbase().map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
 	assert(m_jobid.isNull());
-   m_jobid=get_map()->get_overlay_manager()->get_a_job_id();
-	for (int idx = 0; idx < m_buildroad->get_nsteps(); ++idx) {
-		uchar dir = m_buildroad->get_step(idx);
+	m_jobid = overlay_manager.get_a_job_id();
+	const CoordPath::Step_Vector::size_type nr_steps = m_buildroad->get_nsteps();
+	for (CoordPath::Step_Vector::size_type idx = 0; idx < nr_steps; ++idx) {
+		Direction dir = (*m_buildroad)[idx];
 		Coords c = m_buildroad->get_coords()[idx];
 
 		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
-			m->get_neighbour(c, dir, &c);
+			map.get_neighbour(c, dir, &c);
 			dir = get_reverse_dir(dir);
 		}
 
 		int shift = 2*(dir - Map_Object::WALK_E);
 
-      uchar set_to= get_map()->get_overlay_manager()->get_road_overlay(c);
+		uchar set_to = overlay_manager.get_road_overlay(c);
       set_to|=  Road_Normal << shift;
-      get_map()->get_overlay_manager()->register_road_overlay(c, set_to, m_jobid);
+		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}
 
 	// build hints
-	FCoords endpos = m->get_fcoords(m_buildroad->get_end());
+	FCoords endpos = map.get_fcoords(m_buildroad->get_end());
 
 	assert(m_road_buildhelp_overlay_jobid.isNull());
-   m_road_buildhelp_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
+	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
 	for(int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
 		int caps;
 
-		m->get_neighbour(endpos, dir, &neighb);
-		caps = m_egbase->get_player(m_road_build_player)->get_buildcaps(neighb);
+		map.get_neighbour(endpos, dir, &neighb);
+		caps = egbase().get_player(m_road_build_player)->get_buildcaps(neighb);
 
 		if (!(caps & MOVECAPS_WALK))
 			continue; // need to be able to walk there
 
-		BaseImmovable *imm = m->get_immovable(neighb); // can't build on robusts
+		//  can't build on robusts
+		BaseImmovable * const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
 			if (!(imm->get_type() == Map_Object::FLAG ||
 					(imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))
@@ -680,7 +681,12 @@ void Interactive_Base::roadb_add_overlay()
 
       assert(name!="");
 
-      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture( PicMod_Game,  name.c_str() ),7, Coords(-1,-1), m_road_buildhelp_overlay_jobid);
+		egbase().map().overlay_manager().register_overlay
+			(neighb,
+			 g_gr->get_picture(PicMod_Game, name.c_str()),
+			 7,
+			 Coords(-1, -1),
+			 m_road_buildhelp_overlay_jobid);
 	}
 }
 
@@ -698,12 +704,12 @@ void Interactive_Base::roadb_remove_overlay()
 	//log("Remove overlay\n");
 
    // preview of the road
-	if (not m_jobid.isNull())
-       get_map()->get_overlay_manager()->remove_road_overlay(m_jobid);
+	Overlay_Manager & overlay_manager = egbase().map().overlay_manager();
+	if (not m_jobid.isNull()) overlay_manager.remove_road_overlay(m_jobid);
 	m_jobid = Overlay_Manager::Job_Id::Null();
 
 	// build hints
 	if (not m_road_buildhelp_overlay_jobid.isNull())
-      get_map()->get_overlay_manager()->remove_overlay(m_road_buildhelp_overlay_jobid);
+		overlay_manager.remove_overlay(m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
 }

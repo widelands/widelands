@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -227,7 +227,7 @@ void TrainingSite::init(Editor_Game_Base * g)
 	assert(g);
 
 	ProductionSite::init(g);
-	call_soldiers((Game *) g);
+	call_soldiers();
 }
 
 /**
@@ -301,7 +301,7 @@ void TrainingSite::remove_worker(Worker* w)
 /**
  * Request exactly one soldier
  */
-void TrainingSite::request_soldier(Game *) {
+void TrainingSite::request_soldier() {
 	int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
 	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
@@ -381,14 +381,8 @@ void TrainingSite::request_soldier_callback
 /**
  * If the site is not fully staffed, request as many soldiers as can be accomodated
  */
-void TrainingSite::call_soldiers(Game * g)
-{
-	assert(g);
-
-	while (m_capacity > m_total_soldiers) {
-		request_soldier(g);
-	}
-}
+void TrainingSite::call_soldiers()
+{while (m_capacity > m_total_soldiers) request_soldier();}
 
 /**
  * Drop a given soldier.
@@ -398,7 +392,7 @@ void TrainingSite::call_soldiers(Game * g)
  */
 void TrainingSite::drop_soldier(uint serial)
 {
-	Game *g = (Game *) get_owner()->get_game();
+	Game * const g = dynamic_cast<Game * const>(&owner().egbase());
 
 	assert(g);
 
@@ -441,7 +435,7 @@ void TrainingSite::drop_soldier(Game * g, uint nr)
 	m_soldiers.pop_back();
 
 	// Call more soldiers if are enought space
-	call_soldiers(g);
+	call_soldiers();
 
 	// Walk the soldier home safely
 	s->reset_tasks(g);
@@ -799,8 +793,7 @@ void TrainingSite::change_soldier_capacity(int how)
 	else
 		m_capacity = temp_capacity;
 
-	if (m_capacity > m_total_soldiers)
-		call_soldiers((Game *) get_owner()->get_game());
+	if (m_capacity > m_total_soldiers) call_soldiers();
 
 	while (m_capacity < m_total_soldiers) {
 		if (m_soldier_requests.size()) {

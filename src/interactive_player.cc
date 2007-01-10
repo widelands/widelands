@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,15 +75,15 @@ Interactive_Player::Interactive_Player
 Initialize
 ===============
 */
-Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g)
+Interactive_Player::Interactive_Player(Game & g, const uchar plyn) :
+Interactive_Base(g), m_game(&g)
 {
 
    // Setup all screen elements
-	m_game = g;
 	set_player_number(plyn);
 
 	Map_View* mview;
-   mview = new Map_View(this, 0, 0, get_w(), get_h(), this);
+	mview = new Map_View(this, 0, 0, get_w(), get_h(), *this);
 	mview->warpview.set(this, &Interactive_Player::mainview_move);
 	mview->fieldclicked.set(this, &Interactive_Player::field_action);
    set_mapview(mview);
@@ -352,11 +352,14 @@ void Interactive_Player::start()
 	mapw = 0;
 	maph = 0;
 
-   get_map()->get_overlay_manager()->show_buildhelp(false);
-   get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(this));
+	Map & map = egbase().map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	overlay_manager.show_buildhelp(false);
+	overlay_manager.register_overlay_callback_function
+		(&Int_Player_overlay_callback_function, static_cast<void *>(this));
 
    // Recalc whole map for changed owner stuff
-   get_map()->recalc_whole_map();
+	map.recalc_whole_map();
 
    sample_statistics();
 }
@@ -430,7 +433,7 @@ void Interactive_Player::main_menu_btn()
 //
 void Interactive_Player::toggle_buildhelp(void)
 {
-   get_map()->get_overlay_manager()->toggle_buildhelp();
+	egbase().map().overlay_manager().toggle_buildhelp();
 }
 
 //

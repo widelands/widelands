@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,12 +109,12 @@ protected:
 		UI::Window** registry);
 
 private:
-	void request_soldier(Game* g);
+	void request_soldier();
 	static void request_soldier_callback(Game* g, Request* rq, int ware,
 		Worker* w, void* data);
 
 	void drop_soldier (Game *g, int i);
-	void call_soldiers(Game *g);
+	void call_soldiers();
 	void change_soldier_capacity (int);
 private:
 	Requeriments m_soldier_requeriments;

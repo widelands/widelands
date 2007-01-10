@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,12 +94,11 @@ throw (_wexception)
 
          r->m_cost[0]=fr.Unsigned32();
          r->m_cost[1]=fr.Unsigned32();
-         int nsteps=fr.Unsigned16();
-         assert(nsteps);
-         Path p(egbase->get_map(), r->m_flags[0]->get_position());
-         int i=0;
-         for(i=0; i<nsteps; i++)
-            p.append(fr.Unsigned8());
+			const Path::Step_Vector::size_type nsteps = fr.Unsigned16();
+			assert(nsteps); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			Path p(r->m_flags[0]->get_position());
+			for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+				p.append(egbase->map(), fr.Unsigned8()); //  FIXME validate that the value is a direction
          r->set_path(egbase, p);
 
          // Now that all rudimentary data is set, init this road,
@@ -199,10 +198,11 @@ throw (_wexception)
             fw.Unsigned32(r->m_cost[1]);
 
             // Path
-            fw.Unsigned16(r->m_path.get_nsteps());
-            int i=0;
-            for(i=0; i<r->m_path.get_nsteps(); i++)
-               fw.Unsigned8(r->m_path.get_step(i));
+				const Path & path = r->m_path;
+				const Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+				fw.Unsigned16(nr_steps);
+				for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
+					fw.Unsigned8(path[i]);
 
             // Idle index
             fw.Unsigned32(r->m_idle_index);

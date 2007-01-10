@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,7 +101,7 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 :
 UI::Window(parent, x, y, w, h, _("Watch").c_str()),
 m_game(parent->get_game()),
-m_mapview(this, 0, 0, 200, 166, parent),
+m_mapview(this, 0, 0, 200, 166, *parent),
 m_single_window(single_window),
 last_visit(m_game->get_gametime()),
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,11 @@ class Interactive_Base;
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
-class Map_View : public UI::Panel {
-public:
-	Map_View(UI::Panel *parent, int x, int y, uint w, uint h, Interactive_Base *);
+struct Map_View : public UI::Panel {
+	Map_View
+		(UI::Panel * const parent,
+		 const int x, const int y, const uint w, const uint h,
+		 Interactive_Base &);
 
 	UI::Signal2<int,int> warpview; // x/y in screen coordinates
 	UI::Signal fieldclicked;
@@ -56,8 +58,11 @@ public:
 	void track_sel(int mx, int my);
    inline void need_complete_redraw( void ) { m_complete_redraw_needed = true; }
 
+protected:
+	Interactive_Base & intbase() const throw () {return m_intbase;}
+
 private:
-	Interactive_Base * m_intbase;
+	Interactive_Base & m_intbase;
 	Point              m_viewpoint;
 	bool               m_dragging;
    bool              m_complete_redraw_needed;

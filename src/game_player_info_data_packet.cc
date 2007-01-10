@@ -79,11 +79,11 @@ throw (_wexception)
                // The interactive player might still be in existance
                // we do not delete it then, we reuse it
                if(!game->ipl) {
-                  game->ipl = new Interactive_Player(game, plnum);
+	 					game->ipl = new Interactive_Player(*game, plnum);
                   game->set_iabase(game->ipl);
                }
             } else if (type == Player::AI) {
-               game->cpl.push_back(new Computer_Player(game,plnum));
+					game->cpl.push_back(new Computer_Player(*game,plnum));
             }
          }
       }

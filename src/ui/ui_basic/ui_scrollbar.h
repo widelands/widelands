@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,6 @@ public:
 	void set_pagesize(int pagesize);
 	void set_pos(int pos);
 
-	uint get_steps() const { return m_steps; }
 	uint get_pagesize() const { return m_pagesize; }
 	uint get_pos() const { return m_pos; }
 

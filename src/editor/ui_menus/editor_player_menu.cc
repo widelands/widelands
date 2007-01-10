@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,7 +131,8 @@ Update all
 void Editor_Player_Menu::update(void) {
    if(is_minimized()) return;
 
-   int nr_players=m_parent->get_map()->get_nrplayers();
+	Map & map = m_parent->egbase().map();
+	const Player_Number nr_players = map.get_nrplayers();
    std::string text="";
    if(nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
    text+=static_cast<char>((nr_players%10) + 0x30);
@@ -172,14 +173,14 @@ void Editor_Player_Menu::update(void) {
    for(i=0; i<nr_players; i++) {
       // Check if starting position is valid
       bool start_pos_valid=true;
-      Coords start_pos=m_parent->get_map()->get_starting_pos(i+1);
+		const Coords start_pos = map.get_starting_pos(i + 1);
       if (start_pos.is_invalid()) start_pos_valid = false;
 
       if(!m_plr_names[i]) {
           m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
           posx+=140+spacing;
-          m_plr_names[i]->set_text(m_parent->get_map()->get_scenario_player_name(i+1).c_str());
+			m_plr_names[i]->set_text(map.get_scenario_player_name(i + 1).c_str());
       }
 
       if(!m_plr_set_tribes_buts[i]) {
@@ -192,11 +193,12 @@ void Editor_Player_Menu::update(void) {
 				 std::string());
          posx+=140+spacing;
       }
-      if(m_parent->get_map()->get_scenario_player_tribe(i+1)!="<undefined>")
-         m_plr_set_tribes_buts[i]->set_title(m_parent->get_map()->get_scenario_player_tribe(i+1).c_str());
+		if (map.get_scenario_player_tribe(i + 1) != "<undefined>")
+			m_plr_set_tribes_buts[i]->set_title
+				(map.get_scenario_player_tribe(i + 1).c_str());
       else {
          m_plr_set_tribes_buts[i]->set_title(m_tribes[0].c_str());
-         m_parent->get_map()->set_scenario_player_tribe(i+1,m_tribes[0]);
+			map.set_scenario_player_tribe(i + 1, m_tribes[0]);
       }
 
       // Set Starting pos button
@@ -259,29 +261,30 @@ called when a button is clicked
 ==============
 */
 void Editor_Player_Menu::clicked_up_down(Sint8 change) {
-   int nr_players=m_parent->get_map()->get_nrplayers();
+	Map & map = m_parent->egbase().map();
+	Player_Number nr_players = map.get_nrplayers();
    // Up down button
 	nr_players += change;
    if(nr_players<1) nr_players=1;
    if(nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
-   if(nr_players>m_parent->get_map()->get_nrplayers()) {
+	if (nr_players > map.get_nrplayers()) {
       // register new default name for this players
       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
       char c2= (nr_players%10) + 0x30;
       std::string name=_("Player ");
       if(c1) name.append(1,c1);
       name.append(1,c2);
-      m_parent->get_map()->set_nrplayers(nr_players);
-      m_parent->get_map()->set_scenario_player_name(nr_players, name);
-      m_parent->get_map()->set_scenario_player_tribe(nr_players, m_tribes[0]);
+		map.set_nrplayers(nr_players);
+		map.set_scenario_player_name(nr_players, name);
+		map.set_scenario_player_tribe(nr_players, m_tribes[0]);
       m_parent->set_need_save(true);
    } else {
       if(!m_parent->is_player_tribe_referenced(nr_players)) {
-         std::string name= m_parent->get_map()->get_scenario_player_name(nr_players);
-         std::string tribe=  m_parent->get_map()->get_scenario_player_tribe(nr_players);
-         m_parent->get_map()->set_nrplayers(nr_players);
-         m_parent->get_map()->set_scenario_player_name(nr_players, name);
-         m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
+			std::string name  = map.get_scenario_player_name (nr_players);
+			std::string tribe = map.get_scenario_player_tribe(nr_players);
+			map.set_nrplayers(nr_players);
+			map.set_scenario_player_name(nr_players, name);
+			map.set_scenario_player_tribe(nr_players, tribe);
          m_parent->set_need_save(true);
       } else {
          UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), _("Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"), UI::Modal_Message_Box::OK);
@@ -307,7 +310,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
          if(m_tribes[i]==t) break;
       if(i==m_tribes.size()-1) t=m_tribes[0];
       else t=m_tribes[++i];
-      m_parent->get_map()->set_scenario_player_tribe(n+1,t);
+		m_parent->egbase().map().set_scenario_player_tribe(n+1,t);
       m_parent->set_need_save(true);
    } else {
       UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), _("Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"), UI::Modal_Message_Box::OK);
@@ -323,16 +326,19 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
  */
 void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    // jump to the current field
-   Coords c=m_parent->get_map()->get_starting_pos(n);
+	Map & map = m_parent->egbase().map();
+	const Coords c = map.get_starting_pos(n);
    if (c.is_valid()) m_parent->move_view_to(c);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-   if(m_parent->get_editor()->get_player(n)) {
-      if (not m_parent->get_map()->get_starting_pos(n).is_invalid()) {
-         BaseImmovable* imm = m_parent->get_map()->get_field(m_parent->get_map()->get_starting_pos(n))->get_immovable();
-         if(imm && imm->get_type() == Map_Object::BUILDING) return;
+	if (m_parent->editor().get_player(n)) {
+		if (not map.get_starting_pos(n).is_invalid()) {
+			if
+				(dynamic_cast<const Building * const>
+				 (map[map.get_starting_pos(n)].get_immovable()))
+				return;
       }
    }
 
@@ -344,8 +350,9 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    m_parent->select_tool(m_parent->get_selected_tool(),0);
 
    // Register callback function to make sure that only valid fields are selected.
-   m_parent->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Tool_Set_Starting_Pos_Callback, m_parent->get_map());
-   m_parent->get_map()->recalc_whole_map();
+	map.get_overlay_manager()->register_overlay_callback_function
+		(&Editor_Tool_Set_Starting_Pos_Callback, &map);
+	map.recalc_whole_map();
    update();
 }
 
@@ -355,12 +362,13 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 void Editor_Player_Menu::name_changed(int m) {
    // Player name has been changed
    std::string text=m_plr_names[m]->get_text();
+	Map & map = m_parent->egbase().map();
    if(text=="") {
-      text=m_parent->get_map()->get_scenario_player_name(m+1);
+		text = map.get_scenario_player_name(m + 1);
       m_plr_names[m]->set_text(text.c_str());
    }
-   m_parent->get_map()->set_scenario_player_name(m+1, text);
-   m_plr_names[m]->set_text(m_parent->get_map()->get_scenario_player_name(m+1).c_str());
+	map.set_scenario_player_name(m + 1, text);
+	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1).c_str());
    m_parent->set_need_save(true);
 }
 
@@ -370,36 +378,38 @@ void Editor_Player_Menu::name_changed(int m) {
 void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
    // Check if starting position is valid (was checked before
    // so must be true)
-   Coords start_pos=m_parent->get_map()->get_starting_pos(n);
+	Editor          & editor          = m_parent->editor();
+	Map             & map             = editor.map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	const Coords start_pos = map.get_starting_pos(n);
    assert(start_pos.is_valid());
 
-   Editor* editor=m_parent->get_editor();
-
-   Player* p=editor->get_player(n);
+	Player * p = editor.get_player(n);
    if(!p) {
       // This player is unknown, register it, place a hq and reference the tribe
       // so that this tribe can not be changed
-		editor->add_player
+		editor.add_player
 			(n,
 			 Player::Local,
 			 m_plr_set_tribes_buts[n - 1]->get_title(),
 			 m_plr_names[n - 1]->get_text());
 
-      p=editor->get_player(n);
+		p = editor.get_player(n);
       p->init(false);
    }
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-   BaseImmovable* imm = m_parent->get_map()->get_field(m_parent->get_map()->get_starting_pos(p->get_player_number()))->get_immovable();
-   if(!imm) {
+	BaseImmovable * const imm =
+		map[map.get_starting_pos(p->get_player_number())].get_immovable();
+	if (not imm) {
       // place HQ
-      const Coords &c = m_parent->get_map()->get_starting_pos(p->get_player_number());
+		const Coords c = map.get_starting_pos(p->get_player_number());
       int idx = p->get_tribe()->get_building_index("headquarters");
       if (idx < 0)
          throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name().c_str());
-      m_parent->get_egbase()->warp_building(c, p->get_player_number(), idx);
+		editor.warp_building(c, p->get_player_number(), idx);
 
       m_parent->reference_player_tribe(n, p->get_tribe());
 
@@ -411,13 +421,16 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
       picsname+="_starting_pos.png";
       int picid=g_gr->get_picture( PicMod_Game,  picsname.c_str() );
       // Remove old overlay if any
-      m_parent->get_editor()->get_map()->get_overlay_manager()->remove_overlay(start_pos,picid);
+		overlay_manager.remove_overlay(start_pos,picid);
    }
 
    m_parent->select_tool(m_mis_index,0);
    static_cast<Editor_Make_Infrastructure_Tool*>(m_tools->tools[m_mis_index])->set_player(n);
-   m_parent->get_editor()->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Make_Infrastructure_Tool_Callback, static_cast<void*>(m_parent->get_editor()),n);
-   m_parent->get_editor()->get_map()->recalc_whole_map();
+	overlay_manager.register_overlay_callback_function
+		(&Editor_Make_Infrastructure_Tool_Callback,
+		 static_cast<void *>(&editor),
+		 n);
+	map.recalc_whole_map();
 }
 
 /*
@@ -425,9 +438,9 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
  */
 void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
 
-   Editor* editor=m_parent->get_editor();
+	Editor & editor = m_parent->editor();
 
-   if(!editor->get_player(n)) {
+	if (not editor.get_player(n)) {
       // The player is not yet really on the map, call make infrastructure button first
       make_infrastructure_clicked(n);
    }
@@ -436,7 +449,6 @@ void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
    if (m_allow_buildings_menu.window) {
       delete m_allow_buildings_menu.window;
    }
-   else {
-      new Editor_Player_Menu_Allowed_Buildings_Menu(m_parent, editor->get_player(n), &m_allow_buildings_menu);
-   }
+	else new Editor_Player_Menu_Allowed_Buildings_Menu
+		(m_parent, editor.get_player(n), &m_allow_buildings_menu);
 }

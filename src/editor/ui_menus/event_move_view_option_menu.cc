@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -226,8 +226,11 @@ void Event_Move_View_Option_Menu::clicked(int i) {
 void Event_Move_View_Option_Menu::update(void) {
    if(m_x<0) m_x=0;
    if(m_y<0) m_y=0;
-   if(m_x>=((int)m_parent->get_map()->get_width())) m_x=m_parent->get_map()->get_width()-1;
-   if(m_y>=((int)m_parent->get_map()->get_height())) m_y=m_parent->get_map()->get_height()-1;
+	const Map & map = m_parent->egbase().map();
+	const X_Coordinate mapwidth  = map.get_width ();
+	const Y_Coordinate mapheight = map.get_height();
+	if (m_x >= static_cast<const int>(mapwidth))  m_x = mapwidth  - 1;
+	if (m_y >= static_cast<const int>(mapheight)) m_y = mapheight - 1;
 
    char buf[200];
    sprintf(buf, "%i", m_x);

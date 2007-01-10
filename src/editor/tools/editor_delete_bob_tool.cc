@@ -46,6 +46,6 @@ int Editor_Delete_Bob_Tool::handle_click_impl
 	MapRegion mr(map, center.node, radius);
    FCoords fc;
 	while (mr.next(fc)) if (Bob * const bob=fc.field->get_first_bob())
-         bob->remove(parent.get_editor());
+		bob->remove(&parent.editor());
    return radius + 2;
 }

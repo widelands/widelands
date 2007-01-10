@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    const int xstart=5;
    const int ystart=25;
    const int yend=25;
-	World & world = *get_parent()->get_map()->get_world();
+	World & world = get_parent()->egbase().map().world();
    const int nr_textures = world.get_nr_terrains();
    int textures_in_row=(int)(sqrt((float)nr_textures));
    if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
@@ -215,7 +215,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
    select_correct_tool();
 
    std::string buf=_("Current: ");
-	World & world = *get_parent()->get_map()->get_world();
+	World & world = get_parent()->egbase().map().world();
    int j=m_sbt->get_nr_enabled();
    for(int i=0; j; i++) {
       if(m_sbt->is_enabled(i)) {

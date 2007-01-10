@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,24 +52,15 @@ public:
 	bool     openend;
 };
 
-Computer_Player::Computer_Player (Game *g, uchar pid)
-{
-	game = g;
-	player_number = pid;
-
-	map=0;
-	world=0;
-}
+Computer_Player::Computer_Player(Game & g, const Player_Number pid) :
+m_game(g), player_number(pid), tribe(0)
+{}
 
 // when Computer_Player is constructed, some information is not yet available (e.g. world)
 void Computer_Player::late_initialization ()
 {
-	map = game->get_map();
-	world = map->get_world();
-	assert (world!=0);
-
-	player = game->get_player(player_number);
-	tribe = player->get_tribe();
+	player = game().get_player(player_number);
+	tribe = &player->tribe();
 
 	log ("ComputerPlayer(%d): initializing\n", player_number);
 
@@ -188,7 +179,7 @@ Computer_Player::~Computer_Player ()
 
 Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const char* name)
 {
-	if (map==0)
+	if (tribe == 0)
 		late_initialization ();
 
 	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++)
@@ -200,11 +191,17 @@ Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const
 
 void Computer_Player::think ()
 {
-	if (map==0)
+	if (tribe == 0)
 		late_initialization ();
 
+	const int gametime = game().get_gametime();
+
 	// update statistics about buildable fields
-	while (!buildable_fields.empty() && buildable_fields.front()->next_update_due<=game->get_gametime()) {
+	while
+		(not buildable_fields.empty()
+		 and
+		 buildable_fields.front()->next_update_due <= gametime)
+	{
 		BuildableField* bf=buildable_fields.front();
 
 		// check whether we lost ownership of the field
@@ -227,14 +224,18 @@ void Computer_Player::think ()
 		}
 
 		update_buildable_field (bf);
-		bf->next_update_due=game->get_gametime() + FIELD_UPDATE_INTERVAL;
+		bf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		buildable_fields.push_back (bf);
 		buildable_fields.pop_front ();
-	}
+ 	}
 
 	// do the same for mineable fields
-	while (!mineable_fields.empty() && mineable_fields.front()->next_update_due<=game->get_gametime()) {
+	while
+		(not mineable_fields.empty()
+		 and
+		 mineable_fields.front()->next_update_due <= gametime)
+	{
 		MineableField* mf=mineable_fields.front();
 
 		// check whether we lost ownership of the field
@@ -257,7 +258,7 @@ void Computer_Player::think ()
 		}
 
 		update_mineable_field (mf);
-		mf->next_update_due=game->get_gametime() + FIELD_UPDATE_INTERVAL;
+		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		mineable_fields.push_back (mf);
 		mineable_fields.pop_front ();
@@ -294,22 +295,25 @@ void Computer_Player::think ()
 	}
 
 	// wait a moment so that all fields are classified
-	if (next_construction_due==0)
-	    next_construction_due=game->get_gametime() + 1000;
+	if (next_construction_due == 0) next_construction_due = gametime + 1000;
 
 	// now build something if possible
-	if (next_construction_due<=game->get_gametime()) {
-	    next_construction_due=game->get_gametime() + 2000;
+	if (next_construction_due <= gametime) {
+		next_construction_due = gametime + 2000;
 
-	    if (construct_building()) {
-		inhibit_road_building=game->get_gametime() + 2500;
-		return;
-	    }
+		if (construct_building()) {
+			inhibit_road_building = gametime + 2500;
+			return;
+		}
 	}
 
 	// verify that our production sites are doing well
-	if (next_productionsite_check_due<=game->get_gametime() && !productionsites.empty()) {
-	    next_productionsite_check_due=game->get_gametime() + 2000;
+	if
+		(next_productionsite_check_due <= gametime
+		 and
+		 not productionsites.empty())
+	{
+		next_productionsite_check_due = gametime + 2000;
 
 	    check_productionsite (productionsites.front());
 
@@ -349,14 +353,14 @@ void Computer_Player::think ()
 		i++;
 	}
 
-	if (next_road_due<=game->get_gametime() && inhibit_road_building<=game->get_gametime()) {
-	    next_road_due=game->get_gametime() + 1000;
+	if (next_road_due <= gametime and inhibit_road_building <= gametime) {
+		next_road_due = gametime + 1000;
 
 	    construct_roads ();
 	}
 
 #if 0
-	if (!economies.empty() && inhibit_road_building<=game->get_gametime()) {
+	if (not economies.empty() and inhibit_road_building <= gametime) {
 		EconomyObserver* eco=economies.front();
 
 		bool finish=false;
@@ -387,23 +391,25 @@ void Computer_Player::think ()
 		const Path& path=roads.front()->get_path();
 
 		if (path.get_nsteps()>6) {
-			CoordPath cp(path);
-			int i;
+			const Map & map = game().map();
+			CoordPath cp(map, path);
 
 			// try to split near the middle
-			for (i=0;i<cp.get_nsteps()/2-2;i++) {
-				Field* f;
-
-				f=map->get_field(cp.get_coords()[cp.get_nsteps()/2-i]);
-				if ((f->get_caps()&BUILDCAPS_FLAG)!=0) {
-					game->send_player_build_flag (player_number, cp.get_coords()[cp.get_nsteps()/2-i]);
-					return;
+			CoordPath::Step_Vector::size_type i = cp.get_nsteps() / 2, j = i + 1;
+			for (; i > 1; --i, ++j) {
+				{
+					const Coords c = cp.get_coords()[i];
+					if (map[c].get_caps() & BUILDCAPS_FLAG) {
+						game().send_player_build_flag (player_number, c);
+						return;
+					}
 				}
-
-				f=map->get_field(cp.get_coords()[cp.get_nsteps()/2+i+1]);
-				if ((f->get_caps()&BUILDCAPS_FLAG)!=0) {
-					game->send_player_build_flag (player_number, cp.get_coords()[cp.get_nsteps()/2+i+1]);
-					return;
+				{
+					const Coords c = cp.get_coords()[j];
+					if (map[c].get_caps() & BUILDCAPS_FLAG) {
+						game().send_player_build_flag (player_number, c);
+						return;
+					}
 				}
 			}
 		}
@@ -526,6 +532,7 @@ bool Computer_Player::construct_building ()
 	}
 
 	// then try all mines
+	const World & world = game().map().world();
 	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++) {
 		if (!i->is_buildable || i->type!=BuildingObserver::MINE)
 			continue;
@@ -535,7 +542,7 @@ bool Computer_Player::construct_building ()
 			int prio=-1;
 
 			if (i->hints->get_need_map_resource()!=0) {
-				int res=world->get_resource(i->hints->get_need_map_resource());
+				int res = world.get_resource(i->hints->get_need_map_resource());
 
 				if (mf->coords.field->get_resources()!=res)
 					continue;
@@ -568,7 +575,7 @@ bool Computer_Player::construct_building ()
 
 	// if we want to construct a new building, send the command now
 	log ("ComputerPlayer(%d): want to construct building %d\n", player_number, proposed_building);
-	game->send_player_build (player_number, proposed_coords, proposed_building);
+	game().send_player_build (player_number, proposed_coords, proposed_building);
 
 	return true;
 }
@@ -577,21 +584,38 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 {
 	log ("ComputerPlayer(%d): checking %s\n", player_number, site.bo->desc->get_name());
 
-	if (site.bo->need_trees &&
-	    map->find_immovables(site.site->get_position(), 8, 0,
-	    FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))==0) {
+	Map & map = game().map();
+	if
+		(site.bo->need_trees
+		 and
+		 map.find_immovables
+		 (site.site->get_position(),
+		  8,
+		  0,
+		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
+		 ==
+		 0)
+	{
 
 	    log ("ComputerPlayer(%d): out of resources, destructing\n", player_number);
-	    game->send_player_bulldoze (site.site);
+	    m_game.send_player_bulldoze (site.site);
 	    return;
 	}
 
-	if (site.bo->need_stones &&
-	    map->find_immovables(site.site->get_position(), 8, 0,
-	    FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))==0) {
+	if
+		(site.bo->need_stones
+		 and
+		 map.find_immovables
+		 (site.site->get_position(),
+		  8,
+		  0,
+		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
+		 ==
+		 0)
+	{
 
 	    log ("ComputerPlayer(%d): out of resources, destructing\n", player_number);
-	    game->send_player_bulldoze (site.site);
+		game().send_player_bulldoze (site.site);
 	    return;
 	}
 }
@@ -611,8 +635,10 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 {
 	// look if there is any unowned land nearby
 	FindFieldUnowned find_unowned;
+	Map & map = game().map();
 
-	field->unowned_land_nearby=map->find_fields(field->coords, 8, 0, find_unowned);
+	field->unowned_land_nearby =
+		map.find_fields(field->coords, 8, 0, find_unowned);
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
@@ -620,7 +646,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	const int tree_attr=Map_Object_Descr::get_attribute_id("tree");
 	const int stone_attr=Map_Object_Descr::get_attribute_id("stone");
 
-	map->find_immovables (field->coords, 8, &immovables);
+	map.find_immovables (field->coords, 8, &immovables);
 
 	field->reachable=false;
 	field->preferred=false;
@@ -633,7 +659,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	field->stone_consumers_nearby=0;
 
 	FCoords fse;
-	map->get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
+	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 
 	BaseImmovable* imm=fse.field->get_immovable();
 	if (imm!=0) {
@@ -645,19 +671,31 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	}
 
 	for (unsigned int i=0;i<immovables.size();i++) {
-		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
+		const BaseImmovable & base_immovable = *immovables[i].object;
+		if (dynamic_cast<const Flag * const>(&base_immovable))
 			field->reachable=true;
 
-		if (immovables[i].object->get_type()==BaseImmovable::BUILDING) {
-			Building* bld=static_cast<Building*>(immovables[i].object);
+		if
+			(const Building * const building =
+			 dynamic_cast<const Building * const>(&base_immovable))
+		{
 
-			if (bld->get_building_type()==Building::CONSTRUCTIONSITE) {
-			    Building_Descr* con=static_cast<ConstructionSite*>(bld)->get_building();
+			if
+				(const ConstructionSite * const constructionsite =
+				 dynamic_cast<const ConstructionSite * const>(building))
+			{
+				const Building_Descr & target_descr =
+					*constructionsite->get_building();
 
-			    if (typeid(*con)==typeid(MilitarySite_Descr)) {
-				MilitarySite_Descr* mil=static_cast<MilitarySite_Descr*>(con);
+				if
+					(const MilitarySite_Descr * const target_militarysite_descr =
+					 dynamic_cast<const MilitarySite_Descr * const>(&target_descr))
+				{
 
-				int v=mil->get_conquers() - map->calc_distance(field->coords, immovables[i].coords);
+					const int v =
+						target_militarysite_descr->get_conquers()
+						-
+						map.calc_distance(field->coords, immovables[i].coords);
 
 				if (v>0) {
 				    field->military_influence+=v*(v+2)*6;
@@ -665,23 +703,33 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 				}
 			    }
 
-			    if (typeid(*con)==typeid(ProductionSite_Descr))
-				consider_productionsite_influence (field, immovables[i].coords,
-					get_building_observer(con->get_name()));
+				if
+					(const ProductionSite_Descr * const target_productionsite_descr =
+					 dynamic_cast<const ProductionSite_Descr * const>(&target_descr))
+					consider_productionsite_influence
+					(field,
+					 immovables[i].coords,
+					 get_building_observer(constructionsite->get_name()));
 			}
 
-			if (bld->get_building_type()==Building::MILITARYSITE) {
-			    MilitarySite* mil=static_cast<MilitarySite*>(bld);
+			if
+				(const MilitarySite * const militarysite =
+				 dynamic_cast<const MilitarySite * const>(building))
+			{
+				const int v =
+					militarysite->get_conquers()
+					-
+					map.calc_distance(field->coords, immovables[i].coords);
 
-			    int v=mil->get_conquers() - map->calc_distance(field->coords, immovables[i].coords);
-
-			    if (v>0)
-				field->military_influence+=v*v*mil->get_capacity();
+				if (v > 0) field->military_influence +=
+					v * v * militarysite->get_capacity();
 			}
 
-			if (bld->get_building_type()==Building::PRODUCTIONSITE)
-			    consider_productionsite_influence (field, immovables[i].coords,
-				    get_building_observer(bld->get_name()));
+			if (dynamic_cast<const ProductionSite * const>(building))
+				consider_productionsite_influence
+					(field,
+					 immovables[i].coords,
+					 get_building_observer(building->get_name()));
 
 			continue;
 		}
@@ -698,15 +746,16 @@ void Computer_Player::update_mineable_field (MineableField* field)
 {
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
+	Map & map = game().map();
 
-	map->find_immovables (field->coords, 6, &immovables);
+	map.find_immovables (field->coords, 6, &immovables);
 
 	field->reachable=false;
 	field->preferred=false;
 	field->mines_nearby=true;
 
 	FCoords fse;
-	map->get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
+	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 
 	BaseImmovable* imm=fse.field->get_immovable();
 	if (imm!=0) {
@@ -840,41 +889,43 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 
 	// first look for possible destinations
 	functor.economy=flag->get_economy();
-	map->find_reachable_fields
+	Map & map = game().map();
+	map.find_reachable_fields
 		(flag->get_position(), 16, &reachable, check, functor);
 
 	if (reachable.empty())
 		return false;
 
 	// then choose the one closest to the originating flag
-	int closest, distance;
-
-	closest=0;
-	distance=map->calc_distance(flag->get_position(), reachable[0]);
-	for (unsigned int i=1; i<reachable.size(); i++) {
-		int d=map->calc_distance(flag->get_position(), reachable[i]);
-
-		if (d<distance) {
-		    closest=i;
-		    distance=d;
+	int closest_distance = std::numeric_limits<int>::max();
+	Coords closest;
+	std::vector<Coords>::const_iterator reachable_end = reachable.end();
+	for
+		(std::vector<Coords>::const_iterator it = reachable.begin();
+		 it != reachable_end;
+		 ++it)
+	{
+		const int distance = map.calc_distance(flag->get_position(), *it);
+		if (distance < closest_distance) {
+			closest = *it;
+			closest_distance = distance;
 		}
 	}
+	assert(closest_distance != std::numeric_limits<int>::max());
 
 	// if we join a road and there is no flag yet, build one
-	Field* field=map->get_field(reachable[closest]);
-	if (field->get_immovable()->get_type()==BaseImmovable::ROAD)
-		game->send_player_build_flag (player_number, reachable[closest]);
+	if (dynamic_cast<const Road * const> (map[closest].get_immovable()))
+		game().send_player_build_flag (player_number, closest);
 
 	// and finally build the road
-	Path* path=new Path();
+	Path & path = *new Path();
 	check.set_openend (false);
-	if
-		(map->findpath(flag->get_position(), reachable[closest], 0, *path, check)
-		 <
-		 0)
+	if (map.findpath(flag->get_position(), closest, 0, path, check) < 0) {
+		delete &path;
 		return false;
+	}
 
-	game->send_player_build_road (player_number, path);
+	game().send_player_build_road (player_number, path);
 	return true;
 }
 
@@ -905,6 +956,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 	unsigned int i;
 
 	queue.push (NearFlag(flag, 0, 0));
+	Map & map = game().map();
 
 	while (!queue.empty()) {
 		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
@@ -927,7 +979,8 @@ bool Computer_Player::improve_roads (Flag* flag)
 		if (endflag==nf.flag)
 		    endflag=road->get_flag(Road::FlagEnd);
 
-		long dist=map->calc_distance(flag->get_position(), endflag->get_position());
+			long dist =
+				map.calc_distance(flag->get_position(), endflag->get_position());
 		if (dist > 16) //  out of range
 		    continue;
 
@@ -945,20 +998,20 @@ bool Computer_Player::improve_roads (Flag* flag)
 	    if (2*nf.distance+2>=nf.cost)
 		continue;
 
-	    Path* path=new Path();
+		Path & path = *new Path();
 		if
-			(map->findpath
-			 (flag->get_position(), nf.flag->get_position(), 0, *path, check)
+			(map.findpath
+			 (flag->get_position(), nf.flag->get_position(), 0, path, check)
 			 >=
 			 0
 			 and
-			 2 * path->get_nsteps() + 2 < nf.cost)
+			 static_cast<const int>(2 * path.get_nsteps() + 2) < nf.cost)
 		{
-			game->send_player_build_road (player_number, path);
+			game().send_player_build_road (player_number, path);
 			return true;
 		}
 
-	    delete path;
+		delete &path;
 	}
 
 	return false;
@@ -1073,6 +1126,7 @@ void Computer_Player::construct_roads ()
 {
 	std::vector<WalkableSpot> spots;
 	std::queue<int> queue;
+	Map & map = game().map();
 
 	for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
 	    for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end(); j++) {
@@ -1099,8 +1153,8 @@ void Computer_Player::construct_roads ()
 		if ((player->get_buildcaps(*i)&MOVECAPS_WALK)==0)
 		    continue;
 
-		BaseImmovable *imm=map->get_immovable(*i);
-		if (imm && imm->get_type()==Map_Object::ROAD) {
+		if (BaseImmovable * const imm = map.get_immovable(*i)) {
+			if (Road * const road = dynamic_cast<Road * const>(imm)) {
 		    if ((player->get_buildcaps(*i)&BUILDCAPS_FLAG)==0)
 			continue;
 
@@ -1110,14 +1164,14 @@ void Computer_Player::construct_roads ()
 		    spots.back().coords=*i;
 		    spots.back().hasflag=false;
 		    spots.back().cost=0;
-		    spots.back().eco=((Road*) imm)->get_flag(Road::FlagStart)->get_economy();
+				spots.back().eco = road->get_flag(Road::FlagStart)->get_economy();
 		    spots.back().from=-1;
 
 		    continue;
 		}
 
-		if (imm && imm->get_size()>=BaseImmovable::SMALL)
-		    continue;
+			if (imm->get_size() >= BaseImmovable::SMALL) continue;
+		}
 
 		spots.push_back(WalkableSpot());
 		spots.back().coords=*i;
@@ -1132,7 +1186,7 @@ void Computer_Player::construct_roads ()
 	    for (j=0;j<6;j++) {
 		Coords nc;
 
-		map->get_neighbour (spots[i].coords, j+1, &nc);
+		map.get_neighbour (spots[i].coords, j + 1, &nc);
 
 		for (k=0;k<(int) spots.size();k++)
 		    if (spots[k].coords==nc)
@@ -1173,7 +1227,7 @@ void Computer_Player::construct_roads ()
 			}
 
 			if (!hasflag)
-			    game->send_player_build_flag (player_number, pc.back());
+					game().send_player_build_flag (player_number, pc.back());
 
 			pc.push_front (from.coords);
 			i=from.from;
@@ -1185,24 +1239,24 @@ void Computer_Player::construct_roads ()
 			}
 
 			if (!hasflag)
-			    game->send_player_build_flag (player_number, pc.front());
+				game().send_player_build_flag (player_number, pc.front());
 
 			log ("Computer_Player(%d): New road has length %d\n", player_number, pc.size());
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++)
 				log ("Computer_Player: (%d,%d)\n", c->x, c->y);
 
-				Path * const path = new Path(map, pc.front());
+				Path & path = *new Path(pc.front());
 			pc.pop_front();
 
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++) {
-			    int n=map->is_neighbour(path->get_end(), *c);
+					const int n = map.is_neighbour(path.get_end(), *c);
 			    assert (n>=1 && n<=6);
 
-			    path->append (n);
-			    assert (path->get_end()==*c);
+				path.append (map, n);
+				assert (path.get_end() == *c);
 			}
 
-			game->send_player_build_road (player_number, path);
+				game().send_player_build_road (player_number, path);
 			return;
 		    }
 		}

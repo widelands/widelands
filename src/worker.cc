@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1722,7 +1722,7 @@ Change the location. This should be called in the following situations:
 */
 void Worker::set_location(PlayerImmovable *location)
 {
-	PlayerImmovable *oldlocation = get_location(get_owner()->get_game());
+	PlayerImmovable *oldlocation = get_location(&get_owner()->egbase());
 
 	if (oldlocation == location)
 		return;
@@ -1758,7 +1758,8 @@ void Worker::set_location(PlayerImmovable *location)
 		// Interrupt whatever we've been doing.
 		set_economy(0);
 
-		send_signal((Game*)get_owner()->get_game(), "location");
+		send_signal
+			(static_cast<Game * const>(&get_owner()->egbase()), "location");
 	}
 }
 
@@ -1782,9 +1783,7 @@ void Worker::set_economy(Economy *economy)
 
 	m_economy = economy;
 
-	WareInstance* item = get_carried_item(get_owner()->get_game());
-
-	if (item)
+	if (WareInstance * const item = get_carried_item(&get_owner()->egbase()))
 		item->set_economy(m_economy);
 	if (m_supply)
 		m_supply->set_economy(m_economy);
@@ -2192,7 +2191,10 @@ void Worker::transfer_update(Game* g, State* state)
 			{
 				if
 					(start_task_movepath
-					 (path, index, get_descr()->get_right_walk_anims(does_carry_ware())))
+					 (g->map(),
+					  path,
+					  index,
+					  get_descr()->get_right_walk_anims(does_carry_ware())))
 				{
 					molog("[transfer]: from road %u to flag %u\n", get_serial(), road->get_serial(),
 									nextstep->get_serial());
@@ -2493,11 +2495,16 @@ void Worker::return_update(Game* g, State* state)
 	}
 
 	// Determine the building's flag and move to it
-	Flag* flag = location->get_base_flag();
 
 	molog("[return]: Move to building's flag\n");
 
-	if (!start_task_movepath(g, flag->get_position(), 15, get_descr()->get_right_walk_anims(does_carry_ware()))) {
+	if
+		(not start_task_movepath
+		 (g,
+		  location->get_base_flag()->get_position(),
+		  15,
+		  get_descr()->get_right_walk_anims(does_carry_ware())))
+	{
 		molog("[return]: Failed to return\n");
 
 		set_location(0);
@@ -3677,7 +3684,8 @@ void Carrier::road_update(Game* g, State* state)
 	// Move into idle position if necessary
 	if
 		(start_task_movepath
-		 (road->get_path(),
+		 (g->map(),
+		  road->get_path(),
 		  road->get_idle_index(),
 		  get_descr()->get_right_walk_anims(does_carry_ware())))
 		return;
@@ -4065,12 +4073,11 @@ Find the flag we are closest to (in walking time).
 int Carrier::find_closest_flag(Game* g)
 {
 	Road* road = (Road*)get_location(g);
-	CoordPath startpath;
+	CoordPath startpath(g->map(), road->get_path());
 	CoordPath endpath;
 	int startcost, endcost;
 	int curidx = -1;
 
-	startpath = road->get_path();
 	curidx = startpath.get_index(get_position());
 
 	// Apparently, we're in a building
@@ -4132,7 +4139,10 @@ bool Carrier::start_task_walktoflag(Game* g, int flag, bool offset)
 	}
 
 	return start_task_movepath
-		(path, idx, get_descr()->get_right_walk_anims(does_carry_ware()));
+		(g->map(),
+		 path,
+		 idx,
+		 get_descr()->get_right_walk_anims(does_carry_ware()));
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,12 +120,12 @@ class Cmd_BuildRoad:public PlayerCommand {
 	Path* path;
 
 	Coords start;
-	int nsteps;
+	Path::Step_Vector::size_type nsteps;
 	char* steps;
 
     public:
 	Cmd_BuildRoad(void) : PlayerCommand() { } // For savegame loading
-	Cmd_BuildRoad (int, int, Path*);
+	Cmd_BuildRoad (int, int, Path &);
 	Cmd_BuildRoad (Deserializer*);
 
 	virtual ~Cmd_BuildRoad ();
@@ -286,7 +286,16 @@ class Cmd_EnemyFlagAction:public PlayerCommand {
 
     public:
 	Cmd_EnemyFlagAction(void) : PlayerCommand() { } // For savegame loading
-	Cmd_EnemyFlagAction (int t, int p, Flag* f, int a, int at, int num, int ty):PlayerCommand(t,p)
+	Cmd_EnemyFlagAction
+		(int t,
+		 int p,
+		 const Flag * const f,
+		 int a,
+		 int at,
+		 int num,
+		 int ty)
+		:
+		PlayerCommand(t,p)
 	{ serial=f->get_serial(); action=a; attacker=at; number=num; type=ty; }
 
    // Write these commands to a file (for savegames)

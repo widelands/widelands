@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,7 +154,7 @@ m_parent(parent)
 		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
 		 _("Cancel"));
 
-	const MapTriggerManager & mtm = m_parent->get_map()->get_mtm();
+	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
 	const MapTriggerManager::Index nr_triggers = mtm.get_nr_triggers();
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		if (strcmp(mtm.get_trigger_by_nr(i).get_id(), "null") == 0)
@@ -210,8 +210,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
                m_event->set_window_title( m_window_title->get_text() );
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
-            const MapTriggerManager & mtm =
-               m_parent->get_map()->get_mtm();
+	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
             for(int b=0; b<m_nr_buttons; b++) {
                m_event->set_button_name(b, m_buttons[b].name);
                if(m_buttons[b].trigger!=-1) {
@@ -282,10 +281,12 @@ void Event_Message_Box_Option_Menu::update(void) {
    m_button_name->set_text( m_buttons[m_ls_selected].name.c_str());
 
    if(m_nr_buttons && m_null_triggers.size()) {
-      if(m_buttons[m_ls_selected].trigger==-1)
-         m_current_trigger_ta->set_text("none");
-      else
-         m_current_trigger_ta->set_text( m_parent->get_map()->get_mtm().get_trigger_by_nr(m_null_triggers[m_buttons[m_ls_selected].trigger]).get_name());
+		m_current_trigger_ta->set_text
+			(m_buttons[m_ls_selected].trigger == -1 ?
+			 "none"
+			 :
+			 m_parent->egbase().map().get_mtm().get_trigger_by_nr
+			 (m_null_triggers[m_buttons[m_ls_selected].trigger]).get_name());
    } else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;

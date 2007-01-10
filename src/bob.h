@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 
 class Bob;
 class DirAnimations;
+class Map;
 class Profile;
 class Route;
 class Transfer;
@@ -173,7 +174,8 @@ public: // default tasks
 		 const bool forceonlast = false,
 		 const int only_step = -1);
 	bool start_task_movepath
-		(const Path &,
+		(const Map &,
+		 const Path &,
 		 const int index,
 		 const DirAnimations &,
 		 const bool forceonlast = false,

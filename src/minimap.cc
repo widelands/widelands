@@ -56,7 +56,7 @@ m_viewy       (0),
 m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
 flags         (MiniMap::Terrn)
 {
-	const Map & map = *iabase.get_map();
+	const Map & map = iabase.egbase().map();
 	set_size(w ? w : map.get_width(), h ? h : map.get_height());
 }
 
@@ -85,7 +85,7 @@ Redraw the view of the map
 void MiniMap::View::draw(RenderTarget* dst)
 {
 	dst->renderminimap
-		(*m_iabase.get_egbase(),
+		(m_iabase.egbase(),
 		 m_iabase.get_visibility(),
 		 Coords(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
 		 flags);
@@ -119,7 +119,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int x, int y) {
       c.x = m_viewx + 1 - (get_w() / 2) + x;
       c.y = m_viewy + 1 - (get_h() / 2) + y;
 
-	m_iabase.get_map()->normalize_coords(&c);
+	m_iabase.egbase().map().normalize_coords(&c);
 
 	assert(dynamic_cast<const MiniMap * const>(get_parent()));
 	static_cast<const MiniMap * const>(get_parent())->warpview.call

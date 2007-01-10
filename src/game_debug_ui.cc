@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,7 +176,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object*
 
 	m_tabs = new UI::Tab_Panel(this, 0, 0, 1);
 
-	obj->create_debug_panels(parent->get_egbase(), m_tabs);
+	obj->create_debug_panels(&parent->egbase(), m_tabs);
 
 	m_tabs->set_snapparent(true);
 	m_tabs->resize();
@@ -194,10 +194,11 @@ Remove self when the object disappears.
 */
 void MapObjectDebugWindow::think()
 {
-	Map_Object* obj = m_object.get(get_iabase()->get_egbase());
+	Editor_Game_Base & egbase = get_iabase()->egbase();
+	Map_Object * const obj = m_object.get(&egbase);
 
    if(obj && m_log_general_info)  {
-      obj->log_general_info(get_iabase()->get_egbase());
+      obj->log_general_info(&egbase);
       m_log_general_info = false;
    }
 
@@ -267,7 +268,7 @@ FieldDebugWindow::FieldDebugWindow
 (Interactive_Base & parent, const Coords coords)
 :
 UI::Window(&parent, 0, 0, 200, 200, _("Debug Field").c_str()),
-m_map     (parent.map()),
+m_map     (parent.egbase().map()),
 m_coords  (m_map.get_fcoords(coords)),
 
 	// Setup child panels
@@ -379,8 +380,8 @@ Open the bob debug window for the bob of the given index in the list
 void FieldDebugWindow::open_bob(const uint index) {
 	if (index != UI::Listselect<uintptr_t>::no_selection_index()) if
 		(Map_Object * const object =
-		 get_iabase()->get_egbase()->get_objects()->get_object
-		 (m_ui_bobs.get_selected()))
+		 get_iabase()->egbase().get_objects()
+		 ->get_object(m_ui_bobs.get_selected()))
 		show_mapobject_debug(get_iabase(), object);
 }
 

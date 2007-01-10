@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,10 +51,13 @@ m_building(-1) //  FIXME negative value!
    if(m_player<1) m_player=1;
 
    // Fill the building infos
-   Tribe_Descr* tribe = m_parent->get_editor()->get_tribe(m_parent->get_map()->get_scenario_player_tribe(m_player).c_str());
-   int i=0;
-   if(tribe) {
-      for(i=0; i<tribe->get_nrbuildings(); i++) {
+	Editor & editor = m_parent->editor();
+	if
+		(const Tribe_Descr * const tribe = editor.get_tribe
+		 (editor.map().get_scenario_player_tribe(m_player).c_str()))
+	{
+		const Building_Descr::Index nr_buildings = tribe->get_nrbuildings();
+		for (Building_Descr::Index i = 0; i < nr_buildings; ++i) {
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->get_name();
@@ -196,7 +199,8 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
  */
 void Event_Allow_Building_Option_Menu::update(void) {
    if(m_player<=0) m_player=1;
-   if(m_player>m_parent->get_map()->get_nrplayers()) m_player=m_parent->get_map()->get_nrplayers();
+	const Player_Number nr_players = m_parent->egbase().map().get_nrplayers();
+	if (m_player > nr_players) m_player = nr_players;
 
    if(m_building<0) m_building=0;
    if(m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;

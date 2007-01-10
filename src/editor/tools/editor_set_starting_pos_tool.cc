@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,7 +90,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
       // If the player is already created in the editor, this means
       // that there might be already a hq placed somewhere. This needs to be
       // deleted before a starting position change can occure
-		if (parent.get_editor()->get_player(m_current_player))
+		if (parent.editor().get_player(m_current_player))
 			if (not starting_pos.is_invalid())
 				if
 					(dynamic_cast<Building * const>

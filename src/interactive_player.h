@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,8 +79,8 @@ class Interactive_Player : public Interactive_Base {
       };
 
    public:
-		Interactive_Player(Game *g, uchar pln);
-		~Interactive_Player(void);
+	Interactive_Player(Game &, const uchar pln);
+	~Interactive_Player();
 
 		virtual void think();
 

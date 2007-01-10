@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1150,7 +1150,7 @@ void Warehouse::create_worker(Game *g, int worker)
 
 bool Warehouse::has_soldiers()
 {
-	const Editor_Game_Base & game = *get_owner()->get_game();
+	const Editor_Game_Base & egbase = owner().egbase();
 	const std::vector<Object_Ptr>::const_iterator end =
 		m_incorporated_workers.end();
 	for
@@ -1158,7 +1158,7 @@ bool Warehouse::has_soldiers()
 		 m_incorporated_workers.begin();
 		 it != end;
 		 ++it)
-		if (dynamic_cast<const Soldier * const>(it->get(&game))) return true;
+		if (dynamic_cast<const Soldier * const>(it->get(&egbase))) return true;
 	return false;
 }
 
@@ -1168,5 +1168,5 @@ void Warehouse::conquered_by (Player* pl)
    molog ("Warehouse::conquered_by- ");
    assert (pl);
    molog ("destroying\n");
-   cleanup(pl->get_game());
+	cleanup(&pl->egbase());
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -650,7 +650,7 @@ void Map::find_reachable
 		curpf->cycle = m_pathcycle;
 
 		// Get neighbours
-		for(uint dir = 1; dir <= 6; ++dir) {
+		for (Direction dir = 1; dir <= 6; ++dir) {
 			Pathfield *neighbpf;
 			FCoords neighb;
 
@@ -1626,8 +1626,9 @@ void Map::calc_cost(const Path & path, int *forward, int *backward) const
 	if (backward)
 		*backward = 0;
 
-	for(int i = 0; i < path.get_nsteps(); i++) {
-		int dir = path.get_step(i);
+	const Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+		const Direction dir = path[i];
 
 		if (forward)
 			*forward += calc_cost(coords, dir);
@@ -1644,7 +1645,8 @@ Map::get_neighbour
 Get a field's neighbour by direction
 ===============
 */
-void Map::get_neighbour(const Coords f, int dir, Coords * const o) const
+void Map::get_neighbour
+(const Coords f, const Direction dir, Coords * const o) const
 {
 	switch(dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
@@ -1656,7 +1658,8 @@ void Map::get_neighbour(const Coords f, int dir, Coords * const o) const
 	}
 }
 
-void Map::get_neighbour(const FCoords f, int dir, FCoords * const o) const
+void Map::get_neighbour
+(const FCoords f, const Direction dir, FCoords * const o) const
 {
 	switch(dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
@@ -1916,7 +1919,6 @@ int Map::findpath
 
 	// Some stupid cases...
 	if (start == end) {
-		path.m_map = this;
 		path.m_start = start;
 		path.m_end = end;
 		return 0; // duh...
@@ -2030,7 +2032,6 @@ int Map::findpath
 	else
 		retval = -1;
 
-	path.m_map = this;
 	path.m_start = start;
 	path.m_end = cur;
 
@@ -2508,14 +2509,11 @@ Path::Path
 Initialize a Path from a CoordPath
 ===============
 */
-Path::Path(CoordPath &o)
-{
-	m_map = o.get_map();
-	m_start = o.get_start();
-	m_end = o.get_end();
-	m_path = o.get_steps();
-	std::reverse(m_path.begin(), m_path.end()); // Path stores in reversed order!
-}
+Path::Path(CoordPath & o) :
+m_start(o.get_start()),
+m_end  (o.get_end()),
+m_path (o.steps())
+{std::reverse(m_path.begin(), m_path.end());} //  Path stores in reversed order!
 
 /*
 ===============
@@ -2540,10 +2538,9 @@ Path::append
 Add the given step at the end of the path.
 ===============
 */
-void Path::append(int dir)
-{
+void Path::append(const Map & map, const Direction dir) {
 	m_path.insert(m_path.begin(), dir); // stores in reversed order!
-	m_map->get_neighbour(m_end, dir, &m_end);
+	map.get_neighbour(m_end, dir, &m_end);
 }
 
 
@@ -2554,39 +2551,22 @@ CoordPath::CoordPath
 Initialize from a path, calculating the coordinates as needed
 ===============
 */
-CoordPath::CoordPath(const Path &path)
-{
-	m_map = 0;
-	*this = path;
-}
-
-
-/*
-===============
-CoordPath::operator=
-
-Assign from a path, calculating coordinates as needed.
-===============
-*/
-CoordPath& CoordPath::operator=(const Path& path)
-{
+CoordPath::CoordPath(const Map & map, const Path & path) {
 	m_coords.clear();
 	m_path.clear();
 
-	m_map = path.get_map();
 	m_coords.push_back(path.get_start());
 
 	Coords c = path.get_start();
 
-	for(int i = 0; i < path.get_nsteps(); i++) {
-		int dir = path.get_step(i);
+	Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+		const char dir = path[i];
 
 		m_path.push_back(dir);
-		m_map->get_neighbour(c, dir, &c);
+		map.get_neighbour(c, dir, &c);
 		m_coords.push_back(c);
 	}
-
-	return *this;
 }
 
 
@@ -2660,17 +2640,16 @@ CoordPath::append
 Append the given path. Automatically created the necessary coordinates.
 ===============
 */
-void CoordPath::append(const Path &tail)
-{
-	assert(m_map);
+void CoordPath::append(const Map & map, const Path & tail) {
 	assert(tail.get_start() == get_end());
 
 	Coords c = get_end();
 
-	for(int i = 0; i < tail.get_nsteps(); i++) {
-		char dir = tail.get_step(i);
+	const Path::Step_Vector::size_type nr_steps = tail.get_nsteps();
+	for (CoordPath::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+		const char dir = tail[i];
 
-		m_map->get_neighbour(c, dir, &c);
+		map.get_neighbour(c, dir, &c);
 		m_path.push_back(dir);
 		m_coords.push_back(c);
 	}
@@ -2690,7 +2669,6 @@ Append the given path.
 */
 void CoordPath::append(const CoordPath &tail)
 {
-	assert(m_map);
 	assert(tail.get_start() == get_end());
 
 	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());

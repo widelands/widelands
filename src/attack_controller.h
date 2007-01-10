@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,12 +35,16 @@ class Coords;
 class Widelands_Map_Attack_Controller_Data_Packet;
 
 
-void getCloseMilitarySites(Game* game, Flag* flag, int player, std::vector<MilitarySite*>* militarySites);
-uint getMaxAttackSoldiers(Game* game, Flag* flag, int player);
+void getCloseMilitarySites
+(const Game &,
+ const Flag &,
+ const Player_Number player,
+ std::set<MilitarySite *> & militarySites);
+uint getMaxAttackSoldiers(const Game &, const Flag &, const Player_Number);
 
 class AttackController : public BaseImmovable {
    friend class Widelands_Map_Attack_Controller_Data_Packet;
-   
+
    public:
       AttackController(Game* game, Flag* flag, int attacker, int defender);
       AttackController(Game* game);
@@ -55,7 +59,7 @@ class AttackController : public BaseImmovable {
       virtual void act (Game*, uint);
       virtual void cleanup (Editor_Game_Base*);
       //end inherited
-      
+
       void moveToReached(Soldier* soldier);
       void soldierDied(Soldier* soldier);
       void soldierWon(Soldier* soldier);
@@ -88,7 +92,7 @@ class AttackController : public BaseImmovable {
 
       std::vector<BattleSoldier> involvedSoldiers;
       std::set<Object_Ptr> involvedMilitarySites;
-      
+
       int attackingPlayer;
       int defendingPlayer;
       uint totallyLaunched;

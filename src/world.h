@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,16 +147,16 @@ class World
       inline Terrain_Descr* get_terrain(const char * const str ) const { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
       inline int get_nr_terrains(void) const { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
-		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
-      inline int get_nr_bobs(void) { return bobs.get_nitems(); }
+		inline Bob_Descr* get_bob_descr(ushort index) const{ return bobs.get(index); }
+      inline int get_nr_bobs(void) const{ return bobs.get_nitems(); }
       inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
-      inline int get_nr_immovables(void) { return immovables.get_nitems(); }
-		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
+      inline int get_nr_immovables(void) const{ return immovables.get_nitems(); }
+		inline Immovable_Descr* get_immovable_descr(int index) const{ return immovables.get(index); }
 
-      inline uchar get_resource(const char* l) { return m_resources.get_index(l); }
+      inline uchar get_resource(const char* l) const{ return m_resources.get_index(l); }
 	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
 		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
-      inline int get_nr_resources(void) { return m_resources.get_nitems(); }
+      inline int get_nr_resources(void) const{ return m_resources.get_nitems(); }
 
    private:
 	std::string m_basedir; //  base directory, where the main conf file resides
