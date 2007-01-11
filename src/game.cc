@@ -17,7 +17,6 @@
  *
  */
 
-#include "cmd_queue.h"
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "event_chain.h"
@@ -45,33 +44,19 @@
  *
  * init
  */
-Game::Game(void)
-{
-	m_state = gs_none;
-	m_speed = 1;
-
-	rng = new RNG();
-
-	cmdqueue = new Cmd_Queue(this);
-
-	m_realtime = WLApplication::get()->get_time();
-
-	ipl = 0;
-
-	g_sound_handler.m_the_game=this;
-}
+Game::Game() :
+m_state   (gs_none),
+m_speed   (1),
+ipl       (0),
+cmdqueue  (this),
+m_realtime(WLApplication::get()->get_time())
+{g_sound_handler.m_the_game = this;}
 
 /** Game::~Game(void)
  *
  * cleanup
  */
-Game::~Game(void)
-{
-	g_sound_handler.m_the_game=NULL;
-
-	delete cmdqueue;
-	delete rng;
-}
+Game::~Game() {g_sound_handler.m_the_game = NULL;}
 
 
 /**
@@ -163,9 +148,8 @@ bool Game::run_single_player ()
 	m_netgame=0;
 
 	m_maploader=0;
-	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, 0, &m_maploader);
-	int code = lgm->run();
-	delete lgm;
+	Fullscreen_Menu_LaunchGame lgm(this, 0, &m_maploader);
+	const int code = lgm.run();
 
 	if (code==0 || get_map()==0)
 	    return false;
@@ -192,24 +176,20 @@ bool Game::run_single_player ()
 bool Game::run_load_game(bool is_splayer) {
    assert(is_splayer); // TODO: net game saving not supported
 
-   Fullscreen_Menu_LoadGame* ssg = new Fullscreen_Menu_LoadGame(this, true);
-   int code = ssg->run();
+	{
+		Fullscreen_Menu_LoadGame ssg(this, true);
 
-   if(code) {
+		if (ssg.run()) {
       // We have to create an empty map, otherwise nothing will load properly
 		set_map(new Map);
 
-      FileSystem* fs = g_fs->MakeSubFileSystem( ssg->get_gamename());
+      FileSystem* fs = g_fs->MakeSubFileSystem( ssg.get_gamename());
 
 		Game_Loader gl(*fs, this);
 		gl.load_game();
       delete fs;
-   }
-
-   delete ssg;
-
-   if(code==0)
-      return false;
+		} else return false;
+	}
 
    m_state = gs_running;
 
@@ -225,11 +205,10 @@ bool Game::run_multi_player (NetGame* ng)
 	m_netgame=ng;
 
 	m_maploader=0;
-	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, m_netgame, &m_maploader);
-	m_netgame->set_launch_menu (lgm);
-	int code = lgm->run();
+	Fullscreen_Menu_LaunchGame lgm(this, m_netgame, &m_maploader);
+	m_netgame->set_launch_menu (&lgm);
+	const int code = lgm.run();
 	m_netgame->set_launch_menu (0);
-	delete lgm;
 
 	if (code==0 || get_map()==0)
 	    return false;
@@ -416,7 +395,7 @@ void Game::think(void)
 		if (frametime > 1000)
 			frametime = 1000;
 
-		cmdqueue->run_queue(frametime, get_game_time_pointer());
+		cmdqueue.run_queue(frametime, get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
 	}
@@ -493,10 +472,7 @@ void Game::send_player_command (PlayerCommand* pc)
 		enqueue_command (pc);
 }
 
-void Game::enqueue_command (BaseCommand* cmd)
-{
-	cmdqueue->enqueue (cmd);
-}
+void Game::enqueue_command (BaseCommand * const cmd) {cmdqueue.enqueue(cmd);}
 
 // we might want to make these inlines:
 void Game::send_player_bulldoze (PlayerImmovable* pi)

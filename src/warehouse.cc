@@ -455,8 +455,7 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base* gg)
 {
-	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(gg)) {
 
       while(m_requests.size()) {
          Request* req = m_requests[m_requests.size()-1];

@@ -494,9 +494,7 @@ void Bob::pop_task()
    if (m_stack_dirty)
       throw wexception("MO(%u): pop_task(%s): stack already dirty", get_serial(), state->task->name);
 
-   if (state->path)
 		delete state->path;
-	if (state->route)
 		delete state->route;
 	if (state->transfer)
 		state->transfer->has_failed();
@@ -1222,12 +1220,10 @@ Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, P
 		bob->parse(directory, prof, 0);
 	}
 	catch(std::exception &e) {
-		if (bob)
 			delete bob;
 		throw wexception("Error reading bob %s: %s", directory, e.what());
 	}
 	catch(...) {
-		if (bob)
 			delete bob;
 		throw;
 	}

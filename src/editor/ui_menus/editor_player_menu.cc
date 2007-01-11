@@ -142,26 +142,16 @@ void Editor_Player_Menu::update(void) {
    // Now remove all the unneeded stuff
    int i=0;
    for(i=nr_players; i<MAX_PLAYERS; i++) {
-      if(m_plr_names[i]) {
          delete m_plr_names[i];
          m_plr_names[i]=0;
-      }
-      if(m_plr_set_pos_buts[i]) {
          delete m_plr_set_pos_buts[i];
          m_plr_set_pos_buts[i]=0;
-      }
-      if(m_plr_set_tribes_buts[i]) {
          delete m_plr_set_tribes_buts[i];
          m_plr_set_tribes_buts[i]=0;
-      }
-      if(m_plr_set_tribes_buts[i]) {
          delete m_plr_make_infrastructure_buts[i];
          m_plr_make_infrastructure_buts[i]=0;
-      }
-      if(m_plr_allowed_buildings[i]) {
          delete m_plr_allowed_buildings[i];
          m_plr_allowed_buildings[i]=0;
-      }
    }
    int posy=m_posy;
    int spacing=5;
@@ -287,9 +277,14 @@ void Editor_Player_Menu::clicked_up_down(Sint8 change) {
 			map.set_scenario_player_tribe(nr_players, tribe);
          m_parent->set_need_save(true);
       } else {
-         UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), _("Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"), UI::Modal_Message_Box::OK);
-         mmb->run();
-         delete mmb;
+			UI::Modal_Message_Box mmb
+				(m_parent,
+				 _("Error!"),
+				 _("Can't remove player. It is referenced in some place. Remove "
+				   "all buildings, bobs, triggers and events that depend on this "
+				   "player and try again"),
+				 UI::Modal_Message_Box::OK);
+			mmb.run();
       }
    }
    update();
@@ -313,9 +308,14 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 		m_parent->egbase().map().set_scenario_player_tribe(n+1,t);
       m_parent->set_need_save(true);
    } else {
-      UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), _("Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"), UI::Modal_Message_Box::OK);
-      mmb->run();
-      delete mmb;
+		UI::Modal_Message_Box mmb
+			(m_parent,
+			 _("Error!"),
+			 _("Can't change player tribe. It is referenced in some place. Remove "
+			   "all buildings, bobs, triggers and events that depend on this "
+			   "tribe and try again"),
+			 UI::Modal_Message_Box::OK);
+		mmb.run();
    }
    update();
 }

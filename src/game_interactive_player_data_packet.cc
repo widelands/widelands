@@ -64,10 +64,8 @@ throw (_wexception)
       plr->m_player_number = fr.Unsigned8();
 
       // Main Menu is not closed
-      if(plr->m_fieldaction.window) {
          delete plr->m_fieldaction.window;
          plr->m_fieldaction.window = 0;
-      }
 
       // Map Position
       int x = fr.Unsigned16();
@@ -76,10 +74,8 @@ throw (_wexception)
 
       plr->m_display_flags = fr.Unsigned32();
 
-      if(plr->m_minimap.window) {
          delete plr->m_minimap.window;
          plr->m_minimap.window = 0;
-      }
 
       // Now only restore the callback functions. assumes, map is already loaded
       game->get_map()->get_overlay_manager()->show_buildhelp(false);

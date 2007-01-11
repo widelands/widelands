@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,9 +28,12 @@
  * Lots more are scattered through header files
  */
 
-///Version mark for the build. Appears in title screen
-///\todo Tie this into build_id (which, in turn, should be tied into CVS numbering)
-#define VERSION "cvsbuild"
+/**
+ * Version mark for the build. Appears in title screen
+ * \todo Tie this into build_id (which, in turn, should be tied into SVN
+ * numbering)
+ */
+#define VERSION "svnbuild"
 
 /**
  * locale path: This would be needed to be changed by a packager

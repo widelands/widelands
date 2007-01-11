@@ -253,10 +253,8 @@ void Editor_Event_Menu::update(void) {
 
 void Editor_Event_Menu::clicked_new_event() {
       // Create the event if needed
-      Editor_Event_Menu_New_Event* ntm=new Editor_Event_Menu_New_Event(m_parent);
-      int retval=ntm->run();
-      delete ntm;
-      if(retval) {
+	Editor_Event_Menu_New_Event ntm(m_parent);
+	if (ntm.run()) {
          update();
          m_parent->set_need_save(true);
       }
@@ -282,9 +280,9 @@ void Editor_Event_Menu::clicked_del_event() {
 			 it != event_referencers_end;
 			 ++it)
 			s << it->first->get_type() << ':' << it->first->get_name() << '\n';
-		UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
-         mmb->run();
-         delete mmb;
+		UI::Modal_Message_Box mmb
+			(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
+		mmb.run();
          return;
 	}
 
@@ -300,13 +298,11 @@ void Editor_Event_Menu::clicked_edit_event() {
 
 
 void Editor_Event_Menu::clicked_new_trigger() {
-      Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
-      int retval=ntm->run();
-      if(retval)  {
+	Editor_Event_Menu_New_Trigger ntm(m_parent);
+	if (ntm.run())  {
          update();
          m_parent->set_need_save(true);
       }
-      delete ntm;
 	}
 
 
@@ -348,10 +344,9 @@ void Editor_Event_Menu::clicked_edit_trigger() {
 void Editor_Event_Menu::clicked_new_eventchain() {
       // First, create new TriggerConditional
       EventChain* ev = new EventChain();
-      Editor_Event_Menu_Edit_TriggerConditional* menu = new Editor_Event_Menu_Edit_TriggerConditional( m_parent, 0, ev );
-      int code = menu->run();
-      if( code ) { // TriggerConditional has been accepted
-         ev->set_trigcond( menu->get_trigcond());
+	Editor_Event_Menu_Edit_TriggerConditional menu(m_parent, 0, ev);
+	if (menu.run()) { // TriggerConditional has been accepted
+		ev->set_trigcond(menu.get_trigcond());
 
          // Get the a name
          char buffer[256];
@@ -369,13 +364,12 @@ void Editor_Event_Menu::clicked_new_eventchain() {
          map.get_mecm().register_new_eventchain(ev);
 			m_eventchain_list->add(_("Unnamed").c_str(), *ev, -1, true);
          m_eventchain_list->sort();
+		clicked_edit_eventchain();
       } else {
          // TriggerConditional was not accepted. Remove this EventChain straithly.
          // No dereferencing of triggers is needed, since they are not referenced at all on cancel
          delete ev;
       }
-      delete menu;
-	if (code) clicked_edit_eventchain();
 }
 
 

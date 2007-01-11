@@ -292,10 +292,8 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 		flag->remove_item(g, this);
 	}
 
-	if (m_supply) {
 		delete m_supply;
 		m_supply = 0;
-	}
 
 	if (Game * const game = dynamic_cast<Game * const>(g)) {
 		cancel_moving();
@@ -413,10 +411,8 @@ void WareInstance::update(Game* g)
 		if (!m_supply)
 			m_supply = new IdleWareSupply(this);
 	} else {
-		if (m_supply) {
 			delete m_supply;
 			m_supply = 0;
-		}
 	}
 
 	// Deal with transfers
@@ -1580,10 +1576,8 @@ void Road::cleanup(Editor_Game_Base *gg)
 	// Release carrier
 	m_desire_carriers = 0;
 
-	if (m_carrier_request) {
 		delete m_carrier_request;
 		m_carrier_request = 0;
-	}
 
 	m_carrier = 0; // carrier will be released via PlayerImmovable::cleanup
 
@@ -2375,7 +2369,6 @@ Request::~Request()
 		cancel_transfer(0);
 
 	// Remove requeriments
-	if (m_requeriments)
 		delete m_requeriments;
 	m_requeriments = 0;
 }
@@ -2709,7 +2702,6 @@ void Request::start_transfer(Game* g, Supply* supp)
 	}
 	catch(...)
 	{
-		if (t)
 			delete t;
 
 		throw;
@@ -2756,7 +2748,6 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		m_count--;
 	}
 
-   if (m_requeriments)
 		delete m_requeriments;
 	m_requeriments = 0;
 
@@ -2795,7 +2786,6 @@ void Request::transfer_fail(Game *, Transfer * t) {
    if (!wasopen)
 		m_economy->add_request(this);
 
-	if (m_requeriments)
 		delete m_requeriments;
 	m_requeriments = 0;
 }
@@ -3026,10 +3016,8 @@ void WaresQueue::update() {
 	}
 	else
 	{
-		if (m_request) {
 			delete m_request;
 			m_request = 0;
-		}
 	}
 }
 
@@ -3168,7 +3156,6 @@ void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_
       m_filled=fr->Signed32();
       m_consume_interval=fr->Signed32();
       bool request=fr->Unsigned8();
-      if(m_request)
          delete m_request;
       if(request) {
          m_request = new Request(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);

@@ -69,14 +69,23 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
    if(!trig)
       trig=get_correct_trigger(id);
 
-   int retval=-100;
+	int retval;
    std::string str = id;
-   if( str == "time" ) { Trigger_Time_Option_Menu* t=new Trigger_Time_Option_Menu(m_parent, static_cast<Trigger_Time*>(trig)); retval=t->run(); delete t; }
-   else if( str == "null" ) { Trigger_Null_Option_Menu* t=new Trigger_Null_Option_Menu(m_parent, static_cast<Trigger_Null*>(trig)); retval=t->run(); delete t; }
-   else if( str == "building") { Trigger_Building_Option_Menu* t=new Trigger_Building_Option_Menu(m_parent, static_cast<Trigger_Building*>(trig)); retval=t->run(); delete t; }
-
-   if(retval==-100)
-      throw wexception("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id found: %s\n", id);
+	if        (str == "time") {
+		Trigger_Time_Option_Menu t
+			(m_parent, static_cast<Trigger_Time * const>(trig));
+		retval = t.run();
+	} else if (str == "null") {
+		Trigger_Null_Option_Menu t(m_parent, static_cast<Trigger_Null*>(trig));
+		retval = t.run();
+	} else if (str == "building") {
+		Trigger_Building_Option_Menu t
+			(m_parent, static_cast<Trigger_Building*>(trig));
+		retval = t.run();
+	} else throw wexception
+		("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id "
+		 "found: %s\n",
+		 id);
    if(retval)
       return trig;
    if(!gtrig) {

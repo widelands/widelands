@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,16 +83,32 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
    if(!event)
       event=get_correct_event(id);
 
-   int retval=-100;
+	int retval;
    std::string str = id;
-   if( str == "message_box" ) { Event_Message_Box_Option_Menu* t=new Event_Message_Box_Option_Menu(m_parent, static_cast<Event_Message_Box*>(event)); retval=t->run(); delete t; }
-   else if( str == "move_view" ) { Event_Move_View_Option_Menu* t=new Event_Move_View_Option_Menu(m_parent, static_cast<Event_Move_View*>(event)); retval=t->run(); delete t; }
-   else if( str == "unhide_area" ) { Event_Unhide_Area_Option_Menu* t=new Event_Unhide_Area_Option_Menu(m_parent, static_cast<Event_Unhide_Area*>(event)); retval=t->run(); delete t; }
-   else if( str == "conquer_area" ) { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; }
-   else if( str == "allow_building" ) { Event_Allow_Building_Option_Menu* t=new Event_Allow_Building_Option_Menu(m_parent, static_cast<Event_Allow_Building*>(event)); retval=t->run(); delete t; }
-
-   if(retval==-100)
-      throw wexception("Event_Factory::make_event_with_option_dialog: Unknown event id found: %s\n", id);
+	if        (str == "message_box")    {
+		Event_Message_Box_Option_Menu t
+			(m_parent, static_cast<Event_Message_Box    * const>(event));
+		retval = t.run();
+	} else if (str == "move_view")      {
+		Event_Move_View_Option_Menu t
+			(m_parent, static_cast<Event_Move_View      * const>(event));
+		retval = t.run();
+	} else if (str == "unhide_area")    {
+		Event_Unhide_Area_Option_Menu t
+			(m_parent, static_cast<Event_Unhide_Area    * const>(event));
+		retval = t.run();
+	} else if (str == "conquer_area")   {
+		Event_Conquer_Area_Option_Menu t
+			(m_parent, static_cast<Event_Conquer_Area   * const>(event));
+		retval = t.run();
+	} else if (str == "allow_building") {
+		Event_Allow_Building_Option_Menu t
+			(m_parent, static_cast<Event_Allow_Building * const>(event));
+		retval = t.run();
+	} else throw wexception
+		("Event_Factory::make_event_with_option_dialog: Unknown event id found: "
+		 "%s\n",
+		 id);
    if(retval)
       return event;
    if(!gevent) {

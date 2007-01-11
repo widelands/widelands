@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,58 +44,40 @@ Game_Saver::~Game_Saver(void) {
  * The core save function
  */
 void Game_Saver::save(void) throw(_wexception) {
-   Game_Data_Packet* gp;
-   Game_Map_Data_Packet* gmdp;
 
 	m_fs.EnsureDirectoryExists("binary");
 
    log("Game: Writing Preload Data ... ");
-   gp = new Game_Preload_Data_Packet();
-   gp->Write(m_fs, m_game, 0);
-   delete gp;
+	{Game_Preload_Data_Packet                     p; p.Write(m_fs, m_game, 0);}
    log(" done\n");
 
    log("Game: Writing Game Class Data ... ");
-   gp = new Game_Game_Class_Data_Packet();
-   gp->Write(m_fs, m_game, 0);
-   delete gp;
+	{Game_Game_Class_Data_Packet                  p; p.Write(m_fs, m_game, 0);}
    log(" done\n");
 
    log("Game: Writing Player Info ... ");
-   gp = new Game_Player_Info_Data_Packet();
-   gp->Write(m_fs, m_game, 0);
-   delete gp;
+	{Game_Player_Info_Data_Packet                 p; p.Write(m_fs, m_game, 0);}
    log(" done\n");
 
    log("Game: Writing Map Data!\n");
-   gmdp = new Game_Map_Data_Packet();
-   gmdp->Write(m_fs, m_game, 0);
-   Widelands_Map_Map_Object_Saver *mos = gmdp->get_map_object_saver();
+	Game_Map_Data_Packet                          M; M.Write(m_fs, m_game, 0);
    log("Game: Writing Map Data done!\n");
 
+	Widelands_Map_Map_Object_Saver * const mos = M.get_map_object_saver();
+
    log("Game: Writing Player Economies Info ... ");
-   gp = new Game_Player_Economies_Data_Packet();
-   gp->Write(m_fs, m_game, mos);
-   delete gp;
+	{Game_Player_Economies_Data_Packet            p; p.Write(m_fs, m_game, mos);}
    log(" done\n");
 
    log("Game: Writing Command Queue Data ... ");
-   gp = new Game_Cmd_Queue_Data_Packet();
-   gp->Write(m_fs, m_game, mos);
-   delete gp;
+	{Game_Cmd_Queue_Data_Packet                   p; p.Write(m_fs, m_game, mos);}
    log(" done\n");
 
    log("Game: Writing Interactive Player Data ... ");
-   gp = new Game_Interactive_Player_Data_Packet();
-   gp->Write(m_fs, m_game, mos);
-   delete gp;
+	{Game_Interactive_Player_Data_Packet          p; p.Write(m_fs, m_game, mos);}
    log(" done\n");
 
    log("Game: Writing Computer Player Data ... ");
-   gp = new Game_Computer_Player_Data_Packet();
-   gp->Write(m_fs, m_game, mos);
-   delete gp;
+	{Game_Computer_Player_Data_Packet             p; p.Write(m_fs, m_game, mos);}
    log(" done\n");
-
-   delete gmdp; // Deletes our map object saver
 }

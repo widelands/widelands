@@ -230,10 +230,10 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
  * message
  */
 void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
-   UI::Modal_Message_Box* mmb = new UI::Modal_Message_Box(this, _("Critical Connection Error!"), str, UI::Modal_Message_Box::OK);
-   mmb->run();
+	UI::Modal_Message_Box mmb
+		(this, _("Critical Connection Error!"), str, UI::Modal_Message_Box::OK);
+	mmb.run();
    m_disconnect_expected = true;
-   delete mmb;
 }
 
 /*
@@ -241,9 +241,12 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
  */
 void Fullscreen_Menu_InetLobby::disconnect( void ) {
    if(!m_disconnect_expected) {
-      UI::Modal_Message_Box* mmb = new UI::Modal_Message_Box(this, _("Critical Connection Error!"), _("Server disconnected unexpectedly!"), UI::Modal_Message_Box::OK);
-      mmb->run();
-      delete mmb;
+		UI::Modal_Message_Box mmb
+			(this,
+			 _("Critical Connection Error!"),
+			 _("Server disconnected unexpectedly!"),
+			 UI::Modal_Message_Box::OK);
+		mmb.run();
    }
    end_modal(0);
    return;

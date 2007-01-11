@@ -33,11 +33,7 @@ inits
 ===========
 */
 
-Editor::Editor() {
-   m_eia=0;
-
-   m_realtime=WLApplication::get()->get_time();
-}
+Editor::Editor() : m_realtime(WLApplication::get()->get_time()) {}
 
 
 /*
@@ -68,20 +64,18 @@ void Editor::run() {
 
    g_gr->flush(PicMod_Menu);
 
-	m_eia = new Editor_Interactive(*this);
+	Editor_Interactive eia(*this);
    // inform base, that we have something interactive
-   set_iabase(m_eia);
+   set_iabase(&eia);
 
    postload();
    load_graphics();
 
-   m_eia->start();
-   m_eia->run();
+	eia.start();
+	eia.run();
 
 
    get_objects()->cleanup(this);
-   delete m_eia;
-   m_eia=0;
 
    g_gr->flush(PicMod_Game);
    g_anim.flush();

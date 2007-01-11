@@ -20,11 +20,11 @@
 #ifndef __S__GAME_H
 #define __S__GAME_H
 
+#include "cmd_queue.h"
 #include "editor_game_base.h"
 #include "random.h"
 
 struct Flag;
-struct Cmd_Queue;
 struct Path;
 struct PlayerImmovable;
 
@@ -78,17 +78,17 @@ public:
 		(const bool flush_graphics = true, const bool flush_animations = true);
 
 	// in-game logic
-	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
+	Cmd_Queue * get_cmdqueue() {return &cmdqueue;}
 
 	// Start using logic_rand() for the actual gamelogic (e.g. critter).
 	// Do NOT use for random events in the UI or other display code.
 	// This will allow us to plug another PRNG in here for game playbacks
 	// and other fancy stuff.
-	inline uint logic_rand() { return rng->rand(); }
+	uint logic_rand() {return rng.rand();}
 
 	Coords random_location(const Coords center, uchar radius);
 
-	void logic_rand_seed (uint seed) { rng->seed (seed); }
+	void logic_rand_seed (const uint seed) {rng.seed (seed);}
 
 	int get_speed() const { return m_speed; }
 	void set_speed(int speed);
@@ -98,7 +98,7 @@ public:
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);
 	virtual void player_field_notification (const FCoords&, losegain_t);
 
-	void enqueue_command (BaseCommand*);
+	void enqueue_command (BaseCommand * const);
 
 	void send_player_command (PlayerCommand*);
 
@@ -140,11 +140,11 @@ private:
 	int                            m_state;
 	int                            m_speed; //  frametime multiplier
 
-	RNG                          * rng;
+	RNG                            rng;
 
 	Interactive_Player           * ipl;
 	std::vector<Computer_Player *> cpl;
-	Cmd_Queue                    * cmdqueue;
+	Cmd_Queue                      cmdqueue;
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 };

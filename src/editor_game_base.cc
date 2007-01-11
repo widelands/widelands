@@ -411,12 +411,11 @@ Remove the player with the given number
 */
 void Editor_Game_Base::remove_player(int plnum)
 {
-   assert(plnum >= 1 && plnum <= MAX_PLAYERS);
+	assert(1 <= plnum);
+	assert     (plnum <= MAX_PLAYERS);
 
-	if (m_players[plnum-1]) {
 		delete m_players[plnum-1];
 		m_players[plnum-1] = 0;
-	}
 }
 
 

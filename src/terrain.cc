@@ -218,9 +218,7 @@ Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screen
  */
 Texture::~Texture ()
 {
-	if (m_colormap)
 		delete m_colormap;
-	if (m_pixels)
 		free(m_pixels);
 }
 

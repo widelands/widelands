@@ -33,11 +33,7 @@ UniqueWindow IMPLEMENTATION
 /**
 In order to avoid dangling pointers, we need to kill our contained window here.
 */
-UniqueWindow::Registry::~Registry()
-{
-	if (window)
-		delete window;
-}
+UniqueWindow::Registry::~Registry() {delete window;}
 
 
 /**
@@ -51,7 +47,6 @@ UniqueWindow::UniqueWindow(Panel* parent, UniqueWindow::Registry* reg, int w, in
 
 	if (m_registry)
 	{
-		if (m_registry->window)
 			delete m_registry->window;
 
 		m_registry->window = this;

@@ -45,7 +45,6 @@ extern "C"
 	catch(Parameter_error &e) { //handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
-		if(g_app)
 			delete g_app;
 
 		return 0;
@@ -57,7 +56,6 @@ extern "C"
 		"The exception said: "<<e.what()<<endl<<endl<<
 		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
-		if(g_app)
 			delete g_app;
 
 		return 1;
@@ -70,7 +68,6 @@ extern "C"
 		"The exception said: "<<e.what()<<endl<<endl<<
 		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
-		if(g_app)
 			delete g_app;
 
 		return 1;
@@ -80,7 +77,6 @@ extern "C"
 		"Caught unknown exception in outermost handler!"<<endl<<endl<<
 		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
-		if(g_app)
 			delete g_app;
 
 		return 1;

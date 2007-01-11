@@ -245,7 +245,6 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 		}
 		catch(std::exception& e)
 		{
-			if (prog)
 				delete prog;
 
 			throw wexception("Parse error in program %s: %s", string, e.what());

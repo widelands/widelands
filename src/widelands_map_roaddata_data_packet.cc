@@ -115,10 +115,8 @@ throw (_wexception)
          } else
             r->m_carrier=0;
 
-         if(r->m_carrier_request) {
             delete r->m_carrier_request;
             r->m_carrier_request=0;
-         }
 
          bool request_exists=fr.Unsigned8();
          if(request_exists) {

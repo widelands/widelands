@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,6 @@ Map_Loader("", map), m_fs(fs), m_mol(0)
  * Destructor
  */
 Widelands_Map_Loader::~Widelands_Map_Loader(void) {
-   if(m_mol)
       delete m_mol;
    delete &m_fs;
 }
@@ -117,111 +116,122 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    m_map->get_world()->postload(egbase);
    m_map->set_size(m_map->m_width, m_map->m_height);
 
-   if(m_mol)
       delete m_mol;
    m_mol=new Widelands_Map_Map_Object_Loader;
-
-   Widelands_Map_Data_Packet* dp;
 
    // MANDATORY PACKETS
    // Start with writing the map out, first Elemental data
    // PRELOAD DATA BEGIN
    log("Reading Elemental Data ... ");
-   dp= new Widelands_Map_Elemental_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Elemental_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // now player names and tribes
    log("Reading Player Names And Tribe Data ... ");
-   dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Player_Names_And_Tribes_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
    // PRELOAD DATA END
 
    // now heights
    log("Reading Heights Data ... ");
-   dp=new Widelands_Map_Heights_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Heights_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // and terrains
    log("Reading Terrain Data ... ");
-   dp=new Widelands_Map_Terrain_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Terrain_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // now immovables
    log("Reading Immovable Data ... ");
-   dp=new Widelands_Map_Immovable_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Immovable_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // now player pos
    log("Reading Player Start Position Data ... ");
-   dp=new Widelands_Map_Player_Position_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Player_Position_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // now bobs
    log("Reading Bob Data ... ");
-   dp=new Widelands_Map_Bob_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Bob_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // now resources
    log("Reading Resources Data ... ");
-   dp=new Widelands_Map_Resources_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Resources_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // NON MANDATORY PACKETS BELOW THIS POINT
    // Map Extra Data
    log("Reading Map Extra Data ... ");
-   dp=new Widelands_Map_Extradata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Extradata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // Triggers
    log("Reading Trigger Data ... ");
-   dp=new Widelands_Map_Trigger_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Trigger_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // Objectives: Depend on triggers
    log("Reading Objective Data ... ");
-   dp=new Widelands_Map_Objective_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Objective_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // Events, depend on trigger, objectives
    log("Reading Event Data ... ");
-   dp=new Widelands_Map_Event_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Event_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // Event Chains
    log("Reading Event Chain Data ... ");
-   dp=new Widelands_Map_EventChain_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_EventChain_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Allowed Buildings Data ... ");
-   dp=new Widelands_Map_Allowed_Buildings_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Allowed_Buildings_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // We always write the next few packets since it
@@ -231,101 +241,116 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    // change this order without knowing what you do
    // EXISTENT PACKETS
    log("Reading Flag Data ... ");
-   dp=new Widelands_Map_Flag_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Flag_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Road Data ... ");
-   dp=new Widelands_Map_Road_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Road_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Building Data ... ");
-   dp=new Widelands_Map_Building_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Building_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
 
    log("Reading Map Ware Data ... ");
-   dp=new Widelands_Map_Ware_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Ware_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    // DATA PACKETS
    log("Reading Flagdata Data ... ");
-   dp=new Widelands_Map_Flagdata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Flagdata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Roaddata Data ... ");
-   dp=new Widelands_Map_Roaddata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Roaddata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
 
    log("Reading Buildingdata Data ... ");
-   dp=new Widelands_Map_Buildingdata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Buildingdata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
 
    log("Reading Waredata Data ... ");
-   dp=new Widelands_Map_Waredata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Waredata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Bobdata Data ... ");
-   dp=new Widelands_Map_Bobdata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Bobdata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Immovabledata Data ... ");
-   dp=new Widelands_Map_Immovabledata_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Immovabledata_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Owned-Fields Data ... ");
-   dp=new Widelands_Map_Owned_Fields_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Owned_Fields_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Seen-Fields Data ... ");
-   dp=new Widelands_Map_Seen_Fields_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Seen_Fields_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
 
    // This should be at least after loading Soldiers (Bobs)
    // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
    log("Reading Battle Data ... ");
-   dp=new Widelands_Map_Battle_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Battle_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
-   
+
    //This should be done after loading of soldiers and military sites
    log("Reading Attack Controller Data ... ");
-   dp=new Widelands_Map_Attack_Controller_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Attack_Controller_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    log("Reading Variable Data ... ");
-   dp=new Widelands_Map_Variable_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
+	{
+		Widelands_Map_Variable_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
    log("done!\n ");
 
    if(m_mol->get_nr_unloaded_objects())

@@ -101,11 +101,7 @@ Building::hide_options
 Force the destruction of the options window.
 ===============
 */
-void Building::hide_options()
-{
-	if (m_optionswindow)
-		delete m_optionswindow;
-}
+void Building::hide_options() {delete m_optionswindow;}
 
 
 /*
@@ -510,7 +506,6 @@ UI::Window(parent, 0, 0, Width, 0, building->get_descname()),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
 	m_registry = registry;
-	if (*m_registry)
 		delete *m_registry;
 	*m_registry = this;
 
@@ -596,7 +591,6 @@ it.
 */
 UI::Panel* Building_Window::create_capsbuttons(UI::Panel* parent)
 {
-	if (m_capsbuttons)
 		delete m_capsbuttons;
 
 	m_capsbuttons = new UI::Panel(parent, 0, 0, Width, 34);

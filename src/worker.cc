@@ -1632,7 +1632,6 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 		}
 		catch(std::exception& e)
 		{
-			if (prog)
 				delete prog;
 
 			throw wexception("Parse error in program %s: %s", string, e.what());
@@ -1825,10 +1824,8 @@ void Worker::cleanup(Editor_Game_Base *g)
 {
 	WareInstance* item = get_carried_item(g);
 
-	if (m_supply) {
 		delete m_supply;
 		m_supply = 0;
-	}
 
 	if (item)
       if(g->get_objects()->object_still_available(item))
@@ -4219,12 +4216,10 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 		descr->parse(directory, &prof, encdata);
 	}
 	catch(std::exception &e) {
-		if (descr)
 			delete descr;
 		throw wexception("Error reading worker %s: %s", name, e.what());
 	}
 	catch(...) {
-		if (descr)
 			delete descr;
 		throw;
 	}

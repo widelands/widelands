@@ -110,11 +110,9 @@ m_basedir("maps")
 
 Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
 {
-   if(m_map) {
-      // upsy, obviously ok was not pressed
+	// if m_map is != 0, obviously ok was not pressed
       delete m_map;
       m_map=0;
-   }
 }
 
     /*
@@ -155,10 +153,8 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
 
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       // No directory
-      if (*m_ml) {
          delete *m_ml;
          *m_ml = 0;
-      }
 
       if (get_mapname())
       {
@@ -244,11 +240,12 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       ++ndirs;
    }
 
-   Map* map=new Map();
+	{
+		Map map;
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
 
-		Map_Loader* ml = map->get_correct_loader(name); //  FIXME Do not declare a local variable whose name begins with m_, especially not when it shadows a member!
+			Map_Loader * const ml = map.get_correct_loader(name);
       if(!ml) continue;
 
 		try {
@@ -258,7 +255,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 				 or
 				 dynamic_cast<const        S2_Map_Loader * const>(ml));
 			list.add
-				(map->get_name(),
+				(map.get_name(),
 				 name,
 				 g_gr->get_picture
 				 (PicMod_Game,
@@ -270,7 +267,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       delete ml;
 
    }
-   delete map;
+	}
 
 	list.sort(0, ndirs);
 	list.sort(ndirs);

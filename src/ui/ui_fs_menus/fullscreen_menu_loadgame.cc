@@ -147,7 +147,6 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
-      if( fs )
          delete fs;
    }
 

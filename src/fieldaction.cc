@@ -313,11 +313,8 @@ FieldActionWindow::~FieldActionWindow()
 	if (not m_workarea_preview_job_id.isNull())
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_sel_freeze(false);
-   if (m_text_attackers)
-   {
       delete m_text_attackers;
       m_text_attackers = 0;
-   }
 }
 
 
@@ -1011,10 +1008,8 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 	// Force closing of old fieldaction windows. This is necessary because
 	// show_field_action() does not always open a FieldActionWindow (e.g.
 	// connecting the road we are building to an existing flag)
-	if (registry->window) {
 		delete registry->window;
 		registry->window = 0;
-	}
 
 	if (!iabase->is_building_road()) {
 		faw = new FieldActionWindow(iabase, player, registry);

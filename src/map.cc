@@ -117,30 +117,18 @@ cleanups
 Map::~Map()
 {
    cleanup();
-   if(m_overlay_manager) {
       delete m_overlay_manager;
       m_overlay_manager=0;
-   }
-   if(m_mvm) {
       delete m_mvm;
       m_mvm = 0;
-   }
-   if(m_mom) {
       delete m_mom;
       m_mom = 0;
-   }
-   if(m_mecm) {
       delete m_mecm;
       m_mecm = 0;
-   }
-   if(m_mtm) {
       delete m_mtm;
       m_mtm = 0;
-   }
-   if(m_mem) {
       delete m_mem;
       m_mem = 0;
-   }
 }
 
 void Map::recalc_border(const FCoords fc) {
@@ -377,7 +365,6 @@ void Map::cleanup(void) {
    if (m_starting_pos)
       free(m_starting_pos);
 	m_starting_pos = 0;
-   if (m_world)
 		delete m_world;
 	m_world = 0;
 

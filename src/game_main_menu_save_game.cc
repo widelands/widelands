@@ -188,7 +188,6 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
-      if( fs )
          delete fs;
    }
 
@@ -233,11 +232,9 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
       std::string s=_("A File with the name ");
       s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" already exists. Overwrite?");
-      UI::Modal_Message_Box* mbox= new UI::Modal_Message_Box(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::YESNO);
-      bool retval=mbox->run();
-      delete mbox;
-      if(!retval)
-         return false;
+		UI::Modal_Message_Box mbox
+			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::YESNO);
+		if (not mbox.run()) return false;
 
       // Delete this
       g_fs->Unlink( complete_filename );
@@ -255,9 +252,9 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
 	try {gs.save();} catch(std::exception& exe) {
       std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
-      UI::Modal_Message_Box* mbox= new UI::Modal_Message_Box(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
-      mbox->run();
-      delete mbox;
+		UI::Modal_Message_Box mbox
+			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
+		mbox.run();
    }
    delete fs;
    die();

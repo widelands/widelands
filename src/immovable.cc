@@ -398,7 +398,6 @@ void Immovable_Descr::parse_program(std::string directory, Profile* prof, std::s
 	}
 	catch(...)
 	{
-		if (prog)
 			delete prog;
 
 		throw;

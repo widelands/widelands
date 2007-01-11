@@ -321,9 +321,10 @@ void WLApplication::run()
 
 		g_sound_handler.start_music("intro");
 
-		Fullscreen_Menu_Intro *intro=new Fullscreen_Menu_Intro;
-		intro->run();
-		delete intro;
+		{
+			Fullscreen_Menu_Intro intro;
+			intro.run();
+		}
 
 		//TODO: what does this do? where does it belong? read up on GGZ! #fweber
 		if(NetGGZ::ref()->used())
@@ -1099,13 +1100,8 @@ void WLApplication::mainmenu()
 	bool done=false;
 
 	while(!done) {
-		unsigned char code;
-
-		Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;
-		code = mm->run();
-		delete mm;
-
-		switch(code) {
+		Fullscreen_Menu_Main mm;
+		switch (mm.run()) {
 		case Fullscreen_Menu_Main::mm_singleplayer:
 			mainmenu_singleplayer();
 			break;
@@ -1114,33 +1110,27 @@ void WLApplication::mainmenu()
 			mainmenu_multiplayer();
 			break;
 
-		case Fullscreen_Menu_Main::mm_options:
-			{
+		case Fullscreen_Menu_Main::mm_options: {
 				Section *s = g_options.pull_section("global");
-				Options_Ctrl *om = new Options_Ctrl(s);
-				delete om;
+				Options_Ctrl om(s);
 			}
 			break;
 
-		case Fullscreen_Menu_Main::mm_readme:
-			{
-				Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/README" );
-				ff->run();
-				delete ff;
+		case Fullscreen_Menu_Main::mm_readme: {
+			Fullscreen_Menu_FileView ff("txts/README");
+			ff.run();
 			}
 			break;
 
-		case Fullscreen_Menu_Main::mm_license:
-			{
-				Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/COPYING" );
-				ff->run();
-				delete ff;
+		case Fullscreen_Menu_Main::mm_license: {
+			Fullscreen_Menu_FileView ff("txts/COPYING");
+			ff.run();
 			}
 			break;
 
 		case Fullscreen_Menu_Main::mm_editor:
 			{
-				Editor* e=new Editor();
+				Editor* e=new Editor(); //  Local variable does not work (sig11).
 				e->run();
 				delete e;
 				break;
@@ -1211,15 +1201,15 @@ void WLApplication::mainmenu_singleplayer()
 void WLApplication::mainmenu_multiplayer()
 {
 	NetGame* netgame = 0;
-	Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
-	int code;
+	Fullscreen_Menu_NetSetup ns;
 
-	if(NetGGZ::ref()->tables().size() > 0) ns->fill(NetGGZ::ref()->tables());
-	code=ns->run();
+	if (NetGGZ::ref()->tables().size() > 0) ns.fill(NetGGZ::ref()->tables());
 
-	if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
+	switch (ns.run()) {
+	case Fullscreen_Menu_NetSetup::HOSTGAME:
 		netgame=new NetHost();
-	else if (code==Fullscreen_Menu_NetSetup::JOINGAME) {
+		break;
+	case Fullscreen_Menu_NetSetup::JOINGAME: {
 		IPaddress peer;
 
 		//if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
@@ -1227,23 +1217,24 @@ void WLApplication::mainmenu_multiplayer()
 		ulong addr;
 		ushort port;
 
-		if (!ns->get_host_address(addr,port))
+		if (not ns.get_host_address(addr, port))
 			throw wexception("Address of game server is no good");
 
 		peer.host=addr;
 		peer.port=port;
 
 		netgame=new NetClient(&peer);
-	} else if(code==Fullscreen_Menu_NetSetup::INTERNETGAME) {
-		Fullscreen_Menu_InetServerOptions* igo = new Fullscreen_Menu_InetServerOptions();
-		code=igo->run();
+	}
+		break;
+	case Fullscreen_Menu_NetSetup::INTERNETGAME: {
+		Fullscreen_Menu_InetServerOptions igo;
+		const int igo_code = igo.run();
 
 		// Get informations here
-		std::string host = igo->get_server_name();
-		std::string player = igo->get_player_name();
-		delete igo;
+		const std::string host   = igo.get_server_name();
+		const std::string player = igo.get_player_name();
 
-		if(code) {
+		if (igo_code) {
 			Game_Server_Connection csc(host, GAME_SERVER_PORT);
 
 			try {
@@ -1256,15 +1247,15 @@ void WLApplication::mainmenu_multiplayer()
 			csc.set_username(player.c_str());
 
 			// Wowi, we are connected. Let's start the lobby
-			Fullscreen_Menu_InetLobby* il = new Fullscreen_Menu_InetLobby(&csc);
-			il->run();
-			delete il;
+			Fullscreen_Menu_InetLobby il(&csc);
+			il.run();
 		}
 	}
-	else if((code == Fullscreen_Menu_NetSetup::JOINGGZGAME)
-	        || (code == Fullscreen_Menu_NetSetup::HOSTGGZGAME))
-	{
-		if(code == Fullscreen_Menu_NetSetup::HOSTGGZGAME) NetGGZ::ref()->launch();
+		break;
+	case Fullscreen_Menu_NetSetup::HOSTGGZGAME:
+		NetGGZ::ref()->launch();
+		//  fallthrough
+	case Fullscreen_Menu_NetSetup::JOINGGZGAME: {
 		if(NetGGZ::ref()->host()) netgame = new NetHost();
 
 		else {
@@ -1275,11 +1266,11 @@ void WLApplication::mainmenu_multiplayer()
 			netgame = new NetClient(&peer);
 		}
 	}
+	}
 
 	if (netgame!=0) {
 		netgame->run();
 		delete netgame;
 	}
 
-	delete ns;
 }

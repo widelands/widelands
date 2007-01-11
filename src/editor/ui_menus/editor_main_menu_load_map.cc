@@ -168,24 +168,22 @@ void Main_Menu_Load_Map::selected(uint) {
    m_ok_btn->set_enabled(true);
 
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
-      Map* map=new Map();
-      Map_Loader* m_ml = map->get_correct_loader(name);
+		Map map;
+		Map_Loader * const m_ml = map.get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
       delete m_ml;
 
-      m_name->set_text(map->get_name());
-      m_author->set_text(map->get_author());
-      m_descr->set_text(map->get_description());
-      m_world->set_text(map->get_world_name());
+		m_name  ->set_text(map.get_name       ());
+		m_author->set_text(map.get_author     ());
+		m_descr ->set_text(map.get_description());
+		m_world ->set_text(map.get_world_name ());
 
       char buf[200];
-      sprintf(buf, "%i", map->get_nrplayers());
+		sprintf(buf, "%i", map.get_nrplayers());
       m_nrplayers->set_text(buf);
 
-      sprintf(buf, "%ix%i", map->get_width(), map->get_height());
+		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
       m_size->set_text(buf);
-
-      delete map;
    } else {
       m_name->set_text("");
       m_author->set_text("");
@@ -237,7 +235,7 @@ void Main_Menu_Load_Map::fill_list(void) {
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
    }
 
-   Map* map=new Map();
+	Map map;
 
 	for
 		(filenameset_t::const_iterator pname = m_mapfiles.begin();
@@ -246,7 +244,7 @@ void Main_Menu_Load_Map::fill_list(void) {
 	{
       const char *name = pname->c_str();
 
-      Map_Loader* m_ml = map->get_correct_loader(name);
+		Map_Loader * const m_ml = map.get_correct_loader(name);
       if(!m_ml) continue;
 
 		try {
@@ -266,7 +264,6 @@ void Main_Menu_Load_Map::fill_list(void) {
       delete m_ml;
 
    }
-   delete map;
 
 	if(m_ls->size()) m_ls->select(0);
 }
@@ -296,9 +293,9 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
          std::string s="Map Loading Error!\n\nReason given:\n";
          s+=exe.what();
-         UI::Modal_Message_Box* mbox= new UI::Modal_Message_Box(m_parent, "Load Map Error!!", s, UI::Modal_Message_Box::OK);
-         mbox->run();
-         delete mbox;
+         UI::Modal_Message_Box mbox
+            (m_parent, "Load Map Error!!", s, UI::Modal_Message_Box::OK);
+         mbox.run();
       }
 */
 		m_parent->editor().postload();

@@ -173,13 +173,10 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
-	Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game, m_ml);
-	if(msm->run()==2)
-		m_is_scenario=true;
-	else
-		m_is_scenario=false;
-
-	delete msm;
+	{
+		Fullscreen_Menu_MapSelect msm(m_game, m_ml);
+		m_is_scenario = msm.run() == 2;
+	}
 
 	if (m_netgame)
 		static_cast<NetHost*>(m_netgame)->update_map();

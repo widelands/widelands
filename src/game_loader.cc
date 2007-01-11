@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,57 +59,40 @@ int Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
  * Load the complete file
  */
 int Game_Loader::load_game(void) {
-   Game_Data_Packet* gp;
 
    log("Game: Reading Preload Data ... ");
-   gp = new Game_Preload_Data_Packet();
-   gp->Read(m_fs, m_game, 0);
-   delete gp;
+	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game, 0);}
    log(" done\n");
 
    log("Game: Reading Game Class Data ... ");
-   gp = new Game_Game_Class_Data_Packet();
-   gp->Read(m_fs, m_game, 0);
-   delete gp;
+	{Game_Game_Class_Data_Packet                   p; p.Read(m_fs, m_game, 0);}
    log(" done\n");
 
    log("Game: Reading Player Info ... ");
-   gp = new Game_Player_Info_Data_Packet();
-   gp->Read(m_fs, m_game, 0);
-   delete gp;
+	{Game_Player_Info_Data_Packet                  p; p.Read(m_fs, m_game, 0);}
    log(" done\n");
 
    log("Game: Reading Map Data!\n");
-   Game_Map_Data_Packet* gmdp = new Game_Map_Data_Packet();
-   gmdp->Read(m_fs, m_game, 0);
-   Widelands_Map_Map_Object_Loader *mol = gmdp->get_map_object_loader();
+	Game_Map_Data_Packet                           M; M.Read(m_fs, m_game, 0);
    log("Game: Reading Map Data done!\n");
 
+	Widelands_Map_Map_Object_Loader * const mol = M.get_map_object_loader();
+
    log("Game: Reading Player Economies Info ... ");
-   gp = new Game_Player_Economies_Data_Packet();
-   gp->Read(m_fs, m_game, mol);
-   delete gp;
+	{Game_Player_Economies_Data_Packet             p; p.Read(m_fs, m_game, mol);}
    log(" done\n");
 
    log("Game: Reading Command Queue Data ... ");
-   gp = new Game_Cmd_Queue_Data_Packet();
-   gp->Read(m_fs, m_game, mol);
-   delete gp;
+	{Game_Cmd_Queue_Data_Packet                    p; p.Read(m_fs, m_game, mol);}
    log(" done\n");
 
    log("Game: Reading Interactive Player Data ... ");
-   gp = new Game_Interactive_Player_Data_Packet();
-   gp->Read(m_fs, m_game, mol);
-   delete gp;
+	{Game_Interactive_Player_Data_Packet           p; p.Read(m_fs, m_game, mol);}
    log(" done\n");
 
    log("Game: Reading Computer Player Data ... ");
-   gp = new Game_Computer_Player_Data_Packet();
-   gp->Read(m_fs, m_game, mol);
-   delete gp;
+	{Game_Computer_Player_Data_Packet              p; p.Read(m_fs, m_game, mol);}
    log(" done\n");
-
-   delete gmdp; // delete m_mol too
 
    return 0;
 }

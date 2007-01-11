@@ -272,10 +272,8 @@ Cmd_BuildRoad::Cmd_BuildRoad (Deserializer* des):PlayerCommand (0, des->getchar(
 
 Cmd_BuildRoad::~Cmd_BuildRoad ()
 {
-	if (path!=0)
 		delete path;
 
-	if (steps!=0)
 		delete[] steps;
 }
 

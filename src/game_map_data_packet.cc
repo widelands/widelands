@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,7 @@
  * Destructor
  */
 Game_Map_Data_Packet::~Game_Map_Data_Packet(void) {
-   if(m_wms)
       delete m_wms;
-   if(m_wml)
       delete m_wml;
 }
 
@@ -48,7 +46,6 @@ throw (_wexception)
 	FileSystem * const mapfs = fs.MakeSubFileSystem("map");
 
    // Now Load the map as it would be a normal map saving
-   if(m_wml)
       delete m_wml;
 
 	m_wml = new Widelands_Map_Loader(*mapfs, game->get_map());

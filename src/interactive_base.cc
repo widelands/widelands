@@ -499,7 +499,7 @@ void Interactive_Base::finish_build_road()
 		// awkward... path changes ownership
 		Path & path = *new Path(*m_buildroad);
 		// Build the path as requested
-		if (Game * const game = dynamic_cast<Game * const>(&m_egbase))
+		if (Game * const game = dynamic_cast<Game * const>(&egbase()))
 			game->send_player_build_road (m_road_build_player, path);
 		else {
 			egbase().get_player(m_road_build_player)->build_road(path);

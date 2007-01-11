@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -181,7 +181,6 @@ void Game_Main_Menu_Load_Game::fill_list(void)
       } catch(_wexception& ) {
          // we simply skip illegal entries
       }
-      if( fs )
          delete fs;
    }
 
@@ -214,11 +213,10 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
    } catch(std::exception& exe) {
       std::string s=_("Game Loading Error!\nReason given:\n");
       s+=exe.what();
-      UI::Modal_Message_Box* mbox= new UI::Modal_Message_Box(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
-      mbox->run();
-      delete mbox;
+		UI::Modal_Message_Box mbox
+			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
+		mbox.run();
    }
-   if( fs )
       delete fs;
    die();
 

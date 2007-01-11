@@ -265,10 +265,13 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
          m_given_cond = cond;
          end_modal( 1 );
       } catch(  TriggerConditional_Factory::SyntaxError err ) {
-         UI::Modal_Message_Box* mb = new UI::Modal_Message_Box(m_parent, _("Syntax Error"), _("Your conditional contains at least one syntax error. Please correct!\n"),
-               UI::Modal_Message_Box::OK);
-         mb->run();
-         delete mb;
+			UI::Modal_Message_Box mb
+				(m_parent,
+				 _("Syntax Error"),
+				 _("Your conditional contains at least one syntax error. Please "
+				   "correct!\n"),
+				 UI::Modal_Message_Box::OK);
+			mb.run();
          return;
       }
 }
