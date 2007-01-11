@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@ Rendering functions of the 16-bit software renderer.
 */
 
 #include <SDL.h>
+#include "building.h"
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
@@ -30,6 +31,7 @@ Rendering functions of the 16-bit software renderer.
 #include "player.h"
 #include "rgbcolor.h"
 #include "graphic_impl.h"
+#include "transport.h"
 #include "wexception.h"
 #include "world.h"
 
@@ -208,7 +210,6 @@ Return the color to be used in the minimap for the given field.
 */
 static inline ulong calc_minimap_color
 (SDL_PixelFormat * const fmt,
- Map & map,
  const Editor_Game_Base & egbase,
  const FCoords f,
  const uint flags)
@@ -235,20 +236,17 @@ static inline ulong calc_minimap_color
 		}
 	}
 
-	if (flags & MiniMap::Roads) {
-		if (map.find_immovables(f, 0, 0, FindImmovableType(Map_Object::ROAD)))
+	const PlayerImmovable * const immovable =
+		dynamic_cast<const PlayerImmovable * const>(f.field->get_immovable());
+	if (flags & MiniMap::Roads and dynamic_cast<const Road * const>(immovable))
 			pixelcolor = blend_color(fmt, pixelcolor, 255, 255, 255 );
-	}
-
-	if (flags & MiniMap::Flags) {
-		if (map.find_immovables(f, 0, 0, FindImmovableType(Map_Object::FLAG)))
-			pixelcolor = SDL_MapRGB( fmt, 255, 255, 255 );
-	}
-
-	if (flags & MiniMap::Bldns) {
-		if (map.find_immovables(f, 0, 0, FindImmovableType(Map_Object::BUILDING)))
-			pixelcolor = SDL_MapRGB( fmt, 255, 255, 255 );
-	}
+	if
+		((flags & MiniMap::Flags and dynamic_cast<const Flag * const>(immovable))
+		 or
+		 (flags & MiniMap::Bldns
+		  and
+		  dynamic_cast<const Building * const>(immovable)))
+		 pixelcolor = SDL_MapRGB( fmt, 255, 255, 255 );
 
 	return pixelcolor;
 
@@ -260,28 +258,53 @@ static inline ulong calc_minimap_color
 
 template<typename T>
 void draw_minimap_int
-(Uint8 * const pixels,
- const ushort pitch,
- SDL_PixelFormat * const fmt,
- Map & map,
- const uint mapwidth,
- const Editor_Game_Base & egbase,
- const std::vector<bool> * const visibility,
- const Rect rc,
- const Coords viewpt,
- const uint flags)
+(Uint8 * const             pixels,
+ const ushort              pitch,
+ SDL_PixelFormat * const   fmt,
+ const uint                mapwidth,
+ const Editor_Game_Base  & egbase,
+ const std::vector<bool> & visibility,
+ const Rect                rc,
+ const Point               viewpoint,
+ const uint                flags)
 {
+	const Map & map = egbase.map();
 	for (int y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		FCoords f(viewpt.x, viewpt.y + y, 0);
+		FCoords f(viewpoint.x, viewpoint.y + y, 0);
 		map.normalize_coords(&f);
-		f.field = map.get_field(f);
+		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);
 		for (int x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T * const>(pix) = static_cast<const T>
-				(visibility and not (*visibility)[i] ?
-				 0 : calc_minimap_color(fmt, map, egbase, f, flags));
+				(not visibility[i] ?
+				 0 : calc_minimap_color(fmt, egbase, f, flags));
+		}
+	}
+}
+template<typename T>
+void draw_minimap_int
+(Uint8 * const             pixels,
+ const ushort              pitch,
+ SDL_PixelFormat * const   fmt,
+ const uint                mapwidth,
+ const Editor_Game_Base  & egbase,
+ const Rect                rc,
+ const Point               viewpoint,
+ const uint                flags)
+{
+	const Map & map = egbase.map();
+	for (int y = 0; y < rc.h; ++y) {
+		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
+		FCoords f(viewpoint.x, viewpoint.y + y, 0);
+		map.normalize_coords(&f);
+		f.field = &map[f];
+		Map::Index i = Map::get_index(f, mapwidth);
+		for (int x = 0; x < rc.w; ++x, pix += sizeof(T)) {
+			move_r(mapwidth, f, i);
+			*reinterpret_cast<T * const>(pix) = static_cast<const T>
+				(calc_minimap_color(fmt, egbase, f, flags));
 		}
 	}
 }
@@ -295,28 +318,48 @@ viewpt is the field at the top left of the rectangle.
 ===============
 */
 void Surface::draw_minimap
-(const Editor_Game_Base & egbase,
- const std::vector<bool> * const visibility,
- const Rect rc,
- const Coords viewpt,
- const uint flags)
+(const Editor_Game_Base  & egbase,
+ const std::vector<bool> & visibility,
+ const Rect                rc,
+ const Point               viewpt,
+ const uint                flags)
 {
 	Uint8 * const pixels = static_cast<Uint8 * const>(get_pixels());
 	const ushort pitch = get_pitch();
 	SDL_PixelFormat * const fmt = get_format();
-	Map & map = egbase.get_map();
-	const uint w = map.get_width();
+	const X_Coordinate w = egbase.map().get_width();
 	switch (fmt->BytesPerPixel) {
-	case 2:
+	case sizeof(Uint16):
 		draw_minimap_int<Uint16>
-			(pixels, pitch, fmt, map, w, egbase, visibility, rc, viewpt, flags);
+			(pixels, pitch, fmt, w, egbase, visibility, rc, viewpt, flags);
 		break;
-	case 4:
+	case sizeof(Uint32):
 		draw_minimap_int<Uint32>
-			(pixels, pitch, fmt, map, w, egbase, visibility, rc, viewpt, flags);
+			(pixels, pitch, fmt, w, egbase, visibility, rc, viewpt, flags);
 		break;
-	default:
-		assert (0);
+	default: assert (false);
+	}
+}
+void Surface::draw_minimap
+(const Editor_Game_Base & egbase,
+ const Rect               rc,
+ const Point              viewpoint,
+ const uint               flags)
+{
+	Uint8 * const pixels = static_cast<Uint8 * const>(get_pixels());
+	const ushort pitch = get_pitch();
+	SDL_PixelFormat * const fmt = get_format();
+	const X_Coordinate w = egbase.map().get_width();
+	switch (fmt->BytesPerPixel) {
+	case sizeof(Uint16):
+		draw_minimap_int<Uint16>
+			(pixels, pitch, fmt, w, egbase, rc, viewpoint, flags);
+		break;
+	case sizeof(Uint32):
+		draw_minimap_int<Uint32>
+			(pixels, pitch, fmt, w, egbase, rc, viewpoint, flags);
+		break;
+	default: assert (false);
 	}
 }
 

@@ -84,22 +84,10 @@ Redraw the view of the map
 */
 void MiniMap::View::draw(RenderTarget* dst)
 {
-	dst->renderminimap
-		(m_iabase.egbase(),
-		 m_iabase.get_visibility(),
-		 Coords(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
-		 flags);
-
-/*
-	// draw the view pos marker
-	int x, y;
-	int w, h;
-
-	g_gr->get_picture_size(m_pic_map_spot, &w, &h);
-	x = m_viewx - (w>>1);
-	y = m_viewy - (h>>1);
-	dst->blit(((int)m_player->get_map()->get_width()/2) - (w>>1), ((int)m_player->get_map()->get_height()/2) - (h>>1), m_pic_map_spot);
-*/
+	const std::vector<bool> * visibility = m_iabase.get_visibility();
+	const Point p(m_viewx - get_w() / 2, m_viewy - get_h() / 2);
+	if (visibility) dst->renderminimap(m_iabase.egbase(), *visibility, p, flags);
+	else            dst->renderminimap(m_iabase.egbase(),              p, flags);
 }
 
 

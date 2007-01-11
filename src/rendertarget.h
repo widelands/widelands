@@ -73,10 +73,15 @@ public:
 		 const bool draw_all)
 		= 0;
 	virtual void renderminimap
-		(const Editor_Game_Base &,
-		 const std::vector<bool> * const visibility,
-		 Coords viewpoint,
-		 const uint flags)
+		(const Editor_Game_Base  &,
+		 const std::vector<bool> & visibility,
+		 const Point               viewpoint,
+		 const uint                flags)
+		= 0;
+	virtual void renderminimap
+		(const Editor_Game_Base  &,
+		 const Point               viewpoint,
+		 const uint                flags)
 		= 0;
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plr) = 0;

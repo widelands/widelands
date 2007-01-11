@@ -172,11 +172,16 @@ class Surface {
       void fast_blit( Surface* src );
 
 	void draw_minimap
-		(const Editor_Game_Base & egbase,
-		 const std::vector<bool> * const visibility,
-		 const Rect rc,
-		 const Coords viewpt,
-		 const uint flags);
+		(const Editor_Game_Base  & egbase,
+		 const std::vector<bool> & visibility,
+		 const Rect                rc,
+		 const Point               viewpoint,
+		 const uint                flags);
+	void draw_minimap
+		(const Editor_Game_Base  & egbase,
+		 const Rect                rc,
+		 const Point               viewpoint,
+		 const uint                flags);
 
 
       // sw16_terrain.cc
@@ -304,11 +309,27 @@ public:
 		 const std::vector<bool> * const visibility,
 		 Point viewofs,
 		 const bool draw_all);
+
+	/**
+	 * Renders a minimap into the current window. The field at viewpoint will be
+	 * in the top-left corner of the window. Flags specifies what information to
+	 * display (see Minimap_XXX enums).
+	 *
+	 * Calculate the field at the top-left corner of the clipping rect
+	 * The entire clipping rect will be used for drawing.
+	 */
 	virtual void renderminimap
-		(const Editor_Game_Base &,
-		 const std::vector<bool> * const visibility,
-		 Coords viewpoint,
-		 const uint flags);
+		(const Editor_Game_Base  & egbase,
+		 const std::vector<bool> & visibility,
+		 const Point               viewpoint,
+		 const uint                flags)
+	{
+		m_surface->draw_minimap
+			(egbase, visibility, m_rect, viewpoint - m_offset, flags);
+	}
+	virtual void renderminimap
+		(const Editor_Game_Base & egbase, const Point viewpoint, const uint flags)
+	{m_surface->draw_minimap(egbase, m_rect, viewpoint - m_offset, flags);}
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plrclrs = 0);
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

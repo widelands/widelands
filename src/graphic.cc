@@ -958,31 +958,6 @@ void RenderTargetImpl::rendermap
 }
 
 
-/*
-===============
-RenderTargetImpl::renderminimap
-
-Renders a minimap into the current window.
-The field at viewpt will be in the top-left corner of the window.
-flags specifies what information to display (see Minimap_XXX enums).
-===============
-*/
-void RenderTargetImpl::renderminimap
-(const Editor_Game_Base & egbase,
- const std::vector<bool> * const visibility,
- Coords viewpt,
- const uint flags)
-{
-
-	// Calculate the field at the top-left corner of the clipping rect
-	viewpt.x -= m_offset.x;
-	viewpt.y -= m_offset.y;
-
-	//  The entire clipping rect will be used for drawing.
-	m_surface->draw_minimap(egbase, visibility, m_rect, viewpt, flags);
-}
-
-
 /**
  * Draws a frame of an animation at the given location
  * Plays sound effect that is registered with this frame (the \ref Sound_Handler
