@@ -20,6 +20,7 @@
 #ifndef __S__PLAYER_H
 #define __S__PLAYER_H
 
+#include "building.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "rgbcolor.h"
@@ -100,7 +101,8 @@ class Player {
 		void set_area_seen(Coords c, uint area, bool on);
 
       // Allowed buildings
-      inline bool is_building_allowed(int i) { return m_allowed_buildings[i]; }
+	bool is_building_allowed(const Building_Descr::Index i) const throw ()
+	{return m_allowed_buildings[i];}
       void allow_building(int i, bool t);
 
 		// Player commands
