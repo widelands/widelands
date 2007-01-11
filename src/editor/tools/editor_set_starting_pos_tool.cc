@@ -106,7 +106,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 		g_gr->get_picture_size(picid, w, h);
 
       // check if field is valid
-		if(Editor_Tool_Set_Starting_Pos_Callback(starting_pos, &map, 0)) {
+		if(Editor_Tool_Set_Starting_Pos_Callback(center.node, &map, 0)) {
 			Overlay_Manager & overlay_manager = map.overlay_manager();
          // Remove old overlay if any
 			if (starting_pos.is_valid())
