@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,36 +45,19 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
-      return;
-
-   FileRead fr;
-   try {
-      fr.Open( fs, "binary/owned_fields" );
-   } catch ( ... ) {
-      // not there, so skip
-      return ;
-   }
-
-   // read packet version
-   int packet_version=fr.Unsigned16();
-
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      // Read all the owned_fields
-      Map* map=egbase->get_map();
-
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
-            uchar h=fr.Unsigned8();
-            if(!skip) // On Skip, we ignore this
-               map->get_field(Coords(x,y))->set_owned_by(h);
-         }
-      }
-      return;
-   }
-   throw wexception("Unknown version in Widelands_Map_Owned_Fields_Data_Packet: %i\n", packet_version);
-
-   assert(0); // never here
+	if (not skip) {
+		FileRead fr;
+		try {fr.Open(fs, "binary/owned_fields");} catch (...) {return;}
+		const Uint16 packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map & map = egbase->map();
+			const Map::Index max_index = map.max_index();
+			for (Map::Index i = 0; i < max_index; ++i)
+				map[i].set_owned_by(fr.Unsigned8());
+		} else throw wexception
+			("Unknown version in Widelands_Map_Owned_Fields_Data_Packet: %i\n",
+			 packet_version);
+	}
 }
 
 
@@ -93,12 +76,10 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now, all owned_fields as unsigned chars in order
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         fw.Unsigned8(map->get_field(Coords(x,y))->get_owned_by());
-      }
-   }
+	Map & map = egbase->map();
+	const Map::Index max_index = map.max_index();
+	for (Map::Index i = 0; i < max_index; ++i)
+		fw.Unsigned8(map[i].get_owned_by());
 
    fw.Write( fs, "binary/owned_fields" );
 }
