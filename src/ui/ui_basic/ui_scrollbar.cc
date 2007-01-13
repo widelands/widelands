@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -298,7 +298,10 @@ void Scrollbar::draw(RenderTarget* dst)
 		draw_button(dst, Plus, get_w() - Size, 0, Size, get_h());
 		draw_button(dst, Knob, knobpos - Size/2, 0, Size, get_h());
 
+		assert(3 * Size / 2 <= knobpos);
 		draw_area(dst, MinusPage, Size, 0, knobpos - 3*Size/2, get_h());
+		assert(0 <= get_w());
+		assert(knobpos + 3 * Size / 2 <= static_cast<const uint>(get_w()));
 		draw_area(dst, PlusPage, knobpos + Size/2, 0, get_w() - knobpos - 3*Size/2, get_h());
 	}
 	else
@@ -307,7 +310,10 @@ void Scrollbar::draw(RenderTarget* dst)
 		draw_button(dst, Plus, 0, get_h() - Size, get_w(), Size);
 		draw_button(dst, Knob, 0, knobpos - Size/2, get_w(), Size);
 
+		assert(3 * Size / 2 <= knobpos);
 		draw_area(dst, MinusPage, 0, Size, get_w(), knobpos - 3*Size/2);
+		assert(0 <= get_h());
+		assert(knobpos + 3 * Size / 2 <= static_cast<const uint>(get_h()));
 		draw_area(dst, PlusPage, 0, knobpos + Size/2, get_w(), get_h() - knobpos - 3*Size/2);
 	}
 }

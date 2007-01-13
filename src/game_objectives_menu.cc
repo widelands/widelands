@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,12 +28,12 @@ GameObjectivesMenu::GameObjectivesMenu
 (Interactive_Player & plr, UI::UniqueWindow::Registry & registry, Game & game)
 :
 UI::UniqueWindow
-(&plr, &registry, 340, 5 + 60 + 5 + 150 + 5, _("Objectives Menu")),
-list         (this, 5,  5, get_inner_w() - 10,  60, Align_Left, false),
-objectivetext(this, 5, 70, get_inner_w() - 10, 150, "", Align_Left, 1)
+(&plr, &registry, 340, 5 + 120 + 5 + 240 + 5, _("Objectives Menu")),
+list         (this, 5,   5, get_inner_w() - 10, 120, Align_Left, false),
+objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 {
    // Listselect with Objectives
-	MapObjectiveManager & mom = game.get_map()->get_mom();
+	MapObjectiveManager & mom = game.map().get_mom();
 	for (MapObjectiveManager::Index i = 0; i < mom.get_nr_objectives(); ++i) {
 		MapObjective & obj = mom.get_objective_by_nr(i);
 		if (not obj.get_is_visible()) continue;
