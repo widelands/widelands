@@ -147,14 +147,25 @@ def CheckSDLVersionAtLeast(context, major, minor, micro, env):
 	context.Result( ret )
 	return ret
 
-def CheckCompilerArgument(context, compiler_argument, env):
-	context.Message( 'Trying to enable compiler argument %s ... ' % compiler_argument)
+def CheckCompilerFlag(context, compiler_flag, env):
+	context.Message( 'Trying to enable compiler flag %s ... ' % compiler_flag)
 	lastCCFLAGS = context.env['CCFLAGS']
-	context.env.Append(CCFLAGS = compiler_argument)
+	context.env.Append(CCFLAGS = compiler_flag)
 	ret = context.TryLink("""int main(int argc, char **argv) {return 0;}
                               """, ".cc")
 	if not ret:
 		context.env.Replace(CCFLAGS = lastCCFLAGS)
+	context.Result( ret )
+	return
+
+def CheckLinkerFlag(context, link_flag, env):
+	context.Message( 'Trying to enable linker   flag %s ... ' % link_flag)
+	lastLINKFLAGS = context.env['LINKFLAGS']
+	context.env.Append(LINKFLAGS = link_flag)
+	ret = context.TryLink("""int main(int argc, char **argv) {return 0;}
+                              """, ".cc")
+	if not ret:
+		context.env.Replace(LINKFLAGS = lastLINKFLAGS)
 	context.Result( ret )
 	return
 ################################################################################
@@ -261,37 +272,58 @@ def do_configure(config_h_file, conf, env):
 
 	if conf.CheckLib(library='efence', autoadd=1):
 		if env.efence:
-			env.Append(LINKFLAGS='-lefence')
+			conf.CheckLinkerFlag('-lefence', env)
 			config_h_file.write("#define USE_EFENCE\n\n");
 	else:
 		if env.efence:
 			print 'Could not find efence, so doing a debug-efence build is impossible !'
 			env.Exit(1)
 
-	conf.CheckCompilerArgument('-fstack-protector-all', env)
-	conf.CheckCompilerArgument('-pipe', env)
-	conf.CheckCompilerArgument('-Wall', env)
-	conf.CheckCompilerArgument('-Wcast-align', env)
-	conf.CheckCompilerArgument('-Wcast-qual', env)
-	conf.CheckCompilerArgument('-Wconversion', env)
-	conf.CheckCompilerArgument('-Wdisabled-optimization', env)
-	conf.CheckCompilerArgument('-Wextra', env)
-	#conf.CheckCompilerArgument('-Wfloat-equal', env)
-	#conf.CheckCompilerArgument('-Wformat=2', env)
-	#conf.CheckCompilerArgument('-Winline', env)
-	conf.CheckCompilerArgument('-Winvalid-pch', env)
-	#conf.CheckCompilerArgument('-Wmissing-format-attribute', env)
-	conf.CheckCompilerArgument('-Wmissing-include-dirs', env)
-	#conf.CheckCompilerArgument('-Wmissing-noreturn', env)
-	conf.CheckCompilerArgument('-Wno-comment', env)
-	conf.CheckCompilerArgument('-Wnormalized=nfc', env)
-	#conf.CheckCompilerArgument('-Wold-style-cast', env)
-	#conf.CheckCompilerArgument('-Wpadded', env)
-	conf.CheckCompilerArgument('-Wpointer-arith', env)
-	conf.CheckCompilerArgument('-Wunsafe-loop-optimizations', env)
-	conf.CheckCompilerArgument('-Wshadow', env)
-	conf.CheckCompilerArgument('-Wstack-protector', env)
-	conf.CheckCompilerArgument('-Wstrict-aliasing=2', env)
-	#conf.CheckCompilerArgument('-Wunreachable-code', env)
-	conf.CheckCompilerArgument('-Wwrite-strings', env)
+	conf.CheckCompilerFlag('-fstack-protector-all', env)
+	conf.CheckCompilerFlag('-pipe', env)
+	conf.CheckCompilerFlag('-Wall', env)
+	conf.CheckCompilerFlag('-Wcast-align', env)
+	conf.CheckCompilerFlag('-Wcast-qual', env)
+	conf.CheckCompilerFlag('-Wconversion', env)
+	conf.CheckCompilerFlag('-Wdisabled-optimization', env)
+	conf.CheckCompilerFlag('-Wextra', env)
+	#conf.CheckCompilerFlag('-Wfloat-equal', env)
+	#conf.CheckCompilerFlag('-Wformat=2', env)
+	#conf.CheckCompilerFlag('-Winline', env)
+	conf.CheckCompilerFlag('-Winvalid-pch', env)
+	#conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
+	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
+	#conf.CheckCompilerFlag('-Wmissing-noreturn', env)
+	conf.CheckCompilerFlag('-Wno-comment', env)
+	conf.CheckCompilerFlag('-Wnormalized=nfc', env)
+	#conf.CheckCompilerFlag('-Wold-style-cast', env)
+	#conf.CheckCompilerFlag('-Wpadded', env)
+	conf.CheckCompilerFlag('-Wpointer-arith', env)
+	conf.CheckCompilerFlag('-Wunsafe-loop-optimizations', env)
+	conf.CheckCompilerFlag('-Wshadow', env)
+	conf.CheckCompilerFlag('-Wstack-protector', env)
+	conf.CheckCompilerFlag('-Wstrict-aliasing=2', env)
+	#conf.CheckCompilerFlag('-Wunreachable-code', env)
+	conf.CheckCompilerFlag('-Wwrite-strings', env)
+
+	if env.optimize:
+		# !!!! -fomit-frame-pointer breaks execeptions !!!!
+		conf.CheckCompilerFlag('-fexpensive-optimizations', env)
+        	conf.CheckCompilerFlag('-finline-functions', env)
+		conf.CheckCompilerFlag('-ffast-math', env)
+		conf.CheckCompilerFlag('-funroll-loops', env)
+		conf.CheckCompilerFlag('-O3', env)
+		conf.CheckLinkerFlag('-s', env)
+	else:
+		conf.CheckCompilerFlag('-O0', env)
+
+	if env.profile:
+		conf.CheckCompilerFlag('-pg', env)
+		conf.CheckCompilerFlag('-fprofile-arcs', env)
+		conf.CheckLinkerFlag('-pg', env)
+		conf.CheckLinkerFlag('-fprofile-arcs', env)
+
+	if env.debug:
+		conf.CheckCompilerFlag('-g', env)
+		conf.CheckCompilerFlag('-fmessage-length=0', env)
 

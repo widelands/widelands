@@ -131,7 +131,8 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 				'CheckPKG': CheckPKG,
 				'CheckSDLConfig': CheckSDLConfig,
 				'CheckSDLVersionAtLeast': CheckSDLVersionAtLeast,
-				'CheckCompilerArgument': CheckCompilerArgument,
+				'CheckCompilerFlag': CheckCompilerFlag,
+				'CheckLinkerFlag': CheckLinkerFlag,
 				'CheckParaguiConfig': CheckParaguiConfig
 		   }
 )
@@ -205,38 +206,28 @@ if env['build']=='debug-efence':
 
 if env['build']=='profile':
 	DEBUG=1
-	PROFILE=1
 	OPTIMIZE=1
+	PROFILE=1
 
 if env['build']=='release':
 	OPTIMIZE=1
-	# !!!! -fomit-frame-pointer breaks execeptions !!!!
-
-	# TODO: Those should be tested for existence
-	env.Append(CCFLAGS=['-finline-functions', '-ffast-math', '-funroll-loops'])
-	env.Append(CCFLAGS='-fexpensive-optimizations')
-	env.Append(LINKFLAGS='-s')
 
 if DEBUG:
-	# TODO: fmessage-length should be tested for existence
-	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0'])
+	env.debug=1
+	env.Append(CCFLAGS='-DDEBUG')
 else:
+	env.debug=0
 	env.Append(CCFLAGS='-DNDEBUG')
 
 if PROFILE:
-	#TODO: -fprofile-arcs should be tested for existence
-	env.Append(CCFLAGS=['-pg', '-fprofile-arcs'])
-	env.Append(LINKFLAGS=['-pg', '-fprofile-arcs'])
+	env.profile=1
+else:
+	env.profile=0
 
 if OPTIMIZE:
-	# heavy optimization
-	# TODO: Those should be tested for existence
-	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions
-	#                -ffast-math -funroll-loops -fexpensive-optimizations
-	# !!!! -fomit-frame-pointer breaks execeptions !!!!
-	env.Append(CCFLAGS='-O3')
+	env.optimize=1
 else:
-	env.Append(CCFLAGS='-O0')
+	env.optimize=0
 
 if EFENCE:
 	env.efence=1
@@ -272,8 +263,6 @@ config_h=write_configh_header()
 do_configure(config_h, conf, env)
 write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
 #load_configuration(conf)
-
-#env.Append(LINKFLAGS='-lasprintf') #TODO: *check* for this instead of assuming it's there
 
 env=conf.Finish()
 
