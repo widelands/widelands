@@ -123,7 +123,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
          remove_spaces(&amounts[j]);
 
       int amount=1;
-      if(amounts.size()==2) {
+		if (amounts.size() == 2) {
          char *endp;
 			amount = strtol(amounts[1].c_str(), &endp, 0);
 			if (endp && *endp)
@@ -230,7 +230,7 @@ std::string ProductionSite::get_statistics_string()
 {
    if (!m_workers.size())
 		return _("(not occupied)");
-   else if(m_worker_requests.size()) {
+	else if (m_worker_requests.size()) {
       char buf[1000];
       sprintf(buf, "Waiting for %i workers!", (int)m_worker_requests.size());
       return buf;
@@ -267,21 +267,16 @@ void ProductionSite::calc_statistics()
 	double percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
 	double lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
-	const char* trendBuf;
-	if (lastPercOk > percOk)
-		trendBuf = _("UP").c_str();
-	else if (lastPercOk < percOk)
-		trendBuf = _("DOWN").c_str();
-	else
-		trendBuf = "=";
+	const std::string trend =
+		lastPercOk > percOk ? _("UP") : lastPercOk < percOk ? _("DOWN") : "=";
 
-	if (percOk > 0 && percOk < 100)
-		snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%% %s",
-			percOk, trendBuf);
-	else
-		snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
-	molog("stat: lastOk: %.0f%% percOk: %.0f%% trend: %s\n",
-		lastPercOk, percOk, trendBuf);
+	if (0 < percOk and percOk < 100) snprintf
+		(m_statistics_buf, sizeof(m_statistics_buf),
+		 "%.0f%% %s", percOk, trend.c_str());
+	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
+	molog
+		("stat: lastOk: %.0f%% percOk: %.0f%% trend: %s\n",
+		 lastPercOk, percOk, trend.c_str());
 
    m_last_stat_percent = (char)percOk;
 
@@ -352,23 +347,30 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void ProductionSite::set_economy(Economy* e)
 {
-	Economy* old = get_economy();
-
-	if (old) {
+	if (Economy * const old = get_economy()) {
 		for(uint i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
 	Building::set_economy(e);
-	if (m_worker_requests.size()) {
-      for(uint i=0; i<m_worker_requests.size(); i++)
-         if(m_worker_requests[i])
-            m_worker_requests[i]->set_economy(e);
-   }
+	{
+		std::vector<Request *>::const_iterator m_worker_requests_end =
+			m_worker_requests.end();
+		for
+			(std::vector<Request *>::const_iterator it = m_worker_requests.begin();
+			 it != m_worker_requests_end;
+			 ++it)
+			if (*it) (*it)->set_economy(e);
+	}
 
-   if (e) {
-		for(uint i = 0; i < m_input_queues.size(); i++)
-			m_input_queues[i]->add_to_economy(e);
+	if (e) {
+		std::vector<WaresQueue *>::const_iterator m_input_queues_end =
+			m_input_queues.end();
+		for
+			(std::vector<WaresQueue *>::const_iterator it = m_input_queues.begin();
+			 it != m_input_queues_end;
+			 ++it)
+			(*it)->add_to_economy(e);
 	}
 }
 
@@ -397,8 +399,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
          Worker* w = m_workers[i];
 
          m_workers[i] = 0;
-         if(g->get_objects()->object_still_available(w))
-            w->set_location(0);
+			if (g->get_objects()->object_still_available(w)) w->set_location(0);
       }
       m_workers.resize(0);
    }
@@ -469,26 +470,27 @@ void ProductionSite::request_worker_callback
 	assert(w);
 	assert(w->get_location(g) == psite);
 
-   uint i=0;
-   for(i=0; i<psite->m_worker_requests.size(); i++)
-      if(rq==psite->m_worker_requests[i]) break;
-
-   psite->m_worker_requests.erase(psite->m_worker_requests.begin() + i);
+	{
+		std::vector<Request *> & worker_requests = psite->m_worker_requests;
+		std::vector<Request *>::iterator it = worker_requests.begin();
+		//  Assume that rq must be in worker_requests.
+		assert(worker_requests.size());
+		while (*it != rq) {++it; assert(it != worker_requests.end());}
+		worker_requests.erase(it);
+	}
 
 	psite->m_workers.push_back(w);
 
 	delete rq;
 
-   bool set_worker_idle=true;
-   if(psite->can_start_working() && w==psite->m_workers[0])
-      set_worker_idle=false;
-
-   if(set_worker_idle)
+	Worker * const main_worker = psite->m_workers[0];
+	const bool can_start_working = psite->can_start_working();
+	const bool w_is_not_main_worker = w != main_worker;
+	if (not can_start_working or w_is_not_main_worker)
       w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
 
-   if(psite->can_start_working()) {
-      if(w!=psite->m_workers[0])
-         psite->m_workers[0]->send_signal(g, "wakeup");
+	if (can_start_working) {
+		if (w_is_not_main_worker) main_worker->send_signal(g, "wakeup");
       psite->m_workers[0]->start_task_buildingwork();
    }
 }
@@ -608,9 +610,9 @@ void ProductionSite::program_act(Game* g)
                      }
                   }
                }
-               if(consumed) break;
+					if (consumed) break;
             }
-            if(!consumed) {
+				if (not consumed) {
                molog("   Consuming failed, program restart\n");
                program_end(g, false);
                return;
@@ -649,9 +651,9 @@ void ProductionSite::program_act(Game* g)
                      }
                   }
                }
-               if(found) break;
+					if (found) break;
             }
-            if(!found) {
+				if (not found) {
                molog("   Checking failed, program restart\n");
                program_end(g, false);
                return;
@@ -740,13 +742,11 @@ void ProductionSite::program_act(Game* g)
 
          // how much is digged
          int digged_percentage=100;
-         if(totalstart)
-            digged_percentage = 100 - (totalres*100 / totalstart);
-         if(!totalres)
-            digged_percentage=100;
+			if (totalstart) digged_percentage = 100 - totalres * 100 / totalstart;
+			if (not totalres) digged_percentage = 100;
          molog("  Mine has already digged %i percent (%i/%i)!\n", digged_percentage, totalres, totalstart);
 
-         if(digged_percentage<action->iparam2) {
+			if (digged_percentage<action->iparam2) {
             // Mine can produce normally
             if (totalres == 0) {
                molog("  Run out of resources\n");
@@ -789,8 +789,12 @@ void ProductionSite::program_act(Game* g)
          } else {
             // Mine has reached it's limits, still try to produce something
             // but independant of sourrunding resources. Do not decrease resources further
-            int chance= g->logic_rand() % 100;
-            if(chance>=action->iparam3) {
+				assert(action->iparam3 >= 0);
+				if
+					(g->logic_rand() % 100
+					 >=
+					 static_cast<const uint>(action->iparam3))
+				{
                // Not successfull
                molog("  Not successful this time in fallback programm\n");
                program_end(g, false);
@@ -979,12 +983,7 @@ bool ProductionSite::fetch_from_flag(Game* g)
  * theoretically start working (if all workers
  * are present)
  */
-bool ProductionSite::can_start_working(void) {
-   if(m_worker_requests.size())
-      return false;
-
-   return true;
-}
+bool ProductionSite::can_start_working() {return not m_worker_requests.size();}
 
 /*
 ===============
@@ -1140,7 +1139,7 @@ void ProductionSite::program_end(Game* g, bool success)
 		add_statistics_value(success);
 
    // if succesfull, the workers gain experience
-   if(success) {
+	if (success) {
       uint i=0;
       for(i=0; i<m_workers.size(); i++)
          m_workers[i]->gain_experience(g);
