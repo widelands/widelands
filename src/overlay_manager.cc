@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,7 +153,7 @@ void Overlay_Manager::register_overlay
 (const TCoords c,
  const int picid,
  const int level,
- const Coords hot_spot,
+ const Point hot_spot,
  const Job_Id jobid)
 {
 	assert(c.t <= 2);
@@ -171,7 +171,7 @@ void Overlay_Manager::register_overlay
 	uint hsx = hot_spot.x;
 	uint hsy = hot_spot.y;
 
-	if (hot_spot.is_invalid()) {
+	if (hot_spot == Point::invalid()) {
       g_gr->get_picture_size(picid, hsx, hsy);
       hsx>>=1;
       hsy>>=1;

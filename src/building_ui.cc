@@ -812,7 +812,7 @@ void Building_Window::toggle_workarea() {
 				(c,
 				 workarea_cumulative_picid[i],
 				 0,
-				 Coords(-1, -1),
+				 Point::invalid(),
 				 m_workarea_job_id);
 			hole_radius = radius;
 		}

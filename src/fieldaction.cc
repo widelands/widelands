@@ -866,14 +866,15 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		{
 			--i;
 			const unsigned int radius = it->first;
-			hole_radius = radius;
 			MapHollowRegion workarea
-				= MapHollowRegion(*m_map, m_field, radius, 0);
+				= MapHollowRegion(*m_map, m_field, radius, hole_radius);
 			Coords c;
-			const Coords invalid(-1, -1);
 			while (workarea.next(c)) {
 				m_overlay_manager.register_overlay
-					(c, workarea_cumulative_picid[i], 0, invalid,
+					(c,
+					 workarea_cumulative_picid[i],
+					 0,
+					 Point::invalid(),
 					 m_workarea_preview_job_id);
 			}
 			hole_radius = radius;

@@ -114,7 +114,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 
          // Add new overlay
 			overlay_manager.register_overlay
-				(center.node, picid, 8, Coords(w / 2,STARTING_POS_HOTSPOT_Y));
+				(center.node, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 
          // And set new player pos
 			map.set_starting_pos(m_current_player, center.node);

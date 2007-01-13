@@ -135,12 +135,12 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 		MapTriangleRegion mtr(map, center.triangle, m_sel.radius);
 		TCoords tc;
 		while (mtr.next(tc)) overlay_manager.register_overlay
-			(tc, m_sel.pic, 7, Coords(-1, -1), jobid);
+			(tc, m_sel.pic, 7, Point::invalid(), jobid);
 	} else {
 		MapRegion mr(map, center.node, m_sel.radius);
 		FCoords fc;
 		while (mr.next(fc)) overlay_manager.register_overlay
-			(fc, m_sel.pic, 7, Coords(-1, -1), jobid);
+			(fc, m_sel.pic, 7, Point::invalid(), jobid);
 	}
 
 }
@@ -685,7 +685,7 @@ void Interactive_Base::roadb_add_overlay()
 			(neighb,
 			 g_gr->get_picture(PicMod_Game, name.c_str()),
 			 7,
-			 Coords(-1, -1),
+			 Point::invalid(),
 			 m_road_buildhelp_overlay_jobid);
 	}
 }

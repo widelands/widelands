@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,7 +107,7 @@ struct Overlay_Manager {
 		(const TCoords t,
 		 const int picid,
 		 const int level,
-		 const Coords hot_spot = Coords(-1,-1),
+		 const Point hot_spot = Point::invalid(),
 		 const Job_Id jobid = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays

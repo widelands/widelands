@@ -30,6 +30,11 @@ struct Point {
 	Point() {}
 	Point(const int px, const int py) : x(px), y(py) {}
 
+	static Point invalid() throw () {
+		return Point
+			(std::numeric_limits<int>::max(), std::numeric_limits<int>::max());
+	}
+
 	bool operator==(const Point other) const
 		{return x == other.x and y == other.y;}
 	bool operator!=(const Point other) const {return not (*this == other);}
