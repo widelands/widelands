@@ -1195,7 +1195,8 @@ void Computer_Player::construct_roads ()
 		spots[i].neighbours[j]=(k<(int) spots.size()) ? k : -1;
 	    }
 
-	log ("Computer_Player(%d): %d spots for road building\n", player_number, spots.size());
+	log
+		("Computer_Player(%u): %u spots for road building\n", player_number, spots.size());
 
 	while (!queue.empty()) {
 	    WalkableSpot &from=spots[queue.front()];
@@ -1241,7 +1242,10 @@ void Computer_Player::construct_roads ()
 			if (!hasflag)
 				game().send_player_build_flag (player_number, pc.front());
 
-			log ("Computer_Player(%d): New road has length %d\n", player_number, pc.size());
+				log
+					("Computer_Player(%u): New road has length %u\n",
+					 player_number,
+					 pc.size());
 			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++)
 				log ("Computer_Player: (%d,%d)\n", c->x, c->y);
 

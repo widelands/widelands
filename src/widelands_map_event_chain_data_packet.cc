@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -192,7 +192,7 @@ throw (_wexception)
 			e.m_events.size();
 		s.set_int("nr_events", size);
 		for (EventChain::event_vector::size_type eventnum = 0; eventnum < size; ++eventnum) {
-         sprintf(buf, "event_%02i", eventnum);
+			sprintf(buf, "event_%02u", eventnum);
 			s.set_string(buf, e.m_events[eventnum]->get_name());
       }
 

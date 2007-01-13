@@ -121,6 +121,10 @@ enum {
 };
 //@}
 
-#define NUMBER_OF_WORKAREA_PICS 3U
+/**
+ * C++ is really bad at integer types. For example this constant is not
+ * recognized as a valid value of type Workarea_Info::size_type without a cast.
+ */
+#define NUMBER_OF_WORKAREA_PICS static_cast<const Workarea_Info::size_type>(3)
 
 #endif

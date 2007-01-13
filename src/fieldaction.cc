@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,7 +224,7 @@ private:
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS + 1];
+	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
    /// Variables to use with attack dialog
    UI::Textarea* m_text_attackers;
@@ -293,11 +293,11 @@ FieldActionWindow::FieldActionWindow
    m_text_attackers = 0;
 
 	m_fastclick = true;
-	for (unsigned int i = 1; i <= NUMBER_OF_WORKAREA_PICS; ++i) {
+	for (Workarea_Info::size_type i = NUMBER_OF_WORKAREA_PICS; i;) {
 		char filename[30];
-		snprintf(filename, sizeof(filename), "pics/workarea%icumulative.png", i);
-		workarea_cumulative_picid[i]
-			= g_gr->get_picture( PicMod_Game,  filename );
+		snprintf(filename, sizeof(filename), "pics/workarea%ucumulative.png", i);
+		--i;
+		workarea_cumulative_picid[i] = g_gr->get_picture(PicMod_Game, filename);
 	}
 }
 
@@ -859,9 +859,12 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		unsigned int hole_radius = 0;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
-			(unsigned int i =
+			(Workarea_Info::size_type i =
 				 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
-			 i > 0; --i, ++it) {
+			 i;
+			 ++it)
+		{
+			--i;
 			const unsigned int radius = it->first;
 			hole_radius = radius;
 			MapHollowRegion workarea
