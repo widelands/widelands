@@ -144,6 +144,7 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 env.Tool("ctags", toolpath=['build/scons-tools'])
 env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 env.Tool("astyle", toolpath=['build/scons-tools'])
+env.Tool("disttar", toolpath=['build/scons-tools'])
 
 ################################################################################
 # Environment setup
@@ -160,9 +161,11 @@ env.Append(PATH=[])
 print 'Platform:         ', env['PLATFORM']
 print 'Build type:       ', env['build']
 
+#TODO: should be detected automagically
 if env['PLATFORM']!='win32':
 	env.Append(PATH=['/usr/bin', '/usr/local/bin'])
 
+#TODO: should be detected automagically
 if env['PLATFORM']=='darwin':
 	# this is where DarwinPorts puts stuff by default
 	env.Append(CPPPATH='/opt/local/include')
@@ -302,7 +305,8 @@ if env['build'] == 'release':
 ############### PNG shrinking
 
 # findfiles takes quite long, so don't execute it if it's unneccessary
-if ('shrink' in BUILD_TARGETS) or ('dist' in BUILD_TARGETS):
+if ('shrink' in BUILD_TARGETS):
+	print "Assembling file list for image compactification..."
 	shrink=env.PNGShrink(find('.', '*.png'))
 	Alias("shrink", shrink)
 
@@ -359,61 +363,49 @@ uninstall=PhonyTarget("uninstall", do_uninst)
 ############### Distribute
 
 DISTFILES=[
+	'ChangeLog',
 	'COPYING',
+	'CREDITS',
+	'Doxyfile',
+	'Makefile',
 	'README-compiling.txt',
 	'README.developers',
 	'SConstruct',
-	'ChangeLog',
-	'Doxyfile',
 	'build-widelands.sh',
+	'build/build1.sh',
+	'build/build.txt',
+	'build/build-with-cross.sh',
+	'build/debian-crossbuild',
+	'build/scons-config.py',
+	env.Dir('build/scons-tools'),
+	env.Dir('build/win32'),
+	'build/win32-vctoolkit.bat',
+	env.Dir('campaigns'),
+	env.Dir('doc'),
+	env.Dir('fonts'),
+	env.Dir('game_server'),
+	env.Dir('locale'),
+	env.Dir('macos'),
+	env.Dir('maps'),
+	env.Dir('music'),
+	env.Dir('pics'),
+	env.Dir('sound'),
+	env.Dir('src'),
+	env.Dir('tribes'),
+	env.Dir('txts'),
+	env.Dir('utils'),
+	env.Dir('worlds'),
 	]
-DISTDIRS=[
-	'build',
-	'campaigns',
-	'fonts',
-	'maps',
-	'music',
-	'pics',
-	'src',
-	'sound',
-	'txts',
-	'tribes',
-	'utils',
-	'worlds',
-	]
+env['DISTTAR_FORMAT']='bz2'
+env.Append(
+        DISTTAR_EXCLUDEEXTS=['.o','.so','.a','.dll','.cache','.pyc','.cvsignore','.dblite','.log'],
+	DISTTAR_EXCLUDEDIRS=['CVS','.svn','sourcecode']
+	)
 
-def do_dist(target, source, env):
-	shutil.rmtree(PACKDIR, ignore_errors=1)
-	os.mkdir(PACKDIR, 0755)
-
-	for f in DISTFILES:
-		shutil.copy(f, PACKDIR)
-	for f in DISTDIRS:
-		shutil.copytree(f, os.path.join(PACKDIR, f))
-
-	RMFILES=find(PACKDIR, '*/.cvsignore')
-	#TODO: do include a scons-config.py with suitable content, esp. build number
-	RMFILES+=[PACKDIR+'/build/scons-config.py']
-	RMFILES+=[PACKDIR+'/build/scons-signatures.dblite']
-
-	RMDIRS =find(PACKDIR, '*/CVS')
-	RMDIRS+=glob.glob(PACKDIR+'/build/*-debug*')
-	RMDIRS+=glob.glob(PACKDIR+'/build/*-release')
-	RMDIRS+=glob.glob(PACKDIR+'/build/*-profile')
-	RMDIRS+=[PACKDIR+'/build/sconf_temp']
-
-	for f in RMFILES:
-		os.remove(f)
-	for f in RMDIRS:
-		shutil.rmtree(f)
-
-	#TODO: use sth. else on systems where tar is not supported
-	os.system('tar -czf %s %s' % (PACKDIR+'.tar.gz', PACKDIR))
-	shutil.rmtree(PACKDIR)
-
-	return None
-
-dist=PhonyTarget("dist", do_dist)
+if 'dist' in BUILD_TARGETS:
+	print "Assembling file list for distribution tarball..."
+	dist=env.DistTar('widelands-'+env['build_id']+'.tar.bz2', DISTFILES)
+	Alias("dist", dist)
 
 ############### longlines
 
