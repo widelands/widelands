@@ -206,9 +206,13 @@ void Building_Statistics_Menu::think( void ) {
  * Draw this window
  */
 void Building_Statistics_Menu::draw(RenderTarget* dst) {
-   if(m_anim) {
-      dst->drawanim(5 + get_inner_w()/8, m_end_of_table_y + (get_inner_h() - m_end_of_table_y) / 2, m_anim, 0, 0);
-   }
+	if (m_anim) dst->drawanim
+		(Point
+		 (5 + get_inner_w() / 8,
+		  m_end_of_table_y + (get_inner_h() - m_end_of_table_y) / 2),
+		 m_anim,
+		 0,
+		 0);
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);

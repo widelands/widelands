@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,9 +96,7 @@ continue_button
 }
 
 void Critical_Error::draw(RenderTarget* dst)
-{
-	dst->fill_rect(0, 0, get_w(), get_h(), RGBColor(0, 0, 0));
-}
+{dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBColor(0, 0, 0));}
 
 void Critical_Error::crash()
 {

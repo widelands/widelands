@@ -404,32 +404,39 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 	m_cache_filled = m_queue->get_filled();
 
 	// Draw it
-	dst->blitrect(0, 0, m_pic_background, BG_LeftBorderX, 0, Border, Height);
+	compile_assert(0 <= BG_LeftBorderX);
+	dst->blitrect
+		(Point(0, 0),
+		 m_pic_background,
+		 Rect(Point(BG_LeftBorderX, 0), Border, Height));
 
 	x = Border;
 
-	for(uint cells = 0; cells < m_display_size; cells++) {
-		uint pic;
-
-		if (cells+1 == m_display_size && m_cache_size > m_display_size)
-			dst->blitrect(x, 0, m_pic_background, BG_ContinueCellX, 0, CellWidth, Height);
-		else
-			dst->blitrect(x, 0, m_pic_background, BG_CellX, 0, CellWidth, Height);
-
-		if (cells < m_cache_filled)
-			pic = m_pic_full;
-		else
-			pic = m_pic_empty;
-
-		dst->blit(x, Border, pic);
-
-		x += CellWidth;
+	compile_assert(0 <= BG_ContinueCellX);
+	compile_assert(0 <= BG_CellX);
+	for (uint cells = 0; cells < m_display_size; ++cells, x += CellWidth) {
+		dst->blitrect
+			(Point(x, 0),
+			 m_pic_background,
+			 Rect
+			 (Point
+			  (cells + 1 == m_display_size and m_cache_size > m_display_size ?
+			   BG_ContinueCellX : BG_CellX,
+			   0),
+			  CellWidth, Height));
+		dst->blit
+			(Point(x, Border), cells < m_cache_filled ? m_pic_full : m_pic_empty);
 	}
 
-	if (m_cache_size > m_display_size)
-		dst->blitrect(x, 0, m_pic_background, BG_ContinueBorderX, 0, Border, Height);
-	else
-		dst->blitrect(x, 0, m_pic_background, BG_RightBorderX, 0, Border, Height);
+	compile_assert(0 <= BG_RightBorderX);
+	dst->blitrect
+		(Point(x, 0),
+		 m_pic_background,
+		 Rect
+		 (Point
+		  (m_cache_size > m_display_size ? BG_ContinueBorderX : BG_RightBorderX,
+		   0),
+		  Border, Height));
 }
 
 
@@ -555,7 +562,7 @@ void Building_Window::draw(RenderTarget* dst)
 {
 	uint anim = get_building()->get_ui_anim();
 
-	dst->drawanim(get_inner_w() / 2, get_inner_h() / 2, anim, 0, 0);
+	dst->drawanim(Point(get_inner_w() / 2, get_inner_h() / 2), anim, 0, 0);
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);

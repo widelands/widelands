@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,10 +130,23 @@ void Multiline_Textarea::draw(RenderTarget* dst)
    if (m_text.length())
    {
       // Let the font handler worry about all the complicated stuff..
-      if (is_richtext(m_text))
-         g_fh->draw_richtext(dst, RGBColor(107,87,55), get_halign(), 0 - m_textpos, m_text , get_eff_w(), m_cache_mode, &m_cache_id);
-      else
-         g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(107,87,55), get_halign(), 0 - m_textpos, m_text.c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id);
+      if (is_richtext(m_text)) g_fh->draw_richtext
+	      (*dst,
+	       RGBColor(107,87,55),
+	       Point(get_halign(), 0 - m_textpos),
+	       m_text,
+	       get_eff_w(),
+	       m_cache_mode, &m_cache_id);
+		else g_fh->draw_string
+			(*dst,
+			 m_fontname,
+			 m_fontsize,
+			 m_fcolor, RGBColor(107,87,55),
+			 Point(get_halign(), 0 - m_textpos),
+			 m_text.c_str(),
+			 m_align,
+			 get_eff_w(),
+			 m_cache_mode, &m_cache_id);
       draw_scrollbar();
       m_cache_mode = Widget_Cache_Use;
    }

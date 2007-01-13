@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef __S__FONT_HANDLER_H
 #define __S__FONT_HANDLER_H
 
+#include "geometry.h"
 #include "rgbcolor.h"
 
 #include <list>
@@ -71,7 +72,18 @@ class Font_Handler {
 public:
 	Font_Handler();
 	~Font_Handler();
-	void draw_string(RenderTarget* dst, const std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, std::string text,Align align = Align_CenterLeft, int wrap = -1, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0, int caret = -1) ;
+	void draw_string
+		(RenderTarget &,
+		 const std::string & font,
+		 int size,
+		 const RGBColor fg, const RGBColor bg,
+		 Point dstpoint,
+		 const std::string & text,
+		 const Align align = Align_CenterLeft,
+		 const int wrap = -1,
+		 const Widget_Cache widget_cache = Widget_Cache_None,
+		 uint * const widget_cache_id = 0,
+		 const int caret = -1);
 	void get_size(std::string font, int size, std::string text, int *w, int *h, int wrap = -1);
 	int calc_linewidth(TTF_Font* f, std::string &text);
 	uint get_fontheight(const std::string & name, const int size);
@@ -84,7 +96,14 @@ public:
 	// to make sure that everything is forgotten
 	void flush_cache( void );
 	void delete_widget_cache(uint widget_cache_id);
-	void draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int dsty, std::string text, int wrap, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0);
+	void draw_richtext
+		(RenderTarget &,
+		 const RGBColor bg,
+		 Point dstpoint,
+		 std::string text,
+		 int wrap,
+		 Widget_Cache widget_cache = Widget_Cache_None,
+		 uint * const widget_cache_id = 0);
 	void get_size_from_cache(const uint widget_cache_id, uint & w, uint & h);
 
 	// Register a callback which is used whenever the tag <variable name="kljdf"> appears

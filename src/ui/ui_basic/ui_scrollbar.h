@@ -66,8 +66,8 @@ private:
 
 	void action(Area area);
 
-	void draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h);
-	void draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h);
+	void draw_button(RenderTarget &, const Area area, const Rect);
+	void draw_area(RenderTarget &, const Area, const Rect);
 	void draw(RenderTarget* dst);
 	void think();
 

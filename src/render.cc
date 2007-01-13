@@ -87,23 +87,23 @@ Surface::draw_rect
 Draws the outline of a rectangle
 ===============
 */
-void Surface::draw_rect(Rect rc, RGBColor clr)
-{
+void Surface::draw_rect(const Rect rc, const RGBColor clr) {
    assert( m_surface );
+	assert(rc.x >= 0);
+	assert(rc.y >= 0);
+	assert(rc.w >= 1);
+	assert(rc.h >= 1);
 	ulong color = clr.map( get_format() );
 
-	rc.w += rc.x-1;
-	rc.h += rc.y-1;
+	const Point bl = rc.bottom_left() - Point(1, 1);
 
-	for (int x=rc.x+1; x<rc.w; x++)
-	{
-		set_pixel( x, rc.y, color );
-		set_pixel( x, rc.h, color );
+	for (int x = rc.x + 1; x < bl.x; ++x) {
+		set_pixel(x, rc.y, color);
+		set_pixel(x, bl.y, color);
 	}
-	for (int y=rc.y; y<=rc.h; y++)
-	{
-		set_pixel( rc.x, y, color );
-		set_pixel( rc.w, y, color );
+	for (int y = rc.y; y <= bl.y; ++y) {
+		set_pixel(rc.x, y, color);
+		set_pixel(bl.x, y, color);
 	}
 }
 
@@ -115,9 +115,12 @@ Surface::fill_rect
 Draws a filled rectangle
 ===============
 */
-void Surface::fill_rect(Rect rc, RGBColor clr)
-{
+void Surface::fill_rect(const Rect rc, const RGBColor clr) {
    assert( m_surface );
+	assert(rc.x >= 0);
+	assert(rc.y >= 0);
+	assert(rc.w >= 1);
+	assert(rc.h >= 1);
 	ulong color = clr.map( get_format() );
 
    SDL_Rect r = { rc.x, rc.y, rc.w, rc.h };
@@ -132,14 +135,13 @@ Change the brightness of the given rectangle
 This function is slow as hell.
 ===============
 */
-void Surface::brighten_rect(Rect rc, int factor)
-{
-   rc.w += rc.x;
-   rc.h += rc.y;
-
-   for (int y = rc.y; y < rc.h; y++)
-   {
-      for (int x = rc.x; x < rc.w; x++) {
+void Surface::brighten_rect(const Rect rc, const int factor) {
+	assert(rc.x >= 0);
+	assert(rc.y >= 0);
+	assert(rc.w >= 1);
+	assert(rc.h >= 1);
+	const Point bl = rc.bottom_left();
+	for (int y = rc.y; y < bl.y; ++y) for (int x = rc.x; x < bl.x; ++x) {
          uchar gr, gg, gb;
          short r, g, b;
          ulong clr = get_pixel(x,y);
@@ -152,7 +154,6 @@ void Surface::brighten_rect(Rect rc, int factor)
          if (r & 0xFF00) r = (~r) >> 24;
          clr = SDL_MapRGB( m_surface->format, r, g, b );
          set_pixel( x, y, clr );
-      }
    }
 }
 
@@ -269,13 +270,13 @@ void draw_minimap_int
  const uint                flags)
 {
 	const Map & map = egbase.map();
-	for (int y = 0; y < rc.h; ++y) {
+	for (uint y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		FCoords f(viewpoint.x, viewpoint.y + y, 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);
-		for (int x = 0; x < rc.w; ++x, pix += sizeof(T)) {
+		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T * const>(pix) = static_cast<const T>
 				(not visibility[i] ?
@@ -295,13 +296,13 @@ void draw_minimap_int
  const uint                flags)
 {
 	const Map & map = egbase.map();
-	for (int y = 0; y < rc.h; ++y) {
+	for (uint y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		FCoords f(viewpoint.x, viewpoint.y + y, 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);
-		for (int x = 0; x < rc.w; ++x, pix += sizeof(T)) {
+		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T * const>(pix) = static_cast<const T>
 				(calc_minimap_color(fmt, egbase, f, flags));

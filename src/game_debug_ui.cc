@@ -197,20 +197,19 @@ void MapObjectDebugWindow::think()
 	Editor_Game_Base & egbase = get_iabase()->egbase();
 	Map_Object * const obj = m_object.get(&egbase);
 
-   if(obj && m_log_general_info)  {
+	if (obj) {
+		if (m_log_general_info)  {
       obj->log_general_info(&egbase);
       m_log_general_info = false;
-   }
-
-	if (!obj) {
+		}
+		UI::Window::think();
+   } else {
 		char buf[128];
 
 		snprintf(buf, sizeof(buf), "DEAD: %u", m_serial);
 		set_title(buf);
-		return;
 	}
 
-	UI::Window::think();
 }
 
 

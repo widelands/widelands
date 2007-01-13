@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,25 +55,15 @@ void Widelands_Map_Battle_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
-      return;
+	if (not skip) {
 
-   FileRead fr;
-   try {
-      fr.Open( fs, "binary/battle" );
-   } catch ( ... ) {
-      // not there, so skip
-      return ;
-   }
+		FileRead fr;
+		try {fr.Open(fs, "binary/battle");} catch (...) {return;}
 
-   // First packet version
-   int packet_version=fr.Unsigned16();
-
-   if(packet_version == CURRENT_PACKET_VERSION)
-   {
-      int battles = fr.Unsigned32();
-      for (int i = 0; i < battles; i++)
-      {
+		const Uint16 packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			const Uint32 nr_battles = fr.Unsigned32();
+			for (Uint32 i = 0; i < nr_battles; ++i) {
          Battle* battle = 0;
 
          int serial = fr.Unsigned32();
@@ -106,10 +96,10 @@ throw (_wexception)
       if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
       return; // End of packet, do not run into assert
-   }
-   else
-      throw wexception ("Unkown version of Widelands_Map_Battle_Data_Packet : %d", packet_version);
-   assert(0); // never here
+		} else throw wexception
+			("Unkown version of Widelands_Map_Battle_Data_Packet : %d",
+			 packet_version);
+	}
 }
 
 /*

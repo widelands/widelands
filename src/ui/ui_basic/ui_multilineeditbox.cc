@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,16 +173,15 @@ Redraw the Editbox
 void Multiline_Editbox::draw(RenderTarget* dst)
 {
    // make the whole area a bit darker
-   dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
+	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 	if (get_text().size()) {
 		g_fh->draw_string
-			(dst,
+			(*dst,
 			 m_fontname,
 			 m_fontsize,
 			 m_fcolor,
 			 RGBColor(107,87,55),
-			 Multiline_Editbox::get_halign(),
-			 0 - m_textpos,
+			 Point(Multiline_Editbox::get_halign(), 0 - m_textpos),
 			 get_text().c_str(),
 			 m_align,
 			 get_eff_w(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,10 +139,7 @@ Draw the wares.
 */
 void WaresDisplay::draw(RenderTarget* dst)
 {
-   int x, y;
-
-   x = 2;
-   y = 2;
+	Point p(2, 2);
 
    int number = m_player->get_tribe()->get_nrwares();
    bool is_worker = false;
@@ -157,17 +154,10 @@ void WaresDisplay::draw(RenderTarget* dst)
       for( uint i = 0; i < m_warelists.size(); i++)
          totalstock += m_warelists[i]->stock(id);
 
-      draw_ware(dst, x, y, id, totalstock, is_worker);
+		draw_ware(*dst, p, id, totalstock, is_worker);
 
-      if (((totid+1) % WaresPerRow) != 0)
-      {
-         x += WARE_MENU_PIC_W + 3;
-      }
-      else
-      {
-         x = 2;
-         y += WARE_MENU_PIC_H+8 + 3;
-      }
+		if ((totid + 1) % WaresPerRow) {p.x += WARE_MENU_PIC_W + 3;}
+		else {p.x = 2; p.y += WARE_MENU_PIC_H + 8 + 3;}
    }
 }
 
@@ -179,7 +169,8 @@ WaresDisplay::draw_ware [virtual]
 Draw one ware icon + additional information.
 ===============
 */
-void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock, bool worker)
+void WaresDisplay::draw_ware
+(RenderTarget & dst, const Point p, const uint id, const uint stock, const bool worker)
 {
 	uint pic;
 
@@ -200,16 +191,23 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 	uint w, h;
 	g_gr->get_picture_size(picid, w, h);
 
-   dst->blit(x, y, picid);
+	dst.blit(p, picid);
 
-   int posx = x + (w - WARE_MENU_PIC_W)/2;
-   int posy = y + 1;
+	const Point pos = p + Point((w - WARE_MENU_PIC_W) / 2, 1);
 	// Draw it
-	dst->blit(posx, posy, pic);
-	dst->fill_rect(posx, posy+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, RGBColor(0, 0, 0));
+	dst.blit(pos, pic);
+	dst.fill_rect
+		(Rect(pos + Point(0, WARE_MENU_PIC_H), WARE_MENU_PIC_W, 8),
+		 RGBColor(0, 0, 0));
 
 	char buf[32];
 	snprintf(buf, sizeof(buf), "%i", stock);
 
-	g_fh->draw_string(dst, UI_FONT_ULTRASMALL, UI_FONT_SMALL_CLR,  x+WARE_MENU_PIC_W, y+WARE_MENU_PIC_H -4, buf, Align_Right);
+	g_fh->draw_string
+		(dst,
+		 UI_FONT_ULTRASMALL,
+		 UI_FONT_SMALL_CLR,
+		 p + Point(WARE_MENU_PIC_W, WARE_MENU_PIC_H - 4),
+		 buf,
+		 Align_Right);
 }

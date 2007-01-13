@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,18 +35,14 @@
 EventChain::State EventChain::run( Game* g ) {
    m_state = RUNNING;
 
-   while( m_curevent < m_events.size() ) {
-      Event* ev = m_events[m_curevent];
-      Event::State retval = ev->run( g );
-
-      if( retval == Event::DONE )
-         m_curevent++;
+	while (m_curevent < m_events.size()) {
+		if (m_events[m_curevent]->run(g) == Event::DONE) ++m_curevent;
       else break;
    }
 
-   if( m_curevent == m_events.size()) {
+	if (m_curevent == m_events.size()) {
       // Last event has been run. This is finished
-      if( get_repeating() ) {
+		if (get_repeating()) {
          // This eventchain will repeat in due time
          m_curevent = 0;
          m_trigconditional->reset_triggers( g );
@@ -154,15 +150,16 @@ void Cmd_CheckEventChain::execute (Game* g)
 
 #define CMD_CHECK_EVENTCHAIN_VERSION 1
 void Cmd_CheckEventChain::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
- int version=fr->Unsigned16();
-   if(version==CMD_CHECK_EVENTCHAIN_VERSION) {
+	const Uint16 cmd_check_eventchain_version = fr->Unsigned16();
+	if (cmd_check_eventchain_version == CMD_CHECK_EVENTCHAIN_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
 
       // eventchain id
       m_eventchain_id=fr->Unsigned16();
-   } else
-      throw wexception("Unknown version in Cmd_CheckEventChain::Read: %i", version);
+	} else throw wexception
+		("Unknown version in Cmd_CheckEventChain::Read: %i",
+		 cmd_check_eventchain_version);
 }
 void Cmd_CheckEventChain::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
    // First, write version

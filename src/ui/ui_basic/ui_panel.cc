@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,9 @@ int Panel::run()
 
 			forefather->do_draw(rt);
 
-			rt->blit(app->get_mouse_x()-3, app->get_mouse_y()-7, s_default_cursor);
+			rt->blit
+				(Point(app->get_mouse_x(), app->get_mouse_y()) - Point(3, 7),
+				 s_default_cursor);
 
 			if (Panel *lowest = _mousein)
 			{
@@ -346,7 +348,7 @@ Draw overlays that appear over all child panels.
 This can be used e.g. for debug information.
 ===============
 */
-void Panel::draw_overlay(RenderTarget *) {}
+void Panel::draw_overlay(RenderTarget &) {}
 
 
 /**
@@ -652,10 +654,12 @@ void Panel::do_draw(RenderTarget* dst)
 		Rect outerrc;
 		Point outerofs;
 
-		if (dst->enter_window(Rect(_x, _y, _w, _h), &outerrc, &outerofs)) {
+		if (dst->enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
 			draw_border(dst);
 
-			Rect innerwindow(_lborder, _tborder, _w-(_lborder+_rborder), _h-(_tborder+_bborder));
+			Rect innerwindow
+				(Point(_lborder, _tborder),
+				 _w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
 			if (dst->enter_window(innerwindow, 0, 0)) {
 				draw(dst);
@@ -664,7 +668,7 @@ void Panel::do_draw(RenderTarget* dst)
 				for(Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
 
-				draw_overlay(dst);
+				draw_overlay(*dst);
 			}
 
 			dst->set_window(outerrc, outerofs);
@@ -914,13 +918,17 @@ void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)
 	tip_width += 4;
 	tip_height += 4;
 
-	dst->fill_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(230,200,50));
-	dst->draw_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(0,0,0));
+	dst->fill_rect
+		(Rect(Point(tooltipX - 2, tooltipY - 2), tip_width, tip_height),
+		 RGBColor(230,200,50));
+	dst->draw_rect
+		 (Rect(Point(tooltipX - 2, tooltipY - 2), tip_width, tip_height),
+		  RGBColor(0,0,0));
 	g_fh->draw_string
-		(dst,
+		(*dst,
 		 UI_FONT_TOOLTIP,
 		 UI_FONT_TOOLTIP_CLR,
-		 tooltipX, tooltipY,
+		 Point(tooltipX, tooltipY),
 		 lowest->tooltip(),
 		 Align_Left);
 }

@@ -157,7 +157,7 @@ class Interactive_Base : public UI::Panel {
 	   inline void set_mapview(Map_View* w) { m_mapview=w; }
       inline Map_View* get_mapview() { return m_mapview; }
 
-		virtual void draw_overlay(RenderTarget* dst);
+	virtual void draw_overlay(RenderTarget &);
 
       void unset_sel_picture();
       void set_sel_picture(const char * const);

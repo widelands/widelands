@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,47 +148,75 @@ void Tab_Panel::draw(RenderTarget* dst)
 	int x;
 
 	// draw the background
-	dst->tile(0, 0, m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2,
-	          m_pic_background, get_x(), get_y());
-	dst->tile(0, TP_BUTTON_HEIGHT - 2, get_w(), get_h() - TP_BUTTON_HEIGHT + 2,
-	          m_pic_background, get_x(), get_y() + TP_BUTTON_HEIGHT - 2);
+	compile_assert(2 < TP_BUTTON_WIDTH);
+	compile_assert(4 < TP_BUTTON_HEIGHT);
+	dst->tile
+		(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
+		 m_pic_background, Point(get_x(), get_y()));
+	assert(TP_BUTTON_HEIGHT - 2 <= get_h());
+	dst->tile
+		(Rect
+		 (Point(0, TP_BUTTON_HEIGHT - 2),
+		  get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
+		 m_pic_background,
+		 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
 
 
 	// draw the buttons
-	for(idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH)
-		{
-		if (m_highlight == (int)idx)
-			dst->brighten_rect(x, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT, MOUSE_OVER_BRIGHT_FACTOR);
+	for(idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
+		if (m_highlight == static_cast<const int>(idx)) dst->brighten_rect
+			(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
+			 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
 		uint cpw, cph;
 		g_gr->get_picture_size(m_tabs[idx].picid, cpw, cph);
 
-		dst->blit(x + (TP_BUTTON_WIDTH - cpw)/2, (TP_BUTTON_HEIGHT - cph)/2, m_tabs[idx].picid);
+		dst->blit
+			(Point(x + (TP_BUTTON_WIDTH - cpw)/2, (TP_BUTTON_HEIGHT - cph) / 2),
+			 m_tabs[idx].picid);
 
 		// Draw top part of border
 		RGBColor black(0,0,0);
 
-		dst->brighten_rect(x, 0, TP_BUTTON_WIDTH, 2, BUTTON_EDGE_BRIGHT_FACTOR);
-		dst->brighten_rect(x, 2, 2, TP_BUTTON_HEIGHT - 4, BUTTON_EDGE_BRIGHT_FACTOR);
-		dst->fill_rect(x+TP_BUTTON_WIDTH-2, 2, 1, TP_BUTTON_HEIGHT - 4, black);
-		dst->fill_rect(x+TP_BUTTON_WIDTH-1, 1, 1, TP_BUTTON_HEIGHT - 3, black);
+		dst->brighten_rect
+			(Rect(Point(x, 0), TP_BUTTON_WIDTH, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst->brighten_rect
+			(Rect(Point(x, 2), 2, TP_BUTTON_HEIGHT - 4),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		dst->fill_rect
+			(Rect(Point(x + TP_BUTTON_WIDTH - 2, 2), 1, TP_BUTTON_HEIGHT - 4),
+			 black);
+		dst->fill_rect
+			(Rect(Point(x + TP_BUTTON_WIDTH - 1, 1), 1, TP_BUTTON_HEIGHT - 3),
+			 black);
 
 		// Draw bottom part
-		if (m_active != idx)
-			dst->brighten_rect(x, TP_BUTTON_HEIGHT-2, TP_BUTTON_WIDTH, 2, 2*BUTTON_EDGE_BRIGHT_FACTOR);
-		else
-			{
-			dst->brighten_rect(x, TP_BUTTON_HEIGHT-2, 2, 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		if (m_active != idx) dst->brighten_rect
+			(Rect(Point(x, TP_BUTTON_HEIGHT - 2), TP_BUTTON_WIDTH, 2),
+			 2 * BUTTON_EDGE_BRIGHT_FACTOR);
+		else {
+			dst->brighten_rect
+				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), 2, 2),
+				 BUTTON_EDGE_BRIGHT_FACTOR);
 
-			dst->brighten_rect(x+TP_BUTTON_WIDTH-2, TP_BUTTON_HEIGHT-2, 2, 2, BUTTON_EDGE_BRIGHT_FACTOR);
-			dst->fill_rect(x+TP_BUTTON_WIDTH-1, TP_BUTTON_HEIGHT-2, 1, 1, black);
-			dst->fill_rect(x+TP_BUTTON_WIDTH-2, TP_BUTTON_HEIGHT-1, 2, 1, black);
+			dst->brighten_rect
+				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 2),
+				 BUTTON_EDGE_BRIGHT_FACTOR);
+			dst->fill_rect
+				(Rect(Point(x + TP_BUTTON_WIDTH - 1, TP_BUTTON_HEIGHT - 2), 1, 1),
+				 black);
+			dst->fill_rect
+				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 2, 1),
+				 black);
 			}
 		}
 
 	// draw the remaining separator
-	dst->brighten_rect(x, TP_BUTTON_HEIGHT-2, get_w()-x, 2, 2*BUTTON_EDGE_BRIGHT_FACTOR);
+	assert(x <= get_w());
+	dst->brighten_rect
+		(Rect(Point(x, TP_BUTTON_HEIGHT - 2), get_w() - x, 2),
+		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
 

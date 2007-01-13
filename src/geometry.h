@@ -57,12 +57,22 @@ struct Point {
 	int x, y;
 };
 
+/**
+ * Returns the point in the middle between a and b (rounded to integer values).
+ *
+ * This may not be overflow safe as it could be. If the components of Point had
+ * been unsigned, "((a^b)>>1)+(a&b)" would have worked, but they are signed.
+ */
+inline Point middle(const Point a, const Point b)
+{return Point((a.x + b.x)>>1, (a.y + b.y)>>1);}
+
 
 struct Rect : public Point {
 	Rect() {}
-	Rect(int px, int py, int pw, int ph) : Point(px, py), w(pw), h(ph) {}
+	Rect(const Point p, const uint W, const uint H) : Point(p), w(W), h(H) {}
+	Point bottom_left() const {return *this + Point(w, h);}
 
-	int w, h;
+	uint w, h;
 };
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,15 +73,19 @@ Text_Parser::Text_Parser(){
 Text_Parser::~Text_Parser(){
 }
 
-void Text_Parser::parse(std::string *text, std::vector<Richtext_Block> *blocks, Varibale_Callback vcb, void* vcdata) {
+void Text_Parser::parse
+(std::string                 & text,
+ std::vector<Richtext_Block> & blocks,
+ Varibale_Callback vcb, void * const vcdata) {
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
 	while (more_richtext_blocks) {
 		Richtext_Block new_richtext_block;
-		std::string unparsed_text = "";
-		std::string richtext_format = "";
+		std::string unparsed_text;
+		std::string richtext_format;
 
-		more_richtext_blocks = extract_format_block(text,&unparsed_text,&richtext_format,"<rt",">","</rt>");
+		more_richtext_blocks = extract_format_block
+			(text, unparsed_text, richtext_format, std::string("<rt"), std::string(">"), std::string("</rt>"));
 		parse_richtexttext_attributes(richtext_format,&new_richtext_block);
 
 		std::vector<Text_Block> text_blocks;
@@ -89,14 +93,15 @@ void Text_Parser::parse(std::string *text, std::vector<Richtext_Block> *blocks, 
 		//Second while loop parses all textblocks of current richtext block
 		bool more_text_blocks = true;
 		while (more_text_blocks) {
-			std::string block_format = "";
-			std::string block_text = "";
+			std::string block_format;
+			std::string block_text;
 			Text_Block new_block;
 
 			std::vector<std::string> words;
-			std::vector<uint> line_breaks;
+			std::vector<std::vector<std::string>::size_type> line_breaks;
 
-			more_text_blocks = parse_textblock(&unparsed_text,&block_format,&words, &line_breaks,vcb,vcdata);
+			more_text_blocks = parse_textblock
+				(unparsed_text, block_format, words, line_breaks, vcb, vcdata);
 			parse_text_attributes(block_format,&new_block);
 
 			new_block.set_words(words);
@@ -104,14 +109,21 @@ void Text_Parser::parse(std::string *text, std::vector<Richtext_Block> *blocks, 
 			text_blocks.push_back(new_block);
       }
 		new_richtext_block.set_text_blocks(text_blocks);
-		blocks->push_back(new_richtext_block);
+		blocks.push_back(new_richtext_block);
 	}
 }
 
-bool Text_Parser::parse_textblock(std::string *block, std::string *block_format, std::vector<std::string> *words, std::vector<uint> *line_breaks, Varibale_Callback vcb, void* vcdata) {
-	std::string block_text = "";
+bool Text_Parser::parse_textblock
+(std::string                                       & block,
+ std::string                                       & block_format,
+ std::vector<std::string>                          & words,
+ std::vector<std::vector<std::string>::size_type>  & line_breaks,
+ Varibale_Callback vcb, void * const vcdata)
+{
+	std::string block_text;
 
-	bool extract_more = extract_format_block(block,&block_text,block_format,"<p",">","</p>");
+	const bool extract_more =
+		extract_format_block(block, block_text, block_format, "<p", ">" , "</p>");
 
       // Serch for map variables
       SSS_T offset;
@@ -138,14 +150,11 @@ bool Text_Parser::parse_textblock(std::string *block, std::string *block_format,
 			SSS_T next_break = line.find("<br>");
 			if (next_break == std::string::npos)
 				break;
-			if (next_break != 0)
-				words->push_back(line.substr(0,next_break));
-			line_breaks->push_back((uint)words->size());
+			if (next_break) words.push_back(line.substr(0, next_break));
+			line_breaks.push_back(words.size());
 			line.erase(0,next_break + 4);
    }
-		if (line.size()) {
-			words->push_back(line);
-		}
+		if (line.size()) words.push_back(line);
 	}
 	return extract_more;
 }
@@ -166,48 +175,52 @@ void Text_Parser::split_words(std::string in, std::vector<std::string>* plist) {
 	}
 }
 
-bool Text_Parser::extract_format_block(std::string *block, std::string *block_text, std::string *block_format, std::string block_start, std::string format_end, std::string block_end){
-	if (block->substr(0,block_start.size()) != block_start) {
-		SSS_T format_begin_pos = block->find(block_start);
+bool Text_Parser::extract_format_block
+(std      ::string & block,
+ std      ::string & block_text,
+ std      ::string & block_format,
+ const std::string & block_start,
+ const std::string & format_end,
+ const std::string & block_end)
+{
+	if (block.substr(0, block_start.size()) != block_start) {
+		const std::string::size_type format_begin_pos = block.find(block_start);
 		if (format_begin_pos == std::string::npos) {
 			return false;
 		}
-		block->erase(0,format_begin_pos);
+		block.erase(0, format_begin_pos);
 	}
 
-	block->erase(0,block_start.size());
-	if (block->substr(0,1) == " ")
-		block->erase(0,1);
+	block.erase(0, block_start.size());
+	if (block.substr(0, 1) == " ")
+		block.erase(0, 1);
 
-	SSS_T format_end_pos = block->find(format_end);
+	const std::string::size_type format_end_pos = block.find(format_end);
 	if (format_end_pos == std::string::npos) {
 		return false;
 	}
 
 	//Append block_format
-	block_format->erase();
-	block_format->append(block->substr(0,format_end_pos));
+	block_format.erase();
+	block_format.append(block.substr(0, format_end_pos));
 
 	//Delete whole format block
-	block->erase(0,format_end_pos+format_end.size());
+	block.erase(0, format_end_pos + format_end.size());
 
 	//Find end of block
-	SSS_T block_end_pos = block->find(block_end);
+	const std::string::size_type block_end_pos = block.find(block_end);
 	if (block_end_pos == std::string::npos) {
 		return false;
 	}
 	//Extract text of block
-	block_text->erase();
-	block_text->append(block->substr(0,block_end_pos));
+	block_text.erase();
+	block_text.append(block.substr(0, block_end_pos));
 	//block_text = new std::string(block->substr(0,block_end_pos));
 
 	//Erase text including closing tag
-	block->erase(0,block_end_pos+block_end.size());
+	block.erase(0, block_end_pos + block_end.size());
 	//Is something left
-	if (!block->size() || block->find(block_start) == std::string::npos)
-		return false;
-	else
-		return true;
+	return block.find(block_start) != std::string::npos;
 }
 
 void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Block *element) {

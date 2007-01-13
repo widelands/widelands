@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,11 +98,7 @@ RenderTargetImpl::RenderTargetImpl(Surface* bmp)
 RenderTargetImpl::~RenderTargetImpl
 ===============
 */
-RenderTargetImpl::~RenderTargetImpl()
-{
-   if(m_ground_surface)
-      delete m_ground_surface;
-}
+RenderTargetImpl::~RenderTargetImpl() {delete m_ground_surface;}
 
 /*
 ===============
@@ -151,23 +147,53 @@ void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
 	// safeguards clipping against the bitmap itself
 	if (m_rect.x < 0) {
 		m_offset.x += m_rect.x;
-		m_rect.w += m_rect.x;
+		m_rect.w = std::max(static_cast<const int>(m_rect.w) + m_rect.x, 0);
 		m_rect.x = 0;
 	}
-	if (m_rect.x + m_rect.w > (int)m_surface->get_w())
-		m_rect.w = m_surface->get_w() - m_rect.x;
-	if (m_rect.w < 0)
-		m_rect.w = 0;
+	if (m_rect.x + m_rect.w > m_surface->get_w()) m_rect.w =
+		std::max(static_cast<const int>(m_surface->get_w()) - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
-		m_rect.h += m_rect.y;
+		m_rect.h = std::max(static_cast<const int>(m_rect.h) + m_rect.y, 0);
 		m_rect.y = 0;
 	}
-	if (m_rect.y + m_rect.h > (int)m_surface->get_h())
-		m_rect.h = m_surface->get_h() - m_rect.y;
-	if (m_rect.h < 0)
-		m_rect.h = 0;
+	if (m_rect.y + m_rect.h > m_surface->get_h()) m_rect.h =
+		std::max(static_cast<const int>(m_surface->get_h()) - m_rect.y, 0);
+}
+
+/**
+ * Offsets r by m_offset and clips r against m_rect.
+ *
+ * If true is returned, r a valid rectangle that can be used.
+ * If false is returned, r may not be used and may be partially modified.
+ */
+inline bool RenderTargetImpl::clip(Rect & r) const throw () {
+	r += m_offset;
+
+	if (r.x < 0) {
+		if (r.w <= static_cast<const uint>(-r.x)) return false;
+		r.w += r.x;
+		r.x = 0;
+	}
+	if (r.x + r.w > m_rect.w) {
+		if (static_cast<const int>(m_rect.w) <= r.x) return false;
+		r.w = m_rect.w - r.x;
+	}
+
+	if (r.y < 0) {
+		if (r.h <= static_cast<const uint>(-r.y)) return false;
+		r.h += r.y;
+		r.y = 0;
+	}
+	if (r.y + r.h > m_rect.h) {
+		if (static_cast<const int>(m_rect.h) <= r.y) return false;
+		r.h = m_rect.h - r.y;
+	}
+
+	r += m_rect;
+
+	return r.w and r.h;
 }
 
 
@@ -186,36 +212,8 @@ not changed at all. Otherwise, the function returns true.
 bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
 {
 	Point newofs(0,0);
-	Rect newrect;
-
-	newrect.x = rc.x + m_offset.x;
-	newrect.y = rc.y + m_offset.y;
-	newrect.w = rc.w;
-	newrect.h = rc.h;
-
-	// Clipping
-	if (newrect.x < 0) {
-		newofs.x = newrect.x;
-		newrect.w += newrect.x;
-		newrect.x = 0;
-	}
-	if (newrect.x + newrect.w > m_rect.w)
-		newrect.w = m_rect.w - newrect.x;
-	if (newrect.w <= 0)
-		return false;
-
-	if (newrect.y < 0) {
-		newofs.y = newrect.y;
-		newrect.h += newrect.y;
-		newrect.y = 0;
-	}
-	if (newrect.y + newrect.h > m_rect.h)
-		newrect.h = m_rect.h - newrect.y;
-	if (newrect.h <= 0)
-		return false;
-
-	newrect.x += m_rect.x;
-	newrect.y += m_rect.y;
+	Rect newrect = rc;
+	if (clip(newrect)) {
 
 	// Apply the changes
 	if (previous)
@@ -227,6 +225,7 @@ bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevo
 	m_offset = newofs;
 
 	return true;
+	} else return false;
 }
 
 
@@ -261,44 +260,28 @@ void RenderTargetImpl::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
 {
    int dx=x2-x1;      /* the horizontal distance of the line */
    int dy=y2-y1;      /* the vertical distance of the line */
-   int dxabs=abs(dx);
-   int dyabs=abs(dy);
+	const uint dxabs = abs(dx);
+	const uint dyabs = abs(dy);
    int sdx= dx < 0 ? -1 : 1;
    int sdy= dy < 0 ? -1 : 1;
-   int x=dyabs>>1;
-   int y=dxabs>>1;
-   int px=x1;
-   int py=y1;
+	uint x = dyabs / 2;
+	uint y = dxabs / 2;
+	Point p(x1, y1);
 
-   draw_rect(px,py,1,1,color);
+	draw_rect(Rect(p, 1, 1), color);
 
-   if (dxabs>=dyabs) /* the line is more horizontal than vertical */
-   {
-      for(int i=0;i<dxabs;i++)
-      {
+	if (dxabs >= dyabs) for (uint i = 0;i < dxabs; ++i) {
+		//  the line is more horizontal than vertical
          y+=dyabs;
-         if (y>=dxabs)
-         {
-            y-=dxabs;
-            py+=sdy;
-         }
-         px+=sdx;
-         draw_rect(px,py,1,1,color);
-      }
-   }
-   else /* the line is more vertical than horizontal */
-   {
-      for(int i=0;i<dyabs;i++)
-      {
+		if (y >= dxabs) {y -= dxabs; p.y += sdy;}
+		p.x += sdx;
+		draw_rect(Rect(p, 1, 1), color);
+	} else for (uint i = 0; i < dyabs; ++i) {
+		// the line is more vertical than horizontal
          x+=dxabs;
-         if (x>=dyabs)
-         {
-            x-=dyabs;
-            px+=sdx;
-         }
-         py+=sdy;
-         draw_rect(px,py,1,1,color);
-      }
+		if (x >= dyabs) {x -= dyabs; p.x += sdx;}
+		p.y += sdy;
+		draw_rect(Rect(p, 1, 1), color);
    }
 }
 /*
@@ -311,90 +294,23 @@ RenderTargetImpl::clear
 Clip against window and pass those primitives along to the bitmap.
 ===============
 */
-void RenderTargetImpl::draw_rect(int x, int y, int w, int h, RGBColor clr)
-{
-	x += m_offset.x;
-	y += m_offset.y;
+void RenderTargetImpl::draw_rect(Rect r, const RGBColor clr)
+{if (clip(r)) m_surface->draw_rect(r, clr);}
 
-	if (x < 0) {
-		w += x;
-		x = 0;
-	}
-	if (x + w > m_rect.w)
-		w = m_rect.w - x;
-	if (w <= 0)
-		return;
+void RenderTargetImpl::fill_rect(Rect r, const RGBColor clr)
+{if (clip(r)) m_surface->fill_rect(r, clr);}
 
-	if (y < 0) {
-		h += y;
-		y = 0;
-	}
-	if (y + h > m_rect.h)
-		h = m_rect.h - y;
-	if (h <= 0)
-		return;
-
-	m_surface->draw_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), clr);
-}
-
-void RenderTargetImpl::fill_rect(int x, int y, int w, int h, RGBColor clr)
-{
-	x += m_offset.x;
-	y += m_offset.y;
-
-	if (x < 0) {
-		w += x;
-		x = 0;
-	}
-	if (x + w > m_rect.w)
-		w = m_rect.w - x;
-	if (w <= 0)
-		return;
-
-	if (y < 0) {
-		h += y;
-		y = 0;
-	}
-	if (y + h > m_rect.h)
-		h = m_rect.h - y;
-	if (h <= 0)
-		return;
-
-	m_surface->fill_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), clr);
-}
-
-void RenderTargetImpl::brighten_rect(int x, int y, int w, int h, int factor)
-{
-	x += m_offset.x;
-	y += m_offset.y;
-
-	if (x < 0) {
-		w += x;
-		x = 0;
-	}
-	if (x + w > m_rect.w)
-		w = m_rect.w - x;
-	if (w <= 0)
-		return;
-
-	if (y < 0) {
-		h += y;
-		y = 0;
-	}
-	if (y + h > m_rect.h)
-		h = m_rect.h - y;
-	if (h <= 0)
-		return;
-
-	m_surface->brighten_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), factor);
-}
+void RenderTargetImpl::brighten_rect(Rect r, const int factor)
+{if (clip(r)) m_surface->brighten_rect(r, factor);}
 
 void RenderTargetImpl::clear(void)
 {
-	if (!m_rect.x && !m_rect.y && m_rect.w == (int)m_surface->get_w() && m_rect.h == (int)m_surface->get_h())
+	if
+		(not m_rect.x and not m_rect.y
+		 and
+		 m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
 		m_surface->clear();
-	else
-		m_surface->fill_rect(Rect(m_rect.x, m_rect.y, m_rect.w, m_rect.h), RGBColor(0,0,0));
+	else m_surface->fill_rect(m_rect, RGBColor(0,0,0));
 }
 
 
@@ -405,44 +321,38 @@ RenderTargetImpl::doblit
 Clip against window and source bitmap, then call the Bitmap blit routine.
 ===============
 */
-void RenderTargetImpl::doblit(Point dst, Surface* src, Rect srcrc)
-{
-	dst.x += m_offset.x;
-	dst.y += m_offset.y;
+void RenderTargetImpl::doblit(Point dst, Surface * const src, Rect srcrc) {
+	assert(0 <= srcrc.x);
+	assert(0 <= srcrc.y);
+	dst += m_offset;
 
 	// Clipping
 	if (dst.x < 0) {
+		if (srcrc.w <= static_cast<const uint>(-dst.x)) return;
 		srcrc.x -= dst.x;
 		srcrc.w += dst.x;
 		dst.x = 0;
 	}
-	if (srcrc.x < 0) {
-		dst.x -= srcrc.x;
-		srcrc.w += srcrc.x;
-		srcrc.x = 0;
-	}
-	if (dst.x + srcrc.w > m_rect.w)
+	if (dst.x + srcrc.w > m_rect.w) {
+		if (static_cast<const int>(m_rect.w) <= dst.x) return;
 		srcrc.w = m_rect.w - dst.x;
-	if (srcrc.w <= 0)
-		return;
+	}
 
 	if (dst.y < 0) {
+		if (srcrc.h <= static_cast<const uint>(-dst.y)) return;
 		srcrc.y -= dst.y;
 		srcrc.h += dst.y;
 		dst.y = 0;
 	}
-	if (srcrc.y < 0) {
-		dst.y -= srcrc.y;
-		srcrc.h += srcrc.y;
-		srcrc.y = 0;
-	}
-	if (dst.y + srcrc.h > m_rect.h)
+	if (dst.y + srcrc.h > m_rect.h) {
+		if (static_cast<const int>(m_rect.h) <= dst.y) return;
 		srcrc.h = m_rect.h - dst.y;
-	if (srcrc.h <= 0)
-		return;
+	}
+
+	dst += m_rect;
 
 	// Draw it
-	m_surface->blit(Point(dst.x + m_rect.x, dst.y + m_rect.y), src, srcrc);
+	m_surface->blit(dst, src, srcrc);
 }
 
 
@@ -454,23 +364,18 @@ RenderTargetImpl::blitrect
 Blits a blitsource into this bitmap
 ===============
 */
-void RenderTargetImpl::blit(int dstx, int dsty, uint picture)
-{
-	GraphicImpl* gfx = get_graphicimpl();
-	Surface* src = gfx->get_picture_surface(picture);
-
-	if (src)
-		doblit(Point(dstx, dsty), src, Rect(0, 0, src->get_w(), src->get_h()));
+void RenderTargetImpl::blit(const Point dst, const uint picture) {
+	if (Surface * const src = get_graphicimpl()->get_picture_surface(picture))
+		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
-void RenderTargetImpl::blitrect(int dstx, int dsty, uint picture,
-	                             int srcx, int srcy, int w, int h)
+void RenderTargetImpl::blitrect
+(const Point dst, const uint picture, const Rect srcrc)
 {
-	GraphicImpl* gfx = get_graphicimpl();
-	Surface* src = gfx->get_picture_surface(picture);
-
-	if (src)
-		doblit(Point(dstx, dsty), src, Rect(srcx, srcy, w, h));
+	assert(0 <= srcrc.x);
+	assert(0 <= srcrc.y);
+	if (Surface * const src = get_graphicimpl()->get_picture_surface(picture))
+		doblit(dst, src, srcrc);
 }
 
 
@@ -479,12 +384,11 @@ void RenderTargetImpl::blitrect(int dstx, int dsty, uint picture,
 RenderTargetImpl::tile
 
 Fill the given rectangle with the given picture.
-The pixel from (ofsx/ofsy) inside picture is placed at the top-left corner of
+The pixel from ofs inside picture is placed at the top-left corner of
 the filled rectangle.
 ===============
 */
-void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy)
-{
+void RenderTargetImpl::tile(Rect r, uint picture, Point ofs) {
 	GraphicImpl* gfx = get_graphicimpl();
 	Surface* src = gfx->get_picture_surface(picture);
 
@@ -493,67 +397,42 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 		return;
 	}
 
-	// Clipping
-	x += m_offset.x;
-	y += m_offset.y;
-
-	if (x < 0) {
-		w += x;
-		x = 0;
-	}
-	if (x + w > m_rect.w)
-		w = m_rect.w - x;
-	if (w <= 0)
-		return;
-
-	if (y < 0) {
-		h += y;
-		y = 0;
-	}
-	if (y + h > m_rect.h)
-		h = m_rect.h - y;
-	if (h <= 0)
-		return;
+	if (clip(r)) {
 
 	// Make sure the offset is within bounds
-	ofsx = ofsx % src->get_w();
-	if (ofsx < 0)
-		ofsx += src->get_w();
+		ofs.x = ofs.x % src->get_w();
+		if (ofs.x < 0) ofs.x += src->get_w();
 
-	ofsy = ofsy % src->get_h();
-	if (ofsy < 0)
-		ofsy += src->get_h();
+		ofs.y = ofs.y % src->get_h();
+		if (ofs.y < 0) ofs.y += src->get_h();
 
 	// Blit the picture into the rectangle
-	int ty = 0;
+		uint ty = 0;
 
-	while(ty < h)
-		{
-		int tx = 0;
-		int tofsx = ofsx;
+		while (ty < r.h) {
+			uint tx = 0;
+			int tofsx = ofs.x;
 		Rect srcrc;
 
-		srcrc.y = ofsy;
-		srcrc.h = src->get_h() - ofsy;
-		if (ty + srcrc.h > h)
-			srcrc.h = h - ty;
+			srcrc.y = ofs.y;
+			srcrc.h = src->get_h() - ofs.y;
+			if (ty + srcrc.h > r.h) srcrc.h = r.h - ty;
 
-		while(tx < w)
-			{
+			while (tx < r.w) {
 			srcrc.x = tofsx;
 			srcrc.w = src->get_w() - tofsx;
-			if (tx + srcrc.w > w)
-				srcrc.w = w - tx;
+				if (tx + srcrc.w > r.w) srcrc.w = r.w - tx;
 
-			m_surface->blit(Point(m_rect.x + x + tx, m_rect.y + y + ty), src, srcrc);
+				m_surface->blit(r + Point(tx, ty), src, srcrc);
 
 			tx += srcrc.w;
 			tofsx = 0;
 			}
 
 		ty += srcrc.h;
-		ofsy = 0;
+			ofs.y = 0;
 		}
+	}
 }
 
 
@@ -577,11 +456,8 @@ void RenderTargetImpl::rendermap
  const bool draw_all)
 {
    // Check if we have the ground surface set up
-   if( !m_ground_surface ) {
-      m_ground_surface = new Surface( *m_surface );
-   }
-	viewofs.x -= m_offset.x;
-	viewofs.y -= m_offset.y;
+	if (not m_ground_surface) m_ground_surface = new Surface(*m_surface);
+	viewofs -= m_offset;
 
 
 	// Completely clear the window ( this blinks )
@@ -747,8 +623,7 @@ void RenderTargetImpl::rendermap
 					if (f_is_border) {
 						const Player & player = *egbase.get_player(f_owner_number);
 						const uint anim = player.get_tribe()->get_frontier_anim();
-						if (f_is_visible)
-							drawanim(f_pos.x, f_pos.y, anim, 0, &player);
+						if (f_is_visible) drawanim(f_pos, anim, 0, &player);
 						if
 							((f_is_visible or r_is_visible)
 							 and
@@ -757,8 +632,7 @@ void RenderTargetImpl::rendermap
 							 (tr_owner_number != f_owner_number
 							  or
 							  br_owner_number != f_owner_number))
-							drawanim
-							((f_pos.x +  r_pos.x) / 2, (f_pos.y +  r_pos.y) / 2, anim, 0, &player);
+							drawanim(middle(f_pos, r_pos), anim, 0, &player);
 						if
 							((f_is_visible or bl_is_visible)
 							 and
@@ -767,8 +641,7 @@ void RenderTargetImpl::rendermap
 							 (l_owner_number != f_owner_number
 							  or
 							  br_owner_number != f_owner_number))
-							drawanim
-							((f_pos.x + bl_pos.x) / 2, (f_pos.y + bl_pos.y) / 2, anim, 0, &player);
+							drawanim(middle(f_pos, bl_pos), anim, 0, &player);
 						if
 							((f_is_visible or br_is_visible)
 							 and
@@ -777,8 +650,7 @@ void RenderTargetImpl::rendermap
 							 (r_owner_number != f_owner_number
 							  or
 							  bl_owner_number != f_owner_number))
-							drawanim
-							((f_pos.x + br_pos.x) / 2, (f_pos.y + br_pos.y) / 2, anim, 0, &player);
+							drawanim(middle(f_pos, br_pos), anim, 0, &player);
 					}
 
 					if (f_is_visible) { // Render stuff that belongs to the node
@@ -813,9 +685,7 @@ void RenderTargetImpl::rendermap
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
 							 it < end;
 							 ++it)
-							blit
-							(f_pos.x - it->hotspot_x, f_pos.y - it->hotspot_y,
-							 it->picid);
+							blit(f_pos - it->hotspot, it->picid);
 					}
 				}
 			}
@@ -866,22 +736,23 @@ void RenderTargetImpl::rendermap
 							 ++it)
 						{
 							blit
-								(posx - it->hotspot_x,
-								 posy
-								 +
-								 (TRIANGLE_HEIGHT
-								  -
-								  (f.field->get_height()
-								   +
-								   r.field->get_height()
-								   +
-								   b.field->get_height())
-								  *
-								  HEIGHT_FACTOR)
-								 /
-								 3
+								(Point
+								 (posx,
+								  posy
+								  +
+								  (TRIANGLE_HEIGHT
+								   -
+								   (f.field->get_height()
+								    +
+								    r.field->get_height()
+								    +
+								    b.field->get_height())
+								   *
+								   HEIGHT_FACTOR)
+								  /
+								  3)
 								 -
-								 it->hotspot_y,
+								 it->hotspot,
 								 it->picid);
 						}
 					}
@@ -927,22 +798,23 @@ void RenderTargetImpl::rendermap
 							 ++it)
 						{
 							blit
-								(posx - it->hotspot_x,
-								 posy
-								 +
-								 ((TRIANGLE_HEIGHT * 2)
-								  -
-								  (f.field->get_height()
-								   +
-								   bl.field->get_height()
-								   +
-								   br.field->get_height())
-								  *
-								  HEIGHT_FACTOR)
-								 /
-								 3
+								(Point
+								 (posx,
+								  posy
+								  +
+								  ((TRIANGLE_HEIGHT * 2)
+								   -
+								   (f.field->get_height()
+								    +
+								    bl.field->get_height()
+								    +
+								    br.field->get_height())
+								   *
+								   HEIGHT_FACTOR)
+								  /
+								  3)
 								 -
-								 it->hotspot_y,
+								 it->hotspot,
 								 it->picid);
 						}
 					}
@@ -971,11 +843,11 @@ void RenderTargetImpl::rendermap
  * \todo Document this method's parameters
  * \todo Correctly calculate the stereo position for sound effects
 */
-void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, const Player* player)
+void RenderTargetImpl::drawanim
+(Point dst, const uint animation, const uint time, const Player * const player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
-	Rect rc;
 
 	//TODO? assert(player);
 	assert(data);
@@ -988,46 +860,12 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 
 	// Get the frame and its data
 	Surface* frame;
-	int framenumber = (time / data->frametime) % gfx->get_nrframes();
-   if( player )
-      frame = gfx->get_frame(framenumber, player->get_player_number(), player);
-   else
-      frame = gfx->get_frame(framenumber, 0, 0);
-	dstx += m_offset.x;
-	dsty += m_offset.y;
-
-	dstx -= gfx->get_hotspot().x;
-	dsty -= gfx->get_hotspot().y;
-
-	rc.x = 0;
-	rc.y = 0;
-	rc.w = frame->get_w();
-	rc.h = frame->get_h();
-
-
-	// Clipping
-	if (dstx < 0) {
-		rc.x -= dstx;
-		rc.w += dstx;
-		dstx = 0;
-	}
-	if (dstx + rc.w > m_rect.w)
-		rc.w = m_rect.w - dstx;
-	if (rc.w <= 0)
-		return;
-
-	if (dsty < 0) {
-		rc.y -= dsty;
-		rc.h += dsty;
-		dsty = 0;
-	}
-	if (dsty + rc.h > m_rect.h)
-		rc.h = m_rect.h - dsty;
-	if (rc.h <= 0)
-		return;
-
-	// Draw it
-	m_surface->blit(Point(dstx + m_rect.x, dsty + m_rect.y), frame, rc);
+	const uint framenumber = (time / data->frametime) % gfx->get_nrframes();
+	frame = gfx->get_frame
+		(framenumber, player ? player->get_player_number() : 0, player);
+	dst -= gfx->get_hotspot();
+	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
+	doblit(dst, frame, srcrc);
 
 	// Look if there's a sound effect registered for this frame and trigger the effect
 	uint stereo_position=128; //see Sound_Handler::stereo_position()
@@ -1042,13 +880,16 @@ RenderTargetImpl::drawanimrect
 Draws a part of a frame of an animation at the given location
 ===============
 */
-void RenderTargetImpl::drawanimrect(int dstx, int dsty, uint animation, uint time, const Player* player,
-												int srcx, int srcy, int w, int h)
+void RenderTargetImpl::drawanimrect
+(Point dst,
+ const uint animation,
+ const uint time,
+ const Player * const player,
+ Rect srcrc)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
-	Surface* frame;
-	Rect rc;
+	;
 
 	if (!data || !gfx) {
 		log("WARNING: Animation %i doesn't exist\n", animation);
@@ -1056,70 +897,14 @@ void RenderTargetImpl::drawanimrect(int dstx, int dsty, uint animation, uint tim
 	}
 
 	// Get the frame and its data
-   if( player )
-      frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes(), player->get_player_number(), player);
-   else
-      frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes(), 0, 0);
+	Surface * const frame = gfx->get_frame
+		((time / data->frametime) % gfx->get_nrframes(),
+		 player ? player->get_player_number() : 0,
+		 player);
 
-   dstx += m_offset.x;
-	dsty += m_offset.y;
-
-	dstx -= gfx->get_hotspot().x;
-	dsty -= gfx->get_hotspot().y;
-
-	dstx += srcx;
-	dsty += srcy;
-
-	rc.x = srcx;
-	rc.y = srcy;
-	rc.w = w; //frame->width;
-	rc.h = h; //frame->height;
-
-	// Clipping against source
-	if (rc.x < 0) {
-		dstx -= rc.x;
-		rc.w += rc.x;
-		rc.x = 0;
-	}
-	if (rc.x + rc.w > (int)frame->get_w())
-		rc.w = frame->get_w() - rc.x;
-	if (rc.w <= 0)
-		return;
-
-	if (rc.y < 0) {
-		dsty -= rc.y;
-		rc.h += rc.y;
-		rc.y = 0;
-	}
-	if (rc.y + rc.h > (int)frame->get_h())
-		rc.h = frame->get_h() - rc.y;
-	if (rc.h <= 0)
-		return;
-
-	// Clipping against destination
-	if (dstx < 0) {
-		rc.x -= dstx;
-		rc.w += dstx;
-		dstx = 0;
-	}
-	if (dstx + rc.w > m_rect.w)
-		rc.w = m_rect.w - dstx;
-	if (rc.w <= 0)
-		return;
-
-	if (dsty < 0) {
-		rc.y -= dsty;
-		rc.h += dsty;
-		dsty = 0;
-	}
-	if (dsty + rc.h > m_rect.h)
-		rc.h = m_rect.h - dsty;
-	if (rc.h <= 0)
-		return;
-
-
-	// Draw it
-	m_surface->blit(Point(dstx + m_rect.x, dsty + m_rect.y), frame, rc);
+	dst -= gfx->get_hotspot();
+	dst += srcrc;
+	doblit(dst, frame, srcrc);
 }
 
 
@@ -1173,10 +958,8 @@ GraphicImpl::~GraphicImpl()
 {
    flush(0);
 
-   if(m_roadtextures) {
       delete m_roadtextures;
       m_roadtextures = 0;
-   }
 
 	delete m_rendertarget;
 	flush(-1);
@@ -1328,7 +1111,6 @@ void GraphicImpl::flush(int mod)
             m_picturemap.erase(pic->u.fname);
             free(pic->u.fname);
          }
-         if(pic->surface)
             delete pic->surface;
       }
    }
@@ -1343,15 +1125,11 @@ void GraphicImpl::flush(int mod)
          delete m_animations[i];
       m_animations.resize(0);
 
-      if( m_roadtextures ) {
          delete m_roadtextures;
          m_roadtextures = 0;
-      }
    }
-   if(!mod || mod & PicMod_UI) {
-      // Flush the cached Fontdatas
+	if (not mod or mod & PicMod_UI) // Flush the cached Fontdatas
       g_fh->flush_cache();
-   }
 }
 
 
@@ -1396,8 +1174,9 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 		SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp );
 		SDL_FreeSurface(bmp);
 
-      if( !use_surface )
-         throw wexception("GraphicImpl::get_picture(): no success in converting loaded surface!\n");
+		if (not use_surface) throw wexception
+			("GraphicImpl::get_picture(): no success in converting loaded surface!"
+			 "\n");
 
 		// Fill in a free slot in the pictures array
 		id = find_free_picture();
@@ -1422,7 +1201,7 @@ uint GraphicImpl::get_picture(int mod, Surface* surf, const char* fname )
 	Picture & pic = m_pictures[id];
    pic.mod       = mod;
    pic.surface   = surf;
-   if( fname ) {
+	if (fname) {
 		pic.u.fname = strdup(fname);
 		m_picturemap[fname] = id;
    } else pic.u.fname =  0;
@@ -1617,7 +1396,7 @@ returns the road textures
 ================
 */
 Surface* GraphicImpl::get_road_texture( int roadtex) {
-   if(! m_roadtextures ) {
+	if (not m_roadtextures) {
       // Load the road textures
       m_roadtextures = new Road_Textures();
       m_roadtextures->pic_road_normal = get_picture(PicMod_Game, ROAD_NORMAL_PIC);
@@ -1625,10 +1404,9 @@ Surface* GraphicImpl::get_road_texture( int roadtex) {
       get_picture_surface( m_roadtextures->pic_road_normal )->force_disable_alpha();
       get_picture_surface( m_roadtextures->pic_road_busy )->force_disable_alpha();
    }
-   if(roadtex == Road_Normal)
-      return get_picture_surface(m_roadtextures->pic_road_normal);
-   else
-      return get_picture_surface(m_roadtextures->pic_road_busy);
+	return get_picture_surface
+		(roadtex == Road_Normal ?
+		 m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
 }
 
 /*
@@ -1693,12 +1471,12 @@ GraphicImpl::get_animation_size
 Return the size of the animation at the given time.
 ===============
 */
-void GraphicImpl::get_animation_size(uint anim, uint time, int* pw, int* ph)
+void GraphicImpl::get_animation_size
+(const uint anim, const uint time, uint & w, uint & h)
 {
 	const AnimationData* data = g_anim.get_animation(anim);
 	AnimationGfx* gfx = get_graphicimpl()->get_animation(anim);
 	Surface* frame;
-	int w, h;
 
 	if (!data || !gfx)
 	{
@@ -1713,13 +1491,6 @@ void GraphicImpl::get_animation_size(uint anim, uint time, int* pw, int* ph)
 		w = frame->get_w();
 		h = frame->get_h();
 	}
-
-	if (pw)
-		*pw = w;
-	if (ph)
-		*ph = h;
-
-	return;
 }
 
 

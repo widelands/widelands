@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,22 +93,17 @@ void Textarea::set_align(Align align)
   */
 void Textarea::draw(RenderTarget* dst)
 {
-   if (m_text.length())
-   {
-      int x = 0;
-      int y = 0;
-
-      if (m_align & Align_HCenter)
-         x += get_w()/2;
-      else if (m_align & Align_Right)
-         x += get_w();
-
-      if (m_align & Align_VCenter)
-         y += get_h()/2;
-      else if (m_align & Align_Bottom)
-         y += get_h();
-		g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(107,87,55), x, y, m_text.c_str(), m_align, m_multiline ? get_w() : -1);
-   }
+	if (m_text.length()) g_fh->draw_string
+		(*dst,
+		 m_fontname, m_fontsize, m_fcolor, RGBColor(107, 87, 55),
+		 Point
+		 (m_align & Align_HCenter ?
+		  get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
+		  m_align & Align_VCenter ?
+		  get_h() / 2 : m_align & Align_Bottom ? get_h() : 0),
+		 m_text.c_str(),
+		 m_align,
+		 m_multiline ? get_w() : -1);
 }
 
 

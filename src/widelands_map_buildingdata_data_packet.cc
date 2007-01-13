@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,24 +69,16 @@ void Widelands_Map_Buildingdata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
-      return;
+	if (not skip) {
 
-   FileRead fr;
-   try {
-      fr.Open( fs, "binary/building_data" );
-   } catch ( ... ) {
-      // not there, so skip
-      return ;
-   }
+		FileRead fr;
+		try {fr.Open( fs, "binary/building_data" );} catch (...) {return;}
 
-   // First packet version
-   int packet_version=fr.Unsigned16();
-
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(1) {
+		const Uint16 packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			for (;;) {
          uint ser=fr.Unsigned32();
-         if(ser==0xffffffff) break; // Last building
+				if (ser == 0xffffffff) break; // Last building
 
          log("Loading building with the serial: %i\n", ser);
 
@@ -98,16 +90,14 @@ throw (_wexception)
          log("(%i,%i)\n", building->get_position().x, building->get_position().y);
 
          // Animation
-         if(fr.Unsigned8())
-            building->m_anim=building->get_descr()->get_animation(fr.CString());
-         else
-            building->m_anim=0;
+				building->m_anim = fr.Unsigned8() ?
+					building->get_descr()->get_animation(fr.CString()) : 0;
          building->m_animstart=fr.Unsigned32();
 
          building->m_leave_queue.resize(fr.Unsigned16());
          for(uint i=0; i<building->m_leave_queue.size(); i++) {
             ser=fr.Unsigned32();
-            if(ser) {
+					if (ser) {
                assert(ol->is_object_known(ser));
                building->m_leave_queue[i]=ol->get_object_by_file_index(ser);
             } else
@@ -115,7 +105,7 @@ throw (_wexception)
          }
          building->m_leave_time=fr.Unsigned32();
          ser=fr.Unsigned32();
-         if(ser) {
+				if (ser) {
             assert(ol->is_object_known(ser));
             building->m_leave_allow=ol->get_object_by_file_index(ser);
          } else
@@ -156,13 +146,10 @@ throw (_wexception)
 
          ol->mark_object_as_loaded(building);
       }
-
-      // DONE
-      return;
-   }
-   throw wexception("Unknown version %i in Widelands_Map_Buildingdata_Data_Packet!\n", packet_version);
-
-   assert(0);
+		} else throw wexception
+			("Unknown version %i in Widelands_Map_Buildingdata_Data_Packet!\n",
+			 packet_version);
+	}
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
@@ -174,8 +161,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 
    log("Reading cs stuff for %p\n", &constructionsite);
 
-   int version=fr.Unsigned16();
-   if(version==CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
       constructionsite.m_building=constructionsite.get_owner()->get_tribe()->get_building_descr(constructionsite.get_owner()->get_tribe()->get_safe_building_index(fr.CString()));
       bool prevb=fr.Unsigned8();
       if(prevb) {
@@ -184,10 +171,9 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
          constructionsite.m_prev_building=0;
 
       // Builder request
-      if(constructionsite.m_builder_request)
          delete constructionsite.m_builder_request;
       bool request=fr.Unsigned8();
-      if(request) {
+		if (request) {
          constructionsite.m_builder_request = new Request
 				(&constructionsite,
 				 0,
@@ -200,7 +186,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 
       // Builder
       uint reg=fr.Unsigned32();
-      if(reg) {
+		if (reg) {
          assert(ol->is_object_known(reg));
          constructionsite.m_builder=static_cast<Worker*>(ol->get_object_by_file_index(reg));
       } else
@@ -228,8 +214,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
       constructionsite.m_work_steps=fr.Unsigned32();
 
 		log("Read cs stuff for %p\n", &constructionsite);
-   } else
-      throw wexception("Unknown Constructionsite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
+	} else throw wexception
+		("Unknown Constructionsite-Version %i in "
+		 "Widelands_Map_Buildingdata_Data_Packet!\n",
+		 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
@@ -238,8 +226,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-   int version=fr.Unsigned16();
-   if(version==CURRENT_WAREHOUSE_PACKET_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_WAREHOUSE_PACKET_VERSION) {
 		log("Reading warehouse stuff for %p\n", &warehouse);
       // Supply
 		const Tribe_Descr & tribe = warehouse.get_owner()->tribe();
@@ -293,8 +281,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
       warehouse.m_next_carrier_spawn=fr.Unsigned32();
 
       log("Read warehouse stuff for %p\n", &warehouse);
-   } else
-      throw wexception("Unknown Warehouse-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
+	} else throw wexception
+		("Unknown Warehouse-Version %i in Widelands_Map_Buildingdata_Data_Packet!"
+		 "\n",
+		 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
@@ -354,9 +344,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-   ushort version = fr.Unsigned16();
-
-   if(version==CURRENT_PACKET_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       // Requests
       uint nr_requests=fr.Unsigned16();
       for(uint i=0; i<productionsite.m_worker_requests.size(); i++)
@@ -401,7 +390,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 
       // Wares
       uint nr_queues = fr.Unsigned16();
-      if( nr_queues != productionsite.m_input_queues.size() )
+		if (nr_queues != productionsite.m_input_queues.size())
          throw ("Productionsite has wrong number of input queues!\n");
       for(uint i=0; i<productionsite.m_input_queues.size(); i++)
          productionsite.m_input_queues[i]->Read(&fr,egbase,ol);
@@ -413,8 +402,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
          productionsite.m_statistics[i] = fr.Unsigned8();
       productionsite.m_statistics_changed = fr.Unsigned8();
       memcpy(productionsite.m_statistics_buf, fr.Data(sizeof(productionsite.m_statistics_buf)), sizeof(productionsite.m_statistics_buf));
-   } else
-      throw wexception("Unknown ProductionSite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
+	} else throw wexception
+		("Unknown ProductionSite-Version %i in "
+		 "Widelands_Map_Buildingdata_Data_Packet!\n",
+		 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
@@ -423,10 +414,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-      // read the version
-	uint version=fr.Unsigned16();
-
-	if(version==CURRENT_TRAININGSITE_PACKET_VERSION) {
+	const Uint16 trainingsite_packet_version = fr.Unsigned16();
+	if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION) {
          // Read productionsite
 		read_productionsite(trainingsite, fr, egbase, ol);
 
@@ -486,8 +475,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 		trainingsite.m_total_soldiers=trainingsite.m_soldiers.size()+trainingsite.m_soldier_requests.size();
 
 		// DONE
-	} else
-		throw wexception("Unknown TrainingSite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
+	} else throw wexception
+		("Unknown TrainingSite-Version %i in "
+		 "Widelands_Map_Buildingdata_Data_Packet!\n",
+		 trainingsite_packet_version);
 }
 
 
@@ -529,7 +520,7 @@ throw (_wexception)
             // Player immovable owner is already in existance packet
 
             // Write the general stuff
-            if(building->m_anim) {
+			if (building->m_anim) {
                fw.Unsigned8(1);
                fw.CString(building->get_descr()->get_animation_name(building->m_anim).c_str());
             } else
@@ -544,7 +535,7 @@ throw (_wexception)
                fw.Unsigned32(os->get_object_file_index(building->m_leave_queue[idx].get(egbase)));
             }
             fw.Unsigned32(building->m_leave_time);
-            if(building->m_leave_allow.get(egbase)) {
+			if (building->m_leave_allow.get(egbase)) {
                assert(os->is_object_known(building->m_leave_allow.get(egbase)));
                fw.Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
             } else
@@ -604,14 +595,14 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
 
    // Describtions
    fw.CString(constructionsite.m_building->get_name());
-   if(constructionsite.m_prev_building) {
+	if (constructionsite.m_prev_building) {
       fw.Unsigned8(1);
       fw.CString(constructionsite.m_prev_building->get_name());
    } else
       fw.Unsigned8(0);
 
    // builder request
-   if(constructionsite.m_builder_request) {
+	if (constructionsite.m_builder_request) {
       fw.Unsigned8(1);
       constructionsite.m_builder_request->Write(&fw, egbase, os);
    } else

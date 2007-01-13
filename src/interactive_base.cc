@@ -246,8 +246,7 @@ Interactive_Base::draw_overlay
 Draw debug overlay when appropriate.
 ===============
 */
-void Interactive_Base::draw_overlay(RenderTarget* dst)
-{
+void Interactive_Base::draw_overlay(RenderTarget & dst) {
 	if
 		(get_display_flag(dfDebug)
 		 or
@@ -257,11 +256,13 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
       char buf[100];
 
 	   snprintf(buf, 100, "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
-	   g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf, Align_Left);
+		g_fh->draw_string
+			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, Align_Left);
 	   assert(m_sel.pos.triangle.t < 2);
 	   const char * const triangle_string[] = {"down", "right"};
 	   snprintf(buf, 100, "%3i %3i %s", m_sel.pos.triangle.x, m_sel.pos.triangle.y, triangle_string[m_sel.pos.triangle.t]);
-	   g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 25, buf, Align_Left);
+		g_fh->draw_string
+			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 25), buf, Align_Left);
    }
 
    if (get_display_flag(dfDebug))
@@ -270,7 +271,8 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
       char buf[100];
 		sprintf(buf, "%5.1f fps (avg: %5.1f fps)",
 				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, 85, 5, buf, Align_Left);
+		g_fh->draw_string
+			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(85, 5), buf, Align_Left);
 	}
 }
 

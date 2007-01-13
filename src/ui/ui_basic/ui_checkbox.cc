@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -124,32 +124,32 @@ void Statebox::draw(RenderTarget* dst)
 	if (m_custom_picture)
 	{
 		// center picture
-      int xpos, ypos;
 		uint w, h;
 
 		g_gr->get_picture_size(m_pic_graphics, w, h);
 
-      xpos=(get_inner_w()-w)/2;
-      ypos=(get_inner_h()-h)/2;
-      dst->blit(xpos, ypos, m_pic_graphics);
+		dst->blit
+			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),
+			 m_pic_graphics);
 
 		if (m_state)
-			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_state);
+			dst->draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_state);
 		else if (m_highlighted)
-			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_highlight);
+			dst->draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_highlight);
 	}
 	else
 	{
-		int x;
-
-		if (m_state)
-			x = STATEBOX_WIDTH;
-		else
-			x = 0;
-		dst->blitrect(0, 0, m_pic_graphics, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
+		compile_assert(0 <= STATEBOX_WIDTH);
+		compile_assert(0 <= STATEBOX_HEIGHT);
+		dst->blitrect
+			(Point(0, 0),
+			 m_pic_graphics,
+			 Rect
+			 (Point
+			  (m_state ? STATEBOX_WIDTH : 0, 0), STATEBOX_WIDTH, STATEBOX_HEIGHT));
 
 		if (m_highlighted)
-			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_highlight);
+			dst->draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_highlight);
 	}
 }
 

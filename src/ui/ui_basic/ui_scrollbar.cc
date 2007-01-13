@@ -222,11 +222,10 @@ void Scrollbar::action(Area area)
 }
 
 
-void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h)
-{
+void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 	uint pic;
 
-	dst->tile(x, y, w, h, m_pic_buttons, get_x(), get_y());
+	dst.tile(r, m_pic_buttons, Point(get_x(), get_y()));
 
 	// Draw the picture
 	pic = 0;
@@ -239,7 +238,7 @@ void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, i
 		uint cpw, cph;
 		g_gr->get_picture_size(pic, cpw, cph);
 
-		dst->blit(x + (w - cpw)/2, y + (h - cph)/2, pic);
+		dst.blit(r + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
 	}
 
 	// Draw border
@@ -248,38 +247,39 @@ void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, i
 	if (area != m_pressed)
 	{
 		// top edge
-		dst->brighten_rect(x, y, w, 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(r, r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
-		dst->brighten_rect(x, y+2, 2, h-2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect
+			(Rect(r + Point(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst->fill_rect(x+2, y+h-2, w-2, 1, black);
-		dst->fill_rect(x+1, y+h-1, w-1, 1, black);
+		dst.fill_rect(Rect(r + Point(2, r.h - 2), r.w - 2, 1), black);
+		dst.fill_rect(Rect(r + Point(1, r.h - 1), r.w - 1, 1), black);
 		// right edge
-		dst->fill_rect(x+w-2, y+2, 1, h-2, black);
-		dst->fill_rect(x+w-1, y+1, 1, h-1, black);
+		dst.fill_rect(Rect(r + Point(r.w - 2, 2), 1, r.h - 2), black);
+		dst.fill_rect(Rect(r + Point(r.w - 1, 1), 1, r.h - 1), black);
 	}
 	else
 	{
 		// bottom edge
-		dst->brighten_rect(x, y+h-2, w, 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect
+			(Rect(r + Point(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst->brighten_rect(x+w-2, y, 2, h-2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect
+			(Rect(r + Point(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst->fill_rect(x, y, w-1, 1, black);
-		dst->fill_rect(x, y+1, w-2, 1, black);
+		dst.fill_rect(Rect(r, r.w - 1, 1), black);
+		dst.fill_rect(Rect(r + Point(0, 1), r.w - 2, 1), black);
 		// left edge
-		dst->fill_rect(x, y, 1, h-1, black);
-		dst->fill_rect(x+1, y, 1, h-2, black);
+		dst.fill_rect(Rect(r, 1, r.h - 1), black);
+		dst.fill_rect(Rect(r + Point(1, 0), 1, r.h - 2), black);
 	}
 }
 
 
-void Scrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h)
-{
-	dst->tile(x, y, w, h, m_pic_background, get_x()+x, get_y()+y);
+void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
+	dst.tile(r, m_pic_background, Point(get_x(), get_y()) + r);
 
-	if (area == m_pressed)
-		dst->brighten_rect(x, y, w, h, BUTTON_EDGE_BRIGHT_FACTOR);
+	if (area == m_pressed) dst.brighten_rect(r, BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
 
@@ -294,27 +294,45 @@ void Scrollbar::draw(RenderTarget* dst)
 
 	if (m_horizontal)
 	{
-		draw_button(dst, Minus, 0, 0, Size, get_h());
-		draw_button(dst, Plus, get_w() - Size, 0, Size, get_h());
-		draw_button(dst, Knob, knobpos - Size/2, 0, Size, get_h());
+		draw_button(*dst, Minus, Rect(Point(0, 0), Size, get_h()));
+		draw_button(*dst, Plus, Rect(Point(get_w() - Size, 0), Size, get_h()));
+		draw_button
+			(*dst, Knob, Rect(Point(knobpos - Size / 2, 0), Size, get_h()));
 
 		assert(3 * Size / 2 <= knobpos);
-		draw_area(dst, MinusPage, Size, 0, knobpos - 3*Size/2, get_h());
+		draw_area
+			(*dst,
+			 MinusPage,
+			 Rect(Point(Size, 0), knobpos - 3 * Size / 2, get_h()));
 		assert(0 <= get_w());
 		assert(knobpos + 3 * Size / 2 <= static_cast<const uint>(get_w()));
-		draw_area(dst, PlusPage, knobpos + Size/2, 0, get_w() - knobpos - 3*Size/2, get_h());
+		draw_area
+			(*dst,
+			 PlusPage,
+			 Rect
+			 (Point(knobpos + Size / 2, 0),
+			  get_w() - knobpos - 3 * Size / 2, get_h()));
 	}
 	else
 	{
-		draw_button(dst, Minus, 0, 0, get_w(), Size);
-		draw_button(dst, Plus, 0, get_h() - Size, get_w(), Size);
-		draw_button(dst, Knob, 0, knobpos - Size/2, get_w(), Size);
+		draw_button(*dst, Minus, Rect(Point(0, 0), get_w(), Size));
+		draw_button(*dst, Plus, Rect(Point(0, get_h() - Size), get_w(), Size));
+		draw_button
+			(*dst, Knob, Rect(Point(0, knobpos - Size / 2), get_w(), Size));
 
 		assert(3 * Size / 2 <= knobpos);
-		draw_area(dst, MinusPage, 0, Size, get_w(), knobpos - 3*Size/2);
+		draw_area
+			(*dst,
+			 MinusPage,
+			 Rect(Point(0, Size), get_w(), knobpos - 3 * Size / 2));
 		assert(0 <= get_h());
 		assert(knobpos + 3 * Size / 2 <= static_cast<const uint>(get_h()));
-		draw_area(dst, PlusPage, 0, knobpos + Size/2, get_w(), get_h() - knobpos - 3*Size/2);
+		draw_area
+			(*dst,
+			 PlusPage,
+			 Rect
+			 (Point(0, knobpos + Size / 2),
+			  get_w(), get_h() - knobpos - 3 * Size / 2));
 	}
 }
 

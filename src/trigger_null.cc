@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,12 +44,9 @@ Trigger_Null::~Trigger_Null(void) {
  * File Read, File Write
  */
 void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
-   int version= s->get_safe_int( "version" );
-
-   if(version == TRIGGER_VERSION) {
-      return;
-   }
-   throw wexception("Null Trigger with unknown/unhandled version %i in map!\n", version);
+	const int version = s->get_safe_int("version");
+	if (version != TRIGGER_VERSION) throw wexception
+		("Null Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
 void Trigger_Null::Write(Section & s) const
@@ -59,8 +56,7 @@ void Trigger_Null::Write(Section & s) const
  * check if trigger conditions are done
  */
 void Trigger_Null::check_set_conditions(Game *) {
-   if(m_should_toggle)
-      set_trigger(m_value);
+	if (m_should_toggle) set_trigger(m_value);
 
    return;
 }

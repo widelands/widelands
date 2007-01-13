@@ -118,7 +118,7 @@ struct Panel : public Object {
 
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_border(RenderTarget* dst);
-	virtual void draw_overlay(RenderTarget* dst);
+	virtual void draw_overlay(RenderTarget & dst);
 	void update(int x, int y, int w, int h);
 	void update_inner(int x, int y, int w, int h);
 	void set_cache(bool enable);

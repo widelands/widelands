@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -225,7 +225,7 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 	uint idx = m_scrollpos / lineheight;
 	int y = 1 + idx*lineheight - m_scrollpos;
 
-   dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
+	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		if (y >= get_h())
@@ -234,8 +234,11 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 		const Entry_Record & er = *m_entry_records[idx];
 
 		if (idx == m_selection) {
+			assert(2 <= get_eff_w());
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
-			dst->brighten_rect(1, y, get_eff_w()-2, m_lineheight, -ms_darken_value);
+			dst->brighten_rect
+				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
+				 -ms_darken_value);
       }
 
 		int x;
@@ -255,11 +258,12 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 
       // Horizontal center the string
 		g_fh->draw_string
-			(dst,
+			(*dst,
 			 UI_FONT_SMALL,
 			 col,
 			 RGBColor(107,87,55),
-			 x, y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2,
+			 Point
+			 (x, y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
 			 er.name, m_align,
 			 -1);
 
@@ -267,7 +271,7 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 		if (er.picid != -1) {
 			uint w, h;
 			g_gr->get_picture_size(er.picid, w, h);
-			dst->blit(1, y + (get_lineheight()-h)/2, er.picid);
+			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
       }
 		y += lineheight;
 		idx++;

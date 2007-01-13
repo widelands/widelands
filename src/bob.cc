@@ -1020,13 +1020,8 @@ the one we start from.
 void Bob::draw
 (const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
 {
-	if (!m_anim)
-		return;
-
-	const Point drawpos = calc_drawpos(game, pos);
-
-	dst.drawanim
-		(drawpos.x, drawpos.y,
+	if (m_anim) dst.drawanim
+		(calc_drawpos(game, pos),
 		 m_anim,
 		 game.get_gametime() - m_animstart,
 		 get_owner());

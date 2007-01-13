@@ -628,12 +628,7 @@ void Immovable::draw
  RenderTarget & dst,
  const FCoords,
  const Point pos)
-{
-	if (!m_anim)
-		return;
-
-	dst.drawanim(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, 0);
-}
+{if (m_anim) dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);}
 
 
 /*
@@ -896,15 +891,14 @@ PlayerImmovable::set_owner
 Set the immovable's owner. Currently, it can only be set once.
 ===============
 */
-void PlayerImmovable::set_owner(Player *owner)
-{
+void PlayerImmovable::set_owner(Player * const new_owner) {
 	// Change these asserts once you've made really sure that changing owners
 	// works (necessary for military building)
 	/*THIS IS A TEST
    assert(!m_owner);
-	assert(owner);*/
+	assert(new_owner);*/
 
-	m_owner = owner;
+	m_owner = new_owner;
 
 	m_owner->egbase().player_immovable_notification
 		(this, Editor_Game_Base::GAIN);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,8 +77,19 @@ uint Font_Handler::get_fontheight(const std::string & name, const int size) {
  * surface is rendered with everything that has been written so far.
  */
 // TODO: rename this to draw text
-void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty,
-                               std::string text, Align align, int wrap, Widget_Cache widget_cache, uint *widget_cache_id, int caret) {
+void Font_Handler::draw_string
+(RenderTarget & dst,
+ const std::string & font,
+ const int size,
+ const RGBColor fg, const RGBColor bg,
+ Point dstpoint,
+ const std::string & text,
+ const Align align,
+ const int wrap,
+ const Widget_Cache widget_cache,
+ uint * const widget_cache_id,
+ const int caret)
+{
 	TTF_Font* f = m_font_loader->get_font(font,size);
 	//Width and height of text, needed for alignment
 	uint w, h;
@@ -139,8 +150,8 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
-	do_align(align,&dstx,&dsty,w,h);
-	dst->blit(dstx, dsty, picid);
+	do_align(align, &dstpoint.x, &dstpoint.y, w, h);
+	dst.blit(dstpoint, picid);
 }
 
 /*
@@ -285,7 +296,15 @@ SDL_Surface* Font_Handler::create_sdl_text_surface(TTF_Font* f, RGBColor fg, RGB
 }
 
 //draws richtext, specified by blocks
-void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int dsty, std::string text, int wrap, Widget_Cache widget_cache, uint *widget_cache_id) {
+void Font_Handler::draw_richtext
+(RenderTarget & dst,
+ RGBColor bg,
+ Point dstpoint,
+ std::string text,
+ int wrap,
+ Widget_Cache widget_cache,
+ uint * const widget_cache_id)
+{
 	uint picid;
 	if (widget_cache == Widget_Cache_Use) {
 		//g_gr->get_picture_size(*widget_cache_id,&w,&h);
@@ -297,7 +316,7 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 		}
 		std::vector<Richtext_Block> blocks;
 		Text_Parser p;
-		p.parse(&text,&blocks,m_varcallback,m_cbdata);
+		p.parse(text, blocks, m_varcallback, m_cbdata);
 
 		std::vector<SDL_Surface*> rend_blocks;
 		int global_h = 0;
@@ -355,7 +374,8 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 			//Iterate over text blocks of current richtext block
 			for(std::vector<Text_Block>::iterator text_it = cur_text_blocks.begin(); text_it != cur_text_blocks.end(); text_it++) {
 				std::vector<std::string> words = text_it->get_words();
-				std::vector<uint> line_breaks = text_it->get_line_breaks();
+				std::vector<std::vector<std::string>::size_type> line_breaks =
+					text_it->get_line_breaks();
 
 				//Iterate over words of current text block
 				uint word_cnt = 0;
@@ -501,7 +521,7 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
 		picid = convert_sdl_surface(global_surface);
 		*widget_cache_id = picid;
 	}
-	dst->blit(dstx, dsty, picid);
+	dst.blit(dstpoint, picid);
 }
 
 SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int style) {

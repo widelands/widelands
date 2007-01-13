@@ -166,25 +166,21 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
    }
 
    // Allowed buildings
-   bool write_allowed_buildings=false;
-	const int nr_players = map.get_nrplayers();
-	for (int i = 1; i <= nr_players; ++i) {
-      Player* player=m_egbase->get_player(i);
-      int b=0;
-      if(!player) continue;
-      for(b=0; b < player->get_tribe()->get_nrbuildings(); b++)
-         if(player->is_building_allowed(b)) {
-            write_allowed_buildings=true;
-            break;
-         }
-      if(write_allowed_buildings) break;
-   }
-	if (write_allowed_buildings) {
-      log("Writing Allowed Buildings Data ... ");
-		Widelands_Map_Allowed_Buildings_Data_Packet p;
-		p.Write(m_fs, m_egbase, m_mos);
-      log("done!\n ");
-   }
+	const Player_Number nr_players = map.get_nrplayers();
+	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
+		if (const Player * const player = m_egbase->get_player(plnum)) {
+			const Building_Descr::Index nr_buildings =
+				player->tribe().get_nrbuildings();
+			for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
+				if (player->is_building_allowed(i)) {
+					log("Writing Allowed Buildings Data ... ");
+					Widelands_Map_Allowed_Buildings_Data_Packet p;
+					p.Write(m_fs, m_egbase, m_mos);
+					log("done!\n ");
+					goto end_outer_loop;
+				}
+		}
+	} end_outer_loop:
 
    // !!!!!!!!!! NOTE
    // This packet must be before any building or road packet. So do not
@@ -237,13 +233,13 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       log("done!\n ");
    }
 
-   if(m_mos->get_nr_bobs()) {
+	if (m_mos->get_nr_bobs()) {
       log("Writing Bobdata Data ... ");
 	   {Widelands_Map_Bobdata_Data_Packet     p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
    }
 
-	if(m_mos->get_nr_immovables()) {
+	if (m_mos->get_nr_immovables()) {
       log("Writing Immovabledata Data ... ");
 		{
 			Widelands_Map_Immovabledata_Data_Packet p;
@@ -283,6 +279,8 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
 	{Widelands_Map_Objective_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
-   if(m_mos->get_nr_unsaved_objects())
-      throw wexception("There are %i unsaved objects. This is a bug, please consider committing!\n", m_mos->get_nr_unsaved_objects());
+	if (m_mos->get_nr_unsaved_objects()) throw wexception
+		("There are %i unsaved objects. This is a bug, please consider "
+		 "committing!\n",
+		 m_mos->get_nr_unsaved_objects());
 }

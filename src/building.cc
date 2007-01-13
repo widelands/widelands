@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -709,16 +709,15 @@ void Building::draw
  const FCoords coords,
  const Point pos)
 {
-	if (coords != m_position)
-		return; // draw big buildings only once
+	if (coords == m_position) { // draw big buildings only once
 
-	dst.drawanim
-		(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, get_owner());
+		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
 
 	// door animation?
 
 	// Overlay strings (draw when enabled)
 	draw_help(game, dst, coords, pos);
+	}
 }
 
 
@@ -741,10 +740,10 @@ void Building::draw_help
 	{
       // TODO: Make more here
 		g_fh->draw_string
-			(&dst,
+			(dst,
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
-			 pos.x, pos.y - 45,
+			 pos - Point(0, 45),
 			 get_census_string().c_str(),
 			 Align_Center);
 	}
@@ -752,10 +751,10 @@ void Building::draw_help
 	if (dpyflags & Interactive_Base::dfShowStatistics)
 	{
 		g_fh->draw_string
-			(&dst,
+			(dst,
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
-			 pos.x, pos.y - 35,
+			 pos - Point(0, 35),
 			 get_statistics_string().c_str(),
 			 Align_Center);
 	}

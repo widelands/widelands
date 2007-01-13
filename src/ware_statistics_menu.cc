@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -326,11 +326,14 @@ void WSM_Checkbox::draw(RenderTarget* dst) {
    UI::Checkbox::draw(dst);
 
    // Now, draw a small box with the color
-   dst->fill_rect(1, 1, get_inner_w()-1, COLOR_BOX_HEIGHT-2, m_color);
+	assert(1 <= get_inner_w());
+	compile_assert(2 <= COLOR_BOX_HEIGHT);
+	dst->fill_rect
+		(Rect(Point(1, 1), get_inner_w() - 1, COLOR_BOX_HEIGHT - 2), m_color);
 
    // and the item
-   int posx = (get_inner_w()-WARE_MENU_PIC_W)/2;
-   dst->blit(posx, COLOR_BOX_HEIGHT, m_pic);
+	dst->blit
+		(Point((get_inner_w() - WARE_MENU_PIC_W) / 2, COLOR_BOX_HEIGHT), m_pic);
 
 }
 

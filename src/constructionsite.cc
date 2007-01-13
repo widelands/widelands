@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,7 +143,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
    molog("m_building: %p\n", m_building);
    molog("* m_building (name): %s\n", m_building->get_name());
    molog("m_prev_building: %p\n", m_prev_building);
-   if(m_prev_building)
+	if (m_prev_building)
       molog("* m_prev_building (name): %s\n", m_prev_building->get_name());
 
    molog("m_builder_request: %p\n", m_builder_request);
@@ -274,7 +274,7 @@ void ConstructionSite::set_previous_building(Building_Descr* descr) {
 
    m_prev_building=descr;
 
-   if(!m_prev_building->get_animation("build"))
+	if (not m_prev_building->get_animation("build"))
       throw wexception("Trying to enhance a non buildable building!\n");
 }
 
@@ -381,7 +381,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building* bld = m_building->create(g, get_owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
-      if(g->get_objects()->object_still_available(m_builder)) {
+		if (g->get_objects()->object_still_available(m_builder)) {
          m_builder->reset_tasks((Game*)g);
          m_builder->set_location(bld);
          m_builder->start_task_gowarehouse();
@@ -564,12 +564,11 @@ void ConstructionSite::draw
 		return; // draw big buildings only once
 
 	// Draw the construction site marker
-	dst.drawanim(pos.x, pos.y, m_anim, tanim, get_owner());
+	dst.drawanim(pos, m_anim, tanim, get_owner());
 
 	// Draw the partially finished building
 	int totaltime;
 	int completedtime;
-	int w, h;
 	int lines;
 	uint anim;
 
@@ -585,29 +584,31 @@ void ConstructionSite::draw
 	// Redefine tanim
    tanim = anim_pic*FRAME_LENGTH;
 
-   g_gr->get_animation_size(anim, tanim, &w, &h);
+	uint w, h;
+   g_gr->get_animation_size(anim, tanim, w, h);
 
 	lines = h * completedtime * nr_pics / totaltime;
    lines -= h*anim_pic; // This won't work if pictures have various sizes
 
    // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
-   if(anim_pic) // not the first pic
+	if (anim_pic) //  not the first pic
       // draw the prev pic completly
-      dst.drawanim(pos.x, pos.y, anim, tanim - FRAME_LENGTH, get_owner());
+		dst.drawanim(pos, anim, tanim - FRAME_LENGTH, get_owner());
 
-   if(!anim_pic && m_prev_building) {
+	else if (m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead
-      int width, height;
-      int a = m_prev_building->get_animation("build");
-      int nr_pics2=g_gr->get_animation_nr_frames(a);
-      g_gr->get_animation_size(a, tanim, &width, &height);
-      int tanim2 = (nr_pics2-1)*FRAME_LENGTH;
-      dst.drawanim(pos.x, pos.y, a, tanim2, get_owner());
+		const int a = m_prev_building->get_animation("build");
+		dst.drawanim
+			(pos,
+			 a,
+			 (g_gr->get_animation_nr_frames(a) - 1) * FRAME_LENGTH,
+			 get_owner());
    }
 
+	assert(h - lines >= 0);
 	dst.drawanimrect
-		(pos.x, pos.y, anim, tanim, get_owner(), 0, h - lines, w, lines);
+		(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);

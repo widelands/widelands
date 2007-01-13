@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,38 +48,36 @@ void Widelands_Map_Event_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
-      return;
-
+	if (not skip) {
 
    // Skip, if no events saved
-   FileRead fr;
-   if( !fr.TryOpen( fs, "event" ))
-      return;
+		FileRead fr;
+		if (fr.TryOpen(fs, "event")) {
 
    Profile prof;
    prof.read( "event", 0, fs );
    Section* s = prof.get_section( "global" );
 
    // check packet version
-   int packet_version=s->get_int( "packet_version" );
-   if(packet_version == CURRENT_PACKET_VERSION) {
+			const int packet_version=s->get_int("packet_version");
+			if (packet_version == CURRENT_PACKET_VERSION) {
       while(( s = prof.get_next_section(0)) ) {
          std::string name = s->get_name();
          std::string type = s->get_safe_string("type");
          std::string state = s->get_safe_string("state");
          Event* e = Event_Factory::get_correct_event( type.c_str());
          e->set_name( name.c_str() );
-         if( state == "init") e->m_state = Event::INIT;
-         else if( state == "running") e->m_state = Event::RUNNING;
-         else if( state == "done") e->m_state = Event::DONE;
+					if      (state == "init")    e->m_state = Event::INIT;
+					else if (state == "running") e->m_state = Event::RUNNING;
+					else if (state == "done")    e->m_state = Event::DONE;
 
          e->Read( s, egbase );
          egbase->get_map()->get_mem().register_new_event(e);
       }
-      return;
-   }
-   throw wexception("Unknown version in Map Event Packet: %i\n", packet_version );
+			} else throw wexception
+				("Unknown version in Map Event Packet: %i\n", packet_version);
+		}
+	}
 }
 
 /*

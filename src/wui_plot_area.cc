@@ -88,7 +88,9 @@ WUIPlot_Area::~WUIPlot_Area( void ) {
 void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // first, tile the background
-   dst->tile(0, 0, get_inner_w(), get_inner_h(), g_gr->get_picture(  PicMod_Game, BG_PIC), 0,  0 );
+	dst->tile
+		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
+		 g_gr->get_picture(PicMod_Game, BG_PIC), Point(0, 0));
 
    int spacing = 5;
    int space_at_bottom=15;
@@ -118,7 +120,14 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
       int w, h;
       g_fh->get_size(UI_FONT_SMALL, buf, &w, &h, 0);
-      g_fh->draw_string(dst, UI_FONT_SMALL, RGBColor(255,0,0), RGBColor(255,255,255), (int) (posx - w/2), get_inner_h()-space_at_bottom+4, buf);
+		g_fh->draw_string
+			(*dst,
+			 UI_FONT_SMALL,
+			 RGBColor(255,0,0), RGBColor(255,255,255),
+			 Point
+			 (static_cast<const int>(posx - w / 2),
+			  get_inner_h() - space_at_bottom + 4),
+			 buf);
       posx -= sub;
    }
 
@@ -161,7 +170,12 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    sprintf(buf, "%i", max);
    int w, h;
    g_fh->get_size(UI_FONT_SMALL, buf, &w, &h, 0);
-   g_fh->draw_string(dst, UI_FONT_SMALL, RGBColor(120,255,0), RGBColor(255,255,255), get_inner_w()-space_at_right-w-2, spacing, buf);
+   g_fh->draw_string
+		(*dst,
+		 UI_FONT_SMALL,
+		 RGBColor(120,255,0), RGBColor(255,255,255),
+		 Point(get_inner_w() - space_at_right - w - 2, spacing),
+		 buf);
 
    // Now, plot the pixels
    sub = xline_length / ((float)time_in_ms[m_time] / (float)m_sample_rate);

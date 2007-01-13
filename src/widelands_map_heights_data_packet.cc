@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,20 +49,16 @@ throw (_wexception)
    FileRead fr;
    fr.Open( fs, "binary/heights");
 
-   // read packet version
-   int packet_version=fr.Unsigned16();
-
-   if(packet_version==CURRENT_PACKET_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       // Read all the heights
 		Map & map = egbase->map();
 		const Map::Index max_index = map.max_index();
 		for (Map::Index i = 0; i < max_index; ++i)
 			map[i].set_height(fr.Unsigned8());
-      return;
-   }
-   throw wexception("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n", packet_version);
-
-   assert(0); // never here
+	} else throw wexception
+		("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n",
+		 packet_version);
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -129,7 +129,7 @@ void BaseCommand::BaseCmdWrite(FileWrite* fw, Editor_Game_Base*, Widelands_Map_M
 
 void BaseCommand::BaseCmdRead(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)  {
    int version=fr->Unsigned16();
-   if(version==BASE_CMD_VERSION) {
+	if (version == BASE_CMD_VERSION) {
    // Read duetime
       duetime=fr->Unsigned32();
    } else

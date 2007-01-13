@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,7 +72,9 @@ public:
 
 	virtual void load_animations() = 0;
 	virtual int get_animation_nr_frames(uint anim) = 0;
-	virtual void get_animation_size(uint anim, uint time, int* w, int* h) = 0;
+	virtual void get_animation_size
+		(const uint anim, const uint time, uint & w, uint & h)
+		= 0;
 
 	virtual void screenshot(const char* fname) = 0;
 	virtual const char* get_maptexture_picture (uint id) = 0;

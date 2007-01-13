@@ -168,7 +168,7 @@ void Table<void *>::draw(RenderTarget * dst)
 	uint idx = m_scrollpos / lineheight;
    int y = 1 + idx*lineheight - m_scrollpos + m_columns[0].btn->get_h();
 
-   dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
+	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
       if (y >= get_h())
@@ -176,16 +176,19 @@ void Table<void *>::draw(RenderTarget * dst)
 
 		const Entry_Record & er = *m_entry_records[idx];
 
-      if (idx == m_selection) {
+		if (idx == m_selection) {
+			assert(2 <= get_eff_w());
          // dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
-         dst->brighten_rect(1, y, get_eff_w()-2, m_lineheight, -ms_darken_value);
+			dst->brighten_rect
+				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
+				 -ms_darken_value);
       }
 
       // First draw pictures
 		if (er.get_picid() != -1) {
 			uint w,h;
 			g_gr->get_picture_size(er.get_picid(), w, h);
-			dst->blit(1, y + (get_lineheight() - h) / 2, er.get_picid());
+			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.get_picid());
       }
 
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
@@ -209,12 +212,13 @@ void Table<void *>::draw(RenderTarget * dst)
 
          // Horizontal center the string
 			g_fh->draw_string
-				(dst,
+				(*dst,
 				 UI_FONT_SMALL,
 				 col,
 				 RGBColor(107, 87, 55),
-				 x,
-				 y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2,
+				 Point
+				 (x,
+				  y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
 				 er.get_string(i), m_align,
 				 -1);
 

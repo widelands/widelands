@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ void Flag::draw
 		{  8, -3 }
 	};
 
-	dst.drawanim
-		(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, get_owner());
+	dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
 
 	const uint item_filled = m_item_filled;
 	for (uint i = 0; i < item_filled; ++i) {// draw wares
@@ -50,7 +49,7 @@ void Flag::draw
 		} else
 			warepos.y -= 6 + (i - 8) * 3;
 		dst.drawanim
-			(warepos.x, warepos.y,
+			(warepos,
 			 m_items[i].item->get_ware_descr()->get_animation("idle"),
 			 0,
 			 get_owner());

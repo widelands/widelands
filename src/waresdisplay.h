@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,11 @@ public:
 
 protected:
 	virtual void draw(RenderTarget* dst);
-	virtual void draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock, bool);
+	virtual void draw_ware
+		(RenderTarget &, const Point,
+		 const uint id,
+		 const uint stock,
+		 const bool worker);
 
 private:
 	UI::Textarea*       m_curware;

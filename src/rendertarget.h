@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,15 +56,14 @@ public:
 	virtual int get_h() const = 0;
 
    virtual void draw_line(int x1, int y1, int x2, int y2, RGBColor color) = 0;
-	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr) = 0;
-	virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
-	virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
+	virtual void draw_rect(Rect r, const RGBColor clr) = 0;
+	virtual void fill_rect(Rect r, const RGBColor clr) = 0;
+	virtual void brighten_rect(Rect r, const int factor) = 0;
 	virtual void clear() = 0;
 
-	virtual void blit(int dstx, int dsty, uint picture) = 0;
-	virtual void blitrect(int dstx, int dsty, uint picture,
-	                      int srcx, int srcy, int w, int h) = 0;
-	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy) = 0;
+	virtual void blit(Point dst, const uint picture) = 0;
+	virtual void blitrect(Point dst, const uint picture, Rect src) = 0;
+	virtual void tile(Rect r, const uint picture, Point ofs) = 0;
 
 	virtual void rendermap
 		(const Editor_Game_Base &,
@@ -84,9 +83,19 @@ public:
 		 const uint                flags)
 		= 0;
 
-	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plr) = 0;
-	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,
-				const Player* plr, int srcx, int srcy, int w, int h) = 0;
+	virtual void drawanim
+		(Point dst,
+		 const uint animation,
+		 const uint time,
+		 const Player * const plr)
+		= 0;
+	virtual void drawanimrect
+		(const Point,
+		 uint animation,
+		 uint time,
+		 const Player * const plr,
+		 Rect)
+		= 0;
 };
 
 #endif /* RENDERTARGET_H */

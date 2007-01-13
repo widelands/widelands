@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,29 +171,36 @@ void Window::draw_border(RenderTarget* dst)
 		int pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
 		dst->blitrect //  top left corner
-			(0, 0,
-			 m_pic_top, hidden_width_left, 0,
-			 pos, TP_B_PIXMAP_THICKNESS);
+			(Point(0, 0),
+			 m_pic_top,
+			 Rect(Point(hidden_width_left, 0), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
+		compile_assert(0 <= HZ_B_CORNER_PIXMAP_LEN);
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 			dst->blitrect
-			(pos, 0,
-			 m_pic_top, HZ_B_CORNER_PIXMAP_LEN, 0,
-			 HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS);
+			(Point(pos, 0),
+			 m_pic_top,
+			 Rect
+			 (Point(HZ_B_CORNER_PIXMAP_LEN, 0),
+			  HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
+		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
 		dst->blitrect
-			(pos, 0,
-			 m_pic_top, HZ_B_TOTAL_PIXMAP_LEN - width, 0,
-			 width - hidden_width_right, TP_B_PIXMAP_THICKNESS);
+			(Point(pos, 0),
+			 m_pic_top,
+			 Rect
+			 (Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
+			  width - hidden_width_right, TP_B_PIXMAP_THICKNESS));
 	}
 
 	// draw the title if we have one
 	if (m_title.length()) g_fh->draw_string
-		(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR,
-		 get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2,
+		(*dst,
+		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+		 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
 		 m_title.c_str(), Align_Center);
 
 	if (not _small) { // Only draw this, if we are not minimized.
@@ -202,79 +209,97 @@ void Window::draw_border(RenderTarget* dst)
 
 		if (not _docked_left) {
 
+			compile_assert(0 <= VT_B_PIXMAP_THICKNESS);
 			dst->blitrect // left top thingy
-				(0, TP_B_PIXMAP_THICKNESS,
-				 m_pic_lborder, 0, 0,
-				 VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN);
+				(Point(0, TP_B_PIXMAP_THICKNESS),
+				 m_pic_lborder,
+				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  left bar
+			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst->blitrect
-				(0, pos,
-				 m_pic_lborder, 0, VT_B_THINGY_PIXMAP_LEN,
-				 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN);
+				(Point(0, pos),
+				 m_pic_lborder,
+				 Rect
+				 (Point(0, VT_B_THINGY_PIXMAP_LEN),
+				  VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
 
 			//  odd pixels of left bar and left bottom thingy
 			const int height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
+			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
 			dst->blitrect
-				(0, pos,
-				 m_pic_lborder, 0, VT_B_TOTAL_PIXMAP_LEN - height,
-				 VT_B_PIXMAP_THICKNESS, height);
+				(Point(0, pos),
+				 m_pic_lborder,
+				 Rect
+				 (Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
+				  VT_B_PIXMAP_THICKNESS, height));
 		}
 
 
 		dst->tile //  background
-			(_docked_left ? 0 : VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS,
-			 get_inner_w(), get_inner_h(),
-			 m_pic_background, 0, 0);
+			(Rect
+			 (Point
+			  (_docked_left ? 0 : VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS),
+			  get_inner_w(), get_inner_h()),
+			 m_pic_background, Point(0, 0));
 
 		if (not _docked_right) {
 			const int right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
 			dst->blitrect// right top thingy
-				(right_border_x, TP_B_PIXMAP_THICKNESS,
-				 m_pic_rborder, 0, 0,
-				 VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN);
+				(Point(right_border_x, TP_B_PIXMAP_THICKNESS),
+				 m_pic_rborder,
+				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  rigt bar
+			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
 			for(; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst->blitrect
-				(right_border_x, pos,
-				 m_pic_rborder, 0, VT_B_THINGY_PIXMAP_LEN,
-				 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN);
+				(Point(right_border_x, pos),
+				 m_pic_rborder,
+				 Rect
+				 (Point(0, VT_B_THINGY_PIXMAP_LEN),
+				  VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
 
 			// odd pixels of right bar and right bottom thingy
 			const int height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			dst->blitrect
-				(right_border_x, pos,
-				 m_pic_rborder, 0, VT_B_TOTAL_PIXMAP_LEN - height,
-				 VT_B_PIXMAP_THICKNESS, height);
+				(Point(right_border_x, pos),
+				 m_pic_rborder,
+				 Rect
+				 (Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
+				  VT_B_PIXMAP_THICKNESS, height));
 		}
 		if (not _docked_bottom) {
 			int pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
 			dst->blitrect //  bottom left corner
-				(0, get_h() - BT_B_PIXMAP_THICKNESS,
-				 m_pic_bottom, hidden_width_left, 0,
-				 pos, BT_B_PIXMAP_THICKNESS);
+				(Point(0, get_h() - BT_B_PIXMAP_THICKNESS),
+				 m_pic_bottom,
+				 Rect(Point(hidden_width_left, 0), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 				dst->blitrect
-				(pos, get_h() - BT_B_PIXMAP_THICKNESS,
-				 m_pic_bottom, HZ_B_CORNER_PIXMAP_LEN, 0,
-				 HZ_B_MIDDLE_PIXMAP_LEN, BT_B_PIXMAP_THICKNESS);
+				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
+				 m_pic_bottom,
+				 Rect
+				 (Point(HZ_B_CORNER_PIXMAP_LEN, 0),
+				  HZ_B_MIDDLE_PIXMAP_LEN, BT_B_PIXMAP_THICKNESS));
 
 			// odd pixels of bottom bar and bottom right corner
 			const int width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 			dst->blitrect
-				(pos, get_h() - BT_B_PIXMAP_THICKNESS,
-				 m_pic_bottom, HZ_B_TOTAL_PIXMAP_LEN - width, 0,
-				 width - hidden_width_right, BT_B_PIXMAP_THICKNESS);
+				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
+				 m_pic_bottom,
+				 Rect
+				 (Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
+				  width - hidden_width_right, BT_B_PIXMAP_THICKNESS));
 		}
 	}
 }

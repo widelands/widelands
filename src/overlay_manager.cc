@@ -50,8 +50,7 @@ unsigned char Overlay_Manager::get_overlays
 	while (it != overlay_map.end() and it->first == c and it->second.level <= 5)
 	{
 		overlays[num_ret].picid = it->second.picid;
-		overlays[num_ret].hotspot_x = it->second.hotspot_x;
-		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
 		++it;
 	}
@@ -65,8 +64,7 @@ unsigned char Overlay_Manager::get_overlays
 	}
 	while (it != overlay_map.end() and it->first == c) {
 		overlays[num_ret].picid = it->second.picid;
-		overlays[num_ret].hotspot_x = it->second.hotspot_x;
-		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
 		++it;
 	}
@@ -95,8 +93,7 @@ unsigned char Overlay_Manager::get_overlays
 		 num_ret < MAX_OVERLAYS_PER_TRIANGLE)
 	{
 		overlays[num_ret].picid = it->second.picid;
-		overlays[num_ret].hotspot_x = it->second.hotspot_x;
-		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		overlays[num_ret].hotspot = it->second.hotspot;
 		++num_ret;
 		++it;
 	}
@@ -179,7 +176,7 @@ void Overlay_Manager::register_overlay
 
 	overlay_map.insert
 		(std::pair<const Coords, Registered_Overlays>
-		 (c, Registered_Overlays(jobid, picid, hsx, hsy, level)));
+		 (c, Registered_Overlays(jobid, picid, Point(hsx, hsy), level)));
 
    // Now manually sort, so that they are ordered
    //  * first by c (done by std::multimap)
@@ -296,9 +293,7 @@ void Overlay_Manager::load_graphics() {
 	{
 		uint hotspot_x, hotspot_y;
 		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
-		hotspot_x /= 2; hotspot_y -= 1;
-		buildhelp_info->hotspot_x = hotspot_x;
-		buildhelp_info->hotspot_y = hotspot_y;
+		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y - 1);
 	}
 
 	const Overlay_Info * const buildhelp_infos_end =
@@ -309,9 +304,7 @@ void Overlay_Manager::load_graphics() {
 		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
 		uint hotspot_x, hotspot_y;
 		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
-		hotspot_x /= 2; hotspot_y /= 2;
-		buildhelp_info->hotspot_x = hotspot_x;
-		buildhelp_info->hotspot_y = hotspot_y;
+		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y / 2);
 	}
 
    m_are_graphics_loaded=true;

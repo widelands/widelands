@@ -3494,7 +3494,7 @@ void Worker::draw_inner
 (const Editor_Game_Base & game, RenderTarget & dst, const Point drawpos) const
 {
 	dst.drawanim
-		(drawpos.x, drawpos.y,
+		(drawpos,
 		 get_current_anim(),
 		 game.get_gametime() - get_animstart(),
 		 get_owner());
@@ -3502,7 +3502,7 @@ void Worker::draw_inner
 	const WareInstance * const carried_item = get_carried_item(&game);
 	if (carried_item)
 		dst.drawanim
-		(drawpos.x, drawpos.y - 15,
+		(drawpos - Point(0, 15),
 		 carried_item->get_ware_descr()->get_animation("idle"),
 		 0,
 		 get_owner());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,4 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 Draw the splash screen
 */
 void Fullscreen_Menu_Base::draw(RenderTarget* dst)
-{
-	dst->blit(0, 0, m_pic_background);
-}
+{dst->blit(Point(0, 0), m_pic_background);}

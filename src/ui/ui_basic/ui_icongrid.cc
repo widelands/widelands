@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,7 +136,9 @@ void Icon_Grid::draw(RenderTarget* dst)
 	// First of all, draw the highlight
 	if (m_highlight >= 0 && (m_clicked < 0 || m_clicked == m_highlight)) {
 		get_cell_position(m_highlight, &x, &y);
-		dst->brighten_rect(x, y, m_cell_width, m_cell_height, MOUSE_OVER_BRIGHT_FACTOR);
+		dst->brighten_rect
+			(Rect(Point(x, y), m_cell_width, m_cell_height),
+			 MOUSE_OVER_BRIGHT_FACTOR);
 		highlight = true;
 	}
 
@@ -151,7 +153,9 @@ void Icon_Grid::draw(RenderTarget* dst)
 
 		g_gr->get_picture_size(picid, w, h);
 
-		dst->blit(x + (m_cell_width-w)/2, y + (m_cell_height-h)/2, picid);
+		dst->blit
+			(Point(x + (m_cell_width - w) / 2, y + (m_cell_height - h) / 2),
+			 picid);
 
 		if (get_orientation() == Grid_Horizontal)
 		{
@@ -176,7 +180,8 @@ void Icon_Grid::draw(RenderTarget* dst)
 	{
 		if (m_selected >= 0) {
 			get_cell_position(m_selected, &x, &y);
-			dst->draw_rect(x, y, m_cell_width, m_cell_height, m_selectbox_color);
+			dst->draw_rect
+				(Rect(Point(x, y), m_cell_width, m_cell_height), m_selectbox_color);
 		}
 	}
 
@@ -185,7 +190,11 @@ void Icon_Grid::draw(RenderTarget* dst)
       g_fh->get_size(UI_FONT_SMALL,  m_items[m_highlight].descr.c_str(), &w, &h);
       if(w>get_inner_w())
          set_inner_size(w, get_inner_h());
-		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, 1, get_h() - m_font_height + 10, m_items[m_highlight].descr.c_str());
+		g_fh->draw_string
+			(*dst,
+			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+			 Point(1, get_h() - m_font_height + 10),
+			 m_items[m_highlight].descr.c_str());
    }
 }
 

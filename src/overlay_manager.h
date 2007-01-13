@@ -68,11 +68,10 @@ struct Overlay_Manager {
 		{return id == other.id;}
 		uint id;
 	};
-      struct Overlay_Info {
-         int picid;
-         int hotspot_x;
-         int hotspot_y;
-      };
+	struct Overlay_Info {
+		uint picid;
+		Point hotspot;
+	};
 
       Overlay_Manager();
 
@@ -143,19 +142,16 @@ struct Overlay_Manager {
 		Registered_Overlays
 			(const Job_Id Jobid,
 			 const int Picid,
-			 const int Hotspot_x,
-			 const int Hotspot_y,
+			 const Point  Hotspot,
 			 const int Level)
 			:
 			picid(Picid),
-			hotspot_x(Hotspot_x),
-			hotspot_y(Hotspot_y),
+			hotspot(Hotspot),
 			level(Level)
 		{jobids.insert(Jobid);}
 		std::set<Job_Id> jobids;
 		int picid;
-		int hotspot_x;
-		int hotspot_y;
+		Point            hotspot;
 		int level;
 	};
 

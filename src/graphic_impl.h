@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -144,7 +144,8 @@ class Surface {
 	inline void set_pixel(uint x, uint y, const Uint32 clr) {
          x+= m_offsx;
          y+= m_offsy;
-         assert( x < get_w() && y < get_h() );
+		assert(x < get_w());
+		assert(y < get_h());
          assert( m_surface );
          if( SDL_MUSTLOCK( m_surface ))
             SDL_LockSurface( m_surface );
@@ -164,9 +165,9 @@ class Surface {
 	}
 
       void clear();
-      void draw_rect(Rect rc, RGBColor clr);
-      void fill_rect(Rect rc, RGBColor clr);
-      void brighten_rect(Rect rc, int factor);
+	void draw_rect(const Rect, const RGBColor);
+	void fill_rect(const Rect, const RGBColor);
+	void brighten_rect(const Rect, const int factor);
 
       void blit(Point dst, Surface* src, Rect srcrc);
       void fast_blit( Surface* src );
@@ -292,17 +293,14 @@ public:
 	virtual int get_h() const;
 
    virtual void draw_line(int x1, int y1, int x2, int y2, RGBColor color);
-	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr);
-	virtual void fill_rect(int x, int y, int w, int h, RGBColor clr);
-	virtual void brighten_rect(int x, int y, int w, int h, int factor);
+	virtual void draw_rect(const Rect, const RGBColor);
+	virtual void fill_rect(const Rect, const RGBColor);
+	virtual void brighten_rect(const Rect, const int factor);
 	virtual void clear();
 
-	void doblit(Point dst, Surface* src, Rect srcrc);
-
-	virtual void blit(int dstx, int dsty, uint picture);
-	virtual void blitrect(int dstx, int dsty, uint picture,
-	                      int srcx, int srcy, int w, int h);
-	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy);
+	virtual void blit(const Point, uint picture);
+	virtual void blitrect(const Point dst, uint picture, const Rect src);
+	virtual void tile(Rect r, uint picture, Point ofs);
 
 	virtual void rendermap
 		(const Editor_Game_Base &,
@@ -331,9 +329,20 @@ public:
 		(const Editor_Game_Base & egbase, const Point viewpoint, const uint flags)
 	{m_surface->draw_minimap(egbase, m_rect, viewpoint - m_offset, flags);}
 
-	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plrclrs = 0);
-	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,
-									  const Player* plrclrs, int srcx, int srcy, int w, int h);
+	virtual void drawanim
+		(Point dst,
+		 const uint animation,
+		 const uint time,
+		 const Player * const plrclrs = 0);
+	virtual void drawanimrect
+		(const Point dst,
+		 const uint animation,
+		 const uint time,
+		 const Player * const plrclrs,
+		 Rect);
+private:
+	bool clip(Rect &) const throw ();
+	void doblit(Point, Surface * const, Rect);
 };
 
 
@@ -384,7 +393,8 @@ public:
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
 	virtual int get_animation_nr_frames(uint anim);
-	virtual void get_animation_size(uint anim, uint time, int* w, int* h);
+	virtual void get_animation_size
+		(const uint anim, const uint time, uint & w, uint & h);
 
 	// Misc functions
 	virtual void screenshot(const char* fname);
