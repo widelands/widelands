@@ -17,8 +17,8 @@ def write_configh_header():
 ################################################################################
 
 def write_configh_footer(config_h_file, install_prefix, bindir, datadir):
-	config_h_file.write("#define INSTALL_PREFIX \""+install_prefix+"\"\n\n")
-	config_h_file.write("#define INSTALL_BINDIR \""+bindir+"\"\n\n")
+	config_h_file.write("#define INSTALL_PREFIX \""+install_prefix+"\"\n")
+	config_h_file.write("#define INSTALL_BINDIR \""+bindir+"\"\n")
 	config_h_file.write("#define INSTALL_DATADIR \""+datadir+"\"\n\n")
 
 	config_h_file.write("\n#endif\n")
@@ -199,7 +199,7 @@ def do_configure(config_h_file, conf, env):
 	if not conf.CheckFunc('getenv'):
 		print 'Your system does not support getenv(). Tilde epansion in filenames will not work.'
 	else:
-		config_h_file.write("#define HAS_GETENV\n\n");
+		config_h_file.write("#define HAS_GETENV\n");
 
 	if not conf.CheckSDLConfig(env):
 		print 'Could not find sdl-config! Is SDL installed?'
@@ -211,7 +211,7 @@ def do_configure(config_h_file, conf, env):
 	else:
 		env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
 
-	#disabled until somebody(=me) finds time and courage to actually work on this #fweber
+	#disabled until somebody(==me==fweber) finds time and courage to actually work on this #fweber
 	#if not conf.CheckParaguiConfig(env):
 	#	print 'Could not find paragui. That\'s no problem unless you\'re a developer working on this.'
 	#	#print 'Could not find paragui-config! Is paragui installed?'
@@ -253,11 +253,20 @@ def do_configure(config_h_file, conf, env):
 			""", '.c'):
 		config_h_file.write("//second line is needed by SDL_mixer\n");
 		config_h_file.write("#define NEW_SDL_MIXER 1\n");
-		config_h_file.write("#define USE_RWOPS\n\n");
+		config_h_file.write("#define USE_RWOPS\n");
 		print 'SDL_mixer supports Mix_LoadMUS_RW(). Good'
 	else:
-		config_h_file.write("#define NEW_SDL_MIXER 0\n\n");
+		config_h_file.write("#define NEW_SDL_MIXER 0\n");
 		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
+
+	if conf.CheckLib(library='efence', autoadd=1):
+		if env.efence:
+			env.Append(LINKFLAGS='-lefence')
+			config_h_file.write("#define USE_EFENCE\n\n");
+	else:
+		if env.efence:
+			print 'Could not find efence, so doing a debug-efence build is impossible !'
+			env.Exit(1)
 
 	conf.CheckCompilerArgument('-fstack-protector-all', env)
 	conf.CheckCompilerArgument('-pipe', env)

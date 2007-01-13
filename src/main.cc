@@ -17,10 +17,17 @@
  *
  */
 
+//config.h must be included first of all!
+#include "config.h"
+
 #include <iostream>
 #include <stdexcept>
 #include "wexception.h"
 #include "wlapplication.h"
+
+#ifdef USE_EFENCE
+#include <efencepp.h>
+#endif
 
 using std::cerr;
 using std::endl;

@@ -100,7 +100,7 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
-	opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / profile', 'debug')
+	opts.Add('build', 'debug-no-parachute / debug-slow / debug-efence / debug(default) / release / profile', 'debug')
 	opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
@@ -185,6 +185,7 @@ DEBUG=0
 PROFILE=0
 OPTIMIZE=0
 SDL_PARACHUTE=1
+EFENCE=0
 if env['build']=='debug-no-parachute':
 	DEBUG=1
 	OPTIMIZE=1
@@ -196,6 +197,11 @@ if env['build']=='debug-slow':
 if env['build']=='debug':
 	DEBUG=1
 	OPTIMIZE=1
+
+if env['build']=='debug-efence':
+	DEBUG=1
+	OPTIMIZE=1
+	EFENCE=1
 
 if env['build']=='profile':
 	DEBUG=1
@@ -231,6 +237,11 @@ if OPTIMIZE:
 	env.Append(CCFLAGS='-O3')
 else:
 	env.Append(CCFLAGS='-O0')
+
+if EFENCE:
+	env.efence=1
+else:
+	env.efence=0
 
 if not SDL_PARACHUTE:
 	env.Append(CCFLAGS='-DNOPARACHUTE')
