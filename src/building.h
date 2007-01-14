@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,8 +66,9 @@ public:
 	virtual uint get_ui_anim() const throw () {return get_animation("idle");}
 
 	inline bool get_stopable() const { return m_stopable;}
-	inline std::string get_stop_icon() const { return m_stop_icon;}
-	inline std::string get_continue_icon() const { return m_continue_icon;}
+	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
+	const std::string & get_continue_icon() const throw ()
+	{return m_continue_icon;}
    inline const std::vector<char*>* get_enhances_to() const { return &m_enhances_to; }
 
 	Building* create(Editor_Game_Base* g, Player* owner, Coords pos,

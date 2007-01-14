@@ -625,18 +625,18 @@ void Building_Window::setup_capsbuttons()
 	x = 0;
 
 	if (m_capscache & (1 << Building::PCap_Stopable)) {
-		std::string icon;
-		if (m_building->get_stop())
-			icon = m_building->get_continue_icon();
-		else
-			icon = m_building->get_stop_icon();
+		const bool stopped = m_building->get_stop();
 		new UI::Button<Building_Window>
 			(m_capsbuttons,
 			 x, 0, 34, 34,
 			 4,
-			 g_gr->get_picture(PicMod_Game, icon.c_str()),
+			 g_gr->get_picture
+			 (PicMod_Game,
+			  (stopped ?
+			   m_building->get_continue_icon() : m_building->get_stop_icon())
+			  .c_str()),
 			 &Building_Window::act_start_stop, this,
-			 _("Stop"));
+			 stopped ? _("Continue") : _("Stop"));
 		x += 34;
 	}
 
