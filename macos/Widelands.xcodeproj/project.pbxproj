@@ -285,8 +285,6 @@
 		BF22DE8A0A5FB72B00D0292B /* mapviewpixelconstants.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC7C0A5FB72B00D0292B /* mapviewpixelconstants.h */; };
 		BF22DE8B0A5FB72B00D0292B /* mapviewpixelfunctions.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC7D0A5FB72B00D0292B /* mapviewpixelfunctions.cc */; };
 		BF22DE8C0A5FB72B00D0292B /* mapviewpixelfunctions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC7E0A5FB72B00D0292B /* mapviewpixelfunctions.h */; };
-		BF22DE8D0A5FB72B00D0292B /* md5.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC7F0A5FB72B00D0292B /* md5.cc */; };
-		BF22DE8E0A5FB72B00D0292B /* md5.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC800A5FB72B00D0292B /* md5.h */; };
 		BF22DE8F0A5FB72B00D0292B /* militarysite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC810A5FB72B00D0292B /* militarysite.cc */; };
 		BF22DE900A5FB72B00D0292B /* militarysite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC820A5FB72B00D0292B /* militarysite.h */; };
 		BF22DE910A5FB72B00D0292B /* minimap.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC830A5FB72B00D0292B /* minimap.cc */; };
@@ -700,7 +698,6 @@
 				BF22DE890A5FB72B00D0292B /* mapview.h in Copy Frameworks into .app bundle */,
 				BF22DE8A0A5FB72B00D0292B /* mapviewpixelconstants.h in Copy Frameworks into .app bundle */,
 				BF22DE8C0A5FB72B00D0292B /* mapviewpixelfunctions.h in Copy Frameworks into .app bundle */,
-				BF22DE8E0A5FB72B00D0292B /* md5.h in Copy Frameworks into .app bundle */,
 				BF22DE900A5FB72B00D0292B /* militarysite.h in Copy Frameworks into .app bundle */,
 				BF22DE920A5FB72B00D0292B /* minimap.h in Copy Frameworks into .app bundle */,
 				BF22DE940A5FB72B00D0292B /* network.h in Copy Frameworks into .app bundle */,
@@ -1116,8 +1113,6 @@
 		BF22DC7C0A5FB72B00D0292B /* mapviewpixelconstants.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mapviewpixelconstants.h; sourceTree = "<group>"; };
 		BF22DC7D0A5FB72B00D0292B /* mapviewpixelfunctions.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = mapviewpixelfunctions.cc; sourceTree = "<group>"; };
 		BF22DC7E0A5FB72B00D0292B /* mapviewpixelfunctions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mapviewpixelfunctions.h; sourceTree = "<group>"; };
-		BF22DC7F0A5FB72B00D0292B /* md5.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cc; sourceTree = "<group>"; };
-		BF22DC800A5FB72B00D0292B /* md5.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		BF22DC810A5FB72B00D0292B /* militarysite.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = militarysite.cc; sourceTree = "<group>"; };
 		BF22DC820A5FB72B00D0292B /* militarysite.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = militarysite.h; sourceTree = "<group>"; };
 		BF22DC830A5FB72B00D0292B /* minimap.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = minimap.cc; sourceTree = "<group>"; };
@@ -1670,8 +1665,6 @@
 				BF22DC7C0A5FB72B00D0292B /* mapviewpixelconstants.h */,
 				BF22DC7D0A5FB72B00D0292B /* mapviewpixelfunctions.cc */,
 				BF22DC7E0A5FB72B00D0292B /* mapviewpixelfunctions.h */,
-				BF22DC7F0A5FB72B00D0292B /* md5.cc */,
-				BF22DC800A5FB72B00D0292B /* md5.h */,
 				BF22DC810A5FB72B00D0292B /* militarysite.cc */,
 				BF22DC820A5FB72B00D0292B /* militarysite.h */,
 				BF22DC830A5FB72B00D0292B /* minimap.cc */,
@@ -2296,7 +2289,6 @@
 				BF22DE860A5FB72B00D0292B /* map_variable_manager.cc in Sources */,
 				BF22DE880A5FB72B00D0292B /* mapview.cc in Sources */,
 				BF22DE8B0A5FB72B00D0292B /* mapviewpixelfunctions.cc in Sources */,
-				BF22DE8D0A5FB72B00D0292B /* md5.cc in Sources */,
 				BF22DE8F0A5FB72B00D0292B /* militarysite.cc in Sources */,
 				BF22DE910A5FB72B00D0292B /* minimap.cc in Sources */,
 				BF22DE930A5FB72B00D0292B /* network.cc in Sources */,
