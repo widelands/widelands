@@ -26,6 +26,7 @@
 #include <vector>
 #include <png.h>
 #include "animation.h"
+#include "animation_gfx.h"
 #include "constants.h"
 #include "geometry.h"
 #include "graphic.h"
@@ -34,42 +35,6 @@
 #include "rgbcolor.h"
 
 SDL_Surface* LoadImage(const char * const filename);
-
-/*
-class AnimationGfx
-
-The graphics belonging to an animation
-*/
-class AnimationGfx {
-private:
-	std::vector<Surface*>* m_plrframes;
-   EncodeData  m_encodedata;
-   Point       m_hotspot;
-
-public:
-	AnimationGfx(const AnimationData* data);
-	~AnimationGfx();
-
-   inline const Point& get_hotspot( void ) { return m_hotspot; }
-	inline int get_nrframes() const { assert((*m_plrframes)[0]); return m_plrframes[0].size(); }
-	inline Surface* get_frame(int i, uchar plyr, const Player* player)
-	{
-      assert(i>=0 && i<get_nrframes() && plyr <= MAX_PLAYERS);
-      if( !m_encodedata.hasplrclrs )
-         return m_plrframes[0][i];
-
-      assert( player );
-
-      // Encode for this player
-      if( !m_plrframes[plyr].size() )
-         encode( plyr, player->get_playercolor() );
-      return m_plrframes[plyr][i];
-   }
-
-private:
-	void encode( uchar plyr, const RGBColor* );
-};
-
 
 /*
 class Surface
@@ -391,8 +356,8 @@ public:
 
 	// Animations
 	virtual void load_animations();
-	AnimationGfx* get_animation(uint anim);
-	virtual int get_animation_nr_frames(uint anim);
+	AnimationGfx* get_animation(const uint anim) const;
+	virtual AnimationGfx::Index nr_frames(const uint anim) const;
 	virtual void get_animation_size
 		(const uint anim, const uint time, uint & w, uint & h);
 

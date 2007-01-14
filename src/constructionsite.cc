@@ -557,7 +557,8 @@ void ConstructionSite::draw
  const FCoords coords,
  const Point pos)
 {
-	const int gametime = game.get_gametime();
+	assert(0 <= game.get_gametime());
+	const uint gametime = game.get_gametime();
 	uint tanim = gametime - m_animstart;
 
 	if (coords != m_position)
@@ -567,27 +568,30 @@ void ConstructionSite::draw
 	dst.drawanim(pos, m_anim, tanim, get_owner());
 
 	// Draw the partially finished building
-	int totaltime;
-	int completedtime;
-	int lines;
-	uint anim;
 
-	totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
-	completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+	compile_assert(0 <= CONSTRUCTIONSITE_STEP_TIME);
+	const uint totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	uint completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
 
-	if (m_working)
+	if (m_working) {
+		assert
+			(m_work_steptime
+			 <=
+			 completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
+	}
 
-	anim = get_building()->get_animation("build");
-   int nr_pics=g_gr->get_animation_nr_frames(anim);
-   uint anim_pic = completedtime * nr_pics / totaltime;
+	const uint anim = get_building()->get_animation("build");
+	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
+   uint anim_pic = completedtime * nr_frames / totaltime;
 	// Redefine tanim
    tanim = anim_pic*FRAME_LENGTH;
 
 	uint w, h;
    g_gr->get_animation_size(anim, tanim, w, h);
 
-	lines = h * completedtime * nr_pics / totaltime;
+	uint lines = h * completedtime * nr_frames / totaltime;
+	assert(h * anim_pic <= lines);
    lines -= h*anim_pic; // This won't work if pictures have various sizes
 
    // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
@@ -598,15 +602,15 @@ void ConstructionSite::draw
 	else if (m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead
-		const int a = m_prev_building->get_animation("build");
+		const uint a = m_prev_building->get_animation("build");
 		dst.drawanim
 			(pos,
 			 a,
-			 (g_gr->get_animation_nr_frames(a) - 1) * FRAME_LENGTH,
+			 (g_gr->nr_frames(a) - 1) * FRAME_LENGTH,
 			 get_owner());
    }
 
-	assert(h - lines >= 0);
+	assert(lines <= h);
 	dst.drawanimrect
 		(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
 

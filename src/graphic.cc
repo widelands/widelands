@@ -860,7 +860,7 @@ void RenderTargetImpl::drawanim
 
 	// Get the frame and its data
 	Surface* frame;
-	const uint framenumber = (time / data->frametime) % gfx->get_nrframes();
+	const uint framenumber = (time / data->frametime) % gfx->nr_frames();
 	frame = gfx->get_frame
 		(framenumber, player ? player->get_player_number() : 0, player);
 	dst -= gfx->get_hotspot();
@@ -898,7 +898,7 @@ void RenderTargetImpl::drawanimrect
 
 	// Get the frame and its data
 	Surface * const frame = gfx->get_frame
-		((time / data->frametime) % gfx->get_nrframes(),
+		((time / data->frametime) % gfx->nr_frames(),
 		 player ? player->get_player_number() : 0,
 		 player);
 
@@ -1448,8 +1448,7 @@ GraphicImpl::get_animation
 Retrieve the animation graphics
 ===============
 */
-AnimationGfx* GraphicImpl::get_animation(uint anim)
-{
+AnimationGfx* GraphicImpl::get_animation(const uint anim) const {
 	if (!anim || anim > m_animations.size())
 		return 0;
 
@@ -1459,10 +1458,8 @@ AnimationGfx* GraphicImpl::get_animation(uint anim)
 /*
  * Return the number of frames in this animation
  */
-int GraphicImpl::get_animation_nr_frames(uint anim) {
-   AnimationGfx* gfx=get_animation(anim);
-   return gfx->get_nrframes();
-}
+AnimationGfx::Index GraphicImpl::nr_frames(const uint anim) const
+{return get_animation(anim)->nr_frames();}
 
 /*
 ===============
@@ -1485,8 +1482,8 @@ void GraphicImpl::get_animation_size
 	}
 	else
 	{
-		// Get the frame and its data
-		frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes(), 0, 0); // Ignore playerclrs
+		// Get the frame and its data. Ignore playerclrs.
+		frame = gfx->get_frame((time / data->frametime) % gfx->nr_frames(), 0, 0);
 
 		w = frame->get_w();
 		h = frame->get_h();

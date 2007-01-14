@@ -20,6 +20,7 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
+#include "animation_gfx.h"
 #include "types.h"
 
 class RenderTarget;
@@ -71,7 +72,7 @@ public:
    virtual void reset_texture_animation_reminder( void ) = 0;
 
 	virtual void load_animations() = 0;
-	virtual int get_animation_nr_frames(uint anim) = 0;
+	virtual AnimationGfx::Index nr_frames(const uint anim) const = 0;
 	virtual void get_animation_size
 		(const uint anim, const uint time, uint & w, uint & h)
 		= 0;
