@@ -334,20 +334,19 @@ void FieldActionWindow::init()
 
 	// Move the window away from the current mouse position, i.e.
 	// where the field is, to allow better view
-	int mousex = get_mouse_x();
-	int mousey = get_mouse_y();
-
-	if (mousex >= 0 && mousex < get_w() &&
-	    mousey >= 0 && mousey < get_h()) {
-		if (mousey < get_h()/2)
-			set_pos(get_x(), get_y()+get_h());
-		else
-			set_pos(get_x(), get_y()-get_h());
-	}
+	const Point mouse = get_mouse_position();
+	if
+		(0 <= mouse.x  and mouse.x < get_w()
+		 and
+		 0 <= mouse.y and mouse.y < get_h())
+		set_pos
+		(Point(get_x(), get_y())
+		 +
+		 Point(0, (mouse.y < get_h() / 2 ? 1 : -1) * get_h()));
 
 	// Now force the mouse onto the first button
 	// TODO: should be on first tab button if we're building
-	set_mouse_pos(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17);
+	set_mouse_pos(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
 }
 
 

@@ -43,10 +43,6 @@ Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* parent, U
 UniqueWindow(parent,registry,400,270,_("Load Game")) {
    m_parent=parent;
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Load Game"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    int spacing=5;
    int offsx=spacing;
    int offsy=30;

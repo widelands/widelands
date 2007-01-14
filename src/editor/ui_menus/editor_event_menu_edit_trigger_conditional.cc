@@ -42,10 +42,6 @@ m_given_cond(cond),
 m_event_chain(chain)
 {
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Edit Trigger Conditional Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    const int offsx=5;
    const int offsy=25;
    const int spacing=5;

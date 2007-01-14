@@ -116,7 +116,7 @@ uint Tab_Panel::add(uint picid, Panel* panel, const std::string & tooltip_text)
 	m_tabs.push_back(t);
 	id = m_tabs.size() - 1;
 
-	panel->set_pos(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT);
+	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
 	panel->set_visible(id == m_active);
 
 	return id;

@@ -1019,7 +1019,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 	// Add caps buttons
    posx = 0;
    UI::Panel* caps = create_capsbuttons(this);
-   caps->set_pos(spacing, posy);
+	caps->set_pos(Point(spacing, posy));
    if( caps->get_h() )
       posy += caps->get_h() + spacing;
 
@@ -1125,14 +1125,16 @@ class ProductionSite_Window_ListWorkerWindow : public UI::Window{
  * Constructor
  */
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)
-	: UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str()) {
+:
+UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
+{
    m_ps=ps;
    m_ps_location=ps->get_position();
    m_parent=parent;
 
    // Caption
    UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Worker Listing"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
+	tt->set_pos(Point((get_inner_w() - tt->get_w()) / 2, 5));
 
    int spacing=5;
    int offsx=spacing;

@@ -402,10 +402,6 @@ m_parent(&parent)
 
    m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Ware Statistics"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
 
    // Buttons
    int button_size = ( get_inner_w()-(spacing*5) ) / 4;

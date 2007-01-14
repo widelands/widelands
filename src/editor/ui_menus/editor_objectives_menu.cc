@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -172,10 +172,6 @@ UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu")),
 m_parent(parent),
 m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 {
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("Objectives Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
 	m_table.add_column(_("Name"),    270);
 	m_table.add_column(_("Optional"), 70);

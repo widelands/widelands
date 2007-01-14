@@ -104,7 +104,7 @@ void Window::set_title(const char *text)
 Move the window so that it is under the mouse cursor.
 */
 void Window::move_to_mouse() {
-	set_pos(get_mouse_x() - get_w() / 2, get_mouse_y() - get_h() / 2);
+	set_pos(get_mouse_position() - Point(get_w() / 2, get_h() / 2));
 	move_inside_parent();
 }
 
@@ -136,7 +136,7 @@ void Window::move_inside_parent() {
 		if      (_docked_left)   px = 0;
 		else if (_docked_right)  px = parent->get_inner_w() - get_w();
 		if      (_docked_bottom) py = parent->get_inner_h() - get_h();
-		set_pos(px, py);
+		set_pos(Point(px, py));
 	}
 }
 
@@ -150,7 +150,10 @@ void Window::center_to_parent()
 
 	assert(parent);
 
-	set_pos((parent->get_inner_w() - get_w()) / 2, (parent->get_inner_h() - get_h()) / 2);
+	set_pos
+		(Point
+		 ((parent->get_inner_w() - get_w()) / 2,
+		  (parent->get_inner_h() - get_h()) / 2));
 }
 
 
@@ -353,7 +356,7 @@ void Window::minimize(bool t) {
    } else {
       _oldh=get_inner_h();
       set_size(get_w(), TP_B_PIXMAP_THICKNESS);
-      set_pos(get_x(),get_y()); // If on border, this feels more natural
+		set_pos(Point(get_x(),get_y())); // If on border, this feels more natural
       _small=true;
    }
 }
@@ -551,7 +554,7 @@ void Window::handle_mousemove(int mx, int my, int, int) {
 				}
 			}
 		}
-		set_pos(new_left, new_top);
+		set_pos(Point(new_left, new_top));
 	}
 }
 };

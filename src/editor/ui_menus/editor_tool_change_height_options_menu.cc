@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,10 +62,10 @@ Editor_Tool_Options_Menu
 
    set_inner_size(135, 135);
    UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Height Tool Options"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
 
    ta=new UI::Textarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
    posy+=spacing+width;
 
 	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
@@ -83,11 +83,12 @@ Editor_Tool_Options_Menu
 		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 1);
 
 	m_increase=new UI::Textarea(this, 0, 0, "5", Align_Left);
-   m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
+	m_increase->set_pos
+		(Point((get_inner_w() - m_increase->get_w()) / 2, posy + 5));
    posy+=width+spacing+spacing;
 
    ta=new UI::Textarea(this, 0, 0, _("Set Value"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
    posy+=width+spacing;
 	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
 		(this,
@@ -102,7 +103,7 @@ Editor_Tool_Options_Menu
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 3);
    m_set=new UI::Textarea(this, 0, 0, "5", Align_Left);
-   m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
+	m_set->set_pos(Point((get_inner_w() - m_set->get_w()) / 2, posy + 5));
    posy+=width+spacing;
 
    update();

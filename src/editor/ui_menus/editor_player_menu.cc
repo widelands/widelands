@@ -77,7 +77,7 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
 
 	UI::Textarea * ta =
 		new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
    posy+=spacing+width;
 
 	new UI::IDButton<Editor_Player_Menu, const Sint8>
@@ -95,7 +95,8 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
 		 &Editor_Player_Menu::clicked_up_down, this, -1);
 
    m_nr_of_players_ta=new UI::Textarea(this, 0, 0, "5", Align_Left);
-   m_nr_of_players_ta->set_pos((get_inner_w()-m_nr_of_players_ta->get_w())/2, posy+5);
+   m_nr_of_players_ta->set_pos
+		(Point((get_inner_w() - m_nr_of_players_ta->get_w()) / 2, posy + 5));
    posy+=width+spacing+spacing;
 
    m_posy=posy;

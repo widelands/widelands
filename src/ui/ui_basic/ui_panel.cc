@@ -158,9 +158,7 @@ int Panel::run()
 
 			forefather->do_draw(rt);
 
-			rt->blit
-				(Point(app->get_mouse_x(), app->get_mouse_y()) - Point(3, 7),
-				 s_default_cursor);
+			rt->blit(app->get_mouse_position() - Point(3, 7), s_default_cursor);
 
 			if (Panel *lowest = _mousein)
 			{
@@ -237,12 +235,11 @@ void Panel::set_size(const uint nw, const uint nh)
 /**
  * Move the panel. Panel's position is relative to the parent.
  */
-void Panel::set_pos(const int nx, const int ny)
-{
+void Panel::set_pos(const Point n) {
 	bool nd = _needdraw;
 	update(0, 0, _w, _h);
-	_x = nx;
-	_y = ny;
+	_x = n.x;
+	_y = n.y;
 	update(0, 0, _w, _h);
 	_needdraw = nd;
 }
@@ -267,7 +264,7 @@ void Panel::set_inner_size(uint nw, uint nh)
 void Panel::fit_inner(Panel* inner)
 {
 	set_inner_size(inner->get_w(), inner->get_h());
-	inner->set_pos(0, 0);
+	inner->set_pos(Point(0, 0));
 }
 
 
@@ -438,42 +435,32 @@ void Panel::think()
 /**
  * Get mouse position relative to this panel
 */
-int Panel::get_mouse_x()
-{
-	if (!_parent)
-		return WLApplication::get()->get_mouse_x() - get_x()-get_lborder();
-	else
-		return _parent->get_mouse_x() - get_x()-get_lborder();
-}
-
-int Panel::get_mouse_y()
-{
-	if (!_parent)
-		return WLApplication::get()->get_mouse_y() - get_y()-get_tborder();
-	else
-		return _parent->get_mouse_y() - get_y()-get_tborder();
+Point Panel::get_mouse_position() const throw () {
+	return
+		(_parent ?
+		 _parent             ->get_mouse_position()
+		 :
+		 WLApplication::get()->get_mouse_position())
+		-
+		Point(get_x() + get_lborder(), get_y() + get_tborder());
 }
 
 
 /**
  * Set mouse position relative to this panel
 */
-void Panel::set_mouse_pos(int x, int y)
-{
-	if (!_parent)
-		WLApplication::get()->set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
-	else
-		_parent->set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
+void Panel::set_mouse_pos(const Point p) {
+	const Point relative_p =
+		p + Point(get_x() + get_lborder(), get_y() + get_tborder());
+	if (_parent) _parent     ->set_mouse_pos(relative_p);
+	else WLApplication::get()->set_mouse_pos(relative_p);
 }
 
 
 /*
  * Center the mouse on this panel.
 */
-void Panel::center_mouse()
-{
-	set_mouse_pos(get_w() / 2, get_h() / 2);
-}
+void Panel::center_mouse() {set_mouse_pos(Point(get_w() / 2, get_h() / 2));}
 
 
 /**
@@ -909,26 +896,28 @@ void Panel::set_tooltip(const char * const text) {
  */
 void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)
 {
-	int tooltipX, tooltipY, tip_width, tip_height;
-
-	tooltipX = WLApplication::get()->get_mouse_x() + 20;
-	tooltipY = WLApplication::get()->get_mouse_y() + 25;
-
+	int tip_width, tip_height;
 	g_fh->get_size(UI_FONT_TOOLTIP, lowest->tooltip(), &tip_width, &tip_height, 0);
 	tip_width += 4;
 	tip_height += 4;
+	assert(0 <= tip_width);
+	assert(0 <= tip_height);
+	const WLApplication & wlapplication = *WLApplication::get();
+	Rect r
+		(wlapplication.get_mouse_position() + Point(2, 32),
+		 tip_width, tip_height);
+	const Point tooltip_bottom_left = r.bottom_left();
+	const Point screen_botton_left(g_gr->get_xres(), g_gr->get_yres());
+	if (screen_botton_left.x < tooltip_bottom_left.x) r.x -=  4 + r.w;
+	if (screen_botton_left.y < tooltip_bottom_left.y) r.y -= 35 + r.h;
 
-	dst->fill_rect
-		(Rect(Point(tooltipX - 2, tooltipY - 2), tip_width, tip_height),
-		 RGBColor(230,200,50));
-	dst->draw_rect
-		 (Rect(Point(tooltipX - 2, tooltipY - 2), tip_width, tip_height),
-		  RGBColor(0,0,0));
+	dst->fill_rect(r, RGBColor(230, 200, 50));
+	dst->draw_rect(r, RGBColor(0, 0, 0));
 	g_fh->draw_string
 		(*dst,
 		 UI_FONT_TOOLTIP,
 		 UI_FONT_TOOLTIP_CLR,
-		 Point(tooltipX, tooltipY),
+		 r + Point(2, 2),
 		 lowest->tooltip(),
 		 Align_Left);
 }

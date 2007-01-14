@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,10 +65,6 @@ m_parent(&parent)
    uint spacing = 5;
    uint posx = spacing;
    uint posy = offsy;
-
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("General Statistics"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // Plotter
    m_plot = new WUIPlot_Area(this, spacing, offsy+spacing, get_inner_w()-2*spacing, PLOT_HEIGHT);

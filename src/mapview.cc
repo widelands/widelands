@@ -55,25 +55,20 @@ Moves the mouse cursor so that it is directly above the given field
 */
 void Map_View::warp_mouse_to_field(Coords c)
 {
-	int x, y;
 	const Map & map = intbase().egbase().map();
-	MapviewPixelFunctions::get_save_pix(map, c, x, y);
-	x -= m_viewpoint.x;
-	y -= m_viewpoint.y;
+	Point p;
+	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
+	p -= m_viewpoint;
 
-	if(x>=get_w() || y>=get_h()) {
-      // The user has scrolled the field outside
-      // the viewable area, he most surely doesn't
-      // want to jump there
-      return;
-   }
+	//  If the user has scrolled the field outside the viewable area, he most
+	//  surely doesn't want to jump there.
+	if (p.x < get_w() and p.y < get_h()) {
 
-	if (x <= 0)
-	{warp_mouse_to_field(Coords(c.x + map.get_width (), c.y)); return;}
-	if (y <= 0)
-	{warp_mouse_to_field(Coords(c.x, c.y + map.get_height())); return;}
-
-   set_mouse_pos(x, y);
+		if (p.x <= 0) warp_mouse_to_field(Coords(c.x + map.get_width (), c.y));
+		else if (p.y <= 0)
+			warp_mouse_to_field(Coords(c.x, c.y + map.get_height()));
+		else set_mouse_pos(p);
+	}
 }
 
 

@@ -216,11 +216,11 @@ WLApplication::WLApplication(const int argc, const char **argv):
 		m_input_grab          (false),
 		m_mouse_swapped       (false),
 		m_mouse_speed         (0.0),
-		m_mouse_x             (0),     m_mouse_y             (0),
+		m_mouse_position              (0,                     0),
 		m_mouse_maxx          (0),     m_mouse_maxy          (0),
 		m_mouse_locked        (0),
 		m_mouse_internal_x    (0),     m_mouse_internal_y    (0),
-		m_mouse_internal_compx(0),     m_mouse_internal_compy(0),
+		m_mouse_internal_comp_position(0,                     0),
 		m_should_die          (false),
 		m_gfx_w               (0),     m_gfx_h               (0),
 		m_gfx_fullscreen      (false),
@@ -438,15 +438,15 @@ restart:
 			// settings are invisible to the rest of the code
 			switch(ev->type) {
 			case SDL_MOUSEMOTION:
-				ev->motion.xrel += m_mouse_internal_compx;
-				ev->motion.yrel += m_mouse_internal_compy;
-				m_mouse_internal_compx=m_mouse_internal_compy=0;
+				ev->motion.xrel += m_mouse_internal_comp_position.x;
+				ev->motion.yrel += m_mouse_internal_comp_position.y;
+				m_mouse_internal_comp_position = Point(0, 0);
 
 				if (m_mouse_locked) {
-					set_mouse_pos(m_mouse_x, m_mouse_y);
+					set_mouse_pos(m_mouse_position);
 
-					ev->motion.x = m_mouse_x;
-					ev->motion.y = m_mouse_y;
+					ev->motion.x = m_mouse_position.x;
+					ev->motion.y = m_mouse_position.y;
 				}
 
 				break;
@@ -615,8 +615,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 		case SDL_MOUSEMOTION:
 			// All the interesting stuff is now in Sys_PollEvent()
 
-			m_mouse_x = ev.motion.x;
-			m_mouse_y = ev.motion.y;
+			m_mouse_position = Point(ev.motion.x,ev.motion.y);
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
 				cb->mouse_move
@@ -648,14 +647,13 @@ const int WLApplication::get_time()
  * Move the mouse cursor.
  * No mouse moved event will be issued.
  */
-void WLApplication::set_mouse_pos(int x, int y)
+void WLApplication::set_mouse_pos(const Point p)
 {
-	m_mouse_x = x;
-	m_mouse_y = y;
-	m_mouse_internal_x = x;
-	m_mouse_internal_y = y;
+	m_mouse_position = p;
+	m_mouse_internal_x = p.x;
+	m_mouse_internal_y = p.y;
 
-	do_warp_mouse(x, y); // sync mouse positions
+	do_warp_mouse(p); // sync mouse positions
 }
 
 /**
@@ -670,11 +668,11 @@ void WLApplication::set_input_grab(bool grab)
 
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
-		m_mouse_internal_x = m_mouse_x;
-		m_mouse_internal_y = m_mouse_y;
+		m_mouse_internal_x = m_mouse_position.x;
+		m_mouse_internal_y = m_mouse_position.y;
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
-		do_warp_mouse(m_mouse_x, m_mouse_y);
+		do_warp_mouse(m_mouse_position);
 	}
 }
 
@@ -703,22 +701,15 @@ void WLApplication::set_max_mouse_coords(const int x, const int y)
  * Store the delta mouse_internal_compx/y, so that the resulting motion
  * event can be eliminated.
  */
-void WLApplication::do_warp_mouse(const int x, const int y)
-{
-	int curx, cury;
-
-	if (journal->is_playingback()) // don't warp anything during playback
-		return;
-
-	SDL_GetMouseState(&curx, &cury);
-
-	if (curx == x && cury == y)
-		return;
-
-	m_mouse_internal_compx += curx - x;
-	m_mouse_internal_compy += cury - y;
-
-	SDL_WarpMouse(x, y);
+void WLApplication::do_warp_mouse(const Point p) {
+	if (not journal->is_playingback()) { //  don't warp anything during playback
+		Point cur_position;
+		SDL_GetMouseState(&cur_position.x, &cur_position.y);
+		if (cur_position != p) {
+			m_mouse_internal_comp_position += cur_position - p;
+			SDL_WarpMouse(p.x, p.y);
+		}
+	}
 }
 
 /**
@@ -784,10 +775,10 @@ const bool WLApplication::init_settings()
 	m_mouse_swapped = false;
 	m_mouse_locked = false;
 	m_mouse_speed = 1.0;
-	m_mouse_x = m_mouse_y = 0;
+	m_mouse_position = Point(0, 0);
 	m_mouse_maxx = m_mouse_maxy = 0;
 	m_mouse_internal_x = m_mouse_internal_y = 0;
-	m_mouse_internal_compx = m_mouse_internal_compy = 0;
+	m_mouse_internal_comp_position = Point(0, 0);
 
 	set_input_grab(s->get_bool("inputgrab", false));
 	set_mouse_swap(s->get_bool("swapmouse", false));

@@ -130,7 +130,7 @@ void Textarea::collapse()
    else if (m_align & Align_Bottom)
       y += h;
 
-   set_pos(x, y);
+	set_pos(Point(x, y));
    set_size(m_multiline ? get_w() : 0, 0);
 }
 
@@ -162,7 +162,7 @@ void Textarea::expand()
    else if (m_align & Align_Bottom)
       y -= h;
 
-   set_pos(x, y);
+	set_pos(Point(x, y));
    set_size(m_multiline ? get_w() : w, h);
 }
 };

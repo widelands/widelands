@@ -114,7 +114,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 	height = rows * (WARE_MENU_PIC_H + 8 + 3) + 1;
 
 	set_size(get_inner_w(), height+30);
-   m_curware->set_pos(0, get_inner_h()-25);
+	m_curware->set_pos(Point(0, get_inner_h() - 25));
    m_curware->set_size(get_inner_w(), 20);
 
    m_type = type;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
+
+#include "geometry.h"
 
 #include <SDL_events.h>
 #include <SDL_types.h>
@@ -159,13 +161,10 @@ const bool should_die() {return m_should_die;}
 		{return SDL_GetKeyState(0)[key];}
 
 	//@{
-	void set_mouse_pos(const int x, const int y);
+	void set_mouse_pos(const Point);
 
-	/// The mouse's current X coordinate
-	const int get_mouse_x() {return m_mouse_x;}
-
-	/// The mouse's current Y coordinate
-	const int get_mouse_y() {return m_mouse_y;}
+	/// The mouse's current coordinates
+	Point get_mouse_position() const throw () {return m_mouse_position;}
 
 	void set_input_grab(const bool grab);
 
@@ -179,7 +178,7 @@ const bool should_die() {return m_should_die;}
 
 	void set_max_mouse_coords(const int x, const int y);
 
-	void do_warp_mouse(const int x, const int y);
+	void do_warp_mouse(const Point);
 	//@}
 
 	void init_graphics(const int w, const int h, const int bpp,
@@ -247,8 +246,7 @@ protected:
 
 	///Current state of the mouse buttons
 	///\todo Replace by direct calls to SDL functions???
-	int    m_mouse_x; //  mouse position seen by the outside
-	int    m_mouse_y;
+	Point m_mouse_position;
 
 	///Boundary for the internal mouse's movement - identical to m_gfx_w
 	///\todo Remove this in favour of m_gfx_w?
@@ -267,9 +265,7 @@ protected:
 	///speed)
 	float  m_mouse_internal_y;
 
-	int    m_mouse_internal_compx;
-
-	int    m_mouse_internal_compy;
+	Point m_mouse_internal_comp_position;
 	//@}
 
 	///true if an external entity wants us to quit

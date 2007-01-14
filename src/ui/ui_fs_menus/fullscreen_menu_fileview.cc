@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
    // Menu title
    UI::Textarea* ta= new UI::Textarea(this, 50, 50, title, Align_Left);
    ta->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 100);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 100));
 
 	// Close button
 	new UI::IDButton<Fullscreen_Menu_TextView, int>

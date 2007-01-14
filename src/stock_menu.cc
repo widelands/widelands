@@ -49,8 +49,8 @@ current_page(Wares)
 
 {
 	fill_waredisplay_with_wares();
-	help      .set_pos(posx(0, 3), waresdisplay.get_h());
-	switchpage.set_pos(posx(1, 3), waresdisplay.get_h());
+	help      .set_pos(Point(posx(0, 3), waresdisplay.get_h()));
+	switchpage.set_pos(Point(posx(1, 3), waresdisplay.get_h()));
 	set_inner_size
 		(waresdisplay.get_w(), waresdisplay.get_h() + 30 + vmargin());
 }

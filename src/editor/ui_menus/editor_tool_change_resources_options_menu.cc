@@ -91,10 +91,10 @@ Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c
    int posy=offsy;
    int button_width=20;
    UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Resources Tool Options"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
 
    ta=new UI::Textarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
    posy+=spacing+button_width;
 
 	new UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Uint8>
@@ -113,11 +113,12 @@ Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c
 		 &Editor_Tool_Change_Resources_Options_Menu::clicked, this, 1);
 
    m_increase=new UI::Textarea(this, 0, 0, "5", Align_Left);
-   m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
+	m_increase->set_pos
+		(Point((get_inner_w() - m_increase->get_w()) / 2, posy + 5));
    posy+=button_width+spacing+spacing;
 
    ta=new UI::Textarea(this, 0, 0, _("Set Value"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
    posy+=button_width+spacing;
 
 	new UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Uint8>
@@ -136,7 +137,7 @@ Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c
 		 &Editor_Tool_Change_Resources_Options_Menu::clicked, this, 3);
 
    m_set=new UI::Textarea(this, 0, 0, "5", Align_Left);
-   m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
+	m_set->set_pos(Point((get_inner_w() - m_set->get_w()) / 2, posy + 5));
    posy+=button_width+spacing;
 
    m_cur_selection=new UI::Textarea(this, 0, 0, _("Current Selection"), Align_Left);
@@ -244,5 +245,7 @@ void Editor_Tool_Change_Resources_Options_Menu::update(void) {
 		 (m_srt->get_cur_res())->get_name()
 		 :
 		 "");
-   m_cur_selection->set_pos((get_inner_w()-m_cur_selection->get_w())/2, get_inner_h()-20);
+	m_cur_selection->set_pos
+		(Point
+		 ((get_inner_w() - m_cur_selection->get_w()) / 2, get_inner_h() - 20));
 }

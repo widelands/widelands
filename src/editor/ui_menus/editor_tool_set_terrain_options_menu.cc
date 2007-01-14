@@ -165,7 +165,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    ypos+=TEXTURE_H+1+space+5;
 
    UI::Textarea* ta=new UI::Textarea(this, 0, 5, _("Choose Terrain Menu"), Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
+	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
 
 
    std::string buf=_("Current: ");
@@ -230,5 +230,6 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
    }
 
    m_textarea->set_text(buf.c_str());
-   m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, m_textarea->get_y());
+   m_textarea->set_pos
+		(Point((get_inner_w() - m_textarea->get_w()) / 2, m_textarea->get_y()));
 }

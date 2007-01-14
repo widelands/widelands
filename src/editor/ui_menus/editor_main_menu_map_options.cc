@@ -39,10 +39,6 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
 {
    m_parent=parent;
 
-   // Caption
-   UI::Textarea* tt=new UI::Textarea(this, 0, 0, _("New Map Options"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    // UI::Buttons
    const int offsx=5;
    const int offsy=30;

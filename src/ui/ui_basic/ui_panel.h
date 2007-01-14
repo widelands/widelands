@@ -22,6 +22,7 @@
 #define __S__PANEL_H
 
 #include "error.h"
+#include "geometry.h"
 #include "types.h"
 #include "ui_object.h"
 
@@ -76,7 +77,7 @@ struct Panel : public Object {
 
 	// Geometry
 	void set_size(const uint nw, const uint nh);
-	void set_pos(const int nx, const int ny);
+	void set_pos(const Point);
 	virtual void move_inside_parent();
 
 	inline int get_x() const { return _x; }
@@ -126,9 +127,8 @@ struct Panel : public Object {
 	// Events
 	virtual void think();
 
-	int get_mouse_x();
-	int get_mouse_y();
-	void set_mouse_pos(int x, int y);
+	Point get_mouse_position() const throw();
+	void set_mouse_pos(const Point);
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);

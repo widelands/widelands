@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,10 +75,8 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
    center_to_parent();
 
-   if( gposx != -1 )
-      set_pos( gposy, get_y());
-   if( gposy != -1 )
-      set_pos( get_x(), gposy);
+	if (gposx != -1) set_pos(Point(gposy, get_y()));
+	if (gposy != -1) set_pos(Point(get_x(), gposy));
 }
 
 
