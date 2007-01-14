@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvsbuild
+
+[global]
+packet_version=1
+map_w=64
+map_h=64
+nr_players=2
+world=blackland
+name=Firegames
+author=Nasenbaer
+descr=
+

@@ -270,7 +270,7 @@ def do_configure(config_h_file, conf, env):
 		config_h_file.write("#define NEW_SDL_MIXER 0\n");
 		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
 
-	if conf.CheckLib(library='efence', autoadd=1):
+	if conf.CheckLib(library='efence', autoadd=0):
 		if env.efence:
 			conf.CheckLinkerFlag('-lefence', env)
 			config_h_file.write("#define USE_EFENCE\n\n");

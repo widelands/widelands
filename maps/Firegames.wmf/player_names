@@ -1,0 +1,13 @@
+# Automatically created by Widelands cvsbuild
+
+[global]
+packet_version=1
+
+[player_1]
+name=Spieler 1
+tribe=barbarians
+
+[player_2]
+name=Spieler2
+tribe=barbarians
+

@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvs-build (inofficial)
+
+[global]
+packet_version=1
+map_w=192
+map_h=192
+nr_players=3
+world=desert
+name=The Oasis Triangle
+author=Nasenbaer
+descr="There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+

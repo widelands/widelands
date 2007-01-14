@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvsbuild
+
+[global]
+packet_version=1
+map_w=96
+map_h=80
+nr_players=2
+world=winterland
+name=Glacier Lake
+author=Nasenbaer
+descr="A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are shure, that there is only place enough for one tribe." 
+

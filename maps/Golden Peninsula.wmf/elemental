@@ -1,0 +1,12 @@
+# Automatically created by Widelands build-9
+
+[global]
+packet_version=1
+map_w=64
+map_h=80
+nr_players=2
+world=greenland
+name=Golden Peninsula
+author=Winterwind
+descr=Two empires race for the treasures of a legendary peninsula...
+

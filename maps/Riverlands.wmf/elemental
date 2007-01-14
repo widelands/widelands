@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvs 24-12-2005 (inofficial)
+
+[global]
+packet_version=1
+map_w=192
+map_h=176
+nr_players=7
+world=greenland
+name=Riverlands
+author=ISCH
+descr=
+

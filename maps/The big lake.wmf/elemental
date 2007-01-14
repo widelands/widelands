@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvs 24-12-2005 (inofficial)
+
+[global]
+packet_version=1
+map_w=192
+map_h=192
+nr_players=6
+world=greenland
+name=The big lake
+author=ISCH
+descr=
+

@@ -1,0 +1,25 @@
+# Automatically created by Widelands cvs 24-12-2005 (inofficial)
+
+[global]
+packet_version=1
+
+[player_1]
+name=Marius
+tribe=barbarians
+
+[player_2]
+name=Avitus
+tribe=barbarians
+
+[player_3]
+name=Silvanus
+tribe=barbarians
+
+[player_4]
+name=Caius
+tribe=barbarians
+
+[player_5]
+name=Augustus
+tribe=barbarians
+

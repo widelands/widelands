@@ -1,0 +1,12 @@
+# Automatically created by Widelands cvs 24-12-2005 (inofficial)
+
+[global]
+packet_version=1
+map_w=224
+map_h=48
+nr_players=5
+world=greenland
+name=The long way
+author=ISCH
+descr=
+
