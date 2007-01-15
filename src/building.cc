@@ -19,7 +19,6 @@
 
 #include <stdio.h>
 #include "building.h"
-#include "computer_player_hints.h"
 #include "constructionsite.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -71,7 +70,6 @@ Building_Descr::Building_Descr(Tribe_Descr* tribe, const char* name)
 	m_size = BaseImmovable::SMALL;
 	m_mine = false;
 	m_stopable = false;
-	m_hints = new BuildingHints();
 }
 
 
@@ -88,8 +86,6 @@ Building_Descr::~Building_Descr(void)
       free(m_buildicon_fname);
    for(uint i=0; i<m_enhances_to.size(); i++)
       free(m_enhances_to[i]);
-
-	delete m_hints;
 }
 
 /*
@@ -215,7 +211,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 		if (string) g_sound_handler.load_fx(directory, string);
 	}
 
-	m_hints->parse (prof);
+	m_hints.parse (prof);
 }
 
 

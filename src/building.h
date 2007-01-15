@@ -22,6 +22,7 @@
 
 #include <string>
 #include <vector>
+#include "computer_player_hints.h"
 #include "immovable.h"
 #include "workarea_info.h"
 
@@ -80,7 +81,7 @@ struct Building_Descr : public Map_Object_Descr {
    inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 	Workarea_Info m_workarea_info, m_recursive_workarea_info;
 
-	const BuildingHints* get_hints() const { return m_hints; }
+	const BuildingHints* get_hints() const { return &m_hints; }
 
 protected:
 	virtual Building* create_object() = 0;
@@ -101,7 +102,7 @@ private:
 	bool         m_mine;
 	std::vector<char*> m_enhances_to;     // building to enhance to or 0
 	bool         m_enhanced_building; // if it is one, it is bulldozable
-	BuildingHints     * m_hints; //  hints (knowledge) for computer players
+	BuildingHints       m_hints; //  hints (knowledge) for computer players
 
 public:
 	static Building_Descr* create_from_dir(Tribe_Descr* tribe,
