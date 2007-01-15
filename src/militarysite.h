@@ -26,8 +26,7 @@
 
 class Soldier;
 
-class MilitarySite_Descr : public ProductionSite_Descr {
-public:
+struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr(Tribe_Descr* tribe, const char* name);
 	virtual ~MilitarySite_Descr();
 

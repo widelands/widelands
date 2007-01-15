@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,7 @@ class Critter_BobProgram;
 //
 // Description
 //
-class Critter_Bob_Descr : public Bob_Descr {
-	typedef std::map<std::string, Critter_BobProgram*> ProgramMap;
-
-   public:
+struct Critter_Bob_Descr : public Bob_Descr {
       Critter_Bob_Descr(const char *name, Tribe_Descr* tribe);
 	virtual ~Critter_Bob_Descr();
 
@@ -48,6 +45,7 @@ class Critter_Bob_Descr : public Bob_Descr {
 	std::string   m_descname;
 	DirAnimations m_walk_anims;
 	bool          m_swimming;
+	typedef std::map<std::string, Critter_BobProgram *> ProgramMap;
       ProgramMap     m_programs;
 };
 

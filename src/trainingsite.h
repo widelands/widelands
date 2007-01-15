@@ -24,9 +24,7 @@
 
 class TrainingSite_Window;
 
-class TrainingSite_Descr:public ProductionSite_Descr {
-      public:
-
+struct TrainingSite_Descr:public ProductionSite_Descr {
 	TrainingSite_Descr(Tribe_Descr * tribe, const char *name);
 	 virtual ~ TrainingSite_Descr();
 

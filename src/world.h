@@ -37,8 +37,7 @@ struct World_Descr_Header {
    char descr[WORLD_DESCR_LEN];
 };
 
-class Resource_Descr {
-public:
+struct Resource_Descr {
 	typedef Uint8 Index;
 	Resource_Descr() { }
 	~Resource_Descr() { }
@@ -70,11 +69,10 @@ private:
 	std::vector<Editor_Pic> m_editor_pics;
 };
 
-class Terrain_Descr {
+struct Terrain_Descr {
    friend class Descr_Maintainer<Terrain_Descr>;
    friend class World;
 
-   public:
 	typedef Uint8 Index;
       Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>*);
       ~Terrain_Descr(void);
@@ -119,11 +117,8 @@ class Terrain_Descr {
   * This class provides information on a worldtype usable to create a map;
   * it can read a world file.
   */
-class World
-{
+struct World {
 	friend class Game;
-
-   public:
 
       enum {
          OK = 0,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ Warehouse
 */
 class WarehouseSupply;
 
-class Warehouse_Descr : public Building_Descr {
-public:
+struct Warehouse_Descr : public Building_Descr {
 	enum {
 		Subtype_Normal,
 		Subtype_HQ,
@@ -109,7 +108,6 @@ private:
 	static void idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void* data);
    void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
 
-private:
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type
    std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
@@ -121,8 +119,7 @@ private:
 WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
-class WarehouseSupply : public Supply {
-public:
+struct WarehouseSupply : public Supply {
 	WarehouseSupply(Warehouse* wh);
 	virtual ~WarehouseSupply();
 
@@ -141,7 +138,7 @@ public:
    void add_workers(int id, int count);
    void remove_workers(int id, int count);
 
-public: // Supply implementation
+	// Supply implementation
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(const int ware) const;
 	virtual bool is_active() const throw ();

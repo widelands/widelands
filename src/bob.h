@@ -37,8 +37,7 @@ class Tribe_Descr;
  * BobProgramBase is only used that
  * get_name always works
  */
-class BobProgramBase {
-   public:
+struct BobProgramBase {
       BobProgramBase(void) { }
       virtual~ BobProgramBase(void) { }
 
@@ -48,11 +47,10 @@ class BobProgramBase {
 /**
  * Bobs are moving map objects: Animals, humans, ships...
 */
-class Bob_Descr : public Map_Object_Descr {
+struct Bob_Descr : public Map_Object_Descr {
 	friend class DirAnimations; // To add the various direction bobs
    friend class Widelands_Map_Bobdata_Data_Packet; // To write it to a file
 
-public:
 	Bob_Descr(const char *name, Tribe_Descr* tribe);
 	virtual ~Bob_Descr(void);
 
@@ -156,7 +154,7 @@ public:
    // For debug
    virtual void log_general_info(Editor_Game_Base* egbase);
 
-public: // default tasks
+	// default tasks
 	void reset_tasks(Game*);
 	void send_signal(Game*, std::string sig);
 
@@ -182,7 +180,7 @@ public: // default tasks
 		 const int only_step = -1);
 	void start_task_forcemove(const int dir, const DirAnimations &);
 
-protected: // higher level handling (task-based)
+	// higher level handling (task-based)
 	inline State* get_state() { return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0; }
 	State & top_state()
 	{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
@@ -195,7 +193,7 @@ protected: // higher level handling (task-based)
 
 	virtual void init_auto_task(Game*);
 
-protected: // low level animation and walking handling
+	// low level animation and walking handling
 	void set_animation(Editor_Game_Base* g, uint anim);
 
 	int start_walk(Game* g, WalkingDir dir, uint anim, bool force = false);
@@ -211,12 +209,10 @@ private:
 	void movepath_signal(Game* g, State* state);
 	void forcemove_update(Game* g, State* state);
 
-private:
 	static Task taskIdle;
 	static Task taskMovepath;
 	static Task taskForcemove;
 
-private:
 	Player *           m_owner; //  can be 0
 
 	FCoords            m_position; //  where are we right now?

@@ -38,10 +38,9 @@ class BuildingHints;
 /*
  * Common to all buildings!
  */
-class Building_Descr : public Map_Object_Descr {
+struct Building_Descr : public Map_Object_Descr {
    friend class Widelands_Map_Buildingdata_Data_Packet;
 
-public:
 	struct CostItem {
 		std::string name;   // name of ware
 		int         amount; // amount
@@ -51,7 +50,6 @@ public:
 	};
 	typedef std::vector<CostItem> BuildCost;
 
-public:
 	Building_Descr(Tribe_Descr* tribe, const char* name);
 	virtual ~Building_Descr(void);
 
@@ -202,7 +200,6 @@ protected:
 	virtual UI::Window* create_options_window(Interactive_Player* plr,
 		UI::Window** registry) = 0;
 
-protected:
 	UI::Window* m_optionswindow;
 	Coords    m_position;
 	Flag*     m_flag;

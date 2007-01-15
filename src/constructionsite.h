@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,8 +46,7 @@ with the transport and Flag code.
 Every tribe has exactly one ConstructionSite_Descr.
 The ConstructionSite's idling animation is the basic construction site marker.
 */
-class ConstructionSite_Descr : public Building_Descr {
-public:
+struct ConstructionSite_Descr : public Building_Descr {
 	ConstructionSite_Descr(Tribe_Descr* tribe, const char* name);
 
 	virtual void parse(const char* directoy, Profile* prof,

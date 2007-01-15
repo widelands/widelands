@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,7 @@ class RGBColor;
 
 #define HP_FRAMECOLOR RGBColor(255,255,255)
 
-class Soldier_Descr : public Worker_Descr {
-public:
+struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr(Tribe_Descr * const tribe, const char * const name);
 	virtual ~Soldier_Descr(void);
 

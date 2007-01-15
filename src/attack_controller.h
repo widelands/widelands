@@ -42,10 +42,9 @@ void getCloseMilitarySites
  std::set<MilitarySite *> & militarySites);
 uint getMaxAttackSoldiers(const Game &, const Flag &, const Player_Number);
 
-class AttackController : public BaseImmovable {
+struct AttackController : public BaseImmovable {
    friend class Widelands_Map_Attack_Controller_Data_Packet;
 
-   public:
       AttackController(Game* game, Flag* flag, int attacker, int defender);
       AttackController(Game* game);
       ~AttackController();

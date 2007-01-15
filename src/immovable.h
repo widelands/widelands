@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ If size is NONE, the immovable can simply be removed by placing something on it
 (this is usually true for decorations).
 For more information, see the Map::recalc_* functions.
 */
-class BaseImmovable : public Map_Object {
-public:
+struct BaseImmovable : public Map_Object {
 	enum {
 		NONE,   //  not robust
 		SMALL,
@@ -69,13 +68,11 @@ struct ImmovableAction;
 /*
 Immovable represents a standard immovable such as trees or stones.
 */
-class Immovable_Descr : public Map_Object_Descr {
+struct Immovable_Descr : public Map_Object_Descr {
    friend class Widelands_Map_Immovabledata_Data_Packet; // For writing (get_program)
 
-public:
 	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
 
-public:
 	Immovable_Descr(const char *name, Tribe_Descr* owner_tribe);
 	~Immovable_Descr();
 

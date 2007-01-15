@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -286,8 +286,7 @@ class Worker : public Bob {
 /*
    Carrier is a worker who is employed by a Road.
    */
-class Carrier_Descr : public Worker_Descr {
-   public:
+struct Carrier_Descr : public Worker_Descr {
       Carrier_Descr(Tribe_Descr *tribe, const char *name);
       virtual ~Carrier_Descr(void);
 
