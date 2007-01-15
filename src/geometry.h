@@ -23,6 +23,7 @@
 #include <cmath>
 #include <limits>
 #include <SDL_types.h>
+#include <types.h>
 
 #include "compile_assert.h"
 
