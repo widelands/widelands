@@ -1085,7 +1085,7 @@ bool Worker::run_removeobject(Game * g, State * state, const WorkerAction *) {
 	obj = state->objvar1.get(g);
 	if (obj) {
 		obj->remove(g);
-		state->objvar1.set(0);
+		state->objvar1 = 0;
 	}
 
 	state->ivar1++;

@@ -262,14 +262,12 @@ private:
  *
  * Provides a safe pointer to a Map_Object
  */
-class Object_Ptr {
-public:
-	inline Object_Ptr() { m_serial = 0; }
-	inline Object_Ptr(Map_Object* obj) { m_serial = obj->m_serial; }
+struct Object_Ptr {
+	Object_Ptr(Map_Object * const obj = 0) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
-	inline void set(Map_Object* obj) { if (obj) m_serial = obj->m_serial; else m_serial = 0; }
-	inline Object_Ptr& operator = (Map_Object* obj) { set(obj); return *this; }
+	Object_Ptr & operator=(Map_Object * const obj)
+	{m_serial = obj ? obj->m_serial : 0; return *this;}
 
 	bool is_set() const {return m_serial;}
 
