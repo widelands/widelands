@@ -25,10 +25,6 @@
 #include "wexception.h"
 #include "wlapplication.h"
 
-#ifdef USE_EFENCE
-#include <efencepp.h>
-#endif
-
 using std::cerr;
 using std::endl;
 using std::flush;
