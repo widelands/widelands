@@ -1176,7 +1176,7 @@ void Flag::init(Editor_Game_Base *g)
 
 	set_position(g, m_position);
 
-	m_anim = get_owner()->get_tribe()->get_flag_anim();
+	m_anim = owner().tribe().get_flag_anim();
 	m_animstart = g->get_gametime();
 }
 
@@ -2049,7 +2049,7 @@ Determine where we should be going from our current location.
 */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psuccess)
 {
-	PlayerImmovable* destination = m_request->get_target(m_game);
+	PlayerImmovable * const destination = m_request->get_target();
 	Flag* locflag;
 	Flag* destflag;
 
@@ -2505,10 +2505,7 @@ Request::get_target_flag
 Figure out the flag we need to deliver to.
 ===============
 */
-Flag *Request::get_target_flag(Game *g)
-{
-	return get_target(g)->get_base_flag();
-}
+Flag *Request::get_target_flag() {return get_target()->get_base_flag();}
 
 
 /*
@@ -3765,19 +3762,19 @@ void Economy::add_request(Request* req)
 		 this,
 		 req,
 		 tribe.get_worker_descr(req->get_index())->descname().c_str(),
-		 req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
+		 req->get_target()->get_serial());
 	else if(req->get_type()==Request::SOLDIER) log
 		("%p: add_request(%p) for soldier %s, target is %u\n",
 		 this,
 		 req,
 		 tribe.get_worker_descr(req->get_index())->descname().c_str(),
-		 req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
+		 req->get_target()->get_serial());
 	else if (req->get_type()==Request::WARE) log
 		("%p: add_request(%p) for ware %s, target is %u\n",
 		 this,
 		 req,
-		 tribe.get_ware_descr(req->get_index())->descname(),
-		 req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
+		 tribe.get_ware_descr(req->get_index())->descname().c_str(),
+		 req->get_target()->get_serial());
 
 	m_requests.push_back(req);
 
@@ -4124,7 +4121,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 	Supply *best_supply = 0;
 	Route *best_route = 0;
 	int best_cost = -1;
-	Flag* target_flag = req->get_target_flag(g);
+	Flag * const target_flag = req->get_target_flag();
 
 	// Look for matches in all possible supplies in this economy
 	if (ware >= (int)use_supply->size())
@@ -4286,9 +4283,11 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		rsp.supply = supp;
 		rsp.priority = idletime;
 
-		log("REQ: %u (%i) <- %u (ware %i), priority %i\n", req->get_target(g)->get_serial(),
-				req->get_required_time(), supp->get_position(g)->get_serial(),
-				rsp.ware, rsp.priority);
+		log
+			("REQ: %u (%i) <- %u (ware %i), priority %i\n",
+			 req->get_target()->get_serial(),
+			 req->get_required_time(), supp->get_position(g)->get_serial(),
+			 rsp.ware, rsp.priority);
 
 		s->queue.push(rsp);
 	}
@@ -4399,7 +4398,7 @@ void Economy::balance_requestsupply()
 
 		log
 			("HANDLE: %u -> %u, ware %i, priority %i\n",
-			 rsp.request->get_target(game)->get_serial(),
+			 rsp.request->get_target()->get_serial(),
 			 rsp.supply->get_position(game)->get_serial(),
 			 rsp.ware,
 			 rsp.priority);

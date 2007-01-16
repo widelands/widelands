@@ -139,7 +139,6 @@ class Flag : public PlayerImmovable {
    friend class Widelands_Map_Waredata_Data_Packet; // has to look at pending items
    friend class Widelands_Map_Flagdata_Data_Packet; // has to read/write this to a file
 
-private:
 	struct PendingItem {
 		WareInstance    * item;     //  the item itself
 		bool              pending;  //  if the item is pending
@@ -251,17 +250,15 @@ private:
  * All Workers on the Road are attached via add_worker()/remove_worker() in
  * PlayerImmovable.
  */
-class Road : public PlayerImmovable {
+struct Road : public PlayerImmovable {
    friend class Widelands_Map_Roaddata_Data_Packet; // For saving
    friend class Widelands_Map_Road_Data_Packet; // For init()
 
-public:
 	enum FlagId {
 		FlagStart = 0,
 		FlagEnd = 1
 	};
 
-public:
 	Road();
 	virtual ~Road();
 
@@ -327,12 +324,11 @@ private:
  * Route stores a route from flag to flag.
  * The number of steps is the number of flags stored minus one.
  */
-class Route {
+struct Route {
 	friend class Economy;
    friend class Request;
    friend class Widelands_Map_Bobdata_Data_Packet; // This is in the state structure
 
-public:
 	Route();
 
 	void clear();
@@ -363,10 +359,9 @@ private:
  * Call fail() if something really bad has happened (e.g. the worker
  * or ware was destroyed).
  */
-class Transfer {
+struct Transfer {
 	friend class Request;
 
-public:
 	Transfer(Game* g, Request* req, WareInstance* it);
 	Transfer(Game* g, Request* req, Worker* w);
 	Transfer(Game* g, Request* req, Soldier* s);
@@ -385,7 +380,6 @@ public: // called by the controlled ware or worker
 private:
 	void tlog(const char* fmt, ...) PRINTF_FORMAT(2,3);
 
-private:
 	Game         * m_game;
 	Request      * m_request;
 	WareInstance * m_item;    //  non-null if ware is an item
@@ -397,9 +391,7 @@ private:
 };
 
 
-class Requeriments
-{
-public:
+struct Requeriments {
 	Requeriments (); //  init to allow all
 
 	void set (tAttribute at, int min, int max);
@@ -432,8 +424,7 @@ private:
  * and removing itself from Economies. This rule holds true for Economy
  * changes.
  */
-class Supply : public Trackable {
-public:
+struct Supply : public Trackable {
 	virtual PlayerImmovable* get_position(Game* g) = 0;
 	virtual int get_amount(const int ware) const = 0;
 	virtual bool is_active() const throw () = 0;
@@ -452,8 +443,7 @@ public:
 /**
  * SupplyList is used in the Economy to keep track of supplies.
  */
-class SupplyList {
-public:
+struct SupplyList {
 	SupplyList();
 	~SupplyList();
 
@@ -479,11 +469,10 @@ private:
  * left, a transfer may be initiated.
  * The required time has no meaning for idle requests.
  */
-class Request : public Trackable {
+struct Request : public Trackable {
 	friend class Economy;
 	friend class RequestList;
 
-public:
 	typedef void (*callback_t)(Game*, Request*, int ware, Worker*, void* data);
 
    enum Type {
@@ -492,11 +481,10 @@ public:
 	   SOLDIER = 2
    };
 
-public:
 	Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type);
 	~Request();
 
-	PlayerImmovable * get_target(Game *) const {return m_target;}
+	PlayerImmovable * get_target() const throw () {return m_target;}
 	int get_index() const { return m_index; }
    int get_type() const { return m_type; }
 	bool is_idle() const { return m_idle; }
@@ -506,7 +494,7 @@ public:
 	Economy* get_economy() const { return m_economy; }
 	int get_required_time();
 
-	Flag *get_target_flag(Game *g);
+	Flag * get_target_flag();
 
 	void set_economy(Economy* e);
 	void set_idle(bool idle);
@@ -522,7 +510,7 @@ public:
    void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
    Worker* get_transfer_worker(void);
 
-public: // callbacks for WareInstance/Worker code
+	//  callbacks for WareInstance/Worker code
 	void transfer_finish(Game* g, Transfer* t);
 	void transfer_fail(Game* g, Transfer* t);
 
@@ -540,7 +528,6 @@ public:
 private:
 	Requeriments* get_requeriments () { return m_requeriments;  }
 
-private:
 	typedef std::vector<Transfer*> TransferList;
 
    Type              m_type;
@@ -570,11 +557,9 @@ This micro storage room can hold any number of items of a fixed ware.
 Note that you must call update() after changing the queue's size or filled
 state using one of the set_*() functions.
 */
-class WaresQueue {
-public:
+struct WaresQueue {
 	typedef void (callback_t)(Game* g, WaresQueue* wq, int ware, void* data);
 
-public:
 	WaresQueue(PlayerImmovable* bld);
 	~WaresQueue();
 
@@ -605,7 +590,6 @@ public:
 private:
 	static void request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
-private:
 	PlayerImmovable * m_owner;
 	int               m_ware; //  ware ID
 	uint m_size;             // # of items that fit into the queue
@@ -623,10 +607,9 @@ Economy represents a network of Flag through which wares can be transported.
 */
 struct RSPairStruct;
 
-class Economy {
+struct Economy {
 	friend class Request;
 
-public:
 	Economy(Player *player);
 	~Economy();
 
@@ -697,7 +680,6 @@ private:
 	void process_requests(Game* g, RSPairStruct* s);
 	void create_requested_workers(Game* g);
 
-private:
 	typedef std::vector<Request*> RequestList;
 
 	Player*   m_owner;
@@ -721,8 +703,7 @@ private:
 	uint mpf_cycle;       //  pathfinding cycle, see Flag::mpf_cycle
 };
 
-class Cmd_Call_Economy_Balance : public BaseCommand {
-   public:
+struct Cmd_Call_Economy_Balance : public BaseCommand {
       Cmd_Call_Economy_Balance (void) : BaseCommand (0) { } // For load and save
 
       Cmd_Call_Economy_Balance (int starttime, int player, Economy* economy) :
