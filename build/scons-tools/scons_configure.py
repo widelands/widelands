@@ -273,7 +273,7 @@ def do_configure(config_h_file, conf, env):
 	if conf.CheckLib('efence', symbol='EF_newFrame', language='C', autoadd=0):
 		if env.efence:
 			conf.CheckCompilerFlag('-include stdlib.h -include string.h -include efence.h', env)
-			conf.CheckCompilerFlag('-include new -include fstream -include fstream -include efencepp.h', env)
+			conf.CheckCompilerFlag('-include new -include fstream -include efencepp.h', env)
 			conf.CheckLinkerFlag('-lefence', env)
 	else:
 		if env.efence:
