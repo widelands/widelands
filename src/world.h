@@ -47,8 +47,8 @@ struct Resource_Descr {
    const char* get_descrname() const { return m_descrname.c_str(); }
    const char* get_name() const { return m_name.c_str(); }
 
-   inline bool is_detectable(void) { return m_is_detectable; }
-   inline int get_max_amount(void) { return m_max_amount; }
+	bool is_detectable() const throw () {return m_is_detectable;}
+	int get_max_amount() const throw () {return m_max_amount;}
 
    std::string get_editor_pic(uint amount);
 
