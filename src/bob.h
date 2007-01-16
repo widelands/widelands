@@ -51,26 +51,28 @@ struct Bob_Descr : public Map_Object_Descr {
 	friend class DirAnimations; // To add the various direction bobs
    friend class Widelands_Map_Bobdata_Data_Packet; // To write it to a file
 
-	Bob_Descr(const char *name, Tribe_Descr* tribe);
+	Bob_Descr(const Tribe_Descr * const tribe, const std::string & bob_name);
 	virtual ~Bob_Descr(void);
 
-	inline const char* get_name(void) const { return m_name; }
+	const std::string & name() const throw () {return m_name;}
+	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
 
    Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
    inline const char* get_picture(void) const { return m_picture.c_str(); }
    inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
-	Tribe_Descr * get_owner_tribe() const {return m_owner_tribe;}
+	const Tribe_Descr * const get_owner_tribe() const throw ()
+	{return m_owner_tribe;}
 	bool is_world_bob() const {return not m_owner_tribe;}
 
 protected:
-	virtual Bob *create_object() = 0;
+	virtual Bob * create_object() const = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
-	char          m_name[30];
+	const std::string               m_name;
    std::string m_picture;
    EncodeData  m_default_encodedata;
-   Tribe_Descr* m_owner_tribe;
+	const Tribe_Descr * const m_owner_tribe; //  0 if world bob
 
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof, Tribe_Descr* tribe);
@@ -117,7 +119,7 @@ public:
 	};
 
 protected:
-	Bob(Bob_Descr *descr);
+	Bob(const Bob_Descr & descr);
 	virtual ~Bob(void);
 
 public:
@@ -127,7 +129,8 @@ public:
 	virtual int get_type() const throw ();
 	virtual int get_bob_type() = 0;
    virtual uint get_movecaps() { return 0; }
-	std::string get_name() const { return get_descr()->get_name(); }
+	const std::string & name() const throw () {return descr().name();}
+	const std::string & get_name() const throw () __attribute__ ((deprecated)) {return descr().name();}
 
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
@@ -149,7 +152,7 @@ public:
 	inline const FCoords& get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
 
-   bool is_world_bob(void) { return get_descr()->is_world_bob(); }
+	bool is_world_bob() const throw () {return descr().is_world_bob();}
 
    // For debug
    virtual void log_general_info(Editor_Game_Base* egbase);

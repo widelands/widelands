@@ -330,12 +330,13 @@ Warehouse_Descr::Warehouse_Descr
 Initialize with sane defaults
 ===============
 */
-Warehouse_Descr::Warehouse_Descr(Tribe_Descr* tribe, const char* name)
-	: Building_Descr(tribe, name)
-{
-	m_subtype = Subtype_Normal;
-	m_conquers = 0;
-}
+Warehouse_Descr::Warehouse_Descr
+(const Tribe_Descr & tribe_descr, const std::string & warehouse_name)
+:
+Building_Descr(tribe_descr, warehouse_name),
+m_subtype     (Subtype_Normal),
+m_conquers    (0)
+{}
 
 /*
 ===============
@@ -386,12 +387,11 @@ Warehouse::Warehouse
 Initialize a warehouse (zero contents, etc...)
 ===============
 */
-Warehouse::Warehouse(Warehouse_Descr* descr)
-	: Building(descr)
-{
-	m_supply = new WarehouseSupply(this);
-	m_next_carrier_spawn = 0;
-}
+Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
+Building            (warehouse_descr),
+m_supply            (new WarehouseSupply(this)),
+m_next_carrier_spawn(0)
+{}
 
 
 /*
@@ -951,11 +951,9 @@ Swallow the item, adding it to out inventory.
 */
 void Warehouse::incorporate_item(Game* g, WareInstance* item)
 {
-	int ware = item->get_ware();
-
 	item->destroy(g);
 
-	m_supply->add_wares(ware, 1);
+	m_supply->add_wares(item->descr_index(), 1);
 }
 
 
@@ -983,10 +981,8 @@ void Warehouse::idle_request_cb
 Warehouse_Descr::create_object
 ===============
 */
-Building* Warehouse_Descr::create_object()
-{
-	return new Warehouse(this);
-}
+Building * Warehouse_Descr::create_object() const
+{return new Warehouse(*this);}
 
 /*
 ===============

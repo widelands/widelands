@@ -44,8 +44,10 @@ struct Resource_Descr {
 
 	void parse(Section* s, std::string);
 
-   const char* get_descrname() const { return m_descrname.c_str(); }
-   const char* get_name() const { return m_name.c_str(); }
+	const std::string & name     () const throw () {return m_name;}
+	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
+	const std::string & descrname() const throw () {return m_descrname;}
+	const char * get_descrname() const throw () __attribute__ ((deprecated)) {return m_descrname.c_str();}
 
 	bool is_detectable() const throw () {return m_is_detectable;}
 	int get_max_amount() const throw () {return m_max_amount;}
@@ -81,7 +83,8 @@ struct Terrain_Descr {
 
 	uint         get_texture() const throw () {return m_texture;}
 	uchar        get_is     () const throw () {return m_is;}
-	const char * get_name   () const throw () {return m_name;}
+	const std::string & name() const throw () {return m_name;}
+	const char * get_name   () const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
 	int resource_value(const Resource_Descr::Index resource) const throw () {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?
@@ -100,7 +103,7 @@ struct Terrain_Descr {
 	int get_default_resources_amount() const throw () {return m_default_amount;}
 
    private:
-	char    m_name[30];
+	const std::string m_name;
 	char  * m_picnametempl;
 	uint    m_frametime;
 	uchar   m_is;

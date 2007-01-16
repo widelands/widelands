@@ -62,7 +62,7 @@ class Player {
 		Player
 		(Editor_Game_Base &,
 		 const int type,
-		 const int plnum,
+		 const Player_Number plnum,
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
 		 const uchar * const playercolor);
@@ -71,9 +71,9 @@ class Player {
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 		inline int get_type() const { return m_type; }
-		inline int get_player_number() const { return m_plnum; }
+	Player_Number get_player_number() const throw () {return m_plnum;}
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
-	const Tribe_Descr *get_tribe() const { return &m_tribe; }
+	const Tribe_Descr * get_tribe() const throw () __attribute__ ((deprecated)) {return &tribe();}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
 	const std::string & get_name() const throw () {return m_name;}
@@ -134,7 +134,7 @@ class Player {
 	Editor_Game_Base     & m_egbase;
 		bool           m_view_changed;
 	int                    m_type;
-	int                    m_plnum;
+	const Player_Number    m_plnum;
 		const Tribe_Descr & m_tribe; // buildings, wares, workers, sciences
 	RGBColor               m_playercolor[4];
 

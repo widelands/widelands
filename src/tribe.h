@@ -58,7 +58,8 @@ struct Tribe_Descr {
       static void get_all_tribenames(std::vector<std::string> &);
 
 
-	const std::string & get_name() const throw () {return m_name;}
+	const std::string & name() const throw () {return m_name;}
+	const std::string & get_name() const throw () __attribute__ ((deprecated)) {return m_name;}
 
 		inline int get_nrworkers() const { return m_workers.get_nitems(); }
 		Worker_Descr * get_worker_descr(const uint idx) const
@@ -79,14 +80,15 @@ struct Tribe_Descr {
       inline int get_immovable_index(const char* l) const { return m_immovables.get_index(l); }
       inline int get_nr_immovables(void) { return m_immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) const { return m_immovables.get(index); }
-      inline int get_bob(const char* l) { return m_bobs.get_index(l); }
-		inline Bob_Descr* get_bob_descr(ushort index) { return m_bobs.get(index); }
+      inline int get_bob(const char* l) const{ return m_bobs.get_index(l); }
+		inline Bob_Descr* get_bob_descr(ushort index) const{ return m_bobs.get(index); }
       inline int get_nr_bobs(void) { return m_bobs.get_nitems(); }
 
 	uint get_frontier_anim() const throw () {return m_anim_frontier;}
 	uint get_flag_anim    () const throw () {return m_anim_flag;}
 
-      int get_resource_indicator(Resource_Descr* res, uint amount);
+	uint get_resource_indicator
+		(const Resource_Descr * const res, const uint amount) const;
 
 		void postload(Editor_Game_Base*);
 		void load_graphics();
@@ -95,8 +97,8 @@ struct Tribe_Descr {
 		(Editor_Game_Base &, Warehouse &) const;
 
 
+private:
 	const std::string m_name;
-  private:
       uint m_anim_frontier;
 		uint m_anim_flag;
 

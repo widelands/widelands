@@ -55,21 +55,21 @@ struct ProductionSite_Descr : public Building_Descr {
       int how_many;
    };
 
-   ProductionSite_Descr(Tribe_Descr* tribe, const char* name);
+	ProductionSite_Descr
+		(const Tribe_Descr & tribe, const std::string & productionsite_name);
 	virtual ~ProductionSite_Descr();
 
 	virtual void parse(const char* directory, Profile* prof,
 		const EncodeData* encdata);
-	virtual Building* create_object();
+	virtual Building * create_object() const;
 
 	const std::vector<Worker_Info>* get_workers() const throw ()
 	{return &m_workers;}
-	bool is_output(std::string name) const {
-		return m_output.find(name) != m_output.end();
-	}
+	bool is_output(const std::string & warename) const throw ()
+	{return m_output.find(warename) != m_output.end();}
 	const std::set<std::string>* get_outputs() const { return &m_output; }
 	const std::vector<Input>* get_inputs() const { return &m_inputs; }
-	const ProductionProgram* get_program(std::string name) const;
+	const ProductionProgram * get_program(const std::string &) const;
 	const ProgramMap & get_all_programs() const throw () {return m_programs;}
 
 	virtual bool is_only_production_site(void) { return true; }
@@ -87,7 +87,7 @@ class ProductionSite : public Building {
 	MO_DESCR(ProductionSite_Descr);
 
 public:
-	ProductionSite(ProductionSite_Descr* descr);
+	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
 	virtual std::string get_statistics_string();
@@ -178,9 +178,8 @@ public:
 	Input(Item_Ware_Descr* ware, int max) : m_ware(ware), m_max(max) {}
 	~Input(void) {}
 
-	inline void set_max(int n) { m_max = n; }
-	inline int get_max(void) const { return m_max; }
-	inline Item_Ware_Descr* get_ware() const { return m_ware; }
+	const Item_Ware_Descr & ware_descr() const throw () {return *m_ware;}
+	uint get_max() const throw () {return m_max;}
 
 private:
 	Item_Ware_Descr* m_ware;

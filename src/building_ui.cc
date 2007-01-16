@@ -641,12 +641,17 @@ void Building_Window::setup_capsbuttons()
 	}
 
    if(m_capscache & (1 << Building::PCap_Enhancable)) {
-      const std::vector<char*>* buildings=m_building->get_enhances_to();
+		const std::vector<char *> & buildings = m_building->enhances_to();
       const Tribe_Descr & tribe = *m_player->get_player()->get_tribe();
-      for(uint i=0; i<buildings->size(); i++) {
-         int id = tribe.get_building_index((*buildings)[i]);
+		const std::vector<char *>::const_iterator buildings_end = buildings.end();
+		for
+			(std::vector<char *>::const_iterator it = buildings.begin();
+			 it != buildings_end;
+			 ++it)
+		{
+         int id = tribe.get_building_index(*it);
          if(id==-1)
-            throw wexception("Should enhance to unknown building: %s\n", (*buildings)[i]);
+            throw wexception("Should enhance to unknown building: %s\n", *it);
 
          if(!m_player->get_player()->is_building_allowed(id)) {
             // This buildings is disabled for this scenario, sorry.
@@ -681,7 +686,7 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
-	if (m_building->get_descr()->m_recursive_workarea_info.size()) {
+	if (m_building->descr().m_recursive_workarea_info.size()) {
 		m_toggle_workarea = new UI::Button<Building_Window>
 			(m_capsbuttons,
 			 x, 0, 34, 34,
@@ -800,7 +805,7 @@ void Building_Window::toggle_workarea() {
 		const Coords position = m_building->get_position();
 		m_workarea_job_id = overlay_manager.get_a_job_id();
 		const Workarea_Info & workarea_info =
-			m_building->get_descr()->m_recursive_workarea_info;
+			m_building->descr().m_recursive_workarea_info;
 		m_workarea_job_id = overlay_manager.get_a_job_id();
 		unsigned int hole_radius = 0;
 		Workarea_Info::const_iterator it = workarea_info.begin();
@@ -1204,7 +1209,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
    uint i;
    for(i=0; i<workers->size(); i++) {
 		Worker & worker = *(*workers)[i];
-		m_ls->add(worker.get_descname().c_str(), worker, worker.get_menu_pic());
+		m_ls->add(worker.descname().c_str(), worker, worker.get_menu_pic());
    }
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
@@ -1220,7 +1225,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
 
 	if (m_ls->has_selection()) {
 		const Worker & worker = m_ls->get_selected();
-		sprintf(buffer, "%s", worker.get_descname().c_str());
+		sprintf(buffer, "%s", worker.descname().c_str());
       m_type->set_text(buffer);
 
 		if
@@ -1530,7 +1535,7 @@ void MilitarySite_Window::update(void) {
 		const uint al = s.get_attack_level (), mal = s.get_max_attack_level ();
 		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
 		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
-		er->set_string(0, s.get_name());
+		er->set_string(0, s.name().c_str());
 		sprintf(buf, "%i / %i", hl, mhl);
 		er->set_string(1, buf);
 		sprintf(buf, "%i / %i", al, mal);
@@ -1653,7 +1658,8 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	m_evade_pri->set_visible(false);
 
 	// Add priority buttons for every attribute
-	if (ps->get__descr()->get_train_hp()) {
+	const TrainingSite_Descr & ts_descr = ps->descr();
+	if (ts_descr.get_train_hp()) {
 		// HP buttons
 		new UI::Button<TrainingSite_Options_Window>
 			(this,
@@ -1670,7 +1676,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		new UI::Textarea (this, _cn, (3+_bs)*2, _("Hit Points"), Align_Left);
 		m_hp_pri->set_visible(true);
 	}
-	if (ps->get__descr()->get_train_attack()) {
+	if (ts_descr.get_train_attack()) {
 		// Attack buttons
 		new UI::Button<TrainingSite_Options_Window>
 			(this,
@@ -1687,7 +1693,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		new UI::Textarea (this, _cn, (3+_bs)*3, _("Attack"), Align_Left);
 		m_attack_pri->set_visible(true);
 	}
-	if (ps->get__descr()->get_train_defense()) {
+	if (ts_descr.get_train_defense()) {
 		// Defense buttons
 		new UI::Button<TrainingSite_Options_Window>
 			(this,
@@ -1704,7 +1710,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		new UI::Textarea (this, _cn, (3+_bs)*4, _("Defense"), Align_Left);
 		m_defense_pri->set_visible(true);
 	}
-	if (ps->get__descr()->get_train_evade()) {
+	if (ts_descr.get_train_evade()) {
 		// Evade buttons
 		new UI::Button<TrainingSite_Options_Window>
 			(this,
@@ -1988,7 +1994,7 @@ void TrainingSite_Window::update(void) {
 		const uint al = s.get_attack_level (), mal = s.get_max_attack_level ();
 		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
 		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
-		er->set_string(0, s.get_name());
+		er->set_string(0, s.name().c_str());
 		sprintf(buf, "%i / %i", hl, mhl);
 		er->set_string(1, buf);
 		sprintf(buf, "%i / %i", al, mal);

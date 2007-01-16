@@ -59,18 +59,18 @@ Building_Descr::Building_Descr
 Initialize with sane defaults
 ===============
 */
-Building_Descr::Building_Descr(Tribe_Descr* tribe, const char* name)
-{
-	m_tribe = tribe;
-	snprintf(m_name, sizeof(m_name), "%s", name);
-	strcpy(m_descname, m_name);
-	m_buildable = true;
-	m_buildicon = 0;
-	m_buildicon_fname = 0;
-	m_size = BaseImmovable::SMALL;
-	m_mine = false;
-	m_stopable = false;
-}
+Building_Descr::Building_Descr
+(const Tribe_Descr & tribe_descr, const std::string & building_name)
+:
+m_stopable       (false),
+m_tribe          (tribe_descr),
+m_name           (building_name),
+m_buildable      (true),
+m_buildicon      (0),
+m_buildicon_fname(0),
+m_size           (BaseImmovable::SMALL),
+m_mine           (false)
+{}
 
 
 /*
@@ -97,15 +97,18 @@ Create a building of this type. Does not perform any sanity checks.
 if old != 0 this is an enhancing
 ===============
 */
-Building* Building_Descr::create(Editor_Game_Base* g, Player* owner,
-	Coords pos, bool construct, Building_Descr* old)
+Building* Building_Descr::create
+(Editor_Game_Base & egbase,
+ Player & owner,
+ const Coords pos,
+ const bool construct,
+ const Building_Descr * const old)
+const
 {
-	assert(owner);
-
 	Building* b = construct ? create_constructionsite(old) : create_object();
 	b->m_position = pos;
-	b->set_owner(owner);
-	b->init(g);
+	b->set_owner(&owner);
+	b->init(&egbase);
 
 	return b;
 }
@@ -123,11 +126,9 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	Section* global = prof->get_safe_section("global");
 	Section* s;
 	const char* string;
-	char buf[256];
 	char fname[256];
 
-	snprintf(m_descname, sizeof(m_descname), "%s",
-		global->get_safe_string("descname"));
+	m_descname = global->get_safe_string("descname");
 
 	string = global->get_safe_string("size");
 	if (!strcasecmp(string, "small")) {
@@ -155,8 +156,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	if (m_buildable || m_enhanced_building)
 		{
       // Get build icon
-		snprintf(buf, sizeof(buf), "%s_build.png", m_name);
-		string = global->get_string("buildicon", buf);
+		string = global->get_string("buildicon", (m_name + "_build.png").c_str());
 
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 
@@ -238,22 +238,23 @@ Create a construction site for this type of building
 if old != 0 this is an enhancement from an older building
 ===============
 */
-Building* Building_Descr::create_constructionsite(Building_Descr* old)
+Building * Building_Descr::create_constructionsite
+(const Building_Descr * const old) const
 {
-	if (Building_Descr * const descr =
-	    m_tribe->get_building_descr
-	    (m_tribe->get_building_index("constructionsite")))
+	if
+		(Building_Descr * const descr =
+		 m_tribe.get_building_descr
+	    (m_tribe.get_building_index("constructionsite")))
 	{
 
-	ConstructionSite* csite = (ConstructionSite*)descr->create_object();
-	csite->set_building(this);
+		ConstructionSite & csite = *static_cast<ConstructionSite * const>
+			(descr->create_object());
+		csite.set_building(*this);
+		if (old) csite.set_previous_building(old);
 
-   if(old)
-      csite->set_previous_building(old);
-
-	return csite;
+		return &csite;
 	} else throw wexception
-		("Tribe %s has no constructionsite", m_tribe->get_name().c_str());
+		("Tribe %s has no constructionsite", m_tribe.name().c_str());
 }
 
 
@@ -267,8 +268,10 @@ is there.
 May return 0.
 ===============
 */
-Building_Descr* Building_Descr::create_from_dir(Tribe_Descr* tribe,
-	const char* directory, const EncodeData* encdata)
+Building_Descr* Building_Descr::create_from_dir
+(const Tribe_Descr & tribe,
+ const char * const directory,
+ const EncodeData * const encdata)
 {
 	const char* name;
 
@@ -335,13 +338,12 @@ Implementation
 ==============================
 */
 
-Building::Building(Building_Descr* descr)
-	: PlayerImmovable(descr)
-{
-	m_flag = 0;
-	m_optionswindow = 0;
-	m_stop = false;
-}
+Building::Building(const Building_Descr & building_descr) :
+PlayerImmovable(building_descr),
+m_optionswindow(0),
+m_flag         (0),
+m_stop         (false)
+{}
 
 Building::~Building()
 {
@@ -380,16 +382,10 @@ By default, all buildable buildings can be bulldozed.
 */
 uint Building::get_playercaps() const throw () {
 	uint caps = 0;
-
-	if (get_descr()->get_buildable() || get_descr()->get_enhanced_building())
-		caps |= 1 << PCap_Bulldoze;
-
-	if (get_descr()->get_stopable())
-		caps |= 1 << PCap_Stopable;
-
-   if(get_descr()->get_enhances_to())
-      caps |= 1 << PCap_Enhancable;
-
+	if (descr().get_buildable() or descr().get_enhanced_building())
+		caps                                |= 1 << PCap_Bulldoze;
+	if (descr().get_stopable())       caps |= 1 << PCap_Stopable;
+	if (descr().enhances_to().size()) caps |= 1 << PCap_Enhancable;
 	return caps;
 }
 
@@ -516,12 +512,11 @@ void Building::destroy(Editor_Game_Base* g)
 	Coords pos = m_position;
 	bool fire = burn_on_destroy();
 
-   Tribe_Descr* tribe=get_descr()->get_tribe();
 	PlayerImmovable::destroy(g);
 
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
-		g->create_immovable(pos, "destroyed_building", tribe);
+		g->create_immovable(pos, "destroyed_building", &descr().tribe());
 }
 
 
@@ -533,7 +528,7 @@ Return the animation ID that is used for the building in UI items
 (the building UI, messages, etc..)
 ===============
 */
-uint Building::get_ui_anim() const {return get_descr()->get_ui_anim();}
+uint Building::get_ui_anim() const {return descr().get_ui_anim();}
 
 
 /*
@@ -547,10 +542,8 @@ Default is the descriptive name of the building, but e.g. construction
 sites may want to override this.
 ===============
 */
-std::string Building::get_census_string() const
-{
-	return get_descname();
-}
+const std::string & Building::census_string() const throw ()
+{return descname();}
 
 
 /*
@@ -740,7 +733,7 @@ void Building::draw_help
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 45),
-			 get_census_string().c_str(),
+			 census_string().c_str(),
 			 Align_Center);
 	}
 

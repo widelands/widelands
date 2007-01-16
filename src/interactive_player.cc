@@ -608,57 +608,66 @@ std::vector<bool>* Interactive_Player::get_visibility(void) {
  * Gain a immovable
  */
 void Interactive_Player::gain_immovable( PlayerImmovable* imm ) {
-   if( imm->get_type() != BaseImmovable::BUILDING ) return;
-   Building* b = static_cast<Building*>(imm);
+	if
+		(const Building * const building =
+		 dynamic_cast<const Building * const>(imm))
+	{
+		const ConstructionSite * const constructionsite =
+			dynamic_cast<const ConstructionSite * const>(building);
+		const std::string & building_name = constructionsite ?
+			constructionsite->building().name() : building->name();
 
-   std::string name;
-   bool is_constructionsite = false;
-   if(!strcmp(b->get_name(),"constructionsite")) {
-      name = static_cast<ConstructionSite*>(b)->get_building()->get_name();
-      is_constructionsite = true;
-   } else
-      name = b->get_name();
-
+		const Tribe_Descr & tribe = player().tribe();
+		const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
    // Get the valid vector for this
-   if( (int)m_building_stats.size() < get_player()->get_tribe()->get_nrbuildings())
-      m_building_stats.resize( get_player()->get_tribe()->get_nrbuildings());
+		if (m_building_stats.size() < nr_buildings)
+			m_building_stats.resize(nr_buildings);
 
-   std::vector<Building_Stats>& stat = m_building_stats[ get_player()->get_tribe()->get_building_index(name.c_str()) ];
+		std::vector<Building_Stats> & stat =
+			m_building_stats[tribe.get_building_index(building_name.c_str())];
 
    Building_Stats new_building;
-   new_building.is_constructionsite = is_constructionsite;
-   new_building.pos = b->get_position();
+		new_building.is_constructionsite = constructionsite;
+		new_building.pos = building->get_position();
    stat.push_back( new_building );
+	}
 }
 
 /*
  * Loose a immovable
  */
 void Interactive_Player::lose_immovable( PlayerImmovable* imm ) {
-   if( imm->get_type() != BaseImmovable::BUILDING ) return;
-   Building* b = static_cast<Building*>(imm);
+	if
+		(const Building * const building =
+		 dynamic_cast<const Building * const>(imm))
+	{
+		const ConstructionSite * const constructionsite =
+			dynamic_cast<const ConstructionSite * const>(building);
+		const std::string & building_name = constructionsite ?
+			constructionsite->building().name() : building->name();
 
-   std::string name;
-   if(!strcmp(b->get_name(),"constructionsite")) {
-      name = static_cast<ConstructionSite*>(b)->get_building()->get_name();
-   } else
-      name = b->get_name();
-
+		const Tribe_Descr & tribe = player().tribe();
+		const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
    // Get the valid vector for this
-   if( (int)m_building_stats.size() < get_player()->get_tribe()->get_nrbuildings())
-      m_building_stats.resize( get_player()->get_tribe()->get_nrbuildings());
+		if (m_building_stats.size() < nr_buildings)
+			m_building_stats.resize(nr_buildings);
 
-   std::vector<Building_Stats>& stat = m_building_stats[ get_player()->get_tribe()->get_building_index(name.c_str()) ];
+		std::vector<Building_Stats> & stat =
+			m_building_stats[tribe.get_building_index(building_name.c_str())];
 
+		const Coords building_position = building->get_position();
    for( uint i = 0; i < stat.size(); i++ ) {
-      if( stat[i].pos == b->get_position() ) {
+			if (stat[i].pos == building_position) {
          stat.erase( stat.begin() + i );
          return;
       }
    }
 
-   throw wexception("Interactive_Player::loose_immovable(): A building shoud be removed at the location %i, %i, but nothing"
-         " is known about this building!\n", b->get_position().x, b->get_position().y);
+		throw wexception
+			("Interactive_Player::loose_immovable(): A building shoud be removed "
+			 "at the location %i, %i, but nothing is known about this building!\n",
+			 building_position.x, building_position.y);
+	}
 }
 
 /*

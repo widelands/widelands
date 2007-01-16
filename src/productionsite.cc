@@ -49,8 +49,9 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
-ProductionSite_Descr::ProductionSite_Descr(Tribe_Descr* tribe, const char* name)
-	: Building_Descr(tribe, name)
+ProductionSite_Descr::ProductionSite_Descr
+(const Tribe_Descr & tribe_descr, const std::string & productionsite_name)
+: Building_Descr(tribe_descr, productionsite_name)
 {
 }
 
@@ -159,14 +160,12 @@ ProductionSite_Descr::get_program
 Get the program of the given name.
 ===============
 */
-const ProductionProgram* ProductionSite_Descr::get_program(std::string name)
-	const
+const ProductionProgram * ProductionSite_Descr::get_program
+(const std::string & program_name) const
 {
-	ProgramMap::const_iterator it = m_programs.find(name);
-
-	if (it == m_programs.end())
-		throw wexception("%s has no program '%s'", get_name(), name.c_str());
-
+	const ProgramMap::const_iterator it = m_programs.find(program_name);
+	if (it == m_programs.end()) throw wexception
+		("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second;
 }
 
@@ -177,10 +176,8 @@ ProductionSite_Descr::create_object
 Create a new building of this type
 ===============
 */
-Building* ProductionSite_Descr::create_object()
-{
-	return new ProductionSite(this);
-}
+Building* ProductionSite_Descr::create_object() const
+{return new ProductionSite(*this);}
 
 
 /*
@@ -196,18 +193,16 @@ IMPLEMENTATION
 ProductionSite::ProductionSite
 ===============
 */
-ProductionSite::ProductionSite(ProductionSite_Descr* descr)
-	: Building(descr), m_statistics(STATISTICS_VECTOR_LENGTH, false)
-{
-	m_fetchfromflag = 0;
-
-	m_program_timer = false;
-	m_program_time = 0;
-	m_statistics_changed = true;
-	m_post_timer = 50;
-
-   m_last_stat_percent = 0;
-}
+ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
+Building            (ps_descr),
+m_fetchfromflag     (0),
+m_program_timer     (false),
+m_program_time      (0),
+m_post_timer        (50),
+m_statistics        (STATISTICS_VECTOR_LENGTH, false),
+m_statistics_changed(true),
+m_last_stat_percent (0)
+{}
 
 
 /*
@@ -330,9 +325,10 @@ void ProductionSite::init(Editor_Game_Base* g)
 
 			m_input_queues.push_back(wq);
 			//wq->set_callback(&ConstructionSite::wares_queue_callback, this);
-			wq->init(
-				get_owner()->get_tribe()->get_safe_ware_index((*inputs)[i].get_ware()->get_name()),
-				(*inputs)[i].get_max());
+			wq->init
+				(owner().tribe().get_safe_ware_index
+				 ((*inputs)[i].ware_descr().name().c_str()),
+				 (*inputs)[i].get_max());
 		}
 	}
 }
@@ -592,10 +588,14 @@ void ProductionSite::program_act(Game* g)
             bool consumed=false;
             for(j=0; j<wares.size(); j++) {
                molog("  Consuming(%s)\n", wares[j].c_str());
-
-               for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
-                  if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
-                           wares[j].c_str()) == 0) {
+					const std::vector<Input> & inputs = *descr().get_inputs();
+					const std::vector<Input>::size_type inputs_size =
+						inputs.size();
+					for
+						(std::vector<std::string>::size_type i = 0;
+						 i < inputs_size;
+						 ++i)
+						if (inputs[i].ware_descr().name() == wares[j]) {
                      WaresQueue* wq = m_input_queues[i];
 							if
 								(static_cast<const int>(wq->get_filled())
@@ -609,7 +609,6 @@ void ProductionSite::program_act(Game* g)
                         break;
                      }
                   }
-               }
 					if (consumed) break;
             }
 				if (not consumed) {
@@ -634,10 +633,14 @@ void ProductionSite::program_act(Game* g)
             bool found=false;
             for(j=0; j<wares.size(); j++) {
                molog("  Checking(%s)\n", wares[j].c_str());
-
-               for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
-                  if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
-                           wares[j].c_str()) == 0) {
+					const std::vector<Input> & inputs = *descr().get_inputs();
+					const std::vector<Input>::size_type inputs_size =
+						inputs.size();
+					for
+						(std::vector<std::string>::size_type i = 0;
+						 i < inputs_size;
+						 ++i)
+						if (inputs[i].ware_descr().name() == wares[j]) {
                      WaresQueue* wq = m_input_queues[i];
 							if
 								(static_cast<const int>(wq->get_filled())
@@ -650,7 +653,6 @@ void ProductionSite::program_act(Game* g)
                         break;
                      }
                   }
-               }
 					if (found) break;
             }
 				if (not found) {
@@ -1011,12 +1013,11 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	}
 
 	// Default actions first
-	WareInstance* item = w->fetch_carried_item(g);
 
-	if (item) {
-		if (!get_descr()->is_output(item->get_ware_descr()->get_name()))
-			molog("PSITE: WARNING: carried item %s is not an output item\n",
-					item->get_ware_descr()->get_name());
+	if (WareInstance * const item = w->fetch_carried_item(g)) {
+		const char * const ware_name = item->descr().name().c_str();
+		if (not descr().is_output(ware_name)) molog
+			("PSITE: WARNING: carried item %s is not an output item\n", ware_name);
 
 		molog("ProductionSite::get_building_work: start dropoff\n");
 
@@ -1090,11 +1091,11 @@ ProductionSite::program_start
 Push the given program onto the stack and schedule acting.
 ===============
 */
-void ProductionSite::program_start(Game* g, std::string name)
+void ProductionSite::program_start(Game* g, std::string program_name)
 {
 	State state;
 
-	state.program = get_descr()->get_program(name);
+	state.program = descr().get_program(program_name);
 	state.ip = 0;
 	state.phase = 0;
    state.flags = 0;

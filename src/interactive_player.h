@@ -97,6 +97,7 @@ class Interactive_Player : public Interactive_Base {
 
 		Game * get_game() const {return m_game;}
 		uchar get_player_number() const {return m_player_number;}
+	Player & player() const throw () {return m_game->player(m_player_number);}
 		Player * get_player() const
 		{assert(m_game); return m_game->get_player(m_player_number);}
 

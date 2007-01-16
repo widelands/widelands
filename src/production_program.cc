@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,10 +154,9 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			//  "Always main worker is doing stuff"
 			const char * const main_worker_name
 				= (*building->get_workers())[0].name.c_str();
-			Tribe_Descr * tribe_descr = building->get_tribe();
+			const Tribe_Descr & tribe = building->tribe();
 			const Workarea_Info & worker_workarea_info
-				= tribe_descr->get_worker_descr
-				(tribe_descr->get_safe_worker_index(main_worker_name))
+				= tribe.get_worker_descr(tribe.get_safe_worker_index(main_worker_name))
 				->get_program(act.sparam1.c_str())->get_workarea_info();
 			const Workarea_Info::const_iterator worker_workarea_info_end =
 				worker_workarea_info.end();
@@ -177,7 +176,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 					 de != descriptions_end;
 					 ++de)
 				{
-					std::string description = building->get_descname();
+					std::string description = building->descname();
 					description += ' ';
 					description += m_name;
 					description += " worker ";
@@ -230,7 +229,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
          if(endp && *endp || act.iparam3>100)
             throw wexception("Bad chance after maximum amount is empty: '%s'", cmd[4].c_str());
 
-				 std::string description = building->get_descname();
+				 std::string description = building->descname();
 				 description += ' ';
 				 description += name;
 				 description += " mine ";

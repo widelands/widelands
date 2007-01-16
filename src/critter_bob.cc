@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,11 +171,10 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 /*
  * Constructor
  */
-Critter_Bob_Descr::Critter_Bob_Descr(const char *name, Tribe_Descr* tribe)
-	: Bob_Descr(name, tribe)
-{
-	m_swimming = 0;
-}
+Critter_Bob_Descr::Critter_Bob_Descr
+(const Tribe_Descr * const tribe_descr, const std::string & critter_bob_name)
+: Bob_Descr(tribe_descr, critter_bob_name), m_swimming(0)
+{}
 
 
 Critter_Bob_Descr::~Critter_Bob_Descr() {
@@ -221,8 +220,13 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
    // Pretty name
    m_descname = s->get_safe_string("descname");
 
-   snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
-	m_walk_anims.parse(this, directory, prof, sectname, prof->get_section("walk"), encdata);
+	m_walk_anims.parse
+		(this,
+		 directory,
+		 prof,
+		 (m_name + "_walk_??").c_str(),
+		 prof->get_section("walk"),
+		 encdata);
 
 	Section *sglobal = prof->get_safe_section("global");
    const char* string;
@@ -267,8 +271,8 @@ class Critter_Bob
 //
 #define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000 // wait up to 12 seconds between moves
 
-Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
-	: Bob(d)
+Critter_Bob::Critter_Bob(const Critter_Bob_Descr & critter_bob_descr) :
+Bob(critter_bob_descr)
 {
 }
 
@@ -416,7 +420,4 @@ void Critter_Bob::init_auto_task(Game *) {
 	top_state().ivar1 = 0;
 }
 
-Bob *Critter_Bob_Descr::create_object()
-{
-	return new Critter_Bob(this);
-}
+Bob * Critter_Bob_Descr::create_object() const {return new Critter_Bob(*this);}

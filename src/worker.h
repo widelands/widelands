@@ -72,18 +72,18 @@ class Worker_Descr : public Bob_Descr {
       SOLDIER,
    };
 
-   Worker_Descr(Tribe_Descr *tribe, const char *name);
+   Worker_Descr(const Tribe_Descr &, const std::string & name);
    virtual ~Worker_Descr(void);
 
-   virtual Bob *create_object();
+	virtual Bob * create_object() const;
 
    virtual void load_graphics(void);
 
    inline bool get_buildable() { return m_buildable; }
    inline const BuildCost* get_buildcost() { return &m_buildcost; }
 
-	Tribe_Descr *get_tribe() const throw () {return m_tribe;}
-	std::string get_descname() const throw () {return m_descname;}
+	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
+	const std::string & descname() const throw () {return m_descname;}
    inline std::string get_helptext() const { return m_helptext; }
 
 	uint get_menu_pic() const throw () {return m_menu_pic;}
@@ -104,9 +104,11 @@ class Worker_Descr : public Bob_Descr {
 
    protected:
    virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-   static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
+	static Worker_Descr * create_from_dir
+		(const Tribe_Descr &,
+		 const char * const directory,
+		 const EncodeData * const);
 
-	Tribe_Descr * m_tribe;
 	std::string   m_descname; //  descriptive name
 	std::string   m_helptext; //  short (tooltip-like) help text
 	char        * m_menu_pic_fname;
@@ -129,17 +131,19 @@ class Worker : public Bob {
 
    public:
 
-   Worker(Worker_Descr *descr);
+	Worker(const Worker_Descr &);
    virtual ~Worker();
 
-   virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
+	virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
+	{return descr().get_worker_type();}
    virtual int get_bob_type() { return Bob::WORKER; }
 
-   inline uint get_animation(const char* str) { return get_descr()->get_animation(str); }
-	uint get_menu_pic() const throw() {return get_descr()->get_menu_pic();}
-	const char * get_becomes() const throw () {return get_descr()->get_becomes();}
-	Tribe_Descr *get_tribe() const throw () {return get_descr()->get_tribe();}
-	std::string get_descname() const throw () {return get_descr()->get_descname();}
+	uint get_animation(const char * const str) const
+	{return descr().get_animation(str);}
+	uint          get_menu_pic() const throw () {return descr().get_menu_pic();}
+	const char *  get_becomes () const throw () {return descr().get_becomes ();}
+	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
+	const std::string & descname() const throw () {return descr().descname();}
 
    virtual uint get_movecaps();
 
@@ -287,13 +291,13 @@ class Worker : public Bob {
    Carrier is a worker who is employed by a Road.
    */
 struct Carrier_Descr : public Worker_Descr {
-      Carrier_Descr(Tribe_Descr *tribe, const char *name);
+	Carrier_Descr(const Tribe_Descr &, const std::string & carrier_name);
       virtual ~Carrier_Descr(void);
 
       virtual Worker_Type get_worker_type(void) const { return CARRIER; }
 
    protected:
-      virtual Bob *create_object();
+	virtual Bob * create_object() const;
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 };
 
@@ -303,13 +307,13 @@ class Carrier : public Worker {
    MO_DESCR(Carrier_Descr);
 
    public:
-   Carrier(Carrier_Descr *descr);
+	Carrier(const Carrier_Descr & descr);
    virtual ~Carrier();
 
    bool notify_ware(Game* g, int flag);
 
-   public:
-   virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
+	virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
+	{return descr().get_worker_type();}
 
    void start_task_road();
    void update_task_road(Game* g);

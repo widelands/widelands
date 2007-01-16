@@ -40,8 +40,8 @@
 Player::Player
 (Editor_Game_Base  & the_egbase,
  const int type,
- const int plnum,
- const Tribe_Descr & the_tribe,
+ const Player_Number plnum,
+ const Tribe_Descr & tribe_descr,
  const std::string & name,
  const uchar * const playercolor)
 :
@@ -49,7 +49,7 @@ m_see_all(false),
 m_egbase (the_egbase),
 m_type   (type),
 m_plnum  (plnum),
-m_tribe  (the_tribe)
+m_tribe  (tribe_descr)
 {
 
 	for(int i = 0; i < 4; i++)

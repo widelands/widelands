@@ -89,15 +89,15 @@ class AttackControllerDescr : public Map_Object_Descr
 
 AttackControllerDescr globalAttackControllerDescr;
 
-AttackController::AttackController(Game* _game) :
-BaseImmovable(&globalAttackControllerDescr)  {
-   Map_Object::init(_game);
-   this->game = _game;
-   this->attackedMsEmpty = false;
-}
+AttackController::AttackController(Game & the_game) :
+BaseImmovable  (globalAttackControllerDescr),
+attackedMsEmpty(false),
+game           (&the_game)
+{Map_Object::init(&the_game);}
 
 AttackController::AttackController(Game* _game, Flag* _flag, int _attacker, int _defender) :
-BaseImmovable(&globalAttackControllerDescr)  {
+BaseImmovable(globalAttackControllerDescr)
+{
 
    Map_Object::init(_game);
 

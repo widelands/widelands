@@ -1467,14 +1467,10 @@ Worker_Descr::Worker_Descr
 Worker_Descr::~Worker_Descr
 ===============
 */
-Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
-	: Bob_Descr(name, tribe)
-{
-	m_tribe = tribe;
-	m_menu_pic = 0;
-	m_menu_pic_fname = 0;
-	add_attribute(Map_Object::WORKER);
-}
+Worker_Descr::Worker_Descr
+(const Tribe_Descr & tribe_descr, const std::string & worker_name)
+: Bob_Descr(&tribe_descr, worker_name), m_menu_pic_fname(0), m_menu_pic(0)
+{add_attribute(Map_Object::WORKER);}
 
 Worker_Descr::~Worker_Descr(void)
 {
@@ -1654,15 +1650,13 @@ Worker::Worker
 Worker::~Worker
 ===============
 */
-Worker::Worker(Worker_Descr *descr)
-	: Bob(descr)
-{
-	m_economy = 0;
-	m_location = 0;
-	m_supply = 0;
-   m_needed_exp = 0;
-   m_current_exp = 0;
-}
+Worker::Worker(const Worker_Descr & worker_descr) :
+Bob          (worker_descr),
+m_economy    (0),
+m_supply     (0),
+m_needed_exp (0),
+m_current_exp(0)
+{}
 
 Worker::~Worker()
 {
@@ -1688,7 +1682,7 @@ void Worker::log_general_info(Editor_Game_Base* egbase) {
    WareInstance* ware=static_cast<WareInstance*>(m_carried_item.get(egbase));
    molog("m_carried_item: %p\n", ware);
    if(ware) {
-      molog("* m_carried_item->get_ware() (id): %i\n", ware->get_ware());
+		molog("* m_carried_item->get_ware() (id): %i\n", ware->descr_index());
       molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
    }
 
@@ -3528,10 +3522,7 @@ Worker_Descr::create_object
 Create a generic worker of this type.
 ===============
 */
-Bob* Worker_Descr::create_object()
-{
-	return new Worker(this);
-}
+Bob * Worker_Descr::create_object() const {return new Worker(*this);}
 
 
 /*
@@ -3548,8 +3539,9 @@ Carrier_Descr::Carrier_Descr
 Carrier_Descr::~Carrier_Descr
 ===============
 */
-Carrier_Descr::Carrier_Descr(Tribe_Descr *tribe, const char *name)
-	: Worker_Descr(tribe, name)
+Carrier_Descr::Carrier_Descr
+(const Tribe_Descr & tribe_descr, const std::string & carrier_name)
+: Worker_Descr(tribe_descr, carrier_name)
 {
 }
 
@@ -3584,9 +3576,7 @@ Carrier::Carrier
 Carrier::~Carrier
 ===============
 */
-Carrier::Carrier(Carrier_Descr *descr)
-	: Worker(descr)
-{
+Carrier::Carrier(const Carrier_Descr & carrier_descr) : Worker(carrier_descr) {
 	m_acked_ware = -1;
 }
 
@@ -4150,10 +4140,7 @@ Carrier_Descr::create_object
 Create a carrier of this type.
 ===============
 */
-Bob *Carrier_Descr::create_object()
-{
-	return new Carrier(this);
-}
+Bob * Carrier_Descr::create_object() const {return new Carrier(*this);}
 
 
 /*
@@ -4173,7 +4160,10 @@ config data.
 May return 0.
 ===============
 */
-Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata)
+Worker_Descr *Worker_Descr::create_from_dir
+(const Tribe_Descr & tribe,
+ const char * const directory,
+ const EncodeData * const encdata)
 {
 	const char *name;
 

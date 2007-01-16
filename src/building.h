@@ -51,11 +51,13 @@ struct Building_Descr : public Map_Object_Descr {
 	};
 	typedef std::vector<CostItem> BuildCost;
 
-	Building_Descr(Tribe_Descr* tribe, const char* name);
+	Building_Descr(const Tribe_Descr &, const std::string & name);
 	virtual ~Building_Descr(void);
 
-	inline const char* get_name(void) const { return m_name; }
-	const char * get_descname() const throw () {return m_descname;}
+	const std::string & name    () const throw () {return m_name;}
+	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
+	const std::string & descname() const throw () {return m_descname;}
+	const char * get_descname() const throw () __attribute__ ((deprecated)) {return m_descname.c_str();}
 	inline bool get_buildable(void) const { return m_buildable; }
    inline bool get_enhanced_building(void) const { return m_enhanced_building; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
@@ -68,32 +70,39 @@ struct Building_Descr : public Map_Object_Descr {
 	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
 	const std::string & get_continue_icon() const throw ()
 	{return m_continue_icon;}
-   inline const std::vector<char*>* get_enhances_to() const { return &m_enhances_to; }
+	const std::vector<char *> & enhances_to() const throw ()
+	{return m_enhances_to;}
 
-	Building* create(Editor_Game_Base* g, Player* owner, Coords pos,
-		bool construct, Building_Descr* = 0);
+	Building * create
+		(Editor_Game_Base &,
+		 Player &,
+		 const Coords,
+		 const bool construct,
+		 const Building_Descr * const = 0)
+		const;
 	virtual void parse(const char* directory, Profile* prof,
 		const EncodeData* encdata);
 	virtual void load_graphics();
 
-	virtual int get_conquers(void) const { return 0; }
+	virtual uint get_conquers() const {return 0;}
 
-   inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
+	const Tribe_Descr & tribe() const throw () {return m_tribe;}
+	const Tribe_Descr * get_tribe() const throw () __attribute__ ((deprecated)) {return &m_tribe;}
 	Workarea_Info m_workarea_info, m_recursive_workarea_info;
 
-	const BuildingHints* get_hints() const { return &m_hints; }
+	const BuildingHints & hints() const throw () {return m_hints;}
 
 protected:
-	virtual Building* create_object() = 0;
-	Building* create_constructionsite(Building_Descr* );
+	virtual Building * create_object() const = 0;
+	Building * create_constructionsite(const Building_Descr * const) const;
 	bool         m_stopable;
 	std::string  m_stop_icon;
 	std::string  m_continue_icon;
 
 private:
-	Tribe_Descr* m_tribe;           // the tribe this building belongs to
-	char         m_name[20];        // internal codename
-	char         m_descname[30];    // descriptive name for GUI
+	const Tribe_Descr & m_tribe;
+	const std::string   m_name;     // internal codename
+	std::string         m_descname; // descriptive name for GUI
 	bool         m_buildable;       // the player can build this himself
 	BuildCost    m_buildcost;
 	uint         m_buildicon;       // if buildable: picture in the build dialog
@@ -105,8 +114,10 @@ private:
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
 
 public:
-	static Building_Descr* create_from_dir(Tribe_Descr* tribe,
-		const char* directory, const EncodeData* encdata);
+	static Building_Descr* create_from_dir
+		(const Tribe_Descr &,
+		 const char * const directory,
+		 const EncodeData * const encdata);
 };
 
 
@@ -133,7 +144,7 @@ public:
 		TRAININGSITE
    };
 
-	Building(Building_Descr* descr);
+	Building(const Building_Descr &);
 	virtual ~Building();
 
 	virtual int get_building_type() const throw () = 0;
@@ -147,10 +158,12 @@ public:
 	virtual uint get_playercaps() const throw ();
 	virtual Coords get_position() const throw () {return m_position;}
 
-	const char * get_name    () const throw () {return get_descr()->get_name();}
-	const char * get_descname() const throw () {return get_descr()->get_descname();}
+	const std::string & name    () const throw () {return descr().name    ();}
+	const char * get_name    () const throw () __attribute__ ((deprecated)) {return descr().name().c_str();}
+	const std::string & descname() const throw () {return descr().descname();}
+	const char * get_descname() const throw () __attribute__ ((deprecated)) {return descr().descname().c_str();}
 
-	virtual std::string get_census_string() const;
+	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
 
 	virtual bool burn_on_destroy();
@@ -163,14 +176,17 @@ public:
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
 	bool leave_check_and_wait(Game* g, Worker* w);
-	inline int get_conquers(void) const { return get_descr()->get_conquers(); }
+	uint get_conquers() const throw () {return descr().get_conquers();}
 
-	inline std::string get_stop_icon() const { return get_descr()->get_stop_icon(); }
-	inline std::string get_continue_icon() const { return get_descr()->get_continue_icon(); }
-	inline bool get_stop() const { return m_stop; }
+	const std::string & get_stop_icon    () const throw ()
+	{return descr().get_stop_icon();}
+	const std::string & get_continue_icon() const throw ()
+	{return descr().get_continue_icon();}
+	bool get_stop() const throw () {return m_stop;}
 	virtual void set_stop(bool stop);
 
-   inline const std::vector<char*>* get_enhances_to() const { return get_descr()->get_enhances_to(); }
+	const std::vector<char *> & enhances_to() const throw ()
+	{return descr().enhances_to();}
 
    void log_general_info(Editor_Game_Base* egbase);
 

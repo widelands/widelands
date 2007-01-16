@@ -49,10 +49,9 @@ BaseImmovable::~BaseImmovable
 Base immovable creation and destruction
 ===============
 */
-BaseImmovable::BaseImmovable(Map_Object_Descr *descr)
-	: Map_Object(descr)
-{
-}
+BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
+Map_Object(&mo_descr)
+{}
 
 BaseImmovable::~BaseImmovable()
 {
@@ -233,14 +232,11 @@ Immovable_Descr::Immovable_Descr
 Initialize with sane defaults
 ===============
 */
-Immovable_Descr::Immovable_Descr(const char *name, Tribe_Descr* owner_tribe)
-{
-	snprintf(m_name, sizeof(m_name), "%s", name);
-	m_size = BaseImmovable::NONE;
-   m_picture="";
-	m_default_encodedata.clear();
-   m_owner_tribe=owner_tribe;
-}
+Immovable_Descr::Immovable_Descr
+(const Tribe_Descr * const owner_tribe, const std::string & immovable_name)
+:
+m_name(immovable_name), m_size(BaseImmovable::NONE), m_owner_tribe(owner_tribe)
+{m_default_encodedata.clear();}
 
 
 /*
@@ -304,7 +300,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	char picname[256];
 
 	// Global options
-	snprintf(buf, sizeof(buf), "%s_00.png", m_name);
+	snprintf(buf, sizeof(buf), "%s_00.png", m_name.c_str());
 	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
    m_picture = picname;
 
@@ -412,32 +408,39 @@ Immovable_Descr::parse_animation
 Parse the animation of the given name.
 ===============
 */
-uint Immovable_Descr::parse_animation(std::string directory, Profile* s, std::string name)
+uint Immovable_Descr::parse_animation
+(std::string directory, Profile* s, std::string animation_name)
 {
 	// Load the animation
-	Section* anim = s->get_section(name.c_str());
+	Section * anim = s->get_section(animation_name.c_str());
 	char picname[256];
 	uint animid=0;
 
-	snprintf(picname, sizeof(picname), "%s_%s_??.png", m_name, name.c_str());
+	snprintf
+		(picname, sizeof(picname),
+		 "%s_%s_??.png",
+		 m_name.c_str(),
+		 animation_name.c_str());
 
 	// kind of obscure, this is still needed for backwards compatibility
-	if (name == "idle" && !anim) {
+	if (animation_name == "idle" and not anim) {
 		anim = s->get_section("global");
 
-		snprintf(picname, sizeof(picname), "%s_??.png", m_name);
+		snprintf(picname, sizeof(picname), "%s_??.png", m_name.c_str());
 	}
 
 	if (!anim) {
-		log("%s: Animation %s not defined.\n", directory.c_str(), name.c_str());
+		log
+			("%s: Animation %s not defined.\n",
+			 directory.c_str(),
+			 animation_name.c_str());
 		return 0;
 	}
 
-   if(!is_animation_known(name.c_str())) {
+	if (not is_animation_known(animation_name.c_str())) {
       animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
-      add_animation(name.c_str(), animid);
-   } else
-      animid = get_animation(name.c_str());
+		add_animation(animation_name.c_str(), animid);
+	} else animid = get_animation(animation_name.c_str());
 
 	return animid;
 }
@@ -452,7 +455,7 @@ Create an immovable of this type
 */
 Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords)
 {
-   Immovable *im = new Immovable(this);
+	Immovable * im = new Immovable(*this);
 	im->m_position = coords;
 	im->init(gg);
 	return im;
@@ -473,14 +476,13 @@ Immovable::Immovable
 Immovable::~Immovable
 ===============
 */
-Immovable::Immovable(Immovable_Descr *descr)
-	: BaseImmovable(descr)
-{
-	m_anim = 0;
-	m_program = 0;
-	m_program_ptr = 0;
-	m_program_step = 0;
-}
+Immovable::Immovable(const Immovable_Descr & imm_descr) :
+BaseImmovable (imm_descr),
+m_anim        (0),
+m_program     (0),
+m_program_ptr (0),
+m_program_step(0)
+{}
 
 Immovable::~Immovable()
 {
@@ -807,12 +809,9 @@ PlayerImmovable::PlayerImmovable
 Zero-initialize
 ===============
 */
-PlayerImmovable::PlayerImmovable(Map_Object_Descr *descr)
-	: BaseImmovable(descr)
-{
-	m_owner = 0;
-	m_economy = 0;
-}
+PlayerImmovable::PlayerImmovable(const Map_Object_Descr & mo_descr) :
+BaseImmovable(mo_descr), m_owner(0), m_economy(0)
+{}
 
 /*
 ===============

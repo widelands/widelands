@@ -43,10 +43,11 @@ static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 ConstructionSite_Descr::ConstructionSite_Descr
 ===============
 */
-ConstructionSite_Descr::ConstructionSite_Descr(Tribe_Descr* tribe, const char* name)
-	: Building_Descr(tribe, name)
-{
-}
+ConstructionSite_Descr::ConstructionSite_Descr
+(const Tribe_Descr & tribe_descr, const std::string & building_name)
+:
+Building_Descr(tribe_descr, building_name)
+{}
 
 
 /*
@@ -74,10 +75,8 @@ ConstructionSite_Descr::create_object
 Allocate a ConstructionSite
 ===============
 */
-Building* ConstructionSite_Descr::create_object()
-{
-	return new ConstructionSite(this);
-}
+Building* ConstructionSite_Descr::create_object() const
+{return new ConstructionSite(*this);}
 
 
 /*
@@ -96,22 +95,18 @@ ConstructionSite::ConstructionSite
 Initialize with default values
 ===============
 */
-ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr)
-	: Building(descr)
-{
-	m_building = 0;
-	m_prev_building= 0;
-
-	m_builder = 0;
-	m_builder_request = 0;
-
-	m_fetchfromflag = 0;
-
-	m_working = false;
-	m_work_steptime = 0;
-	m_work_completed = 0;
-	m_work_steps = 0;
-}
+ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
+Building         (cs_descr),
+m_building       (0),
+m_prev_building  (0),
+m_builder_request(0),
+m_builder        (0),
+m_fetchfromflag  (0),
+m_working        (false),
+m_work_steptime  (0),
+m_work_completed (0),
+m_work_steps     (0)
+{}
 
 
 /*
@@ -141,10 +136,10 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
    Building::log_general_info(egbase);
 
    molog("m_building: %p\n", m_building);
-   molog("* m_building (name): %s\n", m_building->get_name());
+	molog("* m_building (name): %s\n", m_building->name().c_str());
    molog("m_prev_building: %p\n", m_prev_building);
 	if (m_prev_building)
-      molog("* m_prev_building (name): %s\n", m_prev_building->get_name());
+		molog("* m_prev_building (name): %s\n", m_prev_building->name().c_str());
 
    molog("m_builder_request: %p\n", m_builder_request);
    molog("m_builder: %p\n", m_builder);
@@ -193,20 +188,12 @@ should be more useful to the player.
 ===============
 */
 uint ConstructionSite::get_ui_anim() const
-{return get_building()->get_animation("idle");}
+{return building().get_animation("idle");}
 
 
-/*
-===============
-ConstructionSite::get_census_string
-
-Print the name of the building we build.
-===============
-*/
-std::string ConstructionSite::get_census_string() const
-{
-	return get_building()->get_descname();
-}
+/// Print the name of the building we build.
+const std::string & ConstructionSite::census_string() const throw ()
+{return building().descname();}
 
 
 /*
@@ -257,11 +244,10 @@ ConstructionSite::set_building
 Set the type of building we're going to build
 ===============
 */
-void ConstructionSite::set_building(Building_Descr* descr)
-{
+void ConstructionSite::set_building(const Building_Descr & building_descr) {
 	assert(!m_building);
 
-	m_building = descr;
+	m_building = &building_descr;
 }
 
 /*
@@ -269,10 +255,12 @@ void ConstructionSite::set_building(Building_Descr* descr)
  * That is the building that was here before, we're
  * an enhancement
  */
-void ConstructionSite::set_previous_building(Building_Descr* descr) {
+void ConstructionSite::set_previous_building
+(const Building_Descr * const previous_building_descr)
+{
    assert(!m_prev_building);
 
-   m_prev_building=descr;
+	m_prev_building = previous_building_descr;
 
 	if (not m_prev_building->get_animation("build"))
       throw wexception("Trying to enhance a non buildable building!\n");
@@ -378,7 +366,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	if (m_work_completed >= m_work_steps)
 	{
 		// Put the real building in place
-		Building* bld = m_building->create(g, get_owner(), m_position, false);
+		Building * const bld = m_building->create(*g, owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
 		if (g->get_objects()->object_still_available(m_builder)) {
@@ -581,7 +569,7 @@ void ConstructionSite::draw
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
-	const uint anim = get_building()->get_animation("build");
+	const uint anim = building().get_animation("build");
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
    uint anim_pic = completedtime * nr_frames / totaltime;
 	// Redefine tanim

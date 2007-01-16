@@ -579,17 +579,13 @@ owner is the player number of the building's owner.
 idx is the building type index.
 ===============
 */
-Building *Editor_Game_Base::warp_building(Coords c, char owner, int idx)
+Building * Editor_Game_Base::warp_building
+(const Coords c,
+ const Player_Number owner,
+ const Building_Descr::Index i)
 {
-	Building_Descr *descr;
-	Player *player = get_player(owner);
-
-	assert(player);
-
-	descr = player->get_tribe()->get_building_descr(idx);
-	assert(descr);
-
-	return descr->create(this, get_player(owner), c, false);
+	Player & plr = player(owner);
+	return plr.tribe().get_building_descr(i)->create(*this, plr, c, false);
 }
 
 
@@ -605,16 +601,13 @@ if oldi != -1 this is a constructionsite comming from an enhancing action
 Building* Editor_Game_Base::warp_constructionsite(Coords c, char owner, int idx, int old_id)
 {
 	Building_Descr* descr, *old_descr=0;
-	Player *player = get_player(owner);
+	Player & plr = player(owner);
 
-	assert(player);
-
-	descr = player->get_tribe()->get_building_descr(idx);
-   if(old_id!=-1)
-      old_descr= player->get_tribe()->get_building_descr(old_id);
+	descr = plr.tribe().get_building_descr(idx);
+   if (old_id!=-1) old_descr = plr.tribe().get_building_descr(old_id);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), c, true, old_descr);
+	return descr->create(*this, plr, c, true, old_descr);
 }
 
 
@@ -627,7 +620,8 @@ Instantly create a bob at the given x/y location.
 idx is the bob type.
 ===============
 */
-Bob *Editor_Game_Base::create_bob(Coords c, int idx, Tribe_Descr* tribe)
+Bob * Editor_Game_Base::create_bob
+(const Coords c, const Bob_Descr::Index idx, const Tribe_Descr * const tribe)
 {
 	Bob_Descr *descr;
 
@@ -708,7 +702,8 @@ AttackController* Editor_Game_Base::create_attack_controller(Flag* flag,int atta
 }
 
 AttackController* Editor_Game_Base::create_attack_controller() {
-   AttackController* ctrl = new AttackController((Game*)this);
+	AttackController * const ctrl =
+		new AttackController(static_cast<Game &>(*this));
    m_attack_serials.push_back(ctrl->get_serial());
    return ctrl;
 }
@@ -829,15 +824,13 @@ void Editor_Game_Base::cleanup_for_load
  * returns 0
  */
 std::vector<Coords>*
-Editor_Game_Base::get_attack_points(uchar player)
+Editor_Game_Base::get_attack_points(const Player_Number player_number)
 {
    std::vector<Coords>* tmp = 0;
 
    for (uint i = 0; i < m_conquer_info.size(); ++i)
    {
-      if (m_conquer_info[i].player == player)
-      {
-         // First initialization
+		if (m_conquer_info[i].player == player_number) { // First initialization
          if (!tmp)
             tmp = new std::vector<Coords>;
 

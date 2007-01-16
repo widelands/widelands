@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -203,7 +203,8 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 		Building_Descr *descr = 0;
 
 		try {
-			descr = Building_Descr::create_from_dir(this, it->c_str(), &m_default_encdata);
+			descr = Building_Descr::create_from_dir
+				(*this, it->c_str(), &m_default_encdata);
 		} catch(std::exception &e) {
 			log("Building %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
 		} catch(...) {
@@ -232,9 +233,8 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 			to_consider.erase(consider_now_iterator);
 			considered.insert(consider_now);
 			{  //  Enhancements from the considered building
-				assert(considered_building_descr.get_enhances_to());
 				const std::vector<char*> & enhancements =
-					*considered_building_descr.get_enhances_to();
+					considered_building_descr.enhances_to();
 				for
 					(std::vector<char*>::const_iterator it = enhancements.begin();
 					 it != enhancements.end(); ++it) {
@@ -292,7 +292,7 @@ void Tribe_Descr::parse_workers(const char *directory)
 		Worker_Descr *descr = 0;
 
 		try {
-			descr = Worker_Descr::create_from_dir(this, it->c_str(), &m_default_encdata);
+			descr = Worker_Descr::create_from_dir(*this, it->c_str(), &m_default_encdata);
 		} catch(std::exception &e) {
 			log("Worker %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
 		} catch(...) {
@@ -407,7 +407,7 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof, this);
 				m_bobs.add(descr);
 			} else {
-				Immovable_Descr *descr = new Immovable_Descr(name, this);
+				Immovable_Descr * const descr = new Immovable_Descr(this, name);
 				descr->parse(it->c_str(), &prof);
 				m_immovables.add(descr);
 			}
@@ -525,7 +525,8 @@ Resource_Descr::get_indicator
 Find the best matching indicator for the given amount.
 ==============
 */
-int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
+uint Tribe_Descr::get_resource_indicator
+(const Resource_Descr * const res, const uint amount) const
 {
    if(!res || !amount) {
       int idx=get_immovable_index("resi_none");
@@ -548,14 +549,14 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
 
 	if (not num_indicators) throw wexception
 		("Tribe %s doesn't declar a resource indicator for resource %s!\n",
-		 get_name().c_str(),
-		 res->get_name());
+		 name().c_str(),
+		 res->name().c_str());
 
    uint bestmatch = (uint) (( static_cast<float>(amount)/res->get_max_amount() ) * num_indicators);
    if(((int)amount)<res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
-   sprintf(buffer, "resi_%s%i", res->get_name(), bestmatch);
+	sprintf(buffer, "resi_%s%i", res->name().c_str(), bestmatch);
 
 	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
 	//res->get_name(), buffer, amount);

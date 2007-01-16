@@ -29,15 +29,17 @@ class Critter_BobProgram;
 // Description
 //
 struct Critter_Bob_Descr : public Bob_Descr {
-      Critter_Bob_Descr(const char *name, Tribe_Descr* tribe);
+	Critter_Bob_Descr
+		(const Tribe_Descr * const, const std::string & critter_bob_name);
 	virtual ~Critter_Bob_Descr();
 
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-      Bob *create_object();
+	Bob * create_object() const;
 
 	bool is_swimming() const throw () {return m_swimming;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
-	const char* get_descname() const throw () {return m_descname.c_str();}
+	const std::string & descname() const throw () {return m_descname;}
+	const char * get_descname() const throw () __attribute__ ((deprecated)) {return descname().c_str();}
 
       const Critter_BobProgram* get_program(std::string name) const;
 
@@ -56,7 +58,7 @@ class Critter_Bob : public Bob {
    MO_DESCR(Critter_Bob_Descr);
 
 public:
-	Critter_Bob(Critter_Bob_Descr *d);
+	Critter_Bob(const Critter_Bob_Descr &);
 	virtual ~Critter_Bob(void);
 
    virtual int get_bob_type() { return Bob::CRITTER; }
@@ -65,7 +67,8 @@ public:
 	virtual void init_auto_task(Game* g);
 
 	void start_task_program(const std::string & name);
-	const char * get_descname() const throw () {return get_descr()->get_descname();}
+	const std::string & descname() const throw () {return descr().descname();}
+	const char * get_descname() const throw ()  __attribute__ ((deprecated)) {return descname().c_str();}
 
 private:
 	void roam_update(Game* g, State* state);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,23 +159,14 @@ throw (_wexception)
             // write id
             fw.Unsigned32(serial);
 
-            bool constructionsite=building->get_building_type()==Building::CONSTRUCTIONSITE;
-
-            if(constructionsite) {
-               ConstructionSite* cs=static_cast<ConstructionSite*>(building);
-               fw.CString(cs->get_building()->get_name());
-               fw.Unsigned8(1);
-            } else {
-            // write name
-            std::string name=building->get_name();
-            fw.CString(name.c_str());
-            fw.Unsigned8(0);
-            }
-
-         } else {
-            // No existance, no owner
-            fw.Unsigned8(0);
-         }
+				const ConstructionSite * const constructionsite =
+					dynamic_cast<const ConstructionSite * const>(building);
+				fw.CString
+					((constructionsite ?
+					  constructionsite->building() : building->descr())
+					 .name().c_str());
+				fw.Unsigned8(static_cast<const bool>(constructionsite));
+			} else fw.Unsigned8(0);
       }
    }
 

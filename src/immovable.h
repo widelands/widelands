@@ -46,7 +46,7 @@ struct BaseImmovable : public Map_Object {
 		BIG
 	};
 
-	BaseImmovable(Map_Object_Descr *descr);
+	BaseImmovable(const Map_Object_Descr &);
 	virtual ~BaseImmovable();
 
 	virtual int  get_size    () const throw () = 0;
@@ -73,10 +73,12 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
 
-	Immovable_Descr(const char *name, Tribe_Descr* owner_tribe);
+	Immovable_Descr
+		(const Tribe_Descr * const, const std::string & immovable_name);
 	~Immovable_Descr();
 
-	inline const char* get_name(void) const { return m_name; }
+	const std::string & name() const throw () {return m_name;}
+	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
 	int get_size() const throw () {return m_size;}
    inline const char* get_picture(void) const { return m_picture.c_str(); }
 	const ImmovableProgram* get_program(std::string name) const;
@@ -92,12 +94,12 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 protected:
    std::string m_picture;
-	char          m_name[30];
+	const std::string         m_name;
 	int           m_size;
 	EncodeData    m_default_encodedata;
 
 	ProgramMap    m_programs;
-   Tribe_Descr*            m_owner_tribe;       // or zero if this is a world immovable
+	const Tribe_Descr * const m_owner_tribe; // 0 if world immovable
 };
 
 class Immovable : public BaseImmovable {
@@ -108,7 +110,7 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(Immovable_Descr);
 
 public:
-	Immovable(Immovable_Descr *descr);
+	Immovable(const Immovable_Descr &);
 	~Immovable();
 
 	Coords get_position() const { return m_position; }
@@ -116,7 +118,8 @@ public:
 	virtual int  get_type    () const throw ();
 	virtual int  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-	std::string get_name() const { return get_descr()->get_name(); }
+	const std::string & name() const throw () {return descr().name();}
+	std::string get_name() const __attribute__ ((deprecated)) {return name();}
 
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);
@@ -127,7 +130,8 @@ public:
 
 	void switch_program(Game* g, std::string name);
 
-	const Tribe_Descr* get_owner_tribe() const throw () {return get_descr()->get_owner_tribe();}
+	const Tribe_Descr * get_owner_tribe() const throw ()
+	{return descr().get_owner_tribe();}
 
 protected:
 	void set_program_animation(Editor_Game_Base* g);
@@ -159,9 +163,8 @@ protected:
  * turned into fugitives when the immovable is destroyed, and their economy is also
  * adjusted automatically.
  */
-class PlayerImmovable : public BaseImmovable {
-public:
-	PlayerImmovable(Map_Object_Descr *descr);
+struct PlayerImmovable : public BaseImmovable {
+	PlayerImmovable(const Map_Object_Descr &);
 	virtual ~PlayerImmovable();
 
 	inline Player *get_owner() const { return m_owner; }

@@ -114,7 +114,7 @@ void IdleWareSupply::set_economy(Economy* e)
 	if (e == m_economy)
 		return;
 
-	int ware = m_ware->get_ware();
+	const Item_Ware_Descr::Index ware = m_ware->descr_index();
 
 	if (m_economy)
 		m_economy->remove_ware_supply(ware, this);
@@ -153,7 +153,7 @@ IdleWareSupply::get_amount
 ===============
 */
 int IdleWareSupply::get_amount(const int ware) const
-{return (ware == m_ware->get_ware()) ? 1 : 0;}
+{return (ware == m_ware->descr_index()) ? 1 : 0;}
 
 
 /*
@@ -173,9 +173,11 @@ The item is already "launched", so we only need to return it.
 ===============
 */
 WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
-	if (ware != m_ware->get_ware())
-		throw wexception("IdleWareSupply: ware(%u) (type = %i) requested for %i",
-				m_ware->get_serial(), m_ware->get_ware(), ware);
+	if (ware != m_ware->descr_index()) throw wexception
+		("IdleWareSupply: ware(%u) (type = %i) requested for %i",
+		 m_ware->get_serial(),
+		 m_ware->descr_index(),
+		 ware);
 
 	return m_ware;
 }
@@ -231,13 +233,15 @@ WareInstance IMPLEMENTATION
 WareInstance::WareInstance
 ===============
 */
-WareInstance::WareInstance(int ware, Item_Ware_Descr* descr) :
-Map_Object(descr),
-m_economy(0),
-m_ware(ware),
-m_ware_descr(descr),
-m_supply(0),
-m_transfer(0)
+WareInstance::WareInstance
+(const Item_Ware_Descr::Index i, const Item_Ware_Descr * const ware_descr)
+:
+Map_Object   (ware_descr),
+m_economy    (0),
+m_descr_index(i),
+m_ware_descr (ware_descr),
+m_supply     (0),
+m_transfer   (0)
 {}
 
 
@@ -249,7 +253,7 @@ WareInstance::~WareInstance
 WareInstance::~WareInstance()
 {
 	if (m_supply) {
-		molog("Ware %i still has supply %p\n", m_ware, m_supply);
+		molog("Ware %u still has supply %p\n", m_descr_index, m_supply);
 		delete m_supply;
 	}
 }
@@ -318,15 +322,13 @@ void WareInstance::set_economy(Economy* e)
 	if (m_economy == e)
 		return;
 
-	if (m_economy)
-		m_economy->remove_wares(m_ware, 1);
+	if (m_economy) m_economy->remove_wares(m_descr_index, 1);
 
 	m_economy = e;
 	if (m_supply)
 		m_supply->set_economy(e);
 
-	if (m_economy)
-		m_economy->add_wares(m_ware, 1);
+	if (m_economy) m_economy->add_wares(m_descr_index, 1);
 }
 
 
@@ -593,7 +595,7 @@ Create the flag. Initially, it doesn't have any attachments.
 ===============
 */
 Flag::Flag() :
-PlayerImmovable(&g_flag_descr),
+PlayerImmovable(g_flag_descr),
 m_anim(0),
 m_building(0),
 m_item_capacity(8),
@@ -1326,14 +1328,14 @@ Road::~Road
 Construction and destruction. Most of the actual work is done in init/cleanup.
 ===============
 */
-Road::Road()
-	: PlayerImmovable(&g_road_descr)
+Road::Road() :
+PlayerImmovable  (g_road_descr),
+m_type           (0),
+m_desire_carriers(0),
+m_carrier_request(0)
 {
-	m_type = 0;
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;
-	m_desire_carriers = 0;
-	m_carrier_request = 0;
 }
 
 Road::~Road()
@@ -3757,19 +3759,25 @@ void Economy::add_request(Request* req)
    if(!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
       return;
 
-   if(req->get_type()==Request::WORKER) {
-      log("%p: add_request(%p) for worker %s, target is %u\n", this, req,
-            get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
-            req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
-   } else if(req->get_type()==Request::SOLDIER) {
-      log("%p: add_request(%p) for soldier %s, target is %u\n", this, req,
-            get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
-            req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
-   } else if (req->get_type()==Request::WARE){
-      log("%p: add_request(%p) for ware %s, target is %u\n", this, req,
-            get_owner()->get_tribe()->get_ware_descr(req->get_index())->get_descname(),
-            req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
-   }
+	const Tribe_Descr & tribe = owner().tribe();
+	if(req->get_type()==Request::WORKER) log
+		("%p: add_request(%p) for worker %s, target is %u\n",
+		 this,
+		 req,
+		 tribe.get_worker_descr(req->get_index())->descname().c_str(),
+		 req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
+	else if(req->get_type()==Request::SOLDIER) log
+		("%p: add_request(%p) for soldier %s, target is %u\n",
+		 this,
+		 req,
+		 tribe.get_worker_descr(req->get_index())->descname().c_str(),
+		 req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
+	else if (req->get_type()==Request::WARE) log
+		("%p: add_request(%p) for ware %s, target is %u\n",
+		 this,
+		 req,
+		 tribe.get_ware_descr(req->get_index())->descname(),
+		 req->get_target(static_cast<const Game * const>(&owner().egbase()))->get_serial());
 
 	m_requests.push_back(req);
 

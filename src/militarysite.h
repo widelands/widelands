@@ -27,16 +27,17 @@
 class Soldier;
 
 struct MilitarySite_Descr : public ProductionSite_Descr {
-	MilitarySite_Descr(Tribe_Descr* tribe, const char* name);
+	MilitarySite_Descr
+		(const Tribe_Descr &, const std::string & militarysite_name);
 	virtual ~MilitarySite_Descr();
 
 	virtual void parse(const char* directory, Profile* prof,
 		const EncodeData* encdata);
-	virtual Building* create_object();
+	virtual Building * create_object() const;
 
 	virtual bool is_only_production_site(void) { return false; }
 
-	virtual int get_conquers(void) const { return m_conquer_radius; }
+	virtual uint get_conquers() const {return m_conquer_radius;}
 	int get_max_number_of_soldiers () const throw () {return m_num_soldiers;}
 	int get_max_number_of_medics   () const throw () {return m_num_medics;}
 	int get_heal_per_second        () const throw () {return m_heal_per_second;}
@@ -56,7 +57,7 @@ class MilitarySite : public ProductionSite {
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	MilitarySite(MilitarySite_Descr* descr);
+	MilitarySite(const MilitarySite_Descr & descr);
 	virtual ~MilitarySite();
 
 	virtual int get_building_type() const throw ()

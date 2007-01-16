@@ -45,13 +45,13 @@ struct Warehouse_Descr : public Building_Descr {
 		Subtype_Port
 	};
 
-	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
+	Warehouse_Descr(const Tribe_Descr & tribe, const std::string & name);
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	virtual Building *create_object();
+	virtual Building * create_object() const;
 
 	inline int get_subtype() const { return m_subtype; }
-	virtual int get_conquers(void) const { return m_conquers; }
+	virtual uint get_conquers() const {return m_conquers;}
 
 private:
 	int m_subtype;
@@ -65,7 +65,7 @@ class Warehouse : public Building {
 	MO_DESCR(Warehouse_Descr);
 
 public:
-	Warehouse(Warehouse_Descr *descr);
+	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
 	virtual int get_building_type() const throw () {return Building::WAREHOUSE;}

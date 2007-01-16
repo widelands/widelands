@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,20 +83,20 @@ throw (_wexception)
          assert(ol->is_object_known(reg));
          location=ol->get_object_by_file_index(reg);
 
-         ware->m_ware=fr.Signed32();
+			ware->m_descr_index = fr.Signed32();
          switch(location->get_type()) {
             case Map_Object::BUILDING: // Fallthrough
             case Map_Object::FLAG:
-               log("Adding ware with id %i from %s\n", ware->m_ware, location->get_type() == Map_Object::FLAG ?  "Flag" : "Building");
+               log("Adding ware with id %i from %s\n", ware->descr_index(), location->get_type() == Map_Object::FLAG ?  "Flag" : "Building");
                ware->m_economy=0; // We didn't know what kind of ware we were till now, so no economy might have a clue of us
-               ware->m_ware_descr=static_cast<PlayerImmovable*>(location)->get_owner()->get_tribe()->get_ware_descr(ware->m_ware);
+               ware->m_ware_descr=static_cast<PlayerImmovable*>(location)->get_owner()->get_tribe()->get_ware_descr(ware->descr_index());
                ware->set_economy(static_cast<PlayerImmovable*>(location)->get_economy());
                break;
 
             case Map_Object::BOB:
-               log("Adding ware with id %i from Worker\n", ware->m_ware);
+               log("Adding ware with id %i from Worker\n", ware->descr_index());
                assert(static_cast<Bob*>(location)->get_bob_type()==Bob::WORKER);
-               ware->m_ware_descr=static_cast<Worker*>(location)->get_tribe()->get_ware_descr(ware->m_ware);
+               ware->m_ware_descr=static_cast<Worker*>(location)->get_tribe()->get_ware_descr(ware->descr_index());
                ware->m_economy=0;
                // The worker sets our economy
                break;
@@ -198,7 +198,7 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
 
    // Economy is set by set_location()
 
-   fw->Signed32(ware->m_ware);
+	fw->Signed32(ware->descr_index());
    // Description is set manually
 
    // Skip Supply

@@ -284,8 +284,9 @@ Soldier_Descr::Soldier_Descr
 Soldier_Descr::~Soldier_Descr
 ===============
 */
-Soldier_Descr::Soldier_Descr(Tribe_Descr * const tribe, const char * const name)
-	: Worker_Descr(tribe, name)
+Soldier_Descr::Soldier_Descr
+(const Tribe_Descr & tribe_descr, const std::string & soldier_name)
+: Worker_Descr(tribe_descr, soldier_name)
 {
 	add_attribute(Map_Object::SOLDIER);
 }
@@ -418,19 +419,17 @@ void Soldier_Descr::load_graphics(void) {
 /**
  * Get random animation of specified type
  */
-uint Soldier_Descr::get_rand_anim(const char * const name) const {
+uint Soldier_Descr::get_rand_anim(const char * const animation_name) const {
    // Todo: This is thought to get a random animation like attack_1 attack_2 attack_3 ...
    // Randimly trhought this method. By now only gets attack, but isn't very difficult
    // to remake allowing the attack_1 and so.
-	return get_animation(name);
+	return get_animation(animation_name);
 }
 
 /**
  * Create a new soldier
  */
-Bob* Soldier_Descr::create_object() {
-   return new Soldier(this);
-}
+Bob * Soldier_Descr::create_object() const {return new Soldier(*this);}
 
 /*
 ==============================
@@ -446,11 +445,8 @@ Soldier::Soldier
 Soldier::~Soldier
 ===============
 */
-Soldier::Soldier(Soldier_Descr *descr)
-	: Worker(descr)
-{
+Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr) {}
    // all done through init
-}
 
 Soldier::~Soldier()
 {

@@ -33,7 +33,7 @@ class RGBColor;
 #define HP_FRAMECOLOR RGBColor(255,255,255)
 
 struct Soldier_Descr : public Worker_Descr {
-	Soldier_Descr(Tribe_Descr * const tribe, const char * const name);
+	Soldier_Descr(const Tribe_Descr &, const std::string & soldier_name);
 	virtual ~Soldier_Descr(void);
 
    virtual Worker_Type get_worker_type(void) const { return Worker_Descr::SOLDIER; }
@@ -70,7 +70,7 @@ struct Soldier_Descr : public Worker_Descr {
 
 	uint get_rand_anim(const char * const name) const;
 protected:
-	virtual Bob *create_object();
+	virtual Bob * create_object() const;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
    // Start values
@@ -109,7 +109,7 @@ class Soldier : public Worker {
 	MO_DESCR(Soldier_Descr);
 
 public:
-	Soldier(Soldier_Descr *descr);
+	Soldier(const Soldier_Descr &);
 	virtual ~Soldier();
 
    virtual void init(Editor_Game_Base*);
@@ -126,20 +126,22 @@ public:
 	uint get_defense_level() const {return m_defense_level;}
 	uint get_evade_level  () const throw () {return m_evade_level;}
 
-public:
-   virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
+	virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
+	{return descr().get_worker_type();}
 
    /// Draw this soldier
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
    // Information function from description
-	uint get_max_hp_level     () const {return get_descr()->get_max_hp_level();}
-	uint get_max_attack_level () const
-	{return get_descr()->get_max_attack_level();}
-	uint get_max_defense_level() const
-	{return get_descr()->get_max_defense_level();}
-	uint get_max_evade_level() const {return get_descr()->get_max_evade_level();}
+	uint get_max_hp_level () const throw ()
+	{return descr().get_max_hp_level();}
+	uint get_max_attack_level () const throw ()
+	{return descr().get_max_attack_level();}
+	uint get_max_defense_level() const throw ()
+	{return descr().get_max_defense_level();}
+	uint get_max_evade_level  () const throw ()
+	{return descr().get_max_evade_level();}
 
    // information functions
 	uint get_current_hitpoints() const {return m_hp_current;}
@@ -151,13 +153,13 @@ public:
 
    // get pictures
 	uint get_hp_level_pic     () const
-	{return get_descr()->get_hp_level_pic(m_hp_level);}
+	{return descr().get_hp_level_pic     (m_hp_level);}
 	uint get_attack_level_pic () const
-	{return get_descr()->get_attack_level_pic(m_attack_level);}
+	{return descr().get_attack_level_pic (m_attack_level);}
 	uint get_defense_level_pic() const
-	{return get_descr()->get_defense_level_pic(m_defense_level);}
+	{return descr().get_defense_level_pic(m_defense_level);}
 	uint get_evade_level_pic  () const
-	{return get_descr()->get_evade_level_pic(m_evade_level);}
+	{return descr().get_evade_level_pic  (m_evade_level);}
 
    /// Sets a random animation of desired type and start playing it
 	void start_animation

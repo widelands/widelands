@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,15 @@ template <class T> struct Descr_Maintainer {
       T* exists(const char* name);
       int add(T* item);
 	typename T::Index get_nitems() const throw () {return nitems;}
-      int get_index(const char * const name) const; // can return -1
+
+	struct Nonexistent {};
+
+	int get_index(const char * const name) const throw (Nonexistent)
+	{
+		for (typename T::Index i = 0; i < nitems; ++i)
+			if (name == items[i]->name()) return i;
+		return -1;
+	}
 
       T * get(const int idx) const {
          if (idx >= 0 and idx < static_cast<int>(nitems)) return items[idx];
@@ -58,14 +66,6 @@ template <class T> struct Descr_Maintainer {
 	}
 };
 
-template <class T>
-int Descr_Maintainer<T>::get_index(const char * const name) const {
-   for(typename T::Index i = 0; i < nitems; ++i) {
-		if (not strcasecmp(name, items[i]->get_name())) return i;
-   }
-
-   return -1;
-}
 
 template <class T>
 int Descr_Maintainer<T>::add(T* item) {
@@ -83,7 +83,7 @@ int Descr_Maintainer<T>::add(T* item) {
 template <class T>
 T* Descr_Maintainer<T>::exists(const char* name) {
 	for (typename T::Index i = 0; i < nitems; ++i)
-      if(!strcasecmp(name, items[i]->get_name())) return items[i];
+		if (name == items[i]->name()) return items[i];
 	return 0;
 }
 

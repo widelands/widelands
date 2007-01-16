@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,8 @@ Note that convenient creation functions are defined in class Game.
 // If you find a better way to do this that doesn't cost a virtual function or additional
 // member variable, go ahead
 #define MO_DESCR(type) \
-public: inline const type* get_descr() const {return static_cast<const type*>(m_descr);}
+public: inline const type* get_descr() const __attribute__ ((deprecated)) {return dynamic_cast<const type * const>(m_descr);} \
+public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
 
 // would be necessary for virtual inheritance stuff
 //#define MO_VIRTUAL_DESCR(type)
@@ -169,7 +170,7 @@ public:
    };
 
 protected:
-	Map_Object(const Map_Object_Descr *descr);
+	Map_Object(const Map_Object_Descr * const descr);
 	virtual ~Map_Object() {}
 
 public:
@@ -177,7 +178,8 @@ public:
 
    inline uint get_file_serial(void) const { return m_file_serial; }
 	inline uint get_serial(void) const { return m_serial; }
-	inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
+	bool has_attribute(const uint attr) const throw ()
+	{return descr().has_attribute(attr);}
 
 	void remove(Editor_Game_Base*);
 	virtual void destroy(Editor_Game_Base*);

@@ -33,12 +33,12 @@ class Battle_Descr : public Map_Object_Descr
 Battle_Descr g_Battle_Descr;
 
 
-Battle::Battle () : BaseImmovable(&g_Battle_Descr)
-{
-   m_first = 0;
-   m_second = 0;
-   m_last_try = 0;
-}
+Battle::Battle () :
+BaseImmovable(g_Battle_Descr),
+m_first      (0),
+m_second     (0),
+m_last_try   (0)
+{}
 
 Battle::~Battle ()
 {
@@ -116,7 +116,7 @@ void Battle::act (Game * g, uint) {
    {
       attacker->send_signal(g, "die");
       defender->send_signal(g, "won_battle");
-      
+
       m_first = 0;
       m_second = 0;
       schedule_destroy (g);
@@ -126,7 +126,7 @@ void Battle::act (Game * g, uint) {
    {
       defender->send_signal(g, "die");
       attacker->send_signal(g, "won_battle");
-      
+
       m_first = 0;
       m_second = 0;
       schedule_destroy (g);

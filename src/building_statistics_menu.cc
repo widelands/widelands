@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -349,9 +349,10 @@ void Building_Statistics_Menu::update( void ) {
 	const Map         & map   = m_parent->get_game()->map();
 	for (Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {
 		const Building_Descr & building = *tribe.get_building_descr(i);
-		const char * const name = building.get_name();
-      if (strcmp(name, "constructionsite") == 0) continue;
-      if (strcmp(name, "headquarters")     == 0) continue;
+		{
+			const std::string & name = building.name();
+			if (name == "constructionsite" or name == "headquarters") continue;
+		}
 
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
 
@@ -404,7 +405,7 @@ void Building_Statistics_Menu::update( void ) {
 
           // Add new Table Entry
           char buffer[100];
-		te->set_string(0, building.get_descname());
+		te->set_string(0, building.descname());
 
           // Product
 		if (productionsite and nr_owned) {

@@ -39,15 +39,16 @@ class MilitarySite_Descr
 
 =============================
 */
-MilitarySite_Descr::MilitarySite_Descr(Tribe_Descr* tribe, const char* name)
-	: ProductionSite_Descr(tribe, name)
-{
-	m_conquer_radius = 0;
-	m_num_soldiers = 0;
-	m_num_medics = 0;
-	m_heal_per_second = 0;
-	m_heal_incr_per_medic = 0;
-}
+MilitarySite_Descr::MilitarySite_Descr
+(const Tribe_Descr & tribe_descr, const std::string & militarysite_name)
+:
+ProductionSite_Descr (tribe_descr, militarysite_name),
+m_conquer_radius     (0),
+m_num_soldiers       (0),
+m_num_medics         (0),
+m_heal_per_second    (0),
+m_heal_incr_per_medic(0)
+{}
 
 MilitarySite_Descr::~MilitarySite_Descr()
 {
@@ -89,9 +90,8 @@ MilitarySite_Descr::create_object
 Create a new building of this type
 ===============
 */
-Building* MilitarySite_Descr::create_object() {
-	return new MilitarySite(this);
-}
+Building * MilitarySite_Descr::create_object() const
+{return new MilitarySite(*this);}
 
 
 /*
@@ -107,13 +107,12 @@ class MilitarySite
 MilitarySite::MilitarySite
 ===============
 */
-MilitarySite::MilitarySite(MilitarySite_Descr* descr)
-	: ProductionSite(descr)
-{
-	m_didconquer = false;
-	m_capacity = descr->get_max_number_of_soldiers();
-	m_in_battle = false;
-}
+MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
+ProductionSite(ms_descr),
+m_didconquer  (false),
+m_capacity    (ms_descr.get_max_number_of_soldiers()),
+m_in_battle   (false)
+{}
 
 
 /**
@@ -539,8 +538,9 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
    //NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
    cleanup(g);
    get_base_flag()->schedule_destroy(g);
-   MilitarySite* newMs = (MilitarySite*)((MilitarySite_Descr*)m_descr)->create(g, winner, m_position, false);
-   return newMs;
+	return static_cast<MilitarySite * const>
+		(static_cast<const MilitarySite_Descr &>(*m_descr)
+		 .create(*g, *winner, m_position, false));
 
    //IMPLEMENTATION FOR OVERTAKING EXISITING BUILDING
    //FIXME: Coorect implementation, someone with deeper knowledge needs

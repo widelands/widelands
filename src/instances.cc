@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -353,8 +353,8 @@ Map_Object::Map_Object
 Zero-initialize a map object
 ===============
 */
-Map_Object::Map_Object(const Map_Object_Descr* descr) :
-m_descr(descr), m_serial(0), m_file_serial(0), m_logsink(0)
+Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
+m_descr(the_descr), m_serial(0), m_file_serial(0), m_logsink(0)
 {}
 
 

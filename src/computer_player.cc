@@ -88,7 +88,7 @@ void Computer_Player::late_initialization ()
 
 /*=====================*/
 //Here comes the empire
-if(tribe->m_name=="empire"){
+	if (tribe->name() == "empire") {
 ware1="stone";
 ware2="trunk";
 ware3="wood";
@@ -106,61 +106,74 @@ granitmine="marblemine";
 
 	// collect information about which buildings our tribe can construct
 	for (int i=0; i<tribe->get_nrbuildings();i++) {
-		Building_Descr* bld=tribe->get_building_descr(i);
-		log ("ComputerPlayer(%d): I can build '%s', id is %d\n",player_number,bld->get_name(),i);
+		const Building_Descr & bld = *tribe->get_building_descr(i);
+		const std::string & building_name = bld.name();
+		log
+			("ComputerPlayer(%d): I can build '%s', id is %d\n",
+			 player_number,
+			 building_name.c_str(),
+			 i);
 
 		buildings.push_back (BuildingObserver());
 
 		BuildingObserver& bo=buildings.back();
-		bo.name=bld->get_name();
+		bo.name                   = building_name.c_str();
 		bo.id=i;
-		bo.desc=bld;
-		bo.hints=bld->get_hints();
+		bo.desc                   = &bld;
+		bo.hints                  = &bld.hints();
 		bo.type=BuildingObserver::BORING;
 		bo.cnt_built=0;
 		bo.cnt_under_construction=0;
 		bo.production_hint=-1;
 
-		bo.is_buildable=bld->get_buildable();
+		bo.is_buildable = bld.get_buildable();
 
 		bo.need_trees=false;
 		bo.need_stones=false;
 
 		// FIXME: define these properties in the building's conf file
-		if (!strcmp(bld->get_name(), quarry))
-		    bo.need_stones=true;
-
-		if (!strcmp(bld->get_name(), granitmine))
-		    bo.need_stones=true;
-
-		if (!strcmp(bld->get_name(), lumberjack))
-		    bo.need_trees=true;
-
-		if (!strcmp(bld->get_name(), ranger))
+		if (building_name == quarry)     bo.need_stones = true;
+		if (building_name == lumberjack) bo.need_trees  = true;
+		if (building_name == granitmine) bo.need_stones = true;
+		if (building_name == lumberjack) bo.need_trees  = true;
+		if (building_name == ranger)
 		    bo.production_hint=tribe->get_safe_ware_index("trunk");
 
-		if (typeid(*bld)==typeid(ConstructionSite_Descr)) {
+		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
 			bo.type=BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
 
-		if (typeid(*bld)==typeid(MilitarySite_Descr)) {
+		if (typeid(bld) == typeid(MilitarySite_Descr)) {
 			bo.type=BuildingObserver::MILITARYSITE;
 			continue;
 		}
 
-		if (typeid(*bld)==typeid(ProductionSite_Descr)) {
-		    ProductionSite_Descr* prod=static_cast<ProductionSite_Descr*>(bld);
+		if (typeid(bld) == typeid(ProductionSite_Descr)) {
+			const ProductionSite_Descr & prod =
+				static_cast<const ProductionSite_Descr &>(bld);
 
-		    bo.type=bld->get_ismine()
-				?BuildingObserver::MINE
-				:BuildingObserver::PRODUCTIONSITE;
+			bo.type = bld.get_ismine() ?
+				BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 
-		    for (std::vector<Input>::const_iterator j=prod->get_inputs()->begin();j!=prod->get_inputs()->end();j++)
-			bo.inputs.push_back (tribe->get_safe_ware_index(j->get_ware()->get_name()));
+			const std::vector<Input>::const_iterator inputs_end =
+				prod.get_inputs()->end();
+			for
+				(std::vector<Input>::const_iterator it =
+				 prod.get_inputs()->begin();
+				 it != inputs_end;
+				 ++it)
+				bo.inputs.push_back
+					(tribe->get_safe_ware_index(it->ware_descr().name().c_str()));
 
-		    for (std::set<std::string>::const_iterator j=prod->get_outputs()->begin();j!=prod->get_outputs()->end();j++)
-			bo.outputs.push_back (tribe->get_safe_ware_index(j->c_str()));
+			const std::set<std::string>::const_iterator outputs_end =
+				prod.get_outputs()->end();
+			for
+				(std::set<std::string>::const_iterator it =
+				 prod.get_outputs()->begin();
+				 it != outputs_end;
+				 ++it)
+				bo.outputs.push_back(tribe->get_safe_ware_index(it->c_str()));
 
 		    continue;
 		}
@@ -582,7 +595,10 @@ bool Computer_Player::construct_building ()
 
 void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 {
-	log ("ComputerPlayer(%d): checking %s\n", player_number, site.bo->desc->get_name());
+	log
+		("ComputerPlayer(%d): checking %s\n",
+		 player_number,
+		 site.bo->desc->name().c_str());
 
 	Map & map = game().map();
 	if
@@ -684,8 +700,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 				(const ConstructionSite * const constructionsite =
 				 dynamic_cast<const ConstructionSite * const>(building))
 			{
-				const Building_Descr & target_descr =
-					*constructionsite->get_building();
+				const Building_Descr & target_descr = constructionsite->building();
 
 				if
 					(const MilitarySite_Descr * const target_militarysite_descr =
@@ -709,7 +724,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 					consider_productionsite_influence
 					(field,
 					 immovables[i].coords,
-					 get_building_observer(constructionsite->get_name()));
+					 get_building_observer(constructionsite->name().c_str()));
 			}
 
 			if
@@ -729,7 +744,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 				consider_productionsite_influence
 					(field,
 					 immovables[i].coords,
-					 get_building_observer(building->get_name()));
+					 get_building_observer(building->name().c_str()));
 
 			continue;
 		}
@@ -806,10 +821,13 @@ Computer_Player::EconomyObserver* Computer_Player::get_economy_observer (Economy
 
 void Computer_Player::gain_building (Building* b)
 {
-	BuildingObserver& bo=get_building_observer(b->get_name());
+	BuildingObserver & bo = get_building_observer(b->name().c_str());
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction++;
+		++get_building_observer
+			(dynamic_cast<const ConstructionSite &>(*b)
+			 .building().name().c_str())
+			.cnt_under_construction;
 		++total_constructionsites;
 	}
 	else {
@@ -831,10 +849,13 @@ void Computer_Player::gain_building (Building* b)
 
 void Computer_Player::lose_building (Building* b)
 {
-	BuildingObserver& bo=get_building_observer(b->get_name());
+	BuildingObserver & bo = get_building_observer(b->name().c_str());
 
 	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction--;
+		--get_building_observer
+			(dynamic_cast<const ConstructionSite &>(*b)
+			 .building().name().c_str())
+			.cnt_under_construction;
 		total_constructionsites--;
 	}
 	else {

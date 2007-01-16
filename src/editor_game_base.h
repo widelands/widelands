@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "bob.h"
+#include "building.h"
 #include "constants.h"
 #include "geometry.h"
 #include "types.h"
@@ -71,10 +73,15 @@ class Editor_Game_Base {
 		 const int type,
 		 const std::string & tribe,
 		 const std::string & name);
-	Player * get_player(const int n) const {
+	Player * get_player(const int n) const __attribute__ ((deprecated)) {
 		assert(n >= 1);
 		assert(n <= MAX_PLAYERS);
 		return m_players[n - 1];
+	}
+	Player & player(const int n) const {
+		assert(1 <= n);
+		assert     (n <= MAX_PLAYERS);
+		return *m_players[n - 1];
 	}
       virtual Player * get_safe_player(const int n);
 
@@ -85,9 +92,12 @@ class Editor_Game_Base {
 		(const bool flush_graphics = true, const bool flush_animations = true);
 
       // warping stuff. instantly creating map_objects
-      Building* warp_building(Coords, char owner, int idx);
+	Building * warp_building
+		(const Coords,
+		 const Player_Number,
+		 const Building_Descr::Index);
 		Building* warp_constructionsite(Coords c, char owner, int idx, int oldid=-1);
-      Bob *create_bob(Coords c, int idx, Tribe_Descr* = 0);
+	Bob * create_bob(const Coords, const Bob_Descr::Index, const Tribe_Descr * const = 0);
 	Immovable* create_immovable(const Coords c, int idx, const Tribe_Descr*);
 	Immovable* create_immovable
 		(const Coords c, const std::string & name, const Tribe_Descr*);
@@ -118,7 +128,7 @@ class Editor_Game_Base {
 	virtual void player_field_notification (const FCoords&, losegain_t)=0;
 
       // Military stuff
-   std::vector<Coords>* get_attack_points(uchar player);
+	std::vector<Coords> * get_attack_points(const Player_Number);
 
    virtual void make_influence_map ();
 

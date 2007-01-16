@@ -47,11 +47,12 @@ Every tribe has exactly one ConstructionSite_Descr.
 The ConstructionSite's idling animation is the basic construction site marker.
 */
 struct ConstructionSite_Descr : public Building_Descr {
-	ConstructionSite_Descr(Tribe_Descr* tribe, const char* name);
+	ConstructionSite_Descr
+		(const Tribe_Descr &, const std::string & constructionsite_name);
 
 	virtual void parse(const char* directoy, Profile* prof,
 		const EncodeData* encdata);
-	virtual Building* create_object();
+	virtual Building * create_object() const;
 };
 
 class ConstructionSite : public Building {
@@ -60,7 +61,7 @@ class ConstructionSite : public Building {
 	MO_DESCR(ConstructionSite_Descr);
 
 public:
-	ConstructionSite(ConstructionSite_Descr* descr);
+	ConstructionSite(const ConstructionSite_Descr & descr);
 	virtual ~ConstructionSite();
 
 	virtual int get_building_type() const throw ()
@@ -68,13 +69,13 @@ public:
 	virtual int get_size() const throw ();
 	virtual uint get_playercaps() const throw ();
 	virtual uint get_ui_anim() const;
-	virtual std::string get_census_string() const;
+	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
 	uint get_built_per64k();
 
-	void set_building(Building_Descr* descr);
-   void set_previous_building(Building_Descr* descr);
-   inline Building_Descr* get_building() const { return m_building; }
+	void set_building         (const Building_Descr &);
+	void set_previous_building(const Building_Descr * const);
+	const Building_Descr & building() const throw () {return *m_building;}
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
@@ -105,8 +106,8 @@ protected:
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
-	Building_Descr* m_building; // type of building that is being built
-   Building_Descr* m_prev_building; // Building that was standing here before
+	const Building_Descr * m_building; // type of building that is being built
+	const Building_Descr * m_prev_building; // Building that was standing here before
 
 	Request* m_builder_request;
 	Worker*  m_builder;

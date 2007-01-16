@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +42,12 @@ Item_Ware_Descr::Item_Ware_Descr
 Item_Ware_Descr::~Item_Ware_Descr
 ===============
 */
-Item_Ware_Descr::Item_Ware_Descr(const char *name)
-{
-   m_name=name;
-   m_menu_pic = 0;
-	m_pic_queue_full = 0;
-	m_pic_queue_empty = 0;
-}
+Item_Ware_Descr::Item_Ware_Descr(const std::string & ware_name) :
+m_name           (ware_name),
+m_menu_pic       (0),
+m_pic_queue_full (0),
+m_pic_queue_empty(0)
+{}
 
 Item_Ware_Descr::~Item_Ware_Descr()
 {

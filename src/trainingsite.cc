@@ -31,23 +31,23 @@
 #include "util.h"
 #include "worker.h"
 
-TrainingSite_Descr::TrainingSite_Descr(Tribe_Descr * tribe, const char *name)
-:ProductionSite_Descr(tribe, name)
-{
-	m_num_soldiers = 0;
-	m_train_hp = false;
-	m_train_attack = false;
-	m_train_defense = false;
-	m_train_evade = false;
-	m_min_hp = 0;
-	m_min_attack = 0;
-	m_min_defense = 0;
-	m_min_evade = 0;
-	m_max_hp = 0;
-	m_max_attack = 0;
-	m_max_defense = 0;
-	m_max_evade = 0;
-}
+TrainingSite_Descr::TrainingSite_Descr
+(const Tribe_Descr & tribe_descr, const std::string & trainingsite_name) :
+ProductionSite_Descr(tribe_descr, trainingsite_name),
+m_num_soldiers      (0),
+m_train_hp          (false),
+m_train_attack      (false),
+m_train_defense     (false),
+m_train_evade       (false),
+m_min_hp            (0),
+m_min_attack        (0),
+m_min_defense       (0),
+m_min_evade         (0),
+m_max_hp            (0),
+m_max_attack        (0),
+m_max_defense       (0),
+m_max_evade         (0)
+{}
 
 TrainingSite_Descr::~TrainingSite_Descr()
 {
@@ -125,10 +125,8 @@ void TrainingSite_Descr::parse(const char *directory, Profile * prof, const Enco
  * Create a new training site
  * \return  the new training site
  */
-Building *TrainingSite_Descr::create_object()
-{
-	return new TrainingSite(this);
-}
+Building * TrainingSite_Descr::create_object() const
+{return new TrainingSite(*this);}
 
 /**
  * Returns the minimum level to which this building can downgrade a specified attribute
@@ -178,22 +176,21 @@ class TrainingSite
 =============================
 */
 
-TrainingSite::TrainingSite(TrainingSite_Descr * descr)
-:  ProductionSite(descr)
-{
-	m_build_heros = false;
-	m_success = false;
-	m_pri_hp = get_descr()->get_train_hp()? 6 : 0;
-	m_pri_attack = get_descr()->get_train_attack()? 6 : 0;
-	m_pri_defense = get_descr()->get_train_defense()? 6 : 0;
-	m_pri_evade = get_descr()->get_train_evade()? 6 : 0;
-	m_total_soldiers = 0;
-	m_capacity = get_descr()->get_max_number_of_soldiers();
-	m_pri_hp_mod = 0;
-	m_pri_attack_mod = 0;
-	m_pri_defense_mod = 0;
-	m_pri_evade_mod = 0;
-}
+TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
+ProductionSite   (d),
+m_capacity       (descr().get_max_number_of_soldiers()),
+m_total_soldiers (0),
+m_build_heros    (false),
+m_pri_hp         (descr().get_train_hp     () ? 6 : 0),
+m_pri_attack     (descr().get_train_attack () ? 6 : 0),
+m_pri_defense    (descr().get_train_defense() ? 6 : 0),
+m_pri_evade      (descr().get_train_evade  () ? 6 : 0),
+m_pri_hp_mod     (0),
+m_pri_attack_mod (0),
+m_pri_defense_mod(0),
+m_pri_evade_mod  (0),
+m_success        (false)
+{}
 
 
 TrainingSite::~TrainingSite()
@@ -899,13 +896,13 @@ void TrainingSite::calc_list_upgrades(Game *) {
  * \param game  the current game object
  * \param name  the program to start
  */
-void TrainingSite::program_start(Game * g, std::string name)
+void TrainingSite::program_start(Game * g, std::string program_name)
 {
 	assert(g);
 
 	set_post_timer(6000);
-	m_prog_name = name;
-	ProductionSite::program_start(g, name);
+	m_prog_name = program_name;
+	ProductionSite::program_start(g, program_name);
 }
 
 /**

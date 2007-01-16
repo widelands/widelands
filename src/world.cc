@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -340,7 +340,7 @@ void World::parse_bobs()
 				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof, 0);
 				bobs.add(descr);
 			} else {
-				Immovable_Descr *descr = new Immovable_Descr(name, 0);
+				Immovable_Descr * const descr = new Immovable_Descr(0, name);
 				descr->parse(it->c_str(), &prof);
 				immovables.add(descr);
 			}
@@ -391,6 +391,7 @@ Terrain_Descr
 
 Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources)
 :
+m_name              (s->get_name()),
 m_picnametempl      (0),
 m_frametime         (FRAME_LENGTH),
 m_valid_resources   (0),
@@ -399,9 +400,6 @@ m_default_resources (-1),
 m_default_amount    (0),
 m_texture           (0)
 {
-
-	// Read configuration
-	snprintf(m_name, sizeof(m_name), "%s", s->get_name());
 
 	// Parse the default resource
 	const char * str = s->get_string("def_resources", 0);
@@ -468,8 +466,7 @@ m_texture           (0)
 		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
 	} else if(!strcasecmp(str, "unpassable")) {
 		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	} else
-		throw wexception("%s: invalid type '%s'", m_name, str);
+	} else throw wexception("%s: invalid type '%s'", m_name.c_str(), str);
 
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];
@@ -477,8 +474,9 @@ m_texture           (0)
 	str = s->get_string("texture", 0);
 	if (str)
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, str);
-	else
-		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.png", directory, m_name);
+	else  snprintf
+		(fnametmpl, sizeof(fnametmpl),
+		 "%s/pics/%s_??.png", directory, m_name.c_str());
 
 	m_picnametempl = strdup(fnametmpl);
 }

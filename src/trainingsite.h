@@ -24,12 +24,13 @@
 
 class TrainingSite_Window;
 
-struct TrainingSite_Descr:public ProductionSite_Descr {
-	TrainingSite_Descr(Tribe_Descr * tribe, const char *name);
+struct TrainingSite_Descr : public ProductionSite_Descr {
+	TrainingSite_Descr
+		(const Tribe_Descr &, const std::string & trainingsite_name);
 	 virtual ~ TrainingSite_Descr();
 
 	virtual void parse(const char *directory, Profile * prof, const EncodeData * encdata);
-	virtual Building *create_object();
+	virtual Building * create_object() const;
 
 	virtual bool is_only_production_site(void) {
 		return true;
@@ -89,7 +90,7 @@ class TrainingSite:public ProductionSite {
 	 MO_DESCR(TrainingSite_Descr);
 	friend class TrainingSite_Window;
       public:
-	 TrainingSite(TrainingSite_Descr * descr);
+	 TrainingSite(const TrainingSite_Descr &);
 	 virtual ~ TrainingSite();
 
 	virtual int get_building_type() const throw ()
@@ -115,8 +116,6 @@ class TrainingSite:public ProductionSite {
 
 	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
 	{return m_soldiers;}
-
-	const TrainingSite_Descr *get__descr() const throw () {return get_descr();}
 
 	virtual void drop_soldier(uint nr);
 	uint get_pri(enum tAttribute atr);

@@ -46,7 +46,7 @@ struct AttackController : public BaseImmovable {
    friend class Widelands_Map_Attack_Controller_Data_Packet;
 
       AttackController(Game* game, Flag* flag, int attacker, int defender);
-      AttackController(Game* game);
+	AttackController(Game &);
       ~AttackController();
       void launchAttack(uint nrAttackers);
 

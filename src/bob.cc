@@ -46,12 +46,10 @@ Bob_Descr::Bob_Descr
 Bob_Descr::~Bob_Descr
 ===============
 */
-Bob_Descr::Bob_Descr(const char *name, Tribe_Descr* owner_tribe)
-{
-	snprintf(m_name, sizeof(m_name), "%s", name);
-   m_default_encodedata.clear();
-   m_owner_tribe=owner_tribe;
-}
+Bob_Descr::Bob_Descr
+(const Tribe_Descr * const owner_tribe, const std::string & bob_name)
+: m_name(bob_name), m_owner_tribe(owner_tribe)
+{m_default_encodedata.clear();}
 
 Bob_Descr::~Bob_Descr(void)
 {
@@ -73,14 +71,19 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
    Section* global = prof->get_safe_section("idle");
 
    // Global options
-	snprintf(buf, sizeof(buf), "%s_00.png", m_name);
+	snprintf(buf, sizeof(buf), "%s_00.png", m_name.c_str());
 	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
    m_picture = picname;
 
    m_default_encodedata.parse(global);
 
-	snprintf(picname, sizeof(picname), "%s_??.png", m_name);
-	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata));
+	add_animation
+		("idle",
+		 g_anim.get
+		 (directory,
+		  prof->get_safe_section("idle"),
+		  (m_name + "_??.png").c_str(),
+		  encdata));
 
 	// Parse attributes
    const char* string;
@@ -131,26 +134,26 @@ Bob::Bob
 Zero-initialize a map object
 ===============
 */
-Bob::Bob(Bob_Descr* descr)
-	: Map_Object(descr)
-{
-	m_owner = 0;
-	m_position.x = m_position.y = 0; // not linked anywhere
-	m_position.field = 0;
-	m_linknext = 0;
-	m_linkpprev = 0;
+Bob::Bob(const Bob_Descr & bob_descr) :
+Map_Object       (&bob_descr),
+m_owner          (0),
+m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
+m_linknext       (0),
+m_linkpprev      (0),
 
-	m_actid = 0; // this isn't strictly necessary, but it shuts up valgrind and "feels" cleaner
+//  This is not strictly necessary but it shuts up valgrind and feels cleaner.
+m_actid          (0),
 
-	m_anim = 0;
-	m_animstart = 0;
+m_anim           (0),
+m_animstart      (0),
 
-	m_walking = IDLE;
-	m_walkstart = m_walkend = 0;
+m_walking        (IDLE),
+m_walkstart      (0),
+m_walkend        (0),
 
-	m_stack_dirty = false;
-	m_sched_init_task = false;
-}
+m_stack_dirty    (false),
+m_sched_init_task(false)
+{}
 
 
 /*
@@ -1208,7 +1211,7 @@ Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, P
 		const char *type = s->get_safe_string("type");
 
 		if (!strcasecmp(type, "critter")) {
-			bob = new Critter_Bob_Descr(name, tribe);
+			bob = new Critter_Bob_Descr(tribe, name);
 		} else
 			throw wexception("Unsupported bob type '%s'", type);
 

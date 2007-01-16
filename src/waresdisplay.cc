@@ -86,7 +86,7 @@ void WaresDisplay::handle_mousemove(int x, int y, int, int) {
    else {
       if(m_type == WORKER) {
          index--;
-         str=m_player->get_tribe()->get_worker_descr(index)->get_descname();
+         str=m_player->get_tribe()->get_worker_descr(index)->descname();
          m_curware->set_text(str.c_str());
       } else {
          index--;

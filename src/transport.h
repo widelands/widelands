@@ -72,16 +72,19 @@ typedef std::vector<Neighbour> Neighbour_list;
 class WareInstance : public Map_Object {
    friend class Widelands_Map_Waredata_Data_Packet;
 
+	MO_DESCR(Item_Ware_Descr);
+
 public:
-	WareInstance(int, Item_Ware_Descr*);
+	WareInstance
+		(const Item_Ware_Descr::Index, const Item_Ware_Descr * const);
 	~WareInstance();
 
 	virtual int get_type() const throw ();
 
 	Map_Object* get_location(Editor_Game_Base* g) { return m_location.get(g); }
 	Economy* get_economy() const throw () {return m_economy;}
-	int get_ware() const { return m_ware; }
-	Item_Ware_Descr* get_ware_descr() const { return m_ware_descr; }
+	Item_Ware_Descr::Index descr_index() const throw () {return m_descr_index;}
+	const Item_Ware_Descr * get_ware_descr() const throw () __attribute__ ((deprecated)) {return m_ware_descr;}
 
 	void init(Editor_Game_Base* g);
 	void cleanup(Editor_Game_Base* g);
@@ -102,8 +105,8 @@ public:
 private:
 	Object_Ptr        m_location;
 	Economy         * m_economy;
-	int               m_ware;
-	Item_Ware_Descr * m_ware_descr;
+	Item_Ware_Descr::Index m_descr_index;
+	const Item_Ware_Descr * m_ware_descr;
 
 	IdleWareSupply  * m_supply;
 	Transfer*         m_transfer;

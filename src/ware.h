@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,9 +55,8 @@ Note that multiple tribes can define a worker with the same name. The different
 #define WARE_MENU_PIC_W  24
 #define WARE_MENU_PIC_H  24
 
-class Item_Ware_Descr : public Map_Object_Descr {
-public:
-	Item_Ware_Descr(const char *name);
+struct Item_Ware_Descr : public Map_Object_Descr {
+	Item_Ware_Descr(const std::string & ware_name);
 	virtual ~Item_Ware_Descr();
 
 	virtual void load_graphics();
@@ -66,14 +65,15 @@ public:
 	uint get_pic_queue_full () const throw () {return m_pic_queue_full;}
 	uint get_pic_queue_empty() const throw () {return m_pic_queue_empty;}
 
-	const char * get_name    () const throw () {return m_name    .c_str();}
-	const char * get_descname() const throw () {return m_descname.c_str();}
+	const std::string & name    () const throw () {return m_name;}
+	const char * get_name    () const throw () __attribute__ ((deprecated)) {return m_name    .c_str();}
+	const std::string & descname() const throw () {return m_descname;}
+	const char * get_descname() const throw () __attribute__ ((deprecated)) {return m_descname.c_str();}
 	const char * get_helptext() const throw () {return m_helptext.c_str();}
 
 private:
 	void parse(const char *directory, Profile *prof);
 
-private:
 	std::string m_name;
 	std::string m_descname;
 	std::string m_helptext;
