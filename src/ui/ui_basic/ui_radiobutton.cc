@@ -102,7 +102,7 @@ Radiogroup::Radiogroup()
 /**
  * Free all associated buttons.
  */
-Radiogroup::~Radiogroup() {delete m_buttons;}
+Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
 
 
 /**
