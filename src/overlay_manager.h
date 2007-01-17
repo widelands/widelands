@@ -102,11 +102,16 @@ struct Overlay_Manager {
 
 	void load_graphics();
 
+	/**
+	 * Register an overlay at a location (node or triangle). hotspot is the point
+	 * of the picture that will be exactly over the location. If hotspot is
+	 * Point::invalid(), the center of the picture will be used as hotspot.
+	 */
 	void register_overlay
-		(const TCoords t,
+		(const TCoords,
 		 const int picid,
 		 const int level,
-		 const Point hot_spot = Point::invalid(),
+		 Point        hotspot = Point::invalid(),
 		 const Job_Id jobid = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays

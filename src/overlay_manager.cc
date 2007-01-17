@@ -150,33 +150,37 @@ void Overlay_Manager::register_overlay
 (const TCoords c,
  const int picid,
  const int level,
- const Point hot_spot,
+ Point            hotspot,
  const Job_Id jobid)
 {
 	assert(c.t <= 2);
 	assert(level!=5); // level == 5 is undefined behavior
 
+	if (hotspot == Point::invalid()) {
+		uint picture_width, picture_height;
+		g_gr->get_picture_size(picid, picture_width, picture_height);
+		hotspot = Point(picture_width / 2, picture_height / 2);
+   }
+
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
 	for
 		(Registered_Overlays_Map::iterator it = overlay_map.find(c);
-		 it != overlay_map.end();
+		 it != overlay_map.end() and it->first == c;
 		 ++it)
-	{
-		if (it->second.picid == picid) {it->second.jobids.insert(jobid); return;}
-		if (it->first != c) break;
-   }
-	uint hsx = hot_spot.x;
-	uint hsy = hot_spot.y;
-
-	if (hot_spot == Point::invalid()) {
-      g_gr->get_picture_size(picid, hsx, hsy);
-      hsx>>=1;
-      hsy>>=1;
-   }
+		if
+			(it->second.picid   == picid
+			 and
+			 it->second.hotspot == hotspot
+			 and
+			 it->second.level   == level)
+		{
+			it->second.jobids.insert(jobid);
+			return;
+		}
 
 	overlay_map.insert
 		(std::pair<const Coords, Registered_Overlays>
-		 (c, Registered_Overlays(jobid, picid, Point(hsx, hsy), level)));
+		 (c, Registered_Overlays(jobid, picid, hotspot, level)));
 
    // Now manually sort, so that they are ordered
    //  * first by c (done by std::multimap)
