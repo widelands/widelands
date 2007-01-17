@@ -361,7 +361,7 @@ Building::get_base_flag
 */
 int Building::get_type() const throw () {return BUILDING;}
 
-int Building::get_size() const throw () {return get_descr()->get_size();}
+int Building::get_size() const throw () {return descr().get_size();}
 
 bool Building::get_passable() const throw () {return false;}
 
@@ -447,7 +447,7 @@ void Building::init(Editor_Game_Base* g)
 	m_flag->attach_building(g, this);
 
 	// Start the animation
-	start_animation(g, get_descr()->get_animation("idle"));
+	start_animation(g, descr().get_animation("idle"));
 
 	m_leave_time = g->get_gametime();
 }
@@ -509,14 +509,12 @@ applicable.
 */
 void Building::destroy(Editor_Game_Base* g)
 {
-	Coords pos = m_position;
-	bool fire = burn_on_destroy();
-
+	const bool fire           = burn_on_destroy();
+	const Coords pos          = m_position;
+	const Tribe_Descr & tribe = descr().tribe();
 	PlayerImmovable::destroy(g);
-
 	// We are deleted. Only use stack variables beyond this point
-	if (fire)
-		g->create_immovable(pos, "destroyed_building", &descr().tribe());
+	if (fire) g->create_immovable(pos, "destroyed_building", &tribe);
 }
 
 
