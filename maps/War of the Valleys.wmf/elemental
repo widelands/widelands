@@ -6,7 +6,7 @@ map_w=112
 map_h=96
 nr_players=3
 world=greenland
-name=War of the Valleys
+name=_War of the Valleys
 author=Winterwind
-descr=It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere.
+descr=_"It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 

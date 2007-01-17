@@ -96,7 +96,7 @@ def main( ):
             os.system( "msgfmt -o %s/LC_MESSAGES/world_%s.mo world_%s_%s.po" % ( lang, world, world, lang ))
 
 ##############################
-# tutorial campaign 1
+# Campaigns
 ##############################
     for mission in CAMPAING_MISSIONS:
         # Get all strings
@@ -120,7 +120,7 @@ def main( ):
 ##############################
 # Texts (General help, Readme and so on) 
 ##############################
-    files = [] 
+    files = []
     for file in glob("../txts/*"):
         if( file[-3:] == "CVS" or file[-1] == '~'): 
             continue
@@ -139,6 +139,27 @@ def main( ):
         # compile message catalogs
         do_makedirs( "%s/LC_MESSAGES" % lang )
         os.system( "msgfmt -o %s/LC_MESSAGES/texts.mo texts_%s.po" % ( lang, lang ))
+	
+##############################
+# Map 
+##############################
+    files = []
+    for file in glob("../maps/*/elemental"):
+        files.append( file )
+
+    catalog = confgettext.parse_conf( files )
+    file = open( "maps.pot", "w")
+    file.write(catalog)
+    file.close()
+
+    for lang in LANGUAGES:
+        # merge new strings with existing translations
+        if not os.system( "msgmerge maps_%s.po maps.pot > tmp" % lang ):
+                do_rename("tmp", "maps_%s.po" % ( lang ) )
+
+        # compile message catalogs
+        do_makedirs( "%s/LC_MESSAGES" % lang )
+        os.system( "msgfmt -o %s/LC_MESSAGES/maps.mo maps_%s.po" % ( lang, lang ))
 
     replace_backslashes_in_comments()
 

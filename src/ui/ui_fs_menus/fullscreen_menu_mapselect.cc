@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,6 +151,9 @@ void Fullscreen_Menu_MapSelect::ok()
 void Fullscreen_Menu_MapSelect::map_selected(uint) {
 	const char * const name = list.get_selected();
 
+   //Load maps textdomain
+   i18n::grab_textdomain("maps");
+
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       // No directory
          delete *m_ml;
@@ -172,7 +175,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
             sprintf(buf, "%i", m_map->get_nrplayers());
 				tanplayers.set_text(buf);
 				tadescr   .set_text(m_map->get_description());
-				taworld   .set_text(m_map->get_world_name());
+				taworld   .set_text(m_map->get_world_name()); //   FIXME name of worlds conf - translatable 
 				m_ok.set_enabled(true);
          } catch(std::exception& e) {
             log("Failed to load map %s: %s\n", get_mapname(), e.what());
@@ -195,6 +198,8 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
 			taworld   .set_text("");
       }
    }
+   // Release maps textdomain
+   i18n::release_textdomain( );
 }
 
 /*
@@ -210,6 +215,10 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint) {
  * fill the file list
  */
 void Fullscreen_Menu_MapSelect::fill_list(void) {
+	
+   //Load maps textdomain
+   i18n::grab_textdomain("maps");
+
    // Fill it with all files we find in all directorys
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
 
@@ -273,4 +282,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 	list.sort(ndirs);
 
 	if (list.size()) list.select(0);
+
+   // Release maps textdomain
+   i18n::release_textdomain( );
 }
