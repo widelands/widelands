@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "editor_game_base.h"
 #include "filesystem.h"
+#include "i18n.h"
 #include "map.h"
 #include "profile.h"
 #include "widelands_map_elemental_data_packet.h"
@@ -38,7 +39,9 @@ Widelands_Map_Elemental_Data_Packet::~Widelands_Map_Elemental_Data_Packet(void) 
 void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map* map)
 throw(_wexception)
 {
-
+    //Load maps textdomain
+    i18n::grab_textdomain("maps");
+    
    Profile prof;
    prof.read( "elemental", 0, fs );
    Section* s = prof.get_section( "global" );
@@ -62,11 +65,14 @@ throw(_wexception)
 
       // Descr
       map->set_description( s->get_string( "descr" ));
-      return;
+       
+    // Release maps textdomain
+    i18n::release_textdomain( );
+      
+       return;
    }
    assert(0); // should never be here
 }
-
 
 
 /*

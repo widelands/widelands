@@ -151,9 +151,6 @@ void Fullscreen_Menu_MapSelect::ok()
 void Fullscreen_Menu_MapSelect::map_selected(uint) {
 	const char * const name = list.get_selected();
 
-   //Load maps textdomain
-   i18n::grab_textdomain("maps");
-
    if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       // No directory
          delete *m_ml;
@@ -198,8 +195,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
 			taworld   .set_text("");
       }
    }
-   // Release maps textdomain
-   i18n::release_textdomain( );
 }
 
 /*
