@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,11 @@
 #define __S__EDITOR_TOOLSIZE_MENU_H
 
 #include "ui_button.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 
 class Editor_Interactive;
-namespace UI {struct Textarea;};
 
 
 /*
@@ -41,13 +41,11 @@ Here, you can select the tool you wish to use the next time
 
 struct Editor_Toolsize_Menu : public UI::UniqueWindow {
       Editor_Toolsize_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
-      virtual ~Editor_Toolsize_Menu();
 
    private:
 	void change_radius(const bool increase);
 
-      Editor_Interactive* m_parent;
-      UI::Textarea* m_textarea;
+	UI::Textarea                                   m_textarea;
 	UI::IDButton<Editor_Toolsize_Menu, const bool> m_increase, m_decrease;
 };
 
