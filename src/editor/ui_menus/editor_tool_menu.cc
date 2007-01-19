@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,15 +47,16 @@ Create all the buttons etc...
 */
 Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry,
                                    Editor_Interactive::Editor_Tools* tools, std::vector<UI::UniqueWindow::Registry>* options)
-	: UI::UniqueWindow(parent, registry, 350, 400, _("Tool Menu"))
+:
+UI::UniqueWindow(parent, registry, 350, 400, _("Tool Menu")),
+m_parent        (parent),
+m_options_menus (options),
+m_tools         (tools)
 {
-   m_tools=tools;
-   m_parent=parent;
-   m_options_menus=options;
 
    // UI::Buttons
    const int offsx=5;
-   const int offsy=30;
+	const int offsy   = 5;
    const int spacing=5;
    const int width=34;
    const int height=34;
@@ -64,43 +65,51 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UI::UniqueWindow:
 
 
    int num_tools=6;
-   m_radioselect=new UI::Radiogroup();
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_change_height.png" ));
+	m_radioselect.add_button
+		(this,
+		 posx, posy,
+		 g_gr->get_picture
+		 (PicMod_Game, "pics/editor_menu_tool_change_height.png"));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_noise_height.png" ));
+	m_radioselect.add_button
+		(this,
+		 posx, posy,
+		 g_gr->get_picture
+		 (PicMod_Game, "pics/editor_menu_tool_noise_height.png"));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_set_terrain.png" ));
+	m_radioselect.add_button
+		(this,
+		 posx, posy,
+		 g_gr->get_picture
+		 (PicMod_Game, "pics/editor_menu_tool_set_terrain.png"));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_place_immovable.png" ));
+	m_radioselect.add_button
+		(this,
+		 posx, posy,
+		 g_gr->get_picture
+		 (PicMod_Game, "pics/editor_menu_tool_place_immovable.png"));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_place_bob.png" ));
+	m_radioselect.add_button
+		(this,
+		 posx, posy,
+		 g_gr->get_picture
+		 (PicMod_Game, "pics/editor_menu_tool_place_bob.png"));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_change_resources.png" ));
+	m_radioselect.add_button
+		(this,
+		 posx, posy,
+		 g_gr->get_picture
+		 (PicMod_Game, "pics/editor_menu_tool_change_resources.png"));
 
    set_inner_size(offsx+(width+spacing)*num_tools, offsy+(height+spacing));
 
-   UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Tool Menu"));
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
+	m_radioselect.set_state(parent->get_selected_tool() - 1);
 
-   m_radioselect->set_state(parent->get_selected_tool()-1);
-
-   m_radioselect->changed.set(this, &Editor_Tool_Menu::changed_to);
-   m_radioselect->clicked.set(this, &Editor_Tool_Menu::changed_to);
+	m_radioselect.changed.set(this, &Editor_Tool_Menu::changed_to);
+	m_radioselect.clicked.set(this, &Editor_Tool_Menu::changed_to);
 
 	if (get_usedefaultpos())
 		center_to_parent();
-}
-
-/*
-===============
-Editor_Tool_Menu::~Editor_Tool_Menu
-
-Unregister from the registry pointer
-===============
-*/
-Editor_Tool_Menu::~Editor_Tool_Menu()
-{
-   delete m_radioselect;
 }
 
 /*
@@ -111,7 +120,7 @@ called when the radiogroup changes or is reclicked
 ===========
 */
 void Editor_Tool_Menu::changed_to(void) {
-   int n=m_radioselect->get_state();
+	const int n = m_radioselect.get_state();
 
    int index=-1;
    switch(n) {
