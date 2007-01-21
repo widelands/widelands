@@ -21,6 +21,7 @@
 #define __S__TEXTAREA_H
 
 #include <string>
+#include "constants.h"
 #include "font_handler.h"
 #include "ui_panel.h"
 
@@ -30,18 +31,68 @@ namespace UI {
  * can easily be printed
  */
 struct Textarea : public Panel {
-	Textarea(Panel *parent, int x, int y, std::string text, Align align = Align_Left);
-	Textarea(Panel *parent, int x, int y, int w, int h, std::string text,
-			   Align align = Align_Left, bool multiline = false);
-	~Textarea();
 
-	void set_text(std::string text);
-	void set_align(Align align);
+	/**
+	 * For non-multiline textareas, the dimensions are set automatically,
+	 * depending on the text. For multiline textareas, only the height and
+	 * vertical position is adjusted automatically. A multiline Textarea differs
+	 * from a Multiline_Textarea in that Multiline_Textarea provides scrollbars.
+	 */
+	Textarea
+		(Panel * const parent,
+		 const int x, const int y,
+		 const std::string & text,
+		 const Align align = Align_Left, const bool multiline = false)
+		:
+		Panel      (parent, x, y, 0, 0),
+		m_text     (text),
+		m_align    (align),
+		m_multiline(multiline)
+	{
+		set_handle_mouse(false);
+		set_think       (false);
+		set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
+	}
+
+	Textarea
+		(Panel *  const parent,
+		 const int x, const int y, const uint w, const uint h,
+		 const Align align = Align_Left, const bool multiline = false)
+		:
+		Panel      (parent, x, y, w, h),
+		m_align    (align),
+		m_multiline(multiline),
+		m_fontname (UI_FONT_NAME),
+		m_fontsize (UI_FONT_SIZE_SMALL),
+		m_fcolor   (UI_FONT_CLR_FG)
+	{set_handle_mouse(false); set_think(false);}
+
+	Textarea
+		(Panel *  const parent,
+		 const int x, const int y, const uint w, const uint h,
+		 const std::string & text,
+		 const Align align = Align_Left, const bool multiline = false)
+		:
+		Panel      (parent, x, y, w, h),
+		m_align    (align),
+		m_multiline(multiline),
+		m_fontname (UI_FONT_NAME),
+		m_fontsize (UI_FONT_SIZE_SMALL),
+		m_fcolor   (UI_FONT_CLR_FG)
+	{set_handle_mouse(false); set_think(false); set_text(text);}
+
+	void set_text(const std::string &);
+	void set_align(const Align);
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
-   inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str()); }
+	void set_font(const std::string & name, const int size, const RGBColor fg) {
+		m_fontname = name;
+		m_fontsize = size;
+		m_fcolor   = fg;
+		set_text(m_text);
+	}
 
 private:
 	void collapse();

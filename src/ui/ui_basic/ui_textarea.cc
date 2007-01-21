@@ -18,58 +18,13 @@
  */
 
 #include "ui_textarea.h"
-#include "constants.h"
 #include "graphic.h"
 
 namespace UI {
 /**
-  Initialize a Textarea. For non-multiline textareas, the dimensions are set
-  automatically, depending on the text.
-  For multiline textareas, only the height and vertical position is adjusted
-  automatically. A multiline Textarea differs from a Multiline_Textarea in that
-  Multiline_Textarea provides scrollbars.
-  */
-   Textarea::Textarea(Panel *parent, int x, int y, std::string text, Align align)
-: Panel(parent, x, y, 0, 0)
-{
-   set_handle_mouse(false);
-   set_think(false);
-
-   m_align = align;
-   m_multiline = false;
-
-   set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
-
-   set_text(text);
-}
-
-   Textarea::Textarea(Panel *parent, int x, int y, int w, int h, std::string text, Align align, bool multiline)
-: Panel(parent, x, y, w, h)
-{
-   set_handle_mouse(false);
-   set_think(false);
-
-   m_align = align;
-   m_multiline = multiline;
-   set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
-
-   set_text(text);
-}
-
-
-/**
-  Free allocated resources
-  */
-Textarea::~Textarea()
-{
-}
-
-
-/**
   Set the text of the Textarea. Size is automatically adjusted
   */
-void Textarea::set_text(std::string text)
-{
+void Textarea::set_text(const std::string & text) {
    collapse(); // collapse() implicitly updates
 
    m_text = text;
@@ -80,8 +35,7 @@ void Textarea::set_text(std::string text)
 /**
   Change the alignment
   */
-void Textarea::set_align(Align align)
-{
+void Textarea::set_align(const Align align) {
    collapse();
    m_align = align;
    expand();
