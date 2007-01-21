@@ -55,9 +55,13 @@
 /// \name Fonts
 /// Font constants, defined including size
 //@{
-#define UI_FONT_BIG "FreeSerif.ttf", 22
-#define UI_FONT_SMALL "FreeSerif.ttf", 14
-#define UI_FONT_ULTRASMALL "FreeSans.ttf", 10
+#define UI_FONT_NAME "FreeSerif.ttf"
+#define UI_FONT_SIZE_BIG 22
+#define UI_FONT_SIZE_SMALL 14
+#define UI_FONT_SIZE_ULTRASMALL 10
+#define UI_FONT_BIG UI_FONT_NAME, UI_FONT_SIZE_BIG
+#define UI_FONT_SMALL UI_FONT_NAME, UI_FONT_SIZE_SMALL
+#define UI_FONT_ULTRASMALL UI_FONT_NAME, UI_FONT_SIZE_ULTRASMALL
 
 #define UI_FONT_TOOLTIP UI_FONT_SMALL
 #define PROSA_FONT "FreeSerif.ttf", 18
