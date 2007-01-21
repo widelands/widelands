@@ -1,31 +1,30 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Czech Translation\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-01-11 13:46+0100\n"
+"Last-Translator: Martin Večeřa <ja@marvec.org>\n"
+"Language-Team: Martin Večeřa <ja@marvec.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 #: ../txts/COPYING:3
 msgid "GNU general public licence"
-msgstr ""
+msgstr "GNU general public licence"
 
 #: ../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr ""
+msgstr "Český překlad verze 2, červen 1991<br></p></rt>"
 
 #: ../txts/COPYING:8
 msgid ""
@@ -34,10 +33,14 @@ msgid ""
 "distribute verbatim copies of this license document, but changing it is not "
 "allowed.<br>"
 msgstr ""
+"Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
+"Suite 330, Boston, MA  02111-1307  USA<br>Kopírování a distribuce doslovných "
+"kopií tohoto licenčního dokumentu jsou dovoleny komukoliv, jeho změny jsou "
+"však zakázány.<br>"
 
 #: ../txts/COPYING:11
 msgid "Preamble"
-msgstr ""
+msgstr "Preambule"
 
 #: ../txts/COPYING:14
 msgid ""
@@ -76,12 +79,47 @@ msgid ""
 "licensed for everyone's free use or not licensed at all.<br>The precise "
 "terms and conditions for copying, distribution and modification follow.<br>"
 msgstr ""
+"Softwarové licence jsou většinou navrženy tak, že vám odebírají právo "
+"svobodného sdílení a úprav programů. Smyslem GNU General Public License je "
+"naproti tomu zaručit svobodu ke sdílení a úpravám svobodného softwaru - pro "
+"zajištění svobodného přístupu k tomuto softwaru pro všechny jeho uživatele. "
+"Tato General Public License se vztahuje na většinu softwaru nadace Free "
+"Software Foundation a na jakýkoli jiný program, jehož autor se přikloní k "
+"jejímu používání. (Některý další software od Free Software Foundation je "
+"namísto toho pokryt GNU Lesser General Public License.) Můžete ji rovněž "
+"použít pro své programy.<br>Pokud mluvíme o svobodném softwaru, máme na "
+"mysli svobodu, nikoliv cenu. Naše General Public License je navržena pro "
+"zajištění toho, že můžete svobodně šířit kopie svobodného softwaru (a "
+"účtovat si poplatek za tuto službu, pokud chcete), že obdržíte zdrojový kód "
+"anebo jej můžete získat, pokud ho chcete, že můžete tento software "
+"modifikovat nebo jeho části použít v nových svobodných programech; a že "
+"víte, že tyto věci smíte dělat.<br>Abychom mohli vaše práva chránit, musíme "
+"vytvořit omezení, která zakáží komukoli vám tato práva odepírat nebo vás "
+"žádat, abyste se těchto práv vzdal. Tato omezení se promítají do jistých "
+"povinností, kterým musíte dostát, pokud šíříte kopie dotyčného softwaru "
+"anebo ho modifikujete.<br>Například, šíříte-li kopie takového programu, ať "
+"již zdarma nebo za poplatek, musíte poskytnout příjemcům všechna práva, "
+"která máte sám. Musíte zaručit, že příjemci rovněž dostanou anebo mohou "
+"získat zdrojový kód. A musíte jim ukázat tyto podmínky, aby znali svá práva."
+"<br>Vaše práva chráníme ve dvou krocích: (1) autorizací softwaru a (2) "
+"nabídkou této licence, která vám dává právoplatné svolení ke kopírování, "
+"šíření a modifikaci softwaru.<br>Kvůli ochraně každého autora i nás "
+"samotných chceme zajistit, aby každý chápal skutečnost, že pro svobodný "
+"software neplatí žádné záruky. Je-li software někým jiným modifikován a "
+"poslán dále, chceme, aby příjemci věděli, že to, co mají, není originál, "
+"takže jakékoliv problémy vnesené jinými se neodrazí na reputaci původních "
+"autorů.<br>Konečně, každý svobodný program je neustále ohrožen softwarovými "
+"patenty. Přejeme si zamezit nebezpečí, že redistributoři svobodného programu "
+"obdrží samostatně patentová osvědčení a tím učiní program vázaným. Abychom "
+"tomu zamezili, deklarovali jsme, že každý patent musí být buď vydán s tím, "
+"že umožňuje každému svobodné užití, anebo nesmí být vydán vůbec.<br>Přesná "
+"ustanovení a podmínky pro kopírování, šíření a modifikaci jsou uvedeny dále."
 
 #: ../txts/COPYING:17
 msgid ""
 "GNU general public license terms and conditions for copying, distribution "
 "and modification"
-msgstr ""
+msgstr "Ustanovení a podmínky pro kopírování, distribuci a modifikaci"
 
 #: ../txts/COPYING:20
 msgid ""
@@ -100,6 +138,20 @@ msgid ""
 "having been made by running the Program). Whether that is true depends on "
 "what the Program does.<br>"
 msgstr ""
+"0. Tato licence se vztahuje na kterýkoliv program či jiné dílo, které "
+"obsahuje zmínku, umístěnou v něm držitelem autorských práv, o tom, že dílo "
+"může být šířeno podle ustanovení GNU General Public License. V dalším textu "
+"znamená \"program\" každý takový program nebo dílo a \"dílo založené na "
+"programu\" znamená buď program samotný anebo každé jiné dílo z něj odvozené, "
+"které podléhá autorskému zákonu: tím se míní dílo obsahující program nebo "
+"jeho část, buď doslovně anebo s modifikacemi, popřípadě v překladu do jiného "
+"jazyka. (Nadále je překlad zahrnován bez omezení pod pojem \"modifikace\".) "
+"Každý uživatel licence je označován jako \"vy\".<br>Jiné činnosti než "
+"kopírování, šíření a modifikace nejsou pokryty touto licencí; sahají mimo "
+"její rámec. Akt spuštění programu není omezen a výstup z programu je pokryt "
+"pouze tehdy, jestliže obsah výstupu tvoří dílo založené na programu "
+"(nezávisle na tom, zda bylo vytvořeno činností programu). Posouzení "
+"platnosti předchozí věty závisí na tom, co program dělá.<br>"
 
 #: ../txts/COPYING:22
 msgid ""
@@ -112,6 +164,13 @@ msgid ""
 "a fee for the physical act of transferring a copy, and you may at your "
 "option offer warranty protection in exchange for a fee.<br>"
 msgstr ""
+"1. Smíte kopírovat a šířit doslovné kopie zdrojového kódu programu tak, jak "
+"jste jej obdržel a na libovolném médiu, za předpokladu, že na každé kopii "
+"viditelně a náležitě zveřejníte zmínku o autorských právech a absenci "
+"záruky; ponecháte nedotčené všechny zmínky vztahující se k této licenci a k "
+"absenci záruky; a dáte každému příjemci spolu s programem kopii této licence."
+"<br>Za fyzický akt přenesení kopie můžete žádat poplatek a podle vlastního "
+"uvážení můžete nabídnout za poplatek záruční ochranu.<br>"
 
 #: ../txts/COPYING:24
 msgid ""
@@ -134,6 +193,24 @@ msgid ""
 "such an announcement, your work based on the Program is not required to "
 "print an announcement.)"
 msgstr ""
+"2. Můžete modifikovat vaši kopii či kopie programu anebo kterékoliv jeho "
+"části, a tak vytvořit dílo založené na programu a kopírovat a rozšiřovat "
+"takové modifikace či dílo podle podmínek paragrafu 1 výše, za předpokladu, "
+"že splníte všechny tyto podmínky:<br><br>a) Modifikované soubory musíte "
+"opatřit zřetelnou zmínkou uvádějící, že jste soubory změnil a datum každé "
+"změny.<br>b) Musíte umožnit, aby jakékoliv vámi publikované či rozšiřované "
+"dílo, které obsahuje zcela nebo zčásti program nebo jakoukoli jeho část, "
+"popřípadě je z programu nebo jeho části odvozeno, mohlo být jako celek "
+"bezplatně poskytnuto každé třetí osobě v souladu s ustanoveními této licence."
+"<br>c) Pokud modifikovaný program pracuje normálně tak, že čte interaktivně "
+"povely, musíte zajistit, že při nejběžnějším způsobu jeho spuštění vytiskne "
+"nebo zobrazí hlášení zahrnující příslušnou zmínku o autorském právu a uvede, "
+"že neexistuje žádná záruka (nebo případně, že záruku poskytujete vy), a že "
+"uživatelé mohou za těchto podmínek program redistribuovat, a musí uživateli "
+"sdělit, jakým způsobem může nahlédnout do kopie této licence. (Výjimka: v "
+"případě, že sám program je interaktivní, avšak žádné takové hlášení "
+"nevypisuje, nepožaduje se, aby vaše dílo založené na programu takové hlášení "
+"vypisovalo.)"
 
 #: ../txts/COPYING:27
 msgid ""
@@ -153,6 +230,21 @@ msgid ""
 "with a work based on the Program) on a volume of a storage or distribution "
 "medium does not bring the other work under the scope of this License."
 msgstr ""
+"Tyto požadavky se vztahují k modifikovanému dílu jako celku. Pokud lze "
+"identifikovat části takového díla, které zřejmě nejsou odvozeny z programu a "
+"mohou být samy o sobě rozumně považovány za nezávislá a samostatná díla, pak "
+"se tato licence a její ustanovení nevztahují na tyto části, jsou-li šířeny "
+"jako nezávislá díla. Avšak jakmile tytéž části rozšiřujete jako část celku, "
+"jímž je dílo založené na programu, musí být rozšiřování tohoto celku "
+"podřízeno ustanovením této licence tak, že povolení poskytnutá dalším "
+"uživatelům se rozšíří na celé dílo, tedy na všechny jeho části bez ohledu na "
+"to, kdo kterou část napsal.<br>Smyslem tohoto paragrafu tedy není získání "
+"práv na dílo zcela napsané vámi ani popírání vašich práv vůči němu; "
+"skutečným smyslem je výkon práva na řízení distribuce odvozených nebo "
+"kolektivních děl založených na programu.<br>Pouhé spojení jiného díla, jež "
+"není na programu založeno, s programem (anebo dílem založeným na programu) "
+"na paměťovém nebo distribučním médiu neuvazuje toto jiné dílo do působnosti "
+"této licence."
 
 #: ../txts/COPYING:30
 msgid ""
@@ -173,6 +265,21 @@ msgid ""
 "code or executable form with such an offer, in accord with Subsection b "
 "above.)"
 msgstr ""
+"3. Můžete kopírovat a rozšiřovat program (nebo dílo na něm založené, viz "
+"paragraf 2) v objektové anebo spustitelné podobě podle ustanovení paragrafů "
+"1 a 2 výše, pokud splníte některou z následujících náležitostí:<br><br>a) "
+"Doprovodíte jej zdrojovým kódem ve strojově čitelné formě. Zdrojový kód musí "
+"být rozšiřován podle ustanovení paragrafů 1 a 2 výše, a to na médiu běžně "
+"používaném pro výměnu softwaru; nebo<br>b) Doprovodíte jej písemnou nabídkou "
+"s platností nejméně tři roky, podle níž poskytnete jakékoli třetí straně, za "
+"poplatek nepřevyšující vaše výdaje vynaložené na fyzickou výrobou zdrojové "
+"distribuce, kompletní strojově čitelnou kopii odpovídajícího zdrojového "
+"kódu, jenž musí být šířen podle ustanovení paragrafů 1 a 2 výše na médiu "
+"běžně používaném pro výměnu softwaru; nebo<br>c) Doprovodíte jej "
+"informacemi, které jste dostal ohledně nabídky na poskytnutí zdrojového "
+"kódu. (Tato alternativa je povolena jen pro nekomerční šíření a jenom tehdy, "
+"pokud jste obdržel program v objektovém nebo spustitelném tvaru spolu s "
+"takovou nabídkou, v souladu s položkou b výše.)"
 
 #: ../txts/COPYING:33
 msgid ""
@@ -186,6 +293,16 @@ msgid ""
 "and so on) of the operating system on which the executable runs, unless that "
 "component itself accompanies the executable."
 msgstr ""
+"Zdrojový kód k dílu je nejvhodnější formou díla z hlediska jeho případných "
+"modifikací. Pro dílo ve spustitelném tvaru znamená úplný zdrojový kód "
+"veškerý zdrojový kód pro všechny moduly, které obsahuje, plus jakékoli další "
+"soubory pro definici rozhraní, plus dávkové soubory potřebné pro kompilaci a "
+"instalaci spustitelného programu. Zvláštní výjimkou jsou však ty softwarové "
+"komponenty, které jsou normálně šířeny (buď ve zdrojové nebo binární formě) "
+"s hlavními součástmi operačního systému, na němž spustitelný program běží "
+"(tj. s překladačem, jádrem apod.). Tyto komponenty nemusí být šířeny se "
+"zdrojovým kódem, pokud ovšem komponenta sama nedoprovází spustitelnou podobu "
+"díla."
 
 #: ../txts/COPYING:36
 msgid ""
@@ -195,6 +312,11 @@ msgid ""
 "even though third parties are notcompelled to copy the source along with the "
 "object code."
 msgstr ""
+"Je-li šíření objektového nebo spustitelného kódu činěno nabídkou přístupu ke "
+"kopírování z určitého místa, potom se za distribuci zdrojového kódu počítá i "
+"nabídnutí ekvivalentního přístupu ke kopírování zdrojového kódu ze stejného "
+"místa, byť přitom nejsou třetí strany nuceny ke zkopírování zdrojového kódu "
+"spolu s objektovým."
 
 #: ../txts/COPYING:39
 msgid ""
@@ -205,6 +327,12 @@ msgid ""
 "copies, or rights, from you under this License will not have their licenses "
 "terminated so long as such parties remain in full compliance."
 msgstr ""
+"4. Nesmíte kopírovat, modifikovat, poskytovat sublicence anebo šířit program "
+"jiným způsobem než výslovně uvedeným v této licenci. Jakýkoli jiný pokus o "
+"kopírování, modifikování, poskytnutí sublicence anebo šíření programu je "
+"neplatný a automaticky ukončí vaše práva daná touto licencí. Strany, které "
+"od vás obdržely kopie anebo práva v souladu s touto licencí, však nemají své "
+"licence ukončeny, dokud se jim plně podřizují."
 
 #: ../txts/COPYING:42
 msgid ""
@@ -216,6 +344,13 @@ msgid ""
 "this License to do so, and all its terms and conditions for copying, "
 "distributing or modifying the Program or works based on it."
 msgstr ""
+"5. Není vaší povinností tuto licenci přijmout, protože jste ji nepodepsal. "
+"Nic jiného vám však nedává možnost kopírovat nebo šířit program nebo "
+"odvozená díla. V případě, že tuto licenci nepřijmete, jsou tyto činnosti "
+"zákonem zakázány. Tím pádem modifikací anebo šířením programu (anebo každého "
+"díla založeného na programu) vyjadřujete své podřízení se licenci a všem "
+"jejím ustanovením a podmínkám pro kopírovaní, modifikování a šíření programu "
+"a děl na něm založených."
 
 #: ../txts/COPYING:45
 msgid ""
@@ -226,6 +361,11 @@ msgid ""
 "recipients' exercise of the rights granted herein. You are not responsible "
 "for enforcing compliance by third parties to this License."
 msgstr ""
+"6. Pokaždé, když redistribuujete program (nebo dílo založené na programu), "
+"získává příjemce od původního držitele licence právo kopírovat, modifikovat "
+"a šířit program v souladu s těmito ustanoveními a podmínkami. Nesmíte klást "
+"žádné další překážky výkonu zde zaručených příjemcových práv. Nejste "
+"odpovědný za vymáhání dodržování této licence třetími stranami."
 
 #: ../txts/COPYING:48
 msgid ""
@@ -242,6 +382,16 @@ msgid ""
 "it and this License would be to refrain entirely from distribution of the "
 "Program."
 msgstr ""
+"7. Jsou-li vám z rozhodnutí soudu, obviněním z porušení patentu nebo z "
+"jakéhokoli jiného důvodu (nejen v souvislosti s patenty) uloženy takové "
+"podmínky (ať již příkazem soudu, smlouvou nebo jinak), které se vylučují s "
+"podmínkami této licence, nejste tím osvobozen od podmínek této licence. "
+"Pokud nemůžete šířit program tak, abyste vyhověl zároveň svým závazkům "
+"vyplývajícím z této licence a jiným platným závazkům, nesmíte jej v důsledku "
+"toho šířit vůbec. Pokud by například patentové osvědčení nepovolovalo "
+"bezplatnou redistribuci programu všemi, kdo vaším přičiněním získají přímo "
+"nebo nepřímo jeho kopie, pak by jediný možný způsob jak vyhovět zároveň "
+"patentovému osvědčení i této licenci spočíval v ukončení distribuce programu."
 
 #: ../txts/COPYING:51
 msgid ""
@@ -249,6 +399,10 @@ msgid ""
 "particular circumstance, the balance of the section is intended to apply and "
 "the section as a whole is intended to apply in other circumstances."
 msgstr ""
+"Pokud by se za nějakých specifických okolností jevila některá část tohoto "
+"paragrafu jako neplatná nebo nevynutitelná, považuje se za směrodatnou "
+"rovnováha vyjádřená tímto paragrafem a paragraf jako celek se považuje za "
+"směrodatný za jiných okolností."
 
 #: ../txts/COPYING:54
 msgid ""
@@ -262,12 +416,22 @@ msgid ""
 "she is willing to distribute software through any other system and a "
 "licensee cannot impose that choice."
 msgstr ""
+"Smyslem tohoto paragrafu není navádět vás k porušování patentů či jiných "
+"ustanovení vlastnického práva, anebo tato ustanovení zpochybňovat; jediným "
+"jeho smyslem je ochrana integrity systému šíření svobodného softwaru, který "
+"je podložen veřejnými licenčními předpisy. Mnozí lidé poskytli své příspěvky "
+"do širokého okruhu softwaru šířeného tímto systémem, a spolehli se tak na "
+"jeho důsledné uplatňování; záleží na autorovi/dárci, aby rozhodl, zda si "
+"přeje šířit software pomocí nějakého jiného systému a žádný uživatel licence "
+"nemůže takové rozhodnutí zpochybňovat."
 
 #: ../txts/COPYING:57
 msgid ""
 "This section is intended to make thoroughly clear what is believed to be a "
 "consequence of the rest of this License."
 msgstr ""
+"Smyslem tohoto paragrafu je zevrubně osvětlit to, co je považováno za "
+"důsledek plynoucí ze zbytku této licence."
 
 #: ../txts/COPYING:60
 msgid ""
@@ -279,6 +443,13 @@ msgid ""
 "excluded.  In such case, this License incorporates the limitation as if "
 "written in the body of this License."
 msgstr ""
+"8. Pokud je šíření či použití programu v některých zemích omezeno buď "
+"patenty anebo autorsky chráněnými rozhraními, může držitel původních "
+"autorských práv, který svěřuje program do působnosti této licence, přidat "
+"výslovné omezení pro geografické šíření, vylučující takové země, takže "
+"šíření je povoleno jen v těch zemích nebo mezi těmi zeměmi, které nejsou "
+"tímto způsobem vyloučeny. Tato licence zahrnuje v tomto případě takové "
+"omezení přesně tak, jako by bylo zapsáno v textu této licence."
 
 #: ../txts/COPYING:63
 msgid ""
@@ -293,6 +464,16 @@ msgid ""
 "a version number of this License, you may choose any version ever published "
 "by the Free Software Foundation."
 msgstr ""
+"9. Free Software Foundation může čas od času vydávat upravené nebo nové "
+"verze General Public License. Takové nové verze se budou svým duchem podobat "
+"současné verzi, v jednotlivostech se však mohou lišit s ohledem na nové "
+"problémy či zájmy.<br>Každé verzi je přiděleno rozlišující číslo verze. "
+"Pokud program specifikuje číslo verze, která se na něj vztahuje, a \"všechny "
+"následující verze\", můžete se podle uvážení řídit ustanoveními a podmínkami "
+"buďto oné konkrétní verze anebo kterékoliv následující verze, kterou vydala "
+"Free Software Foundation. Jestliže program nespecifikuje číslo verze této "
+"licence, můžete si vybrat libovolnou verzi, kterou kdy Free Software "
+"Foundation vydala."
 
 #: ../txts/COPYING:66
 msgid ""
@@ -304,10 +485,17 @@ msgid ""
 "preserving the free status of all derivatives of our free software and of "
 "promoting the sharing and reuse of software generally."
 msgstr ""
+"10. Pokud si přejete zahrnout části programu do jiných svobodných programů, "
+"jejichž distribuční podmínky jsou odlišné, zašlete autorovi žádost o "
+"povolení. V případě softwaru, k němuž vlastní autorská práva Free Software "
+"Foundation, napište Free Software Foundation; někdy činíme výjimky ze zde "
+"uvedených ustanovení. Naše rozhodnutí bude vedeno dvěma cíli: zachováním "
+"svobodné povahy všech odvozenin našeho svobodného softwaru a podporou "
+"sdílení a opětovného využití softwaru obecně."
 
 #: ../txts/COPYING:70
 msgid "No warranty"
-msgstr ""
+msgstr "ZÁRUKA SE NEPOSKYTUJE"
 
 #: ../txts/COPYING:74
 msgid ""
@@ -321,6 +509,14 @@ msgid ""
 "PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR "
 "CORRECTION."
 msgstr ""
+"11. VZHLEDEM K BEZPLATNÉMU POSKYTNUTÍ LICENCE K PROGRAMU SE NA PROGRAM "
+"NEVZTAHUJE ŽÁDNÁ ZÁRUKA, A TO V MÍŘE POVOLENÉ PLATNÝM ZÁKONEM. POKUD NENÍ "
+"PÍSEMNĚ STANOVENO JINAK, POSKYTUJÍ DRŽITELÉ AUTORSKÝCH PRÁV POPŘÍPADĚ JINÉ "
+"STRANY PROGRAM \"TAK, JAK JE\", BEZ ZÁRUKY JAKÉHOKOLI DRUHU, AŤ VÝSLOVNÉ "
+"NEBO VYPLÝVAJÍCÍ, VČETNĚ, ALE NIKOLI JEN, ZÁRUK PRODEJNOSTI A VHODNOSTI PRO "
+"URČITÝ ÚČEL. POKUD JDE O KVALITU A VÝKONNOST PROGRAMU, LEŽÍ VEŠKERÉ RIZIKO "
+"NA VÁS. POKUD BY SE U PROGRAMU PROJEVILY ZÁVADY, PADAJÍ NÁKLADY ZA VŠECHNU "
+"POTŘEBNOU ÚDRŽBU, OPRAVU ČI NÁPRAVU NA VÁŠ VRUB."
 
 #: ../txts/COPYING:77
 msgid ""
@@ -334,14 +530,24 @@ msgid ""
 "PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE "
 "POSSIBILITY OF SUCH DAMAGES."
 msgstr ""
+"12. V ŽÁDNÉM PŘÍPADĚ, S VÝJIMKOU TOHO, KDYŽ TO VYŽADUJE PLATNÝ ZÁKON, ANEBO "
+"KDYŽ TO BYLO PÍSEMNĚ ODSOUHLASENO, VÁM NEBUDE ŽÁDNÝ Z DRŽITELŮ AUTORSKÝCH "
+"PRÁV ANI ŽÁDNÁ JINÁ STRANA, KTERÁ SMÍ MODIFIKOVAT ČI ŠÍŘIT PROGRAM V SOULADU "
+"S PŘEDCHOZÍMI USTANOVENÍMI, ODPOVĚDNI ZA ŠKODY, VČETNĚ VŠECH OBECNÝCH, "
+"SPECIÁLNÍCH, NAHODILÝCH NEBO NÁSLEDNÝCH ŠKOD VYPLÝVAJÍCÍCH Z UŽÍVÁNÍ ANEBO "
+"NESCHOPNOSTI UŽÍVAT PROGRAMU (VČETNĚ, ALE NIKOLI JEN, ZTRÁTY NEBO ZKRESLENÍ "
+"DAT, NEBO TRVALÝCH ŠKOD ZPŮSOBENÝCH VÁM NEBO TŘETÍM STRANÁM, NEBO SELHÁNÍ "
+"FUNKCE PROGRAMU V SOUČINNOSTI S JINÝMI PROGRAMY), A TO I V PŘÍPADĚ, ŽE "
+"TAKOVÝ DRŽITEL AUTORSKÝCH PRÁV NEBO JINÁ STRANA BYLI UPOZORNĚNI NA MOŽNOST "
+"TAKOVÝCH ŠKOD."
 
 #: ../txts/COPYING:82
 msgid "End of Terms and Conditions"
-msgstr ""
+msgstr "KONEC USTANOVENÍ A PODMÍNEK"
 
 #: ../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
-msgstr ""
+msgstr "Doplněk: Jak uplatnit tato ustanovení na vaše nové programy"
 
 #: ../txts/COPYING:90
 msgid ""
@@ -349,6 +555,10 @@ msgid ""
 "use to the public, the best way to achieve this is to make it free software "
 "which everyone can redistribute and change under these terms."
 msgstr ""
+"Pokud vyvinete nový program a chcete, aby byl veřejnosti co nejvíce k "
+"užitku, můžete toho nejlépe dosáhnout tím, že jej prohlásíte za svobodný "
+"software, který může kdokoliv redistribuovat a měnit za zde uvedených "
+"podmínek."
 
 #: ../txts/COPYING:93
 msgid ""
@@ -357,6 +567,10 @@ msgid ""
 "exclusion of warranty; and each file should have at least the copyright line "
 "and a pointer to where the full notice is found."
 msgstr ""
+"K tomu stačí připojit k programu následující údaje. Nejbezpečnější cestou je "
+"jejich připojení na začátek každého zdrojového souboru, čímž se nejúčinněji "
+"sdělí vyloučení záruky; a v každý souboru by pak měla být přinejmenším řádka "
+"s \"copyrightem\" a odkaz na místo, kde lze nalézt úplné údaje."
 
 #: ../txts/COPYING:96
 msgid ""
@@ -374,6 +588,18 @@ msgid ""
 "Boston, MA  02111-1307  USA<br><br><br>Also add information on how to "
 "contact you by electronic and paper mail."
 msgstr ""
+"<řádka se jménem programu a nástinem toho, co dělá><br>Copyright (C)<rok> "
+"<jméno autora><br><br>Tento program je svobodný software; můžete jej šířit a "
+"modifikovat podle<br>ustanovení GNU General Public License, vydávané Free "
+"Software<br>Foundation; a to buď verze 2 této licence anebo (podle vašeho "
+"uvážení)<br>kterékoli pozdější verze.<br><br>Tento program je rozšiřován v "
+"naději, že bude užitečný, avšak BEZ<br>JAKÉKOLI ZÁRUKY; neposkytují se ani "
+"odvozené záruky PRODEJNOSTI anebo<br>VHODNOSTI PRO URČITÝ ÚČEL. Další "
+"podrobnosti hledejte ve GNU General Public License.<br><br>Kopii GNU General "
+"Public License jste měl obdržet spolu s tímto<br>programem; pokud se tak "
+"nestalo, napište o ni Free Software Foundation,<br>Inc., 675 Mass Ave, "
+"Cambridge, MA 02139, USA.<br><br>Připojte rovněž informaci o tom, jak je "
+"možné se s vámi spojit elektronickou a papírovou poštou."
 
 #: ../txts/COPYING:98
 msgid ""
@@ -384,6 +610,11 @@ msgid ""
 "are welcome to redistribute it<br>under certain conditions; type `show c' "
 "for details."
 msgstr ""
+"Pokud je program interaktivní, zařiďte, aby se při startu v interaktivním "
+"módu vypsalo hlášení podobné tomuto:<br><br>Packal verze 69, Copyright (C) "
+"19xx jméno autora.<br>Program Packal je ABSOLUTNĚ BEZ ZÁRUKY; podrobnosti se "
+"dozvíte<br>zadáním 'show w'. Jde o svobodný software a jehošíření za "
+"jistých<br>podmínek je vítáno; podrobnosti získáte zadáním 'show c'."
 
 #: ../txts/COPYING:100
 msgid ""
@@ -395,6 +626,13 @@ msgid ""
 "sign a copyright disclaimer for the program, if necessary.  Here is a "
 "sample; alter the names:"
 msgstr ""
+"Hypotetické povely 'show w' a 'show c' by měly zobrazit příslušné pasáže "
+"General Public License. Odpovídající povely ovšem nemusí být právě 'show w' "
+"a 'show c'; mohou to být třeba stisky tlačítka na myši nebo položky v menu--"
+"cokoliv, co se do vašeho programu hodí.<br><br>Pokud je to nutné, měl byste "
+"také přimět svého zaměstnavatele (jestliže pracujete jako programátor) nebo "
+"představitele vaší školy, je-li někdo takový, k tomu, aby podepsal "
+"\"zřeknutí se autorských práv\". Zde je vzor; jména pozměňte:"
 
 #: ../txts/COPYING:102
 msgid ""
@@ -403,6 +641,10 @@ msgid ""
 "Hacker.<br><br><signature of Ty Coon>, 1 April 1989<br>Ty Coon, President of "
 "Vice"
 msgstr ""
+"Jojotechna, a.s., se tímto zříká veškerého zájmu o autorská práva "
+"k<br>programu `Packal' (překladač s nakladačem) napsanému Jakubem Bastlem."
+"<br><br><Tomáš Složitý--podpis>, 1. dubna 1989<br>Tomáš Složitý, více než "
+"prezident"
 
 #: ../txts/COPYING:104
 msgid ""
@@ -412,14 +654,19 @@ msgid ""
 "library.  If this is what you want to do, use the GNU Library General Public "
 "License instead of this License."
 msgstr ""
+"Tato General Public License neumožňuje zahrnutí vašeho programu do jiných "
+"než svobodných programů. Je-li váš program knihovnou podprogramů, můžete "
+"zvážit, zda je užitečné umožnit sestavování i vázaných aplikačních programů "
+"s vaší knihovnou. V takovém případě použijte GNU Lesser General Public "
+"License namísto této licence."
 
 #: ../txts/README:1
 msgid "README"
-msgstr ""
+msgstr "Soubor README"
 
 #: ../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "strategická hra s otevřenými zdrojovými kódy"
 
 #: ../txts/README:13
 msgid ""
@@ -431,10 +678,16 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you do."
 msgstr ""
+"Widelands je strategická hra podobná hře Settlers II od firmy BlueByte."
+"<br>Začínáte s malým kouskem země a několika málo nezbytnými základními "
+"surovinami. S jejich využitím můžete vybudovat obrovské impérium s mnoha "
+"tisíci obyvateli. Na vaší cestě k úspěchu budete muset vybudovat ekonomickou "
+"infrastrukturu, prozkoumat území okolo vás a čelit útokům nepřítel, kteří se "
+"snaží ovládnout svět podobně jako vy."
 
 #: ../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Navštivte domovskou stránku projektu Widelands:"
 
 #: ../txts/README:22
 msgid ""
@@ -442,10 +695,13 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands spadá pod licenci GNU General Public License (GPL). Více informací "
+"naleznete v souboru 'COPYING' nebo klikněte na tlačítko Licence v hlavní "
+"nabídce."
 
 #: ../txts/README:27
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: ../txts/README:31
 msgid ""
@@ -454,68 +710,74 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
+"Widelands je nený hratelnou hrou, ale aby se stala ještě lepší je potřeba "
+"dalších dobrovolníků. Vaše nabídky (ano, mluvím k Vám) jsou vítány. "
+"Obzvláště v oblasti grafiky by bylo dobré Widelands ještě vylepšit."
 
 #: ../txts/README:36
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Klávesové zkratky (během hry)"
 
 #: ../txts/README:40
 msgid "SPACE       Toggles build-help"
-msgstr ""
+msgstr "Mezera      Přepíná nápovědu k výstavbě"
 
 #: ../txts/README:42
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M               Přepíná náhledovou mapku"
 
 #: ../txts/README:44
 msgid "C               Toggle census"
-msgstr ""
+msgstr "C               Přepíná zobrazení popisků"
 
 #: ../txts/README:46
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S               Přepíná zobrazení statistiky"
 
 #: ../txts/README:48
 msgid "F               Toggle Fullscreen"
-msgstr ""
+msgstr "F               Přepíná celoobrazovkový režim"
 
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
-msgstr ""
+msgstr "Home        Vystředí mapu na počáteční pozici"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
-msgstr ""
+msgstr "Page Up        Zvýší rychlost hry"
 
 #: ../txts/README:55
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "Page Down   Sníží rychlost hry"
 
 #: ../txts/README:58
 msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr ""
+msgstr "F5           Odkryje celou mapu (pouze v testovacím sestavení)"
 
 #: ../txts/README:60
 msgid "F10         Quit the game immediately"
-msgstr ""
+msgstr "F10         Okamžitě ukončí hru"
 
 #: ../txts/README:62
 msgid "F11         Take a screenshot"
-msgstr ""
+msgstr "F11         Uloží snímek obrazovky"
 
 #: ../txts/README:67
 msgid "Online Help"
-msgstr ""
+msgstr "Nápověda online"
 
 #: ../txts/README:71
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Pokud potřebujete nápovědu nebo dokumentaci k Widelands nebo k Editoru "
+"Widelands, navštivte naši domovskou stránku. Aktuální nápovědu můžete nalézt "
+"na adrese:"
 
 #: ../txts/README:79
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Hlášení chyb"
 
 #: ../txts/README:83
 msgid ""
@@ -523,24 +785,29 @@ msgid ""
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
 "page:"
 msgstr ""
+"Pokud chcete nahlásit chybu, pošlete vaše hlášení do emailové konference "
+"<widelands-public@list.sourceforge.net><br>Pro přihlášení navštivte tuto "
+"stránku:"
 
 #: ../txts/README:88
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Prosím specifikujte související informace. Zejména:"
 
 #: ../txts/README:91
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
+"- jakou verzi Widelands používáte (tzn. číslo sestavení, nebo zda je to "
+"vlastní kompilace ze SVN)"
 
 #: ../txts/README:93
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- jak chybu znovu vyvolat"
 
 #: ../txts/README:95
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- jakou mapu jste hrál(a)"
 
 #: ../txts/README:97
 msgid ""
@@ -549,10 +816,14 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
+"- pošlete nám komprimovaný (zip, gzip, bzip2) záznam sezení, pokud je to "
+"možné<br>a chyba není vyloženě triviální. Ve skutečnosti je dobré "
+"vždy<br>zaznamenávat vaše sezení pokud se objevují chyby. Více informací viz "
+"níže."
 
 #: ../txts/README:102
 msgid "Creating a Session Record</p>"
-msgstr ""
+msgstr "Vytváření záznamu sezení</p>"
 
 #: ../txts/README:105
 msgid ""
@@ -560,12 +831,17 @@ msgid ""
 "can then replay an entire session from starting the game to exiting it. This "
 "is really helpful for debugging problems."
 msgstr ""
+"Widelands může zaznamenávat všechny vaše stisky kláves a pohyby myši do "
+"souboru. Ten může být poté použit pro přehrání celého průběhu práce se hrou. "
+"To je velmi užitečné při odstraňování chyb."
 
 #: ../txts/README:108
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
+"Pro vytvoření záznamu sezení spusťte hry s parametrem --record. Na Linuxu "
+"spusťte Widelands jednoduše takto: $ ./widelands --record=soubor.rec"
 
 #: ../txts/README:111
 msgid ""
@@ -575,12 +851,20 @@ msgid ""
 "should read something like c:\\games\\widelands\\widelands.exe. Change this "
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
+"Ve Windows vytvořte zástupce k souboru widelands.exe (pravým tlačítkem "
+"klikněte na widelands.exe a zvolte Vytvořit zástupce). Poté upravte zástupce "
+"(pravým tlačítkem klikněte na vytvořeném zástupci a zvolte Vlastnosti). Pole "
+"Cíl bude vypadat například: C:\\games\\widelands\\widelands.exe. Připojte "
+"nakonec paramter --record (například takto C:\\games\\widelands\\widelands."
+"exe --record=soubor.rec)."
 
 #: ../txts/README:114
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
 msgstr ""
+"Bude vytvořen soubor pojmenovaný soubor.rec. Pro jeho přehrání opakujte výše "
+"uvedené kroky s tím rozdílem, že zaměníte --record za --playback."
 
 #: ../txts/README:117
 msgid ""
@@ -590,22 +874,26 @@ msgid ""
 "change between versions. Session records are not intended to serve as demo "
 "files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
+"Zaznamenaný soubor je nezávislý na platformě, ale obecně není možné používat "
+"jej pro rozdílné verze Widelands, protože uživatelské rozhraní a pořadí "
+"událostí se může měnit. Záznamy sezení nejsou určeny pro použití jako demo; "
+"jsou především ladícím nástrojem, který nám usnadňuje hledání chyb."
 
 #: ../txts/developers:1
 msgid "Development"
-msgstr ""
+msgstr "Vývoj"
 
 #: ../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "Soubor README k Editoru Widelands"
 
 #: ../txts/editor_readme:3
 msgid "README for the Editor"
-msgstr ""
+msgstr "Soubor README k Editoru"
 
 #: ../txts/editor_readme:6 ../txts/README:9
 msgid "Introduction"
-msgstr ""
+msgstr "Úvod"
 
 #: ../txts/editor_readme:9
 msgid ""
@@ -614,59 +902,63 @@ msgid ""
 "and as the Editor becomes better and better this text  will also get longer "
 "and more complete. Probably it will also contain a little tutorial in a while"
 msgstr ""
+"Tento Editor je určen pro hráče, kteří si chtějí navrhnout svoje vlastní "
+"mapy pro Widelands.<br>Jak můžete vidět, na Editoru se stále usilovně "
+"pracuje. Jak bude docházet k jeho vylepšování, bude se rozrůstat i tento "
+"text. Pravděpodobně bude také obsahovat také ukázku použití."
 
 #: ../txts/editor_readme:13
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Klávesové zkratky"
 
 #: ../txts/editor_readme:16
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "Mezera   Přepíná nápovědu pro výstavbu"
 
 #: ../txts/editor_readme:18
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C        Přepíná zobrazení popisků"
 
 #: ../txts/editor_readme:20
 msgid "E        Toggles event menu"
-msgstr ""
+msgstr "E        Přepíná nabídku událostí"
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr ""
+msgstr "F        Přepíná celoobrazovkový režim"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"
-msgstr ""
+msgstr "H        Přepíná hlavní nabídku"
 
 #: ../txts/editor_readme:26
 msgid "M        Toggles minimap"
-msgstr ""
+msgstr "M        Přepíná náhledovou mapku"
 
 #: ../txts/editor_readme:28
 msgid "P        Toggles player menu"
-msgstr ""
+msgstr "P        Přepíná nabídku hráče"
 
 #: ../txts/editor_readme:30
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T        Přepíná nabídku nástrojů"
 
 #: ../txts/editor_readme:32
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L   Otevřít mapu"
 
 #: ../txts/editor_readme:34
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S   Uložit mapu"
 
 #: ../txts/editor_readme:36
 msgid "1-0      Changes tools size"
-msgstr ""
+msgstr "1-0      Mění velikost nástroje"
 
 #: ../txts/editor_readme:38
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr ""
+msgstr "Shift    Při podržení vybere první alternativní nástroj"
 
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr ""
+msgstr "Alt      Při podržení vybere druhý alternativní nástroj"

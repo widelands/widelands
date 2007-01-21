@@ -39,7 +39,7 @@
 #include "wexception.h"
 
 
-static const int nr_of_events=6;
+static const int nr_of_events=5;
 // Translations of names and/or description of events does not work with _("xxxxx").c_str() - it ends in queer asci-symbols
 // So I disabled it - Nasenbaer
 // ToDo make it translateable again
@@ -49,8 +49,8 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
 	{ "unhide_area", "Unhide Area", "This Event makes a user definable part of the map visible for a selectable user" },
 	{ "conquer_area", "Conquer Area", "This Event conquers a user definable part of the map for one player if there isn't a player already there" },
 	{ "allow_building", "Allow Building", "Allows/Disables a certain building for a player so that it can be build or it can't any longer" },
-	{ "set_null_trigger", "Set Null Trigger", "Manually set a Null Trigger to a given value" },
-  // TODO: Events below are not creatable in the editor. Make UI Windows for them
+// TODO: Events below are not creatable in the editor. Make UI Windows for them
+	//{ "set_null_trigger", "Set Null Trigger", "Manually set a Null Trigger to a given value" },
 	//{"unhide_objective", "Unhide Objective", "Hide or unhide an objective so that the player can see it" },
 };
 
