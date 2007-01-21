@@ -99,7 +99,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 /*
  * Get the correct editor pic for this amount of this resource
  */
-std::string Resource_Descr::get_editor_pic(uint amount) {
+const std::string & Resource_Descr::get_editor_pic(const uint amount) const {
 	uint bestmatch = 0;
 
 	assert(m_editor_pics.size());

@@ -52,7 +52,7 @@ struct Resource_Descr {
 	bool is_detectable() const throw () {return m_is_detectable;}
 	int get_max_amount() const throw () {return m_max_amount;}
 
-   std::string get_editor_pic(uint amount);
+	const std::string & get_editor_pic(const uint amount) const;
 
 private:
 	struct Indicator {
