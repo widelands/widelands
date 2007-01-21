@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ throw (_wexception)
    fr.Open( fs, "binary/interactive_player" );
 
    // read packet version
-   int packet_version=fr.Unsigned16();
+	const Uint16 packet_version = fr.Unsigned16();
 
    // Resize the IPLs statistic stuff
    game->get_ipl()->m_current_statistics.resize(0);
@@ -58,7 +58,7 @@ throw (_wexception)
    game->get_ipl()->m_last_stats_update = 0;
    game->get_ipl()->m_general_stats.resize(0);
 
-   if(packet_version == CURRENT_PACKET_VERSION) {
+	if (packet_version == CURRENT_PACKET_VERSION) {
       Interactive_Player* plr = game->get_ipl();
 
       plr->m_player_number = fr.Unsigned8();
@@ -70,7 +70,7 @@ throw (_wexception)
       // Map Position
       int x = fr.Unsigned16();
       int y = fr.Unsigned16();
-      plr->m_mapview->set_viewpoint(Point(x,y));
+		plr->m_mapview.set_viewpoint(Point(x,y));
 
       plr->m_display_flags = fr.Unsigned32();
 
@@ -89,7 +89,11 @@ throw (_wexception)
       ushort nr_wares = fr.Unsigned16();
       ushort nr_entries = fr.Unsigned16();
 
-      assert ( nr_wares == game->get_player(game->get_ipl()->get_player_number())->get_tribe()->get_nrwares());
+		assert //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			(nr_wares
+			 ==
+			 game->player(game->get_ipl()->get_player_number())
+			 .tribe().get_nrwares());
 
       plr->m_current_statistics.resize( nr_wares );
       plr->m_ware_productions.resize( nr_wares );
@@ -156,8 +160,9 @@ throw (_wexception)
    fw.Unsigned8(plr->get_player_number());
 
    // Map Position
-   fw.Unsigned16(plr->m_mapview->get_viewpoint().x);
-   fw.Unsigned16(plr->m_mapview->get_viewpoint().y);
+	const Map_View & mapview = plr->m_mapview;
+	fw.Unsigned16(mapview.get_viewpoint().x);
+	fw.Unsigned16(mapview.get_viewpoint().y);
 
    // Display flags
    fw.Unsigned32(plr->m_display_flags);

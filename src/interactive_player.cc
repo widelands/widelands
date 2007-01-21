@@ -32,7 +32,6 @@
 #include "keycodes.h"
 #include "immovable.h"
 #include "network.h"
-#include "mapview.h"
 #include "player.h"
 #include "productionsite.h"
 #include "ui_editbox.h"
@@ -82,11 +81,7 @@ Interactive_Base(g), m_game(&g)
    // Setup all screen elements
 	set_player_number(plyn);
 
-	Map_View* mview;
-	mview = new Map_View(this, 0, 0, get_w(), get_h(), *this);
-	mview->warpview.set(this, &Interactive_Player::mainview_move);
-	mview->fieldclicked.set(this, &Interactive_Player::field_action);
-   set_mapview(mview);
+	m_mapview.fieldclicked.set(this, &Interactive_Player::field_action);
 
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;

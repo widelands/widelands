@@ -43,7 +43,6 @@
 #include "interactive_base.h"
 #include "keycodes.h"
 #include "map.h"
-#include "mapview.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
@@ -76,12 +75,7 @@ Interactive_Base(e), m_editor(e)
    set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
-   // The mapview. watch the map!!!
-   Map_View* mm;
-	mm = new Map_View(this, 0, 0, get_w(), get_h(), *this);
-   mm->warpview.set(this, &Editor_Interactive::mainview_move);
-   mm->fieldclicked.set(this, &Editor_Interactive::field_clicked);
-   set_mapview(mm);
+	m_mapview.fieldclicked.set(this, &Editor_Interactive::field_clicked);
 
    // user interface buttons
    int x = (get_w() - (7*34)) >> 1;
@@ -301,7 +295,7 @@ the function of the currently selected tool
 void Editor_Interactive::field_clicked() {
 	tools.tools[tools.current_tool_index]
 		->handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
-   get_mapview()->need_complete_redraw();
+	m_mapview.need_complete_redraw();
    set_need_save(true);
 }
 

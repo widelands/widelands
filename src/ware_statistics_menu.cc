@@ -378,7 +378,7 @@ m_parent(&parent)
    int cur_ware = 0;
    int dposy = 0;
    posy += PLOT_HEIGHT+ 2*spacing;
-	const Tribe_Descr & tribe = *parent.get_player()->get_tribe();
+	const Tribe_Descr & tribe = parent.get_player()->tribe();
 	for (uint y = 0; y < nr_rows; ++y) {
       posx = spacing;
 		for

@@ -23,32 +23,28 @@
 #include "editor_game_base.h"
 #include "geometry.h"
 #include "map.h"
+#include "mapview.h"
 #include "overlay_manager.h"
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 
 class CoordPath;
-class Map_View;
 class MiniMap;
 
-/** class Interactive_Base
- *
- * This is the interactive base class. It is used
- * to represent the code that Interactive_Player and
+/**
+ * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-class Interactive_Base : public UI::Panel {
+struct Interactive_Base : public UI::Panel {
    friend class Game_Interactive_Player_Data_Packet;
    friend class Sound_Handler;
 
-   public:
 		enum {
 			dfShowCensus     = 1, //  show census report on buildings
 			dfShowStatistics = 2, //  show statistics report on buildings
 			dfDebug          = 4, //  general debugging info
 		};
 
-	public:
 	Interactive_Base(Editor_Game_Base &);
 		virtual ~Interactive_Base(void);
 
@@ -108,11 +104,13 @@ class Interactive_Base : public UI::Panel {
       // for loading
       virtual void cleanup_for_load() { };
 
+protected:
+	Map_View m_mapview;
+
    private:
       void roadb_add_overlay();
       void roadb_remove_overlay();
 
-      Map_View* m_mapview;
       MiniMap* m_mm;
 	Editor_Game_Base & m_egbase;
 	struct Sel_Data {
@@ -154,8 +152,7 @@ class Interactive_Base : public UI::Panel {
       void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
 
-	   inline void set_mapview(Map_View* w) { m_mapview=w; }
-      inline Map_View* get_mapview() { return m_mapview; }
+	const Map_View & mapview() const throw () {return m_mapview;}
 
 	virtual void draw_overlay(RenderTarget &);
 

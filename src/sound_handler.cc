@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2006 by the Widelands Development Team
+ * Copyright (C) 2005-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -403,7 +403,7 @@ int Sound_Handler::stereo_position(const Coords position)
 
 	ia = m_the_game->get_iabase();
 	assert(ia);
-	vp = ia->get_mapview()->get_viewpoint();
+	vp = ia->mapview().get_viewpoint();
 
 	xres = ia->get_xres();
 	yres = ia->get_yres();
