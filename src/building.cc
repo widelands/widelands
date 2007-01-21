@@ -82,7 +82,6 @@ Cleanup
 */
 Building_Descr::~Building_Descr(void)
 {
-   if(m_buildicon_fname)
       free(m_buildicon_fname);
    for(uint i=0; i<m_enhances_to.size(); i++)
       free(m_enhances_to[i]);
@@ -160,6 +159,8 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 
+		//  Prevent memory leak in case someone would try to call parse twice.
+		assert(not m_buildicon_fname);
 		m_buildicon_fname = strdup(fname);
 
       // build animation
@@ -764,7 +765,7 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
    molog("m_flag: %p\n", m_flag);
    molog("* position: (%i,%i)\n", m_flag->get_position().x, m_flag->get_position().y);
 
-   molog("m_anim: %s\n", get_descr()->get_animation_name(m_anim).c_str());
+	molog("m_anim: %s\n", descr().get_animation_name(m_anim).c_str());
    molog("m_animstart: %i\n", m_animstart);
 
 	molog("m_leave_time: %i\n", m_leave_time);
