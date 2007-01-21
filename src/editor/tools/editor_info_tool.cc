@@ -79,11 +79,16 @@ int Editor_Info_Tool::handle_click_impl
    sprintf(buf1, " %s: %s (TODO: more informations)\n", _("Has bobs").c_str(), f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
    int res=f->get_resources();
    int amount=f->get_resources_amount();
-   if(res==0 && amount==0) {
-	   sprintf(buf1, _(" Has resources: No\n").c_str());
-   } else {
-	   sprintf(buf1, " %s, %i %s '%s'\n", _("Has resources: Yes").c_str(), amount, _("amount of").c_str(), map.get_world()->get_resource(res)->get_name());
-   }
+	if (res or amount) snprintf
+		(buf1, sizeof(buf1),
+	    " %s, %i %s '%s'\n",
+	    _("Has resources: Yes").c_str(),
+		 amount,
+		 _("amount of").c_str(),
+		 map.get_world()->get_resource(res)->name().c_str());
+   else snprintf
+		(buf1, sizeof(buf1),
+		 _(" Has resources: No\n").c_str());
    buf+=buf1;
 
    sprintf(buf1, " %s: %i\n", _("Start resources amount").c_str(), f->get_starting_res_amount());
@@ -95,16 +100,28 @@ int Editor_Info_Tool::handle_click_impl
    sprintf(buf1, "%s\n", _("2) Right Terrain Info\n").c_str()); buf+=buf1;
 	{
 		const Terrain_Descr & ter = f->get_terr();
-		sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter.get_name()); buf+=buf1;
-		sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter.get_texture()); buf+=buf1;
+		snprintf
+			(buf1, sizeof(buf1),
+			 " %s: %s\n", _("Name").c_str(), ter.name().c_str());
+		buf += buf1;
+		snprintf
+			(buf1, sizeof(buf1),
+			 " %s: %i\n", _("Texture Number").c_str(), ter.get_texture());
+		buf += buf1;
 	}
 
    buf += "\n";
    sprintf(buf1, "%s\n", _("3) Down Terrain Info\n").c_str()); buf+=buf1;
 	{
 		const Terrain_Descr & ter = f->get_terd();
-		sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter.get_name()); buf+=buf1;
-		sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter.get_texture()); buf+=buf1;
+		snprintf
+			(buf1, sizeof(buf1),
+			 " %s: %s\n", _("Name").c_str(), ter.name().c_str());
+		buf += buf1;
+		snprintf
+			(buf1, sizeof(buf1),
+			 " %s: %i\n", _("Texture Number").c_str(), ter.get_texture());
+		buf+=buf1;
 	}
 
    buf += "\n";

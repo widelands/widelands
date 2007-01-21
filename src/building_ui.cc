@@ -160,8 +160,8 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, P
 		m_todestroy = todestroy;
 
 	text = _("Do you really want to destroy this ");
-	text += building->get_name();
-	text += "?";
+	text += building->name();
+	text += _("?");
 	new UI::Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
 
 	new UI::Button<BulldozeConfirm>
@@ -328,7 +328,7 @@ m_display_size(0)
 {
 	const Item_Ware_Descr & ware =
 		*queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
-	set_tooltip(ware.get_descname());
+	set_tooltip(ware.descname().c_str());
 	m_pic_empty = ware.get_pic_queue_empty();
 	m_pic_full  = ware.get_pic_queue_full ();
 
@@ -509,7 +509,7 @@ Create the window, add it to the registry.
 */
 Building_Window::Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry)
 :
-UI::Window(parent, 0, 0, Width, 0, building->get_descname()),
+UI::Window(parent, 0, 0, Width, 0, building->descname().c_str()),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
 	m_registry = registry;
@@ -642,7 +642,7 @@ void Building_Window::setup_capsbuttons()
 
    if(m_capscache & (1 << Building::PCap_Enhancable)) {
 		const std::vector<char *> & buildings = m_building->enhances_to();
-      const Tribe_Descr & tribe = *m_player->get_player()->get_tribe();
+	   const Tribe_Descr & tribe = m_player->get_player()->tribe();
 		const std::vector<char *>::const_iterator buildings_end = buildings.end();
 		for
 			(std::vector<char *>::const_iterator it = buildings.begin();
@@ -663,7 +663,7 @@ void Building_Window::setup_capsbuttons()
          char buffer[128];
          snprintf
             (buffer, sizeof(buffer),
-             _("Enhance to %s").c_str(), building.get_descname());
+             _("Enhance to %s").c_str(), building.descname().c_str());
 			new UI::IDButton<Building_Window, Building_Descr::Index>
 				(m_capsbuttons,
 				 x, 0, 34, 34,

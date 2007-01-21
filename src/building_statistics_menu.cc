@@ -89,7 +89,8 @@ m_table
 
    // owned
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
-   m_owned = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
+	m_owned = new UI::Textarea
+		(this, posx+ta->get_w(), posy, 100, 24, Align_CenterLeft);
 
 	m_btn[Prev_Owned] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
@@ -113,7 +114,8 @@ m_table
 
    // build
    new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
-   m_build = new UI::Textarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
+	m_build = new UI::Textarea
+		(this, posx+ta->get_w(), posy, 100, 24, Align_CenterLeft);
 
 	m_btn[Prev_Construction] = new UI::IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
@@ -345,7 +347,7 @@ void Building_Statistics_Menu::update( void ) {
    m_progbar->set_state(0);
 
    // List all buildings
-	const Tribe_Descr & tribe = *m_parent->get_player()->get_tribe();
+	const Tribe_Descr & tribe = m_parent->player().tribe();
 	const Map         & map   = m_parent->get_game()->map();
 	for (Building_Descr::Index i = 0; i < tribe.get_nrbuildings(); ++i) {
 		const Building_Descr & building = *tribe.get_building_descr(i);

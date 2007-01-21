@@ -113,7 +113,7 @@ void BuildGrid::add(int id)
 	Building_Descr* descr = m_tribe.get_building_descr(id);
 	uint picid = descr->get_buildicon();
 
-	UI::Icon_Grid::add(picid, (void*)id, descr->get_descname());
+	UI::Icon_Grid::add(picid, (void*)id, descr->descname());
 }
 
 
@@ -823,7 +823,7 @@ void FieldActionWindow::act_build(long idx)
 		 idx);
 	else egbase.warp_building(m_field, m_plr->get_player_number(), idx);
 	m_iabase->reference_player_tribe
-		(m_plr->get_player_number(), m_plr->get_tribe());
+		(m_plr->get_player_number(), &m_plr->tribe());
 	okdialog();
 }
 
