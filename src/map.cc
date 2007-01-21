@@ -353,7 +353,6 @@ go back to your initial state
 void Map::cleanup(void) {
 	m_nrplayers = 0;
 	m_width = m_height = 0;
-   m_world=0;
 	m_pathcycle = 0;
 
    if (m_fields)
