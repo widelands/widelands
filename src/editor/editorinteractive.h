@@ -40,8 +40,7 @@ struct Editor_Interactive : public Interactive_Base {
       // leaf functions from base class
       void start();
 
-      // gets called when a field is clicked
-      void field_clicked();
+	void map_clicked();
 	virtual void set_sel_pos(Node_and_Triangle);
 
       // gets called when a keyboard event occurs
@@ -58,7 +57,7 @@ struct Editor_Interactive : public Interactive_Base {
       std::vector<bool>* get_visibility(void) { return 0; }
 
       // action functions
-      void exit_editor();
+      void exit();
 
       // reference functions
 	void   reference_player_tribe(const Player_Number, const void * const);

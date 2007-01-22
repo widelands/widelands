@@ -75,7 +75,7 @@ Interactive_Base(e), m_editor(e)
    set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
-	m_mapview.fieldclicked.set(this, &Editor_Interactive::field_clicked);
+	m_mapview.fieldclicked.set(this, &Editor_Interactive::map_clicked);
 
    // user interface buttons
    int x = (get_w() - (7*34)) >> 1;
@@ -184,11 +184,8 @@ Interactive_Base(e), m_editor(e)
    select_tool(1, 0);
 }
 
-/****************************************
- * Editor_Interactive::~EditorInteractive()
- *
- * cleanup
- */
+
+/// Restore default sel.
 Editor_Interactive::~Editor_Interactive() {
    while(tools.tools.size()) {
       delete tools.tools.back();
@@ -197,158 +194,78 @@ Editor_Interactive::~Editor_Interactive() {
    unset_sel_picture(); // reset default sel
 }
 
-/*
-===============
-Editor_Interactive::start
 
-Called just before the game starts, after postload, init and gfxload
-===============
-*/
+/// Called just before the editor starts, after postload, init and gfxload.
 void Editor_Interactive::start()
 {egbase().map().overlay_manager().show_buildhelp(true);}
 
-/*
-===========
-Editor_Interactive::exit_editor()
 
-exit the editor
-===========
-*/
-void Editor_Interactive::exit_editor()
-{
-	if(m_need_save) {
-      UI::Modal_Message_Box* mmb=new UI::Modal_Message_Box(this, _("Map unsaved"), _("The Map is unsaved, do you really want to quit?"), UI::Modal_Message_Box::YESNO);
-      int code=mmb->run();
-      delete mmb;
-      if(code==0) return;
+void Editor_Interactive::exit() {
+	if (m_need_save) {
+		UI::Modal_Message_Box mmb
+			(this,
+			 _("Map unsaved"),
+			 _("The Map is unsaved, do you really want to quit?"),
+			 UI::Modal_Message_Box::YESNO);
+		if (mmb.run() == 0) return;
    }
    end_modal(0);
 }
 
-/*
-===========
-Editor_Interactive::toggle_mainmenu()
-
-toggles the mainmenu
-===========
-*/
-void Editor_Interactive::toggle_mainmenu(void) {
-   if (m_mainmenu.window) {
-      delete m_mainmenu.window;
-   }
-   else {
-      new Editor_Main_Menu(this, &m_mainmenu);
-   }
+void Editor_Interactive::toggle_mainmenu() {
+	if (m_mainmenu.window) delete m_mainmenu.window;
+	else new Editor_Main_Menu(this, &m_mainmenu);
 }
 
-/*
-===========
-Editor_Interactive::toggle_objectivesmenu()
 
-toggles the objectivesmenu
-===========
-*/
-void Editor_Interactive::toggle_objectivesmenu(void) {
-   if (m_objectivesmenu.window) {
-      delete m_objectivesmenu.window;
-   }
-   else {
-      new Editor_Objectives_Menu(this, &m_objectivesmenu);
-   }
+void Editor_Interactive::toggle_objectivesmenu() {
+	if (m_objectivesmenu.window) delete m_objectivesmenu.window;
+	else new Editor_Objectives_Menu(this, &m_objectivesmenu);
 }
 
-/*
-===========
-Editor_Interactive::toggle_variablesmenu()
 
-toggles the variablesmenu
-===========
-*/
-void Editor_Interactive::toggle_variablesmenu(void) {
-   if (m_variablesmenu.window) {
-      delete m_variablesmenu.window;
-   }
-   else {
-      new Editor_Variables_Menu(this, &m_variablesmenu);
-   }
+void Editor_Interactive::toggle_variablesmenu() {
+	if (m_variablesmenu.window) delete m_variablesmenu.window;
+	else new Editor_Variables_Menu(this, &m_variablesmenu);
 }
 
-/*
- * Create the event menu
- */
-void Editor_Interactive::toggle_eventmenu(void) {
-   if(m_eventmenu.window) {
-      delete m_eventmenu.window;
-   } else {
-      new Editor_Event_Menu(this, &m_eventmenu);
-   }
+
+void Editor_Interactive::toggle_eventmenu() {
+	if (m_eventmenu.window) delete m_eventmenu.window;
+	else new Editor_Event_Menu(this, &m_eventmenu);
 }
 
-/*
-===========
-Editor_Interactive::field_clicked()
-
-This functions is called, when a field is clicked. it mainly calls
-the function of the currently selected tool
-===========
-*/
-void Editor_Interactive::field_clicked() {
+void Editor_Interactive::map_clicked() {
 	tools.tools[tools.current_tool_index]
 		->handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
 	m_mapview.need_complete_redraw();
-   set_need_save(true);
+	set_need_save(true);
 }
 
-/*
- * Set the current sel position and, if
- * a tool is selected and the first mouse button is pressed
- * click this field
- */
+/// Needed to get freehand painting tools (hold down mouse and move to edit).
 void Editor_Interactive::set_sel_pos(const Node_and_Triangle sel) {
+	if (tools.current_tool_index < 0 or tools.tools.size() <= tools.current_tool_index) return;
+	const bool target_changed =
+		tools.tools.at(tools.current_tool_index)->operates_on_triangles() ?
+		sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
-	if
-		(sel != get_sel_pos()
-		 and
-		 SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_LEFT))
-      field_clicked();
+	if (target_changed and SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_LEFT))
+		map_clicked();
 }
 
-/*
-===========
-Editor_Interactive::toggle_buildhelp()
 
-toggles the buildhelp on the map
-===========
-*/
 void Editor_Interactive::toggle_buildhelp(void)
 {egbase().map().overlay_manager().toggle_buildhelp();}
 
-/*
-===============
-Editor_Interactive::tool_menu_btn
 
-Bring up or close the tool menu
-===============
-*/
-void Editor_Interactive::tool_menu_btn()
-{
-	if (m_toolmenu.window)
-		delete m_toolmenu.window;
-	else
-		new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menus);
+void Editor_Interactive::tool_menu_btn() {
+	if (m_toolmenu.window) delete m_toolmenu.window;
+	else new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menus);
 }
 
-/*
-===============
-Editor_Interactive::toggle_playermenu
 
-Bring up or close the Player Menu
-===============
-*/
-void Editor_Interactive::toggle_playermenu()
-{
-	if (m_playermenu.window)
-		delete m_playermenu.window;
+void Editor_Interactive::toggle_playermenu() {
+	if (m_playermenu.window) delete m_playermenu.window;
 	else {
          this->select_tool(5,0);
          new Editor_Player_Menu(this,
@@ -358,31 +275,13 @@ void Editor_Interactive::toggle_playermenu()
 
 }
 
-/*
-===============
-Editor_Interactive::toolsize_menu_btn
 
-Bring up or close the main menu
-===============
-*/
-void Editor_Interactive::toolsize_menu_btn()
-{
-	if (m_toolsizemenu.window)
-		delete m_toolsizemenu.window;
-	else
-		new Editor_Toolsize_Menu(this, &m_toolsizemenu);
+void Editor_Interactive::toolsize_menu_btn() {
+	if (m_toolsizemenu.window) delete m_toolsizemenu.window;
+	else new Editor_Toolsize_Menu(this, &m_toolsizemenu);
 }
 
 
-
-
-/*
-===========
-Editor_Interactive::handle_key()
-
-Handles a keyboard event
-===========
-*/
 bool Editor_Interactive::handle_key(bool down, int code, char) {
    if(code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
 
@@ -503,13 +402,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
    return false;
 }
 
-/*
-===========
-Editor_Interactive::select_tool()
 
-select a new tool
-===========
-*/
 void Editor_Interactive::select_tool(int n, int which) {
    if(which==0 && n!=tools.current_tool_index) {
 		Map & map = egbase().map();

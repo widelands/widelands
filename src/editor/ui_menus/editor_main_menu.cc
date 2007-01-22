@@ -144,9 +144,7 @@ void Editor_Main_Menu::map_options_btn() {
    new Main_Menu_Map_Options(m_parent);
    die();
 }
-void Editor_Main_Menu::exit_btn() {
-   m_parent->exit_editor();
-}
+void Editor_Main_Menu::exit_btn() {m_parent->exit();}
 void Editor_Main_Menu::readme_btn() {
    fileview_window(m_parent, &m_window_readme, "txts/editor_readme");
 }
