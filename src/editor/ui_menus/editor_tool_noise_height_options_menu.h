@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,26 +23,32 @@
 #include "editor_tool_options_menu.h"
 
 #include "ui_button.h"
+#include "ui_textarea.h"
 
 class Editor_Interactive;
 class Editor_Noise_Height_Tool;
-namespace UI {struct Textarea;};
 
 struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
-      Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive*, int, Editor_Noise_Height_Tool*, UI::UniqueWindow::Registry*);
-      virtual ~Editor_Tool_Noise_Height_Options_Menu() { }
+	Editor_Tool_Noise_Height_Options_Menu
+		(Editor_Interactive         &,
+		 Editor_Noise_Height_Tool   &,
+		 UI::UniqueWindow::Registry &);
 
-   private:
-      UI::Textarea* m_textarea_lower;
-      UI::Textarea* m_textarea_upper;
-      UI::Textarea* m_set;
-	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_lower_increase;
-	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_lower_decrease;
-	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_upper_increase;
-	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int> m_upper_decrease;
-	Editor_Noise_Height_Tool* m_nht;
+private:
+	enum Button {
+		Lower_Increase,  Lower_Decrease,
+		Upper_Increase,  Upper_Decrease,
+		Set_To_Increase, Set_To_Decrease
+	};
+	UI::Textarea m_lower_label, m_upper_label;
+	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, const Button>
+		m_lower_increase, m_lower_decrease, m_upper_increase, m_upper_decrease;
+	UI::Textarea m_set_label;
+	UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, const Button>
+		m_set_increase, m_set_decrease;
+	Editor_Noise_Height_Tool & m_noise_tool;
 
-      void button_clicked(int);
+	void clicked_button(const Button);
       void update();
 };
 

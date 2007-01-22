@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,20 +20,30 @@
 #ifndef __S__EDITOR_TOOL_OPTIONS_MENU
 #define __S__EDITOR_TOOL_OPTIONS_MENU
 
+#include "editorinteractive.h"
 #include "ui_unique_window.h"
 
-class Editor_Interactive;
-
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
-         Editor_Tool_Options_Menu(Editor_Interactive*, int index, UI::UniqueWindow::Registry*, const char* title);
-         ~Editor_Tool_Options_Menu();
+	Editor_Tool_Options_Menu
+		(Editor_Interactive         &       parent,
+		 UI::UniqueWindow::Registry &,
+		 const uint widht, const uint height,
+		 const char                 * const title);
 
-         inline Editor_Interactive* get_parent() { return m_parent; }
-         void select_correct_tool(void) ;
+	/**
+	 * Selects the correct tool from the parent.
+	 * This is needed when a selection was made in the options menus.
+	 */
+	void select_correct_tool();
 
-      private:
-         int m_index;
-         Editor_Interactive* m_parent;
+	uint  spacing() const throw () {return 5;}
+	uint hspacing() const throw () {return spacing();}
+	uint vspacing() const throw () {return spacing();}
+	uint hmargin () const throw () {return spacing();}
+	uint vmargin () const throw () {return spacing();}
+
+private:
+	Editor_Tool * m_current_pointer;
 };
 
 #endif

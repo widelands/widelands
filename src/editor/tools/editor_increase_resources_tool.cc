@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,7 +88,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 		int amount     = fc.field->get_resources_amount();
       int max_amount = map.get_world()->get_resource(m_cur_res)->get_max_amount();
 
-      amount+=m_changed_by;
+		amount += m_change_by;
       if(amount>max_amount) amount=max_amount;
 
 

@@ -22,140 +22,115 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
 #include "editor_increase_height_tool.h"
 #include "editor_set_height_tool.h"
 
-/*
-=================================================
-
-class Editor_Tool_Change_Height_Options_Menu
-
-=================================================
-*/
-
-/*
-===========
-Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu()
-
-constructor
-===========
-*/
-Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, int index,
-      Editor_Increase_Height_Tool* iht, UI::UniqueWindow::Registry* registry) :
+#define width  20
+#define height 20
+Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
+(Editor_Interactive          & parent,
+ Editor_Increase_Height_Tool & increase_tool,
+ UI::UniqueWindow::Registry  & registry)
+:
 Editor_Tool_Options_Menu
-(parent, index, registry, _("Height Tools Options").c_str())
-{
+(parent, registry, 135, 135, _("Height Tools Options").c_str()),
 
-   m_iht=iht;
-   m_dht=iht->get_dht();
-   m_sht=iht->get_sht();
+m_change_by_label
+(this,
+ hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
+ _("In-/Decrease Value"), Align_BottomCenter),
 
-   int offsx=5;
-   int offsy=30;
-   int spacing=5;
-   int height=20;
-   int width=20;
-   int posx=offsx;
-   int posy=offsy;
+m_change_by_increase
+(this,
+ hmargin(), m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
+ width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Editor_Tool_Change_Height_Options_Menu::clicked_button,
+ this, Change_By_Increase),
 
-   set_inner_size(135, 135);
-   UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Height Tool Options"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
+m_change_by_decrease
+(this,
+ get_inner_w() - hmargin() - width, m_change_by_increase.get_y(), width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Editor_Tool_Change_Height_Options_Menu::clicked_button,
+ this, Change_By_Decrease),
 
-   ta=new UI::Textarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
-   posy+=spacing+width;
+m_change_by_value
+(this,
+ m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing(),
+ m_change_by_increase.get_y(),
+ m_change_by_decrease.get_x() - hspacing()
+ -
+ (m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing()),
+ height,
+ Align_BottomCenter),
 
-	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 0);
+m_set_to_label
+(this,
+ vmargin(),
+ m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
+ get_inner_w() - 2 * hmargin(), height,
+ _("Set Value"), Align_BottomCenter),
 
-	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
-		(this,
-		 get_inner_w() - spacing - width, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 1);
+m_set_to_increase
+(this,
+ hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+ width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Editor_Tool_Change_Height_Options_Menu::clicked_button,
+ this, Set_To_Increase),
 
-	m_increase=new UI::Textarea(this, 0, 0, "5", Align_Left);
-	m_increase->set_pos
-		(Point((get_inner_w() - m_increase->get_w()) / 2, posy + 5));
-   posy+=width+spacing+spacing;
+m_set_to_decrease
+(this,
+ m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Editor_Tool_Change_Height_Options_Menu::clicked_button,
+ this, Set_To_Decrease),
 
-   ta=new UI::Textarea(this, 0, 0, _("Set Value"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
-   posy+=width+spacing;
-	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 2);
-	new UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Uint8>
-		(this,
-		 get_inner_w() - spacing - width, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked, this, 3);
-   m_set=new UI::Textarea(this, 0, 0, "5", Align_Left);
-	m_set->set_pos(Point((get_inner_w() - m_set->get_w()) / 2, posy + 5));
-   posy+=width+spacing;
+m_set_to_value
+(this,
+ m_change_by_value.get_x(), m_set_to_increase.get_y(),
+ m_change_by_value.get_w(), height,
+ Align_BottomCenter),
 
-   update();
-}
+m_increase_tool(increase_tool)
+{update();}
 
-/*
-===========
-Editor_Tool_Change_Height_Options_Menu::clicked()
 
-called when one button is clicked
-===========
-*/
-void Editor_Tool_Change_Height_Options_Menu::clicked(const Uint8 n) {
-   int increase=m_iht->get_changed_by();
-   int set=m_sht->get_set_to();
+void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
+	assert
+		(m_increase_tool                .get_change_by()
+		 ==
+		 m_increase_tool.decrease_tool().get_change_by());
 
-   assert(m_iht->get_changed_by()==m_dht->get_changed_by());
-
-   if(n==0) {
-      ++increase;
-      if(increase>MAX_FIELD_HEIGHT_DIFF) increase=MAX_FIELD_HEIGHT_DIFF;
-   } else if(n==1) {
-      --increase;
-      if(increase<0) increase=0;
+	int change_by = m_increase_tool.get_change_by();
+	Uint8 set_to  = m_increase_tool.set_tool().get_set_to();
+	switch (n) {
+	case Change_By_Increase: change_by +=     change_by < MAX_FIELD_HEIGHT_DIFF;
+		break;
+	case Change_By_Decrease: change_by -= 1 < change_by;                 break;
+	case    Set_To_Increase: set_to    +=     set_to < MAX_FIELD_HEIGHT; break;
+	case    Set_To_Decrease: set_to    -= 0 < set_to;
    }
-   m_iht->set_changed_by(increase);
-   m_dht->set_changed_by(increase);
 
-   if(n==2) {
-      ++set;
-      if(set>MAX_FIELD_HEIGHT) set=MAX_FIELD_HEIGHT;
-   } else if(n==3) {
-      --set;
-      if(set<0) set=0;
-   }
-   m_sht->set_set_to(set);
+	m_increase_tool                .set_change_by(change_by);
+	m_increase_tool.decrease_tool().set_change_by(change_by);
+	m_increase_tool.set_tool().set_set_to(set_to);
 
    select_correct_tool();
    update();
 }
 
-/*
-===========
-Editor_Tool_Change_Height_Options_Menu::update()
-
-Update all the textareas, so that they represent the correct values
-===========
-*/
+/// Update all the textareas, so that they represent the correct values.
 void Editor_Tool_Change_Height_Options_Menu::update(void) {
    char buf[250];
-   sprintf(buf, "%i", m_iht->get_changed_by());
-   m_increase->set_text(buf);
-   sprintf(buf, "%i", m_sht->get_set_to());
-   m_set->set_text(buf);
+	sprintf(buf, "%i", m_increase_tool.get_change_by());
+	m_change_by_value.set_text(buf);
+	sprintf(buf, "%i", m_increase_tool.set_tool().get_set_to());
+	m_set_to_value.set_text(buf);
 }

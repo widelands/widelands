@@ -25,25 +25,11 @@
 #include "ui_radiobutton.h"
 #include "ui_unique_window.h"
 
-namespace UI {struct Radiogroup;};
-
-/*
-=============================
-
-class Editor_Tool_Menu
-
-This class is the tool selection window/menu.
-Here, you can select the tool you wish to use the next time
-
-=============================
-*/
+/// The tool selection window/menu.
 struct Editor_Tool_Menu : public UI::UniqueWindow {
-      Editor_Tool_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*, Editor_Interactive::Editor_Tools*, std::vector<UI::UniqueWindow::Registry>* );
+	Editor_Tool_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
 
-   private:
-      std::vector<UI::UniqueWindow::Registry>* m_options_menus;
-      Editor_Interactive::Editor_Tools* m_tools;
-      Editor_Interactive* m_parent;
+private:
 	UI::Radiogroup m_radioselect;
 
       void changed_to(void);

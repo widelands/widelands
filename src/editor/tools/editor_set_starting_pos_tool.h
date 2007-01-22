@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,17 +31,9 @@
 
 
 
-/*
-=============================
-class Editor_Set_Starting_Pos_Tool
-
-Set the starting position of the various players
-=============================
-*/
-class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
-   public:
-      Editor_Set_Starting_Pos_Tool();
-      virtual ~Editor_Set_Starting_Pos_Tool();
+/// Sets the starting position of players.
+struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
+	Editor_Set_Starting_Pos_Tool();
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
@@ -50,7 +42,7 @@ class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
       // tool functions
       void set_current_player(int i);
 
-   private:
+private:
       std::string m_current_sel_pic;
 };
 

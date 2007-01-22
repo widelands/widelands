@@ -20,6 +20,15 @@
 #ifndef __S__EDITORINTERACTIVE_H
 #define __S__EDITORINTERACTIVE_H
 
+#include "editor_increase_height_tool.h"
+#include "editor_increase_resources_tool.h"
+#include "editor_info_tool.h"
+#include "editor_make_infrastructure_tool.h"
+#include "editor_noise_height_tool.h"
+#include "editor_place_immovable_tool.h"
+#include "editor_place_bob_tool.h"
+#include "editor_set_terrain_tool.h"
+#include "editor_set_starting_pos_tool.h"
 #include "interactive_base.h"
 #include "ui_unique_window.h"
 
@@ -31,6 +40,7 @@ class Editor_Tool;
  * but for the Editor instead of the game
  */
 struct Editor_Interactive : public Interactive_Base {
+	friend struct Editor_Tool_Menu;
 	Editor_Interactive(Editor &);
       ~Editor_Interactive();
 
@@ -46,13 +56,41 @@ struct Editor_Interactive : public Interactive_Base {
       // gets called when a keyboard event occurs
       bool handle_key(bool down, int code, char c);
 
-      void select_tool(int, int);
-      int get_selected_tool(void) { return tools.current_tool_index; }
-      struct Editor_Tools {
-         int current_tool_index;
-         int use_tool;
-         std::vector<Editor_Tool*> tools;
-      };
+	struct Tools {
+		Tools()
+			:
+			current_pointer   (&increase_height),
+			use_tool          (Editor_Tool::First),
+			increase_height   (decrease_height, set_height),
+			noise_height      (set_height),
+			place_immovable   (delete_immovable),
+			place_bob         (delete_bob),
+			increase_resources(decrease_resources, set_resources)
+		{}
+		Editor_Tool & current() const throw () {return *current_pointer;}
+		typedef std::vector<Editor_Tool *> Tool_Vector;
+		typedef Tool_Vector::size_type Index;
+		//Tool_Vector                     tools;
+		Editor_Tool *                   current_pointer;
+		Editor_Tool::Tool_Index         use_tool;
+		Editor_Info_Tool                info;
+		Editor_Set_Height_Tool          set_height;
+		Editor_Decrease_Height_Tool     decrease_height;
+		Editor_Increase_Height_Tool     increase_height;
+		Editor_Noise_Height_Tool        noise_height;
+		Editor_Set_Terrain_Tool         set_terrain;
+		Editor_Delete_Immovable_Tool    delete_immovable;
+		Editor_Place_Immovable_Tool     place_immovable;
+		Editor_Set_Starting_Pos_Tool    set_starting_pos;
+		Editor_Delete_Bob_Tool          delete_bob;
+		Editor_Place_Bob_Tool           place_bob;
+		Editor_Decrease_Resources_Tool  decrease_resources;
+		Editor_Set_Resources_Tool       set_resources;
+		Editor_Increase_Resources_Tool  increase_resources;
+		Editor_Make_Infrastructure_Tool make_infrastructure;
+	} tools;
+
+	void select_tool(Editor_Tool &, const Editor_Tool::Tool_Index);
 
       std::vector<bool>* get_visibility(void) { return 0; }
 
@@ -84,18 +122,20 @@ struct Editor_Interactive : public Interactive_Base {
       std::vector<Player_References> m_player_tribe_references;
       bool m_ctrl_down;
 
-      // Tool
-      Editor_Tools tools;
-
       // UI ownings
 	Editor & m_editor;
-      UI::UniqueWindow::Registry m_toolmenu;
-      UI::UniqueWindow::Registry m_toolsizemenu;
-      UI::UniqueWindow::Registry m_playermenu;
-      UI::UniqueWindow::Registry m_mainmenu;
-      UI::UniqueWindow::Registry m_eventmenu;
-      UI::UniqueWindow::Registry m_variablesmenu;
-      UI::UniqueWindow::Registry m_objectivesmenu;
-      std::vector<UI::UniqueWindow::Registry> m_options_menus;
+	UI::UniqueWindow::Registry m_toolmenu;
+	UI::UniqueWindow::Registry m_toolsizemenu;
+	UI::UniqueWindow::Registry m_playermenu;
+	UI::UniqueWindow::Registry m_mainmenu;
+	UI::UniqueWindow::Registry m_eventmenu;
+	UI::UniqueWindow::Registry m_variablesmenu;
+	UI::UniqueWindow::Registry m_objectivesmenu;
+	UI::UniqueWindow::Registry m_heightmenu;
+	UI::UniqueWindow::Registry m_noise_heightmenu;
+	UI::UniqueWindow::Registry m_terrainmenu;
+	UI::UniqueWindow::Registry m_immovablemenu;
+	UI::UniqueWindow::Registry m_bobmenu;
+	UI::UniqueWindow::Registry m_resourcesmenu;
 };
 #endif // __S__EDITOR_H

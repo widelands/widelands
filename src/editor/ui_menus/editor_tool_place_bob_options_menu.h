@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,22 +23,21 @@
 #include <vector>
 #include "editor_tool_options_menu.h"
 
-class Editor_Interactive;
+#include "ui_tabpanel.h"
+
 class Editor_Place_Bob_Tool;
-namespace UI {
-struct Textarea;
-struct Checkbox;
-};
+namespace UI {struct Checkbox;};
 
 struct Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
-      Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive*, int, Editor_Place_Bob_Tool*,
-		                                         UI::UniqueWindow::Registry*);
-      virtual ~Editor_Tool_Place_Bob_Options_Menu();
+	Editor_Tool_Place_Bob_Options_Menu
+		(Editor_Interactive         &,
+		 Editor_Place_Bob_Tool      &,
+		 UI::UniqueWindow::Registry &);
 
-   private:
+private:
+	UI::Tab_Panel               m_tabpanel;
       std::vector<UI::Checkbox*> m_checkboxes;
-      Editor_Place_Bob_Tool* m_pit;
-      UI::Textarea* m_name;
+	Editor_Place_Bob_Tool     & m_pit;
       void clicked(int, bool);
       void do_nothing(int, bool);
 };

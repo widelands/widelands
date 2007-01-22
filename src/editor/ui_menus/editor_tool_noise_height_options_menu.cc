@@ -22,101 +22,93 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "ui_textarea.h"
 #include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
 #include "editor_noise_height_tool.h"
 
-/*
-=================================================
-
-class Editor_Tool_Noise_Height_Options_Menu
-
-=================================================
-*/
-
-/*
-===============
+#define width  20
+#define height 20
 Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
-
-Create all the buttons etc...
-===============
-*/
-Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent, int index,
-				Editor_Noise_Height_Tool* nht, UI::UniqueWindow::Registry* registry)
+(Editor_Interactive         & parent,
+ Editor_Noise_Height_Tool   & noise_tool,
+ UI::UniqueWindow::Registry & registry)
 :
 Editor_Tool_Options_Menu
-(parent, index, registry, _("Noise Height Options").c_str()),
+(parent, registry, 200, 115, _("Noise Height Options").c_str()),
+
+m_lower_label
+(this,
+ hmargin(), vmargin(), (get_inner_w() - 2 * hmargin() - spacing()) / 2, height,
+ Align_BottomCenter),
+
+m_upper_label
+(this,
+ m_lower_label.get_x() + m_lower_label.get_w() + spacing(),
+ m_lower_label.get_y(),
+ m_lower_label.get_w(), height,
+ Align_BottomCenter),
 
 m_lower_increase
 (this,
- 30, 40, 20, 20,
+ hmargin() + (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 4,
+ m_lower_label.get_y() + m_lower_label.get_h() + vspacing(),
+ width, height,
  0,
  g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
- &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 0),
+ &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this, Lower_Increase),
 
 m_lower_decrease
 (this,
- 50, 40, 20, 20,
+ m_lower_increase.get_x() + m_lower_increase.get_w(), m_lower_increase.get_y(),
+ width, height,
  0,
  g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
- &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 1),
+ &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this, Lower_Decrease),
 
 m_upper_increase
 (this,
- 130, 40, 20, 20,
+ m_lower_decrease.get_x() + width
+ +
+ (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 2 + hspacing(),
+ m_lower_decrease.get_y(),
+ width, height,
  0,
  g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
- &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 2),
+ &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this, Upper_Increase),
 
 m_upper_decrease
 (this,
- 150, 40, 20, 20,
+ m_upper_increase.get_x() + m_upper_increase.get_w(), m_upper_increase.get_y(),
+ width, height,
  0,
  g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
- &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 3)
+ &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this, Upper_Decrease),
 
-{
-   char buf[250];
-   sprintf(buf, "%s: %i", _("Minimum").c_str(), 10);
-   m_textarea_lower=new UI::Textarea(this, 10, 25, buf);
-   sprintf(buf, "%s: %i", _("Maximum").c_str(), 10);
-   m_textarea_upper=new UI::Textarea(this, 105, 25, buf);
+m_set_label
+(this,
+ hspacing(),  m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
+ get_inner_w() - 2 * hspacing(), height,
+ Align_BottomCenter),
 
-   set_inner_size(200, 115);
+m_set_increase
+(this,
+ get_inner_w() / 2 - width,
+ m_set_label.get_y() + m_set_label.get_h() + vspacing(),
+ width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this, Set_To_Increase),
 
-   UI::Textarea* ta=new UI::Textarea(this, 3, 5, _("Noise Height Tool Options"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
+m_set_decrease
+(this,
+ get_inner_w() / 2, m_set_increase.get_y(), width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Editor_Tool_Noise_Height_Options_Menu::clicked_button, this, Set_To_Decrease),
 
-   int posy=70;
-   int width=20;
-   int spacing=5;
-   int height=20;
-   ta=new UI::Textarea(this, 0, 0, _("Set Value"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
-   posy+=20;
+m_noise_tool(noise_tool)
 
-   m_set=new UI::Textarea(this, 0, 0, "99", Align_Left);
-	m_set->set_pos(Point((get_inner_w() - m_set->get_w()) / 2, posy + 5));
-
-	new UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int>
-		(this,
-		 m_set->get_x() - width - spacing, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 4);
-
-	new UI::IDButton<Editor_Tool_Noise_Height_Options_Menu, int>
-		(this,
-		 m_set->get_x() + m_set->get_w() + spacing, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Noise_Height_Options_Menu::button_clicked, this, 5);
-
-   m_nht=nht;
-
-   update();
-}
+{update();}
 
 /*
 ===============
@@ -127,48 +119,42 @@ Update all textareas
 */
 void Editor_Tool_Noise_Height_Options_Menu::update(void) {
    char buf[200];
-   int up, low;
-   m_nht->get_values(&low, &up);
-   sprintf(buf, "%s: %i", _("Minimum").c_str(), low);
-   m_textarea_lower->set_text(buf);
-   sprintf(buf, "%s: %i", _("Maximum").c_str(), up);
-   m_textarea_upper->set_text(buf);
+	Uint8 lower, upper;
+	m_noise_tool.get_values(lower, upper);
+	sprintf(buf, _("Minimum: %u").c_str(), lower);
+	m_lower_label.set_text(buf);
+	sprintf(buf, _("Maximum: %u").c_str(), upper);
+	m_upper_label.set_text(buf);
 
-   sprintf(buf, "%i", m_nht->get_sht()->get_set_to());
-   m_set->set_text(buf);
+	sprintf
+		(buf, _("Set value: %u").c_str(), m_noise_tool.set_tool().get_set_to());
+	m_set_label.set_text(buf);
 
    select_correct_tool();
 
 }
 
-/*
-==============
-Editor_Tool_Noise_Height_Options_Menu::button_clicked()
 
-called when a button is clicked
-==============
-*/
-void Editor_Tool_Noise_Height_Options_Menu::button_clicked(int n) {
-   int up, low, set;
-   set=m_nht->get_sht()->get_set_to();
-   m_nht->get_values(&low, &up);
-   switch(n) {
-      case 0: ++low; break;
-      case 1: --low; break;
-      case 2: ++up; break;
-      case 3: --up; break;
-      case 4: ++set; break;
-      case 5: --set; break;
-   }
-   if(low>MAX_FIELD_HEIGHT) low=MAX_FIELD_HEIGHT;
-   if(low<0) low=0;
-   if(up>MAX_FIELD_HEIGHT) up=MAX_FIELD_HEIGHT;
-   if(up<0) up=0;
-   if(set>MAX_FIELD_HEIGHT) set=MAX_FIELD_HEIGHT;
-   if(set<0) set=0;
+void Editor_Tool_Noise_Height_Options_Menu::clicked_button(const Button n) {
+	Uint8 lower, upper, set_to = m_noise_tool.set_tool().get_set_to();
+	m_noise_tool.get_values(lower, upper);
+	switch (n) {
+	case Lower_Increase:
+		lower += lower  < MAX_FIELD_HEIGHT;
+		upper = std::max(lower, upper);
+		break;
+	case Lower_Decrease:  lower  -= 0 < lower;                     break;
+	case Upper_Increase:  upper  +=     upper  < MAX_FIELD_HEIGHT; break;
+	case Upper_Decrease:
+		upper  -= 0 < upper;
+		lower = std::min(lower, upper);
+		break;
+	case Set_To_Increase: set_to +=     set_to < MAX_FIELD_HEIGHT; break;
+	case Set_To_Decrease: set_to -= 0 < set_to;                    break;
+	}
 
-   m_nht->set_values(low, up);
-   m_nht->get_sht()->set_set_to(set);
+	m_noise_tool.set_values(lower, upper);
+	m_noise_tool.set_tool().set_set_to(set_to);
 
    update();
 }

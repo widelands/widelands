@@ -38,20 +38,10 @@
 #include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
 
-/*
-===============
 Editor_Tool_Menu::Editor_Tool_Menu
-
-Create all the buttons etc...
-===============
-*/
-Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry,
-                                   Editor_Interactive::Editor_Tools* tools, std::vector<UI::UniqueWindow::Registry>* options)
+(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(parent, registry, 350, 400, _("Tool Menu")),
-m_parent        (parent),
-m_options_menus (options),
-m_tools         (tools)
+UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 {
 
    // UI::Buttons
@@ -103,13 +93,21 @@ m_tools         (tools)
 
    set_inner_size(offsx+(width+spacing)*num_tools, offsy+(height+spacing));
 
-	m_radioselect.set_state(parent->get_selected_tool() - 1);
+	{
+		const Editor_Tool & current = parent.tools.current();
+		m_radioselect.set_state
+			(&current == &parent.tools.noise_height       ? 1 :
+			 &current == &parent.tools.set_terrain        ? 2 :
+			 &current == &parent.tools.place_immovable    ? 3 :
+			 &current == &parent.tools.place_bob          ? 4 :
+			 &current == &parent.tools.increase_resources ? 5 :
+			 0);
+	}
 
 	m_radioselect.changed.set(this, &Editor_Tool_Menu::changed_to);
 	m_radioselect.clicked.set(this, &Editor_Tool_Menu::changed_to);
 
-	if (get_usedefaultpos())
-		center_to_parent();
+	if (get_usedefaultpos()) center_to_parent();
 }
 
 /*
@@ -122,76 +120,67 @@ called when the radiogroup changes or is reclicked
 void Editor_Tool_Menu::changed_to(void) {
 	const int n = m_radioselect.get_state();
 
-   int index=-1;
-   switch(n) {
-      case 0: index=1; break;
-      case 1: index=2; break;
-      case 2: index=3; break;
-      case 3: index=4; break;
-      case 4: index=6; break;
-      case 5: index=7; break;
-      default: break;
-   }
-   assert(index!=-1);
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
 
-   // Select tool
-   m_parent->select_tool(index, 0);
+	Editor_Tool                * current_tool_pointer;
+	UI::UniqueWindow::Registry * current_registry_pointer;
+	switch (n) {
+	case 0:
+		current_tool_pointer     = &parent.tools.increase_height;
+		current_registry_pointer = &parent.m_heightmenu;
+		break;
+	case 1:
+		current_tool_pointer     = &parent.tools.noise_height;
+		current_registry_pointer = &parent.m_noise_heightmenu;
+		break;
+	case 2:
+		current_tool_pointer     = &parent.tools.set_terrain;
+		current_registry_pointer = &parent.m_terrainmenu;
+		break;
+	case 3:
+		current_tool_pointer     = &parent.tools.place_immovable;
+		current_registry_pointer = &parent.m_immovablemenu;
+		break;
+	case 4:
+		current_tool_pointer     = &parent.tools.place_bob;
+		current_registry_pointer = &parent.m_bobmenu;
+		break;
+	case 5:
+		current_tool_pointer     = &parent.tools.increase_resources;
+		current_registry_pointer = &parent.m_resourcesmenu;
+		break;
+	default: assert(false);
+	}
 
-   UI::Window* w=(*m_options_menus)[index].window;
-   bool create_window=false;
-   if(w) {
-      // There is already a window. If it is small,
-      // make it big.
-      if(w->is_minimized()) {
-         w->minimize(false);
-      } else {
-         delete w;
-      }
-   } else {
-      create_window=true;
-   }
+	parent.select_tool(*current_tool_pointer, Editor_Tool::First);
 
-   if(create_window) {
-      // Create window
-      switch(n) {
-         case 0:
-            new Editor_Tool_Change_Height_Options_Menu(m_parent, index,
-                  static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[index]),
-                  &((*m_options_menus)[index]));
-            break;
-
-         case 1:
-            new Editor_Tool_Noise_Height_Options_Menu(m_parent, index,
-                  static_cast<Editor_Noise_Height_Tool*>(m_tools->tools[index]),
-                  &((*m_options_menus)[index]));
-            break;
-
-         case 2:
-            new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent, index,
-                  static_cast<Editor_Set_Terrain_Tool*>(m_tools->tools[index]),
-                  &((*m_options_menus)[index]));
-            break;
-
-         case 3:
-            new Editor_Tool_Place_Immovable_Options_Menu(m_parent, index,
-                  static_cast<Editor_Place_Immovable_Tool*>(m_tools->tools[index]),
-                  &((*m_options_menus)[index]));
-            break;
-
-         case 4:
-            new Editor_Tool_Place_Bob_Options_Menu(m_parent, index,
-                  static_cast<Editor_Place_Bob_Tool*>(m_tools->tools[index]),
-                  &((*m_options_menus)[index]));
-            break;
-
-         case 5:
-            new Editor_Tool_Change_Resources_Options_Menu(m_parent, index,
-                  static_cast<Editor_Increase_Resources_Tool*>(m_tools->tools[index]),
-                  &((*m_options_menus)[index]));
-            break;
-
-
-         default: break;
-      }
-   }
+	if (UI::Window * const window = current_registry_pointer->window) {
+		// There is already a window. If it is minimized, restore it.
+		if (window->is_minimized()) window->minimize(false); else delete window;
+	} else switch (n) { //  create window
+	case 0:
+		new Editor_Tool_Change_Height_Options_Menu
+			(parent, parent.tools.increase_height, *current_registry_pointer);
+		break;
+	case 1:
+		new Editor_Tool_Noise_Height_Options_Menu
+			(parent, parent.tools.noise_height, *current_registry_pointer);
+		break;
+	case 2:
+		new Editor_Tool_Set_Terrain_Tool_Options_Menu
+			(parent, parent.tools.set_terrain, *current_registry_pointer);
+		break;
+	case 3:
+		new Editor_Tool_Place_Immovable_Options_Menu
+			(parent, parent.tools.place_immovable, *current_registry_pointer);
+		break;
+	case 4:
+		new Editor_Tool_Place_Bob_Options_Menu
+			(parent, parent.tools.place_bob, *current_registry_pointer);
+		break;
+	case 5:
+		new Editor_Tool_Change_Resources_Options_Menu
+			(parent, parent.tools.increase_resources, *current_registry_pointer);
+	}
 }

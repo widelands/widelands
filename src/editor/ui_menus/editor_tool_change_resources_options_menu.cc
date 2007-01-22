@@ -21,9 +21,7 @@
 #include "editor_tool_change_resources_options_menu.h"
 #include "editorinteractive.h"
 #include "i18n.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
-#include "ui_radiobutton.h"
 #include "editor_increase_resources_tool.h"
 #include "editor_set_resources_tool.h"
 #include "map.h"
@@ -32,176 +30,160 @@
 #include "error.h"
 #include "overlay_manager.h"
 
-/*
-=================================================
+#define width  20
+#define height 20
+Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu
+(Editor_Interactive             & parent,
+ Editor_Increase_Resources_Tool & increase_tool,
+ UI::UniqueWindow::Registry     & registry)
+:
+Editor_Tool_Options_Menu
+(parent, registry, 164, 120, _("Resources Tools Options").c_str()),
 
-class Editor_Tool_Change_Resources_Options_Menu
+m_change_by_label
+(this,
+ hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
+ _("In-/Decrease Value"), Align_BottomCenter),
 
-=================================================
-*/
+m_change_by_increase
+(this,
+ hmargin(), m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
+ width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+ this, Change_By_Increase),
 
-/*
-===========
-Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu()
+m_change_by_decrease
+(this,
+ get_inner_w() - hmargin() - width, m_change_by_increase.get_y(), width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+ this, Change_By_Decrease),
 
-constructor
-===========
-*/
-Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive* parent, int index,
-      Editor_Increase_Resources_Tool* iht, UI::UniqueWindow::Registry* registry) :
-Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c_str())
+m_change_by_value
+(this,
+ m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing(),
+ m_change_by_increase.get_y(),
+ m_change_by_decrease.get_x() - hspacing()
+ -
+ (m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing()),
+ height,
+ Align_BottomCenter),
+
+m_set_to_label
+(this,
+ vmargin(),
+ m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
+ get_inner_w() - 2 * hmargin(), height,
+ _("Set Value"), Align_BottomCenter),
+
+m_set_to_increase
+(this,
+ hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+ width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+ this, Set_To_Increase),
+
+m_set_to_decrease
+(this,
+ m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+ this, Set_To_Decrease),
+
+m_set_to_value
+(this,
+ m_change_by_value.get_x(), m_set_to_increase.get_y(),
+ m_change_by_value.get_w(), height,
+ Align_BottomCenter),
+
+m_cur_selection
+(this, 0, 0, _("Current Selection"), Align_BottomCenter),
+
+m_increase_tool(increase_tool)
 {
+	const World & world = parent.egbase().map().world();
+	const Resource_Descr::Index nr_resources = world.get_nr_resources();
 
-   m_parent=parent;
-   m_irt=iht;
-   m_drt=iht->get_dht();
-   m_srt=iht->get_sht();
-
-
-   // Here we go
-   const int space=5;
-   const int xstart=5;
-   const int ystart=15;
-   const int yend=15;
-	const World & world = parent->egbase().map().world();
-   int nr_resources = world.get_nr_resources();
-   int resources_in_row=(int)(sqrt((float)nr_resources));
-   if(resources_in_row*resources_in_row<nr_resources) { resources_in_row++; }
-   int i=1;
-
-	uint w     = 0, h      = 0;
-	uint width = 0, height = 0;
-   for(i=0; i<nr_resources; i++) {
-		Resource_Descr * const res = world.get_resource(i);
-      std::string editor_pic=res->get_editor_pic(100000);
-		const uint picid = g_gr->get_picture(PicMod_Game,  editor_pic.c_str());
-		g_gr->get_picture_size(picid, w, h);
-      if(w>width) width=w;
-      if(h>height) height=h;
+	//  Find the maximal width and height for the resource pictures.
+	uint resource_pic_max_width = 0, resource_pic_max_height = 0;
+	for (Resource_Descr::Index i = 0; i < nr_resources; ++i) {
+		uint w, h;
+		g_gr->get_picture_size
+			(g_gr->get_picture
+			 (PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str()),
+			 w, h);
+		resource_pic_max_width  = std::max(resource_pic_max_width,  w);
+		resource_pic_max_height = std::max(resource_pic_max_height, h);
    }
 
-   int innsize= (resources_in_row)*(width+1+space)+xstart > 135 ? (resources_in_row)*(width+1+space)+xstart : 135;
-   set_inner_size(innsize, (resources_in_row)*(height+1+space)+ystart+yend+80);
+	const uint resources_in_row =
+		(get_inner_w() - 2 * hmargin() + spacing())
+		/
+		(resource_pic_max_width + spacing());
 
-   int offsx=5;
-   int offsy=30;
-   int spacing=5;
-   int resources=20;
-   int posx=offsx;
-   int posy=offsy;
-   int button_width=20;
-   UI::Textarea* ta=new UI::Textarea(this, 0, 0, _("Resources Tool Options"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 5));
+	m_radiogroup.changed.set
+		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
+	m_radiogroup.clicked.set
+		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
 
-   ta=new UI::Textarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
-   posy+=spacing+button_width;
+	uint cur_x = 0;
+	Point pos
+		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
+	for
+		(Resource_Descr::Index i = 0;
+		 i < nr_resources;
+		 pos.x += resource_pic_max_width + hspacing(), ++cur_x, ++i)
+	{
+		if (cur_x == resources_in_row) {
+			cur_x = 0;
+			pos.x = hmargin();
+			pos.y += resource_pic_max_height + vspacing();
+		}
+		m_radiogroup.add_button
+			(this,
+			 pos.x, pos.y,
+			 g_gr->get_picture
+			 (PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str()));
+	}
+	pos.y += resource_pic_max_height + vspacing();
 
-	new UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Uint8>
-		(this,
-		 posx, posy, button_width, resources,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Change_Resources_Options_Menu::clicked, this, 0);
+	set_inner_size(get_inner_w(), pos.y + m_cur_selection.get_h() + vmargin());
+	m_cur_selection.set_pos(Point(get_inner_w() / 2, pos.y + hspacing()));
 
-	new UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Uint8>
-		(this,
-		 get_inner_w() - spacing - button_width, posy, button_width,
-		 resources,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Change_Resources_Options_Menu::clicked, this, 1);
+	m_radiogroup.set_state(m_increase_tool.get_cur_res());
 
-   m_increase=new UI::Textarea(this, 0, 0, "5", Align_Left);
-	m_increase->set_pos
-		(Point((get_inner_w() - m_increase->get_w()) / 2, posy + 5));
-   posy+=button_width+spacing+spacing;
-
-   ta=new UI::Textarea(this, 0, 0, _("Set Value"), Align_Left);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
-   posy+=button_width+spacing;
-
-	new UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Uint8>
-		(this,
-		 posx, posy, button_width, resources,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Change_Resources_Options_Menu::clicked, this, 2);
-
-	new UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Uint8>
-		(this,
-		 get_inner_w() - spacing - button_width, posy, button_width,
-		 resources,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Change_Resources_Options_Menu::clicked, this, 3);
-
-   m_set=new UI::Textarea(this, 0, 0, "5", Align_Left);
-	m_set->set_pos(Point((get_inner_w() - m_set->get_w()) / 2, posy + 5));
-   posy+=button_width+spacing;
-
-   m_cur_selection=new UI::Textarea(this, 0, 0, _("Current Selection"), Align_Left);
-
-   // Now the available resources
-   posx=xstart;
-   int cur_x=0;
-   i=0;
-   m_radiogroup=new UI::Radiogroup();
-   m_radiogroup->changed.set(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
-   m_radiogroup->clicked.set(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
-
-   while(i<nr_resources) {
-		Resource_Descr * const res = world.get_resource(i);
-      if(cur_x==resources_in_row) { cur_x=0; posy+=height+1+space; posx=xstart; }
-
-      std::string editor_pic=res->get_editor_pic(100000);
-      int picid=g_gr->get_picture( PicMod_Game,  editor_pic.c_str() );
-
-
-      m_radiogroup->add_button(this, posx,posy,picid);
-
-      posx+=width+1+space;
-      ++cur_x;
-      ++i;
-   }
-   posy+=height+1+space+5;
-
-   m_radiogroup->set_state(m_irt->get_cur_res());
-
-   update();
+	update();
 }
 
-/*
-===========
-Editor_Tool_Change_Resources_Options_Menu::clicked()
 
-called when one button is clicked
-===========
-*/
-void Editor_Tool_Change_Resources_Options_Menu::clicked(const Uint8 n) {
-   int increase=m_irt->get_changed_by();
-   int set=m_srt->get_set_to();
+void Editor_Tool_Change_Resources_Options_Menu::clicked_button(const Button n) {
+	assert
+		(m_increase_tool.get_change_by()
+		 ==
+		 m_increase_tool.decrease_tool().get_change_by());
 
-   assert(m_irt->get_changed_by()==m_drt->get_changed_by());
+	int change_by = m_increase_tool.get_change_by();
+	int set_to    = m_increase_tool.set_tool().get_set_to();
 
-   if(n==0) {
-      ++increase;
-   } else if(n==1) {
-      --increase;
-      if(increase<0) increase=0;
+	switch (n) {
+	case Change_By_Increase:
+		change_by += change_by < std::numeric_limits<int>::max(); break;
+	case Change_By_Decrease: change_by -= 1 < change_by;         break;
+	case    Set_To_Increase:
+		set_to += set_to < std::numeric_limits<int>::max();       break;
+	case    Set_To_Decrease: set_to    -= 0 < set_to;
    }
-   m_irt->set_changed_by(increase);
-   m_drt->set_changed_by(increase);
+	m_increase_tool.set_change_by(change_by);
+	m_increase_tool.decrease_tool().set_change_by(change_by);
+	m_increase_tool.set_tool().set_set_to(set_to);
 
-   if(n==2) {
-      ++set;
-   } else if(n==3) {
-      --set;
-      if(set<0) set=0;
-   }
-   m_srt->set_set_to(set);
    select_correct_tool();
-
    update();
 }
 
@@ -209,13 +191,13 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked(const Uint8 n) {
  * called when a resource has been selected
  */
 void Editor_Tool_Change_Resources_Options_Menu::selected(void) {
-   int n=m_radiogroup->get_state();
+	const int n = m_radiogroup.get_state();
 
-   m_srt->set_cur_res(n);
-   m_irt->set_cur_res(n);
-   m_drt->set_cur_res(n);
+	m_increase_tool.set_tool().set_cur_res(n);
+	m_increase_tool.set_cur_res(n);
+	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Map & map = m_parent->egbase().map();
+	Map & map = dynamic_cast<Editor_Interactive &>(*get_parent()).egbase().map();
 	map.overlay_manager().register_overlay_callback_function
 		(&Editor_Change_Resource_Tool_Callback, static_cast<void *>(&map), n);
 	map.recalc_whole_map();
@@ -233,19 +215,18 @@ Update all the textareas, so that they represent the correct values
 */
 void Editor_Tool_Change_Resources_Options_Menu::update(void) {
    char buf[250];
-   sprintf(buf, "%i", m_irt->get_changed_by());
-   m_increase->set_text(buf);
-   sprintf(buf, "%i", m_srt->get_set_to());
-   m_set->set_text(buf);
+	sprintf(buf, "%i", m_increase_tool.get_change_by());
+	m_change_by_value.set_text(buf);
+	sprintf(buf, "%i", m_increase_tool.set_tool().get_set_to());
+	m_set_to_value.set_text(buf);
 
-   int cursel=m_srt->get_cur_res();
-	m_cur_selection->set_text
-		(cursel ?
-		 m_parent->egbase().map().world().get_resource
-		 (m_srt->get_cur_res())->get_name()
+	m_cur_selection.set_text
+		(m_increase_tool.set_tool().get_cur_res() ?
+		 dynamic_cast<Editor_Interactive &>(*get_parent()).egbase().map().world()
+		 .get_resource(m_increase_tool.set_tool().get_cur_res())->name()
 		 :
 		 "");
-	m_cur_selection->set_pos
+	m_cur_selection.set_pos
 		(Point
-		 ((get_inner_w() - m_cur_selection->get_w()) / 2, get_inner_h() - 20));
+		 ((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));
 }

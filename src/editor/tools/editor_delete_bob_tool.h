@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,16 +22,9 @@
 
 #include "editor_tool.h"
 
-/*
-=============================
-class Editor_Delete_Bob_Tool
-
-this deletes bob from the map
-=============================
-*/
-class Editor_Delete_Bob_Tool : public Editor_Tool {
-   public:
-      ~Editor_Delete_Bob_Tool() { }
+/// Deletes bob from the map.
+struct Editor_Delete_Bob_Tool : public Editor_Tool {
+	Editor_Delete_Bob_Tool() : Editor_Tool(*this, *this) {}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()

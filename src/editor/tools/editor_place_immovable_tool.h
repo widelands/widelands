@@ -30,11 +30,10 @@ class Editor_Place_Immovable_Tool
 this places immovables on the map
 =============================
 */
-class Editor_Place_Immovable_Tool : public Editor_Tool, public MultiSelect {
-   public:
-      Editor_Place_Immovable_Tool(Editor_Delete_Immovable_Tool* tool) : Editor_Tool(tool, tool) {
-      }
-      ~Editor_Place_Immovable_Tool() { }
+struct Editor_Place_Immovable_Tool : public Editor_Tool, public MultiSelect {
+	Editor_Place_Immovable_Tool(Editor_Delete_Immovable_Tool & tool)
+		: Editor_Tool(tool, tool)
+	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()

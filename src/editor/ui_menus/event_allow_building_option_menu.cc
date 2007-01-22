@@ -60,9 +60,8 @@ m_building(-1) //  FIXME negative value!
 		for (Building_Descr::Index i = 0; i < nr_buildings; ++i) {
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
-         std::string name=b->get_name();
-         std::string event_name=m_event->get_building();
-         if(name==event_name) m_building=m_buildings.size();
+			const std::string & name = b->name();
+			if (name == m_event->get_building()) m_building = m_buildings.size();
          m_buildings.push_back(name);
       }
    }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,6 @@ int Editor_Decrease_Height_Tool::handle_click_impl
 	MapRegion mr(map, center.node, radius);
 	FCoords fc;
 	while (mr.next(fc))
-		max = std::max(max, map.change_field_height(fc, -m_changed_by));
+		max = std::max(max, map.change_field_height(fc, -m_change_by));
 	return radius + max;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,38 +24,34 @@
 #include "editor_set_resources_tool.h"
 #include "geometry.h"
 
-class World;
-
-/*
-=============================
-class Editor_Increase_Resources_Tool
-
-this increases the resources of a field by a value
-=============================
-*/
-class Editor_Increase_Resources_Tool : public Editor_Tool {
-   public:
-	Editor_Increase_Resources_Tool(Editor_Decrease_Resources_Tool * const dht, Editor_Set_Resources_Tool * const sht) :
-	Editor_Tool(dht, sht), m_dht(dht), m_sht(sht), m_changed_by(1), m_cur_res(0) {}
-      virtual ~Editor_Increase_Resources_Tool() {  }
+/// Increases the resources of a node by a value.
+struct Editor_Increase_Resources_Tool : public Editor_Tool {
+	Editor_Increase_Resources_Tool
+		(Editor_Decrease_Resources_Tool & the_decrease_tool,
+		 Editor_Set_Resources_Tool      & the_set_to_tool) :
+		Editor_Tool(the_decrease_tool, the_set_to_tool),
+		m_decrease_tool(the_decrease_tool), m_set_tool(the_set_to_tool),
+		m_change_by(1), m_cur_res(0)
+	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_increase_resources.png";}
 
-      inline int get_changed_by(void) { return m_changed_by; }
-      inline void set_changed_by(int n) { m_changed_by=n; }
-      inline int get_cur_res(void) { return m_cur_res; }
-      inline void set_cur_res(int res) { m_cur_res=res; }
+	int get_change_by() const throw () {return m_change_by;}
+	void set_change_by(const int n) throw () {m_change_by = n;}
+	Resource_Descr::Index get_cur_res() const throw () {return m_cur_res;}
+	void set_cur_res(const Resource_Descr::Index res) throw () {m_cur_res = res;}
 
-      Editor_Decrease_Resources_Tool* get_dht(void) { return m_dht; }
-      Editor_Set_Resources_Tool* get_sht(void) { return m_sht; }
+	Editor_Decrease_Resources_Tool & decrease_tool() const throw ()
+	{return m_decrease_tool;}
+	Editor_Set_Resources_Tool & set_tool() const throw () {return m_set_tool;}
 
-   private:
-      Editor_Decrease_Resources_Tool* m_dht;
-      Editor_Set_Resources_Tool* m_sht;
-      int m_changed_by;
-      int m_cur_res;
+private:
+	Editor_Decrease_Resources_Tool & m_decrease_tool;
+	Editor_Set_Resources_Tool      & m_set_tool;
+	int                              m_change_by;
+	Resource_Descr::Index            m_cur_res;
 };
 
 int Editor_Change_Resource_Tool_Callback(const TCoords, void *, int);

@@ -35,11 +35,6 @@ int Editor_Make_Infrastructure_Tool_Callback
 		static_cast<const Editor * const>(data)->player(player).get_buildcaps(c);
 }
 
-Editor_Make_Infrastructure_Tool::Editor_Make_Infrastructure_Tool() : m_player(1)
-{}
-
-Editor_Make_Infrastructure_Tool::~Editor_Make_Infrastructure_Tool() {}
-
 
 /*
 ===========

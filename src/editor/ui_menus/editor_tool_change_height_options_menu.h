@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,24 +22,34 @@
 
 #include "editor_tool_options_menu.h"
 
+#include "ui_button.h"
+#include "ui_textarea.h"
+
 class Editor_Interactive;
 class Editor_Increase_Height_Tool;
-class Editor_Decrease_Height_Tool;
-class Editor_Set_Height_Tool;
-namespace UI {struct Textarea;};
 
 struct Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
-      Editor_Tool_Change_Height_Options_Menu(Editor_Interactive*, int, Editor_Increase_Height_Tool*,
-            UI::UniqueWindow::Registry*);
-      ~Editor_Tool_Change_Height_Options_Menu() { }
+	Editor_Tool_Change_Height_Options_Menu
+		(Editor_Interactive          &,
+		 Editor_Increase_Height_Tool &,
+		 UI::UniqueWindow::Registry  &);
 
-   private:
-	void clicked(const Uint8);
+private:
+	enum Button {
+		Change_By_Increase, Change_By_Decrease,
+		Set_To_Increase,    Set_To_Decrease
+	};
+	void clicked_button(const Button);
       void update(void);
-      UI::Textarea* m_increase, *m_set;
-      Editor_Increase_Height_Tool* m_iht;
-      Editor_Decrease_Height_Tool* m_dht;
-      Editor_Set_Height_Tool* m_sht;
+	UI::Textarea                  m_change_by_label;
+	UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Button>
+		m_change_by_increase, m_change_by_decrease;
+	UI::Textarea                  m_change_by_value;
+	UI::Textarea                  m_set_to_label;
+	UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Button>
+		m_set_to_increase,    m_set_to_decrease;
+	UI::Textarea                  m_set_to_value;
+	Editor_Increase_Height_Tool & m_increase_tool;
 };
 
 #endif

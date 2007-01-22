@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,16 +22,9 @@
 
 #include "editor_tool.h"
 
-/*
-=============================
-class Editor_Info_Tool
-
-this is a simple tool to show information about the clicked field
-=============================
-*/
-class Editor_Info_Tool : public Editor_Tool {
-   public:
-      virtual ~Editor_Info_Tool() { }
+/// A simple tool to show information about the clicked node.
+struct Editor_Info_Tool : public Editor_Tool {
+	Editor_Info_Tool() : Editor_Tool(*this, *this) {}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()

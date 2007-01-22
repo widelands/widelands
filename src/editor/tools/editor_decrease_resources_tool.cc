@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ int Editor_Decrease_Resources_Tool::handle_click_impl
 		int res    =fc.field->get_resources();
 		int amount =fc.field->get_resources_amount();
 
-      amount-=m_changed_by;
+		amount -= m_change_by;
       if(amount<0) amount=0;
 
 

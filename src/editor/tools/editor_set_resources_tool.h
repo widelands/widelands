@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,30 +22,24 @@
 
 #include "editor_tool.h"
 
-/*
-=============================
-class Editor_Set_Resources_Tool
-
-this decreases the resources of a field by a value
-=============================
-*/
-class Editor_Set_Resources_Tool : public Editor_Tool {
-   public:
-	Editor_Set_Resources_Tool() : m_cur_res(0), m_set_to(0) {}
-      virtual ~Editor_Set_Resources_Tool() { }
+///  Decreases the resources of a node by a value.
+struct Editor_Set_Resources_Tool : public Editor_Tool {
+	Editor_Set_Resources_Tool()
+		: Editor_Tool(*this, *this), m_cur_res(0), m_set_to(0)
+	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_resources.png";}
 
-      inline int get_set_to(void) { return m_set_to; }
-      inline void set_set_to(int n) { m_set_to=n; }
-      inline int get_cur_res(void) { return m_cur_res; }
-      inline void set_cur_res(int res) { m_cur_res=res; }
+	Uint8 get_set_to() const throw () {return m_set_to;}
+	void set_set_to(const Uint8 n) throw () {m_set_to = n;}
+	Resource_Descr::Index get_cur_res() const throw () {return m_cur_res;}
+	void set_cur_res(const Resource_Descr::Index res) throw () {m_cur_res = res;}
 
-   private:
-      int m_cur_res;
-      int m_set_to;
+private:
+	Resource_Descr::Index m_cur_res;
+	Uint8                 m_set_to;
 };
 
 #endif

@@ -28,37 +28,30 @@ class FCoords;
 class Editor_Interactive;
 class Map;
 
-/*
-=============================
-class Editor_Tool
+/**
+ * An editor tool is a tool that can be selected in the editor. Examples are:
+ * modify height, place bob, place critter, place building. A Tool only makes
+ * one function (like delete_building, place building, modify building are 3
+ * tools).
+ */
+struct Editor_Tool {
+	Editor_Tool(Editor_Tool & second, Editor_Tool & third) :
+	m_second(second), m_third(third)
+	{}
+	virtual ~Editor_Tool() {}
 
-an editor tool is a tool that can be selected in the editor.
-Examples are: modify height, place bob, place critter,
-place building. A Tool only makes one function (like delete_building,
-place building, modify building are 3 tools)
-=============================
-*/
-class Editor_Tool {
-   public:
-	Editor_Tool(Editor_Tool * const second = 0, Editor_Tool * const third = 0) :
-	m_second(second ? second : this), m_third(third ? third : this) {}
-      virtual ~Editor_Tool() {
-         if(m_second==m_third) m_third=0;
-         if(m_second && m_second!=this) { delete m_second; m_second=0; }
-         if(m_third && m_third!=this) { delete m_third; m_third=0; }
+	enum Tool_Index {First, Second, Third};
+	int handle_click
+		(const Tool_Index i,
+		 Map & map, const Node_and_Triangle center,
+		 Editor_Interactive & parent)
+	{
+		return (i == First ? *this : i == Second ? m_second : m_third)
+			.handle_click_impl(map, center, parent);
       }
-
-	int handle_click(int n, Map & map, const Node_and_Triangle center, Editor_Interactive & parent) {
-         if(n==0) return this->handle_click_impl(map, center, parent);
-         if(n==1) return m_second->handle_click_impl(map, center, parent);
-         if(n==2) return m_third->handle_click_impl(map, center, parent);
-         return 0;
-      }
-      const char* get_sel(int n) {
-         if(n==0) return this->get_sel_impl();
-         if(n==1) return m_second->get_sel_impl();
-         if(n==2) return m_third->get_sel_impl();
-         return 0;
+	const char * get_sel(const Tool_Index i) {
+		return
+			(i == First ? *this : i == Second ? m_second : m_third).get_sel_impl();
       }
 
 	virtual int handle_click_impl
@@ -66,8 +59,8 @@ class Editor_Tool {
 	virtual const char * get_sel_impl() const throw () = 0;
 	virtual bool operates_on_triangles() const {return false;};
 
-   protected:
-      Editor_Tool* m_second, *m_third;
+protected:
+	Editor_Tool & m_second, & m_third;
 };
 
 #endif

@@ -23,19 +23,10 @@
 #include "editor_event_menu.h"
 #include "editor_objectives_menu.h"
 #include "editor_variables_menu.h"
-#include "editor_increase_height_tool.h"
-#include "editor_increase_resources_tool.h"
-#include "editor_info_tool.h"
 #include "editor_main_menu.h"
 #include "editor_main_menu_load_map.h"
 #include "editor_main_menu_save_map.h"
-#include "editor_make_infrastructure_tool.h"
-#include "editor_noise_height_tool.h"
-#include "editor_place_immovable_tool.h"
-#include "editor_place_bob_tool.h"
 #include "editor_player_menu.h"
-#include "editor_set_terrain_tool.h"
-#include "editor_set_starting_pos_tool.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
 #include "graphic.h"
@@ -51,19 +42,6 @@
 #include "wlapplication.h"
 
 
-/**********************************************
- *
- * class EditorInteractive
- *
- **********************************************/
-
-/*
-==========
-Editor_Interactive::Editor_Interactive()
-
-construct editor sourroundings
-==========
-*/
 Editor_Interactive::Editor_Interactive(Editor & e) :
 Interactive_Base(e), m_editor(e)
 {
@@ -153,24 +131,6 @@ Interactive_Base(e), m_editor(e)
 		 &Editor_Interactive::toggle_objectivesmenu, this,
 		 _("Objectives"));
 
-
-   // Init Tools
-   tools.current_tool_index=1;
-   tools.use_tool=0;
-   tools.tools.push_back(new Editor_Info_Tool());
-   Editor_Set_Height_Tool* sht=new Editor_Set_Height_Tool();
-   tools.tools.push_back(new Editor_Increase_Height_Tool(new Editor_Decrease_Height_Tool(), sht));
-   tools.tools.push_back(new Editor_Noise_Height_Tool(sht));
-   tools.tools.push_back(new Editor_Set_Terrain_Tool());
-   tools.tools.push_back(new Editor_Place_Immovable_Tool(new Editor_Delete_Immovable_Tool()));
-   tools.tools.push_back(new Editor_Set_Starting_Pos_Tool());
-   tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
-   tools.tools.push_back(new Editor_Increase_Resources_Tool(new Editor_Decrease_Resources_Tool(), new Editor_Set_Resources_Tool()));
-   tools.tools.push_back(new Editor_Make_Infrastructure_Tool());
-
-   // Option menus
-   m_options_menus.resize(tools.tools.size());
-
    // Load all tribes into memory
    std::vector<std::string> tribes;
 	Tribe_Descr::get_all_tribenames(tribes);
@@ -181,18 +141,11 @@ Interactive_Base(e), m_editor(e)
    m_need_save=false;
    m_ctrl_down=false;
 
-   select_tool(1, 0);
+	select_tool(tools.increase_height, Editor_Tool::First);
 }
-
 
 /// Restore default sel.
-Editor_Interactive::~Editor_Interactive() {
-   while(tools.tools.size()) {
-      delete tools.tools.back();
-      tools.tools.pop_back();
-   }
-   unset_sel_picture(); // reset default sel
-}
+Editor_Interactive::~Editor_Interactive() {unset_sel_picture();}
 
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -236,17 +189,15 @@ void Editor_Interactive::toggle_eventmenu() {
 }
 
 void Editor_Interactive::map_clicked() {
-	tools.tools[tools.current_tool_index]
-		->handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
+	tools.current()
+		.handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
 	m_mapview.need_complete_redraw();
 	set_need_save(true);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void Editor_Interactive::set_sel_pos(const Node_and_Triangle sel) {
-	if (tools.current_tool_index < 0 or tools.tools.size() <= tools.current_tool_index) return;
-	const bool target_changed =
-		tools.tools.at(tools.current_tool_index)->operates_on_triangles() ?
+	const bool target_changed = tools.current().operates_on_triangles() ?
 		sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
 	if (target_changed and SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_LEFT))
@@ -260,17 +211,15 @@ void Editor_Interactive::toggle_buildhelp(void)
 
 void Editor_Interactive::tool_menu_btn() {
 	if (m_toolmenu.window) delete m_toolmenu.window;
-	else new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menus);
+	else new Editor_Tool_Menu(*this, m_toolmenu);
 }
 
 
 void Editor_Interactive::toggle_playermenu() {
 	if (m_playermenu.window) delete m_playermenu.window;
 	else {
-         this->select_tool(5,0);
-         new Editor_Player_Menu(this,
-               &tools, 5, 8,
-               &m_playermenu);
+		select_tool(tools.set_starting_pos, Editor_Tool::First);
+		new Editor_Player_Menu(*this, &m_playermenu);
    }
 
 }
@@ -285,9 +234,9 @@ void Editor_Interactive::toolsize_menu_btn() {
 bool Editor_Interactive::handle_key(bool down, int code, char) {
    if(code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
 
-   if(down) {
+	if (down) {
       // only on down events
-      switch(code) {
+		switch (code) {
 			// Sel radius
          case KEY_1:
 			set_sel_radius(0);
@@ -322,17 +271,15 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
 
          case KEY_LSHIFT:
          case KEY_RSHIFT:
-            if(!tools.use_tool) {
-               select_tool(tools.current_tool_index, 1);
-            }
+			if (tools.use_tool == Editor_Tool::First)
+				select_tool(tools.current(), Editor_Tool::Second);
             return true;
 
          case KEY_LALT:
          case KEY_RALT:
          case KEY_MODE:
-            if(!tools.use_tool) {
-               select_tool(tools.current_tool_index, 2);
-            }
+			if (tools.use_tool == Editor_Tool::First)
+				select_tool(tools.current(), Editor_Tool::Third);
             return true;
 
          case KEY_SPACE:
@@ -358,7 +305,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
             return true;
 
          case KEY_i:
-            select_tool(0, 0);
+			select_tool(tools.info, Editor_Tool::First);
             return true;
 
          case KEY_m:
@@ -385,17 +332,16 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
 
 
       }
-   } else {
+	} else {
       // key up events
-      switch(code) {
+		switch (code) {
          case KEY_LSHIFT:
          case KEY_RSHIFT:
          case KEY_LALT:
          case KEY_RALT:
          case KEY_MODE:
-            if(tools.use_tool) {
-               select_tool(tools.current_tool_index, 0);
-            }
+			if (tools.use_tool == Editor_Tool::First)
+				select_tool(tools.current(), Editor_Tool::First);
             return true;
       }
    }
@@ -403,8 +349,10 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
 }
 
 
-void Editor_Interactive::select_tool(int n, int which) {
-   if(which==0 && n!=tools.current_tool_index) {
+void Editor_Interactive::select_tool
+(Editor_Tool & primary, const Editor_Tool::Tool_Index which)
+{
+	if (which == Editor_Tool::First and &primary != tools.current_pointer) {
 		Map & map = egbase().map();
       // A new tool has been selected. Remove all
       // registered overlay callback functions
@@ -412,13 +360,12 @@ void Editor_Interactive::select_tool(int n, int which) {
 		map.recalc_whole_map();
 
    }
-   tools.current_tool_index=n;
+	tools.current_pointer = &primary;
    tools.use_tool=which;
 
-   const char* selpic= tools.tools[n]->get_sel(which);
-   if (not selpic) unset_sel_picture();
-   else              set_sel_picture(selpic);
-	set_sel_triangles(tools.tools[n]->operates_on_triangles());
+	if (const char * sel_pic = primary.get_sel(which)) set_sel_picture(sel_pic);
+	else                                             unset_sel_picture();
+	set_sel_triangles(primary.operates_on_triangles());
 }
 
 /*

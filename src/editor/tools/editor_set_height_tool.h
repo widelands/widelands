@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,27 +22,19 @@
 
 #include "editor_tool.h"
 
-/*
-=============================
-class Editor_Set_Height_Tool
-
-this decreases the height of a field by a value
-=============================
-*/
-class Editor_Set_Height_Tool : public Editor_Tool {
-   public:
-	Editor_Set_Height_Tool() : m_set_to(10) {}
-      virtual ~Editor_Set_Height_Tool() { }
+///  Decreases the height of a node by a value.
+struct Editor_Set_Height_Tool : public Editor_Tool {
+	Editor_Set_Height_Tool() : Editor_Tool(*this, *this), m_set_to(10) {}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_height.png";}
 
-      inline int get_set_to(void) { return m_set_to; }
-      inline void set_set_to(int n) { m_set_to=n; }
+	Uint8 get_set_to() const throw () {return m_set_to;}
+	void set_set_to(const Uint8 n) throw () {m_set_to = n;}
 
-   private:
-      int m_set_to;
+private:
+	Uint8 m_set_to;
 };
 
 #endif

@@ -52,22 +52,13 @@ int Editor_Tool_Set_Starting_Pos_Callback(const TCoords c, void * data, int) {
 
    return 0;
 }
-/*
- * Constructor
- */
-Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool() :
-m_current_sel_pic("")
+
+
+Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
+: Editor_Tool(*this, *this), m_current_sel_pic("")
 {m_current_player = 0;}
 
-/*
- * Destructor
- */
-Editor_Set_Starting_Pos_Tool::~Editor_Set_Starting_Pos_Tool() {
-}
 
-/*
- * click
- */
 int Editor_Set_Starting_Pos_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {

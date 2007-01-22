@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,17 +23,11 @@
 #include "multi_select.h"
 #include "editor_delete_bob_tool.h"
 
-/*
-=============================
-class Editor_Place_Bob_Tool
-
-this places bobs on the map
-=============================
-*/
-class Editor_Place_Bob_Tool : public Editor_Tool, public MultiSelect {
-   public:
-      Editor_Place_Bob_Tool(Editor_Delete_Bob_Tool * tool) : Editor_Tool(tool, tool) { }
-      ~Editor_Place_Bob_Tool() { }
+/// Places bobs on the map.
+struct Editor_Place_Bob_Tool : public Editor_Tool, public MultiSelect {
+	Editor_Place_Bob_Tool(Editor_Delete_Bob_Tool & tool)
+		: Editor_Tool(tool, tool)
+	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()

@@ -36,7 +36,8 @@ template <typename T, typename ID> struct IDButton;
 };
 
 struct Editor_Player_Menu : public UI::UniqueWindow {
-      Editor_Player_Menu(Editor_Interactive*, Editor_Interactive::Editor_Tools*, int spt_tool_index, int make_infrs_tindex, UI::UniqueWindow::Registry*);
+	Editor_Player_Menu
+		(Editor_Interactive &, UI::UniqueWindow::Registry *);
       virtual ~Editor_Player_Menu() { }
 
    private:
@@ -51,7 +52,6 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
       std::vector<std::string> m_tribes;
 
-      Editor_Interactive::Editor_Tools* m_tools;
       int m_spt_index;
       int m_mis_index;
 

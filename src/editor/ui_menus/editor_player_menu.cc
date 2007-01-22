@@ -36,32 +36,10 @@
 #include "ui_textarea.h"
 #include "wexception.h"
 
-/*
-=================================================
-
-class Editor_Tool_Set_Starting_Pos_Options_Menu
-
-=================================================
-*/
-
-
-/*
-===============
 Editor_Player_Menu::Editor_Player_Menu
-
-Create all the buttons etc...
-===============
-*/
-Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
-      Editor_Interactive::Editor_Tools* tools, int spt_tool_index, int make_infrs_tindex, UI::UniqueWindow::Registry* registry)
-   : UI::UniqueWindow(parent, registry, 340, 400, _("Player Options"))
+(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
+: UI::UniqueWindow(&parent, registry, 340, 400, _("Player Options"))
 {
-   // Initialisation
-   m_parent=parent;
-   m_tools=tools;
-   m_spt_index=spt_tool_index;
-   m_mis_index=make_infrs_tindex;
-
    // User Interface
    int offsx=5;
    int offsy=30;
@@ -343,15 +321,18 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
       }
    }
 
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+
    // Select tool set mplayer
-   m_parent->select_tool(m_spt_index,0);
-   static_cast<Editor_Set_Starting_Pos_Tool*>(m_tools->tools[m_spt_index])->set_current_player(n);
+	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
+	parent.tools.set_starting_pos.set_current_player(n);
 
    // Reselect tool, so everything is in a defined state
-   m_parent->select_tool(m_parent->get_selected_tool(),0);
+	parent.select_tool(parent.tools.current(), Editor_Tool::First);
 
    // Register callback function to make sure that only valid fields are selected.
-	map.get_overlay_manager()->register_overlay_callback_function
+	map.overlay_manager().register_overlay_callback_function
 		(&Editor_Tool_Set_Starting_Pos_Callback, &map);
 	map.recalc_whole_map();
    update();
@@ -412,7 +393,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
          throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name().c_str());
 		editor.warp_building(c, p->get_player_number(), idx);
 
-      m_parent->reference_player_tribe(n, p->get_tribe());
+		m_parent->reference_player_tribe(n, p->get_tribe());
 
       // Remove the player overlay from this starting pos.
       // A HQ is overlay enough
@@ -425,8 +406,9 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
 		overlay_manager.remove_overlay(start_pos,picid);
    }
 
-   m_parent->select_tool(m_mis_index,0);
-   static_cast<Editor_Make_Infrastructure_Tool*>(m_tools->tools[m_mis_index])->set_player(n);
+	Editor_Interactive & parent = dynamic_cast<Editor_Interactive &>(*get_parent());
+	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
+	parent.tools.make_infrastructure.set_player(n);
 	overlay_manager.register_overlay_callback_function
 		(&Editor_Make_Infrastructure_Tool_Callback,
 		 static_cast<void *>(&editor),

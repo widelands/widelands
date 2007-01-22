@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,32 +22,31 @@
 
 #include "editor_set_height_tool.h"
 
-/*
-=============================
-class Editor_Noise_Height_Tool
-
-this decreases the height of a field by a value
-=============================
-*/
-class Editor_Noise_Height_Tool : public Editor_Tool {
-   public:
-	Editor_Noise_Height_Tool(Editor_Set_Height_Tool * const sht) :
-	Editor_Tool(sht, sht), m_sht(sht), m_upper_value(14), m_lower_value(10) {}
-      virtual ~Editor_Noise_Height_Tool() { m_third=m_second=0; } // don't delete this, somone else will care
+//  Set the height of a node to a random value within a defined interval.
+struct Editor_Noise_Height_Tool : public Editor_Tool {
+	Editor_Noise_Height_Tool
+		(Editor_Set_Height_Tool & the_set_tool,
+		 Uint8 lower = 10, Uint8 upper = 14)
+		:
+		Editor_Tool(the_set_tool, the_set_tool),
+		m_set_tool(the_set_tool),
+		m_lower_value(lower), m_upper_value(upper)
+	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_noise_height.png";}
 
-      inline Editor_Set_Height_Tool* get_sht(void) { return m_sht; }
+	void get_values(Uint8 & lower, Uint8 & upper) const throw ()
+	{lower = m_lower_value; upper = m_upper_value;}
+	void set_values(const Uint8 lower, const Uint8 upper) throw ()
+	{m_lower_value = lower; m_upper_value = upper;}
 
-      inline void get_values(int* a, int* b) { *a=m_lower_value; *b=m_upper_value; }
-      inline void set_values(int a, int b) { m_lower_value=a; m_upper_value=b; }
+	Editor_Set_Height_Tool & set_tool() const throw () {return m_set_tool;}
 
-   private:
-      Editor_Set_Height_Tool* m_sht;
-      int m_upper_value;
-      int m_lower_value;
+private:
+	Editor_Set_Height_Tool & m_set_tool;
+	Uint8 m_lower_value, m_upper_value;
 };
 
 #endif
