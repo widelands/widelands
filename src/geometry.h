@@ -175,6 +175,11 @@ struct TCoords : public Coords {
 	TCoords(const Coords C, const TriangleIndex T = None) : Coords(C), t(T)
 	{}
 
+	bool operator==(const TCoords other) const
+	{return Coords::operator==(other) and t == other.t;}
+	bool operator!=(const TCoords other) const
+	{return Coords::operator!=(other) or  t != other.t;}
+
 	TriangleIndex t;
 };
 
