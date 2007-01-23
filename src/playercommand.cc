@@ -450,11 +450,10 @@ Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (Deserializer* des):PlayerCommand (0, d
 
 void Cmd_EnhanceBuilding::execute (Game* g)
 {
-	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
-
-	if (obj && obj->get_type() >= Map_Object::BUILDING)
-		player->enhance_building(static_cast<PlayerImmovable * const>(obj), id);
+	if
+		(Building * const building =
+		 dynamic_cast<Building * const>(g->get_objects()->get_object(serial)))
+		g->get_player(get_sender())->enhance_building(building, id);
 }
 
 void Cmd_EnhanceBuilding::serialize (Serializer* ser)

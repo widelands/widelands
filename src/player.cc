@@ -311,50 +311,54 @@ void Player::start_stop_building(PlayerImmovable* imm) {
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
  */
-void Player::enhance_building(PlayerImmovable* imm, int id) {
-   if(imm->get_owner() != this)
-      return;
-   if(imm->get_type() == Map_Object::BUILDING) {
-      Building* b=static_cast<Building*>(imm);
-      int cur_id=get_tribe()->get_building_index(b->get_name());
-      Coords c = b->get_position();
-      assert(cur_id!=-1);
+void Player::enhance_building
+(Building * building, const Building_Descr::Index index_of_new_building)
+{
+	if (building->get_owner() == this) {
+		const Building_Descr::Index index_of_old_building =
+			tribe().get_building_index(building->name().c_str());
+		const Coords position = building->get_position();
 
       // Get workers and soldiers
-      const std::vector<Worker*>& workers =  b->get_workers();
-      std::vector<Worker*> m_workers = workers;
-	const std::vector<Soldier *> soldiers = b->has_soldiers() ?
-		dynamic_cast<ProductionSite &>(*b).get_soldiers()
-		:
-		std::vector<Soldier *>();
+		//  Make copies of the vectors, because the originals are destroyed with
+		//  The building.
+		const std::vector<Worker  *> workers  = building->get_workers();
+		const std::vector<Soldier *> soldiers = building->has_soldiers() ?
+			dynamic_cast<ProductionSite &>(*building).get_soldiers()
+			:
+			std::vector<Soldier *>();
 
-	b->remove(&egbase()); //  no fire or stuff
+		building->remove(&egbase()); //  no fire or stuff
+		//  Hereafter the old building does not exist and building is a dangling
+		//  pointer.
+		building = egbase().warp_constructionsite
+			(position, m_plnum, index_of_new_building, index_of_old_building);
+		//  Hereafter building points to the new building.
 
-	egbase().warp_constructionsite(c, m_plnum, id, cur_id);
-
-	Game & game = dynamic_cast<Game &>(egbase());
+		Game & game = dynamic_cast<Game &>(egbase());
       // Reassign the workers
-	const std::vector<Worker *>::const_iterator workers_end = workers.end();
-	for
-		(std::vector<Worker *>::const_iterator it = workers.begin();
-		 it != workers_end;
-		 ++it)
-	{
-		Worker & worker = **it;
-		worker.set_location(b);
-		worker.reset_tasks(&game);
-      }
+		const std::vector<Worker *>::const_iterator workers_end = workers.end();
+		for
+			(std::vector<Worker *>::const_iterator it = workers.begin();
+			 it != workers_end;
+			 ++it)
+		{
+			Worker & worker = **it;
+			worker.set_location(building);
+			worker.reset_tasks(&game);
+		}
       // Reassign the soldier
-	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
-	for
-		(std::vector<Soldier *>::const_iterator it = soldiers.begin();
-		 it != soldiers_end;
-		 ++it)
-	{
-		Soldier & soldier = **it;
-		soldier.set_location(b);
-		soldier.reset_tasks(&game);
-	}
+		const std::vector<Soldier *>::const_iterator soldiers_end =
+			soldiers.end();
+		for
+			(std::vector<Soldier *>::const_iterator it = soldiers.begin();
+			 it != soldiers_end;
+			 ++it)
+		{
+			Soldier & soldier = **it;
+			soldier.set_location(building);
+			soldier.reset_tasks(&game);
+		}
    }
 }
 

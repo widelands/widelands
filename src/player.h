@@ -113,7 +113,8 @@ class Player {
 		void bulldoze(PlayerImmovable* imm);
 		void flagaction(Flag* flag, int action);
 		void start_stop_building(PlayerImmovable* imm);
-      void enhance_building(PlayerImmovable* imm, int id);
+	void enhance_building
+		(Building *, Building_Descr::Index index_of_new_building);
 
       // Economy stuff
       void add_economy(Economy*);
