@@ -1,3 +1,4 @@
+#include <time.h>
 /*
  * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
@@ -1202,6 +1203,7 @@ void Computer_Player::construct_roads ()
 		spots.back().from=-1;
 	}
 
+	const clock_t time_before = clock();
 	int i,j,k;
 	for (i=0;i<(int) spots.size();i++)
 	    for (j=0;j<6;j++) {
@@ -1217,7 +1219,7 @@ void Computer_Player::construct_roads ()
 	    }
 
 	log
-		("Computer_Player(%u): %u spots for road building\n", player_number, spots.size());
+		("Computer_Player(%u): %u spots for road building (%f seconds) \n", player_number, spots.size(), static_cast<const double>(clock() - time_before) / CLOCKS_PER_SEC);
 
 	while (!queue.empty()) {
 	    WalkableSpot &from=spots[queue.front()];
