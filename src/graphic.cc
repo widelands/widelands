@@ -491,8 +491,8 @@ void RenderTargetImpl::rendermap
 		const int posy = b_posy;
 		b_posy += TRIANGLE_HEIGHT;
 		const int linear_fx = minfx;
-		FCoords r(linear_fx, linear_fy);
-		FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
+		FCoords r(Coords(linear_fx, linear_fy));
+		FCoords br(Coords(linear_fx - not row_is_forward, linear_fy + 1));
 		int r_posx =
 			r.x * TRIANGLE_WIDTH
 			+
@@ -560,8 +560,8 @@ void RenderTargetImpl::rendermap
 
 			{//  Draw things on the node.
 				const int linear_fx = minfx;
-				FCoords r(linear_fx, linear_fy2);
-				FCoords br(linear_fx - (not row_is_forward2), linear_fy2 + 1);
+				FCoords r(Coords(linear_fx, linear_fy2));
+				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
 				// Calculate safe (bounded) field coordinates and get field pointers
 				map.normalize_coords(&r);
@@ -621,8 +621,8 @@ void RenderTargetImpl::rendermap
 
 					//  Render border markes on and halfway between border nodes.
 					if (f_is_border) {
-						const Player & player = *egbase.get_player(f_owner_number);
-						const uint anim = player.get_tribe()->get_frontier_anim();
+						const Player & player = egbase.player(f_owner_number);
+						const uint anim = player.tribe().get_frontier_anim();
 						if (f_is_visible) drawanim(f_pos, anim, 0, &player);
 						if
 							((f_is_visible or r_is_visible)
@@ -691,8 +691,8 @@ void RenderTargetImpl::rendermap
 			}
 			{//  Draw things on the R-triangle.
 				const int linear_fx = minfx;
-				FCoords r(linear_fx, linear_fy2);
-				FCoords b(linear_fx - (not row_is_forward2), linear_fy2 + 1);
+				FCoords r(Coords(linear_fx, linear_fy2));
+				FCoords b(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 				int posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+
@@ -760,8 +760,8 @@ void RenderTargetImpl::rendermap
 			}
 			{//  Draw things on the D-triangle.
 				const int linear_fx = minfx;
-				FCoords f(linear_fx - 1, linear_fy2);
-				FCoords br(linear_fx - (not row_is_forward2), linear_fy2 + 1);
+				FCoords f(Coords(linear_fx - 1, linear_fy2));
+				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 				int posx =
 					(linear_fx - 1) * TRIANGLE_WIDTH
 					+

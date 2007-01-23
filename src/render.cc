@@ -227,7 +227,7 @@ static inline ulong calc_minimap_color
 	if (flags & MiniMap::Owner) {
 		if (f.field->get_owned_by() > 0) { //  If owned, get the player's color...
 			const RGBColor * const playercolors =
-				egbase.get_player(f.field->get_owned_by())->get_playercolor();
+				egbase.player(f.field->get_owned_by()).get_playercolor();
 
 			//  ...and add the player's color to the old color.
 			pixelcolor = blend_color
@@ -272,7 +272,7 @@ void draw_minimap_int
 	const Map & map = egbase.map();
 	for (uint y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		FCoords f(viewpoint.x, viewpoint.y + y, 0);
+		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);
@@ -298,7 +298,7 @@ void draw_minimap_int
 	const Map & map = egbase.map();
 	for (uint y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		FCoords f(viewpoint.x, viewpoint.y + y, 0);
+		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);

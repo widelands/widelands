@@ -694,7 +694,7 @@ inline void Map::normalize_coords(Coords * c) const
  */
 inline FCoords Map::get_fcoords(Field & f) const {
 	const int i = &f - m_fields;
-	return FCoords(i % m_width, i / m_width, &f);
+	return FCoords(Coords(i % m_width, i / m_width), &f);
 }
 inline void Map::get_coords(Field & f, Coords & c) const {c = get_fcoords(f);}
 

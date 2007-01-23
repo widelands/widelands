@@ -28,17 +28,18 @@
 #include "compile_assert.h"
 
 struct Point {
-	Point() {}
-	Point(const int px, const int py) : x(px), y(py) {}
+	Point() throw () {}
+	Point(const int px, const int py) throw () : x(px), y(py) {}
 
 	static Point invalid() throw () {
 		return Point
 			(std::numeric_limits<int>::max(), std::numeric_limits<int>::max());
 	}
 
-	bool operator==(const Point other) const
-		{return x == other.x and y == other.y;}
-	bool operator!=(const Point other) const {return not (*this == other);}
+	bool operator==(const Point other) const throw ()
+	{return x == other.x and y == other.y;}
+	bool operator!=(const Point other) const  throw ()
+	{return not (*this == other);}
 
 	Point operator+(const Point other) const
 		{return Point(x + other.x, y + other.y);}
@@ -64,13 +65,15 @@ struct Point {
  * This may not be overflow safe as it could be. If the components of Point had
  * been unsigned, "((a^b)>>1)+(a&b)" would have worked, but they are signed.
  */
-inline Point middle(const Point a, const Point b)
-{return Point((a.x + b.x)>>1, (a.y + b.y)>>1);}
+inline Point middle(const Point a, const Point b) throw ()
+{return Point((a.x + b.x) >> 1, (a.y + b.y) >> 1);}
 
 
 struct Rect : public Point {
-	Rect() {}
-	Rect(const Point p, const uint W, const uint H) : Point(p), w(W), h(H) {}
+	Rect() throw () {}
+	Rect(const Point p, const uint W, const uint H) throw ()
+		: Point(p), w(W), h(H)
+	{}
 	Point bottom_left() const {return *this + Point(w, h);}
 
 	uint w, h;
@@ -83,10 +86,12 @@ struct Rect : public Point {
  * coordinates.
  */
 struct Vertex:public Point {
-	Vertex() : Point (0,0), b(0), tx(0), ty(0) {}
+	Vertex() throw () : Point (0, 0), b(0), tx(0), ty(0) {}
 	Vertex
-	(const int vx, const int vy, const int vb, const int vtx, const int vty) :
-	Point(vx,vy), b(vb), tx(vtx), ty(vty) {}
+		(const int vx, const int vy, const int vb, const int vtx, const int vty)
+		throw ()
+		: Point(vx,vy), b(vb), tx(vtx), ty(vty)
+	{}
 
 	int b, tx, ty;
 };
@@ -126,12 +131,15 @@ typedef Coordinate Y_Coordinate;
  * Structure used to store map coordinates
  */
 struct Coords {
-	Coords() { }
-	Coords(const X_Coordinate nx, const Y_Coordinate ny) : x(nx), y(ny) {}
+	Coords() throw () { }
+	Coords(const X_Coordinate nx, const Y_Coordinate ny) throw ()
+			: x(nx), y(ny)
+	{}
 
-	bool operator==(const Coords other) const
-		{return x == other.x and y == other.y;}
-	bool operator!=(const Coords other) const {return not (*this == other);}
+	bool operator==(const Coords other) const throw ()
+	{return x == other.x and y == other.y;}
+	bool operator!=(const Coords other) const throw ()
+	{return not (*this == other);}
 
 	bool is_valid  () const throw () {return x != -1 and y != -1;}
 	bool is_invalid() const throw () {return x == -1 and y == -1;}
@@ -140,9 +148,8 @@ struct Coords {
 	 * For use with standard containers.
 	 */
 	struct ordering_functor {
-		bool operator()(const Coords a, const Coords b) const {
-			return a.all < b.all;
-		}
+		bool operator()(const Coords a, const Coords b) const throw ()
+		{return a.all < b.all;}
 	};
 
 	union {struct {X_Coordinate x; Y_Coordinate y;}; Uint32 all;};
@@ -150,19 +157,18 @@ struct Coords {
 compile_assert(sizeof(Coords) == 4);
 
 
-class Field;
+struct Field;
 
 struct FCoords : public Coords {
-	FCoords() {}
-	FCoords(const Coords nc, Field * const nf) : Coords(nc), field(nf) {}
-	FCoords(const int nx, const int ny, Field * const nf) :
-	Coords(nx, ny), field(nf) {}
+	FCoords() throw () {}
+	FCoords(const Coords nc, Field * const nf) throw () : Coords(nc), field(nf)
+	{}
 
 	/**
 	 * Used in RenderTargetImpl::rendermap where this is first called, then
 	 * the coordinates are normalized and after that field is set.
 	 */
-	FCoords(const int nx, const int ny) : Coords(nx, ny) {}
+	FCoords(const Coords nc) throw () : Coords(nc) {}
 
 	Field * field;
 };
@@ -171,13 +177,14 @@ struct FCoords : public Coords {
 struct TCoords : public Coords {
 	enum TriangleIndex {D, R, None};
 
-	TCoords() {}
-	TCoords(const Coords C, const TriangleIndex T = None) : Coords(C), t(T)
+	TCoords() throw () {}
+	TCoords(const Coords C, const TriangleIndex T = None) throw ()
+			: Coords(C), t(T)
 	{}
 
-	bool operator==(const TCoords other) const
+	bool operator==(const TCoords other) const throw ()
 	{return Coords::operator==(other) and t == other.t;}
-	bool operator!=(const TCoords other) const
+	bool operator!=(const TCoords other) const throw ()
 	{return Coords::operator!=(other) or  t != other.t;}
 
 	TriangleIndex t;
@@ -185,14 +192,15 @@ struct TCoords : public Coords {
 
 
 struct Node_and_Triangle {
-	Node_and_Triangle() {}
-	Node_and_Triangle(const Coords Node, const TCoords Triangle) :
-	node(Node), triangle(Triangle) {}
+	Node_and_Triangle() throw () {}
+	Node_and_Triangle(const Coords Node, const TCoords Triangle) throw ()
+			: node(Node), triangle(Triangle)
+	{}
 
-	bool operator==(const Node_and_Triangle other) const
-		{return node == other.node and triangle == other.triangle;}
-	bool operator!=(const Node_and_Triangle other) const
-		{return not (*this == other);}
+	bool operator==(const Node_and_Triangle other) const throw ()
+	{return node == other.node and triangle == other.triangle;}
+	bool operator!=(const Node_and_Triangle other) const throw ()
+	{return not (*this == other);}
 
 	Coords node;
 	TCoords triangle;
