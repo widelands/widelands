@@ -2,7 +2,7 @@ import SCons.Builder
 import SCons.Action
 
 def complain_astyle(target, source, env):
-	print 'INFORMATION: astyle binary was not found (see above). Source indenting was not performed.'
+	print 'INFORMATION: Astyle produces malformed indentation (see for example [https://sourceforge.net/tracker/index.php?func=detail&aid=1642489&group_id=2319&atid=102319]) and is disabled whilst waiting for repair. If you really want to use it, execute "cd /usr/bin && ln -s astyle buggy-astyle" and try again.'#astyle binary was not found (see above). Source indenting was not performed.'
 
 def generate(env):
 	env['ASTYLE']=find_astyle(env)
@@ -15,7 +15,7 @@ def generate(env):
 		env['BUILDERS']['astyle']=SCons.Builder.Builder(action=env.Action(complain_astyle))
 
 def find_astyle(env):
-	b=env.WhereIs('astyle')
+	b=env.WhereIs('buggy-astyle')
 	if b==None:
 		print 'WARNING: Could not find astyle. Source indenting will not be performed.'
 	else:

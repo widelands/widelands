@@ -413,7 +413,7 @@ longlines=PhonyTarget("longlines", 'utils/count-longlines.py')
 
 ############### precommit
 
-Alias('precommit', 'indent')
+#Alias('precommit', 'indent')
 Alias('precommit', buildcat)
 Alias('precommit', 'longlines')
 
