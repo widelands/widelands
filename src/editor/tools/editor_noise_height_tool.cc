@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,35 +25,19 @@
 #include "field.h"
 #include "editorinteractive.h"
 
-/*
-=============================
-
-class Editor_Noise_Height_Tool
-
-=============================
-*/
-
-/*
-===========
-Editor_Noise_Height_Tool::handle_click_impl()
-
-sets the height of the current to a random value,
-this decreases the height of the surrounding fields also
-if this is needed.
-===========
-*/
+/// Sets the heights to random values. Chages surrounding nodes if necessary.
 int Editor_Noise_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
 	const int radius = parent.get_sel_radius();
-   int max = 0;
+	uint max = 0;
 	MapRegion mr(map, center.node, radius);
    FCoords fc;
 	while (mr.next(fc))
 		max =
 		std::max
 		(max,
-		 map.set_field_height
+		 map.set_height
 		 (fc,
 		  m_lower_value
 		  +

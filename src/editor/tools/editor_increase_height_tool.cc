@@ -22,28 +22,14 @@
 #include "field.h"
 #include "editorinteractive.h"
 
-/*
-=============================
-
-class Editor_Increase_Height_Tool
-
-=============================
-*/
-
-/*
-===========
-Editor_Increase_Height_Tool::handle_click_impl()
-
-===========
-*/
+/// Increases the heights by a value. Chages surrounding nodes if necessary.
 int Editor_Increase_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
 	const int radius = parent.get_sel_radius();
-	int max = 0;
+	uint max = 0;
 	MapRegion mr(map, center.node, radius);
 	FCoords fc;
-	while (mr.next(fc))
-		max = std::max(max, map.change_field_height(fc, m_change_by));
+	while (mr.next(fc)) max = std::max(max, map.change_height(fc, m_change_by));
 	return radius + max;
 }

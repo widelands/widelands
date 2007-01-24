@@ -2086,47 +2086,29 @@ int Map::change_terrain(const TCoords c, const Terrain_Descr::Index terrain) {
 }
 
 
-/*
-===========
-Map::set_field_height()
-
-sets the field height to an absolut value. This changes the surrounding
-fields are changed as well
-===========
-*/
-int Map::set_field_height(Coords coordinates, int to)
-{
-   Field* m_field=get_field(coordinates);
-   int val=m_field->get_height();
-   int diff=to-val;
-   return change_field_height(coordinates, diff);
+/**
+ * Sets the height to a value. Recalculates brightness. Changes the surrounding
+ * nodes if necessary. Returns the radius that covers all changes that were
+ * made.
+ */
+uint Map::set_height(const FCoords fc, const Uint8 new_value) {
+	assert(new_value <= MAX_FIELD_HEIGHT);
+	fc.field->set_height(new_value);
+	uint radius = 2;
+	check_neighbour_heights(fc, radius);
+	recalc_for_field_area  (fc, radius);
+	return radius;
 }
 
-/*
-===========
-Map::change_field_height()
-
-relativly change field height, recalculate brightness and
-if needed change surrounding fields so that walking is still
-possible
-
-returns the area of fields, that have been changed
-===========
-*/
-int Map::change_field_height(Coords coords, int by)
+/// Changes the height by a value by calling set_height.
+uint Map::change_height(FCoords fc, const Sint16 difference)
 {
-	FCoords coordinates = get_fcoords(coords);
-   int height = coordinates.field->get_height();
-
-   height+=by;
-   coordinates.field->set_height(height);
-   uint radius = 2;
-
-   check_neighbour_heights(coordinates, radius);
-
-   recalc_for_field_area(coordinates, radius);
-
-   return radius;
+	Uint8 height = fc.field->get_height();
+	if (difference < 0 and height < static_cast<const Uint8>(-difference))
+		height = 0;
+	else if (static_cast<const Sint16>(MAX_FIELD_HEIGHT) - difference < static_cast<const Sint16>(height)) height = MAX_FIELD_HEIGHT;
+	else height += difference;
+	return set_height(fc, height);
 }
 
 

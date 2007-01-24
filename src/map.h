@@ -311,9 +311,8 @@ public:
 	 */
 	bool can_reach_by_water(const Coords) const;
 
-   // change field heights
-	int change_field_height(const Coords, const int delta);
-	int set_field_height(const Coords, const int height);
+	uint set_height   (const FCoords, const Uint8  new_value);
+	uint change_height(const FCoords, const Sint16 difference);
 
 	// change terrain of a field, recalculate buildcaps
 	int change_terrain(const TCoords, const Terrain_Descr::Index terrain);
