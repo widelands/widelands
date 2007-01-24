@@ -340,7 +340,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
          case KEY_LALT:
          case KEY_RALT:
          case KEY_MODE:
-			if (tools.use_tool == Editor_Tool::First)
+			if (tools.use_tool != Editor_Tool::First)
 				select_tool(tools.current(), Editor_Tool::First);
             return true;
       }
