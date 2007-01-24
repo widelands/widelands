@@ -307,22 +307,22 @@ void TrainingSite::request_soldier() {
 	// set requirements to match this site
 	int totalmax = 0;
 	int totalmin = 0;
-	if (get_descr()->get_train_attack()) {
+	if (descr().get_train_attack()) {
 		totalmin += get_descr()->get_min_level(atrAttack);
 		totalmax += get_descr()->get_max_level(atrAttack);
 		r->set(atrAttack, get_descr()->get_min_level(atrAttack), get_descr()->get_max_level(atrAttack));
 	}
-	if (get_descr()->get_train_defense()) {
+	if (descr().get_train_defense()) {
 		totalmin += get_descr()->get_min_level(atrDefense);
 		totalmax += get_descr()->get_max_level(atrDefense);
 		r->set(atrDefense, get_descr()->get_min_level(atrDefense), get_descr()->get_max_level(atrDefense));
 	}
-	if (get_descr()->get_train_evade()) {
+	if (descr().get_train_evade()) {
 		totalmin += get_descr()->get_min_level(atrEvade);
 		totalmax += get_descr()->get_max_level(atrEvade);
 		r->set(atrEvade, get_descr()->get_min_level(atrEvade), get_descr()->get_max_level(atrEvade));
 	}
-	if (get_descr()->get_train_hp()) {
+	if (descr().get_train_hp()) {
 		totalmin += get_descr()->get_min_level(atrHP);
 		totalmax += get_descr()->get_max_level(atrHP);
 		r->set(atrHP, get_descr()->get_min_level(atrHP), get_descr()->get_max_level(atrHP));
