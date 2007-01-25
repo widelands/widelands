@@ -131,7 +131,7 @@ typedef Coordinate Y_Coordinate;
  * Structure used to store map coordinates
  */
 struct Coords {
-	Coords() throw () { }
+	Coords() throw () {}
 	Coords(const X_Coordinate nx, const Y_Coordinate ny) throw ()
 			: x(nx), y(ny)
 	{}
@@ -156,6 +156,35 @@ struct Coords {
 };
 compile_assert(sizeof(Coords) == 4);
 
+struct Area : public Coords {
+	Area() throw () {}
+	Area(const Coords center, const uint Radius) throw ()
+		: Coords(center), radius(Radius)
+	{}
+
+	bool operator==(const Area other) const throw ()
+	{return Coords::operator==(other) and radius == other.radius;}
+	bool operator!=(const Area other) const throw ()
+	{return Coords::operator!=(other) or  radius != other.radius;}
+
+	uint radius;
+};
+
+struct HollowArea : public Area {
+	HollowArea(const Area area, const uint Hole_Radius)
+		: Area(area), hole_radius(Hole_Radius)
+	{}
+
+	bool operator==(const HollowArea other) const throw ()
+	{return Area::operator==(other) and hole_radius == other.hole_radius;}
+	bool operator!=(const HollowArea other) const throw ()
+	{return Area::operator!=(other) or  hole_radius != other.hole_radius;}
+
+	bool is_valid() const throw ()
+	{return Coords::is_valid() and hole_radius < radius;}
+
+	uint hole_radius;
+};
 
 struct Field;
 
