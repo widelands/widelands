@@ -324,7 +324,6 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 				 m_conquer_map[0][index] == playernr)
          {
 				fc.field->set_owned_by(playernr);
-            m_conquer_map[0][index] = playernr;
 				player_field_notification (fc, GAIN);
             continue;
          }
