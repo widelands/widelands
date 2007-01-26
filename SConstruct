@@ -186,6 +186,7 @@ DEBUG=0
 PROFILE=0
 OPTIMIZE=0
 SDL_PARACHUTE=1
+STRIP=0
 EFENCE=0
 if env['build']=='debug-no-parachute':
 	DEBUG=1
@@ -211,6 +212,7 @@ if env['build']=='profile':
 
 if env['build']=='release':
 	OPTIMIZE=1
+	STRIP=1
 
 if DEBUG:
 	env.debug=1
@@ -236,6 +238,11 @@ else:
 
 if not SDL_PARACHUTE:
 	env.Append(CCFLAGS='-DNOPARACHUTE')
+
+if STRIP:
+	env.strip=1
+else:
+	env.strip=0
 
 ################################################################################
 

@@ -314,7 +314,6 @@ def do_configure(config_h_file, conf, env):
 		conf.CheckCompilerFlag('-ffast-math', env)
 		conf.CheckCompilerFlag('-funroll-loops', env)
 		conf.CheckCompilerFlag('-O3', env)
-		conf.CheckLinkerFlag('-s', env)
 	else:
 		conf.CheckCompilerFlag('-O0', env)
 
@@ -328,3 +327,5 @@ def do_configure(config_h_file, conf, env):
 		conf.CheckCompilerFlag('-g', env)
 		conf.CheckCompilerFlag('-fmessage-length=0', env)
 
+	if env.strip:
+		conf.CheckLinkerFlag('-s', env)
