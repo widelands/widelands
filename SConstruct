@@ -10,6 +10,7 @@ import string
 import sys
 sys.path.append("build/scons-tools")
 from scons_configure import *
+from Distribute import *
 
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
@@ -51,7 +52,7 @@ def Glob(match):
 
 	return filenames
 
-########################################################################### find $ROOT -name $GLOB
+######################################################### find $ROOT -name $GLOB
 
 def find(root, glob):
 	files=[]
@@ -63,7 +64,7 @@ def find(root, glob):
 			files+=find(file, glob)
 	return files
 
-########################################################################### Create a phony target (not (yet) a feature of scons)
+########################### Create a phony target (not (yet) a feature of scons)
 
 # taken from scons' wiki
 def PhonyTarget(alias, action):
@@ -79,7 +80,7 @@ def PhonyTarget(alias, action):
 	phony_file = normpath(mktemp(prefix="phony_%s_" % alias, dir="."))
 	return Alias(alias, Command(target=phony_file, source=None, action=action))
 
-########################################################################### Functions for setting permissions when installing
+############################## Functions for setting permissions when installing
 # don't forget to set umask
 try:
 	os.umask(022)
@@ -145,7 +146,7 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 env.Tool("ctags", toolpath=['build/scons-tools'])
 env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 env.Tool("astyle", toolpath=['build/scons-tools'])
-env.Tool("disttar", toolpath=['build/scons-tools'])
+env.Tool("Distribute", toolpath=['build/scons-tools'])
 
 ################################################################################
 # Environment setup
@@ -259,9 +260,10 @@ PACKDIR='widelands-'+env['build_id']
 
 ################################################################################
 
-opts.Save('build/scons-config.py',env) #build_id must be saved *before* it might be set to a fixed date
+#build_id must be saved *before* it might be set to a fixed date
+opts.Save('build/scons-config.py',env)
 
-#This is just a default, do not change it here. Use the option 'build_id' instead.
+#This is just a default, don't change it here. Use the option 'build_id' instead
 if (env['build_id']=='') or (env['build_id']=='date'):
 	env['build_id']=time.strftime("%Y.%m.%d-%H%M%S", time.gmtime())
 print 'Build ID:          '+env['build_id']
@@ -276,7 +278,7 @@ env=conf.Finish()
 # Pretty output
 print
 
-########################################################################### Use distcc if available
+######################################################## Use distcc if available
 
 # not finished yet
 #if os.path.exists('/usr/lib/distcc/bin'):
@@ -284,24 +286,30 @@ print
 #	env['ENV']['PATH'] = '/usr/lib/distcc/bin:'+env['ENV']['PATH']
 #	env['ENV']['HOME'] = os.environ['HOME']
 
-############################################################################ Build things
-
-############### Build setup
+################################################################### Build things
 
 SConsignFile('build/scons-signatures')
 BUILDDIR='build/'+TARGET+'-'+env['build']
 Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 
-############### buildcat
+####################################################################### buildcat
 
 buildcat=SConscript('locale/SConscript')
 
-############### The binary
+##################################################################### The binary
 
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 Default(thebinary)
 
-############### tags
+####################################################################### the rest
+
+SConscript('build/SConscript')
+SConscript('campaigns/SConscript')
+SConscript('doc/SConscript')
+SConscript('maps/SConscript')
+SConscript('utils/SConscript')
+
+########################################################################### tags
 
 S=find('src', '*.h')
 S+=find('src', '*.cc')
@@ -309,7 +317,7 @@ Alias('tags', env.ctags(source=S, target='tags'))
 if env['build'] == 'release':
 	Default('tags')
 
-############### PNG shrinking
+################################################################## PNG shrinking
 
 # findfiles takes quite long, so don't execute it if it's unneccessary
 if ('shrink' in BUILD_TARGETS):
@@ -317,7 +325,7 @@ if ('shrink' in BUILD_TARGETS):
 	shrink=env.PNGShrink(find('.', '*.png'))
 	Alias("shrink", shrink)
 
-############### Install and uninstall
+########################################################## Install and uninstall
 
 INSTDIRS=[
 	'campaigns',
@@ -367,64 +375,45 @@ def do_uninst(target, source, env):
 install=PhonyTarget("install", do_inst)
 uninstall=PhonyTarget("uninstall", do_uninst)
 
-############### Distribute
+##################################################################### Distribute
 
-DISTFILES=[
-	'ChangeLog',
-	'COPYING',
-	'CREDITS',
-	'Doxyfile',
-	'Makefile',
-	'README-compiling.txt',
-	'README.developers',
-	'SConstruct',
-	'build-widelands.sh',
-	'build/build1.sh',
-	'build/build.txt',
-	'build/build-with-cross.sh',
-	'build/debian-crossbuild',
-	'build/scons-config.py',
-	env.Dir('build/scons-tools'),
-	env.Dir('build/win32'),
-	'build/win32-vctoolkit.bat',
-	env.Dir('campaigns'),
-	env.Dir('doc'),
-	env.Dir('fonts'),
-	env.Dir('game_server'),
-	env.Dir('locale'),
-	env.Dir('macos'),
-	env.Dir('maps'),
-	env.Dir('music'),
-	env.Dir('pics'),
-	env.Dir('sound'),
-	env.Dir('src'),
-	env.Dir('tribes'),
-	env.Dir('txts'),
-	env.Dir('utils'),
-	env.Dir('worlds'),
-	]
-env['DISTTAR_FORMAT']='bz2'
-env.Append(
-        DISTTAR_EXCLUDEEXTS=['.o','.so','.a','.dll','.cache','.pyc','.cvsignore','.dblite','.log'],
-	DISTTAR_EXCLUDEDIRS=['CVS','.svn','sourcecode']
-	)
+distadd(env, 'ChangeLog')
+distadd(env, 'COPYING')
+distadd(env, 'CREDITS')
+distadd(env, 'Doxyfile')
+distadd(env, 'Makefile')
+distadd(env, 'README-compiling.txt')
+distadd(env, 'README.developers')
+distadd(env, 'SConstruct')
+distadd(env, 'build-widelands.sh')
+distadd(env, 'fonts')
+distadd(env, 'game_server')
+distadd(env, 'locale')
+distadd(env, 'macos')
+distadd(env, 'music')
+distadd(env, 'pics')
+distadd(env, 'sound')
+distadd(env, 'src')
+distadd(env, 'tribes')
+distadd(env, 'txts')
+distadd(env, 'utils')
+distadd(env, 'worlds')
 
-if 'dist' in BUILD_TARGETS:
-	print "Assembling file list for distribution tarball..."
-	dist=env.DistTar('widelands-'+env['build_id']+'.tar.bz2', DISTFILES)
-	Alias("dist", dist)
+dist=env.DistPackage('widelands.tar.bz2', '')
+Alias('dist', dist)
+AlwaysBuild(dist)
 
-############### longlines
+###################################################################### longlines
 
 longlines=PhonyTarget("longlines", 'utils/count-longlines.py')
 
-############### precommit
+###################################################################### precommit
 
 #Alias('precommit', 'indent')
 Alias('precommit', buildcat)
 Alias('precommit', 'longlines')
 
-############### Documentation
+################################################################## Documentation
 
 PhonyTarget('doc', 'doxygen Doxyfile')
 

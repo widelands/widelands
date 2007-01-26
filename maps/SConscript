@@ -1,0 +1,5 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'maps/SConscript')
+distadd(env, 'maps/*.wmf', True)
