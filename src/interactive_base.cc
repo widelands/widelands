@@ -139,7 +139,7 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 		while (mtr.next(tc)) overlay_manager.register_overlay
 			(tc, m_sel.pic, 7, Point::invalid(), jobid);
 	} else {
-		MapRegion mr(map, center.node, m_sel.radius);
+		MapRegion mr(map, Area(center.node, m_sel.radius));
 		FCoords fc;
 		while (mr.next(fc)) overlay_manager.register_overlay
 			(fc, m_sel.pic, 7, Point::invalid(), jobid);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,8 @@
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
  */
-class Trigger_Null : public Trigger {
-   public:
+struct Trigger_Null : public Trigger {
       Trigger_Null();
-      ~Trigger_Null();
 
       // one liner functions
 	const char * get_id() const {return "null";}
@@ -43,9 +41,9 @@ class Trigger_Null : public Trigger {
 
       void set_trigger_manually(bool t) { m_should_toggle=true; m_value=t; }
 
-   private:
-      bool m_should_toggle;
-      bool m_value;
+private:
+	bool m_should_toggle;
+	bool m_value;
 };
 
 #endif

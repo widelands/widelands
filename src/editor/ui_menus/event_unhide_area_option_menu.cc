@@ -35,13 +35,9 @@
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive* parent, Event_Unhide_Area* event) :
 UI::Window(parent, 0, 0, 180, 280, _("Unhide Area Event Options").c_str()),
 m_event   (event),
-m_parent  (parent)
+m_parent     (parent),
+m_player_area(event->m_player_area)
 {
-   Coords pt=event->get_coords();
-   m_x=pt.x;
-   m_y=pt.y;
-   m_area=m_event->get_area();
-   m_player=m_event->get_player();
    const int offsx=5;
    const int offsy=25;
    int spacing=5;
@@ -52,7 +48,7 @@ m_parent  (parent)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( event->get_name() );
+	m_name->set_text(event->name().c_str());
    posy+=20+spacing;
 
    // Set Field Buttons
@@ -269,38 +265,36 @@ bool Event_Unhide_Area_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 void Event_Unhide_Area_Option_Menu::clicked_ok() {
 	if(m_name->get_text()) m_event->set_name(m_name->get_text());
-	m_event->set_coords(Coords(m_x,m_y));
-	m_event->set_player(m_player);
-	m_event->set_area(m_area);
+	m_event->m_player_area = m_player_area;
 	end_modal(1);
 }
 
 
 void Event_Unhide_Area_Option_Menu::clicked(int i) {
-   switch(i) {
-      case 3: m_x+=100; break;
-      case 4: m_x-=100; break;
-      case 5: m_x+=10; break;
-      case 6: m_x-=10; break;
-      case 7: m_x+=1; break;
-      case 8: m_x-=1; break;
-      case 9: m_y+=100; break;
-      case 10: m_y-=100; break;
-      case 11: m_y+=10; break;
-      case 12: m_y-=10; break;
-      case 13: m_y+=1; break;
-      case 14: m_y-=1; break;
+	switch (i) {
+	case  3: m_player_area.x      += 100; break;
+	case  4: m_player_area.x      -= 100; break;
+	case  5: m_player_area.x      +=  10; break;
+	case  6: m_player_area.x      -=  10; break;
+	case  7: m_player_area.x      +=   1; break;
+	case  8: m_player_area.x      -=   1; break;
+	case  9: m_player_area.y      += 100; break;
+	case 10: m_player_area.y      -= 100; break;
+	case 11: m_player_area.y      +=  10; break;
+	case 12: m_player_area.y      -=  10; break;
+	case 13: m_player_area.y      +=   1; break;
+	case 14: m_player_area.y      -=   1; break;
 
-      case 15: m_player++; break;
-      case 16: m_player--; break;
+	case 15: ++m_player_area.player_number; break;
+	case 16: --m_player_area.player_number; break;
 
-      case 17: m_area+=100; break;
-      case 18: m_area-=100; break;
-      case 19: m_area+=10; break;
-      case 20: m_area-=10; break;
-      case 21: m_area+=1; break;
-      case 22: m_area-=1; break;
-   }
+	case 17: m_player_area.radius += 100; break;
+	case 18: m_player_area.radius -= 100; break;
+	case 19: m_player_area.radius +=  10; break;
+	case 20: m_player_area.radius -=  10; break;
+	case 21: m_player_area.radius +=   1; break;
+	case 22: m_player_area.radius -=   1; break;
+	}
    update();
 }
 
@@ -308,29 +302,32 @@ void Event_Unhide_Area_Option_Menu::clicked(int i) {
  * update function: update all UI elements
  */
 void Event_Unhide_Area_Option_Menu::update(void) {
-   if(m_x<0) m_x=0;
-   if(m_y<0) m_y=0;
+	if (m_player_area.x < 0) m_player_area.x = 0;
+	if (m_player_area.y < 0) m_player_area.y = 0;
 	const Map & map = m_parent->egbase().map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
-	if (m_x >= static_cast<const int>(mapwidth))  m_x = mapwidth  - 1;
-	if (m_y >= static_cast<const int>(mapheight)) m_y = mapheight - 1;
+	if (m_player_area.x >= static_cast<const int>(mapwidth))
+		m_player_area.x = mapwidth  - 1;
+	if (m_player_area.y >= static_cast<const int>(mapheight))
+		m_player_area.y = mapheight - 1;
 
-   if(m_player<=0) m_player=1;
+	if (m_player_area.player_number < 1) m_player_area.player_number = 1;
 	const Player_Number nr_players = map.get_nrplayers();
-	if (m_player > nr_players) m_player = nr_players;
+	if (nr_players < m_player_area.player_number)
+		m_player_area.player_number = nr_players;
 
-   if(m_area<1) m_area=1;
+	if (m_player_area.radius < 1) m_player_area.radius = 1;
 
    char buf[200];
-   sprintf(buf, "%i", m_x);
+	sprintf(buf, "%i", m_player_area.x);
    m_x_ta->set_text(buf);
-   sprintf(buf, "%i", m_y);
+	sprintf(buf, "%i", m_player_area.y);
    m_y_ta->set_text(buf);
 
-   sprintf(buf, "%i", m_player);
+	sprintf(buf, "%i", m_player_area.player_number);
    m_player_ta->set_text(buf);
 
-   sprintf(buf, "%i", m_area);
+	sprintf(buf, "%i", m_player_area.radius);
    m_area_ta->set_text(buf);
 }

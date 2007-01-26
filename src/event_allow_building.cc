@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,7 @@ static const int EVENT_VERSION = 1;
 /*
  * Init and cleanup
  */
-Event_Allow_Building::Event_Allow_Building(void) {
-	set_name(_("Allow Building").c_str());
+Event_Allow_Building::Event_Allow_Building() : Event(_("Allow Building")) {
    set_player(0);
    set_building("<undefined>");
    set_allow(true);

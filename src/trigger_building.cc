@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +18,6 @@
  */
 
 #include "building.h"
-#include "editor_game_base.h"
 #include "editorinteractive.h"
 #include "error.h"
 #include "filesystem.h"
@@ -26,6 +25,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "map_variable_manager.h"
+#include "player.h"
 #include "profile.h"
 #include "trigger_building.h"
 #include "util.h"
@@ -33,52 +33,42 @@
 
 static const int TRIGGER_VERSION = 2;
 
-/*
- * Init and cleanup
- */
-Trigger_Building::Trigger_Building(void) {
-	set_name(_("Building Trigger").c_str());
-   set_trigger(false);
-   m_count=-1;
-   m_area=-1;
-   m_pt.x=0;
-   m_pt.y=0;
-   m_player=-1;
-   m_building=_("<unset>");
-}
+Trigger_Building::Trigger_Building()
+:
+Trigger      (_("Building Trigger")),
+m_player_area(0, Area(Coords(0, 0), 0)),
+m_building   (_("<unset>")),
+m_count      (0)
+{set_trigger(false);}
 
-Trigger_Building::~Trigger_Building(void) {
-}
+Trigger_Building::~Trigger_Building() {}
 
-/*
- * File Read, File Write
- */
 void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
-	const int version= s->get_safe_int("version");
-
-	if (1 <= version and version <= TRIGGER_VERSION) {
-		m_pt =
-			version == 1
-			?
-			Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
-			:
-			s->get_safe_Coords("point");
-      set_area( s->get_safe_int( "area" ));
-      int player = s->get_safe_int( "player" );
-      set_player(player);
-		egbase->get_iabase()->reference_player_tribe(player, this);
+	const int trigger_version= s->get_safe_int("version");
+	if (1 <= trigger_version and trigger_version <= TRIGGER_VERSION) {
+		m_player_area = Player_Area
+			(s->get_safe_int("player"),
+			 Area
+			 (trigger_version == 1
+			  ?
+			  Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
+			  :
+			  s->get_safe_Coords("point"),
+			  s->get_safe_int("area")));
+		egbase->get_iabase()
+			->reference_player_tribe(m_player_area.player_number, this);
       set_building_count( s->get_int( "count" ));
       set_building( s->get_safe_string( "building" ));
-      return;
-   }
-   throw wexception("Building Trigger with unknown/unhandled version %i in map!\n", version);
+	} else throw wexception
+		("Building Trigger with unknown/unhandled version %i in map!\n",
+		 trigger_version);
 }
 
 void Trigger_Building::Write(Section & s) const {
 	s.set_int   ("version",  TRIGGER_VERSION);
-	s.set_Coords("point",    m_pt);
-	s.set_int   ("area",     get_area());
-	s.set_int   ("player",   get_player());
+	s.set_Coords("point",    m_player_area);
+	s.set_int   ("area",     m_player_area.radius);
+	s.set_int   ("player",   m_player_area.player_number);
 	s.set_int   ("count",    get_building_count());
 	s.set_string("building", m_building.c_str());
 }
@@ -89,32 +79,34 @@ void Trigger_Building::Write(Section & s) const {
 void Trigger_Building::check_set_conditions(Game* game) {
 	const Map & map = game->map();
 	if
-		(m_pt.x < 0 or m_pt.x >= map.get_width ()
+		(m_player_area.x < 0 or map.get_width () <= m_player_area.x
 		 or
-		 m_pt.y < 0 or m_pt.y >= map.get_height()
+		 m_player_area.y < 0 or map.get_height() <= m_player_area.y
 		 or
-		 m_player <= 0 or m_player > MAX_PLAYERS)
+		 m_player_area.player_number <= 0
+		 or
+		 map.get_nrplayers() < m_player_area.player_number)
 		return;
 
 
-   int count=0;
-	MapRegion mr(game->map(), m_pt, m_area);
+	uint count = 0;
+	MapRegion mr(game->map(), m_player_area);
 	FCoords fc;
 	while (mr.next(fc)) if
-		(const Building * const b =
+		(const Building * const building =
 		 dynamic_cast<const Building * const>(fc.field->get_immovable()))
 	{
-
-      if(b->get_owner()!=game->get_player(m_player)) continue;
-      std::string name=b->get_name();
-      if(name != m_building) continue;
-      ++count;
-   }
+		if
+			(building->owner().get_player_number() == m_player_area.player_number
+			 and
+			 building->name() == m_building)
+			++count;
+	}
 
    if(count>=m_count) set_trigger(true);
 
    // Set MapVariable inttemp
-	MapVariableManager & mvm = game->get_map()->get_mvm();
+	MapVariableManager & mvm = game->map().get_mvm();
 	Int_MapVariable * inttemp = mvm.get_int_variable("inttemp");
    if( !inttemp ) {
       inttemp = new Int_MapVariable( false );

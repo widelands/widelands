@@ -37,7 +37,7 @@ int Editor_Place_Immovable_Tool::handle_click_impl
 {
 	const int radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
 	FCoords fc;
 	Editor & editor = parent.editor();
 	while (mr.next(fc)) {

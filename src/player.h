@@ -98,7 +98,7 @@ class Player {
 
 	void set_field_seen(const Map::Index i, const bool seen) throw ()
 	{seen_fields[i] = seen;}
-		void set_area_seen(Coords c, uint area, bool on);
+	void set_area_seen(const Area, const bool on);
 
       // Allowed buildings
 	bool is_building_allowed(const Building_Descr::Index i) const throw ()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,9 @@
 #ifndef __S__TRIGGER_BUILDING_OPTION_MENU_H
 #define __S__TRIGGER_BUILDING_OPTION_MENU_H
 
+#include "player_area.h"
+#include "building.h"
+
 #include <string>
 #include <vector>
 #include "ui_window.h"
@@ -37,7 +40,6 @@ struct Textarea;
  */
 struct Trigger_Building_Option_Menu : public UI::Window {
       Trigger_Building_Option_Menu(Editor_Interactive*, Trigger_Building*);
-      ~Trigger_Building_Option_Menu();
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
@@ -51,7 +53,9 @@ struct Trigger_Building_Option_Menu : public UI::Window {
       Editor_Interactive* m_parent;
       UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta, *m_count_ta, *m_building_ta;
       UI::Edit_Box* m_name;
-      int         m_x, m_y, m_player, m_area, m_count, m_building;
+	Player_Area m_player_area;
+	uint m_count;
+	Building_Descr::Index m_building;
       std::vector<std::string> m_buildings;
 };
 

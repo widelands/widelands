@@ -852,10 +852,11 @@ The mouse pointer has moved to the icon for the building with the index idx.
 */
 void FieldActionWindow::building_icon_mouse_in(long idx) {
 	if (m_iabase->m_show_workarea_preview) {
+		assert(m_workarea_preview_job_id.isNull());
+		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
+		HollowArea hollow_area = HollowArea(Area(m_field, 0), 0);
 		const Workarea_Info & workarea_info =
 			m_plr->get_tribe()->get_building_descr(idx)->m_recursive_workarea_info;
-		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
-		unsigned int hole_radius = 0;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =
@@ -864,9 +865,8 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 			 ++it)
 		{
 			--i;
-			const unsigned int radius = it->first;
-			MapHollowRegion workarea
-				= MapHollowRegion(*m_map, m_field, radius, hole_radius);
+			hollow_area.radius = it->first;
+			MapHollowRegion workarea = MapHollowRegion(*m_map, hollow_area);
 			Coords c;
 			while (workarea.next(c)) {
 				m_overlay_manager.register_overlay
@@ -876,7 +876,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 					 Point::invalid(),
 					 m_workarea_preview_job_id);
 			}
-			hole_radius = radius;
+			hollow_area.hole_radius = hollow_area.radius;
 		}
 
 #if 0

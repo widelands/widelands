@@ -134,11 +134,10 @@ Player::set_area_seen
 Mark the given area as (un)seen
 ===============
 */
-void Player::set_area_seen(Coords center, uint area, bool on)
-{
+void Player::set_area_seen(const Area area, const bool on) {
 	const Map & map = egbase().map();
-	const uint mapwidth = map.get_width();
-	MapRegion mr(map, center, area);
+	const X_Coordinate mapwidth = map.get_width();
+	MapRegion mr(map, area);
 	FCoords fc;
 	while (mr.next(fc)) set_field_seen(Map::get_index(fc, mapwidth), on);
 

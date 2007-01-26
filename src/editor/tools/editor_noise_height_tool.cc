@@ -31,7 +31,7 @@ int Editor_Noise_Height_Tool::handle_click_impl
 {
 	const int radius = parent.get_sel_radius();
 	uint max = 0;
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
    FCoords fc;
 	while (mr.next(fc))
 		max =

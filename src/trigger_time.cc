@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,19 +30,12 @@ static const int TRIGGER_VERSION = 1;
 /*
  * Init and cleanup
  */
-Trigger_Time::Trigger_Time(void) {
-   m_last_start_time=0;
-   m_wait_time=60; // defaults to one minute
-   set_name(_("Time Trigger").c_str());
-   set_trigger(false);
-}
+Trigger_Time::Trigger_Time()
+: Trigger(_("Time Trigger")), m_wait_time(60), m_last_start_time(0)
+ // defaults to one minute
+{set_trigger(false);}
 
-Trigger_Time::~Trigger_Time(void) {
-}
 
-/*
- * File Read, File Write
- */
 void Trigger_Time::Read(Section* s, Editor_Game_Base* ) {
    int version= s->get_safe_int( "version" );
 

@@ -48,7 +48,7 @@ int Editor_Decrease_Resources_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
 	const int radius = parent.get_sel_radius();
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
 	FCoords fc;
 	while (mr.next(fc)) {
 		int res    =fc.field->get_resources();
@@ -80,7 +80,7 @@ int Editor_Decrease_Resources_Tool::handle_click_impl
 				str = map.world().get_resource(m_cur_res)->get_editor_pic(amount);
             picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
 				map.get_overlay_manager()->register_overlay(fc, picid, 4);
-				map.recalc_for_field_area(fc, 0);
+	         map.recalc_for_field_area(Area(fc, 0));
          }
       }
    }

@@ -802,12 +802,11 @@ void Building_Window::toggle_workarea() {
 		static_cast<Interactive_Player * const>(get_parent())->egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id.isNull()) {
-		const Coords position = m_building->get_position();
 		m_workarea_job_id = overlay_manager.get_a_job_id();
+		HollowArea hollow_area =
+			HollowArea(Area(m_building->get_position(), 0), 0);
 		const Workarea_Info & workarea_info =
 			m_building->descr().m_recursive_workarea_info;
-		m_workarea_job_id = overlay_manager.get_a_job_id();
-		unsigned int hole_radius = 0;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =
@@ -816,9 +815,8 @@ void Building_Window::toggle_workarea() {
 			 ++it)
 		{
 			--i;
-			const unsigned int radius = it->first;
-			MapHollowRegion workarea
-				= MapHollowRegion(map, position, radius, hole_radius);
+			hollow_area.radius = it->first;
+			MapHollowRegion workarea = MapHollowRegion(map, hollow_area);
 			Coords c;
 			while (workarea.next(c)) overlay_manager.register_overlay
 				(c,
@@ -826,7 +824,7 @@ void Building_Window::toggle_workarea() {
 				 0,
 				 Point::invalid(),
 				 m_workarea_job_id);
-			hole_radius = radius;
+			hollow_area.hole_radius = hollow_area.radius;
 		}
 		m_toggle_workarea->set_tooltip(_("Hide workarea").c_str());
 	} else {

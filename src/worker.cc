@@ -291,7 +291,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    uint totalchance = 0;
    int pick;
 	{
-		MapRegion mr(map, get_position(), action->iparam1);
+		MapRegion mr(map, Area(get_position(), action->iparam1));
 		FCoords fc;
 		while (mr.next(fc)) {
 			uchar fres  = fc.field->get_resources();
@@ -328,7 +328,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    pick = g->logic_rand() % totalchance;
 
 	{
-		MapRegion mr(map, get_position(), action->iparam1);
+		MapRegion mr(map, Area(get_position(), action->iparam1));
 		FCoords fc;
 		while (mr.next(fc)) {
 			uchar fres  = fc.field->get_resources();

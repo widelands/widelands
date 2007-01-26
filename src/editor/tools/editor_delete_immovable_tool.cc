@@ -43,7 +43,7 @@ int Editor_Delete_Immovable_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
 	const int radius = parent.get_sel_radius();
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
    FCoords fc;
 	while (mr.next(fc))
 		if (BaseImmovable * const mim = fc.field->get_immovable()) {

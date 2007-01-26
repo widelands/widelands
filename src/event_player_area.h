@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,19 +17,25 @@
  *
  */
 
-#include "editor_increase_height_tool.h"
-#include "map.h"
-#include "field.h"
-#include "editorinteractive.h"
+#ifndef __S__EVENT_PLAYER_AREA_H
+#define __S__EVENT_PLAYER_AREA_H
 
-/// Increases the heights by a value. Chages surrounding nodes if necessary.
-int Editor_Increase_Height_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
-{
-	const int radius = parent.get_sel_radius();
-	uint max = 0;
-	MapRegion mr(map, Area(center.node, radius));
-	FCoords fc;
-	while (mr.next(fc)) max = std::max(max, map.change_height(fc, m_change_by));
-	return radius + max;
-}
+#include "event.h"
+#include "player_area.h"
+
+///  Abstract base for events involving a player and an area.
+struct Event_Player_Area : public Event {
+	Event_Player_Area(const std::string & Name, const Player_Area player_area)
+		: Event(Name), m_player_area(player_area)
+	{}
+
+	virtual void reinitialize(Game *);
+
+	void Write(Section &, const Editor_Game_Base &) const;
+	void Read (Section *,       Editor_Game_Base *);
+
+protected:
+	Player_Area m_player_area;
+};
+
+#endif

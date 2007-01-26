@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,20 +34,17 @@ class EventReferencer;
 /*
  * Event is a in game event of some kind
  */
-class Event {
+struct Event {
    friend class Widelands_Map_Event_Data_Packet;
 
-   public:
       enum State {
          INIT,
          RUNNING,
          DONE
       };
 
-   public:
-      Event(void) {
-         m_state = INIT;
-      };
+	Event(const std::string & Name = std::string()) : m_state(INIT), m_name(Name)
+	{}
       virtual ~Event(void) { };
 
       // virtual functions, implemented by the real events
@@ -56,8 +53,9 @@ class Event {
 	virtual const char * get_id() const = 0; // this function is needed to recreate the correct option window
 
       // Functions needed by all
-      void set_name(const char* name) { m_name = name; }
-	const char * get_name() const {return m_name.c_str();}
+	void set_name(const std::string & new_name) {m_name = new_name;}
+	const std::string & name() const throw () {return m_name;}
+	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
 
       // File functions, to save or load this event
 	virtual void Write(Section &, const Editor_Game_Base &) const = 0;
@@ -72,12 +70,12 @@ class Event {
 
       inline State get_state( void ) { return m_state; }
 
-   protected:
+protected:
       State        m_state;
 
-   private:
+private:
       std::string                m_name;
 	EventReferencerMap m_referencers;
- };
+};
 
 #endif

@@ -159,16 +159,15 @@ This performs the steps outlined in the comment above Map::recalc_brightness()
 and recalcs the interactive player's overlay.
 ===============
 */
-void Map::recalc_for_field_area(Coords coords, int radius)
-{
-	assert(0 <= coords.x);
-	assert(coords.x < m_width);
-	assert(0 <= coords.y);
-	assert(coords.y < m_height);
+void Map::recalc_for_field_area(const Area area) {
+	assert(0 <= area.x);
+	assert(area.x < m_width);
+	assert(0 <= area.y);
+	assert(area.y < m_height);
    assert(m_overlay_manager);
 
 	{ //  First pass.
-		MapRegion mr(*this, coords, radius + 2);
+		MapRegion mr(*this, area);
 		FCoords fc;
 		while (mr.next(fc)) {
 			recalc_brightness     (fc);
@@ -178,13 +177,13 @@ void Map::recalc_for_field_area(Coords coords, int radius)
 	}
 
 	{ //  Second pass.
-		MapRegion mr(*this, coords, radius + 2);
+		MapRegion mr(*this, area);
 		FCoords fc;
 		while (mr.next(fc)) recalc_fieldcaps_pass2(fc);
 	}
 
 	{ //  Now only recaluclate the overlays.
-		MapRegion mr(*this, coords, radius + 2);
+		MapRegion mr(*this, area);
 		FCoords fc;
 		Overlay_Manager & om = overlay_manager();
 		while (mr.next(fc)) om.recalc_field_overlays(fc);
@@ -682,7 +681,7 @@ template<typename functorT>
 void Map::find_radius
 (const Coords coord, const uint radius, functorT & functor) const
 {
-	MapRegion mr(*this, coord, radius);
+	MapRegion mr(*this, Area(coord, radius));
 	FCoords fc;
 	while (mr.next(fc)) functor(*this, fc);
 }
@@ -2080,27 +2079,23 @@ returns the radius of changes (which are always 2)
 */
 int Map::change_terrain(const TCoords c, const Terrain_Descr::Index terrain) {
 	get_field(c)->set_terrain(c.t, *get_world()->get_terrain(terrain));
-   recalc_for_field_area(c,2);
+	recalc_for_field_area(Area(c, 2));
 
    return 2;
 }
 
 
-/**
- * Sets the height to a value. Recalculates brightness. Changes the surrounding
- * nodes if necessary. Returns the radius that covers all changes that were
- * made.
- */
 uint Map::set_height(const FCoords fc, const Uint8 new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
+	assert(m_fields <= fc.field);
+	assert            (fc.field < m_fields + max_index());
 	fc.field->set_height(new_value);
 	uint radius = 2;
 	check_neighbour_heights(fc, radius);
-	recalc_for_field_area  (fc, radius);
+	recalc_for_field_area(Area(fc, radius));
 	return radius;
 }
 
-/// Changes the height by a value by calling set_height.
 uint Map::change_height(FCoords fc, const Sint16 difference)
 {
 	Uint8 height = fc.field->get_height();
@@ -2109,6 +2104,24 @@ uint Map::change_height(FCoords fc, const Sint16 difference)
 	else if (static_cast<const Sint16>(MAX_FIELD_HEIGHT) - difference < static_cast<const Sint16>(height)) height = MAX_FIELD_HEIGHT;
 	else height += difference;
 	return set_height(fc, height);
+}
+
+uint Map::set_height(const Area area, const Uint8 new_value) {
+	assert(new_value <= MAX_FIELD_HEIGHT);
+	{
+		MapRegion mr(*this, area);
+		FCoords fc;
+		while (mr.next(fc)) fc.field->set_height(new_value);
+	}
+	uint radius = area.radius + 2;
+	{//  Adjust the nodes along the edges of the area.
+		MapHollowRegion mr(*this, HollowArea(area, area.radius - 1));
+		Coords c;
+		while (mr.next(c))
+			check_neighbour_heights(FCoords(c, get_field(c)), radius);
+	}
+	recalc_for_field_area(Area(area, radius));
+	return radius;
 }
 
 
@@ -2124,6 +2137,9 @@ The radius of modified fields is stored in *area.
 */
 void Map::check_neighbour_heights(FCoords coords, uint & area)
 {
+	assert(m_fields <= coords.field);
+	assert            (coords.field < m_fields + max_index());
+
    int height = coords.field->get_height();
    bool check[6] = { false, false, false, false, false, false };
 
@@ -2644,24 +2660,16 @@ void CoordPath::append(const CoordPath &tail)
 }
 
 
-/*
-==============================================================================
-
-MapRegion IMPLEMENTATION
-
-==============================================================================
-*/
-
-MapRegion::MapRegion(const Map & map, Coords coords, const Uint16 radius) :
+MapRegion::MapRegion(const Map & map, const Area area) :
 m_map     (map),
 m_phase   (phaseUpper),
-m_radius  (radius),
+m_radius  (area.radius),
 m_row     (0),
-m_rowwidth(radius + 1),
+m_rowwidth(area.radius + 1),
 m_rowpos  (0),
-m_left    (map.get_fcoords(coords))
+m_left    (map.get_fcoords(area))
 {
-	for (Uint16 i = 0; i < radius; ++i) map.get_tln(m_left, &m_left);
+	for (Uint16 i = 0; i < area.radius; ++i) map.get_tln(m_left, &m_left);
 
 	m_next = m_left;
 }
@@ -2737,16 +2745,20 @@ MapHollowRegion::MapHollowRegion
 Initialize the hollow region.
 ===============
 */
-MapHollowRegion::MapHollowRegion
-(Map & map, const Coords center,
- const unsigned int radius, const unsigned int hole_radius) :
-	m_map(map), m_phase(Top), m_radius(radius), m_hole_radius(hole_radius),
-	m_delta_radius(radius - hole_radius),
-	m_row(0), m_rowwidth(radius + 1), m_rowpos(0)
+MapHollowRegion::MapHollowRegion(Map & map, const HollowArea hollow_area)
+:
+m_map         (map),
+m_phase       (Top),
+m_radius      (hollow_area.radius),
+m_hole_radius (hollow_area.hole_radius),
+m_delta_radius(hollow_area.radius - hollow_area.hole_radius),
+m_row         (0),
+m_rowwidth    (hollow_area.radius + 1),
+m_rowpos      (0)
 {
-	assert(hole_radius < radius);
-	Coords first = center;
-	for(unsigned int i = 0; i < radius; ++i) map.get_tln(first, &first);
+	assert(hollow_area.hole_radius < hollow_area.radius);
+	Coords first = hollow_area;
+	for (uint i = 0; i < hollow_area.radius; ++i) map.get_tln(first, &first);
 	m_left = first;
 	m_next = first;
 }

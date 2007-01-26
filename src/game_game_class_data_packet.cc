@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,9 +42,9 @@ throw (_wexception)
    fr.Open( fs, "binary/game_class" );
 
    // read packet version
-   int packet_version=fr.Unsigned16();
+	const Uint16 packet_version = fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+	if (packet_version == CURRENT_PACKET_VERSION) {
       // Can't load netgames
       game->m_netgame=0;
 
@@ -53,19 +53,22 @@ throw (_wexception)
 
       game->m_gametime=fr.Unsigned32();
 
-      game->m_conquer_info.resize(fr.Unsigned16());
-      for(uint i=0; i<game->m_conquer_info.size(); i++) {
-         game->m_conquer_info[i].player = fr.Unsigned8();
-         game->m_conquer_info[i].middle_point.x = fr.Unsigned16();
-         game->m_conquer_info[i].middle_point.y = fr.Unsigned16();
-         game->m_conquer_info[i].area = fr.Unsigned16();
-      }
-      // DONE
-      return;
-   } else
-      throw wexception("Unknown version in Game_Game_Class_Data_Packet: %i\n", packet_version);
-
-   assert(0); // never here
+		std::vector<Player_Area> & conquer_info = game->m_conquer_info;
+		conquer_info.resize(fr.Unsigned16());
+		const std::vector<Player_Area>::const_iterator conquer_info_end =
+			conquer_info.end();
+		for
+			(std::vector<Player_Area>::iterator it = conquer_info.begin();
+			 it != conquer_info_end;
+			 ++it)
+		{
+			it->player_number = fr.Unsigned8 ();
+			it->x             = fr.Unsigned16();
+			it->y             = fr.Unsigned16();
+			it->radius        = fr.Unsigned16();
+		}
+   } else throw wexception
+	   ("Unknown version in Game_Game_Class_Data_Packet: %u\n", packet_version);
 }
 
 /*
@@ -111,12 +114,26 @@ throw (_wexception)
    // Track pointers are not saved in save games
 
    // Conquer info
+	const std::vector<Player_Area> & conquer_info = game->m_conquer_info;
    fw.Unsigned16(game->m_conquer_info.size());
-   for(uint i=0; i<game->m_conquer_info.size(); i++) {
-      fw.Unsigned8(game->m_conquer_info[i].player);
-      fw.Unsigned16(game->m_conquer_info[i].middle_point.x);
-      fw.Unsigned16(game->m_conquer_info[i].middle_point.y);
-      fw.Unsigned16(game->m_conquer_info[i].area);
+	const std::vector<Player_Area>::const_iterator conquer_info_end =
+		conquer_info.end();
+	for
+		(std::vector<Player_Area>::const_iterator it = conquer_info.begin();
+		 it != conquer_info_end;
+		 ++it)
+	{
+		fw.Unsigned8 (it->player_number);
+		assert(0 <= it->x);
+		fw.Unsigned16(it->x);
+		assert(0 <= it->y);
+		fw.Unsigned16(it->y);
+		assert
+			(it->radius
+			 <=
+			 static_cast<const typeof(it->radius)>
+			 (std::numeric_limits<Uint16>::max()));
+		fw.Unsigned16(it->radius);
    }
 
    fw.Write( fs, "binary/game_class" );

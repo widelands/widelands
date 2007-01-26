@@ -27,22 +27,11 @@
 
 static const int TRIGGER_VERSION = 1;
 
-/*
- * Init and cleanup
- */
-Trigger_Null::Trigger_Null(void) {
-	set_name(_("Null Trigger").c_str());
-   set_trigger(false);
+Trigger_Null::Trigger_Null()
+: Trigger(_("Null Trigger")), m_should_toggle(false), m_value(false)
+{set_trigger(false);}
 
-   m_value=m_should_toggle=false;
-}
 
-Trigger_Null::~Trigger_Null(void) {
-}
-
-/*
- * File Read, File Write
- */
 void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
 	const int version = s->get_safe_int("version");
 	if (version != TRIGGER_VERSION) throw wexception

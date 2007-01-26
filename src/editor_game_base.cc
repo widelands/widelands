@@ -140,27 +140,41 @@ This unconquers a area. This is only possible, when there
 is a building placed on this field
 ===============
 */
-void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
-   assert(playernr);
-   assert(get_map()->get_immovable(coords)->get_type() == Map_Object::BUILDING);
+void Editor_Game_Base::unconquer_area(const Player_Area player_area) {
+	assert(0 <= player_area.x);
+	assert     (player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert     (player_area.y < map().get_height());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
 
-   uint i=0;
-	int radius;
+	//  Here must be a building.
+	const Building & building =
+		dynamic_cast<const Building &>(*map().get_immovable(player_area));
+	assert(building.owner().get_player_number() == player_area.player_number);
 
-   while(i<m_conquer_info.size() && m_conquer_info[i].middle_point!=coords) ++i;
-   assert(i<m_conquer_info.size());
-
-   assert((static_cast<Building*>(get_map()->get_immovable(coords)))->get_conquers() == m_conquer_info[i].area);
-   assert(playernr==m_conquer_info[i].player);
-
+	std::vector<Player_Area>::iterator this_conquer_info =
+		m_conquer_info.begin();
+	log
+		("Editor_Game_Base::unconquer_area: (%i, %i) radius %u, player %u:\n",
+		 player_area.x, player_area.y, player_area.radius,
+		 player_area.player_number);
+	for (;;) {
+		assert(this_conquer_info != m_conquer_info.end());
+		log
+			("\tcomparing with (%i, %i)\n",
+			 this_conquer_info->x, this_conquer_info->y);
+		if (this_conquer_info->Coords::operator==(player_area)) break;
+		++this_conquer_info;
+	}
+	assert(this_conquer_info->player_number == player_area.player_number);
+	assert(this_conquer_info->radius        == player_area.radius);
 
    // step 1: unconquer area of this building
-	radius = m_conquer_info[i].area;
-   do_conquer_area(playernr, coords, radius, false);
+	do_conquer_area(player_area, false);
 
    // step 2: remove this building out ot m_conquer_info
-   // std::vector erase doen't work on my system. I manually erase this
-   m_conquer_info[i]=m_conquer_info[m_conquer_info.size()-1];
+	*this_conquer_info = m_conquer_info.back();
    m_conquer_info.pop_back();
 
    // step 3: recalculate for all claimed areas of this player with a building
@@ -190,15 +204,17 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
 // BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
    // step 3 and 4: Need to reconquer the full map, so it's easier and faster to do only one loop because
    // of the use of an influence map, where the sorting of the m_conquer_info isn't important
-   for(i=0; i<m_conquer_info.size(); i++)
-   {
-      do_conquer_area(m_conquer_info[i].player, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
-      do_conquer_area(m_conquer_info[i].player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
-   }
+	const std::vector<Player_Area>::const_iterator conquer_info_end =
+		m_conquer_info.end();
+	for
+		(std::vector<Player_Area>::const_iterator it = m_conquer_info.begin();
+		 it != conquer_info_end;
+		 ++it)
+	{do_conquer_area(*it, false); do_conquer_area(*it, true);}
 // END : If you wanna to disable the dinamic conquer (by influences) , comment this block
 
 	// step 5: deal with player immovables in the lost area
-	cleanup_playerimmovables_area(coords, radius);
+	cleanup_playerimmovables_area(player_area);
 }
 
 /*
@@ -209,17 +225,17 @@ This conquers a given area because of a new (military) building
 that is set there.
 ===============
 */
-void Editor_Game_Base::conquer_area
-(const uchar playernr, const Coords coords, const Building_Descr* b)
-{
-   Conquer_Info ci;
-   ci.player=playernr;
-   ci.middle_point=coords;
-   ci.area=b->get_conquers();
-   m_conquer_info.push_back(ci);
+void Editor_Game_Base::conquer_area(const Player_Area player_area) {
+	assert(0 <= player_area.x);
+	assert(player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert(player_area.y < map().get_height());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
 
-   do_conquer_area(playernr, coords, b->get_conquers(), true);
-   cleanup_playerimmovables_area(coords, b->get_conquers());
+	m_conquer_info.push_back(player_area);
+	do_conquer_area(player_area, true);
+	cleanup_playerimmovables_area(player_area);
 }
 
 
@@ -232,9 +248,15 @@ Conquers the given area for that player; assumes that there is no military build
 and might be consumed..
 ===============
 */
-void Editor_Game_Base::conquer_area_no_building(uchar playernr, Coords coords, int radius)
-{
-   do_conquer_area(playernr, coords, radius, true);
+void Editor_Game_Base::conquer_area_no_building(const Player_Area player_area) {
+	assert(0 <= player_area.x);
+	assert(player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert(player_area.y < map().get_height());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+
+	do_conquer_area(player_area, true);
 }
 
 /**
@@ -247,23 +269,27 @@ void Editor_Game_Base::conquer_area_no_building(uchar playernr, Coords coords, i
  * parameter at this function.
  */
 #define MAX_RADIUS 32
-int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
-{
+int Editor_Game_Base::calc_influence (const Coords a, const Area area) {
    int w = m_map->get_width(),
        h = m_map->get_height(),
        influence = 0,
        method = 0;
-   uint minx = std::min (std::min(abs(a.x - b.x), abs(a.x - b.x + w)), abs(a.x - b.x - w));
-   uint miny = std::min (std::min(abs(a.y - b.y), abs(a.y - b.y + h)), abs(a.y - b.y - h));
+	uint minx =
+		std::min
+		(std::min
+		 (abs(a.x - area.x), abs(a.x - area.x + w)), abs(a.x - area.x - w));
+	uint miny =
+		std::min
+		(std::min
+		 (abs(a.y - area.y), abs(a.y - area.y + h)), abs(a.y - area.y - h));
 
     // Now "std::max (minx, miny)" is the distance between the points
    influence = std::max (minx, miny);
 
-   if (method == 0)
-   {
+	if (method == 0) {
          // This method makes a "parabola" like x^4, but the maxium radius is MAX_RADIUS,
          // Now it works good, I've an stupid mistake ;)
-      if (influence > radius)
+		if (influence >= 0 and static_cast<const uint>(influence) > area.radius)
          influence = 0;
       else if (influence == 0)
          influence = MAX_RADIUS;
@@ -272,12 +298,11 @@ int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
 
       influence = influence * influence * influence * influence;
    }
-   else if (method == 1)
-   {
+	else if (method == 1) {
       //    The function used here to calculate the influence is (d*(d-1))/2 + 1 and this
       // functions returns something like: 1, 2, 4, 7, 11, 15, 21, 27 ...
       // Works well, but lacks with the bug of cleaning immovables ...
-      influence = radius - influence + 1;
+		influence = area.radius - influence + 1;
 
       if (influence < 1)
          influence = 0;
@@ -296,13 +321,20 @@ Conquers the given area for that player; does the actual work
 Additionally, it updates the visible area for that player.
 ===============
 */
-void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius, bool conquer)
+void Editor_Game_Base::do_conquer_area
+(const Player_Area player_area, const bool conquer)
 {
-	MapRegion mr(*m_map, coords, radius);
+	assert(0 <= player_area.x);
+	assert(player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert(player_area.y < map().get_height());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+	MapRegion mr(*m_map, player_area);
 	FCoords fc;
 	while (mr.next(fc)) {
 		const Map::Index index = m_map->get_index(fc);
-		const int influence = calc_influence(fc, coords, radius);
+		const int influence = calc_influence(fc, player_area);
 
          // This is for put a weight to every field, its equal to the next array:
          // 1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92, 106, 121, 137, 154, 172 ... 1+(x*(x-1)/2)
@@ -313,17 +345,17 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
          // -- RFerriz
 		if (conquer) {
           // Adds the influence
-         m_conquer_map[playernr][index] += influence;
+			m_conquer_map[player_area.player_number][index] += influence;
 
             // Else, do the things that should be done
-			if (fc.field->get_owned_by() == playernr) continue;
+			if (fc.field->get_owned_by() == player_area.player_number) continue;
 
 			if
 				(not fc.field->get_owned_by()
 				 and
-				 m_conquer_map[0][index] == playernr)
-         {
-				fc.field->set_owned_by(playernr);
+				 m_conquer_map[0][index] == player_area.player_number)
+			{
+				fc.field->set_owned_by(player_area.player_number);
 				player_field_notification (fc, GAIN);
             continue;
          }
@@ -331,21 +363,21 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
            // See if we can get the own
 // BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
 			if
-            (m_conquer_map[playernr][index]
+            (m_conquer_map[player_area.player_number][index]
              >
              m_conquer_map[fc.field->get_owned_by()][index])
 			{
 				player_field_notification (fc, LOSE);
-				fc.field->set_owned_by (playernr);
-            m_conquer_map[0][index] = playernr;
+				fc.field->set_owned_by (player_area.player_number);
+				m_conquer_map[0][index] = player_area.player_number;
 				player_field_notification (fc, GAIN);
          }
 // END : If you wanna to disable the dinamic conquer (by influences) , comment this block
       }
 		else {
-         m_conquer_map[playernr][index] -= influence;
+			m_conquer_map[player_area.player_number][index] -= influence;
 
-			if (fc.field->get_owned_by() != playernr) continue;
+			if (fc.field->get_owned_by() != player_area.player_number) continue;
 
          m_conquer_map[0][index] = 0;
 
@@ -356,7 +388,7 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
       }
    }
 
-	m_map->recalc_for_field_area(coords, radius);
+	m_map->recalc_for_field_area(player_area);
 }
 
 
@@ -370,15 +402,13 @@ the game crashes a bit time after unconquer an area with some buildings.
 TODO: Document why there are 2 loops instead of destroying in the 1st.
 ===============
 */
-void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
-{
+void Editor_Game_Base::cleanup_playerimmovables_area(const Area area) {
 	std::vector<ImmovableFound> immovables;
 	std::set<PlayerImmovable*> burnset;
 	Map & m = *m_map;
 
 	// Find all immovables that need fixing
-	m.find_immovables
-		(coords, radius, &immovables, FindImmovablePlayerImmovable());
+	m.find_immovables(area, area.radius, &immovables, FindImmovablePlayerImmovable());
 
 	for
 		(std::vector<ImmovableFound>::const_iterator it = immovables.begin();
@@ -827,13 +857,18 @@ Editor_Game_Base::get_attack_points(const Player_Number player_number)
 {
    std::vector<Coords>* tmp = 0;
 
-   for (uint i = 0; i < m_conquer_info.size(); ++i)
-   {
-		if (m_conquer_info[i].player == player_number) { // First initialization
+	const std::vector<Player_Area>::const_iterator  conquer_info_end =
+		m_conquer_info.end();
+	for
+		(std::vector<Player_Area>::const_iterator it = m_conquer_info.begin();
+		 it != conquer_info_end;
+		 ++it)
+	{
+		if (it->player_number == player_number) { // First initialization
          if (!tmp)
             tmp = new std::vector<Coords>;
 
-         tmp->push_back (m_conquer_info[i].middle_point);
+			tmp->push_back (*it);
 
       }
    }
@@ -857,18 +892,20 @@ void Editor_Game_Base::make_influence_map ()
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
    const uint mapwidth = m_map->get_width();
 
-   for(uint i=0; i<m_conquer_info.size(); i++)
-   {
+	const std::vector<Player_Area>::const_iterator conquer_info_end =
+		m_conquer_info.end();
+	for
+		(std::vector<Player_Area>::const_iterator it = m_conquer_info.begin();
+		 it != conquer_info_end;
+		 ++it)
+	{
          // First, update influence map of the player
-      MapRegion mr(*m_map,  m_conquer_info[i].middle_point, m_conquer_info[i].area);
+		MapRegion mr(*m_map, *it);
 		FCoords fc;
-		while (mr.next(fc)) {
-			const Map::Index index = m_map->get_index(fc);
-         m_conquer_map[m_conquer_info[i].player][index] +=
-            calc_influence
-				(fc, m_conquer_info[i].middle_point, m_conquer_info[i].area);
-      }
-   }
+		while (mr.next(fc))
+			m_conquer_map[it->player_number][m_map->get_index(fc)] +=
+				calc_influence(fc, *it);
+	}
 
    // Now create the real influence map !
    for (int x = 0; x < MAX_X; x++)

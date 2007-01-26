@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,11 +36,10 @@ class TriggerReferencer;
  * one or more triggers with himself; when all triggers are set
  * the event runs.
  */
-class Trigger {
+struct Trigger {
    friend class Widelands_Map_Trigger_Data_Packet;
 
-   public:
-      Trigger(void) { }
+	Trigger(const std::string & Name) : m_name(Name) {}
       virtual ~Trigger(void) { }
 
       // virtual functions, implemented by the real triggers

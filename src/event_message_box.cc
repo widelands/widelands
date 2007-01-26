@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,7 @@ static const int EVENT_VERSION = 1;
 /*
  * Init and cleanup
  */
-Event_Message_Box::Event_Message_Box(void) {
-	set_name(_("Message Box").c_str());
+Event_Message_Box::Event_Message_Box() : Event(_("Message Box")) {
 	set_text(_("No text defined").c_str());
 	set_window_title(_("Window Title").c_str());
    set_is_modal(false);

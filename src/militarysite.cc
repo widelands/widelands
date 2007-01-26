@@ -23,6 +23,7 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
+#include "i18n.h"
 #include <libintl.h>
 #include "militarysite.h"
 #include "player.h"
@@ -74,11 +75,8 @@ void MilitarySite_Descr::parse(const char* directory, Profile* prof,
 	m_num_medics=sglobal->get_safe_int("max_medics");
 	m_heal_per_second=sglobal->get_safe_int("heal_per_second");
 	m_heal_incr_per_medic=sglobal->get_safe_int("heal_increase_per_medic");
-	if (m_conquer_radius > 0) {
-		std::string description (get_descname());
-		description += " conquer";
-		m_workarea_info[m_conquer_radius].insert(description);
-	}
+	if (m_conquer_radius > 0)
+		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
 }
 
 /**
@@ -247,8 +245,9 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
          s->set_location(0);
    }
 	// unconquer land
-	if (m_didconquer)
-		g->unconquer_area(get_owner()->get_player_number(), get_position());
+	if (m_didconquer) g->unconquer_area
+		(Player_Area
+		 (owner().get_player_number(), Area(get_position(), get_conquers())));
 
 	ProductionSite::cleanup(g);
 }
@@ -317,9 +316,10 @@ void MilitarySite::request_soldier_callback
    assert(s);
    assert(s->get_location(g) == msite);
 
-   if (!msite->m_didconquer)
-      g->conquer_area(msite->get_owner()->get_player_number(),
-   msite->get_position(), msite->get_descr());
+	if (not msite->m_didconquer) g->conquer_area
+		(Player_Area
+		 (msite->owner().get_player_number(),
+		  Area(msite->get_position(), msite->descr().get_conquers())));
    msite->m_didconquer = true;
 
    uint i=0;
@@ -350,13 +350,14 @@ void MilitarySite::act(Game* g, uint data)
 	// Maybe a new queueing system like MilitaryAct could be introduced.
    ProductionSite::act(g,data);
 
-      uint total_heal = 0;
 	uint numMedics = 0; // FIX THIS when medics were added
       uint i = 0;
       Soldier* s;
 
-      total_heal = get_descr()->get_heal_per_second();
-      total_heal += get_descr()->get_heal_increase_per_medic() * numMedics;
+	uint total_heal =
+		descr().get_heal_per_second()
+		+
+		descr().get_heal_increase_per_medic() * numMedics;
 
       for (i=0; i < m_soldiers.size(); i++) {
          s = m_soldiers[i];
@@ -525,7 +526,9 @@ void MilitarySite::change_soldier_capacity(int how)
 }
 
 void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldiers) {
-   g->conquer_area(get_owner()->get_player_number(),get_position(),get_descr());
+	g->conquer_area
+		(Player_Area
+		 (owner().get_player_number(), Area(get_position(), get_conquers())));
    m_didconquer = true;
    m_soldiers.insert(m_soldiers.begin(),soldiers->begin(),soldiers->end());
    /*for(uint i=0; i<soldiers->size(); i++)

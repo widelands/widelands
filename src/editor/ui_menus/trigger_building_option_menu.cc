@@ -38,14 +38,9 @@
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* parent, Trigger_Building* trigger) :
 UI::Window(parent, 0, 0, 180, 280, _("Building Trigger Options").c_str()),
 m_trigger (trigger),
-m_parent  (parent)
+m_parent     (parent),
+m_player_area(trigger->m_player_area)
 {
-   Coords pt=trigger->get_coords();
-   m_x=pt.x;
-   m_y=pt.y;
-   m_area=m_trigger->get_area();
-   m_player=m_trigger->get_player();
-   m_count=m_trigger->get_building_count();
    m_building=-1;
    const int offsx=5;
    const int offsy=25;
@@ -53,14 +48,13 @@ m_parent  (parent)
    int posx=offsx;
    int posy=offsy;
 
-   if(m_player<1) m_player=1;
-
    // Fill the building infos
 	;
    int i=0;
 	if
 		(const Tribe_Descr * const tribe = m_parent->editor().get_tribe
-		 (m_parent->egbase().map().get_scenario_player_tribe(m_player).c_str()))
+		 (m_parent->egbase().map()
+		  .get_scenario_player_tribe(m_player_area.player_number).c_str()))
 	{
 	   for(i=0; i<tribe->get_nrbuildings(); i++) {
          Building_Descr* b=tribe->get_building_descr(i);
@@ -312,11 +306,6 @@ m_parent  (parent)
    update();
 }
 
-/*
- * cleanup
- */
-Trigger_Building_Option_Menu::~Trigger_Building_Option_Menu(void) {
-}
 
 /*
  * Handle mouseclick
@@ -334,14 +323,14 @@ bool Trigger_Building_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 void Trigger_Building_Option_Menu::clicked_ok() {
 	if (m_name->get_text()) m_trigger->set_name(m_name->get_text());
-	m_trigger->set_coords(Coords(m_x, m_y));
-	if (m_trigger->get_player() != m_player && m_trigger->get_player() != -1)
-		m_parent->unreference_player_tribe(m_trigger->get_player(), m_trigger);
-	if (m_trigger->get_player() != m_player) {
-		m_trigger->set_player(m_player);
-		m_parent->reference_player_tribe(m_player, m_trigger);
+	const Player_Number trigger_player_number =
+		m_trigger->m_player_area.player_number;
+	if (trigger_player_number != m_player_area.player_number) {
+		if (trigger_player_number)
+			m_parent->unreference_player_tribe(trigger_player_number, m_trigger);
+		m_parent->reference_player_tribe(m_player_area.player_number, m_trigger);
 	}
-	m_trigger->set_area          (m_area);
+	m_trigger->m_player_area = m_player_area;
 	m_trigger->set_building      (m_buildings[m_building].c_str());
 	m_trigger->set_building_count(m_count);
 	m_parent ->set_need_save     (true);
@@ -350,29 +339,29 @@ void Trigger_Building_Option_Menu::clicked_ok() {
 
 
 void Trigger_Building_Option_Menu::clicked(int i) {
-   switch(i) {
-      case 3: m_x+=100; break;
-      case 4: m_x-=100; break;
-      case 5: m_x+=10; break;
-      case 6: m_x-=10; break;
-      case 7: m_x+=1; break;
-      case 8: m_x-=1; break;
-      case 9: m_y+=100; break;
-      case 10: m_y-=100; break;
-      case 11: m_y+=10; break;
-      case 12: m_y-=10; break;
-      case 13: m_y+=1; break;
-      case 14: m_y-=1; break;
+	switch (i) {
+	case  3: m_player_area.x      += 100; break;
+	case  4: m_player_area.x      -= 100; break;
+	case  5: m_player_area.x      +=  10; break;
+	case  6: m_player_area.x      -=  10; break;
+	case  7: m_player_area.x      +=   1; break;
+	case  8: m_player_area.x      -=   1; break;
+	case  9: m_player_area.y      += 100; break;
+	case 10: m_player_area.y      -= 100; break;
+	case 11: m_player_area.y      +=  10; break;
+	case 12: m_player_area.y      -=  10; break;
+	case 13: m_player_area.y      +=   1; break;
+	case 14: m_player_area.y      -=   1; break;
 
-      case 15: m_player++; break;
-      case 16: m_player--; break;
+	case 15: ++m_player_area.player_number; break;
+	case 16: --m_player_area.player_number; break;
 
-      case 17: m_area+=100; break;
-      case 18: m_area-=100; break;
-      case 19: m_area+=10; break;
-      case 20: m_area-=10; break;
-      case 21: m_area+=1; break;
-      case 22: m_area-=1; break;
+	case 17: m_player_area.radius += 100; break;
+	case 18: m_player_area.radius -= 100; break;
+	case 19: m_player_area.radius +=  10; break;
+	case 20: m_player_area.radius -=  10; break;
+	case 21: m_player_area.radius +=   1; break;
+	case 22: m_player_area.radius -=   1; break;
 
       case 23: m_building++; break;
       case 24: m_building--; break;
@@ -387,42 +376,45 @@ void Trigger_Building_Option_Menu::clicked(int i) {
  * update function: update all UI elements
  */
 void Trigger_Building_Option_Menu::update(void) {
-   if(m_x<0) m_x=0;
-   if(m_y<0) m_y=0;
+	if (m_player_area.x < 0) m_player_area.x = 0;
+	if (m_player_area.y < 0) m_player_area.y = 0;
 	const Map & map = m_parent->egbase().map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
-	if (m_x >= static_cast<const int>(mapwidth))  m_x = mapwidth  - 1;
-	if (m_y >= static_cast<const int>(mapheight)) m_y = mapheight - 1;
+	if (m_player_area.x >= static_cast<const int>(mapwidth))
+		m_player_area.x = mapwidth  - 1;
+	if (m_player_area.y >= static_cast<const int>(mapheight))
+		m_player_area.y = mapheight - 1;
 
-   if(m_player<=0) m_player=1;
+	if (m_player_area.player_number < 1) m_player_area.player_number = 1;
 	const Player_Number nr_players = map.get_nrplayers();
-	if (m_player > nr_players) m_player = nr_players;
+	if (nr_players < m_player_area.player_number)
+		m_player_area.player_number = nr_players;
 
-   if(m_area<1) m_area=1;
+	if (m_player_area.radius < 1) m_player_area.radius = 1;
+
    if(m_count<1) m_count=1;
 
-   if(m_building<0) m_building=0;
    if(m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
 
    std::string curbuild=_("<invalid player tribe>");
-   if(!m_buildings.size()) {
-      m_player=-1;
+	if (not m_buildings.size()) {
+		m_player_area.player_number = 0;
       m_building=-1;
    } else {
       curbuild=m_buildings[m_building];
    }
 
    char buf[200];
-   sprintf(buf, "%i", m_x);
+	sprintf(buf, "%i", m_player_area.x);
    m_x_ta->set_text(buf);
-   sprintf(buf, "%i", m_y);
+	sprintf(buf, "%i", m_player_area.y);
    m_y_ta->set_text(buf);
 
-   sprintf(buf, "%i", m_player);
+	sprintf(buf, "%i", m_player_area.player_number);
    m_player_ta->set_text(buf);
 
-   sprintf(buf, "%i", m_area);
+	sprintf(buf, "%i", m_player_area.radius);
    m_area_ta->set_text(buf);
 
    sprintf(buf, "%i", m_count);

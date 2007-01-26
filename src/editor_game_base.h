@@ -27,7 +27,7 @@
 #include "bob.h"
 #include "building.h"
 #include "constants.h"
-#include "geometry.h"
+#include "player_area.h"
 #include "types.h"
 
 class Battle;
@@ -58,10 +58,9 @@ class Editor_Game_Base {
       Map & get_map() const {return *m_map;}
       Object_Manager * get_objects() const {return m_objects;}
 
-      void unconquer_area(uchar playernr, Coords coords);
-	void conquer_area
-		(const uchar playernr, const Coords, const Building_Descr*);
-      void conquer_area_no_building(uchar playernr, Coords coords, int radius);
+	void unconquer_area          (const Player_Area);
+	void conquer_area            (const Player_Area);
+	void conquer_area_no_building(const Player_Area);
 
       // logic handler func
       virtual void think() = 0;
@@ -132,29 +131,20 @@ class Editor_Game_Base {
 
    virtual void make_influence_map ();
 
-      /// Returns the influence value of one position (a) with the radius (radius) about (b)
-   virtual int calc_influence (Coords a, Coords b, int radius);
+      /// Returns the influence on a location from an area.
+	virtual int calc_influence (const Coords a, const Area);
 
    protected:
       // next function is used to update the current gametime,
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
-	virtual void do_conquer_area
-		(const uchar playernr,
-		 const Coords coords,
-		 const int radius,
-		 const bool conquer);
+	virtual void do_conquer_area(const Player_Area, const bool conquer);
 
-   private:
-      struct Conquer_Info {
-         uchar  player;
-         Coords middle_point;
-         ushort    area;
-      };
-      std::vector<Conquer_Info> m_conquer_info;
+private:
+	std::vector<Player_Area> m_conquer_info;
 
-		void cleanup_playerimmovables_area(Coords coords, int radius);
+	void cleanup_playerimmovables_area(const Area);
 
       int m_gametime;
 	Player                   * m_players[MAX_PLAYERS];

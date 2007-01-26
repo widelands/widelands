@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,86 +17,17 @@
  *
  */
 
-#include "editor_game_base.h"
 #include "event_unhide_area.h"
-#include "error.h"
-#include "filesystem.h"
 #include "game.h"
-#include "i18n.h"
-#include "map.h"
 #include "player.h"
-#include "profile.h"
-#include "wexception.h"
 
-static const int EVENT_VERSION = 2;
-
-/*
- * Init and cleanup
- */
-Event_Unhide_Area::Event_Unhide_Area(void) {
-	set_name(_("Unhide Area").c_str());
-   set_coords(Coords(0,0));
-   set_player(1);
-   set_area(5);
-}
-
-Event_Unhide_Area::~Event_Unhide_Area(void) {
-}
-
-/*
- * reinitialize
- */
-void Event_Unhide_Area::reinitialize(Game *) {}
-
-/*
- * File Read, File Write
- */
-void Event_Unhide_Area::Read(Section* s, Editor_Game_Base* egbase) {
-	const int version = s->get_safe_int("version");
-
-	if (1 <= version and version <= EVENT_VERSION) {
-		m_pt =
-			version == 1
-			?
-			Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
-			:
-			s->get_safe_Coords("point");
-
-      set_area( s->get_safe_int("area"));
-
-      int player= s->get_safe_int("player");
-      set_player(player);
-
-		const Map & map = egbase->map();
-		if
-			(m_pt.x < 0 or m_pt.x >= map.get_width ()
-			 or
-			 m_pt.y < 0 or m_pt.y >= map.get_height()
-			 or
-			 player <= 0 or player > map.get_nrplayers())
-         // give a warning
-         log("Unhide Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", m_pt.x, m_pt.y, player);
-      return;
-   }
-   throw wexception("Unhide Area Event with unknown/unhandled version %i in map!\n", version);
-}
-
-void Event_Unhide_Area::Write(Section & s, const Editor_Game_Base &) const {
-	s.set_int   ("version", EVENT_VERSION);
-	s.set_Coords("point",   m_pt);
-	s.set_int   ("area",    get_area());
-	s.set_int   ("player",  get_player());
-}
-
-/*
- * run the event
- */
 Event::State Event_Unhide_Area::run(Game* game) {
-   assert(m_pt.is_valid());
-   assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
+	assert(m_player_area.is_valid());
+	assert(0 < m_player_area.player_number);
+	assert    (m_player_area.player_number <= game->map().get_nrplayers());
 
-   Player* player=game->get_player(m_player);
-   player->set_area_seen(Coords(m_pt.x,m_pt.y),get_area(), true);
+	game->player(m_player_area.player_number)
+		.set_area_seen(m_player_area, true);
 
    m_state = DONE;
    return m_state;

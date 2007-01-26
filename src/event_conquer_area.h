@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,42 +20,23 @@
 #ifndef __S__EVENT_CONQUER_AREA_H
 #define __S__EVENT_CONQUER_AREA_H
 
-#include "event.h"
-#include "geometry.h"
+#include "event_player_area.h"
+#include "i18n.h"
 
-class Editor_Game_Base;
+/// Shows a message box.
+struct Event_Conquer_Area : public Event_Player_Area {
+	friend struct Event_Conquer_Area_Option_Menu;
+	Event_Conquer_Area()
+		:
+		Event_Player_Area
+		(_("Conquer Area"), Player_Area(0, Area(Coords(0, 0), 5)))
+	{}
 
-/*
- * This event shows a message box
- */
-class Event_Conquer_Area : public Event {
-   public:
-     Event_Conquer_Area();
-      ~Event_Conquer_Area();
 
-      // one liner functions
+
 	const char * get_id() const {return "conquer_area";}
 
       State run(Game*);
-      virtual void reinitialize(Game*);
-
-      // File Functions
-	void Write(Section &, const Editor_Game_Base &) const;
-      void Read(Section*, Editor_Game_Base*);
-
-      inline void set_coords(Coords pt) { m_pt=pt; }
-	Coords get_coords() const {return m_pt;}
-	int get_player() const {return m_player;}
-      inline void set_player(int i) { m_player=i; }
-	int get_area() const {return m_area;}
-      inline void set_area(int i) { m_area=i; }
-
-   private:
-      Coords m_pt;
-      int m_area;
-      int m_player;
 };
-
-
 
 #endif

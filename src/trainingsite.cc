@@ -356,7 +356,10 @@ void TrainingSite::request_soldier_callback
 	assert(s);
 	assert(s->get_location(g) == tsite);
 
-	g->conquer_area(tsite->get_owner()->get_player_number(), tsite->get_position(), tsite->get_descr());
+	g->conquer_area
+		(Player_Area
+		 (tsite->owner().get_player_number(),
+		  Area(tsite->get_position(), tsite->descr().get_conquers())));
 
 	uint i;
 	for (i = 0; i < tsite->m_soldier_requests.size(); i++) {

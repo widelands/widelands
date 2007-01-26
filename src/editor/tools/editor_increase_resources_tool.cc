@@ -81,7 +81,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 	const int radius = parent.get_sel_radius();
 	const World & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
 	FCoords fc;
 	while (mr.next(fc)) {
 		int res        = fc.field->get_resources();
@@ -115,7 +115,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(fc, picid, 4);
-				map.recalc_for_field_area(fc, 0);
+	         map.recalc_for_field_area(Area(fc, 0));
          }
       }
    }

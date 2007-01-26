@@ -138,7 +138,7 @@ typedef char Direction;
  *
  * Warning: width and height must be even
  */
-class Map {
+struct Map {
 	friend class Editor_Game_Base;
    friend class Map_Loader;
    friend class S2_Map_Loader;
@@ -148,7 +148,6 @@ class Map {
    friend class Editor;
    friend class Main_Menu_New_Map;
 
-public:
 	enum { // flags for findpath()
 
 		//  use bidirection cost instead of normal cost calculations
@@ -157,7 +156,6 @@ public:
 
 	};
 
-public:
 	struct Pathfield;
 
    Map();
@@ -181,7 +179,7 @@ public:
 
    void load_graphics();
    void recalc_whole_map();
-   void recalc_for_field_area(Coords coords, int radius);
+   void recalc_for_field_area(const Area);
    void recalc_default_resources(void);
 
 	void set_nrplayers(const Uint8 nrplayers);
@@ -311,8 +309,31 @@ public:
 	 */
 	bool can_reach_by_water(const Coords) const;
 
-	uint set_height   (const FCoords, const Uint8  new_value);
+	/**
+	 * Sets the height to a value. Recalculates brightness. Changes the
+	 * surrounding nodes if necessary. Returns the radius that covers all changes
+	 * that were made.
+	 *
+	 * Do not call this to set the height of each node in an area to the same
+	 * value, because it adjusts the heights of surrounding nodes in each call,
+	 * so it will be terribly slow. Use set_height for Area for that purpouse
+	 * instead.
+	 */
+	uint set_height(const FCoords, const Uint8  new_value);
+
+	/// Changes the height by a value by calling set_height.
 	uint change_height(const FCoords, const Sint16 difference);
+
+	/**
+	 * Sets the height of each node within radius from fc to a value.
+	 * Recalculates brightness. Changes the surrounding nodes if necessary.
+	 * Returns the radius of the area that covers all changes that were made.
+	 *
+	 * Calling this is much faster than calling change_height for each node in
+	 * the area, because this adjusts the surrounding nodes only once, after all
+	 * nodes in the area had their new height set.
+	 */
+	uint set_height(const Area, const Uint8  new_value);
 
 	// change terrain of a field, recalculate buildcaps
 	int change_terrain(const TCoords, const Terrain_Descr::Index terrain);
@@ -1154,9 +1175,8 @@ Note that the order in which fields are returned is not guarantueed.
 
 next() returns false when no more fields are to be traversed.
 */
-class MapRegion {
-public:
-	MapRegion(const Map &, const Coords, const Uint16 radius);
+struct MapRegion {
+	MapRegion(const Map &, const Area);
 
 	bool next(FCoords & fc);
 
@@ -1178,18 +1198,19 @@ private:
 	FCoords     m_next;     //  next field to return
 };
 
-/*
-struct MapHollowRegion
----------------
-Producer/Coroutine struct that returns every field for which the distance to
-the center point is greater than hole_radius and at most radius exactly once
-via next(). Note that the order in which fields are returned is not
-guarantueed.
-*/
+/**
+ * Producer/Coroutine struct that returns every node for which the distance to
+ * the center point is greater than <hollow_area>.hole_radius and at most
+ * <hollow_area>.radius.
+ *
+ * Each such location is returned exactly once via next(). But this does not
+ * guarantee that a location is returned at most once when the radius is so
+ * large that the area overlaps itself because of wrapping.
+ *
+ * Note that the order in which fields are returned is not guarantueed.
+ */
 struct MapHollowRegion {
-	MapHollowRegion
-	(Map & map, const Coords center,
-	 const unsigned int radius, const unsigned int hole_radius);
+	MapHollowRegion(Map & map, const HollowArea hollow_area);
 
 	bool next(Coords & c);
 

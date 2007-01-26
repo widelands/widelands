@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
 	const int radius = parent.get_sel_radius();
 	const World & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
 	FCoords fc;
 	while (mr.next(fc)) {
 		int res        = fc.field->get_resources();
@@ -78,7 +78,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(fc, picid, 4);
-				map.recalc_for_field_area(fc, 0);
+	         map.recalc_for_field_area(Area(fc, 0));
          }
       }
    }

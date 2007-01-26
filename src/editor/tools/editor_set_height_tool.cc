@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,10 @@
 int Editor_Set_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
-	uint max = 0;
-	MapRegion mr(map, center.node, radius);
-	FCoords fc;
-	while (mr.next(fc)) max = std::max(max, map.set_height(fc, m_set_to));
-   return radius + max;
+	const uint radius = parent.get_sel_radius();
+	return radius ?
+		map.set_height(Area(center.node, radius), m_set_to)
+		:
+		map.set_height
+		(FCoords(center.node, map.get_field(center.node)), m_set_to);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,8 @@
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
  */
-class Trigger_Time : public Trigger {
-   public:
+struct Trigger_Time : public Trigger {
       Trigger_Time();
-      ~Trigger_Time();
 
       // one liner functions
 	const char * get_id() const {return "time";}
@@ -45,7 +43,7 @@ class Trigger_Time : public Trigger {
       inline void set_last_start_time(int i) { m_last_start_time = i; }
 	int get_wait_time() const {return m_wait_time;}
 
-   private:
+private:
       ulong m_wait_time; // in seconds
       uint m_last_start_time;
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,8 @@
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h
  */
-class Trigger_Building : public Trigger {
-   public:
+struct Trigger_Building : public Trigger {
+	friend struct Trigger_Building_Option_Menu;
       Trigger_Building();
       ~Trigger_Building();
 
@@ -43,23 +43,15 @@ class Trigger_Building : public Trigger {
 	void Write(Section &) const;
       void Read(Section*, Editor_Game_Base*);
 
-      inline void set_coords(Coords pt) { m_pt=pt; }
-	Coords get_coords() const {return m_pt;}
-	int get_player() const {return m_player;}
-      inline void set_player(int i) { m_player=i; }
-	int get_area() const {return m_area;}
-      inline void set_area(int i) { m_area=i; }
 	const char* get_building() const {return m_building.c_str();}
       void set_building(const char* b) { m_building=b; }
       void set_building_count(int n) { m_count=n; }
 	int get_building_count() const {return m_count;}
 
-   private:
-      Coords m_pt;
+private:
+	Player_Area m_player_area;
       std::string m_building;
-      int m_player;
-      int m_area;
-      int m_count;
+	uint m_count;
 };
 
 #endif

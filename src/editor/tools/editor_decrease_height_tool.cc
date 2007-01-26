@@ -30,7 +30,7 @@ int Editor_Decrease_Height_Tool::handle_click_impl
 {
 	const int radius = parent.get_sel_radius();
 	uint max = 0;
-	MapRegion mr(map, center.node, radius);
+	MapRegion mr(map, Area(center.node, radius));
 	FCoords fc;
 	while (mr.next(fc)) max = std::max(max, map.change_height(fc, -m_change_by));
 	return radius + max;
