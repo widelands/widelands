@@ -22,68 +22,55 @@
 #include "fullscreen_menu_fileview.h"
 #include "i18n.h"
 #include "profile.h"
-#include "ui_button.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
 
-Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
-	: Fullscreen_Menu_Base("fileviewmenu.jpg")
+Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)
+:
+Fullscreen_Menu_Base("fileviewmenu.jpg"),
+title               (this, 50, 50, std::string(), Align_Left),
+textview            (this, 30, 170, 735, 330),
+
+close_button
+(this,
+ 300, 545, 200, 26,
+ 0,
+ &Fullscreen_Menu_TextView::end_modal, this, 0,
+ _("Close"))
+
 {
-
-
 	i18n::grab_textdomain( "texts" );
 
    Profile prof(filename.c_str(), "global"); // section-less file
-   Section* s = prof.get_section("global");
+	Section & section = *prof.get_section("global");
 
-   std::string title = s->get_safe_string("title");
-   std::string text = s->get_safe_string("text");
+	title   .set_text(section.get_safe_string("title"));
+	textview.set_text(section.get_safe_string("text"));
    i18n::release_textdomain();
 
-   // Text view
-	mlta=new UI::Multiline_Textarea(this, 30, 170, 735, 330, text.c_str());
-   mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
+	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	title.set_pos(Point((get_inner_w() - title.get_w()) / 2, 100));
 
-   // Menu title
-   UI::Textarea* ta= new UI::Textarea(this, 50, 50, title, Align_Left);
-   ta->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, 100));
-
-	// Close button
-	new UI::IDButton<Fullscreen_Menu_TextView, int>
-		(this,
-		 300, 545, 200, 26,
-		 0,
-		 &Fullscreen_Menu_TextView::end_modal, this, 0,
-		 _("Close"));
+	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 }
 
-void Fullscreen_Menu_TextView::set_text(std::string text) {
-   mlta->set_text(text.c_str());
-}
+void Fullscreen_Menu_TextView::set_text(const std::string & text)
+{textview.set_text(text);}
 
-Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(std::string filename) :
-   Fullscreen_Menu_TextView( filename ) {
-   }
+Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(const std::string & filename)
+: Fullscreen_Menu_TextView(filename)
+{}
 
-/*
-==============================================================================
-
-TextViewWindow
-
-==============================================================================
-*/
 
 struct FileViewWindow : public UI::UniqueWindow {
 	FileViewWindow
 		(UI::Panel * parent,
 		 UI::UniqueWindow::Registry * reg,
 		 std::string filename);
+private:
+	UI::Multiline_Textarea textview;
 };
 
 FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
-	: UI::UniqueWindow(parent, reg, 0, 0, "")
+: UI::UniqueWindow(parent, reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
 {
 	i18n::grab_textdomain( "texts" );
 
@@ -91,13 +78,10 @@ FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* re
    Section* s = prof.get_section("global");
    i18n::release_textdomain();
 
-   std::string title = s->get_safe_string("title");
-   std::string text = s->get_safe_string("text");
+	set_title(s->get_safe_string("title"));
 
-   set_title(title.c_str());
-
-	UI::Multiline_Textarea* mlta=new UI::Multiline_Textarea(this, 0, 0, 560, 240, text.c_str());
-   mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
+	textview.set_text(s->get_safe_string("text"));
+	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
 

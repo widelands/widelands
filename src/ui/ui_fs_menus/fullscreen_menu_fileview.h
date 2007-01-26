@@ -22,14 +22,12 @@
 
 #include "fullscreen_menu_base.h"
 
+#include "ui_button.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 #include <string>
-
-namespace UI {
-struct Multiline_Textarea;
-struct Panel;
-};
 
 void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename);
 
@@ -37,22 +35,22 @@ void fileview_window(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::st
  * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.
 */
 struct Fullscreen_Menu_TextView : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_TextView(std::string filename);
+	Fullscreen_Menu_TextView(const std::string & filename);
 
 protected:
-   void set_text(std::string text);
+	void set_text(const std::string & text);
 
 private:
-   UI::Multiline_Textarea* mlta;
+	UI::Textarea                                title;
+	UI::Multiline_Textarea                      textview;
+	UI::IDButton<Fullscreen_Menu_TextView, int> close_button;
 };
 
 /**
  * Shows an ASCII-File in a Fullscreen Menu. Waits for the button Ok to be clicked.
  */
-class Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView {
-   public:
-      Fullscreen_Menu_FileView(std::string filename );
-};
+struct Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView
+{Fullscreen_Menu_FileView(const std::string & filename);};
 
 
 

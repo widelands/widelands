@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include <string>
 #include "font_handler.h"
 #include "ui_panel.h"
+#include "ui_scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -42,15 +43,19 @@ struct Multiline_Textarea : public Panel {
          ScrollLog = 1,       ///< follow the bottom of the text
       };
 
-   public:
-      Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
-            Align align = Align_Left, bool always_show_scrollbar = false);
+public:
+	Multiline_Textarea
+		(Panel * const parent,
+		 const int x, const int y, const uint w, const uint h,
+		 const std::string & text         = std::string(),
+		 const Align                      = Align_Left,
+		 const bool always_show_scrollbar = false);
       ~Multiline_Textarea();
 
       std::string get_text() const { return m_text; }
       ScrollMode get_scrollmode() const { return m_scrollmode; }
 
-      void set_text(const char *text);
+	void set_text(const std::string &text);
       void set_align(Align align);
       void set_scrollpos(int pixels);
       void set_scrollmode(ScrollMode mode);
@@ -68,7 +73,7 @@ struct Multiline_Textarea : public Panel {
 
    private:
 	std::string  m_text;
-	Scrollbar  * m_scrollbar;
+	Scrollbar    m_scrollbar;
 		ScrollMode     m_scrollmode;
 
    protected:

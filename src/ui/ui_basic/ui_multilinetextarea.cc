@@ -20,18 +20,27 @@
 #include "font_handler.h"
 #include "types.h"
 #include "ui_multilinetextarea.h"
-#include "ui_scrollbar.h"
 #include "constants.h"
 #include "graphic.h"
 #include "text_parser.h"
 
 namespace UI {
-/**
-Initialize a textarea that supports multiline strings.
-*/
-Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
-                                       const char *text, Align align, bool always_show_scrollbar)
-   : Panel(parent, x, y, w - 24, h)
+
+Multiline_Textarea::Multiline_Textarea
+	(Panel * const parent,
+	 const int x, const int y, const uint w, const uint h,
+	 const std::string & text,
+	 const Align align,
+	 const bool always_show_scrollbar)
+	:
+	Panel       (parent, x, y, w - 24, h),
+	m_cache_id  (0),
+	m_cache_mode(Widget_Cache_New),
+	m_text      (text),
+	m_scrollbar (parent, x + get_w(), y, 24, h, false),
+	m_scrollmode(ScrollNormal),
+	m_textheight(0),
+	m_textpos   (0)
 {
    set_handle_mouse(false);
    set_think(false);
@@ -39,25 +48,15 @@ Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint
 
    set_align(align);
 
-   m_cache_id = 0;
-   m_cache_mode = Widget_Cache_New;
-   m_textpos = 0;
-   m_textheight = 0;
-   m_scrollmode = ScrollNormal;
+	m_scrollbar.moved.set(this, &Multiline_Textarea::set_scrollpos);
 
-   m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
-   m_scrollbar->moved.set(this, &Multiline_Textarea::set_scrollpos);
-
-   m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_BIG));
-   m_scrollbar->set_steps(1);
-   m_scrollbar->set_force_draw(always_show_scrollbar);
+	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_BIG));
+	m_scrollbar.set_steps(1);
+	m_scrollbar.set_force_draw(always_show_scrollbar);
 
    set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
 
-
-   if (text)
-      set_text(text);
-
+	update(0, 0, get_eff_w(), get_h());
 }
 
 
@@ -74,18 +73,15 @@ Multiline_Textarea::~Multiline_Textarea() {
 Replace the current text with a new one.
 Fix up scrolling state if necessary.
 */
-void Multiline_Textarea::set_text(const char *text)
-{
-   if (!text) {
+void Multiline_Textarea::set_text(const std::string & text) {
+	m_text = text;
+	if (not text.size()) {
       // Clear the field
-      m_text = "";
 
       m_textheight = 0;
       m_textpos = 0;
-      m_scrollbar->set_steps(1);
+		m_scrollbar.set_steps(1);
    }
-   else
-      m_text = text;
    if (m_cache_mode != Widget_Cache_New)
       m_cache_mode = Widget_Cache_Update;
    update(0, 0, get_eff_w(), get_h());
@@ -153,7 +149,7 @@ void Multiline_Textarea::draw(RenderTarget* dst)
 }
 
 void Multiline_Textarea::draw_scrollbar() {
-   if (m_cache_mode != Widget_Cache_Use ) {
+	if (m_cache_mode != Widget_Cache_Use) {
       bool setbottom = false;
 
       if (m_scrollmode == ScrollLog) {
@@ -169,8 +165,8 @@ void Multiline_Textarea::draw_scrollbar() {
       if (setbottom || m_textpos > m_textheight - get_h())
          m_textpos = m_textheight - get_h();
 
-      m_scrollbar->set_steps(m_textheight - get_h());
-      m_scrollbar->set_pos(m_textpos);
+		m_scrollbar.set_steps(m_textheight - get_h());
+		m_scrollbar.set_pos(m_textpos);
    }
 }
 
