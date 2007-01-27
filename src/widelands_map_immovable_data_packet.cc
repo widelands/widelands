@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,8 @@
  */
 
 #include <map>
-#include "fileread.h"
-#include "filewrite.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "editor_game_base.h"
 #include "immovable.h"
 #include "map.h"
@@ -56,51 +56,50 @@ throw (_wexception)
 {
 	assert(ol);
 
-   FileRead fr;
+	WidelandsFileRead fr;
    fr.Open( fs, "binary/immovable" );
 
-   Map* map=egbase->get_map();
-   World* world=map->get_world();
+	Map        & map        = egbase->map();
+	World      & world      = map.world  ();
+	const Extent map_extent = map.extent ();
 
    // First packet version
-   int packet_version=fr.Unsigned16();
-
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(1) {
+	const Uint16 packet_version=fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		for (;;) {
          uint reg=fr.Unsigned32();
          if(reg==0xffffffff) break;
-         std::string owner=fr.CString();
-         std::string name=fr.CString();
-         int x=fr.Unsigned16();
-         int y=fr.Unsigned16();
+			const char * const owner = fr.CString ();
+			const char * const name  = fr.CString ();
+			const Coords position    = fr.Coords32(map_extent);
 
 			assert(not ol->is_object_known(reg));
 
-         if(owner!="world") {
-            if(!skip) { // We do not load play immovables in normal maps
+			if (strcmp(owner, "world")) {
+				if (not skip) { //  We do not load player immovables in normal maps.
                // It is a tribe immovable
-               egbase->manually_load_tribe(owner.c_str());
-               Tribe_Descr* tribe=egbase->get_tribe(owner.c_str());
+					egbase->manually_load_tribe(owner);
+					Tribe_Descr* tribe=egbase->get_tribe(owner);
                if(!tribe)
-                  throw wexception("Unknown tribe %s in map!\n", owner.c_str());
-               int idx=tribe->get_immovable_index(name.c_str());
+                  throw wexception("Unknown tribe %s in map!\n", owner);
+               int idx=tribe->get_immovable_index(name);
                if(idx==-1)
-                  throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name.c_str(), owner.c_str());
-               Immovable* imm=egbase->create_immovable(Coords(x, y), idx, tribe);
-					ol->register_object(egbase, reg, imm);
+                  throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name, owner);
+					ol->register_object
+						(egbase, reg, egbase->create_immovable(position, idx, tribe));
             }
          } else {
             // World immovable
-            int idx=world->get_immovable_index(name.c_str());
+            int idx=world.get_immovable_index(name);
             if(idx==-1)
-               throw wexception("Unknown world immovable %s in map!\n", name.c_str());
-            Immovable* imm=egbase->create_immovable(Coords(x, y), idx, 0);
-				if (not skip) ol->register_object(egbase, reg, imm);
+               throw wexception("Unknown world immovable %s in map!\n", name);
+				if (not skip) ol->register_object
+					(egbase, reg, egbase->create_immovable(position, idx, 0));
          }
       }
-      return ;
-   }
-   assert(0); // never here
+	} else throw wexception
+		("Unknown version %i in Widelands_Map_Immovable_Data_Packet!\n",
+		 packet_version);
 }
 
 /*
@@ -112,33 +111,33 @@ void Widelands_Map_Immovable_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	WidelandsFileWrite fw;
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-
+	const Map & map = egbase->map();
+	const X_Coordinate mapwidth  = map.get_width ();
+	const Y_Coordinate mapheight = map.get_height();
+	Map::Index i = 0;
+	Coords position;
+	for (position.y = 0; position.y < mapheight; ++position.y)
+		for (position.x = 0; position.x < mapwidth; ++position.x, ++i) {
          // We do not write player immovables
-         if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
-            Immovable* imm=static_cast<Immovable*>(immovable);
-				const Tribe_Descr* tribe=imm->get_owner_tribe();
+			if
+				(const Immovable * const immovable =
+				 dynamic_cast<const Immovable * const>(map[i].get_immovable()))
+			{
+				assert(not os->is_object_known(immovable));
+				fw.Unsigned32(os->register_object(immovable));
+				if (const Tribe_Descr * const tribe = immovable->get_owner_tribe())
+					fw.CString(tribe->name().c_str());
+				else fw.CString("world");
 
-				assert(not os->is_object_known(imm));
-				fw.Unsigned32(os->register_object(imm));
-            if(!tribe)
-               fw.CString("world");
-	         else fw.CString(tribe->get_name().c_str());
-
-            fw.CString(imm->get_name().c_str());
-            fw.Unsigned16(x);
-            fw.Unsigned16(y);
+				fw.CString(immovable->name().c_str());
+				fw.Coords32(position);
          }
       }
-   }
 
    fw.Unsigned32(0xffffffff);
 
