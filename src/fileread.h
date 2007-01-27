@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,9 @@
 #ifndef FILEREAD_H
 #define FILEREAD_H
 
-#include "error.h"
 #include "machdep.h"
-#include "wexception.h"
 
+#include <cassert>
 #include <string>
 
 struct FileSystem;
@@ -33,23 +32,37 @@ struct FileSystem;
  * It works quite naively by reading the entire file into memory.
  * Convenience functions are available for endian-safe access of common data types
  */
-class FileRead {
-	public:
-	void * data;
-	int    filepos;
-	int    length;
+struct FileRead {
 
-	public:
-		FileRead();
-		~FileRead();
+	struct FileRead_Exception {};
+	struct File_Boundary_Exceeded : public FileRead_Exception {};
+	struct Buffer_Overflow        : public FileRead_Exception {};
 
+	FileRead (); /// Create the object with nothing to read.
+	~FileRead(); /// Close the file if open.
+
+	/**
+	 * Loads a file into memory.
+	 * Reserves one additional byte which is zeroed, so that text files can
+	 * be handled like a normal C string.
+	 * Throws an exception if the file couldn't be loaded for whatever reason.
+	 */
 	void    Open(FileSystem &, const char * const filename);
+
+	/// Works just like Open, but returns false when the load fails.
 	bool TryOpen(FileSystem &, const char * const filename);
-		void Close();
+
+	void Close(); /// Frees allocated memory.
 
 		inline int GetSize() const { return length; }
 		inline bool IsEOF() const { if(filepos>=length) return true; return false; }
+
+	/**
+	 * Set the file pointer to the given location.
+	 * Raises File_Boundary_Exceeded when the pointer is out of bound.
+	 */
 		void SetFilePos(int pos);
+
 		inline int GetFilePos(void) { return filepos; }
 
 		inline char Signed8(int pos = -1) { return Deref8(Data(1, pos)); }
@@ -62,7 +75,7 @@ class FileRead {
 	uint Unsigned32(const int pos = -1)
 	{return static_cast<const uint>(Little32(Deref32(Data(4, pos))));}
 		inline float Float(int pos = -1) { return LittleFloat(DerefFloat(Data(4, pos))); }
-		char *CString(int pos = -1);
+	char * CString(int pos = -1); /// Read a zero-terminated string.
 
 	/**
 	 * This function copies characters from the file to the memory starting at
@@ -75,21 +88,23 @@ class FileRead {
 	 */
 	bool ReadLine(char *buf, const char * const buf_end);
 
-		void *Data(int bytes, int pos = -1) {
-			int i;
-
+	void * Data(const int bytes, const int pos = -1) {
 			assert(data);
 
-			i = pos;
+			int i = pos;
 			if (pos < 0) {
 				i = filepos;
 				filepos += bytes;
 			}
-			if (i+bytes > length)
-				throw wexception("File boundary exceeded");
+		if (i+bytes > length) throw File_Boundary_Exceeded();
 
 			return static_cast<char * const>(data) + i;
 		}
+
+	void * data;
+private:
+	int    filepos;
+	int    length;
 };
 
 #endif

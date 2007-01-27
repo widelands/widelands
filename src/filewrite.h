@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,28 +28,46 @@ struct FileSystem;
  * Mirror of \ref FileRead : all writes are first stored in a block of memory and finally
  * written out when Write() is called.
  */
-class FileWrite {
-	public:
-	void * data;
-	int    length;
-	int    maxsize;
-	int    filepos;
-	int    counter;
+struct FileWrite {
 
-	public:
-		FileWrite();
-		~FileWrite();
+	struct FileRead_Exception {};
+	struct Buffer_Overflow        : public FileRead_Exception {};
 
+	FileWrite (); /// Set the buffer to empty.
+	~FileWrite(); /// Clear any remaining allocated data.
+
+	/**
+	 * Actually write the file out to disk.
+	 * If successful, this clears the buffers. Otherwise, an exception
+	 * is raised but the buffer remains intact (don't worry, it will be
+	 * cleared by the destructor).
+	 */
 	void    Write(FileSystem &, const char * const filename);
-	bool TryWrite(FileSystem &, const char * const filename);
-		void Clear();
 
-		void ResetByteCounter(void);
-		int  GetByteCounter(void);
+	void Clear(); /// Clears the object's buffer.
+
+	/**
+	 * Set the file pointer to a new location. The position can be beyond the
+	 * current end of file.
+	 */
 		int  GetFilePos(void);
+
+	/**
+	 * Set the file pointer to a new location. The position can be beyond
+	 * the current end of file.
+	 */
 		void SetFilePos(int pos);
+
+	/**
+	 * Write data at the given location. If pos is -1, write at the
+	 * file pointer and advance the file pointer.
+	 */
 		void Data(const void *data, int size, int pos = -1);
 
+	/**
+	 * This is a perfectly normal printf (actually it isn't because it's limited
+	 * to a maximum string size)
+	 */
 		void Printf(const char *fmt, ...);
 
 		inline void Signed8(char x, int pos = -1) { Data(&x, 1, pos); }
@@ -62,6 +80,12 @@ class FileWrite {
 	{const int y = Little32(static_cast<const int>(x)); Data(&y, 4, pos);}
 		inline void Float(float x, int pos = -1) { float y = LittleFloat(x); Data(&y, 4, pos); }
 		inline void CString(const char *x, int pos = -1) { Data(x, strlen(x)+1, pos); }
+
+private:
+	void * data;
+	int    length;
+	int    maxsize;
+	int    filepos;
 };
 
 #endif

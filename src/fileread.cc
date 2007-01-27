@@ -20,31 +20,11 @@
 #include "fileread.h"
 #include "filesystem.h"
 
-/**
- * Create the object with nothing to read
- */
-FileRead::FileRead()
-{
-	data = 0;
-}
+FileRead::FileRead() : data(0) {}
 
-/**
- * Close the file if open
- */
-FileRead::~FileRead()
-{
-	if (data)
-		Close();
-}
+FileRead::~FileRead() {if (data) Close();}
 
-/**
- * Loads a file into memory.
- * Reserves one additional byte which is zeroed, so that text files can
- * be handled like a normal C string.
- * Throws an exception if the file couldn't be loaded for whatever reason.
- *
- * \todo error handling
- */
+/// \todo error handling
 void FileRead::Open(FileSystem & fs, const char * const filename)
 {
 	assert(!data);
@@ -53,17 +33,11 @@ void FileRead::Open(FileSystem & fs, const char * const filename)
 	filepos = 0;
 }
 
-/**
- * Works just like Open, but returns false when the load fails.
- */
 bool FileRead::TryOpen(FileSystem & fs, const char * const filename) {
 	try {Open(fs, filename);} catch (const std::exception & e) {return false;}
 	return true;
 }
 
-/**
- * Frees allocated memory
- */
 void FileRead::Close()
 {
 	assert(data);
@@ -72,23 +46,15 @@ void FileRead::Close()
 	data = 0;
 }
 
-/**
- * Set the file pointer to the given location.
- * Raises an exception when the pointer is out of bound
- */
 void FileRead::SetFilePos(int pos)
 {
 	assert(data);
 
-	if (pos < 0 || pos >= length)
-		throw wexception("SetFilePos: %i out of bound", pos);
+	if (pos < 0 || pos >= length) throw File_Boundary_Exceeded();
 
 	filepos = pos;
 }
 
-/**
- * Read a zero-terminated string from the file
- */
 char *FileRead::CString(int pos)
 {
 	char *string, *p;
@@ -99,15 +65,13 @@ char *FileRead::CString(int pos)
 	i = pos;
 	if (pos < 0)
 		i = filepos;
-	if (i >= length)
-		throw wexception("File boundary exceeded");
+	if (i >= length) throw File_Boundary_Exceeded();
 
 	string = (char *)data + i;
 	for(p = string; *p; p++, i++) ;
 	i++; // beyond the NUL
 
-	if (i > length)
-		throw wexception("File boundary exceeded");
+	if (i > length) throw File_Boundary_Exceeded();
 
 	if (pos < 0)
 		filepos = i;
@@ -132,7 +96,7 @@ bool FileRead::ReadLine(char * buf, const char * const buf_end) {
 	do {
 		if (buf == buf_end) {
 			buf[-1] = 0;
-			throw wexception("ReadLine: buffer overflow");
+			throw Buffer_Overflow();
 		}
 		char c = ((char *)data)[filepos];
 		filepos++;
