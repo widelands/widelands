@@ -1015,7 +1015,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	// Default actions first
 
 	if (WareInstance * const item = w->fetch_carried_item(g)) {
-		const char * const ware_name = item->descr().name().c_str();
+		const char * const ware_name = item->get_ware_descr()->name().c_str();
 		if (not descr().is_output(ware_name)) molog
 			("PSITE: WARNING: carried item %s is not an output item\n", ware_name);
 
