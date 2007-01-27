@@ -294,20 +294,15 @@ Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 
 ####################################################################### buildcat
 
-buildcat=SConscript('locale/SConscript')
-
-##################################################################### The binary
-
-thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
-Default(thebinary)
-
-####################################################################### the rest
-
 SConscript('build/SConscript')
 SConscript('campaigns/SConscript')
 SConscript('doc/SConscript')
+buildcat=SConscript('locale/SConscript')
 SConscript('maps/SConscript')
 SConscript('utils/SConscript')
+thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
+
+Default(thebinary)
 
 ########################################################################### tags
 
@@ -402,6 +397,10 @@ distadd(env, 'worlds')
 dist=env.DistPackage('widelands.tar.bz2', '')
 Alias('dist', dist)
 AlwaysBuild(dist)
+
+snapshot=env.SnapshotPackage('widelands-snapshot.tar.bz2', '')
+Alias('snapshot', snapshot)
+AlwaysBuild(snapshot)
 
 ###################################################################### longlines
 

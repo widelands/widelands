@@ -46,6 +46,16 @@ def dodist(target, source, env):
 	tarbz2file.close()
 	shutil.rmtree(tmpdir)
 
+def dosnapshot(target, source, env):
+	tmpdir=mkdtemp(prefix='widelands-dist.')
+	tarbz2file=tarfile.open(str(target[0]),'w:bz2')
+
+	for (name,compress) in env['DISTFILES']:
+		tarbz2file.add(name)
+
+	tarbz2file.close()
+	shutil.rmtree(tmpdir)
+
 def generate(env):
 	env['DISTFILES']=[]
 
@@ -53,6 +63,11 @@ def generate(env):
 		bld = env['BUILDERS']['DistPackage']
 	except KeyError:
 		env['BUILDERS']['DistPackage'] = SCons.Builder.Builder(action=dodist)
+
+	try:
+		bld = env['BUILDERS']['SnapshotPackage']
+	except KeyError:
+		env['BUILDERS']['SnapshotPackage'] = SCons.Builder.Builder(action=dosnapshot)
 
 def exists(env):
 	return env.Detect('zip')
