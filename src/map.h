@@ -201,6 +201,7 @@ struct Map {
 	const char * get_description() const {return m_description;}
 	const char * get_world_name() const {return m_worldname;}
 	Uint8 get_nrplayers() const throw () {return m_nrplayers;}
+	Extent extent() const throw () {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const throw () {return m_width;}
 	Y_Coordinate get_height  () const throw () {return m_height;}
 	World & world() const throw () {return *m_world;}
