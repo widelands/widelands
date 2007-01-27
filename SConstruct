@@ -106,8 +106,8 @@ def cli_options():
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
-	opts.Add('bindir', '(either absolute or relative to install_prefix)', 'games/bin')
-	opts.Add('datadir', '(either absolute or relative to install_prefix)', 'games/share/widelands')
+	opts.Add('bindir', '(relative to install_prefix)', 'games')
+	opts.Add('datadir', '(relative to install_prefix)', 'share/games/widelands')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
 	opts.AddOptions(
@@ -297,9 +297,17 @@ Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 SConscript('build/SConscript')
 SConscript('campaigns/SConscript')
 SConscript('doc/SConscript')
+SConscript('fonts/SConscript')
+SConscript('game_server/SConscript')
 buildcat=SConscript('locale/SConscript')
 SConscript('maps/SConscript')
+SConscript('music/SConscript')
+SConscript('pics/SConscript')
+SConscript('sound/SConscript')
+SConscript('tribes/SConscript')
+SConscript('txts/SConscript')
 SConscript('utils/SConscript')
+SConscript('worlds/SConscript')
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 
 Default(thebinary)
@@ -322,62 +330,18 @@ if ('shrink' in BUILD_TARGETS):
 
 ########################################################## Install and uninstall
 
-INSTDIRS=[
-	'campaigns',
-	'fonts',
-	'game_server',
-	'maps',
-	'music',
-	'pics',
-	'sound',
-	'tribes',
-	'txts',
-	'worlds'
-	]
-INSTDIRS+=glob.glob("locale/??_??")
+instadd(env, 'ChangeLog', 'doc')
+instadd(env, 'COPYING', 'doc')
+instadd(env, 'CREDITS', 'doc')
+instadd(env, 'widelands', filetype='binary')
 
-BINDIR='./BIN'
-DATADIR='./DATA'
-instadd(env, 'widelands', os.path.join(BINDIR, 'widelands'))
-instadd(env, 'campaigns', os.path.join(DATADIR, 'campaigns'), True)
-instadd(env, 'fonts', os.path.join(DATADIR, 'fonts'))
-
-##TODO: need to install stuff like licenses - where do they go?
-#def do_inst(target, source, env):
-	#if not os.path.exists(BINDIR):
-		#os.makedirs(BINDIR, 0755)
-	#print 'Installing ', os.path.join(BINDIR, 'widelands')
-	#shutil.copy(os.path.join(BUILDDIR, 'widelands'), BINDIR)
-
-	#shutil.rmtree(DATADIR, ignore_errors=1)
-	#os.makedirs(DATADIR, 0755)
-
-	#for f in INSTDIRS:
-		#print 'Installing ', os.path.join(DATADIR, f)
-		#shutil.copytree(f, os.path.join(DATADIR, f))
-
-	#RMFILES=find(DATADIR, '*/.cvsignore')
-	#RMDIRS =find(DATADIR, '*/CVS')
-
-	#print 'Removing superfluous files ...'
-	#for f in RMFILES:
-		#os.remove(f)
-	#for f in RMDIRS:
-		#shutil.rmtree(f)
-
-#def do_uninst(target, source, env):
-	#print 'Removing ', DATADIR
-	#shutil.rmtree(DATADIR, ignore_errors=1)
-
-	#if os.path.exists(os.path.join(BINDIR, 'widelands')):
-		#print 'Removing ', os.path.join(BINDIR, 'widelands')
-		#os.remove(os.path.join(BINDIR, 'widelands'))
-
-install=env.Install('widelands-install.tar.bz2', '')
+install=env.Install('installtarget', '')
 Alias('install', install)
 AlwaysBuild(install)
 
-#uninstall=PhonyTarget("uninstall", do_uninst)
+uninstall=env.Uninstall('uninstalltarget', '')
+Alias('uninstall', uninstall)
+AlwaysBuild(uninstall)
 
 ##################################################################### Distribute
 
@@ -398,10 +362,7 @@ distadd(env, 'music')
 distadd(env, 'pics')
 distadd(env, 'sound')
 distadd(env, 'src')
-distadd(env, 'tribes')
-distadd(env, 'txts')
 distadd(env, 'utils')
-distadd(env, 'worlds')
 
 dist=env.DistPackage('widelands.tar.bz2', '')
 Alias('dist', dist)
@@ -424,4 +385,3 @@ Alias('precommit', 'longlines')
 ################################################################## Documentation
 
 PhonyTarget('doc', 'doxygen Doxyfile')
-

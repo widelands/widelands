@@ -1,0 +1,7 @@
+Import('*')
+
+from Distribute import distadd, instadd
+
+instadd(env, 'txts/*', 'doc')
+
+distadd(env, 'txts/*')

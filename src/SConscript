@@ -56,6 +56,6 @@ indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)
 
 binary=srcenv.Program(target='widelands', source=SRC)
-movebinary=srcenv.Command('#/widelands', binary, Move('widelands', BUILDDIR+'/widelands'))
+copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', BUILDDIR+'/widelands'))
 
-Return('movebinary')
+Return('copybinary')
