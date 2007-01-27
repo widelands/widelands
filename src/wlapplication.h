@@ -230,6 +230,7 @@ protected:
 
 	///The commandline, conveniently repackaged
 	std::map<std::string, std::string> m_commandline;
+	std::string m_loadgame_filename, m_tutorial_filename, m_editor_filename;
 
 	///the event recorder object
 	Journal *journal;

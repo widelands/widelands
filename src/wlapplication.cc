@@ -317,7 +317,27 @@ WLApplication::~WLApplication()
  */
 void WLApplication::run()
 {
-	if(editor_commandline==0){ //Normal startup (User did not type 'widelands --editor' in commandline)
+	if (editor_commandline) {
+		g_sound_handler.start_music("ingame");
+		//  FIXME if m_editor_filename.size(), load that file in the editor.
+		//  FIXME The editor loading code is unfortunately complicated and hidden
+		//  FIXME in Main_Menu_Load_Map::load_map, which is UI code.
+		Editor * const e = new Editor(); //  Local variable does not work (sig11).
+		e->run();
+		delete e;
+	} else if (m_loadgame_filename.size()) {
+		assert(not m_game);
+		m_game = new Game;
+		m_game->run_load_game(true, m_loadgame_filename.c_str());
+		delete m_game;
+		m_game = 0;
+	} else if (m_tutorial_filename.size()) {
+		assert(not m_game);
+		m_game = new Game;
+		m_game->run_splayer_map_direct(m_tutorial_filename.c_str(), true);
+		delete m_game;
+		m_game = 0;
+	} else {
 
 		g_sound_handler.start_music("intro");
 
@@ -352,12 +372,6 @@ void WLApplication::run()
 		g_sound_handler.change_music("menu", 1000);
 		mainmenu();
 
-	} // if(editor_commandline==0)
-	else { //  if (editor_commandline == 1) - Directly start the Editor
-		g_sound_handler.start_music("ingame");
-		Editor * const e = new Editor(); //  Local variable does not work (sig11).
-		e->run();
-		delete e;
 	}
 
 	g_sound_handler.stop_music(500);
@@ -916,8 +930,19 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 	}
 
 	if(m_commandline.count("editor")>0) {
+		m_editor_filename = m_commandline["editor"];
 		editor_commandline=1;
 		m_commandline.erase("editor");
+	}
+
+	if (m_commandline.count("loadgame") > 0) {
+		m_loadgame_filename = m_commandline["loadgame"];
+		m_commandline.erase("loadgame");
+	}
+
+	if (m_commandline.count("tutorial") > 0) {
+		m_tutorial_filename = m_commandline["tutorial"];
+		m_commandline.erase("tutorial");
 	}
 
 	//Note: it should be possible to record and playback at the same time,

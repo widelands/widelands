@@ -65,7 +65,7 @@ public:
    bool run_splayer_map_direct(const char* mapname, bool scenario);
 	bool run_single_player ();
 	bool run_multi_player (NetGame*);
-   bool run_load_game(bool);
+   bool run_load_game(const bool is_splayer, const char * gamename = 0);
 
 	void load_map (const char*);
 

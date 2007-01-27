@@ -114,15 +114,12 @@ throw (_wexception)
 					log
 						("Adding ware with id %i from Worker\n", ware->descr_index());
 					const Tribe_Descr & tribe = *worker->get_tribe();
-					log("HHH\n");
 					if (tribe.get_nrwares() <= ware_index_from_file)
 						throw wexception
 						("Widelands_Map_Waredata_Data_Packet: ware index out of "
 						 "range: %i\n",
 						 ware_index_from_file);
-					log("III\n");
 					ware->m_ware_descr = tribe.get_ware_descr(ware->descr_index());
-					log("JJJ\n");
 					ware->m_economy = 0; //  The worker sets our economy.
 				} else throw wexception
 					("Widelands_Map_Waredata_Data_Packet: location is not "
