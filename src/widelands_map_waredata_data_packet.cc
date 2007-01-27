@@ -65,59 +65,68 @@ throw (_wexception)
    }
 
 	const Uint16 packet_version=fr.Unsigned16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		for (;;) {
+	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
          uint reg=fr.Unsigned32();
          if(reg==0xffffffff) break; // end of wares
-         assert(ol->get_object_by_file_index(reg)->get_type()==Map_Object::WARE);
-
-			if
-				(WareInstance * const ware = dynamic_cast<WareInstance * const>
-				 (ol->get_object_by_file_index(reg)))
+		if
+			(WareInstance * const ware = dynamic_cast<WareInstance * const>
+			 (ol->get_object_by_file_index(reg)))
+		{
+			reg = fr.Unsigned32();
+			if (Map_Object * const location = ol->get_object_by_file_index(reg))
 			{
-
-         reg=fr.Unsigned32();
-				if (not reg) throw wexception
-					("Widelands_Map_Waredata_Data_Packet::Read: location serial "
-					 "number 0\n");
-
+				const Uint32 ware_index_from_file = fr.Unsigned32();
+				ware->m_descr_index = ware_index_from_file;
 				if
-					(PlayerImmovable * const location =
-					 dynamic_cast<PlayerImmovable * const>
-					 (ol->get_object_by_file_index(reg)))
+					(PlayerImmovable * const player_immovable =
+					 dynamic_cast<PlayerImmovable * const>(location))
 				{
+					if
+						(dynamic_cast<const Building * const>(player_immovable)
+						 or
+						 dynamic_cast<const Flag     * const>(player_immovable))
+					{
+						log
+							("Adding ware with id %i from %s\n",
+							 ware->descr_index(),
+							 dynamic_cast<const Flag * const>(location) ?
+							 "Flag" : "Building");
 
-			const Sint32 ware_index_from_file = fr.Signed32();
-			if (ware_index_from_file < 0) throw wexception
-				("Widelands_Map_Waredata_Data_Packet: negative ware index: %i\n",
-				 ware_index_from_file);
-			const Tribe_Descr & tribe =
-				static_cast<const PlayerImmovable &>(*location).owner().tribe();
-			if (tribe.get_nrwares() <= ware_index_from_file) throw wexception
-				("Widelands_Map_Waredata_Data_Packet: ware index out of range: "
-				 "%i\n",
-				ware_index_from_file);
-			ware->m_descr_index = ware_index_from_file;
-         switch(location->get_type()) {
-            case Map_Object::BUILDING: // Fallthrough
-            case Map_Object::FLAG:
-               log("Adding ware with id %i from %s\n", ware->descr_index(), location->get_type() == Map_Object::FLAG ?  "Flag" : "Building");
-               ware->m_economy=0; // We didn't know what kind of ware we were till now, so no economy might have a clue of us
+						//  We didn't know what kind of ware we were till now, so no
+						//  economy might have a clue of us.
+						ware->m_economy = 0;
+
+						const Tribe_Descr & tribe = player_immovable->owner().tribe();
+						if (tribe.get_nrwares() <= ware_index_from_file)
+							throw wexception
+							("Widelands_Map_Waredata_Data_Packet: ware index out "
+							 "of range: %i\n",
+							 ware_index_from_file);
+						ware->m_ware_descr =
+							tribe.get_ware_descr(ware->descr_index());
+						ware->set_economy(player_immovable->get_economy());
+					} else throw wexception
+						("Widelands_Map_Waredata_Data_Packet: location is "
+						 "PlayerImmovable but not Building or Flag\n");
+				} else if
+					(Worker * const worker = dynamic_cast<Worker * const>(location))
+				{
+					log
+						("Adding ware with id %i from Worker\n", ware->descr_index());
+					const Tribe_Descr & tribe = *worker->get_tribe();
+					log("HHH\n");
+					if (tribe.get_nrwares() <= ware_index_from_file)
+						throw wexception
+						("Widelands_Map_Waredata_Data_Packet: ware index out of "
+						 "range: %i\n",
+						 ware_index_from_file);
+					log("III\n");
 					ware->m_ware_descr = tribe.get_ware_descr(ware->descr_index());
-               ware->set_economy(static_cast<PlayerImmovable*>(location)->get_economy());
-               break;
-
-            case Map_Object::BOB:
-               log("Adding ware with id %i from Worker\n", ware->descr_index());
-               assert(static_cast<Bob*>(location)->get_bob_type()==Bob::WORKER);
-					ware->m_ware_descr = tribe.get_ware_descr(ware->descr_index());
-               ware->m_economy=0;
-               // The worker sets our economy
-               break;
-
-            default: throw wexception("Ware is on unknown object type: %i\n", location->get_type());
-         }
-
+					log("JJJ\n");
+					ware->m_economy = 0; //  The worker sets our economy.
+				} else throw wexception
+					("Widelands_Map_Waredata_Data_Packet: location is not "
+					 "PlayerImmovable or Worker\n");
          // Do not touch supply or transfer
 
          // m_transfer_nextstep
@@ -129,14 +138,21 @@ throw (_wexception)
             ware->m_transfer_nextstep=(Map_Object*)(0);
 
          // Do some kind of init
-         Game * const game = dynamic_cast<Game * const>(egbase);
-         if (game) ware->set_location(game, location);
+				if (Game * const game = dynamic_cast<Game * const>(egbase))
+					ware->set_location(game, location);
          ol->mark_object_as_loaded(ware);
          log("Loadede ware %p (descr is: %p)\n", ware, ware->m_ware_descr);
-      }
-      // DONE
-      return;
-			} throw wexception("Unknown version %i in Widelands_Map_Waredata_Data_Packet!\n", packet_version);
+			} else throw wexception
+				("Widelands_Map_Waredata_Data_Packet: location with serial "
+				 "number %u is not known\n",
+				 reg);
+		} else throw wexception
+			("Widelands_Map_Waredata_Data_Packet: ware with serial number %u "
+			 "is not known\n",
+			 reg);
+	} else throw wexception
+		("Unknown version %u in Widelands_Map_Waredata_Data_Packet!\n",
+		 packet_version);
 }
 
 
