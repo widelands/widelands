@@ -106,7 +106,7 @@ def cli_options():
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
-	opts.Add('bindir', '(either absolut or relative to install_prefix)', 'games')
+	opts.Add('bindir', '(either absolute or relative to install_prefix)', 'games/bin')
 	opts.Add('datadir', '(either absolute or relative to install_prefix)', 'games/share/widelands')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
@@ -336,39 +336,48 @@ INSTDIRS=[
 	]
 INSTDIRS+=glob.glob("locale/??_??")
 
-#TODO: need to install stuff like licenses - where do they go?
-def do_inst(target, source, env):
-	if not os.path.exists(BINDIR):
-		os.makedirs(BINDIR, 0755)
-	print 'Installing ', os.path.join(BINDIR, 'widelands')
-	shutil.copy(os.path.join(BUILDDIR, 'widelands'), BINDIR)
+BINDIR='./BIN'
+DATADIR='./DATA'
+instadd(env, 'widelands', os.path.join(BINDIR, 'widelands'))
+instadd(env, 'campaigns', os.path.join(DATADIR, 'campaigns'), True)
+instadd(env, 'fonts', os.path.join(DATADIR, 'fonts'))
 
-	shutil.rmtree(DATADIR, ignore_errors=1)
-	os.makedirs(DATADIR, 0755)
+##TODO: need to install stuff like licenses - where do they go?
+#def do_inst(target, source, env):
+	#if not os.path.exists(BINDIR):
+		#os.makedirs(BINDIR, 0755)
+	#print 'Installing ', os.path.join(BINDIR, 'widelands')
+	#shutil.copy(os.path.join(BUILDDIR, 'widelands'), BINDIR)
 
-	for f in INSTDIRS:
-		print 'Installing ', os.path.join(DATADIR, f)
-		shutil.copytree(f, os.path.join(DATADIR, f))
+	#shutil.rmtree(DATADIR, ignore_errors=1)
+	#os.makedirs(DATADIR, 0755)
 
-	RMFILES=find(DATADIR, '*/.cvsignore')
-	RMDIRS =find(DATADIR, '*/CVS')
+	#for f in INSTDIRS:
+		#print 'Installing ', os.path.join(DATADIR, f)
+		#shutil.copytree(f, os.path.join(DATADIR, f))
 
-	print 'Removing superfluous files ...'
-	for f in RMFILES:
-		os.remove(f)
-	for f in RMDIRS:
-		shutil.rmtree(f)
+	#RMFILES=find(DATADIR, '*/.cvsignore')
+	#RMDIRS =find(DATADIR, '*/CVS')
 
-def do_uninst(target, source, env):
-	print 'Removing ', DATADIR
-	shutil.rmtree(DATADIR, ignore_errors=1)
+	#print 'Removing superfluous files ...'
+	#for f in RMFILES:
+		#os.remove(f)
+	#for f in RMDIRS:
+		#shutil.rmtree(f)
 
-	if os.path.exists(os.path.join(BINDIR, 'widelands')):
-		print 'Removing ', os.path.join(BINDIR, 'widelands')
-		os.remove(os.path.join(BINDIR, 'widelands'))
+#def do_uninst(target, source, env):
+	#print 'Removing ', DATADIR
+	#shutil.rmtree(DATADIR, ignore_errors=1)
 
-install=PhonyTarget("install", do_inst)
-uninstall=PhonyTarget("uninstall", do_uninst)
+	#if os.path.exists(os.path.join(BINDIR, 'widelands')):
+		#print 'Removing ', os.path.join(BINDIR, 'widelands')
+		#os.remove(os.path.join(BINDIR, 'widelands'))
+
+install=env.Install('widelands-install.tar.bz2', '')
+Alias('install', install)
+AlwaysBuild(install)
+
+#uninstall=PhonyTarget("uninstall", do_uninst)
 
 ##################################################################### Distribute
 
