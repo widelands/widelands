@@ -836,7 +836,6 @@ void PlayerImmovable::set_economy(Economy *e)
 	if (m_economy == e)
 		return;
 
-   log("Setting economy for object %p, which is a %i to %p\n", this, get_type(), e);
 	for(uint i = 0; i < m_workers.size(); i++)
 		m_workers[i]->set_economy(e);
 
