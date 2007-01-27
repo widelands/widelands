@@ -156,6 +156,11 @@ struct Coords {
 };
 compile_assert(sizeof(Coords) == 4);
 
+struct Extent {
+	Extent(const Uint16 W, const Uint16 H) throw () : w(W), h(H) {}
+	Uint16 w, h;
+};
+
 struct Area : public Coords {
 	Area() throw () {}
 	Area(const Coords center, const uint Radius) throw ()
