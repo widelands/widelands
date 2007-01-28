@@ -95,7 +95,6 @@ throw (_wexception)
       }
       if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
-      return; // End of packet, do not run into assert
 		} else throw wexception
 			("Unkown version of Widelands_Map_Battle_Data_Packet : %d",
 			 packet_version);
