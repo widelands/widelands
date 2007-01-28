@@ -34,12 +34,20 @@ class Map;
 class Map_Loader;
 class RenderTarget;
 
-/**
- * Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu
- */
-class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Game* game;
+/// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
+struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
+	Fullscreen_Menu_LoadGame(Game &);
+	~Fullscreen_Menu_LoadGame();
 
+	const std::string & filename() {return m_filename;}
+
+	void clicked_ok    ();
+	void map_selected  (uint);
+	void double_clicked(uint);
+   void fill_list     ();
+
+private:
+	Game &                                      game;
 	UI::IDButton<Fullscreen_Menu_LoadGame, int> back;
 	UI::Button<Fullscreen_Menu_LoadGame>        m_ok;
 	UI::Listselect<const char * const>          list;
@@ -52,16 +60,6 @@ class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 
 	filenameset_t                               m_gamefiles;
 
-public:
-	Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer);
-	~Fullscreen_Menu_LoadGame();
-
-	const char *get_gamename() { return m_filename.c_str(); }
-
-	void clicked_ok();
-	void map_selected  (uint);
-	void double_clicked(uint);
-   void fill_list(void);
 };
 
 

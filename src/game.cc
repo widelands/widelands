@@ -173,21 +173,17 @@ bool Game::run_single_player ()
  * argument defines if this is a single player game (true)
  * or networked (false)
  */
-bool Game::run_load_game(const bool is_splayer, const char * gamename) {
+bool Game::run_load_game(const bool is_splayer, std::string filename) {
    assert(is_splayer); // TODO: net game saving not supported
 
-	std::string gn=gamename;
-
-	if (gn.empty()) {
-		Fullscreen_Menu_LoadGame ssg(this, true);
-		if (ssg.run())
-			gn = ssg.get_gamename();
-		else return false;
+	if (filename.empty()) {
+		Fullscreen_Menu_LoadGame ssg(*this);
+		if (ssg.run()) filename = ssg.filename(); else return false;
 	}
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
 
-	FileSystem * const fs = g_fs->MakeSubFileSystem(gn.c_str());
+	FileSystem * const fs = g_fs->MakeSubFileSystem(filename.c_str());
 
 	Game_Loader gl(*fs, this);
 	gl.load_game();

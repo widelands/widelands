@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,16 +27,9 @@
 #include "i18n.h"
 #include "layered_filesystem.h"
 
-/*
-==============================================================================
-
-Fullscreen_Menu_LoadGame
-
-==============================================================================
-*/
-
-Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *, bool) :
+Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
+game(g),
 
 	// UI::Buttons
 
@@ -87,7 +80,7 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 void Fullscreen_Menu_LoadGame::map_selected(uint) {
 	if (const char * const name = list.get_selected()) {
       FileSystem* fs = g_fs->MakeSubFileSystem( name );
-		Game_Loader gl(*fs, game);
+		Game_Loader gl(*fs, &game);
       Game_Preload_Data_Packet gpdp;
       gl.preload_game(&gpdp); // This has worked before, no problem
 
@@ -136,7 +129,7 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 
       try {
          fs = g_fs->MakeSubFileSystem( name );
-			Game_Loader gl(*fs, game);
+			Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
 	 char* fname = strdup(FileSystem::FS_Filename(name));

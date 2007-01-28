@@ -52,12 +52,11 @@ class BaseCommand;
 class PlayerCommand;
 class NetGame;
 
-class Game : public Editor_Game_Base {
+struct Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
    friend class Game_Game_Class_Data_Packet;
    friend class Game_Player_Info_Data_Packet;
 
-public:
 	Game(void);
 	~Game(void);
 
@@ -65,7 +64,14 @@ public:
    bool run_splayer_map_direct(const char* mapname, bool scenario);
 	bool run_single_player ();
 	bool run_multi_player (NetGame*);
-   bool run_load_game(const bool is_splayer, const char * gamename = 0);
+
+	/**
+	 * Loads a game from filename and runs it. If filename is empty, a dialog is
+	 * shown that lets the user chose a file to load. Returns false if the user
+	 * cancels the dialog. Otherwise returns the result of running the game.
+	 */
+	bool run_load_game
+		(const bool is_splayer, std::string filename = std::string());
 
 	void load_map (const char*);
 
