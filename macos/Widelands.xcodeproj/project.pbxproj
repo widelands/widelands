@@ -40,37 +40,6 @@
 		BF22DD8B0A5FB72B00D0292B /* editor.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB7B0A5FB72A00D0292B /* editor.h */; };
 		BF22DD8C0A5FB72B00D0292B /* editorinteractive.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */; };
 		BF22DD8D0A5FB72B00D0292B /* editorinteractive.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */; };
-		BF22DD8F0A5FB72B00D0292B /* editor_decrease_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB800A5FB72A00D0292B /* editor_decrease_height_tool.cc */; };
-		BF22DD900A5FB72B00D0292B /* editor_decrease_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB810A5FB72A00D0292B /* editor_decrease_height_tool.h */; };
-		BF22DD910A5FB72B00D0292B /* editor_decrease_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB820A5FB72A00D0292B /* editor_decrease_resources_tool.cc */; };
-		BF22DD920A5FB72B00D0292B /* editor_decrease_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB830A5FB72A00D0292B /* editor_decrease_resources_tool.h */; };
-		BF22DD930A5FB72B00D0292B /* editor_delete_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB840A5FB72A00D0292B /* editor_delete_bob_tool.cc */; };
-		BF22DD940A5FB72B00D0292B /* editor_delete_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB850A5FB72A00D0292B /* editor_delete_bob_tool.h */; };
-		BF22DD950A5FB72B00D0292B /* editor_delete_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB860A5FB72A00D0292B /* editor_delete_immovable_tool.cc */; };
-		BF22DD960A5FB72B00D0292B /* editor_delete_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB870A5FB72A00D0292B /* editor_delete_immovable_tool.h */; };
-		BF22DD970A5FB72B00D0292B /* editor_increase_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB880A5FB72A00D0292B /* editor_increase_height_tool.cc */; };
-		BF22DD980A5FB72B00D0292B /* editor_increase_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB890A5FB72A00D0292B /* editor_increase_height_tool.h */; };
-		BF22DD990A5FB72B00D0292B /* editor_increase_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB8A0A5FB72A00D0292B /* editor_increase_resources_tool.cc */; };
-		BF22DD9A0A5FB72B00D0292B /* editor_increase_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB8B0A5FB72A00D0292B /* editor_increase_resources_tool.h */; };
-		BF22DD9B0A5FB72B00D0292B /* editor_info_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB8C0A5FB72A00D0292B /* editor_info_tool.cc */; };
-		BF22DD9C0A5FB72B00D0292B /* editor_info_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB8D0A5FB72A00D0292B /* editor_info_tool.h */; };
-		BF22DD9D0A5FB72B00D0292B /* editor_make_infrastructure_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB8E0A5FB72A00D0292B /* editor_make_infrastructure_tool.cc */; };
-		BF22DD9E0A5FB72B00D0292B /* editor_make_infrastructure_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB8F0A5FB72A00D0292B /* editor_make_infrastructure_tool.h */; };
-		BF22DD9F0A5FB72B00D0292B /* editor_noise_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB900A5FB72A00D0292B /* editor_noise_height_tool.cc */; };
-		BF22DDA00A5FB72B00D0292B /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB910A5FB72A00D0292B /* editor_noise_height_tool.h */; };
-		BF22DDA10A5FB72B00D0292B /* editor_place_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB920A5FB72A00D0292B /* editor_place_bob_tool.cc */; };
-		BF22DDA20A5FB72B00D0292B /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB930A5FB72A00D0292B /* editor_place_bob_tool.h */; };
-		BF22DDA30A5FB72B00D0292B /* editor_place_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB940A5FB72A00D0292B /* editor_place_immovable_tool.cc */; };
-		BF22DDA40A5FB72B00D0292B /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB950A5FB72A00D0292B /* editor_place_immovable_tool.h */; };
-		BF22DDAA0A5FB72B00D0292B /* editor_set_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB9B0A5FB72A00D0292B /* editor_set_height_tool.h */; };
-		BF22DDAB0A5FB72B00D0292B /* editor_set_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB9C0A5FB72A00D0292B /* editor_set_resources_tool.cc */; };
-		BF22DDAC0A5FB72B00D0292B /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB9D0A5FB72A00D0292B /* editor_set_resources_tool.h */; };
-		BF22DDAF0A5FB72B00D0292B /* editor_set_starting_pos_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA00A5FB72A00D0292B /* editor_set_starting_pos_tool.cc */; };
-		BF22DDB00A5FB72B00D0292B /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA10A5FB72A00D0292B /* editor_set_starting_pos_tool.h */; };
-		BF22DDA60A5FB72B00D0292B /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB970A5FB72A00D0292B /* editor_set_terrain_tool.h */; };
-		BF22DDA70A5FB72B00D0292B /* editor_set_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB980A5FB72A00D0292B /* editor_set_terrain_tool.cc */; };
-		BF22DDB10A5FB72B00D0292B /* editor_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA20A5FB72A00D0292B /* editor_tool.h */; };
-		BF22DDB20A5FB72B00D0292B /* multi_select.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA30A5FB72A00D0292B /* multi_select.h */; };
 		BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */; };
 		BF22DDB70A5FB72B00D0292B /* editor_event_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA90A5FB72B00D0292B /* editor_event_menu.h */; };
 		BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBAA0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc */; };
@@ -168,7 +137,6 @@
 		BF22DE150A5FB72B00D0292B /* fieldaction.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC070A5FB72B00D0292B /* fieldaction.h */; };
 		BF22DE160A5FB72B00D0292B /* fileread.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC080A5FB72B00D0292B /* fileread.cc */; };
 		BF22DE170A5FB72B00D0292B /* fileread.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC090A5FB72B00D0292B /* fileread.h */; };
-		BF22DE180A5FB72B00D0292B /* files.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC0A0A5FB72B00D0292B /* files.cc */; };
 		BF22DE190A5FB72B00D0292B /* filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC0B0A5FB72B00D0292B /* filesystem.h */; };
 		BF22DE1A0A5FB72B00D0292B /* filewrite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC0C0A5FB72B00D0292B /* filewrite.cc */; };
 		BF22DE1B0A5FB72B00D0292B /* filewrite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC0D0A5FB72B00D0292B /* filewrite.h */; };
@@ -263,8 +231,6 @@
 		BF22DE740A5FB72B00D0292B /* journal_exceptions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC660A5FB72B00D0292B /* journal_exceptions.h */; };
 		BF22DE750A5FB72B00D0292B /* keycodes.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC670A5FB72B00D0292B /* keycodes.h */; };
 		BF22DE760A5FB72B00D0292B /* languages.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC680A5FB72B00D0292B /* languages.h */; };
-		BF22DE770A5FB72B00D0292B /* layeredfilesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC690A5FB72B00D0292B /* layeredfilesystem.cc */; };
-		BF22DE780A5FB72B00D0292B /* layeredfilesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC6A0A5FB72B00D0292B /* layeredfilesystem.h */; };
 		BF22DE790A5FB72B00D0292B /* machdep.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC6B0A5FB72B00D0292B /* machdep.h */; };
 		BF22DE7A0A5FB72B00D0292B /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC6C0A5FB72B00D0292B /* main.cc */; };
 		BF22DE7B0A5FB72B00D0292B /* map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC6D0A5FB72B00D0292B /* map.cc */; };
@@ -317,8 +283,6 @@
 		BF22DEAC0A5FB72B00D0292B /* queue_cmd_ids.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC9E0A5FB72B00D0292B /* queue_cmd_ids.h */; };
 		BF22DEAD0A5FB72B00D0292B /* random.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC9F0A5FB72B00D0292B /* random.cc */; };
 		BF22DEAE0A5FB72B00D0292B /* random.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA00A5FB72B00D0292B /* random.h */; };
-		BF22DEAF0A5FB72B00D0292B /* realfsimpl.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCA10A5FB72B00D0292B /* realfsimpl.cc */; };
-		BF22DEB00A5FB72B00D0292B /* realfsimpl.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA20A5FB72B00D0292B /* realfsimpl.h */; };
 		BF22DEB10A5FB72B00D0292B /* render.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCA30A5FB72B00D0292B /* render.cc */; };
 		BF22DEB20A5FB72B00D0292B /* rendertarget.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA40A5FB72B00D0292B /* rendertarget.h */; };
 		BF22DEB30A5FB72B00D0292B /* rgbcolor.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA50A5FB72B00D0292B /* rgbcolor.h */; };
@@ -544,6 +508,62 @@
 		BF773E4F0A87E61000181633 /* tribes in Resources */ = {isa = PBXBuildFile; fileRef = BF771A810A87E60400181633 /* tribes */; };
 		BF773E500A87E61000181633 /* txts in Resources */ = {isa = PBXBuildFile; fileRef = BF7738740A87E60C00181633 /* txts */; };
 		BF773E510A87E61000181633 /* worlds in Resources */ = {isa = PBXBuildFile; fileRef = BF77387A0A87E60C00181633 /* worlds */; };
+		BFA98F390B4F01DA00FB5075 /* attack_controller.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F270B4F01D900FB5075 /* attack_controller.cc */; };
+		BFA98F3A0B4F01DA00FB5075 /* attack_controller.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F280B4F01D900FB5075 /* attack_controller.h */; };
+		BFA98F3B0B4F01DA00FB5075 /* cmd_check_eventchain.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */; };
+		BFA98F3C0B4F01DA00FB5075 /* compile_assert.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2A0B4F01D900FB5075 /* compile_assert.h */; };
+		BFA98F3D0B4F01DA00FB5075 /* disk_filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F2B0B4F01D900FB5075 /* disk_filesystem.cc */; };
+		BFA98F3E0B4F01DA00FB5075 /* disk_filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2C0B4F01D900FB5075 /* disk_filesystem.h */; };
+		BFA98F3F0B4F01DA00FB5075 /* encyclopedia_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */; };
+		BFA98F400B4F01DA00FB5075 /* encyclopedia_window.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2E0B4F01D900FB5075 /* encyclopedia_window.h */; };
+		BFA98F410B4F01DA00FB5075 /* filesystem_exceptions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2F0B4F01D900FB5075 /* filesystem_exceptions.h */; };
+		BFA98F420B4F01DA00FB5075 /* filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F300B4F01D900FB5075 /* filesystem.cc */; };
+		BFA98F430B4F01DA00FB5075 /* helper.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F310B4F01D900FB5075 /* helper.h */; };
+		BFA98F440B4F01DA00FB5075 /* layered_filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F320B4F01D900FB5075 /* layered_filesystem.cc */; };
+		BFA98F450B4F01DA00FB5075 /* layered_filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F330B4F01D900FB5075 /* layered_filesystem.h */; };
+		BFA98F460B4F01DA00FB5075 /* transport_draw.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F340B4F01D900FB5075 /* transport_draw.cc */; };
+		BFA98F470B4F01DA00FB5075 /* unzip.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F350B4F01D900FB5075 /* unzip.cc */; };
+		BFA98F480B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */; };
+		BFA98F490B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F370B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.h */; };
+		BFA98F4A0B4F01DA00FB5075 /* zip_exceptions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F380B4F01D900FB5075 /* zip_exceptions.h */; };
+		BFF8CEBF0B6CC6AF005E6AF1 /* animation_gfx.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEB90B6CC6AF005E6AF1 /* animation_gfx.h */; };
+		BFF8CEC00B6CC6AF005E6AF1 /* event_player_area.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFF8CEBA0B6CC6AF005E6AF1 /* event_player_area.cc */; };
+		BFF8CEC10B6CC6AF005E6AF1 /* event_player_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBB0B6CC6AF005E6AF1 /* event_player_area.h */; };
+		BFF8CEC20B6CC6AF005E6AF1 /* player_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBC0B6CC6AF005E6AF1 /* player_area.h */; };
+		BFF8CEC30B6CC6AF005E6AF1 /* widelands_fileread.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBD0B6CC6AF005E6AF1 /* widelands_fileread.h */; };
+		BFF8CEC40B6CC6AF005E6AF1 /* widelands_filewrite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBE0B6CC6AF005E6AF1 /* widelands_filewrite.h */; };
+		BFFB200A0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEA0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc */; };
+		BFFB200B0B60FAD000EBF1A3 /* editor_decrease_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FEB0B60FAD000EBF1A3 /* editor_decrease_height_tool.h */; };
+		BFFB200C0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEC0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc */; };
+		BFFB200D0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FED0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h */; };
+		BFFB200E0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEE0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc */; };
+		BFFB200F0B60FAD000EBF1A3 /* editor_delete_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FEF0B60FAD000EBF1A3 /* editor_delete_bob_tool.h */; };
+		BFFB20100B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF00B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc */; };
+		BFFB20110B60FAD000EBF1A3 /* editor_delete_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF10B60FAD000EBF1A3 /* editor_delete_immovable_tool.h */; };
+		BFFB20120B60FAD000EBF1A3 /* editor_increase_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF20B60FAD000EBF1A3 /* editor_increase_height_tool.cc */; };
+		BFFB20130B60FAD000EBF1A3 /* editor_increase_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF30B60FAD000EBF1A3 /* editor_increase_height_tool.h */; };
+		BFFB20140B60FAD000EBF1A3 /* editor_increase_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF40B60FAD000EBF1A3 /* editor_increase_resources_tool.cc */; };
+		BFFB20150B60FAD000EBF1A3 /* editor_increase_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF50B60FAD000EBF1A3 /* editor_increase_resources_tool.h */; };
+		BFFB20160B60FAD000EBF1A3 /* editor_info_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF60B60FAD000EBF1A3 /* editor_info_tool.cc */; };
+		BFFB20170B60FAD000EBF1A3 /* editor_info_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF70B60FAD000EBF1A3 /* editor_info_tool.h */; };
+		BFFB20180B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF80B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc */; };
+		BFFB20190B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF90B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h */; };
+		BFFB201A0B60FAD000EBF1A3 /* editor_noise_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FFA0B60FAD000EBF1A3 /* editor_noise_height_tool.cc */; };
+		BFFB201B0B60FAD000EBF1A3 /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FFB0B60FAD000EBF1A3 /* editor_noise_height_tool.h */; };
+		BFFB201C0B60FAD000EBF1A3 /* editor_place_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FFC0B60FAD000EBF1A3 /* editor_place_bob_tool.cc */; };
+		BFFB201D0B60FAD000EBF1A3 /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FFD0B60FAD000EBF1A3 /* editor_place_bob_tool.h */; };
+		BFFB201E0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FFE0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc */; };
+		BFFB201F0B60FAD000EBF1A3 /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FFF0B60FAD000EBF1A3 /* editor_place_immovable_tool.h */; };
+		BFFB20200B60FAD000EBF1A3 /* editor_set_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20000B60FAD000EBF1A3 /* editor_set_height_tool.cc */; };
+		BFFB20210B60FAD000EBF1A3 /* editor_set_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20010B60FAD000EBF1A3 /* editor_set_height_tool.h */; };
+		BFFB20220B60FAD000EBF1A3 /* editor_set_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20020B60FAD000EBF1A3 /* editor_set_resources_tool.cc */; };
+		BFFB20230B60FAD000EBF1A3 /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20030B60FAD000EBF1A3 /* editor_set_resources_tool.h */; };
+		BFFB20240B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20040B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc */; };
+		BFFB20250B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20050B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h */; };
+		BFFB20260B60FAD000EBF1A3 /* editor_set_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20060B60FAD000EBF1A3 /* editor_set_terrain_tool.cc */; };
+		BFFB20270B60FAD000EBF1A3 /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20070B60FAD000EBF1A3 /* editor_set_terrain_tool.h */; };
+		BFFB20280B60FAD000EBF1A3 /* editor_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20080B60FAD000EBF1A3 /* editor_tool.h */; };
+		BFFB20290B60FAD000EBF1A3 /* multi_select.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20090B60FAD000EBF1A3 /* multi_select.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -569,23 +589,6 @@
 				BF22DD890A5FB72B00D0292B /* descr_maintainer.h in Copy Frameworks into .app bundle */,
 				BF22DD8B0A5FB72B00D0292B /* editor.h in Copy Frameworks into .app bundle */,
 				BF22DD8D0A5FB72B00D0292B /* editorinteractive.h in Copy Frameworks into .app bundle */,
-				BF22DD900A5FB72B00D0292B /* editor_decrease_height_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD920A5FB72B00D0292B /* editor_decrease_resources_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD940A5FB72B00D0292B /* editor_delete_bob_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD960A5FB72B00D0292B /* editor_delete_immovable_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD980A5FB72B00D0292B /* editor_increase_height_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD9A0A5FB72B00D0292B /* editor_increase_resources_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD9C0A5FB72B00D0292B /* editor_info_tool.h in Copy Frameworks into .app bundle */,
-				BF22DD9E0A5FB72B00D0292B /* editor_make_infrastructure_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDA00A5FB72B00D0292B /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDA20A5FB72B00D0292B /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDA40A5FB72B00D0292B /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDAA0A5FB72B00D0292B /* editor_set_height_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDAC0A5FB72B00D0292B /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDB00A5FB72B00D0292B /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDA60A5FB72B00D0292B /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDB10A5FB72B00D0292B /* editor_tool.h in Copy Frameworks into .app bundle */,
-				BF22DDB20A5FB72B00D0292B /* multi_select.h in Copy Frameworks into .app bundle */,
 				BF22DDB70A5FB72B00D0292B /* editor_event_menu.h in Copy Frameworks into .app bundle */,
 				BF22DDB90A5FB72B00D0292B /* editor_event_menu_edit_eventchain.h in Copy Frameworks into .app bundle */,
 				BF22DDBB0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.h in Copy Frameworks into .app bundle */,
@@ -686,7 +689,6 @@
 				BF22DE740A5FB72B00D0292B /* journal_exceptions.h in Copy Frameworks into .app bundle */,
 				BF22DE750A5FB72B00D0292B /* keycodes.h in Copy Frameworks into .app bundle */,
 				BF22DE760A5FB72B00D0292B /* languages.h in Copy Frameworks into .app bundle */,
-				BF22DE780A5FB72B00D0292B /* layeredfilesystem.h in Copy Frameworks into .app bundle */,
 				BF22DE790A5FB72B00D0292B /* machdep.h in Copy Frameworks into .app bundle */,
 				BF22DE7C0A5FB72B00D0292B /* map.h in Copy Frameworks into .app bundle */,
 				BF22DE7E0A5FB72B00D0292B /* map_event_manager.h in Copy Frameworks into .app bundle */,
@@ -715,7 +717,6 @@
 				BF22DEAB0A5FB72B00D0292B /* queue_cmd_factory.h in Copy Frameworks into .app bundle */,
 				BF22DEAC0A5FB72B00D0292B /* queue_cmd_ids.h in Copy Frameworks into .app bundle */,
 				BF22DEAE0A5FB72B00D0292B /* random.h in Copy Frameworks into .app bundle */,
-				BF22DEB00A5FB72B00D0292B /* realfsimpl.h in Copy Frameworks into .app bundle */,
 				BF22DEB20A5FB72B00D0292B /* rendertarget.h in Copy Frameworks into .app bundle */,
 				BF22DEB30A5FB72B00D0292B /* rgbcolor.h in Copy Frameworks into .app bundle */,
 				BF22DEB50A5FB72B00D0292B /* s2map.h in Copy Frameworks into .app bundle */,
@@ -822,6 +823,38 @@
 				BF22DF760A5FB72B00D0292B /* wui_plot_area.h in Copy Frameworks into .app bundle */,
 				BF22DF770A5FB72B00D0292B /* zip.h in Copy Frameworks into .app bundle */,
 				BF22DF790A5FB72B00D0292B /* zip_filesystem.h in Copy Frameworks into .app bundle */,
+				BFA98F3A0B4F01DA00FB5075 /* attack_controller.h in Copy Frameworks into .app bundle */,
+				BFA98F3B0B4F01DA00FB5075 /* cmd_check_eventchain.h in Copy Frameworks into .app bundle */,
+				BFA98F3C0B4F01DA00FB5075 /* compile_assert.h in Copy Frameworks into .app bundle */,
+				BFA98F3E0B4F01DA00FB5075 /* disk_filesystem.h in Copy Frameworks into .app bundle */,
+				BFA98F400B4F01DA00FB5075 /* encyclopedia_window.h in Copy Frameworks into .app bundle */,
+				BFA98F410B4F01DA00FB5075 /* filesystem_exceptions.h in Copy Frameworks into .app bundle */,
+				BFA98F430B4F01DA00FB5075 /* helper.h in Copy Frameworks into .app bundle */,
+				BFA98F450B4F01DA00FB5075 /* layered_filesystem.h in Copy Frameworks into .app bundle */,
+				BFA98F490B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.h in Copy Frameworks into .app bundle */,
+				BFA98F4A0B4F01DA00FB5075 /* zip_exceptions.h in Copy Frameworks into .app bundle */,
+				BFFB200B0B60FAD000EBF1A3 /* editor_decrease_height_tool.h in Copy Frameworks into .app bundle */,
+				BFFB200D0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h in Copy Frameworks into .app bundle */,
+				BFFB200F0B60FAD000EBF1A3 /* editor_delete_bob_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20110B60FAD000EBF1A3 /* editor_delete_immovable_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20130B60FAD000EBF1A3 /* editor_increase_height_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20150B60FAD000EBF1A3 /* editor_increase_resources_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20170B60FAD000EBF1A3 /* editor_info_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20190B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h in Copy Frameworks into .app bundle */,
+				BFFB201B0B60FAD000EBF1A3 /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */,
+				BFFB201D0B60FAD000EBF1A3 /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */,
+				BFFB201F0B60FAD000EBF1A3 /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20210B60FAD000EBF1A3 /* editor_set_height_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20230B60FAD000EBF1A3 /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20250B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20270B60FAD000EBF1A3 /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20280B60FAD000EBF1A3 /* editor_tool.h in Copy Frameworks into .app bundle */,
+				BFFB20290B60FAD000EBF1A3 /* multi_select.h in Copy Frameworks into .app bundle */,
+				BFF8CEBF0B6CC6AF005E6AF1 /* animation_gfx.h in Copy Frameworks into .app bundle */,
+				BFF8CEC10B6CC6AF005E6AF1 /* event_player_area.h in Copy Frameworks into .app bundle */,
+				BFF8CEC20B6CC6AF005E6AF1 /* player_area.h in Copy Frameworks into .app bundle */,
+				BFF8CEC30B6CC6AF005E6AF1 /* widelands_fileread.h in Copy Frameworks into .app bundle */,
+				BFF8CEC40B6CC6AF005E6AF1 /* widelands_filewrite.h in Copy Frameworks into .app bundle */,
 			);
 			name = "Copy Frameworks into .app bundle";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,38 +900,6 @@
 		BF22DB7B0A5FB72A00D0292B /* editor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor.h; sourceTree = "<group>"; };
 		BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editorinteractive.cc; sourceTree = "<group>"; };
 		BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editorinteractive.h; sourceTree = "<group>"; };
-		BF22DB800A5FB72A00D0292B /* editor_decrease_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_decrease_height_tool.cc; sourceTree = "<group>"; };
-		BF22DB810A5FB72A00D0292B /* editor_decrease_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_decrease_height_tool.h; sourceTree = "<group>"; };
-		BF22DB820A5FB72A00D0292B /* editor_decrease_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_decrease_resources_tool.cc; sourceTree = "<group>"; };
-		BF22DB830A5FB72A00D0292B /* editor_decrease_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_decrease_resources_tool.h; sourceTree = "<group>"; };
-		BF22DB840A5FB72A00D0292B /* editor_delete_bob_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_delete_bob_tool.cc; sourceTree = "<group>"; };
-		BF22DB850A5FB72A00D0292B /* editor_delete_bob_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_delete_bob_tool.h; sourceTree = "<group>"; };
-		BF22DB860A5FB72A00D0292B /* editor_delete_immovable_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_delete_immovable_tool.cc; sourceTree = "<group>"; };
-		BF22DB870A5FB72A00D0292B /* editor_delete_immovable_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_delete_immovable_tool.h; sourceTree = "<group>"; };
-		BF22DB880A5FB72A00D0292B /* editor_increase_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_increase_height_tool.cc; sourceTree = "<group>"; };
-		BF22DB890A5FB72A00D0292B /* editor_increase_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_increase_height_tool.h; sourceTree = "<group>"; };
-		BF22DB8A0A5FB72A00D0292B /* editor_increase_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_increase_resources_tool.cc; sourceTree = "<group>"; };
-		BF22DB8B0A5FB72A00D0292B /* editor_increase_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_increase_resources_tool.h; sourceTree = "<group>"; };
-		BF22DB8C0A5FB72A00D0292B /* editor_info_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_info_tool.cc; sourceTree = "<group>"; };
-		BF22DB8D0A5FB72A00D0292B /* editor_info_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_info_tool.h; sourceTree = "<group>"; };
-		BF22DB8E0A5FB72A00D0292B /* editor_make_infrastructure_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_make_infrastructure_tool.cc; sourceTree = "<group>"; };
-		BF22DB8F0A5FB72A00D0292B /* editor_make_infrastructure_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_make_infrastructure_tool.h; sourceTree = "<group>"; };
-		BF22DB900A5FB72A00D0292B /* editor_noise_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_noise_height_tool.cc; sourceTree = "<group>"; };
-		BF22DB910A5FB72A00D0292B /* editor_noise_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_noise_height_tool.h; sourceTree = "<group>"; };
-		BF22DB920A5FB72A00D0292B /* editor_place_bob_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_place_bob_tool.cc; sourceTree = "<group>"; };
-		BF22DB930A5FB72A00D0292B /* editor_place_bob_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_place_bob_tool.h; sourceTree = "<group>"; };
-		BF22DB940A5FB72A00D0292B /* editor_place_immovable_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_place_immovable_tool.cc; sourceTree = "<group>"; };
-		BF22DB950A5FB72A00D0292B /* editor_place_immovable_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_place_immovable_tool.h; sourceTree = "<group>"; };
-		BF22DB9A0A5FB72A00D0292B /* editor_set_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_height_tool.cc; sourceTree = "<group>"; };
-		BF22DB9B0A5FB72A00D0292B /* editor_set_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_height_tool.h; sourceTree = "<group>"; };
-		BF22DB9C0A5FB72A00D0292B /* editor_set_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_resources_tool.cc; sourceTree = "<group>"; };
-		BF22DB9D0A5FB72A00D0292B /* editor_set_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_resources_tool.h; sourceTree = "<group>"; };
-		BF22DBA00A5FB72A00D0292B /* editor_set_starting_pos_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_starting_pos_tool.cc; sourceTree = "<group>"; };
-		BF22DBA10A5FB72A00D0292B /* editor_set_starting_pos_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_starting_pos_tool.h; sourceTree = "<group>"; };
-		BF22DB960A5FB72A00D0292B /* editor_set_terrain_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_terrain_tool.cc; sourceTree = "<group>"; };
-		BF22DB970A5FB72A00D0292B /* editor_set_terrain_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_terrain_tool.h; sourceTree = "<group>"; };
-		BF22DBA20A5FB72A00D0292B /* editor_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_tool.h; sourceTree = "<group>"; };
-		BF22DBA30A5FB72A00D0292B /* multi_select.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = multi_select.h; sourceTree = "<group>"; };
 		BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_event_menu.cc; sourceTree = "<group>"; };
 		BF22DBA90A5FB72B00D0292B /* editor_event_menu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_event_menu.h; sourceTree = "<group>"; };
 		BF22DBAA0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_event_menu_edit_eventchain.cc; sourceTree = "<group>"; };
@@ -996,7 +997,6 @@
 		BF22DC070A5FB72B00D0292B /* fieldaction.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fieldaction.h; sourceTree = "<group>"; };
 		BF22DC080A5FB72B00D0292B /* fileread.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = fileread.cc; sourceTree = "<group>"; };
 		BF22DC090A5FB72B00D0292B /* fileread.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fileread.h; sourceTree = "<group>"; };
-		BF22DC0A0A5FB72B00D0292B /* files.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = files.cc; sourceTree = "<group>"; };
 		BF22DC0B0A5FB72B00D0292B /* filesystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = filesystem.h; sourceTree = "<group>"; };
 		BF22DC0C0A5FB72B00D0292B /* filewrite.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = filewrite.cc; sourceTree = "<group>"; };
 		BF22DC0D0A5FB72B00D0292B /* filewrite.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = filewrite.h; sourceTree = "<group>"; };
@@ -1091,8 +1091,6 @@
 		BF22DC660A5FB72B00D0292B /* journal_exceptions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = journal_exceptions.h; sourceTree = "<group>"; };
 		BF22DC670A5FB72B00D0292B /* keycodes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = keycodes.h; sourceTree = "<group>"; };
 		BF22DC680A5FB72B00D0292B /* languages.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = languages.h; sourceTree = "<group>"; };
-		BF22DC690A5FB72B00D0292B /* layeredfilesystem.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = layeredfilesystem.cc; sourceTree = "<group>"; };
-		BF22DC6A0A5FB72B00D0292B /* layeredfilesystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = layeredfilesystem.h; sourceTree = "<group>"; };
 		BF22DC6B0A5FB72B00D0292B /* machdep.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = machdep.h; sourceTree = "<group>"; };
 		BF22DC6C0A5FB72B00D0292B /* main.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
 		BF22DC6D0A5FB72B00D0292B /* map.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = map.cc; sourceTree = "<group>"; };
@@ -1145,8 +1143,6 @@
 		BF22DC9E0A5FB72B00D0292B /* queue_cmd_ids.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = queue_cmd_ids.h; sourceTree = "<group>"; };
 		BF22DC9F0A5FB72B00D0292B /* random.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = random.cc; sourceTree = "<group>"; };
 		BF22DCA00A5FB72B00D0292B /* random.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = random.h; sourceTree = "<group>"; };
-		BF22DCA10A5FB72B00D0292B /* realfsimpl.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = realfsimpl.cc; sourceTree = "<group>"; };
-		BF22DCA20A5FB72B00D0292B /* realfsimpl.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = realfsimpl.h; sourceTree = "<group>"; };
 		BF22DCA30A5FB72B00D0292B /* render.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = render.cc; sourceTree = "<group>"; };
 		BF22DCA40A5FB72B00D0292B /* rendertarget.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = rendertarget.h; sourceTree = "<group>"; };
 		BF22DCA50A5FB72B00D0292B /* rgbcolor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = rgbcolor.h; sourceTree = "<group>"; };
@@ -1372,7 +1368,63 @@
 		BF771A810A87E60400181633 /* tribes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tribes; path = ../tribes; sourceTree = SOURCE_ROOT; };
 		BF7738740A87E60C00181633 /* txts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = txts; path = ../txts; sourceTree = SOURCE_ROOT; };
 		BF77387A0A87E60C00181633 /* worlds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = worlds; path = ../worlds; sourceTree = SOURCE_ROOT; };
+		BFA98F270B4F01D900FB5075 /* attack_controller.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = attack_controller.cc; sourceTree = "<group>"; };
+		BFA98F280B4F01D900FB5075 /* attack_controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = attack_controller.h; sourceTree = "<group>"; };
+		BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cmd_check_eventchain.h; sourceTree = "<group>"; };
+		BFA98F2A0B4F01D900FB5075 /* compile_assert.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = compile_assert.h; sourceTree = "<group>"; };
+		BFA98F2B0B4F01D900FB5075 /* disk_filesystem.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = disk_filesystem.cc; sourceTree = "<group>"; };
+		BFA98F2C0B4F01D900FB5075 /* disk_filesystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = disk_filesystem.h; sourceTree = "<group>"; };
+		BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = encyclopedia_window.cc; sourceTree = "<group>"; };
+		BFA98F2E0B4F01D900FB5075 /* encyclopedia_window.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = encyclopedia_window.h; sourceTree = "<group>"; };
+		BFA98F2F0B4F01D900FB5075 /* filesystem_exceptions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = filesystem_exceptions.h; sourceTree = "<group>"; };
+		BFA98F300B4F01D900FB5075 /* filesystem.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = filesystem.cc; sourceTree = "<group>"; };
+		BFA98F310B4F01D900FB5075 /* helper.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
+		BFA98F320B4F01D900FB5075 /* layered_filesystem.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = layered_filesystem.cc; sourceTree = "<group>"; };
+		BFA98F330B4F01D900FB5075 /* layered_filesystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = layered_filesystem.h; sourceTree = "<group>"; };
+		BFA98F340B4F01D900FB5075 /* transport_draw.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = transport_draw.cc; sourceTree = "<group>"; };
+		BFA98F350B4F01D900FB5075 /* unzip.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = unzip.cc; sourceTree = "<group>"; };
+		BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = widelands_map_attack_controller_data_packet.cc; sourceTree = "<group>"; };
+		BFA98F370B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_map_attack_controller_data_packet.h; sourceTree = "<group>"; };
+		BFA98F380B4F01D900FB5075 /* zip_exceptions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = zip_exceptions.h; sourceTree = "<group>"; };
 		BFE2FD5E0AB4A0170003596E /* Files_classes.xcclassmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcclassmodel; name = Files_classes.xcclassmodel; path = "Class Models/Files_classes.xcclassmodel"; sourceTree = "<group>"; };
+		BFF8CEB90B6CC6AF005E6AF1 /* animation_gfx.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = animation_gfx.h; sourceTree = "<group>"; };
+		BFF8CEBA0B6CC6AF005E6AF1 /* event_player_area.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = event_player_area.cc; sourceTree = "<group>"; };
+		BFF8CEBB0B6CC6AF005E6AF1 /* event_player_area.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = event_player_area.h; sourceTree = "<group>"; };
+		BFF8CEBC0B6CC6AF005E6AF1 /* player_area.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = player_area.h; sourceTree = "<group>"; };
+		BFF8CEBD0B6CC6AF005E6AF1 /* widelands_fileread.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_fileread.h; sourceTree = "<group>"; };
+		BFF8CEBE0B6CC6AF005E6AF1 /* widelands_filewrite.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = widelands_filewrite.h; sourceTree = "<group>"; };
+		BFFB1FEA0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_decrease_height_tool.cc; sourceTree = "<group>"; };
+		BFFB1FEB0B60FAD000EBF1A3 /* editor_decrease_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_decrease_height_tool.h; sourceTree = "<group>"; };
+		BFFB1FEC0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_decrease_resources_tool.cc; sourceTree = "<group>"; };
+		BFFB1FED0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_decrease_resources_tool.h; sourceTree = "<group>"; };
+		BFFB1FEE0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_delete_bob_tool.cc; sourceTree = "<group>"; };
+		BFFB1FEF0B60FAD000EBF1A3 /* editor_delete_bob_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_delete_bob_tool.h; sourceTree = "<group>"; };
+		BFFB1FF00B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_delete_immovable_tool.cc; sourceTree = "<group>"; };
+		BFFB1FF10B60FAD000EBF1A3 /* editor_delete_immovable_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_delete_immovable_tool.h; sourceTree = "<group>"; };
+		BFFB1FF20B60FAD000EBF1A3 /* editor_increase_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_increase_height_tool.cc; sourceTree = "<group>"; };
+		BFFB1FF30B60FAD000EBF1A3 /* editor_increase_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_increase_height_tool.h; sourceTree = "<group>"; };
+		BFFB1FF40B60FAD000EBF1A3 /* editor_increase_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_increase_resources_tool.cc; sourceTree = "<group>"; };
+		BFFB1FF50B60FAD000EBF1A3 /* editor_increase_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_increase_resources_tool.h; sourceTree = "<group>"; };
+		BFFB1FF60B60FAD000EBF1A3 /* editor_info_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_info_tool.cc; sourceTree = "<group>"; };
+		BFFB1FF70B60FAD000EBF1A3 /* editor_info_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_info_tool.h; sourceTree = "<group>"; };
+		BFFB1FF80B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_make_infrastructure_tool.cc; sourceTree = "<group>"; };
+		BFFB1FF90B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_make_infrastructure_tool.h; sourceTree = "<group>"; };
+		BFFB1FFA0B60FAD000EBF1A3 /* editor_noise_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_noise_height_tool.cc; sourceTree = "<group>"; };
+		BFFB1FFB0B60FAD000EBF1A3 /* editor_noise_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_noise_height_tool.h; sourceTree = "<group>"; };
+		BFFB1FFC0B60FAD000EBF1A3 /* editor_place_bob_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_place_bob_tool.cc; sourceTree = "<group>"; };
+		BFFB1FFD0B60FAD000EBF1A3 /* editor_place_bob_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_place_bob_tool.h; sourceTree = "<group>"; };
+		BFFB1FFE0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_place_immovable_tool.cc; sourceTree = "<group>"; };
+		BFFB1FFF0B60FAD000EBF1A3 /* editor_place_immovable_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_place_immovable_tool.h; sourceTree = "<group>"; };
+		BFFB20000B60FAD000EBF1A3 /* editor_set_height_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_height_tool.cc; sourceTree = "<group>"; };
+		BFFB20010B60FAD000EBF1A3 /* editor_set_height_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_height_tool.h; sourceTree = "<group>"; };
+		BFFB20020B60FAD000EBF1A3 /* editor_set_resources_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_resources_tool.cc; sourceTree = "<group>"; };
+		BFFB20030B60FAD000EBF1A3 /* editor_set_resources_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_resources_tool.h; sourceTree = "<group>"; };
+		BFFB20040B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_starting_pos_tool.cc; sourceTree = "<group>"; };
+		BFFB20050B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_starting_pos_tool.h; sourceTree = "<group>"; };
+		BFFB20060B60FAD000EBF1A3 /* editor_set_terrain_tool.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = editor_set_terrain_tool.cc; sourceTree = "<group>"; };
+		BFFB20070B60FAD000EBF1A3 /* editor_set_terrain_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_set_terrain_tool.h; sourceTree = "<group>"; };
+		BFFB20080B60FAD000EBF1A3 /* editor_tool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = editor_tool.h; sourceTree = "<group>"; };
+		BFFB20090B60FAD000EBF1A3 /* multi_select.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = multi_select.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1488,6 +1540,30 @@
 		BF22DB5D0A5FB72A00D0292B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BFF8CEB90B6CC6AF005E6AF1 /* animation_gfx.h */,
+				BFF8CEBA0B6CC6AF005E6AF1 /* event_player_area.cc */,
+				BFF8CEBB0B6CC6AF005E6AF1 /* event_player_area.h */,
+				BFF8CEBC0B6CC6AF005E6AF1 /* player_area.h */,
+				BFF8CEBD0B6CC6AF005E6AF1 /* widelands_fileread.h */,
+				BFF8CEBE0B6CC6AF005E6AF1 /* widelands_filewrite.h */,
+				BFA98F270B4F01D900FB5075 /* attack_controller.cc */,
+				BFA98F280B4F01D900FB5075 /* attack_controller.h */,
+				BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */,
+				BFA98F2A0B4F01D900FB5075 /* compile_assert.h */,
+				BFA98F2B0B4F01D900FB5075 /* disk_filesystem.cc */,
+				BFA98F2C0B4F01D900FB5075 /* disk_filesystem.h */,
+				BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */,
+				BFA98F2E0B4F01D900FB5075 /* encyclopedia_window.h */,
+				BFA98F2F0B4F01D900FB5075 /* filesystem_exceptions.h */,
+				BFA98F300B4F01D900FB5075 /* filesystem.cc */,
+				BFA98F310B4F01D900FB5075 /* helper.h */,
+				BFA98F320B4F01D900FB5075 /* layered_filesystem.cc */,
+				BFA98F330B4F01D900FB5075 /* layered_filesystem.h */,
+				BFA98F340B4F01D900FB5075 /* transport_draw.cc */,
+				BFA98F350B4F01D900FB5075 /* unzip.cc */,
+				BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */,
+				BFA98F370B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.h */,
+				BFA98F380B4F01D900FB5075 /* zip_exceptions.h */,
 				BF22DB5F0A5FB72A00D0292B /* animation.cc */,
 				BF22DB600A5FB72A00D0292B /* animation.h */,
 				BF22DB610A5FB72A00D0292B /* battle.cc */,
@@ -1548,7 +1624,6 @@
 				BF22DC070A5FB72B00D0292B /* fieldaction.h */,
 				BF22DC080A5FB72B00D0292B /* fileread.cc */,
 				BF22DC090A5FB72B00D0292B /* fileread.h */,
-				BF22DC0A0A5FB72B00D0292B /* files.cc */,
 				BF22DC0B0A5FB72B00D0292B /* filesystem.h */,
 				BF22DC0C0A5FB72B00D0292B /* filewrite.cc */,
 				BF22DC0D0A5FB72B00D0292B /* filewrite.h */,
@@ -1643,8 +1718,6 @@
 				BF22DC660A5FB72B00D0292B /* journal_exceptions.h */,
 				BF22DC670A5FB72B00D0292B /* keycodes.h */,
 				BF22DC680A5FB72B00D0292B /* languages.h */,
-				BF22DC690A5FB72B00D0292B /* layeredfilesystem.cc */,
-				BF22DC6A0A5FB72B00D0292B /* layeredfilesystem.h */,
 				BF22DC6B0A5FB72B00D0292B /* machdep.h */,
 				BF22DC6C0A5FB72B00D0292B /* main.cc */,
 				BF22DC6D0A5FB72B00D0292B /* map.cc */,
@@ -1697,8 +1770,6 @@
 				BF22DC9E0A5FB72B00D0292B /* queue_cmd_ids.h */,
 				BF22DC9F0A5FB72B00D0292B /* random.cc */,
 				BF22DCA00A5FB72B00D0292B /* random.h */,
-				BF22DCA10A5FB72B00D0292B /* realfsimpl.cc */,
-				BF22DCA20A5FB72B00D0292B /* realfsimpl.h */,
 				BF22DCA30A5FB72B00D0292B /* render.cc */,
 				BF22DCA40A5FB72B00D0292B /* rendertarget.h */,
 				BF22DCA50A5FB72B00D0292B /* rgbcolor.h */,
@@ -1855,38 +1926,38 @@
 		BF22DB7F0A5FB72A00D0292B /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				BF22DB800A5FB72A00D0292B /* editor_decrease_height_tool.cc */,
-				BF22DB810A5FB72A00D0292B /* editor_decrease_height_tool.h */,
-				BF22DB820A5FB72A00D0292B /* editor_decrease_resources_tool.cc */,
-				BF22DB830A5FB72A00D0292B /* editor_decrease_resources_tool.h */,
-				BF22DB840A5FB72A00D0292B /* editor_delete_bob_tool.cc */,
-				BF22DB850A5FB72A00D0292B /* editor_delete_bob_tool.h */,
-				BF22DB860A5FB72A00D0292B /* editor_delete_immovable_tool.cc */,
-				BF22DB870A5FB72A00D0292B /* editor_delete_immovable_tool.h */,
-				BF22DB880A5FB72A00D0292B /* editor_increase_height_tool.cc */,
-				BF22DB890A5FB72A00D0292B /* editor_increase_height_tool.h */,
-				BF22DB8A0A5FB72A00D0292B /* editor_increase_resources_tool.cc */,
-				BF22DB8B0A5FB72A00D0292B /* editor_increase_resources_tool.h */,
-				BF22DB8C0A5FB72A00D0292B /* editor_info_tool.cc */,
-				BF22DB8D0A5FB72A00D0292B /* editor_info_tool.h */,
-				BF22DB8E0A5FB72A00D0292B /* editor_make_infrastructure_tool.cc */,
-				BF22DB8F0A5FB72A00D0292B /* editor_make_infrastructure_tool.h */,
-				BF22DB900A5FB72A00D0292B /* editor_noise_height_tool.cc */,
-				BF22DB910A5FB72A00D0292B /* editor_noise_height_tool.h */,
-				BF22DB920A5FB72A00D0292B /* editor_place_bob_tool.cc */,
-				BF22DB930A5FB72A00D0292B /* editor_place_bob_tool.h */,
-				BF22DB940A5FB72A00D0292B /* editor_place_immovable_tool.cc */,
-				BF22DB950A5FB72A00D0292B /* editor_place_immovable_tool.h */,
-				BF22DB9A0A5FB72A00D0292B /* editor_set_height_tool.cc */,
-				BF22DB9B0A5FB72A00D0292B /* editor_set_height_tool.h */,
-				BF22DB9C0A5FB72A00D0292B /* editor_set_resources_tool.cc */,
-				BF22DB9D0A5FB72A00D0292B /* editor_set_resources_tool.h */,
-				BF22DBA00A5FB72A00D0292B /* editor_set_starting_pos_tool.cc */,
-				BF22DBA10A5FB72A00D0292B /* editor_set_starting_pos_tool.h */,
-				BF22DB960A5FB72A00D0292B /* editor_set_terrain_tool.cc */,
-				BF22DB970A5FB72A00D0292B /* editor_set_terrain_tool.h */,
-				BF22DBA20A5FB72A00D0292B /* editor_tool.h */,
-				BF22DBA30A5FB72A00D0292B /* multi_select.h */,
+				BFFB1FEA0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc */,
+				BFFB1FEB0B60FAD000EBF1A3 /* editor_decrease_height_tool.h */,
+				BFFB1FEC0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc */,
+				BFFB1FED0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h */,
+				BFFB1FEE0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc */,
+				BFFB1FEF0B60FAD000EBF1A3 /* editor_delete_bob_tool.h */,
+				BFFB1FF00B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc */,
+				BFFB1FF10B60FAD000EBF1A3 /* editor_delete_immovable_tool.h */,
+				BFFB1FF20B60FAD000EBF1A3 /* editor_increase_height_tool.cc */,
+				BFFB1FF30B60FAD000EBF1A3 /* editor_increase_height_tool.h */,
+				BFFB1FF40B60FAD000EBF1A3 /* editor_increase_resources_tool.cc */,
+				BFFB1FF50B60FAD000EBF1A3 /* editor_increase_resources_tool.h */,
+				BFFB1FF60B60FAD000EBF1A3 /* editor_info_tool.cc */,
+				BFFB1FF70B60FAD000EBF1A3 /* editor_info_tool.h */,
+				BFFB1FF80B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc */,
+				BFFB1FF90B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h */,
+				BFFB1FFA0B60FAD000EBF1A3 /* editor_noise_height_tool.cc */,
+				BFFB1FFB0B60FAD000EBF1A3 /* editor_noise_height_tool.h */,
+				BFFB1FFC0B60FAD000EBF1A3 /* editor_place_bob_tool.cc */,
+				BFFB1FFD0B60FAD000EBF1A3 /* editor_place_bob_tool.h */,
+				BFFB1FFE0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc */,
+				BFFB1FFF0B60FAD000EBF1A3 /* editor_place_immovable_tool.h */,
+				BFFB20000B60FAD000EBF1A3 /* editor_set_height_tool.cc */,
+				BFFB20010B60FAD000EBF1A3 /* editor_set_height_tool.h */,
+				BFFB20020B60FAD000EBF1A3 /* editor_set_resources_tool.cc */,
+				BFFB20030B60FAD000EBF1A3 /* editor_set_resources_tool.h */,
+				BFFB20040B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc */,
+				BFFB20050B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h */,
+				BFFB20060B60FAD000EBF1A3 /* editor_set_terrain_tool.cc */,
+				BFFB20070B60FAD000EBF1A3 /* editor_set_terrain_tool.h */,
+				BFFB20080B60FAD000EBF1A3 /* editor_tool.h */,
+				BFFB20090B60FAD000EBF1A3 /* multi_select.h */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -2144,11 +2215,11 @@
 			inputPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)../src/config.h",
+				"$(PROJECT_DIR)/../src/config.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# test vor config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 0\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#endif\nEOF\nfi\n";
+			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 0\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#endif\nEOF\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2172,21 +2243,6 @@
 				BF22DD860A5FB72B00D0292B /* critter_bob.cc in Sources */,
 				BF22DD8A0A5FB72B00D0292B /* editor.cc in Sources */,
 				BF22DD8C0A5FB72B00D0292B /* editorinteractive.cc in Sources */,
-				BF22DD8F0A5FB72B00D0292B /* editor_decrease_height_tool.cc in Sources */,
-				BF22DD910A5FB72B00D0292B /* editor_decrease_resources_tool.cc in Sources */,
-				BF22DD930A5FB72B00D0292B /* editor_delete_bob_tool.cc in Sources */,
-				BF22DD950A5FB72B00D0292B /* editor_delete_immovable_tool.cc in Sources */,
-				BF22DD970A5FB72B00D0292B /* editor_increase_height_tool.cc in Sources */,
-				BF22DD990A5FB72B00D0292B /* editor_increase_resources_tool.cc in Sources */,
-				BF22DD9B0A5FB72B00D0292B /* editor_info_tool.cc in Sources */,
-				BF22DD9D0A5FB72B00D0292B /* editor_make_infrastructure_tool.cc in Sources */,
-				BF22DD9F0A5FB72B00D0292B /* editor_noise_height_tool.cc in Sources */,
-				BF22DDA10A5FB72B00D0292B /* editor_place_bob_tool.cc in Sources */,
-				BF22DDA30A5FB72B00D0292B /* editor_place_immovable_tool.cc in Sources */,
-				BF22DDA90A5FB72B00D0292B /* editor_set_height_tool.cc in Sources */,
-				BF22DDAB0A5FB72B00D0292B /* editor_set_resources_tool.cc in Sources */,
-				BF22DDAF0A5FB72B00D0292B /* editor_set_starting_pos_tool.cc in Sources */,
-				BF22DDA50A5FB72B00D0292B /* editor_set_terrain_tool.cc in Sources */,
 				BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */,
 				BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */,
 				BF22DDBA0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.cc in Sources */,
@@ -2235,7 +2291,6 @@
 				BF22DE120A5FB72B00D0292B /* field.cc in Sources */,
 				BF22DE140A5FB72B00D0292B /* fieldaction.cc in Sources */,
 				BF22DE160A5FB72B00D0292B /* fileread.cc in Sources */,
-				BF22DE180A5FB72B00D0292B /* files.cc in Sources */,
 				BF22DE1A0A5FB72B00D0292B /* filewrite.cc in Sources */,
 				BF22DE1C0A5FB72B00D0292B /* font_handler.cc in Sources */,
 				BF22DE1E0A5FB72B00D0292B /* font_loader.cc in Sources */,
@@ -2279,7 +2334,6 @@
 				BF22DE6E0A5FB72B00D0292B /* interactive_player.cc in Sources */,
 				BF22DE710A5FB72B00D0292B /* journal.cc in Sources */,
 				BF22DE730A5FB72B00D0292B /* journal_exceptions.cc in Sources */,
-				BF22DE770A5FB72B00D0292B /* layeredfilesystem.cc in Sources */,
 				BF22DE7A0A5FB72B00D0292B /* main.cc in Sources */,
 				BF22DE7B0A5FB72B00D0292B /* map.cc in Sources */,
 				BF22DE7D0A5FB72B00D0292B /* map_event_manager.cc in Sources */,
@@ -2304,7 +2358,6 @@
 				BF22DEA80A5FB72B00D0292B /* profile.cc in Sources */,
 				BF22DEAA0A5FB72B00D0292B /* queue_cmd_factory.cc in Sources */,
 				BF22DEAD0A5FB72B00D0292B /* random.cc in Sources */,
-				BF22DEAF0A5FB72B00D0292B /* realfsimpl.cc in Sources */,
 				BF22DEB10A5FB72B00D0292B /* render.cc in Sources */,
 				BF22DEB40A5FB72B00D0292B /* s2map.cc in Sources */,
 				BF22DEB80A5FB72B00D0292B /* soldier.cc in Sources */,
@@ -2397,6 +2450,30 @@
 				BF22DF720A5FB72B00D0292B /* world.cc in Sources */,
 				BF22DF750A5FB72B00D0292B /* wui_plot_area.cc in Sources */,
 				BF22DF780A5FB72B00D0292B /* zip_filesystem.cc in Sources */,
+				BFA98F390B4F01DA00FB5075 /* attack_controller.cc in Sources */,
+				BFA98F3D0B4F01DA00FB5075 /* disk_filesystem.cc in Sources */,
+				BFA98F3F0B4F01DA00FB5075 /* encyclopedia_window.cc in Sources */,
+				BFA98F420B4F01DA00FB5075 /* filesystem.cc in Sources */,
+				BFA98F440B4F01DA00FB5075 /* layered_filesystem.cc in Sources */,
+				BFA98F460B4F01DA00FB5075 /* transport_draw.cc in Sources */,
+				BFA98F470B4F01DA00FB5075 /* unzip.cc in Sources */,
+				BFA98F480B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.cc in Sources */,
+				BFFB200A0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc in Sources */,
+				BFFB200C0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc in Sources */,
+				BFFB200E0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc in Sources */,
+				BFFB20100B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc in Sources */,
+				BFFB20120B60FAD000EBF1A3 /* editor_increase_height_tool.cc in Sources */,
+				BFFB20140B60FAD000EBF1A3 /* editor_increase_resources_tool.cc in Sources */,
+				BFFB20160B60FAD000EBF1A3 /* editor_info_tool.cc in Sources */,
+				BFFB20180B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc in Sources */,
+				BFFB201A0B60FAD000EBF1A3 /* editor_noise_height_tool.cc in Sources */,
+				BFFB201C0B60FAD000EBF1A3 /* editor_place_bob_tool.cc in Sources */,
+				BFFB201E0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc in Sources */,
+				BFFB20200B60FAD000EBF1A3 /* editor_set_height_tool.cc in Sources */,
+				BFFB20220B60FAD000EBF1A3 /* editor_set_resources_tool.cc in Sources */,
+				BFFB20240B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc in Sources */,
+				BFFB20260B60FAD000EBF1A3 /* editor_set_terrain_tool.cc in Sources */,
+				BFF8CEC00B6CC6AF005E6AF1 /* event_player_area.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2421,7 +2498,7 @@
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
+				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/SDL.framework/Headers,
@@ -2437,6 +2514,7 @@
 				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				PRODUCT_NAME = Widelands;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SEPARATE_STRIP = YES;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -2445,12 +2523,10 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = i386;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/SDL.framework/Headers,
 					/Library/Frameworks/SDL_image.framework/Headers,
@@ -2467,6 +2543,7 @@
 					/opt/local/lib,
 				);
 				PRODUCT_NAME = Widelands;
+				SEPARATE_STRIP = YES;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -2504,6 +2581,10 @@
 					/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
