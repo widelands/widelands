@@ -306,7 +306,6 @@ def do_configure(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Wstrict-aliasing=2', env)
 	#conf.CheckCompilerFlag('-Wunreachable-code', env)
 	conf.CheckCompilerFlag('-Wwrite-strings', env)
-	conf.CheckCompilerFlag('-Wno-deprecated-declarations', env)
 
 	if env.optimize:
 		# !!!! -fomit-frame-pointer breaks execeptions !!!!
