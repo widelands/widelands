@@ -1110,13 +1110,12 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	return tdelta; // yep, we were successful
 }
 
-/*
-===============
-Bob::set_position
-
-Moves the Map_Object to the given position.
-===============
-*/
+/**
+ * Moves the Map_Object to the given position.
+ *
+ * The bobs on a node are kept sorted by m_file_serial (descending) because that
+ * is the order expected by Widelands_Map_Bobdata_Data_Packet::Write.
+ */
 void Bob::set_position(Editor_Game_Base* g, Coords coords)
 {
 	if (m_position.field) {
@@ -1125,13 +1124,16 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	m_position = g->get_map()->get_fcoords(coords);
+	m_position = g->map().get_fcoords(coords);
 
 	m_linknext = m_position.field->bobs;
 	m_linkpprev = &m_position.field->bobs;
-	if (m_linknext)
-		m_linknext->m_linkpprev = &m_linknext;
-	m_position.field->bobs = this;
+	while (m_linknext and m_file_serial < m_linknext->m_file_serial) {
+		m_linkpprev = &m_linknext->m_linknext;
+		m_linknext = m_linknext->m_linknext;
+	}
+	if (m_linknext) m_linknext->m_linkpprev = &m_linknext;
+	*m_linkpprev = this;
 }
 /*
  * Give debug informations
