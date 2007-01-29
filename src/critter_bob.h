@@ -41,7 +41,7 @@ struct Critter_Bob_Descr : public Bob_Descr {
 	const std::string & descname() const throw () {return m_descname;}
 	const char * get_descname() const throw () __attribute__ ((deprecated)) {return descname().c_str();}
 
-      const Critter_BobProgram* get_program(std::string name) const;
+      const Critter_BobProgram* get_program(std::string programname) const;
 
    private:
 	std::string   m_descname;

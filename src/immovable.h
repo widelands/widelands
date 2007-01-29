@@ -81,11 +81,11 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
 	int get_size() const throw () {return m_size;}
    inline const char* get_picture(void) const { return m_picture.c_str(); }
-	const ImmovableProgram* get_program(std::string name) const;
+	const ImmovableProgram* get_program(std::string programname) const;
 	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
 	void parse(const char *directory, Profile *s);
-	void parse_program(std::string directory, Profile* prof, std::string name);
+	void parse_program(std::string directory, Profile* prof, std::string programname);
 	uint parse_animation(std::string directory, Profile* prof, std::string name);
 	void parse_playFX(std::string directory, Profile* prof, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
@@ -128,7 +128,7 @@ public:
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
-	void switch_program(Game* g, std::string name);
+	void switch_program(Game* g, std::string programname);
 
 	const Tribe_Descr * get_owner_tribe() const throw ()
 	{return descr().get_owner_tribe();}

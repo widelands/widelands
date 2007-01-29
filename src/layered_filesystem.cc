@@ -245,8 +245,8 @@ FileSystem* LayeredFileSystem::CreateSubFileSystem(const std::string dirname,
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{
-		if (!(*it)->IsWritable())
-			continue;
+		//if (!(*it)->IsWritable())
+		//	continue;
 
 		return (*it)->CreateSubFileSystem( dirname, type );
 	}

@@ -163,7 +163,7 @@ public:
 
    /// Sets a random animation of desired type and start playing it
 	void start_animation
-		(Editor_Game_Base*, const char * const name, const uint time);
+		(Editor_Game_Base*, const char * const animname, const uint time);
 
 	/// Heal quantity of hit points instantly
 	void heal (const uint);

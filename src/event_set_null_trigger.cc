@@ -58,17 +58,17 @@ void Event_Set_Null_Trigger::reinitialize(Game *) {}
 void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
 	const int event_version = s->get_safe_int("version");
 	if (event_version == EVENT_VERSION) {
-		const std::string name = s->get_safe_string("trigger");
+		const std::string triggername = s->get_safe_string("trigger");
 		if
 			(Trigger_Null * const trig = static_cast<Trigger_Null * const>
-			 (egbase->map().get_mtm().get_trigger(name.c_str())))
+			 (egbase->map().get_mtm().get_trigger(triggername.c_str())))
 		{
 			// Bit Hackish, hopefully the user paid attention
 			set_trigger(trig);
 			set_setto(s->get_bool("setto"));
 		} else throw wexception
 			("Set Null Trigger event with unknown trigger %s in map!\n",
-			 name.c_str());
+			 triggername.c_str());
 	} else throw wexception
 		("Set Null Trigger Event with unknown/unhandled version %i in map!\n",
 		 event_version);

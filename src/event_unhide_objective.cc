@@ -54,10 +54,11 @@ void Event_Unhide_Objective::reinitialize(Game *) {}
 void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
    int version=s->get_safe_int("version");
    if(version == EVENT_VERSION) {
-      std::string name = s->get_safe_string("objective");
-      MapObjective * const obj = egbase->get_map()->get_mom().get_objective(name.c_str());
+      std::string objectivename = s->get_safe_string("objective");
+      MapObjective * const obj = egbase->get_map()->get_mom().get_objective(objectivename.c_str());
       if( !obj ) {
-         throw wexception("Unhide Objective event with unknown objecive %s in map!\n", name.c_str());
+         throw wexception("Unhide Objective event with unknown objecive %s in map!\n",
+								  objectivename.c_str());
       }
       set_objective( obj );
       set_dounhide(s->get_bool("dounhide"));

@@ -524,11 +524,11 @@ void Warehouse::act(Game* g, uint data)
 
       workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
          // Look if we got one in stock of those
-      std::string name=workerdescr->get_name();
+      std::string workername=workerdescr->get_name();
       std::vector<Object_Ptr>::iterator i;
       for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
       {
-         if(static_cast<Worker*>(i->get(g))->get_name()==name)
+         if(static_cast<Worker*>(i->get(g))->get_name()==workername)
          {
             soldier = static_cast<Soldier*>(i->get(g));
 
@@ -696,11 +696,11 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
 
    // Look if we got one in stock of those
-   std::string name=workerdescr->get_name();
+   std::string workername=workerdescr->get_name();
    std::vector<Object_Ptr>::iterator i;
    for(i=m_incorporated_workers.begin();
          i!=m_incorporated_workers.end(); i++)
-      if(static_cast<Worker*>(i->get(g))->get_name()==name) break;
+      if(static_cast<Worker*>(i->get(g))->get_name()==workername) break;
 
    if(i==m_incorporated_workers.end()) {
       // None found, create a new one (if available)
@@ -736,11 +736,11 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 
 	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
    // Look if we got one in stock of those
-	std::string name=workerdescr->get_name();
+	std::string workername=workerdescr->get_name();
 	std::vector<Object_Ptr>::iterator i;
 	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
-		if(static_cast<Worker*>(i->get(g))->get_name()==name)
+		if(static_cast<Worker*>(i->get(g))->get_name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 			if
@@ -796,11 +796,11 @@ void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
 
 	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
    // Look if we got one in stock of those
-	std::string name=workerdescr->get_name();
+	std::string workername=workerdescr->get_name();
 	std::vector<Object_Ptr>::iterator i;
 	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
-		if(static_cast<Worker*>(i->get(g))->get_name()==name)
+		if(static_cast<Worker*>(i->get(g))->get_name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 			if (!soldier->is_marked())
@@ -874,13 +874,13 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 /*
  * Sort the worker into the right position in m_incorporated_workers
  */
-void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string name, Worker* w) {
+void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Worker* w) {
       // We insert this worker, but to keep some consistency in ordering, we tell him
       // where to insert
 
       std::vector<Object_Ptr>::iterator i=m_incorporated_workers.begin();
 
-      while(i!= m_incorporated_workers.end() && name <= static_cast<Worker*>(i->get(g))->get_name()) ++i;
+      while(i!= m_incorporated_workers.end() && workername <= static_cast<Worker*>(i->get(g))->get_name()) ++i;
       if(i==m_incorporated_workers.end()) {
          m_incorporated_workers.insert(i, w);
          return;
@@ -903,9 +903,9 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	WareInstance* item;
 
 	// Create the item
-   Item_Ware_Descr* descr=get_owner()->get_tribe()->get_ware_descr(ware);
-   assert(descr);
-	item = new WareInstance(ware, descr);
+   Item_Ware_Descr* waredescr=get_owner()->get_tribe()->get_ware_descr(ware);
+   assert(waredescr);
+	item = new WareInstance(ware, waredescr);
 	item->init(g);
 
 	m_supply->remove_wares(ware, 1);
@@ -1004,12 +1004,12 @@ log ("Warehouse::get_soldiers_passing :");
 
 	workerdescr = get_owner()->get_tribe()->get_worker_descr(w);
    // Look if we got one in stock of those
-   std::string name=workerdescr->get_name();
+   std::string workername=workerdescr->get_name();
    std::vector<Object_Ptr>::iterator i;
 
 	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
-      if(static_cast<Worker*>(i->get(g))->get_name()==name)
+      if(static_cast<Worker*>(i->get(g))->get_name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 

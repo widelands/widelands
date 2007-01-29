@@ -39,16 +39,16 @@ using namespace std;
 //
 // Tribe_Descr class
 //
-Tribe_Descr::Tribe_Descr(const std::string & name) : m_name(name) {
+Tribe_Descr::Tribe_Descr(const std::string & tribename) : m_name(tribename) {
 	try
 	{
 		char directory[256];
 
       // Grab the localisation text domain
-		sprintf( directory, "tribe_%s", name.c_str() );
+		sprintf( directory, "tribe_%s", tribename.c_str() );
       i18n::grab_textdomain( directory );
 
-		snprintf(directory, sizeof(directory), "tribes/%s", name.c_str());
+		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
 
 		m_default_encdata.clear();
       parse_wares(directory);
@@ -60,7 +60,7 @@ Tribe_Descr::Tribe_Descr(const std::string & name) : m_name(name) {
       i18n::release_textdomain( );
 	}
 	catch(std::exception &e)
-	{throw wexception("Error loading tribe %s: %s", name.c_str(), e.what());}
+	{throw wexception("Error loading tribe %s: %s", tribename.c_str(), e.what());}
 }
 
 
@@ -154,8 +154,8 @@ void Tribe_Descr::parse_root_conf(const char *directory)
          if (not m_wares.exists(value->get_name()))
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
-         std::string name=value->get_name();
-         m_startwares[name]=value->get_int();
+         std::string valuename=value->get_name();
+         m_startwares[valuename]=value->get_int();
       }
 
       // default workers
@@ -165,8 +165,8 @@ void Tribe_Descr::parse_root_conf(const char *directory)
          if (not m_workers.exists(value->get_name()))
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
-         std::string name=value->get_name();
-         m_startworkers[name]=value->get_int();
+         std::string valuename=value->get_name();
+         m_startworkers[valuename]=value->get_int();
       }
 
       // default soldiers
@@ -330,7 +330,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 		if (!g_fs->FileExists(fname))
 			continue;
 
-		const char *name;
+		const char *warename;
 		const char *slash = strrchr(it->c_str(), '/');
 		const char *backslash = strrchr(it->c_str(), '\\');
 
@@ -338,18 +338,18 @@ void Tribe_Descr::parse_wares(const char* directory)
 			slash = backslash;
 
 		if (slash)
-			name = slash+1;
+			warename = slash+1;
 		else
-			name = it->c_str();
+			warename = it->c_str();
 
-		if (wares->exists(name))
+		if (wares->exists(warename))
 			log("Ware %s is already known in world init\n", it->c_str());
 
 		Item_Ware_Descr* descr = 0;
 
 		try
 		{
-			descr = Item_Ware_Descr::create_from_dir(name, it->c_str());
+			descr = Item_Ware_Descr::create_from_dir(warename, it->c_str());
 		}
 		catch(std::exception& e)
 		{
@@ -384,7 +384,7 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 		if (!g_fs->FileExists(fname))
 			continue;
 
-		const char *name;
+		const char *dirname;
 		const char *slash = strrchr(it->c_str(), '/');
 		const char *backslash = strrchr(it->c_str(), '\\');
 
@@ -392,9 +392,9 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 			slash = backslash;
 
 		if (slash)
-			name = slash+1;
+			dirname = slash+1;
 		else
-			name = it->c_str();
+			dirname = it->c_str();
 
 		try
 		{
@@ -404,10 +404,10 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 
 			if (!strcasecmp(type, "critter")) {
 				Bob_Descr *descr;
-				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof, this);
+				descr = Bob_Descr::create_from_dir(dirname, it->c_str(), &prof, this);
 				m_bobs.add(descr);
 			} else {
-				Immovable_Descr * const descr = new Immovable_Descr(this, name);
+				Immovable_Descr * const descr = new Immovable_Descr(this, dirname);
 				descr->parse(it->c_str(), &prof);
 				m_immovables.add(descr);
 			}
@@ -569,33 +569,36 @@ uint Tribe_Descr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
-int Tribe_Descr::get_safe_ware_index(const char * const name) const {
-   int retval=get_ware_index(name);
+int Tribe_Descr::get_safe_ware_index(const char * const warename) const {
+   int retval=get_ware_index(warename);
 
    if(retval==-1)
-      throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!", name);
+      throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!",
+							  warename);
    return retval;
 }
 
 /*
  * Return the given worker or die trying
  */
-int Tribe_Descr::get_safe_worker_index(const char * const name) const {
-   int retval=get_worker_index(name);
+int Tribe_Descr::get_safe_worker_index(const char * const workername) const {
+   int retval=get_worker_index(workername);
 
    if(retval==-1)
-      throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!", name);
+      throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!",
+							  workername);
    return retval;
 }
 
 /*
  * Return the given building or die trying
  */
-int Tribe_Descr::get_safe_building_index(const char *name) const {
-   int retval=get_building_index(name);
+int Tribe_Descr::get_safe_building_index(const char *buildingname) const {
+   int retval=get_building_index(buildingname);
 
    if(retval==-1)
-      throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!", name);
+      throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!",
+							  buildingname);
    return retval;
 }
 

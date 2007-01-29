@@ -1504,12 +1504,12 @@ Worker_Descr::get_program
 Get a program from the workers description.
 ===============
 */
-const WorkerProgram* Worker_Descr::get_program(std::string name) const
+const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 {
-	ProgramMap::const_iterator it = m_programs.find(name);
+	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("%s has no program '%s'", get_name(), name.c_str());
+		throw wexception("%s has no program '%s'", get_name(), programname.c_str());
 
 	return it->second;
 }
@@ -2540,10 +2540,10 @@ Worker::start_task_program
 Start the given program.
 ===============
 */
-void Worker::start_task_program(const std::string & name) {
+void Worker::start_task_program(const std::string & programname) {
 	push_task(taskProgram);
 	State & state = top_state();
-	state.program = get_descr()->get_program(name);
+	state.program = get_descr()->get_program(programname);
 	state.ivar1 = 0;
 }
 

@@ -284,14 +284,14 @@ bool Game::run(bool is_savegame)
    if(!is_savegame) {
       // Prepare the players (i.e. place HQs)
       for (int i = 1; i <= get_map()->get_nrplayers(); i++) {
-         Player* player = get_player(i);
-         if (!player)
+         Player* plr = get_player(i);
+         if (!plr)
             continue;
 
-         player->init(true);
+         plr->init(true);
 
          const Coords &c = get_map()->get_starting_pos(i);
-         if (player->get_type() == Player::Local) ipl->move_view_to(c);
+         if (plr->get_type() == Player::Local) ipl->move_view_to(c);
       }
 
       // Prepare the map, set default textures

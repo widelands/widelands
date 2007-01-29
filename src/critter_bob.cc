@@ -194,12 +194,13 @@ Critter_Bob_Descr::get_program
 Get a program from the workers description.
 ===============
 */
-const Critter_BobProgram* Critter_Bob_Descr::get_program(std::string name) const
+const Critter_BobProgram* Critter_Bob_Descr::get_program(std::string programname)
+		const
 {
-	ProgramMap::const_iterator it = m_programs.find(name);
+	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("%s has no program '%s'", get_name(), name.c_str());
+		throw wexception("%s has no program '%s'", get_name(), programname.c_str());
 
 	return it->second;
 }
@@ -213,11 +214,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 
 	m_swimming = s->get_bool("swimming", false);
 
-   // Read all walking animations.
-	// Default settings are in [walk]
-	char sectname[256];
-
-   // Pretty name
+	// Pretty name
    m_descname = s->get_safe_string("descname");
 
 	m_walk_anims.parse
@@ -313,10 +310,10 @@ Critter_Bob::start_task_program
 Start the given program.
 ===============
 */
-void Critter_Bob::start_task_program(const std::string & name) {
+void Critter_Bob::start_task_program(const std::string & programname) {
 	push_task(taskProgram);
 	State & state = top_state();
-	state.program = get_descr()->get_program(name);
+	state.program = get_descr()->get_program(programname);
 	state.ivar1   = 0;
 }
 

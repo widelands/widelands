@@ -91,7 +91,7 @@ class Worker_Descr : public Bob_Descr {
 	const DirAnimations & get_right_walk_anims(const bool carries_ware) const
 		throw ()
 	{return carries_ware ? m_walkload_anims : m_walk_anims;}
-   const WorkerProgram* get_program(std::string name) const;
+   const WorkerProgram* get_program(std::string programname) const;
 
    virtual Worker_Type get_worker_type(void) const { return NORMAL; }
 
@@ -198,7 +198,7 @@ class Worker : public Bob {
    void update_task_buildingwork(Game* g);
 
    void start_task_return(Game* g, bool dropitem);
-	void start_task_program(const std::string & name);
+	void start_task_program(const std::string & programname);
 
    virtual void start_task_gowarehouse();
    void start_task_dropoff(Game* g, WareInstance* item);

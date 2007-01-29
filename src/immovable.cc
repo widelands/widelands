@@ -260,12 +260,14 @@ Immovable_Descr::get_program
 Find the program of the given name.
 ===============
 */
-const ImmovableProgram* Immovable_Descr::get_program(std::string name) const
+const ImmovableProgram* Immovable_Descr::get_program(std::string programname)
+		const
 {
-	ProgramMap::const_iterator it = m_programs.find(name);
+	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("Immovable %s has no program '%s'", get_name(), name.c_str());
+		throw wexception("Immovable %s has no program '%s'", get_name(),
+							  programname.c_str());
 
 	return it->second;
 }
@@ -377,18 +379,19 @@ Immovable_Descr::parse_program
 Parse a program.
 ===============
 */
-void Immovable_Descr::parse_program(std::string directory, Profile* prof, std::string name)
+void Immovable_Descr::parse_program(std::string directory, Profile* prof,
+												std::string programname)
 {
 	ImmovableProgram* prog = 0;
 
-	if (m_programs.find(name) != m_programs.end())
-		throw wexception("Duplicate program '%s'", name.c_str());
+	if (m_programs.find(programname) != m_programs.end())
+		throw wexception("Duplicate program '%s'", programname.c_str());
 
 	try
 	{
-		prog = new ImmovableProgram(name);
+		prog = new ImmovableProgram(programname);
 		prog->parse(this, directory, prof);
-		m_programs[name] = prog;
+		m_programs[programname] = prog;
 	}
 	catch(...)
 	{
@@ -565,9 +568,9 @@ Immovable::switch_program
 Switch the currently running program.
 ===============
 */
-void Immovable::switch_program(Game* g, std::string name)
+void Immovable::switch_program(Game* g, std::string programname)
 {
-	m_program = get_descr()->get_program(name);
+	m_program = get_descr()->get_program(programname);
 	m_program_ptr = 0;
 
 	run_program(g, false);
