@@ -28,6 +28,8 @@
 #include "game.h"
 #include "trigger_conditional.h"
 #include "util.h"
+#include "wexception.h"
+
 
 /*
  * Run this event chain

@@ -27,6 +27,7 @@
 #include "game.h"
 #include "instances.h"
 #include "queue_cmd_ids.h"
+#include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 

@@ -25,6 +25,7 @@
 #include <SDL_types.h>
 #include <types.h>
 
+#include "types.h"
 #include "compile_assert.h"
 
 struct Point {

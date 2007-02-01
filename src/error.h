@@ -49,11 +49,6 @@ void critical_error(const char *, ...) PRINTF_FORMAT(1,2);
 #define ALIVE() log("Alive in %s line %i\n", __FILE__, __LINE__)
 void log(const char *, ...) PRINTF_FORMAT(1,2);
 
-#ifdef __WIN32__ 
-#include "wexception.h" // Else Relesebuild won't compile
-#endif
-
-
 #ifdef DEBUG
    #ifndef KEEP_STANDART_ASSERT
 		#include "wexception.h"
