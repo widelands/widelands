@@ -22,8 +22,9 @@
 #include <sstream>
 #include <vector>
 
-#include "wexception.h"
 #include "error.h"
+#include "helper.h"
+#include "wexception.h"
 
 //TODO: move wexception code into it's own file
 

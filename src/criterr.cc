@@ -50,8 +50,8 @@ class Critical_Error : public UI::Panel {
 public:
 	Critical_Error(const char *text);
 
-	void exit() { ::exit(-1); }
-	void crash();
+	void exit() __attribute__ ((noreturn)) { ::exit(-1); }
+	void crash() __attribute__ ((noreturn));
 
 	void draw(RenderTarget* dst);
 private:

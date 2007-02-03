@@ -57,7 +57,7 @@ class IdleSoldierSupply : public Supply {
 	virtual int get_amount(const int ware) const;
 	virtual bool is_active() const throw ();
 
-		virtual WareInstance* launch_item(Game* g, int ware);
+		virtual WareInstance* launch_item(Game* g, int ware) __attribute__ ((noreturn));
 		virtual Worker* launch_worker(Game* g, int ware);
 
 		virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);

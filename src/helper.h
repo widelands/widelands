@@ -57,6 +57,6 @@ template<typename T> std::string toString(const T& x) {
 void split_string(std::string in, std::vector<std::string>* plist, const char* separators);
 void remove_spaces(std::string* in);
 void log(const char *fmt, ...);
-void myassert(int line, const char* file, const char* condt) throw(_wexception);
+void myassert(int line, const char* file, const char* condt) throw(_wexception) __attribute__ ((noreturn));
 
 #endif

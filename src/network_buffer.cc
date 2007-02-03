@@ -75,7 +75,7 @@ uint Network_Buffer::get_32(bool remove) {
    return retval;
 }
 
-std::string Network_Buffer::get_string(bool) {
+std::string Network_Buffer::get_string(bool remove) {
    std::string retval;
 
    assert( remove ); // TODO: allow peeking also for string

@@ -67,10 +67,10 @@ public: // implementation of Supply
 	virtual bool is_active() const throw ();
 
 	virtual WareInstance* launch_item(Game* g, int ware);
-	virtual Worker* launch_worker(Game* g, int ware);
+	virtual Worker* launch_worker(Game* g, int ware) __attribute__ ((noreturn));
 
-	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
-	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r);
+	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req) __attribute__ ((noreturn));
+	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r) __attribute__ ((noreturn));
 	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
 	WareInstance * m_ware;

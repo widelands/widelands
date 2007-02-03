@@ -151,8 +151,8 @@ def CheckCompilerFlag(context, compiler_flag, env):
 	context.Message( 'Trying to enable compiler flag %s ... ' % compiler_flag)
 	lastCCFLAGS = context.env['CCFLAGS']
 	context.env.Append(CCFLAGS = compiler_flag)
-	ret = context.TryLink("""int main(int argc, char **argv) {return 0;}
-                              """, ".cc")
+	ret = context.TryLink("""int main(int argc, char **argv) {return argc==0 && argv==0;}
+			\n""", ".cc") #must use both arguments, otherwise -Werror will break
 	if not ret:
 		context.env.Replace(CCFLAGS = lastCCFLAGS)
 	context.Result( ret )
@@ -162,8 +162,8 @@ def CheckLinkerFlag(context, link_flag, env):
 	context.Message( 'Trying to enable linker   flag %s ... ' % link_flag)
 	lastLINKFLAGS = context.env['LINKFLAGS']
 	context.env.Append(LINKFLAGS = link_flag)
-	ret = context.TryLink("""int main(int argc, char **argv) {return 0;}
-                              """, ".cc")
+	ret = context.TryLink("""int main(int argc, char **argv) {return argc==0 && argv==0;}
+			\n""", ".cc") #must use both arguments, otherwise -Werror will break
 	if not ret:
 		context.env.Replace(LINKFLAGS = lastLINKFLAGS)
 	context.Result( ret )
@@ -294,7 +294,7 @@ def do_configure(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Winvalid-pch', env)
 	#conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
 	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
-	#conf.CheckCompilerFlag('-Wmissing-noreturn', env)
+	conf.CheckCompilerFlag('-Wmissing-noreturn', env)
 	conf.CheckCompilerFlag('-Wno-comment', env)
 	conf.CheckCompilerFlag('-Wnormalized=nfc', env)
 	#conf.CheckCompilerFlag('-Wold-style-cast', env)
@@ -306,6 +306,11 @@ def do_configure(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Wstrict-aliasing=2', env)
 	#conf.CheckCompilerFlag('-Wunreachable-code', env)
 	conf.CheckCompilerFlag('-Wwrite-strings', env)
+
+	#conf.CheckCompilerFlag('-Wno-deprecated-declarations', env)
+	#conf.CheckCompilerFlag('-Wno-unused-variable', env)
+	#conf.CheckCompilerFlag('-Wno-unused-parameter', env)
+	#conf.CheckCompilerFlag('-Werror', env)
 
 	if env.optimize:
 		# !!!! -fomit-frame-pointer breaks execeptions !!!!

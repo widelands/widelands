@@ -113,7 +113,7 @@ public:
       return &m_workers;
    }
 
-	virtual const std::vector<Soldier *> & get_soldiers() const
+	virtual const std::vector<Soldier *> & get_soldiers() const __attribute__ ((noreturn))
 	{throw wexception ("ProductionSite::get_soldiers makes no sense");}
 protected:
 	virtual UI::Window* create_options_window(Interactive_Player* plr,

@@ -47,7 +47,7 @@ public:
    virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
    virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
 														  const Type );
-   virtual void Unlink(const std::string filename);
+   virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
 
 public:
 	static FileSystem *CreateFromDirectory(const std::string directory);

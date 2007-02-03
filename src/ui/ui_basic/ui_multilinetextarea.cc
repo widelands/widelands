@@ -34,11 +34,11 @@ Multiline_Textarea::Multiline_Textarea
 	 const bool always_show_scrollbar)
 	:
 	Panel       (parent, x, y, w - 24, h),
-	m_cache_id  (0),
-	m_cache_mode(Widget_Cache_New),
 	m_text      (text),
 	m_scrollbar (parent, x + get_w(), y, 24, h, false),
 	m_scrollmode(ScrollNormal),
+	m_cache_id  (0),
+	m_cache_mode(Widget_Cache_New),
 	m_textheight(0),
 	m_textpos   (0)
 {

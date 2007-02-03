@@ -77,7 +77,7 @@ class Cmd_NetCheckSync:public BaseCommand {
 	virtual void execute (Game* g);
 
 	// Write these commands to a file (for savegames)
-	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*) __attribute__ ((noreturn));
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
 	virtual int get_id(void) { return QUEUE_CMD_NETCHECKSYNC; }

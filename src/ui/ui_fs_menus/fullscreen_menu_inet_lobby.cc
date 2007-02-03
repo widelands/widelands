@@ -186,19 +186,17 @@ void Fullscreen_Menu_InetLobby::user_info( std::string user, std::string game, s
  * A chat message has arrived
  */
 void Fullscreen_Menu_InetLobby::chat_message( std::string user, std::string msg, bool is_action) {
-   if(is_action) {
-      char buffer[msg.size()+user.size()+100];
+   std::string buffer;
 
-      snprintf(buffer, msg.size()+user.size()+100, "** %s %s\n", user.c_str(), msg.c_str());
-      server_message( buffer );
+   if(is_action) {
+      buffer="** "+user+" "+msg+"\n";
+      server_message( buffer.c_str() );
       return;
    }
 
-   char buffer[msg.size()+user.size()+100];
-
-   snprintf(buffer, msg.size()+user.size()+100, "%s: %s\n", user.c_str(), msg.c_str());
    std::string text = m_chatbox->get_text();
-   m_chatarea->set_text( (m_chatarea->get_text() + std::string(buffer)).c_str() );
+   buffer=user+": "+msg+"\n";
+   m_chatarea->set_text( (m_chatarea->get_text() + buffer).c_str() );
 }
 
 

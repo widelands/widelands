@@ -97,7 +97,7 @@ throw (_wexception)
 						ware->m_economy = 0;
 
 						const Tribe_Descr & tribe = player_immovable->owner().tribe();
-						if (tribe.get_nrwares() <= ware_index_from_file)
+						if (tribe.get_nrwares() <= (int)ware_index_from_file)
 							throw wexception
 							("Widelands_Map_Waredata_Data_Packet: ware index out "
 							 "of range: %i\n",
@@ -114,7 +114,7 @@ throw (_wexception)
 					log
 						("Adding ware with id %i from Worker\n", ware->descr_index());
 					const Tribe_Descr & tribe = *worker->get_tribe();
-					if (tribe.get_nrwares() <= ware_index_from_file)
+					if (tribe.get_nrwares() <= (int)ware_index_from_file)
 						throw wexception
 						("Widelands_Map_Waredata_Data_Packet: ware index out of "
 						 "range: %i\n",

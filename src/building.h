@@ -173,7 +173,7 @@ public:
 	void hide_options();
 
 	virtual bool fetch_from_flag(Game* g);
-	virtual bool get_building_work(Game* g, Worker* w, bool success);
+	virtual bool get_building_work(Game* g, Worker* w, bool success) __attribute__ ((noreturn));
 
 	bool leave_check_and_wait(Game* g, Worker* w);
 	uint get_conquers() const throw () {return descr().get_conquers();}
