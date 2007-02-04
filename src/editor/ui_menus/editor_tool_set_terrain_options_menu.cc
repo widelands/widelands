@@ -188,7 +188,8 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
 			for (uint i = 0; m_tool.get_nr_enabled(); ++i) m_tool.enable(i, false);
       // Disable all checkboxes
 			const uint size = m_checkboxes.size();
-			for (uint i = 0; i < size; ++i, i += i == n) {
+			//TODO: the uint cast is ugly!
+			for (uint i = 0; i < size; ++i, i += i == (uint)n) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing);
          m_checkboxes[i]->set_state(false);
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);

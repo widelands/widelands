@@ -127,7 +127,7 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 void Fullscreen_Menu_LaunchGame::refresh()
 {
 	Map* map = m_game->get_map();
-	int maxplayers = 0;
+	uint maxplayers = 0;
 
 	// update the mapname
 	if (map)
@@ -138,7 +138,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	else m_mapname.set_text(_("(no map)"));
 
 	// update the player description groups
-	for(int i = 0; i < MAX_PLAYERS; i++) {
+	for(uint i = 0; i < MAX_PLAYERS; i++) {
 		m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		m_players[i]->set_enabled(i < maxplayers);
 		if(m_is_scenario && (i<maxplayers) && map) {

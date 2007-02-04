@@ -47,7 +47,7 @@ class NetGame {
 	NetGame ();
 	virtual ~NetGame ();
 
-	int get_playernum () { return playernum; }
+	uint get_playernum () { return playernum; }
 
 	bool get_players_changed ()
 	{
@@ -94,7 +94,7 @@ class NetGame {
 
 	Game                       * game;
 
-	int                          playernum;
+	uint                          playernum;
 	ulong                        net_game_time;
 
 	uint                         common_rand_seed;

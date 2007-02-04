@@ -653,7 +653,7 @@ void NetClient::begin_game ()
 
 void NetClient::handle_network ()
 {
-	int i;
+	uint i;
 
 	// What does this do here? It probably doesn't belong here.
 	NetGGZ::ref()->data();

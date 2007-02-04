@@ -55,7 +55,9 @@ struct Trigger_Building_Option_Menu : public UI::Window {
       UI::Edit_Box* m_name;
 	Player_Area m_player_area;
 	uint m_count;
-	Building_Descr::Index m_building;
+	//Building_Descr::Index m_building;
+	//TODO: line above is type-correct, line below is signedness-correct. Merge them.
+	int m_building;
       std::vector<std::string> m_buildings;
 };
 

@@ -38,7 +38,7 @@ struct Statebox : public Panel {
 
 	Signal changed;
 	Signal1<bool> changedto;
-   Signal2<int,bool> changedtoid;
+	Signal2<int,bool> changedtoid;
 
 	void set_enabled(bool enabled);
 
