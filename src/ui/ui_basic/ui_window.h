@@ -56,8 +56,9 @@ struct Window : public Panel {
 	virtual void move_inside_parent();
 	void center_to_parent();
 
-   inline bool is_minimized(void) { return _small; }
-   void minimize(bool t);
+	bool is_minimal() const throw () {return _is_minimal;}
+   void restore ();
+   void minimize();
    bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
@@ -76,7 +77,7 @@ private:
 	void undock_right();
 	void dock_bottom();
 	void undock_bottom();
-	bool _small;       // Is this window "hidden"
+	bool _is_minimal;
 	uint _oldw,_oldh;  // if it is, these are the old formats
 	bool _dragging, _docked_left, _docked_right, _docked_bottom;
 	int _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;

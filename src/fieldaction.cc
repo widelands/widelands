@@ -173,8 +173,7 @@ FieldActionWindow IMPLEMENTATION
 
 ==============================================================================
 */
-class FieldActionWindow : public UI::UniqueWindow {
-public:
+struct FieldActionWindow : public UI::UniqueWindow {
 	FieldActionWindow(Interactive_Base *iabase, Player* plr, UI::UniqueWindow::Registry *registry);
 	~FieldActionWindow();
 
@@ -1012,7 +1011,7 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 	// show_field_action() does not always open a FieldActionWindow (e.g.
 	// connecting the road we are building to an existing flag)
 		delete registry->window;
-		registry->window = 0;
+	*registry = UI::UniqueWindow::Registry();
 
 	if (!iabase->is_building_road()) {
 		faw = new FieldActionWindow(iabase, player, registry);

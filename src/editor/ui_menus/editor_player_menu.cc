@@ -108,7 +108,7 @@ Update all
 ===============
 */
 void Editor_Player_Menu::update(void) {
-   if(is_minimized()) return;
+	if (is_minimal()) return;
 
 	Map & map = m_parent->egbase().map();
 	const Player_Number nr_players = map.get_nrplayers();

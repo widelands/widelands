@@ -156,8 +156,8 @@ void Editor_Tool_Menu::changed_to(void) {
 	parent.select_tool(*current_tool_pointer, Editor_Tool::First);
 
 	if (UI::Window * const window = current_registry_pointer->window) {
-		// There is already a window. If it is minimized, restore it.
-		if (window->is_minimized()) window->minimize(false); else delete window;
+		// There is already a window. If it is minimal, restore it.
+		if (window->is_minimal()) window->restore(); else delete window;
 	} else switch (n) { //  create window
 	case 0:
 		new Editor_Tool_Change_Height_Options_Menu

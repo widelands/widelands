@@ -64,7 +64,7 @@ namespace UI {
  */
 Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title) :
 Panel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
-_small(false), _dragging(false),
+_is_minimal(false), _dragging(false),
 _docked_left(false), _docked_right(false), _docked_bottom(false),
 _drag_start_win_x(0), _drag_start_win_y(0), _drag_start_mouse_x(0), _drag_start_mouse_y(0),
 m_pic_lborder   (g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
@@ -130,7 +130,10 @@ void Window::move_inside_parent() {
 		if (py < 0) py = 0;
 		else if (py + static_cast<const int>(get_h()) > parent->get_inner_h()) {
 			py = parent->get_inner_h() - get_h();
-			if (parent->get_dock_windows_to_edges() and not _docked_bottom)
+			if
+				(not _is_minimal
+				 and
+				 parent->get_dock_windows_to_edges() and not _docked_bottom)
 				dock_bottom();
 		}
 		if      (_docked_left)   px = 0;
@@ -206,7 +209,7 @@ void Window::draw_border(RenderTarget* dst)
 		 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
 		 m_title.c_str(), Align_Center);
 
-	if (not _small) { // Only draw this, if we are not minimized.
+	if (not _is_minimal) {
 		const int vt_bar_end = get_h() - (_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
 		const int vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
 
@@ -323,7 +326,7 @@ bool Window::handle_mousepress(const Uint8 btn, int mx, int my) {
 		  btn == SDL_BUTTON_LEFT)
 		 or
 		 btn == SDL_BUTTON_MIDDLE)
-      minimize(!is_minimized());
+		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
 			_dragging = true;
 			_drag_start_win_x = get_x();
@@ -348,21 +351,23 @@ bool Window::handle_mouserelease(const Uint8 btn, int, int) {
 	return true;
 }
 
-/*
- * minimize this window
- */
-void Window::minimize(bool t) {
-   if(t==_small) return;
-
-   if(_small) {
+void Window::restore() {
+	assert(_is_minimal);
+	set_border
+		(get_lborder(), get_rborder(),
+		 get_tborder(), _docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS);
       set_inner_size(get_inner_w(), _oldh);
-      _small=false;
-   } else {
+	_is_minimal = false;
+	move_inside_parent();
+}
+void Window::minimize() {
+	assert(not _is_minimal);
+	if (_docked_bottom) undock_bottom(); //  Minimal can not be bottom-docked.
       _oldh=get_inner_h();
+	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
       set_size(get_w(), TP_B_PIXMAP_THICKNESS);
 		set_pos(Point(get_x(),get_y())); // If on border, this feels more natural
-      _small=true;
-   }
+	_is_minimal = true;
 }
 
 inline void Window::dock_left() {
@@ -396,6 +401,7 @@ inline void Window::undock_right() {
 
 inline void Window::dock_bottom() {
 	assert(not _docked_bottom);
+	assert(not _is_minimal); //  Minimal windows can not be bottom-docked.
 	_docked_bottom = true;
 	set_size(get_w(), get_tborder() + get_inner_h());
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
@@ -545,17 +551,20 @@ void Window::handle_mousemove(int mx, int my, int, int) {
 					new_left -= VT_B_PIXMAP_THICKNESS;
 					_drag_start_win_x -= VT_B_PIXMAP_THICKNESS; //  avoid jumping
 				}
-				if (new_top == max_y_minus_h) {
-					if (not _docked_bottom) {
-						dock_bottom();
-						new_top += BT_B_PIXMAP_THICKNESS;
-						_drag_start_win_y += BT_B_PIXMAP_THICKNESS; //  avoid jumping
+				if (not _is_minimal) //  Minimal windows can not be bottom-docked.
+					if (new_top == max_y_minus_h) {
+						if (not _docked_bottom) {
+							dock_bottom();
+							new_top += BT_B_PIXMAP_THICKNESS;
+
+							 //  avoid jumping
+							_drag_start_win_y += BT_B_PIXMAP_THICKNESS;
+						}
+					} else if (_docked_bottom) {
+						undock_bottom();
+						new_top -= BT_B_PIXMAP_THICKNESS;
+						_drag_start_win_y -= BT_B_PIXMAP_THICKNESS; //  avoid jumping
 					}
-				} else if (_docked_bottom) {
-					undock_bottom();
-					new_top -= BT_B_PIXMAP_THICKNESS;
-					_drag_start_win_y -= BT_B_PIXMAP_THICKNESS; //  avoid jumping
-				}
 			}
 		}
 		set_pos(Point(new_left, new_top));
