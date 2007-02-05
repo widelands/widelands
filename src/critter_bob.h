@@ -61,7 +61,7 @@ public:
 	Critter_Bob(const Critter_Bob_Descr &);
 	virtual ~Critter_Bob(void);
 
-   virtual int get_bob_type() { return Bob::CRITTER; }
+	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
 	uint get_movecaps();
 
 	virtual void init_auto_task(Game* g);

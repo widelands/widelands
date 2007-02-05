@@ -332,11 +332,11 @@ struct Route {
 	Route();
 
 	void clear();
-	bool verify(Game *g);
 
 	inline int get_totalcost() const { return m_totalcost; }
 	inline int get_nrsteps() const { return m_route.size()-1; }
-	Flag *get_flag(Editor_Game_Base *g, int idx);
+	Flag * get_flag
+		(Editor_Game_Base * const, const std::vector<Flag *>::size_type) const;
 
 	void starttrim(int count);
 	void truncate(int count);

@@ -136,7 +136,7 @@ class Worker : public Bob {
 
 	virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
 	{return descr().get_worker_type();}
-   virtual int get_bob_type() { return Bob::WORKER; }
+	virtual Bob::Type get_bob_type() const throw () {return Bob::WORKER;}
 
 	uint get_animation(const char * const str) const
 	{return descr().get_animation(str);}

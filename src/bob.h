@@ -85,7 +85,7 @@ class Bob : public Map_Object {
    MO_DESCR(Bob_Descr);
 
 public:
-   enum Bob_Type {
+   enum Type {
       CRITTER,
       WORKER
    };
@@ -127,7 +127,7 @@ public:
 	int get_animstart() const { return m_animstart; }
 
 	virtual int get_type() const throw ();
-	virtual int get_bob_type() = 0;
+	virtual Type get_bob_type() const throw () = 0;
    virtual uint get_movecaps() { return 0; }
 	const std::string & name() const throw () {return descr().name();}
 	const std::string & get_name() const throw () __attribute__ ((deprecated)) {return descr().name();}
@@ -150,7 +150,7 @@ public:
 
 	void set_position(Editor_Game_Base* g, Coords f);
 	inline const FCoords& get_position() const { return m_position; }
-	inline Bob* get_next_bob(void) { return m_linknext; }
+	Bob * get_next_bob() const throw () {return m_linknext;}
 
 	bool is_world_bob() const throw () {return descr().is_world_bob();}
 

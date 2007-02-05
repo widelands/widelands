@@ -1865,34 +1865,6 @@ void Route::clear()
 	m_route.clear();
 }
 
-/*
-===============
-Route::verify
-
-Walk all flags and check whether they're still there and interconnected.
-===============
-*/
-bool Route::verify(Game *g)
-{
-	Flag *flag = (Flag*)m_route[0].get(g);
-
-	if (!flag)
-		return false;
-
-	for(uint idx = 1; idx < m_route.size(); idx++) {
-		Flag *next = (Flag*)m_route[idx].get(g);
-
-		if (!next)
-			return false;
-
-		if (!flag->get_road(next))
-			return false;
-
-		flag = next;
-	}
-
-	return true;
-}
 
 /*
 ===============
@@ -1903,9 +1875,10 @@ idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
 Every route has at least one flag.
 ===============
 */
-Flag *Route::get_flag(Editor_Game_Base *g, int idx)
+Flag * Route::get_flag
+(Editor_Game_Base * const g, const std::vector<Flag *>::size_type idx) const
 {
-	assert(idx >= 0 && idx < (int)m_route.size());
+	assert(idx < m_route.size());
 	return (Flag*)m_route[idx].get(g);
 }
 

@@ -239,7 +239,6 @@ throw
                   r->m_route.push_back(flag);
                }
                s->route=r;
-               r->verify(static_cast<Game*>(egbase));
             } else
                s->route=0;
 
