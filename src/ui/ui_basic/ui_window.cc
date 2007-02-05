@@ -307,6 +307,10 @@ void Window::draw_border(RenderTarget* dst)
 	}
 }
 
+
+void Window::think() {if (not is_minimized()) Panel::think();}
+
+
 /**
  * Left-click: drag the window
  * Right-click: close the window

@@ -63,6 +63,8 @@ struct Window : public Panel {
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
 
+	void think();
+
 	bool handle_mousepress  (const Uint8 btn, int mx, int my);
 	bool handle_mouserelease(const Uint8 btn, int mx, int my);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
