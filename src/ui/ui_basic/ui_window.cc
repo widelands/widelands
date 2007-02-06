@@ -311,7 +311,7 @@ void Window::draw_border(RenderTarget* dst)
 }
 
 
-void Window::think() {if (not is_minimized()) Panel::think();}
+void Window::think() {if (not is_minimal()) Panel::think();}
 
 
 /**
