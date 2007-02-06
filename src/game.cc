@@ -128,8 +128,16 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		 i == 1 ? Player::Local : Player::AI,
 		 m->get_scenario_player_tribe(i),
 		 m->get_scenario_player_name(i));
+   
+        // Reload the textdomain "widelands", so buttons can be translated.
+        if( scenario )
+        i18n::grab_textdomain("widelands");
 
    init_player_controllers ();
+   
+        // Unload the textdomain, to make campaign textdomain available, again.
+        if( scenario )
+        i18n::release_textdomain();
 
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
