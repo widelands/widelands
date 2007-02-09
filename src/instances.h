@@ -201,7 +201,7 @@ protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
 
-	void molog(const char* fmt, ...);
+	void molog(const char* fmt, ...) const __attribute__((format(printf,2,3)));
 
 protected:
 	const Map_Object_Descr * m_descr;

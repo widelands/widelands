@@ -162,7 +162,7 @@ public:
 	Profile(const char* filename, const char *global_section = 0, int error_level = err_throw);
 	~Profile();
 
-	void error(const char *fmt, ...) const;
+	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used();
 
 	void read

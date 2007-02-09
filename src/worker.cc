@@ -2187,7 +2187,7 @@ void Worker::transfer_update(Game* g, State* state)
 					  index,
 					  get_descr()->get_right_walk_anims(does_carry_ware())))
 				{
-					molog("[transfer]: from road %u to flag %u\n", get_serial(), road->get_serial(),
+					molog("[transfer]: from road %u to flag %u nextstep %u\n", get_serial(), road->get_serial(),
 									nextstep->get_serial());
 					return;
 				}

@@ -68,7 +68,7 @@ struct FileWrite {
 	 * This is a perfectly normal printf (actually it isn't because it's limited
 	 * to a maximum string size)
 	 */
-		void Printf(const char *fmt, ...);
+		void Printf(const char *fmt, ...) __attribute__((format(printf,2,3)));
 
 		inline void Signed8(char x, int pos = -1) { Data(&x, 1, pos); }
 		inline void Unsigned8(uchar x, int pos = -1) { Data(&x, 1, pos); }

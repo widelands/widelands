@@ -482,7 +482,7 @@ Map_Object::molog
 Prints a log message prepended by the object's serial number.
 ===============
 */
-void Map_Object::molog(const char* fmt, ...)
+void Map_Object::molog(const char* fmt, ...) const
 {
 	va_list va;
 	char buf[2048];

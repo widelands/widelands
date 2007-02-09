@@ -292,7 +292,7 @@ def do_configure(config_h_file, conf, env):
 	#conf.CheckCompilerFlag('-Wformat=2', env)
 	#conf.CheckCompilerFlag('-Winline', env)
 	conf.CheckCompilerFlag('-Winvalid-pch', env)
-	#conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
+	conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
 	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
 	conf.CheckCompilerFlag('-Wmissing-noreturn', env)
 	conf.CheckCompilerFlag('-Wno-comment', env)
