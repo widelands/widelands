@@ -290,7 +290,7 @@ def do_configure(config_h_file, conf, env):
 	conf.CheckCompilerFlag('-Wextra', env)
 	#conf.CheckCompilerFlag('-Wfloat-equal', env)
 	#conf.CheckCompilerFlag('-Wformat=2', env)
-	#conf.CheckCompilerFlag('-Winline', env)
+	conf.CheckCompilerFlag('-Winline', env)
 	conf.CheckCompilerFlag('-Winvalid-pch', env)
 	conf.CheckCompilerFlag('-Wmissing-format-attribute', env)
 	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
@@ -315,7 +315,7 @@ def do_configure(config_h_file, conf, env):
 	if env.optimize:
 		# !!!! -fomit-frame-pointer breaks execeptions !!!!
 		conf.CheckCompilerFlag('-fexpensive-optimizations', env)
-        	conf.CheckCompilerFlag('-finline-functions', env)
+		conf.CheckCompilerFlag('-finline-functions', env)
 		conf.CheckCompilerFlag('-ffast-math', env)
 		conf.CheckCompilerFlag('-funroll-loops', env)
 		conf.CheckCompilerFlag('-O3', env)
