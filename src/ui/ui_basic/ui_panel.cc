@@ -49,6 +49,7 @@ _lborder(0), _rborder(0), _tborder(0), _bborder(0),
 _border_snap_distance(0), _panel_snap_distance(0),
 	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
 {
+	assert(nparent != this);
 	if (_parent) {
 		_next = _parent->_fchild;
 		_prev = 0;
