@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,7 +16,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// you MUST include ui.h before including this
 
 #ifndef included_ui_icongrid_h
 #define included_ui_icongrid_h
@@ -48,7 +47,6 @@ struct Icon_Grid : public Panel {
 		Grid_Persistant = 2,
 	};
 
-public:
 	Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
 
 	Signal1<int> clicked;
