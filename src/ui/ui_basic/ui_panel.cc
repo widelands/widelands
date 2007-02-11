@@ -479,7 +479,7 @@ bool Panel::handle_mouserelease(const Uint8, int, int) {return false;}
  * Called when the mouse is moved while inside the panel
  *
  */
-void Panel::handle_mousemove(int, int, int, int) {}
+bool Panel::handle_mousemove(int, int, int, int) {return false;}
 
 /**
  * Receive a keypress or keyrelease event.
@@ -684,15 +684,9 @@ void Panel::do_draw(RenderTarget* dst)
 }
 
 
-/**
- * Return the panel that receives mouse clicks at the given location
- * Returns: topmost panel at the given coordinates
- */
-Panel *Panel::get_mousein(int x, int y)
-{
-	Panel *child;
+inline Panel * Panel::child_at_mouse_cursor(int x, int y, Panel * child) {
 
-	for(child = _fchild; child; child = child->_next) {
+	for (; child; child = child->_next) {
 		if (!child->get_handle_mouse() || !child->get_visible())
 			continue;
 		if
@@ -725,50 +719,46 @@ void Panel::do_mousein(bool inside)
 }
 
 /**
- * Propagate mousepresses/-releases to the appropriate panel.
+ * Propagate mousepresses/-releases/-moves to the appropriate panel.
  *
- * Returns: true, if the click was processed
+ * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const Uint8 btn, int x, int y) {
 	x -= _lborder;
 	y -= _tborder;
-
 	if (_flags & pf_top_on_click) move_to_top();
-
 	if (_g_mousegrab != this)
-		if (Panel * const child = get_mousein(x, y))
+		if (Panel * child = _fchild) for (;; child = child->_next) {
+			child = child_at_mouse_cursor(x, y, child);
+			if (not child) break;
 			if (child->do_mousepress(btn, x - child->_x, y - child->_y))
 				return true;
-
+		}
 	return handle_mousepress(btn, x, y);
 }
 bool Panel::do_mouserelease(const Uint8 btn, int x, int y) {
 	x -= _lborder;
 	y -= _tborder;
-
 	if (_g_mousegrab != this)
-		if (Panel * const child = get_mousein(x, y))
+		if (Panel * child = _fchild) for (;; child = child->_next) {
+			child = child_at_mouse_cursor(x, y, child);
+			if (not child) break;
 			if (child->do_mouserelease(btn, x - child->_x, y - child->_y))
 				return true;
-
+		}
 	return handle_mouserelease(btn, x, y);
 }
-
-/**
- * Propagate mouse movement to the appropriate panel.
- */
-void Panel::do_mousemove(int x, int y, int xdiff, int ydiff) {
+bool Panel::do_mousemove(int x, int y, int xdiff, int ydiff) {
 	x -= _lborder;
 	y -= _tborder;
-
-	if (_g_mousegrab == this) handle_mousemove(x, y, xdiff, ydiff);
-	else
-	{
-		Panel *child = get_mousein(x, y);
-
-		if (child) child->do_mousemove(x-child->_x, y-child->_y, xdiff, ydiff);
-		else          handle_mousemove(x,           y,           xdiff, ydiff);
-	}
+	if (_g_mousegrab != this)
+		if (Panel * child = _fchild) for (;; child = child->_next) {
+			child = child_at_mouse_cursor(x, y, child);
+			if (not child) break;
+			if (child->do_mousemove(x - child->_x, y - child->_y, xdiff, ydiff))
+				return true;
+		}
+	return handle_mousemove(x, y, xdiff, ydiff);
 }
 
 /**

@@ -73,7 +73,7 @@ private:
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
-	void handle_mousemove(int mx, int my, int xdiff, int ydiff);
+	bool handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
 private:
 	bool m_horizontal;

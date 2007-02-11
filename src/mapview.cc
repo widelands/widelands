@@ -158,8 +158,7 @@ Map_View::handle_mousemove
 Scroll the view according to mouse movement.
 ===============
 */
-void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff)
-{
+bool Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff) {
 	if (m_dragging)
 	{
 		set_rel_viewpoint(Point(xdiff, ydiff));
@@ -168,6 +167,7 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff)
 	if (not intbase().get_sel_freeze()) track_sel(x, y);
 
 	g_gr->update_fullscreen();
+	return true;
 }
 
 

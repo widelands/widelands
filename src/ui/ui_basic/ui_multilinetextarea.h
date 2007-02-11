@@ -29,8 +29,7 @@ namespace UI {
 struct Scrollbar;
 
 /**
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed.
+ * This defines an area, where a text can easily be printed.
  * The textarea transparently handles explicit line-breaks and word wrapping.
  *
  * Do not use it blindly for big texts: the font handler needs to re-break the
@@ -60,7 +59,8 @@ public:
       void set_scrollpos(int pixels);
       void set_scrollmode(ScrollMode mode);
 
-      inline uint get_eff_w() { return get_w(); }
+	uint scrollbar_w() const throw () {return 24;}
+	uint get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
       inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str()); }
 

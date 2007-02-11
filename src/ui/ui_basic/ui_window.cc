@@ -419,16 +419,15 @@ inline void Window::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-void Window::handle_mousemove(int mx, int my, int, int) {
+bool Window::handle_mousemove(int mx, int my, int, int) {
 	if (_dragging) {
 		const int mouse_x = get_x() + get_lborder() + mx;
 		const int mouse_y = get_y() + get_tborder() + my;
 		int left = std::max(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
 		int top  = std::max(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
 		int new_left = left, new_top = top;
-		const Panel * const parent = get_parent();
 
-		if (parent) {
+		if (const Panel * const parent = get_parent()) {
 			const int w = get_w();
 			const int h = get_h();
 			const int max_x = parent->get_inner_w();
@@ -569,5 +568,6 @@ void Window::handle_mousemove(int mx, int my, int, int) {
 		}
 		set_pos(Point(new_left, new_top));
 	}
+	return true;
 }
 };

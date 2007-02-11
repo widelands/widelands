@@ -49,7 +49,7 @@ public:
 	WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player);
 	virtual ~WaresDisplay();
 
-   void handle_mousemove(int x, int y, int xdiff, int ydiff);
+	bool handle_mousemove(int x, int y, int xdiff, int ydiff);
 
    void add_warelist(const WareList*, wdType);
    void remove_all_warelists(void);

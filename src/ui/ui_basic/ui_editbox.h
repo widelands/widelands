@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ struct Edit_Box : private Basic_Button {
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
-     void handle_mousemove(int x, int y, int xdiff, int ydiff);
+	bool handle_mousemove(int x, int y, int xdiff, int ydiff);
      bool handle_key(bool down, int code, char c);
      void handle_mousein(bool);
 

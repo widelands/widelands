@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,9 +142,9 @@ handles the mousemove for this panel.
 does not much, suppresses messages when the focus
 is received
 */
-void Edit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff) {
-   if(m_keyboard_grabbed) return;
-	else Basic_Button::handle_mousemove(x, y, xdiff, ydiff);
+bool Edit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff) {
+	return m_keyboard_grabbed ?
+		true : Basic_Button::handle_mousemove(x, y, xdiff, ydiff);
 }
 
 /**

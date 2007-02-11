@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -134,7 +134,7 @@ struct Panel : public Object {
 	virtual void handle_mousein(bool inside);
 	virtual bool handle_mousepress  (const Uint8 btn, int x, int y);
 	virtual bool handle_mouserelease(const Uint8 btn, int x, int y);
-	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff);
+	virtual bool handle_mousemove(int x, int y, int xdiff, int ydiff);
 	virtual bool handle_key(bool down, int code, char c);
 
 	void set_handle_mouse(bool yes);
@@ -167,11 +167,16 @@ private:
 
 	void do_draw(RenderTarget* dst);
 
-	Panel *get_mousein(int x, int y);
+	/**
+	 * Returns the child panel that receives mouse events at the given location.
+	 * Starts the search with child (which should usually be set to _fchild) and
+	 * returns the first match.
+	 */
+	Panel * child_at_mouse_cursor(int mouse_x, int mouse_y, Panel * child);
 	void do_mousein(bool inside);
 	bool do_mousepress  (const Uint8 btn, int x, int y);
 	bool do_mouserelease(const Uint8 btn, int x, int y);
-	void do_mousemove(int x, int y, int xdiff, int ydiff);
+	bool do_mousemove(int x, int y, int xdiff, int ydiff);
 	bool do_key(bool down, int code, char c);
 
 	Panel *_parent;

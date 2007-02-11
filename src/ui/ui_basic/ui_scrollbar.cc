@@ -417,12 +417,13 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int, int) {
 /**
 Move the knob while pressed.
 */
-void Scrollbar::handle_mousemove(int mx, int my, int, int) {
+bool Scrollbar::handle_mousemove(int mx, int my, int, int) {
 	if (m_pressed == Knob)
 	{
 		int pos = m_horizontal ? mx : my;
 
 		set_knob_pos(pos - m_knob_grabdelta);
 	}
+	return true;
 }
 };
