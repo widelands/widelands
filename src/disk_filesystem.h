@@ -29,12 +29,11 @@ public:
 	RealFSImpl(const std::string Directory);
 	~RealFSImpl();
 
-	virtual const bool IsWritable() const;
-
 	virtual const int FindFiles(std::string path,
 	                            const std::string pattern,
-	                            filenameset_t *results);
+	                            filenameset_t *results, uint depth=0);
 
+	virtual const bool IsWritable() const;
 	virtual const bool FileExists(const std::string path);
 	virtual const bool IsDirectory(const std::string path);
 	virtual void EnsureDirectoryExists(const std::string dirname);

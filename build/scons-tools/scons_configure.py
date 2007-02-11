@@ -201,10 +201,10 @@ def do_configure(config_h_file, conf, env):
 		textdomainfound=1
 
 	if setlocalefound and textdomainfound:
-		print '   NLS subsystem found.'
+		print '--> NLS subsystem found.'
 	else:
 		#TODO: use dummy replacements that just pass back the original string
-		print '   No usable NLS subsystem found. Please install gettext.'
+		print '--> No usable NLS subsystem found. Please install gettext.'
 		env.Exit(1)
 
 	if not conf.CheckFunc('getenv'):

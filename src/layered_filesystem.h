@@ -50,12 +50,9 @@ public:
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
 	                            filenameset_t *results,
-	                            int depth);
-	virtual const int FindFiles(std::string path, const std::string pattern,
-	                            filenameset_t *results);
+	                            uint depth=0);
 
 	virtual const bool IsWritable() const;
-
 	virtual const bool FileExists(const std::string path);
 	virtual const bool IsDirectory(std::string path);
 	virtual void EnsureDirectoryExists(const std::string dirname);
@@ -78,7 +75,7 @@ private:
 	std::vector<FileSystem*> m_filesystems;
 };
 
-/// Access all game data files etc.. through this FileSystem
+/// Access all game data files etc. through this FileSystem
 extern LayeredFileSystem *g_fs;
 
 #endif

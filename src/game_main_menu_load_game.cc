@@ -169,9 +169,9 @@ void Game_Main_Menu_Load_Game::fill_list(void)
 			Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 
-	 char* fname = strdup(FileSystem::FS_Filename(name));
-	 FileSystem::FS_StripExtension(fname);
-			m_ls->add(fname, name);
+			char* fname = strdup(FileSystem::FS_Filename(name));
+			FileSystem::FS_StripExtension(fname);
+			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
          free(fname);
 
       } catch(_wexception& ) {

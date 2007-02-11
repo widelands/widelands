@@ -124,12 +124,11 @@ void Game_Main_Menu_Save_Game::clicked_ok() {
          die();
 }
 
-/*
+/**
  * called when a item is selected
  */
 void Game_Main_Menu_Save_Game::selected(uint) {
 	const char * const name = m_ls->get_selected();
-
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
 	Game_Loader gl(*fs, m_parent->get_game());
@@ -157,7 +156,7 @@ void Game_Main_Menu_Save_Game::selected(uint) {
    delete fs;
 }
 
-/*
+/**
  * An Item has been doubleclicked
  */
 void Game_Main_Menu_Save_Game::double_clicked(uint) {clicked_ok();}
@@ -181,9 +180,9 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
          fs = g_fs->MakeSubFileSystem( name );
 			Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
-	 char* fname = strdup(FileSystem::FS_Filename(name));
-	 FileSystem::FS_StripExtension(fname);
-			m_ls->add(fname, name);
+			char* fname = strdup(FileSystem::FS_Filename(name));
+			FileSystem::FS_StripExtension(fname);
+			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
          free(fname);
       } catch(_wexception& ) {
          // we simply skip illegal entries

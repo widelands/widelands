@@ -33,7 +33,7 @@ public:
 	virtual const bool IsWritable() const;
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
-										 filenameset_t *results);
+										 filenameset_t *results, uint depth=0);
 
    virtual const bool IsDirectory(std::string path);
 	virtual const bool FileExists(std::string path);

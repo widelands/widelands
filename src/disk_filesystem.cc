@@ -74,11 +74,11 @@ const bool RealFSImpl::IsWritable() const
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-#ifdef _WIN32
 // note: the Win32 version may be broken, feel free to fix it
 const int RealFSImpl::FindFiles(std::string path,
-                                const std::string pattern,
-                                filenameset_t *results)
+										  const std::string pattern,
+										  filenameset_t *results, uint depth)
+#ifdef _WIN32
 {
 	std::string buf;
 	struct _finddata_t c_file;
@@ -105,9 +105,6 @@ const int RealFSImpl::FindFiles(std::string path,
 	return results->size();
 }
 #else
-const int RealFSImpl::FindFiles(std::string path,
-										  const std::string pattern,
-										  filenameset_t *results)
 {
 	std::string buf;
 	glob_t gl;
@@ -179,6 +176,7 @@ FileSystem* RealFSImpl::MakeSubFileSystem(const std::string path)
 	std::string fullname;
 
 	fullname=FS_CanonicalizeName(path);
+	printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
 
 	if( IsDirectory( path )) {
 		return new RealFSImpl( fullname );

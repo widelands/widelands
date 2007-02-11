@@ -34,6 +34,7 @@ typedef std::set<std::string> filenameset_t;
  */
 class FileSystem {
 public:
+	//TODO: this should be unneccessary. Make it so.
 	enum Type {
 	   DIR,
 	   ZIP
@@ -41,11 +42,10 @@ public:
 
 	virtual ~FileSystem() { }
 
-	virtual const bool IsWritable() const = 0;
-
 	virtual const int FindFiles(std::string path, const std::string pattern,
-	                            filenameset_t *results) = 0;
+	                            filenameset_t *results, uint depth=0) = 0;
 
+	virtual const bool IsWritable() const = 0;
 	virtual const bool IsDirectory(std::string path) = 0;
 	virtual const bool FileExists(const std::string path) = 0;
 
@@ -53,10 +53,11 @@ public:
 	virtual void Write(const std::string fname, const void * const data,
 	                   const int length) = 0;
 	virtual void EnsureDirectoryExists(const std::string dirname) = 0;
+	//TODO: use this only from inside EnsureDirectoryExists()
 	virtual void MakeDirectory(const std::string dirname) = 0;
 
-	virtual FileSystem*  MakeSubFileSystem( const std::string dirname ) = 0;
-	virtual FileSystem*  CreateSubFileSystem( const std::string dirname,
+	virtual FileSystem* MakeSubFileSystem( const std::string dirname ) = 0;
+	virtual FileSystem* CreateSubFileSystem( const std::string dirname,
 	      const Type ) = 0;
 	virtual void Unlink( const std::string ) = 0;
 

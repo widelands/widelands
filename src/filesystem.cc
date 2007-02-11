@@ -21,11 +21,11 @@
 
 #include "config.h"
 #include "constants.h"
+#include "disk_filesystem.h"
 #include <errno.h>
 #include "error.h"
 #include "filesystem.h"
 #include "layered_filesystem.h"
-#include "disk_filesystem.h"
 #include <string>
 #include <unistd.h>
 #include <vector>
@@ -426,7 +426,7 @@ FileSystem *FileSystem::Create(std::string root) throw(FileType_error,
 	if(S_ISDIR(statinfo.st_mode)) {
 		return new RealFSImpl(root);
 	}
-	if(S_ISREG(statinfo.st_mode)) {
+	if(S_ISREG(statinfo.st_mode)) { //TODO: ensure root is a zipfile
 		return new ZipFilesystem(root);
 	}
 

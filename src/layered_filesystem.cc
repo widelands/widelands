@@ -35,8 +35,7 @@ LayeredFileSystem::LayeredFileSystem()
 LayeredFileSystem::~LayeredFileSystem()
 {
 	while(!m_filesystems.empty()) {
-		FileSystem *fs = m_filesystems.back();
-		delete fs;
+		delete m_filesystems.back();
 		m_filesystems.pop_back();
 	}
 }
@@ -77,12 +76,13 @@ void LayeredFileSystem::AddFileSystem(FileSystem * const fs)
  *
  * Returns the number of files found.
  */
+//TODO: return type is wrong
 const int LayeredFileSystem::FindFiles(std::string path,
                                        const std::string pattern,
                                        filenameset_t *results,
-                                       int depth)
+                                       uint depth)
 {
-	int i=0;
+	uint i=0;
 	if(!depth)
 		depth=10000; // Wow, if you have so many filesystem you're my hero
 
@@ -102,13 +102,6 @@ const int LayeredFileSystem::FindFiles(std::string path,
 	return results->size();
 }
 
-const int LayeredFileSystem::FindFiles(std::string path,
-                                       const std::string pattern,
-                                       filenameset_t *results)
-{
-	return FindFiles(path,pattern,results,0);
-}
-
 /**
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
@@ -125,11 +118,14 @@ const bool LayeredFileSystem::FileExists(const std::string path)
 }
 
 /**
- * Returns true if the file can be found in at least one of the sub-filesystems
+ * Returns true if path is a directory in at least one of the directories
+ * \todo What if it's a file in some and a dir in others?????
  */
 const bool LayeredFileSystem::IsDirectory(const std::string path)
 {
-	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+	for(FileSystem_rit it = m_filesystems.rbegin();
+			it != m_filesystems.rend(); it++)
+	{
 		if ((*it)->IsDirectory(path))
 			return true;
 	}
@@ -150,10 +146,8 @@ void *LayeredFileSystem::Load(std::string fname, int * const length)
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{
-		if (!(*it)->FileExists(fname))
-			continue;
-
-		return (*it)->Load(fname, length);
+		if ((*it)->FileExists(fname))
+			return (*it)->Load(fname, length);
 	}
 
 	throw FileNotFound_error("Could not find file", fname);
@@ -170,11 +164,11 @@ void LayeredFileSystem::Write(const std::string fname, const void * const data,
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{
-		if (!(*it)->IsWritable())
-			continue;
-
-		(*it)->Write(fname, data, length);
-		return;
+		if ((*it)->IsWritable())
+		{
+			(*it)->Write(fname, data, length);
+			return;
+		}
 	}
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
@@ -188,11 +182,11 @@ void LayeredFileSystem::MakeDirectory(const std::string dirname)
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{
-		if (!(*it)->IsWritable())
-			continue;
-
-		(*it)->MakeDirectory(dirname);
-		return;
+		if ((*it)->IsWritable())
+		{
+			(*it)->MakeDirectory(dirname);
+			return;
+		}
 	}
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
@@ -206,18 +200,18 @@ void LayeredFileSystem::EnsureDirectoryExists(const std::string dirname)
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{
-		if (!(*it)->IsWritable())
-			continue;
-
-		(*it)->EnsureDirectoryExists(dirname);
-		return;
+		if ((*it)->IsWritable())
+		{
+			(*it)->EnsureDirectoryExists(dirname);
+			return;
+		}
 	}
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
 }
 
 /**
- * Create a subfilesystem from this directory
+ * Create a subfilesystem from an existing file/directory
  */
 FileSystem* LayeredFileSystem::MakeSubFileSystem(const std::string dirname)
 {
@@ -227,17 +221,18 @@ FileSystem* LayeredFileSystem::MakeSubFileSystem(const std::string dirname)
 		if (!(*it)->IsWritable())
 			continue;
 
-		if(! (*it)->FileExists(dirname))
+		if (!(*it)->FileExists(dirname))
 			continue;
 
 		return (*it)->MakeSubFileSystem(dirname);
 	}
 
-	throw wexception("LayeredFileSystem: Wasn't able to create sub filesystem!");
+	printf("dirname %s\n", dirname.c_str());
+	throw wexception("LayeredFileSystem: Wasn't able to make sub filesystem!");
 }
 
 /**
- * Create a new subfilesystem
+ * Create a subfilesystem from a new file/directory
  */
 FileSystem* LayeredFileSystem::CreateSubFileSystem(const std::string dirname,
       const Type type)
@@ -245,17 +240,21 @@ FileSystem* LayeredFileSystem::CreateSubFileSystem(const std::string dirname,
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{
-		//if (!(*it)->IsWritable())
-		//	continue;
+		if (!(*it)->IsWritable())
+			continue;
+
+		if ((*it)->FileExists(dirname))
+			continue;
 
 		return (*it)->CreateSubFileSystem( dirname, type );
 	}
 
+	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: Wasn't able to create sub filesystem!");
 }
 
 /**
- * Remove this file or directory. If it is a directory, remove it recursivly
+ * Remove this file or directory. If it is a directory, remove it recursively
  */
 void LayeredFileSystem::Unlink(const std::string file)
 {
