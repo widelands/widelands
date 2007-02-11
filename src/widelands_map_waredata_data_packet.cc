@@ -86,12 +86,6 @@ throw (_wexception)
 						 or
 						 dynamic_cast<const Flag     * const>(player_immovable))
 					{
-						log
-							("Adding ware with id %i from %s\n",
-							 ware->descr_index(),
-							 dynamic_cast<const Flag * const>(location) ?
-							 "Flag" : "Building");
-
 						//  We didn't know what kind of ware we were till now, so no
 						//  economy might have a clue of us.
 						ware->m_economy = 0;
@@ -111,8 +105,6 @@ throw (_wexception)
 				} else if
 					(Worker * const worker = dynamic_cast<Worker * const>(location))
 				{
-					log
-						("Adding ware with id %i from Worker\n", ware->descr_index());
 					const Tribe_Descr & tribe = *worker->get_tribe();
 					if (tribe.get_nrwares() <= (int)ware_index_from_file)
 						throw wexception
@@ -138,7 +130,6 @@ throw (_wexception)
 				if (Game * const game = dynamic_cast<Game * const>(egbase))
 					ware->set_location(game, location);
          ol->mark_object_as_loaded(ware);
-         log("Loadede ware %p (descr is: %p)\n", ware, ware->m_ware_descr);
 			} else throw wexception
 				("Widelands_Map_Waredata_Data_Packet: location with serial "
 				 "number %u is not known\n",

@@ -129,8 +129,6 @@ throw (_wexception)
             r->m_carrier_request=0;
          }
 
-         log("Loaded roaddata for Road: %p\n", r);
-
          ol->mark_object_as_loaded(r);
       }
       // DONE

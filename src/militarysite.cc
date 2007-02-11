@@ -154,7 +154,6 @@ Initialize the military site.
 */
 void MilitarySite::init(Editor_Game_Base* g)
 {
-log (">>MilitarySite::init()\n");
    ProductionSite::init(g);
 
 	if (Game * const game = dynamic_cast<Game * const>(g)) {
@@ -165,7 +164,6 @@ log (">>MilitarySite::init()\n");
       // soldiers should be scheduled.
 		schedule_act(game, 1000);
    }
-log ("<<MilitarySite::init()\n");
 }
 
 /**

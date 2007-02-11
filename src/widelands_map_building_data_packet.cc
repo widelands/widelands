@@ -95,7 +95,6 @@ throw (_wexception)
                else
                   building=egbase->warp_building(Coords(x,y), plr->get_player_number(), index);
 
-               log("Set building %p at (%i,%i)\n", building, x, y);
                assert(building);
 
                // Reference the players tribe if in editor

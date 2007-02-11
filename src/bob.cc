@@ -374,8 +374,6 @@ void Bob::do_act(Game* g, bool signalhandling)
 			// tasks and start a new task afterwards, which is why we don't
 			// call init_auto_task() immediately.
 			if (!m_stack.size()) {
-				molog("schedule reget auto task\n");
-
 				set_signal("");
 				schedule_act(g, 1);
 				m_sched_init_task = true;

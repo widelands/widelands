@@ -541,8 +541,6 @@ whatever reason.
 */
 void WareInstance::cancel_moving() {
 	if (m_transfer) {
-		molog("WareInstance::cancel_moving() fails transfer.\n");
-
 		m_transfer->has_failed();
 		m_transfer = 0;
 	}
@@ -1671,10 +1669,8 @@ void Road::remove_worker(Worker *w)
 		m_carrier = carrier = 0;
 
 	Game * const game = dynamic_cast<Game * const>(&egbase);
-	if (not carrier and not m_carrier_request and m_desire_carriers and game) {
-		molog("Road::remove_worker: Request a new carrier\n");
+	if (not carrier and not m_carrier_request and m_desire_carriers and game)
 		request_carrier(game);
-	}
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -3729,26 +3725,6 @@ void Economy::add_request(Request* req)
    if(!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
       return;
 
-	const Tribe_Descr & tribe = owner().tribe();
-	if(req->get_type()==Request::WORKER) log
-		("%p: add_request(%p) for worker %s, target is %u\n",
-		 this,
-		 req,
-		 tribe.get_worker_descr(req->get_index())->descname().c_str(),
-		 req->get_target()->get_serial());
-	else if(req->get_type()==Request::SOLDIER) log
-		("%p: add_request(%p) for soldier %s, target is %u\n",
-		 this,
-		 req,
-		 tribe.get_worker_descr(req->get_index())->descname().c_str(),
-		 req->get_target()->get_serial());
-	else if (req->get_type()==Request::WARE) log
-		("%p: add_request(%p) for ware %s, target is %u\n",
-		 this,
-		 req,
-		 tribe.get_ware_descr(req->get_index())->descname().c_str(),
-		 req->get_target()->get_serial());
-
 	m_requests.push_back(req);
 
 	// Try to fulfill the request
@@ -3972,8 +3948,6 @@ if possible.
 void Economy::do_merge(Economy *e)
 {
 	int i;
-
-	log("Economy: merge %i + %i\n", get_nrflags(), e->get_nrflags());
 
 	m_rebuilding = true;
 

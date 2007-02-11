@@ -80,14 +80,9 @@ throw (_wexception)
          uint ser=fr.Unsigned32();
 				if (ser == 0xffffffff) break; // Last building
 
-         log("Loading building with the serial: %i\n", ser);
-
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING);
          Building* building=static_cast<Building*>(ol->get_object_by_file_index(ser));
-
-         log("Reading building stuff for %p .. at location ", building);
-         log("(%i,%i)\n", building->get_position().x, building->get_position().y);
 
          // Animation
 				building->m_anim = fr.Unsigned8() ?
@@ -115,7 +110,6 @@ throw (_wexception)
          // Set economy now, some stuff below will count on this
          building->set_economy(building->m_flag->get_economy());
 
-         log("Read building stuff for %p\n", building);
 			if
 				(ConstructionSite * const constructionsite =
 				 dynamic_cast<ConstructionSite * const>(building))
@@ -158,9 +152,6 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-
-   log("Reading cs stuff for %p\n", &constructionsite);
-
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
       constructionsite.m_building=constructionsite.get_owner()->get_tribe()->get_building_descr(constructionsite.get_owner()->get_tribe()->get_safe_building_index(fr.CString()));
@@ -202,7 +193,6 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
       }
       constructionsite.m_wares.resize(size);
       for(uint i=0; i<constructionsite.m_wares.size(); i++) {
-         log("Reading waresqueue %i,%i\n", i+1, (int)constructionsite.m_wares.size());
          constructionsite.m_wares[i]->Read(&fr,egbase,ol);
       }
 
@@ -213,7 +203,6 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
       constructionsite.m_work_completed=fr.Unsigned32();
       constructionsite.m_work_steps=fr.Unsigned32();
 
-		log("Read cs stuff for %p\n", &constructionsite);
 	} else throw wexception
 		("Unknown Constructionsite-Version %i in "
 		 "Widelands_Map_Buildingdata_Data_Packet!\n",

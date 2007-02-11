@@ -109,11 +109,6 @@ granitmine="marblemine";
 	for (int i=0; i<tribe->get_nrbuildings();i++) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
-		log
-			("ComputerPlayer(%d): I can build '%s', id is %d\n",
-			 player_number,
-			 building_name.c_str(),
-			 i);
 
 		buildings.push_back (BuildingObserver());
 
@@ -288,7 +283,6 @@ void Computer_Player::think ()
 
 		// check whether building capabilities have improved
 		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK) != 0) {
-			log ("ComputerPlayer(%d): field (%d,%d) can now be built upon\n", player_number, i->x, i->y);
 			buildable_fields.push_back (new BuildableField(*i));
 			i=unusable_fields.erase(i);
 
@@ -297,7 +291,6 @@ void Computer_Player::think ()
 		}
 
 		if ((player->get_buildcaps(*i) & BUILDCAPS_MINE) != 0) {
-			log ("ComputerPlayer(%d): field (%d,%d) can now be mined upon\n", player_number, i->x, i->y);
 			mineable_fields.push_back (new MineableField(*i));
 			i=unusable_fields.erase(i);
 

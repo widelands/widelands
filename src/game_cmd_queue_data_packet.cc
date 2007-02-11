@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,10 +67,8 @@ throw (_wexception)
          item.serial=fr.Unsigned32();
 
          uint packet_id=fr.Unsigned16();
-         log("Creating queue command for id: %i (serial: %li) ... ", packet_id, item.serial);
          BaseCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
 			cmd->Read(&fr, game, ol);
-         log("done\n");
 
          item.cmd=cmd;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,6 @@ throw (_wexception)
          assert(!ol->is_object_known(ser));
          Road* road=new Road();
          road->init(egbase);
-         log("Registering road %i/%p\n", ser, road);
          ol->register_object(egbase, ser, road);
       }
       // DONE
