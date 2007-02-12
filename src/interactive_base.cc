@@ -38,28 +38,12 @@
 #include "profile.h"
 #include "wlapplication.h"
 
-/*
-==============================================================================
-
-Interactive_Base IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
-Interactive_Base::Interactive_Base
-
-Initialize
-===============
-*/
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
 :
-UI::Panel(0, 0, 0, get_xres(), get_yres()),
-m_mapview(this, 0, 0, get_w(), get_h(), *this),
+Map_View(0, 0, 0, get_xres(), get_yres(), *this),
 m_egbase(the_egbase)
 {
-	m_mapview.warpview.set(this, &Interactive_Player::mainview_move);
+	warpview.set(this, &Interactive_Player::mainview_move);
 
 	{
 		Section & s = *g_options.pull_section("global");
@@ -113,11 +97,6 @@ Interactive_Base::~Interactive_Base(void)
 		abort_build_road();
 }
 
-/*
- * Everything needs to be redrawn. This might take a while
- */
-void Interactive_Base::need_complete_redraw()
-{m_mapview.need_complete_redraw();}
 
 void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 {
@@ -214,13 +193,13 @@ void Interactive_Base::think()
 
 	if (keyboard_free()) {
 		if (app->get_key_state(KEY_UP))
-			m_mapview.set_rel_viewpoint(Point(0, -scrollval));
+			set_rel_viewpoint(Point(0, -scrollval));
 		if (app->get_key_state(KEY_DOWN))
-			m_mapview.set_rel_viewpoint(Point(0,  scrollval));
+			set_rel_viewpoint(Point(0,  scrollval));
 		if (app->get_key_state(KEY_LEFT))
-			m_mapview.set_rel_viewpoint(Point(-scrollval, 0));
+			set_rel_viewpoint(Point(-scrollval, 0));
 		if (app->get_key_state(KEY_RIGHT))
-			m_mapview.set_rel_viewpoint(Point (scrollval, 0));
+			set_rel_viewpoint(Point (scrollval, 0));
    }
 
    // Call game logic here
@@ -291,9 +270,9 @@ void Interactive_Base::mainview_move(int x, int y)
 		const int maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
 		const int maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
 
-		x += mapview().get_w() >> 1;
+		x += get_w() >> 1;
       if (x >= maxx) x -= maxx;
-		y += mapview().get_h() >> 1;
+		y += get_h() >> 1;
       if (y >= maxy) y -= maxy;
 
 
@@ -312,12 +291,12 @@ Warps the main mapview position to the clicked location.
 */
 void Interactive_Base::minimap_warp(int x, int y)
 {
-	x -= mapview().get_w() >> 1;
-	y -= mapview().get_h() >> 1;
+	x -= get_w() >> 1;
+	y -= get_h() >> 1;
 	const Map & map = egbase().map();
 	if (x < 0) x += map.get_width () * TRIANGLE_WIDTH;
 	if (y < 0) y += map.get_height() * TRIANGLE_HEIGHT;
-	m_mapview.set_viewpoint(Point(x, y));
+	set_viewpoint(Point(x, y));
 }
 
 
@@ -350,20 +329,9 @@ void Interactive_Base::move_view_to_point(Point pos)
 {
 	if (m_minimap.window) m_mm->set_view_pos(pos.x, pos.y);
 
-	m_mapview.set_viewpoint
-		(pos - Point(mapview().get_w() / 2, mapview().get_h()/2));
+	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2));
 }
 
-
-/*
-===============
-Interactive_Base::warp_mouse_to_field
-
-Move the mouse so that it's directly above the given field
-===============
-*/
-void Interactive_Base::warp_mouse_to_field(Coords c)
-{m_mapview.warp_mouse_to_field(c);}
 
 /*
 ===========
@@ -381,7 +349,7 @@ void Interactive_Base::toggle_minimap() {
 		m_mm->warpview.set(this, &Interactive_Base::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
-		const Point p = mapview().get_viewpoint();
+		const Point p = get_viewpoint();
 
 		mainview_move(p.x, p.y);
 	}
@@ -459,7 +427,7 @@ void Interactive_Base::start_build_road(Coords _start, int player)
 		 get_player_number());
 
 	roadb_add_overlay();
-	m_mapview.need_complete_redraw();
+	need_complete_redraw();
 }
 
 
@@ -475,7 +443,7 @@ void Interactive_Base::abort_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
-	m_mapview.need_complete_redraw();
+	need_complete_redraw();
 
    m_road_build_player=0;
 
@@ -496,7 +464,7 @@ void Interactive_Base::finish_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
-	m_mapview.need_complete_redraw();
+	need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
@@ -534,7 +502,7 @@ bool Interactive_Base::append_build_road(Coords field)
 		m_buildroad->truncate(idx);
 		roadb_add_overlay();
 
-		m_mapview.need_complete_redraw();
+		need_complete_redraw();
 		return true;
 	}
 
@@ -556,7 +524,7 @@ bool Interactive_Base::append_build_road(Coords field)
 	roadb_remove_overlay();
 	m_buildroad->append(map, path);
 	roadb_add_overlay();
-	m_mapview.need_complete_redraw();
+	need_complete_redraw();
 
 	return true;
 }

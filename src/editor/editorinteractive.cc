@@ -53,7 +53,7 @@ Interactive_Base(e), m_editor(e)
    set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
-	m_mapview.fieldclicked.set(this, &Editor_Interactive::map_clicked);
+	fieldclicked.set(this, &Editor_Interactive::map_clicked);
 
    // user interface buttons
    int x = (get_w() - (7*34)) >> 1;
@@ -191,7 +191,7 @@ void Editor_Interactive::toggle_eventmenu() {
 void Editor_Interactive::map_clicked() {
 	tools.current()
 		.handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
-	m_mapview.need_complete_redraw();
+	need_complete_redraw();
 	set_need_save(true);
 }
 

@@ -35,7 +35,7 @@ class MiniMap;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public UI::Panel {
+struct Interactive_Base : public Map_View {
    friend class Game_Interactive_Player_Data_Packet;
    friend class Sound_Handler;
 
@@ -51,7 +51,6 @@ struct Interactive_Base : public UI::Panel {
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	virtual void reference_player_tribe(const int, const void * const) {}
-      void need_complete_redraw( void );
 
 		static int get_xres();
 		static int get_yres();
@@ -80,7 +79,6 @@ struct Interactive_Base : public UI::Panel {
 
 	void move_view_to(const Coords);
 		void move_view_to_point(Point pos);
-		void warp_mouse_to_field(Coords c);
 
       virtual void start() = 0;
 
@@ -103,9 +101,6 @@ struct Interactive_Base : public UI::Panel {
 
       // for loading
       virtual void cleanup_for_load() { };
-
-protected:
-	Map_View m_mapview;
 
    private:
       void roadb_add_overlay();
@@ -151,8 +146,6 @@ protected:
 
       void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
-
-	const Map_View & mapview() const throw () {return m_mapview;}
 
 	virtual void draw_overlay(RenderTarget &);
 

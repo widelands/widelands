@@ -403,7 +403,7 @@ int Sound_Handler::stereo_position(const Coords position)
 
 	ia = m_the_game->get_iabase();
 	assert(ia);
-	vp = ia->mapview().get_viewpoint();
+	vp = ia->get_viewpoint();
 
 	xres = ia->get_xres();
 	yres = ia->get_yres();

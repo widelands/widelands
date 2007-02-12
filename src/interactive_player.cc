@@ -81,7 +81,7 @@ Interactive_Base(g), m_game(&g)
    // Setup all screen elements
 	set_player_number(plyn);
 
-	m_mapview.fieldclicked.set(this, &Interactive_Player::field_action);
+	fieldclicked.set(this, &Interactive_Player::field_action);
 
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;

@@ -70,7 +70,7 @@ throw (_wexception)
       // Map Position
       int x = fr.Unsigned16();
       int y = fr.Unsigned16();
-		plr->m_mapview.set_viewpoint(Point(x,y));
+		plr->set_viewpoint(Point(x, y));
 
       plr->m_display_flags = fr.Unsigned32();
 
@@ -160,9 +160,10 @@ throw (_wexception)
    fw.Unsigned8(plr->get_player_number());
 
    // Map Position
-	const Map_View & mapview = plr->m_mapview;
-	fw.Unsigned16(mapview.get_viewpoint().x);
-	fw.Unsigned16(mapview.get_viewpoint().y);
+	assert(0 <= plr->get_viewpoint().x);
+	assert(0 <= plr->get_viewpoint().y);
+	fw.Unsigned16(plr->get_viewpoint().x);
+	fw.Unsigned16(plr->get_viewpoint().y);
 
    // Display flags
    fw.Unsigned32(plr->m_display_flags);
