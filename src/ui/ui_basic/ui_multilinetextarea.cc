@@ -170,6 +170,11 @@ void Multiline_Textarea::draw_scrollbar() {
    }
 }
 
+bool Multiline_Textarea::handle_mousepress(const Uint8 btn, int x, int y) {
+	return btn == SDL_BUTTON_WHEELUP or btn == SDL_BUTTON_WHEELDOWN ?
+		m_scrollbar.handle_mousepress(btn, x, y) : false;
+}
+
 int Multiline_Textarea::get_halign() {
    int x = 0;
    // Only HAlignment allowed

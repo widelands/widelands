@@ -67,6 +67,8 @@ public:
       // Drawing and event handlers
       void draw(RenderTarget* dst);
 
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+
       inline const char* get_font_name() { return m_fontname.c_str(); }
       inline const int get_font_size() { return m_fontsize; }
       inline RGBColor& get_font_clr() { return m_fcolor; }
