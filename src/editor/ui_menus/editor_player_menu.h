@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,6 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
 
    private:
       UI::UniqueWindow::Registry m_allow_buildings_menu;
-      Editor_Interactive* m_parent;
       UI::Textarea *m_nr_of_players_ta;
       UI::Edit_Box* m_plr_names[MAX_PLAYERS];
 	UI::IDButton<Editor_Player_Menu, const Player_Number>

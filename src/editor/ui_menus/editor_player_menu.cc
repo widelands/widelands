@@ -110,7 +110,8 @@ Update all
 void Editor_Player_Menu::update(void) {
 	if (is_minimal()) return;
 
-	Map & map = m_parent->egbase().map();
+	Map & map =
+		dynamic_cast<const Editor_Interactive &>(*get_parent()).egbase().map();
 	const Player_Number nr_players = map.get_nrplayers();
    std::string text="";
    if(nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
@@ -230,7 +231,9 @@ called when a button is clicked
 ==============
 */
 void Editor_Player_Menu::clicked_up_down(Sint8 change) {
-	Map & map = m_parent->egbase().map();
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+	Map & map = parent.egbase().map();
 	Player_Number nr_players = map.get_nrplayers();
    // Up down button
 	nr_players += change;
@@ -246,18 +249,18 @@ void Editor_Player_Menu::clicked_up_down(Sint8 change) {
 		map.set_nrplayers(nr_players);
 		map.set_scenario_player_name(nr_players, name);
 		map.set_scenario_player_tribe(nr_players, m_tribes[0]);
-      m_parent->set_need_save(true);
-   } else {
-      if(!m_parent->is_player_tribe_referenced(nr_players)) {
+		parent.set_need_save(true);
+	} else {
+		if (not parent.is_player_tribe_referenced(nr_players)) {
 			std::string name  = map.get_scenario_player_name (nr_players);
 			std::string tribe = map.get_scenario_player_tribe(nr_players);
 			map.set_nrplayers(nr_players);
 			map.set_scenario_player_name(nr_players, name);
 			map.set_scenario_player_tribe(nr_players, tribe);
-         m_parent->set_need_save(true);
+			parent.set_need_save(true);
       } else {
 			UI::Modal_Message_Box mmb
-				(m_parent,
+				(&parent,
 				 _("Error!"),
 				 _("Can't remove player. It is referenced in some place. Remove "
 				   "all buildings, bobs, triggers and events that depend on this "
@@ -274,8 +277,10 @@ void Editor_Player_Menu::clicked_up_down(Sint8 change) {
  * Player Tribe Button clicked
  */
 void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
    // Tribe button has been clicked
-   if(!m_parent->is_player_tribe_referenced(n+1)) {
+	if (not parent.is_player_tribe_referenced(n + 1)) {
       std::string t = m_plr_set_tribes_buts[n]->get_title();
       if(!Tribe_Descr::exists_tribe(t))
          throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
@@ -284,11 +289,11 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
          if(m_tribes[i]==t) break;
       if(i==m_tribes.size()-1) t=m_tribes[0];
       else t=m_tribes[++i];
-		m_parent->egbase().map().set_scenario_player_tribe(n+1,t);
-      m_parent->set_need_save(true);
+		parent.egbase().map().set_scenario_player_tribe(n+1,t);
+		parent.set_need_save(true);
    } else {
 		UI::Modal_Message_Box mmb
-			(m_parent,
+			(&parent,
 			 _("Error!"),
 			 _("Can't change player tribe. It is referenced in some place. Remove "
 			   "all buildings, bobs, triggers and events that depend on this "
@@ -304,15 +309,17 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
  * Set Current Start Position button selected
  */
 void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
    // jump to the current field
-	Map & map = m_parent->egbase().map();
+	Map & map =parent.egbase().map();
 	const Coords c = map.get_starting_pos(n);
-   if (c.is_valid()) m_parent->move_view_to(c);
+   if (c.is_valid()) parent.move_view_to(c);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-	if (m_parent->editor().get_player(n)) {
+	if (parent.editor().get_player(n)) {
 		if (not map.get_starting_pos(n).is_invalid()) {
 			if
 				(dynamic_cast<const Building * const>
@@ -320,9 +327,6 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 				return;
       }
    }
-
-	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
 
    // Select tool set mplayer
 	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
@@ -344,23 +348,27 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 void Editor_Player_Menu::name_changed(int m) {
    // Player name has been changed
    std::string text=m_plr_names[m]->get_text();
-	Map & map = m_parent->egbase().map();
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+	Map & map = parent.egbase().map();
    if(text=="") {
 		text = map.get_scenario_player_name(m + 1);
       m_plr_names[m]->set_text(text.c_str());
    }
 	map.set_scenario_player_name(m + 1, text);
 	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1).c_str());
-   m_parent->set_need_save(true);
+	parent.set_need_save(true);
 }
 
 /*
  * Make infrastructure button clicked
  */
 void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
    // Check if starting position is valid (was checked before
    // so must be true)
-	Editor          & editor          = m_parent->editor();
+	Editor & editor = parent.editor();
 	Map             & map             = editor.map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	const Coords start_pos = map.get_starting_pos(n);
@@ -393,7 +401,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
          throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name().c_str());
 		editor.warp_building(c, p->get_player_number(), idx);
 
-		m_parent->reference_player_tribe(n, p->get_tribe());
+		parent.reference_player_tribe(n, p->get_tribe());
 
       // Remove the player overlay from this starting pos.
       // A HQ is overlay enough
@@ -406,7 +414,6 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
 		overlay_manager.remove_overlay(start_pos,picid);
    }
 
-	Editor_Interactive & parent = dynamic_cast<Editor_Interactive &>(*get_parent());
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
 	parent.tools.make_infrastructure.set_player(n);
 	overlay_manager.register_overlay_callback_function
@@ -420,8 +427,9 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
  * Allowed building button clicked
  */
 void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
-
-	Editor & editor = m_parent->editor();
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+	Editor & editor = parent.editor();
 
 	if (not editor.get_player(n)) {
       // The player is not yet really on the map, call make infrastructure button first
@@ -433,5 +441,5 @@ void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
       delete m_allow_buildings_menu.window;
    }
 	else new Editor_Player_Menu_Allowed_Buildings_Menu
-		(m_parent, editor.get_player(n), &m_allow_buildings_menu);
+		(&parent, editor.get_player(n), &m_allow_buildings_menu);
 }
