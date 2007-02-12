@@ -57,6 +57,8 @@ public:
 	uint get_pagesize() const { return m_pagesize; }
 	uint get_pos() const { return m_pos; }
 
+	bool handle_mousepress  (const Uint8 btn, int x, int y);
+
    void set_force_draw(bool t) { m_force_draw=t; }
 
 private:
@@ -71,7 +73,6 @@ private:
 	void draw(RenderTarget* dst);
 	void think();
 
-	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 	bool handle_mousemove(int mx, int my, int xdiff, int ydiff);
 
