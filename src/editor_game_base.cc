@@ -520,6 +520,7 @@ to the Editor_Game_Base object.
 ===============
 */
 void Editor_Game_Base::set_map(Map * const new_map) {
+	assert(new_map != m_map);
 		delete m_map;
 
 	m_map = new_map;
