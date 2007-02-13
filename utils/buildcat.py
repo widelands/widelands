@@ -113,7 +113,7 @@ def main( ):
                 do_rename("tmp", "campaign_%s_%s.po" % ( mission, lang ) )
 
             # compile message catalogs
-            do_makedirs( "%s/LC_MESSAGES" % lang )
+            do_makedirs( "%s/LC_MESSAGES/campaigns" % lang )
             os.system( "msgfmt -o %s/LC_MESSAGES/campaigns/%s.wmf.mo campaign_%s_%s.po" % ( lang, mission, mission, lang ))
     files = []
 

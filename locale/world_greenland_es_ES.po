@@ -1,0 +1,150 @@
+# Spanish/Spain translation of Widelands.
+# Copyright (C) 2007 Widelands Development Team
+# This file is distributed under the same license as Widelands' package.
+# Antonio Trueba Gayol <atrueba@users.sourceforge.net>, 2007.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands Spanish translation - world_greenland.pot 0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2007-02-09 13:21+0100\n"
+"Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
+"Language-Team: Spanish/Spain <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../worlds/greenland/bobs/bunny/conf:1
+msgid "Bunny"
+msgstr "Conejo"
+
+#: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
+#: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
+#: ../worlds/greenland/bobs/bush5/conf:1
+msgid "Bush"
+msgstr "Arbusto"
+
+#: ../worlds/greenland/bobs/cactus1/conf:1
+#: ../worlds/greenland/bobs/cactus2/conf:1
+msgid "Cactus"
+msgstr "Cacto"
+
+#: ../worlds/greenland/bobs/deadtree1/conf:1
+#: ../worlds/greenland/bobs/deadtree2/conf:1
+#: ../worlds/greenland/bobs/deadtree3/conf:1
+#: ../worlds/greenland/bobs/deadtree4/conf:1
+msgid "Dead Tree"
+msgstr "Árbol muerto"
+
+#: ../worlds/greenland/bobs/deer/conf:1
+msgid "Deer"
+msgstr "Ciervo"
+
+#: ../worlds/greenland/bobs/duck/conf:1
+msgid "Duck"
+msgstr "Pato"
+
+#: ../worlds/greenland/bobs/fox/conf:1
+msgid "Fox"
+msgstr "Zorro"
+
+#: ../worlds/greenland/bobs/grass1/conf:1
+#: ../worlds/greenland/bobs/grass2/conf:1
+#: ../worlds/greenland/bobs/grass3/conf:1
+msgid "Grass"
+msgstr "Hierba"
+
+#: ../worlds/greenland/bobs/mushroom1/conf:1
+#: ../worlds/greenland/bobs/mushroom2/conf:1
+msgid "Mushroom"
+msgstr "Seta"
+
+#: ../worlds/greenland/bobs/pebble1/conf:1
+#: ../worlds/greenland/bobs/pebble2/conf:1
+#: ../worlds/greenland/bobs/pebble3/conf:1
+#: ../worlds/greenland/bobs/pebble4/conf:1
+#: ../worlds/greenland/bobs/pebble5/conf:1
+#: ../worlds/greenland/bobs/pebble6/conf:1
+msgid "Pebble"
+msgstr "Gravilla"
+
+#: ../worlds/greenland/bobs/reindeer/conf:1
+msgid "Reindeer"
+msgstr "Reno"
+
+#: ../worlds/greenland/bobs/sheep/conf:1
+msgid "Sheep"
+msgstr "Oveja"
+
+#: ../worlds/greenland/bobs/skeleton1/conf:1
+#: ../worlds/greenland/bobs/skeleton2/conf:1
+#: ../worlds/greenland/bobs/skeleton3/conf:1
+msgid "Skeleton"
+msgstr "Esqueleto"
+
+#: ../worlds/greenland/bobs/sstones1/conf:1
+#: ../worlds/greenland/bobs/sstones2/conf:1
+#: ../worlds/greenland/bobs/sstones3/conf:1
+#: ../worlds/greenland/bobs/sstones4/conf:1
+#: ../worlds/greenland/bobs/sstones5/conf:1
+#: ../worlds/greenland/bobs/sstones6/conf:1
+#: ../worlds/greenland/bobs/sstones7/conf:1
+msgid "Standing Stones"
+msgstr "Monolito"
+
+#: ../worlds/greenland/bobs/stones1/conf:1
+#: ../worlds/greenland/bobs/stones2/conf:1
+#: ../worlds/greenland/bobs/stones3/conf:1
+#: ../worlds/greenland/bobs/stones4/conf:1
+#: ../worlds/greenland/bobs/stones5/conf:1
+#: ../worlds/greenland/bobs/stones6/conf:1
+msgid "Stones"
+msgstr "Piedras"
+
+#: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
+#: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
+#: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
+#: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
+msgid "Tree"
+msgstr "Árbol"
+
+#: ../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "El Equipo de Desarrollo de Widelands"
+
+#: ../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Bosque"
+
+#: ../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "Estas son las hermosas y generosas tierras de los bárbaros"
+
+#: ../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Carbón"
+
+#: ../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Oro"
+
+#: ../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Hierro"
+
+#: ../worlds/greenland/resconf:28
+msgid "Granit"
+msgstr "Granito"
+
+#: ../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Agua"
+
+#: ../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Pescado"

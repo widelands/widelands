@@ -235,7 +235,7 @@ std::string ProductionSite::get_statistics_string()
 		calc_statistics();
 
    if (m_stop)
-		return "(stopped)";
+		return _("(stopped)");
 	return m_statistics_buf;
 }
 
