@@ -479,7 +479,7 @@ bool Panel::handle_mouserelease(const Uint8, int, int) {return false;}
  * Called when the mouse is moved while inside the panel
  *
  */
-bool Panel::handle_mousemove(int, int, int, int) {return false;}
+bool Panel::handle_mousemove(int, int, int, int) {return _tooltip;}
 
 /**
  * Receive a keypress or keyrelease event.
