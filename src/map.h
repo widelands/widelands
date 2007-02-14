@@ -323,8 +323,8 @@ struct Map {
 	 */
 	uint set_height(const FCoords, const Uint8  new_value);
 
-	/// Changes the height by a value by calling set_height.
-	uint change_height(const FCoords, const Sint16 difference);
+	/// Changes the height of the nodes in an Area by a difference.
+	uint change_height(Area, const Sint16 difference);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in

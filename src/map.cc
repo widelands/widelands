@@ -2098,14 +2098,38 @@ uint Map::set_height(const FCoords fc, const Uint8 new_value) {
 	return radius;
 }
 
-uint Map::change_height(FCoords fc, const Sint16 difference)
-{
-	Uint8 height = fc.field->get_height();
-	if (difference < 0 and height < static_cast<const Uint8>(-difference))
-		height = 0;
-	else if (static_cast<const Sint16>(MAX_FIELD_HEIGHT) - difference < static_cast<const Sint16>(height)) height = MAX_FIELD_HEIGHT;
-	else height += difference;
-	return set_height(fc, height);
+uint Map::change_height(Area area, const Sint16 difference) {
+	{
+		MapRegion mr(*this, area);
+		FCoords fc;
+		while (mr.next(fc)) {
+			if
+				(difference < 0
+			    and
+				 fc.field->height < static_cast<const Uint8>(-difference))
+				fc.field->height = 0;
+			else if
+				(static_cast<const Sint16>(MAX_FIELD_HEIGHT) - difference
+				 <
+				 static_cast<const Sint16>(fc.field->height))
+				fc.field->height = MAX_FIELD_HEIGHT;
+			else fc.field->height += difference;
+		}
+	}
+	uint regional_radius = 0;
+	if (area.radius) {
+		MapHollowRegion mr(*this, HollowArea(area, area.radius - 1));
+		Coords c;
+		while (mr.next(c)) {
+			uint local_radius = 0;
+			check_neighbour_heights(FCoords(c, get_field(c)), local_radius);
+			regional_radius = std::max(regional_radius, local_radius);
+		}
+	} else
+		check_neighbour_heights(FCoords(area, get_field(area)), regional_radius);
+	area.radius += regional_radius + 2;
+	recalc_for_field_area(area);
+	return area.radius;
 }
 
 uint Map::set_height(Area area, interval<Field::Height> height_interval) {

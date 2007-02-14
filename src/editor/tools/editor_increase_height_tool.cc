@@ -26,10 +26,6 @@
 int Editor_Increase_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
-	uint max = 0;
-	MapRegion mr(map, Area(center.node, radius));
-	FCoords fc;
-	while (mr.next(fc)) max = std::max(max, map.change_height(fc, m_change_by));
-	return radius + max;
+	return map.change_height
+		(Area(center.node, parent.get_sel_radius()), m_change_by);
 }
