@@ -128,13 +128,13 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		 i == 1 ? Player::Local : Player::AI,
 		 m->get_scenario_player_tribe(i),
 		 m->get_scenario_player_name(i));
-   
+
         // Reload the textdomain "widelands", so buttons can be translated.
         if( scenario )
         i18n::grab_textdomain("widelands");
 
    init_player_controllers ();
-   
+
         // Unload the textdomain, to make campaign textdomain available, again.
         if( scenario )
         i18n::release_textdomain();
@@ -354,7 +354,7 @@ bool Game::run(bool is_savegame)
 
 void Game::do_conquer_area(const Player_Area player_area, const bool conquer) {
 	Editor_Game_Base::do_conquer_area(player_area, conquer);
-	get_player(player_area.player_number)->set_area_seen
+	player(player_area.player_number).set_area_seen
 		(Area(player_area, player_area.radius + 4), true); //  FIXME Here it is determined that players see 4 steps outside their territory. This must be defined in a ruleset instead.
 }
 
