@@ -147,12 +147,25 @@ def CheckSDLVersionAtLeast(context, major, minor, micro, env):
 	context.Result( ret )
 	return ret
 
+def CheckCompilerAttribute(context, compiler_attribute, env):
+	context.Message( 'Trying whether __attribute__((%s)) works on your compiler ... ' % compiler_attribute)
+
+	ret=context.TryLink("""class test {
+	int test_func(const char* fmt, ...) __attribute__(("""+compiler_attribute+""")) {}
+};
+
+int main(int argc, char **argv){return argc==0 && argv==0;}
+\n\n""", '.cc') #must _use_ both arguments, otherwise -Werror will break
+
+	context.Result(ret)
+	return ret
+
 def CheckCompilerFlag(context, compiler_flag, env):
 	context.Message( 'Trying to enable compiler flag %s ... ' % compiler_flag)
 	lastCCFLAGS = context.env['CCFLAGS']
 	context.env.Append(CCFLAGS = compiler_flag)
 	ret = context.TryLink("""int main(int argc, char **argv) {return argc==0 && argv==0;}
-			\n""", ".cc") #must use both arguments, otherwise -Werror will break
+			\n""", ".cc") #must _use_ both arguments, otherwise -Werror will break
 	if not ret:
 		context.env.Replace(CCFLAGS = lastCCFLAGS)
 	context.Result( ret )
@@ -163,11 +176,12 @@ def CheckLinkerFlag(context, link_flag, env):
 	lastLINKFLAGS = context.env['LINKFLAGS']
 	context.env.Append(LINKFLAGS = link_flag)
 	ret = context.TryLink("""int main(int argc, char **argv) {return argc==0 && argv==0;}
-			\n""", ".cc") #must use both arguments, otherwise -Werror will break
+			\n""", ".cc") #must _use_ both arguments, otherwise -Werror will break
 	if not ret:
 		context.env.Replace(LINKFLAGS = lastLINKFLAGS)
 	context.Result( ret )
 	return
+
 ################################################################################
 
 #TODO: this can be dropped once we use scons-0.97
@@ -192,6 +206,22 @@ def ParseSDLConfig(env, confstring):
 def do_configure(config_h_file, conf, env):
 	print #prettyprinting
 
+	if not conf.TryLink("""class c{}; int main(){class c the_class;}""", '.cc'):
+		print "Can't even compile the simplest C++ program! Your setup is beyond broken. Repair it, then try again."
+		env.Exit(1)
+
+	if not conf.CheckCompilerAttribute('deprecated', env):
+		print "Your compiler does not support __attribute__((deprecated)) which is neccessary for widelands. Please get a decent compiler."
+		env.Exit(1)
+
+	if not conf.CheckCompilerAttribute('noreturn', env):
+		print "Your compiler does not support __attribute__((noreturn)) which is neccessary for widelands. Please get a decent compiler."
+		env.Exit(1)
+
+	if not conf.CheckCompilerAttribute('format(printf, 2, 3)', env):
+		print "Your compiler does not support __attribute__((format(printf, 2, 3))) which is neccessary for widelands. Please get a decent compiler."
+		env.Exit(1)
+
 	setlocalefound=0
 	if (conf.CheckFunc('setlocale') or conf.CheckLibWithHeader('', 'locale.h', 'C', 'setlocale("LC_ALL", "C");', autoadd=0)):
 		setlocalefound=1
@@ -208,7 +238,7 @@ def do_configure(config_h_file, conf, env):
 		env.Exit(1)
 
 	if not conf.CheckFunc('getenv'):
-		print 'Your system does not support getenv(). Tilde epansion in filenames will not work.'
+		print '--> Your system does not support getenv(). Tilde epansion in filenames will not work.'
 	else:
 		config_h_file.write("#define HAS_GETENV\n");
 
@@ -258,7 +288,7 @@ def do_configure(config_h_file, conf, env):
 	if conf.TryLink(""" #include <SDL.h>
 			#define USE_RWOPS
 			#include <SDL_mixer.h>
-			main(){
+			int main(){
 				Mix_LoadMUS_RW("foo.ogg");
 			}
 			""", '.c'):

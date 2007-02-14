@@ -132,6 +132,7 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 				'CheckPKG': CheckPKG,
 				'CheckSDLConfig': CheckSDLConfig,
 				'CheckSDLVersionAtLeast': CheckSDLVersionAtLeast,
+				'CheckCompilerAttribute': CheckCompilerAttribute,
 				'CheckCompilerFlag': CheckCompilerFlag,
 				'CheckLinkerFlag': CheckLinkerFlag,
 				'CheckParaguiConfig': CheckParaguiConfig
