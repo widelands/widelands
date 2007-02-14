@@ -250,8 +250,10 @@ void Editor_Objectives_Menu::clicked_new() {
 
 	Map & map = m_parent->egbase().map();
          MapObjectiveManager & mom = map.get_mom();
-         for (uint b = 1; mom.get_objective(buffer); ++b) snprintf
-            (buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), b);
+	for (uint n = 1;; ++n) {
+		snprintf(buffer, sizeof(buffer), _("Unnamed%u").c_str(), n);
+		if (not mom.get_objective(buffer)) break;
+	}
          // Create a new objective
          MapObjective & mo = *new MapObjective;
          mo.set_name(buffer);
