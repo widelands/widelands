@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ throw (_wexception)
             plr->set_see_all(see_all);
 
             for(uint j=0; j<4; j++)
-               plr->m_playercolor[i] = rgb[j];
+               plr->m_playercolor[j] = rgb[j];
 
             if (type == Player::Local) {
                // The interactive player might still be in existance
