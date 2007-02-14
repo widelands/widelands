@@ -422,15 +422,17 @@ void Map::create_empty_map
    set_scenario_player_tribe(1, _("<undefined>"));
    set_scenario_player_name(1, _("Player 1"));
 
-   for (uint y = 0; y < h; ++y) {
-      for (uint x = 0; x < w; ++x) {
-			FCoords coords = get_fcoords(Coords(x, y));
-
-         coords.field->set_height(10);
-         coords.field->set_terraind(*get_world()->get_terrain(static_cast<uint>(0)));
-         coords.field->set_terrainr(*get_world()->get_terrain(static_cast<uint>(0)));
-      }
-   }
+	{
+		const Terrain_Descr & default_terrain =
+			*world().get_terrain(static_cast<const uint>(0));
+		Field * field = m_fields;
+		const Field * const fields_end = field + max_index();
+		for (; field < fields_end; ++field) {
+			field->set_height(10);
+			field->set_terraind(default_terrain);
+			field->set_terrainr(default_terrain);
+		}
+	}
    recalc_whole_map();
 }
 
