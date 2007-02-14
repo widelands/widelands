@@ -458,15 +458,15 @@ the game starts. Similar for remote players.
 ===============
 */
 Player * Editor_Game_Base::add_player
-(const int plnum,
+(const Player_Number player_number,
  const int type,
  const std::string & tribe,
  const std::string & name)
 {
-   assert(plnum >= 1 && plnum <= MAX_PLAYERS);
+	assert(1 <= player_number);
+	assert(player_number <= MAX_PLAYERS);
 
-   if (m_players[plnum-1])
-      remove_player(plnum);
+   if (m_players[player_number - 1]) remove_player(player_number);
 
    // Get the player's tribe
    uint i;
@@ -480,10 +480,15 @@ Player * Editor_Game_Base::add_player
       m_tribes.push_back(new Tribe_Descr(tribe));
 
    return
-		m_players[plnum-1]
+		m_players[player_number - 1]
 		=
 		new Player
-		(*this, type, plnum, *m_tribes[i], name, g_playercolors[plnum - 1]);
+		(*this,
+		 type,
+		 player_number,
+		 *m_tribes[i],
+		 name,
+		 g_playercolors[player_number - 1]);
 }
 
 /*

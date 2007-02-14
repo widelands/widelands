@@ -68,7 +68,7 @@ class Editor_Game_Base {
       // Player commands
       void remove_player(int plnum);
 	Player * add_player
-		(const int plnum,
+		(const Player_Number plnum,
 		 const int type,
 		 const std::string & tribe,
 		 const std::string & name);
