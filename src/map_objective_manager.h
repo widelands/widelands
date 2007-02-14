@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,18 +46,14 @@
  * Depending on choosen game type.
  */
 
-/*
- * First, the variables
- */
-class MapObjective : public TriggerReferencer {
-   public:
-      MapObjective( ) {
-         m_trigger = 0;
-         m_is_visible = true;
-         m_is_optional = false;
-         m_descr = _("no descr");
-         m_name  = "";
-      }
+struct MapObjective : public TriggerReferencer {
+	MapObjective()
+		:
+		m_descr      (_("no descr")),
+		m_trigger    (0),
+		m_is_visible (true),
+		m_is_optional(false)
+	{}
       virtual ~MapObjective( void ) {
          if( m_trigger )
             unreference_trigger( m_trigger );
@@ -105,8 +101,7 @@ class MapObjective : public TriggerReferencer {
  *
  * But it is better this way.
  */
-class MapObjectiveManager {
-   public:
+struct MapObjectiveManager {
       MapObjectiveManager( void );
       ~MapObjectiveManager( void );
 
