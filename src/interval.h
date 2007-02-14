@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,13 @@
  *
  */
 
-#include "editor_increase_height_tool.h"
-#include "editor_decrease_height_tool.h"
-#include "editor_set_height_tool.h"
-#include "map.h"
-#include "field.h"
-#include "editorinteractive.h"
+#ifndef __INTERVAL_H
+#define __INTERVAL_H
 
-int Editor_Set_Height_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
-{return map.set_height(Area(center.node, parent.get_sel_radius()), m_interval);}
+template<typename T> struct interval {
+	interval(const T Min, const T Max) : min(Min), max(Max) {}
+	bool valid() const throw () {return min <= max;}
+	T min, max;
+};
+
+#endif

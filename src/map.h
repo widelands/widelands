@@ -24,6 +24,7 @@
 #include <vector>
 #include "field.h"
 #include "geometry.h"
+#include "interval.h"
 #include "world.h"
 
 class BaseImmovable;
@@ -326,7 +327,11 @@ struct Map {
 	uint change_height(const FCoords, const Sint16 difference);
 
 	/**
-	 * Sets the height of each node within radius from fc to a value.
+	 * Ensures that the height of each node within radius from fc is in
+	 * height_interval. If the height is < height_interval.min, it is changed to
+	 * height_interval.min. If the height is > height_interval.max, it is changed
+	 * to height_interval.max. Otherwise it is left unchanged.
+	 *
 	 * Recalculates brightness. Changes the surrounding nodes if necessary.
 	 * Returns the radius of the area that covers all changes that were made.
 	 *
@@ -334,7 +339,7 @@ struct Map {
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint set_height(const Area, const Uint8  new_value);
+	uint set_height(Area, interval<Field::Height> height_interval);
 
 	// change terrain of a field, recalculate buildcaps
 	int change_terrain(const TCoords, const Terrain_Descr::Index terrain);

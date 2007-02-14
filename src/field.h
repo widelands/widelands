@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,8 +120,10 @@ public:
 		Buildhelp_None   = 5
 	};
 
+	typedef Uint8 Height;
+
 private:
-   uchar height;
+   Height height;
 	char   brightness;
 
 	FieldCaps       caps                    : 7;
@@ -175,7 +177,7 @@ private:
 	BaseImmovable* immovable;
 
 public:
-   inline uchar get_height() const { return height; }
+	Height get_height() const throw () {return height;}
 	FieldCaps get_caps() const {return caps;}
 
 	const Terrain_Descr & get_terr() const throw ()
@@ -252,9 +254,9 @@ public:
 
    /** \note you must reset this field's + neighbor's brightness when you change the height
     * Map's change_height does this
-    * This function is not private, because the loader and an empty map creator will use them directly
+    * This function is not private, because the loader will use them directly
     * But realize, most of the times you will need Map::set_field_height()*/
-	void set_height(uchar h) {
+	void set_height(Height h) {
 		if (static_cast<const signed char>(h) < 0) h = 0;
 		if (h > MAX_FIELD_HEIGHT) h = MAX_FIELD_HEIGHT;
 		height = h;

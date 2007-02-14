@@ -26,27 +26,26 @@
 struct Editor_Noise_Height_Tool : public Editor_Tool {
 	Editor_Noise_Height_Tool
 		(Editor_Set_Height_Tool & the_set_tool,
-		 Uint8 lower = 10, Uint8 upper = 14)
+		 const interval<Field::Height> the_interval =
+		 interval<Field::Height>(10, 14))
 		:
 		Editor_Tool(the_set_tool, the_set_tool),
 		m_set_tool(the_set_tool),
-		m_lower_value(lower), m_upper_value(upper)
+		m_interval(the_interval)
 	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_noise_height.png";}
 
-	void get_values(Uint8 & lower, Uint8 & upper) const throw ()
-	{lower = m_lower_value; upper = m_upper_value;}
-	void set_values(const Uint8 lower, const Uint8 upper) throw ()
-	{m_lower_value = lower; m_upper_value = upper;}
+	interval<Field::Height> get_interval() const throw () {return m_interval;}
+	void set_interval(const interval<Field::Height> i) throw () {m_interval = i;}
 
 	Editor_Set_Height_Tool & set_tool() const throw () {return m_set_tool;}
 
 private:
 	Editor_Set_Height_Tool & m_set_tool;
-	Uint8 m_lower_value, m_upper_value;
+	interval<Field::Height> m_interval;
 };
 
 #endif

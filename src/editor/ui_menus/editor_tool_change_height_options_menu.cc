@@ -109,7 +109,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 		 m_increase_tool.decrease_tool().get_change_by());
 
 	int change_by = m_increase_tool.get_change_by();
-	Uint8 set_to  = m_increase_tool.set_tool().get_set_to();
+	Field::Height set_to  = m_increase_tool.set_tool().get_interval().min;
 	switch (n) {
 	case Change_By_Increase: change_by +=     change_by < MAX_FIELD_HEIGHT_DIFF;
 		break;
@@ -120,7 +120,8 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 
 	m_increase_tool                .set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);
-	m_increase_tool.set_tool().set_set_to(set_to);
+	m_increase_tool.set_tool()
+		.set_interval(interval<Field::Height>(set_to, set_to));
 
    select_correct_tool();
    update();
@@ -131,6 +132,6 @@ void Editor_Tool_Change_Height_Options_Menu::update(void) {
    char buf[250];
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);
-	sprintf(buf, "%i", m_increase_tool.set_tool().get_set_to());
+	sprintf(buf, "%i", m_increase_tool.set_tool().get_interval().min);
 	m_set_to_value.set_text(buf);
 }

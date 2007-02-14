@@ -119,15 +119,16 @@ Update all textareas
 */
 void Editor_Tool_Noise_Height_Options_Menu::update(void) {
    char buf[200];
-	Uint8 lower, upper;
-	m_noise_tool.get_values(lower, upper);
-	sprintf(buf, _("Minimum: %u").c_str(), lower);
+	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	sprintf(buf, _("Minimum: %u").c_str(), height_interval.min);
 	m_lower_label.set_text(buf);
-	sprintf(buf, _("Maximum: %u").c_str(), upper);
+	sprintf(buf, _("Maximum: %u").c_str(), height_interval.max);
 	m_upper_label.set_text(buf);
 
-	sprintf
-		(buf, _("Set value: %u").c_str(), m_noise_tool.set_tool().get_set_to());
+	snprintf
+		(buf, sizeof(buf),
+		 _("Set value: %u").c_str(),
+		 m_noise_tool.set_tool().get_interval().min);
 	m_set_label.set_text(buf);
 
    select_correct_tool();
@@ -136,25 +137,31 @@ void Editor_Tool_Noise_Height_Options_Menu::update(void) {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_button(const Button n) {
-	Uint8 lower, upper, set_to = m_noise_tool.set_tool().get_set_to();
-	m_noise_tool.get_values(lower, upper);
+	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Field::Height set_to = m_noise_tool.set_tool().get_interval().min;
 	switch (n) {
 	case Lower_Increase:
-		lower += lower  < MAX_FIELD_HEIGHT;
-		upper = std::max(lower, upper);
+		height_interval.min += height_interval.min  < MAX_FIELD_HEIGHT;
+		height_interval.max = std::max(height_interval.min, height_interval.max);
 		break;
-	case Lower_Decrease:  lower  -= 0 < lower;                     break;
-	case Upper_Increase:  upper  +=     upper  < MAX_FIELD_HEIGHT; break;
+	case Lower_Decrease: height_interval.min -= 0 < height_interval.min; break;
+	case Upper_Increase:
+		height_interval.max += height_interval.max  < MAX_FIELD_HEIGHT;
+		break;
 	case Upper_Decrease:
-		upper  -= 0 < upper;
-		lower = std::min(lower, upper);
+		if (0 < height_interval.max) {
+			--height_interval.max;
+				if (height_interval.max < height_interval.min)
+					height_interval.min = height_interval.max;
+		}
 		break;
 	case Set_To_Increase: set_to +=     set_to < MAX_FIELD_HEIGHT; break;
 	case Set_To_Decrease: set_to -= 0 < set_to;                    break;
 	}
 
-	m_noise_tool.set_values(lower, upper);
-	m_noise_tool.set_tool().set_set_to(set_to);
+	m_noise_tool.set_interval(height_interval);
+	m_noise_tool.set_tool()
+		.set_interval(interval<Field::Height>(set_to, set_to));
 
    update();
 }

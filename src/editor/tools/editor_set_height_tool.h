@@ -21,20 +21,24 @@
 #define __S__EDITOR_SET_HEIGHT_TOOL_H
 
 #include "editor_tool.h"
+#include "field.h"
+#include "interval.h"
 
-///  Decreases the height of a node by a value.
+///  Ensures that the height of a node is within an interval.
 struct Editor_Set_Height_Tool : public Editor_Tool {
-	Editor_Set_Height_Tool() : Editor_Tool(*this, *this), m_set_to(10) {}
+	Editor_Set_Height_Tool()
+		: Editor_Tool(*this, *this), m_interval(10, 10)
+	{}
 
 	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_set_height.png";}
 
-	Uint8 get_set_to() const throw () {return m_set_to;}
-	void set_set_to(const Uint8 n) throw () {m_set_to = n;}
+	interval<Field::Height> get_interval() const throw () {return m_interval;}
+	void set_interval(const interval<Field::Height> i) throw () {m_interval = i;}
 
 private:
-	Uint8 m_set_to;
+	interval<Field::Height> m_interval;
 };
 
 #endif

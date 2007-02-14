@@ -2091,7 +2091,7 @@ uint Map::set_height(const FCoords fc, const Uint8 new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
 	assert(m_fields <= fc.field);
 	assert            (fc.field < m_fields + max_index());
-	fc.field->set_height(new_value);
+	fc.field->height = new_value;
 	uint radius = 2;
 	check_neighbour_heights(fc, radius);
 	recalc_for_field_area(Area(fc, radius));
@@ -2108,22 +2108,47 @@ uint Map::change_height(FCoords fc, const Sint16 difference)
 	return set_height(fc, height);
 }
 
-uint Map::set_height(const Area area, const Uint8 new_value) {
-	assert(new_value <= MAX_FIELD_HEIGHT);
+uint Map::set_height(Area area, interval<Field::Height> height_interval) {
+	assert(height_interval.valid());
+	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{
 		MapRegion mr(*this, area);
 		FCoords fc;
-		while (mr.next(fc)) fc.field->set_height(new_value);
+		while (mr.next(fc)) {
+			if      (fc.field->height < height_interval.min)
+				fc.field->height = height_interval.min;
+			else if (height_interval.max < fc.field->height)
+				fc.field->height = height_interval.max;
+		}
 	}
-	uint radius = area.radius + 2;
-	{//  Adjust the nodes along the edges of the area.
-		MapHollowRegion mr(*this, HollowArea(area, area.radius - 1));
-		Coords c;
-		while (mr.next(c))
-			check_neighbour_heights(FCoords(c, get_field(c)), radius);
+	{
+		bool changed;
+		do  {
+			changed = false;
+			height_interval.min = height_interval.min < MAX_FIELD_HEIGHT_DIFF ?
+				0 : height_interval.min - MAX_FIELD_HEIGHT_DIFF;
+			height_interval.max =
+				height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
+				height_interval.max + MAX_FIELD_HEIGHT_DIFF : MAX_FIELD_HEIGHT;
+			const uint hole_radius = area.radius;
+			++area.radius;
+			MapHollowRegion mr(*this, HollowArea(area, hole_radius));
+			Coords c;
+			while (mr.next(c)) {
+				Field & field = (*this)[c];
+				if (field.height < height_interval.min) {
+					field.height = height_interval.min;
+					changed = true;
+				} else if (height_interval.max < field.height) {
+					field.height = height_interval.max;
+					changed = true;
+				}
+			}
+		} while (changed);
 	}
-	recalc_for_field_area(Area(area, radius));
-	return radius;
+	++area.radius;
+	recalc_for_field_area(area);
+	return area.radius;
 }
 
 
@@ -2134,7 +2159,7 @@ Map::check_neighbour_heights()
 This private functions checks all neighbours of a field
 if they are in valid boundaries, if not, they are reheighted
 accordingly.
-The radius of modified fields is stored in *area.
+The radius of modified fields is stored in area.
 =============
 */
 void Map::check_neighbour_heights(FCoords coords, uint & area)

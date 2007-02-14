@@ -39,10 +39,10 @@ int Editor_Noise_Height_Tool::handle_click_impl
 		(max,
 		 map.set_height
 		 (fc,
-		  m_lower_value
+		  m_interval.min
 		  +
 		  static_cast<int>
 		  (static_cast<double>
-		   (m_upper_value-m_lower_value) * rand() / (RAND_MAX + 1.0))));
+		   (m_interval.min - m_interval.max) * rand() / (RAND_MAX + 1.0))));
    return radius + max;
 }
