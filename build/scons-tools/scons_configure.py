@@ -206,9 +206,13 @@ def ParseSDLConfig(env, confstring):
 def do_configure(config_h_file, conf, env):
 	print #prettyprinting
 
+	print "Checking for a working C++ compiler ...",
 	if not conf.TryLink("""class c{}; int main(){class c the_class;}""", '.cc'):
+		print "no"
 		print "Can't even compile the simplest C++ program! Your setup is beyond broken. Repair it, then try again."
 		env.Exit(1)
+	else:
+		print "yes"
 
 	if not conf.CheckCompilerAttribute('deprecated', env):
 		print "Your compiler does not support __attribute__((deprecated)) which is neccessary for widelands. Please get a decent compiler."
