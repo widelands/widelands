@@ -151,7 +151,7 @@ public:
 	void run();
 
 	/// \warning true if an external entity wants us to quit
-const bool should_die() {return m_should_die;}
+	const bool should_die() {return m_should_die;}
 
 	const int get_time();
 

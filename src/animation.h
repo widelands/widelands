@@ -49,17 +49,15 @@ struct AnimationData {
 	std::map<uint, std::string> sfx_cues;
 };
 
-/*
-class AnimationManager
-
-The animation manager manages a list of all active animations.
-They are flushed after a game is finished and loaded at gfxload time by the
-Game code.
-get() only works properly before gfxload. This means that all animations must
-be loaded before the game starts.
-
-Note that animation IDs are counted from 1, while the m_animations array is
-counted from 0.
+/**
+* The animation manager manages a list of all active animations.
+* They are flushed after a game is finished and loaded at gfxload time by the
+* Game code.
+* get() only works properly before gfxload. This means that all animations must
+* be loaded before the game starts.
+*
+* Note that animation IDs are counted from 1, while the m_animations array is
+* counted from 0.
 */
 class AnimationManager {
 public:
@@ -80,11 +78,9 @@ private:
 };
 
 
-/*
-class DirAnimations
-
-Use this class to automatically manage a set of 6 animations, one for each
-possible direction
+/**
+* Use this class to automatically manage a set of 6 animations, one for each
+* possible direction
 */
 class Bob_Descr;
 class DirAnimations {

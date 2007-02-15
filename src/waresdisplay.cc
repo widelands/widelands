@@ -94,6 +94,8 @@ bool WaresDisplay::handle_mousemove(int x, int y, int, int) {
          m_curware->set_text(str.c_str());
       }
    }
+
+   return true;
 }
 
 /*

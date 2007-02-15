@@ -42,7 +42,7 @@ struct Textarea : public Panel {
 		(Panel * const parent,
 		 const int x, const int y,
 		 const std::string & text,
-		 const Align align = Align_Left, const bool multiline = false)
+		 const Align align = Align_Left, const bool multiline = false) __attribute__((noinline))
 		:
 		Panel      (parent, x, y, 0, 0),
 		m_text     (text),
@@ -57,7 +57,7 @@ struct Textarea : public Panel {
 	Textarea
 		(Panel *  const parent,
 		 const int x, const int y, const uint w, const uint h,
-		 const Align align = Align_Left, const bool multiline = false)
+		 const Align align = Align_Left, const bool multiline = false) __attribute__((noinline))
 		:
 		Panel      (parent, x, y, w, h),
 		m_align    (align),
@@ -71,7 +71,7 @@ struct Textarea : public Panel {
 		(Panel *  const parent,
 		 const int x, const int y, const uint w, const uint h,
 		 const std::string & text,
-		 const Align align = Align_Left, const bool multiline = false)
+		 const Align align = Align_Left, const bool multiline = false) __attribute__((noinline))
 		:
 		Panel      (parent, x, y, w, h),
 		m_align    (align),

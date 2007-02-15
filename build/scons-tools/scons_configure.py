@@ -222,6 +222,10 @@ def do_configure(config_h_file, conf, env):
 		print "Your compiler does not support __attribute__((noreturn)) which is neccessary for widelands. Please get a decent compiler."
 		env.Exit(1)
 
+	if not conf.CheckCompilerAttribute('noinline', env):
+		print "Your compiler does not support __attribute__((noinline)) which is neccessary for widelands. Please get a decent compiler."
+		env.Exit(1)
+
 	if not conf.CheckCompilerAttribute('format(printf, 2, 3)', env):
 		print "Your compiler does not support __attribute__((format(printf, 2, 3))) which is neccessary for widelands. Please get a decent compiler."
 		env.Exit(1)
