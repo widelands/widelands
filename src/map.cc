@@ -2117,16 +2117,13 @@ uint Map::change_height(Area area, const Sint16 difference) {
 		}
 	}
 	uint regional_radius = 0;
-	if (area.radius) {
-		MapHollowRegion mr(*this, HollowArea(area, area.radius - 1));
-		Coords c;
-		while (mr.next(c)) {
-			uint local_radius = 0;
-			check_neighbour_heights(FCoords(c, get_field(c)), local_radius);
-			regional_radius = std::max(regional_radius, local_radius);
-		}
-	} else
-		check_neighbour_heights(FCoords(area, get_field(area)), regional_radius);
+	FCoords fc;
+	MapFringeRegion mr(*this, fc, area);
+	do {
+		uint local_radius = 0;
+		check_neighbour_heights(fc, local_radius);
+		regional_radius = std::max(regional_radius, local_radius);
+	} while (mr.next(*this, fc));
 	area.radius += regional_radius + 2;
 	recalc_for_field_area(area);
 	return area.radius;
@@ -2147,27 +2144,25 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 	}
 	{
 		bool changed;
-		do  {
+		do {
 			changed = false;
 			height_interval.min = height_interval.min < MAX_FIELD_HEIGHT_DIFF ?
 				0 : height_interval.min - MAX_FIELD_HEIGHT_DIFF;
 			height_interval.max =
 				height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
 				height_interval.max + MAX_FIELD_HEIGHT_DIFF : MAX_FIELD_HEIGHT;
-			const uint hole_radius = area.radius;
 			++area.radius;
-			MapHollowRegion mr(*this, HollowArea(area, hole_radius));
-			Coords c;
-			while (mr.next(c)) {
-				Field & field = (*this)[c];
-				if (field.height < height_interval.min) {
-					field.height = height_interval.min;
+			FCoords fc;
+			MapFringeRegion mr(*this, fc, area);
+			do {
+				if (fc.field->height < height_interval.min) {
+					fc.field->height = height_interval.min;
 					changed = true;
-				} else if (height_interval.max < field.height) {
-					field.height = height_interval.max;
+				} else if (height_interval.max < fc.field->height) {
+					fc.field->height = height_interval.max;
 					changed = true;
 				}
-			}
+			} while (mr.next(*this, fc));
 		} while (changed);
 	}
 	++area.radius;
@@ -2781,21 +2776,35 @@ bool MapRegion::next(FCoords & fc)
 }
 
 
-/*
-==============================================================================
+MapFringeRegion::MapFringeRegion(const Map & map, FCoords & fc, Area area)
+throw ()
+:
+m_radius            (area.radius),
+m_remaining_in_phase(area.radius),
+m_phase             (area.radius ? 6 : 0)
+{
+	fc = FCoords(area, &map[area]);
+	while (area.radius) {fc = map.tl_n(fc); --area.radius;}
+}
 
-MapHollowRegion IMPLEMENTATION
+bool MapFringeRegion::next(const Map & map, FCoords & fc) throw () {
+	switch (m_phase) {
+	case 0:
+		if (m_radius) {m_phase = 6; m_remaining_in_phase = m_radius;}
+		else return false;
+	case 1: fc = map.tr_n(fc); break;
+	case 2: fc = map.tl_n(fc); break;
+	case 3: fc = map. l_n(fc); break;
+	case 4: fc = map.bl_n(fc); break;
+	case 5: fc = map.br_n(fc); break;
+	case 6: fc = map. r_n(fc); break;
+	}
+	--m_remaining_in_phase;
+	if (m_remaining_in_phase == 0) {m_remaining_in_phase = m_radius; --m_phase;}
+	return m_phase;
+}
 
-==============================================================================
-*/
 
-/*
-===============
-MapHollowRegion::MapHollowRegion
-
-Initialize the hollow region.
-===============
-*/
 MapHollowRegion::MapHollowRegion(Map & map, const HollowArea hollow_area)
 :
 m_map         (map),

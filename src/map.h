@@ -1205,6 +1205,44 @@ private:
 };
 
 /**
+ * Producer/Coroutine struct that returns every node on the fringe of an area.
+ *
+ * Each such node is returned exactly once via the FCoords & parameter of bool
+ * next(const Map, FCoords &). But this does not guarantee that a location is
+ * returned at most once when the radius is so large that the area overlaps
+ * itself because of wrapping.
+ *
+ * The return value of next indicates wether the refenced FCoords have a new
+ * value. This means that it will return true until FCoords has the value it had
+ * before the first call to next, in which case it will return false. If next is
+ * then called again, it will return true again util it reaches the first value
+ * the next time around, and so on.
+ *
+ * When next has returned false, iterating over the same fringe is not the only
+ * possibility. It is also possible to call extend. This makes the region ready
+ * to iterate over the next layer of nodes.
+ *
+ * Note that the order in which nodes are returned is not guarantueed (although
+ * the current implementation sets the FCoords to the top left node in the
+ * constructor and then moves around clockwise when next is called repeatedly).
+ */
+struct MapFringeRegion {
+	MapFringeRegion(const Map &, FCoords &, Area) throw ();
+	bool next(const Map & map, FCoords & fc) throw ();
+	void extend(const Map & map, FCoords & fc) throw () {
+		fc = map.tl_n(fc);
+		++m_radius;
+		m_remaining_in_phase = m_radius;
+		m_phase = 6;
+	}
+private:
+	Uint16  m_radius;
+	Uint16  m_remaining_in_phase;
+	Uint8   m_phase;
+};
+
+
+/**
  * Producer/Coroutine struct that returns every node for which the distance to
  * the center point is greater than <hollow_area>.hole_radius and at most
  * <hollow_area>.radius.
