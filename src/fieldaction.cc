@@ -277,12 +277,11 @@ FieldActionWindow::FieldActionWindow
 	m_plr(plr),
 	m_map(&iabase->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
+	m_field(iabase->get_sel_pos().node, &(*m_map)[iabase->get_sel_pos().node]),
 	m_best_tab(0),
 	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null())
 {
 
-	const Coords c = iabase->get_sel_pos().node;
-	m_field = FCoords(c, m_map->get_field(c));
 
 	iabase->set_sel_freeze(true);
 
@@ -338,10 +337,13 @@ void FieldActionWindow::init()
 		(0 <= mouse.x  and mouse.x < get_w()
 		 and
 		 0 <= mouse.y and mouse.y < get_h())
+	{
 		set_pos
 		(Point(get_x(), get_y())
 		 +
 		 Point(0, (mouse.y < get_h() / 2 ? 1 : -1) * get_h()));
+		move_inside_parent();
+	}
 
 	// Now force the mouse onto the first button
 	// TODO: should be on first tab button if we're building
