@@ -2796,7 +2796,6 @@ bool MapFringeRegion::advance(const Map & map) throw () {
 
 MapHollowRegion::MapHollowRegion(Map & map, const HollowArea hollow_area)
 :
-m_map         (map),
 m_phase       (Top),
 m_radius      (hollow_area.radius),
 m_hole_radius (hollow_area.hole_radius),
@@ -2806,37 +2805,32 @@ m_rowwidth    (hollow_area.radius + 1),
 m_rowpos      (0)
 {
 	assert(hollow_area.hole_radius < hollow_area.radius);
-	Coords first = hollow_area;
-	for (uint i = 0; i < hollow_area.radius; ++i) map.get_tln(first, &first);
-	m_left = first;
-	m_next = first;
+	m_left = hollow_area;
+	for (uint i = 0; i < hollow_area.radius; ++i) m_left = map.tl_n(m_left);
+	m_location = m_left;
 }
 
 
 /*
 ===============
-MapHollowRegion::next
-
 Traverse the region by row.
 I hope this results in slightly better cache behaviour than other algorithms
 (e.g. one could also walk concentric "circles"/hexagons).
 ===============
 */
-bool MapHollowRegion::next(Coords & c) {
+bool MapHollowRegion::advance(const Map & map) throw () {
 	if (m_phase == None) return false;
-	c = m_next;
 	++m_rowpos;
 	if (m_rowpos < m_rowwidth) {
-		m_map.get_rn(m_next, &m_next);
+		m_location = map.r_n(m_location);
 		if ((m_phase & (Upper|Lower)) and m_rowpos == m_delta_radius) {
 			//  Jump over the hole.
 			const unsigned int holewidth = m_rowwidth - 2 * m_delta_radius;
 			for (unsigned int i = 0; i < holewidth; ++i)
-				m_map.get_rn(m_next, &m_next);
+				m_location = map.r_n(m_location);
 			m_rowpos += holewidth;
 		}
-	}
-	else {
+	} else {
 		++m_row;
 		if (m_phase == Top and m_row == m_delta_radius) m_phase = Upper;
 
@@ -2848,10 +2842,7 @@ bool MapHollowRegion::next(Coords & c) {
 			m_phase = Lower;
 		}
 
-		if (m_phase & (Top|Upper)) {
-			m_map.get_bln(m_left, &m_left);
-			++m_rowwidth;
-		}
+		if (m_phase & (Top|Upper)) {m_left = map.bl_n(m_left); ++m_rowwidth;}
 		else {
 
 			if (m_row > m_radius) {
@@ -2860,11 +2851,11 @@ bool MapHollowRegion::next(Coords & c) {
 			}
 			else if (m_phase == Lower and m_row > m_hole_radius) m_phase = Bottom;
 
-			m_map.get_brn(m_left, &m_left);
+			m_left = map.br_n(m_left);
 			--m_rowwidth;
 		}
 
-		m_next = m_left;
+		m_location = m_left;
 		m_rowpos = 0;
 	}
 

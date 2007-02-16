@@ -275,21 +275,27 @@ struct Map {
 
 	void get_ln (const  Coords,  Coords * const) const;
 	void get_ln (const FCoords, FCoords * const) const;
+	Coords  l_n (const  Coords) const;
 	FCoords l_n (const FCoords) const;
 	void get_rn (const  Coords,  Coords * const) const;
 	void get_rn (const FCoords, FCoords * const) const;
+	Coords  r_n (const  Coords) const;
 	FCoords r_n (const FCoords) const;
 	void get_tln(const  Coords,  Coords * const) const;
 	void get_tln(const FCoords, FCoords * const) const;
+	Coords  tl_n(const  Coords) const;
 	FCoords tl_n(const FCoords) const;
 	void get_trn(const  Coords,  Coords * const) const;
 	void get_trn(const FCoords, FCoords * const) const;
+	Coords  tr_n(const  Coords) const;
 	FCoords tr_n(const FCoords) const;
 	void get_bln(const  Coords,  Coords * const) const;
 	void get_bln(const FCoords, FCoords * const) const;
+	Coords  bl_n(const  Coords) const;
 	FCoords bl_n(const FCoords) const;
 	void get_brn(const  Coords,  Coords * const) const;
 	void get_brn(const FCoords, FCoords * const) const;
+	Coords  br_n(const  Coords) const;
 	FCoords br_n(const FCoords) const;
 
 	void get_neighbour(const Coords, const Direction dir, Coords * const) const;
@@ -769,6 +775,19 @@ inline void Map::get_ln(const FCoords f, FCoords * const o) const
 	assert(m_fields <= o->field);
 	assert            (o->field < m_fields + max_index());
 }
+inline Coords Map::l_n(const Coords f) const {
+	assert(0 <= f.x);
+	assert(f.x < m_width);
+	assert(0 <= f.y);
+	assert(f.y < m_height);
+	Coords result(f.x - 1, f.y);
+	if (result.x == -1) result.x = m_width - 1;
+	assert(0 <= result.x);
+	assert(result.x < m_width);
+	assert(0 <= result.y);
+	assert(result.y < m_height);
+	return result;
+}
 inline FCoords Map::l_n(const FCoords f) const {
 	assert(0 <= f.x);
 	assert(f.x < m_width);
@@ -823,6 +842,19 @@ inline void Map::get_rn(const FCoords f, FCoords * const o) const
 	assert(o->y < m_height);
 	assert(m_fields <= o->field);
 	assert            (o->field < m_fields + max_index());
+}
+inline Coords Map::r_n(const Coords f) const {
+	assert(0 <= f.x);
+	assert(f.x < m_width);
+	assert(0 <= f.y);
+	assert(f.y < m_height);
+	Coords result(f.x + 1, f.y);
+	if (result.x == m_width) result.x = 0;
+	assert(0 <= result.x);
+	assert(result.x < m_width);
+	assert(0 <= result.y);
+	assert(result.y < m_height);
+	return result;
 }
 inline FCoords Map::r_n(const FCoords f) const {
 	assert(0 <= f.x);
@@ -890,6 +922,23 @@ inline void Map::get_tln(const FCoords f, FCoords * const o) const
 	assert(o->y < m_height);
 	assert(m_fields <= o->field);
 	assert            (o->field < m_fields + max_index());
+}
+inline Coords Map::tl_n(const Coords f) const {
+	assert(0 <= f.x);
+	assert(f.x < m_width);
+	assert(0 <= f.y);
+	assert(f.y < m_height);
+	Coords result(f.x, f.y - 1);
+	if (result.y & 1) {
+		if (result.y == -1) result.y = m_height - 1;
+		--result.x;
+		if (result.x == -1) result.x = m_width - 1;
+	}
+	assert(0 <= result.x);
+	assert(result.x < m_width);
+	assert(0 <= result.y);
+	assert(result.y < m_height);
+	return result;
 }
 inline FCoords Map::tl_n(const FCoords f) const {
 	assert(0 <= f.x);
@@ -969,6 +1018,20 @@ inline void Map::get_trn(const FCoords f, FCoords * const o) const
 	assert(m_fields <= o->field);
 	assert            (o->field < m_fields + max_index());
 }
+inline Coords Map::tr_n(const Coords f) const {
+	assert(0 <= f.x);
+	assert(f.x < m_width);
+	assert(0 <= f.y);
+	assert(f.y < m_height);
+	Coords result(f.x, f.y - 1);
+	if (f.y & 1) {++result.x; if (result.x == m_width) result.x = 0;}
+	if (result.y == -1) result.y = m_height - 1;
+	assert(0 <= result.x);
+	assert(result.x < m_width);
+	assert(0 <= result.y);
+	assert(result.y < m_height);
+	return result;
+}
 inline FCoords Map::tr_n(const FCoords f) const {
 	assert(0 <= f.x);
 	assert(f.x < m_width);
@@ -1044,6 +1107,20 @@ inline void Map::get_bln(const FCoords f, FCoords * const o) const
 	assert(o->y < m_height);
 	assert(m_fields <= o->field);
 	assert            (o->field < m_fields + max_index());
+}
+inline Coords Map::bl_n(const Coords f) const {
+	assert(0 <= f.x);
+	assert(f.x < m_width);
+	assert(0 <= f.y);
+	assert(f.y < m_height);
+	Coords result(f.x, f.y + 1);
+	if (result.y == m_height) result.y = 0;
+	if (result.y & 1) {--result.x; if (result.x == -1) result.x = m_width - 1;}
+	assert(0 <= result.x);
+	assert(result.x < m_width);
+	assert(0 <= result.y);
+	assert(result.y < m_height);
+	return result;
 }
 inline FCoords Map::bl_n(const FCoords f) const {
 	assert(0 <= f.x);
@@ -1124,6 +1201,20 @@ inline void Map::get_brn(const FCoords f, FCoords * const o) const
 	assert(m_fields <= o->field);
 	assert            (o->field < m_fields + max_index());
 }
+inline Coords Map::br_n(const Coords f) const {
+	assert(0 <= f.x);
+	assert(f.x < m_width);
+	assert(0 <= f.y);
+	assert(f.y < m_height);
+	Coords result(f.x, f.y + 1);
+	if (f.y & 1) {++result.x; if (result.x == m_width) result.x = 0;}
+	if (result.y == m_height) result.y = 0;
+	assert(0 <= result.x);
+	assert(result.x < m_width);
+	assert(0 <= result.y);
+	assert(result.y < m_height);
+	return result;
+}
 inline FCoords Map::br_n(const FCoords f) const {
 	assert(0 <= f.x);
 	assert(f.x < m_width);
@@ -1187,13 +1278,13 @@ struct MapRegion {
 	const FCoords & location() const throw () {return m_next;}
 
 	/**
-	 * Moves on to the next location. The return value of indicates wether the
-	 * new location has not yet been reached during this iteration. Note that
-	 * when the area is so large that it overlaps itself because of wrapping, the
-	 * same location may be reached several times during an iteration, while
-	 * advance keeps returning true. When finally advance returns false, it means
-	 * that the iteration is done and location is the same as it was before the
-	 * first call to advance. The iteration can then be redone by calling advance
+	 * Moves on to the next location. The return value indicates wether the new
+	 * location has not yet been reached during this iteration. Note that when
+	 * the area is so large that it overlaps itself because of wrapping, the same
+	 * location may be reached several times during an iteration, while advance
+	 * keeps returning true. When finally advance returns false, it means that
+	 * the iteration is done and location is the same as it was before the first
+	 * call to advance. The iteration can then be redone by calling advance
 	 * again, which will return true util it reaches the first location the next
 	 * time around, and so on.
 	 */
@@ -1231,13 +1322,13 @@ struct MapFringeRegion {
 	const FCoords & location() const throw () {return m_location;}
 
 	/**
-	 * Moves on to the next location. The return value of indicates wether the
-	 * new location has not yet been reached during this iteration. Note that
-	 * when the area is so large that it overlaps itself because of wrapping, the
-	 * same location may be reached several times during an iteration, while
-	 * advance keeps returning true. When finally advance returns false, it means
-	 * that the iteration is done and location is the same as it was before the
-	 * first call to advance. The iteration can then be redone by calling advance
+	 * Moves on to the next location. The return value indicates wether the new
+	 * location has not yet been reached during this iteration. Note that when
+	 * the area is so large that it overlaps itself because of wrapping, the same
+	 * location may be reached several times during an iteration, while advance
+	 * keeps returning true. When finally advance returns false, it means that
+	 * the iteration is done and location is the same as it was before the first
+	 * call to advance. The iteration can then be redone by calling advance
 	 * again, which will return true util it reaches the first location the next
 	 * time around, and so on.
 	 */
@@ -1265,20 +1356,29 @@ private:
 
 
 /**
- * Producer/Coroutine struct that returns every node for which the distance to
- * the center point is greater than <hollow_area>.hole_radius and at most
- * <hollow_area>.radius.
- *
- * Each such location is returned exactly once via next(). But this does not
- * guarantee that a location is returned at most once when the radius is so
- * large that the area overlaps itself because of wrapping.
+ * Producer/Coroutine struct that iterates over every node for which the
+ * distance to the center point is greater than <hollow_area>.hole_radius and at
+ * most <hollow_area>.radius.
  *
  * Note that the order in which fields are returned is not guarantueed.
  */
 struct MapHollowRegion {
 	MapHollowRegion(Map & map, const HollowArea hollow_area);
 
-	bool next(Coords & c);
+	const Coords & location() const throw () {return m_location;}
+
+	/**
+	 * Moves on to the next location. The return value indicates wether the new
+	 * location has not yet been reached during this iteration. Note that when
+	 * the area is so large that it overlaps itself because of wrapping, the same
+	 * location may be reached several times during an iteration, while advance
+	 * keeps returning true. When finally advance returns false, it means that
+	 * the iteration is done and location is the same as it was before the first
+	 * call to advance. The iteration can then be redone by calling advance
+	 * again, which will return true util it reaches the first location the next
+	 * time around, and so on.
+	 */
+	bool advance(const Map &) throw ();
 
 private:
 	enum Phase {
@@ -1289,7 +1389,6 @@ private:
 		Bottom = 8, // below the hole
 	};
 
-	Map & m_map;
 	Phase m_phase;
 	const unsigned int m_radius;      // radius of the area
 	const unsigned int m_hole_radius; // radius of the hole
@@ -1298,7 +1397,7 @@ private:
 	unsigned int m_rowwidth; // # of fields to return per row
 	unsigned int m_rowpos; // # of fields we have returned in this row
 	Coords m_left; // left-most field of current row
-	Coords m_next; // next field to return
+	Coords m_location;
 };
 
 /**

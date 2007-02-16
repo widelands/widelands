@@ -867,16 +867,14 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		{
 			--i;
 			hollow_area.radius = it->first;
-			MapHollowRegion workarea = MapHollowRegion(*m_map, hollow_area);
-			Coords c;
-			while (workarea.next(c)) {
-				m_overlay_manager.register_overlay
-					(c,
-					 workarea_cumulative_picid[i],
-					 0,
-					 Point::invalid(),
-					 m_workarea_preview_job_id);
-			}
+			MapHollowRegion mr(*m_map, hollow_area);
+			do m_overlay_manager.register_overlay
+				(mr.location(),
+				 workarea_cumulative_picid[i],
+				 0,
+				 Point::invalid(),
+				 m_workarea_preview_job_id);
+			while (mr.advance(*m_map));
 			hollow_area.hole_radius = hollow_area.radius;
 		}
 
