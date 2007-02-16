@@ -2117,13 +2117,12 @@ uint Map::change_height(Area area, const Sint16 difference) {
 		}
 	}
 	uint regional_radius = 0;
-	FCoords fc;
-	MapFringeRegion mr(*this, fc, area);
+	MapFringeRegion mr(*this, area);
 	do {
 		uint local_radius = 0;
-		check_neighbour_heights(fc, local_radius);
+		check_neighbour_heights(mr.location(), local_radius);
 		regional_radius = std::max(regional_radius, local_radius);
-	} while (mr.next(*this, fc));
+	} while (mr.advance(*this));
 	area.radius += regional_radius + 2;
 	recalc_for_field_area(area);
 	return area.radius;
@@ -2144,8 +2143,7 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 	}
 	++area.radius;
 	{
-		FCoords fc;
-		MapFringeRegion mr(*this, fc, area);
+		MapFringeRegion mr(*this, area);
 		bool changed;
 		do {
 			changed = false;
@@ -2155,15 +2153,15 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 				height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
 				height_interval.max + MAX_FIELD_HEIGHT_DIFF : MAX_FIELD_HEIGHT;
 			do {
-				if (fc.field->height < height_interval.min) {
-					fc.field->height = height_interval.min;
+				if (mr.location().field->height < height_interval.min) {
+					mr.location().field->height = height_interval.min;
 					changed = true;
-				} else if (height_interval.max < fc.field->height) {
-					fc.field->height = height_interval.max;
+				} else if (height_interval.max < mr.location().field->height) {
+					mr.location().field->height = height_interval.max;
 					changed = true;
 				}
-			} while (mr.next(*this, fc));
-			mr.extend(*this, fc);
+			} while (mr.advance(*this));
+			mr.extend(*this);
 		} while (changed);
 		area.radius = mr.radius();
 	}
@@ -2777,28 +2775,28 @@ bool MapRegion::next(FCoords & fc)
 }
 
 
-MapFringeRegion::MapFringeRegion(const Map & map, FCoords & fc, Area area)
+MapFringeRegion::MapFringeRegion(const Map & map, Area area)
 throw ()
 :
 m_radius            (area.radius),
 m_remaining_in_phase(area.radius),
 m_phase             (area.radius ? 6 : 0)
 {
-	fc = FCoords(area, &map[area]);
-	while (area.radius) {fc = map.tl_n(fc); --area.radius;}
+	m_location = FCoords(area, &map[area]);
+	while (area.radius) {m_location = map.tl_n(m_location); --area.radius;}
 }
 
-bool MapFringeRegion::next(const Map & map, FCoords & fc) throw () {
+bool MapFringeRegion::advance(const Map & map) throw () {
 	switch (m_phase) {
 	case 0:
 		if (m_radius) {m_phase = 6; m_remaining_in_phase = m_radius;}
 		else return false;
-	case 1: fc = map.tr_n(fc); break;
-	case 2: fc = map.tl_n(fc); break;
-	case 3: fc = map. l_n(fc); break;
-	case 4: fc = map.bl_n(fc); break;
-	case 5: fc = map.br_n(fc); break;
-	case 6: fc = map. r_n(fc); break;
+	case 1: m_location = map.tr_n(m_location); break;
+	case 2: m_location = map.tl_n(m_location); break;
+	case 3: m_location = map. l_n(m_location); break;
+	case 4: m_location = map.bl_n(m_location); break;
+	case 5: m_location = map.br_n(m_location); break;
+	case 6: m_location = map. r_n(m_location); break;
 	}
 	--m_remaining_in_phase;
 	if (m_remaining_in_phase == 0) {m_remaining_in_phase = m_radius; --m_phase;}

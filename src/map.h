@@ -1205,38 +1205,46 @@ private:
 };
 
 /**
- * Producer/Coroutine struct that returns every node on the fringe of an area.
- *
- * Each such node is returned exactly once via the FCoords & parameter of bool
- * next(const Map, FCoords &). But this does not guarantee that a location is
- * returned at most once when the radius is so large that the area overlaps
- * itself because of wrapping.
- *
- * The return value of next indicates wether the refenced FCoords have a new
- * value. This means that it will return true until FCoords has the value it had
- * before the first call to next, in which case it will return false. If next is
- * then called again, it will return true again util it reaches the first value
- * the next time around, and so on.
- *
- * When next has returned false, iterating over the same fringe is not the only
- * possibility. It is also possible to call extend. This makes the region ready
- * to iterate over the next layer of nodes.
+ * Producer/Coroutine struct that iterates over every node on the fringe of an
+ * area.
  *
  * Note that the order in which nodes are returned is not guarantueed (although
- * the current implementation sets the FCoords to the top left node in the
- * constructor and then moves around clockwise when next is called repeatedly).
+ * the current implementation begins at the top left node and then moves around
+ * clockwise when advance is called repeatedly).
  */
 struct MapFringeRegion {
-	MapFringeRegion(const Map &, FCoords &, Area) throw ();
-	bool next(const Map & map, FCoords & fc) throw ();
-	void extend(const Map & map, FCoords & fc) throw () {
-		fc = map.tl_n(fc);
+	MapFringeRegion(const Map &, Area) throw ();
+
+	const FCoords & location() const throw () {return m_location;}
+
+	/**
+	 * Moves on to the next location. The return value of indicates wether the
+	 * new location has not yet been reached during this iteration. Note that
+	 * when the area is so large that it overlaps itself because of wrapping, the
+	 * same location may be reached several times during an iteration, while
+	 * advance keeps returning true. When finally advance returns false, it means
+	 * that the iteration is done and location is the same as it was before the
+	 * first call to advance. The iteration can then be redone by calling advance
+	 * again, which will return true util it reaches the first location the next
+	 * time around, and so on.
+	 */
+	bool advance(const Map & map) throw ();
+
+	/**
+	 * When advance has returned false, iterating over the same fringe again is
+	 * not the only possibility. It is also possible to call extend. This makes
+	 * the region ready to iterate over the next layer of nodes.
+	 */
+	void extend(const Map & map) throw () {
+		m_location = map.tl_n(m_location);
 		++m_radius;
 		m_remaining_in_phase = m_radius;
 		m_phase = 6;
 	}
+
 	Uint16 radius() const throw () {return m_radius;}
 private:
+	FCoords m_location;
 	Uint16  m_radius;
 	Uint16  m_remaining_in_phase;
 	Uint8   m_phase;
