@@ -2142,7 +2142,10 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 				fc.field->height = height_interval.max;
 		}
 	}
+	++area.radius;
 	{
+		FCoords fc;
+		MapFringeRegion mr(*this, fc, area);
 		bool changed;
 		do {
 			changed = false;
@@ -2151,9 +2154,6 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 			height_interval.max =
 				height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
 				height_interval.max + MAX_FIELD_HEIGHT_DIFF : MAX_FIELD_HEIGHT;
-			++area.radius;
-			FCoords fc;
-			MapFringeRegion mr(*this, fc, area);
 			do {
 				if (fc.field->height < height_interval.min) {
 					fc.field->height = height_interval.min;
@@ -2163,9 +2163,10 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 					changed = true;
 				}
 			} while (mr.next(*this, fc));
+			mr.extend(*this, fc);
 		} while (changed);
+		area.radius = mr.radius();
 	}
-	++area.radius;
 	recalc_for_field_area(area);
 	return area.radius;
 }

@@ -1235,6 +1235,7 @@ struct MapFringeRegion {
 		m_remaining_in_phase = m_radius;
 		m_phase = 6;
 	}
+	Uint16 radius() const throw () {return m_radius;}
 private:
 	Uint16  m_radius;
 	Uint16  m_remaining_in_phase;
