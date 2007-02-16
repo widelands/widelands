@@ -1184,8 +1184,22 @@ next() returns false when no more fields are to be traversed.
 struct MapRegion {
 	MapRegion(const Map &, const Area);
 
-	bool next(FCoords & fc);
+	const FCoords & location() const throw () {return m_next;}
 
+	/**
+	 * Moves on to the next location. The return value of indicates wether the
+	 * new location has not yet been reached during this iteration. Note that
+	 * when the area is so large that it overlaps itself because of wrapping, the
+	 * same location may be reached several times during an iteration, while
+	 * advance keeps returning true. When finally advance returns false, it means
+	 * that the iteration is done and location is the same as it was before the
+	 * first call to advance. The iteration can then be redone by calling advance
+	 * again, which will return true util it reaches the first location the next
+	 * time around, and so on.
+	 */
+	bool advance(const Map &) throw ();
+
+	Uint16 radius() const throw () {return m_radius;}
 private:
 	enum Phase {
 		phaseNone,  //  completed
@@ -1193,12 +1207,11 @@ private:
 		phaseLower, //  lower half
 	};
 
-	const Map & m_map;
 	Phase       m_phase;
-	uint        m_radius;   //  radius of area
-	uint        m_row;      //  number of rows completed in this phase
-	uint        m_rowwidth; //  number of fields to return per row
-	uint        m_rowpos;   //  number of fields we have returned in this row
+	const Uint16 m_radius;   //  radius of area
+	Uint16       m_row;      //  number of rows completed in this phase
+	Uint16       m_rowwidth; //  number of fields to return per row
+	Uint16       m_rowpos;   //  number of fields we have returned in this row
 
 	FCoords     m_left;     //  left-most field of current row
 	FCoords     m_next;     //  next field to return
@@ -1228,7 +1241,7 @@ struct MapFringeRegion {
 	 * again, which will return true util it reaches the first location the next
 	 * time around, and so on.
 	 */
-	bool advance(const Map & map) throw ();
+	bool advance(const Map &) throw ();
 
 	/**
 	 * When advance has returned false, iterating over the same fringe again is

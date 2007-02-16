@@ -292,10 +292,9 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    int pick;
 	{
 		MapRegion mr(map, Area(get_position(), action->iparam1));
-		FCoords fc;
-		while (mr.next(fc)) {
-			uchar fres  = fc.field->get_resources();
-			uint amount = fc.field->get_resources_amount();
+		do {
+			uchar fres  = mr.location().field->get_resources();
+			uint amount = mr.location().field->get_resources_amount();
 
       // In the future, we might want to support amount = 0 for
       // fields that can produce an infinite amount of resources.
@@ -316,7 +315,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
          totalchance += 4;
       else if (amount <= 6)
          totalchance += 2;
-   }
+		} while (mr.advance(map));
 	}
 
    if (totalres == 0) {
@@ -329,10 +328,9 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 
 	{
 		MapRegion mr(map, Area(get_position(), action->iparam1));
-		FCoords fc;
-		while (mr.next(fc)) {
-			uchar fres  = fc.field->get_resources();
-			uint amount = fc.field->get_resources_amount();;
+		do {
+			uchar fres  = mr.location().field->get_resources();
+			uint amount = mr.location().field->get_resources_amount();;
 
       if (fres != res)
          amount = 0;
@@ -343,10 +341,10 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 
          amount--;
 
-			fc.field->set_resources(res,amount);
+			mr.location().field->set_resources(res,amount);
          break;
       }
-   }
+		} while (mr.advance(map));
 	}
 
    if (pick >= 0) {

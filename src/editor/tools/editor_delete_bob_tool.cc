@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,14 +25,6 @@
 #include "bob.h"
 
 /*
-=================================================
-
-class Editor_Delete_Bob_Tool
-
-=================================================
-*/
-
-/*
 ===========
 Editor_Delete_Bob_Tool::handle_click_impl()
 
@@ -44,8 +36,8 @@ int Editor_Delete_Bob_Tool::handle_click_impl
 {
 	const int radius = parent.get_sel_radius();
 	MapRegion mr(map, Area(center.node, radius));
-   FCoords fc;
-	while (mr.next(fc)) if (Bob * const bob=fc.field->get_first_bob())
+	do if (Bob * const bob = mr.location().field->get_first_bob())
 		bob->remove(&parent.editor());
+	while (mr.advance(map));
    return radius + 2;
 }

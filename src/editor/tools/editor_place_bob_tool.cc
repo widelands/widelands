@@ -35,16 +35,15 @@ and places this on the current field
 int Editor_Place_Bob_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
-	if (not get_nr_enabled()) return radius;
-	MapRegion mr(map, Area(center.node, radius));
-   FCoords fc;
 	Editor & editor = parent.editor();
-	while (mr.next(fc)) {
-		if (Bob * const bob = fc.field->get_first_bob())
-         // There is already a bob. Remove it first
-			bob->remove(&editor);
-		editor.create_bob(fc, get_random_enabled());
-   }
-   return radius + 2;
+	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	if (get_nr_enabled()) {
+		do {
+			if (Bob * const bob = mr.location().field->get_first_bob())
+				// There is already a bob. Remove it first
+				bob->remove(&editor);
+			editor.create_bob(mr.location(), get_random_enabled());
+		} while (mr.advance(map));
+		return mr.radius() + 2;
+	} else return mr.radius();
 }

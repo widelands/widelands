@@ -168,25 +168,22 @@ void Map::recalc_for_field_area(const Area area) {
 
 	{ //  First pass.
 		MapRegion mr(*this, area);
-		FCoords fc;
-		while (mr.next(fc)) {
-			recalc_brightness     (fc);
-			recalc_border         (fc);
-			recalc_fieldcaps_pass1(fc);
-		}
+		do {
+			recalc_brightness     (mr.location());
+			recalc_border         (mr.location());
+			recalc_fieldcaps_pass1(mr.location());
+		} while (mr.advance(*this));
 	}
 
 	{ //  Second pass.
 		MapRegion mr(*this, area);
-		FCoords fc;
-		while (mr.next(fc)) recalc_fieldcaps_pass2(fc);
+		do recalc_fieldcaps_pass2(mr.location()); while (mr.advance(*this));
 	}
 
 	{ //  Now only recaluclate the overlays.
-		MapRegion mr(*this, area);
-		FCoords fc;
 		Overlay_Manager & om = overlay_manager();
-		while (mr.next(fc)) om.recalc_field_overlays(fc);
+		MapRegion mr(*this, area);
+		do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
 	}
 }
 
@@ -684,8 +681,7 @@ void Map::find_radius
 (const Coords coord, const uint radius, functorT & functor) const
 {
 	MapRegion mr(*this, Area(coord, radius));
-	FCoords fc;
-	while (mr.next(fc)) functor(*this, fc);
+	do functor(*this, mr.location()); while (mr.advance(*this));
 }
 
 
@@ -2101,20 +2097,21 @@ uint Map::set_height(const FCoords fc, const Uint8 new_value) {
 uint Map::change_height(Area area, const Sint16 difference) {
 	{
 		MapRegion mr(*this, area);
-		FCoords fc;
-		while (mr.next(fc)) {
+		do {
 			if
 				(difference < 0
 			    and
-				 fc.field->height < static_cast<const Uint8>(-difference))
-				fc.field->height = 0;
+				 mr.location().field->height
+				 <
+				 static_cast<const Uint8>(-difference))
+				mr.location().field->height = 0;
 			else if
 				(static_cast<const Sint16>(MAX_FIELD_HEIGHT) - difference
 				 <
-				 static_cast<const Sint16>(fc.field->height))
-				fc.field->height = MAX_FIELD_HEIGHT;
-			else fc.field->height += difference;
-		}
+				 static_cast<const Sint16>(mr.location().field->height))
+				mr.location().field->height = MAX_FIELD_HEIGHT;
+			else  mr.location().field->height += difference;
+		} while (mr.advance(*this));
 	}
 	uint regional_radius = 0;
 	MapFringeRegion mr(*this, area);
@@ -2133,13 +2130,12 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{
 		MapRegion mr(*this, area);
-		FCoords fc;
-		while (mr.next(fc)) {
-			if      (fc.field->height < height_interval.min)
-				fc.field->height = height_interval.min;
-			else if (height_interval.max < fc.field->height)
-				fc.field->height = height_interval.max;
-		}
+		do {
+			if      (mr.location().field->height < height_interval.min)
+				mr.location().field->height = height_interval.min;
+			else if (height_interval.max < mr.location().field->height)
+				mr.location().field->height = height_interval.max;
+		} while (mr.advance(*this));
 	}
 	++area.radius;
 	{
@@ -2706,7 +2702,6 @@ void CoordPath::append(const CoordPath &tail)
 
 
 MapRegion::MapRegion(const Map & map, const Area area) :
-m_map     (map),
 m_phase   (phaseUpper),
 m_radius  (area.radius),
 m_row     (0),
@@ -2722,22 +2717,17 @@ m_left    (map.get_fcoords(area))
 
 /*
 ===============
-MapRegion::next
-
 Traverse the region by row.
 I hope this results in slightly better cache behaviour than other algorithms
 (e.g. one could also walk concentric "circles"/hexagons).
 ===============
 */
-bool MapRegion::next(FCoords & fc)
-{
+bool MapRegion::advance(const Map & map) throw () {
 	if (m_phase == phaseNone)
 		return false;
 
-	fc = m_next;
-
 	m_rowpos++;
-	if (m_rowpos < m_rowwidth) m_map.get_rn(m_next, &m_next);
+	if (m_rowpos < m_rowwidth) map.get_rn(m_next, &m_next);
 	else
 	{
 		m_row++;
@@ -2752,7 +2742,7 @@ bool MapRegion::next(FCoords & fc)
 
 		if (m_phase == phaseUpper)
 		{
-			m_map.get_bln(m_left, &m_left);
+			map.get_bln(m_left, &m_left);
 			m_rowwidth++;
 		}
 		else
@@ -2763,7 +2753,7 @@ bool MapRegion::next(FCoords & fc)
 				return true; // early out
 			}
 
-			m_map.get_brn(m_left, &m_left);
+			map.get_brn(m_left, &m_left);
 			m_rowwidth--;
 		}
 

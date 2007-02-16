@@ -37,16 +37,13 @@ int Editor_Place_Immovable_Tool::handle_click_impl
 {
 	const int radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;
-	MapRegion mr(map, Area(center.node, radius));
-	FCoords fc;
 	Editor & editor = parent.editor();
-	while (mr.next(fc)) {
-		if (fc.field->get_immovable()) {
-			if (fc.field->get_immovable()->get_size() != BaseImmovable::NONE)
-            continue;
-      }
-
-		editor.create_immovable(fc, get_random_enabled(), 0);
-   }
+	MapRegion mr(map, Area(center.node, radius));
+	do if
+		(not mr.location().field->get_immovable()
+		 or
+		 mr.location().field->get_immovable()->get_size() == BaseImmovable::NONE)
+		editor.create_immovable(mr.location(), get_random_enabled(), 0);
+	while (mr.advance(map));
    return radius + 2;
 }

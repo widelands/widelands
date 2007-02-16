@@ -331,10 +331,9 @@ void Editor_Game_Base::do_conquer_area
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 	MapRegion mr(*m_map, player_area);
-	FCoords fc;
-	while (mr.next(fc)) {
-		const Map::Index index = m_map->get_index(fc);
-		const int influence = calc_influence(fc, player_area);
+	do {
+		const Map::Index index = m_map->get_index(mr.location());
+		const int influence = calc_influence(mr.location(), player_area);
 
          // This is for put a weight to every field, its equal to the next array:
          // 1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92, 106, 121, 137, 154, 172 ... 1+(x*(x-1)/2)
@@ -348,15 +347,16 @@ void Editor_Game_Base::do_conquer_area
 			m_conquer_map[player_area.player_number][index] += influence;
 
             // Else, do the things that should be done
-			if (fc.field->get_owned_by() == player_area.player_number) continue;
+			if (mr.location().field->get_owned_by() == player_area.player_number)
+				continue;
 
 			if
-				(not fc.field->get_owned_by()
+				(not mr.location().field->get_owned_by()
 				 and
 				 m_conquer_map[0][index] == player_area.player_number)
 			{
-				fc.field->set_owned_by(player_area.player_number);
-				player_field_notification (fc, GAIN);
+				mr.location().field->set_owned_by(player_area.player_number);
+				player_field_notification (mr.location(), GAIN);
             continue;
          }
 
@@ -365,28 +365,29 @@ void Editor_Game_Base::do_conquer_area
 			if
             (m_conquer_map[player_area.player_number][index]
              >
-             m_conquer_map[fc.field->get_owned_by()][index])
+             m_conquer_map[mr.location().field->get_owned_by()][index])
 			{
-				player_field_notification (fc, LOSE);
-				fc.field->set_owned_by (player_area.player_number);
+				player_field_notification (mr.location(), LOSE);
+				mr.location().field->set_owned_by (player_area.player_number);
 				m_conquer_map[0][index] = player_area.player_number;
-				player_field_notification (fc, GAIN);
+				player_field_notification (mr.location(), GAIN);
          }
 // END : If you wanna to disable the dinamic conquer (by influences) , comment this block
       }
 		else {
 			m_conquer_map[player_area.player_number][index] -= influence;
 
-			if (fc.field->get_owned_by() != player_area.player_number) continue;
+			if (mr.location().field->get_owned_by() != player_area.player_number)
+				continue;
 
          m_conquer_map[0][index] = 0;
 
             // ALWAYS set to 0. So is needed to call do_conquer_area with TRUE if you want to have the real
             // map of incluence
-			player_field_notification (fc, LOSE);
-			fc.field->set_owned_by(0);
+			player_field_notification (mr.location(), LOSE);
+			mr.location().field->set_owned_by(0);
       }
-   }
+	} while (mr.advance(*m_map));
 
 	m_map->recalc_for_field_area(player_area);
 }
@@ -907,10 +908,9 @@ void Editor_Game_Base::make_influence_map ()
 	{
          // First, update influence map of the player
 		MapRegion mr(*m_map, *it);
-		FCoords fc;
-		while (mr.next(fc))
-			m_conquer_map[it->player_number][m_map->get_index(fc)] +=
-				calc_influence(fc, *it);
+		do m_conquer_map[it->player_number][m_map->get_index(mr.location())] +=
+			calc_influence(mr.location(), *it);
+		while (mr.advance(*m_map));
 	}
 
    // Now create the real influence map !

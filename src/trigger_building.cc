@@ -90,18 +90,16 @@ void Trigger_Building::check_set_conditions(Game* game) {
 
 
 	uint count = 0;
-	MapRegion mr(game->map(), m_player_area);
-	FCoords fc;
-	while (mr.next(fc)) if
-		(const Building * const building =
-		 dynamic_cast<const Building * const>(fc.field->get_immovable()))
-	{
+	MapRegion mr(map, m_player_area);
+	do if
+		(const Building * const building = dynamic_cast<const Building * const>
+		 (mr.location().field->get_immovable()))
 		if
 			(building->owner().get_player_number() == m_player_area.player_number
 			 and
 			 building->name() == m_building)
 			++count;
-	}
+	while (mr.advance(map));
 
    if(count>=m_count) set_trigger(true);
 

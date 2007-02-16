@@ -691,8 +691,7 @@ void ProductionSite::program_act(Game* g)
 			return;
 		}
 
-		case ProductionAction::actMine:
-      {
+		case ProductionAction::actMine: {
          Map & map = *g->get_map();
          uchar res;
 
@@ -709,13 +708,13 @@ void ProductionSite::program_act(Game* g)
          uint totalstart = 0;
          int pick;
 
-	      {
+			{
 				MapRegion mr(map, Area(get_position(), action->iparam1));
-				FCoords fc;
-		      while (mr.next(fc)) {
-			      uchar fres        = fc.field->get_resources();
-			      uint amount       = fc.field->get_resources_amount();
-			      uint start_amount = fc.field->get_starting_res_amount();
+				do {
+					uchar fres        = mr.location().field->get_resources();
+					uint amount       = mr.location().field->get_resources_amount();
+					uint start_amount =
+						mr.location().field->get_starting_res_amount();
 
 			      // In the future, we might want to support amount = 0 for
 			      // fields that can produce an infinite amount of resources.
@@ -739,7 +738,7 @@ void ProductionSite::program_act(Game* g)
 				      totalchance += 4;
 			      else if (amount <= 6)
 				      totalchance += 2;
-		      }
+				} while (mr.advance(map));
 	      }
 
          // how much is digged
@@ -759,26 +758,25 @@ void ProductionSite::program_act(Game* g)
             // Second pass through fields
             pick = g->logic_rand() % totalchance;
 
-	         {
+				{
 					MapRegion mr(map, Area(get_position(), action->iparam1));
-					FCoords fc;
-		         while (mr.next(fc)) {
-						uchar fres  = fc.field->get_resources();
-						uint amount = fc.field->get_resources_amount();;
+					do {
+						uchar fres  = mr.location().field->get_resources();
+						uint amount = mr.location().field->get_resources_amount();
 
 			         if (fres != res)
 				         amount = 0;
 
 			         pick -= 8*amount;
-			         if (pick < 0) {
+						if (pick < 0) {
 				         assert(amount > 0);
 
 				         --amount;
 
-							fc.field->set_resources(res,amount);
+							mr.location().field->set_resources(res,amount);
 				         break;
 			         }
-		         }
+					} while (mr.advance(map));
 	         }
 
             if (pick >= 0) {

@@ -138,8 +138,8 @@ void Player::set_area_seen(const Area area, const bool on) {
 	const Map & map = egbase().map();
 	const X_Coordinate mapwidth = map.get_width();
 	MapRegion mr(map, area);
-	FCoords fc;
-	while (mr.next(fc)) set_field_seen(Map::get_index(fc, mapwidth), on);
+	do set_field_seen(Map::get_index(mr.location(), mapwidth), on);
+	while (mr.advance(map));
 
    m_view_changed = true;
 }

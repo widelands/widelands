@@ -29,20 +29,18 @@
 int Editor_Noise_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
 	uint max = 0;
-	MapRegion mr(map, Area(center.node, radius));
-   FCoords fc;
-	while (mr.next(fc))
-		max =
+	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	do max =
 		std::max
 		(max,
 		 map.set_height
-		 (fc,
+		 (mr.location(),
 		  m_interval.min
 		  +
 		  static_cast<int>
 		  (static_cast<double>
 		   (m_interval.min - m_interval.max) * rand() / (RAND_MAX + 1.0))));
-   return radius + max;
+	while (mr.advance(map));
+	return mr.radius() + max;
 }

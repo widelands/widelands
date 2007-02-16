@@ -119,9 +119,9 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 			(tc, m_sel.pic, 7, Point::invalid(), jobid);
 	} else {
 		MapRegion mr(map, Area(center.node, m_sel.radius));
-		FCoords fc;
-		while (mr.next(fc)) overlay_manager.register_overlay
-			(fc, m_sel.pic, 7, Point::invalid(), jobid);
+		do overlay_manager.register_overlay
+			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
+		while (mr.advance(map));
 	}
 
 }

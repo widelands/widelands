@@ -47,12 +47,10 @@ there is not already another resource there.
 int Editor_Decrease_Resources_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
-	MapRegion mr(map, Area(center.node, radius));
-	FCoords fc;
-	while (mr.next(fc)) {
-		int res    =fc.field->get_resources();
-		int amount =fc.field->get_resources_amount();
+	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	do {
+		int res    = mr.location().field->get_resources();
+		int amount = mr.location().field->get_resources_amount();
 
 		amount -= m_change_by;
       if(amount<0) amount=0;
@@ -61,28 +59,28 @@ int Editor_Decrease_Resources_Tool::handle_click_impl
 		if
 			(res == m_cur_res
 			 and
-			 Editor_Change_Resource_Tool_Callback(fc, &map, m_cur_res))
+			 Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
 			int picid;
          // Ok, we're doing something. First remove the current overlays
          std::string str;
 			str = map.world().get_resource(res)->get_editor_pic
-				(fc.field->get_resources_amount());
+				(mr.location().field->get_resources_amount());
          picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
-			map.get_overlay_manager()->remove_overlay(fc, picid);
+			map.overlay_manager().remove_overlay(mr.location(), picid);
          if(!amount) {
-				fc.field->set_resources(0,0);
-				fc.field->set_starting_res_amount(0);
+				mr.location().field->set_resources(0, 0);
+				mr.location().field->set_starting_res_amount(0);
          } else {
-				fc.field->set_resources(m_cur_res,amount);
-				fc.field->set_starting_res_amount(amount);
+				mr.location().field->set_resources(m_cur_res,amount);
+				mr.location().field->set_starting_res_amount(amount);
             // set new overlay
 				str = map.world().get_resource(m_cur_res)->get_editor_pic(amount);
             picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
-				map.get_overlay_manager()->register_overlay(fc, picid, 4);
-	         map.recalc_for_field_area(Area(fc, 0));
+				map.overlay_manager().register_overlay(mr.location(), picid, 4);
+	         map.recalc_for_field_area(Area(mr.location(), 0));
          }
       }
-   }
-	return radius;
+	} while (mr.advance(map));
+	return mr.radius();
 }

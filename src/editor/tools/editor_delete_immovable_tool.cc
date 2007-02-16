@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +42,11 @@ deletes the immovable at the given location
 int Editor_Delete_Immovable_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
 {
-	const int radius = parent.get_sel_radius();
-	MapRegion mr(map, Area(center.node, radius));
-   FCoords fc;
-	while (mr.next(fc))
-		if (BaseImmovable * const mim = fc.field->get_immovable()) {
-         if(mim->get_type()!=Map_Object::IMMOVABLE) continue; // Delete no buildings or stuff
-			mim->remove(&parent.editor());
-      }
-   return radius + 2;
+	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	do if
+		(Immovable * const immovable =
+		 dynamic_cast<Immovable * const>(mr.location().field->get_immovable()))
+		immovable->remove(&parent.editor()); //  Delete no buildings or stuff.
+	while (mr.advance(map));
+	return mr.radius() + 2;
 }
