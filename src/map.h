@@ -1263,17 +1263,13 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
 }
 
 
-/*
-class MapRegion
----------------
-Producer/Coroutine class that returns every field within a given radius
-around the center point exactly once via next().
-Note that the order in which fields are returned is not guarantueed.
-
-next() returns false when no more fields are to be traversed.
-*/
+/**
+ * Producer/Coroutine struct that iterates over every node of an area.
+ *
+ * Note that the order in which fields are returned is not guarantueed.
+ */
 struct MapRegion {
-	MapRegion(const Map &, const Area);
+	MapRegion(const Map &, Area);
 
 	const FCoords & location() const throw () {return m_next;}
 
@@ -1292,13 +1288,7 @@ struct MapRegion {
 
 	Uint16 radius() const throw () {return m_radius;}
 private:
-	enum Phase {
-		phaseNone,  //  completed
-		phaseUpper, //  upper half
-		phaseLower, //  lower half
-	};
-
-	Phase       m_phase;
+	bool         m_halfway;
 	const Uint16 m_radius;   //  radius of area
 	Uint16       m_row;      //  number of rows completed in this phase
 	Uint16       m_rowwidth; //  number of fields to return per row

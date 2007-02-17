@@ -2701,17 +2701,15 @@ void CoordPath::append(const CoordPath &tail)
 }
 
 
-MapRegion::MapRegion(const Map & map, const Area area) :
-m_phase   (phaseUpper),
+MapRegion::MapRegion(const Map & map, Area area) :
+m_halfway (false),
 m_radius  (area.radius),
 m_row     (0),
 m_rowwidth(area.radius + 1),
-m_rowpos  (0),
-m_left    (map.get_fcoords(area))
+m_rowpos  (0)
 {
-	for (Uint16 i = 0; i < area.radius; ++i) map.get_tln(m_left, &m_left);
-
-	m_next = m_left;
+	for (; area.radius; --area.radius) map.get_tln(area, &area);
+	m_next = m_left = map.get_fcoords(area);
 }
 
 
@@ -2723,9 +2721,6 @@ I hope this results in slightly better cache behaviour than other algorithms
 ===============
 */
 bool MapRegion::advance(const Map & map) throw () {
-	if (m_phase == phaseNone)
-		return false;
-
 	m_rowpos++;
 	if (m_rowpos < m_rowwidth) map.get_rn(m_next, &m_next);
 	else
@@ -2735,23 +2730,13 @@ bool MapRegion::advance(const Map & map) throw () {
 		// If we completed the widest, center line, switch into lower mode
 		// There are m_radius+1 lines in the upper "half", because the upper
 		// half includes the center line.
-		if (m_phase == phaseUpper && m_row > m_radius) {
-			m_row = 0;
-			m_phase = phaseLower;
-		}
+		if (not m_halfway and m_row > m_radius) {m_row = 0; m_halfway = true;}
 
-		if (m_phase == phaseUpper)
-		{
-			map.get_bln(m_left, &m_left);
-			m_rowwidth++;
-		}
+		if (not m_halfway) {m_left = map.bl_n(m_left); ++m_rowwidth;}
 		else
 		{
 			// There are m_radius lines in the lower "half"
-			if (m_row >= m_radius) {
-				m_phase = phaseNone;
-				return true; // early out
-			}
+			if (m_row >= m_radius) return false;
 
 			map.get_brn(m_left, &m_left);
 			m_rowwidth--;
