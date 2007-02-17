@@ -1,7 +1,27 @@
+build-10:
+- Work on ingame window-system
+- Menu-resolution set to 800x600 (before 640x480) and added new splash
+- Addition of new tribe "The Empire" (still a lot of missing building-graphics)
+- Tribe "Barbarians" was completly overhauled
+- Additon of new worlds (Blackland, winterland and desert)
+- Addition of few new maps and a new campaign-map
+- A lot of localisation-bugs were fixed
+- Widelands is now supported in 11 languages (cz, de, en, fi, fr, he, hu, nl, pl, ru, sk, sv)
+- New feature: Mouse-over-hover-help
+- New feature: Tribe ware encyclopedia
+- Battlecode was reworked
+- Mousewheel support integrated (textarea)
+- A lot of menu texts and alignments were fixed
+- A lot of new button-, icon-, background- and campaign-graphics added.
+- Addition of three new ingame music-tracks
+- Richtext-handler was overhauled
+- Now using new fonts (FreeSans and FreeSerif) licensed under GPL
+- A lot of code-cleanup
+- Bug fixes, bug fixes, bug fixes 
 - Updated Campaign Missions
 - Added proper localisation support (language selectable in options menu)
 - Font renderer now renders multiple newlines correctly and in richtext
-accepts <br> as newline
+  accepts <br> as newline
 - added localisation patch by Josef + beginning of localisation
 - f now triggers fullscreen ingame 
 - added new maps from winterwind
