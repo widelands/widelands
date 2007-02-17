@@ -1407,16 +1407,30 @@ private:
  */
 struct MapTriangleRegion {
 	MapTriangleRegion(const Map &, TCoords, const unsigned short radius);
-	bool next(TCoords & c);
+
+	const TCoords & location() const throw () {return m_location;}
+
+	/**
+	 * Moves on to the next location. The return value indicates wether the new
+	 * location has not yet been reached during this iteration. Note that when
+	 * the area is so large that it overlaps itself because of wrapping, the same
+	 * location may be reached several times during an iteration, while advance
+	 * keeps returning true. When finally advance returns false, it means that
+	 * the iteration is done and location is the same as it was before the first
+	 * call to advance. The iteration can then be redone by calling advance
+	 * again, which will return true util it reaches the first location the next
+	 * time around, and so on.
+	 */
+	bool advance(const Map &) throw ();
+
 private:
-	const Map & m_map;
 	const bool m_radius_is_odd;
 	enum {Top, Upper, Lower, Bottom} m_phase;
 	unsigned short m_remaining_rows_in_upper_phase;
 	unsigned short m_remaining_rows_in_lower_phase;
 	unsigned short m_row_length, m_remaining_in_row;
-	Coords m_left, m_next;
-	TCoords::TriangleIndex m_next_triangle;
+	Coords  m_left;
+	TCoords m_location;
 };
 
 std::string g_MapVariableCallback( std::string str, void* data );

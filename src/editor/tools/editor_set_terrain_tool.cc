@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,9 @@ int Editor_Set_Terrain_Tool::handle_click_impl
 	if (get_nr_enabled()) {
 		int max = 0;
 		MapTriangleRegion mr(map, center.triangle, radius);
-		TCoords c;
-		while (mr.next(c))
-			max = std::max(max, map.change_terrain(c, get_random_enabled()));
+		do max =
+			std::max(max, map.change_terrain(mr.location(), get_random_enabled()));
+		while (mr.advance(map));
 		return radius + max;
 	} else return radius;
 }
