@@ -476,7 +476,9 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
          m_incorporated_workers.erase(m_incorporated_workers.begin());
       }
    }
-	// TODO: un-conquer the area?
+	if (const uint conquer_raduis = get_conquers()) gg->unconquer_area
+		(Player_Area
+		 (owner().get_player_number(), Area(get_position(), conquer_raduis)));
 	Building::cleanup(gg);
 }
 
