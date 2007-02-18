@@ -242,11 +242,11 @@ void AttackController::soldierWon(Soldier* soldier) {
 
    //if the last remaing was an attacker, check for
    //remaining soldiers in the building
-   if (involvedSoldiers[idx].attacker) {
-      MilitarySite* ms = (MilitarySite*)flag->get_building();
+	if (involvedSoldiers[idx].attacker) {
+		MilitarySite & ms = dynamic_cast<MilitarySite &>(*flag->get_building());
       //There are defending soldiers left in the building.
-      if (ms->has_soldiers()) {
-         launchSoldiersOfMilitarySite(ms,ms->nr_not_marked_soldiers(),false);
+      if (ms.has_soldiers()) {
+         launchSoldiersOfMilitarySite(&ms, ms.nr_not_marked_soldiers(), false);
          return;
       }
    }
