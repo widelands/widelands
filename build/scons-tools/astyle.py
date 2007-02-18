@@ -17,7 +17,7 @@ def generate(env):
 def find_astyle(env):
 	b=env.WhereIs('buggy-astyle')
 	if b==None:
-		print 'WARNING: Could not find astyle. Source indenting will not be performed.'
+		complain_astyle(None, None, env)
 	else:
 		print 'Found astyle:     ', b
 	return b

@@ -17,7 +17,7 @@
  *
  */
 
-#include "constants.h"
+#include "build_id.h"
 #include "editor.h"
 #include <errno.h>
 #include "error.h"
@@ -1004,7 +1004,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
  */
 void WLApplication::show_usage()
 {
-	cout<<"This is Widelands-"<<VERSION<<endl<<endl
+	cout<<"This is Widelands-"<<BUILD_ID<<endl<<endl
 	<<"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"<<endl
 	<<endl
 	<<"Options:"<<endl

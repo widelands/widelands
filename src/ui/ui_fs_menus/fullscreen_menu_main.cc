@@ -17,7 +17,7 @@
  *
  */
 
-#include "constants.h"
+#include "build_id.h"
 #include "error.h"
 #include "fullscreen_menu_main.h"
 #include "i18n.h"
@@ -84,7 +84,7 @@ exit
  _("Exit Game")),
 
 	// Text
-version(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right),
+version(this, MENU_XRES-25, MENU_YRES-29, _("Version")+" "+BUILD_ID, Align_Right),
 copyright
 (this,
  15, MENU_YRES - 29,

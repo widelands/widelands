@@ -11,6 +11,7 @@ import sys
 sys.path.append("build/scons-tools")
 from scons_configure import *
 from Distribute import *
+from detect_revision import *
 
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
@@ -102,7 +103,7 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
 	opts.Add('build', 'debug-no-parachute / debug-slow / debug-efence / debug(default) / release / profile', 'debug')
-	opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
+	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '')
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
@@ -255,24 +256,21 @@ env.Append(LIBPATH=env['extra_lib_path'])
 
 BINDIR= os.path.join(env['install_prefix'], env['bindir'])
 DATADIR=os.path.join(env['install_prefix'], env['datadir'])
-PACKDIR='widelands-'+env['build_id']
 
 #TODO: make sure that build type is valid !!!
 
 ################################################################################
 
-#build_id must be saved *before* it might be set to a fixed date
-opts.Save('build/scons-config.py',env)
-
-#This is just a default, don't change it here. Use the option 'build_id' instead
-if (env['build_id']=='') or (env['build_id']=='date'):
-	env['build_id']=time.strftime("%Y.%m.%d-%H%M%S", time.gmtime())
+#This is just a default, don't change it here in the code.
+#Use the commandline option 'build_id' instead
+if env['build_id']=='':
+	env['build_id']='svn'+detect_revision()
 print 'Build ID:          '+env['build_id']
 
 config_h=write_configh_header()
 do_configure(config_h, conf, env)
 write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
-#load_configuration(conf)
+write_buildid(env['build_id'])
 
 env=conf.Finish()
 
@@ -355,23 +353,11 @@ distadd(env, 'README-compiling.txt')
 distadd(env, 'README.developers')
 distadd(env, 'SConstruct')
 distadd(env, 'build-widelands.sh')
-distadd(env, 'fonts')
-distadd(env, 'game_server')
-distadd(env, 'locale')
 distadd(env, 'macos')
-distadd(env, 'music')
-distadd(env, 'pics')
-distadd(env, 'sound')
-distadd(env, 'src')
-distadd(env, 'utils')
 
-dist=env.DistPackage('widelands.tar.bz2', '')
+dist=env.DistPackage('widelands-'+env['build_id'], '')
 Alias('dist', dist)
 AlwaysBuild(dist)
-
-snapshot=env.SnapshotPackage('widelands-snapshot.tar.bz2', '')
-Alias('snapshot', snapshot)
-AlwaysBuild(snapshot)
 
 ###################################################################### longlines
 

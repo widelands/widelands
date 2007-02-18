@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <string>
 
-#include "constants.h"
+#include "build_id.h"
 #include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
@@ -967,7 +967,7 @@ void Profile::write
 {
 	FileWrite fw;
 
-	fw.Printf("# Automatically created by Widelands " VERSION "\n\n");
+	fw.Printf("# Automatically created by Widelands " BUILD_ID "\n\n");
 
 	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
 		if (used_only && !s->is_used())

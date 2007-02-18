@@ -5,6 +5,7 @@
 # Do not change this file, instead create a new Makefile.local
 # and overwrite the vaiables listed here
 
+VERSION=svn`build/scons-tools/detect_revision.py`
 
 ########################### GLOBAL SECTION ##########################
 # NON CROSS COMPILE
@@ -185,7 +186,6 @@ clean:
 doc: $(SRC) $(HEADERS)
 	@doxygen Doxyfile
 
-VERSION:=b8
 dist:
 	@rm -rf widelands-$(VERSION)
 	@mkdir widelands-$(VERSION)
@@ -221,7 +221,7 @@ $(OBJECT_DIR)/widelands: $(OBJ)
 
 -include $(DEP)
 
-$(OBJECT_DIR)/%.o: src/%.cc
+$(OBJECT_DIR)/%.o: src/%.cc src/build_id.h
 	@echo "===> CXX $<"
 	$(Q)$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
 	$(Q)sed -e 's@^\(.*\)\.o:@\1.d \1.o:@' $@.d > $(OBJECT_DIR)/$*.d
@@ -235,3 +235,7 @@ update up:
 
 src/config.h: src/config.h.default
 	@cp src/config.h.default $@
+
+src/build_id.h:
+	sed -e "s/UNKNOWN/$(VERSION)/" src/build_id.h.default > $@
+

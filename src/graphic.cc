@@ -22,6 +22,7 @@ Management classes and functions of the 16-bit software renderer.
 
 #include <SDL_image.h>
 #include "bob.h"
+#include "build_id.h"
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"
@@ -942,7 +943,7 @@ GraphicImpl::GraphicImpl(int w, int h, int bpp, bool fullscreen)
 
 	assert( sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4 );
 
-	SDL_WM_SetCaption("Widelands " VERSION, "Widelands");
+	SDL_WM_SetCaption("Widelands " BUILD_ID, "Widelands");
 
    m_screen.set_sdl_surface( sdlsurface );
 	m_rendertarget = new RenderTargetImpl(&m_screen);

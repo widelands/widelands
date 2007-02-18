@@ -17,10 +17,11 @@
  *
  */
 
+#include "build_id.h"
+#include "constants.h"
+#include "network_lan_promotion.h"
 #include <stdio.h>
 #include <string.h>
-#include "network_lan_promotion.h"
-#include "constants.h"
 
 /*** class LAN_Base ***/
 
@@ -140,7 +141,7 @@ LAN_Game_Promoter::LAN_Game_Promoter ()
     gameinfo.version=LAN_PROMOTION_PROTOCOL_VERSION;
     gameinfo.state=LAN_GAME_OPEN;
 
-    strcpy (gameinfo.gameversion, VERSION);
+    strncpy (gameinfo.gameversion, BUILD_ID, sizeof(gameinfo.gameversion) );
 
     gethostname (gameinfo.hostname, sizeof(gameinfo.hostname));
 }

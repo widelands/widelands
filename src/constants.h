@@ -29,13 +29,6 @@
  */
 
 /**
- * Version mark for the build. Appears in title screen
- * \todo Tie this into build_id (which, in turn, should be tied into SVN
- * numbering)
- */
-#define VERSION "svnbuild"
-
-/**
  * locale path: This would be needed to be changed by a packager
  *
  * The default search path for locales is in the locale directory

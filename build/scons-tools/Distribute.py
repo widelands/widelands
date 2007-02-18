@@ -7,13 +7,18 @@ def distadd(env, source, compress=False):
 	head,tail=os.path.split(source)
 
 	for s in glob.glob(tail):
-			env['DISTFILES']+=[(os.path.join(head, s), compress)]
+		print "Adding",os.path.join(head, s)
+		env['DISTFILES']+=[(os.path.join(head, s), compress)]
 
 def dodist(target, source, env):
+	try:
+		os.remove(str(target[0])+'.tar.bz2')
+	except:
+		pass
 	tmpdir=tempfile.mkdtemp(prefix='widelands-dist.')
-	tarbz2file=tarfile.open(str(target[0]),'w:bz2')
+	tarbz2file=tarfile.open(str(target[0])+'.tar.bz2','w:bz2')
 
-	for (name, compress) in env['DISTFILES']:
+	for (name, compress) in set(env['DISTFILES']):  #the set is there to ensure uniqueness
 		if compress:
 			head,tail=os.path.split(name)
 			try:
@@ -36,20 +41,10 @@ def dodist(target, source, env):
 						dirs.remove('.svn')  # don't visit subversion directories
 
 			zipfile.close()
-			tarbz2file.add(zipfilename, name)
+			tarbz2file.add(zipfilename, os.path.join(str(target[0]), name))
 
 		else:
-			tarbz2file.add(name)
-
-	tarbz2file.close()
-	shutil.rmtree(tmpdir)
-
-def dosnapshot(target, source, env):
-	tmpdir=tempfile.mkdtemp(prefix='widelands-dist.')
-	tarbz2file=tarfile.open(str(target[0]),'w:bz2')
-
-	for (name,compress) in env['DISTFILES']:
-		tarbz2file.add(name)
+			tarbz2file.add(name, os.path.join(str(target[0]), name))
 
 	tarbz2file.close()
 	shutil.rmtree(tmpdir)
@@ -70,7 +65,7 @@ def instadd(env, source, prefix=None, compress=False, filetype='data'):
 def doinst(target, source, env):
 	tmpdir=tempfile.mkdtemp(prefix='widelands-inst.')
 
-	for (name, location, compress, filetype) in env['INSTFILES']:
+	for (name, location, compress, filetype) in set(env['INSTFILES']):  #the set is there to ensure uniqueness
 		if compress:
 			head,tail=os.path.split(name)
 			try:
@@ -108,7 +103,6 @@ def doinst(target, source, env):
 			if filetype=='binary':
 				os.chmod(os.path.join(prefix, name), 0755)
 		elif os.path.isdir(name):
-			print prefix, name, os.path.join(prefix, os.path.basename(name))
 			distutils.dir_util.copy_tree(name, os.path.join(prefix, os.path.basename(name)))
 
 	shutil.rmtree(tmpdir)
@@ -128,11 +122,6 @@ def generate(env):
 		bld = env['BUILDERS']['DistPackage']
 	except KeyError:
 		env['BUILDERS']['DistPackage'] = SCons.Builder.Builder(action=dodist)
-
-	try:
-		bld = env['BUILDERS']['SnapshotPackage']
-	except KeyError:
-		env['BUILDERS']['SnapshotPackage'] = SCons.Builder.Builder(action=dosnapshot)
 
 	try:
 		bld = env['BUILDERS']['Install']

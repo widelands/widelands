@@ -30,10 +30,10 @@ def write_buildid(build_id):
 	build_id_file=open('src/build_id.h', "w")
 
 	build_id_file.write("""
-#ifndef BUILD_ID
-#define BUILD_ID """+build_id+"""
+#ifndef BUILD_ID_H
+#define BUILD_ID_H
 
-const char *g_build_id=\""""+build_id+"""\";
+#define BUILD_ID \""""+build_id+"""\"
 
 #endif
 """)
