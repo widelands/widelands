@@ -1,0 +1,8 @@
+Import('*')
+from Distribute import distadd
+
+distadd(env, 'src/editor/ui_menus/SConscript')
+distadd(env, 'src/editor/ui_menus/SConscript.dist')
+distadd(env, 'src/editor/ui_menus/*.h')
+distadd(env, 'src/editor/ui_menus/*.cc')
+

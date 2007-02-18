@@ -303,11 +303,12 @@ SConscript('maps/SConscript')
 SConscript('music/SConscript')
 SConscript('pics/SConscript')
 SConscript('sound/SConscript')
+SConscript('src/SConscript.dist')
+thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 SConscript('tribes/SConscript')
 SConscript('txts/SConscript')
 SConscript('utils/SConscript')
 SConscript('worlds/SConscript')
-thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 
 Default(thebinary)
 

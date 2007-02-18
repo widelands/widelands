@@ -7,6 +7,8 @@ buildcat=PhonyTarget("buildcat", 'cd locale ; ../utils/buildcat.py ; cd -')
 
 instadd(env, 'locale/??_??', 'locale')
 
+distadd(env, 'locale/SConscript')
 distadd(env, 'locale/*.po*')
 
 Return('buildcat')
+
