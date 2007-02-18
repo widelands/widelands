@@ -12,7 +12,7 @@ def detect_revision():
 	revnum='UNKNOWN'
 
 	if os.path.exists('.svn'):
-		has_svn = os.system('svn >/dev/null 2>&1')==0
+		has_svn = os.system('svn >/dev/null 2>&1')==256
 		if has_svn:
 			revnum=os.popen('svn info|grep Revision:|cut -d" " -f 2').read()
 
