@@ -1,4 +1,5 @@
 Import('env')
 from Distribute import distadd
 
+distadd(env, 'build/scons-tools/SConscript')
 distadd(env, 'build/scons-tools/*.py')
