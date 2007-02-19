@@ -1,0 +1,13 @@
+# player_names-file of second Empire Tutorial - created by Peter Schwanemann, 2007
+
+[global]
+packet_version=1
+
+[player_1]
+name=Lutius
+tribe=empire
+
+[player_2]
+name=Bodir
+tribe=barbarians
+

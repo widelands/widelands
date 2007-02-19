@@ -1,0 +1,12 @@
+# elemental-file of second Empire Tutorial - created by Peter Schwanemann, 2007
+
+[global]
+packet_version=1
+map_w=80
+map_h=80
+nr_players=2
+world=desert
+name=_"Empire Tutorial2 - An outpost for exile"
+author=Nasenbaer
+descr=_"Second mission of the Empire campaign"
+

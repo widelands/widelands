@@ -26,6 +26,7 @@ static const char* filenames[] = {
    "campaigns/t01.wmf",
    "campaigns/t02.wmf",
    "campaigns/emp01.wmf",
+   "campaigns/emp02.wmf",
 };
 
 /*
@@ -71,6 +72,13 @@ empire_1
  1,
  &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 3,
  _("Empire 1: The Strands of Malac' Mor")),
+ 
+ empire_2
+(this,
+ 80, 380, 640, 26,
+ 1,
+ &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 4,
+ _("Empire 2: An outpost for exile")),
 
 back
 (this,

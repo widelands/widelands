@@ -16,7 +16,7 @@ import fileinput
 
 TRIBES = [ "barbarians", "empire" ]
 WORLDS = [ "blackland", "desert", "greenland", "winterland" ]  
-CAMPAING_MISSIONS = ["t01", "t02", "emp01" ]
+CAMPAING_MISSIONS = ["t01", "t02", "emp01", "emp02" ]
 
 def do_rename( src, dst ):
     try:

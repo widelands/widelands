@@ -39,6 +39,7 @@ private:
 	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> mission_2;
 	UI::Textarea                                         title2;
 	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> empire_1;
+	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> empire_2;
 	UI::IDButton<Fullscreen_Menu_TutorialSelectMap, int> back;
 };
 

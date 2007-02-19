@@ -1,0 +1,1029 @@
+# event-file of second Empire Tutorial - created by Peter Schwanemann, 2007
+
+[global]
+packet_version=1
+
+[Diary page 5]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is allready leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
+"</p></rt>""
+window_title=_A new islands
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Show forests]
+type=unhide_area
+state=init
+version=2
+point=17 10
+area=6
+player=1
+
+[Goto forests]
+type=move_view
+state=init
+version=1
+point_x=17
+point_y=10
+
+[Diary page 5.1]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"As Saledus and I walked through these wonderful forests in the north, we felt that our new future has just began. This land is so peaceful, nice and beautiful, I could stay here until the end of my life.<br>But until that day, a lot of years will hopefully go by. For now, we should concentrate on the present and build a few lumberjacks and a sawmill, to produce some good build-materials.<br>But we shouldn't forget, to save this natural bounty. These forests should last forever, so we really should build up a forester, too.<br><br>"
+_"* Build up three lumberjacks, a forester and a sawmill."
+"</p></rt>""
+window_title=_The green forests
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Unhide Objective 1 - Woodeconomy]
+type=unhide_objective
+state=init
+version=1
+objective=Build Woodeconomy
+dounhide=true
+
+[Set Woodeconomy-trigger]
+# Will be run, when triggers 'Lumberjack complete',
+# 'Forester complete' and 'Sawmill complete' are set.
+type=set_null_trigger
+state=init
+version=1
+trigger=Woodeconomy complete
+setto=true
+
+[Goto stones]
+type=move_view
+state=init
+version=1
+point_x=14
+point_y=31
+
+[Diary page 5.2]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Later, I walked down to the rocks in the south and watched out for a place, where we can build up a quarry, to get some hard stone for our bigger buildings.<br>And again, I felt like in paradiese, when noticed, that some marble-like stones where among those rocks. Seems as if we can start a life in luxury in a not so far future.<br><br>"
+_"* Build a quarry to the south of your headquarters."
+"</p></rt>""
+window_title=_The rocks
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Unhide Objective 2 - Quarry]
+type=unhide_objective
+state=init
+version=1
+objective=Build Quarry
+dounhide=true
+
+[Disable Building 01]
+type=allow_building
+state=init
+version=1
+player=1
+building=arena
+allow=false
+
+[Disable Building 02]
+type=allow_building
+state=init
+version=1
+player=1
+building=armoursmith
+allow=false
+
+[Disable Building 03]
+type=allow_building
+state=init
+version=1
+player=1
+building=bakery
+allow=false
+
+[Disable Building 04]
+type=allow_building
+state=init
+version=1
+player=1
+building=barracks
+allow=false
+
+[Disable Building 05]
+type=allow_building
+state=init
+version=1
+player=1
+building=barrier
+allow=false
+
+[Disable Building 06]
+type=allow_building
+state=init
+version=1
+player=1
+building=brewery
+allow=false
+
+[Disable Building 07]
+type=allow_building
+state=init
+version=1
+player=1
+building=burner
+allow=false
+
+[Disable Building 08]
+type=allow_building
+state=init
+version=1
+player=1
+building=carpenter
+allow=false
+
+[Disable Building 09]
+type=allow_building
+state=init
+version=1
+player=1
+building=castle
+allow=false
+
+[Disable Building 10]
+type=allow_building
+state=init
+version=1
+player=1
+building=coalmine
+allow=false
+
+[Disable Building 11]
+type=allow_building
+state=init
+version=1
+player=1
+building=colosseum
+allow=false
+
+[Disable Building 12]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_coalmine
+allow=false
+
+[Disable Building 13]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_goldmine
+allow=false
+
+[Disable Building 14]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_oremine
+allow=false
+
+[Disable Building 15]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_marblemine
+allow=false
+
+[Disable Building 16]
+type=allow_building
+state=init
+version=1
+player=1
+building=farm
+allow=false
+
+[Disable Building 17]
+type=allow_building
+state=init
+version=1
+player=1
+building=fisher
+allow=false
+
+[Disable Building 19]
+type=allow_building
+state=init
+version=1
+player=1
+building=fortress
+allow=false
+
+[Disable Building 20]
+type=allow_building
+state=init
+version=1
+player=1
+building=goldmine
+allow=false
+
+[Disable Building 21]
+type=allow_building
+state=init
+version=1
+player=1
+building=hunter
+allow=false
+
+[Disable Building 22]
+type=allow_building
+state=init
+version=1
+player=1
+building=inn
+allow=false
+
+[Disable Building 24]
+type=allow_building
+state=init
+version=1
+player=1
+building=marblemine
+allow=false
+
+[Disable Building 25]
+type=allow_building
+state=init
+version=1
+player=1
+building=mill
+allow=false
+
+[Disable Building 26]
+type=allow_building
+state=init
+version=1
+player=1
+building=oremine
+allow=false
+
+[Disable Building 27]
+type=allow_building
+state=init
+version=1
+player=1
+building=outpost
+allow=false
+
+[Disable Building 28]
+type=allow_building
+state=init
+version=1
+player=1
+building=piggery
+allow=false
+
+[Disable Building 31]
+type=allow_building
+state=init
+version=1
+player=1
+building=sentry
+allow=false
+
+[Disable Building 32]
+type=allow_building
+state=init
+version=1
+player=1
+building=sheepfarm
+allow=false
+
+[Disable Building 33]
+type=allow_building
+state=init
+version=1
+player=1
+building=smelting_works
+allow=false
+
+[Disable Building 34]
+type=allow_building
+state=init
+version=1
+player=1
+building=stonemason
+allow=false
+
+[Disable Building 35]
+type=allow_building
+state=init
+version=1
+player=1
+building=tavern
+allow=false
+
+[Disable Building 36]
+type=allow_building
+state=init
+version=1
+player=1
+building=tower
+allow=false
+
+[Disable Building 37]
+type=allow_building
+state=init
+version=1
+player=1
+building=trainingscamp
+allow=false
+
+[Disable Building 38]
+type=allow_building
+state=init
+version=1
+player=1
+building=vintagery
+allow=false
+
+[Disable Building 39]
+type=allow_building
+state=init
+version=1
+player=1
+building=warehouse
+allow=false
+
+[Disable Building 40]
+type=allow_building
+state=init
+version=1
+player=1
+building=weaponsmith
+allow=false
+
+[Disable Building 41]
+type=allow_building
+state=init
+version=1
+player=1
+building=weaving-mill
+allow=false
+
+[Disable Building 42]
+type=allow_building
+state=init
+version=1
+player=1
+building=well
+allow=false
+
+[Disable Building 43]
+type=allow_building
+state=init
+version=1
+player=1
+building=vineyard
+allow=false
+
+[Diary page 6]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Wonderful, today our wood-economy was completely build up. Now we can be sure, to have enough wood for our future building-projects."
+"</p></rt>""
+window_title=_Wood for the colony
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Diary page 7]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Great, today the building of the quarry was completed. Now we get enough stone for all our future building-projects."
+"</p></rt>""
+window_title=_Stone for the colony
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Show Shipparts]
+type=unhide_area
+state=init
+version=2
+point=15 46
+area=5
+player=1
+
+[Goto Shipparts]
+type=move_view
+state=init
+version=1
+point_x=15
+point_y=46
+
+[Saledus 1]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
+_"Saledus looks unhappy"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Hey Lutius,<br>don't want to start being panic, but I found something, which presses down my feelings and spreads waves of fear in my heart.<br>You might wonder about the cause. Well, I will tell you:<br>As I walked down to the southern strands of this island, I found some parts of another ship. I don't know, wether these parts are everything left of that ship, but in any way these parts don't seem to be old. Perhaps the owners of that ship came in the same storm, which brought us to Malac' Mor and brought them on this island.<br>However, I beg you, to be cautious and to build some barracks or sentrys around our colony.<br><br>"
+_"* Build some barracks and sentrys around the colony."
+"</p></rt>""
+window_title=_Dangerous shipparts
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Unhide Objective 3 - military-buildings]
+type=unhide_objective
+state=init
+version=1
+objective=Build military buildings
+dounhide=true
+
+[Enable Barracks]
+type=allow_building
+state=init
+version=1
+player=1
+building=barracks
+allow=true
+
+[Enable Sentry]
+type=allow_building
+state=init
+version=1
+player=1
+building=sentry
+allow=true
+
+[Set military buildings trigger]
+# Will be run, when trigger 'Barracks complete',
+# or 'Sentry complete' is set.
+type=set_null_trigger
+state=init
+version=1
+trigger=Military buildings complete
+setto=true
+
+[Show Marblemountains]
+type=unhide_area
+state=init
+version=2
+point=35 19
+area=5
+player=1
+
+[Goto Marblemountains]
+type=move_view
+state=init
+version=1
+point_x=35
+point_y=19
+
+[Saledus 2]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
+_"Saledus smiles"
+"</p><p line-spacing=3 font-size=12><br>"
+_"As I walked to the east, I found a bigger mountain. I am not absolutely sure, a geologist should look if I am right, but I believe, we could mine marble from some places on the mountain. It would be absolutely great. Perhaps you were right, when you saied, that this island is like paradise.<br>Let's expand to that mountain and start mining marble.<br><br>"
+_"* Expand to the east, to start mining marble on the mountain."
+"</p></rt>""
+window_title=_Marble on the mountain
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Unhide Objective 4 - marblemine]
+type=unhide_objective
+state=init
+version=1
+objective=Build Marblemine
+dounhide=true
+
+[Enable Marblemine]
+type=allow_building
+state=init
+version=1
+player=1
+building=marblemine
+allow=true
+
+[Enable Deep Marblemine]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_marblemine
+allow=true
+
+[Show Ironmountains]
+type=unhide_area
+state=init
+version=2
+point=38 37
+area=6
+player=1
+
+[Show Coalmountains]
+type=unhide_area
+state=init
+version=2
+point=49 22
+area=6
+player=1
+
+[Goto Mountains middle]
+type=move_view
+state=init
+version=1
+point_x=42
+point_y=27
+
+[Saledus 3]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Saledus.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8F9131>"
+_"Saledus smiles"
+"</p><p line-spacing=3 font-size=12><br>"
+_"By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems, as if one has a bigger amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start, to build mines, burners, smelting works, carpenter's shops, and smithworks. But for all these bigger buildings we need better and more beautiful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
+_"* Build up a complete Mining and production infrastructure.<br>* Build up a Stonemason."
+"</p></rt>""
+window_title=_Further mountains
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Unhide Objective 5 - mining]
+type=unhide_objective
+state=init
+version=1
+objective=Build Mining infrastructure
+dounhide=true
+
+[Enable Coalmine]
+type=allow_building
+state=init
+version=1
+player=1
+building=coalmine
+allow=true
+
+[Enable Deep Coalmine]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_coalmine
+allow=true
+
+[Enable Oremine]
+type=allow_building
+state=init
+version=1
+player=1
+building=oremine
+allow=true
+
+[Enable Deep Oremine]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_oremine
+allow=true
+
+[Enable Stonemason]
+type=allow_building
+state=init
+version=1
+player=1
+building=stonemason
+allow=true
+
+[Enable Carpenter]
+type=allow_building
+state=init
+version=1
+player=1
+building=carpenter
+allow=true
+
+[Enable Armoursmith]
+type=allow_building
+state=init
+version=1
+player=1
+building=armoursmith
+allow=true
+
+[Enable Weaponsmith]
+type=allow_building
+state=init
+version=1
+player=1
+building=weaponsmith
+allow=true
+
+[Enable Smelter]
+type=allow_building
+state=init
+version=1
+player=1
+building=smelting_works
+allow=true
+
+[Enable Burner]
+type=allow_building
+state=init
+version=1
+player=1
+building=burner
+allow=true
+
+[Set Mining infrastructure-trigger]
+# Will be run, when all needed buildings are build up.
+type=set_null_trigger
+state=init
+version=1
+trigger=Mining infrastructure complete
+setto=true
+
+[Amalea 1]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
+_"Amalea comes in..."
+"</p><p line-spacing=3 font-size=12><br>"
+_"Hi Lutius,<br>I hope you forgive my critic, but it seems to me, as if you forgot something. It's nice and of course a good idea, to build up mines, which will give us a more luxury life, but the people, working in the mines are unhappy with the current situation, they have got a hard work and no time for makeing their own food.<br>What do you think of helping them out? Let's build up a tavern, which can produce some nice food for our miners and a brewery and a vineyard, which can produce some good drinks.<br>Of course this will make us need some people who create a bigger amount of resources for this food, so I would suggest, to build up a fisher, a farm, a mill and a backer. A hunter, a piggery, a vineyard and a well would also be needed.<br>Don't understand me wrong, but the miners need good food and drinks, to have enough power for their hard work."
+"</p></rt>""
+window_title=_Food for the miners
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Enable Well]
+type=allow_building
+state=init
+version=1
+player=1
+building=well
+allow=true
+
+[Enable Farm]
+type=allow_building
+state=init
+version=1
+player=1
+building=farm
+allow=true
+
+[Enable Brewery]
+type=allow_building
+state=init
+version=1
+player=1
+building=brewery
+allow=true
+
+[Enable Vineyard]
+type=allow_building
+state=init
+version=1
+player=1
+building=vineyard
+allow=true
+
+[Enable Vintagery]
+type=allow_building
+state=init
+version=1
+player=1
+building=vintagery
+allow=true
+
+[Enable Mill]
+type=allow_building
+state=init
+version=1
+player=1
+building=mill
+allow=true
+
+[Enable Bakery]
+type=allow_building
+state=init
+version=1
+player=1
+building=bakery
+allow=true
+
+[Enable Hunter]
+type=allow_building
+state=init
+version=1
+player=1
+building=hunter
+allow=true
+
+[Enable Piggery]
+type=allow_building
+state=init
+version=1
+player=1
+building=piggery
+allow=true
+
+[Enable Tavern]
+type=allow_building
+state=init
+version=1
+player=1
+building=tavern
+allow=true
+
+[Enable Inn]
+type=allow_building
+state=init
+version=1
+player=1
+building=inn
+allow=true
+
+[Enable Fisher]
+type=allow_building
+state=init
+version=1
+player=1
+building=fisher
+allow=true
+
+[Show Barbarians 1]
+type=unhide_area
+state=init
+version=2
+point=60 61
+area=6
+player=1
+
+[Show Barbarians 2]
+type=unhide_area
+state=init
+version=2
+point=60 48
+area=6
+player=1
+
+[Goto Barbarians]
+type=move_view
+state=init
+version=1
+point_x=59
+point_y=55
+
+[Diary page 8]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"By the Gods!<br>This is absolutely ugly. It seems, as if we stand close to a test AND it seems as if Saledus was right with his fear concerning the shipparts.<br>Today I walked down to the eastern strands, when I suddenly got a shock. There is one of those hated, evil barbarian tribes, with I had so many problems before.<br>First I was a bit naive and hoped, that they are peaceful, but as soon as one of them saw me, they run towards me and started attacking me with their throwing-spears. Thanks to the Gods, that I was able to hide myself and could silently go back to our colony.<br>Anyway, we MUST build up bigger military buildings, as soon as possible.<br><br>"
+_"* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
+"</p></rt>""
+window_title=_The Barbarians
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Unhide Objective 6 - bigger military buildings]
+type=unhide_objective
+state=init
+version=1
+objective=Build bigger military buildings
+dounhide=true
+
+[Enable Outpost]
+type=allow_building
+state=init
+version=1
+player=1
+building=outpost
+allow=true
+
+[Enable Barrier]
+type=allow_building
+state=init
+version=1
+player=1
+building=barrier
+allow=true
+
+[Enable Tower]
+type=allow_building
+state=init
+version=1
+player=1
+building=tower
+allow=true
+
+[Set Bigger military building-trigger]
+# Will be run, when a bigger military building is build up.
+type=set_null_trigger
+state=init
+version=1
+trigger=Bigger military building complete
+setto=true
+
+[Diary page 9]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"That's good. The first bigger military building is built up and the mining infrastructure is getting better and better. Now we should think of preparing us for a bigger fight.<br>As soon as we have enough soldiers, we should attack and remove the barbarians. And than, when this island is ours again, I will build up a big fortress at the place, the barbarian headquarters stand now, to avoid new settlements of these barbarian bastards.<br><br>"
+_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+"</p></rt>""
+window_title=_Command for Attack
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[Enable Fortress]
+type=allow_building
+state=init
+version=1
+player=1
+building=fortress
+allow=true
+
+[Unhide Objective 7 - Attack]
+type=unhide_objective
+state=init
+version=1
+objective=Remove the barbarians
+dounhide=true
+
+[Diary page 10]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Today makes me proud. We fought for our new home and rose a victory.<br>Still a few barbarians are hiding on our island, but I am sure, that we will find them, soon. Every barbarian, who doesn't attack us, will be put in a boat with the other peaceful ones and will be sent back to their country.<br><br>----------------------VICTORY!-----------------------"
+"</p></rt>""
+window_title=_Victory
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+[7 days later]
+type=message_box
+state=init
+version=1
+text=_""<rt><p line-spacing=3 font-size=12>"
+_"7 days later..."
+"</p></rt>""
+window_title=_As time is running by
+is_modal=true
+number_of_buttons=1
+width=200
+height=150
+posx=-1
+posy=-1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Diary page 11]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Lutius.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>"
+_"Diary of Lutius"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Today a pigeon landed on our island, which brought us a message, filling me up with dark thoughts, fears and horror.<br>The message was adressed to me, begging me, to come back to Fremil.<br>Further it says, that the Empire is at war with the Barbarians. They were attacked from the north, from the tribe I wanted to attack before going in exile.<br>For me, it is clear what I have to do...<br><br>You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
+"</p></rt>""
+window_title=_A Message
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
+#Optional (not needed for winning)
+[Amalea 2]
+type=message_box
+state=init
+version=1
+text=_""<rt image=map:Amalea.png image-align=left><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=AF7511>"
+_"Amalea smiles"
+"</p><p line-spacing=3 font-size=12><br>"
+_"Hey my friend,<br>just visited our new tavern 'At the palms'. The beer, they have got, is really tasty, you really should take a drink there, too.<br>Nice to see, that we get a warmer and more familiar environment on our island. <br>Thank you Lutius."
+"</p></rt>""
+window_title=_"A drink at 'At the palms'"
+is_modal=true
+number_of_buttons=1
+width=450
+height=350
+posx=-1
+posy=-1
+button_00_name=OK
+button_00_has_trigger=false
+
