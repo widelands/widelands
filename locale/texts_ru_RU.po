@@ -1,20 +1,20 @@
-# translation of texts_ru_RU.po to russian
+# translation of texts_ru_RU.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
 # 
+# Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: texts_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-06 14:30+0600\n"
-"Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
-"Language-Team: russian <ru@li.org>\n"
+"PO-Revision-Date: 2007-02-18 00:21+0500\n"
+"Last-Translator: Alexander <bikmeyev@freemail.ru>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../txts/COPYING:1
 msgid "License"
@@ -25,9 +25,8 @@ msgid "GNU general public licence"
 msgstr "GNU Общая публичная лицензия"
 
 #: ../txts/COPYING:6
-#, fuzzy
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr "Версия 2, Июнь 1991"
+msgstr "Версия 2, Июнь 1991<br></p></rt>"
 
 #: ../txts/COPYING:8
 msgid ""
@@ -708,7 +707,6 @@ msgid "an open source strategy game"
 msgstr "стратегическая игра с открытым кодом"
 
 #: ../txts/README:13
-#, fuzzy
 msgid ""
 "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
 "BlueByte.<br>In this game, you start out on a small piece of land with "
@@ -720,7 +718,7 @@ msgid ""
 msgstr ""
 "Widelands  это стратегия подобная Settlers II от BlueByte.<br>Игра "
 "начинается на маленьком участке суши, на котором нет ничего кроме некоторых "
-"полезных ресурсов. Используя их, вы можете строить свою империю с тысячями "
+"полезных ресурсов. Используя их, вы можете построить свою империю с тысячами "
 "обитателей. Для этого вы должны создать экономическую инфраструктуру, "
 "разведывать соседние территории и сражаться с врагами, стремящимися также "
 "как и вы управлять миром."
@@ -779,7 +777,7 @@ msgstr "F               Во весь экран"
 
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
-msgstr ""
+msgstr "Начало       Центрирует главный вид карты на начальном положении"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
@@ -790,9 +788,8 @@ msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "PAGEDOWN    Уменьшить скорость игры"
 
 #: ../txts/README:58
-#, fuzzy
 msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr "F5           Открыть всю карту "
+msgstr "F5           Открыть всю карту (только в отладочных сборках)"
 
 #: ../txts/README:60
 msgid "F10         Quit the game immediately"
@@ -804,13 +801,16 @@ msgstr "F11          Снять скриншот"
 
 #: ../txts/README:67
 msgid "Online Help"
-msgstr ""
+msgstr "Помощь On-Line"
 
 #: ../txts/README:71
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Если вам необходима документация или справка о WideLands или редакторе карт "
+"WideLands, то посетите нашу домашнюю страничку. Вы можете найти всю "
+"последнюю информацию в сети по адресу"
 
 #: ../txts/README:79
 msgid "Reporting Bugs"
@@ -831,13 +831,12 @@ msgid "Please provide enough background information. Tell us:"
 msgstr "Пожалуйста сообщите дополнительную информацию. Перечислите:"
 
 #: ../txts/README:91
-#, fuzzy
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
-"- используемую вами версию Widelands  (т.е. номер build или "
-"вы<br>самостоятельно скомпилировали его из CVS)"
+"- используемую вами версию Widelands  (т.е. номер сборки (build) или что вы "
+"<br> самостоятельно скомпилировали его из SVN)"
 
 #: ../txts/README:93
 msgid "- how to reproduce the bug"
@@ -920,7 +919,6 @@ msgstr ""
 "отлавливать баги."
 
 #: ../txts/developers:1
-#, fuzzy
 msgid "Development"
 msgstr "Разработка"
 

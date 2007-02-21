@@ -1,23 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of maps_ru_RU.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Alexander <bikmeyev@freemail.ru>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: maps_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-02-20 00:48+0500\n"
+"Last-Translator: Alexander <bikmeyev@freemail.ru>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
-msgstr ""
+msgstr "Мат"
 
 #: ../maps/Checkmate.wmf/elemental:11
 msgid ""
@@ -25,10 +26,13 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
+"Является ли это одним из сюрпризов природы или порождение сумасшедшего (и "
+"жаждущего игр) бога, но это таинственное поле битвы ждет двух соперников для "
+"нового противостояния."
 
 #: ../maps/Dry Riverbed.wmf/elemental:9
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Пересохшее русло"
 
 #: ../maps/Dry Riverbed.wmf/elemental:11
 msgid ""
@@ -36,30 +40,37 @@ msgid ""
 "wonder, that here is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last water."
 msgstr ""
+"Уже давным давно эти земли не видели дождя. Не удивительно, что в этом "
+"высохшем русле не осталось воды. Все знают: скоро здесь разразится война. "
+"Война за последнюю воду."
 
 #: ../maps/Elven Forests.wmf/elemental:9
 msgid "Elven Forests"
-msgstr ""
+msgstr "Леса эльфов"
 
 #: ../maps/Elven Forests.wmf/elemental:11
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many a tribe into "
 "the attempt of taking them for itself."
 msgstr ""
+"Освежающая красота этих изумрудных земель привлекает многие племена, "
+"желающих прибрать их себе."
 
 #: ../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
-msgstr ""
+msgstr "Финские озера"
 
 #: ../maps/Finlakes.wmf/elemental:11
 msgid ""
 "These are the beautiful finish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"Это прекрасны финские земли, полные озер, рек, древних лесов и гор. Сможешь "
+"ли ты найти путь через эти земли."
 
 #: ../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
-msgstr ""
+msgstr "Игры в огне"
 
 #: ../maps/Firegames.wmf/elemental:11
 msgid ""
@@ -68,20 +79,25 @@ msgid ""
 "if you are alone, but noone knows, what might happen if you meet an opponent "
 "tribe?"
 msgstr ""
+"Это испытание Богов, дьявола или кого-то другого, что вы и ваше племя "
+"оказались на этом острове среди огня и лавы? Пока что кажется, что вы одни, "
+"но кто знает что может случится, если вы встретите племя соперника?"
 
 #: ../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
-msgstr ""
+msgstr "Четыре замка"
 
 #: ../maps/Four Castles.wmf/elemental:11
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Хорошо защищенные в своих могучих крепостях, четыре жаждущих власти "
+"полководца разработали свои планы захвата этих земель..."
 
 #: ../maps/Glacier Lake.wmf/elemental:9
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Ледниковое озеро"
 
 #: ../maps/Glacier Lake.wmf/elemental:11
 msgid ""
@@ -90,18 +106,22 @@ msgid ""
 "a few month ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only place enough for one tribe."
 msgstr ""
+"Уже давно ваше племя пребывает у этого прекрасного и одинокого ледникового "
+"озера. Никто вас не беспокоит, и ресурсов было достаточно для вашего "
+"племени, но несколько месяцев назад в горы пришло и обосновалось другое "
+"племя. Вы знаете, что здесь есть место только для одного племени."
 
 #: ../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Золотой полуостров"
 
 #: ../maps/Golden Peninsula.wmf/elemental:11
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr ""
+msgstr "Две империи вступили в борьбу за сокровища легендарного полуострова..."
 
 #: ../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Озеро Спокойствия"
 
 #: ../maps/Lake of tranquility.wmf/elemental:11
 msgid ""
@@ -109,10 +129,13 @@ msgid ""
 "beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
 "hostile tribes arrive at its shores..."
 msgstr ""
+"Это озеро, расположенное далеко в древних лесах, давно славилось своей "
+"красотой и спокойствием. Но его покой теперь нарушен, поскольку два "
+"враждебных племени расположились на его берегах..."
 
 #: ../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr ""
+msgstr "Зеленое Плато"
 
 #: ../maps/Plateau.wmf/elemental:11
 msgid ""
@@ -121,14 +144,18 @@ msgid ""
 "hard to get, but easy to lose, so if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Вы находитесь на острове, окруженном могучими горами, хранящими прекрасные и "
+"многочисленные сокровища  в середине - Зеленое Плато, которое трудно "
+"заполучить, но легко потерять, так что если вы нацелились на него, "
+"опасайтесь других кланов."
 
 #: ../maps/Riverlands.wmf/elemental:9
 msgid "Riverlands"
-msgstr ""
+msgstr "Речная страна"
 
 #: ../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "Оазис Треугольник"
 
 #: ../maps/The Oasis Triangle.wmf/elemental:11
 msgid ""
@@ -136,18 +163,21 @@ msgid ""
 "which noone found out, yet. Perhaps you will be the one, but be aware of the "
 "others, who are searching, too!"
 msgstr ""
+"Есть что-то мистическое вроде серого облака вокруг этих трех Оазисов, "
+"которые еще никто не нашел. Возможно вы будете единственным, но опасайтесь "
+"других, которые также ищут его!"
 
 #: ../maps/The big lake.wmf/elemental:9
 msgid "The big lake"
-msgstr ""
+msgstr "Большое озеро"
 
 #: ../maps/The long way.wmf/elemental:9
 msgid "The long way"
-msgstr ""
+msgstr "Длинная дорога"
 
 #: ../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
-msgstr ""
+msgstr "Война Долин"
 
 #: ../maps/War of the Valleys.wmf/elemental:11
 msgid ""
@@ -155,3 +185,6 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"Сказано, что даже Луна и Солнце должны найти свой путь между пиками этих "
+"гор. ПОДСКАЗКА: Монолиты показывают места залегания руды. Не пытайтесь "
+"послать геологов куда-то еще."
