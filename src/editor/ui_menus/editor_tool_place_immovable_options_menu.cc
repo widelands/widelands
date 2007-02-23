@@ -82,7 +82,7 @@ m_pit     (pit)
 
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart, (immovables_in_row)*(height+1+space)+ystart+yend);
 	const uint tab_icon =
-		g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png");
+		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
    int ypos=ystart;
    int xpos=xstart;

@@ -72,7 +72,7 @@ m_pit                   (pit)
 // 		 bobs_in_row * (height + 1 + space) + ystart + yend);
 
 	const uint tab_icon =
-		g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png");
+		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
    int ypos=ystart;
    int xpos=xstart;
 	uint cur_x = bobs_in_row;
