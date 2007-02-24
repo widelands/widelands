@@ -1,23 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+# French translation of PACKAGE.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-02-24 18:30+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
-msgstr ""
+msgstr "Échec et mat"
 
 #: ../maps/Checkmate.wmf/elemental:11
 msgid ""
@@ -25,10 +22,13 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
+"C'est peut-être un des plus étrange hasard de la nature, ou la création d'un "
+"dieu fou (et amateur de jeu), cet étrange champ de bataille attend deux."
+"adversaires pour une autre confrontation."
 
 #: ../maps/Dry Riverbed.wmf/elemental:9
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Rivière asséchée"
 
 #: ../maps/Dry Riverbed.wmf/elemental:11
 msgid ""
@@ -36,30 +36,38 @@ msgid ""
 "wonder, that here is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last water."
 msgstr ""
+"Il y a fort longtemps qu'une goutte de pluie n'a pas touché ce sol. Pas de "
+"surprise, il ne reste pas beaucoup d'eau dans cette rivière asséchée. Tout "
+"le monde le sait: bientôt il y aura une guerre. Une guerre pour l'eau."
 
 #: ../maps/Elven Forests.wmf/elemental:9
 msgid "Elven Forests"
-msgstr ""
+msgstr "Forêt des Elfes"
 
 #: ../maps/Elven Forests.wmf/elemental:11
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many a tribe into "
 "the attempt of taking them for itself."
 msgstr ""
+"La beauté à couper le souffle de ces terres d'émeraude a incité plus d'une "
+"tribu à se les approprier."
 
 #: ../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
-msgstr ""
+msgstr "Lacs de la Fin"
 
 #: ../maps/Finlakes.wmf/elemental:11
 msgid ""
 "These are the beautiful finish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"Voici les magnifiques terres de la fin, composées de lacs, de rivières de "
+"forêts et de montagnes. C'est à vous de trouver un chemin à travers ces "
+"terres."
 
 #: ../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
-msgstr ""
+msgstr "Jeux de Feu"
 
 #: ../maps/Firegames.wmf/elemental:11
 msgid ""
@@ -68,20 +76,26 @@ msgid ""
 "if you are alone, but noone knows, what might happen if you meet an opponent "
 "tribe?"
 msgstr ""
+"Est-ce un test des Dieux ou un plan diabolique de quelqu'un d'autre, que de "
+"vous réveiller avec votre tribu sur cette île parmi le feu et la lave ? "
+"Jusqu'à présent il semblerait que vous soyez seuls, mais qui sait, que se "
+"passerait-il si vous rencontriez une tribu ennemie ?"
 
 #: ../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
-msgstr ""
+msgstr "Quatre Châteaux"
 
 #: ../maps/Four Castles.wmf/elemental:11
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Bien protégés dans leur puissantes forteresses, quatre seigneurs de guerre "
+"affamés de pouvoir achèvent leurs plans de domination de ces terres..."
 
 #: ../maps/Glacier Lake.wmf/elemental:9
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Lac du Glacier"
 
 #: ../maps/Glacier Lake.wmf/elemental:11
 msgid ""
@@ -90,18 +104,24 @@ msgid ""
 "a few month ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only place enough for one tribe."
 msgstr ""
+"Il y a longtemps que votre tribu habite sur ce solitaire et beau glacier. "
+"Personne ne vous a dérangé et les ressources étaient suffisantes pour toute "
+"votre tribu, mais il y a quelques mois une autre tribu est arrivée de par "
+"delà les montagnes et s'est installée. Et vous êtes sûr qu'il n'y a de de la "
+"place que pour une seule tribu."
 
 #: ../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Péninsule dorée"
 
 #: ../maps/Golden Peninsula.wmf/elemental:11
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
+"Deux empires s'affrontent pour les trésors d'une péninsule légendaire..."
 
 #: ../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Lac de la Tranquilité"
 
 #: ../maps/Lake of tranquility.wmf/elemental:11
 msgid ""
@@ -109,10 +129,13 @@ msgid ""
 "beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
 "hostile tribes arrive at its shores..."
 msgstr ""
+"Ce lac, au cœur d'une des plus anciennes forêts, a longtemps été connu pour "
+"sa beauté et sa paix idyllique. A présent, ce sanctuaire a été violé, car "
+"deux tribus hostiles approchent de ses rives..."
 
 #: ../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr ""
+msgstr "Le Plateau Vert"
 
 #: ../maps/Plateau.wmf/elemental:11
 msgid ""
@@ -121,14 +144,18 @@ msgid ""
 "hard to get, but easy to lose, so if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Vous vous trouvez sur une île, couronnée pas de puissantes montagnes qui "
+"gardent en leur cœur un merveilleux et puissant trésor - Le Plateau Vert, "
+"dur à avoir mais facile à perdre. Donc si vous le voulez, méfiez vous des "
+"autres clans."
 
 #: ../maps/Riverlands.wmf/elemental:9
 msgid "Riverlands"
-msgstr ""
+msgstr "Les Pays des Rivières"
 
 #: ../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "Le Triangle de l'Oasis"
 
 #: ../maps/The Oasis Triangle.wmf/elemental:11
 msgid ""
@@ -136,18 +163,21 @@ msgid ""
 "which noone found out, yet. Perhaps you will be the one, but be aware of the "
 "others, who are searching, too!"
 msgstr ""
+"Il y a quelque chose de mystique, comme une atmosphère grise, dans ces trois "
+"oasis, que personne n'a encore décelé. Peut-être serez vous celui-là, mais "
+"attention aux autres, qui cherchent également !"
 
 #: ../maps/The big lake.wmf/elemental:9
 msgid "The big lake"
-msgstr ""
+msgstr "Le grand lac"
 
 #: ../maps/The long way.wmf/elemental:9
 msgid "The long way"
-msgstr ""
+msgstr "Le long chemin"
 
 #: ../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
-msgstr ""
+msgstr "La Guerre des Vallées"
 
 #: ../maps/War of the Valleys.wmf/elemental:11
 msgid ""
@@ -155,3 +185,6 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"On dit que même le soleil et la lune doivent trouver leur chemin entre les "
+"pics de ces montagnes. ASTUCE: Les monolithes indiquent des gisements de "
+"minerai. Ne vous embêtez pas à envoyer des géologues partout."

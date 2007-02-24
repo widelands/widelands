@@ -25,16 +25,16 @@ marble=1
 
 [idle]
 pics=well_i_??.png  # ???
-hot_spot_x=50
-hot_spot_y=50
+hot_spot_x=55
+hot_spot_y=60
 
 [working]
 pics=well_w_??.png  # ???
-hot_spot_x=50
-hot_spot_y=50
+hot_spot_x=55
+hot_spot_y=60
 
 [build]
 pics=well_i_??.png  # ???
-hot_spot_x=50
-hot_spot_y=50
+hot_spot_x=55
+hot_spot_y=60
 

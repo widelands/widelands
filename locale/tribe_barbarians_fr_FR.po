@@ -1,21 +1,16 @@
 # French translation of WIDELANDS.
-# Copyright (C) 2006 THE WIDELANDS'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the WIDELANDS package.
-# Emmanuel Andry <eandry@free.fr>, 2006.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-12-10 22:14+0100\n"
+"PO-Revision-Date: 2007-02-23 23:45+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
 
 #: ../tribes/barbarians/conf:24
 msgid "The Widelands Development Team"
@@ -130,7 +125,6 @@ msgid "Gold Mine"
 msgstr "Mine d'or"
 
 #: ../tribes/barbarians/buildings/granitemine/conf:2
-#, fuzzy
 msgid "Granite Mine"
 msgstr "Mine de Granit"
 
@@ -161,7 +155,6 @@ msgid "Lumberjack"
 msgstr "Bûcheron"
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
-#, fuzzy
 msgid "Metalworks"
 msgstr "Ferronerie"
 
@@ -237,10 +230,9 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
-msgstr "Plaque de Four"
+msgstr "Plaque de Cuisson"
 
 #: ../tribes/barbarians/wares/bakingtray/conf:3
-#, fuzzy
 msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
 "produced in the metalworks like all tools."
@@ -352,7 +344,6 @@ msgid "Fire Tongs"
 msgstr "Pinces"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:3
-#, fuzzy
 msgid ""
 "The fire tongs are the tool of the smelter, working in the Smelting works. "
 "Produced in the metalworks."
@@ -395,7 +386,6 @@ msgid "Gold"
 msgstr "Or"
 
 #: ../tribes/barbarians/wares/gold/conf:3
-#, fuzzy
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
@@ -450,7 +440,6 @@ msgid "Hunting Spear"
 msgstr "Lance de Chasseur"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:3
-#, fuzzy
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metalworks."
@@ -520,7 +509,6 @@ msgid "Pick"
 msgstr "Pioche"
 
 #: ../tribes/barbarians/wares/pick/conf:3
-#, fuzzy
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metalworks."
@@ -562,7 +550,6 @@ msgid "Scythe"
 msgstr "Faux"
 
 #: ../tribes/barbarians/wares/scythe/conf:3
-#, fuzzy
 msgid ""
 "The Scythe is the tool of the farmers. It is produced in the metalworks."
 msgstr "La faux est l'outil des fermiers. Elle est produite à la ferronnerie."
@@ -587,7 +574,6 @@ msgid "Shovel"
 msgstr "Pelle"
 
 #: ../tribes/barbarians/wares/shovel/conf:3
-#, fuzzy
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metalworks."
@@ -602,6 +588,7 @@ msgstr "Casse-Croûte"
 #: ../tribes/barbarians/wares/snack/conf:3
 msgid "A bit bigger, for the advanced minors will need a big morsel."
 msgstr ""
+"Un peu plus gros, pour les mineurs avancés qui veulent un gros morceau."
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"

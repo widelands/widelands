@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2007-02-24 01:10+0100\n"
+"Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,40 +17,48 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/objective:7
 msgid "Build a barrack at the red point in the east of the forest."
-msgstr ""
+msgstr "Construisez une caserne sur le point rouge à l'est de la forêt."
 
 #: ../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack, at the red point at the south of your headquarters."
 msgstr ""
+"Construisez un bûcheron, sur le point rouge au sud de votre quartier "
+"général. "
 
 #: ../campaigns/emp01.wmf/objective:19
 msgid ""
 "Build two further lumberjack huts and a sawmill as soon as there is enough "
 "space for them."
 msgstr ""
+"Construisez deux cabanes de bûcheron de plus et une scierie aussitôt qu'il y "
+"aura assez de place."
 
 #: ../campaigns/emp01.wmf/objective:25
 msgid "Build a forester hut, to save the wood resources of this island."
 msgstr ""
+"Construisez une cabane de sylviculteur, afin de renouveler les ressources en "
+"bois de cette île."
 
 #: ../campaigns/emp01.wmf/objective:31
 msgid ""
 "Build a quarry in the south, to cut some stones and marble out of the rocks. "
 "These might be used for future buildings."
 msgstr ""
+"Construisez une carrière au sud, pour en extraire des pierres er du marbre. "
+"Cela pourra être utilisé pour de futures constuctions."
 
 #: ../campaigns/emp01.wmf/elemental:9
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
+msgstr "Tutoriel de l'Empire 1 - Les rives de Malac' Mor"
 
 #: ../campaigns/emp01.wmf/elemental:11
 msgid "First mission of the Empire campaign"
-msgstr ""
+msgstr "Première mission de la campagne de l'Empire"
 
 #: ../campaigns/emp01.wmf/event:11 ../campaigns/emp01.wmf/event:30
 #: ../campaigns/emp01.wmf/event:49 ../campaigns/emp01.wmf/event:647
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Journal de Lutius"
 
 #: ../campaigns/emp01.wmf/event:13
 msgid ""
@@ -76,10 +84,33 @@ msgid ""
 "the perl-gulf with my family, a few of my friends and a few of my best "
 "warriors."
 msgstr ""
+"Qu'est-il advenu de notre empire ? Je pose vraiment cette question, alors "
+"que mon roi m'a interdit de me battre contre ce monstre de tribu barbare, "
+"qui a tout d'abord agit comme un ami puis a attaqué mon armée pendant la "
+"nuit. <br>J'ai la tâche de patrouiller le long de notre frontière "
+"septentrionale, qui s'étend au nord des montagnes Galdin, dans une grande, "
+"belle et ancienne forêt, avec une armée de 150 hommes. Bientôt nous "
+"rencontrerons une tribu barbare, qui fût au départ aimable et amicale. "
+"Quelques-un de mes hommes ont même commercés avec eux et leurs enfants "
+"venaient vers nous pour admirer nos armes et uniformes. Mais pendant notre "
+"cinquième nuit dans cette région, ils nous attaqués sans raison. J'ai perdu "
+"des centaines de braves, ai été emprisonné puis finalement amené au chef. Il "
+"me cracha au visage, se moqua de moi et me dit de quitter ces terres pour "
+"toujours. Il me dit qu'il voulait pas de nouvelles terres et qu'il ne "
+"voulait pas de nos terres, mais CETTE forêt était leur terre et le restera "
+"jusqu'à ce que les fantômes aient pris le dernier homme de ce peuple !"
+"<br>Trois semaines plus tard, je suis revenu à Fremil, afin de parler à "
+"notre roi. Il était furieux contre les barbares, mais interdit toutefois "
+"toute attaque contre cette tribu. Il croyait que notre armée était trop "
+"faible pour résister à une guerre contre les barbares.<br>Je n'ai trouvé "
+"aucun moyen d'effacer ma culpabilité sans me battre contre les barbares, "
+"alors j'ai quitté Fremil en bateau pour trouver un nouveau monde et une "
+"nouvelle vie au sud. Et maintenant je navigue vers le sud avec ma famille, "
+"quelques amis et quelques-uns de mes meilleurs guerriers."
 
 #: ../campaigns/emp01.wmf/event:15
 msgid "A dark night"
-msgstr ""
+msgstr "Une nuit sombre"
 
 #: ../campaigns/emp01.wmf/event:32
 msgid ""
@@ -93,7 +124,7 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/event:34
 msgid "The rough sea"
-msgstr ""
+msgstr "Une mer agitée"
 
 #: ../campaigns/emp01.wmf/event:51
 msgid ""
@@ -104,14 +135,21 @@ msgid ""
 "palms existing in this far sandy desert. I fear, we won't find the help we "
 "need, to get our ship repaired in good time."
 msgstr ""
+"Finalement les dieux étaient avec nous. Nous avons accosté sur un rivage "
+"inconnu et trouvé un sommeil paisible sous les palmiers. Mais nous n'étions "
+"pas sauvés pour autant.<br>La vérité est que, lorsque je me suis réveillé ce "
+"matin, je n'ai rien vu d'autre que du sable autour de nous. On dirait bien "
+"que nous avons accosté sous les seuls palmiers de ce grand désert de sable. "
+"J'ai peur que nous ne trouvions l'aide dont nous avons besoin pour réparer "
+"notre bateau à temps. "
 
 #: ../campaigns/emp01.wmf/event:53
 msgid "Survivor"
-msgstr ""
+msgstr "Survivant"
 
 #: ../campaigns/emp01.wmf/event:448 ../campaigns/emp01.wmf/event:480
 msgid "Saledus speaks..."
-msgstr ""
+msgstr "Saledus parle..."
 
 #: ../campaigns/emp01.wmf/event:450
 msgid ""
@@ -128,14 +166,14 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/event:452 ../campaigns/emp01.wmf/event:484
 msgid "A visitor"
-msgstr ""
+msgstr "Un visiteur"
 
 #: ../campaigns/emp01.wmf/event:459 ../campaigns/emp01.wmf/event:491
 #: ../campaigns/emp01.wmf/event:510 ../campaigns/emp01.wmf/event:536
 #: ../campaigns/emp01.wmf/event:570 ../campaigns/emp01.wmf/event:604
 #: ../campaigns/emp01.wmf/event:638
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../campaigns/emp01.wmf/event:482
 msgid ""
@@ -144,10 +182,14 @@ msgid ""
 "we can feel a bit more safe again and can look ahead to the next things "
 "waiting to be done."
 msgstr ""
+"Sire, j'ai vu que la construction de la caserne était terminée, alors j'y ai "
+"envoyé un de mes meilleurs soldat pour surveiller le desert.<br>Bien. "
+"Maintenant nous pouvons nous sentir à nouveau un peu plus en sécurité et "
+"pouvons passer aux tâches suivantes à accomplir."
 
 #: ../campaigns/emp01.wmf/event:499 ../campaigns/emp01.wmf/event:525
 msgid "Amalea smiles..."
-msgstr ""
+msgstr "Amalea sourit..."
 
 #: ../campaigns/emp01.wmf/event:501
 msgid ""
@@ -163,7 +205,7 @@ msgstr ""
 #: ../campaigns/emp01.wmf/event:503 ../campaigns/emp01.wmf/event:529
 #: ../campaigns/emp01.wmf/event:563
 msgid "Young Amalea"
-msgstr ""
+msgstr "Jeune Amalea"
 
 #: ../campaigns/emp01.wmf/event:527
 msgid ""
@@ -179,7 +221,7 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/event:559
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea entre..."
 
 #: ../campaigns/emp01.wmf/event:561
 msgid ""
@@ -198,7 +240,7 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/event:593 ../campaigns/emp01.wmf/event:627
 msgid "Saledus smiles..."
-msgstr ""
+msgstr "Saledus sourit..."
 
 #: ../campaigns/emp01.wmf/event:595
 msgid ""
@@ -212,7 +254,7 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/event:597 ../campaigns/emp01.wmf/event:631
 msgid "A Visitor"
-msgstr ""
+msgstr "Un visiteur"
 
 #: ../campaigns/emp01.wmf/event:629
 msgid ""
@@ -236,8 +278,8 @@ msgstr ""
 
 #: ../campaigns/emp01.wmf/event:651
 msgid "Mission Complete"
-msgstr ""
+msgstr "Mission Accomplie"
 
 #: ../campaigns/emp01.wmf/event:654
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"

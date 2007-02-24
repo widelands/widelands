@@ -1,11 +1,12 @@
 # French translation of WIDELANDS.
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-21 20:01+0100\n"
-"PO-Revision-Date: 2006-12-10 21:03+0100\n"
+"PO-Revision-Date: 2007-02-24 00:16+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -51,15 +52,14 @@ msgstr "Poss�d� :"
 #: ../src/building_statistics_menu.cc:101
 #: ../src/building_statistics_menu.cc:126
 #: ../src/building_statistics_menu.cc:149
-#, fuzzy
 msgid "Snow previous"
-msgstr "Montrer les Ressources"
+msgstr "Montrer pr�c�dent"
 
 #: ../src/building_statistics_menu.cc:110
 #: ../src/building_statistics_menu.cc:135
 #: ../src/building_statistics_menu.cc:158
 msgid "Snow next"
-msgstr ""
+msgstr "Montrer suivant"
 
 #: ../src/building_statistics_menu.cc:116
 msgid "In Build: "
@@ -79,7 +79,7 @@ msgstr "Etes-vous s�r de vouloir d�truire cela ?"
 
 #: ../src/building_ui.cc:164
 msgid "?"
-msgstr ""
+msgstr "?"
 
 #: ../src/building_ui.cc:639 ../src/event_message_box.cc:48
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:54
@@ -100,9 +100,8 @@ msgid "Destroy"
 msgstr "D�truire"
 
 #: ../src/building_ui.cc:696 ../src/building_ui.cc:833
-#, fuzzy
 msgid "Show workarea"
-msgstr "Montrer les travailleurs"
+msgstr "Montrer l'espace de travail"
 
 #: ../src/building_ui.cc:707
 msgid "Debug"
@@ -110,7 +109,7 @@ msgstr "Champ de debug"
 
 #: ../src/building_ui.cc:829
 msgid "Hide workarea"
-msgstr ""
+msgstr "Cacher l'espace de travail"
 
 #: ../src/building_ui.cc:1132 ../src/building_ui.cc:1139
 msgid "Worker Listing"
@@ -229,17 +228,16 @@ msgid "Needs Ware"
 msgstr "N�cessite Ressource"
 
 #: ../src/encyclopedia_window.cc:68
-#, fuzzy
 msgid "Consumed"
-msgstr "Ferm�"
+msgstr "Consomm�"
 
 #: ../src/encyclopedia_window.cc:69
 msgid "Group"
-msgstr ""
+msgstr "Group"
 
 #: ../src/event_allow_building.cc:38
 msgid "Allow Building"
-msgstr "Autoriser la construction"
+msgstr "Autorise la construction"
 
 #: ../src/event_message_box.cc:40
 msgid "Message Box"
@@ -391,11 +389,11 @@ msgstr "Enregistrer la partie"
 #: ../src/game_main_menu_save_game.cc:231
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:341
 msgid "A File with the name "
-msgstr "Un fichier avec le nom"
+msgstr "Un fichier avec le nom "
 
 #: ../src/game_main_menu_save_game.cc:233
 msgid " already exists. Overwrite?"
-msgstr "existe d�j�. Ecraser ?"
+msgstr " existe d�j�. Ecraser ?"
 
 #: ../src/game_main_menu_save_game.cc:235
 #: ../src/game_main_menu_save_game.cc:255
@@ -426,7 +424,7 @@ msgstr "LISEZ MOI"
 #: ../src/game_options_menu.cc:66
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
 msgid "License"
-msgstr "License"
+msgstr "Licence"
 
 #: ../src/game_options_menu.cc:75
 msgid "Authors"
@@ -604,9 +602,8 @@ msgid "Next scenario"
 msgstr "Sc�nario suivant"
 
 #: ../src/militarysite.cc:79
-#, fuzzy
 msgid " conquer"
-msgstr "Conqu�rir la zone"
+msgstr " conqu�rir"
 
 #: ../src/militarysite.cc:140
 #, c-format
@@ -707,9 +704,8 @@ msgid "(not occupied)"
 msgstr "(inoccup�)"
 
 #: ../src/productionsite.cc:238
-#, fuzzy
 msgid "(stopped)"
-msgstr "(inoccup�)"
+msgstr "(arr�t�)"
 
 #: ../src/productionsite.cc:266
 msgid "UP"
@@ -1181,9 +1177,9 @@ msgid "Trigger: "
 msgstr "T�che :"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:254
-#, fuzzy, c-format
+#, c-format
 msgid "Unnamed%u"
-msgstr "Pas de nom"
+msgstr "Pas de nom %u"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:284
 msgid "Can't delete Objective, because it's trigger is in use by "
@@ -1195,7 +1191,6 @@ msgstr "Options Outils Ressources"
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:46
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:42
-#, fuzzy
 msgid "In-/Decrease Value"
 msgstr "Augmenter/Diminuer la valeur"
 
@@ -1214,9 +1209,8 @@ msgstr "S�lection du terrain"
 
 #: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:153
 #: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:202
-#, fuzzy
 msgid "Current:"
-msgstr "Courant :"
+msgstr "Actuel :"
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:74
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:54
@@ -1305,7 +1299,6 @@ msgid "Player "
 msgstr "Joueur"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:265
-#, fuzzy
 msgid ""
 "Can't remove player. It is referenced in some place. Remove all buildings, "
 "bobs, triggers and events that depend on this player and try again"
@@ -1333,9 +1326,9 @@ msgstr "Menu Outils de Taille"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:56
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:79
-#, fuzzy, c-format
+#, c-format
 msgid "Current Size: %u"
-msgstr "Taille Actuelle :  %i"
+msgstr "Taille Actuelle :  %u"
 
 #: ../src/editor/ui_menus/event_move_view_option_menu.cc:36
 msgid "Move View Event Options"
@@ -1528,19 +1521,19 @@ msgid "Noise Height Options"
 msgstr "Options Niveau de Bruit"
 
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:123
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum: %u"
-msgstr "Minimum"
+msgstr "Minimum: %u"
 
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:125
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum: %u"
-msgstr "Maximum"
+msgstr "Maximum: %u"
 
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
-#, fuzzy, c-format
+#, c-format
 msgid "Set value: %u"
-msgstr "D�finir"
+msgstr "D�finir la valeur: %u"
 
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:40
 msgid "Allow Building Event Options"
@@ -1689,21 +1682,20 @@ msgstr "Mission 1: Des Yeux dans les T�n�bres - Bases du Jeu"
 msgid ""
 "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
 msgstr ""
-"Mission 2: Un endroit que l'on appelle Chez Soi - Miner, Expansion, "
-"Productions Avanc�es"
+"Mission 2: Un endroit que l'on appelle Foyer - Miner, Expansion, Productions "
+"Avanc�es"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:65
-#, fuzzy
 msgid "Empire Tutorial Campaign"
-msgstr "Campagne d'apprentissage"
+msgstr "Campagne d'apprentissage de l'Empire"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:74
 msgid "Empire 1: The Strands of Malac' Mor"
-msgstr ""
+msgstr "Empire�1:�Les�Rives�de�Malac'�Mor"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:81
 msgid "Empire 2: An outpost for exile"
-msgstr ""
+msgstr "Empire�2:�Un poste avanc� pour l'exil"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:48
 msgid "Choose your map!"
@@ -1730,9 +1722,8 @@ msgid "New Game"
 msgstr "Nouvelle partie"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
-#, fuzzy
 msgid "Campaigns"
-msgstr "Campagne d'apprentissage"
+msgstr "Campagnes"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
 msgid "Begin Network Game"
@@ -1851,12 +1842,11 @@ msgstr "Quitter le Jeu"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-#, fuzzy
 msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2006 by the Widelands Development Team"
+msgstr "(C) 2002-2006 par l'�quipe de d�veloppement de Widelands"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
 msgid "Internet Options"
@@ -1897,7 +1887,7 @@ msgstr "Pas de description"
 #~ msgstr "Options de la nouvelle carte"
 
 #~ msgid "Edit Trigger Conditional Menu"
-#~ msgstr "Menu �dition de t�che conditionnelle"
+#~ msgstr "Menu ÃÂÃÂ©dition de tÃÂÃÂ¢che conditionnelle"
 
 #~ msgid "Ware"
 #~ msgstr "Ressource"
@@ -1906,22 +1896,24 @@ msgstr "Pas de description"
 #~ msgstr "est produit par"
 
 #~ msgid "New Trigger Menu"
-#~ msgstr "Menu Nouvelle Tâche"
+#~ msgstr "Menu Nouvelle TÃÂÃÂÃÂÃÂ¢che"
 
 #~ msgid "Time Trigger Options"
-#~ msgstr "Options tâches temporelles"
+#~ msgstr "Options tÃÂÃÂÃÂÃÂ¢ches temporelles"
 
 #~ msgid "Event Option Menu"
-#~ msgstr "Menu Option des événements"
+#~ msgstr "Menu Option des ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nements"
 
 #~ msgid "New Event Menu"
 #~ msgstr "Menu Nouvel Evenement"
 
 #~ msgid "Edit Event Chain Menu"
-#~ msgstr "Menu d'édition de suite des événements"
+#~ msgstr ""
+#~ "Menu d'ÃÂÃÂÃÂÃÂ©dition de suite des "
+#~ "ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nements"
 
 #~ msgid "Allowed Buildings Menu"
-#~ msgstr "Menu des bâtiments autorisés"
+#~ msgstr "Menu des bÃÂÃÂÃÂÃÂ¢timents autorisÃÂÃÂÃÂÃÂ©s"
 
 #~ msgid "Set Tool Size Menu"
 #~ msgstr "Menu taille des outils"
@@ -1931,23 +1923,28 @@ msgstr "Pas de description"
 #~ "to constantly restart itself when the wait time is over for repeating "
 #~ "events"
 #~ msgstr ""
-#~ "Cet tâche n'est vraie qu'après un certain temps. Elle peut être "
-#~ "configurée pour constamment redémarrer quand le temps d'attente est "
-#~ "terminé pour les événements répétitifs."
+#~ "Cet tÃÂÃÂÃÂÃÂ¢che n'est vraie qu'aprÃÂÃÂÃÂÃÂ¨s un certain "
+#~ "temps. Elle peut ÃÂÃÂÃÂÃÂªtre configurÃÂÃÂÃÂÃÂ©e pour "
+#~ "constamment redÃÂÃÂÃÂÃÂ©marrer quand le temps d'attente est "
+#~ "terminÃÂÃÂÃÂÃÂ© pour les "
+#~ "ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nements "
+#~ "rÃÂÃÂÃÂÃÂ©pÃÂÃÂÃÂÃÂ©titifs."
 
 #~ msgid ""
 #~ "This Trigger never changes its state by itself. It is useful to pass it "
 #~ "to some event which changes triggers"
 #~ msgstr ""
-#~ "Cette tâche ne change jamais d'état par elle-même. Elle est utile pour "
-#~ "les événements déclenchants."
+#~ "Cette tÃÂÃÂÃÂÃÂ¢che ne change jamais d'ÃÂÃÂÃÂÃÂ©tat par "
+#~ "elle-mÃÂÃÂÃÂÃÂªme. Elle est utile pour les "
+#~ "ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nements dÃÂÃÂÃÂÃÂ©clenchants."
 
 #~ msgid ""
 #~ "This trigger gets set when a number of a building type of one player is "
 #~ "available in an area."
 #~ msgstr ""
-#~ "Cette tâche se déclenche quand un certain nombre de bâtiments d'un "
-#~ "joueur est disponible dans une zone."
+#~ "Cette tÃÂÃÂÃÂÃÂ¢che se dÃÂÃÂÃÂÃÂ©clenche quand un certain "
+#~ "nombre de bÃÂÃÂÃÂÃÂ¢timents d'un joueur est disponible dans une "
+#~ "zone."
 
 #~ msgid "greenland"
 #~ msgstr "greenland"
@@ -1963,37 +1960,47 @@ msgstr "Pas de description"
 #~ "modal and to add a picture. Events can be assigned to each button to use "
 #~ "this as a Choose Dialog for the user"
 #~ msgstr ""
-#~ "Cet événement affiche une boîte de dialogue. L'utilisateur peut "
-#~ "choisir d'en faire une fenêtre modale/non-modale et d'ajouter une image. "
-#~ "Des événements peuvent être associés à chaque bouton afin de "
-#~ "l'utiliser comme une fenêtre d'options pour l'utilisateur."
+#~ "Cet ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nement affiche une "
+#~ "boÃÂÃÂÃÂÃÂ®te de dialogue. L'utilisateur peut choisir d'en faire "
+#~ "une fenÃÂÃÂÃÂÃÂªtre modale/non-modale et d'ajouter une image. Des "
+#~ "ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nements peuvent ÃÂÃÂÃÂÃÂªtre "
+#~ "associÃÂÃÂÃÂÃÂ©s ÃÂÃÂÃÂÃÂ  chaque bouton afin de "
+#~ "l'utiliser comme une fenÃÂÃÂÃÂÃÂªtre d'options pour l'utilisateur."
 
 #~ msgid "This Event centers the Players View on a certain field"
-#~ msgstr "Cet événement centre la caméra sur une zone donnée"
+#~ msgstr ""
+#~ "Cet ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nement centre la "
+#~ "camÃÂÃÂÃÂÃÂ©ra sur une zone donnÃÂÃÂÃÂÃÂ©e"
 
 #~ msgid ""
 #~ "This Event makes a user definable part of the map visible for a "
 #~ "selectable user"
 #~ msgstr ""
-#~ "Cet événement permet de révéler une partie de la carte à un joueur "
-#~ "sélectionné."
+#~ "Cet ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nement permet de "
+#~ "rÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©ler une partie de la carte "
+#~ "ÃÂÃÂÃÂÃÂ  un joueur sÃÂÃÂÃÂÃÂ©lectionnÃÂÃÂÃÂÃÂ©."
 
 #~ msgid ""
 #~ "This Event conquers a user definable part of the map for one player if "
 #~ "there isn't a player already there"
 #~ msgstr ""
-#~ "Cet événement conquiert une zone définie par l'utilisateur à un "
-#~ "joueur pas encore présent."
+#~ "Cet ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nement conquiert une zone "
+#~ "dÃÂÃÂÃÂÃÂ©finie par l'utilisateur ÃÂÃÂÃÂÃÂ  un joueur pas "
+#~ "encore prÃÂÃÂÃÂÃÂ©sent."
 
 #~ msgid ""
 #~ "Allows/Disables a certain building for a player so that it can be build "
 #~ "or it can't any longer"
 #~ msgstr ""
-#~ "Autorise/Interdit un bâtiment pour un joueur de manière à ce que l'on "
-#~ "ne puisse pas ou plus le construire"
+#~ "Autorise/Interdit un bÃÂÃÂÃÂÃÂ¢timent pour un joueur de "
+#~ "maniÃÂÃÂÃÂÃÂ¨re ÃÂÃÂÃÂÃÂ  ce que l'on ne puisse pas ou "
+#~ "plus le construire"
 
 #~ msgid "Manually set a Null Trigger to a given value"
-#~ msgstr "Définir manuellement un événement nul à une certaine valeur"
+#~ msgstr ""
+#~ "DÃÂÃÂÃÂÃÂ©finir manuellement un "
+#~ "ÃÂÃÂÃÂÃÂ©vÃÂÃÂÃÂÃÂ©nement nul ÃÂÃÂÃÂÃÂ  une "
+#~ "certaine valeur"
 
 #~ msgid "Single Map"
 #~ msgstr "Carte Solo"
@@ -2008,10 +2015,10 @@ msgstr "Pas de description"
 #~ msgstr "Menu Options"
 
 #~ msgid "Editor Main Menu"
-#~ msgstr "Menu Prinicipal de l'Ã©diteur"
+#~ msgstr "Menu Prinicipal de l'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©diteur"
 
 #~ msgid "constructionsite"
 #~ msgstr "SiteDeContruction"
 
 #~ msgid "headquarters"
-#~ msgstr "QuartierGÃ©nÃ©ral"
+#~ msgstr "QuartierGÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©nÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©ral"

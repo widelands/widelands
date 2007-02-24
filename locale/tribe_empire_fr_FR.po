@@ -1,12 +1,12 @@
 # French translation of WIDELANDS.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-12-10 21:44+0100\n"
+"PO-Revision-Date: 2007-02-24 00:18+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -187,9 +187,8 @@ msgid "Trainingscamp"
 msgstr "Camp d'entraînement"
 
 #: ../tribes/empire/buildings/vineyard/conf:2
-#, fuzzy
 msgid "Vineyard"
-msgstr "Mineur"
+msgstr "Vignoble"
 
 #: ../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
@@ -375,13 +374,12 @@ msgid "Gold"
 msgstr "Or"
 
 #: ../tribes/empire/wares/gold/conf:3
-#, fuzzy
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
-"L'or est le plus précieux de tous les métaux ; seulement les choses très "
-"importantes en sont garnies. "
+"L'or est le plus précieux de tous les métaux; seuls les objets très "
+"importants en sont garnis. "
 
 #: ../tribes/empire/wares/goldstone/conf:2
 msgid "Goldstone"
@@ -606,7 +604,6 @@ msgid "War-Lance"
 msgstr "Lance de Guerre"
 
 #: ../tribes/empire/wares/war_lance/conf:3
-#, fuzzy
 msgid ""
 "This is the best and sharpest weapon, the romans weaponsmith create for "
 "their warriors"
@@ -755,9 +752,8 @@ msgid "Trainer"
 msgstr "Entraîneur"
 
 #: ../tribes/empire/workers/vinefarmer/conf:2
-#, fuzzy
 msgid "Vinefarmer"
-msgstr "Vigne"
+msgstr "Vigneron"
 
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
