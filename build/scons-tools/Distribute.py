@@ -7,7 +7,6 @@ def distadd(env, source, compress=False):
 	head,tail=os.path.split(source)
 
 	for s in glob.glob(tail):
-		print "Adding",os.path.join(head, s)
 		env['DISTFILES']+=[(os.path.join(head, s), compress)]
 
 def dodist(target, source, env):
