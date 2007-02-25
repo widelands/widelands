@@ -20,8 +20,8 @@ stone=1
 
 [idle]
 pics=forester_i_??.png  # ???
-hot_spot_x=49
-hot_spot_y=41
+hot_spot_x=58
+hot_spot_y=54
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
@@ -31,8 +31,8 @@ shadowclr_b=0
 
 [build]
 pics=forester_b_??.png  # ???
-hot_spot_x=49
-hot_spot_y=41
+hot_spot_x=58
+hot_spot_y=54
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0

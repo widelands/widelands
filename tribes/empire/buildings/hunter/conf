@@ -20,8 +20,8 @@ stone=1
 
 [idle]
 pics=hunter_i_??.png  
-hot_spot_x=51
-hot_spot_y=51
+hot_spot_x=55
+hot_spot_y=60
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
@@ -31,8 +31,8 @@ shadowclr_b=0
 
 [build]
 pics=hunter_b_??.png  
-hot_spot_x=51
-hot_spot_y=51
+hot_spot_x=55
+hot_spot_y=60
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
