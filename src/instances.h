@@ -240,8 +240,8 @@ public:
 	void insert(Map_Object *obj);
 	void remove(Map_Object *obj);
 
-   inline bool object_still_available(Map_Object* t) {
-      objmap_t::iterator it = m_objects.begin();
+	bool object_still_available(const Map_Object * const t) const {
+		objmap_t::const_iterator it = m_objects.begin();
       while(it!=m_objects.end()) {
          if(it->second==t) return true;
          ++it;
