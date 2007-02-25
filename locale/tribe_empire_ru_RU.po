@@ -1,16 +1,17 @@
+# translation of tribe_empire_ru_RU.po to русский
 # translation of tribe_empire_ru_RU.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# 
+#
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: tribe_empire_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-20 00:05+0500\n"
-"Last-Translator: Alexander <bikmeyev@freemail.ru>\n"
-"Language-Team:  <ru@li.org>\n"
+"PO-Revision-Date: 2007-02-23 01:18+0500\n"
+"Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
+"Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +36,7 @@ msgstr "Арена"
 #: ../tribes/empire/buildings/armoursmith/conf:2
 #: ../tribes/empire/workers/armoursmith/conf:2
 msgid "Armoursmith"
-msgstr "Оружейня"
+msgstr "Цех доспехов"
 
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
@@ -91,7 +92,7 @@ msgstr "Глубокая Мраморная шахта"
 
 #: ../tribes/empire/buildings/deep_oremine/conf:2
 msgid "Deep Iron Ore Mine"
-msgstr "Глубокая Железнорудная шахта"
+msgstr "Глубокая Железоносная шахта"
 
 #: ../tribes/empire/buildings/farm/conf:2
 msgid "Farm"
@@ -111,7 +112,7 @@ msgstr "Укрепление"
 
 #: ../tribes/empire/buildings/goldmine/conf:2
 msgid "Gold Mine"
-msgstr "Злотой рудник"
+msgstr "Золотая шахта"
 
 #: ../tribes/empire/buildings/headquarters/conf:6
 msgid "Headquarters"
@@ -120,15 +121,6 @@ msgstr "Штаб"
 #: ../tribes/empire/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Хижина охотника"
-
-#: ../tribes/empire/buildings/inn/conf:2
-msgid "Inn"
-msgstr "Постоялый двор"
-
-#: ../tribes/empire/buildings/lumberjack/conf:2
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Дровосек"
 
 #: ../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"
@@ -140,19 +132,15 @@ msgstr "Мельница"
 
 #: ../tribes/empire/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
-msgstr "Железоносный рудник"
+msgstr "Железоносная шахта"
 
 #: ../tribes/empire/buildings/outpost/conf:2
 msgid "Outpost"
-msgstr "Аванпост"
+msgstr "Форпост"
 
 #: ../tribes/empire/buildings/piggery/conf:2
 msgid "Piggery"
 msgstr "Свинарник"
-
-#: ../tribes/empire/buildings/quarry/conf:2
-msgid "Quarry"
-msgstr "Каменоломня"
 
 #: ../tribes/empire/buildings/sawmill/conf:2
 msgid "Sawmill"
@@ -202,7 +190,7 @@ msgstr "Склад"
 #: ../tribes/empire/buildings/weaponsmith/conf:2
 #: ../tribes/empire/workers/weaponsmith/conf:2
 msgid "Weaponsmith"
-msgstr "Оружейник"
+msgstr "Цех оружия"
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -310,11 +298,11 @@ msgid ""
 "does not burn hot enough. Then, coal is used."
 msgstr ""
 "Огонь в Империи обычно поддерживают дровами, но иногда, дерево горит не "
-"столько жарко. Тогда используется уголь."
+"столь жарко. Тогда используется уголь."
 
 #: ../tribes/empire/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr "Углезем"
+msgstr "Углезём"
 
 #: ../tribes/empire/wares/coalearth/conf:3
 msgid ""
@@ -359,7 +347,7 @@ msgstr "Мука"
 #: ../tribes/empire/wares/flour/conf:3
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
-msgstr "Мука производится из пшеницы и необходима вкусного хлеба Империи."
+msgstr "Мука производится из пшеницы и необходима для вкусного хлеба Империи."
 
 #: ../tribes/empire/wares/gold/conf:2
 msgid "Gold"
@@ -400,8 +388,8 @@ msgid ""
 "reserve! It is produced by the carpenter."
 msgstr ""
 "Молот это важный инструмент. Он необходим геологу, рабочему, плотнику и "
-"обоим кузнецам. Держите всегда небольшое количество в резерве! Он "
-"производится плотником."
+"обоим кузнецам (оружейникам). Держите всегда небольшое количество в резерве! "
+"Он производится плотником."
 
 #: ../tribes/empire/wares/heavy_lance/conf:2
 msgid "Heavy Lance"
@@ -421,16 +409,15 @@ msgstr "Простая защита воинов"
 
 #: ../tribes/empire/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
-msgstr "Копье охотника"
+msgstr "Копьё охотника"
 
 #: ../tribes/empire/wares/hunting_spear/conf:3
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
-"Это копье достаточно легко, чтоб его можно было бросать, но имеет "
-"достаточный вес, чтобы убить животного в один миг. Оно используется только "
-"охотниками."
+"Это копьё довольно легкое, чтоб его можно было бросать, но имеет достаточный "
+"вес, чтобы убить животное в один миг. Оно используется только охотниками."
 
 #: ../tribes/empire/wares/iron/conf:2
 msgid "Iron"
@@ -454,7 +441,7 @@ msgstr "Кухонная утварь"
 
 #: ../tribes/empire/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchentools?"
-msgstr "Как приготовить мясо, закуски и пайки, если нет кухни?"
+msgstr "Как приготовить еду, обеды и пайки, если нет кухни?"
 
 #: ../tribes/empire/wares/lance/conf:2
 msgid "Lance"
@@ -490,7 +477,7 @@ msgstr ""
 
 #: ../tribes/empire/wares/meal/conf:2
 msgid "Meal"
-msgstr "Мука"
+msgstr "Еда"
 
 #: ../tribes/empire/wares/meal/conf:3
 msgid "A real meal which satisfies all miners needs."
@@ -637,12 +624,12 @@ msgstr "Дерево"
 
 #: ../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
-msgstr "Деревянное копье"
+msgstr "Деревянное копьё"
 
 #: ../tribes/empire/wares/wood_lance/conf:3
 msgid ""
 "This is a wooden lance, which is the basic of the romans military system."
-msgstr "Это деревянное копье, являющееся основой римской военной системы."
+msgstr "Это деревянное копьё, являющееся основой римской военной системы."
 
 #: ../tribes/empire/wares/wool/conf:2
 msgid "Wool"
@@ -705,6 +692,10 @@ msgstr "Охотник"
 msgid "Innkeeper"
 msgstr "Трактирщик"
 
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Дровосек"
+
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Главный шахтер"
@@ -740,3 +731,9 @@ msgstr "Виноградарь"
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Ткач"
+
+#~ msgid "Inn"
+#~ msgstr "Постоялый двор"
+
+#~ msgid "Quarry"
+#~ msgstr "Каменоломня"

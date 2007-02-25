@@ -1,16 +1,17 @@
+# translation of texts_ru_RU.po to русский
 # translation of texts_ru_RU.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# 
+#
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: texts_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-18 00:21+0500\n"
-"Last-Translator: Alexander <bikmeyev@freemail.ru>\n"
-"Language-Team:  <ru@li.org>\n"
+"PO-Revision-Date: 2007-02-23 00:07+0500\n"
+"Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
+"Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,7 +19,7 @@ msgstr ""
 
 #: ../txts/COPYING:1
 msgid "License"
-msgstr "Лензия"
+msgstr "Лицензия"
 
 #: ../txts/COPYING:3
 msgid "GNU general public licence"
@@ -36,7 +37,7 @@ msgid ""
 "allowed.<br>"
 msgstr ""
 "Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
-"Suite 330, Boston, MA  02111-1307  USA<br>Разрешается копирование и "
+"Suite 330, Boston, MA  02111-1307  USA<br> Разрешается копирование и "
 "распространение копий этого документа, но запрещается внесение каких бы то "
 "ни было изменений в его текст.<br>"
 
@@ -853,7 +854,7 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
-"- прислылайте нам сжатую (zip, gzip, bzip2) запись сессии если это возможно,"
+"- присылайте нам сжатую (zip, gzip, bzip2) запись сессии если это возможно,"
 "<br>за исключением случаев, когда ошибку легко повторить. В "
 "действительности<br>хорошей идеей будет записывать вашу сессию в случае "
 "обнаружени бага.<br>Более детально смотри ниже."
@@ -914,8 +915,8 @@ msgid ""
 msgstr ""
 "Отметим, что записанный файл платформонезависимый, но он может не подойти "
 "для другой версии Widelands, так как могут измениться интерфейс пользователя "
-"и порядок вызова низкоуровненвых функций. Запись сессии не предназначена для "
-"создания демо-файлов; это просто инструмет отладки, помогающий нам "
+"и порядок вызова низкоуровневых функций. Запись сессии не предназначена для "
+"создания демо-файлов; это просто инструмент отладки, помогающий нам "
 "отлавливать баги."
 
 #: ../txts/developers:1

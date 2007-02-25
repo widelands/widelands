@@ -1,16 +1,17 @@
+# translation of tribe_barbarians_ru_RU.po to русский
 # translation of tribe_barbarians_ru_RU.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# 
+#
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: tribe_barbarians_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-20 00:05+0500\n"
-"Last-Translator: Alexander <bikmeyev@freemail.ru>\n"
-"Language-Team:  <ru@li.org>\n"
+"PO-Revision-Date: 2007-02-23 01:06+0500\n"
+"Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
+"Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +39,7 @@ msgstr "Вепрь"
 
 #: ../tribes/barbarians/buildings/axefactory/conf:2
 msgid "Axefactory"
-msgstr "Оружейня"
+msgstr "Фабрика топоров"
 
 #: ../tribes/barbarians/buildings/bakery/conf:2
 msgid "Bakery"
@@ -70,7 +71,7 @@ msgstr "Цитадель"
 
 #: ../tribes/barbarians/buildings/coalmine/conf:2
 msgid "Coal mine"
-msgstr "Угольный рудник"
+msgstr "Угольная шахта"
 
 #: ../tribes/barbarians/buildings/constructionsite/conf:5
 msgid "Construction Site"
@@ -86,7 +87,7 @@ msgstr "Глубокая Золотоносная шахта"
 
 #: ../tribes/barbarians/buildings/deep_oremine/conf:2
 msgid "Deep Iron Ore Mine"
-msgstr "Глубокая Железнорудная шахта"
+msgstr "Глубокая Железоносная шахта"
 
 #: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
 msgid "Deeper Coal Mine"
@@ -126,11 +127,11 @@ msgstr "Хижина егеря"
 
 #: ../tribes/barbarians/buildings/goldmine/conf:2
 msgid "Gold Mine"
-msgstr "Злотой рудник"
+msgstr "Золотая шахта"
 
 #: ../tribes/barbarians/buildings/granitemine/conf:2
 msgid "Granite Mine"
-msgstr "Гранитный рудник"
+msgstr "Гранитная шахта"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood hardener"
@@ -168,7 +169,7 @@ msgstr "Малая пивоварня"
 
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
-msgstr "Железоносный рудник"
+msgstr "Железоносная шахта"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -254,7 +255,7 @@ msgid ""
 "produce in the Axefactory."
 msgstr ""
 "Это второе наиболее опасное оружие, производимое варварами. Только умелые "
-"воины могут использовать его как оружие. Он производится на фабрике топоров."
+"воины могут использовать его. Он производится на фабрике топоров."
 
 #: ../tribes/barbarians/wares/beer/conf:2
 msgid "Beer"
@@ -324,11 +325,11 @@ msgid ""
 "just does not burn hot enough. Then, coal is used."
 msgstr ""
 "Обычно варвары поддерживают огонь при помощи дров, но иногда дерево не дает "
-"достаточно жара. Тогда используется уголь."
+"достаточного жара. Тогда используется уголь."
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr "Углезем"
+msgstr "Углезём"
 
 #: ../tribes/barbarians/wares/coalearth/conf:3
 msgid ""
@@ -440,9 +441,9 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metalworks."
 msgstr ""
-"Это копье достаточно легко, чтоб его можно было бросать, но имеет "
-"достаточный вес, чтобы убить животного в один миг. Оно используется только "
-"охотниками. Производится в литейном цехе."
+"Это копье довольно легкое, чтоб его можно было бросать, но имеет достаточный "
+"вес, чтобы убить животное в один миг. Оно используется только охотниками. "
+"Производится в литейном цехе."
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
@@ -466,7 +467,7 @@ msgstr "Кухонная утварь"
 
 #: ../tribes/barbarians/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchentools?"
-msgstr "Как приготовить мясо, закуски или пайки. если нет кухонь?"
+msgstr "Как приготовить еду, обеды или пайки. если нет кухонь?"
 
 #: ../tribes/barbarians/wares/mask/conf:2
 msgid "Mask"
@@ -494,9 +495,9 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"Мясо содержит много калорий. Оно используется в Гостиницах и Тавернах для "
-"производства обедов для шахтеров и в тренировочных лагерях солдат, для "
-"поддержки силы воинов."
+"Мясо содержит много калорий. Оно используется на постоялых дворах и в "
+"Тавернах для производства обедов для шахтеров, и в тренировочных лагерях "
+"солдат, для поддержки силы воинов."
 
 #: ../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
