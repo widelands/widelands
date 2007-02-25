@@ -561,9 +561,6 @@ bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 
    CheckStepWalkOn cstep(get_movecaps(), false);
 
-   if (pos == owner->get_position())
-      pos = owner->get_base_flag()->get_position();
-
    if(action->sparam1=="immovable") {
       std::vector<ImmovableFound> list;
       if (action->iparam2 < 0)
