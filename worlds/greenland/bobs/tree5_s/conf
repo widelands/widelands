@@ -1,0 +1,30 @@
+[global]
+type=immovable
+size=normal
+program=program
+picture=s1tree5_00.png
+
+# This program grows the tree
+[program]
+0=animation tiny 38000
+1=animation small 42000
+2=animation midd 50000
+3=transform tree5
+
+[tiny]
+pics=s1tree5_??.png
+ftp=8
+hot_spot_x=5
+hot_spot_y=12
+
+[small]
+pics=s2tree5_??.png
+ftp=8
+hot_spot_x=12
+hot_spot_y=28
+
+[midd]
+pics=s3tree5_??.png
+ftp=8
+hot_spot_x=18
+hot_spot_y=48

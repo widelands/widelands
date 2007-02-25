@@ -15,7 +15,7 @@ carrier=1
 # given direction
 
 [plant]
-0=setdescription tree1 tree2 tree3 tree4 tree5 tree6 tree7 tree8 # Set a random immovable description
+0=setdescription tree1_s tree2_s tree3_s tree4_s tree5_s tree6_s tree7_s tree8_s # Set a random immovable description
 1=findspace size:any radius:5			# Find space for the description within the given radius
 2=walk coords								# Walk to the target coordinates
 3=animation idle 500						# Play a planting animation

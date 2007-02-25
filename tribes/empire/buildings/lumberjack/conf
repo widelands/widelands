@@ -19,24 +19,13 @@ wood=1
 
 [idle]
 pics=lumberjack_i_??.png  
-hot_spot_x=40
-hot_spot_y=42
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_x=45
+hot_spot_y=60
 
 [build]
 pics=lumberjack_b_??.png  
-hot_spot_x=40
-hot_spot_y=42
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_x=45
+hot_spot_y=60
+
 
 
