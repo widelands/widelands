@@ -631,27 +631,27 @@ void RenderTargetImpl::rendermap
 							 and
 							 r_owner_number == f_owner_number
 							 and
-							 (tr_owner_number != f_owner_number
-							  or
-							  br_owner_number != f_owner_number))
+							 (tr_owner_number == f_owner_number
+							  xor
+							  br_owner_number == f_owner_number))
 							drawanim(middle(f_pos, r_pos), anim, 0, &player);
 						if
 							((f_is_visible or bl_is_visible)
 							 and
 							 bl_owner_number == f_owner_number
 							 and
-							 (l_owner_number != f_owner_number
-							  or
-							  br_owner_number != f_owner_number))
+							 (l_owner_number == f_owner_number
+							  xor
+							  br_owner_number == f_owner_number))
 							drawanim(middle(f_pos, bl_pos), anim, 0, &player);
 						if
 							((f_is_visible or br_is_visible)
 							 and
 							 br_owner_number == f_owner_number
 							 and
-							 (r_owner_number != f_owner_number
-							  or
-							  bl_owner_number != f_owner_number))
+							 (r_owner_number == f_owner_number
+							  xor
+							  bl_owner_number == f_owner_number))
 							drawanim(middle(f_pos, br_pos), anim, 0, &player);
 					}
 
