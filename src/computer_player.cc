@@ -684,6 +684,11 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 		const BaseImmovable & base_immovable = *immovables[i].object;
 		if (dynamic_cast<const Flag * const>(&base_immovable))
 			field->reachable=true;
+		if
+			(const PlayerImmovable * const player_immovable =
+			 dynamic_cast<const PlayerImmovable * const>(&base_immovable))
+			if (player_immovable->owner().get_player_number() != player_number)
+				continue;
 
 		if
 			(const Building * const building =
