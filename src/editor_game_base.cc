@@ -140,7 +140,7 @@ This unconquers a area. This is only possible, when there
 is a building placed on this field
 ===============
 */
-void Editor_Game_Base::unconquer_area(const Player_Area player_area) {
+void Editor_Game_Base::unconquer_area(Player_Area player_area) {
 	assert(0 <= player_area.x);
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -177,43 +177,12 @@ void Editor_Game_Base::unconquer_area(const Player_Area player_area) {
 	*this_conquer_info = m_conquer_info.back();
    m_conquer_info.pop_back();
 
-   // step 3: recalculate for all claimed areas of this player with a building
-// BEGIN : If you wanna to disable the dinamic conquer (by influences) , uncomment this block
-/*   for(i=0; i<m_conquer_info.size(); i++) {
-      if(m_conquer_info[i].player==playernr) {
-           // Unconquer and reconquer the area
-         do_conquer_area(playernr, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
-         do_conquer_area(playernr, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
-      }
-   }
-
-   // step 4: recalculate for all other players buildings
-   for(uchar player=1; player<=MAX_PLAYERS; player++) {
-      if(player==playernr) continue;
-
-      for(i=0; i<m_conquer_info.size(); i++) {
-         if(m_conquer_info[i].player==player) {
-              // Unconquer and reconquer the area
-            do_conquer_area(player, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
-            do_conquer_area(player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
-         }
-      }
-   }
-*/
-// END : If you wanna to disable the dinamic conquer (by influences) , uncomment this block
-// BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
-   // step 3 and 4: Need to reconquer the full map, so it's easier and faster to do only one loop because
-   // of the use of an influence map, where the sorting of the m_conquer_info isn't important
-	const std::vector<Player_Area>::const_iterator conquer_info_end =
-		m_conquer_info.end();
-	for
-		(std::vector<Player_Area>::const_iterator it = m_conquer_info.begin();
-		 it != conquer_info_end;
-		 ++it)
-	{do_conquer_area(*it, false); do_conquer_area(*it, true);}
-// END : If you wanna to disable the dinamic conquer (by influences) , comment this block
-
 	// step 5: deal with player immovables in the lost area
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	++player_area.radius;
 	cleanup_playerimmovables_area(player_area);
 }
 
@@ -225,7 +194,7 @@ This conquers a given area because of a new (military) building
 that is set there.
 ===============
 */
-void Editor_Game_Base::conquer_area(const Player_Area player_area) {
+void Editor_Game_Base::conquer_area(Player_Area player_area) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -235,6 +204,12 @@ void Editor_Game_Base::conquer_area(const Player_Area player_area) {
 
 	m_conquer_info.push_back(player_area);
 	do_conquer_area(player_area, true);
+
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	++player_area.radius;
 	cleanup_playerimmovables_area(player_area);
 }
 
@@ -269,22 +244,21 @@ void Editor_Game_Base::conquer_area_no_building(const Player_Area player_area) {
  * parameter at this function.
  */
 #define MAX_RADIUS 32
-int Editor_Game_Base::calc_influence (const Coords a, const Area area) {
+Editor_Game_Base::Influence Editor_Game_Base::calc_influence
+(const Coords a, const Area area)
+{
    int w = m_map->get_width(),
        h = m_map->get_height(),
-       influence = 0,
        method = 0;
-	uint minx =
-		std::min
-		(std::min
-		 (abs(a.x - area.x), abs(a.x - area.x + w)), abs(a.x - area.x - w));
-	uint miny =
-		std::min
-		(std::min
-		 (abs(a.y - area.y), abs(a.y - area.y + h)), abs(a.y - area.y - h));
 
     // Now "std::max (minx, miny)" is the distance between the points
-   influence = std::max (minx, miny);
+	Influence influence = std::max
+		(std::min
+		 (std::min
+		  (abs(a.x - area.x), abs(a.x - area.x + w)), abs(a.x - area.x - w)),
+		 std::min
+		 (std::min
+		  (abs(a.y - area.y), abs(a.y - area.y + h)), abs(a.y - area.y - h)));
 
 	if (method == 0) {
          // This method makes a "parabola" like x^4, but the maxium radius is MAX_RADIUS,
@@ -322,7 +296,12 @@ Additionally, it updates the visible area for that player.
 ===============
 */
 void Editor_Game_Base::do_conquer_area
-(const Player_Area player_area, const bool conquer)
+(const Player_Area player_area,
+ const bool conquer,
+ const Uint8 vision_range,
+ const bool neutral_when_no_influence,
+ const bool neutral_when_competing_influence,
+ const bool conquer_guarded_location_by_superior_influence)
 {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
@@ -342,54 +321,63 @@ void Editor_Game_Base::do_conquer_area
          // that is needed to do is first: unconquer the area with inital values, second: reconquer the area
          // with new values. Will be usefull to save this values at the building.
          // -- RFerriz
+		const Player_Number owner = mr.location().field->get_owned_by();
 		if (conquer) {
           // Adds the influence
-			m_conquer_map[player_area.player_number][index] += influence;
-
-            // Else, do the things that should be done
-			if (mr.location().field->get_owned_by() == player_area.player_number)
-				continue;
-
-			if
-				(not mr.location().field->get_owned_by()
-				 and
-				 m_conquer_map[0][index] == player_area.player_number)
-			{
+			Influence new_influence_modified =
+				m_conquer_map[player_area.player_number][index] += influence;
+			if (owner and not conquer_guarded_location_by_superior_influence)
+				new_influence_modified = 1;
+			if (m_conquer_map[owner][index] < new_influence_modified) {
+				if (owner) player_field_notification(mr.location(), LOSE);
 				mr.location().field->set_owned_by(player_area.player_number);
 				player_field_notification (mr.location(), GAIN);
-            continue;
          }
-
-           // See if we can get the own
-// BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
-			if
-            (m_conquer_map[player_area.player_number][index]
-             >
-             m_conquer_map[mr.location().field->get_owned_by()][index])
-			{
+		} else if
+			((m_conquer_map[player_area.player_number][index] -= influence) == 0
+			 and
+			 owner == player_area.player_number)
+		{
+			//  The player completely lost influence over the location, which he
+			//  owned. Now we must see if some other player has influence and if
+			//  so, transfer the ownership to that player.
+			const Player_Number nr_players = map().get_nrplayers();
+			Player_Number best_player =
+				neutral_when_no_influence ? 0 : player_area.player_number;
+			Influence best_value = 0;
+			for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
+				if (const Influence value = m_conquer_map[plnum][index])
+					if        (value >  best_value) {
+						best_value = value;
+						best_player = plnum;
+					} else if (value == best_value) {
+						const Coords c = map().get_fcoords(map()[index]);
+						log
+							("Editor_Game_Base::do_conquer_area: Player %u completely "
+							 "lost influence over (%i, %i). Players %u and %u, both "
+							 "have influence %i there. The location will be neutral "
+							 "(unless another player has higher influence).\n",
+							 player_area.player_number, c.x, c.y, best_player, plnum,
+							 value);
+						best_player = neutral_when_competing_influence ?
+							0 : player_area.player_number;
+						best_player = 0;
+					}
+			if (best_player != player_area.player_number) {
 				player_field_notification (mr.location(), LOSE);
-				mr.location().field->set_owned_by (player_area.player_number);
-				m_conquer_map[0][index] = player_area.player_number;
-				player_field_notification (mr.location(), GAIN);
+				mr.location().field->set_owned_by (best_player);
+				m_conquer_map[0][index] = best_value;
+				if (best_player) player_field_notification (mr.location(), GAIN);
          }
-// END : If you wanna to disable the dinamic conquer (by influences) , comment this block
-      }
-		else {
-			m_conquer_map[player_area.player_number][index] -= influence;
-
-			if (mr.location().field->get_owned_by() != player_area.player_number)
-				continue;
-
-         m_conquer_map[0][index] = 0;
-
-            // ALWAYS set to 0. So is needed to call do_conquer_area with TRUE if you want to have the real
-            // map of incluence
-			player_field_notification (mr.location(), LOSE);
-			mr.location().field->set_owned_by(0);
       }
 	} while (mr.advance(*m_map));
 
-	m_map->recalc_for_field_area(player_area);
+	//  This must reach one step beyond the conquered area to adjust the borders
+	//  of neighbour players.
+	m_map->recalc_for_field_area(Area(player_area, player_area.radius + 1));
+
+	player(player_area.player_number).set_area_seen
+		(Area(player_area, player_area.radius + vision_range), true);
 }
 
 
@@ -897,7 +885,6 @@ void Editor_Game_Base::make_influence_map ()
 
       // Clean influce maps
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
-   const uint mapwidth = m_map->get_width();
 
 	const std::vector<Player_Area>::const_iterator conquer_info_end =
 		m_conquer_info.end();
@@ -914,26 +901,27 @@ void Editor_Game_Base::make_influence_map ()
 	}
 
    // Now create the real influence map !
-   for (int x = 0; x < MAX_X; x++)
-   {
-      for (int y = 0; y < MAX_Y; y++)
-      {
-         int best_player = 0;
-         int best_value = 0;
-         int npl = 1;
+	const Player_Number nr_players = map().get_nrplayers();
+	const Map::Index max_index = map().max_index();
+	for (Map::Index index = 0; index < max_index; ++index) {
+		Player_Number best_player = 0;
+		Influence best_value = 0;
             // Find the most player influence over this position
-         const Map::Index index = Map::get_index(Coords(x, y), mapwidth);
-         while (npl < MAX_PLAYERS)
-         {
-            if (m_conquer_map[npl][index] > best_value)
-            {
-               best_value = m_conquer_map[npl][index];
-               best_player = npl;
-            }
-            npl++;
-         }
-         m_conquer_map[0][index] = best_player;
-      }
+		for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
+			if (const Influence value = m_conquer_map[plnum][index])
+				if        (value >  best_value) {
+					best_value = value;
+					best_player = plnum;
+				} else if (value == best_value) {
+					best_player = 0;
+					const Coords c = map().get_fcoords(map()[index]);
+					log
+						("Editor_Game_Base::make_influence_map: Players %u and %u "
+						 "both have influence %i at (%i, %i), location will be "
+						 "neutral (unless another player has higher influence).\n",
+						 best_player, plnum, value, c.x, c.y);
+				}
+         m_conquer_map[0][index] = best_value;
    }
 }
 // END Support for influece map in load/saved games

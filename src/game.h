@@ -133,8 +133,6 @@ struct Game : public Editor_Game_Base {
 private:
 	void init_player_controllers ();
 	bool run (bool = false);
-	void do_conquer_area(const Player_Area, const bool conquer);
-
 	Map_Loader                   * m_maploader;
 
 	NetGame                      * m_netgame;

@@ -34,6 +34,7 @@
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
+#include "warehouse.h"
 #include "wexception.h"
 
 Editor_Player_Menu::Editor_Player_Menu
@@ -391,17 +392,23 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-	BaseImmovable * const imm =
-		map[map.get_starting_pos(p->get_player_number())].get_immovable();
+	const Player_Number player_number = p->get_player_number();
+	const Coords starting_pos = map.get_starting_pos(player_number);
+	BaseImmovable * const imm = map[starting_pos].get_immovable();
 	if (not imm) {
       // place HQ
-		const Coords c = map.get_starting_pos(p->get_player_number());
-      int idx = p->get_tribe()->get_building_index("headquarters");
+		const Tribe_Descr & tribe = p->tribe();
+      const int idx = tribe.get_building_index("headquarters");
       if (idx < 0)
-         throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name().c_str());
-		editor.warp_building(c, p->get_player_number(), idx);
+         throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
+		Warehouse & headquarter = dynamic_cast<Warehouse &>
+			(*editor.warp_building(starting_pos, player_number, idx));
+		editor.conquer_area
+			(Player_Area
+			 (player_number, Area(starting_pos, headquarter.get_conquers())));
+		tribe.load_warehouse_with_start_wares(editor, headquarter);
 
-		parent.reference_player_tribe(n, p->get_tribe());
+		parent.reference_player_tribe(n, &tribe);
 
       // Remove the player overlay from this starting pos.
       // A HQ is overlay enough

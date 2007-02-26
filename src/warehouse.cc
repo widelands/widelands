@@ -418,11 +418,6 @@ void Warehouse::init(Editor_Game_Base* gg)
 {
 	Building::init(gg);
 
-	if (descr().get_subtype() == Warehouse_Descr::Subtype_HQ) gg->conquer_area
-		(Player_Area
-		 (owner().get_player_number(),
-		  Area(m_position, descr().get_conquers())));
-
    m_supply->set_nrwares(get_owner()->get_tribe()->get_nrwares());
    m_supply->set_nrworkers(get_owner()->get_tribe()->get_nrworkers());
 

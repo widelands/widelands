@@ -58,8 +58,8 @@ class Editor_Game_Base {
       Map & get_map() const {return *m_map;}
       Object_Manager * get_objects() const {return m_objects;}
 
-	void unconquer_area          (const Player_Area);
-	void conquer_area            (const Player_Area);
+	void unconquer_area                (Player_Area);
+	void conquer_area                  (Player_Area);
 	void conquer_area_no_building(const Player_Area);
 
       // logic handler func
@@ -131,17 +131,42 @@ class Editor_Game_Base {
 
    virtual void make_influence_map ();
 
-      /// Returns the influence on a location from an area.
-	virtual int calc_influence (const Coords a, const Area);
-
    protected:
       // next function is used to update the current gametime,
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
-	virtual void do_conquer_area(const Player_Area, const bool conquer);
+
+	virtual void do_conquer_area
+		(const Player_Area player_area,
+		 const bool conquer,
+
+		 //  How far outside the conquered area that the player should see.
+		 const Uint8 vision_range                                  = 4,
+
+		 //  If true and the player completely loses influence over a location, it
+		 //  becomes neutral unless some other player claims it by having
+		 //  positive influence.
+		 const bool neutral_when_no_influence                      = false,
+
+		 //  If true and the player completely loses influence over a location and
+		 //  several players have positive and equal influence, the location
+		 //  becomes neutral unless some other player claims it by having higher
+		 //  influence.
+		 const bool neutral_when_competing_influence               = false,
+
+		 //  If true, the conquering player will (automatically, without actually
+		 //  attacking) conquer a location even if another player already owns and
+		 //  covers the location with a militarysite, if the conquering player's
+		 //  influence becomes greater than the owner's influence.
+		 const bool conquer_guarded_location_by_superior_influence = false);
 
 private:
+	typedef int Influence;
+
+	/// Returns the influence on a location from an area.
+	Influence calc_influence (const Coords a, const Area);
+
 	std::vector<Player_Area> m_conquer_info;
 
 	void cleanup_playerimmovables_area(const Area);
@@ -163,8 +188,10 @@ private:
 public:
 
 	// m_conquer_map[playernr][index] = [quantity of influence]
-	int  m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
-                                                         // The playernr 0 is the REAL OWNER
+	//  m_conquer_map[0][index] contains the value of
+	//  max(m_conquer_map[1][index], ..., m_conquer_map[MAX_PLAYERS][index])
+	//  (Which means the highest influence that any player has on that location.)
+	Influence m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
 	std::vector<uint>          m_attack_serials;
 

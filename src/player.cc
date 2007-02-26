@@ -84,15 +84,16 @@ void Player::init(const bool place_headquarters) {
 
 	if (place_headquarters) {
 		const Tribe_Descr & trdesc = m_tribe;
-		const int plnum = m_plnum;
+		const Player_Number plnum = get_player_number();
+		const Coords starting_pos = map.get_starting_pos(plnum);
 		//try {
-			trdesc.load_warehouse_with_start_wares
-				(egbase(),
-				 *dynamic_cast<Warehouse * const>
-				 (egbase().warp_building
-				  (map.get_starting_pos(plnum),
-				   plnum,
-				   trdesc.get_building_index("headquarters"))));
+			Warehouse & headquarter = *dynamic_cast<Warehouse * const>
+				(egbase().warp_building
+				 (starting_pos, plnum, trdesc.get_building_index("headquarters")));
+			egbase().conquer_area
+				(Player_Area
+				 (plnum, Area(starting_pos, headquarter.get_conquers())));
+			trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
 		//} catch (const Descr_Maintainer<Building_Descr>::Nonexistent) {
 			//throw wexception("Tribe %s lacks headquarters", tribe.get_name());
 		//}

@@ -352,12 +352,6 @@ bool Game::run(bool is_savegame)
 }
 
 
-void Game::do_conquer_area(const Player_Area player_area, const bool conquer) {
-	Editor_Game_Base::do_conquer_area(player_area, conquer);
-	player(player_area.player_number).set_area_seen
-		(Area(player_area, player_area.radius + 4), true); //  FIXME Here it is determined that players see 4 steps outside their territory. This must be defined in a ruleset instead.
-}
-
 /**
  * think() is called by the UI objects initiated during Game::run()
  * during their modal loop.
