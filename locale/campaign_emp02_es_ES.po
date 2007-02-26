@@ -1,10 +1,30 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2007-02-21 21:26+0100\n"
+"Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
 #: ../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Imperio 2: Avanzadilla hacia el exilio"
 
 #: ../campaigns/emp02.wmf/elemental:11
 msgid "Second mission of the Empire campaign"
-msgstr ""
+msgstr "Segunda misión de la campaña del Imperio"
 
 #: ../campaigns/emp02.wmf/event:11 ../campaigns/emp02.wmf/event:45
 #: ../campaigns/emp02.wmf/event:88 ../campaigns/emp02.wmf/event:427
@@ -12,7 +32,7 @@ msgstr ""
 #: ../campaigns/emp02.wmf/event:925 ../campaigns/emp02.wmf/event:960
 #: ../campaigns/emp02.wmf/event:996
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Diario de Lutius"
 
 #: ../campaigns/emp02.wmf/event:13
 msgid ""
@@ -23,10 +43,16 @@ msgid ""
 "will start our new life, we will build up an outpost for our exile, which "
 "perhaps will become a new, beautiful home to everyone of us."
 msgstr ""
+"¡Al fin!<br>Esta isla parece hecha para nosotros, es un regalo de los Dioses "
+"para mi y mi gente.<br>Hasta hoy, sólo hemos visto una pequeña parte de esta "
+"isla, pero esta parte ya ilumina mi mente, como si hubiéramos encontrado un "
+"tesoro incalculable, una tierra paradisíaca.<br>En esta isla empezaremos "
+"nuestra nueva vida, construiremos una avanzadilla hacia nuestro exilio, que "
+"quizás se convierta en un nuevo y hermoso hogar para todos nosotros."
 
 #: ../campaigns/emp02.wmf/event:15
 msgid "A new islands"
-msgstr ""
+msgstr "Nuevas islas"
 
 #: ../campaigns/emp02.wmf/event:47
 msgid ""
@@ -39,14 +65,23 @@ msgid ""
 "These forests should last forever, so we really should build up a forester "
 "too.<br><br>"
 msgstr ""
+"Mientras Saledus y yo caminábamos a través de los magníficos bosques del "
+"norte, sentimos que nuestro nuevo futuro acababa de empezar. Esta tierra es "
+"tan pacífica y hermosa que podría quedarme hasta el final de mis días."
+"<br>Pero hasta ese día, aún han de pasar muchos años. Por ahora debemos "
+"concentrarnos en el presente y conseguir algunos leñadores y un aserradero "
+"para obtener buenos materiales de construcción.<br>Pero no debemos "
+"olvidarnos de proteger este tesoro de la naturaleza. Estos bosques deben "
+"durar eternamente, así que también debemos tener un guardabosques.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:48 ../campaigns/emp02.wmf/objective:7
 msgid "* Build up three lumberjacks, a forester and a sawmill."
 msgstr ""
+"* Construye tres cabañas de leñador, una de guardabosques y un aserradero."
 
 #: ../campaigns/emp02.wmf/event:50
 msgid "The green forests"
-msgstr ""
+msgstr "Los verdes bosques"
 
 #: ../campaigns/emp02.wmf/event:90
 msgid ""
@@ -56,38 +91,47 @@ msgid ""
 "stones where among those rocks. Seems as if we can start a life in luxury in "
 "the not so distant future.<br><br>"
 msgstr ""
+"Más tarde caminé hasta las rocas al sur y busqué un lugar en el que "
+"construir una cantera, para conseguir piedra para nuestras más grandes "
+"construcciones.<br>Y de nuevo me sentí en el paraíso, al darme cuenta que "
+"había mármol entre esas rocas. Parece que podemos empezar una vida lujosa en "
+"un futuro no tan lejano.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:91 ../campaigns/emp02.wmf/objective:13
 msgid "* Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "- Construye una Cantera al sur de tu cuartel general."
 
 #: ../campaigns/emp02.wmf/event:93
 msgid "The rocks"
-msgstr ""
+msgstr "Las rocas"
 
 #: ../campaigns/emp02.wmf/event:429
 msgid ""
 "Wonderful, today our wood economy was completely built up. Now we can be "
 "sure to have enough wood for our future building-projects."
 msgstr ""
+"Maravilloso, hoy nuestra economía maderera está completa. Ahora podemos "
+"estar seguros de tener suficiente madera para nuestros futuros proyectos."
 
 #: ../campaigns/emp02.wmf/event:431
 msgid "Wood for the colony"
-msgstr ""
+msgstr "Madera para la colonia"
 
 #: ../campaigns/emp02.wmf/event:448
 msgid ""
 "Great, today the building of the quarry was completed. Now we get enough "
 "stone for all our future building projects."
 msgstr ""
+"Genial, hoy ha finalizado la construcción de la cantera. Ahora podemos tener "
+"piedra suficiente para nuestros proyectos futuros."
 
 #: ../campaigns/emp02.wmf/event:450
 msgid "Stone for the colony"
-msgstr ""
+msgstr "Piedra para la colonia"
 
 #: ../campaigns/emp02.wmf/event:480
 msgid "Saledus looks unhappy"
-msgstr ""
+msgstr "Saledus parece descontento"
 
 #: ../campaigns/emp02.wmf/event:482
 msgid ""
@@ -101,18 +145,26 @@ msgid ""
 "also brought to this island.<br>However, I beg you to be cautious and to "
 "build some barracks or sentrys around our colony.<br><br>"
 msgstr ""
+"Eh, Lutius,<br>no quiero ser histérico, pero he encontrado algo que me "
+"encoge el estómago y hace aflorar el miedo en mi corazón.<br>Te preguntarás "
+"la causa. Bien, te la diré:<br>Mientras me dirigía a la costa al sur de la "
+"isla encontré restos de otro barco. No se si esos restos son todo lo que "
+"quedó del navío, pero en cualquier caso no parecen muy viejas. Quizás los "
+"dueños de ese navío llegaron en la misma tormenta que nos trajo a nosotros a "
+"Malac' Mor.<br>En cualquier caso, te lo suplico, sé cauto y ordena construir "
+"algunos cuarteles y centinelas alrededor de la colonia.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:483 ../campaigns/emp02.wmf/objective:19
 msgid "* Build some barracks and sentrys around the colony."
-msgstr ""
+msgstr "* Construye algunos cuarteles y centinelas alrededor de la colonia."
 
 #: ../campaigns/emp02.wmf/event:485
 msgid "Dangerous shipparts"
-msgstr ""
+msgstr "Restos peligrosos"
 
 #: ../campaigns/emp02.wmf/event:547 ../campaigns/emp02.wmf/event:613
 msgid "Saledus smiles"
-msgstr ""
+msgstr "Saledus sonríe"
 
 #: ../campaigns/emp02.wmf/event:549
 msgid ""
@@ -123,14 +175,20 @@ msgid ""
 "said that this island is like paradise.<br>Let's expand to that mountain and "
 "start mining marble.<br><br>"
 msgstr ""
+"Mientras viajaba hacia el este encontré una montaña mayor. No estoy seguro, "
+"deberíamos enviar un geólogo a comprobarlo, pero creo que podremos conseguir "
+"mármol de algunas partes de la montaña. Sería magnífico. Quizá estabas en "
+"cierto cuando dijiste que esta isla es un paraíso.<br>Expandámonos hasta esa "
+"montaña, y empecemos a picar mármol.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:550 ../campaigns/emp02.wmf/objective:25
 msgid "* Expand to the east, to start mining marble on the mountain."
 msgstr ""
+"* Expándete hacia el este, para empezar a extraer mármol de las montañas."
 
 #: ../campaigns/emp02.wmf/event:552
 msgid "Marble on the mountain"
-msgstr ""
+msgstr "Mármol en la montaña"
 
 #: ../campaigns/emp02.wmf/event:615
 msgid ""
@@ -142,20 +200,29 @@ msgid ""
 "beautyful building-materials. Let's build a stonemason, who cuts columns, "
 "out of our marble, for us. <br><br>"
 msgstr ""
+"Por todos los Dioses, esto es magnífico, un regalo increíble. Hay otras dos "
+"montañas, y parece que una tiene un yacimiento de carbón y la otra de "
+"hierro. Ahora podemos comenzar a vivir como en Fremil. Deberíamos empezar "
+"inmediatamente a construir minas, quemadores, fundiciones, carpinterías y "
+"herrerías. Pero para todos esos edificios necesitamos más y mejores "
+"materiales. Construyamos un cantero, que nos provea de columnas a partir de "
+"los bloques de mármol.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:616 ../campaigns/emp02.wmf/objective:31
 msgid ""
 "* Build up a complete Mining and production infrastructure.<br>* Build up a "
 "Stonemason."
 msgstr ""
+"* Construye una infraestructura de minería y producción completa.<br>* "
+"Construye un cantero."
 
 #: ../campaigns/emp02.wmf/event:618
 msgid "Further mountains"
-msgstr ""
+msgstr "Más montañas"
 
 #: ../campaigns/emp02.wmf/event:728
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea entra..."
 
 #: ../campaigns/emp02.wmf/event:730
 msgid ""
@@ -172,10 +239,22 @@ msgid ""
 "the miners need good food and drinks to have enough power for their hard "
 "work."
 msgstr ""
+"Hola Lutius,<br>espero que perdones mi crítica, pero me parece que has "
+"olvidado algo. Es bueno, y por supuesto una gran idea, construir minas que "
+"nos permiten una vida más cómoda, pero los trabajadores de las minas están "
+"descontentos con la situación actual: trabajan duro y no tienen tiempo de "
+"preparar su comida.<br>¿Qué opinas de ayudarles? Construyamos una taberna "
+"que prepare buena comida para nuestros mineros, y una cervecería y una "
+"bodega, que suministren buena bebida.<br>Por supuesto, necesitaremos gente "
+"que cree los más cantidad de recursos para esta comida, así que sugiero "
+"conseguir un pescador, una granja, un molino y una panadería. También "
+"necesitaremos un cazador, una pocilga, un viñedo y un pozo.<br>No me "
+"malinterpretes, pero los mineros necesitan buena comida y bebida, para tener "
+"fuerza suficiente para su duro trabajo."
 
 #: ../campaigns/emp02.wmf/event:732
 msgid "Food for the miners"
-msgstr ""
+msgstr "Comida para los mineros"
 
 #: ../campaigns/emp02.wmf/event:868
 msgid ""
@@ -189,16 +268,28 @@ msgid ""
 "was able to hide myself and could silently go back to our colony.<br>Anyway, "
 "we MUST build up bigger military buildings, as soon as possible.<br><br>"
 msgstr ""
+"¡Por los Dioses!<br>Esto es completamente terrible. Parece que estemos cerca "
+"de una prueba Y parece que Saledus estaba acertado en sus temores acerca del "
+"naufragio.<br>Hoy, caminando hacia las costar orientales, me quedé "
+"petrificado. Allí estaba una de las odiosas, malvadas tribus bárbaras que "
+"tantos problemas nos han causado.<br>Al principio fui un poco ingenuo y "
+"deseé que fueran pacíficos, pero tan pronto como uno de ellos me vio, "
+"corrieron hacia mi y me atacaron con sus lanzas. Gracias a los Dioses, pude "
+"ocultarme de ellos y regresar a nuestra colonia.<br>En cualquier caso, "
+"DEBEMOS construir mejores edificios militares, tan pronto como sea posible."
+"<br><br>"
 
 #: ../campaigns/emp02.wmf/event:869 ../campaigns/emp02.wmf/objective:37
 msgid ""
 "* Build up bigger military buildings, like an outpost, a barrier or a tower, "
 "on the eastern frontier."
 msgstr ""
+"* Construye edificios militares mayores, como una avanzadilla, una muralla o "
+"una torre en tu frontera oriental."
 
 #: ../campaigns/emp02.wmf/event:871
 msgid "The Barbarians"
-msgstr ""
+msgstr "Los Bárbaros"
 
 #: ../campaigns/emp02.wmf/event:927
 msgid ""
@@ -210,6 +301,13 @@ msgid ""
 "barbarian headquarters stands now, to avoid new settlements of these "
 "barbarian bastards.<br><br>"
 msgstr ""
+"Esto es bueno. El primer gran edificio militar está construido, y la "
+"infraestructura minera es cada vez mejor. Ahora debemos concentrarnos en "
+"prepararnos para un reto mayor.<br>Tan pronto como tengamos suficientes "
+"soldados debemos atacar y eliminar a los bárbaros. Y entonces, cuando la "
+"isla sea nuestra de nuevo, construiré una gran fortaleza en el lugar que "
+"ahora ocupa el cuartel general bárbaro, para evitar otro asentamiento de "
+"esos bastardos.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:928 ../campaigns/emp02.wmf/objective:43
 msgid ""
@@ -218,10 +316,14 @@ msgid ""
 "(near the place, the barbarian headquarters stood before), to avoid new "
 "settlements of other tribes in that region."
 msgstr ""
+"* Tan pronto como tengas suficientes soldados, ataca y elimina completamente "
+"los edificios bárbaros.<br>* Finalmente, construye una fortaleza en el istmo "
+"(cerca del lugar que ocupaba el cuartel general bárbaro), para evitar el "
+"asentamiento de otras tribus en esa zona."
 
 #: ../campaigns/emp02.wmf/event:930
 msgid "Command for Attack"
-msgstr ""
+msgstr "Orden de ataque"
 
 #: ../campaigns/emp02.wmf/event:962
 msgid ""
@@ -231,22 +333,27 @@ msgid ""
 "put in a boat with the other peaceful ones and will be sent back to their "
 "country.<br><br>----------------------VICTORY!-----------------------"
 msgstr ""
+"Hoy me siento orgulloso. Luchamos por nuestro nuevo hogar y salimos "
+"victoriosos.<br>Aún hay algunos bárbaros ocultos en nuestra isla, pero estoy "
+"seguro que los encontraremos pronto. Todos los bárbaros que no nos ataquen "
+"serán embarcados y enviados de vuelta a su tierra.<br><br>----------------- "
+"¡VICTORIA!--------------------"
 
 #: ../campaigns/emp02.wmf/event:964
 msgid "Victory"
-msgstr ""
+msgstr "Victoria"
 
 #: ../campaigns/emp02.wmf/event:979
 msgid "7 days later..."
-msgstr ""
+msgstr "7 días más tarde..."
 
 #: ../campaigns/emp02.wmf/event:981
 msgid "As time is running by"
-msgstr ""
+msgstr "Mientras el tiempo pasa"
 
 #: ../campaigns/emp02.wmf/event:988
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: ../campaigns/emp02.wmf/event:998
 msgid ""
@@ -258,14 +365,21 @@ msgid ""
 "<br><br>You have completed this mission. You may continue playing if you "
 "wish, otherwise move on to the next mission."
 msgstr ""
+"Hoy llegó una paloma a nuestra isla. El mensaje que trajo me está llenando "
+"de oscuros pensamientos, miedos y horrores.<br>El mensaje iba dirigido a mi, "
+"suplicándome que volviera a Fremil.<br>Dice que el Imperio está en guerra "
+"con los Bárbaros. Fueron atacados desde el norte, por la tribu que yo quería "
+"atacar antes de exiliarme.<br>Para mi, está claro lo que debo hacer..."
+"<br><br>Has completado esta misión. Puedes seguir jugando si lo deseas, o "
+"pasar a la siguiente misión."
 
 #: ../campaigns/emp02.wmf/event:1000
 msgid "A Message"
-msgstr ""
+msgstr "Un Mensaje"
 
 #: ../campaigns/emp02.wmf/event:1016
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea sonríe..."
 
 #: ../campaigns/emp02.wmf/event:1018
 msgid ""
@@ -274,7 +388,11 @@ msgid ""
 "<br>Nice to see, that we get a warmer and more familiar environment on our "
 "island. <br>Thank you Lutius."
 msgstr ""
+"Oye amigo,<br>acabo de visitar la nueva taberna 'Las Palmeras'. Su cerveza "
+"es realmente sabrosa, deberías echar un trago allí tú también.<br>Es bueno "
+"ver que tenemos un ambiente más cálido y familiar en nuestra isla."
+"<br>Gracias, Lutius."
 
 #: ../campaigns/emp02.wmf/event:1020
 msgid "A drink at 'At the palms'"
-msgstr ""
+msgstr "Una bebida en 'Las Palmeras'"

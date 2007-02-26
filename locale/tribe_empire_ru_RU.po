@@ -122,6 +122,15 @@ msgstr "Штаб"
 msgid "Hunters Hut"
 msgstr "Хижина охотника"
 
+#: ../tribes/empire/buildings/inn/conf:2
+msgid "Inn"
+msgstr "Постоялый двор"
+
+#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Дровосек"
+
 #: ../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"
 msgstr "Мраморная шахта"
@@ -141,6 +150,10 @@ msgstr "Форпост"
 #: ../tribes/empire/buildings/piggery/conf:2
 msgid "Piggery"
 msgstr "Свинарник"
+
+#: ../tribes/empire/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Каменоломня"
 
 #: ../tribes/empire/buildings/sawmill/conf:2
 msgid "Sawmill"
@@ -692,10 +705,6 @@ msgstr "Охотник"
 msgid "Innkeeper"
 msgstr "Трактирщик"
 
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Дровосек"
-
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Главный шахтер"
@@ -731,9 +740,3 @@ msgstr "Виноградарь"
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Ткач"
-
-#~ msgid "Inn"
-#~ msgstr "Постоялый двор"
-
-#~ msgid "Quarry"
-#~ msgstr "Каменоломня"

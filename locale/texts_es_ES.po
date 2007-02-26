@@ -2,14 +2,14 @@
 # Copyright (C) 2007 Widelands Development Team
 # This file is distributed under the same license as Widelands' package.
 # Antonio Trueba Gayol <atrueba@users.sourceforge.net>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Spanish translation - texts.pot 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-12 19:19+0100\n"
+"PO-Revision-Date: 2007-02-15 19:21+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -784,7 +784,7 @@ msgstr "Inicio            Centra el mapa en la posición de partida"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
-msgstr "AVPAG       Aumenta la velocidad de juego  "
+msgstr "AVPAG        Aumenta la velocidad de juego  "
 
 #: ../txts/README:55
 msgid "PAGEDOWN    Decrease gamespeed"

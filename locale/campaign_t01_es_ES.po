@@ -2,14 +2,14 @@
 # Copyright (C) 2007 Widelands Development Team
 # This file is distributed under the same license as Widelands' package.
 # Antonio Trueba Gayol <atrueba@mundo-r.com>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Spanish translation - Tutorial 1 0.00\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-13 16:43+0100\n"
+"PO-Revision-Date: 2007-02-15 19:56+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgstr ""
 "guerreros esperan que partamos gloriosamente en cualquier momento, pero dudo "
 "seriamente que sea pronto. Y los días son cada vez más cortos y fríos..."
 "<br>Debemos prepararnos, por si acaso tenemos que enfrentarnos al invierno "
-"es estas rudas tierras. Creo que al este de nuestro campamento hay algunos "
+"en estas rudas tierras. Creo que al este de nuestro campamento hay algunos "
 "lugares donde instalar leñadores.<br><br>-- NUEVO OBJETIVO --<br>- Pulsa "
 "ESPACIO para ver dónde puedes construir. Las marcas rojas indican donde "
 "puedes ubicar un edificio pequeño, como una cabaña.<br>-Construye una cabaña "
@@ -294,7 +294,7 @@ msgstr ""
 "Debemos respetarlos y protegerlos siempre. Lo que tomemos, debemos "
 "devolverlo.<br>Así que, para reponer los árboles que cortemos, debemos tener "
 "un silvicultor, a ser posible cerca del leñador.\"<br><br>-- NUEVO OBJETIVO "
-"--<br>- Construye una cabaña de jardinero al este de la primera cabaña de "
+"--<br>- Construye una cabaña de silvicultor al este de la primera cabaña de "
 "leñador."
 
 #: ../campaigns/t01.wmf/event:570

@@ -2,14 +2,14 @@
 # Copyright (C) 2007 Widelands Development Team
 # This file is distributed under the same license as Widelands' package.
 # Antonio Trueba Gayol <atrueba@users.sourceforge.net>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Spanish translation - widelands.pot 0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-21 20:01+0100\n"
-"PO-Revision-Date: 2007-02-13 16:53+0100\n"
+"PO-Revision-Date: 2007-02-24 20:13+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -957,7 +957,7 @@ msgstr "Menú de herramientas"
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
 #: ../src/editor/ui_menus/editor_event_menu.cc:157
 msgid "New Trigger"
-msgstr "Nuevo disparador"
+msgstr "Nuevo..."
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:176
@@ -1037,7 +1037,7 @@ msgstr "Disparadores registrados:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:94
 msgid "New Event Chain"
-msgstr "Nueva secuencia"
+msgstr "Nueva..."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../src/editor/ui_menus/editor_event_menu.cc:134
@@ -1057,7 +1057,7 @@ msgstr "Borrar"
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
 msgid "New Event"
-msgstr "Nuevo evento"
+msgstr "Nuevo..."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
@@ -1181,9 +1181,9 @@ msgid "Trigger: "
 msgstr "Disparador:"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:254
-#, fuzzy, c-format
+#, c-format
 msgid "Unnamed%u"
-msgstr "Sin nombre"
+msgstr "Sin nombre%u"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:284
 msgid "Can't delete Objective, because it's trigger is in use by "
@@ -1196,7 +1196,7 @@ msgstr "Recursos"
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:46
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:42
 msgid "In-/Decrease Value"
-msgstr "Inc/Decrementar valor"
+msgstr "Diferencial"
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:76
@@ -1698,7 +1698,7 @@ msgstr "Imperio 1: Las hebras de Malac' Mor"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:81
 msgid "Empire 2: An outpost for exile"
-msgstr ""
+msgstr "Imperio 2: Avanzadilla hacia el exilio"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:48
 msgid "Choose your map!"
@@ -1801,7 +1801,7 @@ msgstr "Jugado:"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
-msgstr ""
+msgstr "Antesala"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
 #, c-format
@@ -1845,7 +1845,7 @@ msgstr "Salir del juego"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
 msgid "Version"
-msgstr ""
+msgstr "Versión"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
 msgid "(C) 2002-2007 by the Widelands Development Team"

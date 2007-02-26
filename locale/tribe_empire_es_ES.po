@@ -2,14 +2,14 @@
 # Copyright (C) 2007 Widelands Development Team
 # This file is distributed under the same license as Widelands' package.
 # Antonio Trueba Gayol <atrueba@mundo-r.com>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Spanish translation - tribe_empire.pot 0.00\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-13 16:40+0100\n"
+"PO-Revision-Date: 2007-02-25 21:39+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,9 +37,8 @@ msgstr "Campo de batalla"
 
 #: ../tribes/empire/buildings/armoursmith/conf:2
 #: ../tribes/empire/workers/armoursmith/conf:2
-#, fuzzy
 msgid "Armoursmith"
-msgstr "¿Armaduría?"
+msgstr "Herrería"
 
 #: ../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
@@ -172,7 +171,7 @@ msgstr "Corral"
 
 #: ../tribes/empire/buildings/smelting_works/conf:2
 msgid "Smelting Works"
-msgstr "Fundición"
+msgstr "Forja"
 
 #: ../tribes/empire/buildings/stonemason/conf:2
 #: ../tribes/empire/workers/stonemason/conf:2
@@ -338,8 +337,7 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the Smelting works. "
 "They are produced by the carpenter."
 msgstr ""
-"El <**smelter**> utiliza estas tenazas en la función. Las fabrica el "
-"carpintero."
+"El forjador utiliza estas tenazas en la forja. Las fabrica el carpintero."
 
 #: ../tribes/empire/wares/fish/conf:2
 msgid "Fish"
@@ -491,17 +489,15 @@ msgstr ""
 "utilizar para crear bellos edificios y columnas."
 
 #: ../tribes/empire/wares/marblecolumn/conf:2
-#, fuzzy
 msgid "Marblecolumn"
-msgstr "¿Capitel?"
+msgstr "Columna"
 
 #: ../tribes/empire/wares/marblecolumn/conf:3
-#, fuzzy
 msgid ""
 "Marblecolumns present the high culture of the Empire, so they are needed for "
 "nearly every bigger building."
 msgstr ""
-"Los capiteles demuestran la gran cultura del Imperio, así que se utilizan en "
+"Las columnas demuestran la gran cultura del Imperio, así que se utilizan en "
 "casi todos los edificios importantes."
 
 #: ../tribes/empire/wares/meal/conf:2
@@ -606,7 +602,7 @@ msgstr "Los troncos son un importante recurso para el Imperio."
 
 #: ../tribes/empire/wares/war_lance/conf:2
 msgid "War-Lance"
-msgstr "Casco de Guerra"
+msgstr "Lanza de Guerra"
 
 #: ../tribes/empire/wares/war_lance/conf:3
 msgid ""
@@ -687,7 +683,7 @@ msgstr "Constructor"
 
 #: ../tribes/empire/workers/burner/conf:2
 msgid "Burner"
-msgstr "Quemador de turba"
+msgstr "Hornero"
 
 #: ../tribes/empire/workers/carpenter/conf:2
 msgid "Carpenter"
@@ -742,9 +738,8 @@ msgid "Pig-breeder"
 msgstr "Porquero"
 
 #: ../tribes/empire/workers/smelter/conf:2
-#, fuzzy
 msgid "Smelter"
-msgstr "¿Fundidor?"
+msgstr "Forjador"
 
 #: ../tribes/empire/workers/soldier/conf:2
 msgid "Soldier"

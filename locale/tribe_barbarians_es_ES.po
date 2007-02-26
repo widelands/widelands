@@ -2,14 +2,14 @@
 # Copyright (C) 2007 Widelands Development Team
 # This file is distributed under the same license as Widelands' package.
 # Antonio Trueba Gayol <atrueba@users.sourceforge.net>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Spanish translation - tribe_barbarians.pot 1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-13 16:42+0100\n"
+"PO-Revision-Date: 2007-02-25 21:55+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +146,7 @@ msgstr "Cuartel general"
 #: ../tribes/barbarians/buildings/helmsmith/conf:2
 #: ../tribes/barbarians/workers/helmsmith/conf:2
 msgid "Helmsmith"
-msgstr "Herrero"
+msgstr "Planchista"
 
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
@@ -159,11 +159,11 @@ msgstr "Posada"
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
 #: ../tribes/barbarians/workers/lumberjack/conf:2
 msgid "Lumberjack"
-msgstr "Cabaña de leñador"
+msgstr "Leñador"
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
 msgid "Metalworks"
-msgstr "Metalurgia"
+msgstr "Herrería"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
 msgid "Micro brewery"
@@ -187,11 +187,11 @@ msgstr "Centinela"
 
 #: ../tribes/barbarians/buildings/smelting_works/conf:2
 msgid "Smelting Works"
-msgstr "Fundición"
+msgstr "Forja"
 
 #: ../tribes/barbarians/buildings/stonegrinder/conf:2
 msgid "Stonegrinder"
-msgstr ""
+msgstr "Molino"
 
 #: ../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
@@ -211,7 +211,7 @@ msgstr "Almacén"
 
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
-msgstr ""
+msgstr "Gran armería"
 
 #: ../tribes/barbarians/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -232,7 +232,7 @@ msgid ""
 "same modell."
 msgstr ""
 "El hacha es el arma y herramienta básica de los bárbaros. Todos los soldados "
-"jóvenes sen equipados con esta arma básica, que también usan los leñadores."
+"jóvenes son equipados con esta arma básica, que también usan los leñadores."
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
@@ -244,7 +244,7 @@ msgid ""
 "produced in the metalworks like all tools."
 msgstr ""
 "La pala de hornear es la herramienta del panadero, cada uno necesita una. Se "
-"fabrican en la metalurgia, como todas las herramientas."
+"fabrican en la herrería, como todas las herramientas."
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
@@ -256,7 +256,7 @@ msgid ""
 "produce. Only trained warriors are able to yield such a weapon. It is "
 "produce in the Axefactory."
 msgstr ""
-"Es la segunda arma más poderosa que los bárbaros son capaces de fabricar. "
+"Es el segundo arma más poderosa que los bárbaros son capaces de fabricar. "
 "Sólo los guerreros entrenados son capaces de utilizarla. Se fabrica en la "
 "armería."
 
@@ -352,8 +352,8 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the Smelting works. "
 "Produced in the metalworks."
 msgstr ""
-"Las tenazas son la herramienta del herrero, trabajando en la fundición. Son "
-"fabricadas en la metalurgia."
+"Las tenazas son la herramienta del forjador, trabajando en la forja. Son "
+"fabricadas en la herrería."
 
 #: ../tribes/barbarians/wares/fish/conf:2
 msgid "Fish"
@@ -397,7 +397,7 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
-msgstr "Oro"
+msgstr "Pepita de oro"
 
 #: ../tribes/barbarians/wares/goldstone/conf:3
 msgid "This is the yellow goldstone."
@@ -426,8 +426,8 @@ msgid ""
 "reserve! Build at the metalworks."
 msgstr ""
 "El martillo es una herramienta esencial. Es utilizada por los geólogos, los "
-"trabajadores, y los herreros. ¡Asegúrate de tener siempre algunas de "
-"reserva! Se fabrican en la metalurgia."
+"trabajadores, los herreros y los armeros. ¡Asegúrate de tener siempre "
+"algunas de reserva! Se fabrican en la herrería."
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
@@ -448,7 +448,7 @@ msgid ""
 msgstr ""
 "Esta lanza es suficientemente ligera para ser lanzada, pero suficientemente "
 "pesada para matar cualquier animal de un impacto. Sólo los cazadores la "
-"usan. Se fabrica en las metalurgias."
+"usan. Se fabrica en las herrerías."
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
@@ -460,7 +460,7 @@ msgstr "Las armas y las herramientas se fabrican con hierro."
 
 #: ../tribes/barbarians/wares/ironore/conf:2
 msgid "Ironore"
-msgstr "Hierro"
+msgstr "Mineral de hierro"
 
 #: ../tribes/barbarians/wares/ironore/conf:3
 msgid "This is the red ironore."
@@ -515,7 +515,7 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metalworks."
 msgstr ""
-"Este pico lo usan los canteros y los mineros. Se fabrica en las metalurgias"
+"Este pico lo usan los canteros y los mineros. Se fabrica en las herrerías"
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pittabread"
@@ -551,7 +551,7 @@ msgstr "Guadaña"
 msgid ""
 "The Scythe is the tool of the farmers. It is produced in the metalworks."
 msgstr ""
-"La guadaña es la herramienta de los granjeros. Se fabrica en la metalurgia."
+"La guadaña es la herramienta de los granjeros. Se fabrica en la herrería."
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
@@ -577,7 +577,7 @@ msgid ""
 "the ranger use it. Build at the metalworks."
 msgstr ""
 "Las palas son necesarias para el correcto tratamiento de las plantas, así "
-"que el labrador y el silvicultor las necesitan. Se fabrican en la metalurgia."
+"que el labrador y el silvicultor las necesitan. Se fabrican en la herrería."
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
@@ -629,7 +629,6 @@ msgid "Warriors Axe"
 msgstr "Hacha de guerrero"
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:3
-#, fuzzy
 msgid ""
 "The Warriors Axe is the most dangerous of all weapons. Only a few warriors "
 "ever were able to handle those huge and powerfull axes. Build at the "
@@ -637,7 +636,7 @@ msgid ""
 msgstr ""
 "El Hacha de Guerrero es el arma más peligrosa. Sólo unos pocos guerreros son "
 "capaces de manejar estas enormes y poderosas hachas. Se fabrican en la "
-"<**War Mill**>."
+"<armería."
 
 #: ../tribes/barbarians/wares/water/conf:2
 msgid "Water"
@@ -681,7 +680,7 @@ msgstr "Constructor"
 
 #: ../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
-msgstr ""
+msgstr "Hornero"
 
 #: ../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
@@ -741,7 +740,7 @@ msgstr "Silvicultor"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"
-msgstr "Herrero"
+msgstr "Forjador"
 
 #: ../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"

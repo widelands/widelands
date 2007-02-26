@@ -2,14 +2,14 @@
 # Copyright (C) 2007 Widelands Development Team
 # This file is distributed under the same license as Widelands' package.
 # Antonio Trueba Gayol <atrueba@mundo-r.com>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Spanish translation - Tutorial 2 0.00\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-12 18:42+0100\n"
+"PO-Revision-Date: 2007-02-25 21:45+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,6 @@ msgstr ""
 "sin ellas no podrás expandirte.<br>Construye una carpintería."
 
 #: ../campaigns/t02.wmf/objective:72
-#, fuzzy
 msgid ""
 "<p>Better buildings may require also other improved materials besides "
 "blackwood. One of those is grindstone, which is produced out of water and "
@@ -154,10 +153,10 @@ msgid ""
 msgstr ""
 "<p>Mejores edificios pueden necesitar materiales especiales aparte de las "
 "vigas. Uno de ellos son los bloques, que se fabrican con piedra en bruto y "
-"agua en el <**stonegrinder**>. Puedes obtener agua construyendo un pozo "
-"cerca de una fuente de agua, que tus Geólogos pueden descubrir si los envías "
-"a una bandera que no esté en terreno montañoso, y seleccionando el símbolo "
-"de Geólogo en su menú.<br>Construye un <**stonegrinder**> y un pozo.</p>"
+"agua en el molino. Puedes obtener agua construyendo un pozo cerca de una "
+"fuente de agua, que tus Geólogos pueden descubrir si los envías a una "
+"bandera que no esté en terreno montañoso, y seleccionando el símbolo de "
+"Geólogo en su menú.<br>Construye un molino y un pozo.</p>"
 
 #: ../campaigns/t02.wmf/objective:80
 msgid ""
@@ -636,7 +635,6 @@ msgstr ""
 "necesario, ¡construir una fortaleza como el mundo no ha conocido!\"<br><br>"
 
 #: ../campaigns/t02.wmf/event:752
-#, fuzzy
 msgid ""
 "--NEW OBJECTIVES--<br>- Better buildings may require also other improved "
 "materials besides blackwood. One of those is grindstone, which is produced "
@@ -648,11 +646,11 @@ msgid ""
 msgstr ""
 "-- NUEVO OBJETIVO --<br>- Mejores edificios pueden necesitar materiales "
 "especiales aparte de las vigas. Uno de ellos son los bloques, que se "
-"fabrican con piedra en bruto y agua en el <**stonegrinder**>. Puedes obtener "
-"agua construyendo un pozo cerca de una fuente de agua, que tus Geólogos "
-"pueden descubrir si los envías a una bandera que no esté en terreno "
-"montañoso, y seleccionando el símbolo de Geólogo en su menú.<br>Construye un "
-"<**stonegrinder**> y un pozo.</p>"
+"fabrican con piedra en bruto y agua en el molino. Puedes obtener agua "
+"construyendo un pozo cerca de una fuente de agua, que tus Geólogos pueden "
+"descubrir si los envías a una bandera que no esté en terreno montañoso, y "
+"seleccionando el símbolo de Geólogo en su menú.<br>Construye un molino y un "
+"pozo.</p>"
 
 #: ../campaigns/t02.wmf/event:765
 msgid "Khantrukh steps in..."
