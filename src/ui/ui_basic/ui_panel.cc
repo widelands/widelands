@@ -106,7 +106,7 @@ Panel::~Panel()
 /**
 Free all of the panel's children.
 */
-void Panel::free_children() {delete _fchild;}
+void Panel::free_children() {while (_fchild) delete _fchild;}
 
 
 /**
