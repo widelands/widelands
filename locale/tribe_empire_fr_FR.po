@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-24 00:18+0100\n"
+"PO-Revision-Date: 2007-02-26 23:34+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -15,15 +15,15 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
-#: ../tribes/empire/conf:24
+#: ../tribes/empire/conf:18
 msgid "The Widelands Development Team"
 msgstr "L'équipe de développement de Widelands"
 
-#: ../tribes/empire/conf:25
+#: ../tribes/empire/conf:19
 msgid "The Empire"
 msgstr "L'Empire"
 
-#: ../tribes/empire/conf:26
+#: ../tribes/empire/conf:20
 msgid "This is the culture of the roman Empire."
 msgstr "Voici la culture de l'Empire Romain"
 
@@ -46,7 +46,7 @@ msgstr "Caserne"
 
 #: ../tribes/empire/buildings/barrier/conf:2
 msgid "Barrier"
-msgstr "Barrière"
+msgstr "Barricade"
 
 #: ../tribes/empire/buildings/brewery/conf:2
 msgid "Brewery"
@@ -102,7 +102,7 @@ msgstr "Hutte de Pêcheur"
 
 #: ../tribes/empire/buildings/forester/conf:2
 msgid "Forester Hut"
-msgstr "Sylviculteur"
+msgstr "Hutte de garde forestier"
 
 #: ../tribes/empire/buildings/fortress/conf:2
 msgid "Fortress"
@@ -112,7 +112,7 @@ msgstr "Forteresse"
 msgid "Gold Mine"
 msgstr "Mine d'or"
 
-#: ../tribes/empire/buildings/headquarters/conf:6
+#: ../tribes/empire/buildings/headquarters/conf:2
 msgid "Headquarters"
 msgstr "Quartier Général"
 
@@ -423,7 +423,7 @@ msgstr ""
 
 #: ../tribes/empire/wares/helm/conf:2
 msgid "Helm"
-msgstr "Gouvernail"
+msgstr "Casque"
 
 #: ../tribes/empire/wares/helm/conf:3
 msgid "Basic defence of a warrior"
@@ -579,8 +579,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "use it. It is produced by the carpenter."
 msgstr ""
-"La pelle est nécessaire à la plantation. Elle est utilisée par le "
-"sylviculteur et produite par le charpentier. "
+"La pelle est nécessaire à la plantation. Elle est utilisée par le garde "
+"forestier et produite par le charpentier. "
 
 #: ../tribes/empire/wares/stone/conf:2
 msgid "Stones"
@@ -705,7 +705,7 @@ msgstr "Pêcheur"
 
 #: ../tribes/empire/workers/forester/conf:2
 msgid "Forester"
-msgstr "Sylviculteur"
+msgstr "Garde Forestier"
 
 #: ../tribes/empire/workers/geologist/conf:2
 msgid "Geologist"

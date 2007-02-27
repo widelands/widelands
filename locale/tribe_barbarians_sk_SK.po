@@ -12,15 +12,15 @@ msgstr ""
 "X-Poedit-Language: czech\n"
 "X-Poedit-Country: Czech Republic\n"
 
-#: ../tribes/barbarians/conf:24
+#: ../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
 msgstr "Vývojový tím Widelands"
 
-#: ../tribes/barbarians/conf:25
+#: ../tribes/barbarians/conf:19
 msgid "Barbarians"
 msgstr "Barbari"
 
-#: ../tribes/barbarians/conf:26
+#: ../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
 msgstr "Mocné kmene východných zemí!"
 

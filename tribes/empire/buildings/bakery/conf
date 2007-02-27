@@ -29,15 +29,15 @@ stone=3
 
 [idle]
 pics=bakery_i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=60
+hot_spot_x=85
+hot_spot_y=65
 
 [working]
 pics=bakery_w_??.png  # ???
-hot_spot_x=40
-hot_spot_y=60
+hot_spot_x=85
+hot_spot_y=65
 
 [build]
 pics=bakery_b_??.png  # ???
-hot_spot_x=40
-hot_spot_y=60
+hot_spot_x=85
+hot_spot_y=65

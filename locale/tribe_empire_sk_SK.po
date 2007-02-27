@@ -12,15 +12,15 @@ msgstr ""
 "X-Poedit-Language: czech\n"
 "X-Poedit-Country: Czech Republic\n"
 
-#: ../tribes/empire/conf:24
+#: ../tribes/empire/conf:18
 msgid "The Widelands Development Team"
 msgstr "Vývojový tím Widelands"
 
-#: ../tribes/empire/conf:25
+#: ../tribes/empire/conf:19
 msgid "The Empire"
 msgstr ""
 
-#: ../tribes/empire/conf:26
+#: ../tribes/empire/conf:20
 msgid "This is the culture of the roman Empire."
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr "Pevnosť"
 msgid "Gold Mine"
 msgstr "Zlatá baňa"
 
-#: ../tribes/empire/buildings/headquarters/conf:6
+#: ../tribes/empire/buildings/headquarters/conf:2
 msgid "Headquarters"
 msgstr "Základňa"
 

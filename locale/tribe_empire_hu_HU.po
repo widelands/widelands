@@ -16,15 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: ../tribes/empire/conf:24
+#: ../tribes/empire/conf:18
 msgid "The Widelands Development Team"
 msgstr "Widelands fejlesztőcsapat"
 
-#: ../tribes/empire/conf:25
+#: ../tribes/empire/conf:19
 msgid "The Empire"
 msgstr "A Birodalom"
 
-#: ../tribes/empire/conf:26
+#: ../tribes/empire/conf:20
 msgid "This is the culture of the roman Empire."
 msgstr "A Római Birodalom kultúrája."
 
@@ -114,7 +114,7 @@ msgstr "Vár"
 msgid "Gold Mine"
 msgstr "Aranybánya"
 
-#: ../tribes/empire/buildings/headquarters/conf:6
+#: ../tribes/empire/buildings/headquarters/conf:2
 msgid "Headquarters"
 msgstr "Főhadiszállás"
 

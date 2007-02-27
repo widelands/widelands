@@ -5,22 +5,22 @@ msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-23 23:45+0100\n"
+"PO-Revision-Date: 2007-02-25 19:07+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../tribes/barbarians/conf:24
+#: ../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
 msgstr "L'équipe de développement de Widelands"
 
-#: ../tribes/barbarians/conf:25
+#: ../tribes/barbarians/conf:19
 msgid "Barbarians"
 msgstr "Barbares"
 
-#: ../tribes/barbarians/conf:26
+#: ../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
 msgstr "La puissante tribu des terres de l'est!"
 
@@ -106,7 +106,7 @@ msgstr "Ferme"
 
 #: ../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
-msgstr "Sylviculteur"
+msgstr "Horticulteur"
 
 #: ../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
@@ -184,7 +184,7 @@ msgstr "Fonderie"
 
 #: ../tribes/barbarians/buildings/stonegrinder/conf:2
 msgid "Stonegrinder"
-msgstr "Taille de Pierre"
+msgstr "Fabrique de Chaux"
 
 #: ../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
@@ -403,15 +403,15 @@ msgstr "Ceci est la pépite d'or jaune."
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
-msgstr "Pierre de Taille"
+msgstr "Chaux"
 
 #: ../tribes/barbarians/wares/grindstone/conf:3
 msgid ""
 "Raw stone can be enhanced to grind stone which delivers solid, non burning "
 "build material."
 msgstr ""
-"La pierre brute peut être transformée en pierre de taille qui fournit un "
-"matériau de construction solide et ignifugé."
+"La pierre brute peut être transformée en chaux qui fournit un matériau de "
+"construction solide et ignifugé."
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -650,7 +650,7 @@ msgid ""
 "places, be it to make bread or beer or to grind stones."
 msgstr ""
 "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup "
-"d'endroits, pour le pain et la bière ou polir la pierre."
+"d'endroits, pour le pain et la bière ou fabriquer la chaux."
 
 #: ../tribes/barbarians/wares/wheat/conf:2
 msgid "Wheat"
@@ -738,7 +738,7 @@ msgstr "Mineur"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
-msgstr "Sylviculteur"
+msgstr "Garde Forestier"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"

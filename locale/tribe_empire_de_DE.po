@@ -20,15 +20,15 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: ../tribes/empire/conf:24
+#: ../tribes/empire/conf:18
 msgid "The Widelands Development Team"
 msgstr "Das Widelands Entwicklungsteam"
 
-#: ../tribes/empire/conf:25
+#: ../tribes/empire/conf:19
 msgid "The Empire"
 msgstr "Das Imperium"
 
-#: ../tribes/empire/conf:26
+#: ../tribes/empire/conf:20
 msgid "This is the culture of the roman Empire."
 msgstr "Dies ist die Kultur des römischen Imperiums."
 
@@ -117,7 +117,7 @@ msgstr "Festung"
 msgid "Gold Mine"
 msgstr "Goldmine"
 
-#: ../tribes/empire/buildings/headquarters/conf:6
+#: ../tribes/empire/buildings/headquarters/conf:2
 msgid "Headquarters"
 msgstr "Hauptquartier"
 

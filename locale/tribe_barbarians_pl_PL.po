@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../tribes/barbarians/conf:24
+#: ../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
 msgstr "Zespól rozwojowy Widelands"
 
-#: ../tribes/barbarians/conf:25
+#: ../tribes/barbarians/conf:19
 msgid "Barbarians"
 msgstr "Barbarzyńcy"
 
-#: ../tribes/barbarians/conf:26
+#: ../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
 msgstr "Potężne ludy ze wschodnich ziem!"
 

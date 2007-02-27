@@ -16,15 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: ../tribes/barbarians/conf:24
+#: ../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
 msgstr "Widelands fejlesztőcsapat"
 
-#: ../tribes/barbarians/conf:25
+#: ../tribes/barbarians/conf:19
 msgid "Barbarians"
 msgstr "Barbárok"
 
-#: ../tribes/barbarians/conf:26
+#: ../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
 msgstr "A legendás törzs a déli területekről!"
 

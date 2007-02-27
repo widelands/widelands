@@ -19,15 +19,15 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../tribes/barbarians/conf:24
+#: ../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
 msgstr "El Equipo de Desarrollo de Widelands"
 
-#: ../tribes/barbarians/conf:25
+#: ../tribes/barbarians/conf:19
 msgid "Barbarians"
 msgstr "Bárbaros"
 
-#: ../tribes/barbarians/conf:26
+#: ../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
 msgstr "¡Las prodigiosas tribus de las tierras orientales!"
 

@@ -28,15 +28,15 @@ stone=2
 
 [idle]
 pics=brewery_i_??.png  # ???
-hot_spot_x=47
+hot_spot_x=85
 hot_spot_y=65
 
 [build]
 pics=brewery_i_??.png  # ???
-hot_spot_x=47
+hot_spot_x=85
 hot_spot_y=65
 
 [working]
 pics=brewery_i_??.png  # ???
-hot_spot_x=47
+hot_spot_x=85
 hot_spot_y=65
