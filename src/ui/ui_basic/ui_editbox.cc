@@ -142,9 +142,11 @@ handles the mousemove for this panel.
 does not much, suppresses messages when the focus
 is received
 */
-bool Edit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff) {
+bool Edit_Box::handle_mousemove
+	(const Uint8 state, int x, int y, int xdiff, int ydiff)
+{
 	return m_keyboard_grabbed ?
-		true : Basic_Button::handle_mousemove(x, y, xdiff, ydiff);
+		true : Basic_Button::handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
 /**

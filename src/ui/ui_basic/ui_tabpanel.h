@@ -54,7 +54,7 @@ private:
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
-	bool handle_mousemove(int x, int y, int xdiff, int ydiff);
+	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
 	void handle_mousein(bool inside);
 
 	struct Tab {

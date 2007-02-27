@@ -237,7 +237,7 @@ void Tab_Panel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-bool Tab_Panel::handle_mousemove(int x, int y, int, int) {
+bool Tab_Panel::handle_mousemove(const Uint8 state, int x, int y, int, int) {
 	int hl;
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)

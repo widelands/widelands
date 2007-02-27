@@ -47,7 +47,7 @@ struct InputCallback {
 	void (*mouse_release)
 	(const Uint8 button, //  Button number as #defined in SDL_mouse.h.
 	 int x, int y);      //  The coordinates of the mouse at release time.
-	void (*mouse_move) (int x, int y, int xdiff, int ydiff);
+	void (*mouse_move) (const Uint8 state, int x, int y, int xdiff, int ydiff);
 	void (*key)        (bool down, int code, char c);
 };
 

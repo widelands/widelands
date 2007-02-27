@@ -134,7 +134,8 @@ struct Panel : public Object {
 	virtual void handle_mousein(bool inside);
 	virtual bool handle_mousepress  (const Uint8 btn, int x, int y);
 	virtual bool handle_mouserelease(const Uint8 btn, int x, int y);
-	virtual bool handle_mousemove(int x, int y, int xdiff, int ydiff);
+	virtual bool handle_mousemove
+		(const Uint8 state, int x, int y, int xdiff, int ydiff);
 	virtual bool handle_key(bool down, int code, char c);
 
 	void set_handle_mouse(bool yes);
@@ -176,7 +177,7 @@ private:
 	void do_mousein(bool inside);
 	bool do_mousepress  (const Uint8 btn, int x, int y);
 	bool do_mouserelease(const Uint8 btn, int x, int y);
-	bool do_mousemove(int x, int y, int xdiff, int ydiff);
+	bool do_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
 	bool do_key(bool down, int code, char c);
 
 	Panel *_parent;
@@ -210,7 +211,8 @@ private:
 	static Panel *ui_trackmouse(int *x, int *y);
 	static void ui_mousepress  (const Uint8 button, int x, int y);
 	static void ui_mouserelease(const Uint8 button, int x, int y);
-	static void ui_mousemove(int x, int y, int xdiff, int ydiff);
+	static void ui_mousemove
+		(const Uint8 state, int x, int y, int xdiff, int ydiff);
 	static void ui_key(bool down, int code, char c);
 
 	static Panel *_modal;

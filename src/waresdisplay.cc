@@ -72,7 +72,7 @@ WaresDisplay::~WaresDisplay()
 /*
  * handles mouse move
  */
-bool WaresDisplay::handle_mousemove(int x, int y, int, int) {
+bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
    int row= y / (WARE_MENU_PIC_H + 8 + 3);
    int index=row*WaresPerRow;
    index += x / (WARE_MENU_PIC_W +4)+1;

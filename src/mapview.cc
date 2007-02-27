@@ -159,10 +159,12 @@ Map_View::handle_mousemove
 Scroll the view according to mouse movement.
 ===============
 */
-bool Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff) {
+bool Map_View::handle_mousemove
+(const Uint8 state, int x, int y, int xdiff, int ydiff)
+{
 	if (m_dragging)
 	{
-		if (SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_RIGHT))
+		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
 			set_rel_viewpoint(Point(xdiff, ydiff));
 		else stop_dragging();
 	}

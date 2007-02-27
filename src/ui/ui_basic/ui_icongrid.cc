@@ -275,7 +275,7 @@ void Icon_Grid::handle_mousein(bool inside)
 /**
 Update highlight under the mouse and send signals.
 */
-bool Icon_Grid::handle_mousemove(int x, int y, int, int) {
+bool Icon_Grid::handle_mousemove(const Uint8, int x, int y, int, int) {
 	int hl = index_for_point(x, y);
 
 	if (hl != m_highlight) {

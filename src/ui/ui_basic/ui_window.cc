@@ -419,7 +419,7 @@ inline void Window::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-bool Window::handle_mousemove(int mx, int my, int, int) {
+bool Window::handle_mousemove(const Uint8, int mx, int my, int, int) {
 	if (_dragging) {
 		const int mouse_x = get_x() + get_lborder() + mx;
 		const int mouse_y = get_y() + get_tborder() + my;

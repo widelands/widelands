@@ -479,7 +479,7 @@ bool Panel::handle_mouserelease(const Uint8, int, int) {return false;}
  * Called when the mouse is moved while inside the panel
  *
  */
-bool Panel::handle_mousemove(int, int, int, int) {return _tooltip;}
+bool Panel::handle_mousemove(const Uint8, int, int, int, int) {return _tooltip;}
 
 /**
  * Receive a keypress or keyrelease event.
@@ -748,17 +748,20 @@ bool Panel::do_mouserelease(const Uint8 btn, int x, int y) {
 		}
 	return handle_mouserelease(btn, x, y);
 }
-bool Panel::do_mousemove(int x, int y, int xdiff, int ydiff) {
+bool Panel::do_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff)
+{
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
 		if (Panel * child = _fchild) for (;; child = child->_next) {
 			child = child_at_mouse_cursor(x, y, child);
 			if (not child) break;
-			if (child->do_mousemove(x - child->_x, y - child->_y, xdiff, ydiff))
+			if
+				(child->do_mousemove
+				 (state, x - child->_x, y - child->_y, xdiff, ydiff))
 				return true;
 		}
-	return handle_mousemove(x, y, xdiff, ydiff);
+	return handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
 /**
@@ -837,7 +840,7 @@ void Panel::ui_mouserelease(const Uint8 button, int x, int y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
-void Panel::ui_mousemove(int x, int y, int xdiff, int ydiff) {
+void Panel::ui_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff) {
 	if (!xdiff && !ydiff)
 		return;
 
@@ -852,7 +855,7 @@ void Panel::ui_mousemove(int x, int y, int xdiff, int ydiff) {
 	if (!p)
 		return;
 
-	p->do_mousemove(x, y, xdiff, ydiff);
+	p->do_mousemove(state, x, y, xdiff, ydiff);
 }
 
 /**

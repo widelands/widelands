@@ -68,7 +68,8 @@ struct Window : public Panel {
 
 	bool handle_mousepress  (const Uint8 btn, int mx, int my);
 	bool handle_mouserelease(const Uint8 btn, int mx, int my);
-	bool handle_mousemove(int mx, int my, int xdiff, int ydiff);
+	bool handle_mousemove
+		(const Uint8 state, int mx, int my, int xdiff, int ydiff);
 
 private:
 	void dock_left();

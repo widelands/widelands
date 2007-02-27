@@ -635,7 +635,9 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
 				cb->mouse_move
-				(ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
+				(ev.motion.state,
+				 ev.motion.x,    ev.motion.y,
+				 ev.motion.xrel, ev.motion.yrel);
 			break;
 
 		case SDL_QUIT:

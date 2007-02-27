@@ -72,7 +72,7 @@ protected:
 	void update_for_index(int idx);
 
 	void handle_mousein(bool inside);
-	bool handle_mousemove(int x, int y, int xdiff, int ydiff);
+	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
