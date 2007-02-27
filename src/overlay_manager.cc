@@ -31,7 +31,11 @@ Overlay_Manager::Overlay_Manager() :
 m_are_graphics_loaded(false),
 m_showbuildhelp(false),
 m_callback(0)
-//  No need to initialize m_current_job_id (see comment for get_a_job_id).
+#ifndef NDEBUG
+ //  No need to initialize (see comment for get_a_job_id) other than to shut up
+ //  Valgrind.
+,m_current_job_id(Job_Id::Null())
+#endif
 {}
 
 
