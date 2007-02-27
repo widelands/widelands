@@ -245,7 +245,8 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 	// unconquer land
 	if (m_didconquer) g->unconquer_area
 		(Player_Area
-		 (owner().get_player_number(), Area(get_position(), get_conquers())));
+		 (owner().get_player_number(), Area(get_position(), get_conquers())),
+		 m_defeating_player);
 
 	ProductionSite::cleanup(g);
 }

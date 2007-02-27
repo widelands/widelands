@@ -140,7 +140,9 @@ This unconquers a area. This is only possible, when there
 is a building placed on this field
 ===============
 */
-void Editor_Game_Base::unconquer_area(Player_Area player_area) {
+void Editor_Game_Base::unconquer_area
+(Player_Area player_area, const Player_Number destroying_player)
+{
 	assert(0 <= player_area.x);
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
@@ -171,7 +173,7 @@ void Editor_Game_Base::unconquer_area(Player_Area player_area) {
 	assert(this_conquer_info->radius        == player_area.radius);
 
    // step 1: unconquer area of this building
-	do_conquer_area(player_area, false);
+	do_conquer_area(player_area, false, destroying_player);
 
    // step 2: remove this building out ot m_conquer_info
 	*this_conquer_info = m_conquer_info.back();
@@ -298,6 +300,7 @@ Additionally, it updates the visible area for that player.
 void Editor_Game_Base::do_conquer_area
 (const Player_Area player_area,
  const bool conquer,
+ const Player_Number preferred_player,
  const Uint8 vision_range,
  const bool neutral_when_no_influence,
  const bool neutral_when_competing_influence,
@@ -309,6 +312,9 @@ void Editor_Game_Base::do_conquer_area
 	assert(player_area.y < map().get_height());
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
+	assert    (preferred_player          <= map().get_nrplayers());
+	assert(preferred_player != player_area.player_number);
+	assert(not conquer or not preferred_player);
 	MapRegion mr(*m_map, player_area);
 	do {
 		const Map::Index index = m_map->get_index(mr.location());
@@ -363,10 +369,12 @@ void Editor_Game_Base::do_conquer_area
 						best_player = neutral_when_competing_influence ?
 							0 : player_area.player_number;
 					}
+			m_conquer_map[0][index] = best_value;
+			if (preferred_player and m_conquer_map[preferred_player][index])
+				best_player = preferred_player;
 			if (best_player != player_area.player_number) {
 				player_field_notification (mr.location(), LOSE);
 				mr.location().field->set_owned_by (best_player);
-				m_conquer_map[0][index] = best_value;
 				if (best_player) player_field_notification (mr.location(), GAIN);
          }
       }

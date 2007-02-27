@@ -259,9 +259,11 @@ void AttackController::soldierWon(Soldier* soldier) {
 		 ++it)
 		static_cast<MilitarySite * const>(static_cast<Object_Ptr>(*it).get(game))->set_in_battle(false);
 
-   if (involvedSoldiers[idx].attacker) {
+	if (involvedSoldiers[idx].attacker) {
       log("attackers won, destroying building.\n");
-      flag->get_building()->destroy(game);
+		Building & building = *flag->get_building();
+		building.set_defeating_player(attackingPlayer);
+		building.destroy(game);
 
       /*MilitarySite* opponentMs = (MilitarySite*)flag->get_building();
       MilitarySite* newMs = opponentMs->conquered_by(game,game->get_player(attackingPlayer));

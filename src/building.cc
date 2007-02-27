@@ -343,7 +343,8 @@ Building::Building(const Building_Descr & building_descr) :
 PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
-m_stop         (false)
+m_stop            (false),
+m_defeating_player(0)
 {}
 
 Building::~Building()

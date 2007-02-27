@@ -473,7 +473,8 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
    }
 	if (const uint conquer_raduis = get_conquers()) gg->unconquer_area
 		(Player_Area
-		 (owner().get_player_number(), Area(get_position(), conquer_raduis)));
+		 (owner().get_player_number(), Area(get_position(), conquer_raduis)),
+		 m_defeating_player);
 	Building::cleanup(gg);
 }
 

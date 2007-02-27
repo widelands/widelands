@@ -202,6 +202,11 @@ public:
    /// Testing stuff
    virtual bool has_soldiers() { return false; };
    virtual void conquered_by (Player*);
+
+	///  Stores the Player_Number of the player who has defeated this building.
+	void set_defeating_player(const Player_Number player_number) throw ()
+	{m_defeating_player = player_number;}
+
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);
 
@@ -228,6 +233,9 @@ protected:
 	uint                    m_leave_time;  // when to wake the next one from leave queue
 	Object_Ptr              m_leave_allow; // worker that is allowed to leave now
 	bool m_stop;
+
+	//  The player who has defeated this building.
+	Player_Number           m_defeating_player;
 };
 
 #endif

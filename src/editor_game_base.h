@@ -58,7 +58,7 @@ class Editor_Game_Base {
       Map & get_map() const {return *m_map;}
       Object_Manager * get_objects() const {return m_objects;}
 
-	void unconquer_area                (Player_Area);
+	void unconquer_area(Player_Area, const Player_Number destroying_player = 0);
 	void conquer_area                  (Player_Area);
 	void conquer_area_no_building(const Player_Area);
 
@@ -140,6 +140,14 @@ class Editor_Game_Base {
 	virtual void do_conquer_area
 		(const Player_Area player_area,
 		 const bool conquer,
+
+		 //  When conquer is false, this can be used to prefer a player over other
+		 //  players, when lost land is reassigned. This can for example be used
+		 //  to reward the player who actually destroyed a MilitarySite by giving
+		 //  an unconquered location that he has influence over to him, instead of
+		 //  some other player who has higher influence over that location. If 0,
+		 //  land is simply assigned by influence.
+		 const Player_Number preferred_player                      = 0,
 
 		 //  How far outside the conquered area that the player should see.
 		 const Uint8 vision_range                                  = 4,
