@@ -62,6 +62,8 @@ protected:
 	Interactive_Base & intbase() const throw () {return m_intbase;}
 
 private:
+	void stop_dragging();
+
 	Interactive_Base & m_intbase;
 	Point              m_viewpoint;
 	bool               m_dragging;

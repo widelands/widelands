@@ -122,6 +122,13 @@ void Map_View::set_viewpoint(Point vp)
    m_complete_redraw_needed = true;
 }
 
+
+void Map_View::stop_dragging() {
+	WLApplication::get()->set_mouse_lock(false);
+	grab_mouse(false);
+	m_dragging = false;
+}
+
 /**
  * Mousepressess and -releases on the map:
  * Right-press:   enable  dragging
@@ -141,14 +148,8 @@ bool Map_View::handle_mousepress(const Uint8 btn, int x, int y) {
 	}
 	return true;
 }
-bool Map_View::handle_mouserelease(const Uint8 btn, int, int) {
-	if (btn == SDL_BUTTON_RIGHT and m_dragging) {
-			WLApplication::get()->set_mouse_lock(false);
-			grab_mouse(false);
-			m_dragging = false;
-	}
-	return true;
-}
+bool Map_View::handle_mouserelease(const Uint8 btn, int, int)
+{if (btn == SDL_BUTTON_RIGHT and m_dragging) stop_dragging(); return true;}
 
 
 /*
@@ -161,7 +162,9 @@ Scroll the view according to mouse movement.
 bool Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff) {
 	if (m_dragging)
 	{
-		set_rel_viewpoint(Point(xdiff, ydiff));
+		if (SDL_GetMouseState(0, 0) & SDL_BUTTON(SDL_BUTTON_RIGHT))
+			set_rel_viewpoint(Point(xdiff, ydiff));
+		else stop_dragging();
 	}
 
 	if (not intbase().get_sel_freeze()) track_sel(x, y);
