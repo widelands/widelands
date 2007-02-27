@@ -122,6 +122,16 @@ FieldCaps Player::get_buildcaps(const Coords coords) const {
 		map.get_brn(fc, &flagcoords);
 		if (not flagcoords.field->is_interior(player_number))
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
+
+		//  Prevent big buildings that would swell over borders.
+		if ((buildcaps & BUILDCAPS_BIG) == BUILDCAPS_BIG
+		    and
+		    (not map.tr_n(fc).field->is_interior(player_number)
+		     or
+		     not map.tl_n(fc).field->is_interior(player_number)
+		     or
+		     not map. l_n(fc).field->is_interior(player_number)))
+			buildcaps &= ~BUILDCAPS_SMALL;
 	}
 
 	return static_cast<const FieldCaps>(buildcaps);
