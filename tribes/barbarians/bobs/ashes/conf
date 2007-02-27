@@ -3,12 +3,6 @@ type=immovable
 size=none
 program=program
 picture=ashes_00.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [program]
 0=animation idle 45000

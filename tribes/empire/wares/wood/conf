@@ -5,15 +5,10 @@ menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
 
-
 # These are planks created out of trunks.
 # The roman sawmiller know exactly, howto cut the trunks.
 
 [idle]
 pics=idle.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=10
 hot_spot_y=17
-

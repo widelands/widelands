@@ -1,11 +1,10 @@
 [global]
-descname=_ Helmsmith 
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Helmsmith
+type=production
 size=big
-buildable=yes 
+buildable=yes
 buildicon=build.png
-worker=helmsmith 
+worker=helmsmith
 output=helm
 output=mask
 output=warhelmet
@@ -22,7 +21,7 @@ coal=8
 
 [work]
 0=set +nostats
-1=call produce_helm 
+1=call produce_helm
 2=call produce_mask
 3=call produce_warhelmet
 
@@ -56,8 +55,7 @@ coal=8
 6=consume gold
 7=consume coal
 8=animation working 55000
-9=produce warhelmet 
-
+9=produce warhelmet
 
 [buildcost]
 trunk=4
@@ -69,32 +67,13 @@ thatchreed=3
 pics=helmsmith_i_??.png  # ???
 hot_spot_x=45
 hot_spot_y=85
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=helmsmith_b_??.png  # ???
 hot_spot_x=45
 hot_spot_y=85
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=helmsmith_w_??.png  # ???
 hot_spot_x=45
 hot_spot_y=85
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-

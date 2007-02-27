@@ -1,7 +1,6 @@
 [global]
 descname=_ Sentry
-
-type=military		# basic type (warehouse, production, military)
+type=military
 size=small
 buildable=yes
 buildicon=sentry_build.png

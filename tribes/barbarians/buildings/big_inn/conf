@@ -1,7 +1,6 @@
 [global]
-descname=_ Big Inn   # nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Big Inn
+type=production
 size=medium
 buildable=no
 enhanced_building=yes
@@ -38,33 +37,13 @@ thatchreed=2
 pics=big_inn_i_??.png  # ???
 hot_spot_x=63
 hot_spot_y=63
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=big_inn_i_??.png  # ???
 hot_spot_x=63
 hot_spot_y=63
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=big_inn_i_??.png  # ???
 hot_spot_x=63
 hot_spot_y=63
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-[

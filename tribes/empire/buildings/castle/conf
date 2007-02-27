@@ -1,6 +1,6 @@
 [global]
 descname=_ Castle
-type=military		# basic type (warehouse, production, military)
+type=military
 size=big
 buildable=no
 buildicon=castle_build.png
@@ -18,12 +18,11 @@ marble=4
 stone=2
 
 [idle]
-pics=castle_i_??.png  
-hot_spot_x=92 
-hot_spot_y=108 
+pics=castle_i_??.png
+hot_spot_x=92
+hot_spot_y=108
 
 [build]
-pics=castle_i_??.png  
-hot_spot_x=92 
-hot_spot_y=108 
-
+pics=castle_i_??.png
+hot_spot_x=92
+hot_spot_y=108

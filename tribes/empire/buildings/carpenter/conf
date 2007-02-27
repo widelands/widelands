@@ -1,8 +1,8 @@
 [global]
 descname=_"Carpenter's workshop"
-type=production		# basic type (warehouse, production, military)
+type=production
 size=medium
-buildable=yes 
+buildable=yes
 buildicon=carpenter_build.png
 worker=carpenter
 output=axe
@@ -58,7 +58,7 @@ trunk=8
 [produce_bakingtray]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -68,17 +68,17 @@ trunk=8
 [produce_fire_tongs]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
 6=animation working 35000
-7=produce fire_tongs 
+7=produce fire_tongs
 
 [produce_fishing_rod]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -88,7 +88,7 @@ trunk=8
 [produce_hammer]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -98,7 +98,7 @@ trunk=8
 [produce_kitchen_tools]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -108,7 +108,7 @@ trunk=8
 [produce_pick]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -118,7 +118,7 @@ trunk=8
 [produce_scythe]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -128,7 +128,7 @@ trunk=8
 [produce_shovel]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -138,17 +138,17 @@ trunk=8
 [produce_hunting_spear]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
 6=animation working 35000
-7=produce hunting_spear 
+7=produce hunting_spear
 
 [produce_basket]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -158,52 +158,34 @@ trunk=8
 [produce_saw]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
 6=animation working 35000
-7=produce saw 
+7=produce saw
 
 [produce_axe]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
 6=animation working 35000
-7=produce axe 
+7=produce axe
 
 [idle]
-pics=carpenter_i_??.png 
+pics=carpenter_i_??.png
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
-pics=carpenter_b_??.png 
+pics=carpenter_b_??.png
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
-pics=carpenter_w_??.png 
+pics=carpenter_w_??.png
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0

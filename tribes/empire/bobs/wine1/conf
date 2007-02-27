@@ -6,14 +6,6 @@ size=normal
 attrib=grown_wine
 program=harvestwine
 
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-
-# This program is executed when the farmer harvest the field
 [harvestwine]
 0=remove
 

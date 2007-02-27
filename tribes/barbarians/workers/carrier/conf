@@ -6,60 +6,52 @@ menu_pic=carrier_menu.png
 
 [buildcost]
 
-# Here come the animations
-# For the walk animation, [walk] is a default for all walk animations.
-# You can, however, create [walk_nw] etc.. sections for sub-animations in a
-# given direction
-
-# The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
 hot_spot_x=7
 hot_spot_y=20
 plrclr0_r=2
 plrclr0_g=2
-plrclr0_b=74 
+plrclr0_b=74
 plrclr1_r=2
-plrclr1_g=2  
+plrclr1_g=2
 plrclr1_b=112
 plrclr2_r=2
-plrclr2_g=2  
+plrclr2_g=2
 plrclr2_b=149
 plrclr3_r=255
 plrclr3_g=0
 plrclr3_b=255
 fps=2
 
-# Walking empty-handed
 [walk]
 hot_spot_x=7
 hot_spot_y=20
 plrclr0_r=2
 plrclr0_g=2
-plrclr0_b=74 
+plrclr0_b=74
 plrclr1_r=2
-plrclr1_g=2  
+plrclr1_g=2
 plrclr1_b=112
 plrclr2_r=2
-plrclr2_g=2  
+plrclr2_g=2
 plrclr2_b=149
 plrclr3_r=255
 plrclr3_g=0
 plrclr3_b=255
 fps=12
 
-# Walking with a ware
 [walkload]
 hot_spot_x=7
 hot_spot_y=20
 plrclr0_r=2
 plrclr0_g=2
-plrclr0_b=74 
+plrclr0_b=74
 plrclr1_r=2
-plrclr1_g=2  
+plrclr1_g=2
 plrclr1_b=112
 plrclr2_r=2
-plrclr2_g=2  
+plrclr2_g=2
 plrclr2_b=149
 plrclr3_r=255
 plrclr3_g=0

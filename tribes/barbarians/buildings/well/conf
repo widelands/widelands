@@ -1,7 +1,6 @@
 [global]
-descname=_ Well		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Well
+type=production
 size=small
 buildable=yes
 buildicon=well_build.png
@@ -35,4 +34,3 @@ hot_spot_y=50
 pics=well_i_??.png  # ???
 hot_spot_x=50
 hot_spot_y=50
-

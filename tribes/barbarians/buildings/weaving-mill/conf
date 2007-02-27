@@ -1,7 +1,6 @@
 [global]
-descname=_ Weaving-Mill  # nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Weaving-Mill
+type=production
 size=big
 buildable=yes
 buildicon=build.png
@@ -12,7 +11,6 @@ output=cloth
 [inputs]
 flax=8
 
-
 [work]
 0=sleep 45000
 1=consume flax
@@ -20,39 +18,20 @@ flax=8
 
 [buildcost]
 trunk=5
-raw_stone=2 
+raw_stone=2
 thatchreed=2
 
 [idle]
 pics=i_??.png  # ???
 hot_spot_x=35
 hot_spot_y=85
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=b_??.png  # ???
 hot_spot_x=35
 hot_spot_y=85
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=w_??.png  # ???
 hot_spot_x=35
 hot_spot_y=85
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-

@@ -1,7 +1,6 @@
 [global]
-descname=_ Granite Mine		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Granite Mine
+type=production
 size=mine
 buildable=yes
 buildicon=build.png
@@ -19,7 +18,7 @@ ration=6
 0=sleep 20000
 1=consume snack,meal,ration
 2=animation working 20000
-3=mine granit 2 33 5       
+3=mine granit 2 33 5
 4=produce raw_stone
 
 [buildcost]
@@ -40,5 +39,3 @@ hot_spot_y=64
 pics=i_??.png
 hot_spot_x=53
 hot_spot_y=64
-
-

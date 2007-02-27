@@ -5,18 +5,10 @@ menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
 
-
 # The roman workers know how to work on stones.
 # These stones will last for long time.
 
 [idle]
 pics=idle.png
-clrkey_r=255
-clrkey_g=0
-clrkey_b=0
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 hot_spot_x=7
 hot_spot_y=9
-

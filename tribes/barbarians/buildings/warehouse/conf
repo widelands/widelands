@@ -1,8 +1,7 @@
 [global]
-descname=_ Warehouse # nicer name to display in GUI
+descname=_ Warehouse
 soundfx=warehouse-bringitin
-
-type=warehouse	# basic type (warehouse, production, military)
+type=warehouse
 subtype=none
 size=medium
 buildable=yes
@@ -18,23 +17,11 @@ thatchreed=1
 pics=warehouse_i_??.png  # ???
 hot_spot_x=80
 hot_spot_y=94
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=warehouse_b_??.png  # ???
 hot_spot_x=80
 hot_spot_y=94
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=warehouse_i_??.png  # ???
@@ -42,10 +29,3 @@ sfx_frame=1
 sfx_name=warehouse-bringitin
 hot_spot_x=80
 hot_spot_y=94
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-

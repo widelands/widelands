@@ -1,11 +1,10 @@
 [global]
-descname=_ Armoursmith 
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Armoursmith
+type=production
 size=medium
-buildable=yes 
+buildable=yes
 buildicon=build.png
-worker=armoursmith 
+worker=armoursmith
 output=helm
 output=armour
 output=chain_armour
@@ -31,7 +30,7 @@ cloth=8
 
 [work]
 0=set +nostats
-1=call produce_helm 
+1=call produce_helm
 2=call produce_armour
 3=call produce_chain_armour
 4=call produce_plate_armour
@@ -98,4 +97,3 @@ hot_spot_y=56
 pics=w_??.png  # ???
 hot_spot_x=68
 hot_spot_y=56
-

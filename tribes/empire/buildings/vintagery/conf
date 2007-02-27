@@ -1,11 +1,10 @@
 [global]
 descname=_ Vintagery
-
-type=production		# basic type (warehouse, production, military)
+type=production
 size=medium
 buildable=yes
 buildicon=vintagery_build.png
-worker=brewer    # same as brewery
+worker=brewer # same as brewery
 program=work
 output=wine
 
@@ -30,32 +29,13 @@ marblecolumn=1
 pics=vintagery_i_??.png  # ???
 hot_spot_x=47
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=vintagery_i_??.png  # ???
 hot_spot_x=47
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=vintagery_i_??.png  # ???
 hot_spot_x=47
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-

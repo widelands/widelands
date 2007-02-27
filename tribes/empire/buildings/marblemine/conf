@@ -1,7 +1,6 @@
 [global]
-descname=_ Marble Mine		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Marble Mine
+type=production
 size=mine
 buildable=yes
 buildicon=build.png
@@ -28,11 +27,11 @@ wine=6
 1=sleep 20000
 2=consume ration
 3=animation working 20000
-4=mine granit 2 50 5       
+4=mine granit 2 50 5
 5=produce marble
 6=consume wine
 7=animation working 20000
-8=mine granit 2 50 5       
+8=mine granit 2 50 5
 9=produce marble
 
 [prog_stone]
@@ -40,11 +39,11 @@ wine=6
 1=sleep 20000
 2=consume ration
 3=animation working 20000
-4=mine granit 2 50 5       
+4=mine granit 2 50 5
 5=produce marble
 6=consume wine
 7=animation working 20000
-8=mine granit 2 50 5       
+8=mine granit 2 50 5
 9=produce marble
 
 [buildcost]
@@ -65,5 +64,3 @@ hot_spot_y=64
 pics=i_??.png
 hot_spot_x=53
 hot_spot_y=64
-
-

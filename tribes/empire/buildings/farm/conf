@@ -1,8 +1,7 @@
 [global]
-descname=_ Farm		# nicer name to display in GUI
+descname=_ Farm
 soundfx=farm_animal
-
-type=production		# basic type (warehouse, production, military)
+type=production
 size=big
 buildable=yes
 buildicon=farm_build.png
@@ -14,21 +13,20 @@ program=plant
 program=harvest
 
 [work]
-0=set +nostats	# ending this program has no effect on statistics
+0=set +nostats
 1=call plant
 2=call harvest
 3=playFX farm_animal 192
 
 [plant]
-0=set +catch	# failure of this program will be caught
-1=sleep 20000	# sleep the given amount of time
-2=worker plant	# cause the worker to run the 'plant' program
+0=set +catch
+1=sleep 20000
+2=worker plant
 
 [harvest]
 0=set +catch
-1=sleep 5000		# sleep the given amount of time
-2=worker harvest	# cause the worker to run the 'harvest' program
-
+1=sleep 5000
+2=worker harvest
 
 [buildcost]
 wood=2
@@ -50,5 +48,3 @@ hot_spot_y=84
 pics=farm_b_??.png  # ???
 hot_spot_x=74
 hot_spot_y=84
-
-

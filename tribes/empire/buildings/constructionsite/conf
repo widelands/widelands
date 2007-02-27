@@ -2,18 +2,12 @@
 # trunks laying around on piles, maybe some tools.
 
 [global]
-descname=_ Construction Site	
-
+descname=_ Construction Site
 type=construction
-size=small				# dummy; overridden by building size
-buildable=no			# counterintuitive, but correct: player can't build constructionsite
-
+size=small   # dummy; overridden by building size
+buildable=no # counterintuitive, but correct: player can't build constructionsite
 
 [idle]
 pics=construction_i_??.png  # ???
 hot_spot_x=5
 hot_spot_y=5
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-

@@ -1,7 +1,6 @@
 [global]
-descname=_ Sentry 
-
-type=military		# basic type (warehouse, production, military)
+descname=_ Sentry
+type=military
 size=small
 buildable=yes
 buildicon=sentry_build.png
@@ -15,23 +14,11 @@ heal_increase_per_medic=0
 blackwood=3
 
 [idle]
-pics=sentry_i_??.png  
+pics=sentry_i_??.png
 hot_spot_x=50
 hot_spot_y=52
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
-pics=sentry_i_??.png  
+pics=sentry_i_??.png
 hot_spot_x=50
 hot_spot_y=52
-clrkey_r=255
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0

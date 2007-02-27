@@ -1,7 +1,6 @@
 [global]
-descname=_ Deep Marble Mine		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Deep Marble Mine
+type=production
 size=mine
 buildable=no
 buildicon=deep_marblemine_build.png
@@ -16,14 +15,14 @@ meal=6
 wine=6
 
 [work]
-0=sleep 43000   # a bit faster
+0=sleep 43000
 1=consume meal
 2=animation working 18000
-3=mine granit 2 100 5       
+3=mine granit 2 100 5
 4=produce marble
 5=consume wine
 6=animation working 18000
-7=mine granit 2 100 5       
+7=mine granit 2 100 5
 8=produce marble
 
 [buildcost]
@@ -34,33 +33,13 @@ wood=2
 pics=deep_marblemine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=deep_marblemine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=deep_marblemine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-

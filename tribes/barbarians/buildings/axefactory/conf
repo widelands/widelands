@@ -1,9 +1,8 @@
 [global]
 descname=_ Axefactory
-
-type=production		# basic type (warehouse, production, military)
+type=production
 size=medium
-buildable=no 
+buildable=no
 buildicon=axefactory_build.png
 worker=blacksmith
 output=axe
@@ -29,27 +28,27 @@ coal=8
 [produce_axe]
 0=set +catch
 1=sleep 32000
-2=check coal 
+2=check coal
 3=check iron
 4=consume iron
 5=consume coal
 6=animation working 25000
-7=produce axe 
+7=produce axe
 
 [produce_sharpaxe]
 0=set +catch
 1=sleep 32000
-2=check coal 
+2=check coal
 3=check iron 2
 4=consume iron 2
-5=consume coal 
+5=consume coal
 6=animation working 25000
-7=produce sharpaxe 
+7=produce sharpaxe
 
 [produce_broadaxe]
 0=set +catch
 1=sleep 32000
-2=check coal 2 
+2=check coal 2
 3=check iron 2
 4=consume iron 2
 5=consume coal 2
@@ -67,32 +66,13 @@ thatchreed=1
 pics=axefactory_i_??.png  # ???
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=axefactory_i_??.png  # ???
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=axefactory_i_??.png  # ???
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-

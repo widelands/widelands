@@ -5,19 +5,11 @@ menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
 
-
 # The stonemasons of the barbarians are not very talented workers,
 # therefore the stones miss a certain profesionality: rough, hard edges
 # and not completly cubic.
 
 [idle]
 pics=idle.png
-clrkey_r=255
-clrkey_g=0
-clrkey_b=0
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 hot_spot_x=7
 hot_spot_y=9
-

@@ -8,43 +8,26 @@ program=release
 [buildcost]
 carrier=1
 
-# Here come the animations
-# For the walk animation, [walk] is a default for all walk animations.
-# You can, however, create [walk_nw] etc.. sections for sub-animations in a
-# given direction
-
 [release]
-0=setbobdescription tribe:wildboar tribe:deer sheep # Set a random immovable description
-1=findspace size:any radius:3			# Find space for the description within the given radius
-2=walk coords								# Walk to the target coordinates
-3=animation idle 500						# Play a releasing animation
-4=create_bob                        # Place an bob of the selected description
-5=animation idle 500						# Wait a while
-6=return										# Go back home
+0=setbobdescription tribe:wildboar tribe:deer sheep
+1=findspace size:any radius:3
+2=walk coords
+3=animation idle 500 # Play a releasing animation
+4=create_bob
+5=animation idle 500
+6=return
 
-# The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking empty-handed
 [walk]
 dirpics=walk_!!_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking with a ware
 [walkload]
 dirpics=walkload_!!_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13

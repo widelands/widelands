@@ -1,41 +1,26 @@
 [global]
-descname=_ Fisher Hut     		# nicer name to display in GUI
-type=production					# basic type (warehouse, production, military)
+descname=_ Fisher Hut
+type=production
 size=small
 buildable=yes
 buildicon=fisher_build.png
 worker=fisher
 output=fish
-
 program=work
 
 [buildcost]
 trunk=4
 
 [work]
-0=sleep 18000		# sleep the given amount of time
-1=worker fish     
-
+0=sleep 18000
+1=worker fish
 
 [idle]
 pics=fisher_i_??.png  # ???
 hot_spot_x=44
 hot_spot_y=44
-clrkey_r=255
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=fisher_i_??.png  # ???
 hot_spot_x=44
 hot_spot_y=44
-clrkey_r=255
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-

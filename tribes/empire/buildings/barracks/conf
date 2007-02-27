@@ -1,11 +1,10 @@
 [global]
-descname=_ Barracks 
-
-type=military		# basic type (warehouse, production, military)
+descname=_ Barracks
+type=military
 size=small
 buildable=yes
 buildicon=barracks_build.png
-heal_per_second=1	# very low -> smallest building
+heal_per_second=1 # very low -> smallest building
 conquers=7
 max_soldiers=1
 max_medics=0
@@ -16,13 +15,12 @@ enhances_to=sentry
 trunk=1
 wood=1
 
-
 [idle]
-pics=barracks_i_??.png  
+pics=barracks_i_??.png
 hot_spot_x=40
 hot_spot_y=63
 
 [build]
-pics=barracks_i_??.png  
+pics=barracks_i_??.png
 hot_spot_x=40
 hot_spot_y=63

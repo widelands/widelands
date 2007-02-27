@@ -1,6 +1,6 @@
 [global]
-descname=_ Gamekeeper Hut # nicer name to display in GUI
-type=production		# basic type (warehouse, production, military)
+descname=_ Gamekeeper Hut
+type=production
 size=small
 help=The Gamekeeper makes sure that the natural population of animals never drops to low.
 buildable=yes
@@ -9,34 +9,19 @@ worker=gamekeeper
 program=work
 
 [work]
-0=sleep 60000		
+0=sleep 60000
 1=worker release
-
 
 [buildcost]
 trunk=4
 raw_stone=1
 
 [idle]
-pics=gamekeeper_i_??.png  
+pics=gamekeeper_i_??.png
 hot_spot_x=49
 hot_spot_y=46
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
-pics=gamekeeper_i_??.png  
+pics=gamekeeper_i_??.png
 hot_spot_x=49
 hot_spot_y=46
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-
-

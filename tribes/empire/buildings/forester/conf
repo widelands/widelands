@@ -1,11 +1,10 @@
 [global]
-descname=_ Forester Hut     		# nicer name to display in GUI
-type=production					# basic type (warehouse, production, military)
+descname=_ Forester Hut
+type=production
 size=small
 buildable=yes
 buildicon=forester_build.png
 worker=forester
-
 program=work
 
 [buildcost]
@@ -14,29 +13,15 @@ wood=1
 stone=1
 
 [work]
-0=sleep 11000		# sleep the given amount of time
-1=worker plant		# cause the worker to run the 'plant' program
-
+0=sleep 11000
+1=worker plant
 
 [idle]
 pics=forester_i_??.png  # ???
 hot_spot_x=58
 hot_spot_y=54
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=forester_b_??.png  # ???
 hot_spot_x=58
 hot_spot_y=54
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-

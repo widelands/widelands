@@ -3,14 +3,7 @@ type=immovable
 size=big
 program=program
 picture=field0t_00.bmp
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
-# This program grows the field
 [program]
 0=animation tiny 30000
 1=animation small 45000

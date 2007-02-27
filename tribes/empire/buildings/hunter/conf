@@ -1,17 +1,16 @@
 [global]
-descname=_ Hunters Hut # nicer name to display in GUI
-type=production		# basic type (warehouse, production, military)
+descname=_ Hunters Hut
+type=production
 size=small
-help=The Hunter brings good meat to the colonists 
+help=The Hunter brings good meat to the colonists
 buildable=yes
 buildicon=hunter_build.png
 worker=hunter
 program=work
 
 [work]
-0=sleep 35000		
-1=worker hunt 
-
+0=sleep 35000
+1=worker hunt
 
 [buildcost]
 trunk=1
@@ -19,25 +18,11 @@ wood=1
 stone=1
 
 [idle]
-pics=hunter_i_??.png  
+pics=hunter_i_??.png
 hot_spot_x=55
 hot_spot_y=60
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
-pics=hunter_b_??.png  
+pics=hunter_b_??.png
 hot_spot_x=55
 hot_spot_y=60
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-
-

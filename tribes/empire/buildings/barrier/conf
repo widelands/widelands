@@ -1,7 +1,6 @@
 [global]
 descname=_ Barrier
-
-type=military		# basic type (warehouse, production, military)
+type=military
 size=medium
 buildable=yes
 buildicon=barrier_build.png
@@ -19,11 +18,11 @@ stone=2
 marble=1
 
 [idle]
-pics=barrier_i_??.png  
+pics=barrier_i_??.png
 hot_spot_x=55
 hot_spot_y=80
 
 [build]
-pics=barrier_i_??.png  
+pics=barrier_i_??.png
 hot_spot_x=55
 hot_spot_y=80

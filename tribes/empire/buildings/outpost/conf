@@ -1,7 +1,6 @@
 [global]
 descname=_ Outpost
-
-type=military		# basic type (warehouse, production, military)
+type=military
 size=medium
 buildable=yes
 buildicon=outpost_build.png

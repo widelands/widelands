@@ -1,7 +1,6 @@
 [global]
-descname=_ Iron Ore Mine		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Iron Ore Mine
+type=production
 size=mine
 buildable=yes
 buildicon=oremine_build.png
@@ -16,9 +15,9 @@ ration=6
 
 [work]
 0=sleep 45000
-1=consume ration 
+1=consume ration
 2=animation working 20000
-3=mine iron 2 33 5       
+3=mine iron 2 33 5
 4=produce ironore
 
 [buildcost]
@@ -29,33 +28,13 @@ raw_stone=2
 pics=oremine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=oremine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=oremine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-

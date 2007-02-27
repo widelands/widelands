@@ -1,11 +1,10 @@
 [global]
 descname=_ Smelting Works
-
-type=production		# basic type (warehouse, production, military)
+type=production
 size=medium
-buildable=yes 
+buildable=yes
 buildicon=smelting_works_build.png
-worker=smelter 
+worker=smelter
 output=iron
 output=gold
 
@@ -36,7 +35,7 @@ coal=8
 [smelt_gold]
 0=set +catch
 1=sleep 25000
-2=check goldstone 
+2=check goldstone
 3=check coal
 4=consume goldstone
 5=consume coal
@@ -52,32 +51,13 @@ marble=2
 pics=smelting_works_i_??.png  # ???
 hot_spot_x=55
 hot_spot_y=56
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=smelting_works_b_??.png  # ???
 hot_spot_x=55
 hot_spot_y=56
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=smelting_works_w_??.png  # ???
 hot_spot_x=55
 hot_spot_y=56
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-

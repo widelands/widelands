@@ -1,7 +1,6 @@
 [global]
-descname=_ Quarry		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Quarry
+type=production
 size=small
 buildable=yes
 buildicon=b_quarry_build.png
@@ -20,22 +19,8 @@ trunk=4
 pics=b_quarry_i_??.png  # ???
 hot_spot_x=40
 hot_spot_y=40
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=b_quarry_b_??.png  # ???
 hot_spot_x=40
 hot_spot_y=40
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-

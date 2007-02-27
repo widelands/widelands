@@ -1,7 +1,6 @@
 [global]
-descname=_ Gold Mine		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Gold Mine
+type=production
 size=mine
 buildable=yes
 buildicon=goldmine_build.png
@@ -17,13 +16,13 @@ wine=6
 
 [work]
 0=sleep 45000
-1=consume ration 
+1=consume ration
 2=animation working 20000
-3=mine gold 2 50 5       
+3=mine gold 2 50 5
 4=produce goldstone
-5=consume wine 
+5=consume wine
 6=animation working 20000
-7=mine gold 2 50 5       
+7=mine gold 2 50 5
 8=produce goldstone
 
 [buildcost]
@@ -34,33 +33,13 @@ wood=2
 pics=goldmine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=goldmine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=goldmine_i_??.png
 hot_spot_x=47
 hot_spot_y=61
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-

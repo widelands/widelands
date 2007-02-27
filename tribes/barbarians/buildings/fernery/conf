@@ -1,11 +1,10 @@
 [global]
-descname=_ Fernery  # nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Fernery
+type=production
 size=medium
 buildable=yes
 buildicon=fernery_build.png
-worker=ferner  
+worker=ferner
 stopable=yes
 output=flax
 output=thatchreed
@@ -17,31 +16,31 @@ program=harvestflax
 program=harvestreed
 
 [work]
-0=set +nostats          # ending this program has no effect on statistics
+0=set +nostats
 1=call plantflax
 2=call harvestflax
 3=call plantreed
 4=call harvestreed
 
 [plantflax]
-0=set +catch            # failure of this program will be caught
-1=sleep 20000           # sleep the given amount of time
-2=worker plantflax      # cause the worker to run the 'plant' program
+0=set +catch
+1=sleep 20000
+2=worker plantflax
 
 [plantreed]
-0=set +catch            # failure of this program will be caught
-1=sleep 20000           # sleep the given amount of time
-2=worker plantreed      # cause the worker to run the 'plant' program
+0=set +catch
+1=sleep 20000
+2=worker plantreed
 
 [harvestflax]
 0=set +catch
-1=sleep 5000            # sleep the given amount of time
-2=worker harvestflax    # cause the worker to run the 'harvest' program
+1=sleep 5000
+2=worker harvestflax
 
 [harvestreed]
 0=set +catch
-1=sleep 5000            # sleep the given amount of time
-2=worker harvestreed    # cause the worker to run the 'harvest' program
+1=sleep 5000
+2=worker harvestreed
 
 [buildcost]
 trunk=5
@@ -51,32 +50,13 @@ raw_stone=2
 pics=fernery_i_??.png  # ???
 hot_spot_x=76
 hot_spot_y=76
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=fernery_i_??.png  # ???
 hot_spot_x=76
 hot_spot_y=76
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=fernery_i_00.png  # ???
 hot_spot_x=76
 hot_spot_y=76
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-

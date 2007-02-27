@@ -10,52 +10,35 @@ program=harvest
 carrier=1
 scythe=1
 
-# Here come the animations
-# For the walk animation, [walk] is a default for all walk animations.
-# You can, however, create [walk_nw] etc.. sections for sub-animations in a
-# given direction
-
 [plant]
-0=setdescription tribe:field0 # Set a random immovable description
-1=findspace size:any radius:2			# Find space for the description within the given radius
-2=walk coords								# Walk to the target coordinates
-3=animation idle 500						# Play a planting animation
-4=plant										# Place an immovable of the selected description
-5=animation idle 500						# Wait a while
-6=return										# Go back home
+0=setdescription tribe:field0
+1=findspace size:any radius:2
+2=walk coords
+3=animation idle 500 # Play a planting animation
+4=plant
+5=animation idle 500
+6=return
 
 [harvest]
-0=findobject attrib:barbarian_field radius:2	# find an object matching the given criteria, put it into the object slot
-1=walk object								# walk to the object in the object slot
-2=animation idle 10000				# play an animation 
-3=object harvest								# cause the object to change its program (to 'fall')
-4=animation idle 2000					# wait for the tree to disappear
-5=createitem wheat							# create & carry the given item
-6=return										# return home
+0=findobject attrib:barbarian_field radius:2
+1=walk object
+2=animation idle 10000
+3=object harvest
+4=animation idle 2000
+5=createitem wheat
+6=return
 
-# The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
-clrkey_r=255
-clrkey_g=249
-clrkey_b=137
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking empty-handed
 [walk]
 dirpics=walk_!!_??.png
-clrkey_r=255
-clrkey_g=249
-clrkey_b=137
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking with a ware
 [walkload]
 dirpics=walk_!!_??.png
-clrkey_r=255
-clrkey_g=249
-clrkey_b=137
 hot_spot_x=5
 hot_spot_y=13

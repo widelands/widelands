@@ -1,10 +1,10 @@
 [global]
-descname=_ Stonemason		# nicer name to display in GUI
-type=production		# basic type (warehouse, production, military)
+descname=_ Stonemason
+type=production
 size=medium
 buildable=yes
 buildicon=stonemason_build.png
-worker=stonemason    # like quary
+worker=stonemason # like quary
 program=work
 output=marblecolumn
 soundfx=stonemason
@@ -14,7 +14,7 @@ marble=6
 
 [work]
 0=sleep 50000
-1=check marble 3 #expensive
+1=check marble 3
 2=consume marble 3
 3=playFX stonemason 192
 4=animation working 32000
@@ -23,38 +23,20 @@ marble=6
 [buildcost]
 trunk=1
 wood=1
-stone=1 
-marble=3            # someone who works on marble should like marble
+stone=1
+marble=3 # someone who works on marble should like marble
 
 [idle]
 pics=stonemason_i_??.png  # ???
 hot_spot_x=43
 hot_spot_y=50
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=stonemason_b_??.png  # ???
 hot_spot_x=43
 hot_spot_y=50
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=stonemason_w_??.png  # ???
 hot_spot_x=43
 hot_spot_y=50
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0

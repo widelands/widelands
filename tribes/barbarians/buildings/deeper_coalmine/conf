@@ -1,7 +1,6 @@
 [global]
-descname=_ Deeper Coal Mine		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Deeper Coal Mine
+type=production
 size=mine
 buildable=no
 buildicon=deeper_coalmine_build.png
@@ -15,10 +14,10 @@ stopable=yes
 meal=6
 
 [work]
-0=sleep 40000   # a bit faster
-1=consume meal  
+0=sleep 40000
+1=consume meal
 2=animation working 16000
-3=mine coal 2 100 10       # mine coal in a radius of 2 up to 25% of total available, 3% chances to hit after this 
+3=mine coal 2 100 10
 4=produce coalearth
 
 [buildcost]
@@ -29,33 +28,13 @@ raw_stone=2
 pics=deeper_coalmine_i_??.png
 hot_spot_x=41
 hot_spot_y=67
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=deeper_coalmine_i_??.png
 hot_spot_x=41
 hot_spot_y=67
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=deeper_coalmine_i_??.png
 hot_spot_x=41
 hot_spot_y=67
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-

@@ -1,11 +1,10 @@
 [global]
-descname=_ Wood hardener# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Wood hardener
+type=production
 size=medium
 buildable=yes
 buildicon=hardener_build.png
-worker=lumberjack    # like quary
+worker=lumberjack # like lumberjack
 program=work
 output=blackwood
 
@@ -14,47 +13,26 @@ trunk=8
 
 [work]
 0=sleep 43000
-1=check trunk 2     # two or more
+1=check trunk 2
 2=consume trunk 2
 3=animation working 24000
-4=produce blackwood 
-
+4=produce blackwood
 
 [buildcost]
 trunk=3
-raw_stone=1         # expensive
+raw_stone=1
 
 [idle]
 pics=hardener_i_??.png  # ???
 hot_spot_x=55
 hot_spot_y=60
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=hardener_i_??.png  # ???
 hot_spot_x=55
 hot_spot_y=60
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=hardener_i_??.png  # ???
 hot_spot_x=55
 hot_spot_y=60
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
-
-[

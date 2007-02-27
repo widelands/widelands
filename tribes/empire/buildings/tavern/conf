@@ -1,7 +1,6 @@
 [global]
-descname=_ Tavern      # nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Tavern
+type=production
 size=medium
 buildable=yes
 buildicon=tavern_build.png
@@ -15,18 +14,16 @@ fish=5
 bread=5
 meat=5
 
-
 [work]
 0=sleep 14000
-1=check fish,bread,meat 
-2=consume fish,bread,meat 
+1=check fish,bread,meat
+2=consume fish,bread,meat
 3=animation working 19000
-4=produce ration 
-
+4=produce ration
 
 [buildcost]
 wood=2
-stone=2         # expensive
+stone=2
 marble=1
 
 [idle]
@@ -43,4 +40,3 @@ hot_spot_y=72
 pics=tavern_i_??.png  # ???
 hot_spot_x=72
 hot_spot_y=72
-

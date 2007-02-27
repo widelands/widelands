@@ -10,52 +10,32 @@ soundfx=timber
 carrier=1
 axe=1
 
-# Here come the animations
-# For the walk animation, [walk] is a default for all walk animations.
-# You can, however, create [walk_nw] etc.. sections for sub-animations in a
-# given direction
-
 [chop]
-0=findobject attrib:tree radius:8	# find an object matching the given criteria, put it into the object slot
-1=walk object								# walk to the object in the object slot
-2=animation hacking 10000				# play an animation 
+0=findobject attrib:tree radius:8
+1=walk object
+2=animation hacking 10000
 3=playFX timber 192
-4=object fall								# cause the object to change its program (to 'fall')
-5=animation idle 2000					# wait for the tree to disappear
-6=createitem trunk						# create & carry the given item
-7=return										# return home
+4=object fall
+5=animation idle 2000
+6=createitem trunk
+7=return
 
 [hacking]
 pics=hacking_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking empty-handed
 [walk]
 dirpics=walk_!!_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking with a ware
 [walkload]
 dirpics=walkload_!!_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13

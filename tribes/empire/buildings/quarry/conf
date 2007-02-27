@@ -1,6 +1,6 @@
 [global]
-descname=_ Quarry		# nicer name to display in GUI
-type=production		# basic type (warehouse, production, military)
+descname=_ Quarry
+type=production
 size=small
 buildable=yes
 buildicon=quarry_build.png
@@ -16,7 +16,7 @@ worker=stonemason
 1=call stone
 2=call stone
 3=call stone
-4=call marble     # every fourth stone is marble
+4=call marble # every fourth stone is marble
 
 [stone]
 0=set +catch
@@ -41,5 +41,3 @@ hot_spot_y=60
 pics=quarry_b_??.png  # ???
 hot_spot_x=45
 hot_spot_y=60
-
-

@@ -1,7 +1,6 @@
 [global]
-descname=_ Vineyard		# nicer name to display in GUI
-
-type=production		# basic type (warehouse, production, military)
+descname=_ Vineyard
+type=production
 size=medium
 buildable=yes
 buildicon=vineyard_build.png
@@ -13,20 +12,19 @@ program=plantvine
 program=harvestvine
 
 [work]
-0=set +nostats	# ending this program has no effect on statistics
+0=set +nostats
 1=call plantvine
 2=call harvestvine
 
 [plantvine]
-0=set +catch	# failure of this program will be caught
-1=sleep 20000	# sleep the given amount of time
-2=worker plantvine	# cause the worker to run the 'plantwine' program
+0=set +catch
+1=sleep 20000
+2=worker plantvine
 
 [harvestvine]
 0=set +catch
-1=sleep 5000		# sleep the given amount of time
-2=worker harvestvine	# cause the worker to run the 'harvestwine' program
-
+1=sleep 5000
+2=worker harvestvine
 
 [buildcost]
 wood=2
@@ -43,5 +41,3 @@ hot_spot_y=84
 pics=vineyard_b_??.png  # ???
 hot_spot_x=74
 hot_spot_y=84
-
-

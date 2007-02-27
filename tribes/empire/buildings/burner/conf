@@ -1,9 +1,8 @@
 [global]
 descname=_ Charcoal Burner
-
-type=production		# basic type (warehouse, production, military)
+type=production
 size=medium
-buildable=yes 
+buildable=yes
 buildicon=burner_build.png
 worker=burner
 output=coal
@@ -15,7 +14,7 @@ coalearth=8
 
 [work]
 0=sleep 30000
-1=check trunk 
+1=check trunk
 2=check coalearth
 3=consume trunk
 4=consume coalearth
@@ -31,32 +30,13 @@ marble=2
 pics=burner_i_??.png  # ???
 hot_spot_x=50
 hot_spot_y=50
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
 pics=burner_b_??.png  # ???
 hot_spot_x=50
 hot_spot_y=50
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
 pics=burner_w_??.png  # ???
 hot_spot_x=50
 hot_spot_y=50
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-

@@ -1,8 +1,8 @@
 [global]
 descname=_ Metalworks
-type=production		# basic type (warehouse, production, military)
+type=production
 size=medium
-buildable=yes 
+buildable=yes
 buildicon=metalworks_build.png
 worker=blacksmith
 output=bakingtray
@@ -45,7 +45,7 @@ trunk=8
 [produce_bakingtray]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -55,17 +55,17 @@ trunk=8
 [produce_fire_tongs]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
 6=animation working 35000
-7=produce fire_tongs 
+7=produce fire_tongs
 
 [produce_fishing_rod]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -75,7 +75,7 @@ trunk=8
 [produce_hammer]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -85,7 +85,7 @@ trunk=8
 [produce_kitchen_tools]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -95,7 +95,7 @@ trunk=8
 [produce_pick]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -105,7 +105,7 @@ trunk=8
 [produce_scythe]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -115,7 +115,7 @@ trunk=8
 [produce_shovel]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
@@ -125,12 +125,12 @@ trunk=8
 [produce_hunting_spear]
 0=set +catch
 1=sleep 32000
-2=check trunk 
+2=check trunk
 3=check iron
 4=consume iron
 5=consume trunk
 6=animation working 35000
-7=produce hunting_spear 
+7=produce hunting_spear
 
 [buildcost]
 trunk=2
@@ -139,34 +139,16 @@ grindstone=1
 thatchreed=1
 
 [idle]
-pics=metalworks_i_??.png 
+pics=metalworks_i_??.png
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [build]
-pics=metalworks_i_??.png 
+pics=metalworks_i_??.png
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
 
 [working]
-pics=metalworks_i_??.png 
+pics=metalworks_i_??.png
 hot_spot_x=45
 hot_spot_y=65
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0

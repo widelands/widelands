@@ -3,13 +3,6 @@ type="diminishing"
 size=none
 program=disappear
 
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
-
 [disappear]
 0=animation idle 50000
 1=remove

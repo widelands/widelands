@@ -5,18 +5,10 @@ menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
 
-
-# Grindstone is something between a pulver and a liquid, it is 
+# Grindstone is something between a pulver and a liquid, it is
 # caried in wooden boxes and has a dark greyish color.
 
 [idle]
 pics=idle.png
-clrkey_r=255
-clrkey_g=0
-clrkey_b=0  
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 hot_spot_x=5
 hot_spot_y=12
-

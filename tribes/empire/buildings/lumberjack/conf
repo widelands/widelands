@@ -1,6 +1,6 @@
 [global]
-descname=_ Lumberjack	# nicer name to display in GUI
-type=production		# basic type (warehouse, production, military)
+descname=_ Lumberjack
+type=production
 size=small
 buildable=yes
 buildicon=lumberjack_build.png
@@ -9,8 +9,8 @@ output=trunk
 program=work
 
 [work]
-0=sleep 30000		# Barbarian lumberjack sleeps 25000
-1=worker chop		# cause the worker to run the 'chop' program
+0=sleep 30000 # Barbarian lumberjack sleeps 25000
+1=worker chop
 
 
 [buildcost]
@@ -18,14 +18,11 @@ trunk=2
 wood=1
 
 [idle]
-pics=lumberjack_i_??.png  
+pics=lumberjack_i_??.png
 hot_spot_x=45
 hot_spot_y=60
 
 [build]
-pics=lumberjack_b_??.png  
+pics=lumberjack_b_??.png
 hot_spot_x=45
 hot_spot_y=60
-
-
-

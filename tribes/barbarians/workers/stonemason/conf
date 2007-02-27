@@ -10,44 +10,29 @@ pick=1
 carrier=1
 
 [cut]
-0=findobject attrib:stone radius:6	# find an object matching the given criteria
-1=walk object							# walk to the object in the object slot
-2=animation hacking 10000			# play an animation 
-3=object shrink						# cause the object to change its program (to 'shrink')
-4=createitem raw_stone				# create & carry the given item
-5=return									# return home
+0=findobject attrib:stone radius:6
+1=walk object
+2=animation hacking 10000
+3=object shrink
+4=createitem raw_stone
+5=return
 
-# The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
 [hacking]
 pics=hacking_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking empty-handed
 [walk]
 dirpics=walk_!!_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13
 
-# Walking with a ware
 [walkload]
 dirpics=walkload_!!_??.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=5
 hot_spot_y=13

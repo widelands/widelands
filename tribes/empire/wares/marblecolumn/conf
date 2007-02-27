@@ -7,9 +7,5 @@ queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
 hot_spot_x=8
 hot_spot_y=11
-

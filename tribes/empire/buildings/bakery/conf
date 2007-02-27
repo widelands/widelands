@@ -1,6 +1,6 @@
 [global]
-descname=_ Bakery		# nicer name to display in GUI
-type=production		# basic type (warehouse, production, military)
+descname=_ Bakery
+type=production
 size=medium
 buildable=yes
 buildicon=bakery_build.png
@@ -13,12 +13,11 @@ stopable=yes
 flour=6
 water=6
 
-
 [work]
 0=sleep 15000
 1=check water
-2=check flour 
-3=consume flour 
+2=check flour
+3=consume flour
 4=consume water
 5=animation working 15000
 6=produce bread
@@ -32,34 +31,13 @@ stone=3
 pics=bakery_i_??.png  # ???
 hot_spot_x=40
 hot_spot_y=60
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=255
 
 [working]
 pics=bakery_w_??.png  # ???
 hot_spot_x=40
 hot_spot_y=60
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=255
 
 [build]
 pics=bakery_b_??.png  # ???
 hot_spot_x=40
 hot_spot_y=60
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=255
-
-
-

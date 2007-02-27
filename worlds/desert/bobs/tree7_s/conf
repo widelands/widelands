@@ -4,7 +4,6 @@ size=normal
 program=program
 picture=s1tree7_00.png
 
-# This program grows the tree
 [program]
 0=animation tiny 38000
 1=animation small 42000
