@@ -355,13 +355,13 @@ void Editor_Game_Base::do_conquer_area
 						log
 							("Editor_Game_Base::do_conquer_area: Player %u completely "
 							 "lost influence over (%i, %i). Players %u and %u, both "
-							 "have influence %i there. The location will be neutral "
-							 "(unless another player has higher influence).\n",
+							 "have influence %i there. Depending on game rules, the "
+							 "location will not change ownership or it will become "
+							 "neutral (unless another player has higher influence).\n",
 							 player_area.player_number, c.x, c.y, best_player, plnum,
 							 value);
 						best_player = neutral_when_competing_influence ?
 							0 : player_area.player_number;
-						best_player = 0;
 					}
 			if (best_player != player_area.player_number) {
 				player_field_notification (mr.location(), LOSE);
