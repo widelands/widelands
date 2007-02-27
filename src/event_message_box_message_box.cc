@@ -89,11 +89,13 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
  * scrolling.
  * We are not draggable.
  */
-bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
+	if (btn == SDL_BUTTON_RIGHT) {play_click(); end_modal(0); return true;}
+	return false;
+}
 bool Message_Box_Event_Message_Box::handle_mouserelease
 (const Uint8 btn, int x, int y)
-{return handle_mousepress(btn, x, y);}
+{return false;}
 
 /*
  * clicked

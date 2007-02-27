@@ -611,6 +611,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 					case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
 					}
 				}
+				assert(ev.button.state == SDL_PRESSED);
 				cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
 			}
 			break;
@@ -622,6 +623,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 					case SDL_BUTTON_RIGHT: ev.button.button = SDL_BUTTON_LEFT;
 					}
 				}
+				assert(ev.button.state == SDL_RELEASED);
 				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
 			}
 			break;

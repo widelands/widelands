@@ -77,8 +77,10 @@ Modal_Message_Box::~Modal_Message_Box(void) {
  * we call end_modal() with NO (=0)
  * We are not draggable.
  */
-bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int, int)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+bool Modal_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
+	if (btn == SDL_BUTTON_RIGHT) {play_click(); end_modal(0); return true;}
+	return false;
+}
 bool Modal_Message_Box::handle_mouserelease(const Uint8, int, int)
 {return false;}
 };
