@@ -19,9 +19,9 @@
 
 #include "editor.h"
 #include "editorinteractive.h"
-#include "editor_make_infrastructure_tool.h"
+// #include "editor_make_infrastructure_tool.h"
 #include "editor_player_menu.h"
-#include "editor_player_menu_allowed_buildings_menu.h"
+//#include "editor_player_menu_allowed_buildings_menu.h"
 #include "editor_set_starting_pos_tool.h"
 #include "error.h"
 #include "graphic.h"
@@ -85,8 +85,8 @@ Editor_Player_Menu::Editor_Player_Menu
       m_plr_names[i]=0;
       m_plr_set_pos_buts[i]=0;
       m_plr_set_tribes_buts[i]=0;
-      m_plr_make_infrastructure_buts[i]=0;
-      m_plr_allowed_buildings[i]=0;
+//       m_plr_make_infrastructure_buts[i]=0;
+//       m_plr_allowed_buildings[i]=0;
    }
    update();
 
@@ -129,10 +129,12 @@ void Editor_Player_Menu::update(void) {
          m_plr_set_pos_buts[i]=0;
          delete m_plr_set_tribes_buts[i];
          m_plr_set_tribes_buts[i]=0;
+#if 0
          delete m_plr_make_infrastructure_buts[i];
          m_plr_make_infrastructure_buts[i]=0;
          delete m_plr_allowed_buildings[i];
          m_plr_allowed_buildings[i]=0;
+#endif
    }
    int posy=m_posy;
    int spacing=5;
@@ -189,6 +191,7 @@ void Editor_Player_Menu::update(void) {
       text+=static_cast<char>(((i+1)%10) + 0x30);
       text+="_pos.png";
       m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture( PicMod_Game,  text.c_str() ));
+#if 0
       // Build infrastructure but
       if(!m_plr_make_infrastructure_buts[i]) {
 			m_plr_make_infrastructure_buts[i] =
@@ -219,6 +222,7 @@ void Editor_Player_Menu::update(void) {
 	   m_plr_allowed_buildings[i]->set_enabled(start_pos_valid);
 
       posx=spacing;
+#endif
       posy+=size+spacing;
    }
    set_inner_size(get_inner_w(),posy+spacing);
@@ -361,6 +365,7 @@ void Editor_Player_Menu::name_changed(int m) {
 	parent.set_need_save(true);
 }
 
+#if 0
 /*
  * Make infrastructure button clicked
  */
@@ -450,3 +455,4 @@ void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
 	else new Editor_Player_Menu_Allowed_Buildings_Menu
 		(&parent, editor.get_player(n), &m_allow_buildings_menu);
 }
+#endif

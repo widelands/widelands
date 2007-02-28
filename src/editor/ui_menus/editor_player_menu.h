@@ -45,8 +45,8 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
       UI::Textarea *m_nr_of_players_ta;
       UI::Edit_Box* m_plr_names[MAX_PLAYERS];
 	UI::IDButton<Editor_Player_Menu, const Player_Number>
-		* m_plr_allowed_buildings       [MAX_PLAYERS],
-		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
+// 		* m_plr_allowed_buildings       [MAX_PLAYERS],
+// 		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
       std::vector<std::string> m_tribes;
@@ -60,8 +60,8 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
 	void clicked_up_down            (const Sint8 change);
 	void player_tribe_clicked       (const Uint8);
 	void set_starting_pos_clicked   (const Uint8);
-	void make_infrastructure_clicked(const Uint8);
-	void allowed_buildings_clicked  (const Uint8);
+// 	void make_infrastructure_clicked(const Uint8);
+// 	void allowed_buildings_clicked  (const Uint8);
       void update();
       void think();
 };
