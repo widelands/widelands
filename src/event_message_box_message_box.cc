@@ -93,8 +93,7 @@ bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
 	if (btn == SDL_BUTTON_RIGHT) {play_click(); end_modal(0); return true;}
 	return false;
 }
-bool Message_Box_Event_Message_Box::handle_mouserelease
-(const Uint8 btn, int x, int y)
+bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
 /*
