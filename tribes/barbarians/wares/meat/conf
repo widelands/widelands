@@ -7,5 +7,4 @@ queue_empty_pic=meat_queue_empty.png
 
 [idle]
 pics=meat_idle.png
-hot_spot_x=6
-hot_spot_y=5
+hotspot=6 5

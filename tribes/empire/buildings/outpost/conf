@@ -19,10 +19,8 @@ marble=1
 
 [idle]
 pics=outpost_i_??.png
-hot_spot_x=60
-hot_spot_y=80
+hotspot=60 80
 
 [build]
 pics=outpost_b_??.png
-hot_spot_x=60
-hot_spot_y=80
+hotspot=60 80

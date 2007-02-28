@@ -18,10 +18,8 @@ raw_stone=1
 
 [idle]
 pics=gamekeeper_i_??.png
-hot_spot_x=49
-hot_spot_y=46
+hotspot=49 46
 
 [build]
 pics=gamekeeper_i_??.png
-hot_spot_x=49
-hot_spot_y=46
+hotspot=49 46

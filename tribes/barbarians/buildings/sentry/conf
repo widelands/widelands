@@ -15,10 +15,8 @@ blackwood=3
 
 [idle]
 pics=sentry_i_??.png
-hot_spot_x=50
-hot_spot_y=52
+hotspot=50 52
 
 [build]
 pics=sentry_i_??.png
-hot_spot_x=50
-hot_spot_y=52
+hotspot=50 52

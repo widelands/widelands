@@ -15,5 +15,4 @@ conquers=9
 pics=hq_i_??.png
 sfx_frame=0
 sfx_name=warehouse-bringitin
-hot_spot_x=94
-hot_spot_y=117
+hotspot=94 117

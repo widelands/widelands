@@ -7,5 +7,4 @@ queue_empty_pic=water_queue_empty.png
 
 [idle]
 pics=water_idle.png
-hot_spot_x=4
-hot_spot_y=8
+hotspot=4 8

@@ -2,6 +2,5 @@ descname=_Cactus
 type="boring"
 life_time=0
 
-hot_spot_x=17
-hot_spot_y=25
+hotspot=17 25
 

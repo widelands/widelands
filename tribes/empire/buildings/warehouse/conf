@@ -16,17 +16,14 @@ marblecolumn=2
 
 [idle]
 pics=warehouse_i_??.png  # ???
-hot_spot_x=60
-hot_spot_y=72
+hotspot=60 72
 
 [build]
 pics=warehouse_b_??.png  # ???
-hot_spot_x=60
-hot_spot_y=72
+hotspot=60 72
 
 [working]
 pics=warehouse_i_??.png  # ???
 sfx_frame=1
 sfx_name=warehouse-bringitin
-hot_spot_x=60
-hot_spot_y=72
+hotspot=60 72

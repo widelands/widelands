@@ -7,5 +7,4 @@ queue_empty_pic=wheat_queue_empty.png
 
 [idle]
 pics=wheat_idle.png
-hot_spot_x=4
-hot_spot_y=12
+hotspot=4 12

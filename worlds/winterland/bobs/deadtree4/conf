@@ -2,6 +2,5 @@ descname=_Dead Tree
 type="boring"
 life_time=0
 
-hot_spot_x=23
-hot_spot_y=61
+hotspot=23 61
 

@@ -2,6 +2,5 @@ descname =_Grass
 type="boring"
 life_time=0
 
-hot_spot_x=10
-hot_spot_y=16
+hotspot=10 16
 

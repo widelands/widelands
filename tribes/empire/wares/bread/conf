@@ -7,5 +7,4 @@ queue_empty_pic=bread_queue_empty.png
 
 [idle]
 pics=bread_idle.png
-hot_spot_x=7
-hot_spot_y=15
+hotspot=7 15

@@ -13,17 +13,14 @@ picture=s1tree7_00.png
 [tiny]
 pics=s1tree7_??.png
 ftp=8
-hot_spot_x=5
-hot_spot_y=12
+hotspot=5 12
 
 [small]
 pics=s2tree7_??.png
 ftp=8
-hot_spot_x=12
-hot_spot_y=28
+hotspot=12 28
 
 [midd]
 pics=s3tree7_??.png
 ftp=8
-hot_spot_x=18
-hot_spot_y=48
+hotspot=18 48

@@ -16,10 +16,8 @@ trunk=4
 
 [idle]
 pics=b_ranger_i_??.png  # ???
-hot_spot_x=45
-hot_spot_y=50
+hotspot=45 50
 
 [build]
 pics=b_ranger_b_??.png  # ???
-hot_spot_x=45
-hot_spot_y=50
+hotspot=45 50

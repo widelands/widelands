@@ -214,8 +214,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 		ad->frametime = 1000 / fps;
 
 	// TODO: Frames of varying size / hotspot?
-	ad->hotspot.x = s->get_int("hot_spot_x", 0);
-	ad->hotspot.y = s->get_int("hot_spot_y", 0);
+	ad->hotspot = s->get_Point("hotspot");
 
 	return id;
 }

@@ -56,15 +56,12 @@ marblecolumn=4
 
 [idle]
 pics=colosseum_i_??.png  # ???
-hot_spot_x=82
-hot_spot_y=110
+hotspot=82 110
 
 [working]
 pics=colosseum_i_??.png  # ???
-hot_spot_x=82
-hot_spot_y=110
+hotspot=82 110
 
 [build]
 pics=colosseum_i_??.png  # ???
-hot_spot_x=82
-hot_spot_y=110
+hotspot=82 110

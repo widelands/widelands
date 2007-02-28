@@ -22,15 +22,12 @@ trunk=4
 
 [idle]
 pics=well_i_??.png  # ???
-hot_spot_x=50
-hot_spot_y=50
+hotspot=50 50
 
 [working]
 pics=well_w_??.png  # ???
-hot_spot_x=50
-hot_spot_y=50
+hotspot=50 50
 
 [build]
 pics=well_i_??.png  # ???
-hot_spot_x=50
-hot_spot_y=50
+hotspot=50 50

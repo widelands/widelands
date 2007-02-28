@@ -27,15 +27,12 @@ marblecolumn=1
 
 [idle]
 pics=vintagery_i_??.png  # ???
-hot_spot_x=47
-hot_spot_y=65
+hotspot=47 65
 
 [build]
 pics=vintagery_i_??.png  # ???
-hot_spot_x=47
-hot_spot_y=65
+hotspot=47 65
 
 [working]
 pics=vintagery_i_??.png  # ???
-hot_spot_x=47
-hot_spot_y=65
+hotspot=47 65

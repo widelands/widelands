@@ -9,5 +9,4 @@ program=disappear
 
 [idle]
 pics=field2_??.bmp
-hot_spot_x=15
-hot_spot_y=18
+hotspot=15 18

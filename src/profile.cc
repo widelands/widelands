@@ -138,6 +138,16 @@ const char *Section::Value::get_string() const
 	return m_value;
 }
 
+Point Section::Value::get_Point() const
+{
+	char * endp = m_value;
+	const long int x = strtol(endp, &endp, 0);
+	const long int y = strtol(endp, &endp, 0);
+	if (*endp) throw wexception("%s: '%s' is not a Point", get_name(), m_value);
+
+	return Point(x, y);
+}
+
 Coords Section::Value::get_Coords() const
 {
 	char * endp = m_value;
@@ -442,6 +452,9 @@ const char *Section::get_string(const char *name, const char *def)
 		return def;
 	return v->get_string();
 }
+
+Point Section::get_Point(const char * const name, const Point def)
+{const Value * const v = get_val(name); return v ? v->get_Point() : def;}
 
 /** Section::get_Coords(const char * const name, const Coords def)
  *

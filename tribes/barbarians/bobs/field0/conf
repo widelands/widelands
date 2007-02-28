@@ -13,17 +13,14 @@ picture=field0t_00.bmp
 [tiny]
 pics=field0t_??.bmp
 ftp=5
-hot_spot_x=15
-hot_spot_y=18
+hotspot=15 18
 
 [small]
 pics=field0s_??.bmp
 ftp=5
-hot_spot_x=15
-hot_spot_y=18
+hotspot=15 18
 
 [midd]
 pics=field0m_??.bmp
 ftp=5
-hot_spot_x=15
-hot_spot_y=18
+hotspot=15 18

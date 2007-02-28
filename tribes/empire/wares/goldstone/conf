@@ -7,5 +7,4 @@ queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png
-hot_spot_x=4
-hot_spot_y=4
+hotspot=4 4

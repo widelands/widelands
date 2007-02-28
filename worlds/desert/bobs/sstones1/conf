@@ -4,6 +4,5 @@ size=small
 
 [idle]
 pics=sstones1_??.bmp
-hot_spot_x=4
-hot_spot_y=4
+hotspot=4 4
 

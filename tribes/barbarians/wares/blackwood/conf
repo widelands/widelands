@@ -10,5 +10,4 @@ queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png
-hot_spot_x=10
-hot_spot_y=17
+hotspot=10 17

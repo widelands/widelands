@@ -19,10 +19,8 @@ marble=1
 
 [idle]
 pics=barrier_i_??.png
-hot_spot_x=55
-hot_spot_y=80
+hotspot=55 80
 
 [build]
 pics=barrier_i_??.png
-hot_spot_x=55
-hot_spot_y=80
+hotspot=55 80

@@ -34,15 +34,12 @@ raw_stone=3
 
 [idle]
 pics=farm_i_??.png  # ???
-hot_spot_x=74
-hot_spot_y=84
+hotspot=74 84
 
 [working]
 pics=farm_i_??.png  # ???
-hot_spot_x=74
-hot_spot_y=84
+hotspot=74 84
 
 [build]
 pics=farm_i_??.png  # ???
-hot_spot_x=74
-hot_spot_y=84
+hotspot=74 84

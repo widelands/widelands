@@ -10,5 +10,4 @@ queue_empty_pic=trunk_queue_empty.png
 
 [idle]
 pics=trunk_idle.png
-hot_spot_x=7
-hot_spot_y=11
+hotspot=7 11

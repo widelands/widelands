@@ -11,5 +11,4 @@ attrib=resi
 
 [idle]
 pics=resi_??.png
-hot_spot_x=7
-hot_spot_y=10
+hotspot=7 10

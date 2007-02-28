@@ -10,41 +10,33 @@ carrier=1
 
 [idle]
 pics=idle_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk_e]
 pics=walk_e_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk_w]
 pics=walk_w_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk_se]
 pics=walk_se_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk_sw]
 pics=walk_sw_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk_nw]
 pics=walk_nw_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk_ne]
 pics=walk_ne_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 # Walking with a ware, not needed for builder
 [walkload]
 pics=walk_ne_00.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13

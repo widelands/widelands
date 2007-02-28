@@ -103,15 +103,12 @@ marblecolumn=3
 
 [idle]
 pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hotspot=40 40
 
 [build]
 pics=b_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hotspot=40 40
 
 [working]
 pics=w_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+hotspot=40 40

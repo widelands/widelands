@@ -22,14 +22,12 @@ descr=_ The mighty tribes of the east-lands!
 # No idea for the frontier. Maybe some javelins?
 [frontier]
 pics=pics/frontier_??.png
-hot_spot_x=1
-hot_spot_y=19
+hotspot=1 19
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
 pics=pics/flag_??.png
-hot_spot_x=7
-hot_spot_y=39
+hotspot=7 39
 fps=8
 
 # This are the default wares for a skirmish (non mission) game

@@ -31,15 +31,12 @@ basket=1
 
 [idle]
 pics=idle_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walk]
 dirpics=walk_!!_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13
 
 [walkload]
 dirpics=walk_!!_??.png
-hot_spot_x=5
-hot_spot_y=13
+hotspot=5 13

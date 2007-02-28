@@ -85,15 +85,12 @@ cloth=8
 
 [idle]
 pics=i_??.png  # ???
-hot_spot_x=68
-hot_spot_y=56
+hotspot=68 56
 
 [build]
 pics=b_??.png  # ???
-hot_spot_x=68
-hot_spot_y=56
+hotspot=68 56
 
 [working]
 pics=w_??.png  # ???
-hot_spot_x=68
-hot_spot_y=56
+hotspot=68 56

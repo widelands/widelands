@@ -31,15 +31,12 @@ wood=2
 
 [idle]
 pics=goldmine_i_??.png
-hot_spot_x=47
-hot_spot_y=61
+hotspot=47 61
 
 [working]
 pics=goldmine_i_??.png
-hot_spot_x=47
-hot_spot_y=61
+hotspot=47 61
 
 [build]
 pics=goldmine_i_??.png
-hot_spot_x=47
-hot_spot_y=61
+hotspot=47 61

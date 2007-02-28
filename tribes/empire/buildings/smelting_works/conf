@@ -49,15 +49,12 @@ marble=2
 
 [idle]
 pics=smelting_works_i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=56
+hotspot=55 56
 
 [build]
 pics=smelting_works_b_??.png  # ???
-hot_spot_x=55
-hot_spot_y=56
+hotspot=55 56
 
 [working]
 pics=smelting_works_w_??.png  # ???
-hot_spot_x=55
-hot_spot_y=56
+hotspot=55 56

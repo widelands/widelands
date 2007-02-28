@@ -28,15 +28,12 @@ marble=1
 
 [idle]
 pics=tavern_i_??.png  # ???
-hot_spot_x=72
-hot_spot_y=72
+hotspot=72 72
 
 [build]
 pics=tavern_i_??.png  # ???
-hot_spot_x=72
-hot_spot_y=72
+hotspot=72 72
 
 [working]
 pics=tavern_i_??.png  # ???
-hot_spot_x=72
-hot_spot_y=72
+hotspot=72 72

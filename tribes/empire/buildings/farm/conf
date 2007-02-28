@@ -36,15 +36,12 @@ marblecolumn=2
 
 [idle]
 pics=farm_i_??.png  # ???
-hot_spot_x=74
-hot_spot_y=84
+hotspot=74 84
 
 [working]
 pics=farm_w_??.png  # ???
-hot_spot_x=74
-hot_spot_y=84
+hotspot=74 84
 
 [build]
 pics=farm_b_??.png  # ???
-hot_spot_x=74
-hot_spot_y=84
+hotspot=74 84

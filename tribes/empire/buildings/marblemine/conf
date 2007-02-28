@@ -52,15 +52,12 @@ wood=2
 
 [idle]
 pics=i_??.png
-hot_spot_x=53
-hot_spot_y=64
+hotspot=53 64
 
 [working]
 pics=w_??.png
-hot_spot_x=53
-hot_spot_y=64
+hotspot=53 64
 
 [build]
 pics=i_??.png
-hot_spot_x=53
-hot_spot_y=64
+hotspot=53 64

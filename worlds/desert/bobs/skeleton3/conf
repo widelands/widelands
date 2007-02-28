@@ -2,6 +2,5 @@ descname =_Skeleton
 type="boring"
 life_time=0
 
-hot_spot_x=26
-hot_spot_y=32
+hotspot=26 32
 

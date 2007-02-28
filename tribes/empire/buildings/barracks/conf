@@ -17,10 +17,8 @@ wood=1
 
 [idle]
 pics=barracks_i_??.png
-hot_spot_x=40
-hot_spot_y=63
+hotspot=40 63
 
 [build]
 pics=barracks_i_??.png
-hot_spot_x=40
-hot_spot_y=63
+hotspot=40 63

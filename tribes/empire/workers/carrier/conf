@@ -8,8 +8,7 @@ menu_pic=carrier_menu.png
 
 [idle]
 pics=idle_??.png
-hot_spot_x=7
-hot_spot_y=20
+hotspot=7 20
 plrclr0_r=2
 plrclr0_g=2
 plrclr0_b=74
@@ -25,8 +24,7 @@ plrclr3_b=255
 fps=2
 
 [walk]
-hot_spot_x=7
-hot_spot_y=20
+hotspot=7 20
 plrclr0_r=2
 plrclr0_g=2
 plrclr0_b=74
@@ -42,8 +40,7 @@ plrclr3_b=255
 fps=12
 
 [walkload]
-hot_spot_x=7
-hot_spot_y=20
+hotspot=7 20
 plrclr0_r=2
 plrclr0_g=2
 plrclr0_b=74

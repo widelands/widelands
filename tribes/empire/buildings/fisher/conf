@@ -19,10 +19,8 @@ stone=1
 
 [idle]
 pics=fisher_i_??.png  # ???
-hot_spot_x=50
-hot_spot_y=65
+hotspot=50 65
 
 [build]
 pics=fisher_b_??.png  # ???
-hot_spot_x=50
-hot_spot_y=65
+hotspot=50 65

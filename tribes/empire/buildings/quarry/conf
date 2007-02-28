@@ -34,10 +34,8 @@ wood=1
 
 [idle]
 pics=quarry_i_??.png  # ???
-hot_spot_x=45
-hot_spot_y=60
+hotspot=45 60
 
 [build]
 pics=quarry_b_??.png  # ???
-hot_spot_x=45
-hot_spot_y=60
+hotspot=45 60

@@ -48,15 +48,12 @@ raw_stone=2
 
 [idle]
 pics=fernery_i_??.png  # ???
-hot_spot_x=76
-hot_spot_y=76
+hotspot=76 76
 
 [build]
 pics=fernery_i_??.png  # ???
-hot_spot_x=76
-hot_spot_y=76
+hotspot=76 76
 
 [working]
 pics=fernery_i_00.png  # ???
-hot_spot_x=76
-hot_spot_y=76
+hotspot=76 76

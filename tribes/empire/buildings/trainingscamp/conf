@@ -132,15 +132,12 @@ cloth=2
 
 [idle]
 pics=trainingscamp_i_??.png  # ???
-hot_spot_x=82
-hot_spot_y=105
+hotspot=82 105
 
 [working]
 pics=trainingscamp_i_??.png # should be changed to working animation, as soon as it exists
-hot_spot_x=82
-hot_spot_y=105
+hotspot=82 105
 
 [build]
 pics=trainingscamp_i_??.png # should be changed to building animation, as soon as it exists
-hot_spot_x=82
-hot_spot_y=105
+hotspot=82 105

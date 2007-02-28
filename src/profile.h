@@ -70,6 +70,7 @@ public:
 		float get_float() const;
 		bool get_bool() const;
 		const char *get_string() const;
+		Point  get_Point () const;
 		Coords get_Coords() const;
 
 		void set_string(const char *value);
@@ -105,6 +106,7 @@ public:
 	float get_float(const char *name, float def = 0);
 	bool get_bool(const char *name, bool def = false);
 	const char *get_string(const char *name, const char *def = 0);
+	Point  get_Point (const char * const name, const Point  def = Point (0, 0));
 	Coords get_Coords(const char * const name, const Coords def = Coords(-1, -1));
 
 	int get_safe_int(const char *name);

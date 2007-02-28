@@ -10,5 +10,4 @@ picture=ashes_00.png
 
 [idle]
 pics=ashes_??.png
-hot_spot_x=22
-hot_spot_y=40
+hotspot=22 40
