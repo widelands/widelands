@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "types.h"
 
+#include "ui_button.h"
 #include "ui_unique_window.h"
 
 #include <string>
@@ -44,6 +45,8 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
       UI::UniqueWindow::Registry m_allow_buildings_menu;
       UI::Textarea *m_nr_of_players_ta;
       UI::Edit_Box* m_plr_names[MAX_PLAYERS];
+	UI::Button<Editor_Player_Menu>
+		m_add_player, m_remove_last_player;
 	UI::IDButton<Editor_Player_Menu, const Player_Number>
 // 		* m_plr_allowed_buildings       [MAX_PLAYERS],
 // 		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
@@ -57,7 +60,8 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
       int m_posy;
 
 	void name_changed(int);
-	void clicked_up_down            (const Sint8 change);
+	void clicked_add_player         ();
+	void clicked_remove_last_player ();
 	void player_tribe_clicked       (const Uint8);
 	void set_starting_pos_clicked   (const Uint8);
 // 	void make_infrastructure_clicked(const Uint8);

@@ -30,7 +30,6 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
-#include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
@@ -39,16 +38,32 @@
 
 Editor_Player_Menu::Editor_Player_Menu
 (Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
-: UI::UniqueWindow(&parent, registry, 340, 400, _("Player Options"))
+:
+UI::UniqueWindow(&parent, registry, 340, 400, _("Player Options")),
+
+m_add_player
+(this,
+ 5, 5, 20, 20,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+ &Editor_Player_Menu::clicked_add_player, this,
+ _("Add player"),
+ parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
+
+m_remove_last_player
+(this,
+ get_inner_w() - 5 - 20, 5, 20, 20,
+ 1,
+ g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+ &Editor_Player_Menu::clicked_remove_last_player, this,
+ _("Remove last player"),
+ 1 < parent.egbase().map().get_nrplayers())
+
 {
    // User Interface
-   int offsx=5;
-   int offsy=30;
    int spacing=5;
-   int height=20;
    int width=20;
-   int posx=offsx;
-   int posy=offsy;
+   int posy= 0;
 
 	Tribe_Descr::get_all_tribenames(m_tribes);
 
@@ -58,20 +73,6 @@ Editor_Player_Menu::Editor_Player_Menu
 		new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
 	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
    posy+=spacing+width;
-
-	new UI::IDButton<Editor_Player_Menu, const Sint8>
-		(this,
-		 posx, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Editor_Player_Menu::clicked_up_down, this, 1);
-
-	new UI::IDButton<Editor_Player_Menu, const Sint8>
-		(this,
-		 get_inner_w() - spacing - width, posy, width, height,
-		 1,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Editor_Player_Menu::clicked_up_down, this, -1);
 
    m_nr_of_players_ta=new UI::Textarea(this, 0, 0, "5", Align_Left);
    m_nr_of_players_ta->set_pos
@@ -228,23 +229,12 @@ void Editor_Player_Menu::update(void) {
    set_inner_size(get_inner_w(),posy+spacing);
 }
 
-/*
-==============
-Editor_Player_Menu::clicked_up_down()
-
-called when a button is clicked
-==============
-*/
-void Editor_Player_Menu::clicked_up_down(Sint8 change) {
+void Editor_Player_Menu::clicked_add_player() {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
 	Map & map = parent.egbase().map();
-	Player_Number nr_players = map.get_nrplayers();
-   // Up down button
-	nr_players += change;
-   if(nr_players<1) nr_players=1;
-   if(nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
-	if (nr_players > map.get_nrplayers()) {
+	const Player_Number nr_players = map.get_nrplayers() + 1;
+	assert(nr_players <= MAX_PLAYERS);
       // register new default name for this players
       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
       char c2= (nr_players%10) + 0x30;
@@ -255,14 +245,51 @@ void Editor_Player_Menu::clicked_up_down(Sint8 change) {
 		map.set_scenario_player_name(nr_players, name);
 		map.set_scenario_player_tribe(nr_players, m_tribes[0]);
 		parent.set_need_save(true);
-	} else {
-		if (not parent.is_player_tribe_referenced(nr_players)) {
+	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
+	m_remove_last_player.set_enabled(true);
+	update();
+}
+
+
+void Editor_Player_Menu::clicked_remove_last_player() {
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+	Map & map = parent.egbase().map();
+	const Player_Number old_nr_players = map.get_nrplayers();
+	const Player_Number nr_players = old_nr_players - 1;
+	assert(1 <= nr_players);
+	if (not parent.is_player_tribe_referenced(nr_players)) {
+		{
+			const Coords starting_pos = map.get_starting_pos(old_nr_players);
+			if (starting_pos.is_valid()) {
+				//  Remove starting position marker.
+				std::string picsname = "pics/editor_player_";
+				picsname += static_cast<char>(old_nr_players / 10 + 0x30);
+				picsname += static_cast<char>(old_nr_players % 10 + 0x30);
+				picsname += "_starting_pos.png";
+				map.overlay_manager().remove_overlay
+					(starting_pos, g_gr->get_picture(PicMod_Game, picsname.c_str()));
+			}
+		}
 			std::string name  = map.get_scenario_player_name (nr_players);
 			std::string tribe = map.get_scenario_player_tribe(nr_players);
 			map.set_nrplayers(nr_players);
 			map.set_scenario_player_name(nr_players, name);
 			map.set_scenario_player_tribe(nr_players, tribe);
 			parent.set_need_save(true);
+		m_add_player        .set_enabled(true);
+		m_remove_last_player.set_enabled(1 < nr_players);
+		if
+			(&parent.tools.current() == &parent.tools.set_starting_pos
+			 and
+			 parent.tools.set_starting_pos.get_current_player() == old_nr_players)
+			//  The starting position tool is the currently active editor tool and
+			//  the sel picture is the one with the color of
+			//  the player that is being removed. Make sure that it is fixed in
+			//  that case by by switching the tool to the previous player and
+			//  reselecting the tool.
+			set_starting_pos_clicked(nr_players); //  This calls update().
+		else update();
       } else {
 			UI::Modal_Message_Box mmb
 				(&parent,
@@ -273,8 +300,6 @@ void Editor_Player_Menu::clicked_up_down(Sint8 change) {
 				 UI::Modal_Message_Box::OK);
 			mmb.run();
       }
-   }
-   update();
 }
 
 

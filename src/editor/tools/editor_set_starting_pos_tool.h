@@ -40,6 +40,7 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 	{return m_current_sel_pic.size() ? m_current_sel_pic.c_str() : 0;}
 
       // tool functions
+	Player_Number get_current_player() const throw ();
       void set_current_player(int i);
 
 private:
