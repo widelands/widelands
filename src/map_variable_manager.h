@@ -22,6 +22,7 @@
 
 #include "error.h"
 #include <string>
+#include "types.h"
 
 /*
  * The Map Variable Manager makes sure that variables

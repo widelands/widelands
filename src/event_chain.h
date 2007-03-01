@@ -25,6 +25,7 @@
 #include "event_referencer.h"
 #include "error.h"
 #include "trigger_referencer.h"
+#include "types.h"
 
 class Event;
 class Game;
