@@ -1363,10 +1363,7 @@ struct MapHollowRegion {
 	 * the area is so large that it overlaps itself because of wrapping, the same
 	 * location may be reached several times during an iteration, while advance
 	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done and location is the same as it was before the first
-	 * call to advance. The iteration can then be redone by calling advance
-	 * again, which will return true util it reaches the first location the next
-	 * time around, and so on.
+	 * the iteration is done.
 	 */
 	bool advance(const Map &) throw ();
 

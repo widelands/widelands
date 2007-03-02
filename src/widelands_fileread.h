@@ -41,10 +41,10 @@ struct WidelandsFileRead : public FileRead {
 
 	/**
 	 * Read a Coords from the file. Use this when the result can only be a node
-	 * coordinate. Will throw an an exception if the width is <= the x coordinate
-	 * or the height is <= the y coordinate. Both coordinates are read from the
-	 * file before checking and possibly throwing, so in case such an exception
-	 * is thrown, it is guaranteed that the whole coordinate pair has been read.
+	 * coordinate. Will throw an exception if the width is <= the x coordinate or
+	 * the height is <= the y coordinate. Both coordinates are read from the file
+	 * before checking and possibly throwing, so in case such an exception is
+	 * thrown, it is guaranteed that the whole coordinate pair has been read.
 	 */
 	Coords Coords32(const Extent extent);
 
