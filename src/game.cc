@@ -446,7 +446,7 @@ void Game::cleanup_for_load
 		(std::vector<Tribe_Descr*>::iterator it = m_tribes.begin();
 		 it != m_tribes.end();
 		 ++it)
-		delete &*it;
+		delete *it;
 	m_tribes.resize(0);
 	get_cmdqueue()->flush();
    while(cpl.size()) {
