@@ -19,8 +19,8 @@ raw_stone=1
 
 [idle]
 pics=hunter_i_??.png
-hotspot=51 51
+hotspot=48 43
 
 [build]
 pics=hunter_i_??.png
-hotspot=51 51
+hotspot=48 43

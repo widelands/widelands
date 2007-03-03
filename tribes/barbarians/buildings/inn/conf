@@ -31,12 +31,12 @@ thatchreed=1
 
 [idle]
 pics=inn_i_??.png  # ???
-hotspot=48 58
+hotspot=48 59
 
 [build]
 pics=inn_i_??.png  # ???
-hotspot=48 58
+hotspot=48 59
 
 [working]
 pics=inn_i_??.png  # ???
-hotspot=48 58
+hotspot=48 59

@@ -35,12 +35,12 @@ thatchreed=2
 
 [idle]
 pics=big_inn_i_??.png  # ???
-hotspot=63 63
+hotspot=53 66
 
 [build]
 pics=big_inn_i_??.png  # ???
-hotspot=63 63
+hotspot=53 66
 
 [working]
 pics=big_inn_i_??.png  # ???
-hotspot=63 63
+hotspot=53 66

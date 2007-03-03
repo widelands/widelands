@@ -28,12 +28,12 @@ thatchreed=1
 
 [idle]
 pics=tavern_i_??.png  # ???
-hotspot=36 60
+hotspot=32 56
 
 [build]
 pics=tavern_i_??.png  # ???
-hotspot=36 60
+hotspot=32 56
 
 [working]
 pics=tavern_i_??.png  # ???
-hotspot=36 60
+hotspot=32 56

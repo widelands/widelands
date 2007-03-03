@@ -26,12 +26,12 @@ raw_stone=2
 
 [idle]
 pics=deeper_oremine_i_??.png
-hotspot=41 67
+hotspot=45 45
 
 [working]
 pics=deeper_oremine_i_??.png
-hotspot=47 61
+hotspot=45 45
 
 [build]
 pics=deeper_oremine_i_??.png
-hotspot=47 61
+hotspot=45 45

@@ -26,12 +26,12 @@ raw_stone=2
 
 [idle]
 pics=oremine_i_??.png
-hotspot=47 61
+hotspot=15 28
 
 [working]
 pics=oremine_i_??.png
-hotspot=47 61
+hotspot=15 28
 
 [build]
 pics=oremine_i_??.png
-hotspot=47 61
+hotspot=15 28

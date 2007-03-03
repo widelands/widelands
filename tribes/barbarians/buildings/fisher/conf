@@ -17,8 +17,8 @@ trunk=4
 
 [idle]
 pics=fisher_i_??.png  # ???
-hotspot=44 44
+hotspot=38 37
 
 [build]
 pics=fisher_i_??.png  # ???
-hotspot=44 44
+hotspot=38 37
