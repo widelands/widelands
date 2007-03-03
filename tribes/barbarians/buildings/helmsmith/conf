@@ -65,12 +65,12 @@ thatchreed=3
 
 [idle]
 pics=helmsmith_i_??.png  # ???
-hotspot=45 85
+hotspot=50 68
 
 [build]
 pics=helmsmith_b_??.png  # ???
-hotspot=45 85
+hotspot=50 68
 
 [working]
 pics=helmsmith_w_??.png  # ???
-hotspot=45 85
+hotspot=50 68

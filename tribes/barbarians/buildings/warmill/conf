@@ -105,12 +105,12 @@ thatchreed=1
 
 [idle]
 pics=i_??.png  # ???
-hotspot=40 60
+hotspot=39 60
 
 [build]
 pics=i_??.png  # ???
-hotspot=40 60
+hotspot=39 60
 
 [working]
 pics=i_??.png  # ???
-hotspot=40 60
+hotspot=39 60

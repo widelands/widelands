@@ -17,8 +17,8 @@ trunk=3
 
 [idle]
 pics=lumberjack_i_??.png
-hotspot=40 42
+hotspot=40 35
 
 [build]
 pics=lumberjack_b_??.png
-hotspot=40 42
+hotspot=40 32

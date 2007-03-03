@@ -54,12 +54,12 @@ thatchreed=3
 
 [idle]
 pics=battlearena_i_??.png  # ???
-hotspot=82 98
+hotspot=80 77
 
 [working]
 pics=battlearena_i_??.png  # ???
-hotspot=82 98
+hotspot=80 77
 
 [build]
 pics=battlearena_i_??.png  # ???
-hotspot=82 98
+hotspot=80 77

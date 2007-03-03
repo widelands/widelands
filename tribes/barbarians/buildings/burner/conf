@@ -28,12 +28,12 @@ thatchreed=2
 
 [idle]
 pics=burner_i_??.png  # ???
-hotspot=50 50
+hotspot=44 51
 
 [build]
 pics=burner_i_??.png  # ???
-hotspot=50 50
+hotspot=44 51
 
 [working]
 pics=burner_i_??.png  # ???
-hotspot=50 50
+hotspot=44 51

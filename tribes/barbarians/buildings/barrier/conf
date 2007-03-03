@@ -17,8 +17,8 @@ grindstone=3
 
 [idle]
 pics=barrier_i_??.png
-hotspot=55 60
+hotspot=50 62
 
 [build]
 pics=barrier_i_??.png
-hotspot=55 60
+hotspot=50 62

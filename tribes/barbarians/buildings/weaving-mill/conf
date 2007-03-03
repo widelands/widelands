@@ -23,12 +23,12 @@ thatchreed=2
 
 [idle]
 pics=i_??.png  # ???
-hotspot=35 85
+hotspot=36 78
 
 [build]
 pics=b_??.png  # ???
-hotspot=35 85
+hotspot=36 78
 
 [working]
 pics=w_??.png  # ???
-hotspot=35 85
+hotspot=36 78

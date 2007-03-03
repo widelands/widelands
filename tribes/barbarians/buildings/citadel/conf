@@ -19,8 +19,8 @@ grindstone=2
 
 [idle]
 pics=citadel_i_??.png
-hotspot=82 98
+hotspot=81 90
 
 [build]
 pics=citadel_i_??.png
-hotspot=82 98
+hotspot=81 90

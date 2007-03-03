@@ -17,8 +17,8 @@ raw_stone=4
 
 [idle]
 pics=i_??.png
-hotspot=66 72
+hotspot=56 58
 
 [build]
 pics=i_??.png
-hotspot=66 72
+hotspot=56 58

@@ -130,12 +130,12 @@ thatchreed=3
 
 [idle]
 pics=trainingscamp_i_??.png  # ???
-hotspot=82 88
+hotspot=77 76
 
 [working]
 pics=trainingscamp_i_??.png  # ???
-hotspot=82 88
+hotspot=77 76
 
 [build]
 pics=trainingscamp_i_??.png  # ???
-hotspot=82 88
+hotspot=77 76

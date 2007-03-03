@@ -24,12 +24,12 @@ raw_stone=1
 
 [idle]
 pics=hardener_i_??.png  # ???
-hotspot=55 60
+hotspot=41 52
 
 [build]
 pics=hardener_i_??.png  # ???
-hotspot=55 60
+hotspot=41 52
 
 [working]
 pics=hardener_i_??.png  # ???
-hotspot=55 60
+hotspot=41 52

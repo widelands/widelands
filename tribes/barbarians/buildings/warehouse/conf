@@ -15,14 +15,14 @@ thatchreed=1
 
 [idle]
 pics=warehouse_i_??.png  # ???
-hotspot=80 94
+hotspot=56 77
 
 [build]
 pics=warehouse_b_??.png  # ???
-hotspot=80 94
+hotspot=56 72
 
 [working]
 pics=warehouse_i_??.png  # ???
 sfx_frame=1
 sfx_name=warehouse-bringitin
-hotspot=80 94
+hotspot=56 77

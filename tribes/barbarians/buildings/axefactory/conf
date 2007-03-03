@@ -64,12 +64,12 @@ thatchreed=1
 
 [idle]
 pics=axefactory_i_??.png  # ???
-hotspot=45 65
+hotspot=42 55
 
 [build]
 pics=axefactory_i_??.png  # ???
-hotspot=45 65
+hotspot=42 55
 
 [working]
 pics=axefactory_i_??.png  # ???
-hotspot=45 65
+hotspot=42 55

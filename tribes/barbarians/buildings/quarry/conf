@@ -17,8 +17,8 @@ trunk=4
 
 [idle]
 pics=b_quarry_i_??.png  # ???
-hotspot=40 40
+hotspot=47 45
 
 [build]
 pics=b_quarry_b_??.png  # ???
-hotspot=40 40
+hotspot=48 43

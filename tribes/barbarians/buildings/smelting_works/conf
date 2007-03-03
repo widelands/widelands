@@ -49,12 +49,12 @@ thatchreed=2
 
 [idle]
 pics=smelting_works_i_??.png  # ???
-hotspot=55 56
+hotspot=50 53
 
 [build]
 pics=smelting_works_i_??.png  # ???
-hotspot=55 56
+hotspot=50 53
 
 [working]
 pics=smelting_works_i_??.png  # ???
-hotspot=55 56
+hotspot=50 53

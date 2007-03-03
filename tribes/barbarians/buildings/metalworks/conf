@@ -140,12 +140,12 @@ thatchreed=1
 
 [idle]
 pics=metalworks_i_??.png
-hotspot=45 65
+hotspot=40 54
 
 [build]
 pics=metalworks_i_??.png
-hotspot=45 65
+hotspot=40 54
 
 [working]
 pics=metalworks_i_??.png
-hotspot=45 65
+hotspot=40 54
