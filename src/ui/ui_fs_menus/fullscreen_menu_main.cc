@@ -17,7 +17,7 @@
  *
  */
 
-#include "build_id.h"
+#include "../../build_id.h"
 #include "error.h"
 #include "fullscreen_menu_main.h"
 #include "i18n.h"

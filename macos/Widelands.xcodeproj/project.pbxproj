@@ -495,20 +495,20 @@
 		BF22E2EE0A5FFA4600D0292B /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2EB0A5FFA4500D0292B /* libvorbis.a */; };
 		BF22E2F20A5FFAB600D0292B /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2F00A5FFAB600D0292B /* libogg.a */; };
 		BF22E2F30A5FFAB600D0292B /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */; };
-		BF482BF80A8E7CDA00CF636F /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = BF482BF30A8E7CDA00CF636F /* fonts */; };
 		BF76C7850B9B7C75003E2C5A /* widelands.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF76C7840B9B7C75003E2C5A /* widelands.icns */; };
-		BF773E460A87E61000181633 /* campaigns in Resources */ = {isa = PBXBuildFile; fileRef = BF7718ED0A87E60300181633 /* campaigns */; };
+		BF76CA210B9B8FB7003E2C5A /* pics in Resources */ = {isa = PBXBuildFile; fileRef = BF76C9620B9B8FB6003E2C5A /* pics */; };
 		BF773E470A87E61000181633 /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = BF77192E0A87E60300181633 /* ChangeLog */; };
 		BF773E480A87E61000181633 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = BF77192F0A87E60300181633 /* COPYING */; };
 		BF773E490A87E61000181633 /* CREDITS in Resources */ = {isa = PBXBuildFile; fileRef = BF7719300A87E60300181633 /* CREDITS */; };
-		BF773E4A0A87E61000181633 /* locale in Resources */ = {isa = PBXBuildFile; fileRef = BF7719310A87E60300181633 /* locale */; };
-		BF773E4B0A87E61000181633 /* maps in Resources */ = {isa = PBXBuildFile; fileRef = BF7719AD0A87E60400181633 /* maps */; };
-		BF773E4C0A87E61000181633 /* music in Resources */ = {isa = PBXBuildFile; fileRef = BF7719BD0A87E60400181633 /* music */; };
-		BF773E4D0A87E61000181633 /* pics in Resources */ = {isa = PBXBuildFile; fileRef = BF7719C50A87E60400181633 /* pics */; };
-		BF773E4E0A87E61000181633 /* sound in Resources */ = {isa = PBXBuildFile; fileRef = BF771A7D0A87E60400181633 /* sound */; };
-		BF773E4F0A87E61000181633 /* tribes in Resources */ = {isa = PBXBuildFile; fileRef = BF771A810A87E60400181633 /* tribes */; };
-		BF773E500A87E61000181633 /* txts in Resources */ = {isa = PBXBuildFile; fileRef = BF7738740A87E60C00181633 /* txts */; };
-		BF773E510A87E61000181633 /* worlds in Resources */ = {isa = PBXBuildFile; fileRef = BF77387A0A87E60C00181633 /* worlds */; };
+		BF793D8A0B9B909F003694AF /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = BF793D840B9B909F003694AF /* fonts */; };
+		BF793E900B9B90B6003694AF /* campaigns in Resources */ = {isa = PBXBuildFile; fileRef = BF793E0D0B9B90B5003694AF /* campaigns */; };
+		BF793FE90B9B90F7003694AF /* locale in Resources */ = {isa = PBXBuildFile; fileRef = BF793F3D0B9B90F7003694AF /* locale */; };
+		BF7942B20B9B9137003694AF /* maps in Resources */ = {isa = PBXBuildFile; fileRef = BF79414D0B9B9136003694AF /* maps */; };
+		BF7942B30B9B9137003694AF /* music in Resources */ = {isa = PBXBuildFile; fileRef = BF7942A90B9B9137003694AF /* music */; };
+		BF797EDA0B9B91A2003694AF /* sound in Resources */ = {isa = PBXBuildFile; fileRef = BF7960C70B9B919D003694AF /* sound */; };
+		BF797EDB0B9B91A2003694AF /* tribes in Resources */ = {isa = PBXBuildFile; fileRef = BF7960CC0B9B919D003694AF /* tribes */; };
+		BF798E4E0B9B91BE003694AF /* txts in Resources */ = {isa = PBXBuildFile; fileRef = BF7986940B9B91BC003694AF /* txts */; };
+		BF798E4F0B9B91BE003694AF /* worlds in Resources */ = {isa = PBXBuildFile; fileRef = BF79869B0B9B91BC003694AF /* worlds */; };
 		BFA98F390B4F01DA00FB5075 /* attack_controller.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F270B4F01D900FB5075 /* attack_controller.cc */; };
 		BFA98F3A0B4F01DA00FB5075 /* attack_controller.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F280B4F01D900FB5075 /* attack_controller.h */; };
 		BFA98F3B0B4F01DA00FB5075 /* cmd_check_eventchain.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */; };
@@ -1356,20 +1356,20 @@
 		BF22E2EB0A5FFA4500D0292B /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = /opt/local/lib/libvorbis.a; sourceTree = "<absolute>"; };
 		BF22E2F00A5FFAB600D0292B /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = /opt/local/lib/libogg.a; sourceTree = "<absolute>"; };
 		BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = /opt/local/lib/libvorbisfile.a; sourceTree = "<absolute>"; };
-		BF482BF30A8E7CDA00CF636F /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../fonts; sourceTree = SOURCE_ROOT; };
 		BF76C7840B9B7C75003E2C5A /* widelands.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = widelands.icns; sourceTree = "<group>"; };
-		BF7718ED0A87E60300181633 /* campaigns */ = {isa = PBXFileReference; lastKnownFileType = folder; name = campaigns; path = ../campaigns; sourceTree = SOURCE_ROOT; };
+		BF76C9620B9B8FB6003E2C5A /* pics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pics; path = ../pics; sourceTree = SOURCE_ROOT; };
 		BF77192E0A87E60300181633 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = ChangeLog; path = ../ChangeLog; sourceTree = SOURCE_ROOT; };
 		BF77192F0A87E60300181633 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = COPYING; path = ../COPYING; sourceTree = SOURCE_ROOT; };
 		BF7719300A87E60300181633 /* CREDITS */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = CREDITS; path = ../CREDITS; sourceTree = SOURCE_ROOT; };
-		BF7719310A87E60300181633 /* locale */ = {isa = PBXFileReference; lastKnownFileType = folder; name = locale; path = ../locale; sourceTree = SOURCE_ROOT; };
-		BF7719AD0A87E60400181633 /* maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = maps; path = ../maps; sourceTree = SOURCE_ROOT; };
-		BF7719BD0A87E60400181633 /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = music; path = ../music; sourceTree = SOURCE_ROOT; };
-		BF7719C50A87E60400181633 /* pics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pics; path = ../pics; sourceTree = SOURCE_ROOT; };
-		BF771A7D0A87E60400181633 /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sound; path = ../sound; sourceTree = SOURCE_ROOT; };
-		BF771A810A87E60400181633 /* tribes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tribes; path = ../tribes; sourceTree = SOURCE_ROOT; };
-		BF7738740A87E60C00181633 /* txts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = txts; path = ../txts; sourceTree = SOURCE_ROOT; };
-		BF77387A0A87E60C00181633 /* worlds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = worlds; path = ../worlds; sourceTree = SOURCE_ROOT; };
+		BF793D840B9B909F003694AF /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../fonts; sourceTree = SOURCE_ROOT; };
+		BF793E0D0B9B90B5003694AF /* campaigns */ = {isa = PBXFileReference; lastKnownFileType = folder; name = campaigns; path = ../campaigns; sourceTree = SOURCE_ROOT; };
+		BF793F3D0B9B90F7003694AF /* locale */ = {isa = PBXFileReference; lastKnownFileType = folder; name = locale; path = ../locale; sourceTree = SOURCE_ROOT; };
+		BF79414D0B9B9136003694AF /* maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = maps; path = ../maps; sourceTree = SOURCE_ROOT; };
+		BF7942A90B9B9137003694AF /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = music; path = ../music; sourceTree = SOURCE_ROOT; };
+		BF7960C70B9B919D003694AF /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sound; path = ../sound; sourceTree = SOURCE_ROOT; };
+		BF7960CC0B9B919D003694AF /* tribes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tribes; path = ../tribes; sourceTree = SOURCE_ROOT; };
+		BF7986940B9B91BC003694AF /* txts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = txts; path = ../txts; sourceTree = SOURCE_ROOT; };
+		BF79869B0B9B91BC003694AF /* worlds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = worlds; path = ../worlds; sourceTree = SOURCE_ROOT; };
 		BFA98F270B4F01D900FB5075 /* attack_controller.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = attack_controller.cc; sourceTree = "<group>"; };
 		BFA98F280B4F01D900FB5075 /* attack_controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = attack_controller.h; sourceTree = "<group>"; };
 		BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cmd_check_eventchain.h; sourceTree = "<group>"; };
@@ -1510,20 +1510,20 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF7986940B9B91BC003694AF /* txts */,
+				BF79869B0B9B91BC003694AF /* worlds */,
+				BF7960C70B9B919D003694AF /* sound */,
+				BF7960CC0B9B919D003694AF /* tribes */,
+				BF79414D0B9B9136003694AF /* maps */,
+				BF7942A90B9B9137003694AF /* music */,
+				BF793F3D0B9B90F7003694AF /* locale */,
+				BF793E0D0B9B90B5003694AF /* campaigns */,
+				BF793D840B9B909F003694AF /* fonts */,
+				BF76C9620B9B8FB6003E2C5A /* pics */,
 				BF76C7840B9B7C75003E2C5A /* widelands.icns */,
-				BF482BF30A8E7CDA00CF636F /* fonts */,
-				BF7718ED0A87E60300181633 /* campaigns */,
 				BF77192E0A87E60300181633 /* ChangeLog */,
 				BF77192F0A87E60300181633 /* COPYING */,
 				BF7719300A87E60300181633 /* CREDITS */,
-				BF7719310A87E60300181633 /* locale */,
-				BF7719AD0A87E60400181633 /* maps */,
-				BF7719BD0A87E60400181633 /* music */,
-				BF7719C50A87E60400181633 /* pics */,
-				BF771A7D0A87E60400181633 /* sound */,
-				BF771A810A87E60400181633 /* tribes */,
-				BF7738740A87E60C00181633 /* txts */,
-				BF77387A0A87E60C00181633 /* worlds */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -2155,6 +2155,7 @@
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Widelands" */;
 			buildPhases = (
 				BFF9FAA00AC1BB3600E1B7CB /* ShellScript */,
+				BF76C87B0B9B8D7B003E2C5A /* ShellScript */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -2191,26 +2192,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				BF773E460A87E61000181633 /* campaigns in Resources */,
 				BF773E470A87E61000181633 /* ChangeLog in Resources */,
 				BF773E480A87E61000181633 /* COPYING in Resources */,
 				BF773E490A87E61000181633 /* CREDITS in Resources */,
-				BF773E4A0A87E61000181633 /* locale in Resources */,
-				BF773E4B0A87E61000181633 /* maps in Resources */,
-				BF773E4C0A87E61000181633 /* music in Resources */,
-				BF773E4D0A87E61000181633 /* pics in Resources */,
-				BF773E4E0A87E61000181633 /* sound in Resources */,
-				BF773E4F0A87E61000181633 /* tribes in Resources */,
-				BF773E500A87E61000181633 /* txts in Resources */,
-				BF773E510A87E61000181633 /* worlds in Resources */,
-				BF482BF80A8E7CDA00CF636F /* fonts in Resources */,
 				BF76C7850B9B7C75003E2C5A /* widelands.icns in Resources */,
+				BF76CA210B9B8FB7003E2C5A /* pics in Resources */,
+				BF793D8A0B9B909F003694AF /* fonts in Resources */,
+				BF793E900B9B90B6003694AF /* campaigns in Resources */,
+				BF793FE90B9B90F7003694AF /* locale in Resources */,
+				BF7942B20B9B9137003694AF /* maps in Resources */,
+				BF7942B30B9B9137003694AF /* music in Resources */,
+				BF797EDA0B9B91A2003694AF /* sound in Resources */,
+				BF797EDB0B9B91A2003694AF /* tribes in Resources */,
+				BF798E4E0B9B91BE003694AF /* txts in Resources */,
+				BF798E4F0B9B91BE003694AF /* worlds in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		BF76C87B0B9B8D7B003E2C5A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/../src/build_id.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\n# This script creates a valid build_id.h file. This is recreated on every compile, not like config.h\nPATH=$PATH:/opt/local/bin:/sw/bin/:/usr/local/bin\n\n\nBUILDID=`cd .. && ./build/scons-tools/detect_revision.py` \nSRCDIR=$PROJECT_DIR/../src/\n\ncat > $SRCDIR/build_id.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef BUILD_ID_H\n#define BUILD_ID_H\n\n#define BUILD_ID \"$BUILDID\"\n\n#endif\n\nEOF";
+		};
 		BFF9FAA00AC1BB3600E1B7CB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2223,7 +2238,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 0\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#endif\nEOF\nfi\n";
+			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 0\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#ifdef LOCALE_PATH\n#undef LOCALE_PATH\n#define LOCALE_PATH \"Widelands.app/Contents/Resources/locale\"\n\n#endif\n#endif\nEOF\n\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
