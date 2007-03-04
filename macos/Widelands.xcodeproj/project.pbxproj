@@ -496,6 +496,7 @@
 		BF22E2F20A5FFAB600D0292B /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2F00A5FFAB600D0292B /* libogg.a */; };
 		BF22E2F30A5FFAB600D0292B /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */; };
 		BF482BF80A8E7CDA00CF636F /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = BF482BF30A8E7CDA00CF636F /* fonts */; };
+		BF76C7850B9B7C75003E2C5A /* widelands.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF76C7840B9B7C75003E2C5A /* widelands.icns */; };
 		BF773E460A87E61000181633 /* campaigns in Resources */ = {isa = PBXBuildFile; fileRef = BF7718ED0A87E60300181633 /* campaigns */; };
 		BF773E470A87E61000181633 /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = BF77192E0A87E60300181633 /* ChangeLog */; };
 		BF773E480A87E61000181633 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = BF77192F0A87E60300181633 /* COPYING */; };
@@ -1356,6 +1357,7 @@
 		BF22E2F00A5FFAB600D0292B /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = /opt/local/lib/libogg.a; sourceTree = "<absolute>"; };
 		BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = /opt/local/lib/libvorbisfile.a; sourceTree = "<absolute>"; };
 		BF482BF30A8E7CDA00CF636F /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../fonts; sourceTree = SOURCE_ROOT; };
+		BF76C7840B9B7C75003E2C5A /* widelands.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = widelands.icns; sourceTree = "<group>"; };
 		BF7718ED0A87E60300181633 /* campaigns */ = {isa = PBXFileReference; lastKnownFileType = folder; name = campaigns; path = ../campaigns; sourceTree = SOURCE_ROOT; };
 		BF77192E0A87E60300181633 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = ChangeLog; path = ../ChangeLog; sourceTree = SOURCE_ROOT; };
 		BF77192F0A87E60300181633 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = COPYING; path = ../COPYING; sourceTree = SOURCE_ROOT; };
@@ -1508,6 +1510,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BF76C7840B9B7C75003E2C5A /* widelands.icns */,
 				BF482BF30A8E7CDA00CF636F /* fonts */,
 				BF7718ED0A87E60300181633 /* campaigns */,
 				BF77192E0A87E60300181633 /* ChangeLog */,
@@ -2201,6 +2204,7 @@
 				BF773E500A87E61000181633 /* txts in Resources */,
 				BF773E510A87E61000181633 /* worlds in Resources */,
 				BF482BF80A8E7CDA00CF636F /* fonts in Resources */,
+				BF76C7850B9B7C75003E2C5A /* widelands.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
