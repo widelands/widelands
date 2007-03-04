@@ -53,7 +53,7 @@ struct Event {
       // Functions needed by all
 	void set_name(const std::string & new_name) {m_name = new_name;}
 	const std::string & name() const throw () {return m_name;}
-	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
+	const char * get_name() const throw () {return m_name.c_str();} __attribute__ ((deprecated))
 
       // File functions, to save or load this event
 	virtual void Write(Section &, const Editor_Game_Base &) const = 0;

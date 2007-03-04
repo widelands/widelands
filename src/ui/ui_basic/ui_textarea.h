@@ -42,44 +42,18 @@ struct Textarea : public Panel {
 		(Panel * const parent,
 		 const int x, const int y,
 		 const std::string & text,
-		 const Align align = Align_Left, const bool multiline = false) __attribute__((noinline))
-		:
-		Panel      (parent, x, y, 0, 0),
-		m_text     (text),
-		m_align    (align),
-		m_multiline(multiline)
-	{
-		set_handle_mouse(false);
-		set_think       (false);
-		set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
-	}
+		 const Align align = Align_Left, const bool multiline = false);
 
 	Textarea
 		(Panel *  const parent,
 		 const int x, const int y, const uint w, const uint h,
-		 const Align align = Align_Left, const bool multiline = false) __attribute__((noinline))
-		:
-		Panel      (parent, x, y, w, h),
-		m_align    (align),
-		m_multiline(multiline),
-		m_fontname (UI_FONT_NAME),
-		m_fontsize (UI_FONT_SIZE_SMALL),
-		m_fcolor   (UI_FONT_CLR_FG)
-	{set_handle_mouse(false); set_think(false);}
+		 const Align align = Align_Left, const bool multiline = false);
 
 	Textarea
 		(Panel *  const parent,
 		 const int x, const int y, const uint w, const uint h,
 		 const std::string & text,
-		 const Align align = Align_Left, const bool multiline = false) __attribute__((noinline))
-		:
-		Panel      (parent, x, y, w, h),
-		m_align    (align),
-		m_multiline(multiline),
-		m_fontname (UI_FONT_NAME),
-		m_fontsize (UI_FONT_SIZE_SMALL),
-		m_fcolor   (UI_FONT_CLR_FG)
-	{set_handle_mouse(false); set_think(false); set_text(text);}
+		 const Align align = Align_Left, const bool multiline = false);
 
 	void set_text(const std::string &);
 	void set_align(const Align);

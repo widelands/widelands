@@ -72,11 +72,11 @@ class Editor_Game_Base {
 		 const int type,
 		 const std::string & tribe,
 		 const std::string & name);
-	Player * get_player(const int n) const __attribute__ ((deprecated)) {
+	Player * get_player(const int n) const {
 		assert(n >= 1);
 		assert(n <= MAX_PLAYERS);
 		return m_players[n - 1];
-	}
+	} __attribute__ ((deprecated))
 	Player & player(const int n) const {
 		assert(1 <= n);
 		assert     (n <= MAX_PLAYERS);

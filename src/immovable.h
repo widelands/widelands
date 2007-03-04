@@ -78,7 +78,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	~Immovable_Descr();
 
 	const std::string & name() const throw () {return m_name;}
-	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
+	const char * get_name() const throw () {return m_name.c_str();} __attribute__ ((deprecated))
 	int get_size() const throw () {return m_size;}
    inline const char* get_picture(void) const { return m_picture.c_str(); }
 	const ImmovableProgram* get_program(std::string programname) const;
@@ -119,7 +119,7 @@ public:
 	virtual int  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	const std::string & name() const throw () {return descr().name();}
-	std::string get_name() const __attribute__ ((deprecated)) {return name();}
+	std::string get_name() const {return name();} __attribute__ ((deprecated))
 
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);

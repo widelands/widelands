@@ -151,7 +151,8 @@ def CheckCompilerAttribute(context, compiler_attribute, env):
 	context.Message( 'Trying whether __attribute__((%s)) works on your compiler ... ' % compiler_attribute)
 
 	ret=context.TryLink("""class test {
-	int test_func(const char* fmt, ...) __attribute__(("""+compiler_attribute+""")) {}
+	__attribute__(("""+compiler_attribute+"""))
+	   int test_func(const char* fmt, ...) {}
 };
 
 int main(int argc, char **argv){return argc==0 && argv==0;}

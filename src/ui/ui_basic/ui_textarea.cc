@@ -21,6 +21,52 @@
 #include "graphic.h"
 
 namespace UI {
+
+Textarea::Textarea (Panel * const parent, const int x, const int y,
+						  const std::string & text, const Align align,
+						  const bool multiline)
+	:
+		Panel      (parent, x, y, 0, 0),
+		m_text     (text),
+		m_align    (align),
+		m_multiline(multiline)
+{
+	set_handle_mouse(false);
+	set_think       (false);
+	set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
+}
+
+Textarea::Textarea (Panel *  const parent, const int x, const int y,
+						  const uint w, const uint h, const Align align,
+						  const bool multiline)
+	:
+		Panel      (parent, x, y, w, h),
+		m_align    (align),
+		m_multiline(multiline),
+		m_fontname (UI_FONT_NAME),
+		m_fontsize (UI_FONT_SIZE_SMALL),
+		m_fcolor   (UI_FONT_CLR_FG)
+{
+	set_handle_mouse(false);
+	set_think(false);
+}
+
+Textarea:: Textarea (Panel *  const parent, const int x, const int y,
+							const uint w, const uint h, const std::string & text,
+							const Align align, const bool multiline)
+	:
+		Panel      (parent, x, y, w, h),
+		m_align    (align),
+		m_multiline(multiline),
+		m_fontname (UI_FONT_NAME),
+		m_fontsize (UI_FONT_SIZE_SMALL),
+		m_fcolor   (UI_FONT_CLR_FG)
+{
+	set_handle_mouse(false);
+	set_think(false);
+	set_text(text);
+}
+
 /**
   Set the text of the Textarea. Size is automatically adjusted
   */

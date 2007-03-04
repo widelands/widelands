@@ -55,9 +55,9 @@ struct Building_Descr : public Map_Object_Descr {
 	virtual ~Building_Descr(void);
 
 	const std::string & name    () const throw () {return m_name;}
-	const char * get_name() const throw () __attribute__ ((deprecated)) {return m_name.c_str();}
+	const char * get_name() const throw () {return m_name.c_str();} __attribute__ ((deprecated))
 	const std::string & descname() const throw () {return m_descname;}
-	const char * get_descname() const throw () __attribute__ ((deprecated)) {return m_descname.c_str();}
+	const char * get_descname() const throw () {return m_descname.c_str();} __attribute__ ((deprecated))
 	inline bool get_buildable(void) const { return m_buildable; }
    inline bool get_enhanced_building(void) const { return m_enhanced_building; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
@@ -87,7 +87,7 @@ struct Building_Descr : public Map_Object_Descr {
 	virtual uint get_conquers() const {return 0;}
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
-	const Tribe_Descr * get_tribe() const throw () __attribute__ ((deprecated)) {return &m_tribe;}
+	const Tribe_Descr * get_tribe() const throw () {return &m_tribe;} __attribute__ ((deprecated))
 	Workarea_Info m_workarea_info, m_recursive_workarea_info;
 
 	const BuildingHints & hints() const throw () {return m_hints;}
@@ -159,9 +159,9 @@ public:
 	virtual Coords get_position() const throw () {return m_position;}
 
 	const std::string & name    () const throw () {return descr().name    ();}
-	const char * get_name    () const throw () __attribute__ ((deprecated)) {return descr().name().c_str();}
+	const char * get_name    () const throw () {return descr().name().c_str();} __attribute__ ((deprecated))
 	const std::string & descname() const throw () {return descr().descname();}
-	const char * get_descname() const throw () __attribute__ ((deprecated)) {return descr().descname().c_str();}
+	const char * get_descname() const throw () {return descr().descname().c_str();} __attribute__ ((deprecated))
 
 	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
