@@ -1,10 +1,10 @@
 ; Only change the variables below. Nothing more should be changed.
 
 ;Version String
-#define XAppName "Widelands svn"
-#define XAppVerName "Widelands svn(inofficial)"
+#define XAppName "Widelands"
+#define XAppVerName "Widelands build 10"
 #define XAppVerNumber "0.10.0.1"
-#define XAppID "{WIDELAND-ddmm-yyyy-SVNB-INOFFICIAL}"
+#define XAppID "{WIDELAND-20/03-2007-BUILD10-OFFICIAL}"
 
 ;General String
 #define XAppPublisher "Widelands Development Team"
@@ -57,6 +57,11 @@ Name: swedish; MessagesFile: compiler:Languages\Swedish.isl
 Name: slovak; MessagesFile: compiler:Languages\Slovak.isl
 Name: russian; MessagesFile: compiler:Languages\Russian.isl
 Name: hungarian; MessagesFile: compiler:Languages\Hungarian.isl
+Name: dutch; MessagesFile: compiler:Languages\Dutch.isl
+Name: galician; MessagesFile: compiler:Languages\Galician.isl
+Name: hebrew; MessagesFile: compiler:Languages\Hebrew.isl
+Name: russian; MessagesFile: compiler:Languages\Russian.isl
+Name: spanish; MessagesFile: compiler:Languages\Spanish.isl
 
 [Tasks]
 Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
