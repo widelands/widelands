@@ -53,7 +53,7 @@ WaresDisplay::WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* ga
 	m_player = player;
 
    set_size(Width, 100);
-   m_curware = new UI::Textarea(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Testtext"), Align_Center);
+   m_curware = new UI::Textarea(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Stock"), Align_Center);
 }
 
 
