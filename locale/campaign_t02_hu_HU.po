@@ -2,19 +2,19 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: campaign_t02_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-07-01 12:06+0200\n"
+"PO-Revision-Date: 2006-12-27 18:32+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../campaigns/t02.wmf/objective:8
 msgid ""
@@ -60,6 +60,9 @@ msgid ""
 "iron first. Build a Smelter. Likewise, the coalearth from your coalmines "
 "must be refined into coal - for that, build a Coal Burner.</p>"
 msgstr ""
+"<p>Az érc amit a bányászaink felhoznak nem használható még, ki kell "
+"olvasztani belőle a vasat. Építs egy vasolvasztót. Hasonlóan a  nyers szenet "
+"meg kell tisztítani, ezért építs egy Szénégetőt.</p>"
 
 #: ../campaigns/t02.wmf/objective:56
 msgid ""
@@ -106,8 +109,8 @@ msgid ""
 "<p>The third material necessary for improved buildings is reed, used to "
 "cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 msgstr ""
-"<p>A harmadik anyag ami szüséges a továbbfejlesztett épületekhez, a nád. Ez "
-"szükséges az épületek fedéséhez. <p/>"
+"<p>A harmadik anyag ami szükséges a továbbfejlesztett épületekhez, a nád, "
+"ebből készül a tető. <p/>"
 
 #: ../campaigns/t02.wmf/event:10 ../campaigns/t02.wmf/event:685
 #: ../campaigns/t02.wmf/event:807 ../campaigns/t02.wmf/event:822
@@ -124,6 +127,12 @@ msgid ""
 "between the trees, the symbol of unity and peace among our kin became the "
 "wedge that drives us apart.\" "
 msgstr ""
+"\"A harc folytatódik. Egyre több és több testvérünk adja fel a brutális "
+"harcot a fővárosunkért. Szomorú hallani a történeteket a rokonaink "
+"bűneikről. Éjjeleket töltöttem álmatlanul, fáradtabb lettem, mint ahogy azt "
+"valaha el tudtam képzelni. Mág amikor becsuktam a szemem akkor is lángokban "
+"láttam az erődöt amit az apám épített. A trón a két fa között, az egység és "
+"a béke szimbóluma, most a széthúzást jelenti."
 
 #: ../campaigns/t02.wmf/event:14
 msgid "The Story goes on..."

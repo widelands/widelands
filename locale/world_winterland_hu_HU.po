@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: world_winterland_hu_HU\n"
@@ -116,12 +116,10 @@ msgid "The Widelands Development Team"
 msgstr "A Widelands fejlesztő csapat"
 
 #: ../worlds/winterland/conf:3
-#, fuzzy
 msgid "Winterland"
 msgstr "Jégmezők"
 
 #: ../worlds/winterland/conf:4
-#, fuzzy
 msgid ""
 "These are the white, wide and frosty winterlands, in which the Northmen "
 "dwell."

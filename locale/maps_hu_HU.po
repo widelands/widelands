@@ -1,23 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of maps_hu_HU.po to Hungarian
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: maps_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-03 22:15+0100\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
-msgstr ""
+msgstr "Sakktábla"
 
 #: ../maps/Checkmate.wmf/elemental:11
 msgid ""
@@ -25,10 +26,13 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
+"Ez akár a természet legfurább alkotása akár egy őrült (és sakk mániás) isten "
+"teremtménye, ez hátborzongató csatatér két ellenfélre várakozik egy újabb "
+"küzdelemért."
 
 #: ../maps/Dry Riverbed.wmf/elemental:9
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Kiszáradt folyómeder"
 
 #: ../maps/Dry Riverbed.wmf/elemental:11
 msgid ""
@@ -36,30 +40,37 @@ msgid ""
 "wonder, that here is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last water."
 msgstr ""
+"Sok éve érintette vízcsepp e kietlen vidék földjét. Nem csoda, hogy nincs "
+"sok víz ebben a száraz folyómederben. Mindenki tudja: háború készül. Egy "
+"háború az utolsó vízcseppekért."
 
 #: ../maps/Elven Forests.wmf/elemental:9
 msgid "Elven Forests"
-msgstr ""
+msgstr "Elf erdők"
 
 #: ../maps/Elven Forests.wmf/elemental:11
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many a tribe into "
 "the attempt of taking them for itself."
 msgstr ""
+"E smaragdzöld táj lélegzet-elállító szépsége sok népet vonzott ide, hogy "
+"megszerezze magának."
 
 #: ../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
-msgstr ""
+msgstr "Finn tavak"
 
 #: ../maps/Finlakes.wmf/elemental:11
 msgid ""
 "These are the beautiful finish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"A gyönyörű finn vidék, tavakkal folyókkal, ősi erdőkkel. Csak rajtad áll, "
+"hogy ezt a mesés világot meg tudod-e hódítani."
 
 #: ../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
-msgstr ""
+msgstr "Tüzeskedés"
 
 #: ../maps/Firegames.wmf/elemental:11
 msgid ""
@@ -68,20 +79,25 @@ msgid ""
 "if you are alone, but noone knows, what might happen if you meet an opponent "
 "tribe?"
 msgstr ""
+"Ez az istenek próbája vagy egy gonosz terv, te és a törzsed ezen szigeten "
+"ébred tűzzel és lávával körülvéve? Eddig úgy tűnt egyedül vagy, de senki sem "
+"tudja mi történik ha találkozol egy ellenséges törzzsel."
 
 #: ../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
-msgstr ""
+msgstr "Négy kastély"
 
 #: ../maps/Four Castles.wmf/elemental:11
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Jól védett mitikus erdeikben, a négy hatalom-éhes hadúr e földek teljes "
+"bekebelezését tervezgeti..."
 
 #: ../maps/Glacier Lake.wmf/elemental:9
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Tengerszem"
 
 #: ../maps/Glacier Lake.wmf/elemental:11
 msgid ""
@@ -90,14 +106,19 @@ msgid ""
 "a few month ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only place enough for one tribe."
 msgstr ""
+"Hosszú ideje él a törzsed e gyönyörű tengerszemnél. Senki sem zavart téged "
+"és a természet is megadott mindent, ellátta az egész törzsed. Azonban egy "
+"pár hete új törzs érkezett a hegyeken át és letelepedett. Te biztos vagy "
+"benne, hogy ezen a helyen csak egy törzs fér el."
 
 #: ../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Arany félsziget"
 
 #: ../maps/Golden Peninsula.wmf/elemental:11
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
+"Két birodalom versenyez a mesés kincsért ezen a hatalmas félszigeten..."
 
 #: ../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
@@ -109,10 +130,13 @@ msgid ""
 "beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
 "hostile tribes arrive at its shores..."
 msgstr ""
+"Ez a folyó, a legősibb erdők mélyén, régóta ismert szépségéről és idillikus "
+"nyugalmáról. Azonban most e szent tó partjára két ellenséges törzs "
+"érkezett..."
 
 #: ../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr ""
+msgstr "A zöld fennsík"
 
 #: ../maps/Plateau.wmf/elemental:11
 msgid ""
@@ -128,7 +152,7 @@ msgstr ""
 
 #: ../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "Az oázis háromszög"
 
 #: ../maps/The Oasis Triangle.wmf/elemental:11
 msgid ""
@@ -139,15 +163,15 @@ msgstr ""
 
 #: ../maps/The big lake.wmf/elemental:9
 msgid "The big lake"
-msgstr ""
+msgstr "A nagy tó"
 
 #: ../maps/The long way.wmf/elemental:9
 msgid "The long way"
-msgstr ""
+msgstr "A hosszú út"
 
 #: ../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
-msgstr ""
+msgstr "A völgyek harca"
 
 #: ../maps/War of the Valleys.wmf/elemental:11
 msgid ""
@@ -155,3 +179,6 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"Azt mondják, hogy még a napnak és a holdnak is meg kell találniuk az útjukat "
+"e hegyek között. SEGÍTSÉG: kiálló kövek jelölik az ércben gazdag földeket. "
+"Máshová ne is küldj geológust."

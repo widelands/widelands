@@ -1,25 +1,23 @@
-# translation of text.pot to Hungarian
 # translation of texts_hu_HU.po to Hungarian
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: texts_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-19 20:31+0000\n"
+"PO-Revision-Date: 2007-01-21 17:23+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
 
 #: ../txts/COPYING:1
 msgid "License"
-msgstr "Licensz"
+msgstr "Licenc"
 
 #: ../txts/COPYING:3
 msgid "GNU general public licence"
@@ -421,10 +419,9 @@ msgstr "Használati utasítás"
 
 #: ../txts/README:5
 msgid "an open source strategy game"
-msgstr "Szabad forráskódú statégiai játék"
+msgstr "Szabad forráskódú stratégiai játék"
 
 #: ../txts/README:13
-#, fuzzy
 msgid ""
 "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
 "BlueByte.<br>In this game, you start out on a small piece of land with "
@@ -437,8 +434,8 @@ msgstr ""
 "A Widelands stratégiai játék a Bluebyte Settlers II mintájára készült.\n"
 "A játék egy kis területen indul, egy kevés nyersanyaggal. Az erőforrásokat "
 "felhasználva felépítheted a saját birodalmad, ki kell építened a gazdasági "
-"infrasrtuktúrát. Ahogy egyre nagyobb területet foglalsz el, szembe kell "
-"nézned más népekkel is, akik szintén uralni akaráják a világot."
+"infrastruktúrát, felderíteni a közeli területeket és szembe kell nézned más "
+"népekkel is, akik szintén uralni akarják a világot."
 
 #: ../txts/README:16
 msgid "Check out the Widelands project homepage:"
@@ -451,7 +448,7 @@ msgid ""
 "main menu."
 msgstr ""
 "A Widelands játékot GNU General Public License (GPL) alatt adták ki. További "
-"információért nézd meg a 'COPYING' fájlt, vagy olvasd el a licenszt ami "
+"információért nézd meg a 'COPYING' fájlt, vagy olvasd el a licencet, amely "
 "elérhető a főmenüből."
 
 #: ../txts/README:27
@@ -472,7 +469,7 @@ msgstr ""
 
 #: ../txts/README:36
 msgid "Keyboard shortcuts (in-game)"
-msgstr "Billentyűzetparancsok"
+msgstr "Billentyűparancsok (játék közben)"
 
 #: ../txts/README:40
 msgid "SPACE       Toggles build-help"
@@ -492,11 +489,11 @@ msgstr "S               Statisztika megjelenítése"
 
 #: ../txts/README:48
 msgid "F               Toggle Fullscreen"
-msgstr "F               Teljesképernyő"
+msgstr "F               Teljes képernyő"
 
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
-msgstr ""
+msgstr "Home         Ugrás a kezdőpozícióhoz"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
@@ -507,7 +504,6 @@ msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "PAGEDOWN    Játék sebességének csökkentése"
 
 #: ../txts/README:58
-#, fuzzy
 msgid "F5           Reveals the entire map (only in debug-builds)"
 msgstr "F5           A teljes térkép megmutatása"
 
@@ -521,13 +517,15 @@ msgstr "F11         Kép készítése"
 
 #: ../txts/README:67
 msgid "Online Help"
-msgstr ""
+msgstr "Online segítség"
 
 #: ../txts/README:71
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Ha szükséged van a program használati utasítására vagy segítségre, látogasd "
+"meg weblapunkat. Friss online segítség elérhető ezen a címen:"
 
 #: ../txts/README:79
 msgid "Reporting Bugs"
@@ -541,18 +539,19 @@ msgid ""
 msgstr ""
 "A hibát szeretnél bejelenteni, kérlek küldd el a levelezőlistára, <widelands-"
 "public@list.sourceforge.net>\n"
-"Felíratkozáshoz látogasd meg az alábbi weboldalt:"
+"Feliratkozáshoz nézd meg az alábbi weboldalt:"
 
 #: ../txts/README:88
 msgid "Please provide enough background information. Tell us:"
 msgstr "Kérlek adj meg elegendő háttérinformációt:"
 
 #: ../txts/README:91
-#, fuzzy
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
-msgstr "-a Widelands mely verzióját használod, jelezd ha CVS fordítás"
+msgstr ""
+"-a Widelands mely verzióját használod (pl. build szám vagy verziószám, "
+"jelezd ha saját SVN fordítás)"
 
 #: ../txts/README:93
 msgid "- how to reproduce the bug"
@@ -570,7 +569,7 @@ msgid ""
 "below."
 msgstr ""
 "-ha lehetséges küld el egy becsomagolt (zip, gzip, bzip2) munkamenet "
-"felvételet,\n"
+"felvételt,\n"
 "kivéve ha a hiba könnyedén reprodukálható. Ha hiba történik javasolt mindig "
 "felvételt készíteni \n"
 "További információt alább olvashatsz."
@@ -607,7 +606,7 @@ msgid ""
 msgstr ""
 "Windowson készíthetsz egy parancsikont (jobb gomb a widelands.exe-re, aztán "
 "Parancsikon létrehozása). Ezután be kel állítani a parancsikont (jobb gomb a "
-"paracsikonra az asztalon, majd tulajdonságok). A cél könyvtárnak valahogy "
+"parancsikonra az asztalon, majd tulajdonságok). A cél könyvtárnak valahogy "
 "így kell kinéznie: c:\\games\\widelands\\widelands.exe. Változtasd meg ezt "
 "így: c:\\games\\widelands\\widelands.exe --record=fájlnév.rec."
 
@@ -633,7 +632,6 @@ msgstr ""
 "eszköz, ami segíti a beküldött hibajelentések tanulmányozását."
 
 #: ../txts/developers:1
-#, fuzzy
 msgid "Development"
 msgstr "Fejlesztés"
 
@@ -658,13 +656,13 @@ msgid ""
 msgstr ""
 "A térképszerkesztő olyan felhasználóknak készült akik saját térképet "
 "szeretnének készíteni.\n"
-"Jeleleg még fejlesztés alatt áll, ahogy fejlődik úgy lesz e szöveg egyre "
-"hosszabb. Később valószínüleg itt lesz egy kis bevezető a szerkesztő "
-"használatáshoz."
+"Jelenleg fejlesztés alatt áll, ahogy fejlődik úgy lesz e szöveg egyre "
+"hosszabb. Később valószínűleg itt lesz egy kis bevezető a szerkesztő "
+"használatához."
 
 #: ../txts/editor_readme:13
 msgid "Keyboard shortcuts"
-msgstr "Billentyűzetparancsok"
+msgstr "Billentyűparancsok"
 
 #: ../txts/editor_readme:16
 msgid "SPACE    Toggles build help"
@@ -680,7 +678,7 @@ msgstr "E           Események beállításai"
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr "F           Teljesképernyő"
+msgstr "F           Teljes képernyő"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"

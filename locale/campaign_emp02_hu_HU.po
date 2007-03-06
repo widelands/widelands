@@ -1,10 +1,27 @@
+# translation of campaign_emp01_hu_HU.po to Hungarian
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: campaign_emp02_hu_HU\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2007-01-21 21:23+0100\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Birodalom oktató 2 - Száműzés egy távoli előőrsre"
 
 #: ../campaigns/emp02.wmf/elemental:11
 msgid "Second mission of the Empire campaign"
-msgstr ""
+msgstr "A Birodalom hadjárat második küldetése"
 
 #: ../campaigns/emp02.wmf/event:11 ../campaigns/emp02.wmf/event:45
 #: ../campaigns/emp02.wmf/event:88 ../campaigns/emp02.wmf/event:427
@@ -12,7 +29,7 @@ msgstr ""
 #: ../campaigns/emp02.wmf/event:925 ../campaigns/emp02.wmf/event:960
 #: ../campaigns/emp02.wmf/event:996
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutius naplója"
 
 #: ../campaigns/emp02.wmf/event:13
 msgid ""
@@ -155,7 +172,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:728
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea belép..."
 
 #: ../campaigns/emp02.wmf/event:730
 msgid ""
@@ -175,7 +192,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:732
 msgid "Food for the miners"
-msgstr ""
+msgstr "Étel a bányászoknak"
 
 #: ../campaigns/emp02.wmf/event:868
 msgid ""
@@ -198,7 +215,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:871
 msgid "The Barbarians"
-msgstr ""
+msgstr "A barbárok"
 
 #: ../campaigns/emp02.wmf/event:927
 msgid ""
@@ -234,11 +251,11 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:964
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../campaigns/emp02.wmf/event:979
 msgid "7 days later..."
-msgstr ""
+msgstr "7 nappal később"
 
 #: ../campaigns/emp02.wmf/event:981
 msgid "As time is running by"
@@ -246,7 +263,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:988
 msgid "Continue"
-msgstr ""
+msgstr "Folytatás"
 
 #: ../campaigns/emp02.wmf/event:998
 msgid ""
@@ -261,11 +278,11 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:1000
 msgid "A Message"
-msgstr ""
+msgstr "Az üzenet"
 
 #: ../campaigns/emp02.wmf/event:1016
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea mosolyog"
 
 #: ../campaigns/emp02.wmf/event:1018
 msgid ""
