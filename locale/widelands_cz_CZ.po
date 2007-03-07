@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-21 20:01+0100\n"
+"POT-Creation-Date: 2007-03-07 19:56+0100\n"
 "PO-Revision-Date: 2006-02-08 16:33+0100\n"
 "Last-Translator: Prometheus <mmatej@yahoo.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -324,6 +324,7 @@ msgid "Building statistics"
 msgstr "Statistika stavby"
 
 #: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
+#: ../src/waresdisplay.cc:56
 msgid "Stock"
 msgstr "Zásoba"
 
@@ -744,7 +745,7 @@ msgstr "Nahoru"
 msgid "DOWN"
 msgstr "Dolů"
 
-#: ../src/profile.cc:1005
+#: ../src/profile.cc:1018
 msgid "Usage: "
 msgstr "Vytížení:"
 
@@ -784,13 +785,9 @@ msgstr "Nulová spoušť"
 msgid "Time Trigger"
 msgstr "Časová spoušť"
 
-#: ../src/ware.cc:71 ../src/worker.cc:1553
+#: ../src/ware.cc:71 ../src/worker.cc:1550
 msgid "Doh... someone forgot the help text!"
 msgstr "Zatr... někdo tu zapoměl na help!"
-
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Testtext"
 
 #: ../src/ware_statistics_menu.cc:350
 msgid "Ware Statistics"
@@ -963,7 +960,7 @@ msgid "Descr"
 msgstr "Popis"
 
 #: ../src/editor/tools/editor_info_tool.cc:133
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
+#: ../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
 msgstr "Počet hráčů"
 
@@ -1044,9 +1041,71 @@ msgstr "Zobraz Cťimě"
 msgid "Exit Editor"
 msgstr "Opušť editor"
 
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
-msgid "Bobs Menu"
-msgstr "Menu bobů"
+#: ../src/editor/ui_menus/editor_player_menu.cc:42
+msgid "Player Options"
+msgstr "Volby hráče"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:50
+#, fuzzy
+msgid "Add player"
+msgstr "Hráč"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:59
+msgid "Remove last player"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:204
+msgid "I"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:205
+#, fuzzy
+msgid "Make infrastructure"
+msgstr "Vytvoř adresář"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:218
+msgid "B"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:219
+#, fuzzy
+msgid "Allow/forbid buildidngs"
+msgstr "Povolené budovy"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
+msgid "Player "
+msgstr "Hráč"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:296
+#: ../src/editor/ui_menus/editor_player_menu.cc:327
+#: ../src/editor/ui_menus/editor_event_menu.cc:284
+#: ../src/editor/ui_menus/editor_event_menu.cc:329
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
+msgid "Error!"
+msgstr "Chyba!"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:297
+#, fuzzy
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again"
+msgstr ""
+"Nejde odstranit hráč - je někde vázán. Odstraň všechny budovy, boby, spouště "
+"a události, které s ním souvisejí a zkus akci opakovat."
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:328
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Nejde změnit klan hráče - je někde vázán. Odstraň všechny budovy, boby, "
+"spouště a události, které souvisejí s klanem a zkus akci opakovat."
+
+#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
+#, fuzzy
+msgid "Immovable Bobs Menu"
+msgstr "Menu pevných bobů"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1091,14 +1150,6 @@ msgstr "Nová událost"
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
 msgstr "Nelze smazat událost. Užívá ji"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:329
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
-#: ../src/editor/ui_menus/editor_player_menu.cc:264
-#: ../src/editor/ui_menus/editor_player_menu.cc:297
-msgid "Error!"
-msgstr "Chyba!"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:319
 msgid "Can't delete Trigger. It is in use by "
@@ -1308,50 +1359,6 @@ msgstr ""
 "\n"
 "Důvod:\n"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:41
-msgid "Player Options"
-msgstr "Volby hráče"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:199
-msgid "I"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:200
-#, fuzzy
-msgid "Make infrastructure"
-msgstr "Vytvoř adresář"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:213
-msgid "B"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:214
-#, fuzzy
-msgid "Allow/forbid buildidngs"
-msgstr "Povolené budovy"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:246
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
-msgid "Player "
-msgstr "Hráč"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:265
-#, fuzzy
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend on this player and try again"
-msgstr ""
-"Nejde odstranit hráč - je někde vázán. Odstraň všechny budovy, boby, spouště "
-"a události, které s ním souvisejí a zkus akci opakovat."
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:298
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Nejde změnit klan hráče - je někde vázán. Odstraň všechny budovy, boby, "
-"spouště a události, které souvisejí s klanem a zkus akci opakovat."
-
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
 msgstr "Vlož název adresáře:"
@@ -1549,6 +1556,10 @@ msgstr "Šíře"
 msgid "Create Map"
 msgstr "Vytvoř mapu"
 
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+msgid "Bobs Menu"
+msgstr "Menu bobů"
+
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Volby výškových nástrojů"
@@ -1625,11 +1636,6 @@ msgstr "Chyba v syntaxi"
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:267
 msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr "Tvoje podmínka má minimálně jednu chybu v syntaxi. Prosím oprav!\n"
-
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
-#, fuzzy
-msgid "Immovable Bobs Menu"
-msgstr "Menu pevných bobů"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
 msgid "Allowed Buildings"
@@ -1836,6 +1842,31 @@ msgstr "Vyber uloženou hru!"
 msgid "Gametime:"
 msgstr "Herní čas:"
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "Jeden hráč"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Síťová hra"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Editor"
+msgstr "Editor"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "Exit Game"
+msgstr "Opusť hru"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
+msgid "Version"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+#, fuzzy
+msgid "(C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2006 Vývojový tým Widelands"
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
 msgstr "Lobby"
@@ -1864,31 +1895,6 @@ msgstr "Kritická chyba spojení!"
 msgid "Server disconnected unexpectedly!"
 msgstr "Server se nečekaně odpojil!"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "Jeden hráč"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Síťová hra"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Editor"
-msgstr "Editor"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "Exit Game"
-msgstr "Opusť hru"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
-msgid "Version"
-msgstr ""
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-#, fuzzy
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2006 Vývojový tým Widelands"
-
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
 msgid "Internet Options"
 msgstr "Volby internetu"
@@ -1908,6 +1914,9 @@ msgstr "Odkryj oblast"
 #: ../src/map_objective_manager.h:52
 msgid "no descr"
 msgstr "bez popisu"
+
+#~ msgid "Testtext"
+#~ msgstr "Testtext"
 
 #~ msgid "Current Size"
 #~ msgstr "Současná velikost"

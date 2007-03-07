@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-21 20:01+0100\n"
+"POT-Creation-Date: 2007-03-07 19:56+0100\n"
 "PO-Revision-Date: 2007-02-23 01:18+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
@@ -316,6 +316,7 @@ msgid "Building statistics"
 msgstr "Статистика зданий"
 
 #: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
+#: ../src/waresdisplay.cc:56
 msgid "Stock"
 msgstr "Склад"
 
@@ -719,7 +720,7 @@ msgstr "ВВЕРХ"
 msgid "DOWN"
 msgstr "ВНИЗ"
 
-#: ../src/profile.cc:1005
+#: ../src/profile.cc:1018
 msgid "Usage: "
 msgstr "Использование:"
 
@@ -759,13 +760,9 @@ msgstr "Нулевой тригер"
 msgid "Time Trigger"
 msgstr "Временной тригер"
 
-#: ../src/ware.cc:71 ../src/worker.cc:1553
+#: ../src/ware.cc:71 ../src/worker.cc:1550
 msgid "Doh... someone forgot the help text!"
 msgstr "Ох... кто-то забыл текстовую справку!"
-
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Тест"
 
 #: ../src/ware_statistics_menu.cc:350
 msgid "Ware Statistics"
@@ -933,7 +930,7 @@ msgid "Descr"
 msgstr "Описание"
 
 #: ../src/editor/tools/editor_info_tool.cc:133
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
+#: ../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
 msgstr "Количество игроков"
 
@@ -1016,10 +1013,67 @@ msgstr "Прочти меня!"
 msgid "Exit Editor"
 msgstr "Выход из редактора"
 
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+#: ../src/editor/ui_menus/editor_player_menu.cc:42
+msgid "Player Options"
+msgstr "Настройки Игрока"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:50
 #, fuzzy
-msgid "Bobs Menu"
-msgstr "Меню Bobs"
+msgid "Add player"
+msgstr "Игрок"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:59
+msgid "Remove last player"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:204
+msgid "I"
+msgstr "I"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:205
+msgid "Make infrastructure"
+msgstr "Создать инфраструктуру"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:218
+msgid "B"
+msgstr "B"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:219
+msgid "Allow/forbid buildidngs"
+msgstr "Разрешить/запретить строения"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
+msgid "Player "
+msgstr "Игрок "
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:296
+#: ../src/editor/ui_menus/editor_player_menu.cc:327
+#: ../src/editor/ui_menus/editor_event_menu.cc:284
+#: ../src/editor/ui_menus/editor_event_menu.cc:329
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
+msgid "Error!"
+msgstr "Ошибка!"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:297
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again"
+msgstr ""
+"Не могу удалить игрока. На него ссылаются из другого места. Удалите все "
+"строения, bobs, триггеры и события, зависящие от этого игрока и повторите"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:328
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Не могу изменить племя игрока. На него ссылаются из другого места. Удалите "
+"все строения, bobs, тригеры и события, зависящие от этого игрока и повторите"
+
+#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
+msgid "Immovable Bobs Menu"
+msgstr "Неперемещаемое меню Bobs"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1064,14 +1118,6 @@ msgstr "Новое событие"
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
 msgstr "Не могу удалить событие. Оно используется "
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:329
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
-#: ../src/editor/ui_menus/editor_player_menu.cc:264
-#: ../src/editor/ui_menus/editor_player_menu.cc:297
-msgid "Error!"
-msgstr "Ошибка!"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:319
 msgid "Can't delete Trigger. It is in use by "
@@ -1279,47 +1325,6 @@ msgstr ""
 "\n"
 "Причина:\n"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:41
-msgid "Player Options"
-msgstr "Настройки Игрока"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:199
-msgid "I"
-msgstr "I"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:200
-msgid "Make infrastructure"
-msgstr "Создать инфраструктуру"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:213
-msgid "B"
-msgstr "B"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:214
-msgid "Allow/forbid buildidngs"
-msgstr "Разрешить/запретить строения"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:246
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
-msgid "Player "
-msgstr "Игрок "
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:265
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend on this player and try again"
-msgstr ""
-"Не могу удалить игрока. На него ссылаются из другого места. Удалите все "
-"строения, bobs, триггеры и события, зависящие от этого игрока и повторите"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:298
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Не могу изменить племя игрока. На него ссылаются из другого места. Удалите "
-"все строения, bobs, тригеры и события, зависящие от этого игрока и повторите"
-
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
 msgstr "Введите Имя Каталога"
@@ -1516,6 +1521,11 @@ msgstr "Ширина"
 msgid "Create Map"
 msgstr "Создать Карту"
 
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+#, fuzzy
+msgid "Bobs Menu"
+msgstr "Меню Bobs"
+
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Настройки инструментов высоты"
@@ -1593,10 +1603,6 @@ msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr ""
 "Ваше условие содержит по крайне мере одну синтаксическую ошибку. Пожалуйста "
 "исправьте!\n"
-
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
-msgid "Immovable Bobs Menu"
-msgstr "Неперемещаемое меню Bobs"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
 msgid "Allowed Buildings"
@@ -1800,6 +1806,30 @@ msgstr "Выберите сохраненную игру!"
 msgid "Gametime:"
 msgstr "Время игры: "
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "Один Игрок"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Многопользовательская"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Editor"
+msgstr "Редактор"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "Exit Game"
+msgstr "Выход из игры"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
+msgid "Version"
+msgstr "Версия"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+msgid "(C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2007 Команда разработчиков Widelands "
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
 msgstr "Lobby "
@@ -1828,30 +1858,6 @@ msgstr "Критическая ошибка соединения!"
 msgid "Server disconnected unexpectedly!"
 msgstr "Сервер неожиданно отключился!"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "Один Игрок"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Многопользовательская"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Editor"
-msgstr "Редактор"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "Exit Game"
-msgstr "Выход из игры"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
-msgid "Version"
-msgstr "Версия"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2007 Команда разработчиков Widelands "
-
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
 msgid "Internet Options"
 msgstr "Настройки Интернет"
@@ -1871,3 +1877,6 @@ msgstr "Открытая область"
 #: ../src/map_objective_manager.h:52
 msgid "no descr"
 msgstr "нет описания"
+
+#~ msgid "Testtext"
+#~ msgstr "Тест"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-21 20:01+0100\n"
+"POT-Creation-Date: 2007-03-07 19:56+0100\n"
 "PO-Revision-Date: 2006-04-05 19:49+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: Swedish\n"
@@ -331,6 +331,7 @@ msgid "Building statistics"
 msgstr "Byggstatistik"
 
 #: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
+#: ../src/waresdisplay.cc:56
 msgid "Stock"
 msgstr "Lager"
 
@@ -752,7 +753,7 @@ msgstr "UPP"
 msgid "DOWN"
 msgstr "NER"
 
-#: ../src/profile.cc:1005
+#: ../src/profile.cc:1018
 msgid "Usage: "
 msgstr "Användning: "
 
@@ -793,13 +794,9 @@ msgstr "Nollställa Utlösare"
 msgid "Time Trigger"
 msgstr "Tids Utlösare"
 
-#: ../src/ware.cc:71 ../src/worker.cc:1553
+#: ../src/ware.cc:71 ../src/worker.cc:1550
 msgid "Doh... someone forgot the help text!"
 msgstr "Doh.. någon har glömt hjälptexten!"
-
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Testtext"
 
 #: ../src/ware_statistics_menu.cc:350
 msgid "Ware Statistics"
@@ -972,7 +969,7 @@ msgid "Descr"
 msgstr "Beskr"
 
 #: ../src/editor/tools/editor_info_tool.cc:133
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
+#: ../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
 msgstr "Antal spelare"
 
@@ -1053,10 +1050,73 @@ msgstr "Läs Readme"
 msgid "Exit Editor"
 msgstr "Stäng Redigerare"
 
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+#: ../src/editor/ui_menus/editor_player_menu.cc:42
+msgid "Player Options"
+msgstr "Spelar inställningar"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:50
 #, fuzzy
-msgid "Bobs Menu"
-msgstr "Bobs Meny"
+msgid "Add player"
+msgstr "Spelare"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:59
+msgid "Remove last player"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:204
+msgid "I"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:205
+#, fuzzy
+msgid "Make infrastructure"
+msgstr "Skapa mapp"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:218
+msgid "B"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:219
+#, fuzzy
+msgid "Allow/forbid buildidngs"
+msgstr "Tillåtna byggnader"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
+msgid "Player "
+msgstr "Spelare "
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:296
+#: ../src/editor/ui_menus/editor_player_menu.cc:327
+#: ../src/editor/ui_menus/editor_event_menu.cc:284
+#: ../src/editor/ui_menus/editor_event_menu.cc:329
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
+msgid "Error!"
+msgstr "Fel!"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:297
+#, fuzzy
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again"
+msgstr ""
+"Kan inte ta bort spelare. Spelaren är refererad på någon plats. Ta bort alla "
+"byggnader, bobs, utlösare och händelser som berör denna spelaren och försök "
+"igen"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:328
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Kan inte ändra spelarens stam. Spelaren är refererad på någon plats. Ta bort "
+"alla byggnader, bobs, utlösare och händelser som berör denna spelaren och "
+"försök igen"
+
+#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
+#, fuzzy
+msgid "Immovable Bobs Menu"
+msgstr "Oflyttbar Bobs meny"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1101,14 +1161,6 @@ msgstr "Ny händelse"
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
 msgstr "Kan inte ta bort händelse. Används av "
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:329
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
-#: ../src/editor/ui_menus/editor_player_menu.cc:264
-#: ../src/editor/ui_menus/editor_player_menu.cc:297
-msgid "Error!"
-msgstr "Fel!"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:319
 msgid "Can't delete Trigger. It is in use by "
@@ -1320,52 +1372,6 @@ msgstr ""
 "\n"
 "Anledning:\n"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:41
-msgid "Player Options"
-msgstr "Spelar inställningar"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:199
-msgid "I"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:200
-#, fuzzy
-msgid "Make infrastructure"
-msgstr "Skapa mapp"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:213
-msgid "B"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:214
-#, fuzzy
-msgid "Allow/forbid buildidngs"
-msgstr "Tillåtna byggnader"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:246
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
-msgid "Player "
-msgstr "Spelare "
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:265
-#, fuzzy
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend on this player and try again"
-msgstr ""
-"Kan inte ta bort spelare. Spelaren är refererad på någon plats. Ta bort alla "
-"byggnader, bobs, utlösare och händelser som berör denna spelaren och försök "
-"igen"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:298
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Kan inte ändra spelarens stam. Spelaren är refererad på någon plats. Ta bort "
-"alla byggnader, bobs, utlösare och händelser som berör denna spelaren och "
-"försök igen"
-
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
 msgstr "Ange mappnamn: "
@@ -1567,6 +1573,11 @@ msgstr "Bredd"
 msgid "Create Map"
 msgstr "Skapa karta"
 
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+#, fuzzy
+msgid "Bobs Menu"
+msgstr "Bobs Meny"
+
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Höjdverktygs Alternativ"
@@ -1644,11 +1655,6 @@ msgstr "Syntaxfel"
 msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr ""
 "Ditt villkor innehåller minst ett syntax fel. Var vänlig, rätta till det!\n"
-
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
-#, fuzzy
-msgid "Immovable Bobs Menu"
-msgstr "Oflyttbar Bobs meny"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
 msgid "Allowed Buildings"
@@ -1857,6 +1863,31 @@ msgstr "Välj sparat spel!"
 msgid "Gametime:"
 msgstr "Speltid:"
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "En spelare"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Flera spelare"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Editor"
+msgstr "Redigera"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "Exit Game"
+msgstr "Avsluta spel"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
+msgid "Version"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+#, fuzzy
+msgid "(C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2006 av Widelands utvecklingslag"
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
 msgstr "Lobby"
@@ -1885,31 +1916,6 @@ msgstr "Kritiskt anslutningsfel!"
 msgid "Server disconnected unexpectedly!"
 msgstr "Servern tappade kontakten!"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "En spelare"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Flera spelare"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Editor"
-msgstr "Redigera"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "Exit Game"
-msgstr "Avsluta spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
-msgid "Version"
-msgstr ""
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-#, fuzzy
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2006 av Widelands utvecklingslag"
-
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
 msgid "Internet Options"
 msgstr "Internet-inställningar"
@@ -1929,6 +1935,9 @@ msgstr "Visa area"
 #: ../src/map_objective_manager.h:52
 msgid "no descr"
 msgstr "ingen beskr"
+
+#~ msgid "Testtext"
+#~ msgstr "Testtext"
 
 #~ msgid "Current Size"
 #~ msgstr "Nuvarande storlek"

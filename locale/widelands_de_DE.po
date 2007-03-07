@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Mainlanguagepack 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-21 20:01+0100\n"
-"PO-Revision-Date: 2007-02-21 20:03+0100\n"
+"POT-Creation-Date: 2007-03-07 19:56+0100\n"
+"PO-Revision-Date: 2007-03-07 20:12+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -314,6 +314,7 @@ msgid "Building statistics"
 msgstr "Gebäudestatistik"
 
 #: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
+#: ../src/waresdisplay.cc:56
 msgid "Stock"
 msgstr "Lager"
 
@@ -719,7 +720,7 @@ msgstr "+"
 msgid "DOWN"
 msgstr "-"
 
-#: ../src/profile.cc:1005
+#: ../src/profile.cc:1018
 msgid "Usage: "
 msgstr "Benutzung:"
 
@@ -759,13 +760,9 @@ msgstr "Null Auslöser"
 msgid "Time Trigger"
 msgstr "Zeit Auslöser"
 
-#: ../src/ware.cc:71 ../src/worker.cc:1553
+#: ../src/ware.cc:71 ../src/worker.cc:1550
 msgid "Doh... someone forgot the help text!"
 msgstr "Och neeee! Jemand hat den Hilfstext vergessen!"
-
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Lagerhaus"
 
 #: ../src/ware_statistics_menu.cc:350
 msgid "Ware Statistics"
@@ -933,7 +930,7 @@ msgid "Descr"
 msgstr "Beschr"
 
 #: ../src/editor/tools/editor_info_tool.cc:133
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
+#: ../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
 msgstr "Anzahl der Spieler"
 
@@ -1014,9 +1011,68 @@ msgstr "Zeige Liesmich"
 msgid "Exit Editor"
 msgstr "Beenden"
 
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
-msgid "Bobs Menu"
-msgstr "Natur Menü"
+#: ../src/editor/ui_menus/editor_player_menu.cc:42
+msgid "Player Options"
+msgstr "Spieleroptionen"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:50
+msgid "Add player"
+msgstr "Füge Spieler hinzu"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:59
+msgid "Remove last player"
+msgstr "Entferne letzten Spieler"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:204
+msgid "I"
+msgstr "I"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:205
+msgid "Make infrastructure"
+msgstr "Erstelle Infrastruktur"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:218
+msgid "B"
+msgstr "B"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:219
+msgid "Allow/forbid buildidngs"
+msgstr "Erlaube/verbiete Gebäude"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
+msgid "Player "
+msgstr "Spieler"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:296
+#: ../src/editor/ui_menus/editor_player_menu.cc:327
+#: ../src/editor/ui_menus/editor_event_menu.cc:284
+#: ../src/editor/ui_menus/editor_event_menu.cc:329
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
+msgid "Error!"
+msgstr "Fehler!"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:297
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again"
+msgstr ""
+"Kann Spieler nicht löschen. Der Spieler wird verwendet. Entferne alle "
+"Gebäude, Natur, Auslöser und Ereignisse die mit diesem Spieler verknüpft "
+"sind und versuche es nochmal."
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:328
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Kann Spieler-Stamm nicht ändern. Der Stamm wird verwendet. Entferne alle "
+"Gebäude, Natur, Auslöser und Ereignisse die mit diesem Stamm verknüpft sind "
+"und versuche es nochmal."
+
+#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
+msgid "Immovable Bobs Menu"
+msgstr "Menü: unbewegte Natur"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1061,14 +1117,6 @@ msgstr "Neues Ereig."
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
 msgstr "Kann das Ereignis nicht löschen. Es wird genutzt von"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:329
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
-#: ../src/editor/ui_menus/editor_player_menu.cc:264
-#: ../src/editor/ui_menus/editor_player_menu.cc:297
-msgid "Error!"
-msgstr "Fehler!"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:319
 msgid "Can't delete Trigger. It is in use by "
@@ -1276,49 +1324,6 @@ msgstr ""
 "beschädigt!\n"
 "Grund:\n"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:41
-msgid "Player Options"
-msgstr "Spieleroptionen"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:199
-msgid "I"
-msgstr "I"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:200
-msgid "Make infrastructure"
-msgstr "Erstelle Infrastruktur"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:213
-msgid "B"
-msgstr "B"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:214
-msgid "Allow/forbid buildidngs"
-msgstr "Erlaube/verbiete Gebäude"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:246
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
-msgid "Player "
-msgstr "Spieler"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:265
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend on this player and try again"
-msgstr ""
-"Kann Spieler nicht löschen. Der Spieler wird verwendet. Entferne alle "
-"Gebäude, Natur, Auslöser und Ereignisse die mit diesem Spieler verknüpft "
-"sind und versuche es nochmal."
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:298
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Kann Spieler-Stamm nicht ändern. Der Stamm wird verwendet. Entferne alle "
-"Gebäude, Natur, Auslöser und Ereignisse die mit diesem Stamm verknüpft sind "
-"und versuche es nochmal."
-
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
 msgstr "Ordnername eingeben:"
@@ -1515,6 +1520,10 @@ msgstr "Weite"
 msgid "Create Map"
 msgstr "Karte erstellen"
 
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+msgid "Bobs Menu"
+msgstr "Natur Menü"
+
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Höhen Werkzeug Menü"
@@ -1590,10 +1599,6 @@ msgstr "Syntax Fehler"
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:267
 msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr "Deine Bedingung hat mindestens einen Syntax-Fehler. Bitte beheben!\n"
-
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
-msgid "Immovable Bobs Menu"
-msgstr "Menü: unbewegte Natur"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
 msgid "Allowed Buildings"
@@ -1796,6 +1801,30 @@ msgstr "Wähle ein gespeichertes Spiel"
 msgid "Gametime:"
 msgstr "Spielzeit"
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "Einzelspieler"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Mehrspieler"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Editor"
+msgstr "Editor"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "Exit Game"
+msgstr "Spiel beenden"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
+msgid "Version"
+msgstr "Version"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+msgid "(C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2007 Widelands Entwicklungsteam"
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
 msgstr "Zuschauer"
@@ -1824,30 +1853,6 @@ msgstr "Kritischer Verbindungsfehler"
 msgid "Server disconnected unexpectedly!"
 msgstr "Unerwartet vom Server getrennt!"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "Einzelspieler"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Mehrspieler"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Editor"
-msgstr "Editor"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "Exit Game"
-msgstr "Spiel beenden"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
-msgid "Version"
-msgstr "Version"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2007 Widelands Entwicklungsteam"
-
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
 msgid "Internet Options"
 msgstr "Internetoptionen"
@@ -1867,6 +1872,9 @@ msgstr "Zeige Gebiet"
 #: ../src/map_objective_manager.h:52
 msgid "no descr"
 msgstr "Keine Beschr."
+
+#~ msgid "Testtext"
+#~ msgstr "Lagerhaus"
 
 #~ msgid "Current Size"
 #~ msgstr "Jetztige Größe"

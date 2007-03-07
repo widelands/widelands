@@ -207,8 +207,10 @@ msgstr ""
 "<br><br>"
 
 #: ../campaigns/emp02.wmf/event:616 ../campaigns/emp02.wmf/objective:31
+#, fuzzy
 msgid ""
-"* Build up a complete Mining and production infrastructure.<br>* Build up a "
+"* Build up a complete Mining and production infrastructure(Coalmine, "
+"Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a "
 "Stonemason."
 msgstr ""
 "* Construisez une infrastructure de minage et de production complète.<br>* "

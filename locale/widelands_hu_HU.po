@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-21 20:01+0100\n"
+"POT-Creation-Date: 2007-03-07 19:56+0100\n"
 "PO-Revision-Date: 2007-01-21 17:51+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
@@ -313,6 +313,7 @@ msgid "Building statistics"
 msgstr "Építési statisztika"
 
 #: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
+#: ../src/waresdisplay.cc:56
 msgid "Stock"
 msgstr "Raktárak"
 
@@ -716,7 +717,7 @@ msgstr "FEL"
 msgid "DOWN"
 msgstr "LE"
 
-#: ../src/profile.cc:1005
+#: ../src/profile.cc:1018
 msgid "Usage: "
 msgstr "Kihasználtság:"
 
@@ -756,13 +757,9 @@ msgstr "Null Trigger"
 msgid "Time Trigger"
 msgstr "Idő trigger"
 
-#: ../src/ware.cc:71 ../src/worker.cc:1553
+#: ../src/ware.cc:71 ../src/worker.cc:1550
 msgid "Doh... someone forgot the help text!"
 msgstr "Hopp... valaki elfelejtette a segítség szövegét megírni."
-
-#: ../src/waresdisplay.cc:56
-msgid "Testtext"
-msgstr "Teszt szöveg"
 
 #: ../src/ware_statistics_menu.cc:350
 msgid "Ware Statistics"
@@ -929,7 +926,7 @@ msgid "Descr"
 msgstr "Leírás:"
 
 #: ../src/editor/tools/editor_info_tool.cc:133
-#: ../src/editor/ui_menus/editor_player_menu.cc:57
+#: ../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
 msgstr "Játékosok száma:"
 
@@ -1010,9 +1007,68 @@ msgstr "Útmutató"
 msgid "Exit Editor"
 msgstr "Vissza a főmenübe"
 
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
-msgid "Bobs Menu"
-msgstr "Állatok"
+#: ../src/editor/ui_menus/editor_player_menu.cc:42
+msgid "Player Options"
+msgstr "Játékos beállításai"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:50
+#, fuzzy
+msgid "Add player"
+msgstr "Játékos "
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:59
+msgid "Remove last player"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:204
+msgid "I"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:205
+msgid "Make infrastructure"
+msgstr "Infrastruktúra létrehozása"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:218
+msgid "B"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:219
+msgid "Allow/forbid buildidngs"
+msgstr "Engedélyezett/letiltott épületek"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:241
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
+msgid "Player "
+msgstr "Játékos "
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:296
+#: ../src/editor/ui_menus/editor_player_menu.cc:327
+#: ../src/editor/ui_menus/editor_event_menu.cc:284
+#: ../src/editor/ui_menus/editor_event_menu.cc:329
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
+msgid "Error!"
+msgstr "Hiba!"
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:297
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again"
+msgstr ""
+"Nem törölheted ezt a játékost. Valami hivatkozik rá. Távolíts el minden "
+"épületet, tárgyat, triggert és eseményt ami ezzel a néppel kapcsolatban áll."
+
+#: ../src/editor/ui_menus/editor_player_menu.cc:328
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Nem változtathatod meg a játékos törzsét. Valami hivatkozik rá. Távolíts el "
+"minden épületet, tárgyat, triggert és eseményt ami ezzel a néppel "
+"kapcsolatban áll."
+
+#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
+msgid "Immovable Bobs Menu"
+msgstr "Nem mozgatható tárgyak"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1057,14 +1113,6 @@ msgstr "Új esemény"
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
 msgstr "Nem lehet törölni az eseményt. Használja "
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:329
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
-#: ../src/editor/ui_menus/editor_player_menu.cc:264
-#: ../src/editor/ui_menus/editor_player_menu.cc:297
-msgid "Error!"
-msgstr "Hiba!"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:319
 msgid "Can't delete Trigger. It is in use by "
@@ -1272,48 +1320,6 @@ msgstr ""
 "\n"
 "A hiba oka:\n"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:41
-msgid "Player Options"
-msgstr "Játékos beállításai"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:199
-msgid "I"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:200
-msgid "Make infrastructure"
-msgstr "Infrastruktúra létrehozása"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:213
-msgid "B"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:214
-msgid "Allow/forbid buildidngs"
-msgstr "Engedélyezett/letiltott épületek"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:246
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
-msgid "Player "
-msgstr "Játékos "
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:265
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend on this player and try again"
-msgstr ""
-"Nem törölheted ezt a játékost. Valami hivatkozik rá. Távolíts el minden "
-"épületet, tárgyat, triggert és eseményt ami ezzel a néppel kapcsolatban áll."
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:298
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Nem változtathatod meg a játékos törzsét. Valami hivatkozik rá. Távolíts el "
-"minden épületet, tárgyat, triggert és eseményt ami ezzel a néppel "
-"kapcsolatban áll."
-
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
 msgstr "Új könyvtár neve:"
@@ -1510,6 +1516,10 @@ msgstr "Szélesség"
 msgid "Create Map"
 msgstr "Térkép létrehozása"
 
+#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
+msgid "Bobs Menu"
+msgstr "Állatok"
+
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Magasság szerkesztő eszközök beállításai"
@@ -1587,10 +1597,6 @@ msgid "Your conditional contains at least one syntax error. Please correct!\n"
 msgstr ""
 "A feltételek legalább egy szintaktikai hibát tartalmaznak. Kérlek javítsd "
 "ki!\n"
-
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
-msgid "Immovable Bobs Menu"
-msgstr "Nem mozgatható tárgyak"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
 msgid "Allowed Buildings"
@@ -1793,6 +1799,30 @@ msgstr "Válaszd ki a mentett játékot!"
 msgid "Gametime:"
 msgstr "Játékidő:"
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "Egyjátékos mód"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Hálózati játék"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Editor"
+msgstr "Térképkészítő"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "Exit Game"
+msgstr "Kilépés"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
+msgid "Version"
+msgstr "Verzió"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+msgid "(C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2007 Widelands fejlesztőcsapat"
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
 msgstr ""
@@ -1821,30 +1851,6 @@ msgstr "Súlyos kapcsolódási hiba!"
 msgid "Server disconnected unexpectedly!"
 msgstr "Váratlanul megszakad a kapcsolat a szerverrel!"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "Egyjátékos mód"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Hálózati játék"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Editor"
-msgstr "Térképkészítő"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "Exit Game"
-msgstr "Kilépés"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
-msgid "Version"
-msgstr "Verzió"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2007 Widelands fejlesztőcsapat"
-
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
 msgid "Internet Options"
 msgstr "Internet beállítások"
@@ -1864,3 +1870,6 @@ msgstr "Terület felfedése"
 #: ../src/map_objective_manager.h:52
 msgid "no descr"
 msgstr "nincs leírás"
+
+#~ msgid "Testtext"
+#~ msgstr "Teszt szöveg"
