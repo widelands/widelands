@@ -26,12 +26,12 @@ marble=1
 
 [idle]
 pics=mill_i_??.png  # ???
-hotspot=40 60
+hotspot=45 90
 
 [working]
-pics=mill_w_??.png  # should be turning mill-wings
-hotspot=40 60
+pics=mill_i_??.png  # should be turning mill-wings
+hotspot=45 90
 
 [build]
-pics=mill_b_??.png  # ???
-hotspot=40 60
+pics=mill_i_??.png  # ???
+hotspot=45 90

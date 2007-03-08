@@ -28,12 +28,12 @@ marblecolumn=2
 
 [idle]
 pics=piggery_i_??.png  # ???
-hotspot=48 58
+hotspot=82 95
 
 [build]
-pics=piggery_b_??.png  # ???
-hotspot=48 58
+pics=piggery_i_??.png  # ???
+hotspot=82 95
 
 [working]
-pics=piggery_w_??.png  # ???
-hotspot=48 58
+pics=piggery_i_??.png  # ???
+hotspot=82 95

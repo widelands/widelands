@@ -3,7 +3,7 @@ descname=_ Weaponsmith
 type=production
 size=big
 buildable=yes
-buildicon=build.png
+buildicon=weaponsmith_build.png
 worker=weaponsmith
 output=wood_lance
 output=lance
@@ -102,13 +102,13 @@ marble=2
 marblecolumn=3
 
 [idle]
-pics=i_??.png  # ???
-hotspot=40 40
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80
 
 [build]
-pics=b_??.png  # ???
-hotspot=40 40
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80
 
 [working]
-pics=w_??.png  # ???
-hotspot=40 40
+pics=weaponsmith_i_??.png  # ???
+hotspot=55 80

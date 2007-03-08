@@ -23,12 +23,12 @@ marble=1
 
 [idle]
 pics=weaving_mill_i_??.png  # ???
-hotspot=40 40
+hotspot=84 76
 
 [build]
-pics=weaving_mill_b_??.png  # ???
-hotspot=40 40
+pics=weaving_mill_i_??.png  # ???
+hotspot=84 76
 
 [working]
-pics=weaving_mill_w_??.png  # ???
-hotspot=40 40
+pics=weaving_mill_i_??.png  # ???
+hotspot=84 76

@@ -27,7 +27,7 @@ pics=well_i_??.png  # ???
 hotspot=55 60
 
 [working]
-pics=well_w_??.png  # ???
+pics=well_i_??.png  # ???
 hotspot=55 60
 
 [build]

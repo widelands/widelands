@@ -28,12 +28,12 @@ wood=2
 
 [idle]
 pics=sheepfarm_i_??.png  # ???
-hotspot=48 58
+hotspot=82 95
 
 [build]
-pics=sheepfarm_b_??.png  # ???
-hotspot=48 58
+pics=sheepfarm_i_??.png  # ???
+hotspot=82 95
 
 [working]
-pics=sheepfarm_w_??.png  # ???
-hotspot=48 58
+pics=sheepfarm_i_??.png  # ???
+hotspot=82 95

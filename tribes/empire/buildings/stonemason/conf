@@ -28,12 +28,12 @@ marble=3 # someone who works on marble should like marble
 
 [idle]
 pics=stonemason_i_??.png  # ???
-hotspot=43 50
+hotspot=63 63
 
 [build]
-pics=stonemason_b_??.png  # ???
-hotspot=43 50
+pics=stonemason_i_??.png  # ???
+hotspot=63 63
 
 [working]
-pics=stonemason_w_??.png  # ???
-hotspot=43 50
+pics=stonemason_i_??.png  # ???
+hotspot=63 63

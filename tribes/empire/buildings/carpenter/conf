@@ -177,12 +177,12 @@ trunk=8
 
 [idle]
 pics=carpenter_i_??.png
-hotspot=45 65
+hotspot=63 63
 
 [build]
-pics=carpenter_b_??.png
-hotspot=45 65
+pics=carpenter_i_??.png
+hotspot=63 63
 
 [working]
-pics=carpenter_w_??.png
-hotspot=45 65
+pics=carpenter_i_??.png
+hotspot=63 63

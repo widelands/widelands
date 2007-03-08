@@ -22,5 +22,5 @@ pics=outpost_i_??.png
 hotspot=60 80
 
 [build]
-pics=outpost_b_??.png
+pics=outpost_i_??.png
 hotspot=60 80

@@ -34,8 +34,8 @@ marblecolumn=2
 
 [idle]
 pics=vineyard_i_??.png  # ???
-hotspot=74 52
+hotspot=70 70
 
 [build]
-pics=vineyard_b_??.png  # ???
-hotspot=74 52
+pics=vineyard_i_??.png  # ???
+hotspot=70 70

@@ -19,7 +19,7 @@ pics=warehouse_i_??.png  # ???
 hotspot=60 72
 
 [build]
-pics=warehouse_b_??.png  # ???
+pics=warehouse_i_??.png  # ???
 hotspot=60 72
 
 [working]

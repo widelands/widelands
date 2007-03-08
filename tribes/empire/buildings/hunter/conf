@@ -22,5 +22,5 @@ pics=hunter_i_??.png
 hotspot=55 60
 
 [build]
-pics=hunter_b_??.png
+pics=hunter_i_??.png
 hotspot=55 60

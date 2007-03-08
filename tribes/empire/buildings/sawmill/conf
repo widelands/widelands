@@ -28,12 +28,12 @@ wood=1
 
 [idle]
 pics=sawmill_i_??.png  # ???
-hotspot=55 60
+hotspot=56 80
 
 [build]
-pics=sawmill_b_??.png  # ???
-hotspot=55 60
+pics=sawmill_i_??.png  # ???
+hotspot=56 80
 
 [working]
-pics=sawmill_w_??.png  # ???
-hotspot=55 60
+pics=sawmill_i_??.png  # ???
+hotspot=56 80
