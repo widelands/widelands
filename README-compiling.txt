@@ -1,12 +1,13 @@
-This document describes steps needed to compile widelands for different
-Systems using different compilers. If you have problems, please also have a
+This document describes steps needed to compile Widelands for different
+systems using different compilers. If you have problems, please also have a
 look at our website http://www.widelands.org, especially the FAQ.
 
 Dependencies
 ------------
 
-These are the libraries you need. You also need the headers and link libraries,
-for widelands makes direct use of them:
+These are the libraries you need. You also need the headers and link libraries
+(on some distributions these come in separate packages, e.g. 'libpng-dev'),
+for Widelands makes direct use of them:
    - SDL >= 1.2.8
    - SDL_mixer >= 1.2.6
    - SDL_image
@@ -16,29 +17,49 @@ for widelands makes direct use of them:
    - libpng
    - zlib
 
-Make sure you have them all.
-If you encounter library versions that do not work, please tell us.
+Make sure you have them all. If you encounter library versions that do not work,
+please tell us.
 
 For compiling, you will also need
-   - Python >= 1.5.2
+   - Python >= 2.4
+If you have a desparate need to use older Python versions then tell us. It'd be
+possible, but the inconvenience seems not to be worthwile so far.
 
-Unix
-----
-make sure, you've got the developer libs and include files from libsdl
-installed (www.libsdl.org), then edit the Makefile and check the user
-definable variables. If everything is good, simply run GNU make in the
+Unix - scons
+------------
+
+Using scons for building is the preferred way starting with Widelands-build10.
+We still support make, but the motivation to do so is dwindling rapidly.
+
+If you already have scons installed on your machine, change to the Widelands
+directory and execute "scons release". That's it.
+
+If you don't have scons installed, you can still build Widelands: change to
+the Widelands directory and call "./build-widelands.sh release". This is a
+wrapper around a minimal version of scons that we deliver together with
+widelands. You can even use this for development, but we recommend a full
+install anyway.
+
+To help us find bugs (not neccessary, we only produce bug-free code ;-) )
+it's useful to replace "release" with "debug" in the above.
+
+Unix - make
+-----------
+
+Edit src/config.h.default to your liking and check the Makefile for more
+user definable variables. If everything is good, simply run GNU make in the
 widelands directory.
 
 Windows
 -------
-(if you're searching for a good CVS tool for windows, i recommend Tortoise
+If you're searching for a good CVS tool for windows, we recommend Tortoise
 CVS, using as CVS tool the cvs95 programm (included in tortoise).
-check http://tortoisecvs.sourceforge.net.
+Check http://tortoisecvs.sourceforge.net.
 
-compiling widelands using free development tools under windows
+Compiling Widelands using free development tools under Windows
 --------------------------------------------------------------
-this describes the steps needed to set up a free development enviroment
-under windows and compiling widelands.
+This describes the steps needed to set up a free development enviroment
+under Windows and compiling Widelands.
  - get the latest MSYS snapshot from http://sourceforge.net/projects/mingw
  - install it
  - get the latest complete mingw tarball from
@@ -54,7 +75,7 @@ under windows and compiling widelands.
  - if there were no problems, you're done. start developing and commit your
    changes
 
-compiling widelands using msvc 6
+Compiling Widelands using msvc 6
 --------------------------------
 
 - you will need the sdl headers and lib to compile (and dll to execute); sdl is not included in msvc. sdl can be found at www.libsdl.org
@@ -63,34 +84,3 @@ compiling widelands using msvc 6
 http://support.microsoft.com/default.aspx?scid=kb;EN-US;q181506
 (or search for article Q181506 on microsoft.com support).
 
-Cross compiling
----------------
-This describes the steps needed to cross compile widelands from a unix
-system to win32. This is for developer and release admins, since it might
-make reboots unnecessary, and therefore realising much more convinient.
-
- - get root
- - get the wonderfull script from the SDL developers (thanks guys!), that
-   automatically installs the cross build tools:
-   http://www.libsdl.org/extras/win32/cross/build-cross.sh
-   put it into an empty dir and run it. it will fetch all tools needed and
-   install them under /usr/local/cross-tools. Don't change this path, or
-   you'll surely run into trouble.
- - get a sdl source tarball from www.libsdl.org, unpack it
- - get the scripts
-   http://www.libsdl.org/extras/win32/cross/cross-configure.sh
-   http://www.libsdl.org/extras/win32/cross/cross-make.sh
-   into the sdl source dir
- - run 'sh cross-configure.sh --disable-debug'
- - if this is sucessfull, run 'sh cross-make.sh'
- - become root, do a 'make install'
- - this is a fix, i had to do, hack knows why (it won't harm if you do it,
-   you might have to do it too):
-    run as root:
-     /usr/local/cross-tools/bin/i386-mingw32msvc-ranlib /usr/local/cross-tools/i386-mingw32msvc/lib/libSDL.a
-     /usr/local/cross-tools/bin/i386-mingw32msvc-ranlib /usr/local/cross-tools/i386-mingw32msvc/lib/libSDLmain.a
- - get the widelands sources, edit the Makefile
- - set the var CROSS to YES
- - make clean && make
- - if everything went ok, the file widelands (without .exe) is a windows
-   executable depending on nothing but SDL.dll

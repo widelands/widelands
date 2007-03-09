@@ -62,7 +62,7 @@ endif
 #  profile    optimized, debugging symbols, profiling
 #
 ifndef BUILD
-BUILD:=debug
+BUILD:=release
 endif
 
 endif
