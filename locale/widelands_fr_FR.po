@@ -1,12 +1,12 @@
 # French translation of WIDELANDS.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-07 19:56+0100\n"
-"PO-Revision-Date: 2007-02-25 18:52+0100\n"
+"PO-Revision-Date: 2007-03-07 22:18+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -1015,13 +1015,12 @@ msgid "Player Options"
 msgstr "Options du joueur"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:50
-#, fuzzy
 msgid "Add player"
-msgstr "Joueur"
+msgstr "Ajouter un Joueur"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:59
 msgid "Remove last player"
-msgstr ""
+msgstr "Supprimer le dernier joueur"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:204
 msgid "I"

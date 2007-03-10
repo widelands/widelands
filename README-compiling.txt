@@ -2,9 +2,11 @@ This document describes steps needed to compile Widelands for different
 systems using different compilers. If you have problems, please also have a
 look at our website http://www.widelands.org, especially the FAQ.
 
-Dependencies
-------------
 
+
+================
+= Dependencies =
+================
 These are the libraries you need. You also need the headers and link libraries
 (on some distributions these come in separate packages, e.g. 'libpng-dev'),
 for Widelands makes direct use of them:
@@ -16,6 +18,8 @@ for Widelands makes direct use of them:
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
+   - libiconv (only needed under win32)
+   - libintl (only needed under win32)
 
 Make sure you have them all. If you encounter library versions that do not work,
 please tell us.
@@ -25,9 +29,14 @@ For compiling, you will also need
 If you have a desparate need to use older Python versions then tell us. It'd be
 possible, but the inconvenience seems not to be worthwile so far.
 
-Unix - scons
-------------
 
+
+============
+=   Unix   =
+============
+
+scons
+------------------
 Using scons for building is the preferred way starting with Widelands-build10.
 We still support make, but the motivation to do so is dwindling rapidly.
 
@@ -43,21 +52,24 @@ install anyway.
 To help us find bugs (not neccessary, we only produce bug-free code ;-) )
 it's useful to replace "release" with "debug" in the above.
 
-Unix - make
------------
 
+make
+------------------
 Edit src/config.h.default to your liking and check the Makefile for more
 user definable variables. If everything is good, simply run GNU make in the
 widelands directory.
 
-Windows
--------
-If you're searching for a good CVS tool for windows, we recommend Tortoise
-CVS, using as CVS tool the cvs95 programm (included in tortoise).
-Check http://tortoisecvs.sourceforge.net.
 
-Compiling Widelands using free development tools under Windows
---------------------------------------------------------------
+
+=============
+=  Windows  =
+=============
+If you're searching for a good SVN tool for windows, we recommend Tortoise
+SVN.
+Check http://tortoisesvn.sourceforge.net.
+
+mingw and msys
+------------------
 This describes the steps needed to set up a free development enviroment
 under Windows and compiling Widelands.
  - get the latest MSYS snapshot from http://sourceforge.net/projects/mingw
@@ -65,22 +77,37 @@ under Windows and compiling Widelands.
  - get the latest complete mingw tarball from
    http://sourceforge.net/projects/mingw
  - unpack it under the MSYS sh-shell in the dir /mingw
- - get a SDL source tarball from www.libsdl.org
- - ./configure; make; make install it
-   (you will quite definitivly disable debug, since this bloats SDL.dll
-   usw ./configure --disable-debug for this)
- - do the same for SDL_image
- - check out a widelands CVS version or get a build source release
+ - get all library source tarballs which are mentioned in DEPENDENCIES and STDPort from http://www.stlport.com
+ - compile and install all stuff
+ - check out a widelands SVN version or get a build source release
  - unpack it, edit the makefile user variables and run make
  - if there were no problems, you're done. start developing and commit your
    changes
+   
+Bloodshed's DevCpp
+------------------
+Since Build10, we support a DevCpp-Project file for Bloodshed's free GPLed IDE.
+DevCpp uses mingw and can be set up to use an allready installed mingw-environment
+(like the one you can set up via the instructions above).
+You can get the newest version of DevCpp at http://www.bloodshed.net
 
-Compiling Widelands using msvc 6
---------------------------------
+The mingw-version, that comes with DevCpp does not include all needed librarys so you
+have to install few manually. For few librarys dev-packages are available, so you 
+might check http://devpaks.org/ for the librarys you need.
 
-- you will need the sdl headers and lib to compile (and dll to execute); sdl is not included in msvc. sdl can be found at www.libsdl.org
+If everything is set up correctly, you can open the [Widelands]/build/win32/Widelands.dev,
+can change and save anything and of course can compile Widelands.
 
-- microsoft visual c++ will (by default) not know how what to do with .cc files. the standard file extension for c++ source is .cc on most unix-based systems. to make your visual c++ understand cc files, read
-http://support.microsoft.com/default.aspx?scid=kb;EN-US;q181506
-(or search for article Q181506 on microsoft.com support).
+InnoSetup
+------------------
+Since Build10 we support a Innosetup file, which can be used for compiling a Setup
+(like the official Widelands-Setup available on sourceforge.net-mirrors).
+Innosetup can be downloaded from http://www.jrsoftware.org 
+
+If you've installed InnoSetup, you just need to open [Widelands]/build/win32/Widelands.iss.
+You might change few settings or directly start packing/compiling the setup.
+
+ATTENTION!
+Please check if all needed *.dll-files are in [Widelands]-directory during Setup packing/compile.
+Else your setup might be useless :-?
 

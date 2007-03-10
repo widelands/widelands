@@ -2,7 +2,7 @@
 # Widelands tribe_barbarians po-File -> German.
 # Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-# 
+#
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 # Philipp Niemann <widelands@azagtoth.de>, 2006.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-12-22 16:03+0100\n"
+"PO-Revision-Date: 2007-03-10 20:50+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -416,7 +416,7 @@ msgid ""
 "build material."
 msgstr ""
 "Felsen können zu Mörtel weiterverarbeitet werden, welcher als unbrennbares "
-"und gut formbares Material geschätzt wird."
+"und gut formbares Baumaterial geschätzt wird."
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -560,7 +560,7 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
-msgstr "Kriegsaxt"
+msgstr "Kampfaxt"
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:3
 msgid ""
