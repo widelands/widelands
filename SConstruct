@@ -311,6 +311,7 @@ SConscript('utils/SConscript')
 SConscript('worlds/SConscript')
 
 Default(thebinary)
+env.AddPostAction(thebinary, Action(lambda target,source,env:0, lambda target,source,env:"\n\nThe localizations must be built manually, call \"scons locale\" or \"./build-widelands locale\"\n\n"))
 
 ########################################################################### tags
 
