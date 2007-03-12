@@ -2,7 +2,7 @@
 # Widelands campaign_ank po-File -> German.
 # Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-# 
+#
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 # Philipp Niemann <widelands@azagtoth.de>, 2006.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: campaign_t02_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-01-03 12:45+0100\n"
+"PO-Revision-Date: 2007-03-12 20:23+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -606,7 +606,7 @@ msgid ""
 "It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to "
 "the better versions of their buildings respectively.</p>"
 msgstr ""
-"--NEW OBJECTIVES--<br>- Ein normales Bergwerk kann nur ungefähr ein Drittel "
+"--NEUER AUFTRAG--<br>- Ein normales Bergwerk kann nur ungefähr ein Drittel "
 "aller im Berg liegenden Resourcen abbauen. Dennoch kann man an weitere "
 "Rohstoffe kommen, in dem man die Mine zu einer tiefen Mine ausbaut. Um ein "
 "Gebäude auszubauen, musst Du es anklicken und dann den entsprechende Knopf "
@@ -624,7 +624,7 @@ msgstr ""
 "könntest Du gleich alle Bergwerke ausbauen lassen, doch bedenke, dass "
 "ausgebaute Bergwerke zwar schneller arbeiten, dafür aber teureres Essen "
 "benötigen. Die Entscheidung liegt also bei Dir.<br>- Baue einige Bergwerke "
-"und eine Tavern zu verbesserten Gebäuden aus.</p>  "
+"und eine Tavern zu verbesserten Gebäuden aus.</p>"
 
 #: ../campaigns/t02.wmf/event:733
 msgid "Boldreth seems concerned..."

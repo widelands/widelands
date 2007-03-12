@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_de_DE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-03-10 20:50+0100\n"
+"PO-Revision-Date: 2007-03-12 20:32+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -560,7 +560,7 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
-msgstr "Kampfaxt"
+msgstr "Scharfe Axt"
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:3
 msgid ""
@@ -568,9 +568,10 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axefactory."
 msgstr ""
-"Echte Krieger empfinden die Kriegsaxt als erste richtige Waffe. Nachdem sie "
-"gelernt haben eine normale Axt zu führen, dürfen sie diese gefährlichere, "
-"schwerere und schärfere Axt führen. Hergestellt wird sie in der Axtfabrik."
+"Echte Krieger empfinden die Scharfe Axt als erste richtige Waffe. Nachdem "
+"sie gelernt haben eine normale Axt zu führen, dürfen sie diese "
+"gefährlichere, schwerere und schärfere Axt führen. Hergestellt wird sie in "
+"der Axtfabrik."
 
 #: ../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
