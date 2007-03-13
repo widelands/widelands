@@ -176,7 +176,7 @@ FileSystem* RealFSImpl::MakeSubFileSystem(const std::string path)
 	std::string fullname;
 
 	fullname=FS_CanonicalizeName(path);
-	printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
+	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
 
 	if( IsDirectory( path )) {
 		return new RealFSImpl( fullname );
