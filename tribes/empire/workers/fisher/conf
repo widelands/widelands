@@ -22,11 +22,11 @@ fishing_rod=1
 7=return
 
 [idle]
-pics=fishing_??.png
+pics=walk_s_??.png
 hotspot=12 25
 
 [fishing]
-pics=fishing_??.png
+pics=walk_s_??.png
 hotspot=12 25
 fps=20
 
