@@ -30,12 +30,12 @@ marblecolumn=1
 
 [idle]
 pics=inn_i_??.png  # ???
-hotspot=72 72
+hotspot=54 73
 
 [build]
 pics=inn_i_??.png  # ???
-hotspot=72 72
+hotspot=54 73
 
 [working]
 pics=inn_i_??.png  # ???
-hotspot=72 72
+hotspot=54 73
