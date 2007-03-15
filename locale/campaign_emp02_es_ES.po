@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-21 21:26+0100\n"
+"PO-Revision-Date: 2007-03-13 20:45+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,8 +76,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:48 ../campaigns/emp02.wmf/objective:7
 msgid "* Build up three lumberjacks, a forester and a sawmill."
-msgstr ""
-"* Construye tres cabañas de leñador, una de guardabosques y un aserradero."
+msgstr "* Construye tres leñadores, un guardabosques y un aserradero."
 
 #: ../campaigns/emp02.wmf/event:50
 msgid "The green forests"
@@ -209,14 +208,14 @@ msgstr ""
 "los bloques de mármol.<br><br>"
 
 #: ../campaigns/emp02.wmf/event:616 ../campaigns/emp02.wmf/objective:31
-#, fuzzy
 msgid ""
 "* Build up a complete Mining and production infrastructure(Coalmine, "
 "Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a "
 "Stonemason."
 msgstr ""
-"* Construye una infraestructura de minería y producción completa.<br>* "
-"Construye un cantero."
+"* Construye una infraestructura de minería y producción completa (minas de "
+"carbón y hierro, carpintería, armería, herrería, forja y quemador de turba) "
+"y un cantero."
 
 #: ../campaigns/emp02.wmf/event:618
 msgid "Further mountains"
@@ -247,12 +246,12 @@ msgstr ""
 "descontentos con la situación actual: trabajan duro y no tienen tiempo de "
 "preparar su comida.<br>¿Qué opinas de ayudarles? Construyamos una taberna "
 "que prepare buena comida para nuestros mineros, y una cervecería y una "
-"bodega, que suministren buena bebida.<br>Por supuesto, necesitaremos gente "
-"que cree los más cantidad de recursos para esta comida, así que sugiero "
-"conseguir un pescador, una granja, un molino y una panadería. También "
-"necesitaremos un cazador, una pocilga, un viñedo y un pozo.<br>No me "
-"malinterpretes, pero los mineros necesitan buena comida y bebida, para tener "
-"fuerza suficiente para su duro trabajo."
+"bodega, que suministren buena bebida.<br>Por supuesto, esto significa que "
+"necesitaremos más recursos, así que sugiero conseguir un pescador, una "
+"granja, un molino y una panadería. También necesitaremos un cazador, una "
+"pocilga, un viñedo y un pozo.<br>No me malinterpretes, pero los mineros "
+"necesitan buena comida y bebida, para tener fuerza suficiente para su duro "
+"trabajo."
 
 #: ../campaigns/emp02.wmf/event:732
 msgid "Food for the miners"

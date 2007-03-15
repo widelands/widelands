@@ -9,13 +9,15 @@ msgstr ""
 "Project-Id-Version: tribe_empire_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-23 01:18+0500\n"
+"PO-Revision-Date: 2007-03-14 02:27+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
-"Language-Team: русский <ru@li.org>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
 
 #: ../tribes/empire/conf:18
 msgid "The Widelands Development Team"
@@ -68,7 +70,7 @@ msgstr "Замок"
 
 #: ../tribes/empire/buildings/coalmine/conf:2
 msgid "Coal mine"
-msgstr "Угольный рудник"
+msgstr "Угольная шахта"
 
 #: ../tribes/empire/buildings/colosseum/conf:2
 msgid "Colosseum"
@@ -112,7 +114,7 @@ msgstr "Укрепление"
 
 #: ../tribes/empire/buildings/goldmine/conf:2
 msgid "Gold Mine"
-msgstr "Золотая шахта"
+msgstr "Золотоносная шахта"
 
 #: ../tribes/empire/buildings/headquarters/conf:2
 msgid "Headquarters"
@@ -380,7 +382,7 @@ msgstr "Слиток золота"
 
 #: ../tribes/empire/wares/goldstone/conf:3
 msgid "This is the yellow goldstone."
-msgstr "Это слиток желтого золота."
+msgstr "Это слиток жёлтого золота."
 
 #: ../tribes/empire/wares/grape/conf:2
 msgid "Grape"
@@ -462,7 +464,7 @@ msgstr "Пика"
 
 #: ../tribes/empire/wares/lance/conf:3
 msgid "This wooden lance has an iron spike."
-msgstr "Это деревянная пика имеет металлическое острие"
+msgstr "Это деревянная пика имеет металлическое остриё"
 
 #: ../tribes/empire/wares/marble/conf:2
 msgid "Marble"
@@ -506,8 +508,8 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"Мясо содержит много калорий. Оно используется в Гостиницах и Тавернах для "
-"производства обедов для шахтеров и в тренировочных лагерях солдат, для "
+"Мясо содержит много калорий. Оно используется на Постоялых дворах и Тавернах "
+"для производства обедов для шахтёров и в тренировочных лагерях солдат, для "
 "поддержки силы воинов."
 
 #: ../tribes/empire/wares/pick/conf:2
@@ -535,7 +537,7 @@ msgstr "Паек"
 
 #: ../tribes/empire/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
-msgstr "Небольшой набор для поддержки сил шахтеров."
+msgstr "Небольшой набор для поддержки сил шахтёров."
 
 #: ../tribes/empire/wares/saw/conf:2
 msgid "Saw"
@@ -629,7 +631,7 @@ msgstr "Вино"
 msgid ""
 "This wine gives enough power, to mine marble or gold. And furthermore, our "
 "soldiers like it, too."
-msgstr "Это вино придает сил шахтерам, а кроме того и наши солдаты его любят."
+msgstr "Это вино придает сил шахтёрам, а кроме того и наши солдаты его любят."
 
 #: ../tribes/empire/wares/wood/conf:2
 msgid "Wood"
@@ -707,7 +709,7 @@ msgstr "Трактирщик"
 
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
-msgstr "Главный шахтер"
+msgstr "Главный шахтёр"
 
 #: ../tribes/empire/workers/miller/conf:2
 msgid "Miller"
@@ -715,7 +717,7 @@ msgstr "Мельник"
 
 #: ../tribes/empire/workers/miner/conf:2
 msgid "Miner"
-msgstr "Шахтер"
+msgstr "Шахтёр"
 
 #: ../tribes/empire/workers/pig-breeder/conf:2
 msgid "Pig-breeder"

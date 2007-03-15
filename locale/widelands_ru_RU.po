@@ -9,14 +9,18 @@ msgstr ""
 "Project-Id-Version: widelands_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-07 19:56+0100\n"
-"PO-Revision-Date: 2007-02-23 01:18+0500\n"
+"PO-Revision-Date: 2007-03-11 01:54+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-SearchPath-0: /home/rombal/PoeditBase\n"
 
 #: ../src/building_statistics_menu.cc:54
 msgid "Building Statistics"
@@ -79,7 +83,7 @@ msgstr "Уничтожить строение?"
 
 #: ../src/building_ui.cc:162
 msgid "Do you really want to destroy this "
-msgstr "Вы действительно хотите уничтожить это "
+msgstr "Подтверждаете уничтожение "
 
 #: ../src/building_ui.cc:164
 msgid "?"
@@ -225,15 +229,15 @@ msgstr "Большие земли (Widelands)"
 
 #: ../src/encyclopedia_window.cc:47
 msgid "Tribe ware encyclopedia"
-msgstr "Энциклопедия продукции племени"
+msgstr "Энциклопедия товаров племени"
 
 #: ../src/encyclopedia_window.cc:67
 msgid "Needs Ware"
-msgstr "Потребности в товарах"
+msgstr "Требуется"
 
 #: ../src/encyclopedia_window.cc:68
 msgid "Consumed"
-msgstr "Используется"
+msgstr "Кол-во"
 
 #: ../src/encyclopedia_window.cc:69
 msgid "Group"
@@ -326,7 +330,7 @@ msgstr "Задания"
 
 #: ../src/game_main_menu.cc:90
 msgid "Chat"
-msgstr "Чат"
+msgstr "Общение"
 
 #: ../src/game_main_menu.cc:98 ../src/game_options_menu.cc:46
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
@@ -429,7 +433,7 @@ msgstr "ПРОЧТИ"
 #: ../src/game_options_menu.cc:66
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
 msgid "License"
-msgstr "Лензия"
+msgstr "Лицензия"
 
 #: ../src/game_options_menu.cc:75
 msgid "Authors"
@@ -571,7 +575,7 @@ msgstr "Достроить"
 
 #: ../src/interactive_player.cc:127
 msgid "Tribe's ware encyclopedia"
-msgstr "Энциклопедия продукции племени"
+msgstr "Энциклопедия товаров племени"
 
 #: ../src/interactive_player.cc:283
 msgid "PAUSE"
@@ -746,7 +750,7 @@ msgstr "Не работает"
 
 #: ../src/trigger_building.cc:38
 msgid "Building Trigger"
-msgstr "Создать тригер"
+msgstr "Тригер строения"
 
 #: ../src/trigger_building.cc:40
 msgid "<unset>"
@@ -849,7 +853,7 @@ msgstr " флаг"
 
 #: ../src/editor/tools/editor_info_tool.cc:72
 msgid " mine"
-msgstr " рудник"
+msgstr " шахта"
 
 #: ../src/editor/tools/editor_info_tool.cc:73
 msgid " port"
@@ -955,12 +959,12 @@ msgstr "Меню инструментов"
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
 #: ../src/editor/ui_menus/editor_event_menu.cc:157
 msgid "New Trigger"
-msgstr "Новый Тригер"
+msgstr "Нов. Тригер"
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:176
 msgid "Available Triggers: "
-msgstr "Доступные Тригеры: "
+msgstr "Готовые Тригеры: "
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:59
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:60
@@ -997,7 +1001,7 @@ msgstr "Загрузить Карту"
 #: ../src/editor/ui_menus/editor_main_menu.cc:81
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 msgid "Save Map"
-msgstr "Записать Карту"
+msgstr "Сохранить Карту"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:92
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:38
@@ -1011,20 +1015,19 @@ msgstr "Прочти меня!"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:114
 msgid "Exit Editor"
-msgstr "Выход из редактора"
+msgstr "Выход"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
 msgstr "Настройки Игрока"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:50
-#, fuzzy
 msgid "Add player"
-msgstr "Игрок"
+msgstr "Добавить игрока"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:59
 msgid "Remove last player"
-msgstr ""
+msgstr "Удалить последнего игрока"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:204
 msgid "I"
@@ -1073,7 +1076,7 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
 msgid "Immovable Bobs Menu"
-msgstr "Неперемещаемое меню Bobs"
+msgstr "Не перемещаемое меню Bobs"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1085,15 +1088,15 @@ msgstr "Цепочка событий:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:74
 msgid "Registered Events: "
-msgstr "Зарегистрированные события:"
+msgstr "Список событий:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:81
 msgid "Registered Triggers"
-msgstr "Зарегистрированные Тригеры"
+msgstr "Список Тригеров"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:94
 msgid "New Event Chain"
-msgstr "Новая цепочка событий"
+msgstr "Нов. цеп. событий"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../src/editor/ui_menus/editor_event_menu.cc:134
@@ -1113,7 +1116,7 @@ msgstr "Удалить"
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
 msgid "New Event"
-msgstr "Новое событие"
+msgstr "Нов. событие"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
@@ -1489,7 +1492,7 @@ msgstr "Ничего не определено!"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:42
 msgid "Edit Event Chain"
-msgstr "Редактировать цепочку событий"
+msgstr "Изменить цеп. событий"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:60
 msgid "Runs multiple times"
@@ -1691,9 +1694,7 @@ msgstr "Миссия 1: Глаза во тьме - Основы игры"
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:58
 msgid ""
 "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
-msgstr ""
-"Миссия 2: Место что мы назовем домом - Шахты, Расширение границ, Продвинутое "
-"производство"
+msgstr "Миссия 2: Наш будущий дом - Шахты, Расширение границ, Производство"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:65
 msgid "Empire Tutorial Campaign"
@@ -1879,4 +1880,4 @@ msgid "no descr"
 msgstr "нет описания"
 
 #~ msgid "Testtext"
-#~ msgstr "Тест"
+#~ msgstr "Тестовый текст: "

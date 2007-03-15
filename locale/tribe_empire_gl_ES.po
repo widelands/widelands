@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-03-01 00:16+0100\n"
+"PO-Revision-Date: 2007-03-13 21:24+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -150,7 +150,7 @@ msgstr "Asentamento"
 
 #: ../tribes/empire/buildings/piggery/conf:2
 msgid "Piggery"
-msgstr ""
+msgstr "Curral"
 
 #: ../tribes/empire/buildings/quarry/conf:2
 msgid "Quarry"
@@ -256,12 +256,11 @@ msgid "Basket"
 msgstr "Cesta"
 
 #: ../tribes/empire/wares/basket/conf:3
-#, fuzzy
 msgid ""
 "This basket is needed by the wine-grower, for harvesting the wine-grapes. It "
 "is produced by the carpenter."
 msgstr ""
-"Esta cesta precísaa o <**wine-grower**>, para recollé-las uvas. Fabrícaa o "
+"Esta cesta precísaa o vendimador, para recollé-las uvas. Fabrícaa o "
 "carpinteiro."
 
 #: ../tribes/empire/wares/beer/conf:2
@@ -570,13 +569,12 @@ msgid "Shovel"
 msgstr "Pá"
 
 #: ../tribes/empire/wares/shovel/conf:3
-#, fuzzy
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "use it. It is produced by the carpenter."
 msgstr ""
 "As pás son precisas para un correcto manexo das plantas, polo que o "
-"<**forester**> a usa. É fabricada polo carpinteiro."
+"gardabosques a usa. É fabricada polo carpinteiro."
 
 #: ../tribes/empire/wares/stone/conf:2
 msgid "Stones"
@@ -700,7 +698,7 @@ msgstr "Pescador"
 
 #: ../tribes/empire/workers/forester/conf:2
 msgid "Forester"
-msgstr ""
+msgstr "Gardabosques"
 
 #: ../tribes/empire/workers/geologist/conf:2
 msgid "Geologist"
@@ -732,7 +730,7 @@ msgstr "Mineiro"
 
 #: ../tribes/empire/workers/pig-breeder/conf:2
 msgid "Pig-breeder"
-msgstr ""
+msgstr "Porqueiro"
 
 #: ../tribes/empire/workers/smelter/conf:2
 msgid "Smelter"
@@ -748,7 +746,7 @@ msgstr "Adestrador"
 
 #: ../tribes/empire/workers/vinefarmer/conf:2
 msgid "Vinefarmer"
-msgstr ""
+msgstr "Vendimador"
 
 #: ../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"

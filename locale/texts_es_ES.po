@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands Spanish translation - texts.pot 0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-15 19:21+0100\n"
+"PO-Revision-Date: 2007-03-13 21:14+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -764,43 +764,43 @@ msgstr "ESPACIO    (Des)activa la ayuda de construcción"
 
 #: ../txts/README:42
 msgid "M               Toggle minimap"
-msgstr "M                  (Des)activa el minimapa"
+msgstr "M          (Des)activa el minimapa"
 
 #: ../txts/README:44
 msgid "C               Toggle census"
-msgstr "C                   (Des)activa el censo"
+msgstr "C          (Des)activa el censo"
 
 #: ../txts/README:46
 msgid "S               Toggle statistics"
-msgstr "S                   (Des)activa las estadísticas"
+msgstr "S          (Des)activa las estadísticas"
 
 #: ../txts/README:48
 msgid "F               Toggle Fullscreen"
-msgstr "F                   (Des)activa la presentación a pantalla completa"
+msgstr "F          (Des)activa la presentación a pantalla completa"
 
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
-msgstr "Inicio            Centra el mapa en la posición de partida"
+msgstr "Inicio     Centra el mapa en la posición de partida"
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
-msgstr "AVPAG        Aumenta la velocidad de juego  "
+msgstr "AVPAG      Aumenta la velocidad de juego  "
 
 #: ../txts/README:55
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr "REPAG         Decrementa la velocidad de juego"
+msgstr "REPAG      Decrementa la velocidad de juego"
 
 #: ../txts/README:58
 msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr "F5                 Revela el mapa completo (sólo depuración)"
+msgstr "F5         Revela el mapa completo (sólo depuración)"
 
 #: ../txts/README:60
 msgid "F10         Quit the game immediately"
-msgstr "F10               Abandona el juego inmediatamente"
+msgstr "F10        Abandona el juego inmediatamente"
 
 #: ../txts/README:62
 msgid "F11         Take a screenshot"
-msgstr "F11               Captura la pantalla"
+msgstr "F11        Captura la pantalla"
 
 #: ../txts/README:67
 msgid "Online Help"
@@ -961,49 +961,48 @@ msgstr "ESPACIO    (Des)activa la ayuda de construcción"
 
 #: ../txts/editor_readme:18
 msgid "C        Toggles census on/off"
-msgstr "C                (Des)activa el censo"
+msgstr "C          (Des)activa el censo"
 
 #: ../txts/editor_readme:20
 msgid "E        Toggles event menu"
-msgstr "E                (Des)activa el menú de eventos"
+msgstr "E          (Des)activa el menú de eventos"
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr "F                (Des)activa la presentación a pantalla completa"
+msgstr "F          (Des)activa la presentación a pantalla completa"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"
-msgstr "H               (Des)activa el menú principal"
+msgstr "H          (Des)activa el menú principal"
 
 #: ../txts/editor_readme:26
 msgid "M        Toggles minimap"
-msgstr "M               (Des)activa el minimapa"
+msgstr "M          (Des)activa el minimapa"
 
 #: ../txts/editor_readme:28
 msgid "P        Toggles player menu"
-msgstr "P               (Des)activa el menú de jugadores"
+msgstr "P          (Des)activa el menú de jugadores"
 
 #: ../txts/editor_readme:30
 msgid "T        Toggles tools menu"
-msgstr "T               (Des)activa el menú de herramientas"
+msgstr "T          (Des)activa el menú de herramientas"
 
 #: ../txts/editor_readme:32
 msgid "CTRL+L   Load Map"
-msgstr "CTRL+L    Cargar mapa"
+msgstr "CTRL+L     Cargar mapa"
 
 #: ../txts/editor_readme:34
 msgid "CTRL+S   Save Map"
-msgstr "CTRL+S    Salvar mapa"
+msgstr "CTRL+S     Salvar mapa"
 
 #: ../txts/editor_readme:36
 msgid "1-0      Changes tools size"
-msgstr "1-0             Cambia el tamaño de herramientas"
+msgstr "1-0        Cambia el tamaño de herramientas"
 
 #: ../txts/editor_readme:38
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr "SHIFT       (pulsado) Selecciona la primera herramienta alternativa"
+msgstr "SHIFT      (pulsado) Selecciona la primera herramienta alternativa"
 
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr ""
-"ALT             (pulsado) Selecciona la segunda herramienta alternativa"
+msgstr "ALT        (pulsado) Selecciona la segunda herramienta alternativa"

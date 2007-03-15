@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-03-01 00:18+0100\n"
+"PO-Revision-Date: 2007-03-13 21:08+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,9 +69,8 @@ msgstr ""
 "vez."
 
 #: ../campaigns/t01.wmf/objective:24
-#, fuzzy
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- Construe unha <**ranger hut**> ó leste da cabana do leñador."
+msgstr "- Construe unha cabana de gardabosques ó leste da cabana do leñador."
 
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
@@ -276,7 +275,6 @@ msgid "Khantrukh nods..."
 msgstr "Khantrukh asinte..."
 
 #: ../campaigns/t01.wmf/event:553
-#, fuzzy
 msgid ""
 " \"Of course, if we intended to build a bigger settlement much more "
 "Lumberjacks would be advisable, but this should do for now.<br>But never "
@@ -291,8 +289,8 @@ msgstr ""
 "esquezas que estas fragas son a nosa herdanza, fiada a nos polos nosos "
 "devanceiros. Debemos respetalas e horalas sempre. O que collamos, debe ser "
 "devolto.<br>De modo que, para repor as árbores que cortamos, debemos "
-"construir unha cabana de <**ranger**>, a poder ser preto da do leñador."
-"\"<br><br>-- NOVOS OBXECTIVOS --<br>- Construe unha cabana de <**ranger**>ó "
+"construir unha cabana de gardabosques, a poder ser preto da do leñador."
+"\"<br><br>-- NOVOS OBXECTIVOS --<br>- Construe unha cabana de gardabosques ó "
 "leste da cabana do leñador."
 
 #: ../campaigns/t01.wmf/event:570

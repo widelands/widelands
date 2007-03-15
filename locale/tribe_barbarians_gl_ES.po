@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-26 17:46+0100\n"
+"PO-Revision-Date: 2007-03-13 21:16+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galego <gl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -178,7 +178,7 @@ msgstr "Canteira"
 
 #: ../tribes/barbarians/buildings/ranger/conf:2
 msgid "Ranger Hut"
-msgstr ""
+msgstr "Cabana de vixiante"
 
 #: ../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
@@ -565,13 +565,12 @@ msgid "Shovel"
 msgstr "Pá"
 
 #: ../tribes/barbarians/wares/shovel/conf:3
-#, fuzzy
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metalworks."
 msgstr ""
 "A pá é imprescindible para tratar adecuadamente ás plantas. Por iso, o "
-"labrego e o <**ranger**> a usan. Fabrícase nas ferrerías."
+"labrego e o gardabosques a usan. Fabrícase nas ferrerías."
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
@@ -698,7 +697,7 @@ msgstr "Pescador"
 
 #: ../tribes/barbarians/workers/gamekeeper/conf:2
 msgid "Gamekeeper"
-msgstr ""
+msgstr "Gardabosques"
 
 #: ../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
@@ -730,7 +729,7 @@ msgstr "Mineiro"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
-msgstr ""
+msgstr "Vixiante"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"

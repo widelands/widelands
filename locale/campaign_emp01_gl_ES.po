@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-25 23:40+0100\n"
+"PO-Revision-Date: 2007-03-13 21:04+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,10 +37,9 @@ msgstr ""
 "para eles."
 
 #: ../campaigns/emp01.wmf/objective:25
-#, fuzzy
 msgid "Build a forester hut, to save the wood resources of this island."
 msgstr ""
-"Construe unha cabana de <**forester**>, para protexé-los recursos da illa."
+"Construe unha cabana de gardabosques, para protexé-los recursos da illa."
 
 #: ../campaigns/emp01.wmf/objective:31
 msgid ""
@@ -105,8 +104,9 @@ msgstr ""
 "tribos. Cria que o noso exército era demasiado feble para aguantar unha "
 "guerra contra os bárbaros.<br>Non atopei forma de expiá-la miña culpa sen "
 "loitar cos bárbaros, de modo que abandonei Fremil en barco, na procura dun "
-"novo mundo e unha nova vida nalgures, no sul. E agora navegocara o sul coa "
-"miña familia, algúns dos meus amigos e un feixe dos meus mellores guerreiros."
+"novo mundo e unha nova vida nalgures, no sul. E agora navego cara ó sul polo "
+"Golfo de Perl coa miña familia, algúns dos meus amigos e un feixe dos meus "
+"mellores guerreiros."
 
 #: ../campaigns/emp01.wmf/event:15
 msgid "A dark night"
@@ -121,12 +121,12 @@ msgid ""
 "taking more and more water. We can thank the Gods if we survive this black "
 "night with just our lifes."
 msgstr ""
-"Semella que navegar no golfo foi un dos nosos maiores erros. A Natureza "
-"estaba en contra nosa e levounos cada unha escura e salvaxe treboada. Non "
-"sei cantas horas pasaron dende que sa ondas creceron maiores co noso barco, "
-"pero inda habia ser un suicidio sair afora.<br>Noso barco está gravemente "
-"danado, e máis anegado a cada intre. Debemos agradecer ós Deuses se "
-"sobrevivimos esta escura noite só coas nosas vidas."
+"Semella que navegar no Golfo de Perl foi un dos nosos maiores erros. A "
+"Natureza estaba en contra nosa e levounos cada unha escura e salvaxe "
+"treboada. Non sei cantas horas pasaron dende que sa ondas creceron maiores "
+"co noso barco, pero inda habia ser un suicidio sair afora.<br>Noso barco "
+"está gravemente danado, e máis anegado a cada intre. Debemos agradecer ós "
+"Deuses se sobrevivimos esta escura noite só coas nosas vidas."
 
 #: ../campaigns/emp01.wmf/event:34
 msgid "The rough sea"
@@ -253,7 +253,6 @@ msgid "Amalea comes in..."
 msgstr "Amalea entra..."
 
 #: ../campaigns/emp01.wmf/event:561
-#, fuzzy
 msgid ""
 "Hi Lutius,<br>I've got two important things to talk about:<br>First the "
 "positive thing: I saw that the construction of the sawmill is complete, so "
@@ -276,7 +275,7 @@ msgstr ""
 "calorosos e son o fogar de moitos animais. Non debemos deixar esta illa "
 "completamente deserta.<br>Lutius, prégocho: construe unha cabana de "
 "<**forester**>, e que alguén se ocupe de plantar novas árbores.<br><br>- "
-"Construe unha cabana de <**forester**>, para protexé-los recursos da illa."
+"Construe unha cabana de gardabosques, para protexé-los recursos da illa."
 
 #: ../campaigns/emp01.wmf/event:593 ../campaigns/emp01.wmf/event:627
 msgid "Saledus smiles..."

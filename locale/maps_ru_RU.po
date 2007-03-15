@@ -3,24 +3,24 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Alexander <bikmeyev@freemail.ru>, 2007.
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: maps_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-23 00:00+0500\n"
+"PO-Revision-Date: 2007-03-14 01:24+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
-"Language-Team: русский <ru@li.org>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
 
 #: ../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
-msgstr "Мат"
+msgstr "Шах и Мат"
 
 #: ../maps/Checkmate.wmf/elemental:11
 msgid ""
@@ -28,8 +28,8 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
-"Является ли это одним из сюрпризов природы или порождение сумасшедшего (и "
-"жаждущего игр) бога, но это таинственное поле битвы ждет двух соперников для "
+"Является ли это одним из сюрпризов природы или порождением сумасшедшего (и "
+"жаждущего игр) бога, но это таинственное поле битвы ждёт двух соперников для "
 "нового противостояния."
 
 #: ../maps/Dry Riverbed.wmf/elemental:9
@@ -67,12 +67,12 @@ msgid ""
 "These are the beautiful finish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
-"Это прекрасны финские земли, полные озер, рек, древних лесов и гор. Сможешь "
-"ли ты найти путь через эти земли."
+"Это прекрасные финские земли, полные озёр, рек, древних лесов и гор. Твоя "
+"задача найти путь через эти земли."
 
 #: ../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
-msgstr "Игры в огне"
+msgstr "Игры с огнем"
 
 #: ../maps/Firegames.wmf/elemental:11
 msgid ""
@@ -83,7 +83,7 @@ msgid ""
 msgstr ""
 "Это испытание Богов, дьявола или кого-то другого, что вы и ваше племя "
 "оказались на этом острове среди огня и лавы? Пока что кажется, что вы одни, "
-"но кто знает что может случится, если вы встретите племя соперника?"
+"но кто знает что может случиться, если вы встретите племя соперника?"
 
 #: ../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
@@ -94,7 +94,7 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
-"Хорошо защищенные в своих могучих крепостях, четыре жаждущих власти "
+"Хорошо защищённые в своих могучих крепостях, четыре жаждущих власти "
 "полководца разработали свои планы захвата этих земель..."
 
 #: ../maps/Glacier Lake.wmf/elemental:9
@@ -108,10 +108,10 @@ msgid ""
 "a few month ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only place enough for one tribe."
 msgstr ""
-"Уже давно ваше племя пребывает у этого прекрасного и одинокого ледникового "
-"озера. Никто вас не беспокоит, и ресурсов было достаточно для вашего "
-"племени, но несколько месяцев назад в горы пришло и обосновалось другое "
-"племя. Вы знаете, что здесь есть место только для одного племени."
+"Уже давно ваше племя пребывает у этого прекрасного и уединённого ледникового "
+"озера. Никто вас не беспокоит, и ресурсов для вашего племени достаточно, но "
+"несколько месяцев назад в горы пришли и обосновались другие. Вы знаете, что "
+"здесь есть место только для одного племени."
 
 #: ../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
@@ -137,7 +137,7 @@ msgstr ""
 
 #: ../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr "Зеленое Плато"
+msgstr "Зелёное Плато"
 
 #: ../maps/Plateau.wmf/elemental:11
 msgid ""
@@ -146,8 +146,8 @@ msgid ""
 "hard to get, but easy to lose, so if you want it, be aware of the other "
 "clans."
 msgstr ""
-"Вы находитесь на острове, окруженном могучими горами, хранящими прекрасные и "
-"многочисленные сокровища  в середине - Зеленое Плато, которое трудно "
+"Вы находитесь на острове, окружённом могучими горами, хранящими прекрасные и "
+"многочисленные сокровища в середине - Зелёное Плато, которое трудно "
 "заполучить, но легко потерять, так что если вы нацелились на него, "
 "опасайтесь других кланов."
 
@@ -165,8 +165,8 @@ msgid ""
 "which noone found out, yet. Perhaps you will be the one, but be aware of the "
 "others, who are searching, too!"
 msgstr ""
-"Есть что-то мистическое вроде серого облака вокруг этих трех Оазисов, "
-"которые еще никто не нашел. Возможно вы будете единственным, но опасайтесь "
+"Есть что-то мистическое вроде серого облака вокруг этих трёх Оазисов, "
+"которые ещё никто не нашёл. Возможно вы будете единственным, но опасайтесь "
 "других, которые также ищут его!"
 
 #: ../maps/The big lake.wmf/elemental:9
@@ -188,5 +188,5 @@ msgid ""
 "Geologists elsewhere."
 msgstr ""
 "Сказано, что даже Луна и Солнце должны найти свой путь между пиками этих "
-"гор. ПОДСКАЗКА: Монолиты показывают места залегания руды. Не пытайтесь "
-"послать геологов куда-то еще."
+"гор. ПОДСКАЗКА: Монолиты показывают места залегания руды. Не посылайте "
+"геологов куда-то ещё."
