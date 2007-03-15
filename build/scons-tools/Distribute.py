@@ -57,7 +57,7 @@ def instadd(env, source, prefix=None, compress=False, filetype='data'):
 
 	for s in glob.glob(os.path.basename(source)):
 		if s=='SConscript':
-			return
+			continue
 		head,tail=os.path.split(source)
 		env['INSTFILES']+=[(os.path.join(head, s), os.path.join(prefix, tail), compress, filetype)]
 
