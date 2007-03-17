@@ -28,12 +28,12 @@ marble=2
 
 [idle]
 pics=burner_i_??.png  # ???
-hotspot=47 47
+hotspot=54 54
 
 [build]
 pics=burner_i_??.png  # ???
-hotspot=47 47
+hotspot=54 54
 
 [working]
 pics=burner_i_??.png  # ???
-hotspot=47 47
+hotspot=54 54
