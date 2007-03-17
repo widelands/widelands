@@ -9,492 +9,237 @@
 /* Begin PBXBuildFile section */
 		002F3A2E09D0888800EBEB88 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F3A2C09D0888800EBEB88 /* SDLMain.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		BF22DD700A5FB72B00D0292B /* animation.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB5F0A5FB72A00D0292B /* animation.cc */; };
-		BF22DD710A5FB72B00D0292B /* animation.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB600A5FB72A00D0292B /* animation.h */; };
 		BF22DD720A5FB72B00D0292B /* battle.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB610A5FB72A00D0292B /* battle.cc */; };
-		BF22DD730A5FB72B00D0292B /* battle.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB620A5FB72A00D0292B /* battle.h */; };
 		BF22DD740A5FB72B00D0292B /* bob.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB630A5FB72A00D0292B /* bob.cc */; };
-		BF22DD750A5FB72B00D0292B /* bob.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB640A5FB72A00D0292B /* bob.h */; };
 		BF22DD760A5FB72B00D0292B /* building.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB650A5FB72A00D0292B /* building.cc */; };
-		BF22DD770A5FB72B00D0292B /* building.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB660A5FB72A00D0292B /* building.h */; };
 		BF22DD780A5FB72B00D0292B /* building_statistics_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB670A5FB72A00D0292B /* building_statistics_menu.cc */; };
-		BF22DD790A5FB72B00D0292B /* building_statistics_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB680A5FB72A00D0292B /* building_statistics_menu.h */; };
 		BF22DD7A0A5FB72B00D0292B /* building_ui.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB690A5FB72A00D0292B /* building_ui.cc */; };
 		BF22DD7B0A5FB72B00D0292B /* cmd_queue.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB6A0A5FB72A00D0292B /* cmd_queue.cc */; };
-		BF22DD7C0A5FB72B00D0292B /* cmd_queue.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB6B0A5FB72A00D0292B /* cmd_queue.h */; };
 		BF22DD7D0A5FB72B00D0292B /* computer_player.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB6C0A5FB72A00D0292B /* computer_player.cc */; };
-		BF22DD7E0A5FB72B00D0292B /* computer_player.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB6D0A5FB72A00D0292B /* computer_player.h */; };
 		BF22DD7F0A5FB72B00D0292B /* computer_player_hints.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB6E0A5FB72A00D0292B /* computer_player_hints.cc */; };
-		BF22DD800A5FB72B00D0292B /* computer_player_hints.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB6F0A5FB72A00D0292B /* computer_player_hints.h */; };
-		BF22DD810A5FB72B00D0292B /* config.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB700A5FB72A00D0292B /* config.h */; };
-		BF22DD820A5FB72B00D0292B /* constants.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB710A5FB72A00D0292B /* constants.h */; };
 		BF22DD830A5FB72B00D0292B /* constructionsite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB720A5FB72A00D0292B /* constructionsite.cc */; };
-		BF22DD840A5FB72B00D0292B /* constructionsite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB730A5FB72A00D0292B /* constructionsite.h */; };
 		BF22DD850A5FB72B00D0292B /* criterr.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB740A5FB72A00D0292B /* criterr.cc */; };
 		BF22DD860A5FB72B00D0292B /* critter_bob.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB750A5FB72A00D0292B /* critter_bob.cc */; };
-		BF22DD870A5FB72B00D0292B /* critter_bob.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB760A5FB72A00D0292B /* critter_bob.h */; };
-		BF22DD880A5FB72B00D0292B /* critter_bob_program.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB770A5FB72A00D0292B /* critter_bob_program.h */; };
-		BF22DD890A5FB72B00D0292B /* descr_maintainer.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB780A5FB72A00D0292B /* descr_maintainer.h */; };
 		BF22DD8A0A5FB72B00D0292B /* editor.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB7A0A5FB72A00D0292B /* editor.cc */; };
-		BF22DD8B0A5FB72B00D0292B /* editor.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB7B0A5FB72A00D0292B /* editor.h */; };
 		BF22DD8C0A5FB72B00D0292B /* editorinteractive.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB7C0A5FB72A00D0292B /* editorinteractive.cc */; };
-		BF22DD8D0A5FB72B00D0292B /* editorinteractive.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DB7D0A5FB72A00D0292B /* editorinteractive.h */; };
 		BF22DDB60A5FB72B00D0292B /* editor_event_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBA80A5FB72A00D0292B /* editor_event_menu.cc */; };
-		BF22DDB70A5FB72B00D0292B /* editor_event_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBA90A5FB72B00D0292B /* editor_event_menu.h */; };
 		BF22DDB80A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBAA0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.cc */; };
-		BF22DDB90A5FB72B00D0292B /* editor_event_menu_edit_eventchain.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBAB0A5FB72B00D0292B /* editor_event_menu_edit_eventchain.h */; };
 		BF22DDBA0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBAC0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.cc */; };
-		BF22DDBB0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBAD0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.h */; };
 		BF22DDBC0A5FB72B00D0292B /* editor_event_menu_new_event.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBAE0A5FB72B00D0292B /* editor_event_menu_new_event.cc */; };
-		BF22DDBD0A5FB72B00D0292B /* editor_event_menu_new_event.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBAF0A5FB72B00D0292B /* editor_event_menu_new_event.h */; };
 		BF22DDBE0A5FB72B00D0292B /* editor_event_menu_new_trigger.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBB00A5FB72B00D0292B /* editor_event_menu_new_trigger.cc */; };
-		BF22DDBF0A5FB72B00D0292B /* editor_event_menu_new_trigger.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBB10A5FB72B00D0292B /* editor_event_menu_new_trigger.h */; };
 		BF22DDC00A5FB72B00D0292B /* editor_main_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBB20A5FB72B00D0292B /* editor_main_menu.cc */; };
-		BF22DDC10A5FB72B00D0292B /* editor_main_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBB30A5FB72B00D0292B /* editor_main_menu.h */; };
 		BF22DDC20A5FB72B00D0292B /* editor_main_menu_load_map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBB40A5FB72B00D0292B /* editor_main_menu_load_map.cc */; };
-		BF22DDC30A5FB72B00D0292B /* editor_main_menu_load_map.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBB50A5FB72B00D0292B /* editor_main_menu_load_map.h */; };
 		BF22DDC40A5FB72B00D0292B /* editor_main_menu_map_options.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBB60A5FB72B00D0292B /* editor_main_menu_map_options.cc */; };
-		BF22DDC50A5FB72B00D0292B /* editor_main_menu_map_options.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBB70A5FB72B00D0292B /* editor_main_menu_map_options.h */; };
 		BF22DDC60A5FB72B00D0292B /* editor_main_menu_new_map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBB80A5FB72B00D0292B /* editor_main_menu_new_map.cc */; };
-		BF22DDC70A5FB72B00D0292B /* editor_main_menu_new_map.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBB90A5FB72B00D0292B /* editor_main_menu_new_map.h */; };
 		BF22DDC80A5FB72B00D0292B /* editor_main_menu_save_map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBBA0A5FB72B00D0292B /* editor_main_menu_save_map.cc */; };
-		BF22DDC90A5FB72B00D0292B /* editor_main_menu_save_map.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBBB0A5FB72B00D0292B /* editor_main_menu_save_map.h */; };
 		BF22DDCA0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBBC0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.cc */; };
-		BF22DDCB0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBBD0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.h */; };
 		BF22DDCC0A5FB72B00D0292B /* editor_objectives_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBBE0A5FB72B00D0292B /* editor_objectives_menu.cc */; };
-		BF22DDCD0A5FB72B00D0292B /* editor_objectives_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBBF0A5FB72B00D0292B /* editor_objectives_menu.h */; };
 		BF22DDCE0A5FB72B00D0292B /* editor_player_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBC00A5FB72B00D0292B /* editor_player_menu.cc */; };
-		BF22DDCF0A5FB72B00D0292B /* editor_player_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBC10A5FB72B00D0292B /* editor_player_menu.h */; };
 		BF22DDD00A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBC20A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.cc */; };
-		BF22DDD10A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBC30A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.h */; };
 		BF22DDD20A5FB72B00D0292B /* editor_tool_change_height_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBC40A5FB72B00D0292B /* editor_tool_change_height_options_menu.cc */; };
-		BF22DDD30A5FB72B00D0292B /* editor_tool_change_height_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBC50A5FB72B00D0292B /* editor_tool_change_height_options_menu.h */; };
 		BF22DDD40A5FB72B00D0292B /* editor_tool_change_resources_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBC60A5FB72B00D0292B /* editor_tool_change_resources_options_menu.cc */; };
-		BF22DDD50A5FB72B00D0292B /* editor_tool_change_resources_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBC70A5FB72B00D0292B /* editor_tool_change_resources_options_menu.h */; };
 		BF22DDD60A5FB72B00D0292B /* editor_tool_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBC80A5FB72B00D0292B /* editor_tool_menu.cc */; };
-		BF22DDD70A5FB72B00D0292B /* editor_tool_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBC90A5FB72B00D0292B /* editor_tool_menu.h */; };
 		BF22DDD80A5FB72B00D0292B /* editor_tool_noise_height_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBCA0A5FB72B00D0292B /* editor_tool_noise_height_options_menu.cc */; };
-		BF22DDD90A5FB72B00D0292B /* editor_tool_noise_height_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBCB0A5FB72B00D0292B /* editor_tool_noise_height_options_menu.h */; };
 		BF22DDDA0A5FB72B00D0292B /* editor_tool_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBCC0A5FB72B00D0292B /* editor_tool_options_menu.cc */; };
-		BF22DDDB0A5FB72B00D0292B /* editor_tool_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBCD0A5FB72B00D0292B /* editor_tool_options_menu.h */; };
 		BF22DDDC0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBCE0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.cc */; };
-		BF22DDDD0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBCF0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.h */; };
 		BF22DDDE0A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBD00A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.cc */; };
-		BF22DDDF0A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBD10A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.h */; };
 		BF22DDE00A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBD20A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.cc */; };
-		BF22DDE10A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBD30A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.h */; };
 		BF22DDE20A5FB72B00D0292B /* editor_toolsize_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBD40A5FB72B00D0292B /* editor_toolsize_menu.cc */; };
-		BF22DDE30A5FB72B00D0292B /* editor_toolsize_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBD50A5FB72B00D0292B /* editor_toolsize_menu.h */; };
 		BF22DDE40A5FB72B00D0292B /* editor_variables_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBD60A5FB72B00D0292B /* editor_variables_menu.cc */; };
-		BF22DDE50A5FB72B00D0292B /* editor_variables_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBD70A5FB72B00D0292B /* editor_variables_menu.h */; };
 		BF22DDE60A5FB72B00D0292B /* event_allow_building_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBD80A5FB72B00D0292B /* event_allow_building_option_menu.cc */; };
-		BF22DDE70A5FB72B00D0292B /* event_allow_building_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBD90A5FB72B00D0292B /* event_allow_building_option_menu.h */; };
 		BF22DDE80A5FB72B00D0292B /* event_conquer_area_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBDA0A5FB72B00D0292B /* event_conquer_area_option_menu.cc */; };
-		BF22DDE90A5FB72B00D0292B /* event_conquer_area_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBDB0A5FB72B00D0292B /* event_conquer_area_option_menu.h */; };
 		BF22DDEA0A5FB72B00D0292B /* event_message_box_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBDC0A5FB72B00D0292B /* event_message_box_option_menu.cc */; };
-		BF22DDEB0A5FB72B00D0292B /* event_message_box_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBDD0A5FB72B00D0292B /* event_message_box_option_menu.h */; };
 		BF22DDEC0A5FB72B00D0292B /* event_move_view_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBDE0A5FB72B00D0292B /* event_move_view_option_menu.cc */; };
-		BF22DDED0A5FB72B00D0292B /* event_move_view_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBDF0A5FB72B00D0292B /* event_move_view_option_menu.h */; };
 		BF22DDEE0A5FB72B00D0292B /* event_unhide_area_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBE00A5FB72B00D0292B /* event_unhide_area_option_menu.cc */; };
-		BF22DDEF0A5FB72B00D0292B /* event_unhide_area_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBE10A5FB72B00D0292B /* event_unhide_area_option_menu.h */; };
 		BF22DDF10A5FB72B00D0292B /* trigger_building_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBE30A5FB72B00D0292B /* trigger_building_option_menu.cc */; };
-		BF22DDF20A5FB72B00D0292B /* trigger_building_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBE40A5FB72B00D0292B /* trigger_building_option_menu.h */; };
 		BF22DDF30A5FB72B00D0292B /* trigger_null_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBE50A5FB72B00D0292B /* trigger_null_option_menu.cc */; };
-		BF22DDF40A5FB72B00D0292B /* trigger_null_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBE60A5FB72B00D0292B /* trigger_null_option_menu.h */; };
 		BF22DDF50A5FB72B00D0292B /* trigger_time_option_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBE70A5FB72B00D0292B /* trigger_time_option_menu.cc */; };
-		BF22DDF60A5FB72B00D0292B /* trigger_time_option_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBE80A5FB72B00D0292B /* trigger_time_option_menu.h */; };
 		BF22DDF70A5FB72B00D0292B /* editor_game_base.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBE90A5FB72B00D0292B /* editor_game_base.cc */; };
-		BF22DDF80A5FB72B00D0292B /* editor_game_base.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBEA0A5FB72B00D0292B /* editor_game_base.h */; };
-		BF22DDF90A5FB72B00D0292B /* error.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBEB0A5FB72B00D0292B /* error.h */; };
 		BF22DDFA0A5FB72B00D0292B /* event.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBEC0A5FB72B00D0292B /* event.cc */; };
-		BF22DDFB0A5FB72B00D0292B /* event.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBED0A5FB72B00D0292B /* event.h */; };
 		BF22DDFC0A5FB72B00D0292B /* event_allow_building.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBEE0A5FB72B00D0292B /* event_allow_building.cc */; };
-		BF22DDFD0A5FB72B00D0292B /* event_allow_building.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBEF0A5FB72B00D0292B /* event_allow_building.h */; };
 		BF22DDFE0A5FB72B00D0292B /* event_chain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBF00A5FB72B00D0292B /* event_chain.cc */; };
-		BF22DDFF0A5FB72B00D0292B /* event_chain.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBF10A5FB72B00D0292B /* event_chain.h */; };
 		BF22DE000A5FB72B00D0292B /* event_conquer_area.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBF20A5FB72B00D0292B /* event_conquer_area.cc */; };
-		BF22DE010A5FB72B00D0292B /* event_conquer_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBF30A5FB72B00D0292B /* event_conquer_area.h */; };
 		BF22DE020A5FB72B00D0292B /* event_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBF40A5FB72B00D0292B /* event_factory.cc */; };
-		BF22DE030A5FB72B00D0292B /* event_factory.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBF50A5FB72B00D0292B /* event_factory.h */; };
 		BF22DE040A5FB72B00D0292B /* event_message_box.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBF60A5FB72B00D0292B /* event_message_box.cc */; };
-		BF22DE050A5FB72B00D0292B /* event_message_box.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBF70A5FB72B00D0292B /* event_message_box.h */; };
 		BF22DE060A5FB72B00D0292B /* event_message_box_message_box.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBF80A5FB72B00D0292B /* event_message_box_message_box.cc */; };
-		BF22DE070A5FB72B00D0292B /* event_message_box_message_box.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBF90A5FB72B00D0292B /* event_message_box_message_box.h */; };
 		BF22DE080A5FB72B00D0292B /* event_move_view.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBFA0A5FB72B00D0292B /* event_move_view.cc */; };
-		BF22DE090A5FB72B00D0292B /* event_move_view.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBFB0A5FB72B00D0292B /* event_move_view.h */; };
 		BF22DE0A0A5FB72B00D0292B /* event_referencer.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBFC0A5FB72B00D0292B /* event_referencer.cc */; };
-		BF22DE0B0A5FB72B00D0292B /* event_referencer.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBFD0A5FB72B00D0292B /* event_referencer.h */; };
 		BF22DE0C0A5FB72B00D0292B /* event_set_null_trigger.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DBFE0A5FB72B00D0292B /* event_set_null_trigger.cc */; };
-		BF22DE0D0A5FB72B00D0292B /* event_set_null_trigger.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DBFF0A5FB72B00D0292B /* event_set_null_trigger.h */; };
 		BF22DE0E0A5FB72B00D0292B /* event_unhide_area.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC000A5FB72B00D0292B /* event_unhide_area.cc */; };
-		BF22DE0F0A5FB72B00D0292B /* event_unhide_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC010A5FB72B00D0292B /* event_unhide_area.h */; };
 		BF22DE100A5FB72B00D0292B /* event_unhide_objective.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC020A5FB72B00D0292B /* event_unhide_objective.cc */; };
-		BF22DE110A5FB72B00D0292B /* event_unhide_objective.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC030A5FB72B00D0292B /* event_unhide_objective.h */; };
 		BF22DE120A5FB72B00D0292B /* field.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC040A5FB72B00D0292B /* field.cc */; };
-		BF22DE130A5FB72B00D0292B /* field.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC050A5FB72B00D0292B /* field.h */; };
 		BF22DE140A5FB72B00D0292B /* fieldaction.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC060A5FB72B00D0292B /* fieldaction.cc */; };
-		BF22DE150A5FB72B00D0292B /* fieldaction.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC070A5FB72B00D0292B /* fieldaction.h */; };
 		BF22DE160A5FB72B00D0292B /* fileread.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC080A5FB72B00D0292B /* fileread.cc */; };
-		BF22DE170A5FB72B00D0292B /* fileread.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC090A5FB72B00D0292B /* fileread.h */; };
-		BF22DE190A5FB72B00D0292B /* filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC0B0A5FB72B00D0292B /* filesystem.h */; };
 		BF22DE1A0A5FB72B00D0292B /* filewrite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC0C0A5FB72B00D0292B /* filewrite.cc */; };
-		BF22DE1B0A5FB72B00D0292B /* filewrite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC0D0A5FB72B00D0292B /* filewrite.h */; };
 		BF22DE1C0A5FB72B00D0292B /* font_handler.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC0E0A5FB72B00D0292B /* font_handler.cc */; };
-		BF22DE1D0A5FB72B00D0292B /* font_handler.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC0F0A5FB72B00D0292B /* font_handler.h */; };
 		BF22DE1E0A5FB72B00D0292B /* font_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC100A5FB72B00D0292B /* font_loader.cc */; };
-		BF22DE1F0A5FB72B00D0292B /* font_loader.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC110A5FB72B00D0292B /* font_loader.h */; };
 		BF22DE200A5FB72B00D0292B /* fxset.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC120A5FB72B00D0292B /* fxset.cc */; };
-		BF22DE210A5FB72B00D0292B /* fxset.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC130A5FB72B00D0292B /* fxset.h */; };
 		BF22DE220A5FB72B00D0292B /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC140A5FB72B00D0292B /* game.cc */; };
-		BF22DE230A5FB72B00D0292B /* game.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC150A5FB72B00D0292B /* game.h */; };
 		BF22DE240A5FB72B00D0292B /* game_chat_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC160A5FB72B00D0292B /* game_chat_menu.cc */; };
-		BF22DE250A5FB72B00D0292B /* game_chat_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC170A5FB72B00D0292B /* game_chat_menu.h */; };
 		BF22DE260A5FB72B00D0292B /* game_cmd_queue_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC180A5FB72B00D0292B /* game_cmd_queue_data_packet.cc */; };
-		BF22DE270A5FB72B00D0292B /* game_cmd_queue_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC190A5FB72B00D0292B /* game_cmd_queue_data_packet.h */; };
 		BF22DE280A5FB72B00D0292B /* game_computer_player_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC1A0A5FB72B00D0292B /* game_computer_player_data_packet.cc */; };
-		BF22DE290A5FB72B00D0292B /* game_computer_player_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC1B0A5FB72B00D0292B /* game_computer_player_data_packet.h */; };
 		BF22DE2A0A5FB72B00D0292B /* game_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC1C0A5FB72B00D0292B /* game_data_packet.cc */; };
-		BF22DE2B0A5FB72B00D0292B /* game_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC1D0A5FB72B00D0292B /* game_data_packet.h */; };
 		BF22DE2C0A5FB72B00D0292B /* game_data_packet_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC1E0A5FB72B00D0292B /* game_data_packet_factory.cc */; };
-		BF22DE2D0A5FB72B00D0292B /* game_data_packet_factory.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC1F0A5FB72B00D0292B /* game_data_packet_factory.h */; };
-		BF22DE2E0A5FB72B00D0292B /* game_data_packet_ids.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC200A5FB72B00D0292B /* game_data_packet_ids.h */; };
 		BF22DE2F0A5FB72B00D0292B /* game_debug_ui.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC210A5FB72B00D0292B /* game_debug_ui.cc */; };
-		BF22DE300A5FB72B00D0292B /* game_debug_ui.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC220A5FB72B00D0292B /* game_debug_ui.h */; };
 		BF22DE310A5FB72B00D0292B /* game_game_class_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC230A5FB72B00D0292B /* game_game_class_data_packet.cc */; };
-		BF22DE320A5FB72B00D0292B /* game_game_class_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC240A5FB72B00D0292B /* game_game_class_data_packet.h */; };
 		BF22DE330A5FB72B00D0292B /* game_interactive_player_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC250A5FB72B00D0292B /* game_interactive_player_data_packet.cc */; };
-		BF22DE340A5FB72B00D0292B /* game_interactive_player_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC260A5FB72B00D0292B /* game_interactive_player_data_packet.h */; };
 		BF22DE350A5FB72B00D0292B /* game_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC270A5FB72B00D0292B /* game_loader.cc */; };
-		BF22DE360A5FB72B00D0292B /* game_loader.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC280A5FB72B00D0292B /* game_loader.h */; };
 		BF22DE370A5FB72B00D0292B /* game_main_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC290A5FB72B00D0292B /* game_main_menu.cc */; };
-		BF22DE380A5FB72B00D0292B /* game_main_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC2A0A5FB72B00D0292B /* game_main_menu.h */; };
 		BF22DE390A5FB72B00D0292B /* game_main_menu_load_game.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC2B0A5FB72B00D0292B /* game_main_menu_load_game.cc */; };
-		BF22DE3A0A5FB72B00D0292B /* game_main_menu_load_game.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC2C0A5FB72B00D0292B /* game_main_menu_load_game.h */; };
 		BF22DE3B0A5FB72B00D0292B /* game_main_menu_save_game.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC2D0A5FB72B00D0292B /* game_main_menu_save_game.cc */; };
-		BF22DE3C0A5FB72B00D0292B /* game_main_menu_save_game.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC2E0A5FB72B00D0292B /* game_main_menu_save_game.h */; };
 		BF22DE3D0A5FB72B00D0292B /* game_map_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC2F0A5FB72B00D0292B /* game_map_data_packet.cc */; };
-		BF22DE3E0A5FB72B00D0292B /* game_map_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC300A5FB72B00D0292B /* game_map_data_packet.h */; };
 		BF22DE3F0A5FB72B00D0292B /* game_objectives_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC310A5FB72B00D0292B /* game_objectives_menu.cc */; };
-		BF22DE400A5FB72B00D0292B /* game_objectives_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC320A5FB72B00D0292B /* game_objectives_menu.h */; };
 		BF22DE410A5FB72B00D0292B /* game_options_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC330A5FB72B00D0292B /* game_options_menu.cc */; };
-		BF22DE420A5FB72B00D0292B /* game_options_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC340A5FB72B00D0292B /* game_options_menu.h */; };
 		BF22DE430A5FB72B00D0292B /* game_player_economies_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC350A5FB72B00D0292B /* game_player_economies_data_packet.cc */; };
-		BF22DE440A5FB72B00D0292B /* game_player_economies_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC360A5FB72B00D0292B /* game_player_economies_data_packet.h */; };
 		BF22DE450A5FB72B00D0292B /* game_player_info_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC370A5FB72B00D0292B /* game_player_info_data_packet.cc */; };
-		BF22DE460A5FB72B00D0292B /* game_player_info_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC380A5FB72B00D0292B /* game_player_info_data_packet.h */; };
 		BF22DE470A5FB72B00D0292B /* game_preload_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC390A5FB72B00D0292B /* game_preload_data_packet.cc */; };
-		BF22DE480A5FB72B00D0292B /* game_preload_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC3A0A5FB72B00D0292B /* game_preload_data_packet.h */; };
 		BF22DE490A5FB72B00D0292B /* game_saver.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC3B0A5FB72B00D0292B /* game_saver.cc */; };
-		BF22DE4A0A5FB72B00D0292B /* game_saver.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC3C0A5FB72B00D0292B /* game_saver.h */; };
 		BF22DE4B0A5FB72B00D0292B /* game_server_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC3D0A5FB72B00D0292B /* game_server_connection.cc */; };
-		BF22DE4C0A5FB72B00D0292B /* game_server_connection.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC3E0A5FB72B00D0292B /* game_server_connection.h */; };
-		BF22DE4D0A5FB72B00D0292B /* game_server_proto.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC3F0A5FB72B00D0292B /* game_server_proto.h */; };
 		BF22DE4E0A5FB72B00D0292B /* game_server_proto_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC400A5FB72B00D0292B /* game_server_proto_packet.cc */; };
-		BF22DE4F0A5FB72B00D0292B /* game_server_proto_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC410A5FB72B00D0292B /* game_server_proto_packet.h */; };
 		BF22DE500A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC420A5FB72B00D0292B /* game_server_proto_packet_chatmessage.cc */; };
-		BF22DE510A5FB72B00D0292B /* game_server_proto_packet_chatmessage.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC430A5FB72B00D0292B /* game_server_proto_packet_chatmessage.h */; };
 		BF22DE520A5FB72B00D0292B /* game_server_proto_packet_connect.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC440A5FB72B00D0292B /* game_server_proto_packet_connect.cc */; };
-		BF22DE530A5FB72B00D0292B /* game_server_proto_packet_connect.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC450A5FB72B00D0292B /* game_server_proto_packet_connect.h */; };
 		BF22DE540A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC460A5FB72B00D0292B /* game_server_proto_packet_getroominfo.cc */; };
-		BF22DE550A5FB72B00D0292B /* game_server_proto_packet_getroominfo.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC470A5FB72B00D0292B /* game_server_proto_packet_getroominfo.h */; };
 		BF22DE560A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC480A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.cc */; };
-		BF22DE570A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC490A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.h */; };
 		BF22DE580A5FB72B00D0292B /* game_server_proto_packet_hello.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC4A0A5FB72B00D0292B /* game_server_proto_packet_hello.cc */; };
-		BF22DE590A5FB72B00D0292B /* game_server_proto_packet_hello.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC4B0A5FB72B00D0292B /* game_server_proto_packet_hello.h */; };
 		BF22DE5A0A5FB72B00D0292B /* game_server_proto_packet_ping.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC4C0A5FB72B00D0292B /* game_server_proto_packet_ping.cc */; };
-		BF22DE5B0A5FB72B00D0292B /* game_server_proto_packet_ping.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC4D0A5FB72B00D0292B /* game_server_proto_packet_ping.h */; };
 		BF22DE5C0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC4E0A5FB72B00D0292B /* game_server_proto_packet_userentered.cc */; };
-		BF22DE5D0A5FB72B00D0292B /* game_server_proto_packet_userentered.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC4F0A5FB72B00D0292B /* game_server_proto_packet_userentered.h */; };
 		BF22DE5E0A5FB72B00D0292B /* general_statistics_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC500A5FB72B00D0292B /* general_statistics_menu.cc */; };
-		BF22DE5F0A5FB72B00D0292B /* general_statistics_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC510A5FB72B00D0292B /* general_statistics_menu.h */; };
-		BF22DE600A5FB72B00D0292B /* geometry.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC520A5FB72B00D0292B /* geometry.h */; };
 		BF22DE610A5FB72B00D0292B /* graphic.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC530A5FB72B00D0292B /* graphic.cc */; };
-		BF22DE620A5FB72B00D0292B /* graphic.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC540A5FB72B00D0292B /* graphic.h */; };
-		BF22DE630A5FB72B00D0292B /* graphic_impl.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC550A5FB72B00D0292B /* graphic_impl.h */; };
 		BF22DE640A5FB72B00D0292B /* helper.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC560A5FB72B00D0292B /* helper.cc */; };
 		BF22DE650A5FB72B00D0292B /* i18n.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC570A5FB72B00D0292B /* i18n.cc */; };
-		BF22DE660A5FB72B00D0292B /* i18n.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC580A5FB72B00D0292B /* i18n.h */; };
 		BF22DE670A5FB72B00D0292B /* immovable.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC590A5FB72B00D0292B /* immovable.cc */; };
-		BF22DE680A5FB72B00D0292B /* immovable.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC5A0A5FB72B00D0292B /* immovable.h */; };
-		BF22DE690A5FB72B00D0292B /* immovable_program.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC5B0A5FB72B00D0292B /* immovable_program.h */; };
 		BF22DE6A0A5FB72B00D0292B /* instances.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC5C0A5FB72B00D0292B /* instances.cc */; };
-		BF22DE6B0A5FB72B00D0292B /* instances.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC5D0A5FB72B00D0292B /* instances.h */; };
 		BF22DE6C0A5FB72B00D0292B /* interactive_base.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC5E0A5FB72B00D0292B /* interactive_base.cc */; };
-		BF22DE6D0A5FB72B00D0292B /* interactive_base.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC5F0A5FB72B00D0292B /* interactive_base.h */; };
 		BF22DE6E0A5FB72B00D0292B /* interactive_player.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC600A5FB72B00D0292B /* interactive_player.cc */; };
-		BF22DE6F0A5FB72B00D0292B /* interactive_player.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC610A5FB72B00D0292B /* interactive_player.h */; };
-		BF22DE700A5FB72B00D0292B /* ioapi.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC620A5FB72B00D0292B /* ioapi.h */; };
 		BF22DE710A5FB72B00D0292B /* journal.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC630A5FB72B00D0292B /* journal.cc */; };
-		BF22DE720A5FB72B00D0292B /* journal.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC640A5FB72B00D0292B /* journal.h */; };
 		BF22DE730A5FB72B00D0292B /* journal_exceptions.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC650A5FB72B00D0292B /* journal_exceptions.cc */; };
-		BF22DE740A5FB72B00D0292B /* journal_exceptions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC660A5FB72B00D0292B /* journal_exceptions.h */; };
-		BF22DE750A5FB72B00D0292B /* keycodes.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC670A5FB72B00D0292B /* keycodes.h */; };
-		BF22DE760A5FB72B00D0292B /* languages.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC680A5FB72B00D0292B /* languages.h */; };
-		BF22DE790A5FB72B00D0292B /* machdep.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC6B0A5FB72B00D0292B /* machdep.h */; };
 		BF22DE7A0A5FB72B00D0292B /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC6C0A5FB72B00D0292B /* main.cc */; };
 		BF22DE7B0A5FB72B00D0292B /* map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC6D0A5FB72B00D0292B /* map.cc */; };
-		BF22DE7C0A5FB72B00D0292B /* map.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC6E0A5FB72B00D0292B /* map.h */; };
 		BF22DE7D0A5FB72B00D0292B /* map_event_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC6F0A5FB72B00D0292B /* map_event_manager.cc */; };
-		BF22DE7E0A5FB72B00D0292B /* map_event_manager.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC700A5FB72B00D0292B /* map_event_manager.h */; };
 		BF22DE7F0A5FB72B00D0292B /* map_eventchain_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC710A5FB72B00D0292B /* map_eventchain_manager.cc */; };
-		BF22DE800A5FB72B00D0292B /* map_eventchain_manager.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC720A5FB72B00D0292B /* map_eventchain_manager.h */; };
-		BF22DE810A5FB72B00D0292B /* map_loader.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC730A5FB72B00D0292B /* map_loader.h */; };
 		BF22DE820A5FB72B00D0292B /* map_objective_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC740A5FB72B00D0292B /* map_objective_manager.cc */; };
-		BF22DE830A5FB72B00D0292B /* map_objective_manager.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC750A5FB72B00D0292B /* map_objective_manager.h */; };
 		BF22DE840A5FB72B00D0292B /* map_trigger_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC760A5FB72B00D0292B /* map_trigger_manager.cc */; };
-		BF22DE850A5FB72B00D0292B /* map_trigger_manager.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC770A5FB72B00D0292B /* map_trigger_manager.h */; };
 		BF22DE860A5FB72B00D0292B /* map_variable_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC780A5FB72B00D0292B /* map_variable_manager.cc */; };
-		BF22DE870A5FB72B00D0292B /* map_variable_manager.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC790A5FB72B00D0292B /* map_variable_manager.h */; };
 		BF22DE880A5FB72B00D0292B /* mapview.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC7A0A5FB72B00D0292B /* mapview.cc */; };
-		BF22DE890A5FB72B00D0292B /* mapview.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC7B0A5FB72B00D0292B /* mapview.h */; };
-		BF22DE8A0A5FB72B00D0292B /* mapviewpixelconstants.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC7C0A5FB72B00D0292B /* mapviewpixelconstants.h */; };
 		BF22DE8B0A5FB72B00D0292B /* mapviewpixelfunctions.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC7D0A5FB72B00D0292B /* mapviewpixelfunctions.cc */; };
-		BF22DE8C0A5FB72B00D0292B /* mapviewpixelfunctions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC7E0A5FB72B00D0292B /* mapviewpixelfunctions.h */; };
 		BF22DE8F0A5FB72B00D0292B /* militarysite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC810A5FB72B00D0292B /* militarysite.cc */; };
-		BF22DE900A5FB72B00D0292B /* militarysite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC820A5FB72B00D0292B /* militarysite.h */; };
 		BF22DE910A5FB72B00D0292B /* minimap.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC830A5FB72B00D0292B /* minimap.cc */; };
-		BF22DE920A5FB72B00D0292B /* minimap.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC840A5FB72B00D0292B /* minimap.h */; };
 		BF22DE930A5FB72B00D0292B /* network.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC850A5FB72B00D0292B /* network.cc */; };
-		BF22DE940A5FB72B00D0292B /* network.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC860A5FB72B00D0292B /* network.h */; };
 		BF22DE950A5FB72B00D0292B /* network_buffer.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC870A5FB72B00D0292B /* network_buffer.cc */; };
-		BF22DE960A5FB72B00D0292B /* network_buffer.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC880A5FB72B00D0292B /* network_buffer.h */; };
 		BF22DE970A5FB72B00D0292B /* network_ggz.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC890A5FB72B00D0292B /* network_ggz.cc */; };
-		BF22DE980A5FB72B00D0292B /* network_ggz.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC8A0A5FB72B00D0292B /* network_ggz.h */; };
 		BF22DE990A5FB72B00D0292B /* network_lan_promotion.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC8B0A5FB72B00D0292B /* network_lan_promotion.cc */; };
-		BF22DE9A0A5FB72B00D0292B /* network_lan_promotion.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC8C0A5FB72B00D0292B /* network_lan_promotion.h */; };
-		BF22DE9B0A5FB72B00D0292B /* network_system.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC8D0A5FB72B00D0292B /* network_system.h */; };
 		BF22DE9C0A5FB72B00D0292B /* overlay_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC8E0A5FB72B00D0292B /* overlay_manager.cc */; };
-		BF22DE9D0A5FB72B00D0292B /* overlay_manager.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC8F0A5FB72B00D0292B /* overlay_manager.h */; };
 		BF22DE9E0A5FB72B00D0292B /* player.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC900A5FB72B00D0292B /* player.cc */; };
-		BF22DE9F0A5FB72B00D0292B /* player.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC910A5FB72B00D0292B /* player.h */; };
 		BF22DEA00A5FB72B00D0292B /* playercommand.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC920A5FB72B00D0292B /* playercommand.cc */; };
-		BF22DEA10A5FB72B00D0292B /* playercommand.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC930A5FB72B00D0292B /* playercommand.h */; };
 		BF22DEA20A5FB72B00D0292B /* playerdescrgroup.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC940A5FB72B00D0292B /* playerdescrgroup.cc */; };
-		BF22DEA30A5FB72B00D0292B /* playerdescrgroup.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC950A5FB72B00D0292B /* playerdescrgroup.h */; };
 		BF22DEA40A5FB72B00D0292B /* production_program.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC960A5FB72B00D0292B /* production_program.cc */; };
-		BF22DEA50A5FB72B00D0292B /* production_program.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC970A5FB72B00D0292B /* production_program.h */; };
 		BF22DEA60A5FB72B00D0292B /* productionsite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC980A5FB72B00D0292B /* productionsite.cc */; };
-		BF22DEA70A5FB72B00D0292B /* productionsite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC990A5FB72B00D0292B /* productionsite.h */; };
 		BF22DEA80A5FB72B00D0292B /* profile.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC9A0A5FB72B00D0292B /* profile.cc */; };
-		BF22DEA90A5FB72B00D0292B /* profile.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC9B0A5FB72B00D0292B /* profile.h */; };
 		BF22DEAA0A5FB72B00D0292B /* queue_cmd_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC9C0A5FB72B00D0292B /* queue_cmd_factory.cc */; };
-		BF22DEAB0A5FB72B00D0292B /* queue_cmd_factory.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC9D0A5FB72B00D0292B /* queue_cmd_factory.h */; };
-		BF22DEAC0A5FB72B00D0292B /* queue_cmd_ids.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DC9E0A5FB72B00D0292B /* queue_cmd_ids.h */; };
 		BF22DEAD0A5FB72B00D0292B /* random.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DC9F0A5FB72B00D0292B /* random.cc */; };
-		BF22DEAE0A5FB72B00D0292B /* random.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA00A5FB72B00D0292B /* random.h */; };
 		BF22DEB10A5FB72B00D0292B /* render.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCA30A5FB72B00D0292B /* render.cc */; };
-		BF22DEB20A5FB72B00D0292B /* rendertarget.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA40A5FB72B00D0292B /* rendertarget.h */; };
-		BF22DEB30A5FB72B00D0292B /* rgbcolor.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA50A5FB72B00D0292B /* rgbcolor.h */; };
 		BF22DEB40A5FB72B00D0292B /* s2map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCA60A5FB72B00D0292B /* s2map.cc */; };
-		BF22DEB50A5FB72B00D0292B /* s2map.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA70A5FB72B00D0292B /* s2map.h */; };
-		BF22DEB70A5FB72B00D0292B /* singleton.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCA90A5FB72B00D0292B /* singleton.h */; };
 		BF22DEB80A5FB72B00D0292B /* soldier.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCAA0A5FB72B00D0292B /* soldier.cc */; };
-		BF22DEB90A5FB72B00D0292B /* soldier.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCAB0A5FB72B00D0292B /* soldier.h */; };
 		BF22DEBA0A5FB72B00D0292B /* songset.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCAC0A5FB72B00D0292B /* songset.cc */; };
-		BF22DEBB0A5FB72B00D0292B /* songset.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCAD0A5FB72B00D0292B /* songset.h */; };
 		BF22DEBC0A5FB72B00D0292B /* sound_handler.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCAE0A5FB72B00D0292B /* sound_handler.cc */; };
-		BF22DEBD0A5FB72B00D0292B /* sound_handler.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCAF0A5FB72B00D0292B /* sound_handler.h */; };
 		BF22DEBE0A5FB72B00D0292B /* stock_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCB00A5FB72B00D0292B /* stock_menu.cc */; };
-		BF22DEBF0A5FB72B00D0292B /* stock_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCB10A5FB72B00D0292B /* stock_menu.h */; };
 		BF22DEC00A5FB72B00D0292B /* terrain.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCB20A5FB72B00D0292B /* terrain.cc */; };
 		BF22DEC10A5FB72B00D0292B /* text_parser.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCB30A5FB72B00D0292B /* text_parser.cc */; };
-		BF22DEC20A5FB72B00D0292B /* text_parser.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCB40A5FB72B00D0292B /* text_parser.h */; };
-		BF22DEC30A5FB72B00D0292B /* trackptr.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCB50A5FB72B00D0292B /* trackptr.h */; };
 		BF22DEC40A5FB72B00D0292B /* trainingsite.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCB60A5FB72B00D0292B /* trainingsite.cc */; };
-		BF22DEC50A5FB72B00D0292B /* trainingsite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCB70A5FB72B00D0292B /* trainingsite.h */; };
 		BF22DEC60A5FB72B00D0292B /* transport.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCB80A5FB72B00D0292B /* transport.cc */; };
-		BF22DEC70A5FB72B00D0292B /* transport.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCB90A5FB72B00D0292B /* transport.h */; };
 		BF22DEC80A5FB72B00D0292B /* tribe.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCBA0A5FB72B00D0292B /* tribe.cc */; };
-		BF22DEC90A5FB72B00D0292B /* tribe.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCBB0A5FB72B00D0292B /* tribe.h */; };
-		BF22DECA0A5FB72B00D0292B /* tribedata.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCBC0A5FB72B00D0292B /* tribedata.h */; };
 		BF22DECB0A5FB72B00D0292B /* trigger.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCBD0A5FB72B00D0292B /* trigger.cc */; };
-		BF22DECC0A5FB72B00D0292B /* trigger.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCBE0A5FB72B00D0292B /* trigger.h */; };
 		BF22DECD0A5FB72B00D0292B /* trigger_building.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCBF0A5FB72B00D0292B /* trigger_building.cc */; };
-		BF22DECE0A5FB72B00D0292B /* trigger_building.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCC00A5FB72B00D0292B /* trigger_building.h */; };
 		BF22DECF0A5FB72B00D0292B /* trigger_conditional.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCC10A5FB72B00D0292B /* trigger_conditional.cc */; };
-		BF22DED00A5FB72B00D0292B /* trigger_conditional.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCC20A5FB72B00D0292B /* trigger_conditional.h */; };
 		BF22DED10A5FB72B00D0292B /* trigger_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCC30A5FB72B00D0292B /* trigger_factory.cc */; };
-		BF22DED20A5FB72B00D0292B /* trigger_factory.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCC40A5FB72B00D0292B /* trigger_factory.h */; };
 		BF22DED30A5FB72B00D0292B /* trigger_null.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCC50A5FB72B00D0292B /* trigger_null.cc */; };
-		BF22DED40A5FB72B00D0292B /* trigger_null.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCC60A5FB72B00D0292B /* trigger_null.h */; };
 		BF22DED50A5FB72B00D0292B /* trigger_referencer.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCC70A5FB72B00D0292B /* trigger_referencer.cc */; };
-		BF22DED60A5FB72B00D0292B /* trigger_referencer.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCC80A5FB72B00D0292B /* trigger_referencer.h */; };
 		BF22DED70A5FB72B00D0292B /* trigger_time.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCC90A5FB72B00D0292B /* trigger_time.cc */; };
-		BF22DED80A5FB72B00D0292B /* trigger_time.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCCA0A5FB72B00D0292B /* trigger_time.h */; };
-		BF22DED90A5FB72B00D0292B /* types.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCCB0A5FB72B00D0292B /* types.h */; };
 		BF22DEDB0A5FB72B00D0292B /* ui_box.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCCF0A5FB72B00D0292B /* ui_box.cc */; };
-		BF22DEDC0A5FB72B00D0292B /* ui_box.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCD00A5FB72B00D0292B /* ui_box.h */; };
 		BF22DEDD0A5FB72B00D0292B /* ui_button.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD10A5FB72B00D0292B /* ui_button.cc */; };
-		BF22DEDE0A5FB72B00D0292B /* ui_button.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCD20A5FB72B00D0292B /* ui_button.h */; };
 		BF22DEDF0A5FB72B00D0292B /* ui_checkbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD30A5FB72B00D0292B /* ui_checkbox.cc */; };
-		BF22DEE00A5FB72B00D0292B /* ui_checkbox.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCD40A5FB72B00D0292B /* ui_checkbox.h */; };
 		BF22DEE10A5FB72B00D0292B /* ui_editbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD50A5FB72B00D0292B /* ui_editbox.cc */; };
-		BF22DEE20A5FB72B00D0292B /* ui_editbox.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCD60A5FB72B00D0292B /* ui_editbox.h */; };
 		BF22DEE30A5FB72B00D0292B /* ui_icongrid.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD70A5FB72B00D0292B /* ui_icongrid.cc */; };
-		BF22DEE40A5FB72B00D0292B /* ui_icongrid.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCD80A5FB72B00D0292B /* ui_icongrid.h */; };
 		BF22DEE50A5FB72B00D0292B /* ui_listselect.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCD90A5FB72B00D0292B /* ui_listselect.cc */; };
-		BF22DEE60A5FB72B00D0292B /* ui_listselect.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCDA0A5FB72B00D0292B /* ui_listselect.h */; };
 		BF22DEE70A5FB72B00D0292B /* ui_modal_messagebox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCDB0A5FB72B00D0292B /* ui_modal_messagebox.cc */; };
-		BF22DEE80A5FB72B00D0292B /* ui_modal_messagebox.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCDC0A5FB72B00D0292B /* ui_modal_messagebox.h */; };
 		BF22DEE90A5FB72B00D0292B /* ui_multilineeditbox.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCDD0A5FB72B00D0292B /* ui_multilineeditbox.cc */; };
-		BF22DEEA0A5FB72B00D0292B /* ui_multilineeditbox.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCDE0A5FB72B00D0292B /* ui_multilineeditbox.h */; };
 		BF22DEEB0A5FB72B00D0292B /* ui_multilinetextarea.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCDF0A5FB72B00D0292B /* ui_multilinetextarea.cc */; };
-		BF22DEEC0A5FB72B00D0292B /* ui_multilinetextarea.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCE00A5FB72B00D0292B /* ui_multilinetextarea.h */; };
-		BF22DEED0A5FB72B00D0292B /* ui_object.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCE10A5FB72B00D0292B /* ui_object.h */; };
 		BF22DEEE0A5FB72B00D0292B /* ui_panel.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCE20A5FB72B00D0292B /* ui_panel.cc */; };
-		BF22DEEF0A5FB72B00D0292B /* ui_panel.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCE30A5FB72B00D0292B /* ui_panel.h */; };
 		BF22DEF00A5FB72B00D0292B /* ui_progressbar.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCE40A5FB72B00D0292B /* ui_progressbar.cc */; };
-		BF22DEF10A5FB72B00D0292B /* ui_progressbar.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCE50A5FB72B00D0292B /* ui_progressbar.h */; };
 		BF22DEF20A5FB72B00D0292B /* ui_radiobutton.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCE60A5FB72B00D0292B /* ui_radiobutton.cc */; };
-		BF22DEF30A5FB72B00D0292B /* ui_radiobutton.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCE70A5FB72B00D0292B /* ui_radiobutton.h */; };
 		BF22DEF40A5FB72B00D0292B /* ui_scrollbar.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCE80A5FB72B00D0292B /* ui_scrollbar.cc */; };
-		BF22DEF50A5FB72B00D0292B /* ui_scrollbar.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCE90A5FB72B00D0292B /* ui_scrollbar.h */; };
-		BF22DEF60A5FB72B00D0292B /* ui_signal.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCEA0A5FB72B00D0292B /* ui_signal.h */; };
 		BF22DEF70A5FB72B00D0292B /* ui_table.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCEB0A5FB72B00D0292B /* ui_table.cc */; };
-		BF22DEF80A5FB72B00D0292B /* ui_table.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCEC0A5FB72B00D0292B /* ui_table.h */; };
 		BF22DEF90A5FB72B00D0292B /* ui_tabpanel.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCED0A5FB72B00D0292B /* ui_tabpanel.cc */; };
-		BF22DEFA0A5FB72B00D0292B /* ui_tabpanel.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCEE0A5FB72B00D0292B /* ui_tabpanel.h */; };
 		BF22DEFB0A5FB72B00D0292B /* ui_textarea.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCEF0A5FB72B00D0292B /* ui_textarea.cc */; };
-		BF22DEFC0A5FB72B00D0292B /* ui_textarea.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCF00A5FB72B00D0292B /* ui_textarea.h */; };
 		BF22DEFD0A5FB72B00D0292B /* ui_unique_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF10A5FB72B00D0292B /* ui_unique_window.cc */; };
-		BF22DEFE0A5FB72B00D0292B /* ui_unique_window.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCF20A5FB72B00D0292B /* ui_unique_window.h */; };
 		BF22DEFF0A5FB72B00D0292B /* ui_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF30A5FB72B00D0292B /* ui_window.cc */; };
-		BF22DF000A5FB72B00D0292B /* ui_window.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCF40A5FB72B00D0292B /* ui_window.h */; };
 		BF22DF010A5FB72B00D0292B /* fullscreen_menu_base.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF60A5FB72B00D0292B /* fullscreen_menu_base.cc */; };
-		BF22DF020A5FB72B00D0292B /* fullscreen_menu_base.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCF70A5FB72B00D0292B /* fullscreen_menu_base.h */; };
 		BF22DF030A5FB72B00D0292B /* fullscreen_menu_fileview.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCF80A5FB72B00D0292B /* fullscreen_menu_fileview.cc */; };
-		BF22DF040A5FB72B00D0292B /* fullscreen_menu_fileview.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCF90A5FB72B00D0292B /* fullscreen_menu_fileview.h */; };
 		BF22DF050A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCFA0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.cc */; };
-		BF22DF060A5FB72B00D0292B /* fullscreen_menu_inet_lobby.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCFB0A5FB72B00D0292B /* fullscreen_menu_inet_lobby.h */; };
 		BF22DF070A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCFC0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.cc */; };
-		BF22DF080A5FB72B00D0292B /* fullscreen_menu_inet_server_options.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCFD0A5FB72B00D0292B /* fullscreen_menu_inet_server_options.h */; };
 		BF22DF090A5FB72B00D0292B /* fullscreen_menu_intro.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DCFE0A5FB72B00D0292B /* fullscreen_menu_intro.cc */; };
-		BF22DF0A0A5FB72B00D0292B /* fullscreen_menu_intro.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DCFF0A5FB72B00D0292B /* fullscreen_menu_intro.h */; };
 		BF22DF0B0A5FB72B00D0292B /* fullscreen_menu_launchgame.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD000A5FB72B00D0292B /* fullscreen_menu_launchgame.cc */; };
-		BF22DF0C0A5FB72B00D0292B /* fullscreen_menu_launchgame.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD010A5FB72B00D0292B /* fullscreen_menu_launchgame.h */; };
 		BF22DF0D0A5FB72B00D0292B /* fullscreen_menu_loadgame.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD020A5FB72B00D0292B /* fullscreen_menu_loadgame.cc */; };
-		BF22DF0E0A5FB72B00D0292B /* fullscreen_menu_loadgame.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD030A5FB72B00D0292B /* fullscreen_menu_loadgame.h */; };
 		BF22DF0F0A5FB72B00D0292B /* fullscreen_menu_main.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD040A5FB72B00D0292B /* fullscreen_menu_main.cc */; };
-		BF22DF100A5FB72B00D0292B /* fullscreen_menu_main.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD050A5FB72B00D0292B /* fullscreen_menu_main.h */; };
 		BF22DF110A5FB72B00D0292B /* fullscreen_menu_mapselect.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD060A5FB72B00D0292B /* fullscreen_menu_mapselect.cc */; };
-		BF22DF120A5FB72B00D0292B /* fullscreen_menu_mapselect.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD070A5FB72B00D0292B /* fullscreen_menu_mapselect.h */; };
 		BF22DF130A5FB72B00D0292B /* fullscreen_menu_netsetup.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD080A5FB72B00D0292B /* fullscreen_menu_netsetup.cc */; };
-		BF22DF140A5FB72B00D0292B /* fullscreen_menu_netsetup.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD090A5FB72B00D0292B /* fullscreen_menu_netsetup.h */; };
 		BF22DF150A5FB72B00D0292B /* fullscreen_menu_options.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD0A0A5FB72B00D0292B /* fullscreen_menu_options.cc */; };
-		BF22DF160A5FB72B00D0292B /* fullscreen_menu_options.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD0B0A5FB72B00D0292B /* fullscreen_menu_options.h */; };
 		BF22DF170A5FB72B00D0292B /* fullscreen_menu_singleplayer.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD0C0A5FB72B00D0292B /* fullscreen_menu_singleplayer.cc */; };
-		BF22DF180A5FB72B00D0292B /* fullscreen_menu_singleplayer.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD0D0A5FB72B00D0292B /* fullscreen_menu_singleplayer.h */; };
 		BF22DF190A5FB72B00D0292B /* fullscreen_menu_tutorial_select_map.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD0E0A5FB72B00D0292B /* fullscreen_menu_tutorial_select_map.cc */; };
-		BF22DF1A0A5FB72B00D0292B /* fullscreen_menu_tutorial_select_map.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD0F0A5FB72B00D0292B /* fullscreen_menu_tutorial_select_map.h */; };
-		BF22DF1C0A5FB72B00D0292B /* unzip.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD110A5FB72B00D0292B /* unzip.h */; };
-		BF22DF1D0A5FB72B00D0292B /* util.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD120A5FB72B00D0292B /* util.h */; };
 		BF22DF1E0A5FB72B00D0292B /* ware.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD130A5FB72B00D0292B /* ware.cc */; };
-		BF22DF1F0A5FB72B00D0292B /* ware.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD140A5FB72B00D0292B /* ware.h */; };
 		BF22DF200A5FB72B00D0292B /* ware_statistics_menu.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD150A5FB72B00D0292B /* ware_statistics_menu.cc */; };
-		BF22DF210A5FB72B00D0292B /* ware_statistics_menu.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD160A5FB72B00D0292B /* ware_statistics_menu.h */; };
 		BF22DF220A5FB72B00D0292B /* warehouse.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD170A5FB72B00D0292B /* warehouse.cc */; };
-		BF22DF230A5FB72B00D0292B /* warehouse.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD180A5FB72B00D0292B /* warehouse.h */; };
 		BF22DF240A5FB72B00D0292B /* waresdisplay.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD190A5FB72B00D0292B /* waresdisplay.cc */; };
-		BF22DF250A5FB72B00D0292B /* waresdisplay.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD1A0A5FB72B00D0292B /* waresdisplay.h */; };
 		BF22DF260A5FB72B00D0292B /* watchwindow.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD1B0A5FB72B00D0292B /* watchwindow.cc */; };
-		BF22DF270A5FB72B00D0292B /* watchwindow.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD1C0A5FB72B00D0292B /* watchwindow.h */; };
-		BF22DF280A5FB72B00D0292B /* wexception.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD1D0A5FB72B00D0292B /* wexception.h */; };
 		BF22DF290A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD1E0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.cc */; };
-		BF22DF2A0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD1F0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.h */; };
 		BF22DF2B0A5FB72B00D0292B /* widelands_map_battle_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD200A5FB72B00D0292B /* widelands_map_battle_data_packet.cc */; };
-		BF22DF2C0A5FB72B00D0292B /* widelands_map_battle_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD210A5FB72B00D0292B /* widelands_map_battle_data_packet.h */; };
 		BF22DF2D0A5FB72B00D0292B /* widelands_map_bob_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD220A5FB72B00D0292B /* widelands_map_bob_data_packet.cc */; };
-		BF22DF2E0A5FB72B00D0292B /* widelands_map_bob_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD230A5FB72B00D0292B /* widelands_map_bob_data_packet.h */; };
 		BF22DF2F0A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD240A5FB72B00D0292B /* widelands_map_bobdata_data_packet.cc */; };
-		BF22DF300A5FB72B00D0292B /* widelands_map_bobdata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD250A5FB72B00D0292B /* widelands_map_bobdata_data_packet.h */; };
 		BF22DF310A5FB72B00D0292B /* widelands_map_building_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD260A5FB72B00D0292B /* widelands_map_building_data_packet.cc */; };
-		BF22DF320A5FB72B00D0292B /* widelands_map_building_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD270A5FB72B00D0292B /* widelands_map_building_data_packet.h */; };
 		BF22DF330A5FB72B00D0292B /* widelands_map_buildingdata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD280A5FB72B00D0292B /* widelands_map_buildingdata_data_packet.cc */; };
-		BF22DF340A5FB72B00D0292B /* widelands_map_buildingdata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD290A5FB72B00D0292B /* widelands_map_buildingdata_data_packet.h */; };
 		BF22DF350A5FB72B00D0292B /* widelands_map_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD2A0A5FB72B00D0292B /* widelands_map_data_packet.cc */; };
-		BF22DF360A5FB72B00D0292B /* widelands_map_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD2B0A5FB72B00D0292B /* widelands_map_data_packet.h */; };
-		BF22DF370A5FB72B00D0292B /* widelands_map_data_packet_ids.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD2C0A5FB72B00D0292B /* widelands_map_data_packet_ids.h */; };
 		BF22DF380A5FB72B00D0292B /* widelands_map_elemental_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD2D0A5FB72B00D0292B /* widelands_map_elemental_data_packet.cc */; };
-		BF22DF390A5FB72B00D0292B /* widelands_map_elemental_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD2E0A5FB72B00D0292B /* widelands_map_elemental_data_packet.h */; };
 		BF22DF3A0A5FB72B00D0292B /* widelands_map_event_chain_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD2F0A5FB72B00D0292B /* widelands_map_event_chain_data_packet.cc */; };
-		BF22DF3B0A5FB72B00D0292B /* widelands_map_event_chain_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD300A5FB72B00D0292B /* widelands_map_event_chain_data_packet.h */; };
 		BF22DF3C0A5FB72B00D0292B /* widelands_map_event_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD310A5FB72B00D0292B /* widelands_map_event_data_packet.cc */; };
-		BF22DF3D0A5FB72B00D0292B /* widelands_map_event_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD320A5FB72B00D0292B /* widelands_map_event_data_packet.h */; };
 		BF22DF3E0A5FB72B00D0292B /* widelands_map_extradata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD330A5FB72B00D0292B /* widelands_map_extradata_data_packet.cc */; };
-		BF22DF3F0A5FB72B00D0292B /* widelands_map_extradata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD340A5FB72B00D0292B /* widelands_map_extradata_data_packet.h */; };
 		BF22DF400A5FB72B00D0292B /* widelands_map_flag_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD350A5FB72B00D0292B /* widelands_map_flag_data_packet.cc */; };
-		BF22DF410A5FB72B00D0292B /* widelands_map_flag_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD360A5FB72B00D0292B /* widelands_map_flag_data_packet.h */; };
 		BF22DF420A5FB72B00D0292B /* widelands_map_flagdata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD370A5FB72B00D0292B /* widelands_map_flagdata_data_packet.cc */; };
-		BF22DF430A5FB72B00D0292B /* widelands_map_flagdata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD380A5FB72B00D0292B /* widelands_map_flagdata_data_packet.h */; };
 		BF22DF440A5FB72B00D0292B /* widelands_map_heights_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD390A5FB72B00D0292B /* widelands_map_heights_data_packet.cc */; };
-		BF22DF450A5FB72B00D0292B /* widelands_map_heights_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD3A0A5FB72B00D0292B /* widelands_map_heights_data_packet.h */; };
 		BF22DF460A5FB72B00D0292B /* widelands_map_immovable_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD3B0A5FB72B00D0292B /* widelands_map_immovable_data_packet.cc */; };
-		BF22DF470A5FB72B00D0292B /* widelands_map_immovable_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD3C0A5FB72B00D0292B /* widelands_map_immovable_data_packet.h */; };
 		BF22DF480A5FB72B00D0292B /* widelands_map_immovabledata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD3D0A5FB72B00D0292B /* widelands_map_immovabledata_data_packet.cc */; };
-		BF22DF490A5FB72B00D0292B /* widelands_map_immovabledata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD3E0A5FB72B00D0292B /* widelands_map_immovabledata_data_packet.h */; };
 		BF22DF4A0A5FB72B00D0292B /* widelands_map_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD3F0A5FB72B00D0292B /* widelands_map_loader.cc */; };
-		BF22DF4B0A5FB72B00D0292B /* widelands_map_loader.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD400A5FB72B00D0292B /* widelands_map_loader.h */; };
 		BF22DF4C0A5FB72B00D0292B /* widelands_map_map_object_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD410A5FB72B00D0292B /* widelands_map_map_object_loader.cc */; };
-		BF22DF4D0A5FB72B00D0292B /* widelands_map_map_object_loader.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD420A5FB72B00D0292B /* widelands_map_map_object_loader.h */; };
 		BF22DF4E0A5FB72B00D0292B /* widelands_map_map_object_saver.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD430A5FB72B00D0292B /* widelands_map_map_object_saver.cc */; };
-		BF22DF4F0A5FB72B00D0292B /* widelands_map_map_object_saver.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD440A5FB72B00D0292B /* widelands_map_map_object_saver.h */; };
 		BF22DF500A5FB72B00D0292B /* widelands_map_objective_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD450A5FB72B00D0292B /* widelands_map_objective_data_packet.cc */; };
-		BF22DF510A5FB72B00D0292B /* widelands_map_objective_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD460A5FB72B00D0292B /* widelands_map_objective_data_packet.h */; };
 		BF22DF520A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD470A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.cc */; };
-		BF22DF530A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD480A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.h */; };
 		BF22DF540A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD490A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.cc */; };
-		BF22DF550A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD4A0A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.h */; };
 		BF22DF560A5FB72B00D0292B /* widelands_map_player_position_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD4B0A5FB72B00D0292B /* widelands_map_player_position_data_packet.cc */; };
-		BF22DF570A5FB72B00D0292B /* widelands_map_player_position_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD4C0A5FB72B00D0292B /* widelands_map_player_position_data_packet.h */; };
 		BF22DF580A5FB72B00D0292B /* widelands_map_resources_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD4D0A5FB72B00D0292B /* widelands_map_resources_data_packet.cc */; };
-		BF22DF590A5FB72B00D0292B /* widelands_map_resources_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD4E0A5FB72B00D0292B /* widelands_map_resources_data_packet.h */; };
 		BF22DF5A0A5FB72B00D0292B /* widelands_map_road_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD4F0A5FB72B00D0292B /* widelands_map_road_data_packet.cc */; };
-		BF22DF5B0A5FB72B00D0292B /* widelands_map_road_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD500A5FB72B00D0292B /* widelands_map_road_data_packet.h */; };
 		BF22DF5C0A5FB72B00D0292B /* widelands_map_roaddata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD510A5FB72B00D0292B /* widelands_map_roaddata_data_packet.cc */; };
-		BF22DF5D0A5FB72B00D0292B /* widelands_map_roaddata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD520A5FB72B00D0292B /* widelands_map_roaddata_data_packet.h */; };
 		BF22DF5E0A5FB72B00D0292B /* widelands_map_saver.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD530A5FB72B00D0292B /* widelands_map_saver.cc */; };
-		BF22DF5F0A5FB72B00D0292B /* widelands_map_saver.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD540A5FB72B00D0292B /* widelands_map_saver.h */; };
 		BF22DF600A5FB72B00D0292B /* widelands_map_seen_fields_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD550A5FB72B00D0292B /* widelands_map_seen_fields_data_packet.cc */; };
-		BF22DF610A5FB72B00D0292B /* widelands_map_seen_fields_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD560A5FB72B00D0292B /* widelands_map_seen_fields_data_packet.h */; };
 		BF22DF620A5FB72B00D0292B /* widelands_map_terrain_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD570A5FB72B00D0292B /* widelands_map_terrain_data_packet.cc */; };
-		BF22DF630A5FB72B00D0292B /* widelands_map_terrain_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD580A5FB72B00D0292B /* widelands_map_terrain_data_packet.h */; };
 		BF22DF640A5FB72B00D0292B /* widelands_map_trigger_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD590A5FB72B00D0292B /* widelands_map_trigger_data_packet.cc */; };
-		BF22DF650A5FB72B00D0292B /* widelands_map_trigger_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD5A0A5FB72B00D0292B /* widelands_map_trigger_data_packet.h */; };
 		BF22DF660A5FB72B00D0292B /* widelands_map_variable_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD5B0A5FB72B00D0292B /* widelands_map_variable_data_packet.cc */; };
-		BF22DF670A5FB72B00D0292B /* widelands_map_variable_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD5C0A5FB72B00D0292B /* widelands_map_variable_data_packet.h */; };
 		BF22DF680A5FB72B00D0292B /* widelands_map_ware_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD5D0A5FB72B00D0292B /* widelands_map_ware_data_packet.cc */; };
-		BF22DF690A5FB72B00D0292B /* widelands_map_ware_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD5E0A5FB72B00D0292B /* widelands_map_ware_data_packet.h */; };
 		BF22DF6A0A5FB72B00D0292B /* widelands_map_waredata_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD5F0A5FB72B00D0292B /* widelands_map_waredata_data_packet.cc */; };
-		BF22DF6B0A5FB72B00D0292B /* widelands_map_waredata_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD600A5FB72B00D0292B /* widelands_map_waredata_data_packet.h */; };
 		BF22DF6C0A5FB72B00D0292B /* wlapplication.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD610A5FB72B00D0292B /* wlapplication.cc */; };
-		BF22DF6D0A5FB72B00D0292B /* wlapplication.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD620A5FB72B00D0292B /* wlapplication.h */; };
-		BF22DF6E0A5FB72B00D0292B /* workarea_info.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD630A5FB72B00D0292B /* workarea_info.h */; };
 		BF22DF6F0A5FB72B00D0292B /* worker.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD640A5FB72B00D0292B /* worker.cc */; };
-		BF22DF700A5FB72B00D0292B /* worker.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD650A5FB72B00D0292B /* worker.h */; };
-		BF22DF710A5FB72B00D0292B /* worker_program.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD660A5FB72B00D0292B /* worker_program.h */; };
 		BF22DF720A5FB72B00D0292B /* world.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD670A5FB72B00D0292B /* world.cc */; };
-		BF22DF730A5FB72B00D0292B /* world.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD680A5FB72B00D0292B /* world.h */; };
-		BF22DF740A5FB72B00D0292B /* worlddata.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD690A5FB72B00D0292B /* worlddata.h */; };
 		BF22DF750A5FB72B00D0292B /* wui_plot_area.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD6A0A5FB72B00D0292B /* wui_plot_area.cc */; };
-		BF22DF760A5FB72B00D0292B /* wui_plot_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD6B0A5FB72B00D0292B /* wui_plot_area.h */; };
-		BF22DF770A5FB72B00D0292B /* zip.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD6C0A5FB72B00D0292B /* zip.h */; };
 		BF22DF780A5FB72B00D0292B /* zip_filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DD6D0A5FB72B00D0292B /* zip_filesystem.cc */; };
-		BF22DF790A5FB72B00D0292B /* zip_filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BF22DD6E0A5FB72B00D0292B /* zip_filesystem.h */; };
-		BF22DF810A5FB78F00D0292B /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF800A5FB78F00D0292B /* SDL_image.framework */; };
-		BF22DF850A5FB79900D0292B /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF840A5FB79900D0292B /* SDL_ttf.framework */; };
-		BF22DF8D0A5FB7A900D0292B /* SDL_net.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF8C0A5FB7A900D0292B /* SDL_net.framework */; };
-		BF22DF910A5FB7BE00D0292B /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF900A5FB7BE00D0292B /* SDL_mixer.framework */; };
-		BF22DF990A5FB7F200D0292B /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF980A5FB7F200D0292B /* libz.a */; };
-		BF22DF9B0A5FB80900D0292B /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF9A0A5FB80900D0292B /* libpng.a */; };
-		BF22DFA00A5FBC2B00D0292B /* libintl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DF9F0A5FBC2B00D0292B /* libintl.a */; };
-		BF22DFC80A5FBFBC00D0292B /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22DFC70A5FBFBC00D0292B /* SDL.framework */; };
-		BF22E2D40A5FEEDB00D0292B /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2D30A5FEEDA00D0292B /* libfreetype.a */; };
-		BF22E2EC0A5FFA4500D0292B /* libiconv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2E90A5FFA4500D0292B /* libiconv.a */; };
-		BF22E2ED0A5FFA4600D0292B /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2EA0A5FFA4500D0292B /* libjpeg.a */; };
-		BF22E2EE0A5FFA4600D0292B /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2EB0A5FFA4500D0292B /* libvorbis.a */; };
-		BF22E2F20A5FFAB600D0292B /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2F00A5FFAB600D0292B /* libogg.a */; };
-		BF22E2F30A5FFAB600D0292B /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */; };
+		BF3E41A50BABFF20004B9507 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		BF3E42220BAC052E004B9507 /* widelands-libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E420D0BAC04F1004B9507 /* widelands-libfreetype.a */; };
+		BF3E42230BAC052E004B9507 /* widelands-libiconv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E420E0BAC04F1004B9507 /* widelands-libiconv.a */; };
+		BF3E42240BAC052E004B9507 /* widelands-libintl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E420F0BAC04F1004B9507 /* widelands-libintl.a */; };
+		BF3E42250BAC052E004B9507 /* widelands-libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E42100BAC04F1004B9507 /* widelands-libjpeg.a */; };
+		BF3E42260BAC052E004B9507 /* widelands-libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E42110BAC04F1004B9507 /* widelands-libogg.a */; };
+		BF3E42270BAC052E004B9507 /* widelands-libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E42120BAC04F1004B9507 /* widelands-libpng.a */; };
+		BF3E42280BAC052E004B9507 /* widelands-libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E42130BAC04F1004B9507 /* widelands-libvorbis.a */; };
+		BF3E42290BAC052E004B9507 /* widelands-libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E42140BAC04F1004B9507 /* widelands-libvorbisfile.a */; };
+		BF3E422A0BAC052E004B9507 /* widelands-libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3E42150BAC04F1004B9507 /* widelands-libz.a */; };
 		BF76C7850B9B7C75003E2C5A /* widelands.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF76C7840B9B7C75003E2C5A /* widelands.icns */; };
 		BF76CA210B9B8FB7003E2C5A /* pics in Resources */ = {isa = PBXBuildFile; fileRef = BF76C9620B9B8FB6003E2C5A /* pics */; };
 		BF773E470A87E61000181633 /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = BF77192E0A87E60300181633 /* ChangeLog */; };
@@ -509,355 +254,72 @@
 		BF797EDB0B9B91A2003694AF /* tribes in Resources */ = {isa = PBXBuildFile; fileRef = BF7960CC0B9B919D003694AF /* tribes */; };
 		BF798E4E0B9B91BE003694AF /* txts in Resources */ = {isa = PBXBuildFile; fileRef = BF7986940B9B91BC003694AF /* txts */; };
 		BF798E4F0B9B91BE003694AF /* worlds in Resources */ = {isa = PBXBuildFile; fileRef = BF79869B0B9B91BC003694AF /* worlds */; };
+		BF800DA60BAC115900ADE70F /* AppKit.framework in Headers */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
+		BF800DA70BAC115900ADE70F /* Cocoa.framework in Headers */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		BF800DA80BAC115900ADE70F /* Foundation.framework in Headers */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
+		BF800DAE0BAC115900ADE70F /* widelands-libfreetype.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E420D0BAC04F1004B9507 /* widelands-libfreetype.a */; };
+		BF800DAF0BAC115900ADE70F /* widelands-libiconv.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E420E0BAC04F1004B9507 /* widelands-libiconv.a */; };
+		BF800DB00BAC115900ADE70F /* widelands-libintl.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E420F0BAC04F1004B9507 /* widelands-libintl.a */; };
+		BF800DB10BAC115900ADE70F /* widelands-libjpeg.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E42100BAC04F1004B9507 /* widelands-libjpeg.a */; };
+		BF800DB20BAC115900ADE70F /* widelands-libogg.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E42110BAC04F1004B9507 /* widelands-libogg.a */; };
+		BF800DB30BAC115900ADE70F /* widelands-libpng.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E42120BAC04F1004B9507 /* widelands-libpng.a */; };
+		BF800DB40BAC115900ADE70F /* widelands-libvorbis.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E42130BAC04F1004B9507 /* widelands-libvorbis.a */; };
+		BF800DB50BAC115900ADE70F /* widelands-libvorbisfile.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E42140BAC04F1004B9507 /* widelands-libvorbisfile.a */; };
+		BF800DB60BAC115900ADE70F /* widelands-libz.a in Headers */ = {isa = PBXBuildFile; fileRef = BF3E42150BAC04F1004B9507 /* widelands-libz.a */; };
+		BF800FA20BAC1B2800ADE70F /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF800F630BAC1B2800ADE70F /* SDL_image.framework */; };
+		BF800FA30BAC1B2800ADE70F /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF800F640BAC1B2800ADE70F /* SDL_mixer.framework */; };
+		BF800FA40BAC1B2800ADE70F /* SDL_net.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF800F650BAC1B2800ADE70F /* SDL_net.framework */; };
+		BF800FA50BAC1B2800ADE70F /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */; };
+		BF800FA60BAC1B2800ADE70F /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF800F670BAC1B2800ADE70F /* SDL.framework */; };
+		BF800FA90BAC1B5200ADE70F /* SDL_image.framework in Headers */ = {isa = PBXBuildFile; fileRef = BF800F630BAC1B2800ADE70F /* SDL_image.framework */; };
+		BF800FAA0BAC1B5200ADE70F /* SDL_mixer.framework in Headers */ = {isa = PBXBuildFile; fileRef = BF800F640BAC1B2800ADE70F /* SDL_mixer.framework */; };
+		BF800FAB0BAC1B5200ADE70F /* SDL_net.framework in Headers */ = {isa = PBXBuildFile; fileRef = BF800F650BAC1B2800ADE70F /* SDL_net.framework */; };
+		BF800FAC0BAC1B5200ADE70F /* SDL_ttf.framework in Headers */ = {isa = PBXBuildFile; fileRef = BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */; };
+		BF800FAD0BAC1B5200ADE70F /* SDL.framework in Headers */ = {isa = PBXBuildFile; fileRef = BF800F670BAC1B2800ADE70F /* SDL.framework */; };
+		BF800FAE0BAC1B5C00ADE70F /* SDL_image.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F630BAC1B2800ADE70F /* SDL_image.framework */; };
+		BF800FAF0BAC1B5C00ADE70F /* SDL_mixer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F640BAC1B2800ADE70F /* SDL_mixer.framework */; };
+		BF800FB00BAC1B5C00ADE70F /* SDL_net.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F650BAC1B2800ADE70F /* SDL_net.framework */; };
+		BF800FB10BAC1B5C00ADE70F /* SDL_ttf.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */; };
+		BF800FB20BAC1B5C00ADE70F /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF800F670BAC1B2800ADE70F /* SDL.framework */; };
 		BFA98F390B4F01DA00FB5075 /* attack_controller.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F270B4F01D900FB5075 /* attack_controller.cc */; };
-		BFA98F3A0B4F01DA00FB5075 /* attack_controller.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F280B4F01D900FB5075 /* attack_controller.h */; };
-		BFA98F3B0B4F01DA00FB5075 /* cmd_check_eventchain.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */; };
-		BFA98F3C0B4F01DA00FB5075 /* compile_assert.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2A0B4F01D900FB5075 /* compile_assert.h */; };
 		BFA98F3D0B4F01DA00FB5075 /* disk_filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F2B0B4F01D900FB5075 /* disk_filesystem.cc */; };
-		BFA98F3E0B4F01DA00FB5075 /* disk_filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2C0B4F01D900FB5075 /* disk_filesystem.h */; };
 		BFA98F3F0B4F01DA00FB5075 /* encyclopedia_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F2D0B4F01D900FB5075 /* encyclopedia_window.cc */; };
-		BFA98F400B4F01DA00FB5075 /* encyclopedia_window.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2E0B4F01D900FB5075 /* encyclopedia_window.h */; };
-		BFA98F410B4F01DA00FB5075 /* filesystem_exceptions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F2F0B4F01D900FB5075 /* filesystem_exceptions.h */; };
 		BFA98F420B4F01DA00FB5075 /* filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F300B4F01D900FB5075 /* filesystem.cc */; };
-		BFA98F430B4F01DA00FB5075 /* helper.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F310B4F01D900FB5075 /* helper.h */; };
 		BFA98F440B4F01DA00FB5075 /* layered_filesystem.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F320B4F01D900FB5075 /* layered_filesystem.cc */; };
-		BFA98F450B4F01DA00FB5075 /* layered_filesystem.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F330B4F01D900FB5075 /* layered_filesystem.h */; };
 		BFA98F460B4F01DA00FB5075 /* transport_draw.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F340B4F01D900FB5075 /* transport_draw.cc */; };
 		BFA98F470B4F01DA00FB5075 /* unzip.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F350B4F01D900FB5075 /* unzip.cc */; };
 		BFA98F480B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFA98F360B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.cc */; };
-		BFA98F490B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F370B4F01D900FB5075 /* widelands_map_attack_controller_data_packet.h */; };
-		BFA98F4A0B4F01DA00FB5075 /* zip_exceptions.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFA98F380B4F01D900FB5075 /* zip_exceptions.h */; };
-		BFF8CEBF0B6CC6AF005E6AF1 /* animation_gfx.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEB90B6CC6AF005E6AF1 /* animation_gfx.h */; };
 		BFF8CEC00B6CC6AF005E6AF1 /* event_player_area.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFF8CEBA0B6CC6AF005E6AF1 /* event_player_area.cc */; };
-		BFF8CEC10B6CC6AF005E6AF1 /* event_player_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBB0B6CC6AF005E6AF1 /* event_player_area.h */; };
-		BFF8CEC20B6CC6AF005E6AF1 /* player_area.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBC0B6CC6AF005E6AF1 /* player_area.h */; };
-		BFF8CEC30B6CC6AF005E6AF1 /* widelands_fileread.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBD0B6CC6AF005E6AF1 /* widelands_fileread.h */; };
-		BFF8CEC40B6CC6AF005E6AF1 /* widelands_filewrite.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFF8CEBE0B6CC6AF005E6AF1 /* widelands_filewrite.h */; };
 		BFFB200A0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEA0B60FAD000EBF1A3 /* editor_decrease_height_tool.cc */; };
-		BFFB200B0B60FAD000EBF1A3 /* editor_decrease_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FEB0B60FAD000EBF1A3 /* editor_decrease_height_tool.h */; };
 		BFFB200C0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEC0B60FAD000EBF1A3 /* editor_decrease_resources_tool.cc */; };
-		BFFB200D0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FED0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h */; };
 		BFFB200E0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FEE0B60FAD000EBF1A3 /* editor_delete_bob_tool.cc */; };
-		BFFB200F0B60FAD000EBF1A3 /* editor_delete_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FEF0B60FAD000EBF1A3 /* editor_delete_bob_tool.h */; };
 		BFFB20100B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF00B60FAD000EBF1A3 /* editor_delete_immovable_tool.cc */; };
-		BFFB20110B60FAD000EBF1A3 /* editor_delete_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF10B60FAD000EBF1A3 /* editor_delete_immovable_tool.h */; };
 		BFFB20120B60FAD000EBF1A3 /* editor_increase_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF20B60FAD000EBF1A3 /* editor_increase_height_tool.cc */; };
-		BFFB20130B60FAD000EBF1A3 /* editor_increase_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF30B60FAD000EBF1A3 /* editor_increase_height_tool.h */; };
 		BFFB20140B60FAD000EBF1A3 /* editor_increase_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF40B60FAD000EBF1A3 /* editor_increase_resources_tool.cc */; };
-		BFFB20150B60FAD000EBF1A3 /* editor_increase_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF50B60FAD000EBF1A3 /* editor_increase_resources_tool.h */; };
 		BFFB20160B60FAD000EBF1A3 /* editor_info_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF60B60FAD000EBF1A3 /* editor_info_tool.cc */; };
-		BFFB20170B60FAD000EBF1A3 /* editor_info_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF70B60FAD000EBF1A3 /* editor_info_tool.h */; };
 		BFFB20180B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FF80B60FAD000EBF1A3 /* editor_make_infrastructure_tool.cc */; };
-		BFFB20190B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FF90B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h */; };
 		BFFB201A0B60FAD000EBF1A3 /* editor_noise_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FFA0B60FAD000EBF1A3 /* editor_noise_height_tool.cc */; };
-		BFFB201B0B60FAD000EBF1A3 /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FFB0B60FAD000EBF1A3 /* editor_noise_height_tool.h */; };
 		BFFB201C0B60FAD000EBF1A3 /* editor_place_bob_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FFC0B60FAD000EBF1A3 /* editor_place_bob_tool.cc */; };
-		BFFB201D0B60FAD000EBF1A3 /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FFD0B60FAD000EBF1A3 /* editor_place_bob_tool.h */; };
 		BFFB201E0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1FFE0B60FAD000EBF1A3 /* editor_place_immovable_tool.cc */; };
-		BFFB201F0B60FAD000EBF1A3 /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB1FFF0B60FAD000EBF1A3 /* editor_place_immovable_tool.h */; };
 		BFFB20200B60FAD000EBF1A3 /* editor_set_height_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20000B60FAD000EBF1A3 /* editor_set_height_tool.cc */; };
-		BFFB20210B60FAD000EBF1A3 /* editor_set_height_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20010B60FAD000EBF1A3 /* editor_set_height_tool.h */; };
 		BFFB20220B60FAD000EBF1A3 /* editor_set_resources_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20020B60FAD000EBF1A3 /* editor_set_resources_tool.cc */; };
-		BFFB20230B60FAD000EBF1A3 /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20030B60FAD000EBF1A3 /* editor_set_resources_tool.h */; };
 		BFFB20240B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20040B60FAD000EBF1A3 /* editor_set_starting_pos_tool.cc */; };
-		BFFB20250B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20050B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h */; };
 		BFFB20260B60FAD000EBF1A3 /* editor_set_terrain_tool.cc in Sources */ = {isa = PBXBuildFile; fileRef = BFFB20060B60FAD000EBF1A3 /* editor_set_terrain_tool.cc */; };
-		BFFB20270B60FAD000EBF1A3 /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20070B60FAD000EBF1A3 /* editor_set_terrain_tool.h */; };
-		BFFB20280B60FAD000EBF1A3 /* editor_tool.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20080B60FAD000EBF1A3 /* editor_tool.h */; };
-		BFFB20290B60FAD000EBF1A3 /* multi_select.h in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = BFFB20090B60FAD000EBF1A3 /* multi_select.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		002F39FD09D0883400EBEB88 /* Copy Frameworks into .app bundle */ = {
+		BF800FA70BAC1B3800ADE70F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BF22DD710A5FB72B00D0292B /* animation.h in Copy Frameworks into .app bundle */,
-				BF22DD730A5FB72B00D0292B /* battle.h in Copy Frameworks into .app bundle */,
-				BF22DD750A5FB72B00D0292B /* bob.h in Copy Frameworks into .app bundle */,
-				BF22DD770A5FB72B00D0292B /* building.h in Copy Frameworks into .app bundle */,
-				BF22DD790A5FB72B00D0292B /* building_statistics_menu.h in Copy Frameworks into .app bundle */,
-				BF22DD7C0A5FB72B00D0292B /* cmd_queue.h in Copy Frameworks into .app bundle */,
-				BF22DD7E0A5FB72B00D0292B /* computer_player.h in Copy Frameworks into .app bundle */,
-				BF22DD800A5FB72B00D0292B /* computer_player_hints.h in Copy Frameworks into .app bundle */,
-				BF22DD810A5FB72B00D0292B /* config.h in Copy Frameworks into .app bundle */,
-				BF22DD820A5FB72B00D0292B /* constants.h in Copy Frameworks into .app bundle */,
-				BF22DD840A5FB72B00D0292B /* constructionsite.h in Copy Frameworks into .app bundle */,
-				BF22DD870A5FB72B00D0292B /* critter_bob.h in Copy Frameworks into .app bundle */,
-				BF22DD880A5FB72B00D0292B /* critter_bob_program.h in Copy Frameworks into .app bundle */,
-				BF22DD890A5FB72B00D0292B /* descr_maintainer.h in Copy Frameworks into .app bundle */,
-				BF22DD8B0A5FB72B00D0292B /* editor.h in Copy Frameworks into .app bundle */,
-				BF22DD8D0A5FB72B00D0292B /* editorinteractive.h in Copy Frameworks into .app bundle */,
-				BF22DDB70A5FB72B00D0292B /* editor_event_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDB90A5FB72B00D0292B /* editor_event_menu_edit_eventchain.h in Copy Frameworks into .app bundle */,
-				BF22DDBB0A5FB72B00D0292B /* editor_event_menu_edit_trigger_conditional.h in Copy Frameworks into .app bundle */,
-				BF22DDBD0A5FB72B00D0292B /* editor_event_menu_new_event.h in Copy Frameworks into .app bundle */,
-				BF22DDBF0A5FB72B00D0292B /* editor_event_menu_new_trigger.h in Copy Frameworks into .app bundle */,
-				BF22DDC10A5FB72B00D0292B /* editor_main_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDC30A5FB72B00D0292B /* editor_main_menu_load_map.h in Copy Frameworks into .app bundle */,
-				BF22DDC50A5FB72B00D0292B /* editor_main_menu_map_options.h in Copy Frameworks into .app bundle */,
-				BF22DDC70A5FB72B00D0292B /* editor_main_menu_new_map.h in Copy Frameworks into .app bundle */,
-				BF22DDC90A5FB72B00D0292B /* editor_main_menu_save_map.h in Copy Frameworks into .app bundle */,
-				BF22DDCB0A5FB72B00D0292B /* editor_main_menu_save_map_make_directory.h in Copy Frameworks into .app bundle */,
-				BF22DDCD0A5FB72B00D0292B /* editor_objectives_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDCF0A5FB72B00D0292B /* editor_player_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDD10A5FB72B00D0292B /* editor_player_menu_allowed_buildings_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDD30A5FB72B00D0292B /* editor_tool_change_height_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDD50A5FB72B00D0292B /* editor_tool_change_resources_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDD70A5FB72B00D0292B /* editor_tool_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDD90A5FB72B00D0292B /* editor_tool_noise_height_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDDB0A5FB72B00D0292B /* editor_tool_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDDD0A5FB72B00D0292B /* editor_tool_place_bob_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDDF0A5FB72B00D0292B /* editor_tool_place_immovable_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDE10A5FB72B00D0292B /* editor_tool_set_terrain_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDE30A5FB72B00D0292B /* editor_toolsize_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDE50A5FB72B00D0292B /* editor_variables_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDE70A5FB72B00D0292B /* event_allow_building_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDE90A5FB72B00D0292B /* event_conquer_area_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDEB0A5FB72B00D0292B /* event_message_box_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDED0A5FB72B00D0292B /* event_move_view_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDEF0A5FB72B00D0292B /* event_unhide_area_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDF20A5FB72B00D0292B /* trigger_building_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDF40A5FB72B00D0292B /* trigger_null_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDF60A5FB72B00D0292B /* trigger_time_option_menu.h in Copy Frameworks into .app bundle */,
-				BF22DDF80A5FB72B00D0292B /* editor_game_base.h in Copy Frameworks into .app bundle */,
-				BF22DDF90A5FB72B00D0292B /* error.h in Copy Frameworks into .app bundle */,
-				BF22DDFB0A5FB72B00D0292B /* event.h in Copy Frameworks into .app bundle */,
-				BF22DDFD0A5FB72B00D0292B /* event_allow_building.h in Copy Frameworks into .app bundle */,
-				BF22DDFF0A5FB72B00D0292B /* event_chain.h in Copy Frameworks into .app bundle */,
-				BF22DE010A5FB72B00D0292B /* event_conquer_area.h in Copy Frameworks into .app bundle */,
-				BF22DE030A5FB72B00D0292B /* event_factory.h in Copy Frameworks into .app bundle */,
-				BF22DE050A5FB72B00D0292B /* event_message_box.h in Copy Frameworks into .app bundle */,
-				BF22DE070A5FB72B00D0292B /* event_message_box_message_box.h in Copy Frameworks into .app bundle */,
-				BF22DE090A5FB72B00D0292B /* event_move_view.h in Copy Frameworks into .app bundle */,
-				BF22DE0B0A5FB72B00D0292B /* event_referencer.h in Copy Frameworks into .app bundle */,
-				BF22DE0D0A5FB72B00D0292B /* event_set_null_trigger.h in Copy Frameworks into .app bundle */,
-				BF22DE0F0A5FB72B00D0292B /* event_unhide_area.h in Copy Frameworks into .app bundle */,
-				BF22DE110A5FB72B00D0292B /* event_unhide_objective.h in Copy Frameworks into .app bundle */,
-				BF22DE130A5FB72B00D0292B /* field.h in Copy Frameworks into .app bundle */,
-				BF22DE150A5FB72B00D0292B /* fieldaction.h in Copy Frameworks into .app bundle */,
-				BF22DE170A5FB72B00D0292B /* fileread.h in Copy Frameworks into .app bundle */,
-				BF22DE190A5FB72B00D0292B /* filesystem.h in Copy Frameworks into .app bundle */,
-				BF22DE1B0A5FB72B00D0292B /* filewrite.h in Copy Frameworks into .app bundle */,
-				BF22DE1D0A5FB72B00D0292B /* font_handler.h in Copy Frameworks into .app bundle */,
-				BF22DE1F0A5FB72B00D0292B /* font_loader.h in Copy Frameworks into .app bundle */,
-				BF22DE210A5FB72B00D0292B /* fxset.h in Copy Frameworks into .app bundle */,
-				BF22DE230A5FB72B00D0292B /* game.h in Copy Frameworks into .app bundle */,
-				BF22DE250A5FB72B00D0292B /* game_chat_menu.h in Copy Frameworks into .app bundle */,
-				BF22DE270A5FB72B00D0292B /* game_cmd_queue_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE290A5FB72B00D0292B /* game_computer_player_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE2B0A5FB72B00D0292B /* game_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE2D0A5FB72B00D0292B /* game_data_packet_factory.h in Copy Frameworks into .app bundle */,
-				BF22DE2E0A5FB72B00D0292B /* game_data_packet_ids.h in Copy Frameworks into .app bundle */,
-				BF22DE300A5FB72B00D0292B /* game_debug_ui.h in Copy Frameworks into .app bundle */,
-				BF22DE320A5FB72B00D0292B /* game_game_class_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE340A5FB72B00D0292B /* game_interactive_player_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE360A5FB72B00D0292B /* game_loader.h in Copy Frameworks into .app bundle */,
-				BF22DE380A5FB72B00D0292B /* game_main_menu.h in Copy Frameworks into .app bundle */,
-				BF22DE3A0A5FB72B00D0292B /* game_main_menu_load_game.h in Copy Frameworks into .app bundle */,
-				BF22DE3C0A5FB72B00D0292B /* game_main_menu_save_game.h in Copy Frameworks into .app bundle */,
-				BF22DE3E0A5FB72B00D0292B /* game_map_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE400A5FB72B00D0292B /* game_objectives_menu.h in Copy Frameworks into .app bundle */,
-				BF22DE420A5FB72B00D0292B /* game_options_menu.h in Copy Frameworks into .app bundle */,
-				BF22DE440A5FB72B00D0292B /* game_player_economies_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE460A5FB72B00D0292B /* game_player_info_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE480A5FB72B00D0292B /* game_preload_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE4A0A5FB72B00D0292B /* game_saver.h in Copy Frameworks into .app bundle */,
-				BF22DE4C0A5FB72B00D0292B /* game_server_connection.h in Copy Frameworks into .app bundle */,
-				BF22DE4D0A5FB72B00D0292B /* game_server_proto.h in Copy Frameworks into .app bundle */,
-				BF22DE4F0A5FB72B00D0292B /* game_server_proto_packet.h in Copy Frameworks into .app bundle */,
-				BF22DE510A5FB72B00D0292B /* game_server_proto_packet_chatmessage.h in Copy Frameworks into .app bundle */,
-				BF22DE530A5FB72B00D0292B /* game_server_proto_packet_connect.h in Copy Frameworks into .app bundle */,
-				BF22DE550A5FB72B00D0292B /* game_server_proto_packet_getroominfo.h in Copy Frameworks into .app bundle */,
-				BF22DE570A5FB72B00D0292B /* game_server_proto_packet_getuserinfo.h in Copy Frameworks into .app bundle */,
-				BF22DE590A5FB72B00D0292B /* game_server_proto_packet_hello.h in Copy Frameworks into .app bundle */,
-				BF22DE5B0A5FB72B00D0292B /* game_server_proto_packet_ping.h in Copy Frameworks into .app bundle */,
-				BF22DE5D0A5FB72B00D0292B /* game_server_proto_packet_userentered.h in Copy Frameworks into .app bundle */,
-				BF22DE5F0A5FB72B00D0292B /* general_statistics_menu.h in Copy Frameworks into .app bundle */,
-				BF22DE600A5FB72B00D0292B /* geometry.h in Copy Frameworks into .app bundle */,
-				BF22DE620A5FB72B00D0292B /* graphic.h in Copy Frameworks into .app bundle */,
-				BF22DE630A5FB72B00D0292B /* graphic_impl.h in Copy Frameworks into .app bundle */,
-				BF22DE660A5FB72B00D0292B /* i18n.h in Copy Frameworks into .app bundle */,
-				BF22DE680A5FB72B00D0292B /* immovable.h in Copy Frameworks into .app bundle */,
-				BF22DE690A5FB72B00D0292B /* immovable_program.h in Copy Frameworks into .app bundle */,
-				BF22DE6B0A5FB72B00D0292B /* instances.h in Copy Frameworks into .app bundle */,
-				BF22DE6D0A5FB72B00D0292B /* interactive_base.h in Copy Frameworks into .app bundle */,
-				BF22DE6F0A5FB72B00D0292B /* interactive_player.h in Copy Frameworks into .app bundle */,
-				BF22DE700A5FB72B00D0292B /* ioapi.h in Copy Frameworks into .app bundle */,
-				BF22DE720A5FB72B00D0292B /* journal.h in Copy Frameworks into .app bundle */,
-				BF22DE740A5FB72B00D0292B /* journal_exceptions.h in Copy Frameworks into .app bundle */,
-				BF22DE750A5FB72B00D0292B /* keycodes.h in Copy Frameworks into .app bundle */,
-				BF22DE760A5FB72B00D0292B /* languages.h in Copy Frameworks into .app bundle */,
-				BF22DE790A5FB72B00D0292B /* machdep.h in Copy Frameworks into .app bundle */,
-				BF22DE7C0A5FB72B00D0292B /* map.h in Copy Frameworks into .app bundle */,
-				BF22DE7E0A5FB72B00D0292B /* map_event_manager.h in Copy Frameworks into .app bundle */,
-				BF22DE800A5FB72B00D0292B /* map_eventchain_manager.h in Copy Frameworks into .app bundle */,
-				BF22DE810A5FB72B00D0292B /* map_loader.h in Copy Frameworks into .app bundle */,
-				BF22DE830A5FB72B00D0292B /* map_objective_manager.h in Copy Frameworks into .app bundle */,
-				BF22DE850A5FB72B00D0292B /* map_trigger_manager.h in Copy Frameworks into .app bundle */,
-				BF22DE870A5FB72B00D0292B /* map_variable_manager.h in Copy Frameworks into .app bundle */,
-				BF22DE890A5FB72B00D0292B /* mapview.h in Copy Frameworks into .app bundle */,
-				BF22DE8A0A5FB72B00D0292B /* mapviewpixelconstants.h in Copy Frameworks into .app bundle */,
-				BF22DE8C0A5FB72B00D0292B /* mapviewpixelfunctions.h in Copy Frameworks into .app bundle */,
-				BF22DE900A5FB72B00D0292B /* militarysite.h in Copy Frameworks into .app bundle */,
-				BF22DE920A5FB72B00D0292B /* minimap.h in Copy Frameworks into .app bundle */,
-				BF22DE940A5FB72B00D0292B /* network.h in Copy Frameworks into .app bundle */,
-				BF22DE960A5FB72B00D0292B /* network_buffer.h in Copy Frameworks into .app bundle */,
-				BF22DE980A5FB72B00D0292B /* network_ggz.h in Copy Frameworks into .app bundle */,
-				BF22DE9A0A5FB72B00D0292B /* network_lan_promotion.h in Copy Frameworks into .app bundle */,
-				BF22DE9B0A5FB72B00D0292B /* network_system.h in Copy Frameworks into .app bundle */,
-				BF22DE9D0A5FB72B00D0292B /* overlay_manager.h in Copy Frameworks into .app bundle */,
-				BF22DE9F0A5FB72B00D0292B /* player.h in Copy Frameworks into .app bundle */,
-				BF22DEA10A5FB72B00D0292B /* playercommand.h in Copy Frameworks into .app bundle */,
-				BF22DEA30A5FB72B00D0292B /* playerdescrgroup.h in Copy Frameworks into .app bundle */,
-				BF22DEA50A5FB72B00D0292B /* production_program.h in Copy Frameworks into .app bundle */,
-				BF22DEA70A5FB72B00D0292B /* productionsite.h in Copy Frameworks into .app bundle */,
-				BF22DEA90A5FB72B00D0292B /* profile.h in Copy Frameworks into .app bundle */,
-				BF22DEAB0A5FB72B00D0292B /* queue_cmd_factory.h in Copy Frameworks into .app bundle */,
-				BF22DEAC0A5FB72B00D0292B /* queue_cmd_ids.h in Copy Frameworks into .app bundle */,
-				BF22DEAE0A5FB72B00D0292B /* random.h in Copy Frameworks into .app bundle */,
-				BF22DEB20A5FB72B00D0292B /* rendertarget.h in Copy Frameworks into .app bundle */,
-				BF22DEB30A5FB72B00D0292B /* rgbcolor.h in Copy Frameworks into .app bundle */,
-				BF22DEB50A5FB72B00D0292B /* s2map.h in Copy Frameworks into .app bundle */,
-				BF22DEB70A5FB72B00D0292B /* singleton.h in Copy Frameworks into .app bundle */,
-				BF22DEB90A5FB72B00D0292B /* soldier.h in Copy Frameworks into .app bundle */,
-				BF22DEBB0A5FB72B00D0292B /* songset.h in Copy Frameworks into .app bundle */,
-				BF22DEBD0A5FB72B00D0292B /* sound_handler.h in Copy Frameworks into .app bundle */,
-				BF22DEBF0A5FB72B00D0292B /* stock_menu.h in Copy Frameworks into .app bundle */,
-				BF22DEC20A5FB72B00D0292B /* text_parser.h in Copy Frameworks into .app bundle */,
-				BF22DEC30A5FB72B00D0292B /* trackptr.h in Copy Frameworks into .app bundle */,
-				BF22DEC50A5FB72B00D0292B /* trainingsite.h in Copy Frameworks into .app bundle */,
-				BF22DEC70A5FB72B00D0292B /* transport.h in Copy Frameworks into .app bundle */,
-				BF22DEC90A5FB72B00D0292B /* tribe.h in Copy Frameworks into .app bundle */,
-				BF22DECA0A5FB72B00D0292B /* tribedata.h in Copy Frameworks into .app bundle */,
-				BF22DECC0A5FB72B00D0292B /* trigger.h in Copy Frameworks into .app bundle */,
-				BF22DECE0A5FB72B00D0292B /* trigger_building.h in Copy Frameworks into .app bundle */,
-				BF22DED00A5FB72B00D0292B /* trigger_conditional.h in Copy Frameworks into .app bundle */,
-				BF22DED20A5FB72B00D0292B /* trigger_factory.h in Copy Frameworks into .app bundle */,
-				BF22DED40A5FB72B00D0292B /* trigger_null.h in Copy Frameworks into .app bundle */,
-				BF22DED60A5FB72B00D0292B /* trigger_referencer.h in Copy Frameworks into .app bundle */,
-				BF22DED80A5FB72B00D0292B /* trigger_time.h in Copy Frameworks into .app bundle */,
-				BF22DED90A5FB72B00D0292B /* types.h in Copy Frameworks into .app bundle */,
-				BF22DEDC0A5FB72B00D0292B /* ui_box.h in Copy Frameworks into .app bundle */,
-				BF22DEDE0A5FB72B00D0292B /* ui_button.h in Copy Frameworks into .app bundle */,
-				BF22DEE00A5FB72B00D0292B /* ui_checkbox.h in Copy Frameworks into .app bundle */,
-				BF22DEE20A5FB72B00D0292B /* ui_editbox.h in Copy Frameworks into .app bundle */,
-				BF22DEE40A5FB72B00D0292B /* ui_icongrid.h in Copy Frameworks into .app bundle */,
-				BF22DEE60A5FB72B00D0292B /* ui_listselect.h in Copy Frameworks into .app bundle */,
-				BF22DEE80A5FB72B00D0292B /* ui_modal_messagebox.h in Copy Frameworks into .app bundle */,
-				BF22DEEA0A5FB72B00D0292B /* ui_multilineeditbox.h in Copy Frameworks into .app bundle */,
-				BF22DEEC0A5FB72B00D0292B /* ui_multilinetextarea.h in Copy Frameworks into .app bundle */,
-				BF22DEED0A5FB72B00D0292B /* ui_object.h in Copy Frameworks into .app bundle */,
-				BF22DEEF0A5FB72B00D0292B /* ui_panel.h in Copy Frameworks into .app bundle */,
-				BF22DEF10A5FB72B00D0292B /* ui_progressbar.h in Copy Frameworks into .app bundle */,
-				BF22DEF30A5FB72B00D0292B /* ui_radiobutton.h in Copy Frameworks into .app bundle */,
-				BF22DEF50A5FB72B00D0292B /* ui_scrollbar.h in Copy Frameworks into .app bundle */,
-				BF22DEF60A5FB72B00D0292B /* ui_signal.h in Copy Frameworks into .app bundle */,
-				BF22DEF80A5FB72B00D0292B /* ui_table.h in Copy Frameworks into .app bundle */,
-				BF22DEFA0A5FB72B00D0292B /* ui_tabpanel.h in Copy Frameworks into .app bundle */,
-				BF22DEFC0A5FB72B00D0292B /* ui_textarea.h in Copy Frameworks into .app bundle */,
-				BF22DEFE0A5FB72B00D0292B /* ui_unique_window.h in Copy Frameworks into .app bundle */,
-				BF22DF000A5FB72B00D0292B /* ui_window.h in Copy Frameworks into .app bundle */,
-				BF22DF020A5FB72B00D0292B /* fullscreen_menu_base.h in Copy Frameworks into .app bundle */,
-				BF22DF040A5FB72B00D0292B /* fullscreen_menu_fileview.h in Copy Frameworks into .app bundle */,
-				BF22DF060A5FB72B00D0292B /* fullscreen_menu_inet_lobby.h in Copy Frameworks into .app bundle */,
-				BF22DF080A5FB72B00D0292B /* fullscreen_menu_inet_server_options.h in Copy Frameworks into .app bundle */,
-				BF22DF0A0A5FB72B00D0292B /* fullscreen_menu_intro.h in Copy Frameworks into .app bundle */,
-				BF22DF0C0A5FB72B00D0292B /* fullscreen_menu_launchgame.h in Copy Frameworks into .app bundle */,
-				BF22DF0E0A5FB72B00D0292B /* fullscreen_menu_loadgame.h in Copy Frameworks into .app bundle */,
-				BF22DF100A5FB72B00D0292B /* fullscreen_menu_main.h in Copy Frameworks into .app bundle */,
-				BF22DF120A5FB72B00D0292B /* fullscreen_menu_mapselect.h in Copy Frameworks into .app bundle */,
-				BF22DF140A5FB72B00D0292B /* fullscreen_menu_netsetup.h in Copy Frameworks into .app bundle */,
-				BF22DF160A5FB72B00D0292B /* fullscreen_menu_options.h in Copy Frameworks into .app bundle */,
-				BF22DF180A5FB72B00D0292B /* fullscreen_menu_singleplayer.h in Copy Frameworks into .app bundle */,
-				BF22DF1A0A5FB72B00D0292B /* fullscreen_menu_tutorial_select_map.h in Copy Frameworks into .app bundle */,
-				BF22DF1C0A5FB72B00D0292B /* unzip.h in Copy Frameworks into .app bundle */,
-				BF22DF1D0A5FB72B00D0292B /* util.h in Copy Frameworks into .app bundle */,
-				BF22DF1F0A5FB72B00D0292B /* ware.h in Copy Frameworks into .app bundle */,
-				BF22DF210A5FB72B00D0292B /* ware_statistics_menu.h in Copy Frameworks into .app bundle */,
-				BF22DF230A5FB72B00D0292B /* warehouse.h in Copy Frameworks into .app bundle */,
-				BF22DF250A5FB72B00D0292B /* waresdisplay.h in Copy Frameworks into .app bundle */,
-				BF22DF270A5FB72B00D0292B /* watchwindow.h in Copy Frameworks into .app bundle */,
-				BF22DF280A5FB72B00D0292B /* wexception.h in Copy Frameworks into .app bundle */,
-				BF22DF2A0A5FB72B00D0292B /* widelands_map_allowed_buildings_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF2C0A5FB72B00D0292B /* widelands_map_battle_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF2E0A5FB72B00D0292B /* widelands_map_bob_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF300A5FB72B00D0292B /* widelands_map_bobdata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF320A5FB72B00D0292B /* widelands_map_building_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF340A5FB72B00D0292B /* widelands_map_buildingdata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF360A5FB72B00D0292B /* widelands_map_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF370A5FB72B00D0292B /* widelands_map_data_packet_ids.h in Copy Frameworks into .app bundle */,
-				BF22DF390A5FB72B00D0292B /* widelands_map_elemental_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF3B0A5FB72B00D0292B /* widelands_map_event_chain_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF3D0A5FB72B00D0292B /* widelands_map_event_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF3F0A5FB72B00D0292B /* widelands_map_extradata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF410A5FB72B00D0292B /* widelands_map_flag_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF430A5FB72B00D0292B /* widelands_map_flagdata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF450A5FB72B00D0292B /* widelands_map_heights_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF470A5FB72B00D0292B /* widelands_map_immovable_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF490A5FB72B00D0292B /* widelands_map_immovabledata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF4B0A5FB72B00D0292B /* widelands_map_loader.h in Copy Frameworks into .app bundle */,
-				BF22DF4D0A5FB72B00D0292B /* widelands_map_map_object_loader.h in Copy Frameworks into .app bundle */,
-				BF22DF4F0A5FB72B00D0292B /* widelands_map_map_object_saver.h in Copy Frameworks into .app bundle */,
-				BF22DF510A5FB72B00D0292B /* widelands_map_objective_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF530A5FB72B00D0292B /* widelands_map_owned_fields_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF550A5FB72B00D0292B /* widelands_map_player_names_and_tribes_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF570A5FB72B00D0292B /* widelands_map_player_position_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF590A5FB72B00D0292B /* widelands_map_resources_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF5B0A5FB72B00D0292B /* widelands_map_road_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF5D0A5FB72B00D0292B /* widelands_map_roaddata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF5F0A5FB72B00D0292B /* widelands_map_saver.h in Copy Frameworks into .app bundle */,
-				BF22DF610A5FB72B00D0292B /* widelands_map_seen_fields_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF630A5FB72B00D0292B /* widelands_map_terrain_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF650A5FB72B00D0292B /* widelands_map_trigger_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF670A5FB72B00D0292B /* widelands_map_variable_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF690A5FB72B00D0292B /* widelands_map_ware_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF6B0A5FB72B00D0292B /* widelands_map_waredata_data_packet.h in Copy Frameworks into .app bundle */,
-				BF22DF6D0A5FB72B00D0292B /* wlapplication.h in Copy Frameworks into .app bundle */,
-				BF22DF6E0A5FB72B00D0292B /* workarea_info.h in Copy Frameworks into .app bundle */,
-				BF22DF700A5FB72B00D0292B /* worker.h in Copy Frameworks into .app bundle */,
-				BF22DF710A5FB72B00D0292B /* worker_program.h in Copy Frameworks into .app bundle */,
-				BF22DF730A5FB72B00D0292B /* world.h in Copy Frameworks into .app bundle */,
-				BF22DF740A5FB72B00D0292B /* worlddata.h in Copy Frameworks into .app bundle */,
-				BF22DF760A5FB72B00D0292B /* wui_plot_area.h in Copy Frameworks into .app bundle */,
-				BF22DF770A5FB72B00D0292B /* zip.h in Copy Frameworks into .app bundle */,
-				BF22DF790A5FB72B00D0292B /* zip_filesystem.h in Copy Frameworks into .app bundle */,
-				BFA98F3A0B4F01DA00FB5075 /* attack_controller.h in Copy Frameworks into .app bundle */,
-				BFA98F3B0B4F01DA00FB5075 /* cmd_check_eventchain.h in Copy Frameworks into .app bundle */,
-				BFA98F3C0B4F01DA00FB5075 /* compile_assert.h in Copy Frameworks into .app bundle */,
-				BFA98F3E0B4F01DA00FB5075 /* disk_filesystem.h in Copy Frameworks into .app bundle */,
-				BFA98F400B4F01DA00FB5075 /* encyclopedia_window.h in Copy Frameworks into .app bundle */,
-				BFA98F410B4F01DA00FB5075 /* filesystem_exceptions.h in Copy Frameworks into .app bundle */,
-				BFA98F430B4F01DA00FB5075 /* helper.h in Copy Frameworks into .app bundle */,
-				BFA98F450B4F01DA00FB5075 /* layered_filesystem.h in Copy Frameworks into .app bundle */,
-				BFA98F490B4F01DA00FB5075 /* widelands_map_attack_controller_data_packet.h in Copy Frameworks into .app bundle */,
-				BFA98F4A0B4F01DA00FB5075 /* zip_exceptions.h in Copy Frameworks into .app bundle */,
-				BFFB200B0B60FAD000EBF1A3 /* editor_decrease_height_tool.h in Copy Frameworks into .app bundle */,
-				BFFB200D0B60FAD000EBF1A3 /* editor_decrease_resources_tool.h in Copy Frameworks into .app bundle */,
-				BFFB200F0B60FAD000EBF1A3 /* editor_delete_bob_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20110B60FAD000EBF1A3 /* editor_delete_immovable_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20130B60FAD000EBF1A3 /* editor_increase_height_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20150B60FAD000EBF1A3 /* editor_increase_resources_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20170B60FAD000EBF1A3 /* editor_info_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20190B60FAD000EBF1A3 /* editor_make_infrastructure_tool.h in Copy Frameworks into .app bundle */,
-				BFFB201B0B60FAD000EBF1A3 /* editor_noise_height_tool.h in Copy Frameworks into .app bundle */,
-				BFFB201D0B60FAD000EBF1A3 /* editor_place_bob_tool.h in Copy Frameworks into .app bundle */,
-				BFFB201F0B60FAD000EBF1A3 /* editor_place_immovable_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20210B60FAD000EBF1A3 /* editor_set_height_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20230B60FAD000EBF1A3 /* editor_set_resources_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20250B60FAD000EBF1A3 /* editor_set_starting_pos_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20270B60FAD000EBF1A3 /* editor_set_terrain_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20280B60FAD000EBF1A3 /* editor_tool.h in Copy Frameworks into .app bundle */,
-				BFFB20290B60FAD000EBF1A3 /* multi_select.h in Copy Frameworks into .app bundle */,
-				BFF8CEBF0B6CC6AF005E6AF1 /* animation_gfx.h in Copy Frameworks into .app bundle */,
-				BFF8CEC10B6CC6AF005E6AF1 /* event_player_area.h in Copy Frameworks into .app bundle */,
-				BFF8CEC20B6CC6AF005E6AF1 /* player_area.h in Copy Frameworks into .app bundle */,
-				BFF8CEC30B6CC6AF005E6AF1 /* widelands_fileread.h in Copy Frameworks into .app bundle */,
-				BFF8CEC40B6CC6AF005E6AF1 /* widelands_filewrite.h in Copy Frameworks into .app bundle */,
+				BF800FAE0BAC1B5C00ADE70F /* SDL_image.framework in CopyFiles */,
+				BF800FAF0BAC1B5C00ADE70F /* SDL_mixer.framework in CopyFiles */,
+				BF800FB00BAC1B5C00ADE70F /* SDL_net.framework in CopyFiles */,
+				BF800FB10BAC1B5C00ADE70F /* SDL_ttf.framework in CopyFiles */,
+				BF800FB20BAC1B5C00ADE70F /* SDL.framework in CopyFiles */,
 			);
-			name = "Copy Frameworks into .app bundle";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1342,20 +804,15 @@
 		BF22DD6C0A5FB72B00D0292B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		BF22DD6D0A5FB72B00D0292B /* zip_filesystem.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = zip_filesystem.cc; sourceTree = "<group>"; };
 		BF22DD6E0A5FB72B00D0292B /* zip_filesystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = zip_filesystem.h; sourceTree = "<group>"; };
-		BF22DF800A5FB78F00D0292B /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
-		BF22DF840A5FB79900D0292B /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
-		BF22DF8C0A5FB7A900D0292B /* SDL_net.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_net.framework; path = /Library/Frameworks/SDL_net.framework; sourceTree = "<absolute>"; };
-		BF22DF900A5FB7BE00D0292B /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
-		BF22DF980A5FB7F200D0292B /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = /opt/local/lib/libz.a; sourceTree = "<absolute>"; };
-		BF22DF9A0A5FB80900D0292B /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = /opt/local/lib/libpng.a; sourceTree = "<absolute>"; };
-		BF22DF9F0A5FBC2B00D0292B /* libintl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libintl.a; path = /opt/local/lib/libintl.a; sourceTree = "<absolute>"; };
-		BF22DFC70A5FBFBC00D0292B /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
-		BF22E2D30A5FEEDA00D0292B /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = /opt/local/lib/libfreetype.a; sourceTree = "<absolute>"; };
-		BF22E2E90A5FFA4500D0292B /* libiconv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiconv.a; path = /opt/local/lib/libiconv.a; sourceTree = "<absolute>"; };
-		BF22E2EA0A5FFA4500D0292B /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = /opt/local/lib/libjpeg.a; sourceTree = "<absolute>"; };
-		BF22E2EB0A5FFA4500D0292B /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = /opt/local/lib/libvorbis.a; sourceTree = "<absolute>"; };
-		BF22E2F00A5FFAB600D0292B /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = /opt/local/lib/libogg.a; sourceTree = "<absolute>"; };
-		BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = /opt/local/lib/libvorbisfile.a; sourceTree = "<absolute>"; };
+		BF3E420D0BAC04F1004B9507 /* widelands-libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libfreetype.a"; path = "build/copied_libs/widelands-libfreetype.a"; sourceTree = "<group>"; };
+		BF3E420E0BAC04F1004B9507 /* widelands-libiconv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libiconv.a"; path = "build/copied_libs/widelands-libiconv.a"; sourceTree = "<group>"; };
+		BF3E420F0BAC04F1004B9507 /* widelands-libintl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libintl.a"; path = "build/copied_libs/widelands-libintl.a"; sourceTree = "<group>"; };
+		BF3E42100BAC04F1004B9507 /* widelands-libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libjpeg.a"; path = "build/copied_libs/widelands-libjpeg.a"; sourceTree = "<group>"; };
+		BF3E42110BAC04F1004B9507 /* widelands-libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libogg.a"; path = "build/copied_libs/widelands-libogg.a"; sourceTree = "<group>"; };
+		BF3E42120BAC04F1004B9507 /* widelands-libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libpng.a"; path = "build/copied_libs/widelands-libpng.a"; sourceTree = "<group>"; };
+		BF3E42130BAC04F1004B9507 /* widelands-libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libvorbis.a"; path = "build/copied_libs/widelands-libvorbis.a"; sourceTree = "<group>"; };
+		BF3E42140BAC04F1004B9507 /* widelands-libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libvorbisfile.a"; path = "build/copied_libs/widelands-libvorbisfile.a"; sourceTree = "<group>"; };
+		BF3E42150BAC04F1004B9507 /* widelands-libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "widelands-libz.a"; path = "build/copied_libs/widelands-libz.a"; sourceTree = "<group>"; };
 		BF76C7840B9B7C75003E2C5A /* widelands.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = widelands.icns; sourceTree = "<group>"; };
 		BF76C9620B9B8FB6003E2C5A /* pics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pics; path = ../pics; sourceTree = SOURCE_ROOT; };
 		BF77192E0A87E60300181633 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = ChangeLog; path = ../ChangeLog; sourceTree = SOURCE_ROOT; };
@@ -1370,6 +827,11 @@
 		BF7960CC0B9B919D003694AF /* tribes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tribes; path = ../tribes; sourceTree = SOURCE_ROOT; };
 		BF7986940B9B91BC003694AF /* txts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = txts; path = ../txts; sourceTree = SOURCE_ROOT; };
 		BF79869B0B9B91BC003694AF /* worlds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = worlds; path = ../worlds; sourceTree = SOURCE_ROOT; };
+		BF800F630BAC1B2800ADE70F /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/ManuallyInstalled/SDL_image.framework; sourceTree = "<absolute>"; };
+		BF800F640BAC1B2800ADE70F /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/ManuallyInstalled/SDL_mixer.framework; sourceTree = "<absolute>"; };
+		BF800F650BAC1B2800ADE70F /* SDL_net.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_net.framework; path = /Library/Frameworks/ManuallyInstalled/SDL_net.framework; sourceTree = "<absolute>"; };
+		BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/ManuallyInstalled/SDL_ttf.framework; sourceTree = "<absolute>"; };
+		BF800F670BAC1B2800ADE70F /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/ManuallyInstalled/SDL.framework; sourceTree = "<absolute>"; };
 		BFA98F270B4F01D900FB5075 /* attack_controller.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = attack_controller.cc; sourceTree = "<group>"; };
 		BFA98F280B4F01D900FB5075 /* attack_controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = attack_controller.h; sourceTree = "<group>"; };
 		BFA98F290B4F01D900FB5075 /* cmd_check_eventchain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cmd_check_eventchain.h; sourceTree = "<group>"; };
@@ -1430,25 +892,25 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8D11072E0486CEB800E47090 /* Frameworks */ = {
+		BF3E418B0BABFE9B004B9507 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				BF22DF810A5FB78F00D0292B /* SDL_image.framework in Frameworks */,
-				BF22DF850A5FB79900D0292B /* SDL_ttf.framework in Frameworks */,
-				BF22DF8D0A5FB7A900D0292B /* SDL_net.framework in Frameworks */,
-				BF22DF910A5FB7BE00D0292B /* SDL_mixer.framework in Frameworks */,
-				BF22DF990A5FB7F200D0292B /* libz.a in Frameworks */,
-				BF22DF9B0A5FB80900D0292B /* libpng.a in Frameworks */,
-				BF22DFA00A5FBC2B00D0292B /* libintl.a in Frameworks */,
-				BF22DFC80A5FBFBC00D0292B /* SDL.framework in Frameworks */,
-				BF22E2D40A5FEEDB00D0292B /* libfreetype.a in Frameworks */,
-				BF22E2EC0A5FFA4500D0292B /* libiconv.a in Frameworks */,
-				BF22E2ED0A5FFA4600D0292B /* libjpeg.a in Frameworks */,
-				BF22E2EE0A5FFA4600D0292B /* libvorbis.a in Frameworks */,
-				BF22E2F20A5FFAB600D0292B /* libogg.a in Frameworks */,
-				BF22E2F30A5FFAB600D0292B /* libvorbisfile.a in Frameworks */,
+				BF3E41A50BABFF20004B9507 /* Cocoa.framework in Frameworks */,
+				BF3E42220BAC052E004B9507 /* widelands-libfreetype.a in Frameworks */,
+				BF3E42230BAC052E004B9507 /* widelands-libiconv.a in Frameworks */,
+				BF3E42240BAC052E004B9507 /* widelands-libintl.a in Frameworks */,
+				BF3E42250BAC052E004B9507 /* widelands-libjpeg.a in Frameworks */,
+				BF3E42260BAC052E004B9507 /* widelands-libogg.a in Frameworks */,
+				BF3E42270BAC052E004B9507 /* widelands-libpng.a in Frameworks */,
+				BF3E42280BAC052E004B9507 /* widelands-libvorbis.a in Frameworks */,
+				BF3E42290BAC052E004B9507 /* widelands-libvorbisfile.a in Frameworks */,
+				BF3E422A0BAC052E004B9507 /* widelands-libz.a in Frameworks */,
+				BF800FA20BAC1B2800ADE70F /* SDL_image.framework in Frameworks */,
+				BF800FA30BAC1B2800ADE70F /* SDL_mixer.framework in Frameworks */,
+				BF800FA40BAC1B2800ADE70F /* SDL_net.framework in Frameworks */,
+				BF800FA50BAC1B2800ADE70F /* SDL_ttf.framework in Frameworks */,
+				BF800FA60BAC1B2800ADE70F /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,11 +929,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BF22DFC70A5FBFBC00D0292B /* SDL.framework */,
-				BF22DF900A5FB7BE00D0292B /* SDL_mixer.framework */,
-				BF22DF8C0A5FB7A900D0292B /* SDL_net.framework */,
-				BF22DF840A5FB79900D0292B /* SDL_ttf.framework */,
-				BF22DF800A5FB78F00D0292B /* SDL_image.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -1533,6 +990,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF800F630BAC1B2800ADE70F /* SDL_image.framework */,
+				BF800F640BAC1B2800ADE70F /* SDL_mixer.framework */,
+				BF800F650BAC1B2800ADE70F /* SDL_net.framework */,
+				BF800F660BAC1B2800ADE70F /* SDL_ttf.framework */,
+				BF800F670BAC1B2800ADE70F /* SDL.framework */,
 				BF22DF970A5FB7D400D0292B /* Libraries */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
@@ -2126,15 +1588,15 @@
 		BF22DF970A5FB7D400D0292B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				BF22E2F00A5FFAB600D0292B /* libogg.a */,
-				BF22E2F10A5FFAB600D0292B /* libvorbisfile.a */,
-				BF22E2E90A5FFA4500D0292B /* libiconv.a */,
-				BF22E2EA0A5FFA4500D0292B /* libjpeg.a */,
-				BF22E2EB0A5FFA4500D0292B /* libvorbis.a */,
-				BF22E2D30A5FEEDA00D0292B /* libfreetype.a */,
-				BF22DF9F0A5FBC2B00D0292B /* libintl.a */,
-				BF22DF9A0A5FB80900D0292B /* libpng.a */,
-				BF22DF980A5FB7F200D0292B /* libz.a */,
+				BF3E420F0BAC04F1004B9507 /* widelands-libintl.a */,
+				BF3E420E0BAC04F1004B9507 /* widelands-libiconv.a */,
+				BF3E420D0BAC04F1004B9507 /* widelands-libfreetype.a */,
+				BF3E42100BAC04F1004B9507 /* widelands-libjpeg.a */,
+				BF3E42110BAC04F1004B9507 /* widelands-libogg.a */,
+				BF3E42120BAC04F1004B9507 /* widelands-libpng.a */,
+				BF3E42130BAC04F1004B9507 /* widelands-libvorbis.a */,
+				BF3E42140BAC04F1004B9507 /* widelands-libvorbisfile.a */,
+				BF3E42150BAC04F1004B9507 /* widelands-libz.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -2149,17 +1611,46 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		BF800DA00BAC114900ADE70F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF800FA90BAC1B5200ADE70F /* SDL_image.framework in Headers */,
+				BF800FAA0BAC1B5200ADE70F /* SDL_mixer.framework in Headers */,
+				BF800FAB0BAC1B5200ADE70F /* SDL_net.framework in Headers */,
+				BF800FAC0BAC1B5200ADE70F /* SDL_ttf.framework in Headers */,
+				BF800FAD0BAC1B5200ADE70F /* SDL.framework in Headers */,
+				BF800DA60BAC115900ADE70F /* AppKit.framework in Headers */,
+				BF800DA70BAC115900ADE70F /* Cocoa.framework in Headers */,
+				BF800DA80BAC115900ADE70F /* Foundation.framework in Headers */,
+				BF800DAE0BAC115900ADE70F /* widelands-libfreetype.a in Headers */,
+				BF800DAF0BAC115900ADE70F /* widelands-libiconv.a in Headers */,
+				BF800DB00BAC115900ADE70F /* widelands-libintl.a in Headers */,
+				BF800DB10BAC115900ADE70F /* widelands-libjpeg.a in Headers */,
+				BF800DB20BAC115900ADE70F /* widelands-libogg.a in Headers */,
+				BF800DB30BAC115900ADE70F /* widelands-libpng.a in Headers */,
+				BF800DB40BAC115900ADE70F /* widelands-libvorbis.a in Headers */,
+				BF800DB50BAC115900ADE70F /* widelands-libvorbisfile.a in Headers */,
+				BF800DB60BAC115900ADE70F /* widelands-libz.a in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		8D1107260486CEB800E47090 /* Widelands */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Widelands" */;
 			buildPhases = (
-				BFF9FAA00AC1BB3600E1B7CB /* ShellScript */,
-				BF76C87B0B9B8D7B003E2C5A /* ShellScript */,
+				BFF9FAA00AC1BB3600E1B7CB /* Create config.h */,
+				BF76C87B0B9B8D7B003E2C5A /* Create BUILDID */,
+				BF3E41E90BAC01C7004B9507 /* Copy static libs */,
+				BF800DA00BAC114900ADE70F /* Headers */,
+				BF800FA70BAC1B3800ADE70F /* CopyFiles */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D1107290486CEB800E47090 /* Resources */,
-				8D11072E0486CEB800E47090 /* Frameworks */,
-				002F39FD09D0883400EBEB88 /* Copy Frameworks into .app bundle */,
+				BF3E418B0BABFE9B004B9507 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2212,13 +1703,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BF76C87B0B9B8D7B003E2C5A /* ShellScript */ = {
+		BF3E41E90BAC01C7004B9507 /* Copy static libs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				/opt/local/lib/libz.a,
+				/opt/local/lib/libpng.a,
+				/opt/local/lib/libintl.a,
+				/opt/local/lib/libfreetype.a,
+				/opt/local/lib/libvorbis.a,
+				/opt/local/lib/libjpeg.a,
+				/opt/local/lib/libiconv.a,
+				/opt/local/lib/libvorbisfile.a,
+				/opt/local/lib/libogg.a,
+			);
+			name = "Copy static libs";
+			outputPaths = (
+				"$(PROJECT_DIR)/copied_libs/widelands-libogg.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libvorbisfile.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libiconv.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libjpeg.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libvorbis.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libfreetype.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libintl.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libpng.a",
+				"$(PROJECT_DIR)/copied_libs/widelands-libz.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Copy static libs from /opt/local/lib to our local lib, renaming them on the way to FORCE Xcode to do \n# static linking. This sucks, but there seems to be no other way (Other projects came to the same conclusion, see Wesnoth for\n# example)\n\nmkdir -p $PROJECT_DIR/build/copied_libs/\n\nfor i in libogg.a libvorbisfile.a libiconv.a libjpeg.a libvorbis.a libfreetype.a libintl.a libpng.a libz.a libSDL.a libSDL_gfx.a libSDL_mixer.a libSDL_sound.a libSDLmain.a libSDL_Pango.a libSDL_image.a libSDL_net.a libSDL_ttf.a;\n\tdo test -f $PROJECT_DIR/build/copied_libs/widelands-$i || cp /opt/local/lib/$i $PROJECT_DIR/build/copied_libs/widelands-$i &&\n\t\tranlib $PROJECT_DIR/build/copied_libs/widelands-$i;\ndone";
+		};
+		BF76C87B0B9B8D7B003E2C5A /* Create BUILDID */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Create BUILDID";
 			outputPaths = (
 				"$(PROJECT_DIR)/../src/build_id.h",
 			);
@@ -2226,13 +1750,14 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\n\n# This script creates a valid build_id.h file. This is recreated on every compile, not like config.h\nPATH=$PATH:/opt/local/bin:/sw/bin/:/usr/local/bin\n\n\nBUILDID=`cd .. && ./build/scons-tools/detect_revision.py` \nSRCDIR=$PROJECT_DIR/../src/\n\ncat > $SRCDIR/build_id.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef BUILD_ID_H\n#define BUILD_ID_H\n\n#define BUILD_ID \"$BUILDID\"\n\n#endif\n\nEOF";
 		};
-		BFF9FAA00AC1BB3600E1B7CB /* ShellScript */ = {
+		BFF9FAA00AC1BB3600E1B7CB /* Create config.h */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Create config.h";
 			outputPaths = (
 				"$(PROJECT_DIR)/../src/config.h",
 			);
@@ -2515,7 +2040,13 @@
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/ManuallyInstalled\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/ManuallyInstalled\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = "";
@@ -2531,7 +2062,15 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_3)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/copied_libs\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/build/copied_libs\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/build/copied_libs\"";
 				PRODUCT_NAME = Widelands;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SEPARATE_STRIP = YES;
@@ -2544,9 +2083,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/ManuallyInstalled\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/ManuallyInstalled\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/SDL.framework/Headers,
 					/Library/Frameworks/SDL_image.framework/Headers,
@@ -2561,7 +2108,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/local/lib,
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_3)",
 				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/copied_libs\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/build/copied_libs\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/build/copied_libs\"";
 				PRODUCT_NAME = Widelands;
 				SEPARATE_STRIP = YES;
 				WRAPPER_EXTENSION = app;
@@ -2574,15 +2127,12 @@
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/ManuallyInstalled,
 					/Library/Frameworks,
-					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Library/Frameworks/SDL.framework/Headers,
-					"$(HEADER_SEARCH_PATHS)",
-				);
+				HEADER_SEARCH_PATHS = "";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(inherited)",
 					"-DDEBUG\n",
@@ -2598,8 +2148,8 @@
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/ManuallyInstalled,
 					/Library/Frameworks,
-					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = "";
@@ -2607,10 +2157,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Library/Frameworks/SDL.framework/Headers,
-					"$(HEADER_SEARCH_PATHS)",
-				);
+				HEADER_SEARCH_PATHS = "";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
