@@ -3,7 +3,7 @@ descname=_ Marble Mine
 type=production
 size=mine
 buildable=yes
-buildicon=build.png
+buildicon=marblemine_build.png
 worker=miner
 program=work
 program=prog_marble
@@ -51,13 +51,13 @@ trunk=4
 wood=2
 
 [idle]
-pics=i_??.png
-hotspot=53 64
+pics=marblemine_i_??.png
+hotspot=47 61
 
 [working]
-pics=w_??.png
-hotspot=53 64
+pics=marblemine_i_??.png
+hotspot=47 61
 
 [build]
-pics=i_??.png
-hotspot=53 64
+pics=marblemine_build.png
+hotspot=47 61
