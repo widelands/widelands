@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-01-02 14:30+0100\n"
+"PO-Revision-Date: 2007-03-19 20:33+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,6 @@ msgid "Gold Mine"
 msgstr "Aranybánya"
 
 #: ../tribes/barbarians/buildings/granitemine/conf:2
-#, fuzzy
 msgid "Granite Mine"
 msgstr "Gránitbánya"
 
@@ -256,6 +255,8 @@ msgid ""
 "produce. Only trained warriors are able to yield such a weapon. It is "
 "produce in the Axefactory."
 msgstr ""
+"Ez a második legveszélyesebb fegyver amit a barbárok elő tudnak állítani. "
+"Csak képzett harcosok tudják használni. A fejszekészítő műhelyben készül."
 
 #: ../tribes/barbarians/wares/beer/conf:2
 msgid "Beer"
@@ -291,7 +292,7 @@ msgid ""
 "produced in the axefactory."
 msgstr ""
 "Az alap harci képzettségű harcosok kapnak egy nagy fejszét, amit a "
-"fejleszkészítő készít a harcosoknak."
+"fejszekészítő készít a harcosoknak."
 
 #: ../tribes/barbarians/wares/bronzeaxe/conf:2
 msgid "Bronze Axe"
@@ -304,8 +305,8 @@ msgid ""
 "this. Produced in the axefactory."
 msgstr ""
 "A bronzfejszét nehezen használható fegyvernek tartják, nagy kárt tud tenni, "
-"de nehezen kezelhető. Csak ügyes harcosok tudják használni. A fejeszekészítő "
-"készíti."
+"de nehezen kezelhető. Csak ügyes harcosok tudják használni. A fejszekészítő "
+"műhelyében készül."
 
 #: ../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
@@ -349,7 +350,7 @@ msgid ""
 "Produced in the metalworks."
 msgstr ""
 "A fogó a vasolvasztó mester eszköze. A többi szerszámhoz hasonlóan ezt is a "
-"szerszámkovács készíti."
+"szerszámkovács műhelyben készül."
 
 #: ../tribes/barbarians/wares/fish/conf:2
 msgid "Fish"
@@ -421,8 +422,8 @@ msgid ""
 "reserve! Build at the metalworks."
 msgstr ""
 "A kalapács nagyon fontos eszköz. A geológusok, munkások, a szerszámkovács és "
-"a sisak készítőis használja. Figyelj oda, hogy mindig legyen belőle pár "
-"tartalékban. A szerszámkovács készíti el."
+"a sisak készítő is használja. Figyelj oda, hogy mindig legyen belőle pár "
+"tartalékban. A szerszámkovács műhelyében készül."
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
@@ -525,9 +526,8 @@ msgid "Ration"
 msgstr "Szendvics"
 
 #: ../tribes/barbarians/wares/ration/conf:3
-#, fuzzy
 msgid "A small bite to keep miners strong and working."
-msgstr "Ez a kis falat kenyér segít a bányászoknak a munkában."
+msgstr "Ez a kis falat kenyér erőssé teszi a bányászokat és segít a munkában."
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
@@ -557,6 +557,9 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axefactory."
 msgstr ""
+"A valódi harcosok az éles fejszét tartják az első komoly fegyvernek, miután "
+"tudják használni a közönséges fejszét kapnak egy ilyet. Nehezebb és élesebb "
+"mint a közönséges fejsze. A fejszekészítő műhelyben készítik."
 
 #: ../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
@@ -576,7 +579,7 @@ msgstr "Étel"
 
 #: ../tribes/barbarians/wares/snack/conf:3
 msgid "A bit bigger, for the advanced minors will need a big morsel."
-msgstr ""
+msgstr "Egy kicsit nagyobb adagokra van szüksége a jobb bányászoknak."
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
@@ -587,7 +590,7 @@ msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
 "of the barbarians is in this ale."
 msgstr ""
-"Csak ez a sör elfogadható az öreg harcosoknak. Azt mondják a berbárok minden "
+"Csak ez a sör elfogadható az öreg harcosoknak. Azt mondják a barbárok minden "
 "ereje ebben a világos sörben van."
 
 #: ../tribes/barbarians/wares/thatchreed/conf:2
@@ -595,7 +598,6 @@ msgid "Thatch Reed"
 msgstr "Nádtető"
 
 #: ../tribes/barbarians/wares/thatchreed/conf:3
-#, fuzzy
 msgid "Thatcher Reed is used to make roofs of buildings waterproof."
 msgstr "A nádtető vízállóvá teszi az épülteket."
 
@@ -613,7 +615,7 @@ msgstr "Harci sisak"
 
 #: ../tribes/barbarians/wares/warhelmet/conf:3
 msgid "An enhanced mask, for barbarian warriors."
-msgstr ""
+msgstr "Egy továbbfejlesztett maszk, a barbár harcosoknak."
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
 msgid "Warriors Axe"
@@ -625,6 +627,9 @@ msgid ""
 "ever were able to handle those huge and powerfull axes. Build at the "
 "axefactory."
 msgstr ""
+"A harci fejsze az összes közül a legveszedelmesebb fegyver. Csak néhány "
+"harcos lesz valaha is képes használni ezeket a hatalmas és erős fejszéket. A "
+"fejszekészítő műhelyben készülnek."
 
 #: ../tribes/barbarians/wares/water/conf:2
 msgid "Water"
@@ -643,7 +648,6 @@ msgid "Wheat"
 msgstr "Búza"
 
 #: ../tribes/barbarians/wares/wheat/conf:3
-#, fuzzy
 msgid ""
 "Wheat is essential for surviving, good bread and strong ales can be made of "
 "this wheat."

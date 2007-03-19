@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: campaign_t02_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-12-27 18:32+0100\n"
+"PO-Revision-Date: 2007-03-19 21:38+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,7 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:754 ../campaigns/t02.wmf/event:770
 #: ../campaigns/t02.wmf/event:786
 msgid "Advisor"
-msgstr ""
+msgstr "Tanácsadó"
 
 #: ../campaigns/t02.wmf/event:514
 msgid "Khantrukh joins the both of you"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:529
 msgid "Boldreth jumps up."
-msgstr ""
+msgstr "Boldreth felugrik."
 
 #: ../campaigns/t02.wmf/event:531
 msgid ""
@@ -315,7 +315,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:637
 msgid "The elder laughs..."
-msgstr ""
+msgstr "Az öreg nevet..."
 
 #: ../campaigns/t02.wmf/event:639
 msgid ""

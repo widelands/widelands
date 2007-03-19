@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: maps_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-03-03 22:15+0100\n"
+"PO-Revision-Date: 2007-03-19 20:49+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Nyugalom tava"
 
 #: ../maps/Lake of tranquility.wmf/elemental:11
 msgid ""
@@ -136,7 +136,7 @@ msgstr ""
 
 #: ../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr "A zöld fennsík"
+msgstr "A Zöld fennsík"
 
 #: ../maps/Plateau.wmf/elemental:11
 msgid ""
@@ -145,10 +145,13 @@ msgid ""
 "hard to get, but easy to lose, so if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Egy hatalmas hegyekkel zsúfolt szigeten állsz, ami felbecsülhetetlen és "
+"mitikus kincset rejt a közepén - A Zöld Fennsíkot, amit nehéz meghódítani, "
+"de könnyű elveszíteni. Ha meg akarod szerezni figyelj oda a többi klánra."
 
 #: ../maps/Riverlands.wmf/elemental:9
 msgid "Riverlands"
-msgstr ""
+msgstr "Folyamvidék"
 
 #: ../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
@@ -160,6 +163,9 @@ msgid ""
 "which noone found out, yet. Perhaps you will be the one, but be aware of the "
 "others, who are searching, too!"
 msgstr ""
+"Van valami misztikus, borongós atmoszféra itt a három Oázisnál, amit még "
+"senki sem talált meg. Talán te leszel az első, de légy elővigyázatos, mások "
+"is keresik!"
 
 #: ../maps/The big lake.wmf/elemental:9
 msgid "The big lake"

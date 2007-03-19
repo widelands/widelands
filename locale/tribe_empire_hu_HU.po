@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tribe_empire_hu_HU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-01-21 17:22+0100\n"
+"PO-Revision-Date: 2007-03-19 20:31+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -247,7 +247,7 @@ msgid ""
 "produced by the carpenter."
 msgstr ""
 "Minden péknek szüksége van egy saját kenyérsütőlapátra, ezt a szerszámkovács "
-"készíti el."
+"készíti."
 
 #: ../tribes/empire/wares/basket/conf:2
 msgid "Basket"
@@ -259,7 +259,7 @@ msgid ""
 "is produced by the carpenter."
 msgstr ""
 "A bortermelőnek szüksége van erre a kosárra, hogy összegyűjtse a szőlőt. A "
-"többi szerszámhoz hasonlóan ezt is a szerszámkovács készíti."
+"többi szerszámhoz hasonlóan ezt is a szerszámkovács készíti el."
 
 #: ../tribes/empire/wares/beer/conf:2
 msgid "Beer"
@@ -356,7 +356,7 @@ msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the carpenter."
 msgstr ""
 "A halásznak szüksége van horgászbotra, hogy halat tudjon fogni. A "
-"szerszámkészítő készíti el."
+"szerszámkészítő műhelyében készül."
 
 #: ../tribes/empire/wares/flour/conf:2
 msgid "Flour"
@@ -406,7 +406,7 @@ msgid ""
 msgstr ""
 "A kalapács nagyon fontos eszköz. A geológusok, munkások és a szerszámkovács "
 "is használja. Figyelj oda, hogy mindig legyen belőle pár tartalékban. A "
-"szerszámkovács készíti el."
+"szerszámkovács műhelyében készül."
 
 #: ../tribes/empire/wares/heavy_lance/conf:2
 msgid "Heavy Lance"
@@ -522,7 +522,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "carpenter."
 msgstr ""
-"Csákányt a kőfaragók és a bányászok használják. A szerszámkovács készíti el."
+"Csákányt a kőfaragók és a bányászok használják. A szerszámkovács műhelyében "
+"készül."
 
 #: ../tribes/empire/wares/plate_armour/conf:2
 msgid "Plate-Armour"
@@ -558,7 +559,8 @@ msgstr "Kasza"
 
 #: ../tribes/empire/wares/scythe/conf:3
 msgid "The Scythe is the tool of the farmers. It is produced by the carpenter."
-msgstr "A kasza a farmerek legfontosabb eszköze. A szerszámkészítő készíti el."
+msgstr ""
+"A kasza a farmerek legfontosabb eszköze. A szerszámkészítő műhelyében készül."
 
 #: ../tribes/empire/wares/shovel/conf:2
 msgid "Shovel"
@@ -570,7 +572,7 @@ msgid ""
 "use it. It is produced by the carpenter."
 msgstr ""
 "A lapát fontos a növények ültetéséhez, ezért minden erdésznek szüksége van "
-"egyre. A szerszámkovács készíti el."
+"egyre. A szerszámkovács műhelyében készül."
 
 #: ../tribes/empire/wares/stone/conf:2
 msgid "Stones"
