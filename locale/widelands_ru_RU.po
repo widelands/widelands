@@ -9,18 +9,17 @@ msgstr ""
 "Project-Id-Version: widelands_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-07 19:56+0100\n"
-"PO-Revision-Date: 2007-03-11 01:54+0500\n"
+"PO-Revision-Date: 2007-03-17 02:12+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Poedit-SearchPath-0: /home/rombal/PoeditBase\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/building_statistics_menu.cc:54
 msgid "Building Statistics"
@@ -79,7 +78,7 @@ msgstr "Перейти к неработающему:"
 
 #: ../src/building_ui.cc:148
 msgid "Destroy building?"
-msgstr "Уничтожить строение?"
+msgstr "Разрушить здание?"
 
 #: ../src/building_ui.cc:162
 msgid "Do you really want to destroy this "
@@ -92,7 +91,7 @@ msgstr "?"
 #: ../src/building_ui.cc:639 ../src/event_message_box.cc:48
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:54
 msgid "Continue"
-msgstr "Продолжить"
+msgstr "Далее"
 
 #: ../src/building_ui.cc:639
 msgid "Stop"
@@ -173,7 +172,7 @@ msgstr "Режим тренировки:"
 
 #: ../src/building_ui.cc:1645
 msgid "Balanced"
-msgstr "Сбалансировано"
+msgstr "Оптимально"
 
 #: ../src/building_ui.cc:1674
 msgid "Hit Points"
@@ -197,7 +196,7 @@ msgstr "Создать героев"
 
 #: ../src/building_ui.cc:1772
 msgid "Balanced army"
-msgstr "Сбалансированая армия"
+msgstr "Оптимальная армия"
 
 #: ../src/building_ui.cc:1919
 msgid "xx"
@@ -265,7 +264,7 @@ msgstr "Передвинуть обзор"
 
 #: ../src/event_set_null_trigger.cc:39
 msgid "Set Null Trigger"
-msgstr "Установить нулевой тригер"
+msgstr "Установить нуль тригер"
 
 #: ../src/fieldaction.cc:275
 msgid "Action"
@@ -335,7 +334,7 @@ msgstr "Общение"
 #: ../src/game_main_menu.cc:98 ../src/game_options_menu.cc:46
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
 msgid "Options"
-msgstr "Настройка"
+msgstr "Настройки"
 
 #: ../src/game_main_menu_load_game.cc:43
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
@@ -402,7 +401,7 @@ msgstr "Файл с таким именем"
 
 #: ../src/game_main_menu_save_game.cc:233
 msgid " already exists. Overwrite?"
-msgstr "уже существует. Переписать?"
+msgstr "уже существует. Перезаписать?"
 
 #: ../src/game_main_menu_save_game.cc:235
 #: ../src/game_main_menu_save_game.cc:255
@@ -417,7 +416,7 @@ msgid ""
 "Reason given:\n"
 msgstr ""
 "Ошибка записи игры!\n"
-"Сохраненный файл может быть поврежден!\n"
+"Сохраненный файл может быть повреждён!\n"
 "\n"
 "Причина:\n"
 
@@ -571,7 +570,7 @@ msgstr "Миникарта"
 
 #: ../src/interactive_player.cc:119 ../src/editor/editorinteractive.cc:100
 msgid "Buildhelp"
-msgstr "Достроить"
+msgstr "Возможности строительства"
 
 #: ../src/interactive_player.cc:127
 msgid "Tribe's ware encyclopedia"
@@ -750,7 +749,7 @@ msgstr "Не работает"
 
 #: ../src/trigger_building.cc:38
 msgid "Building Trigger"
-msgstr "Тригер строения"
+msgstr "Тригер здания"
 
 #: ../src/trigger_building.cc:40
 msgid "<unset>"
@@ -758,11 +757,11 @@ msgstr "<unset>"
 
 #: ../src/trigger_null.cc:31
 msgid "Null Trigger"
-msgstr "Нулевой тригер"
+msgstr "Нуль триггер"
 
 #: ../src/trigger_time.cc:34
 msgid "Time Trigger"
-msgstr "Временной тригер"
+msgstr "Триггер времени"
 
 #: ../src/ware.cc:71 ../src/worker.cc:1550
 msgid "Doh... someone forgot the help text!"
@@ -778,7 +777,7 @@ msgstr "Следовать"
 
 #: ../src/watchwindow.cc:124
 msgid "Center mainview on this"
-msgstr "Центрировать экран по этому"
+msgstr "Центрировать экран на  этом"
 
 #: ../src/watchwindow.cc:142
 #: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:37
@@ -876,9 +875,8 @@ msgid "Has base immovable"
 msgstr "Нельзя передвинуть"
 
 #: ../src/editor/tools/editor_info_tool.cc:79
-#, fuzzy
 msgid "Has bobs"
-msgstr "Имеются bobs"
+msgstr "Имеет Доп.об."
 
 #: ../src/editor/tools/editor_info_tool.cc:85
 msgid "Has resources: Yes"
@@ -950,7 +948,7 @@ msgstr "5) Информация о Мире"
 
 #: ../src/editor/tools/editor_info_tool.cc:145
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
-msgstr " СДЕЛАТЬ - Больше информации (Число bobs/число товаров...)\n"
+msgstr " СДЕЛАТЬ - Больше информации (Число Доп.объектов/число товаров...)\n"
 
 #: ../src/editor/ui_menus/editor_tool_menu.cc:44
 msgid "Tool Menu"
@@ -959,12 +957,12 @@ msgstr "Меню инструментов"
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
 #: ../src/editor/ui_menus/editor_event_menu.cc:157
 msgid "New Trigger"
-msgstr "Нов. Тригер"
+msgstr "Нов.Триггер"
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:176
 msgid "Available Triggers: "
-msgstr "Готовые Тригеры: "
+msgstr "Готовые Триггеры: "
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:59
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:60
@@ -1064,7 +1062,8 @@ msgid ""
 "bobs, triggers and events that depend on this player and try again"
 msgstr ""
 "Не могу удалить игрока. На него ссылаются из другого места. Удалите все "
-"строения, bobs, триггеры и события, зависящие от этого игрока и повторите"
+"строения, доп.объекты, триггеры и события, зависящие от этого игрока и "
+"повторите"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:328
 msgid ""
@@ -1072,11 +1071,12 @@ msgid ""
 "buildings, bobs, triggers and events that depend on this tribe and try again"
 msgstr ""
 "Не могу изменить племя игрока. На него ссылаются из другого места. Удалите "
-"все строения, bobs, тригеры и события, зависящие от этого игрока и повторите"
+"все строения, доп.объекты, триггеры и события, зависящие от этого игрока и "
+"повторите"
 
 #: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
 msgid "Immovable Bobs Menu"
-msgstr "Не перемещаемое меню Bobs"
+msgstr "Не перемещаемое меню Дополнительных объектов"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:56
 msgid "Event Menu"
@@ -1092,11 +1092,11 @@ msgstr "Список событий:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:81
 msgid "Registered Triggers"
-msgstr "Список Тригеров"
+msgstr "Список Триггеров"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:94
 msgid "New Event Chain"
-msgstr "Нов. цеп. событий"
+msgstr "Нов.цеп.соб."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../src/editor/ui_menus/editor_event_menu.cc:134
@@ -1104,19 +1104,19 @@ msgstr "Нов. цеп. событий"
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:199
 #: ../src/editor/ui_menus/editor_variables_menu.cc:285
 msgid "Edit"
-msgstr "Редактировать"
+msgstr "Изм."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:114
 #: ../src/editor/ui_menus/editor_event_menu.cc:145
 #: ../src/editor/ui_menus/editor_event_menu.cc:177
 msgid "Del"
-msgstr "Удалить"
+msgstr "Удал."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:125
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
 msgid "New Event"
-msgstr "Нов. событие"
+msgstr "Нов.соб."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:274
 msgid "Can't delete Event. It is in use by "
@@ -1124,7 +1124,7 @@ msgstr "Не могу удалить событие. Оно использует
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:319
 msgid "Can't delete Trigger. It is in use by "
-msgstr "Не могу удалить Тригер. Он используется "
+msgstr "Не могу удалить Триггер. Он используется "
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:357
 #: ../src/editor/ui_menus/editor_event_menu.cc:365
@@ -1134,7 +1134,7 @@ msgstr "Без названия"
 
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:34
 msgid "Trigger Option Menu"
-msgstr "Меню настройки Тригера"
+msgstr "Настройка Триггера"
 
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:56
 #: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
@@ -1187,7 +1187,7 @@ msgstr "Отобразить в начале:"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:89
 msgid "Optional Objective: "
-msgstr "Необязательно задание: "
+msgstr "Необязательное задание: "
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:95
 msgid "Objective text: "
@@ -1209,11 +1209,11 @@ msgstr "Назад"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:177
 msgid "Optional"
-msgstr "Не обязательно"
+msgstr "Необяз."
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:178
 msgid "Visible"
-msgstr "Отобразить"
+msgstr "Отобр."
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:190
 #: ../src/editor/ui_menus/editor_variables_menu.cc:278
@@ -1229,7 +1229,7 @@ msgstr "Удалить"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:217
 msgid "Trigger: "
-msgstr "Тригер: "
+msgstr "Триггер: "
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:254
 #, c-format
@@ -1238,7 +1238,7 @@ msgstr "Без названия%u"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:284
 msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "Не могу удалить задание, потому что его тригер используется "
+msgstr "Не могу удалить задание, потому что его триггер используется "
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:41
 msgid "Resources Tools Options"
@@ -1247,12 +1247,12 @@ msgstr "Настройки Ресурсов"
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:46
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:42
 msgid "In-/Decrease Value"
-msgstr "Увеличить/Уменьшить значение"
+msgstr "Больше/Меньше"
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:76
 msgid "Set Value"
-msgstr "Установить значение"
+msgstr "Задать значение"
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:106
 msgid "Current Selection"
@@ -1334,7 +1334,7 @@ msgstr "Введите Имя Каталога"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:36
 msgid "Toolsize Menu"
-msgstr "Меню размера инструментов"
+msgstr "Размер инструментов"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:56
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:79
@@ -1348,11 +1348,11 @@ msgstr "Настройки событий окна обзора"
 
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
 msgid "Null Trigger Options"
-msgstr "Настройки нулевого тригера"
+msgstr "Опции нуль триггера"
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:60
 msgid "New Variable"
-msgstr "Новая переменная"
+msgstr "Нов. перем."
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:72
 msgid "Integer"
@@ -1364,7 +1364,7 @@ msgstr "Строка"
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:162
 msgid "Edit Variable"
-msgstr "Редактировать Переменную"
+msgstr "Изменить переменную"
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:171
 #: ../src/editor/ui_menus/editor_variables_menu.cc:301
@@ -1381,7 +1381,7 @@ msgstr "Грамматическая ошибка!"
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:267
 msgid "Variables Menu"
-msgstr "Меню переменных"
+msgstr "Переменные"
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:300
 msgid "Variable"
@@ -1425,7 +1425,7 @@ msgstr "Имя кнопки: "
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:120
 msgid "Select Trigger: "
-msgstr "Выбрать Тригер: "
+msgstr "Выбрать Триггер: "
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:138
 msgid "Current: "
@@ -1433,11 +1433,11 @@ msgstr "Текущий: "
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:139
 msgid "No trigger selected!"
-msgstr "Нет выбранных тригеров!"
+msgstr "Нет выбранных триггеров!"
 
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:39
 msgid "Building Trigger Options"
-msgstr "Настройки Тригера строения"
+msgstr "Настройки Триггера строения"
 
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:96
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:96
@@ -1525,13 +1525,12 @@ msgid "Create Map"
 msgstr "Создать Карту"
 
 #: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
-#, fuzzy
 msgid "Bobs Menu"
-msgstr "Меню Bobs"
+msgstr "Дополнительные объекты"
 
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
-msgstr "Настройки инструментов высоты"
+msgstr "Инструменты высоты"
 
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:37
 msgid "Noise Height Options"
@@ -1562,11 +1561,11 @@ msgstr "Разрешить строение: "
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:39
 msgid "Edit Trigger Conditional"
-msgstr "Редактировать условный Тригер"
+msgstr "Изменить Триггер Условий"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:53
 msgid "Trigger Conditional: "
-msgstr "Условный Тригер: "
+msgstr "Триггер Условий: "
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:69
 msgid "("
@@ -1586,7 +1585,7 @@ msgstr "ИЛИ"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:117
 msgid "XOR"
-msgstr "ИСКЛ_ИЛИ"
+msgstr "X-ИЛИ"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:129
 msgid "NOT"
@@ -1617,7 +1616,7 @@ msgstr "Доступные строения: "
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
 msgid "Forbidden Buildings:"
-msgstr "Запрещенные строения: "
+msgstr "Запрещённые строения: "
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:86
 msgid "Forbid"
@@ -1669,7 +1668,7 @@ msgstr "Использовать оконный режим "
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
 msgid "Show buildings area preview"
-msgstr "Показать предпросмотр зоны строений"
+msgstr "Предпросмотр зоны строений"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:103
 msgid "Snap windows only when overlapping"
@@ -1833,22 +1832,22 @@ msgstr "(C) 2002-2007 Команда разработчиков Widelands "
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
-msgstr "Lobby "
+msgstr "Лобби"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
 #, c-format
 msgid "User %s is using \"%s\" in room \"%s\"\n"
-msgstr "Пользователь %s использует  \"%s\" под записью \"%s\"\n"
+msgstr "Пользователь %s использует  \"%s\" в группе \"%s\"\n"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:216
 #, c-format
 msgid "User %s has entered the room %s !\n"
-msgstr "Пользователь %s вошел под именем %s !\n"
+msgstr "Пользователь %s вошел в группу %s !\n"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:216
 #, c-format
 msgid "User %s has left the room %s !\n"
-msgstr "Пользователь %s вышел из записи %s !\n"
+msgstr "Пользователь %s вышел из группы %s !\n"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:232
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244

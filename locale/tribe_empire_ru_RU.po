@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tribe_empire_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-03-14 02:27+0500\n"
+"PO-Revision-Date: 2007-03-17 00:59+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -209,7 +209,7 @@ msgstr "Цех оружия"
 
 #: ../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
-msgstr "Ткацкий цех"
+msgstr "Прядильный комбинат"
 
 #: ../tribes/empire/buildings/well/conf:2
 msgid "Well"
@@ -272,7 +272,7 @@ msgid ""
 "Young soldiers and miners need some encouragement. This drink makes a man "
 "fearless and strong."
 msgstr ""
-"Ваши шахтеры и солдаты нуждаются в некотором поощрении. Этот напиток делает "
+"Ваши шахтёры и солдаты нуждаются в некотором поощрении. Этот напиток делает "
 "людей бесстрашными и сильными."
 
 #: ../tribes/empire/wares/bread/conf:2
@@ -408,7 +408,7 @@ msgstr ""
 
 #: ../tribes/empire/wares/heavy_lance/conf:2
 msgid "Heavy Lance"
-msgstr "Тяжелая пика"
+msgstr "Тяжёлая пика"
 
 #: ../tribes/empire/wares/heavy_lance/conf:3
 msgid "This is a good warrior lance, with a steel-top and a little blade."
@@ -431,7 +431,7 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
-"Это копьё довольно легкое, чтоб его можно было бросать, но имеет достаточный "
+"Это копьё довольно лёгкое, чтоб его можно было бросать, но имеет достаточный "
 "вес, чтобы убить животное в один миг. Оно используется только охотниками."
 
 #: ../tribes/empire/wares/iron/conf:2
@@ -456,7 +456,7 @@ msgstr "Кухонная утварь"
 
 #: ../tribes/empire/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchentools?"
-msgstr "Как приготовить еду, обеды и пайки, если нет кухни?"
+msgstr "Как приготовить пайки и обеды, если нет кухни?"
 
 #: ../tribes/empire/wares/lance/conf:2
 msgid "Lance"
@@ -464,7 +464,7 @@ msgstr "Пика"
 
 #: ../tribes/empire/wares/lance/conf:3
 msgid "This wooden lance has an iron spike."
-msgstr "Это деревянная пика имеет металлическое остриё"
+msgstr "Эта деревянная пика имеет металлическое остриё"
 
 #: ../tribes/empire/wares/marble/conf:2
 msgid "Marble"
@@ -492,11 +492,11 @@ msgstr ""
 
 #: ../tribes/empire/wares/meal/conf:2
 msgid "Meal"
-msgstr "Еда"
+msgstr "Сытный обед"
 
 #: ../tribes/empire/wares/meal/conf:3
 msgid "A real meal which satisfies all miners needs."
-msgstr "Настоящая еда, удовлетворяющая всем потребностям шахтеров."
+msgstr "Настоящая еда, удовлетворяющая всем потребностям шахтёров."
 
 #: ../tribes/empire/wares/meat/conf:2
 msgid "Meat"
@@ -508,9 +508,9 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"Мясо содержит много калорий. Оно используется на Постоялых дворах и Тавернах "
-"для производства обедов для шахтёров и в тренировочных лагерях солдат, для "
-"поддержки силы воинов."
+"Мясо содержит много калорий. Оно используется на Постоялых дворах и в "
+"Тавернах для производства обедов для шахтёров и в тренировочных лагерях "
+"солдат, для поддержки силы воинов."
 
 #: ../tribes/empire/wares/pick/conf:2
 msgid "Pick"
@@ -521,7 +521,7 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "carpenter."
 msgstr ""
-"Кирка используется каменщиками и шахтерами. Она производится плотником."
+"Кирка используется каменщиками и шахтёрами. Она производится плотником."
 
 #: ../tribes/empire/wares/plate_armour/conf:2
 msgid "Plate-Armour"
@@ -533,7 +533,7 @@ msgstr "Наилучшая броня из существующих у солд�
 
 #: ../tribes/empire/wares/ration/conf:2
 msgid "Ration"
-msgstr "Паек"
+msgstr "Паёк"
 
 #: ../tribes/empire/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
@@ -653,7 +653,7 @@ msgstr "Шерсть"
 #: ../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr ""
-"Шерсть, используется на прядильных комбинатах Империи для производства сукна."
+"Шерсть, используется на Прядильных комбинатах Империи для производства сукна."
 
 #: ../tribes/empire/workers/baker/conf:2
 msgid "Baker"

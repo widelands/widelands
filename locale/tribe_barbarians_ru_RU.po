@@ -9,13 +9,15 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-23 01:06+0500\n"
+"PO-Revision-Date: 2007-03-17 00:49+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
 
 #: ../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -127,7 +129,7 @@ msgstr "Хижина егеря"
 
 #: ../tribes/barbarians/buildings/goldmine/conf:2
 msgid "Gold Mine"
-msgstr "Золотая шахта"
+msgstr "Золотоносная шахта"
 
 #: ../tribes/barbarians/buildings/granitemine/conf:2
 msgid "Granite Mine"
@@ -209,7 +211,7 @@ msgstr "Склад"
 
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
-msgstr "Оружейня"
+msgstr "Оружейная"
 
 #: ../tribes/barbarians/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
@@ -278,8 +280,8 @@ msgid ""
 "Fire-hardened wood, hard as iron and can not burn, used for military "
 "buildings."
 msgstr ""
-"Обожженное в огне дерево, твердое как железо и не горит, используется для "
-"военных строений."
+"Обожжённое в огне дерево, твёрдое как железо и не сгораемое, используется "
+"для военных строений."
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
@@ -396,7 +398,7 @@ msgstr "Слиток золота"
 
 #: ../tribes/barbarians/wares/goldstone/conf:3
 msgid "This is the yellow goldstone."
-msgstr "Это слиток желтого золота."
+msgstr "Это слиток жёлтого золота."
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
@@ -407,8 +409,8 @@ msgid ""
 "Raw stone can be enhanced to grind stone which delivers solid, non burning "
 "build material."
 msgstr ""
-"Грубый камень может обработкой быть превращен в бетонный блок, являющийся "
-"прочным не горючим строительным материалом."
+"Грубый камень после обработки может быть превращен в бетонный блок, "
+"являющийся прочным не горючим строительным материалом."
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -434,14 +436,14 @@ msgstr "Простая защита воинов"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
-msgstr "Копье охотника"
+msgstr "Копьё охотника"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:3
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metalworks."
 msgstr ""
-"Это копье довольно легкое, чтоб его можно было бросать, но имеет достаточный "
+"Это копьё довольно лёгкое, чтоб его можно было бросать, но имеет достаточный "
 "вес, чтобы убить животное в один миг. Оно используется только охотниками. "
 "Производится в литейном цехе."
 
@@ -467,7 +469,7 @@ msgstr "Кухонная утварь"
 
 #: ../tribes/barbarians/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchentools?"
-msgstr "Как приготовить еду, обеды или пайки. если нет кухонь?"
+msgstr "Как приготовить обеды или пайки, если нет кухонь?"
 
 #: ../tribes/barbarians/wares/mask/conf:2
 msgid "Mask"
@@ -479,7 +481,7 @@ msgstr "Улучшенная версия шлема."
 
 #: ../tribes/barbarians/wares/meal/conf:2
 msgid "Meal"
-msgstr "Еда"
+msgstr "Сытный обед"
 
 #: ../tribes/barbarians/wares/meal/conf:3
 msgid "A real meal which satisfies all miners needs"
@@ -495,8 +497,8 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"Мясо содержит много калорий. Оно используется на постоялых дворах и в "
-"Тавернах для производства обедов для шахтеров, и в тренировочных лагерях "
+"Мясо содержит много калорий. Оно используется на Постоялых дворах и в "
+"Тавернах для производства обедов для шахтёров, и в тренировочных лагерях "
 "солдат, для поддержки силы воинов."
 
 #: ../tribes/barbarians/wares/pick/conf:2
@@ -508,7 +510,7 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metalworks."
 msgstr ""
-"Кирка используется камнетёсами и шахтерами. Производится в литейном цехе."
+"Кирка используется камнетёсами и шахтёрами. Производится в литейном цехе."
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pittabread"
@@ -525,7 +527,7 @@ msgstr "Паёк"
 
 #: ../tribes/barbarians/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
-msgstr "Небольшой набор для поддержки сил шахтеров."
+msgstr "Небольшой набор для поддержки сил шахтёров."
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
@@ -568,7 +570,7 @@ msgid ""
 "the ranger use it. Build at the metalworks."
 msgstr ""
 "Лопата необходима для соответствующего ухода за растениями. Поэтому она "
-"используется садовниками и лесничими. Производится в литейном цехе."
+"используется садовниками и лесниками. Производится в литейном цехе."
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
@@ -576,7 +578,7 @@ msgstr "Обед"
 
 #: ../tribes/barbarians/wares/snack/conf:3
 msgid "A bit bigger, for the advanced minors will need a big morsel."
-msgstr "чуть больше пайка, опытным шахтерам требуются большие куски."
+msgstr "Чуть больше пайка, опытным шахтёрам требуются большие куски."
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
@@ -718,11 +720,11 @@ msgstr "Главный пивовар"
 
 #: ../tribes/barbarians/workers/master-miner/conf:2
 msgid "Master Miner"
-msgstr "Главный шахтер"
+msgstr "Главный шахтёр"
 
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
-msgstr "Шахтер"
+msgstr "Шахтёр"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
