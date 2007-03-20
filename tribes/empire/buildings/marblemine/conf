@@ -52,12 +52,12 @@ wood=2
 
 [idle]
 pics=marblemine_i_??.png
-hotspot=47 61
+hotspot=66 76
 
 [working]
 pics=marblemine_i_??.png
-hotspot=47 61
+hotspot=66 76
 
 [build]
-pics=marblemine_build.png
-hotspot=47 61
+pics=marblemine_i_??.png
+hotspot=66 76
