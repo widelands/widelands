@@ -103,6 +103,20 @@ public:
 	};
 
 	struct State {
+		State(const Task * const the_task = 0)
+			:
+			task    (the_task),
+			ivar1   (0),
+			ivar2   (0),
+			ivar3   (0),
+			coords  (Coords::Null()),
+			diranims(0),
+			path    (0),
+			transfer(0),
+			route   (0),
+			program (0)
+		{}
+
 		const Task           * task;
 		int                    ivar1;
 		int                    ivar2;

@@ -463,17 +463,7 @@ fill the state information with parameters for the task.
 void Bob::push_task(const Task & task) {
 	if (m_stack_dirty && m_stack.size()) throw wexception
 		("MO(%u): push_task(%s): stack already dirty", get_serial(), task.name);
-   m_stack.push_back(State());
-	State & state  = top_state();
-	state.task     = &task;
-	state.ivar1    = 0;
-	state.ivar2    = 0;
-	state.diranims = 0;
-	state.path     = 0;
-	state.transfer = 0;
-	state.route    = 0;
-	state.program  = 0;
-
+   m_stack.push_back(State(&task));
    m_stack_dirty = true;
 }
 
