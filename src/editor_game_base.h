@@ -126,9 +126,6 @@ class Editor_Game_Base {
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t)=0;
 	virtual void player_field_notification (const FCoords&, losegain_t)=0;
 
-      // Military stuff
-	std::vector<Coords> * get_attack_points(const Player_Number);
-
    virtual void make_influence_map ();
 
    protected:

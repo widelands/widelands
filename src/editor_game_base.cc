@@ -848,36 +848,6 @@ void Editor_Game_Base::cleanup_for_load
    m_conquer_info.resize(0);
 }
 
-/**
- * Editor_Game_Base::get_attack_points
- *
- *    Returns all the positions of MilitarySites (buildings that can be attacked) of
- * a given player. If the player has no buildings that can be attacked, rare, then
- * returns 0
- */
-std::vector<Coords>*
-Editor_Game_Base::get_attack_points(const Player_Number player_number)
-{
-   std::vector<Coords>* tmp = 0;
-
-	const std::vector<Player_Area>::const_iterator  conquer_info_end =
-		m_conquer_info.end();
-	for
-		(std::vector<Player_Area>::const_iterator it = m_conquer_info.begin();
-		 it != conquer_info_end;
-		 ++it)
-	{
-		if (it->player_number == player_number) { // First initialization
-         if (!tmp)
-            tmp = new std::vector<Coords>;
-
-			tmp->push_back (*it);
-
-      }
-   }
-
-   return tmp;
-}
 
 // BEGIN Support for influece map in load/saved games
 /**
