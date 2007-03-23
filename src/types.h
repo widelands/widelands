@@ -26,7 +26,9 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
+typedef uint   Military_Influence;
 typedef uchar Player_Number;
+typedef ushort Vision;
 
 enum tAttribute {
     atrHP = 0,
