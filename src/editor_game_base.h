@@ -76,7 +76,7 @@ class Editor_Game_Base {
 		assert(n >= 1);
 		assert(n <= MAX_PLAYERS);
 		return m_players[n - 1];
-	} __attribute__ ((deprecated))
+	}
 	Player & player(const int n) const {
 		assert(1 <= n);
 		assert     (n <= MAX_PLAYERS);

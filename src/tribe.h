@@ -59,7 +59,7 @@ struct Tribe_Descr {
 
 
 	const std::string & name() const throw () {return m_name;}
-	const std::string & get_name() const throw () {return m_name;} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return m_name;}
 
 		inline int get_nrworkers() const { return m_workers.get_nitems(); }
 		Worker_Descr * get_worker_descr(const uint idx) const

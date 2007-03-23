@@ -39,7 +39,7 @@ struct Critter_Bob_Descr : public Bob_Descr {
 	bool is_swimming() const throw () {return m_swimming;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	const std::string & descname() const throw () {return m_descname;}
-	const char * get_descname() const throw () {return descname().c_str();} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descname().c_str();}
 
       const Critter_BobProgram* get_program(std::string programname) const;
 

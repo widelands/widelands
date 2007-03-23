@@ -55,7 +55,7 @@ struct Bob_Descr : public Map_Object_Descr {
 	virtual ~Bob_Descr(void);
 
 	const std::string & name() const throw () {return m_name;}
-	const char * get_name() const throw () {return m_name.c_str();} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 
    Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
    inline const char* get_picture(void) const { return m_picture.c_str(); }
@@ -130,7 +130,7 @@ public:
 	virtual Type get_bob_type() const throw () = 0;
    virtual uint get_movecaps() { return 0; }
 	const std::string & name() const throw () {return descr().name();}
-	const std::string & get_name() const throw () {return descr().name();} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return descr().name();}
 
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);

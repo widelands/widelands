@@ -84,7 +84,7 @@ public:
 	Map_Object* get_location(Editor_Game_Base* g) { return m_location.get(g); }
 	Economy* get_economy() const throw () {return m_economy;}
 	Item_Ware_Descr::Index descr_index() const throw () {return m_descr_index;}
-	const Item_Ware_Descr * get_ware_descr() const throw () {assert(m_ware_descr); return m_ware_descr;} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const Item_Ware_Descr * get_ware_descr() const throw () {assert(m_ware_descr); return m_ware_descr;}
 
 	void init(Editor_Game_Base* g);
 	void cleanup(Editor_Game_Base* g);

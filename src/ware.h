@@ -66,9 +66,9 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	uint get_pic_queue_empty() const throw () {return m_pic_queue_empty;}
 
 	const std::string & name    () const throw () {return m_name;}
-	const char * get_name    () const throw () {return m_name    .c_str();} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const char * get_name    () const throw () {return m_name    .c_str();}
 	const std::string & descname() const throw () {return m_descname;}
-	const char * get_descname() const throw () {return m_descname.c_str();} __attribute__ ((deprecated))
+	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
 	const char * get_helptext() const throw () {return m_helptext.c_str();}
 
 private:
