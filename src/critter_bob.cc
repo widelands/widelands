@@ -197,11 +197,9 @@ Get a program from the workers description.
 const Critter_BobProgram* Critter_Bob_Descr::get_program(std::string programname)
 		const
 {
-	ProgramMap::const_iterator it = m_programs.find(programname);
-
-	if (it == m_programs.end())
-		throw wexception("%s has no program '%s'", get_name(), programname.c_str());
-
+	const ProgramMap::const_iterator it = m_programs.find(programname);
+	if (it == m_programs.end()) throw wexception
+		("%s has no program '%s'", name().c_str(), programname.c_str());
 	return it->second;
 }
 

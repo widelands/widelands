@@ -247,10 +247,10 @@ void Bob::init(Editor_Game_Base* gg)
 
    m_sched_init_task = true;
 
-	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) schedule_act(game, 1);
+	if (Game * const game = dynamic_cast<Game * const>(gg))
+		schedule_act(game, 1);
 	else {// In editor: play idle task forever
-      set_animation(gg, get_descr()->get_animation("idle"));
+		set_animation(gg, descr().get_animation("idle"));
    }
 }
 
@@ -1132,7 +1132,9 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
    molog("Postition: (%i,%i)\n", m_position.x, m_position.y);
    molog("ActID: %i\n", m_actid);
 
-	molog("Animation: %s\n", m_anim ? get_descr()->get_animation_name(m_anim).c_str() : "<none>" );
+	molog
+		("Animation: %s\n",
+		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
    molog("AnimStart: %i\n", m_animstart);
 
 	molog("WalkingDir: %i\n", m_walking);
