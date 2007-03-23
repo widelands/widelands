@@ -107,6 +107,12 @@ class Editor_Game_Base {
       std::vector<uint> get_attack_controller_serials() const {return m_attack_serials;}
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}
+	typedef int Time;
+	static Time     Never  () throw () {return std::numeric_limits<Time>::max();}
+	typedef Uint32 Duration;
+	static Duration Forever() throw ()
+	{return std::numeric_limits<Duration>::max();}
+
 	int get_gametime() const {return m_gametime;}
 	Interactive_Base * get_iabase() const {return m_iabase;}
 
