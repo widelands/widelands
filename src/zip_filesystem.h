@@ -25,8 +25,7 @@
 #include "unzip.h"
 #include "zip.h"
 
-class ZipFilesystem : public FileSystem {
-public:
+struct ZipFilesystem : public FileSystem {
    ZipFilesystem(const std::string);
 	virtual ~ZipFilesystem();
 
@@ -38,7 +37,7 @@ public:
    virtual const bool IsDirectory(std::string path);
 	virtual const bool FileExists(std::string path);
 
-	virtual void *Load(const std::string fname, int * const length);
+	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void Write(const std::string fname, const void * const data,
 							 const int length);
    virtual void EnsureDirectoryExists(const std::string dirname);

@@ -33,8 +33,7 @@ typedef std::set<std::string> filenameset_t;
  * FileSystem is an abstract base class representing certain filesystem operations.
  * \todo const correctness
  */
-class FileSystem {
-public:
+struct FileSystem {
 	//TODO: this should be unneccessary. Make it so.
 	enum Type {
 	   DIR,
@@ -50,7 +49,7 @@ public:
 	virtual const bool IsDirectory(std::string path) = 0;
 	virtual const bool FileExists(const std::string path) = 0;
 
-	virtual void *Load(const std::string fname, int * const length) = 0;
+	virtual void * Load(const std::string & fname, size_t & length) = 0;
 	virtual void Write(const std::string fname, const void * const data,
 	                   const int length) = 0;
 	virtual void EnsureDirectoryExists(const std::string dirname) = 0;

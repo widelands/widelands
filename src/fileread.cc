@@ -29,7 +29,7 @@ void FileRead::Open(FileSystem & fs, const char * const filename)
 {
 	assert(!data);
 
-	data = fs.Load(filename, &length);
+	data = fs.Load(filename, length);
 	filepos = 0;
 }
 
@@ -46,25 +46,20 @@ void FileRead::Close()
 	data = 0;
 }
 
-void FileRead::SetFilePos(int pos)
-{
+void FileRead::SetFilePos(const Pos pos) {
 	assert(data);
 
-	if (pos < 0 || pos >= length) throw File_Boundary_Exceeded();
+	if (pos >= length) throw File_Boundary_Exceeded();
 
 	filepos = pos;
 }
 
-char *FileRead::CString(int pos)
-{
+char * FileRead::CString(const Pos pos) {
 	char *string, *p;
-	int i;
 
 	assert(data);
 
-	i = pos;
-	if (pos < 0)
-		i = filepos;
+	Pos i = pos == NoPos() ? filepos : pos;
 	if (i >= length) throw File_Boundary_Exceeded();
 
 	string = (char *)data + i;
@@ -73,8 +68,7 @@ char *FileRead::CString(int pos)
 
 	if (i > length) throw File_Boundary_Exceeded();
 
-	if (pos < 0)
-		filepos = i;
+	if (pos == NoPos()) {prevpos = filepos; filepos = i;}
 
 	return string;
 }

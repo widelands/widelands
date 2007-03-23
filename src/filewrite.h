@@ -22,6 +22,8 @@
 
 #include "machdep.h"
 
+#include <cassert>
+
 struct FileSystem;
 
 /**
@@ -29,9 +31,11 @@ struct FileSystem;
  * written out when Write() is called.
  */
 struct FileWrite {
+	typedef size_t Pos;
+	static Pos NoPos() throw () {return std::numeric_limits<size_t>::max();}
 
-	struct FileRead_Exception {};
-	struct Buffer_Overflow        : public FileRead_Exception {};
+	struct Exception {};
+	struct Buffer_Overflow : public Exception {};
 
 	FileWrite (); /// Set the buffer to empty.
 	~FileWrite(); /// Clear any remaining allocated data.
@@ -47,22 +51,33 @@ struct FileWrite {
 	void Clear(); /// Clears the object's buffer.
 
 	/**
-	 * Set the file pointer to a new location. The position can be beyond the
-	 * current end of file.
+	 * Get the position that will be written to in the next write operation that
+	 * does not specify a position.
 	 */
-		int  GetFilePos(void);
+	Pos GetPos() const throw () {return filepos;}
 
 	/**
 	 * Set the file pointer to a new location. The position can be beyond
 	 * the current end of file.
 	 */
-		void SetFilePos(int pos);
+	void SetFilePos(const Pos pos) throw () {filepos = pos;}
 
 	/**
-	 * Write data at the given location. If pos is -1, write at the
+	 * Reserve size bytes at the current file position for filling in later. It
+	 * will only advance the reading position, not increase the buffer size. That
+	 * is done when writing if necessary.
+	 *
+	 * Returns the position of the first reserved byte.
+	 */
+	Pos Reserve(const size_t size) throw ()
+	{const Pos result = filepos; filepos += size; return result;}
+
+	/**
+	 * Write data at the given location. If pos is NoPos(), write at the
 	 * file pointer and advance the file pointer.
 	 */
-		void Data(const void *data, int size, int pos = -1);
+	void Data
+		(const void * const data, const size_t size, const Pos pos = NoPos());
 
 	/**
 	 * This is a perfectly normal printf (actually it isn't because it's limited
@@ -70,22 +85,26 @@ struct FileWrite {
 	 */
 		void Printf(const char *fmt, ...) __attribute__((format(printf,2,3)));
 
-		inline void Signed8(char x, int pos = -1) { Data(&x, 1, pos); }
-		inline void Unsigned8(uchar x, int pos = -1) { Data(&x, 1, pos); }
-		inline void Signed16(short x, int pos = -1) { short y = Little16(x); Data(&y, 2, pos); }
-	void Unsigned16(ushort x, int pos = -1)
-	{const short y = Little16(static_cast<const short>(x)); Data(&y, 2, pos);}
-		inline void Signed32(int x, int pos = -1) { int y = Little32(x); Data(&y, 4, pos); }
-	void Unsigned32(const uint x, const int pos = -1)
-	{const int y = Little32(static_cast<const int>(x)); Data(&y, 4, pos);}
-		inline void Float(float x, int pos = -1) { float y = LittleFloat(x); Data(&y, 4, pos); }
-		inline void CString(const char *x, int pos = -1) { Data(x, strlen(x)+1, pos); }
+	void   Signed8 (const Sint8  x, const Pos pos = NoPos()) {Data(&x, 1, pos);}
+	void Unsigned8 (const Uint8  x, const Pos pos = NoPos()) {Data(&x, 1, pos);}
+	void   Signed16(const Sint16 x, const Pos pos = NoPos())
+	{const Sint16 y = Little16   (x); Data(&y, 2, pos);}
+	void Unsigned16(const Uint16 x, const Pos pos = NoPos())
+	{const Uint16 y = Little16   (x); Data(&y, 2, pos);}
+	void   Signed32(const Sint32 x, const Pos pos = NoPos())
+	{const Uint32 y = Little32   (x); Data(&y, 4, pos);}
+	void Unsigned32(const Uint32 x, const Pos pos = NoPos())
+	{const Uint32 y = Little32   (x); Data(&y, 4, pos);}
+	void      Float(const float  x, const Pos pos = NoPos())
+	{const float  y = LittleFloat(x); Data(&y, 4, pos);}
+	void CString(const char * const x, const Pos pos = NoPos())
+	{Data(x, strlen(x) + 1, pos);}
 
 private:
 	void * data;
-	int    length;
-	int    maxsize;
-	int    filepos;
+	size_t length;
+	size_t maxsize;
+	Pos    filepos;
 };
 
 #endif

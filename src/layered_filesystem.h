@@ -58,7 +58,7 @@ public:
 	virtual void EnsureDirectoryExists(const std::string dirname);
 	virtual void MakeDirectory(const std::string dirname);
 
-	virtual void *Load(const std::string fname, int * const length);
+	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void Write(const std::string fname, const void * const data,
 	                   const int length);
 

@@ -320,17 +320,11 @@ void RealFSImpl::MakeDirectory(const std::string dirname)
  * Read the given file into alloced memory; called by FileRead::Open.
  * Throws an exception if the file couldn't be opened.
  */
-void *RealFSImpl::Load(const std::string fname, int * const length)
-{
-	std::string fullname;
+void * RealFSImpl::Load(const std::string & fname, size_t & length) {
+	const std::string fullname = FS_CanonicalizeName(fname);
+
 	FILE *file=0;
 	void *data=0;
-	int size;
-
-	fullname =FS_CanonicalizeName(fname);
-
-	file = 0;
-	data = 0;
 
 	try
 	{
@@ -343,13 +337,20 @@ void *RealFSImpl::Load(const std::string fname, int * const length)
 		//printf("------------------------------------------\n");
 
 		file = fopen(fullname.c_str(), "rb");
-		if (!file)
-			throw wexception("Couldn't open %s (%s)", fname.c_str(), fullname.c_str());
+		if (file == NULL) throw File_error("RealFSImpl::Load", fullname.c_str());
 
 		// determine the size of the file (rather quirky, but it doesn't require
 		// potentially unportable functions)
 		fseek(file, 0, SEEK_END);
-		size = ftell(file);
+		size_t size;
+		{
+			const long ftell_pos = ftell(file);
+			if (ftell_pos < 0) throw wexception
+				("RealFSImpl::Load: error when loading \"%s\" (\"%s\"): file size "
+				 "calculation yieded negative value %li",
+				 fname.c_str(), fullname.c_str(), ftell_pos);
+			size = ftell_pos;
+		}
 		fseek(file, 0, SEEK_SET);
 
 		// allocate a buffer and read the entire file into it
@@ -360,6 +361,10 @@ void *RealFSImpl::Load(const std::string fname, int * const length)
 
 		fclose(file);
 		file = 0;
+
+		length = size;
+
+		return data;
 	}
 	catch(...)
 	{
@@ -371,11 +376,6 @@ void *RealFSImpl::Load(const std::string fname, int * const length)
 		}
 		throw;
 	}
-
-	if (length)
-		*length = size;
-
-	return data;
 }
 
 /**

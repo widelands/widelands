@@ -33,6 +33,8 @@ struct FileSystem;
  * Convenience functions are available for endian-safe access of common data types
  */
 struct FileRead {
+	typedef size_t Pos;
+	static Pos NoPos() throw () {return std::numeric_limits<size_t>::max();}
 
 	struct FileRead_Exception {};
 	struct File_Boundary_Exceeded : public FileRead_Exception {};
@@ -55,27 +57,41 @@ struct FileRead {
 	void Close(); /// Frees allocated memory.
 
 		inline int GetSize() const { return length; }
-		inline bool IsEOF() const { if(filepos>=length) return true; return false; }
+	bool IsEOF() const throw () {return length <= filepos;}
 
 	/**
 	 * Set the file pointer to the given location.
 	 * Raises File_Boundary_Exceeded when the pointer is out of bound.
 	 */
-		void SetFilePos(int pos);
+	void SetFilePos(const Pos pos);
 
-		inline int GetFilePos(void) { return filepos; }
+	/**
+	 * Get the position that will be read from in the next read operation that
+	 * does not specify a position.
+	 */
+	Pos GetPos() const throw () {return filepos;}
 
-		inline char Signed8(int pos = -1) { return Deref8(Data(1, pos)); }
-	uchar Unsigned8(const int pos = -1)
-	{return static_cast<const uchar>(Deref8(Data(1, pos)));}
-		inline short Signed16(int pos = -1) { return Little16(Deref16(Data(2, pos))); }
-	ushort Unsigned16(const int pos = -1)
-	{return static_cast<const ushort>(Little16(Deref16(Data(2, pos))));}
-		inline int Signed32(int pos = -1) { return Little32(Deref32(Data(4, pos))); }
-	uint Unsigned32(const int pos = -1)
-	{return static_cast<const uint>(Little32(Deref32(Data(4, pos))));}
-		inline float Float(int pos = -1) { return LittleFloat(DerefFloat(Data(4, pos))); }
-	char * CString(int pos = -1); /// Read a zero-terminated string.
+	/**
+	 * Get the position that was read from in the previous read operation that
+	 * did not specify a position.
+	 */
+	Pos GetPrevPos() const throw () {return prevpos;}
+
+	Sint8    Signed8 (const Pos pos = NoPos())
+	{return                                       Deref8    (Data(1, pos));}
+	Uint8  Unsigned8 (const Pos pos = NoPos())
+	{return static_cast<const Uint8>             (Deref8    (Data(1, pos)));}
+	Sint16   Signed16(const Pos pos = NoPos())
+	{return                           Little16   (Deref16   (Data(2, pos)));}
+	Uint16 Unsigned16(const Pos pos = NoPos())
+	{return static_cast<const Uint16>(Little16   (Deref16   (Data(2, pos))));}
+	Sint32   Signed32(const Pos pos = NoPos())
+	{return                           Little32   (Deref32   (Data(4, pos)));}
+	Uint32 Unsigned32(const Pos pos = NoPos())
+	{return static_cast<const Uint32>(Little32   (Deref32   (Data(4, pos))));}
+	float       Float(const Pos pos = NoPos())
+	{return                           LittleFloat(DerefFloat(Data(4, pos)));}
+	char * CString(const Pos pos = NoPos()); /// Read a zero-terminated string.
 
 	/**
 	 * This function copies characters from the file to the memory starting at
@@ -88,12 +104,12 @@ struct FileRead {
 	 */
 	bool ReadLine(char *buf, const char * const buf_end);
 
-	void * Data(const int bytes, const int pos = -1) {
+	void * Data(const uint bytes, const Pos pos = NoPos()) {
 			assert(data);
 
-			int i = pos;
-			if (pos < 0) {
-				i = filepos;
+			Pos i = pos;
+			if (pos == NoPos()) {
+				prevpos = i = filepos;
 				filepos += bytes;
 			}
 		if (i+bytes > length) throw File_Boundary_Exceeded();
@@ -103,8 +119,9 @@ struct FileRead {
 
 	void * data;
 private:
-	int    filepos;
-	int    length;
+	Pos    filepos;
+	Pos    prevpos;
+	size_t length;
 };
 
 #endif

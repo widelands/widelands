@@ -118,11 +118,9 @@ throw (_wexception)
 
    std::vector<int> serials = egbase->get_battle_serials();
 
-   // Here we will insert skip data (number of battles)
-   // later, write a dummy for know
-   int filepos = fw.GetFilePos();
+	//  Here we will insert skip data (number of battles) later.
+	const FileWrite::Pos filepos = fw.Reserve(4);
    int battles = 0;
-   fw.Unsigned32(0x00000000);
 
 
    for (uint i = 0; i < serials.size(); i++)

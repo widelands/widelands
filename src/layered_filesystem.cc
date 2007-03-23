@@ -141,8 +141,7 @@ const bool LayeredFileSystem::IsDirectory(const std::string path)
  * we'd have problems differentiating the errors returned by the sub-FS.
  * Let's just avoid any possible hassles with that.
  */
-void *LayeredFileSystem::Load(std::string fname, int * const length)
-{
+void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
 	for(FileSystem_rit it = m_filesystems.rbegin();
 	      it != m_filesystems.rend(); it++)
 	{

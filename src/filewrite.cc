@@ -20,7 +20,6 @@
 #include "filesystem.h"
 #include "filewrite.h"
 
-#include <cassert>
 #include <stdarg.h>
 
 FileWrite::FileWrite() : data(0), length(0), maxsize(0), filepos(0) {}
@@ -45,25 +44,11 @@ void FileWrite::Write(FileSystem & fs, const char * const filename)
 	Clear();
 }
 
-void FileWrite::SetFilePos(int pos)
-{
-	assert(pos >= 0);
-	filepos = pos;
-}
-
-int FileWrite::GetFilePos(void)
-{
-	return filepos;
-}
-
-void FileWrite::Data(const void *buf, int size, int pos)
-{
-	int i;
-
+void FileWrite::Data(const void *buf, const size_t size, const Pos pos) {
 	assert(data || !length);
 
-	i = pos;
-	if (pos < 0) {
+	Pos i = pos;
+	if (pos == NoPos()) {
 		i = filepos;
 		filepos += size;
 	}
@@ -95,5 +80,5 @@ void FileWrite::Printf(const char *fmt, ...)
 
 	if (i < 0) throw Buffer_Overflow();
 
-	Data(buf, i, -1);
+	Data(buf, i);
 }

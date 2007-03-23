@@ -291,8 +291,7 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
  * Read the given file into alloced memory; called by FileRead::Open.
  * \throw FileNotFound_error if the file couldn't be opened.
  */
-void *ZipFilesystem::Load(std::string fname, int * const length)
-{
+void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
    if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
 		throw ZipOperation_error
 			("ZipFilesystem::Load",
@@ -301,11 +300,12 @@ void *ZipFilesystem::Load(std::string fname, int * const length)
 			 "couldn't open file from zipfile");
 
    char buffer[1024];
-   int len;
-   int totallen = 0;
+	size_t totallen = 0;
    unzOpenCurrentFile( m_unzipfile );
-   while( (len = unzReadCurrentFile( m_unzipfile, buffer, sizeof(buffer))) )
-      totallen += len;
+	while
+		(const size_t len =
+		  unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer)))
+		totallen += len;
    unzCloseCurrentFile( m_unzipfile );
 
    void* retdata = malloc( totallen );
@@ -313,7 +313,7 @@ void *ZipFilesystem::Load(std::string fname, int * const length)
    unzReadCurrentFile( m_unzipfile, retdata, totallen );
    unzCloseCurrentFile( m_unzipfile );
 
-   *length = totallen;
+   length = totallen;
 
    return retdata;
 }
