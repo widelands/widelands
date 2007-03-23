@@ -92,7 +92,8 @@ struct Game : public Editor_Game_Base {
 	// and other fancy stuff.
 	uint logic_rand() {return rng.rand();}
 
-	Coords random_location(const Coords center, uchar radius);
+	/// Generate a random location within radius from location.
+	Coords random_location(Coords location, uchar radius);
 
 	void logic_rand_seed (const uint seed) {rng.seed (seed);}
 
@@ -149,11 +150,11 @@ private:
 	int m_realtime; // the real time (including) pauses in milliseconds
 };
 
-inline Coords Game::random_location(const Coords center, uchar radius) {
+inline Coords Game::random_location(Coords location, uchar radius) {
 	const ushort s = radius * 2 + 1;
-	return Coords
-		(center.x + logic_rand() % s - radius,
-		 center.y + logic_rand() % s - radius);
+	location.x += logic_rand() % s - radius;
+	location.y += logic_rand() % s - radius;
+	return location;
 }
 
 #endif // __S__GAME_H
