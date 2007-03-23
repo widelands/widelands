@@ -128,6 +128,7 @@ const bool ZipFilesystem::FileExists(std::string path)
    unzGoToFirstFile( m_unzipfile );
    unz_file_info file_info;
    char filename_inzip[256];
+   memset(filename_inzip, ' ', 256);
 
    if( path[0] != '/' )
       path = '/' + path;
