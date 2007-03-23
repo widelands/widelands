@@ -141,13 +141,18 @@ struct World {
 	const char * get_author() const throw () {return hd.author;}
 	const char * get_descr () const throw () {return hd.descr;}
 
+	Terrain_Descr ::Index index_of_terrain   (const char * const name) const
+	{return ters       .get_index(name);}
+	Terrain_Descr & terrain_descr    (const Terrain_Descr  ::Index i) const
+		throw ()
+	{return *ters.get(i);}
       inline Terrain_Descr* get_terrain(const uint i) const { assert(i<ters.get_nitems()); return ters.get(i); }
       inline Terrain_Descr* get_terrain(const char * const str ) const { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
       inline int get_nr_terrains(void) const { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) const{ return bobs.get(index); }
       inline int get_nr_bobs(void) const{ return bobs.get_nitems(); }
-      inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
+      inline int get_immovable_index(const char* l)const { return immovables.get_index(l); }
       inline int get_nr_immovables(void) const{ return immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) const{ return immovables.get(index); }
 
