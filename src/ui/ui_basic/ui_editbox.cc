@@ -79,8 +79,6 @@ bool Edit_Box::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	if (not m_keyboard_grabbed) {
       set_can_focus(true);
-      grab_mouse(true);
-		Basic_Button::handle_mousepress(btn, x, y);
       focus();
       m_keyboard_grabbed=true;
       m_lasttext=m_text;
