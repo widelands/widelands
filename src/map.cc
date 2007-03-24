@@ -2184,7 +2184,7 @@ Military_Influence Map::calc_influence
 (const Coords a, const Area<> area) const
 {
 	const X_Coordinate w = get_width();
-	const Y_Coordinate h = get_width();
+	const Y_Coordinate h = get_height();
 	Military_Influence influence = std::max
 		(std::min
 		 (std::min
