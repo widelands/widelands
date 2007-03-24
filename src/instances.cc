@@ -219,13 +219,7 @@ Object_Ptr::get
 ===============
 */
 const Map_Object * Object_Ptr::get(const Editor_Game_Base * const game) const
-{
-	if (!m_serial) return 0;
-	Map_Object* obj = game->get_objects()->get_object(m_serial);
-	assert(obj);
-
-   return obj;
-}
+{return m_serial ? game->get_objects()->get_object(m_serial) : 0;}
 
 
 
@@ -439,11 +433,13 @@ Returns the absolute gametime at which the CMD_ACT will occur.
 */
 uint Map_Object::schedule_act(Game* g, uint tdelta, uint data)
 {
+	if (tdelta < Editor_Game_Base::Forever()) {
 	uint time = g->get_gametime() + tdelta;
 
 	g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
 
 	return time;
+	} else return Editor_Game_Base::Never();
 }
 
 

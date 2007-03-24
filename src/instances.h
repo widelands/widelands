@@ -40,21 +40,24 @@ namespace UI {struct Tab_Panel;};
 // Base class for descriptions of worker, files and so on. this must just
 // link them together
 //
-class Map_Object;
+struct Map_Object;
 
-class Map_Object_Descr {
-public:
+struct Map_Object_Descr {
 	typedef Uint8 Index;
 	Map_Object_Descr(void) { }
    virtual ~Map_Object_Descr(void) {
       m_anims.clear();
    }
 
+	struct Animation_Nonexistent {};
 	uint get_animation(const char * const name) const {
-		std::map<std::string,uint>::const_iterator i = m_anims.find(name);
-      assert(i!=m_anims.end());
-      return i->second;
+		std::map<std::string,uint>::const_iterator it = m_anims.find(name);
+		if (it == m_anims.end()) throw Animation_Nonexistent();
+		return it->second;
    }
+
+	uint main_animation() const throw ()
+	{return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;}
 
 	bool has_attribute(uint attr) const throw ();
 
@@ -127,6 +130,7 @@ class Map_Object {
 
 public:
 	enum {
+		AREAWATCHER,
 		BOB,  //  class Bob
 
 		WARE, //  class WareInstance
