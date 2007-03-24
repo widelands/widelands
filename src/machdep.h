@@ -40,63 +40,58 @@
 #define BigFloat(x)    (x)
 #endif
 
-inline short Swap16(short x) {
-	short s;
-	reinterpret_cast<uchar * const>(&s)[0] =
-		reinterpret_cast<const uchar * const>(&x)[1];
-	reinterpret_cast<uchar * const>(&s)[1] =
-		reinterpret_cast<const uchar * const>(&x)[0];
+inline Uint16 Swap16(const Uint16 x) {
+	Uint16 s;
+	reinterpret_cast<Uint8 * const>(&s)[0] =
+		reinterpret_cast<const Uint8 * const>(&x)[1];
+	reinterpret_cast<Uint8 * const>(&s)[1] =
+		reinterpret_cast<const Uint8 * const>(&x)[0];
 	return s;
 }
 
-inline int Swap32(int x) {
-	int s;
-	reinterpret_cast<uchar * const>(&s)[0] =
-		reinterpret_cast<const uchar * const>(&x)[3];
-	reinterpret_cast<uchar * const>(&s)[1] =
-		reinterpret_cast<const uchar * const>(&x)[2];
-	reinterpret_cast<uchar * const>(&s)[2] =
-		reinterpret_cast<const uchar * const>(&x)[1];
-	reinterpret_cast<uchar * const>(&s)[3] =
-		reinterpret_cast<const uchar * const>(&x)[0];
+inline Uint32 Swap32(const Uint32 x) {
+	Uint32 s;
+	reinterpret_cast<Uint8 * const>(&s)[0] =
+		reinterpret_cast<const Uint8 * const>(&x)[3];
+	reinterpret_cast<Uint8 * const>(&s)[1] =
+		reinterpret_cast<const Uint8 * const>(&x)[2];
+	reinterpret_cast<Uint8 * const>(&s)[2] =
+		reinterpret_cast<const Uint8 * const>(&x)[1];
+	reinterpret_cast<Uint8 * const>(&s)[3] =
+		reinterpret_cast<const Uint8 * const>(&x)[0];
 	return s;
 }
 
-inline float SwapFloat(float x)
+inline float SwapFloat(const float x)
 {
 	float s;
-	reinterpret_cast<uchar * const>(&s)[0] =
-		reinterpret_cast<const uchar * const>(&x)[3];
+	reinterpret_cast<Uint8 * const>(&s)[0] =
+		reinterpret_cast<const Uint8 * const>(&x)[3];
 	reinterpret_cast<uchar * const>(&s)[1] =
-		reinterpret_cast<const uchar * const>(&x)[2];
+		reinterpret_cast<const Uint8 * const>(&x)[2];
 	reinterpret_cast<uchar * const>(&s)[2] =
-		reinterpret_cast<const uchar * const>(&x)[1];
-	reinterpret_cast<uchar * const>(&s)[3] =
-		reinterpret_cast<const uchar * const>(&x)[0];
+		reinterpret_cast<const Uint8 * const>(&x)[1];
+	reinterpret_cast<Uint8 * const>(&s)[3] =
+		reinterpret_cast<const Uint8 * const>(&x)[0];
 	return s;
 }
 
-inline char Deref8(const void* ptr)
-{
-	return *reinterpret_cast<const char*>(ptr);
-}
+inline Uint8 Deref8(const void * const ptr)
+{return *reinterpret_cast<const Uint8 * const>(ptr);}
 
-inline short Deref16(const void* ptr)
-{
-	short r;
+inline Uint16 Deref16(const void * const ptr) {
+	Uint16 r;
 	memcpy(&r, ptr, sizeof(r));
 	return r;
 }
 
-inline int Deref32(const void* ptr)
-{
-	int r;
+inline Uint32 Deref32(const void * const ptr) {
+	Uint32 r;
 	memcpy(&r, ptr, sizeof(r));
 	return r;
 }
 
-inline float DerefFloat(const void* ptr)
-{
+inline float DerefFloat(const void * const ptr) {
 	float r;
 	memcpy(&r, ptr, sizeof(r));
 	return r;
