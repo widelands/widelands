@@ -224,9 +224,9 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 			: Coords_type(C), t(T)
 	{}
 
-	bool operator==(const TCoords<> other) const throw ()
+	bool operator==(const TCoords other) const throw ()
 	{return Coords_type::operator==(other) and t == other.t;}
-	bool operator!=(const TCoords<> other) const throw ()
+	bool operator!=(const TCoords other) const throw ()
 	{return Coords_type::operator!=(other) or  t != other.t;}
 
 	TriangleIndex t;
