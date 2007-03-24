@@ -55,7 +55,7 @@ struct Map_View : public UI::Panel {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
 
-	void track_sel(int mx, int my);
+	void track_sel(Point m);
    inline void need_complete_redraw( void ) { m_complete_redraw_needed = true; }
 
 protected:

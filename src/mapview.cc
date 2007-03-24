@@ -137,7 +137,7 @@ void Map_View::stop_dragging() {
  */
 bool Map_View::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		track_sel(x, y);
+		track_sel(Point(x, y));
 
 			fieldclicked.call();
 	}
@@ -169,7 +169,7 @@ bool Map_View::handle_mousemove
 		else stop_dragging();
 	}
 
-	if (not intbase().get_sel_freeze()) track_sel(x, y);
+	if (not intbase().get_sel_freeze()) track_sel(Point(x, y));
 
 	g_gr->update_fullscreen();
 	return true;
@@ -184,9 +184,9 @@ Move the sel to the given mouse position.
 Does not honour sel freeze.
 ===============
 */
-void Map_View::track_sel(int mx, int my)
-{
+void Map_View::track_sel(Point m) {
+	m += m_viewpoint;
 	m_intbase.set_sel_pos
 		(MapviewPixelFunctions::calc_node_and_triangle
-		 (intbase().egbase().map(), m_viewpoint.x + mx, m_viewpoint.y + my));
+		 (intbase().egbase().map(), m.x, m.y));
 }
