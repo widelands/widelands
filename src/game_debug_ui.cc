@@ -248,7 +248,7 @@ public:
 
 private:
 	Map &                        m_map;
-	FCoords                      m_coords;
+	const FCoords                m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
 	UI::Button<FieldDebugWindow> m_ui_immovable;
@@ -266,23 +266,31 @@ Initialize the field debug window.
 FieldDebugWindow::FieldDebugWindow
 (Interactive_Base & parent, const Coords coords)
 :
-UI::Window(&parent, 0, 0, 200, 200, _("Debug Field").c_str()),
+UI::Window(&parent, 0, 60, 200, 400, _("Debug Field").c_str()),
 m_map     (parent.egbase().map()),
 m_coords  (m_map.get_fcoords(coords)),
 
 	// Setup child panels
-m_ui_field(this, 0, 0, 200, 80, ""),
+m_ui_field(this, 0, 0, 200, 280, ""),
 
 m_ui_immovable
 (this,
- 0, 80, 200, 24,
+ 0, 280, 200, 24,
  0,
  &FieldDebugWindow::open_immovable, this,
  ""),
 
-m_ui_bobs(this, 0, 104, 200, 96)
+m_ui_bobs(this, 0, 304, 200, 96)
 
-{m_ui_bobs.selected.set(this, &FieldDebugWindow::open_bob);}
+{
+	assert(0 <= m_coords.x);
+	assert(m_coords.x < m_map.get_width());
+	assert(0 <= m_coords.y);
+	assert(m_coords.y < m_map.get_height());
+	assert(&m_map[0] <= m_coords.field);
+	assert             (m_coords.field < &m_map[0] + m_map.max_index());
+	m_ui_bobs.selected.set(this, &FieldDebugWindow::open_bob);
+}
 
 
 /*
@@ -315,6 +323,13 @@ void FieldDebugWindow::think()
 	snprintf(buf, sizeof(buf), "%i, %i - %s %i\n",
 		 m_coords.x, m_coords.y, _("height:").c_str(), m_coords.field->get_height());
 	str += buf;
+	const Map::Index i = m_coords.field - &m_map[0];
+	const Editor_Game_Base & egbase =
+		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
+	const Player_Number nr_players = m_map.get_nrplayers();
+	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
+		const Player & player = egbase.player(plnum);
+	}
 
 	m_ui_field.set_text(str.c_str());
 
