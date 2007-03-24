@@ -385,6 +385,7 @@ void Trigger_Building_Option_Menu::update(void) {
 		m_player_area.x = mapwidth  - 1;
 	if (m_player_area.y >= static_cast<const int>(mapheight))
 		m_player_area.y = mapheight - 1;
+	m_player_area.field = map.get_field(m_player_area);
 
 	if (m_player_area.player_number < 1) m_player_area.player_number = 1;
 	const Player_Number nr_players = map.get_nrplayers();
