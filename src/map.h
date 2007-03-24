@@ -123,7 +123,7 @@ struct FindBobAttribute : public FindBob {
    virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
-typedef char Direction;
+typedef Uint8 Direction;
 
 /** class Map
  *
@@ -180,7 +180,7 @@ struct Map {
 
    void load_graphics();
    void recalc_whole_map();
-   void recalc_for_field_area(const Area);
+   void recalc_for_field_area(const Area<FCoords>);
    void recalc_default_resources(void);
 
 	void set_nrplayers(const Uint8 nrplayers);
@@ -216,35 +216,29 @@ struct Map {
 
 	BaseImmovable * get_immovable(const Coords) const;
 	uint find_bobs
-		(const Coords,
-		 const uint radius,
+		(const Area<FCoords>,
 		 std::vector<Bob *> * list,
 		 const FindBob & functor = FindBobAlwaysTrue());
 	uint find_reachable_bobs
-		(const Coords coord,
-		 const uint radius,
+		(const Area<FCoords>,
 		 std::vector<Bob *> * list,
 		 const CheckStep &,
 		 const FindBob & functor = FindBobAlwaysTrue());
 	uint find_immovables
-		(const Coords coord,
-		 const uint radius,
+		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint find_reachable_immovables
-		(const Coords,
-		 const uint radius,
+		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
 		 const CheckStep &,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint find_fields
-		(const Coords coord,
-		 const uint radius,
+		(const Area<FCoords>,
 		 std::vector<Coords> * list,
 		 const FindField & functor);
 	uint find_reachable_fields
-		(const Coords coord,
-		 const uint radius,
+		(const Area<FCoords>,
 		 std::vector<Coords>* list,
 		 const CheckStep &,
 		 const FindField &);
@@ -252,7 +246,6 @@ struct Map {
 	// Field logic
 	typedef uint Index;
 	static Index get_index(const Coords c, const X_Coordinate width);
-	Index get_index(const FCoords c) {return c.field - m_fields;}
 	Index max_index() const {return m_width * m_height;}
 	Field & operator[](const Index)  const;
 	Field & operator[](const Coords) const;
@@ -264,7 +257,7 @@ struct Map {
 	FCoords get_fcoords(Field &) const;
 	void get_coords(Field & f, Coords & c) const;
 
-	int calc_distance(const Coords, const Coords) const;
+	uint calc_distance(const Coords, const Coords) const;
 	int is_neighbour(const Coords, const Coords) const;
 
 	int calc_cost_estimate(const Coords, const Coords) const;
@@ -301,6 +294,7 @@ struct Map {
 	void get_neighbour(const Coords, const Direction dir, Coords * const) const;
 	void get_neighbour
 		(const FCoords, const Direction dir, FCoords * const) const;
+	FCoords get_neighbour(const FCoords f, const Direction dir) const throw ();
 
 	// Pathfinding
 	int findpath
@@ -330,7 +324,7 @@ struct Map {
 	uint set_height(const FCoords, const Uint8  new_value);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint change_height(Area, const Sint16 difference);
+	uint change_height(Area<FCoords>, const Sint16 difference);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in
@@ -345,10 +339,10 @@ struct Map {
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint set_height(Area, interval<Field::Height> height_interval);
+	uint set_height(Area<FCoords>, interval<Field::Height> height_interval);
 
 	// change terrain of a field, recalculate buildcaps
-	int change_terrain(const TCoords, const Terrain_Descr::Index terrain);
+	int change_terrain(const TCoords<>, const Terrain_Descr::Index terrain);
 
    /*
     * Get the a manager for registering or removing
@@ -365,6 +359,8 @@ struct Map {
 	const MapObjectiveManager  & get_mom () const {return *m_mom;}
 	MapObjectiveManager        & get_mom ()       {return *m_mom;}
 
+	/// Returns the military influence on a location from an area.
+	Military_Influence calc_influence(const Coords a, const Area<>) const;
 
 private:
 	void set_size(const uint w, const uint h);
@@ -415,10 +411,9 @@ private:
 
 	template<typename functorT>
 		void find_reachable
-		(const Coords, const uint radius, const CheckStep &, functorT &);
+		(const Area<FCoords>, const CheckStep &, functorT &);
 
-	template<typename functorT>
-		void find_radius(const Coords, const uint radius, functorT &) const;
+	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 
 	Map & operator=(const Map &);
 	Map            (const Map &);
@@ -1244,6 +1239,19 @@ inline FCoords Map::br_n(const FCoords f) const {
 	return result;
 }
 
+inline FCoords Map::get_neighbour(const FCoords f, const Direction dir) const
+throw ()
+{
+	switch(dir) {
+	case Map_Object::WALK_NW: return tl_n(f);
+	case Map_Object::WALK_NE: return tr_n(f);
+	case Map_Object::WALK_E:  return  r_n(f);
+	case Map_Object::WALK_SE: return br_n(f);
+	case Map_Object::WALK_SW: return bl_n(f);
+	case Map_Object::WALK_W:  return  l_n(f);
+	}
+	assert(false);
+}
 
 inline void move_r(const X_Coordinate mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
@@ -1262,173 +1270,6 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
 	assert(f.x < mapwidth);
 }
 
-
-/**
- * Producer/Coroutine struct that iterates over every node of an area.
- *
- * Note that the order in which fields are returned is not guarantueed.
- */
-struct MapRegion {
-	MapRegion(const Map &, Area);
-
-	const FCoords & location() const throw () {return m_next;}
-
-	/**
-	 * Moves on to the next location. The return value indicates wether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done and location is the same as it was before the first
-	 * call to advance. The iteration can then be redone by calling advance
-	 * again, which will return true util it reaches the first location the next
-	 * time around, and so on.
-	 */
-	bool advance(const Map &) throw ();
-
-	Uint16 radius() const throw () {return m_radius;}
-private:
-	bool         m_halfway;
-	const Uint16 m_radius;   //  radius of area
-	Uint16       m_row;      //  number of rows completed in this phase
-	Uint16       m_rowwidth; //  number of fields to return per row
-	Uint16       m_rowpos;   //  number of fields we have returned in this row
-
-	FCoords     m_left;     //  left-most field of current row
-	FCoords     m_next;     //  next field to return
-};
-
-/**
- * Producer/Coroutine struct that iterates over every node on the fringe of an
- * area.
- *
- * Note that the order in which nodes are returned is not guarantueed (although
- * the current implementation begins at the top left node and then moves around
- * clockwise when advance is called repeatedly).
- */
-struct MapFringeRegion {
-	MapFringeRegion(const Map &, Area) throw ();
-
-	const FCoords & location() const throw () {return m_location;}
-
-	/**
-	 * Moves on to the next location. The return value indicates wether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done and location is the same as it was before the first
-	 * call to advance. The iteration can then be redone by calling advance
-	 * again, which will return true util it reaches the first location the next
-	 * time around, and so on.
-	 */
-	bool advance(const Map &) throw ();
-
-	/**
-	 * When advance has returned false, iterating over the same fringe again is
-	 * not the only possibility. It is also possible to call extend. This makes
-	 * the region ready to iterate over the next layer of nodes.
-	 */
-	void extend(const Map & map) throw () {
-		m_location = map.tl_n(m_location);
-		++m_radius;
-		m_remaining_in_phase = m_radius;
-		m_phase = 6;
-	}
-
-	Uint16 radius() const throw () {return m_radius;}
-private:
-	FCoords m_location;
-	Uint16  m_radius;
-	Uint16  m_remaining_in_phase;
-	Uint8   m_phase;
-};
-
-
-/**
- * Producer/Coroutine struct that iterates over every node for which the
- * distance to the center point is greater than <hollow_area>.hole_radius and at
- * most <hollow_area>.radius.
- *
- * Note that the order in which fields are returned is not guarantueed.
- */
-struct MapHollowRegion {
-	MapHollowRegion(Map & map, const HollowArea hollow_area);
-
-	const Coords & location() const throw () {return m_location;}
-
-	/**
-	 * Moves on to the next location. The return value indicates wether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done.
-	 */
-	bool advance(const Map &) throw ();
-
-private:
-	enum Phase {
-		None   = 0, // not initialized or completed
-		Top    = 1, // above the hole
-		Upper  = 2, // upper half
-		Lower  = 4, // lower half
-		Bottom = 8, // below the hole
-	};
-
-	Phase m_phase;
-	const unsigned int m_radius;      // radius of the area
-	const unsigned int m_hole_radius; // radius of the hole
-	const unsigned int m_delta_radius;
-	unsigned int m_row; // # of rows completed in this phase
-	unsigned int m_rowwidth; // # of fields to return per row
-	unsigned int m_rowpos; // # of fields we have returned in this row
-	Coords m_left; // left-most field of current row
-	Coords m_location;
-};
-
-/**
- * Producer/Coroutine struct that returns every triangle which can be reached by
- * crossing at most <radius> edges.
- *
- * Each such location is returned exactly once via next(). But this does not
- * guarantee that a location is returned at most once when the radius is so
- * large that the area overlaps itself because of wrapping.
- *
- * Note that the order in which locations are returned is not guarantueed. (But
- * in fact the triangles are returned row by row from top to bottom and from
- * left to right in each row and I see no reason why that would ever change.)
- *
- * The initial coordinates must refer to a triangle (TCoords::D or TCoords::R).
- * Use MapRegion instead for nodes (TCoords::None).
- */
-struct MapTriangleRegion {
-	MapTriangleRegion(const Map &, TCoords, const unsigned short radius);
-
-	const TCoords & location() const throw () {return m_location;}
-
-	/**
-	 * Moves on to the next location. The return value indicates wether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done and location is the same as it was before the first
-	 * call to advance. The iteration can then be redone by calling advance
-	 * again, which will return true util it reaches the first location the next
-	 * time around, and so on.
-	 */
-	bool advance(const Map &) throw ();
-
-private:
-	const bool m_radius_is_odd;
-	enum {Top, Upper, Lower, Bottom} m_phase;
-	unsigned short m_remaining_rows_in_upper_phase;
-	unsigned short m_remaining_rows_in_lower_phase;
-	unsigned short m_row_length, m_remaining_in_row;
-	Coords  m_left;
-	TCoords m_location;
-};
 
 std::string g_MapVariableCallback( std::string str, void* data );
 #endif // __S__MAP_H

@@ -23,10 +23,10 @@
 #include "geometry.h"
 #include "types.h"
 
-struct Player_Area : public Area {
+template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 	Player_Area() {}
-	Player_Area(const Player_Number pn, const Area area)
-		: Area(area), player_number(pn)
+	Player_Area(const Player_Number pn, const Area_type area)
+		: Area_type(area), player_number(pn)
 	{}
 	Player_Number player_number;
 };

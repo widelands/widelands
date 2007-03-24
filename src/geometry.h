@@ -145,8 +145,10 @@ struct Coords {
 	bool operator!=(const Coords other) const throw ()
 	{return not (*this == other);}
 
-	bool is_valid  () const throw () {return x != -1 and y != -1;}
-	bool is_invalid() const throw () {return x == -1 and y == -1;}
+	bool is_valid  () const throw () __attribute__((deprecated))
+	{return x != -1 and y != -1;}
+
+	bool isNull() const throw () {return *this == Null();}
 
 	/**
 	 * For use with standard containers.
@@ -165,34 +167,36 @@ struct Extent {
 	Uint16 w, h;
 };
 
-struct Area : public Coords {
+template <typename _Coords_type = Coords, typename _Radius_type = Uint16>
+struct Area : public _Coords_type
+{
+	typedef _Coords_type Coords_type;
+	typedef _Radius_type Radius_type;
 	Area() throw () {}
-	Area(const Coords center, const uint Radius) throw ()
-		: Coords(center), radius(Radius)
+	Area(const Coords_type center, const Radius_type Radius) throw ()
+		: Coords_type(center), radius(Radius)
 	{}
 
 	bool operator==(const Area other) const throw ()
-	{return Coords::operator==(other) and radius == other.radius;}
+	{return Coords_type::operator==(other) and radius == other.radius;}
 	bool operator!=(const Area other) const throw ()
-	{return Coords::operator!=(other) or  radius != other.radius;}
+	{return Coords_type::operator!=(other) or  radius != other.radius;}
 
-	uint radius;
+	Radius_type radius;
 };
 
-struct HollowArea : public Area {
-	HollowArea(const Area area, const uint Hole_Radius)
-		: Area(area), hole_radius(Hole_Radius)
+template <typename Area_type = Area<> > struct HollowArea : public Area_type {
+	HollowArea
+		(const Area_type area, const typename Area_type::Radius_type Hole_Radius)
+		: Area_type(area), hole_radius(Hole_Radius)
 	{}
 
 	bool operator==(const HollowArea other) const throw ()
-	{return Area::operator==(other) and hole_radius == other.hole_radius;}
+	{return Area_type::operator==(other) and hole_radius == other.hole_radius;}
 	bool operator!=(const HollowArea other) const throw ()
-	{return Area::operator!=(other) or  hole_radius != other.hole_radius;}
+	{return not (*this == other);}
 
-	bool is_valid() const throw ()
-	{return Coords::is_valid() and hole_radius < radius;}
-
-	uint hole_radius;
+	typename Area_type::Radius_type hole_radius;
 };
 
 struct Field;
@@ -206,42 +210,47 @@ struct FCoords : public Coords {
 	 * Used in RenderTargetImpl::rendermap where this is first called, then
 	 * the coordinates are normalized and after that field is set.
 	 */
-	FCoords(const Coords nc) throw () : Coords(nc) {}
+	explicit FCoords(const Coords nc) throw () : Coords(nc) {}
 
 	Field * field;
 };
 
 
-struct TCoords : public Coords {
+template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 	enum TriangleIndex {D, R, None};
 
 	TCoords() throw () {}
-	TCoords(const Coords C, const TriangleIndex T = None) throw ()
-			: Coords(C), t(T)
+	TCoords(const Coords_type C, const TriangleIndex T = None) throw ()
+			: Coords_type(C), t(T)
 	{}
 
-	bool operator==(const TCoords other) const throw ()
-	{return Coords::operator==(other) and t == other.t;}
-	bool operator!=(const TCoords other) const throw ()
-	{return Coords::operator!=(other) or  t != other.t;}
+	bool operator==(const TCoords<> other) const throw ()
+	{return Coords_type::operator==(other) and t == other.t;}
+	bool operator!=(const TCoords<> other) const throw ()
+	{return Coords_type::operator!=(other) or  t != other.t;}
 
 	TriangleIndex t;
 };
 
 
+template
+<typename Node_Coords_type = Coords, typename Triangle_Coords_type = Coords>
 struct Node_and_Triangle {
 	Node_and_Triangle() throw () {}
-	Node_and_Triangle(const Coords Node, const TCoords Triangle) throw ()
+	Node_and_Triangle
+		(const Node_Coords_type              Node,
+		 const TCoords<Triangle_Coords_type> Triangle)
+		throw ()
 			: node(Node), triangle(Triangle)
 	{}
 
-	bool operator==(const Node_and_Triangle other) const throw ()
+	bool operator==(const Node_and_Triangle<> other) const throw ()
 	{return node == other.node and triangle == other.triangle;}
-	bool operator!=(const Node_and_Triangle other) const throw ()
+	bool operator!=(const Node_and_Triangle<> other) const throw ()
 	{return not (*this == other);}
 
-	Coords node;
-	TCoords triangle;
+	Node_Coords_type              node;
+	TCoords<Triangle_Coords_type> triangle;
 };
 
 #endif /* GEOMETRY_H */

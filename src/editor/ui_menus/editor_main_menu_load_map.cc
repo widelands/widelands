@@ -307,7 +307,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          text+="_starting_pos.png";
 			const Coords fc = map.get_starting_pos(i);
 
-         if (fc.is_invalid()) continue;
+			if (fc.isNull()) continue;
 			uint w, h;
 			const uint picid=g_gr->get_picture(PicMod_Game,  text.c_str());
 			g_gr->get_picture_size(picid, w, h);

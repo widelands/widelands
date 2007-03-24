@@ -51,7 +51,7 @@ private:
       Editor_Interactive* m_parent;
       UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
       UI::Edit_Box* m_name;
-	Player_Area m_player_area;
+	Player_Area<> m_player_area;
 };
 
 #endif

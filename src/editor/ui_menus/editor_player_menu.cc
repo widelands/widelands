@@ -148,7 +148,7 @@ void Editor_Player_Menu::update(void) {
       // Check if starting position is valid
       bool start_pos_valid=true;
 		const Coords start_pos = map.get_starting_pos(i + 1);
-      if (start_pos.is_invalid()) start_pos_valid = false;
+		if (start_pos.isNull()) start_pos_valid = false;
 
       if(!m_plr_names[i]) {
           m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
@@ -350,7 +350,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
 	if (parent.editor().get_player(n)) {
-		if (not map.get_starting_pos(n).is_invalid()) {
+		if (not map.get_starting_pos(n).isNull()) {
 			if
 				(dynamic_cast<const Building * const>
 				 (map[map.get_starting_pos(n)].get_immovable()))

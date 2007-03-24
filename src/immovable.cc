@@ -80,7 +80,10 @@ void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 
 	f->immovable = this;
 
-	if (get_size() >= SMALL) g->map().recalc_for_field_area(Area(c, 2));
+	if (get_size() >= SMALL) {
+		Map & map = g->map();
+		map.recalc_for_field_area(Area<FCoords>(map.get_fcoords(c), 2));
+	}
 }
 
 /*
@@ -99,7 +102,10 @@ void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 
 	f->immovable = 0;
 
-	if (get_size() >= SMALL) g->map().recalc_for_field_area(Area(c, 2));
+	if (get_size() >= SMALL) {
+		Map & map = g->map();
+		map.recalc_for_field_area(Area<FCoords>(map.get_fcoords(c), 2));
+	}
 }
 
 

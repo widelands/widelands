@@ -35,7 +35,7 @@
 struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 	Editor_Set_Starting_Pos_Tool();
 
-	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return m_current_sel_pic.size() ? m_current_sel_pic.c_str() : 0;}
 
@@ -47,6 +47,6 @@ private:
       std::string m_current_sel_pic;
 };
 
-int Editor_Tool_Set_Starting_Pos_Callback(const TCoords, void *, int);
+int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<>, void *, int);
 
 #endif

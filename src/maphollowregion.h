@@ -1,0 +1,66 @@
+/*
+ * Copyright (C) 2004, 2007 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#ifndef __S__MAPHOLLOWREGION_H
+#define __S__MAPHOLLOWREGION_H
+
+#include "map.h"
+
+/**
+ * Producer/Coroutine struct that iterates over every node for which the
+ * distance to the center point is greater than <hollow_area>.hole_radius and at
+ * most <hollow_area>.radius.
+ *
+ * Note that the order in which fields are returned is not guarantueed.
+ */
+template <typename Area_type = Area<> > struct MapHollowRegion {
+	MapHollowRegion(Map & map, const HollowArea<Area_type> hollow_area);
+
+	const typename Area_type::Coords_type & location() const throw ()
+	{return m_hollow_area;}
+
+	/**
+	 * Moves on to the next location. The return value indicates wether the new
+	 * location has not yet been reached during this iteration. Note that when
+	 * the area is so large that it overlaps itself because of wrapping, the same
+	 * location may be reached several times during an iteration, while advance
+	 * keeps returning true. When finally advance returns false, it means that
+	 * the iteration is done.
+	 */
+	bool advance(const Map &) throw ();
+
+private:
+	enum Phase {
+		None   = 0, // not initialized or completed
+		Top    = 1, // above the hole
+		Upper  = 2, // upper half
+		Lower  = 4, // lower half
+		Bottom = 8, // below the hole
+	};
+
+	HollowArea<Area_type> m_hollow_area;
+	Phase m_phase;
+	const unsigned int m_delta_radius;
+	unsigned int m_row; // # of rows completed in this phase
+	unsigned int m_rowwidth; // # of fields to return per row
+	unsigned int m_rowpos; // # of fields we have returned in this row
+	typename Area_type::Coords_type m_left; //  left-most node of current row
+};
+
+#endif

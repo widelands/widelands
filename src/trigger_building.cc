@@ -36,7 +36,7 @@ static const int TRIGGER_VERSION = 2;
 Trigger_Building::Trigger_Building()
 :
 Trigger      (_("Building Trigger")),
-m_player_area(0, Area(Coords(0, 0), 0)),
+m_player_area(0, Area<FCoords>(FCoords(Coords(0, 0)), 0)),
 m_building   (_("<unset>")),
 m_count      (0)
 {set_trigger(false);}
@@ -46,14 +46,15 @@ Trigger_Building::~Trigger_Building() {}
 void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
 	const int trigger_version= s->get_safe_int("version");
 	if (1 <= trigger_version and trigger_version <= TRIGGER_VERSION) {
-		m_player_area = Player_Area
+		m_player_area = Player_Area<Area<FCoords> >
 			(s->get_safe_int("player"),
-			 Area
-			 (trigger_version == 1
-			  ?
-			  Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))
-			  :
-			  s->get_safe_Coords("point"),
+			 Area<FCoords>
+			 (egbase->map().get_fcoords
+			  (trigger_version == 1
+			   ?
+			   (Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y")))
+			   :
+			   s->get_safe_Coords("point")),
 			  s->get_safe_int("area")));
 		egbase->get_iabase()
 			->reference_player_tribe(m_player_area.player_number, this);
@@ -90,7 +91,7 @@ void Trigger_Building::check_set_conditions(Game* game) {
 
 
 	uint count = 0;
-	MapRegion mr(map, m_player_area);
+	MapRegion<Area<FCoords> > mr (map, m_player_area);
 	do if
 		(const Building * const building = dynamic_cast<const Building * const>
 		 (mr.location().field->get_immovable()))

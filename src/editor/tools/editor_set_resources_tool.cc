@@ -35,11 +35,13 @@ sets the resources of the current to a fixed value
 ===========
 */
 int Editor_Set_Resources_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const World & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
-	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	MapRegion<Area<FCoords> > mr
+		(map,
+		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int res        = mr.location().field->get_resources();
 		int amount     = mr.location().field->get_resources_amount();
@@ -69,7 +71,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);
-	         map.recalc_for_field_area(Area(mr.location(), 0));
+				map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
          }
       }
 	} while (mr.advance(map));

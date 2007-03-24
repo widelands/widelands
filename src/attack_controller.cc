@@ -41,8 +41,7 @@ void getCloseMilitarySites
    std::vector<ImmovableFound> immovables;
 
 	map.find_reachable_immovables
-		(flag.get_position(),
-		 25,
+		(Area<FCoords>(game.map().get_fcoords(flag.get_position()), 25),
 		 &immovables,
 		 CheckStepWalkOn(MOVECAPS_WALK, false));
 

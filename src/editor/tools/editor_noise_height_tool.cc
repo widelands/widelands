@@ -21,16 +21,18 @@
 #include "editor_decrease_height_tool.h"
 #include "editor_set_height_tool.h"
 #include "editor_noise_height_tool.h"
-#include "map.h"
+#include "mapregion.h"
 #include "field.h"
 #include "editorinteractive.h"
 
 /// Sets the heights to random values. Chages surrounding nodes if necessary.
 int Editor_Noise_Height_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	uint max = 0;
-	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	MapRegion<Area<FCoords> > mr
+		(map,
+		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do max =
 		std::max
 		(max,

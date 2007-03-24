@@ -181,16 +181,16 @@ public:
 	FieldCaps get_caps() const {return caps;}
 
 	const Terrain_Descr & get_terr() const throw ()
-	{return *triangles[TCoords::R].terrain_type;}
+	{return *triangles[TCoords<>::R].terrain_type;}
 	const Terrain_Descr & get_terd() const throw ()
-	{return *triangles[TCoords::D].terrain_type;}
-	void set_terrain(const TCoords::TriangleIndex t, const Terrain_Descr & p)
+	{return *triangles[TCoords<>::D].terrain_type;}
+	void set_terrain(const TCoords<>::TriangleIndex t, const Terrain_Descr & p)
 		throw ()
 	{triangles[t]         .terrain_type = &p;}
 	void set_terrainr(const Terrain_Descr & p) throw ()
-	{triangles[TCoords::R].terrain_type = &p;}
+	{triangles[TCoords<>::R].terrain_type = &p;}
 	void set_terraind(const Terrain_Descr & p) throw ()
-	{triangles[TCoords::D].terrain_type = &p;}
+	{triangles[TCoords<>::D].terrain_type = &p;}
 
 	inline Bob* get_first_bob(void) { return bobs; }
 	inline BaseImmovable* get_immovable() { return immovable; }

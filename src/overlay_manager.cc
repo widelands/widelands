@@ -49,7 +49,7 @@ unsigned char Overlay_Manager::get_overlays
 
 	unsigned char num_ret = 0;
 
-	const Registered_Overlays_Map & overlay_map = m_overlays[TCoords::None];
+	const Registered_Overlays_Map & overlay_map = m_overlays[TCoords<>::None];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() and it->first == c and it->second.level <= 5)
 	{
@@ -80,10 +80,10 @@ end:
  * Returns the currently registered overlays for a triangle.
  */
 unsigned char Overlay_Manager::get_overlays
-(const TCoords c, Overlay_Info * const overlays) const
+(const TCoords<> c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
-	assert(c.t == TCoords::D or c.t == TCoords::R);
+	assert(c.t == TCoords<>::D or c.t == TCoords<>::R);
 
 	unsigned char num_ret = 0;
 
@@ -151,7 +151,7 @@ void Overlay_Manager::recalc_field_overlays(const FCoords fc) {
  * finally, register a new overlay
  */
 void Overlay_Manager::register_overlay
-(const TCoords c,
+(const TCoords<> c,
  const int picid,
  const int level,
  Point            hotspot,
@@ -211,7 +211,7 @@ void Overlay_Manager::register_overlay
 /*
  * remove one (or many) overlays from a node or triangle
  */
-void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
+void Overlay_Manager::remove_overlay(const TCoords<> c, const int picid) {
 	assert(c.t <= 2);
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];

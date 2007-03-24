@@ -26,8 +26,9 @@
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
 int Editor_Decrease_Height_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	return map.change_height
-		(Area(center.node, parent.get_sel_radius()), -m_change_by);
+		(Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()),
+		 -m_change_by);
 }

@@ -30,7 +30,7 @@ struct Editor_Decrease_Resources_Tool : public Editor_Tool {
 		: Editor_Tool(*this, *this), m_cur_res(0), m_change_by(1)
 	{}
 
-	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_decrease_resources.png";}
 

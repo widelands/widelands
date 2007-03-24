@@ -20,6 +20,7 @@
 #include "event_unhide_area.h"
 #include "game.h"
 #include "player.h"
+#include "profile.h"
 
 Event::State Event_Unhide_Area::run(Game* game) {
 	assert(m_player_area.is_valid());
@@ -31,4 +32,16 @@ Event::State Event_Unhide_Area::run(Game* game) {
 
    m_state = DONE;
    return m_state;
+}
+
+void Event_Unhide_Area::Read(Section * s, Editor_Game_Base * egbase) {
+	Event_Player_Area::Read(s, egbase);
+	duration = s->get_int("duration", 0);
+}
+
+void Event_Unhide_Area::Write
+(Section & s, const Editor_Game_Base & egbase) const
+{
+	Event_Player_Area::Write(s, egbase);
+	s.set_int("duration", duration);
 }

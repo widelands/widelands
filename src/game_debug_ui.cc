@@ -345,7 +345,7 @@ void FieldDebugWindow::think()
 
 	m_ui_bobs.clear();
 
-	m_map.find_bobs(m_coords, 0, &bobs);
+	m_map.find_bobs(Area<FCoords>(m_coords, 0), &bobs);
 	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
 		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->get_name().c_str(), (*it)->get_serial());
 		m_ui_bobs.add(buf, (*it)->get_serial());

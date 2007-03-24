@@ -53,12 +53,12 @@ throw (_wexception)
 
       game->m_gametime=fr.Unsigned32();
 
-		std::vector<Player_Area> & conquer_info = game->m_conquer_info;
+		std::vector<Player_Area<> > & conquer_info = game->m_conquer_info;
 		conquer_info.resize(fr.Unsigned16());
-		const std::vector<Player_Area>::const_iterator conquer_info_end =
+		const std::vector<Player_Area<> >::const_iterator conquer_info_end =
 			conquer_info.end();
 		for
-			(std::vector<Player_Area>::iterator it = conquer_info.begin();
+			(std::vector<Player_Area<> >::iterator it = conquer_info.begin();
 			 it != conquer_info_end;
 			 ++it)
 		{
@@ -114,12 +114,12 @@ throw (_wexception)
    // Track pointers are not saved in save games
 
    // Conquer info
-	const std::vector<Player_Area> & conquer_info = game->m_conquer_info;
+	const std::vector<Player_Area<> > & conquer_info = game->m_conquer_info;
    fw.Unsigned16(game->m_conquer_info.size());
-	const std::vector<Player_Area>::const_iterator conquer_info_end =
+	const std::vector<Player_Area<> >::const_iterator conquer_info_end =
 		conquer_info.end();
 	for
-		(std::vector<Player_Area>::const_iterator it = conquer_info.begin();
+		(std::vector<Player_Area<> >::const_iterator it = conquer_info.begin();
 		 it != conquer_info_end;
 		 ++it)
 	{

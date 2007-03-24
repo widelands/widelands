@@ -30,9 +30,9 @@ void Event_Player_Area::reinitialize(Game *) {}
 void Event_Player_Area::Read(Section* s, Editor_Game_Base* egbase) {
 	const int event_version = s->get_safe_int("version");
 	if (1 <= event_version and event_version <= EVENT_VERSION) {
-		m_player_area = Player_Area
+		m_player_area = Player_Area<>
 			(s->get_safe_int("player"),
-			 Area
+			 Area<>
 			 (event_version == 1
 			  ?
 			  Coords(s->get_safe_int("point_x"), s->get_safe_int("point_y"))

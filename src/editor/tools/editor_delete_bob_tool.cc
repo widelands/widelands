@@ -19,7 +19,7 @@
 
 #include "editor_delete_bob_tool.h"
 #include "field.h"
-#include "map.h"
+#include "mapregion.h"
 #include "editorinteractive.h"
 #include "editor.h"
 #include "bob.h"
@@ -32,10 +32,11 @@ deletes the bob at the given location
 ===========
 */
 int Editor_Delete_Bob_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const int radius = parent.get_sel_radius();
-	MapRegion mr(map, Area(center.node, radius));
+	MapRegion<Area<FCoords> > mr
+		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
 	do if (Bob * const bob = mr.location().field->get_first_bob())
 		bob->remove(&parent.editor());
 	while (mr.advance(map));

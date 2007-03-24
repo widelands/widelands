@@ -51,7 +51,7 @@ struct Editor_Interactive : public Interactive_Base {
       void start();
 
 	void map_clicked();
-	virtual void set_sel_pos(Node_and_Triangle);
+	virtual void set_sel_pos(Node_and_Triangle<>);
 
       // gets called when a keyboard event occurs
       bool handle_key(bool down, int code, char c);

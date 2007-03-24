@@ -27,7 +27,7 @@
 #include "interactive_base.h"
 #include "interactive_player.h"
 #include "keycodes.h"
-#include "map.h"
+#include "maptriangleregion.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"
@@ -98,7 +98,7 @@ Interactive_Base::~Interactive_Base(void)
 }
 
 
-void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
+void Interactive_Base::set_sel_pos(const Node_and_Triangle<> center)
 {
 	Map & map = egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
@@ -112,13 +112,13 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle center)
 
    // register sel overlay position
 	if (m_sel.triangles) {
-		assert(center.triangle.t == TCoords::D or center.triangle.t == TCoords::R);
-		MapTriangleRegion mr(map, center.triangle, m_sel.radius);
+		assert(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
+		MapTriangleRegion<> mr(map, center.triangle, m_sel.radius);
 		do overlay_manager.register_overlay
 			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
-		MapRegion mr(map, Area(center.node, m_sel.radius));
+		MapRegion<> mr(map, Area<>(center.node, m_sel.radius));
 		do overlay_manager.register_overlay
 			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));

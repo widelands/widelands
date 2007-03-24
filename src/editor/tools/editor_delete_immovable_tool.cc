@@ -20,7 +20,7 @@
 #include "editor_delete_immovable_tool.h"
 #include "field.h"
 #include "immovable.h"
-#include "map.h"
+#include "mapregion.h"
 #include "editorinteractive.h"
 #include "editor.h"
 
@@ -40,9 +40,11 @@ deletes the immovable at the given location
 ===========
 */
 int Editor_Delete_Immovable_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	MapRegion<Area<FCoords> > mr
+		(map,
+		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do if
 		(Immovable * const immovable =
 		 dynamic_cast<Immovable * const>(mr.location().field->get_immovable()))

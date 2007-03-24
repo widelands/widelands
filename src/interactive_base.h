@@ -62,7 +62,7 @@ struct Interactive_Base : public Map_View {
       // logic handler func
       void think();
 
-	const Node_and_Triangle & get_sel_pos() const {return m_sel.pos;}
+	const Node_and_Triangle<> & get_sel_pos() const {return m_sel.pos;}
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
 	/**
@@ -73,7 +73,7 @@ struct Interactive_Base : public Map_View {
 	void set_sel_triangles(const bool yes) throw () {m_sel.triangles = yes;}
 
 	uint get_sel_radius() const throw () {return m_sel.radius;}
-	virtual void set_sel_pos(const Node_and_Triangle);
+	virtual void set_sel_pos(const Node_and_Triangle<>);
 	void set_sel_freeze(const bool yes) throw () {m_sel.freeze = yes;}
 	void set_sel_radius(const uint n);
 
@@ -111,8 +111,9 @@ struct Interactive_Base : public Map_View {
 	struct Sel_Data {
 		Sel_Data
 			(const bool Freeze = false, const bool Triangles = false,
-			 const Node_and_Triangle Pos         =
-			 Node_and_Triangle(Coords(0, 0), TCoords(Coords(0, 0), TCoords::D)),
+			 const Node_and_Triangle<> Pos       =
+			 Node_and_Triangle<>
+			 (Coords(0, 0), TCoords<>(Coords(0, 0), TCoords<>::D)),
 			 const uint Radius                   = 0,
 			 const int Pic                       = 0,
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
@@ -122,7 +123,7 @@ struct Interactive_Base : public Map_View {
 		{}
 		bool              freeze; // don't change m_sel even if mouse moves
 		bool              triangles; //  otherwise nodes
-		Node_and_Triangle pos;
+		Node_and_Triangle<>     pos;
 		uint              radius;
 		int               pic;
 		Overlay_Manager::Job_Id jobid;

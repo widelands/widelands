@@ -34,6 +34,7 @@ class.
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "maphollowregion.h"
 #include "militarysite.h"
 #include "player.h"
 #include "productionsite.h"
@@ -803,8 +804,7 @@ void Building_Window::toggle_workarea() {
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id.isNull()) {
 		m_workarea_job_id = overlay_manager.get_a_job_id();
-		HollowArea hollow_area =
-			HollowArea(Area(m_building->get_position(), 0), 0);
+		HollowArea<> hollow_area(Area<>(m_building->get_position(), 0), 0);
 		const Workarea_Info & workarea_info =
 			m_building->descr().m_recursive_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
@@ -816,7 +816,7 @@ void Building_Window::toggle_workarea() {
 		{
 			--i;
 			hollow_area.radius = it->first;
-			MapHollowRegion mr(map, hollow_area);
+			MapHollowRegion<> mr(map, hollow_area);
 			do overlay_manager.register_overlay
 				(mr.location(),
 				 workarea_cumulative_picid[i],

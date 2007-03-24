@@ -20,15 +20,17 @@
 
 #include "editor_set_terrain_tool.h"
 #include "editorinteractive.h"
+#include "maptriangleregion.h"
 
 int Editor_Set_Terrain_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	assert(center.triangle.t == TCoords::D or center.triangle.t == TCoords::R);
+	assert
+		(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 	const int radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
 		int max = 0;
-		MapTriangleRegion mr(map, center.triangle, radius);
+		MapTriangleRegion<> mr(map, center.triangle, radius);
 		do max =
 			std::max(max, map.change_terrain(mr.location(), get_random_enabled()));
 		while (mr.advance(map));

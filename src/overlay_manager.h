@@ -54,7 +54,7 @@
  */
 #define MAX_OVERLAYS_PER_NODE 5
 #define MAX_OVERLAYS_PER_TRIANGLE 3
-typedef int (*Overlay_Callback_Function)(const TCoords, void*, int);
+typedef int (*Overlay_Callback_Function)(const TCoords<>, void *, int);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
 		static Job_Id Null() throw ()//  Constant value for no job.
@@ -108,20 +108,20 @@ struct Overlay_Manager {
 	 * Point::invalid(), the center of the picture will be used as hotspot.
 	 */
 	void register_overlay
-		(const TCoords,
+		(const TCoords<>,
 		 const int picid,
 		 const int level,
 		 Point        hotspot = Point::invalid(),
 		 const Job_Id jobid = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays
-	void remove_overlay(const TCoords, const int picid = -1);
+	void remove_overlay(const TCoords<>, const int picid = -1);
 
 	void remove_overlay(const Job_Id jobid);
 
 	unsigned char get_overlays(const FCoords c, Overlay_Info * const) const;
 	unsigned char get_overlays
-		(const TCoords, Overlay_Info * const overlays) const;
+		(const TCoords<>, Overlay_Info * const overlays) const;
 
       void show_buildhelp(bool t) { m_showbuildhelp= t; }
       void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; }
@@ -175,7 +175,7 @@ struct Overlay_Manager {
 		std::multimap<const Coords, Registered_Overlays, Coords::ordering_functor>
 		Registered_Overlays_Map;
 
-	//  indexed by TCoords::TriangleIndex
+	//  indexed by TCoords<>::TriangleIndex
 	Registered_Overlays_Map m_overlays[3];
 
 	Overlay_Info m_buildhelp_infos[Field::Buildhelp_None];

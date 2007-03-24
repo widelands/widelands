@@ -291,7 +291,8 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    uint totalchance = 0;
    int pick;
 	{
-		MapRegion mr(map, Area(get_position(), action->iparam1));
+		MapRegion<Area<FCoords> > mr
+			(map, Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
 		do {
 			uchar fres  = mr.location().field->get_resources();
 			uint amount = mr.location().field->get_resources_amount();
@@ -327,7 +328,8 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    pick = g->logic_rand() % totalchance;
 
 	{
-		MapRegion mr(map, Area(get_position(), action->iparam1));
+		MapRegion<Area<FCoords> > mr
+			(map, Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
 		do {
 			uchar fres  = mr.location().field->get_resources();
 			uint amount = mr.location().field->get_resources_amount();;
@@ -545,9 +547,6 @@ void WorkerProgram::parse_findobject
 
 bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 {
-   Coords pos = get_position();
-   Map* map = g->get_map();
-
    molog("  FindObject(%i, %i,%s)\n", action->iparam1, action->iparam2, action->sparam1.c_str());
 
 
@@ -561,13 +560,14 @@ bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 
    CheckStepWalkOn cstep(get_movecaps(), false);
 
-   if(action->sparam1=="immovable") {
+   Map & map = g->map();
+	const Area<FCoords> area (map.get_fcoords(get_position()), action->iparam1);
+	if (action->sparam1 == "immovable") {
       std::vector<ImmovableFound> list;
-      if (action->iparam2 < 0)
-         map->find_reachable_immovables(pos, action->iparam1, &list, cstep);
-      else
-         map->find_reachable_immovables(pos, action->iparam1, &list, cstep,
-               FindImmovableAttribute(action->iparam2));
+		if (action->iparam2 < 0)
+			map.find_reachable_immovables(area, &list, cstep);
+		else map.find_reachable_immovables
+			(area, &list, cstep, FindImmovableAttribute(action->iparam2));
 
       if (!list.size()) {
          set_signal("fail"); // no object found, cannot run program
@@ -578,14 +578,12 @@ bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
       int sel = g->logic_rand() % list.size();
       state->objvar1 = list[sel].object;
       molog("  %i found\n", list.size());
-   } else {
+	} else {
       std::vector<Bob*> list;
       log("BOB: searching bob with attribute (%i)\n", action->iparam2);
-      if (action->iparam2 < 0)
-         map->find_reachable_bobs(pos, action->iparam1, &list, cstep);
-      else
-         map->find_reachable_bobs(pos, action->iparam1, &list, cstep,
-               FindBobAttribute(action->iparam2));
+		if (action->iparam2 < 0) map.find_reachable_bobs(area, &list, cstep);
+		else map.find_reachable_bobs
+			(area, &list, cstep, FindBobAttribute(action->iparam2));
 
       if (!list.size()) {
          set_signal("fail"); // no object found, cannot run program
@@ -695,8 +693,8 @@ void WorkerProgram::parse_findspace
 bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
 {
 	std::vector<Coords> list;
-	Map* map = g->get_map();
-	World* w = map->get_world();
+	Map & map = g->map();
+	World * const w = &map.world();
 
    CheckStepDefault cstep(get_movecaps());
 
@@ -704,12 +702,13 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
    if(action->sparam1.size())
      res=w->get_resource(action->sparam1.c_str());
 
+	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
    int retval=0;
    if(res!=-1) {
-      retval=map->find_reachable_fields(get_position(), action->iparam1, &list, cstep,
+      retval=map.find_reachable_fields(area, &list, cstep,
                FindFieldSizeResource((FindFieldSize::Size)action->iparam2,res));
    } else {
-      retval=map->find_reachable_fields(get_position(), action->iparam1, &list, cstep,
+      retval=map.find_reachable_fields(area, &list, cstep,
                FindFieldSize((FindFieldSize::Size)action->iparam2));
    }
 
@@ -3239,7 +3238,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	// Try to find a warehouse we can return to
 	std::vector<ImmovableFound> warehouses;
 
-	if (map->find_immovables(get_position(), 15, &warehouses, FindImmovableAttribute(WAREHOUSE))) {
+	if (map->find_immovables(Area<FCoords>(map->get_fcoords(get_position()), 15), &warehouses, FindImmovableAttribute(WAREHOUSE))) {
 		int bestdist = -1;
 		Warehouse *best = 0;
 
@@ -3369,22 +3368,22 @@ void Worker::geologist_update(Game* g, State* state)
 	}
 
 	//
-	Map* map = g->get_map();
+	Map & map = g->map();
+	const World & world = map.world();
 	PlayerImmovable* location = get_location(g);
 	Flag* owner;
-	Coords center;
 
 	assert(location);
 	assert(location->get_type() == FLAG);
 
 	owner = (Flag*)location;
-	center = owner->get_position();
+	Area<FCoords> owner_area(map.get_fcoords(owner->get_position()), state->ivar2);
 
 	// Check if it's time to go home
 	if (state->ivar1 > 0)
 	{
 		// Check to see if we're on suitable terrain
-		BaseImmovable* imm = map->get_immovable(get_position());
+		BaseImmovable * const imm = map.get_immovable(get_position());
 
 		if (!imm ||
 		    (imm->get_size() == BaseImmovable::NONE && !imm->has_attribute(RESI)))
@@ -3406,23 +3405,35 @@ void Worker::geologist_update(Game* g, State* state)
 		ffa.add(&ffis, false);
 		ffa.add(&ffia, true);
 
-		if (map->find_reachable_fields(center, state->ivar2, &list, cstep, ffa))
-      {
-         Coords target;
+		if (map.find_reachable_fields(owner_area, &list, cstep, ffa)) {
+			FCoords target;
 
          // is center a mountain piece?
-         bool is_center_mountain= (map->get_field(center)->get_terd().get_is() & TERRAIN_MOUNTAIN) |
-            (map->get_field(center)->get_terr().get_is() & TERRAIN_MOUNTAIN);
+			bool is_center_mountain =
+				(owner_area.field->get_terd()).get_is()
+				&
+				TERRAIN_MOUNTAIN
+				|
+				(owner_area.field->get_terr()).get_is()
+				&
+				TERRAIN_MOUNTAIN;
          // Only run towards fields that are on a mountain (or not)
          // depending on position of center
          bool is_target_mountain;
          uint n=list.size();
          uint i=g->logic_rand() % list.size();
-         do {
+			do {
             molog("[geologist] Searching for a suitable field!\n");
-            target = list[g->logic_rand() % list.size()];
-            is_target_mountain = (map->get_field(target)->get_terd().get_is() & TERRAIN_MOUNTAIN) |
-               (map->get_field(target)->get_terr().get_is() & TERRAIN_MOUNTAIN);
+				target =
+					map.get_fcoords(list[g->logic_rand() % list.size()]);
+				is_target_mountain =
+					(target.field->get_terd()).get_is()
+					&
+					TERRAIN_MOUNTAIN
+					|
+					(target.field->get_terr()).get_is()
+					&
+					TERRAIN_MOUNTAIN;
             if(i==0) i=list.size();
             --i;
             --n;
@@ -3449,14 +3460,16 @@ void Worker::geologist_update(Game* g, State* state)
 		state->ivar1 = 0;
 	}
 
-	if (get_position() == center) {
+	if (get_position() == owner_area) {
 		molog("[geologist]: We're home\n");
 		pop_task();
 		return;
 	}
 
 	molog("[geologist]: Return home\n");
-	if (!start_task_movepath(g, center, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+	if
+		(not start_task_movepath
+		 (g, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[geologist]: Couldn't find path home\n");
 		set_signal("fail");

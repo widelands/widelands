@@ -268,10 +268,12 @@ void WatchWindow::start_tracking(Point pos)
 		MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node;
 
 	// Scan progressively larger circles around the given position for suitable bobs
-	for(radius = 2; radius <= 32; radius <<= 1) {
-		if (map.find_bobs(center, radius, &bobs))
-			break;
-	}
+	for
+		(Area<FCoords> area
+		 (map.get_fcoords
+		  (MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node),
+		  2); area.radius <= 32; radius *= 2)
+		if (map.find_bobs(area, &bobs)) break;
 
 	// Find the bob closest to us
 	int closest_dist = -1;

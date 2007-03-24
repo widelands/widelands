@@ -45,9 +45,11 @@ there is not already another resource there.
 ===========
 */
 int Editor_Decrease_Resources_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	MapRegion<Area<FCoords> > mr
+		(map,
+		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int res    = mr.location().field->get_resources();
 		int amount = mr.location().field->get_resources_amount();
@@ -68,17 +70,17 @@ int Editor_Decrease_Resources_Tool::handle_click_impl
 				(mr.location().field->get_resources_amount());
          picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
 			map.overlay_manager().remove_overlay(mr.location(), picid);
-         if(!amount) {
+			if(!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
-         } else {
+			} else {
 				mr.location().field->set_resources(m_cur_res,amount);
 				mr.location().field->set_starting_res_amount(amount);
             // set new overlay
 				str = map.world().get_resource(m_cur_res)->get_editor_pic(amount);
             picid=g_gr->get_picture( PicMod_Menu,  str.c_str() );
 				map.overlay_manager().register_overlay(mr.location(), picid, 4);
-	         map.recalc_for_field_area(Area(mr.location(), 0));
+				map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
          }
       }
 	} while (mr.advance(map));

@@ -44,11 +44,10 @@ class Tribe_Descr;
 class Flag;
 class AttackController;
 
-class Editor_Game_Base {
+struct Editor_Game_Base {
    friend class Interactive_Base;
    friend class Game_Game_Class_Data_Packet;
 
-   public:
       Editor_Game_Base();
       virtual ~Editor_Game_Base();
 
@@ -58,9 +57,10 @@ class Editor_Game_Base {
       Map & get_map() const {return *m_map;}
       Object_Manager * get_objects() const {return m_objects;}
 
-	void unconquer_area(Player_Area, const Player_Number destroying_player = 0);
-	void conquer_area                  (Player_Area);
-	void conquer_area_no_building(const Player_Area);
+	void unconquer_area
+		(Player_Area<Area<FCoords> >, const Player_Number destroying_player = 0);
+	void conquer_area                  (Player_Area<Area<FCoords> >);
+	void conquer_area_no_building(const Player_Area<Area<FCoords> >);
 
       // logic handler func
       virtual void think() = 0;
@@ -141,7 +141,7 @@ class Editor_Game_Base {
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
 
 	virtual void do_conquer_area
-		(const Player_Area player_area,
+		(Player_Area<Area<FCoords> > player_area,
 		 const bool conquer,
 
 		 //  When conquer is false, this can be used to prefer a player over other
@@ -173,14 +173,9 @@ class Editor_Game_Base {
 		 const bool conquer_guarded_location_by_superior_influence = false);
 
 private:
-	typedef int Influence;
+	std::vector<Player_Area<> > m_conquer_info;
 
-	/// Returns the influence on a location from an area.
-	Influence calc_influence (const Coords a, const Area);
-
-	std::vector<Player_Area> m_conquer_info;
-
-	void cleanup_playerimmovables_area(const Area);
+	void cleanup_playerimmovables_area(const Area<FCoords>);
 
       int m_gametime;
 	Player                   * m_players[MAX_PLAYERS];
@@ -202,7 +197,7 @@ public:
 	//  m_conquer_map[0][index] contains the value of
 	//  max(m_conquer_map[1][index], ..., m_conquer_map[MAX_PLAYERS][index])
 	//  (Which means the highest influence that any player has on that location.)
-	Influence m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
+	Military_Influence m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
 	std::vector<uint>          m_attack_serials;
 

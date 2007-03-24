@@ -599,8 +599,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_trees
 		 and
 		 map.find_immovables
-		 (site.site->get_position(),
-		  8,
+		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 8), //  FIXME bug #1669667
 		  0,
 		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
 		 ==
@@ -616,8 +615,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_stones
 		 and
 		 map.find_immovables
-		 (site.site->get_position(),
-		  8,
+		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 8), //  FIXME bug #1669667
 		  0,
 		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
 		 ==
@@ -648,7 +646,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	Map & map = game().map();
 
 	field->unowned_land_nearby =
-		map.find_fields(field->coords, 8, 0, find_unowned);
+		map.find_fields(Area<FCoords>(field->coords, 8), 0, find_unowned);
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
@@ -656,7 +654,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 	const int tree_attr=Map_Object_Descr::get_attribute_id("tree");
 	const int stone_attr=Map_Object_Descr::get_attribute_id("stone");
 
-	map.find_immovables (field->coords, 8, &immovables);
+	map.find_immovables (Area<FCoords>(field->coords, 8), &immovables);
 
 	field->reachable=false;
 	field->preferred=false;
@@ -762,7 +760,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 	std::vector<ImmovableFound> immovables;
 	Map & map = game().map();
 
-	map.find_immovables (field->coords, 6, &immovables);
+	map.find_immovables (Area<FCoords>(field->coords, 6), &immovables);
 
 	field->reachable=false;
 	field->preferred=false;
@@ -911,7 +909,10 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 	functor.economy=flag->get_economy();
 	Map & map = game().map();
 	map.find_reachable_fields
-		(flag->get_position(), 16, &reachable, check, functor);
+		(Area<FCoords>(map.get_fcoords(flag->get_position()), 16),
+		 &reachable,
+		 check,
+		 functor);
 
 	if (reachable.empty())
 		return false;

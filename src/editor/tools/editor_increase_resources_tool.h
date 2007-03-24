@@ -34,7 +34,7 @@ struct Editor_Increase_Resources_Tool : public Editor_Tool {
 		m_change_by(1), m_cur_res(0)
 	{}
 
-	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_increase_resources.png";}
 
@@ -54,6 +54,6 @@ private:
 	Resource_Descr::Index            m_cur_res;
 };
 
-int Editor_Change_Resource_Tool_Callback(const TCoords, void *, int);
+int Editor_Change_Resource_Tool_Callback(const TCoords<>, void *, int);
 
 #endif

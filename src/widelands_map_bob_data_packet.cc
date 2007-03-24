@@ -154,7 +154,7 @@ throw (_wexception)
       for(ushort x=0; x<map->get_width(); x++) {
             std::vector<Bob*> bobarr;
 
-            egbase->get_map()->find_bobs(Coords(x,y), 0, &bobarr);
+            map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr); //  FIXME clean up this mess!
             fw.Unsigned32(bobarr.size());
 
             for(uint i=0; i<bobarr.size(); i++) {

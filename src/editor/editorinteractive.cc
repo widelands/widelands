@@ -196,7 +196,7 @@ void Editor_Interactive::map_clicked() {
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
-void Editor_Interactive::set_sel_pos(const Node_and_Triangle sel) {
+void Editor_Interactive::set_sel_pos(const Node_and_Triangle<> sel) {
 	const bool target_changed = tools.current().operates_on_triangles() ?
 		sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);

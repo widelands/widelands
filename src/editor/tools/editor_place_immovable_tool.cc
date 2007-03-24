@@ -20,7 +20,7 @@
 #include "editor_place_immovable_tool.h"
 #include "field.h"
 #include "immovable.h"
-#include "map.h"
+#include "mapregion.h"
 #include "editorinteractive.h"
 #include "editor.h"
 
@@ -33,12 +33,13 @@ and places this on the current field
 ===========
 */
 int Editor_Place_Immovable_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const int radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;
 	Editor & editor = parent.editor();
-	MapRegion mr(map, Area(center.node, radius));
+	MapRegion<Area<FCoords> > mr
+		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
 	do if
 		(not mr.location().field->get_immovable()
 		 or

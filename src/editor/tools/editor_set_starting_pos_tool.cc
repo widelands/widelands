@@ -33,7 +33,7 @@ static int m_current_player;
 /*
  * static callback function for overlay calculation
  */
-int Editor_Tool_Set_Starting_Pos_Callback(const TCoords c, void * data, int) {
+int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<> c, void * data, int) {
 	const Map & map = *static_cast<const Map * const>(data);
 
 	// Area around already placed players
@@ -41,7 +41,7 @@ int Editor_Tool_Set_Starting_Pos_Callback(const TCoords c, void * data, int) {
 	for (unsigned short i = 1; i <= nrplayers; ++i) {
 		if (i == m_current_player) continue;
 		const Coords sp = map.get_starting_pos(i);
-		if (sp.is_invalid()) continue;
+		if (sp.isNull()) continue;
 		if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) return 0;
 	}
 
@@ -60,7 +60,7 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 
 
 int Editor_Set_Starting_Pos_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
@@ -82,7 +82,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
       // that there might be already a hq placed somewhere. This needs to be
       // deleted before a starting position change can occure
 		if (parent.editor().get_player(m_current_player))
-			if (not starting_pos.is_invalid())
+			if (not starting_pos.isNull())
 				if
 					(dynamic_cast<Building * const>
 					 (map.get_field(starting_pos)->get_immovable()))

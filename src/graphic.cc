@@ -731,7 +731,7 @@ void RenderTargetImpl::rendermap
 							overlay_info
 							+
 							overlay_manager.get_overlays
-							(TCoords(f, TCoords::R), overlay_info);
+							(TCoords<>(f, TCoords<>::R), overlay_info);
 						for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
 							 it < overlay_info_end;
@@ -793,7 +793,7 @@ void RenderTargetImpl::rendermap
 							overlay_info
 							+
 							overlay_manager.get_overlays
-							(TCoords(f, TCoords::D), overlay_info);
+							(TCoords<>(f, TCoords<>::D), overlay_info);
 						for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
 							 it < overlay_info_end;

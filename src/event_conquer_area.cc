@@ -26,7 +26,11 @@ Event::State Event_Conquer_Area::run(Game* game) {
 	assert(0 < m_player_area.player_number);
 	assert    (m_player_area.player_number <= game->map().get_nrplayers());
 
-	game->conquer_area_no_building(m_player_area);
+	game->conquer_area_no_building
+		(Player_Area<Area<FCoords> >
+		 (m_player_area.player_number,
+		  Area<FCoords>
+		  (game->map().get_fcoords(m_player_area), m_player_area.radius)));
 
    m_state = DONE;
    return m_state;

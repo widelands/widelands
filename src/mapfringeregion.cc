@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,16 +17,23 @@
  *
  */
 
-#include "editor_increase_height_tool.h"
-#include "map.h"
-#include "field.h"
-#include "editorinteractive.h"
+#include "mapfringeregion.h"
 
-/// Increases the heights by a value. Chages surrounding nodes if necessary.
-int Editor_Increase_Height_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
-{
-	return map.change_height
-		(Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()),
-		 m_change_by);
+template <>
+bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) throw () {
+	switch (m_phase) {
+	case 0:
+		if (m_area.radius) {m_phase = 6; m_remaining_in_phase = m_area.radius;}
+		else return false;
+	case 1: map.get_trn(m_area, &m_area); break;
+	case 2: map.get_tln(m_area, &m_area); break;
+	case 3: map. get_ln(m_area, &m_area); break;
+	case 4: map.get_bln(m_area, &m_area); break;
+	case 5: map.get_brn(m_area, &m_area); break;
+	case 6: map. get_rn(m_area, &m_area); break;
+	}
+	--m_remaining_in_phase;
+	if (m_remaining_in_phase == 0)
+	{m_remaining_in_phase = m_area.radius; --m_phase;}
+	return m_phase;
 }

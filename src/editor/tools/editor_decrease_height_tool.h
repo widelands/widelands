@@ -26,7 +26,7 @@
 struct Editor_Decrease_Height_Tool : public Editor_Tool {
 	Editor_Decrease_Height_Tool() : Editor_Tool(*this, *this), m_change_by(1) {}
 
-	int handle_click_impl(Map &, const Node_and_Triangle, Editor_Interactive &);
+	int handle_click_impl(Map &, const Node_and_Triangle<>, Editor_Interactive &);
 	const char * get_sel_impl() const throw ()
 	{return "pics/fsel_editor_decrease_height.png";}
 

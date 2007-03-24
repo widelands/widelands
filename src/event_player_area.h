@@ -25,7 +25,8 @@
 
 ///  Abstract base for events involving a player and an area.
 struct Event_Player_Area : public Event {
-	Event_Player_Area(const std::string & Name, const Player_Area player_area)
+	Event_Player_Area
+		(const std::string & Name, const Player_Area<> player_area)
 		: Event(Name), m_player_area(player_area)
 	{}
 
@@ -35,7 +36,7 @@ struct Event_Player_Area : public Event {
 	void Read (Section *,       Editor_Game_Base *);
 
 protected:
-	Player_Area m_player_area;
+	Player_Area<> m_player_area;
 };
 
 #endif

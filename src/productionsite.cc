@@ -709,7 +709,10 @@ void ProductionSite::program_act(Game* g)
          int pick;
 
 			{
-				MapRegion mr(map, Area(get_position(), action->iparam1));
+				MapRegion<Area<FCoords> > mr
+					(map,
+					 Area<FCoords>
+					 (map.get_fcoords(get_position()), action->iparam1));
 				do {
 					uchar fres        = mr.location().field->get_resources();
 					uint amount       = mr.location().field->get_resources_amount();
@@ -759,7 +762,10 @@ void ProductionSite::program_act(Game* g)
             pick = g->logic_rand() % totalchance;
 
 				{
-					MapRegion mr(map, Area(get_position(), action->iparam1));
+					MapRegion<Area<FCoords> > mr
+						(map,
+						 Area<FCoords>
+						 (map.get_fcoords(get_position()), action->iparam1));
 					do {
 						uchar fres  = mr.location().field->get_resources();
 						uint amount = mr.location().field->get_resources_amount();

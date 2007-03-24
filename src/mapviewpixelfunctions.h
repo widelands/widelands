@@ -43,7 +43,7 @@ unsigned int get_map_end_screen_y(const Map &);
  * the point is in. But this should be fully correct for all but the most
  * bizarre triangle shapes, and acceptable even for them.
  */
-Node_and_Triangle calc_node_and_triangle(const Map &, unsigned int x, unsigned int y);
+Node_and_Triangle<> calc_node_and_triangle(const Map &, unsigned int x, unsigned int y);
 
 void normalize_pix(const Map &, Point & p);
 

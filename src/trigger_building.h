@@ -49,7 +49,7 @@ struct Trigger_Building : public Trigger {
 	int get_building_count() const {return m_count;}
 
 private:
-	Player_Area m_player_area;
+	Player_Area<Area<FCoords> > m_player_area;
       std::string m_building;
 	uint m_count;
 };

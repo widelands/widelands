@@ -35,31 +35,34 @@ class Editor_Increase_Resources_Tool
 
 =============================
 */
-int Editor_Change_Resource_Tool_Callback(const TCoords c, void * data, int curres) {
+int Editor_Change_Resource_Tool_Callback
+(const TCoords<> c, void * data, int curres)
+{
 	Map & map = *static_cast<Map * const>(data);
+	const World & world = map.world();
 	FCoords f = FCoords(c, map.get_field(c));
 
    FCoords f1;
    int count=0;
 
    // This field
-	count += f.field->get_terr().resource_value(curres);
-	count += f.field->get_terd().resource_value(curres);
+	count += (f.field->get_terr()).resource_value(curres);
+	count += (f.field->get_terd()).resource_value(curres);
 
 
    // If one of the neighbours is unpassable, count its resource stronger
    // top left neigbour
    map.get_neighbour(f, Map_Object::WALK_NW, &f1);
-	count += f1.field->get_terr().resource_value(curres);
-	count += f1.field->get_terd().resource_value(curres);
+	count += (f1.field->get_terr()).resource_value(curres);
+	count += (f1.field->get_terd()).resource_value(curres);
 
    // top right neigbour
    map.get_neighbour(f, Map_Object::WALK_NE, &f1);
-	count += f1.field->get_terd().resource_value(curres);
+	count += (f1.field->get_terd()).resource_value(curres);
 
    // left neighbour
    map.get_neighbour(f, Map_Object::WALK_W, &f1);
-	count += f1.field->get_terr().resource_value(curres);
+	count += (f1.field->get_terr()).resource_value(curres);
 
    if(count<=3)
       return 0;
@@ -76,11 +79,13 @@ there is not already another resource there.
 ===========
 */
 int Editor_Increase_Resources_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	const World & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
-	MapRegion mr(map, Area(center.node, parent.get_sel_radius()));
+	MapRegion<Area<FCoords> > mr
+		(map,
+		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int res        = mr.location().field->get_resources();
 		int amount     = mr.location().field->get_resources_amount();
@@ -113,7 +118,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 					(PicMod_Menu,
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);
-	         map.recalc_for_field_area(Area(mr.location(), 0));
+	         map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
          }
       }
 	} while (mr.advance(map));

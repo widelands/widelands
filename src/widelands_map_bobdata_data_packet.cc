@@ -380,7 +380,7 @@ throw (_wexception)
 
          std::vector<Bob*> bobarr;
 
-         egbase->get_map()->find_bobs(Coords(x,y), 0, &bobarr);
+		map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr);
 
          for(uint i=0; i<bobarr.size(); i++) {
             Bob* ibob=bobarr[i];

@@ -84,15 +84,17 @@ void Player::init(const bool place_headquarters) {
 
 	if (place_headquarters) {
 		const Tribe_Descr & trdesc = m_tribe;
-		const Player_Number plnum = get_player_number();
-		const Coords starting_pos = map.get_starting_pos(plnum);
+		Player_Area<Area<FCoords> > starting_area
+			(m_plnum,
+			 Area<FCoords>(map.get_fcoords(map.get_starting_pos(m_plnum)), 0));
 		//try {
-			Warehouse & headquarter = *dynamic_cast<Warehouse * const>
-				(egbase().warp_building
-				 (starting_pos, plnum, trdesc.get_building_index("headquarters")));
-			egbase().conquer_area
-				(Player_Area
-				 (plnum, Area(starting_pos, headquarter.get_conquers())));
+			Warehouse & headquarter = dynamic_cast<Warehouse &>
+				(*egbase().warp_building
+				 (starting_area,
+				  starting_area.player_number,
+				  trdesc.get_building_index("headquarters")));
+			starting_area.radius = headquarter.get_conquers();
+			egbase().conquer_area(starting_area);
 			trdesc.load_warehouse_with_start_wares(egbase(), headquarter);
 		//} catch (const Descr_Maintainer<Building_Descr>::Nonexistent) {
 			//throw wexception("Tribe %s lacks headquarters", tribe.get_name());
@@ -145,10 +147,10 @@ Player::set_area_seen
 Mark the given area as (un)seen
 ===============
 */
-void Player::set_area_seen(const Area area, const bool on) {
+void Player::set_area_seen(const Area<> area, const bool on) {
 	const Map & map = egbase().map();
 	const X_Coordinate mapwidth = map.get_width();
-	MapRegion mr(map, area);
+	MapRegion<> mr(map, area);
 	do set_field_seen(Map::get_index(mr.location(), mapwidth), on);
 	while (mr.advance(map));
 

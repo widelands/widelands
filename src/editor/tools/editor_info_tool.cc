@@ -42,7 +42,7 @@ show a simple info dialog with infos about this field
 ===========
 */
 int Editor_Info_Tool::handle_click_impl
-(Map & map, const Node_and_Triangle center, Editor_Interactive & parent)
+(Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
 	UI::Window * w =
 		new UI::Window(&parent, 30, 30, 400, 200, _("Field Information").c_str());

@@ -25,7 +25,7 @@
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "map.h"
+#include "maphollowregion.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
@@ -855,7 +855,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 	if (m_iabase->m_show_workarea_preview) {
 		assert(m_workarea_preview_job_id.isNull());
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
-		HollowArea hollow_area = HollowArea(Area(m_field, 0), 0);
+		HollowArea<> hollow_area(Area<>(m_field, 0), 0);
 		const Workarea_Info & workarea_info =
 			m_plr->get_tribe()->get_building_descr(idx)->m_recursive_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
@@ -867,7 +867,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		{
 			--i;
 			hollow_area.radius = it->first;
-			MapHollowRegion mr(*m_map, hollow_area);
+			MapHollowRegion<> mr(*m_map, hollow_area);
 			do m_overlay_manager.register_overlay
 				(mr.location(),
 				 workarea_cumulative_picid[i],

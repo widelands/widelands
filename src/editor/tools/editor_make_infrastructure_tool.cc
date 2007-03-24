@@ -29,7 +29,7 @@
  * Callback function to calculate correct overlays
  */
 int Editor_Make_Infrastructure_Tool_Callback
-(const TCoords c, void * data, int player)
+(const TCoords<> c, void * data, int player)
 {
 	return
 		static_cast<const Editor * const>(data)->player(player).get_buildcaps(c);
@@ -47,7 +47,7 @@ Obviously, this function ignores the sel radius
 ===========
 */
 int Editor_Make_Infrastructure_Tool::handle_click_impl
-(Map &, const Node_and_Triangle, Editor_Interactive & parent)
+(Map &, const Node_and_Triangle<>, Editor_Interactive & parent)
 {
 	// Special case for buildings
 	/*BaseImmovable * const imm = map.get_immovable(get_sel_pos());

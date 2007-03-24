@@ -21,7 +21,7 @@
 #include "error.h"
 #include "event_chain.h"
 #include "layered_filesystem.h"
-#include "map.h"
+#include "mapfringeregion.h"
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"
 #include "map_variable_manager.h"
@@ -159,15 +159,17 @@ This performs the steps outlined in the comment above Map::recalc_brightness()
 and recalcs the interactive player's overlay.
 ===============
 */
-void Map::recalc_for_field_area(const Area area) {
+void Map::recalc_for_field_area(const Area<FCoords> area) {
 	assert(0 <= area.x);
 	assert(area.x < m_width);
 	assert(0 <= area.y);
 	assert(area.y < m_height);
+	assert(m_fields <= area.field);
+	assert            (area.field < m_fields + max_index());
    assert(m_overlay_manager);
 
 	{ //  First pass.
-		MapRegion mr(*this, area);
+		MapRegion<Area<FCoords> > mr(*this, area);
 		do {
 			recalc_brightness     (mr.location());
 			recalc_border         (mr.location());
@@ -176,13 +178,13 @@ void Map::recalc_for_field_area(const Area area) {
 	}
 
 	{ //  Second pass.
-		MapRegion mr(*this, area);
+		MapRegion<Area<FCoords> > mr(*this, area);
 		do recalc_fieldcaps_pass2(mr.location()); while (mr.advance(*this));
 	}
 
 	{ //  Now only recaluclate the overlays.
 		Overlay_Manager & om = overlay_manager();
-		MapRegion mr(*this, area);
+		MapRegion<Area<FCoords> > mr(*this, area);
 		do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
 	}
 }
@@ -236,6 +238,7 @@ void Map::recalc_whole_map(void)
  * are not shown.
  */
 void Map::recalc_default_resources(void) {
+	const World & w = world();
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
          FCoords f,f1;
@@ -598,8 +601,6 @@ BaseImmovable * Map::get_immovable(const Coords coord) const
 
 /*
 ===============
-Map::find_reachable
-
 Call the functor for every field that can be reached from coord without moving
 outside the given radius.
 
@@ -608,8 +609,7 @@ Functor is of the form: functor(Map*, FCoords)
 */
 template<typename functorT>
 void Map::find_reachable
-(const Coords coord,
- const uint radius,
+(const Area<FCoords> area,
  const CheckStep & checkstep,
  functorT & functor)
 {
@@ -617,7 +617,7 @@ void Map::find_reachable
 
 	increase_pathcycle();
 
-	queue.push_back(get_field(coord));
+	queue.push_back(area.field);
 
 	while(queue.size()) {
 		Pathfield* curpf;
@@ -646,7 +646,7 @@ void Map::find_reachable
 				continue;
 
 			// Is the field still within the radius?
-			if ((uint)calc_distance(coord, neighb) > radius)
+			if (calc_distance(area, neighb) > area.radius)
 				continue;
 
 			// Are we allowed to move onto this field?
@@ -657,7 +657,7 @@ void Map::find_reachable
 				  cur,
 				  neighb,
 				  dir,
-				  cur == coord ? CheckStep::stepFirst : CheckStep::stepNormal))
+				  cur == area ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Queue this field
@@ -677,10 +677,8 @@ Functor is of the form: functor(Map &, FCoords)
 ===============
 */
 template<typename functorT>
-void Map::find_radius
-(const Coords coord, const uint radius, functorT & functor) const
-{
-	MapRegion mr(*this, Area(coord, radius));
+void Map::find(const Area<FCoords> area, functorT & functor) const {
+	MapRegion<Area<FCoords> > mr(*this, area);
 	do functor(*this, mr.location()); while (mr.advance(*this));
 }
 
@@ -730,14 +728,11 @@ Returns the number of objects found.
 ===============
 */
 unsigned int Map::find_bobs
-(const Coords coord,
- const uint radius,
- std::vector<Bob*> * list,
- const FindBob & functor)
+(const Area<FCoords> area, std::vector<Bob*> * list, const FindBob & functor)
 {
 	FindBobsCallback cb(list, functor);
 
-	find_radius(coord, radius, cb);
+	find(area, cb);
 
 	return cb.m_found;
 }
@@ -757,15 +752,14 @@ Returns the number of objects found.
 ===============
 */
 unsigned int Map::find_reachable_bobs
-(const Coords coord,
- const uint radius,
+(const Area<FCoords> area,
  std::vector<Bob*> * list,
  const CheckStep & checkstep,
  const FindBob & functor)
 {
 	FindBobsCallback cb(list, functor);
 
-	find_reachable(coord, radius, checkstep, cb);
+	find_reachable(area, checkstep, cb);
 
 	return cb.m_found;
 }
@@ -817,14 +811,13 @@ If list is not 0, found immovables are stored in list.
 ===============
 */
 unsigned int Map::find_immovables
-(const Coords coord,
- const uint radius,
+(const Area<FCoords>           area,
  std::vector<ImmovableFound> * list,
  const FindImmovable & functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
-	find_radius(coord, radius, cb);
+	find(area, cb);
 
 	return cb.m_found;
 }
@@ -843,15 +836,14 @@ Returns the number of immovables we found.
 ===============
 */
 uint Map::find_reachable_immovables
-(const Coords coord,
- const uint radius,
+(const Area<FCoords>           area,
  std::vector<ImmovableFound> * list,
  const CheckStep & checkstep,
  const FindImmovable & functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
-	find_reachable(coord, radius, checkstep, cb);
+	find_reachable(area, checkstep, cb);
 
 	return cb.m_found;
 }
@@ -885,8 +877,6 @@ struct FindFieldsCallback {
 
 /*
 ===============
-Map::find_fields
-
 Fills in a list of coordinates of fields within the given area that functor
 accepts.
 Returns the number of matching fields.
@@ -895,14 +885,13 @@ Note that list can be 0.
 ===============
 */
 unsigned int Map::find_fields
-(const Coords coord,
- const uint radius,
+(const Area<FCoords>   area,
  std::vector<Coords> * list,
  const FindField & functor)
 {
 	FindFieldsCallback cb(list, functor);
 
-	find_radius(coord, radius, cb);
+	find(area, cb);
 
 	return cb.m_found;
 }
@@ -910,8 +899,6 @@ unsigned int Map::find_fields
 
 /*
 ===============
-Map::find_reachable_fields
-
 Fills in a list of coordinates of fields reachable by walking within the given
 radius that functor accepts.
 Returns the number of matching fields.
@@ -920,15 +907,14 @@ Note that list can be 0.
 ===============
 */
 unsigned int Map::find_reachable_fields
-(const Coords coord,
- const uint radius,
+(const Area<FCoords>   area,
  std::vector<Coords> * list,
  const CheckStep & checkstep,
  const FindField & functor)
 {
 	FindFieldsCallback cb(list, functor);
 
-	find_reachable(coord, radius, checkstep, cb);
+	find_reachable(area, checkstep, cb);
 
 	return cb.m_found;
 }
@@ -1022,40 +1008,45 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
 
    // 1a) Get all the neighbours to make life easier
-	FCoords tln, trn, ln, rn, bln, brn;
+	const FCoords  r =  r_n(f);
+	const FCoords tr = tr_n(f);
+	const FCoords tl = tl_n(f);
+	const FCoords  l =  l_n(f);
 
-   get_tln(f, &tln);
-   get_trn(f, &trn);
-   get_ln(f, &ln);
-   get_rn(f, &rn);
-   get_bln(f, &bln);
-   get_brn(f, &brn);
+	const World & w = world();
+
+	const Uint8 tr_d_terrain_is = (tr.field->get_terd()).get_is();
+	const Uint8 tl_r_terrain_is = (tl.field->get_terr()).get_is();
+	const Uint8 tl_d_terrain_is = (tl.field->get_terd()).get_is();
+	const Uint8  l_r_terrain_is =  (l.field->get_terr()).get_is();
+	const Uint8  f_d_terrain_is =  (f.field->get_terd()).get_is();
+	const Uint8  f_r_terrain_is =  (f.field->get_terr()).get_is();
 
    // 1b) Collect some information about the neighbours
 	uchar cnt_unpassable = 0;
 	uchar cnt_water = 0;
 	uchar cnt_acid = 0;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (f  .field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (ln .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (tln.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (tln.field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (trn.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if  (tr_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if  (tl_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if  (tl_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if   (l_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if   (f_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if   (f_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (f  .field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (ln .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (tln.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (tln.field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (trn.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if  (tr_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if  (tl_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if  (tl_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if   (l_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if   (f_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if   (f_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (f  .field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (ln .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (tln.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (tln.field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (trn.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if  (tr_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if  (tl_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if  (tl_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if   (l_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if   (f_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if   (f_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
 
 
    // 2) Passability
@@ -1093,12 +1084,12 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
    // 4) Flags
    //    We can build flags on anything that's walkable and buildable, with some
    //    restrictions
-   if (caps & MOVECAPS_WALK)
-   {
+	if (caps & MOVECAPS_WALK) {
       // 4b) Flags must be at least 1 field apart
-      if (find_immovables(f, 1, 0, FindImmovableType(Map_Object::FLAG))) {
+		if
+			(find_immovables
+			 (Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
          goto end;
-      }
       caps |= BUILDCAPS_FLAG;
    }
 end:
@@ -1124,14 +1115,19 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	// This is unavoidable and shouldn't hurt too much anyway.
 
 	// 1a) Get all the neighbours to make life easier
-	FCoords tln, trn, ln, rn, bln, brn;
+	const FCoords  r =  r_n(f);
+	const FCoords tr = tr_n(f);
+	const FCoords tl = tl_n(f);
+	const FCoords  l =  l_n(f);
 
-   get_tln(f, &tln);
-   get_trn(f, &trn);
-   get_ln(f, &ln);
-   get_rn(f, &rn);
-   get_bln(f, &bln);
-   get_brn(f, &brn);
+	const World & w = world();
+
+	const Uint8 tr_d_terrain_is = (tr.field->get_terd()).get_is();
+	const Uint8 tl_r_terrain_is = (tl.field->get_terr()).get_is();
+	const Uint8 tl_d_terrain_is = (tl.field->get_terd()).get_is();
+	const Uint8  l_r_terrain_is =  (l.field->get_terr()).get_is();
+	const Uint8  f_d_terrain_is =  (f.field->get_terd()).get_is();
+	const Uint8  f_r_terrain_is =  (f.field->get_terr()).get_is();
 
 	// 1b) Collect some information about the neighbours
 	int cnt_unpassable = 0;
@@ -1140,40 +1136,40 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	int cnt_mountain = 0;
 	int cnt_dry = 0;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (f  .field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (ln .field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (tln.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (tln.field->get_terr().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if (trn.field->get_terd().get_is() & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if  (tr_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if  (tl_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if  (tl_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if   (l_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if   (f_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if   (f_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (f  .field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (ln .field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (tln.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (tln.field->get_terr().get_is() & TERRAIN_WATER)      ++cnt_water;
-	if (trn.field->get_terd().get_is() & TERRAIN_WATER)      ++cnt_water;
+	if  (tr_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if  (tl_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if  (tl_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if   (l_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if   (f_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
+	if   (f_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (f  .field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (ln .field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (tln.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (tln.field->get_terr().get_is() & TERRAIN_ACID)       ++cnt_acid;
-	if (trn.field->get_terd().get_is() & TERRAIN_ACID)       ++cnt_acid;
+	if  (tr_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if  (tl_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if  (tl_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if   (l_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if   (f_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
+	if   (f_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if (f  .field->get_terd().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if (ln .field->get_terr().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if (tln.field->get_terd().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if (tln.field->get_terr().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if (trn.field->get_terd().get_is() & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if  (tr_d_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if  (tl_r_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if  (tl_d_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if   (l_r_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if   (f_d_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
+	if   (f_r_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
 
-	if (f  .field->get_terr().get_is() & TERRAIN_DRY)        ++cnt_dry;
-	if (f  .field->get_terd().get_is() & TERRAIN_DRY)        ++cnt_dry;
-	if (ln .field->get_terr().get_is() & TERRAIN_DRY)        ++cnt_dry;
-	if (tln.field->get_terd().get_is() & TERRAIN_DRY)        ++cnt_dry;
-	if (tln.field->get_terr().get_is() & TERRAIN_DRY)        ++cnt_dry;
-	if (trn.field->get_terd().get_is() & TERRAIN_DRY)        ++cnt_dry;
+	if  (tr_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
+	if  (tl_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
+	if  (tl_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
+	if   (l_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
+	if   (f_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
+	if   (f_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
 
 	uchar caps = f.field->caps;
 
@@ -1196,11 +1192,14 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	//
 	// NOTE: This dependency on the bottom-right neighbour is the reason why the caps
 	// calculation is split into two passes
-	if
-		(not (brn.field->caps & BUILDCAPS_FLAG)
-		 and
-	    not find_immovables(brn, 0, 0, FindImmovableType(Map_Object::FLAG)))
-		goto end;
+	{
+		const FCoords br = br_n(f);
+		if
+			(not (br.field->caps & BUILDCAPS_FLAG)
+			 and
+			 not find_immovables
+			 (Area<FCoords>(br, 0), 0, FindImmovableType(Map_Object::FLAG)))
+			goto end;
 
 	// === passability and flags allow us to build something beyond this point ===
 
@@ -1213,11 +1212,15 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	// Small buildings: same as small objects
 	// Medium buildings: allow only medium second-order neighbours
 	// Big buildings:  same as big objects
-	{
+		{
+			const FCoords bl = bl_n(f);
 	uchar building = BUILDCAPS_BIG;
 	std::vector<ImmovableFound> objectlist;
 
-	find_immovables(f, 2, &objectlist, FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
+			find_immovables
+				(Area<FCoords>(f, 2),
+				 &objectlist,
+				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 	for(uint i = 0; i < objectlist.size(); i++) {
 		BaseImmovable *obj = objectlist[i].object;
 		Coords objpos = objectlist[i].coords;
@@ -1230,7 +1233,9 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 					// a flag to the bottom-right does not reduce building size (obvious)
 					// additionally, roads going top-right and left from a big building's
 					// flag should be allowed
-					if ((objpos != brn && objpos != rn && objpos != bln) ||
+							if
+								((objpos != br and objpos != r and objpos != bl)
+								 or
 					    (obj->get_type() != Map_Object::FLAG && obj->get_type() != Map_Object::ROAD))
 						building = BUILDCAPS_MEDIUM;
 				}
@@ -1261,7 +1266,10 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	if (cnt_mountain == 6)
 	{
 		// 4b) Check the mountain slope
-		if ((int)brn.field->get_height() - f.field->get_height() < 4)
+		if
+			(static_cast<const int>(br.field->get_height()) - f.field->get_height()
+			 <
+			 4)
 			caps |= BUILDCAPS_MINE;
 		goto end;
 	}
@@ -1270,36 +1278,24 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	if (cnt_mountain || cnt_dry)
 		goto end;
 
+			const Sint16 f_height = f.field->get_height();
+
 	// 7) Reduce building size based on slope of direct neighbours:
 	//    - slope >= 4: can't build anything here -> return
 	//    - slope >= 3: maximum size is small
-	int slope;
-
-	slope = abs((int)tln.field->get_height() - f.field->get_height());
-	if (slope >= 4) goto end;
-	if (slope >= 3) building = BUILDCAPS_SMALL;
-
-	slope = abs((int)trn.field->get_height() - f.field->get_height());
-	if (slope >= 4) goto end;
-	if (slope >= 3) building = BUILDCAPS_SMALL;
-
-	slope = abs((int)rn.field->get_height() - f.field->get_height());
-	if (slope >= 4) goto end;
-	if (slope >= 3) building = BUILDCAPS_SMALL;
-
+			{
+				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 1));
+				do {
+					const Uint16 slope =
+						abs(mr.location().field->get_height() - f_height);
+					if (slope >= 4) goto end;
+					if (slope >= 3) building = BUILDCAPS_SMALL;
+				} while (mr.advance(*this));
+			}
 	// Special case for bottom-right neighbour (where our flag is)
 	// Is this correct?
    // Yep, it is - Holger
-	slope = abs((int)brn.field->get_height() - f.field->get_height());
-	if (slope >= 2) goto end;
-
-	slope = abs((int)bln.field->get_height() - f.field->get_height());
-	if (slope >= 4) goto end;
-	if (slope >= 3) building = BUILDCAPS_SMALL;
-
-	slope = abs((int)ln.field->get_height() - f.field->get_height());
-	if (slope >= 4) goto end;
-	if (slope >= 3) building = BUILDCAPS_SMALL;
+			if (abs(br.field->get_height() - f_height) >= 2) goto end;
 
 	// 8) Reduce building size based on height diff. of second order neighbours
 	//     If height difference between this field and second order neighbour
@@ -1313,47 +1309,14 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	//    an automatic method will probably work better.
 	//    However, it should probably be more clever than this, to avoid harbours at tiny
 	//    lakes... - Nicolai
-	//
-	// Processes the neighbours in clockwise order, starting from the right-most
-	FCoords sec;
-
-	get_rn(rn, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_brn(rn, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_brn(brn, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_bln(brn, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_bln(bln, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_ln(bln, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_ln(ln, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_tln(ln, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_tln(tln, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_trn(tln, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_trn(trn, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
-
-	get_rn(trn, &sec);
-	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
+			{
+				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
+				do if (abs(mr.location().field->get_height() - f_height) >= 3)
+				{building = BUILDCAPS_SMALL; break;} while (mr.advance(*this));
+			}
 
 	caps |= building;
+		}
 	}
 end: //  9) That's it, store the collected information.
 	f.field->caps = static_cast<const FieldCaps>(caps);
@@ -1364,7 +1327,7 @@ end: //  9) That's it, store the collected information.
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-int Map::calc_distance(const Coords a, const Coords b) const
+uint Map::calc_distance(const Coords a, const Coords b) const
 {
 	uint dist;
 	int dy;
@@ -2075,9 +2038,10 @@ The fieldcaps need to be recalculated
 returns the radius of changes (which are always 2)
 ===========
 */
-int Map::change_terrain(const TCoords c, const Terrain_Descr::Index terrain) {
-	get_field(c)->set_terrain(c.t, *get_world()->get_terrain(terrain));
-	recalc_for_field_area(Area(c, 2));
+int Map::change_terrain(const TCoords<> c, const Terrain_Descr::Index terrain) {
+	Area<FCoords> affected_area(get_fcoords(c), 2);
+	affected_area.field->set_terrain(c.t, *get_world()->get_terrain(terrain));
+	recalc_for_field_area(affected_area);
 
    return 2;
 }
@@ -2090,13 +2054,13 @@ uint Map::set_height(const FCoords fc, const Uint8 new_value) {
 	fc.field->height = new_value;
 	uint radius = 2;
 	check_neighbour_heights(fc, radius);
-	recalc_for_field_area(Area(fc, radius));
+	recalc_for_field_area(Area<FCoords>(fc, radius));
 	return radius;
 }
 
-uint Map::change_height(Area area, const Sint16 difference) {
+uint Map::change_height(Area<FCoords> area, const Sint16 difference) {
 	{
-		MapRegion mr(*this, area);
+		MapRegion<Area<FCoords> > mr(*this, area);
 		do {
 			if
 				(difference < 0
@@ -2114,7 +2078,7 @@ uint Map::change_height(Area area, const Sint16 difference) {
 		} while (mr.advance(*this));
 	}
 	uint regional_radius = 0;
-	MapFringeRegion mr(*this, area);
+	MapFringeRegion<Area<FCoords> > mr(*this, area);
 	do {
 		uint local_radius = 0;
 		check_neighbour_heights(mr.location(), local_radius);
@@ -2125,11 +2089,13 @@ uint Map::change_height(Area area, const Sint16 difference) {
 	return area.radius;
 }
 
-uint Map::set_height(Area area, interval<Field::Height> height_interval) {
+uint Map::set_height
+(Area<FCoords> area, interval<Field::Height> height_interval)
+{
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{
-		MapRegion mr(*this, area);
+		MapRegion<Area<FCoords> > mr(*this, area);
 		do {
 			if      (mr.location().field->height < height_interval.min)
 				mr.location().field->height = height_interval.min;
@@ -2139,7 +2105,7 @@ uint Map::set_height(Area area, interval<Field::Height> height_interval) {
 	}
 	++area.radius;
 	{
-		MapFringeRegion mr(*this, area);
+		MapFringeRegion<Area<FCoords> > mr(*this, area);
 		bool changed;
 		do {
 			changed = false;
@@ -2210,6 +2176,32 @@ void Map::check_neighbour_heights(FCoords coords, uint & area)
 
 	for (Uint8 i = 0; i < 6; ++i)
 		if (check[i]) check_neighbour_heights(n[i], area);
+}
+
+
+#define MAX_RADIUS 32
+Military_Influence Map::calc_influence
+(const Coords a, const Area<> area) const
+{
+	const X_Coordinate w = get_width();
+	const Y_Coordinate h = get_width();
+	Military_Influence influence = std::max
+		(std::min
+		 (std::min
+		  (abs(a.x - area.x), abs(a.x - area.x + w)), abs(a.x - area.x - w)),
+		 std::min
+		 (std::min
+		  (abs(a.y - area.y), abs(a.y - area.y + h)), abs(a.y - area.y - h)));
+
+	//  This method makes a "parabola" like x^4, but the maxium radius is
+	//  MAX_RADIUS,
+	if (influence > area.radius) influence = 0;
+	else if (influence == 0) influence = MAX_RADIUS;
+	else influence = MAX_RADIUS - influence;
+	influence *= influence;
+	influence *= influence;
+
+   return influence;
 }
 
 
@@ -2698,273 +2690,4 @@ void CoordPath::append(const CoordPath &tail)
 
 	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());
 	m_coords.insert(m_coords.end(), tail.m_coords.begin()+1, tail.m_coords.end());
-}
-
-
-MapRegion::MapRegion(const Map & map, Area area) :
-m_halfway (false),
-m_radius  (area.radius),
-m_row     (0),
-m_rowwidth(area.radius + 1),
-m_rowpos  (0)
-{
-	for (; area.radius; --area.radius) map.get_tln(area, &area);
-	m_next = m_left = map.get_fcoords(area);
-}
-
-
-/*
-===============
-Traverse the region by row.
-I hope this results in slightly better cache behaviour than other algorithms
-(e.g. one could also walk concentric "circles"/hexagons).
-===============
-*/
-bool MapRegion::advance(const Map & map) throw () {
-	m_rowpos++;
-	if (m_rowpos < m_rowwidth) map.get_rn(m_next, &m_next);
-	else
-	{
-		m_row++;
-
-		// If we completed the widest, center line, switch into lower mode
-		// There are m_radius+1 lines in the upper "half", because the upper
-		// half includes the center line.
-		if (not m_halfway and m_row > m_radius) {m_row = 0; m_halfway = true;}
-
-		if (not m_halfway) {m_left = map.bl_n(m_left); ++m_rowwidth;}
-		else
-		{
-			// There are m_radius lines in the lower "half"
-			if (m_row >= m_radius) return false;
-
-			map.get_brn(m_left, &m_left);
-			m_rowwidth--;
-		}
-
-		m_next = m_left;
-		m_rowpos = 0;
-	}
-
-	return true;
-}
-
-
-MapFringeRegion::MapFringeRegion(const Map & map, Area area)
-throw ()
-:
-m_radius            (area.radius),
-m_remaining_in_phase(area.radius),
-m_phase             (area.radius ? 6 : 0)
-{
-	m_location = FCoords(area, &map[area]);
-	while (area.radius) {m_location = map.tl_n(m_location); --area.radius;}
-}
-
-bool MapFringeRegion::advance(const Map & map) throw () {
-	switch (m_phase) {
-	case 0:
-		if (m_radius) {m_phase = 6; m_remaining_in_phase = m_radius;}
-		else return false;
-	case 1: m_location = map.tr_n(m_location); break;
-	case 2: m_location = map.tl_n(m_location); break;
-	case 3: m_location = map. l_n(m_location); break;
-	case 4: m_location = map.bl_n(m_location); break;
-	case 5: m_location = map.br_n(m_location); break;
-	case 6: m_location = map. r_n(m_location); break;
-	}
-	--m_remaining_in_phase;
-	if (m_remaining_in_phase == 0) {m_remaining_in_phase = m_radius; --m_phase;}
-	return m_phase;
-}
-
-
-MapHollowRegion::MapHollowRegion(Map & map, const HollowArea hollow_area)
-:
-m_phase       (Top),
-m_radius      (hollow_area.radius),
-m_hole_radius (hollow_area.hole_radius),
-m_delta_radius(hollow_area.radius - hollow_area.hole_radius),
-m_row         (0),
-m_rowwidth    (hollow_area.radius + 1),
-m_rowpos      (0)
-{
-	assert(hollow_area.hole_radius < hollow_area.radius);
-	m_left = hollow_area;
-	for (uint i = 0; i < hollow_area.radius; ++i) m_left = map.tl_n(m_left);
-	m_location = m_left;
-}
-
-
-/*
-===============
-Traverse the region by row.
-I hope this results in slightly better cache behaviour than other algorithms
-(e.g. one could also walk concentric "circles"/hexagons).
-===============
-*/
-bool MapHollowRegion::advance(const Map & map) throw () {
-	if (m_phase == None) return false;
-	++m_rowpos;
-	if (m_rowpos < m_rowwidth) {
-		m_location = map.r_n(m_location);
-		if ((m_phase & (Upper|Lower)) and m_rowpos == m_delta_radius) {
-			//  Jump over the hole.
-			const unsigned int holewidth = m_rowwidth - 2 * m_delta_radius;
-			for (unsigned int i = 0; i < holewidth; ++i)
-				m_location = map.r_n(m_location);
-			m_rowpos += holewidth;
-		}
-	} else {
-		++m_row;
-		if (m_phase == Top and m_row == m_delta_radius) m_phase = Upper;
-
-		// If we completed the widest, center line, switch into lower mode
-		// There are m_radius+1 lines in the upper "half", because the upper
-		// half includes the center line.
-		else if (m_phase == Upper and m_row > m_radius) {
-			m_row = 1;
-			m_phase = Lower;
-		}
-
-		if (m_phase & (Top|Upper)) {m_left = map.bl_n(m_left); ++m_rowwidth;}
-		else {
-
-			if (m_row > m_radius) {
-				m_phase = None;
-				return true; // early out
-			}
-			else if (m_phase == Lower and m_row > m_hole_radius) m_phase = Bottom;
-
-			m_left = map.br_n(m_left);
-			--m_rowwidth;
-		}
-
-		m_location = m_left;
-		m_rowpos = 0;
-	}
-
-	return true;
-}
-
-
-MapTriangleRegion::MapTriangleRegion
-(const Map & map, TCoords first, const unsigned short radius)
-: m_radius_is_odd(radius & 1)
-{
-	assert(first.t == TCoords::R or first.t == TCoords::D);
-	const unsigned short radius_plus_1 = radius + 1;
-	const unsigned short half_radius_rounded_down = radius / 2;
-	m_row_length = radius_plus_1;
-	for (unsigned short i = 0; i < half_radius_rounded_down; ++i)
-		map.get_tln(first, &first);
-	if (first.t == TCoords::R) {
-		m_left = first;
-		if (radius) {
-			m_remaining_rows_in_upper_phase = half_radius_rounded_down + 1;
-			m_remaining_rows_in_lower_phase = (radius - 1) / 2;
-			if (m_radius_is_odd) {
-				map.get_trn(first, &first);
-				m_phase = Top;
-				m_row_length = radius + 2;
-				m_remaining_in_row = radius_plus_1 / 2;
-				first.t = TCoords::D;
-			} else {
-				m_phase = Upper;
-				m_remaining_in_row = m_row_length = radius_plus_1;
-				first.t = TCoords::R;
-			}
-		} else {
-			assert(radius == 0);
-			m_phase = Bottom;
-			m_remaining_in_row = 1;
-			first.t = TCoords::R;
-		}
-	} else {
-		m_remaining_rows_in_upper_phase = radius_plus_1 / 2;
-		m_remaining_rows_in_lower_phase = half_radius_rounded_down;
-		if (m_radius_is_odd) {
-			map.get_ln(first, &first);
-			m_left = first;
-			m_phase = Upper;
-			m_remaining_in_row = m_row_length = radius + 2;
-			first.t = TCoords::R;
-		} else {
-			map.get_bln(first, &m_left);
-			m_phase = Top;
-			m_row_length = radius + 3;
-			m_remaining_in_row = half_radius_rounded_down + 1;
-			first.t = TCoords::D;
-		}
-	}
-	m_location = first;
-}
-
-
-/**
- * Traverse the region by row.
- */
-bool MapTriangleRegion::advance(const Map & map) throw () {
-	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
-	if (m_remaining_in_row == 0) return false;
-	--m_remaining_in_row;
-	switch (m_phase) {
-	case Top:
-		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
-		else if (m_remaining_rows_in_upper_phase) {
-			m_phase = Upper;
-			m_remaining_in_row = m_row_length;
-			assert(m_remaining_in_row);
-			m_location = TCoords(m_left, m_location.t);
-		}
-		break;
-	case Upper:
-		if (m_remaining_in_row) {
-			if (m_location.t == TCoords::D) m_location.t = TCoords::R;
-			else m_location = TCoords(map.r_n(m_location), TCoords::D);
-		} else {
-			if (--m_remaining_rows_in_upper_phase) {
-				m_row_length += 2;
-				m_left = map.bl_n(m_left);
-			} else {
-				if (m_remaining_rows_in_lower_phase) {
-					m_phase = Lower;
-					assert(m_row_length >= 2);
-					m_row_length -= 2;
-				} else if (m_location.t == TCoords::R) {
-					m_phase = Bottom;
-					m_row_length /= 2;
-				} else return false;
-				m_left = map.br_n(m_left);
-			}
-			m_remaining_in_row = m_row_length;
-			m_location = TCoords(m_left, m_location.t);
-		}
-		break;
-	case Lower:
-		if (m_remaining_in_row) {
-			if (m_location.t == TCoords::D) m_location.t = TCoords::R;
-			else m_location = TCoords(map.r_n(m_location), TCoords::D);
-		} else {
-			if (--m_remaining_rows_in_lower_phase) {
-				assert(m_row_length >= 2);
-				m_remaining_in_row = m_row_length -= 2;
-				m_left = map.br_n(m_left);
-			}
-			else if (m_location.t == TCoords::R) {
-				m_phase = Bottom;
-				m_remaining_in_row = m_row_length / 2;
-				m_left = map.br_n(m_left);
-			}
-			m_location = TCoords(m_left, m_location.t);
-		}
-		break;
-	case Bottom:
-		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
-		break;
-	default:
-		assert(0);
-	}
-	assert(m_remaining_in_row < 10000); //  Catch wrapping (ingteger underflow)
-	return true;
 }

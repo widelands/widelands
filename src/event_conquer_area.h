@@ -29,7 +29,7 @@ struct Event_Conquer_Area : public Event_Player_Area {
 	Event_Conquer_Area()
 		:
 		Event_Player_Area
-		(_("Conquer Area"), Player_Area(0, Area(Coords(0, 0), 5)))
+		(_("Conquer Area"), Player_Area<>(0, Area<>(Coords(0, 0), 5)))
 	{}
 
 

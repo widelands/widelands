@@ -52,7 +52,7 @@ private:
       UI::Textarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
       UI::Checkbox *m_enable;
       UI::Edit_Box* m_name;
-	Player_Area m_player_area;
+	Player_Area<> m_player_area;
 };
 
 #endif
