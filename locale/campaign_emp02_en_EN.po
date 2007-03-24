@@ -1,19 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of campaign_emp02_en_EN.po to
+# translation of campaign_emp02.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Florian Weber <Florian.Weber@pfaffenhofen.de>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: campaign_emp02_en_EN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-24 21:37+0100\n"
+"Last-Translator: Florian Weber <Florian.Weber@pfaffenhofen.de>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
@@ -50,7 +52,7 @@ msgstr "As Saledus and I walked through these wonderful forests in the north, we
 #: ../campaigns/emp02.wmf/event:48
 #: ../campaigns/emp02.wmf/objective:7
 msgid "* Build up three lumberjacks, a forester and a sawmill."
-msgstr "Build up three lumberjacks, a forester and a sawmill."
+msgstr "* Build up three lumberjacks, a forester and a sawmill."
 
 #: ../campaigns/emp02.wmf/event:50
 msgid "The green forests"
@@ -63,7 +65,7 @@ msgstr "Later, I walked down to the rocks in the south and looked for a place wh
 #: ../campaigns/emp02.wmf/event:91
 #: ../campaigns/emp02.wmf/objective:13
 msgid "* Build a quarry to the south of your headquarters."
-msgstr "Build a quarry to the south of your headquarters."
+msgstr "* Build a quarry to the south of your headquarters."
 
 #: ../campaigns/emp02.wmf/event:93
 msgid "The rocks"
@@ -96,7 +98,7 @@ msgstr "Hey Lutius,<br>I don't want to start a panic, but I found something whic
 #: ../campaigns/emp02.wmf/event:483
 #: ../campaigns/emp02.wmf/objective:19
 msgid "* Build some barracks and sentrys around the colony."
-msgstr "Build some barracks and sentrys around the colony."
+msgstr "* Build some barracks and sentrys around the colony."
 
 #: ../campaigns/emp02.wmf/event:485
 msgid "Dangerous shipparts"
@@ -114,7 +116,7 @@ msgstr "Hey Lutius,<br>I've got good news for you: As I walked to the east, I fo
 #: ../campaigns/emp02.wmf/event:550
 #: ../campaigns/emp02.wmf/objective:25
 msgid "* Expand to the east, to start mining marble on the mountain."
-msgstr "Expand to the east, to start mining marble on the mountain."
+msgstr "* Expand to the east, to start mining marble on the mountain."
 
 #: ../campaigns/emp02.wmf/event:552
 msgid "Marble on the mountain"
@@ -127,7 +129,7 @@ msgstr "By the Gods, that's great, that's an unbelievable present. There are two
 #: ../campaigns/emp02.wmf/event:616
 #: ../campaigns/emp02.wmf/objective:31
 msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
-msgstr "Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
+msgstr "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
 
 #: ../campaigns/emp02.wmf/event:618
 msgid "Further mountains"
@@ -152,7 +154,7 @@ msgstr "By the Gods!<br>This is absolutely awful. It seems as if we stand close 
 #: ../campaigns/emp02.wmf/event:869
 #: ../campaigns/emp02.wmf/objective:37
 msgid "* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
-msgstr "Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
+msgstr "* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
 
 #: ../campaigns/emp02.wmf/event:871
 msgid "The Barbarians"
@@ -165,7 +167,7 @@ msgstr "That's good. The first large military building is built up and the minin
 #: ../campaigns/emp02.wmf/event:928
 #: ../campaigns/emp02.wmf/objective:43
 msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr "As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+msgstr "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 
 #: ../campaigns/emp02.wmf/event:930
 msgid "Command for Attack"

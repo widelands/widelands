@@ -1,21 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of widelands_en_EN.po to
+# translation of widelands.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Florian Weber <Florian.Weber@pfaffenhofen.de>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: widelands_en_EN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-24 18:58+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-24 21:49+0100\n"
+"Last-Translator: Florian Weber <Florian.Weber@pfaffenhofen.de>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../src/game_server_proto_packet_getroominfo.cc:66
 #, c-format
@@ -68,7 +69,7 @@ msgstr "Next scenario"
 
 #: ../src/map_variable_manager.cc:31 ../src/map.cc:419
 msgid "<undefined>"
-msgstr "undefined>"
+msgstr "<undefined>"
 
 #: ../src/interactive_player.cc:103 ../src/editor/editorinteractive.cc:68
 msgid "Menu"
@@ -140,7 +141,9 @@ msgstr "Cancel"
 msgid ""
 "Game Loading Error!\n"
 "Reason given:\n"
-msgstr ""Game Loading Error!\n"
+msgstr ""
+"Game Loading Error!\n"
+"Reason given:\n"
 
 #: ../src/game_main_menu_load_game.cc:213
 msgid "Load Game Error!!"
@@ -195,7 +198,9 @@ msgstr "The User %s is currently not logged in or unknown to the server.\n"
 msgid ""
 "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
 "Server runs %i.%02i\n"
-msgstr ""Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+msgstr ""
+"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+"Server runs %i.%02i\n"
 
 #: ../src/game_server_proto_packet_connect.cc:78
 #, c-format
@@ -273,7 +278,7 @@ msgstr "Stock"
 
 #: ../src/criterr.cc:69
 msgid "!! CRITICAL ERROR !!"
-msgstr "CRITICAL ERROR !!"
+msgstr "!! CRITICAL ERROR !!"
 
 #: ../src/criterr.cc:78
 msgid "Exit"
@@ -281,7 +286,7 @@ msgstr "Exit"
 
 #: ../src/criterr.cc:85
 msgid "!! Continue execution !!"
-msgstr "Continue execution !!"
+msgstr "!! Continue execution !!"
 
 #: ../src/criterr.cc:94
 msgid "Crash"
@@ -329,11 +334,11 @@ msgstr "Set Null Trigger"
 
 #: ../src/productionsite.cc:227
 msgid "(not occupied)"
-msgstr "not occupied)"
+msgstr "(not occupied)"
 
 #: ../src/productionsite.cc:238
 msgid "(stopped)"
-msgstr "stopped)"
+msgstr "(stopped)"
 
 #: ../src/productionsite.cc:266
 msgid "UP"
@@ -378,7 +383,7 @@ msgstr "A File with the name "
 
 #: ../src/game_main_menu_save_game.cc:233
 msgid " already exists. Overwrite?"
-msgstr "already exists. Overwrite?"
+msgstr " already exists. Overwrite?"
 
 #: ../src/game_main_menu_save_game.cc:235
 #: ../src/game_main_menu_save_game.cc:255
@@ -391,32 +396,38 @@ msgid ""
 "Saved Game-File may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""Game Saving Error!\n"
+msgstr ""
+"Game Saving Error!\n"
+"Saved Game-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
 
 #: ../src/game_server_proto_packet_chatmessage.cc:69
 #, c-format
 msgid ""
 "Server replied illegally to ChatMessage package. Should have sent %i but "
 "sent %i. Ignored"
-msgstr ""Server replied illegally to ChatMessage package. Should have sent %i but "
+msgstr ""
+"Server replied illegally to ChatMessage package. Should have sent %i but "
+"sent %i. Ignored"
 
 #: ../src/militarysite.cc:79
 msgid " conquer"
-msgstr "conquer"
+msgstr " conquer"
 
 #: ../src/militarysite.cc:140
 #, c-format
 msgid "%d soldier (+%d)"
 msgid_plural "%d soldiers (+%d)"
-msgstr[d soldier (+%d)0] ""
-msgstr[1] ""
+msgstr[0] "%d soldier (+%d)"
+msgstr[1] "%d soldier (+%d)"
 
 #: ../src/militarysite.cc:142
 #, c-format
 msgid "%d soldier"
 msgid_plural "%d soldiers"
-msgstr[d soldier0] ""
-msgstr[1] ""
+msgstr[0] "%d soldier"
+msgstr[1] "%d soldier"
 
 #: ../src/s2map.cc:250
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -563,7 +574,7 @@ msgstr "Building Trigger"
 
 #: ../src/trigger_building.cc:40
 msgid "<unset>"
-msgstr "unset>"
+msgstr "<unset>"
 
 #: ../src/trigger_time.cc:34
 msgid "Time Trigger"
@@ -579,11 +590,11 @@ msgstr "Do you really want to destroy this "
 
 #: ../src/building_ui.cc:164
 msgid "?"
-msgstr ""
+msgstr "?"
 
 #: ../src/building_ui.cc:639
 msgid "Stop"
-msgstr "msgstr "
+msgstr "Stop"
 
 #: ../src/building_ui.cc:666
 #, c-format
@@ -815,7 +826,7 @@ msgstr "Back"
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
 #, c-format
 msgid "User %s is using \"%s\" in room \"%s\"\n"
-msgstr "User %s is using \"
+msgstr "User %s is using \"%s\" in room \"%s\"\n"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:216
 #, c-format
@@ -913,9 +924,8 @@ msgid "Mission 1: Eyes in the Darkness - Game Basics"
 msgstr "Mission 1: Eyes in the Darkness - Game Basics"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:58
-msgid ""
-"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
-msgstr ""Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgid "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgstr "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:65
 msgid "Empire Tutorial Campaign"
@@ -956,7 +966,7 @@ msgstr "Select map"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:138
 msgid "(no map)"
-msgstr "no map)"
+msgstr "(no map)"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
 #: ../src/editor/ui_menus/editor_player_menu.cc:241
@@ -1088,7 +1098,7 @@ msgstr "Version"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
 msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2007 by the Widelands Development Team"
 
 #: ../src/editor/tools/editor_info_tool.cc:48
 msgid "Field Information"
@@ -1110,7 +1120,7 @@ msgstr "Height"
 
 #: ../src/editor/tools/editor_info_tool.cc:64
 msgid " Caps: "
-msgstr "Caps: "
+msgstr " Caps: "
 
 #: ../src/editor/tools/editor_info_tool.cc:66
 msgid "small"
@@ -1126,23 +1136,23 @@ msgstr "big"
 
 #: ../src/editor/tools/editor_info_tool.cc:71
 msgid " flag"
-msgstr "flag"
+msgstr " flag"
 
 #: ../src/editor/tools/editor_info_tool.cc:72
 msgid " mine"
-msgstr "mine"
+msgstr " mine"
 
 #: ../src/editor/tools/editor_info_tool.cc:73
 msgid " port"
-msgstr "port"
+msgstr " port"
 
 #: ../src/editor/tools/editor_info_tool.cc:74
 msgid " walk"
-msgstr "walk"
+msgstr " walk"
 
 #: ../src/editor/tools/editor_info_tool.cc:75
 msgid " swim"
-msgstr "swim"
+msgstr " swim"
 
 #: ../src/editor/tools/editor_info_tool.cc:77
 msgid "Owned by"
@@ -1167,7 +1177,7 @@ msgstr "amount of"
 #: ../src/editor/tools/editor_info_tool.cc:91
 #, c-format
 msgid " Has resources: No\n"
-msgstr "Has resources: No\n"
+msgstr " Has resources: No\n"
 
 #: ../src/editor/tools/editor_info_tool.cc:94
 msgid "Start resources amount"
@@ -1176,7 +1186,7 @@ msgstr "Start resources amount"
 #: ../src/editor/tools/editor_info_tool.cc:97
 #, c-format
 msgid " Roads: TODO!\n"
-msgstr "Roads: TODO!\n"
+msgstr " Roads: TODO!\n"
 
 #: ../src/editor/tools/editor_info_tool.cc:100
 msgid "2) Right Terrain Info\n"
@@ -1216,7 +1226,7 @@ msgstr "Number of Players"
 
 #: ../src/editor/tools/editor_info_tool.cc:134
 msgid " TODO: more information (number of resources, number of terrains...)"
-msgstr "TODO: more information (number of resources, number of terrains...)"
+msgstr " TODO: more information (number of resources, number of terrains...)"
 
 #: ../src/editor/tools/editor_info_tool.cc:138
 msgid "5) World Info"
@@ -1224,7 +1234,7 @@ msgstr "5) World Info"
 
 #: ../src/editor/tools/editor_info_tool.cc:145
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
-msgstr "TODO -- More information (Number of bobs/number of wares...)\n"
+msgstr " TODO -- More information (Number of bobs/number of wares...)\n"
 
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
 msgid "Null Trigger Options"
@@ -1388,11 +1398,11 @@ msgstr "Forbid"
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:96
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:138
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
 msgid "Allow"
-msgstr "msgstr "
+msgstr "Allow"
 
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
 #: ../src/editor/ui_menus/editor_main_menu.cc:59
@@ -1428,11 +1438,11 @@ msgstr "Trigger Conditional: "
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:69
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:81
 msgid ")"
-msgstr "msgstr "
+msgstr ")"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:93
 msgid "AND"
@@ -1530,7 +1540,7 @@ msgstr "unnamed"
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:343
 msgid " exists already. Overwrite?"
-msgstr "exists already. Overwrite?"
+msgstr " exists already. Overwrite?"
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:345
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:368
@@ -1543,7 +1553,11 @@ msgid ""
 "Saved Map-File may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr ""Map Saving Error!\n"
+msgstr ""
+"Map Saving Error!\n"
+"Saved Map-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:36
 msgid "Toolsize Menu"
@@ -1623,13 +1637,17 @@ msgstr "Allow/forbid buildidngs"
 msgid ""
 "Can't remove player. It is referenced in some place. Remove all buildings, "
 "bobs, triggers and events that depend on this player and try again"
-msgstr ""Can't remove player. It is referenced in some place. Remove all buildings, "
+msgstr ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:328
 msgid ""
 "Can't change player tribe. It is referenced in some place. Remove all "
 "buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""Can't change player tribe. It is referenced in some place. Remove all "
+msgstr ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
 
 #: ../src/editor/ui_menus/editor_variables_menu.cc:60
 msgid "New Variable"
@@ -1698,7 +1716,7 @@ msgstr "Allow Building: "
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:207
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:400
 msgid "<invalid player tribe>"
-msgstr "invalid player tribe>"
+msgstr "<invalid player tribe>"
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:41
 msgid "Message Box Event Options"
@@ -1845,3 +1863,4 @@ msgstr "Unhide Area"
 #: ../src/map_objective_manager.h:52
 msgid "no descr"
 msgstr "no descr"
+

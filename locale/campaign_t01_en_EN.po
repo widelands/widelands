@@ -1,19 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of campaign_t01_en_EN.po to
+# translation of campaign_t01.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Florian Weber <Florian.Weber@pfaffenhofen.de>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: campaign_t01_en_EN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-24 21:38+0100\n"
+"Last-Translator: Florian Weber <Florian.Weber@pfaffenhofen.de>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../campaigns/t01.wmf/event:11
 #: ../campaigns/t01.wmf/event:608
@@ -71,7 +73,7 @@ msgstr "An old man approaches you..."
 
 #: ../campaigns/t01.wmf/event:456
 msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
-msgstr "\"
+msgstr " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
 
 #: ../campaigns/t01.wmf/event:458
 #: ../campaigns/t01.wmf/event:477
@@ -89,7 +91,7 @@ msgstr "Khantrukh continues..."
 
 #: ../campaigns/t01.wmf/event:475
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br>We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack."
-msgstr "\"
+msgstr " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br>We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack."
 
 #: ../campaigns/t01.wmf/event:492
 msgid "The elder remarks..."
@@ -97,7 +99,7 @@ msgstr "The elder remarks..."
 
 #: ../campaigns/t01.wmf/event:494
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-msgstr "\"
+msgstr " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
@@ -105,7 +107,7 @@ msgstr "Khantrukh speaks..."
 
 #: ../campaigns/t01.wmf/event:514
 msgid " \"There is an old saying: 'A burden divided is easier to endure.' A crossroad on the way between our site and the lumberjack would ease the work of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road."
-msgstr "\"
+msgstr " \"There is an old saying: 'A burden divided is easier to endure.' A crossroad on the way between our site and the lumberjack would ease the work of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road."
 
 #: ../campaigns/t01.wmf/event:531
 msgid "The old man looks to the sky..."
@@ -113,7 +115,7 @@ msgstr "The old man looks to the sky..."
 
 #: ../campaigns/t01.wmf/event:533
 msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr "\"
+msgstr " \"The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
@@ -121,7 +123,7 @@ msgstr "Khantrukh nods..."
 
 #: ../campaigns/t01.wmf/event:553
 msgid " \"Of course, if we intended to build a bigger settlement much more Lumberjacks would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give again.<br>So, in order to replace the trees we chop down, we should build a Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--<br>- Build a Ranger's Hut to the east of the first Lumberjack."
-msgstr "\"
+msgstr " \"Of course, if we intended to build a bigger settlement much more Lumberjacks would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give again.<br>So, in order to replace the trees we chop down, we should build a Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--<br>- Build a Ranger's Hut to the east of the first Lumberjack."
 
 #: ../campaigns/t01.wmf/event:570
 msgid "The elder speaks..."
@@ -129,7 +131,7 @@ msgstr "The elder speaks..."
 
 #: ../campaigns/t01.wmf/event:572
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
-msgstr "\"
+msgstr " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
 
 #: ../campaigns/t01.wmf/event:610
 msgid "In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br>They are a constant reminder why we had to hide here.<br>And a constant reminder why we must return in the end."
@@ -177,17 +179,17 @@ msgstr "Mission Complete"
 
 #: ../campaigns/t01.wmf/objective:8
 msgid "- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-msgstr "press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+msgstr "- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 
 #: ../campaigns/t01.wmf/objective:16
 msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr "There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+msgstr "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 
 #: ../campaigns/t01.wmf/objective:24
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "Build a Ranger's Hut to the east of the Lumberjack."
+msgstr "- Build a Ranger's Hut to the east of the Lumberjack."
 
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
-msgstr "Build two Quarries south-west of your headquarters."
+msgstr "- Build two Quarries south-west of your headquarters."
 

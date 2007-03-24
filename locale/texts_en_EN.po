@@ -1,19 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of texts_en_EN.po to
+# translation of texts.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Florian Weber <Florian.Weber@pfaffenhofen.de>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: texts_en_EN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-24 21:40+0100\n"
+"Last-Translator: Florian Weber <Florian.Weber@pfaffenhofen.de>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../txts/COPYING:1
 msgid "License"
@@ -141,7 +143,7 @@ msgstr "To do so, attach the following notices to the program.  It is safest to 
 
 #: ../txts/COPYING:96
 msgid "<one line to give the program's name and a brief idea of what it does.><br>Copyright (C) <year>  <name of author><br><br>This program is free software; you can redistribute it and/or modify<br>it under the terms of the GNU General Public License as published by<br>the Free Software Foundation; either version 2 of the License, or<br>(at your option) any later version.<br><br>This program is distributed in the hope that it will be useful,<br>but WITHOUT ANY WARRANTY; without even the implied warranty of<br>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>GNU General Public License for more details.<br><br>You should have received a copy of the GNU General Public License<br>along with this program; if not, write to the Free Software<br>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA<br><br><br>Also add information on how to contact you by electronic and paper mail."
-msgstr "one line to give the program's name and a brief idea of what it does.><br>Copyright (C) <year>  <name of author><br><br>This program is free software; you can redistribute it and/or modify<br>it under the terms of the GNU General Public License as published by<br>the Free Software Foundation; either version 2 of the License, or<br>(at your option) any later version.<br><br>This program is distributed in the hope that it will be useful,<br>but WITHOUT ANY WARRANTY; without even the implied warranty of<br>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>GNU General Public License for more details.<br><br>You should have received a copy of the GNU General Public License<br>along with this program; if not, write to the Free Software<br>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA<br><br><br>Also add information on how to contact you by electronic and paper mail."
+msgstr "<one line to give the program's name and a brief idea of what it does.><br>Copyright (C) <year>  <name of author><br><br>This program is free software; you can redistribute it and/or modify<br>it under the terms of the GNU General Public License as published by<br>the Free Software Foundation; either version 2 of the License, or<br>(at your option) any later version.<br><br>This program is distributed in the hope that it will be useful,<br>but WITHOUT ANY WARRANTY; without even the implied warranty of<br>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>GNU General Public License for more details.<br><br>You should have received a copy of the GNU General Public License<br>along with this program; if not, write to the Free Software<br>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA<br><br><br>Also add information on how to contact you by electronic and paper mail."
 
 #: ../txts/COPYING:98
 msgid "If the program is interactive, make it output a short notice like this<br>when it starts in an interactive mode:<br><br>Gnomovision version 69, Copyright (C) year  name of author<br>Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.<br>This is free software, and you are welcome to redistribute it<br>under certain conditions; type `show c' for details."
@@ -257,19 +259,19 @@ msgstr "Please provide enough background information. Tell us:"
 
 #: ../txts/README:91
 msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
-msgstr "what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
+msgstr "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
 
 #: ../txts/README:93
 msgid "- how to reproduce the bug"
-msgstr "how to reproduce the bug"
+msgstr "- how to reproduce the bug"
 
 #: ../txts/README:95
 msgid "- which map you were playing"
-msgstr "which map you were playing"
+msgstr "- which map you were playing"
 
 #: ../txts/README:97
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
-msgstr "send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
+msgstr "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
 
 #: ../txts/README:102
 msgid "Creating a Session Record</p>"
