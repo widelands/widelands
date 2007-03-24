@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../maps/Checkmate.wmf/elemental:9
+msgid "Checkmate"
+msgstr "Checkmate"
+
+#: ../maps/Checkmate.wmf/elemental:11
+msgid "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
+msgstr "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
+
+#: ../maps/Dry Riverbed.wmf/elemental:9
+msgid "Dry Riverbed"
+msgstr "Dry Riverbed"
+
+#: ../maps/Dry Riverbed.wmf/elemental:11
+msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
+msgstr "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
+
+#: ../maps/Elven Forests.wmf/elemental:9
+msgid "Elven Forests"
+msgstr "Elven Forests"
+
+#: ../maps/Elven Forests.wmf/elemental:11
+msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
+msgstr "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
+
+#: ../maps/Finlakes.wmf/elemental:9
+msgid "Finish Lakes"
+msgstr "Finish Lakes"
+
+#: ../maps/Finlakes.wmf/elemental:11
+msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgstr "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+
+#: ../maps/Firegames.wmf/elemental:9
+msgid "Firegames"
+msgstr "Firegames"
+
+#: ../maps/Firegames.wmf/elemental:11
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+msgstr "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+
+#: ../maps/Four Castles.wmf/elemental:9
+msgid "Four Castles"
+msgstr "Four Castles"
+
+#: ../maps/Four Castles.wmf/elemental:11
+msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+msgstr "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+
+#: ../maps/Glacier Lake.wmf/elemental:9
+msgid "Glacier Lake"
+msgstr "Glacier Lake"
+
+#: ../maps/Glacier Lake.wmf/elemental:11
+msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
+msgstr "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
+
+#: ../maps/Golden Peninsula.wmf/elemental:9
+msgid "Golden Peninsula"
+msgstr "Golden Peninsula"
+
+#: ../maps/Golden Peninsula.wmf/elemental:11
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "Two empires race for the treasures of a legendary peninsula..."
+
+#: ../maps/Lake of tranquility.wmf/elemental:9
+msgid "Lake of Tranquility"
+msgstr "Lake of Tranquility"
+
+#: ../maps/Lake of tranquility.wmf/elemental:11
+msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+msgstr "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+
+#: ../maps/Plateau.wmf/elemental:9
+msgid "The Green Plateau"
+msgstr "The Green Plateau"
+
+#: ../maps/Plateau.wmf/elemental:11
+msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
+msgstr "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
+
+#: ../maps/Riverlands.wmf/elemental:9
+msgid "Riverlands"
+msgstr "Riverlands"
+
+#: ../maps/The Oasis Triangle.wmf/elemental:9
+msgid "The Oasis Triangle"
+msgstr "The Oasis Triangle"
+
+#: ../maps/The Oasis Triangle.wmf/elemental:11
+msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+msgstr "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+
+#: ../maps/The big lake.wmf/elemental:9
+msgid "The big lake"
+msgstr "The big lake"
+
+#: ../maps/The long way.wmf/elemental:9
+msgid "The long way"
+msgstr "The long way"
+
+#: ../maps/War of the Valleys.wmf/elemental:9
+msgid "War of the Valleys"
+msgstr "War of the Valleys"
+
+#: ../maps/War of the Valleys.wmf/elemental:11
+msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
+msgstr "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
+
