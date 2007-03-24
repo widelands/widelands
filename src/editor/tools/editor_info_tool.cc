@@ -44,6 +44,7 @@ show a simple info dialog with infos about this field
 int Editor_Info_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
+	const World & world = map.world();
 	UI::Window * w =
 		new UI::Window(&parent, 30, 30, 400, 200, _("Field Information").c_str());
    UI::Multiline_Textarea* multiline_textarea = new UI::Multiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
@@ -85,7 +86,7 @@ int Editor_Info_Tool::handle_click_impl
 	    _("Has resources: Yes").c_str(),
 		 amount,
 		 _("amount of").c_str(),
-		 map.get_world()->get_resource(res)->name().c_str());
+		 world.get_resource(res)->name().c_str());
    else snprintf
 		(buf1, sizeof(buf1),
 		 _(" Has resources: No\n").c_str());
@@ -97,9 +98,11 @@ int Editor_Info_Tool::handle_click_impl
    sprintf(buf1, _(" Roads: TODO!\n").c_str()); buf+=buf1;
 
    buf += "\n";
-   sprintf(buf1, "%s\n", _("2) Right Terrain Info\n").c_str()); buf+=buf1;
+   sprintf(buf1, "%s\n", _("2) Terrain Info\n").c_str()); buf+=buf1;
 	{
-		const Terrain_Descr & ter = f->get_terr();
+		const Field & tf = map[center.triangle];
+		const Terrain_Descr & ter = world.terrain_descr
+			(center.triangle.t == TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 		snprintf
 			(buf1, sizeof(buf1),
 			 " %s: %s\n", _("Name").c_str(), ter.name().c_str());
@@ -108,20 +111,6 @@ int Editor_Info_Tool::handle_click_impl
 			(buf1, sizeof(buf1),
 			 " %s: %i\n", _("Texture Number").c_str(), ter.get_texture());
 		buf += buf1;
-	}
-
-   buf += "\n";
-   sprintf(buf1, "%s\n", _("3) Down Terrain Info\n").c_str()); buf+=buf1;
-	{
-		const Terrain_Descr & ter = f->get_terd();
-		snprintf
-			(buf1, sizeof(buf1),
-			 " %s: %s\n", _("Name").c_str(), ter.name().c_str());
-		buf += buf1;
-		snprintf
-			(buf1, sizeof(buf1),
-			 " %s: %i\n", _("Texture Number").c_str(), ter.get_texture());
-		buf+=buf1;
 	}
 
    buf += "\n";
@@ -134,7 +123,6 @@ int Editor_Info_Tool::handle_click_impl
    sprintf(buf1, " %s\n", _(" TODO: more information (number of resources, number of terrains...)").c_str()); buf+=buf1;
 
    buf += "\n";
-	const World & world = map.world();
    sprintf(buf1, "%s\n", _("5) World Info").c_str()); buf+=buf1;
 	sprintf(buf1, " %s: %s\n", _("Name").c_str(), world.get_name());
 	buf += buf1;

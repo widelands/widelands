@@ -250,12 +250,12 @@ void Map::recalc_default_resources(void) {
 
          // This field
 			{
-				const Terrain_Descr & terr = f.field->get_terr();
+				const Terrain_Descr & terr = w.terrain_descr(f.field->terrain_r());
 				++m[terr.get_default_resources()];
 				amount += terr.get_default_resources_amount();
 			}
 			{
-				const Terrain_Descr & terd = f.field->get_terd();
+				const Terrain_Descr & terd = w.terrain_descr(f.field->terrain_d());
 				++m[terd.get_default_resources()];
 				amount += terd.get_default_resources_amount();
 			}
@@ -264,7 +264,7 @@ void Map::recalc_default_resources(void) {
          // top left neigbour
          get_neighbour(f, Map_Object::WALK_NW, &f1);
 			{
-				const Terrain_Descr & terr = f1.field->get_terr();
+				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
 				const char resr =
 					terr.get_default_resources();
 				if
@@ -276,7 +276,7 @@ void Map::recalc_default_resources(void) {
 				amount += terr.get_default_resources_amount();
 			}
 			{
-				const Terrain_Descr & terd = f1.field->get_terd();
+				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
 				const char resd =
 					terd.get_default_resources();
 				if
@@ -291,7 +291,7 @@ void Map::recalc_default_resources(void) {
          // top right neigbour
          get_neighbour(f, Map_Object::WALK_NE, &f1);
 			{
-				const Terrain_Descr & terd = f1.field->get_terd();
+				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
 				const char resd =
 					terd.get_default_resources();
 				if
@@ -306,7 +306,7 @@ void Map::recalc_default_resources(void) {
          // left neighbour
          get_neighbour(f, Map_Object::WALK_W, &f1);
 			{
-				const Terrain_Descr & terr = f1.field->get_terr();
+				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
 				const char resr =
 					terr.get_default_resources();
 				if
@@ -423,14 +423,12 @@ void Map::create_empty_map
    set_scenario_player_name(1, _("Player 1"));
 
 	{
-		const Terrain_Descr & default_terrain =
-			*world().get_terrain(static_cast<const uint>(0));
 		Field * field = m_fields;
 		const Field * const fields_end = field + max_index();
 		for (; field < fields_end; ++field) {
 			field->set_height(10);
-			field->set_terraind(default_terrain);
-			field->set_terrainr(default_terrain);
+			field->set_terrain_d(0);
+			field->set_terrain_r(0);
 		}
 	}
    recalc_whole_map();
@@ -1015,12 +1013,12 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
 	const World & w = world();
 
-	const Uint8 tr_d_terrain_is = (tr.field->get_terd()).get_is();
-	const Uint8 tl_r_terrain_is = (tl.field->get_terr()).get_is();
-	const Uint8 tl_d_terrain_is = (tl.field->get_terd()).get_is();
-	const Uint8  l_r_terrain_is =  (l.field->get_terr()).get_is();
-	const Uint8  f_d_terrain_is =  (f.field->get_terd()).get_is();
-	const Uint8  f_r_terrain_is =  (f.field->get_terr()).get_is();
+	const Uint8 tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
+	const Uint8 tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
+	const Uint8 tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
+	const Uint8  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
+	const Uint8  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
+	const Uint8  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
    // 1b) Collect some information about the neighbours
 	uchar cnt_unpassable = 0;
@@ -1122,12 +1120,12 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 
 	const World & w = world();
 
-	const Uint8 tr_d_terrain_is = (tr.field->get_terd()).get_is();
-	const Uint8 tl_r_terrain_is = (tl.field->get_terr()).get_is();
-	const Uint8 tl_d_terrain_is = (tl.field->get_terd()).get_is();
-	const Uint8  l_r_terrain_is =  (l.field->get_terr()).get_is();
-	const Uint8  f_d_terrain_is =  (f.field->get_terd()).get_is();
-	const Uint8  f_r_terrain_is =  (f.field->get_terr()).get_is();
+	const Uint8 tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
+	const Uint8 tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
+	const Uint8 tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
+	const Uint8  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
+	const Uint8  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
+	const Uint8  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
 	// 1b) Collect some information about the neighbours
 	int cnt_unpassable = 0;
@@ -2040,7 +2038,9 @@ returns the radius of changes (which are always 2)
 */
 int Map::change_terrain(const TCoords<> c, const Terrain_Descr::Index terrain) {
 	Area<FCoords> affected_area(get_fcoords(c), 2);
-	affected_area.field->set_terrain(c.t, *get_world()->get_terrain(terrain));
+	if (c.t == TCoords<>::D) affected_area.field->set_terrain_d(terrain);
+	else
+	{assert(c.t == TCoords<>::R); affected_area.field->set_terrain_r(terrain);}
 	recalc_for_field_area(affected_area);
 
    return 2;

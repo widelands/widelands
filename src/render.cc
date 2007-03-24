@@ -220,8 +220,10 @@ static inline ulong calc_minimap_color
 	if (flags & MiniMap::Terrn) {
 		pixelcolor =
 			get_graphicimpl()->
-			get_maptexture_data(f.field->get_terd().get_texture())->
-			get_minimap_color(f.field->get_brightness());
+			get_maptexture_data
+			(egbase.map().world()
+			 .terrain_descr(f.field->terrain_d()).get_texture())
+			->get_minimap_color(f.field->get_brightness());
 	}
 
 	if (flags & MiniMap::Owner) {

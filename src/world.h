@@ -146,8 +146,10 @@ struct World {
 	Terrain_Descr & terrain_descr    (const Terrain_Descr  ::Index i) const
 		throw ()
 	{return *ters.get(i);}
-      inline Terrain_Descr* get_terrain(const uint i) const { assert(i<ters.get_nitems()); return ters.get(i); }
-      inline Terrain_Descr* get_terrain(const char * const str ) const { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
+	const Terrain_Descr & get_ter(const Terrain_Descr::Index i) const
+	{assert(i < ters.get_nitems()); return *ters.get(i);}
+	const Terrain_Descr * get_ter(const char * const name) const
+	{const int i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
       inline int get_nr_terrains(void) const { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) const{ return bobs.get(index); }

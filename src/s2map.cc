@@ -344,7 +344,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case 0x13: c=4; break; // unknown texture!
 					default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 				}
-				f->set_terraind(*m_map->m_world->get_terrain(c));
+				f->set_terrain_d(c);
 			}
 		free(section);
 		section = 0;
@@ -386,7 +386,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case 0x13: c=4; break; // unknown texture!
 					default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 				}
-				f->set_terrainr(*m_map->m_world->get_terrain(c));
+				f->set_terrain_r(c);
 			}
 		free(section);
 		section = 0;

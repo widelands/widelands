@@ -46,23 +46,23 @@ int Editor_Change_Resource_Tool_Callback
    int count=0;
 
    // This field
-	count += (f.field->get_terr()).resource_value(curres);
-	count += (f.field->get_terd()).resource_value(curres);
+	count += world.terrain_descr(f.field->terrain_r()).resource_value(curres);
+	count += world.terrain_descr(f.field->terrain_d()).resource_value(curres);
 
 
    // If one of the neighbours is unpassable, count its resource stronger
    // top left neigbour
    map.get_neighbour(f, Map_Object::WALK_NW, &f1);
-	count += (f1.field->get_terr()).resource_value(curres);
-	count += (f1.field->get_terd()).resource_value(curres);
+	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
+	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
    // top right neigbour
    map.get_neighbour(f, Map_Object::WALK_NE, &f1);
-	count += (f1.field->get_terd()).resource_value(curres);
+	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
    // left neighbour
    map.get_neighbour(f, Map_Object::WALK_W, &f1);
-	count += (f1.field->get_terr()).resource_value(curres);
+	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
    if(count<=3)
       return 0;

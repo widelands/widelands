@@ -58,30 +58,28 @@ throw (_wexception)
 		const Uint16 nr_terrains = fr.Unsigned16();
 
       // construct ids and map
-		std::map<const Uint16, const Terrain_Descr *> smap;
+		typedef std::map<const Uint16, Terrain_Descr::Index> terrain_id_map;
+		terrain_id_map smap;
 		for (Uint16 i = 0; i < nr_terrains; ++i) {
 			const Uint16       id   = fr.Unsigned16();
          const char * const name = fr.CString   ();
-			const std::map<const Uint16, const Terrain_Descr *>::const_iterator
-				it = smap.find(id);
+			const terrain_id_map::const_iterator it = smap.find(id);
 			if (it != smap.end()) log
 				("Widelands_Map_Terrain_Data_Packet::Read: WARNING: Found "
 				 "duplicate terrain id %i: Previously defined as \"%s\", now as "
 				 "\"%s\".\n",
-				 id,
-				 it->second->get_name(),
-				 name);
-			if (not world.get_terrain(name)) throw wexception
+				 id, world.terrain_descr(it->second).name().c_str(), name);
+			if (not world.get_ter(name)) throw wexception
 				("Terrain '%s' exists in map, not in world!", name);
-			smap[id] = world.get_terrain(name);
+			smap[id] = world.index_of_terrain(name);
       }
 
       // Now get all the terrains
 		const Map::Index max_index = map.max_index();
 		for (Map::Index i = 0; i < max_index; ++i) {
 			Field & f = map[i];
-			f.set_terrainr(*smap[fr.Unsigned8()]);
-			f.set_terraind(*smap[fr.Unsigned8()]);
+			f.set_terrain_r(smap[fr.Unsigned8()]);
+			f.set_terrain_d(smap[fr.Unsigned8()]);
       }
       return;
    }
@@ -116,7 +114,7 @@ throw (_wexception)
    // Write all terrain names and their id's
 	std::map<const char * const, Terrain_Descr::Index> smap;
 	for (Terrain_Descr::Index i = 0; i < nr_terrains; ++i) {
-		const char * const name = world.get_terrain(i)->get_name();
+		const char * const name = world.get_ter(i).name().c_str();
 		smap[name] = i;
       fw.Unsigned16(i);
 		fw.CString(name);
@@ -126,8 +124,8 @@ throw (_wexception)
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		Field & f = map[i];
-		fw.Unsigned8(smap[f.get_terr().get_name()]);
-		fw.Unsigned8(smap[f.get_terd().get_name()]);
+		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).get_name()]);
+		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).get_name()]);
    }
 
    fw.Write( fs, "binary/terrain");

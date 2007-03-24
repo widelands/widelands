@@ -25,6 +25,7 @@
 #include "compile_assert.h"
 #include "constants.h"
 #include "types.h"
+#include "world.h"
 
 #include <limits>
 
@@ -94,23 +95,11 @@ class BaseImmovable;
  * a field like it is represented in the game
  * \todo This is all one evil hack :(
  */
-class Field {
+struct Field {
    friend class Map;
 	friend class Bob;
 	friend class BaseImmovable;
 
-	struct Triangle {
-
-		/**
-		 * This could be a terrain-type index instead. It could be for example 1
-		 * byte instead the 4 bytes currently used by the pointer. That would
-		 * save 3 bytes for each triangle, which is 384 kiB on a 256 * 256 map.
-		 */
-		const Terrain_Descr * terrain_type;
-
-	};
-
-public:
 	enum Buildhelp_Index {
 		Buildhelp_Flag   = 0,
 		Buildhelp_Small  = 1,
@@ -121,6 +110,11 @@ public:
 	};
 
 	typedef Uint8 Height;
+
+	struct Terrains {
+		Terrain_Descr::Index d : 4;
+		Terrain_Descr::Index r : 4;
+	};
 
 private:
    Height height;
@@ -169,8 +163,7 @@ private:
 	uchar m_starting_res_amount;
 	uchar m_res_amount;
 
-	/**  Indexed by TCoords::TriangleIndex.*/
-	Triangle triangles[2];
+	Terrains terrains;
 
 	/** linked list, \sa Bob::m_linknext*/
 	Bob* bobs;
@@ -180,19 +173,15 @@ public:
 	Height get_height() const throw () {return height;}
 	FieldCaps get_caps() const {return caps;}
 
-	const Terrain_Descr & get_terr() const throw ()
-	{return *triangles[TCoords<>::R].terrain_type;}
-	const Terrain_Descr & get_terd() const throw ()
-	{return *triangles[TCoords<>::D].terrain_type;}
-	void set_terrain(const TCoords<>::TriangleIndex t, const Terrain_Descr & p)
-		throw ()
-	{triangles[t]         .terrain_type = &p;}
-	void set_terrainr(const Terrain_Descr & p) throw ()
-	{triangles[TCoords<>::R].terrain_type = &p;}
-	void set_terraind(const Terrain_Descr & p) throw ()
-	{triangles[TCoords<>::D].terrain_type = &p;}
+	Terrains             get_terrains() const throw () {return terrains;}
+	Terrain_Descr::Index terrain_d   () const throw () {return terrains.d;}
+	Terrain_Descr::Index terrain_r   () const throw () {return terrains.r;}
+	void set_terrains (const Terrains             i) throw () {terrains   = i;}
+	void set_terrain_d(const Terrain_Descr::Index i) throw () {terrains.d = i;}
+	void set_terrain_r(const Terrain_Descr::Index i) throw () {terrains.r = i;}
 
 	inline Bob* get_first_bob(void) { return bobs; }
+	const BaseImmovable * get_immovable() const throw () {return immovable;}
 	inline BaseImmovable* get_immovable() { return immovable; }
 
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
@@ -262,6 +251,6 @@ public:
 		height = h;
 	}
 };
-compile_assert(sizeof(Field) == 8 + 4 * sizeof(void *));
+compile_assert(sizeof(Field) == 12 + 2 * sizeof(void *));
 
 #endif

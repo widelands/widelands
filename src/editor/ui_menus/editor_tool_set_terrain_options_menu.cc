@@ -77,7 +77,7 @@ m_tool(tool)
 	for (size_t checkfor = 0; checkfor < 6; ++checkfor)
 		for (Terrain_Descr::Index i  = 0; i < nr_terrains; ++i) {
 
-         const uchar ter_is = world.get_terrain(i)->get_is();
+			const uchar ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor]) continue;
 
 			if (cur_x == terrains_in_row) {
@@ -154,7 +154,7 @@ m_tool(tool)
 	uint j = m_tool.get_nr_enabled();
 	for (Terrain_Descr::Index i = 0; j; ++i) if (m_tool.is_enabled(i)) {
          buf+=" ";
-		buf += world.get_terrain(i)->name();
+		buf += world.get_ter(i).name();
          --j;
    }
 	m_cur_selection.set_text(buf);
@@ -206,7 +206,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
 		uint j = m_tool.get_nr_enabled();
 		for (Terrain_Descr::Index i = 0; j; ++i) if (m_tool.is_enabled(i)) {
          buf+=" ";
-			buf += world.get_terrain(i)->name();
+			buf += world.get_ter(i).name();
          --j;
 		}
 

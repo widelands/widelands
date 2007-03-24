@@ -470,6 +470,7 @@ void RenderTargetImpl::rendermap
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
 
 	const Map & map = egbase.map();
+	const World & world = map.world();
 	const Overlay_Manager & overlay_manager = map.get_overlay_manager();
 	const uint mapwidth = map.get_width();
 	int minfx, minfy;
@@ -515,7 +516,7 @@ void RenderTargetImpl::rendermap
 		map.get_ln(r, &f);
 		const Texture * f_r_texture =
 			get_graphicimpl()->get_maptexture_data
-			((f.field->get_terr()).get_texture());
+			(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 		uint count = dx;
 		while (count--) {
@@ -531,13 +532,13 @@ void RenderTargetImpl::rendermap
 			br_posx += TRIANGLE_WIDTH;
 			const Texture & tr_d_texture =
 				*get_graphicimpl()->get_maptexture_data
-				((tr.field->get_terd()).get_texture());
+				(world.terrain_descr(tr.field->terrain_d()).get_texture());
 			const Texture & f_d_texture =
 				*get_graphicimpl()->get_maptexture_data
-				((f.field->get_terd()).get_texture());
+				(world.terrain_descr(f.field->terrain_d()).get_texture());
 			f_r_texture =
 				get_graphicimpl()->get_maptexture_data
-				((f.field->get_terr()).get_texture());
+				(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 			const uchar roads =
 				f.field->get_roads() | overlay_manager.get_road_overlay(f);
