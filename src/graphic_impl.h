@@ -36,6 +36,8 @@
 
 SDL_Surface* LoadImage(const char * const filename);
 
+struct Texture;
+
 /*
 class Surface
 const
@@ -151,11 +153,21 @@ class Surface {
 
 
       // sw16_terrain.cc
-      void draw_field(Rect&, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-            Field * const lf, Field * const ft,
+	void draw_field
+		(Rect &,
+		 Field * const f, Field * const rf, Field * const fl, Field * const rfl,
             const int posx, const int rposx, const int posy,
             const int blposx, const int rblposx, const int blposy,
-            uchar roads, uchar darken, bool);
+            uchar roads,
+		 Sint8            f_brightness,
+		 Sint8            r_brightness,
+		 Sint8           bl_brightness,
+		 Sint8           br_brightness,
+		 const Texture & tr_d_texture,
+		 const Texture &  l_r_texture,
+		 const Texture &  f_d_texture,
+		 const Texture &  f_r_texture,
+		 bool);
 
 
    private:
@@ -222,7 +234,7 @@ public:
 
 	void animate(uint time);
    inline void reset_was_animated( void ) { m_was_animated = false; }
-   inline bool was_animated( void ) { return m_was_animated; }
+	bool was_animated() const throw () {return m_was_animated;}
 };
 
 /*

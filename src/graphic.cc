@@ -513,6 +513,9 @@ void RenderTargetImpl::rendermap
 		FCoords tr, f;
 		map.get_tln(r, &tr);
 		map.get_ln(r, &f);
+		const Texture * f_r_texture =
+			get_graphicimpl()->get_maptexture_data
+			((f.field->get_terr()).get_texture());
 
 		uint count = dx;
 		while (count--) {
@@ -520,26 +523,40 @@ void RenderTargetImpl::rendermap
 			const FCoords l = f, bl = br;
 			f = r;
 			const int f_posx = r_posx, bl_posx = br_posx;
+			const Texture & l_r_texture = *f_r_texture;
 			move_r(mapwidth, tr);
 			move_r(mapwidth,  r,  r_index);
 			move_r(mapwidth, br, br_index);
 			r_posx  += TRIANGLE_WIDTH;
 			br_posx += TRIANGLE_WIDTH;
+			const Texture & tr_d_texture =
+				*get_graphicimpl()->get_maptexture_data
+				((tr.field->get_terd()).get_texture());
+			const Texture & f_d_texture =
+				*get_graphicimpl()->get_maptexture_data
+				((f.field->get_terd()).get_texture());
+			f_r_texture =
+				get_graphicimpl()->get_maptexture_data
+				((f.field->get_terr()).get_texture());
 
-			uchar darken = 0;
-			if (visibility) {
-				if (not (*visibility) [f_index]) darken |= 1;
-				if (not (*visibility) [r_index]) darken |= 2;
-				if (not (*visibility)[bl_index]) darken |= 4;
-				if (not (*visibility)[br_index]) darken |= 8;
-			}
 			const uchar roads =
 				f.field->get_roads() | overlay_manager.get_road_overlay(f);
 
 			m_ground_surface->draw_field //  Render ground
-				(m_rect, f.field, r.field, bl.field, br.field, l.field, tr.field,
+				(m_rect,
+				 f.field, r.field, bl.field, br.field,
 				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
-				 roads, darken, draw_all);
+				 roads,
+				 (not visibility or (*visibility) [f_index]) ?
+				 f .field->get_brightness() : -128,
+				 (not visibility or (*visibility) [r_index]) ?
+				 r .field->get_brightness() : -128,
+				 (not visibility or (*visibility)[bl_index]) ?
+				 bl.field->get_brightness() : -128,
+				 (not visibility or (*visibility)[br_index]) ?
+				 br.field->get_brightness() : -128,
+				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
+				 draw_all);
 		}
 
 		++linear_fy;

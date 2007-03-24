@@ -283,41 +283,46 @@ static inline void get_horiz_linearcomb (int u1, int u2, int v1, int v2, float& 
 }
 
 template<typename T>
-void render_top_triangle (Surface *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y2)
+void render_top_triangle
+(Surface & dst,
+ const Texture & tex,
+ Vertex & p1, Vertex & p2, Vertex & p3,
+ int y2)
 {
-	int y,y1,w,h,ix1,ix2,count;
+	int y, y1, ix1, ix2, count;
 	int x1,x2,dx1,dx2;
 	int b1,db1, tx1,dtx1, ty1,dty1;
-	int b,db,tx,dtx,ty,dty;
+	int b, tx, ty;
 	float lambda, mu;
 	unsigned char *texpixels;
 	T *texcolormap;
 
-	get_horiz_linearcomb (p2->x-p1->x, p2->y-p1->y, p3->x-p1->x, p3->y-p1->y, lambda, mu);
-	db=ftofix((p2->b-p1->b)*lambda + (p3->b-p1->b)*mu);
-	dtx=ftofix((p2->tx-p1->tx)*lambda + (p3->tx-p1->tx)*mu);
-	dty=ftofix((p2->ty-p1->ty)*lambda + (p3->ty-p1->ty)*mu);
+	get_horiz_linearcomb
+		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
+	const int db =  ftofix((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
+	const int dtx = ftofix((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
+	const int dty = ftofix((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
 
-	w=dst->get_w();
-	h=dst->get_h();
+	const int w = dst.get_w();
+	const int h = dst.get_h();
 
-	texpixels=tex->get_curpixels();
-	texcolormap=(T*) (tex->get_colormap());
+	texpixels = tex.get_curpixels();
+	texcolormap = static_cast<T * const>(tex.get_colormap());
 
-	y1=p1->y;
+	y1 = p1.y;
 
-	x1=x2=itofix(p1->x);
-	dx1=(itofix(p2->x) - x1) / (p2->y - y1);
-	dx2=(itofix(p3->x) - x1) / (p3->y - y1);
+	x1 = x2 =  itofix(p1.x);
+	dx1     = (itofix(p2.x) - x1)   / (p2.y - y1);
+	dx2     = (itofix(p3.x) - x1)   / (p3.y - y1);
 
-	b1=itofix(p1->b);
-	db1=(itofix(p2->b) - b1) / (p2->y - y1);
+	b1      =  itofix(p1.b);
+	db1     = (itofix(p2.b) - b1)   / (p2.y - y1);
 
-	tx1=itofix(p1->tx);
-	dtx1=(itofix(p2->tx) - tx1) / (p2->y - y1);
+	tx1     =  itofix(p1.tx);
+	dtx1    = (itofix(p2.tx) - tx1) / (p2.y - y1);
 
-	ty1=itofix(p1->ty);
-	dty1=(itofix(p2->ty) - ty1) / (p2->y - y1);
+	ty1     =  itofix(p1.ty);
+	dty1    = (itofix(p2.ty) - ty1) / (p2.y - y1);
 
 	for (y=y1;y<y2 && y<h;y++) {
 		if (y>=0) {
@@ -338,7 +343,13 @@ void render_top_triangle (Surface *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex
 
 			count=ix2-ix1;
 
-			T *scanline=(T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + ix1;
+			T * scanline =
+				reinterpret_cast<T * const>
+				(static_cast<Uint8 * const>(dst.get_pixels())
+				 +
+				 y * dst.get_pitch())
+				+
+				ix1;
 
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
@@ -360,45 +371,50 @@ void render_top_triangle (Surface *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex
 }
 
 template<typename T>
-void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y1)
+void render_bottom_triangle
+(Surface & dst,
+ const Texture & tex,
+ Vertex & p1, Vertex & p2, Vertex & p3,
+ int y1)
 {
-	int y,y2,w,h,ix1,ix2,count;
+	int y, y2, ix1, ix2, count;
 	int x1,x2,dx1,dx2;
 	int b1,db1, tx1,dtx1, ty1,dty1;
-	int b,db,tx,dtx,ty,dty;
+	int b ,tx, ty;
 	float lambda, mu;
 	unsigned char *texpixels;
 	T *texcolormap;
 
-	get_horiz_linearcomb (p2->x-p1->x, p2->y-p1->y, p3->x-p1->x, p3->y-p1->y, lambda, mu);
-	db=ftofix((p2->b-p1->b)*lambda + (p3->b-p1->b)*mu);
-	dtx=ftofix((p2->tx-p1->tx)*lambda + (p3->tx-p1->tx)*mu);
-	dty=ftofix((p2->ty-p1->ty)*lambda + (p3->ty-p1->ty)*mu);
+	get_horiz_linearcomb
+		(p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, lambda, mu);
+	const int db  = ftofix((p2.b  - p1.b)  * lambda + (p3.b  - p1.b)  * mu);
+	const int dtx = ftofix((p2.tx - p1.tx) * lambda + (p3.tx - p1.tx) * mu);
+	const int dty = ftofix((p2.ty - p1.ty) * lambda + (p3.ty - p1.ty) * mu);
 
-	w=dst->get_w();
-	h=dst->get_h();
+	const int w = dst.get_w();
+	const int h = dst.get_h();
 
-	texpixels=tex->get_curpixels();
-	texcolormap=(T*) (tex->get_colormap());
+	texpixels = tex.get_curpixels();
+	texcolormap = static_cast<T * const>(tex.get_colormap());
 
-	y2=p3->y;
+	y2 = p3.y;
 
-	x1=x2=itofix(p3->x);
-	dx1=-(itofix(p1->x) - x1) / (p1->y - y2);
-	dx2=-(itofix(p2->x) - x1) / (p2->y - y2);
+	x1 = x2 =   itofix(p3.x);
+	dx1     = -(itofix(p1.x) - x1) / (p1.y - y2);
+	dx2     = -(itofix(p2.x) - x1) / (p2.y - y2);
 
 	// this may seem redundant but reduces rounding artifacts
-	x1=itofix(p1->x) + dx1*(p1->y-y2);
-	x2=itofix(p2->x) + dx2*(p2->y-y2);
+	x1      =   itofix(p1.x) + dx1 * (p1.y - y2);
+	x2      =   itofix(p2.x) + dx2 * (p2.y - y2);
 
-	b1=itofix(p3->b);
-	db1=-(itofix(p1->b) - b1) / (p1->y - y2);
+	b1      =   itofix(p3.b);
+	db1     = -(itofix(p1.b) - b1)   / (p1.y - y2);
 
-	tx1=itofix(p3->tx);
-	dtx1=-(itofix(p1->tx) - tx1) / (p1->y - y2);
+	tx1     =   itofix(p3.tx);
+	dtx1    = -(itofix(p1.tx) - tx1) / (p1.y - y2);
 
-	ty1=itofix(p3->ty);
-	dty1=-(itofix(p1->ty) - ty1) / (p1->y - y2);
+	ty1     =   itofix(p3.ty);
+	dty1    = -(itofix(p1.ty) - ty1) / (p1.y - y2);
 
 	for (y=y2;y>=y1 && y>0;y--) {
 		if (y<h) {
@@ -419,7 +435,13 @@ void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Ver
 
 			count=ix2-ix1;
 
-			T* scanline=(T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + ix1;
+			T * scanline =
+				reinterpret_cast<T * const>
+				(static_cast<Uint8 * const>(dst.get_pixels())
+				 +
+				 y * dst.get_pitch())
+				+
+				ix1;
 
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
@@ -450,9 +472,10 @@ void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Ver
  * or at the top, respectively.
  */
 template<typename T>
-void render_triangle (Surface* dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *tex)
+void render_triangle
+(Surface & dst, Vertex & p1, Vertex & p2, Vertex & p3, const Texture & tex)
 {
-	Vertex *p[3]={ p1,p2,p3 };
+	Vertex * p[3]= {&p1, &p2, &p3};
 	int top,bot,mid,y,ym,i;
 
 	top=bot=0; // to avoid compiler warning
@@ -470,16 +493,16 @@ void render_triangle (Surface* dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *te
 
 	if (p[top]->y < ym) {
 		if (p[mid]->x < p[bot]->x)
-			render_top_triangle<T> (dst,tex,p[top],p[mid],p[bot],ym);
+			render_top_triangle<T>    (dst, tex, *p[top], *p[mid], *p[bot], ym);
 		else
-			render_top_triangle<T> (dst,tex,p[top],p[bot],p[mid],ym);
+			render_top_triangle<T>    (dst, tex, *p[top], *p[bot], *p[mid], ym);
 	}
 
 	if (ym < p[bot]->y) {
 		if (p[mid]->x < p[top]->x)
-			render_bottom_triangle<T> (dst,tex,p[mid],p[top],p[bot],ym);
+			render_bottom_triangle<T> (dst, tex, *p[mid], *p[top], *p[bot], ym);
 		else
-			render_bottom_triangle<T> (dst,tex,p[top],p[mid],p[bot],ym);
+			render_bottom_triangle<T> (dst, tex, *p[top], *p[mid], *p[bot], ym);
 	}
 }
 
@@ -510,15 +533,18 @@ void render_triangle (Surface* dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *te
 #define DITHER_RAND_SHIFT  (16 / DITHER_WIDTH)
 
 template<typename T>
-void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Texture* ttex, Texture* btex)
+void dither_edge_horiz
+(Surface & dst,
+ const Vertex & start, const Vertex & end,
+ const Texture & ttex, const Texture & btex)
 {
 	unsigned char *tpixels, *bpixels;
 	T *tcolormap, *bcolormap;
 
-	tpixels=ttex->get_curpixels();
-	tcolormap=(T*) (ttex->get_colormap());
-	bpixels=btex->get_curpixels();
-	bcolormap=(T*) (btex->get_colormap());
+	tpixels = ttex.get_curpixels();
+	tcolormap = static_cast<T * const>(ttex.get_colormap());
+	bpixels = btex.get_curpixels();
+	bcolormap = static_cast<T * const>(btex.get_colormap());
 
 	int tx,ty,b,dtx,dty,db,tx0,ty0;
 
@@ -532,8 +558,8 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 	// TODO: seed this depending on field coordinates
 	uint rnd=0;
 
-	int dstw = dst->get_w();
-	int dsth = dst->get_h();
+	const int dstw = dst.get_w();
+	const int dsth = dst.get_h();
 
 	int ydiff = itofix(end.y - start.y) / (end.x - start.x);
 	int centery = itofix(start.y);
@@ -552,7 +578,7 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 			// dither above the edge
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
-					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
+					T * const pix = (T*) ((uchar*)dst.get_pixels() + y*dst.get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
 					*pix = tcolormap[tpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -565,7 +591,7 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 			// dither below the edge
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
-					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
+					T * const pix = (T*) ((uchar*)dst.get_pixels() + y*dst.get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
 					*pix = bcolormap[bpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -584,15 +610,18 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 
 
 template<typename T>
-static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& end, Texture* ltex, Texture* rtex)
+static void dither_edge_vert
+(Surface & dst,
+ const Vertex & start, const Vertex & end,
+ const Texture & ltex, const Texture & rtex)
 {
 	unsigned char *lpixels, *rpixels;
 	T* lcolormap, *rcolormap;
 
-	lpixels=ltex->get_curpixels();
-	lcolormap=(T*) (ltex->get_colormap());
-	rpixels=rtex->get_curpixels();
-	rcolormap=(T*) (rtex->get_colormap());
+	lpixels = ltex.get_curpixels();
+	lcolormap = static_cast<T * const>(ltex.get_colormap());
+	rpixels = rtex.get_curpixels();
+	rcolormap = static_cast<T * const>(rtex.get_colormap());
 
 	int tx,ty,b,dtx,dty,db,tx0,ty0;
 
@@ -606,8 +635,8 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 	// TODO: seed this depending on field coordinates
 	uint rnd=0;
 
-	int dstw = dst->get_w();
-	int dsth = dst->get_h();
+	const int dstw = dst.get_w();
+	const int dsth = dst.get_h();
 
 	int xdiff = itofix(end.x - start.x) / (end.y - start.y);
 	int centerx = itofix(start.x);
@@ -626,7 +655,12 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 			// dither on left side
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
-					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
+					T * const pix = reinterpret_cast<T * const>
+						(static_cast<Uint8 * const>(dst.get_pixels())
+						 +
+						 y * dst.get_pitch())
+						+
+						x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
 					*pix = lcolormap[lpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -639,7 +673,12 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 			// dither on right side
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
-					T *pix = (T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
+					T * const pix = reinterpret_cast<T * const>
+						(static_cast<Uint8 * const>(dst.get_pixels())
+						 +
+						 y * dst.get_pitch())
+						+
+						x;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
 					*pix = rcolormap[rpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -721,13 +760,11 @@ void render_road_vert(Surface* dst, const Point& start, const Point& end, Surfac
 
 template<typename T>
 void draw_field_int
-(Surface * dst,
+(Surface & dst,
  Field * const f,
- Field * const rf,
- Field * const fl,
- Field * const rfl,
- Field * const lf,
- Field * const ft,
+ Field * const r,
+ Field * const bl,
+ Field * const br,
  const int     posx,
  const int     rposx,
  const int     posy,
@@ -735,101 +772,109 @@ void draw_field_int
  const int     rblposx,
  const int     blposy,
  uchar         roads,
- uchar         darken,
+ Sint8            f_brightness,
+ Sint8            r_brightness,
+ Sint8           bl_brightness,
+ Sint8           br_brightness,
+ const Texture & tr_d_texture,
+ const Texture &  l_r_texture,
+ const Texture &  f_d_texture,
+ const Texture &  f_r_texture,
  bool          draw_all)
 {
-	Vertex r, l, br, bl;
-
-	r = Vertex(rposx, posy - rf->get_height() * HEIGHT_FACTOR, rf->get_brightness(), 0, 0);
-	l = Vertex(posx, posy - f->get_height() * HEIGHT_FACTOR, f->get_brightness(), 64, 0);
-	br = Vertex(rblposx, blposy - rfl->get_height() * HEIGHT_FACTOR, rfl->get_brightness(), 0, 64);
-	bl = Vertex(blposx, blposy - fl->get_height() * HEIGHT_FACTOR, fl->get_brightness(), 64, 64);
-
-	if (darken&1) l.b=-128;
-	if (darken&2) r.b=-128;
-	if (darken&4) bl.b=-128;
-	if (darken&8) br.b=-128;
+	Vertex  r_vert
+		(rposx, posy - r->get_height() * HEIGHT_FACTOR, r_brightness, 0, 0);
+	Vertex  f_vert
+		(posx, posy - f->get_height() * HEIGHT_FACTOR, f_brightness, 64, 0);
+	Vertex br_vert
+		(rblposx, blposy - br->get_height() * HEIGHT_FACTOR, br_brightness, 0, 64);
+	Vertex bl_vert
+		(blposx, blposy - bl->get_height() * HEIGHT_FACTOR, bl_brightness, 64, 64);
 
 	Surface* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
 	Surface* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
 
-	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr().get_texture());
-	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd().get_texture());
-	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr().get_texture());
-	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd().get_texture());
-
 	if( draw_all ) {
-		render_triangle<T> (dst, &r, &l,  &br, rtex);
-		render_triangle<T> (dst, &l, &br, &bl, btex);
+		render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
+		render_triangle<T> (dst, f_vert, br_vert, bl_vert, f_d_texture);
 	} else {
-		if( rtex->was_animated())
-			render_triangle<T> (dst, &r, &l, &br, rtex);
-		if( btex->was_animated())
-			render_triangle<T>(dst, &l, &br, &bl, btex);
+		if (f_r_texture.was_animated())
+			render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
+		if (f_d_texture.was_animated())
+			render_triangle<T> (dst, f_vert, br_vert, bl_vert, f_d_texture);
 	}
 
 	// Render roads and dither polygon edges
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
-	if ((darken&3)!=3) {
+	if (-128 < f_brightness or -128 < r_brightness) {
 		if (road) {
 			switch(road) {
 				case Road_Normal:
-					render_road_horiz<T> (dst, l, r, rt_normal);
+					render_road_horiz<T> (&dst, f_vert, r_vert, rt_normal);
 					break;
 				case Road_Busy:
-					render_road_horiz<T> (dst, l, r, rt_busy);
+					render_road_horiz<T> (&dst, f_vert, r_vert, rt_busy);
 					break;
 			default: assert(false); break; //  never here
 			}
 		}
 		else {
-			if( draw_all || rtex->was_animated() || ttex->was_animated())
-				if (rtex!=0 && ttex!=0 && rtex!=ttex)
-					dither_edge_horiz<T> (dst, l, r, rtex, ttex);
+			if
+				(draw_all
+				 or
+				 f_r_texture.was_animated() or tr_d_texture.was_animated())
+				if (&f_r_texture != &tr_d_texture) dither_edge_horiz<T>
+					(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
 		}
 	}
 
 	road = (roads >> Road_SouthEast) & Road_Mask;
-	if ((darken&9)!=9) {
+	if (-128 < f_brightness or -128 < br_brightness) {
 		if (road) {
 			switch(road) {
 				case Road_Normal:
-					render_road_vert<T> (dst, l, br, rt_normal);
+					render_road_vert<T> (&dst, f_vert, br_vert, rt_normal);
 					break;
 				case Road_Busy:
-					render_road_vert<T> (dst, l, br, rt_busy);
+					render_road_vert<T> (&dst, f_vert, br_vert, rt_busy);
 					break;
 				default:
 					assert(0); break; // never here
 			}
 		}
 		else {
-			if( draw_all || rtex->was_animated() || btex->was_animated())
-				if (rtex!=0 && btex!=0 && rtex!=btex)
-					dither_edge_vert<T> (dst, l, br, rtex, btex);
+			if
+				(draw_all
+				 or
+				 f_r_texture.was_animated() or f_d_texture.was_animated())
+				if (&f_r_texture != &f_d_texture) dither_edge_vert<T>
+					(dst, f_vert, br_vert, f_r_texture, f_d_texture);
 		}
 	}
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
-	if ((darken&5)!=5) {
+	if (-128 < f_brightness or -128 < bl_brightness) {
 		if (road) {
 			switch(road) {
 				case Road_Normal:
-					render_road_vert<T> (dst, l, bl, rt_normal);
+					render_road_vert<T> (&dst, f_vert, bl_vert, rt_normal);
 					break;
 				case Road_Busy:
-					render_road_vert<T> (dst, l, bl, rt_busy);
+					render_road_vert<T> (&dst, f_vert, bl_vert, rt_busy);
 					break;
 				default:
 					assert(0); break; // never here
 			}
 		}
 		else {
-			if( draw_all || btex->was_animated() || ltex->was_animated())
-				if (ltex!=0 && btex!=0 && ltex!=btex)
-					dither_edge_vert<T>(dst, l, bl, btex, ltex);
+			if
+				(draw_all
+				 or
+				 f_d_texture.was_animated() or l_r_texture.was_animated())
+				if (&l_r_texture != &f_d_texture) dither_edge_vert<T>
+					(dst, f_vert, bl_vert, f_d_texture, l_r_texture);
 		}
 	}
 
@@ -844,22 +889,44 @@ Draw ground textures and roads for the given parallelogram (two triangles)
 into the bitmap.
 ===============
 */
-void Surface::draw_field(Rect& subwin, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-			Field * const lf, Field * const ft,
+void Surface::draw_field
+(Rect & subwin,
+ Field * const f, Field * const rf, Field * const fl, Field * const rfl,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
-	                uchar roads, uchar darken, bool draw_all)
+ uchar roads,
+ Sint8            f_brightness,
+ Sint8            r_brightness,
+ Sint8           bl_brightness,
+ Sint8           br_brightness,
+ const Texture & tr_d_texture,
+ const Texture &  l_r_texture,
+ const Texture &  f_d_texture,
+ const Texture &  f_r_texture,
+bool draw_all)
 {
 	set_subwin( subwin );
 
 	switch (get_format()->BytesPerPixel) {
 	    case 2:
 		draw_field_int<Uint16>
-		    (this, f, rf, fl, rfl, lf, ft, posx, rposx, posy, blposx, rblposx, blposy, roads, darken, draw_all);
+		    (*this,
+		     f, rf, fl, rfl,
+		     posx, rposx, posy, blposx, rblposx, blposy,
+		     roads,
+		     f_brightness, r_brightness, bl_brightness, br_brightness,
+		     tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
+		     draw_all);
 		break;
 	    case 4:
 		draw_field_int<Uint32>
-		    (this, f, rf, fl, rfl, lf, ft, posx, rposx, posy, blposx, rblposx, blposy, roads, darken, draw_all);
+		    (*this,
+		     f, rf, fl, rfl,
+		     posx, rposx, posy, blposx, rblposx, blposy,
+		     roads,
+		     f_brightness, r_brightness, bl_brightness, br_brightness,
+		     tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
+		     draw_all);
 		break;
 	    default:
 		assert (0);
