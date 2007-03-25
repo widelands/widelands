@@ -1,23 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+# Widelands - Finnish language
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: $Id$\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-24 06:31+0200\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Lisenssi"
 
 #: ../txts/COPYING:3
 msgid "GNU general public licence"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr ""
+msgstr "Versio 2, kesäkuu 1991<br></p></rt>"
 
 #: ../txts/COPYING:8
 msgid ""
@@ -307,7 +307,7 @@ msgstr ""
 
 #: ../txts/COPYING:70
 msgid "No warranty"
-msgstr ""
+msgstr "Ei takuuta"
 
 #: ../txts/COPYING:74
 msgid ""
@@ -415,11 +415,11 @@ msgstr ""
 
 #: ../txts/README:1
 msgid "README"
-msgstr ""
+msgstr "LUEMINUT"
 
 #: ../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "Avoimen lähdekoodin strategiapeli"
 
 #: ../txts/README:13
 msgid ""
@@ -434,7 +434,7 @@ msgstr ""
 
 #: ../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Tarkista Widelands-projektin kotisivut:"
 
 #: ../txts/README:22
 msgid ""
@@ -445,7 +445,7 @@ msgstr ""
 
 #: ../txts/README:27
 msgid "Status"
-msgstr ""
+msgstr "Tila"
 
 #: ../txts/README:31
 msgid ""
@@ -457,15 +457,15 @@ msgstr ""
 
 #: ../txts/README:36
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Näppäimistöoikotiet (pelissä)"
 
 #: ../txts/README:40
 msgid "SPACE       Toggles build-help"
-msgstr ""
+msgstr "SPACE       Rakennusapu päälle/pois"
 
 #: ../txts/README:42
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M               Minikartta päälle/pois"
 
 #: ../txts/README:44
 msgid "C               Toggle census"
@@ -473,11 +473,11 @@ msgstr ""
 
 #: ../txts/README:46
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S               Statistiikat päälle/pois"
 
 #: ../txts/README:48
 msgid "F               Toggle Fullscreen"
-msgstr ""
+msgstr "F               Kokoruudun tila päälle/pois"
 
 #: ../txts/README:50
 msgid "Home        Center main mapview on starting location"
@@ -485,11 +485,11 @@ msgstr ""
 
 #: ../txts/README:53
 msgid "PAGEUP         Increase gamespeed"
-msgstr ""
+msgstr "PAGEUP         Lisää pelinopeutta"
 
 #: ../txts/README:55
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PAGEDOWN    Vähennä pelinopeutta"
 
 #: ../txts/README:58
 msgid "F5           Reveals the entire map (only in debug-builds)"
@@ -497,15 +497,15 @@ msgstr ""
 
 #: ../txts/README:60
 msgid "F10         Quit the game immediately"
-msgstr ""
+msgstr "F10         Poistu pelistä välittömästi"
 
 #: ../txts/README:62
 msgid "F11         Take a screenshot"
-msgstr ""
+msgstr "F11         Ota ruudunkaappaus"
 
 #: ../txts/README:67
 msgid "Online Help"
-msgstr ""
+msgstr "Online-apu"
 
 #: ../txts/README:71
 msgid ""
@@ -515,7 +515,7 @@ msgstr ""
 
 #: ../txts/README:79
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Bugien raportointi"
 
 #: ../txts/README:83
 msgid ""
@@ -536,11 +536,11 @@ msgstr ""
 
 #: ../txts/README:93
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- Kuinka ongelma voidaan toistaa"
 
 #: ../txts/README:95
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- Mitä karttaa pelasit"
 
 #: ../txts/README:97
 msgid ""
@@ -593,19 +593,19 @@ msgstr ""
 
 #: ../txts/developers:1
 msgid "Development"
-msgstr ""
+msgstr "Kehitys"
 
 #: ../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "LUEMINUT Widelandsin muokkaimelle"
 
 #: ../txts/editor_readme:3
 msgid "README for the Editor"
-msgstr ""
+msgstr "LUEMINUT karttamuokkaimelle"
 
 #: ../txts/editor_readme:6 ../txts/README:9
 msgid "Introduction"
-msgstr ""
+msgstr "Esittely"
 
 #: ../txts/editor_readme:9
 msgid ""
@@ -617,11 +617,11 @@ msgstr ""
 
 #: ../txts/editor_readme:13
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Näppäimistöoikotiet"
 
 #: ../txts/editor_readme:16
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "SPACE    Rakennusapu päälle/pois"
 
 #: ../txts/editor_readme:18
 msgid "C        Toggles census on/off"
@@ -633,19 +633,19 @@ msgstr ""
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr ""
+msgstr "F        Koko ruudun tila päälle/pois"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"
-msgstr ""
+msgstr "H        Päävalikko"
 
 #: ../txts/editor_readme:26
 msgid "M        Toggles minimap"
-msgstr ""
+msgstr "M        Minikartta"
 
 #: ../txts/editor_readme:28
 msgid "P        Toggles player menu"
-msgstr ""
+msgstr "P        Pelaajavalikko"
 
 #: ../txts/editor_readme:30
 msgid "T        Toggles tools menu"
@@ -653,11 +653,11 @@ msgstr ""
 
 #: ../txts/editor_readme:32
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L   Lataa kartta"
 
 #: ../txts/editor_readme:34
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S   Tallenna kartta"
 
 #: ../txts/editor_readme:36
 msgid "1-0      Changes tools size"

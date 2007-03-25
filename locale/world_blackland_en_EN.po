@@ -21,10 +21,8 @@ msgstr ""
 msgid "Bunny"
 msgstr "Bunny"
 
-#: ../worlds/blackland/bobs/bush1/conf:1
-#: ../worlds/blackland/bobs/bush2/conf:1
-#: ../worlds/blackland/bobs/bush3/conf:1
-#: ../worlds/blackland/bobs/bush4/conf:1
+#: ../worlds/blackland/bobs/bush1/conf:1 ../worlds/blackland/bobs/bush2/conf:1
+#: ../worlds/blackland/bobs/bush3/conf:1 ../worlds/blackland/bobs/bush4/conf:1
 #: ../worlds/blackland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Bush"
@@ -106,14 +104,10 @@ msgstr "Standing Stones"
 msgid "Stones"
 msgstr "Stones"
 
-#: ../worlds/blackland/bobs/tree1/conf:4
-#: ../worlds/blackland/bobs/tree2/conf:4
-#: ../worlds/blackland/bobs/tree3/conf:4
-#: ../worlds/blackland/bobs/tree4/conf:4
-#: ../worlds/blackland/bobs/tree5/conf:4
-#: ../worlds/blackland/bobs/tree6/conf:4
-#: ../worlds/blackland/bobs/tree7/conf:4
-#: ../worlds/blackland/bobs/tree8/conf:4
+#: ../worlds/blackland/bobs/tree1/conf:4 ../worlds/blackland/bobs/tree2/conf:4
+#: ../worlds/blackland/bobs/tree3/conf:4 ../worlds/blackland/bobs/tree4/conf:4
+#: ../worlds/blackland/bobs/tree5/conf:4 ../worlds/blackland/bobs/tree6/conf:4
+#: ../worlds/blackland/bobs/tree7/conf:4 ../worlds/blackland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Tree"
 
@@ -152,4 +146,3 @@ msgstr "Water"
 #: ../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Fish"
-

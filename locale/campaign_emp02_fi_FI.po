@@ -1,3 +1,20 @@
+# Widelands - Finnish language
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id$\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2007-03-24 06:12+0200\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
 #: ../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr ""
@@ -12,7 +29,7 @@ msgstr ""
 #: ../campaigns/emp02.wmf/event:925 ../campaigns/emp02.wmf/event:960
 #: ../campaigns/emp02.wmf/event:996
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutiuksen päiväkirja"
 
 #: ../campaigns/emp02.wmf/event:13
 msgid ""
@@ -26,7 +43,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:15
 msgid "A new islands"
-msgstr ""
+msgstr "Uudet saaret"
 
 #: ../campaigns/emp02.wmf/event:47
 msgid ""
@@ -46,7 +63,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:50
 msgid "The green forests"
-msgstr ""
+msgstr "Vihreät metsät"
 
 #: ../campaigns/emp02.wmf/event:90
 msgid ""
@@ -63,7 +80,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:93
 msgid "The rocks"
-msgstr ""
+msgstr "Kivikko"
 
 #: ../campaigns/emp02.wmf/event:429
 msgid ""
@@ -73,7 +90,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:431
 msgid "Wood for the colony"
-msgstr ""
+msgstr "Puuta kolonialle"
 
 #: ../campaigns/emp02.wmf/event:448
 msgid ""
@@ -87,7 +104,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:480
 msgid "Saledus looks unhappy"
-msgstr ""
+msgstr "Saledus näyttää surulliselta"
 
 #: ../campaigns/emp02.wmf/event:482
 msgid ""
@@ -112,7 +129,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:547 ../campaigns/emp02.wmf/event:613
 msgid "Saledus smiles"
-msgstr ""
+msgstr "Saledus hymyilee"
 
 #: ../campaigns/emp02.wmf/event:549
 msgid ""
@@ -156,7 +173,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:728
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea astuu sisään..."
 
 #: ../campaigns/emp02.wmf/event:730
 msgid ""
@@ -176,7 +193,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:732
 msgid "Food for the miners"
-msgstr ""
+msgstr "Ruokaa kaivostyöntekijöille"
 
 #: ../campaigns/emp02.wmf/event:868
 msgid ""
@@ -199,7 +216,7 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:871
 msgid "The Barbarians"
-msgstr ""
+msgstr "Barbaarit"
 
 #: ../campaigns/emp02.wmf/event:927
 msgid ""
@@ -235,19 +252,19 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:964
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../campaigns/emp02.wmf/event:979
 msgid "7 days later..."
-msgstr ""
+msgstr "Seitsemän päivää myöhemmin..."
 
 #: ../campaigns/emp02.wmf/event:981
 msgid "As time is running by"
-msgstr ""
+msgstr "Kun aika rientää"
 
 #: ../campaigns/emp02.wmf/event:988
 msgid "Continue"
-msgstr ""
+msgstr "Jatka"
 
 #: ../campaigns/emp02.wmf/event:998
 msgid ""
@@ -262,11 +279,11 @@ msgstr ""
 
 #: ../campaigns/emp02.wmf/event:1000
 msgid "A Message"
-msgstr ""
+msgstr "Viesti"
 
 #: ../campaigns/emp02.wmf/event:1016
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea hymyilee"
 
 #: ../campaigns/emp02.wmf/event:1018
 msgid ""

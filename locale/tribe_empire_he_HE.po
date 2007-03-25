@@ -125,8 +125,7 @@ msgid "Inn"
 msgstr ""
 
 #: ../tribes/empire/buildings/lumberjack/conf:2
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
+msgid "Lumberjack's Hut"
 msgstr ""
 
 #: ../tribes/empire/buildings/marblemine/conf:2
@@ -663,6 +662,10 @@ msgstr ""
 
 #: ../tribes/empire/workers/innkeeper/conf:2
 msgid "Innkeeper"
+msgstr ""
+
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
 msgstr ""
 
 #: ../tribes/empire/workers/master-miner/conf:2

@@ -1,3 +1,20 @@
+# Widelands - Finnish language
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id$\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2007-03-24 05:58+0200\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
 #: ../campaigns/t01.wmf/objective:8
 msgid ""
 "- press SPACE to see where you can build. The red spots show you, where a "
@@ -39,7 +56,7 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
 #: ../campaigns/t01.wmf/event:665
 msgid "Thron speaks..."
-msgstr ""
+msgstr "Thron puhuu..."
 
 #: ../campaigns/t01.wmf/event:13
 msgid ""
@@ -51,7 +68,7 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:15 ../campaigns/t01.wmf/event:32
 #: ../campaigns/t01.wmf/event:49 ../campaigns/t01.wmf/event:66
 msgid "The Story begins..."
-msgstr ""
+msgstr "Tarina alkaa..."
 
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
@@ -62,7 +79,7 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
 #: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../campaigns/t01.wmf/event:30
 msgid ""
@@ -88,7 +105,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
-msgstr ""
+msgstr "Vanha mies lähestyy sinua..."
 
 #: ../campaigns/t01.wmf/event:456
 msgid ""
@@ -101,11 +118,11 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:535 ../campaigns/t01.wmf/event:555
 #: ../campaigns/t01.wmf/event:574
 msgid "Advisor"
-msgstr ""
+msgstr "Neuvoja"
 
 #: ../campaigns/t01.wmf/event:473
 msgid "Khantrukh continues..."
-msgstr ""
+msgstr "Khantrukh jatkaa..."
 
 #: ../campaigns/t01.wmf/event:475
 msgid ""
@@ -143,7 +160,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "Khantrukh puhuu..."
 
 #: ../campaigns/t01.wmf/event:514
 msgid ""
@@ -160,7 +177,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:531
 msgid "The old man looks to the sky..."
-msgstr ""
+msgstr "Vanha mies katsoo taivaalle..."
 
 #: ../campaigns/t01.wmf/event:533
 msgid ""
@@ -176,7 +193,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
-msgstr ""
+msgstr "Khantrukh nyökkää..."
 
 #: ../campaigns/t01.wmf/event:553
 msgid ""
@@ -191,7 +208,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:570
 msgid "The elder speaks..."
-msgstr ""
+msgstr "Vanhus puhuu..."
 
 #: ../campaigns/t01.wmf/event:572
 msgid ""
@@ -214,7 +231,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:612
 msgid "In the night..."
-msgstr ""
+msgstr "Yössä..."
 
 #: ../campaigns/t01.wmf/event:629
 msgid ""
@@ -227,7 +244,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:631
 msgid "At the grave"
-msgstr ""
+msgstr "Hautuumaalla"
 
 #: ../campaigns/t01.wmf/event:648
 msgid ""
@@ -257,7 +274,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:712
 msgid "Victory!"
-msgstr ""
+msgstr "Voitto!"
 
 #: ../campaigns/t01.wmf/event:714
 msgid ""
@@ -268,4 +285,4 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
-msgstr ""
+msgstr "Tehtävä suoritettu"

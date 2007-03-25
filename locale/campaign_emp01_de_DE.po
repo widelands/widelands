@@ -167,8 +167,9 @@ msgid "Saledus speaks..."
 msgstr "Saledus sagt..."
 
 #: ../campaigns/emp01.wmf/event:450
+#, fuzzy
 msgid ""
-"Sire, I fear we are not save in this foreign land.<br>Who knows, what cruel "
+"Sire, I fear we are not safe in this foreign land.<br>Who knows, what cruel "
 "creatures live behind this forest in that mighty desert?<br>And what if that "
 "creatures crawl in the woods and wait for the time to attack us?"
 "<br><br>Well, perhaps my fear is wrong, but it can't be wrong to watch out "

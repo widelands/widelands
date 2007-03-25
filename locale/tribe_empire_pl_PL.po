@@ -128,8 +128,8 @@ msgid "Inn"
 msgstr "Karczma"
 
 #: ../tribes/empire/buildings/lumberjack/conf:2
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Drwal"
 
 #: ../tribes/empire/buildings/marblemine/conf:2
@@ -708,6 +708,10 @@ msgstr "Myśliwy"
 #: ../tribes/empire/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Karczmarz"
+
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Drwal"
 
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"

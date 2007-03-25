@@ -157,8 +157,8 @@ msgid "Inn"
 msgstr "Posada"
 
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Leñador"
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
@@ -717,6 +717,10 @@ msgstr "Cazador"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Posadero"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Leñador"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

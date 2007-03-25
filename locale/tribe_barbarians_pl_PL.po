@@ -157,8 +157,8 @@ msgid "Inn"
 msgstr "Karczma"
 
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Drwal"
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
@@ -711,6 +711,10 @@ msgstr "Myśliwy"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Karczmarz"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Drwal"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

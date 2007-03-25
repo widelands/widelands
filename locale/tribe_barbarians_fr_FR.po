@@ -150,8 +150,8 @@ msgid "Inn"
 msgstr "Auberge"
 
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Bûcheron"
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
@@ -719,6 +719,10 @@ msgstr "Chasseur"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Aubergiste"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Bûcheron"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

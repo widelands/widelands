@@ -21,7 +21,7 @@
 #define FILEREAD_H
 
 #include "machdep.h"
-
+#include <limits>
 #include <cassert>
 #include <string>
 

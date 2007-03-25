@@ -2,9 +2,9 @@
 
 ;Version String
 #define XAppName "Widelands"
-#define XAppVerName "Widelands build 10"
+#define XAppVerName "Widelands SVNbuild"
 #define XAppVerNumber "0.10.0.1"
-#define XAppID "{WIDELAND-20/03-2007-BUILD10-OFFICIAL}"
+#define XAppID "{WIDELAND-ddmm-yyyy-SVN-INOFFICIAL}"
 
 ;General String
 #define XAppPublisher "Widelands Development Team"

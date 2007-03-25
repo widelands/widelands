@@ -153,8 +153,7 @@ msgid "Inn"
 msgstr ""
 
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
+msgid "Lumberjack's Hut"
 msgstr ""
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
@@ -654,6 +653,10 @@ msgstr ""
 
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
+msgstr ""
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
 msgstr ""
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2

@@ -151,8 +151,8 @@ msgid "Inn"
 msgstr "Krčma"
 
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Drevorúbač"
 
 #: ../tribes/barbarians/buildings/metalworks/conf:2
@@ -653,6 +653,10 @@ msgstr "Polovník"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Krčmár"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Drevorúbač"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

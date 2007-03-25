@@ -122,8 +122,8 @@ msgid "Inn"
 msgstr "Hospoda"
 
 #: ../tribes/empire/buildings/lumberjack/conf:2
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Dřevorubec"
 
 #: ../tribes/empire/buildings/marblemine/conf:2
@@ -698,6 +698,10 @@ msgstr "Lovec"
 #: ../tribes/empire/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Hospodský"
+
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Dřevorubec"
 
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"

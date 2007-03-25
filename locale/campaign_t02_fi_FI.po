@@ -1,19 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+# Widelands - Finnish language
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: $Id$\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-03-24 05:59+0200\n"
+"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../campaigns/t02.wmf/objective:8
 msgid ""
@@ -109,7 +109,7 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:10 ../campaigns/t02.wmf/event:685
 #: ../campaigns/t02.wmf/event:807 ../campaigns/t02.wmf/event:822
 msgid "Thron speaks..."
-msgstr ""
+msgstr "Thron puhuu..."
 
 #: ../campaigns/t02.wmf/event:12
 msgid ""
@@ -124,7 +124,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:14
 msgid "The Story goes on..."
-msgstr ""
+msgstr "Tarina kulkee eteenpäin..."
 
 #: ../campaigns/t02.wmf/event:17 ../campaigns/t02.wmf/event:30
 #: ../campaigns/t02.wmf/event:43 ../campaigns/t02.wmf/event:506
@@ -140,7 +140,7 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:814 ../campaigns/t02.wmf/event:829
 #: ../campaigns/t02.wmf/event:914
 msgid "Continue"
-msgstr ""
+msgstr "Jatka"
 
 #: ../campaigns/t02.wmf/event:25
 msgid ""
@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:27 ../campaigns/t02.wmf/event:40
 msgid "The Story continues..."
-msgstr ""
+msgstr "Tarina jatkuu..."
 
 #: ../campaigns/t02.wmf/event:38
 msgid ""
@@ -192,7 +192,7 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:754 ../campaigns/t02.wmf/event:770
 #: ../campaigns/t02.wmf/event:786
 msgid "Advisor"
-msgstr ""
+msgstr "Neuvoja"
 
 #: ../campaigns/t02.wmf/event:514
 msgid "Khantrukh joins the both of you"
@@ -354,7 +354,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:689
 msgid "A beautiful morning..."
-msgstr ""
+msgstr "Kaunis aamu..."
 
 #: ../campaigns/t02.wmf/event:700
 msgid "Boldreth remarks..."
@@ -496,7 +496,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:811
 msgid "One fullmoon night..."
-msgstr ""
+msgstr "Eräänä kuutamoisena yönä..."
 
 #: ../campaigns/t02.wmf/event:824
 msgid ""
@@ -513,7 +513,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:907
 msgid "Victory!"
-msgstr ""
+msgstr "Voitto!"
 
 #: ../campaigns/t02.wmf/event:909
 msgid ""
@@ -530,4 +530,4 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:911
 msgid "Mission Complete!"
-msgstr ""
+msgstr "Tehtävä suoritettu!"

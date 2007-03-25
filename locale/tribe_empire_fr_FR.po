@@ -125,8 +125,8 @@ msgid "Inn"
 msgstr "Auberge"
 
 #: ../tribes/empire/buildings/lumberjack/conf:2
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Bûcheron"
 
 #: ../tribes/empire/buildings/marblemine/conf:2
@@ -722,6 +722,10 @@ msgstr "Chasseur"
 #: ../tribes/empire/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Aubergiste"
+
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Bûcheron"
 
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"

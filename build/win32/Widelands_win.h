@@ -11,7 +11,7 @@
 #define VER_RELEASE	0
 #define VER_BUILD	10
 #define COMPANY_NAME	"The Widelands Development Team"
-#define FILE_VERSION	"Build 10"
+#define FILE_VERSION	"SVNbuild"
 #define FILE_DESCRIPTION	"Widelands - realtime strategy game"
 #define INTERNAL_NAME	"WL"
 #define LEGAL_COPYRIGHT	"GPL v2"
@@ -19,6 +19,6 @@
 #define License	"Gnu GPL v2"
 #define ORIGINAL_FILENAME	"widelands"
 #define PRODUCT_NAME	"Widelands"
-#define PRODUCT_VERSION	"Build 10"
+#define PRODUCT_VERSION	"SVNbuild"
 
 #endif /*WIDELANDS_WIN_H*/

@@ -129,8 +129,8 @@ msgid "Inn"
 msgstr "Posada"
 
 #: ../tribes/empire/buildings/lumberjack/conf:2
-#: ../tribes/empire/workers/lumberjack/conf:2
-msgid "Lumberjack"
+#, fuzzy
+msgid "Lumberjack's Hut"
 msgstr "Leñador"
 
 #: ../tribes/empire/buildings/marblemine/conf:2
@@ -720,6 +720,10 @@ msgstr "Cazador"
 #: ../tribes/empire/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Posadero"
+
+#: ../tribes/empire/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Leñador"
 
 #: ../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
