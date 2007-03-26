@@ -584,7 +584,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 						snprintf(buf, sizeof(buf), "shot%04i.bmp", nr);
 						if (g_fs->FileExists(buf))
 							continue;
-						g_gr->screenshot(buf);
+						g_gr->screenshot(*buf);
 						break;
 					}
 				}

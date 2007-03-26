@@ -959,11 +959,11 @@ GraphicImpl::GraphicImpl(int w, int h, int bpp, bool fullscreen)
 	if (!sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
 
-	assert( sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4 );
+	assert(sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4);
 
 	SDL_WM_SetCaption("Widelands " BUILD_ID, "Widelands");
 
-   m_screen.set_sdl_surface( sdlsurface );
+	m_screen.set_sdl_surface(*sdlsurface);
 	m_rendertarget = new RenderTargetImpl(&m_screen);
 }
 
@@ -1191,12 +1191,8 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 		}
 
       // Convert the surface accordingly
-		SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp );
+		SDL_Surface & use_surface = *SDL_DisplayFormatAlpha(bmp);
 		SDL_FreeSurface(bmp);
-
-		if (not use_surface) throw wexception
-			("GraphicImpl::get_picture(): no success in converting loaded surface!"
-			 "\n");
 
 		// Fill in a free slot in the pictures array
 		id = find_free_picture();
@@ -1215,12 +1211,13 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 	return id;
 }
 
-uint GraphicImpl::get_picture(int mod, Surface* surf, const char* fname )
+uint GraphicImpl::get_picture
+(const int mod, Surface & surf, const char * const fname)
 {
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
    pic.mod       = mod;
-   pic.surface   = surf;
+   pic.surface   = &surf;
 	if (fname) {
 		pic.u.fname = strdup(fname);
 		m_picturemap[fname] = id;
@@ -1264,10 +1261,12 @@ Note that surfaces do not belong to a module and must be freed explicitly.
 */
 uint GraphicImpl::create_surface(int w, int h)
 {
-
-   SDL_Surface* surf = SDL_CreateRGBSurface( SDL_SWSURFACE, w, h, m_screen.get_format()->BitsPerPixel,
-         m_screen.get_format()->Rmask, m_screen.get_format()->Gmask, m_screen.get_format()->Bmask,
-         m_screen.get_format()->Amask);
+	const SDL_PixelFormat & format = m_screen.format();
+	SDL_Surface & surf = *SDL_CreateRGBSurface
+		(SDL_SWSURFACE,
+		 w, h,
+		 format.BitsPerPixel,
+		 format.Rmask, format.Gmask, format.Bmask, format.Amask);
 
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
@@ -1355,18 +1354,16 @@ Note: Terrain textures are not reused, even if fnametempl matches.
       These textures are freed when PicMod_Game is flushed.
 ===============
 */
-uint GraphicImpl::get_maptexture(const char* fnametempl, uint frametime)
+uint GraphicImpl::get_maptexture(const char & fnametempl, const uint frametime)
 {
 	try {
-		Texture* tex = new Texture(fnametempl, frametime, m_screen.get_format());
-
-		m_maptextures.push_back(tex);
-
-		return m_maptextures.size(); // ID 1 is at m_maptextures[0]
+		m_maptextures.push_back
+			(new Texture(fnametempl, frametime, m_screen.format()));
 	} catch(std::exception& e) {
-		log("Failed to load maptexture %s: %s\n", fnametempl, e.what());
+		log("Failed to load maptexture %s: %s\n", &fnametempl, e.what());
 		return 0;
 	}
+	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 
 
@@ -1518,8 +1515,7 @@ GraphicImpl::screenshot
 Save a screenshot in the given file.
 ===============
 */
-void GraphicImpl::screenshot(const char* fname)
-{
+void GraphicImpl::screenshot(const char & fname) const {
 	// TODO: this is incorrect; it bypasses the files code
    m_screen.save_bmp(fname);
 }
@@ -1597,7 +1593,10 @@ void GraphicImpl::save_png(uint pic_index, FileWrite* fw) {
       uint i = 0;
       for( uint x = 0; x < surf->get_w(); x++ ) {
          uchar r, g, b, a;
-         SDL_GetRGBA( surf->get_pixel(x,y), surf->get_format(), &r, &g, &b, &a);
+			SDL_GetRGBA
+				(surf->get_pixel(x, y),
+				 &const_cast<SDL_PixelFormat &>(surf->format()),
+				 &r, &g, &b, &a);
          row[i+0] = r;
          row[i+1] = g;
          row[i+2] = b;

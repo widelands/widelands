@@ -84,12 +84,20 @@ public:
 		 const Widget_Cache widget_cache = Widget_Cache_None,
 		 uint * const widget_cache_id = 0,
 		 const int caret = -1);
-	void get_size(std::string font, int size, std::string text, int *w, int *h, int wrap = -1);
-	int calc_linewidth(TTF_Font* f, std::string &text);
+	void get_size
+		(const std::string & fontname, const int size,
+		 std::string text,
+		 int *w, int *h, int wrap = -1);
+	int calc_linewidth(TTF_Font &, const std::string & text);
 	uint get_fontheight(const std::string & name, const int size);
 	std::string remove_first_space(const std::string &text);
-	std::string word_wrap_text(TTF_Font* f, const std::string &unwrapped_text, int max_width);
-	std::string word_wrap_text(std::string font, int size, const std::string &unwrapped_text,int max_width);
+	std::string word_wrap_text
+		(TTF_Font &,
+		 const std::string & unwrapped_text,
+		 const int max_width);
+	std::string word_wrap_text
+		(const std::string & font, const int size,
+		 const std::string & unwrapped_text,const int max_width);
 	void do_align(Align align, int *dstx, int *dsty, int w, int h);
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
@@ -114,7 +122,7 @@ private:
 	struct _Cache_Infos {
 		uint surface_id;
 		std::string str;
-		TTF_Font* f;
+		const TTF_Font * f;
 		RGBColor fg;
 		RGBColor bg;
 		uint      w;
@@ -137,12 +145,31 @@ private:
 	void* m_cbdata;
 
 private:
-	uint create_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int caret = -1);
-	uint convert_sdl_surface( SDL_Surface* );
-	SDL_Surface* draw_string_sdl_surface(std::string font, int size, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int style = TTF_STYLE_NORMAL, int line_spacing = 0);
-	SDL_Surface* create_sdl_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int line_spacing = 0);
-	SDL_Surface* create_static_long_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int line_spacing = 0, int caret = -1);
-	SDL_Surface* create_single_line_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int caret = -1);
+	uint create_text_surface
+		(TTF_Font &,
+		 const RGBColor fg, const RGBColor bg,
+		 const std::string & text, const Align, const int wrap,
+		 const int caret = -1);
+	uint convert_sdl_surface(SDL_Surface &);
+	SDL_Surface * draw_string_sdl_surface
+		(const std::string & fontname, const int fontsize,
+		 const RGBColor fg, const RGBColor bg,
+		 const std::string & text,
+		 const Align align, const int wrap, const int style = TTF_STYLE_NORMAL,
+		 const int line_spacing = 0);
+	SDL_Surface* create_sdl_text_surface
+		(TTF_Font &, const RGBColor fg, const RGBColor bg,
+		 const std::string & text,
+		 const Align align, const int wrap, const int line_spacing = 0);
+	SDL_Surface * create_static_long_text_surface
+		(TTF_Font &, const RGBColor fg, const RGBColor bg,
+		 std::string text,
+		 const Align align, const int wrap, const int line_spacing = 0,
+		 const int caret = -1);
+	SDL_Surface* create_single_line_text_surface
+		(TTF_Font &, const RGBColor fg, const RGBColor bg,
+		 std::string text,
+		 const Align align, const int caret = -1);
 	SDL_Surface* create_empty_sdl_surface(uint w, uint h);
 	SDL_Surface* join_sdl_surfaces
 		(const uint w, const uint h,
@@ -154,7 +181,10 @@ private:
 		 const bool keep_surfaces = false);
 	SDL_Surface* load_image(std::string file);
 	SDL_Surface* render_space(Text_Block &block, RGBColor bg, int style = TTF_STYLE_NORMAL);
-	void render_caret(TTF_Font *f, SDL_Surface *line, const std::string &text_caret_pos);
+	void render_caret
+		(TTF_Font &,
+		 SDL_Surface & line,
+		 const std::string & text_caret_pos);
 };
 
 extern Font_Handler* g_fh; // the default font

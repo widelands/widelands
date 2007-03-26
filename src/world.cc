@@ -506,5 +506,5 @@ Trigger load of the actual animation frames.
 void Terrain_Descr::load_graphics()
 {
 	if (m_picnametempl)
-		m_texture = g_gr->get_maptexture(m_picnametempl, m_frametime);
+		m_texture = g_gr->get_maptexture(*m_picnametempl, m_frametime);
 }

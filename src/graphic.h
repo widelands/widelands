@@ -61,13 +61,16 @@ public:
 	virtual void flush(int mod) = 0;
 	virtual uint get_picture(int mod, const char* fname) = 0;
    virtual void get_picture_size(const uint pic, uint & w, uint & h) = 0;
-	virtual uint get_picture(int mod, Surface*, const char* name = 0 ) = 0;
+	virtual uint get_picture
+		(const int mod, Surface &, const char * const name = 0)
+		= 0;
    virtual void save_png(uint, FileWrite* )=0;
    virtual uint create_surface(int w, int h) = 0;
 	virtual void free_surface(uint pic) = 0;
 	virtual RenderTarget* get_surface_renderer(uint pic) = 0;
 
-	virtual uint get_maptexture(const char* fnametempl, uint frametime) = 0;
+	virtual uint get_maptexture(const char & fnametempl, const uint frametime)
+		= 0;
 	virtual void animate_maptextures(uint time) = 0;
    virtual void reset_texture_animation_reminder( void ) = 0;
 
@@ -77,7 +80,7 @@ public:
 		(const uint anim, const uint time, uint & w, uint & h)
 		= 0;
 
-	virtual void screenshot(const char* fname) = 0;
+	virtual void screenshot(const char & fname) const = 0;
 	virtual const char* get_maptexture_picture (uint id) = 0;
 };
 

@@ -45,8 +45,8 @@ public:
 	Uint8 g() const throw () {return SDL_Color::g;}
 	Uint8 b() const throw () {return SDL_Color::b;}
 
-	ulong map(SDL_PixelFormat * const fmt) const throw ()
-	{return SDL_MapRGB(fmt, r(), g(), b());}
+	ulong map(const SDL_PixelFormat & fmt) const throw ()
+	{return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r(), g(), b());}
 	void set(SDL_PixelFormat * const fmt, ulong clr) throw ()
 	{SDL_GetRGB(clr, fmt, &(SDL_Color::r), &(SDL_Color::g), &(SDL_Color::b));}
 

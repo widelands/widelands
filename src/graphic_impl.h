@@ -62,26 +62,40 @@ class Surface {
       ~Surface( void ) { if( m_surface ) SDL_FreeSurface( m_surface ); m_surface = 0; }
 
       // Set surface, only call once
-      void set_sdl_surface( SDL_Surface* surface ) { m_surface = surface; m_w = m_surface->w; m_h = m_surface->h; }
+	void set_sdl_surface(SDL_Surface & surface) throw()
+	{m_surface = &surface; m_w = m_surface->w; m_h = m_surface->h;}
 	  SDL_Surface* get_sdl_surface() { return m_surface; }
 
       // Get width and height
-      inline uint get_w( void ) { return m_w; }
-      inline uint get_h( void ) { return m_h; }
+	uint get_w() const throw () {return m_w;}
+	uint get_h() const throw () {return m_h;}
       void update( void );
 
       // Save a bitmap of this to a file
-      void save_bmp( const char* fname );
+	void save_bmp(const char & fname) const;
 
       // For the bravest: Direct Pixel access. Use carefully
       void force_disable_alpha( void ); // Needed if you want to blit directly to the screen by memcpy
-      inline SDL_PixelFormat* get_format() { assert(m_surface); return m_surface->format; }
-      inline ushort get_pitch( void ) { assert(m_surface); return m_surface->pitch; }
+	const SDL_PixelFormat * get_format() const
+		throw ()
+	{return m_surface->format;}
+	const SDL_PixelFormat & format() const throw ()
+	{assert(m_surface); return *m_surface->format;}
+	ushort get_pitch() const throw () {return m_surface->pitch;}
 	void * get_pixels() {
 		assert(m_surface);
 		return
 			static_cast<uchar * const>(m_surface->pixels) +
 			m_offsy*m_surface->pitch + m_offsx*m_surface->format->BytesPerPixel;
+	}
+	const void * get_pixels() const throw () {
+		assert(m_surface);
+		return
+			static_cast<uchar * const>(m_surface->pixels)
+			+
+			m_offsy * m_surface->pitch
+			+
+			m_offsx * m_surface->format->BytesPerPixel;
 	}
 
       // Lock
@@ -183,7 +197,6 @@ class Surface {
 class Colormap {
 //    friend class Texture;
 
-private:
 	SDL_Color palette[256];
 	void * colormap; // maps 8 bit color and brightness value to the shaded color
 		// NOTE: brightness is currently 8 bits. Restricting brightness
@@ -191,7 +204,7 @@ private:
 		// table, and thus improve memory cache impact inside the renderer.
 
 public:
-	Colormap (const SDL_Color*, SDL_PixelFormat* fmt);
+	Colormap (const SDL_Color &, const SDL_PixelFormat & fmt);
 	~Colormap ();
 
 	SDL_Color* get_palette() { return palette; }
@@ -221,7 +234,8 @@ private:
    bool              m_was_animated;
 
 public:
-	Texture (const char* fnametempl, uint frametime, SDL_PixelFormat*);
+	Texture
+		(const char & fnametempl, const uint frametime, const SDL_PixelFormat &);
 	~Texture ();
 
    inline const char* get_texture_picture(void) { return m_texture_picture.c_str(); }
@@ -358,7 +372,7 @@ public:
 	Surface* get_picture_surface(uint id);
 
 	// Map textures
-	virtual uint get_maptexture(const char* fnametempl, uint frametime);
+	virtual uint get_maptexture(const char & fnametempl, const uint frametime);
 	virtual void animate_maptextures(uint time);
    virtual void reset_texture_animation_reminder( void );
 	Texture* get_maptexture_data(uint id);
@@ -374,9 +388,9 @@ public:
 		(const uint anim, const uint time, uint & w, uint & h);
 
 	// Misc functions
-	virtual void screenshot(const char* fname);
+	virtual void screenshot(const char & fname) const;
 
-	virtual uint get_picture(int mod, Surface* surf, const char* = 0 );
+	virtual uint get_picture(const int mod, Surface &, const char * const = 0);
 	virtual const char* get_maptexture_picture(uint id);
 
 private:

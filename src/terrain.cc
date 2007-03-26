@@ -46,14 +46,13 @@ Colormap
  * Create a new Colormap, taking the palette as a parameter.
  * It automatically creates the colormap for shading.
  */
-Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
-{
+Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
 	int i,j,r,g,b;
 
-	memcpy(palette, pal, sizeof(palette));
+	memcpy(palette, &pal, sizeof(palette));
 
-	assert(fmt->BytesPerPixel == 2 or fmt->BytesPerPixel == 4);
-	colormap = malloc(fmt->BytesPerPixel * 65536);
+	assert(format.BytesPerPixel == 2 or format.BytesPerPixel == 4);
+	colormap = malloc(format.BytesPerPixel * 65536);
 
 //    log ("Creating color map\n");
 	for (i=0;i<256;i++)
@@ -69,8 +68,9 @@ Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
          if (g>255) g=255;
          if (b>255) b=255;
 
-			const Uint32 value = SDL_MapRGB(fmt, r, g, b);
-			if (fmt->BytesPerPixel == 2)
+			const Uint32 value =
+				SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), r, g, b);
+			if (format.BytesPerPixel == 2)
 				static_cast<Uint16 * const>(colormap)[(j << 8) | i] = value;
 			else
 				static_cast<Uint32 * const>(colormap)[(j << 8) | i] = value;
@@ -102,13 +102,16 @@ Texture
  * Currently it converts a 16 bit pic to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screenfmt)
+Texture::Texture
+(const char            & fnametmpl,
+ const uint              frametime,
+ const SDL_PixelFormat & format)
 {
 	m_colormap = 0;
 	m_nrframes = 0;
 	m_pixels = 0;
 	m_frametime = frametime;
-   is_32bit = screenfmt->BytesPerPixel == 4;
+   is_32bit = format.BytesPerPixel == 4;
 
 	// Load the pictures one by one
 	char fname[256];
@@ -118,7 +121,7 @@ Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screen
 		char *p;
 
 		// create the file name by reverse-scanning for '?' and replacing
-		snprintf(fname, sizeof(fname), "%s", fnametmpl);
+		snprintf(fname, sizeof(fname), "%s", &fnametmpl);
 		p = fname + strlen(fname);
 		while(p > fname) {
 			if (*--p != '?')
@@ -159,7 +162,7 @@ Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screen
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
 			if (surf->format->BitsPerPixel == 8)
-				m_colormap = new Colormap(surf->format->palette->colors, screenfmt);
+				m_colormap = new Colormap(*surf->format->palette->colors, format);
 			else {
 				SDL_Color pal[256];
 
@@ -173,7 +176,7 @@ Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screen
 							pal[(r<<5) | (g<<2) | b].b=b<<6;
 						}
 
-				m_colormap = new Colormap(pal, screenfmt);
+				m_colormap = new Colormap(*pal, format);
 			}
 		}
 
@@ -208,7 +211,7 @@ Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screen
 	}
 
 	if (!m_nrframes)
-		throw wexception("%s: texture has no frames", fnametmpl);
+		throw wexception("%s: texture has no frames", &fnametmpl);
 }
 
 
@@ -282,8 +285,7 @@ static inline void get_horiz_linearcomb (int u1, int u2, int v1, int v2, float& 
 	mu=-u2/det;
 }
 
-template<typename T>
-void render_top_triangle
+template<typename T> static void render_top_triangle
 (Surface & dst,
  const Texture & tex,
  Vertex & p1, Vertex & p2, Vertex & p3,
@@ -370,8 +372,7 @@ void render_top_triangle
 	}
 }
 
-template<typename T>
-void render_bottom_triangle
+template<typename T> static void render_bottom_triangle
 (Surface & dst,
  const Texture & tex,
  Vertex & p1, Vertex & p2, Vertex & p3,
@@ -471,8 +472,7 @@ void render_bottom_triangle
  * render_bottom_triangle, which require a horizontal edge at the bottom
  * or at the top, respectively.
  */
-template<typename T>
-void render_triangle
+template<typename T> static void render_triangle
 (Surface & dst, Vertex & p1, Vertex & p2, Vertex & p3, const Texture & tex)
 {
 	Vertex * p[3]= {&p1, &p2, &p3};
@@ -532,8 +532,7 @@ void render_triangle
 #define DITHER_RAND_MASK  (DITHER_WIDTH * 2 - 1)
 #define DITHER_RAND_SHIFT  (16 / DITHER_WIDTH)
 
-template<typename T>
-void dither_edge_horiz
+template<typename T> static void dither_edge_horiz
 (Surface & dst,
  const Vertex & start, const Vertex & end,
  const Texture & ttex, const Texture & btex)
@@ -609,8 +608,7 @@ void dither_edge_horiz
 }
 
 
-template<typename T>
-static void dither_edge_vert
+template<typename T> static void dither_edge_vert
 (Surface & dst,
  const Vertex & start, const Vertex & end,
  const Texture & ltex, const Texture & rtex)
@@ -704,11 +702,11 @@ render_road_vert
 Render a road.
 ===============
 */
-template<typename T>
-void render_road_horiz(Surface* dst, const Point& start, const Point& end, Surface* src )
+template<typename T> static void render_road_horiz
+(Surface & dst, const Point start, const Point end, const Surface & src)
 {
-	int dstw = dst->get_w();
-	int dsth = dst->get_h();
+	int dstw = dst.get_w();
+	int dsth = dst.get_h();
 
 	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int centery = start.y << 16;
@@ -719,22 +717,26 @@ void render_road_horiz(Surface* dst, const Point& start, const Point& end, Surfa
 
 		int y = (centery >> 16) - 2;
 
-		for(int i = 0; i < 5; i++, y++) {
-			if (y < 0 || y >= dsth)
-				continue;
-
-			T * const dpix = reinterpret_cast<T * const>(static_cast<uchar * const>(dst->get_pixels()) + y * dst->get_pitch()) +  x;
-			T * const spix = reinterpret_cast<T * const>(static_cast<uchar * const>(src->get_pixels()) + i * src->get_pitch()) + sx;
-			*dpix = *spix;
-		}
+		for(int i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
+			*(reinterpret_cast<T * const>
+			  (static_cast<uchar * const>(dst.get_pixels()) + y * dst.get_pitch())
+			  +
+			  x)
+			=
+			*(reinterpret_cast<const T * const>
+			  (static_cast<const uchar * const>(src.get_pixels())
+			   +
+			   i * src.get_pitch())
+			  +
+			  sx);
 	}
 }
 
-template<typename T>
-void render_road_vert(Surface* dst, const Point& start, const Point& end, Surface* src)
+template<typename T> static void render_road_vert
+(Surface & dst, const Point start, const Point end, const Surface & src)
 {
-	int dstw = dst->get_w();
-	int dsth = dst->get_h();
+	int dstw = dst.get_w();
+	int dsth = dst.get_h();
 
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
@@ -745,15 +747,18 @@ void render_road_vert(Surface* dst, const Point& start, const Point& end, Surfac
 
 		int x = (centerx >> 16) - 2;
 
-		for(int i = 0; i < 5; i++, x++) {
-			if (x < 0 || x >= dstw)
-				continue;
-
-
-			T * const dpix = reinterpret_cast<T * const>(static_cast<uchar *>(dst->get_pixels()) +  y * dst->get_pitch()) + x;
-			T * const spix = reinterpret_cast<T * const>(static_cast<uchar *>(src->get_pixels()) + sy * src->get_pitch()) + i;
-			*dpix = *spix;
-		}
+		for(int i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
+			*(reinterpret_cast<T * const>
+			  (static_cast<uchar * const>(dst.get_pixels()) +  y * dst.get_pitch())
+			  +
+			  x)
+			=
+			*(reinterpret_cast<const T * const>
+			  (static_cast<const uchar * const>(src.get_pixels())
+			   +
+			   sy * src.get_pitch())
+			  +
+			  i);
 	}
 }
 
@@ -791,8 +796,8 @@ void draw_field_int
 	Vertex bl_vert
 		(blposx, blposy - bl->get_height() * HEIGHT_FACTOR, bl_brightness, 64, 64);
 
-	Surface* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
-	Surface* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
+	const Surface & rt_normal = *get_graphicimpl()->get_road_texture(Road_Normal);
+	const Surface & rt_busy   = *get_graphicimpl()->get_road_texture(Road_Busy);
 
 	if( draw_all ) {
 		render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
@@ -812,10 +817,10 @@ void draw_field_int
 		if (road) {
 			switch(road) {
 				case Road_Normal:
-					render_road_horiz<T> (&dst, f_vert, r_vert, rt_normal);
+					render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 					break;
 				case Road_Busy:
-					render_road_horiz<T> (&dst, f_vert, r_vert, rt_busy);
+					render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 					break;
 			default: assert(false); break; //  never here
 			}
@@ -835,10 +840,10 @@ void draw_field_int
 		if (road) {
 			switch(road) {
 				case Road_Normal:
-					render_road_vert<T> (&dst, f_vert, br_vert, rt_normal);
+					render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 					break;
 				case Road_Busy:
-					render_road_vert<T> (&dst, f_vert, br_vert, rt_busy);
+					render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 					break;
 				default:
 					assert(0); break; // never here
@@ -859,10 +864,10 @@ void draw_field_int
 		if (road) {
 			switch(road) {
 				case Road_Normal:
-					render_road_vert<T> (&dst, f_vert, bl_vert, rt_normal);
+					render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 					break;
 				case Road_Busy:
-					render_road_vert<T> (&dst, f_vert, bl_vert, rt_busy);
+					render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 					break;
 				default:
 					assert(0); break; // never here

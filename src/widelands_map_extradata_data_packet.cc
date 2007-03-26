@@ -74,13 +74,14 @@ throw (_wexception)
             SDL_Surface* surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
             if (!surf)
                continue; // Illegal pic. Skip it
-            Surface* picsurf = new Surface( );
-            picsurf->set_sdl_surface( surf );
+				Surface & picsurf = *new Surface();
+				picsurf.set_sdl_surface(*surf);
 
 	    std::string picname = FileSystem::FS_Filename( (*pname).c_str() );
             picname = "map:" + picname;
 
-            uint data = g_gr->get_picture( PicMod_Game, picsurf, picname.c_str());
+				const uint data =
+					g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
 
             // ok, the pic is now known to the game. But when the game is saved, this data has to be
             // regenerated.
