@@ -384,15 +384,10 @@ AnimationGfx::AnimationGfx
 Load the animation
 ===============
 */
+static const uint nextensions = 4;
+static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
 AnimationGfx::AnimationGfx(const AnimationData* data)
 {
-   const int nextensions=4;
-   const char extensions[nextensions][5] = {
-      ".bmp",
-      ".png",
-      ".gif",
-      ".jpg"
-   };
 
    m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
    m_encodedata.plrclr[0] = data->encdata.plrclr[0];
@@ -438,16 +433,13 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
             continue;
          }
 
-         // Load the image
-         SDL_Surface* bmp = 0;
-
 			try {
 				SDL_Surface & bmp = *LoadImage(fname);
 
 				// Get a new AnimFrame
-				Surface* frame = new Surface();
-				frames.push_back( frame );
-				frame->set_sdl_surface(bmp);
+				Surface & frame = *new Surface();
+				frames.push_back(&frame);
+				frame.set_sdl_surface(bmp);
          }
          catch(std::exception& e)
          {
@@ -457,6 +449,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
 
          if(!cycling) alldone=true;
+			break;
       }
 
       if(alldone==true) break;
