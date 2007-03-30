@@ -848,18 +848,17 @@ uint Map::find_reachable_immovables
 
 /*
 ===============
-FindFieldsCallback
+FindNodesCallback
 
 The actual logic behind find_fields and find_reachable_fields.
 ===============
 */
-struct FindFieldsCallback {
-	FindFieldsCallback(std::vector<Coords>* list, const FindField& functor)
+struct FindNodesCallback {
+	FindNodesCallback(std::vector<Coords>* list, const FindNode& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(const Map &, const FCoords cur) {
-		if (m_functor.accept(cur))
-		{
+	void operator()(const Map & map, const FCoords cur) {
+		if (m_functor.accept(map, cur)) {
 			if (m_list)
 				m_list->push_back(cur);
 
@@ -868,7 +867,7 @@ struct FindFieldsCallback {
 	}
 
 	std::vector<Coords> * m_list;
-	const FindField     & m_functor;
+	const FindNode     & m_functor;
 	uint                  m_found;
 };
 
@@ -885,9 +884,9 @@ Note that list can be 0.
 unsigned int Map::find_fields
 (const Area<FCoords>   area,
  std::vector<Coords> * list,
- const FindField & functor)
+ const FindNode & functor)
 {
-	FindFieldsCallback cb(list, functor);
+	FindNodesCallback cb(list, functor);
 
 	find(area, cb);
 
@@ -908,9 +907,9 @@ unsigned int Map::find_reachable_fields
 (const Area<FCoords>   area,
  std::vector<Coords> * list,
  const CheckStep & checkstep,
- const FindField & functor)
+ const FindNode & functor)
 {
-	FindFieldsCallback cb(list, functor);
+	FindNodesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
 
@@ -2036,12 +2035,13 @@ The fieldcaps need to be recalculated
 returns the radius of changes (which are always 2)
 ===========
 */
-int Map::change_terrain(const TCoords<> c, const Terrain_Descr::Index terrain) {
-	Area<FCoords> affected_area(get_fcoords(c), 2);
-	if (c.t == TCoords<>::D) affected_area.field->set_terrain_d(terrain);
+int Map::change_terrain
+(const TCoords<FCoords> c, const Terrain_Descr::Index terrain)
+{
+	if (c.t == TCoords<FCoords>::D) c.field->set_terrain_d(terrain);
 	else
-	{assert(c.t == TCoords<>::R); affected_area.field->set_terrain_r(terrain);}
-	recalc_for_field_area(affected_area);
+	{assert(c.t == TCoords<FCoords>::R); c.field->set_terrain_r(terrain);}
+	recalc_for_field_area(Area<FCoords>(c, 2));
 
    return 2;
 }
@@ -2258,7 +2258,7 @@ Field search functors
 */
 
 
-void FindFieldAnd::add(const FindField* findfield, bool negate)
+void FindNodeAnd::add(const FindNode* findfield, bool negate)
 {
 	Subfunctor sf;
 
@@ -2268,13 +2268,12 @@ void FindFieldAnd::add(const FindField* findfield, bool negate)
 	m_subfunctors.push_back(sf);
 }
 
-bool FindFieldAnd::accept(FCoords coord) const
-{
+bool FindNodeAnd::accept(const Map & map, const FCoords coord) const {
 	for(std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
 	    it != m_subfunctors.end();
 		 ++it)
 	{
-		if (it->findfield->accept(coord) == it->negate)
+		if (it->findfield->accept(map, coord) == it->negate)
 			return false;
 	}
 
@@ -2282,8 +2281,7 @@ bool FindFieldAnd::accept(FCoords coord) const
 }
 
 
-bool FindFieldCaps::accept(FCoords coord) const
-{
+bool FindNodeCaps::accept(const Map &, const FCoords coord) const {
 	uchar fieldcaps = coord.field->get_caps();
 
 	if ((fieldcaps & BUILDCAPS_SIZEMASK) < (m_mincaps & BUILDCAPS_SIZEMASK))
@@ -2295,8 +2293,7 @@ bool FindFieldCaps::accept(FCoords coord) const
 	return true;
 }
 
-bool FindFieldSize::accept(FCoords coord) const
-{
+bool FindNodeSize::accept(const Map &, const FCoords coord) const {
 	BaseImmovable* imm = coord.field->get_immovable();
 	bool hasrobust = (imm && imm->get_size() > BaseImmovable::NONE);
 	uchar fieldcaps = coord.field->get_caps();
@@ -2316,21 +2313,16 @@ bool FindFieldSize::accept(FCoords coord) const
 	}
 }
 
-bool FindFieldSizeResource::accept(FCoords coord) const {
-   bool base_ret=FindFieldSize::accept(coord);
-
-   if(!base_ret)
-      return false;
-
+bool FindNodeSizeResource::accept(const Map & map, const FCoords coord) const {
+	if (FindNodeSize::accept(map, coord)) {
    if(coord.field->get_resources()==m_res &&
          coord.field->get_resources_amount())
       return true;
-
+	}
    return false;
 }
 
-bool FindFieldImmovableSize::accept(FCoords coord) const
-{
+bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {
 	BaseImmovable* imm = coord.field->get_immovable();
 	int size = BaseImmovable::NONE;
 
@@ -2342,12 +2334,12 @@ bool FindFieldImmovableSize::accept(FCoords coord) const
 	case BaseImmovable::SMALL: return m_sizes & sizeSmall;
 	case BaseImmovable::MEDIUM: return m_sizes & sizeMedium;
 	case BaseImmovable::BIG: return m_sizes & sizeBig;
-	default: throw wexception("FindFieldImmovableSize: bad size = %i", size);
+	default: throw wexception("FindNodeImmovableSize: bad size = %i", size);
 	}
 }
 
 
-bool FindFieldImmovableAttribute::accept(FCoords coord) const
+bool FindNodeImmovableAttribute::accept(const Map &, const FCoords coord) const
 {
 	BaseImmovable* imm = coord.field->get_immovable();
 
@@ -2358,8 +2350,7 @@ bool FindFieldImmovableAttribute::accept(FCoords coord) const
 }
 
 
-bool FindFieldResource::accept(FCoords coord) const
-{
+bool FindNodeResource::accept(const Map &, const FCoords coord) const {
 	uchar res = coord.field->get_resources();
    uchar amount = coord.field->get_resources_amount();
 

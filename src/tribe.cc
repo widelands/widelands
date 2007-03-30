@@ -39,7 +39,9 @@ using namespace std;
 //
 // Tribe_Descr class
 //
-Tribe_Descr::Tribe_Descr(const std::string & tribename) : m_name(tribename) {
+Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & world)
+: m_name(tribename), m_world(world)
+{
 	try
 	{
 		char directory[256];

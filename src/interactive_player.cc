@@ -60,7 +60,9 @@ Interactive_Player IMPLEMENTATION
 */
 
 // This function is the callback for recalculation of field overlays
-int Int_Player_overlay_callback_function(const TCoords<> c, void* data, int) {
+int Int_Player_overlay_callback_function
+(const TCoords<FCoords> c, void* data, int)
+{
 	return
 		static_cast<const Interactive_Player * const>(data)->get_player()->
 		get_buildcaps(c);

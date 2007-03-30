@@ -81,7 +81,7 @@ class Player {
 
 		void init(const bool place_headquarters);
 
-		FieldCaps get_buildcaps(const Coords coords) const;
+	FieldCaps get_buildcaps(const FCoords) const;
 
       // For cheating
       void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }

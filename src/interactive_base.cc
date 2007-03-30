@@ -113,7 +113,8 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle<> center)
    // register sel overlay position
 	if (m_sel.triangles) {
 		assert(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
-		MapTriangleRegion<> mr(map, center.triangle, m_sel.radius);
+		MapTriangleRegion<> mr
+			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
 		do overlay_manager.register_overlay
 			(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));

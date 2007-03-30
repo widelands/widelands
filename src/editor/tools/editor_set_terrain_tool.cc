@@ -27,13 +27,24 @@ int Editor_Set_Terrain_Tool::handle_click_impl
 {
 	assert
 		(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
-	const int radius = parent.get_sel_radius();
+	const World & world = map.world();
+	const Uint16 radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
 		int max = 0;
-		MapTriangleRegion<> mr(map, center.triangle, radius);
-		do max =
-			std::max(max, map.change_terrain(mr.location(), get_random_enabled()));
-		while (mr.advance(map));
+		MapTriangleRegion<TCoords<FCoords> > mr
+			(map,
+			 Area<TCoords<FCoords> >
+			 (TCoords<FCoords>
+			  (FCoords(map.get_fcoords(center.triangle)),
+			   static_cast<const TCoords<FCoords>::TriangleIndex>
+			   (center.triangle.t)),
+			  radius));
+		do {
+			const Terrain_Descr::Index new_terrain_index =
+				get_random_enabled();
+				max = std::max
+					(max, map.change_terrain(mr.location(), new_terrain_index));
+		} while (mr.advance(map));
 		return radius + max;
 	} else return radius;
 }

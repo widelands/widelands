@@ -110,9 +110,8 @@ Player::get_buildcaps
 Return filtered buildcaps that take the player's territory into account.
 ===============
 */
-FieldCaps Player::get_buildcaps(const Coords coords) const {
+FieldCaps Player::get_buildcaps(const FCoords fc) const {
 	const Map & map = egbase().map();
-	const FCoords fc = map.get_fcoords(coords);
 	uchar buildcaps = fc.field->get_caps();
 	const uchar player_number = m_plnum;
 
@@ -167,7 +166,7 @@ Build a flag, checking that it's legal to do so.
 */
 void Player::build_flag(Coords c)
 {
-	int buildcaps = get_buildcaps(c);
+	int buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG) Flag::create(&m_egbase, this, c);
 }
@@ -203,12 +202,12 @@ void Player::build_road(const Path & path) {
 	end = (Flag *)imm;
 
 	// Verify ownership of the path
-	Coords coords = path.get_start();
+	FCoords coords = egbase().map().get_fcoords(path.get_start());
 
 	const int laststep = path.get_nsteps() - 1;
 	for (int i = 0; i < laststep; ++i) {
 		const Direction dir = path[i];
-		map.get_neighbour(coords, dir, &coords);
+		coords = map.get_neighbour(coords, dir);
 
 		imm = map.get_immovable(coords);
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
@@ -249,8 +248,9 @@ void Player::build(Coords c, int idx)
 
 
 	// Validate build position
-	egbase().map().normalize_coords(&c);
-	buildcaps = get_buildcaps(c);
+	const Map & map = egbase().map();
+	map.normalize_coords(&c);
+	buildcaps = get_buildcaps(map.get_fcoords(c));
 
 	if (descr->get_ismine())
 		{

@@ -130,6 +130,7 @@ class Map_Object {
 
 public:
 	enum {
+		RESOURCE_REGENERATOR,
 		AREAWATCHER,
 		BOB,  //  class Bob
 

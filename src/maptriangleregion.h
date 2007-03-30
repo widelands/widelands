@@ -37,10 +37,12 @@
  * The initial coordinates must refer to a triangle (TCoords<>::D or TCoords<>::R).
  * Use MapRegion instead for nodes (TCoords<>::None).
  */
-template <typename Coords_type = TCoords<> > struct MapTriangleRegion {
+template <typename Coords_type = TCoords<>, typename Radius_type = Uint16 >
+struct MapTriangleRegion
+{
 	MapTriangleRegion(const Map &, Coords_type, const Uint16 radius);
 
-	const TCoords<Coords_type> & location() const throw ();
+	const Coords_type & location() const throw ();
 
 	/**
 	 * Moves on to the next location. The return value indicates wether the new
@@ -54,24 +56,6 @@ template <typename Coords_type = TCoords<> > struct MapTriangleRegion {
 	 * time around, and so on.
 	 */
 	bool advance(const Map &) throw ();
-};
-template <typename Coords_type> struct MapTriangleRegion<TCoords<Coords_type> >
-{
-	MapTriangleRegion
-		(const Map &, TCoords<Coords_type>, const Uint16 radius);
-
-	const TCoords<Coords_type> & location() const throw () {return m_location;}
-
-	bool advance(const Map &) throw ();
-
-private:
-	const bool m_radius_is_odd;
-	enum {Top, Upper, Lower, Bottom} m_phase;
-	unsigned short m_remaining_rows_in_upper_phase;
-	unsigned short m_remaining_rows_in_lower_phase;
-	unsigned short m_row_length, m_remaining_in_row;
-	Coords_type          m_left;
-	TCoords<Coords_type> m_location;
 };
 template <> struct MapTriangleRegion<FCoords> {
 	MapTriangleRegion(const Map & map, const Area<FCoords> area) :
@@ -111,6 +95,23 @@ private:
 	Uint16                  m_rowwidth;
 	Uint16                  m_remaining_in_row;
 	Uint16                  m_remaining_rows;
+};
+template <typename Coords_type> struct MapTriangleRegion<TCoords<Coords_type> >
+{
+	MapTriangleRegion(const Map &, Area<TCoords<Coords_type>, Uint16>);
+
+	const TCoords<Coords_type> & location() const throw () {return m_location;}
+
+	bool advance(const Map &) throw ();
+
+private:
+	const bool m_radius_is_odd;
+	enum {Top, Upper, Lower, Bottom} m_phase;
+	unsigned short m_remaining_rows_in_upper_phase;
+	unsigned short m_remaining_rows_in_lower_phase;
+	unsigned short m_row_length, m_remaining_in_row;
+	Coords_type          m_left;
+	TCoords<Coords_type> m_location;
 };
 
 #endif

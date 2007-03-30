@@ -538,6 +538,7 @@ bool Computer_Player::construct_building ()
 		}
 	}
 
+#if 0 //FIXME
 	// then try all mines
 	const World & world = game().map().world();
 	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++) {
@@ -572,6 +573,7 @@ bool Computer_Player::construct_building ()
 			}
 		}
 	}
+#endif
 
 	if (proposed_building<0)
 		return false;
@@ -628,11 +630,11 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 	}
 }
 
-struct FindFieldUnowned:FindField {
-	virtual bool accept (const FCoords) const;
+struct FindNodeUnowned:FindNode {
+	virtual bool accept (const Map &, const FCoords) const;
 };
 
-bool FindFieldUnowned::accept (const FCoords fc) const
+bool FindNodeUnowned::accept (const Map &, const FCoords fc) const
 {
 	// when looking for unowned terrain to acquire, we are actually
 	// only interested in fields we can walk on
@@ -642,7 +644,7 @@ bool FindFieldUnowned::accept (const FCoords fc) const
 void Computer_Player::update_buildable_field (BuildableField* field)
 {
 	// look if there is any unowned land nearby
-	FindFieldUnowned find_unowned;
+	FindNodeUnowned find_unowned;
 	Map & map = game().map();
 
 	field->unowned_land_nearby =
@@ -782,9 +784,14 @@ void Computer_Player::update_mineable_field (MineableField* field)
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
 			field->reachable=true;
 
-		if (immovables[i].object->get_type()==BaseImmovable::BUILDING &&
-		    (player->get_buildcaps(immovables[i].coords)&BUILDCAPS_MINE)!=0) {
-			Building* bld=static_cast<Building*>(immovables[i].object);
+		if
+			(const Building * const bld =
+			 dynamic_cast<const Building * const>(immovables[i].object))
+			if
+				(player->get_buildcaps(map.get_fcoords(immovables[i].coords))
+				 &
+				 BUILDCAPS_MINE)
+			{
 
 			if (bld->get_building_type()==Building::CONSTRUCTIONSITE ||
 			    bld->get_building_type()==Building::PRODUCTIONSITE)
@@ -875,13 +882,12 @@ void Computer_Player::lose_building (Building* b)
 }
 
 // Road building
-struct FindFieldWithFlagOrRoad:FindField {
+struct FindNodeWithFlagOrRoad:FindNode {
 	Economy* economy;
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, FCoords) const;
 };
 
-bool FindFieldWithFlagOrRoad::accept (FCoords fc) const
-{
+bool FindNodeWithFlagOrRoad::accept (const Map &, FCoords fc) const {
 	BaseImmovable* imm=fc.field->get_immovable();
 
 	if (imm==0)
@@ -901,7 +907,7 @@ bool FindFieldWithFlagOrRoad::accept (FCoords fc) const
 
 bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 {
-	FindFieldWithFlagOrRoad functor;
+	FindNodeWithFlagOrRoad functor;
 	CheckStepRoadAI check(player, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 

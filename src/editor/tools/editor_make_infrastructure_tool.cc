@@ -29,7 +29,7 @@
  * Callback function to calculate correct overlays
  */
 int Editor_Make_Infrastructure_Tool_Callback
-(const TCoords<> c, void * data, int player)
+(const TCoords<FCoords> c, void * data, int player)
 {
 	return
 		static_cast<const Editor * const>(data)->player(player).get_buildcaps(c);

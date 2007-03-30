@@ -36,7 +36,7 @@ class Editor_Increase_Resources_Tool
 =============================
 */
 int Editor_Change_Resource_Tool_Callback
-(const TCoords<> c, void * data, int curres)
+(const TCoords<FCoords> c, void * data, int curres)
 {
 	Map & map = *static_cast<Map * const>(data);
 	const World & world = map.world();

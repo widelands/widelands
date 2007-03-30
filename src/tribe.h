@@ -36,6 +36,7 @@ class Item_Ware_Descr;
 class Resource_Descr;
 class Worker_Descr;
 class Warehouse;
+struct World;
 
 /*
 Tribes
@@ -51,7 +52,7 @@ struct Tribe_Descr {
          ERR_WRONGVERSION
       };
 
-	Tribe_Descr(const std::string & tribename);
+	Tribe_Descr(const std::string & tribename, const World &);
 
       // Static function to check for tribes
 	static bool exists_tribe(const std::string & name);
@@ -60,6 +61,7 @@ struct Tribe_Descr {
 
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return m_name;}
+	const World & world() const throw () {return m_world;}
 
 		inline int get_nrworkers() const { return m_workers.get_nitems(); }
 		Worker_Descr * get_worker_descr(const uint idx) const
@@ -99,6 +101,7 @@ struct Tribe_Descr {
 
 private:
 	const std::string m_name;
+	const World & m_world;
       uint m_anim_frontier;
 		uint m_anim_flag;
 

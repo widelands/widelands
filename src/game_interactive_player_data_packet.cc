@@ -31,7 +31,7 @@
 #define CURRENT_PACKET_VERSION 1
 
 // Forward declaration. Defined in interactive_player.cc
-int Int_Player_overlay_callback_function(const TCoords<>, void *, int);
+int Int_Player_overlay_callback_function(const TCoords<FCoords>, void *, int);
 
 /*
  * Destructor

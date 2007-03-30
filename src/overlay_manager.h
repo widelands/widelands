@@ -54,7 +54,7 @@
  */
 #define MAX_OVERLAYS_PER_NODE 5
 #define MAX_OVERLAYS_PER_TRIANGLE 3
-typedef int (*Overlay_Callback_Function)(const TCoords<>, void *, int);
+typedef int (*Overlay_Callback_Function)(const TCoords<FCoords>, void *, int);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
 		static Job_Id Null() throw ()//  Constant value for no job.

@@ -622,7 +622,7 @@ resource:<resname>
    therelike (non detectable Resources and default resources)
 
 iparam1 = radius
-iparam2 = FindFieldSize::sizeXXX
+iparam2 = FindNodeSize::sizeXXX
 sparam1 = Resource
 
 ==============================
@@ -657,13 +657,13 @@ void WorkerProgram::parse_findspace
 				const char* name;
 				int val;
 			} sizenames[] = {
-				{"any",    FindFieldSize::sizeAny},
-				{"build",  FindFieldSize::sizeBuild},
-				{"small",  FindFieldSize::sizeSmall},
-				{"medium", FindFieldSize::sizeMedium},
-				{"big",    FindFieldSize::sizeBig},
-				{"mine",   FindFieldSize::sizeMine},
-				{"port",   FindFieldSize::sizePort},
+				{"any",    FindNodeSize::sizeAny},
+				{"build",  FindNodeSize::sizeBuild},
+				{"small",  FindNodeSize::sizeSmall},
+				{"medium", FindNodeSize::sizeMedium},
+				{"big",    FindNodeSize::sizeBig},
+				{"mine",   FindNodeSize::sizeMine},
+				{"port",   FindNodeSize::sizePort},
 				{ 0, 0 }
 			};
 
@@ -706,10 +706,10 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
    int retval=0;
    if(res!=-1) {
       retval=map.find_reachable_fields(area, &list, cstep,
-               FindFieldSizeResource((FindFieldSize::Size)action->iparam2,res));
+               FindNodeSizeResource((FindNodeSize::Size)action->iparam2,res));
    } else {
       retval=map.find_reachable_fields(area, &list, cstep,
-               FindFieldSize((FindFieldSize::Size)action->iparam2));
+               FindNodeSize((FindNodeSize::Size)action->iparam2));
    }
 
    if(!retval) {
@@ -3398,9 +3398,9 @@ void Worker::geologist_update(Game* g, State* state)
 		// Find a suitable field and walk towards it
 		std::vector<Coords> list;
 		CheckStepDefault cstep(get_movecaps());
-		FindFieldImmovableSize ffis(FindFieldImmovableSize::sizeNone);
-		FindFieldImmovableAttribute ffia(RESI);
-		FindFieldAnd ffa;
+		FindNodeImmovableSize ffis(FindNodeImmovableSize::sizeNone);
+		FindNodeImmovableAttribute ffia(RESI);
+		FindNodeAnd ffa;
 
 		ffa.add(&ffis, false);
 		ffa.add(&ffia, true);

@@ -47,6 +47,6 @@ private:
       std::string m_current_sel_pic;
 };
 
-int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<>, void *, int);
+int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<FCoords>, void *, int);
 
 #endif

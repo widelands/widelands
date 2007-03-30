@@ -20,55 +20,54 @@
 #include "maptriangleregion.h"
 
 template <> MapTriangleRegion<>::MapTriangleRegion
-(const Map & map, TCoords<> first, const Uint16 radius)
-: m_radius_is_odd(radius & 1)
+(const Map & map, Area<TCoords<> > area)
+: m_radius_is_odd(area.radius & 1)
 {
-	assert(first.t == TCoords<>::R or first.t == TCoords<>::D);
-	const unsigned short radius_plus_1 = radius + 1;
-	const unsigned short half_radius_rounded_down = radius / 2;
+	assert(area.t == TCoords<>::R or area.t == TCoords<>::D);
+	const unsigned short radius_plus_1 = area.radius + 1;
+	const unsigned short half_radius_rounded_down = area.radius / 2;
 	m_row_length = radius_plus_1;
-	for (unsigned short i = 0; i < half_radius_rounded_down; ++i)
-		map.get_tln(first, &first);
-	if (first.t == TCoords<>::R) {
-		m_left = first;
-		if (radius) {
+	for (uint i = half_radius_rounded_down; i; --i) map.get_tln(area, &area);
+	if (area.t == TCoords<>::R) {
+		m_left = area;
+		if (area.radius) {
 			m_remaining_rows_in_upper_phase = half_radius_rounded_down + 1;
-			m_remaining_rows_in_lower_phase = (radius - 1) / 2;
+			m_remaining_rows_in_lower_phase = (area.radius - 1) / 2;
 			if (m_radius_is_odd) {
-				map.get_trn(first, &first);
+				map.get_trn(area, &area);
 				m_phase = Top;
-				m_row_length = radius + 2;
+				m_row_length = area.radius + 2;
 				m_remaining_in_row = radius_plus_1 / 2;
-				first.t = TCoords<>::D;
+				area.t = TCoords<>::D;
 			} else {
 				m_phase = Upper;
 				m_remaining_in_row = m_row_length = radius_plus_1;
-				first.t = TCoords<>::R;
+				area.t = TCoords<>::R;
 			}
 		} else {
-			assert(radius == 0);
+			assert(area.radius == 0);
 			m_phase = Bottom;
-			m_remaining_in_row = 1;
-			first.t = TCoords<>::R;
+			m_remaining_in_row = 0;
+			area.t = TCoords<>::R;
 		}
 	} else {
 		m_remaining_rows_in_upper_phase = radius_plus_1 / 2;
 		m_remaining_rows_in_lower_phase = half_radius_rounded_down;
 		if (m_radius_is_odd) {
-			map.get_ln(first, &first);
-			m_left = first;
+			map.get_ln(area, &area);
+			m_left = area;
 			m_phase = Upper;
-			m_remaining_in_row = m_row_length = radius + 2;
-			first.t = TCoords<>::R;
+			m_remaining_in_row = m_row_length = area.radius + 2;
+			area.t = TCoords<>::R;
 		} else {
-			map.get_bln(first, &m_left);
+			map.get_bln(area, &m_left);
 			m_phase = Top;
-			m_row_length = radius + 3;
-			m_remaining_in_row = half_radius_rounded_down + 1;
-			first.t = TCoords<>::D;
+			m_row_length = area.radius + 3;
+			m_remaining_in_row = half_radius_rounded_down + (0 < area.radius);
+			area.t = TCoords<>::D;
 		}
 	}
-	m_location = first;
+	m_location = area;
 }
 
 
@@ -126,6 +125,130 @@ template <> bool MapTriangleRegion<>::advance(const Map & map) throw () {
 				m_left = map.br_n(m_left);
 			}
 			m_location = TCoords<>(m_left, m_location.t);
+		}
+		break;
+	case Bottom:
+		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
+		break;
+	default:
+		assert(0);
+	}
+	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
+	return true;
+}
+
+
+template <> MapTriangleRegion<TCoords<FCoords> >::MapTriangleRegion
+(const Map & map, Area<TCoords<FCoords> > area)
+: m_radius_is_odd(area.radius & 1)
+{
+	assert(area.t == TCoords<FCoords>::R or area.t == TCoords<FCoords>::D);
+	const unsigned short radius_plus_1 = area.radius + 1;
+	const unsigned short half_radius_rounded_down = area.radius / 2;
+	m_row_length = radius_plus_1;
+	for (uint i = half_radius_rounded_down; i; --i) map.get_tln(area, &area);
+	if (area.t == TCoords<FCoords>::R) {
+		m_left = area;
+		if (area.radius) {
+			m_remaining_rows_in_upper_phase = half_radius_rounded_down + 1;
+			m_remaining_rows_in_lower_phase = (area.radius - 1) / 2;
+			if (m_radius_is_odd) {
+				map.get_trn(area, &area);
+				m_phase = Top;
+				m_row_length = area.radius + 2;
+				m_remaining_in_row = radius_plus_1 / 2;
+				area.t = TCoords<FCoords>::D;
+			} else {
+				m_phase = Upper;
+				m_remaining_in_row = m_row_length = radius_plus_1;
+				area.t = TCoords<FCoords>::R;
+			}
+		} else {
+			m_phase = Bottom;
+			m_remaining_in_row = 0;
+			area.t = TCoords<FCoords>::R;
+		}
+	} else {
+		m_remaining_rows_in_upper_phase = radius_plus_1 / 2;
+		m_remaining_rows_in_lower_phase = half_radius_rounded_down;
+		if (m_radius_is_odd) {
+			map.get_ln(area, &area);
+			m_left = area;
+			m_phase = Upper;
+			m_remaining_in_row = m_row_length = area.radius + 2;
+			area.t = TCoords<FCoords>::R;
+		} else {
+			map.get_bln(area, &m_left);
+			m_phase = Top;
+			m_row_length = area.radius + 3;
+			m_remaining_in_row = half_radius_rounded_down + (0 < area.radius);
+			area.t = TCoords<FCoords>::D;
+		}
+	}
+	m_location = area;
+}
+
+
+/// Traverse the region by row.
+template <>
+bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
+{
+	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
+	if (m_remaining_in_row == 0) return false;
+	--m_remaining_in_row;
+	switch (m_phase) {
+	case Top:
+		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
+		else if (m_remaining_rows_in_upper_phase) {
+			m_phase = Upper;
+			m_remaining_in_row = m_row_length;
+			assert(m_remaining_in_row);
+			m_location = TCoords<FCoords>(m_left, m_location.t);
+		}
+		break;
+	case Upper:
+		if (m_remaining_in_row) {
+			if (m_location.t == TCoords<FCoords>::D)
+				m_location.t = TCoords<FCoords>::R;
+			else m_location =
+				TCoords<FCoords>(map.r_n(m_location), TCoords<FCoords>::D);
+		} else {
+			if (--m_remaining_rows_in_upper_phase) {
+				m_row_length += 2;
+				m_left = map.bl_n(m_left);
+			} else {
+				if (m_remaining_rows_in_lower_phase) {
+					m_phase = Lower;
+					assert(m_row_length >= 2);
+					m_row_length -= 2;
+				} else if (m_location.t == TCoords<FCoords>::R) {
+					m_phase = Bottom;
+					m_row_length /= 2;
+				} else return false;
+				m_left = map.br_n(m_left);
+			}
+			m_remaining_in_row = m_row_length;
+			m_location = TCoords<FCoords>(m_left, m_location.t);
+		}
+		break;
+	case Lower:
+		if (m_remaining_in_row) {
+			if (m_location.t == TCoords<FCoords>::D)
+				m_location.t = TCoords<FCoords>::R;
+			else m_location =
+				TCoords<FCoords>(map.r_n(m_location), TCoords<FCoords>::D);
+		} else {
+			if (--m_remaining_rows_in_lower_phase) {
+				assert(m_row_length >= 2);
+				m_remaining_in_row = m_row_length -= 2;
+				m_left = map.br_n(m_left);
+			}
+			else if (m_location.t == TCoords<FCoords>::R) {
+				m_phase = Bottom;
+				m_remaining_in_row = m_row_length / 2;
+				m_left = map.br_n(m_left);
+			}
+			m_location = TCoords<FCoords>(m_left, m_location.t);
 		}
 		break;
 	case Bottom:

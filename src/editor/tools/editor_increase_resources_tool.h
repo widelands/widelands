@@ -54,6 +54,6 @@ private:
 	Resource_Descr::Index            m_cur_res;
 };
 
-int Editor_Change_Resource_Tool_Callback(const TCoords<>, void *, int);
+int Editor_Change_Resource_Tool_Callback(const TCoords<FCoords>, void *, int);
 
 #endif

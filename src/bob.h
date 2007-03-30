@@ -120,7 +120,7 @@ public:
 		const Task           * task;
 		int                    ivar1;
 		int                    ivar2;
-		int                    ivar3;
+		union                  {int ivar3; Uint32 ui32var3;};
 		Object_Ptr             objvar1;
 		std::string            svar1;
 

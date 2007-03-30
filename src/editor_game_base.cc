@@ -432,7 +432,7 @@ Player * Editor_Game_Base::add_player
 		if (m_tribes[i]->get_name() == tribe) break;
 
    if (i == m_tribes.size())
-      m_tribes.push_back(new Tribe_Descr(tribe));
+      m_tribes.push_back(new Tribe_Descr(tribe, map().world()));
 
    return
 		m_players[player_number - 1]
@@ -456,7 +456,7 @@ void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
 		if (m_tribes[i]->get_name() == tribe) break;
 
 	if (i == m_tribes.size())
-		m_tribes.push_back(new Tribe_Descr(tribe));
+		m_tribes.push_back(new Tribe_Descr(tribe, map().world()));
 }
 
 /*

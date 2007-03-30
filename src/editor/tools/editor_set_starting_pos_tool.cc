@@ -33,7 +33,9 @@ static int m_current_player;
 /*
  * static callback function for overlay calculation
  */
-int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<> c, void * data, int) {
+int Editor_Tool_Set_Starting_Pos_Callback
+(const TCoords<FCoords> c, void * data, int)
+{
 	const Map & map = *static_cast<const Map * const>(data);
 
 	// Area around already placed players
@@ -45,7 +47,7 @@ int Editor_Tool_Set_Starting_Pos_Callback(const TCoords<> c, void * data, int) {
 		if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) return 0;
 	}
 
-	const int caps = map.get_field(c)->get_caps();
+	const int caps = c.field->get_caps();
    if((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG)
       return caps;
 
@@ -97,7 +99,9 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 		g_gr->get_picture_size(picid, w, h);
 
       // check if field is valid
-		if(Editor_Tool_Set_Starting_Pos_Callback(center.node, &map, 0)) {
+		if (Editor_Tool_Set_Starting_Pos_Callback
+		    (map.get_fcoords(center.node), &map, 0))
+		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
          // Remove old overlay if any
 			if (starting_pos.is_valid())

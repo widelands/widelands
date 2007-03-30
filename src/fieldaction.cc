@@ -1020,8 +1020,10 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		return;
 	}
 
+	const Map & map = player->egbase().map();
+
 	// we're building a road right now
-	const Coords target = iabase->get_sel_pos().node;
+	const FCoords target = map.get_fcoords(iabase->get_sel_pos().node);
 
 	// if user clicked on the same field again, build a flag
 	if (target == iabase->get_build_road_end()) {
@@ -1045,7 +1047,6 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 	}
 
 	// did he click on a flag or a road where a flag can be built?
-	const Map & map = iabase->egbase().map();
 
 	if (const BaseImmovable * imm = map.get_immovable(target)) {
 		switch(imm->get_type()) {

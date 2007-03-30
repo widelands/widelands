@@ -64,7 +64,7 @@ struct ImmovableFound {
 /*
 FindImmovable
 FindBob
-FindField
+FindNode
 FindResource
 CheckStep
 
@@ -80,10 +80,10 @@ struct FindBob {
 	virtual bool accept(Bob *imm) const = 0;
    virtual ~FindBob() {}  // make gcc shut up
 };
-struct FindField {
+struct FindNode {
 	// Return true if this immovable should be returned by find_fields()
-	virtual bool accept(FCoords coord) const = 0;
-   virtual ~FindField() {}  // make gcc shut up
+	virtual bool accept(const Map &, const FCoords coord) const = 0;
+   virtual ~FindNode() {}  // make gcc shut up
 };
 struct CheckStep {
 	enum StepId {
@@ -236,12 +236,12 @@ struct Map {
 	uint find_fields
 		(const Area<FCoords>,
 		 std::vector<Coords> * list,
-		 const FindField & functor);
+		 const FindNode & functor);
 	uint find_reachable_fields
 		(const Area<FCoords>,
 		 std::vector<Coords>* list,
 		 const CheckStep &,
-		 const FindField &);
+		 const FindNode &);
 
 	// Field logic
 	typedef uint Index;
@@ -341,8 +341,9 @@ struct Map {
 	 */
 	uint set_height(Area<FCoords>, interval<Field::Height> height_interval);
 
-	// change terrain of a field, recalculate buildcaps
-	int change_terrain(const TCoords<>, const Terrain_Descr::Index terrain);
+	//  change terrain of a triangle, recalculate buildcaps
+	int change_terrain
+		(const TCoords<FCoords>, const Terrain_Descr::Index terrain);
 
    /*
     * Get the a manager for registering or removing
@@ -451,34 +452,34 @@ struct FindImmovablePlayerImmovable : public FindImmovable {
 	virtual bool accept(BaseImmovable* imm) const;
 };
 
-struct FindFieldCaps : public FindField {
-	FindFieldCaps(uchar mincaps) : m_mincaps(mincaps) { }
-   virtual ~FindFieldCaps() {}  // make gcc shut up
+struct FindNodeCaps : public FindNode {
+	FindNodeCaps(uchar mincaps) : m_mincaps(mincaps) { }
+   virtual ~FindNodeCaps() {}  // make gcc shut up
 
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, const FCoords coord) const;
 
 	uchar m_mincaps;
 };
 
 // Accepts fields if they are accepted by all subfunctors.
-struct FindFieldAnd : public FindField {
-	FindFieldAnd() { }
-	virtual ~FindFieldAnd() { }
+struct FindNodeAnd : public FindNode {
+	FindNodeAnd() { }
+	virtual ~FindNodeAnd() { }
 
-	void add(const FindField* findfield, bool negate = false);
+	void add(const FindNode* findfield, bool negate = false);
 
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, const FCoords coord) const;
 
 	struct Subfunctor {
 		bool              negate;
-		const FindField * findfield;
+		const FindNode * findfield;
 	};
 
 	std::vector<Subfunctor> m_subfunctors;
 };
 
 // Accepts fields based on what can be built there
-struct FindFieldSize : public FindField {
+struct FindNodeSize : public FindNode {
 	enum Size {
 		sizeAny    = 0,   //  any field not occupied by a robust immovable
 		sizeBuild,        //  any field we can build on (flag or building)
@@ -489,27 +490,27 @@ struct FindFieldSize : public FindField {
 		sizePort,         //  can build a port on this field
 	};
 
-	FindFieldSize(Size size) : m_size(size) { }
-   virtual ~FindFieldSize() {}  // make gcc shut up
+	FindNodeSize(Size size) : m_size(size) { }
+   virtual ~FindNodeSize() {}  // make gcc shut up
 
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, const FCoords coord) const;
 
 	Size m_size;
 };
 
 // Accepts a field for a certain size if it has
 // a valid resource and amount on it
-struct FindFieldSizeResource : public FindFieldSize {
-   FindFieldSizeResource(Size size, int res) : FindFieldSize(size) { m_res=res; }
-   virtual ~FindFieldSizeResource() {}  // make gcc shut up
+struct FindNodeSizeResource : public FindNodeSize {
+   FindNodeSizeResource(Size size, int res) : FindNodeSize(size) { m_res=res; }
+   virtual ~FindNodeSizeResource() {}  // make gcc shut up
 
-   virtual bool accept(FCoords coord) const;
+   virtual bool accept(const Map &, const FCoords coord) const;
 
    int m_res;
 };
 
 // Accepts fields based on the size of immovables on the field
-struct FindFieldImmovableSize : public FindField {
+struct FindNodeImmovableSize : public FindNode {
 	enum {
 		sizeNone   = 1 << 0,
 		sizeSmall  = 1 << 1,
@@ -517,31 +518,31 @@ struct FindFieldImmovableSize : public FindField {
 		sizeBig    = 1 << 3
 	};
 
-	FindFieldImmovableSize(uint sizes) : m_sizes(sizes) { }
-   virtual ~FindFieldImmovableSize() {}  // make gcc shut up
+	FindNodeImmovableSize(uint sizes) : m_sizes(sizes) { }
+   virtual ~FindNodeImmovableSize() {}  // make gcc shut up
 
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, const FCoords coord) const;
 
 	uint m_sizes;
 };
 
 // Accepts a field if it has an immovable with a given attribute
-struct FindFieldImmovableAttribute : public FindField {
-	FindFieldImmovableAttribute(uint attrib) : m_attribute(attrib) { }
-   virtual ~FindFieldImmovableAttribute() {}  // make gcc shut up
+struct FindNodeImmovableAttribute : public FindNode {
+	FindNodeImmovableAttribute(uint attrib) : m_attribute(attrib) { }
+   virtual ~FindNodeImmovableAttribute() {}  // make gcc shut up
 
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, const FCoords coord) const;
 
 	uint m_attribute;
 };
 
 
 // Accepts a field if it has the given resource
-struct FindFieldResource : public FindField {
-	FindFieldResource(uchar res) : m_resource(res) { }
-   virtual ~FindFieldResource() {}  // make gcc shut up
+struct FindNodeResource : public FindNode {
+	FindNodeResource(uchar res) : m_resource(res) { }
+   virtual ~FindNodeResource() {}  // make gcc shut up
 
-	virtual bool accept(FCoords coord) const;
+	virtual bool accept(const Map &, const FCoords coord) const;
 
 	uchar m_resource;
 };

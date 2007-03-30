@@ -45,6 +45,7 @@ private:
       UI::UniqueWindow::Registry m_registry;
 };
 
-int Editor_Make_Infrastructure_Tool_Callback(const TCoords<>, void *, int);
+int Editor_Make_Infrastructure_Tool_Callback
+(const TCoords<FCoords>, void *, int);
 
 #endif
