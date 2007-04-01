@@ -30,12 +30,12 @@ longlines=0
 oversizelines=0
 
 for line in fileinput.input(files):
-	line3=line.expandtabs(3).rstrip()
+	line2=line.expandtabs(2).rstrip()
 	line8=line.expandtabs(8).rstrip()
 
 	lines+=1
 	if len(line8)>80:
-		if len(line3)>80:
+		if len(line2)>80:
 			longlines+=1
 		else:
 			oversizelines+=1
@@ -47,6 +47,6 @@ print "Total lines:                         %7i   %6.2f%%" % (lines, 100.0)
 print "Short lines        <80 @ tabwidth=8: %7i   %6.2f%%" % (shortlines, 100.0*shortlines/lines)
 print "Long lines         >80 @ tabwidth=8: %7i   %6.2f%%" % (longlines, 100.0*longlines/lines)
 print
-print "OVERSIZE LINES !!  >80 @ tabwidth=3: %7i   %6.2f%%" % (oversizelines, 100.0*oversizelines/lines)
+print "OVERSIZE LINES !!  >80 @ tabwidth=2: %7i   %6.2f%%" % (oversizelines, 100.0*oversizelines/lines)
 print
 
