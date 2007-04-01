@@ -177,6 +177,10 @@ public:
 	Terrain_Descr::Index terrain_d   () const throw () {return terrains.d;}
 	Terrain_Descr::Index terrain_r   () const throw () {return terrains.r;}
 	void set_terrains (const Terrains             i) throw () {terrains   = i;}
+	void set_terrain
+		(const TCoords<FCoords>::TriangleIndex t, const Terrain_Descr::Index i)
+		throw ()
+	{(t == TCoords<FCoords>::D ? terrains.d : terrains.r) = i;}
 	void set_terrain_d(const Terrain_Descr::Index i) throw () {terrains.d = i;}
 	void set_terrain_r(const Terrain_Descr::Index i) throw () {terrains.r = i;}
 
