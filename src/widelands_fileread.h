@@ -26,21 +26,23 @@
 /// A FileRead that can read Widelands-specific types.
 struct WidelandsFileRead : public FileRead {
 
-	struct Data_Error                                          {};
-	struct Extent_Exceeded            : public Data_Error      {};
+	struct Data_Error {
+		Data_Error(const Pos pos) : position(pos) {}
+		Pos position;
+	};
+	struct Extent_Exceeded : public Data_Error
+	{Extent_Exceeded(const Pos pos) : Data_Error(pos) {}};
 	struct Width_Exceeded : public Extent_Exceeded {
 		Width_Exceeded(const Pos pos, const Uint16 W, const X_Coordinate X) :
-			position(pos), w(W), x(X)
+			Extent_Exceeded(pos), w(W), x(X)
 		{}
-		Pos          position;
 		Uint16       w;
 		X_Coordinate x;
 	};
 	struct Height_Exceeded : public Extent_Exceeded {
 		Height_Exceeded(const Pos pos, const Uint16 H, const Y_Coordinate Y) :
-			position(pos), h(H), y(Y)
+			Extent_Exceeded(pos), h(H), y(Y)
 		{}
-		Pos          position;
 		Uint16       h;
 		Y_Coordinate y;
 	};
