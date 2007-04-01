@@ -158,7 +158,7 @@ struct World {
       inline int get_nr_immovables(void) const{ return immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) const{ return immovables.get(index); }
 
-      inline uchar get_resource(const char* l) const{ return m_resources.get_index(l); }
+	int get_resource(const char * const name) const {return m_resources.get_index(name);}
 	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
 		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
       inline int get_nr_resources(void) const{ return m_resources.get_nitems(); }
