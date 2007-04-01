@@ -28,6 +28,7 @@ typedef unsigned long ulong;
 
 typedef uint   Military_Influence;
 typedef uchar Player_Number;
+typedef uchar Resource_Amount;
 typedef ushort Vision;
 
 enum tAttribute {
