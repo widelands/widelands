@@ -269,9 +269,6 @@ void ProductionSite::calc_statistics()
 		(m_statistics_buf, sizeof(m_statistics_buf),
 		 "%.0f%% %s", percOk, trend.c_str());
 	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
-	molog
-		("stat: lastOk: %.0f%% percOk: %.0f%% trend: %s\n",
-		 lastPercOk, percOk, trend.c_str());
 
    m_last_stat_percent = (char)percOk;
 
@@ -1077,8 +1074,7 @@ ProductionSite::program_step
 Advance the program to the next step, but does not schedule anything.
 ===============
 */
-void ProductionSite::program_step()
-{
+void ProductionSite::program_step(const uint phase) {
 	State* state = get_current_program();
 
 	assert(state);
