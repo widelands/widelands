@@ -1816,7 +1816,7 @@ void Worker::cleanup(Editor_Game_Base *g)
 		m_supply = 0;
 
 	if (item)
-      if(g->get_objects()->object_still_available(item))
+      if(g->objects().object_still_available(item))
          item->destroy(g);
 
    // We are destoryed, but we were maybe idling

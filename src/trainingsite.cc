@@ -266,7 +266,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 			Soldier *s = m_soldiers[i];
 			m_soldiers[i] = 0;
 
-			if (g->get_objects()->object_still_available(s))
+			if (g->objects().object_still_available(s))
 				s->set_location(0);
 		}
 		m_soldiers.resize(0);

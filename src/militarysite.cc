@@ -239,7 +239,7 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
       Soldier* s = m_soldiers[i];
 
       m_soldiers[i] = 0;
-      if(g->get_objects()->object_still_available(s))
+		if (g->objects().object_still_available(s))
          s->set_location(0);
    }
 	// unconquer land
@@ -567,7 +567,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
       Soldier* s = m_soldiers[i];
 
       m_soldiers[i] = 0;
-      if(g->get_objects()->object_still_available(s))
+		if (g->objects().object_still_available(s))
          s->set_location(0);
    }
    log("removed all remainig soldiers\n");

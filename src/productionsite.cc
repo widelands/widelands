@@ -392,7 +392,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
          Worker* w = m_workers[i];
 
          m_workers[i] = 0;
-			if (g->get_objects()->object_still_available(w)) w->set_location(0);
+			if (g->objects().object_still_available(w)) w->set_location(0);
       }
       m_workers.resize(0);
    }

@@ -119,7 +119,7 @@ Cmd_Bulldoze::Cmd_Bulldoze (Deserializer* des):PlayerCommand (0, des->getchar())
 void Cmd_Bulldoze::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* obj = g->objects().get_object(serial);
 
 	if (obj && obj->get_type() >= Map_Object::BUILDING)
 		player->bulldoze(static_cast<PlayerImmovable*>(obj));
@@ -149,7 +149,7 @@ void Cmd_Bulldoze::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_
    // Write base classes
    PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   Map_Object* obj=egbase->objects().get_object(serial);
    assert(mos->is_object_known(obj));
    fw->Unsigned32(mos->get_object_file_index(obj));
 }
@@ -347,7 +347,7 @@ Cmd_FlagAction::Cmd_FlagAction (Deserializer* des):PlayerCommand (0, des->getcha
 void Cmd_FlagAction::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* obj = g->objects().get_object(serial);
 
 	if (obj && obj->get_type() == Map_Object::FLAG && static_cast<PlayerImmovable*>(obj)->get_owner() == player)
 		player->flagaction (static_cast<Flag*>(obj), action);
@@ -386,7 +386,7 @@ void Cmd_FlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Ma
    fw->Unsigned8(action);
 
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   Map_Object* obj=egbase->objects().get_object(serial);
    assert(mos->is_object_known(obj));
    fw->Unsigned32(mos->get_object_file_index(obj));
 }
@@ -401,7 +401,7 @@ Cmd_StartStopBuilding::Cmd_StartStopBuilding (Deserializer* des):PlayerCommand (
 void Cmd_StartStopBuilding::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* obj = g->objects().get_object(serial);
 
 	if (obj && obj->get_type() >= Map_Object::BUILDING)
 		player->start_stop_building(static_cast<PlayerImmovable*>(obj));
@@ -434,7 +434,7 @@ void Cmd_StartStopBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widel
    PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   Map_Object* obj=egbase->objects().get_object(serial);
    assert(mos->is_object_known(obj));
    fw->Unsigned32(mos->get_object_file_index(obj));
 }
@@ -452,7 +452,7 @@ void Cmd_EnhanceBuilding::execute (Game* g)
 {
 	if
 		(Building * const building =
-		 dynamic_cast<Building * const>(g->get_objects()->get_object(serial)))
+		 dynamic_cast<Building * const>(g->objects().get_object(serial)))
 		g->get_player(get_sender())->enhance_building(building, id);
 }
 
@@ -488,7 +488,7 @@ void Cmd_EnhanceBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   Map_Object* obj=egbase->objects().get_object(serial);
    assert(mos->is_object_known(obj));
    fw->Unsigned32(mos->get_object_file_index(obj));
 
@@ -508,7 +508,7 @@ Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions (Deserializer* des):PlayerC
 void Cmd_ChangeTrainingOptions::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* obj = g->objects().get_object(serial);
 
 	/* ¿ Maybe we must check that the building is a training house ? */
 	if ((obj) && (obj->get_type() >= Map_Object::BUILDING)) {
@@ -555,7 +555,7 @@ void Cmd_ChangeTrainingOptions::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->get_objects()->get_object(serial);
+	Map_Object* obj=egbase->objects().get_object(serial);
 	assert(mos->is_object_known(obj));
 	fw->Unsigned32(mos->get_object_file_index(obj));
 
@@ -577,8 +577,8 @@ Cmd_DropSoldier::Cmd_DropSoldier(Deserializer* des):PlayerCommand (0, des->getch
 void Cmd_DropSoldier::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
-	Map_Object* sold = g->get_objects()->get_object(soldier);
+	Map_Object* obj = g->objects().get_object(serial);
+	Map_Object* sold = g->objects().get_object(soldier);
 
 	/* ¿ Maybe we must check that the building is a training house ? */
 	if ((obj) && (sold) && (obj->get_type() >= Map_Object::BUILDING) && (((Worker*)sold)->get_worker_type() == Worker_Descr::SOLDIER)) {
@@ -623,12 +623,12 @@ void Cmd_DropSoldier::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_M
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->get_objects()->get_object(serial);
+	Map_Object* obj=egbase->objects().get_object(serial);
 	assert(mos->is_object_known(obj));
 	fw->Unsigned32(mos->get_object_file_index(obj));
 
 	// Now soldier serial
-	obj=egbase->get_objects()->get_object(serial);
+	obj=egbase->objects().get_object(serial);
 	assert(mos->is_object_known(obj));
 	fw->Unsigned16(mos->get_object_file_index(obj));
 
@@ -645,7 +645,7 @@ Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(Deserializer* des):PlayerCo
 void Cmd_ChangeSoldierCapacity::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* obj = g->objects().get_object(serial);
 
 	if (obj && obj->get_type() >= Map_Object::BUILDING)
 		player->change_soldier_capacity(static_cast<PlayerImmovable*>(obj), val);
@@ -685,7 +685,7 @@ void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->get_objects()->get_object(serial);
+	Map_Object* obj=egbase->objects().get_object(serial);
 	assert(mos->is_object_known(obj));
 	fw->Unsigned32(mos->get_object_file_index(obj));
 
@@ -709,7 +709,7 @@ Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (Deserializer* des):PlayerCommand (0, d
 void Cmd_EnemyFlagAction::execute (Game* g)
 {
 	Player* player = g->get_player(get_sender());
-	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* obj = g->objects().get_object(serial);
    PlayerImmovable* imm = static_cast<PlayerImmovable*>(obj);
 
    Player* real_player = g->get_player(attacker);
@@ -768,7 +768,7 @@ void Cmd_EnemyFlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    fw->Unsigned8(action);
 
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   Map_Object* obj=egbase->objects().get_object(serial);
    assert(mos->is_object_known(obj));
    fw->Unsigned32(mos->get_object_file_index(obj));
 

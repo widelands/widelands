@@ -1978,18 +1978,18 @@ Transfer::~Transfer()
 		assert(!m_item);
 		assert(!m_soldier);
 
-      if(m_game->get_objects()->object_still_available(m_worker))
+      if(m_game->objects().object_still_available(m_worker))
          m_worker->cancel_task_transfer(m_game);
 	}
 	else if (m_item)
 	{
 		assert(!m_soldier);
-		if(m_game->get_objects()->object_still_available(m_item))
+		if(m_game->objects().object_still_available(m_item))
 			m_item->cancel_transfer(m_game);
 	}
 	else if (m_soldier)
 	{
-		if(m_game->get_objects()->object_still_available(m_soldier))
+		if(m_game->objects().object_still_available(m_soldier))
 			m_soldier->cancel_task_transfer(m_game);
 	}
 }

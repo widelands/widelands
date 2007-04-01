@@ -94,16 +94,13 @@ Editor_Game_Base::Editor_Game_Base()
 initialization
 ============
 */
-Editor_Game_Base::Editor_Game_Base() {
-   m_map = 0;
-
-   m_objects = new Object_Manager;
+Editor_Game_Base::Editor_Game_Base() :
+m_gametime          (0),
+m_iabase            (0),
+m_map               (0),
+m_lasttrackserial   (0)
+{
 	memset(m_players, 0, sizeof(m_players));
-
-   m_gametime=0;
-   m_iabase=0;
-
-	m_lasttrackserial = 0;
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
 }
 
@@ -117,7 +114,6 @@ last few cleanups
 Editor_Game_Base::~Editor_Game_Base() {
    int i;
 
-   delete m_objects;
    for(i = 1; i <= MAX_PLAYERS; i++)
       if (m_players[i-1])
          remove_player(i);
@@ -678,7 +674,7 @@ Battle* Editor_Game_Base::create_battle ()
 AttackController* Editor_Game_Base::create_attack_controller(Flag* flag,int attacker, int defender, uint num) {
    uint i;
    for (i=0;i<m_attack_serials.size();i++) {
-      AttackController* curCtrl = (AttackController*)this->get_objects()->get_object(m_attack_serials[i]);
+      AttackController* curCtrl = (AttackController*)this->objects().get_object(m_attack_serials[i]);
       if (curCtrl->getFlag() == flag) {
          curCtrl->launchAttack(num);
          return curCtrl;
@@ -702,7 +698,7 @@ void Editor_Game_Base::remove_attack_controller(uint serial) {
    for(uint i=0;i<m_attack_serials.size();i++) {
       if (m_attack_serials[i] == serial) {
          log("Editor_Game_Base: Destroying battle with serial %i \n",serial);
-			static_cast<AttackController * const>(this->get_objects()->get_object(serial))->destroy(this);
+			static_cast<AttackController * const>(this->objects().get_object(serial))->destroy(this);
 
 			if (i < m_attack_serials.size() - 1)
 				m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];
@@ -784,7 +780,7 @@ void Editor_Game_Base::cleanup_for_load
 (const bool flush_graphics, const bool flush_animations)
 {
    // Clean all the stuff up, so we can load
-   get_objects()->cleanup(this);
+	cleanup_objects();
 
    // We do not flush the animations in the editor since all tribes are loaded and
    // animations can not change a lot, or?

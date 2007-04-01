@@ -75,7 +75,7 @@ void Editor::run() {
 	eia.run();
 
 
-   get_objects()->cleanup(this);
+	cleanup_objects();
 
    g_gr->flush(PicMod_Game);
    g_anim.flush();

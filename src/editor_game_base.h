@@ -47,6 +47,7 @@ class AttackController;
 struct Editor_Game_Base {
    friend class Interactive_Base;
    friend class Game_Game_Class_Data_Packet;
+	friend struct Fullscreen_Menu_LaunchGame;
 
       Editor_Game_Base();
       virtual ~Editor_Game_Base();
@@ -55,7 +56,8 @@ struct Editor_Game_Base {
 	Map & map() const throw () {return *m_map;}
       inline Map *get_map() { return m_map; }
       Map & get_map() const {return *m_map;}
-      Object_Manager * get_objects() const {return m_objects;}
+	const Object_Manager & objects() const {return m_objects;}
+	Object_Manager       & objects()       {return m_objects;}
 
 	void unconquer_area
 		(Player_Area<Area<FCoords> >, const Player_Number destroying_player = 0);
@@ -134,7 +136,11 @@ struct Editor_Game_Base {
 
    virtual void make_influence_map ();
 
-   protected:
+protected:
+	void cleanup_objects() throw () {
+		objects().cleanup(this);
+	}
+
       // next function is used to update the current gametime,
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
@@ -179,7 +185,7 @@ private:
 
       int m_gametime;
 	Player                   * m_players[MAX_PLAYERS];
-	Object_Manager           * m_objects;
+	Object_Manager             m_objects;
 protected:
 	std::vector<Tribe_Descr *> m_tribes;
 private:

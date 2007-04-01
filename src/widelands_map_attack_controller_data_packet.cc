@@ -141,7 +141,7 @@ throw (_wexception) {
    fw.Unsigned32(serials.size());
 
    for (uint i=0;i<serials.size();i++) {
-      AttackController* ctrl = (AttackController*)egbase->get_objects()->get_object(serials[i]);
+      AttackController* ctrl = (AttackController*)egbase->objects().get_object(serials[i]);
       assert(not os->is_object_known(ctrl));
 
       fw.Unsigned32(os->register_object(ctrl));  // Something like serial ..

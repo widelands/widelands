@@ -110,7 +110,7 @@ void Fullscreen_Menu_LaunchGame::think()
  * */
 void Fullscreen_Menu_LaunchGame::back_clicked()
 {
-	m_game->get_objects()->cleanup(m_game);
+	m_game->cleanup_objects();
 	end_modal(0);
 }
 

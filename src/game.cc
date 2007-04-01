@@ -337,7 +337,7 @@ bool Game::run(bool is_savegame)
 
 	g_sound_handler.change_music("menu", 1000, 0);
 
-	get_objects()->cleanup(this);
+	cleanup_objects();
 	delete ipl;
 
 	for (unsigned int i=0; i<cpl.size(); i++)

@@ -50,7 +50,7 @@ bool Widelands_Map_Map_Object_Loader::is_object_known(uint n) {
 void Widelands_Map_Map_Object_Loader::register_object(Editor_Game_Base* egbase, uint n, Map_Object* obj) {
    assert(!is_object_known(n));
 
-   egbase->get_objects()->overwrite_file_serial(obj, n);
+   egbase->objects().overwrite_file_serial(obj, n);
 
    m_objects.insert(std::pair<uint, Map_Object*>(n, obj));
    m_loaded_obj[obj]=false;

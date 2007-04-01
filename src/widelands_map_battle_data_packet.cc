@@ -125,7 +125,7 @@ throw (_wexception)
 
    for (uint i = 0; i < serials.size(); i++)
    {
-      Map_Object* obj = egbase->get_objects()->get_object(serials[i]);
+      Map_Object* obj = egbase->objects().get_object(serials[i]);
 
       if (!obj || (obj->get_type() != Map_Object::BATTLE))
          continue;

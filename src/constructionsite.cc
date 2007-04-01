@@ -369,7 +369,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building * const bld = m_building->create(*g, owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
-		if (g->get_objects()->object_still_available(m_builder)) {
+		if (g->objects().object_still_available(m_builder)) {
          m_builder->reset_tasks((Game*)g);
          m_builder->set_location(bld);
          m_builder->start_task_gowarehouse();

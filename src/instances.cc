@@ -35,7 +35,7 @@ Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int t, Map_Object* o) : BaseComma
    obj_serial=o->get_serial();
 }
 void Cmd_Destroy_Map_Object::execute(Game* g) {
-   Map_Object* obj = g->get_objects()->get_object(obj_serial);
+   Map_Object* obj = g->objects().get_object(obj_serial);
 
    if (obj)
       obj->destroy (g);
@@ -66,7 +66,7 @@ void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Wide
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
 
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(obj_serial);
+   Map_Object* obj=egbase->objects().get_object(obj_serial);
    if(obj) { // The object might have vanished
       assert(mos->is_object_known(obj));
       fw->Unsigned32(mos->get_object_file_index(obj));
@@ -80,7 +80,7 @@ Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : BaseCommand(t) {
    arg=a;
 }
 void Cmd_Act::execute(Game* g) {
-   Map_Object* obj = g->get_objects()->get_object(obj_serial);
+   Map_Object* obj = g->objects().get_object(obj_serial);
    if (obj)
       obj->act(g, arg);
    // the object must queue the next CMD_ACT itself if necessary
@@ -116,7 +116,7 @@ void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
 
    // Now serial
-   Map_Object* obj=egbase->get_objects()->get_object(obj_serial);
+   Map_Object* obj=egbase->objects().get_object(obj_serial);
    if( obj ) { // Object might have dissappeared
       assert(mos->is_object_known(obj));
       fw->Unsigned32(mos->get_object_file_index(obj));
@@ -207,7 +207,7 @@ Object_Ptr::get
 Map_Object * Object_Ptr::get(const Editor_Game_Base * const game)
 {
 	if (!m_serial) return 0;
-	Map_Object* obj = game->get_objects()->get_object(m_serial);
+	Map_Object* obj = game->objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;
 	return obj;
@@ -219,7 +219,7 @@ Object_Ptr::get
 ===============
 */
 const Map_Object * Object_Ptr::get(const Editor_Game_Base * const game) const
-{return m_serial ? game->get_objects()->get_object(m_serial) : 0;}
+{return m_serial ? game->objects().get_object(m_serial) : 0;}
 
 
 
@@ -406,9 +406,7 @@ Initialize the object by adding it to the object manager.
 ===============
 */
 void Map_Object::init(Editor_Game_Base* g)
-{
-	g->get_objects()->insert(this);
-}
+{g->objects().insert(this);}
 
 /*
 ===============
@@ -418,9 +416,7 @@ Make sure you call this from derived classes!
 ===============
 */
 void Map_Object::cleanup(Editor_Game_Base *g)
-{
-	g->get_objects()->remove(this);
-}
+{g->objects().remove(this);}
 
 
 /*
