@@ -56,7 +56,7 @@ struct FileRead {
 
 	void Close(); /// Frees allocated memory.
 
-		inline int GetSize() const { return length; }
+	size_t GetSize() const throw () {return length;}
 	bool IsEOF() const throw () {return length <= filepos;}
 
 	/**
