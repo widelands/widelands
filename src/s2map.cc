@@ -125,6 +125,14 @@ int S2_Map_Loader::preload_map(bool scenario) {
    return 0;
 }
 
+
+void S2_Map_Loader::load_world() {
+	assert(get_state() == STATE_PRELOADED);
+	m_map->load_world();
+	set_state(STATE_WORLD_LOADED);
+}
+
+
 /*
 ===========
 S2_Map_Loader::load_map_complete()
@@ -136,10 +144,8 @@ the Map* can't be set to another one.
 ===========
 */
 int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
+	assert(get_state() == STATE_WORLD_LOADED);
 
-
-   // now, load the world, load the rest infos from the map
-   m_map->load_world();
    // Postload the world which provides all the immovables found on a map
    m_map->m_world->postload(game);
    m_map->set_size(m_map->m_width, m_map->m_height);

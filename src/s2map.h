@@ -141,6 +141,7 @@ class S2_Map_Loader : public Map_Loader {
 
       virtual int get_type(void) { return Map_Loader::S2ML; }
       virtual int preload_map(bool);
+	void load_world();
       virtual int load_map_complete(Editor_Game_Base*, bool scenario);
 
    private:

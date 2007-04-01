@@ -101,17 +101,20 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
    return 0;
 }
 
+
+void Widelands_Map_Loader::load_world() {
+	assert(get_state() == STATE_PRELOADED);
+	m_map->load_world();
+	set_state(STATE_WORLD_LOADED);
+}
+
+
 /*
  * Load the complete map and make sure that it runs without problems
  */
 int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
+	assert(get_state() == STATE_WORLD_LOADED);
 
-   // Load elemental data block (again)
-   Widelands_Map_Elemental_Data_Packet mp;
-   mp.Pre_Read(m_fs, m_map);
-
-   // now, load the world, load the rest infos from the map
-   m_map->load_world();
    // Postload the world which provides all the immovables found on a map
    m_map->get_world()->postload(egbase);
    m_map->set_size(m_map->m_width, m_map->m_height);

@@ -138,6 +138,7 @@ void Fullscreen_Menu_MapSelect::ok()
 
          egbase->set_map((*m_ml)->get_map());
          (*m_ml)->preload_map(m_is_scenario);
+			(*m_ml)->load_world();
          m_map = 0;
       }
 
@@ -172,7 +173,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
             sprintf(buf, "%i", m_map->get_nrplayers());
 				tanplayers.set_text(buf);
 				tadescr   .set_text(m_map->get_description());
-				taworld   .set_text(m_map->get_world_name()); //   FIXME name of worlds conf - translatable 
+				taworld   .set_text(m_map->get_world_name()); //   FIXME name of worlds conf - translatable
 				m_ok.set_enabled(true);
          } catch(std::exception& e) {
             log("Failed to load map %s: %s\n", get_mapname(), e.what());
@@ -210,7 +211,7 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint) {
  * fill the file list
  */
 void Fullscreen_Menu_MapSelect::fill_list(void) {
-	
+
    //Load maps textdomain
    i18n::grab_textdomain("maps");
 

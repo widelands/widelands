@@ -50,14 +50,20 @@ throw (_wexception)
 
 	m_wml = new Widelands_Map_Loader(*mapfs, game->get_map());
 
-   // Now load the map
-   m_wml->load_map_complete(game, true);
-   m_mol = m_wml->get_map_object_loader();
+	m_wml->preload_map(true);
+	m_wml->load_world();
 
    // DONE, mapfs gets deleted by WidelandsMapLoader
 
    return;
 }
+
+
+void Game_Map_Data_Packet::Read_Complete(Game & game) {
+	m_wml->load_map_complete(&game, true);
+	m_mol = m_wml->get_map_object_loader();
+}
+
 
 /*
  * Write Function

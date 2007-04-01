@@ -33,9 +33,14 @@ class Game_Map_Data_Packet : public Game_Data_Packet {
       Game_Map_Data_Packet(void) { m_mos = 0; m_mol = 0; m_wms = 0; m_wml = 0; }
       virtual ~Game_Map_Data_Packet();
 
+
+	/// Ensures that the world gets loaded but does not much more.
 	virtual void Read
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Loader * const = 0)
 		throw (_wexception);
+
+	void Read_Complete(Game &); ///  Loads the rest of the map.
+
 	virtual void Write
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
 		throw (_wexception);
@@ -48,7 +53,6 @@ class Game_Map_Data_Packet : public Game_Data_Packet {
       Widelands_Map_Map_Object_Loader* m_mol;
       Widelands_Map_Saver* m_wms;
       Widelands_Map_Loader* m_wml;
-
 };
 
 #endif

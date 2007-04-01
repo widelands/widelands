@@ -279,6 +279,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
          ml->preload_map(true);
 
+		ml->load_world();
 		ml->load_map_complete(&m_parent->editor(), true);
 /*      }  catch(std::exception& exe) {
          // This really shoudn't fail since maps are already preloaded (in map preview)

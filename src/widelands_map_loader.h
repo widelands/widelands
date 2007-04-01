@@ -36,6 +36,7 @@ class Widelands_Map_Loader : public Map_Loader {
       virtual int get_type(void) { return Map_Loader::WLML; }
 
       virtual int preload_map(bool);
+	void load_world();
       virtual int load_map_complete(Editor_Game_Base*, bool);
 
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }

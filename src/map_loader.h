@@ -50,6 +50,7 @@ class Map_Loader {
 
       virtual int get_type(void) = 0;
       virtual int preload_map(bool as_scenario)=0;
+	virtual void load_world() = 0;
       virtual int load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
 
       inline Map* get_map() { return m_map; }
@@ -58,6 +59,7 @@ class Map_Loader {
       enum State {
          STATE_INIT,
          STATE_PRELOADED,
+		STATE_WORLD_LOADED,
          STATE_LOADED
       };
       void set_state(State s) { m_s=s; }

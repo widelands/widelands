@@ -68,13 +68,17 @@ int Game_Loader::load_game(void) {
 	{Game_Game_Class_Data_Packet                   p; p.Read(m_fs, m_game, 0);}
    log(" done\n");
 
-   log("Game: Reading Player Info ... ");
+	log("Game: Reading Map Data ... ");
+	Game_Map_Data_Packet M;                           M.Read(m_fs, m_game, 0);
+	log(" done\n");
+
+	log("Game: Reading Player Info ... ");
 	{Game_Player_Info_Data_Packet                  p; p.Read(m_fs, m_game, 0);}
    log(" done\n");
 
-   log("Game: Reading Map Data!\n");
-	Game_Map_Data_Packet                           M; M.Read(m_fs, m_game, 0);
-   log("Game: Reading Map Data done!\n");
+	log("Game: Reading Map Data Complete!\n");
+	M.Read_Complete(*m_game);
+	log("Game: Reading Map Data Complete done!\n");
 
 	Widelands_Map_Map_Object_Loader * const mol = M.get_map_object_loader();
 
