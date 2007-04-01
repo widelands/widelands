@@ -867,6 +867,8 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		{
 			--i;
 			hollow_area.radius = it->first;
+			assert(hollow_area.radius);
+			assert(hollow_area.hole_radius < hollow_area.radius);
 			MapHollowRegion<> mr(*m_map, hollow_area);
 			do m_overlay_manager.register_overlay
 				(mr.location(),
