@@ -235,11 +235,9 @@ public:
 
 	void cleanup(Editor_Game_Base *g);
 
-	inline Map_Object* get_object(uint serial) {
-		objmap_t::iterator it = m_objects.find(serial);
-		if (it == m_objects.end())
-			return 0;
-		return it->second;
+	Map_Object * get_object(const uint serial) const {
+		const objmap_t::const_iterator it = m_objects.find(serial);
+		return it != m_objects.end() ? it->second : 0;
 	}
 
 	void insert(Map_Object *obj);
