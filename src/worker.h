@@ -83,6 +83,7 @@ class Worker_Descr : public Bob_Descr {
    inline const BuildCost* get_buildcost() { return &m_buildcost; }
 
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
+	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
 	const std::string & descname() const throw () {return m_descname;}
    inline std::string get_helptext() const { return m_helptext; }
 
