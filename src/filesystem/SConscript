@@ -1,0 +1,16 @@
+Import('*')
+
+SRC=Glob('*.cc')
+
+srcenv.Append(INDENTLIST=[
+	'filesystem/disk_filesystem.h',
+	'filesystem/disk_filesystem.cc',
+	'filesystem/filesystem.h',
+	'filesystem/filesystem_exceptions.h',
+	'filesystem/layered_filesystem.h',
+	'filesystem/layered_filesystem.cc',
+	'filesystem/zip_exceptions.h',
+	])
+
+lib=srcenv.StaticLibrary(target='filesystem', source=SRC)
+

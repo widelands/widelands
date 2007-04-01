@@ -102,7 +102,7 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
-	opts.Add('build', 'debug-no-parachute / debug-slow / debug-efence / debug(debug) / release / profile', 'debug')
+	opts.Add('build', 'debug-no-parachute / debug-slow / debug-efence / debug(default) / release / profile', 'debug')
 	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '')
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')

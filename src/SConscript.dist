@@ -11,4 +11,5 @@ distadd(env, 'src/build_id.h.default')
 SConscript('editor/SConscript.dist')
 SConscript('ui/ui_basic/SConscript.dist')
 SConscript('ui/ui_fs_menus/SConscript.dist')
+SConscript('filesystem/SConscript.dist')
 
