@@ -423,12 +423,14 @@ void Map::create_empty_map
    set_scenario_player_name(1, _("Player 1"));
 
 	{
+		Field::Terrains default_terrains;
+		default_terrains.d = 0;
+		default_terrains.r = 0;
 		Field * field = m_fields;
 		const Field * const fields_end = field + max_index();
 		for (; field < fields_end; ++field) {
 			field->set_height(10);
-			field->set_terrain_d(0);
-			field->set_terrain_r(0);
+			field->set_terrains(default_terrains);
 		}
 	}
    recalc_whole_map();
