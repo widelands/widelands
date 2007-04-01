@@ -594,8 +594,6 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 {
 	Map_Object* allow = m_leave_allow.get(g);
 
-	molog("Building::leave_check_and_wait\n");
-
 	if (w == allow) {
 		m_leave_allow = 0;
 		return true;
@@ -607,15 +605,12 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 	if (!m_leave_queue.size())
 	{
 		if ((int)(time - m_leave_time) >= 0) {
-			molog("Building::leave_check_and_wait: Leave now\n");
 			m_leave_time = time + BUILDING_LEAVE_INTERVAL;
 			return true;
 		}
 
 		schedule_act(g, m_leave_time - time);
 	}
-
-	molog("Building::leave_check_and_wait: Put on queue\n");
 
 	m_leave_queue.push_back(w);
 	return false;
