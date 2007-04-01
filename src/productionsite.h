@@ -123,7 +123,7 @@ protected:
 	struct State {
 		const ProductionProgram * program; //  currently running program
 		int  ip;    //  instruction pointer
-		int  phase; //  micro-step index (instruction dependent)
+		uint phase; //  micro-step index (instruction dependent)
 		uint flags; //  pfXXX flags
 	};
 
@@ -133,7 +133,7 @@ protected:
 
 	State* get_current_program() { return m_program.size() ? &*m_program.rbegin() : 0; }
 	void program_act(Game* g);
-	void program_step();
+	void program_step(const uint phase = 0);
 	void program_start(Game* g, std::string name);
 	void program_end(Game* g, bool success);
 	void add_statistics_value(bool val);
