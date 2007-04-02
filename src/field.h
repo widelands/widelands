@@ -110,11 +110,11 @@ struct Field {
 	};
 
 	typedef Uint8 Height;
+	typedef Uint8 Resource_Amount;
 
-	struct Terrains {
-		Terrain_Descr::Index d : 4;
-		Terrain_Descr::Index r : 4;
-	};
+	struct Terrains         {Terrain_Descr::Index  d : 4, r : 4;};
+	struct Resources        {Resource_Descr::Index d : 4, r : 4;};
+	struct Resource_Amounts {Resource_Amount       d : 4, r : 4;};
 
 private:
    Height height;
