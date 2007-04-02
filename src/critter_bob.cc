@@ -328,7 +328,6 @@ void Critter_Bob::program_update(Game* g, State* state)
 	for(;;)
 	{
       const Critter_BobProgram* program=static_cast<const Critter_BobProgram*>(state->program);
-		molog("[program]: %s#%i\n", program->get_name().c_str(), state->ivar1);
 
 		if (state->ivar1 >= program->get_size()) {
 			molog("  End of program\n");

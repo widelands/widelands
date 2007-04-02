@@ -2554,7 +2554,6 @@ void Worker::program_update(Game* g, State* state)
 	for(;;)
 	{
       const WorkerProgram* program=static_cast<const WorkerProgram*>(state->program);
-		molog("[program]: %s#%i\n", program->get_name().c_str(), state->ivar1);
 
 		if (state->ivar1 >= program->get_size()) {
 			molog("  End of program\n");
@@ -3080,7 +3079,6 @@ void Worker::leavebuilding_update(Game* g, State* state)
 	BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
 	if (!position || position->get_type() != BUILDING) {
-		molog("[leavebuilding]: Left the building successfully\n");
 		pop_task();
 		return;
 	}
