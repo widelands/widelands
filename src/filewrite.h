@@ -105,6 +105,9 @@ private:
 	size_t length;
 	size_t maxsize;
 	Pos    filepos;
+
+	FileWrite & operator=(const FileWrite &);
+	FileWrite            (const FileWrite &);
 };
 
 #endif

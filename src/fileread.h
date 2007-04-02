@@ -122,6 +122,9 @@ private:
 	Pos    filepos;
 	Pos    prevpos;
 	size_t length;
+
+	FileRead & operator=(const FileRead &);
+	FileRead            (const FileRead &);
 };
 
 #endif
