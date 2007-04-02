@@ -121,6 +121,9 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
         m_state = gs_running;
 
+	m_maploader->preload_map(scenario);
+	m_maploader->load_world();
+
     // We have to create the players here
    for( uint i = 1; i <= m->get_nrplayers(); i++)
 		add_player
