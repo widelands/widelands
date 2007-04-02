@@ -355,8 +355,9 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1); //  FIXME memory leak!
-		if (fread(data, size, 1, file) != 1)
-			throw wexception("Read failed for %s (%s)", fname.c_str(), fullname.c_str());
+		if (size and fread(data, size, 1, file) != 1) throw wexception
+			("RealFSImpl::Load: read failed for %s (%s) with size %u",
+			 fname.c_str(), fullname.c_str(), size);
 		((char *)data)[size] = 0;
 
 		fclose(file);
