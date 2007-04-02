@@ -48,7 +48,7 @@ template <typename Area_type= Area<> > struct MapDifferenceRegion {
 		--direction; if (not direction) direction = 6;
 		switch (direction) {
 		case Map_Object::WALK_NW:
-			for (; area.radius; --area.radius) map.get_tln(m_area, m_area);
+			for (; area.radius; --area.radius) map.get_tln(m_area, &m_area);
 			break;
 		case Map_Object::WALK_NE:
 			for (; area.radius; --area.radius) map.get_trn(m_area, &m_area);
