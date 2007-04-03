@@ -1,13 +1,13 @@
 CREDITS
 =======
 
-Widelands uses a lot of librarys and files,
+Widelands uses a lot of libraries and files,
 which are distributed by other Open-Source Projects.
-And you hardly can believe, that widelands still 
-would be in stoneage, if not using these files :-).
+And you really can believe, that widelands still 
+would be in the stoneage, if not for using these files :-).
 
 The Widelands Development Team wants to thank
-the following Projects:
+the following projects:
 
 
     libSDL
@@ -63,7 +63,7 @@ and last but not least:
 
     http://www.Sourceforge.net 
     * for their Portal
-    * cvs-server
+    * subversion server
     * and many more services :-)
     
 

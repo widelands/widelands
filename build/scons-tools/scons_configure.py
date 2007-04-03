@@ -320,6 +320,7 @@ def do_configure(config_h_file, conf, env):
 			env.Exit(1)
 
 	conf.CheckCompilerFlag('-fstack-protector-all', env)
+	conf.CheckCompilerFlag('-fbounds-check', env)
 	conf.CheckCompilerFlag('-pipe', env)
 	conf.CheckCompilerFlag('-Wall', env)
 	conf.CheckCompilerFlag('-Wcast-align', env)

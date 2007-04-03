@@ -1446,7 +1446,7 @@ void Road::mark_map(Editor_Game_Base *g)
 			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir >= 0 && rdir <= 4)
+			if (rdir <= 4)
 				curf.field->set_road(rdir, m_type);
 		}
 
@@ -1455,7 +1455,7 @@ void Road::mark_map(Editor_Game_Base *g)
 			const Direction dir  = m_path[steps];
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir >= 0 && rdir <= 4)
+			if (rdir <= 4)
 				curf.field->set_road(rdir, m_type);
 
 			map->get_neighbour(curf, dir, &curf);
@@ -1485,7 +1485,7 @@ void Road::unmark_map(Editor_Game_Base *g)
 			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir >= 0 && rdir <= 4)
+			if (rdir <= 4)
 				curf.field->set_road(rdir, Road_None);
 		}
 
@@ -1494,7 +1494,7 @@ void Road::unmark_map(Editor_Game_Base *g)
 			const Direction  dir = m_path[steps];
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir >= 0 && rdir <= 4)
+			if (rdir <= 4)
 				curf.field->set_road(rdir, Road_None);
 
 			map->get_neighbour(curf, dir, &curf);
