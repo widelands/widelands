@@ -403,7 +403,7 @@ void TrainingSite::drop_soldier(uint serial)
 		Soldier *s = m_soldiers[i];
 		while ((s->get_serial() != serial) && (i < (int) m_soldiers.size())) {
 			i++;
-			s = m_soldiers[i];
+			s = m_soldiers.at(i);
 		}
 		if ((i < (int) m_soldiers.size()) && (s->get_serial() == serial)) {
 			drop_soldier(g, i);
