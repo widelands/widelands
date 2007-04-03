@@ -461,7 +461,7 @@ void MilitarySite::drop_soldier (Game *g, int nr)
       s->set_location(0);
 
       for (uint i = nr; i < m_soldiers.size(); i++)
-         m_soldiers[i] = m_soldiers[i+1];
+         m_soldiers[i] = m_soldiers.at(i+1);
 
       m_soldiers.pop_back();
 
