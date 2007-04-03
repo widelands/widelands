@@ -455,7 +455,7 @@ void MilitarySite::drop_soldier (Game *g, int nr)
       if ((nr < 0) || (nr > (int) m_soldiers.size()))
          return;
 
-      s = m_soldiers[nr];
+      s = m_soldiers.at(nr);
 
       assert (s);
       s->set_location(0);
