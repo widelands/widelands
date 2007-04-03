@@ -460,8 +460,16 @@ void MilitarySite::drop_soldier (Game *g, int nr)
       assert (s);
       s->set_location(0);
 
-      for (uint i = nr; i < m_soldiers.size(); i++)
-         m_soldiers[i] = m_soldiers.at(i+1);
+	{
+		const std::vector<Soldier *>::const_iterator soldiers_end =
+			m_soldiers.end();
+		for
+			(std::vector<Soldier *>::iterator
+			 current = m_soldiers.begin() + nr, next = current + 1;
+			 next < soldiers_end;
+			 current = next, ++next)
+			*current = *next;
+	}
 
       m_soldiers.pop_back();
 
