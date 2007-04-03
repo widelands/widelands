@@ -93,11 +93,20 @@ void Map_View::draw(RenderTarget* dst)
 		m_complete_redraw_needed = true;
 
 	egbase.map().overlay_manager().load_graphics();
-   dst->rendermap
+	if
+		(const Interactive_Player * const interactive_player =
+		 dynamic_cast<const Interactive_Player * const>(&intbase()))
+		dst->rendermap
 		(egbase,
-		 intbase().get_visibility(),
+		 &interactive_player->player(),
 		 m_viewpoint,
 		 m_complete_redraw_needed);
+	else dst->rendermap
+		(egbase,
+		 0,
+		 m_viewpoint,
+		 m_complete_redraw_needed);
+
    m_complete_redraw_needed = false;
 }
 

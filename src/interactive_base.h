@@ -56,8 +56,8 @@ struct Interactive_Base : public Map_View {
 		static int get_yres();
 	bool m_show_workarea_preview;
 
-      // get visibility, for drawing
-      virtual std::vector<bool>* get_visibility(void) = 0;
+	//  point of view for drawing
+	virtual Player * get_player() const throw () = 0;
 
       // logic handler func
       void think();

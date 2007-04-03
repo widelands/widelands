@@ -502,6 +502,18 @@ void Warehouse::act(Game* g, uint data)
 
 		if (stock < 100) {
 			tdelta -= 4*(100 - stock);
+			if
+				(not
+				 (Building::get_workers().size() | m_incorporated_workers.size()))
+			{
+				//  The first worker will be created in the building so it should
+				//  start seeing.
+				Player & player = owner();
+				Map    & map    = player.egbase().map();
+				player.see_area
+					(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+				log("Warehouse::act: started seeing\n");
+			}
 			insert_workers(id, 1);
 		} else if (stock > 100) {
 			tdelta -= 4*(stock - 100);
@@ -1165,4 +1177,26 @@ void Warehouse::conquered_by (Player* pl)
    assert (pl);
    molog ("destroying\n");
 	cleanup(&pl->egbase());
+}
+
+void Warehouse::add_worker(Worker * worker) {
+	if (not (Building::get_workers().size() | m_incorporated_workers.size())) {
+		//  The first worker will enter the building so it should start seeing.
+		Player & player = owner();
+		Map    & map    = player.egbase().map();
+		player.see_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+	}
+	PlayerImmovable::add_worker(worker);
+}
+
+void Warehouse::remove_worker(Worker * worker) {
+	PlayerImmovable::remove_worker(worker);
+	if (not (Building::get_workers().size() | m_incorporated_workers.size())) {
+		//  The last worker has left the building so it should stop seeing.
+		Player & player = owner();
+		Map    & map    = player.egbase().map();
+		player.unsee_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+	}
 }

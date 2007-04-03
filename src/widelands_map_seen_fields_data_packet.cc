@@ -59,33 +59,31 @@ throw (_wexception)
    // read packet version
    int packet_version=fr.Unsigned16();
 
-	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 		compile_assert(MAX_PLAYERS < 32);
 		Map & map = egbase->map();
 		const Uint8 nr_players = map.get_nrplayers();
 		const Map::Index max_index = map.max_index();
-		if (skip) fr.Data
-			(max_index * (packet_version == 1 ? sizeof(Uint16) : sizeof(Uint32)));
-		else if (packet_version == 1) for (Map::Index i = 0; i < max_index; ++i) {
+	if (packet_version == 1) for (Map::Index i = 0; i < max_index; ++i) {
 			const Uint32 data = fr.Unsigned16();
 			for (Uint8 j = 0; j < nr_players;) {
-				const bool see = data & (1 << j);
+			const Vision see = data & 1 << j;
 				++j;
 				if (Player * const player = egbase->get_player(j))
-					player->set_field_seen(i, see);
+				player->m_fields[i].vision = see;
 				else if (see) log
 					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
 					 "%i, which does not exist, sees field %i.\n",
 					 j,
 					 i);
 			}
-		} else for (Map::Index i = 0; i < max_index; ++i) {
+	} else if (packet_version == CURRENT_PACKET_VERSION)
+		for (Map::Index i = 0; i < max_index; ++i) {
 			const Uint32 data = fr.Unsigned32();
 			for (Uint8 j = 0; j < nr_players;) {
-				const bool see = data & (1 << j);
+				const Vision see = data & 1 << j;
 				++j;
 				if (Player * const player = egbase->get_player(j))
-					player->set_field_seen(i, see);
+					player->m_fields[i].vision = see;
 				else if (see) log
 					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
 					 "%i, which does not exist, sees field %i.\n",
@@ -93,7 +91,7 @@ throw (_wexception)
 					 i);
 			}
 		}
-	} else throw wexception
+	else throw wexception
 		("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %i\n",
 		 packet_version);
 }
@@ -121,7 +119,7 @@ throw (_wexception)
 		for (Uint8 j = 0; j < nr_players;) {
 			const Uint8 player_index = j + 1;
 			if (const Player * const player = egbase->get_player(player_index))
-				data |= (player->is_field_seen(i) << j);
+				data |= ((0 < player->vision(i)) << j);
 			j = player_index;
 		}
 		fw.Unsigned32(data);

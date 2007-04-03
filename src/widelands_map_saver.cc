@@ -49,6 +49,8 @@
 #include "widelands_map_owned_fields_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 #include "widelands_map_player_position_data_packet.h"
+#include "widelands_map_players_areawatchers_data_packet.h"
+#include "widelands_map_players_view_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
@@ -254,6 +256,17 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
 
    log("Writing Seen-Fields Data ... ");
 	{Widelands_Map_Seen_Fields_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+   log("done!\n ");
+
+   log("Writing Area Watchers Data ... ");
+	{
+		Widelands_Map_Players_AreaWatchers_Data_Packet  p;
+		p.Write(m_fs, m_egbase, m_mos);
+	}
+   log("done!\n ");
+
+   log("Writing Players Unseen Data ... ");
+	{Widelands_Map_Players_View_Data_Packet p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
 

@@ -770,3 +770,27 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
    molog("m_leave_queue.size(): %i\n", m_leave_queue.size());
    molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
 }
+
+
+void Building::add_worker(Worker * worker) {
+	if (not get_workers().size()) {
+		//  The first worker will enter the building so it should start seeing.
+		Player & player = owner();
+		Map    & map    = player.egbase().map();
+		player.see_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+	}
+	PlayerImmovable::add_worker(worker);
+}
+
+
+void Building::remove_worker(Worker * worker) {
+	PlayerImmovable::remove_worker(worker);
+	if (not get_workers().size()) {
+		//  The last worker has left the building so it should stop seeing.
+		Player & player = owner();
+		Map    & map    = player.egbase().map();
+		player.unsee_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+	}
+}

@@ -202,8 +202,6 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
    m_state = gs_running;
 
-   make_influence_map ();  // This is needed to call after load a map :)
-
    return run(true);
 }
 

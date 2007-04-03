@@ -67,18 +67,13 @@ public:
 
 	virtual void rendermap
 		(const Editor_Game_Base &,
-		 const std::vector<bool> * const visibility,
+		 const Player * const,
 		 Point viewofs,
 		 const bool draw_all)
 		= 0;
 	virtual void renderminimap
 		(const Editor_Game_Base  &,
-		 const std::vector<bool> & visibility,
-		 const Point               viewpoint,
-		 const uint                flags)
-		= 0;
-	virtual void renderminimap
-		(const Editor_Game_Base  &,
+		 const Player * const,
 		 const Point               viewpoint,
 		 const uint                flags)
 		= 0;

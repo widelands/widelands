@@ -31,6 +31,7 @@
 #include "sound_handler.h"
 #include "attack_controller.h"
 
+extern Map_Object_Descr g_road_descr;
 
 //
 //
@@ -49,7 +50,8 @@ m_see_all(false),
 m_egbase (the_egbase),
 m_type   (type),
 m_plnum  (plnum),
-m_tribe  (tribe_descr)
+m_tribe  (tribe_descr),
+m_fields (0)
 {
 
 	for(int i = 0; i < 4; i++)
@@ -63,12 +65,10 @@ m_tribe  (tribe_descr)
    for(i=0; i<m_tribe.get_nrbuildings(); i++)
       m_allowed_buildings[i]=true;
 
-   // Resize the visibility array, so that it is large enough
-   // init() will shrink it again
-   seen_fields.resize(1024*1024);
 }
 
 Player::~Player() {
+	delete[] m_fields;
 }
 /*
 ===============
@@ -79,9 +79,6 @@ Prepare the player for in-game action
 */
 void Player::init(const bool place_headquarters) {
 	const Map & map = egbase().map();
-
-	seen_fields.resize(map.max_index(), false);
-
 	if (place_headquarters) {
 		const Tribe_Descr & trdesc = m_tribe;
 		Player_Area<Area<FCoords> > starting_area
@@ -136,24 +133,6 @@ FieldCaps Player::get_buildcaps(const FCoords fc) const {
 	}
 
 	return static_cast<const FieldCaps>(buildcaps);
-}
-
-
-/*
-===============
-Player::set_area_seen
-
-Mark the given area as (un)seen
-===============
-*/
-void Player::set_area_seen(const Area<> area, const bool on) {
-	const Map & map = egbase().map();
-	const X_Coordinate mapwidth = map.get_width();
-	MapRegion<> mr(map, area);
-	do set_field_seen(Map::get_index(mr.location(), mapwidth), on);
-	while (mr.advance(map));
-
-   m_view_changed = true;
 }
 
 
@@ -540,4 +519,101 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
          log("Player sent bad enemyflagaction = %i\n", action);
 		}
    }
+}
+
+
+inline void Player::discover_node
+(const Map     & map,
+ const ::Field & first_map_field,
+ const FCoords   f,
+ Field         & field)
+throw ()
+{
+	assert(0 <= f.x);
+	assert(f.x < map.get_width());
+	assert(0 <= f.y);
+	assert(f.y < map.get_height());
+	assert(&map[0] <= f.field);
+	assert           (f.field < &map[0] + map.max_index());
+	assert(m_fields <= &field);
+	assert            (&field < m_fields + map.max_index());
+	assert(field.vision <= 1);
+
+	{// discover everything (above the ground) in this field
+		field.terrains = f.field->get_terrains();
+		field.roads    = f.field->get_roads   ();
+		field.owner    = f.field->get_owned_by();
+		{//  map_object_descr[TCoords::None]
+
+			const Map_Object_Descr * map_object_descr;
+			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
+				map_object_descr = &base_immovable->descr();
+				if (map_object_descr == &g_road_descr) map_object_descr = 0;
+				else if
+					(const Building * const building =
+					 dynamic_cast<const Building * const>(base_immovable))
+					if (building->get_position() != f)
+						//  TODO This is not the buildidng's main position so we can
+						//  TODO not see it. But it should be possible to see it from
+						//  TODO a distance somehow.
+						map_object_descr = 0;
+			} else map_object_descr = 0;
+			field.map_object_descr[TCoords<>::None] = map_object_descr;
+		}
+	}
+	{//  discover the D triangle and the SW edge of the top right neighbour field
+		FCoords tr = map.tr_n(f);
+		Field & tr_field = m_fields[tr.field - &first_map_field];
+		if (tr_field.vision <= 1) {
+			tr_field.terrains.d = tr.field->terrain_d();
+			tr_field.roads &= ~(Road_Mask << Road_SouthWest);
+			tr_field.roads |= Road_Mask << Road_SouthWest & tr.field->get_roads();
+		}
+	}
+	{//  discover both triangles and the SE edge of the top left  neighbour field
+		FCoords tl = map.tl_n(f);
+		Field & tl_field = m_fields[tl.field - &first_map_field];
+		if (tl_field.vision <= 1) {
+			tl_field.terrains = tl.field->get_terrains();
+			tl_field.roads &= ~(Road_Mask << Road_SouthEast);
+			tl_field.roads |= Road_Mask << Road_SouthEast & tl.field->get_roads();
+		}
+	}
+	{//  discover the R triangle and the  E edge of the     left  neighbour field
+		FCoords l = map.l_n(f);
+		Field & l_field = m_fields[l.field - &first_map_field];
+		if (l_field.vision <= 1) {
+			l_field.terrains.r = l.field->terrain_r();
+			l_field.roads &= ~(Road_Mask << Road_East);
+			l_field.roads |= Road_Mask << Road_East & l.field->get_roads();
+		}
+	}
+}
+
+void Player::see_node
+(const Map                  & map,
+ const ::Field              & first_map_field,
+ const FCoords                f,
+ const Editor_Game_Base::Time gametime,
+ const bool                   lasting)
+throw ()
+{
+	assert(0 <= f.x);
+	assert(f.x < map.get_width());
+	assert(0 <= f.y);
+	assert(f.y < map.get_height());
+	assert(&map[0] <= f.field);
+	assert           (f.field < &first_map_field + map.max_index());
+
+	Field & field = m_fields[f.field - &first_map_field];
+	assert(m_fields <= &field);
+	assert            (&field < m_fields + map.max_index());
+	Vision vision = field.vision;
+	if (vision == 0) vision = 1;
+	if (vision == 1) {
+		if (not lasting) field.time_node_last_unseen = gametime;
+		discover_node(map, first_map_field, f, field);
+	}
+	vision += lasting;
+	field.vision = vision;
 }

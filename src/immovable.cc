@@ -101,6 +101,8 @@ void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 	assert(f->immovable == this);
 
 	f->immovable = 0;
+	g->inform_players_about_immovable
+		(Map::get_index(c, g->map().get_width()), 0);
 
 	if (get_size() >= SMALL) {
 		Map & map = g->map();

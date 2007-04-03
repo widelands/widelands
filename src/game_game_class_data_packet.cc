@@ -22,7 +22,7 @@
 #include "game.h"
 #include "game_game_class_data_packet.h"
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 /*
  * Destructor
@@ -44,7 +44,7 @@ throw (_wexception)
    // read packet version
 	const Uint16 packet_version = fr.Unsigned16();
 
-	if (packet_version == CURRENT_PACKET_VERSION) {
+	if (packet_version <= CURRENT_PACKET_VERSION) {
       // Can't load netgames
       game->m_netgame=0;
 
@@ -53,20 +53,6 @@ throw (_wexception)
 
       game->m_gametime=fr.Unsigned32();
 
-		std::vector<Player_Area<> > & conquer_info = game->m_conquer_info;
-		conquer_info.resize(fr.Unsigned16());
-		const std::vector<Player_Area<> >::const_iterator conquer_info_end =
-			conquer_info.end();
-		for
-			(std::vector<Player_Area<> >::iterator it = conquer_info.begin();
-			 it != conquer_info_end;
-			 ++it)
-		{
-			it->player_number = fr.Unsigned8 ();
-			it->x             = fr.Unsigned16();
-			it->y             = fr.Unsigned16();
-			it->radius        = fr.Unsigned16();
-		}
    } else throw wexception
 	   ("Unknown version in Game_Game_Class_Data_Packet: %u\n", packet_version);
 }
@@ -112,29 +98,6 @@ throw (_wexception)
    // Map is handled by map saving
 
    // Track pointers are not saved in save games
-
-   // Conquer info
-	const std::vector<Player_Area<> > & conquer_info = game->m_conquer_info;
-   fw.Unsigned16(game->m_conquer_info.size());
-	const std::vector<Player_Area<> >::const_iterator conquer_info_end =
-		conquer_info.end();
-	for
-		(std::vector<Player_Area<> >::const_iterator it = conquer_info.begin();
-		 it != conquer_info_end;
-		 ++it)
-	{
-		fw.Unsigned8 (it->player_number);
-		assert(0 <= it->x);
-		fw.Unsigned16(it->x);
-		assert(0 <= it->y);
-		fw.Unsigned16(it->y);
-		assert
-			(it->radius
-			 <=
-			 static_cast<const typeof(it->radius)>
-			 (std::numeric_limits<Uint16>::max()));
-		fw.Unsigned16(it->radius);
-   }
 
    fw.Write( fs, "binary/game_class" );
 }

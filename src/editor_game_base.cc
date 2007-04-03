@@ -18,6 +18,7 @@
  */
 
 #include <set>
+#include "areawatcher.h"
 #include "battle.h"
 #include "building.h"
 #include "editor_game_base.h"
@@ -34,6 +35,8 @@
 #include "world.h"
 #include "error.h"
 #include "attack_controller.h"
+
+extern Map_Object_Descr g_road_descr;
 
 // hard-coded playercolors
 const uchar g_playercolors[MAX_PLAYERS][12] = {
@@ -101,7 +104,6 @@ m_map               (0),
 m_lasttrackserial   (0)
 {
 	memset(m_players, 0, sizeof(m_players));
-   memset (m_conquer_map, 0, sizeof (m_conquer_map));
 }
 
 /*
@@ -130,8 +132,6 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 /*
 ===============
-Editor_Game_Base::unconquer_area
-
 This unconquers a area. This is only possible, when there
 is a building placed on this field
 ===============
@@ -143,6 +143,9 @@ void Editor_Game_Base::unconquer_area
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert     (player_area.y < map().get_height());
+	const Field & first_field = map()[0];
+	assert(&first_field <= player_area.field);
+	assert                (player_area.field < &first_field + map().max_index());
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 
@@ -151,29 +154,8 @@ void Editor_Game_Base::unconquer_area
 		dynamic_cast<const Building &>(*map().get_immovable(player_area));
 	assert(building.owner().get_player_number() == player_area.player_number);
 
-	std::vector<Player_Area<> >::iterator this_conquer_info =
-		m_conquer_info.begin();
-	log
-		("Editor_Game_Base::unconquer_area: (%i, %i) radius %u, player %u:\n",
-		 player_area.x, player_area.y, player_area.radius,
-		 player_area.player_number);
-	for (;;) {
-		assert(this_conquer_info != m_conquer_info.end());
-		log
-			("\tcomparing with (%i, %i)\n",
-			 this_conquer_info->x, this_conquer_info->y);
-		if (this_conquer_info->Coords::operator==(player_area)) break;
-		++this_conquer_info;
-	}
-	assert(this_conquer_info->player_number == player_area.player_number);
-	assert(this_conquer_info->radius        == player_area.radius);
-
    // step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);
-
-   // step 2: remove this building out ot m_conquer_info
-	*this_conquer_info = m_conquer_info.back();
-   m_conquer_info.pop_back();
 
 	// step 5: deal with player immovables in the lost area
 	//  Players are not allowed to have their immovables on their borders.
@@ -197,12 +179,12 @@ void Editor_Game_Base::conquer_area(Player_Area<Area<FCoords> > player_area) {
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert(player_area.y < map().get_height());
+	const Field & first_field = map()[0];
+	assert(&first_field <= player_area.field);
+	assert                (player_area.field < &first_field + map().max_index());
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 
-	m_conquer_info.push_back
-		(Player_Area<>
-		 (player_area.player_number, Area<>(player_area, player_area.radius)));
 	do_conquer_area(player_area, true);
 
 	//  Players are not allowed to have their immovables on their borders.
@@ -225,22 +207,11 @@ and might be consumed..
 */
 void Editor_Game_Base::conquer_area_no_building
 (const Player_Area<Area<FCoords> > player_area)
-{
-	assert(0 <= player_area.x);
-	assert(player_area.x < map().get_width());
-	assert(0 <= player_area.y);
-	assert(player_area.y < map().get_height());
-	assert(0 < player_area.player_number);
-	assert    (player_area.player_number <= map().get_nrplayers());
-
-	do_conquer_area(player_area, true);
-}
+{do_conquer_area(player_area, true);}
 
 
 /**
 ===============
-Editor_Game_Base::do_conquer_area [private]
-
 Conquers the given area for that player; does the actual work
 Additionally, it updates the visible area for that player.
 ===============
@@ -249,7 +220,6 @@ void Editor_Game_Base::do_conquer_area
 (Player_Area<Area<FCoords> > player_area,
  const bool conquer,
  const Player_Number preferred_player,
- const Uint8 vision_range,
  const bool neutral_when_no_influence,
  const bool neutral_when_competing_influence,
  const bool conquer_guarded_location_by_superior_influence)
@@ -266,6 +236,7 @@ void Editor_Game_Base::do_conquer_area
 	assert    (preferred_player          <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
 	assert(not conquer or not preferred_player);
+	Player & conquering_player = player(player_area.player_number);
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
 		const Map::Index index = mr.location().field - &first_field;
@@ -284,50 +255,65 @@ void Editor_Game_Base::do_conquer_area
 		if (conquer) {
           // Adds the influence
 			Military_Influence new_influence_modified =
-				m_conquer_map[player_area.player_number][index] += influence;
+				conquering_player.military_influence(index) += influence;
 			if (owner and not conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
-			if (m_conquer_map[owner][index] < new_influence_modified) {
+			if
+				(not owner
+				 or
+				 player(owner).military_influence(index) < new_influence_modified)
+			{
 				if (owner) player_field_notification(mr.location(), LOSE);
 				mr.location().field->set_owned_by(player_area.player_number);
 				player_field_notification (mr.location(), GAIN);
          }
 		} else if
-			((m_conquer_map[player_area.player_number][index] -= influence) == 0
+			(not (conquering_player.military_influence(index) -= influence)
 			 and
 			 owner == player_area.player_number)
 		{
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
-			const Player_Number nr_players = map().get_nrplayers();
-			Player_Number best_player =
-				neutral_when_no_influence ? 0 : player_area.player_number;
-			Military_Influence best_value = 0;
-			for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
-				if (const Military_Influence value = m_conquer_map[plnum][index])
-					if        (value >  best_value) {
-						best_value = value;
-						best_player = plnum;
-					} else if (value == best_value) {
-						const Coords c = map().get_fcoords(map()[index]);
-						log
-							("Editor_Game_Base::do_conquer_area: Player %u completely "
-							 "lost influence over (%i, %i). Players %u and %u, both "
-							 "have influence %i there. Depending on game rules, the "
-							 "location will not change ownership or it will become "
-							 "neutral (unless another player has higher influence).\n",
-							 player_area.player_number, c.x, c.y, best_player, plnum,
-							 value);
-						best_player = neutral_when_competing_influence ?
-							0 : player_area.player_number;
-					}
-			m_conquer_map[0][index] = best_value;
-			if (preferred_player and m_conquer_map[preferred_player][index])
+			Player_Number best_player;
+			if
+				(preferred_player
+				 and
+				 player(preferred_player).military_influence(index))
 				best_player = preferred_player;
+			else {
+				best_player =
+					neutral_when_no_influence ? 0 : player_area.player_number;
+				Military_Influence highest_military_influence = 0;
+				const Player_Number nr_players = map().get_nrplayers();
+				for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
+					if
+						(const Military_Influence value =
+						 player(plnum).military_influence(index))
+						if        (value >  highest_military_influence) {
+							highest_military_influence = value;
+							best_player = plnum;
+						} else if (value == highest_military_influence) {
+							const Coords c = map().get_fcoords(map()[index]);
+							log
+								("Editor_Game_Base::do_conquer_area: Player %u "
+								 "completely lost influence over (%i, %i). Players %u "
+								 "and %u, both have influence %i there. Depending on "
+								 "game rules, the location will not change ownership "
+								 "or it will become neutral (unless another player has "
+								 "higher influence).\n",
+								 player_area.player_number,
+								 c.x, c.y,
+								 best_player, plnum,
+								 value);
+							best_player = neutral_when_competing_influence ?
+								0 : player_area.player_number;
+						}
+			}
 			if (best_player != player_area.player_number) {
 				player_field_notification (mr.location(), LOSE);
 				mr.location().field->set_owned_by (best_player);
+				inform_players_about_ownership(index, best_player);
 				if (best_player) player_field_notification (mr.location(), GAIN);
          }
       }
@@ -337,9 +323,6 @@ void Editor_Game_Base::do_conquer_area
 	//  of neighbour players.
 	++player_area.radius;
 	map().recalc_for_field_area(player_area);
-
-	player(player_area.player_number).set_area_seen
-		(Area<>(player_area, player_area.radius + vision_range), true);
 }
 
 
@@ -467,6 +450,27 @@ Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
    return 0;
 }
 
+void Editor_Game_Base::inform_players_about_ownership
+(const Map::Index i, const Player_Number new_owner)
+{
+	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
+		if (Player * const p = m_players[plnum]) {
+			Player::Field & player_field = p->m_fields[i];
+			if (1 < player_field.vision) player_field.owner = new_owner;
+		}
+}
+void Editor_Game_Base::inform_players_about_immovable
+(const Map::Index i, const Map_Object_Descr * const descr)
+{
+	if (descr != &g_road_descr) for
+		(Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
+		if (Player * const p = m_players[plnum]) {
+			Player::Field & player_field = p->m_fields[i];
+			if (1 < player_field.vision)
+				player_field.map_object_descr[TCoords<>::None] = descr;
+		}
+}
+
 /*
 ===============
 Editor_Game_Base::set_map
@@ -483,6 +487,12 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 
    // Register map_variable callback
    g_fh->register_variable_callback( g_MapVariableCallback, m_map);
+}
+
+
+void Editor_Game_Base::allocate_player_maps() {
+	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
+		if (m_players[i]) m_players[i]->allocate_map();
 }
 
 
@@ -642,6 +652,7 @@ Immovable *Editor_Game_Base::create_immovable
       descr = tribe->get_immovable_descr(idx);
 	assert(descr);
 
+	inform_players_about_immovable(Map::get_index(c, map().get_width()), descr);
 	return descr->create(this, c);
 }
 
@@ -798,63 +809,62 @@ void Editor_Game_Base::cleanup_for_load
       }
 
    m_map->cleanup();
-
-   m_conquer_info.resize(0);
 }
 
 
-// BEGIN Support for influece map in load/saved games
-/**
- * Editor_Game_Base::make_influence_map
- *
- *    This method rebuilds the influence map of the full game. It should be called just after
- * load a game, and it can be called after every MilitarySite creation/remove, but may not
- * be efficient enought.
- */
-void Editor_Game_Base::make_influence_map ()
+void Editor_Game_Base::set_road
+(const FCoords f, const Uint8 direction, const Uint8 roadtype)
 {
-   log("Making influence map\n");
+	const Map & m = map();
+	const Field & first_field = m[0];
+	assert(0 <= f.x);
+	assert(f.x < m.get_width());
+	assert(0 <= f.y);
+	assert(f.y < m.get_height());
+	assert(&first_field <= f.field);
+	assert                (f.field < &first_field + m.max_index());
+	assert
+		(direction == Road_SouthWest or
+		 direction == Road_SouthEast or
+		 direction == Road_East);
+	assert
+		(roadtype == Road_None or roadtype == Road_Normal or
+		 roadtype == Road_Busy or roadtype == Road_Water);
 
-      // Clean influce maps
-   memset (m_conquer_map, 0, sizeof (m_conquer_map));
+	if (f.field->get_road(direction) == roadtype) return;
+	f.field->set_road(direction, roadtype);
 
-	const std::vector<Player_Area<> >::const_iterator conquer_info_end =
-		m_conquer_info.end();
-	for
-		(std::vector<Player_Area<> >::const_iterator it = m_conquer_info.begin();
-		 it != conquer_info_end;
-		 ++it)
-	{
-         // First, update influence map of the player
-		const X_Coordinate mapwidth = map().get_width();
-		MapRegion<> mr(map(), *it);
-		do m_conquer_map[it->player_number][Map::get_index(mr.location(), mapwidth)] +=
-			m_map->calc_influence(mr.location(), *it);
-		while (mr.advance(*m_map));
+	FCoords neighbour;
+	Uint8 mask;
+	switch (direction) {
+	case Road_SouthWest:
+		neighbour = m.bl_n(f);
+		mask = Road_Mask << Road_SouthWest;
+		break;
+	case Road_SouthEast:
+		neighbour = m.br_n(f);
+		mask = Road_Mask << Road_SouthEast;
+		break;
+	case Road_East:
+		neighbour = m. r_n(f);
+		mask = Road_Mask << Road_East;
+		break;
+	default: assert(false);
 	}
-
-   // Now create the real influence map !
-	const Player_Number nr_players = map().get_nrplayers();
-	const Map::Index max_index = map().max_index();
-	for (Map::Index index = 0; index < max_index; ++index) {
-		Player_Number best_player = 0;
-		Military_Influence best_value = 0;
-            // Find the most player influence over this position
-		for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
-			if (const Military_Influence value = m_conquer_map[plnum][index])
-				if        (value >  best_value) {
-					best_value = value;
-					best_player = plnum;
-				} else if (value == best_value) {
-					best_player = 0;
-					const Coords c = map().get_fcoords(map()[index]);
-					log
-						("Editor_Game_Base::make_influence_map: Players %u and %u "
-						 "both have influence %i at (%i, %i), location will be "
-						 "neutral (unless another player has higher influence).\n",
-						 best_player, plnum, value, c.x, c.y);
-				}
-         m_conquer_map[0][index] = best_value;
-   }
-}
-// END Support for influece map in load/saved games
+	const Uint8 road = f.field->get_roads() & mask;
+	const Map::Index           i = f        .field - &first_field;
+	const Map::Index neighbour_i = neighbour.field - &first_field;
+	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
+		if (Player * const p = m_players[plnum]) {
+			Player::Field & first_player_field = *p->m_fields;
+			Player::Field & player_field = (&first_player_field)[i];
+			if
+				(1 < player_field                      .vision
+				 |
+				 1 < (&first_player_field)[neighbour_i].vision)
+			{
+				player_field.roads &= ~mask;
+				player_field.roads |= road;
+			}
+		}
+};

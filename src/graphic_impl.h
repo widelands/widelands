@@ -155,12 +155,7 @@ class Surface {
 
 	void draw_minimap
 		(const Editor_Game_Base  & egbase,
-		 const std::vector<bool> & visibility,
-		 const Rect                rc,
-		 const Point               viewpoint,
-		 const uint                flags);
-	void draw_minimap
-		(const Editor_Game_Base  & egbase,
+		 const Player * const,
 		 const Rect                rc,
 		 const Point               viewpoint,
 		 const uint                flags);
@@ -295,7 +290,7 @@ public:
 
 	virtual void rendermap
 		(const Editor_Game_Base &,
-		 const std::vector<bool> * const visibility,
+		 const Player * const,
 		 Point viewofs,
 		 const bool draw_all);
 
@@ -309,16 +304,13 @@ public:
 	 */
 	virtual void renderminimap
 		(const Editor_Game_Base  & egbase,
-		 const std::vector<bool> & visibility,
+		 const Player * const     player,
 		 const Point               viewpoint,
 		 const uint                flags)
 	{
 		m_surface->draw_minimap
-			(egbase, visibility, m_rect, viewpoint - m_offset, flags);
+			(egbase, player, m_rect, viewpoint - m_offset, flags);
 	}
-	virtual void renderminimap
-		(const Editor_Game_Base & egbase, const Point viewpoint, const uint flags)
-	{m_surface->draw_minimap(egbase, m_rect, viewpoint - m_offset, flags);}
 
 	virtual void drawanim
 		(Point dst,

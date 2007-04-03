@@ -27,12 +27,13 @@
 #include "bob.h"
 #include "building.h"
 #include "constants.h"
+#include "map.h"
 #include "player_area.h"
 #include "types.h"
 
+struct AreaWatcher;
 class Battle;
 class Bob;
-class Building;
 class Building_Descr;
 class Immovable;
 class Interactive_Base;
@@ -87,10 +88,13 @@ struct Editor_Game_Base {
       virtual Player * get_safe_player(const int n);
 
       // loading stuff
+	void allocate_player_maps();
       void postload();
       void load_graphics();
 	virtual void cleanup_for_load
 		(const bool flush_graphics = true, const bool flush_animations = true);
+
+	void set_road(const FCoords, const Uint8 direction, const Uint8 roadtype);
 
       // warping stuff. instantly creating map_objects
 	Building * warp_building
@@ -110,7 +114,7 @@ struct Editor_Game_Base {
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}
 	typedef int Time;
-	static Time     Never  () throw () {return std::numeric_limits<Time>::max();}
+	static Time     Never  () throw () {return 0xffffffff;}
 	typedef Uint32 Duration;
 	static Duration Forever() throw ()
 	{return std::numeric_limits<Duration>::max();}
@@ -130,11 +134,15 @@ struct Editor_Game_Base {
       // Get a tribe from the loaded list, when available
       Tribe_Descr * get_tribe(const char * const tribe) const;
 
+	void inform_players_about_ownership(const Map::Index, const Player_Number);
+	void inform_players_about_immovable
+		(const Map::Index, const Map_Object_Descr * const);
+	void inform_players_about_road
+		(const FCoords, const Map_Object_Descr * const);
+
 	enum losegain_t { LOSE=0, GAIN };
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t)=0;
 	virtual void player_field_notification (const FCoords&, losegain_t)=0;
-
-   virtual void make_influence_map ();
 
 protected:
 	void cleanup_objects() throw () {
@@ -158,9 +166,6 @@ protected:
 		 //  land is simply assigned by influence.
 		 const Player_Number preferred_player                      = 0,
 
-		 //  How far outside the conquered area that the player should see.
-		 const Uint8 vision_range                                  = 4,
-
 		 //  If true and the player completely loses influence over a location, it
 		 //  becomes neutral unless some other player claims it by having
 		 //  positive influence.
@@ -179,8 +184,6 @@ protected:
 		 const bool conquer_guarded_location_by_superior_influence = false);
 
 private:
-	std::vector<Player_Area<> > m_conquer_info;
-
 	void cleanup_playerimmovables_area(const Area<FCoords>);
 
       int m_gametime;
@@ -194,16 +197,7 @@ private:
 
 	uint                       m_lasttrackserial;
 	std::map<uint, void *>     m_trackpointers;
-      // I know that this fucks, ideas ?
-#define MAX_X     512
-#define MAX_Y     512
 public:
-
-	// m_conquer_map[playernr][index] = [quantity of influence]
-	//  m_conquer_map[0][index] contains the value of
-	//  max(m_conquer_map[1][index], ..., m_conquer_map[MAX_PLAYERS][index])
-	//  (Which means the highest influence that any player has on that location.)
-	Military_Influence m_conquer_map[MAX_PLAYERS + 1][MAX_X * MAX_Y];
       std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
 	std::vector<uint>          m_attack_serials;
 

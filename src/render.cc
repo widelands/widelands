@@ -217,7 +217,9 @@ static inline ulong calc_minimap_color
 (const SDL_PixelFormat & format,
  const Editor_Game_Base & egbase,
  const FCoords f,
- const uint flags)
+ const uint flags,
+ const Player_Number owner,
+ const bool see_details)
 {
 	ulong pixelcolor = 0;
 
@@ -231,9 +233,9 @@ static inline ulong calc_minimap_color
 	}
 
 	if (flags & MiniMap::Owner) {
-		if (f.field->get_owned_by() > 0) { //  If owned, get the player's color...
+		if (0 < owner) { //  If owned, get the player's color...
 			const RGBColor * const playercolors =
-				egbase.player(f.field->get_owned_by()).get_playercolor();
+				egbase.player(owner).get_playercolor();
 
 			//  ...and add the player's color to the old color.
 			pixelcolor = blend_color
@@ -243,6 +245,7 @@ static inline ulong calc_minimap_color
 		}
 	}
 
+	if (see_details) {
 	const PlayerImmovable * const immovable =
 		dynamic_cast<const PlayerImmovable * const>(f.field->get_immovable());
 	if (flags & MiniMap::Roads and dynamic_cast<const Road * const>(immovable))
@@ -255,6 +258,7 @@ static inline ulong calc_minimap_color
 		  dynamic_cast<const Building * const>(immovable)))
 		pixelcolor = SDL_MapRGB
 		(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
+	}
 
 	return pixelcolor;
 
@@ -271,13 +275,13 @@ static void draw_minimap_int
  const SDL_PixelFormat   & format,
  const uint                mapwidth,
  const Editor_Game_Base  & egbase,
- const std::vector<bool> & visibility,
+ const Player * const     player,
  const Rect                rc,
  const Point               viewpoint,
  const uint                flags)
 {
 	const Map & map = egbase.map();
-	for (uint y = 0; y < rc.h; ++y) {
+	if (not player or player->see_all()) for (uint y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
@@ -286,24 +290,12 @@ static void draw_minimap_int
 		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T * const>(pix) = static_cast<const T>
-				(not visibility[i] ?
-				 0 : calc_minimap_color(format, egbase, f, flags));
+				(calc_minimap_color
+				 (format, egbase, f, flags, f.field->get_owned_by(), true));
 		}
-	}
-}
-template<typename T>
-static void draw_minimap_int
-(Uint8 * const             pixels,
- const ushort              pitch,
- const SDL_PixelFormat   & format,
- const uint                mapwidth,
- const Editor_Game_Base  & egbase,
- const Rect                rc,
- const Point               viewpoint,
- const uint                flags)
-{
-	const Map & map = egbase.map();
-	for (uint y = 0; y < rc.h; ++y) {
+	} else {
+		const Player::Field * const player_fields = player->fields();
+		for (uint y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
@@ -311,23 +303,28 @@ static void draw_minimap_int
 		Map::Index i = Map::get_index(f, mapwidth);
 		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
-			*reinterpret_cast<T * const>(pix) = static_cast<const T>
-				(calc_minimap_color(format, egbase, f, flags));
+				const Player::Field & player_field = player_fields[i];
+				const Vision vision = player_field.vision;
+				*reinterpret_cast<T * const>(pix) = static_cast<const T>
+					(vision ?
+					 calc_minimap_color
+					 (format, egbase, f, flags, player_field.owner, 1 < vision)
+					 :
+					 0);
+			}
 		}
 	}
 }
 
 /*
 ===============
-Surface::draw_minimap
-
 Draw a minimap into the given rectangle of the bitmap.
 viewpt is the field at the top left of the rectangle.
 ===============
 */
 void Surface::draw_minimap
 (const Editor_Game_Base  & egbase,
- const std::vector<bool> & visibility,
+ const Player * const     player,
  const Rect                rc,
  const Point               viewpt,
  const uint                flags)
@@ -338,32 +335,11 @@ void Surface::draw_minimap
 	switch (format().BytesPerPixel) {
 	case sizeof(Uint16):
 		draw_minimap_int<Uint16>
-			(pixels, pitch, format(), w, egbase, visibility, rc, viewpt, flags);
+			(pixels, pitch, format(), w, egbase, player, rc, viewpt, flags);
 		break;
 	case sizeof(Uint32):
 		draw_minimap_int<Uint32>
-			(pixels, pitch, format(), w, egbase, visibility, rc, viewpt, flags);
-		break;
-	default: assert (false);
-	}
-}
-void Surface::draw_minimap
-(const Editor_Game_Base & egbase,
- const Rect               rc,
- const Point              viewpoint,
- const uint               flags)
-{
-	Uint8 * const pixels = static_cast<Uint8 * const>(get_pixels());
-	const ushort pitch = get_pitch();
-	const X_Coordinate w = egbase.map().get_width();
-	switch (format().BytesPerPixel) {
-	case sizeof(Uint16):
-		draw_minimap_int<Uint16>
-			(pixels, pitch, format(), w, egbase, rc, viewpoint, flags);
-		break;
-	case sizeof(Uint32):
-		draw_minimap_int<Uint32>
-			(pixels, pitch, format(), w, egbase, rc, viewpoint, flags);
+			(pixels, pitch, format(), w, egbase, player, rc, viewpt, flags);
 		break;
 	default: assert (false);
 	}

@@ -20,6 +20,7 @@
 #ifndef __S__PLAYER_H
 #define __S__PLAYER_H
 
+#include "areawatcher.h"
 #include "building.h"
 #include "editor_game_base.h"
 #include "mapregion.h"
@@ -47,12 +48,14 @@ class AttackController;
  * locally, remotely or by AI.
  *                      -- Nicolai
  */
-class Player {
+struct Player {
 	friend class Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
+	friend struct Widelands_Map_Building_Data_Packet;
+	friend struct Widelands_Map_Players_View_Data_Packet;
+	friend struct Widelands_Map_Seen_Fields_Data_Packet;
 
-	public:
 		enum {
 			Local = 0,
 			Remote,
@@ -67,6 +70,16 @@ class Player {
 		 const std::string & name,
 		 const uchar * const playercolor);
       ~Player();
+
+	void allocate_map() {
+		const Map & map = egbase().map();
+		log("Player::init(&map=%p)", &map);
+		assert(map.get_width ());
+		assert(map.get_height());
+		m_fields = new Field[map.max_index()];
+		log("Player::allocate_map: %p\n", m_fields);
+	}
+
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
@@ -85,20 +98,291 @@ class Player {
 
       // For cheating
       void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }
-      bool get_see_all(void) { return m_see_all; }
+	bool see_all() const throw () {return m_see_all;}
+
+	/// Per-player field information.
+	struct Field {
+		Field() :
+			military_influence(0),
+			vision            (0)
+		{
+			//  Must be initialized because the rendering code is accessing it even
+			//  for triangles that the player does not see (it is the darkening
+			//  that actually hides the ground from the player). This is important
+			//  for worlds where the number of terrain types is not maximal (16),
+			//  so that an uninitialized terrain index could cause a not found
+			//  error in Descr_Maintainer<Terrain_Descr>::get(const Terrain_Index).
+			terrains.d = terrains.r = 0;
+
+			time_triangle_last_surveyed[0] = Editor_Game_Base::Never();
+			time_triangle_last_surveyed[1] = Editor_Game_Base::Never();
+
+			//  Initialized for debug purpouses only.
+			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = 0;
+		}
+
+		/**
+		 * Military influence is exerted by buildings with the help of soldiers.
+		 * When the first soldier enters a building, it starts to exert military
+		 * influence on the nodes within its conquer radius. When a building
+		 * starts to exert military influence, it adds influence values to the
+		 * nodes. When the last soldier leaves the building, it stops to exert
+		 * military influence. Then the same values are subtracted from the nodes.
+		 * Adding and subtracting influence values affects land ownership
+		 * according to certain rules.
+		 *
+		 * This is not saved/loaded. It is recalculated during the loading process
+		 * by adding influence values to the nodes surrounding a building when the
+		 * first soldier located in it is loaded.
+		 */
+		Military_Influence military_influence;
+		//  FIXME Change the military influence calculation so that this can be
+		//  FIXME 16 bit.
+
+		/**
+		 * The 5 least significant bits are used to store the player number of the
+		 * owner of this node, as far as this player knows.
+		 *
+		 * The remaining bits indicates wether the player is currently seeing this
+		 * node or has ever seen it.
+		 *
+		 * Each time a person is created at or moves to a location close enough to
+		 * see this node, the value is increased by 0x20. When the person moves
+		 * away or is destroyed, the value is decreased by 0x20 again.
+		 *
+		 * If the value is < 0x20, the player has never seen the node. If this is
+		 * the case when a unit appears, the value is increased by 0x20 an extra
+		 * time, so that when the node later becomes unseen again, the value will
+		 * not drop below 0x20 again. Therefore the values 0x20 .. 0x3f means that
+		 * the field has been seen, but is currently not seen because it is not
+		 * within vision range of any person of this player.
+		 *
+		 * There are 3 levels of player view of locations:
+		 * 0. Players have no view at all of locations that they have never seen.
+		 * 1. Players only have a static view of locations that they have seen but
+		 *    are not seeing currently. With this static view, the player will
+		 *    only see the more persistent properties of the area, such as
+		 *    ownership, immovable kind, terrain type and roads. He will not see
+		 *    the more volatile properties such as bobs or immovable program
+		 *    state.
+		 * 2. Players have full view of all locations that they see. (There are of
+		 *    course properties that players with full vision are not
+		 *    automatically informed about, such as resources and other players'
+		 *    information.)
+		 *
+		 * Note a fundamental difference between seeing a node, and having
+		 * knownledge about resources. A node is considered continuously seen by a
+		 * player as long as it is within vision range of any person of that
+		 * player. If something on the node changes, the game engine will inform
+		 * that player about it. But resource knowledge is not continous. It is
+		 * instant (given at the time when the geological survey completes) and
+		 * immediately starts aging. Mining implies geological surveying, so a
+		 * player will be informed about resource changes that he causes himself
+		 * by mining.
+		 *
+		 * Buildings do not see on their own. Only people can see. But as soon as
+		 * a person enters a building, the person stops seeing. If it is the only
+		 * person in the building, the building itself starts to see (some
+		 * buildings, such as fortresses usually see much further than persons
+		 * standing on the ground). As soon as a person leaves a building, the
+		 * person begins to see on its own. If the building becomes empty of
+		 * people, it stops seeing.
+		 *
+		 * Only the Boolean representation of this value (wether the field has
+		 * ever been seen) is saved/loaded. The complete value is then obtained by
+		 * increasing this value by 0x20 for each person that during the loading
+		 * process is found to see this node.
+		 */
+		Vision vision;
+
+
+		//  Below follows information about the field, as far as this player
+		//  knows.
+
+		/**
+		 * The terrain types of the 2 triangles, as far as this player knows.
+		 * Each value is only valid when one of the corner nodes of the triangle
+		 * has been seen.
+		 */
+		::Field::Terrains terrains;
+
+		Uint8         roads;
+
+		/**
+		 * The owner of this node, as far as this player knows.
+		 * Only valid when this player has seen this node.
+		 */
+		Player_Number owner;
+
+		/**
+		 * The amount of resource at each of the triangles, as far as this player
+		 * knows.
+		 * The d component is only valid when
+		 * time_last_surveyed[0] != Editor_Game_Base::Never().
+		 * The r component is only valid when
+		 * time_last_surveyed[1] != Editor_Game_Base::Never().
+		 */
+		::Field::Resource_Amounts resource_amounts;
+
+		/**
+		 * Wether there is a road between this node and the node to the east,
+		 * as far as this player knows.
+		 * Only valid when this player has seen this node or the node to the east.
+		 */
+		Uint8 road_e() const throw () {return roads & Road_Mask;}
+
+		/**
+		 * Wether there is a road between this node and the node to the southeast,
+		 * as far as this player knows.
+		 * Only valid when this player has seen this node or the node to the
+		 * southeast.
+		 */
+		Uint8 road_se() const throw ()
+		{return roads >> Road_SouthEast & Road_Mask;}
+
+		/**
+		 * Wether there is a road between this node and the node to the southwest,
+		 * as far as this player knows.
+		 * Only valid when this player has seen this node or the node to the
+		 * southwest.
+		 */
+		Uint8 road_sw() const throw ()
+		{return roads >> Road_SouthWest & Road_Mask;}
+
+		/**
+		 * The last time when this player surveyed the respective triangle
+		 * geologically. Indexed by TCoords::TriangleIndex. A geologic survey is a
+		 * thorough investigation. Therefore it is considered impossible to have
+		 * knowledge about the resources of a triangle without having knowledge
+		 * about each of the surrounding nodes:
+		 *
+		 *     geologic information about a triangle =>
+		 *         each neighbouring node has been seen
+		 *
+		 * and the contrapositive:
+		 *
+		 *     some neighbouring node has never been seen =>
+		 *         no geologic information about the triangle
+		 *
+		 * Is Editor_Game_Base::Never() when never surveyed.
+		 */
+		Editor_Game_Base::Time time_triangle_last_surveyed[2];
+
+		/**
+		 * The last time when this player saw this node.
+		 * Only valid when vision is in 4 .. 7. (When vision < 4, this player has
+		 * never seen this node and when 8 <= vision, this player is currently
+		 * seeing this node.)
+		 *
+		 * This value is only for the node.
+		 *
+		 * The corresponding value for a triangle between the nodes A, B and C is
+		 *   max
+		 *     (time_node_last_unseen for A,
+		 *      time_node_last_unseen for B,
+		 *      time_node_last_unseen for C)
+		 * and is only valid if all of {A, B, C} have vision < 8 and at least one
+		 * of them has 4 <= vision.
+		 *
+		 * The corresponding value for an edge between the nodes A and B is
+		 *   max(time_node_last_unseen for A, time_node_last_unseen for B)
+		 * and is only valid if all of {A, B} have vision < 8 and at least one of
+		 * them has 4 <= vision.
+		 *
+		 */
+		Editor_Game_Base::Time time_node_last_unseen;
+
+		/**
+		 * The type of immovable on this node, as far as this player knows.
+		 * Only valid when the player has seen this node (or maybe a nearby node
+		 * if the immovable is big?). (Roads are not stored here.)
+		 */
+		const Map_Object_Descr * map_object_descr[3];
+
+		//  Summary of intended layout (not yet fully implemented)
+		//
+		//                                  32bit arch    64bit arch
+		//                                 ============  ============
+		//  Identifier                     offset  size  offset  size
+		//  =======================        ======  ====  ======  ====
+		//  military_influence              0x000  0x10   0x000  0x10
+		//  vision                          0x010  0x10   0x010  0x10
+		//  terrains                        0x020  0x08   0x020  0x08
+		//  roads                           0x028  0x06   0x028  0x06
+		//  owner_d                         0x02e  0x05   0x02e  0x05
+		//  owner_r                         0x033  0x05   0x033  0x05
+		//  resource_amounts                0x038  0x08   0x038  0x08
+		//  time_triangle_last_surveyed[0]  0x040  0x20   0x040  0x20
+		//  time_triangle_last_surveyed[1]  0x060  0x20   0x060  0x20
+		//  time_node_last_unseen           0x080  0x20   0x080  0x20
+		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
+		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
+		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
+		//  <end>                           0x100         0x160
+
+	private:
+		Field & operator=(const Field &);
+		Field            (const Field &);
+	};
+
+	const Field * fields() const throw () {return m_fields;}
 
 		// See area
-	bool is_field_seen(const Map::Index i) const throw ()
-	{return m_see_all or seen_fields[i];}
-	bool is_field_seen(const Coords c) const throw ()
-	{return is_field_seen(Map::get_index(c, egbase().map().get_width()));}
-		inline bool is_field_seen(int x, int y) { if(m_see_all) return true; return is_field_seen(Coords(x, y)); }
-		inline std::vector<bool>* get_visibility() { if(m_see_all) return 0; return &seen_fields; }
+	Vision vision(const Map::Index i) const throw ()
+	{return m_fields[i].vision;}
       inline bool has_view_changed( void ) { bool t = m_view_changed; m_view_changed = false; return t; }
 
-	void set_field_seen(const Map::Index i, const bool seen) throw ()
-	{seen_fields[i] = seen;}
-	void set_area_seen(const Area<>, const bool on);
+	/**
+	 * Update this player's information about this node and the surrounding
+	 * triangles and edges. If lasting is true, the vision is incremented so that
+	 * the node remains seen at least until a corresponding call to unsee_node is
+	 * made.
+	 */
+	void see_node
+		(const Map                  &,
+		 const ::Field              & first_map_field,
+		 const FCoords,
+		 const Editor_Game_Base::Time,
+		 const bool                   lasting = true)
+		throw ();
+
+	/// Decrement this player's vision for a node.
+	void unsee_node(const Map::Index i, const Editor_Game_Base::Time gametime)
+		throw ()
+	{
+		Field & field = m_fields[i];
+		assert(1 < field.vision);
+		--field.vision;
+		if (field.vision == 1) field.time_node_last_unseen = gametime;
+		assert(1 <= field.vision);
+	}
+
+	/// Call see_node for each node in the area.
+	void see_area(const Area<FCoords> area, const bool lasting = true)
+		throw ()
+	{
+		const Editor_Game_Base::Time gametime = egbase().get_gametime();
+		const Map & map = egbase().map();
+		const ::Field & first_map_field = map[0];
+		MapRegion<Area<FCoords> > mr(map, area);
+		do see_node(map, first_map_field, mr.location(), gametime, lasting);
+		while (mr.advance(map));
+		m_view_changed = true;
+	}
+
+	/// Decrement this player's vision for each node in an area.
+	void unsee_area(const Area<FCoords> area) throw () {
+		const Editor_Game_Base::Time gametime = egbase().get_gametime();
+		const Map &                  map      = egbase().map         ();
+		const ::Field & first_map_field = map[0];
+		MapRegion<Area<FCoords> > mr(map, area);
+		do unsee_node(mr.location().field - &first_map_field, gametime);
+		while (mr.advance(map));
+		m_view_changed = true;
+	}
+
+	Military_Influence & military_influence(const Map::Index i) throw ()
+	{return m_fields[i].military_influence;}
 
       // Allowed buildings
 	bool is_building_allowed(const Building_Descr::Index i) const throw ()
@@ -130,7 +414,39 @@ class Player {
       void change_training_options(PlayerImmovable* imm, int atr, int val);
          // Launch an attack
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
+
+	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
+		assert(player_area.player_number == get_player_number());
+		see_area
+			(Area<FCoords>
+			 (egbase().map().get_fcoords(player_area), player_area.radius));
+		AreaWatcher & result = AreaWatcher::create(egbase(), player_area);
+		m_areawatchers.insert(&result);
+		return result;
+	}
+
+	void remove_areawatcher(AreaWatcher & areawatcher) {
+		unsee_area
+			(Area<FCoords>
+			 (egbase().map().get_fcoords(areawatcher), areawatcher.radius));
+		m_areawatchers.erase(&areawatcher);
+	}
+
+	typedef std::set<Object_Ptr> AreaWatchers;
+	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
+
 	private:
+
+	/**
+	 * Called when a node becomes seen (not only the first time) before the
+	 * vision counter is incremented. Discovers the node and those of the 6
+	 * surrounding edges/triangles that are not seen fron another node.
+	 */
+	void discover_node(const Map &, const ::Field &, const FCoords, Field &)
+		throw ();
+
+	AreaWatchers           m_areawatchers;
+
 		bool m_see_all;
 	Editor_Game_Base     & m_egbase;
 		bool           m_view_changed;
@@ -139,7 +455,7 @@ class Player {
 		const Tribe_Descr & m_tribe; // buildings, wares, workers, sciences
 	RGBColor               m_playercolor[4];
 
-		std::vector<bool> seen_fields;
+	Field *                m_fields;
       std::vector<bool> m_allowed_buildings;
       std::vector<Economy*> m_economies;
       std::string    m_name; // Player name

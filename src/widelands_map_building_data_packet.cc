@@ -51,8 +51,7 @@ void Widelands_Map_Building_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
-      return;
+	if (not skip) {
 
    FileRead fr;
    try {
@@ -62,60 +61,64 @@ throw (_wexception)
       return ;
    }
 
-   Map* map=egbase->get_map();
-
-   // First packet version
-   int packet_version=fr.Unsigned16();
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
-            uchar exists=fr.Unsigned8();
-            if(exists) {
+		const Uint16 packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Map & map = egbase->map();
+			const X_Coordinate width  = map.get_width ();
+			const Y_Coordinate height = map.get_height();
+			Player_Area<Area<FCoords> > a;
+			for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
+				if (fr.Unsigned8()) {
                // Ok, now read all the additional data
-               uchar owner=fr.Unsigned8();
+					a.player_number = fr.Unsigned8();
                uint serial=fr.Unsigned32();
-               std::string name=fr.CString();
+					const char * const name = fr.CString();
                bool is_constructionsite=fr.Unsigned8();
 
                // No building lives on more than one main place
                assert(!ol->is_object_known(serial));
 
                // Get the tribe and the building index
-               Player* plr=egbase->get_safe_player(owner);
-               assert(plr); // He must be there
-               int index=plr->get_tribe()->get_building_index(name.c_str());
+					Player * const player = egbase->get_safe_player(a.player_number);
+					assert(player); // He must be there FIXME Never use assert to validate input!
+					const Tribe_Descr & tribe = player->tribe();
+               int index= tribe.get_building_index(name);
                if(index==-1)
                   throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
-                        name.c_str(), plr->get_tribe()->get_name().c_str());
+                        name, tribe.name().c_str());
 
                // Now, create this Building, take extra special care for constructionsites
-               Building* building=0;
-               if(is_constructionsite)
-                  building=egbase->warp_constructionsite(Coords(x,y),plr->get_player_number(),index,0); // all data is read later
-               else
-                  building=egbase->warp_building(Coords(x,y), plr->get_player_number(), index);
-
-               assert(building);
+					Building & building = // all data is read later
+						*(is_constructionsite ?
+						  egbase->warp_constructionsite(a, a.player_number, index, 0)
+						  :
+						  egbase->warp_building        (a, a.player_number, index));
 
                // Reference the players tribe if in editor
-               assert
-		            (not dynamic_cast<const Editor_Interactive * const>
-		             (egbase->get_iabase())
-		             or
-		             not skip);
-	            egbase->get_iabase()->reference_player_tribe
-		            (owner, plr->get_tribe());
+					egbase->get_iabase()->reference_player_tribe
+						(a.player_number, &tribe);
                // and register it with the object loader for further loading
-               ol->register_object(egbase, serial, building);
-            }
-         }
+					ol->register_object(egbase, serial, &building);
 
-      }
-      // DONE
-      return;
-   }
-   throw wexception("Unknown version %i in Widelands_Map_Building_Data_Packet!\n", packet_version);
-   assert(0); // Never here
+					a.radius = building.get_conquers();
+					if (a.radius) { //  Add to map of military influence.
+						Player::Field * const player_fields = player->m_fields;
+						const Field & first_map_field = map[0];
+						a.field = map.get_field(a);
+						MapRegion<Area<FCoords> > mr(map, a);
+						do player_fields[mr.location().field - &first_map_field]
+							.military_influence
+							+=
+							egbase->map().calc_influence
+							(mr.location(), Area<>(a, a.radius));
+						while (mr.advance(map));
+					}
+            }
+			}
+		} else throw wexception
+			("Unknown version %u in Widelands_Map_Building_Data_Packet!\n",
+			 packet_version);
+	}
 }
 
 

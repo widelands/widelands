@@ -451,10 +451,11 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	if (not get_player()->is_field_seen(get_sel_pos().node)) return;
+	const Map & map = egbase().map();
+	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width()))) {
 
 	// Special case for buildings
-	BaseImmovable * const imm = m_game->get_map()->get_immovable(get_sel_pos().node);
+	BaseImmovable * const imm = map.get_immovable(get_sel_pos().node);
 
 	if (imm && imm->get_type() == Map_Object::BUILDING) {
 		Building *building = (Building *)imm;
@@ -467,6 +468,7 @@ void Interactive_Player::field_action()
 
 	// everything else can bring up the temporary dialog
 	show_field_action(this, get_player(), &m_fieldaction);
+	}
 }
 
 /*
@@ -575,9 +577,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 #ifdef DEBUG
    // Only in debug builds
 	case KEY_F5:
-		if (down) {
-         get_player()->set_see_all(!get_player()->get_see_all());
-		}
+		if (down) player().set_see_all(not player().see_all());
 		return true;
 #endif
 	}
@@ -593,13 +593,6 @@ void Interactive_Player::set_player_number(uint n) {
    m_player_number=n;
 }
 
-
-/*
- * Return our players visibility
- */
-std::vector<bool>* Interactive_Player::get_visibility(void) {
-   return m_game->get_player(m_player_number)->get_visibility();
-}
 
 /*
  * Gain a immovable

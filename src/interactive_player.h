@@ -98,14 +98,11 @@ class Interactive_Player : public Interactive_Base {
 		Game * get_game() const {return m_game;}
 		uchar get_player_number() const {return m_player_number;}
 	Player & player() const throw () {return m_game->player(m_player_number);}
-		Player * get_player() const
+	Player * get_player() const throw ()
 		{assert(m_game); return m_game->get_player(m_player_number);}
 
       // for savegames
       void set_player_number(uint plrn);
-
-      // Visibility for drawing
-      std::vector<bool>* get_visibility(void);
 
       // For ware production statistics (only needed for the interactive player)
       void ware_produced(uint id);

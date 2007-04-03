@@ -264,8 +264,6 @@ void WatchWindow::start_tracking(Point pos)
 	int radius;
 
 	MapviewPixelFunctions::normalize_pix(map, pos);
-	const Coords center =
-		MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node;
 
 	// Scan progressively larger circles around the given position for suitable bobs
 	for

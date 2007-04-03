@@ -21,7 +21,7 @@
 
 #include "graphic.h"
 #include "i18n.h"
-#include "interactive_base.h"
+#include "interactive_player.h"
 #include "map.h"
 #include "mapviewpixelconstants.h"
 #include "minimap.h"
@@ -84,10 +84,11 @@ Redraw the view of the map
 */
 void MiniMap::View::draw(RenderTarget* dst)
 {
-	const std::vector<bool> * visibility = m_iabase.get_visibility();
-	const Point p(m_viewx - get_w() / 2, m_viewy - get_h() / 2);
-	if (visibility) dst->renderminimap(m_iabase.egbase(), *visibility, p, flags);
-	else            dst->renderminimap(m_iabase.egbase(),              p, flags);
+	dst->renderminimap
+		(m_iabase.egbase(),
+		 m_iabase.get_player(),
+		 Point(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
+		 flags);
 }
 
 

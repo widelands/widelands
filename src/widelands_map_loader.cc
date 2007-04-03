@@ -46,6 +46,8 @@
 #include "widelands_map_owned_fields_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 #include "widelands_map_player_position_data_packet.h"
+#include "widelands_map_players_areawatchers_data_packet.h"
+#include "widelands_map_players_view_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
@@ -131,6 +133,8 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 		p.Read(m_fs, egbase, !scenario, m_mol);
 	}
    log("done!\n ");
+
+	egbase->allocate_player_maps(); //  Can do this now that map size is known.
 
    // now player names and tribes
    log("Reading Player Names And Tribe Data ... ");
@@ -237,6 +241,27 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 	}
    log("done!\n ");
 
+   log("Reading Owned-Fields Data ... ");
+	{
+		Widelands_Map_Owned_Fields_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
+   log("done!\n ");
+
+   log("Reading Seen-Fields Data ... ");
+	{
+		Widelands_Map_Seen_Fields_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
+   log("done!\n ");
+
+	log("Reading AreaWatchers Data ... ");
+	{
+		Widelands_Map_Players_AreaWatchers_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
+	log("done!\n ");
+
    // We always write the next few packets since it
    // takes too much time looking if it really is needed
    // !!!!!!!!!! NOTE
@@ -265,7 +290,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    log("done!\n ");
 
 
-   log("Reading Map Ware Data ... ");
+	log("Reading Map Ware Data ... ");
 	{
 		Widelands_Map_Ware_Data_Packet p;
 		p.Read(m_fs, egbase, !scenario, m_mol);
@@ -317,20 +342,6 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 	}
    log("done!\n ");
 
-   log("Reading Owned-Fields Data ... ");
-	{
-		Widelands_Map_Owned_Fields_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
-	}
-   log("done!\n ");
-
-   log("Reading Seen-Fields Data ... ");
-	{
-		Widelands_Map_Seen_Fields_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
-	}
-   log("done!\n ");
-
 
    // This should be at least after loading Soldiers (Bobs)
    // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
@@ -340,6 +351,14 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 		p.Read(m_fs, egbase, !scenario, m_mol);
 	}
    log("done!\n ");
+
+	//  Must be loaded after every kind of object that can see.
+	log("Reading Players View Data ... ");
+	{
+		Widelands_Map_Players_View_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
+	log("done!\n ");
 
    //This should be done after loading of soldiers and military sites
    log("Reading Attack Controller Data ... ");

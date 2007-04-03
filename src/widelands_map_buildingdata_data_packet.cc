@@ -247,12 +247,13 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
       }
 
       // Incorporated Workers
-      while(warehouse.m_incorporated_workers.size()) {
+		while(warehouse.m_incorporated_workers.size()) {assert(false); //  FIXME why this loop?
          std::vector<Object_Ptr>::iterator i=warehouse.m_incorporated_workers.begin();
          static_cast<Worker*>(i->get(egbase))->remove(egbase);
          warehouse.m_incorporated_workers.erase(i);
       }
       warehouse.m_incorporated_workers.resize(0);
+		Player & player = warehouse.owner();
       int nrworkers=fr.Unsigned16();
       for(int i=0; i<nrworkers; i++) {
          uint id=fr.Unsigned32();
@@ -265,6 +266,13 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          warehouse.sort_worker_in(egbase, name, w);
       }
+		if (nrworkers) {
+			Map & map = egbase->map();
+			player.see_area
+				(Area<FCoords>
+				 (map.get_fcoords(warehouse.get_position()),
+				  warehouse.vision_range()));
+		}
 
       // Carrier spawn
       warehouse.m_next_carrier_spawn=fr.Unsigned32();

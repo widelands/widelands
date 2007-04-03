@@ -85,6 +85,7 @@ struct Building_Descr : public Map_Object_Descr {
 	virtual void load_graphics();
 
 	virtual uint get_conquers() const {return 0;}
+	virtual uint vision_range() const throw () {return get_conquers() + 4;} //  FIXME make this configurable
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &m_tribe;}
@@ -177,6 +178,7 @@ public:
 
 	bool leave_check_and_wait(Game* g, Worker* w);
 	uint get_conquers() const throw () {return descr().get_conquers();}
+	virtual uint vision_range() const throw () {return descr().vision_range();}
 
 	const std::string & get_stop_icon    () const throw ()
 	{return descr().get_stop_icon();}
@@ -206,6 +208,9 @@ public:
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(const Player_Number player_number) throw ()
 	{m_defeating_player = player_number;}
+
+	void    add_worker(Worker *);
+	void remove_worker(Worker *);
 
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);

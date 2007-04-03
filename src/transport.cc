@@ -729,11 +729,9 @@ void Flag::attach_building(Editor_Game_Base *g, Building *building)
 
 	m_building = building;
 
-	Map *map = g->get_map();
-	Coords tln;
-
-	map->get_tln(m_position, &tln);
-	map->get_field(tln)->set_road(Road_SouthEast, Road_Normal);
+	const Map  & map = g->map();
+	g->set_road
+		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Normal);
 
 	m_building->set_economy(get_economy());
 }
@@ -752,11 +750,9 @@ void Flag::detach_building(Editor_Game_Base *g)
 
 	m_building->set_economy(0);
 
-	Map *map = g->get_map();
-	Coords tln;
-
-	map->get_tln(m_position, &tln);
-	map->get_field(tln)->set_road(Road_SouthEast, Road_None);
+	const Map & map = g->map();
+	g->set_road
+		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
 
 	m_building = 0;
 }
@@ -1446,8 +1442,7 @@ void Road::mark_map(Editor_Game_Base *g)
 			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4)
-				curf.field->set_road(rdir, m_type);
+			if (rdir <= 4) g->set_road(curf, rdir, m_type);
 		}
 
 		// mark the road that leads away from this field
@@ -1455,8 +1450,7 @@ void Road::mark_map(Editor_Game_Base *g)
 			const Direction dir  = m_path[steps];
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4)
-				curf.field->set_road(rdir, m_type);
+			if (rdir <= 4) g->set_road(curf, rdir, m_type);
 
 			map->get_neighbour(curf, dir, &curf);
 		}
@@ -1485,8 +1479,7 @@ void Road::unmark_map(Editor_Game_Base *g)
 			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4)
-				curf.field->set_road(rdir, Road_None);
+			if (rdir <= 4) g->set_road(curf, rdir, Road_None);
 		}
 
 		// mark the road that leads away from this field
@@ -1494,8 +1487,7 @@ void Road::unmark_map(Editor_Game_Base *g)
 			const Direction  dir = m_path[steps];
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4)
-				curf.field->set_road(rdir, Road_None);
+			if (rdir <= 4) g->set_road(curf, rdir, Road_None);
 
 			map->get_neighbour(curf, dir, &curf);
 		}
@@ -3352,15 +3344,6 @@ public:
 	{
 		unsigned slot = t->mpf_heapindex;
 
-#if defined(DEBUG) && defined(__i386__)
-      /* This is here temporarilly till the bugs are fixed
-       * which trigger the asserts below
-       */
-      log("DBG: slot: %i, m_data.size(): %i\n", slot, m_data.size());
-      if(slot >= m_data.size()) asm("int $3");
-      log("DBG: m_data[slot]: %p, t: %p\n", m_data[slot], t);
-      if(m_data[slot] != t) asm("int $3");
-#endif
 		assert(slot < m_data.size());
 		assert(m_data[slot] == t);
 
@@ -3980,8 +3963,6 @@ Flag f and all its direct and indirect neighbours are put into a new economy.
 */
 void Economy::do_split(Flag *f)
 {
-	log("Economy: split %i\n", get_nrflags());
-
 	Economy *e = new Economy(m_owner);
 
 	m_rebuilding = true;
@@ -4010,8 +3991,6 @@ void Economy::do_split(Flag *f)
 				open.insert(n);
 		}
 	}
-
-	log("  split %i flags\n", e->get_nrflags());
 
 	// Fix Supply/Request after rebuilding
 	m_rebuilding = false;
