@@ -6,7 +6,7 @@ instadd(env, 'locale/*', 'locale')
 
 #will be executed from base dir!
 buildlocale=PhonyTarget("buildlocale", 'utils/buildlocale.py')
-buildcat=PhonyTarget("buildcat", 'utils/buildcat.py')
+buildcat=PhonyTarget("buildcat", 'utils/buildcat.py -a')
 
 Return('buildlocale', 'buildcat')
 
