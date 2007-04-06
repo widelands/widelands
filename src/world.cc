@@ -163,7 +163,7 @@ World::World(const char* name)
 	try
 	{
       // Grab the localisation text domain
-      sprintf( directory, "world_%s", name );
+      sprintf( directory, "worlds/%s", name );
       i18n::grab_textdomain( directory );
 
       snprintf(directory, sizeof(directory), "worlds/%s", name);

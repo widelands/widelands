@@ -294,17 +294,17 @@ SConsignFile('build/scons-signatures')
 BUILDDIR='build/'+TARGET+'-'+env['build']
 Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 
-####################################################################### buildcat
+####################################################################### 
 
 SConscript('build/SConscript')
 SConscript('campaigns/SConscript')
 SConscript('doc/SConscript')
 SConscript('fonts/SConscript')
 SConscript('game_server/SConscript')
-buildcat=SConscript('locale/SConscript')
 SConscript('maps/SConscript')
 SConscript('music/SConscript')
 SConscript('pics/SConscript')
+(buildlocale, buildcat)=SConscript('po/SConscript')
 SConscript('sound/SConscript')
 SConscript('src/SConscript.dist')
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
@@ -314,15 +314,15 @@ SConscript('utils/SConscript')
 SConscript('worlds/SConscript')
 
 Default(thebinary)
-env.AddPostAction(thebinary, Action(lambda target,source,env:0, lambda target,source,env:"\n\nThe localizations must be built manually, call \"scons locale\" or \"./build-widelands locale\"\n\n"))
+if env['build']=='release':
+	Default(buildlocale)
 
 ########################################################################### tags
 
 S=find('src', '*.h')
 S+=find('src', '*.cc')
 Alias('tags', env.ctags(source=S, target='tags'))
-if env['build'] == 'release':
-	Default('tags')
+Default('tags')
 
 ################################################################## PNG shrinking
 
@@ -342,6 +342,7 @@ instadd(env, 'widelands', filetype='binary')
 install=env.Install('installtarget', '')
 Alias('install', install)
 AlwaysBuild(install)
+env.AddPreAction(install, Action(buildlocale))
 
 uninstall=env.Uninstall('uninstalltarget', '')
 Alias('uninstall', uninstall)

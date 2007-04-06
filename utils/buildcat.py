@@ -1,209 +1,325 @@
 #!/usr/bin/python -tt
 
-"""This programm generates all the gettext files from available translations
-This could surely be done with a shell script, but my python abilities are better then
-my shell scripting
-
-Usage: Edit the available languages to your need, run this script in the 'locale' directory"""
-
-
-import os
-import sys
-import confgettext 
-from glob import glob
-import string
-import fileinput
-
-TRIBES = [ "barbarians", "empire" ]
-WORLDS = [ "blackland", "desert", "greenland", "winterland" ]  
-CAMPAING_MISSIONS = ["t01", "t02", "emp01", "emp02" ]
-
-def do_rename( src, dst ):
-    try:
-        os.remove( dst )
-    except: 
-        "" # do nothing
-    os.rename( src, dst )
-
-def do_makedirs( dirs ):
-    try: 
-        os.makedirs( dirs )
-    except:
-        "" # nothing
-        
-def main( ):
-    LANGUAGES = extract_languages()
-###############################
-# here we go: Widelands binarys
-###############################
-    files = glob("../src/*.cc")
-    files += glob("../src/*/*.cc")
-    files += glob("../src/*/*/*.cc")
-    files += glob("../src/*.h")
-    files += glob("../src/*/*.h")
-    files += glob("../src/*/*/*.h")
-    os.system("xgettext -k_ -o widelands.pot %s" % string.join( files )) 
-
-    for lang in LANGUAGES:
-        # merge new strings with existing translations
-        if not os.system( "msgmerge widelands_%s.po widelands.pot > tmp" % lang ):
-            do_rename("tmp", "widelands_%s.po" % lang )
-        
-        # compile message catalogs
-        do_makedirs( "%s/LC_MESSAGES" % lang )
-        os.system( "msgfmt -o %s/LC_MESSAGES/widelands.mo widelands_%s.po" % ( lang, lang ))
-
-##############################
-# Tribes
-##############################
-    for tribe in TRIBES:
-        # Get all strings
-        files = glob("../tribes/%s/conf" % tribe )
-        files += glob("../tribes/%s/*/*/conf" % tribe )
-        catalog = confgettext.parse_conf( files )
-        file = open( "tribe_%s.pot" % tribe, "w")
-        file.write(catalog)
-        file.close()
-
-        for lang in LANGUAGES:
-            # merge new strings with existing translations
-            if not os.system( "msgmerge tribe_%s_%s.po tribe_%s.pot > tmp" % ( tribe, lang, tribe )):
-                do_rename("tmp", "tribe_%s_%s.po" % (tribe, lang ) )
-            
-            # compile message catalogs
-            do_makedirs( "%s/LC_MESSAGES" % lang )
-            os.system( "msgfmt -o %s/LC_MESSAGES/tribe_%s.mo tribe_%s_%s.po" % ( lang, tribe, tribe, lang ))
-
-##############################
-# Worlds
-##############################
-    for world in WORLDS:
-        # Get all strings
-        files = glob("../worlds/%s/*conf" % world )
-        files += glob("../worlds/%s/*/*/conf" % world )
-        catalog = confgettext.parse_conf( files )
-        file = open( "world_%s.pot" % world, "w")
-        file.write(catalog)
-        file.close()
-
-        for lang in LANGUAGES:
-            # merge new strings with existing translations
-            if not os.system( "msgmerge world_%s_%s.po world_%s.pot > tmp" % ( world, lang, world )):
-                do_rename("tmp", "world_%s_%s.po" % ( world, lang ) )
-
-            # compile message catalogs
-            do_makedirs( "%s/LC_MESSAGES" % lang )
-            os.system( "msgfmt -o %s/LC_MESSAGES/world_%s.mo world_%s_%s.po" % ( lang, world, world, lang ))
-
-##############################
-# Campaigns
-##############################
-    for mission in CAMPAING_MISSIONS:
-        # Get all strings
-        files = glob("../campaigns/%s.wmf/e*" % mission )
-        files += glob("../campaigns/%s.wmf/objective" % mission )
-        catalog = confgettext.parse_conf( files )
-        file = open( "campaign_%s.pot" % mission, "w")
-        file.write(catalog)
-        file.close()
-
-        for lang in LANGUAGES:
-            # merge new strings with existing translations
-            if not os.system( "msgmerge campaign_%s_%s.po campaign_%s.pot > tmp" % ( mission, lang, mission )):
-                do_rename("tmp", "campaign_%s_%s.po" % ( mission, lang ) )
-
-            # compile message catalogs
-            do_makedirs( "%s/LC_MESSAGES/campaigns" % lang )
-            os.system( "msgfmt -o %s/LC_MESSAGES/campaigns/%s.wmf.mo campaign_%s_%s.po" % ( lang, mission, mission, lang ))
-    files = []
-
-##############################
-# Texts (General help, Readme and so on) 
-##############################
-    files = []
-    for file in glob("../txts/*"):
-        if( file[-3:] == "CVS" or file[-1] == '~'): 
-            continue
-        files.append( file )
-
-    catalog = confgettext.parse_conf( files )
-    file = open( "texts.pot", "w")
-    file.write(catalog)
-    file.close()
-
-    for lang in LANGUAGES:
-        # merge new strings with existing translations
-        if not os.system( "msgmerge texts_%s.po texts.pot > tmp" % lang ):
-                do_rename("tmp", "texts_%s.po" % ( lang ) )
-
-        # compile message catalogs
-        do_makedirs( "%s/LC_MESSAGES" % lang )
-        os.system( "msgfmt -o %s/LC_MESSAGES/texts.mo texts_%s.po" % ( lang, lang ))
-	
-##############################
-# Map 
-##############################
-    files = []
-    for file in glob("../maps/*/elemental"):
-        files.append( file )
-
-    catalog = confgettext.parse_conf( files )
-    file = open( "maps.pot", "w")
-    file.write(catalog)
-    file.close()
-
-    for lang in LANGUAGES:
-        # merge new strings with existing translations
-        if not os.system( "msgmerge maps_%s.po maps.pot > tmp" % lang ):
-                do_rename("tmp", "maps_%s.po" % ( lang ) )
-
-        # compile message catalogs
-        do_makedirs( "%s/LC_MESSAGES" % lang )
-        os.system( "msgfmt -o %s/LC_MESSAGES/maps.mo maps_%s.po" % ( lang, lang ))
-
-    replace_backslashes_in_comments()
-
-
-
+##############################################################################
+#
+# This script holds the common functions for locale handling & generation.
 # 
-# This function extracts the available languages from the source files languages.h
+# Usage: add non-iterative catalogs to MAINPOT list, or iterative catalogs 
+# (i.e., tribes) to ITERATIVEPOTS as explained below
 #
-def extract_languages(  ):
-    lines = []
-    extract = False
-    for line in (open("../src/languages.h").readlines()):
-        if( line.find("EXTRACT BEGIN") != -1 ):
-            extract = True
-            continue;
-        if( line.find("EXTRACT END") != -1 ):
-            break;
-        if extract:
-            lines.append( line.strip(" \n\t\r(,}{"))
-      
-    retval = []
-    for line in lines:
-        ( long, abr ) = line.split(',');
-        long = long.strip()
-        abr = abr.strip();
-        abr = abr.strip('"')
-        retval.append( abr )
-    return retval
-
+# This file assumes to be called from base directory. Accepts a list of
+# language codes to work on, or "-a" option to update all available. At least
+# one of these is mandatory.
 #
-# In the generated .po[t] files, comments show filenames for easy orientation
-# (that's really all they're there for). These filenames are platform dependent
-# (slash/backslash), which screws up CVS handling of .po[t] files. Therefore,
-# all backslashes in these filenames always get converted to slashes.
+##############################################################################
+
+import confgettext
+from glob import glob
+import os
+import re
+import string
+import sys
+
+
+# Holds the names of non-iterative catalogs to build and the
+# corresponding source paths list. Note that paths MUST be relative to po/pot,
+# to let .po[t] comments point to somewhere useful
+MAINPOTS = [( "maps", ["../../maps/*/elemental"] ),
+			( "texts", ["../../txts/*"] ),
+			( "widelands", ["../../src/*.cc",
+							"../../src/*/*.cc",
+							"../../src/*/*/*.cc",
+							"../../src/*.h",
+							"../../src/*/*.h",
+							"../../src/*/*/*.h"] ) ]
+
+
+# This defines the rules for iterative generation of catalogs. This allows
+# to automatically add new .pot files for newly created tribes, worlds, ...
 #
-def replace_backslashes_in_comments():
-    files =glob("*.po")
-    files+=glob("*.pot")
+# This is a list with structure:
+#	- target .pot file mask
+#	- base directory to scan for catalogs
+#	- List of source paths for catalog creation: tells the program which files
+#			to use for building .pot files. Same rules apply as the above case
+#
+# For every instance found of a given type, '%s' in this values is replaced
+# with the name of the instance.
+ITERATIVEPOTS = [ ("campaigns/%s", "../../campaigns/", ["../../campaigns/%s/e*",
+									 "../../campaigns/%s/objective"] ),
+				  ("tribes/%s", "../../tribes", ["../../tribes/%s/conf",
+												 "../../tribes/%s/*/*/conf"] ),
+				  ("worlds/%s", "../../worlds", ["../../worlds/%s/*conf",
+												 "../../worlds/%s/*/*/conf"] )
+				]
 
-    for line in fileinput.input(files, inplace=1):
-        if line[0]=='#':
-            print string.replace(line, '\\', '/'),
-        else:
-            print line,
 
+# Some useful regular expressions
+
+RE_NO_DOTFILE="^[^\.]"		# Matches everything but dot-leaded filenames.
+RE_ISO639="^[a-z]{2,2}(_[A-Z]{2,2})?$"	# Matches ISO-639 language codes
+										# structure. Note that this doesn't
+										# garantees correctness of code.
+
+# Options passed to common external programs
+XGETTEXTOPTS="-k_ --from-code=UTF-8 "
+MSGMERGEOPTS="-q --no-wrap"
+
+##############################################################################
+#
+# Check if we are called from the right place
+#
+##############################################################################
+def do_check_root():
+		if (not os.path.isdir("po")):
+
+				print "Error: no 'po/' subdir found.\n"
+				print ("This script needs to access translations placed " +
+					"under 'po/' subdir, but these seem unavailable. Check " +
+					"that you called this script from Widelands' main dir.\n")
+				sys.exit(1)
+
+
+##############################################################################
+#
+# Check correctness of passed arguments
+#
+##############################################################################
+def do_check_parameters():
+		if len(sys.argv) < 2:
+				print "Usage: buildcat.py [-a | ll1 ll2 ... ]"
+				print "\twhere ll1 ll2 ... are language codes to update/generate."
+				sys.exit(1)
+
+
+##############################################################################
+#
+# Create subdirs as needed
+#
+##############################################################################
+def do_makedirs( dirs ):
+		try:
+				os.makedirs( dirs )
+		except:
+				"" # do nothing
+
+
+##############################################################################
+#
+# Compile a .pot file using python scripts, as xgettext is unable to handle
+# our conffile format.
+#
+##############################################################################
+def do_compile( potfile, srcfiles ):
+		files = []
+		for i in srcfiles:
+				files += glob(i)
+
+		catalog = confgettext.parse_conf(files)
+		file = open(potfile, "w")
+		file.write(catalog)
+		file.close()
+
+
+##############################################################################
+#
+# Compile known source code files with xgettext.
+#
+##############################################################################
+def do_compile_src( potfile, srcfiles ):
+		return os.system("xgettext %s -o %s %s" %  (XGETTEXTOPTS, potfile, 
+					string.join(srcfiles)))
+
+
+##############################################################################
+#
+# Return a list of directories under a given preffix, matching regular
+# expression provided.
+#
+##############################################################################
+def do_find_dirs(preffix, pattern):
+		res = []
+		p = re.compile(pattern)
+
+		for file in os.listdir(preffix):
+				if (os.path.isdir("%s/%s" % (preffix, file)) and
+								p.match(file)):
+						res.append(file)
+
+		res.sort()
+		return res
+
+
+##############################################################################
+#
+# Build a list of catalogs from iterative rules above. Returns a list of 
+# type ("catalog_name", ["source_paths_list"])
+#
+##############################################################################
+def do_find_iterative(preffix, basedir, srcmasks):
+		res = []
+
+		for file in do_find_dirs(basedir, RE_NO_DOTFILE):
+				srcfiles = []
+				for p in srcmasks:
+						srcfiles.append(string.replace(p, "%s", file))
+				name = string.replace(preffix, "%s", file)
+				res.append((name, srcfiles))
+
+		return res
+
+
+##############################################################################
+#
+# Find files under "root" matching given pattern
+#
+##############################################################################
+def do_find_files(root, pattern):
+		res = []
+		p = re.compile(pattern)
+
+		for base, dirs, files in os.walk(root):
+				for f in (files):
+						file = ("%s/%s" % (base[len(root):], f))
+						if p.match(file):
+								res.append(file)
+
+		return res
+
+
+##############################################################################
+#
+# Regenerate all .pot files specified above and place them under pot/ tree
+#
+##############################################################################
+def do_update_potfiles():
+		print("Generating reference catalogs:")
+		oldcwd = os.getcwd()
+
+		do_makedirs("po/pot")
+		os.chdir("po/pot")
+
+		# Build the list of catalogs to generate
+		potfiles = MAINPOTS
+		for preffix, basedir, srcfiles in ITERATIVEPOTS:
+				potfiles += do_find_iterative(preffix, basedir, srcfiles)
+
+		# Generate .pot catalogs
+		for pot, srcfiles in potfiles:
+				do_makedirs(os.path.dirname(pot))
+				potfile = pot + '.pot'
+
+				print("\t%s" % potfile)
+				if potfile == 'widelands.pot':
+						# This catalogs can be built with xgettext
+						do_compile_src( potfile, srcfiles )
+				else:
+						do_compile( potfile, srcfiles )
+		
+		os.chdir(oldcwd)
+		print("")
+
+
+##############################################################################
+#
+# Compile a target .po file from source "po" and "pot" catalogs. Dump result
+# to "dst" file.
+#
+##############################################################################
+def do_buildpo(po, pot, dst):
+		return os.system("msgmerge %s %s %s -o %s" % 
+						(MSGMERGEOPTS, po, pot, dst))
+
+
+##############################################################################
+#
+# Modify source .po file to suit project specific needs. Dump result to a
+# different destination file
+#
+##############################################################################
+def do_tunepo(src, dst):
+		input = open(src)
+		output = open(dst, 'w')
+
+		# Here we should update file headers. Maybe for a future release...
+		# do_update_headers(.......)
+
+		# Some comments in .po[t] files show filenames and line numbers for
+		# reference in platform-dependent form (slash/backslash). We
+		# standarize them to slashes, since this results in smaller SVN diffs
+		for l in input:
+				if l[0:2] == "#:":
+						output.write(l.replace('\\', '/'))
+				else:
+						output.write(l)
+
+		input.close()
+		output.close()
+		return
+
+
+##############################################################################
+#
+# Update .po files for a given language dir, or create empty ones if there's
+# no translation present.
+#
+##############################################################################
+def do_update_po(lang, files):
+		sys.stdout.write("\t%s:\t" % lang)
+
+		for f in files:
+				# File names to use
+				po = ("po/%s/%s" % (lang, f.rstrip("t")))
+				pot = ("po/pot/%s" % f)
+				tmp = "tmp.po"
+			
+				if not (os.path.exists(po)):
+						# No need to call mesgmerge if there's no translation
+						# to merge with. We can use .pot file as input file
+						# below, but we need to make sure the target dir is
+						# ready.
+						do_makedirs(os.path.dirname(po))
+						tmp = pot
+						fail = 0
+				else:
+						fail = do_buildpo(po, pot, tmp)
+
+				if not fail:
+						# tmp file is ready, but we need to tune some aspects
+						# of it
+						do_tunepo(tmp, po)
+
+						sys.stdout.write(".")
+						sys.stdout.flush()
+
+		sys.stdout.write("\n")
+
+
+##############################################################################
+#
+# Update .po catalogs for specified languages, or all available if "-a" is
+# specified.
+#
+##############################################################################
 if __name__ == "__main__":
-    main()
+		# Sanity checks
+		do_check_parameters()
+		do_check_root()
+
+		# Make sure .pot files are up to date.
+		do_update_potfiles()
+
+		sys.stdout.write("Updating translations: ")
+		if (sys.argv[1] == "-a"):
+				lang = do_find_dirs("po/", RE_ISO639)
+				print "all available."
+		else:
+				lang = sys.argv[1:]
+				print lang
+
+		# Assemble a list of .pot files available
+		srcfiles = do_find_files("po/pot", ".*\.pot$")
+
+		for l in lang:
+				do_update_po(l.lstrip("/"), srcfiles)
+		print ""

@@ -47,7 +47,7 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & world)
 		char directory[256];
 
       // Grab the localisation text domain
-		sprintf( directory, "tribe_%s", tribename.c_str() );
+		sprintf( directory, "tribes/%s", tribename.c_str() );
       i18n::grab_textdomain( directory );
 
 		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());

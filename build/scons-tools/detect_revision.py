@@ -9,7 +9,7 @@
 import os
 
 def detect_revision():
-	revnum='UNKNOWN'
+	revnum='UNKNOWN-VERSION'
 
 	if os.path.exists('.svn'):
 		has_svn = os.system('svn >/dev/null 2>&1')==256
