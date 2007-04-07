@@ -102,7 +102,7 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
-	opts.Add('build', 'debug-no-parachute / debug-slow / debug-efence / debug(default) / release / profile', 'debug')
+	opts.Add('build', 'debug(default) / profile / release', 'debug')
 	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '')
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
@@ -112,8 +112,10 @@ def cli_options():
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
 	opts.AddOptions(
-		BoolOption('use_ggz', 'Use the GGZ Gamingzone?', 0),
-		BoolOption('cross', 'Is this a cross compile? (developer use only)', 0)
+		BoolOption('enable_sdl_parachute', 'Enable SDL parachute?', 0),
+		BoolOption('enable_efence', 'Use the efence memory debugger?', 0),
+		BoolOption('enable_ggz', 'Use the GGZ Gamingzone?', 0),
+		#BoolOption('enable_cross', 'Is this a cross compile? (developer use only)', 0)
 		)
 	return opts
 
@@ -185,67 +187,34 @@ if env['PLATFORM']=='darwin':
 #
 # Parse build type
 
-DEBUG=0
-PROFILE=0
-OPTIMIZE=0
-SDL_PARACHUTE=1
-STRIP=0
-EFENCE=0
-if env['build']=='debug-no-parachute':
-	DEBUG=1
-	OPTIMIZE=1
-	SDL_PARACHUTE=0
-
-if env['build']=='debug-slow':
-	DEBUG=1
+env.debug=0
+env.optimize=0
+env.strip=0
+env.efence=0
+env.profile=0
 
 if env['build']=='debug':
-	DEBUG=1
-	OPTIMIZE=1
-
-if env['build']=='debug-efence':
-	DEBUG=1
-	OPTIMIZE=1
-	EFENCE=1
-
-if env['build']=='profile':
-	DEBUG=1
-	OPTIMIZE=1
-	PROFILE=1
-
-if env['build']=='release':
-	OPTIMIZE=1
-	STRIP=1
-
-if DEBUG:
 	env.debug=1
-	env.Append(CCFLAGS='-DDEBUG')
-else:
-	env.debug=0
-	env.Append(CCFLAGS='-DNDEBUG')
-
-if PROFILE:
-	env.profile=1
-else:
-	env.profile=0
-
-if OPTIMIZE:
-	env.optimize=1
-else:
-	env.optimize=0
-
-if EFENCE:
-	env.efence=1
-else:
-	env.efence=0
-
-if not SDL_PARACHUTE:
 	env.Append(CCFLAGS='-DNOPARACHUTE')
 
-if STRIP:
+if env['build']=='profile':
+	env.debug=1
+	env.optimize=1
+	env.profile=1
+	env.Append(CCFLAGS='-DNOPARACHUTE')
+
+if env['build']=='release':
+	env.optimize=1
 	env.strip=1
+	SDL_PARACHUTE=1
+
+if env.debug==1:
+	env.Append(CCFLAGS='-DDEBUG')
 else:
-	env.strip=0
+	env.Append(CCFLAGS='-DNDEBUG')
+
+if env['enable_efence']=='1':
+	env.efence=1
 
 ################################################################################
 
@@ -359,7 +328,6 @@ distadd(env, 'README-compiling.txt')
 distadd(env, 'README.developers')
 distadd(env, 'SConstruct')
 distadd(env, 'build-widelands.sh')
-distadd(env, 'macos')
 
 dist=env.DistPackage('widelands-'+env['build_id'], '')
 Alias('dist', dist)

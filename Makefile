@@ -45,6 +45,8 @@ ifndef CXX
 CXX:=g++
 endif
 
+#ADD_CFLAGS:=-DNO_PARACHUTE
+
 # additional build flags. if you're not a developer, you don't want
 # to change this
 #ADD_CFLAGS:= inherit flags from command line!
@@ -62,7 +64,7 @@ endif
 #  profile    optimized, debugging symbols, profiling
 #
 ifndef BUILD
-BUILD:=release
+BUILD:=debug
 endif
 
 endif
@@ -117,19 +119,8 @@ OPTIMIZE:=yes
 DEBUG:=yes
 PROFILE:=yes
 else
-ifeq ($(BUILD),debug-slow)
-DEBUG:=yes
-else
 ifeq ($(BUILD),debug)
-BUILD:=debug
-OPTIMIZE:=yes
 DEBUG:=yes
-else
-BUILD:=debug-no-parachute
-OPTIMIZE:=YES
-DEBUG:=YES
-ADD_CFLAGS:=-DNO_PARACHUTE
-endif
 endif
 endif
 endif

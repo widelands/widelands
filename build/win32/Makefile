@@ -28,6 +28,8 @@ SDL_CONFIG:=sdl-config
 # ctags
 CTAGS:=/usr/bin/ctags
 
+#ADD_CFLAGS:=-DNO_PARACHUTE
+
 # additional build flags. if you're not a developer, you don't want
 # to change this
 #ADD_CFLAGS:= inherit flags from command line!
@@ -37,14 +39,12 @@ CTAGS:=/usr/bin/ctags
 #ADD_LDFLAGS:=
 
 # Different build-types:
-#  debug-no-parachute optimized, debugging symbols, disable SDLs parachute
-#  debug-slow debugging symbols
-#  debug      optimized, debugging symbols
+#  debug      not optimized, debugging symbols
 #  release    optimized
 #  profile    optimized, debugging symbols, profiling
 #
 ifndef BUILD
-BUILD:=debug-slow
+BUILD:=debug
 endif
 
 ifndef CXX
@@ -86,19 +86,8 @@ OPTIMIZE:=yes
 DEBUG:=yes
 PROFILE:=yes
 else
-ifeq ($(BUILD),debug-slow)
-DEBUG:=yes
-else
 ifeq ($(BUILD),debug)
-BUILD:=debug
-OPTIMIZE:=yes
 DEBUG:=yes
-else
-BUILD:=debug-no-parachute
-OPTIMIZE:=YES
-DEBUG:=YES
-ADD_CFLAGS:=-DNO_PARACHUTE
-endif
 endif
 endif
 endif
