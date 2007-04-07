@@ -84,22 +84,23 @@ def parse_conf(env, output):
 ################################################################################
 
 def parse_cli(env):
-	if env['use_ggz']:
+	if env['enable_ggz']:
 		env.Append(CCFLAGS='-DUSE_GGZ')
 		env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
 
-	if env['cross']:
-		print 'Cross-compiling does not work yet!'
-		env.Exit(1)
-		#TARGET='i586-mingw32msvc'
-		#PREFIX='/usr/local/cross-tools'
-		#env['ENV']['PATH']=PREFIX+'/'+TARGET+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
-		#env['CXX']=TARGET+'-g++'
-		### manually overwrite
-		###env['sdlconfig']=PREFIX+'/bin/'+TARGET+'-sdl_config'
-		#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
-	else:
-		TARGET='native'
+	#if env['cross']:
+	#	print 'Cross-compiling does not work yet!'
+	#	env.Exit(1)
+	#	#TARGET='i586-mingw32msvc'
+	#	#PREFIX='/usr/local/cross-tools'
+	#	#env['ENV']['PATH']=PREFIX+'/'+TARGET+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
+	#	#env['CXX']=TARGET+'-g++'
+	#	### manually overwrite
+	#	###env['sdlconfig']=PREFIX+'/bin/'+TARGET+'-sdl_config'
+	#	#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
+	#else:
+	#	TARGET='native'
+	TARGET='native'
 
 	return TARGET
 

@@ -193,6 +193,11 @@ env.strip=0
 env.efence=0
 env.profile=0
 
+if env['build'] not in ['debug', 'profile', 'release']:
+	print "\nERROR: unknown buildtype:", env['build']
+	print "       Please specify a valid build type."
+	Exit(1)
+
 if env['build']=='debug':
 	env.debug=1
 	env.Append(CCFLAGS='-DNOPARACHUTE')
@@ -225,8 +230,6 @@ env.Append(LIBPATH=env['extra_lib_path'])
 
 BINDIR= os.path.join(env['install_prefix'], env['bindir'])
 DATADIR=os.path.join(env['install_prefix'], env['datadir'])
-
-#TODO: make sure that build type is valid !!!
 
 ################################################################################
 
