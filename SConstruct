@@ -304,7 +304,7 @@ SConscript('game_server/SConscript')
 SConscript('maps/SConscript')
 SConscript('music/SConscript')
 SConscript('pics/SConscript')
-(buildlocale, buildcat)=SConscript('po/SConscript')
+buildlocale=SConscript('po/SConscript')
 SConscript('sound/SConscript')
 SConscript('src/SConscript.dist')
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
@@ -372,7 +372,6 @@ longlines=PhonyTarget("longlines", 'utils/count-longlines.py')
 ###################################################################### precommit
 
 #Alias('precommit', 'indent')
-Alias('precommit', buildcat)
 Alias('precommit', 'longlines')
 
 ################################################################## Documentation
