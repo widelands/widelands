@@ -29,6 +29,7 @@
 #include "font_loader.h"
 #include "graphic.h"
 #include "rendertarget.h"
+#include "surface.h"
 #include "util.h"
 #include "wexception.h"
 #include "text_parser.h"

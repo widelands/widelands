@@ -17,19 +17,33 @@
  *
  */
 
-#include "terrain.h"
+#ifndef COLORMAP_H
+#define COLORMAP_H
+
+#include <SDL_video.h>
 
 /**
- * get lambda and mu so that lambda*u+mu*v=(1 0)^T with u=(u1 u2)^T and
- * v=(v1 v2)^T
+ * Colormap contains a palette and lookup table for use with ground textures.
 */
-void get_horiz_linearcomb (int u1, int u2, int v1, int v2,
-			   float& lambda, float& mu)
-{
-	float det;
+class Colormap {
+// 	friend class Texture;
 
-	det = u1 * v2 - u2 * v1; //  determinant of (u v)
+	SDL_Color palette[256];
 
-	lambda = v2 / det;       //  by Cramer's rule
-	mu=-u2/det;
-}
+	 /** maps 8 bit color and brightness value to the shaded color
+	  * \note brightness is currently 8 bits. Restricting brightness
+	  * to 64 or less shades would greatly reduce the size of this
+	  * table, and thus improve memory cache impact inside the renderer.
+	  */
+	void * colormap;
+
+public:
+	Colormap (const SDL_Color &, const SDL_PixelFormat & fmt);
+	~Colormap ();
+
+	SDL_Color* get_palette() { return palette; }
+
+	void* get_colormap () const { return colormap; }
+};
+
+#endif

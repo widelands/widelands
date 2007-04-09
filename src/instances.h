@@ -35,7 +35,6 @@ class Path;
 class Player;
 namespace UI {struct Tab_Panel;};
 
-
 //
 // Base class for descriptions of worker, files and so on. this must just
 // link them together
@@ -88,6 +87,13 @@ private:
 	Map_Object_Descr            (const Map_Object_Descr &);
 };
 
+/**
+ * dummy class because Map_Object needs a description
+ * \todo move this to another header??
+ */
+class Flag_Descr : public Map_Object_Descr {
+};
+extern Flag_Descr g_flag_descr;
 
 /*
 Notes on Map_Object

@@ -48,14 +48,12 @@ class Warehouse;
 class Widelands_Map_Map_Object_Loader;
 class Widelands_Map_Map_Object_Saver;
 
-
 struct Neighbour {
 	Flag * flag;
 	Road * road;
 	int    cost;
 };
 typedef std::vector<Neighbour> Neighbour_list;
-
 
 /**
  * WareInstance represents one item while it is being carried around.

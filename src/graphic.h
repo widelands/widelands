@@ -27,23 +27,24 @@ class RenderTarget;
 class FileWrite;
 class Surface;
 
-enum { // picture module flags
+/// picture module flags
+enum {
 	PicMod_UI = 1,
 	PicMod_Menu = 2,
 	PicMod_Game = 4,
 	PicMod_Font = 8,
 };
 
-/*
-class Graphic
-
-This interface represents the framebuffer / screen.
-
-Picture IDs can be allocated using get_picture() and used in RenderTarget::blit().
-Pictures are only loaded from disk once and thrown out of memory when the
-graphics system is unloaded, or when flush() is called with the appropriate
-module flag; the user can request to flush one single picture alone, but this is only
-used (and usefull) in the editor.
+/**
+ * This interface represents the framebuffer / screen.
+ *
+ * Picture IDs can be allocated using \ref get_picture() and used in
+ * \ref RenderTarget::blit().
+ *
+ * Pictures are only loaded from disk once and thrown out of memory when the
+ * graphics system is unloaded, or when \ref flush() is called with the
+ * appropriate module flag; the user can request to flush one single picture
+ * alone, but this is only used (and usefull) in the editor.
 */
 class Graphic {
 public:

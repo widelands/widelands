@@ -329,7 +329,8 @@ void Surface::draw_minimap
  const Point               viewpt,
  const uint                flags)
 {
-	Uint8 * const pixels = static_cast<Uint8 * const>(get_pixels());
+	//TODO: this const_cast is evil and should be exorcised.
+	Uint8 * const pixels = const_cast<Uint8 * const>(static_cast<const Uint8 * const>(get_pixels()));
 	const ushort pitch = get_pitch();
 	const X_Coordinate w = egbase.map().get_width();
 	switch (format().BytesPerPixel) {

@@ -43,6 +43,8 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
+Flag_Descr g_flag_descr;
+
 /*
 ==============================================================================
 
@@ -572,18 +574,6 @@ Flag IMPLEMENTATION
 
 ==============================================================================
 */
-
-// dummy class because Map_Object needs a description
-class Flag_Descr : public Map_Object_Descr {
-public:
-	Flag_Descr();
-};
-
-Flag_Descr::Flag_Descr()
-{
-}
-
-Flag_Descr g_flag_descr;
 
 /*
 ===============

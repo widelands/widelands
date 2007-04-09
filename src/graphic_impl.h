@@ -31,311 +31,20 @@
 #include "geometry.h"
 #include "graphic.h"
 #include "player.h"
-#include "rendertarget.h"
+#include "rendertargetimpl.h"
 #include "rgbcolor.h"
+#include "surface.h"
+#include "texture.h"
+
+#define MAX_RECTS 20
+
+#define get_graphicimpl() (static_cast<GraphicImpl*>(g_gr))
 
 SDL_Surface* LoadImage(const char * const filename);
 
-struct Texture;
-
-/*
-class Surface
-const
-This was formerly called struct Bitmap. But now it manages an SDL Surface as it's
-core.
-
-Represents a simple bitmap without managing its memory.
-The rendering functions do NOT perform any clipping; this is up to the caller.
+/**
+ * The 16-bit software renderer implementation of the Graphic interface.
 */
-class Surface {
-   friend class AnimationGfx;
-   friend class Font_Handler; // Needs m_surface for SDL_Blitting
-
-   SDL_Surface* m_surface;
-   int m_offsx;
-   int m_offsy;
-   uint m_w, m_h;
-
-   public:
-      Surface( void ) { m_surface = 0; m_offsy = m_offsx = 0; }
-      Surface( const Surface& );
-      ~Surface( void ) { if( m_surface ) SDL_FreeSurface( m_surface ); m_surface = 0; }
-
-      // Set surface, only call once
-	void set_sdl_surface(SDL_Surface & surface) throw()
-	{m_surface = &surface; m_w = m_surface->w; m_h = m_surface->h;}
-	  SDL_Surface* get_sdl_surface() { return m_surface; }
-
-      // Get width and height
-	uint get_w() const throw () {return m_w;}
-	uint get_h() const throw () {return m_h;}
-      void update( void );
-
-      // Save a bitmap of this to a file
-	void save_bmp(const char & fname) const;
-
-      // For the bravest: Direct Pixel access. Use carefully
-      void force_disable_alpha( void ); // Needed if you want to blit directly to the screen by memcpy
-	const SDL_PixelFormat * get_format() const
-		throw ()
-	{return m_surface->format;}
-	const SDL_PixelFormat & format() const throw ()
-	{assert(m_surface); return *m_surface->format;}
-	ushort get_pitch() const throw () {return m_surface->pitch;}
-	void * get_pixels() {
-		assert(m_surface);
-		return
-			static_cast<uchar * const>(m_surface->pixels) +
-			m_offsy*m_surface->pitch + m_offsx*m_surface->format->BytesPerPixel;
-	}
-	const void * get_pixels() const throw () {
-		assert(m_surface);
-		return
-			static_cast<uchar * const>(m_surface->pixels)
-			+
-			m_offsy * m_surface->pitch
-			+
-			m_offsx * m_surface->format->BytesPerPixel;
-	}
-
-      // Lock
-      inline void lock( void ) { if( SDL_MUSTLOCK( m_surface )) SDL_LockSurface( m_surface ); }
-      inline void unlock( void ) { if( SDL_MUSTLOCK( m_surface )) SDL_UnlockSurface( m_surface ); }
-
-      // For the slowest: Indirect pixel access
-	inline ulong get_pixel(uint x, uint y) {
-         x+= m_offsx;
-         y+= m_offsy;
-         assert( x < get_w() && y < get_h() );
-         assert( m_surface );
-         // Locking not needed: reading only
-		const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
-		Uint8 * const pix =
-			static_cast<Uint8 * const>(m_surface->pixels) +
-			y * m_surface->pitch + x * bytes_per_pixel;
-		switch (bytes_per_pixel) {
-		case 1: return *pix; //  Maybe needed for save_png.
-		case 2: return *reinterpret_cast<const Uint16 * const>(pix);
-		case 3: //  Needed for save_png.
-		case 4: return *reinterpret_cast<const Uint32 * const>(pix);
-		}
-         assert(0);
-         return 0; // Should never be here
-	}
-	inline void set_pixel(uint x, uint y, const Uint32 clr) {
-         x+= m_offsx;
-         y+= m_offsy;
-		assert(x < get_w());
-		assert(y < get_h());
-         assert( m_surface );
-         if( SDL_MUSTLOCK( m_surface ))
-            SDL_LockSurface( m_surface );
-		const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
-		Uint8 * const pix =
-			static_cast<Uint8 * const>(m_surface->pixels) +
-			y * m_surface->pitch + x * bytes_per_pixel;
-		switch (bytes_per_pixel) {
-		case 2:
-			*reinterpret_cast<Uint16 * const>(pix) =
-				static_cast<const Uint16>(clr);
-			break;
-		case 4: *reinterpret_cast<Uint32 * const>(pix) = clr; break;
-		}
-         if( SDL_MUSTLOCK( m_surface ))
-            SDL_UnlockSurface( m_surface );
-	}
-
-      void clear();
-	void draw_rect(const Rect, const RGBColor);
-	void fill_rect(const Rect, const RGBColor);
-	void brighten_rect(const Rect, const int factor);
-
-      void blit(Point dst, Surface* src, Rect srcrc);
-      void fast_blit( Surface* src );
-
-	void draw_minimap
-		(const Editor_Game_Base  & egbase,
-		 const Player * const,
-		 const Rect                rc,
-		 const Point               viewpoint,
-		 const uint                flags);
-
-
-      // sw16_terrain.cc
-	void draw_field
-		(Rect &,
-		 Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-            const int posx, const int rposx, const int posy,
-            const int blposx, const int rblposx, const int blposy,
-            uchar roads,
-		 Sint8            f_brightness,
-		 Sint8            r_brightness,
-		 Sint8           bl_brightness,
-		 Sint8           br_brightness,
-		 const Texture & tr_d_texture,
-		 const Texture &  l_r_texture,
-		 const Texture &  f_d_texture,
-		 const Texture &  f_r_texture,
-		 bool);
-
-
-   private:
-      inline void set_subwin( Rect r ) { m_offsx = r.x; m_offsy = r.y; m_w =r.w; m_h = r.h; }
-      inline void unset_subwin( void ) { m_offsx = 0; m_offsy = 0; m_w = m_surface->w; m_h = m_surface->h; }
-};
-
-
-/** class Colormap
-*
-* Colormap contains a palette and lookup table for use with ground textures.
-*/
-class Colormap {
-//    friend class Texture;
-
-	SDL_Color palette[256];
-	void * colormap; // maps 8 bit color and brightness value to the shaded color
-		// NOTE: brightness is currently 8 bits. Restricting brightness
-		// to 64 or less shades would greatly reduce the size of this
-		// table, and thus improve memory cache impact inside the renderer.
-
-public:
-	Colormap (const SDL_Color &, const SDL_PixelFormat & fmt);
-	~Colormap ();
-
-	SDL_Color* get_palette() { return palette; }
-
-   void* get_colormap () const { return colormap; }
-};
-
-
-/** class Texture
-*
-* Texture represents are terrain texture, which is strictly
-* TEXTURE_W by TEXTURE_H pixels in size. It uses 8 bit color, and a pointer
-* to the corresponding palette and color lookup table is provided.
-*
-* Currently, this is initialized from a 16 bit bitmap. This should be
-* changed to load 8 bit bitmaps directly.
-*/
-class Texture {
-private:
-	Colormap      * m_colormap;
-	uint            m_nrframes;
-	unsigned char * m_pixels;
-	uint            m_frametime;
-	unsigned char * m_curframe;
-	std::string     m_texture_picture;
-   bool              is_32bit;
-   bool              m_was_animated;
-
-public:
-	Texture
-		(const char & fnametempl, const uint frametime, const SDL_PixelFormat &);
-	~Texture ();
-
-   inline const char* get_texture_picture(void) { return m_texture_picture.c_str(); }
-
-	unsigned char *get_pixels () const { return m_pixels; }
-	unsigned char* get_curpixels() const { return m_curframe; }
-	void* get_colormap () const { return m_colormap->get_colormap(); }
-
-	Uint32 get_minimap_color(const char shade);
-
-	void animate(uint time);
-   inline void reset_was_animated( void ) { m_was_animated = false; }
-	bool was_animated() const throw () {return m_was_animated;}
-};
-
-/*
- * This contains all the road textures needed to render roads
- */
-struct Road_Textures {
-   uint pic_road_normal;
-   uint pic_road_busy;
-};
-
-/*
-class RenderTargetImpl
-
-The 16-bit software renderer implementation of the RenderTarget interface
-*/
-class RenderTargetImpl : public RenderTarget {
-	Surface* m_ground_surface; // only needed, when this is a mapview
-	Surface * m_surface;        //  the target surface
-	Rect      m_rect;           //  the current clip rectangle
-	Point     m_offset;         //  drawing offset
-
-public:
-	RenderTargetImpl(Surface* bmp);
-	virtual ~RenderTargetImpl();
-
-	void reset();
-
-	virtual void get_window(Rect* rc, Point* ofs) const;
-	virtual void set_window(const Rect& rc, const Point& ofs);
-	virtual bool enter_window(const Rect& rc, Rect* previous, Point* prevofs);
-
-	virtual int get_w() const;
-	virtual int get_h() const;
-
-   virtual void draw_line(int x1, int y1, int x2, int y2, RGBColor color);
-	virtual void draw_rect(const Rect, const RGBColor);
-	virtual void fill_rect(const Rect, const RGBColor);
-	virtual void brighten_rect(const Rect, const int factor);
-	virtual void clear();
-
-	virtual void blit(const Point, uint picture);
-	virtual void blitrect(const Point dst, uint picture, const Rect src);
-	virtual void tile(Rect r, uint picture, Point ofs);
-
-	virtual void rendermap
-		(const Editor_Game_Base &,
-		 const Player * const,
-		 Point viewofs,
-		 const bool draw_all);
-
-	/**
-	 * Renders a minimap into the current window. The field at viewpoint will be
-	 * in the top-left corner of the window. Flags specifies what information to
-	 * display (see Minimap_XXX enums).
-	 *
-	 * Calculate the field at the top-left corner of the clipping rect
-	 * The entire clipping rect will be used for drawing.
-	 */
-	virtual void renderminimap
-		(const Editor_Game_Base  & egbase,
-		 const Player * const     player,
-		 const Point               viewpoint,
-		 const uint                flags)
-	{
-		m_surface->draw_minimap
-			(egbase, player, m_rect, viewpoint - m_offset, flags);
-	}
-
-	virtual void drawanim
-		(Point dst,
-		 const uint animation,
-		 const uint time,
-		 const Player * const plrclrs = 0);
-	virtual void drawanimrect
-		(const Point dst,
-		 const uint animation,
-		 const uint time,
-		 const Player * const plrclrs,
-		 Rect);
-private:
-	bool clip(Rect &) const throw ();
-	void doblit(Point, Surface * const, Rect);
-};
-
-
-/*
-class GraphicImpl
-
-The 16-bit software renderer implementation of the Graphic interface.
-*/
-#define MAX_RECTS 20
-
 class GraphicImpl : public Graphic {
 public:
 	GraphicImpl(int w, int h, int bpp, bool fullscreen);
@@ -359,18 +68,18 @@ public:
 	virtual uint create_surface(int w, int h);
 	virtual void free_surface(uint pic);
 	virtual RenderTarget* get_surface_renderer(uint pic);
-   virtual void save_png(uint, FileWrite*);
+	virtual void save_png(uint, FileWrite*);
 
 	Surface* get_picture_surface(uint id);
 
 	// Map textures
 	virtual uint get_maptexture(const char & fnametempl, const uint frametime);
 	virtual void animate_maptextures(uint time);
-   virtual void reset_texture_animation_reminder( void );
+	virtual void reset_texture_animation_reminder( void );
 	Texture* get_maptexture_data(uint id);
 
-   // Road textures
-   Surface* get_road_texture( int );
+	// Road textures
+	Surface* get_road_texture( int );
 
 	// Animations
 	virtual void load_animations();
@@ -386,8 +95,8 @@ public:
 	virtual const char* get_maptexture_picture(uint id);
 
 private:
-   // Static function for png writing
-   static void m_png_write_function( png_structp, png_bytep, png_size_t );
+	// Static function for png writing
+	static void m_png_write_function( png_structp, png_bytep, png_size_t );
 
 	struct Picture {
 		int mod; //  0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
@@ -414,13 +123,9 @@ private:
 	std::vector<Picture>        m_pictures;
 	picmap_t m_picturemap; //  hash of filename/picture ID pairs
 
-   Road_Textures*       m_roadtextures;
+	Road_Textures*       m_roadtextures;
 	std::vector<Texture      *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 };
-
-#define get_graphicimpl() (static_cast<GraphicImpl*>(g_gr))
-
-
 
 #endif // included_graphic_impl_h

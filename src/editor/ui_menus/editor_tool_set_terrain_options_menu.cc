@@ -83,7 +83,7 @@ m_tool(tool)
 			if (cur_x == terrains_in_row) {
 				cur_x = 0;
 				pos.x  = hmargin();
-				pos.y += TEXTURE_H + vspacing();
+				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
          // Create a surface for this
@@ -132,20 +132,20 @@ m_tool(tool)
          m_surfaces.push_back(surface);
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos.x , pos.y, surface);
-			cb.set_size(TEXTURE_W + 1, TEXTURE_H + 1);
+			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedtoid.set
 				(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
 			m_checkboxes[i] = &cb;
 
-			pos.x += TEXTURE_W + hspacing();
+			pos.x += TEXTURE_WIDTH + hspacing();
          ++cur_x;
       }
-	pos.y += TEXTURE_H + vspacing();
+	pos.y += TEXTURE_HEIGHT + vspacing();
 
 	set_inner_size
-		(terrains_in_row * (TEXTURE_W + hspacing()) + 2 * hmargin() - hspacing(),
+		(terrains_in_row * (TEXTURE_WIDTH + hspacing()) + 2 * hmargin() - hspacing(),
 		 pos.y + m_cur_selection.get_h() + vmargin());
 	pos.x = get_inner_w() / 2;
 	m_cur_selection.set_pos(pos);

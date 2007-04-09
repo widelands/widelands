@@ -39,10 +39,10 @@
 
 /* \name Textures
  * textures have a fixed size and are squares
- * TEXTURE_H is just defined for easier understandement of the code*/
+ * TEXTURE_HEIGHT is just defined for easier understandement of the code*/
 //@{
-#define TEXTURE_W 64
-#define TEXTURE_H TEXTURE_W
+#define TEXTURE_WIDTH 64
+#define TEXTURE_HEIGHT TEXTURE_WIDTH
 //@}
 
 /// \name Fonts

@@ -23,6 +23,7 @@
 #include "bitoutbuffer.h"
 #include "editor_game_base.h"
 #include "field.h"
+#include "instances.h" //for g_flag_descr
 #include "player.h"
 #include "transport.h"
 #include "tribe.h"
@@ -30,7 +31,6 @@
 #include "filesystem.h"
 #include "zip_exceptions.h"
 
-extern const Map_Object_Descr g_flag_descr;
 extern const Map_Object_Descr g_road_descr;
 
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
