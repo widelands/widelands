@@ -41,11 +41,13 @@
 #define get_graphicimpl() (static_cast<GraphicImpl*>(g_gr))
 
 SDL_Surface* LoadImage(const char * const filename);
+Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen);
 
 /**
  * The 16-bit software renderer implementation of the Graphic interface.
 */
-class GraphicImpl : public Graphic {
+class GraphicImpl : public Graphic
+{
 public:
 	GraphicImpl(int w, int h, int bpp, bool fullscreen);
 	virtual ~GraphicImpl();
@@ -86,7 +88,7 @@ public:
 	AnimationGfx* get_animation(const uint anim) const;
 	virtual AnimationGfx::Index nr_frames(const uint anim) const;
 	virtual void get_animation_size
-		(const uint anim, const uint time, uint & w, uint & h);
+	(const uint anim, const uint time, uint & w, uint & h);
 
 	// Misc functions
 	virtual void screenshot(const char & fname) const;
@@ -98,7 +100,8 @@ private:
 	// Static function for png writing
 	static void m_png_write_function( png_structp, png_bytep, png_size_t );
 
-	struct Picture {
+	struct Picture
+	{
 		int mod; //  0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
 		Surface*  surface;
 

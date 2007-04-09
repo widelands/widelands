@@ -23,6 +23,12 @@
 #include "animation_gfx.h"
 #include "types.h"
 
+/**
+ * Names of road terrains
+ */
+#define ROAD_NORMAL_PIC "pics/roadt_normal.png"
+#define ROAD_BUSY_PIC   "pics/roadt_busy.png"
+
 class RenderTarget;
 class FileWrite;
 class Surface;
@@ -46,7 +52,9 @@ enum {
  * appropriate module flag; the user can request to flush one single picture
  * alone, but this is only used (and usefull) in the editor.
 */
-class Graphic {
+
+class Graphic
+{
 public:
 	virtual ~Graphic() { }
 
@@ -61,25 +69,25 @@ public:
 
 	virtual void flush(int mod) = 0;
 	virtual uint get_picture(int mod, const char* fname) = 0;
-   virtual void get_picture_size(const uint pic, uint & w, uint & h) = 0;
+	virtual void get_picture_size(const uint pic, uint & w, uint & h) = 0;
 	virtual uint get_picture
-		(const int mod, Surface &, const char * const name = 0)
-		= 0;
-   virtual void save_png(uint, FileWrite* )=0;
-   virtual uint create_surface(int w, int h) = 0;
+	(const int mod, Surface &, const char * const name = 0)
+	= 0;
+	virtual void save_png(uint, FileWrite* )=0;
+	virtual uint create_surface(int w, int h) = 0;
 	virtual void free_surface(uint pic) = 0;
 	virtual RenderTarget* get_surface_renderer(uint pic) = 0;
 
 	virtual uint get_maptexture(const char & fnametempl, const uint frametime)
-		= 0;
+	= 0;
 	virtual void animate_maptextures(uint time) = 0;
-   virtual void reset_texture_animation_reminder( void ) = 0;
+	virtual void reset_texture_animation_reminder( void ) = 0;
 
 	virtual void load_animations() = 0;
 	virtual AnimationGfx::Index nr_frames(const uint anim) const = 0;
 	virtual void get_animation_size
-		(const uint anim, const uint time, uint & w, uint & h)
-		= 0;
+	(const uint anim, const uint time, uint & w, uint & h)
+	= 0;
 
 	virtual void screenshot(const char & fname) const = 0;
 	virtual const char* get_maptexture_picture (uint id) = 0;
@@ -87,5 +95,4 @@ public:
 
 extern Graphic* g_gr;
 
-
-#endif /* GRAPHIC_H */
+#endif
