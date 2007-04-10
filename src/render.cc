@@ -30,7 +30,7 @@ Rendering functions of the 16-bit software renderer.
 #include "minimap.h"
 #include "player.h"
 #include "rgbcolor.h"
-#include "graphic_impl.h"
+#include "graphic.h"
 #include "transport.h"
 #include "wexception.h"
 #include "world.h"
@@ -225,7 +225,7 @@ static inline ulong calc_minimap_color
 
 	if (flags & MiniMap::Terrn) {
 		pixelcolor =
-			get_graphicimpl()->
+			g_gr->
 			get_maptexture_data
 			(egbase.map().world()
 			 .terrain_descr(f.field->terrain_d()).get_texture())

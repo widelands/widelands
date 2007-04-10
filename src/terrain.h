@@ -20,7 +20,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-#include "graphic_impl.h"
+#include "graphic.h"
 #include "mapviewpixelconstants.h"
 #include "random.h"
 #include "surface.h"
@@ -532,8 +532,8 @@ template<typename T> static void draw_field_int
 	Vertex bl_vert
 		(blposx, blposy - bl->get_height() * HEIGHT_FACTOR, bl_brightness, 64, 64);
 
-	const Surface & rt_normal = *get_graphicimpl()->get_road_texture(Road_Normal);
-	const Surface & rt_busy   = *get_graphicimpl()->get_road_texture(Road_Busy);
+	const Surface & rt_normal = *g_gr->get_road_texture(Road_Normal);
+	const Surface & rt_busy   = *g_gr->get_road_texture(Road_Busy);
 
 	if( draw_all ) {
 		render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);

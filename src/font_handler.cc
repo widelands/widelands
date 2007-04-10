@@ -34,10 +34,7 @@
 #include "wexception.h"
 #include "text_parser.h"
 
-// GRAPHIC_TODO: remove this include
-#include "graphic_impl.h"
-
-/*
+/**
  * Plain Constructor
  */
 Font_Handler::Font_Handler(void) {
@@ -47,7 +44,7 @@ Font_Handler::Font_Handler(void) {
 	m_cbdata = 0;
 }
 
-/*
+/**
  * Plain Destructor
  */
 Font_Handler::~Font_Handler(void) {
@@ -270,7 +267,8 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	}
 
 	// blit all this together in one Surface
-	return join_sdl_surfaces( global_surface_width, global_surface_height, m_rendered_lines, bg, align, line_spacing);
+	return join_sdl_surfaces( global_surface_width, global_surface_height,
+				  m_rendered_lines, bg, align, line_spacing);
 
 }
 
@@ -284,8 +282,8 @@ void Font_Handler::render_caret
 	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
 
 	Surface* caret_surf =
-		static_cast<const GraphicImpl * const>(g_gr)->get_picture_surface
-		(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
+		g_gr->get_picture_surface(
+			g_gr->get_picture(PicMod_Game, "pics/caret.png"));
 	SDL_Surface* caret_surf_sdl = caret_surf->m_surface;
 
 	SDL_Rect r;
@@ -379,8 +377,8 @@ void Font_Handler::draw_richtext
 				img_pos.y = 0;
 
 				Surface* image =
-					static_cast<const GraphicImpl * const>(g_gr)->get_picture_surface
-					(g_gr->get_picture(PicMod_Game, img_it->c_str()));
+					g_gr->get_picture_surface(
+						g_gr->get_picture(PicMod_Game, img_it->c_str()));
 					// Not Font, but game.
 
 				img_surf_h = img_surf_h < static_cast<const int>(image->get_h()) ?

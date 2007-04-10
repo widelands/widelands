@@ -23,7 +23,7 @@
 #include "fileread.h"
 #include "filesystem.h"
 #include "filewrite.h"
-#include "graphic_impl.h" // Since we are laying about the path of the pictures
+#include "graphic.h" // Since we are laying about the path of the pictures
 #include "map.h"
 #include "profile.h"
 #include "widelands_map_extradata_data_packet.h"

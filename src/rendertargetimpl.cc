@@ -19,7 +19,7 @@
 
 #include <assert.h>
 #include "editor_game_base.h"
-#include "graphic_impl.h"
+#include "graphic.h"
 #include "instances.h" //only needed for g_flag_descr
 #include "mapviewpixelconstants.h"
 #include "overlay_manager.h"
@@ -298,7 +298,7 @@ void RenderTargetImpl::doblit(Point dst, Surface * const src, Rect srcrc)
 */
 void RenderTargetImpl::blit(const Point dst, const uint picture)
 {
-	if (Surface * const src = get_graphicimpl()->get_picture_surface(picture))
+	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
@@ -308,7 +308,7 @@ void RenderTargetImpl::blitrect
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (Surface * const src = get_graphicimpl()->get_picture_surface(picture))
+	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, srcrc);
 }
 
@@ -320,8 +320,7 @@ void RenderTargetImpl::blitrect
 */
 void RenderTargetImpl::tile(Rect r, uint picture, Point ofs)
 {
-	GraphicImpl* gfx = get_graphicimpl();
-	Surface* src = gfx->get_picture_surface(picture);
+	Surface* src = g_gr->get_picture_surface(picture);
 
 	if (!src) {
 		log("RenderTargetImpl::tile: bad picture %u\n", picture);
@@ -484,7 +483,7 @@ void RenderTargetImpl::rendermap
 			map.get_tln(r, &tr);
 			map.get_ln(r, &f);
 			const Texture * f_r_texture =
-				get_graphicimpl()->get_maptexture_data
+				g_gr->get_maptexture_data
 				(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 			uint count = dx;
@@ -500,13 +499,13 @@ void RenderTargetImpl::rendermap
 				r_posx  += TRIANGLE_WIDTH;
 				br_posx += TRIANGLE_WIDTH;
 				const Texture & tr_d_texture =
-					*get_graphicimpl()->get_maptexture_data
+					*g_gr->get_maptexture_data
 					(world.terrain_descr(tr.field->terrain_d()).get_texture());
 				const Texture & f_d_texture =
-					*get_graphicimpl()->get_maptexture_data
+					*g_gr->get_maptexture_data
 					(world.terrain_descr(f.field->terrain_d()).get_texture());
 				f_r_texture =
-					get_graphicimpl()->get_maptexture_data
+					g_gr->get_maptexture_data
 					(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 				const uchar roads =
@@ -835,7 +834,7 @@ void RenderTargetImpl::rendermap
 			map.get_ln(r, &f);
 			Map::Index tr_index = tr.field - &map[0];
 			const Texture * f_r_texture =
-				get_graphicimpl()->get_maptexture_data
+				g_gr->get_maptexture_data
 				(world
 				 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
 				 .get_texture());
@@ -857,14 +856,14 @@ void RenderTargetImpl::rendermap
 				r_posx  += TRIANGLE_WIDTH;
 				br_posx += TRIANGLE_WIDTH;
 				const Texture & tr_d_texture =
-					*get_graphicimpl()->get_maptexture_data
+					*g_gr->get_maptexture_data
 					(world.terrain_descr(first_player_field[tr_index].terrains.d)
 					 .get_texture());
 				const Texture & f_d_texture =
-					*get_graphicimpl()->get_maptexture_data
+					*g_gr->get_maptexture_data
 					(world.terrain_descr(f_player_field.terrains.d).get_texture());
 				f_r_texture =
-					get_graphicimpl()->get_maptexture_data
+					g_gr->get_maptexture_data
 					(world.terrain_descr(f_player_field.terrains.r).get_texture());
 
 				const Uint8 roads =
@@ -1230,7 +1229,7 @@ void RenderTargetImpl::drawanim
 (Point dst, const uint animation, const uint time, const Player * const player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
-	AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
+	AnimationGfx* gfx = g_gr->get_animation(animation);
 
 	//TODO? assert(player);
 	assert(data);
@@ -1273,21 +1272,18 @@ void RenderTargetImpl::drawanimrect
  Rect srcrc)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
-	AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
-	;
-
-	if (!data || !gfx) {
+	if (!data || !g_gr) {
 		log("WARNING: Animation %i doesn't exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	Surface * const frame = gfx->get_frame
-				((time / data->frametime) % gfx->nr_frames(),
+	Surface * const frame = g_gr->get_animation(animation)->get_frame
+				((time / data->frametime) % g_gr->nr_frames(),
 				 player ? player->get_player_number() : 0,
 				 player);
 
-	dst -= gfx->get_hotspot();
+	dst -= g_gr->get_animation(animation)->get_hotspot();
 
 	dst += srcrc;
 

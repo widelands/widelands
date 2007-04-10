@@ -18,7 +18,7 @@
  */
 
 #include "constants.h"
-#include "graphic_impl.h"
+#include "graphic.h"
 #include "layered_filesystem.h"
 #include "texture.h"
 

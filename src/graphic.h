@@ -21,7 +21,11 @@
 #define GRAPHIC_H
 
 #include "animation_gfx.h"
+#include "picture.h"
+#include <png.h>
+#include "rendertargetimpl.h"
 #include "types.h"
+#include <vector>
 
 /**
  * Names of road terrains
@@ -29,20 +33,20 @@
 #define ROAD_NORMAL_PIC "pics/roadt_normal.png"
 #define ROAD_BUSY_PIC   "pics/roadt_busy.png"
 
+#define MAX_RECTS 20
+
 class RenderTarget;
 class FileWrite;
 class Surface;
+class Graphic;
 
-/// picture module flags
-enum {
-	PicMod_UI = 1,
-	PicMod_Menu = 2,
-	PicMod_Game = 4,
-	PicMod_Font = 8,
-};
+///\todo Get rid of this global function
+SDL_Surface* LoadImage(const char * const filename);
+///\todo Get rid of this global function
+Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen);
 
 /**
- * This interface represents the framebuffer / screen.
+ * A renderer to get pixels to a 16bit framebuffer.
  *
  * Picture IDs can be allocated using \ref get_picture() and used in
  * \ref RenderTarget::blit().
@@ -56,41 +60,66 @@ enum {
 class Graphic
 {
 public:
-	virtual ~Graphic() { }
+	Graphic(int w, int h, int bpp, bool fullscreen);
+	~Graphic();
 
-	virtual int get_xres() = 0;
-	virtual int get_yres() = 0;
-	virtual RenderTarget* get_render_target() = 0;
-	virtual void toggle_fullscreen() = 0;
-	virtual void update_fullscreen() = 0;
-	virtual void update_rectangle(int x, int y, int w, int h) = 0;
-	virtual bool need_update() = 0;
-	virtual void refresh() = 0;
+	int get_xres();
+	int get_yres();
+	RenderTarget* get_render_target();
+	void toggle_fullscreen();
+	void update_fullscreen();
+	void update_rectangle(int x, int y, int w, int h);
+	bool need_update();
+	void refresh();
 
-	virtual void flush(int mod) = 0;
-	virtual uint get_picture(int mod, const char* fname) = 0;
-	virtual void get_picture_size(const uint pic, uint & w, uint & h) = 0;
-	virtual uint get_picture
-	(const int mod, Surface &, const char * const name = 0)
-	= 0;
-	virtual void save_png(uint, FileWrite* )=0;
-	virtual uint create_surface(int w, int h) = 0;
-	virtual void free_surface(uint pic) = 0;
-	virtual RenderTarget* get_surface_renderer(uint pic) = 0;
+	void flush(int mod);
+	uint get_picture(int mod, const char* fname);
+	void get_picture_size(const uint pic, uint & w, uint & h);
+	uint get_picture(const int mod, Surface &, const char * const name = 0);
+	Surface* get_picture_surface(uint id);
+	void save_png(uint, FileWrite* );
+	uint create_surface(int w, int h);
+	void free_surface(uint pic);
+	RenderTarget* get_surface_renderer(uint pic);
 
-	virtual uint get_maptexture(const char & fnametempl, const uint frametime)
-	= 0;
-	virtual void animate_maptextures(uint time) = 0;
-	virtual void reset_texture_animation_reminder( void ) = 0;
+	uint get_maptexture(const char & fnametempl, const uint frametime);
+	void animate_maptextures(uint time);
+	void reset_texture_animation_reminder( void );
 
-	virtual void load_animations() = 0;
-	virtual AnimationGfx::Index nr_frames(const uint anim) const = 0;
-	virtual void get_animation_size
-	(const uint anim, const uint time, uint & w, uint & h)
-	= 0;
+	void load_animations();
+	AnimationGfx::Index nr_frames(const uint anim=0) const;
+	void get_animation_size(const uint anim, const uint time, uint & w, uint & h);
 
-	virtual void screenshot(const char & fname) const = 0;
-	virtual const char* get_maptexture_picture (uint id) = 0;
+	void screenshot(const char & fname) const;
+	const char* get_maptexture_picture (uint id);
+	Texture* get_maptexture_data(uint id);
+	AnimationGfx* get_animation(const uint anim) const;
+
+	Surface* get_road_texture( int roadtex);
+
+protected:
+	/// Static function for png writing
+	static void m_png_write_function(png_structp png_ptr,
+					 png_bytep data,
+					 png_size_t length);
+
+	std::vector<Picture>::size_type find_free_picture();
+
+	typedef std::map<std::string, std::vector<Picture>::size_type> picmap_t;
+
+	Surface m_screen;
+	RenderTargetImpl * m_rendertarget;
+	SDL_Rect m_update_rects[MAX_RECTS];
+	int m_nr_update_rects;
+	bool m_update_fullscreen;
+
+	std::vector<Picture> m_pictures;
+	/// hash of filename/picture ID pairs
+	picmap_t m_picturemap;
+
+	Road_Textures* m_roadtextures;
+	std::vector<Texture *> m_maptextures;
+	std::vector<AnimationGfx *> m_animations;
 };
 
 extern Graphic* g_gr;
