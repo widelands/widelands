@@ -672,7 +672,7 @@ bool Sound_Handler::get_disable_fx()
 */
 void Sound_Handler::set_disable_music(bool disable)
 {
-	if (m_lock_audio_disabling)
+	if (m_lock_audio_disabling || m_disable_music == disable)
 		return;
 
 	if (disable==true) {

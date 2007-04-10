@@ -209,7 +209,7 @@ private:
 		(const char * picname,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
-   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)());
+   void add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)(), const std::string & tooltip_text);
 	void okdialog();
 
 	Interactive_Base    *m_iabase;
@@ -378,15 +378,15 @@ void FieldActionWindow::add_buttons_auto()
 			// Add flag actions
 			Flag *flag = (Flag*)imm;
 
-			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad);
+			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad, _("Build road"));
 
 			Building *building = flag->get_building();
 
 			if (!building || building->get_playercaps() & (1 << Building::PCap_Bulldoze))
-				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag);
+				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag, _("Destroy this flag"));
 
 			if (dynamic_cast<const Game * const>(&m_iabase->egbase()))
-            add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist);
+            add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
 			// No geologist in editor
 		}
 		else
@@ -399,10 +399,10 @@ void FieldActionWindow::add_buttons_auto()
 
 			// Add build actions
 			if (buildcaps & BUILDCAPS_FLAG)
-				add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
+				add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag, _("Put a flag"));
 
 			if (imm && imm->get_type() == Map_Object::ROAD)
-				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad);
+				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad, _("Destroy a road"));
 		}
 	}
       // There goes actions that can be done to non-owner fields ;)
@@ -431,13 +431,13 @@ void FieldActionWindow::add_buttons_auto()
 	// Watch actions, only when game (no use in editor)
    // same for statistics. census is ok
 	if (dynamic_cast<const Game * const>(&m_iabase->egbase())) {
-      add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch);
-      add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics);
+      add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch, _("Watch field in a separate window"));
+      add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics, _("Toggle building statistics display"));
    }
-	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census);
+	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census, _("Toggle building label display"));
 
 	if (m_iabase->get_display_flag(Interactive_Base::dfDebug))
-		add_button(watchbox, pic_debug, &FieldActionWindow::act_debug);
+		add_button(watchbox, pic_debug, &FieldActionWindow::act_debug, _("Debug window"));
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
@@ -480,17 +480,17 @@ void FieldActionWindow::add_buttons_attack ()
          {
             m_attackers = 0;
             m_attackers_type = STRONGEST;
-            add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less);
+            add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less, _("Send less soldiers"));
 
             m_text_attackers = new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
             attackbox->add(m_text_attackers, UI::Box::AlignTop);
 
-            add_button(attackbox, pic_attack_more, &FieldActionWindow::act_attack_more);
+            add_button(attackbox, pic_attack_more, &FieldActionWindow::act_attack_more, _("Send more soldiers"));
 
-            add_button(attackbox, pic_attack_strong, &FieldActionWindow::act_attack_strong);
-            add_button(attackbox, pic_attack_weak,   &FieldActionWindow::act_attack_weak);
+            add_button(attackbox, pic_attack_strong, &FieldActionWindow::act_attack_strong, _("Most agressive attack"));
+            add_button(attackbox, pic_attack_weak,   &FieldActionWindow::act_attack_weak, _("Cautious attack"));
 
-            add_button(attackbox, pic_attack, &FieldActionWindow::act_attack);
+            add_button(attackbox, pic_attack, &FieldActionWindow::act_attack, _("Start attack"));
             act_attack_more();
          }
       }
@@ -589,9 +589,9 @@ void FieldActionWindow::add_buttons_road(bool flag)
 	UI::Box* buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	if (flag)
-		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
+		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag, _("Build flag"));
 
-	add_button(buildbox, pic_abort, &FieldActionWindow::act_abort_buildroad);
+	add_button(buildbox, pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
 	buildbox->resize();
@@ -619,7 +619,7 @@ uint FieldActionWindow::add_tab
 FieldActionWindow::add_button
 ===============
 */
-void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)())
+void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (FieldActionWindow::*fn)(), const std::string & tooltip_text)
 {
 	box->add
 		(new UI::Button<FieldActionWindow>
@@ -627,7 +627,7 @@ void FieldActionWindow::add_button(UI::Box* box, const char* picname, void (Fiel
 		  0, 0, 34, 34,
 		  2,
 		  g_gr->get_picture(PicMod_Game, picname),
-		  fn, this),
+		  fn, this, tooltip_text),
 		 UI::Box::AlignTop);
 }
 
@@ -1064,3 +1064,4 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		}
 	}
 }
+

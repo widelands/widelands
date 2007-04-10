@@ -28,16 +28,6 @@
 Graphic *g_gr;
 
 /**
- * Factory function
- * \todo const-ify
- * \todo Get rid of this function
- */
-Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen)
-{
-	return new Graphic(w, h, bpp, fullscreen);
-}
-
-/**
  * Helper function wraps around SDL_image. Returns the given image file as a
  * surface.
  * Cannot return 0, throws an exception on error.

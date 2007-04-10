@@ -741,7 +741,6 @@ void WLApplication::do_warp_mouse(const Point p) {
  * \todo Ensure that calling this with active UI elements does barf
  * \todo Document parameters
  */
-Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen);
 void WLApplication::init_graphics(const int w, const int h,
                                   const int bpp, const bool fullscreen)
 {
@@ -760,7 +759,7 @@ void WLApplication::init_graphics(const int w, const int h,
 
 	// If we are not to be shut down
 	if( w && h ) {
-		g_gr = SW16_CreateGraphics(w, h, bpp, fullscreen);
+		g_gr = new Graphic(w, h, bpp, fullscreen);
 		set_max_mouse_coords(w, h);
 	}
 }
