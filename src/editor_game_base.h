@@ -114,7 +114,7 @@ struct Editor_Game_Base {
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}
 	typedef int Time;
-	static Time     Never  () throw () {return std::numeric_limits<Time>::max();}
+	static Time     Never  () throw () {return 0xffffffff;}
 	typedef Uint32 Duration;
 	static Duration Forever() throw ()
 	{return std::numeric_limits<Duration>::max();}
