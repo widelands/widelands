@@ -20,7 +20,7 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
-#include "rendertargetimpl.h"
+#include "rendertarget.h"
 #include "surface.h"
 
 /// picture module flags
@@ -32,16 +32,16 @@ enum {
 };
 
 struct Picture {
-	Picture() : mod(0), surface(0) {u.fname=0;
-	}
+	Picture() : mod(0), surface(0) {u.fname=0;}
 	/// 0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
 	int mod;
 	Surface* surface;
 
-	//WTF ?!?! A union between char* and class* ?!?! Why ?!?! #fweber
+	//WTF ?!?! A union between char* (to be used as filename) and class* ?!?
+	//Why ?!?! #fweber
 	union {
 		char * fname;
-		RenderTargetImpl * rendertarget;
+		RenderTarget * rendertarget;
 	} u;
 };
 

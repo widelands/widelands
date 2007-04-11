@@ -17,21 +17,24 @@
  *
  */
 
-#include <assert.h>
-#include "editor_game_base.h"
+// #include <assert.h>
+// #include "editor_game_base.h"
+
+// #include "instances.h" //only needed for g_flag_descr
+
 #include "graphic.h"
-#include "instances.h" //only needed for g_flag_descr
 #include "mapviewpixelconstants.h"
 #include "overlay_manager.h"
-#include "rendertargetimpl.h"
+#include "rendertarget.h"
+#include "surface.h"
 #include "tribe.h"
 
 /**
  * Build a render target for the given bitmap.
  * \note The bitmap will not be owned by the renderer, i.e. it won't be
  * deleted by the destructor.
-*/
-RenderTargetImpl::RenderTargetImpl(Surface* bmp)
+ */
+RenderTarget::RenderTarget(Surface* bmp)
 {
 	m_surface = bmp;
 	m_ground_surface = 0;
@@ -39,29 +42,15 @@ RenderTargetImpl::RenderTargetImpl(Surface* bmp)
 	reset();
 }
 
-
-RenderTargetImpl::~RenderTargetImpl()
+RenderTarget::~RenderTarget()
 {
 	delete m_ground_surface;
 }
 
 /**
- * Called every time before the render target is handed out by the Graphic
- * implementation to start in a neutral state.
-*/
-void RenderTargetImpl::reset()
-{
-	m_rect.x = m_rect.y = 0;
-	m_rect.w = m_surface->get_w();
-	m_rect.h = m_surface->get_h();
-
-	m_offset.x = m_offset.y = 0;
-}
-
-/**
  * Retrieve the current window setting.
-*/
-void RenderTargetImpl::get_window(Rect* rc, Point* ofs) const
+ */
+void RenderTarget::get_window(Rect* rc, Point* ofs) const
 {
 	*rc = m_rect;
 	*ofs = m_offset;
@@ -69,8 +58,8 @@ void RenderTargetImpl::get_window(Rect* rc, Point* ofs) const
 
 /**
  * Sets an arbitrary drawing window.
-*/
-void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
+ */
+void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 {
 	m_rect = rc;
 	m_offset = ofs;
@@ -84,7 +73,7 @@ void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
 	}
 
 	if (m_rect.x + m_rect.w > m_surface->get_w()) m_rect.w =
-			std::max(static_cast<const int>(m_surface->get_w()) - m_rect.x, 0);
+				std::max(static_cast<const int>(m_surface->get_w()) - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
@@ -93,46 +82,7 @@ void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
 	}
 
 	if (m_rect.y + m_rect.h > m_surface->get_h()) m_rect.h =
-			std::max(static_cast<const int>(m_surface->get_h()) - m_rect.y, 0);
-}
-
-/**
- * Offsets r by m_offset and clips r against m_rect.
- *
- * If true is returned, r a valid rectangle that can be used.
- * If false is returned, r may not be used and may be partially modified.
- */
-inline bool RenderTargetImpl::clip(Rect & r) const throw ()
-{
-	r += m_offset;
-
-	if (r.x < 0) {
-		if (r.w <= static_cast<const uint>(-r.x)) return false;
-
-		r.w += r.x;
-
-		r.x = 0;
-	}
-
-	if (r.x + r.w > m_rect.w) {
-		if (static_cast<const int>(m_rect.w) <= r.x) return false;
-		r.w = m_rect.w - r.x;
-	}
-
-	if (r.y < 0) {
-		if (r.h <= static_cast<const uint>(-r.y)) return false;
-		r.h += r.y;
-		r.y = 0;
-	}
-
-	if (r.y + r.h > m_rect.h) {
-		if (static_cast<const int>(m_rect.h) <= r.y) return false;
-		r.h = m_rect.h - r.y;
-	}
-
-	r += m_rect;
-
-	return r.w and r.h;
+				std::max(static_cast<const int>(m_surface->get_h()) - m_rect.y, 0);
 }
 
 /**
@@ -143,8 +93,8 @@ inline bool RenderTargetImpl::clip(Rect & r) const throw ()
  *
  * Returns false if the subwindow is invisible. In that case, the window state
  * is not changed at all. Otherwise, the function returns true.
-*/
-bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
+ */
+bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
 {
 	Point newofs(0,0);
 	Rect newrect = rc;
@@ -169,16 +119,16 @@ bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevo
 
 /**
  * Returns the true size of the render target (ignoring the window settings).
-*/
-int RenderTargetImpl::get_w() const
+ */
+int RenderTarget::get_w() const
 {
 	return m_surface->get_w();
 }
 
 /**
  * Returns the true size of the render target (ignoring the window settings).
-*/
-int RenderTargetImpl::get_h() const
+ */
+int RenderTarget::get_h() const
 {
 	return m_surface->get_h();
 }
@@ -190,7 +140,7 @@ int RenderTargetImpl::get_h() const
  * This function is still quite slow, since it draws
  * every pixel as a rectangle. So use it with care
  */
-void RenderTargetImpl::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
+void RenderTarget::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
 {
 	int dx=x2-x1;      /* the horizontal distance of the line */
 	int dy=y2-y1;      /* the vertical distance of the line */
@@ -206,104 +156,66 @@ void RenderTargetImpl::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
 
 	if (dxabs >= dyabs) for (uint i = 0;i < dxabs; ++i) {
 			//  the line is more horizontal than vertical
-			y+=dyabs;
+		y+=dyabs;
 
-			if (y >= dxabs) {y -= dxabs; p.y += sdy;}
+		if (y >= dxabs) {y -= dxabs; p.y += sdy;}
 
-			p.x += sdx;
-			draw_rect(Rect(p, 1, 1), color);
-		}
+		p.x += sdx;
+		draw_rect(Rect(p, 1, 1), color);
+	}
 	else for (uint i = 0; i < dyabs; ++i) {
 			// the line is more vertical than horizontal
-			x+=dxabs;
+		x+=dxabs;
 
-			if (x >= dyabs) {x -= dyabs; p.x += sdx;}
+		if (x >= dyabs) {x -= dyabs; p.x += sdx;}
 
-			p.y += sdy;
-			draw_rect(Rect(p, 1, 1), color);
-		}
+		p.y += sdy;
+		draw_rect(Rect(p, 1, 1), color);
+	}
 }
 
 /**
  * Clip against window and pass those primitives along to the bitmap.
-*/
-void RenderTargetImpl::draw_rect(Rect r, const RGBColor clr)
+ */
+void RenderTarget::draw_rect(Rect r, const RGBColor clr)
+{
+	if (clip(r))
+		m_surface->draw_rect(r, clr);
+}
 
-{if (clip(r)) m_surface->draw_rect(r, clr);}
+void RenderTarget::fill_rect(Rect r, const RGBColor clr)
+{
+	if (clip(r))
+		m_surface->fill_rect(r, clr);
+}
 
-void RenderTargetImpl::fill_rect(Rect r, const RGBColor clr)
+void RenderTarget::brighten_rect(Rect r, const int factor)
+{
+	if (clip(r))
+		m_surface->brighten_rect(r, factor);
+}
 
-{if (clip(r)) m_surface->fill_rect(r, clr);}
-
-void RenderTargetImpl::brighten_rect(Rect r, const int factor)
-
-{if (clip(r)) m_surface->brighten_rect(r, factor);}
-
-void RenderTargetImpl::clear(void)
+void RenderTarget::clear()
 {
 	if
 	(not m_rect.x and not m_rect.y
-			and
-			m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
+		and
+		m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
 		m_surface->clear();
 	else m_surface->fill_rect(m_rect, RGBColor(0,0,0));
 }
 
 /**
- * Clip against window and source bitmap, then call the Bitmap blit routine.
-*/
-void RenderTargetImpl::doblit(Point dst, Surface * const src, Rect srcrc)
-{
-	assert(0 <= srcrc.x);
-	assert(0 <= srcrc.y);
-	dst += m_offset;
-
-	// Clipping
-
-	if (dst.x < 0) {
-		if (srcrc.w <= static_cast<const uint>(-dst.x)) return;
-
-		srcrc.x -= dst.x;
-
-		srcrc.w += dst.x;
-
-		dst.x = 0;
-	}
-
-	if (dst.x + srcrc.w > m_rect.w) {
-		if (static_cast<const int>(m_rect.w) <= dst.x) return;
-		srcrc.w = m_rect.w - dst.x;
-	}
-
-	if (dst.y < 0) {
-		if (srcrc.h <= static_cast<const uint>(-dst.y)) return;
-		srcrc.y -= dst.y;
-		srcrc.h += dst.y;
-		dst.y = 0;
-	}
-
-	if (dst.y + srcrc.h > m_rect.h) {
-		if (static_cast<const int>(m_rect.h) <= dst.y) return;
-		srcrc.h = m_rect.h - dst.y;
-	}
-
-	dst += m_rect;
-
-	// Draw it
-	m_surface->blit(dst, src, srcrc);
-}
-
-/**
  * Blits a blitsource into this bitmap
-*/
-void RenderTargetImpl::blit(const Point dst, const uint picture)
+ */
+void RenderTarget::blit(const Point dst, const uint picture)
 {
 	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
-void RenderTargetImpl::blitrect
-(const Point dst, const uint picture, const Rect srcrc)
+void RenderTarget::blitrect(const Point dst, const uint picture,
+			    const Rect srcrc)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -317,13 +229,13 @@ void RenderTargetImpl::blitrect
  *
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
-*/
-void RenderTargetImpl::tile(Rect r, uint picture, Point ofs)
+ */
+void RenderTarget::tile(Rect r, uint picture, Point ofs)
 {
 	Surface* src = g_gr->get_picture_surface(picture);
 
 	if (!src) {
-		log("RenderTargetImpl::tile: bad picture %u\n", picture);
+		log("RenderTarget::tile: bad picture %u\n", picture);
 		return;
 	}
 
@@ -370,27 +282,6 @@ void RenderTargetImpl::tile(Rect r, uint picture, Point ofs)
 	}
 }
 
-///\todo Rename the _in_ parameter "result" to reflect it's real meaning
-inline Sint8 RenderTargetImpl::node_brightness
-(const Editor_Game_Base::Time gametime, Editor_Game_Base::Time last_seen,
- const Vision vision, Sint8 result)
-{
-	if      (vision == 0) result = -128;
-	else if (vision == 1) {
-		assert(last_seen <= gametime);
-		const Editor_Game_Base::Duration time_ago = gametime - last_seen;
-		result =
-			static_cast<const Sint16>
-			(((static_cast<const Sint16>(result) + 128) >> 1)
-			 *
-			 (1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
-			-
-			128;
-	}
-
-	return result;
-}
-
 /**
  * Render the map into the current drawing window.
  * viewofs is the offset of the upper left corner of the window into the map,
@@ -401,12 +292,12 @@ inline Sint8 RenderTargetImpl::node_brightness
  * place, the ground is not redrawn at all.
  *
  * \todo For heaven's sake break this up in smaller functions!
-*/
-void RenderTargetImpl::rendermap
-(const Editor_Game_Base & egbase,
- const Player * const     player, //  Will be 0 when called from the editor.
- Point viewofs,
- const bool draw_all)
+ */
+void RenderTarget::rendermap
+		(const Editor_Game_Base & egbase,
+		 const Player * const     player, //  Will be 0 when called from the editor.
+		 Point viewofs,
+		 const bool draw_all)
 {
 	// Check if we have the ground surface set up
 
@@ -465,11 +356,11 @@ void RenderTargetImpl::rendermap
 			FCoords r(Coords(linear_fx, linear_fy));
 			FCoords br(Coords(linear_fx - not row_is_forward, linear_fy + 1));
 			int r_posx =
-				r.x * TRIANGLE_WIDTH
-				+
-				row_is_forward * (TRIANGLE_WIDTH / 2)
-				-
-				viewofs.x;
+					r.x * TRIANGLE_WIDTH
+					+
+					row_is_forward * (TRIANGLE_WIDTH / 2)
+					-
+					viewofs.x;
 			int br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 			// Calculate safe (bounded) field coordinates and get field pointers
@@ -483,8 +374,8 @@ void RenderTargetImpl::rendermap
 			map.get_tln(r, &tr);
 			map.get_ln(r, &f);
 			const Texture * f_r_texture =
-				g_gr->get_maptexture_data
-				(world.terrain_descr(f.field->terrain_r()).get_texture());
+					g_gr->get_maptexture_data
+					(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 			uint count = dx;
 
@@ -499,27 +390,27 @@ void RenderTargetImpl::rendermap
 				r_posx  += TRIANGLE_WIDTH;
 				br_posx += TRIANGLE_WIDTH;
 				const Texture & tr_d_texture =
-					*g_gr->get_maptexture_data
-					(world.terrain_descr(tr.field->terrain_d()).get_texture());
+						*g_gr->get_maptexture_data
+						(world.terrain_descr(tr.field->terrain_d()).get_texture());
 				const Texture & f_d_texture =
-					*g_gr->get_maptexture_data
-					(world.terrain_descr(f.field->terrain_d()).get_texture());
+						*g_gr->get_maptexture_data
+						(world.terrain_descr(f.field->terrain_d()).get_texture());
 				f_r_texture =
-					g_gr->get_maptexture_data
-					(world.terrain_descr(f.field->terrain_r()).get_texture());
+						g_gr->get_maptexture_data
+						(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 				const uchar roads =
-					f.field->get_roads() | overlay_manager.get_road_overlay(f);
+						f.field->get_roads() | overlay_manager.get_road_overlay(f);
 
 				m_ground_surface->draw_field //  Render ground
-				(m_rect,
-				 f.field, r.field, bl.field, br.field,
-				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
-				 roads,
-				 f .field->get_brightness(), r .field->get_brightness(),
-				 bl.field->get_brightness(), br.field->get_brightness(),
-				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
-				 draw_all);
+						(m_rect,
+						f.field, r.field, bl.field, br.field,
+						f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
+						roads,
+						f .field->get_brightness(), r .field->get_brightness(),
+						bl.field->get_brightness(), br.field->get_brightness(),
+						tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
+						draw_all);
 			}
 
 			++linear_fy;
@@ -562,15 +453,15 @@ void RenderTargetImpl::rendermap
 					r_owner_number = r.field->get_owned_by();
 					uchar br_owner_number = br.field->get_owned_by();
 					Point r_pos
-					(linear_fx * TRIANGLE_WIDTH
-					 +
-					 row_is_forward2 * (TRIANGLE_WIDTH / 2)
-					 -
-					 viewofs.x,
-					 posy - r.field->get_height() * HEIGHT_FACTOR);
+							(linear_fx * TRIANGLE_WIDTH
+							+
+							row_is_forward2 * (TRIANGLE_WIDTH / 2)
+							-
+							viewofs.x,
+					posy - r.field->get_height() * HEIGHT_FACTOR);
 					Point br_pos
-					(r_pos.x - TRIANGLE_WIDTH / 2,
-					 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
+							(r_pos.x - TRIANGLE_WIDTH / 2,
+							b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
 					int count = dx2;
 
@@ -590,11 +481,11 @@ void RenderTargetImpl::rendermap
 						br_owner_number = br.field->get_owned_by();
 						const Point f_pos = r_pos, bl_pos = br_pos;
 						r_pos = Point
-							(r_pos.x + TRIANGLE_WIDTH,
-							 posy - r.field->get_height() * HEIGHT_FACTOR);
+								(r_pos.x + TRIANGLE_WIDTH,
+								posy - r.field->get_height() * HEIGHT_FACTOR);
 						br_pos = Point
-							 (br_pos.x + TRIANGLE_WIDTH,
-							  b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
+								(br_pos.x + TRIANGLE_WIDTH,
+								b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
 						//  Render border markes on and halfway between border nodes.
 
@@ -605,26 +496,26 @@ void RenderTargetImpl::rendermap
 
 							if
 							(r_owner_number == f_owner_number
-									and
-									(tr_owner_number == f_owner_number
-									 xor
-									 br_owner_number == f_owner_number))
+										and
+										(tr_owner_number == f_owner_number
+										xor
+										br_owner_number == f_owner_number))
 								drawanim(middle(f_pos, r_pos), anim, 0, &owner);
 
 							if
 							(bl_owner_number == f_owner_number
-									and
-									(l_owner_number == f_owner_number
-									 xor
-									 br_owner_number == f_owner_number))
+										and
+										(l_owner_number == f_owner_number
+										xor
+										br_owner_number == f_owner_number))
 								drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
 
 							if
 							(br_owner_number == f_owner_number
-									and
-									(r_owner_number == f_owner_number
-									 xor
-									 bl_owner_number == f_owner_number))
+										and
+										(r_owner_number == f_owner_number
+										xor
+										bl_owner_number == f_owner_number))
 								drawanim(middle(f_pos, br_pos), anim, 0, &owner);
 						}
 
@@ -652,17 +543,17 @@ void RenderTargetImpl::rendermap
 
 							//  Render overlays on nodes.
 							Overlay_Manager::Overlay_Info
-							overlay_info[MAX_OVERLAYS_PER_NODE];
+									overlay_info[MAX_OVERLAYS_PER_NODE];
 
 							const Overlay_Manager::Overlay_Info * const end =
-								overlay_info
-								+
-								overlay_manager.get_overlays(f, overlay_info);
+									overlay_info
+									+
+									overlay_manager.get_overlays(f, overlay_info);
 
 							for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
-									it < end;
-									++it)
+										it < end;
+										++it)
 								blit(f_pos - it->hotspot, it->picid);
 						}
 					}
@@ -673,11 +564,11 @@ void RenderTargetImpl::rendermap
 					FCoords r(Coords(linear_fx, linear_fy2));
 					FCoords b(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 					int posx =
-						(linear_fx - 1) * TRIANGLE_WIDTH
-						+
-						(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
-						-
-						viewofs.x;
+							(linear_fx - 1) * TRIANGLE_WIDTH
+							+
+							(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
+							-
+							viewofs.x;
 
 					//  Calculate safe (bounded) field coordinates.
 					map.normalize_coords(&r);
@@ -699,37 +590,37 @@ void RenderTargetImpl::rendermap
 
 						{
 							Overlay_Manager::Overlay_Info overlay_info
-							[MAX_OVERLAYS_PER_TRIANGLE];
+									[MAX_OVERLAYS_PER_TRIANGLE];
 							const Overlay_Manager::Overlay_Info * const overlay_info_end =
-								overlay_info
-								+
-								overlay_manager.get_overlays
-								(TCoords<>(f, TCoords<>::R), overlay_info);
+									overlay_info
+									+
+									overlay_manager.get_overlays
+									(TCoords<>(f, TCoords<>::R), overlay_info);
 
 							for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
-									it < overlay_info_end;
-									++it) {
-								blit
-								(Point
-								 (posx,
-								  posy
-								  +
-								  (TRIANGLE_HEIGHT
-								   -
-								   (f.field->get_height()
-								    +
-								    r.field->get_height()
-								    +
-								    b.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
-								 -
-								 it->hotspot,
-								 it->picid);
-							}
+										it < overlay_info_end;
+										++it) {
+										blit
+										(Point
+										(posx,
+										posy
+										+
+										(TRIANGLE_HEIGHT
+										-
+										(f.field->get_height()
+										+
+										r.field->get_height()
+										+
+										b.field->get_height())
+										*
+										HEIGHT_FACTOR)
+										/
+										3)
+										-
+										it->hotspot,
+										it->picid);
+										}
 						}
 					}
 				}
@@ -739,11 +630,11 @@ void RenderTargetImpl::rendermap
 					FCoords f(Coords(linear_fx - 1, linear_fy2));
 					FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 					int posx =
-						(linear_fx - 1) * TRIANGLE_WIDTH
-						+
-						row_is_forward2 * (TRIANGLE_WIDTH / 2)
-						-
-						viewofs.x;
+							(linear_fx - 1) * TRIANGLE_WIDTH
+							+
+							row_is_forward2 * (TRIANGLE_WIDTH / 2)
+							-
+							viewofs.x;
 
 					//  Calculate safe (bounded) field coordinates.
 					map.normalize_coords(&f);
@@ -763,37 +654,37 @@ void RenderTargetImpl::rendermap
 
 						{
 							Overlay_Manager::Overlay_Info overlay_info
-							[MAX_OVERLAYS_PER_TRIANGLE];
+									[MAX_OVERLAYS_PER_TRIANGLE];
 							const Overlay_Manager::Overlay_Info * const overlay_info_end =
-								overlay_info
-								+
-								overlay_manager.get_overlays
-								(TCoords<>(f, TCoords<>::D), overlay_info);
+									overlay_info
+									+
+									overlay_manager.get_overlays
+									(TCoords<>(f, TCoords<>::D), overlay_info);
 
 							for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
-									it < overlay_info_end;
-									++it) {
-								blit
-								(Point
-								 (posx,
-								  posy
-								  +
-								  ((TRIANGLE_HEIGHT * 2)
-								   -
-								   (f.field->get_height()
-								    +
-								    bl.field->get_height()
-								    +
-								    br.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
-								 -
-								 it->hotspot,
-								 it->picid);
-							}
+										it < overlay_info_end;
+										++it) {
+										blit
+										(Point
+										(posx,
+										posy
+										+
+										((TRIANGLE_HEIGHT * 2)
+										-
+										(f.field->get_height()
+										+
+										bl.field->get_height()
+										+
+										br.field->get_height())
+										*
+										HEIGHT_FACTOR)
+										/
+										3)
+										-
+										it->hotspot,
+										it->picid);
+										}
 						}
 					}
 				}
@@ -813,11 +704,11 @@ void RenderTargetImpl::rendermap
 			FCoords r(Coords(linear_fx, linear_fy));
 			FCoords br(Coords(linear_fx - not row_is_forward, linear_fy + 1));
 			int r_posx =
-				r.x * TRIANGLE_WIDTH
-				+
-				row_is_forward * (TRIANGLE_WIDTH / 2)
-				-
-				viewofs.x;
+					r.x * TRIANGLE_WIDTH
+					+
+					row_is_forward * (TRIANGLE_WIDTH / 2)
+					-
+					viewofs.x;
 			int br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 			// Calculate safe (bounded) field coordinates and get field pointers
@@ -834,10 +725,10 @@ void RenderTargetImpl::rendermap
 			map.get_ln(r, &f);
 			Map::Index tr_index = tr.field - &map[0];
 			const Texture * f_r_texture =
-				g_gr->get_maptexture_data
-				(world
-				 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
-				 .get_texture());
+					g_gr->get_maptexture_data
+					(world
+					.terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
+					.get_texture());
 
 			uint count = dx;
 
@@ -856,38 +747,38 @@ void RenderTargetImpl::rendermap
 				r_posx  += TRIANGLE_WIDTH;
 				br_posx += TRIANGLE_WIDTH;
 				const Texture & tr_d_texture =
-					*g_gr->get_maptexture_data
-					(world.terrain_descr(first_player_field[tr_index].terrains.d)
-					 .get_texture());
+						*g_gr->get_maptexture_data
+						(world.terrain_descr(first_player_field[tr_index].terrains.d)
+						.get_texture());
 				const Texture & f_d_texture =
-					*g_gr->get_maptexture_data
-					(world.terrain_descr(f_player_field.terrains.d).get_texture());
+						*g_gr->get_maptexture_data
+						(world.terrain_descr(f_player_field.terrains.d).get_texture());
 				f_r_texture =
-					g_gr->get_maptexture_data
-					(world.terrain_descr(f_player_field.terrains.r).get_texture());
+						g_gr->get_maptexture_data
+						(world.terrain_descr(f_player_field.terrains.r).get_texture());
 
 				const Uint8 roads =
-					f_player_field.roads | overlay_manager.get_road_overlay(f);
+						f_player_field.roads | overlay_manager.get_road_overlay(f);
 
 				m_ground_surface->draw_field //  Render ground
-				(m_rect,
-				 f.field, r.field, bl.field, br.field,
-				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
-				 roads,
-				 node_brightness
-				 (gametime, f_player_field.time_node_last_unseen,
-				  f_player_field.vision, f.field->get_brightness()),
-				 node_brightness
-				 (gametime, r_player_field->time_node_last_unseen,
-				  r_player_field->vision, r.field->get_brightness()),
-				 node_brightness
-				 (gametime, bl_player_field.time_node_last_unseen,
-				  bl_player_field.vision, bl.field->get_brightness()),
-				 node_brightness
-				 (gametime, br_player_field->time_node_last_unseen,
-				  br_player_field->vision, br.field->get_brightness()),
-				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
-				 draw_all);
+						(m_rect,
+						f.field, r.field, bl.field, br.field,
+						f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
+						roads,
+						node_brightness
+								(gametime, f_player_field.time_node_last_unseen,
+								f_player_field.vision, f.field->get_brightness()),
+						node_brightness
+								(gametime, r_player_field->time_node_last_unseen,
+								r_player_field->vision, r.field->get_brightness()),
+						node_brightness
+								(gametime, bl_player_field.time_node_last_unseen,
+								bl_player_field.vision, bl.field->get_brightness()),
+						node_brightness
+								(gametime, br_player_field->time_node_last_unseen,
+								br_player_field->vision, br.field->get_brightness()),
+						tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
+						draw_all);
 			}
 
 			++linear_fy;
@@ -930,21 +821,21 @@ void RenderTargetImpl::rendermap
 					r_owner_number = r.field->get_owned_by();//  FIXME PPoV
 					uchar br_owner_number = br.field->get_owned_by();//  FIXME PPoV
 					const Player::Field *  r_player_field =
-						first_player_field + r_index;
+							first_player_field + r_index;
 					const Player::Field * br_player_field =
-						first_player_field + br_index;
+							first_player_field + br_index;
 					Vision  r_vision =  r_player_field->vision;
 					Vision br_vision = br_player_field->vision;
 					Point r_pos
-					(linear_fx * TRIANGLE_WIDTH
-					 +
-					 row_is_forward2 * (TRIANGLE_WIDTH / 2)
-					 -
-					 viewofs.x,
-					 posy - r.field->get_height() * HEIGHT_FACTOR);
+							(linear_fx * TRIANGLE_WIDTH
+							+
+							row_is_forward2 * (TRIANGLE_WIDTH / 2)
+							-
+							viewofs.x,
+					posy - r.field->get_height() * HEIGHT_FACTOR);
 					Point br_pos
-					(r_pos.x - TRIANGLE_WIDTH / 2,
-					 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
+							(r_pos.x - TRIANGLE_WIDTH / 2,
+							b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
 					int count = dx2;
 
@@ -971,11 +862,11 @@ void RenderTargetImpl::rendermap
 						br_vision = player->vision(br_index);
 						const Point f_pos = r_pos, bl_pos = br_pos;
 						r_pos = Point
-							(r_pos.x + TRIANGLE_WIDTH,
-							 posy - r.field->get_height() * HEIGHT_FACTOR);
+								(r_pos.x + TRIANGLE_WIDTH,
+								posy - r.field->get_height() * HEIGHT_FACTOR);
 						br_pos = Point
-							 (br_pos.x + TRIANGLE_WIDTH,
-							  b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
+								(br_pos.x + TRIANGLE_WIDTH,
+								b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
 						//  Render border markes on and halfway between border nodes.
 
@@ -987,32 +878,32 @@ void RenderTargetImpl::rendermap
 
 							if
 							((f_vision | r_vision)
-									and
-									r_owner_number == f_owner_number
-									and
-									(tr_owner_number == f_owner_number
-									 xor
-									 br_owner_number == f_owner_number))
+										and
+										r_owner_number == f_owner_number
+										and
+										(tr_owner_number == f_owner_number
+										xor
+										br_owner_number == f_owner_number))
 								drawanim(middle(f_pos, r_pos), anim, 0, &owner);
 
 							if
 							((f_vision | bl_vision)
-									and
-									bl_owner_number == f_owner_number
-									and
-									(l_owner_number == f_owner_number
-									 xor
-									 br_owner_number == f_owner_number))
+										and
+										bl_owner_number == f_owner_number
+										and
+										(l_owner_number == f_owner_number
+										xor
+										br_owner_number == f_owner_number))
 								drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
 
 							if
 							((f_vision | br_vision)
-									and
-									br_owner_number == f_owner_number
-									and
-									(r_owner_number == f_owner_number
-									 xor
-									 bl_owner_number == f_owner_number))
+										and
+										br_owner_number == f_owner_number
+										and
+										(r_owner_number == f_owner_number
+										xor
+										bl_owner_number == f_owner_number))
 								drawanim(middle(f_pos, br_pos), anim, 0, &owner);
 						}
 
@@ -1040,29 +931,29 @@ void RenderTargetImpl::rendermap
 
 							//  Render overlays on nodes.
 							Overlay_Manager::Overlay_Info
-							overlay_info[MAX_OVERLAYS_PER_NODE];
+									overlay_info[MAX_OVERLAYS_PER_NODE];
 
 							const Overlay_Manager::Overlay_Info * const end =
-								overlay_info
-								+
-								overlay_manager.get_overlays(f, overlay_info);
+									overlay_info
+									+
+									overlay_manager.get_overlays(f, overlay_info);
 
 							for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
-									it < end;
-									++it)
+										it < end;
+										++it)
 								blit(f_pos - it->hotspot, it->picid);
 						} else if (f_vision == 1) if
 							(const Map_Object_Descr * const map_object_descr =
-										f_player_field.map_object_descr[TCoords<>::None]) {
+									f_player_field.map_object_descr[TCoords<>::None]) {
 								if (const uint picid = map_object_descr->main_animation())
 									drawanim(f_pos, picid, 0);
 								else if (map_object_descr == &g_flag_descr) {
 									const Player & owner = egbase.player(f_owner_number);
 									drawanim
-									(f_pos, owner.tribe().get_flag_anim(), 0, &owner);
+										(f_pos, owner.tribe().get_flag_anim(), 0, &owner);
 								}
-							}
+									}
 					}
 				}
 
@@ -1071,11 +962,11 @@ void RenderTargetImpl::rendermap
 					FCoords r(Coords(linear_fx, linear_fy2));
 					FCoords b(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 					int posx =
-						(linear_fx - 1) * TRIANGLE_WIDTH
-						+
-						(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
-						-
-						viewofs.x;
+							(linear_fx - 1) * TRIANGLE_WIDTH
+							+
+							(row_is_forward2 + 1) * (TRIANGLE_WIDTH / 2)
+							-
+							viewofs.x;
 
 					//  Calculate safe (bounded) field coordinates.
 					map.normalize_coords(&r);
@@ -1102,37 +993,37 @@ void RenderTargetImpl::rendermap
 						//  FIXME does not need visibility rules.
 						{ //  FIXME Visibility check here.
 							Overlay_Manager::Overlay_Info overlay_info
-							[MAX_OVERLAYS_PER_TRIANGLE];
+									[MAX_OVERLAYS_PER_TRIANGLE];
 							const Overlay_Manager::Overlay_Info * const overlay_info_end =
-								overlay_info
-								+
-								overlay_manager.get_overlays
-								(TCoords<>(f, TCoords<>::R), overlay_info);
+									overlay_info
+									+
+									overlay_manager.get_overlays
+									(TCoords<>(f, TCoords<>::R), overlay_info);
 
 							for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
-									it < overlay_info_end;
-									++it)
+										it < overlay_info_end;
+										++it)
 							{
 								blit
-								(Point
-								 (posx,
-								  posy
-								  +
-								  (TRIANGLE_HEIGHT
-								   -
-								   (f.field->get_height()
-								    +
-								    r.field->get_height()
-								    +
-								    b.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
-								 -
-								 it->hotspot,
-								 it->picid);
+										(Point
+										(posx,
+										posy
+										+
+										(TRIANGLE_HEIGHT
+										-
+										(f.field->get_height()
+										+
+										r.field->get_height()
+										+
+										b.field->get_height())
+										*
+										HEIGHT_FACTOR)
+										/
+										3)
+										-
+										it->hotspot,
+								it->picid);
 							}
 						}
 					}
@@ -1143,11 +1034,11 @@ void RenderTargetImpl::rendermap
 					FCoords f(Coords(linear_fx - 1, linear_fy2));
 					FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 					int posx =
-						(linear_fx - 1) * TRIANGLE_WIDTH
-						+
-						row_is_forward2 * (TRIANGLE_WIDTH / 2)
-						-
-						viewofs.x;
+							(linear_fx - 1) * TRIANGLE_WIDTH
+							+
+							row_is_forward2 * (TRIANGLE_WIDTH / 2)
+							-
+							viewofs.x;
 
 					//  Calculate safe (bounded) field coordinates.
 					map.normalize_coords(&f);
@@ -1167,37 +1058,37 @@ void RenderTargetImpl::rendermap
 
 						{ //  FIXME Visibility check here.
 							Overlay_Manager::Overlay_Info overlay_info
-							[MAX_OVERLAYS_PER_TRIANGLE];
+									[MAX_OVERLAYS_PER_TRIANGLE];
 							const Overlay_Manager::Overlay_Info * const overlay_info_end =
-								overlay_info
-								+
-								overlay_manager.get_overlays
-								(TCoords<>(f, TCoords<>::D), overlay_info);
+									overlay_info
+									+
+									overlay_manager.get_overlays
+									(TCoords<>(f, TCoords<>::D), overlay_info);
 
 							for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
-									it < overlay_info_end;
-									++it) {
-								blit
-								(Point
-								 (posx,
-								  posy
-								  +
-								  ((TRIANGLE_HEIGHT * 2)
-								   -
-								   (f.field->get_height()
-								    +
-								    bl.field->get_height()
-								    +
-								    br.field->get_height())
-								   *
-								   HEIGHT_FACTOR)
-								  /
-								  3)
-								 -
-								 it->hotspot,
-								 it->picid);
-							}
+										it < overlay_info_end;
+										++it) {
+										blit
+										(Point
+										(posx,
+										posy
+										+
+										((TRIANGLE_HEIGHT * 2)
+										-
+										(f.field->get_height()
+										+
+										bl.field->get_height()
+										+
+										br.field->get_height())
+										*
+										HEIGHT_FACTOR)
+										/
+										3)
+										-
+										it->hotspot,
+										it->picid);
+										}
 						}
 					}
 				}
@@ -1211,6 +1102,22 @@ void RenderTargetImpl::rendermap
 	g_gr->reset_texture_animation_reminder();
 }
 
+/**
+ * Renders a minimap into the current window. The field at viewpoint will be
+ * in the top-left corner of the window. Flags specifies what information to
+ * display (see Minimap_XXX enums).
+ *
+ * Calculate the field at the top-left corner of the clipping rect
+ * The entire clipping rect will be used for drawing.
+ */
+void RenderTarget::renderminimap(const Editor_Game_Base & egbase,
+				 const Player * const player,
+				 const Point viewpoint,
+				 const uint flags)
+{
+	m_surface->draw_minimap
+			(egbase, player, m_rect, viewpoint - m_offset, flags);
+}
 
 /**
  * Draws a frame of an animation at the given location
@@ -1224,9 +1131,9 @@ void RenderTargetImpl::rendermap
  *
  * \todo Document this method's parameters
  * \todo Correctly calculate the stereo position for sound effects
-*/
-void RenderTargetImpl::drawanim
-(Point dst, const uint animation, const uint time, const Player * const player)
+ */
+void RenderTarget::drawanim(Point dst, const uint animation, const uint time,
+			    const Player * const player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = g_gr->get_animation(animation);
@@ -1246,7 +1153,7 @@ void RenderTargetImpl::drawanim
 	const uint framenumber = (time / data->frametime) % gfx->nr_frames();
 
 	frame = gfx->get_frame
-		(framenumber, player ? player->get_player_number() : 0, player);
+			(framenumber, player ? player->get_player_number() : 0, player);
 
 	dst -= gfx->get_hotspot();
 
@@ -1260,16 +1167,12 @@ void RenderTargetImpl::drawanim
 	g_anim.trigger_soundfx(animation, framenumber, stereo_position);
 }
 
-
 /**
  * Draws a part of a frame of an animation at the given location
-*/
-void RenderTargetImpl::drawanimrect
-(Point dst,
- const uint animation,
- const uint time,
- const Player * const player,
- Rect srcrc)
+ */
+void RenderTarget::drawanimrect(Point dst, const uint animation,
+				const uint time, const Player * const player,
+				Rect srcrc)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	if (!data || !g_gr) {
@@ -1279,13 +1182,130 @@ void RenderTargetImpl::drawanimrect
 
 	// Get the frame and its data
 	Surface * const frame = g_gr->get_animation(animation)->get_frame
-				((time / data->frametime) % g_gr->nr_frames(),
-				 player ? player->get_player_number() : 0,
-				 player);
+			((time / data->frametime) % g_gr->nr_frames(),
+			  player ? player->get_player_number() : 0,
+			  player);
 
 	dst -= g_gr->get_animation(animation)->get_hotspot();
 
 	dst += srcrc;
 
 	doblit(dst, frame, srcrc);
+}
+
+/**
+ * Called every time before the render target is handed out by the Graphic
+ * implementation to start in a neutral state.
+ */
+void RenderTarget::reset()
+{
+	m_rect.x = m_rect.y = 0;
+	m_rect.w = m_surface->get_w();
+	m_rect.h = m_surface->get_h();
+
+	m_offset.x = m_offset.y = 0;
+}
+
+/**
+ * Offsets r by m_offset and clips r against m_rect.
+ *
+ * If true is returned, r a valid rectangle that can be used.
+ * If false is returned, r may not be used and may be partially modified.
+ */
+bool RenderTarget::clip(Rect & r) const throw ()
+{
+	r += m_offset;
+
+	if (r.x < 0) {
+		if (r.w <= static_cast<const uint>(-r.x)) return false;
+
+		r.w += r.x;
+
+		r.x = 0;
+	}
+
+	if (r.x + r.w > m_rect.w) {
+		if (static_cast<const int>(m_rect.w) <= r.x) return false;
+		r.w = m_rect.w - r.x;
+	}
+
+	if (r.y < 0) {
+		if (r.h <= static_cast<const uint>(-r.y)) return false;
+		r.h += r.y;
+		r.y = 0;
+	}
+
+	if (r.y + r.h > m_rect.h) {
+		if (static_cast<const int>(m_rect.h) <= r.y) return false;
+		r.h = m_rect.h - r.y;
+	}
+
+	r += m_rect;
+
+	return r.w and r.h;
+}
+
+/**
+ * Clip against window and source bitmap, then call the Bitmap blit routine.
+ */
+void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
+{
+	assert(0 <= srcrc.x);
+	assert(0 <= srcrc.y);
+	dst += m_offset;
+
+	// Clipping
+
+	if (dst.x < 0) {
+		if (srcrc.w <= static_cast<const uint>(-dst.x)) return;
+
+		srcrc.x -= dst.x;
+
+		srcrc.w += dst.x;
+
+		dst.x = 0;
+	}
+
+	if (dst.x + srcrc.w > m_rect.w) {
+		if (static_cast<const int>(m_rect.w) <= dst.x) return;
+		srcrc.w = m_rect.w - dst.x;
+	}
+
+	if (dst.y < 0) {
+		if (srcrc.h <= static_cast<const uint>(-dst.y)) return;
+		srcrc.y -= dst.y;
+		srcrc.h += dst.y;
+		dst.y = 0;
+	}
+
+	if (dst.y + srcrc.h > m_rect.h) {
+		if (static_cast<const int>(m_rect.h) <= dst.y) return;
+		srcrc.h = m_rect.h - dst.y;
+	}
+
+	dst += m_rect;
+
+	// Draw it
+	m_surface->blit(dst, src, srcrc);
+}
+
+///\todo Rename the _in_ parameter "result" to reflect it's real meaning
+Sint8 RenderTarget::node_brightness(const Editor_Game_Base::Time gametime,
+				    Editor_Game_Base::Time last_seen,
+				    const Vision vision, Sint8 result)
+{
+	if      (vision == 0) result = -128;
+	else if (vision == 1) {
+		assert(last_seen <= gametime);
+		const Editor_Game_Base::Duration time_ago = gametime - last_seen;
+		result =
+				static_cast<const Sint16>
+				(((static_cast<const Sint16>(result) + 128) >> 1)
+				*
+				(1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
+				-
+				128;
+	}
+
+	return result;
 }

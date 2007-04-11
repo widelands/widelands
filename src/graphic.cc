@@ -23,6 +23,7 @@
 #include "filewrite.h"
 #include "font_handler.h"
 #include "graphic.h"
+#include "rendertarget.h"
 #include <SDL_image.h>
 
 Graphic *g_gr;
@@ -74,7 +75,7 @@ Graphic::Graphic(int w, int h, int bpp, bool fullscreen)
 
 	m_screen.set_sdl_surface(*sdlsurface);
 
-	m_rendertarget = new RenderTargetImpl(&m_screen);
+	m_rendertarget = new RenderTarget(&m_screen);
 }
 
 /**
@@ -417,7 +418,7 @@ uint Graphic::create_surface(int w, int h)
 	pic.mod       = -1; // mark as surface
 	pic.surface   = new Surface();
 	pic.surface->set_sdl_surface(surf);
-	pic.u.rendertarget = new RenderTargetImpl(pic.surface);
+	pic.u.rendertarget = new RenderTarget(pic.surface);
 
 	return id;
 }
@@ -446,7 +447,7 @@ RenderTarget* Graphic::get_surface_renderer(uint pic)
 {
 	assert(pic < m_pictures.size() && m_pictures[pic].mod == -1);
 
-	RenderTargetImpl* rt = m_pictures[pic].u.rendertarget;
+	RenderTarget* rt = m_pictures[pic].u.rendertarget;
 
 	rt->reset();
 

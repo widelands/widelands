@@ -20,13 +20,15 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
-#include <vector>
+#include "editor_game_base.h" //TODO: replace, only needed for "Time"
 #include "geometry.h"
 #include "rgbcolor.h"
 #include "types.h"
+#include <vector>
 
 class Editor_Game_Base;
 class Player;
+class Surface;
 
 /**
  * This abstract class represents anything that can be rendered to.
@@ -45,50 +47,58 @@ class Player;
 */
 class RenderTarget {
 public:
-	virtual ~RenderTarget() {}
-	virtual void get_window(Rect* rc, Point* ofs) const = 0;
-	virtual void set_window(const Rect& rc, const Point& ofs) = 0;
-	virtual bool enter_window(const Rect& rc, Rect* previous, Point* prevofs) = 0;
+	RenderTarget(Surface* bmp);
+	~RenderTarget();
+	void get_window(Rect* rc, Point* ofs) const;
+	void set_window(const Rect& rc, const Point& ofs);
+	bool enter_window(const Rect& rc, Rect* previous, Point* prevofs);
 
-	virtual int get_w() const = 0;
-	virtual int get_h() const = 0;
+	int get_w() const;
+	int get_h() const;
 
-	virtual void draw_line(int x1, int y1, int x2, int y2, RGBColor color) = 0;
-	virtual void draw_rect(Rect r, const RGBColor clr) = 0;
-	virtual void fill_rect(Rect r, const RGBColor clr) = 0;
-	virtual void brighten_rect(Rect r, const int factor) = 0;
-	virtual void clear() = 0;
+	void draw_line(int x1, int y1, int x2, int y2, RGBColor color);
+	void draw_rect(Rect r, const RGBColor clr);
+	void fill_rect(Rect r, const RGBColor clr);
+	void brighten_rect(Rect r, const int factor);
+	void clear();
 
-	virtual void blit(Point dst, const uint picture) = 0;
-	virtual void blitrect(Point dst, const uint picture, Rect src) = 0;
-	virtual void tile(Rect r, const uint picture, Point ofs) = 0;
+	void blit(Point dst, const uint picture);
+	void blitrect(Point dst, const uint picture, Rect src);
+	void tile(Rect r, const uint picture, Point ofs);
 
-	virtual void rendermap
-		(const Editor_Game_Base &,
-		 const Player * const,
-		 Point viewofs,
-		 const bool draw_all)
-		= 0;
-	virtual void renderminimap
-		(const Editor_Game_Base  &,
-		 const Player * const,
-		 const Point viewpoint,
-		 const uint flags)
-		= 0;
+	void rendermap (const Editor_Game_Base & egbase,
+			const Player * const player, //  Will be 0 when called from the editor.
+			Point viewofs, const bool draw_all);
 
-	virtual void drawanim
-		(Point dst,
-		 const uint animation,
-		 const uint time,
-		 const Player * const plr)
-		= 0;
-	virtual void drawanimrect
-		(const Point,
-		 uint animation,
-		 uint time,
-		 const Player * const plr,
-		 Rect)
-		= 0;
+	void renderminimap(const Editor_Game_Base  & egbase,
+			   const Player * const player, const Point viewpoint,
+			   const uint flags);
+
+	void drawanim(Point dst, const uint animation, const uint time,
+		      const Player * const player=0);
+	
+	void drawanimrect(Point dst, const uint animation, const uint time,
+			  const Player * const player, Rect srcrc);
+
+	void reset();
+
+protected:
+	bool clip(Rect & r) const throw ();
+
+	void doblit(Point dst, Surface * const src, Rect srcrc);
+
+	Sint8 node_brightness(const Editor_Game_Base::Time gametime,
+			      Editor_Game_Base::Time last_seen,
+			      const Vision vision, Sint8 result);
+			
+	///Only needed, when this is a mapview
+	Surface* m_ground_surface;
+	///The target surface
+	Surface * m_surface;
+	///The current clip rectangle
+	Rect m_rect;
+	///Drawing offset
+	Point m_offset;
 };
 
-#endif /* RENDERTARGET_H */
+#endif

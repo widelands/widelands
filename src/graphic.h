@@ -23,7 +23,6 @@
 #include "animation_gfx.h"
 #include "picture.h"
 #include <png.h>
-#include "rendertargetimpl.h"
 #include "types.h"
 #include <vector>
 
@@ -106,7 +105,7 @@ protected:
 	typedef std::map<std::string, std::vector<Picture>::size_type> picmap_t;
 
 	Surface m_screen;
-	RenderTargetImpl * m_rendertarget;
+	RenderTarget * m_rendertarget;
 	SDL_Rect m_update_rects[MAX_RECTS];
 	int m_nr_update_rects;
 	bool m_update_fullscreen;
