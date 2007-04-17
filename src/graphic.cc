@@ -24,6 +24,8 @@
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
+#include "wexception.h"
+
 #include <SDL_image.h>
 
 Graphic *g_gr;

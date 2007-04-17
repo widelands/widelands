@@ -21,6 +21,7 @@
 #include "graphic.h"
 #include "layered_filesystem.h"
 #include "texture.h"
+#include "wexception.h"
 
 /**
  * Create a texture, taking the pixel data from a Pic.
