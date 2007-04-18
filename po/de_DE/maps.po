@@ -17,183 +17,110 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: ../maps/Checkmate.wmf/elemental:9
+#: ../../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
 msgstr "Freundschaftstest"
 
-#: ../maps/Checkmate.wmf/elemental:11
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr ""
-"Vielleicht ist es eine der seltsamsten Launen der Natur, oder ein Gedanke im "
-"Kopf eines bösartigen (und Spielesüchtigen) Gottes, doch so oder so ruft "
-"dieses verrückte Kriegsgebiet nach zwei neuen Gegnern und einer neuen "
-"Konfrontation."
+#: ../../maps/Checkmate.wmf/elemental:11
+msgid "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
+msgstr "Vielleicht ist es eine der seltsamsten Launen der Natur oder ein Gedanke im Kopf eines bösartigen (und spielesüchtigen) Gottes, doch so oder so ruft dieses verrückte Kriegsgebiet nach zwei neuen Gegnern und einer neuen Konfrontation."
 
-#: ../maps/Dry Riverbed.wmf/elemental:9
+#: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid "Dry Riverbed"
 msgstr "Trockenes Flussbett"
 
-#: ../maps/Dry Riverbed.wmf/elemental:11
-msgid ""
-"It is a long time ago, since the last rain drop touched these grounds. No "
-"wonder, that here is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last water."
-msgstr ""
-"Es ist lange her, seit der letzte Regentropfen, den staubigen Boden dieser "
-"Landschaft berührte und so ist es auch nicht verwunderlich, dass dieses "
-"Flussbett schon fast ganz trocken liegt. Jeder weiß, dass bald ein Krieg "
-"über das letzte verbliebene Wasser ausbrechen wird..."
+#: ../../maps/Dry Riverbed.wmf/elemental:11
+msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
+msgstr "Es ist lange her, seit der letzte Regentropfen den staubigen Boden dieser Landschaft berührte, und so ist es auch nicht verwunderlich, dass dieses Flussbett schon fast ganz trocken liegt. Jeder weiß, dass bald ein Krieg über das letzte verbliebene Wasser ausbrechen wird..."
 
-#: ../maps/Elven Forests.wmf/elemental:9
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid "Elven Forests"
-msgstr "Elfische Wälder"
+msgstr "Elfenwälder"
 
-#: ../maps/Elven Forests.wmf/elemental:11
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many a tribe into "
-"the attempt of taking them for itself."
-msgstr ""
-"Die atemberaubende Schönheit dieses magischen Landes hat schon häufiger "
-"einen Stamm dazu getrieben, es für sich zu beanspruchen."
+#: ../../maps/Elven Forests.wmf/elemental:11
+msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
+msgstr "Die atemberaubende Schönheit dieses magischen Landes hat schon häufiger einen Stamm dazu getrieben, es für sich zu beanspruchen."
 
-#: ../maps/Finlakes.wmf/elemental:9
+#: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
 msgstr "Finnische Seen"
 
-#: ../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful finish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
-"Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, "
-"Flüsse, uralte Wälder und Berge kennzeichnen. Nun bist du dran, deinen Weg "
-"zu finden..."
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgstr "Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, Flüsse, uralte Wälder und Berge auszeichnen. Nun bist du daran, deinen Weg zu finden..."
 
-#: ../maps/Firegames.wmf/elemental:9
+#: ../../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
 msgstr "Feuerspiele"
 
-#: ../maps/Firegames.wmf/elemental:11
-msgid ""
-"Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but noone knows, what might happen if you meet an opponent "
-"tribe?"
-msgstr ""
-"Ist es ein Test der Götter oder nur ein böser Plan von irgendwem anders, "
-"dass du und deine Gefolgschaft heute morgen auf dieser Insel zwischen Feuer "
-"und Lava erwachen musstest? Bisher scheint alles ruhig und verlassen zu "
-"sein, doch niemand weiß, was kommen mag, wenn du auf andere Menschen triffst."
+#: ../../maps/Firegames.wmf/elemental:11
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+msgstr "Ist es ein Test der Götter oder nur ein böser Plan von irgendwem anders, dass du und deine Gefolgschaft heute morgen auf dieser Insel zwischen Feuer und Lava erwachen musstest? Bisher scheint alles ruhig und verlassen zu sein, doch niemand weiß, was kommen mag, wenn du auf andere Menschen triffst."
 
-#: ../maps/Four Castles.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
 msgstr "Vier Burgen"
 
-#: ../maps/Four Castles.wmf/elemental:11
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Gut geschützt in ihren mächtigen Festungen, sitzen vier machtgierige "
-"Anführer vor ihrem Plan um diese Lande einzunehmen."
+#: ../../maps/Four Castles.wmf/elemental:11
+msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+msgstr "Gut geschützt in ihren mächtigen Festungen sitzen vier machtgierige Anführer vor ihrem Plan, um diesen Landstrich einzunehmen."
 
-#: ../maps/Glacier Lake.wmf/elemental:9
+#: ../../maps/Glacier Lake.wmf/elemental:9
 msgid "Glacier Lake"
 msgstr "Gletschersee"
 
-#: ../maps/Glacier Lake.wmf/elemental:11
-msgid ""
-"A long time your tribe dwelled on this beautiful and lonely glacier lake. "
-"Noone disturbed you and the resources were enough for your whole tribe, but "
-"a few month ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only place enough for one tribe."
-msgstr ""
-"Eine lange Zeit schon, wohntest du und deine Leute an diesem schönen und "
-"einsamen Gletschersee. Niemand störte euch und die Ressourcen reichten "
-"problemlos aus. Nun, vor einigen Tagen, kam ein anderer Stamm über die Berge "
-"und siedelte sich auf der anderen Seite des Sees nieder. Und du weißt genau, "
-"dass hier nicht genug Platz für alle ist."
+#: ../../maps/Glacier Lake.wmf/elemental:11
+msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
+msgstr "Eine lange Zeit schon, wohntest du und deine Leute an diesem schönen und einsamen Gletschersee. Niemand störte euch und die Ressourcen reichten problemlos aus. Nun, vor einigen Tagen, kam ein anderer Stamm über die Berge und ließ sich auf der anderen Seite des Sees nieder. Und du weißt genau, dass hier nicht genug Platz für alle ist."
 
-#: ../maps/Golden Peninsula.wmf/elemental:9
+#: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
 msgstr "Goldene Insel"
 
-#: ../maps/Golden Peninsula.wmf/elemental:11
+#: ../../maps/Golden Peninsula.wmf/elemental:11
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr ""
-"Zwei Imperien breiten sich aus, um den Schatz einer legendären Insel zu "
-"finden..."
+msgstr "Zwei Imperien breiten sich aus, um den Schatz einer legendären Insel zu finden..."
 
-#: ../maps/Lake of tranquility.wmf/elemental:9
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
 msgstr "See der Ruhe"
 
-#: ../maps/Lake of tranquility.wmf/elemental:11
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
-msgstr ""
-"Dieser See, in den Tiefen der ältesten Wälder, war lange Zeit für seine "
-"Schönheit und den idyllischen Frieden bekannt, doch seit kurzer Zeit "
-"streifen zwei gefährliche Gruppen um ihn herum."
+#: ../../maps/Lake of tranquility.wmf/elemental:11
+msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+msgstr "Dieser See, in den Tiefen der ältesten Wälder, war lange Zeit für seine Schönheit und den idyllischen Frieden bekannt, doch seit kurzer Zeit streifen zwei gefährliche Stämme um ihn herum."
 
-#: ../maps/Plateau.wmf/elemental:9
+#: ../../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
 msgstr "Das grüne Plateau"
 
-#: ../maps/Plateau.wmf/elemental:11
-msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
-msgstr ""
-"Du stehst auf einer Insel, die von einem mächtigen Berg gekrönt wird. In ihm "
-"steckt der große Schatz dieser Insel - das grüne Plateau. Es ist schwer zu "
-"bekommen und schnell zu verlieren, wenn du es also haben willst, beobachte "
-"jeden Schritt deines Gegners."
+#: ../../maps/Plateau.wmf/elemental:11
+msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
+msgstr "Du stehst auf einer Insel, die von einem mächtigen Berg gekrönt wird. In ihm steckt der große Schatz dieser Insel - das grüne Plateau. Es ist schwer zu bekommen und schnell zu verlieren, wenn du es also haben willst, beobachte jeden Schritt deines Gegners."
 
-#: ../maps/Riverlands.wmf/elemental:9
+#: ../../maps/Riverlands.wmf/elemental:9
 msgid "Riverlands"
 msgstr "Land der Flüsse"
 
-#: ../maps/The Oasis Triangle.wmf/elemental:9
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
 msgstr "Das Oasen-Dreieck"
 
-#: ../maps/The Oasis Triangle.wmf/elemental:11
-msgid ""
-"There is something mystical, like a grey atmosphere, about this three Oasis, "
-"which noone found out, yet. Perhaps you will be the one, but be aware of the "
-"others, who are searching, too!"
-msgstr ""
-"Es ist etwas mystisches, wie eine graue Atmosphäre, dass diese drei Oasen "
-"umhüllt und doch hat bisher niemand den Grund hierfür finden können. "
-"Vielleicht wirst du der erste sein, der das Geheimnis lüftet, doch bedenke, "
-"dass du nicht der einzige bist, der danach sucht."
+#: ../../maps/The Oasis Triangle.wmf/elemental:11
+msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+msgstr "Es ist etwas Mystisches, wie eine graue Atmosphäre, dass diese drei Oasen umhüllt, und doch hat bisher niemand den Grund hierfür finden können. Vielleicht wirst du der Erste sein, der das Geheimnis lüftet, doch bedenke, dass du nicht der Einzige bist, der danach sucht."
 
-#: ../maps/The big lake.wmf/elemental:9
+#: ../../maps/The big lake.wmf/elemental:9
 msgid "The big lake"
 msgstr "Der große See"
 
-#: ../maps/The long way.wmf/elemental:9
+#: ../../maps/The long way.wmf/elemental:9
 msgid "The long way"
 msgstr "Der lange Weg"
 
-#: ../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
 msgstr "Krieg der Täler"
 
-#: ../maps/War of the Valleys.wmf/elemental:11
-msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
-msgstr ""
-"Man sagt, dass sogar Sonne und Mond ihren Weg durch die Täler dieser Berge "
-"suchen müssen. TIPP: Obelisken markieren Eisenvorkommen, woanders brauchst "
-"du gar nicht erst nach Eisen suchen."
+#: ../../maps/War of the Valleys.wmf/elemental:11
+msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
+msgstr "Man sagt, dass sogar Sonne und Mond ihren Weg durch die Täler dieser Berge suchen müssen. TIPP: Obelisken markieren Eisenvorkommen, woanders brauchst du gar nicht erst nach Eisen suchen."
