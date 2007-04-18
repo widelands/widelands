@@ -238,8 +238,8 @@ static const char* const pic_tab_buildhouse[3] = {
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png"
 };
-static const char * const tooltip_tab_build[3] = //  FIXME mark for translation
-{"Build small buildings", "Build medium buildings", "Build large buildings",};
+static const std::string tooltip_tab_build[3] = 
+{_("Build small buildings"), _("Build medium buildings"), _("Build large buildings"),};
 
 static const char* const pic_tab_buildmine = "pics/menu_tab_buildmine.png";
 
@@ -570,7 +570,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 	for(int i = 0; i < 3; i++)
 		if (bbg_house[i]) m_tabpanel->activate
 			(m_best_tab = add_tab
-			 (pic_tab_buildhouse[i], bbg_house[i], tooltip_tab_build[i]));
+			 (pic_tab_buildhouse[i], bbg_house[i], _(tooltip_tab_build[i])));
 
 	if (bbg_mine) m_tabpanel->activate
 		(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine, _("Build mines")));

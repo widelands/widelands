@@ -173,7 +173,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint) {
             sprintf(buf, "%i", m_map->get_nrplayers());
 				tanplayers.set_text(buf);
 				tadescr   .set_text(m_map->get_description());
-				taworld   .set_text(m_map->get_world_name()); //   FIXME name of worlds conf - translatable
+				taworld   .set_text(World::World(m_map->get_world_name()).get_name());
 				m_ok.set_enabled(true);
          } catch(std::exception& e) {
             log("Failed to load map %s: %s\n", get_mapname(), e.what());
@@ -211,9 +211,6 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint) {
  * fill the file list
  */
 void Fullscreen_Menu_MapSelect::fill_list(void) {
-
-   //Load maps textdomain
-   i18n::grab_textdomain("maps");
 
    // Fill it with all files we find in all directorys
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
@@ -278,7 +275,4 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 	list.sort(ndirs);
 
 	if (list.size()) list.select(0);
-
-   // Release maps textdomain
-   i18n::release_textdomain( );
 }

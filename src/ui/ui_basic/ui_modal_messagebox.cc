@@ -18,6 +18,7 @@
  */
 
 #include "constants.h"
+#include "i18n.h"
 #include "ui_window.h"
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
@@ -48,21 +49,21 @@ Modal_Message_Box::Modal_Message_Box
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
 			 &Modal_Message_Box::end_modal, this, 0,
-			 "OK");
+			 _("OK"));
 	} else if (type == YESNO) {
 		new IDButton<Modal_Message_Box, int>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
 			 &Modal_Message_Box::end_modal, this, 1,
-			 "Yes");
+			 _("Yes"));
 		new IDButton<Modal_Message_Box, int>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 1,
 			 &Modal_Message_Box::end_modal, this, 0,
-			 "No");
+			 _("No"));
    }
 }
 
