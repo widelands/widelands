@@ -39,18 +39,21 @@ MAINPOTS = [( "maps", ["../../maps/*/elemental"] ),
 #
 # This is a list with structure:
 #	- target .pot file mask
-#	- base directory to scan for catalogs
+#	- base directory to scan for catalogs (referred to Widelands' base dir)
 #	- List of source paths for catalog creation: tells the program which files
-#			to use for building .pot files. Same rules apply as the above case
+#			to use for building .pot files (referred to "po/pot/<path_to_pot/"
+#			dir, so the file pointers inside .pot files actually point
+#			somewhere useful)
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
-ITERATIVEPOTS = [ ("campaigns/%s", "../../campaigns/", ["../../campaigns/%s/e*",
-									 "../../campaigns/%s/objective"] ),
-				  ("tribes/%s", "../../tribes", ["../../tribes/%s/conf",
-												 "../../tribes/%s/*/*/conf"] ),
-				  ("worlds/%s", "../../worlds", ["../../worlds/%s/*conf",
-												 "../../worlds/%s/*/*/conf"] )
+ITERATIVEPOTS = [ ("campaigns/%s", "campaigns/", 
+											["../../../campaigns/%s/e*",
+											"../../campaigns/%s/objective"] ),
+				  ("tribes/%s", "tribes/", ["../../../tribes/%s/conf",
+											 "../../../tribes/%s/*/*/conf"] ),
+				  ("worlds/%s", "worlds/", ["../../../worlds/%s/*conf",
+											 "../../../worlds/%s/*/*/conf"] )
 				]
 
 
@@ -194,10 +197,6 @@ def do_find_files(root, pattern):
 ##############################################################################
 def do_update_potfiles():
 		print("Generating reference catalogs:")
-		oldcwd = os.getcwd()
-
-		do_makedirs("po/pot")
-		os.chdir("po/pot")
 
 		# Build the list of catalogs to generate
 		potfiles = MAINPOTS
@@ -206,17 +205,21 @@ def do_update_potfiles():
 
 		# Generate .pot catalogs
 		for pot, srcfiles in potfiles:
-				do_makedirs(os.path.dirname(pot))
-				potfile = pot + '.pot'
+				path = "po/pot/" + os.path.dirname(pot)
+				do_makedirs(path)
+				oldcwd = os.getcwd()
+				os.chdir(path)
+				potfile = os.path.basename(pot) + '.pot'
 
-				print("\t%s" % potfile)
+				print("\tpo/pot/%s.pot" % pot)
 				if potfile == 'widelands.pot':
 						# This catalogs can be built with xgettext
 						do_compile_src( potfile, srcfiles )
 				else:
 						do_compile( potfile, srcfiles )
 		
-		os.chdir(oldcwd)
+				os.chdir(oldcwd)
+
 		print("")
 
 
@@ -288,6 +291,9 @@ def do_update_po(lang, files):
 						# tmp file is ready, but we need to tune some aspects
 						# of it
 						do_tunepo(tmp, po)
+
+						if tmp == "tmp.po":
+								os.remove("tmp.po")
 
 						sys.stdout.write(".")
 						sys.stdout.flush()
