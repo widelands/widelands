@@ -86,7 +86,7 @@ void Main_Menu_Map_Options::update(void) {
 	m_name  ->set_text(map.get_name());
 	sprintf(buf, "%i", map.get_nrplayers());
    m_nrplayers->set_text(buf);
-	m_world ->set_text(map.get_world_name());
+	m_world ->set_text(World::World(map.get_world_name()).get_name());
 	m_descr ->set_text(map.get_description());
 }
 

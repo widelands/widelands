@@ -104,7 +104,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 		 posx, posy, width, height,
 		 1,
 		 &Main_Menu_New_Map::button_clicked, this, 4,
-		 (*m_worlds)[m_currentworld]);
+		 World::World((*m_worlds)[m_currentworld].c_str()).get_name());
 
 	posy+=height+spacing+spacing+spacing;
 
@@ -137,7 +137,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
       case 4:
               ++m_currentworld;
               if(m_currentworld==m_worlds->size()) m_currentworld=0;
-              m_world->set_title((*m_worlds)[m_currentworld].c_str());
+              m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());	
               break;
    }
 

@@ -28,8 +28,8 @@ class Editor_Interactive;
 
 struct Event_Descr {
    std::string id;
-   const char* name;
-   const char* descr;
+   const std::string name;
+   const std::string descr;
 };
 
 /*

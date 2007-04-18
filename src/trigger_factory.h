@@ -29,8 +29,8 @@ class Editor_Interactive;
 
 struct Trigger_Descr {
    std::string id;
-   const char* name;
-   const char* descr;
+   const std::string name;
+   const std::string descr;
 };
 
 /*
