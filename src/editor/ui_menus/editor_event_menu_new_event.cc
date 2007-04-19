@@ -124,7 +124,7 @@ void Editor_Event_Menu_New_Event::clicked_ok() {
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Event::selected(uint) {
-	m_description->set_text(_(m_event_list->get_selected().descr));
+	m_description->set_text(i18n::translate(m_event_list->get_selected().descr));
    m_ok_button->set_enabled(true);
 }
 
