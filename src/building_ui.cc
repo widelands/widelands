@@ -1215,42 +1215,38 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
    update();
 }
 
-/*
- * update()
+/**
+ * \brief Update worker info subwindow, following user selection 
  */
-void ProductionSite_Window_ListWorkerWindow::update(void) {
-   char buffer[250];
-
+void ProductionSite_Window_ListWorkerWindow::update(void)
+{
 	if (m_ls->has_selection()) {
 		const Worker & worker = m_ls->get_selected();
-		sprintf(buffer, "%s", worker.descname().c_str());
-      m_type->set_text(buffer);
 
-		if
-			(worker.get_current_experience() != -1
-			 and
-			 worker.get_needed_experience () != -1)
+		m_type->set_text( worker.descname() );
+
+		if ( worker.get_current_experience() != -1 and
+			 worker.get_needed_experience () != -1 )
 		{
-			sprintf
-				(buffer,
-				 "%i/%i",
-				 worker.get_current_experience(),
-				 worker.get_needed_experience());
-         m_experience->set_text(buffer);
-			sprintf
-				(buffer,
-				 "%s",
-				 i18n::translate(worker.get_becomes()).c_str()); //don't use _() ! Would tag "worker->get_becomes" for translation !
-         m_becomes->set_text(buffer);
-      } else {
-         m_experience->set_text("");
-         m_becomes->set_text("");
-      }
-   } else {
-      m_experience->set_text("");
-      m_becomes->set_text("");
-      m_type->set_text("");
-   }
+			// Fill upgrade status
+			char buffer[7];
+			sprintf(buffer, "%i/%i", worker.get_current_experience(),
+							worker.get_needed_experience() );
+			m_experience->set_text( buffer );
+
+			// Get the descriptive name of the ongoing upgrade
+			uint index = worker.get_tribe()->get_safe_worker_index(
+							worker.get_becomes() );
+			const Worker_Descr *descr = worker.get_tribe()->get_worker_descr(
+														index);
+			m_becomes->set_text( descr->descname() );
+
+		} else {
+			// Worker is not upgradeable
+			m_experience->set_text("---");
+			m_becomes->set_text("---");
+		}
+	}
 }
 
 class ProductionSite_Window : public Building_Window {
