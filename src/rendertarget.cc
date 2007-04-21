@@ -1182,7 +1182,7 @@ void RenderTarget::drawanimrect(Point dst, const uint animation,
 
 	// Get the frame and its data
 	Surface * const frame = g_gr->get_animation(animation)->get_frame
-			((time / data->frametime) % g_gr->nr_frames(),
+			((time / data->frametime) % g_gr->nr_frames(animation),
 			  player ? player->get_player_number() : 0,
 			  player);
 
