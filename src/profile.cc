@@ -948,7 +948,7 @@ void Profile::read
 					}
 
 					if( translate_line && strlen( tail ))
-						data += i18n::translate( tail ); //do not use _() here! it would tag "tail" for translation
+						data += i18n::translate( tail );
 					else
 						data += tail;
 					if (s && ! reading_multiline) { // error() may or may not throw

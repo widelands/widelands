@@ -241,7 +241,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 		} else {
 			//no. mark the commandline as faulty and stop parsing
 			m_commandline.clear();
-			cout<<"Malformed option: "<<opt<<endl<<endl;
+			cout << _("Malformed option: ") << opt << endl << endl;
 			break;
 		}
 
@@ -779,12 +779,12 @@ const bool WLApplication::init_settings()
 	g_options.read("config", "global");
 	s=g_options.pull_section("global");
 
-	//then parse the commandline - overwrites conffile settings
-	parse_command_line();
-
 	// Set Locale and grab default domain
 	i18n::set_locale( s->get_string("language", "en_EN"));
 	i18n::grab_textdomain("widelands");
+
+	//then parse the commandline - overwrites conffile settings
+	parse_command_line();
 
 	// Input
 	m_should_die = false;
@@ -922,13 +922,11 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 		#ifndef __WIN32__
 		init_double_game();
 		#else
-		cout<<endl
-		<<"Sorry, no double-instance debugging on WIN32."<<endl
-		<<endl;
+		cout << endl << _("Sorry, no double-instance debugging on WIN32.")
+				<< endl << endl;
 		#endif
 		#else
-		cout<<"--double is disabled. This is not a debug build!"
-		<<endl;
+		cout << _("--double is disabled. This is not a debug build!") << endl;
 		#endif
 
 		m_commandline.erase("double");
@@ -1006,38 +1004,35 @@ void WLApplication::parse_command_line() throw(Parameter_error)
  */
 void WLApplication::show_usage()
 {
-	cout<<"This is Widelands-"<<BUILD_ID<<endl<<endl
-	<<"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"<<endl
-	<<endl
-	<<"Options:"<<endl
-	<<endl
-	<<" --<config-entry-name>=value overwrites any config file setting"<<endl
-	<<endl
-	<<" --record=FILENAME    Record all events to the given filename for later playback"<<endl
-	<<" --playback=FILENAME  Playback given filename (see --record)"<<endl
-	<<endl
-	<<" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL"<<endl
-	<<endl
+	char buf[80];
+	snprintf(buf, sizeof(buf), _("This is Widelands-%i").c_str(), BUILD_ID);
+	cout << buf << endl << endl;
+	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>")
+		<< endl << endl;
+	cout << _("Options:") << endl << endl;
+	cout << _(" --<config-entry-name>=value overwrites any config file setting\n\n" 
+			  " --record=FILENAME    Record all events to the given filename for later playback\n" 
+			  " --playback=FILENAME  Playback given filename (see --record)\n\n" 
+			  " --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n") 
+			  << endl;
 #ifdef USE_GGZ
-	<<" --ggz                Starts game as GGZ Gaming Zone client (don't use!)"<<endl
+	cout << _(" --ggz                Starts game as GGZ Gaming Zone client (don't use!)")
+			<< endl;
 #endif
-	<<" --nosound            Starts the game with sound disabled"<<endl
-	<<" --nozip              Do not save files as binary zip archives."<<endl
-	<<endl
-	<<" --editor             Directly starts the Widelands editor."<<endl
-	<<endl
+	cout << _(" --nosound            Starts the game with sound disabled\n"
+			  " --nozip              Do not save files as binary zip archives.\n\n"
+			  " --editor             Directly starts the Widelands editor.\n")
+			  << endl;
 #ifdef DEBUG
 #ifndef __WIN32__
-	<<" --double             Start the game twice (for localhost network testing)"<<endl
-	<<endl
+	cout << _(" --double             Start the game twice (for localhost network testing)\n")
+			<< endl;
 #endif
 #endif
-	<<" --help               Show this help"<<endl
-	<<endl
-	<<"Bug reports? Suggestions? Check out the project website:"<<endl
-	<<"        http://www.sourceforge.net/projects/widelands"<<endl
-	<<endl
-	<<"Hope you enjoy this game!"<<endl<<endl;
+	cout << _(" --help               Show this help\n") << endl;
+	cout << _("Bug reports? Suggestions? Check out the project website:\n"
+			  "        http://www.sourceforge.net/projects/widelands\n\n"
+			  "Hope you enjoy this game!\n") << endl;
 }
 
 #ifdef DEBUG
