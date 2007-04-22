@@ -1005,7 +1005,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 void WLApplication::show_usage()
 {
 	char buf[80];
-	snprintf(buf, sizeof(buf), _("This is Widelands-%i").c_str(), BUILD_ID);
+	snprintf(buf, sizeof(buf), _("This is Widelands-%s").c_str(), BUILD_ID);
 	cout << buf << endl << endl;
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>")
 		<< endl << endl;
