@@ -43,7 +43,7 @@
 #define WORKER_BOB_PACKET_VERSION 1
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 2
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 3
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 /*
@@ -288,16 +288,35 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
    int version=fr->Unsigned16();
 
    if(version==WORKER_BOB_PACKET_VERSION) {
-      switch(worker->get_worker_type()) {
-         case Worker_Descr::NORMAL: break;
-         case Worker_Descr::SOLDIER:
-         {
-            int soldierversion=fr->Unsigned16();
-            if(soldierversion==SOLDIER_WORKER_BOB_PACKET_VERSION) {
-               Soldier* soldier=static_cast<Soldier*>(worker);
+		if (Soldier * const soldier = dynamic_cast<Soldier * const>(worker)) {
+			const Uint16 soldier_worker_bob_packet_version = fr->Unsigned16();
+			if
+				(2 <= soldier_worker_bob_packet_version
+				 and
+				 soldier_worker_bob_packet_version
+				 <=
+				 SOLDIER_WORKER_BOB_PACKET_VERSION)
+			{
+				const Uint32 min_hp = soldier->descr().get_min_hp();
+				assert(min_hp);
+				{
+					//  Soldiers created by old versions of Widelands have wrong
+					//  values for m_hp_max and m_hp_current; they
+					//  were soldier->descr().get_min_hp() less than they should be,
+					//  see bug #1687368.
+					const Uint32 broken_hp_compensation =
+						soldier_worker_bob_packet_version < 3 ? min_hp : 0;
 
-               soldier->m_hp_current=fr->Unsigned32();
-               soldier->m_hp_max=fr->Unsigned32();
+					soldier->m_hp_current =
+						broken_hp_compensation + fr->Unsigned32();
+					soldier->m_hp_max = broken_hp_compensation + fr->Unsigned32();
+				}
+				if (soldier->m_hp_max < min_hp) throw wexception
+					("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+					 "binary/bob_data:%u: soldier %p (serial %u): m_hp_max = %u but "
+					 "must be at least %u",
+					 fr->GetPrevPos(), worker, worker->get_serial(),
+					 soldier->m_hp_max, min_hp);
                soldier->m_min_attack=fr->Unsigned32();
                soldier->m_max_attack=fr->Unsigned32();
                soldier->m_defense=fr->Unsigned32();
@@ -307,21 +326,27 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
                soldier->m_defense_level=fr->Unsigned32();
                soldier->m_evade_level=fr->Unsigned32();
                soldier->m_marked=fr->Unsigned8();
-            } else
-               throw wexception("Unknown version %i in Soldier Bob (SubSubPacket)!", soldierversion);
-         }
-         break;
-
-         case Worker_Descr::CARRIER:
-         {
-            int carrierversion=fr->Unsigned16();
-            if(carrierversion==CARRIER_WORKER_BOB_PACKET_VERSION) {
-               Carrier* c=static_cast<Carrier*>(worker);
-               c->m_acked_ware=fr->Signed32();
-            }
-         }
-         break;
-         default: throw wexception("Unknown Worker %i in Widelands_Map_Bobdata_Data_Packet::read_worker_bob()\n", worker->get_worker_type());
+			} else throw wexception
+				("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+				 "binary/bob_data:%u: soldier %p (serial %u): unknown soldier "
+				 "worker bob packet version %u",
+				 fr->GetPrevPos(),
+				 worker, worker->get_serial(), soldier_worker_bob_packet_version);
+		} else if
+			(Carrier * const carrier = dynamic_cast<Carrier * const>(worker))
+		{
+			const Uint16 carrier_worker_bob_packet_version = fr->Unsigned16();
+			if
+				(carrier_worker_bob_packet_version
+				 ==
+				 CARRIER_WORKER_BOB_PACKET_VERSION)
+				carrier->m_acked_ware = fr->Signed32();
+			else throw wexception
+				("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+				 "binary/bob_data:%u: carrier %p (serial %u): unknown carrier "
+				 "worker bob packet version %u",
+				 fr->GetPrevPos(),
+				 worker, worker->get_serial(), carrier_worker_bob_packet_version);
       }
 
       // location

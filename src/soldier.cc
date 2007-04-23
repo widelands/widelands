@@ -299,13 +299,6 @@ Soldier_Descr::~Soldier_Descr(void)
    m_evade_pics_fn.resize(0);
 }
 
-/**
-===============
-Soldier_Descr::parse
-
-Parse carrier-specific configuration data
-===============
-*/
 void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
 	Worker_Descr::parse(directory, prof, encdata);
@@ -324,9 +317,14 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
    m_min_hp= strtol(list[0].c_str(),&endp, 0);
 	if (endp and *endp)
       throw wexception("Parse error in hp string: %s is a bad value", list[0].c_str());
+	if (0 == m_min_hp) throw wexception
+		("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
    m_max_hp = strtol(list[1].c_str(),&endp, 0);
 	if (endp and *endp)
       throw wexception("Parse error in hp string: %s is a bad value", list[1].c_str());
+	if (m_max_hp < m_min_hp) throw wexception
+		("Parse error in hp string: \"%s\" < \"%s\"",
+		 list[1].c_str(), list[0].c_str());
 
    // Parse attack
    std::string attack=sglobal->get_safe_string("attack");
@@ -466,10 +464,11 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_max_attack=get_descr()->get_max_attack();
 	m_defense=get_descr()->get_defense();
 	m_evade=get_descr()->get_evade();
-	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) {
-		int range=get_descr()->get_max_hp()-get_descr()->get_min_hp();
-		m_hp_max = game->logic_rand() % range;
+	if (Game * const game = dynamic_cast<Game * const>(gg)) {
+		const uint min_hp = descr().get_min_hp();
+		assert(min_hp);
+		assert(min_hp <= descr().get_max_hp());
+		m_hp_max = min_hp + game->logic_rand() % (descr().get_max_hp() - min_hp);
 	}
 	m_hp_current=m_hp_max;
 
@@ -578,6 +577,7 @@ void Soldier::draw
 		Rect r(Point(drawpos.x - w, drawpos.y - h - 7), w * 2, 5);
 		dst.draw_rect(r, HP_FRAMECOLOR);
 	// Draw the actual bar
+		assert(m_hp_max);
 	const float fraction = static_cast<float>(m_hp_current) / m_hp_max;
 	//FIXME:
    //Draw bar in playercolor, should be removed when soldier is correctly painted
