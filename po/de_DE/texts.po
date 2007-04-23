@@ -1,24 +1,20 @@
-# translation of texts_de_DE.po to German
-# Widelands texts po-File -> German.
-# Copyright (C) 2005-2006 Widelands Development Team
-# This file is distributed under the same license as the Widelands package.
-# 
+# Widelands texts.po
+# Copyright (C) 2005-2007 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
-# Philipp Niemann <widelands@azagtoth.de>, 2006.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: texts_de_DE\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: Widelands svn2226\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-11-14 13:30+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
-"Language-Team: German <widelands-public@sourceforge.net>\n"
+"PO-Revision-Date: 2007-04-23 20:38+0100\n"
+"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
-"X-Generator: KBabel 1.11.2\n"
 
 #: ../../txts/COPYING:1
 msgid "License"
