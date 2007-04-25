@@ -5,10 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2226\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-18 20:37+0200\n"
-"PO-Revision-Date: 2007-04-23 20:40+0200\n"
-"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-04-25 22:24+0200\n"
+"PO-Revision-Date: 2007-04-25 22:23+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,8 +19,8 @@ msgstr ""
 msgid "Building Statistics"
 msgstr "Gebäudestatistik"
 
-#: ../../src/building_statistics_menu.cc:72 ../../src/building_ui.cc:1426
-#: ../../src/building_ui.cc:1879
+#: ../../src/building_statistics_menu.cc:72 ../../src/building_ui.cc:1422
+#: ../../src/building_ui.cc:1875
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #: ../../src/editor/tools/editor_info_tool.cc:118
 #: ../../src/editor/tools/editor_info_tool.cc:127
@@ -128,71 +128,71 @@ msgstr "Erfahrung:"
 msgid "Trying to become: "
 msgstr "Wird ausgebildet zu:"
 
-#: ../../src/building_ui.cc:1325
+#: ../../src/building_ui.cc:1321
 msgid "Show worker listing"
 msgstr "Zeige Arbeiterliste"
 
-#: ../../src/building_ui.cc:1427 ../../src/building_ui.cc:1880
+#: ../../src/building_ui.cc:1423 ../../src/building_ui.cc:1876
 msgid "HP"
 msgstr "LP"
 
-#: ../../src/building_ui.cc:1428 ../../src/building_ui.cc:1881
+#: ../../src/building_ui.cc:1424 ../../src/building_ui.cc:1877
 msgid "AT"
 msgstr "AT"
 
-#: ../../src/building_ui.cc:1429 ../../src/building_ui.cc:1882
+#: ../../src/building_ui.cc:1425 ../../src/building_ui.cc:1878
 msgid "DE"
 msgstr "PA"
 
-#: ../../src/building_ui.cc:1430 ../../src/building_ui.cc:1883
+#: ../../src/building_ui.cc:1426 ../../src/building_ui.cc:1879
 msgid "EV"
 msgstr "AU"
 
-#: ../../src/building_ui.cc:1431 ../../src/building_ui.cc:1884
+#: ../../src/building_ui.cc:1427 ../../src/building_ui.cc:1880
 msgid "Level"
 msgstr "Level"
 
-#: ../../src/building_ui.cc:1452 ../../src/building_ui.cc:1908
+#: ../../src/building_ui.cc:1448 ../../src/building_ui.cc:1904
 msgid "Capacity"
 msgstr "Kapazität"
 
-#: ../../src/building_ui.cc:1617
+#: ../../src/building_ui.cc:1613
 msgid "Training Options"
 msgstr "Trainingsoptionen"
 
-#: ../../src/building_ui.cc:1644
+#: ../../src/building_ui.cc:1640
 msgid "Training mode : "
 msgstr "Trainingsmodus"
 
-#: ../../src/building_ui.cc:1645
+#: ../../src/building_ui.cc:1641
 msgid "Balanced"
 msgstr "Ausgeglichen"
 
-#: ../../src/building_ui.cc:1674
+#: ../../src/building_ui.cc:1670
 msgid "Hit Points"
 msgstr "Lebenspunkte"
 
-#: ../../src/building_ui.cc:1691 ../../src/fieldaction.cc:503
+#: ../../src/building_ui.cc:1687 ../../src/fieldaction.cc:503
 msgid "Attack"
 msgstr "Attacke"
 
-#: ../../src/building_ui.cc:1708
+#: ../../src/building_ui.cc:1704
 msgid "Defense"
 msgstr "Verteidigung"
 
-#: ../../src/building_ui.cc:1726
+#: ../../src/building_ui.cc:1722
 msgid "Evade"
 msgstr "Ausweichen"
 
-#: ../../src/building_ui.cc:1770
+#: ../../src/building_ui.cc:1766
 msgid "Make heroes"
 msgstr "Erstelle Helden"
 
-#: ../../src/building_ui.cc:1772
+#: ../../src/building_ui.cc:1768
 msgid "Balanced army"
 msgstr "Ausgeglichene Armee"
 
-#: ../../src/building_ui.cc:1919
+#: ../../src/building_ui.cc:1915
 msgid "xx"
 msgstr "xx"
 
@@ -290,65 +290,56 @@ msgid "Set Null Trigger"
 msgstr "Setze Null-Auslöser"
 
 #: ../../src/fieldaction.cc:242
-#, fuzzy
 msgid "Build small buildings"
-msgstr "Baue Minen"
+msgstr "Baue kleine Gebäude"
 
 #: ../../src/fieldaction.cc:242
-#, fuzzy
 msgid "Build medium buildings"
-msgstr "Erlaubte Gebäude"
+msgstr "Baue mittlere Gebäude"
 
 #: ../../src/fieldaction.cc:242
-#, fuzzy
 msgid "Build large buildings"
-msgstr "Erlaubte Gebäude"
+msgstr "Baue große Gebäude"
 
 #: ../../src/fieldaction.cc:275
 msgid "Action"
 msgstr "Aktion"
 
 #: ../../src/fieldaction.cc:381
-#, fuzzy
 msgid "Build road"
 msgstr "Baue Wege"
 
 #: ../../src/fieldaction.cc:386
-#, fuzzy
 msgid "Destroy this flag"
-msgstr "Gebäude zerstören?"
+msgstr "Flagge abreißen"
 
 #: ../../src/fieldaction.cc:389
 msgid "Send geologist to explore site"
-msgstr ""
+msgstr "Sende einen Geologen um die Fläche zu untersuchen"
 
 #: ../../src/fieldaction.cc:402
-#, fuzzy
 msgid "Put a flag"
-msgstr " Flagge"
+msgstr " Flagge setzen"
 
 #: ../../src/fieldaction.cc:405
-#, fuzzy
 msgid "Destroy a road"
-msgstr "Zerstören"
+msgstr "Weg zerstören"
 
 #: ../../src/fieldaction.cc:434
 msgid "Watch field in a separate window"
-msgstr ""
+msgstr "Zeige das Feld in einem seperaten Fenster"
 
 #: ../../src/fieldaction.cc:435
-#, fuzzy
 msgid "Toggle building statistics display"
-msgstr "Gebäudestatistik"
+msgstr "Schalte Gebäudestatistik an/aus"
 
 #: ../../src/fieldaction.cc:437
 msgid "Toggle building label display"
-msgstr ""
+msgstr "Schalte Gebäudenamen ein/aus"
 
 #: ../../src/fieldaction.cc:440
-#, fuzzy
 msgid "Debug window"
-msgstr "Debug-Feld"
+msgstr "Debug-Fenster"
 
 #: ../../src/fieldaction.cc:446 ../../src/fieldaction.cc:598
 msgid "Build roads"
@@ -359,41 +350,36 @@ msgid "Watch"
 msgstr "Beobachten"
 
 #: ../../src/fieldaction.cc:483
-#, fuzzy
 msgid "Send less soldiers"
-msgstr "%d Soldat"
+msgstr "Sende weniger Soldaten"
 
 #: ../../src/fieldaction.cc:488
-#, fuzzy
 msgid "Send more soldiers"
-msgstr "%d Soldat"
+msgstr "Sende mehr Soldaten"
 
 #: ../../src/fieldaction.cc:490
 msgid "Most agressive attack"
-msgstr ""
+msgstr "Agressivste Attacke"
 
 #: ../../src/fieldaction.cc:491
 msgid "Cautious attack"
-msgstr ""
+msgstr "Schwächste Attacke"
 
 #: ../../src/fieldaction.cc:493
-#, fuzzy
 msgid "Start attack"
-msgstr "Spiel starten"
+msgstr "Angriff starten"
 
 #: ../../src/fieldaction.cc:576
 msgid "Build mines"
 msgstr "Baue Minen"
 
 #: ../../src/fieldaction.cc:592
-#, fuzzy
 msgid "Build flag"
-msgstr "in Bau"
+msgstr "Setze Flagge"
 
 #: ../../src/fieldaction.cc:594
-#, fuzzy
 msgid "Cancel road"
-msgstr "Abbrechen"
+msgstr "Straße Abbrechen"
 
 #: ../../src/game_chat_menu.cc:56
 msgid "Chat Menu"
@@ -916,6 +902,83 @@ msgstr "Zentriere Hauptfenster hierauf"
 msgid "Close"
 msgstr "Schließen"
 
+#: ../../src/wlapplication.cc:244
+msgid "Malformed option: "
+msgstr "Nicht erkannte Option:"
+
+#: ../../src/wlapplication.cc:925
+msgid "Sorry, no double-instance debugging on WIN32."
+msgstr "Entschuldigung, aber der Doppelstart läuft unter Windows nicht."
+
+#: ../../src/wlapplication.cc:929
+msgid "--double is disabled. This is not a debug build!"
+msgstr "--double ist nicht möglich, dies ist kein Debug-Build!"
+
+#: ../../src/wlapplication.cc:1008
+#, c-format
+msgid "This is Widelands-%s"
+msgstr "Dies ist Widelands-%s"
+
+#: ../../src/wlapplication.cc:1010
+msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
+msgstr "Benutzung: widelands <Option0>=<Wert0> ... <OptionN>=<WertN>"
+
+#: ../../src/wlapplication.cc:1012
+msgid "Options:"
+msgstr "Optionen:"
+
+#: ../../src/wlapplication.cc:1013
+msgid ""
+" --<config-entry-name>=value overwrites any config file setting\n"
+"\n"
+" --record=FILENAME    Record all events to the given filename for later playback\n"
+" --playback=FILENAME  Playback given filename (see --record)\n"
+"\n"
+" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n"
+msgstr ""
+" --<config-Eintrag-Name>=Wert Überschreibt die jeweilige Einstellung in der config-Datei \n"
+"\n"
+" --record=DATEINAME    Nehme das gesamte Spiel, in der angegebenen Datei, für ein späteres Abspielen, auf.\n"
+" --playback=DATEINAME  Datei abspielen (zum abspieln der Dateien von --record)\n"
+"\n"
+" --coredump=[yes|no]  Erzeugt einen core dump bei Segmentfehlern anstatt den von SDL zu benutzen\n"
+
+#: ../../src/wlapplication.cc:1019
+msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
+msgstr " --ggz                Started das Spiel als GGZ Gaming Zone Klienten (nicht benutzen!)"
+
+#: ../../src/wlapplication.cc:1022
+msgid ""
+" --nosound            Starts the game with sound disabled\n"
+" --nozip              Do not save files as binary zip archives.\n"
+"\n"
+" --editor             Directly starts the Widelands editor.\n"
+msgstr ""
+" --nosound            Startet das Spiel ohne Sound\n"
+" --nozip              Schaltet die Komprimierung von gespeicherten Daten ab.\n"
+"\n"
+" --editor             Startet direkt den Widelands Karten Editor.\n"
+
+#: ../../src/wlapplication.cc:1028
+msgid " --double             Start the game twice (for localhost network testing)\n"
+msgstr " --double             Startet das Spiel doppelt (für localhost-Netzwerk-tests)\n"
+
+#: ../../src/wlapplication.cc:1032
+msgid " --help               Show this help\n"
+msgstr " --help               Zeigt diese Hilfe\n"
+
+#: ../../src/wlapplication.cc:1033
+msgid ""
+"Bug reports? Suggestions? Check out the project website:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Hope you enjoy this game!\n"
+msgstr ""
+"Fehlerberichte? Ideen? Gucke auf die Projektwebseite:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Wir wünschen dir viel Spaß beim Spielen!\n"
+
 #: ../../src/editor/editorinteractive.cc:76
 msgid "Tool"
 msgstr "Werkzeug"
@@ -1033,9 +1096,8 @@ msgid " Roads: TODO!\n"
 msgstr " Wege: TODO!\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:101
-#, fuzzy
 msgid "2) Terrain Info\n"
-msgstr "2) Rechte-Gebietsinfo\n"
+msgstr "2) Gebietsinfo\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:112
 msgid "Texture Number"
@@ -1742,11 +1804,11 @@ msgstr "Zeit-Auslöser"
 
 #: ../../src/ui/ui_basic/ui_modal_messagebox.cc:59
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: ../../src/ui/ui_basic/ui_modal_messagebox.cc:66
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
 msgid "Lobby"
@@ -1758,7 +1820,7 @@ msgid "User %s is using \"%s\" in room \"%s\"\n"
 msgstr "Benutzer %s benutzt \"%s\" im Raum \"%s\"\n"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:216
-#, fuzzy, c-format
+#, c-format
 msgid "User %s has entered the room %s !\n"
 msgstr "Benutzer %s hat den Raum %s betreten!\n"
 

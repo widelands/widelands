@@ -5,10 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2226\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-04-23 23:22+0200\n"
-"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
+"PO-Revision-Date: 2007-04-25 22:24+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +60,6 @@ msgid "Saledus speaks..."
 msgstr "Saledus sagt..."
 
 #: ../../../campaigns/emp01.wmf/event:450
-#, fuzzy
 msgid "Sire, I fear we are not safe in this foreign land.<br>Who knows, what cruel creatures live behind this forest in that mighty desert?<br>And what if that creatures crawl in the woods and wait for the time to attack us?<br><br>Well, perhaps my fear is wrong, but it can't be wrong to watch out in the forests, so that we can be sure to see any potential enemies before they can see us.<br>We really should build a barrack in the easter-center of the forest. Than one of us will watch out in the darkness and will keep us save from evil attacks of these creatures.<br><br>- build a barrack at the red point on the east side of the forests right of your headquarters."
 msgstr "Herr, ich befürchte, dass wir hier in diesem fremden Land nicht sicher sein können.<br>Wer weiß schon, was für schreckliche Kreaturen in dieser Wüste und hinter ihr wohnen? Und vor allem: Was ist, wenn diese Kreaturen es bis in diesen Wald schaffen und dann aus dem Hinterhalt über unsere Leute herfallen?<br><br>Es mag sein, dass meine Angst übertrieben ist, doch es scheint mir nur logisch und vorsichtig, wenn wir im Osten des Waldes eine kleine Baracke aufbauen, von der aus jemand in der Wüste nach potentiellen Gefahren Ausschau halten kann.<br><br>- Baue eine Baracke beim roten Punkt im Osten des Waldes, rechts von deinem Hauptquartier."
 

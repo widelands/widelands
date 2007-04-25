@@ -5,10 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2226\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-04-23 20:51+0200\n"
-"Last-Translator: Philipp Niemann <widelands@azagatoth.de>\n"
+"PO-Revision-Date: 2007-04-25 22:02+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,9 +115,8 @@ msgid "Inn"
 msgstr "Wirtshaus"
 
 #: ../../../tribes/empire/buildings/lumberjack/conf:2
-#, fuzzy
 msgid "Lumberjack's Hut"
-msgstr "Holzfäller"
+msgstr "Holzfäller Hütte"
 
 #: ../../../tribes/empire/buildings/marblemine/conf:2
 msgid "Marble Mine"

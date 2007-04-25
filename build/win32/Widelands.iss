@@ -1,4 +1,25 @@
-; Only change the variables below. Nothing more should be changed.
+; ===================================== ;
+; Widelands-Inno-Setup-Script           ;
+; ===================================== ;
+;                                       ;
+; You will need a current version of    ;
+; the "Inno Setup Compiler" and the     ;
+; "Inno Setup QuickStart Pack" to com-  ;
+; pile a Setup with use of this script. ;
+;                                       ;
+; For more information visit:           ;
+; http://www.innosetup.com              ;
+;                                       ;
+; ===================================== ;
+
+
+; CHANGES BEFORE COMPILE:
+;
+; Only change the "Placeholder"-variables in the two "#define"-sections.
+; Nothing more must be changed. All visible stuff is defined there.
+; You don't even need to clean up your widelands-svn-checkout-directory.
+; ".svn"-directorys will be excluded in the compilation-processe.
+
 
 ;Version String
 #define XAppName "Widelands"
@@ -28,7 +49,7 @@ AllowNoIcons=true
 LicenseFile=..\..\COPYING
 InfoAfterFile=..\..\ChangeLog
 OutputDir=..\..\..\
-OutputBaseFilename=Widelands-svn_Setup
+OutputBaseFilename=Widelands-SVN-Setup
 SetupIconFile=.\WL.ico
 Compression=lzma/ultra
 SolidCompression=true
@@ -44,7 +65,7 @@ UninstallDisplayName={#XAppVerName}
 VersionInfoCopyright={#XAppPublisher}
 InternalCompressLevel=max
 AppID={{#XAppID}
-AppCopyright=Widelands Development Team 2001-2006
+AppCopyright=Widelands Development Team 2001-2007
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
@@ -68,7 +89,23 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [Files]
-Source: ..\..\*; DestDir: {app}; Flags: recursesubdirs ignoreversion
+Source: ..\..\campaigns\*; DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\fonts\*; DestDir: {app}\fonts\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\game_server\*; DestDir: {app}\game_server\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\locale\*; DestDir: {app}\locale\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\maps\*; DestDir: {app}\maps\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Components: " Maps"
+Source: ..\..\music\*; DestDir: {app}\music\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Components: " Music"
+Source: ..\..\pics\*; DestDir: {app}\pics\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\sound\*; DestDir: {app}\sound\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\tribes\*; DestDir: {app}\tribes\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\txts\*; DestDir: {app}\txts\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\worlds\*; DestDir: {app}\worlds\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\*.dll; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
+Source: ..\..\widelands.exe; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
+Source: ..\..\config; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
+Source: ..\..\ChangeLog; DestDir: {app}; Flags: ignoreversion; DestName: ChangeLog.txt; Components: " Widelands"
+Source: ..\..\COPYING; DestDir: {app}; Flags: ignoreversion; DestName: COPYING.txt; Components: " Widelands"
+Source: ..\..\CREDITS; DestDir: {app}; Flags: ignoreversion; DestName: CREDITS.txt; Components: " Widelands"
 
 
 [INI]
@@ -83,7 +120,7 @@ Name: {userdesktop}\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: desktopi
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: quicklaunchicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
 Name: {group}\{#HelpNameName}; Filename: {app}\{#HelpName}; Tasks: ; Languages: 
 Name: {group}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\pics\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
-Name: {userdesktop}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\pics\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {userdesktop}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\pics\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
 
 [Run]
 Filename: {app}\{#XAppExeName}; Description: {cm:LaunchProgram,{#XAppName}}; Flags: nowait postinstall skipifsilent
@@ -91,3 +128,10 @@ Filename: {app}\{#XAppExeName}; Description: {cm:LaunchProgram,{#XAppName}}; Fla
 [UninstallDelete]
 Type: files; Name: {app}\{#XAppUrlName}
 Type: files; Name: {app}\{#HelpName}
+Type: files; Name: {app}\stdout.txt
+Type: files; Name: {app}\stderr.txt
+
+[Components]
+Name: Widelands; Description: Widelands Core; Flags: fixed checkablealone; Types: custom compact full
+Name: Music; Description: Widelands Background Music; Types: full
+Name: Maps; Description: Widelands Maps; Types: compact full

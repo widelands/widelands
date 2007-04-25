@@ -1,11 +1,11 @@
 # Widelands campaigns/t02.wmf.po
 # Copyright (C) 2005-2007 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn2226\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
 "PO-Revision-Date: 2007-04-23 22:31+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
