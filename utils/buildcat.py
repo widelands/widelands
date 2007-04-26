@@ -26,7 +26,7 @@ from time import strftime,gmtime
 # The current version of source
 SRCVERSION="svn" + str(detect_revision())
 NO_HEADER_REWRITE = 0
-HEADER_YEAR = strftime(%Y,gmtime())
+HEADER_YEAR = strftime("%Y",gmtime())
 
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
