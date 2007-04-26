@@ -1,18 +1,15 @@
-# Spanish/Spain translation of Widelands.
+# Widelands po/es_ES/worlds/blackland.po
 # Copyright (C) 2007 Widelands Development Team
-# This file is distributed under the same license as Widelands' package.
-# Antonio Trueba Gayol <atrueba@mundo-r.com>, 2007.
-#
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands Spanish translation - world_blackland.pot "
-"0.00\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-02-09 13:19+0100\n"
+"Project-Id-Version: Widelands svn\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-04-26 18:09+0000\n"
+"PO-Revision-Date: 2007-02-08 18:55+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
-"Language-Team: Spanish/Spain <es@li.org>\n"
+"Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,132 +17,138 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../worlds/blackland/bobs/bunny/conf:1
+#: ../../../worlds/blackland/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Conejo"
 
-#: ../worlds/blackland/bobs/bush1/conf:1 ../worlds/blackland/bobs/bush2/conf:1
-#: ../worlds/blackland/bobs/bush3/conf:1 ../worlds/blackland/bobs/bush4/conf:1
-#: ../worlds/blackland/bobs/bush5/conf:1
+#: ../../../worlds/blackland/bobs/bush1/conf:1
+#: ../../../worlds/blackland/bobs/bush2/conf:1
+#: ../../../worlds/blackland/bobs/bush3/conf:1
+#: ../../../worlds/blackland/bobs/bush4/conf:1
+#: ../../../worlds/blackland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Arbusto"
 
-#: ../worlds/blackland/bobs/cactus1/conf:1
-#: ../worlds/blackland/bobs/cactus2/conf:1
+#: ../../../worlds/blackland/bobs/cactus1/conf:1
+#: ../../../worlds/blackland/bobs/cactus2/conf:1
 msgid "Cactus"
 msgstr "Cacto"
 
-#: ../worlds/blackland/bobs/deadtree1/conf:1
-#: ../worlds/blackland/bobs/deadtree2/conf:1
-#: ../worlds/blackland/bobs/deadtree3/conf:1
-#: ../worlds/blackland/bobs/deadtree4/conf:1
+#: ../../../worlds/blackland/bobs/deadtree1/conf:1
+#: ../../../worlds/blackland/bobs/deadtree2/conf:1
+#: ../../../worlds/blackland/bobs/deadtree3/conf:1
+#: ../../../worlds/blackland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Árbol muerto"
 
-#: ../worlds/blackland/bobs/deer/conf:1
+#: ../../../worlds/blackland/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Ciervo"
 
-#: ../worlds/blackland/bobs/duck/conf:1
+#: ../../../worlds/blackland/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Pato"
 
-#: ../worlds/blackland/bobs/fox/conf:1
+#: ../../../worlds/blackland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Zorro"
 
-#: ../worlds/blackland/bobs/grass1/conf:1
-#: ../worlds/blackland/bobs/grass2/conf:1
-#: ../worlds/blackland/bobs/grass3/conf:1
+#: ../../../worlds/blackland/bobs/grass1/conf:1
+#: ../../../worlds/blackland/bobs/grass2/conf:1
+#: ../../../worlds/blackland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Hierba"
 
-#: ../worlds/blackland/bobs/mushroom1/conf:1
-#: ../worlds/blackland/bobs/mushroom2/conf:1
+#: ../../../worlds/blackland/bobs/mushroom1/conf:1
+#: ../../../worlds/blackland/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Seta"
 
-#: ../worlds/blackland/bobs/pebble1/conf:1
-#: ../worlds/blackland/bobs/pebble2/conf:1
-#: ../worlds/blackland/bobs/pebble3/conf:1
-#: ../worlds/blackland/bobs/pebble4/conf:1
-#: ../worlds/blackland/bobs/pebble5/conf:1
-#: ../worlds/blackland/bobs/pebble6/conf:1
+#: ../../../worlds/blackland/bobs/pebble1/conf:1
+#: ../../../worlds/blackland/bobs/pebble2/conf:1
+#: ../../../worlds/blackland/bobs/pebble3/conf:1
+#: ../../../worlds/blackland/bobs/pebble4/conf:1
+#: ../../../worlds/blackland/bobs/pebble5/conf:1
+#: ../../../worlds/blackland/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Gravilla"
 
-#: ../worlds/blackland/bobs/reindeer/conf:1
+#: ../../../worlds/blackland/bobs/reindeer/conf:1
 msgid "Reindeer"
 msgstr "Reno"
 
-#: ../worlds/blackland/bobs/sheep/conf:1
+#: ../../../worlds/blackland/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Oveja"
 
-#: ../worlds/blackland/bobs/skeleton1/conf:1
-#: ../worlds/blackland/bobs/skeleton2/conf:1
-#: ../worlds/blackland/bobs/skeleton3/conf:1
+#: ../../../worlds/blackland/bobs/skeleton1/conf:1
+#: ../../../worlds/blackland/bobs/skeleton2/conf:1
+#: ../../../worlds/blackland/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Esqueleto"
 
-#: ../worlds/blackland/bobs/sstones1/conf:1
-#: ../worlds/blackland/bobs/sstones2/conf:1
-#: ../worlds/blackland/bobs/sstones3/conf:1
-#: ../worlds/blackland/bobs/sstones4/conf:1
-#: ../worlds/blackland/bobs/sstones5/conf:1
-#: ../worlds/blackland/bobs/sstones6/conf:1
-#: ../worlds/blackland/bobs/sstones7/conf:1
+#: ../../../worlds/blackland/bobs/sstones1/conf:1
+#: ../../../worlds/blackland/bobs/sstones2/conf:1
+#: ../../../worlds/blackland/bobs/sstones3/conf:1
+#: ../../../worlds/blackland/bobs/sstones4/conf:1
+#: ../../../worlds/blackland/bobs/sstones5/conf:1
+#: ../../../worlds/blackland/bobs/sstones6/conf:1
+#: ../../../worlds/blackland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Monolito"
 
-#: ../worlds/blackland/bobs/stones1/conf:1
-#: ../worlds/blackland/bobs/stones2/conf:1
-#: ../worlds/blackland/bobs/stones3/conf:1
-#: ../worlds/blackland/bobs/stones4/conf:1
-#: ../worlds/blackland/bobs/stones5/conf:1
-#: ../worlds/blackland/bobs/stones6/conf:1
+#: ../../../worlds/blackland/bobs/stones1/conf:1
+#: ../../../worlds/blackland/bobs/stones2/conf:1
+#: ../../../worlds/blackland/bobs/stones3/conf:1
+#: ../../../worlds/blackland/bobs/stones4/conf:1
+#: ../../../worlds/blackland/bobs/stones5/conf:1
+#: ../../../worlds/blackland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Piedras"
 
-#: ../worlds/blackland/bobs/tree1/conf:4 ../worlds/blackland/bobs/tree2/conf:4
-#: ../worlds/blackland/bobs/tree3/conf:4 ../worlds/blackland/bobs/tree4/conf:4
-#: ../worlds/blackland/bobs/tree5/conf:4 ../worlds/blackland/bobs/tree6/conf:4
-#: ../worlds/blackland/bobs/tree7/conf:4 ../worlds/blackland/bobs/tree8/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:4
+#: ../../../worlds/blackland/bobs/tree2/conf:4
+#: ../../../worlds/blackland/bobs/tree3/conf:4
+#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree5/conf:4
+#: ../../../worlds/blackland/bobs/tree6/conf:4
+#: ../../../worlds/blackland/bobs/tree7/conf:4
+#: ../../../worlds/blackland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Árbol"
 
-#: ../worlds/blackland/conf:2
+#: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
 msgstr "El Equipo de Desarrollo de Widelands"
 
-#: ../worlds/blackland/conf:3
+#: ../../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Páramo"
 
-#: ../worlds/blackland/conf:4
+#: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
 msgstr "Estos son los grises, horribles y peligrosos páramos"
 
-#: ../worlds/blackland/resconf:4
+#: ../../../worlds/blackland/resconf:4
 msgid "Coal"
 msgstr "Carbón"
 
-#: ../worlds/blackland/resconf:12
+#: ../../../worlds/blackland/resconf:12
 msgid "Gold"
 msgstr "Oro"
 
-#: ../worlds/blackland/resconf:20
+#: ../../../worlds/blackland/resconf:20
 msgid "Iron"
 msgstr "Hierro"
 
-#: ../worlds/blackland/resconf:28
+#: ../../../worlds/blackland/resconf:28
 msgid "Granit"
 msgstr "Granito"
 
-#: ../worlds/blackland/resconf:36
+#: ../../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "Agua"
 
-#: ../worlds/blackland/resconf:41
+#: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Pescado"
