@@ -5,25 +5,26 @@ if some are found they are output in a xgettext style file"""
 
 import sys
 import os
+from time import strftime,gmtime
 
-head = """# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\\n"
-"Report-Msgid-Bugs-To: \\n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n"
-"Language-Team: LANGUAGE <LL@li.org>\\n"
-"MIME-Version: 1.0\\n"
-"Content-Type: text/plain; charset=UTF-8\\n"
-"Content-Transfer-Encoding: 8bit\\n"
-
-"""
+time_now = gmtime()
+### Set the header to something sensible, a much as is possible here.
+head =  "# Widelands PATH/TO/FILE.PO\n"
+head += "# Copyright (C) 2005-" + strftime("%Y", time_now) + " Widelands Development Team\n"
+head += "# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n"
+head += "#\n"
+head += "msgid \"\"\n"
+head += "msgstr \"\"\n"
+head += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
+head += "\"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\\n\"\n"
+head += "\"POT-Creation-Date: " + strftime("%Y-%m-%d %H:%M+0000", time_now) + "\\n\"\n"
+head += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"
+head += "\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n"
+head += "\"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\\n\"\n"
+head += "\"MIME-Version: 1.0\\n\"\n"
+head += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
+head += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
+head += "\n"
 
 class occurences: 
     def __init__( self, file, line ):

@@ -19,7 +19,14 @@ import os
 import re
 import string
 import sys
+sys.path.append('build/scons-tools')
+from detect_revision import detect_revision
+from time import strftime,gmtime
 
+# The current version of source
+SRCVERSION="svn" + str(detect_revision())
+NO_HEADER_REWRITE = 0
+HEADER_YEAR = strftime(%Y,gmtime())
 
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
@@ -65,8 +72,12 @@ RE_ISO639="^[a-z]{2,2}(_[A-Z]{2,2})?$"	# Matches ISO-639 language codes
 										# garantees correctness of code.
 
 # Options passed to common external programs
-XGETTEXTOPTS="-k_ --from-code=UTF-8 "
+XGETTEXTOPTS ="-k_ --from-code=UTF-8"
+XGETTEXTOPTS+=" --copyright-holder='Widelands Development Team'"
+XGETTEXTOPTS+=" --msgid-bugs-address='widelands-public@lists.sourceforge.net'"
+
 MSGMERGEOPTS="-q --no-wrap"
+
 
 ##############################################################################
 #
@@ -236,6 +247,111 @@ def do_buildpo(po, pot, dst):
 
 ##############################################################################
 #
+# Check each headerline for correctness
+#
+# Take input:
+#  filename:    Name of the file worked upon
+#  filehandle:  Handle to write clean headers to
+#  lines[]:     The headerlines to be checked
+#
+# Always returns true
+#
+##############################################################################
+def do_header_check(filename, filehandle, lines):
+	
+	# Array of regex to match lines that will be checked. Place all matches
+	# that have a template before those that do not. Templates are used by
+	# re_compiled_array index numbers.
+	re_compiled_array=[
+		re.compile(r"^# Widelands " + filename + r"$"),
+		re.compile(r"^# Copyright \(C\) 200[0-9](-200[56789])* Widelands Development Team$"),
+		re.compile(r"^# [^\s<>]+( [^\s<>]+)+ <[^\s]+@[^\s]+>, 20[0-9]{2}\.$"),
+		re.compile(r"^#$"),
+		re.compile(r"^msgid \"\"$"),
+		re.compile(r"^msgstr \"\"$"),
+		re.compile(r"^\"Project-Id-Version: Widelands " + SRCVERSION + r"\\n\"$"),
+		re.compile(r"^\"Report-Msgid-Bugs-To: widelands-public@lists\.sourceforge\.net\\n\"$"),
+		re.compile(r"^\"POT-Creation-Date: [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}\+[0-9]{4}\\n\"$"),
+		re.compile(r"^\"PO-Revision-Date: [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}\+[0-9]{4}\\n\"$"),
+		re.compile(r"^\"Last-Translator: [^\s<>]+( [^\s<>]+)* <[^\s]+@[^\s]+>\\n\"$"),
+		re.compile(r"^\"Language-Team: [^\s<>]+( [^\s<>]+)* <[^\s]+@[^\s]+>\\n\"$"),
+		re.compile(r"^\"MIME-Version: 1\.0\\n\"$"),
+		re.compile(r"^\"Content-Type: text/plain; charset=UTF-8\\n\"$"),
+		re.compile(r"^\"Content-Transfer-Encoding: 8bit\\n\"$"),
+		re.compile(r"^\"Plural-Forms: nplurals=[0-9]+; plural=.*;\\n\"$")
+	]
+
+	# Create an array of template strings to output on header line
+	# mismatch. Final \n is appended on each use, so don't append one here.
+	HEADERTEMPLATE=[
+		"# Widelands " + filename,
+		"# Copyright (C) " + HEADER_YEAR + " Widelands Development Team.",
+		"# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.",
+		"#",
+		"msgid \"\"",
+		"msgstr \"\"",
+		"\"Project-Id-Version: Widelands " + SRCVERSION + "\\n\"",
+		"\"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\\n\"",
+		"\"POT-Creation-Date: YYYY-MM-DD hh:mm+ZZZZ\\n\"",
+		"\"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\\n\"",
+		"\"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\\n\"",
+		"\"Language-Team: Language <widelands-public@lists.sourceforge.net>\\n\"",
+		"\"MIME-Version: 1.0\\n\"",
+		"\"Content-Type: text/plain; charset=UTF-8\\n\"",
+		"\"Content-Transfer-Encoding: 8bit\\n\""
+	]
+
+	# Extended Headers are checked, as well.
+	re_extended_header = re.compile(r"^\"X-.+: .+\\n\"$")
+
+	# The function
+	## Obey option and just write the header!
+	if NO_HEADER_REWRITE:
+		for line in lines:
+			filehandle.write(line)
+		return 1
+
+	# No header found, write new and return
+	if len(lines) == 0:
+		# Write a fresh header and return true
+		for line in HEADERTEMPLATE:
+			filehandle.write(line + "\n")
+		return 1
+
+	# This array will be populated with the checked headerlines
+	results = []
+
+	# Check headers, sort, insert missing
+	# Append correct extended headers
+	# Write file and show discarded lines
+	for regexnr in range(len(re_compiled_array)):
+		for linenr in range(len(lines)):
+			if re_compiled_array[regexnr].match(lines[linenr]):
+				results.append(lines[linenr])
+				lines.pop(linenr)
+				break
+		else:
+			if regexnr < len(HEADERTEMPLATE):
+				results.append(HEADERTEMPLATE[regexnr] + "\n")
+
+	for line in lines[:]:
+		if re_extended_header.match(line):
+			results.append(line)
+			lines.remove(line)
+	
+	for line in results:
+		filehandle.write(line)
+	
+	if len(lines) != 0:
+		print "\nDiscarded the following lines from " + filename + "!"
+		for line in lines:
+			print ">>>" + line.rstrip("\n")
+
+	return 1
+
+
+##############################################################################
+#
 # Modify source .po file to suit project specific needs. Dump result to a
 # different destination file
 #
@@ -244,13 +360,26 @@ def do_tunepo(src, dst):
 		input = open(src)
 		output = open(dst, 'w')
 
-		# Here we should update file headers. Maybe for a future release...
-		# do_update_headers(.......)
+		# Check file consistency
 
-		# Some comments in .po[t] files show filenames and line numbers for
-		# reference in platform-dependent form (slash/backslash). We
-		# standarize them to slashes, since this results in smaller SVN diffs
+		header = 1
+		headerlines = []
+
 		for l in input:
+
+				# Check headers in .po files.
+				# Eat up all headerlines and check them
+				if header:
+					if not re.match(r"^$", l):
+						headerlines.append(l)
+						continue
+					else:
+						do_header_check(dst, output, headerlines)
+						header = 0
+
+				# Some comments in .po[t] files show filenames and line numbers for
+				# reference in platform-dependent form (slash/backslash). We
+				# standarize them to slashes, since this results in smaller SVN diffs
 				if l[0:2] == "#:":
 						output.write(l.replace('\\', '/'))
 				else:
@@ -272,10 +401,10 @@ def do_update_po(lang, files):
 
 		for f in files:
 				# File names to use
-				po = ("po/%s/%s" % (lang, f.rstrip("t")))
+				po = ("po/%s/%s" % (lang, f.rstrip("t").lstrip("/")))
 				pot = ("po/pot/%s" % f)
 				tmp = "tmp.po"
-			
+
 				if not (os.path.exists(po)):
 						# No need to call mesgmerge if there's no translation
 						# to merge with. We can use .pot file as input file
@@ -316,6 +445,10 @@ if __name__ == "__main__":
 		do_update_potfiles()
 
 		sys.stdout.write("Updating translations: ")
+
+		if (os.getenv('NO_HEADER_REWRITE')):
+			NO_HEADER_REWRITE = 1
+
 		if (sys.argv[1] == "-a"):
 				lang = do_find_dirs("po/", RE_ISO639)
 				print "all available."
