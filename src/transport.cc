@@ -1018,8 +1018,8 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 		m_item_filled--;
 		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
 
-		Game * const game = dynamic_cast<Game * const>(g);
-		if (game) wake_up_capacity_queue(game);
+		if (Game * const game = dynamic_cast<Game * const>(g))
+			wake_up_capacity_queue(game);
 
 		return;
 	}
@@ -1762,8 +1762,8 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
       }
 
       // Cause a worker update in any case
-	   Game * const game = dynamic_cast<Game * const>(g);
-	   if (game) w->send_signal(game, "road");
+		if (Game * const game = dynamic_cast<Game * const>(g))
+			w->send_signal(game, "road");
    }
 
    // Initialize the new road
@@ -1775,8 +1775,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
       (*it)->set_location(newroad);
 
    // Do the following only if in game
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(g)) {
 
       // Request a new carrier for this road if necessary
       // This must be done _after_ the new road initializes, otherwise request
@@ -2355,8 +2354,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
          uint what_is=fr->Unsigned8();
          uint reg=fr->Unsigned32();
          Transfer* trans=0;
-         Game * const game = dynamic_cast<Game * const>(egbase);
-         if (game) {
+			if (Game * const game = dynamic_cast<Game * const>(egbase)) {
             assert(mol->is_object_known(reg));
             if(what_is==WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));

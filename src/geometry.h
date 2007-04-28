@@ -145,7 +145,7 @@ struct Coords {
 	bool operator!=(const Coords other) const throw ()
 	{return not (*this == other);}
 
-	bool is_valid  () const throw () __attribute__((deprecated))
+	__attribute__((deprecated)) bool is_valid () const throw ()
 	{return x != -1 and y != -1;}
 
 	bool isNull() const throw () {return *this == Null();}

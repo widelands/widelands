@@ -1796,8 +1796,8 @@ void Worker::init(Editor_Game_Base *g)
    // is unknown to this worker till he is initialized
 	// assert(get_location(g));
 
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) create_needed_experience(game); // Set his experience
+	if (Game * const game = dynamic_cast<Game * const>(g))
+		create_needed_experience(game); // Set his experience
 }
 
 
@@ -1823,8 +1823,7 @@ void Worker::cleanup(Editor_Game_Base *g)
    // or doing something else. Get Location might
    // init a gowarehouse task or something and this results
    // in a dirty stack. Nono, we do not want to end like this
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) reset_tasks(game);
+	if (Game * const game = dynamic_cast<Game * const>(g)) reset_tasks(game);
 
 	if (get_location(g))
 		set_location(0);

@@ -306,8 +306,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(g)) {
 		uint i;
 
 		// TODO: figure out whether planing is necessary
@@ -584,9 +583,9 @@ void ConstructionSite::draw
 
    // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
 	if (anim_pic) //  not the first pic
-      // draw the prev pic from top to where next image will be drawing  
-      dst.drawanimrect  
-        (pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect( Point(0, 0), w, h - lines));  
+      // draw the prev pic from top to where next image will be drawing
+      dst.drawanimrect
+        (pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect( Point(0, 0), w, h - lines));
     else if (m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead

@@ -421,8 +421,7 @@ void Warehouse::init(Editor_Game_Base* gg)
    m_supply->set_nrwares(get_owner()->tribe().get_nrwares());
    m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
 
-	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(gg)) {
       for(int i = 0; i < get_owner()->tribe().get_nrwares(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 

@@ -626,8 +626,8 @@ void Soldier::draw
 void Soldier::start_animation
 (Editor_Game_Base* gg, const char * const animname, const uint time)
 {
-	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) start_task_idle (game, descr().get_rand_anim(animname), time);
+	if (Game * const game = dynamic_cast<Game * const>(gg))
+		start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 
 /**

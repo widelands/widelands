@@ -356,12 +356,16 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area) {
 	}
 
 	// Fix all immovables
-	Game * const game = dynamic_cast<Game * const>(this);
-	for(std::set<PlayerImmovable*>::iterator it = burnset.begin(); it != burnset.end(); ++it)
-	{
-		if (game) (*it)->schedule_destroy(game);
-		else      (*it)->remove(this);
-	}
+	if (Game * const game = dynamic_cast<Game * const>(this)) for
+		(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
+		 it != burnset.end();
+		 ++it)
+		(*it)->schedule_destroy(game);
+	else for
+		(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
+		 it != burnset.end();
+		 ++it)
+		(*it)->remove(this);
 }
 
 

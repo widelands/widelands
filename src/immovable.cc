@@ -526,8 +526,8 @@ void Immovable::init(Editor_Game_Base *g)
 
 	set_program_animation(g);
 
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) switch_program(game, "program");
+	if (Game * const game = dynamic_cast<Game * const>(g))
+		switch_program(game, "program");
 }
 
 

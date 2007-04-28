@@ -56,8 +56,8 @@ void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
    Map_Object::init(eg);
    m_first = s1;
    m_second = s2;
-	Game * const game = dynamic_cast<Game * const>(eg);
-	if (game) m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
+	if (Game * const game = dynamic_cast<Game * const>(eg))
+		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
 void Battle::init (Editor_Game_Base* eg)
@@ -66,8 +66,8 @@ void Battle::init (Editor_Game_Base* eg)
 
    Map_Object::init(eg);
 
-	Game * const game = dynamic_cast<Game * const>(eg);
-	if (game) m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
+	if (Game * const game = dynamic_cast<Game * const>(eg))
+		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
 void Battle::soldiers (Soldier* s1, Soldier* s2)

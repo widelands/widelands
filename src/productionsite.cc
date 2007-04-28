@@ -301,8 +301,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	Game * const game = dynamic_cast<Game * const>(g);
-	if (game) {
+	if (Game * const game = dynamic_cast<Game * const>(g)) {
 		// Request worker
 		if (!m_workers.size()) {
 			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();

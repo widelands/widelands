@@ -225,8 +225,7 @@ void BulldozeConfirm::bulldoze()
 	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
-		Game * const game = dynamic_cast<Game * const>(egbase);
-		if (game) {
+		if (Game * const game = dynamic_cast<Game * const>(egbase)) {
 			game->send_player_bulldoze (todestroy);
          m_iabase->need_complete_redraw();
 		} else {// Editor
@@ -1216,7 +1215,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 }
 
 /**
- * \brief Update worker info subwindow, following user selection 
+ * \brief Update worker info subwindow, following user selection
  */
 void ProductionSite_Window_ListWorkerWindow::update(void)
 {
