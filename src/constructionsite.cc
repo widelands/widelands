@@ -324,7 +324,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq->init(get_owner()->get_tribe()->get_safe_ware_index((*bc)[i].name.c_str()), (*bc)[i].amount);
+			wq->init(get_owner()->tribe().get_safe_ware_index((*bc)[i].name.c_str()), (*bc)[i].amount);
 
 			m_work_steps += (*bc)[i].amount;
 		}
@@ -407,7 +407,7 @@ Issue a request for the builder.
 void ConstructionSite::request_builder(Game *) {
 	assert(!m_builder && !m_builder_request);
 
-	m_builder_request = new Request(this, get_owner()->get_tribe()->get_safe_worker_index("builder"),
+	m_builder_request = new Request(this, get_owner()->tribe().get_safe_worker_index("builder"),
 	                                &ConstructionSite::request_builder_callback, this, Request::WORKER);
 }
 

@@ -57,7 +57,7 @@ condTable
 
 descrTxt(this,5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, ""),
 
-tribe(interactivePlayer.get_player()->get_tribe())
+tribe(&interactivePlayer.get_player()->tribe())
 
 {
 	wares.selected.set(this, &EncyclopediaWindow::wareSelected);
@@ -82,7 +82,7 @@ void EncyclopediaWindow::fillWares() {
    int i;
    for (i=0;i<nrWares;i++) {
       Item_Ware_Descr* ware = tribe->get_ware_descr(i);
-		wares.add(ware->get_descname(), i, ware->get_menu_pic());
+		wares.add(ware->descname().c_str(), i, ware->get_menu_pic());
    }
 }
 
@@ -104,17 +104,17 @@ void EncyclopediaWindow::wareSelected(uint) {
 			 (tribe->get_building_descr(i)))
 		{
 
-			const char * const name = curProdSite->get_name();
+			const char * const name = curProdSite->name().c_str();
       if (strcmp(name, "constructionsite") == 0) continue;
       if (strcmp(name, "headquarters")     == 0) continue;
 
 			if
-				(curProdSite->get_outputs()->find(selectedWare->get_name())
+				(curProdSite->get_outputs()->find(selectedWare->name())
 				 !=
 				 curProdSite->get_outputs()->end())
 			{
 				prodSites.add
-					(curProdSite->get_descname(), i, curProdSite->get_buildicon());
+					(curProdSite->descname().c_str(), i, curProdSite->get_buildicon());
             found = true;
          }
       }
@@ -138,15 +138,15 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 	//  FIXME supposed to have any meaning to the game logic except to uniquely
 	//  FIXME identify the program.
 	std::map<std::string, ProductionProgram*>::const_iterator programIt =
-		program_map.find(std::string("produce_") + selectedWare->get_name());
+		program_map.find(std::string("produce_") + selectedWare->name());
 
    uint i;
 
 	if (programIt == program_map.end()) programIt =
-		program_map.find(std::string("smelt_") + selectedWare->get_name());
+		program_map.find(std::string("smelt_") + selectedWare->name());
 
 	if (programIt == program_map.end()) programIt =
-		program_map.find(std::string("prog_") + selectedWare->get_name());
+		program_map.find(std::string("prog_") + selectedWare->name());
 
 	if (programIt == program_map.end()) programIt = program_map.find("work");
 
@@ -225,7 +225,7 @@ void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, b
 
 	UI::Table<uintptr_t>::Entry_Record & tableEntry =
 		condTable.add(index, curWare->get_menu_pic());
-   std::string rowText = curWare->get_descname();
+   std::string rowText = curWare->descname();
    std::string consumeAmount = "0";
    std::string groupId = "";
 

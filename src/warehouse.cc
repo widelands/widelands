@@ -418,19 +418,19 @@ void Warehouse::init(Editor_Game_Base* gg)
 {
 	Building::init(gg);
 
-   m_supply->set_nrwares(get_owner()->get_tribe()->get_nrwares());
-   m_supply->set_nrworkers(get_owner()->get_tribe()->get_nrworkers());
+   m_supply->set_nrwares(get_owner()->tribe().get_nrwares());
+   m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
 
 	Game * const game = dynamic_cast<Game * const>(gg);
 	if (game) {
-      for(int i = 0; i < get_owner()->get_tribe()->get_nrwares(); i++) {
+      for(int i = 0; i < get_owner()->tribe().get_nrwares(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
          req->set_idle(true);
 
          m_requests.push_back(req);
       }
-      for(int i = 0; i < get_owner()->get_tribe()->get_nrworkers(); i++) {
+      for(int i = 0; i < get_owner()->tribe().get_nrworkers(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
          req->set_idle(true);
@@ -496,7 +496,7 @@ void Warehouse::act(Game* g, uint data)
 {
 	if (g->get_gametime() - m_next_carrier_spawn >= 0)
 	{
-		int id = get_owner()->get_tribe()->get_safe_worker_index("carrier");
+		int id = get_owner()->tribe().get_safe_worker_index("carrier");
 		int stock = m_supply->stock_workers(id);
 		int tdelta = CARRIER_SPAWN_INTERVAL;
 
@@ -528,18 +528,18 @@ void Warehouse::act(Game* g, uint data)
       // Military stuff: Kill the soldiers that are dead
    if (g->get_gametime() - m_next_military_act >= 0)
    {
-      int ware = get_owner()->get_tribe()->get_safe_worker_index("soldier");
+      int ware = get_owner()->tribe().get_safe_worker_index("soldier");
 
       Worker_Descr* workerdescr;
       Soldier* soldier;
 
-      workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+      workerdescr = get_owner()->tribe().get_worker_descr(ware);
          // Look if we got one in stock of those
-      std::string workername=workerdescr->get_name();
+      std::string workername=workerdescr->name();
       std::vector<Object_Ptr>::iterator i;
       for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
       {
-         if(static_cast<Worker*>(i->get(g))->get_name()==workername)
+         if(static_cast<Worker*>(i->get(g))->name()==workername)
          {
             soldier = static_cast<Soldier*>(i->get(g));
 
@@ -679,7 +679,7 @@ bool Warehouse::fetch_from_flag(Game* g)
 {
 	int carrierid;
 
-	carrierid = get_owner()->get_tribe()->get_safe_worker_index("carrier");
+	carrierid = get_owner()->tribe().get_safe_worker_index("carrier");
 
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
@@ -704,14 +704,14 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 	Worker_Descr* workerdescr;
 	Worker* worker;
 
-	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+	workerdescr = get_owner()->tribe().get_worker_descr(ware);
 
    // Look if we got one in stock of those
-   std::string workername=workerdescr->get_name();
+   std::string workername=workerdescr->name();
    std::vector<Object_Ptr>::iterator i;
    for(i=m_incorporated_workers.begin();
          i!=m_incorporated_workers.end(); i++)
-      if(static_cast<Worker*>(i->get(g))->get_name()==workername) break;
+      if(static_cast<Worker*>(i->get(g))->name()==workername) break;
 
    if(i==m_incorporated_workers.end()) {
       // None found, create a new one (if available)
@@ -745,13 +745,13 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 	Worker_Descr* workerdescr;
 	Soldier* soldier;
 
-	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+	workerdescr = get_owner()->tribe().get_worker_descr(ware);
    // Look if we got one in stock of those
-	std::string workername=workerdescr->get_name();
+	std::string workername=workerdescr->name();
 	std::vector<Object_Ptr>::iterator i;
 	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
-		if(static_cast<Worker*>(i->get(g))->get_name()==workername)
+		if(static_cast<Worker*>(i->get(g))->name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 			if
@@ -805,13 +805,13 @@ void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
 	Worker_Descr* workerdescr;
 	Soldier* soldier;
 
-	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+	workerdescr = get_owner()->tribe().get_worker_descr(ware);
    // Look if we got one in stock of those
-	std::string workername=workerdescr->get_name();
+	std::string workername=workerdescr->name();
 	std::vector<Object_Ptr>::iterator i;
 	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
-		if(static_cast<Worker*>(i->get(g))->get_name()==workername)
+		if(static_cast<Worker*>(i->get(g))->name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 			if (!soldier->is_marked())
@@ -856,7 +856,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 {
 	assert(w->get_owner() == get_owner());
 
-	int index = get_owner()->get_tribe()->get_worker_index(w->get_name().c_str());
+	int index = get_owner()->tribe().get_worker_index(w->name().c_str());
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
    // We remove carrier, but we keep other workers around
@@ -871,7 +871,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
       if (w->get_worker_type() == Worker_Descr::SOLDIER)
          ((Soldier*)w)->mark(false);
 
-      sort_worker_in(g, w->get_name(), w);
+      sort_worker_in(g, w->name(), w);
       w->set_location(0); // No more in a economy
       w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
    }
@@ -891,7 +891,7 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
 
       std::vector<Object_Ptr>::iterator i=m_incorporated_workers.begin();
 
-      while(i!= m_incorporated_workers.end() && workername <= static_cast<Worker*>(i->get(g))->get_name()) ++i;
+      while(i!= m_incorporated_workers.end() && workername <= static_cast<Worker*>(i->get(g))->name()) ++i;
       if(i==m_incorporated_workers.end()) {
          m_incorporated_workers.insert(i, w);
          return;
@@ -914,7 +914,7 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	WareInstance* item;
 
 	// Create the item
-   Item_Ware_Descr* waredescr=get_owner()->get_tribe()->get_ware_descr(ware);
+   Item_Ware_Descr* waredescr=get_owner()->tribe().get_ware_descr(ware);
    assert(waredescr);
 	item = new WareInstance(ware, waredescr);
 	item->init(g);
@@ -941,8 +941,8 @@ void Warehouse::do_launch_item(Game* g, WareInstance* item)
 	Worker* worker;
 
 	// Create a carrier
-	carrierid = get_owner()->get_tribe()->get_worker_index("carrier");
-	workerdescr = get_owner()->get_tribe()->get_worker_descr(carrierid);
+	carrierid = get_owner()->tribe().get_worker_index("carrier");
+	workerdescr = get_owner()->tribe().get_worker_descr(carrierid);
 
 	worker = workerdescr->create(g, get_owner(), this, m_position);
 
@@ -1013,14 +1013,14 @@ log ("Warehouse::get_soldiers_passing :");
 	Worker_Descr* workerdescr;
 	Soldier* soldier;
 
-	workerdescr = get_owner()->get_tribe()->get_worker_descr(w);
+	workerdescr = get_owner()->tribe().get_worker_descr(w);
    // Look if we got one in stock of those
-   std::string workername=workerdescr->get_name();
+   std::string workername=workerdescr->name();
    std::vector<Object_Ptr>::iterator i;
 
 	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
-      if(static_cast<Worker*>(i->get(g))->get_name()==workername)
+      if(static_cast<Worker*>(i->get(g))->name()==workername)
 		{
 			soldier = static_cast<Soldier*>(i->get(g));
 
@@ -1068,7 +1068,7 @@ bool Warehouse::can_create_worker(Game *, int worker) {
             m_supply->get_workers().get_nrwareids());
    }
 
-   w_desc=get_owner()->get_tribe()->get_worker_descr(worker);
+   w_desc=get_owner()->tribe().get_worker_descr(worker);
 
 	if (w_desc)
 	{
@@ -1087,17 +1087,17 @@ bool Warehouse::can_create_worker(Game *, int worker) {
 			int id_w;
 
 
-			id_w = get_owner()->get_tribe()->get_ware_index((*bc)[i].name.c_str());
+			id_w = get_owner()->tribe().get_ware_index((*bc)[i].name.c_str());
          if(id_w!=-1) {
             if (m_supply->stock_wares(id_w) < (*bc)[i].amount)
             {
-               molog (" %s: Need more %s for creation\n", w_desc->get_name(), (*bc)[i].name.c_str());
+               molog (" %s: Need more %s for creation\n", w_desc->name().c_str(), (*bc)[i].name.c_str());
                enought_wares = false;
             }
          } else {
-            id_w = get_owner()->get_tribe()->get_safe_worker_index((*bc)[i].name.c_str());
+            id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
             if (m_supply->stock_workers(id_w) < (*bc)[i].amount) {
-               molog (" %s: Need more %s for creation\n", w_desc->get_name(), (*bc)[i].name.c_str());
+               molog (" %s: Need more %s for creation\n", w_desc->name().c_str(), (*bc)[i].name.c_str());
                enought_wares = false;
             }
          }
@@ -1120,7 +1120,7 @@ void Warehouse::create_worker(Game *g, int worker)
 	if (!can_create_worker (g, worker))
 		throw wexception ("Warehouse::create_worker WE CANN'T CREATE A %d WORKER", worker);
 
-   w_desc=get_owner()->get_tribe()->get_worker_descr(worker);
+   w_desc=get_owner()->tribe().get_worker_descr(worker);
 
 	if (w_desc)
 	{
@@ -1129,11 +1129,11 @@ void Warehouse::create_worker(Game *g, int worker)
 
 		for(i = 0; i < bc->size(); i++) {
 			int id_w;
-			id_w = get_owner()->get_tribe()->get_ware_index((*bc)[i].name.c_str());
+			id_w = get_owner()->tribe().get_ware_index((*bc)[i].name.c_str());
          if(id_w!=-1) {
             remove_wares(id_w , (*bc)[i].amount);
          } else {
-            id_w = get_owner()->get_tribe()->get_safe_worker_index((*bc)[i].name.c_str());
+            id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
             remove_workers(id_w , (*bc)[i].amount);
          }
 		}
@@ -1145,7 +1145,7 @@ void Warehouse::create_worker(Game *g, int worker)
 
 		incorporate_worker(g, w);
 
-		molog (" We have created a(n) %s\n", w_desc->get_name ());
+		molog (" We have created a(n) %s\n", w_desc->name().c_str());
 
 	}
 	else

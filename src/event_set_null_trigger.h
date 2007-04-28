@@ -56,7 +56,7 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
 	bool get_setto() const {return m_setto;}
 
       // For Trigger referencer
-	const char* get_name() const {return Event::get_name();}
+	const char* get_name() const {return Event::name().c_str();}
 	const char* get_type() const {return "Event Set Null Trigger";}
 
    private:

@@ -408,7 +408,7 @@ Player * Editor_Game_Base::add_player
 	manually_load_tribe(tribe.c_str());
 
    for(i = 0; i < m_tribes.size(); i++)
-		if (m_tribes[i]->get_name() == tribe) break;
+		if (m_tribes[i]->name() == tribe) break;
 
    if (i == m_tribes.size())
       m_tribes.push_back(new Tribe_Descr(tribe, map().world()));
@@ -432,7 +432,7 @@ void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
 	uint i;
 
 	for(i = 0; i < m_tribes.size(); i++)
-		if (m_tribes[i]->get_name() == tribe) break;
+		if (m_tribes[i]->name() == tribe) break;
 
 	if (i == m_tribes.size())
 		m_tribes.push_back(new Tribe_Descr(tribe, map().world()));
@@ -444,7 +444,7 @@ void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
 Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
 	uint i;
    for(i = 0; i < m_tribes.size(); i++) {
-		if (not strcmp(m_tribes[i]->get_name().c_str(), tribe))
+		if (not strcmp(m_tribes[i]->name().c_str(), tribe))
 			return m_tribes[i];
    }
    return 0;
@@ -516,7 +516,7 @@ void Editor_Game_Base::postload()
 		for(pid = 1; pid <= MAX_PLAYERS; pid++) {
 			Player* plr = get_player(pid);
 
-			if (plr && plr->get_tribe() == m_tribes[id])
+			if (plr && &plr->tribe() == m_tribes[id])
 				break;
 		}
 
@@ -669,7 +669,7 @@ Immovable* Editor_Game_Base::create_immovable
 
 	if (idx < 0)
 		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for %s",
-								c.x, c.y, name.c_str(), tribe ? tribe->get_name().c_str() : "world");
+								c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
 
 	return create_immovable(c, idx, tribe);
 }

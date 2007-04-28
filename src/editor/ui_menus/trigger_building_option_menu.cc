@@ -59,7 +59,7 @@ m_player_area(trigger->m_player_area)
 	   for(i=0; i<tribe->get_nrbuildings(); i++) {
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
-         std::string name=b->get_name();
+         std::string name=b->name();
          std::string trig_name= m_trigger->get_building();
          if(name==trig_name) m_building=m_buildings.size();
          m_buildings.push_back(name);

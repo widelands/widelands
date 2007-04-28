@@ -75,12 +75,12 @@ throw (_wexception)
          Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
 
          // Animation
-         imm->m_anim=imm->get_descr()->get_animation(fr.CString());
+         imm->m_anim=imm->descr().get_animation(fr.CString());
          imm->m_animstart=fr.Signed32();
 
          // Programm
          if(fr.Unsigned8())
-            imm->m_program=imm->get_descr()->get_program(fr.CString());
+            imm->m_program=imm->descr().get_program(fr.CString());
          else
             imm->m_program=0;
          imm->m_program_ptr=fr.Unsigned32();
@@ -126,7 +126,7 @@ throw (_wexception)
             // My position is not needed, set on creation
 
             // Animations
-            fw.CString(imm->get_descr()->get_animation_name(imm->m_anim).c_str());
+            fw.CString(imm->descr().get_animation_name(imm->m_anim).c_str());
             fw.Signed32(imm->m_animstart);
 
             // Program Stuff

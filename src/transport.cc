@@ -1607,7 +1607,7 @@ issued.
 void Road::request_carrier(Game * g) {
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
-	m_carrier_request = new Request(this, get_owner()->get_tribe()->get_safe_worker_index("carrier"),
+	m_carrier_request = new Request(this, get_owner()->tribe().get_safe_worker_index("carrier"),
 	                                &Road::request_carrier_callback, this, Request::WORKER);
 }
 
@@ -3087,7 +3087,7 @@ void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Ma
    fw->Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
 	// Owner and callback is not saved, but this should be obvious on load
-   fw->CString(m_owner->get_owner()->get_tribe()->get_ware_descr(m_ware)->get_name());
+   fw->CString(m_owner->get_owner()->tribe().get_ware_descr(m_ware)->name().c_str());
    fw->Signed32(m_size);
    fw->Signed32(m_filled);
    fw->Signed32(m_consume_interval);
@@ -3101,7 +3101,7 @@ void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_
    int version=fr->Unsigned16();
 
    if(version==WARES_QUEUE_DATA_PACKET_VERSION) {
-      m_ware=m_owner->get_owner()->get_tribe()->get_ware_index(fr->CString());
+      m_ware=m_owner->get_owner()->tribe().get_ware_index(fr->CString());
       m_size=fr->Signed32();
       m_filled=fr->Signed32();
       m_consume_interval=fr->Signed32();
@@ -3141,10 +3141,10 @@ m_rebuilding(false),
 m_request_timer(false),
 mpf_cycle(0)
 {
-   m_worker_supplies.resize( player->get_tribe()->get_nrworkers() );
-   m_workers.set_nrwares( player->get_tribe()->get_nrworkers() );
-   m_ware_supplies.resize( player->get_tribe()->get_nrwares() );
-   m_wares.set_nrwares( player->get_tribe()->get_nrwares() );
+   m_worker_supplies.resize( player->tribe().get_nrworkers() );
+   m_workers.set_nrwares( player->tribe().get_nrworkers() );
+   m_ware_supplies.resize( player->tribe().get_nrwares() );
+   m_wares.set_nrwares( player->tribe().get_nrwares() );
 
    player->add_economy(this);
 }
@@ -4232,7 +4232,7 @@ void Economy::create_requested_workers(Game* g)
 			if (!req->is_idle() && ((req->get_type()==Request::WORKER) || (req->get_type()==Request::SOLDIER))) {
 				int index = req->get_index();
 				int num_wares = 0;
-            Worker_Descr* w_desc=get_owner()->get_tribe()->get_worker_descr(index);
+            Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
 
 				// Ignore it if is a worker that cann't be buildable
 				if (!w_desc->get_buildable())
@@ -4261,7 +4261,7 @@ void Economy::create_requested_workers(Game* g)
 					uint n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
 						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
-log("Economy::process_request-- Created a '%s' needed\n", w_desc->get_name());
+log("Economy::process_request-- Created a '%s' needed\n", w_desc->name().c_str());
 							m_warehouses[n_wh]->create_worker(g, index);
 							//break;
 						} // if (m_warehouses[n_wh]

@@ -351,7 +351,7 @@ UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
    // First, we must decide about the size
-	const int nr_wares = parent.get_player()->get_tribe()->get_nrwares();
+	const int nr_wares = parent.get_player()->tribe().get_nrwares();
 	uint wares_per_row = MIN_WARES_PER_LINE;
    while(nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
 	const uint nr_rows =
@@ -389,7 +389,7 @@ m_parent(&parent)
 			const Item_Ware_Descr & ware = *tribe.get_ware_descr(cur_ware);
 			WSM_Checkbox & cb = *new WSM_Checkbox
 				(this, posx, posy, cur_ware, ware.get_menu_pic(), colors[cur_ware]);
-			cb.set_tooltip(ware.get_descname());
+			cb.set_tooltip(ware.descname().c_str());
 			cb.changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
 			posx += cb.get_w() + spacing;
 			dposy = cb.get_h() + spacing;

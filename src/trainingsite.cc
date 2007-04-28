@@ -299,7 +299,7 @@ void TrainingSite::remove_worker(Worker* w)
  * Request exactly one soldier
  */
 void TrainingSite::request_soldier() {
-	int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
+	int soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
 	Request *req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
 	Requeriments *r = new Requeriments();
@@ -308,24 +308,24 @@ void TrainingSite::request_soldier() {
 	int totalmax = 0;
 	int totalmin = 0;
 	if (descr().get_train_attack()) {
-		totalmin += get_descr()->get_min_level(atrAttack);
-		totalmax += get_descr()->get_max_level(atrAttack);
-		r->set(atrAttack, get_descr()->get_min_level(atrAttack), get_descr()->get_max_level(atrAttack));
+		totalmin += descr().get_min_level(atrAttack);
+		totalmax += descr().get_max_level(atrAttack);
+		r->set(atrAttack, descr().get_min_level(atrAttack), descr().get_max_level(atrAttack));
 	}
 	if (descr().get_train_defense()) {
-		totalmin += get_descr()->get_min_level(atrDefense);
-		totalmax += get_descr()->get_max_level(atrDefense);
-		r->set(atrDefense, get_descr()->get_min_level(atrDefense), get_descr()->get_max_level(atrDefense));
+		totalmin += descr().get_min_level(atrDefense);
+		totalmax += descr().get_max_level(atrDefense);
+		r->set(atrDefense, descr().get_min_level(atrDefense), descr().get_max_level(atrDefense));
 	}
 	if (descr().get_train_evade()) {
-		totalmin += get_descr()->get_min_level(atrEvade);
-		totalmax += get_descr()->get_max_level(atrEvade);
-		r->set(atrEvade, get_descr()->get_min_level(atrEvade), get_descr()->get_max_level(atrEvade));
+		totalmin += descr().get_min_level(atrEvade);
+		totalmax += descr().get_max_level(atrEvade);
+		r->set(atrEvade, descr().get_min_level(atrEvade), descr().get_max_level(atrEvade));
 	}
 	if (descr().get_train_hp()) {
-		totalmin += get_descr()->get_min_level(atrHP);
-		totalmax += get_descr()->get_max_level(atrHP);
-		r->set(atrHP, get_descr()->get_min_level(atrHP), get_descr()->get_max_level(atrHP));
+		totalmin += descr().get_min_level(atrHP);
+		totalmax += descr().get_max_level(atrHP);
+		r->set(atrHP, descr().get_min_level(atrHP), descr().get_max_level(atrHP));
 	}
 
 	//  To make sure that fully trained soldiers are not requested.
@@ -455,36 +455,36 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 
 	assert(g);
 
-	if (get_descr()->get_train_hp())
+	if (descr().get_train_hp())
 		count_upgrades++;
-	if (get_descr()->get_train_attack())
+	if (descr().get_train_attack())
 		count_upgrades++;
-	if (get_descr()->get_train_defense())
+	if (descr().get_train_defense())
 		count_upgrades++;
-	if (get_descr()->get_train_evade())
+	if (descr().get_train_evade())
 		count_upgrades++;
 
 	for (uint i = 0; i < m_soldiers.size(); i++) {
 		uint count;
 		count = 0;
-		if (((m_soldiers[i]->get_level(atrHP) < (uint) get_descr()->get_min_level(atrHP)) ||
-		     (m_soldiers[i]->get_level(atrHP) >= (uint) get_descr()->get_max_level(atrHP)))
-		    && (get_descr()->get_train_hp()))
+		if (((m_soldiers[i]->get_level(atrHP) < (uint) descr().get_min_level(atrHP)) ||
+		     (m_soldiers[i]->get_level(atrHP) >= (uint) descr().get_max_level(atrHP)))
+		    && (descr().get_train_hp()))
 			count++;
 
-		if (((m_soldiers[i]->get_level(atrAttack) < (uint) get_descr()->get_min_level(atrAttack)) ||
-		     (m_soldiers[i]->get_level(atrAttack) >= (uint) get_descr()->get_max_level(atrAttack)))
-		    && (get_descr()->get_train_attack()))
+		if (((m_soldiers[i]->get_level(atrAttack) < (uint) descr().get_min_level(atrAttack)) ||
+		     (m_soldiers[i]->get_level(atrAttack) >= (uint) descr().get_max_level(atrAttack)))
+		    && (descr().get_train_attack()))
 			count++;
 
-		if (((m_soldiers[i]->get_level(atrDefense) < (uint) get_descr()->get_min_level(atrDefense)) ||
-		     (m_soldiers[i]->get_level(atrDefense) >= (uint) get_descr()->get_max_level(atrDefense)))
-		    && (get_descr()->get_train_defense()))
+		if (((m_soldiers[i]->get_level(atrDefense) < (uint) descr().get_min_level(atrDefense)) ||
+		     (m_soldiers[i]->get_level(atrDefense) >= (uint) descr().get_max_level(atrDefense)))
+		    && (descr().get_train_defense()))
 			count++;
 
-		if (((m_soldiers[i]->get_level(atrEvade) < (uint) get_descr()->get_min_level(atrEvade)) ||
-		     (m_soldiers[i]->get_level(atrEvade) >= (uint) get_descr()->get_max_level(atrEvade)))
-		    && (get_descr()->get_train_evade()))
+		if (((m_soldiers[i]->get_level(atrEvade) < (uint) descr().get_min_level(atrEvade)) ||
+		     (m_soldiers[i]->get_level(atrEvade) >= (uint) descr().get_max_level(atrEvade)))
+		    && (descr().get_train_evade()))
 			count++;
 
 		if (count >= count_upgrades)
@@ -521,9 +521,9 @@ void TrainingSite::act(Game * g, uint data)
 			return;
 		}
 
-		if (m_anim != get_descr()->get_animation("idle")) {
+		if (m_anim != descr().get_animation("idle")) {
 			// Restart idle animation (which is the default animation)
-			start_animation(g, get_descr()->get_animation("idle"));
+			start_animation(g, descr().get_animation("idle"));
 		}
 
 		program_act(g); //  this will do the actual training
@@ -569,7 +569,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 			throw wexception("Unkown attribute to upgrade %s.", str[1].c_str());
 
 		if (m_soldiers.size()) {
-			max_level = get_descr()->get_max_level(attrib);
+			max_level = descr().get_max_level(attrib);
 			MAX_level = max_level;
 
 			if (m_build_heros) {
@@ -790,8 +790,8 @@ void TrainingSite::change_soldier_capacity(int how)
 
 	if (temp_capacity < 0)
 		m_capacity = 0;
-	else if (temp_capacity > get_descr()->get_max_number_of_soldiers())
-		m_capacity = get_descr()->get_max_number_of_soldiers();
+	else if (temp_capacity > descr().get_max_number_of_soldiers())
+		m_capacity = descr().get_max_number_of_soldiers();
 	else
 		m_capacity = temp_capacity;
 
@@ -830,13 +830,13 @@ void TrainingSite::calc_list_upgrades(Game *) {
 	int r_evade = m_pri_evade;
 	std::vector < std::string > list;
 
-	if (!get_descr()->get_train_hp())
+	if (!descr().get_train_hp())
 		r_hp = 0;
-	if (!get_descr()->get_train_attack())
+	if (!descr().get_train_attack())
 		r_attack = 0;
-	if (!get_descr()->get_train_defense())
+	if (!descr().get_train_defense())
 		r_defense = 0;
-	if (!get_descr()->get_train_evade())
+	if (!descr().get_train_evade())
 		r_evade = 0;
 
 	while ((r_hp > 0) || (r_attack > 0) || (r_defense > 0) || (r_evade > 0)) {

@@ -174,10 +174,10 @@ throw (_wexception)
 					assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
 					const uint reg = os->register_object(bobarr[i]);
                // Write its owner
-               std::string owner_tribe = bobarr[i]->get_descr()->get_owner_tribe() ? bobarr[i]->get_descr()->get_owner_tribe()->get_name() : "world";
+               std::string owner_tribe = bobarr[i]->descr().get_owner_tribe() ? bobarr[i]->descr().get_owner_tribe()->name() : "world";
                fw.CString(owner_tribe.c_str());
                // Write it's name
-               fw.CString(bobarr[i]->get_name().c_str());
+               fw.CString(bobarr[i]->name().c_str());
                // Write it's subtype
                fw.Unsigned8(bobarr[i]->get_bob_type());
                // And it's file register index

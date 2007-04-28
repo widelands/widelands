@@ -193,7 +193,7 @@ throw (_wexception)
 		s.set_int("nr_events", size);
 		for (EventChain::event_vector::size_type eventnum = 0; eventnum < size; ++eventnum) {
 			sprintf(buf, "event_%02u", eventnum);
-			s.set_string(buf, e.m_events[eventnum]->get_name());
+			s.set_string(buf, e.m_events[eventnum]->name().c_str());
       }
 
       // Which is the current event

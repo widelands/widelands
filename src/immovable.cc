@@ -274,7 +274,7 @@ const ImmovableProgram* Immovable_Descr::get_program(std::string programname)
 	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("Immovable %s has no program '%s'", get_name(),
+		throw wexception("Immovable %s has no program '%s'", name().c_str(),
 							  programname.c_str());
 
 	return it->second;
@@ -506,10 +506,10 @@ Immovable::get_passable
 */
 int Immovable::get_type() const throw () {return IMMOVABLE;}
 
-int Immovable::get_size() const throw () {return get_descr()->get_size();}
+int Immovable::get_size() const throw () {return descr().get_size();}
 
 bool Immovable::get_passable() const throw ()
-{return get_descr()->get_size() < BIG;}
+{return descr().get_size() < BIG;}
 
 /*
 ===============
@@ -558,7 +558,7 @@ void Immovable::set_program_animation(Editor_Game_Base* g)
 	const ImmovableProgram* prog = m_program;
 
 	if (!prog)
-		prog = get_descr()->get_program("program");
+		prog = descr().get_program("program");
 
 	const ImmovableAction& action = prog->get_action(m_program_ptr);
 
@@ -578,7 +578,7 @@ Switch the currently running program.
 */
 void Immovable::switch_program(Game* g, std::string programname)
 {
-	m_program = get_descr()->get_program(programname);
+	m_program = descr().get_program(programname);
 	m_program_ptr = 0;
 
 	run_program(g, false);
@@ -622,7 +622,7 @@ void Immovable::run_program(Game* g, bool killable)
 	}
 	while(origptr != m_program_ptr);
 
-	molog("WARNING: %s has infinite loop in program %s\n", get_descr()->get_name(),
+	molog("WARNING: %s has infinite loop in program %s\n", descr().name().c_str(),
 					m_program->get_name().c_str());
 }
 
@@ -753,7 +753,7 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 {
 	Coords c = m_position;
 
-   if(!get_descr()->get_owner_tribe() && (action.sparam2 != "world"))
+   if(!descr().get_owner_tribe() && (action.sparam2 != "world"))
       throw wexception("Should create tribe-immovable %s, but we are no tribe immovable!\n", action.sparam1.c_str());
 
 	if (!killable) { // we need to reschedule and remove self from act()
@@ -765,7 +765,7 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 	const Tribe_Descr* tribe=0;
 
    if(action.sparam2 != "world")
-      tribe=get_descr()->get_owner_tribe(); // Not a world bob?
+      tribe=descr().get_owner_tribe(); // Not a world bob?
 
 	remove(g);
 	// Only use variables on the stack below this point!

@@ -126,7 +126,7 @@ throw (_wexception)
       fw.Signed32(plr->m_type);
       fw.Signed32(plr->m_plnum);
 
-		fw.CString(plr->m_tribe.get_name().c_str());
+		fw.CString(plr->m_tribe.name().c_str());
 
       for(uint j=0; j<4; j++) {
          fw.Unsigned8(plr->m_playercolor[j].r());

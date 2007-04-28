@@ -86,11 +86,11 @@ bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
    else {
       if(m_type == WORKER) {
          index--;
-         str=m_player->get_tribe()->get_worker_descr(index)->descname();
+         str=m_player->tribe().get_worker_descr(index)->descname();
          m_curware->set_text(str.c_str());
       } else {
          index--;
-         str=m_player->get_tribe()->get_ware_descr(index)->get_descname();
+         str=m_player->tribe().get_ware_descr(index)->descname();
          m_curware->set_text(str.c_str());
       }
    }
@@ -143,11 +143,11 @@ void WaresDisplay::draw(RenderTarget* dst)
 {
 	Point p(2, 2);
 
-   int number = m_player->get_tribe()->get_nrwares();
+   int number = m_player->tribe().get_nrwares();
    bool is_worker = false;
 
    if( m_type == WORKER ) {
-      number = m_player->get_tribe()->get_nrworkers();
+      number = m_player->tribe().get_nrworkers();
       is_worker = true;
    }
    int totid=0;
@@ -179,12 +179,12 @@ void WaresDisplay::draw_ware
 	// Get the picture
 	if (worker)
 	{
-		Worker_Descr* w = m_player->get_tribe()->get_worker_descr(id);
+		Worker_Descr* w = m_player->tribe().get_worker_descr(id);
 		pic = w->get_menu_pic();
 	}
 	else
 	{
-      Item_Ware_Descr* wd = m_player->get_tribe()->get_ware_descr(id);
+      Item_Ware_Descr* wd = m_player->tribe().get_ware_descr(id);
 		pic = wd->get_menu_pic();
 	}
 

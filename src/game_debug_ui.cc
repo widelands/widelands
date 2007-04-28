@@ -395,8 +395,8 @@ void FieldDebugWindow::think()
 		std::string name;
 
 		switch(imm->get_type()) {
-		case Map_Object::IMMOVABLE: name = ((Immovable*)imm)->get_name(); break;
-		case Map_Object::BUILDING: name = ((Building*)imm)->get_name(); break;
+		case Map_Object::IMMOVABLE: name = ((Immovable*)imm)->name(); break;
+		case Map_Object::BUILDING: name = ((Building*)imm)->name(); break;
 		case Map_Object::FLAG: name = "flag"; break;
 		case Map_Object::ROAD: name = "road"; break;
 		default: name = "unknown"; break;
@@ -417,7 +417,7 @@ void FieldDebugWindow::think()
 
 	m_map.find_bobs(Area<FCoords>(m_coords, 0), &bobs);
 	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
-		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->get_name().c_str(), (*it)->get_serial());
+		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->name().c_str(), (*it)->get_serial());
 		m_ui_bobs.add(buf, (*it)->get_serial());
 	}
 }

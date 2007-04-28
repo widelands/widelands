@@ -232,10 +232,10 @@ void Interactive_Player::sample_statistics( void ) {
       for( uint j = 0; plr && j < plr->get_nr_economies(); j++) {
          Economy* eco = plr->get_economy_by_number( j );
 
-         for( int wareid = 0; wareid < plr->get_tribe()->get_nrwares(); wareid++)
+         for( int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
             wastock += eco->stock_ware( wareid );
-         for( int workerid = 0; workerid < plr->get_tribe()->get_nrworkers(); workerid++) {
-            if( plr->get_tribe()->get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER)
+         for( int workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
+            if( plr->tribe().get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER)
                continue;
             wostock += eco->stock_worker( workerid );
          }
@@ -365,12 +365,12 @@ void Interactive_Player::start()
  * A ware was produced
  */
 void Interactive_Player::ware_produced( uint wareid ) {
-   if( m_ware_productions.size() != (uint)get_player()->get_tribe()->get_nrwares() ) {
-      m_ware_productions.resize( get_player()->get_tribe()->get_nrwares() );
-      m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
+   if( m_ware_productions.size() != (uint)get_player()->tribe().get_nrwares() ) {
+      m_ware_productions.resize( get_player()->tribe().get_nrwares() );
+      m_current_statistics.resize( get_player()->tribe().get_nrwares() );
    }
 
-   assert( wareid < (uint)get_player()->get_tribe()->get_nrwares() );
+   assert( wareid < (uint)get_player()->tribe().get_nrwares() );
 
    m_current_statistics[wareid]++;
 }
@@ -381,9 +381,9 @@ void Interactive_Player::ware_produced( uint wareid ) {
  * Set the next production period
  */
 void Interactive_Player::next_ware_production_period( void ) {
-   if( m_ware_productions.size() != (uint)get_player()->get_tribe()->get_nrwares() ) {
-      m_ware_productions.resize( get_player()->get_tribe()->get_nrwares() );
-      m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
+   if( m_ware_productions.size() != (uint)get_player()->tribe().get_nrwares() ) {
+      m_ware_productions.resize( get_player()->tribe().get_nrwares() );
+      m_current_statistics.resize( get_player()->tribe().get_nrwares() );
    }
 
    for(uint i = 0; i < m_ware_productions.size(); i++) {

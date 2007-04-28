@@ -39,7 +39,7 @@ class Event_Message_Box : public Event, public TriggerReferencer {
 
       // For trigger referenecer
 	const char * get_type() const {return "Event:MessageBox";}
-	const char * get_name() const {return Event::get_name();}
+	const char * get_name() const {return Event::name().c_str();}
 
       // one liner functions
 	const char * get_id() const {return "message_box";}

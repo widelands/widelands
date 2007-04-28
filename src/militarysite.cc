@@ -280,7 +280,7 @@ Issue the soldier request
 ===============
 */
 void MilitarySite::request_soldier() {
-   int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
+   int soldierid = get_owner()->tribe().get_safe_worker_index("soldier");
 
    // TODO: This should be user-configurable through windows options (still nothing is done to support this)
    Requeriments* r = new Requeriments();
@@ -498,8 +498,8 @@ void MilitarySite::change_soldier_capacity(int how)
       {
          m_capacity += how;
 
-         if (m_capacity > (uint) get_descr()->get_max_number_of_soldiers())
-            m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
+         if (m_capacity > (uint) descr().get_max_number_of_soldiers())
+            m_capacity = (uint) descr().get_max_number_of_soldiers();
 			call_soldiers();
       }
       else

@@ -86,7 +86,7 @@ throw (_wexception)
 
          // Animation
 				building->m_anim = fr.Unsigned8() ?
-					building->get_descr()->get_animation(fr.CString()) : 0;
+					building->descr().get_animation(fr.CString()) : 0;
          building->m_animstart=fr.Unsigned32();
 
          building->m_leave_queue.resize(fr.Unsigned16());
@@ -154,10 +154,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 {
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
-      constructionsite.m_building=constructionsite.get_owner()->get_tribe()->get_building_descr(constructionsite.get_owner()->get_tribe()->get_safe_building_index(fr.CString()));
+      constructionsite.m_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
       bool prevb=fr.Unsigned8();
       if(prevb) {
-         constructionsite.m_prev_building=constructionsite.get_owner()->get_tribe()->get_building_descr(constructionsite.get_owner()->get_tribe()->get_safe_building_index(fr.CString()));
+         constructionsite.m_prev_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
       } else
          constructionsite.m_prev_building=0;
 
@@ -261,7 +261,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
          assert(ol->is_object_known(id));
          // Worker might not yet be loaded so that get ware won't work
          // but make sure that such a worker exists in tribe
-         if(warehouse.get_owner()->get_tribe()->get_worker_index(name.c_str())==-1)
+         if(warehouse.get_owner()->tribe().get_worker_index(name.c_str())==-1)
             throw wexception("Unknown worker %s in incorporated workers in Widelands_Map_Buildingdata_Data_Packet!\n", name.c_str());
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          warehouse.sort_worker_in(egbase, name, w);
@@ -377,7 +377,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       productionsite.m_program.resize(nr_progs);
       for(uint i=0; i<nr_progs; i++) {
          std::string prog = fr.CString();
-         productionsite.m_program[i].program = productionsite.get_descr()->get_program(prog.c_str());
+         productionsite.m_program[i].program = productionsite.descr().get_program(prog.c_str());
          productionsite.m_program[i].ip = fr.Signed32();
          productionsite.m_program[i].phase = fr.Signed32();
          productionsite.m_program[i].flags = fr.Unsigned32();
@@ -519,7 +519,7 @@ throw (_wexception)
             // Write the general stuff
 			if (building->m_anim) {
                fw.Unsigned8(1);
-               fw.CString(building->get_descr()->get_animation_name(building->m_anim).c_str());
+               fw.CString(building->descr().get_animation_name(building->m_anim).c_str());
             } else
                fw.Unsigned8(0);
 
@@ -591,10 +591,10 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
    fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
 
    // Describtions
-   fw.CString(constructionsite.m_building->get_name());
+   fw.CString(constructionsite.m_building->name().c_str());
 	if (constructionsite.m_prev_building) {
       fw.Unsigned8(1);
-      fw.CString(constructionsite.m_prev_building->get_name());
+      fw.CString(constructionsite.m_prev_building->name().c_str());
    } else
       fw.Unsigned8(0);
 
@@ -641,14 +641,14 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
    const WareList& wares=warehouse.m_supply->get_wares();
    for(int i=0; i<wares.get_nrwareids(); i++) {
       fw.Unsigned8(1);
-      fw.CString(warehouse.get_owner()->get_tribe()->get_ware_descr(i)->get_name());
+      fw.CString(warehouse.get_owner()->tribe().get_ware_descr(i)->name().c_str());
       fw.Unsigned16(wares.stock(i));
    }
    fw.Unsigned8(0);
    const WareList& workers=warehouse.m_supply->get_workers();
    for(int i=0; i<workers.get_nrwareids(); i++) {
       fw.Unsigned8(1);
-      fw.CString(warehouse.get_owner()->get_tribe()->get_worker_descr(i)->get_name());
+      fw.CString(warehouse.get_owner()->tribe().get_worker_descr(i)->name().c_str());
       fw.Unsigned16(workers.stock(i));
    }
    fw.Unsigned8(0);
@@ -684,7 +684,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 	{
 		assert(os->is_object_known(it->second));
 		fw.Unsigned32(os->get_object_file_index(it->second));
-		fw.CString(it->second->get_name().c_str());
+		fw.CString(it->second->name().c_str());
    }
 
    // Carrier spawn

@@ -460,7 +460,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 
 			if (list.size() != 4) throw wexception
 				("Error in tribe (%s), startsoldier %s is not valid!",
-				 get_name().c_str(),
+				 name().c_str(),
 				 it->first.c_str());
 
       char* endp;
@@ -533,7 +533,7 @@ uint Tribe_Descr::get_resource_indicator
    if(!res || !amount) {
       int idx=get_immovable_index("resi_none");
       if(idx==-1)
-	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", get_name().c_str());
+	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", name().c_str());
       return idx;
    }
 
@@ -542,7 +542,7 @@ uint Tribe_Descr::get_resource_indicator
    int i=1;
    int num_indicators=0;
    while(true) {
-      sprintf(buffer, "resi_%s%i", res->get_name(), i);
+      sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
       if(get_immovable_index(buffer)==-1)
          break;
       ++i;

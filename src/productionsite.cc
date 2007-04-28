@@ -91,12 +91,12 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 		// This house obviously requests wares and works on them
 		Section::Value* val;
 		while((val=s->get_next_val(0))) {
-			int idx=get_tribe()->get_ware_index(val->get_name());
+			int idx=tribe().get_ware_index(val->get_name());
 			if (idx == -1)
 				throw wexception("Error in [inputs], ware %s is unknown!",
 					val->get_name());
 
-			Item_Ware_Descr* ware= get_tribe()->get_ware_descr(idx);
+			Item_Ware_Descr* ware= tribe().get_ware_descr(idx);
 
 			Input input(ware,val->get_int());
 			m_inputs.push_back(input);
@@ -305,7 +305,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 	if (game) {
 		// Request worker
 		if (!m_workers.size()) {
-			const std::vector<ProductionSite_Descr::Worker_Info>* info=get_descr()->get_workers();
+			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();
          uint i;
          int j;
          for(i=0; i<info->size(); i++)
@@ -314,8 +314,7 @@ void ProductionSite::init(Editor_Game_Base* g)
       }
 
 		// Init input ware queues
-		const std::vector<Input>* inputs =
-			const_cast<ProductionSite_Descr*>(get_descr())->get_inputs();
+		const std::vector<Input>* inputs = descr().get_inputs();
 
 		for(uint i = 0; i < inputs->size(); i++) {
 			WaresQueue* wq = new WaresQueue(this);
@@ -422,7 +421,7 @@ void ProductionSite::remove_worker(Worker* w)
    for(i=0; i<m_workers.size(); i++) {
       if (m_workers[i] == w) {
          m_workers[i] = 0;
-			request_worker(w->get_name().c_str());
+			request_worker(w->name().c_str());
          m_workers.erase(m_workers.begin() + i);
          break;
       }
@@ -518,9 +517,9 @@ void ProductionSite::act(Game* g, uint data)
 			return;
 		}
 
-		if (m_anim != get_descr()->get_animation("idle")) {
+		if (m_anim != descr().get_animation("idle")) {
 			// Restart idle animation, which is the default
-			start_animation(g, get_descr()->get_animation("idle"));
+			start_animation(g, descr().get_animation("idle"));
 		}
 
 		program_act(g);
@@ -669,9 +668,9 @@ void ProductionSite::program_act(Game* g)
 		{
 			molog("  Produce(%s)\n", action->sparam1.c_str());
 
-			int wareid = get_owner()->get_tribe()->get_safe_ware_index(action->sparam1.c_str());
+			int wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
 
-			WareInstance* item = new WareInstance(wareid,  get_owner()->get_tribe()->get_ware_descr(wareid));
+			WareInstance* item = new WareInstance(wareid,  get_owner()->tribe().get_ware_descr(wareid));
 			item->init(g);
 
          // For statistics, inform the user that a ware was produced

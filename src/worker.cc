@@ -225,8 +225,8 @@ bool Worker::run_createitem(Game* g, State* state, const WorkerAction* action)
 		item->schedule_destroy(g);
 	}
 
-	wareid = get_owner()->get_tribe()->get_safe_ware_index(action->sparam1.c_str());
-	item = new WareInstance(wareid, get_owner()->get_tribe()->get_ware_descr(wareid));
+	wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
+	item = new WareInstance(wareid, get_owner()->tribe().get_ware_descr(wareid));
 	item->init(g);
 
 	set_carried_item(g, item);
@@ -408,7 +408,7 @@ bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* actio
    if(state->svar1 == "world") {
 	state->ivar2 = g->get_map()->get_world()->get_immovable_index(bob.c_str());
    } else {
-	state->ivar2 = get_descr()->get_tribe()->get_immovable_index(bob.c_str());
+	state->ivar2 = descr().get_tribe()->get_immovable_index(bob.c_str());
    }
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown immovable %s\n", action->sparamv[idx].c_str());
@@ -469,7 +469,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* ac
    if(state->svar1 == "world") {
 	state->ivar2 = g->get_map()->get_world()->get_bob(bob.c_str());
    } else {
-	state->ivar2 = get_descr()->get_tribe()->get_bob(bob.c_str());
+	state->ivar2 = descr().get_tribe()->get_bob(bob.c_str());
    }
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action->sparamv[idx].c_str());
@@ -835,7 +835,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* action)
 		 (g,
 		  dest,
 		  10,
-		  get_descr()->get_right_walk_anims
+		  descr().get_right_walk_anims
 		  (does_carry_ware()), forceonlast, max_steps))
 	{
 		molog("  couldn't find path\n");
@@ -1020,7 +1020,7 @@ bool Worker::run_plant(Game * g, State * state, const WorkerAction *) {
    if(state->svar1 == "world")
       g->create_immovable(pos, state->ivar2, 0);
    else
-      g->create_immovable(pos, state->ivar2, get_descr()->get_tribe());
+      g->create_immovable(pos, state->ivar2, descr().get_tribe());
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -1049,7 +1049,7 @@ bool Worker::run_create_bob(Game * g, State * state, const WorkerAction *) {
    if(state->svar1 == "world")
       g->create_bob(pos, state->ivar2, 0);
    else
-      g->create_bob(pos, state->ivar2, get_descr()->get_tribe());
+      g->create_bob(pos, state->ivar2, descr().get_tribe());
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -1183,14 +1183,14 @@ bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
       Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
 
       if(rdescr->is_detectable() && amount) {
-         idx = get_descr()->get_tribe()->get_resource_indicator(rdescr, amount);
+         idx = descr().get_tribe()->get_resource_indicator(rdescr, amount);
       } else {
-         idx = get_descr()->get_tribe()->get_resource_indicator(0, 0); // not detectable
+         idx = descr().get_tribe()->get_resource_indicator(0, 0); // not detectable
       }
 
 		//NoLog("  Resource: %02X -> plant indicator '%s'\n", res, get_descr()->get_tribe()->get_immovable_descr(idx)->get_name());
 
-		g->create_immovable(position, idx, get_descr()->get_tribe());
+		g->create_immovable(position, idx, descr().get_tribe());
 	}
 
 	state->ivar1++;
@@ -1301,12 +1301,12 @@ void IdleWorkerSupply::set_economy(Economy* e)
 		return;
 
 	if (m_economy)
-		m_economy->remove_worker_supply(m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()), this);
+		m_economy->remove_worker_supply(m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()), this);
 
 	m_economy = e;
 
 	if (m_economy)
-		m_economy->add_worker_supply(m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()), this);
+		m_economy->add_worker_supply(m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()), this);
 }
 
 
@@ -1331,7 +1331,7 @@ It's just the one worker.
 ===============
 */
 int IdleWorkerSupply::get_amount(const int ware) const {
-	if (ware == m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()))
+	if (ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()))
 		return 1;
 
 	return 0;
@@ -1366,7 +1366,7 @@ No need to explicitly launch the worker.
 ===============
 */
 Worker* IdleWorkerSupply::launch_worker(Game *, int ware) {
-	assert(ware == m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()));
+	assert(ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()));
 
 	return m_worker;
 }
@@ -1427,7 +1427,7 @@ IdleWorkerSupply::mark_as_used
 ===============
 */
 void IdleWorkerSupply::mark_as_used (Game *, int ware, Requeriments * r) {
-	assert(ware == m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()));
+	assert(ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()));
 
 	if (m_worker->get_worker_type()==Worker_Descr::SOLDIER)
 	{
@@ -1503,7 +1503,7 @@ const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 	ProgramMap::const_iterator it = m_programs.find(programname);
 
 	if (it == m_programs.end())
-		throw wexception("%s has no program '%s'", get_name(), programname.c_str());
+		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
 
 	return it->second;
 }
@@ -1545,10 +1545,10 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 
 	sglobal = prof->get_safe_section("global");
 
-	m_descname = sglobal->get_string("descname", get_name());
+	m_descname = sglobal->get_string("descname", name().c_str());
 	m_helptext = sglobal->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
-	snprintf(buf, sizeof(buf), "%s_menu.png", get_name());
+	snprintf(buf, sizeof(buf), "%s_menu.png", name().c_str());
 	string = sglobal->get_string("menu_pic", buf);
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);
@@ -1766,7 +1766,7 @@ void Worker::set_economy(Economy *economy)
 		return;
 
 	if (m_economy)
-		m_economy->remove_workers(get_descr()->get_tribe()->get_worker_index(get_name().c_str()), 1);
+		m_economy->remove_workers(descr().get_tribe()->get_worker_index(name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1776,7 +1776,7 @@ void Worker::set_economy(Economy *economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(get_descr()->get_tribe()->get_worker_index(get_name().c_str()), 1);
+		m_economy->add_workers(descr().get_tribe()->get_worker_index(name().c_str()), 1);
 }
 
 
@@ -1922,14 +1922,14 @@ void Worker::incorporate(Game *g)
  * This sets the needed experience on a value between max and min
  */
 void Worker::create_needed_experience(Game* g) {
-   if(get_descr()->get_min_exp()==-1 && get_descr()->get_max_exp()==-1) {
+   if(descr().get_min_exp()==-1 && descr().get_max_exp()==-1) {
       m_needed_exp=m_current_exp=-1;
       return;
    }
 
-   int range=get_descr()->get_max_exp()-get_descr()->get_min_exp();
+   int range=descr().get_max_exp()-descr().get_min_exp();
    int value=g->logic_rand() % range;
-   m_needed_exp=value+get_descr()->get_min_exp();
+   m_needed_exp=value+descr().get_min_exp();
    m_current_exp=0;
 }
 
@@ -1964,12 +1964,12 @@ void Worker::level(Game* g) {
    // worker and can fullfill the same jobs (which should be given in all
    // circumstances)
    assert(get_becomes());
-   int index=get_descr()->get_tribe()->get_worker_index(get_becomes());
-   Worker_Descr* new_descr=get_descr()->get_tribe()->get_worker_descr(index);
+   int index=descr().get_tribe()->get_worker_index(get_becomes());
+   Worker_Descr* new_descr=descr().get_tribe()->get_worker_descr(index);
 
    // Inform the economy, that something has changed
-   m_economy->remove_workers(get_descr()->get_tribe()->get_worker_index(get_descr()->get_name()), 1);
-   m_economy->add_workers(new_descr->get_tribe()->get_worker_index(new_descr->get_name()),1);
+   m_economy->remove_workers(descr().get_tribe()->get_worker_index(descr().name().c_str()), 1);
+   m_economy->add_workers(new_descr->get_tribe()->get_worker_index(new_descr->name().c_str()),1);
 
    m_descr=new_descr;
 
@@ -2116,7 +2116,7 @@ void Worker::transfer_update(Game* g, State* state)
 
 			molog("[transfer]: move from flag to building\n");
 			start_task_forcemove
-				(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(nextstep);
 			return;
 		}
@@ -2133,7 +2133,7 @@ void Worker::transfer_update(Game* g, State* state)
 				path.reverse();
 
 			start_task_movepath
-				(path, get_descr()->get_right_walk_anims(does_carry_ware()));
+				(path, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(road);
 			return;
 		}
@@ -2147,7 +2147,7 @@ void Worker::transfer_update(Game* g, State* state)
 
 			molog("[transfer]: set location to road %u\n", road->get_serial());
 			set_location(road);
-			set_animation(g, get_descr()->get_animation("idle"));
+			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 10); // wait a little
 			return;
 		}
@@ -2179,7 +2179,7 @@ void Worker::transfer_update(Game* g, State* state)
 					 (g->map(),
 					  path,
 					  index,
-					  get_descr()->get_right_walk_anims(does_carry_ware())))
+					  descr().get_right_walk_anims(does_carry_ware())))
 				{
 					molog("[transfer]: from road %u to flag %u nextstep %u\n", get_serial(), road->get_serial(),
 									nextstep->get_serial());
@@ -2194,7 +2194,7 @@ void Worker::transfer_update(Game* g, State* state)
 
 			molog("[transfer]: arrive at flag %u\n", nextstep->get_serial());
 			set_location((Flag*)nextstep);
-			set_animation(g, get_descr()->get_animation("idle"));
+			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 10); // wait a little
 			return;
 		}
@@ -2451,7 +2451,7 @@ void Worker::return_update(Game* g, State* state)
 
 						flag->add_item(g, item);
 
-						set_animation(g, get_descr()->get_animation("idle"));
+						set_animation(g, descr().get_animation("idle"));
 						schedule_act(g, 20); // rest a while
 						return;
 					}
@@ -2460,7 +2460,7 @@ void Worker::return_update(Game* g, State* state)
 				molog("[return]: Move back into building\n");
 
 				start_task_forcemove
-					(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+					(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 				return;
 			}
 		}
@@ -2475,7 +2475,7 @@ void Worker::return_update(Game* g, State* state)
 		 (g,
 		  location->get_base_flag()->get_position(),
 		  15,
-		  get_descr()->get_right_walk_anims(does_carry_ware())))
+		  descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
 
@@ -2537,7 +2537,7 @@ Start the given program.
 void Worker::start_task_program(const std::string & programname) {
 	push_task(taskProgram);
 	State & state = top_state();
-	state.program = get_descr()->get_program(programname);
+	state.program = descr().get_program(programname);
 	state.ivar1 = 0;
 }
 
@@ -2790,14 +2790,14 @@ void Worker::dropoff_update(Game * g, State *) {
 				item = fetch_carried_item(g);
 				flag->add_item(g, item);
 
-				set_animation(g, get_descr()->get_animation("idle"));
+				set_animation(g, descr().get_animation("idle"));
 				schedule_act(g, 50);
 				return;
 			}
 
 			molog("[dropoff]: flag is overloaded\n");
 			start_task_forcemove
-				(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 			return;
 		}
 
@@ -2807,7 +2807,7 @@ void Worker::dropoff_update(Game * g, State *) {
 	// We don't have the item any more, return home
 	if (location->get_type() == Map_Object::FLAG) {
 		start_task_forcemove
-			(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 		return;
 	}
 
@@ -2893,7 +2893,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		if (item)
 			set_carried_item(g, item);
 
-		set_animation(g, get_descr()->get_animation("idle"));
+		set_animation(g, descr().get_animation("idle"));
 		schedule_act(g, 20);
 		return;
 	}
@@ -2903,7 +2903,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		molog("[fetchfromflag]: return to building\n");
 
 		start_task_forcemove
-			(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 		return;
 	}
 
@@ -3101,7 +3101,7 @@ void Worker::leavebuilding_update(Game* g, State* state)
 	}
 
 	start_task_forcemove
-		(WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
+		(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
 }
 
 
@@ -3219,7 +3219,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		if (building && building->has_attribute(WAREHOUSE) && building->get_owner() == get_owner()) {
 			molog("[fugitive]: move into warehouse\n");
 			start_task_forcemove
-				(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+				(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(building);
 			return;
 		}
@@ -3271,7 +3271,7 @@ void Worker::fugitive_update(Game* g, State* state)
 				molog("[fugitive]: try to move to warehouse\n");
 
 				// the warehouse could be on a different island, so check for failure
-				if (start_task_movepath(g, flag->get_position(), 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+				if (start_task_movepath(g, flag->get_position(), 0, descr().get_right_walk_anims(does_carry_ware())))
 					return;
 			}
 		}
@@ -3284,10 +3284,10 @@ void Worker::fugitive_update(Game* g, State* state)
 		 (g,
 		  g->random_location(get_position(), 5), //  Pick a target at random.
 		  4,
-		  get_descr()->get_right_walk_anims(does_carry_ware())))
+		  descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
-	start_task_idle(g, get_descr()->get_animation("idle"), 50);
+	start_task_idle(g, descr().get_animation("idle"), 50);
 }
 
 
@@ -3443,7 +3443,7 @@ void Worker::geologist_update(Game* g, State* state)
             // FALLTHROUGH TO RETURN HOME
          } else {
             molog("[geologist]: Walk towards free field\n");
-            if (!start_task_movepath(g, target, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+            if (!start_task_movepath(g, target, 0, descr().get_right_walk_anims(does_carry_ware())))
             {
                molog("[geologist]: BUG: couldn't find path\n");
                set_signal("fail");
@@ -3654,7 +3654,7 @@ void Carrier::road_update(Game* g, State* state)
 			molog("[road]: delay (acked for %i)\n", m_acked_ware);
 			state->ivar1 = 1;
 
-			set_animation(g, get_descr()->get_animation("idle"));
+			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 50);
 		}
 
@@ -3667,12 +3667,12 @@ void Carrier::road_update(Game* g, State* state)
 		 (g->map(),
 		  road->get_path(),
 		  road->get_idle_index(),
-		  get_descr()->get_right_walk_anims(does_carry_ware())))
+		  descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
 	// Be bored. There's nothing good on TV, either.
 	// TODO: idle animations
-	set_animation(g, get_descr()->get_animation("idle"));
+	set_animation(g, descr().get_animation("idle"));
 	skip_act(); // wait until signal
 	state->ivar1 = 1; // we're available immediately after an idle phase
 }
@@ -3772,7 +3772,7 @@ void Carrier::transport_update(Game* g, State* state)
 				item->set_location(g, (Building*)pos);
 				item->update(g);
 
-				set_animation(g, get_descr()->get_animation("idle"));
+				set_animation(g, descr().get_animation("idle"));
 				schedule_act(g, 20);
 				return;
 			}
@@ -3780,7 +3780,7 @@ void Carrier::transport_update(Game* g, State* state)
 			// Now walk back onto the flag
 			molog("[transport]: Move out of building.\n");
 			start_task_forcemove
-				(WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
+				(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
 			return;
 		}
 
@@ -3811,7 +3811,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 		set_carried_item(g, item);
 
-		set_animation(g, get_descr()->get_animation("idle"));
+		set_animation(g, descr().get_animation("idle"));
 		schedule_act(g, 20);
 		return;
 	}
@@ -3834,7 +3834,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 		molog("[transport]: Move into building.\n");
 		start_task_forcemove
-			(WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
 		state->ivar1 = -1;
 		return;
 	}
@@ -3882,7 +3882,7 @@ void Carrier::transport_update(Game* g, State* state)
 			molog("[transport]: strange: acked ware from busy flag no longer present.\n");
 
 			m_acked_ware = -1;
-			set_animation(g, get_descr()->get_animation("idle"));
+			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 20);
 			return;
 		}
@@ -3900,7 +3900,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 		set_carried_item(g, otheritem);
 
-		set_animation(g, get_descr()->get_animation("idle"));
+		set_animation(g, descr().get_animation("idle"));
 		schedule_act(g, 20);
 		return;
 	}
@@ -4122,7 +4122,7 @@ bool Carrier::start_task_walktoflag(Game* g, int flag, bool offset)
 		(g->map(),
 		 path,
 		 idx,
-		 get_descr()->get_right_walk_anims(does_carry_ware()));
+		 descr().get_right_walk_anims(does_carry_ware()));
 }
 
 

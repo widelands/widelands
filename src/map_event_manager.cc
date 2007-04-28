@@ -38,7 +38,7 @@ MapEventManager::~MapEventManager( void ) {
  */
 bool MapEventManager::register_new_event( Event* mv ) {
    // check if this event is already known
-   if( get_event( mv->get_name() ) )
+   if( get_event( mv->name().c_str() ) )
          return 0;
 
    m_events.push_back( mv );
@@ -52,7 +52,7 @@ Event* MapEventManager::get_event( const char* name ) {
    uint i;
    Event* retval = 0;
    for( i = 0; i < m_events.size(); i++) {
-      if( !strcmp( m_events[i]->get_name(), name ) ) {
+      if( !strcmp( m_events[i]->name().c_str(), name ) ) {
          retval = m_events[i];
          break;
       }
@@ -66,7 +66,7 @@ Event* MapEventManager::get_event( const char* name ) {
  */
 void MapEventManager::delete_event( const char* name ) {
    for( uint i = 0; i < m_events.size(); i++) {
-      if( !strcmp( m_events[i]->get_name(), name ) ) {
+      if( !strcmp( m_events[i]->name().c_str(), name ) ) {
          delete m_events[i];
          m_events[i] = m_events[m_events.size() - 1];
          m_events.resize( m_events.size() - 1 );
@@ -83,7 +83,7 @@ void MapEventManager::delete_unreferenced_events( void ) {
    while( i < m_events.size() ) {
       Event* tr = m_events[i];
       if( tr->get_referencers().empty() ) {
-         delete_event(tr->get_name());
+         delete_event(tr->name().c_str());
          i = 0;
          continue;
       }

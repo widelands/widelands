@@ -857,7 +857,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
 		HollowArea<> hollow_area(Area<>(m_field, 0), 0);
 		const Workarea_Info & workarea_info =
-			m_plr->get_tribe()->get_building_descr(idx)->m_recursive_workarea_info;
+			m_plr->tribe().get_building_descr(idx)->m_recursive_workarea_info;
 		Workarea_Info::const_iterator it = workarea_info.begin();
 		for
 			(Workarea_Info::size_type i =

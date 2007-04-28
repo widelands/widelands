@@ -71,7 +71,7 @@ throw (_wexception)
          for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
             Player* plr=egbase->get_player(i);
             if(!plr) continue;
-            const Tribe_Descr* t=plr->get_tribe();
+            const Tribe_Descr* t=&plr->tribe();
 
             int b;
             for(b=0; b<t->get_nrbuildings(); b++) {
@@ -88,7 +88,7 @@ throw (_wexception)
          const Tribe_Descr* t;
 
          assert(plr);
-         t=plr->get_tribe();
+         t=&plr->tribe();
 
          sprintf( buf, "player_%i", i );
          s = prof.get_safe_section( buf );
@@ -99,7 +99,7 @@ throw (_wexception)
             bool allowed = s->get_bool(name);
             int index=t->get_building_index(name);
             if(index==-1)
-               throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->get_name().c_str());
+               throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->name().c_str());
             plr->allow_building(index, allowed);
          }
       }
@@ -134,7 +134,7 @@ throw (_wexception)
       if(!plr) continue; // skip this player, is data can not be saved
       const Tribe_Descr* t;
       if( plr )
-         t = plr->get_tribe();
+         t = &plr->tribe();
       else
          t = egbase->get_tribe(egbase->get_map()->get_scenario_player_tribe(i).c_str());
 
@@ -145,7 +145,7 @@ throw (_wexception)
       int b;
       for(b=0; b<t->get_nrbuildings(); b++) {
          Building_Descr* building=t->get_building_descr(b);
-         std::string name=building->get_name();
+         std::string name=building->name();
          bool val;
          if(plr)
             val = plr->is_building_allowed(b);

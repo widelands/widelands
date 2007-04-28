@@ -124,8 +124,8 @@ throw (_wexception)
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		Field & f = map[i];
-		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).get_name()]);
-		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).get_name()]);
+		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
+		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
    }
 
    fw.Write( fs, "binary/terrain");

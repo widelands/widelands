@@ -107,12 +107,12 @@ void IdleSoldierSupply::set_economy(Economy* e)
 		return;
 
 	if (m_economy)
-		m_economy->remove_soldier_supply(m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()), this);
+		m_economy->remove_soldier_supply(m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()), this);
 
 	m_economy = e;
 
 	if (m_economy)
-		m_economy->add_soldier_supply(m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()), this);
+		m_economy->add_soldier_supply(m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()), this);
 }
 
 
@@ -137,7 +137,7 @@ It's just the one soldier.
 ===============
 */
 int IdleSoldierSupply::get_amount(const int ware) const {
-	if (ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()))
+	if (ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()))
 		return 1;
 
 	return 0;
@@ -187,7 +187,7 @@ No need to explicitly launch the soldier.
 Soldier * IdleSoldierSupply::launch_soldier
 (Game *, int ware, Requeriments * req)
 {
-	assert(ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()));
+	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
 	if (req)
 	{
@@ -215,7 +215,7 @@ IdleSodlierSupply::mark_as_used
 ===============
 */
 void IdleSoldierSupply::mark_as_used(Game *, int ware, Requeriments * req) {
-	assert(ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()));
+	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
 	if (req)
 	{
@@ -247,7 +247,7 @@ No need to explicitly launch the soldier.
 int IdleSoldierSupply::get_passing_requeriments
 (Game *, int ware, Requeriments * req)
 {
-	assert(ware == m_soldier->get_owner()->get_tribe()->get_worker_index(m_soldier->get_name().c_str()));
+	assert(ware == m_soldier->get_owner()->tribe().get_worker_index(m_soldier->name().c_str()));
 
 	// Oops we find a marked soldied (in use)
 	if (m_soldier->is_marked())
@@ -460,10 +460,10 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_evade_level=0;
 
 	m_hp_max=0;
-	m_min_attack=get_descr()->get_min_attack();
-	m_max_attack=get_descr()->get_max_attack();
-	m_defense=get_descr()->get_defense();
-	m_evade=get_descr()->get_evade();
+	m_min_attack=descr().get_min_attack();
+	m_max_attack=descr().get_max_attack();
+	m_defense=descr().get_defense();
+	m_evade=descr().get_evade();
 	if (Game * const game = dynamic_cast<Game * const>(gg)) {
 		const uint min_hp = descr().get_min_hp();
 		assert(min_hp);
@@ -489,37 +489,37 @@ void Soldier::set_level
    set_evade_level(evade);
 }
 void Soldier::set_hp_level(const uint hp) {
-   assert(hp>=m_hp_level && hp<=get_descr()->get_max_hp_level());
+   assert(hp>=m_hp_level && hp<=descr().get_max_hp_level());
 
    while(m_hp_level<hp) {
       ++m_hp_level;
-      m_hp_max+=get_descr()->get_hp_incr_per_level();
-      m_hp_current+=get_descr()->get_hp_incr_per_level();
+      m_hp_max+=descr().get_hp_incr_per_level();
+      m_hp_current+=descr().get_hp_incr_per_level();
    }
 }
 void Soldier::set_attack_level(const uint attack) {
-   assert(attack>=m_attack_level && attack<=get_descr()->get_max_attack_level());
+   assert(attack>=m_attack_level && attack<=descr().get_max_attack_level());
 
    while(m_attack_level<attack) {
       ++m_attack_level;
-      m_min_attack+=get_descr()->get_attack_incr_per_level();
-      m_max_attack+=get_descr()->get_attack_incr_per_level();
+      m_min_attack+=descr().get_attack_incr_per_level();
+      m_max_attack+=descr().get_attack_incr_per_level();
    }
 }
 void Soldier::set_defense_level(const uint defense) {
-   assert(defense>=m_defense_level && defense<=get_descr()->get_max_defense_level());
+   assert(defense>=m_defense_level && defense<=descr().get_max_defense_level());
 
    while(m_defense_level<defense) {
       ++m_defense_level;
-      m_defense+=get_descr()->get_defense_incr_per_level();
+      m_defense+=descr().get_defense_incr_per_level();
    }
 }
 void Soldier::set_evade_level(const uint evade) {
-   assert(evade>=m_evade_level && evade<=get_descr()->get_max_evade_level());
+   assert(evade>=m_evade_level && evade<=descr().get_max_evade_level());
 
    while(m_evade_level<evade) {
       ++m_evade_level;
-      m_evade+=get_descr()->get_evade_incr_per_level();
+      m_evade+=descr().get_evade_incr_per_level();
    }
 }
 
@@ -627,7 +627,7 @@ void Soldier::start_animation
 (Editor_Game_Base* gg, const char * const animname, const uint time)
 {
 	Game * const game = dynamic_cast<Game * const>(gg);
-	if (game) start_task_idle (game, get_descr()->get_rand_anim(animname), time);
+	if (game) start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 
 /**
@@ -686,10 +686,10 @@ void Soldier::moveToBattleUpdate(Game* g, State* state) {
          if (state->ivar1 != 3)
             m_attack_ctrl->moveToReached(this);
          state->ivar1 = 3;
-         start_task_idle(g,get_descr()->get_animation("idle"),1000);
+         start_task_idle(g,descr().get_animation("idle"),1000);
          return;
       }
-      if (!start_task_movepath(g,state->coords,0,get_descr()->get_right_walk_anims(does_carry_ware()))) {
+      if (!start_task_movepath(g,state->coords,0,descr().get_right_walk_anims(does_carry_ware()))) {
          molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
          set_signal("fail");
          mark(false);

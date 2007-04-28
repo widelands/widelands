@@ -67,20 +67,20 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 	const char* string;
 	Section* global = prof->get_safe_section("global");
 
-	m_descname = global->get_string("descname", get_name());
+	m_descname = global->get_string("descname", name().c_str());
 	m_helptext = global->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
-	snprintf(buf, sizeof(buf), "%s_menu.png", get_name());
+	snprintf(buf, sizeof(buf), "%s_menu.png", name().c_str());
 	string = global->get_string("menu_pic", buf);
 	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
 	m_menu_pic_fname = buf;
 
-	snprintf(buf, sizeof(buf), "%s_queue_full.png", get_name());
+	snprintf(buf, sizeof(buf), "%s_queue_full.png", name().c_str());
 	string = global->get_string("queue_full_pic", buf);
 	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
 	m_pic_queue_full_fname = buf;
 
-	snprintf(buf, sizeof(buf), "%s_queue_empty.png", get_name());
+	snprintf(buf, sizeof(buf), "%s_queue_empty.png", name().c_str());
 	string = global->get_string("queue_empty_pic", buf);
 	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
 	m_pic_queue_empty_fname = buf;

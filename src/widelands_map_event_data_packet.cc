@@ -98,7 +98,7 @@ throw (_wexception)
 	const MapEventManager::Index nr_events = mem.get_nr_events();
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 		const Event & e = mem.get_event_by_nr(i);
-		Section & s = *prof.create_section(e.get_name());
+		Section & s = *prof.create_section(e.name().c_str());
 		s.set_string("type", e.get_id());
 		switch (e.m_state) {
 		case Event::INIT:    s.set_string("state", "init");    break;

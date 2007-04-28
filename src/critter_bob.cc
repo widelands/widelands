@@ -275,7 +275,7 @@ Critter_Bob::~Critter_Bob()
 {
 }
 
-uint Critter_Bob::get_movecaps() { return get_descr()->is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
+uint Critter_Bob::get_movecaps() { return descr().is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
 
 
 /*
@@ -311,7 +311,7 @@ Start the given program.
 void Critter_Bob::start_task_program(const std::string & programname) {
 	push_task(taskProgram);
 	State & state = top_state();
-	state.program = get_descr()->get_program(programname);
+	state.program = descr().get_program(programname);
 	state.ivar1   = 0;
 }
 
@@ -387,7 +387,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 			 (g,
 			  g->random_location(get_position(), 2), //  Pick a target at random.
 			  3,
-			  get_descr()->get_walk_anims()))
+			  descr().get_walk_anims()))
 		{
 			state->ivar1 = 0;
 			return;
@@ -395,7 +395,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 
 		//molog("        Failed\n");
 
-		start_task_idle(g, get_descr()->get_animation("idle"), 1 + g->logic_rand()%1000);
+		start_task_idle(g, descr().get_animation("idle"), 1 + g->logic_rand()%1000);
 	}
 	else
 	{
@@ -403,7 +403,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 
 		//molog("[roam]: Idle\n");
 
-		start_task_idle(g, get_descr()->get_animation("idle"), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
+		start_task_idle(g, descr().get_animation("idle"), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
 	}
 }
 

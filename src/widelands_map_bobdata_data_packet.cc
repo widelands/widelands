@@ -116,7 +116,7 @@ throw
 
          // Animation
          if(fr.Unsigned8()) {
-            bob->m_anim=bob->get_descr()->get_animation(fr.CString());
+            bob->m_anim=bob->descr().get_animation(fr.CString());
          } else
             bob->m_anim=0;
          bob->m_animstart=fr.Signed32();
@@ -181,7 +181,7 @@ throw
 
             bool diranims=fr.Unsigned8();
             if(diranims) {
-               const Bob_Descr & bob_descr = *bob->get_descr();
+               const Bob_Descr & bob_descr = bob->descr();
                const uint anims[6] = {
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
@@ -247,9 +247,9 @@ throw
             if(program) {
                std::string progname=fr.CString();
                if(bob->get_bob_type()==Bob::WORKER)
-                  s->program=static_cast<Worker*>(bob)->get_descr()->get_program(progname);
+                  s->program=static_cast<Worker*>(bob)->descr().get_program(progname);
                else
-                  s->program=static_cast<Critter_Bob*>(bob)->get_descr()->get_program(progname);
+                  s->program=static_cast<Critter_Bob*>(bob)->descr().get_program(progname);
             } else
                s->program=0;
          }
@@ -450,7 +450,7 @@ throw (_wexception)
             // Animation
             if(bob->m_anim) {
                fw.Unsigned8(1);
-               fw.CString(bob->get_descr()->get_animation_name(bob->m_anim).c_str());
+               fw.CString(bob->descr().get_animation_name(bob->m_anim).c_str());
             } else
                fw.Unsigned8(0);
             fw.Signed32(bob->m_animstart);
@@ -492,12 +492,12 @@ throw (_wexception)
 
                if(s->diranims) {
                   fw.Unsigned8(1);
-                  fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(1)).c_str());
-                  fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(2)).c_str());
-                  fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(3)).c_str());
-                  fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(4)).c_str());
-                  fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(5)).c_str());
-                  fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(6)).c_str());
+                  fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(1)).c_str());
+                  fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(2)).c_str());
+                  fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(3)).c_str());
+                  fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(4)).c_str());
+                  fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(5)).c_str());
+                  fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(6)).c_str());
                } else
                   fw.Unsigned8(0);
 

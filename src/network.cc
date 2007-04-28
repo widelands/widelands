@@ -329,7 +329,7 @@ void NetHost::handle_network ()
 
 		game->remove_player (i);
 		game->add_player
-			(i, Player::Remote, pl->get_tribe()->get_name(), _("I have no name"));
+			(i, Player::Remote, pl->tribe().name().c_str(), _("I have no name"));
 
 		Client peer;
 		peer.sock=sock;

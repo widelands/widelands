@@ -139,9 +139,9 @@ throw (_wexception)
    std::map<std::string,uchar> smap;
    for(int i=0; i<nr_res; i++) {
       Resource_Descr* res=world->get_resource(i);
-      smap[res->get_name()]=i;
+      smap[res->name().c_str()]=i;
       fw.Unsigned16(i);
-      fw.CString(res->get_name());
+      fw.CString(res->name().c_str());
    }
 
    // Now, all resouces as unsigned chars in order

@@ -219,7 +219,7 @@ void Editor_Event_Menu::update(void) {
 		const MapEventManager::Index nr_events = mem.get_nr_events();
 		for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 			Event & event = mem.get_event_by_nr(i);
-			m_event_list->add(event.get_name(), event);
+			m_event_list->add(event.name().c_str(), event);
 			if (event.get_referencers().empty()) m_event_list->set_entry_color
 				(m_event_list->size()-1, RGBColor(255,0,0));
 		}
@@ -266,7 +266,7 @@ void Editor_Event_Menu::clicked_del_event() {
 	const Event::EventReferencerMap & event_referencers =
 		event.get_referencers();
 	if (event_referencers.empty()) {
-		m_parent->egbase().map().get_mem().delete_event(event.get_name());
+		m_parent->egbase().map().get_mem().delete_event(event.name().c_str());
 		m_parent->unreference_player_tribe(0, &event);  // Remove all references done by this event
       m_parent->set_need_save(true);
       update();

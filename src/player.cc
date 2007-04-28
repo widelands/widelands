@@ -218,9 +218,9 @@ void Player::build(Coords c, int idx)
 	Building_Descr* descr;
 
 	// Validate building type
-	if (idx < 0 || idx >= get_tribe()->get_nrbuildings())
+	if (idx < 0 || idx >= tribe().get_nrbuildings())
 		return;
-	descr = get_tribe()->get_building_descr(idx);
+	descr = tribe().get_building_descr(idx);
 
 	if (!descr->get_buildable())
 		return;
@@ -369,7 +369,7 @@ void Player::flagaction(Flag* flag, int action)
 		case FLAGACTION_GEOLOGIST:
 			//try {
 				flag->add_flag_job
-					(game, get_tribe()->get_worker_index("geologist"), "expedition");
+					(game, tribe().get_worker_index("geologist"), "expedition");
 			/*} catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
 				log("Tribe defines no geologist\n");
 			}*/

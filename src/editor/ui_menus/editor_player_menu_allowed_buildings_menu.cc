@@ -111,7 +111,7 @@ m_allow_button
 		if (not building.get_enhanced_building() and not building.get_buildable())
 			continue;
 		(m_player->is_building_allowed(i) ? m_allowed : m_forbidden).add
-			(building.get_descname(), i, building.get_buildicon());
+			(building.descname().c_str(), i, building.get_buildicon());
    }
 	m_forbidden.sort();
 	m_allowed  .sort();
@@ -159,7 +159,7 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 	const Building_Descr & building =
 		*m_player->tribe().get_building_descr(building_index);
 	target.add
-		(building.get_descname(),
+		(building.descname().c_str(),
 		 building_index,
 		 building.get_buildicon());
 	target.sort();

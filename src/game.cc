@@ -315,7 +315,7 @@ bool Game::run(bool is_savegame)
          Player* plr=get_player(curplr);
 
          if(plr) {
-            get_map()->set_scenario_player_tribe(curplr, plr->get_tribe()->get_name());
+            get_map()->set_scenario_player_tribe(curplr, plr->tribe().name());
             get_map()->set_scenario_player_name(curplr, plr->get_name());
          } else {
             get_map()->set_scenario_player_tribe(curplr, "");

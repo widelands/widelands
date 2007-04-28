@@ -142,7 +142,7 @@ m_event_chain(chain)
 	const MapEventManager::Index nr_events = mem.get_nr_events();
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 		Event & event = mem.get_event_by_nr(i);
-		m_available_events->add(event.get_name(), event);
+		m_available_events->add(event.name().c_str(), event);
    }
    m_available_events->sort();
 
@@ -167,7 +167,7 @@ m_event_chain(chain)
 
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
 		Event & event = *m_event_chain->get_event(i);
-		m_events->add(event.get_name(), event);
+		m_events->add(event.name().c_str(), event);
    }
 
    m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
@@ -238,7 +238,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ins_event() {
 	Event & event = m_available_events->get_selected();
-	m_events->add(event.get_name(), event, -1, true);
+	m_events->add(event.name().c_str(), event, -1, true);
 }
 
 
