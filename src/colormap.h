@@ -26,8 +26,6 @@
  * Colormap contains a palette and lookup table for use with ground textures.
 */
 class Colormap {
-// 	friend class Texture;
-
 	SDL_Color palette[256];
 
 	 /** maps 8 bit color and brightness value to the shaded color

@@ -237,7 +237,7 @@ void Computer_Player::think ()
 
 		buildable_fields.push_back (bf);
 		buildable_fields.pop_front ();
- 	}
+	}
 
 	// do the same for mineable fields
 	while

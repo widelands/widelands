@@ -137,7 +137,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
       case 4:
               ++m_currentworld;
               if(m_currentworld==m_worlds->size()) m_currentworld=0;
-              m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());	
+              m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());
               break;
    }
 

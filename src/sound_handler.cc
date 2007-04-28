@@ -609,9 +609,9 @@ void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
 			    "no files!\n", songset_name.c_str());
         }
 #ifdef __WIN32__
-    	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
 #endif
-    
+
     }
 
 /** Stop playing a songset.
