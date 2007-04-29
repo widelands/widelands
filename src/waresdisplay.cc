@@ -17,7 +17,8 @@
  *
  */
 
-#include <stdio.h>
+#include "waresdisplay.h"
+
 #include "editor_game_base.h"
 #include "font_handler.h"
 #include "graphic.h"
@@ -26,16 +27,9 @@
 #include "rendertarget.h"
 #include "tribe.h"
 #include "ui_textarea.h"
-#include "waresdisplay.h"
 #include "worker.h"
 
-/*
-==============================================================================
-
-WaresDisplay IMPLEMENTATION
-
-==============================================================================
-*/
+#include <stdio.h>
 
 
 /*

@@ -17,15 +17,19 @@
  *
  */
 
-#include <stdio.h>
+#include "wui_plot_area.h"
+
 #include "constants.h"
 #include "font_loader.h"
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
+
 #include "ui_panel.h"
-#include "wui_plot_area.h"
+
+#include <stdio.h>
+
 
 /*
  * Where to draw tics

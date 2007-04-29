@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,26 +17,18 @@
  *
  */
 
-#include <string>
 #include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "game_server_proto_packet_ping.h"
 #include "network_buffer.h"
-#include "util.h"
 #include "wexception.h"
 
-/*
- * Constructor
- */
-Game_Server_Protocol_Packet_Ping::Game_Server_Protocol_Packet_Ping( void ) {
-}
 
-/*
- * Destructor
- */
-Game_Server_Protocol_Packet_Ping::~Game_Server_Protocol_Packet_Ping( void ) {
-}
+Game_Server_Protocol_Packet_Ping::Game_Server_Protocol_Packet_Ping() {}
+
+
+Game_Server_Protocol_Packet_Ping::~Game_Server_Protocol_Packet_Ping() {}
 
 /*
  * Get this packets id

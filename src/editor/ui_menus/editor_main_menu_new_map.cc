@@ -17,20 +17,24 @@
  *
  */
 
-#include <string>
-#include <stdio.h>
-#include <vector>
 #include "editor_main_menu_new_map.h"
+
 #include "graphic.h"
 #include "i18n.h"
-#include "ui_window.h"
-#include "ui_textarea.h"
-#include "ui_button.h"
 #include "editorinteractive.h"
 #include "map.h"
 #include "world.h"
 #include "error.h"
 #include "editor.h"
+
+#include "ui_window.h"
+#include "ui_textarea.h"
+#include "ui_button.h"
+
+#include <string>
+#include <vector>
+
+#include <stdio.h>
 
 /*
 ===============

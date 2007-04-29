@@ -17,11 +17,13 @@
  *
  */
 
-#include <set>
+#include "editor_game_base.h"
+
 #include "areawatcher.h"
+#include "attack_controller.h"
 #include "battle.h"
 #include "building.h"
-#include "editor_game_base.h"
+#include "error.h"
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
@@ -33,8 +35,8 @@
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
-#include "error.h"
-#include "attack_controller.h"
+
+#include <set>
 
 extern Map_Object_Descr g_road_descr;
 

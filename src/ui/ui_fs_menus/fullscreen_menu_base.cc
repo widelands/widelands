@@ -17,12 +17,14 @@
  *
  */
 
-#include <stdio.h>
 #include "fullscreen_menu_base.h"
+
 #include "graphic.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "wlapplication.h"
+
+#include <stdio.h>
 
 /*
 ==============================================================================

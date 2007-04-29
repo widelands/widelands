@@ -17,6 +17,8 @@
  *
  */
 
+#include "watchwindow.h"
+
 #include "bob.h"
 #include "game.h"
 #include "graphic.h"
@@ -27,22 +29,17 @@
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
+
 #include "ui_button.h"
 #include "ui_signal.h"
 #include "ui_window.h"
-#include "watchwindow.h"
+
 #include <vector>
+
 
 #define NUM_VIEWS 5
 #define REFRESH_TIME 5000
 
-/*
-==============================================================================
-
-WatchWindow
-
-==============================================================================
-*/
 //Holds information for a view
 struct WatchWindowView {
 	Point view_point;

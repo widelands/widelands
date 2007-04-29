@@ -26,12 +26,12 @@
 #define PRINTF_FORMAT(b,c)
 #endif
 
-#include <list>
-
 #include "immovable.h"
 #include "map.h"
 #include "trackptr.h"
 #include "ware.h"
+
+#include <list>
 
 class Building;
 class Economy;

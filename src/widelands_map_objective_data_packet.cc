@@ -17,28 +17,24 @@
  *
  */
 
+#include "widelands_map_objective_data_packet.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
-#include "util.h"
 #include "map.h"
 #include "map_objective_manager.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger_null.h"
-#include "widelands_map_objective_data_packet.h"
+
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Objective_Data_Packet::~Widelands_Map_Objective_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Objective_Data_Packet::~Widelands_Map_Objective_Data_Packet() {}
+
+
 void Widelands_Map_Objective_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

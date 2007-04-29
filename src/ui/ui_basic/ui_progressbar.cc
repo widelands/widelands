@@ -17,13 +17,16 @@
  *
  */
 
-#include <cstdio>
+#include "constants.h"
 #include "font_handler.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
 #include "types.h"
+
 #include "ui_progressbar.h"
-#include "constants.h"
+
+#include <cstdio>
+
 
 namespace UI {
 /**

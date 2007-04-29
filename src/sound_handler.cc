@@ -17,7 +17,8 @@
  *
  */
 
-#include <errno.h>
+#include "sound_handler.h"
+
 #include "error.h"
 #include "fileread.h"
 #include "game.h"
@@ -29,10 +30,10 @@
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
 #include "songset.h"
-#include "sound_handler.h"
 
 #include <SDL.h>
 
+#include <errno.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif

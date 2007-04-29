@@ -28,6 +28,8 @@
 #include "i18n.h"
 #include "map.h"
 #include "map_event_manager.h"
+#include "trigger_conditional.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
@@ -35,8 +37,6 @@
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "trigger_conditional.h"
-#include "util.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
 UI::Window(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()),

@@ -17,20 +17,21 @@
  *
  */
 
-#include <stdio.h>
 #include "event_move_view_option_menu.h"
-#include "i18n.h"
+#include "graphic.h"
 #include "event_move_view.h"
+#include "editorinteractive.h"
+#include "error.h"
+#include "i18n.h"
+#include "map.h"
+
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
-#include "editorinteractive.h"
-#include "error.h"
-#include "map.h"
-#include "graphic.h"
-#include "util.h"
+
+#include <stdio.h>
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
 UI::Window(parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),

@@ -17,23 +17,17 @@
  *
  */
 
-#include <stdio.h>
-#include "bob.h"
 #include "critter_bob.h"
+
 #include "critter_bob_program.h"
 #include "field.h"
 #include "game.h"
-#include "util.h"
+#include "helper.h"
 #include "profile.h"
 #include "wexception.h"
 
-/*
-==============================================================================
+#include <stdio.h>
 
-class WorkerProgram
-
-==============================================================================
-*/
 
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 #if 0
@@ -93,7 +87,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			if (!string)
 				break;
 
-			split_string(string, &cmd, " \t\r\n");
+			split_string(string, cmd, " \t\r\n");
 			if (!cmd.size())
 				continue;
 

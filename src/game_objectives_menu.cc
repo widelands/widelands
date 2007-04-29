@@ -18,11 +18,11 @@
  */
 
 #include "game_objectives_menu.h"
+
 #include "interactive_player.h"
 #include "map_objective_manager.h"
 #include "player.h"
 #include "trigger_null.h"
-#include "util.h"
 
 GameObjectivesMenu::GameObjectivesMenu
 (Interactive_Player & plr, UI::UniqueWindow::Registry & registry, Game & game)

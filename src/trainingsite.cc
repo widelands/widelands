@@ -17,19 +17,21 @@
  *
  */
 
-#include <stdio.h>
-#include "editor_game_base.h"
-#include "i18n.h"
-#include "game.h"
 #include "trainingsite.h"
-#include "tribe.h"
+
+#include "editor_game_base.h"
+#include "game.h"
+#include "helper.h"
+#include "i18n.h"
 #include "player.h"
 #include "production_program.h"
 #include "profile.h"
 #include "soldier.h"
 #include "transport.h"
-#include "util.h"
+#include "tribe.h"
 #include "worker.h"
+
+#include <stdio.h>
 
 TrainingSite_Descr::TrainingSite_Descr
 (const Tribe_Descr & tribe_descr, const std::string & trainingsite_name) :
@@ -78,7 +80,7 @@ void TrainingSite_Descr::parse(const char *directory, Profile * prof, const Enco
 	m_num_soldiers = sglobal->get_safe_int("max_soldiers");
 
 	trainable = sglobal->get_safe_string("train");
-	split_string(trainable, &str_list, ",");
+	split_string(trainable, str_list, ",");
 
 	while (str_list.size()) {
 		if (str_list[0] == "hp")
@@ -552,7 +554,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 		bool done = false;
 		std::vector < std::string > str;
 
-		split_string(m_list_upgrades[i], &str, "_");
+		split_string(m_list_upgrades[i], str, "_");
 
 		molog(m_list_upgrades[i].c_str());
 		assert(str.size() == 2); //  upgrade what

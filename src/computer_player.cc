@@ -18,9 +18,9 @@
  *
  */
 
-#include <queue>
-#include <typeinfo>
-#include <algorithm>
+#include "computer_player.h"
+
+#include "computer_player_hints.h"
 #include "error.h"
 #include "map.h"
 #include "world.h"
@@ -30,8 +30,10 @@
 #include "constructionsite.h"
 #include "productionsite.h"
 #include "militarysite.h"
-#include "computer_player.h"
-#include "computer_player_hints.h"
+
+#include <algorithm>
+#include <queue>
+#include <typeinfo>
 
 #define FIELD_UPDATE_INTERVAL 1000
 

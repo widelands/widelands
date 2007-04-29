@@ -17,13 +17,14 @@
  *
  */
 
+#include "game.h"
+
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "event_chain.h"
 #include "interactive_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
-#include "game.h"
 #include "game_loader.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -35,15 +36,12 @@
 #include "playercommand.h"
 #include "soldier.h"
 #include "sound_handler.h"
-#include <string>
 #include "tribe.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 
-/** Game::Game(void)
- *
- * init
- */
+#include <string>
+
 Game::Game() :
 m_state   (gs_none),
 m_speed   (1),
@@ -52,10 +50,6 @@ cmdqueue  (this),
 m_realtime(WLApplication::get()->get_time())
 {g_sound_handler.m_the_game = this;}
 
-/** Game::~Game(void)
- *
- * cleanup
- */
 Game::~Game() {g_sound_handler.m_the_game = NULL;}
 
 

@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_event_chain_data_packet.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "event.h"
@@ -30,21 +32,14 @@
 #include "profile.h"
 #include "trigger.h"
 #include "trigger_conditional.h"
-#include "util.h"
-#include "widelands_map_event_chain_data_packet.h"
 #include "world.h"
+
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_EventChain_Data_Packet::~Widelands_Map_EventChain_Data_Packet(void) {
-}
+Widelands_Map_EventChain_Data_Packet::~Widelands_Map_EventChain_Data_Packet() {}
 
-/*
- * Read Function
- */
+
 void Widelands_Map_EventChain_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

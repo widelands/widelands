@@ -17,29 +17,24 @@
  *
  */
 
-#include <stdio.h>
+#include "immovable.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "field.h"
 #include "game.h"
-#include "immovable.h"
+#include "helper.h"
 #include "immovable_program.h"
 #include "player.h"
 #include "map.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "sound_handler.h"
-#include "util.h"
 #include "wexception.h"
 #include "worker.h"
 
-/*
-==============================================================================
+#include <stdio.h>
 
-BaseImmovable IMPLEMENTATION
-
-==============================================================================
-*/
 
 /*
 ===============
@@ -182,7 +177,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			if (!string)
 				break;
 
-			split_string(string, &command, " \t\r\n");
+			split_string(string, command, " \t\r\n");
 			if (!command.size())
 				continue;
 
@@ -739,7 +734,7 @@ void ImmovableProgram::parse_transform
 
    std::vector<std::string> list;
 
-   split_string(cmd[1], &list, ":");
+	split_string(cmd[1], list, ":");
    if(list.size()==1) {
       act->sparam1 = cmd[1];
       act->sparam2 = "world";

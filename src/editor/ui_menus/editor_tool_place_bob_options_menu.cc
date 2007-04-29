@@ -17,20 +17,22 @@
  *
  */
 
-#include "editorinteractive.h"
-#include "editor_place_bob_tool.h"
 #include "editor_tool_place_bob_options_menu.h"
+
+#include "editor_place_bob_tool.h"
+#include "editorinteractive.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
+#include "wlapplication.h"
+#include "world.h"
+
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
-#include "wlapplication.h"
-#include "world.h"
 
 Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 (Editor_Interactive         & parent,

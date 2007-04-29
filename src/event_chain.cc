@@ -17,17 +17,17 @@
  *
  */
 
-#include "event.h"
 #include "event_chain.h"
+
+#include "event.h"
 #include "fileread.h"
 #include "filewrite.h"
+#include "game.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"
 #include "map_trigger_manager.h"
-#include "game.h"
 #include "trigger_conditional.h"
-#include "util.h"
 #include "wexception.h"
 
 

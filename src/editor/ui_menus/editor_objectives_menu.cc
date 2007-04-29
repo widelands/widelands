@@ -17,9 +17,9 @@
  *
  */
 
-#include <map>
-#include "editorinteractive.h"
 #include "editor_objectives_menu.h"
+
+#include "editorinteractive.h"
 #include "error.h"
 #include "i18n.h"
 #include "map.h"
@@ -28,6 +28,7 @@
 #include "trigger.h"
 #include "trigger_null.h"
 #include "trigger_referencer.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
@@ -36,7 +37,8 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
-#include "util.h"
+
+#include <map>
 
 /*
  * This is a modal box - The user must end this first

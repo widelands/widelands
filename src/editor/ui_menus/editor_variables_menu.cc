@@ -17,20 +17,21 @@
  *
  */
 
-#include "editorinteractive.h"
 #include "editor_variables_menu.h"
+
+#include "editorinteractive.h"
 #include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "map_variable_manager.h"
+
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
-#include "util.h"
 
 /*
  * This is a modal box - The user must end this first

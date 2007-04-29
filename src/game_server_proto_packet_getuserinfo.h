@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,15 +20,17 @@
 #ifndef __S__GAME_SERVER_PROTO_PACKET_GETUSERINFO_H
 #define __S__GAME_SERVER_PROTO_PACKET_GETUSERINFO_H
 
-#include <string>
 #include "game_server_proto_packet.h"
+
+#include <string>
 
 /*
  * Gets information about one logged-in user.
  */
-class Game_Server_Protocol_Packet_GetUserInfo : public Game_Server_Protocol_Packet {
-   public:
-      Game_Server_Protocol_Packet_GetUserInfo( std::string );
+struct Game_Server_Protocol_Packet_GetUserInfo :
+public Game_Server_Protocol_Packet
+{
+	Game_Server_Protocol_Packet_GetUserInfo(const std::string & username);
       virtual ~Game_Server_Protocol_Packet_GetUserInfo();
 
       virtual ushort get_id(void);
@@ -38,8 +40,8 @@ class Game_Server_Protocol_Packet_GetUserInfo : public Game_Server_Protocol_Pack
       virtual void write_reply(Network_Buffer*) { }
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 
-   private:
-      std::string m_username; // which user to query
+private:
+	const std::string m_username; // which user to query
 };
 
 

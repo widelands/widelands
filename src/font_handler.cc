@@ -19,20 +19,23 @@
  * http://www.wesnoth.org
  */
 
-#include <SDL_image.h>
-#include <algorithm>
-#include <iostream>
-#include <SDL_ttf.h>
+#include "font_handler.h"
+
 #include "error.h"
 #include "filesystem.h"
-#include "font_handler.h"
 #include "font_loader.h"
 #include "graphic.h"
+#include "helper.h"
 #include "rendertarget.h"
 #include "surface.h"
-#include "util.h"
 #include "wexception.h"
 #include "text_parser.h"
+
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
+#include <algorithm>
+#include <iostream>
 
 /**
  * Plain Constructor
@@ -221,7 +224,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	std::vector<std::string> lines;
 
 	text = word_wrap_text(font, text, wrap);
-	split_string(text, &lines, "\n");
+	split_string(text, lines, "\n");
 
 	SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
 	SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
@@ -775,7 +778,7 @@ void Font_Handler::get_size
 	if (wrap > 0)
 		text = word_wrap_text(font, text, wrap);
 	std::vector<std::string> lines;
-	split_string(text, &lines, "\n");
+	split_string(text, lines, "\n");
 
 	*w = 0;
 	*h = 0;

@@ -17,12 +17,6 @@
  *
  */
 
-#include <cstdarg>
-#include <cctype>
-#include <limits>
-#include <stdio.h>
-#include <string>
-
 #include "build_id.h"
 #include "error.h"
 #include "fileread.h"
@@ -31,6 +25,13 @@
 #include "profile.h"
 #include "wexception.h"
 #include "wlapplication.h"
+
+#include <cstdarg>
+#include <cctype>
+#include <limits>
+#include <string>
+
+#include <stdio.h>
 
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =

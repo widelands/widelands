@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_event_data_packet.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "event.h"
@@ -25,22 +27,15 @@
 #include "map.h"
 #include "map_event_manager.h"
 #include "profile.h"
-#include "util.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_event_data_packet.h"
 #include "world.h"
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Event_Data_Packet::~Widelands_Map_Event_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Event_Data_Packet::~Widelands_Map_Event_Data_Packet() {}
+
+
 void Widelands_Map_Event_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

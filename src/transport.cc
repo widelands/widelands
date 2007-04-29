@@ -25,8 +25,8 @@ What _does_ belong in here:
 Flags, Roads, the logic behind ware pulls and pushes.
 */
 
-#include <cstdarg>
-#include <stdio.h>
+#include "transport.h"
+
 #include "cmd_queue.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -35,7 +35,6 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "game.h"
 #include "player.h"
 #include "soldier.h"
-#include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
@@ -43,15 +42,13 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
+#include <cstdarg>
+
+#include <stdio.h>
+
+
 Flag_Descr g_flag_descr;
 
-/*
-==============================================================================
-
-IdleWareSupply IMPLEMENTATION
-
-==============================================================================
-*/
 
 /*
 Whenever a WareInstance is idle, it issues an IdleWareSupply.

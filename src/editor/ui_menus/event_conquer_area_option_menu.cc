@@ -17,20 +17,22 @@
  *
  */
 
-#include <stdio.h>
 #include "event_conquer_area_option_menu.h"
+
 #include "event_conquer_area.h"
+#include "editorinteractive.h"
+#include "error.h"
+#include "graphic.h"
 #include "i18n.h"
+#include "map.h"
+
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
-#include "editorinteractive.h"
-#include "error.h"
-#include "map.h"
-#include "graphic.h"
-#include "util.h"
+
+#include <stdio.h>
 
 Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu
 (Editor_Interactive* parent, Event_Conquer_Area* event)

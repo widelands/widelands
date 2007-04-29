@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,9 @@
 /*
  * A new user entered a certain room
  */
-class Game_Server_Protocol_Packet_UserEntered : public Game_Server_Protocol_Packet {
-   public:
+struct Game_Server_Protocol_Packet_UserEntered :
+public Game_Server_Protocol_Packet
+{
       Game_Server_Protocol_Packet_UserEntered( void );
       virtual ~Game_Server_Protocol_Packet_UserEntered();
 
@@ -38,7 +39,7 @@ class Game_Server_Protocol_Packet_UserEntered : public Game_Server_Protocol_Pack
 	virtual void write_reply(Network_Buffer *);
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) { };
 
-   private:
+private:
       std::string m_name;
 };
 

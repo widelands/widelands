@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,8 @@
 /*
  * Ping. Checks if connection is alive
  */
-class Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
-   public:
-      Game_Server_Protocol_Packet_Ping(void);
+struct Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
+	Game_Server_Protocol_Packet_Ping();
       virtual ~Game_Server_Protocol_Packet_Ping();
 
       virtual ushort get_id(void);

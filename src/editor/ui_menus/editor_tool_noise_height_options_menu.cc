@@ -17,14 +17,16 @@
  *
  */
 
-#include <stdio.h>
 #include "editor_tool_noise_height_options_menu.h"
+
 #include "editorinteractive.h"
-#include "graphic.h"
-#include "i18n.h"
 #include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
 #include "editor_noise_height_tool.h"
+#include "graphic.h"
+#include "i18n.h"
+
+#include <stdio.h>
 
 #define width  20
 #define height 20

@@ -17,6 +17,8 @@
  *
  */
 
+#include "warehouse.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
@@ -24,7 +26,6 @@
 #include "profile.h"
 #include "soldier.h"
 #include "transport.h"
-#include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
 #include "tribe.h"

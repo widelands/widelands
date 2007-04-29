@@ -18,16 +18,17 @@
  */
 
 #include "event_message_box_message_box.h"
+
 #include "event_message_box.h"
 #include "game.h"
 #include "graphic.h"
 #include "editorinteractive.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
-#include "ui_button.h"
 #include "constants.h"
 #include "trigger_null.h"
-#include "util.h"
+
+#include "ui_button.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 
 /*
  * The message box himself

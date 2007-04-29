@@ -20,10 +20,11 @@
 #ifndef __S__PRODUCTION_PROGRAM_H
 #define __S__PRODUCTION_PROGRAM_H
 
-#include <string>
-#include <vector>
 #include "error.h"
 #include "types.h"
+
+#include <string>
+#include <vector>
 
 class Profile;
 
@@ -70,9 +71,8 @@ class ProductionProgram
 -----------------------
 Holds a series of actions to perform for production.
 */
-class ProductionProgram {
-public:
-	ProductionProgram(std::string name);
+struct ProductionProgram {
+	ProductionProgram(const std::string & name);
 
 	std::string get_name() const { return m_name; }
 	int get_size() const { return m_actions.size(); }

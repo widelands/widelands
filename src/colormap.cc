@@ -17,8 +17,9 @@
  *
  */
 
-#include <assert.h>
 #include "colormap.h"
+
+#include <assert.h>
 
 /**
  * Create a new Colormap, taking the palette as a parameter.

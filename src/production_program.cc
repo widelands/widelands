@@ -17,31 +17,17 @@
  *
  */
 
-#include <stdio.h>
+#include "helper.h"
 #include "productionsite.h"
 #include "production_program.h"
 #include "profile.h"
 #include "tribe.h"
-#include "util.h"
 #include "worker_program.h"
 
-/*
-==============================================================================
+#include <stdio.h>
 
-class ProductionProgram
 
-==============================================================================
-*/
-
-/*
-===============
-ProductionProgram::ProductionProgram
-===============
-*/
-ProductionProgram::ProductionProgram(std::string name)
-{
-	m_name = name;
-}
+ProductionProgram::ProductionProgram(const std::string & name) : m_name(name) {}
 
 
 /*
@@ -64,7 +50,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			break;
 
 		std::vector<std::string> cmd;
-		split_string(string, &cmd, " \t\r\n");
+		split_string(string, cmd, " \t\r\n");
 		if (!cmd.size())
 			continue;
 
@@ -86,7 +72,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
          std::vector<std::string> wares;
-         split_string(cmd[1],&wares,",");
+			split_string(cmd[1], wares, ",");
          uint i;
          for(i=0; i<wares.size(); i++) {
             Section* s=prof->get_safe_section("inputs");
@@ -111,7 +97,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
          std::vector<std::string> wares;
-         split_string(cmd[1],&wares,",");
+			split_string(cmd[1], wares, ",");
          uint i;
          for(i=0; i<wares.size(); i++) {
             Section* s=prof->get_safe_section("inputs");

@@ -28,15 +28,12 @@
 
 #define CURRENT_PACKET_VERSION 2
 
-/*
- * Destructor
- */
-Widelands_Map_Player_Position_Data_Packet::~Widelands_Map_Player_Position_Data_Packet(void) {
-}
+Widelands_Map_Player_Position_Data_Packet::
+~Widelands_Map_Player_Position_Data_Packet
+()
+{}
 
-/*
- * Read Function
- */
+
 void Widelands_Map_Player_Position_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base * egbase,
@@ -77,9 +74,6 @@ throw (_wexception)
 }
 
 
-/*
- * Write Function
- */
 void Widelands_Map_Player_Position_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,

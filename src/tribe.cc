@@ -17,22 +17,23 @@
  *
  */
 
-#include <iostream>
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"
 #include "game.h"
+#include "helper.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "profile.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "wlapplication.h"
 #include "worker.h"
 #include "world.h"
+
+#include <iostream>
 
 using namespace std;
 
@@ -456,7 +457,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 			 ++it)
 		{
       std::vector<std::string> list;
-		split_string(it->first, &list, "/");
+		split_string(it->first, list, "/");
 
 			if (list.size() != 4) throw wexception
 				("Error in tribe (%s), startsoldier %s is not valid!",

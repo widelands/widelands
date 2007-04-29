@@ -17,26 +17,21 @@
  *
  */
 
+#include "widelands_map_variable_data_packet.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
-#include "util.h"
 #include "map.h"
 #include "map_variable_manager.h"
 #include "profile.h"
-#include "widelands_map_variable_data_packet.h"
+
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Variable_Data_Packet::~Widelands_Map_Variable_Data_Packet(void) {
-}
+Widelands_Map_Variable_Data_Packet::~Widelands_Map_Variable_Data_Packet() {}
 
-/*
- * Read Function
- */
+
 void Widelands_Map_Variable_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

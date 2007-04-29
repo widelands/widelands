@@ -17,12 +17,13 @@
  *
  */
 
-#include <stdio.h>
+#include "attack_controller.h"
 #include "battle.h"
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
 #include "graphic.h"
+#include "helper.h"
 #include "militarysite.h"
 #include "player.h"
 #include "profile.h"
@@ -31,28 +32,18 @@
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
-#include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
-#include "attack_controller.h"
+
+#include <stdio.h>
 
 
-/*
-==============================================================================
-
-IdleSoldierSupply IMPLEMENTATION
-
-==============================================================================
-*/
-
-class IdleSoldierSupply : public Supply {
-	public:
+struct IdleSoldierSupply : public Supply {
 		IdleSoldierSupply(Soldier * const);
 		~IdleSoldierSupply();
 
 		void set_economy(Economy* e);
 
-	public:
 		virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(const int ware) const;
 	virtual bool is_active() const throw ();
@@ -307,7 +298,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
    // Parse hitpoints
    std::string hp=sglobal->get_safe_string("hp");
    std::vector<std::string> list;
-   split_string(hp, &list, "-");
+	split_string(hp, list, "-");
 	if (list.size() != 2) throw wexception
 		("Parse error in hp string: \"%s\" (must be \"min-max\")", hp.c_str());
    uint i=0;
@@ -329,7 +320,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
    // Parse attack
    std::string attack=sglobal->get_safe_string("attack");
    list.resize(0);
-   split_string(attack, &list, "-");
+   split_string(attack, list, "-");
 	if (list.size() != 2)
       throw wexception("Parse error in attack string: \"%s\" (must be \"min-max\")", attack.c_str());
    for(i=0; i<list.size(); i++)

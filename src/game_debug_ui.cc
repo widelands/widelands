@@ -18,7 +18,6 @@
  */
 // UI classes for real-time game debugging
 
-#include <stdio.h>
 #include "bob.h"
 #include "building.h"
 #include "field.h"
@@ -27,6 +26,7 @@
 #include "instances.h"
 #include "interactive_base.h"
 #include "map.h"
+
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
@@ -34,16 +34,10 @@
 #include "ui_tabpanel.h"
 #include "ui_window.h"
 
-/*
-==============================================================================
+#include <stdio.h>
 
-MapObjectDebugPanel
 
-==============================================================================
-*/
-
-class MapObjectDebugPanel : public UI::Panel, public Map_Object::LogSink {
-public:
+struct MapObjectDebugPanel : public UI::Panel, public Map_Object::LogSink {
 	MapObjectDebugPanel(UI::Panel* parent, Editor_Game_Base* egbase, Map_Object* obj);
 	~MapObjectDebugPanel();
 

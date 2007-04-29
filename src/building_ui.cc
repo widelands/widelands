@@ -26,6 +26,7 @@ class.
 */
 
 #include "building.h"
+
 #include "cmd_queue.h"
 #include "constructionsite.h"
 #include "error.h"
@@ -43,6 +44,11 @@ class.
 #include "trainingsite.h"
 #include "transport.h"
 #include "tribe.h"
+#include "warehouse.h"
+#include "waresdisplay.h"
+#include "wexception.h"
+#include "worker.h"
+
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
@@ -51,10 +57,6 @@ class.
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "warehouse.h"
-#include "waresdisplay.h"
-#include "wexception.h"
-#include "worker.h"
 
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";

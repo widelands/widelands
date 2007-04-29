@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,9 @@
 /*
  * Checks versioning with the game server
  */
-class Game_Server_Protocol_Packet_Connect : public Game_Server_Protocol_Packet {
-   public:
-      Game_Server_Protocol_Packet_Connect(void);
+struct Game_Server_Protocol_Packet_Connect : public Game_Server_Protocol_Packet
+{
+	Game_Server_Protocol_Packet_Connect();
       virtual ~Game_Server_Protocol_Packet_Connect();
 
       virtual ushort get_id(void);

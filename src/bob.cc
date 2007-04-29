@@ -17,9 +17,9 @@
  *
  */
 
-#include <stdio.h>
-#include "animation.h"
 #include "bob.h"
+
+#include "animation.h"
 #include "critter_bob.h"
 #include "game.h"
 #include "map.h"
@@ -31,6 +31,7 @@
 #include "tribe.h"
 #include "wexception.h"
 
+#include <stdio.h>
 
 /*
 ==============================================================================

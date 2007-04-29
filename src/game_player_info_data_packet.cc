@@ -17,26 +17,23 @@
  *
  */
 
+#include "game_player_info_data_packet.h"
+
 #include "computer_player.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
-#include "game_player_info_data_packet.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "tribe.h"
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
+
 Game_Player_Info_Data_Packet::~Game_Player_Info_Data_Packet(void) {
 }
 
-/*
- * Read Function
- */
+
 void Game_Player_Info_Data_Packet::Read
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -95,9 +92,7 @@ throw (_wexception)
    assert(0); // never here
 }
 
-/*
- * Write Function
- */
+
 void Game_Player_Info_Data_Packet::Write
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const)
 throw (_wexception)

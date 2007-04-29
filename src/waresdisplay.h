@@ -22,18 +22,19 @@
 
 #include "ui_panel.h"
 
+#include <vector>
+
 class Editor_Game_Base;
-class UI::Textarea;
 class Player;
 class WareList;
+namespace UI {struct Textarea;};
 
 /*
 class WaresDisplay
 ------------------
 Panel that displays the contents of a WareList.
 */
-class WaresDisplay : public UI::Panel {
-public:
+struct WaresDisplay : public UI::Panel {
 	enum {
 		Width = 5 * 24 + 4 * 4, //  (5 wares icons) + space in between
 

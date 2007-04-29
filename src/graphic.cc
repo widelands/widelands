@@ -17,12 +17,13 @@
  *
  */
 
+#include "graphic.h"
+
 #include "build_id.h"
 #include "fileread.h"
 #include "filesystem/layered_filesystem.h"
 #include "filewrite.h"
 #include "font_handler.h"
-#include "graphic.h"
 #include "rendertarget.h"
 #include "wexception.h"
 

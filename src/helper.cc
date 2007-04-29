@@ -17,14 +17,15 @@
  *
  */
 
+#include "helper.h"
+
+#include "error.h"
+#include "wexception.h"
+
 #include <cstdarg>
 #include <iostream>
 #include <sstream>
 #include <vector>
-
-#include "error.h"
-#include "helper.h"
-#include "wexception.h"
 
 //TODO: move wexception code into it's own file
 
@@ -33,11 +34,12 @@ using std::cout;
 /**
  * split a string by whitespace
  */
-void split_string(std::string in, std::vector<std::string>* plist, const char* separators)
+void split_string
+(const std::string & in,
+ std::vector<std::string> & plist,
+ const char * const separators)
 {
-	std::string::size_type pos, endpos;
-
-	pos = 0;
+	std::string::size_type pos = 0, endpos;
 
 	while(pos != std::string::npos) {
 		pos = in.find_first_not_of(separators, pos);
@@ -46,7 +48,7 @@ void split_string(std::string in, std::vector<std::string>* plist, const char* s
 
 		endpos = in.find_first_of(separators, pos);
 
-		plist->push_back(in.substr(pos, endpos - pos));
+		plist.push_back(in.substr(pos, endpos - pos));
 
 		pos = endpos;
 	}

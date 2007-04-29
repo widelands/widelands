@@ -17,9 +17,10 @@
  *
  */
 
+#include "event_message_box.h"
+
 #include "editor_game_base.h"
 #include "error.h"
-#include "event_message_box.h"
 #include "event_message_box_message_box.h"
 #include "filesystem.h"
 #include "game.h"
@@ -29,7 +30,6 @@
 #include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger_null.h"
-#include "util.h"
 #include "wexception.h"
 
 static const int EVENT_VERSION = 1;

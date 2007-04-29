@@ -17,9 +17,9 @@
  *
  */
 
-#include <stdio.h>
-#include "i18n.h"
 #include "trigger_building_option_menu.h"
+
+#include "i18n.h"
 #include "trigger_building.h"
 #include "ui_window.h"
 #include "ui_textarea.h"
@@ -33,7 +33,9 @@
 #include "editor.h"
 #include "player.h"
 #include "tribe.h"
-#include "util.h"
+
+#include <stdio.h>
+
 
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* parent, Trigger_Building* trigger) :
 UI::Window(parent, 0, 0, 180, 280, _("Building Trigger Options").c_str()),

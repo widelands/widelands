@@ -17,9 +17,10 @@
  *
  */
 
+#include "wlapplication.h"
+
 #include "build_id.h"
 #include "editor.h"
-#include <errno.h>
 #include "error.h"
 #include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
@@ -36,19 +37,21 @@
 #include "game_server_proto.h"
 #include "graphic.h"
 #include "i18n.h"
-#include <iostream>
 #include "journal.h"
 #include "layered_filesystem.h"
 #include "network.h"
 #include "network_ggz.h"
 #include "profile.h"
 #include "sound_handler.h"
+#include "wexception.h"
+
+#include <iostream>
 #include <stdexcept>
 #include <string>
+
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "wexception.h"
-#include "wlapplication.h"
 
 #ifdef DEBUG
 #ifndef __WIN32__

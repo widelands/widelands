@@ -31,7 +31,6 @@
 #include "ui_window.h"
 #include "trigger.h"
 #include "trigger_conditional.h"
-#include "util.h"
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
 (Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain)

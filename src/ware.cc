@@ -17,31 +17,20 @@
  *
  */
 
-#include <stdio.h>
+#include "ware.h"
+
 #include "animation.h"
 #include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "profile.h"
 #include "tribe.h"
-#include "ware.h"
 #include "wexception.h"
 #include "worker.h"
 
-/*
-==============================================================================
+#include <stdio.h>
 
-Item_Ware_Descr IMPLEMENTATION
 
-==============================================================================
-*/
-
-/*
-===============
-Item_Ware_Descr::Item_Ware_Descr
-Item_Ware_Descr::~Item_Ware_Descr
-===============
-*/
 Item_Ware_Descr::Item_Ware_Descr(const std::string & ware_name) :
 m_name           (ware_name),
 m_menu_pic       (0),
@@ -49,9 +38,8 @@ m_pic_queue_full (0),
 m_pic_queue_empty(0)
 {}
 
-Item_Ware_Descr::~Item_Ware_Descr()
-{
-}
+
+Item_Ware_Descr::~Item_Ware_Descr() {}
 
 
 /*

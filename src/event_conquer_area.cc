@@ -18,6 +18,7 @@
  */
 
 #include "event_conquer_area.h"
+
 #include "game.h"
 #include "map.h"
 

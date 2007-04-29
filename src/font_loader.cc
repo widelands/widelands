@@ -17,17 +17,20 @@
  *
  */
 
+#include "font_loader.h"
+
 #include "error.h"
 #include "fileread.h"
 #include "font_handler.h"
-#include "font_loader.h"
 #include "graphic.h"
-#include <iostream>
 #include "layered_filesystem.h"
 #include "rgbcolor.h"
-#include <SDL_ttf.h>
-#include <string>
 #include "wexception.h"
+
+#include <SDL_ttf.h>
+
+#include <iostream>
+#include <string>
 
 Font_Handler* g_fh = 0; // the font handler
 

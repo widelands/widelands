@@ -17,20 +17,15 @@
  *
  */
 
-#include <string>
+#include "zip_filesystem.h"
+
 #include "error.h"
 #include "filesystem_exceptions.h"
 #include "zip_exceptions.h"
-#include "zip_filesystem.h"
 #include "wexception.h"
 
-/*
-==============================================================================
+#include <string>
 
-ZipFilesystem IMPLEMENTATION
-
-==============================================================================
-*/
 
 /**
  * Initialize the real file-system

@@ -17,26 +17,28 @@
  *
  */
 
+#include "encyclopedia_window.h"
+
+#include "building.h"
+#include "graphic.h"
+#include "i18n.h"
+#include "interactive_player.h"
+#include "helper.h"
+#include "player.h"
+#include "productionsite.h"
+#include "production_program.h"
+#include "tribe.h"
+#include "ware.h"
+
+#include "ui_window.h"
+#include "ui_unique_window.h"
+#include "ui_table.h"
+
 #include <set>
 #include <map>
 #include <vector>
 #include <string>
 #include <typeinfo>
-
-#include "encyclopedia_window.h"
-#include "graphic.h"
-#include "i18n.h"
-#include "interactive_player.h"
-#include "ui_window.h"
-#include "ui_unique_window.h"
-#include "ui_table.h"
-#include "tribe.h"
-#include "ware.h"
-#include "player.h"
-#include "building.h"
-#include "productionsite.h"
-#include "production_program.h"
-#include "helper.h"
 
 #define WINDOW_WIDTH  600
 #define WINDOW_HEIGHT 550
@@ -162,7 +164,7 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
       for (i=0; i<actions.size(); i++) {
          //some actions are noted as "consume ware1,ware2"
          std::vector<std::string> splitWares;
-         split_string(actions[i].sparam1,&splitWares,",");
+			split_string(actions[i].sparam1, splitWares, ",");
 
          bool isGrouped = false;
 

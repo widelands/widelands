@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +17,21 @@
  *
  */
 
-#include <string>
 #include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "game_server_proto_packet_hello.h"
 #include "network_buffer.h"
-#include "util.h"
 #include "wexception.h"
 
-/*
- * Constructor
- */
-Game_Server_Protocol_Packet_Hello::Game_Server_Protocol_Packet_Hello(std::string name) {
-   m_name = name;
-}
 
-/*
- * Destructor
- */
-Game_Server_Protocol_Packet_Hello::~Game_Server_Protocol_Packet_Hello(void) {
-}
+Game_Server_Protocol_Packet_Hello::Game_Server_Protocol_Packet_Hello
+(const std::string & name)
+: m_name(name)
+{}
+
+
+Game_Server_Protocol_Packet_Hello::~Game_Server_Protocol_Packet_Hello() {}
 
 /*
  * Get this packets id

@@ -17,19 +17,21 @@
  *
  */
 
-#include <iostream>
-#include <sstream>
+#include "world.h"
+
 #include "constants.h"
 #include "error.h"
 #include "fileread.h"
+#include "graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
-#include "graphic.h"
 #include "profile.h"
-#include "util.h"
 #include "wexception.h"
-#include "world.h"
 #include "worlddata.h"
+
+#include <iostream>
+#include <sstream>
 
 using std::cerr;
 using std::endl;
@@ -64,7 +66,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
       std::vector<std::string> args;
       Editor_Pic i;
 
-      split_string(string, &args, " \t");
+		split_string(string, args, " \t");
 
       if (args.size() != 1 && args.size() != 2)
       {

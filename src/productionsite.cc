@@ -17,20 +17,21 @@
  *
  */
 
+#include "productionsite.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
+#include "helper.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "map.h"
 #include "player.h"
-#include "productionsite.h"
 #include "production_program.h"
 #include "profile.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
-#include "util.h"
 #include "wexception.h"
 #include "worker.h"
 #include "ware.h"
@@ -112,13 +113,13 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 		workerstr = sglobal->get_string("worker", "");
 
    std::vector<std::string> workers;
-   split_string(workerstr, &workers, ",");
+	split_string(workerstr, workers, ",");
    uint i;
    std::vector<std::string> amounts;
    for(i=0; i<workers.size(); i++) {
       amounts.resize(0);
       remove_spaces(&workers[i]);
-      split_string(workers[i],&amounts,"*");
+		split_string(workers[i], amounts, "*");
       uint j;
       for(j=0; j<amounts.size(); j++)
          remove_spaces(&amounts[j]);
@@ -574,10 +575,9 @@ void ProductionSite::program_act(Game* g)
 			m_workers[0]->update_task_buildingwork(g);  // Always main worker is doing stuff
 			return;
 
-		case ProductionAction::actConsume:
-         {
+	case ProductionAction::actConsume: {
             std::vector<std::string> wares;
-            split_string(action->sparam1, &wares, ",");
+		split_string(action->sparam1, wares, ",");
 
             uint j=0;
             bool consumed=false;
@@ -619,10 +619,9 @@ void ProductionSite::program_act(Game* g)
             return;
          }
 
-		case ProductionAction::actCheck:
-         {
+	case ProductionAction::actCheck: {
             std::vector<std::string> wares;
-            split_string(action->sparam1, &wares, ",");
+		split_string(action->sparam1, wares, ",");
 
             uint j=0;
             bool found=false;

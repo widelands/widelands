@@ -17,23 +17,25 @@
  *
  */
 
-#include <stdio.h>
+#include "event_allow_building_option_menu.h"
+
 #include "editor.h"
 #include "editorinteractive.h"
 #include "error.h"
 #include "event_allow_building.h"
-#include "event_allow_building_option_menu.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "util.h"
+
+#include <stdio.h>
 
 #define spacing 5
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :

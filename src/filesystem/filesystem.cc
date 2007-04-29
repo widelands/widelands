@@ -19,23 +19,23 @@
 // this originally comes from Return to the Shadows (http://www.rtts.org/)
 // files.cc: provides all the OS abstraction to access files
 
+#include "filesystem.h"
+
 #include "config.h"
 #include "constants.h"
-#include "disk_filesystem.h"
-#include <errno.h>
-#include "error.h"
-#include "filesystem.h"
-#include "layered_filesystem.h"
-#include <string>
-#include <unistd.h>
-#include <vector>
-#include "zip_exceptions.h"
-#include "zip_filesystem.h"
-
 #ifdef USE_DATAFILE
 #include "datafile.h"
 #endif
+#include "disk_filesystem.h"
+#include "error.h"
+#include "layered_filesystem.h"
+#include "zip_exceptions.h"
+#include "zip_filesystem.h"
 
+#include <string>
+#include <vector>
+
+#include <errno.h>
 #ifdef _WIN32
   #include <windows.h>
   #include <io.h>
@@ -46,8 +46,8 @@
   #include <glob.h>
   #include <sys/stat.h>
   #include <sys/types.h>
-  #include <unistd.h>
 #endif
+#include <unistd.h>
 
 FileSystem::FileSystem()
 {

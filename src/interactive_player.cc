@@ -17,47 +17,41 @@
  *
  */
 
+#include "interactive_player.h"
+
 #include "building.h"
 #include "building_statistics_menu.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
 #include "fieldaction.h"
 #include "font_handler.h"
+#include "encyclopedia_window.h"
 #include "game_loader.h"
 #include "game_main_menu.h"
 #include "graphic.h"
 #include "general_statistics_menu.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "keycodes.h"
 #include "immovable.h"
 #include "network.h"
 #include "player.h"
 #include "productionsite.h"
-#include "ui_editbox.h"
-#include "ui_button.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
 #include "overlay_manager.h"
 #include "soldier.h"
 #include "stock_menu.h"
 #include "transport.h"
 #include "tribe.h"
-#include "util.h"
 #include "ware_statistics_menu.h"
 #include "wlapplication.h"
-#include "encyclopedia_window.h"
+
+#include "ui_editbox.h"
+#include "ui_button.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+#include "ui_unique_window.h"
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 
-/*
-==============================================================================
-
-Interactive_Player IMPLEMENTATION
-
-==============================================================================
-*/
 
 // This function is the callback for recalculation of field overlays
 int Int_Player_overlay_callback_function

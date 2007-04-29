@@ -20,13 +20,15 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include <cmath>
-#include <limits>
-#include <SDL_types.h>
-#include <types.h>
-
 #include "types.h"
 #include "compile_assert.h"
+
+#include <SDL_types.h>
+
+#include <cmath>
+#include <limits>
+
+#include <types.h>
 
 struct Point {
 	Point() throw () {}

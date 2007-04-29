@@ -18,22 +18,23 @@
  */
 
 #include "event_message_box_option_menu.h"
+
 #include "event_message_box.h"
 #include "i18n.h"
-#include "ui_window.h"
-#include "ui_textarea.h"
+#include "editorinteractive.h"
+#include "error.h"
+#include "graphic.h"
+#include "map.h"
+#include "map_trigger_manager.h"
+#include "trigger_null.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
-#include "ui_multilineeditbox.h"
 #include "ui_listselect.h"
-#include "editorinteractive.h"
-#include "error.h"
-#include "map.h"
-#include "map_trigger_manager.h"
-#include "graphic.h"
-#include "trigger_null.h"
-#include "util.h"
+#include "ui_multilineeditbox.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
 (Editor_Interactive* parent, Event_Message_Box* event)

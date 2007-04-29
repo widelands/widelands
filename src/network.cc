@@ -23,7 +23,6 @@
     Game setup, lobby, LAN game finding, internet gaming, GGZ....
 */
 
-#include <algorithm>
 #include "error.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
@@ -37,9 +36,12 @@
 #include "playercommand.h"
 #include "playerdescrgroup.h"
 #include "tribe.h"
+#include "wexception.h"
+
 #include "ui_table.h"
 #include "ui_window.h"
-#include "wexception.h"
+
+#include <algorithm>
 
 #define CHECK_SYNC_INTERVAL     2000
 #define   DELAY_PROBE_INTERVAL 10000

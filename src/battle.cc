@@ -19,6 +19,7 @@
 // TODO: Create the load/save code, networkcode isn't needed (I think)
 
 #include "battle.h"
+
 #include "error.h"
 #include "game.h"
 #include "soldier.h"

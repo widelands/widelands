@@ -25,22 +25,17 @@
 #include "trigger.h"
 #include "trigger_factory.h"
 #include "profile.h"
-#include "util.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_trigger_data_packet.h"
 #include "world.h"
 
+
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Trigger_Data_Packet::~Widelands_Map_Trigger_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Trigger_Data_Packet::~Widelands_Map_Trigger_Data_Packet() {}
+
+
 void Widelands_Map_Trigger_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

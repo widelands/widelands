@@ -17,21 +17,22 @@
  *
  */
 
-#include "constants.h"
 #include "fullscreen_menu_inet_lobby.h"
+
+#include "constants.h"
 #include "game_server_connection.h"
 #include "game_server_proto_packet_hello.h"
 #include "game_server_proto_packet_chatmessage.h"
 #include "game_server_proto_packet_connect.h"
 #include "game_server_proto_packet_getuserinfo.h"
 #include "i18n.h"
+
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
-#include "util.h"
 
 /*
  * Static callback functions for various packets

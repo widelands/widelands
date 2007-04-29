@@ -17,6 +17,8 @@
  *
  */
 
+#include "worker.h"
+
 #include "cmd_queue.h"
 #include "critter_bob.h"
 #include "error.h"
@@ -24,6 +26,7 @@
 #include "filewrite.h"
 #include "game.h"
 #include "graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "layered_filesystem.h"
@@ -32,18 +35,16 @@
 #include "queue_cmd_ids.h"
 #include "rendertarget.h"
 #include "soldier.h"
+#include "sound_handler.h"
 #include "transport.h"
 #include "tribe.h"
-#include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker.h"
 #include "worker_program.h"
 #include "world.h"
 #include "worlddata.h"
-#include "sound_handler.h"
 
 Cmd_Incorporate::Cmd_Incorporate(int t, Worker* w) :
        BaseCommand(t) {
@@ -147,7 +148,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 			if (!string)
 				break;
 
-			split_string(string, &cmd, " \t\r\n");
+			split_string(string, cmd, " \t\r\n");
 			if (!cmd.size())
 				continue;
 
@@ -395,7 +396,7 @@ bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* actio
 	molog("  SetDescription: %s\n", action->sparamv[idx].c_str());
 
    std::vector<std::string> list;
-   split_string(action->sparamv[idx], &list, ":");
+   split_string(action->sparamv[idx], list, ":");
    std::string bob;
    if(list.size()==1) {
       state->svar1 = "world";
@@ -456,7 +457,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* ac
 	molog("  SetBobDescription: %s\n", action->sparamv[idx].c_str());
 
    std::vector<std::string> list;
-   split_string(action->sparamv[idx], &list, ":");
+   split_string(action->sparamv[idx], list, ":");
    std::string bob;
    if(list.size()==1) {
       state->svar1 = "world";
@@ -1586,7 +1587,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
    m_min_experience=m_max_experience=-1;
    if(exp.size()) {
       std::vector<std::string> list;
-      split_string(exp, &list, "-");
+		split_string(exp, list, "-");
       if(list.size()!=2)
          throw wexception("Parse error in experience string: \"%s\" (must be \"min-max\")", exp.c_str());
       uint i=0;

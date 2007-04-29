@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_allowed_buildings_data_packet.h"
+
 #include "editorinteractive.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -24,23 +26,21 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
+#include "profile.h"
 #include "tribe.h"
-#include "widelands_map_allowed_buildings_data_packet.h"
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
-#include "profile.h"
+
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Allowed_Buildings_Data_Packet::~Widelands_Map_Allowed_Buildings_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Allowed_Buildings_Data_Packet::
+~Widelands_Map_Allowed_Buildings_Data_Packet
+()
+{}
+
+
 void Widelands_Map_Allowed_Buildings_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

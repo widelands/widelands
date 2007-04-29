@@ -20,10 +20,10 @@
 #ifndef __S__TRIGGER_BUILDING_H
 #define __S__TRIGGER_BUILDING_H
 
-#include <string>
+#include "player_area.h"
 #include "trigger.h"
-#include "geometry.h"
 
+#include <string>
 /*
  * For documentation see the description in editor or trigger_factory.cc
  * or see trigger.h

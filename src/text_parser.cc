@@ -17,13 +17,15 @@
  *
  */
 
+#include "text_parser.h"
+
+#include "constants.h"
+#include "error.h"
+#include "graphic.h"
+#include "helper.h"
+
 #include <vector>
 #include <string>
-#include "constants.h"
-#include "text_parser.h"
-#include "graphic.h"
-#include "error.h"
-#include "util.h"
 
 Richtext_Block::Richtext_Block() {
 	m_image_align = Align_Left;
@@ -243,7 +245,7 @@ void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Blo
          format.erase(0,val_end+1);
 			if (key == "image") {
 				std::vector<std::string> images;
-				split_string(val, &images, ";");
+				split_string(val, images, ";");
 				element->set_images(images);
 			}
 			else if (key == "image-align")

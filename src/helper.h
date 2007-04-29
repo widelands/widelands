@@ -20,10 +20,11 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include "wexception.h"
+
 #include <sstream>
 #include <string>
 #include <vector>
-#include "wexception.h"
 
 /**
  * Convert std::string to any sstream-compatible type
@@ -54,7 +55,10 @@ template<typename T> std::string toString(const T& x) {
 	return oss.str();
 }
 
-void split_string(std::string in, std::vector<std::string>* plist, const char* separators);
+void split_string
+(const std::string & in,
+ std::vector<std::string> & plist,
+ const char * const separators);
 void remove_spaces(std::string* in);
 void log(const char *fmt, ...);
 void myassert(int line, const char* file, const char* condt) throw(_wexception) __attribute__ ((noreturn));

@@ -21,11 +21,12 @@
 #define FILESYSTEM_H
 
 #include "filesystem_exceptions.h"
+#include "types.h"
+
 #include <set>
 #include <string>
 #include <stdexcept>
 #include <vector>
-#include "types.h"
 
 typedef std::set<std::string> filenameset_t;
 

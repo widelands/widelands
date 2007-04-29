@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,16 +20,16 @@
 #ifndef __S__GAME_SERVER_PROTO_PACKET_HELLO_H
 #define __S__GAME_SERVER_PROTO_PACKET_HELLO_H
 
-#include <string>
 #include "game_server_proto_packet.h"
+
+#include <string>
 
 /*
  * This is used to register a user on a game server
  * when he connects
  */
-class Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
-   public:
-      Game_Server_Protocol_Packet_Hello(std::string name);
+struct Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
+	Game_Server_Protocol_Packet_Hello(const std::string & name);
       virtual ~Game_Server_Protocol_Packet_Hello();
 
       virtual ushort get_id(void);
@@ -39,7 +39,7 @@ class Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
       virtual void write_reply(Network_Buffer*) { }
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 
-   private:
+private:
       std::string m_name;
 };
 

@@ -17,19 +17,23 @@
  *
  */
 
-#include <cstdarg>
-#include <stdio.h>
-#include <string>
+#include "instances.h"
+
 #include "cmd_queue.h"
 #include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
-#include "instances.h"
 #include "queue_cmd_ids.h"
 #include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
+
+#include <cstdarg>
+#include <string>
+
+#include <stdio.h>
+
 
 Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int t, Map_Object* o) : BaseCommand(t) {
    obj_serial=o->get_serial();

@@ -18,7 +18,6 @@
  */
 
 #include "game.h"
-#include "util.h"
 #include "wexception.h"
 #include "wlapplication.h"
 #include "filesystem.h"
@@ -34,13 +33,13 @@ void SaveHandler::think(Game *g, int realtime) {
 	int autosaveInterval = g_options.pull_section("global")->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
 	if (autosaveInterval <= 0)
 		return; // no autosave requested
-	
+
 	int elapsed = (realtime-m_lastSaveTime)/1000;
 	if (elapsed < autosaveInterval)
 		return;
 
 	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
-	
+
 	// save the game
 	std::string complete_filename = create_file_name (get_base_dir(), "WL_autosave");
 
@@ -48,7 +47,7 @@ void SaveHandler::think(Game *g, int realtime) {
 	if(g_fs->FileExists(complete_filename)) {
 		g_fs->Unlink(complete_filename);
 	}
-	
+
 	if (!save_game(g, complete_filename))
 		log("Autosave: ERROR\n");
 
@@ -81,7 +80,7 @@ std::string SaveHandler::create_file_name(std::string dir, std::string filename)
 	}
 	if(assign_extension)
 		filename+=WLGF_SUFFIX;
-	
+
 	// Now append directory name
 	std::string complete_filename=dir;
 	complete_filename+="/";
@@ -107,7 +106,7 @@ bool SaveHandler::save_game(Game *g, std::string complete_filename, std::string 
 	} else {
 		fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
 	}
-	
+
 	bool ret = true;
 	Game_Saver gs(*fs, g);
 	try {

@@ -17,17 +17,19 @@
  *
  */
 
-#include "i18n.h"
 #include "trigger_null_option_menu.h"
+
+#include "i18n.h"
 #include "trigger_null.h"
+#include "editorinteractive.h"
+#include "error.h"
+
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
-#include "editorinteractive.h"
-#include "error.h"
-#include "util.h"
+
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
 UI::Window(parent, 0, 0, 164, 100, _("Null Trigger Options").c_str()),
