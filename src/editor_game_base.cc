@@ -267,6 +267,7 @@ void Editor_Game_Base::do_conquer_area
 			{
 				if (owner) player_field_notification(mr.location(), LOSE);
 				mr.location().field->set_owned_by(player_area.player_number);
+				inform_players_about_ownership(index, player_area.player_number);
 				player_field_notification (mr.location(), GAIN);
          }
 		} else if
