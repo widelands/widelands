@@ -24,8 +24,11 @@
 #include "filesystem/layered_filesystem.h"
 #include "filewrite.h"
 #include "font_handler.h"
+#include "i18n.h"
 #include "rendertarget.h"
 #include "wexception.h"
+
+#include "ui_progresswindow.h"
 
 #include <SDL_image.h>
 
@@ -503,12 +506,21 @@ void Graphic::reset_texture_animation_reminder( void )
 /**
  * Load all animations that are registered with the AnimationManager
 */
-void Graphic::load_animations()
-{
+void Graphic::load_animations(const UI::ProgressWindow & loader_ui) {
 	assert(!m_animations.size());
 
-	for(uint id = 1; id <= g_anim.get_nranimations(); id++)
+	const std::string step_description = _("Loading animations: %d%% complete");
+	uint last_shown = 100;
+	const uint nr_animations = g_anim.get_nranimations();
+	for (uint id = 0; id < nr_animations;) {
+		const uint percent = 100 * id / nr_animations;
+		if (percent != last_shown) {
+			last_shown = percent;
+			loader_ui.stepf(step_description, percent);
+		}
+		++id;
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));
+	}
 }
 
 /**

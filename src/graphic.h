@@ -68,6 +68,8 @@ public:
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int x, int y, int w, int h);
+	void update_rectangle(const Rect & rect)
+	{update_rectangle (rect.x, rect.y, rect.w, rect.h);}
 	bool need_update();
 	void refresh();
 
@@ -85,7 +87,7 @@ public:
 	void animate_maptextures(uint time);
 	void reset_texture_animation_reminder( void );
 
-	void load_animations();
+	void load_animations(const UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(const uint anim=0) const;
 	void get_animation_size(const uint anim, const uint time, uint & w, uint & h);
 

@@ -28,6 +28,7 @@
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+namespace UI {struct ProgressWindow;};
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -136,7 +137,7 @@ struct Game : public Editor_Game_Base {
 
 private:
 	void init_player_controllers ();
-	bool run (bool = false);
+	bool run (const UI::ProgressWindow & loader_ui, bool = false);
 	Map_Loader                   * m_maploader;
 
 	NetGame                      * m_netgame;

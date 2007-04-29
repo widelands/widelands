@@ -30,6 +30,7 @@
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
+#include "ui_progresswindow.h"
 
 /*
 ===============
@@ -199,13 +200,14 @@ void Game_Main_Menu_Load_Game::edit_box_changed(void) {
 bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 
    FileSystem* fs = 0;
-   try {
+	try {
+		UI::ProgressWindow loader_ui;
       fs = g_fs->MakeSubFileSystem( filename );
 		Game_Loader gl(*fs, m_parent->get_game());
       m_parent->get_game()->cleanup_for_load(true,true);
 		gl.load_game();
       m_parent->get_game()->postload();
-      m_parent->get_game()->load_graphics();
+      m_parent->get_game()->load_graphics(loader_ui);
    } catch(std::exception& exe) {
       std::string s=_("Game Loading Error!\nReason given:\n");
       s+=exe.what();

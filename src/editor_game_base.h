@@ -44,6 +44,7 @@ class PlayerImmovable;
 class Tribe_Descr;
 class Flag;
 class AttackController;
+namespace UI {struct ProgressWindow;};
 
 struct Editor_Game_Base {
    friend class Interactive_Base;
@@ -90,7 +91,7 @@ struct Editor_Game_Base {
       // loading stuff
 	void allocate_player_maps();
       void postload();
-      void load_graphics();
+	void load_graphics(const UI::ProgressWindow & loader_ui);
 	virtual void cleanup_for_load
 		(const bool flush_graphics = true, const bool flush_animations = true);
 

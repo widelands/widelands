@@ -40,6 +40,8 @@
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 
+#include "ui_progresswindow.h"
+
 #include <string>
 
 Game::Game() :
@@ -102,40 +104,51 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
 	m_maploader = new Widelands_Map_Loader(*fs, m);
+	UI::ProgressWindow loaderUI;
 
     // Loading the locals for the campaign
         if( scenario )
             {
+			loaderUI.step (_("Loading texts"));
             std::string textdomain("");
             textdomain.append(mapname);
 	    i18n::grab_textdomain(textdomain.c_str());
+
+			loaderUI.step (_("Preloading a map"));
             m_maploader->preload_map(scenario);
             log("Loading the locals for scenario. file: %s.mo\n", mapname);
             }
 
         m_state = gs_running;
 
+	loaderUI.step (_("Preloading a map"));
 	m_maploader->preload_map(scenario);
+	loaderUI.step (_("Loading a world"));
 	m_maploader->load_world();
 
     // We have to create the players here
-   for( uint i = 1; i <= m->get_nrplayers(); i++)
+	const Player_Number nr_players = m->get_nrplayers();
+	for (Player_Number i = 1; i <= nr_players; ++i) {
+		loaderUI.stepf (_("Adding player %u"), i);
 		add_player
-		(i,
-		 i == 1 ? Player::Local : Player::AI,
-		 m->get_scenario_player_tribe(i),
-		 m->get_scenario_player_name(i));
+			(i,
+			 i == 1 ? Player::Local : Player::AI,
+			 m->get_scenario_player_tribe(i),
+			 m->get_scenario_player_name(i));
+	}
 
         // Reload the textdomain "widelands", so buttons can be translated.
         if( scenario )
         i18n::grab_textdomain("widelands");
 
+	loaderUI.step (_("Preparing computer players"));
    init_player_controllers ();
 
         // Unload the textdomain, to make campaign textdomain available, again.
         if( scenario )
         i18n::release_textdomain();
 
+	loaderUI.step (_("Loading a map"));
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
@@ -143,7 +156,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
    if( scenario )
 	   i18n::release_textdomain();
 
-	return run();
+	return run(loaderUI);
 }
 
 
@@ -162,15 +175,18 @@ bool Game::run_single_player ()
 	g_gr->flush(PicMod_Menu);
 
 	m_state = gs_running;
+	UI::ProgressWindow loaderUI;
 
+	loaderUI.step(_("Preparing computer players"));
 	init_player_controllers ();
 
+	loaderUI.step(_("Loading a map"));
 	// Now first, completly load the map
 	m_maploader->load_map_complete(this, code==2); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
 
-	return run();
+	return run(loaderUI);
 }
 
 /**
@@ -185,18 +201,22 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 		Fullscreen_Menu_LoadGame ssg(*this);
 		if (ssg.run()) filename = ssg.filename(); else return false;
 	}
+
+	UI::ProgressWindow loaderUI;
+
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
 
 	FileSystem * const fs = g_fs->MakeSubFileSystem(filename.c_str());
 
 	Game_Loader gl(*fs, this);
+	loaderUI.step(_("Loading..."));
 	gl.load_game();
    delete fs;
 
    m_state = gs_running;
 
-   return run(true);
+   return run(loaderUI, true);
 }
 
 //extern uchar g_playercolors[MAX_PLAYERS][12];
@@ -214,20 +234,24 @@ bool Game::run_multi_player (NetGame* ng)
 	if (code==0 || get_map()==0)
 	    return false;
 
+	UI::ProgressWindow loaderUI;
 	g_gr->flush(PicMod_Menu);
 
 	m_state = gs_running;
 
+	loaderUI.step(_("Preparing computer players"));
 	init_player_controllers ();
 
 	// Now first, completly load the map
+	loaderUI.step(_("Loading a map"));
 	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
 
+	loaderUI.step(_("Initializing a network game"));
 	m_netgame->begin_game();
 
-	return run();
+	return run(loaderUI);
 }
 
 
@@ -280,17 +304,20 @@ void Game::init_player_controllers ()
  *
  * \return true if a game actually took place, false otherwise
  */
-bool Game::run(bool is_savegame)
-{
-   postload();
+bool Game::run(const UI::ProgressWindow & loader_ui, bool is_savegame) {
+	postload();
 
 	if (not is_savegame) {
+		std::string step_description = _("Creating player infrastructure");
       // Prepare the players (i.e. place HQs)
 		const Player_Number nr_players = map().get_nrplayers();
 		for (Player_Number i = 1; i <= nr_players; ++i) if
 			(Player * const plr = get_player(i))
 		{
-         plr->init(true);
+			step_description += ".";
+			loader_ui.step(step_description);
+			plr->init(true);
+
 			if (plr->get_type() == Player::Local)
 				ipl->move_view_to(map().get_starting_pos(i));
       }
@@ -311,16 +338,14 @@ bool Game::run(bool is_savegame)
 			map().set_scenario_player_name (curplr, player_name);
       }
 
+		// Everything prepared, send the first trigger event
+		// We lie about the sender here. Hey, what is one lie in a lifetime?
+		enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
+	}
 
+	load_graphics(loader_ui);
 
-      // Everything prepared, send the first trigger event
-      // We lie about the sender here. Hey, what is one lie in a lifetime?
-      enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
-   }
-
-   load_graphics();
-
-   g_sound_handler.change_music("ingame", 1000, 0);
+	g_sound_handler.change_music("ingame", 1000, 0);
 
 	ipl->run();
 
@@ -383,7 +408,7 @@ void Game::think(void)
 		cmdqueue.run_queue(frametime, get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
-        
+
 		// check if autosave is needed, but only if that is not a network game
 		if (NULL == m_netgame)
 			m_savehandler.think(this, m_realtime);

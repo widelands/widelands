@@ -26,6 +26,7 @@
 #include "world.h"
 #include "error.h"
 #include "editor.h"
+#include "ui_progresswindow.h"
 
 #include "ui_window.h"
 #include "ui_textarea.h"
@@ -159,6 +160,8 @@ void Main_Menu_New_Map::button_clicked(int n) {
 void Main_Menu_New_Map::clicked_create_map() {
 	Map & map = m_parent->egbase().map();
 	Editor & editor = m_parent->editor();
+	UI::ProgressWindow loader;
+
 	// Clean all the stuff up, so we can load
 	editor.cleanup_for_load(true, false);
 
@@ -168,7 +171,7 @@ void Main_Menu_New_Map::clicked_create_map() {
 	map.get_world()->postload(&editor);
 
 	editor.postload     ();
-	editor.load_graphics();
+	editor.load_graphics(loader);
 
 	map.recalc_whole_map();
 

@@ -24,6 +24,7 @@
 #include "player.h"
 #include "world.h"
 #include "wlapplication.h"
+#include "ui_progresswindow.h"
 
 /*
 ===========
@@ -55,6 +56,7 @@ and go for it
 */
 void Editor::run() {
 
+	UI::ProgressWindow loader_ui;
    // set empty map, defaults
    Map* m=new Map;
    m->create_empty_map();
@@ -69,7 +71,7 @@ void Editor::run() {
    set_iabase(&eia);
 
    postload();
-   load_graphics();
+	load_graphics(loader_ui);
 
 	eia.start();
 	eia.run();

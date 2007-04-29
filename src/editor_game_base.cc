@@ -27,6 +27,7 @@
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "instances.h"
 #include "interactive_base.h"
 #include "mapregion.h"
@@ -35,6 +36,8 @@
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
+
+#include "ui_progresswindow.h"
 
 #include <set>
 
@@ -556,8 +559,8 @@ If the graphics system is to be replaced at runtime, the function must be
 called after that has happened.
 ===============
 */
-void Editor_Game_Base::load_graphics()
-{
+void Editor_Game_Base::load_graphics(const UI::ProgressWindow & loader_ui) {
+	loader_ui.step(_("Loading world data"));
 	m_map->load_graphics(); // especially loads world data
 
 	const std::vector<Tribe_Descr*>::const_iterator tribes_end = m_tribes.end();
@@ -565,11 +568,14 @@ void Editor_Game_Base::load_graphics()
 		(std::vector<Tribe_Descr*>::const_iterator it = m_tribes.begin();
 		 it != tribes_end;
 		 ++it)
+	{
+		loader_ui.stepf(_("Loading tribe: %s"), (*it)->name().c_str());
 		(*it)->load_graphics();
+	}
 
 	// TODO: load player graphics? (maybe)
 
-	g_gr->load_animations();
+	g_gr->load_animations(loader_ui);
 }
 
 /*

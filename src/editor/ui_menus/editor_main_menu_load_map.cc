@@ -40,6 +40,7 @@
 #include "overlay_manager.h"
 #include "world.h"
 #include "map_loader.h"
+#include "ui_progresswindow.h"
 
 /*
 ===============
@@ -275,10 +276,12 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
 		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
+		UI::ProgressWindow loader_ui;
 //      try {
          //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
          ml->preload_map(true);
 
+		 loader_ui.step (_("Loading world data"));
 		ml->load_world();
 		ml->load_map_complete(&m_parent->editor(), true);
 /*      }  catch(std::exception& exe) {
@@ -296,7 +299,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
       }
 */
 		m_parent->editor().postload();
-		m_parent->editor().load_graphics();
+		m_parent->editor().load_graphics(loader_ui);
 
       // Now update all the visualisations
       // Player positions
