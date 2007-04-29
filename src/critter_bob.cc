@@ -85,12 +85,11 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 	for(uint idx = 0; ; ++idx) {
 		try
 		{
-			char buf[32];
-			const char* string;
+			char buffer[32];
 			std::vector<std::string> cmd;
 
-			snprintf(buf, sizeof(buf), "%i", idx);
-			string = sprogram->get_string(buf, 0);
+			snprintf(buffer, sizeof(buffer), "%i", idx);
+			const char * const string = sprogram->get_string(buffer, 0);
 			if (!string)
 				break;
 

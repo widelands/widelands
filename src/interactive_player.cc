@@ -277,16 +277,14 @@ void Interactive_Player::think()
 {
    Interactive_Base::think();
 
-   // Draw speed display
-   int speed = m_game->get_speed();
-   char buf[32] = "";
+	{//  draw speed display
+		char buffer[32];
+		if (uint speed = m_game->get_speed())
+			snprintf(buffer, sizeof(buffer), _("%ux").c_str(), speed);
+		else strncpy (buffer, _("PAUSE").c_str(), sizeof(buffer));
+		m_label_speed->set_text(buffer);
+	}
 
-   if (!speed)
-	   strcpy(buf, _("PAUSE").c_str());
-   else if (speed > 1)
-      snprintf(buf, sizeof(buf), "%ix", speed);
-
-   m_label_speed->set_text(buf);
 
    // Reset our statistics counting
    if(m_game->get_gametime()-m_last_stats_update > STATISTICS_SAMPLE_TIME)

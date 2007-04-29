@@ -66,9 +66,9 @@ throw (_wexception)
 				map.set_starting_pos
 					(i, Coords(s->get_int(buf_x), s->get_int(buf_y)));
 			} else {
-				char buf[64];
-				snprintf(buf, sizeof(buf), "player_%i", i);
-				map.set_starting_pos(i, s->get_Coords(buf));
+				char buffer[64];
+				snprintf(buffer, sizeof(buffer), "player_%i", i);
+				map.set_starting_pos(i, s->get_Coords(buffer));
 			}
       }
       return;
@@ -96,9 +96,9 @@ throw (_wexception)
 	const Map & map = *egbase->get_map();
 	const ushort nrplayers = map.get_nrplayers();
 	for (ushort i = 1; i <= nrplayers; ++i) {
-		char buf[64];
-		snprintf(buf, sizeof(buf), "player_%i", i);
-		s->set_Coords(buf, map.get_starting_pos(i));
+		char buffer[64];
+		snprintf(buffer, sizeof(buffer), "player_%i", i);
+		s->set_Coords(buffer, map.get_starting_pos(i));
    }
 
    prof.write("player_position", false, fs );

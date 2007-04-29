@@ -229,10 +229,10 @@ void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, b
    std::string consumeAmount = "0";
    std::string groupId = "";
 
-   if (consumed) {
-      char buf[5];
-      snprintf(buf, sizeof(buf), "%i", wareCondition->amount);
-      consumeAmount = buf;
+	if (consumed) {
+		char buffer[5];
+		snprintf(buffer, sizeof(buffer), "%i", wareCondition->amount);
+		consumeAmount = buffer;
    }
 
    if (wareCondition->isGrouped) {

@@ -70,15 +70,14 @@ void FileWrite::Data(const void *buf, const size_t size, const Pos pos) {
 
 void FileWrite::Printf(const char *fmt, ...)
 {
-	char buf[2048];
+	char buffer[2048];
 	va_list va;
-	int i;
 
 	va_start(va, fmt);
-	i = vsnprintf(buf, sizeof(buf), fmt, va);
+	const int i = vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
 	if (i < 0) throw Buffer_Overflow();
 
-	Data(buf, i);
+	Data(buffer, i);
 }

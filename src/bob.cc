@@ -65,14 +65,16 @@ Parse additional information from the config file
 */
 void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
+   char buffer [256];
 	char picname[256];
-   char buf[256];
 
    Section* global = prof->get_safe_section("idle");
 
    // Global options
-	snprintf(buf, sizeof(buf), "%s_00.png", m_name.c_str());
-	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
+	snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
+	snprintf
+		(picname, sizeof(picname),
+		 "%s/%s", directory, global->get_string("picture", buffer));
    m_picture = picname;
 
    m_default_encodedata.parse(global);

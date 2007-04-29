@@ -573,10 +573,10 @@ const char * Section::get_next_Coords
  */
 void Section::set_int(const char *name, int value, bool duplicate)
 {
-	char buf[32];
+	char buffer[32];
 
-	snprintf(buf, sizeof(buf), "%i", value);
-	create_val(name, buf, duplicate)->mark_used();
+	snprintf(buffer, sizeof(buffer), "%i", value);
+	create_val(name, buffer, duplicate)->mark_used();
 }
 
 /** Section::set_float(const char *name, float value, bool duplicate = false)
@@ -587,10 +587,10 @@ void Section::set_int(const char *name, int value, bool duplicate)
  */
 void Section::set_float(const char *name, float value, bool duplicate)
 {
-	char buf[64];
+	char buffer[64];
 
-	snprintf(buf, sizeof(buf), "%f", value);
-	create_val(name, buf, duplicate)->mark_used();
+	snprintf(buffer, sizeof(buffer), "%f", value);
+	create_val(name, buffer, duplicate)->mark_used();
 }
 
 /** Section::set_bool(const char *name, bool value, bool duplicate = false)
@@ -627,10 +627,10 @@ void Section::set_string(const char *name, const char *string, bool duplicate)
 void Section::set_Coords
 (const char * const name, const Coords value, const bool duplicate)
 {
-	char buf[64];
+	char buffer[64];
 
-	snprintf(buf, sizeof(buf), "%i %i", value.x, value.y);
-	create_val(name, buf, duplicate)->mark_used();
+	snprintf(buffer, sizeof(buffer), "%i %i", value.x, value.y);
+	create_val(name, buffer, duplicate)->mark_used();
 }
 
 
@@ -681,17 +681,15 @@ void Profile::error(const char *fmt, ...) const
 	if (m_error_level == err_ignore)
 		return;
 
-	char buf[256];
+	char buffer[256];
 	va_list va;
 
 	va_start(va, fmt);
-	vsnprintf(buf, sizeof(buf), fmt, va);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (m_error_level == err_log)
-		log("%s\n", buf);
-	else
-		throw wexception("%s", buf);
+	if (m_error_level == err_log) log("%s\n", buffer);
+	else throw wexception("%s", buffer);
 }
 
 /** Profile::check_used()
@@ -849,9 +847,9 @@ void Profile::read
 		// line can become quite big. But this should be enough
 		//  Previously this was allocated with new and then simply leaked.
 		//  We (Valgrind and I) did not like that.
-		char buf[1024*30];
-		const char * const buf_end = buf + sizeof(buf);
-		char * line = buf;
+		char buffer[1024 * 30];
+		const char * const buf_end = buffer + sizeof(buffer);
+		char * line = buffer;
 		char *p = 0;
 		uint linenr = 0;
 		Section *s = 0;

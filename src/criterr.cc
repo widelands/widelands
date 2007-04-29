@@ -116,19 +116,19 @@ void critical_error(const char* str, ...)
 {
 	static int in_criterr = 0;
 
-	char buf[1024];
+	char buffer[1024];
 	va_list va;
 
 	va_start(va, str);
-	vsnprintf(buf, sizeof(buf), str, va);
+	vsnprintf(buffer, sizeof(buffer), str, va);
 	va_end(va);
 
-	log("Critical Error%s: %s\n", in_criterr ? " (recursive)" : "", buf);
+	log("Critical Error%s: %s\n", in_criterr ? " (recursive)" : "", buffer);
 
 	if (in_criterr || !g_gr)
 	{
 #ifdef WIN32
-		MessageBox(NULL, buf, _("Widelands").c_str(), MB_ICONINFORMATION);
+		MessageBox(NULL, buffer, _("Widelands").c_str(), MB_ICONINFORMATION);
 #endif
 
 		if (in_criterr <= 1)
@@ -147,7 +147,7 @@ void critical_error(const char* str, ...)
 	else
 	{
 		in_criterr++;
-		Critical_Error ce(buf);
+		Critical_Error ce(buffer);
 		ce.run();
 		in_criterr--;
 	}

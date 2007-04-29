@@ -2113,13 +2113,13 @@ Transfer::tlog
 */
 void Transfer::tlog(const char* fmt, ...)
 {
-	char buf[1024];
+	char buffer[1024];
 	va_list va;
 	char id;
 	uint serial;
 
 	va_start(va, fmt);
-	vsnprintf(buf, sizeof(buf), fmt, va);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
 	if (m_worker) {
@@ -2136,7 +2136,7 @@ void Transfer::tlog(const char* fmt, ...)
 		serial = 0;
 	}
 
-	log("T%c(%u): %s", id, serial, buf);
+	log("T%c(%u): %s", id, serial, buffer);
 }
 
 /*

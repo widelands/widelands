@@ -223,9 +223,9 @@ void WatchWindow::close_cur_view() {
 void WatchWindow::toggle_buttons() {
 	for (uint i=0;i<NUM_VIEWS;i++) {
 		if (i<m_views.size()) {
-			char buf[32];
-			snprintf(buf, sizeof(buf), "%i", i+1);
-			m_view_btns[i]->set_title(buf);
+			char buffer[32];
+			snprintf(buffer, sizeof(buffer), "%i", i + 1);
+			m_view_btns[i]->set_title(buffer);
 			m_view_btns[i]->set_enabled(true);
 		}
 		else {

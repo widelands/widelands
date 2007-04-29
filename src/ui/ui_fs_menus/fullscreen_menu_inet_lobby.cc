@@ -149,9 +149,7 @@ void Fullscreen_Menu_InetLobby::clicked_back() {
  * server (as response to a packet mostly)
  */
 void Fullscreen_Menu_InetLobby::server_message(std::string str) {
-   std::string buf = str;
-
-   m_chatarea->set_text( (m_chatarea->get_text() + buf).c_str() );
+   m_chatarea->set_text((m_chatarea->get_text() + str).c_str());
 }
 
 /*

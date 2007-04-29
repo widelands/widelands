@@ -112,14 +112,16 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    // Draw xticks
    float sub = xline_length / how_many_ticks[m_time];
    float posx = get_inner_w()-space_at_right;
-   char buf[200];
+   char buffer[200];
    for(int i = 0; i <= how_many_ticks[m_time]; i++) {
       dst->draw_line((int)posx, get_inner_h()-space_at_bottom, (int) posx, get_inner_h()-space_at_bottom+3, LINE_COLOR);
 
-      sprintf(buf, "%i", max_x[m_time]/how_many_ticks[m_time] * i);
+		snprintf
+			(buffer, sizeof(buffer),
+			 "%i", max_x[m_time] / how_many_ticks[m_time] * i);
 
       int w, h;
-      g_fh->get_size(UI_FONT_SMALL, buf, &w, &h, 0);
+      g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
 		g_fh->draw_string
 			(*dst,
 			 UI_FONT_SMALL,
@@ -127,7 +129,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 			 Point
 			 (static_cast<const int>(posx - w / 2),
 			  get_inner_h() - space_at_bottom + 4),
-			 buf);
+			 buffer);
       posx -= sub;
    }
 
@@ -167,15 +169,15 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    }
 
    // Print the maximal value
-   sprintf(buf, "%i", max);
+   sprintf(buffer, "%i", max);
    int w, h;
-   g_fh->get_size(UI_FONT_SMALL, buf, &w, &h, 0);
+   g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
    g_fh->draw_string
 		(*dst,
 		 UI_FONT_SMALL,
 		 RGBColor(120,255,0), RGBColor(255,255,255),
 		 Point(get_inner_w() - space_at_right - w - 2, spacing),
-		 buf);
+		 buffer);
 
    // Now, plot the pixels
    sub = xline_length / ((float)time_in_ms[m_time] / (float)m_sample_rate);

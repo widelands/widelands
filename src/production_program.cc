@@ -57,15 +57,13 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
 	for(uint idx = 0; ; ++idx) {
-		char buf[32];
-		const char* string;
-		std::vector<std::string> cmd;
-
-		snprintf(buf, sizeof(buf), "%i", idx);
-		string = sprogram->get_string(buf, 0);
+		char buffer[32];
+		snprintf(buffer, sizeof(buffer), "%i", idx);
+		const char * const string = sprogram->get_string(buffer, 0);
 		if (!string)
 			break;
 
+		std::vector<std::string> cmd;
 		split_string(string, &cmd, " \t\r\n");
 		if (!cmd.size())
 			continue;

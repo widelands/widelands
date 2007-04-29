@@ -99,15 +99,16 @@ void Progress_Bar::draw(RenderTarget* dst)
 	}
 
 	// Print the state in percent
-	char buf[30];
+	char buffer[30];
 
-	snprintf(buf, sizeof(buf), "%u%%", static_cast<const uint>(fraction * 100));
+	snprintf
+		(buffer, sizeof(buffer), "%u%%", static_cast<const uint>(fraction * 100));
 
 	g_fh->draw_string
 		(*dst,
 		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 		 Point(get_w() / 2, get_h() / 2),
-		 buf,
+		 buffer,
 		 Align_Center);
 }
 };

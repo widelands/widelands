@@ -166,13 +166,13 @@ Create the window
 MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object* obj)
 	: UI::Window(parent, 0, 0, 100, 100, "")
 {
-	char buf[128];
+	char buffer[128];
 
 	m_object = obj;
 
 	m_serial = obj->get_serial();
-	snprintf(buf, sizeof(buf), "%u", m_serial);
-	set_title(buf);
+	snprintf(buffer, sizeof(buffer), "%u", m_serial);
+	set_title(buffer);
 
 	m_tabs = new UI::Tab_Panel(this, 0, 0, 1);
 
@@ -204,10 +204,10 @@ void MapObjectDebugWindow::think()
 		}
 		UI::Window::think();
    } else {
-		char buf[128];
+		char buffer[128];
 
-		snprintf(buf, sizeof(buf), "DEAD: %u", m_serial);
-		set_title(buf);
+		snprintf(buffer, sizeof(buffer), "DEAD: %u", m_serial);
+		set_title(buffer);
 	}
 
 }
@@ -314,15 +314,18 @@ This is done every frame in order to have up to date information all the time.
 void FieldDebugWindow::think()
 {
 	std::string str;
-	char buf[512];
+	char buffer[512];
 
 	UI::Window::think();
 
 	// Select information about the field itself
 	str = "";
-	snprintf(buf, sizeof(buf), "%i, %i - %s %i\n",
-		 m_coords.x, m_coords.y, _("height:").c_str(), m_coords.field->get_height());
-	str += buf;
+	snprintf
+		(buffer, sizeof(buffer),
+		 "%i, %i - %s %i\n",
+		 m_coords.x, m_coords.y,
+		 _("height:").c_str(), m_coords.field->get_height());
+	str += buffer;
 	const Map::Index i = m_coords.field - &m_map[0];
 	const Editor_Game_Base & egbase =
 		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
@@ -330,24 +333,24 @@ void FieldDebugWindow::think()
 	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
 		const Player & player = egbase.player(plnum);
 		const Player::Field & player_field = player.fields()[i];
-		snprintf(buf, sizeof(buf), "Player %u:\n", plnum);
-		str += buf;
+		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
+		str += buffer;
 		snprintf
-			(buf, sizeof(buf),
+			(buffer, sizeof(buffer),
 			 "  military influence: %u\n", player_field.military_influence);
-		str += buf;
+		str += buffer;
 		Vision vision = player_field.vision;
-		snprintf(buf, sizeof(buf), "  vision: %u\n", vision);
-		str += buf;
+		snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
+		str += buffer;
 		{
 			const Editor_Game_Base::Time time_last_surveyed =
 				player_field.time_triangle_last_surveyed[TCoords<>::D];
 			if (time_last_surveyed != Editor_Game_Base::Never()) {
 				snprintf
-					(buf, sizeof(buf),
+					(buffer, sizeof(buffer),
 					 "  D triangle last surveyed at %u: amount %u\n",
 					 time_last_surveyed, player_field.resource_amounts.d);
-				str += buf;
+				str += buffer;
 			} else str += "  D triangle never surveyed\n";
 		}
 		{
@@ -355,17 +358,17 @@ void FieldDebugWindow::think()
 				player_field.time_triangle_last_surveyed[TCoords<>::R];
 			if (time_last_surveyed != Editor_Game_Base::Never()) {
 				snprintf
-					(buf, sizeof(buf),
+					(buffer, sizeof(buffer),
 					 "  R triangle last surveyed at %u: amount %u\n",
 					 time_last_surveyed, player_field.resource_amounts.r);
-				str += buf;
+				str += buffer;
 			} else str += "  R triangle never surveyed\n";
 		}
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1:
 			snprintf
-				(buf, sizeof(buf),
+				(buffer, sizeof(buffer),
 				 "  last seen at %u:\n"
 				 "    owner: %u\n"
 				 "    immovable animation:\n%s\n"
@@ -378,11 +381,11 @@ void FieldDebugWindow::think()
 				 ->picnametempl.c_str()
 				 :
 				 "(none)");
-			str += buf;
+			str += buffer;
 			break;
 		default:
-			snprintf(buf, sizeof(buf), "  seen %u times\n", vision - 1);
-			str +=  buf;
+			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
+			str +=  buffer;
 		}
 	}
 
@@ -402,8 +405,9 @@ void FieldDebugWindow::think()
 		default: name = "unknown"; break;
 		}
 
-		snprintf(buf, sizeof(buf), "%s (%u)", name.c_str(), imm->get_serial());
-		m_ui_immovable.set_title(buf);
+		snprintf
+			(buffer, sizeof(buffer), "%s (%u)", name.c_str(), imm->get_serial());
+		m_ui_immovable.set_title(buffer);
 		m_ui_immovable.set_enabled(true);
 	} else {
 		m_ui_immovable.set_title("no immovable");
@@ -417,8 +421,10 @@ void FieldDebugWindow::think()
 
 	m_map.find_bobs(Area<FCoords>(m_coords, 0), &bobs);
 	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
-		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->name().c_str(), (*it)->get_serial());
-		m_ui_bobs.add(buf, (*it)->get_serial());
+		snprintf
+			(buffer, sizeof(buffer),
+			 "%s (%u)", (*it)->name().c_str(), (*it)->get_serial());
+		m_ui_bobs.add(buffer, (*it)->get_serial());
 	}
 }
 

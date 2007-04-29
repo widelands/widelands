@@ -1976,7 +1976,7 @@ FIXME What if a soldier have been removed and another added? This needs review.
 void TrainingSite_Window::update(void) {
 	const std::vector<Soldier*> & soldiers = get_trainingsite()->get_soldiers();
 
-	char buf[200];
+	char buffer[200];
 	if (soldiers.size() != m_table->size()) m_table->clear();
 
 	for (uint i = 0; i < soldiers.size(); ++i) {
@@ -1988,23 +1988,26 @@ void TrainingSite_Window::update(void) {
 		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
 		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
 		er->set_string(0, s.name().c_str());
-		sprintf(buf, "%i / %i", hl, mhl);
-		er->set_string(1, buf);
-		sprintf(buf, "%i / %i", al, mal);
-		er->set_string(2, buf);
-		sprintf(buf, "%i / %i", dl, mdl);
-		er->set_string(3, buf);
-		sprintf(buf, "%i / %i", el, mel);
-		er->set_string(4, buf);
-		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
-		er->set_string(5, buf);
+		snprintf(buffer, sizeof(buffer), "%i / %i", hl, mhl);
+		er->set_string(1, buffer);
+		snprintf(buffer, sizeof(buffer), "%i / %i", al, mal);
+		er->set_string(2, buffer);
+		snprintf(buffer, sizeof(buffer), "%i / %i", dl, mdl);
+		er->set_string(3, buffer);
+		snprintf(buffer, sizeof(buffer), "%i / %i", el, mel);
+		er->set_string(4, buffer);
+		snprintf
+			(buffer, sizeof(buffer),
+			 "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
+		er->set_string(5, buffer);
 	}
 	m_table->sort();
 
-	std::string str;
-	sprintf (buf, "%2d", ((TrainingSite *)get_building())->get_capacity());
-	str = (const char *) buf;
-	m_capacity->set_text (str);
+	snprintf
+		(buffer, sizeof(buffer),
+		 "%2d",
+		 dynamic_cast<const TrainingSite &>(*get_building()).get_capacity());
+	m_capacity->set_text (buffer);
 }
 
 /*

@@ -1536,8 +1536,7 @@ Parse the worker data from configuration
 */
 void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
-	const char *string;
-	char buf[256];
+	char buffer[256];
 	char fname[256];
 	Section* sglobal;
 
@@ -1548,8 +1547,8 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	m_descname = sglobal->get_string("descname", name().c_str());
 	m_helptext = sglobal->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
-	snprintf(buf, sizeof(buf), "%s_menu.png", name().c_str());
-	string = sglobal->get_string("menu_pic", buf);
+	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
+	const char * string = sglobal->get_string("menu_pic", buffer);
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);
 

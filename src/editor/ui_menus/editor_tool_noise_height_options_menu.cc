@@ -118,18 +118,18 @@ Update all textareas
 ===============
 */
 void Editor_Tool_Noise_Height_Options_Menu::update(void) {
-   char buf[200];
+   char buffer[200];
 	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
-	sprintf(buf, _("Minimum: %u").c_str(), height_interval.min);
-	m_lower_label.set_text(buf);
-	sprintf(buf, _("Maximum: %u").c_str(), height_interval.max);
-	m_upper_label.set_text(buf);
+	sprintf(buffer, _("Minimum: %u").c_str(), height_interval.min);
+	m_lower_label.set_text(buffer);
+	sprintf(buffer, _("Maximum: %u").c_str(), height_interval.max);
+	m_upper_label.set_text(buffer);
 
 	snprintf
-		(buf, sizeof(buf),
+		(buffer, sizeof(buffer),
 		 _("Set value: %u").c_str(),
 		 m_noise_tool.set_tool().get_interval().min);
-	m_set_label.set_text(buf);
+	m_set_label.set_text(buffer);
 
    select_correct_tool();
 

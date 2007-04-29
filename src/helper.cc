@@ -68,15 +68,15 @@ void remove_spaces(std::string* in) {
  */
 void log(const char *fmt, ...)
 {
-	char buf[2048];
+	char buffer[2048];
 	va_list va;
 
 	va_start(va, fmt);
-	vsnprintf(buf, sizeof(buf), fmt, va);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
 	//TODO: use iostreams instead of vprintf because other parts of Widelands use iostreams
-	cout << buf;
+	cout << buffer;
 	cout.flush();
 }
 
@@ -93,12 +93,12 @@ class _wexception implementation
 _wexception::_wexception(const char* file, uint line, const char *fmt, ...) throw()
 {
 	va_list va;
-	char buf[256];
+	char buffer[256];
 	va_start(va, fmt);
-	vsnprintf(buf, sizeof(buf), fmt, va);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 	std::ostringstream ost;
-	ost << file << ':' << line << ' ' << buf;
+	ost << file << ':' << line << ' ' << buffer;
 	m_what = ost.str();
 }
 

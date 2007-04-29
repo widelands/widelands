@@ -477,14 +477,13 @@ Prints a log message prepended by the object's serial number.
 void Map_Object::molog(const char* fmt, ...) const
 {
 	va_list va;
-	char buf[2048];
+	char buffer[2048];
 
 	va_start(va, fmt);
-	vsnprintf(buf, sizeof(buf), fmt, va);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (m_logsink)
-		m_logsink->log(buf);
+	if (m_logsink) m_logsink->log(buffer);
 
-	log("MO(%u): %s", m_serial, buf);
+	log("MO(%u): %s", m_serial, buffer);
 }

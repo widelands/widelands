@@ -202,14 +202,14 @@ void WaresDisplay::draw_ware
 		(Rect(pos + Point(0, WARE_MENU_PIC_H), WARE_MENU_PIC_W, 8),
 		 RGBColor(0, 0, 0));
 
-	char buf[32];
-	snprintf(buf, sizeof(buf), "%i", stock);
+	char buffer[32];
+	snprintf(buffer, sizeof(buffer), "%i", stock);
 
 	g_fh->draw_string
 		(dst,
 		 UI_FONT_ULTRASMALL,
 		 UI_FONT_SMALL_CLR,
 		 p + Point(WARE_MENU_PIC_W, WARE_MENU_PIC_H - 4),
-		 buf,
+		 buffer,
 		 Align_Right);
 }

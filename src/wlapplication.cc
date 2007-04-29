@@ -576,17 +576,12 @@ void WLApplication::handle_input(const InputCallback *cb)
 			}
 			if (ev.key.keysym.sym == SDLK_F11) // take screenshot
 			{
-				if (ev.type == SDL_KEYDOWN) {
-					char buf[256];
-					int nr;
-
-					for(nr = 0; nr < 10000; nr++) {
-						snprintf(buf, sizeof(buf), "shot%04i.bmp", nr);
-						if (g_fs->FileExists(buf))
-							continue;
-						g_gr->screenshot(*buf);
+				if (ev.type == SDL_KEYDOWN) for (uint nr = 0; nr < 10000; ++nr) {
+					char buffer[256];
+					snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr);
+					if (g_fs->FileExists(buffer)) continue;
+					g_gr->screenshot(*buffer);
 						break;
-					}
 				}
 				break;
 			}
@@ -1004,16 +999,16 @@ void WLApplication::parse_command_line() throw(Parameter_error)
  */
 void WLApplication::show_usage()
 {
-	char buf[80];
-	snprintf(buf, sizeof(buf), _("This is Widelands-%s").c_str(), BUILD_ID);
-	cout << buf << endl << endl;
+	char buffer[80];
+	snprintf(buffer, sizeof(buffer), _("This is Widelands-%s").c_str(), BUILD_ID);
+	cout << buffer << endl << endl;
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>")
 		<< endl << endl;
 	cout << _("Options:") << endl << endl;
-	cout << _(" --<config-entry-name>=value overwrites any config file setting\n\n" 
-			  " --record=FILENAME    Record all events to the given filename for later playback\n" 
-			  " --playback=FILENAME  Playback given filename (see --record)\n\n" 
-			  " --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n") 
+	cout << _(" --<config-entry-name>=value overwrites any config file setting\n\n"
+			  " --record=FILENAME    Record all events to the given filename for later playback\n"
+			  " --playback=FILENAME  Playback given filename (see --record)\n\n"
+			  " --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n")
 			  << endl;
 #ifdef USE_GGZ
 	cout << _(" --ggz                Starts game as GGZ Gaming Zone client (don't use!)")

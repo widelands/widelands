@@ -47,9 +47,9 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	WLApplication::get()->init_graphics(MENU_XRES, MENU_YRES, s->get_int("depth", 16), s->get_bool("fullscreen", false));
 
 	// Load background graphics
-	char buf[256];
-	snprintf(buf, sizeof(buf), "pics/%s", bgpic);
-	m_pic_background = g_gr->get_picture( PicMod_Menu,  buf );
+	char buffer[256];
+	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
+	m_pic_background = g_gr->get_picture(PicMod_Menu, buffer);
 }
 
 

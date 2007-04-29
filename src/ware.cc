@@ -63,27 +63,27 @@ Parse the item data from the given profile.
 */
 void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 {
-	char buf[256];
+	char buffer[256];
 	const char* string;
 	Section* global = prof->get_safe_section("global");
 
 	m_descname = global->get_string("descname", name().c_str());
 	m_helptext = global->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
-	snprintf(buf, sizeof(buf), "%s_menu.png", name().c_str());
-	string = global->get_string("menu_pic", buf);
-	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
-	m_menu_pic_fname = buf;
+	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
+	string = global->get_string("menu_pic", buffer);
+	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
+	m_menu_pic_fname = buffer;
 
-	snprintf(buf, sizeof(buf), "%s_queue_full.png", name().c_str());
-	string = global->get_string("queue_full_pic", buf);
-	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
-	m_pic_queue_full_fname = buf;
+	snprintf(buffer, sizeof(buffer), "%s_queue_full.png", name().c_str());
+	string = global->get_string("queue_full_pic", buffer);
+	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
+	m_pic_queue_full_fname = buffer;
 
-	snprintf(buf, sizeof(buf), "%s_queue_empty.png", name().c_str());
-	string = global->get_string("queue_empty_pic", buf);
-	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
-	m_pic_queue_empty_fname = buf;
+	snprintf(buffer, sizeof(buffer), "%s_queue_empty.png", name().c_str());
+	string = global->get_string("queue_empty_pic", buffer);
+	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
+	m_pic_queue_empty_fname = buffer;
 
 	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle")));
 }

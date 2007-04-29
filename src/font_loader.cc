@@ -72,10 +72,10 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
 * Ohterwise font will be loaded with open_font and chached.
 */
 TTF_Font* Font_Loader::get_font(std::string name, int size) {
-	char buf[5];
-	snprintf(buf,sizeof(buf),"%i",size);
+	char buffer[5];
+	snprintf(buffer, sizeof(buffer), "%i", size);
 
-	std::string key_name = name+"-"+buf;
+	const std::string key_name = name + '-' + buffer;
 	const std::map<std::string,TTF_Font*>::iterator it = m_font_table.find(key_name);
 	if(it != m_font_table.end()) {
 		TTF_SetFontStyle(it->second,TTF_STYLE_BOLD);
