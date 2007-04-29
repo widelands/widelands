@@ -29,8 +29,7 @@
 /**
  * Encapsulates i18n-handling
  */
-class i18n {
-public:
+struct i18n {
 	static const std::string translate(const std::string);
 	static void grab_textdomain(const std::string);
 	static void release_textdomain();
