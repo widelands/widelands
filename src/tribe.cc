@@ -39,8 +39,8 @@ using namespace std;
 //
 // Tribe_Descr class
 //
-Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & world)
-: m_name(tribename), m_world(world)
+Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
+: m_name(tribename), m_world(the_world)
 {
 	try
 	{
