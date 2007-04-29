@@ -59,8 +59,7 @@ struct AnimationData {
 * Note that animation IDs are counted from 1, while the m_animations array is
 * counted from 0.
 */
-class AnimationManager {
-public:
+struct AnimationManager {
 	AnimationManager();
 	~AnimationManager();
 
@@ -83,8 +82,7 @@ private:
 * possible direction
 */
 class Bob_Descr;
-class DirAnimations {
-public:
+struct DirAnimations {
 	DirAnimations
 		(const uint dir1 = 0,
 		 const uint dir2 = 0,
