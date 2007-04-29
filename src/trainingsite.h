@@ -121,9 +121,7 @@ class TrainingSite:public ProductionSite {
 	uint get_pri(enum tAttribute atr);
 	void add_pri(enum tAttribute atr);
 	void sub_pri(enum tAttribute atr);
-	uint get_capacity() {
-		return m_capacity;
-	}
+	uint get_capacity() const throw () {return m_capacity;}
 	virtual void soldier_capacity_up() {
 		change_soldier_capacity(1);
 	}
