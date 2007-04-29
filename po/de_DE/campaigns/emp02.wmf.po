@@ -1,13 +1,13 @@
-# Widelands campaigns/emp02.wmf.po
+# Widelands po/de_DE/campaigns/emp02.wmf.po
 # Copyright (C) 2005-2007 Widelands Development Team
 # German Translation <widelands-public@lists.sourceforge.net>, 2007.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2226\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-04-23 22:30+0200\n"
+"Project-Id-Version: Widelands svn2248\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-04-29 21:49+0000\n"
+"PO-Revision-Date: 2007-04-29 23:32+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
@@ -37,7 +38,7 @@ msgstr "Tagebuch von Lutius"
 
 #: ../../../campaigns/emp02.wmf/event:13
 msgid "Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is allready leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
-msgstr "Endlich!<br>Diese Insel scheint für uns gemacht zu sein, sie ist ein Geschenk der Götter an meine Leute und mich.<br>Bis jetzt haben wir nur einen kleinen Teil der Insel erkundet, doch schon alleine dieser Teil lässt mich das Sonnenlicht in meinem Herzen spüren und schenkt mir das Gefühl, einen unbezahlbaren Schatz, ein Land wie das Paradies, gefunden zu haben.<br>Auf dieser Insel werden wir unser neues Leben beginnen, unseren Außenposten für unser Exil errichten, das vielleicht schon bald ein wunderschönes Zuhause für jeden von uns werden kann."
+msgstr "Endlich!<br>Diese Insel scheint für uns gemacht zu sein, sie ist ein Geschenk der Götter an meine Leute und mich.<br>Bis jetzt haben wir nur einen kleinen Teil der Insel erkundet, doch schon alleine dieser Teil lässt mich das Sonnenlicht in meinem Herzen spüren und schenkt mir das Gefühl, einen unbezahlbaren Schatz, ein Land wie das Paradies gefunden zu haben.<br>Auf dieser Insel werden wir unser neues Leben beginnen, unseren Außenposten für unser Exil errichten, das vielleicht schon bald ein wunderschönes Zuhause für jeden von uns werden kann."
 
 #: ../../../campaigns/emp02.wmf/event:15
 msgid "A new islands"
@@ -57,7 +58,7 @@ msgstr "Der grüne Wald"
 
 #: ../../../campaigns/emp02.wmf/event:90
 msgid "Later, I walked down to the rocks in the south and looked for a place where we can build a quarry, to get some hard stone for our bigger buildings.<br>Again I feel like i'm in paradise when I noticed that some marble-like stones where among those rocks. Seems as if we can start a life in luxury in the not so distant future.<br><br>"
-msgstr "Später ging ich hinunter zu den Felsen im Süden und suchte nach einem guten Platz, wo wir einen Steinbruch errichten können, um dieses massive Gesteinabzubauen, welches wir sicherlich schon bald für unsere größeren Gebäude brauchen werden.<br>Und wieder fühlte ich mich wie im Paradies, als ich feststellte, dass manche der Steine Marmor ähneln. Es scheint so, als ob ob wir hier bald ein Leben im Luxus führen könnten.<br><br>"
+msgstr "Später ging ich hinunter zu den Felsen im Süden und suchte nach einem guten Platz, wo wir einen Steinbruch errichten können, um dieses massive Gestein abzubauen, welches wir sicherlich schon bald für unsere größeren Gebäude brauchen werden.<br>Und wieder fühlte ich mich wie im Paradies, als ich feststellte, dass manche der Steine Marmor ähneln. Es scheint so, als ob wir hier bald ein Leben im Luxus führen könnten.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:91
 msgid "* Build a quarry to the south of your headquarters."
@@ -85,7 +86,7 @@ msgstr "Steine für die Kolonie"
 
 #: ../../../campaigns/emp02.wmf/event:480
 msgid "Saledus looks unhappy"
-msgstr "Saledus guckt unglücklich"
+msgstr "Saledus sieht unglücklich aus"
 
 #: ../../../campaigns/emp02.wmf/event:482
 msgid "Hey Lutius,<br>I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart.<br>You might wonder about the cause. Well, I will tell you:<br>As I walked down to the southern strands of this island I found some parts of another ship. I don't know whether these parts are everything left of that ship, but in any case these parts don't seem to be old. Perhaps the owners of that ship came in the same storm which brought us to Malac' Mor and were also brought to this island.<br>However, I beg you to be cautious and to build some barracks or sentrys around our colony.<br><br>"
@@ -118,11 +119,11 @@ msgstr "Das Marmor der Berge"
 
 #: ../../../campaigns/emp02.wmf/event:615
 msgid "By the Gods, that's great, that's an unbelievable present. There are two more mountains and it seems as if one has a large amount of coal and the other an amount of iron. Now we can start living like in Fremil. We should directly start to build mines, burners, smelting works, carpenter's shops and smithworks. But for all these bigger buildings we need better and more beautyful building-materials. Let's build a stonemason, who cuts columns, out of our marble, for us. <br><br>"
-msgstr "Bei den Göttern, das ist großartig, das ist ein unglaubliches Geschenk. Dort sind zwei weitere Berge und es scheint beinahe so, als ob einer eine größere Menge Steinkohle verbirgt und der andere einige Eisenadern hat. Nun können wir wirklich ein Leben wie in Fremil führen. Wir sollten sofort anfangen, Minen, eine Köhlerei, einen Hochofen, Schmieden und einen Schreiner zu bauen. Allerdings brauchen wir für diese größeren Gebäude bessere und schönere Baumaterialien. Lass uns einen Steinmetz beauftragen, der uns ein paar wunderschöne Säulen aus Marmor schlägt.<br><br>"
+msgstr "Bei den Göttern, das ist großartig, das ist ein unglaubliches Geschenk! Dort sind zwei weitere Berge und es scheint beinahe so, als ob einer eine größere Menge Steinkohle verbirgt und der andere einige Eisenadern hat. Nun können wir wirklich ein Leben wie in Fremil führen. Wir sollten sofort anfangen, Minen, eine Köhlerei, einen Hochofen, Schmieden und einen Schreiner zu bauen. Allerdings brauchen wir für diese größeren Gebäude bessere und schönere Baumaterialien. Lass uns einen Steinmetz beauftragen, der uns ein paar wunderschöne Säulen aus Marmor schlägt.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:616
 msgid "* Build up a complete Mining and production infrastructure(Coalmine, Oremine, Carpenter, Weaponsmith, Armoursmith, Smelter, Burner) and a Stonemason."
-msgstr "* Baue eine complete Bergbau- und Produktionsinfrastruktur auf: Kohlen- und Eisenmine, Köhlerei und Hochofen, Schreiner, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
+msgstr "* Baue eine komplette Bergbau- und Produktionsinfrastruktur auf: Kohlen- und Eisenmine, Köhlerei und Hochofen, Schreiner, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
 
 #: ../../../campaigns/emp02.wmf/event:618
 msgid "Further mountains"
@@ -130,11 +131,11 @@ msgstr "Weitere Berge"
 
 #: ../../../campaigns/emp02.wmf/event:728
 msgid "Amalea comes in..."
-msgstr "Amalea kommt herein"
+msgstr "Amalea kommt herein..."
 
 #: ../../../campaigns/emp02.wmf/event:730
 msgid "Hi Lutius,<br>I hope you forgive my criticism, but it seems to me as if you forgot something. It's nice, and of course a good idea, to build up mines, which will give us a more luxury life, but the people working in the mines are unhappy with the current situation, they have to do hard work and have no time for making their own food.<br>What do you think about helping them out? Let's build up a tavern, which can produce some nice food for our miners, and a brewery and a vineyard, which can produce some good drinks.<br>Of course this will mean we need more resources for this food. I suggest you build a fisher, a farm, a mill and a baker. A hunter, a piggery, a vineyard and a well would also be needed.<br>Don't understand me wrong, but the miners need good food and drinks to have enough power for their hard work."
-msgstr "Hallo, Lutius,<br>ich hoffe, du vergibst mir meine Kritik, aber ich befürchte, dass du etwas vergessen hast. Es ist schön und natürlich eine gute Idee, Minen aufzubauen, die uns ein luxuriöseres Leben ermöglichen werden. Doch die Leute, die in den Minen arbeiten, sind unglücklich mit der derzeitigen Versorgung. Sie müssen hart arbeiten und haben kaum Zeit ihr eigenes Essen zuzubereiten.<br>Sollten wir ihnen nicht etwas aushelfen? <br>Lutius, lass uns eine Taverne errichten, die ein paar leckere Snacks und Rationen für unsere Bergarbeiter herstellt, sowie eine Brauerei und eine Winzerei, die Bier und Wein für unsere Bergarbeiter herstellen.<br>Natürlich werden wir mehr Rohstoffe für das ganze Essen brauchen. Ich schlage daher vor, einen Fischer, einen Bauernhof, eine Mühle und einen Bäcker zu errichten. Ein Jäger, eine Schweinefarm, ein Winzer und ein Brunnen wären wohl auch von Nöten.<br>Versteh mich bitte nicht falsch, aber die Bergarbeiter brauchen nun einmal etwas ordentliches zu essen und zu trinken, um genügend Kraft für ihre harte Arbeit zu haben."
+msgstr "Hallo, Lutius,<br>ich hoffe, du vergibst mir meine Kritik, aber ich befürchte, dass du etwas vergessen hast. Es ist schön und natürlich eine gute Idee, Minen aufzubauen, die uns ein luxuriöseres Leben ermöglichen werden. Doch die Leute, die in den Minen arbeiten, sind unglücklich mit der derzeitigen Versorgung. Sie müssen hart arbeiten und haben kaum Zeit ihr eigenes Essen zuzubereiten.<br>Sollten wir ihnen nicht etwas aushelfen? <br>Lutius, lass uns eine Taverne errichten, die ein paar leckere Snacks und Rationen für unsere Bergarbeiter herstellt, sowie eine Brauerei und eine Winzerei, die Bier und Wein für unsere Bergarbeiter herstellen.<br>Natürlich werden wir mehr Rohstoffe für das ganze Essen brauchen. Ich schlage daher vor, einen Fischer, einen Bauernhof, eine Mühle und einen Bäcker zu errichten. Ein Jäger, eine Schweinefarm, ein Winzer und ein Brunnen wären wohl auch von Nöten.<br>Versteh mich bitte nicht falsch, aber die Bergarbeiter brauchen nun einmal etwas Ordentliches zu essen und zu trinken, um genügend Kraft für ihre harte Arbeit zu haben."
 
 #: ../../../campaigns/emp02.wmf/event:732
 msgid "Food for the miners"
@@ -142,7 +143,7 @@ msgstr "Essen für die Bergarbeiter"
 
 #: ../../../campaigns/emp02.wmf/event:868
 msgid "By the Gods!<br>This is absolutely awful. It seems as if we stand close to a test AND it seems as if Saledus was right with his fear concerning the shipwreck.<br>Today as I walked down to the eastern strands, I suddenly got a shock. There was one of those hated, evil, barbarian tribes with whom we had so many problems before.<br>First I was a bit naive and hoped that they are peaceful, but as soon as one of them saw me they ran towards me and started attacking me with their throwing-spears. Thanks to the Gods that I was able to hide myself and could silently go back to our colony.<br>Anyway, we MUST build up bigger military buildings, as soon as possible.<br><br>"
-msgstr "Bei den Göttern!<br>Das ist ein Schock. Es scheint beinahe so, als ob wir vor einer Prüfung stehen und Saledus mit seinen Befürchtungen bezüglich der Schiffsteile, Recht hatte.<br> Heute, als ich zu den östlichen Stränden ging, war ich wie vom Blitz getroffen. Dort war einer dieser verhassten, bösen, barbarischen Stämme, mit denen wir zuvor schon mehr als genug Ärger hatten.<br>Zuerst war ich etwas naiv und hoffte, dass sie friedlich wären, doch kaum hatten sie mich entdeckt, griffen sie mich mit ihren Wurfspeern an. Den Göttern sei dank, dass ich mich verstecken und schließlich in unsere Kolonie zurückschleichen konnte.<br>Wie auch immer, wir MÜSSEN so schnell wie möglich größere militärische Gebäude errichten.<br><br>"
+msgstr "Bei den Göttern!<br>Das ist ein Schock. Es scheint beinahe so, als ob wir vor einer Prüfung stehen und Saledus mit seinen Befürchtungen bezüglich der Schiffsteile Recht hatte.<br> Heute, als ich zu den östlichen Stränden ging, war ich wie vom Blitz getroffen. Dort war einer dieser verhassten, bösen barbarischen Stämme, mit denen wir zuvor schon mehr als genug Ärger hatten.<br>Zuerst war ich etwas naiv und hoffte, dass sie friedlich wären, doch kaum hatten sie mich entdeckt, griffen sie mich mit ihren Wurfspeeren an. Den Göttern sei Dank, dass ich mich verstecken und schließlich in unsere Kolonie zurückschleichen konnte.<br>Wie auch immer, wir MÜSSEN so schnell wie möglich größere militärische Gebäude errichten.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:869
 msgid "* Build up bigger military buildings, like an outpost, a barrier or a tower, on the eastern frontier."
@@ -154,7 +155,7 @@ msgstr "Die Barbaren"
 
 #: ../../../campaigns/emp02.wmf/event:927
 msgid "That's good. The first large military building is built up and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for a bigger fight.<br>As soon as we have enough soldiers we should attack and remove the barbarians. And than, when this island is ours again, I will build up a big fortress at the place where the barbarian headquarters stands now, to avoid new settlements of these barbarian bastards.<br><br>"
-msgstr "Das ist gut. Das erste Gebäude unseres Verteidigungswalls wurde gerade fertiggestellt und unsere Bergbau-Infrastruktur wird besser und besser. Nun sollten wir uns auf einen größeren Kampf vorbereiten.<br>Sobald wir genügend Soldaten haben, sollten wir die Barbaren angreifen und vertreiben. Sobald wir sie vertrieben haben und die Insel wieder unser ist, werde ich eine Festung an der Stelle ihres Hauptquartiers errichten; diese Demonstrationunserer Macht wird neue Besiedlungsversuche der Barbaren verhindern."
+msgstr "Das ist gut. Das erste Gebäude unseres Verteidigungswalls wurde gerade fertiggestellt und unsere Bergbau-Infrastruktur wird besser und besser. Nun sollten wir uns auf einen größeren Kampf vorbereiten.<br>Sobald wir genügend Soldaten haben, sollten wir die Barbaren angreifen und vertreiben. Sobald wir sie vertrieben haben und die Insel wieder Unser ist, werde ich eine Festung an der Stelle ihres Hauptquartiers errichten; diese Demonstration unserer Macht wird neue Besiedlungsversuche der Barbaren verhindern."
 
 #: ../../../campaigns/emp02.wmf/event:928
 msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>* Finally build up a fortress on the island-tounge (near the place, the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
@@ -166,7 +167,7 @@ msgstr "Kommando für den Angriff"
 
 #: ../../../campaigns/emp02.wmf/event:962
 msgid "Today makes me proud. We fought for our new home and rose victorious.<br>There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian, who doesn't attack us, will be put in a boat with the other peaceful ones and will be sent back to their country.<br><br>----------------------VICTORY!-----------------------"
-msgstr "Der heutige Tag macht mich Stolz. Wir kämpften für unser neues Zuhause und haben einen großen Sieg errungen.<br>Nach wie vor streunen noch ein paar Barbaren über unsere Insel, doch ich bin sicher, dass wir bald alle gefunden haben werden. Jeder Barbar, der sich uns freiwillig stellt, wird mit seinen restlichen friedlichen Brüdern in ein Boot gesteckt und in ihre Heimat zurückgebracht.<br><br>----------------------SIEG!-----------------------"
+msgstr "Der heutige Tag macht mich stolz. Wir kämpften für unser neues Zuhause und haben einen großen Sieg errungen.<br>Nach wie vor streunen noch ein paar Barbaren über unsere Insel, doch ich bin sicher, dass wir bald alle gefunden haben werden. Jeder Barbar, der sich uns freiwillig stellt, wird mit seinen restlichen friedlichen Brüdern in ein Boot gesteckt und in ihre Heimat zurückgebracht.<br><br>----------------------SIEG!-----------------------"
 
 #: ../../../campaigns/emp02.wmf/event:964
 msgid "Victory"
@@ -186,7 +187,7 @@ msgstr "Weiter"
 
 #: ../../../campaigns/emp02.wmf/event:998
 msgid "Today a pigeon landed on our island. It brought a message which is filling me with dark thoughts, fears and horror.<br>The message was adressed to me, begging me to come back to Fremil.<br>It says that the Empire is at war with the Barbarians. They were attacked from the north, from the tribe I wanted to attack before going in exile.<br>For me, it is clear what I have to do...<br><br>You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
-msgstr "Heute landete eine Taube auf unserer Insel. Sie brachte eine Nachricht, die mich mit dunklen Gedanken, Schrecken und Angst erfüllt.<br>Die an mich adressierte Nachricht enthielt eine Bitte, nach Fremil zurückzukehren.<br> Das Imperium befände sich im Krieg gegen die Barbaren, attackiert aus dem Norden von dem Stamm, den ich angreifen wollte, bevor ich ins Exil ging.<br> Für mich ist die Entscheidung klar, es gibt nur eine Möglichkeit ...<br><br> Herzlichen Glückwunsch, du hast die Mission geschafft. Wenn du möchtest, kannst du weiterspielen, ansonsten starte einfach die nächste Mission."
+msgstr "Heute landete eine Taube auf unserer Insel. Sie brachte eine Nachricht, die mich mit dunklen Gedanken, Schrecken und Angst erfüllt.<br>Die an mich adressierte Nachricht enthielt eine Bitte, nach Fremil zurückzukehren.<br> Das Imperium befände sich im Krieg gegen die Barbaren, attackiert aus dem Norden von dem Stamm, den ich angreifen wollte, bevor ich ins Exil ging.<br>Für mich ist die Entscheidung klar, es gibt nur eine Möglichkeit...<br><br> Herzlichen Glückwunsch, du hast die Mission geschafft. Wenn du möchtest, kannst du weiterspielen, ansonsten starte einfach die nächste Mission."
 
 #: ../../../campaigns/emp02.wmf/event:1000
 msgid "A Message"
@@ -198,7 +199,7 @@ msgstr "Amalea lächelt"
 
 #: ../../../campaigns/emp02.wmf/event:1018
 msgid "Hey my friend,<br>just visited our new tavern 'At the palms'. The beer, they have got, is really tasty, you really should take a drink there, too.<br>Nice to see, that we get a warmer and more familiar environment on our island. <br>Thank you Lutius."
-msgstr "Hallo, mein Freund,<br>ich war gerade in unserer neuen Taverne 'Bei den Palmen'. Das Bier, das die dort ausschenken, ist hervorragend. Du solltest dort auch mal hingehen und dich einen Abend lang einfach nur entspannen. <br>Ich finde es schön, dass wir hier ein immer behaglicheres Umfeld bekommen - es ist fast wie zu Hause.<br>Danke, Lutius."
+msgstr "Hallo, mein Freund!<br>Ich war gerade in unserer neuen Taverne 'Bei den Palmen'. Das Bier, das die dort ausschenken, ist hervorragend. Du solltest dort auch mal hingehen und dich einen Abend lang einfach nur entspannen. <br>Ich finde es schön, dass wir hier ein immer behaglicheres Umfeld bekommen - es ist fast wie zu Hause.<br>Danke, Lutius."
 
 #: ../../../campaigns/emp02.wmf/event:1020
 msgid "A drink at 'At the palms'"

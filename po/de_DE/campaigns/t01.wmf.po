@@ -1,18 +1,19 @@
-# Widelands campaigns/t01.wmf.po
+# Widelands po/de_DE/campaigns/t01.wmf.po
 # Copyright (C) 2005-2007 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2226\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2007-04-23 22:30+0200\n"
+"Project-Id-Version: Widelands svn2248\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-04-29 21:49+0000\n"
+"PO-Revision-Date: 2007-04-29 21:06+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../campaigns/t01.wmf/event:11 ../../../campaigns/t01.wmf/event:608
 #: ../../../campaigns/t01.wmf/event:627 ../../../campaigns/t01.wmf/event:646
@@ -50,7 +51,7 @@ msgstr "Meines Vaters Knochen liegen friedlich in der Erde, auf einem Hügel im 
 
 #: ../../../campaigns/t01.wmf/event:64
 msgid "As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait."
-msgstr "Als ich noch jung war, lehrte mich mein Vater, dass es eine Zeit zum Kämpfen und eine Zeit des Wartens gäbe. Er sagte mir, dass die Zeiten des Wartens dabei gar noch härter als die des Kämpfens seien, denn in ihnen müsse man ununterbrochen achtgeben nicht in einen zu tiefen Schlaf zu fallen und nicht leichtgläubig dem Frieden zu trauen, um so nicht vom Tod überrascht zu werden, bevor nicht die richtige Zeit gekommen sei. <br>Und so ist auch nun eine Zeit des Wartens angebrochen..."
+msgstr "Als ich noch jung war lehrte mich mein Vater, dass es eine Zeit zum Kämpfen und eine Zeit des Wartens gäbe. Er sagte mir, dass die Zeiten des Wartens dabei gar noch härter als die des Kämpfens seien. Denn in jenen müsse man ununterbrochen achtgeben, nicht in einen zu tiefen Schlaf zu fallen und nicht leichtgläubig dem Frieden zu trauen. Um so nicht vom Tod überrascht zu werden, bevor die richtige Zeit gekommen sei. <br>Und so ist auch für uns eine Zeit des Wartens angebrochen..."
 
 #: ../../../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
@@ -73,7 +74,7 @@ msgstr "Khantrukh fährt fort..."
 
 #: ../../../campaigns/t01.wmf/event:475
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br>We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack."
-msgstr " \"Niemand außer den Göttern weiß, wie lange wir hier noch versteckt bleiben müssen. Die Krieger hoffen, dass wir irgendwann glorreich heimwärts marschieren, doch ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Und die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten unseres Quartiers gibt es einige Plätze auf denen wir eine Holzfällerhütte aufbauen könnten.\"<br><br>--NEUES ZIEL--<br>- Drücke die Leertaste, um zu sehen, wo Du bauen kannst. Die roten Punkte zeigen Dir, wo Du ein kleines Gebäude, wie zum Beispiel einen Holzfäller, bauen kannst. <br>- Baue einen Holzfäller, indem Du auf den roten Punkt rechts Deines Hauptquartiers klickst und den Holzfäller auswählst."
+msgstr " \"Niemand außer den Göttern weiß, wie lange wir hier noch versteckt bleiben müssen. Die Krieger hoffen, dass wir irgendwann glorreich heimwärts marschieren, doch ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Und die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten unseres Quartiers gibt es einige Plätze auf denen wir eine Holzfällerhütte aufbauen könnten.\"<br><br>--NEUES ZIEL--<br>- Drücke die Leertaste, um zu sehen, wo Du bauen kannst. Die roten Marker zeigen Dir, wo Du ein kleines Gebäude, wie zum Beispiel einen Holzfäller, bauen kannst. <br>- Baue einen Holzfäller, indem Du auf den roten Marker rechts Deines Hauptquartiers klickst und den Holzfäller auswählst."
 
 #: ../../../campaigns/t01.wmf/event:492
 msgid "The elder remarks..."
@@ -81,7 +82,7 @@ msgstr "Der Alte merkt an..."
 
 #: ../../../campaigns/t01.wmf/event:494
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-msgstr " \"Es scheint offensichtlich, dass es zu schwer für unsere Leute wird, müßten sie die ganze Strecke bis zum Holzfäller durch die Wildnis laufen. Wir sollten einen Pfad zwischen unserem Hauptquartier und dem Holzfäller anlegen. Es scheint logisch, dass die Männer einen möglichst kurzen und ebenen Weg bevorzugen werden. Das Holz wird auch dann schwer genug sein.\"<br><br>--NEUES ZIEL--<br>- Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller. Dies kannst Du machen, indem Du auf die Flagge eines der beiden Gebäude klickst und den Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, die aufzeigen, wie steil der Weg in diese Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für Deine Leute auf ihm zu laufen. Wenn Du nun eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann die nächste Richtung angeben. Baue eine Straße zwischen den beiden Flaggen der beiden Gebäude und versuch sie möglichst eben zu halten."
+msgstr " \"Es scheint offensichtlich, dass es zu schwer für unsere Leute wird, müßten sie die ganze Strecke bis zum Holzfäller durch die Wildnis laufen. Wir sollten einen Pfad zwischen unserem Hauptquartier und dem Holzfäller anlegen. Und logisch, dass die Männer einen möglichst kurzen und ebenen Weg bevorzugen werden. Das Holz wird auch dann schwer genug sein.\"<br><br>--NEUES ZIEL--<br>- Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller. Dies kannst Du machen, indem Du auf die Flagge eines der beiden Gebäude klickst und den Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, die aufzeigen, wie steil der Weg in diese Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für Deine Leute auf ihm zu laufen. Wenn Du nun eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann die nächste Richtung angeben. Baue eine Straße zwischen den beiden Flaggen der beiden Gebäude und versuch sie möglichst eben zu halten."
 
 #: ../../../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
@@ -113,11 +114,11 @@ msgstr "Der Alte sagt..."
 
 #: ../../../campaigns/t01.wmf/event:572
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
-msgstr " \"Ich bin sicher, dass weder Du noch Deine Krieger den Wunsch haben, lange an diesem üblen Ort zu verweilen. Doch auch unser Krieg, um die Heimat zurück zu erobern, wird eine lange Zeit dauern und es scheint weise, uns vorzubereiten. Ich würde anweisen, dass wir bereits jetzt Felsen für die Zukunft schlagen. Wer weiß schon genau, welche Festung wir schon bald bauen müssen? Und - wie ein Geschenk der Götter - gibt es tatsächlich große Felsen in unmittelbarer Nähe.\"<br><br>--NEUES ZIEL--<br>- Baue zwei Steinbrüche im Südwesten Deines Hauptquartiers auf."
+msgstr " \"Ich bin sicher, dass weder Du noch Deine Krieger den Wunsch haben, lange an diesem üblen Ort zu verweilen. Doch auch unser Krieg um die Heimat zurück zu erobern, wird eine lange Zeit dauern und es scheint weise, uns vorzubereiten. Ich würde anweisen, dass wir bereits jetzt Felsen für die Zukunft schlagen. Wer weiß schon genau, welche Festung wir schon bald bauen müssen? Und - wie ein Geschenk der Götter - gibt es tatsächlich große Felsen in unmittelbarer Nähe.\"<br><br>--NEUES ZIEL--<br>- Baue zwei Steinbrüche im Südwesten Deines Hauptquartiers auf."
 
 #: ../../../campaigns/t01.wmf/event:610
 msgid "In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br>They are a constant reminder why we had to hide here.<br>And a constant reminder why we must return in the end."
-msgstr "In einer dieser schlaflosen Nächte stieg ich auf den Hügel und schaute in Richtung Norden. Die Feuer brennen noch immer und stillen nach wie vor ihren Hunger an meines Vaters Vermächnis.<br>Sie sind wie konstante Erinnerungsmarken, die aufzeigen, warum wir uns hier verstecken müssen....<br>...und warum wir sobald wie möglich zurückkehren müssen."
+msgstr "In einer dieser schlaflosen Nächte stieg ich auf den Hügel und schaute in Richtung Norden. Die Feuer brennen noch immer und stillen nach wie vor ihren Hunger an meines Vaters Vermächtnis.<br>Sie sind wie konstante Erinnerungsmarken, die aufzeigen, warum wir uns hier verstecken müssen...<br>...und warum wir sobald wie möglich zurückkehren müssen."
 
 #: ../../../campaigns/t01.wmf/event:612
 msgid "In the night..."
@@ -125,7 +126,7 @@ msgstr "In der Nacht..."
 
 #: ../../../campaigns/t01.wmf/event:629
 msgid "Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br>Somehow it felt like farewell. For the first time I wondered what the future might hold for me..."
-msgstr "Noch einmal ging ich hinauf zu meines Vaters Grab, in einer heiligen Grotte am Fuße des großen Kal'mavrath. Ich stand einfach dort und fühlte weder die Stunden die vorbeizogen noch den kalten Regen, der vom dunklen Himmel rieselte...<br>Es fühlte sich beinahe wie ein Abschied aus diesem Lande an. Zum ersten Mal fragte ich mich, was wohl die Zukunft für mich bereit hält."
+msgstr "Noch einmal ging ich hinauf zu meines Vaters Grab, in einer heiligen Grotte am Fuße des großen Kal'mavrath. Ich stand einfach dort und fühlte weder die Stunden, die vorbeizogen, noch den kalten Regen, der vom dunklen Himmel rieselte...<br>Es fühlte sich beinahe wie ein Abschied aus diesem Lande an. Zum ersten Mal fragte ich mich, was wohl die Zukunft für mich bereit hält."
 
 #: ../../../campaigns/t01.wmf/event:631
 msgid "At the grave"
@@ -133,7 +134,7 @@ msgstr "Am Grab"
 
 #: ../../../campaigns/t01.wmf/event:648
 msgid "Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br>But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side..."
-msgstr "Vor einiger Zeit kam Boldreth zu mir. Sein Vorschlag war es, etwas dichter an unsere Heimat zu ziehen, um beim ersten Wanken der Macht meines Bruders über ihn herzufallen.<br> Doch wenn ich nun über den Wald gucke, sehe ich noch immer den zum Himmel aufsteigenden schwarzen Rauch. Ich weiß, dass es zu früh ist. Das, was Boldreth erhofft, wird in nächster Zeit noch nicht geschehen. Und sollte er dennoch Recht haben: Ich fürchte eine endlose Schlacht. Ein zu rascher Rückzug würde etliche Tote auf beiden Seiten bedeuten..."
+msgstr "Vor einiger Zeit kam Boldreth zu mir. Sein Vorschlag war es, etwas dichter an unsere Heimat zu ziehen, um beim ersten Wanken der Macht meines Bruders über ihn herzufallen.<br> Doch wenn ich nun über den Wald gucke, sehe ich noch immer den zum Himmel aufsteigenden, schwarzen Rauch. Ich weiß, dass es zu früh ist. Das, was Boldreth erhofft, wird in nächster Zeit noch nicht geschehen. Und sollte er dennoch Recht haben: Ich fürchte eine endlose Schlacht. Ein zu rascher Rückzug würde etliche Tote auf beiden Seiten bedeuten..."
 
 #: ../../../campaigns/t01.wmf/event:650
 msgid "The other day..."
@@ -158,24 +159,3 @@ msgstr "Gut gemacht! Jetzt haben wir alles, um sicher über den Winter zu kommen
 #: ../../../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Mission erfüllt"
-
-#~ msgid "- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-#~ msgstr "- Drücke die Leertaste, um zu sehen wo Du bauen kannst. Die roten Punkte zeigen Dir, wo Du ein kleines Gebäude wie zum Beispiel einen Holzfäller bauen kannst. <br>- Baue einen Holzfäller, indem Du auf den roten Punkt rechts Deines Hauptquartiers klickst und den Holzfäller auswählst.<br>- Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller. Dies kannst Du machen, indem Du auf die Flagge eines der Gebäude klickst und den Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, die aufzeigen, wie steil der Weg in diese Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für Deine Leute, auf ihm zu laufen. Wenn Du nun eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann die nächste Richtung angeben. Baue eine Straße zwischen den Flaggen der beiden Gebäude und versuche, sie möglichst eben zu halten."
-
-#~ msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-#~ msgstr "- Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. Wenn Du es anklickst und im sich öffnenden Menü das Flaggensymbol wählst, setzt Du dort eine Flagge. Auf diese Weise wird die Transportarbeit auf zwei Träger aufgeteilt. Wenn viele Waren zwischen zwei Punkten transportiert werden, ist es sinnvoll, Flaggen hinzuzufügen, da der Transport so viel schneller voran geht. Setze eine Flagge in der Mitte der Straße.<br>- Baue einen weiteren Holzfäller südlich der Flagge, die Du eben gesetzt hast. Danach verbinde den neuen Holzfäller mit dieser Flagge. Du kannst die Straße automatisch bauen lassen, anstatt sie Stück für Stück vorzugeben. Wähle wieder den Straßenbauknopf einer Flagge aus und klicke dann auf das Ziel, um die gesamte Straße zu bauen."
-
-#~ msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-#~ msgstr "- Baue ein Forsthaus östlich des ersten Holzfällers."
-
-#~ msgid "- Build two Quarries south-west of your headquarters."
-#~ msgstr "- Baue zwei Steinmetze in der Nähe der Felsen im Südwesten Deines Hauptquartiers."
-
-#~ msgid "Order3"
-#~ msgstr "Auftrag 3"
-
-#~ msgid "Order5"
-#~ msgstr "Auftrag 5"
-
-#~ msgid "Order7"
-#~ msgstr "Auftrag 7"
