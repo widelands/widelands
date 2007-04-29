@@ -290,37 +290,31 @@ bool Game::run(bool is_savegame)
 {
    postload();
 
-   if(!is_savegame) {
+	if (not is_savegame) {
       // Prepare the players (i.e. place HQs)
-      for (int i = 1; i <= get_map()->get_nrplayers(); i++) {
-         Player* plr = get_player(i);
-         if (!plr)
-            continue;
-
+		const Player_Number nr_players = map().get_nrplayers();
+		for (Player_Number i = 1; i <= nr_players; ++i) if
+			(Player * const plr = get_player(i))
+		{
          plr->init(true);
-
-         const Coords &c = get_map()->get_starting_pos(i);
-         if (plr->get_type() == Player::Local) ipl->move_view_to(c);
+			if (plr->get_type() == Player::Local)
+				ipl->move_view_to(map().get_starting_pos(i));
       }
 
       // Prepare the map, set default textures
-      get_map()->recalc_default_resources();
-      get_map()->get_mem().delete_unreferenced_events();
-      get_map()->get_mtm().delete_unreferenced_triggers();
+		map().recalc_default_resources();
+		map().get_mem().delete_unreferenced_events  ();
+		map().get_mtm().delete_unreferenced_triggers();
 
       // Finally, set the scenario names and tribes to represent
       // the correct names of the players
-      int curplr;
-      for(curplr=1; curplr <= get_map()->get_nrplayers(); curplr++) {
-         Player* plr=get_player(curplr);
-
-         if(plr) {
-            get_map()->set_scenario_player_tribe(curplr, plr->tribe().name());
-            get_map()->set_scenario_player_name(curplr, plr->get_name());
-         } else {
-            get_map()->set_scenario_player_tribe(curplr, "");
-            get_map()->set_scenario_player_name(curplr, "");
-         }
+		for (Player_Number curplr = 1; curplr <= nr_players; ++curplr) {
+			const Player * const plr = get_player(curplr);
+			const std::string                                             no_name;
+			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
+			const std::string & player_name = plr ? plr->    get_name() : no_name;
+			map().set_scenario_player_tribe(curplr,  tribe_name);
+			map().set_scenario_player_name (curplr, player_name);
       }
 
 

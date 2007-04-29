@@ -123,36 +123,23 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Write
 throw (_wexception)
 {
    Profile prof;
-   Section* s = prof.create_section("global");
+	prof.create_section("global")
+		->set_int("packet_version", CURRENT_PACKET_VERSION);
 
-   s->set_int("packet_version", CURRENT_PACKET_VERSION );
-
-   char buf[256];
-   int i=0;
-   for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
-      Player* plr=egbase->get_player(i);
-      if(!plr) continue; // skip this player, is data can not be saved
-      const Tribe_Descr* t;
-      if( plr )
-         t = &plr->tribe();
-      else
-         t = egbase->get_tribe(egbase->get_map()->get_scenario_player_tribe(i).c_str());
-
-      sprintf( buf, "player_%i", i );
-      s = prof.create_section( buf );
+	const Player_Number nr_players = egbase->map().get_nrplayers();
+	for (Player_Number i = 1; i <= nr_players; ++i) if
+		(Player * const plr = egbase->get_player(i))
+	{
+		const Tribe_Descr & tribe = plr->tribe();
+		char buffer[10];
+		snprintf(buffer, sizeof(buffer), "player_%u", i);
+		Section & section = *prof.create_section(buffer);
 
       // Write for all buildings if it is enabled
-      int b;
-      for(b=0; b<t->get_nrbuildings(); b++) {
-         Building_Descr* building=t->get_building_descr(b);
-         std::string name=building->name();
-         bool val;
-         if(plr)
-            val = plr->is_building_allowed(b);
-         else
-            val = true; // All known buildings are allowed
-         s->set_bool(name.c_str(), val);
-      }
+		const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
+		for (Building_Descr::Index b = 0; b < nr_buildings; ++b) section.set_bool
+			(tribe.get_building_descr(b)->name().c_str(),
+			 plr->is_building_allowed(b));
    }
 
    prof.write("allowed_buildings", false, fs );
