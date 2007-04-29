@@ -106,6 +106,7 @@ Source: ..\..\config; DestDir: {app}; Flags: ignoreversion; Components: " Widela
 Source: ..\..\ChangeLog; DestDir: {app}; Flags: ignoreversion; DestName: ChangeLog.txt; Components: " Widelands"
 Source: ..\..\COPYING; DestDir: {app}; Flags: ignoreversion; DestName: COPYING.txt; Components: " Widelands"
 Source: ..\..\CREDITS; DestDir: {app}; Flags: ignoreversion; DestName: CREDITS.txt; Components: " Widelands"
+Source: .\innosetup-files\WL-Editor.ico; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
 
 
 [INI]
@@ -113,14 +114,15 @@ Filename: {app}\{#XAppUrlName}; Section: InternetShortcut; Key: URL; String: {#X
 Filename: {app}\{#HelpName}; Section: InternetShortcut; Key: URL; String: {#HelpURL}
 
 [Icons]
-Name: {group}\{#XAppName}; Filename: {app}\{#XAppExeName}; WorkingDir: {app}; IconFilename: {app}\widelands.exe; Flags: useapppaths; Tasks: ; Languages: 
+Name: {app}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {group}\{#XAppName}; Filename: {app}\{#XAppExeName}; WorkingDir: {app}; IconFilename: {app}\widelands.exe; Flags: useapppaths; Tasks: ; Languages:
 Name: {group}\{cm:ProgramOnTheWeb,{#XAppName}}; Filename: {app}\{#XAppUrlName}
 Name: {group}\{cm:UninstallProgram,{#XAppName}}; Filename: {uninstallexe}
-Name: {userdesktop}\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: desktopicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
+Name: {group}\{#HelpNameName}; Filename: {app}\{#HelpName}; Tasks: ; Languages:
+Name: {group}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: quicklaunchicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
-Name: {group}\{#HelpNameName}; Filename: {app}\{#HelpName}; Tasks: ; Languages: 
-Name: {group}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\pics\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
-Name: {userdesktop}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\pics\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {userdesktop}\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: desktopicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
+Name: {userdesktop}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
 
 [Run]
 Filename: {app}\{#XAppExeName}; Description: {cm:LaunchProgram,{#XAppName}}; Flags: nowait postinstall skipifsilent

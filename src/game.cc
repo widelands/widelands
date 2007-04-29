@@ -389,6 +389,10 @@ void Game::think(void)
 		cmdqueue.run_queue(frametime, get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
+        
+		// check if autosave is needed, but only if that is not a network game
+		if (NULL == m_netgame)
+			m_savehandler.think(this, m_realtime);
 	}
 }
 

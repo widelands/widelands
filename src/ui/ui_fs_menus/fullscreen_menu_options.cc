@@ -20,6 +20,7 @@
 #define DEFINE_LANGUAGES  // So that the language array gets defined
 
 #include <stdio.h>
+#include <libintl.h>
 #include "fullscreen_menu_options.h"
 #include "constants.h"
 #include "graphic.h"
@@ -28,6 +29,7 @@
 #include "profile.h"
 #include "sound_handler.h"
 #include "wlapplication.h"
+#include "save_handler.h"
 
 /*
 ==============================================================================
@@ -90,21 +92,25 @@ m_label_game_options
 
    // Toggle Options
 
-m_single_watchwin(this,85,365),
+m_single_watchwin(this,85,355),
 m_label_single_watchwin
-(this, 110, 375, _("Use single Watchwindow Mode"), Align_VCenter),
+(this, 110, 365, _("Use single Watchwindow Mode"), Align_VCenter),
 
-m_show_workarea_preview(this, 85, 395),
+m_show_workarea_preview(this, 85, 385),
 m_label_show_workarea_preview
-(this, 110, 405, _("Show buildings area preview"), Align_VCenter),
+(this, 110, 395, _("Show buildings area preview"), Align_VCenter),
 
-m_snap_windows_only_when_overlapping(this, 85, 425),
+m_snap_windows_only_when_overlapping(this, 85, 415),
 m_label_snap_windows_only_when_overlapping
-(this, 110, 435, _("Snap windows only when overlapping"), Align_VCenter),
+(this, 110, 425, _("Snap windows only when overlapping"), Align_VCenter),
 
-m_dock_windows_to_edges(this, 85, 455),
+m_dock_windows_to_edges(this, 85, 445),
 m_label_dock_windows_to_edges
-(this,110,465,_("Dock windows to edges"), Align_VCenter)
+(this,110,455,_("Dock windows to edges"), Align_VCenter),
+
+m_autosave(this, 85, 475),
+m_label_autosave
+(this, 110, 485, "Autosave game every XXX minutes", Align_VCenter)
 
 {
 	m_title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -119,6 +125,13 @@ m_label_dock_windows_to_edges
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
+    m_autosave                          .set_state(opt.autosave > 0);
+ 
+	char str[255];
+	snprintf (str, sizeof(str)/sizeof(str[0]),
+			  ngettext("Autosave game every %d minute", "Autosave game every %d minutes", DEFAULT_AUTOSAVE_INTERVAL), DEFAULT_AUTOSAVE_INTERVAL);
+	m_label_autosave.set_text(str);
+
 
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
@@ -191,7 +204,8 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 		m_dock_windows_to_edges             .get_state   (),
 		m_music                             .get_state   (),
 		m_fx                                .get_state   (),
-		m_language_list                     .get_selected()
+		m_language_list                     .get_selected(),
+        (m_autosave.get_state() ? DEFAULT_AUTOSAVE_INTERVAL : 0)
 	};
    return opt;
 }
@@ -226,6 +240,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.language = s->get_string("language", "");
    opt.music = !s->get_bool("disable_music", false);
    opt.fx = !s->get_bool("disable_fx", false );
+   opt.autosave = s->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
    return opt;
 }
 
@@ -243,6 +258,7 @@ void Options_Ctrl::save_options(){
    m_opt_section->set_bool("disable_music", !opt.music);
    m_opt_section->set_bool("disable_fx", !opt.fx);
    m_opt_section->set_string("language", opt.language.c_str());
+   m_opt_section->set_int("autosave", opt.autosave*60);
    WLApplication::get()->set_input_grab(opt.inputgrab);
    i18n::set_locale( opt.language.c_str() );
    g_sound_handler.set_disable_music( !opt.music );

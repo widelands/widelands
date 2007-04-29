@@ -23,6 +23,7 @@
 #include "cmd_queue.h"
 #include "editor_game_base.h"
 #include "random.h"
+#include "save_handler.h"
 
 struct Flag;
 struct Path;
@@ -130,6 +131,8 @@ struct Game : public Editor_Game_Base {
 
    // If this has a netgame, return it
    NetGame* get_netgame( void ) { return m_netgame; }
+   
+   SaveHandler* get_save_handler() { return &m_savehandler; }
 
 private:
 	void init_player_controllers ();
@@ -146,6 +149,8 @@ private:
 	Interactive_Player           * ipl;
 	std::vector<Computer_Player *> cpl;
 	Cmd_Queue                      cmdqueue;
+
+	SaveHandler                    m_savehandler;
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 };

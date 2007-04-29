@@ -92,8 +92,7 @@ m_parent(parent)
 		 &Game_Main_Menu_Save_Game::die, this,
 		 _("Cancel"));
 
-   m_basedir="ssave";
-   m_curdir="ssave";
+   m_curdir=SaveHandler::get_base_dir();
 
    fill_list();
 
@@ -120,7 +119,7 @@ called when the ok button has been clicked
 void Game_Main_Menu_Save_Game::clicked_ok() {
       std::string filename=m_editbox->get_text();
 
-      if(save_game(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
+      if(save_game(filename))
          die();
 }
 
@@ -206,25 +205,9 @@ void Game_Main_Menu_Save_Game::edit_box_changed(void) {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
-   // Make sure that the base directory exists
-   g_fs->EnsureDirectoryExists(m_basedir);
-
-   // ok, first check if the extension matches (ignoring case)
-   bool assign_extension=true;
-   if(filename.size() >= strlen(WLGF_SUFFIX)) {
-      char buffer[10]; // enough for the extension
-      filename.copy(buffer, sizeof(WLGF_SUFFIX), filename.size()-strlen(WLGF_SUFFIX));
-      if(!strncasecmp(buffer, WLGF_SUFFIX, strlen(WLGF_SUFFIX)))
-         assign_extension=false;
-   }
-   if(assign_extension)
-      filename+=WLGF_SUFFIX;
-
-   // Now append directory name
-   std::string complete_filename=m_curdir;
-   complete_filename+="/";
-   complete_filename+=filename;
+bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
+    SaveHandler* savehandler = m_parent->get_game()->get_save_handler();
+    std::string complete_filename = savehandler->create_file_name(m_curdir, filename);
 
    // Check if file exists, if it does, show a warning
    if(g_fs->FileExists(complete_filename)) {
@@ -239,24 +222,14 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
       g_fs->Unlink( complete_filename );
    }
 
-   // Make a filesystem out of this
-   FileSystem* fs = 0;
-   if( !binary ) {
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::DIR );
-   } else {
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
-   }
-
-	Game_Saver gs(*fs, m_parent->get_game());
-	try {gs.save();} catch(std::exception& exe) {
+   std::string error;
+   if (!savehandler->save_game(m_parent->get_game(), complete_filename, &error)) {
       std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
-      s+=exe.what();
+      s+=error;
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
    }
-   delete fs;
-   die();
 
    return true;
 }

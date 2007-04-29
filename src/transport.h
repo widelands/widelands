@@ -618,7 +618,7 @@ struct Economy {
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
 
-	bool find_route(Flag *start, Flag *end, Route *route, int cost_cutoff = -1);
+	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff = -1);
 	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 
 	inline int get_nrflags() const { return m_flags.size(); }

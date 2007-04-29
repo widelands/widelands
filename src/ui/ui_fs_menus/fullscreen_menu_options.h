@@ -49,6 +49,7 @@ class Options_Ctrl {
          bool music;
          bool fx;
          std::string language;
+			int autosave; // autosave interval in minutes
 		};
 
 		Options_Ctrl(Section *s);
@@ -97,6 +98,8 @@ private:
 	UI::Textarea                      m_label_snap_windows_only_when_overlapping;
 	UI::Checkbox                      m_dock_windows_to_edges;
 	UI::Textarea                      m_label_dock_windows_to_edges;
+	UI::Checkbox                      m_autosave;
+	UI::Textarea                      m_label_autosave;
 
 	struct res {
 		int xres;

@@ -1,3 +1,3 @@
 #!/bin/sh
-cd ../../locale && python.exe ../utils/buildcat.py
-cd ../build/win32
+cd ../.. && python.exe utils/buildlocale.py
+cd ./build/win32

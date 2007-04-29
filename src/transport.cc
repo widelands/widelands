@@ -2032,7 +2032,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	}
 
 	// Brute force: recalculate the best route every time
-	if (!locflag->get_economy()->find_route(locflag, destflag, &m_route))
+	if (!locflag->get_economy()->find_route(locflag, destflag, &m_route, m_item))
 		throw wexception("Transfer::get_next_step: inconsistent economy");
 
 	if (m_route.get_nrsteps() >= 1 && location->get_type() == Map_Object::ROAD) {
@@ -3201,7 +3201,7 @@ void Economy::check_split(Flag *f1, Flag *f2)
 
 	Economy *e = f1->get_economy();
 
-	if (e->find_route(f1, f2, 0))
+	if (e->find_route(f1, f2, 0, false))
 		return;
 
 	// Should we split off f1 or f2? Ideally, we'd split off so that the
@@ -3394,7 +3394,7 @@ This function should always be successfull, except for when it's called from
 check_split().
 ===============
 */
-bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
+bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff)
 {
 	assert(start->get_economy() == this);
 	assert(end->get_economy() == this);
@@ -3436,12 +3436,15 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 		for(uint i = 0; i < neighbours.size(); i++) {
 			Flag *neighbour = neighbours[i].flag;
 			int cost;
+			int wait_cost = 0;
 
 			// don't need to find the optimal path if we're just checking connectivity
 			if (neighbour == end && !route)
 				return true;
 
-			cost = current->mpf_realcost + neighbours[i].cost;
+			if (wait)
+			  wait_cost = (current->m_item_filled + neighbour->m_item_filled) * neighbours[i].cost / 2;
+			cost = current->mpf_realcost + neighbours[i].cost + wait_cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
 				// add to open list
@@ -3504,7 +3507,7 @@ Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 		Warehouse *wh = m_warehouses[i];
 		Route buf_route;
 
-		if (!find_route(start, wh->get_base_flag(), &buf_route, best_totalcost))
+		if (!find_route(start, wh->get_base_flag(), &buf_route, false, best_totalcost))
 			continue;
 
 		best_totalcost = buf_route.get_totalcost();
@@ -4066,7 +4069,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 
 		int cost_cutoff = best_cost;
 
-		if (!find_route(supp->get_position(g)->get_base_flag(), target_flag, route, cost_cutoff)) {
+		if (!find_route(supp->get_position(g)->get_base_flag(), target_flag, route, false, cost_cutoff)) {
 			if (!best_route)
 				throw wexception("Economy::find_best_supply: COULDN'T FIND A ROUTE!");
 			continue;
