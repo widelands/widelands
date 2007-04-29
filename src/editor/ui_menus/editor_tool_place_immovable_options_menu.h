@@ -20,10 +20,11 @@
 #ifndef __S__EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU
 #define __S__EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU
 
-#include <vector>
 #include "editor_tool_options_menu.h"
 
 #include "ui_tabpanel.h"
+
+#include <vector>
 
 class Editor_Interactive;
 class Editor_Place_Immovable_Tool;

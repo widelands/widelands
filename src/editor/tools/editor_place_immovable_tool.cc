@@ -18,11 +18,12 @@
  */
 
 #include "editor_place_immovable_tool.h"
+
+#include "editor.h"
+#include "editorinteractive.h"
 #include "field.h"
 #include "immovable.h"
 #include "mapregion.h"
-#include "editorinteractive.h"
-#include "editor.h"
 
 /*
 ===========

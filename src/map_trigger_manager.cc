@@ -17,25 +17,23 @@
  *
  */
 
-#include <vector>
 #include "map_trigger_manager.h"
+
 #include "trigger.h"
 
-/*
- * Map Trigger Manager implementation
- */
-MapTriggerManager::MapTriggerManager( void ) {
-}
+#include <vector>
 
-MapTriggerManager::~MapTriggerManager( void ) {
+
+MapTriggerManager::MapTriggerManager() {}
+
+
+MapTriggerManager::~MapTriggerManager() {
    for( uint i = 0; i < m_triggers.size(); i++)
       delete m_triggers[i];
    m_triggers.resize( 0 );
 }
 
-/*
- * Register a new trigger
- */
+
 bool MapTriggerManager::register_new_trigger( Trigger* mv ) {
    // check if this trigger is already known
    if( get_trigger( mv->get_name() ) )
@@ -45,9 +43,7 @@ bool MapTriggerManager::register_new_trigger( Trigger* mv ) {
    return true;
 }
 
-/*
- * Get triggers
- */
+
 Trigger* MapTriggerManager::get_trigger( const char* name ) {
    uint i;
    Trigger* retval = 0;
@@ -61,9 +57,7 @@ Trigger* MapTriggerManager::get_trigger( const char* name ) {
    return retval;
 }
 
-/*
- * Remove a trigger
- */
+
 void MapTriggerManager::delete_trigger( const char* name ) {
    for( uint i = 0; i < m_triggers.size(); i++) {
       if( !strcmp( m_triggers[i]->get_name(), name ) ) {
@@ -75,10 +69,8 @@ void MapTriggerManager::delete_trigger( const char* name ) {
    }
 }
 
-/*
- * Delete all unreferenced triggers
- */
-void MapTriggerManager::delete_unreferenced_triggers( void ) {
+
+void MapTriggerManager::delete_unreferenced_triggers() {
    uint i = 0;
    while( i < m_triggers.size() ) {
       Trigger* tr = m_triggers[i];

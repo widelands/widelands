@@ -20,11 +20,12 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include <string>
-#include <vector>
 #include "computer_player_hints.h"
 #include "immovable.h"
 #include "workarea_info.h"
+
+#include <string>
+#include <vector>
 
 class Flag;
 class Interactive_Player;

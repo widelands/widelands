@@ -20,10 +20,10 @@
 #ifndef __WARE_DESCR_H
 #define __WARE_DESCR_H
 
+#include "instances.h"
+
 #include <string>
 #include <vector>
-
-#include "instances.h"
 
 class Economy;
 class PlayerImmovable;

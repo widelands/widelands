@@ -17,6 +17,8 @@
  *
  */
 
+#include "tribe.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"
@@ -26,7 +28,6 @@
 #include "layered_filesystem.h"
 #include "profile.h"
 #include "soldier.h"
-#include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "wlapplication.h"

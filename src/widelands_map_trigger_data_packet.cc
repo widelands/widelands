@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_trigger_data_packet.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"
@@ -26,7 +28,6 @@
 #include "trigger_factory.h"
 #include "profile.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_trigger_data_packet.h"
 #include "world.h"
 
 

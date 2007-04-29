@@ -18,19 +18,13 @@
  */
 
 #include "editor_delete_immovable_tool.h"
+
 #include "field.h"
-#include "immovable.h"
-#include "mapregion.h"
 #include "editorinteractive.h"
 #include "editor.h"
+#include "immovable.h"
+#include "mapregion.h"
 
-/*
-=================================================
-
-class Editor_Delete_Immovable_Tool
-
-=================================================
-*/
 
 /*
 ===========

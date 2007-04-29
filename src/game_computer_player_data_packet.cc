@@ -17,24 +17,20 @@
  *
  */
 
+#include "game_computer_player_data_packet.h"
+
 #include "computer_player.h"
 #include "game.h"
-#include "game_computer_player_data_packet.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "mapview.h"
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Game_Computer_Player_Data_Packet::~Game_Computer_Player_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Game_Computer_Player_Data_Packet::~Game_Computer_Player_Data_Packet() {}
+
+
 void Game_Computer_Player_Data_Packet::Read
 (FileSystem & fs, Game *, Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)

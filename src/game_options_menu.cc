@@ -17,12 +17,13 @@
  *
  */
 
+#include "game_options_menu.h"
+
 #include "building_statistics_menu.h"
 #include "fullscreen_menu_fileview.h"
 #include "game_options_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
-#include "game_options_menu.h"
 #include "general_statistics_menu.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -30,6 +31,7 @@
 #include "sound_handler.h"
 #include "stock_menu.h"
 #include "ware_statistics_menu.h"
+
 
 GameOptionsMenu::GameOptionsMenu
 (Interactive_Player & plr,

@@ -21,6 +21,7 @@
 #define __S__EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU
 
 #include "editor_tool_options_menu.h"
+
 #include "ui_button.h"
 #include "ui_radiobutton.h"
 #include "ui_textarea.h"

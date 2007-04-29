@@ -17,12 +17,11 @@
  *
  */
 
-#include <string>
-#include <stdio.h>
+#include "editor_main_menu_save_map.h"
+
 #include "constants.h"
 #include "editor.h"
 #include "editorinteractive.h"
-#include "editor_main_menu_save_map.h"
 #include "editor_main_menu_save_map_make_directory.h"
 #include "error.h"
 #include "filesystem.h"
@@ -30,16 +29,20 @@
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "profile.h"
+#include "wexception.h"
+#include "widelands_map_loader.h"
+#include "widelands_map_saver.h"
+#include "zip_filesystem.h"
+
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
-#include "wexception.h"
-#include "widelands_map_loader.h"
-#include "widelands_map_saver.h"
-#include "zip_filesystem.h"
+
+#include <string>
+#include <stdio.h>
 
 /*
 ===============

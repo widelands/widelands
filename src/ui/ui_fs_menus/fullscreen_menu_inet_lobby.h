@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,10 @@
 #ifndef __S__INET_LOBBY_H
 #define __S__INET_LOBBY_H
 
+#include "fullscreen_menu_base.h"
+
 #include <string>
 #include <vector>
-#include "fullscreen_menu_base.h"
 
 namespace UI {
 struct Edit_Box;
@@ -35,8 +36,7 @@ class Game_Server_Connection;
  * This class represents the 'lobby'. this is where the user can join games
  * and chat.
  */
-class Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
-	public:
+struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 		Fullscreen_Menu_InetLobby(Game_Server_Connection*);
 		~Fullscreen_Menu_InetLobby();
 

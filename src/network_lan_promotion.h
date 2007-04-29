@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,9 @@
 #ifndef __NETWORK_LAN_PROMOTION_H__
 #define __NETWORK_LAN_PROMOTION_H__
 
-#include <list>
 #include "network_system.h"
+
+#include <list>
 
 #define LAN_PROMOTION_PROTOCOL_VERSION 1
 

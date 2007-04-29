@@ -17,12 +17,13 @@
  *
  */
 
+#include "widelands_map_elemental_data_packet.h"
+
 #include "editor_game_base.h"
 #include "filesystem.h"
 #include "i18n.h"
 #include "map.h"
 #include "profile.h"
-#include "widelands_map_elemental_data_packet.h"
 #include "world.h"
 
 #define CURRENT_PACKET_VERSION 1
@@ -41,7 +42,7 @@ throw(_wexception)
 {
     //Load maps textdomain
     i18n::grab_textdomain("maps");
-    
+
    Profile prof;
    prof.read( "elemental", 0, fs );
    Section* s = prof.get_section( "global" );
@@ -65,10 +66,10 @@ throw(_wexception)
 
       // Descr
       map->set_description( s->get_string( "descr" ));
-       
+
     // Release maps textdomain
     i18n::release_textdomain( );
-      
+
        return;
    }
    assert(0); // should never be here

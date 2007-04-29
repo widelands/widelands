@@ -17,11 +17,13 @@
  *
  */
 
-#include <map>
+#include "widelands_map_buildingdata_data_packet.h"
+
 #include "constructionsite.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
+#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
@@ -31,17 +33,17 @@
 #include "productionsite.h"
 #include "production_program.h"
 #include "soldier.h"
-#include "transport.h"
-#include "tribe.h"
 #include "trainingsite.h"
 #include "transport.h"
+#include "tribe.h"
+#include "warehouse.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_buildingdata_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "warehouse.h"
 #include "worker.h"
-#include "error.h"
+
+#include <map>
+
 
 // Versions
 #define CURRENT_PACKET_VERSION 1

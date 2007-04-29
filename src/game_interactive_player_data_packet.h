@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,13 @@
 
 #include "game_data_packet.h"
 
+struct FileRead;
+
 /*
  * Informations about the interactive player. Mostly scrollpos,
  * player number and so on
  */
-class Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
-   public:
+struct Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
       virtual ~Game_Interactive_Player_Data_Packet();
 
 	virtual void Read

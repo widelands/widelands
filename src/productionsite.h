@@ -21,12 +21,13 @@
 #define PRODUCTIONSITE_H
 
 #include "building.h"
+#include "types.h"
+#include "wexception.h"
+
 #include <map>
 #include <set>
 #include <string>
-#include "types.h"
 #include <vector>
-#include "wexception.h"
 
 class Input;
 class Item_Ware_Descr;

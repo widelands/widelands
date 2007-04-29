@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,8 @@
  *
  */
 
-#include <SDL_image.h>
+#include "widelands_map_extradata_data_packet.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"
@@ -26,17 +27,18 @@
 #include "graphic.h" // Since we are laying about the path of the pictures
 #include "map.h"
 #include "profile.h"
-#include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_data_packet_ids.h"
 
+#include <SDL_image.h>
+
+
 #define CURRENT_PACKET_VERSION 1
+
 
 Widelands_Map_Extradata_Data_Packet::~Widelands_Map_Extradata_Data_Packet(void)
 {}
 
-/**
- * Read Function
- */
+
 void Widelands_Map_Extradata_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

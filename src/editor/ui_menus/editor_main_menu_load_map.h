@@ -20,8 +20,9 @@
 #ifndef __S__EDITOR_MAIN_MENU_LOAD_MAP_H
 #define __S__EDITOR_MAIN_MENU_LOAD_MAP_H
 
-#include "ui_window.h"
 #include "filesystem.h"
+
+#include "ui_window.h"
 
 class Editor_Interactive;
 namespace UI {

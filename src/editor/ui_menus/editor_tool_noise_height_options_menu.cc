@@ -28,6 +28,7 @@
 
 #include <stdio.h>
 
+
 #define width  20
 #define height 20
 Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu

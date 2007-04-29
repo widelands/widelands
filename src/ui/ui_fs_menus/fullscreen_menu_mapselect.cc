@@ -17,10 +17,10 @@
  *
  */
 
-#include <stdio.h>
+#include "fullscreen_menu_mapselect.h"
+
 #include "editor_game_base.h"
 #include "error.h"
-#include "fullscreen_menu_mapselect.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
@@ -30,13 +30,7 @@
 #include "wexception.h"
 #include "widelands_map_loader.h"
 
-/*
-==============================================================================
-
-Fullscreen_Menu_MapSelect
-
-==============================================================================
-*/
+#include <stdio.h>
 
 
 Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader** ml)

@@ -17,9 +17,10 @@
  *
  */
 
+#include "transport.h"
+
 #include "editor_game_base.h"
 #include "rendertarget.h"
-#include "transport.h"
 
 void Flag::draw
 (const Editor_Game_Base & game,

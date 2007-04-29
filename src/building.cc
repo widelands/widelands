@@ -17,7 +17,6 @@
  *
  */
 
-#include <stdio.h>
 #include "building.h"
 #include "constructionsite.h"
 #include "editor_game_base.h"
@@ -42,15 +41,11 @@
 #include "wexception.h"
 #include "worker.h"
 
+#include <stdio.h>
+
+
 static const int BUILDING_LEAVE_INTERVAL = 1000;
 
-/*
-==============================================================================
-
-Basic building
-
-==============================================================================
-*/
 
 /*
 ===============

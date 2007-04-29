@@ -17,16 +17,15 @@
  *
  */
 
-#include <algorithm>
 #include "overlay_manager.h"
-#include "graphic.h"
-#include "field.h"
+
 #include "error.h"
+#include "field.h"
+#include "graphic.h"
+
+#include <algorithm>
 
 
-/*
- * Constructor
- */
 Overlay_Manager::Overlay_Manager() :
 m_are_graphics_loaded(false),
 m_showbuildhelp(false),

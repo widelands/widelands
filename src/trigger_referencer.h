@@ -25,8 +25,7 @@ class Trigger;
 /*
  * An Trigger referencer is a class, that uses an Trigger (trigger chain, objective)
  */
-class TriggerReferencer {
-   public:
+struct TriggerReferencer {
       virtual ~TriggerReferencer() {}
 	virtual const char * get_type() const = 0;
 	virtual const char * get_name() const = 0;

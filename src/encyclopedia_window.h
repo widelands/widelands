@@ -20,17 +20,17 @@
 #ifndef __S__ENCYCLOPEDIA_WINDOW_H
 #define __S__ENCYCLOPEDIA_WINDOW_H
 
-#include <string>
-
-#include "encyclopedia_window.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
+
 #include "ui_listselect.h"
 #include "ui_window.h"
 #include "ui_unique_window.h"
 #include "ui_table.h"
 #include "ui_multilinetextarea.h"
+
+#include <string>
 
 class Item_Ware_Descr;
 class Tribe_Descr;

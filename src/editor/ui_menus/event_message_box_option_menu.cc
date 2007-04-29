@@ -36,6 +36,7 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
+
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu
 (Editor_Interactive* parent, Event_Message_Box* event)
 :

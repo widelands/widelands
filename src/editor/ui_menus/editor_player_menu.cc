@@ -17,11 +17,10 @@
  *
  */
 
+#include "editor_player_menu.h"
+
 #include "editor.h"
 #include "editorinteractive.h"
-// #include "editor_make_infrastructure_tool.h"
-#include "editor_player_menu.h"
-//#include "editor_player_menu_allowed_buildings_menu.h"
 #include "editor_set_starting_pos_tool.h"
 #include "error.h"
 #include "graphic.h"
@@ -30,11 +29,13 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
+#include "warehouse.h"
+#include "wexception.h"
+
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
-#include "warehouse.h"
-#include "wexception.h"
+
 
 Editor_Player_Menu::Editor_Player_Menu
 (Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)

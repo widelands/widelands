@@ -20,10 +20,11 @@
 #ifndef __BOB_H
 #define __BOB_H
 
-#include <string>
 #include "geometry.h"
 #include "instances.h"
 #include "animation.h"
+
+#include <string>
 
 class Bob;
 class DirAnimations;

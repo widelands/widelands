@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +17,20 @@
  *
  */
 
-#include <vector>
 #include "map_objective_manager.h"
 
-/*
- * Map Objective Manager implementation
- */
-MapObjectiveManager::MapObjectiveManager( void ) {
-}
+#include <vector>
 
-MapObjectiveManager::~MapObjectiveManager( void ) {
+
+MapObjectiveManager::MapObjectiveManager() {}
+
+MapObjectiveManager::~MapObjectiveManager() {
    for( uint i = 0; i < m_objectives.size(); i++)
       delete m_objectives[i];
    m_objectives.resize( 0 );
 }
 
-/*
- * Register a new objective
- */
+
 bool MapObjectiveManager::register_new_objective( MapObjective* mv ) {
    // check if this objective is already known
    if( get_objective( mv->get_name() ) )
@@ -44,9 +40,7 @@ bool MapObjectiveManager::register_new_objective( MapObjective* mv ) {
    return true;
 }
 
-/*
- * Get objectives
- */
+
 MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 {
    uint i;
@@ -61,9 +55,7 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
    return retval;
 }
 
-/*
- * Remove a objective
- */
+
 void MapObjectiveManager::delete_objective( const char* name ) {
    for( uint i = 0; i < m_objectives.size(); i++) {
       if( !strcmp( m_objectives[i]->get_name(), name ) ) {

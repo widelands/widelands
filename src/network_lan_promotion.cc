@@ -17,9 +17,11 @@
  *
  */
 
+#include "network_lan_promotion.h"
+
 #include "build_id.h"
 #include "constants.h"
-#include "network_lan_promotion.h"
+
 #include <stdio.h>
 #include <string.h>
 

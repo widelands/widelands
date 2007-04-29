@@ -20,10 +20,11 @@
 #ifndef __S__EVENT_MESSAGEBOX_H
 #define __S__EVENT_MESSAGEBOX_H
 
-#include <vector>
-#include <string>
 #include "event.h"
 #include "trigger_referencer.h"
+
+#include <string>
+#include <vector>
 
 class Trigger_Null;
 class Editor_Game_Base;

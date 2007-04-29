@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
  */
 
 #include "fullscreen_menu_launchgame.h"
+
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
 #include "i18n.h"
@@ -27,13 +28,6 @@
 #include "map.h"
 #include "playerdescrgroup.h"
 
-/*
-==============================================================================
-
-Fullscreen_Menu_LaunchGame
-
-==============================================================================
-*/
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map_Loader** ml)
 :

@@ -34,6 +34,7 @@
 
 #include <stdio.h>
 
+
 Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu
 (Editor_Interactive* parent, Event_Conquer_Area* event)
 :
@@ -47,7 +48,6 @@ m_player_area(event->m_player_area)
    int spacing=5;
    int posx=offsx;
    int posy=offsy;
-
 
    // Name editbox
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);

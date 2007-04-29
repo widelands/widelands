@@ -17,14 +17,18 @@
  *
  */
 
-#include <stdio.h>
 #include "editor_tool_change_height_options_menu.h"
+
+#include "editor_increase_height_tool.h"
+#include "editor_set_height_tool.h"
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "i18n.h"
+
 #include "ui_button.h"
-#include "editor_increase_height_tool.h"
-#include "editor_set_height_tool.h"
+
+#include <stdio.h>
+
 
 #define width  20
 #define height 20

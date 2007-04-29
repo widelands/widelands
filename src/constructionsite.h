@@ -20,9 +20,10 @@
 #ifndef CONSTRUCTIONSITE_H
 #define CONSTRUCTIONSITE_H
 
-#include <vector>
 #include "building.h"
 #include "types.h"
+
+#include <vector>
 
 class Building;
 class Request;

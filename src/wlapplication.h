@@ -32,8 +32,7 @@ class Game;
 class Journal;
 
 ///Thrown if a commandline parameter is faulty
-class Parameter_error : public std::runtime_error {
-public:
+struct Parameter_error : public std::runtime_error {
 	explicit Parameter_error() throw() : std::runtime_error("") {}
 	explicit Parameter_error(std::string text) throw() : std::runtime_error(text) {}
 	virtual ~Parameter_error() throw() {}
@@ -143,8 +142,7 @@ struct InputCallback {
  * \todo Default filenames for recording and playback
  */
 
-class WLApplication {
-public:
+struct WLApplication {
 	static WLApplication * const get(const int argc=0, const char **argv=0);
 	~WLApplication();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,7 @@
 class LAN_Open_Game;
 struct LAN_Game_Info;
 
-class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
-	public:
+struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		enum {
 			CANCEL=0,
 			HOSTGAME,
@@ -58,7 +57,7 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 
 		void fill(std::list<std::string> tables);
 
-	private:
+private:
 	UI::Textarea                                title;
 	UI::Button<Fullscreen_Menu_NetSetup>        joingame;
 	UI::Button<Fullscreen_Menu_NetSetup>        hostgame;

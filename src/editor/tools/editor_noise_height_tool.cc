@@ -17,10 +17,11 @@
  *
  */
 
+#include "editor_noise_height_tool.h"
+
 #include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
 #include "editor_set_height_tool.h"
-#include "editor_noise_height_tool.h"
 #include "mapregion.h"
 #include "field.h"
 #include "editorinteractive.h"

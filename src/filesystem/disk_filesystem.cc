@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,12 +17,14 @@
  *
  */
 
-#include <assert.h>
-#include <errno.h>
 #include "disk_filesystem.h"
-#include <sys/stat.h>
+
 #include "wexception.h"
 #include "zip_filesystem.h"
+
+#include <assert.h>
+#include <errno.h>
+#include <sys/stat.h>
 
 #ifdef __WIN32__
 #include "windows.h"

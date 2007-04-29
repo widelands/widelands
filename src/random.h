@@ -24,8 +24,7 @@
 
 extern const uint rng_sbox[256];
 
-class RNG {
-    public:
+struct RNG {
 	RNG ();
 
 	void seed (uint);

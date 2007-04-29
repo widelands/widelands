@@ -20,13 +20,12 @@
 #ifndef __S__EVENT_REFERENCER_H
 #define __S__EVENT_REFERENCER_H
 
-class Event;
+struct Event;
 
 /*
  * An Event referencer is a class, that uses an Event
  */
-class EventReferencer {
-   public:
+struct EventReferencer {
       virtual ~EventReferencer() {}
 	virtual const char * get_type() const = 0;
 	virtual const char * get_name() const = 0;

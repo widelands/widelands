@@ -18,6 +18,7 @@
  */
 
 #include "trigger_null.h"
+
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"

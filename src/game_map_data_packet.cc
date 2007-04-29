@@ -17,9 +17,10 @@
  *
  */
 
+#include "game_map_data_packet.h"
+
 #include "filesystem.h"
 #include "game.h"
-#include "game_map_data_packet.h"
 #include "widelands_map_loader.h"
 #include "widelands_map_saver.h"
 

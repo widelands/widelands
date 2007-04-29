@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
  */
 
 #include "editor_player_menu_allowed_buildings_menu.h"
+
 #include "i18n.h"
 #include "map.h"
 #include "tribe.h"

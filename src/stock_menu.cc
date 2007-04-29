@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,15 @@
  *
  */
 
+#include "stock_menu.h"
+
 #include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
-#include "stock_menu.h"
 #include "transport.h"
+
 
 Stock_Menu::Stock_Menu
 (Interactive_Player & plr, UI::UniqueWindow::Registry & registry)

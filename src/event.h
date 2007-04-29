@@ -20,9 +20,10 @@
 #ifndef __S__EVENT_H
 #define __S__EVENT_H
 
-#include <string>
-#include <map>
 #include "types.h"
+
+#include <map>
+#include <string>
 
 class Game;
 class Section;

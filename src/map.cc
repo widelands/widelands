@@ -17,7 +17,6 @@
  *
  */
 
-#include <algorithm>
 #include "error.h"
 #include "event_chain.h"
 #include "layered_filesystem.h"
@@ -30,10 +29,14 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "s2map.h"
-#include <stdio.h>
 #include "widelands_map_loader.h"
 #include "worlddata.h"
 #include "wexception.h"
+
+#include <algorithm>
+
+#include <stdio.h>
+
 
 /**
  * Callback function for font renderer.

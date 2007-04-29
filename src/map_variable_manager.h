@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,10 @@
 #define __S__VARIABLE_MANAGER_H
 
 #include "error.h"
-#include <string>
 #include "types.h"
+
+#include <string>
+#include <vector>
 
 /*
  * The Map Variable Manager makes sure that variables
@@ -39,14 +41,12 @@
 /*
  * First, the variables
  */
-class MapVariable {
-   public:
+struct MapVariable {
       enum Type {
          MVT_INT,
          MVT_STRING,
       };
 
-   public:
       MapVariable( bool t ) { m_delete_protected = t; }
       virtual ~MapVariable( void ) { }
 
@@ -62,8 +62,7 @@ class MapVariable {
       bool           m_delete_protected;
 };
 
-class Int_MapVariable : public MapVariable {
-   public:
+struct Int_MapVariable : public MapVariable {
       Int_MapVariable( bool t ) : MapVariable( t ) { m_value = 0; }
 
 	Type get_type() const {return MVT_INT;}
@@ -80,8 +79,7 @@ class Int_MapVariable : public MapVariable {
       long            m_value;
 };
 
-class String_MapVariable : public MapVariable {
-   public:
+struct String_MapVariable : public MapVariable {
       String_MapVariable( bool t ) : MapVariable( t ) { m_value = ""; }
 
 	Type get_type() const {return MVT_STRING;}
@@ -101,8 +99,7 @@ class String_MapVariable : public MapVariable {
  *
  * But it is better this way.
  */
-class MapVariableManager {
-   public:
+struct MapVariableManager {
       MapVariableManager( void );
       ~MapVariableManager( void );
 

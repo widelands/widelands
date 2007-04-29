@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,7 @@ class Editor_Game_Base;
  */
 typedef std::map<uint, Map_Object*> Reverse_Map_Object_Map;
 
-class Widelands_Map_Map_Object_Loader {
-   public:
-      Widelands_Map_Map_Object_Loader(void);
-      ~Widelands_Map_Map_Object_Loader(void);
-
+struct Widelands_Map_Map_Object_Loader {
       bool is_object_known(uint);
       void register_object(Editor_Game_Base*, uint, Map_Object*);
 

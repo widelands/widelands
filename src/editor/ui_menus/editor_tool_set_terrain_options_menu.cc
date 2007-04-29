@@ -17,23 +17,26 @@
  *
  */
 
+#include "editor_tool_set_terrain_options_menu.h"
 
 #include "editor_set_terrain_tool.h"
-#include "editor_tool_set_terrain_options_menu.h"
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
 #include "rendertarget.h"
-#include "ui_button.h"
-#include "ui_panel.h"
-#include "ui_checkbox.h"
 #include "wlapplication.h"
 #include "world.h"
 #include "worlddata.h"
 
-Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu
+#include "ui_button.h"
+#include "ui_panel.h"
+#include "ui_checkbox.h"
+
+
+Editor_Tool_Set_Terrain_Tool_Options_Menu::
+Editor_Tool_Set_Terrain_Tool_Options_Menu
 (Editor_Interactive         & parent,
  Editor_Set_Terrain_Tool    & tool,
  UI::UniqueWindow::Registry & registry)

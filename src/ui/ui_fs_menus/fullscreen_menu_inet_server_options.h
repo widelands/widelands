@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004. 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,13 @@
 #define __S__INET_SERVER_OPTIONS_H
 
 #include "fullscreen_menu_base.h"
+
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_textarea.h"
 
 
-class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
-	public:
+struct Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 		Fullscreen_Menu_InetServerOptions ();
 		~Fullscreen_Menu_InetServerOptions ();
 
@@ -36,7 +36,7 @@ class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 		const char* get_server_name()
 	{return hostname.get_text();}
 
-	private:
+private:
 	UI::Textarea                                         title;
 	UI::IDButton<Fullscreen_Menu_InetServerOptions, int> rungame;
 	UI::IDButton<Fullscreen_Menu_InetServerOptions, int> back;

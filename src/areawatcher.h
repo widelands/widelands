@@ -20,8 +20,8 @@
 #ifndef __S__AREAWATCHER_H
 #define __S__AREAWATCHER_H
 
-#include "player_area.h"
 #include "instances.h"
+#include "player_area.h"
 
 struct AreaWatcher_Descr;
 

@@ -17,7 +17,6 @@
  *
  */
 
-#include <vector>
 #include "building.h"
 #include "building_statistics_menu.h"
 #include "error.h"
@@ -33,6 +32,9 @@
 #include "ui_textarea.h"
 #include "tribe.h"
 #include "wui_plot_area.h"
+
+#include <vector>
+
 
 #define BUILDING_LIST_HEIGHT 220
 #define BUILDING_LIST_WIDTH  320

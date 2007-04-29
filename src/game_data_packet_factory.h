@@ -31,8 +31,7 @@ class Game_Data_Packet;
  * classes. This is usefull to add new Packets without
  * the need to touch any other code than class
  */
-class Game_Data_Packet_Factory {
-   public:
+struct Game_Data_Packet_Factory {
       Game_Data_Packet* create_correct_packet(ushort id) throw(_wexception);
 };
 

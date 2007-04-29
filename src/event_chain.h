@@ -20,12 +20,13 @@
 #ifndef __S__EVENT_CHAIN_H
 #define __S__EVENT_CHAIN_H
 
-#include <string>
-#include <vector>
 #include "event_referencer.h"
 #include "error.h"
 #include "trigger_referencer.h"
 #include "types.h"
+
+#include <string>
+#include <vector>
 
 class Event;
 class Game;

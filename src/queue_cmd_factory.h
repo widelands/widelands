@@ -28,8 +28,7 @@ class BaseCommand;
  * This creates the correct queue commands
  * from the queue command file ids
  */
-class Queue_Cmd_Factory {
-   public:
+struct Queue_Cmd_Factory {
       static BaseCommand* create_correct_queue_command(uint id);
 };
 

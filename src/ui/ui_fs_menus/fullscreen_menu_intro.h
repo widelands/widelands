@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,7 @@
  * This simply waits modal for a click and in the meantime
  * shows the splash screen
  */
-class Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
-public:
+struct Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Intro();
 
 protected:

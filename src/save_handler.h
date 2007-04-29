@@ -27,10 +27,9 @@ class Game;
 #define DEFAULT_AUTOSAVE_INTERVAL			15
 
 class SaveHandler {
-private:
 	int m_lastSaveTime;
 	bool m_initialized;
-	
+
 	void initialize(int currenttime);
 
 protected:

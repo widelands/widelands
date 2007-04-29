@@ -25,6 +25,7 @@
 #include "map.h"
 #include "mapview.h"
 #include "overlay_manager.h"
+
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 

@@ -17,8 +17,8 @@
  *
  */
 
-#include <stdio.h>
 #include "animation.h"
+
 #include "bob.h"
 #include "error.h"
 #include "constants.h"
@@ -26,13 +26,8 @@
 #include "sound_handler.h"
 #include "wexception.h"
 
-/*
-==============================================================================
+#include <stdio.h>
 
-EncodeData IMPLEMENTAION
-
-==============================================================================
-*/
 
 /*
 ===============

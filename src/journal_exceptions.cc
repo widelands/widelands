@@ -17,8 +17,9 @@
  *
  */
 
-#include "helper.h"
 #include "journal_exceptions.h"
+
+#include "helper.h"
 
 Journalfile_error::Journalfile_error(const std::string _filename) throw():
 		std::runtime_error("Problem with journal file."),

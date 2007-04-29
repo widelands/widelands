@@ -17,20 +17,23 @@
  *
  */
 
-#include "constants.h"
 #include "editor_event_menu_new_event.h"
+
+#include "constants.h"
+#include "editorinteractive.h"
+#include "error.h"
+#include "event.h"
+#include "event_factory.h"
 #include "i18n.h"
+#include "map.h"
+#include "map_event_manager.h"
+
 #include "ui_window.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
-#include "editorinteractive.h"
-#include "event.h"
-#include "event_factory.h"
-#include "map.h"
-#include "map_event_manager.h"
-#include "error.h"
+
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* parent) :
 UI::Window(parent, 0, 0, 400, 240, _("New Event").c_str()),

@@ -20,14 +20,15 @@
 #ifndef __S__FIELD_H
 #define __S__FIELD_H
 
-#include <cassert>
 #include "geometry.h"
 #include "compile_assert.h"
 #include "constants.h"
 #include "types.h"
 #include "world.h"
 
+#include <cassert>
 #include <limits>
+
 
 #define MAX_FIELD_HEIGHT 60
 #define MAX_FIELD_HEIGHT_DIFF 5

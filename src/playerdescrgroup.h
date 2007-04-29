@@ -20,12 +20,13 @@
 #ifndef __S__PLAYER_DESCR_GROUP
 #define __S__PLAYER_DESCR_GROUP
 
-#include <string>
-#include <vector>
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_signal.h"
 #include "ui_textarea.h"
+
+#include <string>
+#include <vector>
 
 class Game;
 

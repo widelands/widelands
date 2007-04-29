@@ -17,10 +17,13 @@
  *
  */
 
-#include <assert.h>
-#include "editor_game_base.h"
 #include "surface.h"
+
+#include "editor_game_base.h"
 #include "terrain.h"
+
+#include <assert.h>
+
 
 Surface::~Surface() {
 	if( m_surface )

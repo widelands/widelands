@@ -21,7 +21,6 @@
 Rendering functions of the 16-bit software renderer.
 */
 
-#include <SDL.h>
 #include "building.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -36,13 +35,7 @@ Rendering functions of the 16-bit software renderer.
 #include "wexception.h"
 #include "world.h"
 
-/*
-==============================================================================
-
-Surface
-
-==============================================================================
-*/
+#include <SDL.h>
 
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,8 @@
 #ifndef OPTIONSMENU_H
 #define OPTIONSMENU_H
 
-#define NUM_RESOLUTIONS 6
-
 #include "fullscreen_menu_base.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_listselect.h"
@@ -34,8 +33,9 @@
 class Fullscreen_Menu_Options;
 struct Section;
 
-class Options_Ctrl {
-	public:
+#define NUM_RESOLUTIONS 6
+
+struct Options_Ctrl {
 		struct Options_Struct {
 			int xres;
 			int yres;

@@ -17,17 +17,20 @@
  *
  */
 
+#include "playerdescrgroup.h"
+
 #include "constants.h"
 #include "game.h"
 #include "i18n.h"
 #include "player.h"
-#include "playerdescrgroup.h"
 #include "types.h"
+#include "tribe.h"
+#include "wexception.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_textarea.h"
-#include "tribe.h"
-#include "wexception.h"
+
 
 static const std::string default_names[MAX_PLAYERS + 1] = {
 	"",

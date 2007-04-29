@@ -17,15 +17,12 @@
  *
  */
 
-#include <locale.h>
-#include <libintl.h>
-#include <stdio.h>
+#include "militarysite.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
 #include "i18n.h"
-#include <libintl.h>
-#include "militarysite.h"
 #include "player.h"
 #include "profile.h"
 #include "soldier.h"
@@ -33,13 +30,11 @@
 #include "tribe.h"
 #include "worker.h"
 
-/**
-=============================
+#include <libintl.h>
+#include <locale.h>
+#include <stdio.h>
 
-class MilitarySite_Descr
 
-=============================
-*/
 MilitarySite_Descr::MilitarySite_Descr
 (const Tribe_Descr & tribe_descr, const std::string & militarysite_name)
 :

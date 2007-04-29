@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006 by the Widelands Development Team
+ * Copyright (C) 2004-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,13 @@
     Game setup, lobby, LAN game finding, internet gaming, GGZ....
 */
 
+#include "network.h"
+
 #include "error.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "network.h"
 #include "network_ggz.h"
 #include "network_lan_promotion.h"
 #include "network_system.h"

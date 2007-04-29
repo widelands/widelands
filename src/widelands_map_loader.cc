@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_loader.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
@@ -40,7 +42,6 @@
 #include "widelands_map_heights_data_packet.h"
 #include "widelands_map_immovable_data_packet.h"
 #include "widelands_map_immovabledata_data_packet.h"
-#include "widelands_map_loader.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_objective_data_packet.h"
 #include "widelands_map_owned_fields_data_packet.h"
@@ -60,17 +61,12 @@
 #include "world.h"
 
 
-/*
- * Constructor
- */
 Widelands_Map_Loader::Widelands_Map_Loader(FileSystem & fs, Map* map) :
 Map_Loader("", map), m_fs(fs), m_mol(0)
 {}
 
-/*
- * Destructor
- */
-Widelands_Map_Loader::~Widelands_Map_Loader(void) {
+
+Widelands_Map_Loader::~Widelands_Map_Loader() {
       delete m_mol;
    delete &m_fs;
 }

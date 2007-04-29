@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,15 +24,6 @@
 #include "instances.h"
 #include "widelands_map_map_object_loader.h"
 #include "wexception.h"
-
-/*
- * constructor, destructor
- */
-Widelands_Map_Map_Object_Loader::Widelands_Map_Map_Object_Loader(void) {
-}
-
-Widelands_Map_Map_Object_Loader::~Widelands_Map_Map_Object_Loader(void) {
-}
 
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,9 @@
 #define __S__EVENT_MANAGER_H
 
 #include "error.h"
+
 #include <string>
+#include <vector>
 
 class Event;
 
@@ -37,10 +39,9 @@ class Event;
  *
  * But it is better this way.
  */
-class MapEventManager {
-   public:
-      MapEventManager( void );
-      ~MapEventManager( void );
+struct MapEventManager {
+	MapEventManager();
+	~MapEventManager();
 
       /*
        * Register a new event

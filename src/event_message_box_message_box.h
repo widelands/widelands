@@ -20,20 +20,20 @@
 #ifndef __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
 #define __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
 
-class Event_Message_Box;
-class Game;
-class Trigger_Null;
-
-#include <vector>
 #include "ui_window.h"
 
-class Message_Box_Event_Message_Box : public UI::Window {
-   public:
+#include <vector>
+
+struct Event_Message_Box;
+struct Game;
+struct Trigger_Null;
+
+struct Message_Box_Event_Message_Box : public UI::Window {
       Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int, int, int, int);
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
       Game* m_game;
       void clicked(int);
       bool m_is_modal;

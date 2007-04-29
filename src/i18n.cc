@@ -17,11 +17,12 @@
  *
  */
 
-#include <libintl.h>
 #include "constants.h" //for LOCALE_PATH
 #include "i18n.h"
-#include <libintl.h>
 #include "config.h"  // this might override the local path (e.g. MacOS X)
+
+#include <libintl.h>
+
 
 std::string i18n::m_locale="";
 std::vector<std::string> i18n::m_textdomains=std::vector<std::string>();
@@ -46,7 +47,7 @@ const std::string i18n::translate(const std::string str)
 void i18n::grab_textdomain(const std::string domain)
 {
 	const char* dom=domain.c_str();
-	
+
    bind_textdomain_codeset(dom, "UTF-8");
 	bindtextdomain(dom, LOCALE_PATH);
 	textdomain(dom);

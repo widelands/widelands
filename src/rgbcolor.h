@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Wide Lands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,24 +20,13 @@
 #ifndef RGBCOLOR_H
 #define RGBCOLOR_H
 
-#include <SDL.h>
 #include "types.h"
 
-/*
-==============================================================================
+#include <SDL.h>
 
-COLOR HANDLING
 
-==============================================================================
-*/
-
-/*
-class RGBColor
-*/
 struct RGBColor : protected SDL_Color {
-
-public:
-	inline RGBColor() { }
+	RGBColor() {}
 	RGBColor(const Uint8 R, const Uint8 G, const Uint8 B) throw ()
 	{SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;}
 

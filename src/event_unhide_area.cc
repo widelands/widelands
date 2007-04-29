@@ -18,6 +18,7 @@
  */
 
 #include "event_unhide_area.h"
+
 #include "game.h"
 #include "player.h"
 #include "profile.h"

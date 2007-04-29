@@ -20,8 +20,6 @@
 #ifndef __TRIBE_H
 #define __TRIBE_H
 
-#include <map>
-#include <vector>
 #include "animation.h"
 #include "bob.h"
 #include "building.h"
@@ -29,6 +27,9 @@
 #include "immovable.h"
 #include "ware.h"
 #include "worker.h"
+
+#include <map>
+#include <vector>
 
 class Building_Descr;
 class Editor_Game_Base;

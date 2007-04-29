@@ -20,9 +20,10 @@
 #ifndef __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
 #define __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
 
+#include "ui_window.h"
+
 #include <string>
 #include <vector>
-#include "ui_window.h"
 
 class Editor_Interactive;
 class Event_Allow_Building;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,7 @@
 class Interactive_Player;
 class WUIPlot_Area;
 
-class Ware_Statistics_Menu : public UI::UniqueWindow {
-   public:
+struct Ware_Statistics_Menu : public UI::UniqueWindow {
 	Ware_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
       virtual ~Ware_Statistics_Menu(void);
 

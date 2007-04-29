@@ -17,22 +17,18 @@
  *
  */
 
-#include "game.h"
 #include "game_preload_data_packet.h"
+
+#include "game.h"
 #include "map.h"
 #include "profile.h"
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Game_Preload_Data_Packet::~Game_Preload_Data_Packet(void) {
-}
 
-/**
- * Read Function
- */
+Game_Preload_Data_Packet::~Game_Preload_Data_Packet() {}
+
+
 void Game_Preload_Data_Packet::Read
 (FileSystem & fs, Game *, Widelands_Map_Map_Object_Loader * const)
 throw(_wexception)

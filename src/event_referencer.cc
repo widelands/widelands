@@ -17,8 +17,9 @@
  *
  */
 
-#include "event.h"
 #include "event_referencer.h"
+
+#include "event.h"
 
 /*
  * Reference a event

@@ -17,9 +17,9 @@
  *
  */
 
-#include <stdio.h>
-#include "animation.h"
 #include "constructionsite.h"
+
+#include "animation.h"
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
@@ -33,7 +33,9 @@
 #include "wexception.h"
 #include "worker.h"
 
-#include "ui/ui_basic/ui_object.h" //only needed for i18n function _()
+#include "ui_object.h" //only needed for i18n function _()
+
+#include <stdio.h>
 
 static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 

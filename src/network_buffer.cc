@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,12 @@
  *
  */
 
-#include "error.h"
 #include "network_buffer.h"
+
+#include "error.h"
 #include "wexception.h"
 
-/*
- * Constructor
- */
+
 Network_Buffer::Network_Buffer(void) {
    m_buffer_real_len = 1000;
    m_buffer_len = 0; // To correct for size entry
@@ -33,12 +32,8 @@ Network_Buffer::Network_Buffer(void) {
    put_16(0); // This will become our size
 }
 
-/*
- * Destructor
- */
-Network_Buffer::~Network_Buffer(void) {
-   free(m_buffer);
-}
+
+Network_Buffer::~Network_Buffer() {free(m_buffer);}
 
 /*
  * finish this buffer, this basically corrects

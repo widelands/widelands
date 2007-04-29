@@ -21,6 +21,7 @@
 #define __S__MAPVIEW_H
 
 #include "geometry.h"
+
 #include "ui_panel.h"
 #include "ui_signal.h"
 

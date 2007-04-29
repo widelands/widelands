@@ -26,6 +26,7 @@ class Editor_Interactive;
 namespace UI {
 class Edit_Box;
 class Multiline_Editbox;
+struct Textarea;
 };
 
 /*

@@ -17,17 +17,14 @@
  *
  */
 
-// #include <assert.h>
-// #include "editor_game_base.h"
-
-// #include "instances.h" //only needed for g_flag_descr
+#include "rendertarget.h"
 
 #include "graphic.h"
 #include "mapviewpixelconstants.h"
 #include "overlay_manager.h"
-#include "rendertarget.h"
 #include "surface.h"
 #include "tribe.h"
+
 
 /**
  * Build a render target for the given bitmap.

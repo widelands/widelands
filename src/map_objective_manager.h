@@ -22,9 +22,10 @@
 
 #include "error.h"
 #include "i18n.h"
-#include <string>
 #include "trigger_null.h"
 #include "trigger_referencer.h"
+
+#include <string>
 
 /*
  * The Map Objective manager keeps all objectives

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,7 @@
  * If present, this contains all buildings that are allowed to be build
  * by players. If absent, all buildings are allowed per default
  */
-class Widelands_Map_Allowed_Buildings_Data_Packet : public Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Allowed_Buildings_Data_Packet : public Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Allowed_Buildings_Data_Packet();
 
 	virtual void Read

@@ -17,9 +17,10 @@
  *
  */
 
+#include "editor_event_menu_edit_eventchain.h"
+
 #include "constants.h"
 #include "editorinteractive.h"
-#include "editor_event_menu_edit_eventchain.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
 #include "error.h"
 #include "event.h"

@@ -17,10 +17,12 @@
  *
  */
 
-#include "error.h"
 #include "fullscreen_menu_tutorial_select_map.h"
-#include "i18n.h"
+
 #include "constants.h"
+#include "error.h"
+#include "i18n.h"
+
 
 static const char* filenames[] = {
    "campaigns/t01.wmf",
@@ -72,7 +74,7 @@ empire_1
  1,
  &Fullscreen_Menu_TutorialSelectMap::end_modal, this, 3,
  _("Empire 1: The Strands of Malac' Mor")),
- 
+
  empire_2
 (this,
  80, 380, 640, 26,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,7 @@
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)
  */
-class Game_Player_Info_Data_Packet : public Game_Data_Packet {
-   public:
+struct Game_Player_Info_Data_Packet : public Game_Data_Packet {
       virtual ~Game_Player_Info_Data_Packet();
 
 	virtual void Read
@@ -36,7 +35,6 @@ class Game_Player_Info_Data_Packet : public Game_Data_Packet {
 	virtual void Write
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
 		throw (_wexception);
-
 };
 
 #endif

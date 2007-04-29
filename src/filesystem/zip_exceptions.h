@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,7 @@
  * throw FileNotFound_error("ZipFilesystem::Load", fname,
  * "couldn't open file (from zipfile "+m_zipfilename+")");
  */
-class ZipOperation_error : public std::logic_error {
-public:
+struct ZipOperation_error : public std::logic_error {
 	explicit ZipOperation_error(const std::string & thrower,
 	                            const std::string & filename,
 	                            const std::string & zipfilename,

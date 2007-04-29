@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,7 @@
 /*
  * What map variables are there, what values do they have?
  */
-class Widelands_Map_Variable_Data_Packet : public Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Variable_Data_Packet : public Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Variable_Data_Packet();
 
 	virtual void Read

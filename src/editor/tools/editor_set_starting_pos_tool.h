@@ -20,9 +20,9 @@
 #ifndef __S__EDITOR_SET_STARTING_POS_TOOL_H
 #define __S__EDITOR_SET_STARTING_POS_TOOL_H
 
-#include <string>
 #include "editor_tool.h"
 
+#include <string>
 
 // How much place should be left around a player position
 // where no other player can start

@@ -17,24 +17,19 @@
  *
  */
 
+#include "mapview.h"
+
 #include "graphic.h"
 #include "interactive_base.h"
 #include "interactive_player.h"
 #include "map.h"
-#include "mapview.h"
 #include "mapviewpixelfunctions.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "rendertarget.h"
 #include "wlapplication.h"
 
-/*
-===============
-Map_View::Map_View
 
-Initialize
-===============
-*/
 Map_View::Map_View
 (UI::Panel * parent, int x, int y, uint w, uint h, Interactive_Base & player)
 :

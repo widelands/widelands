@@ -29,8 +29,7 @@ class Game_Preload_Data_Packet;
  * This class reads a complete state
  * of a game out to a file.
  */
-class Game_Loader {
-   public:
+struct Game_Loader {
 	Game_Loader(FileSystem &, Game* game);
       ~Game_Loader(void);
 

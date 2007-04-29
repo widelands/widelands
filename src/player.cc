@@ -17,19 +17,21 @@
  *
  */
 
+#include "player.h"
+
+#include "attack_controller.h"
+#include "cmd_queue.h"
 #include "error.h"
 #include "game.h"
 #include "militarysite.h"
-#include "player.h"
+#include "soldier.h"
+#include "sound_handler.h"
 #include "transport.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
-#include "cmd_queue.h"
-#include "soldier.h"
-#include "sound_handler.h"
-#include "attack_controller.h"
+
 
 extern Map_Object_Descr g_road_descr;
 

@@ -20,11 +20,11 @@
 #ifndef __S__OVERLAY_HANDLER_H
 #define __S__OVERLAY_HANDLER_H
 
-#include <map>
 #include "field.h"
 #include "geometry.h"
 #include "types.h"
 
+#include <map>
 #include <set>
 
 /*

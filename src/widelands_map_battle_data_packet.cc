@@ -17,7 +17,8 @@
  *
  */
 
-#include <map>
+#include "widelands_map_battle_data_packet.h"
+
 #include "battle.h"
 #include "fileread.h"
 #include "filewrite.h"
@@ -28,10 +29,12 @@
 #include "tribe.h"
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_battle_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "error.h"
+
+#include <map>
+
 
 /* VERSION 1: initial release
 */

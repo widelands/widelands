@@ -30,11 +30,13 @@
 #include "filesystem.h"
 #include "zip_exceptions.h"
 
+
 #define CURRENT_PACKET_VERSION   1
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define DIRNAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/binary"
 #define FILENAME_TEMPLATE DIRNAME_TEMPLATE "/areawatchers"
 #define FILENAME_SIZE 32
+
 
 void Widelands_Map_Players_AreaWatchers_Data_Packet::Read
 (FileSystem       & fs,

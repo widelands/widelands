@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,13 @@
 
 #include "widelands_map_data_packet.h"
 
+struct Map;
+
 /*
  * The elemental data packet contains all basic and elemental data
  * like number of players, map size, world name, magic bytes and so on
  */
-class Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Elemental_Data_Packet();
 
 	virtual void Read

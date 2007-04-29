@@ -32,13 +32,6 @@
 #include <stdio.h>
 
 
-/*
-===============
-WaresDisplay::WaresDisplay
-
-Initialize the wares display
-===============
-*/
 WaresDisplay::WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player)
 	: UI::Panel(parent, x, y, Width, 0)
 {

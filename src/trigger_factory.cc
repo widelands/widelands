@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
  *
  */
 
+#include "trigger_factory.h"
 
 #include "editorinteractive.h"
 #include "error.h"
@@ -24,11 +25,11 @@
 #include "trigger_time.h"
 #include "trigger_null.h"
 #include "trigger_building.h"
-#include "trigger_factory.h"
 #include "trigger_time_option_menu.h"
 #include "trigger_null_option_menu.h"
 #include "trigger_building_option_menu.h"
 #include "wexception.h"
+
 
 static const int nr_of_triggers=3;
 Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {

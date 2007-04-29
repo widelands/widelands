@@ -17,21 +17,14 @@
  *
  */
 
-#include <stdio.h>
-#include <string>
+#include "editor_main_menu_load_map.h"
+
 #include "building.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
-#include "ui_textarea.h"
-#include "ui_editbox.h"
-#include "ui_button.h"
-#include "ui_modal_messagebox.h"
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
 #include "editor.h"
 #include "editorinteractive.h"
-#include "editor_main_menu_load_map.h"
 #include "widelands_map_loader.h"
 #include "wexception.h"
 #include "error.h"
@@ -40,7 +33,18 @@
 #include "overlay_manager.h"
 #include "world.h"
 #include "map_loader.h"
+
+#include "ui_button.h"
+#include "ui_editbox.h"
+#include "ui_listselect.h"
+#include "ui_modal_messagebox.h"
+#include "ui_multilinetextarea.h"
 #include "ui_progresswindow.h"
+#include "ui_textarea.h"
+
+#include <string>
+
+#include <stdio.h>
 
 /*
 ===============

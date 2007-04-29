@@ -17,6 +17,8 @@
  *
  */
 
+#include "game_loader.h"
+
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
@@ -24,7 +26,6 @@
 #include "game_computer_player_data_packet.h"
 #include "game_data_packet_ids.h"
 #include "game_game_class_data_packet.h"
-#include "game_loader.h"
 #include "game_map_data_packet.h"
 #include "game_preload_data_packet.h"
 #include "game_interactive_player_data_packet.h"
@@ -33,17 +34,11 @@
 #include "widelands_map_map_object_loader.h"
 
 
-/*
- * Constructor
- */
 Game_Loader::Game_Loader(FileSystem & fs, Game* game) : m_fs(fs), m_game(game)
 {}
 
-/*
- * Destructor
- */
-Game_Loader::~Game_Loader(void) {
-}
+
+Game_Loader::~Game_Loader() {}
 
 /*
  * This function preloads a game

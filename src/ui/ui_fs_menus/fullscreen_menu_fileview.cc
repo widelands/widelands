@@ -17,11 +17,13 @@
  *
  */
 
+#include "fullscreen_menu_fileview.h"
+
 #include "constants.h"
 #include "filesystem.h"
-#include "fullscreen_menu_fileview.h"
 #include "i18n.h"
 #include "profile.h"
+
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)
 :

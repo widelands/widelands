@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define __S__GENERAL_STATISTICS_MENU_H
 
 #include "constants.h"
+
 #include "ui_unique_window.h"
 
 class Interactive_Player;

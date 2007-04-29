@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,26 +17,23 @@
  *
  */
 
-#include <vector>
 #include "event_chain.h"
 #include "map_eventchain_manager.h"
 #include "trigger_conditional.h"
 
-/*
- * Map Objective Manager implementation
- */
-MapEventChainManager::MapEventChainManager( void ) {
-}
+#include <vector>
 
-MapEventChainManager::~MapEventChainManager( void ) {
+
+MapEventChainManager::MapEventChainManager() {}
+
+
+MapEventChainManager::~MapEventChainManager() {
    for( uint i = 0; i < m_eventchains.size(); i++)
       delete m_eventchains[i];
    m_eventchains.resize( 0 );
 }
 
-/*
- * Register a new eventchain
- */
+
 bool MapEventChainManager::register_new_eventchain( EventChain* mv ) {
    // check if this eventchain is already known
    if( get_eventchain( mv->get_name() ) )

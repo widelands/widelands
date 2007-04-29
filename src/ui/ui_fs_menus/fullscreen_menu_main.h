@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define __S__MAINMENUE_H
 
 #include "fullscreen_menu_base.h"
+
 #include "ui_button.h"
 #include "ui_textarea.h"
 

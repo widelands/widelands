@@ -26,6 +26,8 @@
 #include <string>
 #include <vector>
 
+struct EncodeData;
+struct ProductionSite_Descr;
 class Profile;
 
 struct ProductionAction {

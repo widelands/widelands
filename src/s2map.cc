@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,18 +17,20 @@
  *
  */
 
+#include "s2map.h"
+
 #include "editor_game_base.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "i18n.h"
-#include <iostream>
 #include "layered_filesystem.h"
 #include "map.h"
 #include "map_loader.h"
-#include "s2map.h"
 #include "types.h"
 #include "wexception.h"
 #include "world.h"
+
+#include <iostream>
 
 using std::cerr;
 using std::ios;

@@ -17,6 +17,8 @@
  *
  */
 
+#include "soldier.h"
+
 #include "attack_controller.h"
 #include "battle.h"
 #include "editor_game_base.h"
@@ -29,7 +31,6 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
-#include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"

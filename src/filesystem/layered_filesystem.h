@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,7 @@
  * $CWD  <-- the current-working directory; this is useful for debugging, when
  * the executable isn't in the root of the game-data directory
  */
-class LayeredFileSystem : public FileSystem {
-public:
+struct LayeredFileSystem : public FileSystem {
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 

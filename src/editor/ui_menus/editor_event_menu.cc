@@ -17,10 +17,11 @@
  *
  */
 
+#include "editor_event_menu.h"
+
 #include "event.h"
 #include "event_chain.h"
 #include "event_factory.h"
-#include "editor_event_menu.h"
 #include "editor_event_menu_edit_eventchain.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
 #include "editor_event_menu_new_trigger.h"

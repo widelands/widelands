@@ -24,9 +24,11 @@
  * Implementation is in immovable.cc
  */
 
-#include <string>
 #include "immovable.h"
 #include "types.h"
+
+#include <string>
+
 
 class Profile;
 

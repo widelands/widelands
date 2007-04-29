@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,15 @@
 
 #include "widelands_map_data_packet.h"
 
+struct FileRead;
+struct FileWrite;
 class Worker;
 class Critter_Bob;
 
 /*
  * This cares for the data of bobs
  */
-class Widelands_Map_Bobdata_Data_Packet : public Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Bobdata_Data_Packet : public Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Bobdata_Data_Packet();
 
 	virtual void Read

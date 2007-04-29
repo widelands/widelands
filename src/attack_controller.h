@@ -20,12 +20,13 @@
 #ifndef __S__WIDELANDS_ATTACK_CTRL_H
 #define __S__WIDELANDS_ATTACK_CTRL_H
 
+#include "immovable.h"
 #include "instances.h"
 
 #include <set>
 #include <vector>
+
 #include <types.h>
-#include "immovable.h"
 
 class Game;
 class Flag;

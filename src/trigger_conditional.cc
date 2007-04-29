@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,11 +18,13 @@
  */
 
 
+#include "trigger_conditional.h"
+
 #include "compile_assert.h"
 #include "error.h"
 #include "event_chain.h"
 #include "trigger.h"
-#include "trigger_conditional.h"
+
 
 const char * const TriggerConditional_Factory::operators[] =
 {"NOT", "AND", "OR", "XOR", "(", ")", "trigger"};

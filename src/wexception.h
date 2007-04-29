@@ -21,8 +21,9 @@
 #define WEXCEPTION_H
 
 #include <string>
-#include <types.h>
 #include <exception>
+
+#include <types.h>
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))

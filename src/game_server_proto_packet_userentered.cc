@@ -17,10 +17,11 @@
  *
  */
 
+#include "game_server_proto_packet_userentered.h"
+
 #include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
-#include "game_server_proto_packet_userentered.h"
 #include "network_buffer.h"
 #include "wexception.h"
 

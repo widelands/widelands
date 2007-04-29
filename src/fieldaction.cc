@@ -17,11 +17,13 @@
  *
  */
 
+#include "fieldaction.h"
+
+#include "attack_controller.h"
 #include "interactive_player.h"
 #include "cmd_queue.h"
 #include "editorinteractive.h"
 #include "error.h"
-#include "fieldaction.h"
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -31,32 +33,24 @@
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
+#include "watchwindow.h"
+
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_icongrid.h"
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
-#include "watchwindow.h"
-#include "attack_controller.h"
 
-class Building_Descr;
 
-/*
-==============================================================================
-
-BuildGrid IMPLEMENTATION
-
-==============================================================================
-*/
+struct Building_Descr;
 
 #define BG_CELL_WIDTH  34 // extents of one cell
 #define BG_CELL_HEIGHT 34
 
 
 // The BuildGrid presents a selection of buildable buildings
-class BuildGrid : public UI::Icon_Grid {
-public:
+struct BuildGrid : public UI::Icon_Grid {
 	BuildGrid
 		(UI::Panel* parent,
 		 const Tribe_Descr & tribe,
@@ -238,7 +232,7 @@ static const char* const pic_tab_buildhouse[3] = {
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png"
 };
-static const std::string tooltip_tab_build[3] = 
+static const std::string tooltip_tab_build[3] =
 {_("Build small buildings"), _("Build medium buildings"), _("Build large buildings"),};
 
 static const char* const pic_tab_buildmine = "pics/menu_tab_buildmine.png";

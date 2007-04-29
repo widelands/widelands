@@ -18,6 +18,7 @@
  */
 
 #include "editor_increase_resources_tool.h"
+
 #include "graphic.h"
 #include "map.h"
 #include "field.h"
@@ -28,13 +29,7 @@
 #include "overlay_manager.h"
 #include "worlddata.h"
 
-/*
-=============================
 
-class Editor_Increase_Resources_Tool
-
-=============================
-*/
 int Editor_Change_Resource_Tool_Callback
 (const TCoords<FCoords> c, void * data, int curres)
 {

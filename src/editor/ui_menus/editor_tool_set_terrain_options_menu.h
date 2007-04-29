@@ -20,10 +20,11 @@
 #ifndef __S__EDITOR_TOOL_SET_TERRAIN_TOOL_H
 #define __S__EDITOR_TOOL_SET_TERRAIN_TOOL_H
 
-#include <vector>
 #include "editor_tool_options_menu.h"
 
 #include "ui_textarea.h"
+
+#include <vector>
 
 class Editor_Interactive;
 class Editor_Set_Terrain_Tool;

@@ -19,30 +19,16 @@
 
  // just testing - philipp
 
+#include "minimap.h"
+
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "map.h"
 #include "mapviewpixelconstants.h"
-#include "minimap.h"
 #include "rendertarget.h"
 
-/*
-==============================================================================
 
-MiniMapView
-
-==============================================================================
-*/
-
-
-/*
-===============
-MiniMapView::MiniMapView
-
-Initialize the minimap object
-===============
-*/
 MiniMap::View::View
 (UI::Panel & parent,
  const  int x, const  int y,

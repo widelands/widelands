@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +17,22 @@
  *
  */
 
-#include <vector>
 #include "map_event_manager.h"
+
 #include "event.h"
 
-/*
- * Map Event Manager implementation
- */
-MapEventManager::MapEventManager( void ) {
-}
+#include <vector>
 
-MapEventManager::~MapEventManager( void ) {
+
+MapEventManager::MapEventManager() {}
+
+MapEventManager::~MapEventManager() {
    for( uint i = 0; i < m_events.size(); i++)
       delete m_events[i];
    m_events.resize( 0 );
 }
 
-/*
- * Register a new event
- */
+
 bool MapEventManager::register_new_event( Event* mv ) {
    // check if this event is already known
    if( get_event( mv->name().c_str() ) )

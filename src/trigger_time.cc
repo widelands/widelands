@@ -17,12 +17,13 @@
  *
  */
 
+#include "trigger_time.h"
+
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "i18n.h"
 #include "profile.h"
-#include "trigger_time.h"
 #include "wexception.h"
 
 static const int TRIGGER_VERSION = 1;

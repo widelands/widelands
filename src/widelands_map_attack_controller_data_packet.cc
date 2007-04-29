@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +17,27 @@
  *
  */
 
-#include <map>
-#include <set>
+#include "attack_controller.h"
 #include "battle.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "editor_game_base.h"
+#include "error.h"
+#include "geometry.h"
 #include "immovable.h"
 #include "militarysite.h"
 #include "map.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "world.h"
-#include "geometry.h"
-#include "attack_controller.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_attack_controller_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "error.h"
+#include "world.h"
+
+#include <map>
+#include <set>
+
 
 /* VERSION 1: initial release
 */

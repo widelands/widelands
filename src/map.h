@@ -20,12 +20,13 @@
 #ifndef __S__MAP_H
 #define __S__MAP_H
 
-#include <string>
-#include <vector>
 #include "field.h"
 #include "geometry.h"
 #include "interval.h"
 #include "world.h"
+
+#include <string>
+#include <vector>
 
 class BaseImmovable;
 class FileRead;

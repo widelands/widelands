@@ -17,12 +17,14 @@
  *
  */
 
+#include "game_player_economies_data_packet.h"
+
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
-#include "game_player_economies_data_packet.h"
 #include "player.h"
 #include "transport.h"
+
 
 #define CURRENT_PACKET_VERSION 1
 

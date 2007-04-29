@@ -20,8 +20,9 @@
 #ifndef __S__EVENT_FACTORY_H
 #define __S__EVENT_FACTORY_H
 
-#include <string>
 #include "types.h"
+
+#include <string>
 
 class Event;
 class Editor_Interactive;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,15 +23,17 @@
 #include "widelands_map_data_packet.h"
 
 struct ConstructionSite;
+struct FileRead;
+struct FileWrite;
 struct MilitarySite;
 struct TrainingSite;
 struct ProductionSite;
+struct Warehouse;
 
 /*
  * This cares for the data of buildings
  */
-class Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Buildingdata_Data_Packet();
 
 	virtual void Read

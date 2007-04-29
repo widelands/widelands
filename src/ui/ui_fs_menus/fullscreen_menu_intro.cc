@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,18 +21,10 @@
 
 #include <SDL.h>
 
-/*
-==============================================================================
-
-Fullscreen_Menu_Intro IMPLEMENTATION
-
-==============================================================================
-*/
 
 Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 	: Fullscreen_Menu_Base("splash.jpg")
-{
-}
+{}
 
 bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int, int) {
 		end_modal(0);

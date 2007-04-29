@@ -17,14 +17,15 @@
  *
  */
 
-#include <string.h>
-#include "profile.h"
 #include "computer_player_hints.h"
 
-BuildingHints::BuildingHints ()
-{
-	need_map_resource=0;
-}
+#include "profile.h"
+
+#include <string.h>
+
+
+BuildingHints::BuildingHints () : need_map_resource(0) {}
+
 
 void BuildingHints::parse (Profile* prof)
 {

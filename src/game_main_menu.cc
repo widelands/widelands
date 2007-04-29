@@ -17,9 +17,10 @@
  *
  */
 
+#include "game_main_menu.h"
+
 #include "building_statistics_menu.h"
 #include "game_chat_menu.h"
-#include "game_main_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
 #include "game_objectives_menu.h"
@@ -29,8 +30,10 @@
 #include "i18n.h"
 #include "interactive_player.h"
 #include "stock_menu.h"
-#include "ui_unique_window.h"
 #include "ware_statistics_menu.h"
+
+#include "ui_unique_window.h"
+
 
 GameMainMenu::GameMainMenu
 (Interactive_Player & plr,

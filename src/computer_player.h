@@ -21,6 +21,7 @@
 #define __COMPPLAYER_H
 
 #include "game.h"
+
 #include <list>
 
 class BuildingHints;

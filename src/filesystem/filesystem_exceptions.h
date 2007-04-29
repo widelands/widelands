@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,7 @@
 /**
  * Generic problem when dealing with a file or directory
  */
-class File_error : public std::runtime_error {
-public:
+struct File_error : public std::runtime_error {
 	explicit File_error(const std::string & thrower,
 	                    const std::string & filename,
 	                    const std::string & message="problem with file/directory")

@@ -17,7 +17,6 @@
  *
  */
 
-#include <map>
 #include "fileread.h"
 #include "filewrite.h"
 #include "editor.h"
@@ -32,17 +31,14 @@
 #include "widelands_map_map_object_saver.h"
 #include "error.h"
 
+#include <map>
+
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Road_Data_Packet::~Widelands_Map_Road_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Road_Data_Packet::~Widelands_Map_Road_Data_Packet() {}
+
+
 void Widelands_Map_Road_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
@@ -81,9 +77,6 @@ throw (_wexception)
 }
 
 
-/*
- * Write Function
- */
 void Widelands_Map_Road_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,

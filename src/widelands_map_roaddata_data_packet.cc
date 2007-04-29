@@ -17,7 +17,8 @@
  *
  */
 
-#include <map>
+#include "widelands_map_roaddata_data_packet.h"
+
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
@@ -29,10 +30,11 @@
 #include "transport.h"
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_roaddata_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "error.h"
+
+#include <map>
 
 #define CURRENT_PACKET_VERSION 1
 

@@ -37,6 +37,7 @@
 
 #include <stdio.h>
 
+
 #define spacing 5
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
 UI::Window(parent, 0, 0, 200, 280, _("Allow Building Event Options").c_str()),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,10 @@
 #ifndef __S__STOCK_MENU_H
 #define __S__STOCK_MENU_H
 
+#include "waresdisplay.h"
+
 #include "ui_button.h"
 #include "ui_unique_window.h"
-#include "waresdisplay.h"
 
 class WaresDisplay;
 class Interactive_Player;
@@ -32,8 +33,7 @@ class Economy;
  * Shows statistics about all stocks currently in the game of
  * one player
  */
-class Stock_Menu : public UI::UniqueWindow {
-public:
+struct Stock_Menu : public UI::UniqueWindow {
 	Stock_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
 
 	virtual void think();

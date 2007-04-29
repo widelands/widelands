@@ -18,9 +18,11 @@
  */
 
 #include "editor_increase_height_tool.h"
+
 #include "map.h"
 #include "field.h"
 #include "editorinteractive.h"
+
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.
 int Editor_Increase_Height_Tool::handle_click_impl

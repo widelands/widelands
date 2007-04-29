@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ class EventChain;
  *
  * But it is better this way.
  */
-class MapEventChainManager {
-   public:
+struct MapEventChainManager {
       MapEventChainManager( void );
       ~MapEventChainManager( void );
 
@@ -60,7 +59,7 @@ class MapEventChainManager {
 	EventChain & get_eventchain_by_nr(const Index i) const
 	{assert(i < m_eventchains.size()); return *m_eventchains[i];}
 
-   private:
+private:
 	eventchain_vector m_eventchains;
 };
 

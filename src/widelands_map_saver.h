@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,7 @@ debugability
 
 ===========================
 */
-class Widelands_Map_Saver {
-   public:
+struct Widelands_Map_Saver {
 	Widelands_Map_Saver(FileSystem &, Editor_Game_Base*);
       ~Widelands_Map_Saver(void);
 

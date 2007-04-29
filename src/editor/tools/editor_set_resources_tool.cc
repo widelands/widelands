@@ -17,9 +17,10 @@
  *
  */
 
+#include "editor_set_resources_tool.h"
+
 #include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
-#include "editor_set_resources_tool.h"
 #include "graphic.h"
 #include "map.h"
 #include "field.h"

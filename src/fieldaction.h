@@ -20,10 +20,12 @@
 #ifndef FIELDACTION_H
 #define FIELDACTION_H
 
+#include "ui_unique_window.h"
+
 class Building;
+struct Player;
 class PlayerImmovable;
 class Interactive_Base;
-struct UI::UniqueWindow::Registry;
 
 // fieldaction.cc
 void show_field_action(Interactive_Base *parent, Player* player, UI::UniqueWindow::Registry* registry);

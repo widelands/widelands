@@ -17,9 +17,10 @@
  *
  */
 
+#include "fullscreen_menu_singleplayer.h"
+
 #include "constants.h"
 #include "error.h"
-#include "fullscreen_menu_singleplayer.h"
 #include "i18n.h"
 
 Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :

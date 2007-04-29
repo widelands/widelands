@@ -20,9 +20,14 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
-#include <queue>
-#include <SDL_net.h>
+#include "constants.h"
+#include "error.h"
 #include "types.h"
+
+#include <SDL_net.h>
+
+#include <queue>
+#include <string>
 #include <vector>
 
 class Game;
@@ -37,8 +42,7 @@ class LAN_Game_Promoter;
 
 class NetStatusWindow;
 
-class NetGame {
-    public:
+struct NetGame {
 	struct Chat_Message {
 		uint plrnum;
 		std::string msg;
@@ -113,8 +117,7 @@ class NetGame {
 	std::queue<Chat_Message>     chat_msg_queue;
 };
 
-class NetHost:public NetGame {
-    public:
+struct NetHost:public NetGame {
 	NetHost ();
 	virtual ~NetHost ();
 
@@ -224,8 +227,7 @@ class Serializer {
 	std::vector<unsigned char> buffer;
 };
 
-class Deserializer {
-    public:
+struct Deserializer {
 	Deserializer ();
 	~Deserializer ();
 

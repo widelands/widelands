@@ -19,8 +19,10 @@
 
 
 #include "editor_set_terrain_tool.h"
+
 #include "editorinteractive.h"
 #include "maptriangleregion.h"
+
 
 int Editor_Set_Terrain_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)

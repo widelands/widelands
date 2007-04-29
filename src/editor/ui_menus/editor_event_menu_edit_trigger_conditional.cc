@@ -17,8 +17,9 @@
  *
  */
 
-#include "editorinteractive.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
+
+#include "editorinteractive.h"
 #include "error.h"
 #include "graphic.h"
 #include "i18n.h"

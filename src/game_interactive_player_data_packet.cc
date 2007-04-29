@@ -17,10 +17,11 @@
  *
  */
 
+#include "game_interactive_player_data_packet.h"
+
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
-#include "game_interactive_player_data_packet.h"
 #include "interactive_player.h"
 #include "mapview.h"
 #include "overlay_manager.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,17 +20,17 @@
 #ifndef __S__WUI_PLOT_AREA__H
 #define __S__WUI_PLOT_AREA__H
 
-#include <vector>
 #include "rgbcolor.h"
 #include "ui_panel.h"
+
+#include <vector>
 
 /*
  * A Plot Area is a simple 2D Plot, with the
  * X Axis as time (actually Minus Time)
  * and the Y Axis some Data
  */
-class WUIPlot_Area : public UI::Panel {
-   public:
+struct WUIPlot_Area : public UI::Panel {
       enum TIME {
          TIME_15_MINS = 0,
          TIME_30_MINS,

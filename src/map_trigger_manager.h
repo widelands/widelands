@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include "error.h"
 
+#include <vector>
+
 class Trigger;
 
 /*
@@ -36,8 +38,7 @@ class Trigger;
  *
  * But it is better this way.
  */
-class MapTriggerManager {
-   public:
+struct MapTriggerManager {
       MapTriggerManager( void );
       ~MapTriggerManager( void );
 
@@ -63,7 +64,7 @@ class MapTriggerManager {
 	Trigger & get_trigger_by_nr(const Index i) const
 	{assert(i < m_triggers.size()); return *m_triggers[i];}
 
-   private:
+private:
 	trigger_vector      m_triggers;
 };
 

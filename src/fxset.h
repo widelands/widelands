@@ -21,6 +21,7 @@
 #define FXSET_H
 
 #include <SDL_mixer.h>
+
 #include <vector>
 
 class Sound_Handler;

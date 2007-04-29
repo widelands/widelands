@@ -17,20 +17,23 @@
  *
  */
 
-#include "constants.h"
 #include "editor_event_menu_new_trigger.h"
+
+#include "constants.h"
 #include "i18n.h"
 #include "map_trigger_manager.h"
-#include "ui_window.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
-#include "ui_button.h"
-#include "ui_listselect.h"
 #include "editorinteractive.h"
 #include "trigger.h"
 #include "trigger_factory.h"
 #include "map.h"
 #include "error.h"
+
+#include "ui_window.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+#include "ui_button.h"
+#include "ui_listselect.h"
+
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
 UI::Window(parent, 0, 0, 400, 240, _("New Trigger").c_str()),

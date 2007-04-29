@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ must be deleted, a new one must be selected
 
 =============================
 */
-class Map_Loader {
-   public:
+struct Map_Loader {
       enum Type {
          WLML, // Widelands Map Loader
          S2ML  // S2 Map Loader

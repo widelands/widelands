@@ -17,14 +17,13 @@
  *
  */
 
-#include <stdio.h>
 #include "random.h"
 
-RNG::RNG ()
-{
-    state0=0;
-    state1=0;
-}
+#include <stdio.h>
+
+
+RNG::RNG () : state0(0), state1(0) {}
+
 
 void RNG::seed (uint s)
 {

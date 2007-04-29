@@ -20,16 +20,17 @@
 #ifndef __S__EDITOR_GAME_BASE_H
 #define __S__EDITOR_GAME_BASE_H
 
-#include <cassert>
-#include <map>
-#include <string>
-#include <vector>
 #include "bob.h"
 #include "building.h"
 #include "constants.h"
 #include "map.h"
 #include "player_area.h"
 #include "types.h"
+
+#include <cassert>
+#include <map>
+#include <string>
+#include <vector>
 
 struct AreaWatcher;
 class Battle;

@@ -24,6 +24,7 @@
 #include "geometry.h"
 #include "rgbcolor.h"
 #include "types.h"
+
 #include <vector>
 
 class Editor_Game_Base;
@@ -76,7 +77,7 @@ public:
 
 	void drawanim(Point dst, const uint animation, const uint time,
 		      const Player * const player=0);
-	
+
 	void drawanimrect(Point dst, const uint animation, const uint time,
 			  const Player * const player, Rect srcrc);
 
@@ -90,7 +91,7 @@ protected:
 	Sint8 node_brightness(const Editor_Game_Base::Time gametime,
 			      Editor_Game_Base::Time last_seen,
 			      const Vision vision, Sint8 result);
-			
+
 	///Only needed, when this is a mapview
 	Surface* m_ground_surface;
 	///The target surface

@@ -20,9 +20,11 @@
 #ifndef JOURNAL_H
 #define JOURNAL_H
 
-#include <fstream>
 #include "journal_exceptions.h"
+
 #include <SDL_events.h>
+
+#include <fstream>
 #include <string>
 
 /**

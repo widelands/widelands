@@ -17,12 +17,15 @@
  *
  */
 
-#include <map>
 #include "event.h"
+
 #include "event_referencer.h"
 #include "map.h"
 #include "editor_game_base.h"
 #include "game.h"
+
+#include <map>
+
 
 /*
  * reference or unrefereence this Event

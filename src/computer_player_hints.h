@@ -22,8 +22,7 @@
 
 class Profile;
 
-class BuildingHints {
-    public:
+struct BuildingHints {
 	BuildingHints ();
 
 	void parse (Profile*);

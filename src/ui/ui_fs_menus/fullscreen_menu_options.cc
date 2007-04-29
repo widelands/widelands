@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,25 +19,19 @@
 
 #define DEFINE_LANGUAGES  // So that the language array gets defined
 
-#include <stdio.h>
-#include <libintl.h>
 #include "fullscreen_menu_options.h"
+
 #include "constants.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "languages.h"
 #include "profile.h"
+#include "save_handler.h"
 #include "sound_handler.h"
 #include "wlapplication.h"
-#include "save_handler.h"
 
-/*
-==============================================================================
-
-Fullscreen_Menu_Options
-
-==============================================================================
-*/
+#include <libintl.h>
+#include <stdio.h>
 
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
@@ -126,7 +120,7 @@ m_label_autosave
 		(opt.snap_windows_only_when_overlapping);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
     m_autosave                          .set_state(opt.autosave > 0);
- 
+
 	char str[255];
 	snprintf (str, sizeof(str)/sizeof(str[0]),
 			  ngettext("Autosave game every %d minute", "Autosave game every %d minutes", DEFAULT_AUTOSAVE_INTERVAL), DEFAULT_AUTOSAVE_INTERVAL);

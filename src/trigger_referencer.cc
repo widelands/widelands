@@ -17,12 +17,11 @@
  *
  */
 
-#include "trigger.h"
 #include "trigger_referencer.h"
 
-/*
- * Reference a trigger
- */
+#include "trigger.h"
+
+
 void TriggerReferencer::reference_trigger( Trigger* tr ) {
    tr->reference( this );
 }

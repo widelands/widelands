@@ -29,8 +29,7 @@
  * Only world animals are valid, no tribe animals are
  * written
  */
-class Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Bob_Data_Packet();
 
 	virtual void Read

@@ -30,8 +30,7 @@ class Game;
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)
  */
-class Game_Cmd_Queue_Data_Packet : public Game_Data_Packet {
-   public:
+struct Game_Cmd_Queue_Data_Packet : public Game_Data_Packet {
       virtual ~Game_Cmd_Queue_Data_Packet();
 
 	virtual void Read

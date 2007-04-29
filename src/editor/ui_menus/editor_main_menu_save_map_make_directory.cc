@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,17 +17,17 @@
  *
  */
 
-#include "constants.h"
 #include "editor_main_menu_save_map_make_directory.h"
+
+#include "constants.h"
 #include "i18n.h"
+
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 
-/*
- * Create this
- */
+
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UI::Panel* parent, const char* dirname) :
 UI::Window(parent, 0, 0, 230, 120, _("Make Directory").c_str())
 {

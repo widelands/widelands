@@ -17,9 +17,10 @@
  *
  */
 
+#include "game_data_packet_factory.h"
+
 #include "game_cmd_queue_data_packet.h"
 #include "game_computer_player_data_packet.h"
-#include "game_data_packet_factory.h"
 #include "game_data_packet_ids.h"
 #include "game_game_class_data_packet.h"
 #include "game_interactive_player_data_packet.h"

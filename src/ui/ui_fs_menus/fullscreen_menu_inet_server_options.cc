@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,9 @@
  */
 
 #include "fullscreen_menu_inet_server_options.h"
-#include "i18n.h"
+
 #include "constants.h"
+#include "i18n.h"
 
 Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 :

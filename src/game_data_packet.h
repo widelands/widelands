@@ -35,8 +35,7 @@ saved game file. it is an abstract base class
 
 ========================================
 */
-class Game_Data_Packet {
-   public:
+struct Game_Data_Packet {
       virtual ~Game_Data_Packet() {}
 	virtual void Read
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Loader * const = 0)

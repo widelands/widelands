@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,7 @@ class Editor_Game_Base;
 class Widelands_Map_Map_Object_Loader;
 
 /// Takes ownership of the filesystem that is passed to it.
-class Widelands_Map_Loader : public Map_Loader {
-   public:
+struct Widelands_Map_Loader : public Map_Loader {
 	Widelands_Map_Loader(FileSystem &, Map*);
       virtual ~Widelands_Map_Loader(void);
 

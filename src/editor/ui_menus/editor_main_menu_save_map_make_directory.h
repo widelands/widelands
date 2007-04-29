@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,9 @@
 #ifndef __S__EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 #define __S__EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
-#include <string>
 #include "ui_window.h"
+
+#include <string>
 
 namespace UI {
 struct Edit_Box;

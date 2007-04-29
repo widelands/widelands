@@ -24,6 +24,7 @@
 #include "player.h"
 #include "trigger_null.h"
 
+
 GameObjectivesMenu::GameObjectivesMenu
 (Interactive_Player & plr, UI::UniqueWindow::Registry & registry, Game & game)
 :

@@ -20,8 +20,9 @@
 #ifndef __S__CMD_QUEUE_H
 #define __S__CMD_QUEUE_H
 
-#include <queue>
 #include "queue_cmd_ids.h"
+
+#include <queue>
 
 class FileRead;
 class FileWrite;

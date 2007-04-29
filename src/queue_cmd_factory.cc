@@ -17,9 +17,10 @@
  *
  */
 
+#include "queue_cmd_factory.h"
+
 #include "cmd_check_eventchain.h"
 #include "event_chain.h"
-#include "queue_cmd_factory.h"
 #include "queue_cmd_ids.h"
 #include "playercommand.h"
 #include "instances.h"

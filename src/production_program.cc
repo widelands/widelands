@@ -17,9 +17,10 @@
  *
  */
 
+#include "production_program.h"
+
 #include "helper.h"
 #include "productionsite.h"
-#include "production_program.h"
 #include "profile.h"
 #include "tribe.h"
 #include "worker_program.h"

@@ -23,10 +23,11 @@
 #include "geometry.h"
 #include "rgbcolor.h"
 
+#include <SDL_ttf.h>
+
 #include <list>
 #include <string>
 #include <vector>
-#include <SDL_ttf.h>
 
 class Font_Loader;
 class RenderTarget;

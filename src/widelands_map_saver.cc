@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_saver.h"
+
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
@@ -54,7 +56,6 @@
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
-#include "widelands_map_saver.h"
 #include "widelands_map_seen_fields_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_trigger_data_packet.h"
@@ -62,23 +63,16 @@
 #include "widelands_map_ware_data_packet.h"
 #include "widelands_map_waredata_data_packet.h"
 
-/*
- * Constructor
- */
+
 Widelands_Map_Saver::Widelands_Map_Saver
 (FileSystem & fs, Editor_Game_Base* egbase) :
 m_egbase(egbase), m_fs(fs), m_mos(0)
 {}
 
-/*
- * Destructor
- */
+
 Widelands_Map_Saver::~Widelands_Map_Saver() {delete m_mos;}
 
 
-/*
- * save function
- */
 void Widelands_Map_Saver::save(void) throw(_wexception) {
 
       delete m_mos;

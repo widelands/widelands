@@ -34,6 +34,7 @@
 #include "ui_tabpanel.h"
 #include "ui_textarea.h"
 
+
 Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 (Editor_Interactive         & parent,
  Editor_Place_Bob_Tool      & pit,

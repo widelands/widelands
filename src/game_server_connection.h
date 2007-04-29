@@ -20,14 +20,15 @@
 #ifndef __S__META_SERVER_CONNECTION_H
 #define __S__META_SERVER_CONNECTION_H
 
-class Game_Server_Protocol_Packet;
+#include "types.h"
+
+#include <SDL_net.h>
 
 #include <map>
 #include <string>
 #include <vector>
-#include <SDL_net.h>
 
-#include "types.h"
+class Game_Server_Protocol_Packet;
 
 /*
  * This class defines a connection to a widelands

@@ -17,25 +17,22 @@
  *
  */
 
+#include "game_cmd_queue_data_packet.h"
+
 #include "cmd_queue.h"
 #include "error.h"
 #include "game.h"
-#include "game_cmd_queue_data_packet.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "queue_cmd_factory.h"
 
+
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet() {}
+
+
 void Game_Cmd_Queue_Data_Packet::Read
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)

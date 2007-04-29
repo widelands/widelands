@@ -17,7 +17,8 @@
  *
  */
 
-#include <map>
+#include "widelands_map_immovable_data_packet.h"
+
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "editor_game_base.h"
@@ -26,10 +27,12 @@
 #include "tribe.h"
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_immovable_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "error.h"
+
+#include <map>
+
 
 /* VERSION 1: initial release
      - registering through Map_Object_Loader/Saver
@@ -38,15 +41,10 @@
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Immovable_Data_Packet::~Widelands_Map_Immovable_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Immovable_Data_Packet::~Widelands_Map_Immovable_Data_Packet() {}
+
+
 void Widelands_Map_Immovable_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

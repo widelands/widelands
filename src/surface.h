@@ -24,6 +24,9 @@
 #include "rgbcolor.h"
 #include "texture.h"
 
+struct Editor_Game_Base;
+struct Player;
+
 /**
  * This was formerly called struct Bitmap. But now it manages an
  * \ref SDL_Surface as it's core.

@@ -24,6 +24,7 @@
 #include "player.h"
 #include "world.h"
 #include "wlapplication.h"
+
 #include "ui_progresswindow.h"
 
 /*

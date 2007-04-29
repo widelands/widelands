@@ -17,9 +17,10 @@
  *
  */
 
+#include "editor_make_infrastructure_tool.h"
+
 #include "editor.h"
 #include "editorinteractive.h"
-#include "editor_make_infrastructure_tool.h"
 #include "field.h"
 #include "fieldaction.h"
 #include "map.h"

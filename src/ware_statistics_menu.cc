@@ -17,6 +17,8 @@
  *
  */
 
+#include "ware_statistics_menu.h"
+
 #include "error.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -25,12 +27,13 @@
 #include "rendertarget.h"
 #include "rgbcolor.h"
 #include "tribe.h"
+#include "ware.h"
+#include "wui_plot_area.h"
+
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_textarea.h"
-#include "ware.h"
-#include "ware_statistics_menu.h"
-#include "wui_plot_area.h"
+
 
 #define WARES_DISPLAY_BG "pics/ware_list_bg.png"
 

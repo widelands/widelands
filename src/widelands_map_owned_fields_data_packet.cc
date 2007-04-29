@@ -18,6 +18,7 @@
  */
 
 #include "widelands_map_owned_fields_data_packet.h"
+
 #include "fileread.h"
 #include "filewrite.h"
 #include "editor_game_base.h"
@@ -29,15 +30,12 @@
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Owned_Fields_Data_Packet::~Widelands_Map_Owned_Fields_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Owned_Fields_Data_Packet::~Widelands_Map_Owned_Fields_Data_Packet
+()
+{}
+
+
 void Widelands_Map_Owned_Fields_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,9 @@
 #ifndef __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 #define __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 
-#include "ui_window.h"
 #include "trigger_conditional.h"
+
+#include "ui_window.h"
 
 class Editor_Interactive;
 class TriggerConditional;

@@ -17,10 +17,11 @@
  *
  */
 
+#include "trigger.h"
+
 #include "filesystem.h"
 #include "game.h"
 #include "map.h"
-#include "trigger.h"
 #include "trigger_referencer.h"
 
 /*

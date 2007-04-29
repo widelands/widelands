@@ -18,17 +18,19 @@
  */
 
 #include "attack_controller.h"
-#include "transport.h"
-#include "game.h"
-#include "player.h"
-#include "map.h"
-#include "error.h"
-#include "militarysite.h"
-#include "soldier.h"
-#include "geometry.h"
-#include "instances.h"
+
 #include "battle.h"
+#include "error.h"
+#include "game.h"
+#include "geometry.h"
 #include "immovable.h"
+#include "instances.h"
+#include "map.h"
+#include "militarysite.h"
+#include "player.h"
+#include "soldier.h"
+#include "transport.h"
+
 
 void getCloseMilitarySites
 (const Game & game,

@@ -17,11 +17,11 @@
  *
  */
 
+#include "songset.h"
 
 #include "error.h"
 #include "fileread.h"
 #include "layered_filesystem.h"
-#include "songset.h"
 #include "sound_handler.h"
 
 /// Prepare infrastructure for reading song files from disk

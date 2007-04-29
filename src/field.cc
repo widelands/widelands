@@ -18,6 +18,7 @@
  */
 
 #include "field.h"
+
 #include "mapviewpixelfunctions.h"
 
 /**

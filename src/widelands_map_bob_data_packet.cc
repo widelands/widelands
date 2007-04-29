@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,33 +17,31 @@
  *
  */
 
-#include <map>
+#include "widelands_map_bob_data_packet.h"
+
 #include "fileread.h"
 #include "filewrite.h"
 #include "editor_game_base.h"
+#include "error.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"
-#include "world.h"
 #include "widelands_map_data_packet_ids.h"
-#include "widelands_map_bob_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "error.h"
+#include "world.h"
+
+#include <map>
+
 
 // VERSION 1:
 //   - workers are also handled here, registering through Map_Object_Loader/Saver
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Bob_Data_Packet::~Widelands_Map_Bob_Data_Packet(void) {
-}
 
-/*
- * Read Function
- */
+Widelands_Map_Bob_Data_Packet::~Widelands_Map_Bob_Data_Packet() {}
+
+
 void Widelands_Map_Bob_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,

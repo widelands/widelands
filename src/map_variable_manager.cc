@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006 by the Widelands Development Team
+ * Copyright (C) 2002-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,14 @@
  *
  */
 
-#include "i18n.h"
 #include "map_variable_manager.h"
+
+#include "i18n.h"
+
 #include <vector>
 
-/*
- * Map Variable Manager implementation
- */
-MapVariableManager::MapVariableManager( void ) {
+
+MapVariableManager::MapVariableManager() {
    // Create a default variable
    String_MapVariable* smv = new String_MapVariable( 1 );
    smv->set_name(_("Next scenario").c_str());
@@ -32,15 +32,14 @@ MapVariableManager::MapVariableManager( void ) {
    register_new_variable( smv );
 }
 
-MapVariableManager::~MapVariableManager( void ) {
+
+MapVariableManager::~MapVariableManager() {
    for( uint i = 0; i < m_variables.size(); i++)
       delete m_variables[i];
    m_variables.resize( 0 );
 }
 
-/*
- * Register a new variable
- */
+
 bool MapVariableManager::register_new_variable( MapVariable* mv ) {
    // check if this variable is already known
    if( get_variable( mv->get_name() ) )

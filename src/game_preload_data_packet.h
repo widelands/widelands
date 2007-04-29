@@ -20,15 +20,15 @@
 #ifndef __S__GAME_PRELOAD_DATA_PACKET_H
 #define __S__GAME_PRELOAD_DATA_PACKET_H
 
-#include <string>
 #include "game_data_packet.h"
+
+#include <string>
 
 /**
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)
  */
-class Game_Preload_Data_Packet : public Game_Data_Packet {
-   public:
+struct Game_Preload_Data_Packet : public Game_Data_Packet {
       virtual ~Game_Preload_Data_Packet();
 
 	virtual void Read

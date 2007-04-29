@@ -21,11 +21,11 @@
 #define __S__GAME_MAIN_MENU_H
 
 #include "interactive_player.h"
+
 #include "ui_button.h"
 
 // The GameMainMenu is a rather dumb window with lots of buttons
-class GameMainMenu : public UI::UniqueWindow {
-public:
+struct GameMainMenu : public UI::UniqueWindow {
 	GameMainMenu
 		(Interactive_Player &,
 		 UI::UniqueWindow::Registry &,

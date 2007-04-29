@@ -17,6 +17,8 @@
  *
  */
 
+#include "playercommand.h"
+
 #include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
@@ -24,7 +26,6 @@
 #include "instances.h"
 #include "network.h"
 #include "player.h"
-#include "playercommand.h"
 #include "soldier.h"
 #include "wexception.h"
 #include "widelands_map_map_object_saver.h"

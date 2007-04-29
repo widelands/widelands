@@ -21,12 +21,12 @@
 #define SONGSET_H
 
 #include "config.h" //must be included before SDL_mixer.h!
+#include "fileread.h"
 
 #include <SDL_mixer.h>
+
 #include <string>
 #include <vector>
-
-struct FileRead;
 
 /** A collection of several pieces of music meant for the same situation.
  *
@@ -39,9 +39,7 @@ struct FileRead;
  * memory. Instead, each song is loaded on request and the data is free()d
  * afterwards
  */
-class Songset
-{
-public:
+struct Songset {
 	Songset();
 	~Songset();
 

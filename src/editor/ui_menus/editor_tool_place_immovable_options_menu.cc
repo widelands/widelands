@@ -17,27 +17,22 @@
  *
  */
 
+#include "editor_tool_place_immovable_options_menu.h"
+
 #include "editorinteractive.h"
 #include "editor_place_immovable_tool.h"
-#include "editor_tool_place_immovable_options_menu.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
+#include "wlapplication.h"
+#include "world.h"
+
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_textarea.h"
-#include "wlapplication.h"
-#include "world.h"
 
-/*
-=================================================
-
-class Editor_Tool_Place_Immovable_Options_Menu
-
-=================================================
-*/
 
 /*
 ===========

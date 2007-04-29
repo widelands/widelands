@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,17 +18,18 @@
  */
 
 #include "editor_main_menu.h"
-#include "i18n.h"
-#include "ui_unique_window.h"
-#include "ui_textarea.h"
-#include "editorinteractive.h"
-#include "ui_button.h"
-#include "editor_main_menu_new_map.h"
-#include "editor_main_menu_map_options.h"
-#include "editor_main_menu_save_map.h"
 #include "editor_main_menu_load_map.h"
+#include "editor_main_menu_map_options.h"
+#include "editor_main_menu_new_map.h"
+#include "editor_main_menu_save_map.h"
+#include "editorinteractive.h"
 #include "error.h"
 #include "fullscreen_menu_fileview.h"
+#include "i18n.h"
+
+#include "ui_button.h"
+#include "ui_textarea.h"
+#include "ui_unique_window.h"
 
 /*
 ===============

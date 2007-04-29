@@ -18,13 +18,14 @@
  */
 
 
+#include "event_factory.h"
+
 #include "editorinteractive.h"
 #include "event.h"
 #include "event_allow_building.h"
 #include "event_allow_building_option_menu.h"
 #include "event_conquer_area.h"
 #include "event_conquer_area_option_menu.h"
-#include "event_factory.h"
 #include "event_message_box.h"
 #include "event_message_box_option_menu.h"
 #include "event_move_view.h"

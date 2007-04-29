@@ -25,10 +25,12 @@
 
 #include "fxset.h"
 #include "geometry.h"
-#include <map>
 #include "random.h"
+
+#include <map>
 #include <string>
 #include <vector>
+
 #include <unistd.h>
 
 struct FileRead;

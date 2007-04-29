@@ -20,10 +20,11 @@
 #ifndef __S__INTPLAYER_H
 #define __S__INTPLAYER_H
 
-#include <vector>
 #include "game.h"
 #include "interactive_base.h"
 #include "network.h" // For chat
+
+#include <vector>
 
 class Player;
 namespace UI {

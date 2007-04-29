@@ -17,15 +17,18 @@
  *
  */
 
-#include <string>
+#include "editor_set_starting_pos_tool.h"
+
 #include "building.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_tool.h"
-#include "editor_set_starting_pos_tool.h"
 #include "graphic.h"
 #include "map.h"
 #include "overlay_manager.h"
+
+#include <string>
+
 
 // global variable to pass data from callback to class
 static int m_current_player;

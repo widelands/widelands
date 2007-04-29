@@ -25,8 +25,7 @@
 /*
  * how many and which economies does a player have?
  */
-class Game_Player_Economies_Data_Packet : public Game_Data_Packet {
-   public:
+struct Game_Player_Economies_Data_Packet : public Game_Data_Packet {
       virtual ~Game_Player_Economies_Data_Packet();
 
 	virtual void Read

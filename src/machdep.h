@@ -20,9 +20,11 @@
 #ifndef MACHDEP_H
 #define MACHDEP_H
 
-#include <string>
-#include <SDL_endian.h>
 #include "types.h"
+
+#include <SDL_endian.h>
+
+#include <string>
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define Little16(x)    (x)

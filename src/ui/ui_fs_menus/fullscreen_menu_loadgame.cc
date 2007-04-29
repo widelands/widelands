@@ -17,7 +17,6 @@
  *
  */
 
-#include <stdio.h>
 #include "error.h"
 #include "fullscreen_menu_loadgame.h"
 #include "game.h"
@@ -26,6 +25,9 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
+
+#include <stdio.h>
+
 
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game & g) :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
