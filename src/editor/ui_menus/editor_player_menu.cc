@@ -140,7 +140,6 @@ void Editor_Player_Menu::update(void) {
    int posy=m_posy;
    int spacing=5;
    int size=20;
-   int posx=spacing;
 
 
    // And recreate the needed
@@ -150,6 +149,7 @@ void Editor_Player_Menu::update(void) {
 		const Coords start_pos = map.get_starting_pos(i + 1);
 		if (start_pos.isNull()) start_pos_valid = false;
 
+		int posx = spacing;
       if(!m_plr_names[i]) {
           m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
@@ -221,8 +221,6 @@ void Editor_Player_Menu::update(void) {
          posx+=size+spacing;
       }
 	   m_plr_allowed_buildings[i]->set_enabled(start_pos_valid);
-
-      posx=spacing;
 #endif
       posy+=size+spacing;
    }
