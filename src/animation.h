@@ -67,7 +67,7 @@ struct AnimationManager {
 	uint get(const char *directory, Section *s, const char *picnametempl = 0,
 	         const EncodeData *encdefaults = 0);
 
-public: // for use by the graphics subsystem
+	// for use by the graphics subsystem
 	uint get_nranimations() const;
 	const AnimationData* get_animation(uint id) const;
 	void trigger_soundfx(uint animation, uint framenumber, uint stereo_position);
