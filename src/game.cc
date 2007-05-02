@@ -304,7 +304,7 @@ void Game::init_player_controllers ()
  *
  * \return true if a game actually took place, false otherwise
  */
-bool Game::run(const UI::ProgressWindow & loader_ui, bool is_savegame) {
+bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 	postload();
 
 	if (not is_savegame) {

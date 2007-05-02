@@ -506,7 +506,7 @@ void Graphic::reset_texture_animation_reminder( void )
 /**
  * Load all animations that are registered with the AnimationManager
 */
-void Graphic::load_animations(const UI::ProgressWindow & loader_ui) {
+void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 	assert(!m_animations.size());
 
 	const std::string step_description = _("Loading animations: %d%% complete");

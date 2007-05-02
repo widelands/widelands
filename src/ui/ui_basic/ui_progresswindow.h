@@ -30,12 +30,18 @@ struct ProgressWindow {
 	ProgressWindow();
 
 	/// Display a progress step description.
-	void step(const std::string & description) const;
-	void stepf(const std::string & format, ...) const;
+	void step(const std::string & description);
+	void stepf(const std::string & format, ...);
 
 private:
+	uint  m_xres;
+	uint  m_yres;
 	Point m_label_center;
 	Rect  m_label_rectangle;
+	
+	void draw_background(RenderTarget & rt,
+						 const uint xres,
+						 const uint yres);
 };
 };
 

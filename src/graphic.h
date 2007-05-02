@@ -87,7 +87,7 @@ public:
 	void animate_maptextures(uint time);
 	void reset_texture_animation_reminder( void );
 
-	void load_animations(const UI::ProgressWindow & loader_ui);
+	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(const uint anim=0) const;
 	void get_animation_size(const uint anim, const uint time, uint & w, uint & h);
 

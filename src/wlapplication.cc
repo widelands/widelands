@@ -862,7 +862,15 @@ const bool WLApplication::init_hardware()
 	SDL_EnableUNICODE(1); // useful for e.g. chat messages
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	init_graphics(800, 600, s->get_int("depth",16), m_gfx_fullscreen);
+	uint xres = 800;
+	uint yres = 600;
+	if (m_loadgame_filename.size() or m_tutorial_filename.size()) {
+		// main menu will not be shown, so set in-game resolution
+		xres = s->get_int("xres",xres);
+		yres = s->get_int("yres",yres);
+	}
+
+	init_graphics(xres, yres, s->get_int("depth",16), m_gfx_fullscreen);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!

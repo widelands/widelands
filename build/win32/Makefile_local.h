@@ -8,13 +8,13 @@
 
 
 #### Buildtype ####
-#BUILD=release
+BUILD=release
 #Build=debug-no-parachute
-Build=debug-slow
+#Build=debug-slow
 #Build=debug
 
 #### Version #### // Needed for 'make dist'
 Version="SVNbuild"
 
 #### GGZ-Build ####
-USE_GGZ=YES
+USE_GGZ=NO
