@@ -3,6 +3,7 @@ from Distribute import *
 
 distadd(env, 'utils/SConscript')
 distadd(env, 'utils/buildcat.py')
+distadd(env, 'utils/buildlocale.py')
 distadd(env, 'utils/confgettext.py')
 distadd(env, 'utils/count-longlines.py')
 distadd(env, 'utils/detect_misused_tabs.sh')
