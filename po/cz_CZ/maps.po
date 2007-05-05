@@ -2,125 +2,101 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2007-05-05 00:47+0100\n"
+"Last-Translator: Matej Svrcek <matej@svrcek.org>\n"
+"Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
 
 #: ../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
-msgstr ""
+msgstr "Šachovnice"
 
 #: ../maps/Checkmate.wmf/elemental:11
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr ""
+msgid "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
+msgstr "Ať už jen z nejbláznivějších výstřelků přírody, nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
 
 #: ../maps/Dry Riverbed.wmf/elemental:9
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Vyschlé řečiště"
 
 #: ../maps/Dry Riverbed.wmf/elemental:11
-msgid ""
-"It is a long time ago, since the last rain drop touched these grounds. No "
-"wonder, that here is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last water."
-msgstr ""
+msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
+msgstr "Už velmi dávno v těchto zemích nespadla na zem ani kapka. Není divu, že ani v řece už nezbyla skoro žádná voda. A je jasné: bude válka. Válka o poslední zbytky vody."
 
 #: ../maps/Elven Forests.wmf/elemental:9
 msgid "Elven Forests"
-msgstr ""
+msgstr "Elfí les"
 
+# many a tribe - not quite clear, perhaps many tribes
 #: ../maps/Elven Forests.wmf/elemental:11
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many a tribe into "
-"the attempt of taking them for itself."
-msgstr ""
+msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
+msgstr "Omračující krása těchto bájných zemí přivábila už mnohé kmeny, které se rozhodly si je vzít jen pro sebe."
 
 #: ../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
-msgstr ""
+msgstr "Finská jezera"
 
 #: ../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful finish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
+msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgstr "Tohle je krajina Finských jezer, plná jezerních ploch, řek, pravěkých hvozdů a hor. Je jen na tobě, jak si jimi najdeš cestu."
 
 #: ../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
-msgstr ""
+msgstr "Hrátky s ohněm"
 
 #: ../maps/Firegames.wmf/elemental:11
-msgid ""
-"Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but noone knows, what might happen if you meet an opponent "
-"tribe?"
-msgstr ""
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+msgstr "Je to snad boží zkouška, nebo ďábelský plán někoho jiného, že se ty i se svým kmenem probouzíš na ostrově mezi lávou a ohněm? Zatím to vypadá, že jsi na něm osamocen, ale kdoví, co všechno se může stát, jestli se střetneš se soupeřícím klanem?"
 
 #: ../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
-msgstr ""
+msgstr "Čtyři hrady"
 
 #: ../maps/Four Castles.wmf/elemental:11
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
+msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+msgstr "Dobře ukrytí ve svých tvrzích, čtyři vládychtiví vladykové spřádají své plány na ovládnutí těchto zemí..."
 
 #: ../maps/Glacier Lake.wmf/elemental:9
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Ledovcové pleso"
 
 #: ../maps/Glacier Lake.wmf/elemental:11
-msgid ""
-"A long time your tribe dwelled on this beautiful and lonely glacier lake. "
-"Noone disturbed you and the resources were enough for your whole tribe, but "
-"a few month ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only place enough for one tribe."
-msgstr ""
+msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
+msgstr "Dlouhé věky tvůj kmen sídlil na břehu krásného a osamoceného horského plesa. Nikým nerušeni užívali jste bohatých darů, kterých byla přehršel. To všechno skončilo před pár měsíci, kdy přes hory přišel cizí kmen, aby se zde usadil. Ale ty si jsi jistý, že zde je místo pouze pro jeden klan."
 
 #: ../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Zlatý poloostrov"
 
 #: ../maps/Golden Peninsula.wmf/elemental:11
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr ""
+msgstr "Dvě říše soupeří o poklady bájného poloostrova..."
 
 #: ../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Jezero klidu"
 
 #: ../maps/Lake of tranquility.wmf/elemental:11
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
-msgstr ""
+msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+msgstr "Jezero klidu, ukryto v nejhlubších hvozdech, bylo odedávna znáno svou čarovnou krásou a nerušeným tichem. Avšak teď byla jeho klidná hladina zčeřena, když se na jeho břehu objevily dva neprátelské kmeny..."
 
 #: ../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr ""
+msgstr "Zelená pláň"
 
 #: ../maps/Plateau.wmf/elemental:11
-msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
-msgstr ""
+msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
+msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný a mocný poklad - Zelenou pláň. Je nesmírně těžké ji dobýt, ale tak snadné zas ztratit. Jestli ji chceš pro sebe, musís se o ní utkat s ostatními."
 
 #: ../maps/Riverlands.wmf/elemental:9
 msgid "Riverlands"
@@ -131,10 +107,7 @@ msgid "The Oasis Triangle"
 msgstr ""
 
 #: ../maps/The Oasis Triangle.wmf/elemental:11
-msgid ""
-"There is something mystical, like a grey atmosphere, about this three Oasis, "
-"which noone found out, yet. Perhaps you will be the one, but be aware of the "
-"others, who are searching, too!"
+msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
 msgstr ""
 
 #: ../maps/The big lake.wmf/elemental:9
@@ -150,8 +123,6 @@ msgid "War of the Valleys"
 msgstr ""
 
 #: ../maps/War of the Valleys.wmf/elemental:11
-msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
+msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr ""
+

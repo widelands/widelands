@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Czech translation\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-11-28 19:35+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"PO-Revision-Date: 2007-05-05 00:47+0100\n"
+"Last-Translator: Matej Svrcek <matej@svrcek.org>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -230,8 +230,7 @@ msgid "Axe"
 msgstr "Sekera"
 
 #: ../tribes/empire/wares/axe/conf:3
-msgid ""
-"The Axe is the tool for the lumberjack. It is produced by the carpenter."
+msgid "The Axe is the tool for the lumberjack. It is produced by the carpenter."
 msgstr "Sekera je nástroj dřevorubce. Vyrobit ji umí tesař."
 
 #: ../tribes/empire/wares/bakingtray/conf:2
@@ -239,20 +238,15 @@ msgid "Bakingtray"
 msgstr "Pekáč"
 
 #: ../tribes/empire/wares/bakingtray/conf:3
-msgid ""
-"The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced by the carpenter."
-msgstr ""
-"Pekáč je nástroj pekaře, každý potřebuje jednu svou. Vyrobit ji umí tesař."
+msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the carpenter."
+msgstr "Pekáč je nástroj pekaře, každý potřebuje jednu svou. Vyrobit ji umí tesař."
 
 #: ../tribes/empire/wares/basket/conf:2
 msgid "Basket"
 msgstr "Koš"
 
 #: ../tribes/empire/wares/basket/conf:3
-msgid ""
-"This basket is needed by the wine-grower, for harvesting the wine-grapes. It "
-"is produced by the carpenter."
+msgid "This basket is needed by the wine-grower, for harvesting the wine-grapes. It is produced by the carpenter."
 msgstr "Koš potřebuje vinař pro sklízení vinné révy. Vyrobit jej umí tesař."
 
 #: ../tribes/empire/wares/beer/conf:2
@@ -260,12 +254,8 @@ msgid "Beer"
 msgstr "Pivo"
 
 #: ../tribes/empire/wares/beer/conf:3
-msgid ""
-"Young soldiers and miners need some encouragement. This drink makes a man "
-"fearless and strong."
-msgstr ""
-"Mladí vojáci a horníci potřebují nějaké povzbuzení. Tento nápoj činí muže "
-"neohrožnými a silnými."
+msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
+msgstr "Mladí vojáci a horníci potřebují nějaké povzbuzení. Tento nápoj činí muže neohrožnými a silnými."
 
 #: ../tribes/empire/wares/bread/conf:2
 msgid "Bread"
@@ -288,47 +278,32 @@ msgid "Cloth"
 msgstr "Sukno"
 
 #: ../tribes/empire/wares/cloth/conf:3
-msgid ""
-"Cloth is needed for Empire ships and few bigger buildings. It is produced "
-"out of wool."
-msgstr ""
-"Plátna je potřeba pro lodě Impéria a některé větší budovy. Vyrábí se z vlny."
+msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
+msgstr "Plátna je potřeba pro lodě Impéria a některé větší budovy. Vyrábí se z vlny."
 
 #: ../tribes/empire/wares/coal/conf:2
 msgid "Coal"
 msgstr "Uhlí"
 
 #: ../tribes/empire/wares/coal/conf:3
-msgid ""
-"The fires of the Empire are usually fed with wood, but sometimes, wood just "
-"does not burn hot enough. Then, coal is used."
-msgstr ""
-"Ohně Impéria spalují dřevo, ale někdy jen dřevo nestačí. Potom se používá "
-"uhlí."
+msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
+msgstr "Ohně Impéria spalují dřevo, ale někdy jen dřevo nestačí. Potom se používá uhlí."
 
 #: ../tribes/empire/wares/coalearth/conf:2
 msgid "Coalearth"
 msgstr "Kamenné uhlí"
 
 #: ../tribes/empire/wares/coalearth/conf:3
-msgid ""
-"This earth is found in the deep coal mines. It needs to be enhanced to get "
-"proper coal"
-msgstr ""
-"Tato hornina se dobývá z hlubinných dolů. Musí být zpracována, aby se z ní "
-"stalo uhlí."
+msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
+msgstr "Tato hornina se dobývá z hlubinných dolů. Musí být zpracována, aby se z ní stalo uhlí."
 
 #: ../tribes/empire/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
 msgstr "Žárové kleště"
 
 #: ../tribes/empire/wares/fire_tongs/conf:3
-msgid ""
-"The fire tongs are the tool of the smelter, working in the Smelting works. "
-"They are produced by the carpenter."
-msgstr ""
-"Žárové kleště jsou nástroj slévače, kteří pracují ve slévárnách. Vyrábí je "
-"tesař."
+msgid "The fire tongs are the tool of the smelter, working in the Smelting works. They are produced by the carpenter."
+msgstr "Žárové kleště jsou nástroj slévače, kteří pracují ve slévárnách. Vyrábí je tesař."
 
 #: ../tribes/empire/wares/fish/conf:2
 msgid "Fish"
@@ -343,8 +318,7 @@ msgid "Fishing Rod"
 msgstr "Prut"
 
 #: ../tribes/empire/wares/fishing_rod/conf:3
-msgid ""
-"Fishing rods are needed by fishers, to catch fish. Produced by the carpenter."
+msgid "Fishing rods are needed by fishers, to catch fish. Produced by the carpenter."
 msgstr "Rybářské pruty používají rybáři k chytání ryb. Vyrábí jej tesaři."
 
 #: ../tribes/empire/wares/flour/conf:2
@@ -352,22 +326,16 @@ msgid "Flour"
 msgstr "Mouka"
 
 #: ../tribes/empire/wares/flour/conf:3
-msgid ""
-"Flour is produced out of wheat and is needed for the tasty Empire bread."
-msgstr ""
-"Mouka se vyrábí z pšenice a používá se k pečení skvělého chleba Impéria."
+msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
+msgstr "Mouka se vyrábí z pšenice a používá se k pečení skvělého chleba Impéria."
 
 #: ../tribes/empire/wares/gold/conf:2
 msgid "Gold"
 msgstr "Zlato"
 
 #: ../tribes/empire/wares/gold/conf:3
-msgid ""
-"Gold is the most valuable of all metals; only very important things are "
-"garnished with it."
-msgstr ""
-"Zlato je nejcennější ze všech kovů; zdobí se jím jen ty úplně nejdůležitější "
-"věci."
+msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
+msgstr "Zlato je nejcennější ze všech kovů; zdobí se jím jen ty úplně nejdůležitější věci."
 
 #: ../tribes/empire/wares/goldstone/conf:2
 msgid "Goldstone"
@@ -390,14 +358,8 @@ msgid "Hammer"
 msgstr "Kladivo"
 
 #: ../tribes/empire/wares/hammer/conf:3
-msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the worker, "
-"the carpenter and both blacksmiths. Make sure you always got some in "
-"reserve! It is produced by the carpenter."
-msgstr ""
-"Kladivo je naprosto nezbytný nástroj. Používá jej geolog, dělník, tesař a "
-"oba kováři. Dej si pozor, ať jich máš vždy aspoň pár rezervních! Vyrábí jej "
-"tesaři."
+msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the carpenter and both blacksmiths. Make sure you always got some in reserve! It is produced by the carpenter."
+msgstr "Kladivo je naprosto nezbytný nástroj. Používá jej geolog, dělník, tesař a oba kováři. Dej si pozor, ať jich máš vždy aspoň pár rezervních! Vyrábí jej tesaři."
 
 #: ../tribes/empire/wares/heavy_lance/conf:2
 msgid "Heavy Lance"
@@ -420,13 +382,8 @@ msgid "Hunting Spear"
 msgstr "Lovecný oštěp"
 
 #: ../tribes/empire/wares/hunting_spear/conf:3
-msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters."
-msgstr ""
-"Tento oštěp je dost lehký na to, aby se jím dalo házet, a přesto mohl zabít "
-"jakékoli zvíře jednou ranou. Používají je pouze lovci. Vyrábí se v "
-"železárnách."
+msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
+msgstr "Tento oštěp je dost lehký na to, aby se jím dalo házet, a přesto mohl zabít jakékoli zvíře jednou ranou. Používají je pouze lovci. Vyrábí se v železárnách."
 
 #: ../tribes/empire/wares/iron/conf:2
 msgid "Iron"
@@ -465,24 +422,16 @@ msgid "Marble"
 msgstr "Mramor"
 
 #: ../tribes/empire/wares/marble/conf:3
-msgid ""
-"Marble is the beautiful stone, which is cutted out of the mountains and "
-"which is used for beautiful buildings and columns."
-msgstr ""
-"Mramor je nádherný kámen, který se láme v horách a používá se na krásné domy "
-"a sloupy."
+msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
+msgstr "Mramor je nádherný kámen, který se láme v horách a používá se na krásné domy a sloupy."
 
 #: ../tribes/empire/wares/marblecolumn/conf:2
 msgid "Marblecolumn"
 msgstr "Mramorový sloup"
 
 #: ../tribes/empire/wares/marblecolumn/conf:3
-msgid ""
-"Marblecolumns present the high culture of the Empire, so they are needed for "
-"nearly every bigger building."
-msgstr ""
-"Mramorové sloupy představují úroveň kultury Impéria a jsou potřeba pro skoro "
-"všechny větší budovy."
+msgid "Marblecolumns present the high culture of the Empire, so they are needed for nearly every bigger building."
+msgstr "Mramorové sloupy představují úroveň kultury Impéria a jsou potřeba pro skoro všechny větší budovy."
 
 #: ../tribes/empire/wares/meal/conf:2
 msgid "Meal"
@@ -497,22 +446,15 @@ msgid "Meat"
 msgstr "Maso"
 
 #: ../tribes/empire/wares/meat/conf:3
-msgid ""
-"Meat contains a lot of energy. It is used in the Inns and Taverns to fix "
-"lunch for the miners and in the soldier trainingcamps to keep warriors "
-"strong."
-msgstr ""
-"Maso obsahuje spoustu energie. Podává se v hospodách a hostincích jako oběd "
-"pro horníky a ve vojenských leženích vojákům, aby jim dodalo sílu."
+msgid "Meat contains a lot of energy. It is used in the Inns and Taverns to fix lunch for the miners and in the soldier trainingcamps to keep warriors strong."
+msgstr "Maso obsahuje spoustu energie. Podává se v hospodách a hostincích jako oběd pro horníky a ve vojenských leženích vojákům, aby jim dodalo sílu."
 
 #: ../tribes/empire/wares/pick/conf:2
 msgid "Pick"
 msgstr "Páčidlo"
 
 #: ../tribes/empire/wares/pick/conf:3
-msgid ""
-"This pick is used by the stonemasons and the miners. It is produced by the "
-"carpenter."
+msgid "This pick is used by the stonemasons and the miners. It is produced by the carpenter."
 msgstr "Toto páčidlo používají kameníci a horníci. Umí jej vyrobit tesař."
 
 #: ../tribes/empire/wares/plate_armour/conf:2
@@ -529,19 +471,15 @@ msgstr "Porce"
 
 #: ../tribes/empire/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
-msgstr "I malé kousnutí udrží horníky při síle a práci."
+msgstr "I malé zakousnutí udrží horníky při síle a práci."
 
 #: ../tribes/empire/wares/saw/conf:2
 msgid "Saw"
 msgstr "Pila"
 
 #: ../tribes/empire/wares/saw/conf:3
-msgid ""
-"This saw is needed by the carpenter, to create all the usefull tools. It is "
-"produced by the carpenter."
-msgstr ""
-"Tuto pilu používají tesaři pro výrobu užetečných nářadí. Umí ji vyrobit "
-"tesař."
+msgid "This saw is needed by the carpenter, to create all the usefull tools. It is produced by the carpenter."
+msgstr "Tuto pilu používají tesaři pro výrobu užetečných nářadí. Umí ji vyrobit tesař."
 
 #: ../tribes/empire/wares/scythe/conf:2
 msgid "Scythe"
@@ -556,18 +494,15 @@ msgid "Shovel"
 msgstr "Lopata"
 
 #: ../tribes/empire/wares/shovel/conf:3
-msgid ""
-"The shovel is needed for proper handling of plants. Therefore the forester "
-"use it. It is produced by the carpenter."
-msgstr ""
-"Lopata se používá pro obdělávání rostlin. Používá ji lesník a vyrobit ji umí "
-"tesař."
+msgid "The shovel is needed for proper handling of plants. Therefore the forester use it. It is produced by the carpenter."
+msgstr "Lopata se používá pro obdělávání rostlin. Používá ji lesník a vyrobit ji umí tesař."
 
 #: ../tribes/empire/wares/stone/conf:2
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../tribes/empire/wares/stone/conf:3 ../tribes/empire/wares/wood/conf:3
+#: ../tribes/empire/wares/stone/conf:3
+#: ../tribes/empire/wares/wood/conf:3
 msgid "Stones and wood are the basic build ware of the Empire."
 msgstr "Kameny a dřevou jsou základní stavební materiály Impéria."
 
@@ -584,47 +519,32 @@ msgid "War-Lance"
 msgstr "Válečné kopí"
 
 #: ../tribes/empire/wares/war_lance/conf:3
-msgid ""
-"This is the best and sharpest weapon, the romans weaponsmith create for "
-"their warriors"
-msgstr ""
-"Toto je nejlepší a nejostřejší zbraň, kterou římský kovář vyrábí pro své "
-"vojáky."
+msgid "This is the best and sharpest weapon, the romans weaponsmith create for their warriors"
+msgstr "Toto je nejlepší a nejostřejší zbraň, kterou římský kovář vyrábí pro své vojáky."
 
 #: ../tribes/empire/wares/water/conf:2
 msgid "Water"
 msgstr "Voda"
 
 #: ../tribes/empire/wares/water/conf:3
-msgid ""
-"Water is the most essential essence for life! This water is used in many "
-"places, be it to make bread or beer."
-msgstr ""
-"Voda je to nejdůležitější pro každý život! Tato voda se používá na mnoha "
-"místech, ať už při pečení chleba nebo vaření piva."
+msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
+msgstr "Voda je to nejdůležitější pro každý život! Tato voda se používá na mnoha místech, ať už při pečení chleba nebo vaření piva."
 
 #: ../tribes/empire/wares/wheat/conf:2
 msgid "Wheat"
 msgstr "Pšenice"
 
 #: ../tribes/empire/wares/wheat/conf:3
-msgid ""
-"Wheat is essential for surviving, good bread and strong ales can be made of "
-"this wheat."
-msgstr ""
-"Mouka je důležitá pro přežití, jde z ní připravit dobrý chleba i silné pivo."
+msgid "Wheat is essential for surviving, good bread and strong ales can be made of this wheat."
+msgstr "Mouka je důležitá pro přežití, jde z ní připravit dobrý chleba i silné pivo."
 
 #: ../tribes/empire/wares/wine/conf:2
 msgid "Wine"
 msgstr "Víno"
 
 #: ../tribes/empire/wares/wine/conf:3
-msgid ""
-"This wine gives enough power, to mine marble or gold. And furthermore, our "
-"soldiers like it, too."
-msgstr ""
-"Toto víno dodá sílu horníkům při lámání mramoru nebo dobývání zlata. Navíc "
-"si s ním užijí i vojáci."
+msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
+msgstr "Toto víno dodá sílu horníkům při lámání mramoru nebo dobývání zlata. Navíc si s ním užijí i vojáci."
 
 #: ../tribes/empire/wares/wood/conf:2
 msgid "Wood"
@@ -635,8 +555,7 @@ msgid "Wood Lance"
 msgstr "Dřevěné kopí"
 
 #: ../tribes/empire/wares/wood_lance/conf:3
-msgid ""
-"This is a wooden lance, which is the basic of the romans military system."
+msgid "This is a wooden lance, which is the basic of the romans military system."
 msgstr "Toto je dřevěné kopí, základ římské vojenské síly."
 
 #: ../tribes/empire/wares/wool/conf:2
@@ -742,3 +661,4 @@ msgstr "Tiskař"
 
 #~ msgid "Wine-Grower"
 #~ msgstr "Vinař"
+
