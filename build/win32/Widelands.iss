@@ -30,7 +30,7 @@
 ;General String
 #define XAppPublisher "Widelands Development Team"
 #define XAppURL "http://www.widelands.org"
-#define HelpURL "http://xoops.widelands.org/modules/mediawiki/wiki/Help"
+#define HelpURL "http://xoops.widelands.org/modules/mediawiki/wiki/Main_Page#Help"
 #define XAppExeName "widelands.exe"
 #define XAppUrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
