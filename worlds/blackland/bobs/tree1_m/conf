@@ -1,0 +1,15 @@
+[global]
+type=immovable
+size=normal
+program=program
+picture=s3tree1_00.png
+
+[program]
+0=animation medium 50000
+1=transform tree1
+
+[medium]
+pics=s3tree1_??.png
+ftp=8
+hotspot=18 48
+

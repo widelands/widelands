@@ -2,25 +2,14 @@
 type=immovable
 size=normal
 program=program
-picture=s1tree1_00.png
+picture=s2tree1_00.png
 
 [program]
-0=animation tiny 38000
-1=animation small 42000
-2=animation midd 50000
-3=transform tree1
-
-[tiny]
-pics=s1tree1_??.png
-ftp=8
-hotspot=5 12
+0=animation small 38000
+1=transform tree1_m
 
 [small]
 pics=s2tree1_??.png
 ftp=8
 hotspot=12 28
 
-[midd]
-pics=s3tree1_??.png
-ftp=8
-hotspot=18 48

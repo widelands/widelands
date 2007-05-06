@@ -10,7 +10,7 @@ shovel=1
 carrier=1
 
 [plant]
-0=setdescription tree1_s tree2_s tree3_s tree4_s tree5_s tree6_s tree7_s tree8_s
+0=setdescription tree1_t tree2_t tree3_t tree4_t tree5_t tree6_t tree7_t tree8_t
 1=findspace size:any radius:5
 2=walk coords
 3=animation idle 500 # Play a planting animation

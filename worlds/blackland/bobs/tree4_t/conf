@@ -1,0 +1,15 @@
+[global]
+type=immovable
+size=normal
+program=program
+picture=s1tree4_00.png
+
+[program]
+0=animation tiny 38000
+3=transform tree4_s
+
+[tiny]
+pics=s1tree4_??.png
+ftp=8
+hotspot=5 12
+
