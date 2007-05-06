@@ -603,7 +603,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_trees
 		 and
 		 map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 8), //  FIXME bug #1669667
+		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 8), //  FIXME Use conf to set radius instead
 		  0,
 		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
 		 ==
@@ -619,7 +619,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_stones
 		 and
 		 map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 8), //  FIXME bug #1669667
+		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 6), //  FIXME Use conf to set radius instead
 		  0,
 		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
 		 ==
