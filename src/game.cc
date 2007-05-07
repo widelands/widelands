@@ -107,22 +107,24 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	UI::ProgressWindow loaderUI;
 
     // Loading the locals for the campaign
+        std::string camp_textdomain("");
         if( scenario )
             {
-			loaderUI.step (_("Loading texts"));
-            std::string textdomain("");
-            textdomain.append(mapname);
-	    i18n::grab_textdomain(textdomain.c_str());
-
-			loaderUI.step (_("Preloading a map"));
-            m_maploader->preload_map(scenario);
+            loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
+            camp_textdomain.append(mapname);
+            i18n::grab_textdomain(camp_textdomain.c_str());
             log("Loading the locals for scenario. file: %s.mo\n", mapname);
+            m_maploader->preload_map(scenario);
+            i18n::release_textdomain(); // To see a translated loaderUI-Texts
+            }
+        else // we are not loading a scenario, so no ingame texts to be translated.
+            {
+            loaderUI.step (_("Preloading a map"));
+            m_maploader->preload_map(scenario);
             }
 
         m_state = gs_running;
 
-	loaderUI.step (_("Preloading a map"));
-	m_maploader->preload_map(scenario);
 	loaderUI.step (_("Loading a world"));
 	m_maploader->load_world();
 
@@ -137,18 +139,15 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 			 m->get_scenario_player_name(i));
 	}
 
-        // Reload the textdomain "widelands", so buttons can be translated.
-        if( scenario )
-        i18n::grab_textdomain("widelands");
-
 	loaderUI.step (_("Preparing computer players"));
    init_player_controllers ();
 
-        // Unload the textdomain, to make campaign textdomain available, again.
-        if( scenario )
-        i18n::release_textdomain();
+	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
-	loaderUI.step (_("Loading a map"));
+        // Reload campaign textdomain
+        if( scenario )
+        i18n::grab_textdomain(camp_textdomain.c_str());
+
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
