@@ -27,9 +27,10 @@
 #endif
 
 #include "immovable.h"
+#include "item_ware_descr.h"
 #include "map.h"
 #include "trackptr.h"
-#include "ware.h"
+#include "warelist.h"
 
 #include <list>
 

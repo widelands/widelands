@@ -28,7 +28,7 @@
 #include "productionsite.h"
 #include "production_program.h"
 #include "tribe.h"
-#include "ware.h"
+#include "warelist.h"
 
 #include "ui_window.h"
 #include "ui_unique_window.h"

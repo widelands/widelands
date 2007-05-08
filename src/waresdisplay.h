@@ -21,6 +21,7 @@
 #define include_waresdisplay_h
 
 #include "ui_panel.h"
+#include "warelist.h"
 
 #include <vector>
 

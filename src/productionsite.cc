@@ -34,7 +34,7 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
-#include "ware.h"
+#include "warelist.h"
 #include "world.h"
 #include "sound_handler.h"
 

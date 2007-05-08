@@ -25,29 +25,19 @@ buildings directly. Instead, they must send a player command through the Game
 class.
 */
 
-#include "building.h"
 
-#include "cmd_queue.h"
 #include "constructionsite.h"
-#include "error.h"
-#include "font_handler.h"
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
-#include "player.h"
-#include "productionsite.h"
-#include "rendertarget.h"
 #include "soldier.h"
 #include "trainingsite.h"
-#include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "waresdisplay.h"
-#include "wexception.h"
-#include "worker.h"
 
 #include "ui_box.h"
 #include "ui_button.h"
@@ -274,8 +264,8 @@ It updates itself automatically through think().
 class WaresQueueDisplay : public UI::Panel {
 public:
 	enum {
-		CellWidth = 24,
-		CellHeight = 24,
+		CellWidth = WARE_MENU_PIC_W,
+		CellHeight = WARE_MENU_PIC_H,
 		Border = 4,
 
 		Height = CellHeight + 2 * Border,

@@ -27,7 +27,7 @@
 #include "rendertarget.h"
 #include "rgbcolor.h"
 #include "tribe.h"
-#include "ware.h"
+#include "warelist.h"
 #include "wui_plot_area.h"
 
 #include "ui_button.h"

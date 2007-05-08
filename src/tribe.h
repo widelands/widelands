@@ -25,7 +25,7 @@
 #include "building.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
-#include "ware.h"
+#include "item_ware_descr.h"
 #include "worker.h"
 
 #include <map>
