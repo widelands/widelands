@@ -290,8 +290,8 @@ private:
 private:
 	WaresQueue * m_queue;
 	uint         m_max_width;
-	uint         m_pic_empty;
-	uint         m_pic_full;
+	uint         m_icon;            //< Index to ware's picture
+	uint         m_fade_mask;       //< Mask to show faded version of icons
 	uint         m_pic_background;
 
 	uint         m_cache_size;
@@ -321,8 +321,18 @@ m_display_size(0)
 	const Item_Ware_Descr & ware =
 		*queue->get_owner()->tribe().get_ware_descr(m_queue->get_ware());
 	set_tooltip(ware.descname().c_str());
-	m_pic_empty = ware.get_pic_queue_empty();
-	m_pic_full  = ware.get_pic_queue_full ();
+
+	m_icon = ware.get_icon();
+
+	// Prepare a fadeout mask for undelivered wares
+	SDL_Surface *s = SDL_DisplayFormatAlpha(
+			g_gr->get_picture_surface(m_icon)->get_sdl_surface());
+	SDL_Rect r = {0, 0, WARE_MENU_PIC_W, WARE_MENU_PIC_H};
+	SDL_FillRect(s, &r, SDL_MapRGBA(s->format, 0, 0, 0, 175));
+	Surface *surf = new Surface();
+	surf->set_sdl_surface(*s);
+
+	m_fade_mask = g_gr->get_picture(PicMod_Game, *surf);
 
 	recalc_size();
 
@@ -416,8 +426,13 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 			   BG_ContinueCellX : BG_CellX,
 			   0),
 			  CellWidth, Height));
-		dst->blit
-			(Point(x, Border), cells < m_cache_filled ? m_pic_full : m_pic_empty);
+
+		// Fill ware queue with ware's icon
+		dst->blit(Point(x, Border), m_icon);
+
+		// If ware is undelivered, gray it out.
+		if (cells >= m_cache_filled)
+			dst->blit(Point(x, Border), m_fade_mask);
 	}
 
 	compile_assert(0 <= BG_RightBorderX);

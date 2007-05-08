@@ -41,17 +41,7 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 	snprintf(buffer, sizeof(buffer), "%s_menu.png", name().c_str());
 	string = global->get_string("menu_pic", buffer);
 	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
-	m_menu_pic_fname = buffer;
-
-	snprintf(buffer, sizeof(buffer), "%s_queue_full.png", name().c_str());
-	string = global->get_string("queue_full_pic", buffer);
-	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
-	m_pic_queue_full_fname = buffer;
-
-	snprintf(buffer, sizeof(buffer), "%s_queue_empty.png", name().c_str());
-	string = global->get_string("queue_empty_pic", buffer);
-	snprintf(buffer, sizeof(buffer), "%s/%s", directory, string);
-	m_pic_queue_empty_fname = buffer;
+	m_icon_fname = buffer;
 
 	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle")));
 }
@@ -62,9 +52,7 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
  */
 void Item_Ware_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture( PicMod_Game,  m_menu_pic_fname.c_str() );
-	m_pic_queue_full = g_gr->get_picture( PicMod_Game,  m_pic_queue_full_fname.c_str() );
-	m_pic_queue_empty = g_gr->get_picture( PicMod_Game,  m_pic_queue_empty_fname.c_str() );
+	m_icon = g_gr->get_picture( PicMod_Game, m_icon_fname.c_str() );
 }
 
 

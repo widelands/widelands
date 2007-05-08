@@ -391,7 +391,7 @@ m_parent(&parent)
 		{
 			const Item_Ware_Descr & ware = *tribe.get_ware_descr(cur_ware);
 			WSM_Checkbox & cb = *new WSM_Checkbox
-				(this, posx, posy, cur_ware, ware.get_menu_pic(), colors[cur_ware]);
+				(this, posx, posy, cur_ware, ware.get_icon(), colors[cur_ware]);
 			cb.set_tooltip(ware.descname().c_str());
 			cb.changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
 			posx += cb.get_w() + spacing;

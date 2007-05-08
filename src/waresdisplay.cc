@@ -170,10 +170,7 @@ void WaresDisplay::draw_ware
 		pic = w->get_menu_pic();
 	}
 	else
-	{
-      Item_Ware_Descr* wd = m_player->tribe().get_ware_descr(id);
-		pic = wd->get_menu_pic();
-	}
+		pic = m_player->tribe().get_ware_descr(id)->get_icon();
 
    // Draw a background
 	const uint picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");

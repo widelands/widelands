@@ -84,7 +84,7 @@ void EncyclopediaWindow::fillWares() {
    int i;
    for (i=0;i<nrWares;i++) {
       Item_Ware_Descr* ware = tribe->get_ware_descr(i);
-		wares.add(ware->descname().c_str(), i, ware->get_menu_pic());
+		wares.add(ware->descname().c_str(), i, ware->get_icon());
    }
 }
 
@@ -226,7 +226,7 @@ void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, b
    Item_Ware_Descr* curWare = tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
 
 	UI::Table<uintptr_t>::Entry_Record & tableEntry =
-		condTable.add(index, curWare->get_menu_pic());
+		condTable.add(index, curWare->get_icon());
    std::string rowText = curWare->descname();
    std::string consumeAmount = "0";
    std::string groupId = "";

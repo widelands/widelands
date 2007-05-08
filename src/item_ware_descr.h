@@ -48,18 +48,14 @@ class Item_Ware_Descr : public Map_Object_Descr
 {
 	public:
 		Item_Ware_Descr(const std::string & ware_name):
-				m_name            (ware_name),
-				m_menu_pic        (0),
-				m_pic_queue_full  (0),
-				m_pic_queue_empty (0)
+				m_name       (ware_name),
+				m_icon       (0)
 				{}
 				
 		virtual ~Item_Ware_Descr() {};
 
-
-		uint get_menu_pic       () const throw () {return m_menu_pic;}
-		uint get_pic_queue_full () const throw () {return m_pic_queue_full;}
-		uint get_pic_queue_empty() const throw () {return m_pic_queue_empty;}
+		/// \return index to ware's icon inside picture stack
+		const uint get_icon() const throw() {return m_icon;}
 
 		/// \return ware's unique name
 		const std::string & name() const throw() {return m_name;}
@@ -79,14 +75,8 @@ class Item_Ware_Descr : public Map_Object_Descr
 		std::string m_name;       //< Ware's unique name into tribe
 		std::string m_descname;   //< Short localized name
 		std::string m_helptext;   //< Long descriptive text
-		std::string m_menu_pic_fname;
-		std::string m_pic_queue_full_fname;
-		std::string m_pic_queue_empty_fname;
-
-		uint        m_menu_pic;
-
-		uint        m_pic_queue_full;
-		uint        m_pic_queue_empty;
+		std::string m_icon_fname; //< Filename of ware's main picture
+		uint        m_icon;       //< Index of ware's picture in picture stack
 };
 
 
