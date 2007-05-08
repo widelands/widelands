@@ -335,9 +335,8 @@ void WSM_Checkbox::draw(RenderTarget* dst) {
 		(Rect(Point(1, 1), get_inner_w() - 1, COLOR_BOX_HEIGHT - 2), m_color);
 
    // and the item
-	dst->blit
-		(Point((get_inner_w() - WARE_MENU_PIC_W) / 2, COLOR_BOX_HEIGHT), m_pic);
-
+	dst->blit(Point( (get_inner_w()-WARE_MENU_PIC_WIDTH)/2, COLOR_BOX_HEIGHT),
+	          m_pic);
 }
 
 /*
@@ -367,9 +366,8 @@ m_parent(&parent)
    int posy=offsy;
 
 
-   set_inner_size(
-         10,
-         offsy+spacing+ PLOT_HEIGHT + spacing + nr_rows * (WARE_MENU_PIC_H + spacing ) + 100 );
+   set_inner_size(10, (offsy + spacing + PLOT_HEIGHT + spacing + 
+                       nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100) );
 
 
    // Plotter

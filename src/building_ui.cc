@@ -264,8 +264,8 @@ It updates itself automatically through think().
 class WaresQueueDisplay : public UI::Panel {
 public:
 	enum {
-		CellWidth = WARE_MENU_PIC_W,
-		CellHeight = WARE_MENU_PIC_H,
+		CellWidth = WARE_MENU_PIC_WIDTH,
+		CellHeight = WARE_MENU_PIC_HEIGHT,
 		Border = 4,
 
 		Height = CellHeight + 2 * Border,
@@ -327,7 +327,7 @@ m_display_size(0)
 	// Prepare a fadeout mask for undelivered wares
 	SDL_Surface *s = SDL_DisplayFormatAlpha(
 			g_gr->get_picture_surface(m_icon)->get_sdl_surface());
-	SDL_Rect r = {0, 0, WARE_MENU_PIC_W, WARE_MENU_PIC_H};
+	SDL_Rect r = {0, 0, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT};
 	SDL_FillRect(s, &r, SDL_MapRGBA(s->format, 0, 0, 0, 175));
 	Surface *surf = new Surface();
 	surf->set_sdl_surface(*s);

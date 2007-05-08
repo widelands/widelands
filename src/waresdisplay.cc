@@ -60,9 +60,9 @@ WaresDisplay::~WaresDisplay()
  * handles mouse move
  */
 bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
-   int row= y / (WARE_MENU_PIC_H + 8 + 3);
+   int row = y / (WARE_MENU_PIC_HEIGHT + 8 + 3);
    int index=row*WaresPerRow;
-   index += x / (WARE_MENU_PIC_W +4)+1;
+   index += x / (WARE_MENU_PIC_WIDTH +4) + 1;
    std::string str;
 
    assert( m_warelists.size() );
@@ -100,7 +100,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
    int rows, height;
 
    rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
-	height = rows * (WARE_MENU_PIC_H + 8 + 3) + 1;
+	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
 	set_size(get_inner_w(), height+30);
 	m_curware->set_pos(Point(0, get_inner_h() - 25));
@@ -145,8 +145,8 @@ void WaresDisplay::draw(RenderTarget* dst)
 
 		draw_ware(*dst, p, id, totalstock, is_worker);
 
-		if ((totid + 1) % WaresPerRow) {p.x += WARE_MENU_PIC_W + 3;}
-		else {p.x = 2; p.y += WARE_MENU_PIC_H + 8 + 3;}
+		if ((totid + 1) % WaresPerRow) {p.x += WARE_MENU_PIC_WIDTH + 3;}
+		else {p.x = 2; p.y += WARE_MENU_PIC_HEIGHT + 8 + 3;}
    }
 }
 
@@ -179,11 +179,11 @@ void WaresDisplay::draw_ware
 
 	dst.blit(p, picid);
 
-	const Point pos = p + Point((w - WARE_MENU_PIC_W) / 2, 1);
+	const Point pos = p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1);
 	// Draw it
 	dst.blit(pos, pic);
 	dst.fill_rect
-		(Rect(pos + Point(0, WARE_MENU_PIC_H), WARE_MENU_PIC_W, 8),
+		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
 		 RGBColor(0, 0, 0));
 
 	char buffer[32];
@@ -193,7 +193,7 @@ void WaresDisplay::draw_ware
 		(dst,
 		 UI_FONT_ULTRASMALL,
 		 UI_FONT_SMALL_CLR,
-		 p + Point(WARE_MENU_PIC_W, WARE_MENU_PIC_H - 4),
+		 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
 		 buffer,
 		 Align_Right);
 }

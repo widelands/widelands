@@ -24,8 +24,8 @@
 #include <string>
 
 
-#define WARE_MENU_PIC_W  24  //< Default width for ware's menu icons
-#define WARE_MENU_PIC_H  24  //< Default height for ware's menu icons
+#define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
+#define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
 
 /**
  * Wares can be stored in warehouses. They can be transferred across an
