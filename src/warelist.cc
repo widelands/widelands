@@ -19,6 +19,7 @@
 
 #include "error.h"
 #include "warelist.h"
+#include "types.h"
 
 
 /**

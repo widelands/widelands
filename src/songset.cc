@@ -88,18 +88,18 @@ Mix_Music *Songset::get_song()
 
 	//TODO: review the #ifdef'ed blocks
 
-#ifdef __WIN32__
-#warning Mix_LoadMUS_RW is not available under windows!!!
-	// Hack for windows, works because cwd is directory where
-	// executable is in
-	m_m = Mix_LoadMUS(filename.c_str());
-
-#else
 #if NEW_SDL_MIXER == 1
 	m_m = Mix_LoadMUS_RW(m_rwops);
 
 #else
 #warning Please update your SDL_mixer library to at least version 1.2.6!!!
+
+#ifdef __WIN32__
+	// Hack for windows, works because cwd is directory where
+	// executable is in
+	m_m = Mix_LoadMUS(filename.c_str());
+
+#else
 	// We have to go the long way. We are pretty sure, we're not under windows
 	// so we have a /tmp dir and mktemp (hopefully)
 	// This solution is terribly slow, but we hope that there are only
@@ -113,10 +113,10 @@ Mix_Music *Songset::get_song()
 	fclose( f );
 
 	m_m = Mix_LoadMUS(tempfile);
-
 	//TODO: this should use a RWopsified version!
-#endif
-#endif
+
+#endif // __WIN32__
+#endif // NEW_SDL_MIXER == 1
 
 	if (m_m) {
 		log(("Sound_Handler: loaded song \""+filename+"\"\n").c_str());
