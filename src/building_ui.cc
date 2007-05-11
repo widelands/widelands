@@ -325,14 +325,10 @@ m_display_size(0)
 	m_icon = ware.get_icon();
 
 	// Prepare a fadeout mask for undelivered wares
-	SDL_Surface *s = SDL_DisplayFormatAlpha(
-			g_gr->get_picture_surface(m_icon)->get_sdl_surface());
-	SDL_Rect r = {0, 0, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT};
-	SDL_FillRect(s, &r, SDL_MapRGBA(s->format, 0, 0, 0, 175));
-	Surface *surf = new Surface();
-	surf->set_sdl_surface(*s);
+	Surface *s = new Surface(*g_gr->get_picture_surface(m_pic_background));
 
-	m_fade_mask = g_gr->get_picture(PicMod_Game, *surf);
+	SDL_SetAlpha(s->get_sdl_surface(), SDL_SRCALPHA, 175);
+	m_fade_mask = g_gr->get_picture(PicMod_Game, *s);
 
 	recalc_size();
 
@@ -432,7 +428,11 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 
 		// If ware is undelivered, gray it out.
 		if (cells >= m_cache_filled)
-			dst->blit(Point(x, Border), m_fade_mask);
+			dst->blitrect(Point(x, 0), m_fade_mask,
+			              Rect(Point(cells + 1 == m_display_size and
+			                         m_cache_size > m_display_size ?
+				                     BG_ContinueCellX : BG_CellX, 0),
+				          CellWidth, Height));
 	}
 
 	compile_assert(0 <= BG_RightBorderX);
