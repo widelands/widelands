@@ -24,6 +24,7 @@
 #include "bob.h"
 #include "cmd_queue.h"
 #include "idleworkersupply.h"
+#include "worker_program.h"
 
 class Building;
 class Economy;
@@ -45,9 +46,10 @@ class Tribe_Descr;
    - Idle: the worker is at his job but idling
    - Work: the worker is running his working schedule
    */
-class Worker;
+
+/// \todo (Antonio Trueba#1#): Get rid of forward class declaration (Chicken-and-egg problem)
+class WorkerAction;
 class WorkerProgram;
-struct WorkerAction;
 
 class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;

@@ -181,14 +181,6 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 
 
 
-/*
-==============================================================================
-
-WorkerProgram Commands
-
-==============================================================================
-*/
-
 
 /*
 ==============================
@@ -201,19 +193,6 @@ sparam1 = ware name
 
 ==============================
 */
-void WorkerProgram::parse_createitem
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size() != 2)
-		throw wexception("Usage: createitem <ware type>");
-
-	act->function = &Worker::run_createitem;
-	act->sparam1 = cmd[1];
-}
-
 bool Worker::run_createitem(Game* g, State* state, const WorkerAction* action)
 {
 	WareInstance* item;
@@ -257,25 +236,6 @@ sparam1 = resource
 
 ==============================
 */
-void WorkerProgram::parse_mine
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string>& cmd)
-{
-   if (cmd.size() != 3)
-      throw wexception("Usage: mine <ware type> <area>");
-
-   act->function = &Worker::run_mine;
-   act->sparam1 = cmd[1];
-   char* endp;
-   act->iparam1 = strtol(cmd[2].c_str(),&endp, 0);
-
-   if(endp && *endp)
-      throw wexception("Bad area '%s'", cmd[2].c_str());
-
-}
-
 bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 {
    molog("  Mine(%s,%i)\n", action->sparam1.c_str(), action->iparam1);
@@ -375,21 +335,6 @@ sparamv = possible bobs
 
 ==============================
 */
-void WorkerProgram::parse_setdescription
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size() < 2)
-		throw wexception("Usage: setdescription <bob name> <bob name> ...");
-
-	act->function = &Worker::run_setdescription;
-
-	for(uint i = 1; i < cmd.size(); i++)
-		act->sparamv.push_back(cmd[i]);
-}
-
 bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* action)
 {
 	int idx = g->logic_rand() % action->sparamv.size();
@@ -436,21 +381,6 @@ sparamv = possible bobs
 
 ==============================
 */
-void WorkerProgram::parse_setbobdescription
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size() < 2)
-		throw wexception("Usage: setbobdescription <bob name> <bob name> ...");
-
-	act->function = &Worker::run_setbobdescription;
-
-	for(uint i = 1; i < cmd.size(); i++)
-		act->sparamv.push_back(cmd[i]);
-}
-
 bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* action)
 {
 	int idx = g->logic_rand() % action->sparamv.size();
@@ -509,44 +439,6 @@ sparam1 = type
 
 ==============================
 */
-void WorkerProgram::parse_findobject
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	uint i;
-
-	act->function = &Worker::run_findobject;
-	act->iparam1 = -1;
-	act->iparam2 = -1;
-   act->sparam1 = "immovable";
-
-	// Parse predicates
-	for(i = 1; i < cmd.size(); i++) {
-		uint idx = cmd[i].find(':');
-		std::string key = cmd[i].substr(0, idx);
-		std::string value = cmd[i].substr(idx+1);
-
-		if (key == "radius") {
-			char* endp;
-
-			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (endp && *endp)
-				throw wexception("Bad findobject radius '%s'", value.c_str());
-		} else if (key == "attrib") {
-			act->iparam2 = Map_Object_Descr::get_attribute_id(value);
-		} else if (key == "type") {
-         act->sparam1 = value;
-      } else
-			throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
-	}
-
-	if (act->iparam1 <= 0)
-		throw wexception("findobject: must specify radius");
-	m_workarea_info[act->iparam1].insert(" findobject");
-}
-
 bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 {
    molog("  FindObject(%i, %i,%s)\n", action->iparam1, action->iparam2, action->sparam1.c_str());
@@ -629,69 +521,6 @@ sparam1 = Resource
 
 ==============================
 */
-void WorkerProgram::parse_findspace
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string>& cmd)
-{
-	uint i;
-
-	act->function = &Worker::run_findspace;
-	act->iparam1 = -1;
-	act->iparam2 = -1;
-   act->sparam1 = "";
-
-	// Parse predicates
-	for(i = 1; i < cmd.size(); i++) {
-		uint idx = cmd[i].find(':');
-		std::string key = cmd[i].substr(0, idx);
-		std::string value = cmd[i].substr(idx+1);
-
-		if (key == "radius") {
-			char* endp;
-
-			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (endp && *endp)
-				throw wexception("Bad findspace radius '%s'", value.c_str());
-		} else if (key == "size") {
-			static const struct {
-				const char* name;
-				int val;
-			} sizenames[] = {
-				{"any",    FindNodeSize::sizeAny},
-				{"build",  FindNodeSize::sizeBuild},
-				{"small",  FindNodeSize::sizeSmall},
-				{"medium", FindNodeSize::sizeMedium},
-				{"big",    FindNodeSize::sizeBig},
-				{"mine",   FindNodeSize::sizeMine},
-				{"port",   FindNodeSize::sizePort},
-				{ 0, 0 }
-			};
-
-			int index;
-
-			for(index = 0; sizenames[index].name; ++index)
-				if (value == sizenames[index].name)
-					break;
-
-			if (!sizenames[index].name)
-				throw wexception("Bad findspace size '%s'", value.c_str());
-
-			act->iparam2 = sizenames[index].val;
-		} else if(key == "resource") {
-         act->sparam1 = value;
-      } else
-			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
-	}
-
-	if (act->iparam1 <= 0)
-		throw wexception("findspace: must specify radius");
-	if (act->iparam2 < 0)
-		throw wexception("findspace: must specify size");
-	m_workarea_info[act->iparam1].insert(" findspace");
-}
-
 bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
 {
 	std::vector<Coords> list;
@@ -747,25 +576,6 @@ iparam1 = walkXXX
 
 ==============================
 */
-void WorkerProgram::parse_walk
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size() != 2)
-		throw wexception("Usage: walk <where>");
-
-	act->function = &Worker::run_walk;
-
-	if (cmd[1] == "object")
-		act->iparam1 = WorkerAction::walkObject;
-	else if (cmd[1] == "coords")
-		act->iparam1 = WorkerAction::walkCoords;
-	else
-		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
-}
-
 bool Worker::run_walk(Game* g, State* state, const WorkerAction* action)
 {
 	BaseImmovable* imm = g->get_map()->get_immovable(get_position());
@@ -862,30 +672,6 @@ iparam2 = duration
 
 ==============================
 */
-void WorkerProgram::parse_animation(Worker_Descr* descr, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
-{
-	char* endp;
-
-	if (cmd.size() != 3)
-		throw wexception("Usage: animation <name> <time>");
-
-	act->function = &Worker::run_animation;
-
-	if(!descr->is_animation_known(cmd[1].c_str())) {
-      // dynamically allocate animations here
-      Section* s = parser->prof->get_safe_section(cmd[1].c_str());
-      descr->add_animation(cmd[1].c_str(), (g_anim.get(parser->directory.c_str(), s, 0, parser->encdata)));
-   }
-   act->iparam1 = descr->get_animation(cmd[1].c_str());
-
-	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (endp && *endp)
-		throw wexception("Bad duration '%s'", cmd[2].c_str());
-
-	if (act->iparam2 <= 0)
-		throw wexception("animation duration must be positive");
-}
-
 bool Worker::run_animation(Game* g, State* state, const WorkerAction* action)
 {
 	set_animation(g, action->iparam1);
@@ -908,13 +694,6 @@ iparam1 = 0: don't drop item on flag, 1: do drop item on flag
 
 ==============================
 */
-void WorkerProgram::parse_return
-(Worker_Descr *, WorkerAction * act, Parser *, const std::vector<std::string> &)
-{
-	act->function = &Worker::run_return;
-	act->iparam1 = 1; // drop any item on our owner's flag
-}
-
 bool Worker::run_return(Game* g, State* state, const WorkerAction* action)
 {
 	molog("  Return(%i)\n", action->iparam1);
@@ -936,19 +715,6 @@ sparam1 = object command name
 
 ==============================
 */
-void WorkerProgram::parse_object
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size() != 2)
-		throw wexception("Usage: object <program name>");
-
-	act->function = &Worker::run_object;
-	act->sparam1 = cmd[1];
-}
-
 bool Worker::run_object(Game* g, State* state, const WorkerAction* action)
 {
 	Map_Object* obj;
@@ -1000,10 +766,6 @@ selected by a previous command (i.e. setdescription)
 
 ==============================
 */
-void WorkerProgram::parse_plant
-(Worker_Descr *, WorkerAction * act, Parser *, const std::vector<std::string> &)
-{act->function = &Worker::run_plant;}
-
 bool Worker::run_plant(Game * g, State * state, const WorkerAction *) {
 	Coords pos = get_position();
 
@@ -1039,10 +801,6 @@ selected by a previous command (i.e. setbobdescription).
 
 ==============================
 */
-void WorkerProgram::parse_create_bob
-(Worker_Descr *, WorkerAction * act, Parser *, const std::vector<std::string> &)
-{act->function = &Worker::run_create_bob;}
-
 bool Worker::run_create_bob(Game * g, State * state, const WorkerAction *) {
 	Coords pos = get_position();
 
@@ -1069,12 +827,6 @@ Simply remove the currently selected object - make no fuss about it.
 
 ==============================
 */
-void WorkerProgram::parse_removeobject
-(Worker_Descr *, WorkerAction * act, Parser *, const std::vector<std::string> &)
-{
-	act->function = &Worker::run_removeobject;
-}
-
 bool Worker::run_removeobject(Game * g, State * state, const WorkerAction *) {
 	Map_Object* obj;
 
@@ -1104,30 +856,6 @@ sparam1 = subcommand
 
 ==============================
 */
-void WorkerProgram::parse_geologist
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	char* endp;
-
-	if (cmd.size() != 4)
-		throw wexception("Usage: geologist <repeat #> <radius> <subcommand>");
-
-	act->function = &Worker::run_geologist;
-
-	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
-	if (endp && *endp)
-		throw wexception("Bad repeat count '%s'", cmd[1].c_str());
-
-	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (endp && *endp)
-		throw wexception("Bad radius '%s'", cmd[2].c_str());
-
-	act->sparam1 = cmd[3];
-}
-
 bool Worker::run_geologist(Game* g, State* state, const WorkerAction* action)
 {
 	#ifdef DEBUG
@@ -1156,18 +884,6 @@ when possible.
 
 ==============================
 */
-void WorkerProgram::parse_geologist_find
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size() != 1)
-		throw wexception("Usage: geologist-find");
-
-	act->function = &Worker::run_geologist_find;
-}
-
 bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
 	FCoords position = g->get_map()->get_fcoords(get_position());
 	BaseImmovable* imm = position.field->get_immovable();
@@ -1199,22 +915,6 @@ bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
 	return false;
 }
 
-void WorkerProgram::parse_playFX
-(Worker_Descr *,
- WorkerAction * act,
- Parser *,
- const std::vector<std::string> & cmd)
-{
-	if (cmd.size()<2 || cmd.size()>3)
-		throw wexception("Usage: playFX <fx_name> [priority]");
-
-	act->sparam1=cmd[1];
-	act->function = &Worker::run_playFX;
-	if (cmd.size()==2)
-		act->iparam1=64;//50%chance to play, only one instance at a time
-	else
-		act->iparam1=atoi(cmd[2].c_str());
-}
 
 /** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
