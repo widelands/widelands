@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#ifndef IDLEWORKERSUPPLY_H
+#define IDLEWORKERSUPPLY_H
+
+#include "transport.h"
+
+class IdleWorkerSupply : public Supply
+{
+	public:
+		IdleWorkerSupply(Worker* w);
+		~IdleWorkerSupply();
+
+		void set_economy(Economy* e);
+		virtual PlayerImmovable* get_position(Game* g);
+		virtual int get_amount(const int ware) const;
+
+		/// Idle workers are always active supplies, because they need to get
+		/// into a Warehouse ASAP.
+		virtual bool is_active() const throw() {return true;}
+
+		virtual WareInstance* launch_item(Game* g, int ware)
+				__attribute__ ((noreturn));
+
+		virtual Worker* launch_worker(Game* g, int ware);
+		virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
+		virtual int get_passing_requeriments (Game* g, int ware,
+		                                      Requeriments* r);
+		virtual void mark_as_used (Game* g, int ware, Requeriments* r);
+
+
+	private:
+		Worker  * m_worker;
+		Economy * m_economy;
+};
+
+
+#endif  // IDLEWORKERSUPPLY_H

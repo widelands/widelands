@@ -23,6 +23,7 @@
 #include "animation.h"
 #include "bob.h"
 #include "cmd_queue.h"
+#include "idleworkersupply.h"
 
 class Building;
 class Economy;
@@ -32,7 +33,6 @@ class Road;
 class PlayerImmovable;
 class WareInstance;
 class Tribe_Descr;
-class IdleWorkerSupply;
 
 /*
    Worker is the base class for all humans (and actually potential non-humans, too)
