@@ -20,6 +20,7 @@
 #include "worker.h"
 
 #include "cmd_queue.h"
+#include "cmd_incorporate.h"
 #include "critter_bob.h"
 #include "error.h"
 #include "fileread.h"
@@ -46,41 +47,6 @@
 #include "worker_program.h"
 #include "world.h"
 #include "worlddata.h"
-
-Cmd_Incorporate::Cmd_Incorporate(int t, Worker* w) :
-       BaseCommand(t) {
-          worker=w;
-}
-void Cmd_Incorporate::execute(Game* g) {
-   worker->incorporate(g);
-}
-
-#define CMD_INCORPORATE_VERSION 1
-void Cmd_Incorporate::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
- int version=fr->Unsigned16();
-   if(version==CMD_INCORPORATE_VERSION) {
-      // Read Base Commands
-      BaseCommand::BaseCmdRead(fr,egbase,mol);
-
-      // Serial of worker
-      int fileserial=fr->Unsigned32();
-      assert(mol->is_object_known(fileserial));
-      worker=static_cast<Worker*>(mol->get_object_by_file_index(fileserial));
-   } else
-      throw wexception("Unknown version in Cmd_Incorporate::Read: %i", version);
-}
-void Cmd_Incorporate::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
-   // First, write version
-   fw->Unsigned16(CMD_INCORPORATE_VERSION);
-
-   // Write base classes
-   BaseCommand::BaseCmdWrite(fw, egbase, mos);
-
-   // Now serial
-   assert(mos->is_object_known(worker));
-   fw->Unsigned32(mos->get_object_file_index(worker));
-}
-
 
 
 /*
