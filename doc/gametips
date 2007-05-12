@@ -1,0 +1,34 @@
+[global]
+background=pics/tips_bg.png
+width=400
+height=180
+padding-left=20
+padding-top=5
+padding-right=15
+padding-bottom=5
+background-color=6b5737
+text-color=21211b
+
+[Tip 1]
+text=_Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop.
+sec=5
+
+[Tip 2]
+text=_Watch the fishers hut - after fish resource is exhausted in working area, productin will stop.
+sec=4
+
+[Tip 3]
+text=_Building process will start only after a road is built to the construction site.
+sec=4
+
+[Tip 4]
+text=_Be sure to send out a geologist to explore site before building a well or mine.
+sec=4
+
+[Tip 5]
+text=_Your teritory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc.
+sec=5
+
+[Tip 6]
+text=_Miners will work only if supplied with food.
+sec=3

@@ -36,6 +36,14 @@ ProgressWindow::ProgressWindow() : m_xres(0), m_yres(0) {
 	step(_("Preparing..."));
 }
 
+ProgressWindow::~ProgressWindow() {
+	for (VisualizationArray::iterator it = m_visualizations.begin();
+		 it != m_visualizations.end(); ++it) {
+		// inform visualizations
+		(*it)->stop();
+	}
+}
+
 void ProgressWindow::draw_background(
 		RenderTarget & rt, const uint xres, const uint yres) {
 	
@@ -86,14 +94,25 @@ void ProgressWindow::step(const std::string & description) {
 
 	const uint xres = g_gr->get_xres();
 	const uint yres = g_gr->get_yres();
+	bool repaint = (xres != m_xres or yres != m_yres);
+
 	// if resolution is changed, repaint the background
-	if (xres != m_xres or yres != m_yres)
+	if (repaint)
 		draw_background(rt, xres, yres);
 
 	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
 	g_fh->draw_string
 		(rt, UI_FONT_SMALL, PROGRESS_FONT_COLOR, m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
+	
+	if (m_visualizations.size() > 0) {
+		for (VisualizationArray::iterator it = m_visualizations.begin();
+			 it != m_visualizations.end(); ++it) {
+			// let visualizations do their work
+			(*it)->update(repaint);
+		}
+	}
+
 	g_gr->refresh();
 }
 
@@ -108,4 +127,25 @@ void ProgressWindow::stepf(const std::string & format, ...) {
 	va_end(va);
 	step (buffer);
 }
+
+/// Register additional visualization (tips/hints, animation, etc)
+void ProgressWindow::add_visualization(
+		IProgressVisualization * instance) {
+	// just add to collection
+	m_visualizations.push_back(instance);
+}
+
+void ProgressWindow::remove_visualization(
+		IProgressVisualization * instance) {
+	// remove
+	for (VisualizationArray::iterator it = m_visualizations.begin();
+		 it != m_visualizations.end(); ++it) {
+		
+		if ((*it) == instance) {
+			m_visualizations.erase (it, it+1);
+			break;
+		}
+	}
+}
+
 };

@@ -26,6 +26,7 @@
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
 #include "game_loader.h"
+#include "game_tips.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
@@ -105,6 +106,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
 	m_maploader = new Widelands_Map_Loader(*fs, m);
 	UI::ProgressWindow loaderUI;
+	GameTips tips (loaderUI);
 
     // Loading the locals for the campaign
         std::string camp_textdomain("");
@@ -175,6 +177,7 @@ bool Game::run_single_player ()
 
 	m_state = gs_running;
 	UI::ProgressWindow loaderUI;
+	GameTips tips (loaderUI);
 
 	loaderUI.step(_("Preparing computer players"));
 	init_player_controllers ();
@@ -202,6 +205,7 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 	}
 
 	UI::ProgressWindow loaderUI;
+	GameTips tips (loaderUI);
 
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);

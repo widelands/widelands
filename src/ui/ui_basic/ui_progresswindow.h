@@ -23,21 +23,41 @@
 #include "graphic.h"
 
 #include <string>
+#include <vector>
 
 namespace UI {
 /// Manages a progress window on the screen.
+struct IProgressVisualization {
+	// perform any visualizations as needed
+	// if repaint is true, ensure previously painted areas are visible
+	virtual void update(bool repaint) = 0;
+
+	// Progress Window is closing, unregister and cleanup
+	virtual void stop() = 0;
+
+	virtual ~IProgressVisualization() {}
+};
+
+/// Manages a progress window on the screen.
 struct ProgressWindow {
 	ProgressWindow();
+	~ProgressWindow();
+
+	/// Register additional visualization (tips/hints, animation, etc)
+	void add_visualization(IProgressVisualization * instance);
+	void remove_visualization(IProgressVisualization * instance);
 
 	/// Display a progress step description.
 	void step(const std::string & description);
 	void stepf(const std::string & format, ...);
 
 private:
+	typedef std::vector<IProgressVisualization*> VisualizationArray;
 	uint  m_xres;
 	uint  m_yres;
 	Point m_label_center;
 	Rect  m_label_rectangle;
+	VisualizationArray m_visualizations;
 	
 	void draw_background(RenderTarget & rt,
 						 const uint xres,
