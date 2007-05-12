@@ -43,27 +43,29 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 	try {
 		Profile prof(filename.c_str(), NULL);
 		Section* s = prof.get_section("global");
-		const char *text = s->get_string("background", NULL);
-		if (NULL != text)
-			m_background_picture = text;
-		m_width = s->get_int("width", GAMETIPS_DEFAULT_TEXTAREA_W);
-		m_height = s->get_int("height", GAMETIPS_DEFAULT_TEXTAREA_H);
-		m_pading_l = s->get_int("padding-left", GAMETIPS_DEFAULT_PADDING);
-		m_pading_r = s->get_int("padding-right", GAMETIPS_DEFAULT_PADDING);
-		m_pading_t = s->get_int("padding-top", GAMETIPS_DEFAULT_PADDING);
-		m_pading_b = s->get_int("padding-bottom", GAMETIPS_DEFAULT_PADDING);
-		m_font_size = s->get_int("text-size", UI_FONT_SIZE_SMALL);
-		m_bgcolor = color_from_hex(s->get_string("background-color", NULL),
-								   GAMETIPS_TEXTAREA_COLOR_BG);
-		m_color   = color_from_hex(s->get_string("text-color", NULL),
-								   GAMETIPS_FONT_COLOR_FG);
+		if (NULL != s) {
+			const char *text = s->get_string("background", NULL);
+			if (NULL != text)
+				m_background_picture = text;
+			m_width = s->get_int("width", GAMETIPS_DEFAULT_TEXTAREA_W);
+			m_height = s->get_int("height", GAMETIPS_DEFAULT_TEXTAREA_H);
+			m_pading_l = s->get_int("padding-left", GAMETIPS_DEFAULT_PADDING);
+			m_pading_r = s->get_int("padding-right", GAMETIPS_DEFAULT_PADDING);
+			m_pading_t = s->get_int("padding-top", GAMETIPS_DEFAULT_PADDING);
+			m_pading_b = s->get_int("padding-bottom", GAMETIPS_DEFAULT_PADDING);
+			m_font_size = s->get_int("text-size", UI_FONT_SIZE_SMALL);
+			m_bgcolor = color_from_hex(s->get_string("background-color", NULL),
+									GAMETIPS_TEXTAREA_COLOR_BG);
+			m_color   = color_from_hex(s->get_string("text-color", NULL),
+									GAMETIPS_FONT_COLOR_FG);
+		}
 
 		while(( s = prof.get_next_section(0)) ) {
-			text = s->get_string("text", NULL);
+			const char *text = s->get_string("text", NULL);
 			if (NULL == text)
 				continue;
 
-            Tip tip;
+			Tip tip;
 			tip.text = text;
 			tip.interval = s->get_int("sec", GAMETIPS_DEFAULT_INTERVAL);
 			m_tips.push_back (tip);
