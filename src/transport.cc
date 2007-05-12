@@ -27,6 +27,7 @@ Flags, Roads, the logic behind ware pulls and pushes.
 
 #include "transport.h"
 
+#include "carrier.h"
 #include "cmd_queue.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -40,7 +41,6 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker.h"
 
 #include <cstdarg>
 

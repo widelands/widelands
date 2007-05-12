@@ -20,6 +20,7 @@
 #include "widelands_map_bobdata_data_packet.h"
 
 #include "bob.h"
+#include "carrier.h"
 #include "critter_bob.h"
 #include "critter_bob_program.h"
 #include "error.h"
@@ -34,7 +35,6 @@
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker.h"
 #include "worker_program.h"
 
 #define CURRENT_PACKET_VERSION 1
