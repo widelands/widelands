@@ -17,39 +17,16 @@
  *
  */
 
-#ifndef __S__WORKER_DESCR_H
-#define __S__WORKER_DESCR_H
+#ifndef __S__WORKER_H
+#define __S__WORKER_H
 
-#include "animation.h"
-#include "bob.h"
-#include "cmd_queue.h"
 #include "idleworkersupply.h"
-#include "worker_program.h"
 
-class Building;
-class Economy;
-class Flag;
-class Route;
-class Road;
-class PlayerImmovable;
-class WareInstance;
-class Tribe_Descr;
-
-/*
-   Worker is the base class for all humans (and actually potential non-humans, too)
-   that belong to a tribe.
-
-   Every worker can carry one (item) ware.
-
-   Workers can be in one of the following meta states:
-   - Request: the worker is walking to his job somewhere
-   - Idle: the worker is at his job but idling
-   - Work: the worker is running his working schedule
-   */
 
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (Chicken-and-egg problem)
 class WorkerAction;
 class WorkerProgram;
+
 
 class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;
@@ -125,6 +102,18 @@ class Worker_Descr : public Bob_Descr {
 	ProgramMap    m_programs;
 };
 
+
+/**
+ * Worker is the base class for all humans (and actually potential non-humans,
+ * too) that belong to a tribe.
+ *
+ * Every worker can carry one (item) ware.
+ *
+ * Workers can be in one of the following meta states:
+ *  - Request: the worker is walking to his job somewhere
+ *  - Idle: the worker is at his job but idling
+ *  - Work: the worker is running his working schedule
+ */
 class Worker : public Bob {
 	friend class Soldier; //  allow access to m_supply
    friend class WorkerProgram;
@@ -290,4 +279,4 @@ class Worker : public Bob {
 };
 
 
-#endif // __S__WORKER_DESCR_H
+#endif // __S__WORKER_H

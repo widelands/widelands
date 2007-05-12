@@ -60,7 +60,7 @@ class WorkerProgram : public BobProgramBase
 											   Parser* parser,
 											   const std::vector<std::string>&);
 
-		WorkerProgram(std::string name);
+		WorkerProgram(std::string name) {m_name = name;}
 		virtual ~WorkerProgram(void) { }
 
 		std::string get_name() const {return m_name;}

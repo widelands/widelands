@@ -17,8 +17,81 @@
  *
  */
 
+#include "helper.h"
 #include "profile.h"
 #include "worker_program.h"
+
+const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
+	{"mine",              &WorkerProgram::parse_mine},
+	{"createitem",        &WorkerProgram::parse_createitem},
+	{"setdescription",    &WorkerProgram::parse_setdescription},
+	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
+	{"findobject",        &WorkerProgram::parse_findobject},
+	{"findspace",         &WorkerProgram::parse_findspace},
+	{"walk",              &WorkerProgram::parse_walk},
+	{"animation",         &WorkerProgram::parse_animation},
+	{"return",            &WorkerProgram::parse_return},
+	{"object",            &WorkerProgram::parse_object},
+	{"plant",             &WorkerProgram::parse_plant},
+	{"create_bob",        &WorkerProgram::parse_create_bob},
+	{"removeobject",      &WorkerProgram::parse_removeobject},
+	{"geologist",         &WorkerProgram::parse_geologist},
+	{"geologist-find",    &WorkerProgram::parse_geologist_find},
+	{"playFX",            &WorkerProgram::parse_playFX},
+
+	{ 0, 0 }
+};
+
+
+/**
+ * Parse a program
+ */
+void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
+{
+	Section* sprogram = parser->prof->get_safe_section(name.c_str());
+
+	for(uint idx = 0; ; ++idx) {
+		try
+		{
+			char buf[32];
+			const char* string;
+			std::vector<std::string> cmd;
+
+			snprintf(buf, sizeof(buf), "%i", idx);
+			string = sprogram->get_string(buf, 0);
+			if (!string)
+				break;
+
+			split_string(string, cmd, " \t\r\n");
+			if (!cmd.size())
+				continue;
+
+			// Find the appropriate parser
+			WorkerAction act;
+			uint mapidx;
+
+			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+				if (cmd[0] == s_parsemap[mapidx].name)
+					break;
+
+			if (!s_parsemap[mapidx].name)
+				throw wexception("unknown command '%s'", cmd[0].c_str());
+
+			(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
+
+			m_actions.push_back(act);
+		}
+		catch(std::exception& e)
+		{
+			throw wexception("Line %i: %s", idx, e.what());
+		}
+	}
+
+	// Check for line numbering problems
+	if (sprogram->get_num_values() != m_actions.size())
+		throw wexception("Line numbers appear to be wrong");
+}
+
 
 /**
  * createitem <waretype>

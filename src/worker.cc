@@ -17,149 +17,31 @@
  *
  */
 
-#include "worker.h"
-
 #include "carrier.h"
-#include "cmd_queue.h"
 #include "cmd_incorporate.h"
 #include "critter_bob.h"
-#include "error.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "graphic.h"
 #include "helper.h"
 #include "i18n.h"
-#include "idleworkersupply.h"
 #include "interactive_player.h"
-#include "layered_filesystem.h"
 #include "player.h"
 #include "profile.h"
-#include "queue_cmd_ids.h"
-#include "rendertarget.h"
 #include "soldier.h"
 #include "sound_handler.h"
-#include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
-#include "wexception.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
+#include "worker.h"
 #include "worker_program.h"
-#include "world.h"
-#include "worlddata.h"
 
 
-/*
-==============================================================================
-
-class WorkerProgram
-
-==============================================================================
-*/
-
-const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
-	{"mine",              &WorkerProgram::parse_mine},
-	{"createitem",        &WorkerProgram::parse_createitem},
-	{"setdescription",    &WorkerProgram::parse_setdescription},
-	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
-	{"findobject",        &WorkerProgram::parse_findobject},
-	{"findspace",         &WorkerProgram::parse_findspace},
-	{"walk",              &WorkerProgram::parse_walk},
-	{"animation",         &WorkerProgram::parse_animation},
-	{"return",            &WorkerProgram::parse_return},
-	{"object",            &WorkerProgram::parse_object},
-	{"plant",             &WorkerProgram::parse_plant},
-	{"create_bob",        &WorkerProgram::parse_create_bob},
-	{"removeobject",      &WorkerProgram::parse_removeobject},
-	{"geologist",         &WorkerProgram::parse_geologist},
-	{"geologist-find",    &WorkerProgram::parse_geologist_find},
-	{"playFX",            &WorkerProgram::parse_playFX},
-
-	{ 0, 0 }
-};
-
-
-/*
-===============
-WorkerProgram::WorkerProgram
-
-Initialize a program
-===============
-*/
-WorkerProgram::WorkerProgram(std::string name)
-{
-	m_name = name;
-}
-
-
-/*
-===============
-WorkerProgram::parse
-
-Parse a program
-===============
-*/
-void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
-{
-	Section* sprogram = parser->prof->get_safe_section(name.c_str());
-
-	for(uint idx = 0; ; ++idx) {
-		try
-		{
-			char buf[32];
-			const char* string;
-			std::vector<std::string> cmd;
-
-			snprintf(buf, sizeof(buf), "%i", idx);
-			string = sprogram->get_string(buf, 0);
-			if (!string)
-				break;
-
-			split_string(string, cmd, " \t\r\n");
-			if (!cmd.size())
-				continue;
-
-			// Find the appropriate parser
-			WorkerAction act;
-			uint mapidx;
-
-			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
-				if (cmd[0] == s_parsemap[mapidx].name)
-					break;
-
-			if (!s_parsemap[mapidx].name)
-				throw wexception("unknown command '%s'", cmd[0].c_str());
-
-			(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
-
-			m_actions.push_back(act);
-		}
-		catch(std::exception& e)
-		{
-			throw wexception("Line %i: %s", idx, e.what());
-		}
-	}
-
-	// Check for line numbering problems
-	if (sprogram->get_num_values() != m_actions.size())
-		throw wexception("Line numbers appear to be wrong");
-}
-
-
-
-
-/*
-==============================
-
-createitem <waretype>
-
-The worker will create and carry an item of the given type.
-
-sparam1 = ware name
-
-==============================
-*/
+/**
+ * createitem <waretype>
+ *
+ * The worker will create and carry an item of the given type.
+ *
+ * sparam1 = ware name
+ */
 bool Worker::run_createitem(Game* g, State* state, const WorkerAction* action)
 {
 	WareInstance* item;
@@ -190,19 +72,16 @@ bool Worker::run_createitem(Game* g, State* state, const WorkerAction* action)
 	return true;
 }
 
-/*
-==============================
 
-mine <resource> <area>
-
-Mine on the current coordinates (from walk or so) for resources
-decrease, go home
-
-iparam1 = area
-sparam1 = resource
-
-==============================
-*/
+/**
+ * mine <resource> <area>
+ *
+ * Mine on the current coordinates (from walk or so) for resources decrease,
+ * go home
+ *
+ * iparam1 = area
+ * sparam1 = resource
+ */
 bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
 {
    molog("  Mine(%s,%i)\n", action->sparam1.c_str(), action->iparam1);
@@ -290,18 +169,15 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* action)
    return true;
 }
 
-/*
-==============================
 
-setdescription <immovable name> <immovable name> ...
-
-Randomly select an immovable name that can be used in subsequent commands
-(e.g. plant).
-
-sparamv = possible bobs
-
-==============================
-*/
+/**
+ * setdescription <immovable name> <immovable name> ...
+ *
+ * Randomly select an immovable name that can be used in subsequent commands
+ * (e.g. plant).
+ *
+ * sparamv = possible bobs
+ */
 bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* action)
 {
 	int idx = g->logic_rand() % action->sparamv.size();
@@ -336,18 +212,15 @@ bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* actio
 	return true;
 }
 
-/*
-==============================
 
-setbobdescription <bob name> <bob name> ...
-
-Randomly select a bob name that can be used in subsequent commands
-(e.g. create_bob).
-
-sparamv = possible bobs
-
-==============================
-*/
+/**
+ * setbobdescription <bob name> <bob name> ...
+ *
+ * Randomly select a bob name that can be used in subsequent commands
+ * (e.g. create_bob).
+ *
+ * sparamv = possible bobs
+ */
 bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* action)
 {
 	int idx = g->logic_rand() % action->sparamv.size();
@@ -382,30 +255,27 @@ bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* ac
 	return true;
 }
 
-/*
-==============================
 
-findobject key:value key:value ...
-
-Find and select an object based on a number of predicates.
-The object can be used in other commands like walk or object.
-
-Predicates:
-radius:<dist>
-	Find objects within the given radius
-
-attrib:<attribute>  (optional)
-	Find objects with the given attribute
-
-type:<what>         (optional, defaults to immovable)
-   Find only objects of this type
-
-iparam1 = radius predicate
-iparam2 = attribute predicate (if >= 0)
-sparam1 = type
-
-==============================
-*/
+/**
+ * findobject key:value key:value ...
+ *
+ * Find and select an object based on a number of predicates.
+ * The object can be used in other commands like walk or object.
+ *
+ * Predicates:
+ * radius:<dist>
+ *	Find objects within the given radius
+ *
+ * attrib:<attribute>  (optional)
+ *	Find objects with the given attribute
+ *
+ * type:<what>         (optional, defaults to immovable)
+ *	Find only objects of this type
+ *
+ * iparam1 = radius predicate
+ * iparam2 = attribute predicate (if >= 0)
+ * sparam1 = type
+ */
 bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 {
    molog("  FindObject(%i, %i,%s)\n", action->iparam1, action->iparam2, action->sparam1.c_str());
@@ -463,31 +333,27 @@ bool Worker::run_findobject(Game* g, State* state, const WorkerAction* action)
 
 
 
-/*
-==============================
-
-findspace key:value key:value ...
-
-Find a field based on a number of predicates.
-The field can later be used in other commands, e.g. walk.
-
-Predicates:
-radius:<dist>
-	Search for fields within the given radius around the worker.
-
-size:[any|build|small|medium|big|mine|port]
-	Search for fields with the given amount of space.
-
-resource:<resname>
-   Resource to search for. This is mainly intended for fisher and
-   therelike (non detectable Resources and default resources)
-
-iparam1 = radius
-iparam2 = FindNodeSize::sizeXXX
-sparam1 = Resource
-
-==============================
-*/
+/**
+ * findspace key:value key:value ...
+ *
+ * Find a field based on a number of predicates.
+ * The field can later be used in other commands, e.g. walk.
+ *
+ * Predicates:
+ * radius:<dist>
+ *	Search for fields within the given radius around the worker.
+ *
+ * size:[any|build|small|medium|big|mine|port]
+ *	Search for fields with the given amount of space.
+ *
+ * resource:<resname>
+ *	Resource to search for. This is mainly intended for fisher and
+ *	therelike (non detectable Resources and default resources)
+ *
+ * iparam1 = radius
+ * iparam2 = FindNodeSize::sizeXXX
+ * sparam1 = Resource
+ */
 bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
 {
 	std::vector<Coords> list;
@@ -530,19 +396,15 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* action)
 }
 
 
-/*
-==============================
-
-walk <where>
-
-Walk to a previously selected destination. where can be one of:
-	object  walk to a previously found and selected object
-	coords  walk to a previously found and selected field/coordinate
-
-iparam1 = walkXXX
-
-==============================
-*/
+/**
+ *walk <where>
+ *
+ * Walk to a previously selected destination. where can be one of:
+ *	object  walk to a previously found and selected object
+ *	coords  walk to a previously found and selected field/coordinate
+ *
+ * iparam1 = walkXXX
+ */
 bool Worker::run_walk(Game* g, State* state, const WorkerAction* action)
 {
 	BaseImmovable* imm = g->get_map()->get_immovable(get_position());
@@ -627,18 +489,14 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* action)
 }
 
 
-/*
-==============================
-
-animation <name> <duration>
-
-Play the given animation for the given amount of time.
-
-iparam1 = anim id
-iparam2 = duration
-
-==============================
-*/
+/**
+ * animation <name> <duration>
+ *
+ * Play the given animation for the given amount of time.
+ *
+ * iparam1 = anim id
+ * iparam2 = duration
+ */
 bool Worker::run_animation(Game* g, State* state, const WorkerAction* action)
 {
 	set_animation(g, action->iparam1);
@@ -650,17 +508,11 @@ bool Worker::run_animation(Game* g, State* state, const WorkerAction* action)
 
 
 
-/*
-==============================
-
-return
-
-Return home, drop any item we're carrying onto our building's flag.
-
-iparam1 = 0: don't drop item on flag, 1: do drop item on flag
-
-==============================
-*/
+/**
+ * Return home, drop any item we're carrying onto our building's flag.
+ *
+ * iparam1 = 0: don't drop item on flag, 1: do drop item on flag
+ */
 bool Worker::run_return(Game* g, State* state, const WorkerAction* action)
 {
 	molog("  Return(%i)\n", action->iparam1);
@@ -671,17 +523,13 @@ bool Worker::run_return(Game* g, State* state, const WorkerAction* action)
 }
 
 
-/*
-==============================
-
-object <command>
-
-Cause the currently selected object to execute the given program.
-
-sparam1 = object command name
-
-==============================
-*/
+/**
+ * object <command>
+ *
+ * Cause the currently selected object to execute the given program.
+ *
+ * sparam1 = object command name
+ */
 bool Worker::run_object(Game* g, State* state, const WorkerAction* action)
 {
 	Map_Object* obj;
@@ -723,16 +571,10 @@ bool Worker::run_object(Game* g, State* state, const WorkerAction* action)
 }
 
 
-/*
-==============================
-
-plant
-
-Plant an immovable on the current position. The immovable type must have been
-selected by a previous command (i.e. setdescription)
-
-==============================
-*/
+/**
+ * Plant an immovable on the current position. The immovable type must have
+ * been selected by a previous command (i.e. setdescription)
+ */
 bool Worker::run_plant(Game * g, State * state, const WorkerAction *) {
 	Coords pos = get_position();
 
@@ -758,16 +600,11 @@ bool Worker::run_plant(Game * g, State * state, const WorkerAction *) {
 	return true;
 }
 
-/*
-==============================
 
-create_bob
-
-Plants a bob (critter usually, maybe also worker later on). The immovable type must have been
-selected by a previous command (i.e. setbobdescription).
-
-==============================
-*/
+/**
+ * Plants a bob (critter usually, maybe also worker later on). The immovable
+ * type must have been selected by a previous command (i.e. setbobdescription).
+ */
 bool Worker::run_create_bob(Game * g, State * state, const WorkerAction *) {
 	Coords pos = get_position();
 
@@ -785,15 +622,9 @@ bool Worker::run_create_bob(Game * g, State * state, const WorkerAction *) {
 
 
 
-/*
-==============================
-
-removeobject
-
-Simply remove the currently selected object - make no fuss about it.
-
-==============================
-*/
+/**
+ * Simply remove the currently selected object - make no fuss about it.
+ */
 bool Worker::run_removeobject(Game * g, State * state, const WorkerAction *) {
 	Map_Object* obj;
 
@@ -809,20 +640,16 @@ bool Worker::run_removeobject(Game * g, State * state, const WorkerAction *) {
 }
 
 
-/*
-==============================
-
-geologist <repeat #> <radius> <subcommand>
-
-Walk around the starting point randomly within a certain radius,
-and execute the subcommand for some of the fields.
-
-iparam1 = maximum repeat #
-iparam2 = radius
-sparam1 = subcommand
-
-==============================
-*/
+/**
+ * geologist <repeat #> <radius> <subcommand>
+ *
+ * Walk around the starting point randomly within a certain radius, and
+ * execute the subcommand for some of the fields.
+ *
+ * iparam1 = maximum repeat #
+ * iparam2 = radius
+ * sparam1 = subcommand
+ */
 bool Worker::run_geologist(Game* g, State* state, const WorkerAction* action)
 {
 	#ifdef DEBUG
@@ -841,16 +668,10 @@ bool Worker::run_geologist(Game* g, State* state, const WorkerAction* action)
 }
 
 
-/*
-==============================
-
-geologist-find
-
-Check resources at the current position, and plant a marker object
-when possible.
-
-==============================
-*/
+/**
+ * Check resources at the current position, and plant a marker object when
+ * possible.
+ */
 bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
 	FCoords position = g->get_map()->get_fcoords(get_position());
 	BaseImmovable* imm = position.field->get_immovable();
@@ -883,8 +704,10 @@ bool Worker::run_geologist_find(Game * g, State * state, const WorkerAction *) {
 }
 
 
-/** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
- * is decided only by the sound server*/
+/**
+ * Demand from the \ref g_sound_handler to play a certain sound effect.
+ * Whether the effect actually gets played is decided only by the sound server.
+ */
 bool Worker::run_playFX(Game* g, State* state, const WorkerAction* action)
 {
 	g_sound_handler.play_fx(action->sparam1, get_position(), action->iparam1);
@@ -895,20 +718,6 @@ bool Worker::run_playFX(Game* g, State* state, const WorkerAction* action)
 }
 
 
-/*
-==============================================================================
-
-Worker IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
-Worker_Descr::Worker_Descr
-Worker_Descr::~Worker_Descr
-===============
-*/
 Worker_Descr::Worker_Descr
 (const Tribe_Descr & tribe_descr, const std::string & worker_name)
 : Bob_Descr(&tribe_descr, worker_name), m_menu_pic_fname(0), m_menu_pic(0)
@@ -926,26 +735,18 @@ Worker_Descr::~Worker_Descr(void)
 }
 
 
-/*
-===============
-Worker_Descr::load_graphics
-
-Load graphics (other than animations).
-===============
-*/
+/**
+ * Load graphics (other than animations).
+ */
 void Worker_Descr::load_graphics()
 {
 	m_menu_pic = g_gr->get_picture( PicMod_Game,  m_menu_pic_fname );
 }
 
 
-/*
-===============
-Worker_Descr::get_program
-
-Get a program from the workers description.
-===============
-*/
+/**
+ * Get a program from the workers description.
+ */
 const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 {
 	ProgramMap::const_iterator it = m_programs.find(programname);
@@ -957,13 +758,9 @@ const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 }
 
 
-/*
-===============
-Worker_Descr::create
-
-Custom creation routing that accounts for the location.
-===============
-*/
+/**
+ * Custom creation routing that accounts for the location.
+ */
 Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovable *location, Coords coords)
 {
    Worker *worker = (Worker*)create_object();
@@ -975,13 +772,9 @@ Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovabl
 }
 
 
-/*
-===============
-Worker_Descr::parse
-
-Parse the worker data from configuration
-===============
-*/
+/**
+ * Parse the worker data from configuration
+ */
 void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
 	char buffer[256];
@@ -1077,20 +870,6 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 }
 
 
-/*
-==============================
-
-IMPLEMENTATION
-
-==============================
-*/
-
-/*
-===============
-Worker::Worker
-Worker::~Worker
-===============
-*/
 Worker::Worker(const Worker_Descr & worker_descr) :
 Bob          (worker_descr),
 m_economy    (0),
@@ -1103,7 +882,7 @@ Worker::~Worker()
 {
 }
 
-/*
+/**
  * Log basic informations
  */
 void Worker::log_general_info(Editor_Game_Base* egbase) {
@@ -1133,27 +912,19 @@ void Worker::log_general_info(Editor_Game_Base* egbase) {
    molog("m_supply: %p\n", m_supply);
 }
 
-/*
-===============
-Worker::get_movecaps
-===============
-*/
+
 uint Worker::get_movecaps()
 {
 	return MOVECAPS_WALK;
 }
 
 
-/*
-===============
-Worker::set_location
-
-Change the location. This should be called in the following situations:
-- worker creation (usually, location is a warehouse)
-- worker moves along a route (location is a road and finally building)
-- current location is destroyed (building burnt down etc...)
-===============
-*/
+/**
+ * Change the location. This should be called in the following situations:
+ * - worker creation (usually, location is a warehouse)
+ * - worker moves along a route (location is a road and finally building)
+ * - current location is destroyed (building burnt down etc...)
+ */
 void Worker::set_location(PlayerImmovable *location)
 {
 	PlayerImmovable *oldlocation = get_location(&get_owner()->egbase());
@@ -1198,15 +969,11 @@ void Worker::set_location(PlayerImmovable *location)
 }
 
 
-/*
-===============
-Worker::set_economy
-
-Change the worker's current economy. This is called:
-- by set_location() when appropriate
-- by the current location, when the location's economy changes
-===============
-*/
+/**
+ * Change the worker's current economy. This is called:
+ * - by set_location() when appropriate
+ * - by the current location, when the location's economy changes
+ */
 void Worker::set_economy(Economy *economy)
 {
 	if (economy == m_economy)
@@ -1227,13 +994,9 @@ void Worker::set_economy(Economy *economy)
 }
 
 
-/*
-===============
-Worker::init
-
-Initialize the worker
-===============
-*/
+/**
+ * Initialize the worker
+ */
 void Worker::init(Editor_Game_Base *g)
 {
 	Bob::init(g);
@@ -1248,13 +1011,9 @@ void Worker::init(Editor_Game_Base *g)
 }
 
 
-/*
-===============
-Worker::cleanup
-
-Remove the worker.
-===============
-*/
+/**
+ * Remove the worker.
+ */
 void Worker::cleanup(Editor_Game_Base *g)
 {
 	WareInstance* item = get_carried_item(g);
@@ -1281,14 +1040,11 @@ void Worker::cleanup(Editor_Game_Base *g)
 }
 
 
-/*
-===============
-Worker::set_carried_item
-
-Set the item we carry.
-If we carry an item right now, it will be destroyed (see fetch_carried_item()).
-===============
-*/
+/**
+ * Set the item we carry.
+ * If we carry an item right now, it will be destroyed (see
+ * fetch_carried_item()).
+ */
 void Worker::set_carried_item(Game* g, WareInstance* item)
 {
 	WareInstance* olditem = get_carried_item(g);
@@ -1304,13 +1060,9 @@ void Worker::set_carried_item(Game* g, WareInstance* item)
 }
 
 
-/*
-===============
-Worker::fetch_carried_item
-
-Stop carrying the current item, and return a pointer to it.
-===============
-*/
+/**
+ * Stop carrying the current item, and return a pointer to it.
+ */
 WareInstance* Worker::fetch_carried_item(Game* g)
 {
 	WareInstance* item = get_carried_item(g);
@@ -1324,14 +1076,10 @@ WareInstance* Worker::fetch_carried_item(Game* g)
 }
 
 
-/*
-===============
-Worker::schedule_incorporate
-
-Schedule an immediate CMD_INCORPORATE, which will integrate this worker into
-the warehouse he is standing on.
-===============
-*/
+/**
+ * Schedule an immediate CMD_INCORPORATE, which will integrate this worker into
+ * the warehouse he is standing on.
+ */
 void Worker::schedule_incorporate(Game* g)
 {
 	g->get_cmdqueue()->enqueue (new Cmd_Incorporate(g->get_gametime(), this));
@@ -1340,14 +1088,10 @@ void Worker::schedule_incorporate(Game* g)
 }
 
 
-/*
-===============
-Worker::incorporate
-
-Incorporate the worker into the warehouse it's standing on immediately.
-This will delete the worker.
-===============
-*/
+/**
+ * Incorporate the worker into the warehouse it's standing on immediately.
+ * This will delete the worker.
+ */
 void Worker::incorporate(Game *g)
 {
 	PlayerImmovable *location = get_location(g);
@@ -1363,8 +1107,10 @@ void Worker::incorporate(Game *g)
 	send_signal(g, "fail");
 }
 
-/*
+
+/**
  * Calculate needed experience.
+ *
  * This sets the needed experience on a value between max and min
  */
 void Worker::create_needed_experience(Game* g) {
@@ -1379,7 +1125,7 @@ void Worker::create_needed_experience(Game* g) {
    m_current_exp=0;
 }
 
-/*
+/**
  * Gain experience
  *
  * This function increases the experience
@@ -1396,10 +1142,9 @@ void Worker::gain_experience(Game* g) {
 
 }
 
-/*
- * Level this worker to the next higher
- * level. this includes creating a new worker
- * with his propertys and removing this worker
+/**
+ * Level this worker to the next higher level. this includes creating a
+ * new worker with his propertys and removing this worker
  */
 void Worker::level(Game* g) {
 
@@ -1422,13 +1167,9 @@ void Worker::level(Game* g) {
    create_needed_experience(g);
 }
 
-/*
-===============
-Worker::init_auto_task
-
-Set a fallback task.
-===============
-*/
+/**
+ * Set a fallback task.
+ */
 void Worker::init_auto_task(Game* g)
 {
 	PlayerImmovable* location = get_location(g);
@@ -1450,17 +1191,11 @@ void Worker::init_auto_task(Game* g)
 }
 
 
-/*
-==============================
-
-TRANSFER task
-
-Follow the given transfer.
-Signal "cancel" to cancel the transfer.
-
-==============================
-*/
-
+/**
+ * Follow the given transfer.
+ *
+ * Signal "cancel" to cancel the transfer.
+ */
 Bob::Task Worker::taskTransfer = {
 	"transfer",
 
@@ -1470,13 +1205,9 @@ Bob::Task Worker::taskTransfer = {
 };
 
 
-/*
-===============
-Worker::start_task_transfer
-
-Tell the worker to follow the Transfer
-===============
-*/
+/**
+ * Tell the worker to follow the Transfer
+ */
 void Worker::start_task_transfer(Game* g, Transfer* t)
 {
 	State* state;
@@ -1499,11 +1230,6 @@ void Worker::start_task_transfer(Game* g, Transfer* t)
 }
 
 
-/*
-===============
-Worker::transfer_update
-===============
-*/
 void Worker::transfer_update(Game* g, State* state)
 {
 	PlayerImmovable* location = get_location(g);
@@ -1654,11 +1380,6 @@ void Worker::transfer_update(Game* g, State* state)
 }
 
 
-/*
-===============
-Worker::transfer_signal
-===============
-*/
 void Worker::transfer_signal(Game *, State *) {
 	std::string signal = get_signal();
 
@@ -1677,11 +1398,6 @@ void Worker::transfer_signal(Game *, State *) {
 }
 
 
-/*
-===============
-Worker::transfer_mask
-===============
-*/
 void Worker::transfer_mask(Game *, State * state)
 {
 	std::string signal = get_signal();
@@ -1691,35 +1407,24 @@ void Worker::transfer_mask(Game *, State * state)
 }
 
 
-/*
-===============
-Worker::cancel_task_transfer
-
-Called by transport code when the transfer has been cancelled & destroyed.
-===============
-*/
+/**
+ * Called by transport code when the transfer has been cancelled & destroyed.
+ */
 void Worker::cancel_task_transfer(Game* g)
 {
 	send_signal(g, "cancel");
 }
 
 
-/*
-==============================
-
-BUILDINGWORK task
-
-Endless loop, in which the worker calls the owning building's
-get_building_work() function to intiate subtasks.
-The signal "update" is used to wake the worker up after a sleeping time
-(initiated by a false return value from get_building_work()).
-
-ivar1 - 0: no task has failed; 1: currently in buildingwork;
-        2: signal failure of buildingwork
-
-==============================
-*/
-
+/**
+ * Endless loop, in which the worker calls the owning building's
+ * get_building_work() function to intiate subtasks.
+ * The signal "update" is used to wake the worker up after a sleeping time
+ * (initiated by a false return value from get_building_work()).
+ *
+ * ivar1 - 0: no task has failed; 1: currently in buildingwork;
+ *		2: signal failure of buildingwork
+ */
 Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
 
@@ -1729,13 +1434,9 @@ Bob::Task Worker::taskBuildingwork = {
 };
 
 
-/*
-===============
-Worker::start_task_buildingwork
-
-Begin work at a building.
-===============
-*/
+/**
+ * Begin work at a building.
+ */
 void Worker::start_task_buildingwork() {
 	push_task(taskBuildingwork);
 	top_state().ivar1 = 0;
@@ -1798,15 +1499,11 @@ void Worker::buildingwork_signal(Game * g, State *) {
 }
 
 
-/*
-===============
-Worker::update_task_buildingwork
-
-Wake up the buildingwork task if it was sleeping.
-Otherwise, the buildingwork task will update as soon as the previous task
-is finished.
-===============
-*/
+/**
+ * Wake up the buildingwork task if it was sleeping.
+ * Otherwise, the buildingwork task will update as soon as the previous task
+ * is finished.
+ */
 void Worker::update_task_buildingwork(Game* g)
 {
 	State* state = get_state();
@@ -1816,19 +1513,12 @@ void Worker::update_task_buildingwork(Game* g)
 }
 
 
-/*
-==============================
-
-RETURN task
-
-Return to our owning building.
-If dropitem (ivar1) is true, we'll drop our carried item (if any) on the
-building's flag, if possible.
-Blocks all signals except for "location".
-
-==============================
-*/
-
+/**
+ * Return to our owning building.
+ * If dropitem (ivar1) is true, we'll drop our carried item (if any) on the
+ * building's flag, if possible.
+ * Blocks all signals except for "location".
+ */
 Bob::Task Worker::taskReturn = {
 	"return",
 
@@ -1838,13 +1528,9 @@ Bob::Task Worker::taskReturn = {
 };
 
 
-/*
-===============
-Worker::start_task_return
-
-Return to our owning building.
-===============
-*/
+/**
+ * Return to our owning building.
+ */
 void Worker::start_task_return(Game* g, bool dropitem)
 {
 	PlayerImmovable* location = get_location(g);
@@ -1864,11 +1550,6 @@ void Worker::start_task_return(Game* g, bool dropitem)
 }
 
 
-/*
-===============
-Worker::return_update
-===============
-*/
 void Worker::return_update(Game* g, State* state)
 {
 	PlayerImmovable* location = get_location(g);
@@ -1931,11 +1612,6 @@ void Worker::return_update(Game* g, State* state)
 }
 
 
-/*
-===============
-Worker::return_signal
-===============
-*/
 void Worker::return_signal(Game *, State *) {
 	std::string signal = get_signal();
 
@@ -1950,20 +1626,13 @@ void Worker::return_signal(Game *, State *) {
 }
 
 
-/*
-==============================
-
-PROGRAM task
-
-Follow the steps of a configuration-defined program.
-ivar1 is the next action to be performed.
-ivar2 is used to store description indices selected by setdescription
-objvar1 is used to store objects found by findobject
-coords is used to store target coordinates found by findspace
-
-==============================
-*/
-
+/**
+ * Follow the steps of a configuration-defined program.
+ * ivar1 is the next action to be performed.
+ * ivar2 is used to store description indices selected by setdescription
+ * objvar1 is used to store objects found by findobject
+ * coords is used to store target coordinates found by findspace
+ */
 Bob::Task Worker::taskProgram = {
 	"program",
 
@@ -1973,13 +1642,9 @@ Bob::Task Worker::taskProgram = {
 };
 
 
-/*
-===============
-Worker::start_task_program
-
-Start the given program.
-===============
-*/
+/**
+ * Start the given program.
+ */
 void Worker::start_task_program(const std::string & programname) {
 	push_task(taskProgram);
 	State & state = top_state();
@@ -1988,11 +1653,6 @@ void Worker::start_task_program(const std::string & programname) {
 }
 
 
-/*
-===============
-Worker::program_update
-===============
-*/
 void Worker::program_update(Game* g, State* state)
 {
 	const WorkerAction* action;
@@ -2015,24 +1675,11 @@ void Worker::program_update(Game* g, State* state)
 }
 
 
-/*
-===============
-Worker::program_signal
-===============
-*/
 void Worker::program_signal(Game *, State *) {
 	molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 	pop_task();
 }
 
-
-/*
-==============================
-
-GOWAREHOUSE task
-
-==============================
-*/
 
 Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
@@ -2042,15 +1689,12 @@ Bob::Task Worker::taskGowarehouse = {
 	0,
 };
 
-/*
-===============
-Worker::start_task_gowarehouse
 
-Get the worker to move to the nearest warehouse.
-The worker is added to the list of usable wares, so he may be reassigned to
-a new task immediately.
-===============
-*/
+/**
+ * Get the worker to move to the nearest warehouse.
+ * The worker is added to the list of usable wares, so he may be reassigned to
+ * a new task immediately.
+ */
 void Worker::start_task_gowarehouse() {
 	assert(!m_supply);
 
@@ -2060,11 +1704,6 @@ void Worker::start_task_gowarehouse() {
 }
 
 
-/*
-===============
-Worker::gowarehouse_update
-===============
-*/
 void Worker::gowarehouse_update(Game* g, State* state)
 {
 	PlayerImmovable *location = get_location(g);
@@ -2117,11 +1756,6 @@ void Worker::gowarehouse_update(Game* g, State* state)
 }
 
 
-/*
-===============
-Worker::gowarehouse_signal
-===============
-*/
 void Worker::gowarehouse_signal(Game * g, State *) {
 	std::string signal = get_signal();
 
@@ -2152,14 +1786,6 @@ void Worker::gowarehouse_signal(Game * g, State *) {
 }
 
 
-/*
-==============================
-
-DROPOFF task
-
-==============================
-*/
-
 Bob::Task Worker::taskDropoff = {
 	"dropoff",
 
@@ -2168,13 +1794,9 @@ Bob::Task Worker::taskDropoff = {
 	0,
 };
 
-/*
-===============
-Worker::set_job_dropoff
-
-Walk to the building's flag, drop the given item, and walk back inside.
-===============
-*/
+/**
+ * Walk to the building's flag, drop the given item, and walk back inside.
+ */
 void Worker::start_task_dropoff(Game* g, WareInstance* item)
 {
 	assert(item);
@@ -2185,11 +1807,6 @@ void Worker::start_task_dropoff(Game* g, WareInstance* item)
 }
 
 
-/*
-===============
-Worker::dropoff_update
-===============
-*/
 void Worker::dropoff_update(Game * g, State *) {
 	std::string signal = get_signal();
 
@@ -2271,16 +1888,10 @@ void Worker::dropoff_update(Game * g, State *) {
 }
 
 
-/*
-==============================
-
-FETCHFROMFLAG task
-
-ivar1 is set to 0 if we should move to the flag and fetch the item, and it is
-set to 1 if we should move into the building.
-
-==============================
-*/
+/**
+ * ivar1 is set to 0 if we should move to the flag and fetch the item, and it is
+ * set to 1 if we should move into the building.
+ */
 
 Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
@@ -2291,25 +1902,16 @@ Bob::Task Worker::taskFetchfromflag = {
 };
 
 
-/*
-===============
-Worker::start_task_fetchfromflag
-
-Walk to the building's flag, fetch an item from the flag that is destined for
-the building, and walk back inside.
-===============
-*/
+/**
+ * Walk to the building's flag, fetch an item from the flag that is destined for
+ * the building, and walk back inside.
+ */
 void Worker::start_task_fetchfromflag() {
 	push_task(taskFetchfromflag);
 	top_state().ivar1 = 0;
 }
 
 
-/*
-===============
-Worker::fetchfromflag_update
-===============
-*/
 void Worker::fetchfromflag_update(Game *g, State* state)
 {
 	PlayerImmovable* owner = get_location(g);
@@ -2376,16 +1978,9 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 }
 
 
-/*
-==============================
-
-WAITFORCAPACITY task
-
-Wait for available capacity on a flag.
-
-==============================
-*/
-
+/**
+ * Wait for available capacity on a flag.
+ */
 Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 
@@ -2394,17 +1989,14 @@ Bob::Task Worker::taskWaitforcapacity = {
 	0,
 };
 
-/*
-===============
-Worker::start_task_waitforcapacity
-
-Checks the capacity of the flag.
-If there is none, a wait task is pushed, and the worker is added to the flag's
-wait queue. The function returns true in this case.
-If the flag still has capacity, the function returns false and doesn't act at
-all.
-===============
-*/
+/**
+ * Checks the capacity of the flag.
+ *
+ * If there is none, a wait task is pushed, and the worker is added to the
+ * flag's wait queue. The function returns true in this case.
+ * If the flag still has capacity, the function returns false and doesn't
+ * act at all.
+ */
 bool Worker::start_task_waitforcapacity(Game* g, Flag* flag)
 {
 	if (flag->has_capacity())
@@ -2420,21 +2012,11 @@ bool Worker::start_task_waitforcapacity(Game* g, Flag* flag)
 }
 
 
-/*
-===============
-Worker::waitforcapacity_update
-===============
-*/
 void Worker::waitforcapacity_update(Game *, State *) {
 	skip_act(); // wait indefinitely
 }
 
 
-/*
-===============
-Worker::waitforcapacity_signal
-===============
-*/
 void Worker::waitforcapacity_signal(Game *, State *) {
 	// The 'wakeup' signal is to be expected; don't propagate it
 	if (get_signal() == "wakeup")
@@ -2443,14 +2025,11 @@ void Worker::waitforcapacity_signal(Game *, State *) {
 	pop_task();
 }
 
-/*
-===============
-Worker::wakeup_flag_capacity
 
-Called when the flag we waited on has now got capacity left.
-Return true if we actually woke up due to this.
-===============
-*/
+/**
+ * Called when the flag we waited on has now got capacity left.
+ * Return true if we actually woke up due to this.
+ */
 bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 {
 	State* state = get_state();
@@ -2469,17 +2048,10 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 }
 
 
-/*
-==============================
-
-WAITLEAVEBUILDING task
-
-ivar1 - 0: don't change location; 1: change location to the flag
-objvar1 - the building we're leaving
-
-==============================
-*/
-
+/**
+ * ivar1 - 0: don't change location; 1: change location to the flag
+ * objvar1 - the building we're leaving
+ */
 Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 
@@ -2489,16 +2061,12 @@ Bob::Task Worker::taskLeavebuilding = {
 };
 
 
-/*
-===============
-Worker::start_task_leavebuilding
-
-Leave the current building.
-Waits on the buildings leave wait queue if necessary.
-
-If changelocation is true, change the location to the flag once we're outside.
-===============
-*/
+/**
+ * Leave the current building.
+ * Waits on the buildings leave wait queue if necessary.
+ *
+ * If changelocation is true, change the location to the flag once we're outside.
+ */
 void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 {
 	PlayerImmovable* location = get_location(g);
@@ -2515,11 +2083,6 @@ void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 }
 
 
-/*
-===============
-Worker::leavebuilding_update
-===============
-*/
 void Worker::leavebuilding_update(Game* g, State* state)
 {
 	BaseImmovable* position = g->get_map()->get_immovable(get_position());
@@ -2551,11 +2114,6 @@ void Worker::leavebuilding_update(Game* g, State* state)
 }
 
 
-/*
-===============
-Worker::leavebuilding_signal
-===============
-*/
 void Worker::leavebuilding_signal(Game * g, State *) {
 	std::string signal = get_signal();
 
@@ -2571,14 +2129,10 @@ void Worker::leavebuilding_signal(Game * g, State *) {
 }
 
 
-/*
-===============
-Worker::wakeup_leave_building
-
-Called when the given building allows us to leave it.
-Return true if we actually woke up due to this.
-===============
-*/
+/**
+ * Called when the given building allows us to leave it.
+ * \return true if we actually woke up due to this.
+ */
 bool Worker::wakeup_leave_building(Game* g, Building* building)
 {
 	State* state = get_state();
@@ -2600,16 +2154,9 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 
 
 
-/*
-==============================
-
-FUGITIVE task
-
-Run around aimlessly until we find a warehouse.
-
-==============================
-*/
-
+/**
+ * Run around aimlessly until we find a warehouse.
+ */
 Bob::Task Worker::taskFugitive = {
 	"fugitive",
 
@@ -2619,11 +2166,6 @@ Bob::Task Worker::taskFugitive = {
 };
 
 
-/*
-===============
-Worker::start_task_fugitive
-===============
-*/
 void Worker::start_task_fugitive(Game* g)
 {
 	push_task(taskFugitive);
@@ -2633,11 +2175,6 @@ void Worker::start_task_fugitive(Game* g)
 }
 
 
-/*
-===============
-Worker::fugitive_update
-===============
-*/
 void Worker::fugitive_update(Game* g, State* state)
 {
 	Map *map = g->get_map();
@@ -2737,34 +2274,22 @@ void Worker::fugitive_update(Game* g, State* state)
 }
 
 
-/*
-===============
-Worker::fugitive_signal
-===============
-*/
 void Worker::fugitive_signal(Game *, State *) {
 	molog("[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
 	pop_task();
 }
 
 
-/*
-==============================
-
-GEOLOGIST task
-
-Walk in a circle around our owner, calling a subprogram on currently
-empty fields.
-
-ivar1 - number of attempts
-ivar2 - radius to search
-svar1 - name of subcommand
-
-Failure of path movement is caught, all other signals terminate this task.
-
-==============================
-*/
-
+/**
+ * Walk in a circle around our owner, calling a subprogram on currently
+ * empty fields.
+ *
+ * ivar1 - number of attempts
+ * ivar2 - radius to search
+ * svar1 - name of subcommand
+ *
+ * Failure of path movement is caught, all other signals terminate this task.
+ */
 Bob::Task Worker::taskGeologist = {
 	"geologist",
 
@@ -2774,11 +2299,6 @@ Bob::Task Worker::taskGeologist = {
 };
 
 
-/*
-===============
-Worker::start_task_geologist
-===============
-*/
 void Worker::start_task_geologist
 (const int attempts, const int radius, const std::string & subcommand)
 {
@@ -2790,11 +2310,6 @@ void Worker::start_task_geologist
 }
 
 
-/*
-===============
-Worker::geologist_update
-===============
-*/
 void Worker::geologist_update(Game* g, State* state)
 {
 	std::string signal = get_signal();
@@ -2942,45 +2457,31 @@ void Worker::draw_inner
 }
 
 
-/*
-===============
-Worker::draw
-
-Draw the worker, taking the carried item into account.
-===============
-*/
-void Worker::draw
-(const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
-{if (get_current_anim()) draw_inner(game, dst, calc_drawpos(game, pos));}
-
-
-/*
-===============
-Worker_Descr::create_object
-
-Create a generic worker of this type.
-===============
-*/
-Bob * Worker_Descr::create_object() const {return new Worker(*this);}
+/**
+ * Draw the worker, taking the carried item into account.
+ */
+void Worker::draw(const Editor_Game_Base & game, RenderTarget & dst,
+                  const Point pos) const
+{
+	if (get_current_anim())
+		draw_inner(game, dst, calc_drawpos(game, pos));
+}
 
 
-/*
-==============================================================================
+/**
+ * Create a generic worker of this type.
+ */
+Bob * Worker_Descr::create_object() const
+{
+	return new Worker(*this);
+}
 
-Worker factory
 
-==============================================================================
-*/
-
-/*
-===============
-Worker_Descr::create_from_dir [static]
-
-Automatically create the appropriate Worker_Descr type from the given
-config data.
-May return 0.
-===============
-*/
+/**
+ * Automatically create the appropriate Worker_Descr type from the given
+ * config data.
+ * \note May return 0.
+ */
 Worker_Descr *Worker_Descr::create_from_dir
 (const Tribe_Descr & tribe,
  const char * const directory,
