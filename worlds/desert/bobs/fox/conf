@@ -1,6 +1,6 @@
-descname=_Desert Fox
-type="critter"
-swimming=0  # defaults to 0, is only in the water?
+descname=_ Fox #Fox for greenlands
+type="critter" #graphics: Toralf Bethke 
+swimming=0
 attrib=eatable
 program=remove
 
@@ -9,6 +9,10 @@ program=remove
 
 [idle]
 hotspot=5 9
+pics=fox_idle_se_??.png
+fps=10
 
 [walk]
 hotspot=5 9
+dirpics=fox_walk_!!_??.png
+fps=20

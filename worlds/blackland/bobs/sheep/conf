@@ -13,6 +13,8 @@ pics=sheep_??.png
 sfx_frame=0
 sfx_name=sheep
 hotspot=5 9
+fps=20
 
 [walk]
 hotspot=5 9
+fps=20
