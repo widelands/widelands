@@ -598,12 +598,21 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		 player_number,
 		 site.bo->desc->name().c_str());
 
+	// Get max radius of recursive workarea
+	Workarea_Info::size_type radius = 0;
+	
+	const Workarea_Info & workarea_info = site.bo->desc->m_recursive_workarea_info;
+	for
+		(Workarea_Info::const_iterator it = workarea_info.begin();
+			it != workarea_info.end();
+			++it) if (it->first > radius) radius = it->first;
+
 	Map & map = game().map();
 	if
 		(site.bo->need_trees
 		 and
 		 map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 8), //  FIXME Use conf to set radius instead
+		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		  0,
 		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
 		 ==
@@ -619,7 +628,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 		(site.bo->need_stones
 		 and
 		 map.find_immovables
-		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), 6), //  FIXME Use conf to set radius instead
+		 (Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		  0,
 		  FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
 		 ==
