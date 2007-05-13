@@ -63,6 +63,16 @@
 		38EAFF340BF38D4900578DA1 /* warelist.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFF320BF38D4800578DA1 /* warelist.h */; };
 		38EAFF370BF38D5700578DA1 /* item_ware_descr.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFF350BF38D5700578DA1 /* item_ware_descr.cc */; };
 		38EAFF380BF38D5700578DA1 /* item_ware_descr.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFF360BF38D5700578DA1 /* item_ware_descr.h */; };
+		38EAFF560BF6E2F700578DA1 /* carrier.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFF520BF6E2F700578DA1 /* carrier.cc */; };
+		38EAFF570BF6E2F700578DA1 /* carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFF530BF6E2F700578DA1 /* carrier.h */; };
+		38EAFF580BF6E2F700578DA1 /* cmd_incorporate.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFF540BF6E2F700578DA1 /* cmd_incorporate.cc */; };
+		38EAFF590BF6E2F700578DA1 /* cmd_incorporate.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFF550BF6E2F700578DA1 /* cmd_incorporate.h */; };
+		38EAFF5B0BF6E31400578DA1 /* worker_program.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFF5A0BF6E31400578DA1 /* worker_program.cc */; };
+		38EAFF5E0BF6E32D00578DA1 /* game_tips.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFF5C0BF6E32D00578DA1 /* game_tips.cc */; };
+		38EAFF5F0BF6E32D00578DA1 /* game_tips.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFF5D0BF6E32D00578DA1 /* game_tips.h */; };
+		38EAFF620BF6E34500578DA1 /* idleworkersupply.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFF600BF6E34500578DA1 /* idleworkersupply.cc */; };
+		38EAFF630BF6E34500578DA1 /* idleworkersupply.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFF610BF6E34500578DA1 /* idleworkersupply.h */; };
+		38EAFF6B0BF6E73C00578DA1 /* doc in Resources */ = {isa = PBXBuildFile; fileRef = 38EAFF670BF6E73B00578DA1 /* doc */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		BF22DD700A5FB72B00D0292B /* animation.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB5F0A5FB72A00D0292B /* animation.cc */; };
 		BF22DD720A5FB72B00D0292B /* battle.cc in Sources */ = {isa = PBXBuildFile; fileRef = BF22DB610A5FB72A00D0292B /* battle.cc */; };
@@ -431,6 +441,16 @@
 		38EAFF320BF38D4800578DA1 /* warelist.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = warelist.h; sourceTree = "<group>"; };
 		38EAFF350BF38D5700578DA1 /* item_ware_descr.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = item_ware_descr.cc; sourceTree = "<group>"; };
 		38EAFF360BF38D5700578DA1 /* item_ware_descr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = item_ware_descr.h; sourceTree = "<group>"; };
+		38EAFF520BF6E2F700578DA1 /* carrier.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = carrier.cc; sourceTree = "<group>"; };
+		38EAFF530BF6E2F700578DA1 /* carrier.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = carrier.h; sourceTree = "<group>"; };
+		38EAFF540BF6E2F700578DA1 /* cmd_incorporate.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = cmd_incorporate.cc; sourceTree = "<group>"; };
+		38EAFF550BF6E2F700578DA1 /* cmd_incorporate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cmd_incorporate.h; sourceTree = "<group>"; };
+		38EAFF5A0BF6E31400578DA1 /* worker_program.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = worker_program.cc; sourceTree = "<group>"; };
+		38EAFF5C0BF6E32D00578DA1 /* game_tips.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = game_tips.cc; sourceTree = "<group>"; };
+		38EAFF5D0BF6E32D00578DA1 /* game_tips.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = game_tips.h; sourceTree = "<group>"; };
+		38EAFF600BF6E34500578DA1 /* idleworkersupply.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = idleworkersupply.cc; sourceTree = "<group>"; };
+		38EAFF610BF6E34500578DA1 /* idleworkersupply.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = idleworkersupply.h; sourceTree = "<group>"; };
+		38EAFF670BF6E73B00578DA1 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = doc; path = ../../doc; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Widelands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Widelands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF22DB5F0A5FB72A00D0292B /* animation.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cc; sourceTree = "<group>"; };
@@ -1047,6 +1067,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38EAFF670BF6E73B00578DA1 /* doc */,
 				BF7986940B9B91BC003694AF /* txts */,
 				BF79869B0B9B91BC003694AF /* worlds */,
 				BF7960C70B9B919D003694AF /* sound */,
@@ -1112,18 +1133,24 @@
 				BF22DB790A5FB72A00D0292B /* editor */,
 				38EAFD9F0BEF4EFA00578DA1 /* filesystem */,
 				BF22DCCC0A5FB72B00D0292B /* ui */,
-				38EAFF350BF38D5700578DA1 /* item_ware_descr.cc */,
-				38EAFF360BF38D5700578DA1 /* item_ware_descr.h */,
-				38EAFF310BF38D4800578DA1 /* warelist.cc */,
-				38EAFF320BF38D4800578DA1 /* warelist.h */,
 				38EAFD630BEF4EA000578DA1 /* areawatcher.cc */,
 				38EAFD640BEF4EA000578DA1 /* areawatcher.h */,
 				38EAFD650BEF4EA000578DA1 /* bitinbuffer.h */,
 				38EAFD660BEF4EA000578DA1 /* bitoutbuffer.h */,
 				38EAFD670BEF4EA000578DA1 /* build_id.h */,
+				38EAFF520BF6E2F700578DA1 /* carrier.cc */,
+				38EAFF530BF6E2F700578DA1 /* carrier.h */,
+				38EAFF540BF6E2F700578DA1 /* cmd_incorporate.cc */,
+				38EAFF550BF6E2F700578DA1 /* cmd_incorporate.h */,
 				38EAFD680BEF4EA100578DA1 /* colormap.cc */,
 				38EAFD690BEF4EA100578DA1 /* colormap.h */,
+				38EAFF5C0BF6E32D00578DA1 /* game_tips.cc */,
+				38EAFF5D0BF6E32D00578DA1 /* game_tips.h */,
+				38EAFF600BF6E34500578DA1 /* idleworkersupply.cc */,
+				38EAFF610BF6E34500578DA1 /* idleworkersupply.h */,
 				38EAFD6A0BEF4EA100578DA1 /* interval.h */,
+				38EAFF350BF38D5700578DA1 /* item_ware_descr.cc */,
+				38EAFF360BF38D5700578DA1 /* item_ware_descr.h */,
 				38EAFD6B0BEF4EA100578DA1 /* mapdifferenceregion.cc */,
 				38EAFD6C0BEF4EA100578DA1 /* mapdifferenceregion.h */,
 				38EAFD6D0BEF4EA100578DA1 /* mapfringeregion.cc */,
@@ -1142,6 +1169,9 @@
 				38EAFD7A0BEF4EA100578DA1 /* terrain.h */,
 				38EAFD7B0BEF4EA100578DA1 /* texture.cc */,
 				38EAFD7C0BEF4EA100578DA1 /* texture.h */,
+				38EAFF310BF38D4800578DA1 /* warelist.cc */,
+				38EAFF320BF38D4800578DA1 /* warelist.h */,
+				38EAFF5A0BF6E31400578DA1 /* worker_program.cc */,
 				38EAFD7D0BEF4EA100578DA1 /* widelands_map_players_areawatchers_data_packet.cc */,
 				38EAFD7E0BEF4EA100578DA1 /* widelands_map_players_areawatchers_data_packet.h */,
 				38EAFD7F0BEF4EA100578DA1 /* widelands_map_players_view_data_packet.cc */,
@@ -1784,6 +1814,10 @@
 				38EAFDD10BF36A0E00578DA1 /* ui_progresswindow.h in Headers */,
 				38EAFF340BF38D4900578DA1 /* warelist.h in Headers */,
 				38EAFF380BF38D5700578DA1 /* item_ware_descr.h in Headers */,
+				38EAFF570BF6E2F700578DA1 /* carrier.h in Headers */,
+				38EAFF590BF6E2F700578DA1 /* cmd_incorporate.h in Headers */,
+				38EAFF5F0BF6E32D00578DA1 /* game_tips.h in Headers */,
+				38EAFF630BF6E34500578DA1 /* idleworkersupply.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1850,6 +1884,7 @@
 				BF798E4F0B9B91BE003694AF /* worlds in Resources */,
 				38EAFDB80BEF4EFA00578DA1 /* SConscript in Resources */,
 				38EAFDB90BEF4EFA00578DA1 /* SConscript.dist in Resources */,
+				38EAFF6B0BF6E73C00578DA1 /* doc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2182,6 +2217,11 @@
 				38EAFDD00BF36A0E00578DA1 /* ui_progresswindow.cc in Sources */,
 				38EAFF330BF38D4800578DA1 /* warelist.cc in Sources */,
 				38EAFF370BF38D5700578DA1 /* item_ware_descr.cc in Sources */,
+				38EAFF560BF6E2F700578DA1 /* carrier.cc in Sources */,
+				38EAFF580BF6E2F700578DA1 /* cmd_incorporate.cc in Sources */,
+				38EAFF5B0BF6E31400578DA1 /* worker_program.cc in Sources */,
+				38EAFF5E0BF6E32D00578DA1 /* game_tips.cc in Sources */,
+				38EAFF620BF6E34500578DA1 /* idleworkersupply.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
