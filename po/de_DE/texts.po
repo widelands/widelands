@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn2248\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-04-29 21:49+0000\n"
-"PO-Revision-Date: 2007-05-13 15:47+0100\n"
+"PO-Revision-Date: 2007-05-13 22:00+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -500,19 +500,19 @@ msgstr "ALT(gehalten)     Wählt das zweite alternative Werkzeug aus"
 
 #: ../../txts\gametips:13
 msgid "Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop."
-msgstr ""
+msgstr "Manche Gebäude (zum Beispiel Bauern- oder Weinhöfe) haben nur einen kleinen Arbeitsbereich und können nichts produzieren, wenn sie von Straßen und/oder Bäumen eingekreist sind."
 
 #: ../../txts\gametips:17
 msgid "Watch the fishers hut - after fish resource is exhausted in working area, production will stop."
-msgstr ""
+msgstr "Beobachte die Fischerhütten. Wenn die Fischressourcen schwinden werden die Fischer aufhören zu arbeiten."
 
 #: ../../txts\gametips:21
 msgid "Building process will start only after a road is built to the construction site."
-msgstr ""
+msgstr "Der Baue eines Gebäudes wird immer erst dann starten, nachdem eine Straße zu der Baustelle führt."
 
 #: ../../txts\gametips:25
 msgid "Be sure to send out a geologist to explore site before building a well or mine."
-msgstr ""
+msgstr "Sende immer zu erst einen Geologen zum Untersuchen aus, bevor du Minen oder Brunnen baust."
 
 #: ../../txts\gametips:29
 msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc."
@@ -524,13 +524,13 @@ msgstr "Bergarbeiter arbeiten nur dann, wenn sie mit Nahrung versorgt werden."
 
 #: ../../txts\gametips:37
 msgid "Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares."
-msgstr ""
+msgstr "Teile deine Straßen, durch Flaggen, in viele kleine Teile auf. Das wird den Transport deiner Waren beschleunigen."
 
 #: ../../txts\gametips:41
 msgid "Always build up some forester- or rangerhut, so you will not go out of trunks and wood."
-msgstr ""
+msgstr "Baue immer ein paar Försterhütten auf, damit du nie ohne Holz da stehst."
 
 #: ../../txts\gametips:45
 msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
-msgstr ""
+msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
 

@@ -36,6 +36,10 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 	: m_lastUpdated(0), m_updateAfter(0),
 	  m_progressWindow(progressWindow), m_registered(false),
 	  m_lastTip(0) {
+                   
+    // Loading texts-locals, for translating the tips
+    i18n::grab_textdomain("texts");
+    
 	// Skip, if no triggers saved
 	// Load the TrueType Font
 	std::string filename = "txts/gametips";
@@ -61,15 +65,11 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 		}
 
 		while(( s = prof.get_next_section(0)) ) {
-            // Loading texts-locals, for translating the tips
-            i18n::grab_textdomain("texts");
+
             
 			const char *text = s->get_string("text", NULL);
 			if (NULL == text)
 				continue;
-			
-            // And drop textdomain, to fall back to previous one.	
-            i18n::release_textdomain();
 
 			Tip tip;
 			tip.text = text;
@@ -88,6 +88,10 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 		m_registered = true;
 		m_lastTip = m_tips.size();
 	}
+
+    // Now drop textdomain, to fall back to previous one.	
+    i18n::release_textdomain();
+
 }
 
 GameTips::~GameTips() {
