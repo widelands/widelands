@@ -19,6 +19,7 @@
 
 #include "carrier.h"
 #include "game.h"
+#include "wexception.h"
 
 
 /**

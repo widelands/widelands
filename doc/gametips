@@ -11,10 +11,10 @@ text-color=21211b
 
 [Tip 1]
 text=_Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop.
-sec=5
+sec=7
 
 [Tip 2]
-text=_Watch the fishers hut - after fish resource is exhausted in working area, productin will stop.
+text=_Watch the fishers hut - after fish resource is exhausted in working area, production will stop.
 sec=4
 
 [Tip 3]
@@ -26,9 +26,21 @@ text=_Be sure to send out a geologist to explore site before building a well or 
 sec=4
 
 [Tip 5]
-text=_Your teritory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc.
+text=_Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc.
 sec=5
 
 [Tip 6]
 text=_Miners will work only if supplied with food.
 sec=3
+
+[Tip 7]
+text=_Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares.
+sec=6
+
+[Tip 8]
+text=_Always build up some forester- or rangerhut, so you will not go out of trunks and wood.
+sec=5
+
+[Tip 9]
+text=_Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums.
+sec=6

@@ -23,6 +23,7 @@
 #include "soldier.h"
 #include "tribe.h"
 #include "worker.h"
+#include "wexception.h"
 
 
 /**
