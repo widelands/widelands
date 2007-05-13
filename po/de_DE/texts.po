@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn2248\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2007-04-29 21:49+0000\n"
-"PO-Revision-Date: 2007-05-06 22:57+0100\n"
+"PO-Revision-Date: 2007-05-13 15:47+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -497,4 +497,40 @@ msgstr "SHIFT(gehalten)    Wählt das erste alternative Werkzeug aus"
 #: ../../txts\editor_readme:45
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT(gehalten)     Wählt das zweite alternative Werkzeug aus"
+
+#: ../../txts\gametips:13
+msgid "Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop."
+msgstr ""
+
+#: ../../txts\gametips:17
+msgid "Watch the fishers hut - after fish resource is exhausted in working area, production will stop."
+msgstr ""
+
+#: ../../txts\gametips:21
+msgid "Building process will start only after a road is built to the construction site."
+msgstr ""
+
+#: ../../txts\gametips:25
+msgid "Be sure to send out a geologist to explore site before building a well or mine."
+msgstr ""
+
+#: ../../txts\gametips:29
+msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc."
+msgstr "Dein Territorium kannst du durch das Errichten von Militärgebäuden (wie Baracken, Wachstuben und Festungen) erweitern."
+
+#: ../../txts\gametips:33
+msgid "Miners will work only if supplied with food."
+msgstr "Bergarbeiter arbeiten nur dann, wenn sie mit Nahrung versorgt werden."
+
+#: ../../txts\gametips:37
+msgid "Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares."
+msgstr ""
+
+#: ../../txts\gametips:41
+msgid "Always build up some forester- or rangerhut, so you will not go out of trunks and wood."
+msgstr ""
+
+#: ../../txts\gametips:45
+msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
+msgstr ""
 
