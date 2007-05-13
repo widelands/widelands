@@ -598,7 +598,9 @@ throw (_wexception)
 	Field & first_field = map[0]; //  FIXME make this const when FCoords has been templatized so it can have "const Field * field;"
 	const Player_Number nr_players = map.get_nrplayers();
 	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		const Player & player = egbase->player(plnum);
+		if (NULL == egbase->get_player(plnum)) // valid in editor
+			continue;
+		const Player & player = egbase->player(plnum);		
 		FileWrite                   unseen_times_file;
 		BitOutBuffer<2>     node_immovable_kinds_file;
 		FileWrite                node_immovables_file;
@@ -611,6 +613,8 @@ throw (_wexception)
 		BitOutBuffer<4>           survey_amounts_file;
 		FileWrite                   survey_times_file;
 		const Player::Field * const player_fields = player.m_fields;
+		if (NULL == player_fields) // no fields in editor
+			continue;
 		for
 			(FCoords first_in_row(Coords(0, 0), &first_field);
 			 first_in_row.y < mapheight;

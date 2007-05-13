@@ -116,10 +116,12 @@ throw (_wexception)
 	const Map & map = egbase->map();
 	const Player_Number nr_players = map.get_nrplayers();
 	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		Player & player = egbase->player(plnum);
+		Player * player = egbase->get_player(plnum);
+		if (NULL == player) // valid condition in editor
+			continue;
 		WidelandsFileWrite fw;
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
-		const Player::AreaWatchers & areawatchers = player.areawatchers();
+		const Player::AreaWatchers & areawatchers = player->areawatchers();
 		const Player::AreaWatchers::const_iterator areawatchers_end =
 			areawatchers.end();
 		for

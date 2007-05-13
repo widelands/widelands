@@ -260,7 +260,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	if (not parent.is_player_tribe_referenced(nr_players)) {
 		{
 			const Coords starting_pos = map.get_starting_pos(old_nr_players);
-			if (starting_pos.is_valid()) {
+			if (not starting_pos.isNull()) {
 				//  Remove starting position marker.
 				std::string picsname = "pics/editor_player_";
 				picsname += static_cast<char>(old_nr_players / 10 + 0x30);
@@ -343,7 +343,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
    // jump to the current field
 	Map & map =parent.egbase().map();
 	const Coords c = map.get_starting_pos(n);
-   if (c.is_valid()) parent.move_view_to(c);
+   if (not c.isNull()) parent.move_view_to(c);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
