@@ -156,7 +156,8 @@ def do_find_dirs(preffix, pattern):
 		p = re.compile(pattern)
 
 		for file in os.listdir(preffix):
-				if (os.path.isdir("%s/%s" % (preffix, file)) and
+				if (os.path.isdir(os.path.normpath("%s/%s" %
+						          (preffix, file))) and
 								p.match(file)):
 						res.append(file)
 
@@ -216,7 +217,7 @@ def do_update_potfiles():
 
 		# Generate .pot catalogs
 		for pot, srcfiles in potfiles:
-				path = "po/pot/" + os.path.dirname(pot)
+				path = os.path.normpath("po/pot/" + os.path.dirname(pot))
 				do_makedirs(path)
 				oldcwd = os.getcwd()
 				os.chdir(path)
@@ -401,8 +402,9 @@ def do_update_po(lang, files):
 
 		for f in files:
 				# File names to use
-				po = ("po/%s/%s" % (lang, f.rstrip("t").lstrip("/")))
-				pot = ("po/pot/%s" % f)
+				po = os.path.normpath(("po/%s/%s" % 
+						(lang, f.rstrip("t").lstrip("/"))))
+				pot = os.path.normpath(("po/pot/%s" % f))
 				tmp = "tmp.po"
 
 				if not (os.path.exists(po)):
@@ -460,5 +462,5 @@ if __name__ == "__main__":
 		srcfiles = do_find_files("po/pot", ".*\.pot$")
 
 		for l in lang:
-				do_update_po(l.lstrip("/"), srcfiles)
+				do_update_po(l, srcfiles)
 		print ""
