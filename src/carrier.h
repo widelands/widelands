@@ -41,15 +41,11 @@ class Carrier : public Worker
 						{Worker_Descr::parse(directory, prof, encdata);}
 		};
 
-		MO_DESCR(Descr);
 
 		Carrier(const Descr & descr): Worker(descr) {m_acked_ware = -1;}
 		virtual ~Carrier() {};
 
 		bool notify_ware(Game* g, int flag);
-
-		virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
-		{return descr().get_worker_type();}
 
 		void start_task_road();
 		void update_task_road(Game* g);
@@ -58,6 +54,8 @@ class Carrier : public Worker
 
 
 	private:
+		MO_DESCR(Descr);
+
 		void find_pending_item(Game* g);
 		int find_closest_flag(Game* g);
 

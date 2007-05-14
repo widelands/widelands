@@ -36,7 +36,7 @@ struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr(const Tribe_Descr &, const std::string & soldier_name);
 	virtual ~Soldier_Descr(void);
 
-   virtual Worker_Type get_worker_type(void) const { return Worker_Descr::SOLDIER; }
+   virtual Worker_Type get_worker_type(void) const {return SOLDIER;}
 
    virtual void load_graphics(void);
 
@@ -125,9 +125,6 @@ public:
 	uint get_attack_level () const {return m_attack_level;}
 	uint get_defense_level() const {return m_defense_level;}
 	uint get_evade_level  () const throw () {return m_evade_level;}
-
-	virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
-	{return descr().get_worker_type();}
 
    /// Draw this soldier
 	virtual void draw

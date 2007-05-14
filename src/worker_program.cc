@@ -67,7 +67,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 				continue;
 
 			// Find the appropriate parser
-			WorkerAction act;
+			Worker::Action act;
 			uint mapidx;
 
 			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
@@ -100,7 +100,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
  *
  * sparam1 = ware name
  */
-void WorkerProgram::parse_createitem(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_createitem(Worker_Descr *, Worker::Action * act,
                                      Parser *,
                                      const std::vector<std::string> & cmd)
 {
@@ -121,7 +121,7 @@ void WorkerProgram::parse_createitem(Worker_Descr *, WorkerAction * act,
  * iparam1 = area
  * sparam1 = resource
  */
-void WorkerProgram::parse_mine(Worker_Descr *, WorkerAction * act, Parser *,
+void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
                                const std::vector<std::string>& cmd)
 {
    if (cmd.size() != 3)
@@ -146,7 +146,7 @@ void WorkerProgram::parse_mine(Worker_Descr *, WorkerAction * act, Parser *,
  *
  * sparamv = possible bobs
  */
-void WorkerProgram::parse_setdescription(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_setdescription(Worker_Descr *, Worker::Action * act,
                                          Parser *,
                                          const std::vector<std::string> & cmd)
 {
@@ -168,7 +168,7 @@ void WorkerProgram::parse_setdescription(Worker_Descr *, WorkerAction * act,
  *
  * sparamv = possible bobs
  */
-void WorkerProgram::parse_setbobdescription(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act,
                                             Parser *,
                                             const std::vector<std::string>& cmd)
 {
@@ -202,7 +202,7 @@ void WorkerProgram::parse_setbobdescription(Worker_Descr *, WorkerAction * act,
  * iparam2 = attribute predicate (if >= 0)
  * sparam1 = type
  */
-void WorkerProgram::parse_findobject(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
                                      Parser *,
                                      const std::vector<std::string> & cmd)
 {
@@ -263,7 +263,7 @@ void WorkerProgram::parse_findobject(Worker_Descr *, WorkerAction * act,
  * iparam2 = FindNodeSize::sizeXXX
  * sparam1 = Resource
  */
-void WorkerProgram::parse_findspace(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
                                     Parser *,
                                     const std::vector<std::string>& cmd)
 {
@@ -334,7 +334,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, WorkerAction * act,
  *
  * iparam1 = walkXXX
  */
-void WorkerProgram::parse_walk(Worker_Descr *, WorkerAction * act, Parser *,
+void WorkerProgram::parse_walk(Worker_Descr *, Worker::Action * act, Parser *,
                                const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
@@ -343,9 +343,9 @@ void WorkerProgram::parse_walk(Worker_Descr *, WorkerAction * act, Parser *,
 	act->function = &Worker::run_walk;
 
 	if (cmd[1] == "object")
-		act->iparam1 = WorkerAction::walkObject;
+		act->iparam1 = Worker::Action::walkObject;
 	else if (cmd[1] == "coords")
-		act->iparam1 = WorkerAction::walkCoords;
+		act->iparam1 = Worker::Action::walkCoords;
 	else
 		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
 }
@@ -359,7 +359,7 @@ void WorkerProgram::parse_walk(Worker_Descr *, WorkerAction * act, Parser *,
  * iparam2 = duration
  *
  */
-void WorkerProgram::parse_animation(Worker_Descr* descr, WorkerAction* act,
+void WorkerProgram::parse_animation(Worker_Descr* descr, Worker::Action* act,
 									Parser* parser,
 									const std::vector<std::string>& cmd)
 {
@@ -393,7 +393,7 @@ void WorkerProgram::parse_animation(Worker_Descr* descr, WorkerAction* act,
  *
  * iparam1 = 0: don't drop item on flag, 1: do drop item on flag
  */
-void WorkerProgram::parse_return(Worker_Descr *, WorkerAction * act, Parser *,
+void WorkerProgram::parse_return(Worker_Descr *, Worker::Action * act, Parser *,
                                  const std::vector<std::string> &)
 {
 	act->function = &Worker::run_return;
@@ -408,7 +408,7 @@ void WorkerProgram::parse_return(Worker_Descr *, WorkerAction * act, Parser *,
  *
  * sparam1 = object command name
  */
-void WorkerProgram::parse_object(Worker_Descr *, WorkerAction * act, Parser *,
+void WorkerProgram::parse_object(Worker_Descr *, Worker::Action * act, Parser *,
                                  const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
@@ -423,7 +423,7 @@ void WorkerProgram::parse_object(Worker_Descr *, WorkerAction * act, Parser *,
  * Plant an immovable on the current position. The immovable type must have
  * been selected by a previous command (i.e. setdescription)
  */
-void WorkerProgram::parse_plant(Worker_Descr *, WorkerAction * act, Parser *,
+void WorkerProgram::parse_plant(Worker_Descr *, Worker::Action * act, Parser *,
                                 const std::vector<std::string> &)
 {
 	act->function = &Worker::run_plant;
@@ -434,7 +434,7 @@ void WorkerProgram::parse_plant(Worker_Descr *, WorkerAction * act, Parser *,
  * Plants a bob (critter usually, maybe also worker later on). The immovable
  * type must have been selected by a previous command (i.e. setbobdescription).
  */
-void WorkerProgram::parse_create_bob(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_create_bob(Worker_Descr *, Worker::Action * act,
                                      Parser *,
                                      const std::vector<std::string> &)
 {
@@ -445,7 +445,7 @@ void WorkerProgram::parse_create_bob(Worker_Descr *, WorkerAction * act,
 /**
  * Simply remove the currently selected object - make no fuss about it.
  */
-void WorkerProgram::parse_removeobject(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_removeobject(Worker_Descr *, Worker::Action * act,
                                        Parser *,
                                        const std::vector<std::string> &)
 {
@@ -463,7 +463,7 @@ void WorkerProgram::parse_removeobject(Worker_Descr *, WorkerAction * act,
  * iparam2 = radius
  * sparam1 = subcommand
  */
-void WorkerProgram::parse_geologist(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_geologist(Worker_Descr *, Worker::Action * act,
                                     Parser *,
                                     const std::vector<std::string> & cmd)
 {
@@ -490,7 +490,7 @@ void WorkerProgram::parse_geologist(Worker_Descr *, WorkerAction * act,
  * Check resources at the current position, and plant a marker object
  * when possible.
  */
-void WorkerProgram::parse_geologist_find(Worker_Descr *, WorkerAction * act,
+void WorkerProgram::parse_geologist_find(Worker_Descr *, Worker::Action * act,
                                          Parser *,
                                          const std::vector<std::string> & cmd)
 {
@@ -501,7 +501,7 @@ void WorkerProgram::parse_geologist_find(Worker_Descr *, WorkerAction * act,
 }
 
 
-void WorkerProgram::parse_playFX(Worker_Descr *, WorkerAction * act, Parser *,
+void WorkerProgram::parse_playFX(Worker_Descr *, Worker::Action * act, Parser *,
                                  const std::vector<std::string> & cmd)
 {
 	if (cmd.size()<2 || cmd.size()>3)

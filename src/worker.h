@@ -21,86 +21,7 @@
 #define __S__WORKER_H
 
 #include "idleworkersupply.h"
-
-
-/// \todo (Antonio Trueba#1#): Get rid of forward class declaration (Chicken-and-egg problem)
-class WorkerAction;
-class WorkerProgram;
-
-
-class Worker_Descr : public Bob_Descr {
-   friend class Tribe_Descr;
-   friend class Warehouse;
-   friend class WorkerProgram;
-
-   typedef std::map<std::string, WorkerProgram*> ProgramMap;
-
-   struct CostItem {
-      std::string name;   // name of ware
-      int         amount; // amount
-
-      inline CostItem(const char* iname, int iamount)
-         : name(iname), amount(iamount) {}
-   };
-   typedef std::vector<CostItem> BuildCost;
-
-   public:
-   enum Worker_Type {
-      NORMAL = 0,
-      CARRIER,
-      SOLDIER,
-   };
-
-   Worker_Descr(const Tribe_Descr &, const std::string & name);
-   virtual ~Worker_Descr(void);
-
-	virtual Bob * create_object() const;
-
-   virtual void load_graphics(void);
-
-   inline bool get_buildable() { return m_buildable; }
-   inline const BuildCost* get_buildcost() { return &m_buildcost; }
-
-	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
-	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
-	const std::string & descname() const throw () {return m_descname;}
-   inline std::string get_helptext() const { return m_helptext; }
-
-	uint get_menu_pic() const throw () {return m_menu_pic;}
-	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
-	const DirAnimations & get_right_walk_anims(const bool carries_ware) const
-		throw ()
-	{return carries_ware ? m_walkload_anims : m_walk_anims;}
-   const WorkerProgram* get_program(std::string programname) const;
-
-   virtual Worker_Type get_worker_type(void) const { return NORMAL; }
-
-   // For leveling
-	int get_max_exp() const throw () {return m_max_experience;}
-	int get_min_exp() const throw () {return m_min_experience;}
-	const char * get_becomes() const throw () {return m_becomes.size() ? m_becomes.c_str() : 0;}
-
-   Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
-
-   protected:
-   virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	static Worker_Descr * create_from_dir
-		(const Tribe_Descr &,
-		 const char * const directory,
-		 const EncodeData * const);
-
-	std::string   m_descname; //  descriptive name
-	std::string   m_helptext; //  short (tooltip-like) help text
-	char        * m_menu_pic_fname;
-	uint          m_menu_pic;
-	DirAnimations m_walk_anims;
-	DirAnimations m_walkload_anims;
-   bool        m_buildable;
-   BuildCost      m_buildcost;
-   int            m_max_experience, m_min_experience;
-   std::string    m_becomes;
-	ProgramMap    m_programs;
-};
+#include "worker_descr.h"
 
 
 /**
@@ -114,12 +35,31 @@ class Worker_Descr : public Bob_Descr {
  *  - Idle: the worker is at his job but idling
  *  - Work: the worker is running his working schedule
  */
-class Worker : public Bob {
+class Worker : public Bob
+{
 	friend class Soldier; //  allow access to m_supply
-   friend class WorkerProgram;
-   friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
+	friend class WorkerProgram;
+	friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 
-   MO_DESCR(Worker_Descr);
+	MO_DESCR(Worker_Descr);
+
+	struct Action {
+		typedef bool (Worker::*execute_t)(Game* g, Bob::State* state,
+		                                  const Action* act);
+
+		enum {
+			walkObject, //  walk to objvar1
+			walkCoords, //  walk to coords
+		};
+
+		execute_t                function;
+		int                      iparam1;
+		int                      iparam2;
+		std::string              sparam1;
+
+		std::vector<std::string> sparamv;
+	};
+
 
    public:
 
@@ -250,23 +190,23 @@ class Worker : public Bob {
    static Task taskGeologist;
 
    private: // Program commands
-   bool run_mine(Game* g, State* state, const WorkerAction* act);
-   bool run_createitem(Game* g, State* state, const WorkerAction* act);
-   bool run_setdescription(Game* g, State* state, const WorkerAction* act);
-   bool run_setbobdescription(Game* g, State* state, const WorkerAction* act);
-   bool run_findobject(Game* g, State* state, const WorkerAction* act);
-   bool run_findspace(Game* g, State* state, const WorkerAction* act);
-   bool run_findresource(Game* g, State* state, const WorkerAction* act);
-   bool run_walk(Game* g, State* state, const WorkerAction* act);
-   bool run_animation(Game* g, State* state, const WorkerAction* act);
-   bool run_return(Game* g, State* state, const WorkerAction* act);
-   bool run_object(Game* g, State* state, const WorkerAction* act);
-   bool run_plant(Game* g, State* state, const WorkerAction* act);
-   bool run_create_bob(Game* g, State* state, const WorkerAction* act);
-   bool run_removeobject(Game* g, State* state, const WorkerAction* act);
-   bool run_geologist(Game* g, State* state, const WorkerAction* act);
-   bool run_geologist_find(Game* g, State* state, const WorkerAction* act);
-   bool run_playFX(Game* g, State* state, const WorkerAction* act);
+   bool run_mine(Game* g, State* state, const Action* act);
+   bool run_createitem(Game* g, State* state, const Action* act);
+   bool run_setdescription(Game* g, State* state, const Action* act);
+   bool run_setbobdescription(Game* g, State* state, const Action* act);
+   bool run_findobject(Game* g, State* state, const Action* act);
+   bool run_findspace(Game* g, State* state, const Action* act);
+   bool run_findresource(Game* g, State* state, const Action* act);
+   bool run_walk(Game* g, State* state, const Action* act);
+   bool run_animation(Game* g, State* state, const Action* act);
+   bool run_return(Game* g, State* state, const Action* act);
+   bool run_object(Game* g, State* state, const Action* act);
+   bool run_plant(Game* g, State* state, const Action* act);
+   bool run_create_bob(Game* g, State* state, const Action* act);
+   bool run_removeobject(Game* g, State* state, const Action* act);
+   bool run_geologist(Game* g, State* state, const Action* act);
+   bool run_geologist_find(Game* g, State* state, const Action* act);
+   bool run_playFX(Game* g, State* state, const Action* act);
 
    private:
 	Object_Ptr m_location; //  meta location of the worker, a PlayerImmovable
