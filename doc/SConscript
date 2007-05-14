@@ -1,6 +1,6 @@
-Import('*')
-from Distribute import distadd, instadd
+Import('env')
+from Distribute import distadd
 
-instadd(env, 'doc/*', 'doc')
+#instadd(env, 'doc/filename', 'doc')
 
-distadd(env, 'doc/*')
+distadd(env, 'doc/SConscript')
