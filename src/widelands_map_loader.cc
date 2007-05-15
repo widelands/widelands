@@ -111,6 +111,13 @@ void Widelands_Map_Loader::load_world() {
  * Load the complete map and make sure that it runs without problems
  */
 int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
+   //This is needed to ensure that world is loaded for multiplayer clients,
+   //hosts do world loading while creating the game and the states 
+   //are not available outside this class to make a conditional load.
+   //if You know a better way to fix this, DO IT! -- Alexia Death
+   if(get_state() == STATE_PRELOADED){
+      this->load_world();
+   }
 	assert(get_state() == STATE_WORLD_LOADED);
 
    // Postload the world which provides all the immovables found on a map
