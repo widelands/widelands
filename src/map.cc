@@ -422,7 +422,9 @@ void Map::create_empty_map
    set_author(_("Unknown").c_str());
    set_description(_("no description defined").c_str());
    set_nrplayers(1);
-   set_scenario_player_tribe(1, _("<undefined>"));
+    // Set Barbarians as the "basic" tribe
+    // <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"
+   set_scenario_player_tribe(1,"barbarians"); 
    set_scenario_player_name(1, _("Player 1"));
 
 	{
