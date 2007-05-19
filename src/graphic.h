@@ -71,7 +71,7 @@ public:
 	void update_rectangle(const Rect & rect)
 	{update_rectangle (rect.x, rect.y, rect.w, rect.h);}
 	bool need_update();
-	void refresh();
+	void refresh(bool force = true);
 
 	void flush(int mod);
 	uint get_picture(int mod, const char* fname);
@@ -82,6 +82,20 @@ public:
 	uint create_surface(int w, int h);
 	void free_surface(uint pic);
 	RenderTarget* get_surface_renderer(uint pic);
+
+	enum  ResizeMode {
+		// do not worry about proportions, just sketch to requested size
+		ResizeMode_Loose,
+		// keep proportions, clip wider edge
+		ResizeMode_Clip,
+		// keep proportions, leave empty border if needed
+		ResizeMode_LeaveBorder,
+		// keep proportions, balance clipping and borders
+		ResizeMode_Average,
+	};
+
+	uint get_resized_picture(const uint, const uint w, const uint h, ResizeMode);
+	SDL_Surface* resize(const uint index, const uint w, const uint h);
 
 	uint get_maptexture(const char & fnametempl, const uint frametime);
 	void animate_maptextures(uint time);
@@ -126,3 +140,4 @@ protected:
 extern Graphic* g_gr;
 
 #endif
+

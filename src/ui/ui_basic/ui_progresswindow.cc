@@ -56,10 +56,14 @@ void ProgressWindow::draw_background(
 		g_gr->get_picture(PicMod_Menu, "pics/progress_bg.png");
 	if (pic_tile > 0) {
 		rt.tile(wnd_rect, pic_tile, Point(0, 0));
+		g_gr->update_fullscreen();
 	}
 	
 	const uint pic_background =
-		g_gr->get_picture(PicMod_Menu, "pics/progress.png");
+		g_gr->get_resized_picture(
+			g_gr->get_picture(PicMod_Menu, "pics/progress.png"),
+								  xres, yres, Graphic::ResizeMode_Loose);
+
 	if (pic_background > 0) {
 		uint w = 0;
 		uint h = 0;
@@ -67,6 +71,7 @@ void ProgressWindow::draw_background(
 		// center picture horizontally
 		Point pt((xres - w) / 2, 0);
 		rt.blitrect(pt, pic_background, wnd_rect);
+		g_gr->update_fullscreen();
 	}
 	
 	const uint h = g_fh->get_fontheight (UI_FONT_SMALL);
@@ -113,7 +118,7 @@ void ProgressWindow::step(const std::string & description) {
 		}
 	}
 
-	g_gr->refresh();
+	g_gr->refresh(false);
 }
 
 /**

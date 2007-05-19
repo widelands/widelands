@@ -31,6 +31,7 @@
 #include "ui_progresswindow.h"
 
 #include <SDL_image.h>
+#include <SDL_rotozoom.h>
 
 Graphic *g_gr;
 
@@ -168,13 +169,16 @@ bool Graphic::need_update()
 
 /**
  * Bring the screen uptodate.
+ *
+ * \param force update whole screen
 */
-void Graphic::refresh()
+void Graphic::refresh(bool force)
 {
-	//if (m_update_fullscreen)
-	m_screen.update();
-
-	//else SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);
+	if (force or m_update_fullscreen)
+		m_screen.update();
+	else
+		SDL_UpdateRects(m_screen.get_sdl_surface(),
+						m_nr_update_rects, m_update_rects);
 
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;
@@ -312,6 +316,92 @@ uint Graphic::get_picture
 	} else pic.u.fname =  0;
 
 	return id;
+}
+
+/**
+ * Produces a resized version of the specified picture
+ *
+ * Might return same id if dimensions are the same
+ */
+uint Graphic::get_resized_picture
+(const uint index, const uint w, const uint h, ResizeMode mode)
+{
+	if (index >= m_pictures.size() or !m_pictures[index].mod)
+		throw wexception("get_resized_picture(%i): picture doesn't exist", index);
+
+	Surface* orig = m_pictures[index].surface;
+	if (orig->get_w() == w and orig->get_h() == h)
+		return index;
+
+	uint width = w;
+	uint height = h;
+
+	if (mode != ResizeMode_Loose) {
+		const double ratio_x = double(w) / orig->get_w();
+		const double ratio_y = double(h) / orig->get_h();
+
+		// if proportions are to be kept, recalculate width and height		
+		if (ratio_x != ratio_y) {
+			double ratio = 0;
+
+			if (ResizeMode_Clip == mode)
+				ratio = std::max (ratio_x, ratio_y);
+			else if (ResizeMode_LeaveBorder == mode)
+				ratio = std::max (ratio_x, ratio_y);
+			else // average
+				ratio = (ratio_x + ratio_y) / 2;
+			
+			width = uint(orig->get_w() * ratio);
+			height = uint(orig->get_h() * ratio);
+		}
+	}
+
+	const uint pic = g_gr->create_surface(w, h);
+	
+	if (mode == ResizeMode_Loose || (width == w && height == h)) {
+		SDL_Surface * const resized = resize(index, w, h);
+		Surface* s = m_pictures[pic].surface;
+		s->set_sdl_surface(*resized);
+	} else {
+		
+		SDL_Surface * const resized = resize(index, width, height);
+		Surface src;
+		src.set_sdl_surface(*resized);
+
+		// Get the rendertarget for this
+		RenderTarget* target = g_gr->get_surface_renderer(pic);
+		
+		// apply rectangle by adjusted size
+		Rect srcrc;
+		srcrc.w = std::min(w, width);
+		srcrc.h = std::min(h, height);
+		srcrc.x = (width - srcrc.w) / 2;
+		srcrc.y = (height - srcrc.h) / 2;
+
+		target->blitrect
+			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
+			 get_picture(m_pictures[index].mod, src), srcrc);
+	}
+
+	m_pictures[pic].mod = m_pictures[index].mod;
+	return pic;
+}
+
+/**
+ * Produces a resized version of the specified picture
+ *
+ * \param index position of the source picture in the stack
+ * \param w target width
+ * \param h target height
+ * \return resized version of picture
+ */
+SDL_Surface* Graphic::resize(const uint index, const uint w, const uint h)
+{
+	Surface *orig = g_gr->get_picture_surface(index);
+	double zoomx = double(w) / orig->get_w();
+	double zoomy = double(h) / orig->get_h();
+
+	return zoomSurface(orig->get_sdl_surface(), zoomx, zoomy, 1);
 }
 
 
@@ -658,3 +748,4 @@ Surface* Graphic::get_road_texture( int roadtex)
 	       (roadtex == Road_Normal ?
 		m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
 }
+

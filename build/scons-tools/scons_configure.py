@@ -291,6 +291,10 @@ def do_configure(config_h_file, conf, env):
 		print 'Could not find the SDL_net library! Is it installed?'
 		env.Exit(1)
 
+	if not conf.CheckLib(library='SDL_gfx', symbol='zoomSurface', autoadd=1):
+		print 'Could not find the SDL_gfx library! Is it installed?'
+		env.Exit(1)
+
 	if not conf.CheckLib(library='SDL_mixer', symbol='Mix_OpenAudio', autoadd=1):
 		print 'Could not find the SDL_mixer library! Is it installed?'
 		env.Exit(1)

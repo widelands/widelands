@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		002F3A2E09D0888800EBEB88 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F3A2C09D0888800EBEB88 /* SDLMain.m */; };
+		38717C3D0BFEEA1500C1A4EE /* worker_descr.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38717C3B0BFEEA1500C1A4EE /* worker_descr.cc */; };
+		38717C3E0BFEEA1500C1A4EE /* worker_descr.h in Headers */ = {isa = PBXBuildFile; fileRef = 38717C3C0BFEEA1500C1A4EE /* worker_descr.h */; };
 		38EAFD810BEF4EA100578DA1 /* areawatcher.cc in Sources */ = {isa = PBXBuildFile; fileRef = 38EAFD630BEF4EA000578DA1 /* areawatcher.cc */; };
 		38EAFD820BEF4EA100578DA1 /* areawatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFD640BEF4EA000578DA1 /* areawatcher.h */; };
 		38EAFD830BEF4EA100578DA1 /* bitinbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EAFD650BEF4EA000578DA1 /* bitinbuffer.h */; };
@@ -388,6 +390,8 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		38717C3B0BFEEA1500C1A4EE /* worker_descr.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = worker_descr.cc; sourceTree = "<group>"; };
+		38717C3C0BFEEA1500C1A4EE /* worker_descr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = worker_descr.h; sourceTree = "<group>"; };
 		38EAFD630BEF4EA000578DA1 /* areawatcher.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = areawatcher.cc; sourceTree = "<group>"; };
 		38EAFD640BEF4EA000578DA1 /* areawatcher.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = areawatcher.h; sourceTree = "<group>"; };
 		38EAFD650BEF4EA000578DA1 /* bitinbuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = bitinbuffer.h; sourceTree = "<group>"; };
@@ -1305,6 +1309,7 @@
 				BF22DD5F0A5FB72B00D0292B /* widelands_map_waredata_data_packet.cc */,
 				BF22DD610A5FB72B00D0292B /* wlapplication.cc */,
 				BF22DD640A5FB72B00D0292B /* worker.cc */,
+				38717C3B0BFEEA1500C1A4EE /* worker_descr.cc */,
 				38EAFF5A0BF6E31400578DA1 /* worker_program.cc */,
 				BF22DD670A5FB72B00D0292B /* world.cc */,
 				BF22DD6A0A5FB72B00D0292B /* wui_plot_area.cc */,
@@ -1514,6 +1519,7 @@
 				BF22DD620A5FB72B00D0292B /* wlapplication.h */,
 				BF22DD630A5FB72B00D0292B /* workarea_info.h */,
 				BF22DD650A5FB72B00D0292B /* worker.h */,
+				38717C3C0BFEEA1500C1A4EE /* worker_descr.h */,
 				BF22DD660A5FB72B00D0292B /* worker_program.h */,
 				BF22DD680A5FB72B00D0292B /* world.h */,
 				BF22DD690A5FB72B00D0292B /* worlddata.h */,
@@ -1818,6 +1824,7 @@
 				38EAFF590BF6E2F700578DA1 /* cmd_incorporate.h in Headers */,
 				38EAFF5F0BF6E32D00578DA1 /* game_tips.h in Headers */,
 				38EAFF630BF6E34500578DA1 /* idleworkersupply.h in Headers */,
+				38717C3E0BFEEA1500C1A4EE /* worker_descr.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2222,6 +2229,7 @@
 				38EAFF5B0BF6E31400578DA1 /* worker_program.cc in Sources */,
 				38EAFF5E0BF6E32D00578DA1 /* game_tips.cc in Sources */,
 				38EAFF620BF6E34500578DA1 /* idleworkersupply.cc in Sources */,
+				38717C3D0BFEEA1500C1A4EE /* worker_descr.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2270,6 +2278,7 @@
 					/Library/Frameworks/ManuallyInstalled/SDL_mixer.framework/Headers,
 					/opt/local/include/,
 					"$(HEADER_SEARCH_PATHS)",
+					/Library/Frameworks/ManuallyInstalled/SDL_gfx.framework/Headers,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -2319,6 +2328,7 @@
 					/Library/Frameworks/ManuallyInstalled/SDL_mixer.framework/Headers,
 					/opt/local/include/,
 					"$(HEADER_SEARCH_PATHS)",
+					/Library/Frameworks/ManuallyInstalled/SDL_gfx.framework/Headers,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
