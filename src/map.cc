@@ -29,6 +29,7 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "s2map.h"
+#include "tribe.h"
 #include "widelands_map_loader.h"
 #include "worlddata.h"
 #include "wexception.h"
@@ -415,17 +416,19 @@ the given data
 void Map::create_empty_map
 (const uint w, const uint h, const std::string worldname)
 {
-   set_world_name(worldname.c_str());
-   load_world();
-   set_size(w,h);
-   set_name(_("No Name").c_str());
-   set_author(_("Unknown").c_str());
-   set_description(_("no description defined").c_str());
-   set_nrplayers(1);
-    // Set Barbarians as the "basic" tribe
-    // <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"
-   set_scenario_player_tribe(1,"barbarians"); 
-   set_scenario_player_name(1, _("Player 1"));
+	set_world_name(worldname.c_str());
+	load_world();
+	set_size(w,h);
+	set_name(_("No Name").c_str());
+	set_author(_("Unknown").c_str());
+	set_description(_("no description defined").c_str());
+	set_nrplayers(1);
+	// Set first tribe found as the "basic" tribe
+	// <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"
+	std::vector<std::string> tribes;
+	Tribe_Descr::get_all_tribenames(tribes);
+	set_scenario_player_tribe(1, tribes[0]); 
+	set_scenario_player_name(1, _("Player 1"));
 
 	{
 		Field::Terrains default_terrains;
