@@ -568,6 +568,14 @@ void Map::set_world_name(const char *string)
 	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
 }
 
+void Map::set_background(const char * string)
+{
+	if (NULL == string)
+		m_background.clear();
+	else
+		m_background = string;
+}
+
 /*
 ===============
 Map::load_world

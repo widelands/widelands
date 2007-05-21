@@ -195,6 +195,7 @@ struct Map {
 	void set_world_name(const char *string);
 	void set_name(const char *string);
 	void set_description(const char *string);
+	void set_background(const char *string);
 
 	// informational functions
 	const char * get_filename() const {return m_filename;}
@@ -202,6 +203,7 @@ struct Map {
 	const char * get_name() const {return m_name;}
 	const char * get_description() const {return m_description;}
 	const char * get_world_name() const {return m_worldname;}
+	const std::string & get_background() const {return m_background;}
 	Uint8 get_nrplayers() const throw () {return m_nrplayers;}
 	Extent extent() const throw () {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const throw () {return m_width;}
@@ -378,6 +380,7 @@ private:
 	char        m_name         [61];
 	char        m_description[1024];
 	char        m_worldname  [1024];
+	std::string m_background;
 	World     * m_world;           //  world type
 	Coords    * m_starting_pos;    //  players' starting positions
 

@@ -40,12 +40,15 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow {
-	ProgressWindow();
+	ProgressWindow(const std::string & background = std::string());
 	~ProgressWindow();
 
 	/// Register additional visualization (tips/hints, animation, etc)
 	void add_visualization(IProgressVisualization * instance);
 	void remove_visualization(IProgressVisualization * instance);
+
+	/// Set a picture to render in the background
+	void set_background(const std::string & file_name);
 
 	/// Display a progress step description.
 	void step(const std::string & description);
@@ -58,10 +61,12 @@ private:
 	Point m_label_center;
 	Rect  m_label_rectangle;
 	VisualizationArray m_visualizations;
+	std::string m_background;
 	
 	void draw_background(RenderTarget & rt,
 						 const uint xres,
 						 const uint yres);
+	void update(bool repaint);
 };
 };
 

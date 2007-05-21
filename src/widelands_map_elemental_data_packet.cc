@@ -67,6 +67,9 @@ throw(_wexception)
       // Descr
       map->set_description( s->get_string( "descr" ));
 
+	  // Loader background
+      map->set_background(s->get_string("background"));
+
     // Release maps textdomain
     i18n::release_textdomain( );
 

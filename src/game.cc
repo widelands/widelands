@@ -127,6 +127,9 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
         m_state = gs_running;
 
+	const std::string background = m->get_background();
+	if (background.size() > 0)
+		loaderUI.set_background(background);
 	loaderUI.step (_("Loading a world"));
 	m_maploader->load_world();
 
@@ -176,7 +179,7 @@ bool Game::run_single_player ()
 	g_gr->flush(PicMod_Menu);
 
 	m_state = gs_running;
-	UI::ProgressWindow loaderUI;
+	UI::ProgressWindow loaderUI(map().get_background());
 	GameTips tips (loaderUI);
 
 	loaderUI.step(_("Preparing computer players"));

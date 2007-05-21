@@ -32,7 +32,13 @@
 
 namespace UI {
 
-ProgressWindow::ProgressWindow() : m_xres(0), m_yres(0) {
+ProgressWindow::ProgressWindow(const std::string & background)
+	: m_xres(0), m_yres(0)
+{
+	if (background.size() > 0)
+		m_background = background;
+	else
+		m_background = "pics/progress.png";
 	step(_("Preparing..."));
 }
 
@@ -61,7 +67,7 @@ void ProgressWindow::draw_background(
 	
 	const uint pic_background =
 		g_gr->get_resized_picture(
-			g_gr->get_picture(PicMod_Menu, "pics/progress.png"),
+			g_gr->get_picture(PicMod_Menu, m_background.c_str()),
 								  xres, yres, Graphic::ResizeMode_Loose);
 
 	if (pic_background > 0) {
@@ -94,6 +100,14 @@ void ProgressWindow::draw_background(
 	m_yres = yres;
 }
 
+/// Set a picture to render in the background
+void ProgressWindow::set_background(const std::string & file_name) {
+	RenderTarget & rt = *g_gr->get_render_target();
+	m_background = file_name;
+	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
+	update(true);
+}
+
 void ProgressWindow::step(const std::string & description) {
 	RenderTarget & rt = *g_gr->get_render_target();
 
@@ -109,7 +123,11 @@ void ProgressWindow::step(const std::string & description) {
 	g_fh->draw_string
 		(rt, UI_FONT_SMALL, PROGRESS_FONT_COLOR, m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
-	
+
+	update(repaint);
+}
+
+void ProgressWindow::update(bool repaint) {
 	if (m_visualizations.size() > 0) {
 		for (VisualizationArray::iterator it = m_visualizations.begin();
 			 it != m_visualizations.end(); ++it) {
