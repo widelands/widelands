@@ -2,8 +2,6 @@
 descname=_Hammer
 help=_The hammer is an essential tool. It is needed by the geologist, the worker, the carpenter and both blacksmiths. Make sure you always got some in reserve! It is produced by the carpenter.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

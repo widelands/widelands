@@ -2,8 +2,6 @@
 descname=_War Helmet
 help=_An enhanced mask, for barbarian warriors.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

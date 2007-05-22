@@ -2,8 +2,6 @@
 descname=_Wood Lance
 help=_This is a wooden lance, which is the basic of the romans military system.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

@@ -2,8 +2,6 @@
 descname=_Scythe
 help=_The Scythe is the tool of the farmers. It is produced by the carpenter.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

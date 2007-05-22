@@ -2,8 +2,6 @@
 descname=_Marblecolumn
 help=_Marblecolumns present the high culture of the Empire, so they are needed for nearly every bigger building.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

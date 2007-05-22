@@ -2,8 +2,6 @@
 descname=_Cloth
 help=_Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

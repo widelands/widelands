@@ -2,8 +2,6 @@
 descname=_Advanced Lance
 help=_This is an advanced lance, with steel top.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

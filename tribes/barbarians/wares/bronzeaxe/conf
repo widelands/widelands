@@ -2,8 +2,6 @@
 descname=_Bronze Axe
 help=_"The bronzeaxe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axefactory."
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

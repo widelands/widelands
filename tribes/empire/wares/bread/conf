@@ -2,8 +2,6 @@
 descname=_Bread
 help=_The backers of the Empire make really tasty bread.
 menu_pic=bread_menu.png
-queue_full_pic=bread_queue_full.png
-queue_empty_pic=bread_queue_empty.png
 
 [idle]
 pics=bread_idle.png

@@ -2,8 +2,6 @@
 descname=_Coal
 help=_The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

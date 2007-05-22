@@ -2,8 +2,6 @@
 descname=_Axe
 help=_The Axe is the tool for the lumberjack. It is produced by the carpenter.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

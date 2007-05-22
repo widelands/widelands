@@ -2,8 +2,6 @@
 descname=_Water
 help=_Water is the most essential essence for life! This water is used in many places, be it to make bread or beer.
 menu_pic=water_menu.png
-queue_full_pic=water_queue_full.png
-queue_empty_pic=water_queue_empty.png
 
 [idle]
 pics=water_idle.png

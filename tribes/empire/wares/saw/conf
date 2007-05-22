@@ -2,8 +2,6 @@
 descname=_Saw
 help=_This saw is needed by the carpenter, to create all the usefull tools. It is produced by the carpenter.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

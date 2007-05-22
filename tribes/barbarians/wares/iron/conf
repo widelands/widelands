@@ -2,8 +2,6 @@
 descname=_Iron
 help=_Weapons and Tools are made of iron.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

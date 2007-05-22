@@ -2,8 +2,6 @@
 descname=_Blackwood
 help=_Fire-hardened wood, hard as iron and can not burn, used for military buildings.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 # This wood is black and shiny, like vulcanic glass. These are planks,
 # not trunks any longer

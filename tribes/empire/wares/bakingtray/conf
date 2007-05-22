@@ -2,8 +2,6 @@
 descname=_Bakingtray
 help=_The bakingtray is the tool of the baker, each baker needs its own. It is produced by the carpenter.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png

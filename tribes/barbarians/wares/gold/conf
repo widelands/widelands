@@ -2,8 +2,6 @@
 descname=_Gold
 help=_Gold is the most valuable of all metals; only very important things are garnished with it.
 menu_pic=menu.png
-queue_full_pic=queue_full.png
-queue_empty_pic=queue_empty.png
 
 [idle]
 pics=idle.png
