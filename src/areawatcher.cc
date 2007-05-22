@@ -27,10 +27,7 @@ void AreaWatcher::act(Game * game, uint)
 {game->player(player_number).remove_areawatcher(*this); remove(game);}
 
 
-struct AreaWatcher_Descr : public Map_Object_Descr {};
-
-
-AreaWatcher_Descr g_areawatcher_descr;
+Map_Object_Descr g_areawatcher_descr;
 
 
 inline AreaWatcher::AreaWatcher(const Player_Area<> player_area) :

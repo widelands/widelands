@@ -142,171 +142,220 @@ void Carrier::start_task_transport(int fromflag)
 
 void Carrier::transport_update(Game* g, State* state)
 {
-	WareInstance* item;
 	Road* road = (Road*)get_location(g);
-
 	assert(road); // expect 'location' signal
 
-	//molog("[transport]\n");
+	if (state->ivar1 == -1)
+		// If we're "in" the target building, special code applies
+		deliver_to_building(g);
 
-	// If we're "in" the target building, special code applies
-	if (state->ivar1 == -1) {
-		BaseImmovable* pos = g->get_map()->get_immovable(get_position());
+	else if (!does_carry_ware())
+		// If we don't carry something, walk to the flag
+		pickup_from_flag(g, state);
 
-		// tough luck, the building has disappeared
-		if (!pos || (pos->get_type() != BUILDING && pos->get_type() != FLAG)) {
-			molog("[transport]: Building disappeared while in building.\n");
+	else {
+		// If the item should go to the building attached to our flag, walk
+		// directly into said building
+		Flag* flag = road->get_flag((Road::FlagId)(state->ivar1 ^ 1));
 
-			set_location(0);
-			return;
+		WareInstance* item = get_carried_item(g);
+		assert(item->get_location(g) == this);
+
+		// A sanity check is necessary, in case the building has been destroyed
+		PlayerImmovable* next = item->get_next_move_step(g);
+
+		if (next && next != flag && next->get_base_flag() == flag)
+			enter_building(g, state);
+
+		else if (!flag->has_capacity())
+			// If the flag is overloaded we are allowed to drop items as
+			// long as we can pick another up. Otherwise we have to wait.
+			swap_or_wait(g, state);
+
+		else if (!start_task_walktoflag(g, state->ivar1 ^ 1))
+			// Drop the item, possible exchanging it with another one
+			drop_item(g, state);
+	}
+
+	return;
+}
+
+
+/**
+ * Deliver all wares addressed to the building the carrier is already into
+ *
+ * \param g Game the carrier lives on
+ */
+/// \todo Upgrade this function to really support many-wares-at-a-time
+void Carrier::deliver_to_building(Game* g)
+{
+	BaseImmovable* pos = g->get_map()->get_immovable(get_position());
+
+	// tough luck, the building has disappeared
+	if (!pos || (pos->get_type() != BUILDING && pos->get_type() != FLAG)) {
+		molog("[Carrier]: Building disappeared while in building.\n");
+		set_location(0);
+
+	} else 	if (pos->get_type() == Map_Object::BUILDING) {
+		molog("[Carrier]: Arrived at building.\n");
+
+		// Drop all items addresed to this building
+		while (WareInstance* item = fetch_carried_item(g)) {
+			item->set_location(g, (Building*)pos);
+			item->update(g);
+
+			molog("[Carrier]: Delivered item inside building.\n");
+
 		}
-
-		// Drop the item, indicating success
-		if (pos->get_type() == Map_Object::BUILDING) {
-			item = fetch_carried_item(g);
-
-			if (item) {
-				molog("[transport]: Arrived in building.\n");
-				item->set_location(g, (Building*)pos);
-				item->update(g);
-
-				set_animation(g, descr().get_animation("idle"));
-				schedule_act(g, 20);
-				return;
-			}
-
-			// Now walk back onto the flag
-			molog("[transport]: Move out of building.\n");
-			start_task_forcemove
-				(WALK_SE, descr().get_right_walk_anims(does_carry_ware()));
-			return;
-		}
-
+		// No more deliverable items. Walk out to the flag.
+		molog("[Carrier]: Move out of building.\n");
+		start_task_forcemove(WALK_SE,
+				descr().get_right_walk_anims(does_carry_ware()));
+	} else {
 		// We're done
 		pop_task();
-		return;
 	}
 
-	// If we don't carry something, walk to the flag
-	if (!get_carried_item(g)) {
-		Flag* flag;
-		Flag* otherflag;
+	return;
+}
 
-		if (start_task_walktoflag(g, state->ivar1))
-			return;
+
+/**
+ * Walks to the queued flag and picks up one acked ware
+ *
+ * \param g Game the carrier lives on
+ * \param s Flags sent to the task
+ */
+
+/// \todo Upgrade this function to support many-wares-at-a-time (TM)
+void Carrier::pickup_from_flag(Game* g, State* s)
+{
+	if (!start_task_walktoflag(g, s->ivar1)) {
 
 		m_acked_ware = -1;
 
-		flag = road->get_flag((Road::FlagId)state->ivar1);
-		otherflag = road->get_flag((Road::FlagId)(state->ivar1 ^ 1));
-		item = flag->fetch_pending_item(g, otherflag);
+		Road* road = (Road*)get_location(g);
+		Flag* flag = road->get_flag((Road::FlagId)s->ivar1);
+		Flag* otherflag = road->get_flag((Road::FlagId)(s->ivar1 ^ 1));
 
+		// Are there items to move between our flags?
+		WareInstance* item = flag->fetch_pending_item(g, otherflag);
 		if (!item) {
-			molog("[transport]: Nothing on flag.\n");
+			molog("[Carrier]: Nothing suitable on flag.\n");
 			pop_task();
-			return;
-		}
+		} else {
+			set_carried_item(g, item);
 
-		set_carried_item(g, item);
-
-		set_animation(g, descr().get_animation("idle"));
-		schedule_act(g, 20);
-		return;
-	}
-
-	// If the item should go to the building attached to our flag, walk directly
-	// into said building
-	Flag* flag;
-
-	item = get_carried_item(g);
-	flag = road->get_flag((Road::FlagId)(state->ivar1 ^ 1));
-
-	assert(item->get_location(g) == this);
-
-	// A sanity check is necessary, in case the building has been destroyed
-	PlayerImmovable* next = item->get_next_move_step(g);
-
-	if (next && next != flag && next->get_base_flag() == flag) {
-		if (start_task_walktoflag(g, state->ivar1 ^ 1))
-			return;
-
-		molog("[transport]: Move into building.\n");
-		start_task_forcemove
-			(WALK_NW, descr().get_right_walk_anims(does_carry_ware()));
-		state->ivar1 = -1;
-		return;
-	}
-
-	// Move into waiting position if the flag is overloaded
-	if (!flag->has_capacity())
-	{
-		Flag *otherflag = road->get_flag((Road::FlagId)state->ivar1);
-
-		if (m_acked_ware == (state->ivar1 ^ 1))
-		{
-			// All is well, we already acked an item that we can pick up
-			// from this flag
-		}
-		else if (flag->has_pending_item(g, otherflag))
-		{
-			if (!flag->ack_pending_item(g, otherflag))
-				throw wexception("MO(%u): transport: overload exchange: flag %u is fucked up",
-							get_serial(), flag->get_serial());
-
-			m_acked_ware = state->ivar1 ^ 1;
-		}
-		else
-		{
-			if (start_task_walktoflag(g, state->ivar1 ^ 1, true))
-				return;
-
-			// Wait one field away
-			start_task_waitforcapacity(g, flag);
-			return;
-		}
-	}
-
-	// If there is capacity, walk to the flag
-	if (start_task_walktoflag(g, state->ivar1 ^ 1))
-		return;
-
-	// Drop the item, possible exchanging it with another one
-	WareInstance* otheritem = 0;
-
-	if (m_acked_ware == (state->ivar1 ^ 1)) {
-		otheritem = flag->fetch_pending_item(g, road->get_flag((Road::FlagId)state->ivar1));
-
-		if (!otheritem && !flag->has_capacity()) {
-			molog("[transport]: strange: acked ware from busy flag no longer present.\n");
-
-			m_acked_ware = -1;
 			set_animation(g, descr().get_animation("idle"));
 			schedule_act(g, 20);
-			return;
 		}
+	}
 
-		state->ivar1 = m_acked_ware;
+	return;
+}
+
+
+/**
+ * Drop one item in a flag, and pick up a new one if we acked it
+ *
+ * \param g Game the carrier lives on.
+ * \param s Flags sent to the task
+ */
+/// \todo Upgrade this function to really support many-wares-at-a-time
+void Carrier::drop_item(Game* g, State* s)
+{
+	WareInstance* other = 0;
+	Road* road = (Road*)get_location(g);
+	Flag* flag = road->get_flag((Road::FlagId)(s->ivar1 ^ 1));
+
+	if (m_acked_ware == (s->ivar1 ^ 1)) {
+		// If there's an item we acked, we can drop ours even if the flag is
+		// flooded
+		other = flag->fetch_pending_item(g,
+				road->get_flag((Road::FlagId)s->ivar1));
+
+		if (!other && !flag->has_capacity())
+			molog("[Carrier]: strange: acked ware from busy flag no longer present.\n");
+
+		else
+			s->ivar1 = m_acked_ware;
+
 		m_acked_ware = -1;
 	}
 
-	item = fetch_carried_item(g);
+	// Drop our item
+	WareInstance* item = fetch_carried_item(g);
 	flag->add_item(g, item);
 
-	if (otheritem)
-	{
+	// Pick up new load, if any
+	if (other) {
 		molog("[transport]: return trip.\n");
 
-		set_carried_item(g, otheritem);
+		set_carried_item(g, other);
 
 		set_animation(g, descr().get_animation("idle"));
 		schedule_act(g, 20);
-		return;
-	}
-	else
-	{
-		molog("[transport]: back to idle.\n");
+	} else {
+		molog("[Carrier]: back to idle.\n");
 		pop_task();
 	}
+
+	return;
+}
+
+
+/**
+ * When picking up items, if some of them is targeted to the building attached
+ * to target flag walk straight into it and deliver.
+ *
+ * \param g Game the carrier lives on.
+ * \param s Flags sent to the task.
+ */
+void Carrier::enter_building(Game* g, State* s)
+{
+	if (!start_task_walktoflag(g, s->ivar1 ^ 1)) {
+		molog("[Carrier]: Move into building.\n");
+		start_task_forcemove(WALK_NW,
+		                     descr().get_right_walk_anims(does_carry_ware()));
+		s->ivar1 = -1;
+	}
+
+	return;
+}
+
+
+/**
+ * Swaps items from an overloaded flag for as long as the carrier can pick
+ * up new items from it. Otherwise, changes the carrier state to wait.
+ *
+ * \param g Game the carrier lives on.
+ * \param s Flags sent to the task.
+ */
+/// \todo Upgrade this function to truly support many-wares-at-a-time
+void Carrier::swap_or_wait(Game *g, State* s)
+{
+	// Road that employs us
+	Road* road = (Road*)get_location(g);
+	// Flag we are delivering to
+	Flag *flag = road->get_flag((Road::FlagId)(s->ivar1 ^ 1));
+	// The other flag of our road
+	Flag *otherflag = road->get_flag((Road::FlagId)(s->ivar1));
+
+
+	if (m_acked_ware == (s->ivar1 ^ 1)) {
+		// All is well, we already acked an item that we can pick up
+		// from this flag
+	} else if (flag->has_pending_item(g, otherflag)) {
+		if (!flag->ack_pending_item(g, otherflag))
+			throw wexception("MO(%u): transport: overload exchange: flag %u is fucked up",
+						get_serial(), flag->get_serial());
+
+		m_acked_ware = s->ivar1 ^ 1;
+	} else if (!start_task_walktoflag(g, s->ivar1 ^ 1, true))
+		// Wait one field away
+		start_task_waitforcapacity(g, flag);
+
+	return;
 }
 
 

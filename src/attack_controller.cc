@@ -81,14 +81,7 @@ uint getMaxAttackSoldiers
    return maxAttackSoldiers;
 }
 
-class AttackControllerDescr : public Map_Object_Descr
-{
-   public:
-      AttackControllerDescr() { }
-      ~AttackControllerDescr() { }
-};
-
-AttackControllerDescr globalAttackControllerDescr;
+Map_Object_Descr globalAttackControllerDescr;
 
 AttackController::AttackController(Game & the_game) :
 BaseImmovable  (globalAttackControllerDescr),

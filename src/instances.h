@@ -88,12 +88,10 @@ private:
 };
 
 /**
- * dummy class because Map_Object needs a description
+ * dummy instance because Map_Object needs a description
  * \todo move this to another header??
  */
-class Flag_Descr : public Map_Object_Descr {
-};
-extern Flag_Descr g_flag_descr;
+extern Map_Object_Descr g_flag_descr;
 
 /*
 Notes on Map_Object

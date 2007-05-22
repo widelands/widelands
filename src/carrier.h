@@ -69,6 +69,12 @@ class Carrier : public Worker
 		static Task taskRoad;
 		static Task taskTransport;
 
+		void deliver_to_building(Game* g);
+		void pickup_from_flag(Game *g, State* s);
+		void drop_item(Game* g, State* s);
+		void enter_building(Game* g, State* s);
+		void swap_or_wait(Game*g, State* s);
+
 		/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 		int m_acked_ware;
 };

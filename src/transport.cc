@@ -27,13 +27,13 @@ Flags, Roads, the logic behind ware pulls and pushes.
 
 #include "transport.h"
 
+#include "building.h"
 #include "carrier.h"
-#include "cmd_queue.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
+#include "instances.h"
 #include "player.h"
 #include "soldier.h"
 #include "tribe.h"
@@ -41,13 +41,14 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
+#include "worker.h"
 
 #include <cstdarg>
 
 #include <stdio.h>
 
 
-Flag_Descr g_flag_descr;
+Map_Object_Descr g_flag_descr;
 
 
 /*
@@ -1288,17 +1289,8 @@ Road IMPLEMENTATION
 ==============================================================================
 */
 
-// dummy class because Map_Object needs a description
-class Road_Descr : public Map_Object_Descr {
-public:
-	Road_Descr();
-};
-
-Road_Descr::Road_Descr()
-{
-}
-
-Road_Descr g_road_descr;
+// dummy instance because Map_Object needs a description
+Map_Object_Descr g_road_descr;
 
 
 /*
