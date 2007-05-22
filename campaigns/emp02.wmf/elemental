@@ -9,4 +9,5 @@ world=desert
 name=_"Empire Tutorial2 - An outpost for exile"
 author=Nasenbaer
 descr=_"Second mission of the Empire campaign"
+background="tribes/empire/map.jpg"
 

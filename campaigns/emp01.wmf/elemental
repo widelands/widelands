@@ -9,4 +9,5 @@ world=desert
 name=_"Empire Tutorial1 - The strands of Malac' Mor"
 author=Nasenbaer
 descr=_"First mission of the Empire campaign"
+background="tribes/empire/map.jpg"
 
