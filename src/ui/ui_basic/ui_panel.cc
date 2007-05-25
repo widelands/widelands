@@ -906,6 +906,8 @@ void Panel::draw_tooltip(RenderTarget* dst, Panel *lowest)
 		 UI_FONT_TOOLTIP_CLR,
 		 r + Point(2, 2),
 		 lowest->tooltip(),
-		 Align_Left);
+		 Align_Left, -1,
+		 Widget_Cache_None,
+		 0, -1, false);
 }
 };

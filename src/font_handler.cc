@@ -88,7 +88,8 @@ void Font_Handler::draw_string
  const int wrap,
  const Widget_Cache widget_cache,
  uint * const widget_cache_id,
- const int caret)
+ const int caret,
+ bool transparent)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	//Width and height of text, needed for alignment
@@ -122,7 +123,8 @@ void Font_Handler::draw_string
 		else {
 			//not cached, create a new surface
 			ci.surface_id =
-				create_text_surface(font, fg, bg, text, align, wrap, caret);
+				create_text_surface(font, fg, bg, text, align,
+									wrap, caret, transparent);
 			// Now cache it
 			g_gr->get_picture_size(ci.surface_id, ci.w, ci.h);
 			ci.f = &font;
@@ -148,7 +150,8 @@ void Font_Handler::draw_string
 		if (widget_cache == Widget_Cache_Update)
 			g_gr->free_surface(*widget_cache_id);
 		*widget_cache_id =
-			create_text_surface(font, fg, bg, text, align, wrap, caret);
+			create_text_surface(font, fg, bg, text, align,
+								wrap, caret, transparent);
 		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
@@ -162,13 +165,14 @@ void Font_Handler::draw_string
 uint Font_Handler::create_text_surface
 (TTF_Font & f, const RGBColor fg, const RGBColor bg,
  const std::string & text, const Align align, const int wrap,
- const int caret)
+ const int caret, bool transparent)
 {
 	return convert_sdl_surface
 		(*(wrap > 0 ?
 		   create_static_long_text_surface(f, fg, bg, text, align, wrap, 0, caret)
 		   :
-		   create_single_line_text_surface(f, fg, bg, text, align, caret)));
+		   create_single_line_text_surface(f, fg, bg, text, align, caret)),
+		 bg, transparent);
 }
 
 /*
@@ -329,7 +333,12 @@ SDL_Surface* Font_Handler::create_sdl_text_surface
 		 create_single_line_text_surface(font, fg, bg, text, align));
 }
 
-//draws richtext, specified by blocks
+/*
+ * draws richtext, specified by blocks
+ *
+ * If transparent is true, background is transparent,
+ * and \param bg is used only for antialiasing
+ */
 void Font_Handler::draw_richtext
 (RenderTarget & dst,
  RGBColor bg,
@@ -337,7 +346,8 @@ void Font_Handler::draw_richtext
  std::string text,
  int wrap,
  Widget_Cache widget_cache,
- uint * const widget_cache_id)
+ uint * const widget_cache_id,
+ bool transparent)
 {
 	uint picid;
 	if (widget_cache == Widget_Cache_Use) {
@@ -552,7 +562,8 @@ void Font_Handler::draw_richtext
 			SDL_FreeSurface(block_images);
 		}
 		picid = convert_sdl_surface
-			(*join_sdl_surfaces(wrap, global_h, rend_blocks, bg));
+			(*join_sdl_surfaces(wrap, global_h, rend_blocks, bg),
+			 bg, transparent);
 		*widget_cache_id = picid;
 	}
 	dst.blit(dstpoint, picid);
@@ -631,11 +642,20 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 
 /*
  * Converts a SDLSurface in a widelands one
+ *
+ * If transparent is true, background is transparent
  */
-uint Font_Handler::convert_sdl_surface(SDL_Surface & surface) {
+uint Font_Handler::convert_sdl_surface
+(SDL_Surface & surface, const RGBColor bg, bool transparent)
+{
 	Surface & surf = *new Surface();
-	SDL_SetColorKey
-		(&surface, SDL_SRCCOLORKEY, SDL_MapRGB(surface.format, 107, 87, 55));
+
+	if (transparent) {
+		SDL_SetColorKey
+		(&surface, SDL_SRCCOLORKEY,
+		 SDL_MapRGB(surface.format, bg.r(), bg.g(), bg.b()));
+	}
+
 	surf.set_sdl_surface(surface);
 
 	uint picid = g_gr->get_picture(PicMod_Font, surf);

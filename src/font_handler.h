@@ -84,7 +84,8 @@ public:
 		 const int wrap = -1,
 		 const Widget_Cache widget_cache = Widget_Cache_None,
 		 uint * const widget_cache_id = 0,
-		 const int caret = -1);
+		 const int caret = -1,
+		 bool transparent = true);
 	void get_size
 		(const std::string & fontname, const int size,
 		 std::string text,
@@ -112,7 +113,8 @@ public:
 		 std::string text,
 		 int wrap,
 		 Widget_Cache widget_cache = Widget_Cache_None,
-		 uint * const widget_cache_id = 0);
+		 uint * const widget_cache_id = 0,
+		 bool transparent = true);
 	void get_size_from_cache(const uint widget_cache_id, uint & w, uint & h);
 
 	// Register a callback which is used whenever the tag <variable name="kljdf"> appears
@@ -150,8 +152,9 @@ private:
 		(TTF_Font &,
 		 const RGBColor fg, const RGBColor bg,
 		 const std::string & text, const Align, const int wrap,
-		 const int caret = -1);
-	uint convert_sdl_surface(SDL_Surface &);
+		 const int caret = -1, bool transparent = true);
+	uint convert_sdl_surface
+		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
 		(const std::string & fontname, const int fontsize,
 		 const RGBColor fg, const RGBColor bg,

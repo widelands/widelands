@@ -107,7 +107,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
          // Remove old overlay if any
-			if (starting_pos.is_valid())
+			if (!starting_pos.isNull())
 				overlay_manager.remove_overlay(starting_pos, picid);
 
          // Add new overlay

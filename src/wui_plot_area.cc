@@ -133,7 +133,8 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 			 Point
 			 (static_cast<const int>(posx - w / 2),
 			  get_inner_h() - space_at_bottom + 4),
-			 buffer);
+			 buffer, Align_CenterLeft, -1,
+			 Widget_Cache_None, 0, -1, false);
       posx -= sub;
    }
 
@@ -181,7 +182,8 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		 UI_FONT_SMALL,
 		 RGBColor(120,255,0), RGBColor(255,255,255),
 		 Point(get_inner_w() - space_at_right - w - 2, spacing),
-		 buffer);
+		 buffer, Align_CenterLeft, -1,
+		 Widget_Cache_None, 0, -1, false);
 
    // Now, plot the pixels
    sub = xline_length / ((float)time_in_ms[m_time] / (float)m_sample_rate);
