@@ -15,6 +15,7 @@ for Widelands makes direct use of them:
    - SDL_image
    - SDL_net
    - SDL_ttf >= 2.0.0
+   - SDL_gfx
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
