@@ -95,6 +95,8 @@ def cli_options():
 	opts.Add('datadir', '(relative to install_prefix)', 'share/games/widelands')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
+	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')
+	opts.Add('extra_link_flags', '(does not work with build-widelands.sh!)', '')
 	opts.AddOptions(
 		BoolOption('enable_sdl_parachute', 'Enable SDL parachute?', 0),
 		BoolOption('enable_efence', 'Use the efence memory debugger?', 0),
@@ -213,6 +215,8 @@ TARGET=parse_cli(env)
 
 env.Append(CPPPATH=env['extra_include_path'])
 env.Append(LIBPATH=env['extra_lib_path'])
+env.AppendUnique(CCFLAGS=Split(env['extra_compile_flags']))
+env.AppendUnique(LINKFLAGS=env['extra_link_flags'])
 
 BINDIR= os.path.join(env['install_prefix'], env['bindir'])
 DATADIR=os.path.join(env['install_prefix'], env['datadir'])
