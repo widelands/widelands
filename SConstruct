@@ -13,6 +13,10 @@ from scons_configure import *
 from Distribute import *
 from detect_revision import *
 
+#Sanity checks
+EnsurePythonVersion(2, 4)
+EnsureSConsVersion(0, 97)
+
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
@@ -20,40 +24,20 @@ SetOption('implicit_cache', 1)
 # Pretty output
 print
 
-########################################################################### Glob
-# glob.glob does not work with BuildDir(), so use the following replacement from
-# http://www.scons.org/cgi-bin/wiki/BuildDirGlob?highlight=%28glob%29
-# which I modified slightly to return a list of filenames instead of nodes
-def Glob(match):
-	"""Similar to glob.glob, except globs SCons nodes, and thus sees
-	generated files and files from build directories.  Basically, it sees
-	anything SCons knows about.  A key subtlety is that since this function
-	operates on generated nodes as well as source nodes on the filesystem,
-	it needs to be called after builders that generate files you want to
-	include.
-	"""
+########################################## simple glob that works across BUILDDIR
+#TODO: optional recursion
 
-	def fn_filter(node):
-		fn = str(node)
-		return fnmatch.fnmatch(os.path.basename(fn), match)
+def simpleglob(pattern='*', directory='.'):
+        entries=[]
 
-	here = Dir('.')
+	for entry in os.listdir(Dir(directory).srcnode().abspath):
+		if fnmatch.fnmatchcase(entry, pattern):
+			entries.append(entry)
 
-	children = here.all_children()
-	nodes = map(File, filter(fn_filter, children))
-	node_srcs = [n.srcnode() for n in nodes]
-	filenames=[]
-
-	src = here.srcnode()
-	if src is not here:
-		src_children = map(File, filter(fn_filter, src.all_children()))
-		for s in src_children:
-			 if s not in node_srcs:
-			 	filenames.append(os.path.basename(str(s)))
-
-	return filenames
+	return entries
 
 ######################################################### find $ROOT -name $GLOB
+#TODO: replace with simpleglob
 
 def find(root, glob):
 	files=[]
@@ -115,7 +99,6 @@ def cli_options():
 		BoolOption('enable_sdl_parachute', 'Enable SDL parachute?', 0),
 		BoolOption('enable_efence', 'Use the efence memory debugger?', 0),
 		BoolOption('enable_ggz', 'Use the GGZ Gamingzone?', 0),
-		#BoolOption('enable_cross', 'Is this a cross compile? (developer use only)', 0)
 		)
 	return opts
 
@@ -252,21 +235,13 @@ env=conf.Finish()
 # Pretty output
 print
 
-######################################################## Use distcc if available
-
-# not finished yet
-#if os.path.exists('/usr/lib/distcc/bin'):
-#	env['ENV']['DISTCC_HOSTS'] = os.environ['DISTCC_HOSTS']
-#	env['ENV']['PATH'] = '/usr/lib/distcc/bin:'+env['ENV']['PATH']
-#	env['ENV']['HOME'] = os.environ['HOME']
-
 ################################################################### Build things
 
 SConsignFile('build/scons-signatures')
 BUILDDIR='build/'+TARGET+'-'+env['build']
-Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
+Export('env', 'BUILDDIR', 'PhonyTarget', 'simpleglob')
 
-####################################################################### 
+#######################################################################
 
 SConscript('build/SConscript')
 SConscript('campaigns/SConscript')
@@ -311,12 +286,12 @@ instadd(env, 'COPYING', 'doc')
 instadd(env, 'CREDITS', 'doc')
 instadd(env, 'widelands', filetype='binary')
 
-install=env.Install('installtarget', '')
+install=env.Install('installtarget', 'build-widelands.sh') # the second argument is a (neccessary) dummy
 Alias('install', install)
 AlwaysBuild(install)
 env.AddPreAction(install, Action(buildlocale))
 
-uninstall=env.Uninstall('uninstalltarget', '')
+uninstall=env.Uninstall('uninstalltarget', 'build-widelands.sh') # the second argument is a (neccessary) dummy
 Alias('uninstall', uninstall)
 AlwaysBuild(uninstall)
 
@@ -332,7 +307,7 @@ distadd(env, 'README.developers')
 distadd(env, 'SConstruct')
 distadd(env, 'build-widelands.sh')
 
-dist=env.DistPackage('widelands-'+env['build_id'], '')
+dist=env.DistPackage('widelands-'+env['build_id'], 'build-widelands.sh') # the second argument is a (neccessary) dummy
 Alias('dist', dist)
 AlwaysBuild(dist)
 

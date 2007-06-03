@@ -1,7 +1,8 @@
 Import('*')
 
-SRC=Glob('*.cc')
+SRC=simpleglob("*.cc")
 
 localenv=srcenv.Copy()
 
 lib=localenv.StaticLibrary(target='uifsmenus', source=SRC)
+

@@ -1,10 +1,10 @@
 Import('*')
 
-SRC=Glob('*.cc')
+SRC=simpleglob("*.cc")
 
 editorenv=srcenv.Copy()
 
-Export('editorenv', 'Glob')
+Export('editorenv')
 
 SConscript('ui_menus/SConscript')
 SConscript('tools/SConscript')

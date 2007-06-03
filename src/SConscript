@@ -3,7 +3,7 @@ Import('*')
 #TODO: find a way to remove the .orig files astyle leaves around. Probably in
 #      scons-tools/astyle.py
 
-SRC=Glob('*.cc')
+SRC=simpleglob("*.cc")
 
 srcenv=env.Copy()
 
@@ -17,7 +17,7 @@ srcenv.Append(CPPPATH=[
 		'#/src/filesystem',
 		])
 
-Export('srcenv', 'Glob')
+Export('srcenv')
 srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
 srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
 srcenv.Append(LIBS='editor', LIBPATH='editor')

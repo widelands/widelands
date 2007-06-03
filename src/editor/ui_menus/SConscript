@@ -1,7 +1,8 @@
 Import('*')
 
-SRC=Glob('*.cc')
+SRC=simpleglob("*.cc")
 
 localenv=editorenv.Copy()
 
 lib=localenv.StaticLibrary(target='editoruimenus', source=SRC)
+

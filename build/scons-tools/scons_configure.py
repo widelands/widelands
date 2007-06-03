@@ -40,48 +40,6 @@ def write_buildid(build_id):
 	build_id_file.close()
 
 ################################################################################
-# verbatim copy from env.ParseConfig for parsing `sdl-config`
-# it's a nested function there, so we can't use it directly
-
-#TODO: this can be dropped once we use scons-0.97
-
-def parse_conf(env, output):
-            dict = {
-                'ASFLAGS'       : [],
-                'CCFLAGS'       : [],
-                'CPPFLAGS'      : [],
-                'CPPPATH'       : [],
-                'LIBPATH'       : [],
-                'LIBS'          : [],
-                'LINKFLAGS'     : [],
-            }
-            static_libs = []
-
-            params = string.split(output)
-            for arg in params:
-                if arg[0] != '-':
-                    static_libs.append(arg)
-                elif arg[:2] == '-L':
-                    dict['LIBPATH'].append(arg[2:])
-                elif arg[:2] == '-l':
-                    dict['LIBS'].append(arg[2:])
-                elif arg[:2] == '-I':
-                    dict['CPPPATH'].append(arg[2:])
-                elif arg[:4] == '-Wa,':
-                    dict['ASFLAGS'].append(arg)
-                elif arg[:4] == '-Wl,':
-                    dict['LINKFLAGS'].append(arg)
-                elif arg[:4] == '-Wp,':
-                    dict['CPPFLAGS'].append(arg)
-                elif arg == '-pthread':
-                    dict['CCFLAGS'].append(arg)
-                    dict['LINKFLAGS'].append(arg)
-                else:
-                    dict['CCFLAGS'].append(arg)
-            apply(env.Append, (), dict)
-            return static_libs
-
-################################################################################
 
 def parse_cli(env):
 	if env['enable_ggz']:
@@ -186,25 +144,6 @@ def CheckLinkerFlag(context, link_flag, env):
 
 ################################################################################
 
-#TODO: this can be dropped once we use scons-0.97
-def ParseSDLConfig(env, confstring):
-	words=confstring.split()
-
-	for i, w in enumerate(words):
-		if w=='-framework':
-#remove implicitly causes the new element i to be the former i+1, so the next
-#two lines remove two consecutive tokens
-			words.remove(w)
-			w2=words.pop(i)
-			env.Append(LINKFLAGS=w+' '+w2)
-
-# problematic flags have been taken care of, call the standard parser
-	parse_conf(env, string.join(words))
-
-	return
-
-################################################################################
-
 def do_configure(config_h_file, conf, env):
 	print #prettyprinting
 
@@ -260,7 +199,7 @@ def do_configure(config_h_file, conf, env):
 		print 'Could not find an SDL version >= 1.2.8!'
 		env.Exit(1)
 	else:
-		env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
+		env.ParseConfig(env['sdlconfig']+' --libs --cflags')
 
 	#disabled until somebody finds time and courage to actually work on this #fweber
 	#if not conf.CheckParaguiConfig(env):

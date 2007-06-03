@@ -2,7 +2,7 @@
 
 if [ ! -e utils/scons.py ] ; then
 	cd utils
-	tar xzf scons-local-0.96.1.tar.gz
+	tar xzf scons-local-0.97.tar.gz
 	cd -
 fi
 

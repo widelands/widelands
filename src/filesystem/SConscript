@@ -1,6 +1,6 @@
 Import('*')
 
-SRC=Glob('*.cc')
+SRC=simpleglob("*.cc")
 
 srcenv.Append(INDENTLIST=[
 	'filesystem/disk_filesystem.h',

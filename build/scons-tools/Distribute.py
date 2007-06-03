@@ -1,4 +1,5 @@
 import SCons
+from SCons.Script import *
 import os, shutil, glob, distutils.dir_util
 import tempfile, tarfile
 from zipfile import *
@@ -107,7 +108,7 @@ def doinst(target, source, env):
 	shutil.rmtree(tmpdir)
 
 def douninst(target, source, env):
-	for (name, location, compress) in env['INSTFILES']:
+	for (name, location, compress, filetype) in env['INSTFILES']:
 		if os.path.isfile(location):
 			os.remove(location)
 		if os.path.isdir(location):

@@ -1,4 +1,4 @@
-Import('env')
+Import('*')
 from Distribute import distadd
 
 #instadd(env, 'doc/filename', 'doc')

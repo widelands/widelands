@@ -26,6 +26,7 @@ please tell us.
 
 For compiling, you will also need
    - Python >= 2.4
+   - scons >= 0.97 (optional but recommended, see below)
 If you have a desparate need to use older Python versions then tell us. It'd be
 possible, but the inconvenience seems not to be worthwile so far.
 
