@@ -104,7 +104,10 @@ def cli_options():
 
 ################################################################################
 # Environment setup
-#
+
+# write only *one* signature file in a place where we don't care
+SConsignFile('build/scons-signatures')
+
 # Create configuration objects
 
 opts=cli_options()
@@ -237,7 +240,6 @@ print
 
 ################################################################### Build things
 
-SConsignFile('build/scons-signatures')
 BUILDDIR='build/'+TARGET+'-'+env['build']
 Export('env', 'BUILDDIR', 'PhonyTarget', 'simpleglob')
 
