@@ -108,11 +108,20 @@ def doinst(target, source, env):
 	shutil.rmtree(tmpdir)
 
 def douninst(target, source, env):
-	for (name, location, compress, filetype) in env['INSTFILES']:
-		if os.path.isfile(location):
-			os.remove(location)
-		if os.path.isdir(location):
-			shutil.rmtree(location)
+	datadir=os.path.join(env['install_prefix'], env['datadir'])
+	executable=os.path.join(env['install_prefix'], env['bindir'], 'widelands')
+
+	print "Removing data directory", datadir
+	if os.path.exists(datadir):
+		shutil.rmtree(datadir)
+	else:
+		print "        %s does not exist" % (datadir,)
+
+	print "Removing executable", executable
+	if os.path.exists(executable):
+		os.remove(executable)
+	else:
+		print "        %s does not exist" % (executable,)
 
 def generate(env):
 	env['DISTFILES']=[]
