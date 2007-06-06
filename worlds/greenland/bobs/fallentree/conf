@@ -2,6 +2,7 @@
 descname =_Dead tree
 type="boring"
 hotspot=3 31
+program=program
 
 [program]
 0=animation dead 30000
