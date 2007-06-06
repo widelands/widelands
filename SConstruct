@@ -299,6 +299,7 @@ env.AddPreAction(install, Action(buildlocale))
 
 uninstall=env.Uninstall('uninstalltarget', 'build-widelands.sh') # the second argument is a (neccessary) dummy
 Alias('uninstall', uninstall)
+Alias('uninst', uninstall)
 AlwaysBuild(uninstall)
 
 ##################################################################### Distribute
@@ -329,3 +330,16 @@ Alias('precommit', 'longlines')
 ################################################################## Documentation
 
 PhonyTarget('doc', 'doxygen Doxyfile')
+
+########################################################################## Clean
+
+#PhonyTarget('distclean', 'rm -f  build/native-*')
+
+PhonyTarget('distclean', 'rm -f  utils/scons.py')
+PhonyTarget('distclean', 'rm -f  utils/scons-LICENSE')
+PhonyTarget('distclean', 'rm -f  utils/scons-README')
+PhonyTarget('distclean', 'rm -fr utils/scons-local-0.96.1')
+PhonyTarget('distclean', 'rm -fr utils/scons-local-0.97')
+PhonyTarget('distclean', 'rm -f  utils/scons-time.py')
+PhonyTarget('distclean', 'rm -f  utils/sconsign.py')
+
