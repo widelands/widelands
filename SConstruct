@@ -333,13 +333,21 @@ PhonyTarget('doc', 'doxygen Doxyfile')
 
 ########################################################################## Clean
 
-#PhonyTarget('distclean', 'rm -f  build/native-*')
+distcleanactions=[
+	Delete('build/native-debug'),
+	Delete('build/native-profile'),
+	Delete('build/native-release'),
+	Delete('build/sconf_temp'),
+	Delete('build/scons-config.py'),
+#	Delete('build/scons-signatures.dblite')) # This can not work, how to get rid of this file?
+	Delete('utils/scons.py'),
+	Delete('utils/scons-LICENSE'),
+	Delete('utils/scons-README'),
+	Delete('utils/scons-local-0.96.1'),
+	Delete('utils/scons-local-0.97'),
+	Delete('utils/scons-time.py'),
+	Delete('utils/sconsign.py'),
+]
 
-PhonyTarget('distclean', 'rm -f  utils/scons.py')
-PhonyTarget('distclean', 'rm -f  utils/scons-LICENSE')
-PhonyTarget('distclean', 'rm -f  utils/scons-README')
-PhonyTarget('distclean', 'rm -fr utils/scons-local-0.96.1')
-PhonyTarget('distclean', 'rm -fr utils/scons-local-0.97')
-PhonyTarget('distclean', 'rm -f  utils/scons-time.py')
-PhonyTarget('distclean', 'rm -f  utils/sconsign.py')
+distclean=PhonyTarget("distclean", distcleanactions)
 
