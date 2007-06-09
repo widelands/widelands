@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -e utils/scons.py ] ; then
+if [ ! -e utils/scons.py -o -z "`utils/scons.py -v|grep 0.97`" ] ; then
 	cd utils
 	tar xzf scons-local-0.97.tar.gz
 	cd -
