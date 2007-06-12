@@ -307,10 +307,7 @@ AlwaysBuild(uninstall)
 distadd(env, 'ChangeLog')
 distadd(env, 'COPYING')
 distadd(env, 'CREDITS')
-distadd(env, 'Doxyfile')
 distadd(env, 'Makefile')
-distadd(env, 'README-compiling.txt')
-distadd(env, 'README.developers')
 distadd(env, 'SConstruct')
 distadd(env, 'build-widelands.sh')
 
@@ -329,7 +326,7 @@ Alias('precommit', 'longlines')
 
 ################################################################## Documentation
 
-PhonyTarget('doc', 'doxygen Doxyfile')
+PhonyTarget('doc', 'doxygen doc/Doxyfile')
 
 ########################################################################## Clean
 

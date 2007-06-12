@@ -3,4 +3,7 @@ from Distribute import distadd
 
 #instadd(env, 'doc/filename', 'doc')
 
+distadd(env, 'doc/Doxyfile')
+distadd(env, 'doc/README.compiling')
+distadd(env, 'doc/README.development')
 distadd(env, 'doc/SConscript')
