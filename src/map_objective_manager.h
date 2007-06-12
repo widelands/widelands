@@ -22,8 +22,8 @@
 
 #include "error.h"
 #include "i18n.h"
-#include "trigger_null.h"
-#include "trigger_referencer.h"
+#include "trigger/trigger_null.h"
+#include "trigger/trigger_referencer.h"
 
 #include <string>
 

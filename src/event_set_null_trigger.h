@@ -21,8 +21,8 @@
 #define __S__EVENT_SET_NULL_TRIGGER_H
 
 #include "event.h"
-#include "trigger_null.h"
-#include "trigger_referencer.h"
+#include "trigger/trigger_null.h"
+#include "trigger/trigger_referencer.h"
 
 class Editor_Game_Base;
 

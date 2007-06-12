@@ -21,7 +21,7 @@
 
 #include "graphic.h"
 #include "i18n.h"
-#include "trigger_time.h"
+#include "trigger/trigger_time.h"
 #include "editorinteractive.h"
 #include "error.h"
 

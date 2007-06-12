@@ -26,7 +26,7 @@
 #include "graphic.h"
 #include "map.h"
 #include "map_trigger_manager.h"
-#include "trigger_null.h"
+#include "trigger/trigger_null.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"

@@ -30,8 +30,8 @@
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "trigger.h"
-#include "trigger_conditional.h"
+#include "trigger/trigger.h"
+#include "trigger/trigger_conditional.h"
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
 (Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain)

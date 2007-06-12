@@ -29,7 +29,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "map_event_manager.h"
-#include "trigger_conditional.h"
+#include "trigger/trigger_conditional.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"

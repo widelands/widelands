@@ -26,7 +26,7 @@
 #include "map_objective_manager.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
-#include "trigger_null.h"
+#include "trigger/trigger_null.h"
 
 
 #define CURRENT_PACKET_VERSION 1

@@ -20,7 +20,7 @@
 #include "trigger_building_option_menu.h"
 
 #include "i18n.h"
-#include "trigger_building.h"
+#include "trigger/trigger_building.h"
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"

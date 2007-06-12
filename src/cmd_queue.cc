@@ -26,7 +26,7 @@
 #include "instances.h"
 #include "machdep.h"
 #include "player.h"
-#include "trigger.h"
+#include "trigger/trigger.h"
 #include "wexception.h"
 #include "worker.h"
 

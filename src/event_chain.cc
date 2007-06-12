@@ -27,7 +27,7 @@
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"
 #include "map_trigger_manager.h"
-#include "trigger_conditional.h"
+#include "trigger/trigger_conditional.h"
 #include "wexception.h"
 
 

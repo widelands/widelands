@@ -19,7 +19,7 @@
 
 #include "event_chain.h"
 #include "map_eventchain_manager.h"
-#include "trigger_conditional.h"
+#include "trigger/trigger_conditional.h"
 
 #include <vector>
 

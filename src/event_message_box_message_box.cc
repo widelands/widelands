@@ -24,7 +24,7 @@
 #include "graphic.h"
 #include "editorinteractive.h"
 #include "constants.h"
-#include "trigger_null.h"
+#include "trigger/trigger_null.h"
 
 #include "ui_button.h"
 #include "ui_multilinetextarea.h"

@@ -17,14 +17,14 @@
  *
  */
 
-#include "trigger_factory.h"
+#include "trigger/trigger_factory.h"
 
 #include "editorinteractive.h"
 #include "error.h"
 #include "i18n.h"
-#include "trigger_time.h"
-#include "trigger_null.h"
-#include "trigger_building.h"
+#include "trigger/trigger_time.h"
+#include "trigger/trigger_null.h"
+#include "trigger/trigger_building.h"
 #include "trigger_time_option_menu.h"
 #include "trigger_null_option_menu.h"
 #include "trigger_building_option_menu.h"

@@ -19,7 +19,7 @@
 
 #include "map_trigger_manager.h"
 
-#include "trigger.h"
+#include "trigger/trigger.h"
 
 #include <vector>
 

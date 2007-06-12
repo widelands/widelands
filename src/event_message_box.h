@@ -21,7 +21,7 @@
 #define __S__EVENT_MESSAGEBOX_H
 
 #include "event.h"
-#include "trigger_referencer.h"
+#include "trigger/trigger_referencer.h"
 
 #include <string>
 #include <vector>

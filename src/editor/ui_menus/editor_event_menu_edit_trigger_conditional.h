@@ -20,7 +20,7 @@
 #ifndef __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 #define __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 
-#include "trigger_conditional.h"
+#include "trigger/trigger_conditional.h"
 
 #include "ui_window.h"
 

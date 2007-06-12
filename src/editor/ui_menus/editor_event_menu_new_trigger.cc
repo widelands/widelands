@@ -23,8 +23,8 @@
 #include "i18n.h"
 #include "map_trigger_manager.h"
 #include "editorinteractive.h"
-#include "trigger.h"
-#include "trigger_factory.h"
+#include "trigger/trigger.h"
+#include "trigger/trigger_factory.h"
 #include "map.h"
 #include "error.h"
 

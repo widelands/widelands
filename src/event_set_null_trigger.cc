@@ -28,7 +28,7 @@
 #include "map.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
-#include "trigger_null.h"
+#include "trigger/trigger_null.h"
 #include "wexception.h"
 
 static const int EVENT_VERSION = 1;

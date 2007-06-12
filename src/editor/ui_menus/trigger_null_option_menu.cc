@@ -20,7 +20,7 @@
 #include "trigger_null_option_menu.h"
 
 #include "i18n.h"
-#include "trigger_null.h"
+#include "trigger/trigger_null.h"
 #include "editorinteractive.h"
 #include "error.h"
 

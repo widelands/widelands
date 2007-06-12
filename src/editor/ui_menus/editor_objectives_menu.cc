@@ -25,9 +25,9 @@
 #include "map.h"
 #include "map_objective_manager.h"
 #include "map_trigger_manager.h"
-#include "trigger.h"
-#include "trigger_null.h"
-#include "trigger_referencer.h"
+#include "trigger/trigger.h"
+#include "trigger/trigger_null.h"
+#include "trigger/trigger_referencer.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"

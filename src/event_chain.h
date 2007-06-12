@@ -22,7 +22,7 @@
 
 #include "event_referencer.h"
 #include "error.h"
-#include "trigger_referencer.h"
+#include "trigger/trigger_referencer.h"
 #include "types.h"
 
 #include <string>
