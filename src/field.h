@@ -256,6 +256,13 @@ public:
 		height = h;
 	}
 };
-compile_assert(sizeof(Field) == 12 + 2 * sizeof(void *));
+//TODO:
+/**
+ * \todo This following line is wrong on 64bit systems.
+ * Question: does anything rely on this size? If yes, that needs to be fixed
+ * ASAP! Or is it just a paranoia check? In that case it still needs fixing.
+ *
+ * compile_assert(sizeof(Field) == 12 + 2 * sizeof(void *));
+ */
 
 #endif
