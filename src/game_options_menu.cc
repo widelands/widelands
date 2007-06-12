@@ -28,7 +28,7 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "stock_menu.h"
 #include "ware_statistics_menu.h"
 

@@ -23,7 +23,7 @@
 #include "error.h"
 #include "constants.h"
 #include "profile.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "wexception.h"
 
 #include <stdio.h>

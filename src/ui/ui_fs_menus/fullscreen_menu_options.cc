@@ -27,7 +27,7 @@
 #include "languages.h"
 #include "profile.h"
 #include "save_handler.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "wlapplication.h"
 
 #include <libintl.h>

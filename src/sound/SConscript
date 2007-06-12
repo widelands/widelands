@@ -1,0 +1,24 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+srcenv.Append(INDENTLIST=[
+	'sound/fxset.h',
+	'sound/fxset.cc',
+	'sound/songset.h',
+	'sound/songset.cc',
+	'sound/sound_handler.h',
+	'sound/sound_handler.cc',
+	])
+
+lib=srcenv.StaticLibrary(target='sound', source=SRC)
+
+srcenv.Append(INDENTLIST=[
+	'fxset.h',
+	'fxset.cc',
+	'songset.h',
+	'songset.cc',
+	'sound_handler.h',
+	'sound_handler.cc',
+        ])
+

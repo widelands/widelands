@@ -27,7 +27,7 @@
 #include "i18n.h"
 #include "player.h"
 #include "rendertarget.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "transport.h"
 #include "tribe.h"
 #include "wexception.h"

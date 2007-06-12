@@ -25,7 +25,7 @@
 #include "game.h"
 #include "militarysite.h"
 #include "soldier.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "transport.h"
 #include "trainingsite.h"
 #include "tribe.h"

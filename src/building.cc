@@ -33,7 +33,7 @@
 #include "productionsite.h"
 #include "profile.h"
 #include "rendertarget.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "trainingsite.h"
 #include "transport.h"
 #include "tribe.h"

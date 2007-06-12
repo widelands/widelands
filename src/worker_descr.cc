@@ -23,7 +23,7 @@
 #include "i18n.h"
 #include "profile.h"
 #include "soldier.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "wexception.h"
 #include "worker.h"
 #include "worker_descr.h"

@@ -28,7 +28,7 @@
 #include "player.h"
 #include "profile.h"
 #include "soldier.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"

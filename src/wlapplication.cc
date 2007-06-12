@@ -42,7 +42,7 @@
 #include "network.h"
 #include "network_ggz.h"
 #include "profile.h"
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 #include "wexception.h"
 
 #include <iostream>
