@@ -192,7 +192,7 @@ dist:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic src/editor src/editor/ui_menus src/editor/tools src/filesystem
+SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic src/editor src/editor/ui_menus src/editor/tools src/filesystem src/sound src/trigger
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
