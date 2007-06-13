@@ -18,6 +18,7 @@ srcenv.Append(CPPPATH=[
 		])
 
 Export('srcenv')
+srcenv.Append(LIBS='events', LIBPATH='events')
 srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
 srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
 srcenv.Append(LIBS='editor', LIBPATH='editor')
@@ -33,6 +34,7 @@ SConscript('ui/ui_fs_menus/SConscript')
 SConscript('filesystem/SConscript')
 SConscript('sound/SConscript')
 SConscript('trigger/SConscript')
+SConscript('events/SConscript')
 
 srcenv.Append(INDENTLIST=[
 	'geometry.h',

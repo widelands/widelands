@@ -19,7 +19,7 @@
 
 #include "map_event_manager.h"
 
-#include "event.h"
+#include "events/event.h"
 
 #include <vector>
 

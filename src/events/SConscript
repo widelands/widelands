@@ -1,0 +1,35 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+srcenv.Append(INDENTLIST=[
+	'events/event_allow_building.cc',
+	'events/event_allow_building.h',
+	'events/event.cc',
+	'events/event_chain.cc',
+	'events/event_chain.h',
+	'events/event_conquer_area.cc',
+	'events/event_conquer_area.h',
+	'events/event_factory.cc',
+	'events/event_factory.h',
+	'events/event.h',
+	'events/event_message_box.cc',
+	'events/event_message_box.h',
+	'events/event_message_box_message_box.cc',
+	'events/event_message_box_message_box.h',
+	'events/event_move_view.cc',
+	'events/event_move_view.h',
+	'events/event_player_area.cc',
+	'events/event_player_area.h',
+	'events/event_referencer.cc',
+	'events/event_referencer.h',
+	'events/event_set_null_trigger.cc',
+	'events/event_set_null_trigger.h',
+	'events/event_unhide_area.cc',
+	'events/event_unhide_area.h',
+	'events/event_unhide_objective.cc',
+	'events/event_unhide_objective.h',
+	])
+
+lib=srcenv.StaticLibrary(target='events', source=SRC)
+

@@ -20,7 +20,7 @@
 #include "event_unhide_area_option_menu.h"
 
 #include "i18n.h"
-#include "event_unhide_area.h"
+#include "events/event_unhide_area.h"
 #include "editorinteractive.h"
 #include "error.h"
 #include "map.h"

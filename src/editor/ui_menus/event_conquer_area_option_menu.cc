@@ -19,7 +19,7 @@
 
 #include "event_conquer_area_option_menu.h"
 
-#include "event_conquer_area.h"
+#include "events/event_conquer_area.h"
 #include "editorinteractive.h"
 #include "error.h"
 #include "graphic.h"

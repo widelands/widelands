@@ -1,0 +1,8 @@
+Import('*')
+from Distribute import distadd
+
+distadd(env, 'src/events/SConscript')
+distadd(env, 'src/events/SConscript.dist')
+distadd(env, 'src/events/*.h')
+distadd(env, 'src/events/*.cc')
+

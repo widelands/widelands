@@ -21,8 +21,8 @@
 
 #include "editor_game_base.h"
 #include "error.h"
-#include "event.h"
-#include "event_factory.h"
+#include "events/event.h"
+#include "events/event_factory.h"
 #include "fileread.h"
 #include "map.h"
 #include "map_event_manager.h"

@@ -21,8 +21,8 @@
 
 #include "editor_game_base.h"
 #include "error.h"
-#include "event.h"
-#include "event_chain.h"
+#include "events/event.h"
+#include "events/event_chain.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "map.h"

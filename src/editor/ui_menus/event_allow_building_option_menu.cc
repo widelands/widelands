@@ -22,7 +22,7 @@
 #include "editor.h"
 #include "editorinteractive.h"
 #include "error.h"
-#include "event_allow_building.h"
+#include "events/event_allow_building.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"

@@ -19,7 +19,7 @@
 
 #include "event_message_box_option_menu.h"
 
-#include "event_message_box.h"
+#include "events/event_message_box.h"
 #include "i18n.h"
 #include "editorinteractive.h"
 #include "error.h"

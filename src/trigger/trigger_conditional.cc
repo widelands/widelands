@@ -22,7 +22,7 @@
 
 #include "compile_assert.h"
 #include "error.h"
-#include "event_chain.h"
+#include "events/event_chain.h"
 #include "trigger.h"
 
 

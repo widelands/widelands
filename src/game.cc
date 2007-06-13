@@ -21,7 +21,7 @@
 
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
-#include "event_chain.h"
+#include "events/event_chain.h"
 #include "interactive_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
