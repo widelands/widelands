@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-26 18:09+0000\n"
-"PO-Revision-Date: 2007-02-08 18:55+0100\n"
+"POT-Creation-Date: 2007-06-13 18:25+0000\n"
+"PO-Revision-Date: 2007-06-13 20:51+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -301,74 +301,236 @@ msgstr "Ten en cuenta que, aunque los registros de sesión son independientes de
 msgid "Development"
 msgstr "Desarrollo"
 
+#: ../../txts/developers:3
+msgid "Widelands Development Team"
+msgstr "El Equipo de Desarrollo de Widelands"
+
+#: ../../txts/developers:9
+msgid "Chieftain"
+msgstr "Jefe"
+
+#: ../../txts/developers:15
+msgid "Elders"
+msgstr "Ancianos"
+
+#: ../../txts/developers:19
+msgid "Graphics"
+msgstr "Gráficos"
+
+#: ../../txts/developers:24
+msgid "Homepage"
+msgstr "Página inicial"
+
+#: ../../txts/developers:29
+msgid "Sound"
+msgstr "Sonido"
+
+#: ../../txts/developers:32
+msgid "vacant"
+msgstr "disponible"
+
+#: ../../txts/developers:36
+msgid "Translation"
+msgstr "Traducción"
+
+#: ../../txts/developers:44
+msgid "Coders"
+msgstr "Programadores"
+
+#: ../../txts/developers:66
+msgid "Graphicians"
+msgstr "Grafistas"
+
+#: ../../txts/developers:88
+msgid "Musicians"
+msgstr "Músicos"
+
+#: ../../txts/developers:95
+msgid "Sound Effects"
+msgstr "Efectos de sonido"
+
+#: ../../txts/developers:101
+msgid "Maps and Missions"
+msgstr "Mapas y Misiones"
+
+#: ../../txts/developers:109
+msgid "Barbarian Campaign Story"
+msgstr "Historia de las Campañas Bárbaras"
+
+#: ../../txts/developers:115
+msgid "Translators"
+msgstr "Traductores"
+
+#: ../../txts/developers:119
+msgid "Czech"
+msgstr "Checo"
+
+#: ../../txts/developers:125
+msgid "Dutch"
+msgstr "Holandés"
+
+#: ../../txts/developers:130
+msgid "Finnish"
+msgstr "Finlandés"
+
+#: ../../txts/developers:135
+msgid "French"
+msgstr "Francés"
+
+#: ../../txts/developers:141
+msgid "Galician"
+msgstr "Gallego"
+
+#: ../../txts/developers:146
+msgid "German"
+msgstr "Alemán"
+
+#: ../../txts/developers:153
+msgid "Hebrew"
+msgstr "Hebreo"
+
+#: ../../txts/developers:158
+msgid "Hungarian"
+msgstr "Húngaro"
+
+#: ../../txts/developers:163
+msgid "Polish"
+msgstr "Polaco"
+
+#: ../../txts/developers:169
+msgid "Russian"
+msgstr "Ruso"
+
+#: ../../txts/developers:174
+msgid "Spanish"
+msgstr "Castellano"
+
+#: ../../txts/developers:179
+msgid "Slovak"
+msgstr "Eslovaco"
+
+#: ../../txts/developers:184
+msgid "Swedish"
+msgstr "Sueco"
+
+#: ../../txts/developers:192
+msgid "Packagers"
+msgstr "Empaquetadores"
+
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
 msgstr "LEEME del Editor de Widelands"
 
-#: ../../txts/editor_readme:3
+#: ../../txts/editor_readme:4
 msgid "README for the Editor"
 msgstr "LEEME del Editor"
 
-#: ../../txts/editor_readme:6 ../../txts/README:9
+#: ../../txts/editor_readme:7
+#: ../../txts/README:9
 msgid "Introduction"
 msgstr "Introducción"
 
-#: ../../txts/editor_readme:9
-msgid "This Editor is intended for players who d like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text  will also get longer and more complete. Probably it will also contain a little tutorial in a while"
-msgstr "Este editor está orientado a jugadores que quieren diseñar sus propios mapas para jugar en Widelands.<br>Como puedes ver, este Editor está en desarrollo, y a la vez que el Editor mejora más y más, este texto será más largo y completo. Probablemente también contendrá un pequeño tutorial."
+#: ../../txts/editor_readme:10
+msgid "This Editor is intended for players who'd like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
+msgstr "Este editor está orientado a jugadores que quieren diseñar sus propios mapas para jugar en Widelands.<br>Como puedes ver, este Editor está en desarrollo, y a la vez que el Editor mejora más y más, este texto será más largo y completo."
 
-#: ../../txts/editor_readme:13
+#: ../../txts/editor_readme:12
+msgid "Please look into our enduser manuals in our wiki-pages at:"
+msgstr "Consulta el manual de usuario en nuestro wiki:"
+
+#: ../../txts/editor_readme:14
+msgid "Those pages might be more complete and up to date than this file. And there you further can find a short tutorial about building a map."
+msgstr "Esas páginas pueden ser más completas y actuales que este fichero. Además, allí podrás encontrar una pequeña guía sobre cómo crear un mapa."
+
+#: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
 msgstr "Atajos de teclado"
 
-#: ../../txts/editor_readme:16
+#: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
 msgstr "ESPACIO    (Des)activa la ayuda de construcción"
 
-#: ../../txts/editor_readme:18
+#: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
 msgstr "C          (Des)activa el censo"
 
-#: ../../txts/editor_readme:20
+#: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
 msgstr "E          (Des)activa el menú de eventos"
 
-#: ../../txts/editor_readme:22
+#: ../../txts/editor_readme:27
 msgid "F        Toggle Fullscreen"
 msgstr "F          (Des)activa la presentación a pantalla completa"
 
-#: ../../txts/editor_readme:24
+#: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
 msgstr "H          (Des)activa el menú principal"
 
-#: ../../txts/editor_readme:26
+#: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
 msgstr "M          (Des)activa el minimapa"
 
-#: ../../txts/editor_readme:28
+#: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
 msgstr "P          (Des)activa el menú de jugadores"
 
-#: ../../txts/editor_readme:30
+#: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
 msgstr "T          (Des)activa el menú de herramientas"
 
-#: ../../txts/editor_readme:32
+#: ../../txts/editor_readme:37
 msgid "CTRL+L   Load Map"
 msgstr "CTRL+L     Cargar mapa"
 
-#: ../../txts/editor_readme:34
+#: ../../txts/editor_readme:39
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S     Salvar mapa"
 
-#: ../../txts/editor_readme:36
+#: ../../txts/editor_readme:41
 msgid "1-0      Changes tools size"
 msgstr "1-0        Cambia el tamaño de herramientas"
 
-#: ../../txts/editor_readme:38
+#: ../../txts/editor_readme:43
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr "SHIFT      (pulsado) Selecciona la primera herramienta alternativa"
 
-#: ../../txts/editor_readme:40
+#: ../../txts/editor_readme:45
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT        (pulsado) Selecciona la segunda herramienta alternativa"
+
+#: ../../txts/gametips:13
+msgid "Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop."
+msgstr "Algunos edificios (por ejemplo, los viñedos) tienen una pequeña área de producción, de modo que, si el edificio está rodeado de árboles o caminos, dejará de ser productivo."
+
+#: ../../txts/gametips:17
+msgid "Watch the fishers hut - after fish resource is exhausted in working area, production will stop."
+msgstr "Vigila las cabañas de los pescadores. Cuando hayan terminado con todos los peces de la zona, dejarán de ser productivas."
+
+#: ../../txts/gametips:21
+msgid "Building process will start only after a road is built to the construction site."
+msgstr "La construcción sólo comenzará cuando haya un camino construido hasta el punto de edificación."
+
+#: ../../txts/gametips:25
+msgid "Be sure to send out a geologist to explore site before building a well or mine."
+msgstr "Asegúrate de enviar un geólogo a explorar el área antes de construir un pozo o una mina."
+
+#: ../../txts/gametips:29
+msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc."
+msgstr "Puedes expandir tu territorio construyendo varios edificios militares: Centinelas, Fortalezas, Cuarteles, etc..."
+
+#: ../../txts/gametips:33
+msgid "Miners will work only if supplied with food."
+msgstr "Los mineros sólo trabajarán si disponen de comida."
+
+#: ../../txts/gametips:37
+msgid "Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares."
+msgstr "Divide tus caminos en varios tramos pequeños, colocando banderas intermedias. De este modo acelerarás el transporte de tus mercancías."
+
+#: ../../txts/gametips:41
+msgid "Always build up some forester- or rangerhut, so you will not go out of trunks and wood."
+msgstr "Construye siempre una cabaña de guardabosques o de silvicultor, de modo que nunca te quedes sin madera ni troncos."
+
+#: ../../txts/gametips:45
+msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
+msgstr "¿Más preguntas? Visítanos en www.widelands.org. Allí encontrarás los FAQs, el wiki y, por supuesto, los foros de nuestra comunidad."
+

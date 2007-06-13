@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-26 18:09+0000\n"
-"PO-Revision-Date: 2007-02-08 18:55+0100\n"
+"POT-Creation-Date: 2007-06-13 18:25+0000\n"
+"PO-Revision-Date: 2007-06-13 20:35+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -112,6 +112,10 @@ msgstr "Piedras"
 msgid "Tree"
 msgstr "Árbol"
 
+#: ../../../worlds/winterland/bobs/wolf/conf:1
+msgid "Wolf"
+msgstr "Lobo"
+
 #: ../../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
 msgstr "El Equipo de Desarrollo de Widelands"
@@ -147,3 +151,4 @@ msgstr "Agua"
 #: ../../../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Pescado"
+
