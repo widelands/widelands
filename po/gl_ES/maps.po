@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-26 18:09+0000\n"
-"PO-Revision-Date: 2007-04-21 10:06+0100\n"
+"POT-Creation-Date: 2007-06-13 18:25+0000\n"
+"PO-Revision-Date: 2007-06-13 20:34+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -101,6 +101,10 @@ msgstr "Estás en pé nunha illa, coroada por grandiosos montes, que agachan un 
 msgid "Riverlands"
 msgstr "Marismas"
 
+#: ../../maps/Riverlands.wmf/elemental:11
+msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
+msgstr "Unha terra mística, chea de paisaxes diferentes, todos cruzados por un feixe de grandes rios."
+
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
 msgstr "O Triángulo de Oasis"
@@ -113,9 +117,17 @@ msgstr "Hai algo místico, como unha atmosfera gris, nestes tres oasis, que ning
 msgid "The big lake"
 msgstr "O Gran Lago"
 
+#: ../../maps/The big lake.wmf/elemental:11
+msgid "This island once came out of the deepest grounds of the sea. In those days, fire rose out of the salty seawater and brought ash, stones and earth to daylight. And the fire came nearer and nearer to the sun, while the mountain grew and grew. Until one day, when the whole firemountain exploded. Nowadays only this ring is left from that mighty firemountain. Do you think, that it is big enough for more than one tribe?"
+msgstr "Nun tempo esta illa sobresaía dende as profundidades do mar. Neses dias, o fogo brotou do salgado mar e cuspiu cinzas, pedras e terra cara ó ceo. E o fogo subiu cada vez máis preto do sol, mentres as montañas crecian e crecian. Ata o dia en que o volcán estoupou. Agora só queda este anel do que unha vez fora unha imponente montaña. ¿Coidas que ha ser grande abondo para máis dunha tribo?"
+
 #: ../../maps/The long way.wmf/elemental:9
 msgid "The long way"
 msgstr "O Longo Camiño"
+
+#: ../../maps/The long way.wmf/elemental:11
+msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
+msgstr "Outra estraña proba dos Deuses. Pra chegar á outra beira, semella que o único camiño é ó través da terra dos teus inimigos."
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
@@ -124,3 +136,4 @@ msgstr "Guerra dos Vales"
 #: ../../maps/War of the Valleys.wmf/elemental:11
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Está escrito que ata a lua e o sol deben atopa-lo seu camiño entre as espirais destes montes. PISTA: Os monolitos indican vetas de mineral. Non mandes xeólogos a outro lugar."
+

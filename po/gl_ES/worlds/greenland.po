@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-26 18:09+0000\n"
-"PO-Revision-Date: 2007-04-21 10:06+0100\n"
+"POT-Creation-Date: 2007-06-13 18:25+0000\n"
+"PO-Revision-Date: 2007-06-13 20:26+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,10 @@ msgstr "Cervo"
 #: ../../../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Parrulo"
+
+#: ../../../worlds/greenland/bobs/fallentree/conf:2
+msgid "Dead tree"
+msgstr "Árbore morta"
 
 #: ../../../worlds/greenland/bobs/fox/conf:1
 msgid "Fox"
@@ -117,6 +121,10 @@ msgstr "Pedras"
 msgid "Tree"
 msgstr "Árbore"
 
+#: ../../../worlds/greenland/bobs/wolf/conf:1
+msgid "Wolf"
+msgstr "Lobo"
+
 #: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
 msgstr "O Equipo de Desenvolvemento de Widelands"
@@ -152,3 +160,4 @@ msgstr "Auga"
 #: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Peixe"
+

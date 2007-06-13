@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-26 18:09+0000\n"
-"PO-Revision-Date: 2007-04-21 10:06+0100\n"
+"POT-Creation-Date: 2007-06-13 18:25+0000\n"
+"PO-Revision-Date: 2007-06-13 20:25+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -50,8 +50,8 @@ msgid "Duck"
 msgstr "Parrulo"
 
 #: ../../../worlds/desert/bobs/fox/conf:1
-msgid "Desert Fox"
-msgstr "Raposo de deserto"
+msgid "Fox"
+msgstr "Raposo"
 
 #: ../../../worlds/desert/bobs/grass1/conf:1
 #: ../../../worlds/desert/bobs/grass2/conf:1
@@ -163,3 +163,7 @@ msgstr "Auga"
 #: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "Peixe"
+
+#~ msgid "Desert Fox"
+#~ msgstr "Raposo de deserto"
+
