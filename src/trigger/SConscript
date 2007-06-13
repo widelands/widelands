@@ -1,0 +1,23 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+srcenv.Append(INDENTLIST=[
+	'trigger/trigger_building.cc',
+	'trigger/trigger_building.h',
+	'trigger/trigger.cc',
+	'trigger/trigger_conditional.cc',
+	'trigger/trigger_conditional.h',
+	'trigger/trigger_factory.cc',
+	'trigger/trigger_factory.h',
+	'trigger/trigger.h',
+	'trigger/trigger_null.cc',
+	'trigger/trigger_null.h',
+	'trigger/trigger_referencer.cc',
+	'trigger/trigger_referencer.h',
+	'trigger/trigger_time.cc',
+	'trigger/trigger_time.h',
+	])
+
+lib=srcenv.StaticLibrary(target='trigger', source=SRC)
+
