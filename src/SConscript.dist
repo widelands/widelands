@@ -14,4 +14,5 @@ SConscript('ui/ui_fs_menus/SConscript.dist')
 SConscript('filesystem/SConscript.dist')
 SConscript('sound/SConscript.dist')
 SConscript('trigger/SConscript.dist')
+SConscript('events/SConscript.dist')
 
