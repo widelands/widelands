@@ -371,6 +371,7 @@ distcleanactions=[
 	Delete('locale/ru_RU'),
 	Delete('locale/es_ES'),
 	Delete('locale/fr_FR'),
+	Delete('po/pot'),
 ]
 
 distclean=PhonyTarget("distclean", distcleanactions)
