@@ -167,12 +167,10 @@ void Carrier::transport_update(Game* g, State* state)
 		if (next && next != flag && next->get_base_flag() == flag)
 			enter_building(g, state);
 
-		else if (!flag->has_capacity())
-			// If the flag is overloaded we are allowed to drop items as
-			// long as we can pick another up. Otherwise we have to wait.
-			swap_or_wait(g, state);
-
-		else if (!start_task_walktoflag(g, state->ivar1 ^ 1))
+		// If the flag is overloaded we are allowed to drop items as
+		// long as we can pick another up. Otherwise we have to wait.
+		else if ((flag->has_capacity() || !swap_or_wait(g, state))
+				 && !start_task_walktoflag(g, state->ivar1 ^ 1))
 			// Drop the item, possible exchanging it with another one
 			drop_item(g, state);
 	}
@@ -274,12 +272,16 @@ void Carrier::drop_item(Game* g, State* s)
 		other = flag->fetch_pending_item(g,
 				road->get_flag((Road::FlagId)s->ivar1));
 
-		if (!other && !flag->has_capacity())
+		if (!other && !flag->has_capacity()) {
 			molog("[Carrier]: strange: acked ware from busy flag no longer present.\n");
 
-		else
-			s->ivar1 = m_acked_ware;
+			m_acked_ware = -1;
+			set_animation(g, descr().get_animation("idle"));
+			schedule_act(g, 20);
+			return;
+		}
 
+		s->ivar1 = m_acked_ware;
 		m_acked_ware = -1;
 	}
 
@@ -330,9 +332,11 @@ void Carrier::enter_building(Game* g, State* s)
  *
  * \param g Game the carrier lives on.
  * \param s Flags sent to the task.
+ *
+ * \return true if the carrier must wait before delivering his wares.
  */
 /// \todo Upgrade this function to truly support many-wares-at-a-time
-void Carrier::swap_or_wait(Game *g, State* s)
+bool Carrier::swap_or_wait(Game *g, State* s)
 {
 	// Road that employs us
 	Road* road = (Road*)get_location(g);
@@ -345,17 +349,20 @@ void Carrier::swap_or_wait(Game *g, State* s)
 	if (m_acked_ware == (s->ivar1 ^ 1)) {
 		// All is well, we already acked an item that we can pick up
 		// from this flag
+		return false;
 	} else if (flag->has_pending_item(g, otherflag)) {
 		if (!flag->ack_pending_item(g, otherflag))
 			throw wexception("MO(%u): transport: overload exchange: flag %u is fucked up",
 						get_serial(), flag->get_serial());
 
 		m_acked_ware = s->ivar1 ^ 1;
-	} else if (!start_task_walktoflag(g, s->ivar1 ^ 1, true))
+		return false;
+	} else if (!start_task_walktoflag(g, s->ivar1 ^ 1, true)) {
 		// Wait one field away
 		start_task_waitforcapacity(g, flag);
+	}
 
-	return;
+	return true;
 }
 
 
