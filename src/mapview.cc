@@ -93,14 +93,10 @@ void Map_View::draw(RenderTarget* dst)
 		 dynamic_cast<const Interactive_Player * const>(&intbase()))
 		dst->rendermap
 		(egbase,
-		 &interactive_player->player(),
+		 interactive_player->player(),
 		 m_viewpoint,
 		 m_complete_redraw_needed);
-	else dst->rendermap
-		(egbase,
-		 0,
-		 m_viewpoint,
-		 m_complete_redraw_needed);
+	else dst->rendermap(egbase, m_viewpoint, m_complete_redraw_needed);
 
    m_complete_redraw_needed = false;
 }

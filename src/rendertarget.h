@@ -67,13 +67,43 @@ public:
 	void blitrect(Point dst, const uint picture, Rect src);
 	void tile(Rect r, const uint picture, Point ofs);
 
-	void rendermap (const Editor_Game_Base & egbase,
-			const Player * const player, //  Will be 0 when called from the editor.
-			Point viewofs, const bool draw_all);
+	/**
+	 * Renders the map from a player's point of view into the current drawing
+	 * window.
+	 *
+	 * Will call the function below when player.see_all().
+	 *
+	 * viewofs is the offset of the upper left corner of the window into the map,
+	 * in pixels.
+	 *
+	 * draw_all is used to check if the whole ground texture tiles have to be
+	 * redrawn or only the aniamted ones. If no animation took place, the ground
+	 * is not redrawn at all.
+	 */
+	void rendermap
+		(const Editor_Game_Base & egbase,
+		 const Player           & player,
+		 Point                    viewofs,
+		 const bool               draw_all);
 
-	void renderminimap(const Editor_Game_Base  & egbase,
-			   const Player * const player, const Point viewpoint,
-			   const uint flags);
+	/**
+	 * Same as above but not from a player's point of view. Used in game when
+	 * rendering for a player that sees all and the editor.
+	 */
+	void rendermap
+		(const Editor_Game_Base & egbase,
+		 Point                    viewofs,
+		 const bool               draw_all);
+
+	/**
+	 * Render the minimap. If player is not 0, it renders from that player's
+	 * point of view.
+	 */
+	void renderminimap
+		(const Editor_Game_Base & egbase,
+		 const Player * const     player,
+		 const Point              viewpoint,
+		 const uint               flags);
 
 	void drawanim(Point dst, const uint animation, const uint time,
 		      const Player * const player=0);

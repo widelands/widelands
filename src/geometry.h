@@ -209,8 +209,8 @@ struct FCoords : public Coords {
 	{}
 
 	/**
-	 * Used in RenderTargetImpl::rendermap where this is first called, then
-	 * the coordinates are normalized and after that field is set.
+	 * Used in RenderTarget::rendermap where this is first called, then the
+	 * coordinates are normalized and after that field is set.
 	 */
 	explicit FCoords(const Coords nc) throw () : Coords(nc) {}
 
