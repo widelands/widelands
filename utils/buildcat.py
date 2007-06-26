@@ -73,8 +73,9 @@ RE_ISO639="^[a-z]{2,2}(_[A-Z]{2,2})?$"	# Matches ISO-639 language codes
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
-XGETTEXTOPTS+=" --copyright-holder='Widelands Development Team'"
-XGETTEXTOPTS+=" --msgid-bugs-address='widelands-public@lists.sourceforge.net'"
+# escaped double quotes are necessary for windows, as it ignores single quotes
+XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
+XGETTEXTOPTS+=" --msgid-bugs-address=\"widelands-public@lists.sourceforge.net\""
 
 MSGMERGEOPTS="-q --no-wrap"
 
@@ -141,8 +142,19 @@ def do_compile( potfile, srcfiles ):
 #
 ##############################################################################
 def do_compile_src( potfile, srcfiles ):
-		return os.system("xgettext %s -o %s %s" %  (XGETTEXTOPTS, potfile, 
-					string.join(srcfiles)))
+		# call xgettext and supply source filenames via stdin
+		gettext_input = os.popen("xgettext %s --files-from=- --output=%s" % \
+				(XGETTEXTOPTS, potfile), "w")
+		try:
+			for one_pattern in srcfiles:
+				# 'normpath' is necessary for windows ('/' vs. '\')
+				# 'glob' handles filename wildcards
+				for one_file in glob(os.path.normpath(one_pattern)):
+					gettext_input.write(one_file + "\n")
+			return gettext_input.close()
+		except IOError, err_msg:
+			sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
+			return -1
 
 
 ##############################################################################
