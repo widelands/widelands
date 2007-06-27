@@ -84,6 +84,8 @@ class Worker_Descr : public Bob_Descr
 		int get_max_exp() const throw () {return m_max_experience;}
 		int get_min_exp() const throw () {return m_min_experience;}
 		const char * get_becomes() const throw () {return m_becomes.c_str();}
+		int get_becomes_index() const throw ();
+		bool can_act_as(int ware) const;
 
 		Worker *create(Editor_Game_Base *g, Player *owner,
 		               PlayerImmovable *location, Coords coords);
@@ -107,6 +109,7 @@ class Worker_Descr : public Bob_Descr
 		int           m_max_experience;
 		int           m_min_experience;
 		std::string   m_becomes;        ///< Workername this worker evolves to, if any
+		mutable int   m_becomes_index;  ///< index in tribe array if any (cached)
 		ProgramMap    m_programs;
 };
 

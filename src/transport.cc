@@ -2600,7 +2600,7 @@ This function does not take ownership of route, i.e. the caller is responsible
 for its deletion.
 ===============
 */
-void Request::start_transfer(Game* g, Supply* supp)
+void Request::start_transfer(Game* g, Supply* supp, int ware)
 {
 	assert(is_open());
 	Transfer* t = 0;
@@ -2613,7 +2613,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// worker starts walking
 			log("Request: start soldier transfer for %i\n", get_index());
 
-			Soldier* s = supp->launch_soldier(g, get_index(), get_requeriments());
+			Soldier* s = supp->launch_soldier(g, ware, get_requeriments());
 			t = new Transfer(g, this, s);
 		}
 		else if (get_type()==WORKER)
@@ -2623,7 +2623,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// worker starts walking
 			log("Request: start worker transfer for %i\n", get_index());
 
-			Worker* w = supp->launch_worker(g, get_index());
+			Worker* w = supp->launch_worker(g, ware);
 
 			t = new Transfer(g, this, w);
 		}
@@ -2632,7 +2632,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// Begin the transfer of an item. The item itself is passive.
 			// launch_item() ensures the WareInstance is transported out of the warehouse
 			// Once it's on the flag, the flag code will decide what to do with it.
-			WareInstance* item = supp->launch_item(g, get_index());
+			WareInstance* item = supp->launch_item(g, ware);
 
 			t = new Transfer(g, this, item);
 		}
@@ -4010,6 +4010,24 @@ void Economy::start_request_timer(int delta)
 	}
 }
 
+/*
+ ===============
+ Economy::get_ware_substitute
+ 
+ Find the substitute supply if available - a more experienced worker,
+ more advanced ware, etc
+ ===============
+ */
+int Economy::get_ware_substitute(Request* req, int ware)
+{
+	if (req->get_type() == Request::WORKER) {
+		const Tribe_Descr& tribe = req->get_target()->get_owner()->tribe();
+		const Worker_Descr* workerdescr = tribe.get_worker_descr(ware);
+		return workerdescr->get_becomes_index();
+	}
+
+	return -1;
+}
 
 /*
 ===============
@@ -4019,9 +4037,10 @@ Find the supply that is best suited to fulfill the given request.
 Returns 0 if no supply is found.
 ===============
 */
-Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, std::vector<SupplyList>* use_supply)
+Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost, std::vector<SupplyList>* use_supply)
 {
 	assert(req->is_open());
+	assert(NULL != pware && NULL != pcost);
 
 	Route buf_route0, buf_route1;
 	Supply *best_supply = 0;
@@ -4030,11 +4049,20 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 	Flag * const target_flag = req->get_target_flag();
 
 	// Look for matches in all possible supplies in this economy
-	if (ware >= (int)use_supply->size())
+	if (*pware >= (int)use_supply->size())
 		return false; // tough luck, we have definitely no supplies for this ware
 
-	for(int i = 0; i < ((*use_supply)[ware]).get_nrsupplies(); i++) {
-		Supply* supp = ((*use_supply)[ware]).get_supply(i);
+	// if there are no resources of requested ware, try a substitute
+	// (for example, master fisher can work as an ordinary fisher)
+	int substitute = *pware;
+	while (substitute >= 0 and 0 == (*use_supply)[substitute].get_nrsupplies()) {
+		substitute = get_ware_substitute(req, substitute);
+	}
+	if (substitute >= 0)
+		*pware = substitute;
+
+	for(int i = 0; i < (*use_supply)[*pware].get_nrsupplies(); i++) {
+		Supply* supp = (*use_supply)[*pware].get_supply(i);
 		Route* route;
 
 		// idle requests only get active supplies
@@ -4044,9 +4072,9 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 		// Check requeriments
 		if (req->get_type() == Request::SOLDIER)
 			if (req->has_requeriments())
-				if (supp->get_passing_requeriments (g, ware,  req->get_requeriments()) < 1)
+				if (supp->get_passing_requeriments (g, *pware,  req->get_requeriments()) < 1)
 				{
-					log ("No pasado %d\n", supp->get_passing_requeriments (g, ware,  req->get_requeriments()));
+					log ("No pasado %d\n", supp->get_passing_requeriments (g, *pware,  req->get_requeriments()));
 					continue;
 				}
 				else
@@ -4119,10 +4147,11 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		int cost; // estimated time in milliseconds to fulfill Request
 		int idletime;
 
+		int ware_index = req->get_index();
       if(req->get_type()==Request::WARE)
-         supp = find_best_supply(g, req, req->get_index(), &cost, &m_ware_supplies);
+         supp = find_best_supply(g, req, &ware_index, &cost, &m_ware_supplies);
       else
-         supp = find_best_supply(g, req, req->get_index(), &cost, &m_worker_supplies);
+         supp = find_best_supply(g, req, &ware_index, &cost, &m_worker_supplies);
 
 		if (!supp)
 			continue;
@@ -4184,7 +4213,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		case Request::SOLDIER: rsp.is_soldier = true; break;
 		}
 
-		rsp.ware = req->get_index();
+		rsp.ware = ware_index;
 		rsp.request = req;
 		rsp.supply = supp;
 		rsp.priority = idletime;
@@ -4309,7 +4338,7 @@ void Economy::balance_requestsupply()
 			 rsp.ware,
 			 rsp.priority);
 
-		rsp.request->start_transfer(game, rsp.supply);
+		rsp.request->start_transfer(game, rsp.supply, rsp.ware);
 
 		// for multiple wares
 		if (rsp.request && have_request(rsp.request)) {

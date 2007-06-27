@@ -501,7 +501,7 @@ struct Request : public Trackable {
 	void set_required_time(int time);
 	void set_required_interval(int interval);
 
-	void start_transfer(Game *g, Supply* supp);
+	void start_transfer(Game *g, Supply* supp, int ware);
 
 
    // For savegames
@@ -675,7 +675,8 @@ private:
 
 	void start_request_timer(int delta = 200);
 
-	Supply* find_best_supply(Game* g, Request* req, int ware, int* pcost, std::vector<SupplyList>*);
+	Supply* find_best_supply(Game* g, Request* req, int* ware, int* pcost, std::vector<SupplyList>*);
+	int  get_ware_substitute(Request* req, int ware);
 	void process_requests(Game* g, RSPairStruct* s);
 	void create_requested_workers(Game* g);
 

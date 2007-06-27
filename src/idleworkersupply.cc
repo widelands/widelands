@@ -94,7 +94,7 @@ WareInstance * IdleWorkerSupply::launch_item(Game *, int)
  */
 Worker* IdleWorkerSupply::launch_worker(Game *, int ware)
 {
-	assert(ware == m_worker->get_owner()->tribe().get_worker_index(m_worker->name().c_str()));
+	assert(m_worker->descr().can_act_as(ware));
 
 	return m_worker;
 }

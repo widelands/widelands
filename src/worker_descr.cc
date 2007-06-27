@@ -24,6 +24,7 @@
 #include "profile.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
+#include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
 #include "worker_descr.h"
@@ -33,7 +34,8 @@ Worker_Descr::Worker_Descr(const Tribe_Descr & tribe_descr,
                             const std::string & worker_name):
                             Bob_Descr        (&tribe_descr, worker_name),
                             m_menu_pic_fname (0),
-                            m_menu_pic(0)
+                            m_menu_pic(0),
+							m_becomes_index(-2)
 {
 	add_attribute(Map_Object::WORKER);
 }
@@ -256,4 +258,36 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 	}
 
 	return descr;
+}
+
+/**
+* index of get_becomes() in tribe array or -1
+ */
+int Worker_Descr::get_becomes_index() const throw() {
+	if (m_becomes_index >= -1) // already calculated
+		return m_becomes_index;
+	
+	const char * becomes = get_becomes();
+	if (NULL != becomes && 0 != becomes[0])
+		m_becomes_index = tribe().get_safe_worker_index(becomes);
+	else
+		m_becomes_index = -1;
+
+	return m_becomes_index;
+}
+
+/**
+* check if worker can be substitute for a requested worker type
+ */
+bool Worker_Descr::can_act_as(int ware) const {
+	if (ware == tribe().get_worker_index(name().c_str()))
+		return true;
+	
+	// if requested worker type can be promoted, compare with that type
+	const Worker_Descr *descr = tribe().get_worker_descr(ware);
+	const int becomes = descr->get_becomes_index();
+	if (becomes >= 0)
+		return can_act_as(becomes);
+
+	return false;
 }
