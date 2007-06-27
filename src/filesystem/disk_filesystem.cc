@@ -404,3 +404,12 @@ void RealFSImpl::Write(const std::string fname, const void * const data,
 	if (c != 1)
 		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 }
+
+// rename a file or directory
+void RealFSImpl::Rename
+(const std::string & old_name, const std::string & new_name)
+{
+	const std::string fullname1 = FS_CanonicalizeName(old_name);
+	const std::string fullname2 = FS_CanonicalizeName(new_name);
+	rename(fullname1.c_str(), fullname2.c_str());
+}

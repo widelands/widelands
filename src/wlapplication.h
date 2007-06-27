@@ -211,6 +211,8 @@ struct WLApplication {
 
 	static void show_usage();
 
+	void emergency_save(const std::string & message);
+
 protected:
 	WLApplication(const int argc, const char **argv);
 

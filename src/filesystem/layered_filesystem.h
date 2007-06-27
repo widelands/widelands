@@ -65,6 +65,7 @@ struct LayeredFileSystem : public FileSystem {
 	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
 	                                        const Type);
 	virtual void Unlink(const std::string file);
+	virtual void Rename(const std::string&, const std::string&);
 
 	virtual void listSubdirs() const;
 

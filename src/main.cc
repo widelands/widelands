@@ -61,11 +61,11 @@ extern "C"
 		"The exception said: "<<e.what()<<endl<<endl<<
 		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
+		g_app->emergency_save(e.what());
 			delete g_app;
 
 		return 1;
 	}
-#if 0
 	catch(std::exception &e) {
 		cerr<<endl<<
 		"Caught exception (of type '"<<typeid(e).name()<<
@@ -73,6 +73,7 @@ extern "C"
 		"The exception said: "<<e.what()<<endl<<endl<<
 		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
+		g_app->emergency_save(e.what());
 			delete g_app;
 
 		return 1;
@@ -82,9 +83,9 @@ extern "C"
 		"Caught unknown exception in outermost handler!"<<endl<<endl<<
 		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
+		g_app->emergency_save("Unhandled exception");
 			delete g_app;
 
 		return 1;
 	}
-#endif
 }

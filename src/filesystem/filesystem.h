@@ -61,6 +61,7 @@ struct FileSystem {
 	virtual FileSystem* CreateSubFileSystem( const std::string dirname,
 	      const Type ) = 0;
 	virtual void Unlink( const std::string ) = 0;
+	virtual void Rename(const std::string&, const std::string&) = 0;
 
 	static FileSystem *Create(const std::string root)
 	throw(FileType_error, FileNotFound_error, FileAccessDenied_error);

@@ -48,6 +48,7 @@ struct ZipFilesystem : public FileSystem {
    virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
 														  const Type );
    virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
+   virtual void Rename(const std::string&, const std::string&);
 
 public:
 	static FileSystem *CreateFromDirectory(const std::string directory);

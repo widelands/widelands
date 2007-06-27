@@ -397,3 +397,9 @@ void ZipFilesystem::m_OpenUnzip( void ) {
 
    m_state = STATE_UNZIPPPING;
 }
+
+void ZipFilesystem::Rename
+(const std::string & old_name, const std::string & new_name)
+{
+	assert (false and "rename inside zip FS is not implemented yet");
+}

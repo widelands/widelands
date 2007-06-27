@@ -1296,3 +1296,31 @@ void WLApplication::mainmenu_multiplayer()
 	}
 
 }
+
+/**
+* Try to save if possible
+ */
+void WLApplication::emergency_save(const std::string & message) {
+	if (NULL == m_game)
+		return;
+
+	try {
+		time_t t;
+		time(&t);
+		SaveHandler * save_handler = m_game->get_save_handler();
+		char * current_time = ctime(&t);
+		// remove trailing newline character
+		std::string time_string (current_time, strlen(current_time)-1);
+		int pos = std::string::npos;
+		// ':' is not a valid file name character under Windows
+		while ((pos = time_string.find (':')) != std::string::npos) {
+			time_string[pos] = '.';
+		}
+
+		std::string filename = save_handler->create_file_name
+			(save_handler->get_base_dir(), time_string);
+		save_handler->save_game(m_game, filename);
+	} catch (...) {
+		// just ignore
+	}
+}

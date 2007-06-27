@@ -269,3 +269,22 @@ void LayeredFileSystem::Unlink(const std::string file)
 		return;
 	}
 }
+
+void LayeredFileSystem::Rename
+(const std::string & old_name, const std::string & new_name)
+{
+	if( !FileExists( old_name ))
+		return;
+	
+	for(FileSystem_rit it = m_filesystems.rbegin();
+		it != m_filesystems.rend(); it++)
+	{
+		if (!(*it)->IsWritable())
+			continue;
+		if (!(*it)->FileExists(old_name))
+			continue;
+		
+		(*it)->Rename(old_name, new_name);
+		return;
+	}
+}
