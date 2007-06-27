@@ -292,7 +292,10 @@ void Editor_Game_Base::do_conquer_area
 					neutral_when_no_influence ? 0 : player_area.player_number;
 				Military_Influence highest_military_influence = 0;
 				const Player_Number nr_players = map().get_nrplayers();
-				for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
+				for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
+					if (NULL == get_player(plnum))
+						continue; // player might be inactive (unchecked on creation)
+
 					if
 						(const Military_Influence value =
 						 player(plnum).military_influence(index))
@@ -315,6 +318,7 @@ void Editor_Game_Base::do_conquer_area
 							best_player = neutral_when_competing_influence ?
 								0 : player_area.player_number;
 						}
+				}
 			}
 			if (best_player != player_area.player_number) {
 				player_field_notification (mr.location(), LOSE);
