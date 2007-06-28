@@ -4,15 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2248\n"
+"Project-Id-Version: Widelands svn2335\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-04-29 21:49+0000\n"
-"PO-Revision-Date: 2007-04-23 20:45+0200\n"
+"POT-Creation-Date: 2007-06-28 20:03+0000\n"
+"PO-Revision-Date: 2007-06-28 22:30+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../../../worlds/desert/bobs/bunny/conf:1
 msgid "Bunny"
@@ -47,8 +48,8 @@ msgid "Duck"
 msgstr "Ente"
 
 #: ../../../worlds/desert/bobs/fox/conf:1
-msgid "Desert Fox"
-msgstr "Wüstenfuchs"
+msgid "Fox"
+msgstr "Fuchs"
 
 #: ../../../worlds/desert/bobs/grass1/conf:1
 #: ../../../worlds/desert/bobs/grass2/conf:1
@@ -160,3 +161,4 @@ msgstr "Wasser"
 #: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "Fisch"
+
