@@ -10,35 +10,35 @@ background-color=dfd1ad
 text-color=21211b
 
 [Tip 1]
-text=_Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop.
+text=_Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop.
 sec=7
 
 [Tip 2]
-text=_Watch the fishers hut - after fish resource is exhausted in working area, production will stop.
+text=_Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop.
 sec=4
 
 [Tip 3]
-text=_Building process will start only after a road is built to the construction site.
+text=_The building process will only start after a road is built to the construction site.
 sec=4
 
 [Tip 4]
-text=_Be sure to send out a geologist to explore site before building a well or mine.
+text=_Be sure to send a geologist to survey sites before building a well or a mine.
 sec=4
 
 [Tip 5]
-text=_Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc.
+text=_Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc.
 sec=5
 
 [Tip 6]
-text=_Miners will work only if supplied with food.
+text=_Miners will only work if supplied with food.
 sec=3
 
 [Tip 7]
-text=_Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares.
+text=_Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares.
 sec=6
 
 [Tip 8]
-text=_Always build up some forester- or rangerhut, so you will not go out of trunks and wood.
+text=_Always build a forester and a ranger's hut, so you will not run out of trunks and food.
 sec=5
 
 [Tip 9]
