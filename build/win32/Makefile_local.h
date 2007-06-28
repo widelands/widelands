@@ -17,4 +17,4 @@ BUILD=release
 Version="SVNbuild"
 
 #### GGZ-Build ####
-USE_GGZ=NO
+USE_GGZ=YES
