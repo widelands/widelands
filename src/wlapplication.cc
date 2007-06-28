@@ -1321,6 +1321,7 @@ void WLApplication::emergency_save(const std::string & message) {
 			(save_handler->get_base_dir(), time_string);
 		save_handler->save_game(m_game, filename);
 	} catch (...) {
-		// just ignore
+		log ("Emergency save failed");
+		throw;
 	}
 }
