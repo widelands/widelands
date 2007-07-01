@@ -1632,13 +1632,8 @@ void Map::get_neighbour
 	}
 }
 
-/*
-===========
-Map::get_correct_loader()
-
-returns the correct initialized loader for
-the given mapfile
-===========
+/**
+ * Returns the correct initialized loader for the given mapfile
 */
 Map_Loader* Map::get_correct_loader(const char* filename) {
    Map_Loader* retval=0;
@@ -1651,6 +1646,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
 			retval = new Widelands_Map_Loader(*fs, this);
       } catch( ... ) {
          // If this fails, it is an illegal file (maybe old plain binary map format)
+         //TODO: catchall hides real errors! Replace with more specific code
       }
    }
    else if (!strcasecmp(filename+(strlen(filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
@@ -1662,8 +1658,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
    return retval;
 }
 
-/** class StarQueue
- *
+/**
  * Provides the flexible priority queue to maintain the open list.
  */
 class StarQueue {

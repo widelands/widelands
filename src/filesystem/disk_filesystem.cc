@@ -54,8 +54,7 @@ RealFSImpl::~RealFSImpl()
 {
 }
 
-/** RealFSImpl::IsWritable()
- *
+/**
  * Return true if this directory is writable.
  */
 const bool RealFSImpl::IsWritable() const

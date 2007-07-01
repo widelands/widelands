@@ -71,10 +71,9 @@ Widelands_Map_Loader::~Widelands_Map_Loader() {
    delete &m_fs;
 }
 
-/*
- * This function preloads map so that
- * the map class returns valid data for all
- * the get_info() functions (_width, _nrplayers..)
+/**
+ * Preloads a map so that the map class returns valid data for all it's
+ * get_info() functions (_width, _nrplayers..)
  */
 int Widelands_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
@@ -87,6 +86,9 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
    mp.Pre_Read(m_fs, m_map);
 
    if(!World::exists_world(m_map->get_world_name())) {
+      //TODO: throw something more meaningful than wexception and handle the
+      //actual problem instead of ignoring it
+      //(e.g. in fullscreen_menu_mapselect.cc::285)
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
 

@@ -112,7 +112,8 @@ Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
 /**
  * Gets called when the Checkbox changes
  */
-void Fullscreen_Menu_MapSelect::changed(bool t) {
+void Fullscreen_Menu_MapSelect::changed(bool t)
+{
 	m_is_scenario=t;
 }
 
@@ -143,7 +144,8 @@ void Fullscreen_Menu_MapSelect::ok()
 	}
 }
 
-void Fullscreen_Menu_MapSelect::map_selected(uint) {
+void Fullscreen_Menu_MapSelect::map_selected(uint)
+{
 	const char * const name = list.get_selected();
 
 	if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
@@ -201,15 +203,30 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint) {
 }
 
 /**
- * fill the file list
+ * Fill the list with maps that can be opened.
+ *
+ * At first, only the subdirectories are added to the list, then the normal
+ * files follow. This is done to make navigation easier.
+ *
+ * To make things more difficult, we have to support compressed and uncompressed
+ * map files here - the former are files, the latter are directories. Care must
+ * be taken to sort uncompressed maps (which look like and really are
+ * directories) with the files.
+ * \todo This has not been accomplished yet
+ *
+ * The search starts in \ref m_curdir ("..../maps") and there is no possibility
+ * to move further up. If the user moves down into subdirectories, we insert an
+ * entry to move back up.
  */
-void Fullscreen_Menu_MapSelect::fill_list(void) {
+void Fullscreen_Menu_MapSelect::fill_list(void)
+{
 	// Fill it with all files we find in all directorys
 	g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
 
 	int ndirs=0;
-	// First, we add all directorys
-	// We manually add the parent directory
+
+	//If we are not at the top of the map directory hierarchy (we're not talking
+	//about the absolute filesystem top!) we manually add ".."
 	if(m_curdir!=m_basedir) {
 		m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
 		list.add("<parent>",
@@ -218,11 +235,14 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 		++ndirs;
 	}
 
+	//Add subdirectories to the list
+	//TODO: but skip uncompressed maps (which look like directories)
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
 		if(!strcmp(FileSystem::FS_Filename(name),".")) continue;
 		if(!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
 		if(!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
+		if(!strcmp(FileSystem::FS_Filename(name),".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
 		if(!g_fs->IsDirectory(name)) continue;
 		if(Widelands_Map_Loader::is_widelands_map( name )) continue;
 
@@ -232,26 +252,23 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 		++ndirs;
 	}
 
+	//Add map files(compressed maps) and directories(uncompressed)
 	{
-		Map map;
+		Map map; //Map_Loader needs a place to put it's preload data
+
 		for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 			const char *name = pname->c_str();
 
 			Map_Loader * const ml = map.get_correct_loader(name);
 			if(!ml) continue;
 
-			try {
-				ml->preload_map(true);
-				assert(dynamic_cast<const Widelands_Map_Loader * const>(ml)
-				       or
-				       dynamic_cast<const        S2_Map_Loader * const>(ml));
-				list.add(map.get_name(),
-				         name,
-				         g_gr->get_picture(PicMod_Game,
-					 dynamic_cast<const Widelands_Map_Loader * const>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch(_wexception& ) {
-				// we simply skip illegal entries
-			}
+			map.set_filename(name);
+			ml->preload_map(true);
+			list.add(map.get_name(),
+			         name,
+			         g_gr->get_picture(PicMod_Game,
+			         dynamic_cast<const Widelands_Map_Loader * const>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+
 			delete ml;
 		}
 	}

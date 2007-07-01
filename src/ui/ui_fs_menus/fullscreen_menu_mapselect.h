@@ -36,7 +36,8 @@ class Map_Loader;
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
+class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
+{
 	Editor_Game_Base                           * egbase;
 
 	UI::Textarea                                 title;
