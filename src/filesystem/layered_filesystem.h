@@ -46,6 +46,7 @@ struct LayeredFileSystem : public FileSystem {
 	virtual ~LayeredFileSystem();
 
 	virtual void AddFileSystem(FileSystem * const fs);
+	virtual void RemoveFileSystem(FileSystem * const fs);
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
 	                            filenameset_t *results,

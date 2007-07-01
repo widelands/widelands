@@ -66,6 +66,19 @@ void LayeredFileSystem::AddFileSystem(FileSystem * const fs)
 }
 
 /**
+ * Remove a filesystem from the stack
+ * \param fs The filesystem to be removed
+ */
+void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
+{
+	if( m_filesystems.back() == fs ) {
+		m_filesystems.pop_back();
+	} else {
+		throw(std::logic_error("LayeredFileSystem::RemoveFileSystem: interspersed add/remove detected!"));
+	}
+}
+
+/**
  * Find files in all sub-filesystems in the given path, with the given pattern.
  * Store all found files in results.
  *
@@ -80,7 +93,7 @@ const int LayeredFileSystem::FindFiles(std::string path,
                                        uint depth)
 {
 	uint i=0;
-	if(!depth)
+	if(depth==0)
 		depth=10000; // Wow, if you have so many filesystem you're my hero
 
 	for(FileSystem_rit it = m_filesystems.rbegin();
