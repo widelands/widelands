@@ -22,9 +22,14 @@
 #include "filesystem.h"
 
 
-FileRead::FileRead() : data(0) {}
+FileRead::FileRead() : data(0), length(0)
+{}
 
-FileRead::~FileRead() {if (data) Close();}
+FileRead::~FileRead()
+{
+	if (data)
+		Close();
+}
 
 /// \todo error handling
 void FileRead::Open(FileSystem & fs, const char * const filename)
@@ -36,7 +41,13 @@ void FileRead::Open(FileSystem & fs, const char * const filename)
 }
 
 bool FileRead::TryOpen(FileSystem & fs, const char * const filename) {
-	try {Open(fs, filename);} catch (const std::exception & e) {return false;}
+	try {
+		Open(fs, filename);
+	}
+	catch (const std::exception & e) {
+		return false;
+	}
+
 	return true;
 }
 
