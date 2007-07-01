@@ -14,7 +14,7 @@ from Distribute import *
 from detect_revision import *
 
 #Sanity checks
-EnsurePythonVersion(2, 4)
+EnsurePythonVersion(2, 3)
 EnsureSConsVersion(0, 97)
 
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
