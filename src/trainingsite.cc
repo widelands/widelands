@@ -470,22 +470,22 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 		uint count;
 		count = 0;
 		if (((m_soldiers[i]->get_level(atrHP) < (uint) descr().get_min_level(atrHP)) ||
-		     (m_soldiers[i]->get_level(atrHP) >= (uint) descr().get_max_level(atrHP)))
+		     (m_soldiers[i]->get_level(atrHP) > (uint) descr().get_max_level(atrHP)))
 		    && (descr().get_train_hp()))
 			count++;
 
 		if (((m_soldiers[i]->get_level(atrAttack) < (uint) descr().get_min_level(atrAttack)) ||
-		     (m_soldiers[i]->get_level(atrAttack) >= (uint) descr().get_max_level(atrAttack)))
+		     (m_soldiers[i]->get_level(atrAttack) > (uint) descr().get_max_level(atrAttack)))
 		    && (descr().get_train_attack()))
 			count++;
 
 		if (((m_soldiers[i]->get_level(atrDefense) < (uint) descr().get_min_level(atrDefense)) ||
-		     (m_soldiers[i]->get_level(atrDefense) >= (uint) descr().get_max_level(atrDefense)))
+		     (m_soldiers[i]->get_level(atrDefense) > (uint) descr().get_max_level(atrDefense)))
 		    && (descr().get_train_defense()))
 			count++;
 
 		if (((m_soldiers[i]->get_level(atrEvade) < (uint) descr().get_min_level(atrEvade)) ||
-		     (m_soldiers[i]->get_level(atrEvade) >= (uint) descr().get_max_level(atrEvade)))
+		     (m_soldiers[i]->get_level(atrEvade) > (uint) descr().get_max_level(atrEvade)))
 		    && (descr().get_train_evade()))
 			count++;
 
@@ -603,7 +603,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 			else
 				level = min_level;
 
-			if (level >= MAX_level)
+			if (level > MAX_level)
 				level = 5000;
 		}
 
@@ -629,7 +629,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 				break;
 			}
 
-			if ((level >= 0) && (level < MAX_level)) {
+			if ((level >= 0) && (level <= MAX_level)) {
 				sprintf(buf, "%s%d", (m_list_upgrades[i]).c_str(), level);
 				m_list_upgrades[i] = buf;
 				program_start(g, m_list_upgrades[i]);
