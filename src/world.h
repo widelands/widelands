@@ -128,7 +128,7 @@ struct World {
          ERR_WRONGVERSION
       };
 
-      World(const char* name);
+      World(const std::string name);
 
       // Check if a world really exists
       static bool exists_world(std::string);

@@ -48,7 +48,7 @@ void i18n::grab_textdomain(const std::string domain)
 {
 	const char* dom=domain.c_str();
 
-   bind_textdomain_codeset(dom, "UTF-8");
+	bind_textdomain_codeset(dom, "UTF-8");
 	bindtextdomain(dom, LOCALE_PATH);
 	textdomain(dom);
 	m_textdomains.push_back(dom);

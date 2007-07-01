@@ -151,20 +151,13 @@ World
 =============================================================================
 */
 
-World::World(const char* name)
+World::World(const std::string name) : m_basedir("worlds/"+name)
 {
-	char directory[256];
-
 	try
 	{
-      // Grab the localisation text domain
-      sprintf( directory, "worlds/%s", name );
-      i18n::grab_textdomain( directory );
+		i18n::grab_textdomain(m_basedir);
 
-      snprintf(directory, sizeof(directory), "worlds/%s", name);
-		m_basedir = directory;
-
-		parse_root_conf(name);
+		parse_root_conf(name.c_str());
 		parse_resources();
 		parse_terrains();
 		parse_bobs();
@@ -174,7 +167,8 @@ World::World(const char* name)
 	catch(std::exception &e)
 	{
 		// tag with world name
-		throw wexception("Error loading world %s: %s", name, e.what());
+		throw wexception("Error loading world %s: %s",
+		                 name.c_str(), e.what());
 	}
 }
 
