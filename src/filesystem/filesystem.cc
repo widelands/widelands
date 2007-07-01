@@ -62,13 +62,13 @@ FileSystem::FileSystem()
 }
 
 /**
- * Append extension (e.g. ".foo") to the filename if it is'nt already there
+ * Append extension (e.g. ".foo") to the filename if it isn't already there
  * \param filename The filename to possibly be extended
  * \param extension The extension to append, without leading dot (unless you
- * want to consecutive dots, that is)
+ * want two consecutive dots)
  */
 const std::string FileSystem::AutoExtension(const std::string filename,
-													 const std::string extension)
+                                            const std::string extension)
 {
 	const SSS_T suffix_length=extension.size()+1;
 	const SSS_T startpos=filename.size()-suffix_length;
@@ -137,7 +137,7 @@ const char *FileSystem::FS_RelativePath(char *buf, const int buflen, const char 
 
 /**
  * \param path A file or directory name
- * \return True if ref path is absolute
+ * \return True if ref path is absolute, false otherwise
  */
 const bool FileSystem::pathIsAbsolute(const std::string path) const
 {

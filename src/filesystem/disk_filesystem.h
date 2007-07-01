@@ -49,7 +49,7 @@ struct RealFSImpl : public FileSystem {
 	virtual void Unlink(const std::string file);
 	virtual void Rename(const std::string&, const std::string&);
 
-	virtual void listSubdirs() const;
+	virtual const std::string getBasename() {return m_directory;};
 
 private:
 	void m_unlink_directory(const std::string file);

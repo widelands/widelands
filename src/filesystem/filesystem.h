@@ -66,7 +66,9 @@ struct FileSystem {
 	static FileSystem *Create(const std::string root)
 	throw(FileType_error, FileNotFound_error, FileAccessDenied_error);
 
-	virtual void listSubdirs() const = 0;
+	///Retrieve the filesystem root's name == the mountpoint inside a
+	///LayeredFileSystem
+	virtual const std::string getBasename() = 0;
 
 	// basic path/filename manipulation
 	const std::string getWorkingDirectory() const;

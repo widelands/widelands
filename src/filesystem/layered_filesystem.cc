@@ -43,7 +43,7 @@ void LayeredFileSystem::listSubdirs() const
 	std::vector<FileSystem*>::const_iterator i;
 	for(i=m_filesystems.begin();i!=m_filesystems.end();i++)
 	{
-		(*i)->listSubdirs();
+		printf("   %s\n", (*i)->getBasename().c_str());
 	}
 }
 
@@ -275,7 +275,7 @@ void LayeredFileSystem::Rename
 {
 	if( !FileExists( old_name ))
 		return;
-	
+
 	for(FileSystem_rit it = m_filesystems.rbegin();
 		it != m_filesystems.rend(); it++)
 	{
@@ -283,7 +283,7 @@ void LayeredFileSystem::Rename
 			continue;
 		if (!(*it)->FileExists(old_name))
 			continue;
-		
+
 		(*it)->Rename(old_name, new_name);
 		return;
 	}

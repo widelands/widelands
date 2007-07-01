@@ -67,7 +67,8 @@ struct LayeredFileSystem : public FileSystem {
 	virtual void Unlink(const std::string file);
 	virtual void Rename(const std::string&, const std::string&);
 
-	virtual void listSubdirs() const;
+	void listSubdirs() const;
+	virtual const std::string getBasename() {return "";};
 
 private:
 	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;

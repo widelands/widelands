@@ -54,11 +54,6 @@ RealFSImpl::~RealFSImpl()
 {
 }
 
-void RealFSImpl::listSubdirs() const
-{
-	printf("%s\n", m_directory.c_str());
-}
-
 /** RealFSImpl::IsWritable()
  *
  * Return true if this directory is writable.
@@ -78,8 +73,8 @@ const bool RealFSImpl::IsWritable() const
  */
 // note: the Win32 version may be broken, feel free to fix it
 const int RealFSImpl::FindFiles(std::string path,
-										  const std::string pattern,
-										  filenameset_t *results, uint depth)
+                                const std::string pattern,
+                                filenameset_t *results, uint depth)
 #ifdef _WIN32
 {
 	std::string buf;
@@ -225,7 +220,7 @@ void RealFSImpl::Unlink(const std::string file)
 }
 
 /**
- * remove directory or file
+ * Remove a single directory or file
  */
 void RealFSImpl::m_unlink_file(const std::string file)
 {
@@ -243,10 +238,13 @@ void RealFSImpl::m_unlink_file(const std::string file)
 #endif
 }
 
+/**
+ * Recursively remove a directory
+ */
 void RealFSImpl::m_unlink_directory(const std::string file)
 {
-	assert( FileExists( file ));
-	assert( IsDirectory( file ));
+	assert( FileExists( file ));  //TODO: throw an exception instead
+	assert( IsDirectory( file ));  //TODO: throw an exception instead
 
 	filenameset_t files;
 

@@ -27,51 +27,51 @@
 #include <string>
 
 struct ZipFilesystem : public FileSystem {
-   ZipFilesystem(const std::string);
+	ZipFilesystem(const std::string);
 	virtual ~ZipFilesystem();
 
 	virtual const bool IsWritable() const;
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
-										 filenameset_t *results, uint depth=0);
+                                    filenameset_t *results, uint depth=0);
 
-   virtual const bool IsDirectory(std::string path);
+	virtual const bool IsDirectory(std::string path);
 	virtual const bool FileExists(std::string path);
 
 	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void Write(const std::string fname, const void * const data,
-							 const int length);
-   virtual void EnsureDirectoryExists(const std::string dirname);
-   virtual void MakeDirectory(const std::string dirname);
+                           const int length);
+	virtual void EnsureDirectoryExists(const std::string dirname);
+	virtual void MakeDirectory(const std::string dirname);
 
-   virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
-   virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
-														  const Type );
-   virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
-   virtual void Rename(const std::string&, const std::string&);
+	virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
+	virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
+                                                 const Type );
+	virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
+	virtual void Rename(const std::string&, const std::string&);
 
 public:
 	static FileSystem *CreateFromDirectory(const std::string directory);
 
-	void listSubdirs() const {printf("%s\n", m_basename.c_str());}
+	virtual const std::string getBasename() {return m_zipfilename;};
 
 private:
-   void m_OpenUnzip( void );
-   void m_OpenZip( void );
-   void m_Close( void );
+	void m_OpenUnzip( void );
+	void m_OpenZip( void );
+	void m_Close( void );
 
 private:
-   enum State {
-      STATE_IDLE,
-      STATE_ZIPPING,
-      STATE_UNZIPPPING
-   };
+	enum State {
+		STATE_IDLE,
+		STATE_ZIPPING,
+		STATE_UNZIPPPING
+	};
 
-   State       m_state;
-   zipFile     m_zipfile;
-   unzFile     m_unzipfile;
-   std::string m_zipfilename;
-   std::string m_basename;
+	State       m_state;
+	zipFile     m_zipfile;
+	unzFile     m_unzipfile;
+	std::string m_zipfilename;
+	std::string m_basename;
 
 };
 
