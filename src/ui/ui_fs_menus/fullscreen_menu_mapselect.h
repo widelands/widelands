@@ -62,7 +62,7 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 
 	Map_Loader *                               * m_ml;
 	Map*              m_map;
-   bool              m_is_scenario;
+	bool              m_is_scenario;
 
 public:
 	Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader**);
@@ -72,13 +72,13 @@ public:
 
 	void ok();
 	void map_selected  (uint);
-   void changed(bool);
+	void changed(bool);
 	void double_clicked(uint);
-   void fill_list(void);
+	void fill_list(void);
 
-   std::string m_curdir;
-   std::string m_basedir;
-   std::string m_parentdir;
+	std::string m_curdir;
+	std::string m_basedir;
+	std::string m_parentdir;
 };
 
 
