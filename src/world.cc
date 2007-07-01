@@ -347,15 +347,20 @@ void World::parse_bobs()
 	}
 }
 
-/*
- * World::exists_world()
+/**
+ * Check if the world data can actually be read
  */
-bool World::exists_world(std::string worldname) {
-   std::string buf;
-   buf="worlds/" + worldname + "/conf";;
+bool World::exists_world(std::string worldname)
+{
+	FileRead f;
+	FileSystem *fs;
+	bool exists;
 
-   FileRead f;
-	return f.TryOpen(*g_fs, buf.c_str());
+	fs=g_fs->MakeSubFileSystem("worlds/"+worldname);
+	exists=f.TryOpen(*fs, "conf");
+	delete fs;
+
+	return exists;
 }
 
 /*
