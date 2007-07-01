@@ -144,11 +144,16 @@ void Fullscreen_Menu_MapSelect::ok()
 	}
 }
 
+/**
+ * Called when a different entry in the listbox gets selected.
+ * When this happens, the information display at the right needs to be
+ * refreshed.
+ */
 void Fullscreen_Menu_MapSelect::map_selected(uint)
 {
 	const char * const name = list.get_selected();
 
-	if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
+	if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map(name)) {
 		// No directory
 		delete *m_ml;
 		*m_ml = 0;
@@ -218,7 +223,7 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint) {
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  */
-void Fullscreen_Menu_MapSelect::fill_list(void)
+void Fullscreen_Menu_MapSelect::fill_list()
 {
 	// Fill it with all files we find in all directorys
 	g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
