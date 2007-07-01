@@ -157,15 +157,10 @@ World::World(const std::string name) : m_basedir("worlds/"+name)
 	{
 		i18n::grab_textdomain(m_basedir);
 
-		FileSystem *fs=g_fs->MakeSubFileSystem(m_basedir);
-		g_fs->AddFileSystem(fs);
-
 		parse_root_conf(name.c_str());
 		parse_resources();
 		parse_terrains();
 		parse_bobs();
-
-		g_fs->RemoveFileSystem(fs);
 
 		i18n::release_textdomain();
 	}
@@ -213,9 +208,9 @@ void World::load_graphics()
 // down here: Private functions for loading
 //
 
-//
-// read the <world-directory>/conf
-//
+/**
+ * Read the <world-directory>/conf
+ */
 void World::parse_root_conf(const char *name)
 {
 	char fname[256];

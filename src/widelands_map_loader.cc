@@ -60,15 +60,14 @@
 #include "widelands_map_waredata_data_packet.h"
 #include "world.h"
 
-
 Widelands_Map_Loader::Widelands_Map_Loader(FileSystem & fs, Map* map) :
 Map_Loader("", map), m_fs(fs), m_mol(0)
 {}
 
 
 Widelands_Map_Loader::~Widelands_Map_Loader() {
-      delete m_mol;
-   delete &m_fs;
+	delete m_mol;
+	delete &m_fs;
 }
 
 /**
@@ -114,7 +113,7 @@ void Widelands_Map_Loader::load_world() {
  */
 int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
    //This is needed to ensure that world is loaded for multiplayer clients,
-   //hosts do world loading while creating the game and the states 
+   //hosts do world loading while creating the game and the states
    //are not available outside this class to make a conditional load.
    //if You know a better way to fix this, DO IT! -- Alexia Death
    if(get_state() == STATE_PRELOADED){

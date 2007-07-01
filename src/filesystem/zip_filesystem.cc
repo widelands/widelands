@@ -87,13 +87,13 @@ const int ZipFilesystem::FindFiles
    char filename_inzip[256];
    while(1) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
-									 sizeof(filename_inzip),NULL,0,NULL,0);
+                            sizeof(filename_inzip),NULL,0,NULL,0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
       std::string filename = FS_Filename( complete_filename.c_str() );
       std::string filepath = complete_filename.substr( 0,
-																		 complete_filename.size()-
-																				 filename.size());
+                                                       complete_filename.size()-
+                                                       filename.size());
 
       //TODO: sth. strange is going on wrt the leading slash! This is just an ugly
       //workaround and does not solve the real problem (which remains undiscovered)
@@ -116,6 +116,7 @@ const bool ZipFilesystem::FileExists(std::string path)
 {
    try {
       m_OpenUnzip();
+      //TODO: check return code
    } catch( ... ) {
       return false;
    }
@@ -130,7 +131,7 @@ const bool ZipFilesystem::FileExists(std::string path)
 
    while(1) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
-									 sizeof(filename_inzip),NULL,0,NULL,0);
+                            sizeof(filename_inzip),NULL,0,NULL,0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
       if( complete_filename[ complete_filename.size() - 1 ] == '/' )
