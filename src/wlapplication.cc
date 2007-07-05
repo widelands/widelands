@@ -1311,7 +1311,7 @@ void WLApplication::emergency_save(const std::string & message) {
 		char * current_time = ctime(&t);
 		// remove trailing newline character
 		std::string time_string (current_time, strlen(current_time)-1);
-		int pos = std::string::npos;
+		SSS_T pos = std::string::npos;
 		// ':' is not a valid file name character under Windows
 		while ((pos = time_string.find (':')) != std::string::npos) {
 			time_string[pos] = '.';
