@@ -1300,7 +1300,7 @@ void WLApplication::mainmenu_multiplayer()
 /**
 * Try to save if possible
  */
-void WLApplication::emergency_save(const std::string & message) {
+void WLApplication::emergency_save(const std::string &) {
 	if (NULL == m_game)
 		return;
 

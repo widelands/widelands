@@ -42,7 +42,8 @@ class Carrier : public Worker
 		};
 
 
-		Carrier(const Descr & descr): Worker(descr) {m_acked_ware = -1;}
+	Carrier(const Descr & carrier_descr): Worker(carrier_descr), m_acked_ware(-1)
+	{}
 		virtual ~Carrier() {};
 
 		bool notify_ware(Game* g, int flag);
