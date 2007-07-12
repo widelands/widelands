@@ -37,6 +37,10 @@ struct EncodeData;
 class Building;
 class BuildingHints;
 
+#define LOW_PRIORITY             2
+#define DEFAULT_PRIORITY         4
+#define HIGH_PRIORITY            8
+
 /*
  * Common to all buildings!
  */
@@ -188,6 +192,13 @@ public:
 	bool get_stop() const throw () {return m_stop;}
 	virtual void set_stop(bool stop);
 
+	int get_base_priority() const { return m_priority; }
+	int get_priority(int type, int ware_index, bool adjust = true) const;
+	void set_priority(int new_priority);
+	void set_priority(int type, int ware_index, int new_priority);
+
+	void collect_priorities(std::map<int, std::map<int, int> > & p) const;
+
 	const std::vector<char *> & enhances_to() const throw ()
 	{return descr().enhances_to();}
 
@@ -242,6 +253,9 @@ protected:
 
 	//  The player who has defeated this building.
 	Player_Number           m_defeating_player;
+	
+	int m_priority; // base priority
+	std::map<int, int> m_ware_priorities;
 };
 
 #endif

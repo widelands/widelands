@@ -339,7 +339,8 @@ PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
 m_stop            (false),
-m_defeating_player(0)
+m_defeating_player(0),
+m_priority (DEFAULT_PRIORITY)
 {}
 
 Building::~Building()
@@ -741,6 +742,57 @@ void Building::draw_help
 
 void Building::set_stop(bool stop) {
 	m_stop = stop;
+	get_economy()->rebalance_supply();
+}
+
+/**
+* Get priority of a requested ware.
+* Currently always returns base priority - to be extended later
+ */
+int Building::get_priority(int type, int ware_index, bool adjust) const {
+	int priority = m_priority;
+
+	if (type == Request::WARE) {
+		// if priority is defined for specific ware,
+		// combine base priority and ware priority
+		std::map<int, int>::const_iterator it = m_ware_priorities.find(ware_index);
+		if (it != m_ware_priorities.end())
+			priority = adjust
+				? (priority * it->second / DEFAULT_PRIORITY)
+				: it->second;
+	}
+
+	return priority;
+}
+
+/**
+* Collect priorities assigned to wares of this building
+* priorities are identified by ware type and index
+ */
+void Building::collect_priorities(std::map<int, std::map<int, int> > & p) const
+{
+	if (m_ware_priorities.size() == 0)
+		return;
+	std::map<int, int> & ware_priorities = p[Request::WARE];
+	std::map<int, int>::const_iterator it;
+	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
+		if (it->first == DEFAULT_PRIORITY)
+			continue;
+		ware_priorities[it->first] = it->second;
+	}
+}
+
+/**
+* Set base priority for this building (applies for all wares)
+ */
+void Building::set_priority(int new_priority) {
+	m_priority = new_priority;
+}
+
+void Building::set_priority(int type, int ware_index, int new_priority) {
+	if (type == Request::WARE) {
+		m_ware_priorities[ware_index] = new_priority;
+	}
 }
 
 void Building::conquered_by (Player *)

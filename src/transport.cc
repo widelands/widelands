@@ -2284,6 +2284,7 @@ Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbda
 
 	m_count = 1;
 	m_required_time = target->owner().egbase().get_gametime();
+	m_last_request_time = m_required_time;
 	m_required_interval = 0;
 
 	m_callbackfn = cbfn;
@@ -2315,7 +2316,9 @@ Request::~Request()
 }
 
 // Modified to allow Requeriments and SoldierRequests
-#define REQUEST_VERSION 2
+#define REQUEST_VERSION            3
+#define REQUEST_SUPPORTED_VERSION  2
+
 /**
  * Read this request from a file
  *
@@ -2327,13 +2330,17 @@ Request::~Request()
 void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
    uint version=fr->Unsigned16();
 
-   if(version==REQUEST_VERSION) {
+   if (version >= REQUEST_SUPPORTED_VERSION) {
       m_type=static_cast<Type>(fr->Unsigned8());
       m_index=fr->Unsigned32();
       m_idle=fr->Unsigned8();
       m_count=fr->Unsigned32();
       m_required_time=fr->Unsigned32();
       m_required_interval=fr->Unsigned32();
+	  
+	  if (version == REQUEST_VERSION) {
+		  m_last_request_time = fr->Unsigned32();
+	  }
 
       assert(!m_transfers.size());
 
@@ -2401,6 +2408,8 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    // Write required time
    fw->Unsigned32(m_required_time);
    fw->Unsigned32(m_required_interval);
+
+   fw->Unsigned32(m_last_request_time);
 
    // Write number of current transfers
    fw->Unsigned16(m_transfers.size());
@@ -2484,6 +2493,69 @@ int Request::get_required_time()
 {
 	return
 		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
+}
+
+
+#define MAX_IDLE_PRIORITY           100
+#define PRIORITY_MAX_COST         50000
+#define COST_WEIGHT_IN_PRIORITY       1
+#define WAITTIME_WEIGHT_IN_PRIORITY   2
+
+/*
+ ===============
+ Request::get_priority
+ 
+ Return the request priority used to sort requests or -1 to skip request
+ ===============
+ */
+int Request::get_priority (int cost)
+{
+	if (is_idle()) {
+		// idle requests are prioritized only by cost
+		int weighted_cost = cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST;
+		return weighted_cost > MAX_IDLE_PRIORITY
+			? 0
+			: MAX_IDLE_PRIORITY - weighted_cost;
+	}
+
+	int modifier = DEFAULT_PRIORITY;
+	bool is_construction_site = false;
+	const Building * const building =
+		dynamic_cast<const Building * const>(get_target());
+
+	if (0x0 != building) {
+		if (building->get_stop())
+			return -1;
+		
+		modifier = building->get_priority(get_type(), get_index());
+		is_construction_site =
+			Building::CONSTRUCTIONSITE == building->get_type();
+	}
+
+	Editor_Game_Base& g = m_economy->owner().egbase();
+
+	if (cost > PRIORITY_MAX_COST)
+		cost = PRIORITY_MAX_COST;
+
+	int wait_time = is_construction_site
+		? g.get_gametime() - get_required_time()
+		: g.get_gametime() - get_last_request_time();
+	int distance = PRIORITY_MAX_COST - cost;
+
+	// priority is higher if building waits for ware a long time
+	// additional factor - cost to deliver, so nearer building
+	// with same priority will get ware first
+	int priority = (wait_time * WAITTIME_WEIGHT_IN_PRIORITY +
+					distance * COST_WEIGHT_IN_PRIORITY) * modifier
+	               + MAX_IDLE_PRIORITY;
+
+	log("PRIORITY: %d (%s, gt=%d, last=%d, cost=%d, *%d)",
+		priority, 0x0 != building ? building->name().c_str() : "",
+		g.get_gametime(), get_last_request_time(), cost, modifier);
+
+	if (priority <= MAX_IDLE_PRIORITY)
+		return MAX_IDLE_PRIORITY + 1; // make sure idle request are lower
+	return priority;
 }
 
 
@@ -4145,44 +4217,32 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		Request* req = *it;
 		Supply* supp;
 		int cost; // estimated time in milliseconds to fulfill Request
-		int idletime;
 
 		int ware_index = req->get_index();
-      if(req->get_type()==Request::WARE)
-         supp = find_best_supply(g, req, &ware_index, &cost, &m_ware_supplies);
-      else
-         supp = find_best_supply(g, req, &ware_index, &cost, &m_worker_supplies);
+		if(req->get_type()==Request::WARE)
+			supp = find_best_supply(g, req, &ware_index, &cost, &m_ware_supplies);
+		else
+			supp = find_best_supply(g, req, &ware_index, &cost, &m_worker_supplies);
 
 		if (!supp)
 			continue;
 
-		if (req->is_idle()) {
-			idletime = 0;
-		} else {
+		if (!req->is_idle() and not supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
+			int idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
+			// If the building wouldn't have to idle, we wait with the request
+			if (idletime < -200) {
+				if (s->nexttimer < 0 || s->nexttimer > (-idletime))
+					s->nexttimer = -idletime;
 
-			if (not supp->is_active()) {
-				// If the building wouldn't have to idle, we wait with the request
-				if (idletime < -200) {
-					if (s->nexttimer < 0 || s->nexttimer > (-idletime))
-						s->nexttimer = -idletime;
-
-					continue;
-				}
-			} else {
-				// If the Supply is active (i.e. idle ware), we always fulfill
-				// a Request
-				if (idletime < 1)
-					idletime = 1;
+				continue;
 			}
-
-			// TODO: priorities?
-
-			if (idletime <= 0)
-				idletime = 1;
 		}
+
+		int priority = req->get_priority (cost);
+		if (priority < 0)
+			continue;
 
 		// If its a soldier, then mark to prevent re-request this soldier.
 		// If we don't do this, then the same soldier can be re-requested, this cause a
@@ -4216,7 +4276,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		rsp.ware = ware_index;
 		rsp.request = req;
 		rsp.supply = supp;
-		rsp.priority = idletime;
+		rsp.priority = priority;
 
 		log
 			("REQ: %u (%i) <- %u (ware %i), priority %i\n",
@@ -4339,6 +4399,7 @@ void Economy::balance_requestsupply()
 			 rsp.priority);
 
 		rsp.request->start_transfer(game, rsp.supply, rsp.ware);
+		rsp.request->set_last_request_time(owner().egbase().get_gametime());
 
 		// for multiple wares
 		if (rsp.request && have_request(rsp.request)) {

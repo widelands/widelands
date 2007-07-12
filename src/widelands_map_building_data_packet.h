@@ -22,6 +22,10 @@
 
 #include "widelands_map_data_packet.h"
 
+class Building;
+class FileRead;
+class FileWrite;
+
 /*
  * This packet cares for the existance of buildings
  * on the map, the data is parsed somewhere else
@@ -40,6 +44,10 @@ struct Widelands_Map_Building_Data_Packet : public Widelands_Map_Data_Packet {
 		 Editor_Game_Base*,
 		 Widelands_Map_Map_Object_Saver * const  = 0)
 		throw (_wexception);
+	
+protected:
+	void read_priorities (Building & building, FileRead & fr);
+	void write_priorities (Building & building, FileWrite & fw);
 };
 
 

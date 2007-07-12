@@ -41,12 +41,12 @@ void SaveHandler::think(Game *g, int realtime) {
 	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 
 	// save the game
-	std::string complete_filename = create_file_name (get_base_dir(), "WL_autosave");
+	std::string complete_filename = create_file_name (get_base_dir(), "wl_autosave");
 	std::string backup_filename;
 
 	// always overwrite a file
 	if(g_fs->FileExists(complete_filename)) {
-		backup_filename = create_file_name (get_base_dir(), "WL_autosave2");
+		backup_filename = create_file_name (get_base_dir(), "wl_autosave2");
 		if(g_fs->FileExists(backup_filename)) {
 			g_fs->Unlink(backup_filename);
 		}

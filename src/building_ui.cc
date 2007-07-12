@@ -57,6 +57,13 @@ static const char* pic_queue_background = "pics/queue_background.png";
 
 static const char* pic_list_worker = "pics/menu_list_workers.png";
 
+static const char* pic_priority_low = "pics/low_priority_button.png";
+static const char* pic_priority_normal = "pics/normal_priority_button.png";
+static const char* pic_priority_high = "pics/high_priority_button.png";
+static const char* pic_priority_low_on = "pics/low_priority_on.png";
+static const char* pic_priority_normal_on = "pics/normal_priority_on.png";
+static const char* pic_priority_high_on = "pics/high_priority_on.png";
+
 static const char* pic_tab_military = "pics/menu_tab_military.png";
 static const char* pic_tab_training = "pics/menu_tab_training.png";
 static const char* pic_up_train = "pics/menu_up_train.png";
@@ -1255,6 +1262,32 @@ void ProductionSite_Window_ListWorkerWindow::update(void)
 	}
 }
 
+struct PriorityButtonInfo {
+	UI::Basic_Button* button;
+	int picture_enabled;
+	int picture_disabled;
+	
+	PriorityButtonInfo() {}
+
+	PriorityButtonInfo
+		(UI::Basic_Button* btn, int pic_enabled, int pic_disabled)
+		: button(btn), picture_enabled(pic_enabled),
+		  picture_disabled(pic_disabled)
+	{}
+};
+
+struct PriorityButtonHelper : std::map<int, PriorityButtonInfo> {
+	PriorityButtonHelper(ProductionSite * ps, int ware_type, int ware_index);
+	
+	void button_clicked (int priority);
+	void update_buttons ();
+
+private:
+	ProductionSite * m_ps;
+	int m_ware_type;
+	int m_ware_index;
+};
+
 class ProductionSite_Window : public Building_Window {
 public:
 	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry);
@@ -1267,12 +1300,45 @@ public:
 private:
    Interactive_Player* m_parent;
    UI::Window** m_reg;
+	std::list<PriorityButtonHelper> m_priority_helpers;
 public:
    void list_worker_clicked(void);
 protected:
-   UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
+	UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
+
+	void create_ware_queue_panel(UI::Box* box, ProductionSite * ps, WaresQueue * const wq);
+
+	UI::Basic_Button* create_priority_button
+		(UI::Box* box, PriorityButtonHelper & helper,
+		 int priority, int x, int y, int w, int h,
+		 const char * picture1, const char * picture2,
+		 const std::string & tooltip);		
 };
 
+
+PriorityButtonHelper::PriorityButtonHelper
+(ProductionSite * ps, int ware_type, int ware_index)
+	: m_ps(ps),
+	  m_ware_type(ware_type),
+	  m_ware_index(ware_index)
+{}
+
+void PriorityButtonHelper::button_clicked (int priority) {
+	m_ps->set_priority (m_ware_type, m_ware_index, priority);
+	update_buttons();
+}
+
+void PriorityButtonHelper::update_buttons () {
+	const int priority = m_ps->get_priority(m_ware_type, m_ware_index, false);
+	for (iterator it = begin(); it != end(); ++it) {
+		bool enable = it->first != priority;
+		it->second.button->set_enabled(enable);
+		it->second.button->set_pic
+			(enable
+				? it->second.picture_enabled
+				: it->second.picture_disabled);
+	}
+}
 
 /*
 ===============
@@ -1296,28 +1362,96 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
    }
 }
 
+UI::Basic_Button * ProductionSite_Window::create_priority_button
+(UI::Box* box, PriorityButtonHelper & helper,
+ int priority, int x, int y, int w, int h,
+ const char * picture1, const char * picture2,
+ const std::string & tooltip)
+{
+	int pic_enabled = g_gr->get_resized_picture (
+		 g_gr->get_picture(PicMod_Game,  picture1),
+		 w, h, Graphic::ResizeMode_Clip);
+	int pic_disabled = g_gr->get_resized_picture (
+		 g_gr->get_picture(PicMod_Game,  picture2),
+		 w, h, Graphic::ResizeMode_Clip);
+	UI::IDButton<PriorityButtonHelper, int> * button =
+	 new UI::IDButton<PriorityButtonHelper, int>
+	  (box,
+	   x, 0, w, h,
+	   4,
+	   pic_enabled,
+	   &PriorityButtonHelper::button_clicked, &helper, priority,
+	   tooltip, true, true);
+	helper[priority] = PriorityButtonInfo(button, pic_enabled, pic_disabled);
+	return button;
+}
+
+void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite * ps, WaresQueue * const wq)
+{
+	const int priority_buttons_width = WaresQueueDisplay::Height / 3;
+	UI::Box* hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
+	WaresQueueDisplay* wqd = new WaresQueueDisplay(hbox, 0, 0,
+												   get_w() - priority_buttons_width,
+												   wq, m_parent->get_game());
+	
+	hbox->add(wqd, UI::Box::AlignTop);
+	
+	if (wq->get_ware() >= 0) {
+		m_priority_helpers.push_back (PriorityButtonHelper(ps, Request::WARE, wq->get_ware()));
+		PriorityButtonHelper & helper = m_priority_helpers.back();
+		
+		UI::Box* vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
+		// Add priority buttons
+		vbox->add
+			(create_priority_button (vbox, helper, HIGH_PRIORITY, 0, 0,
+									 priority_buttons_width,
+									 priority_buttons_width,
+									 pic_priority_high,
+									 pic_priority_high_on,
+									 _("Highest priority")),
+			 UI::Box::AlignTop);
+		vbox->add
+			(create_priority_button (vbox, helper, DEFAULT_PRIORITY, 0, 0,
+									 priority_buttons_width,
+									 priority_buttons_width,
+									 pic_priority_normal,
+									 pic_priority_normal_on,
+									 _("Normal priority")),
+			 UI::Box::AlignTop);
+		vbox->add
+			(create_priority_button (vbox, helper, LOW_PRIORITY, 0, 0,
+									 priority_buttons_width,
+									 priority_buttons_width,
+									 pic_priority_low,
+									 pic_priority_low_on,
+									 _("Lowest priority")),
+			 UI::Box::AlignTop);
+		
+		hbox->add(vbox, UI::Box::AlignCenter);
+		helper.update_buttons();
+	}
+
+	box->add(hbox, UI::Box::AlignLeft);
+}
+
 UI::Box*
 ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite* ps)
 {
-   UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical);
+	UI::Box* box = new UI::Box (parent, 0, 0, UI::Box::Vertical);
 
-   // Add the wares queue
-   std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
-   for(uint i = 0; i < warequeues->size(); i++)
-   {
-      WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
-            (*warequeues)[i], m_parent->get_game());
+	// Add the wares queue
+	std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
+	for(uint i = 0; i < warequeues->size(); i++) {
+		create_ware_queue_panel (box, ps, (*warequeues)[i]);
+	}
 
-      box->add(wqd, UI::Box::AlignLeft);
-   }
+	box->add_space(8);
 
-   box->add_space(8);
+	// Add caps buttons
+	box->add(create_capsbuttons(box), UI::Box::AlignLeft);
 
-      // Add caps buttons
-   box->add(create_capsbuttons(box), UI::Box::AlignCenter);
-
-      // Add list worker button
-   box->add
+	// Add list worker button
+	box->add
 		(new UI::Button<ProductionSite_Window>
 		 (box,
 		  0, 0, 32, 32,
@@ -1327,7 +1461,7 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 		  _("Show worker listing")),
 		 UI::Box::AlignLeft);
 
-   return box;
+	return box;
 }
 
 /*

@@ -44,3 +44,7 @@ sec=5
 [Tip 9]
 text=_Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums.
 sec=6
+
+[Tip 10]
+text=_Use priority buttons in building window to adjust delivery of a specific ware.
+sec=5

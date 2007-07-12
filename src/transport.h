@@ -492,6 +492,8 @@ struct Request : public Trackable {
 	{return m_idle || m_count > static_cast<const int>(m_transfers.size());}
 	Economy* get_economy() const { return m_economy; }
 	int get_required_time();
+	int get_last_request_time() { return m_last_request_time; }
+	int get_priority(int cost);
 
 	Flag * get_target_flag();
 
@@ -500,6 +502,8 @@ struct Request : public Trackable {
 	void set_count(int count);
 	void set_required_time(int time);
 	void set_required_interval(int interval);
+
+	void set_last_request_time(int time) { m_last_request_time = time; }
 
 	void start_transfer(Game *g, Supply* supp, int ware);
 
@@ -541,6 +545,7 @@ private:
 
 	int m_required_time; //  when do we need the first ware (can be in the past)
 	int               m_required_interval; //  time between items
+	int m_last_request_time;
 
 	TransferList      m_transfers;         //  maximum size is m_count
 
@@ -666,6 +671,8 @@ struct Economy {
 
    // Called by cmd queue
    void balance_requestsupply();
+
+   void rebalance_supply() { start_request_timer(); }
 
 private:
 	void do_remove_flag(Flag *f);

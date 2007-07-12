@@ -36,7 +36,9 @@
 #include <map>
 
 
-#define CURRENT_PACKET_VERSION 1
+#define LOWEST_SUPPORTED_VERSION           1
+#define PRIORITIES_INTRODUCED_IN_VERSION   2
+#define CURRENT_PACKET_VERSION             2
 
 Widelands_Map_Building_Data_Packet::~Widelands_Map_Building_Data_Packet() {}
 
@@ -52,51 +54,55 @@ throw (_wexception)
 {
 	if (not skip) {
 
-   FileRead fr;
-   try {
-      fr.Open( fs, "binary/building" );
-   } catch ( ... ) {
-      // not there, so skip
-      return ;
-   }
+		FileRead fr;
+		try {
+			fr.Open( fs, "binary/building" );
+		} catch ( ... ) {
+			// not there, so skip
+			return ;
+		}
 
 		const Uint16 packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
 			Map & map = egbase->map();
 			const X_Coordinate width  = map.get_width ();
 			const Y_Coordinate height = map.get_height();
 			Player_Area<Area<FCoords> > a;
 			for (a.y = 0; a.y < height; ++a.y) for (a.x = 0; a.x < width; ++a.x) {
 				if (fr.Unsigned8()) {
-               // Ok, now read all the additional data
+					// Ok, now read all the additional data
 					a.player_number = fr.Unsigned8();
-               uint serial=fr.Unsigned32();
+					int serial=fr.Unsigned32();
 					const char * const name = fr.CString();
-               bool is_constructionsite=fr.Unsigned8();
+					bool is_constructionsite=fr.Unsigned8();
 
-               // No building lives on more than one main place
-               assert(!ol->is_object_known(serial));
+					// No building lives on more than one main place
+					assert(!ol->is_object_known(serial));
 
-               // Get the tribe and the building index
+					// Get the tribe and the building index
 					Player * const player = egbase->get_safe_player(a.player_number);
 					assert(player); // He must be there FIXME Never use assert to validate input!
 					const Tribe_Descr & tribe = player->tribe();
-               int index= tribe.get_building_index(name);
-               if(index==-1)
-                  throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
-                        name, tribe.name().c_str());
+					int index= tribe.get_building_index(name);
+					if(index==-1)
+						throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
+							name, tribe.name().c_str());
 
-               // Now, create this Building, take extra special care for constructionsites
+					// Now, create this Building, take extra special care for constructionsites
 					Building & building = // all data is read later
 						*(is_constructionsite ?
 						  egbase->warp_constructionsite(a, a.player_number, index, 0)
 						  :
 						  egbase->warp_building        (a, a.player_number, index));
 
-               // Reference the players tribe if in editor
+					if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION) {
+						read_priorities (building, fr);
+					}
+					
+					// Reference the players tribe if in editor
 					egbase->get_iabase()->reference_player_tribe
 						(a.player_number, &tribe);
-               // and register it with the object loader for further loading
+					// and register it with the object loader for further loading
 					ol->register_object(egbase, serial, &building);
 
 					a.radius = building.get_conquers();
@@ -112,7 +118,7 @@ throw (_wexception)
 							(mr.location(), Area<>(a, a.radius));
 						while (mr.advance(map));
 					}
-            }
+				}
 			}
 		} else throw wexception
 			("Unknown version %u in Widelands_Map_Building_Data_Packet!\n",
@@ -130,35 +136,35 @@ void Widelands_Map_Building_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	// now packet version
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Write buildings and owner, register this with the map_object_saver so that
-   // it's data can be saved later.
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-         // We only write Buildings
-         if(immovable && immovable->get_type()==Map_Object::BUILDING) {
-            Building* building=static_cast<Building*>(immovable);
+	// Write buildings and owner, register this with the map_object_saver so that
+	// it's data can be saved later.
+	Map* map=egbase->get_map();
+	for(ushort y=0; y<map->get_height(); y++) {
+		for(ushort x=0; x<map->get_width(); x++) {
+			BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
+			// We only write Buildings
+			if(immovable && immovable->get_type()==Map_Object::BUILDING) {
+				Building* building=static_cast<Building*>(immovable);
 
-            if(building->get_position()!=Coords(x,y)) {
-               // This is not this buildings main position
-               fw.Unsigned8('\0');
-               continue;
-            }
+				if(building->get_position()!=Coords(x,y)) {
+					// This is not this buildings main position
+					fw.Unsigned8('\0');
+					continue;
+				}
 
-            // Buildings can life on only one main position
-            assert(!os->is_object_known(building));
-            uint serial=os->register_object(building);
+				// Buildings can life on only one main position
+				assert(!os->is_object_known(building));
+				uint serial=os->register_object(building);
 
-            fw.Unsigned8(1);
-            fw.Unsigned8(building->get_owner()->get_player_number());
-            // write id
-            fw.Unsigned32(serial);
+				fw.Unsigned8(1);
+				fw.Unsigned8(building->get_owner()->get_player_number());
+				// write id
+				fw.Unsigned32(serial);
 
 				const ConstructionSite * const constructionsite =
 					dynamic_cast<const ConstructionSite * const>(building);
@@ -167,10 +173,90 @@ throw (_wexception)
 					  constructionsite->building() : building->descr())
 					 .name().c_str());
 				fw.Unsigned8(static_cast<const bool>(constructionsite));
-			} else fw.Unsigned8(0);
-      }
-   }
 
-   fw.Write( fs, "binary/building" );
-   // DONE
+				write_priorities(*building, fw);
+				
+			} else fw.Unsigned8(0);
+		}
+	}
+
+	fw.Write( fs, "binary/building" );
+	// DONE
+}
+
+/*
+ * Priorities are writen in format:
+ 0    - ware type (8 bits), for example Request:WARE
+ 2    - count of priorities for this type (8 bits)
+   fish  - ware name (32 bits)
+   4     - priority assigned to a ware (32 bits)
+   water - ware name (32 bits)
+   1     - ware priority(32 bits)
+ 0xff - end of ware types
+ */
+void Widelands_Map_Building_Data_Packet::write_priorities
+(Building & building, FileWrite & fw)
+{
+	fw.Unsigned32(building.get_base_priority());
+	
+	std::map<int, std::map<int, int> > type_to_priorities;
+	std::map<int, std::map<int, int> >::iterator it;
+	
+	const Tribe_Descr & tribe = building.get_owner()->tribe();
+	building.collect_priorities(type_to_priorities);
+	for (it = type_to_priorities.begin();
+		 it != type_to_priorities.end(); ++it)
+	{
+		if (it->second.size() == 0)
+			continue;
+		
+		// write ware type and priority count
+		const int ware_type = it->first;
+		fw.Unsigned8(ware_type);
+		fw.Unsigned8(it->second.size());
+		
+		std::map<int, int>::iterator it2;
+		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+		{
+			std::string name;
+			const int ware_index = it2->first;
+			if (Request::WARE == ware_type)
+				name = tribe.get_ware_descr(ware_index)->name();
+			else if (Request::WORKER == ware_type)
+				name = tribe.get_worker_descr(ware_index)->name();
+			else
+				throw wexception("unrecognized ware type %d while writing priorities", ware_type);
+			
+			fw.CString(name.c_str());
+			fw.Unsigned32(it2->second);
+		}
+	}
+	
+	// write 0xff so the end can be easily identified
+	fw.Unsigned8(0xff);
+}
+
+void Widelands_Map_Building_Data_Packet::read_priorities
+(Building & building, FileRead & fr)
+{
+	building.set_priority(fr.Unsigned32());
+
+	const Tribe_Descr & tribe = building.get_owner()->tribe();
+	int ware_type = -1;
+	// read ware type
+	while (0xff != (ware_type = fr.Unsigned8())) {
+		// read count of priorities assigned for this ware type
+		const unsigned char count = fr.Unsigned8();
+		for (unsigned char i = 0; i < count; i++) {
+			int idx = -1;
+			if (Request::WARE == ware_type)
+				idx = tribe.get_safe_ware_index(fr.CString());
+			else if (Request::WORKER == ware_type)
+				idx = tribe.get_safe_worker_index(fr.CString());
+			else
+				throw wexception("unrecognized ware type %d while reading priorities", ware_type);
+
+			building.set_priority(ware_type, idx, fr.Unsigned32());
+		}
+	}
 }
