@@ -16,6 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+
 /*
 The entire transport subsystem comes into this file.
 
@@ -23,6 +24,8 @@ What does _not_ belong in here: road renderer, client-side road building.
 
 What _does_ belong in here:
 Flags, Roads, the logic behind ware pulls and pushes.
+
+TODO: split this up into two files per class (.h and .cc)
 */
 
 #include "transport.h"
@@ -51,8 +54,8 @@ Flags, Roads, the logic behind ware pulls and pushes.
 Map_Object_Descr g_flag_descr;
 
 
-/*
-Whenever a WareInstance is idle, it issues an IdleWareSupply.
+/**
+ * Whenever a WareInstance is idle, it issues an IdleWareSupply.
 */
 class IdleWareSupply : public Supply {
 public:
@@ -77,37 +80,22 @@ private:
 	Economy      * m_economy;
 };
 
-
-/*
-===============
-IdleWareSupply::IdleWareSupply
-
-Initialize the Supply and update the economy.
-===============
+/**
+ * Initialize the Supply and update the economy.
 */
 IdleWareSupply::IdleWareSupply(WareInstance* ware) : m_ware(ware), m_economy(0)
 {set_economy(m_ware->get_economy());}
 
-
-/*
-===============
-IdleWareSupply::~IdleWareSupply
-
-Cleanup.
-===============
+/**
+ * Cleanup.
 */
 IdleWareSupply::~IdleWareSupply()
 {
 	set_economy(0);
 }
 
-
-/*
-===============
-IdleWareSupply::set_economy
-
-Add/remove self from economies as necessary.
-===============
+/**
+ * Add/remove self from economies as necessary.
 */
 void IdleWareSupply::set_economy(Economy* e)
 {
@@ -125,13 +113,8 @@ void IdleWareSupply::set_economy(Economy* e)
 		m_economy->add_ware_supply(ware, this);
 }
 
-
-/*
-===============
-IdleWareSupply::get_position
-
-Figure out the player immovable that this ware belongs to.
-===============
+/**
+ * Figure out the player immovable that this ware belongs to.
 */
 PlayerImmovable* IdleWareSupply::get_position(Game* g)
 {
@@ -146,31 +129,18 @@ PlayerImmovable* IdleWareSupply::get_position(Game* g)
 	return 0;
 }
 
-
-/*
-===============
-IdleWareSupply::get_amount
-===============
-*/
 int IdleWareSupply::get_amount(const int ware) const
-{return (ware == m_ware->descr_index()) ? 1 : 0;}
+{
+	return (ware == m_ware->descr_index()) ? 1 : 0;
+}
 
-
-/*
-===============
-IdleWareSupply::is_active
-===============
-*/
 bool IdleWareSupply::is_active()  const throw ()
-{return not m_ware->is_moving();}
+{
+	return not m_ware->is_moving();
+}
 
-
-/*
-===============
-IdleWareSupply::launch_item
-
-The item is already "launched", so we only need to return it.
-===============
+/**
+ * The item is already "launched", so we only need to return it.
 */
 WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
 	if (ware != m_ware->descr_index()) throw wexception
@@ -182,40 +152,24 @@ WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
 	return m_ware;
 }
 
-
-/*
-===============
-IdleWareSupply::launch_worker
-===============
-*/
 Worker* IdleWareSupply::launch_worker(Game *, int)
-{throw wexception("IdleWareSupply::launch_worker makes no sense");}
+{
+	throw wexception("IdleWareSupply::launch_worker makes no sense");
+}
 
-
-/*
-===============
-IdleWareSupply::launch_soldier
-===============
-*/
 Soldier* IdleWareSupply::launch_soldier(Game *, int, Requeriments *)
-{throw wexception("IdleWareSupply::launch_soldier makes no sense");}
+{
+	throw wexception("IdleWareSupply::launch_soldier makes no sense");
+}
 
-
-/*
-===============
-IdleWareSupply::get_passing_requeriments
-===============
-*/
 int IdleWareSupply::get_passing_requeriments(Game *, int, Requeriments *)
-{throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");}
+{
+	throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");
+}
 
-/*
-===============
-IdleWareSupply::get_passing_requeriments
-===============
-*/
 void IdleWareSupply::mark_as_used (Game *, int, Requeriments *) {
 	// By now, wares have not need to have this method
+	throw wexception("IdleWareSupply::mark_as_used makes no sense");
 }
 
 
@@ -228,11 +182,6 @@ WareInstance IMPLEMENTATION
 */
 
 
-/*
-===============
-WareInstance::WareInstance
-===============
-*/
 WareInstance::WareInstance
 (const Item_Ware_Descr::Index i, const Item_Ware_Descr * const ware_descr)
 :
@@ -244,12 +193,6 @@ m_supply     (0),
 m_transfer   (0)
 {}
 
-
-/*
-===============
-WareInstance::~WareInstance
-===============
-*/
 WareInstance::~WareInstance()
 {
 	if (m_supply) {
@@ -258,31 +201,16 @@ WareInstance::~WareInstance()
 	}
 }
 
+int WareInstance::get_type() const throw ()
+{
+	return WARE;
+}
 
-/*
-===============
-WareInstance::get_type
-===============
-*/
-int WareInstance::get_type() const throw () {return WARE;}
-
-
-/*
-===============
-WareInstance::init
-===============
-*/
 void WareInstance::init(Editor_Game_Base* g)
 {
 	Map_Object::init(g);
 }
 
-
-/*
-===============
-WareInstance::cleanup
-===============
-*/
 void WareInstance::cleanup(Editor_Game_Base* g)
 {
 	//molog("WareInstance::cleanup\n");
@@ -309,13 +237,8 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 	Map_Object::cleanup(g);
 }
 
-
-/*
-===============
-WareInstance::set_economy
-
-Ware accounting
-===============
+/**
+ * Ware accounting
 */
 void WareInstance::set_economy(Economy* e)
 {
@@ -331,15 +254,10 @@ void WareInstance::set_economy(Economy* e)
 	if (m_economy) m_economy->add_wares(m_descr_index, 1);
 }
 
-
-/*
-===============
-WareInstance::set_location
-
-Change the current location.
-Once you've assigned a ware to its new location, you usually have to call
-update() as well.
-===============
+/**
+ * Change the current location.
+ * Once you've assigned a ware to its new location, you usually have to call
+ * \ref update() as well.
 */
 void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 {
@@ -372,28 +290,19 @@ void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 	}
 }
 
-
-/*
-===============
-WareInstance::act
-
-Callback for the return-to-warehouse timer.
-===============
+/**
+ * Callback for the return-to-warehouse timer.
 */
-void WareInstance::act(Game *, uint) {}
+void WareInstance::act(Game *, uint)
+{}
 
-
-/*
-===============
-WareInstance::update
-
-Performs the state updates necessary for the current location:
-- if it's a building, acknowledge the Request or incorporate into warehouse
-- if it's a flag and we have no request, start the return to warehouse timer
-  and issue a Supply
-
-Note: update() may result in the deletion of this object.
-===============
+/**
+ * Performs the state updates necessary for the current location:
+ * - if it's a building, acknowledge the Request or incorporate into warehouse
+ * - if it's a flag and we have no request, start the return to warehouse timer
+ * and issue a Supply
+ *
+ * \note \ref update() may result in the deletion of this object.
 */
 void WareInstance::update(Game* g)
 {
@@ -482,13 +391,8 @@ void WareInstance::update(Game* g)
 	}
 }
 
-
-/*
-===============
-WareInstance::set_transfer
-
-Set ware state so that it follows the given transfer.
-===============
+/**
+ * Set ware state so that it follows the given transfer.
 */
 void WareInstance::set_transfer(Game* g, Transfer* t)
 {
@@ -504,13 +408,8 @@ void WareInstance::set_transfer(Game* g, Transfer* t)
 	update(g);
 }
 
-
-/*
-===============
-WareInstance::cancel_transfer
-
-The transfer has been cancelled, just stop moving.
-===============
+/**
+ * The transfer has been cancelled, just stop moving.
 */
 void WareInstance::cancel_transfer(Game* g)
 {
@@ -519,25 +418,17 @@ void WareInstance::cancel_transfer(Game* g)
 	update(g);
 }
 
-
-
-/*
-===============
-WareInstance::is_moving
-
-We are moving when there's a transfer, it's that simple.
-===============
+/**
+ * We are moving when there's a transfer, it's that simple.
 */
-bool WareInstance::is_moving() const throw () {return m_transfer;}
+bool WareInstance::is_moving() const throw ()
+{
+	return m_transfer;
+}
 
-
-/*
-===============
-WareInstance::cancel_moving
-
-Call this function if movement + potential request need to be cancelled for
-whatever reason.
-===============
+/**
+ * Call this function if movement + potential request need to be cancelled for
+ * whatever reason.
 */
 void WareInstance::cancel_moving() {
 	if (m_transfer) {
@@ -546,14 +437,9 @@ void WareInstance::cancel_moving() {
 	}
 }
 
-
-/*
-===============
-WareInstance::get_next_move_step
-
-Return the next flag we should be moving to, or the final target if the route
-has been completed successfully.
-===============
+/**
+ * Return the next flag we should be moving to, or the final target if the route
+ * has been completed successfully.
 */
 PlayerImmovable* WareInstance::get_next_move_step(Game* g)
 {
@@ -573,12 +459,8 @@ Flag IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-Flag::Flag
-
-Create the flag. Initially, it doesn't have any attachments.
-===============
+/**
+ * Create the flag. Initially, it doesn't have any attachments.
 */
 Flag::Flag() :
 PlayerImmovable(g_flag_descr),
@@ -588,16 +470,13 @@ m_item_capacity(8),
 m_item_filled(0),
 m_items(new PendingItem[m_item_capacity]),
 m_always_call_for_flag(0)
-{for (uint i = 0; i < 6; ++i) m_roads[i] = 0;}
+{
+	for (uint i = 0; i < 6; ++i) m_roads[i] = 0;
+}
 
-
-/*
-===============
-Flag::~Flag
-
-Shouldn't be necessary to do anything, since die() always calls
-cleanup() first.
-===============
+/**
+ * Shouldn't be necessary to do anything, since die() always calls
+ * cleanup() first.
 */
 Flag::~Flag()
 {
@@ -616,12 +495,8 @@ Flag::~Flag()
 			log("Flag: ouch! road left\n");
 }
 
-/*
-===============
-Flag::create [static]
-
-Create a flag at the given location
-===============
+/**
+ * Create a flag at the given location
 */
 Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 {
@@ -652,33 +527,28 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 	return flag;
 }
 
+int Flag::get_type() const throw ()
+{
+	return FLAG;
+}
 
-/*
-===============
-Flag::get_type
-Flag::get_size
-Flag::get_passable
-Flag::get_base_flag
-===============
-*/
-int Flag::get_type() const throw () {return FLAG;}
+int Flag::get_size() const throw ()
+{
+	return SMALL;
+}
 
-int Flag::get_size() const throw () {return SMALL;}
-
-bool Flag::get_passable() const throw () {return true;}
+bool Flag::get_passable() const throw ()
+{
+	return true;
+}
 
 Flag *Flag::get_base_flag()
 {
 	return this;
 }
 
-
-/*
-===============
-Flag::set_economy
-
-Call this only from Economy code!
-===============
+/**
+ * Call this only from Economy code!
 */
 void Flag::set_economy(Economy *e)
 {
@@ -704,12 +574,8 @@ void Flag::set_economy(Economy *e)
 	}
 }
 
-/*
-===============
-Flag::attach_building
-
-Call this only from the Building init!
-===============
+/**
+ * Call this only from the Building init!
 */
 void Flag::attach_building(Editor_Game_Base *g, Building *building)
 {
@@ -724,13 +590,8 @@ void Flag::attach_building(Editor_Game_Base *g, Building *building)
 	m_building->set_economy(get_economy());
 }
 
-
-/*
-===============
-Flag::detach_building
-
-Call this only from the Building cleanup!
-===============
+/**
+ * Call this only from the Building cleanup!
 */
 void Flag::detach_building(Editor_Game_Base *g)
 {
@@ -745,13 +606,8 @@ void Flag::detach_building(Editor_Game_Base *g)
 	m_building = 0;
 }
 
-
-/*
-===============
-Flag::attach_road
-
-Call this only from the Road init!
-===============
+/**
+ * Call this only from the Road init!
 */
 void Flag::attach_road(int dir, Road *road)
 {
@@ -761,13 +617,8 @@ void Flag::attach_road(int dir, Road *road)
 	m_roads[dir-1]->set_economy(get_economy());
 }
 
-
-/*
-===============
-Flag::detach_road
-
-Call this only from the Road init!
-===============
+/**
+ * Call this only from the Road init!
 */
 void Flag::detach_road(int dir)
 {
@@ -777,13 +628,8 @@ void Flag::detach_road(int dir)
 	m_roads[dir-1] = 0;
 }
 
-
-/*
-===============
-Flag::get_neighbours
-
-Return neighbouring flags.
-===============
+/**
+ * Return neighbouring flags.
 */
 void Flag::get_neighbours(Neighbour_list *neighbours)
 {
@@ -812,12 +658,8 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 	// point or whatever ;)
 }
 
-/*
-===============
-Flag::get_road
-
-Return the road that leads to the given flag.
-===============
+/**
+ * Return the road that leads to the given flag.
 */
 Road *Flag::get_road(Flag *flag)
 {
@@ -833,36 +675,23 @@ Road *Flag::get_road(Flag *flag)
 	return 0;
 }
 
-
-/*
-===============
-Flag::has_capacity
-
-Returns true if the flag can hold more items.
-===============
+/**
+ * Returns true if the flag can hold more items.
 */
 bool Flag::has_capacity()
 {
 	return (m_item_filled < m_item_capacity);
 }
 
-
-/*
-===============
-Flag::wait_for_capacity
-
-Signal the given bob by interrupting its task as soon as capacity becomes free.
-===============
+/**
+ * Signal the given bob by interrupting its task as soon as capacity becomes
+ * free.
 */
 void Flag::wait_for_capacity(Game *, Worker* bob)
-{m_capacity_wait.push_back(bob);}
+{
+	m_capacity_wait.push_back(bob);
+}
 
-
-/*
-===============
-Flag::add_item
-===============
-*/
 void Flag::add_item(Game* g, WareInstance* item)
 {
 	PendingItem* pi;
@@ -878,16 +707,11 @@ void Flag::add_item(Game* g, WareInstance* item)
 	item->update(g); // will call call_carrier() if necessary
 }
 
-
-/*
-===============
-Flag::has_pending_item
-
-Returns true if an item is currently waiting for a carrier to the given Flag.
-
-Note: Due to fetch_from_flag() semantics, this function makes no sense for a
-      building destination.
-===============
+/**
+ * \return true if an item is currently waiting for a carrier to the given Flag.
+ *
+ * \note Due to \ref fetch_from_flag() semantics, this function makes no sense
+ * for a  building destination.
 */
 bool Flag::has_pending_item(Game *, Flag * dest) {
 	int i;
@@ -905,15 +729,10 @@ bool Flag::has_pending_item(Game *, Flag * dest) {
 	return false;
 }
 
-
-/*
-===============
-Flag::ack_pending_item
-
-Called by carrier code to indicate that the carrier is moving to pick up an
-item.
-Returns true if an item is actually waiting for the carrier.
-===============
+/**
+ * Called by carrier code to indicate that the carrier is moving to pick up an
+ * item.
+ * \return true if an item is actually waiting for the carrier.
 */
 bool Flag::ack_pending_item(Game *, Flag * destflag) {
 	int i;
@@ -932,13 +751,8 @@ bool Flag::ack_pending_item(Game *, Flag * destflag) {
 	return false;
 }
 
-
-/*
-===============
-Flag::wake_up_capacity_queue
-
-Wake one sleeper from the capacity queue.
-===============
+/**
+ * Wake one sleeper from the capacity queue.
 */
 void Flag::wake_up_capacity_queue(Game* g)
 {
@@ -957,16 +771,12 @@ void Flag::wake_up_capacity_queue(Game* g)
 	}
 }
 
-
-/*
-===============
-Flag::fetch_pending_item
-
-Called by carrier code to retrieve one of the items on the flag that is meant
-for that carrier.
-This function may return 0 even if ack_pending_item() has already been called
-successfully.
-===============
+/**
+ * Called by carrier code to retrieve one of the items on the flag that is meant
+ * for that carrier.
+ * 
+ * This function may return 0 even if \ref ack_pending_item() has already been
+ * called successfully.
 */
 WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 {
@@ -998,14 +808,9 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 	return item;
 }
 
-
-/*
-===============
-Flag::remove_item
-
-Force a removal of the given item from this flag.
-Called by WareInstance::cleanup()
-===============
+/**
+ * Force a removal of the given item from this flag.
+ * Called by \ref WareInstance::cleanup()
 */
 void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 {
@@ -1026,22 +831,19 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 	                 get_serial(), item->get_serial());
 }
 
-
-/*
-===============
-Flag::call_carrier
-
-If nextstep is not null, a carrier will be called to move this item to
-the given flag or building.
-If nextstep is null, the internal data will be reset to indicate that the
-item isn't going anywhere right now.
-
-nextstep is compared with the cached data, and a new carrier is only called
-if that data hasn't changed.
-This behaviour is overriden by m_always_call_for_step, which is set by
-update_items() to ensure that new carriers are called when roads are split,
-for example.
-===============
+/**
+ * If nextstep is not null, a carrier will be called to move this item to
+ * the given flag or building.
+ *
+ * If nextstep is null, the internal data will be reset to indicate that the
+ * item isn't going anywhere right now.
+ *
+ * nextstep is compared with the cached data, and a new carrier is only called
+ * if that data hasn't changed.
+ *
+ * This behaviour is overriden by \ref m_always_call_for_step, which is set by
+ * \ref update_items() to ensure that new carriers are called when roads are
+ * split, for example.
 */
 void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 {
@@ -1121,20 +923,15 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	return;
 }
 
-
-/*
-===============
-Flag::update_items
-
-Called whenever a road gets broken or split.
-Make sure all items on this flag are rerouted if necessary.
-
-Note: When two roads connect the same two flags, and one of these roads
-      is removed, this might cause the carrier(s) on the other road to
-		move unnecessarily. Fixing this could potentially be very expensive and
-		fragile.
-		A similar thing can happen when a road is split.
-===============
+/**
+ * Called whenever a road gets broken or split.
+ * Make sure all items on this flag are rerouted if necessary.
+ *
+ * \note When two roads connect the same two flags, and one of these roads
+ * is removed, this might cause the carrier(s) on the other road to
+ * move unnecessarily. Fixing this could potentially be very expensive and
+ * fragile.
+ * A similar thing can happen when a road is split.
 */
 void Flag::update_items(Game* g, Flag* other)
 {
@@ -1146,12 +943,6 @@ void Flag::update_items(Game* g, Flag* other)
 	m_always_call_for_flag = 0;
 }
 
-
-/*
-===============
-Flag::init
-===============
-*/
 void Flag::init(Editor_Game_Base *g)
 {
 	PlayerImmovable::init(g);
@@ -1162,12 +953,8 @@ void Flag::init(Editor_Game_Base *g)
 	m_animstart = g->get_gametime();
 }
 
-/*
-===============
-Flag::cleanup
-
-Detach building and free roads.
-===============
+/**
+ * Detach building and free roads.
 */
 void Flag::cleanup(Editor_Game_Base *g)
 {
@@ -1208,17 +995,12 @@ void Flag::cleanup(Editor_Game_Base *g)
 	PlayerImmovable::cleanup(g);
 }
 
-
-/*
-===============
-Flag::destroy
-
-Destroy the building as well.
-
-Note that this is needed in addition to the call to m_building->remove() in
-Flag::cleanup(). This function is needed to ensure a fire is created when a
-player removes a flag.
-===============
+/**
+ * Destroy the building as well.
+ *
+ * \note This is needed in addition to the call to m_building->remove() in
+ * \ref Flag::cleanup(). This function is needed to ensure a fire is created
+ * when a player removes a flag.
 */
 void Flag::destroy(Editor_Game_Base* g)
 {
@@ -1230,14 +1012,9 @@ void Flag::destroy(Editor_Game_Base* g)
 	PlayerImmovable::destroy(g);
 }
 
-
-/*
-==============
-Flag::add_flag_job
-
-Add a new flag job to request the worker with the given ID, and to execute
-the given program once it's completed.
-==============
+/**
+ * Add a new flag job to request the worker with the given ID, and to execute
+ * the given program once it's completed.
 */
 void Flag::add_flag_job(Game *, int workerware, std::string programname) {
 	FlagJob j;
@@ -1249,14 +1026,9 @@ void Flag::add_flag_job(Game *, int workerware, std::string programname) {
 	m_flag_jobs.push_back(j);
 }
 
-
-/*
-==============
-Flag::flag_job_request_callback [static]
-
-This function is called when one of the flag job workers arrives on
-the flag. Give him his job.
-==============
+/**
+ * This function is called when one of the flag job workers arrives on
+ * the flag. Give him his job.
 */
 void Flag::flag_job_request_callback
 (Game *, Request * rq, int, Worker * w, void * data)
@@ -1280,7 +1052,6 @@ void Flag::flag_job_request_callback
 	flag->molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
-
 /*
 ==============================================================================
 
@@ -1292,14 +1063,8 @@ Road IMPLEMENTATION
 // dummy instance because Map_Object needs a description
 Map_Object_Descr g_road_descr;
 
-
-/*
-===============
-Road::Road
-Road::~Road
-
-Construction and destruction. Most of the actual work is done in init/cleanup.
-===============
+/**
+ * Most of the actual work is done in init.
 */
 Road::Road() :
 PlayerImmovable  (g_road_descr),
@@ -1311,6 +1076,9 @@ m_carrier_request(0)
 	m_flagidx[0] = m_flagidx[1] = -1;
 }
 
+/**
+ * Most of the actual work is done in cleanup.
+ */
 Road::~Road()
 {
 	if (m_carrier_request) {
@@ -1319,13 +1087,8 @@ Road::~Road()
 	}
 }
 
-
-/*
-===============
-Road::create [static]
-
-Create a road between the given flags, using the given path.
-===============
+/**
+ * Create a road between the given flags, using the given path.
 */
 Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path)
 {
@@ -1344,46 +1107,37 @@ Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const 
 	return r;
 }
 
-/*
-===============
-Road::get_type
-Road::get_size
-Road::get_passable
-Road::get_base_flag
-===============
-*/
-int Road::get_type() const throw () {return ROAD;}
+int Road::get_type() const throw ()
+{
+	return ROAD;
+}
 
-int Road::get_size() const throw () {return SMALL;}
+int Road::get_size() const throw ()
+{
+	return SMALL;
+}
 
-bool Road::get_passable() const throw () {return true;}
+bool Road::get_passable() const throw ()
+{
+	return true;
+}
 
 Flag *Road::get_base_flag()
 {
 	return m_flags[FlagStart];
 }
 
-
-/*
-===============
-Road::get_cost
-
-Return the cost of getting from fromflag to the other flag.
-===============
+/**
+ * Return the cost of getting from fromflag to the other flag.
 */
 int Road::get_cost(FlagId fromflag)
 {
 	return m_cost[fromflag];
 }
 
-
-/*
-===============
-Road::set_path
-
-Set the new path, calculate costs.
-You have to set start and end flags before calling this function.
-===============
+/**
+ * Set the new path, calculate costs.
+ * You have to set start and end flags before calling this function.
 */
 void Road::set_path(Editor_Game_Base *g, const Path &path)
 {
@@ -1398,13 +1152,8 @@ void Road::set_path(Editor_Game_Base *g, const Path &path)
 	m_idle_index = path.get_nsteps() / 2;
 }
 
-
-/*
-===============
-Road::mark_map
-
-Add road markings to the map
-===============
+/**
+ * Add road markings to the map
 */
 void Road::mark_map(Editor_Game_Base *g)
 {
@@ -1436,12 +1185,8 @@ void Road::mark_map(Editor_Game_Base *g)
 	}
 }
 
-/*
-===============
-Road::unmark_map
-
-Remove road markings from the map
-===============
+/**
+ * Remove road markings from the map
 */
 void Road::unmark_map(Editor_Game_Base *g)
 {
@@ -1473,12 +1218,8 @@ void Road::unmark_map(Editor_Game_Base *g)
 	}
 }
 
-/*
-===============
-Road::init
-
-Initialize the road.
-===============
+/**
+ * Initialize the road.
 */
 void Road::init(Editor_Game_Base *gg)
 {
@@ -1490,7 +1231,7 @@ void Road::init(Editor_Game_Base *gg)
 
 }
 
-/*
+/**
  * This links into the flags, calls a carrier
  * and so on. This was formerly done in init (and
  * still is for normal games). But for save game loading
@@ -1532,13 +1273,8 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
    }
 }
 
-
-/*
-===============
-Road::cleanup
-
-Cleanup the road
-===============
+/**
+ * Cleanup the road
 */
 void Road::cleanup(Editor_Game_Base *gg)
 {
@@ -1567,14 +1303,9 @@ void Road::cleanup(Editor_Game_Base *gg)
 	PlayerImmovable::cleanup(g);
 }
 
-
-/*
-===============
-Road::set_economy
-
-Workers' economies are fixed by PlayerImmovable, but we need to handle
-any requests ourselves.
-===============
+/**
+ * Workers' economies are fixed by PlayerImmovable, but we need to handle
+ * any requests ourselves.
 */
 void Road::set_economy(Economy *e)
 {
@@ -1583,15 +1314,11 @@ void Road::set_economy(Economy *e)
 		m_carrier_request->set_economy(e);
 }
 
-
-/*
-===============
-Road::request_carrier
-
-Request a new carrier.
-Only call this if the road can handle a new carrier, and if no request has been
-issued.
-===============
+/**
+ * Request a new carrier.
+ *
+ * Only call this if the road can handle a new carrier, and if no request has
+ * been issued.
 */
 void Road::request_carrier(Game * g) {
 	assert(!m_carrier.get(g) && !m_carrier_request);
@@ -1600,13 +1327,8 @@ void Road::request_carrier(Game * g) {
 	                                &Road::request_carrier_callback, this, Request::WORKER);
 }
 
-
-/*
-===============
-Road::request_carrier_callback [static]
-
-The carrier has arrived successfully.
-===============
+/**
+ * The carrier has arrived successfully.
 */
 void Road::request_carrier_callback
 (Game *, Request * rq, int, Worker * w, void * data)
@@ -1623,13 +1345,8 @@ void Road::request_carrier_callback
 	carrier->start_task_road();
 }
 
-
-/*
-===============
-Road::remove_worker
-
-If we lost our carrier, re-request it.
-===============
+/**
+ * If we lost our carrier, re-request it.
 */
 void Road::remove_worker(Worker *w)
 {
@@ -1646,28 +1363,19 @@ void Road::remove_worker(Worker *w)
 	PlayerImmovable::remove_worker(w);
 }
 
-
-/*
-===============
-Road::presplit
-
-A flag has been placed that splits this road. This function is called before
-the new flag initializes. We remove markings to avoid interference with the
-flag.
-===============
+/**
+ * A flag has been placed that splits this road. This function is called before
+ * the new flag initializes. We remove markings to avoid interference with the
+ * flag.
 */
 void Road::presplit(Editor_Game_Base * g, Coords) {unmark_map(g);}
 
-
-/*
-===============
-Road::postsplit
-
-The flag that splits this road has been initialized. Perform the actual
-splitting.
-After the split, this road will span [start...new flag]. A new road will
-be created to span [new flag...end]
-===============
+/**
+ * The flag that splits this road has been initialized. Perform the actual
+ * splitting.
+ *
+ * After the split, this road will span [start...new flag]. A new road will
+ * be created to span [new flag...end]
 */
 void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 {
@@ -1778,14 +1486,9 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
    }
 }
 
-
-/*
-===============
-Road::notify_ware
-
-Called by Flag code: an item should be picked up from the given flag.
-Return true if a carrier has been sent on its way, or false otherwise.
-===============
+/**
+ * Called by Flag code: an item should be picked up from the given flag.
+ * \return true if a carrier has been sent on its way, false otherwise.
 */
 bool Road::notify_ware(Game* g, FlagId flagid)
 {
@@ -1806,24 +1509,11 @@ Route IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-Route::Route
+Route::Route() : m_totalcost(0)
+{}
 
-Set sane defaults
-===============
-*/
-Route::Route()
-{
-	m_totalcost = 0;
-}
-
-/*
-===============
-Route::clear
-
-Completely clear the route
-===============
+/**
+ * Completely clear the route
 */
 void Route::clear()
 {
@@ -1831,15 +1521,10 @@ void Route::clear()
 	m_route.clear();
 }
 
-
-/*
-===============
-Route::get_flag
-
-Return the flag with the given number.
-idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
-Every route has at least one flag.
-===============
+/**
+ * Return the flag with the given number.
+ * idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
+ * Every route has at least one flag.
 */
 Flag * Route::get_flag
 (Editor_Game_Base * const g, const std::vector<Flag *>::size_type idx) const
@@ -1848,12 +1533,8 @@ Flag * Route::get_flag
 	return (Flag*)m_route[idx].get(g);
 }
 
-/*
-===============
-Route::starttrim
-
-Remove the first count steps from the route.
-===============
+/**
+ * Remove the first count steps from the route.
 */
 void Route::starttrim(int count)
 {
@@ -1862,13 +1543,8 @@ void Route::starttrim(int count)
 	m_route.erase(m_route.begin(), m_route.begin()+count);
 }
 
-
-/*
-===============
-Route::truncate
-
-Keep the first count steps, truncate the rest.
-===============
+/**
+ * Keep the first count steps, truncate the rest.
 */
 void Route::truncate(int count)
 {
@@ -1887,59 +1563,41 @@ Transfer IMPLEMENTATION
 */
 
 
-/*
-===============
-Transfer::Transfer
-
-Start the transfer
-===============
-*/
-Transfer::Transfer(Game* g, Request* req, WareInstance* it)
+Transfer::Transfer(Game* g, Request* req, WareInstance* it) :
+	m_game(g),
+	m_request(req),
+	m_worker(0),
+	m_item(it),
+	m_soldier(0),
+	m_idle(false)
 {
-	m_game = g;
-	m_request = req;
-	m_item = it;
-	m_worker = 0;
-	m_soldier = 0;
-
-	m_idle = false;
-
 	m_item->set_transfer(g, this);
 }
 
-Transfer::Transfer(Game* g, Request* req, Worker* w)
+Transfer::Transfer(Game* g, Request* req, Worker* w) :
+	m_game(g),
+	m_request(req),
+	m_item(0),
+	m_worker(w),
+	m_soldier(0),
+	m_idle(false)
 {
-	m_game = g;
-	m_request = req;
-	m_worker = w;
-	m_item = 0;
-	m_soldier = 0;
-
-	m_idle = false;
-
 	m_worker->start_task_transfer(g, this);
 }
 
-
-Transfer::Transfer(Game* g, Request* req, Soldier* s)
+Transfer::Transfer(Game* g, Request* req, Soldier* s) :
+	m_game(g),
+	m_request(req),
+	m_soldier(s),
+	m_item(0),
+	m_worker(0),
+	m_idle(false)
 {
-	m_game = g;
-	m_request = req;
-	m_soldier = s;
-	m_worker = 0;
-	m_item = 0;
-
-	m_idle = false;
-
 	m_soldier->start_task_transfer(g, this);
 }
 
-/*
-===============
-Transfer::~Transfer
-
-Cleanup.
-===============
+/**
+ * Cleanup.
 */
 Transfer::~Transfer()
 {
@@ -1964,27 +1622,17 @@ Transfer::~Transfer()
 	}
 }
 
-
-/*
-===============
-Transfer::set_idle
-
-An idle transfer can be fail()ed by the controlled item whenever a better
-Request is available.
-===============
+/**
+ * An idle transfer can be fail()ed by the controlled item whenever a better
+ * Request is available.
 */
 void Transfer::set_idle(bool idle)
 {
 	m_idle = idle;
 }
 
-
-/*
-===============
-Transfer::get_next_step
-
-Determine where we should be going from our current location.
-===============
+/**
+ * Determine where we should be going from our current location.
 */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psuccess)
 {
@@ -2069,7 +1717,6 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	return m_route.get_flag(m_game, 0);
 }
 
-
 /**
  * Transfer finished successfully.
  * This Transfer object will be deleted indirectly by finish().
@@ -2080,26 +1727,15 @@ void Transfer::has_finished()
    m_request->transfer_finish(m_game, this);
 }
 
-
-/*
-===============
-Transfer::fail
-
-Transfer failed for reasons beyond our control.
-This Transfer object will be deleted indirectly by fail().
-===============
+/**
+ * Transfer failed for reasons beyond our control.
+ * This Transfer object will be deleted indirectly by \ref fail().
 */
 void Transfer::has_failed()
 {
    m_request->transfer_fail(m_game, this);
 }
 
-
-/*
-===============
-Transfer::tlog
-===============
-*/
 void Transfer::tlog(const char* fmt, ...)
 {
 	char buffer[1024];
@@ -2196,12 +1832,12 @@ bool Requeriments::check (int hp, int attack, int defense, int evade)
 
 // Modified to allow Requeriments and Soldiers
 #define REQUERIMENTS_VERSION 1
-/*
+/**
  * Read this requeriment from a file
  *
  * it is most probably created by some init function,
- * It's called problably by some request loader, militarysite or trainingsite loader.
- *
+ * It's called problably by some request loader, militarysite or trainingsite
+ * loader.
  */
 void Requeriments::Read
 (FileRead * fr, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
@@ -2232,7 +1868,7 @@ void Requeriments::Read
    throw wexception("Unknown requeriment version %i in file!\n", version);
 }
 
-/*
+/**
  * Write this requeriment to a file
  */
 void Requeriments::Write
@@ -2268,12 +1904,6 @@ Request IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-Request::Request
-Request::~Request
-===============
-*/
 Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type w)
 {
 	m_type=w;
@@ -2295,7 +1925,6 @@ Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbda
 
 	m_requeriments = 0;
 }
-
 
 Request::~Request()
 {
@@ -2445,23 +2074,17 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    // DONE
 }
 
-/*
-===============
-Request::get_target_flag
-
-Figure out the flag we need to deliver to.
-===============
+/**
+ * Figure out the flag we need to deliver to.
 */
-Flag *Request::get_target_flag() {return get_target()->get_base_flag();}
+Flag *Request::get_target_flag()
+{
+	return get_target()->get_base_flag();
+}
 
-
-/*
-===============
-Request::get_base_required_time
-
-Return the point in time at which we want the item of the given number to
-be delivered. nr is in the range [0..m_count[
-===============
+/**
+ * Return the point in time at which we want the item of the given number to
+ * be delivered. nr is in the range [0..m_count[
 */
 int Request::get_base_required_time(Editor_Game_Base* g, int nr)
 {
@@ -2480,14 +2103,10 @@ int Request::get_base_required_time(Editor_Game_Base* g, int nr)
 	return m_required_time + nr * m_required_interval;
 }
 
-
-/*
-===============
-Request::get_required_time
-
-Return the time when the requested ware is needed.
-Can be in the past, indicating that we have been idling, waiting for the ware.
-===============
+/**
+ * Return the time when the requested ware is needed.
+ * Can be in the past, indicating that we have been idling, waiting for the
+ * ware.
 */
 int Request::get_required_time()
 {
@@ -2495,18 +2114,13 @@ int Request::get_required_time()
 		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
 }
 
-
 #define MAX_IDLE_PRIORITY           100
 #define PRIORITY_MAX_COST         50000
 #define COST_WEIGHT_IN_PRIORITY       1
 #define WAITTIME_WEIGHT_IN_PRIORITY   2
 
-/*
- ===============
- Request::get_priority
- 
- Return the request priority used to sort requests or -1 to skip request
- ===============
+/**
+ * Return the request priority used to sort requests or -1 to skip request
  */
 int Request::get_priority (int cost)
 {
@@ -2558,13 +2172,8 @@ int Request::get_priority (int cost)
 	return priority;
 }
 
-
-/*
-===============
-Request::set_economy
-
-Change the Economy we belong to.
-===============
+/**
+ * Change the Economy we belong to.
 */
 void Request::set_economy(Economy* e)
 {
@@ -2580,13 +2189,8 @@ void Request::set_economy(Economy* e)
 		m_economy->add_request(this);
 }
 
-
-/*
-===============
-Request::set_idle
-
-Make a Request idle or not idle.
-===============
+/**
+ * Make a Request idle or not idle.
 */
 void Request::set_idle(bool idle)
 {
@@ -2606,13 +2210,8 @@ void Request::set_idle(bool idle)
 	}
 }
 
-
-/*
-===============
-Request::set_count
-
-Change the number of wares we need.
-===============
+/**
+ * Change the number of wares we need.
 */
 void Request::set_count(int count)
 {
@@ -2635,42 +2234,27 @@ void Request::set_count(int count)
 	}
 }
 
-
-/*
-===============
-Request::set_required_time
-
-Change the time at which the first item to be delivered is needed.
-Default is the gametime of the Request creation.
-===============
+/**
+ * Change the time at which the first item to be delivered is needed.
+ * Default is the gametime of the Request creation.
 */
 void Request::set_required_time(int time)
 {
 	m_required_time = time;
 }
 
-
-/*
-===============
-Request::set_required_interval
-
-Change the time between desired delivery of items.
-===============
+/**
+ * Change the time between desired delivery of items.
 */
 void Request::set_required_interval(int interval)
 {
 	m_required_interval = interval;
 }
 
-
-/*
-===============
-Request::start_transfer
-
-Begin transfer of the requested ware from the given warehouse.
-This function does not take ownership of route, i.e. the caller is responsible
-for its deletion.
-===============
+/**
+ * Begin transfer of the requested ware from the given warehouse.
+ * This function does not take ownership of route, i.e. the caller is
+ * responsible for its deletion.
 */
 void Request::start_transfer(Game* g, Supply* supp, int ware)
 {
@@ -2723,15 +2307,10 @@ void Request::start_transfer(Game* g, Supply* supp, int ware)
 		m_economy->remove_request(this);
 }
 
-
-/*
-===============
-Request::transfer_finish
-
-Callback from ware/worker code that the requested ware has arrived.
-This will call a callback function in the target, which is then responsible
-for removing and deleting the request.
-===============
+/**
+ * Callback from ware/worker code that the requested ware has arrived.
+ * This will call a callback function in the target, which is then responsible
+ * for removing and deleting the request.
 */
 void Request::transfer_finish(Game *g, Transfer* t)
 {
@@ -2772,16 +2351,11 @@ void Request::transfer_finish(Game *g, Transfer* t)
 log ("<<Transfer::has_finished()\n");
 }
 
-
-/*
-===============
-Request::transfer_fail
-
-Callback from ware/worker code that the scheduled transfer has failed.
-The calling code has already dealt with the worker/item.
-
-Re-open the request.
-===============
+/**
+ * Callback from ware/worker code that the scheduled transfer has failed.
+ * The calling code has already dealt with the worker/item.
+ *
+ * Re-open the request.
 */
 void Request::transfer_fail(Game *, Transfer * t) {
 	bool wasopen = is_open();
@@ -2799,21 +2373,16 @@ void Request::transfer_fail(Game *, Transfer * t) {
 	m_requeriments = 0;
 }
 
-
-/*
-===============
-Request::cancel_transfer
-
-Cancel the transfer with the given index.
-Note that this does *not* update whether the Request is registered with the
-Economy or not.
-===============
+/**
+ * Cancel the transfer with the given index.
+ *
+ * \note This does *not* update whether the \ref Request is registered with the
+ * \ref Economy or not.
 */
 void Request::cancel_transfer(uint idx)
 {
 	remove_transfer(idx);
 }
-
 
 /**
  * Remove and free the transfer with the given index.
@@ -2829,14 +2398,9 @@ void Request::remove_transfer(uint idx)
 	delete t;
 }
 
-
-/*
-===============
-Request::find_transfer
-
-Lookup a Transfer in the transfers array.
-Throws an exception if the Transfer is not registered with us.
-===============
+/**
+ * Lookup a \ref Transfer in the transfers array.
+ * \throw wexception if the \ref Transfer is not registered with us.
 */
 uint Request::find_transfer(Transfer* t)
 {
@@ -2858,49 +2422,25 @@ SupplyList IMPLEMENTATION
 */
 
 
-/*
-===============
-SupplyList::SupplyList
-
-Zero-initialize
-===============
-*/
 SupplyList::SupplyList()
-{
-}
+{}
 
-
-/*
-===============
-SupplyList::~SupplyList
-
-A supply list should be empty when it's destroyed.
-===============
+/**
+ * A supply list should be empty when it's destroyed.
 */
 SupplyList::~SupplyList()
-{
-}
+{}
 
-
-/*
-===============
-SupplyList::add
-
-Add a supply to the list.
-===============
+/**
+ * Add a supply to the list.
 */
 void SupplyList::add_supply(Supply* supp)
 {
 	m_supplies.push_back(supp);
 }
 
-
-/*
-===============
-SupplyList::remove_supply
-
-Remove a supply from the list.
-===============
+/**
+ * Remove a supply from the list.
 */
 void SupplyList::remove_supply(Supply* supp)
 {
@@ -2925,12 +2465,8 @@ WaresQueue IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-WaresQueue::WaresQueue
-
-Pre-initialize a WaresQueue
-===============
+/**
+ * Pre-initialize a WaresQueue
 */
 WaresQueue::WaresQueue(PlayerImmovable* bld)
 {
@@ -2945,26 +2481,16 @@ WaresQueue::WaresQueue(PlayerImmovable* bld)
 	m_callback_data = 0;
 }
 
-
-/*
-===============
-WaresQueue::~WaresQueue
-
-cleanup() must be called!
-===============
+/**
+ * cleanup() must be called!
 */
 WaresQueue::~WaresQueue()
 {
 	assert(m_ware == -1);
 }
 
-
-/*
-===============
-WaresQueue::init
-
-Initialize the queue. This also issues the first request, if necessary.
-===============
+/**
+ * Initialize the queue. This also issues the first request, if necessary.
 */
 void WaresQueue::init(const int ware, const uint size) {
 	assert(m_ware == -1);
@@ -2976,13 +2502,8 @@ void WaresQueue::init(const int ware, const uint size) {
 	update();
 }
 
-
-/*
-===============
-WaresQueue::cleanup
-
-Clear the queue appropriately.
-===============
+/**
+ * Clear the queue appropriately.
 */
 void WaresQueue::cleanup() {
 	assert(m_ware != -1);
@@ -2998,14 +2519,9 @@ void WaresQueue::cleanup() {
 	m_ware = -1;
 }
 
-
-/*
-===============
-WaresQueue::update
-
-Fix filled <= size and requests.
-You must call this after every call to set_*()
-===============
+/**
+ * Fix filled <= size and requests.
+ * You must call this after every call to set_*()
 */
 void WaresQueue::update() {
 	assert(m_ware != -1);
@@ -3030,13 +2546,8 @@ void WaresQueue::update() {
 	}
 }
 
-
-/*
-===============
-WaresQueue::set_callback
-
-Set the callback function that is called when an item has arrived.
-===============
+/**
+ * Set the callback function that is called when an item has arrived.
 */
 void WaresQueue::set_callback(callback_t* fn, void* data)
 {
@@ -3044,13 +2555,8 @@ void WaresQueue::set_callback(callback_t* fn, void* data)
 	m_callback_data = data;
 }
 
-
-/*
-===============
-WaresQueue::request_callback [static]
-
-Called when an item arrives at the owning building.
-===============
+/**
+ * Called when an item arrives at the owning building.
 */
 void WaresQueue::request_callback
 (Game * g, Request *, int ware, Worker * w, void * data)
@@ -3069,13 +2575,8 @@ void WaresQueue::request_callback
 		(*wq->m_callback_fn)(g, wq, ware, wq->m_callback_data);
 }
 
-
-/*
-===============
-WaresQueue::remove_from_economy
-
-Remove the wares in this queue from the given economy (used in accounting).
-===============
+/**
+ * Remove the wares in this queue from the given economy (used in accounting).
 */
 void WaresQueue::remove_from_economy(Economy* e)
 {
@@ -3086,13 +2587,8 @@ void WaresQueue::remove_from_economy(Economy* e)
 		m_request->set_economy(0);
 }
 
-
-/*
-===============
-WaresQueue::add_to_economy
-
-Add the wares in this queue to the given economy (used in accounting)
-===============
+/**
+ * Add the wares in this queue to the given economy (used in accounting)
 */
 void WaresQueue::add_to_economy(Economy* e)
 {
@@ -3103,18 +2599,23 @@ void WaresQueue::add_to_economy(Economy* e)
 		m_request->set_economy(e);
 }
 
-
-/*
-===============
-WaresQueue::set_size
-WaresQueue::set_filled
-
-Change size and fill status of the queue.
-Important: that you must call update() after calling any of these functions.
-===============
+/**
+ * Change size of the queue.
+ *
+ * \warning You must call \ref update() after this!
+ * \todo Why not call update from here?
 */
-void WaresQueue::set_size(const uint size) throw () {m_size = size;}
+void WaresQueue::set_size(const uint size) throw ()
+{
+	m_size = size;
+}
 
+/**
+ * Change fill status of the queue.
+ *
+ * \warning You must call \ref update() after this!
+ * \todo Why not call update from here?
+ */
 void WaresQueue::set_filled(const uint filled) throw() {
 	if (filled > m_filled)
 		m_owner->get_economy()->add_wares(m_ware, filled - m_filled);
@@ -3124,20 +2625,16 @@ void WaresQueue::set_filled(const uint filled) throw() {
 	m_filled = filled;
 }
 
-
-/*
-===============
-WaresQueue::set_consume_interval
-
-Set the time between consumption of items when the owning building
-is consuming at full speed.
-This interval is merely a hint for the Supply/Request balancing code.
-===============
+/**
+ * Set the time between consumption of items when the owning building
+ * is consuming at full speed.
+ *
+ * This interval is merely a hint for the Supply/Request balancing code.
 */
 void WaresQueue::set_consume_interval(const uint time) throw ()
 {m_consume_interval = time;}
 
-/*
+/**
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 1
@@ -3188,12 +2685,6 @@ Economy IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-Economy::Economy
-Economy::~Economy
-===============
-*/
 Economy::Economy(Player *player) :
 m_owner(player),
 m_rebuilding(false),
@@ -3222,16 +2713,12 @@ Economy::~Economy()
 		log("Warning: Economy still has warehouses left on destruction\n");
 }
 
-
-/*
-===============
-Economy::check_merge [static]
-
-Two flags have been connected; check whether their economies should be
-merged.
-Since we could merge into both directions, we preserve the economy that is
-currently bigger (should be more efficient).
-===============
+/**
+ * Two flags have been connected; check whether their economies should be
+ * merged.
+ * Since we could merge into both directions, we preserve the economy that is
+ * currently bigger (should be more efficient).
+ * \todo Mark this function as static. WHich doxygen command??
 */
 void Economy::check_merge(Flag *f1, Flag *f2)
 {
@@ -3247,13 +2734,24 @@ void Economy::check_merge(Flag *f1, Flag *f2)
 	e1->do_merge(e2);
 }
 
-/*
-===============
-Economy::check_split [static]
-
-If the two flags can no longer reach each other (pathfinding!), the economy
-gets split.
-===============
+/**
+ * If the two flags can no longer reach each other (pathfinding!), the economy
+ * gets split.
+ *
+ * Should we create the new economy starting at f1 or f2? Ideally, we'd split
+ * off in a way that the new economy will be relatively small.
+ *
+ * Unfortunately, there's no easy way to tell in advance which of the two
+ * resulting economies will be smaller (the problem is even NP-complete), so we
+ * use a heuristic.
+ *
+ * Using f2 is just a guess, but if anything f2 is probably best: it will be
+ * the end point of a road. Since roads are typically built from the center of
+ * a country outwards, and since splits are more likely to happen outwards,
+ * the economy at the end point is probably smaller in average. It's all just
+ * guesswork though ;)
+ * 
+ * * \todo Mark this function as static. WHich doxygen command??
 */
 void Economy::check_split(Flag *f1, Flag *f2)
 {
@@ -3265,24 +2763,14 @@ void Economy::check_split(Flag *f1, Flag *f2)
 	if (e->find_route(f1, f2, 0, false))
 		return;
 
-	// Should we split off f1 or f2? Ideally, we'd split off so that the
-	// new economy will be relatively small.
-	// Unfortunately, there's no easy way to tell in advance which of the two
-	// resulting economies will be smaller
-	// Using f2 is just a guess, but if anything f2 is probably best:
-	// it will be the end point of a road. Since roads are typically built
-	// from the center of a country outwards, and since splits
-	// are more likely to happen outwards, the economy at the end point is
-	// probably smaller in average. It's all just guesswork though ;)
 	e->do_split(f2);
 }
 
-/*
-class FlagQueue
-
-Provides the flexible priority queue to maintain the open list.
-This is more flexible than a standard priority_queue (fast boost() to
-adjust cost)
+/**
+ * Provides the flexible priority queue to maintain the open list.
+ *
+ * This is more flexible than a standard priority_queue (fast boost() to
+ * adjust cost)
 */
 class FlagQueue {
 	std::vector<Flag*> m_data;
@@ -3439,21 +2927,21 @@ public:
 
 };
 
-/*
-===============
-Economy::find_route
-
-Route between the two flags.
-Store the route in route if it is not null. Note that route will be cleared
-before storing the result.
-Returns true if a route has been found.
-
-If cost_cutoff is >= 0, the function will stop and return false if it can't
-find a route that is better than cost_cutoff.
-
-This function should always be successfull, except for when it's called from
-check_split().
-===============
+/**
+ * Calcaluate a route between two flags.
+ *
+ * Store the route in \ref route if it exists. Note that route will be cleared
+ * before storing the result.
+ *
+ * For two flags from the same economy, this function should always be
+ * successful, except for when it's called from \ref check_split()
+ *
+ * \param start,end start and endpoint of the route
+ * \param route the calculated route
+ * \param cost_cutoff maximum cost for desirable routes. If no route cheaper
+ * than this can be found, return false
+ *
+ * \return true if a route has been found, false otherwise
 */
 bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff)
 {
@@ -3547,15 +3035,10 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int co
 	return true;
 }
 
-
-/*
-===============
-Economy::find_nearest_warehouse
-
-Find the nearest warehouse, starting from the given start flag.
-Returns the best warehouse (or 0 if none can be found) and stores the route to
-it in the given route.
-===============
+/**
+ * Find the nearest warehouse, starting from the given start flag.
+ * Returns the best warehouse (or 0 if none can be found) and stores the route
+ * to it in the given route.
 */
 Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 {
@@ -3579,14 +3062,9 @@ Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 	return best_warehouse;
 }
 
-
-/*
-===============
-Economy::add_flag
-
-Add a flag to the flag array.
-Only call from Flag init and split/merger code!
-===============
+/**
+ * Add a flag to the flag array.
+ * Only call from Flag init and split/merger code!
 */
 void Economy::add_flag(Flag *flag)
 {
@@ -3597,13 +3075,9 @@ void Economy::add_flag(Flag *flag)
 	flag->mpf_cycle = 0;
 }
 
-/*
-===============
-Economy::remove_flag
-
-Remove a flag from the flag array.
-Only call from Flag cleanup and split/merger code!
-===============
+/**
+ * Remove a flag from the flag array.
+ * Only call from Flag cleanup and split/merger code!
 */
 void Economy::remove_flag(Flag *flag)
 {
@@ -3616,13 +3090,9 @@ void Economy::remove_flag(Flag *flag)
 		delete this;
 }
 
-/*
-===============
-Economy::do_remove_flag [private]
-
-Remove the flag, but don't delete the economy automatically.
-This is called from the merge code.
-===============
+/**
+ * Remove the flag, but don't delete the economy automatically.
+ * This is called from the merge code.
 */
 void Economy::do_remove_flag(Flag *flag)
 {
@@ -3641,15 +3111,11 @@ void Economy::do_remove_flag(Flag *flag)
 	m_flags.pop_back();
 }
 
-/*
-===============
-Economy::add_wares
-
-Call this whenever some entity created a ware, e.g. when a lumberjack
-has felled a tree.
-This is also called when a ware is added to the economy through trade or
-a merger.
-===============
+/**
+ * Call this whenever some entity created a ware, e.g. when a lumberjack
+ * has felled a tree.
+ * This is also called when a ware is added to the economy through trade or
+ * a merger.
 */
 void Economy::add_wares(int id, int count)
 {
@@ -3668,16 +3134,11 @@ void Economy::add_workers(int id, int count)
 	// TODO: add to global player inventory?
 }
 
-
-/*
-===============
-Economy::remove_wares
-
-Call this whenever a ware his destroyed or consumed, e.g. food has been
-eaten or a warehouse has been destroyed.
-This is also called when a ware is removed from the economy through trade or
-a split of the Economy.
-===============
+/**
+ * Call this whenever a ware is destroyed or consumed, e.g. food has been
+ * eaten or a warehouse has been destroyed.
+ * This is also called when a ware is removed from the economy through trade or
+ * a split of the Economy.
 */
 void Economy::remove_wares(int id, int count)
 {
@@ -3688,6 +3149,12 @@ void Economy::remove_wares(int id, int count)
 
 	// TODO: remove from global player inventory?
 }
+
+/**
+ * Call this whenever a worker is destroyed..
+ * This is also called when a worker is removed from the economy through
+ * a split of the Economy.
+ */
 void Economy::remove_workers(int id, int count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
@@ -3697,27 +3164,18 @@ void Economy::remove_workers(int id, int count)
 	// TODO: remove from global player inventory?
 }
 
-
-/*
-===============
-Economy::add_warehouse
-
-Add the warehouse to our list of warehouses.
-This also adds the wares in the warehouse to the economy. However, if wares are
-added to the warehouse in the future, add_wares() must be called.
-===============
+/**
+ * Add the warehouse to our list of warehouses.
+ * This also adds the wares in the warehouse to the economy. However, if wares
+ * are added to the warehouse in the future, add_wares() must be called.
 */
 void Economy::add_warehouse(Warehouse *wh)
 {
 	m_warehouses.push_back(wh);
 }
 
-/*
-===============
-Economy::remove_warehouse
-
-Remove the warehouse and its wares from the economy.
-===============
+/**
+ * Remove the warehouse and its wares from the economy.
 */
 void Economy::remove_warehouse(Warehouse *wh)
 {
@@ -3743,14 +3201,9 @@ void Economy::remove_warehouse(Warehouse *wh)
       m_warehouses.pop_back();
 }
 
-
-/*
-===============
-Economy::add_request
-
-Consider the request, try to fulfill it immediately or queue it for later.
-Important: This must only be called by the Request class.
-===============
+/**
+ * Consider the request, try to fulfill it immediately or queue it for later.
+ * Important: This must only be called by the \ref Request class.
 */
 void Economy::add_request(Request* req)
 {
@@ -3766,13 +3219,9 @@ void Economy::add_request(Request* req)
 	start_request_timer();
 }
 
-
-/*
-===============
-Economy::have_request
-
-Return true if the given Request is registered with the Economy.
-===============
+/**
+ * \return true if the given Request is registered with the \ref Economy, false
+ * otherwise
 */
 bool Economy::have_request(Request* req)
 {
@@ -3781,14 +3230,9 @@ bool Economy::have_request(Request* req)
 	return it != m_requests.end();
 }
 
-
-/*
-===============
-Economy::remove_request
-
-Remove the request from this economy.
-Important: This must only be called by the Request class.
-===============
+/**
+ * Remove the request from this economy.
+ * Important: This must only be called by the \ref Request class.
 */
 void Economy::remove_request(Request* req)
 {
@@ -3805,13 +3249,8 @@ void Economy::remove_request(Request* req)
 	m_requests.pop_back();
 }
 
-
-/*
-===============
-Economy::add_worker_supply
-
-Add a worker_supply to our list of supplies.
-===============
+/**
+ * Add a worker_supply to our list of supplies.
 */
 void Economy::add_worker_supply(int ware, Supply* supp)
 {
@@ -3825,12 +3264,9 @@ void Economy::add_worker_supply(int ware, Supply* supp)
 	start_request_timer();
 }
 
-/*
-===============
-Economy::have_worker_supply
-
-Return true if the given worker_supply is registered with the economy.
-===============
+/**
+ * \return true if the given worker_supply is registered with the economy, false
+ * otherwise
 */
 bool Economy::have_worker_supply(int ware, Supply* supp)
 {
@@ -3844,13 +3280,8 @@ bool Economy::have_worker_supply(int ware, Supply* supp)
 	return false;
 }
 
-
-/*
-===============
-Economy::remove_worker_supply
-
-Remove a worker_supply from our list of supplies.
-===============
+/**
+ * Remove a worker_supply from our list of supplies.
 */
 void Economy::remove_worker_supply(int ware, Supply* supp)
 {
@@ -3859,13 +3290,8 @@ void Economy::remove_worker_supply(int ware, Supply* supp)
 	m_worker_supplies[ware].remove_supply(supp);
 }
 
-
-/*
-===============
-Economy::add_soldier_supply
-
-Add a soldier_supply to our list of supplies.
-===============
+/**
+ * Add a soldier_supply to our list of supplies.
 */
 void Economy::add_soldier_supply(int ware, Supply* supp)
 {
@@ -3879,12 +3305,8 @@ void Economy::add_soldier_supply(int ware, Supply* supp)
 	start_request_timer();
 }
 
-/*
-===============
-Economy::have_soldier_supply
-
-Return true if the given soldier_supply is registered with the economy.
-===============
+/**
+ * Return true if the given soldier_supply is registered with the economy.
 */
 bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments *) {
 	if (ware >= (int)m_worker_supplies.size())
@@ -3897,13 +3319,8 @@ bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments *) {
 	return false;
 }
 
-
-/*
-===============
-Economy::remove_soldier_supply
-
-Remove a soldier_supply from our list of supplies.
-===============
+/**
+ * Remove a soldier_supply from our list of supplies.
 */
 void Economy::remove_soldier_supply(int ware, Supply* supp)
 {
@@ -3912,14 +3329,8 @@ void Economy::remove_soldier_supply(int ware, Supply* supp)
 	m_worker_supplies[ware].remove_supply(supp);
 }
 
-
-
-/*
-===============
-Economy::add_ware_supply
-
-Add a ware_supply to our list of supplies.
-===============
+/**
+ * Add a ware_supply to our list of supplies.
 */
 void Economy::add_ware_supply(int ware, Supply* supp)
 {
@@ -3933,13 +3344,8 @@ void Economy::add_ware_supply(int ware, Supply* supp)
 	start_request_timer();
 }
 
-
-/*
-===============
-Economy::have_ware_supply
-
-Return true if the given ware_supply is registered with the economy.
-===============
+/**
+ * Return true if the given ware_supply is registered with the economy.
 */
 bool Economy::have_ware_supply(int ware, Supply* supp)
 {
@@ -3953,13 +3359,8 @@ bool Economy::have_ware_supply(int ware, Supply* supp)
 	return false;
 }
 
-
-/*
-===============
-Economy::remove_ware_supply
-
-Remove a ware_supply from our list of supplies.
-===============
+/**
+ * Remove a ware_supply from our list of supplies.
 */
 void Economy::remove_ware_supply(int ware, Supply* supp)
 {
@@ -3969,16 +3370,11 @@ void Economy::remove_ware_supply(int ware, Supply* supp)
 	m_ware_supplies[ware].remove_supply(supp);
 }
 
-
-
-/*
-===============
-Economy::do_merge
-
-Add e's flags to this economy.
-Also transfer all wares and wares request. Try to resolve the new ware requests
-if possible.
-===============
+/**
+ * Add e's flags to this economy.
+ *
+ * Also transfer all wares and wares request. Try to resolve the new ware
+ * requests if possible.
 */
 void Economy::do_merge(Economy *e)
 {
@@ -4005,13 +3401,8 @@ void Economy::do_merge(Economy *e)
 	delete e;
 }
 
-
-/*
-===============
-Economy::do_split
-
-Flag f and all its direct and indirect neighbours are put into a new economy.
-===============
+/**
+ * Flag f and all its direct and indirect neighbours are put into a new economy.
 */
 void Economy::do_split(Flag *f)
 {
@@ -4049,13 +3440,8 @@ void Economy::do_split(Flag *f)
 	e->m_rebuilding = false;
 }
 
-
-/*
-===============
-Economy::start_request_timer
-
-Make sure the request timer is running.
-===============
+/**
+ * Make sure the request timer is running.
 */
 void Economy::start_request_timer(int delta)
 {
@@ -4082,13 +3468,10 @@ void Economy::start_request_timer(int delta)
 	}
 }
 
-/*
- ===============
- Economy::get_ware_substitute
- 
- Find the substitute supply if available - a more experienced worker,
- more advanced ware, etc
- ===============
+/**
+ * Find the substitute supply if available - a more experienced worker,
+ * more advanced ware, etc
+ * 
  */
 int Economy::get_ware_substitute(Request* req, int ware)
 {
@@ -4101,13 +3484,9 @@ int Economy::get_ware_substitute(Request* req, int ware)
 	return -1;
 }
 
-/*
-===============
-Economy::find_best_supply
-
-Find the supply that is best suited to fulfill the given request.
-Returns 0 if no supply is found.
-===============
+/**
+ * Find the supply that is best suited to fulfill the given request.
+ * \return 0 if no supply is found, the best supply otherwise
 */
 Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost, std::vector<SupplyList>* use_supply)
 {
@@ -4178,7 +3557,6 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost,
 	return best_supply;
 }
 
-
 struct RequestSupplyPair {
    bool                 is_item;
    bool                 is_worker;
@@ -4203,13 +3581,8 @@ struct RSPairStruct {
 	int         nexttimer;
 };
 
-
-/*
-===============
-Economy::process_requests
-
-Walk all Requests and find potential transfer candidates.
-===============
+/**
+ * Walk all Requests and find potential transfer candidates.
 */
 void Economy::process_requests(Game* g, RSPairStruct* s)
 {
@@ -4291,13 +3664,9 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 	create_requested_workers (g);
 }
 
-/*
-===============
-Economy::create_requested_workers
-
-Walk all Requests and find requests of workers than aren't supplied. Then try to create
-the worker at warehouses.
-===============
+/**
+ * Walk all Requests and find requests of workers than aren't supplied. Then
+ * try to create the worker at warehouses.
 */
 void Economy::create_requested_workers(Game* g)
 {
@@ -4352,14 +3721,9 @@ log("Economy::process_request-- Created a '%s' needed\n", w_desc->name().c_str()
 	} // if (get_nr_warehouses())
 }
 
-
-/*
-===============
-Economy::balance_requestsupply
-
-Balance Requests and Supplies by collecting and weighing pairs, and
-starting transfers for them.
-===============
+/**
+ * Balance Requests and Supplies by collecting and weighing pairs, and
+ * starting transfers for them.
 */
 void Economy::balance_requestsupply()
 {
@@ -4416,13 +3780,9 @@ void Economy::balance_requestsupply()
 	}
 }
 
-/*
-===============
-Cmd_Call_Economy_Balance
-
-Called by Cmd_Queue as requested by start_request_timer().
-Call economy functions to balance supply and request.
-===============
+/**
+ * Called by Cmd_Queue as requested by start_request_timer().
+ * Call economy functions to balance supply and request.
 */
 void Cmd_Call_Economy_Balance::execute(Game* g) {
    Player* plr=g->get_player(m_player);
@@ -4439,7 +3799,7 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
    m_economy->balance_requestsupply();
 }
 
-/*
+/**
  * Read and write
  */
 #define CURRENT_CMD_CALL_ECONOMY_VERSION 1

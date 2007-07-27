@@ -35,7 +35,7 @@ static const int CARRIER_SPAWN_INTERVAL = 2500;
 
 
 WarehouseSupply::WarehouseSupply(Warehouse* wh)
-: m_warehouse(wh), m_economy (0)
+	: m_economy (0), m_warehouse(wh)
 {}
 
 

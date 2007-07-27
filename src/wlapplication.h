@@ -60,6 +60,8 @@ struct InputCallback {
  * i18n, input handling, timing, low level networking and graphics setup (the
  * actual graphics work is done by \ref class Graphic).
  *
+ * \todo Is the above part about i18n still true? #bedouin
+ *
  * Equally important, the main event loop is chugging along in this class. [not
  * yet but some time in the future #fweber5nov2006]
  *
@@ -93,6 +95,9 @@ struct InputCallback {
  * are (or are not) a primary thread. Each WLApplication singleton really *is* a
  * singleton - inside it's own process.
  *
+ * Forking does not work on windows, but nobody cares enough to investigate.
+ * It's only a debugging convenience anyway.
+ *
  * \par Session recording and playback
  *
  * For debugging, e.g. profiling a real game without incurring the speed dis-
@@ -115,12 +120,14 @@ struct InputCallback {
  * So Widelands must paint it's own cursor (even more so, as we have \e two
  * cursors: the freefloating hand and the cross that moves on nodes) and hide
  * the system cursor. Ordinarily, relative coordinates break down when the
- * cursor leaves the window. This means we have to grab the mouse, then realtive
+ * cursor leaves the window. This means we have to grab the mouse, then relative
  * coords are always available.
  *
  * Mouse: Some mouse functions deal with button mask bits. Bits are simply
  * obtained as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right
  * are pressed"
+ *
+ * \todo Use mousebutton names from SDL instead of hardcoded bitmasks
  *
  * We also implement different mouse speed settings. To make this work, internal
  * mouse position is kept at subpixel resolution.

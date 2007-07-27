@@ -387,14 +387,6 @@ void WLApplication::run()
 	while(!m_should_die) {
 		SDL_Event e;
 
-		//get an event from the queue; on empty queue, create an idle event
-		if (SDL_PollEvent(&e)==0) {
-			e.type=SDL_USEREVENT;
-			e.user.code=IDLE;
-			SDL_PushEvent(&e);
-			//TODO: handle error
-		}
-
 		if(journal->is_recording()) journal->record_event(&e);
 		//TODO: playback
 
@@ -410,9 +402,6 @@ void WLApplication::run()
 			break;
 		case SDL_USEREVENT:
 			switch(e.user.code) {
-			case IDLE:
-				//perhaps sleep a little?
-				break;
 			case CHANGE_MUSIC:
 				g_sound_handler.change_music();
 				break;
