@@ -17,155 +17,128 @@
  *
  */
 
-#include "bob.h"
-
-#include "animation.h"
-#include "critter_bob.h"
-#include "game.h"
-#include "map.h"
-#include "mapviewpixelconstants.h"
-#include "player.h"
-#include "profile.h"
-#include "rendertarget.h"
-#include "transport.h"
-#include "tribe.h"
-#include "wexception.h"
 
 #include <stdio.h>
 
-/*
-==============================================================================
+#include "bob.h"
+#include "critter_bob.h"
+#include "game.h"
+#include "mapviewpixelconstants.h"
+#include "profile.h"
+#include "rendertarget.h"
+#include "transport.h"
+#include "wexception.h"
 
-Bob IMPLEMENTATION
 
-==============================================================================
-*/
-
-/*
-===============
-Bob_Descr::Bob_Descr
-Bob_Descr::~Bob_Descr
-===============
-*/
-Bob_Descr::Bob_Descr
-(const Tribe_Descr * const owner_tribe, const std::string & bob_name)
-: m_name(bob_name), m_owner_tribe(owner_tribe)
-{m_default_encodedata.clear();}
-
-Bob_Descr::~Bob_Descr(void)
+/**
+ * Parse additional information from the config file
+ */
+void Bob::Descr::parse(const char *directory, Profile *prof,
+                  const EncodeData *encdata)
 {
-}
-
-
-/*
-===============
-Bob_Descr::parse
-
-Parse additional information from the config file
-===============
-*/
-void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
-{
-   char buffer [256];
+	char buffer [256];
 	char picname[256];
 
-   Section* global = prof->get_safe_section("idle");
+	Section* global = prof->get_safe_section("idle");
 
-   // Global options
+	// Global options
 	snprintf(buffer, sizeof(buffer), "%s_00.png", m_name.c_str());
-	snprintf
-		(picname, sizeof(picname),
-		 "%s/%s", directory, global->get_string("picture", buffer));
-   m_picture = picname;
+	snprintf(picname, sizeof(picname), "%s/%s", directory,
+	         global->get_string("picture", buffer));
 
-   m_default_encodedata.parse(global);
+	m_picture = picname;
 
-	add_animation
-		("idle",
-		 g_anim.get
-		 (directory,
-		  prof->get_safe_section("idle"),
-		  (m_name + "_??.png").c_str(),
-		  encdata));
+	m_default_encodedata.parse(global);
+
+	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle"),
+	                                 (m_name + "_??.png").c_str(), encdata));
 
 	// Parse attributes
-   const char* string;
+	const char* string;
 	global= prof->get_safe_section("global");
-   while(global->get_next_string("attrib", &string)) {
+
+	while(global->get_next_string("attrib", &string)) {
 		uint attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-		{
-         throw wexception("Bad attribute '%s'", string);
-		}
+			throw wexception("Bad attribute '%s'", string);
 
 		add_attribute(attrib);
 	}
 }
 
 
-/*
-===============
-Bob_Descr::create
-
-Create a bob of this type
-===============
-*/
-Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords)
+/**
+ * Create a bob of this type
+ */
+Bob *Bob::Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords)
 {
-   Bob *bob = create_object();
-   bob->set_owner(owner);
-   bob->set_position(gg, coords);
-   bob->init(gg);
+	Bob *bob = create_object();
+	bob->set_owner(owner);
+	bob->set_position(gg, coords);
+	bob->init(gg);
 
-   return bob;
+	return bob;
 }
 
 
-/*
-==============================
+/**
+ * Master factory to read a bob from the given directory and create the
+ * appropriate description class.
+ */
+Bob::Descr *Bob::Descr::create_from_dir(const char *name,
+                                        const char *directory, Profile *prof,
+                                        Tribe_Descr* tribe)
+{
+	Bob::Descr *bob = 0;
 
-IMPLEMENTATION
+	try {
+		Section *s = prof->get_safe_section("global");
+		const char *type = s->get_safe_string("type");
 
-==============================
-*/
+		if (!strcasecmp(type, "critter"))
+			bob = new Critter_Bob_Descr(tribe, name);
+		else
+			throw wexception("Unsupported bob type '%s'", type);
 
-/*
-===============
-Bob::Bob
+		bob->parse(directory, prof, 0);
+	}
+	catch(std::exception &e) {
+		delete bob;
+		throw wexception("Error reading bob %s: %s", directory, e.what());
+	}
+	catch(...) {
+		delete bob;
+		throw;
+	}
 
-Zero-initialize a map object
-===============
-*/
-Bob::Bob(const Bob_Descr & bob_descr) :
-Map_Object       (&bob_descr),
-m_owner          (0),
-m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
-m_linknext       (0),
-m_linkpprev      (0),
+	return bob;
+}
 
-//  This is not strictly necessary but it shuts up valgrind and feels cleaner.
-m_actid          (0),
 
-m_anim           (0),
-m_animstart      (0),
-
-m_walking        (IDLE),
-m_walkstart      (0),
-m_walkend        (0),
-
-m_stack_dirty    (false),
-m_sched_init_task(false)
+/**
+ * Zero-initialize a map object
+ */
+Bob::Bob(const Bob::Descr & descr) :
+		Map_Object       (&descr),
+		m_owner          (0),
+		m_position       (FCoords(Coords(0,0), 0)), // not linked anywhere
+		m_linknext       (0),
+		m_linkpprev      (0),
+		m_actid          (0),
+		m_anim           (0),
+		m_animstart      (0),
+		m_walking        (IDLE),
+		m_walkstart      (0),
+		m_walkend        (0),
+		m_stack_dirty    (false),
+		m_sched_init_task(false)
 {}
 
 
-/*
-===============
-Bob::~Bob()
-
-Cleanup an object. Removes map links
-===============
-*/
+/**
+ * Cleanup an object. Removes map links
+ */
 Bob::~Bob()
 {
 	if (m_position.field) {
@@ -173,14 +146,6 @@ Bob::~Bob()
 		*(int *)0 = 0;
 	}
 }
-
-
-/*
-===============
-Bob::get_type
-===============
-*/
-int Bob::get_type() const throw () {return BOB;}
 
 
 /*
@@ -235,36 +200,28 @@ modify or even clear the signal before it reaches the normal signal handling
 functions.
 */
 
-/*
-===============
-Bob::init
-
-Make sure you call this from derived classes!
-
-Initialize the object
-===============
-*/
+/**
+ * Initialize the object
+ *
+ * \note Make sure you call this from derived classes!
+ */
 void Bob::init(Editor_Game_Base* gg)
 {
-   Map_Object::init(gg);
+	Map_Object::init(gg);
 
-   m_sched_init_task = true;
+	m_sched_init_task = true;
 
 	if (Game * const game = dynamic_cast<Game * const>(gg))
 		schedule_act(game, 1);
-	else {// In editor: play idle task forever
+	else
+		// In editor: play idle task forever
 		set_animation(gg, descr().get_animation("idle"));
-   }
 }
 
 
-/*
-===============
-Bob::cleanup
-
-Perform independant cleanup as necessary.
-===============
-*/
+/**
+ * Perform independent cleanup as necessary.
+ */
 void Bob::cleanup(Editor_Game_Base *gg)
 {
 	while(m_stack.size()) {
@@ -272,27 +229,23 @@ void Bob::cleanup(Editor_Game_Base *gg)
 		m_stack_dirty = false;
 	}
 
-   if (m_position.field) {
-      m_position.field = 0;
-      *m_linkpprev = m_linknext;
-      if (m_linknext)
-         m_linknext->m_linkpprev = m_linkpprev;
+	if (m_position.field) {
+		m_position.field = 0;
+		*m_linkpprev = m_linknext;
+		if (m_linknext)
+			m_linknext->m_linkpprev = m_linkpprev;
+	}
 
-   }
-   Map_Object::cleanup(gg);
+	Map_Object::cleanup(gg);
 }
 
 
-/*
-===============
-Bob::act
-
-Called by Cmd_Queue when a CMD_ACT event is triggered.
-Hand the acting over to the task.
-
-Change to the next task if necessary.
-===============
-*/
+/**
+ * Called by Cmd_Queue when a CMD_ACT event is triggered.
+ * Hand the acting over to the task.
+ *
+ * Change to the next task if necessary.
+ */
 void Bob::act(Game* g, uint data)
 {
 	if (!m_stack.size()) {
@@ -306,7 +259,8 @@ void Bob::act(Game* g, uint data)
 		m_sched_init_task = false;
 
 		if (!m_stack.size())
-			throw wexception("MO(%u): init_auto_task() failed to set a task", get_serial());
+			throw wexception("MO(%u): init_auto_task() failed to set a task",
+			                 get_serial());
 
 		assert(m_stack_dirty);
 
@@ -332,16 +286,12 @@ void Bob::act(Game* g, uint data)
 }
 
 
-/*
-===============
-Bob::do_act
-
-Handle the actual calls to update() and signal() as appropriate.
-
-signalhandling is true when do_act() is called by send_signal(), and false
-otherwise.
-===============
-*/
+/**
+ * Handle the actual calls to update() and signal() as appropriate.
+ *
+ * signalhandling is true when do_act() is called by send_signal(), and false
+ * otherwise.
+ */
 void Bob::do_act(Game* g, bool signalhandling)
 {
 	for(;;) {
@@ -350,26 +300,26 @@ void Bob::do_act(Game* g, bool signalhandling)
 		origactid = m_actid;
 
 		if (m_stack_dirty)
-			throw wexception("MO(%u): stack dirty before update[%s]", get_serial(),
-									get_state() ? get_state()->task->name : "(nil)");
+			throw wexception("MO(%u): stack dirty before update[%s]",
+			                 get_serial(),
+							 get_state() ? get_state()->task->name : "(nil)");
 
 		// Run the task if we're not coming from signalhandling
 		if (!signalhandling) {
 			const Task & task = *top_state().task;
 			(this->*task.update)(g, &top_state());
 			if (not m_stack_dirty) {
-				if (origactid == m_actid) throw wexception
-					("MO(%u): update[%s] failed to act", get_serial(), task.name);
+				if (origactid == m_actid)
+					throw wexception("MO(%u): update[%s] failed to act",
+					                 get_serial(), task.name);
 				break; // we did our work, now get out of here
-			}
-			else if (origactid != m_actid) throw wexception
-				("MO(%u): [%s] changes both stack and act",
-				 get_serial(),
-				 task.name);
+
+			} else if (origactid != m_actid)
+				throw wexception("MO(%u): [%s] changes both stack and act",
+				                 get_serial(), task.name);
 		}
 
-		do
-		{
+		do {
 			m_stack_dirty = false;
 
 			// Get a new task as soon as possible
@@ -388,7 +338,8 @@ void Bob::do_act(Game* g, bool signalhandling)
 				if (Ptr signal = top_state().task->signal)
 					(this->*signal)(g, get_state());
 
-				// If the initial signal handler doesn't mess with the stack, get out of here
+				// If the initial signal handler doesn't mess with the stack,
+				// get out of here
 				if (!m_stack_dirty && signalhandling)
 					return;
 			}
@@ -399,13 +350,9 @@ void Bob::do_act(Game* g, bool signalhandling)
 }
 
 
-/*
-===============
-Bob::schedule_destroy
-
-Kill self ASAP.
-===============
-*/
+/**
+ * Kill self ASAP.
+ */
 void Bob::schedule_destroy(Game* g)
 {
 	Map_Object::schedule_destroy(g);
@@ -413,107 +360,87 @@ void Bob::schedule_destroy(Game* g)
 }
 
 
-/*
-===============
-Bob::schedule_act
-
-Schedule a new act for the current task. All other pending acts are cancelled.
-===============
-*/
+/**
+ * Schedule a new act for the current task. All other pending acts are
+ * cancelled.
+ */
 void Bob::schedule_act(Game* g, uint tdelta)
 {
 	Map_Object::schedule_act(g, tdelta, ++m_actid);
 }
 
 
-/*
-===============
-Bob::skip_act
-
-Explicitly state that we don't want to act.
-===============
-*/
+/**
+ * Explicitly state that we don't want to act.
+ */
 void Bob::skip_act() {
 	if (!get_state()->task->signal)
 		throw wexception("MO(%u): %s calls skip_act(), but has no signal() function",
-					get_serial(), get_state()->task->name);
+		                 get_serial(), get_state()->task->name);
 
 	m_actid++;
 }
 
 
-/*
-===============
-Bob::force_skip_act
-
-Explicitly state that we don't want to act, even if we cannot be awoken by a
-signal. Use with great care.
-===============
-*/
-void Bob::force_skip_act() {m_stack_dirty = false; ++m_actid;}
-
-
-/*
-===============
-Bob::push_task
-
-Push a new task onto the stack.
-
-push_task() itself does not call any functions of the task, so the caller can
-fill the state information with parameters for the task.
-===============
-*/
-void Bob::push_task(const Task & task) {
-	if (m_stack_dirty && m_stack.size()) throw wexception
-		("MO(%u): push_task(%s): stack already dirty", get_serial(), task.name);
-   m_stack.push_back(State(&task));
-   m_stack_dirty = true;
+/**
+ * Explicitly state that we don't want to act, even if we cannot be awoken by a
+ * signal. Use with great care.
+ */
+void Bob::force_skip_act()
+{
+	m_stack_dirty = false;
+	++m_actid;
 }
 
 
-/*
-===============
-Bob::pop_task
-
-Remove the current task from the stack.
-
-pop_task() itself does not call any parent task functions, but it sets a flag
-to make it happen.
-===============
-   */
-void Bob::pop_task()
+/**
+ * Push a new task onto the stack.
+ *
+ * push_task() itself does not call any functions of the task, so the caller
+ * can fill the state information with parameters for the task.
+ */
+void Bob::push_task(const Task & task)
 {
-   State* state = get_state();
-
-   if (m_stack_dirty)
-      throw wexception("MO(%u): pop_task(%s): stack already dirty", get_serial(), state->task->name);
-
-		delete state->path;
-		delete state->route;
-	if (state->transfer)
-		state->transfer->has_failed();
-
-   m_stack.pop_back();
-
-
+	if (m_stack_dirty && m_stack.size()) throw wexception
+		("MO(%u): push_task(%s): stack already dirty", get_serial(), task.name);
+	m_stack.push_back(State(&task));
 	m_stack_dirty = true;
 }
 
 
-/*
-===============
-Bob::get_state
+/**
+ * Remove the current task from the stack.
+ *
+ * pop_task() itself does not call any parent task functions, but it sets a
+ * flag to make it happen.
+ */
+void Bob::pop_task()
+{
+	State* state = get_state();
 
-Get the bottom-most (usually the only) state of this task from the stack.
-Return 0 if this task is not running at all.
-===============
-*/
+	if (m_stack_dirty)
+		throw wexception("MO(%u): pop_task(%s): stack already dirty",
+		                 get_serial(), state->task->name);
+
+	delete state->path;
+	delete state->route;
+	if (state->transfer)
+		state->transfer->has_failed();
+
+	m_stack.pop_back();
+	m_stack_dirty = true;
+}
+
+
+/**
+ * Get the bottom-most (usually the only) state of this task from the stack.
+ * \return 0 if this task is not running at all.
+ */
 Bob::State* Bob::get_state(Task* task)
 {
 	std::vector<State>::iterator it = m_stack.end();
 
-	while(it != m_stack.begin())
-	{
+	while(it != m_stack.begin()) {
 		--it;
 
 		if (it->task == task)
@@ -524,13 +451,9 @@ Bob::State* Bob::get_state(Task* task)
 }
 
 
-/*
-===============
-Bob::send_signal
-
-Sets the signal string and calls the current task's signal function, if any.
-===============
-*/
+/**
+ * Sets the signal string and calls the current task's signal function, if any.
+ */
 void Bob::send_signal(Game* g, std::string sig)
 {
 	assert(sig.size()); //  use set_signal() for signal removal
@@ -552,65 +475,32 @@ void Bob::send_signal(Game* g, std::string sig)
 }
 
 
-/*
-===============
-Bob::reset_tasks
-
-Force a complete reset of the state stack.
-The state stack is emptied completely, and an init auto task is scheduled
-as if the Bob has just been created and initialized.
-===============
-*/
+/**
+ * Force a complete reset of the state stack.
+ *
+ * The state stack is emptied completely, and an init auto task is scheduled
+ * as if the Bob has just been created and initialized.
+ */
 void Bob::reset_tasks(Game* g)
 {
 	while(m_stack.size()) {
 		m_stack_dirty = false;
-
 		pop_task();
 	}
 
 	set_signal("");
-   schedule_act(g, 1);
-   m_sched_init_task = true;
+	schedule_act(g, 1);
+	m_sched_init_task = true;
 	m_stack_dirty = false;
 }
 
 
-/*
-===============
-Bob::set_signal
 
-Simply set the signal string without calling any functions.
-You should use this function to unset a signal, or to set a signal just before
-calling pop_task().
-===============
-*/
-void Bob::set_signal(std::string sig)
-{
-	m_signal = sig;
-}
-
-
-/*
-===============
-Bob::init_auto_task
-
-Automatically select a task.
-===============
-*/
-void Bob::init_auto_task(Game *) {}
-
-
-/*
-==============================
-
-IDLE task
-
-Wait a time or indefinitely.
-Every signal can interrupt this task.  No signals are caught.
-
-==============================
-*/
+/**
+ * Wait a time or indefinitely.
+ *
+ * Every signal can interrupt this task.  No signals are caught.
+ */
 
 Bob::Task Bob::taskIdle = {
 	"idle",
@@ -621,17 +511,14 @@ Bob::Task Bob::taskIdle = {
 };
 
 
-/*
-===============
-Bob::start_task_idle
-
-Start an idle phase, using the given animation
-If the timeout is a positive value, the idle phase stops after the given
-time.
-
-This task always succeeds unless interrupted.
-===============
-*/
+/**
+ * Start an idle phase, using the given animation
+ *
+ * If the timeout is a positive value, the idle phase stops after the given
+ * time.
+ *
+ * This task always succeeds unless interrupted.
+ */
 void Bob::start_task_idle(Game* g, uint anim, int timeout)
 {
 	State* state;
@@ -645,6 +532,7 @@ void Bob::start_task_idle(Game* g, uint anim, int timeout)
 	state = get_state();
 	state->ivar1 = timeout;
 }
+
 
 void Bob::idle_update(Game* g, State* state)
 {
@@ -661,25 +549,16 @@ void Bob::idle_update(Game* g, State* state)
 	state->ivar1 = 0;
 }
 
-void Bob::idle_signal(Game *, State *) {pop_task();}
 
-
-/*
-==============================
-
-MOVEPATH task
-
-Move along a predefined path.
-ivar1 is the step number.
-ivar2 is non-zero if we should force moving onto the final field.
-ivar3 is number of steps to take maximally or -1
-
-Sets the following signal(s):
-"fail" - cannot move along the given path
-
-==============================
-*/
-
+/**
+ * Move along a predefined path.
+ * \par ivar1 the step number.
+ * \par ivar2 non-zero if we should force moving onto the final field.
+ * \par ivar3 number of steps to take maximally or -1
+ *
+ * Sets the following signal(s):
+ * "fail" - cannot move along the given path
+ */
 Bob::Task Bob::taskMovepath = {
 	"movepath",
 
@@ -688,27 +567,20 @@ Bob::Task Bob::taskMovepath = {
 	0,                     //  mask
 };
 
-/*
-===============
-Bob::start_task_movepath
-
-Start moving to the given destination. persist is the same parameter as
-for Map::findpath().
-
-Returns false if no path could be found.
-
-The task finishes once the goal has been reached. It may fail.
-
-only step defines how many steps should be taken, before this returns as a success
-===============
-*/
-bool Bob::start_task_movepath
-(Game* g,
- const Coords dest,
- int persist,
- const DirAnimations & anims,
- const bool forceonlast,
- const int only_step)
+/**
+ * Start moving to the given destination. persist is the same parameter as
+ * for Map::findpath().
+ *
+ * \return false if no path could be found.
+ *
+ * \note The task finishes once the goal has been reached. It may fail.
+ *
+ * \par only_step defines how many steps should be taken, before this
+ * returns as a success
+ */
+bool Bob::start_task_movepath(Game* g, const Coords dest, int persist,
+                              const DirAnimations & anims,
+                              const bool forceonlast, const int only_step)
 {
 	Path* path = new Path;
 	CheckStepDefault cstep_default(get_movecaps());
@@ -737,18 +609,11 @@ bool Bob::start_task_movepath
 }
 
 
-/*
-===============
-Bob::start_task_movepath
-
-Start moving along the given, precalculated path.
-===============
-*/
-void Bob::start_task_movepath
-(const Path & path,
- const DirAnimations & anims,
- const bool forceonlast,
- const int only_step)
+/**
+ * Start moving along the given, precalculated path.
+ */
+void Bob::start_task_movepath(const Path & path, const DirAnimations & anims,
+							  const bool forceonlast, const int only_step)
 {
 	assert(path.get_start() == get_position());
 
@@ -762,30 +627,23 @@ void Bob::start_task_movepath
 }
 
 
-/*
-===============
-Bob::start_task_movepath
-
-Move to the given index on the given path. The current position must be on the
-given path.
-
-Return true if a task has been started, or false if we already are on the given
-path index.
-===============
-*/
-bool Bob::start_task_movepath
-(const Map & map,
- const Path & origpath,
- const int index,
- const DirAnimations & anims,
- const bool forceonlast,
- const int only_step)
+/**
+ * Move to the given index on the given path. The current position must be on
+ * the given path.
+ *
+ * \return true if a task has been started, or false if we already are on
+ * the given path index.
+ */
+bool Bob::start_task_movepath(const Map & map, const Path & origpath,
+							  const int index, const DirAnimations & anims,
+							  const bool forceonlast, const int only_step)
 {
 	CoordPath path(map, origpath);
 	int curidx = path.get_index(get_position());
 
 	if (curidx == -1)
-		throw wexception("MO(%u): start_task_movepath(index): not on path", get_serial());
+		throw wexception("MO(%u): start_task_movepath(index): not on path",
+		                 get_serial());
 
 	if (curidx != index) {
 		if (curidx < index) {
@@ -808,11 +666,6 @@ bool Bob::start_task_movepath
 }
 
 
-/*
-===============
-Bob::movepath_update
-===============
-*/
 void Bob::movepath_update(Game* g, State* state)
 {
 	if (state->ivar1)
@@ -821,43 +674,43 @@ void Bob::movepath_update(Game* g, State* state)
 	// We ignore signals when they arrive, but interrupt as soon as possible,
 	// i.e. when the next step has finished
 	if (get_signal().size()) {
-		molog("[movepath]: Interrupted by signal '%s'.\n", get_signal().c_str());
+		molog("[movepath]: Interrupted by signal '%s'.\n",
+		      get_signal().c_str());
+
 		pop_task();
 		return;
 	}
 
 	assert(state->ivar1 >= 0);
 	const Path * const path = state->path;
-	if
-		(not path
-		 or
-		 static_cast<const Path::Step_Vector::size_type>(state->ivar1)
-		 >=
-		 path->get_nsteps())
-	{
+	if (not path or
+		static_cast<const Path::Step_Vector::size_type>(state->ivar1) >=
+		path->get_nsteps())	{
+
 		assert(not path or m_position == path->get_end());
-      pop_task(); // success
+		pop_task(); // success
 		return;
+
 	} else if(state->ivar1==state->ivar3) {
       // We have stepped all steps that we were asked for.
       // This is some kind of success, though we do not are were we wanted
       // to go
       pop_task();
       return;
-   }
+	}
 
 	const Direction dir = (*path)[state->ivar1];
 	bool forcemove = false;
 
-	if
-		(state->ivar2
-		 and
-		 static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1
-		 ==
-		 path->get_nsteps())
+	if (state->ivar2 and
+		static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1 ==
+		path->get_nsteps())
+
 		forcemove = true;
 
-	int tdelta = start_walk(g, (WalkingDir)dir, state->diranims->get_animation(dir), forcemove);
+	int tdelta = start_walk(g, (WalkingDir)dir,
+	                        state->diranims->get_animation(dir), forcemove);
+
 	if (tdelta < 0) {
 		molog("[movepath]: Can't walk.\n");
 		set_signal("fail"); // failure to reach goal
@@ -866,28 +719,18 @@ void Bob::movepath_update(Game* g, State* state)
 	}
 
 	state->ivar1++;
-
 	schedule_act(g, tdelta);
 }
 
-/*
- * movepath signal
- */
-void Bob::movepath_signal(Game *, State *) {
-   if(get_signal()=="interrupt_now") {
-      // User requests an immediate interrupt.
-      // Well, he better nows what he's doing
-      pop_task();
-   }
+
+void Bob::movepath_signal(Game *, State *)
+{
+	if(get_signal()=="interrupt_now")
+		// User requests an immediate interrupt.
+		// Well, he better nows what he's doing
+		pop_task();
 }
 
-/*
-==============================
-
-FORCEMOVE task
-
-==============================
-*/
 
 Bob::Task Bob::taskForcemove = {
 	"forcemove",
@@ -898,50 +741,44 @@ Bob::Task Bob::taskForcemove = {
 };
 
 
-/*
-===============
-Bob::start_task_forcemove
-
-Move into the given direction, without passability checks.
-===============
-*/
-void Bob::start_task_forcemove(const int dir, const DirAnimations & anims) {
+/**
+ * Move into the given direction, without passability checks.
+ */
+void Bob::start_task_forcemove(const int dir, const DirAnimations & anims)
+{
 	push_task(taskForcemove);
 	State & state  = top_state();
 	state.ivar1    = dir;
 	state.diranims = &anims;
 }
 
+
 void Bob::forcemove_update(Game* g, State* state)
 {
-	if (state->diranims)
-	{
+	if (state->diranims) {
 		int tdelta = start_walk(g, (WalkingDir)state->ivar1,
-		                        state->diranims->get_animation(state->ivar1), true);
+		                        state->diranims->get_animation(state->ivar1),
+		                        true);
 
 		state->diranims = 0;
 		schedule_act(g, tdelta);
-	}
-	else
-	{
+
+	} else {
 		end_walk();
 		pop_task();
 	}
 }
 
 
-/*
-===============
-Bob::calc_drawpos
-
-Calculates the actual position to draw on from the base field position.
-This function takes walking etc. into account.
-
-pos is the location, in pixels, of the field m_position (height is already
-taken into account).
-===============
-*/
-Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const {
+/**
+ * Calculates the actual position to draw on from the base field position.
+ * This function takes walking etc. into account.
+ *
+ * pos is the location, in pixels, of the field m_position (height is already
+ * taken into account).
+ */
+Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
+{
 	const Map & map = game.get_map();
 	const FCoords end = m_position;
 	FCoords start;
@@ -984,12 +821,14 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const {
 		spos.y += end.field->get_height() * HEIGHT_FACTOR;
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
-		float f =
-			static_cast<float>(game.get_gametime() - m_walkstart)
-			/
-			(m_walkend - m_walkstart);
-		if (f < 0) f = 0;
-		else if (f > 1) f = 1;
+		float f = static_cast<float>(game.get_gametime() - m_walkstart) /
+			      (m_walkend - m_walkstart);
+
+		if (f < 0)
+			f = 0;
+
+		else if (f > 1)
+			f = 1;
 
 		epos.x = static_cast<int>(f * epos.x + (1 - f) * spos.x);
 		epos.y = static_cast<int>(f * epos.y + (1 - f) * spos.y);
@@ -999,77 +838,44 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const {
 }
 
 
-/*
-===============
-Bob::draw
-
-Draw the map object.
-posx/posy is the on-bitmap position of the field we're currently on.
-
-It LERPs between start and end position when we're walking.
-Note that the current field is actually the field we're walking to, not
-the one we start from.
-===============
-*/
-void Bob::draw
-(const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
+/**
+ * Draw the map object.
+ *
+ * posx/posy is the on-bitmap position of the field we're currently on.
+ *
+ * It LERPs between start and end position when we're walking.
+ * Note that the current field is actually the field we're walking to, not
+ * the one we start from.
+ */
+void Bob::draw(const Editor_Game_Base & game, RenderTarget & dst,
+               const Point pos) const
 {
-	if (m_anim) dst.drawanim
-		(calc_drawpos(game, pos),
-		 m_anim,
-		 game.get_gametime() - m_animstart,
-		 get_owner());
+	if (m_anim)
+		dst.drawanim(calc_drawpos(game, pos), m_anim,
+		             (game.get_gametime() - m_animstart), get_owner());
 }
 
 
-/*
-===============
-Bob::set_animation
-
-Set a looping animation, starting now.
-===============
-*/
+/**
+ * Set a looping animation, starting now.
+ */
 void Bob::set_animation(Editor_Game_Base* g, uint anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();
 }
 
-/*
-===============
-Bob::is_walking
 
-Return true if we're currently walking
-===============
-*/
-bool Bob::is_walking()
-{
-	return m_walking != IDLE;
-}
-
-/*
-===============
-Bob::end_walk
-
-Call this from your task_act() function that was scheduled after start_walk().
-===============
-*/
-void Bob::end_walk() {m_walking = IDLE;}
-
-
-/*
-===============
-Bob::start_walk
-
-Cause the object to walk, honoring passable/impassable parts of the map using movecaps.
-If force is true, the passability check is skipped.
-
-Returns the number of milliseconds after which the walk has ended. You must
-call end_walk() after this time, so schedule a task_act().
-
-Returns a negative value when we can't walk into the requested direction.
-===============
-*/
+/**
+ * Cause the object to walk, honoring passable/impassable parts of the map
+ * using movecaps. If force is true, the passability check is skipped.
+ *
+ * \return the number of milliseconds after which the walk has ended. You must
+ * call end_walk() after this time, so schedule a task_act().
+ *
+ * \note Returns a negative value when we can't walk into the requested
+ * direction.
+ */
 int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 {
 	FCoords newf;
@@ -1083,7 +889,8 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	uint movecaps = get_movecaps();
 
 	if (!force) {
-		if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM && newf.field->get_caps() & MOVECAPS_WALK) &&
+		if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM &&
+		      newf.field->get_caps() & MOVECAPS_WALK) &&
 		    !(newf.field->get_caps() & movecaps))
 			return -1;
 	}
@@ -1101,6 +908,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	return tdelta; // yep, we were successful
 }
 
+
 void Bob::set_position(Editor_Game_Base* g, Coords coords)
 {
 	if (m_position.field) {
@@ -1116,20 +924,19 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	if (m_linknext) m_linknext->m_linkpprev = &m_linknext;
 	*m_linkpprev = this;
 }
-/*
+
+/**
  * Give debug informations
  */
-void Bob::log_general_info(Editor_Game_Base* egbase) {
-   molog("Owner: %p\n", m_owner);
-
-   molog("Postition: (%i,%i)\n", m_position.x, m_position.y);
-   molog("ActID: %i\n", m_actid);
-
-	molog
-		("Animation: %s\n",
+void Bob::log_general_info(Editor_Game_Base* egbase)
+{
+	molog("Owner: %p\n", m_owner);
+	molog("Postition: (%i,%i)\n", m_position.x, m_position.y);
+	molog("ActID: %i\n", m_actid);
+	molog("Animation: %s\n",
 		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
-   molog("AnimStart: %i\n", m_animstart);
 
+	molog("AnimStart: %i\n", m_animstart);
 	molog("WalkingDir: %i\n", m_walking);
 	molog("WalkingStart: %i\n", m_walkstart);
 	molog("WalkEnd: %i\n", m_walkend);
@@ -1138,17 +945,18 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
 	molog("Init auto task: %i\n", m_sched_init_task);
 	molog("Signale: %s\n", m_signal.c_str());
 
-   molog("Stack size: %i\n", m_stack.size());
-   for(uint i=0; i<m_stack.size(); i++) {
-      molog("Stack dump %i/%i\n", i+1, m_stack.size());
+	molog("Stack size: %i\n", m_stack.size());
 
-      molog("* task->name: %s\n", m_stack[i].task->name);
+	for(uint i=0; i<m_stack.size(); i++) {
+		molog("Stack dump %i/%i\n", i+1, m_stack.size());
 
-      molog("* ivar1: %i\n", m_stack[i].ivar1);
-      molog("* ivar2: %i\n", m_stack[i].ivar2);
-      molog("* ivar3: %i\n", m_stack[i].ivar3);
+		molog("* task->name: %s\n", m_stack[i].task->name);
 
-      molog("* object pointer: %p\n", m_stack[i].objvar1.get(egbase));
+		molog("* ivar1: %i\n", m_stack[i].ivar1);
+		molog("* ivar2: %i\n", m_stack[i].ivar2);
+		molog("* ivar3: %i\n", m_stack[i].ivar3);
+
+		molog("* object pointer: %p\n", m_stack[i].objvar1.get(egbase));
 		molog("* svar1: %s\n", m_stack[i].svar1.c_str());
 
 		molog("* coords: (%i,%i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
@@ -1162,54 +970,10 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
 			molog("** End: (%i,%i)\n", path.get_end().x, path.get_end().y);
 			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
 				molog("** Step %i/%i: %i\n", j + 1, nr_steps, path[j]);
-      }
+		}
 		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);
 
-      molog("* program: %p\n",  m_stack[i].route);
-   }
-}
-
-/*
-==============================================================================
-
-Bob_Descr factory
-
-==============================================================================
-*/
-
-/*
-===============
-Bob_Descr::create_from_dir(const char *directory) [static]
-
-Master factory to read a bob from the given directory and create the
-appropriate description class.
-===============
-*/
-Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, Profile *prof, Tribe_Descr* tribe)
-{
-	Bob_Descr *bob = 0;
-
-	try
-	{
-		Section *s = prof->get_safe_section("global");
-		const char *type = s->get_safe_string("type");
-
-		if (!strcasecmp(type, "critter")) {
-			bob = new Critter_Bob_Descr(tribe, name);
-		} else
-			throw wexception("Unsupported bob type '%s'", type);
-
-		bob->parse(directory, prof, 0);
+		molog("* program: %p\n",  m_stack[i].route);
 	}
-	catch(std::exception &e) {
-			delete bob;
-		throw wexception("Error reading bob %s: %s", directory, e.what());
-	}
-	catch(...) {
-			delete bob;
-		throw;
-	}
-
-	return bob;
 }

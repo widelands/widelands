@@ -29,7 +29,7 @@ class Worker;
 class WorkerProgram;
 
 
-class Worker_Descr : public Bob_Descr
+class Worker_Descr : public Bob::Descr
 {
 	friend class Tribe_Descr;
 	friend class Warehouse;

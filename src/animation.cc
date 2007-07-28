@@ -318,7 +318,7 @@ If they don't exist, the data is taken from defaults and the bitmaps foowalk_??_
 are used.
 ===============
 */
-void DirAnimations::parse(Bob_Descr* b, const char *directory, Profile *prof, const char *sectnametempl,
+void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *prof, const char *sectnametempl,
                           Section *defaults, const EncodeData *encdefaults)
 {
 	char dirpictempl[256];

@@ -84,7 +84,7 @@ struct Tribe_Descr {
       inline int get_nr_immovables(void) { return m_immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) const { return m_immovables.get(index); }
       inline int get_bob(const char* l) const{ return m_bobs.get_index(l); }
-		inline Bob_Descr* get_bob_descr(ushort index) const{ return m_bobs.get(index); }
+		inline Bob::Descr* get_bob_descr(ushort index) const{ return m_bobs.get(index); }
       inline int get_nr_bobs(void) { return m_bobs.get_nitems(); }
 
 	uint get_frontier_anim() const throw () {return m_anim_frontier;}
@@ -110,7 +110,7 @@ private:
       Descr_Maintainer<Building_Descr> m_buildings;
       Descr_Maintainer<Item_Ware_Descr> m_wares;
       Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
-      Descr_Maintainer<Bob_Descr> m_bobs;  // The player critters
+      Descr_Maintainer<Bob::Descr> m_bobs;  // The player critters
 
 	typedef std::map<std::string, int> starting_resources_map;
 	starting_resources_map m_startwares;

@@ -182,7 +182,7 @@ throw
 
             bool diranims=fr.Unsigned8();
             if(diranims) {
-               const Bob_Descr & bob_descr = bob->descr();
+               const Bob::Descr & bob_descr = bob->descr();
                const uint anims[6] = {
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),

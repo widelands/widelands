@@ -152,7 +152,7 @@ struct World {
 	{const int i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
       inline int get_nr_terrains(void) const { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
-		inline Bob_Descr* get_bob_descr(ushort index) const{ return bobs.get(index); }
+      inline Bob::Descr* get_bob_descr(ushort index) const{ return bobs.get(index); }
       inline int get_nr_bobs(void) const{ return bobs.get_nitems(); }
       inline int get_immovable_index(const char* l)const { return immovables.get_index(l); }
       inline int get_nr_immovables(void) const{ return immovables.get_nitems(); }
@@ -167,7 +167,7 @@ struct World {
 	std::string m_basedir; //  base directory, where the main conf file resides
 	World_Descr_Header                hd;
 
-      Descr_Maintainer<Bob_Descr> bobs;
+      Descr_Maintainer<Bob::Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;
       Descr_Maintainer<Terrain_Descr> ters;
 	Descr_Maintainer<Resource_Descr>  m_resources;

@@ -104,7 +104,7 @@ struct Editor_Game_Base {
 		 const Player_Number,
 		 const Building_Descr::Index);
 		Building* warp_constructionsite(Coords c, char owner, int idx, int oldid=-1);
-	Bob * create_bob(const Coords, const Bob_Descr::Index, const Tribe_Descr * const = 0);
+	Bob * create_bob(const Coords, const Bob::Descr::Index, const Tribe_Descr * const = 0);
 	Immovable* create_immovable(const Coords c, int idx, const Tribe_Descr*);
 	Immovable* create_immovable
 		(const Coords c, const std::string & name, const Tribe_Descr*);

@@ -407,8 +407,8 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 			const char *type = s->get_safe_string("type");
 
 			if (!strcasecmp(type, "critter")) {
-				Bob_Descr *descr;
-				descr = Bob_Descr::create_from_dir(dirname, it->c_str(), &prof, this);
+				Bob::Descr *descr;
+				descr = Bob::Descr::create_from_dir(dirname, it->c_str(), &prof, this);
 				m_bobs.add(descr);
 			} else {
 				Immovable_Descr * const descr = new Immovable_Descr(this, dirname);

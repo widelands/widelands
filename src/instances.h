@@ -39,52 +39,47 @@ namespace UI {struct Tab_Panel;};
 // Base class for descriptions of worker, files and so on. this must just
 // link them together
 //
-struct Map_Object;
-
 struct Map_Object_Descr {
-	typedef Uint8 Index;
-	Map_Object_Descr(void) { }
-   virtual ~Map_Object_Descr(void) {
-      m_anims.clear();
-   }
+	friend class DirAnimations;
+	public:
+		typedef Uint8 Index;
+		Map_Object_Descr(void) {}
+		virtual ~Map_Object_Descr(void) {m_anims.clear();}
 
-	struct Animation_Nonexistent {};
-	uint get_animation(const char * const name) const {
-		std::map<std::string,uint>::const_iterator it = m_anims.find(name);
-		if (it == m_anims.end()) throw Animation_Nonexistent();
-		return it->second;
-   }
+		struct Animation_Nonexistent {};
+		uint get_animation(const char * const name) const {
+			std::map<std::string,uint>::const_iterator it = m_anims.find(name);
+			if (it == m_anims.end()) throw Animation_Nonexistent();
+			return it->second;
+		}
 
-	uint main_animation() const throw ()
-	{return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;}
+		uint main_animation() const throw () {
+			return (m_anims.begin() != m_anims.end()) ?
+					m_anims.begin()->second : 0;
+		}
 
-	bool has_attribute(uint attr) const throw ();
+		std::string get_animation_name(const uint anim) const; // This is needed for save games and debug
+		bool has_attribute(uint attr) const throw ();
+		static uint get_attribute_id(std::string name);
 
-	std::string get_animation_name(const uint anim) const; // This is needed for save games and debug
+	protected:
+		void add_attribute(uint attr);
 
-protected:
-	void add_attribute(uint attr);
-
-   void add_animation(const char* name, uint anim);
-   bool is_animation_known(const char* name);
-
-
-private:
-	std::vector<uint>           m_attributes;
-   std::map<std::string,uint> m_anims;
+		void add_animation(const char* name, uint anim);
+		bool is_animation_known(const char* name);
 
 
-public:
-	static uint get_attribute_id(std::string name);
+	private:
+		typedef std::map<std::string, uint> AttribMap;
 
-private:
-	typedef std::map<std::string, uint> AttribMap;
+		Map_Object_Descr & operator=(const Map_Object_Descr &);
+		Map_Object_Descr            (const Map_Object_Descr &);
 
-	static uint        s_dyn_attribhigh; //  highest attribute ID used
-	static AttribMap   s_dyn_attribs;
+		std::vector<uint>           m_attributes;
+		std::map<std::string,uint>  m_anims;
+		static uint                 s_dyn_attribhigh; //  highest attribute ID used
+		static AttribMap            s_dyn_attribs;
 
-	Map_Object_Descr & operator=(const Map_Object_Descr &);
-	Map_Object_Descr            (const Map_Object_Descr &);
 };
 
 /**

@@ -28,7 +28,7 @@ class Critter_BobProgram;
 //
 // Description
 //
-struct Critter_Bob_Descr : public Bob_Descr {
+struct Critter_Bob_Descr : public Bob::Descr {
 	Critter_Bob_Descr
 		(const Tribe_Descr * const, const std::string & critter_bob_name);
 	virtual ~Critter_Bob_Descr();

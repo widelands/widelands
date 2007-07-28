@@ -21,6 +21,7 @@
 #define included_animation_h
 
 #include "geometry.h"
+#include "instances.h"
 #include "rgbcolor.h"
 
 #include <string>
@@ -82,7 +83,6 @@ private:
 * Use this class to automatically manage a set of 6 animations, one for each
 * possible direction
 */
-class Bob_Descr;
 struct DirAnimations {
 	DirAnimations
 		(const uint dir1 = 0,
@@ -93,14 +93,15 @@ struct DirAnimations {
 		 const uint dir6 = 0);
 	~DirAnimations();
 
-	void parse(Bob_Descr* b, const char *directory, Profile *prof, const char *sectnametempl, Section *defaults = 0,
+	void parse(Map_Object_Descr* b, const char *directory, Profile *prof,
+	           const char *sectnametempl, Section *defaults = 0,
 	           const EncodeData *encdefaults = 0);
 
 	uint get_animation(const int dir) const throw ()
-	{return m_animations[dir - 1];}
+			{return m_animations[dir - 1];}
 
-private:
-	uint m_animations[6];
+	private:
+		uint m_animations[6];
 };
 
 extern AnimationManager g_anim;

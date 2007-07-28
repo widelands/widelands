@@ -330,8 +330,8 @@ void World::parse_bobs()
 			const char *type = s->get_safe_string("type");
 
 			if (!strcasecmp(type, "critter")) {
-				Bob_Descr *descr;
-				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof, 0);
+				Bob::Descr *descr;
+				descr = Bob::Descr::create_from_dir(name, it->c_str(), &prof, 0);
 				bobs.add(descr);
 			} else {
 				Immovable_Descr * const descr = new Immovable_Descr(0, name);

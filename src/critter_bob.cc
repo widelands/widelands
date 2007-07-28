@@ -161,12 +161,11 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 ===========================================================================
 */
 
-/*
- * Constructor
- */
-Critter_Bob_Descr::Critter_Bob_Descr
-(const Tribe_Descr * const tribe_descr, const std::string & critter_bob_name)
-: Bob_Descr(tribe_descr, critter_bob_name), m_swimming(0)
+Critter_Bob_Descr::Critter_Bob_Descr(const Tribe_Descr * const tribe_descr,
+                                     const std::string & critter_bob_name) :
+
+                                     Bob::Descr(tribe_descr, critter_bob_name),
+                                     m_swimming(0)
 {}
 
 
@@ -199,7 +198,7 @@ const Critter_BobProgram* Critter_Bob_Descr::get_program(std::string programname
 
 void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
-	Bob_Descr::parse(directory, prof, encdata);
+	Bob::Descr::parse(directory, prof, encdata);
 
 	Section *s = prof->get_safe_section("global");
 

@@ -634,9 +634,9 @@ idx is the bob type.
 ===============
 */
 Bob * Editor_Game_Base::create_bob
-(const Coords c, const Bob_Descr::Index idx, const Tribe_Descr * const tribe)
+(const Coords c, const Bob::Descr::Index idx, const Tribe_Descr * const tribe)
 {
-	Bob_Descr *descr;
+	Bob::Descr *descr;
 
    if(!tribe)
       descr = m_map->get_world()->get_bob_descr(idx);

@@ -30,12 +30,12 @@
 #include "worker_descr.h"
 #include "worker_program.h"
 
-Worker_Descr::Worker_Descr(const Tribe_Descr & tribe_descr,
+Worker_Descr::Worker_Descr(const Tribe_Descr  & tribe_descr,
                             const std::string & worker_name):
-                            Bob_Descr        (&tribe_descr, worker_name),
-                            m_menu_pic_fname (0),
-                            m_menu_pic(0),
-							m_becomes_index(-2)
+                            Bob::Descr        (&tribe_descr, worker_name),
+                            m_menu_pic_fname  (0),
+                            m_menu_pic        (0),
+							m_becomes_index   (-2)
 {
 	add_attribute(Map_Object::WORKER);
 }
@@ -102,7 +102,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 	char fname[256];
 	Section* sglobal;
 
-	Bob_Descr::parse(directory, prof, encdata);
+	Bob::Descr::parse(directory, prof, encdata);
 
 	sglobal = prof->get_safe_section("global");
 
@@ -266,7 +266,7 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 int Worker_Descr::get_becomes_index() const throw() {
 	if (m_becomes_index >= -1) // already calculated
 		return m_becomes_index;
-	
+
 	const char * becomes = get_becomes();
 	if (NULL != becomes && 0 != becomes[0])
 		m_becomes_index = tribe().get_safe_worker_index(becomes);
@@ -282,7 +282,7 @@ int Worker_Descr::get_becomes_index() const throw() {
 bool Worker_Descr::can_act_as(int ware) const {
 	if (ware == tribe().get_worker_index(name().c_str()))
 		return true;
-	
+
 	// if requested worker type can be promoted, compare with that type
 	const Worker_Descr *descr = tribe().get_worker_descr(ware);
 	const int becomes = descr->get_becomes_index();
