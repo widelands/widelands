@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,38 +19,38 @@
 #ifndef __S__WIDELANDS_BATTLE__H__
 #define __S__WIDELANDS_BATTLE__H__
 
+
 #include "immovable.h"
+#include "soldier.h"
 
-struct Soldier;
-
-class Widelands_Map_Battle_Data_Packet;
 
 class Battle : public BaseImmovable
 {
-   friend class Widelands_Map_Battle_Data_Packet;
-   public:
-         Battle();
-         ~Battle();
-	virtual int  get_type    () const throw () {return BATTLE;}
-	virtual int  get_size    () const throw () {return SMALL;}
-	virtual bool get_passable() const throw () {return false;}
-      virtual void draw
-         (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
-      {}
+	friend class Widelands_Map_Battle_Data_Packet;
 
-      void init (Editor_Game_Base*);
-      void init (Editor_Game_Base*, Soldier*, Soldier*);
-      void soldiers (Soldier*, Soldier*);
-      virtual void cleanup (Editor_Game_Base*);
-      virtual void act (Game*, uint);
+	public:
+		typedef Map_Object_Descr Descr;
 
-   private:
-      Soldier* m_first;
-      Soldier* m_second;
-      int      m_last_try;
-      int      m_next_assault;
+		Battle();
+		~Battle();
+		virtual int  get_type    () const throw () {return BATTLE;}
+		virtual int  get_size    () const throw () {return SMALL;}
+		virtual bool get_passable() const throw () {return false;}
+
+		virtual void draw(const Editor_Game_Base &, RenderTarget &,
+		                  const FCoords, const Point) {}
+
+		void init (Editor_Game_Base*);
+		void init (Editor_Game_Base*, Soldier*, Soldier*);
+		void soldiers (Soldier*, Soldier*);
+		virtual void cleanup (Editor_Game_Base*);
+		virtual void act (Game*, uint);
+
+	private:
+		Soldier* m_first;
+		Soldier* m_second;
+		int      m_last_try;
+		int      m_next_assault;
 };
-
-
 
 #endif

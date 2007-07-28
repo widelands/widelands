@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,143 +20,137 @@
 
 #include "battle.h"
 
-#include "error.h"
+//#include "error.h"
 #include "game.h"
-#include "soldier.h"
-
-class Battle_Descr : public Map_Object_Descr
-{
-   public:
-      Battle_Descr() { }
-      ~Battle_Descr() { }
-};
-
-Battle_Descr g_Battle_Descr;
 
 
-Battle::Battle () :
-BaseImmovable(g_Battle_Descr),
-m_first      (0),
-m_second     (0),
-m_last_try   (0)
+Battle::Descr g_Battle_Descr;
+
+
+Battle::Battle (): BaseImmovable(g_Battle_Descr),
+                   m_first      (0),
+                   m_second     (0),
+                   m_last_try   (0)
 {}
+
 
 Battle::~Battle ()
 {
-   if (m_first) log ("Battle : first wasn't removed yet!\n");
-   if (m_second) log ("Battle : second wasn't removed yet!\n");
+	if (m_first) log ("Battle : first wasn't removed yet!\n");
+	if (m_second) log ("Battle : second wasn't removed yet!\n");
 }
+
 
 void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
 {
-   assert (eg);
-   assert (s1);
-   assert (s2);
+	assert (eg);
+	assert (s1);
+	assert (s2);
 
-   log ("Battle::init\n");
-   Map_Object::init(eg);
-   m_first = s1;
-   m_second = s2;
+	log ("Battle::init\n");
+	Map_Object::init(eg);
+	m_first = s1;
+	m_second = s2;
 	if (Game * const game = dynamic_cast<Game * const>(eg))
 		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
+
 
 void Battle::init (Editor_Game_Base* eg)
 {
-   assert (eg);
+	assert (eg);
 
-   Map_Object::init(eg);
+	Map_Object::init(eg);
 
 	if (Game * const game = dynamic_cast<Game * const>(eg))
 		m_next_assault = schedule_act(game, 1000); // Every round is 1000 ms
 }
 
+
 void Battle::soldiers (Soldier* s1, Soldier* s2)
 {
-   assert (s1);
-   assert (s2);
-   log ("Battle::init\n");
+	assert (s1);
+	assert (s2);
+	log ("Battle::init\n");
 
-   m_first = s1;
-   m_second = s2;
-
+	m_first = s1;
+	m_second = s2;
 }
 
 
 void Battle::cleanup (Editor_Game_Base* eg)
 {
-   log ("Battle::cleanup\n");
-   m_first = 0;
-   m_second = 0;
-   Map_Object::cleanup(eg);
+	log ("Battle::cleanup\n");
+	m_first = 0;
+	m_second = 0;
+	Map_Object::cleanup(eg);
 }
 
-void Battle::act (Game * g, uint) {
-   log ("Battle::act\n");
 
-   Soldier* attacker;
-   Soldier* defender;
+void Battle::act (Game * g, uint)
+{
+	log ("Battle::act\n");
 
-   attacker = m_second;
-   defender = m_first;
+	Soldier* attacker;
+	Soldier* defender;
 
-   m_last_try = !m_last_try;
-   if (m_last_try)
-   {
-      attacker = m_first;
-      defender = m_second;
-   }
+	attacker = m_second;
+	defender = m_first;
 
-   else
-   {
-      attacker = m_second;
-      defender = m_first;
-   }
+	m_last_try = !m_last_try;
+	if (m_last_try)	{
+		attacker = m_first;
+		defender = m_second;
 
-   if (attacker->get_current_hitpoints() < 1)
-   {
-      attacker->send_signal(g, "die");
-      defender->send_signal(g, "won_battle");
+	} else {
+		attacker = m_second;
+		defender = m_first;
+	}
 
-      m_first = 0;
-      m_second = 0;
-      schedule_destroy (g);
-      return;
-   }
-   if (defender->get_current_hitpoints() < 1)
-   {
-      defender->send_signal(g, "die");
-      attacker->send_signal(g, "won_battle");
+	if (attacker->get_current_hitpoints() < 1) {
+		attacker->send_signal(g, "die");
+		defender->send_signal(g, "won_battle");
 
-      m_first = 0;
-      m_second = 0;
-      schedule_destroy (g);
-      return;
-   }
+		m_first = 0;
+		m_second = 0;
+		schedule_destroy (g);
+		return;
+	}
 
-   // Put attack animation
-   //attacker->start_animation(g, "attack", 1000);
-   uint hit = g->logic_rand() % 100;
-   log (" hit=%d ", hit);
-   //FIXME: correct implementaion
-   if (hit > defender->get_evade())
-   {
-      uint attack = attacker->get_min_attack() +
-            (g->logic_rand()% (attacker->get_max_attack()-attacker->get_min_attack()-1));
-      uint defend = defender->get_defense();
-      defend = (attack * defend) / 100;
+	if (defender->get_current_hitpoints() < 1)
+	{
+		defender->send_signal(g, "die");
+		attacker->send_signal(g, "won_battle");
 
-log (" attack(%d)=%d ", attacker->get_serial(), attack);
-log (" defense(%d)=%d ", defender->get_serial(), defend);
-log (" damage=%d\n", attack-defend);
+		m_first = 0;
+		m_second = 0;
+		schedule_destroy (g);
+		return;
+	}
 
-      defender->damage (attack-defend);
-      // defender->start_animation(g, "defend", 1000);
-   }
-   else
-   {
-log (" evade(%d)=%d\n", defender->get_serial(), defender->get_evade());
-      //defender->start_animation(g, "evade", 1000);
-   }
-   m_next_assault = schedule_act(g, 1000);
+	// Put attack animation
+	//attacker->start_animation(g, "attack", 1000);
+	uint hit = g->logic_rand() % 100;
+	log (" hit=%d ", hit);
+	//FIXME: correct implementaion
+	if (hit > defender->get_evade()) {
+		uint attack = attacker->get_min_attack() +
+					  (g->logic_rand() % (attacker->get_max_attack() -
+										  attacker->get_min_attack() -1 ) );
+
+		uint defend = defender->get_defense();
+		defend = (attack * defend) / 100;
+
+		log (" attack(%d)=%d ", attacker->get_serial(), attack);
+		log (" defense(%d)=%d ", defender->get_serial(), defend);
+		log (" damage=%d\n", attack-defend);
+
+		defender->damage (attack-defend);
+		// defender->start_animation(g, "defend", 1000);
+
+	} else {
+		log (" evade(%d)=%d\n", defender->get_serial(), defender->get_evade());
+		//defender->start_animation(g, "evade", 1000);
+	}
+	m_next_assault = schedule_act(g, 1000);
 }
