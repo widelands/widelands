@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-06-13 18:25+0000\n"
+"POT-Creation-Date: 2007-07-28 18:20+0000\n"
 "PO-Revision-Date: 2007-06-13 20:34+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -136,4 +136,3 @@ msgstr "Guerra dos Vales"
 #: ../../maps/War of the Valleys.wmf/elemental:11
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Está escrito que ata a lua e o sol deben atopa-lo seu camiño entre as espirais destes montes. PISTA: Os monolitos indican vetas de mineral. Non mandes xeólogos a outro lugar."
-

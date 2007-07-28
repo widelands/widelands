@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-06-13 18:25+0000\n"
-"PO-Revision-Date: 2007-06-13 21:04+0100\n"
+"POT-Creation-Date: 2007-07-28 18:20+0000\n"
+"PO-Revision-Date: 2007-07-28 20:27+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -353,67 +353,67 @@ msgstr "Efectos de son"
 msgid "Maps and Missions"
 msgstr "Mapas e misións"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:110
 msgid "Barbarian Campaign Story"
 msgstr "Historia da Campaña dos Bárbaros"
 
-#: ../../txts/developers:115
+#: ../../txts/developers:116
 msgid "Translators"
 msgstr "Tradutores"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Czech"
 msgstr "Checo"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:126
 msgid "Dutch"
 msgstr "Holandés"
 
-#: ../../txts/developers:130
+#: ../../txts/developers:131
 msgid "Finnish"
 msgstr "Finés"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:136
 msgid "French"
 msgstr "Francés"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:142
 msgid "Galician"
 msgstr "Galego"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "German"
 msgstr "Alemán"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:154
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:159
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: ../../txts/developers:163
+#: ../../txts/developers:164
 msgid "Polish"
 msgstr "Polaco"
 
-#: ../../txts/developers:169
+#: ../../txts/developers:170
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:175
 msgid "Spanish"
 msgstr "Castelán"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:180
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Swedish"
 msgstr "Sueco"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:193
 msgid "Packagers"
 msgstr "Empaquetadores"
 
@@ -499,38 +499,42 @@ msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT          (Mantido) Elixe a segunda ferramenta alternativa"
 
 #: ../../txts/gametips:13
-msgid "Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop."
-msgstr "Algúns edifícios (por exemplo, os viñedos) precisan unha pequena área de traballo, de modo que, se o edifício está rodeado de árbores ou camiños, ha deixar de producir."
+msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
+msgstr "Algúns edifícios (por exemplo, os viñedos) precisan unha pequena área de traballo. Se o edifício está rodeado de árbores ou camiños, ha deixar de producir."
 
 #: ../../txts/gametips:17
-msgid "Watch the fishers hut - after fish resource is exhausted in working area, production will stop."
-msgstr "Vixía as cabanas dos pescadores. Cando rematen con tódolos peixes do súa zona, han deizar de producir."
+msgid "Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop."
+msgstr "Vixia as cabanas dos pescadores. Cando rematen con tódolos peixes do sua zona, han deixar de producir."
 
 #: ../../txts/gametips:21
-msgid "Building process will start only after a road is built to the construction site."
+msgid "The building process will only start after a road is built to the construction site."
 msgstr "A construción só pode comezar cando un camiño chegue ata o lugar de edificación."
 
 #: ../../txts/gametips:25
-msgid "Be sure to send out a geologist to explore site before building a well or mine."
+msgid "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr "Está certo de enviar un xeólogo a explorar o terreo antes de construir un pozo ou unha mina."
 
 #: ../../txts/gametips:29
-msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc."
-msgstr "O teu territorio pode crecer se constrúes algúns edifícios militares, coma Centinelas, Fortezas, Cuartéis, etc..."
+msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
+msgstr "O teu territorio pode crecer se constrúes alguns edifícios militares, coma Centinelas, Fortezas, Cuartéis, etc..."
 
 #: ../../txts/gametips:33
-msgid "Miners will work only if supplied with food."
+msgid "Miners will only work if supplied with food."
 msgstr "Os mineiros só han traballar se teñen comida."
 
 #: ../../txts/gametips:37
-msgid "Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares."
-msgstr "Divide os teus camiños en tramos curtos, situando bandeiras. Isto ha acelerá-lo transporte das túas mercadorias."
+msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
+msgstr "Divide os teus camiños en tramos curtos, situando bandeiras. Isto ha acelerá-lo transporte das tuas mercadorias."
 
 #: ../../txts/gametips:41
-msgid "Always build up some forester- or rangerhut, so you will not go out of trunks and wood."
-msgstr "Cosntrúe sempre unha cabana de gardabosques ou de silvicultor, pra estar certo de non quedar sen árbores ou troncos."
+msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
+msgstr "Cosntrúe sempre unha cabana de gardabosques ou de silvicultor, para non quedar sen árbores ou troncos."
 
 #: ../../txts/gametips:45
 msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
 msgstr "¿Máis preguntas? Visítanos en www.widelands.org. Aló has atopar FAQs, o Wiki e os Foros da nosa comunidade."
+
+#: ../../txts/gametips:49
+msgid "Use priority buttons in building window to adjust delivery of a specific ware."
+msgstr "Usa os botóns de prioridade na ventá dun edifício para axustá-las entregas dunha mercadoría determinada."
 
