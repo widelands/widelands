@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-06-13 18:25+0000\n"
-"PO-Revision-Date: 2007-06-13 20:51+0100\n"
+"POT-Creation-Date: 2007-07-28 18:20+0000\n"
+"PO-Revision-Date: 2007-07-28 20:25+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -353,67 +353,67 @@ msgstr "Efectos de sonido"
 msgid "Maps and Missions"
 msgstr "Mapas y Misiones"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:110
 msgid "Barbarian Campaign Story"
 msgstr "Historia de las Campañas Bárbaras"
 
-#: ../../txts/developers:115
+#: ../../txts/developers:116
 msgid "Translators"
 msgstr "Traductores"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Czech"
 msgstr "Checo"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:126
 msgid "Dutch"
 msgstr "Holandés"
 
-#: ../../txts/developers:130
+#: ../../txts/developers:131
 msgid "Finnish"
 msgstr "Finlandés"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:136
 msgid "French"
 msgstr "Francés"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:142
 msgid "Galician"
 msgstr "Gallego"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "German"
 msgstr "Alemán"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:154
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:159
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: ../../txts/developers:163
+#: ../../txts/developers:164
 msgid "Polish"
 msgstr "Polaco"
 
-#: ../../txts/developers:169
+#: ../../txts/developers:170
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:175
 msgid "Spanish"
 msgstr "Castellano"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:180
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Swedish"
 msgstr "Sueco"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:193
 msgid "Packagers"
 msgstr "Empaquetadores"
 
@@ -499,38 +499,42 @@ msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT        (pulsado) Selecciona la segunda herramienta alternativa"
 
 #: ../../txts/gametips:13
-msgid "Some buildings (for example, vineyard) have a very small working area, so if building is surrounded with trees and roads, production will stop."
-msgstr "Algunos edificios (por ejemplo, los viñedos) tienen una pequeña área de producción, de modo que, si el edificio está rodeado de árboles o caminos, dejará de ser productivo."
+msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
+msgstr "Algunos edificios (por ejemplo, los viñedos) tienen una pequeña área de producción .Si el edificio está rodeado de árboles o caminos, dejará de ser productivo."
 
 #: ../../txts/gametips:17
-msgid "Watch the fishers hut - after fish resource is exhausted in working area, production will stop."
+msgid "Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop."
 msgstr "Vigila las cabañas de los pescadores. Cuando hayan terminado con todos los peces de la zona, dejarán de ser productivas."
 
 #: ../../txts/gametips:21
-msgid "Building process will start only after a road is built to the construction site."
+msgid "The building process will only start after a road is built to the construction site."
 msgstr "La construcción sólo comenzará cuando haya un camino construido hasta el punto de edificación."
 
 #: ../../txts/gametips:25
-msgid "Be sure to send out a geologist to explore site before building a well or mine."
+msgid "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr "Asegúrate de enviar un geólogo a explorar el área antes de construir un pozo o una mina."
 
 #: ../../txts/gametips:29
-msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Baracks, etc."
+msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
 msgstr "Puedes expandir tu territorio construyendo varios edificios militares: Centinelas, Fortalezas, Cuarteles, etc..."
 
 #: ../../txts/gametips:33
-msgid "Miners will work only if supplied with food."
+msgid "Miners will only work if supplied with food."
 msgstr "Los mineros sólo trabajarán si disponen de comida."
 
 #: ../../txts/gametips:37
-msgid "Split you roads in several short tracks, trough planting some flags. This will speed up transportation of your wares."
+msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
 msgstr "Divide tus caminos en varios tramos pequeños, colocando banderas intermedias. De este modo acelerarás el transporte de tus mercancías."
 
 #: ../../txts/gametips:41
-msgid "Always build up some forester- or rangerhut, so you will not go out of trunks and wood."
-msgstr "Construye siempre una cabaña de guardabosques o de silvicultor, de modo que nunca te quedes sin madera ni troncos."
+msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
+msgstr "Construye siempre una cabaña de guardabosques o de silvicultor, para no quedarte nunca sin madera ni troncos."
 
 #: ../../txts/gametips:45
 msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
 msgstr "¿Más preguntas? Visítanos en www.widelands.org. Allí encontrarás los FAQs, el wiki y, por supuesto, los foros de nuestra comunidad."
+
+#: ../../txts/gametips:49
+msgid "Use priority buttons in building window to adjust delivery of a specific ware."
+msgstr "Usa los botones de prioridad en la ventana de un edificio para ajustar las entregas de un material determinado"
 
