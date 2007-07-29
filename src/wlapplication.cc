@@ -1211,6 +1211,15 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
+      #if __WIN32__
+      // The Winsock2 library needs to get called through WSAStartup,
+      // to initiate the use of the Winsock DLL by Widelands.
+      WSADATA wsaData;   
+      if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0) {
+        throw wexception("Initialisation of Wsock2-library failed");
+        }
+      #endif
+      
 	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup ns;
 

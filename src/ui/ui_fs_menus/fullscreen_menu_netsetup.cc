@@ -36,7 +36,7 @@ joingame
  90, 220, 200, 26,
  1,
  &Fullscreen_Menu_NetSetup::clicked_joingame, this,
- _("Join a Game")),
+ _("Join a Game"), std::string(), false),
 
 hostgame
 (this,
@@ -125,6 +125,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 void Fullscreen_Menu_NetSetup::game_selected (uint) {
 	if (const LAN_Open_Game * const game = opengames.get_selected())
 		hostname.set_text(game->info.hostname);
+		joingame.set_enabled(true);
 }
 
 void Fullscreen_Menu_NetSetup::update_game_info
