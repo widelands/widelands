@@ -43,50 +43,37 @@ using std::endl;
 // this is a detail of S2 maps
 #define CRITTER_PER_DEFINITION   1
 
-/*
-=============================
+/**
+ * class S2_Map_Loader
+ *
+ * the implementation of the S2 Map Loader
+ */
 
-class S2_Map_Loader
 
-implementation of the S2 Map Loader
-
-=============================
-*/
-
-/*
-===========
-S2_Map_Loader::S2_Map_Loader()
-
-inits the map loader
-===========
-*/
+/**
+ * S2_Map_Loader::S2_Map_Loader() - inits the map loader
+ */
 S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) : Map_Loader(filename, map)
 {
 	snprintf(m_filename, sizeof(m_filename), "%s", filename);
 	m_map=map;
 }
 
-/*
-===========
-S2_Map_Loader::~S2_Map_Loader()
 
-cleanups
-===========
-*/
+/**
+ * S2_Map_Loader::~S2_Map_Loader() - cleanups
+ */
 S2_Map_Loader::~S2_Map_Loader() {
 }
 
-/*
-===========
-S2_Map_Loader::preload_map()
 
-preloads the map. The map will then return valid
-infos when get_width() or get_nrplayers(),
-get_author() and so on are called
-
-load the header
-===========
-*/
+/**
+ * S2_Map_Loader::preload_map() - load the header
+ *
+ * preloads the map. The map will then return valid
+ * infos when get_width() or get_nrplayers(),
+ * get_author() and so on are called
+ */
 int S2_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
 
@@ -116,7 +103,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
       };
 
       for(int i=1; i<=m_map->get_nrplayers(); i++) {
-         m_map->set_scenario_player_tribe(i, "empires"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
+         m_map->set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
          m_map->set_scenario_player_name(i, names[i-1]);
       }
    }
@@ -127,7 +114,11 @@ int S2_Map_Loader::preload_map(bool scenario) {
    return 0;
 }
 
-
+/**
+ * S2_Map_Loader::load_world()
+ *
+ * load predefined world of the S2Map
+ */
 void S2_Map_Loader::load_world() {
 	assert(get_state() == STATE_PRELOADED);
 	m_map->load_world();
@@ -135,16 +126,14 @@ void S2_Map_Loader::load_world() {
 }
 
 
-/*
-===========
-S2_Map_Loader::load_map_complete()
-
-Completly loads the map, loads the
-corresponding world, loads the graphics
-and places all the objects. From now on
-the Map* can't be set to another one.
-===========
-*/
+/**
+ * S2_Map_Loader::load_map_complete()
+ *
+ * Completly loads the map, loads the
+ * corresponding world, loads the graphics
+ * and places all the objects. From now on
+ * the Map* can't be set to another one.
+ */
 int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
 	assert(get_state() == STATE_WORLD_LOADED);
 
@@ -159,20 +148,20 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
 
    return 0;
 }
-/*
-===============
-S2_Map_Loader::load_s2mf_section
 
-Some of the original S2 maps have rather odd sizes. In that case, however,
-width (and height?) are rounded up to some alignment. The in-file size of
-a section is stored in the section header (I think ;)).
-This is the work-around.
 
-Returns a pointer to the (packed) contents of the section. 0 if the read
-failed.
-If successful, you must free the returned pointer.
-===============
-*/
+/**
+ * S2_Map_Loader::load_s2mf_section
+ *
+ * Some of the original S2 maps have rather odd sizes. In that case, however,
+ * width (and height?) are rounded up to some alignment. The in-file size of
+ * a section is stored in the section header (I think ;)).
+ * This is the work-around.
+ *
+ * Returns a pointer to the (packed) contents of the section. 0 if the read
+ * failed.
+ * If successful, you must free the returned pointer.
+ */
 uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
 {
    ushort dw, dh;
@@ -225,13 +214,12 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
    return section;
 }
 
-/*
-===============
-S2_Map_Loader::load_s2mf_header [private]
 
-Load informational data of an S2 map
-===============
-*/
+/**
+ * S2_Map_Loader::load_s2mf_header [private]
+ *
+ * Load informational data of an S2 map
+ */
 void S2_Map_Loader::load_s2mf_header()
 {
 	FileRead file;
@@ -265,13 +253,12 @@ void S2_Map_Loader::load_s2mf_header()
 	}
 }
 
-/*
-===============
-S2_Map_Loader::load_s2mf [private]
 
-This loads a given file as a settlers 2 map file
-===============
-*/
+/**
+ * S2_Map_Loader::load_s2mf [private]
+ *
+ * This loads a given file as a settlers 2 map file
+ */
 void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 {
    uchar *section = 0;
@@ -302,11 +289,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		assert(mapwidth  == header.w);
 		assert(mapheight == header.h);
 
-		////           S E C T I O N    1 : H E I G H T S
-		// New section??
+
+		/*
+          SWD-SECTION 1: Heights
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section Heights not found");
+			throw wexception("Section 1 (Heights) not found");
 
 		Field *f = m_map->m_fields;
 		pc = section;
@@ -316,11 +305,13 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		free(section);
 		section = 0;
 
-		////           S E C T I O N    2 : Landscape
-		// New section??
+
+        /*
+          SWD-SECTION 2: Terrain 1
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section Landscape not found");
+			throw wexception("Section 2 (Terrain 1) not found");
 
 		f = m_map->m_fields;
 		pc = section;
@@ -358,11 +349,12 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		section = 0;
 
 
-		// S E C T I O N 3  -------- LANDSCAPE 2
-		// New section??
+        /*
+		  SWD-SECTION 3: Terrain 2
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section Landscape 2 not found");
+			throw wexception("Section 3 (Terrain 2) not found");
 
 		f = m_map->m_fields;
 		pc = section;
@@ -400,35 +392,41 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		section = 0;
 
 
-		// S E C T I O N 4  -------- UNKNOWN !!! Skip
-		// New section??
+		/*
+          SWD-SECTION 4: Existing Roads
+           As loading of Roads at game-start is not supported, yet - we simply skip it.
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section UNKNOWN not found");
+			throw wexception("Section 4 (Existing Roads) not found");
 		free(section);
 		section = 0;
 
-		// S E C T I O N 5  -------- Landscape (rocks, stuff..)
-		// New section??
+
+        /*
+          SWD-SECTION 5: Bobs
+        */
 		bobs = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!bobs)
-			throw wexception("Section 5 (bobs) not found");
+			throw wexception("Section 5 (Bobs) not found");
 
-		// S E C T I O N 6  -------- Ways
-		// This describes where you can put ways
-		// 0xc* == it's not possible to build ways here now
-		// 0x80 == Heres a HQ. bob is Player number
-		//      bob == 0 blue
-		//      bob == 1 yellow
-		//      bob == 2 red
-		//      bob == 3 pink
-		//      bob == 4 grey
-		//      bob == 6 green
-		//      bob == 6 orange
-		// New section??
+
+        /*
+          SWD-SECTION 6: Ways
+           This describes where you can put ways
+		   0xc* == it's not possible to build ways here now
+		   0x80 == Heres a HQ, owner is Player number
+		     owner == 0 -> blue
+		     owner == 1 -> yellow
+		     owner == 2 -> red
+		     owner == 3 -> pink
+		     owner == 4 -> grey
+		     owner == 6 -> green
+		     owner == 6 -> orange
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 6 not found");
+			throw wexception("Section 6 (Ways) not found");
 
 		for (Y_Coordinate y = 0; y < mapheight; ++y) {
 			uint i = y * mapwidth;
@@ -443,24 +441,26 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		free(section);
 		section = 0;
 
-		// S E C T I O N 7  -------- Animals
-		// 0x01 == Bunny
-		// 0x02 == fox
-		// 0x03 == reindeer
-		// 0x04 == deer
-		// 0x05 == duck
-		// 0x06 == sheep
-		// New section??
+
+        /*
+          SWD-SECTION 7: Animals
+		   0x01        == Bunny
+		   0x02        == fox
+		   0x03        == reindeer
+		   0x04 + 0x07 == deer
+		   0x05 + 0x08 == duck
+		   0x06        == sheep
+           0x09        == donkey
+		*/
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 7 (animals) not found");
+			throw wexception("Section 7 (Animals) not found");
 
 		for (Y_Coordinate y = 0; y < mapheight; ++y) {
 			uint i = y * mapwidth;
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				const char *bobname = 0;
 
-				// ignore everything but HQs
 				switch(section[i]) {
 					case 0:
 						break;
@@ -469,7 +469,10 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case 0x03: bobname = "reindeer"; break;
 					case 0x04: bobname = "deer"; break;
 					case 0x05: bobname = "duck"; break;
-					case 0x06: bobname = "Sheep"; break;
+					case 0x06: bobname = "sheep"; break;
+					case 0x07: bobname = "deer"; break;
+					case 0x08: bobname = "duck"; break;
+					// case 0x09: bobname = "donkey"; break; -> Not implemented, yet.
 					default:
 						cerr << "Unsupported animal: " << (int)section[i] << endl;
 						break;
@@ -487,63 +490,73 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		free(section);
 		section = 0;
 
-		// S E C T I O N 8  --------UNKNOWN
-		// New section??
+
+        /*
+          SWD-SECTION 8: Unknown
+           Skipped
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 8 (unknown) not found");
+			throw wexception("Section 8 (Unknown) not found");
 		free(section);
 		section = 0;
 
 
-		// S E C T I O N 9  -------- What buildings can be build?
-		// 0x01 == flags (?? )
-		// 0x02 == buildings (small) (??)
-		// 0x04 == buildings
-		// 0x09 == flags
-		// 0x0a == buildings (small) (??)
-		// 0x0c == buildings (big) (??)
-		// 0x0d == mining
-		// 0x68 == trees
-		// 0x78 == no buildings
-		// New section??
+        /*
+          SWD-SECTION 9: Buildings
+		   What kind of buildings can be build?
+		     0x01 == flags (?? )
+		     0x02 == buildings (small) (??)
+		     0x04 == buildings
+		     0x09 == flags
+		     0x0a == buildings (small) (??)
+		     0x0c == buildings (big) (??)
+		     0x0d == mining
+		     0x68 == trees
+		     0x78 == no buildings
+		*/
 		buildings = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!buildings)
-			throw wexception("Section 9 (buildings) not found");
+			throw wexception("Section 9 (Buildings) not found");
 
-		// S E C T I O N 10  -------- UNKNOWN
-		// New section??
+
+        /*
+          SWD-SECTION 10: Unknown
+           Skipped
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 10 (unknown) not found");
+			throw wexception("Section 10 (Unknown) not found");
 		free(section);
 		section = 0;
 
-		// S E C T I O N 11  -------- STARTING_POINT
-		// I don't know what this does. It really identifies some points
-		//  (6 on new maps, 1 on old)
-		//  But this points don't make sense....
-		//  We skip it.
-		// New section??
+
+        /*
+          SWD-SECTION 11: Settlers2 Mapeditor tool position
+		   In this section the positions of the Mapeditor tools seem to be saved.
+           But as this is unusable for playing or the WL-Editor, we just skip it!
+		*/
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 11 (unknown) not found");
+			throw wexception("Section 11 (Tool Position) not found");
 		free(section);
 		section = 0;
 
-		// S E C T I O N 12  -------- Mining
-		// 0x00 == Water
-		// 0x87 == ?? (but nothing)
-		// 0x21 == things laying around (nothing)
-		// 0x40 == nothing
-		// 0x51-57 == gold 1-7
-		// 0x49-4f == iron 1-7
-		// 0x41-47 == cowl 1-7
-		// 0x59-5f == stones 1-7
-		// New section??
+
+        /*
+          SWD-SECTION 12: Resources
+		   0x00 == Water
+		   0x87 == ?? (but nothing)
+		   0x21 == things laying around (nothing)
+		   0x40 == nothing
+		   0x51-57 == gold 1-7
+		   0x49-4f == iron 1-7
+		   0x41-47 == cowl 1-7
+		   0x59-5f == stones 1-7
+		*/
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 12 (resources) not found");
+			throw wexception("Section 12 (Resources) not found");
 
 		f = m_map->m_fields;
 		pc = section;
@@ -576,34 +589,42 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		section = 0;
 
 
-		// S E C T I O N 13  -------- Bergflanken.
-		//
-		// ?? for what is that ??
-		// Skip
-		// New section??
+        /*
+          SWD-SECTION 13: Higlights and Shadows
+           It seems as if the Settlers2 Mapeditor saves the highlights and shadows from slopes to this section.
+           But as this is unusable for the WL engine, we just skip it.
+		*/
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 13 (unknown) not found");
+			throw wexception("Section 13 (Highlights and Shadows) not found");
 		free(section);
 		section = 0;
 
-		// S E C T I O N 14  -------- Fieldcount
-		// Describes to which island the field sticks
-		//  0 == water
-		//  1 == island 1
-		//  2 == island 2
-		//  ....
-		//  fe == killing field (lava)
-		//
-		// New section??
+
+        /*
+          SWD-SECTION 14: Fieldcount
+		   Describes to which island the field sticks
+		    0 == water
+		    1 == island 1
+		    2 == island 2
+		    ...
+		    fe == killing field (lava)
+
+          Unusable, yet - so we simply skip it.
+        */
 		section = load_s2mf_section(&file, mapwidth, mapheight);
 		if (!section)
-			throw wexception("Section 14 (island id) not found");
+			throw wexception("Section 14 (Island id) not found");
 		free(section);
 		section = 0;
 
 		file.Close();
 
+
+        /*
+          Map is completely read into memory.
+          Now try to convert the last stuff to Widelands-format
+        */
 		uchar c;
 		for (Y_Coordinate y = 0; y < mapheight; ++y)
 			for (X_Coordinate x = 0; x < mapwidth; ++x) {
@@ -651,6 +672,12 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case BOB_DEADTREE3: bobname = "deadtree3"; break;
 					case BOB_DEADTREE4: bobname = "deadtree4"; break;
 
+                    // May it be, that here are the different growing stats?
+                    // BOB_TREE1 = tiny tree1
+                    // BOB_TREE2 = small tree1
+                    // BOB_TREE3 = medium tree1
+                    // BOB_TREE4 = tree1
+                    // ?????????????????
 					case BOB_TREE1:
 					case BOB_TREE2:
 					case BOB_TREE3:
