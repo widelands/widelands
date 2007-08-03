@@ -93,15 +93,20 @@ throw (_wexception)
 				MilitarySite* origin = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
 				assert(origin);
 
-				Coords* battleGround = new Coords(fr.Unsigned32(),fr.Unsigned32());
+				Coordinate x = (Coordinate)fr.Unsigned32();
+				Coordinate y = (Coordinate)fr.Unsigned32();
+				Coords* battleGround = new Coords(x, y);
 
+				bool attacker = fr.Unsigned8();
+				bool arrived = fr.Unsigned8();
+				bool fighting = fr.Unsigned8();
 				AttackController::BattleSoldier bs = {
 					soldier,
 					origin,
 					battleGround,
-					fr.Unsigned8(),
-					fr.Unsigned8(),
-					fr.Unsigned8()
+					attacker,
+					arrived,
+					fighting
 				};
 				ctrl->involvedSoldiers.push_back(bs);
 				soldier->set_attack_ctrl(ctrl);
