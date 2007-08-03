@@ -231,7 +231,7 @@ class Bob : public Map_Object
 	private:
 		void do_act(Game* g, bool signalhandling);
 		void idle_update(Game* g, State* state);
-		void idle_signal(Game* g, State* state) {pop_task();}
+		void idle_signal(Game* g, State* state);
 		void movepath_update(Game* g, State* state);
 		void movepath_signal(Game* g, State* state);
 		void forcemove_update(Game* g, State* state);

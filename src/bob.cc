@@ -550,6 +550,12 @@ void Bob::idle_update(Game* g, State* state)
 }
 
 
+void Bob::idle_signal(Game*, State*)
+{
+	pop_task();
+}
+
+
 /**
  * Move along a predefined path.
  * \par ivar1 the step number.
