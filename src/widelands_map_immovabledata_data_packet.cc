@@ -76,7 +76,15 @@ throw (_wexception)
          Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
 
          // Animation
-         imm->m_anim=imm->descr().get_animation(fr.CString());
+			const char* animname = fr.CString();
+			try {
+				imm->m_anim = imm->descr().get_animation(animname);
+			}
+			catch(Map_Object_Descr::Animation_Nonexistent&) {
+				imm->m_anim = imm->descr().main_animation();
+				log("Warning: Animation '%s' not found, using animation '%s').\n",
+					animname, imm->descr().get_animation_name(imm->m_anim).c_str());
+			}
          imm->m_animstart=fr.Signed32();
 
          // Programm
