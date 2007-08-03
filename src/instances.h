@@ -244,19 +244,19 @@ public:
 
 	bool object_still_available(const Map_Object * const t) const {
 		objmap_t::const_iterator it = m_objects.begin();
-      while(it!=m_objects.end()) {
-         if(it->second==t) return true;
-         ++it;
-      }
-      return false;
-   }
+		while(it!=m_objects.end()) {
+			if(it->second==t) return true;
+			++it;
+		}
+		return false;
+	}
 
-   void overwrite_file_serial(Map_Object*, uint);
+	void overwrite_file_serial(Map_Object*, uint);
 
 private:
 	uint m_lastserial;
 	uint m_last_file_serial;
-   objmap_t m_objects;
+	objmap_t m_objects;
 
 	Object_Manager & operator=(const Object_Manager &);
 	Object_Manager            (const Object_Manager &);
@@ -289,37 +289,37 @@ private:
 
 
 class Cmd_Destroy_Map_Object:public BaseCommand {
-	private:
-		int obj_serial;
+private:
+	int obj_serial;
 
-	public:
-      Cmd_Destroy_Map_Object(void) : BaseCommand(0) { } // For savegame loading
-		Cmd_Destroy_Map_Object (int t, Map_Object* o);
-		virtual void execute (Game* g);
+public:
+	Cmd_Destroy_Map_Object(void) : BaseCommand(0) { } // For savegame loading
+	Cmd_Destroy_Map_Object (int t, Map_Object* o);
+	virtual void execute (Game* g);
 
-      // Write these commands to a file (for savegames)
-      virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	// Write these commands to a file (for savegames)
+	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-      virtual int get_id(void) { return QUEUE_CMD_DESTROY_MAPOBJECT; } // Get this command id
+	virtual int get_id(void) { return QUEUE_CMD_DESTROY_MAPOBJECT; } // Get this command id
 };
 
 class Cmd_Act:public BaseCommand {
-	private:
-		int obj_serial;
-		int arg;
+private:
+	int obj_serial;
+	int arg;
 
-	public:
-      Cmd_Act(void) : BaseCommand(0) { } // For savegame loading
-		Cmd_Act (int t, Map_Object* o, int a);
+public:
+	Cmd_Act(void) : BaseCommand(0) { } // For savegame loading
+	Cmd_Act (int t, Map_Object* o, int a);
 
-		virtual void execute (Game* g);
+	virtual void execute (Game* g);
 
-      // Write these commands to a file (for savegames)
-      virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	// Write these commands to a file (for savegames)
+	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-      virtual int get_id(void) { return QUEUE_CMD_ACT; } // Get this command id
+	virtual int get_id(void) { return QUEUE_CMD_ACT; } // Get this command id
 };
 
 #endif // __S__INSTANCE_H

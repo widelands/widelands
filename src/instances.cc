@@ -410,7 +410,9 @@ Initialize the object by adding it to the object manager.
 ===============
 */
 void Map_Object::init(Editor_Game_Base* g)
-{g->objects().insert(this);}
+{
+	g->objects().insert(this);
+}
 
 /*
 ===============
@@ -420,7 +422,9 @@ Make sure you call this from derived classes!
 ===============
 */
 void Map_Object::cleanup(Editor_Game_Base *g)
-{g->objects().remove(this);}
+{
+	g->objects().remove(this);
+}
 
 
 /*
@@ -434,12 +438,13 @@ Returns the absolute gametime at which the CMD_ACT will occur.
 uint Map_Object::schedule_act(Game* g, uint tdelta, uint data)
 {
 	if (tdelta < Editor_Game_Base::Forever()) {
-	uint time = g->get_gametime() + tdelta;
+		uint time = g->get_gametime() + tdelta;
 
-	g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
+		g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
 
-	return time;
-	} else return Editor_Game_Base::Never();
+		return time;
+	} else
+		return Editor_Game_Base::Never();
 }
 
 
