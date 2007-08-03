@@ -335,9 +335,9 @@ void Journal::record_event(SDL_Event *e)
 		case SDL_KEYDOWN:
 			write((unsigned char)RFC_EVENT);
 			write((unsigned char)RFC_KEYDOWN);
+			write(e->key.keysym.mod);
 			write(e->key.keysym.sym);
 			write(e->key.keysym.unicode);
-			write(e->key.keysym.mod);
 			m_recordstream<<std::flush;
 			break;
 		case SDL_KEYUP:
