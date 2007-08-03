@@ -382,7 +382,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
          delete m_worker_requests[i];
          m_worker_requests[i]=0;
       }
-      m_workers.resize(0);
+      m_worker_requests.resize(0);
    }
 
    if (m_workers.size()) {
@@ -893,7 +893,7 @@ void ProductionSite::program_act(Game* g)
 
 				for (;; ++it) {
 					if (it == soldiers_end) {
-						molog("   ¡¡Training failed!!, program restart\n");
+						molog("   Training failed!!, program restart\n");
 						program_end(g, false);
 						return;
 					}
