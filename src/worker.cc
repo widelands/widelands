@@ -1091,6 +1091,25 @@ void Worker::transfer_update(Game* g, State* state)
 		return;
 	}
 
+	// If our location is a building, make sure we're actually in it.
+	// If we're a building's worker, and we've just been released from
+	// the building, we may be somewhere else entirely (e.g. lumberjack, soldier)
+	// or we may be on the building's flag for a fetch_from_flag or dropoff
+	// task.
+	if (location->get_type() == BUILDING) {
+		BaseImmovable* position = g->get_map()->get_immovable(get_position());
+
+		if (position != location) {
+			if (position->get_type() == FLAG) {
+				location = (PlayerImmovable*)position;
+				set_location(location);
+			} else {
+				set_location(0);
+				return;
+			}
+		}
+	}
+
 	// Figure out where to go
 	bool success;
 	PlayerImmovable* nextstep = state->transfer->get_next_step(location,
