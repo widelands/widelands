@@ -369,6 +369,7 @@ void Journal::record_event(SDL_Event *e)
 		case SDL_MOUSEMOTION:
 			write((unsigned char)RFC_EVENT);
 			write((unsigned char)RFC_MOUSEMOTION);
+			write(e->motion.state);
 			write(e->motion.x);
 			write(e->motion.y);
 			write(e->motion.xrel);
@@ -445,6 +446,7 @@ bool Journal::read_event(SDL_Event *e)
 				break;
 			case RFC_MOUSEMOTION:
 				e->type = SDL_MOUSEMOTION;
+				read(e->motion.state);
 				read(e->motion.x);
 				read(e->motion.y);
 				read(e->motion.xrel);
