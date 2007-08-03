@@ -724,6 +724,7 @@ Worker::Worker(const Worker_Descr & worker_descr):Bob          (worker_descr),
 
 Worker::~Worker()
 {
+	assert(!m_location.is_set());
 }
 
 
