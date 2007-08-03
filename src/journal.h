@@ -70,12 +70,12 @@ public:
 	Journal();
 	~Journal();
 
-	void start_recording(std::string filename="widelands.jnl") throw(Journalfile_error, BadMagic_error);
+	void start_recording(std::string filename="widelands.jnl");
 	void stop_recording();
 	///True if events are being recorded
 	bool is_recording() {return m_record;}
 
-	void start_playback(std::string filename="widelands.jnl") throw(Journalfile_error, BadMagic_error);
+	void start_playback(std::string filename="widelands.jnl");
 	void stop_playback();
 	///True if events are being played back
 	bool is_playingback() {return m_playback;}
@@ -83,8 +83,8 @@ public:
 	void record_event(SDL_Event *e);
 	bool read_event(SDL_Event *e);
 
-	void timestamp_handler(Uint32 *stamp) throw(Journalfile_error);
-	void set_idle_mark() throw(Journalfile_error);
+	void timestamp_handler(Uint32 *stamp);
+	void set_idle_mark();
 
 protected:
 	/**
@@ -93,24 +93,24 @@ protected:
 	 */
 	const long get_playback_offset() {return m_playbackstream.tellg();}
 
-	void write(char  v) throw();
-	void write(unsigned char v) throw();
-	void write(Sint16 v) throw();
-	void write(Uint16 v) throw();
-	void write(Sint32 v) throw();
-	void write(Uint32 v) throw();
-	void write(SDLKey v) throw();
-	void write(SDLMod v) throw();
+	void write(char  v);
+	void write(unsigned char v);
+	void write(Sint16 v);
+	void write(Uint16 v);
+	void write(Sint32 v);
+	void write(Uint32 v);
+	void write(SDLKey v);
+	void write(SDLMod v);
 
-	void read(char  &v) throw();
-	void read(unsigned char &v) throw();
-	void read(Sint16 &v) throw();
-	void read(Uint16 &v) throw();
-	void read(Sint32 &v) throw();
-	void read(Uint32 &v) throw();
-	void read(SDLKey &v) throw();
-	void read(SDLMod &v) throw();
-	void ensure_code(unsigned char code) throw(BadRecord_error);
+	void read(char  &v);
+	void read(unsigned char &v);
+	void read(Sint16 &v);
+	void read(Uint16 &v);
+	void read(Sint32 &v);
+	void read(Uint32 &v);
+	void read(SDLKey &v);
+	void read(SDLMod &v);
+	void ensure_code(unsigned char code);
 
 	///The recording file's name.
 	///\note This does \e not go through the layered filesystem on purpose!

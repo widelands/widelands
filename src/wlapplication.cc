@@ -432,9 +432,18 @@ const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
 
 restart:
 	//inject synthesized events into the event queue when playing back
-	if (journal->is_playingback())
-		haveevent=journal->read_event(ev);
-	else {
+	if (journal->is_playingback()) {
+		try {
+			haveevent=journal->read_event(ev);
+		}
+		catch(Journalfile_error& e) {
+			// An error might occur here when playing back a file that
+			// was not finalized due to a crash etc.
+			// Since playbacks are intended precisely for debugging such
+			// crashes, we must ignore the error and continue.
+			log("JOURNAL: read error, continue without playback: %s\n", e.what());
+		}
+	} else {
 		haveevent=SDL_PollEvent(ev);
 
 		if (haveevent)

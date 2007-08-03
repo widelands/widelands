@@ -27,39 +27,39 @@
  * Write a signed char value to the recording file.
  * \param v The character to be written
  */
-void Journal::write(char v) throw()
+void Journal::write(char v)
 {
 	m_recordstream.write(&v,sizeof(v));
 }
 
 /// \overload
-void Journal::write(unsigned char v) throw()
+void Journal::write(unsigned char v)
 {
 	m_recordstream.write((char*)&v,sizeof(v));
 }
 
 /// \overload
-void Journal::write(Sint16 v) throw()
+void Journal::write(Sint16 v)
 {
 	v = Little16(v);
 	m_recordstream.write((char*)&v,sizeof(v));
 }
 /// \overload
-void Journal::write(Uint16 v) throw()
+void Journal::write(Uint16 v)
 {
 	v = Little16(v);
 	m_recordstream.write((char*)&v,sizeof(v));
 }
 
 /// \overload
-void Journal::write(Sint32 v) throw()
+void Journal::write(Sint32 v)
 {
 	v = Little32(v);
 	m_recordstream.write((char*)&v,sizeof(v));
 }
 
 /// \overload
-void Journal::write(Uint32 v) throw()
+void Journal::write(Uint32 v)
 {
 	v = Little32(v);
 	m_recordstream.write((char*)&v,sizeof(v));
@@ -78,7 +78,7 @@ void Journal::write(Uint32 v) throw()
  * \sa write(SDLMod v)
  * \sa read(SDLMod &v)
  */
-void Journal::write(SDLKey v) throw()
+void Journal::write(SDLKey v)
 {
 	Uint32 vv;
 
@@ -90,7 +90,7 @@ void Journal::write(SDLKey v) throw()
  * \overload
  * \sa write(SDLKey v)
  */
-void Journal::write(SDLMod v) throw()
+void Journal::write(SDLMod v)
 {
 	Uint32 vv;
 
@@ -102,7 +102,7 @@ void Journal::write(SDLMod v) throw()
  * Write a signed char value to the recording file.
  * \param v Reference where the read character will be stored.
  */
-void Journal::read(char &v) throw()
+void Journal::read(char &v)
 {
 	m_playbackstream.read((char*)&v,sizeof(char));
 }
@@ -110,7 +110,7 @@ void Journal::read(char &v) throw()
 /**
  * \overload
  */
-void Journal::read(unsigned char &v) throw()
+void Journal::read(unsigned char &v)
 {
 	m_playbackstream.read((char*)&v,sizeof(unsigned char));
 }
@@ -118,7 +118,7 @@ void Journal::read(unsigned char &v) throw()
 /**
  * \overload
  */
-void Journal::read(Sint16 &v) throw()
+void Journal::read(Sint16 &v)
 {
 	m_playbackstream.read((char*)&v,sizeof(Sint16));
 	v=Little16(v);
@@ -127,7 +127,7 @@ void Journal::read(Sint16 &v) throw()
 /**
  * \overload
  */
-void Journal::read(Uint16 &v) throw()
+void Journal::read(Uint16 &v)
 {
 	m_playbackstream.read((char*)&v,sizeof(Uint16));
 	v=Little16(v);
@@ -136,7 +136,7 @@ void Journal::read(Uint16 &v) throw()
 /**
  * \overload
  */
-void Journal::read(Sint32 &v) throw()
+void Journal::read(Sint32 &v)
 {
 	m_playbackstream.read((char*)&v,sizeof(Sint32));
 	v=Little32(v);
@@ -145,7 +145,7 @@ void Journal::read(Sint32 &v) throw()
 /**
  * \overload
  */
-void Journal::read(Uint32 &v) throw()
+void Journal::read(Uint32 &v)
 {
 	m_playbackstream.read((char*)&v,sizeof(Uint32));
 	v=Little32(v);
@@ -155,7 +155,7 @@ void Journal::read(Uint32 &v) throw()
  * \overload
  * \sa read(SDLKey v)
  */
-void Journal::read(SDLKey &v) throw()
+void Journal::read(SDLKey &v)
 {
 	//Look at read(SDLKey v) before changing code here!
 	//Additional reminder: SDLKey is an enum which are signed int !
@@ -170,7 +170,7 @@ void Journal::read(SDLKey &v) throw()
  * \overload
  * \sa read(SDLKey v)
  */
-void Journal::read(SDLMod &v) throw()
+void Journal::read(SDLMod &v)
 {
 	//Look at read(SDLMod v) before changing code here!
 	//Additional reminder: SDLKey is an enum which are signed int !
@@ -184,7 +184,7 @@ void Journal::read(SDLMod &v) throw()
 /**
  * \todo Document me
  */
-void Journal::ensure_code(unsigned char code) throw(BadRecord_error)
+void Journal::ensure_code(unsigned char code)
 {
 	unsigned char filecode;
 
@@ -224,7 +224,7 @@ Journal::~Journal()
  * \param filename File the events should be written to
  * \todo set the filename somewhere else
  */
-void Journal::start_recording(std::string filename) throw(Journalfile_error, BadMagic_error)
+void Journal::start_recording(std::string filename)
 {
 	assert(!m_recordstream.is_open());
 
@@ -270,7 +270,7 @@ void Journal::stop_recording()
  * \param filename File to get events from
  * \todo set the filename somewhere else
  */
-void Journal::start_playback(std::string filename) throw(Journalfile_error, BadMagic_error)
+void Journal::start_playback(std::string filename)
 {
 	assert(!m_playbackstream.is_open());
 
@@ -475,7 +475,7 @@ bool Journal::read_event(SDL_Event *e)
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");
-		stop_recording();
+		stop_playback();
 		throw Journalfile_error(m_playbackname);
 	}
 }
@@ -486,7 +486,7 @@ bool Journal::read_event(SDL_Event *e)
  * If necessary, they will be recorded. On playback, they will be modified to
  * show the recorded time instead of the current time.
  */
-void Journal::timestamp_handler(Uint32 *stamp) throw(Journalfile_error)
+void Journal::timestamp_handler(Uint32 *stamp)
 {
 	if (m_record) {
 		write((unsigned char)RFC_GETTIME);
@@ -502,7 +502,7 @@ void Journal::timestamp_handler(Uint32 *stamp) throw(Journalfile_error)
 /**
  * \todo document me
  */
-void Journal::set_idle_mark() throw(Journalfile_error)
+void Journal::set_idle_mark()
 {
 	write((unsigned char)RFC_ENDEVENTS);
 }
