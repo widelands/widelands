@@ -267,13 +267,6 @@ void Bob::act(Game* g, uint data)
 		m_stack_dirty = false;
 		do_act(g, false);
 		return;
-	} else if (m_sched_init_task) {
-		assert(m_stack_dirty);
-
-		// This happens when we schedule for an init_auto_task(), but the bob
-		// owner explicitly pushes a task
-		m_sched_init_task = false;
-		m_stack_dirty = false;
 	}
 
 	// Eliminate spurious calls of act().
@@ -299,10 +292,26 @@ void Bob::do_act(Game* g, bool signalhandling)
 
 		origactid = m_actid;
 
-		if (m_stack_dirty)
-			throw wexception("MO(%u): stack dirty before update[%s]",
+		if (m_stack_dirty) {
+			if (m_sched_init_task) {
+				// Consider the following sequence of events:
+				//  (1) Owner of worker calls reset_tasks
+				//  (2) Owner of worker calls start_task_XYZ
+				//  (3) Worker receives a signal before the first scheduled
+				//      call to act.
+				// In particular, this may happen when a builder leaves a
+				// construction site and is immediately given a transfer to
+				// another construction site.
+				//
+				// In this case, the stack will still be dirty at this point.
+				m_sched_init_task = false;
+				m_stack_dirty = false;
+			} else {
+				throw wexception("MO(%u): stack dirty before update[%s]",
 			                 get_serial(),
 							 get_state() ? get_state()->task->name : "(nil)");
+			}
+		}
 
 		// Run the task if we're not coming from signalhandling
 		if (!signalhandling) {
