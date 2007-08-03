@@ -70,7 +70,7 @@ class Carrier : public Worker
 		static Task taskRoad;
 		static Task taskTransport;
 
-		void deliver_to_building(Game* g);
+		void deliver_to_building(Game* g, State* state);
 		void pickup_from_flag(Game *g, State* s);
 		void drop_item(Game* g, State* s);
 		void enter_building(Game* g, State* s);

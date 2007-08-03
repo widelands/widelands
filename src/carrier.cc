@@ -147,7 +147,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 	if (state->ivar1 == -1)
 		// If we're "in" the target building, special code applies
-		deliver_to_building(g);
+		deliver_to_building(g, state);
 
 	else if (!does_carry_ware())
 		// If we don't carry something, walk to the flag
@@ -185,7 +185,7 @@ void Carrier::transport_update(Game* g, State* state)
  * \param g Game the carrier lives on
  */
 /// \todo Upgrade this function to really support many-wares-at-a-time
-void Carrier::deliver_to_building(Game* g)
+void Carrier::deliver_to_building(Game* g, State* state)
 {
 	BaseImmovable* pos = g->get_map()->get_immovable(get_position());
 
@@ -194,17 +194,36 @@ void Carrier::deliver_to_building(Game* g)
 		molog("[Carrier]: Building disappeared while in building.\n");
 		set_location(0);
 
-	} else 	if (pos->get_type() == Map_Object::BUILDING) {
+	} else if (pos->get_type() == Map_Object::BUILDING) {
 		molog("[Carrier]: Arrived at building.\n");
 
 		// Drop all items addresed to this building
-		while (WareInstance* item = fetch_carried_item(g)) {
-			item->set_location(g, (Building*)pos);
-			item->update(g);
+		while (WareInstance* item = get_carried_item(g)) {
+			// If the building has disappeared and immediately been replaced
+			// with another building, we might have to return without dropping
+			// the item.
+			PlayerImmovable* next = item->get_next_move_step(g);
 
-			molog("[Carrier]: Delivered item inside building.\n");
+			if (next == pos) {
+				fetch_carried_item(g);
+				item->set_location(g, (Building*)pos);
+				item->update(g);
 
+				molog("[Carrier]: Delivered item inside building.\n");
+			} else {
+				molog("[Carrier]: Building switch from under us, return to road.\n");
+
+				Road* road = (Road*)get_location(g);
+				Flag* flag = road->get_flag((Road::FlagId)0);
+
+				if (((Building*)pos)->get_base_flag() == flag)
+					state->ivar1 = 1;
+				else
+					state->ivar1 = 0;
+				break;
+			}
 		}
+
 		// No more deliverable items. Walk out to the flag.
 		molog("[Carrier]: Move out of building.\n");
 		start_task_forcemove(WALK_SE,
