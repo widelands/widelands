@@ -256,6 +256,7 @@ class Bob : public Map_Object
 
 		bool        m_stack_dirty;
 		bool        m_sched_init_task; ///< if init_auto_task was scheduled
+		bool        m_in_act; ///< if do_act is currently running (blocking signals)
 		std::string m_signal;
 };
 

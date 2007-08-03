@@ -132,7 +132,8 @@ Bob::Bob(const Bob::Descr & descr) :
 		m_walkstart      (0),
 		m_walkend        (0),
 		m_stack_dirty    (false),
-		m_sched_init_task(false)
+		m_sched_init_task(false),
+		m_in_act         (false)
 {}
 
 
@@ -287,6 +288,9 @@ void Bob::act(Game* g, uint data)
  */
 void Bob::do_act(Game* g, bool signalhandling)
 {
+	assert(!m_in_act);
+	m_in_act = true;
+
 	for(;;) {
 		uint origactid;
 
@@ -339,6 +343,7 @@ void Bob::do_act(Game* g, bool signalhandling)
 				set_signal("");
 				schedule_act(g, 1);
 				m_sched_init_task = true;
+				m_in_act = false;
 				return;
 			}
 
@@ -349,13 +354,17 @@ void Bob::do_act(Game* g, bool signalhandling)
 
 				// If the initial signal handler doesn't mess with the stack,
 				// get out of here
-				if (!m_stack_dirty && signalhandling)
+				if (!m_stack_dirty && signalhandling) {
+					m_in_act = false;
 					return;
+				}
 			}
 		} while(m_stack_dirty);
 
 		signalhandling = false; // next pass will be a normal, non-signal handling pass
 	}
+
+	m_in_act = false;
 }
 
 
@@ -480,7 +489,8 @@ void Bob::send_signal(Game* g, std::string sig)
 		}
 	}
 
-	do_act(g, true); // signal handler act
+	if (!m_in_act)
+		do_act(g, true); // signal handler act
 }
 
 
