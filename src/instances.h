@@ -283,10 +283,47 @@ struct Object_Ptr {
 	bool operator<(const Object_Ptr other) const throw ()
 	{return m_serial < other.m_serial;}
 
+	uint get_serial() const { return m_serial; }
+
 private:
 	uint m_serial;
 };
 
+template<class T>
+struct OPtr {
+	OPtr(T* const obj = 0)
+		: m(obj)
+	{
+	}
+
+	OPtr& operator=(T* const obj)
+	{
+		m = obj;
+		return *this;
+	}
+
+	bool is_set() const { return m.is_set(); }
+
+	T* get(const Editor_Game_Base* const g)
+	{
+		return static_cast<T*>(m.get(g));
+	}
+
+	const T* get(const Editor_Game_Base* const g) const
+	{
+		return static_cast<const T*>(m.get(g));
+	}
+
+	bool operator<(const OPtr<T>& other) const throw ()
+	{
+		return m < other.m;
+	}
+
+	uint get_serial() const { return m.get_serial(); }
+
+private:
+	Object_Ptr m;
+};
 
 class Cmd_Destroy_Map_Object:public BaseCommand {
 private:
