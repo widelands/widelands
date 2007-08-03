@@ -684,21 +684,6 @@ void ProductionSite::program_act(Game* g)
 		case ProductionAction::actProduce: {
 			molog("  Produce(%s)\n", action->sparam1.c_str());
 
-			int wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
-
-			WareInstance* item = new WareInstance(wareid,  get_owner()->tribe().get_ware_descr(wareid));
-			item->init(g);
-
-			// For statistics, inform the user that a ware was produced
-			// Ware statistics are only cached for the interactive user
-			// since other tribes would have other types of wares
-			if(g->get_ipl()->get_player_number()==get_owner()->get_player_number())
-				g->get_ipl()->ware_produced(wareid);
-
-			m_workers[0]->set_carried_item(g,item);
-
-			// get the worker to drop the item off
-			// get_building_work() will advance the program
 			m_workers[0]->update_task_buildingwork(g);
 			return;
 		}
@@ -1074,10 +1059,31 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 				m_program_time = schedule_act(g, 10);
 			}
 		} else if (action->type == ProductionAction::actProduce) {
-			// Worker returned home after dropping item
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
+			if (state->phase == 0)
+			{
+				int wareid = get_owner()->tribe().get_safe_ware_index(action->sparam1.c_str());
+
+				WareInstance* item = new WareInstance(
+						wareid, get_owner()->tribe().get_ware_descr(wareid));
+				item->init(g);
+
+				// For statistics, inform the user that a ware was produced
+				// Ware statistics are only cached for the interactive user
+				// since other tribes would have other types of wares
+				if(g->get_ipl()->get_player_number()==get_owner()->get_player_number())
+					g->get_ipl()->ware_produced(wareid);
+
+				w->start_task_dropoff(g, item);
+
+				state->phase++;
+				return true;
+			}
+			else
+			{
+				program_step();
+				m_program_timer = true;
+				m_program_time = schedule_act(g, 10);
+			}
 		}
 	}
 
