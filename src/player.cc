@@ -329,7 +329,12 @@ void Player::enhance_building
 		//  Hereafter building points to the new building.
 
 		Game & game = dynamic_cast<Game &>(egbase());
-      // Reassign the workers
+
+		// Reassign the workers and soldiers.
+		// Note that this will make sure they stay within the economy;
+		// However, they are no longer associated with the building as
+		// workers of that buiding, which is why they will leave for a
+		// warehouse.
 		const std::vector<Worker *>::const_iterator workers_end = workers.end();
 		for
 			(std::vector<Worker *>::const_iterator it = workers.begin();
@@ -338,9 +343,9 @@ void Player::enhance_building
 		{
 			Worker & worker = **it;
 			worker.set_location(building);
-			worker.reset_tasks(&game);
 		}
-      // Reassign the soldier
+
+		// Reassign the soldier
 		const std::vector<Soldier *>::const_iterator soldiers_end =
 			soldiers.end();
 		for
@@ -350,7 +355,6 @@ void Player::enhance_building
 		{
 			Soldier & soldier = **it;
 			soldier.set_location(building);
-			soldier.reset_tasks(&game);
 		}
    }
 }
