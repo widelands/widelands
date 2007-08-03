@@ -403,8 +403,10 @@ void Game::think(void)
 		else
 			frametime *= get_speed();
 
-		// maybe we are too fast...
-		if (frametime==0)
+		// Maybe we are too fast...
+		// Note that the time reported by WLApplication might jump backwards
+		// when playback stops.
+		if (frametime <= 0)
 			return;
 
 		// prevent frametime escalation in case the game logic is the performance bottleneck

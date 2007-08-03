@@ -94,6 +94,7 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 
 		m_cmds.pop();
 
+		assert(c->get_duetime() - *game_time_var >= 0);
 		*game_time_var = c->get_duetime();
 
 		// Modify RNG state depending on the command. This
@@ -106,6 +107,7 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 		delete c;
 	}
 
+	assert(final - *game_time_var >= 0);
 	*game_time_var = final;
 
 	return cnt;
