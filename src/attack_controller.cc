@@ -193,7 +193,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
       BattleSoldier bs = {
          soldier,
          militarySite,
-         0,
+         Coords::Null(),
          attackers,
          false,
          false,
@@ -201,7 +201,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 
       calcBattleGround(&bs,totallyLaunched);
 
-      soldier->startTaskMoveToBattle(this->game, this->flag, *bs.battleGround);
+      soldier->startTaskMoveToBattle(this->game, this->flag, bs.battleGround);
 
       involvedSoldiers.push_back(bs);
       totallyLaunched++;
@@ -328,16 +328,16 @@ uint AttackController::getBattleSoldierIndex(Soldier* soldier) {
 
 void AttackController::removeSoldier(Soldier* soldier) {
    uint idx = getBattleSoldierIndex(soldier);
-   delete involvedSoldiers[idx].battleGround;
+   involvedSoldiers[idx].battleGround = Coords::Null();
    if (idx < (involvedSoldiers.size()-1)) {
       involvedSoldiers[idx] = involvedSoldiers[involvedSoldiers.size() -1];
    }
    involvedSoldiers.pop_back();
 }
 
-bool AttackController::battleGroundOccupied(Coords* coords) {
+bool AttackController::battleGroundOccupied(Coords coords) {
    for(uint i=0;i<involvedSoldiers.size();i++) {
-      if (involvedSoldiers[i].battleGround && *involvedSoldiers[i].battleGround == *coords) {
+      if (involvedSoldiers[i].battleGround == coords) {
          return true;
       }
    }
@@ -347,7 +347,7 @@ bool AttackController::battleGroundOccupied(Coords* coords) {
 void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldierNr) {
    log("Calculating battle ground for soldier\n");
    if (soldierNr == 0) {
-      battleSoldier->battleGround = new Coords(flag->get_position().x, flag->get_position().y);
+      battleSoldier->battleGround = flag->get_position();
       return;
    }
 
@@ -366,8 +366,8 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
       map->get_neighbour(prevCoords,walkDir[walkDirIndex], &newCoords);
 
       if (step.allowed(map,prevCoords,newCoords,walkDir[walkDirIndex],CheckStep::stepNormal)) {
-         if (!battleGroundOccupied(&newCoords)) {
-            battleSoldier->battleGround = new Coords(newCoords.x,newCoords.y);
+         if (!battleGroundOccupied(newCoords)) {
+            battleSoldier->battleGround = newCoords;
             return;
          }
          prevCoords = newCoords;
@@ -376,5 +376,5 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
          walkDirIndex = (soldierNr+1) % 5;
       }
    }
-   battleSoldier->battleGround = new Coords(flag->get_position().x, flag->get_position().y);
+   battleSoldier->battleGround = flag->get_position();
 }

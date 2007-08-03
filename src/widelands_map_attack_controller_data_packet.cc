@@ -95,7 +95,6 @@ throw (_wexception)
 
 				Coordinate x = (Coordinate)fr.Unsigned32();
 				Coordinate y = (Coordinate)fr.Unsigned32();
-				Coords* battleGround = new Coords(x, y);
 
 				bool attacker = fr.Unsigned8();
 				bool arrived = fr.Unsigned8();
@@ -103,7 +102,7 @@ throw (_wexception)
 				AttackController::BattleSoldier bs = {
 					soldier,
 					origin,
-					battleGround,
+					Coords(x, y),
 					attacker,
 					arrived,
 					fighting
@@ -175,8 +174,8 @@ throw (_wexception) {
 			assert(os->is_object_known(bs.origin));
 			fw.Unsigned32(os->get_object_file_index(bs.origin));
 
-			fw.Unsigned32(bs.battleGround->x);
-			fw.Unsigned32(bs.battleGround->y);
+			fw.Unsigned32(bs.battleGround.x);
+			fw.Unsigned32(bs.battleGround.y);
 
 			fw.Unsigned8(bs.attacker);
 			fw.Unsigned8(bs.arrived);

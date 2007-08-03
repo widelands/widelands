@@ -72,13 +72,13 @@ struct AttackController : public BaseImmovable {
       struct BattleSoldier {
          Soldier* soldier;
          MilitarySite* origin;
-         Coords* battleGround;
+         Coords battleGround;
          bool attacker;
          bool arrived;
          bool fighting;
       };
 
-      bool battleGroundOccupied(Coords* coords);
+      bool battleGroundOccupied(Coords coords);
       void calcBattleGround(BattleSoldier*, int);
 
       bool launchAllSoldiers(bool attackers, int nrLaunch);
