@@ -1,0 +1,12 @@
+# Automatically created by Widelands svn 2357
+
+[global]
+packet_version=1
+map_w=112
+map_h=112
+nr_players=4
+world=greenland
+name=_"Enemy in sight"
+author="ISCH"
+descr=_"A Multiplayer-battle-map on a X-Shaped island."
+

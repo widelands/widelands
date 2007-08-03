@@ -1,0 +1,17 @@
+# Automatically created by Widelands svn 2357
+
+[global]
+packet_version=1
+
+[player_1]
+name=Marius
+tribe=empire
+
+[player_2]
+name=Avitus
+tribe=empire
+
+[player_3]
+name=Silvanus
+tribe=empire
+
