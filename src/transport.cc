@@ -308,8 +308,8 @@ void WareInstance::update(Game* g)
 {
 	Map_Object* loc = m_location.get(g);
 
-   if(!m_ware_descr) // Upsy, we're not even intialized. Happens on load
-      return;
+	if(!m_ware_descr) // Upsy, we're not even intialized. Happens on load
+		return;
 
 	// Reset our state if we're not on location or outside an economy
 	if (!loc || !get_economy()) {
@@ -611,7 +611,7 @@ void Flag::detach_building(Editor_Game_Base *g)
 */
 void Flag::attach_road(int dir, Road *road)
 {
-   assert(!m_roads[dir-1] || m_roads[dir-1]==road);
+	assert(!m_roads[dir-1] || m_roads[dir-1]==road);
 
 	m_roads[dir-1] = road;
 	m_roads[dir-1]->set_economy(get_economy());
@@ -774,7 +774,7 @@ void Flag::wake_up_capacity_queue(Game* g)
 /**
  * Called by carrier code to retrieve one of the items on the flag that is meant
  * for that carrier.
- * 
+ *
  * This function may return 0 even if \ref ack_pending_item() has already been
  * called successfully.
 */
@@ -1379,117 +1379,117 @@ void Road::presplit(Editor_Game_Base * g, Coords) {unmark_map(g);}
 */
 void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 {
-   Flag *oldend = m_flags[FlagEnd];
+	Flag *oldend = m_flags[FlagEnd];
 
-   // detach from end
-   m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
+	// detach from end
+	m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
 
-   // build our new path and the new road's path
+	// build our new path and the new road's path
 	CoordPath path(g->map(), m_path);
-   CoordPath secondpath(path);
-   int index = path.get_index(flag->get_position());
+	CoordPath secondpath(path);
+	int index = path.get_index(flag->get_position());
 
 	assert(index > 0);
 	assert(static_cast<const uint>(index) < path.get_nsteps() - 1);
 
-   path.truncate(index);
-   secondpath.starttrim(index);
+	path.truncate(index);
+	secondpath.starttrim(index);
 
-   // change road size and reattach
-   m_flags[FlagEnd] = flag;
-   set_path(g, path);
+	// change road size and reattach
+	m_flags[FlagEnd] = flag;
+	set_path(g, path);
 
 	const Direction dir = get_reverse_dir(m_path[m_path.get_nsteps() - 1]);
-   m_flags[FlagEnd]->attach_road(dir, this);
-   m_flagidx[FlagEnd] = dir;
+	m_flags[FlagEnd]->attach_road(dir, this);
+	m_flagidx[FlagEnd] = dir;
 
-   // recreate road markings
-   mark_map(g);
+	// recreate road markings
+	mark_map(g);
 
-   // create the new road
-   Road *newroad = new Road();
-   newroad->set_owner(get_owner());
-   newroad->m_type = m_type;
-   newroad->m_flags[FlagStart] = flag; // flagidx will be set on init()
-   newroad->m_flags[FlagEnd] = oldend;
-   newroad->set_path(g, secondpath);
+	// create the new road
+	Road *newroad = new Road();
+	newroad->set_owner(get_owner());
+	newroad->m_type = m_type;
+	newroad->m_flags[FlagStart] = flag; // flagidx will be set on init()
+	newroad->m_flags[FlagEnd] = oldend;
+	newroad->set_path(g, secondpath);
 
-   // Find workers on this road that need to be reassigned
-   // The algorithm is pretty simplistic, and has a bias towards keeping
-   // the worker around; there's obviously nothing wrong with that.
-   Carrier *carrier = (Carrier *)m_carrier.get(g);
-   const std::vector<Worker*> workers = get_workers();
-   std::vector<Worker*> reassigned_workers;
+	// Find workers on this road that need to be reassigned
+	// The algorithm is pretty simplistic, and has a bias towards keeping
+	// the worker around; there's obviously nothing wrong with that.
+	Carrier *carrier = (Carrier *)m_carrier.get(g);
+	const std::vector<Worker*> workers = get_workers();
+	std::vector<Worker*> reassigned_workers;
 
-   for(std::vector<Worker*>::const_iterator it = workers.begin(); it != workers.end(); ++it) {
-      Worker* w = *it;
-      int idx = path.get_index(w->get_position());
+	for(std::vector<Worker*>::const_iterator it = workers.begin(); it != workers.end(); ++it) {
+		Worker* w = *it;
+		int idx = path.get_index(w->get_position());
 
-      // Careful! If the worker is currently inside the building at our
-      // starting flag, we *must not* reassign him.
-      // If he is in the building at our end flag or at the other road's
-      // end flag, he can be reassigned to the other road.
-      if (idx < 0)
-      {
-         Map* map = g->get_map();
-         BaseImmovable* imm = map->get_immovable(w->get_position());
+		// Careful! If the worker is currently inside the building at our
+		// starting flag, we *must not* reassign him.
+		// If he is in the building at our end flag or at the other road's
+		// end flag, he can be reassigned to the other road.
+		if (idx < 0)
+		{
+			Map* map = g->get_map();
+			BaseImmovable* imm = map->get_immovable(w->get_position());
 
-         if (imm && imm->get_type() == BUILDING) {
-            Coords pos;
+			if (imm && imm->get_type() == BUILDING) {
+				Coords pos;
 
-            g->get_map()->get_brn(w->get_position(), &pos);
+				g->get_map()->get_brn(w->get_position(), &pos);
 
-            if (pos == path.get_start())
-               idx = 0;
-         }
-      }
+				if (pos == path.get_start())
+					idx = 0;
+			}
+		}
 
-      molog("Split: check %u -> idx %i\n", w->get_serial(), idx);
+		molog("Split: check %u -> idx %i\n", w->get_serial(), idx);
 
-      if (idx < 0)
-      {
-         reassigned_workers.push_back(w);
+		if (idx < 0)
+		{
+			reassigned_workers.push_back(w);
 
-         if (carrier == w) {
-            // Reassign the carrier. Note that the final steps of reassigning
-            // are done in newroad->init()
-            m_carrier = 0;
-            newroad->m_carrier = carrier;
-         }
-      }
+			if (carrier == w) {
+				// Reassign the carrier. Note that the final steps of reassigning
+				// are done in newroad->init()
+				m_carrier = 0;
+				newroad->m_carrier = carrier;
+			}
+		}
 
-      // Cause a worker update in any case
+		// Cause a worker update in any case
 		if (Game * const game = dynamic_cast<Game * const>(g))
 			w->send_signal(game, "road");
-   }
+	}
 
-   // Initialize the new road
-   newroad->init(g);
+	// Initialize the new road
+	newroad->init(g);
 
-   // Actually reassign workers after the new road has initialized,
-   // so that the reassignment is safe
-   for(std::vector<Worker*>::const_iterator it = reassigned_workers.begin(); it != reassigned_workers.end(); ++it)
-      (*it)->set_location(newroad);
+	// Actually reassign workers after the new road has initialized,
+	// so that the reassignment is safe
+	for(std::vector<Worker*>::const_iterator it = reassigned_workers.begin(); it != reassigned_workers.end(); ++it)
+		(*it)->set_location(newroad);
 
-   // Do the following only if in game
+	// Do the following only if in game
 	if (Game * const game = dynamic_cast<Game * const>(g)) {
 
-      // Request a new carrier for this road if necessary
-      // This must be done _after_ the new road initializes, otherwise request
-      // routing might not work correctly
-      if (!m_carrier.get(g) && !m_carrier_request)
-         request_carrier(game);
+		// Request a new carrier for this road if necessary
+		// This must be done _after_ the new road initializes, otherwise request
+		// routing might not work correctly
+		if (!m_carrier.get(g) && !m_carrier_request)
+			request_carrier(game);
 
-      // Make sure items waiting on the original endpoint flags are dealt with
-      m_flags[FlagStart]->update_items(static_cast<Game*>(g), oldend);
-      oldend->update_items(game, m_flags[FlagStart]);
-   }
+		// Make sure items waiting on the original endpoint flags are dealt with
+		m_flags[FlagStart]->update_items(static_cast<Game*>(g), oldend);
+		oldend->update_items(game, m_flags[FlagStart]);
+	}
 }
 
 /**
  * Called by Flag code: an item should be picked up from the given flag.
  * \return true if a carrier has been sent on its way, false otherwise.
-*/
+ */
 bool Road::notify_ware(Game* g, FlagId flagid)
 {
 	Carrier* carrier = (Carrier*)m_carrier.get(g);
@@ -1966,7 +1966,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
       m_count=fr->Unsigned32();
       m_required_time=fr->Unsigned32();
       m_required_interval=fr->Unsigned32();
-	  
+
 	  if (version == REQUEST_VERSION) {
 		  m_last_request_time = fr->Unsigned32();
 	  }
@@ -2140,7 +2140,7 @@ int Request::get_priority (int cost)
 	if (0x0 != building) {
 		if (building->get_stop())
 			return -1;
-		
+
 		modifier = building->get_priority(get_type(), get_index());
 		is_construction_site =
 			Building::CONSTRUCTIONSITE == building->get_type();
@@ -2750,7 +2750,7 @@ void Economy::check_merge(Flag *f1, Flag *f2)
  * a country outwards, and since splits are more likely to happen outwards,
  * the economy at the end point is probably smaller in average. It's all just
  * guesswork though ;)
- * 
+ *
  * * \todo Mark this function as static. WHich doxygen command??
 */
 void Economy::check_split(Flag *f1, Flag *f2)
@@ -3471,7 +3471,7 @@ void Economy::start_request_timer(int delta)
 /**
  * Find the substitute supply if available - a more experienced worker,
  * more advanced ware, etc
- * 
+ *
  */
 int Economy::get_ware_substitute(Request* req, int ware)
 {
