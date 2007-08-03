@@ -115,7 +115,7 @@ private:
 	const Building_Descr * m_prev_building; // Building that was standing here before
 
 	Request* m_builder_request;
-	Worker*  m_builder;
+	OPtr<Worker> m_builder;
 
 	std::vector<WaresQueue*> m_wares;
 

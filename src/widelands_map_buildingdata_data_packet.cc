@@ -607,12 +607,13 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
    } else
       fw.Unsigned8(0);
 
-   // builder
-   if(constructionsite.m_builder) {
-      assert(os->is_object_known(constructionsite.m_builder));
-      fw.Unsigned32(os->get_object_file_index(constructionsite.m_builder));
-   } else
-      fw.Unsigned32(0);
+	// builder
+	const Worker* builder = constructionsite.m_builder.get(egbase);
+	if (builder) {
+		assert(os->is_object_known(builder));
+		fw.Unsigned32(os->get_object_file_index(builder));
+	} else
+		fw.Unsigned32(0);
 
    // ware queues
    fw.Unsigned16(constructionsite.m_wares.size());

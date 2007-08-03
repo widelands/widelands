@@ -102,7 +102,6 @@ Building         (cs_descr),
 m_building       (0),
 m_prev_building  (0),
 m_builder_request(0),
-m_builder        (0),
 m_fetchfromflag  (0),
 m_working        (false),
 m_work_steptime  (0),
@@ -144,7 +143,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 		molog("* m_prev_building (name): %s\n", m_prev_building->name().c_str());
 
    molog("m_builder_request: %p\n", m_builder_request);
-   molog("m_builder: %p\n", m_builder);
+   molog("m_builder: %u\n", m_builder.get_serial());
 
    molog("m_fetchfromflag: %i\n", m_fetchfromflag);
 
@@ -370,11 +369,12 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building * const bld = m_building->create(*g, owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
-		if (g->objects().object_still_available(m_builder)) {
-         m_builder->reset_tasks((Game*)g);
-         m_builder->set_location(bld);
-         m_builder->start_task_gowarehouse();
-      }
+		Worker* builder = m_builder.get(g);
+		if (builder) {
+			builder->reset_tasks((Game*)g);
+			builder->set_location(bld);
+			builder->start_task_gowarehouse();
+		}
 	}
 }
 
@@ -406,7 +406,7 @@ Issue a request for the builder.
 ===============
 */
 void ConstructionSite::request_builder(Game *) {
-	assert(!m_builder && !m_builder_request);
+	assert(!m_builder.is_set() && !m_builder_request);
 
 	m_builder_request = new Request(this, get_owner()->tribe().get_safe_worker_index("builder"),
 	                                &ConstructionSite::request_builder_callback, this, Request::WORKER);
@@ -447,8 +447,9 @@ bool ConstructionSite::fetch_from_flag(Game* g)
 {
 	m_fetchfromflag++;
 
-	if (m_builder)
-		m_builder->update_task_buildingwork(g);
+	Worker* builder = m_builder.get(g);
+	if (builder)
+		builder->update_task_buildingwork(g);
 
 	return true;
 }
@@ -462,7 +463,7 @@ Called by our builder to get instructions.
 ===============
 */
 bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
-	assert(w == m_builder);
+	assert(w == m_builder.get(g));
 
 	// Check if one step has completed
 	if (m_working) {
@@ -528,8 +529,12 @@ void ConstructionSite::wares_queue_callback
 {
 	ConstructionSite* cs = (ConstructionSite*)data;
 
-	if (!cs->m_working && cs->m_builder)
-		cs->m_builder->update_task_buildingwork(g);
+	if (!cs->m_working) {
+		Worker* builder = cs->m_builder.get(g);
+
+		if (builder)
+			builder->update_task_buildingwork(g);
+	}
 }
 
 
