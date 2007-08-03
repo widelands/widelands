@@ -666,9 +666,6 @@ void Soldier::moveToBattleUpdate(Game* g, State* state) {
 		BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
 		if (position && position->get_type() == BUILDING) {
-			// We are in our building, try to exit
-			if (start_task_waitforcapacity(g, (Flag*)get_location(g)->get_base_flag()))
-				return;
 			state->ivar1 = 2;
 			start_task_leavebuilding (g, 1);
 			return;
