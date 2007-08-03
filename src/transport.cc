@@ -1566,8 +1566,8 @@ Transfer IMPLEMENTATION
 Transfer::Transfer(Game* g, Request* req, WareInstance* it) :
 	m_game(g),
 	m_request(req),
-	m_worker(0),
 	m_item(it),
+	m_worker(0),
 	m_soldier(0),
 	m_idle(false)
 {
@@ -1588,9 +1588,9 @@ Transfer::Transfer(Game* g, Request* req, Worker* w) :
 Transfer::Transfer(Game* g, Request* req, Soldier* s) :
 	m_game(g),
 	m_request(req),
-	m_soldier(s),
 	m_item(0),
 	m_worker(0),
+	m_soldier(s),
 	m_idle(false)
 {
 	m_soldier->start_task_transfer(g, this);
