@@ -333,35 +333,42 @@ void Journal::record_event(SDL_Event *e)
 		//completely unneccessary overhad.
 		switch(e->type) {
 		case SDL_KEYDOWN:
-			write(RFC_EVENT);
-			write(RFC_KEYDOWN);
+			write((unsigned char)RFC_EVENT);
+			write((unsigned char)RFC_KEYDOWN);
 			write(e->key.keysym.sym);
 			write(e->key.keysym.unicode);
 			write(e->key.keysym.mod);
 			m_recordstream<<std::flush;
 			break;
 		case SDL_KEYUP:
-			write(RFC_EVENT);
-			write(RFC_KEYUP);
+			write((unsigned char)RFC_EVENT);
+			write((unsigned char)RFC_KEYUP);
 			write(e->key.keysym.mod);
 			write(e->key.keysym.sym);
 			write(e->key.keysym.unicode);
 			m_recordstream<<std::flush;
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			write(RFC_EVENT);
-			write(RFC_MOUSEBUTTONDOWN);
+			write((unsigned char)RFC_EVENT);
+			write((unsigned char)RFC_MOUSEBUTTONDOWN);
 			write(e->button.button);
+			write(e->button.x);
+			write(e->button.y);
+			write(e->button.state);
 			m_recordstream<<std::flush;
+			break;
 		case SDL_MOUSEBUTTONUP:
-			write(RFC_EVENT);
-			write(RFC_MOUSEBUTTONUP);
+			write((unsigned char)RFC_EVENT);
+			write((unsigned char)RFC_MOUSEBUTTONUP);
 			write(e->button.button);
+			write(e->button.x);
+			write(e->button.y);
+			write(e->button.state);
 			m_recordstream<<std::flush;
 			break;
 		case SDL_MOUSEMOTION:
-			write(RFC_EVENT);
-			write(RFC_MOUSEMOTION);
+			write((unsigned char)RFC_EVENT);
+			write((unsigned char)RFC_MOUSEMOTION);
 			write(e->motion.x);
 			write(e->motion.y);
 			write(e->motion.xrel);
@@ -369,8 +376,8 @@ void Journal::record_event(SDL_Event *e)
 			m_recordstream<<std::flush;
 			break;
 		case SDL_QUIT:
-			write(RFC_EVENT);
-			write(RFC_QUIT);
+			write((unsigned char)RFC_EVENT);
+			write((unsigned char)RFC_QUIT);
 			m_recordstream<<std::flush;
 			break;
 		default:
@@ -425,10 +432,16 @@ bool Journal::read_event(SDL_Event *e)
 			case RFC_MOUSEBUTTONDOWN:
 				e->type=SDL_MOUSEBUTTONDOWN;
 				read(e->button.button);
+				read(e->button.x);
+				read(e->button.y);
+				read(e->button.state);
 				break;
 			case RFC_MOUSEBUTTONUP:
 				e->type=SDL_MOUSEBUTTONUP;
 				read(e->button.button);
+				read(e->button.x);
+				read(e->button.y);
+				read(e->button.state);
 				break;
 			case RFC_MOUSEMOTION:
 				e->type = SDL_MOUSEMOTION;
@@ -474,12 +487,12 @@ bool Journal::read_event(SDL_Event *e)
 void Journal::timestamp_handler(Uint32 *stamp) throw(Journalfile_error)
 {
 	if (m_record) {
-		write(RFC_GETTIME);
+		write((unsigned char)RFC_GETTIME);
 		write(*stamp);
 	}
 
 	if (m_playback) {
-		ensure_code(RFC_GETTIME);
+		ensure_code((unsigned char)RFC_GETTIME);
 		read(*stamp);
 	}
 }
@@ -489,5 +502,5 @@ void Journal::timestamp_handler(Uint32 *stamp) throw(Journalfile_error)
  */
 void Journal::set_idle_mark() throw(Journalfile_error)
 {
-	write(RFC_ENDEVENTS);
+	write((unsigned char)RFC_ENDEVENTS);
 }

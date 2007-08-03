@@ -555,7 +555,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 		// CAREFUL: Record files do not save the entire SDL_Event structure.
 		// Therefore, playbacks are incomplete. When you change the following
 		// code so that it uses previously unused fields in SDL_Event,
-		// please also take a look at Sys_PollEvent()
+		// please also take a look at Journal::read_event and Journal::record_event
 
 		switch(ev.type) {
 		case SDL_KEYDOWN:
@@ -953,7 +953,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 			journal->start_recording(m_commandline["record"]);
 		}
 		catch (Journalfile_error e) {
-			//TODO: tell the user
+			cout << "Journal file error: " << e.what() << endl;
 		}
 
 		m_commandline.erase("record");
@@ -967,7 +967,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 			journal->start_playback(m_commandline["playback"]);
 		}
 		catch (Journalfile_error e) {
-			//TODO: tell the user
+			cout << "Journal file error: " << e.what() << endl;
 		}
 
 		m_commandline.erase("playback");
@@ -1214,12 +1214,12 @@ void WLApplication::mainmenu_multiplayer()
       #if __WIN32__
       // The Winsock2 library needs to get called through WSAStartup,
       // to initiate the use of the Winsock DLL by Widelands.
-      WSADATA wsaData;   
+      WSADATA wsaData;
       if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0) {
         throw wexception("Initialisation of Wsock2-library failed");
         }
       #endif
-      
+
 	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup ns;
 
