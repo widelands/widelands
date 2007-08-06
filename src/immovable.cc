@@ -930,8 +930,7 @@ Release workers
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
 	while(m_workers.size())
-      if(g->objects().object_still_available(m_workers[0]))
-            m_workers[0]->set_location(0);
+		m_workers[0]->set_location(0);
 
 	if (m_owner) m_owner->egbase().player_immovable_notification
 		(this, Editor_Game_Base::LOSE);
