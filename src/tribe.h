@@ -90,6 +90,8 @@ struct Tribe_Descr {
 	uint get_frontier_anim() const throw () {return m_anim_frontier;}
 	uint get_flag_anim    () const throw () {return m_anim_flag;}
 
+	uint get_bob_vision_range() const throw() { return m_bob_vision_range; }
+
 	uint get_resource_indicator
 		(const Resource_Descr * const res, const uint amount) const;
 
@@ -103,8 +105,9 @@ struct Tribe_Descr {
 private:
 	const std::string m_name;
 	const World & m_world;
-      uint m_anim_frontier;
-		uint m_anim_flag;
+	uint m_anim_frontier;
+	uint m_anim_flag;
+	uint m_bob_vision_range;
 
       Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> m_buildings;

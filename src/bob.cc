@@ -24,10 +24,29 @@
 #include "critter_bob.h"
 #include "game.h"
 #include "mapviewpixelconstants.h"
+#include "player.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "transport.h"
+#include "tribe.h"
 #include "wexception.h"
+
+
+/**
+ * Only tribe bobs have a vision range, since it would be irrelevant
+ * for world bobs.
+ *
+ * Currently, all bobs use the tribe's default vision range.
+ *
+ * \returns radius (in fields) of area that the bob can see
+ */
+uint Bob::Descr::vision_range() const
+{
+	if (m_owner_tribe)
+		return m_owner_tribe->get_bob_vision_range();
+
+	return 0;
+}
 
 
 /**
@@ -119,8 +138,8 @@ Bob::Descr *Bob::Descr::create_from_dir(const char *name,
 /**
  * Zero-initialize a map object
  */
-Bob::Bob(const Bob::Descr & descr) :
-		Map_Object       (&descr),
+Bob::Bob(const Bob::Descr &_descr) :
+		Map_Object       (&_descr),
 		m_owner          (0),
 		m_position       (FCoords(Coords(0,0), 0)), // not linked anywhere
 		m_linknext       (0),
@@ -229,6 +248,8 @@ void Bob::cleanup(Editor_Game_Base *gg)
 		pop_task();
 		m_stack_dirty = false;
 	}
+
+	set_owner(0); // implicitly remove ourselves from owner's map
 
 	if (m_position.field) {
 		m_position.field = 0;
@@ -934,12 +955,38 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 }
 
 
+/**
+ * Give the bob a new owner.
+ *
+ * This will update the owner's viewing area.
+ */
+void Bob::set_owner(Player* player)
+{
+	if (m_owner != 0 && m_position.field)
+		m_owner->unsee_area(Area<FCoords>(get_position(), vision_range()));
+
+	m_owner = player;
+
+	if (m_owner != 0 && m_position.field)
+		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
+}
+
+
+/**
+ * Move the bob to a new position.
+ *
+ * Performs the necessary (un)linking in the \ref Field structures and
+ * updates the owner's viewing area, if the bob has an owner.
+ */
 void Bob::set_position(Editor_Game_Base* g, Coords coords)
 {
 	if (m_position.field) {
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
+
+		if (m_owner != 0)
+			m_owner->unsee_area(Area<FCoords>(get_position(), vision_range()));
 	}
 
 	m_position = g->map().get_fcoords(coords);
@@ -948,6 +995,9 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	m_linkpprev = &m_position.field->bobs;
 	if (m_linknext) m_linknext->m_linkpprev = &m_linknext;
 	*m_linkpprev = this;
+
+	if (m_owner != 0)
+		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
 }
 
 /**

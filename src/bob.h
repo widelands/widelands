@@ -122,6 +122,8 @@ class Bob : public Map_Object
 											  Profile *prof,
 											  Tribe_Descr* tribe);
 
+				uint vision_range() const;
+
 			protected:
 				virtual Bob * create_object() const = 0;
 				virtual void parse(const char *directory, Profile *prof,
@@ -151,12 +153,14 @@ class Bob : public Map_Object
 		void skip_act();
 		void force_skip_act();
 		Point calc_drawpos(const Editor_Game_Base &, const Point) const;
-		inline void set_owner(Player *player) {m_owner = player;}
+		void set_owner(Player *player);
 		Player * get_owner() const {return m_owner;}
 		void set_position(Editor_Game_Base* g, Coords f);
 		inline const FCoords& get_position() const {return m_position;}
 		Bob * get_next_bob() const throw () {return m_linknext;}
 		bool is_world_bob() const throw () {return descr().is_world_bob();}
+
+		uint vision_range() const { return descr().vision_range(); }
 
 		virtual void draw(const Editor_Game_Base &, RenderTarget &,
 		                  const Point) const;

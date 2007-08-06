@@ -130,6 +130,8 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		s->get_string("name"); // descriptive name
 		s->get_string("descr"); // long description
 
+		m_bob_vision_range = s->get_int("bob_vision_range");
+
 		// Section [defaults]
 		s = prof.get_section("defaults");
 
