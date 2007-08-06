@@ -140,35 +140,15 @@ struct Player {
 		//  FIXME 16 bit.
 
 		/**
-		 * The 5 least significant bits are used to store the player number of the
-		 * owner of this node, as far as this player knows.
+		 * Indicates whether the player is currently seeing this node or
+		 * has ever seen it.
 		 *
-		 * The remaining bits indicates wether the player is currently seeing this
-		 * node or has ever seen it.
-		 *
-		 * Each time a person is created at or moves to a location close enough to
-		 * see this node, the value is increased by 0x20. When the person moves
-		 * away or is destroyed, the value is decreased by 0x20 again.
-		 *
-		 * If the value is < 0x20, the player has never seen the node. If this is
-		 * the case when a unit appears, the value is increased by 0x20 an extra
-		 * time, so that when the node later becomes unseen again, the value will
-		 * not drop below 0x20 again. Therefore the values 0x20 .. 0x3f means that
-		 * the field has been seen, but is currently not seen because it is not
-		 * within vision range of any person of this player.
-		 *
-		 * There are 3 levels of player view of locations:
-		 * 0. Players have no view at all of locations that they have never seen.
-		 * 1. Players only have a static view of locations that they have seen but
-		 *    are not seeing currently. With this static view, the player will
-		 *    only see the more persistent properties of the area, such as
-		 *    ownership, immovable kind, terrain type and roads. He will not see
-		 *    the more volatile properties such as bobs or immovable program
-		 *    state.
-		 * 2. Players have full view of all locations that they see. (There are of
-		 *    course properties that players with full vision are not
-		 *    automatically informed about, such as resources and other players'
-		 *    information.)
+		 * The value is
+		 *  0    if the player has never seen the node
+		 *  1    if the player does not currently see the node, but has
+		 *       seen it previously
+		 *  1+n  if the player currently sees the node, where
+		 *        n is the number of objects that can see the node.
 		 *
 		 * Note a fundamental difference between seeing a node, and having
 		 * knownledge about resources. A node is considered continuously seen by a
@@ -188,10 +168,14 @@ struct Player {
 		 * person begins to see on its own. If the building becomes empty of
 		 * people, it stops seeing.
 		 *
-		 * Only the Boolean representation of this value (wether the field has
+		 * Only the Boolean representation of this value (whether the field has
 		 * ever been seen) is saved/loaded. The complete value is then obtained by
-		 * increasing this value by 0x20 for each person that during the loading
-		 * process is found to see this node.
+		 * the calls to see_node or see_area peformed by all the building and
+		 * worker objects that can see the node.
+		 *
+		 * \note Never change this variable directly. Instead, use the functions
+		 * \ref see_node and \ref unsee_node or, more conveniently, \ref see_area
+		 * and \ref unsee_area .
 		 */
 		Vision vision;
 
@@ -270,9 +254,8 @@ struct Player {
 
 		/**
 		 * The last time when this player saw this node.
-		 * Only valid when vision is in 4 .. 7. (When vision < 4, this player has
-		 * never seen this node and when 8 <= vision, this player is currently
-		 * seeing this node.)
+		 * Only valid when \ref vision is 1, i.e. the player has previously seen
+		 * this node but can't see it right now.
 		 *
 		 * This value is only for the node.
 		 *
@@ -281,13 +264,13 @@ struct Player {
 		 *     (time_node_last_unseen for A,
 		 *      time_node_last_unseen for B,
 		 *      time_node_last_unseen for C)
-		 * and is only valid if all of {A, B, C} have vision < 8 and at least one
-		 * of them has 4 <= vision.
+		 * and is only valid if all of {A, B, C} are currently not seen (i.e. \ref vision <= 1)
+		 * and at least one of them has been seen at least once (i.e. \ref vision == 1).
 		 *
 		 * The corresponding value for an edge between the nodes A and B is
 		 *   max(time_node_last_unseen for A, time_node_last_unseen for B)
-		 * and is only valid if all of {A, B} have vision < 8 and at least one of
-		 * them has 4 <= vision.
+		 * and is only valid if all of {A, B} are currently not seen and at
+		 * least one of them has been seen at least once.
 		 *
 		 */
 		Editor_Game_Base::Time time_node_last_unseen;

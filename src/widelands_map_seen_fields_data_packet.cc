@@ -62,29 +62,27 @@ throw (_wexception)
 		const Map::Index max_index = map.max_index();
 	if (packet_version == 1) for (Map::Index i = 0; i < max_index; ++i) {
 			const Uint32 data = fr.Unsigned16();
-			for (Uint8 j = 0; j < nr_players;) {
-			const Vision see = data & 1 << j;
-				++j;
-				if (Player * const player = egbase->get_player(j))
-				player->m_fields[i].vision = see;
+			for (Uint8 j = 0; j < nr_players; ++j) {
+				bool see = data & (1 << j);
+				if (Player * const player = egbase->get_player(j+1))
+					player->m_fields[i].vision = see ? 1 : 0;
 				else if (see) log
 					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
 					 "%i, which does not exist, sees field %i.\n",
-					 j,
+					 j+1,
 					 i);
 			}
 	} else if (packet_version == CURRENT_PACKET_VERSION)
 		for (Map::Index i = 0; i < max_index; ++i) {
 			const Uint32 data = fr.Unsigned32();
-			for (Uint8 j = 0; j < nr_players;) {
-				const Vision see = data & 1 << j;
-				++j;
-				if (Player * const player = egbase->get_player(j))
-					player->m_fields[i].vision = see;
+			for (Uint8 j = 0; j < nr_players; ++j) {
+				bool see = data & (1 << j);
+				if (Player * const player = egbase->get_player(j+1))
+					player->m_fields[i].vision = see ? 1 : 0;
 				else if (see) log
 					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
 					 "%i, which does not exist, sees field %i.\n",
-					 j,
+					 j+1,
 					 i);
 			}
 		}
@@ -113,11 +111,10 @@ throw (_wexception)
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		Uint32 data = 0;
-		for (Uint8 j = 0; j < nr_players;) {
+		for (Uint8 j = 0; j < nr_players; ++j) {
 			const Uint8 player_index = j + 1;
 			if (const Player * const player = egbase->get_player(player_index))
 				data |= ((0 < player->vision(i)) << j);
-			j = player_index;
 		}
 		fw.Unsigned32(data);
    }
