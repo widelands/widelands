@@ -258,7 +258,6 @@ void WatchWindow::start_tracking(Point pos)
 {
 	Map & map = *m_game->get_map();
 	std::vector<Bob*> bobs;
-	int radius;
 
 	MapviewPixelFunctions::normalize_pix(map, pos);
 
@@ -267,7 +266,7 @@ void WatchWindow::start_tracking(Point pos)
 		(Area<FCoords> area
 		 (map.get_fcoords
 		  (MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node),
-		  2); area.radius <= 32; radius *= 2)
+		  2); area.radius <= 32; area.radius *= 2)
 		if (map.find_bobs(area, &bobs)) break;
 
 	// Find the bob closest to us
