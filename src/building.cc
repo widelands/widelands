@@ -210,6 +210,26 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	m_hints.parse (prof);
 }
 
+/**
+ * Normal buildings don't conquer anything, do this returns 0 by default.
+ *
+ * \return the radius (in number of fields) of the conquered area.
+ */
+uint Building_Descr::get_conquers() const
+{
+	return 0;
+}
+
+
+/**
+ * \return the radius (in number of fields) of the area seen by this
+ * building.
+ */
+uint Building_Descr::vision_range() const throw()
+{
+	return get_conquers() + 4;
+}
+
 
 /*
 ===============

@@ -89,8 +89,8 @@ struct Building_Descr : public Map_Object_Descr {
 		const EncodeData* encdata);
 	virtual void load_graphics();
 
-	virtual uint get_conquers() const {return 0;}
-	virtual uint vision_range() const throw () {return get_conquers() + 4;} //  FIXME make this configurable
+	virtual uint get_conquers() const;
+	virtual uint vision_range() const throw ();
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &m_tribe;}
@@ -253,7 +253,7 @@ protected:
 
 	//  The player who has defeated this building.
 	Player_Number           m_defeating_player;
-	
+
 	int m_priority; // base priority
 	std::map<int, int> m_ware_priorities;
 };
