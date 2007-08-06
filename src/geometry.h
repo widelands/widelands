@@ -211,6 +211,8 @@ struct FCoords : public Coords {
 	/**
 	 * Used in RenderTarget::rendermap where this is first called, then the
 	 * coordinates are normalized and after that field is set.
+	 *
+	 * \note You really want to use \ref Map::get_fcoords instead.
 	 */
 	explicit FCoords(const Coords nc) throw () : Coords(nc) {}
 
