@@ -91,10 +91,6 @@ public:
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
-	//  The constructionsite should only see as far as the builder would if
-	//  he was on his own.
-	uint vision_range() const throw () {return 2;}
-
    void log_general_info(Editor_Game_Base* egbase);
 
 protected:

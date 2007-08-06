@@ -118,6 +118,7 @@ private:
 	std::vector<char*> m_enhances_to;     // building to enhance to or 0
 	bool         m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
+	uint m_vision_range; // for migration, 0 is the default, meaning get_conquers() + 4
 
 public:
 	static Building_Descr* create_from_dir

@@ -64,7 +64,8 @@ m_buildable      (true),
 m_buildicon      (0),
 m_buildicon_fname(0),
 m_size           (BaseImmovable::SMALL),
-m_mine           (false)
+m_mine           (false),
+m_vision_range   (0)
 {}
 
 
@@ -208,6 +209,8 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	}
 
 	m_hints.parse (prof);
+
+	m_vision_range = global->get_int("vision_range");
 }
 
 /**
@@ -227,7 +230,10 @@ uint Building_Descr::get_conquers() const
  */
 uint Building_Descr::vision_range() const throw()
 {
-	return get_conquers() + 4;
+	if (m_vision_range > 0)
+		return m_vision_range;
+	else
+		return get_conquers() + 4;
 }
 
 
