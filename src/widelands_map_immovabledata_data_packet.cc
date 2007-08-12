@@ -93,6 +93,19 @@ throw (_wexception)
 			else
 				imm->m_program=0;
 			imm->m_program_ptr=fr.Unsigned32();
+			if (!imm->m_program) {
+				imm->m_program_ptr = 0;
+			} else {
+				if (imm->m_program_ptr >= imm->m_program->get_size()) {
+					// Try to not fail if the program of some immovable has changed
+					// significantly.
+					// Note that in some cases, the immovable may end up broken despite
+					// the fixup, but there isn't really anything we can do against that.
+					log("Warning: Immovable '%s', size of program '%s' seems to have changed.\n",
+						imm->descr().name().c_str(), imm->m_program->get_name().c_str());
+					imm->m_program_ptr = 0;
+				}
+			}
 			imm->m_program_step=fr.Signed32();
 
 			ol->mark_object_as_loaded(imm);
