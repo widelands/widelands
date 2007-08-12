@@ -53,29 +53,29 @@ void Widelands_Map_Immovabledata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
-      return;
+	if( skip )
+		return;
 
-   FileRead fr;
-   try {
-      fr.Open( fs, "binary/immovable_data" );
-   } catch ( ... ) {
-      // not there, so skip
-      return ;
-   }
+	FileRead fr;
+	try {
+		fr.Open( fs, "binary/immovable_data" );
+	} catch ( ... ) {
+		// not there, so skip
+		return ;
+	}
 
-   // First packet version
-   int packet_version=fr.Unsigned16();
+	// First packet version
+	int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(1) {
-         uint reg=fr.Unsigned32();
-         if(reg==0xffffffff) break; // Last immovable
+	if(packet_version==CURRENT_PACKET_VERSION) {
+		while(1) {
+			uint reg=fr.Unsigned32();
+			if(reg==0xffffffff) break; // Last immovable
 
-         assert(ol->is_object_known(reg));
-         Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
+			assert(ol->is_object_known(reg));
+			Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
 
-         // Animation
+			// Animation
 			const char* animname = fr.CString();
 			try {
 				imm->m_anim = imm->descr().get_animation(animname);
@@ -85,24 +85,24 @@ throw (_wexception)
 				log("Warning: Animation '%s' not found, using animation '%s').\n",
 					animname, imm->descr().get_animation_name(imm->m_anim).c_str());
 			}
-         imm->m_animstart=fr.Signed32();
+			imm->m_animstart=fr.Signed32();
 
-         // Programm
-         if(fr.Unsigned8())
-            imm->m_program=imm->descr().get_program(fr.CString());
-         else
-            imm->m_program=0;
-         imm->m_program_ptr=fr.Unsigned32();
-         imm->m_program_step=fr.Signed32();
+			// Programm
+			if(fr.Unsigned8())
+			imm->m_program=imm->descr().get_program(fr.CString());
+			else
+			imm->m_program=0;
+			imm->m_program_ptr=fr.Unsigned32();
+			imm->m_program_step=fr.Signed32();
 
-         ol->mark_object_as_loaded(imm);
-      }
-      // DONE
-      return;
-   }
-   throw wexception("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!\n", packet_version);
+			ol->mark_object_as_loaded(imm);
+		}
+		// DONE
+		return;
+	}
+	throw wexception("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!\n", packet_version);
 
-   assert( 0 );
+	assert( 0 );
 }
 
 
@@ -115,45 +115,45 @@ void Widelands_Map_Immovabledata_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	// now packet version
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
+	Map* map=egbase->get_map();
+	for(ushort y=0; y<map->get_height(); y++) {
+		for(ushort x=0; x<map->get_width(); x++) {
+			BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
 
-         // We do not write player immovables
-         if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
-            assert(os->is_object_known(immovable));
-            Immovable* imm=static_cast<Immovable*>(immovable);
+			// We do not write player immovables
+			if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
+			assert(os->is_object_known(immovable));
+			Immovable* imm=static_cast<Immovable*>(immovable);
 
-            fw.Unsigned32(os->get_object_file_index(imm));
+			fw.Unsigned32(os->get_object_file_index(imm));
 
-            // My position is not needed, set on creation
+			// My position is not needed, set on creation
 
-            // Animations
-            fw.CString(imm->descr().get_animation_name(imm->m_anim).c_str());
-            fw.Signed32(imm->m_animstart);
+			// Animations
+			fw.CString(imm->descr().get_animation_name(imm->m_anim).c_str());
+			fw.Signed32(imm->m_animstart);
 
-            // Program Stuff
-            if(imm->m_program) {
-               fw.Unsigned8(1);
-               fw.CString(imm->m_program->get_name().c_str());
-            } else
-               fw.Unsigned8(0);
-            fw.Unsigned32(imm->m_program_ptr);
-            fw.Signed32(imm->m_program_step);
+			// Program Stuff
+			if(imm->m_program) {
+				fw.Unsigned8(1);
+				fw.CString(imm->m_program->get_name().c_str());
+			} else
+				fw.Unsigned8(0);
+			fw.Unsigned32(imm->m_program_ptr);
+			fw.Signed32(imm->m_program_step);
 
-            os->mark_object_as_saved(imm);
-         }
-      }
-   }
+			os->mark_object_as_saved(imm);
+			}
+		}
+	}
 
-   fw.Unsigned32(0xffffffff);
+	fw.Unsigned32(0xffffffff);
 
-   fw.Write( fs, "binary/immovable_data" );
-   // DONE
+	fw.Write( fs, "binary/immovable_data" );
+	// DONE
 }
