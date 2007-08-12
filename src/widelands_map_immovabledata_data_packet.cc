@@ -89,9 +89,9 @@ throw (_wexception)
 
 			// Programm
 			if(fr.Unsigned8())
-			imm->m_program=imm->descr().get_program(fr.CString());
+				imm->m_program=imm->descr().get_program(fr.CString());
 			else
-			imm->m_program=0;
+				imm->m_program=0;
 			imm->m_program_ptr=fr.Unsigned32();
 			imm->m_program_step=fr.Signed32();
 
@@ -127,27 +127,27 @@ throw (_wexception)
 
 			// We do not write player immovables
 			if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
-			assert(os->is_object_known(immovable));
-			Immovable* imm=static_cast<Immovable*>(immovable);
+				assert(os->is_object_known(immovable));
+				Immovable* imm=static_cast<Immovable*>(immovable);
 
-			fw.Unsigned32(os->get_object_file_index(imm));
+				fw.Unsigned32(os->get_object_file_index(imm));
 
-			// My position is not needed, set on creation
+				// My position is not needed, set on creation
 
-			// Animations
-			fw.CString(imm->descr().get_animation_name(imm->m_anim).c_str());
-			fw.Signed32(imm->m_animstart);
+				// Animations
+				fw.CString(imm->descr().get_animation_name(imm->m_anim).c_str());
+				fw.Signed32(imm->m_animstart);
 
-			// Program Stuff
-			if(imm->m_program) {
-				fw.Unsigned8(1);
-				fw.CString(imm->m_program->get_name().c_str());
-			} else
-				fw.Unsigned8(0);
-			fw.Unsigned32(imm->m_program_ptr);
-			fw.Signed32(imm->m_program_step);
+				// Program Stuff
+				if(imm->m_program) {
+					fw.Unsigned8(1);
+					fw.CString(imm->m_program->get_name().c_str());
+				} else
+					fw.Unsigned8(0);
+				fw.Unsigned32(imm->m_program_ptr);
+				fw.Signed32(imm->m_program_step);
 
-			os->mark_object_as_saved(imm);
+				os->mark_object_as_saved(imm);
 			}
 		}
 	}
