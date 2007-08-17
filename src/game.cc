@@ -96,36 +96,36 @@ bool Game::can_start()
 }
 
 bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
-   m_netgame = 0;
+	m_netgame = 0;
 
-   assert(!get_map());
+	assert(!get_map());
 
-   Map *m = new Map();
-   set_map(m);
+	Map *m = new Map();
+	set_map(m);
 
-   FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
+	FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
 	m_maploader = new Widelands_Map_Loader(*fs, m);
 	UI::ProgressWindow loaderUI;
 	GameTips tips (loaderUI);
 
-    // Loading the locals for the campaign
-        std::string camp_textdomain("");
-        if( scenario )
-            {
-            loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
-            camp_textdomain.append(mapname);
-            i18n::grab_textdomain(camp_textdomain.c_str());
-            log("Loading the locals for scenario. file: %s.mo\n", mapname);
-            m_maploader->preload_map(scenario);
-            i18n::release_textdomain(); // To see a translated loaderUI-Texts
-            }
-        else // we are not loading a scenario, so no ingame texts to be translated.
-            {
-            loaderUI.step (_("Preloading a map"));
-            m_maploader->preload_map(scenario);
-            }
+	// Loading the locals for the campaign
+	std::string camp_textdomain("");
+	if( scenario )
+		{
+		loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
+		camp_textdomain.append(mapname);
+		i18n::grab_textdomain(camp_textdomain.c_str());
+		log("Loading the locals for scenario. file: %s.mo\n", mapname);
+		m_maploader->preload_map(scenario);
+		i18n::release_textdomain(); // To see a translated loaderUI-Texts
+		}
+	else // we are not loading a scenario, so no ingame texts to be translated.
+		{
+		loaderUI.step (_("Preloading a map"));
+		m_maploader->preload_map(scenario);
+		}
 
-        m_state = gs_running;
+	m_state = gs_running;
 
 	const std::string background = m->get_background();
 	if (background.size() > 0)
@@ -145,20 +145,20 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	}
 
 	loaderUI.step (_("Preparing computer players"));
-   init_player_controllers ();
+	init_player_controllers ();
 
 	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
-        // Reload campaign textdomain
-        if( scenario )
-        i18n::grab_textdomain(camp_textdomain.c_str());
+	// Reload campaign textdomain
+	if( scenario )
+	i18n::grab_textdomain(camp_textdomain.c_str());
 
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
 
-   if( scenario )
-	   i18n::release_textdomain();
+	if( scenario )
+		i18n::release_textdomain();
 
 	return run(loaderUI);
 }
@@ -200,7 +200,7 @@ bool Game::run_single_player ()
  * or networked (false)
  */
 bool Game::run_load_game(const bool is_splayer, std::string filename) {
-   assert(is_splayer); // TODO: net game saving not supported
+	assert(is_splayer); // TODO: net game saving not supported
 
 	if (filename.empty()) {
 		Fullscreen_Menu_LoadGame ssg(*this);
@@ -218,11 +218,11 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 	Game_Loader gl(*fs, this);
 	loaderUI.step(_("Loading..."));
 	gl.load_game();
-   delete fs;
+	delete fs;
 
-   m_state = gs_running;
+	m_state = gs_running;
 
-   return run(loaderUI, true);
+	return run(loaderUI, true);
 }
 
 //extern uchar g_playercolors[MAX_PLAYERS][12];
@@ -290,7 +290,6 @@ void Game::init_player_controllers ()
 	for (Player_Number i = 1; i <= nr_players; ++i)
 		if (get_player(i) and get_player(i)->get_type() == Player::AI)
 			cpl.push_back (new Computer_Player(*this, i));
-
 }
 
 /**
@@ -315,7 +314,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 	if (not is_savegame) {
 		std::string step_description = _("Creating player infrastructure");
-      // Prepare the players (i.e. place HQs)
+		// Prepare the players (i.e. place HQs)
 		const Player_Number nr_players = map().get_nrplayers();
 		for (Player_Number i = 1; i <= nr_players; ++i) if
 			(Player * const plr = get_player(i))
@@ -328,13 +327,13 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 				ipl->move_view_to(map().get_starting_pos(i));
       }
 
-      // Prepare the map, set default textures
+		// Prepare the map, set default textures
 		map().recalc_default_resources();
 		map().get_mem().delete_unreferenced_events  ();
 		map().get_mtm().delete_unreferenced_triggers();
 
-      // Finally, set the scenario names and tribes to represent
-      // the correct names of the players
+		// Finally, set the scenario names and tribes to represent
+		// the correct names of the players
 		for (Player_Number curplr = 1; curplr <= nr_players; ++curplr) {
 			const Player * const plr = get_player(curplr);
 			const std::string                                             no_name;
@@ -342,7 +341,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 			const std::string & player_name = plr ? plr->    get_name() : no_name;
 			map().set_scenario_player_tribe(curplr,  tribe_name);
 			map().set_scenario_player_name (curplr, player_name);
-      }
+		}
 
 		// Everything prepared, send the first trigger event
 		// We lie about the sender here. Hey, what is one lie in a lifetime?
@@ -437,18 +436,18 @@ void Game::set_speed(int speed)
 
 void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 {
-   for (unsigned int i=0;i<cpl.size();i++)
-      if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
-         if (lg==GAIN)
-            cpl[i]->gain_immovable (pi);
-         else
-            cpl[i]->lose_immovable (pi);
+	for (unsigned int i=0;i<cpl.size();i++)
+		if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
+			if (lg==GAIN)
+				cpl[i]->gain_immovable (pi);
+			else
+				cpl[i]->lose_immovable (pi);
 
-   if(get_ipl()->get_player_number()==pi->get_owner()->get_player_number())
-      if (lg==GAIN)
-         get_ipl()->gain_immovable (pi);
-      else
-         get_ipl()->lose_immovable (pi);
+	if(get_ipl()->get_player_number()==pi->get_owner()->get_player_number())
+		if (lg==GAIN)
+			get_ipl()->gain_immovable (pi);
+		else
+			get_ipl()->lose_immovable (pi);
 }
 
 void Game::player_field_notification (const FCoords& fc, losegain_t lg)
@@ -475,10 +474,10 @@ void Game::cleanup_for_load
 		delete *it;
 	m_tribes.resize(0);
 	get_cmdqueue()->flush();
-   while(cpl.size()) {
-      delete cpl[cpl.size()-1];
-      cpl.pop_back();
-   }
+	while(cpl.size()) {
+		delete cpl[cpl.size()-1];
+		cpl.pop_back();
+	}
 }
 
 /**
@@ -494,7 +493,10 @@ void Game::send_player_command (PlayerCommand* pc)
 		enqueue_command (pc);
 }
 
-void Game::enqueue_command (BaseCommand * const cmd) {cmdqueue.enqueue(cmd);}
+void Game::enqueue_command (BaseCommand * const cmd)
+{
+	cmdqueue.enqueue(cmd);
+}
 
 // we might want to make these inlines:
 void Game::send_player_bulldoze (PlayerImmovable* pi)

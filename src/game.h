@@ -56,14 +56,14 @@ class NetGame;
 
 struct Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
-   friend class Game_Game_Class_Data_Packet;
-   friend class Game_Player_Info_Data_Packet;
+	friend class Game_Game_Class_Data_Packet;
+	friend class Game_Player_Info_Data_Packet;
 
 	Game(void);
 	~Game(void);
 
 	// life cycle
-   bool run_splayer_map_direct(const char* mapname, bool scenario);
+	bool run_splayer_map_direct(const char* mapname, bool scenario);
 	bool run_single_player ();
 	bool run_multi_player (NetGame*);
 
@@ -118,8 +118,8 @@ struct Game : public Editor_Game_Base {
 	void send_player_flagaction (Flag*, int);
 	void send_player_start_stop_building (Building*);
 	void send_player_enhance_building (Building*, int);
-   void send_player_change_training_options(Building*, int, int);
-   void send_player_drop_soldier(Building*, int);
+	void send_player_change_training_options(Building*, int, int);
+	void send_player_drop_soldier(Building*, int);
 	void send_player_change_soldier_capacity(Building*, int);
 	void send_player_enemyflagaction
 		(const Flag * const,
@@ -128,12 +128,12 @@ struct Game : public Editor_Game_Base {
 		 const int num_soldiers,
 		 const int type);
 
-   Interactive_Player* get_ipl(void) { return ipl; }
+	Interactive_Player* get_ipl(void) { return ipl; }
 
-   // If this has a netgame, return it
-   NetGame* get_netgame( void ) { return m_netgame; }
-   
-   SaveHandler* get_save_handler() { return &m_savehandler; }
+	// If this has a netgame, return it
+	NetGame* get_netgame( void ) { return m_netgame; }
+
+	SaveHandler* get_save_handler() { return &m_savehandler; }
 
 private:
 	void init_player_controllers ();
