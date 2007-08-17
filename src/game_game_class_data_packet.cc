@@ -44,7 +44,6 @@ throw (_wexception)
       // Can't load netgames
       game->m_netgame=0;
 
-      game->m_state=gs_running;
       game->m_speed=fr.Signed16();
 
       game->m_gametime=fr.Unsigned32();

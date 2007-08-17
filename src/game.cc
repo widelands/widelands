@@ -97,6 +97,7 @@ bool Game::can_start()
 
 bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	m_netgame = 0;
+	m_state = gs_loading;
 
 	assert(!get_map());
 
@@ -124,8 +125,6 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		loaderUI.step (_("Preloading a map"));
 		m_maploader->preload_map(scenario);
 		}
-
-	m_state = gs_running;
 
 	const std::string background = m->get_background();
 	if (background.size() > 0)
@@ -178,7 +177,7 @@ bool Game::run_single_player ()
 
 	g_gr->flush(PicMod_Menu);
 
-	m_state = gs_running;
+	m_state = gs_loading;
 	UI::ProgressWindow loaderUI(map().get_background());
 	GameTips tips (loaderUI);
 
@@ -215,12 +214,12 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
 	FileSystem * const fs = g_fs->MakeSubFileSystem(filename.c_str());
 
+	m_state = gs_loading;
+
 	Game_Loader gl(*fs, this);
 	loaderUI.step(_("Loading..."));
 	gl.load_game();
 	delete fs;
-
-	m_state = gs_running;
 
 	return run(loaderUI, true);
 }
@@ -243,7 +242,7 @@ bool Game::run_multi_player (NetGame* ng)
 	UI::ProgressWindow loaderUI;
 	g_gr->flush(PicMod_Menu);
 
-	m_state = gs_running;
+	m_state = gs_loading;
 
 	loaderUI.step(_("Preparing computer players"));
 	init_player_controllers ();
@@ -352,6 +351,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 	g_sound_handler.change_music("ingame", 1000, 0);
 
+	m_state = gs_running;
 	ipl->run();
 
 	g_sound_handler.change_music("menu", 1000, 0);

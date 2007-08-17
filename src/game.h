@@ -42,6 +42,7 @@ namespace UI {struct ProgressWindow;};
 enum {
 	gs_none    = 0, //  not connected, nothing
 	gs_menu,        //  in the setup menu(s)
+	gs_loading,     //  menu has completed, but the game is still loading
 	gs_running      //  in-game
 };
 
@@ -78,6 +79,11 @@ struct Game : public Editor_Game_Base {
 
 	void think(void);
 
+	/**
+	 * \return \c true if the game is completely loaded and running (or paused)
+	 * or \c false otherwise.
+	 */
+	bool is_loaded() { return m_state == gs_running; }
 
 	bool can_start();
 
