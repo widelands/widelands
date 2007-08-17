@@ -150,7 +150,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
 	// Reload campaign textdomain
 	if( scenario )
-	i18n::grab_textdomain(camp_textdomain.c_str());
+		i18n::grab_textdomain(camp_textdomain.c_str());
 
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
@@ -324,7 +324,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 			if (plr->get_type() == Player::Local)
 				ipl->move_view_to(map().get_starting_pos(i));
-      }
+		}
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
