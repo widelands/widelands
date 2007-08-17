@@ -2339,9 +2339,9 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		delete m_requeriments;
 	m_requeriments = 0;
 
-   // the callback functions are likely to delete us,
-   // therefore we musn't access member variables behind this
-   // point
+	// the callback functions are likely to delete us,
+	// therefore we musn't access member variables behind this
+	// point
 	if (w)
 		(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
 	else
@@ -2364,12 +2364,12 @@ void Request::transfer_fail(Game *, Transfer * t) {
 	t->m_worker = 0;
 	t->m_item = 0;
 
-   remove_transfer(find_transfer(t));
+	remove_transfer(find_transfer(t));
 
-   if (!wasopen)
+	if (!wasopen)
 		m_economy->add_request(this);
 
-		delete m_requeriments;
+	delete m_requeriments;
 	m_requeriments = 0;
 }
 
@@ -2401,7 +2401,7 @@ void Request::remove_transfer(uint idx)
 /**
  * Lookup a \ref Transfer in the transfers array.
  * \throw wexception if the \ref Transfer is not registered with us.
-*/
+ */
 uint Request::find_transfer(Transfer* t)
 {
 	TransferList::iterator it = std::find(m_transfers.begin(), m_transfers.end(), t);
