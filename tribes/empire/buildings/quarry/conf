@@ -16,7 +16,10 @@ worker=stonemason
 1=call stone
 2=call stone
 3=call stone
-4=call marble # every fourth stone is marble
+4=call marble # 2 of 7 times it finds marble
+5=call stone
+6=call stone
+7=call marble # 2 of 7 times it finds marble
 
 [stone]
 0=set +catch

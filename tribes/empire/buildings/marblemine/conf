@@ -25,26 +25,30 @@ wine=6
 [prog_marble]
 0=set +catch
 1=sleep 20000
-2=consume ration
-3=animation working 20000
-4=mine granit 2 50 5
-5=produce marble
-6=consume wine
-7=animation working 20000
-8=mine granit 2 50 5
-9=produce marble
+2=check ration
+3=check wine
+4=consume ration
+5=consume wine
+6=animation working 20000
+7=mine granit 2 50 5
+8=produce marble
+9=animation working 20000
+10=mine granit 2 50 5
+11=produce marble
 
 [prog_stone]
 0=set +catch
 1=sleep 20000
-2=consume ration
-3=animation working 20000
-4=mine granit 2 50 5
-5=produce marble
-6=consume wine
-7=animation working 20000
-8=mine granit 2 50 5
-9=produce marble
+2=check ration
+3=check wine
+4=consume ration
+5=consume wine
+6=animation working 20000
+7=mine granit 2 50 5
+8=produce stone
+9=animation working 20000
+10=mine granit 2 50 5
+11=produce stone
 
 [buildcost]
 trunk=4
