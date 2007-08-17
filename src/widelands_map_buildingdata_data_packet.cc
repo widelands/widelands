@@ -390,7 +390,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       // Wares
       uint nr_queues = fr.Unsigned16();
 		if (nr_queues != productionsite.m_input_queues.size())
-         throw ("Productionsite has wrong number of input queues!\n");
+         throw wexception("Productionsite has wrong number of input queues!\n");
       for(uint i=0; i<productionsite.m_input_queues.size(); i++)
          productionsite.m_input_queues[i]->Read(&fr,egbase,ol);
 
