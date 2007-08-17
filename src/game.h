@@ -42,7 +42,6 @@ namespace UI {struct ProgressWindow;};
 enum {
 	gs_none    = 0, //  not connected, nothing
 	gs_menu,        //  in the setup menu(s)
-	gs_paused,      //  in-game but paused
 	gs_running      //  in-game
 };
 
