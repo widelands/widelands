@@ -203,7 +203,10 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
 	if (filename.empty()) {
 		Fullscreen_Menu_LoadGame ssg(*this);
-		if (ssg.run()) filename = ssg.filename(); else return false;
+		if (ssg.run() > 0)
+			filename = ssg.filename();
+		else
+			return false;
 	}
 
 	UI::ProgressWindow loaderUI;
