@@ -31,6 +31,17 @@ For compiling, you will also need
 If you have a desparate need to use older Python versions then tell us. It'd be
 possible, but the inconvenience seems not to be worthwile so far.
 
+If you are a developer, you might (optionally!) make use of the following software:
+   - ctags
+   - astyle
+     astyle does not layout correctly when structs are used like public classes (C++)
+     and not in the traditional C sense. If you decide to use this, please
+     double-check the results before committing
+   - pngrewrite and optipng
+     Used to make PNG images more compact. You most certainly don't need this;
+     compactification is a once-a-year, one-person-only job. If you don't know
+     already that you will be doing it, forget about it.
+
 
 
 ============
