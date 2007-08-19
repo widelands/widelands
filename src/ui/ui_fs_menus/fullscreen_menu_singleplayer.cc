@@ -45,11 +45,11 @@ load_game
  &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
  _("Load Game")),
 
-tutorial
+campaign
 (this,
  90, 300, 200, 26,
  1,
- &Fullscreen_Menu_SinglePlayer::end_modal, this, Tutorial_Campaign,
+ &Fullscreen_Menu_SinglePlayer::end_modal, this, Campaign,
  _("Campaigns")),
 
 back

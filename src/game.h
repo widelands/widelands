@@ -67,6 +67,7 @@ struct Game : public Editor_Game_Base {
 	// life cycle
 	bool run_splayer_map_direct(const char* mapname, bool scenario);
 	bool run_single_player ();
+	bool run_campaign ();
 	bool run_multi_player (NetGame*);
 
 	/**

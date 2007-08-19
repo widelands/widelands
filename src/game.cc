@@ -25,6 +25,7 @@
 #include "interactive_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
+#include "fullscreen_menu_campaign_select.h"
 #include "game_loader.h"
 #include "game_tips.h"
 #include "graphic.h"
@@ -203,6 +204,45 @@ bool Game::run_single_player ()
 
 	return run(loaderUI);
 }
+
+
+/**
+ * Run Campaign UI
+ * Only the UI is loaded, real loading of the map will
+ * take place in run_splayer_map_direct
+ */
+bool Game::run_campaign() {
+
+	m_state = gs_menu;
+	m_netgame = 0;
+
+	// set variables
+	int campaign;
+	int loop=1;
+	std::string campmapfile;
+
+	// Campaign UI - Loop
+	while (loop==1){
+		// First start UI for selecting the campaign
+		Fullscreen_Menu_CampaignSelect select_campaign;
+		if (select_campaign.run())
+			campaign = select_campaign.get_campaign();
+		if (campaign == -1) // Back was pressed
+			return false;
+
+		// Than start UI for the selected campaign
+		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
+		if (select_campaignmap.run())
+			campmapfile = select_campaignmap.get_map();
+			campaign = select_campaign.get_campaign();
+		if (campaign != -1) // Gets -1 if back was pressed
+			loop=0;
+		}
+
+		// Load selected campaign-map-file
+		return run_splayer_map_direct(campmapfile.c_str(), true);
+}
+
 
 /**
  * Load a game

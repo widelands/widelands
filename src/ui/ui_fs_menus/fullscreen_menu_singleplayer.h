@@ -32,13 +32,13 @@
 struct Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
       Fullscreen_Menu_SinglePlayer();
 
-	enum {Back = dying_code, New_Game, Tutorial_Campaign, Load_Game};
+	enum {Back = dying_code, New_Game, Campaign, Load_Game};
 
 private:
 	UI::Textarea                                    title;
 	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> new_game;
 	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> load_game;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> tutorial;
+	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> campaign;
 	UI::IDButton<Fullscreen_Menu_SinglePlayer, int> back;
 };
 

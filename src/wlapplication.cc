@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 by the Widelands Development Team
+ * Copyright (C) 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,6 @@
 #include "fullscreen_menu_netsetup.h"
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
-#include "fullscreen_menu_tutorial_select_map.h"
 #include "game.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
@@ -1196,16 +1195,9 @@ void WLApplication::mainmenu_singleplayer()
 				done=true;
 			break;
 
-		case Fullscreen_Menu_SinglePlayer::Tutorial_Campaign:
-			{
-				const char * filename = 0;
-				{
-					Fullscreen_Menu_TutorialSelectMap select_tutorial;
-					if (const uint i = select_tutorial.run())
-						filename = select_tutorial.get_mapname(i);
-				}
-				if (filename) m_game->run_splayer_map_direct(filename, true);
-			}
+		case Fullscreen_Menu_SinglePlayer::Campaign:
+			if (m_game->run_campaign())
+				done=true;
 			break;
 		}
 
