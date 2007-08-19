@@ -25,6 +25,7 @@
 #include "game.h"
 #include "instances.h"
 #include "network.h"
+#include "streamwrite.h"
 #include "player.h"
 #include "soldier.h"
 #include "wexception.h"
@@ -126,11 +127,11 @@ void Cmd_Bulldoze::execute (Game* g)
 		player->bulldoze(static_cast<PlayerImmovable*>(obj));
 }
 
-void Cmd_Bulldoze::serialize (Serializer* ser)
+void Cmd_Bulldoze::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_BULLDOZE);
-	ser->putchar (get_sender());
-	ser->putlong (serial);
+	ser->Unsigned8(PLCMD_BULLDOZE);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned32(serial);
 }
 #define PLAYER_CMD_BULLDOZE_VERSION 1
 void Cmd_Bulldoze::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
@@ -172,13 +173,13 @@ void Cmd_Build::execute (Game* g)
 	player->build(coords, id);
 }
 
-void Cmd_Build::serialize (Serializer* ser)
+void Cmd_Build::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_BUILD);
-	ser->putchar (get_sender());
-	ser->putshort (id);
-	ser->putshort (coords.x);
-	ser->putshort (coords.y);
+	ser->Unsigned8(PLCMD_BUILD);
+	ser->Unsigned8(get_sender());
+	ser->Signed16(id);
+	ser->Unsigned16(coords.x);
+	ser->Unsigned16(coords.y);
 }
 #define PLAYER_CMD_BUILD_VERSION 1
 void Cmd_Build::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
@@ -224,12 +225,12 @@ void Cmd_BuildFlag::execute (Game* g)
 	player->build_flag(coords);
 }
 
-void Cmd_BuildFlag::serialize (Serializer* ser)
+void Cmd_BuildFlag::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_BUILDFLAG);
-	ser->putchar (get_sender());
-	ser->putshort (coords.x);
-	ser->putshort (coords.y);
+	ser->Unsigned8(PLCMD_BUILDFLAG);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned16(coords.x);
+	ser->Unsigned16(coords.y);
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
 void Cmd_BuildFlag::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
@@ -300,18 +301,18 @@ void Cmd_BuildRoad::execute (Game* g)
 	player->build_road(*path);
 }
 
-void Cmd_BuildRoad::serialize (Serializer* ser)
+void Cmd_BuildRoad::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_BUILDROAD);
-	ser->putchar (get_sender());
-	ser->putshort (start.x);
-	ser->putshort (start.y);
-	ser->putshort (nsteps);
+	ser->Unsigned8(PLCMD_BUILDROAD);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned16(start.x);
+	ser->Unsigned16(start.y);
+	ser->Unsigned16(nsteps);
 
 	assert (path!=0 || steps!=0);
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-		ser->putchar (path ? (*path)[i] : steps[i]);
+		ser->Unsigned8(path ? (*path)[i] : steps[i]);
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
 void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
@@ -363,12 +364,12 @@ void Cmd_FlagAction::execute (Game* g)
 		player->flagaction (static_cast<Flag*>(obj), action);
 }
 
-void Cmd_FlagAction::serialize (Serializer* ser)
+void Cmd_FlagAction::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_FLAGACTION);
-	ser->putchar (get_sender());
-	ser->putchar (action);
-	ser->putlong (serial);
+	ser->Unsigned8(PLCMD_FLAGACTION);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned8(action);
+	ser->Unsigned32(serial);
 }
 
 #define PLAYER_CMD_FLAGACTION_VERSION 1
@@ -418,11 +419,11 @@ void Cmd_StartStopBuilding::execute (Game* g)
 		player->start_stop_building(static_cast<PlayerImmovable*>(obj));
 }
 
-void Cmd_StartStopBuilding::serialize (Serializer* ser)
+void Cmd_StartStopBuilding::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_STARTSTOPBUILDING);
-	ser->putchar (get_sender());
-	ser->putlong (serial);
+	ser->Unsigned8(PLCMD_STARTSTOPBUILDING);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned32(serial);
 }
 #define PLAYER_CMD_STOPBUILDING_VERSION 1
 void Cmd_StartStopBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
@@ -469,12 +470,12 @@ void Cmd_EnhanceBuilding::execute (Game* g)
 		g->get_player(get_sender())->enhance_building(building, id);
 }
 
-void Cmd_EnhanceBuilding::serialize (Serializer* ser)
+void Cmd_EnhanceBuilding::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_ENHANCEBUILDING);
-	ser->putchar (get_sender());
-	ser->putlong (serial);
-	ser->putshort (id);
+	ser->Unsigned8(PLCMD_ENHANCEBUILDING);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned32(serial);
+	ser->Unsigned16(id);
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
 void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
@@ -532,13 +533,13 @@ void Cmd_ChangeTrainingOptions::execute (Game* g)
 
 }
 
-void Cmd_ChangeTrainingOptions::serialize (Serializer* ser)
+void Cmd_ChangeTrainingOptions::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_CHANGETRAININGOPTIONS);
-	ser->putchar (get_sender());
-	ser->putlong (serial);
-	ser->putshort (attribute);
-	ser->putshort (value);
+	ser->Unsigned8(PLCMD_CHANGETRAININGOPTIONS);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned32(serial);
+	ser->Unsigned16(attribute);
+	ser->Unsigned16(value);
 }
 
 
@@ -603,12 +604,12 @@ void Cmd_DropSoldier::execute (Game* g)
 	}
 }
 
-void Cmd_DropSoldier::serialize (Serializer* ser)
+void Cmd_DropSoldier::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_DROPSOLDIER);
-	ser->putchar (get_sender());
-	ser->putlong (serial);
-	ser->putlong (soldier);
+	ser->Unsigned8(PLCMD_DROPSOLDIER);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned32(serial);
+	ser->Unsigned32(soldier);
 }
 
 #define PLAYER_CMD_DROPSOLDIER_VERSION 1
@@ -667,12 +668,12 @@ void Cmd_ChangeSoldierCapacity::execute (Game* g)
 		player->change_soldier_capacity(static_cast<PlayerImmovable*>(obj), val);
 }
 
-void Cmd_ChangeSoldierCapacity::serialize (Serializer* ser)
+void Cmd_ChangeSoldierCapacity::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_CHANGESOLDIERCAPACITY);
-	ser->putchar (get_sender());
-	ser->putlong (serial);
-	ser->putshort (val);
+	ser->Unsigned8(PLCMD_CHANGESOLDIERCAPACITY);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned32(serial);
+	ser->Unsigned16(val);
 }
 
 #define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
@@ -744,15 +745,15 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 		log ("Cmd_EnemyFlagAction Player invalid.\n");
 }
 
-void Cmd_EnemyFlagAction::serialize (Serializer* ser)
+void Cmd_EnemyFlagAction::serialize (StreamWrite* ser)
 {
-	ser->putchar (PLCMD_ENEMYFLAGACTION);
-	ser->putchar (get_sender());
-	ser->putchar (action);
-	ser->putlong (serial);
-	ser->putchar (attacker);
-	ser->putchar (number);
-	ser->putchar (type);
+	ser->Unsigned8(PLCMD_ENEMYFLAGACTION);
+	ser->Unsigned8(get_sender());
+	ser->Unsigned8(action);
+	ser->Unsigned32(serial);
+	ser->Unsigned8(attacker);
+	ser->Unsigned8(number);
+	ser->Unsigned8(type);
 }
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
 void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)

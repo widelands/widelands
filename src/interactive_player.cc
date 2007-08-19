@@ -349,8 +349,14 @@ void Interactive_Player::start()
 
    // Recalc whole map for changed owner stuff
 	map.recalc_whole_map();
+}
 
-   sample_statistics();
+// This is a bandaid/HACK that we can hopefully remove one day, when
+// statistics saving is moved into Player (which is necessary for network
+// games)
+void Interactive_Player::prepare_statistics()
+{
+	sample_statistics();
 }
 
 /*

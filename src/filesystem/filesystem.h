@@ -30,6 +30,10 @@
 
 typedef std::set<std::string> filenameset_t;
 
+class StreamRead;
+class StreamWrite;
+
+
 /**
  * FileSystem is an abstract base class representing certain filesystem operations.
  * \todo const correctness
@@ -56,6 +60,26 @@ struct FileSystem {
 	virtual void EnsureDirectoryExists(const std::string dirname) = 0;
 	//TODO: use this only from inside EnsureDirectoryExists()
 	virtual void MakeDirectory(const std::string dirname) = 0;
+
+	/**
+	 * Opens the given file for reading as a stream.
+	 * Throws an exception if the file couldn't be opened.
+	 *
+	 * \return a \ref StreamRead object for the file. The caller must delete this
+	 * object when done to close the file.
+	 */
+	virtual StreamRead* OpenStreamRead(const std::string fname) = 0;
+
+	/**
+	 * Opens the given file for writing as a stream.
+	 * A pre-existing file will be overwritten.
+	 *
+	 * Throws an exception if the file couldn't be opened.
+	 *
+	 * \return a \ref StreamWrite object for the file. The caller must delete this
+	 * object when done to close the file (which will implicitly flush unwritten data).
+	 */
+	virtual StreamWrite* OpenStreamWrite(const std::string fname) = 0;
 
 	virtual FileSystem* MakeSubFileSystem( const std::string dirname ) = 0;
 	virtual FileSystem* CreateSubFileSystem( const std::string dirname,

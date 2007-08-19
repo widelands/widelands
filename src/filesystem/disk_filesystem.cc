@@ -32,6 +32,9 @@
 #include <glob.h>
 #endif
 
+#include "streamread.h"
+#include "streamwrite.h"
+
 /**
  * Initialize the real file-system
  */
@@ -409,4 +412,101 @@ void RealFSImpl::Rename
 	const std::string fullname1 = FS_CanonicalizeName(old_name);
 	const std::string fullname2 = FS_CanonicalizeName(new_name);
 	rename(fullname1.c_str(), fullname2.c_str());
+}
+
+
+/*****************************************************************************
+
+Implementation of OpenStreamRead
+
+*****************************************************************************/
+
+namespace {
+
+class RealFSStreamRead : public StreamRead {
+public:
+	RealFSStreamRead(const std::string fname)
+	{
+		m_file = fopen(fname.c_str(), "rb");
+		if (!m_file)
+			throw wexception("Couldn't open %s for reading", fname.c_str());
+	}
+
+	~RealFSStreamRead()
+	{
+		fclose(m_file);
+	}
+
+	size_t Data(void* const data, const size_t bufsize)
+	{
+		return fread(data, 1, bufsize, m_file);
+	}
+
+	bool EndOfFile()
+	{
+		return feof(m_file);
+	}
+
+private:
+	FILE* m_file;
+};
+
+} // anonymous namespace
+
+StreamRead* RealFSImpl::OpenStreamRead(const std::string fname)
+{
+	const std::string fullname = FS_CanonicalizeName(fname);
+
+	return new RealFSStreamRead(fullname);
+}
+
+
+/*****************************************************************************
+
+Implementation of OpenStreamWrite
+
+*****************************************************************************/
+
+namespace {
+
+class RealFSStreamWrite : public StreamWrite {
+public:
+	RealFSStreamWrite(const std::string fname)
+	: m_filename(fname)
+	{
+		m_file = fopen(fname.c_str(), "wb");
+		if (!m_file)
+			throw wexception("Couldn't open %s for writing", fname.c_str());
+	}
+
+	~RealFSStreamWrite()
+	{
+		fclose(m_file);
+	}
+
+	void Data(const void * const data, const size_t size)
+	{
+		size_t ret = fwrite(data, 1, size, m_file);
+
+		if (ret != size)
+			throw wexception("Write to %s failed", m_filename.c_str());
+	}
+
+	void Flush()
+	{
+		fflush(m_file);
+	}
+
+private:
+	std::string m_filename;
+	FILE* m_file;
+};
+
+} // anonymous namespace
+
+StreamWrite* RealFSImpl::OpenStreamWrite(const std::string fname)
+{
+	const std::string fullname = FS_CanonicalizeName(fname);
+
+	return new RealFSStreamWrite(fullname);
 }

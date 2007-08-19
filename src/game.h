@@ -30,6 +30,8 @@ struct Path;
 struct PlayerImmovable;
 namespace UI {struct ProgressWindow;};
 
+class ReplayWriter;
+
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
@@ -157,6 +159,8 @@ private:
 	Cmd_Queue                      cmdqueue;
 
 	SaveHandler                    m_savehandler;
+
+	ReplayWriter* m_replaywriter;
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 };

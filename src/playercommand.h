@@ -25,7 +25,7 @@
 #include "building.h"
 #include "transport.h"
 
-class Serializer;
+class StreamWrite;
 class Deserializer;
 
 
@@ -42,7 +42,7 @@ private:
 
 	char get_sender() const { return sender; }
 
-	virtual void serialize (Serializer*)=0;
+	virtual void serialize (StreamWrite*)=0;
 	static PlayerCommand* deserialize (Deserializer*);
 
 protected:
@@ -69,7 +69,7 @@ public:
 	virtual int get_id(void) { return QUEUE_CMD_BULLDOZE; } // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_Build:public PlayerCommand {
@@ -91,7 +91,7 @@ public:
 	virtual int get_id(void) { return QUEUE_CMD_BUILD; } // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_BuildFlag:public PlayerCommand {
@@ -112,7 +112,7 @@ public:
 	virtual int get_id(void) { return QUEUE_CMD_FLAG; } // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_BuildRoad:public PlayerCommand {
@@ -137,7 +137,7 @@ public:
 	virtual int get_id(void) { return QUEUE_CMD_BUILDROAD; } // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_FlagAction:public PlayerCommand {
@@ -160,7 +160,7 @@ public:
 	Cmd_FlagAction (Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_StartStopBuilding:public PlayerCommand {
@@ -181,7 +181,7 @@ public:
 	Cmd_StartStopBuilding (Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_EnhanceBuilding:public PlayerCommand {
@@ -203,7 +203,7 @@ public:
 	Cmd_EnhanceBuilding (Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 
@@ -227,7 +227,7 @@ public:
 	Cmd_ChangeTrainingOptions (Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_DropSoldier:public PlayerCommand {
@@ -249,7 +249,7 @@ public:
 	Cmd_DropSoldier(Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 class Cmd_ChangeSoldierCapacity:public PlayerCommand {
@@ -271,7 +271,7 @@ public:
 	Cmd_ChangeSoldierCapacity (Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 /////////////TESTING STUFF
@@ -306,7 +306,7 @@ public:
 	Cmd_EnemyFlagAction (Deserializer*);
 
 	virtual void execute (Game* g);
-	virtual void serialize (Serializer*);
+	virtual void serialize (StreamWrite*);
 };
 
 

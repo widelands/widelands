@@ -887,6 +887,12 @@ void Serializer::end_packet ()
 	buffer[1]=length & 0xFF;
 }
 
+void Serializer::Data(const void * const data, const size_t size)
+{
+	for(size_t idx = 0; idx < size; ++idx)
+		putchar(((const char*)data)[idx]);
+}
+
 void Serializer::putstr (const char* str)
 {
 	while (*str)

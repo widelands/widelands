@@ -44,6 +44,9 @@ struct ZipFilesystem : public FileSystem {
 	virtual void EnsureDirectoryExists(const std::string dirname);
 	virtual void MakeDirectory(const std::string dirname);
 
+	virtual StreamRead* OpenStreamRead(const std::string fname);
+	virtual StreamWrite* OpenStreamWrite(const std::string fname);
+
 	virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
 	virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
                                                  const Type );

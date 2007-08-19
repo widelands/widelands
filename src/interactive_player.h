@@ -85,6 +85,7 @@ class Interactive_Player : public Interactive_Base {
 
 		virtual void think();
 
+		void prepare_statistics();
 		void start();
 
 		void exit_game_btn();

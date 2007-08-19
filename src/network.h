@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "error.h"
 #include "types.h"
+#include "streamwrite.h"
 
 #include <SDL_net.h>
 
@@ -192,8 +193,8 @@ class NetClient:public NetGame {
 	Deserializer   * deserializer;
 };
 
-class Serializer {
-    public:
+class Serializer : public StreamWrite {
+public:
 	Serializer ();
 	~Serializer ();
 
@@ -201,6 +202,8 @@ class Serializer {
 	void end_packet ();
 
 	void send (TCPsocket);
+
+	void Data(const void * const data, const size_t size);
 
 	void putchar (char v)
 	{
@@ -223,7 +226,7 @@ class Serializer {
 
 	void putstr (const char*);
 
-    private:
+private:
 	std::vector<unsigned char> buffer;
 };
 

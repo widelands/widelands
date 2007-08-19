@@ -35,6 +35,7 @@
 #include "network.h"
 #include "player.h"
 #include "playercommand.h"
+#include "replay.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -50,10 +51,20 @@ m_state   (gs_none),
 m_speed   (1),
 ipl       (0),
 cmdqueue  (this),
+m_replaywriter(0),
 m_realtime(WLApplication::get()->get_time())
-{g_sound_handler.m_the_game = this;}
+{
+	g_sound_handler.m_the_game = this;
+}
 
-Game::~Game() {g_sound_handler.m_the_game = NULL;}
+Game::~Game()
+{
+	if (m_replaywriter) {
+		delete m_replaywriter;
+		m_replaywriter = 0;
+	}
+	g_sound_handler.m_the_game = NULL;
+}
 
 
 /**
@@ -355,6 +366,38 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 	g_sound_handler.change_music("ingame", 1000, 0);
 
 	m_state = gs_running;
+
+	// This bandaid is unfortunately necessary to make sure
+	// statistics data is set up for saving before replay saves.
+	// I hope this can be removed once statistics saving is moved
+	// into the Player code (this is necessary for network games
+	// anyway)
+	ipl->prepare_statistics();
+
+	{
+		log("Starting replay writer\n");
+
+		// Derive a replay filename from the current time
+		time_t t;
+		time(&t);
+		char* current_time = ctime(&t);
+		// Remove trailing newline
+		std::string time_string(current_time, strlen(current_time)-1);
+		SSS_T pos = std::string::npos;
+		// ':' is not a valid file name character under Windows,
+		// so we replace it with '.'
+		while ((pos = time_string.find (':')) != std::string::npos) {
+			time_string[pos] = '.';
+		}
+
+		std::string fname(REPLAY_DIR);
+		fname += time_string;
+		fname += REPLAY_SUFFIX;
+
+		m_replaywriter = new ReplayWriter(this, fname);
+		log("Replay writer has started\n");
+	}
+
 	ipl->run();
 
 	g_sound_handler.change_music("menu", 1000, 0);
@@ -496,8 +539,22 @@ void Game::send_player_command (PlayerCommand* pc)
 		enqueue_command (pc);
 }
 
+
+/**
+ * Actually enqueue a command.
+ *
+ * \note In a network game, player commands are only allowed to enter the
+ * command queue after being accepted by the networking logic via
+ * \ref send_player_command , so you must never enqueue a player command directly.
+ */
 void Game::enqueue_command (BaseCommand * const cmd)
 {
+	if (m_replaywriter) {
+		PlayerCommand* plcmd = dynamic_cast<PlayerCommand*>(cmd);
+		if (plcmd)
+			m_replaywriter->SendPlayerCommand(plcmd);
+	}
+
 	cmdqueue.enqueue(cmd);
 }
 
