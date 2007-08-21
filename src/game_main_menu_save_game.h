@@ -42,7 +42,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 
       void fill_list(void);
       bool save_game(std::string);
-   
+
       Interactive_Player* m_parent;
       UI::Edit_Box* m_editbox;
       UI::Textarea* m_name, *m_gametime;
