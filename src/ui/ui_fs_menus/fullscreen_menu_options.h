@@ -88,7 +88,7 @@ private:
 	UI::Listselect<void *>            m_reslist;
 	UI::Textarea                      m_label_resolution;
 	UI::Textarea                      m_label_language;
-	UI::Listselect<std::string &>     m_language_list;
+	UI::Listselect<std::string>       m_language_list;
 	UI::Textarea                      m_label_game_options;
 	UI::Checkbox                      m_single_watchwin;
 	UI::Textarea                      m_label_single_watchwin;

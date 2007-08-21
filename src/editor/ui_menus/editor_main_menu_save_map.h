@@ -59,7 +59,7 @@ struct Main_Menu_Save_Map : public UI::Window {
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
       Editor_Interactive *m_parent;
-	UI::Listselect<const char * const> * m_ls;
+	UI::Listselect<const char *> * m_ls;
 	UI::Button<Main_Menu_Save_Map> * m_ok_btn;
 
       std::string m_basedir;

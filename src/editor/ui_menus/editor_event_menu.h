@@ -38,9 +38,9 @@ struct Editor_Event_Menu : public UI::UniqueWindow {
    private:
       Editor_Interactive *m_parent;
 
-	UI::Listselect<Event      &> *m_event_list;
-	UI::Listselect<EventChain &> *m_eventchain_list;
-	UI::Listselect<Trigger    &> *m_trigger_list;
+	UI::Listselect<Event*      > *m_event_list;
+	UI::Listselect<EventChain* > *m_eventchain_list;
+	UI::Listselect<Trigger*    > *m_trigger_list;
 	UI::Button<Editor_Event_Menu> * m_btn_del_event;
 	UI::Button<Editor_Event_Menu> * m_btn_edit_event;
 	UI::Button<Editor_Event_Menu> * m_btn_del_trigger;

@@ -46,7 +46,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       Interactive_Player* m_parent;
       UI::Edit_Box* m_editbox;
       UI::Textarea* m_name, *m_gametime;
-	UI::Listselect<const char * const> * m_ls;
+	UI::Listselect<const char *> * m_ls;
 
 	UI::Button<Game_Main_Menu_Save_Game> * m_ok_btn;
       std::string m_curdir;

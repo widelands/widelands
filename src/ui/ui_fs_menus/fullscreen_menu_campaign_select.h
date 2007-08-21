@@ -47,7 +47,7 @@ struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
 
 private:
 	UI::Textarea						title;
-	UI::Listselect<const char * const>			list;
+	UI::Listselect<const char *>               list;
 	UI::Textarea						label_campname;
 	UI::Textarea						tacampname;
 	UI::Textarea						label_difficulty;
@@ -63,7 +63,7 @@ private:
  * UI 2 - Selection of a map
  *
  */
-struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base { 
+struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_CampaignMapSelect();
 	void clicked_back();
 	void clicked_ok();
@@ -74,7 +74,7 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 
 private:
 	UI::Textarea						title;
-	UI::Listselect<const char * const>			list;
+	UI::Listselect<const char *>                  list;
 	UI::Textarea						label_mapname;
 	UI::Textarea						tamapname;
 	UI::Textarea						label_author;

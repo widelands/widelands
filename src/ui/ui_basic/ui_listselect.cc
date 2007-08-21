@@ -36,7 +36,7 @@ Args: parent  parent panel
       h
       align   alignment of text inside the Listselect
 */
-Listselect<void *>::Listselect
+BaseListselect::BaseListselect
 (Panel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
 :
 Panel(parent, x, y, w, h),
@@ -52,7 +52,7 @@ m_show_check(show_check)
 
 	set_align(align);
 
-	m_scrollbar->moved.set(this, &Listselect::set_scrollpos);
+	m_scrollbar->moved.set(this, &BaseListselect::set_scrollpos);
 	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar->set_steps(1);
 
@@ -72,13 +72,17 @@ m_show_check(show_check)
 /**
 Free allocated resources
 */
-Listselect<void *>::~Listselect() {m_scrollbar = 0; clear();}
+BaseListselect::~BaseListselect()
+{
+	m_scrollbar = 0;
+	clear();
+}
 
 
 /**
 Remove all entries from the listselect
 */
-void Listselect<void *>::clear() {
+void BaseListselect::clear() {
 	const Entry_Record_vector::const_iterator entry_records_end =
 		m_entry_records.end();
 	for
@@ -88,11 +92,12 @@ void Listselect<void *>::clear() {
 		free(*it);
 	m_entry_records.clear();
 
-	if (m_scrollbar) m_scrollbar->set_steps(1);
+	if (m_scrollbar)
+		m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
 	m_selection = no_selection_index();
 	m_last_click_time = -10000;
-   m_last_selection = no_selection_index();
+	m_last_selection = no_selection_index();
 }
 
 
@@ -103,9 +108,9 @@ Args: name   name that will be displayed
       entry  value returned by get_select()
       sel    if true, directly select the new entry
 */
-void Listselect<void *>::add
+void BaseListselect::add
 (const char * const name,
- void * entry,
+ uint entry,
  const int picid,
  const bool sel)
 {
@@ -118,30 +123,34 @@ void Listselect<void *>::add
 	strcpy(er.name, name);
 
 	uint entry_height = 0;
-   if(picid==-1) {
-      entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
-   } else {
+	if(picid==-1) {
+		entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
+	} else {
 		uint w, h;
 		g_gr->get_picture_size(picid, w, h);
-      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);
-	   if (m_max_pic_width < w) m_max_pic_width = w;
-   }
-   if(entry_height>m_lineheight) m_lineheight=entry_height;
+		entry_height = (h >= g_fh->get_fontheight(UI_FONT_SMALL))
+			? h : g_fh->get_fontheight(UI_FONT_SMALL);
+		if (m_max_pic_width < w)
+			m_max_pic_width = w;
+	}
+
+	if(entry_height>m_lineheight) m_lineheight=entry_height;
 
 	m_entry_records.push_back(&er);
 
 	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
-   if(sel) {
-      Listselect::select( m_entry_records.size() - 1);
-	}
+
+	if (sel)
+		select(m_entry_records.size() - 1);
 }
 
 /*
  * Switch two entries
  */
-void Listselect<void *>::switch_entries(const uint m, const uint n) {
+void BaseListselect::switch_entries(const uint m, const uint n)
+{
 	assert(m < size());
 	assert(n < size());
 
@@ -163,7 +172,8 @@ void Listselect<void *>::switch_entries(const uint m, const uint n) {
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void Listselect<void *>::sort(const uint Begin, uint End) {
+void BaseListselect::sort(const uint Begin, uint End)
+{
 	if (End > size()) End = size();
 	for (uint i = Begin; i < End; ++i) for (uint j = i; j < End; ++j) {
 		Entry_Record * const eri = m_entry_records[i];
@@ -180,17 +190,33 @@ void Listselect<void *>::sort(const uint Begin, uint End) {
 /**
 Set the list alignment (only horizontal alignment works)
 */
-void Listselect<void *>::set_align(const Align align)
-{m_align = static_cast<const Align>(align & Align_Horizontal);}
+void BaseListselect::set_align(const Align align)
+{
+	m_align = static_cast<const Align>(align & Align_Horizontal);
+}
 
 
 /**
 Scroll to the given position, in pixels.
 */
-void Listselect<void *>::set_scrollpos(const int i) {
+void BaseListselect::set_scrollpos(const int i)
+{
 	m_scrollpos = i;
 
 	update(0, 0, get_eff_w(), get_h());
+}
+
+
+/**
+ * Define a special color that will be used to display the item at the given
+ * index.
+ */
+void BaseListselect::set_entry_color(const uint n, const RGBColor col) throw ()
+{
+	assert(n < m_entry_records.size());
+
+	m_entry_records[n]->use_clr = true;
+	m_entry_records[n]->clr = col;
 }
 
 
@@ -200,7 +226,8 @@ void Listselect<void *>::set_scrollpos(const int i) {
  *
  * Args: i  the entry to select
  */
-void Listselect<void *>::select(const uint i) {
+void BaseListselect::select(const uint i)
+{
 	if (m_selection == i)
 		return;
 
@@ -215,11 +242,60 @@ void Listselect<void *>::select(const uint i) {
 	update(0, 0, get_eff_w(), get_h());
 }
 
+/**
+ * \return \c true if an item is select, or \c false if there is no current
+ * selection
+ */
+bool BaseListselect::has_selection() const throw()
+{
+	return m_selection != no_selection_index();
+}
+
+
+/**
+ * \return the ID/entry value of the currently selected item.
+ * The entry value is given as a parameter to \ref add
+ *
+ * Throws an exception when no item is selected.
+ */
+uint BaseListselect::get_selected() const throw (No_Selection)
+{
+	if (m_selection == no_selection_index())
+		throw No_Selection();
+
+	return m_entry_records[m_selection]->m_entry;
+}
+
+
+/**
+ * Remove the currently selected item. Throws an exception when no
+ * item is selected.
+ */
+void BaseListselect::remove_selected() throw (No_Selection)
+{
+	if (m_selection == no_selection_index())
+		throw No_Selection();
+
+	remove(m_selection);
+}
+
+
+uint BaseListselect::get_lineheight() const throw ()
+{
+	return m_lineheight + 2;
+}
+
+uint BaseListselect::get_eff_w() const throw ()
+{
+	return get_w();
+}
+
 
 /**
 Redraw the listselect box
 */
-void Listselect<void *>::draw(RenderTarget* dst) {
+void BaseListselect::draw(RenderTarget* dst)
+{
 	// draw text lines
 	const uint lineheight = get_lineheight();
 	uint idx = m_scrollpos / lineheight;
@@ -239,7 +315,7 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 			dst->brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
-      }
+		}
 
 		int x;
 		if (m_align & Align_Right)
@@ -247,16 +323,16 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 		else if (m_align & Align_HCenter)
 			x = get_eff_w()>>1;
 		else {
-         // Pictures are always left aligned, leave some space here
+			// Pictures are always left aligned, leave some space here
 			if(m_max_pic_width)
-            x= m_max_pic_width + 10;
-         else
-            x=1;
-      }
+				x= m_max_pic_width + 10;
+			else
+			x=1;
+		}
 
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
-      // Horizontal center the string
+		// Horizontal center the string
 		g_fh->draw_string
 			(*dst,
 			 UI_FONT_SMALL,
@@ -267,12 +343,12 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 			 er.name, m_align,
 			 -1);
 
-      // Now draw pictures
+		// Now draw pictures
 		if (er.picid != -1) {
 			uint w, h;
 			g_gr->get_picture_size(er.picid, w, h);
 			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
-      }
+		}
 		y += lineheight;
 		idx++;
 	}
@@ -282,47 +358,54 @@ void Listselect<void *>::draw(RenderTarget* dst) {
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Listselect<void *>::handle_mousepress(const Uint8 btn, int, int y) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+bool BaseListselect::handle_mousepress(const Uint8 btn, int, int y)
+{
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
-	   int time=WLApplication::get()->get_time();
+	int time=WLApplication::get()->get_time();
 
-      // This hick hack is needed if any of the
-      // callback functions calls clear to forget the last
-      // clicked time.
-      int real_last_click_time=m_last_click_time;
+	// This hick hack is needed if any of the
+	// callback functions calls clear to forget the last
+	// clicked time.
+	int real_last_click_time=m_last_click_time;
 
-      m_last_selection=m_selection;
-      m_last_click_time=time;
-		play_click();
+	m_last_selection=m_selection;
+	m_last_click_time=time;
+	play_click();
 
-      y = (y + m_scrollpos) / get_lineheight();
-	if (y >= 0 and y < static_cast<const int>(m_entry_records.size())) select(y);
+	y = (y + m_scrollpos) / get_lineheight();
+	if (y >= 0 and y < static_cast<const int>(m_entry_records.size()))
+		select(y);
 
-      // check if doubleclicked
+	// check if doubleclicked
 	if
 		(time-real_last_click_time < DOUBLE_CLICK_INTERVAL
 		 and
 		 m_last_selection == m_selection
 		 and
 		 m_selection != no_selection_index())
-         double_clicked.call(m_selection);
-
+		double_clicked.call(m_selection);
 
 	return true;
 }
-bool Listselect<void *>::handle_mouserelease(const Uint8 btn, int, int)
-{return btn == SDL_BUTTON_LEFT;}
+
+bool BaseListselect::handle_mouserelease(const Uint8 btn, int, int)
+{
+	return btn == SDL_BUTTON_LEFT;
+}
 
 /*
  * Remove entry
  */
-void Listselect<void *>::remove(const uint i) {
+void BaseListselect::remove(const uint i)
+{
 	assert(i < m_entry_records.size());
 
-   free(m_entry_records[i]);
-   m_entry_records.erase(m_entry_records.begin() + i);
-	if (m_selection == i) selected.call(m_selection = no_selection_index());
+	free(m_entry_records[i]);
+	m_entry_records.erase(m_entry_records.begin() + i);
+	if (m_selection == i)
+		selected.call(m_selection = no_selection_index());
 }
 
 /*
@@ -330,12 +413,14 @@ void Listselect<void *>::remove(const uint i) {
  * the first entry with this name. If none is found, nothing
  * is done
  */
-void Listselect<void *>::remove(const char * const str) {
-   for(uint i=0; i<m_entry_records.size(); i++) {
-      if(!strcmp(m_entry_records[i]->name,str)) {
+void BaseListselect::remove(const char * const str)
+{
+	for(uint i=0; i<m_entry_records.size(); i++) {
+		if(!strcmp(m_entry_records[i]->name,str)) {
 			remove(i);
-         return;
-      }
-   }
+			return;
+		}
+	}
 }
-};
+
+} // namespace UI

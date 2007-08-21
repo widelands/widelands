@@ -51,7 +51,7 @@ private:
 	Game &                                      game;
 	UI::IDButton<Fullscreen_Menu_LoadGame, int> back;
 	UI::Button<Fullscreen_Menu_LoadGame>        m_ok;
-	UI::Listselect<const char * const>          list;
+	UI::Listselect<const char *>                list;
 	UI::Textarea                                title;
 	UI::Textarea                                label_mapname;
 	UI::Textarea                                tamapname;

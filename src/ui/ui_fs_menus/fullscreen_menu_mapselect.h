@@ -43,7 +43,7 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base
 	UI::Textarea                                 title;
 	UI::Textarea                                 label_load_map_as_scenario;
 	UI::Checkbox                                 load_map_as_scenario;
-	UI::Listselect<const char * const>           list;
+	UI::Listselect<const char *>                 list;
 	UI::Textarea                                 label_name;
 	UI::Textarea                                 taname;
 	UI::Textarea                                 label_author;

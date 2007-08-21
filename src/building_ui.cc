@@ -1133,7 +1133,7 @@ class ProductionSite_Window_ListWorkerWindow : public UI::Window{
       Coords          m_ps_location;
       ProductionSite* m_ps;
       Interactive_Player* m_parent;
-	UI::Listselect<Worker &> * m_ls;
+	UI::Listselect<Worker*> * m_ls;
       UI::Textarea* m_type, *m_experience, *m_becomes;
 };
 
@@ -1159,7 +1159,7 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
    int posy=offsy;
 
    // listselect
-   m_ls=new UI::Listselect<Worker &>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
+   m_ls=new UI::Listselect<Worker*>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
 
    // the descriptive areas
    // Type
@@ -1219,8 +1219,8 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 
    uint i;
    for(i=0; i<workers->size(); i++) {
-		Worker & worker = *(*workers)[i];
-		m_ls->add(worker.descname().c_str(), worker, worker.get_menu_pic());
+		Worker* worker = (*workers)[i];
+		m_ls->add(worker->descname().c_str(), worker, worker->get_menu_pic());
    }
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
@@ -1234,7 +1234,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 void ProductionSite_Window_ListWorkerWindow::update(void)
 {
 	if (m_ls->has_selection()) {
-		const Worker & worker = m_ls->get_selected();
+		const Worker& worker = *m_ls->get_selected();
 
 		m_type->set_text( worker.descname() );
 
@@ -1266,7 +1266,7 @@ struct PriorityButtonInfo {
 	UI::Basic_Button* button;
 	int picture_enabled;
 	int picture_disabled;
-	
+
 	PriorityButtonInfo() {}
 
 	PriorityButtonInfo
@@ -1278,7 +1278,7 @@ struct PriorityButtonInfo {
 
 struct PriorityButtonHelper : std::map<int, PriorityButtonInfo> {
 	PriorityButtonHelper(ProductionSite * ps, int ware_type, int ware_index);
-	
+
 	void button_clicked (int priority);
 	void update_buttons ();
 
@@ -1312,7 +1312,7 @@ protected:
 		(UI::Box* box, PriorityButtonHelper & helper,
 		 int priority, int x, int y, int w, int h,
 		 const char * picture1, const char * picture2,
-		 const std::string & tooltip);		
+		 const std::string & tooltip);
 };
 
 
@@ -1393,13 +1393,13 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 	WaresQueueDisplay* wqd = new WaresQueueDisplay(hbox, 0, 0,
 												   get_w() - priority_buttons_width,
 												   wq, m_parent->get_game());
-	
+
 	hbox->add(wqd, UI::Box::AlignTop);
-	
+
 	if (wq->get_ware() >= 0) {
 		m_priority_helpers.push_back (PriorityButtonHelper(ps, Request::WARE, wq->get_ware()));
 		PriorityButtonHelper & helper = m_priority_helpers.back();
-		
+
 		UI::Box* vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
 		// Add priority buttons
 		vbox->add
@@ -1426,7 +1426,7 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 									 pic_priority_low_on,
 									 _("Lowest priority")),
 			 UI::Box::AlignTop);
-		
+
 		hbox->add(vbox, UI::Box::AlignCenter);
 		helper.update_buttons();
 	}

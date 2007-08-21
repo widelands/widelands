@@ -57,7 +57,7 @@ m_parent(parent)
    int posy=offsy;
 
    // listselect
-   m_ls=new UI::Listselect<const char * const>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
+   m_ls=new UI::Listselect<const char *>(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
    m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
    // Filename editbox
