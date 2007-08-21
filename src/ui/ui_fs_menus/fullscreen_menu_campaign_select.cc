@@ -50,20 +50,20 @@ list(this, 15, 205, 455, 365),
 
 // Info fields
 label_campname	(this, 480, 205, _("Campaign:")),
-tacampname	(this, 490, 220, ""),
+tacampname	(this, 490, 225, ""),
 label_difficulty(this, 480, 255, _("Difficulty:")),
-tadifficulty	(this, 490, 270, ""),
+tadifficulty	(this, 490, 275, ""),
 label_campdescr	(this, 480, 305, _("Description:")),
-tacampdescr	(this, 490, 325, 275, 190, ""),
+tacampdescr	(this, 490, 330, 290, 190, ""),
 
 // UI::Buttons
 b_ok
-(this, 550, 520, 200, 26, 2,
+(this, 490, 540, 142, 26, 2,
 &Fullscreen_Menu_CampaignSelect::clicked_ok, this,
 _("OK"), std::string(), false),
 
 back
-(this, 550, 550, 200, 26, 2,
+(this, 637, 540, 143, 26, 2,
 &Fullscreen_Menu_CampaignSelect::clicked_back, this,
 _("Back"), std::string(), true)
 
@@ -250,20 +250,20 @@ list(this, 15, 205, 455, 365),
 
 // Info fields
 label_mapname   (this, 480, 205, _("Name:")),
-tamapname       (this, 490, 220, ""),
+tamapname       (this, 490, 225, ""),
 label_author    (this, 480, 255, _("Author:")),
-taauthor        (this, 490, 270, ""),
+taauthor        (this, 490, 275, ""),
 label_mapdescr  (this, 480, 305, _("Description:")),
-tamapdescr      (this, 490, 320, 280, 190, ""),
+tamapdescr      (this, 490, 330, 290, 190, ""),
 
 // UI::Buttons
 b_ok
-(this, 550, 520, 200, 26, 2,
+(this, 490, 540, 142, 26, 2,
 &Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
 _("OK"), std::string(), false),
 
 back
-(this, 550, 550, 200, 26, 2,
+(this, 637, 540, 143, 26, 2,
 &Fullscreen_Menu_CampaignMapSelect::clicked_back, this,
 _("Back"), std::string(), true)
 
@@ -321,8 +321,7 @@ char number[4];
 
 // Create the entry we use to load the section of the map
 mapsection = campsection;
-if(i<=9){mapsection += "0";}
-sprintf(number, "%i", i);
+sprintf(number, "%02i", i);
 mapsection += number;
 
 // Load the section of the map
@@ -384,9 +383,7 @@ char number[4];
 
 // Create the entry we use to load the section of the map
 mapsection = campsection;
-if(i<=9){
-mapsection += "0";}
-sprintf(number, "%i", i);
+sprintf(number, "%02i", i);
 mapsection += number;
 
 // Add all visible entries to the list.
@@ -401,9 +398,7 @@ while ((s = prof.get_section(mapsection.c_str()))){
 
 	// increase mapsection
 	mapsection = campsection;
-	if(i<=9){
-	mapsection += "0";}
-	sprintf(number, "%i", i);
+	sprintf(number, "%02i", i);
 	mapsection += number;}
 
 if (list.size()) list.select(0);
