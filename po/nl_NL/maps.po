@@ -1,157 +1,151 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+# Widelands po/nl_NL/maps.po
+# Copyright (C) 2007 Widelands Development Team.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Project-Id-Version: Widelands svn2407\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-08-21 14:31+0000\n"
+"PO-Revision-Date: 2007-08-19 15:43+0100\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../maps/Checkmate.wmf/elemental:9
+#: ../../maps/Checkmate.wmf/elemental:9
 msgid "Checkmate"
-msgstr ""
+msgstr "Schaakmat"
 
-#: ../maps/Checkmate.wmf/elemental:11
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr ""
+#: ../../maps/Checkmate.wmf/elemental:11
+msgid "Whether just one of nature's strangest features or the creation of a mad (and game-hungry) god, this weird battleground awaits two opponents for another confrontation."
+msgstr "Ofwel één van natuur's vreemdste verschijnselen, ofwel de creatie van een waanzinnige (en speelzieke) god, wacht dit strijdperk op twee opponenten voor alweer een confrontatie."
 
-#: ../maps/Dry Riverbed.wmf/elemental:9
+#: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Droge rivierbedding"
 
-#: ../maps/Dry Riverbed.wmf/elemental:11
-msgid ""
-"It is a long time ago, since the last rain drop touched these grounds. No "
-"wonder, that here is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last water."
-msgstr ""
+#: ../../maps/Dry Riverbed.wmf/elemental:11
+msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
+msgstr "Het is lang geleden dat er een regendruppel deze gronden beroerde. Geen wonder dat er niet veel water over is in deze droge rivierbedding. Iedereen weet het: spoedig zal het oorlog zijn. Oorlog voor het laatste water."
 
-#: ../maps/Elven Forests.wmf/elemental:9
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid "Elven Forests"
-msgstr ""
+msgstr "Elvenbossen"
 
-#: ../maps/Elven Forests.wmf/elemental:11
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many a tribe into "
-"the attempt of taking them for itself."
-msgstr ""
+#: ../../maps/Elven Forests.wmf/elemental:11
+msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
+msgstr "De adembenemende schoonheid van deze smaragdgroene landen heeft vele stammen gelokt om te proberen deze voor zichzelf in te nemen."
 
-#: ../maps/Finlakes.wmf/elemental:9
+#: ../../maps/Enemy in sight.wmf/elemental:9
+msgid "Enemy in sight"
+msgstr "Vijand in zicht"
+
+#: ../../maps/Enemy in sight.wmf/elemental:11
+msgid "A Multiplayer-battle-map on a X-Shaped island."
+msgstr "Een strijdkaart voor meer spelers op een kruisvormig eiland."
+
+#: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
-msgstr ""
+msgstr "Finse meren"
 
-#: ../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful finish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgstr "Dit is het mooie finse landschap, bestaande uit meren, rivieren, oerbossen en bergen. Het is aan jou, je hier een weg door te banen."
 
-#: ../maps/Firegames.wmf/elemental:9
+#: ../../maps/Firegames.wmf/elemental:9
 msgid "Firegames"
-msgstr ""
+msgstr "Vuurspelen"
 
-#: ../maps/Firegames.wmf/elemental:11
-msgid ""
-"Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but noone knows, what might happen if you meet an opponent "
-"tribe?"
-msgstr ""
+#: ../../maps/Firegames.wmf/elemental:11
+msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but noone knows, what might happen if you meet an opponent tribe?"
+msgstr "Is dit een test door de Goden of een snood plan van iemand anders, dat jij en je stam ontwaakten op dit eiland tussen vuur en lava? Tot nu lijkt het erop dat je alleen bent, maar niemand weet wat er kan gebeuren als je een vijandige stam tegenkomt."
 
-#: ../maps/Four Castles.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid "Four Castles"
-msgstr ""
+msgstr "Vier kastelen"
 
-#: ../maps/Four Castles.wmf/elemental:11
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
+#: ../../maps/Four Castles.wmf/elemental:11
+msgid "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+msgstr "Goed afgeschermd in hun machtige vestingen, zijn vier heerszuchtige krijgsheren hun schema aan het uitwerken om dit land te domineren..."
 
-#: ../maps/Glacier Lake.wmf/elemental:9
+#: ../../maps/Glacier Lake.wmf/elemental:9
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Gletsjermeer"
 
-#: ../maps/Glacier Lake.wmf/elemental:11
-msgid ""
-"A long time your tribe dwelled on this beautiful and lonely glacier lake. "
-"Noone disturbed you and the resources were enough for your whole tribe, but "
-"a few month ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only place enough for one tribe."
-msgstr ""
+#: ../../maps/Glacier Lake.wmf/elemental:11
+msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
+msgstr "Lang geleden stootte je stam op dit mooie en afgelegen gletsjermeer. Niemand viel je lastig en de voorraden waren voldoende voor je hele stam, maar enige maanden geleden kwam er een andere stam over de bergen en vestigde zich hier. Maar je weet het zeker: er hier slecht plaats voor één stam."
 
-#: ../maps/Golden Peninsula.wmf/elemental:9
+#: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Gouden schiereiland"
 
-#: ../maps/Golden Peninsula.wmf/elemental:11
+#: ../../maps/Golden Peninsula.wmf/elemental:11
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr ""
+msgstr "Twee koninkrijken racen naar de schatten van een legendarisch schiereiland..."
 
-#: ../maps/Lake of tranquility.wmf/elemental:9
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Meer van Rust"
 
-#: ../maps/Lake of tranquility.wmf/elemental:11
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
-msgstr ""
+#: ../../maps/Lake of tranquility.wmf/elemental:11
+msgid "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+msgstr "Dit meer, diep in de oudste oerbossen, is lang bekend om zijn schoonheid en idyllische rust. Toch is zijn rust nu verstoord, als er twee stammen aankomen aan zijn oevers..."
 
-#: ../maps/Plateau.wmf/elemental:9
+#: ../../maps/Plateau.wmf/elemental:9
 msgid "The Green Plateau"
-msgstr ""
+msgstr "De Groene Hoogvlakte"
 
-#: ../maps/Plateau.wmf/elemental:11
-msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
-msgstr ""
+#: ../../maps/Plateau.wmf/elemental:11
+msgid "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
+msgstr "Je staat op een eiland, gekroond met machtige bergen die een schitterende en rijke schat in hun midden bewaren - De Groene Hoogvlakte, die hard te verkrijgen, maar makkelijk te verliezen is, dus als je het wilt, moet je de andere clans in de gaten houden."
 
-#: ../maps/Riverlands.wmf/elemental:9
+#: ../../maps/Riverlands.wmf/elemental:9
 msgid "Riverlands"
-msgstr ""
+msgstr "Rivierenland"
 
-#: ../maps/The Oasis Triangle.wmf/elemental:9
+#: ../../maps/Riverlands.wmf/elemental:11
+msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
+msgstr "Een mystiek land met een grote verscheidenheid aan landschappen dat door een handvol grote rivieren wordt doorkruist."
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "De Oase Driehoek"
 
-#: ../maps/The Oasis Triangle.wmf/elemental:11
-msgid ""
-"There is something mystical, like a grey atmosphere, about this three Oasis, "
-"which noone found out, yet. Perhaps you will be the one, but be aware of the "
-"others, who are searching, too!"
-msgstr ""
+#: ../../maps/The Oasis Triangle.wmf/elemental:11
+msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+msgstr "Er hangt iets mystieks, als een grijze atmosfoor, rond deze drie Oases, dat nog door niemand is ontdekt. Misschien zal jij diegene zijn, maar houd rekening met de anderen die ook op zoek zijn!"
 
-#: ../maps/The big lake.wmf/elemental:9
+#: ../../maps/The big lake.wmf/elemental:9
 msgid "The big lake"
-msgstr ""
+msgstr "Het grote meer"
 
-#: ../maps/The long way.wmf/elemental:9
+#: ../../maps/The big lake.wmf/elemental:11
+msgid "This island once came out of the deepest grounds of the sea. In those days, fire rose out of the salty seawater and brought ash, stones and earth to daylight. And the fire came nearer and nearer to the sun, while the mountain grew and grew. Until one day, when the whole firemountain exploded. Nowadays only this ring is left from that mighty firemountain. Do you think, that it is big enough for more than one tribe?"
+msgstr "Dit eiland steeg ooit op uit de zeebodem. In die dagen rees het vuur uit het zoute zeewater en bracht as, steen en aarde aan het oppervlak. En het vuur steeg hoger en hoger naar de zon, terwijl de berg groeide en groeide. Tot op een dag de hele berg ontplofte. Nu is er slechts nog deze ring over van die machtige vuurberg. Wat denk je? Is het groot genoeg voor meer dan één stam?"
+
+#: ../../maps/The long way.wmf/elemental:9
 msgid "The long way"
-msgstr ""
+msgstr "De lange weg"
 
-#: ../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/The long way.wmf/elemental:11
+msgid "Another strange test by the Gods. To reach the other side, there seems to be no other way, than occupying the land of your enemies."
+msgstr "Een andere vreemde proef van de goden. Om de andere kant te bereiken, lijkt er geen andere weg dan het land van je vijanden te bezetten."
+
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "Two Frontiers"
+msgstr "Twee Grenzen"
+
+#: ../../maps/Two frontiers.wmf/elemental:11
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr "Een strijdkaart voor meer spelers op een klein cirkelvormig eiland."
+
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid "War of the Valleys"
-msgstr ""
+msgstr "Oorlog der Valleien"
 
-#: ../maps/War of the Valleys.wmf/elemental:11
-msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
-msgstr ""
+#: ../../maps/War of the Valleys.wmf/elemental:11
+msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
+msgstr "Er wordt gefluisterd dat zelfs de zon en de maan hun weg moeten zoeken tussen deze bergpieken. HINT: Monolieten markeren delfstoffen. Doe geen moeite om geologen elders te sturen."

@@ -4,28 +4,29 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2327\n"
+"Project-Id-Version: Widelands svn2407\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-06-23 09:16+0000\n"
-"PO-Revision-Date: 2007-07-22 16:18+0100\n"
-"Last-Translator: Dikjuh <lostsoul288@gmail.com>\n"
+"POT-Creation-Date: 2007-08-21 14:31+0000\n"
+"PO-Revision-Date: 2007-08-19 15:52+0100\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-Basepath: ../../pot/\n"
+"X-Poedit-SearchPath-0: campaigns\n"
 
 #: ../../../campaigns/emp01.wmf/elemental:9
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "koninkrijk trainingsmissie1 - De stranden van Malac' Mor"
+msgstr "Keizerrijk trainingsmissie1 - De stranden van Malac' Mor"
 
 #: ../../../campaigns/emp01.wmf/elemental:11
 msgid "First mission of the Empire campaign"
 msgstr "Eerste missie van de Keizerijk campagne"
 
-#: ../../../campaigns/emp01.wmf/event:11
-#: ../../../campaigns/emp01.wmf/event:30
+#: ../../../campaigns/emp01.wmf/event:11 ../../../campaigns/emp01.wmf/event:30
 #: ../../../campaigns/emp01.wmf/event:49
 #: ../../../campaigns/emp01.wmf/event:647
 msgid "Diary of Lutius"
@@ -33,7 +34,7 @@ msgstr "Dagboek van Lutius"
 
 #: ../../../campaigns/emp01.wmf/event:13
 msgid "What has become of our Empire? I really ask this question, while my king disallowed me to fight against that monster of a barbarian tribe, that first acted like a peaceful friend and than attacked my army in the darkest night. <br>I got the the task to patrol on our northern frontier, which lies on the north of Galdin Mountains in a great, beautiful and ancient forest, with an army of 150 men. Soon we met a barbarian tribe, which at first was nice and friendly.  A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons. But in our fifth night in that region, they attacked us without reason. I lost hundreds of good men, was enprisoned and finally was brought to the chieftain. He spit at me, laughed about me and told me to leave this land forever. He told me he doesn't want new land and doesn't want our land, but THIS forest was their land and will stay theirs until the ghosts take the last man of his folk!<br>Three weeks later, I came back to Fremil, to speak with our king. He was furious at the Barbarians, but disallowed an attack of these tribes anyway. He believed, that our army was too weak to resist in a war against the barbarians.<br>I saw no way, how I could erase my guilt, without fighting against the Barbarians and so I left Fremil by boat, to find a new world and a new life for me somewhere in the south. And now I am sailing southwards on the perl-gulf with my family, a few of my friends and a few of my best warriors."
-msgstr "Wat is er geworden van ons keizerrijk? Ik vraag dit echt, terwijl mijn koning mij niet toestaat te vechten tegen dat monster van een barbaarse stam, dat zich eerst voordeed als een vredelievende vriend en daarna mijn leger in het donkerste van de nacht aanviel.<br>Ik heb de taak om de noordelijke kant van ons grensgebied te patrouilleren, dat aan de noordzijde van de Galdin bergen ligt in een groot, prachtig en zeer oud bos, met een leger van 150 man. Al snel kwamen we een barbaarse stam tegen, dat op het eerste gezicht aardig en vriendelijk was. Sommige van mijn mannen handelden zelfs met ze en hun kinderen kwamen naar ons, om onze schone en nette uniformen en wapens te bewonderen. Maar in onze 5e nacht in die regio, vielen ze ons aan zonder reden. Ik verloor honderden goede mannen, werd gevangen genomen en uiteindelijk naar de stamhoofd gebracht. Hij spoog op mij, lachte mij uit en droeg mij op om dit land voor altijd te verlaten. Hij vertelde mij dat hij geen nieuw land wilde en ons land ook niet, maar DIT bos was hun land en zal van hun blijven totdat de geesteb de laatste man van hun volk tot zich heeft genomen!<br>Drie weken later, kwam ik terug in Fremil, om te praten met onze koning. Hij was razend op de barbaren, maar toch stond hij niet toe om een van de stammen aan te vallen. Hij geloofde dat ons leger te zwak was om een oorlog met de barbaren te kunnen weerstaan.<br>Ik zag geen kans, om mijn schuldgevoel kwijt te raken, zonder tegen de barbaren te vechten en dus verliet ik Fremil met een boot, om een nieuwe wereld te vinden en een nieuw leven voor mezelf ergens in het zuiden. En nu zeil ik zuidelijk over de perlse golf met mijn familie, sommige van mijn vrienden en enkele van mijn beste strijders."
+msgstr "Wat is er geworden van ons keizerrijk? Ik vraag dit echt, terwijl mijn koning mij niet toestaat te vechten tegen dat monster van een barbaarse stam, dat zich eerst voordeed als een vredelievende vriend en daarna mijn leger in het donkerste van de nacht aanviel.<br>Ik heb de taak om de noordelijke kant van ons grensgebied te patrouilleren, dat aan de noordzijde van de Galdin bergen ligt in een groot, prachtig en zeer oud bos, met een leger van 150 man. Al snel kwamen we een barbaarse stam tegen, die op het eerste gezicht aardig en vriendelijk was. Sommige van mijn mannen handelden zelfs met ze en hun kinderen kwamen naar ons, om onze schone en nette uniformen en wapens te bewonderen. Maar in onze 5e nacht in die regio, vielen ze ons aan zonder reden. Ik verloor honderden goede mannen, werd gevangen genomen en uiteindelijk naar de stamhoofd gebracht. Hij spoog op mij, lachte mij uit en droeg mij op om dit land voor altijd te verlaten. Hij vertelde mij dat hij geen nieuw land wilde en ons land ook niet, maar DIT bos was hun land en zal van hun blijven totdat de geesten de laatste man van hun stam tot zich heeft genomen!<br>Drie weken later, kwam ik terug in Fremil, om te praten met onze koning. Hij was razend op de barbaren, maar toch stond hij niet toe om een van de stammen aan te vallen. Hij geloofde dat ons leger te zwak was om een oorlog met de barbaren te kunnen weerstaan.<br>Ik zag geen kans, om mijn schuldgevoel kwijt te raken, zonder tegen de barbaren te vechten en dus verliet ik Fremil met een boot, om een nieuwe wereld te vinden en een nieuw leven voor mezelf ergens in het zuiden. En nu zeil ik zuidelijk over de perlse golf met mijn familie, sommige van mijn vrienden en enkele van mijn beste strijders."
 
 #: ../../../campaigns/emp01.wmf/event:15
 msgid "A dark night"
@@ -41,7 +42,7 @@ msgstr "Een donkere nacht"
 
 #: ../../../campaigns/emp01.wmf/event:32
 msgid "Seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us in a dark, wild storm. I really don't know how many hours have passed, since the waves got higher than our boat, but still it would be suicide to go outside.<br>Our ship is badly damaged and is taking more and more water. We can thank the Gods if we survive this black night with just our lifes."
-msgstr "Het leek alsof het zeilen over de perlse golf een van onze grootste fouten was. De natuur was tegen ons en dreef ons in een duistere, woeste storm. Ik weet echt niet hoeveel uren veerbij waren gegaan, sinds de golven hoger werden dan onze boot, maar niettemin was het zelfmoord om naar buiten te gaan.<br>Ons schip is zwaar beschadigd en schept steeds meer en meer water. We mogen de goden bedanken als we deze donkere nacht overleven met alleen onze levens."
+msgstr "Het lijkt alsof het zeilen over de perlse golf een van onze grootste fouten was. De natuur was tegen ons en dreef ons in een duistere, woeste storm. Ik weet echt niet hoeveel uren voorbij waren gegaan, sinds de golven hoger werden dan onze boot, maar niettemin was het zelfmoord om naar buiten te gaan.<br>Ons schip is zwaar beschadigd en schept steeds meer en meer water. We mogen de goden bedanken als we deze donkere nacht overleven met alleen onze levens."
 
 #: ../../../campaigns/emp01.wmf/event:34
 msgid "The rough sea"
@@ -49,7 +50,7 @@ msgstr "De ruige zee"
 
 #: ../../../campaigns/emp01.wmf/event:51
 msgid "Finally the Gods were with us. We landed on an unknown coast and found a peaceful sleep under the palms growing at the strand. But that is about as good as it gets.<br>The truth is, when I woke up this morning, I saw nothing more than sand around us. It really seems as if we landed under the only palms existing in this far sandy desert. I fear, we won't find the help we need, to get our ship repaired in good time."
-msgstr "Eindelijk waren de goden met ons. We landen op een onbekende kust en vonden een vredige slaap onder de palmen die groeiden op het strand. Maar dat is ongeveer het beste wat kon gebeuren.<br>De waarheid is, dat toen ik wakker werd vanmorgen, alleen maar zand om ons heen zag. Het leek er op dat we beland waren onder de enige palmen die bestonden in deze verafgelegen zanderige woestijn. ik vrees, dat we geen hulp vinden die we nodig zijn, om ons schip zo snel als mogelijk te repareren."
+msgstr "Eindelijk waren de goden met ons. We landen op een onbekende kust en vonden een vredige slaap onder de palmen die groeiden op het strand. Maar dat is ongeveer het beste wat er valt te melden.<br>De waarheid is, dat toen ik wakker werd vanmorgen, alleen maar zand om ons heen zag. Het leek er op dat we beland waren onder de enige palmen die bestonden in deze afgelegen zanderige woestijn. ik vrees, dat we niet de hulp vinden die we nodig hebben, om ons schip zo snel mogelijk te repareren."
 
 #: ../../../campaigns/emp01.wmf/event:53
 msgid "Survivor"
@@ -90,7 +91,7 @@ msgstr "Amalea glimlacht..."
 
 #: ../../../campaigns/emp01.wmf/event:501
 msgid "Hey Lutius, I just met Saledus outside. He told me about construction of the barracks. Well, I am not one of those girls, who think we need more barracks, but on the other hand, we might concentrate on other stuff now.<br>It is absolutely clear that we need wood, for repairing our ship. So I walked through the forest, yesterday and found a nice place for a lumberjack south of our headquarters.<br><br>- build a lumberjack at the red point, south of your headquarters"
-msgstr "Hé Lutius, ik kwam Saledus net buiten tegen. Hij vertelde me over de constructie van de barakken. Eigenlijk, ben ik niet een van die meisjes, di denken dat we meer barakken nodig zijn, maar aan de andere kant, zouden we ons nu moeten concentreren op ander dingen.<br>Het is overduidelijk dat we meer hout nodig zijn, om ons schip te repareren. Daarom liep ik gisteren door het bos en vond een mooie plek voor een houthakkershut ten zuiden van ons hoofdkwartier.<br><br>- Bouw een houthakkershut op de rode punt, ten zuiden van uw hoofdkwartier"
+msgstr "Hé Lutius, ik kwam Saledus net buiten tegen. Hij vertelde me over de constructie van de barakken. Eigenlijk, ben ik niet een van die meisjes, die denken dat we meer barakken nodig hebben, maar aan de andere kant, zouden we ons nu moeten concentreren op ander dingen.<br>Het is overduidelijk dat we meer hout nodig hebben, om ons schip te repareren. Daarom liep ik gisteren door het bos en vond een mooie plek voor een houthakkershut ten zuiden van ons hoofdkwartier.<br><br>- Bouw een houthakkershut op de rode punt, ten zuiden van uw hoofdkwartier"
 
 #: ../../../campaigns/emp01.wmf/event:503
 #: ../../../campaigns/emp01.wmf/event:529
@@ -100,7 +101,7 @@ msgstr "Jonge Amalea"
 
 #: ../../../campaigns/emp01.wmf/event:527
 msgid "Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjacks, so that we can faster harvest the trunks.<br>But unfortunally the trunks are useless for repairing our ship - We need refined wood, like every ship and every bigger building needs, too - so we should build up a sawmill, as soon as we have got enough space for this.<br><br>- Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
-msgstr "Hé Lutius, ik kreeg het bericht dat onze eerste houthakker vandaag is begonnen met zijn werk. Misschien zou het een goed idee zijn om te wachten tot hij genoeg ruimte heeft vrijgemaakt om nog twee houthakkershutten te bouwen, zodat we sneller stammen verzamelen.<br>Maar helaas zijn de stammen niet te gebruiken om ons schip te repareren - We zijn planken nodig, zoals elk schip en alle grotere gebouwen - dus we zouden een houtzagerij moeten bouwen, wanneer we er genoeg ruimte voor hebben.<br><br>- Bouw nog twee houthakkershutten en een houtzagerij wanneer er genoeg ruimte voor ze is."
+msgstr "Hé Lutius, ik kreeg het bericht dat onze eerste houthakker vandaag is begonnen met zijn werk. Misschien zou het een goed idee zijn om te wachten tot hij genoeg ruimte heeft vrijgemaakt om nog twee houthakkershutten te bouwen, zodat we sneller stammen verzamelen.<br>Maar helaas zijn de stammen niet te gebruiken om ons schip te repareren - We hebben planken nodig, zoals elk schip en alle grotere gebouwen - dus we zouden een houtzagerij moeten bouwen, wanneer we er genoeg ruimte voor hebben.<br><br>- Bouw nog twee houthakkershutten en een houtzagerij wanneer er genoeg ruimte voor ze is."
 
 #: ../../../campaigns/emp01.wmf/event:559
 msgid "Amalea comes in..."
@@ -108,7 +109,7 @@ msgstr "Amalea komt binnen..."
 
 #: ../../../campaigns/emp01.wmf/event:561
 msgid "Hi Lutius,<br>I've got two important things to talk about:<br>First the positive thing: I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting, to wood.<br>But that's just the only positive thing I know to talk about. The negative is, that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br>Lutius, this trees keep us safe from sandstorms out of the desert, they provide shade for the hot days and they are the home of so many smart little animals. We shouldn't leave this island as complete desert.<br>Lutius, I beg you: build a forester hut, so that someone cares about planting new trees.<br><br>- Build a forester hut, to save the wood resources of this island."
-msgstr "Hallo Lutius,<br>Er zijn twee belangrijke punten waar ik het over wil hebben:<br>Eerst het positieve: Ik zag dat de houtzagerij gebouwd is, dus kunnen we beginnen met het raffineren van de stammen die de houthakkers verzamelen, tot planken.<br>Maar dat is ook het enigste positieve ding waar ik over kan praten. Het negatieve is, dat onze houthakkers met ongelovelijke snelheid werken. Er zijn bijna geen bomen meer over op dit eiland.<br>Lutius, deze bomen beschermen ons tegen zandstormen uit de woestijn, ze geven ons schaduw op hete dagen en het is de woonplaats van zo veel slimme kleine dieren. We zouden dit eiland niet moeten verlaten als een grote woestijn.<br>Lutius, ik smeek u: bouw een boswachtershut, zodat iemand zorgt dat er nieuwe bomen geplant worden.<br><br>- Bouw een boswachtershut, om de bossen op dit eiland te behouden."
+msgstr "Hallo Lutius,<br>Er zijn twee belangrijke punten waar ik het over wil hebben:<br>Eerst het positieve: Ik zag dat de houtzagerij gebouwd is, dus kunnen we beginnen met het raffineren van de stammen die de houthakkers verzamelen, tot planken.<br>Maar dat is ook het enige positieve ding waar ik over kan praten. Het negatieve is, dat onze houthakkers met ongelovelijke snelheid werken. Er zijn bijna geen bomen meer over op dit eiland.<br>Lutius, deze bomen beschermen ons tegen zandstormen uit de woestijn, ze geven ons schaduw op hete dagen en het is de woonplaats van zo veel slimme kleine dieren. We zouden dit eiland niet moeten achterlaten als een grote woestijn.<br>Lutius, ik smeek u: bouw een boswachtershut, zodat iemand zorgt dat er nieuwe bomen geplant worden.<br><br>- Bouw een boswachtershut, om de bossen op dit eiland te behouden."
 
 #: ../../../campaigns/emp01.wmf/event:593
 #: ../../../campaigns/emp01.wmf/event:627
@@ -117,7 +118,7 @@ msgstr "Saledus glimlacht..."
 
 #: ../../../campaigns/emp01.wmf/event:595
 msgid "Hey my good old friend, I just thought about the rocks, standing on the south strand of this land. Perhaps we could cut out some usefull stones and beautiful marble.<br>The repair of our ship will take a few weeks anyway and the resources we harvest now might be the base of strong and big buildings in another land.<br><br>- Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "Hey goede oude vriend, ik dacht net aan het gesteente, dat zich bevind op het zuidelijke strand van dit eiland. Misschien kunne we er bruikbare stenen en zeer mooi marmer uithakken.<br>Het repareren van ons schip duurt toch nog een paar weken en de grondstoffen die we nu verzamelen zouden de basis kunnen vormen van grote, sterke gebouwen kunnen vormen in een ander land.<br><br>- Bouw een steengroeve in het zuiden, om stenen en marmer uit het gesteente te hakken. Deze zouden bruikbaar kunnen zijn voor toekomstige gebouwen."
+msgstr "Hey goede oude vriend, ik dacht net aan het gesteente, dat zich bevind op het zuidelijke strand van dit eiland. Misschien kunnen we er bruikbare stenen en zeer mooi marmer uithakken.<br>Het repareren van ons schip duurt toch nog een paar weken en de grondstoffen die we nu verzamelen zouden de basis kunnen vormen van grote, sterke gebouwen kunnen vormen in een ander land.<br><br>- Bouw een steengroeve in het zuiden, om stenen en marmer uit het gesteente te hakken. Deze zouden bruikbaar kunnen zijn voor toekomstige gebouwen."
 
 #: ../../../campaigns/emp01.wmf/event:597
 #: ../../../campaigns/emp01.wmf/event:631
@@ -139,4 +140,3 @@ msgstr "Missie voltooid"
 #: ../../../campaigns/emp01.wmf/event:654
 msgid "Continue"
 msgstr "Ga verder"
-
