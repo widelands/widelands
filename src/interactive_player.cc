@@ -335,12 +335,6 @@ Called just before the game starts, after postload, init and gfxload
 */
 void Interactive_Player::start()
 {
-	int mapw;
-	int maph;
-
-	mapw = 0;
-	maph = 0;
-
 	Map & map = egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
