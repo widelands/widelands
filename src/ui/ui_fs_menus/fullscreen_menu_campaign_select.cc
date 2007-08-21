@@ -55,7 +55,7 @@ Fullscreen_Menu_Base("choosemapmenu.jpg"),
 	label_difficulty (this, 480, 255, _("Difficulty:")),
 	tadifficulty     (this, 490, 270, ""),
 	label_campdescr  (this, 480, 305, _("Description:")),
-	tacampdescr      (this, 490, 320, 280, 190, ""),
+	tacampdescr      (this, 490, 325, 275, 190, ""),
 
 	// UI::Buttons
 	b_ok
@@ -117,11 +117,16 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i) {
 	char cdescription[12];
 	std::string difficulty;
 
+	// Load maps textdomain to translate the strings from cconfig
+	i18n::grab_textdomain("maps");
+
 	// read in the campaign config
 	Profile prof("campaigns/cconfig");
 	Section *s;
-
 	s = prof.get_section("global");
+
+	// Release maps texdoamin
+	i18n::release_textdomain();
 
 	// add I to basic section name
 	sprintf(cname, "campname%i", i);
@@ -170,17 +175,24 @@ void Fullscreen_Menu_CampaignSelect::double_clicked(uint) {
  */
 void Fullscreen_Menu_CampaignSelect::fill_list(void) {
 
+	// Load maps textdomain to translate the strings from cconfig
+	i18n::grab_textdomain("maps");
+
 	// read in the campaign config
 	Profile prof("campaigns/cconfig");
 	Section *s;
-
 	s = prof.get_section("global");
+
+	// Release maps texdoamin
+	i18n::release_textdomain();
+
 	int i = 0;
 
 	// predefine variables, used in while-loop
 	char cname[12];
 	char csection[12];
 	char cdifficulty[12];
+	char cvisible[12];
 	std::string difficulty;
 
 	sprintf(csection, "campsect%i", i);
@@ -188,6 +200,10 @@ void Fullscreen_Menu_CampaignSelect::fill_list(void) {
 		// add i to the other strings the UI will search for
 		sprintf(cname, "campname%i", i);
 		sprintf(cdifficulty, "campdiff%i", i);
+		sprintf(cvisible, "campvisi%i", i);
+
+	// Only list visible campaigns
+	if (s->get_int(cvisible) == 1) {
 
 		// convert difficulty level to the fitting picture
 		int dif = s->get_int(cdifficulty);
@@ -203,10 +219,13 @@ void Fullscreen_Menu_CampaignSelect::fill_list(void) {
 			difficulty="pics/novalue.png";}}}
 
 	list.add(
-		s->get_string(cname, _("[Name string missing]").c_str()),
+		s->get_string(cname, _("[No value found]").c_str()),
 		s->get_string(csection),
 		g_gr->get_picture(PicMod_Game,difficulty.c_str())
 		);
+
+	} // if (s->get_int(cvisible) == 1)
+
 	i++;
 	// increase csection
 	sprintf(csection, "campsect%i", i);
@@ -290,10 +309,16 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map() {
 void Fullscreen_Menu_CampaignMapSelect::map_selected(uint i) {
 	if (list.get_selected()) { //gets false, if the selected entry has no value.
 
+	// Load maps textdomain to translate the strings from cconfig
+	i18n::grab_textdomain("maps");
+
 	// read in the campaign config
 	Profile prof("campaigns/cconfig");
 	Section *s;
 	s = prof.get_section("global");
+
+	// Release maps texdoamin
+	i18n::release_textdomain();
 
 	// Get section of campaign-maps
 	char csection[12];
@@ -321,7 +346,6 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint i) {
 	tamapname .set_text(s->get_string("name", _("[No value found]").c_str()));
 	taauthor  .set_text(s->get_string("author", _("[No value found]").c_str()));
 	tamapdescr.set_text(s->get_string("descr", _("[No value found]").c_str()));
-
 	}
 	else { // normally never here
 	b_ok.set_enabled(false);
@@ -346,15 +370,21 @@ void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint) {
  */
 void Fullscreen_Menu_CampaignMapSelect::fill_list(void) {
 
+	// Load maps textdomain to translate the strings from cconfig
+	i18n::grab_textdomain("maps");
+
 	// read in the campaign config
 	Profile prof("campaigns/cconfig");
 	Section *s;
 	s = prof.get_section("global");
 
+	// Release maps texdoamin
+	i18n::release_textdomain();
+
 	// Set title of title of the page
 	char cname[12];
 	sprintf(cname, "campname%i", campaign);
-	title.set_text(s->get_string(cname, _("Choose your map!").c_str()));
+	title.set_text(s->get_string(cname));
 
 	// Get section of campaign-maps
 	char csection[12];
@@ -375,8 +405,9 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list(void) {
 	// Add all visible entries to the list.
 	while ((s = prof.get_section(mapsection.c_str()))){
 	  if (s->get_int("visible")==1){
+
 	  list.add(
-	    s->get_string("name", _("[Name string missing]").c_str()),
+	    s->get_string("name", "[???]"),
 	    s->get_string("path"),
 	    g_gr->get_picture(PicMod_Game,"pics/ls_wlmap.png")
 	    );

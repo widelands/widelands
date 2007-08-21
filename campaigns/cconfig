@@ -9,6 +9,7 @@
 # campsect??	= name of section, to be loaded, if this campaign is selected.
 # campdiff??	= level of difficulty 1-3 (easy to hard) (this is only a visualisation, it has no influences on the real difficulty).
 # campdesc??	= Description of the campaign
+# campvisi??	= Is campaign visible by default? (1=yes, 0=no)
 #####
 
 [global]
@@ -16,11 +17,13 @@ campname0=_"(Tutorial) Barbarians - The second Empire"
 campsect0=barbariantut
 campdiff0=1
 campdesc0=_"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
+campvisi0=1
 
 campname1=_"Empire - The months of exile"
 campsect1=empiretut
 campdiff1=2
 campdesc1=_"Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
+campvisi1=1
 
 
 
@@ -61,7 +64,7 @@ path="campaigns/emp01.wmf"
 [empiretut01]
 name=_"Empire Tutorial2 - An outpost for exile"
 author=Nasenbaer
-descr=_"Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green mediteran island, looking like paradise."
+descr=_"Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
 visible=1
 path="campaigns/emp02.wmf"
 

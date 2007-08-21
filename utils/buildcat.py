@@ -31,7 +31,7 @@ HEADER_YEAR = strftime("%Y",gmtime())
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
-MAINPOTS = [( "maps", ["../../maps/*/elemental"] ),
+MAINPOTS = [( "maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
 			( "texts", ["../../txts/*"] ),
 			( "widelands", ["../../src/*.cc",
 							"../../src/*/*.cc",
