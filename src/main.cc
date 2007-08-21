@@ -19,6 +19,7 @@
 
 //config.h must be included first of all!
 #include "config.h"
+#include "build_id.h"
 
 #include "wexception.h"
 #include "wlapplication.h"
@@ -59,7 +60,8 @@ extern "C"
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report."<<endl<<endl<<
+		"This should not happen. Please file a bug report"<<
+		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save(e.what());
 			delete g_app;
@@ -71,7 +73,8 @@ extern "C"
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report."<<endl<<endl<<
+		"This should not happen. Please file a bug report"<<
+		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save(e.what());
 			delete g_app;
@@ -81,7 +84,8 @@ extern "C"
 	catch(...) {
 		cerr<<endl<<
 		"Caught unknown exception in outermost handler!"<<endl<<endl<<
-		"This should not happen. Please file a bug report."<<endl<<endl<<
+		"This should not happen. Please file a bug report"<<
+		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save("Unhandled exception");
 			delete g_app;
