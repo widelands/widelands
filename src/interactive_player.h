@@ -88,7 +88,6 @@ class Interactive_Player : public Interactive_Base {
 		void prepare_statistics();
 		void start();
 
-		void exit_game_btn();
 		void main_menu_btn();
 		void toggle_buildhelp();
 		void open_encyclopedia();

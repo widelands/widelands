@@ -83,13 +83,6 @@ Interactive_Base(g), m_game(&g)
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
 
-	/* temp (should be toggle messages)
-	b = new UI::Button(this, x, y, 34, 34, 2);
-	b->clicked.set(this, &Interactive_Player::exit_game_btn);
-	b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_exit_game.png" ));
-	b->set_tooltip(_("Exit game").c_str());
-	// temp */
-
 	new UI::Button<Interactive_Player>
 		(this,
 		 x + 34, y, 34, 34,
@@ -393,15 +386,6 @@ const std::vector<uint> * Interactive_Player::get_ware_production_statistics
    assert( ware < (int)m_ware_productions.size()) ;
 
    return &m_ware_productions[ware];
-}
-
-/** Interactive_Player::exit_game_btn(void *a)
- *
- * Handle exit button
- */
-void Interactive_Player::exit_game_btn()
-{
-	end_modal(0);
 }
 
 /*
