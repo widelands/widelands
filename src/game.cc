@@ -278,7 +278,6 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 	return run(loaderUI, true);
 }
 
-//extern uchar g_playercolors[MAX_PLAYERS][12];
 bool Game::run_multi_player (NetGame* ng)
 {
 	m_state = gs_menu;
