@@ -60,7 +60,7 @@ extern "C"
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report"<<
+		"This should not happen. Please file a bug report "<<
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save(e.what());
@@ -73,7 +73,7 @@ extern "C"
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report"<<
+		"This should not happen. Please file a bug report "<<
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save(e.what());
@@ -84,7 +84,7 @@ extern "C"
 	catch(...) {
 		cerr<<endl<<
 		"Caught unknown exception in outermost handler!"<<endl<<endl<<
-		"This should not happen. Please file a bug report"<<
+		"This should not happen. Please file a bug report "<<
 		"on version: "<<BUILD_ID<<"."<<endl<<endl<<
 		flush;
 		g_app->emergency_save("Unhandled exception");
