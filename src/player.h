@@ -56,13 +56,13 @@ struct Player {
 	friend struct Widelands_Map_Players_View_Data_Packet;
 	friend struct Widelands_Map_Seen_Fields_Data_Packet;
 
-		enum {
-			Local = 0,
-			Remote,
-			AI
-		};
+	enum {
+		Local = 0,
+		Remote,
+		AI
+	};
 
-		Player
+	Player
 		(Editor_Game_Base &,
 		 const int type,
 		 const Player_Number plnum,
@@ -88,8 +88,8 @@ struct Player {
 
 	FieldCaps get_buildcaps(const FCoords) const;
 
-      // For cheating
-      void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }
+	// For cheating
+	void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }
 	bool see_all() const throw () {return m_see_all;}
 
 	/// Per-player field information.
@@ -302,10 +302,16 @@ struct Player {
 
 	const Field * fields() const throw () {return m_fields;}
 
-		// See area
-	Vision vision(const Map::Index i) const throw ()
-	{return m_fields[i].vision;}
-      inline bool has_view_changed( void ) { bool t = m_view_changed; m_view_changed = false; return t; }
+	// See area
+	Vision vision(const Map::Index i) const throw () {
+		return m_fields[i].vision;
+	}
+
+	bool has_view_changed( void ) {
+		bool t = m_view_changed;
+		m_view_changed = false;
+		return t;
+	}
 
 	/**
 	 * Update this player's information about this node and the surrounding
@@ -360,35 +366,36 @@ struct Player {
 	{return m_fields[i].military_influence;}
 
       // Allowed buildings
-	bool is_building_allowed(const Building_Descr::Index i) const throw ()
-	{return m_allowed_buildings[i];}
-      void allow_building(int i, bool t);
+	bool is_building_allowed(const Building_Descr::Index i) const throw () {
+		return m_allowed_buildings[i];
+	}
+	void allow_building(int i, bool t);
 
-		// Player commands
-		// Only to be called indirectly via CmdQueue
-		void build_flag(Coords c);
+	// Player commands
+	// Only to be called indirectly via CmdQueue
+	void build_flag(Coords c);
 	void build_road(const Path & path);
-		void build(Coords c, int idx);
-		void bulldoze(PlayerImmovable* imm);
-		void flagaction(Flag* flag, int action);
-		void start_stop_building(PlayerImmovable* imm);
+	void build(Coords c, int idx);
+	void bulldoze(PlayerImmovable* imm);
+	void flagaction(Flag* flag, int action);
+	void start_stop_building(PlayerImmovable* imm);
 	void enhance_building
 		(Building *, Building_Descr::Index index_of_new_building);
 
-      // Economy stuff
-      void add_economy(Economy*);
-      void remove_economy(Economy*);
-      bool has_economy(Economy*);
-      int get_economy_number(Economy*); // for savegames
+	// Economy stuff
+	void add_economy(Economy*);
+	void remove_economy(Economy*);
+	bool has_economy(Economy*);
+	int get_economy_number(Economy*); // for savegames
 	Economy * get_economy_by_number(const int i) const {return m_economies[i];} // for loading
 	uint get_nr_economies() const {return m_economies.size();}
 
-      // Military stuff
-      void drop_soldier(PlayerImmovable* imm, Soldier* worker);
-      void change_soldier_capacity (PlayerImmovable* , int val);
-      void change_training_options(PlayerImmovable* imm, int atr, int val);
-         // Launch an attack
-      void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
+	// Military stuff
+	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
+	void change_soldier_capacity (PlayerImmovable* , int val);
+	void change_training_options(PlayerImmovable* imm, int atr, int val);
+		// Launch an attack
+	void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
 
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
 		assert(player_area.player_number == get_player_number());
@@ -410,8 +417,7 @@ struct Player {
 	typedef std::set<Object_Ptr> AreaWatchers;
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
-	private:
-
+private:
 	/**
 	 * Called when a node becomes seen (not only the first time) before the
 	 * vision counter is incremented. Discovers the node and those of the 6
@@ -422,18 +428,18 @@ struct Player {
 
 	AreaWatchers           m_areawatchers;
 
-		bool m_see_all;
-	Editor_Game_Base     & m_egbase;
-		bool           m_view_changed;
+	bool m_see_all;
+	Editor_Game_Base&      m_egbase;
+	bool                   m_view_changed;
 	int                    m_type;
 	const Player_Number    m_plnum;
-		const Tribe_Descr & m_tribe; // buildings, wares, workers, sciences
+	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences
 	RGBColor               m_playercolor[4];
 
-	Field *                m_fields;
-      std::vector<bool> m_allowed_buildings;
-      std::vector<Economy*> m_economies;
-      std::string    m_name; // Player name
+	Field *               m_fields;
+	std::vector<bool>     m_allowed_buildings;
+	std::vector<Economy*> m_economies;
+	std::string           m_name; // Player name
 };
 
 #endif

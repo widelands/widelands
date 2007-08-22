@@ -55,23 +55,24 @@ m_plnum  (plnum),
 m_tribe  (tribe_descr),
 m_fields (0)
 {
-
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 
-   set_name(name);
+	set_name(name);
 
-   // Allow all buildings per default
-   int i;
-   m_allowed_buildings.resize(m_tribe.get_nrbuildings());
-   for(i=0; i<m_tribe.get_nrbuildings(); i++)
-      m_allowed_buildings[i]=true;
-
+	// Allow all buildings per default
+	int i;
+	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
+	for(i=0; i<m_tribe.get_nrbuildings(); i++)
+		m_allowed_buildings[i]=true;
 }
+
 
 Player::~Player() {
 	delete[] m_fields;
 }
+
+
 /*
 ===============
 Player::init
@@ -370,7 +371,7 @@ void Player::enhance_building
 			Soldier & soldier = **it;
 			soldier.set_location(building);
 		}
-   }
+	}
 }
 
 
@@ -405,53 +406,56 @@ void Player::flagaction(Flag* flag, int action)
  *
  * Disable or enable a building for a player
  */
-void Player::allow_building(int i, bool t) {
+void Player::allow_building(int i, bool t)
+{
 	assert(i < m_tribe.get_nrbuildings());
 	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
 
-   m_allowed_buildings[i]=t;
+	m_allowed_buildings[i]=t;
 }
 
 /*
  * Economy stuff below
  */
-void Player::add_economy(Economy* eco) {
-   if(has_economy(eco)) return;
-   m_economies.push_back(eco);
+void Player::add_economy(Economy* eco)
+{
+	if(has_economy(eco))
+		return;
+	m_economies.push_back(eco);
 }
 
 void Player::remove_economy(Economy* eco) {
-   if(!has_economy(eco)) return;
-   std::vector<Economy*>::iterator i = m_economies.begin();
-   while(i!=m_economies.end()) {
-      if(*i == eco) {
-         m_economies.erase(i);
-         return;
-      }
-      ++i;
-   }
-   assert(0); // Never here
+	if(!has_economy(eco)) return;
+	std::vector<Economy*>::iterator i = m_economies.begin();
+	while(i!=m_economies.end()) {
+		if(*i == eco) {
+			m_economies.erase(i);
+			return;
+		}
+		++i;
+	}
+	assert(0); // Never here
 }
 
 bool Player::has_economy(Economy* eco) {
-   std::vector<Economy*>::iterator  i = m_economies.begin();
-   while(i!=m_economies.end()) {
-      if( *i == eco) return true;
-      ++i;
-   }
-   return false;
+	std::vector<Economy*>::iterator  i = m_economies.begin();
+	while(i!=m_economies.end()) {
+		if( *i == eco) return true;
+		++i;
+	}
+	return false;
 }
 
 int Player::get_economy_number(Economy* eco) {
-   assert(has_economy(eco));
+	assert(has_economy(eco));
 
-   std::vector<Economy*>::iterator  i = m_economies.begin();
-   while(i!=m_economies.end()) {
-      if( *i == eco) return (i - m_economies.begin());
-      ++i;
-   }
-   assert(0); // never here
-   return 0;
+	std::vector<Economy*>::iterator  i = m_economies.begin();
+	while(i!=m_economies.end()) {
+		if( *i == eco) return (i - m_economies.begin());
+		++i;
+	}
+	assert(0); // never here
+	return 0;
 }
 
 /************  Military stuff  **********/
@@ -464,15 +468,15 @@ Change the training priotity values
 ==========
 */
 void Player::change_training_options(PlayerImmovable* imm, int atr, int val) {
-    if (imm->get_owner() != this)
-        return;
-    if (imm->get_type() == Map_Object::BUILDING) {
-        TrainingSite* ts=static_cast<TrainingSite*>(imm);
-        if (val>0)
-            ts->add_pri((enum tAttribute) atr);
-        else
-            ts->sub_pri((enum tAttribute) atr);
-    }
+	if (imm->get_owner() != this)
+		return;
+	if (imm->get_type() == Map_Object::BUILDING) {
+		TrainingSite* ts=static_cast<TrainingSite*>(imm);
+		if (val>0)
+			ts->add_pri((enum tAttribute) atr);
+		else
+			ts->sub_pri((enum tAttribute) atr);
+	}
 }
 
 /*
@@ -483,13 +487,13 @@ Forces the drop of given soldier at given house
 ===========
 */
 void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
-    if (imm->get_owner() != this)
-        return;
-    if ((soldier->get_worker_type() == Worker_Descr::SOLDIER) &&
-        (imm->get_type() >= Map_Object::BUILDING)) {
-            Building* ms= static_cast<Building*>(imm);
-            ms->drop_soldier (soldier->get_serial());
-    }
+	if (imm->get_owner() != this)
+		return;
+	if ((soldier->get_worker_type() == Worker_Descr::SOLDIER) &&
+	    (imm->get_type() >= Map_Object::BUILDING)) {
+			Building* ms= static_cast<Building*>(imm);
+			ms->drop_soldier (soldier->get_serial());
+	}
 }
 
 //TODO val might (theoretically) be >1 or <-1, but there's always an inc/dec by one
@@ -514,31 +518,29 @@ Perform an action on the given enemy flag.
 */
 void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 {
-   if (attacker != get_player_number())
-      throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
+	if (attacker != get_player_number())
+		throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
 
 	if (Game * const game = dynamic_cast<Game * const>(&egbase())) {
+		assert (num >= 0);
 
-   assert (num >= 0);
+		log("++Player::EnemyFlagAction()\n");
+		// Additional security check LOOK, if equal exit!!
+		if (flag->get_owner() == this)
+			return;
+		log("--Player::EnemyFlagAction() Checkpoint!\n");
 
-log("++Player::EnemyFlagAction()\n");
-   // Additional security check LOOK, if equal exit!!
-   if (flag->get_owner() == this)
-      return;
-log("--Player::EnemyFlagAction() Checkpoint!\n");
-
-   switch(action) {
-
-      case ENEMYFLAGACTION_ATTACK:
-         {
-            game->create_attack_controller(flag,attacker,flag->get_owner()->get_player_number(),(uint)num);
-            break;
-         }
-
-      default:
-         log("Player sent bad enemyflagaction = %i\n", action);
+		switch(action) {
+		case ENEMYFLAGACTION_ATTACK:
+		{
+			game->create_attack_controller(flag,attacker,flag->get_owner()->get_player_number(),(uint)num);
+			break;
 		}
-   }
+
+		default:
+			log("Player sent bad enemyflagaction = %i\n", action);
+		}
+	}
 }
 
 
