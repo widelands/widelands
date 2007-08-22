@@ -20,7 +20,6 @@
 #include "game_data_packet_factory.h"
 
 #include "game_cmd_queue_data_packet.h"
-#include "game_computer_player_data_packet.h"
 #include "game_data_packet_ids.h"
 #include "game_game_class_data_packet.h"
 #include "game_interactive_player_data_packet.h"
@@ -37,7 +36,6 @@ Game_Data_Packet* Game_Data_Packet_Factory::create_correct_packet(ushort id) thr
        case PACKET_PLAYER_ECONOMIES_DATA: return new Game_Player_Economies_Data_Packet(); break;
        case PACKET_CMD_QUEUE_DATA: return new Game_Cmd_Queue_Data_Packet(); break;
        case PACKET_INTERACTIVE_PLAYER_DATA: return new Game_Interactive_Player_Data_Packet(); break;
-       case PACKET_COMPUTER_PLAYER_DATA: return new Game_Computer_Player_Data_Packet(); break;
        default: throw wexception("Unknown Packet_Data_ID in saved-game file: %i\n", id); break;
     }
     // never here

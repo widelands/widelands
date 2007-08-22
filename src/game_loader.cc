@@ -23,7 +23,6 @@
 #include "filesystem.h"
 #include "game.h"
 #include "game_cmd_queue_data_packet.h"
-#include "game_computer_player_data_packet.h"
 #include "game_data_packet_ids.h"
 #include "game_game_class_data_packet.h"
 #include "game_map_data_packet.h"
@@ -87,10 +86,6 @@ int Game_Loader::load_game(void) {
 
    log("Game: Reading Interactive Player Data ... ");
 	{Game_Interactive_Player_Data_Packet           p; p.Read(m_fs, m_game, mol);}
-   log(" done\n");
-
-   log("Game: Reading Computer Player Data ... ");
-	{Game_Computer_Player_Data_Packet              p; p.Read(m_fs, m_game, mol);}
    log(" done\n");
 
    return 0;
