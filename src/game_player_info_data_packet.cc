@@ -39,58 +39,58 @@ void Game_Player_Info_Data_Packet::Read
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   FileRead fr;
-   fr.Open( fs, "binary/player_info" );
+	FileRead fr;
+	fr.Open( fs, "binary/player_info" );
 
-   // read packet version
-   int packet_version=fr.Unsigned16();
+	// read packet version
+	int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      uint max_players = fr.Unsigned16();
-      for(uint i=1; i<=max_players; i++) {
-         game->remove_player(i);
-         if(fr.Unsigned8()) {
-            bool see_all = fr.Unsigned8();
-            int type = fr.Signed32();
-            int plnum = fr.Signed32();
-            std::string tribe = fr.CString();
+	if(packet_version==CURRENT_PACKET_VERSION) {
+		uint max_players = fr.Unsigned16();
+		for(uint i=1; i<=max_players; i++) {
+			game->remove_player(i);
+			if(fr.Unsigned8()) {
+				bool see_all = fr.Unsigned8();
+				int type = fr.Signed32();
+				int plnum = fr.Signed32();
+				std::string tribe = fr.CString();
 
-            RGBColor rgb[4];
+				RGBColor rgb[4];
 
-            for(uint j=0; j<4; j++) {
-               uchar r = fr.Unsigned8();
-               uchar g = fr.Unsigned8();
-               uchar b = fr.Unsigned8();
-               rgb[j] = RGBColor(r, g, b);
-            }
+				for(uint j=0; j<4; j++) {
+					uchar r = fr.Unsigned8();
+					uchar g = fr.Unsigned8();
+					uchar b = fr.Unsigned8();
+					rgb[j] = RGBColor(r, g, b);
+				}
 
-            std::string name = fr.CString();
+				std::string name = fr.CString();
 
-            game->add_player(plnum, type, tribe, name);
-            Player* plr = game->get_player(plnum);
-            plr->set_see_all(see_all);
+				game->add_player(plnum, type, tribe, name);
+				Player* plr = game->get_player(plnum);
+				plr->set_see_all(see_all);
 
-            for(uint j=0; j<4; j++)
-               plr->m_playercolor[j] = rgb[j];
+				for(uint j=0; j<4; j++)
+					plr->m_playercolor[j] = rgb[j];
 
-            if (type == Player::Local) {
-               // The interactive player might still be in existance
-               // we do not delete it then, we reuse it
-               if(!game->ipl) {
+				if (type == Player::Local) {
+					// The interactive player might still be in existance
+					// we do not delete it then, we reuse it
+					if(!game->ipl) {
 						game->ipl = new Interactive_Player(*game, plnum);
-                  game->set_iabase(game->ipl);
-               }
-            } else if (type == Player::AI) {
-					game->cpl.push_back(new Computer_Player(*game,plnum));
-            }
-         }
-      }
-      // DONE
-      return;
-   } else
-      throw wexception("Unknown version in Game_Player_Info_Data_Packet: %i\n", packet_version);
+						game->set_iabase(game->ipl);
+					}
+				} else if (type == Player::AI) {
+						game->cpl.push_back(new Computer_Player(*game,plnum));
+				}
+			}
+		}
+		// DONE
+		return;
+	} else
+		throw wexception("Unknown version in Game_Player_Info_Data_Packet: %i\n", packet_version);
 
-   assert(0); // never here
+	assert(0); // never here
 }
 
 
@@ -98,45 +98,45 @@ void Game_Player_Info_Data_Packet::Write
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // Now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	// Now packet version
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Number of (potential) players
-   fw.Unsigned16(game->get_map()->get_nrplayers());
-   for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
-      Player* plr = game->get_player(i);
+	// Number of (potential) players
+	fw.Unsigned16(game->get_map()->get_nrplayers());
+	for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
+		Player* plr = game->get_player(i);
 
-      if(!plr) {
-         fw.Unsigned8(0);
-         continue;
-      }
+		if(!plr) {
+			fw.Unsigned8(0);
+			continue;
+		}
 
-      // Player is in game
-      fw.Unsigned8(1);
+		// Player is in game
+		fw.Unsigned8(1);
 
-      fw.Unsigned8(plr->m_see_all);
+		fw.Unsigned8(plr->m_see_all);
 
 
-      fw.Signed32(plr->m_type);
-      fw.Signed32(plr->m_plnum);
+		fw.Signed32(plr->m_type);
+		fw.Signed32(plr->m_plnum);
 
 		fw.CString(plr->m_tribe.name().c_str());
 
-      for(uint j=0; j<4; j++) {
-         fw.Unsigned8(plr->m_playercolor[j].r());
-         fw.Unsigned8(plr->m_playercolor[j].g());
-         fw.Unsigned8(plr->m_playercolor[j].b());
-      }
+		for(uint j=0; j<4; j++) {
+			fw.Unsigned8(plr->m_playercolor[j].r());
+			fw.Unsigned8(plr->m_playercolor[j].g());
+			fw.Unsigned8(plr->m_playercolor[j].b());
+		}
 
 		// Seen fields is in a map packet
-      // Allowed buildings is in a map packet
+		// Allowed buildings is in a map packet
 
-      // Economies are in a packet after map loading
+		// Economies are in a packet after map loading
 
-      fw.CString(plr->m_name.c_str());
-   }
+		fw.CString(plr->m_name.c_str());
+	}
 
-   fw.Write( fs, "binary/player_info" );
+	fw.Write( fs, "binary/player_info" );
 }

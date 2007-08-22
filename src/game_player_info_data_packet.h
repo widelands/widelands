@@ -27,7 +27,7 @@
  * a game for a user (for example in a listbox)
  */
 struct Game_Player_Info_Data_Packet : public Game_Data_Packet {
-      virtual ~Game_Player_Info_Data_Packet();
+	virtual ~Game_Player_Info_Data_Packet();
 
 	virtual void Read
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Loader * const = 0)
