@@ -48,6 +48,8 @@ enum {
 	gs_running      //  in-game
 };
 
+class FileRead;
+class FileWrite;
 class Player;
 class Interactive_Player;
 class Computer_Player;
@@ -57,11 +59,28 @@ class PlayerCommand;
 class NetGame;
 
 struct Game : public Editor_Game_Base {
+public:
+	struct General_Stats {
+		std::vector< uint > land_size;
+		std::vector< uint > nr_workers;
+		std::vector< uint > nr_buildings;
+		std::vector< uint > nr_wares;
+		std::vector< uint > productivity;
+		std::vector< uint > nr_kills;
+		std::vector< uint > miltary_strength;
+	};
+	typedef std::vector<General_Stats> General_Stats_vector;
+
+public:
 	friend class Cmd_Queue; // this class handles the commands
 	friend class Game_Game_Class_Data_Packet;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Loader;
 	friend class Game_Main_Menu_Load_Game;
+
+	// This friend is for legacy reasons and should probably be removed
+	// at least after summer 2008, maybe even earlier.
+	friend class Game_Interactive_Player_Data_Packet;
 
 	Game(void);
 	~Game(void);
@@ -145,9 +164,20 @@ struct Game : public Editor_Game_Base {
 
 	SaveHandler* get_save_handler() { return &m_savehandler; }
 
+	// Statistics
+	const General_Stats_vector & get_general_statistics() const {
+		return m_general_stats;
+	}
+
+	void ReadStatistics(FileRead& fr, uint version);
+	void WriteStatistics(FileWrite& fw);
+
 private:
 	void init_player_controllers ();
 	bool run (UI::ProgressWindow & loader_ui, bool = false);
+	void sample_statistics();
+
+private:
 	Map_Loader                   * m_maploader;
 
 	NetGame                      * m_netgame;
@@ -166,6 +196,9 @@ private:
 	ReplayWriter* m_replaywriter;
 
 	int m_realtime; // the real time (including) pauses in milliseconds
+
+	uint m_last_stats_update;
+	General_Stats_vector m_general_stats;
 };
 
 inline Coords Game::random_location(Coords location, uchar radius) {

@@ -62,11 +62,8 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
 
 	set_carried_item(g, item);
 
-   // For statistics, inform the user that a ware was produced
-   // Ware statistics are only cached for the interactive user
-   // since other tribes would have other types of wares
-   if(g->get_ipl()->get_player_number()==get_owner()->get_player_number())
-      g->get_ipl()->ware_produced(wareid);
+	// For statistics, inform the user that a ware was produced
+	get_owner()->ware_produced(wareid);
 
 	state->ivar1++;
 	schedule_act(g, 10);

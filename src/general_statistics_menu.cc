@@ -21,6 +21,7 @@
 
 #include "editor_game_base.h"
 #include "error.h"
+#include "game.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
@@ -76,12 +77,12 @@ m_parent(&parent)
    posy+=PLOT_HEIGHT+spacing+spacing;
 
 	const Game & game = *parent.get_game();
-	const Interactive_Player::General_Stats_vector & genstats =
-		parent.get_general_statistics();
-	const Interactive_Player::General_Stats_vector::size_type
+	const Game::General_Stats_vector & genstats =
+		game.get_general_statistics();
+	const Game::General_Stats_vector::size_type
 		general_statistics_size = genstats.size();
 	for
-		(Interactive_Player::General_Stats_vector::size_type i = 0;
+		(Game::General_Stats_vector::size_type i = 0;
 		 i < general_statistics_size;
 		 ++i)
 	{
@@ -298,7 +299,7 @@ void General_Statistics_Menu::cb_changed_to(int id, bool what) {
  * The radiogroup has changed
  */
 void General_Statistics_Menu::radiogroup_changed(int id) {
-   for(uint i = 0; i < m_parent->get_general_statistics().size(); i++) {
+   for(uint i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
       if(!m_cbs[i]) continue;
 
       m_plot->show_plot( i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());

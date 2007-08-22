@@ -120,7 +120,6 @@ Interactive_Base(g), m_game(&g)
 	// Chat Messages
 	m_chat_messages = new UI::Multiline_Textarea(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft);
 	m_type_message = new UI::Textarea(this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft);
-	m_last_stats_update = 0;
 
 	m_is_typing_msg = false;
 	m_do_chat_overlays = true;
@@ -137,120 +136,6 @@ Interactive_Player::~Interactive_Player(void)
 {
 }
 
-/*
- * Sample all satistics data
- */
-void Interactive_Player::sample_statistics( void ) {
-	// Update ware stats
-	next_ware_production_period();
-
-	// Update general stats
-	Map* m = get_game()->get_map();
-	std::vector< uint > land_size; land_size.resize( m->get_nrplayers() );
-	std::vector< uint > nr_buildings; nr_buildings.resize( m->get_nrplayers() );
-	std::vector< uint > nr_kills; nr_kills.resize( m->get_nrplayers() );
-	std::vector< uint > miltary_strength; miltary_strength.resize( m->get_nrplayers() );
-	std::vector< uint > nr_workers; nr_workers.resize( m->get_nrplayers() );
-	std::vector< uint > nr_wares; nr_wares.resize( m->get_nrplayers() );
-	std::vector< uint > productivity; productivity.resize( m->get_nrplayers() );
-
-	std::vector< uint > nr_production_sites; nr_production_sites.resize( m->get_nrplayers() );
-
-	// We walk the map, to gain all needed informations
-	for( ushort y = 0; y < m->get_height(); y++) {
-		for(ushort x = 0; x < m->get_width(); x++) {
-			Field* f = m->get_field( Coords( x, y ) );
-
-			// First, ownership of this field
-			if( f->get_owned_by() )
-				land_size[ f->get_owned_by()-1 ]++;
-
-			// Get the immovable
-			BaseImmovable* imm = f->get_immovable();
-			if(imm && imm->get_type() == Map_Object::BUILDING) {
-				Building* build = static_cast<Building*>(imm);
-				if( build->get_position() == Coords(x,y)) { // only main location is intresting
-
-					// Ok, count the building
-					nr_buildings[ build->get_owner()->get_player_number() - 1 ]++;
-
-					// If it is a productionsite, add it's productivity
-					if( build->get_building_type() == Building::PRODUCTIONSITE ) {
-						nr_production_sites[  build->get_owner()->get_player_number() - 1 ]++;
-						productivity[  build->get_owner()->get_player_number() - 1 ] += static_cast<ProductionSite*>( build )->get_statistics_percent();
-					}
-				}
-			}
-
-
-			// Now, walk the bobs
-			if( f->get_first_bob() ) {
-				Bob* b = f->get_first_bob();
-				do {
-					if( b->get_bob_type() == Bob::WORKER ) {
-						Worker* w = static_cast<Worker*>(b);
-
-						switch( w->get_worker_type() ) {
-							case Worker_Descr::SOLDIER:
-							{
-								Soldier* s = static_cast<Soldier*>(w);
-								uint calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
-								miltary_strength[ s->get_owner()->get_player_number() -1 ] += calc_level;
-							}
-							break;
-
-							default: break;
-						}
-
-					}
-				} while( (b = b->get_next_bob() ) );
-			}
-		}
-	}
-
-	// Number of workers / wares
-	for( uint i = 0; i < m->get_nrplayers(); i++) {
-		Player* plr = get_game()->get_player(i+1);
-
-		uint wostock = 0;
-		uint wastock = 0;
-
-		for( uint j = 0; plr && j < plr->get_nr_economies(); j++) {
-			Economy* eco = plr->get_economy_by_number( j );
-
-			for( int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
-				wastock += eco->stock_ware( wareid );
-			for( int workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
-				if( plr->tribe().get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER)
-					continue;
-				wostock += eco->stock_worker( workerid );
-			}
-		}
-		nr_wares[ i ] = wastock;
-		nr_workers[ i ] = wostock;
-	}
-
-	// Now, divide the statistics
-	for( uint i = 0; i < m->get_nrplayers(); i++) {
-		if( productivity[ i ] )
-			productivity[ i ] /= nr_production_sites[ i ];
-	}
-
-	// Now, push this on the general statistics
-	m_general_stats.resize( m->get_nrplayers() );
-	for( uint i = 0; i < m->get_nrplayers(); i++) {
-		m_general_stats[i].land_size.push_back( land_size[i] );
-		m_general_stats[i].nr_buildings.push_back( nr_buildings[i] );
-		m_general_stats[i].nr_kills.push_back( nr_kills[i] );
-		m_general_stats[i].miltary_strength.push_back( miltary_strength[i] );
-		m_general_stats[i].nr_workers.push_back( nr_workers[i] );
-		m_general_stats[i].nr_wares.push_back( nr_wares[i]  );
-		m_general_stats[i].productivity.push_back( productivity[i] );
-	}
-
-	// Update last stats time
-	m_last_stats_update = m_game->get_gametime();
-}
 
 /*
 ===============
@@ -270,10 +155,6 @@ void Interactive_Player::think()
 		else strncpy (buffer, _("PAUSE").c_str(), sizeof(buffer));
 		m_label_speed->set_text(buffer);
 	}
-
-	// Reset our statistics counting
-	if(m_game->get_gametime()-m_last_stats_update > STATISTICS_SAMPLE_TIME)
-		sample_statistics();
 
 	// Check for chatmessages
 	NetGame* ng = m_game->get_netgame();
@@ -336,55 +217,6 @@ void Interactive_Player::start()
 	map.recalc_whole_map();
 }
 
-// This is a bandaid/HACK that we can hopefully remove one day, when
-// statistics saving is moved into Player (which is necessary for network
-// games)
-void Interactive_Player::prepare_statistics()
-{
-	sample_statistics();
-}
-
-/*
- * A ware was produced
- */
-void Interactive_Player::ware_produced( uint wareid ) {
-	if( m_ware_productions.size() != (uint)get_player()->tribe().get_nrwares() ) {
-		m_ware_productions.resize( get_player()->tribe().get_nrwares() );
-		m_current_statistics.resize( get_player()->tribe().get_nrwares() );
-	}
-
-	assert( wareid < (uint)get_player()->tribe().get_nrwares() );
-
-	m_current_statistics[wareid]++;
-}
-
-/*
- * void next_ware_production_period()
- *
- * Set the next production period
- */
-void Interactive_Player::next_ware_production_period( void ) {
-	if( m_ware_productions.size() != (uint)get_player()->tribe().get_nrwares() ) {
-		m_ware_productions.resize( get_player()->tribe().get_nrwares() );
-		m_current_statistics.resize( get_player()->tribe().get_nrwares() );
-	}
-
-	for(uint i = 0; i < m_ware_productions.size(); i++) {
-		m_ware_productions[i].push_back( m_current_statistics[i] );
-		m_current_statistics[i] = 0;
-	}
-}
-
-/*
- * Get current ware production statistics
- */
-const std::vector<uint> * Interactive_Player::get_ware_production_statistics
-(const int ware) const
-{
-	assert( ware < (int)m_ware_productions.size()) ;
-
-	return &m_ware_productions[ware];
-}
 
 /*
 ===============
@@ -571,77 +403,10 @@ void Interactive_Player::set_player_number(uint n) {
 }
 
 
-/*
- * Gain a immovable
+/**
+ * Cleanup any game-related data before loading a new game
+ * while a game is currently playing.
  */
-void Interactive_Player::gain_immovable( PlayerImmovable* imm ) {
-	if
-		(const Building * const building =
-		 dynamic_cast<const Building * const>(imm))
-	{
-		const ConstructionSite * const constructionsite =
-			dynamic_cast<const ConstructionSite * const>(building);
-		const std::string & building_name = constructionsite ?
-			constructionsite->building().name() : building->name();
-
-		const Tribe_Descr & tribe = player().tribe();
-		const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
-   // Get the valid vector for this
-		if (m_building_stats.size() < nr_buildings)
-			m_building_stats.resize(nr_buildings);
-
-		std::vector<Building_Stats> & stat =
-			m_building_stats[tribe.get_building_index(building_name.c_str())];
-
-		Building_Stats new_building;
-		new_building.is_constructionsite = constructionsite;
-		new_building.pos = building->get_position();
-		stat.push_back( new_building );
-	}
-}
-
-/*
- * Loose a immovable
- */
-void Interactive_Player::lose_immovable( PlayerImmovable* imm ) {
-	if
-		(const Building * const building =
-		 dynamic_cast<const Building * const>(imm))
-	{
-		const ConstructionSite * const constructionsite =
-			dynamic_cast<const ConstructionSite * const>(building);
-		const std::string & building_name = constructionsite ?
-			constructionsite->building().name() : building->name();
-
-		const Tribe_Descr & tribe = player().tribe();
-		const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
-
-		// Get the valid vector for this
-		if (m_building_stats.size() < nr_buildings)
-			m_building_stats.resize(nr_buildings);
-
-		std::vector<Building_Stats> & stat =
-			m_building_stats[tribe.get_building_index(building_name.c_str())];
-
-		const Coords building_position = building->get_position();
-		for( uint i = 0; i < stat.size(); i++ ) {
-				if (stat[i].pos == building_position) {
-				stat.erase( stat.begin() + i );
-				return;
-			}
-		}
-
-		throw wexception
-			("Interactive_Player::loose_immovable(): A building shoud be removed "
-			 "at the location %i, %i, but nothing is known about this building!\n",
-			 building_position.x, building_position.y);
-	}
-}
-
-/*
- * Cleanup, so that we can load
- */
-void Interactive_Player::cleanup_for_load( void ) {
-	m_building_stats.clear();
-	m_general_stats.clear();
+void Interactive_Player::cleanup_for_load()
+{
 }

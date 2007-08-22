@@ -22,6 +22,8 @@
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "events/event_chain.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "interactive_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
@@ -36,6 +38,7 @@
 #include "network.h"
 #include "player.h"
 #include "playercommand.h"
+#include "productionsite.h"
 #include "replay.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
@@ -56,6 +59,7 @@ m_replaywriter(0),
 m_realtime(WLApplication::get()->get_time())
 {
 	g_sound_handler.m_the_game = this;
+	m_last_stats_update = 0;
 }
 
 Game::~Game()
@@ -406,13 +410,6 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 	m_state = gs_running;
 
-	// This bandaid is unfortunately necessary to make sure
-	// statistics data is set up for saving before replay saves.
-	// I hope this can be removed once statistics saving is moved
-	// into the Player code (this is necessary for network games
-	// anyway)
-	ipl->prepare_statistics();
-
 	{
 		log("Starting replay writer\n");
 
@@ -471,6 +468,19 @@ void Game::think(void)
 		for (unsigned int i=0;i<cpl.size();i++)
 			cpl[i]->think();
 
+		if (!m_general_stats.size() ||
+		    get_gametime() - m_last_stats_update > STATISTICS_SAMPLE_TIME) {
+			sample_statistics();
+
+			for (Player_Number curplr = 1; curplr <= get_map()->get_nrplayers(); ++curplr) {
+				Player* plr = get_player(curplr);
+				if (plr)
+					plr->sample_statistics();
+			}
+
+			m_last_stats_update = get_gametime();
+		}
+
 		int frametime = -m_realtime;
 		m_realtime =  WLApplication::get()->get_time();
 		frametime += m_realtime;
@@ -528,11 +538,10 @@ void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 			else
 				cpl[i]->lose_immovable (pi);
 
-	if(get_ipl()->get_player_number()==pi->get_owner()->get_player_number())
-		if (lg==GAIN)
-			get_ipl()->gain_immovable (pi);
-		else
-			get_ipl()->lose_immovable (pi);
+	if (lg==GAIN)
+		pi->get_owner()->gain_immovable (pi);
+	else
+		pi->get_owner()->lose_immovable (pi);
 }
 
 void Game::player_field_notification (const FCoords& fc, losegain_t lg)
@@ -565,6 +574,10 @@ void Game::cleanup_for_load
 		delete cpl[cpl.size()-1];
 		cpl.pop_back();
 	}
+
+	// Statistics
+	m_last_stats_update = 0;
+	m_general_stats.clear();
 }
 
 /**
@@ -663,4 +676,199 @@ void Game::send_player_enemyflagaction
  const int type)
 {
 	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), who_attacks, flag, action, who_attacks, num_soldiers, type));
+}
+
+
+/**
+ * Sample global statistics for the game.
+ */
+void Game::sample_statistics()
+{
+	// Update general stats
+	Map* m = get_map();
+	std::vector< uint > land_size; land_size.resize( m->get_nrplayers() );
+	std::vector< uint > nr_buildings; nr_buildings.resize( m->get_nrplayers() );
+	std::vector< uint > nr_kills; nr_kills.resize( m->get_nrplayers() );
+	std::vector< uint > miltary_strength; miltary_strength.resize( m->get_nrplayers() );
+	std::vector< uint > nr_workers; nr_workers.resize( m->get_nrplayers() );
+	std::vector< uint > nr_wares; nr_wares.resize( m->get_nrplayers() );
+	std::vector< uint > productivity; productivity.resize( m->get_nrplayers() );
+
+	std::vector< uint > nr_production_sites; nr_production_sites.resize( m->get_nrplayers() );
+
+	// We walk the map, to gain all needed informations
+	for(ushort y = 0; y < m->get_height(); y++) {
+		for(ushort x = 0; x < m->get_width(); x++) {
+			Field* f = m->get_field( Coords( x, y ) );
+
+			// First, ownership of this field
+			if (f->get_owned_by())
+				land_size[ f->get_owned_by()-1 ]++;
+
+			// Get the immovable
+			BaseImmovable* imm = f->get_immovable();
+			if (imm && imm->get_type() == Map_Object::BUILDING) {
+				Building* build = static_cast<Building*>(imm);
+				if (build->get_position() == Coords(x,y)) { // only main location is intresting
+					// Ok, count the building
+					nr_buildings[ build->get_owner()->get_player_number() - 1 ]++;
+
+					// If it is a productionsite, add its productivity
+					if( build->get_building_type() == Building::PRODUCTIONSITE ) {
+						nr_production_sites[  build->get_owner()->get_player_number() - 1 ]++;
+						productivity[ build->get_owner()->get_player_number() - 1 ] += static_cast<ProductionSite*>( build )->get_statistics_percent();
+					}
+				}
+			}
+
+			// Now, walk the bobs
+			if( f->get_first_bob() ) {
+				Bob* b = f->get_first_bob();
+				do {
+					if( b->get_bob_type() == Bob::WORKER ) {
+						Worker* w = static_cast<Worker*>(b);
+
+						switch( w->get_worker_type() ) {
+							case Worker_Descr::SOLDIER:
+							{
+								Soldier* s = static_cast<Soldier*>(w);
+								uint calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
+								miltary_strength[ s->get_owner()->get_player_number() -1 ] += calc_level;
+							}
+							break;
+
+							default: break;
+						}
+					}
+				} while( (b = b->get_next_bob() ) );
+			}
+		}
+	}
+
+	// Number of workers / wares
+	for(uint i = 0; i < m->get_nrplayers(); i++) {
+		Player* plr = get_player(i+1);
+
+		uint wostock = 0;
+		uint wastock = 0;
+
+		for(uint j = 0; plr && j < plr->get_nr_economies(); j++) {
+			Economy* eco = plr->get_economy_by_number( j );
+
+			for( int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
+				wastock += eco->stock_ware( wareid );
+			for( int workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
+				if( plr->tribe().get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER)
+					continue;
+				wostock += eco->stock_worker( workerid );
+			}
+		}
+		nr_wares[ i ] = wastock;
+		nr_workers[ i ] = wostock;
+	}
+
+	// Now, divide the statistics
+	for(uint i = 0; i < m->get_nrplayers(); i++) {
+		if (productivity[ i ])
+			productivity[ i ] /= nr_production_sites[ i ];
+	}
+
+	// Now, push this on the general statistics
+	m_general_stats.resize( m->get_nrplayers() );
+	for( uint i = 0; i < m->get_nrplayers(); i++) {
+		m_general_stats[i].land_size.push_back( land_size[i] );
+		m_general_stats[i].nr_buildings.push_back( nr_buildings[i] );
+		m_general_stats[i].nr_kills.push_back( nr_kills[i] );
+		m_general_stats[i].miltary_strength.push_back( miltary_strength[i] );
+		m_general_stats[i].nr_workers.push_back( nr_workers[i] );
+		m_general_stats[i].nr_wares.push_back( nr_wares[i]  );
+		m_general_stats[i].productivity.push_back( productivity[i] );
+	}
+}
+
+
+/**
+ * Read statistics data from a file.
+ *
+ * \param version indicates the kind of statistics file, which may be
+ *   0 - old style statistics (from the time when statistics were kept in
+ *       \ref Interactive_Player )
+ *   1 - current version
+ */
+void Game::ReadStatistics(FileRead& fr, uint version)
+{
+	if (version == 0 || version == 1) {
+		if (version >= 1) {
+			m_last_stats_update = fr.Unsigned32();
+		}
+
+		// Read general statistics
+		uint entries = fr.Unsigned16();
+		m_general_stats.resize(get_map()->get_nrplayers());
+
+		for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+			if (get_player(i+1)) {
+				m_general_stats[i].land_size.resize(entries);
+				m_general_stats[i].nr_workers.resize(entries);
+				m_general_stats[i].nr_buildings.resize(entries);
+				m_general_stats[i].nr_wares.resize(entries);
+				m_general_stats[i].productivity.resize(entries);
+				m_general_stats[i].nr_kills.resize(entries);
+				m_general_stats[i].miltary_strength.resize(entries);
+			}
+		}
+
+		for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+			if (!get_player(i+1))
+				continue;
+
+			for(uint j = 0; j < m_general_stats[i].land_size.size(); j++) {
+				m_general_stats[i].land_size[j] = fr.Unsigned32();
+				m_general_stats[i].nr_workers[j] = fr.Unsigned32();
+				m_general_stats[i].nr_buildings[j] = fr.Unsigned32();
+				m_general_stats[i].nr_wares[j] = fr.Unsigned32();
+				m_general_stats[i].productivity[j] = fr.Unsigned32();
+				m_general_stats[i].nr_kills[j] = fr.Unsigned32();
+				m_general_stats[i].miltary_strength[j] = fr.Unsigned32();
+			}
+		}
+	} else
+		throw wexception("Unsupported version %i", version);
+}
+
+
+/**
+ * Write general statistics to the given file.
+ */
+void Game::WriteStatistics(FileWrite& fw)
+{
+	fw.Unsigned32(m_last_stats_update);
+
+	// General statistics
+	// First, we write the size of the statistics arrays
+	uint entries = 0;
+
+	for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+		if (get_player(i+1) && m_general_stats.size()) {
+			entries = m_general_stats[i].land_size.size();
+			break;
+		}
+	}
+
+	fw.Unsigned16(entries);
+
+	for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+		if (!get_player(i+1))
+			continue;
+
+		for( uint j = 0; j < entries; j++) {
+			fw.Unsigned32(m_general_stats[i].land_size[j]);
+			fw.Unsigned32(m_general_stats[i].nr_workers[j]);
+			fw.Unsigned32(m_general_stats[i].nr_buildings[j]);
+			fw.Unsigned32(m_general_stats[i].nr_wares[j]);
+			fw.Unsigned32(m_general_stats[i].productivity[j]);
+			fw.Unsigned32(m_general_stats[i].nr_kills[j]);
+			fw.Unsigned32(m_general_stats[i].miltary_strength[j]);
+		}
+	}
 }

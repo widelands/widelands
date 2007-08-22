@@ -366,7 +366,7 @@ m_parent(&parent)
    int posy=offsy;
 
 
-   set_inner_size(10, (offsy + spacing + PLOT_HEIGHT + spacing + 
+   set_inner_size(10, (offsy + spacing + PLOT_HEIGHT + spacing +
                        nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100) );
 
 
@@ -396,7 +396,7 @@ m_parent(&parent)
 			dposy = cb.get_h() + spacing;
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
-         m_plot->register_plot_data(cur_ware, parent.get_ware_production_statistics(cur_ware), colors[cur_ware]);
+         m_plot->register_plot_data(cur_ware, parent.get_player()->get_ware_production_statistics(cur_ware), colors[cur_ware]);
       }
       posy += dposy;
    }

@@ -246,8 +246,8 @@ void Building_Statistics_Menu::clicked_help() {
 
 void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	assert(m_table.has_selection());
-	const std::vector<Interactive_Player::Building_Stats> & vec =
-		m_parent->get_building_statistics(m_table.get_selected());
+	const std::vector<Player::Building_Stats> & vec =
+		m_parent->get_player()->get_building_statistics(m_table.get_selected());
 
    bool found = true; // We think, we always find a proper building
 
@@ -358,7 +358,7 @@ void Building_Statistics_Menu::update( void ) {
 			if (name == "constructionsite" or name == "headquarters") continue;
 		}
 
-      const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
+      const std::vector< Player::Building_Stats >& vec = m_parent->get_player()->get_building_statistics(i);
 
       // walk all entries, add new ones if needed
 		UI::Table<const uintptr_t>::Entry_Record * te = 0;

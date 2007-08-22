@@ -1067,11 +1067,8 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 						wareid, get_owner()->tribe().get_ware_descr(wareid));
 				item->init(g);
 
-				// For statistics, inform the user that a ware was produced
-				// Ware statistics are only cached for the interactive user
-				// since other tribes would have other types of wares
-				if(g->get_ipl()->get_player_number()==get_owner()->get_player_number())
-					g->get_ipl()->ware_produced(wareid);
+				// For statistics, inform the player that a ware was produced
+				get_owner()->ware_produced(wareid);
 
 				w->start_task_dropoff(g, item);
 

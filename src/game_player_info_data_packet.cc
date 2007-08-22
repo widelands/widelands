@@ -28,7 +28,7 @@
 #include "tribe.h"
 
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 Game_Player_Info_Data_Packet::~Game_Player_Info_Data_Packet(void) {
@@ -45,7 +45,7 @@ throw (_wexception)
 	// read packet version
 	int packet_version=fr.Unsigned16();
 
-	if(packet_version==CURRENT_PACKET_VERSION) {
+	if (packet_version==CURRENT_PACKET_VERSION || packet_version == 1) {
 		uint max_players = fr.Unsigned16();
 		for(uint i=1; i<=max_players; i++) {
 			game->remove_player(i);
@@ -73,6 +73,9 @@ throw (_wexception)
 				for(uint j=0; j<4; j++)
 					plr->m_playercolor[j] = rgb[j];
 
+				if (packet_version >= 2)
+					plr->ReadStatistics(fr, 0);
+
 				if (type == Player::Local) {
 					// The interactive player might still be in existance
 					// we do not delete it then, we reuse it
@@ -85,6 +88,10 @@ throw (_wexception)
 				}
 			}
 		}
+
+		if (packet_version >= 2)
+			game->ReadStatistics(fr, 1);
+
 		// DONE
 		return;
 	} else
@@ -136,7 +143,11 @@ throw (_wexception)
 		// Economies are in a packet after map loading
 
 		fw.CString(plr->m_name.c_str());
+
+		plr->WriteStatistics(fw);
 	}
+
+	game->WriteStatistics(fw);
 
 	fw.Write( fs, "binary/player_info" );
 }

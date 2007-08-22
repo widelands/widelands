@@ -21,7 +21,10 @@
 
 #include "attack_controller.h"
 #include "cmd_queue.h"
+#include "constructionsite.h"
 #include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "militarysite.h"
 #include "soldier.h"
@@ -638,4 +641,173 @@ throw ()
 	}
 	vision += lasting;
 	field.vision = vision;
+}
+
+
+/**
+ * Called by Game::think to sample statistics data in regular intervals.
+ */
+void Player::sample_statistics()
+{
+	if( m_ware_productions.size() != (uint)tribe().get_nrwares() ) {
+		m_ware_productions.resize( tribe().get_nrwares() );
+		m_current_statistics.resize( tribe().get_nrwares() );
+	}
+
+	for(uint i = 0; i < m_ware_productions.size(); i++) {
+		m_ware_productions[i].push_back( m_current_statistics[i] );
+		m_current_statistics[i] = 0;
+	}
+}
+
+
+/**
+ * A ware was produced. Update the corresponding statistics.
+ */
+void Player::ware_produced( uint wareid )
+{
+	if( m_ware_productions.size() != (uint)tribe().get_nrwares() ) {
+		m_ware_productions.resize( tribe().get_nrwares() );
+		m_current_statistics.resize( tribe().get_nrwares() );
+	}
+
+	assert( wareid < (uint)tribe().get_nrwares() );
+
+	m_current_statistics[wareid]++;
+}
+
+
+/**
+ * Get current ware production statistics
+ */
+const std::vector<uint> * Player::get_ware_production_statistics
+		(const int ware) const
+{
+	assert( ware < (int)m_ware_productions.size()) ;
+
+	return &m_ware_productions[ware];
+}
+
+
+/**
+ * Gain an immovable
+ */
+void Player::gain_immovable( PlayerImmovable* imm ) {
+	if
+	(const Building * const building =
+		dynamic_cast<const Building * const>(imm))
+	{
+		const ConstructionSite * const constructionsite =
+				dynamic_cast<const ConstructionSite * const>(building);
+		const std::string & building_name = constructionsite ?
+				constructionsite->building().name() : building->name();
+
+		const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
+
+		// Get the valid vector for this
+		if (m_building_stats.size() < nr_buildings)
+			m_building_stats.resize(nr_buildings);
+
+		std::vector<Building_Stats> & stat =
+				m_building_stats[tribe().get_building_index(building_name.c_str())];
+
+		Building_Stats new_building;
+		new_building.is_constructionsite = constructionsite;
+		new_building.pos = building->get_position();
+		stat.push_back( new_building );
+	}
+}
+
+/**
+ * Loose an immovable
+ */
+void Player::lose_immovable( PlayerImmovable* imm )
+{
+	if
+	(const Building * const building =
+		dynamic_cast<const Building * const>(imm))
+	{
+		const ConstructionSite * const constructionsite =
+				dynamic_cast<const ConstructionSite * const>(building);
+		const std::string & building_name = constructionsite ?
+				constructionsite->building().name() : building->name();
+
+		const Building_Descr::Index nr_buildings = tribe().get_nrbuildings();
+
+		// Get the valid vector for this
+		if (m_building_stats.size() < nr_buildings)
+			m_building_stats.resize(nr_buildings);
+
+		std::vector<Building_Stats> & stat =
+				m_building_stats[tribe().get_building_index(building_name.c_str())];
+
+		const Coords building_position = building->get_position();
+		for( uint i = 0; i < stat.size(); i++ ) {
+			if (stat[i].pos == building_position) {
+				stat.erase( stat.begin() + i );
+				return;
+			}
+		}
+
+		throw wexception
+				("Interactive_Player::loose_immovable(): A building shoud be removed "
+				"at the location %i, %i, but nothing is known about this building!\n",
+				building_position.x, building_position.y);
+	}
+}
+
+
+/**
+ * Read statistics data from a file.
+ *
+ * \param version indicates the kind of statistics file, which may be
+ *   0 - old style statistics (from the time when statistics were kept in
+ *       \ref Interactive_Player )
+ */
+void Player::ReadStatistics(FileRead& fr, uint version)
+{
+	if (version == 0) {
+		ushort nr_wares = fr.Unsigned16();
+		ushort nr_entries = fr.Unsigned16();
+
+		if (nr_wares > 0) {
+			if (nr_wares != tribe().get_nrwares())
+				throw wexception("Statistics for %u has bad number of wares (%u != %u)",
+						get_player_number(),
+						nr_wares, tribe().get_nrwares());
+
+			m_current_statistics.resize(nr_wares);
+			m_ware_productions.resize(nr_wares);
+
+			for(uint i = 0; i < m_current_statistics.size(); i++) {
+				m_current_statistics[i] = fr.Unsigned32();
+				m_ware_productions[i].resize(nr_entries);
+
+				for(uint j = 0; j < m_ware_productions[i].size(); j++)
+					m_ware_productions[i][j] = fr.Unsigned32();
+			}
+		}
+	} else
+		throw wexception("Unsupported version %i", version);
+}
+
+
+/**
+ * Write statistics data to the give file
+ */
+void Player::WriteStatistics(FileWrite& fw)
+{
+	if (m_current_statistics.size()) {
+		fw.Unsigned16(m_current_statistics.size());
+		fw.Unsigned16(m_ware_productions[0].size());
+
+		for( uint i = 0; i < m_current_statistics.size(); i++) {
+			fw.Unsigned32(m_current_statistics[i]);
+			for( uint j = 0; j < m_ware_productions[i].size(); j++)
+				fw.Unsigned32(m_ware_productions[i][j]);
+		}
+	} else {
+		fw.Unsigned16(0);
+		fw.Unsigned16(0);
+	}
 }

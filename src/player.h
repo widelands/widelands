@@ -27,6 +27,8 @@
 #include "rgbcolor.h"
 
 class Economy;
+class FileRead;
+class FileWrite;
 class Path;
 class PlayerImmovable;
 class Soldier;
@@ -49,6 +51,15 @@ class AttackController;
  *                      -- Nicolai
  */
 struct Player {
+public:
+	struct Building_Stats {
+		bool is_constructionsite;
+		Coords pos;
+	};
+	typedef std::vector<Building_Stats> Building_Stats_vector;
+	typedef std::vector<Building_Stats_vector> BuildingStats;
+
+public:
 	friend class Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
@@ -417,6 +428,20 @@ struct Player {
 	typedef std::set<Object_Ptr> AreaWatchers;
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
+	// Statistics
+	const Building_Stats_vector & get_building_statistics(const int i) const {
+		return m_building_stats[i];
+	}
+	const std::vector<uint> * get_ware_production_statistics(const int ware) const;
+
+	void ReadStatistics(FileRead& fr, uint version);
+	void WriteStatistics(FileWrite& fw);
+	void sample_statistics();
+	void ware_produced(uint id);
+	void next_ware_production_period( void );
+	void gain_immovable(PlayerImmovable* );
+	void lose_immovable(PlayerImmovable* );
+
 private:
 	/**
 	 * Called when a node becomes seen (not only the first time) before the
@@ -426,6 +451,7 @@ private:
 	void discover_node(const Map &, const ::Field &, const FCoords, Field &)
 		throw ();
 
+private:
 	AreaWatchers           m_areawatchers;
 
 	bool m_see_all;
@@ -440,6 +466,10 @@ private:
 	std::vector<bool>     m_allowed_buildings;
 	std::vector<Economy*> m_economies;
 	std::string           m_name; // Player name
+
+	std::vector<uint> m_current_statistics;
+	std::vector< std::vector<uint> > m_ware_productions;
+	BuildingStats m_building_stats;
 };
 
 #endif

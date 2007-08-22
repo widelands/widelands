@@ -43,23 +43,6 @@ class Interactive_Player : public Interactive_Base {
 	friend class Game_Interactive_Player_Data_Packet;
 
 public:
-	struct Building_Stats {
-		bool is_constructionsite;
-		Coords pos;
-	};
-	typedef std::vector<Building_Stats> Building_Stats_vector;
-	typedef std::vector<Building_Stats_vector> BuildingStats;
-	struct General_Stats {
-		std::vector< uint > land_size;
-		std::vector< uint > nr_workers;
-		std::vector< uint > nr_buildings;
-		std::vector< uint > nr_wares;
-		std::vector< uint > productivity;
-		std::vector< uint > nr_kills;
-		std::vector< uint > miltary_strength;
-	};
-	typedef std::vector<General_Stats> General_Stats_vector;
-
 	struct Game_Main_Menu_Windows {
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
@@ -85,7 +68,6 @@ public:
 
 	virtual void think();
 
-	void prepare_statistics();
 	void start();
 
 	void main_menu_btn();
@@ -106,19 +88,6 @@ public:
 
 	// for savegames
 	void set_player_number(uint plrn);
-
-	// For ware production statistics (only needed for the interactive player)
-	void ware_produced(uint id);
-	void next_ware_production_period( void );
-	const std::vector<uint> * get_ware_production_statistics(const int ware) const;
-
-	// For statistics mainly, we keep track of buildings
-	void gain_immovable(PlayerImmovable* );
-	void lose_immovable(PlayerImmovable* );
-	const Building_Stats_vector & get_building_statistics(const int i) const
-	{return m_building_stats[i];}
-	const General_Stats_vector & get_general_statistics() const
-	{return m_general_stats;}
 
 	// For load
 	virtual void cleanup_for_load( void );
@@ -149,22 +118,12 @@ private:
 	UI::UniqueWindow::Registry m_encyclopedia;
 	Game_Main_Menu_Windows  m_mainm_windows;
 
-	std::vector<uint> m_current_statistics;
-	std::vector< std::vector<uint> > m_ware_productions;
-	uint  m_last_stats_update;
-
-	BuildingStats m_building_stats;
-	General_Stats_vector m_general_stats;
-
 	// Chat message stack
 	std::vector< NetGame::Chat_Message > m_chatmsges;
 	std::vector< Overlay_Chat_Messages > m_show_chatmsg;
 	bool m_do_chat_overlays;
 	bool m_is_typing_msg; // Is the user typing a chat message
 	std::string m_typed_message;
-
-private:
-	void sample_statistics( void );
 };
 
 
