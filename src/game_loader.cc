@@ -23,7 +23,6 @@
 #include "filesystem.h"
 #include "game.h"
 #include "game_cmd_queue_data_packet.h"
-#include "game_data_packet_ids.h"
 #include "game_game_class_data_packet.h"
 #include "game_map_data_packet.h"
 #include "game_preload_data_packet.h"
