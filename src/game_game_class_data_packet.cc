@@ -33,23 +33,23 @@ void Game_Game_Class_Data_Packet::Read
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   FileRead fr;
+	FileRead fr;
 
-   fr.Open( fs, "binary/game_class" );
+	fr.Open( fs, "binary/game_class" );
 
-   // read packet version
+	// read packet version
 	const Uint16 packet_version = fr.Unsigned16();
 
 	if (packet_version <= CURRENT_PACKET_VERSION) {
-      // Can't load netgames
-      game->m_netgame=0;
+		// Can't load netgames
+		game->m_netgame=0;
 
-      game->m_speed=fr.Signed16();
+		game->m_speed=fr.Signed16();
 
-      game->m_gametime=fr.Unsigned32();
-
-   } else throw wexception
-	   ("Unknown version in Game_Game_Class_Data_Packet: %u\n", packet_version);
+		game->m_gametime=fr.Unsigned32();
+	} else
+		throw wexception
+			("Unknown version in Game_Game_Class_Data_Packet: %u\n", packet_version);
 }
 
 /*
@@ -59,40 +59,40 @@ void Game_Game_Class_Data_Packet::Write
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
+	FileWrite fw;
 
-   // Packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	// Packet version
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Can't save netgames (TODO)
-   assert(!game->m_netgame);
+	// Can't save netgames (TODO)
+	assert(!game->m_netgame);
 
-   // State is running, we do not need to save this
+	// State is running, we do not need to save this
 	// Save speed
-   fw.Signed16(game->m_speed);
+	fw.Signed16(game->m_speed);
 
-   // From the interactive player, is saved somewhere else
-   // Computer players are saved somewhere else
+	// From the interactive player, is saved somewhere else
+	// Computer players are saved somewhere else
 
-   // CMD Queue is saved later
-   // We do not care for real time.
+	// CMD Queue is saved later
+	// We do not care for real time.
 
-   // EDITOR GAME CLASS
-   // Write gametime
-   fw.Unsigned32(game->m_gametime);
+	// EDITOR GAME CLASS
+	// Write gametime
+	fw.Unsigned32(game->m_gametime);
 
-   // We do not care for players, since they were set
-   // on game initialization to match Map::scenario_player_[names|tribes]
-   // or vice versa, so this is handled by map loader
+	// We do not care for players, since they were set
+	// on game initialization to match Map::scenario_player_[names|tribes]
+	// or vice versa, so this is handled by map loader
 
-   // Objects are loaded and saved by map
+	// Objects are loaded and saved by map
 
-   // Tribes and wares are handled by map
-   // Interactive_Base doesn't need saving
+	// Tribes and wares are handled by map
+	// Interactive_Base doesn't need saving
 
-   // Map is handled by map saving
+	// Map is handled by map saving
 
-   // Track pointers are not saved in save games
+	// Track pointers are not saved in save games
 
-   fw.Write( fs, "binary/game_class" );
+	fw.Write( fs, "binary/game_class" );
 }
