@@ -84,7 +84,7 @@ struct Player {
 	const std::string & get_name() const throw () {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
 
-		void init(const bool place_headquarters);
+	void init(const bool place_headquarters);
 
 	FieldCaps get_buildcaps(const FCoords) const;
 
@@ -365,7 +365,7 @@ struct Player {
 	Military_Influence & military_influence(const Map::Index i) throw ()
 	{return m_fields[i].military_influence;}
 
-      // Allowed buildings
+	// Allowed buildings
 	bool is_building_allowed(const Building_Descr::Index i) const throw () {
 		return m_allowed_buildings[i];
 	}
