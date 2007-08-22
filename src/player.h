@@ -69,17 +69,9 @@ struct Player {
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
 		 const uchar * const playercolor);
-      ~Player();
+	~Player();
 
-	void allocate_map() {
-		const Map & map = egbase().map();
-		log("Player::init(&map=%p)", &map);
-		assert(map.get_width ());
-		assert(map.get_height());
-		m_fields = new Field[map.max_index()];
-		log("Player::allocate_map: %p\n", m_fields);
-	}
-
+	void allocate_map();
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}

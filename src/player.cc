@@ -102,6 +102,20 @@ void Player::init(const bool place_headquarters) {
 }
 
 
+/**
+ * Allocate the fields array that contains player-specific field information.
+ */
+void Player::allocate_map()
+{
+	const Map & map = egbase().map();
+	log("Player::init(&map=%p)\n", &map);
+	assert(map.get_width ());
+	assert(map.get_height());
+	m_fields = new Field[map.max_index()];
+	log("Player::allocate_map: %p\n", m_fields);
+}
+
+
 /*
 ===============
 Player::get_buildcaps
