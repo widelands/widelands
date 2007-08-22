@@ -551,6 +551,8 @@ void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 void Game::cleanup_for_load
 (const bool flush_graphics, const bool flush_animations)
 {
+	m_state = gs_loading;
+
 	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
 	for
 		(std::vector<Tribe_Descr*>::iterator it = m_tribes.begin();

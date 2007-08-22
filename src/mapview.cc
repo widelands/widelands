@@ -79,13 +79,17 @@ in this function
 void Map_View::draw(RenderTarget* dst)
 {
 	Editor_Game_Base & egbase = intbase().egbase();
-   // Check if the view has changed in a game
-	if
-		(dynamic_cast<const Game * const>(&egbase)
-		 and
-		 dynamic_cast<Interactive_Player &>(intbase())
-		 .get_player()->has_view_changed())
-		m_complete_redraw_needed = true;
+
+	if (Game* game = dynamic_cast<Game *>(&egbase)) {
+		// Bail out if the game isn't actually loaded.
+		// This fixes a crash with displaying an error dialog during loading.
+		if (!game->is_loaded())
+			return;
+
+		// Check if the view has changed in a game
+		if (dynamic_cast<Interactive_Player &>(intbase()).get_player()->has_view_changed())
+			m_complete_redraw_needed = true;
+	}
 
 	egbase.map().overlay_manager().load_graphics();
 	if
@@ -98,7 +102,7 @@ void Map_View::draw(RenderTarget* dst)
 		 m_complete_redraw_needed);
 	else dst->rendermap(egbase, m_viewpoint, m_complete_redraw_needed);
 
-   m_complete_redraw_needed = false;
+	m_complete_redraw_needed = false;
 }
 
 

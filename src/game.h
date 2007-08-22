@@ -60,6 +60,8 @@ struct Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
 	friend class Game_Game_Class_Data_Packet;
 	friend class Game_Player_Info_Data_Packet;
+	friend class Game_Loader;
+	friend class Game_Main_Menu_Load_Game;
 
 	Game(void);
 	~Game(void);

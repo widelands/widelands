@@ -205,15 +205,17 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
    FileSystem* fs = 0;
 	try {
 		UI::ProgressWindow loader_ui;
-      fs = g_fs->MakeSubFileSystem( filename );
+		fs = g_fs->MakeSubFileSystem( filename );
 		Game_Loader gl(*fs, m_parent->get_game());
-      m_parent->get_game()->cleanup_for_load(true,true);
+		m_parent->get_game()->cleanup_for_load(true,true);
 		gl.load_game();
-      m_parent->get_game()->postload();
-      m_parent->get_game()->load_graphics(loader_ui);
+		m_parent->get_game()->postload();
+		m_parent->get_game()->load_graphics(loader_ui);
+		m_parent->get_game()->m_state = gs_running;
    } catch(std::exception& exe) {
-      std::string s=_("Game Loading Error!\nReason given:\n");
-      s+=exe.what();
+		std::string s=_("Game Loading Error!\nReason given:\n");
+		s+=exe.what();
+		log("%s\n", s.c_str());
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
