@@ -53,7 +53,6 @@ void Widelands_Map_Building_Data_Packet::Read
 throw (_wexception)
 {
 	if (not skip) {
-
 		FileRead fr;
 		try {
 			fr.Open( fs, "binary/building" );
@@ -98,7 +97,7 @@ throw (_wexception)
 					if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION) {
 						read_priorities (building, fr);
 					}
-					
+
 					// Reference the players tribe if in editor
 					egbase->get_iabase()->reference_player_tribe
 						(a.player_number, &tribe);
@@ -175,7 +174,7 @@ throw (_wexception)
 				fw.Unsigned8(static_cast<const bool>(constructionsite));
 
 				write_priorities(*building, fw);
-				
+
 			} else fw.Unsigned8(0);
 		}
 	}
@@ -198,10 +197,10 @@ void Widelands_Map_Building_Data_Packet::write_priorities
 (Building & building, FileWrite & fw)
 {
 	fw.Unsigned32(building.get_base_priority());
-	
+
 	std::map<int, std::map<int, int> > type_to_priorities;
 	std::map<int, std::map<int, int> >::iterator it;
-	
+
 	const Tribe_Descr & tribe = building.get_owner()->tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin();
@@ -209,12 +208,12 @@ void Widelands_Map_Building_Data_Packet::write_priorities
 	{
 		if (it->second.size() == 0)
 			continue;
-		
+
 		// write ware type and priority count
 		const int ware_type = it->first;
 		fw.Unsigned8(ware_type);
 		fw.Unsigned8(it->second.size());
-		
+
 		std::map<int, int>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
 		{
@@ -226,12 +225,12 @@ void Widelands_Map_Building_Data_Packet::write_priorities
 				name = tribe.get_worker_descr(ware_index)->name();
 			else
 				throw wexception("unrecognized ware type %d while writing priorities", ware_type);
-			
+
 			fw.CString(name.c_str());
 			fw.Unsigned32(it2->second);
 		}
 	}
-	
+
 	// write 0xff so the end can be easily identified
 	fw.Unsigned8(0xff);
 }
