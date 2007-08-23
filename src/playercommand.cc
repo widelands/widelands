@@ -24,7 +24,7 @@
 #include "filewrite.h"
 #include "game.h"
 #include "instances.h"
-#include "network.h"
+#include "streamread.h"
 #include "streamwrite.h"
 #include "player.h"
 #include "soldier.h"
@@ -59,9 +59,9 @@ PlayerCommand::~PlayerCommand ()
 {
 }
 
-PlayerCommand* PlayerCommand::deserialize (Deserializer* des)
+PlayerCommand* PlayerCommand::deserialize (StreamRead* des)
 {
-	switch (des->getchar()) {
+	switch (des->Unsigned8()) {
 		case PLCMD_BULLDOZE:
 			return new Cmd_Bulldoze(des);
 		case PLCMD_BUILD:
@@ -113,9 +113,9 @@ void PlayerCommand::PlayerCmdRead(FileRead* fr, Editor_Game_Base* egbase, Widela
 
 /*** class Cmd_Bulldoze ***/
 
-Cmd_Bulldoze::Cmd_Bulldoze (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_Bulldoze::Cmd_Bulldoze (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	serial=des->getlong();
+	serial=des->Unsigned32();
 }
 
 void Cmd_Bulldoze::execute (Game* g)
@@ -160,11 +160,11 @@ void Cmd_Bulldoze::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_
 
 /*** class Cmd_Build ***/
 
-Cmd_Build::Cmd_Build (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_Build::Cmd_Build (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	id=des->getshort();
-	coords.x=des->getshort();
-	coords.y=des->getshort();
+	id=des->Signed16();
+	coords.x=des->Unsigned16();
+	coords.y=des->Unsigned16();
 }
 
 void Cmd_Build::execute (Game* g)
@@ -213,10 +213,10 @@ void Cmd_Build::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map
 
 /*** class Cmd_BuildFlag ***/
 
-Cmd_BuildFlag::Cmd_BuildFlag (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_BuildFlag::Cmd_BuildFlag (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	coords.x=des->getshort();
-	coords.y=des->getshort();
+	coords.x=des->Unsigned16();
+	coords.y=des->Unsigned16();
 }
 
 void Cmd_BuildFlag::execute (Game* g)
@@ -266,18 +266,18 @@ nsteps       (pa.get_nsteps()),
 steps        (0)
 {}
 
-Cmd_BuildRoad::Cmd_BuildRoad (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_BuildRoad::Cmd_BuildRoad (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	start.x=des->getshort();
-	start.y=des->getshort();
-	nsteps=des->getshort();
+	start.x=des->Unsigned16();
+	start.y=des->Unsigned16();
+	nsteps=des->Unsigned16();
 
 	// we cannot completely deserialize the path here because we don't have a Map
 	path=0;
 	steps=new char[nsteps];
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-		steps[i]=des->getchar();
+		steps[i]=des->Unsigned8();
 }
 
 Cmd_BuildRoad::~Cmd_BuildRoad ()
@@ -349,10 +349,10 @@ void Cmd_BuildRoad::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map
 
 
 /*** Cmd_FlagAction ***/
-Cmd_FlagAction::Cmd_FlagAction (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_FlagAction::Cmd_FlagAction (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	action=des->getchar();
-	serial=des->getlong();
+	action=des->Unsigned8();
+	serial=des->Unsigned32();
 }
 
 void Cmd_FlagAction::execute (Game* g)
@@ -405,9 +405,9 @@ void Cmd_FlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Ma
 
 /*** Cmd_StartStopBuilding ***/
 
-Cmd_StartStopBuilding::Cmd_StartStopBuilding (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_StartStopBuilding::Cmd_StartStopBuilding (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	serial=des->getlong();
+	serial=des->Unsigned32();
 }
 
 void Cmd_StartStopBuilding::execute (Game* g)
@@ -456,10 +456,10 @@ void Cmd_StartStopBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widel
 
 /*** Cmd_EnhanceBuilding ***/
 
-Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	serial=des->getlong();
-	id=des->getshort();
+	serial=des->Unsigned32();
+	id=des->Unsigned16();
 }
 
 void Cmd_EnhanceBuilding::execute (Game* g)
@@ -514,11 +514,11 @@ void Cmd_EnhanceBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
 
 
 /*** class Cmd_ChangeTrainingOptions ***/
-Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	serial=des->getlong();      // Serial of the building
-	attribute=des->getshort();  // Attribute to modify
-	value=des->getshort();      // New vale
+	serial=des->Unsigned32();      // Serial of the building
+	attribute=des->Unsigned16();  // Attribute to modify
+	value=des->Unsigned16();      // New vale
 }
 
 void Cmd_ChangeTrainingOptions::execute (Game* g)
@@ -586,10 +586,10 @@ void Cmd_ChangeTrainingOptions::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 
 /*** class Cmd_DropSoldier ***/
 
-Cmd_DropSoldier::Cmd_DropSoldier(Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_DropSoldier::Cmd_DropSoldier(StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	serial=des->getlong();      // Serial of the building
-	soldier=des->getlong();     // Serial of soldier
+	serial=des->Unsigned32();      // Serial of the building
+	soldier=des->Unsigned32();     // Serial of soldier
 }
 
 void Cmd_DropSoldier::execute (Game* g)
@@ -653,10 +653,10 @@ void Cmd_DropSoldier::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_M
 
 /*** Cmd_ChangeSoldierCapacity ***/
 
-Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	serial=des->getlong();
-	val=des->getshort();
+	serial=des->Unsigned32();
+	val=des->Unsigned16();
 }
 
 void Cmd_ChangeSoldierCapacity::execute (Game* g)
@@ -715,13 +715,13 @@ void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 /// TESTING STUFF
 /*** Cmd_EnemyFlagAction ***/
 
-Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (Deserializer* des):PlayerCommand (0, des->getchar())
+Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead* des):PlayerCommand (0, des->Unsigned8())
 {
-	action=des->getchar();
-	serial=des->getlong();
-	attacker=des->getchar();
-	number=des->getchar();
-	type=des->getchar();
+	action=des->Unsigned8();
+	serial=des->Unsigned32();
+	attacker=des->Unsigned8();
+	number=des->Unsigned8();
+	type=des->Unsigned8();
 }
 
 void Cmd_EnemyFlagAction::execute (Game* g)

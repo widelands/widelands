@@ -945,6 +945,23 @@ int Deserializer::read_packet (TCPsocket sock)
 	return 0;
 }
 
+size_t Deserializer::Data(void* const data, const size_t bufsize)
+{
+	size_t read = 0;
+
+	while(read < bufsize && avail()) {
+		((char*)data)[read] = getchar();
+		read++;
+	}
+
+	return read;
+}
+
+bool Deserializer::EndOfFile()
+{
+	return !avail();
+}
+
 short Deserializer::getshort ()
 {
 	short val;

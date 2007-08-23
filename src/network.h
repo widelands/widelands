@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "error.h"
 #include "types.h"
+#include "streamread.h"
 #include "streamwrite.h"
 
 #include <SDL_net.h>
@@ -230,7 +231,7 @@ private:
 	std::vector<unsigned char> buffer;
 };
 
-struct Deserializer {
+struct Deserializer : public StreamRead {
 	Deserializer ();
 	~Deserializer ();
 
@@ -238,6 +239,9 @@ struct Deserializer {
 
 	bool avail ()
 	{ return !queue.empty(); }
+
+	size_t Data(void* const data, const size_t bufsize);
+	bool EndOfFile();
 
 	char getchar ()
 	{
