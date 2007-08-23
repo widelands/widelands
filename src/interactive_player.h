@@ -40,8 +40,6 @@ struct Textarea;
  * cares for input and so on.
  */
 class Interactive_Player : public Interactive_Base {
-	friend class Game_Interactive_Player_Data_Packet;
-
 public:
 	struct Game_Main_Menu_Windows {
 		UI::UniqueWindow::Registry loadgame;
@@ -91,6 +89,7 @@ public:
 
 	// For load
 	virtual void cleanup_for_load( void );
+	void postload();
 
 	// Chat messages
 	bool show_chat_overlay( void ) { return m_do_chat_overlays; }

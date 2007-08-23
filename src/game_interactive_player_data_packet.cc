@@ -31,8 +31,6 @@
 
 #define CURRENT_PACKET_VERSION 2
 
-// Forward declaration. Defined in interactive_player.cc
-int Int_Player_overlay_callback_function(const TCoords<FCoords>, void *, int);
 
 /*
  * Destructor
@@ -56,27 +54,14 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
 		Interactive_Player* plr = game->get_ipl();
 
-		plr->m_player_number = fr.Unsigned8();
-
-		// Main Menu is not closed
-		delete plr->m_fieldaction.window;
-		plr->m_fieldaction.window = 0;
+		plr->set_player_number(fr.Unsigned8());
 
 		// Map Position
 		int x = fr.Unsigned16();
 		int y = fr.Unsigned16();
 		plr->set_viewpoint(Point(x, y));
 
-		plr->m_display_flags = fr.Unsigned32();
-
-		delete plr->m_minimap.window;
-		plr->m_minimap.window = 0;
-
-		// Now only restore the callback functions. assumes, map is already loaded
-		game->get_map()->get_overlay_manager()->show_buildhelp(false);
-		game->get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(plr));
-
-		game->get_map()->recalc_whole_map();
+		plr->set_display_flags(fr.Unsigned32());
 
 		if (packet_version == 1) {
 			game->m_last_stats_update = fr.Unsigned32();
@@ -117,7 +102,7 @@ throw (_wexception)
 	fw.Unsigned16(plr->get_viewpoint().y);
 
 	// Display flags
-	fw.Unsigned32(plr->m_display_flags);
+	fw.Unsigned32(plr->get_display_flags());
 
 	fw.Write( fs, "binary/interactive_player" );
 }

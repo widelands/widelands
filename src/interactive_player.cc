@@ -207,14 +207,30 @@ Called just before the game starts, after postload, init and gfxload
 */
 void Interactive_Player::start()
 {
+	postload();
+}
+
+
+/**
+ * Called for every game after loading (from a savegame or just from a map
+ * during single/multiplayer/scenario).
+ */
+void Interactive_Player::postload()
+{
 	Map & map = egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-		(&Int_Player_overlay_callback_function, static_cast<void *>(this));
+			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map();
+
+	// Close game-relevant UI windows (but keep main menu open)
+	delete m_fieldaction.window;
+	m_fieldaction.window = 0;
+
+	hide_minimap();
 }
 
 

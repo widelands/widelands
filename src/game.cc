@@ -159,8 +159,8 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 			 m->get_scenario_player_name(i));
 	}
 
-	loaderUI.step (_("Preparing computer players"));
-	init_player_controllers ();
+	ipl = new Interactive_Player(*this, 0);
+	set_iabase(ipl);
 
 	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
@@ -197,8 +197,8 @@ bool Game::run_single_player ()
 	UI::ProgressWindow loaderUI(map().get_background());
 	GameTips tips (loaderUI);
 
-	loaderUI.step(_("Preparing computer players"));
-	init_player_controllers ();
+	ipl = new Interactive_Player(*this, 0);
+	set_iabase(ipl);
 
 	loaderUI.step(_("Loading a map"));
 	// Now first, completly load the map
@@ -274,6 +274,9 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
 	m_state = gs_loading;
 
+	ipl = new Interactive_Player(*this, 0);
+	set_iabase(ipl);
+
 	Game_Loader gl(*fs, this);
 	loaderUI.step(_("Loading..."));
 	gl.load_game();
@@ -301,8 +304,8 @@ bool Game::run_multi_player (NetGame* ng)
 
 	m_state = gs_loading;
 
-	loaderUI.step(_("Preparing computer players"));
-	init_player_controllers ();
+	ipl = new Interactive_Player(*this, 0);
+	set_iabase(ipl);
 
 	// Now first, completly load the map
 	loaderUI.step(_("Loading a map"));
@@ -326,27 +329,35 @@ void Game::load_map (const char* filename)
 }
 
 
-void Game::init_player_controllers ()
+/**
+ * Called for every game after loading (from a savegame or just from a map
+ * during single/multiplayer/scenario).
+ *
+ * Ensure that players are setup properly (in particular AI and the
+ * \ref Interactive_Player if any).
+ */
+void Game::postload()
 {
-	ipl=0;
-	const Player_Number nr_players = map().get_nrplayers();
-	for (Player_Number i = 1; i <= nr_players; ++i)
-		if (const Player * const p = get_player(i))
-			if (p->get_type() == Player::Local) {
-				ipl = new Interactive_Player(*this, i);
-				break;
-			}
+	Editor_Game_Base::postload();
 
 	assert (ipl!=0);
 
-	// inform base, that we have something interactive
-	set_iabase(ipl);
-
 	// set up computer controlled players
-	for (Player_Number i = 1; i <= nr_players; ++i)
-		if (get_player(i) and get_player(i)->get_type() == Player::AI)
-			cpl.push_back (new Computer_Player(*this, i));
+	const Player_Number nr_players = map().get_nrplayers();
+	for (Player_Number i = 1; i <= nr_players; ++i) {
+		Player* player = get_player(i);
+
+		if (player) {
+			if (player->get_type() == Player::AI)
+				cpl.push_back (new Computer_Player(*this, i));
+			else if (player->get_type() == Player::Local)
+				ipl->set_player_number(i);
+		}
+	}
+
+	ipl->postload();
 }
+
 
 /**
  * This runs a game, including game creation phase.

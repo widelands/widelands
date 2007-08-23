@@ -358,6 +358,16 @@ void Interactive_Base::toggle_minimap() {
 }
 
 
+/**
+ * Hide the minimap if it is currently shown; otherwise, do nothing.
+ */
+void Interactive_Base::hide_minimap()
+{
+	if (m_minimap.window)
+		delete m_minimap.window;
+}
+
+
 /*
 ===============
 Interactive_Base::get_display_flags

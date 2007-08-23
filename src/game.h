@@ -101,6 +101,7 @@ public:
 
 	void load_map (const char*);
 
+	virtual void postload();
 	void think(void);
 
 	/**
@@ -173,7 +174,6 @@ public:
 	void WriteStatistics(FileWrite& fw);
 
 private:
-	void init_player_controllers ();
 	bool run (UI::ProgressWindow & loader_ui, bool = false);
 	void sample_statistics();
 

@@ -37,7 +37,6 @@ class MiniMap;
  * Editor_Interactive share.
  */
 struct Interactive_Base : public Map_View {
-   friend class Game_Interactive_Player_Data_Packet;
    friend class Sound_Handler;
 
 		enum {
@@ -143,8 +142,9 @@ struct Interactive_Base : public Map_View {
 
       UI::UniqueWindow::Registry m_minimap;
 
-   protected:
-      void toggle_minimap(void);
+protected:
+	void toggle_minimap();
+	void hide_minimap();
 
       void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);

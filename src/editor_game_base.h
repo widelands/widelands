@@ -91,7 +91,7 @@ struct Editor_Game_Base {
 
       // loading stuff
 	void allocate_player_maps();
-      void postload();
+	virtual void postload();
 	void load_graphics(UI::ProgressWindow & loader_ui);
 	virtual void cleanup_for_load
 		(const bool flush_graphics = true, const bool flush_animations = true);
