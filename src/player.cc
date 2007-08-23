@@ -633,14 +633,14 @@ throw ()
 	Field & field = m_fields[f.field - &first_map_field];
 	assert(m_fields <= &field);
 	assert            (&field < m_fields + map.max_index());
-	Vision vision = field.vision;
-	if (vision == 0) vision = 1;
-	if (vision == 1) {
+	Vision fvision = field.vision;
+	if (fvision == 0) fvision = 1;
+	if (fvision == 1) {
 		if (not lasting) field.time_node_last_unseen = gametime;
 		discover_node(map, first_map_field, f, field);
 	}
-	vision += lasting;
-	field.vision = vision;
+	fvision += lasting;
+	field.vision = fvision;
 }
 
 
