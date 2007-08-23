@@ -1129,6 +1129,13 @@ void WLApplication::mainmenu()
 			mainmenu_multiplayer();
 			break;
 
+		case Fullscreen_Menu_Main::mm_replay:
+			m_game = new Game;
+			m_game->run_replay();
+			delete m_game;
+			m_game = 0;
+			break;
+
 		case Fullscreen_Menu_Main::mm_options: {
 				Section *s = g_options.pull_section("global");
 				Options_Ctrl om(s);

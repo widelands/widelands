@@ -171,6 +171,17 @@ int Interactive_Base::get_yres()
 }
 
 
+/**
+ * Called by \ref Game::postload at the end of the game loading
+ * sequence.
+ *
+ * Default implementation does nothing.
+ */
+void Interactive_Base::postload()
+{
+}
+
+
 /*
 ===============
 Interactive_Base::think

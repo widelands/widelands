@@ -45,9 +45,14 @@ public:
 	ReplayReader(Game* game, const std::string filename);
 	~ReplayReader();
 
+	PlayerCommand* GetPlayerCommand(uint time);
+	bool EndOfReplay();
+
 private:
 	Game* m_game;
 	StreamRead* m_cmdlog;
+
+	uint m_replaytime;
 };
 
 /**

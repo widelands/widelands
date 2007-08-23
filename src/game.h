@@ -30,8 +30,6 @@ struct Path;
 struct PlayerImmovable;
 namespace UI {struct ProgressWindow;};
 
-class ReplayWriter;
-
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
@@ -51,12 +49,14 @@ enum {
 class FileRead;
 class FileWrite;
 class Player;
-class Interactive_Player;
+class Interactive_Base;
 class Computer_Player;
 class Map_Loader;
 class BaseCommand;
 class PlayerCommand;
 class NetGame;
+class ReplayReader;
+class ReplayWriter;
 
 struct Game : public Editor_Game_Base {
 public:
@@ -90,6 +90,7 @@ public:
 	bool run_single_player ();
 	bool run_campaign ();
 	bool run_multi_player (NetGame*);
+	bool run_replay();
 
 	/**
 	 * Loads a game from filename and runs it. If filename is empty, a dialog is
@@ -158,7 +159,7 @@ public:
 		 const int num_soldiers,
 		 const int type);
 
-	Interactive_Player* get_ipl(void) { return ipl; }
+	Interactive_Player* get_ipl();
 
 	// If this has a netgame, return it
 	NetGame* get_netgame( void ) { return m_netgame; }
@@ -187,12 +188,12 @@ private:
 
 	RNG                            rng;
 
-	Interactive_Player           * ipl;
 	std::vector<Computer_Player *> cpl;
 	Cmd_Queue                      cmdqueue;
 
 	SaveHandler                    m_savehandler;
 
+	ReplayReader* m_replayreader;
 	ReplayWriter* m_replaywriter;
 
 	int m_realtime; // the real time (including) pauses in milliseconds

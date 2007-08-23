@@ -52,22 +52,27 @@ throw (_wexception)
 	const Uint16 packet_version = fr.Unsigned16();
 
 	if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
-		Interactive_Player* plr = game->get_ipl();
-
-		plr->set_player_number(fr.Unsigned8());
-
-		// Map Position
+		unsigned char player_number = fr.Unsigned8();
 		int x = fr.Unsigned16();
 		int y = fr.Unsigned16();
-		plr->set_viewpoint(Point(x, y));
+		uint display_flags = fr.Unsigned32();
 
-		plr->set_display_flags(fr.Unsigned32());
-
-		if (packet_version == 1) {
+		if (packet_version == 1)
 			game->m_last_stats_update = fr.Unsigned32();
 
-			plr->get_player()->ReadStatistics(fr, 0);
-			game->ReadStatistics(fr, 0);
+		if (Interactive_Player* plr = game->get_ipl()) {
+			plr->set_player_number(player_number);
+
+			// Map Position
+			plr->set_viewpoint(Point(x, y));
+
+			plr->set_display_flags(display_flags);
+
+			if (packet_version == 1) {
+
+				plr->get_player()->ReadStatistics(fr, 0);
+				game->ReadStatistics(fr, 0);
+			}
 		}
 
 		// DONE

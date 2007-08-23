@@ -25,8 +25,10 @@
 #include "fileread.h"
 #include "filewrite.h"
 #include "interactive_player.h"
+#include "interactive_spectator.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
+#include "fullscreen_menu_loadreplay.h"
 #include "fullscreen_menu_campaign_select.h"
 #include "game_loader.h"
 #include "game_tips.h"
@@ -53,8 +55,8 @@
 Game::Game() :
 m_state   (gs_none),
 m_speed   (1),
-ipl       (0),
 cmdqueue  (this),
+m_replayreader(0),
 m_replaywriter(0),
 m_realtime(WLApplication::get()->get_time())
 {
@@ -64,6 +66,10 @@ m_realtime(WLApplication::get()->get_time())
 
 Game::~Game()
 {
+	if (m_replayreader) {
+		delete m_replayreader;
+		m_replayreader = 0;
+	}
 	if (m_replaywriter) {
 		delete m_replaywriter;
 		m_replaywriter = 0;
@@ -79,6 +85,18 @@ bool Game::get_allow_cheats()
 {
 	return true;
 }
+
+
+/**
+ * \return a pointer to the \ref Interactive_Player if any.
+ * \note This function may return 0 (in particular, it will return 0 during
+ * playback)
+ */
+Interactive_Player* Game::get_ipl()
+{
+	return dynamic_cast<Interactive_Player*>(get_iabase());
+}
+
 
 /** Game::can_start()
  *
@@ -159,8 +177,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 			 m->get_scenario_player_name(i));
 	}
 
-	ipl = new Interactive_Player(*this, 0);
-	set_iabase(ipl);
+	set_iabase(new Interactive_Player(*this, 0));
 
 	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
@@ -197,8 +214,7 @@ bool Game::run_single_player ()
 	UI::ProgressWindow loaderUI(map().get_background());
 	GameTips tips (loaderUI);
 
-	ipl = new Interactive_Player(*this, 0);
-	set_iabase(ipl);
+	set_iabase(new Interactive_Player(*this, 0));
 
 	loaderUI.step(_("Loading a map"));
 	// Now first, completly load the map
@@ -274,8 +290,7 @@ bool Game::run_load_game(const bool is_splayer, std::string filename) {
 
 	m_state = gs_loading;
 
-	ipl = new Interactive_Player(*this, 0);
-	set_iabase(ipl);
+	set_iabase(new Interactive_Player(*this, 0));
 
 	Game_Loader gl(*fs, this);
 	loaderUI.step(_("Loading..."));
@@ -304,8 +319,7 @@ bool Game::run_multi_player (NetGame* ng)
 
 	m_state = gs_loading;
 
-	ipl = new Interactive_Player(*this, 0);
-	set_iabase(ipl);
+	set_iabase(new Interactive_Player(*this, 0));
 
 	// Now first, completly load the map
 	loaderUI.step(_("Loading a map"));
@@ -317,6 +331,36 @@ bool Game::run_multi_player (NetGame* ng)
 	m_netgame->begin_game();
 
 	return run(loaderUI);
+}
+
+
+/**
+ * Display the fullscreen menu to choose a replay,
+ * then start the interactive replay.
+ */
+bool Game::run_replay()
+{
+	Fullscreen_Menu_LoadReplay rm(this);
+
+	if (rm.run() <= 0)
+		return false;
+
+	log("Selected replay: %s\n", rm.filename().c_str());
+
+	UI::ProgressWindow loaderUI;
+	GameTips tips (loaderUI);
+
+	// We have to create an empty map, otherwise nothing will load properly
+	set_map(new Map);
+
+	m_state = gs_loading;
+	set_iabase(new Interactive_Spectator(this));
+
+	loaderUI.step(_("Loading..."));
+
+	m_replayreader = new ReplayReader(this, rm.filename());
+
+	return run(loaderUI, true);
 }
 
 
@@ -333,29 +377,33 @@ void Game::load_map (const char* filename)
  * Called for every game after loading (from a savegame or just from a map
  * during single/multiplayer/scenario).
  *
- * Ensure that players are setup properly (in particular AI and the
- * \ref Interactive_Player if any).
+ * Ensure that players and player controllers are setup properly (in particular
+ * AI and the \ref Interactive_Player if any).
  */
 void Game::postload()
 {
 	Editor_Game_Base::postload();
 
-	assert (ipl!=0);
+	assert(get_iabase() != 0);
 
-	// set up computer controlled players
-	const Player_Number nr_players = map().get_nrplayers();
-	for (Player_Number i = 1; i <= nr_players; ++i) {
-		Player* player = get_player(i);
+	// Set up computer controlled players
+	// unless we're watching a replay
+	if (Interactive_Player* ipl = dynamic_cast<Interactive_Player*>(get_iabase())) {
+		const Player_Number nr_players = map().get_nrplayers();
+		for (Player_Number i = 1; i <= nr_players; ++i) {
+			Player* player = get_player(i);
 
-		if (player) {
-			if (player->get_type() == Player::AI)
-				cpl.push_back (new Computer_Player(*this, i));
-			else if (player->get_type() == Player::Local)
-				ipl->set_player_number(i);
+			if (player) {
+				if (player->get_type() == Player::AI) {
+					cpl.push_back (new Computer_Player(*this, i));
+				} else if (player->get_type() == Player::Local) {
+					ipl->set_player_number(i);
+				}
+			}
 		}
 	}
 
-	ipl->postload();
+	get_iabase()->postload();
 }
 
 
@@ -391,7 +439,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 			plr->init(true);
 
 			if (plr->get_type() == Player::Local)
-				ipl->move_view_to(map().get_starting_pos(i));
+				get_ipl()->move_view_to(map().get_starting_pos(i));
 		}
 
 		// Prepare the map, set default textures
@@ -421,7 +469,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 	m_state = gs_running;
 
-	{
+	if (!m_replayreader) {
 		log("Starting replay writer\n");
 
 		// Derive a replay filename from the current time
@@ -445,12 +493,13 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		log("Replay writer has started\n");
 	}
 
-	ipl->run();
+	get_iabase()->run();
 
 	g_sound_handler.change_music("menu", 1000, 0);
 
 	cleanup_objects();
-	delete ipl;
+	delete get_iabase();
+	set_iabase(0);
 
 	for (unsigned int i=0; i<cpl.size(); i++)
 		delete cpl[i];
@@ -517,6 +566,19 @@ void Game::think(void)
 		// prevent frametime escalation in case the game logic is the performance bottleneck
 		if (frametime > 1000)
 			frametime = 1000;
+
+		if (m_replayreader) {
+			for(;;) {
+				PlayerCommand* cmd = m_replayreader->GetPlayerCommand(get_gametime() + frametime);
+				if (!cmd)
+					break;
+
+				enqueue_command(cmd);
+			}
+
+			if (m_replayreader->EndOfReplay())
+				dynamic_cast<Interactive_Spectator*>(get_iabase())->end_of_game();
+		}
 
 		cmdqueue.run_queue(frametime, get_game_time_pointer());
 

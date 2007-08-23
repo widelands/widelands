@@ -48,37 +48,44 @@ multiplayer
  &Fullscreen_Menu_Main::end_modal, this, mm_multiplayer,
  _("Multi Player")),
 
-options
+replay
 (this,
  100, 220, 220, 26,
+ 3,
+ &Fullscreen_Menu_Main::end_modal, this, mm_replay,
+ _("Watch Replay")),
+
+options
+(this,
+ 100, 260, 220, 26,
  3,
  &Fullscreen_Menu_Main::end_modal, this, mm_options,
  _("Options")),
 
 editor
 (this,
- 100, 260, 220, 26,
+ 100, 300, 220, 26,
  3,
  &Fullscreen_Menu_Main::end_modal, this, mm_editor,
  _("Editor")),
 
 readme
 (this,
- 100, 300, 220, 26,
+ 100, 340, 220, 26,
  3,
  &Fullscreen_Menu_Main::end_modal, this, mm_readme,
  _("View Readme")),
 
 license
 (this,
- 100, 340, 220, 26,
+ 100, 380, 220, 26,
  3,
  &Fullscreen_Menu_Main::end_modal, this, mm_license,
  _("License")),
 
 exit
 (this,
- 100, 400, 220, 26,
+ 100, 440, 220, 26,
  3,
  &Fullscreen_Menu_Main::end_modal, this, mm_exit,
  _("Exit Game")),

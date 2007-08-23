@@ -87,7 +87,7 @@ void Map_View::draw(RenderTarget* dst)
 			return;
 
 		// Check if the view has changed in a game
-		if (dynamic_cast<Interactive_Player &>(intbase()).get_player()->has_view_changed())
+		if (intbase().get_player() && intbase().get_player()->has_view_changed())
 			m_complete_redraw_needed = true;
 	}
 

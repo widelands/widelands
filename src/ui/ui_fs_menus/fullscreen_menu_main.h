@@ -32,6 +32,7 @@
 class Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 	UI::IDButton<Fullscreen_Menu_Main, int> singleplayer;
 	UI::IDButton<Fullscreen_Menu_Main, int> multiplayer;
+	UI::IDButton<Fullscreen_Menu_Main, int> replay;
 	UI::IDButton<Fullscreen_Menu_Main, int> options;
 	UI::IDButton<Fullscreen_Menu_Main, int> editor;
 	UI::IDButton<Fullscreen_Menu_Main, int> readme;
@@ -41,15 +42,16 @@ class Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 	UI::Textarea                            copyright;
 public:
 	Fullscreen_Menu_Main();
-   enum {
-      mm_singleplayer,
-      mm_multiplayer,
-      mm_options,
-      mm_editor,
-      mm_readme,
-      mm_license,
-      mm_exit
-   };
+	enum {
+		mm_singleplayer,
+		mm_multiplayer,
+		mm_replay,
+		mm_options,
+		mm_editor,
+		mm_readme,
+		mm_license,
+		mm_exit
+	};
 };
 
 #endif /* __S__MAINMENUE_H */

@@ -61,6 +61,7 @@ struct Interactive_Base : public Map_View {
 
       // logic handler func
       void think();
+	virtual void postload();
 
 	const Node_and_Triangle<> & get_sel_pos() const {return m_sel.pos;}
 	bool get_sel_freeze() const {return m_sel.freeze;}
