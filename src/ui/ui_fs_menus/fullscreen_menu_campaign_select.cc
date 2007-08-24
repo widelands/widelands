@@ -40,38 +40,38 @@ std::string campmapfile;
  * Loads a list of all visible campaigns
  */
 Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
-Fullscreen_Menu_Base("choosemapmenu.jpg"),
+	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
-// Text
-title (this, MENU_XRES / 2, 90, _("Select a campaign"), Align_HCenter),
+	// Text
+	title (this, MENU_XRES / 2, 90, _("Select a campaign"), Align_HCenter),
 
-// List of visible, available campaigns
-list(this, 15, 205, 455, 365),
+	// List of visible, available campaigns
+	list(this, 15, 205, 455, 365),
 
-// Info fields
-label_campname	(this, 480, 205, _("Campaign:")),
-tacampname	(this, 490, 225, ""),
-label_difficulty(this, 480, 255, _("Difficulty:")),
-tadifficulty	(this, 490, 275, ""),
-label_campdescr	(this, 480, 305, _("Description:")),
-tacampdescr	(this, 490, 330, 290, 190, ""),
+	// Info fields
+	label_campname	(this, 480, 205, _("Campaign:")),
+	tacampname	(this, 490, 225, ""),
+	label_difficulty(this, 480, 255, _("Difficulty:")),
+	tadifficulty	(this, 490, 275, ""),
+	label_campdescr	(this, 480, 305, _("Description:")),
+	tacampdescr	(this, 490, 330, 290, 190, ""),
 
-// UI::Buttons
-b_ok
-(this, 490, 540, 142, 26, 2,
-&Fullscreen_Menu_CampaignSelect::clicked_ok, this,
-_("OK"), std::string(), false),
+	// UI::Buttons
+	b_ok
+	(this, 490, 540, 142, 26, 2,
+	&Fullscreen_Menu_CampaignSelect::clicked_ok, this,
+	_("OK"), std::string(), false),
 
-back
-(this, 637, 540, 143, 26, 2,
-&Fullscreen_Menu_CampaignSelect::clicked_back, this,
-_("Back"), std::string(), true)
+	back
+	(this, 637, 540, 143, 26, 2,
+	&Fullscreen_Menu_CampaignSelect::clicked_back, this,
+	_("Back"), std::string(), true)
 
 {
-title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
-list.double_clicked.set(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
-fill_list();
+	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
+	list.double_clicked.set(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
+	fill_list();
 }
 
 
@@ -80,8 +80,8 @@ fill_list();
  */
 void Fullscreen_Menu_CampaignSelect::clicked_back()
 {
-end_modal(1);
-campaign=-1;
+	end_modal(1);
+	campaign=-1;
 }
 
 
@@ -90,142 +90,155 @@ campaign=-1;
  */
 void Fullscreen_Menu_CampaignSelect::clicked_ok()
 {
-get_campaign();
-end_modal(1);
+	get_campaign();
+	end_modal(1);
 }
 
-int Fullscreen_Menu_CampaignSelect::get_campaign() {
-return campaign;
+int Fullscreen_Menu_CampaignSelect::get_campaign()
+{
+	return campaign;
 }
 
 
 /**
  * an entry of campaignlist got selected.
  */
-void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i) {
-if (list.get_selected()) { //gets false, if the selected entry has no value.
+void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
+{
+	if (list.get_selected()) { //gets false, if the selected entry has no value.
 
-campaign=i;
+		campaign=i;
 
-// enable OK button
-b_ok.set_enabled(true);
+		// enable OK button
+		b_ok.set_enabled(true);
 
-// predefine the used variables
-char cname[12];
-char cdifficulty[12];
-char cdescription[12];
-std::string difficulty;
+		// predefine the used variables
+		char cname[12];
+		char cdifficulty[12];
+		char cdescription[12];
+		std::string difficulty;
 
-// Load maps textdomain to translate the strings from cconfig
-i18n::grab_textdomain("maps");
+		// Load maps textdomain to translate the strings from cconfig
+		i18n::grab_textdomain("maps");
 
-// read in the campaign config
-Profile prof("campaigns/cconfig");
-Section *s;
-s = prof.get_section("global");
+		// read in the campaign config
+		Profile prof("campaigns/cconfig");
+		Section *s;
+		s = prof.get_section("global");
 
-// Release maps texdoamin
-i18n::release_textdomain();
+		// Release maps texdoamin
+		i18n::release_textdomain();
 
-// add I to basic section name
-sprintf(cname, "campname%i", i);
-sprintf(cdifficulty, "campdiff%i", i);
-sprintf(cdescription, "campdesc%i", i);
+		// add I to basic section name
+		sprintf(cname, "campname%i", i);
+		sprintf(cdifficulty, "campdiff%i", i);
+		sprintf(cdescription, "campdesc%i", i);
 
-// Convert difficulty level to something understandable
-int dif = s->get_int(cdifficulty);
-if (dif==1) {
-	difficulty=_("Easy living").c_str();}
-else {
- if (dif==2) {
-	difficulty=_("Be vigilant").c_str();}
- else {
-  if (dif==3) {
-	difficulty=_("Hard struggle").c_str();}
-  else {
-	difficulty=_("[No value found]").c_str();}}}
+		// Convert difficulty level to something understandable
+		int dif = s->get_int(cdifficulty);
+		if (dif==1) {
+			difficulty=_("Easy living").c_str();
+		} else {
+			if (dif==2) {
+				difficulty=_("Be vigilant").c_str();
+			} else {
+				if (dif==3) {
+					difficulty=_("Hard struggle").c_str();
+				} else {
+					difficulty=_("[No value found]").c_str();
+				}
+			}
+		}
 
-// Print informations
-tacampname.set_text(s->get_string(cname, _("[No value found]").c_str()));
-tadifficulty.set_text(difficulty);
-tacampdescr.set_text(s->get_string(cdescription, _("[No value found]").c_str()));
+		// Print informations
+		tacampname.set_text(s->get_string(cname, _("[No value found]").c_str()));
+		tadifficulty.set_text(difficulty);
+		tacampdescr.set_text(s->get_string(cdescription, _("[No value found]").c_str()));
 
-} else { // normally never here
-	b_ok.set_enabled(false);
-	tacampname  .set_text(_("[Invalid entry]").c_str());
-	tadifficulty.set_text("");
-	tacampdescr .set_text("");}
+	} else { // normally never here
+		b_ok.set_enabled(false);
+		tacampname  .set_text(_("[Invalid entry]").c_str());
+		tadifficulty.set_text("");
+		tacampdescr .set_text("");
+	}
 }
 
 
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_CampaignSelect::double_clicked(uint) {
-clicked_ok();
+void Fullscreen_Menu_CampaignSelect::double_clicked(uint)
+{
+	clicked_ok();
 }
 
 
 /**
  * fill the campaign list
  */
-void Fullscreen_Menu_CampaignSelect::fill_list(void) {
-// Load maps textdomain to translate the strings from cconfig
-i18n::grab_textdomain("maps");
+void Fullscreen_Menu_CampaignSelect::fill_list(void)
+{
 
-// read in the campaign config
-Profile prof("campaigns/cconfig");
-Section *s;
-s = prof.get_section("global");
+	// Load maps textdomain to translate the strings from cconfig
+	i18n::grab_textdomain("maps");
 
-// Release maps texdoamin
-i18n::release_textdomain();
+	// read in the campaign config
+	Profile prof("campaigns/cconfig");
+	Section *s;
+	s = prof.get_section("global");
 
-int i = 0;
+	// Release maps texdoamin
+	i18n::release_textdomain();
 
-// predefine variables, used in while-loop
-char cname[12];
-char csection[12];
-char cdifficulty[12];
-char cvisible[12];
-std::string difficulty;
+	int i = 0;
 
-sprintf(csection, "campsect%i", i);
-while (s->get_string(csection)) {
-	// add i to the other strings the UI will search for
-	sprintf(cname, "campname%i", i);
-	sprintf(cdifficulty, "campdiff%i", i);
-	sprintf(cvisible, "campvisi%i", i);
+	// predefine variables, used in while-loop
+	char cname[12];
+	char csection[12];
+	char cdifficulty[12];
+	char cvisible[12];
+	std::string difficulty;
 
-// Only list visible campaigns
-if (s->get_int(cvisible) == 1) {
+	sprintf(csection, "campsect%i", i);
+	while (s->get_string(csection)) {
+		// add i to the other strings the UI will search for
+		sprintf(cname, "campname%i", i);
+		sprintf(cdifficulty, "campdiff%i", i);
+		sprintf(cvisible, "campvisi%i", i);
 
-	// convert difficulty level to the fitting picture
-	int dif = s->get_int(cdifficulty);
-	if (dif==1) {
-		difficulty="pics/big.png";}
-	else {
-	 if (dif==2) {
-		difficulty="pics/medium.png";}
-	 else {
-	  if (dif==3) {
-		difficulty="pics/small.png";}
-	  else {
-		difficulty="pics/novalue.png";}}}
+		// Only list visible campaigns
+		if (s->get_int(cvisible) == 1) {
 
-list.add(
-	s->get_string(cname, _("[No value found]").c_str()),
-	s->get_string(csection),
-	g_gr->get_picture(PicMod_Game,difficulty.c_str()));
+			// convert difficulty level to the fitting picture
+			int dif = s->get_int(cdifficulty);
+			if (dif==1) {
+				difficulty="pics/big.png";
+			} else {
+				if (dif==2) {
+					difficulty="pics/medium.png";
+				} else {
+					if (dif==3) {
+						difficulty="pics/small.png";
+					} else {
+						difficulty="pics/novalue.png";
+					}
+				}
+			}
 
-} // if (s->get_int(cvisible) == 1)
+			list.add(
+				s->get_string(cname, _("[No value found]").c_str()),
+				s->get_string(csection),
+				g_gr->get_picture(PicMod_Game,difficulty.c_str()));
 
-i++;
-// increase csection
-sprintf(csection, "campsect%i", i);
-} // while (s->get_string(csection))
+		} // if (s->get_int(cvisible) == 1)
 
-if (list.size()) list.select(0);
+		i++;
+
+		// increase csection
+		sprintf(csection, "campsect%i", i);
+	} // while (s->get_string(csection))
+
+	if (list.size()) list.select(0);
 
 }
 
@@ -240,47 +253,49 @@ if (list.size()) list.select(0);
  * Loads a list of all visible maps of selected campaign and let's the user choose one.
  */
 Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
-Fullscreen_Menu_Base("choosemapmenu.jpg"),
-// Text
-title
-(this, MENU_XRES / 2, 90, _("Choose your map!"), Align_HCenter),
+	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
-// List of visible, available campaigns
-list(this, 15, 205, 455, 365),
+	// Text
+	title
+	(this, MENU_XRES / 2, 90, _("Choose your map!"), Align_HCenter),
 
-// Info fields
-label_mapname   (this, 480, 205, _("Name:")),
-tamapname       (this, 490, 225, ""),
-label_author    (this, 480, 255, _("Author:")),
-taauthor        (this, 490, 275, ""),
-label_mapdescr  (this, 480, 305, _("Description:")),
-tamapdescr      (this, 490, 330, 290, 190, ""),
+	// List of visible, available campaigns
+	list(this, 15, 205, 455, 365),
 
-// UI::Buttons
-b_ok
-(this, 490, 540, 142, 26, 2,
-&Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
-_("OK"), std::string(), false),
+	// Info fields
+	label_mapname   (this, 480, 205, _("Name:")),
+	tamapname       (this, 490, 225, ""),
+	label_author    (this, 480, 255, _("Author:")),
+	taauthor        (this, 490, 275, ""),
+	label_mapdescr  (this, 480, 305, _("Description:")),
+	tamapdescr      (this, 490, 330, 290, 190, ""),
 
-back
-(this, 637, 540, 143, 26, 2,
-&Fullscreen_Menu_CampaignMapSelect::clicked_back, this,
-_("Back"), std::string(), true)
+	// UI::Buttons
+	b_ok
+	(this, 490, 540, 142, 26, 2,
+	&Fullscreen_Menu_CampaignMapSelect::clicked_ok, this,
+	_("OK"), std::string(), false),
+
+	back
+	(this, 637, 540, 143, 26, 2,
+	&Fullscreen_Menu_CampaignMapSelect::clicked_back, this,
+	_("Back"), std::string(), true)
 
 {
-title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
-list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
-fill_list();
+	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
+	list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
+	fill_list();
 }
+
 
 /**
  * Back was clicked.
  */
 void Fullscreen_Menu_CampaignMapSelect::clicked_back()
 {
-end_modal(1);
-campaign=-1;
+	end_modal(1);
+	campaign=-1;
 }
 
 
@@ -289,117 +304,128 @@ campaign=-1;
  */
 void Fullscreen_Menu_CampaignMapSelect::clicked_ok()
 {
-end_modal(1);
+	end_modal(1);
 }
 
-std::string Fullscreen_Menu_CampaignMapSelect::get_map() {
-return campmapfile;
+
+std::string Fullscreen_Menu_CampaignMapSelect::get_map()
+{
+	return campmapfile;
 }
+
 
 /**
  * an entry of the maplist got selected.
  */
-void Fullscreen_Menu_CampaignMapSelect::map_selected(uint i) {
-if (list.get_selected()) { //gets false, if the selected entry has no value.
-// Load maps textdomain to translate the strings from cconfig
-i18n::grab_textdomain("maps");
+void Fullscreen_Menu_CampaignMapSelect::map_selected(uint i)
+{
+	if (list.get_selected()) { //gets false, if the selected entry has no value.
+		// Load maps textdomain to translate the strings from cconfig
+		i18n::grab_textdomain("maps");
 
-// read in the campaign config
-Profile prof("campaigns/cconfig");
-Section *s;
-s = prof.get_section("global");
+		// read in the campaign config
+		Profile prof("campaigns/cconfig");
+		Section *s;
+		s = prof.get_section("global");
 
-// Release maps texdoamin
-i18n::release_textdomain();
+		// Release maps texdoamin
+		i18n::release_textdomain();
 
-// Get section of campaign-maps
-char csection[12];
-sprintf(csection, "campsect%i", campaign);
-std::string campsection = s->get_string(csection);
-std::string mapsection;
-char number[4];
+		// Get section of campaign-maps
+		char csection[12];
+		sprintf(csection, "campsect%i", campaign);
+		std::string campsection = s->get_string(csection);
+		std::string mapsection;
+		char number[4];
 
-// Create the entry we use to load the section of the map
-mapsection = campsection;
-sprintf(number, "%02i", i);
-mapsection += number;
+		// Create the entry we use to load the section of the map
+		mapsection = campsection;
+		sprintf(number, "%02i", i);
+		mapsection += number;
 
-// Load the section of the map
-s = prof.get_section(mapsection.c_str());
+		// Load the section of the map
+		s = prof.get_section(mapsection.c_str());
 
-// Put the path to the map into campmapfile
-campmapfile=s->get_string("path");
+		// Put the path to the map into campmapfile
+		campmapfile=s->get_string("path");
 
-// enable OK button
-b_ok.set_enabled(true);
+		// enable OK button
+		b_ok.set_enabled(true);
 
-// Print informations
-tamapname .set_text(s->get_string("name", _("[No value found]").c_str()));
-taauthor  .set_text(s->get_string("author", _("[No value found]").c_str()));
-tamapdescr.set_text(s->get_string("descr", _("[No value found]").c_str()));
-} else { // normally never here
-	b_ok.set_enabled(false);
-	tamapname .set_text(_("[Invalid entry]").c_str());
-	taauthor  .set_text("");
-	tamapdescr.set_text("");}
+		// Print informations
+		tamapname .set_text(s->get_string("name", _("[No value found]").c_str()));
+		taauthor  .set_text(s->get_string("author", _("[No value found]").c_str()));
+		tamapdescr.set_text(s->get_string("descr", _("[No value found]").c_str()));
+
+	} else { // normally never here
+		b_ok.set_enabled(false);
+		tamapname .set_text(_("[Invalid entry]").c_str());
+		taauthor  .set_text("");
+		tamapdescr.set_text("");
+	}
 }
 
 
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint) {
-clicked_ok();
+void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint)
+{
+	clicked_ok();
 }
 
 
 /**
  * fill the campaign-map list
  */
-void Fullscreen_Menu_CampaignMapSelect::fill_list(void) {
-// Load maps textdomain to translate the strings from cconfig
-i18n::grab_textdomain("maps");
+void Fullscreen_Menu_CampaignMapSelect::fill_list(void)
+{
+	// Load maps textdomain to translate the strings from cconfig
+	i18n::grab_textdomain("maps");
 
-// read in the campaign config
-Profile prof("campaigns/cconfig");
-Section *s;
-s = prof.get_section("global");
+	// read in the campaign config
+	Profile prof("campaigns/cconfig");
+	Section *s;
+	s = prof.get_section("global");
 
-// Release maps texdoamin
-i18n::release_textdomain();
+	// Release maps texdoamin
+	i18n::release_textdomain();
 
-// Set title of title of the page
-char cname[12];
-sprintf(cname, "campname%i", campaign);
-title.set_text(s->get_string(cname));
+	// Set title of title of the page
+	char cname[12];
+	sprintf(cname, "campname%i", campaign);
+	title.set_text(s->get_string(cname));
 
-// Get section of campaign-maps
-char csection[12];
-sprintf(csection, "campsect%i", campaign);
-std::string campsection = s->get_string(csection);
-std::string mapsection;
-int i = 0;
-char number[4];
+	// Get section of campaign-maps
+	char csection[12];
+	sprintf(csection, "campsect%i", campaign);
+	std::string campsection = s->get_string(csection);
+	std::string mapsection;
+	int i = 0;
+	char number[4];
 
-// Create the entry we use to load the section of the map
-mapsection = campsection;
-sprintf(number, "%02i", i);
-mapsection += number;
-
-// Add all visible entries to the list.
-while ((s = prof.get_section(mapsection.c_str()))){
-	if (s->get_int("visible")==1){
-	list.add(
-		s->get_string("name", "[???]"),
-		s->get_string("path"),
-		g_gr->get_picture(PicMod_Game,"pics/ls_wlmap.png"));}
-
-	i++;
-
-	// increase mapsection
+	// Create the entry we use to load the section of the map
 	mapsection = campsection;
 	sprintf(number, "%02i", i);
-	mapsection += number;}
+	mapsection += number;
 
-if (list.size()) list.select(0);
+	// Add all visible entries to the list.
+	while((s = prof.get_section(mapsection.c_str()))) {
+		if (s->get_int("visible") == 1){
+		list.add(
+			s->get_string("name", "[???]"),
+			s->get_string("path"),
+			g_gr->get_picture(PicMod_Game,"pics/ls_wlmap.png"));
+		}
+
+		i++;
+
+		// increase mapsection
+		mapsection = campsection;
+		sprintf(number, "%02i", i);
+		mapsection += number;
+	}
+
+	if (list.size()) list.select(0);
+
 }
