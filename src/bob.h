@@ -20,8 +20,6 @@
 #ifndef __BOB_H
 #define __BOB_H
 
-#include <string>
-
 #include "animation.h"
 
 
@@ -38,22 +36,18 @@ class Tribe_Descr;
  */
 
 struct BobProgramBase {
-      BobProgramBase(void) { }
-      virtual~ BobProgramBase(void) { }
-
-      virtual std::string get_name(void) const =0;
+	virtual ~BobProgramBase() {}
+	virtual std::string get_name() const = 0;
 };
 
 
 /**
  * Bobs are moving map objects: Animals, humans, ships...
  */
-class Bob : public Map_Object
-{
+struct Bob : public Map_Object {
 	friend class Widelands_Map_Bobdata_Data_Packet;
 	friend class Widelands_Map_Bob_Data_Packet;
 
-	public:
 		struct State;
 		typedef void (Bob::*Ptr)(Game*, State*);
 		enum Type {CRITTER,	WORKER};
@@ -66,18 +60,19 @@ class Bob : public Map_Object
 			Ptr mask;
 		};
 
-		struct State {
-			State(const Task * const the_task = 0): task    (the_task),
-													ivar1   (0),
-													ivar2   (0),
-													ivar3   (0),
-													coords  (Coords::Null()),
-													diranims(0),
-													path    (0),
-													transfer(0),
-													route   (0),
-													program (0)
-													{}
+	struct State {
+		State(const Task * const the_task = 0) :
+			task    (the_task),
+			ivar1   (0),
+			ivar2   (0),
+			ivar3   (0),
+			coords  (Coords::Null()),
+			diranims(0),
+			path    (0),
+			transfer(0),
+			route   (0),
+			program (0)
+		{}
 
 			const Task           * task;
 			int                    ivar1;
@@ -97,7 +92,6 @@ class Bob : public Map_Object
 		struct Descr: public Map_Object_Descr {
 			friend class Widelands_Map_Bobdata_Data_Packet; // To write it to a file
 
-			public:
 				Descr(const Tribe_Descr * const tribe,
 				      const std::string & bob_name): m_name(bob_name),
                                                      m_owner_tribe(tribe)
