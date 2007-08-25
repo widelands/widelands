@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,11 +32,6 @@
 
 
 static const int CARRIER_SPAWN_INTERVAL = 2500;
-
-
-WarehouseSupply::WarehouseSupply(Warehouse* wh)
-	: m_economy (0), m_warehouse(wh)
-{}
 
 
 WarehouseSupply::~WarehouseSupply()

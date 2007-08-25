@@ -124,7 +124,7 @@ WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
 struct WarehouseSupply : public Supply {
-	WarehouseSupply(Warehouse* wh);
+	WarehouseSupply(Warehouse * const wh) : m_economy(0), m_warehouse(wh) {}
 	virtual ~WarehouseSupply();
 
 	void set_economy(Economy* e);
