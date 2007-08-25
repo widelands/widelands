@@ -35,7 +35,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		const EncodeData* encdata);
 	virtual Building * create_object() const;
 
-	virtual bool is_only_production_site(void) { return false; }
+	virtual bool is_only_production_site() const throw () {return false;}
 
 	virtual uint get_conquers() const {return m_conquer_radius;}
 	int get_max_number_of_soldiers () const throw () {return m_num_soldiers;}

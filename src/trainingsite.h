@@ -32,9 +32,6 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	virtual void parse(const char *directory, Profile * prof, const EncodeData * encdata);
 	virtual Building * create_object() const;
 
-	virtual bool is_only_production_site(void) {
-		return true;
-	}
 	int get_max_number_of_soldiers() const throw () {return m_num_soldiers;}
 	bool get_train_hp     () const throw () {return m_train_hp;}
 	bool get_train_attack () const throw () {return m_train_attack;}

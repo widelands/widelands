@@ -986,7 +986,7 @@ bool ProductionSite::fetch_from_flag(Game* g)
  * theoretically start working (if all workers
  * are present)
  */
-bool ProductionSite::can_start_working()
+bool ProductionSite::can_start_working() const throw ()
 {
 	return not m_worker_requests.size();
 }

@@ -73,7 +73,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	const ProductionProgram * get_program(const std::string &) const;
 	const ProgramMap & get_all_programs() const throw () {return m_programs;}
 
-	virtual bool is_only_production_site(void) { return true; }
+	virtual bool is_only_production_site() const throw () {return true;}
 
 
 private:
@@ -140,7 +140,7 @@ protected:
 	void add_statistics_value(bool val);
 
 	void calc_statistics();
-	bool can_start_working(void);
+	bool can_start_working() const throw ();
 	void set_post_timer (int t) { m_post_timer = t; }
 
 protected:  // TrainingSite must have access to this stuff
