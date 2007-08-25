@@ -96,76 +96,121 @@ extern const Map_Object_Descr g_road_descr;
 static inline const Map_Object_Descr * read_unseen_immovable
 (const Editor_Game_Base & egbase,
  const World            & world,
- const Player_Number      plnum,               //  only for error messages
- const TCoords<>          tcoords,             //  only for error messages
+ const Player_Number      plnum,                    //  only for error messages
+ const TCoords<>          tcoords,                  //  only for error messages
  BitInBuffer<2>         & immovable_kinds_file,
  FileRead               & immovables_file,
- const char             & immovables_filename) //  only for error messages
+ const char             & immovable_kinds_filename, //  only for error messages
+ const char             & immovables_filename)      //  only for error messages
 {
 	const Map_Object_Descr * map_object_descr;
-	switch (immovable_kinds_file.get()) {
-	case 0:  //  The player sees no immovable.
-		map_object_descr = 0; break;
-	case 1: {//  The player sees a tribe or world immovable.
-		const FileRead::Pos tribename_filepos = immovables_file.GetPos();
-		const char & tribename = *immovables_file.CString();
-		const char & type_name = *immovables_file.CString();
-		if (tribename) // it is a tribe immovable
-			if
-				(const Tribe_Descr * const owner_tribe =
-				 egbase.get_tribe(&tribename))
-			{
-				const int index = owner_tribe->get_immovable_index(&type_name);
+	try {
+		switch (immovable_kinds_file.get()) {
+		case 0:  //  The player sees no immovable.
+			map_object_descr = 0; break;
+		case 1: {//  The player sees a tribe or world immovable.
+			const FileRead::Pos tribename_filepos = immovables_file.GetPos();
+			const char * tribename; try {tribename = immovables_file.CString();}
+			catch (const FileRead::File_Boundary_Exceeded) {
+				throw wexception
+					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%u: (%i, %i) t = %u: unexpected end of file while "
+					 "reading immovable tribe name",
+					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+					 tcoords.x, tcoords.y, tcoords.t);
+			}
+			const char * type_name; try {type_name = immovables_file.CString();}
+			catch (const FileRead::File_Boundary_Exceeded) {
+				throw wexception
+					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%u: (%i, %i) t = %u: unexpected end of file while "
+					 "reading immovable type name",
+					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+					 tcoords.x, tcoords.y, tcoords.t);
+			}
+			if (*tribename) // it is a tribe immovable
+				if
+					(const Tribe_Descr * const owner_tribe =
+					 egbase.get_tribe(tribename))
+				{
+					const int index = owner_tribe->get_immovable_index(type_name);
+					if (index == -1) throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+						 "in \"%s\":%u: (%i, %i) t = %u: player thinks that there is "
+						 "an immovable, defined in the tribe \"%s\", of the "
+						 "nonexistent type \"%s\" at this location",
+						 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+						 tcoords.x, tcoords.y, tcoords.t, tribename, type_name);
+					map_object_descr = owner_tribe->get_immovable_descr(index);
+				} else throw wexception
+					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is an "
+					 "immovable, defined in the nonexistent tribe \"%s\" at this "
+					 "location",
+					 plnum, &immovables_filename, tribename_filepos,
+					 tcoords.x, tcoords.y, tcoords.t, tribename);
+			else {//  it is a world immovable
+				const int index = world.get_immovable_index(type_name);
 				if (index == -1) throw wexception
 					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%i: (%i, %i) t = %u: player thinks that there is an "
-					 "immovable, defined in the tribe \"%s\", of the nonexistent "
+					 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is an "
+					 "immovable, defined in the world (%s), of the nonexistent type "
+					 "\"%s\" at this location",
+					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+					 tcoords.x, tcoords.y, tcoords.t, world.get_name(), type_name);
+				map_object_descr = world.get_immovable_descr(index);
+			}
+		} break;
+		case 2:  //  The player sees a flag.
+			map_object_descr = &g_flag_descr; break;
+		case 3: {//  The player sees a building.
+			const char * tribename; try {tribename = immovables_file.CString();}
+			catch (const FileRead::File_Boundary_Exceeded) {
+				throw wexception
+					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%u: (%i, %i) t = %u: unexpected end of file while "
+					 "reading building tribe name",
+					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+					 tcoords.x, tcoords.y, tcoords.t);
+			}
+			if
+				(const Tribe_Descr * const owner_tribe =
+				 egbase.get_tribe(tribename))
+			{
+				const char *  buildname;
+				try {buildname = immovables_file.CString();}
+				catch (const FileRead::File_Boundary_Exceeded) {
+					throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+						 "in \"%s\":%u: (%i, %i) t = %u: unexpected end of file "
+						 "while reading building name",
+						 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+						 tcoords.x, tcoords.y, tcoords.t);
+				}
+				const int index = owner_tribe->get_building_index(buildname);
+				if (index == -1) throw wexception
+					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
+					 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is a "
+					 "building, defined in the tribe \"%s\", of the nonexistent "
 					 "type \"%s\" at this location",
 					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-					 tcoords.x, tcoords.y, tcoords.t, &tribename, &type_name);
-				map_object_descr = owner_tribe->get_immovable_descr(index);
+					 tcoords.x, tcoords.y, tcoords.t, tribename, buildname);
+				map_object_descr = owner_tribe->get_building_descr(index);
 			} else throw wexception
 				("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-				 "\"%s\":%i: (%i, %i) t = %u: player thinks that there is an "
-				 "immovable, defined in the nonexistent tribe \"%s\" at this "
+				 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is a "
+				 "building, defined in the nonexistent tribe \"%s\" at this "
 				 "location",
-				 plnum, &immovables_filename, tribename_filepos,
-				 tcoords.x, tcoords.y, tcoords.t, &tribename);
-		else {//  it is a world immovable
-			const int index = world.get_immovable_index(&type_name);
-			if (index == -1) throw wexception
-				("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-				 "\"%s\":%i: (%i, %i) t = %u: player thinks that there is an "
-				 "immovable, defined in the world (%s), of the nonexistent type "
-				 "\"%s\" at this location",
 				 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-				 tcoords.x, tcoords.y, tcoords.t, world.get_name(), &type_name);
-			map_object_descr = world.get_immovable_descr(index);
+				 tcoords.x, tcoords.y, tcoords.t, tribename);
 		}
-	} break;
-	case 2:  //  The player sees a flag.
-		map_object_descr = &g_flag_descr; break;
-	case 3: {//  The player sees a building.
-		const char & tribename = *immovables_file.CString();
-		if (const Tribe_Descr * const owner_tribe = egbase.get_tribe(&tribename))
-		{
-			const char & buildingname = *immovables_file.CString();
-			const int index = owner_tribe->get_building_index(&buildingname);
-			if (index == -1) throw wexception
-				("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-				 "\"%s\":%i: (%i, %i) t = %u: player thinks that there is a "
-				 "building, defined in the tribe \"%s\", of the nonexistent type "
-				 "\"%s\" at this location",
-				 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-				 tcoords.x, tcoords.y, tcoords.t, &tribename, &buildingname);
-			map_object_descr = owner_tribe->get_building_descr(index);
-		} else throw wexception
-			("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-			 "\"%s\":%i: (%i, %i) t = %u: player thinks that there is a building, "
-			 "defined in the nonexistent tribe \"%s\" at this location",
-			 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-			 tcoords.x, tcoords.y, tcoords.t, &tribename);
-	}
+		}
+	} catch (const FileRead::File_Boundary_Exceeded) {
+		throw wexception
+			("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+			 "in \"%s\": (%i, %i) t = %u: unexpected end of file while reading "
+			 "immovable kind",
+			 plnum, &immovable_kinds_filename, tcoords.x, tcoords.y, tcoords.t);
 	}
 	return map_object_descr;
 }
@@ -407,10 +452,27 @@ throw (_wexception)
 				case 1: {
 					//  The player has seen the node but does not see it now. Load
 					//  his information about the node from file.
-					f_player_field.time_node_last_unseen =
-						unseen_times_file.Unsigned32();
+					try {
+						f_player_field.time_node_last_unseen =
+							unseen_times_file.Unsigned32();
+					} catch (const FileRead::File_Boundary_Exceeded) {
+						throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: "
+						 "player %u: in \"%s\":%u: node (%i, %i): unexpected end of "
+						 "file while reading time_node_last_unseen",
+						 plnum, unseen_times_filename, unseen_times_file.GetPrevPos(),
+						 f.x, f.y);
+					}
 
-					owner = owners_file.Unsigned8();
+					try {owner = owners_file.Unsigned8();}
+					catch (const FileRead::File_Boundary_Exceeded) {
+						throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: "
+						 "player %u: in \"%s\":%u: node (%i, %i): unexpected end of "
+						 "file while reading owner",
+						 plnum, unseen_times_filename, unseen_times_file.GetPrevPos(),
+						 f.x, f.y);
+					}
 					if (nr_players < owner) throw wexception
 						("Widelands_Map_Players_View_Data_Packet::Read: "
 						 "player %u: in \"%s\":%i & 0xf: node (%i, %i): Player "
@@ -422,8 +484,8 @@ throw (_wexception)
 					f_player_field.map_object_descr[TCoords<>::None] =
 						read_unseen_immovable
 						(*egbase, world, plnum, TCoords<>(f, TCoords<>::None),
-						 node_immovable_kinds_file,
-						 node_immovables_file, *node_immovables_filename);
+						 node_immovable_kinds_file, node_immovables_file,
+						 *node_immovable_kinds_filename, *node_immovables_filename);
 				}
 					break;
 				default:
@@ -466,12 +528,20 @@ throw (_wexception)
 				} else if (f_everseen | bl_everseen | br_everseen) {
 					//  The player has seen the D triangle but does not see it now.
 					//  Load his information about the triangle from file.
-					f_player_field.terrains.d = terrains_file.get();
+					try {f_player_field.terrains.d = terrains_file.get();}
+					catch (const FileRead::File_Boundary_Exceeded) {
+						throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: "
+						 "player %u: in \"%s\": node (%i, %i) t = D: unexpected end "
+						 "of file while reading terrain",
+						 plnum, terrains_filename, f.x, f.y);
+					}
 					f_player_field.map_object_descr[TCoords<>::D] =
 						read_unseen_immovable
 						(*egbase, world, plnum, TCoords<>(f, TCoords<>::D),
-						 triangle_immovable_kinds_file,
-						 triangle_immovables_file, *triangle_immovables_filename);
+						 triangle_immovable_kinds_file, triangle_immovables_file,
+						 *triangle_immovable_kinds_filename,
+						 *triangle_immovables_filename);
 				}
 				if  (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -482,12 +552,20 @@ throw (_wexception)
 				} else if (f_everseen | br_everseen | r_everseen) {
 					//  The player has seen the R triangle but does not see it now.
 					//  Load his information about the triangle from file.
-					f_player_field.terrains.r = terrains_file.get();
+					try {f_player_field.terrains.r = terrains_file.get();}
+					catch (const FileRead::File_Boundary_Exceeded) {
+						throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: "
+						 "player %u: in \"%s\": node (%i, %i) t = R: unexpected end "
+						 "of file while reading terrain",
+						 plnum, terrains_filename, f.x, f.y);
+					}
 					f_player_field.map_object_descr[TCoords<>::R] =
 						read_unseen_immovable
 						(*egbase, world, plnum, TCoords<>(f, TCoords<>::R),
-						 triangle_immovable_kinds_file,
-						 triangle_immovables_file, *triangle_immovables_filename);
+						 triangle_immovable_kinds_file, triangle_immovables_file,
+						 *triangle_immovable_kinds_filename,
+						 *triangle_immovables_filename);
 				}
 
 				{//  edges
@@ -496,17 +574,38 @@ throw (_wexception)
 					else if (f_everseen | bl_everseen)
 						//  The player has seen the SouthWest edge but does not see it
 						//  now. Load his information about this edge from file.
-						roads  = roads_file.get() << Road_SouthWest;
+						try {roads  = roads_file.get() << Road_SouthWest;}
+						catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: "
+								 "player %u: in \"%s\": node (%i, %i): unexpected end "
+								 "of file while reading Road_SouthWest",
+								 plnum, roads_filename, f.x, f.y);
+						}
 					if (f_seen | br_seen) mask |= Road_Mask << Road_SouthEast;
 					else if (f_everseen | br_everseen)
 						//  The player has seen the SouthEast edge but does not see it
 						//  now. Load his information about this edge from file.
-						roads |= roads_file.get() << Road_SouthEast;
+						try {roads |= roads_file.get() << Road_SouthEast;}
+						catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: "
+								 "player %u: in \"%s\": node (%i, %i): unexpected end "
+								 "of file while reading Road_SouthEast",
+								 plnum, roads_filename, f.x, f.y);
+						}
 					if (f_seen |  r_seen) mask |= Road_Mask << Road_East;
 					else if (f_everseen |  r_everseen)
 						//  The player has seen the      East edge but does not see it
 						//  now. Load his information about this edge from file.
-						roads |= roads_file.get() << Road_East;
+						try {roads |= roads_file.get() << Road_East;}
+						catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: "
+								 "player %u: in \"%s\": node (%i, %i): unexpected end "
+								 "of file while reading Road_East",
+								 plnum, roads_filename, f.x, f.y);
+						}
 					roads |= f.field->get_roads() & mask;
 				}
 
@@ -515,15 +614,79 @@ throw (_wexception)
 				f_player_field.owner = owner;
 
 				//  geologic survey
-				if (f_everseen & bl_everseen & br_everseen and surveys_file.get()) {
-					f_player_field.resource_amounts.d = survey_amounts_file.get();
-					f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
-						survey_times_file.Unsigned32();
+				try {
+					if
+						(f_everseen & bl_everseen & br_everseen
+						 and
+						 surveys_file.get())
+					{
+						try {
+							f_player_field.resource_amounts.d =
+								survey_amounts_file.get();
+						} catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: player "
+								 "%u: in \"%s\": node (%i, %i) t = D: unexpected end "
+								 "of file while reading resource amount of surveyed "
+								 "triangle",
+								 plnum, survey_amounts_filename, f.x, f.y);
+						}
+						try {
+							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
+								survey_times_file.Unsigned32();
+						} catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: player "
+								 "%u: in \"%s\":%u: node (%i, %i) t = D: unexpected "
+								 "end of file while reading "
+								 "time_triangle_last_surveyed",
+								 plnum, survey_times_filename,
+								 survey_times_file.GetPrevPos(), f.x, f.y);
+						}
+					}
+				} catch (const FileRead::File_Boundary_Exceeded) {
+					throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+						 "in \"%s\": node (%i, %i) t = D: unexpected end of file "
+						 "while reading survey bit",
+						 plnum, surveys_filename, f.x, f.y);
 				}
-				if (f_everseen & br_everseen &  r_everseen and surveys_file.get()) {
-					f_player_field.resource_amounts.r = survey_amounts_file.get();
-					f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
-						survey_times_file.Unsigned32();
+				try {
+					if
+						(f_everseen & br_everseen &  r_everseen
+						 and
+						 surveys_file.get())
+					{
+						try {
+							f_player_field.resource_amounts.r =
+								survey_amounts_file.get();
+						} catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: player "
+								 "%u: in \"%s\": node (%i, %i) t = R: unexpected end "
+								 "of file while reading resource amount of surveyed "
+								 "triangle",
+								 plnum, survey_amounts_filename, f.x, f.y);
+						}
+						try {
+							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
+								survey_times_file.Unsigned32();
+						} catch (const FileRead::File_Boundary_Exceeded) {
+							throw wexception
+								("Widelands_Map_Players_View_Data_Packet::Read: player "
+								 "%u: in \"%s\":%u: node (%i, %i) t = R: unexpected "
+								 "end of file while reading "
+								 "time_triangle_last_surveyed",
+								 plnum, survey_times_filename,
+								 survey_times_file.GetPrevPos(), f.x, f.y);
+						}
+					}
+				} catch (const FileRead::File_Boundary_Exceeded) {
+					throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+						 "in \"%s\": node (%i, %i) t = R: unexpected end of file "
+						 "while reading survey bit",
+						 plnum, surveys_filename, f.x, f.y);
 				}
 			} while (r.x);
 		}
