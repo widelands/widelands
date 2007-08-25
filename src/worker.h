@@ -82,7 +82,7 @@ class Worker : public Bob
 
 		PlayerImmovable * get_location(Editor_Game_Base * egbase)
 		{return reinterpret_cast<PlayerImmovable * const>(m_location.get(egbase));}
-		inline Economy *get_economy() {return m_economy;}
+	Economy * get_economy() const throw () {return m_economy;}
 
 		void set_location(PlayerImmovable *location);
 		void set_economy(Economy *economy);

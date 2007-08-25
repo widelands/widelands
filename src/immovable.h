@@ -169,7 +169,7 @@ struct PlayerImmovable : public BaseImmovable {
 
 	inline Player *get_owner() const { return m_owner; }
 	Player & owner() const {return *m_owner;}
-	inline Economy *get_economy() const { return m_economy; }
+	Economy * get_economy() const throw () {return m_economy;}
 	Economy & economy() const throw () {return *m_economy;}
 
 	virtual Flag *get_base_flag() = 0;

@@ -490,7 +490,7 @@ struct Request : public Trackable {
 	int get_count() const { return m_count; }
 	bool is_open() const
 	{return m_idle || m_count > static_cast<const int>(m_transfers.size());}
-	Economy* get_economy() const { return m_economy; }
+	Economy * get_economy() const throw () {return m_economy;}
 	int get_required_time();
 	int get_last_request_time() { return m_last_request_time; }
 	int get_priority(int cost);
