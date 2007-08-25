@@ -78,7 +78,7 @@ class Worker : public Bob
 		const std::string & descname() const throw ()
 				{return descr().descname();}
 
-		virtual uint get_movecaps();
+		virtual uint get_movecaps() const throw ();
 
 		PlayerImmovable * get_location(Editor_Game_Base * egbase)
 		{return reinterpret_cast<PlayerImmovable * const>(m_location.get(egbase));}

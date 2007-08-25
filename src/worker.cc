@@ -757,10 +757,7 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 }
 
 
-uint Worker::get_movecaps()
-{
-	return MOVECAPS_WALK;
-}
+uint Worker::get_movecaps() const throw () {return MOVECAPS_WALK;}
 
 
 /**

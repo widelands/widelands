@@ -936,7 +936,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	//
 	// The somewhat crazy check involving MOVECAPS_SWIM should allow swimming objects to
 	// temporarily land.
-	uint movecaps = get_movecaps();
+	const uint movecaps = get_movecaps();
 
 	if (!force) {
 		if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM &&

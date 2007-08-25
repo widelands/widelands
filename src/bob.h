@@ -136,7 +136,7 @@ struct Bob : public Map_Object {
 
 		virtual int get_type() const throw () {return BOB;}
 		virtual Type get_bob_type() const throw () = 0;
-		virtual uint get_movecaps() {return 0;}
+	virtual uint get_movecaps() const throw () {return 0;}
 		const std::string & name() const throw () {return descr().name();}
 
 		virtual void init(Editor_Game_Base*);

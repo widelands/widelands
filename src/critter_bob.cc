@@ -254,7 +254,8 @@ Critter_Bob::~Critter_Bob()
 {
 }
 
-uint Critter_Bob::get_movecaps() { return descr().is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
+uint Critter_Bob::get_movecaps() const throw ()
+{return descr().is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;}
 
 
 /*
