@@ -324,64 +324,65 @@ void FieldDebugWindow::think()
 	const Editor_Game_Base & egbase =
 		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
 	const Player_Number nr_players = m_map.get_nrplayers();
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		const Player & player = egbase.player(plnum);
-		const Player::Field & player_field = player.fields()[i];
-		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
-		str += buffer;
-		snprintf
-			(buffer, sizeof(buffer),
-			 "  military influence: %u\n", player_field.military_influence);
-		str += buffer;
-		Vision vision = player_field.vision;
-		snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
-		str += buffer;
-		{
-			const Editor_Game_Base::Time time_last_surveyed =
-				player_field.time_triangle_last_surveyed[TCoords<>::D];
-			if (time_last_surveyed != Editor_Game_Base::Never()) {
-				snprintf
-					(buffer, sizeof(buffer),
-					 "  D triangle last surveyed at %u: amount %u\n",
-					 time_last_surveyed, player_field.resource_amounts.d);
-				str += buffer;
-			} else str += "  D triangle never surveyed\n";
-		}
-		{
-			const Editor_Game_Base::Time time_last_surveyed =
-				player_field.time_triangle_last_surveyed[TCoords<>::R];
-			if (time_last_surveyed != Editor_Game_Base::Never()) {
-				snprintf
-					(buffer, sizeof(buffer),
-					 "  R triangle last surveyed at %u: amount %u\n",
-					 time_last_surveyed, player_field.resource_amounts.r);
-				str += buffer;
-			} else str += "  R triangle never surveyed\n";
-		}
-		switch (vision) {
-		case 0: str += "  never seen\n"; break;
-		case 1:
+	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
+		if (const Player * const player = egbase.get_player(plnum)) {
+			const Player::Field & player_field = player->fields()[i];
+			snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
+			str += buffer;
 			snprintf
 				(buffer, sizeof(buffer),
-				 "  last seen at %u:\n"
-				 "    owner: %u\n"
-				 "    immovable animation:\n%s\n"
-				 "      ",
-				 player_field.time_node_last_unseen,
-				 player_field.owner,
-				 player_field.map_object_descr[TCoords<>::None] ?
-				 g_anim.get_animation
-				 (player_field.map_object_descr[TCoords<>::None]->main_animation())
-				 ->picnametempl.c_str()
-				 :
-				 "(none)");
+				 "  military influence: %u\n", player_field.military_influence);
 			str += buffer;
-			break;
-		default:
-			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
-			str +=  buffer;
+			Vision vision = player_field.vision;
+			snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
+			str += buffer;
+			{
+				const Editor_Game_Base::Time time_last_surveyed =
+					player_field.time_triangle_last_surveyed[TCoords<>::D];
+				if (time_last_surveyed != Editor_Game_Base::Never()) {
+					snprintf
+						(buffer, sizeof(buffer),
+						 "  D triangle last surveyed at %u: amount %u\n",
+						 time_last_surveyed, player_field.resource_amounts.d);
+					str += buffer;
+				} else str += "  D triangle never surveyed\n";
+			}
+			{
+				const Editor_Game_Base::Time time_last_surveyed =
+					player_field.time_triangle_last_surveyed[TCoords<>::R];
+				if (time_last_surveyed != Editor_Game_Base::Never()) {
+					snprintf
+						(buffer, sizeof(buffer),
+						 "  R triangle last surveyed at %u: amount %u\n",
+						 time_last_surveyed, player_field.resource_amounts.r);
+					str += buffer;
+				} else str += "  R triangle never surveyed\n";
 		}
-	}
+			switch (vision) {
+			case 0: str += "  never seen\n"; break;
+			case 1:
+				snprintf
+					(buffer, sizeof(buffer),
+					 "  last seen at %u:\n"
+					 "    owner: %u\n"
+					 "    immovable animation:\n%s\n"
+					 "      ",
+					 player_field.time_node_last_unseen,
+					 player_field.owner,
+					 player_field.map_object_descr[TCoords<>::None] ?
+					 g_anim.get_animation
+					 (player_field.map_object_descr[TCoords<>::None]
+					  ->main_animation())
+					 ->picnametempl.c_str()
+					 :
+					 "(none)");
+				str += buffer;
+				break;
+			default:
+				snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
+				str +=  buffer;
+			}
+		}
 
 	m_ui_field.set_text(str.c_str());
 
