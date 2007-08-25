@@ -257,13 +257,13 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
  *
  * Predicates:
  * radius:<dist>
- *	Find objects within the given radius
+ * Find objects within the given radius
  *
  * attrib:<attribute>  (optional)
- *	Find objects with the given attribute
+ * Find objects with the given attribute
  *
  * type:<what>         (optional, defaults to immovable)
- *	Find only objects of this type
+ * Find only objects of this type
  *
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
@@ -337,14 +337,14 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
  *
  * Predicates:
  * radius:<dist>
- *	Search for fields within the given radius around the worker.
+ * Search for fields within the given radius around the worker.
  *
  * size:[any|build|small|medium|big|mine|port]
- *	Search for fields with the given amount of space.
+ * Search for fields with the given amount of space.
  *
  * resource:<resname>
- *	Resource to search for. This is mainly intended for fisher and
- *	therelike (non detectable Resources and default resources)
+ * Resource to search for. This is mainly intended for fisher and
+ * therelike (non detectable Resources and default resources)
  *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
@@ -395,8 +395,8 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
  *walk <where>
  *
  * Walk to a previously selected destination. where can be one of:
- *	object  walk to a previously found and selected object
- *	coords  walk to a previously found and selected field/coordinate
+ * object  walk to a previously found and selected object
+ * coords  walk to a previously found and selected field/coordinate
  *
  * iparam1 = walkXXX
  */
@@ -1235,9 +1235,9 @@ void Worker::transfer_update(Game* g, State* state)
 			return;
 		}
 
-		throw wexception("MO(%u): [transfer]: from road to bad nextstep %u "
-		                 "(type %u)", get_serial(),	nextstep->get_serial(),
-		                 nextstep->get_type());
+		throw wexception
+			("MO(%u): [transfer]: from road to bad nextstep %u (type %u)",
+			 get_serial(), nextstep->get_serial(), nextstep->get_type());
 	}
 
 	throw wexception("MO(%u): location %u has bad type %u", get_serial(),
@@ -1289,7 +1289,7 @@ void Worker::cancel_task_transfer(Game* g)
  * (initiated by a false return value from get_building_work()).
  *
  * ivar1 - 0: no task has failed; 1: currently in buildingwork;
- *		2: signal failure of buildingwork
+ *         2: signal failure of buildingwork
  */
 Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
@@ -1464,8 +1464,13 @@ void Worker::return_update(Game* g, State* state)
 
 	molog("[return]: Move to building's flag\n");
 
-	if (not start_task_movepath(g, location->get_base_flag()->get_position(),
-						15,	descr().get_right_walk_anims(does_carry_ware())))
+	if
+		(not
+		 start_task_movepath
+		 (g,
+		  location->get_base_flag()->get_position(),
+		  15,
+		  descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
 

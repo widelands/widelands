@@ -49,12 +49,12 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	list(this, 15, 205, 455, 365),
 
 	// Info fields
-	label_campname	(this, 480, 205, _("Campaign:")),
-	tacampname	(this, 490, 225, ""),
-	label_difficulty(this, 480, 255, _("Difficulty:")),
-	tadifficulty	(this, 490, 275, ""),
-	label_campdescr	(this, 480, 305, _("Description:")),
-	tacampdescr	(this, 490, 330, 290, 190, ""),
+	label_campname   (this, 480, 205, _("Campaign:")),
+	tacampname       (this, 490, 225, ""),
+	label_difficulty (this, 480, 255, _("Difficulty:")),
+	tadifficulty     (this, 490, 275, ""),
+	label_campdescr  (this, 480, 305, _("Description:")),
+	tacampdescr      (this, 490, 330, 290, 190, ""),
 
 	// UI::Buttons
 	b_ok

@@ -24,7 +24,7 @@
 
 class Game;
 // default autosave interval in minutes
-#define DEFAULT_AUTOSAVE_INTERVAL			15
+#define DEFAULT_AUTOSAVE_INTERVAL 15
 
 class SaveHandler {
 	int m_lastSaveTime;

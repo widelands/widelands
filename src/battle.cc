@@ -98,7 +98,7 @@ void Battle::act (Game * g, uint)
 	defender = m_first;
 
 	m_last_try = !m_last_try;
-	if (m_last_try)	{
+	if (m_last_try) {
 		attacker = m_first;
 		defender = m_second;
 

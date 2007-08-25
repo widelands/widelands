@@ -50,7 +50,7 @@ struct Bob : public Map_Object {
 
 		struct State;
 		typedef void (Bob::*Ptr)(Game*, State*);
-		enum Type {CRITTER,	WORKER};
+	enum Type {CRITTER, WORKER};
 
 		struct Task {
 			const char* name;

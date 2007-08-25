@@ -340,7 +340,7 @@ uint Graphic::get_resized_picture
 		const double ratio_x = double(w) / orig->get_w();
 		const double ratio_y = double(h) / orig->get_h();
 
-		// if proportions are to be kept, recalculate width and height		
+		//  if proportions are to be kept, recalculate width and height
 		if (ratio_x != ratio_y) {
 			double ratio = 0;
 
@@ -350,27 +350,27 @@ uint Graphic::get_resized_picture
 				ratio = std::max (ratio_x, ratio_y);
 			else // average
 				ratio = (ratio_x + ratio_y) / 2;
-			
+
 			width = uint(orig->get_w() * ratio);
 			height = uint(orig->get_h() * ratio);
 		}
 	}
 
 	const uint pic = g_gr->create_surface(w, h);
-	
+
 	if (mode == ResizeMode_Loose || (width == w && height == h)) {
 		SDL_Surface * const resized = resize(index, w, h);
 		Surface* s = m_pictures[pic].surface;
 		s->set_sdl_surface(*resized);
 	} else {
-		
+
 		SDL_Surface * const resized = resize(index, width, height);
 		Surface src;
 		src.set_sdl_surface(*resized);
 
 		// Get the rendertarget for this
 		RenderTarget* target = g_gr->get_surface_renderer(pic);
-		
+
 		// apply rectangle by adjusted size
 		Rect srcrc;
 		srcrc.w = std::min(w, width);

@@ -36,14 +36,14 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 	: m_lastUpdated(0), m_updateAfter(0),
 	  m_progressWindow(progressWindow), m_registered(false),
 	  m_lastTip(0) {
-                   
+
     // Loading texts-locals, for translating the tips
     i18n::grab_textdomain("texts");
-    
+
 	// Skip, if no triggers saved
 	// Load the TrueType Font
 	std::string filename = "txts/gametips";
-	
+
 	try {
 		Profile prof(filename.c_str(), NULL);
 		Section* s = prof.get_section("global");
@@ -66,7 +66,7 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 
 		while(( s = prof.get_next_section(0)) ) {
 
-            
+
 			const char *text = s->get_string("text", NULL);
 			if (NULL == text)
 				continue;
@@ -89,7 +89,7 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 		m_lastTip = m_tips.size();
 	}
 
-    // Now drop textdomain, to fall back to previous one.	
+    // Now drop textdomain, to fall back to previous one.
     i18n::release_textdomain();
 
 }
@@ -118,7 +118,7 @@ const uint GameTips::colorvalue_from_hex(const char c1, const char c2) {
 		ret += (c2 - 'A' + 0xa);
 	else
 		return 0x100;
-	
+
 	return ret;
 }
 
@@ -171,7 +171,7 @@ void GameTips::update(bool repaint) {
 		m_updateAfter = m_tips[next].interval * 1000;
 	} else if (repaint) {
 		show_tip(m_lastTip);
-	}		
+	}
 }
 
 void GameTips::stop() {
@@ -187,7 +187,7 @@ void GameTips::show_tip(int index) {
 	const uint yres = g_gr->get_yres();
 	Rect tips_area;
 	Rect text_area;
-	
+
 	// try to load a background
 	const uint pic_background =
 		g_gr->get_picture(PicMod_Menu, m_background_picture.c_str());
@@ -207,7 +207,7 @@ void GameTips::show_tip(int index) {
 		tips_area = Rect(pt, m_width - 2 * GAMETIPS_TEXTAREA_BORDER,
 						 m_height - 2 * GAMETIPS_TEXTAREA_BORDER);
 		rt.fill_rect(tips_area, m_bgcolor);
-		
+
 		tips_area.x -= GAMETIPS_TEXTAREA_BORDER;
 		tips_area.y -= GAMETIPS_TEXTAREA_BORDER;
 		tips_area.w += 2 * GAMETIPS_TEXTAREA_BORDER;
@@ -222,7 +222,7 @@ void GameTips::show_tip(int index) {
 	text_area.h -= m_pading_t + m_pading_b;
 	Point center(text_area.x + text_area.w / 2,
 				 text_area.y + text_area.h / 2);
-	
+
 	g_fh->draw_string(rt, UI_FONT_NAME, m_font_size,
 					  m_color, m_bgcolor,//RGBColor(107,87,55),
 					  center, m_tips[index].text.c_str(),

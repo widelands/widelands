@@ -46,8 +46,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 	(this, MENU_XRES - 300, 180, _("Load Map as scenario: "), Align_VCenter),
 	load_map_as_scenario
 	(this,
- 	label_load_map_as_scenario.get_x() + label_load_map_as_scenario.get_w() + 10,
- 	170),
+	label_load_map_as_scenario.get_x() + label_load_map_as_scenario.get_w() + 10,
+	170),
 
 
 	// Create the list area

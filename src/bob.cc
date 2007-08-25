@@ -729,9 +729,13 @@ void Bob::movepath_update(Game* g, State* state)
 
 	assert(state->ivar1 >= 0);
 	const Path * const path = state->path;
-	if (not path or
-		static_cast<const Path::Step_Vector::size_type>(state->ivar1) >=
-		path->get_nsteps())	{
+	if
+		(not path
+		 or
+		 static_cast<const Path::Step_Vector::size_type>(state->ivar1)
+		 >=
+		 path->get_nsteps())
+	{
 
 		assert(not path or m_position == path->get_end());
 		pop_task(); // success

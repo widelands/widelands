@@ -1364,9 +1364,9 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 
 UI::Basic_Button * ProductionSite_Window::create_priority_button
 (UI::Box* box, PriorityButtonHelper & helper,
- int priority, int x, int y, int w, int h,
+ int priority, int x, int, int w, int h,
  const char * picture1, const char * picture2,
- const std::string & tooltip)
+ const std::string & button_tooltip)
 {
 	int pic_enabled = g_gr->get_resized_picture (
 		 g_gr->get_picture(PicMod_Game,  picture1),
@@ -1381,7 +1381,7 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
 	   4,
 	   pic_enabled,
 	   &PriorityButtonHelper::button_clicked, &helper, priority,
-	   tooltip, true, true);
+	   button_tooltip, true, true);
 	helper[priority] = PriorityButtonInfo(button, pic_enabled, pic_disabled);
 	return button;
 }

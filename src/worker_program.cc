@@ -190,13 +190,13 @@ void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act
  *
  * Predicates:
  * radius:<dist>
- *	Find objects within the given radius
+ * Find objects within the given radius
  *
  * attrib:<attribute>  (optional)
- *	Find objects with the given attribute
+ * Find objects with the given attribute
  *
  * type:<what>         (optional, defaults to immovable)
- *	Find only objects of this type
+ * Find only objects of this type
  *
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
@@ -250,10 +250,10 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
  *
  * Predicates:
  * radius:<dist>
- * 	Search for fields within the given radius around the worker.
+ * Search for fields within the given radius around the worker.
  *
  * size:[any|build|small|medium|big|mine|port]
- *	Search for fields with the given amount of space.
+ * Search for fields with the given amount of space.
  *
  * resource:<resname>
  * Resource to search for. This is mainly intended for fisher and
@@ -329,8 +329,8 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
  * walk <where>
  *
  * Walk to a previously selected destination. where can be one of:
- *	object  walk to a previously found and selected object
- *	coords  walk to a previously found and selected field/coordinate
+ * object  walk to a previously found and selected object
+ * coords  walk to a previously found and selected field/coordinate
  *
  * iparam1 = walkXXX
  */
