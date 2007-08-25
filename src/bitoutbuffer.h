@@ -35,8 +35,11 @@ template<const Uint8 Size> struct BitOutBuffer {
 		if (mask == 0x00) {fw.Unsigned8(buffer); mask = 0xff;}
 		buffer <<= Size;
 	}
-	void Write(FileSystem & fs, const char * const filename)
-	{if (mask != 0xff) {fw.Unsigned8(buffer);} fw.Write(fs, filename);}
+	void Write(FileSystem & fs, const char * const filename) {
+		if (mask != 0xff)
+		{while (mask <<= Size) buffer <<= Size; fw.Unsigned8(buffer);}
+		fw.Write(fs, filename);
+	}
 private:
 	FileWrite fw;
 	Uint8 buffer, mask;
