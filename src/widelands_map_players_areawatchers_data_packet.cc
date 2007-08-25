@@ -74,7 +74,7 @@ throw (_wexception)
 				const Uint32 reg = fr.Unsigned32();
 				if (ol->is_object_known(reg)) throw wexception
 					("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player "
-					 "%u: in \"%s\":%i: read object with reg %u, but an object with "
+					 "%u: in \"%s\":%u: read object with reg %u, but an object with "
 					 "that reg has already been loaded",
 					 plnum, filename, fr.GetPrevPos(), reg);
 				Coords c;
@@ -82,13 +82,13 @@ throw (_wexception)
 				catch  (const WidelandsFileRead::Width_Exceeded e) {
 					throw wexception
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
-						 "player %u: in \"%s\":%i: area watcher %u: x-cordinate (%u) "
+						 "player %u: in \"%s\":%u: area watcher %u: x-cordinate (%u) "
 						 "exceeds the witdh of the map (%u)\n",
 						 plnum, filename, e.position, reg, e.x, e.w);
 				} catch (const WidelandsFileRead::Height_Exceeded e) {
 					throw wexception
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
-						 "player %u: in \"%s\":%i: area watcher %u: y-cordinate (%u) "
+						 "player %u: in \"%s\":%u: area watcher %u: y-cordinate (%u) "
 						 "exceeds the height of the map (%u)\n",
 						 plnum, filename, e.position, reg, e.y, e.h);
 				}
