@@ -391,17 +391,14 @@ void Game::postload()
 	// unless we're watching a replay
 	if (Interactive_Player* ipl = dynamic_cast<Interactive_Player*>(get_iabase())) {
 		const Player_Number nr_players = map().get_nrplayers();
-		for (Player_Number i = 1; i <= nr_players; ++i) {
-			Player* player = get_player(i);
-
-			if (player) {
-				if (player->get_type() == Player::AI) {
+		for (Player_Number i = 1; i <= nr_players; ++i)
+			if (const Player * const p = get_player(i)) {
+				if (p->get_type() == Player::AI) {
 					cpl.push_back (new Computer_Player(*this, i));
-				} else if (player->get_type() == Player::Local) {
+				} else if (p->get_type() == Player::Local) {
 					ipl->set_player_number(i);
 				}
 			}
-		}
 	}
 
 	get_iabase()->postload();
