@@ -38,8 +38,7 @@ struct Critter_BobAction {
 	std::vector<std::string> sparamv;
 };
 
-class Critter_BobProgram : public BobProgramBase {
-public:
+struct Critter_BobProgram : public BobProgramBase {
 	struct Parser {
 		Critter_Bob_Descr * descr;
 		std::string         directory;
@@ -49,9 +48,8 @@ public:
 
 	typedef void (Critter_BobProgram::*parse_t)(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
 
-public:
-	Critter_BobProgram(std::string name);
-   virtual ~Critter_BobProgram(void) { }
+	Critter_BobProgram(const std::string & name) : m_name(name) {}
+	virtual ~Critter_BobProgram() {}
 
 	std::string get_name() const { return m_name; }
 	int get_size() const { return m_actions.size(); }

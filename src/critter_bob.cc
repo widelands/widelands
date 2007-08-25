@@ -54,19 +54,6 @@ const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 
 /*
 ===============
-Critter_BobProgram::Critter_BobProgram
-
-Initialize a program
-===============
-*/
-Critter_BobProgram::Critter_BobProgram(std::string name)
-{
-	m_name = name;
-}
-
-
-/*
-===============
 Critter_BobProgram::parse
 
 Parse a program
