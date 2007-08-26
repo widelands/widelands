@@ -229,7 +229,7 @@ static inline const Map_Object_Descr * read_unseen_immovable
 	}
 
 #define CHECK_TRAILING_BYTES(file, filename)                                   \
-	if (not    unseen_times_file.IsEOF()) throw wexception                      \
+	if (not (file).IsEOF()) throw wexception                                    \
 		("Widelands_Map_Players_View_Data_Packet::Read: player %u:"              \
 		 "Found %u trailing bytes in \"%s\"",                                    \
 		 plnum, (file).GetSize() - (file).GetPos(), filename);
