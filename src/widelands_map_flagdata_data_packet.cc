@@ -146,19 +146,6 @@ throw (_wexception)
             flag->m_flag_jobs.push_back(f);
 			}
 
-         // Path finding variables are not saved
-//
-//         flag->mpf_cycle=fr.Unsigned32();
-//         flag->mpf_heapindex=fr.Signed32();
-//         flag->mpf_realcost=fr.Signed32();
-//         uint backlink=fr.Unsigned32();
-//         if (backlink) {
-//            assert(ol->is_object_known(backlink));
-//            flag->mpf_backlink=static_cast<Flag*>(ol->get_object_by_file_index(backlink));
-//         } else
-//             flag->mpf_backlink=0;
-//         flag->mpf_estimate=fr.Signed32();
-
          ol->mark_object_as_loaded(flag);
 		}
 
