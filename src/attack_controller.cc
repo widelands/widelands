@@ -258,22 +258,6 @@ void AttackController::soldierWon(Soldier* soldier) {
 		Building & building = *flag->get_building();
 		building.set_defeating_player(attackingPlayer);
 		building.destroy(game);
-
-      /*MilitarySite* opponentMs = (MilitarySite*)flag->get_building();
-      MilitarySite* newMs = opponentMs->conquered_by(game,game->get_player(attackingPlayer));
-
-      std::vector<Soldier*> entryingSoldiers;
-      uint capacity = newMs->get_capacity();
-
-      for (uint i=0;i<involvedSoldiers.size();i++) {
-         assert(involvedSoldiers[i].attacker);
-         if (i < capacity) {
-            entryingSoldiers.push_back(involvedSoldiers[i].soldier);
-            involvedSoldiers[i].origin->drop_soldier(involvedSoldiers[i].soldier->get_serial());
-            involvedSoldiers[i].origin = newMs;
-			}
-		}
-      newMs->init_after_conquering(game,&entryingSoldiers);*/
 	}
 
 	for (uint i=0;i<involvedSoldiers.size();i++) {
