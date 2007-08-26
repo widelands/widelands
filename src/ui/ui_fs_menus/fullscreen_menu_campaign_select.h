@@ -73,6 +73,7 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	void fill_list();
 	std::string get_map();
 	void set_campaign(uint);
+	int get_campaign();
 
 private:
 	UI::Textarea                                  title;

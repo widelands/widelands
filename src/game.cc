@@ -255,7 +255,7 @@ bool Game::run_campaign()
 		select_campaignmap.set_campaign(campaign);
 		if (select_campaignmap.run())
 			campmapfile = select_campaignmap.get_map();
-			campaign = select_campaign.get_campaign();
+			campaign = select_campaignmap.get_campaign();
 		if (campaign != -1) // Gets -1 if back was pressed
 			loop=0;
 	}

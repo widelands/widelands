@@ -308,6 +308,10 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 {
 	return campmapfile;
 }
+int Fullscreen_Menu_CampaignMapSelect::get_campaign()
+{
+	return campaign;
+}
 //telling this class what campaign we have and since we know what campaign we have, fill it.
 void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint i)
 {
