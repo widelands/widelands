@@ -36,7 +36,7 @@ template <typename Area_type = Area<> > struct MapHollowRegion {
 	{return m_hollow_area;}
 
 	/**
-	 * Moves on to the next location. The return value indicates wether the new
+	 * Moves on to the next location. The return value indicates whether the new
 	 * location has not yet been reached during this iteration. Note that when
 	 * the area is so large that it overlaps itself because of wrapping, the same
 	 * location may be reached several times during an iteration, while advance

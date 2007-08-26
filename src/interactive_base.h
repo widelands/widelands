@@ -67,7 +67,7 @@ struct Interactive_Base : public Map_View {
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
 	/**
-	 * sel_triangles determines wether the mouse pointer selects triangles.
+	 * sel_triangles determines whether the mouse pointer selects triangles.
 	 * (False meas that it selects nodes.)
 	 */
 	bool get_sel_triangles() const throw () {return m_sel.triangles;}

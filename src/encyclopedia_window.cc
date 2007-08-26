@@ -135,7 +135,7 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 
 	//  FIXME This needs reworking. A program can indeed produce iron even if the
 	//  FIXME program name is not any of produce_iron, smelt_iron, prog_iron or
-	//  FIXME work. What matters is wether the program has a statement such as
+	//  FIXME work. What matters is whether the program has a statement such as
 	//  FIXME "produce iron" or "createitem iron". The program name is not
 	//  FIXME supposed to have any meaning to the game logic except to uniquely
 	//  FIXME identify the program.
