@@ -250,9 +250,9 @@ bool Game::run_campaign()
 			campaign=select_campaign.get_campaign();
 		if (campaign == -1) // Back was pressed
 			return false;
-
 		// Than start UI for the selected campaign
 		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
+		select_campaignmap.set_campaign(campaign);
 		if (select_campaignmap.run())
 			campmapfile = select_campaignmap.get_map();
 			campaign = select_campaign.get_campaign();

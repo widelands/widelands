@@ -56,7 +56,8 @@ private:
 	UI::Multiline_Textarea                     tacampdescr;
 	UI::Button<Fullscreen_Menu_CampaignSelect> b_ok;
 	UI::Button<Fullscreen_Menu_CampaignSelect> back;
-
+// Variables used for exchange between the two Campaign UIs and Game::run_campaign
+	int                                        campaign;
 };
 
 /*
@@ -71,6 +72,7 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	void double_clicked(uint);
 	void fill_list();
 	std::string get_map();
+	void set_campaign(uint);
 
 private:
 	UI::Textarea                                  title;
@@ -83,6 +85,8 @@ private:
 	UI::Multiline_Textarea                        tamapdescr;
 	UI::Button<Fullscreen_Menu_CampaignMapSelect> b_ok;
 	UI::Button<Fullscreen_Menu_CampaignMapSelect> back;
+	int                                        campaign;
+	std::string                                campmapfile;
 
 };
 #endif // __S__CAMPAIGN_SELECT_H

@@ -25,9 +25,6 @@
 #include "i18n.h"
 #include "profile.h"
 
-// Variables used for exchange between the two Campaign UIs and Game::run_campaign
-int campaign;
-std::string campmapfile;
 
 
 /*
@@ -285,7 +282,6 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
 	list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
-	fill_list();
 }
 
 
@@ -312,7 +308,12 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 {
 	return campmapfile;
 }
-
+//telling this class what campaign we have and since we know what campaign we have, fill it.
+void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint i)
+{
+   campaign=i;
+   fill_list();
+}
 
 /**
  * an entry of the maplist got selected.
