@@ -61,24 +61,14 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 
 	back
 	(this, 637, 540, 143, 26, 2,
-	&Fullscreen_Menu_CampaignSelect::clicked_back, this,
-	_("Back"), std::string(), true)
+	&Fullscreen_Menu_CampaignSelect::end_modal, this, 0,
+	_("Back"))
 
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
 	list.double_clicked.set(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
 	fill_list();
-}
-
-
-/**
- * Back was clicked.
- */
-void Fullscreen_Menu_CampaignSelect::clicked_back()
-{
-	end_modal(1);
-	campaign=-1;
 }
 
 
@@ -103,7 +93,6 @@ int Fullscreen_Menu_CampaignSelect::get_campaign()
 void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 {
 	if (list.get_selected()) { //gets false, if the selected entry has no value.
-
 		campaign=i;
 
 		// enable OK button
@@ -132,20 +121,17 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 		sprintf(cdescription, "campdesc%i", i);
 
 		// Convert difficulty level to something understandable
-		int dif = s->get_int(cdifficulty);
-		if (dif==1) {
-			difficulty=_("Easy living").c_str();
-		} else {
-			if (dif==2) {
-				difficulty=_("Be vigilant").c_str();
-			} else {
-				if (dif==3) {
-					difficulty=_("Hard struggle").c_str();
-				} else {
-					difficulty=_("[No value found]").c_str();
-				}
-			}
-		}
+		const char * const dif_picture_filenames[] = {
+		_("[No value found]").c_str(),
+		_("Easy living").c_str(),
+		_("Be vigilant").c_str(),
+		_("Hard struggle").c_str()
+		};
+
+		uint dif = s->get_int(cdifficulty);
+		if (sizeof(dif_picture_filenames) / sizeof(*dif_picture_filenames) <= dif)
+			dif = 0;
+		difficulty = dif_picture_filenames[dif];
 
 		// Print informations
 		tacampname.set_text(s->get_string(cname, _("[No value found]").c_str()));
@@ -175,7 +161,6 @@ void Fullscreen_Menu_CampaignSelect::double_clicked(uint)
  */
 void Fullscreen_Menu_CampaignSelect::fill_list(void)
 {
-
 	// Load maps textdomain to translate the strings from cconfig
 	i18n::grab_textdomain("maps");
 
@@ -204,23 +189,20 @@ void Fullscreen_Menu_CampaignSelect::fill_list(void)
 		sprintf(cvisible, "campvisi%i", i);
 
 		// Only list visible campaigns
-		if (s->get_int(cvisible) == 1) {
+		if (s->get_bool(cvisible)) {
 
 			// convert difficulty level to the fitting picture
-			int dif = s->get_int(cdifficulty);
-			if (dif==1) {
-				difficulty="pics/big.png";
-			} else {
-				if (dif==2) {
-					difficulty="pics/medium.png";
-				} else {
-					if (dif==3) {
-						difficulty="pics/small.png";
-					} else {
-						difficulty="pics/novalue.png";
-					}
-				}
-			}
+			const char * const dif_picture_filenames[] = {
+			"pics/novalue.png",
+			"pics/big.png",
+			"pics/medium.png",
+			"pics/small.png"
+			};
+
+			uint dif = s->get_int(cdifficulty);
+			if (sizeof(dif_picture_filenames) / sizeof(*dif_picture_filenames) <= dif)
+				dif = 0;
+			difficulty = dif_picture_filenames[dif];
 
 			list.add(
 				s->get_string(cname, _("[No value found]").c_str()),
@@ -234,9 +216,8 @@ void Fullscreen_Menu_CampaignSelect::fill_list(void)
 		// increase csection
 		sprintf(csection, "campsect%i", i);
 	} // while (s->get_string(csection))
-
-	if (list.size()) list.select(0);
-
+	if (list.size())
+		list.select(0);
 }
 
 
@@ -275,23 +256,13 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 
 	back
 	(this, 637, 540, 143, 26, 2,
-	&Fullscreen_Menu_CampaignMapSelect::clicked_back, this,
-	_("Back"), std::string(), true)
+	&Fullscreen_Menu_CampaignMapSelect::end_modal, this, 0,
+	_("Back"))
 
 {
 	title.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 	list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
 	list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
-}
-
-
-/**
- * Back was clicked.
- */
-void Fullscreen_Menu_CampaignMapSelect::clicked_back()
-{
-	end_modal(1);
-	campaign=-1;
 }
 
 
@@ -416,9 +387,9 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list(void)
 
 	// Add all visible entries to the list.
 	while((s = prof.get_section(mapsection.c_str()))) {
-		if (s->get_int("visible") == 1){
+		if (s->get_bool("visible")){
 		list.add(
-			s->get_string("name", "[???]"),
+			s->get_string("name", _("[No value found]").c_str()),
 			s->get_string("path"),
 			g_gr->get_picture(PicMod_Game,"pics/ls_wlmap.png"));
 		}
@@ -430,7 +401,6 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list(void)
 		sprintf(number, "%02i", i);
 		mapsection += number;
 	}
-
-	if (list.size()) list.select(0);
-
+	if (list.size())
+		list.select(0);
 }

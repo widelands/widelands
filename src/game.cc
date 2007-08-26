@@ -246,18 +246,17 @@ bool Game::run_campaign()
 	while (loop==1) {
 		// First start UI for selecting the campaign
 		Fullscreen_Menu_CampaignSelect select_campaign;
-		if (select_campaign.run())
+		if (select_campaign.run() > 0)
 			campaign=select_campaign.get_campaign();
-		if (campaign == -1) // Back was pressed
+		else // Back was pressed
 			return false;
 		// Than start UI for the selected campaign
 		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
-		if (select_campaignmap.run())
+		if (select_campaignmap.run()) {
 			campmapfile = select_campaignmap.get_map();
-			campaign = select_campaignmap.get_campaign();
-		if (campaign != -1) // Gets -1 if back was pressed
 			loop=0;
+		}
 	}
 
 	// Load selected campaign-map-file

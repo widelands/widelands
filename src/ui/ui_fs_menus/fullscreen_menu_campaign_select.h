@@ -46,18 +46,18 @@ struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
 	int get_campaign();
 
 private:
-	UI::Textarea                               title;
-	UI::Listselect<const char *>               list;
-	UI::Textarea                               label_campname;
-	UI::Textarea                               tacampname;
-	UI::Textarea                               label_difficulty;
-	UI::Textarea                               tadifficulty;
-	UI::Textarea                               label_campdescr;
-	UI::Multiline_Textarea                     tacampdescr;
-	UI::Button<Fullscreen_Menu_CampaignSelect> b_ok;
-	UI::Button<Fullscreen_Menu_CampaignSelect> back;
+	UI::Textarea                                      title;
+	UI::Listselect<const char *>                      list;
+	UI::Textarea                                      label_campname;
+	UI::Textarea                                      tacampname;
+	UI::Textarea                                      label_difficulty;
+	UI::Textarea                                      tadifficulty;
+	UI::Textarea                                      label_campdescr;
+	UI::Multiline_Textarea                            tacampdescr;
+	UI::Button<Fullscreen_Menu_CampaignSelect>        b_ok;
+	UI::IDButton<Fullscreen_Menu_CampaignSelect, int> back;
 // Variables used for exchange between the two Campaign UIs and Game::run_campaign
-	int                                        campaign;
+	int                                               campaign;
 };
 
 /*
@@ -76,18 +76,18 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	int get_campaign();
 
 private:
-	UI::Textarea                                  title;
-	UI::Listselect<const char *>                  list;
-	UI::Textarea                                  label_mapname;
-	UI::Textarea                                  tamapname;
-	UI::Textarea                                  label_author;
-	UI::Textarea                                  taauthor;
-	UI::Textarea                                  label_mapdescr;
-	UI::Multiline_Textarea                        tamapdescr;
-	UI::Button<Fullscreen_Menu_CampaignMapSelect> b_ok;
-	UI::Button<Fullscreen_Menu_CampaignMapSelect> back;
-	int                                        campaign;
-	std::string                                campmapfile;
+	UI::Textarea                                         title;
+	UI::Listselect<const char *>                         list;
+	UI::Textarea                                         label_mapname;
+	UI::Textarea                                         tamapname;
+	UI::Textarea                                         label_author;
+	UI::Textarea                                         taauthor;
+	UI::Textarea                                         label_mapdescr;
+	UI::Multiline_Textarea                               tamapdescr;
+	UI::Button<Fullscreen_Menu_CampaignMapSelect>        b_ok;
+	UI::IDButton<Fullscreen_Menu_CampaignMapSelect, int> back;
+	int                                                  campaign;
+	std::string                                          campmapfile;
 
 };
 #endif // __S__CAMPAIGN_SELECT_H
