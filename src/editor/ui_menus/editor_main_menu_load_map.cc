@@ -281,27 +281,11 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
 
 		UI::ProgressWindow loader_ui;
-//      try {
-         //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
          ml->preload_map(true);
 
 		 loader_ui.step (_("Loading world data"));
 		ml->load_world();
 		ml->load_map_complete(&m_parent->editor(), true);
-/*      }  catch (std::exception& exe) {
-         // This really shoudn't fail since maps are already preloaded (in map preview)
-         // and therefore valid, but if it does, a valid map must be displayed, therefore
-         // we create an empty one from scratch
-			m_parent->editor().cleanup_for_load(true, false);
-         m_map->create_empty_map();
-
-         std::string s="Map Loading Error!\n\nReason given:\n";
-         s+=exe.what();
-         UI::Modal_Message_Box mbox
-            (m_parent, "Load Map Error!!", s, UI::Modal_Message_Box::OK);
-         mbox.run();
-		}
-*/
 		m_parent->editor().postload();
 		m_parent->editor().load_graphics(loader_ui);
 
