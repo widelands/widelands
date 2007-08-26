@@ -488,7 +488,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 
 	m_fastclick = false;
 
-	for(int id = 0; id < tribe.get_nrbuildings(); id++)
+	for (int id = 0; id < tribe.get_nrbuildings(); id++)
 	{
 		Building_Descr * descr = tribe.get_building_descr(id);
 		BuildGrid** ppgrid;
@@ -500,7 +500,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
          if (!descr->get_buildable() || !m_plr->is_building_allowed(id))
             continue;
 		} else {
-			if(!descr->get_buildable() && !descr->get_enhanced_building()) continue;
+			if (!descr->get_buildable() && !descr->get_enhanced_building()) continue;
 		}
 
 		// Figure out if we can build it here, and in which tab it belongs
@@ -535,7 +535,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 		}
 
 	// Add all necessary tabs
-	for(int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++)
 		if (bbg_house[i]) m_tabpanel->activate
 			(m_best_tab = add_tab
 			 (pic_tab_buildhouse[i], bbg_house[i], i18n::translate(tooltip_tab_build[i])));
@@ -928,7 +928,7 @@ void FieldActionWindow::act_attack_more() {
    else
       m_attackers = available;
 
-   sprintf(buf, "%d/%d", m_attackers, available );
+   sprintf(buf, "%d/%d", m_attackers, available);
    m_text_attackers->set_text (buf);
 }
 
@@ -1019,7 +1019,7 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 	// did he click on a flag or a road where a flag can be built?
 
 	if (const BaseImmovable * imm = map.get_immovable(target)) {
-		switch(imm->get_type()) {
+		switch (imm->get_type()) {
 		case Map_Object::ROAD:
 			if (!(player->get_buildcaps(target) & BUILDCAPS_FLAG))
 				break;

@@ -55,9 +55,9 @@ class TriggerConditional_Factory {
       class SyntaxError {};
 
    public:
-      static TriggerConditional* create_from_infix( EventChain* evchain, const std::vector<Token>& );
-      static TriggerConditional* create_from_postfix( EventChain* evchain, const std::vector<Token>& );
-      static std::vector<Token>* create_tokenlist( const TriggerConditional* );
+      static TriggerConditional* create_from_infix(EventChain* evchain, const std::vector<Token>&);
+      static TriggerConditional* create_from_postfix(EventChain* evchain, const std::vector<Token>&);
+      static std::vector<Token>* create_tokenlist(const TriggerConditional*);
 };
 
 
@@ -75,13 +75,13 @@ class TriggerConditional_Factory {
  */
 class TriggerConditional {
    public:
-      virtual ~TriggerConditional( void ) { };
-      virtual bool eval( Game* ) = 0;
+      virtual ~TriggerConditional(void) { };
+      virtual bool eval(Game*) = 0;
 
-      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist( void ) = 0;
+      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist(void) = 0;
 
-      void unreference_triggers( EventChain* );
-      void reset_triggers( Game* );
+      void unreference_triggers(EventChain*);
+      void reset_triggers(Game*);
 };
 
 /*
@@ -90,14 +90,14 @@ class TriggerConditional {
 class TriggerConditional_OneArg : public TriggerConditional {
    public:
       TriggerConditional_OneArg(TriggerConditional*);
-      virtual ~TriggerConditional_OneArg( void );
+      virtual ~TriggerConditional_OneArg(void);
 
-      virtual bool eval( Game* );
-      virtual bool do_eval( bool ) = 0;
-      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist( void ) ;
+      virtual bool eval(Game*);
+      virtual bool do_eval(bool) = 0;
+      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist(void) ;
 
    protected:
-      virtual TriggerConditional_Factory::TokenNames get_token( void ) = 0;
+      virtual TriggerConditional_Factory::TokenNames get_token(void) = 0;
 
    private:
       TriggerConditional *m_conditional;
@@ -107,8 +107,8 @@ class TriggerConditional_OneArg : public TriggerConditional {
 class TriggerConditional_Const : public TriggerConditional {
    public:
       TriggerConditional_Const(Trigger*);
-      virtual bool eval( Game* );
-      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist( void ) ;
+      virtual bool eval(Game*);
+      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist(void) ;
 
    private:
       Trigger*   m_trigger;
@@ -122,14 +122,14 @@ class TriggerConditional_Const : public TriggerConditional {
 class TriggerConditional_TwoArg : public TriggerConditional {
    public:
       TriggerConditional_TwoArg(TriggerConditional*, TriggerConditional*);
-      virtual ~TriggerConditional_TwoArg( void );
+      virtual ~TriggerConditional_TwoArg(void);
 
-      virtual bool eval( Game* );
-      virtual bool do_eval( bool, bool) = 0;
-      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist( void ) ;
+      virtual bool eval(Game*);
+      virtual bool do_eval(bool, bool) = 0;
+      virtual std::vector< TriggerConditional_Factory::Token >* get_infix_tokenlist(void) ;
 
    protected:
-      virtual TriggerConditional_Factory::TokenNames get_token( void ) = 0;
+      virtual TriggerConditional_Factory::TokenNames get_token(void) = 0;
 
    private:
       TriggerConditional *m_lconditional;
@@ -143,40 +143,40 @@ class TriggerAND : public TriggerConditional_TwoArg {
    public:
       TriggerAND(TriggerConditional*, TriggerConditional*);
 
-      virtual bool do_eval( bool, bool);
+      virtual bool do_eval(bool, bool);
 
    protected:
-      virtual TriggerConditional_Factory::TokenNames get_token( void ) { return TriggerConditional_Factory::AND; }
+      virtual TriggerConditional_Factory::TokenNames get_token(void) { return TriggerConditional_Factory::AND; }
 };
 
 class TriggerOR : public TriggerConditional_TwoArg {
    public:
       TriggerOR(TriggerConditional*, TriggerConditional*);
 
-      virtual bool do_eval( bool, bool);
+      virtual bool do_eval(bool, bool);
 
    protected:
-      virtual TriggerConditional_Factory::TokenNames get_token( void ) { return TriggerConditional_Factory::OR; }
+      virtual TriggerConditional_Factory::TokenNames get_token(void) { return TriggerConditional_Factory::OR; }
 };
 
 class TriggerXOR : public TriggerConditional_TwoArg {
    public:
       TriggerXOR(TriggerConditional*, TriggerConditional*);
 
-      virtual bool do_eval( bool, bool);
+      virtual bool do_eval(bool, bool);
 
    protected:
-      virtual TriggerConditional_Factory::TokenNames get_token( void ) { return TriggerConditional_Factory::XOR; }
+      virtual TriggerConditional_Factory::TokenNames get_token(void) { return TriggerConditional_Factory::XOR; }
 };
 
 class TriggerNOT : public TriggerConditional_OneArg {
    public:
       TriggerNOT(TriggerConditional*);
 
-      virtual bool do_eval( bool );
+      virtual bool do_eval(bool);
 
    protected:
-      virtual TriggerConditional_Factory::TokenNames get_token( void ) { return TriggerConditional_Factory::NOT; }
+      virtual TriggerConditional_Factory::TokenNames get_token(void) { return TriggerConditional_Factory::NOT; }
 };
 
 #endif // __S__TRIGGER_CONDITIONAL_H

@@ -51,7 +51,7 @@ throw(_wexception)
 {
 
    FileRead fr;
-   fr.Open( fs, "binary/bob" );
+   fr.Open(fs, "binary/bob");
 
    Map* map=egbase->get_map();
 
@@ -60,15 +60,15 @@ throw(_wexception)
 
    if (packet_version==CURRENT_PACKET_VERSION) {
       // Now get all the the bobs
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
+      for (ushort y=0; y<map->get_height(); y++) {
+         for (ushort x=0; x<map->get_width(); x++) {
             uint nr_bobs=fr.Unsigned32();
 
             uint i=0;
 
             assert(!egbase->get_map()->get_field(Coords(x,y))->get_first_bob());
 
-            for(i=0;i<nr_bobs;i++) {
+            for (i=0;i<nr_bobs;i++) {
                std::string owner=fr.CString();
                std::string name=fr.CString();
                uchar subtype=fr.Unsigned8();
@@ -77,33 +77,33 @@ throw(_wexception)
 					assert(not ol->is_object_known(reg));
 
                Bob* bob=0;
-               if(subtype != Bob::CRITTER && subtype != Bob::WORKER)
+               if (subtype != Bob::CRITTER && subtype != Bob::WORKER)
                   throw wexception("Unknown bob type %i in Widelands_Map_Bob_Data_Packet!\n", subtype);
 
-               if(owner=="world") {
-                  if(subtype!=Bob::CRITTER)
+               if (owner=="world") {
+                  if (subtype!=Bob::CRITTER)
                      throw wexception("world bob is not a critter!\n");
                   int idx=egbase->get_map()->get_world()->get_bob(name.c_str());
-                  if(idx==-1)
+                  if (idx==-1)
                      throw wexception("Map defines Bob %s, but world doesn't deliver!\n", name.c_str());
                   bob=egbase->create_bob(Coords(x,y),idx);
 					} else {
-                  if(skip) continue; // We do no load player bobs when no scenario
+                  if (skip) continue; // We do no load player bobs when no scenario
                   egbase->manually_load_tribe(owner.c_str()); // Make sure that the correct tribe is known and loaded
                   Tribe_Descr* tribe=egbase->get_tribe(owner.c_str());
-                  if(!tribe)
+                  if (!tribe)
                      throw wexception("Map asks for Tribe %s, but world doesn't deliver!\n", owner.c_str());
-                  if(subtype==Bob::WORKER) {
+                  if (subtype==Bob::WORKER) {
                      int idx=tribe->get_worker_index(name.c_str());
-                     if(idx==-1)
+                     if (idx==-1)
                         throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
                      Worker_Descr* descr=tribe->get_worker_descr(idx);
                      bob=descr->create_object();
                      bob->set_position(egbase, Coords(x,y));
                      bob->init(egbase);
-						} else if(subtype==Bob::CRITTER) {
+						} else if (subtype==Bob::CRITTER) {
                      int idx=tribe->get_bob(name.c_str());
-                     if(idx==-1)
+                     if (idx==-1)
                         throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
                      bob=egbase->create_bob(Coords(x,y),idx,tribe);
 						}
@@ -148,18 +148,18 @@ throw (_wexception)
    //      ...
    //      bobn
    Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
             std::vector<Bob*> bobarr;
 
             map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr); //  FIXME clean up this mess!
             fw.Unsigned32(bobarr.size());
 
-            for(uint i=0; i<bobarr.size(); i++) {
+            for (uint i=0; i<bobarr.size(); i++) {
                Bob* ibob=bobarr[i];
-               for(uint j=i; j<bobarr.size(); j++) {
+               for (uint j=i; j<bobarr.size(); j++) {
                   Bob* jbob=bobarr[j];
-                  if(ibob->get_file_serial() < jbob->get_file_serial()) {
+                  if (ibob->get_file_serial() < jbob->get_file_serial()) {
                      bobarr[i] = jbob;
                      bobarr[j] = ibob;
                      ibob=jbob;
@@ -167,7 +167,7 @@ throw (_wexception)
 					}
 				}
 
-            for(uint i=0;i<bobarr.size(); i++) {
+            for (uint i=0;i<bobarr.size(); i++) {
                // write serial number
 					assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
 					const uint reg = os->register_object(bobarr[i]);
@@ -184,7 +184,7 @@ throw (_wexception)
 		}
 	}
 
-   fw.Write( fs, "binary/bob");
+   fw.Write(fs, "binary/bob");
 
    // DONE
 }

@@ -47,7 +47,7 @@ struct Trigger {
 
       // Toggle the triggers state (if it isn't a one timer)
       // and give it a chance to reinitialize
-      virtual void reset_trigger( Game* ) = 0;
+      virtual void reset_trigger(Game*) = 0;
 
       // Functions needed by all
       void set_name(const char* name) { m_name=name; }
@@ -59,8 +59,8 @@ struct Trigger {
       virtual void Read(Section*, Editor_Game_Base*) = 0;
 
       // Reference this event
-      void reference( TriggerReferencer* ref );
-      void unreference( TriggerReferencer* ref);
+      void reference(TriggerReferencer* ref);
+      void unreference(TriggerReferencer* ref);
 	typedef std::map<TriggerReferencer *, uint> TriggerReferencerMap;
 	const TriggerReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}

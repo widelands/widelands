@@ -45,9 +45,9 @@ void SaveHandler::think(Game *g, int realtime) {
 	std::string backup_filename;
 
 	// always overwrite a file
-	if(g_fs->FileExists(complete_filename)) {
+	if (g_fs->FileExists(complete_filename)) {
 		backup_filename = create_file_name (get_base_dir(), "wl_autosave2");
-		if(g_fs->FileExists(backup_filename)) {
+		if (g_fs->FileExists(backup_filename)) {
 			g_fs->Unlink(backup_filename);
 		}
 		g_fs->Rename(complete_filename, backup_filename);
@@ -58,7 +58,7 @@ void SaveHandler::think(Game *g, int realtime) {
 		
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
-			if(g_fs->FileExists(complete_filename)) {
+			if (g_fs->FileExists(complete_filename)) {
 				g_fs->Unlink(complete_filename);
 			}
 			g_fs->Rename(backup_filename, complete_filename);
@@ -90,13 +90,13 @@ void SaveHandler::initialize(int currenttime) {
 std::string SaveHandler::create_file_name(std::string dir, std::string filename) {
 	// ok, first check if the extension matches (ignoring case)
 	bool assign_extension=true;
-	if(filename.size() >= strlen(WLGF_SUFFIX)) {
+	if (filename.size() >= strlen(WLGF_SUFFIX)) {
 		char buffer[10]; // enough for the extension
 		filename.copy(buffer, sizeof(WLGF_SUFFIX), filename.size()-strlen(WLGF_SUFFIX));
-		if(!strncasecmp(buffer, WLGF_SUFFIX, strlen(WLGF_SUFFIX)))
+		if (!strncasecmp(buffer, WLGF_SUFFIX, strlen(WLGF_SUFFIX)))
 			assign_extension=false;
 	}
-	if(assign_extension)
+	if (assign_extension)
 		filename+=WLGF_SUFFIX;
 
 	// Now append directory name
@@ -119,10 +119,10 @@ bool SaveHandler::save_game(Game *g, std::string complete_filename, std::string 
 
 	// Make a filesystem out of this
 	FileSystem* fs = 0;
-	if( !binary ) {
-		fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::DIR );
+	if (!binary) {
+		fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
 	} else {
-		fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
+		fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
 
 	bool ret = true;

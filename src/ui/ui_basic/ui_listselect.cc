@@ -58,7 +58,7 @@ m_show_check(show_check)
 
 	if (show_check) {
 		uint pic_h;
-		m_check_picid = g_gr->get_picture( PicMod_Game,  "pics/list_selected.png" );
+		m_check_picid = g_gr->get_picture(PicMod_Game,  "pics/list_selected.png");
 		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
 		if (pic_h > m_lineheight) m_lineheight = pic_h;
 	}
@@ -123,7 +123,7 @@ void BaseListselect::add
 	strcpy(er.name, name);
 
 	uint entry_height = 0;
-	if(picid==-1) {
+	if (picid==-1) {
 		entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
 	} else {
 		uint w, h;
@@ -134,7 +134,7 @@ void BaseListselect::add
 			m_max_pic_width = w;
 	}
 
-	if(entry_height>m_lineheight) m_lineheight=entry_height;
+	if (entry_height>m_lineheight) m_lineheight=entry_height;
 
 	m_entry_records.push_back(&er);
 
@@ -324,7 +324,7 @@ void BaseListselect::draw(RenderTarget* dst)
 			x = get_eff_w()>>1;
 		else {
 			// Pictures are always left aligned, leave some space here
-			if(m_max_pic_width)
+			if (m_max_pic_width)
 				x= m_max_pic_width + 10;
 			else
 			x=1;
@@ -415,8 +415,8 @@ void BaseListselect::remove(const uint i)
  */
 void BaseListselect::remove(const char * const str)
 {
-	for(uint i=0; i<m_entry_records.size(); i++) {
-		if(!strcmp(m_entry_records[i]->name,str)) {
+	for (uint i=0; i<m_entry_records.size(); i++) {
+		if (!strcmp(m_entry_records[i]->name,str)) {
 			remove(i);
 			return;
 		}

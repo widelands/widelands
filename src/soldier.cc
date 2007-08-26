@@ -303,7 +303,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	if (list.size() != 2) throw wexception
 		("Parse error in hp string: \"%s\" (must be \"min-max\")", hp.c_str());
 	uint i=0;
-	for(i=0; i<list.size(); i++)
+	for (i=0; i<list.size(); i++)
 		remove_spaces(&list[i]);
 	char* endp;
 	m_min_hp= strtol(list[0].c_str(),&endp, 0);
@@ -324,7 +324,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	split_string(attack, list, "-");
 	if (list.size() != 2)
 		throw wexception("Parse error in attack string: \"%s\" (must be \"min-max\")", attack.c_str());
-	for(i=0; i<list.size(); i++)
+	for (i=0; i<list.size(); i++)
 		remove_spaces(&list[i]);
 	m_min_attack= strtol(list[0].c_str(),&endp, 0);
 	if (endp and *endp)
@@ -359,22 +359,22 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	char buffer[256];
 	std::string dir=directory;
 	dir+="/";
-	for(i=0; i<=m_max_hp_level; i++) {
+	for (i=0; i<=m_max_hp_level; i++) {
 		sprintf(buffer, "hp_level_%i_pic", i);
 		m_hp_pics_fn[i]=dir;
 		m_hp_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for(i=0; i<=m_max_attack_level; i++) {
+	for (i=0; i<=m_max_attack_level; i++) {
 		sprintf(buffer, "attack_level_%i_pic", i);
 		m_attack_pics_fn[i]=dir;
 		m_attack_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for(i=0; i<=m_max_defense_level; i++) {
+	for (i=0; i<=m_max_defense_level; i++) {
 		sprintf(buffer, "defense_level_%i_pic", i);
 		m_defense_pics_fn[i]=dir;
 		m_defense_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for(i=0; i<=m_max_evade_level; i++) {
+	for (i=0; i<=m_max_evade_level; i++) {
 		sprintf(buffer, "evade_level_%i_pic", i);
 		m_evade_pics_fn[i]=dir;
 		m_evade_pics_fn[i]+=sglobal->get_safe_string(buffer);
@@ -390,17 +390,17 @@ void Soldier_Descr::load_graphics(void) {
 	m_defense_pics.resize(m_max_defense_level+1);
 	m_evade_pics.resize(m_max_evade_level+1);
 	uint i;
-	for(i=0; i<=m_max_hp_level; i++) {
-		m_hp_pics[i]=g_gr->get_picture( PicMod_Game,  m_hp_pics_fn[i].c_str() );
+	for (i=0; i<=m_max_hp_level; i++) {
+		m_hp_pics[i]=g_gr->get_picture(PicMod_Game,  m_hp_pics_fn[i].c_str());
 	}
-	for(i=0; i<=m_max_attack_level; i++) {
-		m_attack_pics[i]=g_gr->get_picture( PicMod_Game,  m_attack_pics_fn[i].c_str() );
+	for (i=0; i<=m_max_attack_level; i++) {
+		m_attack_pics[i]=g_gr->get_picture(PicMod_Game,  m_attack_pics_fn[i].c_str());
 	}
-	for(i=0; i<=m_max_defense_level; i++) {
-		m_defense_pics[i]=g_gr->get_picture( PicMod_Game,  m_defense_pics_fn[i].c_str() );
+	for (i=0; i<=m_max_defense_level; i++) {
+		m_defense_pics[i]=g_gr->get_picture(PicMod_Game,  m_defense_pics_fn[i].c_str());
 	}
-	for(i=0; i<=m_max_evade_level; i++) {
-		m_evade_pics[i]=g_gr->get_picture( PicMod_Game,  m_evade_pics_fn[i].c_str() );
+	for (i=0; i<=m_max_evade_level; i++) {
+		m_evade_pics[i]=g_gr->get_picture(PicMod_Game,  m_evade_pics_fn[i].c_str());
 	}
 	Worker_Descr::load_graphics();
 }
@@ -483,7 +483,7 @@ void Soldier::set_level
 void Soldier::set_hp_level(const uint hp) {
 	assert(hp>=m_hp_level && hp<=descr().get_max_hp_level());
 
-	while(m_hp_level<hp) {
+	while (m_hp_level<hp) {
 		++m_hp_level;
 		m_hp_max+=descr().get_hp_incr_per_level();
 		m_hp_current+=descr().get_hp_incr_per_level();
@@ -492,7 +492,7 @@ void Soldier::set_hp_level(const uint hp) {
 void Soldier::set_attack_level(const uint attack) {
 	assert(attack>=m_attack_level && attack<=descr().get_max_attack_level());
 
-	while(m_attack_level<attack) {
+	while (m_attack_level<attack) {
 		++m_attack_level;
 		m_min_attack+=descr().get_attack_incr_per_level();
 		m_max_attack+=descr().get_attack_incr_per_level();
@@ -501,7 +501,7 @@ void Soldier::set_attack_level(const uint attack) {
 void Soldier::set_defense_level(const uint defense) {
 	assert(defense>=m_defense_level && defense<=descr().get_max_defense_level());
 
-	while(m_defense_level<defense) {
+	while (m_defense_level<defense) {
 		++m_defense_level;
 		m_defense+=descr().get_defense_incr_per_level();
 	}
@@ -509,7 +509,7 @@ void Soldier::set_defense_level(const uint defense) {
 void Soldier::set_evade_level(const uint evade) {
 	assert(evade>=m_evade_level && evade<=descr().get_max_evade_level());
 
-	while(m_evade_level<evade) {
+	while (m_evade_level<evade) {
 		++m_evade_level;
 		m_evade+=descr().get_evade_incr_per_level();
 	}

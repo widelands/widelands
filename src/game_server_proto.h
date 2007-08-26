@@ -98,7 +98,7 @@ enum GSP_Flags {
 /*
  * Flag decoding
  */
-#define IS_ANSWER(flag) ( (flag) & GSP_ANSWER )
+#define IS_ANSWER(flag) ((flag) & GSP_ANSWER)
 
 /*
  * Protocol version: currently 1.0

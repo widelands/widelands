@@ -29,7 +29,7 @@
 struct Game_Server_Protocol_Packet_UserEntered :
 public Game_Server_Protocol_Packet
 {
-      Game_Server_Protocol_Packet_UserEntered( void );
+      Game_Server_Protocol_Packet_UserEntered(void);
       virtual ~Game_Server_Protocol_Packet_UserEntered();
 
       virtual ushort get_id(void);

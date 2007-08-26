@@ -1247,7 +1247,7 @@ inline FCoords Map::br_n(const FCoords f) const {
 inline FCoords Map::get_neighbour(const FCoords f, const Direction dir) const
 throw ()
 {
-	switch(dir) {
+	switch (dir) {
 	case Map_Object::WALK_NW: return tl_n(f);
 	case Map_Object::WALK_NE: return tr_n(f);
 	case Map_Object::WALK_E:  return  r_n(f);
@@ -1276,5 +1276,5 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
 }
 
 
-std::string g_MapVariableCallback( std::string str, void* data );
+std::string g_MapVariableCallback(std::string str, void* data);
 #endif // __S__MAP_H

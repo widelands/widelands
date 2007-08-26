@@ -24,7 +24,7 @@
 #include <vector>
 
 ///A macro to make i18n more readable and aid in tagging strings for translation
-#define _( str ) i18n::translate( str )
+#define _(str) i18n::translate(str)
 
 /**
  * Encapsulates i18n-handling

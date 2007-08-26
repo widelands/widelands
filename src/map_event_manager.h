@@ -46,18 +46,18 @@ struct MapEventManager {
       /*
        * Register a new event
        */
-      bool register_new_event( Event* );
+      bool register_new_event(Event*);
 
       /*
        * Get a event
        */
-      Event* get_event( const char* name );
-      void delete_event( const char* name );
+      Event* get_event(const char* name);
+      void delete_event(const char* name);
 
       /*
        * Delete all unreferenced events
        */
-      void delete_unreferenced_events( void );
+      void delete_unreferenced_events(void);
 
 	typedef std::vector<Event *> event_vector;
 	typedef event_vector::size_type Index;

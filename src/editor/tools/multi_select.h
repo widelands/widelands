@@ -43,9 +43,9 @@ class MultiSelect {
 		if (static_cast<const int>(m_enabled.size()) < n + 1)
             m_enabled.resize(n+1,false);
 
-         if(m_enabled[n]==t) return;
+         if (m_enabled[n]==t) return;
          m_enabled[n]=t;
-         if(t) ++m_nr_enabled;
+         if (t) ++m_nr_enabled;
          else --m_nr_enabled;
          assert(m_nr_enabled>=0);
 		}
@@ -61,7 +61,7 @@ class MultiSelect {
 			 rand() / (RAND_MAX + 1.0));
          int i=0;
          int j=rand_value+1;
-         while(j) { if(is_enabled(i)) j--; ++i; }
+         while (j) { if (is_enabled(i)) j--; ++i; }
          return i-1;
 		}
 

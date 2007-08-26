@@ -122,7 +122,7 @@ called when the ok button has been clicked
 void Game_Main_Menu_Save_Game::clicked_ok() {
       std::string filename=m_editbox->get_text();
 
-      if(save_game(filename))
+      if (save_game(filename))
          die();
 }
 
@@ -132,7 +132,7 @@ void Game_Main_Menu_Save_Game::clicked_ok() {
 void Game_Main_Menu_Save_Game::selected(uint) {
 	const char * const name = m_ls->get_selected();
 
-   FileSystem* fs = g_fs->MakeSubFileSystem( name );
+   FileSystem* fs = g_fs->MakeSubFileSystem(name);
 	Game_Loader gl(*fs, m_parent->get_game());
    Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
@@ -174,19 +174,19 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
 
    Game_Preload_Data_Packet gpdp;
 
-   for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
+   for (filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
 
       FileSystem* fs = 0;
       try {
-         fs = g_fs->MakeSubFileSystem( name );
+         fs = g_fs->MakeSubFileSystem(name);
 			Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 			char* fname = strdup(FileSystem::FS_Filename(name));
 			FileSystem::FS_StripExtension(fname);
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
          free(fname);
-		} catch(_wexception& ) {
+		} catch (_wexception&) {
          // we simply skip illegal entries
 		}
          delete fs;
@@ -213,7 +213,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
     std::string complete_filename = savehandler->create_file_name(m_curdir, filename);
 
    // Check if file exists, if it does, show a warning
-   if(g_fs->FileExists(complete_filename)) {
+   if (g_fs->FileExists(complete_filename)) {
       std::string s=_("A File with the name ");
       s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" already exists. Overwrite?");
@@ -222,7 +222,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 		if (not mbox.run()) return false;
 
       // Delete this
-      g_fs->Unlink( complete_filename );
+      g_fs->Unlink(complete_filename);
 	}
 
    std::string error;

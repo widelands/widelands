@@ -84,7 +84,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 	g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
 
-	for(filenameset_t::iterator pname = files.begin(); pname != files.end(); ++pname) {
+	for (filenameset_t::iterator pname = files.begin(); pname != files.end(); ++pname) {
 		std::string savename = *pname + WLGF_SUFFIX;
 
 		if (!g_fs->FileExists(savename))
@@ -102,7 +102,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			FileSystem::FS_StripExtension(fname);
 			m_list.add(fname, *pname);
 			free(fname);
-		} catch(_wexception& ) {
+		} catch (_wexception&) {
 			// we simply skip illegal entries
 		}
 

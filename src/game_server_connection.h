@@ -43,7 +43,7 @@ typedef void (*UserEntered_Handler)(std::string, std::string, bool, void*);
 typedef void (*RoomInfo_Handler)(std::vector<std::string >, void*);
 typedef void (*UserInfo_Handler)(std::string, std::string, std::string, void*);
 typedef void (*ChatMessage_Handler)(std::string, std::string, uchar, void*);
-typedef void (*Disconnet_Handler)( void* );
+typedef void (*Disconnet_Handler)(void*);
 
 class Game_Server_Connection {
    public:
@@ -68,8 +68,8 @@ class Game_Server_Connection {
       void server_message(std::string str);
       void user_entered(std::string str, std::string, uchar);
       void get_room_info(std::vector<std::string >);
-      void get_user_info( std::string, std::string, std::string);
-      void chat_message( std::string, std::string, uchar );
+      void get_user_info(std::string, std::string, std::string);
+      void chat_message(std::string, std::string, uchar);
       void critical_error(std::string str);
 
       // Set user data

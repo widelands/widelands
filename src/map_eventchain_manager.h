@@ -39,19 +39,19 @@ class EventChain;
  * But it is better this way.
  */
 struct MapEventChainManager {
-      MapEventChainManager( void );
-      ~MapEventChainManager( void );
+      MapEventChainManager(void);
+      ~MapEventChainManager(void);
 
       /*
        * Register a new eventchain
        */
-      bool register_new_eventchain( EventChain* );
+      bool register_new_eventchain(EventChain*);
 
       /*
        * Get a eventchain
        */
 	EventChain * get_eventchain(const char * const name) const;
-      void delete_eventchain( const char* name );
+      void delete_eventchain(const char* name);
 
 	typedef std::vector<EventChain *> eventchain_vector;
 	typedef eventchain_vector::size_type Index;

@@ -308,7 +308,7 @@ template<typename T> static void dither_edge_horiz
 	int ydiff = ITOFIX(end.y - start.y) / (end.x - start.x);
 	int centery = ITOFIX(start.y);
 
-	for(int x = start.x; x < end.x; x++, centery += ydiff) {
+	for (int x = start.x; x < end.x; x++, centery += ydiff) {
 		rnd=SIMPLE_RAND(rnd);
 
 		if (x>=0 && x<dstw) {
@@ -386,7 +386,7 @@ template<typename T> static void dither_edge_vert
 	int xdiff = ITOFIX(end.x - start.x) / (end.y - start.y);
 	int centerx = ITOFIX(start.x);
 
-	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
+	for (int y = start.y; y < end.y; y++, centerx += xdiff) {
 		rnd=SIMPLE_RAND(rnd);
 
 		if (y>=0 && y<dsth) {
@@ -449,13 +449,13 @@ template<typename T> static void render_road_horiz
 	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int centery = start.y << 16;
 
-	for(int x = start.x, sx = 0; x < end.x; x++, centery += ydiff, sx ++) {
+	for (int x = start.x, sx = 0; x < end.x; x++, centery += ydiff, sx ++) {
 		if (x < 0 || x >= dstw)
 			continue;
 
 		int y = (centery >> 16) - 2;
 
-		for(int i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
+		for (int i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
 			*(reinterpret_cast<T * const>
 			  (static_cast<uchar * const>(dst.get_pixels()) + y * dst.get_pitch())
 			  +
@@ -479,13 +479,13 @@ template<typename T> static void render_road_vert
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
 
-	for(int y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++ ) {
+	for (int y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++) {
 		if (y < 0 || y >= dsth)
 			continue;
 
 		int x = (centerx >> 16) - 2;
 
-		for(int i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
+		for (int i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
 			*(reinterpret_cast<T * const>
 			  (static_cast<uchar * const>(dst.get_pixels()) +  y * dst.get_pitch())
 			  +
@@ -535,7 +535,7 @@ template<typename T> static void draw_field_int
 	const Surface & rt_normal = *g_gr->get_road_texture(Road_Normal);
 	const Surface & rt_busy   = *g_gr->get_road_texture(Road_Busy);
 
-	if( draw_all ) {
+	if (draw_all) {
 		render_triangle<T> (dst, r_vert,  f_vert, br_vert, f_r_texture);
 		render_triangle<T> (dst, f_vert, br_vert, bl_vert, f_d_texture);
 	} else {
@@ -551,7 +551,7 @@ template<typename T> static void draw_field_int
 	road = (roads >> Road_East) & Road_Mask;
 	if (-128 < f_brightness or -128 < r_brightness) {
 		if (road) {
-			switch(road) {
+			switch (road) {
 				case Road_Normal:
 					render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 					break;
@@ -574,7 +574,7 @@ template<typename T> static void draw_field_int
 	road = (roads >> Road_SouthEast) & Road_Mask;
 	if (-128 < f_brightness or -128 < br_brightness) {
 		if (road) {
-			switch(road) {
+			switch (road) {
 				case Road_Normal:
 					render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 					break;
@@ -598,7 +598,7 @@ template<typename T> static void draw_field_int
 	road = (roads >> Road_SouthWest) & Road_Mask;
 	if (-128 < f_brightness or -128 < bl_brightness) {
 		if (road) {
-			switch(road) {
+			switch (road) {
 				case Road_Normal:
 					render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 					break;

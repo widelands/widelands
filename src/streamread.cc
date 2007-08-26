@@ -97,7 +97,7 @@ std::string StreamRead::String()
 	std::string x;
 	char ch;
 
-	for(;;) {
+	for (;;) {
 		DataComplete(&ch, 1);
 
 		if (ch == 0)

@@ -316,7 +316,7 @@ void NetHost::handle_network ()
 
 	if (promoter!=0){
 	    promoter->run ();
-           
+
 	}
 	// if we are in the game initiation phase, check for new connections
 	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {
@@ -427,8 +427,8 @@ void NetHost::handle_network ()
 				    log ("[Host] Duplicate pong!\n");
 				    continue;
 				}
-				
-				clients[i].lag=std::max( (SDL_GetTicks() - last_ping_sent), (ulong)1);
+
+				clients[i].lag=std::max((SDL_GetTicks() - last_ping_sent), (ulong)1);
 				pongs_received++;
 
 				if (pongs_received==clients.size())
@@ -446,7 +446,7 @@ void NetHost::handle_network ()
 				break;
 			    case NETCMD_CHATMESSAGE:
 				{
-				log ("[Host] Chat recived\n");	
+				log ("[Host] Chat recived\n");
 					char buffer[256];
 					Chat_Message msg;
 					//uchar plrnum =  clients[i].deserializer->getchar();
@@ -460,7 +460,7 @@ void NetHost::handle_network ()
 				}
 				break;
 			    default: //no need to faint on invalid data...
-				log("[Host]Invalid network data received"); 
+				log("[Host]Invalid network data received");
 			}
 
 	// Do not send out packets too often.
@@ -846,7 +846,7 @@ void NetClient::disconnect ()
 
     // Since we are now independent of the host, we are not bound to network
     // time anymore (nor are we receiving NETCMD_ADVANCETIME packets).
-    //FIXME: This is not working. if host drops the clients charactesrs start blinking around 
+	//FIXME: This is not working. if host drops the clients characters start blinking around
     net_game_time=INT_MAX;
 }
 
@@ -911,7 +911,7 @@ void Serializer::end_packet ()
 
 void Serializer::Data(const void * const data, const size_t size)
 {
-	for(size_t idx = 0; idx < size; ++idx)
+	for (size_t idx = 0; idx < size; ++idx)
 		putchar(((const char*)data)[idx]);
 }
 
@@ -954,7 +954,7 @@ int Deserializer::read_packet (TCPsocket sock)
 
 	// read packet data in chunks of 256 bytes
 	while (length>0) {
-		amount=std::min( length, 256 );
+		amount=std::min(length, 256);
 
 		SDLNet_TCP_Recv (sock, buffer, amount);
 
@@ -971,7 +971,7 @@ size_t Deserializer::Data(void* const data, const size_t bufsize)
 {
 	size_t read = 0;
 
-	while(read < bufsize && avail()) {
+	while (read < bufsize && avail()) {
 		((char*)data)[read] = getchar();
 		read++;
 	}

@@ -47,17 +47,17 @@ void Widelands_Map_EventChain_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    // Skip, if no triggers saved
    FileRead fr;
-   if( !fr.TryOpen( fs, "event_chain" ))
+   if (!fr.TryOpen(fs, "event_chain"))
       return;
 
    Profile prof;
-   prof.read( "event_chain", 0, fs );
-   Section* s = prof.get_section( "global" );
+   prof.read("event_chain", 0, fs);
+   Section* s = prof.get_section("global");
 
    /*
 
@@ -71,78 +71,78 @@ throw (_wexception)
       State               m_state;
  */
    // check packet version
-   int packet_version=s->get_int( "packet_version" );
-   if(packet_version == CURRENT_PACKET_VERSION) {
-      while(( s = prof.get_next_section(0)) ) {
+   int packet_version=s->get_int("packet_version");
+   if (packet_version == CURRENT_PACKET_VERSION) {
+      while ((s = prof.get_next_section(0))) {
          std::string name = s->get_name();
          EventChain* e = new EventChain();
 
          // Name
-         e->set_name( name.c_str() );
+         e->set_name(name.c_str());
 
          // Repeating
-         e->m_repeating = s->get_safe_bool( "repeating" );
+         e->m_repeating = s->get_safe_bool("repeating");
 
          // TriggerConditional
          std::vector< TriggerConditional_Factory::Token > toklist;
-         uint nr_tokens = s->get_safe_int( "nr_conditional_element" );
+         uint nr_tokens = s->get_safe_int("nr_conditional_element");
 
          char buf[256];
-         for( uint i = 0; i < nr_tokens; i++) {
+         for (uint i = 0; i < nr_tokens; i++) {
             sprintf(buf, "conditional_element_%02i", i);
             TriggerConditional_Factory::Token tok;
-            std::string type = s->get_safe_string( buf );
+            std::string type = s->get_safe_string(buf);
             tok.data = 0;
-            if( type == "trigger" ) {
+            if (type == "trigger") {
                tok.token = TriggerConditional_Factory::TRIGGER;
                sprintf(buf, "conditional_element_%02i_data", i);
-               std::string trigname = s->get_safe_string( buf );
+               std::string trigname = s->get_safe_string(buf);
                Trigger * const trig = egbase->get_map()->get_mtm().get_trigger(trigname.c_str());
-               if( !trig )
-                  throw wexception( "Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
+               if (!trig)
+                  throw wexception("Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
                tok.data = trig;
-				} else if ( type == ")" ) {
+				} else if (type == ")") {
                tok.token = TriggerConditional_Factory::RPAREN;
-				} else if ( type == "(" ) {
+				} else if (type == "(") {
                tok.token = TriggerConditional_Factory::LPAREN;
-				} else if ( type == "XOR" ) {
+				} else if (type == "XOR") {
                tok.token = TriggerConditional_Factory::XOR;
-				} else if ( type == "OR" ) {
+				} else if (type == "OR") {
                tok.token = TriggerConditional_Factory::OR;
-				} else if ( type == "AND" ) {
+				} else if (type == "AND") {
                tok.token = TriggerConditional_Factory::AND;
-				} else if ( type == "NOT" ) {
+				} else if (type == "NOT") {
                tok.token = TriggerConditional_Factory::NOT;
 				}
-            toklist.push_back( tok );
+            toklist.push_back(tok);
 			}
-         e->set_trigcond( TriggerConditional_Factory::create_from_infix( e, toklist ));
+         e->set_trigcond(TriggerConditional_Factory::create_from_infix(e, toklist));
 
          // Events
-         uint nr_events = s->get_safe_int( "nr_events" );
-         for( uint i = 0; i < nr_events; i++) {
+         uint nr_events = s->get_safe_int("nr_events");
+         for (uint i = 0; i < nr_events; i++) {
             sprintf(buf, "event_%02i", i);
-            std::string evname = s->get_safe_string( buf );
+            std::string evname = s->get_safe_string(buf);
             Event * const event = egbase->get_map()->get_mem().get_event(evname.c_str());
-            if( !event )
-               throw wexception( "Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
-            e->add_event( event );
+            if (!event)
+               throw wexception("Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
+            e->add_event(event);
 			}
 
          // Current event
-         e->m_curevent = s->get_safe_int( "current_event" );
+         e->m_curevent = s->get_safe_int("current_event");
 
          // State
          std::string state = s->get_safe_string("state");
-         if( state == "init") e->m_state = EventChain::INIT;
-         else if( state == "running") e->m_state = EventChain::RUNNING;
-         else if( state == "done") e->m_state = EventChain::DONE;
+         if (state == "init") e->m_state = EventChain::INIT;
+         else if (state == "running") e->m_state = EventChain::RUNNING;
+         else if (state == "done") e->m_state = EventChain::DONE;
 
          egbase->get_map()->get_mecm().register_new_eventchain(e);
 		}
       return;
 	}
-   throw wexception("Unknown version in Map EventChain Packet: %i\n", packet_version );
+   throw wexception("Unknown version in Map EventChain Packet: %i\n", packet_version);
 }
 
 /*
@@ -170,7 +170,7 @@ throw (_wexception)
 			e.m_trigconditional->get_infix_tokenlist();
 		s.set_int("nr_conditional_element", toklist->size());
       char buf[256];
-      for( uint t = 0; t < toklist->size(); t++) {
+      for (uint t = 0; t < toklist->size(); t++) {
          TriggerConditional_Factory::Token tok = (*toklist)[t];
          sprintf(buf, "conditional_element_%02i", t);
 			s.set_string(buf, TriggerConditional_Factory::operators[tok.token]);
@@ -203,7 +203,7 @@ throw (_wexception)
 	}
 
 
-   prof.write("event_chain", false, fs );
+   prof.write("event_chain", false, fs);
 
    // done
 }

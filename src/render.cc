@@ -41,16 +41,16 @@ Rendering functions of the 16-bit software renderer.
 /*
  * Create a Surface from a surface
  */
-Surface::Surface( const Surface& surf ) {
+Surface::Surface(const Surface& surf) {
    m_w = surf.m_w;
    m_h = surf.m_h;
-   m_surface = SDL_DisplayFormat( surf.m_surface ); // HACK: assume this should be picture format; there is no SDL_CopySurface
+   m_surface = SDL_DisplayFormat(surf.m_surface); // HACK: assume this should be picture format; there is no SDL_CopySurface
 }
 
 /*
  * Updating the whole Surface
  */
-void Surface::update( void ) {
+void Surface::update(void) {
    SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 }
 
@@ -58,7 +58,7 @@ void Surface::update( void ) {
  * Save a bitmap
  */
 void Surface::save_bmp(const char & fname) const {
-   assert( m_surface );
+   assert(m_surface);
 	SDL_SaveBMP(m_surface, &fname);
 }
 
@@ -68,9 +68,9 @@ void Surface::save_bmp(const char & fname) const {
  * by direct pixel access. For example for road
  * textures
  */
-void Surface::force_disable_alpha( void ) {
-   SDL_Surface* newsur = SDL_DisplayFormat( m_surface );
-   SDL_FreeSurface( m_surface );
+void Surface::force_disable_alpha(void) {
+   SDL_Surface* newsur = SDL_DisplayFormat(m_surface);
+   SDL_FreeSurface(m_surface);
    m_surface = newsur;
 }
 
@@ -82,7 +82,7 @@ Draws the outline of a rectangle
 ===============
 */
 void Surface::draw_rect(const Rect rc, const RGBColor clr) {
-   assert( m_surface );
+   assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
@@ -110,7 +110,7 @@ Draws a filled rectangle
 ===============
 */
 void Surface::fill_rect(const Rect rc, const RGBColor clr) {
-   assert( m_surface );
+   assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
@@ -118,7 +118,7 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 	const ulong color = clr.map(format());
 
    SDL_Rect r = { rc.x, rc.y, rc.w, rc.h };
-   SDL_FillRect( m_surface, &r, color);
+   SDL_FillRect(m_surface, &r, color);
 }
 
 /*
@@ -139,15 +139,15 @@ void Surface::brighten_rect(const Rect rc, const int factor) {
          uchar gr, gg, gb;
          short r, g, b;
          ulong clr = get_pixel(x,y);
-         SDL_GetRGB( clr, m_surface->format, &gr, &gg, &gb );
+         SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
          r = gr + factor;
          g = gg + factor;
          b = gb + factor;
          if (b & 0xFF00) b = (~b) >> 24;
          if (g & 0xFF00) g = (~g) >> 24;
          if (r & 0xFF00) r = (~r) >> 24;
-         clr = SDL_MapRGB( m_surface->format, r, g, b );
-         set_pixel( x, y, clr );
+         clr = SDL_MapRGB(m_surface->format, r, g, b);
+         set_pixel(x, y, clr);
 	}
 }
 
@@ -160,7 +160,7 @@ Clear the entire bitmap to black
 ===============
 */
 void Surface::clear() {
-	SDL_FillRect( m_surface, 0, 0 );
+	SDL_FillRect(m_surface, 0, 0);
 }
 
 /*
@@ -175,14 +175,14 @@ void Surface::blit(Point dst, Surface* src, Rect srcrc)
    SDL_Rect srcrect = { srcrc.x, srcrc.y, srcrc.w, srcrc.h };
    SDL_Rect dstrect = { dst.x, dst.y, 0, 0 };
 
-   SDL_BlitSurface( src->m_surface, &srcrect, m_surface, &dstrect );
+   SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
 }
 
 /*
  * Fast blit, simply copy the source to the destination
  */
-void Surface::fast_blit( Surface* src ) {
-   SDL_BlitSurface( src->m_surface, 0, m_surface, 0 );
+void Surface::fast_blit(Surface* src) {
+   SDL_BlitSurface(src->m_surface, 0, m_surface, 0);
 }
 
 /*
@@ -370,7 +370,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
    m_plrframes = new std::vector<Surface*>[MAX_PLAYERS+1];
 
    std::vector<Surface*> frames;
-	for(;;) {
+	for (;;) {
       char fname[256];
       int nr = frames.size();
       char *p;
@@ -384,7 +384,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
          nr=frames.size();
          snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(),extensions[i]);
          p = fname + strlen(fname);
-         while(p > fname) {
+         while (p > fname) {
             if (*--p != '?')
                continue;
 
@@ -400,7 +400,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
          // is the frame actually there?
          if (!g_fs->FileExists(fname)) {
-            if(i==(nextensions-1)) { alldone=true; break; }
+            if (i==(nextensions-1)) { alldone=true; break; }
             continue;
 			}
 
@@ -412,18 +412,18 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				frames.push_back(&frame);
 				frame.set_sdl_surface(bmp);
 			}
-         catch(std::exception& e)
+         catch (std::exception& e)
          {
             log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
             continue;
 			}
 
 
-         if(!cycling) alldone=true;
+         if (!cycling) alldone=true;
 			break;
 		}
 
-      if(alldone==true) break;
+      if (alldone==true) break;
 	}
 
    m_plrframes[0] = frames;
@@ -443,9 +443,9 @@ Free all resources
 */
 AnimationGfx::~AnimationGfx()
 {
-   for( uint i = 0; i <= MAX_PLAYERS; i++ ) {
+   for (uint i = 0; i <= MAX_PLAYERS; i++) {
       std::vector<Surface*>& frames = m_plrframes[i];
-      for( uint j = 0; j < frames.size(); j++) {
+      for (uint j = 0; j < frames.size(); j++) {
          delete frames[j];
 		}
 	}
@@ -460,12 +460,12 @@ AnimationGfx::encode
 Encodes the given surface into a frame
 ===============
 */
-void AnimationGfx::encode( uchar plr, const RGBColor* plrclrs )
+void AnimationGfx::encode(uchar plr, const RGBColor* plrclrs)
 {
-   assert( m_encodedata.hasplrclrs );
+   assert(m_encodedata.hasplrclrs);
    std::vector<Surface*>& frames = m_plrframes[plr];
 
-   for( uint i = 0; i < m_plrframes[0].size(); i++ ) {
+   for (uint i = 0; i < m_plrframes[0].size(); i++) {
       // Copy the old surface
 		Surface & origsurface = *m_plrframes[0][i];
 		SDL_Surface & tempsurface = *SDL_ConvertSurface

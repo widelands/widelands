@@ -79,7 +79,7 @@ m_te      (te)
 
    // What type
    new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
-   m_name = new UI::Edit_Box( this, 120, 5, 120, 20, 0, 0);
+   m_name = new UI::Edit_Box(this, 120, 5, 120, 20, 0, 0);
 	m_name->set_text(obj.get_name());
    posy += 20 + spacing;
 
@@ -120,7 +120,7 @@ m_te      (te)
 
    posy += 20 + spacing;
 
-   set_inner_size( get_inner_w(), posy);
+   set_inner_size(get_inner_w(), posy);
 
    center_to_parent();
 }
@@ -145,10 +145,10 @@ void Edit_Objective_Window::clicked_ok() {
    // Extract value
 	MapObjective & obj = UI::Table<MapObjective &>::get(m_te);
 
-	obj.set_name( m_name->get_text());
-	obj.set_is_optional( m_optional->get_state() );
-	obj.set_is_visible( m_visible->get_state() );
-	obj.set_descr( m_descr->get_text().c_str() );
+	obj.set_name(m_name->get_text());
+	obj.set_is_optional(m_optional->get_state());
+	obj.set_is_visible(m_visible->get_state());
+	obj.set_descr(m_descr->get_text().c_str());
 	m_te.set_string(0, obj.get_name());
 	m_te.set_string(1, obj.get_is_optional() ? "Yes" : "No");
 	m_te.set_string(2, obj.get_is_visible() ? "Yes" : "No");
@@ -216,9 +216,9 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
    posx += 60 + spacing;
 
    // Trigger name
-   new UI::Textarea( this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
+   new UI::Textarea(this, posx, get_inner_h() - 30, 80, 20, _("Trigger: "), Align_CenterLeft);
    posx += 45 + spacing;
-   m_trigger = new UI::Textarea( this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
+   m_trigger = new UI::Textarea(this, posx, get_inner_h() - 30, 100, 20, "-", Align_CenterLeft);
 
    // Add all variables
 	const MapObjectiveManager & mom = m_parent->egbase().map().get_mom();
@@ -303,8 +303,8 @@ void Editor_Objectives_Menu::clicked_del() {
 	map.get_mom().delete_objective(obj.get_name());
 	m_table.remove_selected();
 
-         m_edit_button->set_enabled( false );
-         m_delete_button->set_enabled( false );
+         m_edit_button->set_enabled(false);
+         m_delete_button->set_enabled(false);
 }
 
 
@@ -312,8 +312,8 @@ void Editor_Objectives_Menu::clicked_del() {
  * The table has been selected
  */
 void Editor_Objectives_Menu::table_selected(uint n) {
-   m_edit_button->set_enabled( true );
-   m_delete_button->set_enabled( true );
+   m_edit_button->set_enabled(true);
+   m_delete_button->set_enabled(true);
 
    // Baad stuff will happen, if trigger got deleted
 	m_trigger->set_text(m_table[n].get_trigger()->get_name());

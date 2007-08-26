@@ -45,7 +45,7 @@ class Surface {
 
 public:
 	Surface() : m_surface(0), m_offsx(0) ,m_offsy(0) {}
-	Surface( const Surface& );
+	Surface(const Surface&);
 	~Surface();
 
 	/// Set surface, only call once
@@ -82,7 +82,7 @@ public:
 	void brighten_rect(const Rect, const int factor);
 
 	void blit(Point dst, Surface* src, Rect srcrc);
-	void fast_blit( Surface* src );
+	void fast_blit(Surface* src);
 
 	void draw_minimap
 		(const Editor_Game_Base  & egbase,
@@ -110,7 +110,7 @@ public:
 		 bool);
 
 private:
-	inline void set_subwin( Rect r );
+	inline void set_subwin(Rect r);
 	inline void unset_subwin();
 };
 

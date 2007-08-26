@@ -46,7 +46,7 @@ void Game_Interactive_Player_Data_Packet::Read
 throw (_wexception)
 {
 	FileRead fr;
-	fr.Open( fs, "binary/interactive_player" );
+	fr.Open(fs, "binary/interactive_player");
 
 	// read packet version
 	const Uint16 packet_version = fr.Unsigned16();
@@ -109,5 +109,5 @@ throw (_wexception)
 	// Display flags
 	fw.Unsigned32(plr->get_display_flags());
 
-	fw.Write( fs, "binary/interactive_player" );
+	fw.Write(fs, "binary/interactive_player");
 }

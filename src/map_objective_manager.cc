@@ -25,18 +25,18 @@
 MapObjectiveManager::MapObjectiveManager() {}
 
 MapObjectiveManager::~MapObjectiveManager() {
-   for( uint i = 0; i < m_objectives.size(); i++)
+   for (uint i = 0; i < m_objectives.size(); i++)
       delete m_objectives[i];
-   m_objectives.resize( 0 );
+   m_objectives.resize(0);
 }
 
 
-bool MapObjectiveManager::register_new_objective( MapObjective* mv ) {
+bool MapObjectiveManager::register_new_objective(MapObjective* mv) {
    // check if this objective is already known
-   if( get_objective( mv->get_name() ) )
+   if (get_objective(mv->get_name()))
          return 0;
 
-   m_objectives.push_back( mv );
+   m_objectives.push_back(mv);
    return true;
 }
 
@@ -45,8 +45,8 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 {
    uint i;
    MapObjective* retval = 0;
-   for( i = 0; i < m_objectives.size(); i++) {
-      if( !strcmp( m_objectives[i]->get_name(), name ) ) {
+   for (i = 0; i < m_objectives.size(); i++) {
+      if (!strcmp(m_objectives[i]->get_name(), name)) {
          retval = m_objectives[i];
          break;
 		}
@@ -56,12 +56,12 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 }
 
 
-void MapObjectiveManager::delete_objective( const char* name ) {
-   for( uint i = 0; i < m_objectives.size(); i++) {
-      if( !strcmp( m_objectives[i]->get_name(), name ) ) {
+void MapObjectiveManager::delete_objective(const char* name) {
+   for (uint i = 0; i < m_objectives.size(); i++) {
+      if (!strcmp(m_objectives[i]->get_name(), name)) {
          delete m_objectives[i];
          m_objectives[i] = m_objectives[m_objectives.size() - 1];
-         m_objectives.resize( m_objectives.size() - 1 );
+         m_objectives.resize(m_objectives.size() - 1);
          break;
 		}
 	}

@@ -244,8 +244,8 @@ public:
 
 	bool object_still_available(const Map_Object * const t) const {
 		objmap_t::const_iterator it = m_objects.begin();
-		while(it!=m_objects.end()) {
-			if(it->second==t) return true;
+		while (it!=m_objects.end()) {
+			if (it->second==t) return true;
 			++it;
 		}
 		return false;

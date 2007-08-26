@@ -265,7 +265,7 @@ void AttackController::soldierWon(Soldier* soldier) {
       std::vector<Soldier*> entryingSoldiers;
       uint capacity = newMs->get_capacity();
 
-      for(uint i=0;i<involvedSoldiers.size();i++) {
+      for (uint i=0;i<involvedSoldiers.size();i++) {
          assert(involvedSoldiers[i].attacker);
          if (i < capacity) {
             entryingSoldiers.push_back(involvedSoldiers[i].soldier);
@@ -276,7 +276,7 @@ void AttackController::soldierWon(Soldier* soldier) {
       newMs->init_after_conquering(game,&entryingSoldiers);*/
 	}
 
-	for(uint i=0;i<involvedSoldiers.size();i++) {
+	for (uint i=0;i<involvedSoldiers.size();i++) {
 		//involvedSoldiers[i].soldier->set_economy(0);
 		involvedSoldiers[i].soldier->set_location(involvedSoldiers[i].origin);
 		involvedSoldiers[i].soldier->send_signal(game,"return_home");
@@ -290,7 +290,7 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived) {
    uint s1Index = getBattleSoldierIndex(soldier);
    involvedSoldiers[s1Index].arrived = isArrived;
 
-   for(uint i=0;i<involvedSoldiers.size();i++) {
+   for (uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].arrived && !involvedSoldiers[i].fighting && (involvedSoldiers[i].attacker != involvedSoldiers[s1Index].attacker)) {
          involvedSoldiers[i].fighting = true;
          involvedSoldiers[s1Index].fighting = true;
@@ -311,7 +311,7 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived) {
 
 bool AttackController::opponentsLeft(Soldier* soldier) {
    uint idx = getBattleSoldierIndex(soldier);
-   for(uint i=0;i<involvedSoldiers.size();i++) {
+   for (uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].attacker != involvedSoldiers[idx].attacker)
          return true;
 	}
@@ -319,7 +319,7 @@ bool AttackController::opponentsLeft(Soldier* soldier) {
 }
 
 uint AttackController::getBattleSoldierIndex(Soldier* soldier) {
-  for(uint i=0;i<involvedSoldiers.size();i++) {
+  for (uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].soldier == soldier)
          return i;
 	}
@@ -336,7 +336,7 @@ void AttackController::removeSoldier(Soldier* soldier) {
 }
 
 bool AttackController::battleGroundOccupied(Coords coords) {
-   for(uint i=0;i<involvedSoldiers.size();i++) {
+   for (uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].battleGround == coords) {
          return true;
 		}

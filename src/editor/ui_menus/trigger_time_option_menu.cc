@@ -57,7 +57,7 @@ m_parent(parent)
 
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text( trigger->get_name() );
+   m_name->set_text(trigger->get_name());
 
    posy+=20+spacing;
 
@@ -240,8 +240,8 @@ void Trigger_Time_Option_Menu::clicked_ok() {
       int seconds=m_values[4]*10+m_values[5];
       int total=hours*3600+minutes*60+seconds;
       m_trigger->set_wait_time(total);
-      if(m_name->get_text())
-         m_trigger->set_name( m_name->get_text() );
+      if (m_name->get_text())
+         m_trigger->set_name(m_name->get_text());
       end_modal(1);
 }
 
@@ -249,10 +249,10 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 void Trigger_Time_Option_Menu::clicked(int i) {
    int id=(i-2)/2;
    m_values[id]= i%2 ?  m_values[id]-1 :  m_values[id]+1;
-   if(m_values[id]<0) m_values[id]=0;
-   if(!m_values[0] && !m_values[1] && !m_values[2] && !m_values[3] && !m_values[4] && !m_values[5]) m_values[5]=1;
-   if(m_values[id]>9) m_values[id]=9;
-   if( (id==2 || id==4)  && m_values[id]>=6) m_values[id]=5;
+   if (m_values[id]<0) m_values[id]=0;
+   if (!m_values[0] && !m_values[1] && !m_values[2] && !m_values[3] && !m_values[4] && !m_values[5]) m_values[5]=1;
+   if (m_values[id]>9) m_values[id]=9;
+   if ((id==2 || id==4)  && m_values[id]>=6) m_values[id]=5;
    update();
 }
 
@@ -261,7 +261,7 @@ void Trigger_Time_Option_Menu::clicked(int i) {
  */
 void Trigger_Time_Option_Menu::update(void) {
    int i;
-   for(i=0; i<6; i++) {
+   for (i=0; i<6; i++) {
       std::string str;
       str.append(1, static_cast<char>(m_values[i]+0x30));
       m_textareas[i]->set_text(str);

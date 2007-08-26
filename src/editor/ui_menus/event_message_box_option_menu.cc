@@ -63,7 +63,7 @@ m_parent(parent)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
-   m_name->set_text( event->get_name() );
+   m_name->set_text(event->get_name());
    posy+= 20+spacing;
 
    // Modal cb
@@ -76,13 +76,13 @@ m_parent(parent)
    // Window Title
    new UI::Textarea(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
    m_window_title=new UI::Edit_Box(this, spacing+100, posy, get_inner_w()-100-2*spacing, 20, 0, 2);
-   m_window_title->set_text( m_event->get_window_title() );
+   m_window_title->set_text(m_event->get_window_title());
 
    // Text
    posy+=20+spacing;
    new UI::Textarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
    posy+=20+spacing;
-   m_text=new UI::Multiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event->get_text() );
+   m_text=new UI::Multiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event->get_text());
 
    posy+=80+spacing;
 
@@ -163,9 +163,9 @@ m_parent(parent)
          m_null_triggers.push_back(i);
 	}
 
-   for(int i=0; i<m_event->get_nr_buttons(); i++) {
+   for (int i=0; i<m_event->get_nr_buttons(); i++) {
       m_buttons[i].name=m_event->get_button_name(i);
-      for(int j=0; j<((int)m_null_triggers.size()); j++) {
+      for (int j=0; j<((int)m_null_triggers.size()); j++) {
          // Get this triggers index
          int foundidx = -1;
          for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
@@ -174,7 +174,7 @@ m_parent(parent)
                break;
 				}
 
-         if(foundidx==m_null_triggers[j])
+         if (foundidx==m_null_triggers[j])
             m_buttons[i].trigger=j;
 		}
 	}
@@ -204,18 +204,18 @@ bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 
 void Event_Message_Box_Option_Menu::clicked_ok() {
-            if(m_name->get_text())
-               m_event->set_name( m_name->get_text() );
-            if(m_text->get_text().c_str())
-               m_event->set_text( m_text->get_text().c_str() );
-            if(m_window_title->get_text())
-               m_event->set_window_title( m_window_title->get_text() );
+            if (m_name->get_text())
+               m_event->set_name(m_name->get_text());
+            if (m_text->get_text().c_str())
+               m_event->set_text(m_text->get_text().c_str());
+            if (m_window_title->get_text())
+               m_event->set_window_title(m_window_title->get_text());
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
 	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
-            for(int b=0; b<m_nr_buttons; b++) {
+            for (int b=0; b<m_nr_buttons; b++) {
                m_event->set_button_name(b, m_buttons[b].name);
-               if(m_buttons[b].trigger!=-1) {
+               if (m_buttons[b].trigger!=-1) {
                   m_event->set_button_trigger
                      (b,
                       static_cast<Trigger_Null*>
@@ -232,28 +232,28 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
 
 void Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease() {
             m_nr_buttons--;
-            if(m_nr_buttons<1) m_nr_buttons=1;
+            if (m_nr_buttons<1) m_nr_buttons=1;
             update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase() {
             m_nr_buttons++;
-            if(m_nr_buttons>MAX_BUTTONS) m_nr_buttons=MAX_BUTTONS;
+            if (m_nr_buttons>MAX_BUTTONS) m_nr_buttons=MAX_BUTTONS;
             update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease() {
             m_buttons[m_ls_selected].trigger--;
-            if(m_buttons[m_ls_selected].trigger<-1) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
+            if (m_buttons[m_ls_selected].trigger<-1) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
             update();
 }
 
 
 void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
             m_buttons[m_ls_selected].trigger++;
-            if(m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
+            if (m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
                m_buttons[m_ls_selected].trigger=-1;
             update();
 }
@@ -263,16 +263,16 @@ void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
  * update function: update all UI elements
  */
 void Event_Message_Box_Option_Menu::update(void) {
-   if(m_ls_selected>=m_nr_buttons) m_buttons_ls->select(0);
+   if (m_ls_selected>=m_nr_buttons) m_buttons_ls->select(0);
 
-   if(!m_null_triggers.size()) {
+   if (!m_null_triggers.size()) {
       // No triggers, no other buttons
       m_nr_buttons=1;
 	}
 
    m_buttons_ls->clear();
    int i;
-   for(i=0; i<m_nr_buttons; i++)
+   for (i=0; i<m_nr_buttons; i++)
 		m_buttons_ls->add(m_buttons[i].name.c_str(), 0);
 
    std::string text;
@@ -280,9 +280,9 @@ void Event_Message_Box_Option_Menu::update(void) {
    m_nr_buttons_ta->set_text(text.c_str());
 
 
-   m_button_name->set_text( m_buttons[m_ls_selected].name.c_str());
+   m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
 
-   if(m_nr_buttons && m_null_triggers.size()) {
+   if (m_nr_buttons && m_null_triggers.size()) {
 		m_current_trigger_ta->set_text
 			(m_buttons[m_ls_selected].trigger == -1 ?
 			 "none"

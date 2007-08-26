@@ -49,8 +49,8 @@ int Editor_Set_Resources_Tool::handle_click_impl
 		int max_amount = world.get_resource(m_cur_res)->get_max_amount();
 
       amount=m_set_to;
-      if(amount<0) amount=0;
-      if(amount>max_amount) amount=max_amount;
+      if (amount<0) amount=0;
+      if (amount>max_amount) amount=max_amount;
 
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
@@ -61,7 +61,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
 				 (mr.location().field->get_resources_amount()).c_str());
 			overlay_manager.remove_overlay(mr.location(), picid);
 
-         if(!amount) {
+         if (!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
 			} else {

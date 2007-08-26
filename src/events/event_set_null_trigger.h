@@ -44,15 +44,15 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
 	void Write(Section &, const Editor_Game_Base &) const;
       void Read(Section*, Editor_Game_Base*);
 
-      inline void set_trigger( Trigger_Null* trig ) {
-         if( m_trigger )
-            unreference_trigger( m_trigger );
-         if( trig )
-            reference_trigger( trig );
+      inline void set_trigger(Trigger_Null* trig) {
+         if (m_trigger)
+            unreference_trigger(m_trigger);
+         if (trig)
+            reference_trigger(trig);
          m_trigger=trig;
 		}
-      inline Trigger_Null* get_trigger( void ) { return m_trigger; }
-      inline void set_setto( bool t ) { m_setto = t; }
+      inline Trigger_Null* get_trigger(void) { return m_trigger; }
+      inline void set_setto(bool t) { m_setto = t; }
 	bool get_setto() const {return m_setto;}
 
       // For Trigger referencer

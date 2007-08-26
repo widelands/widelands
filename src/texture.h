@@ -65,7 +65,7 @@ public:
 	Uint32 get_minimap_color(const char shade);
 
 	void animate(uint time);
-	void reset_was_animated( void ) { m_was_animated = false; }
+	void reset_was_animated(void) { m_was_animated = false; }
 	bool was_animated() const throw () {return m_was_animated;}
 };
 

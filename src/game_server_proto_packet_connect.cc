@@ -43,9 +43,9 @@ ushort Game_Server_Protocol_Packet_Connect::get_id(void) {
  * Write To network
  */
 void Game_Server_Protocol_Packet_Connect::send(Network_Buffer* buffer) {
-   ushort version = ( GSP_MAJOR_VERSION << 8 ) | GSP_MINOR_VERSION;
-   buffer->put_16( version );
-   buffer->put_string( "widelands" );
+   ushort version = (GSP_MAJOR_VERSION << 8) | GSP_MINOR_VERSION;
+   buffer->put_16(version);
+   buffer->put_string("widelands");
 }
 
 /*
@@ -57,13 +57,13 @@ void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* g
 
    char buffer[1024];
 
-   switch( retcode ) {
+   switch (retcode) {
       case WELCOME: // Everything is ok
          break;
 
       case PROTOCOL_TO_OLD:
 	      snprintf(buffer, 1024, _("Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n").c_str(),
-			 GSP_MAJOR_VERSION, GSP_MINOR_VERSION, version &0xff00 , version &0x00ff );
+			 GSP_MAJOR_VERSION, GSP_MINOR_VERSION, version &0xff00 , version &0x00ff);
          gsc->critical_error(buffer);
          break;
 

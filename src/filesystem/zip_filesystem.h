@@ -49,7 +49,7 @@ struct ZipFilesystem : public FileSystem {
 
 	virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
 	virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
-                                                 const Type );
+                                                 const Type);
 	virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
 	virtual void Rename(const std::string&, const std::string&);
 
@@ -59,9 +59,9 @@ public:
 	virtual const std::string getBasename() {return m_zipfilename;};
 
 private:
-	void m_OpenUnzip( void );
-	void m_OpenZip( void );
-	void m_Close( void );
+	void m_OpenUnzip(void);
+	void m_OpenZip(void);
+	void m_Close(void);
 
 private:
 	enum State {

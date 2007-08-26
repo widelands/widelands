@@ -89,7 +89,7 @@ struct InputCallback {
  * floating around by accident.
  *
  * For testing purposes, we can spawn a second process with widelands running in
- * it (see \ref init_double_game() ). The fact that WLApplication is a singleton
+ * it (see \ref init_double_game()). The fact that WLApplication is a singleton
  * is not touched by this: the processes start out as a byte exact memory copy,
  * so the two instances can't know (except for fork()'s return value) that they
  * are (or are not) a primary thread. Each WLApplication singleton really *is* a

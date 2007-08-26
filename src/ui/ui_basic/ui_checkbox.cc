@@ -53,9 +53,8 @@ Statebox::Statebox(Panel *parent, int x, int y, uint picid)
 	else
 	{
 		m_custom_picture = false;
-		m_pic_graphics = g_gr->get_picture( PicMod_UI,
-		                                    "pics/checkbox_light_new.png"
-		                                  );
+		m_pic_graphics =
+			g_gr->get_picture(PicMod_UI, "pics/checkbox_light_new.png");
 	}
 
 	m_highlighted = false;
@@ -111,7 +110,7 @@ void Statebox::set_state(bool on)
 	m_state = on;
 	changed.call();
 	changedto.call(on);
-	if(m_id!=-1) changedtoid.call(m_id,on);
+	if (m_id!=-1) changedtoid.call(m_id,on);
    update(0, 0, get_w(), get_h());
 }
 

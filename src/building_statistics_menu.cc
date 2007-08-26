@@ -84,8 +84,8 @@ m_table
    posx = get_inner_w() / 4 + spacing;
 
    // Toggle when to run button
-   UI::Textarea* ta = new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Total Productivity: "), Align_CenterLeft );
-   m_progbar = new UI::Progress_Bar(this, posx + ta->get_w() + spacing, posy, get_inner_w() - ( posx + ta->get_w() + spacing) - spacing, 24, UI::Progress_Bar::Horizontal);
+   UI::Textarea* ta = new UI::Textarea(this, posx, posy, get_inner_w()/4, 24, _("Total Productivity: "), Align_CenterLeft);
+   m_progbar = new UI::Progress_Bar(this, posx + ta->get_w() + spacing, posy, get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 24, UI::Progress_Bar::Horizontal);
    m_progbar->set_total(100);
    posy += 25;
 
@@ -193,12 +193,12 @@ Building_Statistics_Menu::~Building_Statistics_Menu()
  *
  * Update this statistic
  */
-void Building_Statistics_Menu::think( void ) {
+void Building_Statistics_Menu::think(void) {
    int gs = m_parent->get_game()->get_speed();
 
-   if(gs==0) gs = 1;
+   if (gs==0) gs = 1;
 
-   if((m_parent->get_game()->get_gametime() - m_lastupdate)/gs > UPDATE_TIME ) {
+   if ((m_parent->get_game()->get_gametime() - m_lastupdate)/gs > UPDATE_TIME) {
       update();
       m_lastupdate = m_parent->get_game()->get_gametime();
 	}
@@ -226,9 +226,9 @@ void Building_Statistics_Menu::draw(RenderTarget* dst) {
  * validate if this pointer is ok
  */
 int Building_Statistics_Menu::validate_pointer(int* id, int size) {
-   if(*id < 0)
+   if (*id < 0)
       *id = size-1;
-   if(*id >= size)
+   if (*id >= size)
       *id = 0;
 
    return *id;
@@ -266,8 +266,8 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
          /* Jump to prev constructionsite */
          {
             int curindex = m_last_building_index;
-            while( validate_pointer(&(--m_last_building_index), vec.size()) != curindex )
-               if( vec[m_last_building_index].is_constructionsite ) break;
+            while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
+               if (vec[m_last_building_index].is_constructionsite) break;
 			}
          break;
 
@@ -275,8 +275,8 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
          /* Jump to next constructionsite */
          {
             int curindex = m_last_building_index;
-            while( validate_pointer(&(++m_last_building_index), vec.size()) != curindex )
-               if( vec[m_last_building_index].is_constructionsite ) break;
+            while (validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
+               if (vec[m_last_building_index].is_constructionsite) break;
 			}
          break;
 
@@ -284,20 +284,20 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
          {
             int curindex = m_last_building_index;
             found = false;
-            while( validate_pointer(&(--m_last_building_index), vec.size()) != curindex )
-               if( !vec[m_last_building_index].is_constructionsite ) {
+            while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
+               if (!vec[m_last_building_index].is_constructionsite) {
                   Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-                  if( b->get_building_type() == Building::PRODUCTIONSITE) {
-                     if(((ProductionSite*)b)->get_statistics_percent() <= LOW_PROD ) {
+                  if (b->get_building_type() == Building::PRODUCTIONSITE) {
+                     if (((ProductionSite*)b)->get_statistics_percent() <= LOW_PROD) {
                         found = true;
                         break;
 							}
 						}
 					}
-            if(!found) { // Now look at the old
+            if (!found) { // Now look at the old
                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-               if( b->get_building_type() == Building::PRODUCTIONSITE)
-                  if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD )
+               if (b->get_building_type() == Building::PRODUCTIONSITE)
+                  if (((ProductionSite*)b)->get_statistics_percent() < LOW_PROD)
                      found = true;
 				}
 			}
@@ -307,20 +307,20 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
          {
             int curindex = m_last_building_index;
             found = false;
-            while( validate_pointer(&(++m_last_building_index), vec.size()) != curindex )
-               if( !vec[m_last_building_index].is_constructionsite ) {
+            while (validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
+               if (!vec[m_last_building_index].is_constructionsite) {
                   Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-                  if( b->get_building_type() == Building::PRODUCTIONSITE) {
-                     if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD ) {
+                  if (b->get_building_type() == Building::PRODUCTIONSITE) {
+                     if (((ProductionSite*)b)->get_statistics_percent() < LOW_PROD) {
                         found = true;
                         break;
 							}
 						}
 					}
-            if(!found) { // Now look at the old
+            if (!found) { // Now look at the old
                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-               if( b->get_building_type() == Building::PRODUCTIONSITE)
-                     if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD )
+               if (b->get_building_type() == Building::PRODUCTIONSITE)
+                     if (((ProductionSite*)b)->get_statistics_percent() < LOW_PROD)
                         found = true;
 					}
 			}
@@ -343,7 +343,7 @@ void Building_Statistics_Menu::table_changed(uint) {update();}
 /*
  * Update table
  */
-void Building_Statistics_Menu::update( void ) {
+void Building_Statistics_Menu::update(void) {
    m_owned->set_text("");
    m_build->set_text("");
    m_progbar->set_state(0);
@@ -373,8 +373,8 @@ void Building_Statistics_Menu::update( void ) {
 
       // If not in list, add new one, as long as this building is
       // enabled
-      if(!te) {
-         if(! m_parent->get_player()->is_building_allowed(i) ) continue;
+      if (!te) {
+         if (! m_parent->get_player()->is_building_allowed(i)) continue;
 			te = &m_table.add(i, building.get_buildicon());
 		}
 
@@ -417,7 +417,7 @@ void Building_Statistics_Menu::update( void ) {
 				(static_cast<const float>(total_prod)
 				 /
 				 static_cast<const float>(nr_owned));
-			snprintf(buffer, sizeof(buffer), "%i", percent );
+			snprintf(buffer, sizeof(buffer), "%i", percent);
 			if (is_selected)  {
 				m_progbar->set_state(percent);
 				m_btn[Prev_Unproductive]->set_enabled(true);
@@ -435,13 +435,13 @@ void Building_Statistics_Menu::update( void ) {
           // Number of this buildings
 		snprintf(buffer, sizeof(buffer), "%i", nr_owned);
           te->set_string(2, buffer);
-          if(is_selected)
+          if (is_selected)
             m_owned->set_text(buffer);
 
           // Number of currently builds
 		snprintf(buffer, sizeof(buffer), "%i", nr_build);
           te->set_string(3, buffer);
-          if(is_selected)
+          if (is_selected)
             m_build->set_text(buffer);
 	}
 

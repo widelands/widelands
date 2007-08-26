@@ -44,7 +44,7 @@ void Widelands_Map_Terrain_Data_Packet::Read
 throw (_wexception)
 {
    FileRead fr;
-   fr.Open( fs, "binary/terrain");
+   fr.Open(fs, "binary/terrain");
 
 	Map & map = egbase->map();
 	World & world = map.world();
@@ -52,7 +52,7 @@ throw (_wexception)
    // first packet version
    int packet_version=fr.Unsigned16();
 
-	if(packet_version==CURRENT_PACKET_VERSION) {
+	if (packet_version==CURRENT_PACKET_VERSION) {
 		const Uint16 nr_terrains = fr.Unsigned16();
 
       // construct ids and map
@@ -126,6 +126,6 @@ throw (_wexception)
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
 	}
 
-   fw.Write( fs, "binary/terrain");
+   fw.Write(fs, "binary/terrain");
    // DONE
 }

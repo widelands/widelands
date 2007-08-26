@@ -39,24 +39,24 @@ class Trigger;
  * But it is better this way.
  */
 struct MapTriggerManager {
-      MapTriggerManager( void );
-      ~MapTriggerManager( void );
+      MapTriggerManager(void);
+      ~MapTriggerManager(void);
 
       /*
        * Register a new trigger
        */
-      bool register_new_trigger( Trigger* );
+      bool register_new_trigger(Trigger*);
 
       /*
        * Delete unused trigger
        */
-      void delete_unreferenced_triggers( void );
+      void delete_unreferenced_triggers(void);
 
       /*
        * Get a trigger
        */
-      Trigger* get_trigger( const char* name );
-      void delete_trigger( const char* name );
+      Trigger* get_trigger(const char* name);
+      void delete_trigger(const char* name);
 
 	typedef std::vector<Trigger *> trigger_vector;
 	typedef trigger_vector::size_type Index;

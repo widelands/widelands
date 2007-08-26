@@ -78,7 +78,7 @@ public:
 	void get_picture_size(const uint pic, uint & w, uint & h);
 	uint get_picture(const int mod, Surface &, const char * const name = 0);
 	Surface* get_picture_surface(uint id);
-	void save_png(uint, FileWrite* );
+	void save_png(uint, FileWrite*);
 	uint create_surface(int w, int h);
 	void free_surface(uint pic);
 	RenderTarget* get_surface_renderer(uint pic);
@@ -99,7 +99,7 @@ public:
 
 	uint get_maptexture(const char & fnametempl, const uint frametime);
 	void animate_maptextures(uint time);
-	void reset_texture_animation_reminder( void );
+	void reset_texture_animation_reminder(void);
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(const uint anim=0) const;
@@ -110,7 +110,7 @@ public:
 	Texture* get_maptexture_data(uint id);
 	AnimationGfx* get_animation(const uint anim) const;
 
-	Surface* get_road_texture( int roadtex);
+	Surface* get_road_texture(int roadtex);
 
 protected:
 	/// Static function for png writing

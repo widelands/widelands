@@ -37,7 +37,7 @@ struct Languages {
 
 
 /*
- * Add your language below in alphabetical order ( as far as possible ). But keep
+ * Add your language below in alphabetical order (as far as possible). But keep
  * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc

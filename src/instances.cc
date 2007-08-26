@@ -48,13 +48,13 @@ void Cmd_Destroy_Map_Object::execute(Game* g) {
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
  int version=fr->Unsigned16();
-   if(version==CMD_DESTROY_MAP_OBJECT_VERSION) {
+   if (version==CMD_DESTROY_MAP_OBJECT_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
 
       // Serial
       int fileserial=fr->Unsigned32();
-      if( fileserial ) {
+      if (fileserial) {
          assert(mol->is_object_known(fileserial));
          obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
 		} else
@@ -71,11 +71,11 @@ void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Wide
 
    // Now serial
    Map_Object* obj=egbase->objects().get_object(obj_serial);
-   if(obj) { // The object might have vanished
+   if (obj) { // The object might have vanished
       assert(mos->is_object_known(obj));
       fw->Unsigned32(mos->get_object_file_index(obj));
 	} else
-      fw->Unsigned32( 0 );
+      fw->Unsigned32(0);
 
 }
 
@@ -93,14 +93,14 @@ void Cmd_Act::execute(Game* g) {
 #define CMD_ACT_VERSION 1
 void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
  int version=fr->Unsigned16();
-   if(version==CMD_ACT_VERSION) {
+   if (version==CMD_ACT_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
 
       // Serial
       int fileserial=fr->Unsigned32();
 
-      if( fileserial ) {
+      if (fileserial) {
          assert(mol->is_object_known(fileserial));
          obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
 		} else
@@ -121,11 +121,11 @@ void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
 
    // Now serial
    Map_Object* obj=egbase->objects().get_object(obj_serial);
-   if( obj ) { // Object might have dissappeared
+   if (obj) { // Object might have dissappeared
       assert(mos->is_object_known(obj));
       fw->Unsigned32(mos->get_object_file_index(obj));
 	} else
-      fw->Unsigned32( 0 );
+      fw->Unsigned32(0);
 
    // And arg
    fw->Unsigned32(arg);
@@ -154,7 +154,7 @@ Clear all objects
 */
 void Object_Manager::cleanup(Editor_Game_Base *g)
 {
-	while(!m_objects.empty()) {
+	while (!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
       it->second->remove(g);
 	}
@@ -174,7 +174,7 @@ void Object_Manager::insert(Map_Object *obj)
 	m_lastserial++;
    assert(m_lastserial);
 	obj->m_serial = m_lastserial;
-   if(obj->m_file_serial==0) {
+   if (obj->m_file_serial==0) {
       m_last_file_serial++;
       obj->m_file_serial = m_last_file_serial;
 	}
@@ -187,7 +187,7 @@ void Object_Manager::insert(Map_Object *obj)
  * for a file which is used in various sortings
  */
 void Object_Manager::overwrite_file_serial(Map_Object* obj, uint new_serial) {
-   if(new_serial>m_last_file_serial) m_last_file_serial=new_serial;
+   if (new_serial>m_last_file_serial) m_last_file_serial=new_serial;
    obj->m_file_serial = new_serial;
 }
 
@@ -244,8 +244,8 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
  */
 bool Map_Object_Descr::is_animation_known(const char* name) {
    std::map<std::string,uint>::iterator i=m_anims.begin();
-   while(i!=m_anims.end()) {
-      if(i->first==name)
+   while (i!=m_anims.end()) {
+      if (i->first==name)
          return true;
       ++i;
 	}
@@ -256,7 +256,7 @@ void Map_Object_Descr::add_animation(const char* name, uint anim) {
    std::string use_name=name;
    std::map<std::string,uint>::iterator i=m_anims.begin();
 
-   while(i!=m_anims.end()) {
+   while (i!=m_anims.end()) {
       assert(i->first!=name);
       ++i;
 	}
@@ -283,7 +283,7 @@ Search for the attribute in the attribute list
 ===============
 */
 bool Map_Object_Descr::has_attribute(uint attr) const throw () {
-	for(uint i = 0; i < m_attributes.size(); i++) {
+	for (uint i = 0; i < m_attributes.size(); i++) {
 		if (m_attributes[i] == attr)
 			return true;
 	}

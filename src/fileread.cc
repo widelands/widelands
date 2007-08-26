@@ -76,7 +76,7 @@ char * FileRead::CString(const Pos pos) {
 	if (i >= length) throw File_Boundary_Exceeded();
 
 	string = (char *)data + i;
-	for(p = string; *p; p++, i++) ;
+	for (p = string; *p; p++, i++) ;
 	i++; // beyond the NUL
 
 	if (i > length) throw File_Boundary_Exceeded();

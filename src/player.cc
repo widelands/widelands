@@ -58,7 +58,7 @@ m_plnum  (plnum),
 m_tribe  (tribe_descr),
 m_fields (0)
 {
-	for(int i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 
 	set_name(name);
@@ -66,7 +66,7 @@ m_fields (0)
 	// Allow all buildings per default
 	int i;
 	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
-	for(i=0; i<m_tribe.get_nrbuildings(); i++)
+	for (i=0; i<m_tribe.get_nrbuildings(); i++)
 		m_allowed_buildings[i]=true;
 }
 
@@ -282,7 +282,7 @@ void Player::bulldoze(PlayerImmovable* imm)
 		return;
 
 	// Extended security check
-	switch(imm->get_type()) {
+	switch (imm->get_type()) {
 	case Map_Object::BUILDING:
 		building = (Building*)imm;
 		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
@@ -422,16 +422,16 @@ void Player::allow_building(int i, bool t)
  */
 void Player::add_economy(Economy* eco)
 {
-	if(has_economy(eco))
+	if (has_economy(eco))
 		return;
 	m_economies.push_back(eco);
 }
 
 void Player::remove_economy(Economy* eco) {
-	if(!has_economy(eco)) return;
+	if (!has_economy(eco)) return;
 	std::vector<Economy*>::iterator i = m_economies.begin();
-	while(i!=m_economies.end()) {
-		if(*i == eco) {
+	while (i!=m_economies.end()) {
+		if (*i == eco) {
 			m_economies.erase(i);
 			return;
 		}
@@ -442,8 +442,8 @@ void Player::remove_economy(Economy* eco) {
 
 bool Player::has_economy(Economy* eco) {
 	std::vector<Economy*>::iterator  i = m_economies.begin();
-	while(i!=m_economies.end()) {
-		if( *i == eco) return true;
+	while (i!=m_economies.end()) {
+		if (*i == eco) return true;
 		++i;
 	}
 	return false;
@@ -453,8 +453,8 @@ int Player::get_economy_number(Economy* eco) {
 	assert(has_economy(eco));
 
 	std::vector<Economy*>::iterator  i = m_economies.begin();
-	while(i!=m_economies.end()) {
-		if( *i == eco) return (i - m_economies.begin());
+	while (i!=m_economies.end()) {
+		if (*i == eco) return (i - m_economies.begin());
 		++i;
 	}
 	assert(0); // never here
@@ -533,7 +533,7 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 			return;
 		log("--Player::EnemyFlagAction() Checkpoint!\n");
 
-		switch(action) {
+		switch (action) {
 		case ENEMYFLAGACTION_ATTACK:
 		{
 			game->create_attack_controller(flag,attacker,flag->get_owner()->get_player_number(),(uint)num);
@@ -649,13 +649,13 @@ throw ()
  */
 void Player::sample_statistics()
 {
-	if( m_ware_productions.size() != (uint)tribe().get_nrwares() ) {
-		m_ware_productions.resize( tribe().get_nrwares() );
-		m_current_statistics.resize( tribe().get_nrwares() );
+	if (m_ware_productions.size() != (uint)tribe().get_nrwares()) {
+		m_ware_productions.resize(tribe().get_nrwares());
+		m_current_statistics.resize(tribe().get_nrwares());
 	}
 
-	for(uint i = 0; i < m_ware_productions.size(); i++) {
-		m_ware_productions[i].push_back( m_current_statistics[i] );
+	for (uint i = 0; i < m_ware_productions.size(); i++) {
+		m_ware_productions[i].push_back(m_current_statistics[i]);
 		m_current_statistics[i] = 0;
 	}
 }
@@ -664,14 +664,14 @@ void Player::sample_statistics()
 /**
  * A ware was produced. Update the corresponding statistics.
  */
-void Player::ware_produced( uint wareid )
+void Player::ware_produced(uint wareid)
 {
-	if( m_ware_productions.size() != (uint)tribe().get_nrwares() ) {
-		m_ware_productions.resize( tribe().get_nrwares() );
-		m_current_statistics.resize( tribe().get_nrwares() );
+	if (m_ware_productions.size() != (uint)tribe().get_nrwares()) {
+		m_ware_productions.resize(tribe().get_nrwares());
+		m_current_statistics.resize(tribe().get_nrwares());
 	}
 
-	assert( wareid < (uint)tribe().get_nrwares() );
+	assert(wareid < (uint)tribe().get_nrwares());
 
 	m_current_statistics[wareid]++;
 }
@@ -683,7 +683,7 @@ void Player::ware_produced( uint wareid )
 const std::vector<uint> * Player::get_ware_production_statistics
 		(const int ware) const
 {
-	assert( ware < (int)m_ware_productions.size()) ;
+	assert(ware < (int)m_ware_productions.size()) ;
 
 	return &m_ware_productions[ware];
 }
@@ -692,7 +692,7 @@ const std::vector<uint> * Player::get_ware_production_statistics
 /**
  * Gain an immovable
  */
-void Player::gain_immovable( PlayerImmovable* imm ) {
+void Player::gain_immovable(PlayerImmovable* imm) {
 	if
 	(const Building * const building =
 		dynamic_cast<const Building * const>(imm))
@@ -714,14 +714,14 @@ void Player::gain_immovable( PlayerImmovable* imm ) {
 		Building_Stats new_building;
 		new_building.is_constructionsite = constructionsite;
 		new_building.pos = building->get_position();
-		stat.push_back( new_building );
+		stat.push_back(new_building);
 	}
 }
 
 /**
  * Loose an immovable
  */
-void Player::lose_immovable( PlayerImmovable* imm )
+void Player::lose_immovable(PlayerImmovable* imm)
 {
 	if
 	(const Building * const building =
@@ -742,9 +742,9 @@ void Player::lose_immovable( PlayerImmovable* imm )
 				m_building_stats[tribe().get_building_index(building_name.c_str())];
 
 		const Coords building_position = building->get_position();
-		for( uint i = 0; i < stat.size(); i++ ) {
+		for (uint i = 0; i < stat.size(); i++) {
 			if (stat[i].pos == building_position) {
-				stat.erase( stat.begin() + i );
+				stat.erase(stat.begin() + i);
 				return;
 			}
 		}
@@ -762,7 +762,7 @@ void Player::lose_immovable( PlayerImmovable* imm )
  *
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (from the time when statistics were kept in
- *       \ref Interactive_Player )
+ *       \ref Interactive_Player)
  */
 void Player::ReadStatistics(FileRead& fr, uint version)
 {
@@ -779,11 +779,11 @@ void Player::ReadStatistics(FileRead& fr, uint version)
 			m_current_statistics.resize(nr_wares);
 			m_ware_productions.resize(nr_wares);
 
-			for(uint i = 0; i < m_current_statistics.size(); i++) {
+			for (uint i = 0; i < m_current_statistics.size(); i++) {
 				m_current_statistics[i] = fr.Unsigned32();
 				m_ware_productions[i].resize(nr_entries);
 
-				for(uint j = 0; j < m_ware_productions[i].size(); j++)
+				for (uint j = 0; j < m_ware_productions[i].size(); j++)
 					m_ware_productions[i][j] = fr.Unsigned32();
 			}
 		}
@@ -801,9 +801,9 @@ void Player::WriteStatistics(FileWrite& fw)
 		fw.Unsigned16(m_current_statistics.size());
 		fw.Unsigned16(m_ware_productions[0].size());
 
-		for( uint i = 0; i < m_current_statistics.size(); i++) {
+		for (uint i = 0; i < m_current_statistics.size(); i++) {
 			fw.Unsigned32(m_current_statistics[i]);
-			for( uint j = 0; j < m_ware_productions[i].size(); j++)
+			for (uint j = 0; j < m_ware_productions[i].size(); j++)
 				fw.Unsigned32(m_ware_productions[i][j]);
 		}
 	} else {

@@ -59,17 +59,17 @@ int Editor_Info_Tool::handle_click_impl
 	buf += buf1;
    sprintf(buf1, " %s %i\n", _("Height").c_str(), f->get_height()); buf+=buf1;
    buf+=_(" Caps: ");
-   switch((f->get_caps() & BUILDCAPS_SIZEMASK)) {
+   switch ((f->get_caps() & BUILDCAPS_SIZEMASK)) {
       case BUILDCAPS_SMALL: buf+=_("small"); break;
       case BUILDCAPS_MEDIUM: buf+=_("medium"); break;
       case BUILDCAPS_BIG: buf+=_("big"); break;
       default: break;
 	}
-   if(f->get_caps() & BUILDCAPS_FLAG) buf+=_(" flag");
-   if(f->get_caps() & BUILDCAPS_MINE) buf+=_(" mine");
-   if(f->get_caps() & BUILDCAPS_PORT) buf+=_(" port");
-   if(f->get_caps() & MOVECAPS_WALK) buf+=_(" walk");
-   if(f->get_caps() & MOVECAPS_SWIM) buf+=_(" swim");
+   if (f->get_caps() & BUILDCAPS_FLAG) buf+=_(" flag");
+   if (f->get_caps() & BUILDCAPS_MINE) buf+=_(" mine");
+   if (f->get_caps() & BUILDCAPS_PORT) buf+=_(" port");
+   if (f->get_caps() & MOVECAPS_WALK) buf+=_(" walk");
+   if (f->get_caps() & MOVECAPS_SWIM) buf+=_(" swim");
    buf+="\n";
    sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f->get_owned_by()); buf+=buf1;
    sprintf(buf1, " %s: %s (TODO! more info)\n", _("Has base immovable").c_str(), f->get_immovable() ? "Yes" : "No"); buf+=buf1;

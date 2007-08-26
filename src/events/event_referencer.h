@@ -30,8 +30,8 @@ struct EventReferencer {
 	virtual const char * get_type() const = 0;
 	virtual const char * get_name() const = 0;
 
-      void reference_event( Event* );
-      void unreference_event( Event* );
+      void reference_event(Event*);
+      void unreference_event(Event*);
 };
 
 

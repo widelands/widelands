@@ -121,7 +121,7 @@ void Fullscreen_Menu_MapSelect::ok()
 {
 	const std::string filename = list.get_selected();
 
-	if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename )) {
+	if (g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
 		m_curdir=g_fs->FS_CanonicalizeName(filename);
 		list.clear();
 		m_mapfiles.clear();
@@ -137,7 +137,7 @@ void Fullscreen_Menu_MapSelect::ok()
 			m_map = 0;
 		}
 
-		if(m_is_scenario)
+		if (m_is_scenario)
 			end_modal(2);
 		else
 		end_modal(1);
@@ -153,7 +153,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint)
 {
 	const char * const name = list.get_selected();
 
-	if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map(name)) {
+	if (!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map(name)) {
 		// No directory
 		delete *m_ml;
 		*m_ml = 0;
@@ -177,7 +177,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint)
 				tadescr   .set_text(m_map->get_description());
 				taworld   .set_text(World::World(m_map->get_world_name()).get_name());
 				m_ok.set_enabled(true);
-			} catch(std::exception& e) {
+			} catch (std::exception& e) {
 				log("Failed to load map %s: %s\n", get_mapname(), e.what());
 
 				taname    .set_text("(bad map file)");
@@ -232,7 +232,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 	//If we are not at the top of the map directory hierarchy (we're not talking
 	//about the absolute filesystem top!) we manually add ".."
-	if(m_curdir!=m_basedir) {
+	if (m_curdir!=m_basedir) {
 		m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
 		list.add("<parent>",
 		         m_parentdir.c_str(),
@@ -242,14 +242,14 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 	//Add subdirectories to the list
 	//TODO: but skip uncompressed maps (which look like directories)
-	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+	for (filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
-		if(!strcmp(FileSystem::FS_Filename(name),".")) continue;
-		if(!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-		if(!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
-		if(!strcmp(FileSystem::FS_Filename(name),".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
-		if(!g_fs->IsDirectory(name)) continue;
-		if(Widelands_Map_Loader::is_widelands_map( name )) continue;
+		if (!strcmp(FileSystem::FS_Filename(name),".")) continue;
+		if (!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
+		if (!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
+		if (!strcmp(FileSystem::FS_Filename(name),".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
+		if (!g_fs->IsDirectory(name)) continue;
+		if (Widelands_Map_Loader::is_widelands_map(name)) continue;
 
 		list.add(FileSystem::FS_Filename(name),
 		         name,
@@ -261,11 +261,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	{
 		Map map; //Map_Loader needs a place to put it's preload data
 
-		for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+		for (filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 			const char *name = pname->c_str();
 
 			Map_Loader * const ml = map.get_correct_loader(name);
-			if(!ml) continue;
+			if (!ml) continue;
 
 			map.set_filename(name);
 			ml->preload_map(true);

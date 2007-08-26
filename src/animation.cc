@@ -58,7 +58,7 @@ void EncodeData::parse(Section *s)
 	int r, g, b;
 
 	// Read player color codes
-	for(i = 0; i < 4; i++) {
+	for (i = 0; i < 4; i++) {
 		char keyname[32];
 
 		snprintf(keyname, sizeof(keyname), "plrclr%i_r", i);
@@ -90,7 +90,7 @@ void EncodeData::add(const EncodeData *other)
 {
 	if (other->hasplrclrs) {
 		hasplrclrs = true;
-		for(int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++)
 			plrclr[i] = other->plrclr[i];
 	}
 }
@@ -181,7 +181,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 
 	ad->picnametempl = pictempl;
 
-	if(ad->picnametempl[strlen(pictempl)-4]=='.') {
+	if (ad->picnametempl[strlen(pictempl)-4]=='.') {
 		// delete extension
 		ad->picnametempl[strlen(pictempl)-4]='\0';
 	}
@@ -191,7 +191,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 	int framenum;
 	const char *fxname;
 	ad->sfx_cues[123456]="dummy";
-	while( s->get_next_int("sfx_frame", &framenum)!=0 && s->get_next_string("sfx_name", &fxname)!=0) {
+	while (s->get_next_int("sfx_frame", &framenum)!=0 && s->get_next_string("sfx_name", &fxname)!=0) {
 		//TODO: error handling
 		g_sound_handler.load_fx(directory, fxname);
 		ad->sfx_cues[framenum]=fxname;
@@ -263,7 +263,7 @@ void AnimationManager::trigger_soundfx(uint animation, uint framenumber, uint st
 //temporarily disabled #fweber 30jan2006
 	assert(animation>0 && animation<=m_animations.size()); //animation must not be zero!
 
-	if ( m_animations[animation-1].sfx_cues.count(framenumber)!=0 ) {
+	if (m_animations[animation-1].sfx_cues.count(framenumber)!=0) {
 		std::string fxname;
 
 		fxname=m_animations[animation-1].sfx_cues[framenumber];
@@ -335,7 +335,7 @@ void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *p
 		throw wexception("DirAnimations section name template %s does not contain %%s", sectnametempl);
 	strncpy(repl, "%s", 2);
 
-	if(defaults) string = defaults->get_string("dirpics", 0);
+	if (defaults) string = defaults->get_string("dirpics", 0);
    else string=0;
 
 	if (string) {
@@ -348,7 +348,7 @@ void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *p
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
 	}
 
-	for(int dir = 1; dir <= 6; dir++) {
+	for (int dir = 1; dir <= 6; dir++) {
 		static const char *dirstrings[6] = { "ne", "e", "se", "sw", "w", "nw" };
 		char sectname[300];
 		Section *s;

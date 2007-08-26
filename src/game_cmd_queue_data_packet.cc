@@ -38,12 +38,12 @@ void Game_Cmd_Queue_Data_Packet::Read
 throw (_wexception)
 {
    FileRead fr;
-   fr.Open( fs, "binary/cmd_queue" );
+   fr.Open(fs, "binary/cmd_queue");
 
    // read packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       Cmd_Queue* cmdq=game->get_cmdqueue();
 
       // nothing to be done for m_game
@@ -52,14 +52,14 @@ throw (_wexception)
       cmdq->nextserial=fr.Unsigned32();
 
       // Erase all currently pending commands in the queue
-      while(!cmdq->m_cmds.empty())
+      while (!cmdq->m_cmds.empty())
          cmdq->m_cmds.pop();
 
       // Number of cmds
       uint ncmds=fr.Unsigned16();
 
       uint i=0;
-      while(i<ncmds) {
+      while (i<ncmds) {
          Cmd_Queue::cmditem item;
          item.serial=fr.Unsigned32();
 
@@ -111,7 +111,7 @@ throw (_wexception)
    assert(p.top().serial==cmdq->m_cmds.top().serial);
    assert(p.top().cmd==cmdq->m_cmds.top().cmd);
 
-   while(p.size()) {
+   while (p.size()) {
       // Serial number
       fw.Unsigned32(p.top().serial);
 
@@ -124,5 +124,5 @@ throw (_wexception)
       p.pop();
 	}
 
-   fw.Write( fs, "binary/cmd_queue" );
+   fw.Write(fs, "binary/cmd_queue");
 }

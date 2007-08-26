@@ -134,23 +134,23 @@ called, when button get clicked
 ===========
 */
 void Main_Menu_New_Map::button_clicked(int n) {
-   switch(n) {
+   switch (n) {
       case 0: m_w++; break;
       case 1: m_w--; break;
       case 2: m_h++; break;
       case 3: m_h--; break;
       case 4:
               ++m_currentworld;
-              if(m_currentworld==m_worlds->size()) m_currentworld=0;
+              if (m_currentworld==m_worlds->size()) m_currentworld=0;
               m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());
               break;
 	}
 
    char buf[200];
-   if(m_w<0) m_w=0;
-   if(m_w>=NUMBER_OF_MAP_DIMENSIONS) m_w=NUMBER_OF_MAP_DIMENSIONS-1;
-   if(m_h<0) m_h=0;
-   if(m_h>=NUMBER_OF_MAP_DIMENSIONS) m_h=NUMBER_OF_MAP_DIMENSIONS-1;
+   if (m_w<0) m_w=0;
+   if (m_w>=NUMBER_OF_MAP_DIMENSIONS) m_w=NUMBER_OF_MAP_DIMENSIONS-1;
+   if (m_h<0) m_h=0;
+   if (m_h>=NUMBER_OF_MAP_DIMENSIONS) m_h=NUMBER_OF_MAP_DIMENSIONS-1;
    sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
    m_width->set_text(buf);
    sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);

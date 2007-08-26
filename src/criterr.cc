@@ -136,7 +136,7 @@ void critical_error(const char* str, ...)
 		{
 			Section *s = g_options.pull_section("global");
 
-			if(s->get_bool("coredump", false))
+			if (s->get_bool("coredump", false))
 			{
 				log("Trigger a segmentation fault\n");
 				abort();

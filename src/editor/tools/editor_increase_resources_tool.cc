@@ -59,7 +59,7 @@ int Editor_Change_Resource_Tool_Callback
    map.get_neighbour(f, Map_Object::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
-   if(count<=3)
+   if (count<=3)
       return 0;
    else
       return f.field->get_caps();
@@ -87,7 +87,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
       int max_amount = map.get_world()->get_resource(m_cur_res)->get_max_amount();
 
 		amount += m_change_by;
-      if(amount>max_amount) amount=max_amount;
+      if (amount>max_amount) amount=max_amount;
 
 
 		if
@@ -102,7 +102,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 				 (mr.location().field->get_resources_amount()).c_str());
 			overlay_manager.remove_overlay(mr.location(), picid);
 
-         if(!amount) {
+         if (!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
 			} else {

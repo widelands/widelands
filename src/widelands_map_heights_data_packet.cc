@@ -43,7 +43,7 @@ throw (_wexception)
 {
 
    FileRead fr;
-   fr.Open( fs, "binary/heights");
+   fr.Open(fs, "binary/heights");
 
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {

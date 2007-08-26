@@ -51,7 +51,7 @@ m_building(-1) //  FIXME negative value!
    int posx=offsx;
    int posy=offsy;
 
-   if(m_player<1) m_player=1;
+   if (m_player<1) m_player=1;
 
    // Fill the building infos
 	Editor & editor = m_parent->editor();
@@ -62,7 +62,7 @@ m_building(-1) //  FIXME negative value!
 		const Building_Descr::Index nr_buildings = tribe->get_nrbuildings();
 		for (Building_Descr::Index i = 0; i < nr_buildings; ++i) {
          Building_Descr* b=tribe->get_building_descr(i);
-         if(!b->get_buildable() && !b->get_enhanced_building()) continue;
+         if (!b->get_buildable() && !b->get_enhanced_building()) continue;
 			const std::string & name = b->name();
 			if (name == m_event->get_building()) m_building = m_buildings.size();
          m_buildings.push_back(name);
@@ -72,7 +72,7 @@ m_building(-1) //  FIXME negative value!
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( event->name().c_str() );
+   m_name->set_text(event->name().c_str());
    posy+=20+spacing;
 
    // Player
@@ -170,11 +170,11 @@ bool Event_Allow_Building_Option_Menu::handle_mouserelease
 
 
 void Event_Allow_Building_Option_Menu::clicked_ok() {
-            if(m_name->get_text())
-               m_event->set_name( m_name->get_text() );
-            if(m_event->get_player()!=m_player && m_event->get_player()!=-1)
+            if (m_name->get_text())
+               m_event->set_name(m_name->get_text());
+            if (m_event->get_player()!=m_player && m_event->get_player()!=-1)
                m_parent->unreference_player_tribe(m_event->get_player(), m_event);
-            if(m_event->get_player()!=m_player) {
+            if (m_event->get_player()!=m_player) {
                m_event->set_player(m_player);
                m_parent->reference_player_tribe(m_player, m_event);
 				}
@@ -186,7 +186,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 
 
 void Event_Allow_Building_Option_Menu::clicked(int i) {
-   switch(i) {
+   switch (i) {
       case 15: m_player++; break;
       case 16: m_player--; break;
 
@@ -200,15 +200,15 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
  * update function: update all UI elements
  */
 void Event_Allow_Building_Option_Menu::update(void) {
-   if(m_player<=0) m_player=1;
+   if (m_player<=0) m_player=1;
 	const Player_Number nr_players = m_parent->egbase().map().get_nrplayers();
 	if (m_player > nr_players) m_player = nr_players;
 
-   if(m_building<0) m_building=0;
-   if(m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
+   if (m_building<0) m_building=0;
+   if (m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
 
    std::string curbuild=_("<invalid player tribe>");
-   if(!m_buildings.size()) {
+   if (!m_buildings.size()) {
       m_player=-1;
       m_building=-1;
 	} else {

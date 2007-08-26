@@ -153,7 +153,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 	molog("m_work_steps: %i\n", m_work_steps);
 
    molog("WaresQueue size: %i\n", m_wares.size());
-   for(uint i=0; i<m_wares.size(); i++) {
+   for (uint i=0; i<m_wares.size(); i++) {
       molog("Dumping WaresQueue %i/%i\n", i+1, m_wares.size());
       molog("* Owner: %i (player nr)\n", m_wares[i]->get_owner()->get_player_number());
       molog("* Ware: %i (index)\n", m_wares[i]->get_ware());
@@ -281,7 +281,7 @@ void ConstructionSite::set_economy(Economy* e)
 	uint i;
 
 	if (old) {
-		for(i = 0; i < m_wares.size(); i++)
+		for (i = 0; i < m_wares.size(); i++)
 			m_wares[i]->remove_from_economy(old);
 	}
 
@@ -290,7 +290,7 @@ void ConstructionSite::set_economy(Economy* e)
 		m_builder_request->set_economy(e);
 
 	if (e) {
-		for(i = 0; i < m_wares.size(); i++)
+		for (i = 0; i < m_wares.size(); i++)
 			m_wares[i]->add_to_economy(e);
 	}
 }
@@ -317,7 +317,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 
 		m_wares.resize(bc->size());
 
-		for(i = 0; i < bc->size(); i++) {
+		for (i = 0; i < bc->size(); i++) {
 			WaresQueue* wq = new WaresQueue(this);
 
 			m_wares[i] = wq;
@@ -355,7 +355,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	// Cleanup the wares queues
-	for(uint i = 0; i < m_wares.size(); i++) {
+	for (uint i = 0; i < m_wares.size(); i++) {
 		m_wares[i]->cleanup();
 		delete m_wares[i];
 	}
@@ -492,7 +492,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	// Check if we've got wares to consume
 	if (m_work_completed < m_work_steps)
 	{
-		for(uint i = 0; i < m_wares.size(); i++) {
+		for (uint i = 0; i < m_wares.size(); i++) {
 			WaresQueue* wq = m_wares[i];
 
 			if (!wq->get_filled())
@@ -592,7 +592,7 @@ void ConstructionSite::draw
 	if (anim_pic) //  not the first pic
       // draw the prev pic from top to where next image will be drawing
       dst.drawanimrect
-        (pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect( Point(0, 0), w, h - lines));
+        (pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
     else if (m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead

@@ -95,10 +95,10 @@ void i18n::set_locale(const std::string str) {
 	setlocale(LC_ALL, str.c_str()); //call to libintl
 	m_locale=str;
 
-	if( m_textdomains.size() ) {
+	if (m_textdomains.size()) {
 		const char * const domain = m_textdomains.back().c_str();
 		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain( domain, LOCALE_PATH );
+		bindtextdomain(domain, LOCALE_PATH);
 		textdomain(domain);
 	}
 }

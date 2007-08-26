@@ -54,14 +54,14 @@ void Event_Unhide_Objective::reinitialize(Game *) {}
  */
 void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
    int version=s->get_safe_int("version");
-   if(version == EVENT_VERSION) {
+   if (version == EVENT_VERSION) {
       std::string objectivename = s->get_safe_string("objective");
       MapObjective * const obj = egbase->get_map()->get_mom().get_objective(objectivename.c_str());
-      if( !obj ) {
+      if (!obj) {
          throw wexception("Unhide Objective event with unknown objecive %s in map!\n",
 								  objectivename.c_str());
 		}
-      set_objective( obj );
+      set_objective(obj);
       set_dounhide(s->get_bool("dounhide"));
       return;
 	}
@@ -70,7 +70,7 @@ void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
 
 void Event_Unhide_Objective::Write(Section & s, const Editor_Game_Base &) const
 {
-   assert( m_objective );
+   assert(m_objective);
 	s.set_int   ("version",  EVENT_VERSION);
 	s.set_string("objective", m_objective->get_name());
 	s.set_bool  ("dounhide",  get_dounhide());
@@ -80,9 +80,9 @@ void Event_Unhide_Objective::Write(Section & s, const Editor_Game_Base &) const
  * check if trigger conditions are done
  */
 Event::State Event_Unhide_Objective::run(Game *) {
-   assert( m_objective );
+   assert(m_objective);
 
-   m_objective->set_is_visible( get_dounhide());
+   m_objective->set_is_visible(get_dounhide());
 
    m_state = DONE;
    return m_state;

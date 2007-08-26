@@ -61,13 +61,13 @@ m_pit                   (pit)
 	m_tabpanel.set_snapparent(true);
 
 	uint width = 0, height = 0;
-   for(int j=0; j<nr_bobs; j++) {
+   for (int j=0; j<nr_bobs; j++) {
 		uint w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture
 			 (PicMod_Game, world.get_bob_descr(j)->get_picture()), w, h);
-      if(w>width) width=w;
-      if(h>height) height=h;
+      if (w>width) width=w;
+      if (h>height) height=h;
 	}
 
 	const uint tab_icon =
@@ -76,7 +76,7 @@ m_pit                   (pit)
    int xpos=xstart;
 	uint cur_x = bobs_in_row;
    int i=0;
-   while(i<nr_bobs) {
+   while (i<nr_bobs) {
 		UI::Box * box;
 			if (cur_x == bobs_in_row) {
          cur_x=0;

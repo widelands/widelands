@@ -273,7 +273,7 @@ void WatchWindow::start_tracking(Point pos)
 	int closest_dist = -1;
 	Bob* closest = 0;
 
-	for(uint i = 0; i < bobs.size(); i++) {
+	for (uint i = 0; i < bobs.size(); i++) {
 		Bob* bob = bobs[i];
 		Point p;
 
@@ -402,6 +402,6 @@ void show_watch_window(Interactive_Player *parent, Coords coords)
 	}
 	else
 		win = new WatchWindow(parent, 250, 150, 200, 200, coords,false);
-   win->closed.set( parent, &Interactive_Player::need_complete_redraw);
+   win->closed.set(parent, &Interactive_Player::need_complete_redraw);
 
 }

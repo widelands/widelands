@@ -55,7 +55,7 @@ throw (_wexception)
 	assert(ol);
 
 	WidelandsFileRead fr;
-   fr.Open( fs, "binary/immovable" );
+   fr.Open(fs, "binary/immovable");
 
 	Map        & map        = egbase->map();
 	World      & world      = map.world  ();
@@ -66,7 +66,7 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (;;) {
          uint reg=fr.Unsigned32();
-         if(reg==0xffffffff) break;
+         if (reg==0xffffffff) break;
 			const char * const owner = fr.CString ();
 			const char * const name  = fr.CString ();
 			const Coords position    = fr.Coords32(map_extent);
@@ -78,10 +78,10 @@ throw (_wexception)
                // It is a tribe immovable
 					egbase->manually_load_tribe(owner);
 					Tribe_Descr* tribe=egbase->get_tribe(owner);
-               if(!tribe)
+               if (!tribe)
                   throw wexception("Unknown tribe %s in map!\n", owner);
                int idx=tribe->get_immovable_index(name);
-               if(idx==-1)
+               if (idx==-1)
                   throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name, owner);
 					ol->register_object
 						(egbase, reg, egbase->create_immovable(position, idx, tribe));
@@ -89,7 +89,7 @@ throw (_wexception)
 			} else {
             // World immovable
             int idx=world.get_immovable_index(name);
-            if(idx==-1)
+            if (idx==-1)
                throw wexception("Unknown world immovable %s in map!\n", name);
 				Immovable & immovable = *egbase->create_immovable(position, idx, 0);
 				if (not skip) ol->register_object(egbase, reg, &immovable);
@@ -139,6 +139,6 @@ throw (_wexception)
 
    fw.Unsigned32(0xffffffff);
 
-   fw.Write( fs, "binary/immovable");
+   fw.Write(fs, "binary/immovable");
    // DONE
 }

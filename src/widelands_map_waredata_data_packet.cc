@@ -49,13 +49,13 @@ void Widelands_Map_Waredata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/ware_data" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/ware_data");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
@@ -63,7 +63,7 @@ throw (_wexception)
 	const Uint16 packet_version=fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
          uint reg=fr.Unsigned32();
-         if(reg==0xffffffff) break; // end of wares
+         if (reg==0xffffffff) break; // end of wares
 		if
 			(WareInstance * const ware = dynamic_cast<WareInstance * const>
 			 (ol->get_object_by_file_index(reg)))
@@ -116,7 +116,7 @@ throw (_wexception)
 
          // m_transfer_nextstep
          reg=fr.Unsigned32();
-         if(reg) {
+         if (reg) {
             assert(ol->is_object_known(reg));
             ware->m_transfer_nextstep=ol->get_object_by_file_index(reg);
 			} else
@@ -157,15 +157,15 @@ throw (_wexception)
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint> ids;
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x,y));
 
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
-         if(imm && imm->get_type()==Map_Object::FLAG) {
+         if (imm && imm->get_type()==Map_Object::FLAG) {
             Flag* fl=static_cast<Flag*>(imm);
-            for(int i=0; i<fl->m_item_filled; i++) {
+            for (int i=0; i<fl->m_item_filled; i++) {
                assert(os->is_object_known(fl->m_items[i].item));
                write_ware(&fw,egbase,os,fl->m_items[i].item);
 				}
@@ -173,11 +173,11 @@ throw (_wexception)
 
          // Now, check for workers
          Bob* b=f->get_first_bob();
-         while(b) {
-            if(b->get_bob_type()==Bob::WORKER) {
+         while (b) {
+            if (b->get_bob_type()==Bob::WORKER) {
                Worker* w=static_cast<Worker*>(b);
                WareInstance* ware=w->get_carried_item(egbase);
-               if(ware) {
+               if (ware) {
                   assert(os->is_object_known(ware));
                   write_ware(&fw,egbase,os,ware);
 					}
@@ -188,7 +188,7 @@ throw (_wexception)
 	}
    fw.Unsigned32(0xffffffff); // End of wares
 
-   fw.Write( fs, "binary/ware_data" );
+   fw.Write(fs, "binary/ware_data");
    // DONE
 }
 
@@ -201,7 +201,7 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
 
    // Location
    Map_Object* obj=ware->m_location.get(egbase);
-   if(obj) {
+   if (obj) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
 	} else
@@ -215,14 +215,14 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
    // Skip Supply
 
    // Transfer is handled automatically
-//   if(ware->m_transfer)
+//   if (ware->m_transfer)
 //      fw->Unsigned8(1);
 //   else
 //      fw->Unsigned8(0);
 //
    // m_transfer_nextstep
 	obj=ware->m_transfer_nextstep.get(egbase);
-   if(obj) {
+   if (obj) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
 	} else

@@ -129,15 +129,15 @@ bool Text_Parser::parse_textblock
 
       // Serch for map variables
       SSS_T offset;
-      while( (offset = block_text.find("<variable name=")) != std::string::npos) {
+      while ((offset = block_text.find("<variable name=")) != std::string::npos) {
          SSS_T end = block_text.find(">");
-         if( end == std::string::npos ) {
+         if (end == std::string::npos) {
             log("WARNING: <variable> tag not closed!\n");
 		}
 		else {
             std::string name = block_text.substr(offset+15, end-(offset+15));
-            std::string str = vcb( name, vcdata );
-            block_text.replace( offset, end-offset+1, str );
+            std::string str = vcb(name, vcdata);
+            block_text.replace(offset, end-offset+1, str);
 			}
 		}
 
@@ -146,7 +146,7 @@ bool Text_Parser::parse_textblock
 	split_words(block_text, &unwrapped_words);
 
 	//Handle user defined line breaks, and save them
-	for(std::vector<std::string>::const_iterator it = unwrapped_words.begin(); it != unwrapped_words.end(); it++) {
+	for (std::vector<std::string>::const_iterator it = unwrapped_words.begin(); it != unwrapped_words.end(); it++) {
 		std::string line = *it;
 		while (true) {
 			SSS_T next_break = line.find("<br>");
@@ -162,8 +162,8 @@ bool Text_Parser::parse_textblock
 }
 
 void Text_Parser::split_words(std::string in, std::vector<std::string>* plist) {
-	std::replace( in.begin(), in.end(), '\n', ' ');
-	while(in.size()) {
+	std::replace(in.begin(), in.end(), '\n', ' ');
+	while (in.size()) {
 		SSS_T text_start = in.find_first_not_of(" ");
 		if (text_start > 0) {
 			plist->push_back(in.substr(0,text_start));
@@ -283,7 +283,7 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 				element->set_line_spacing(atoi(val.c_str()));
          else if (key == "font-color") {
             SSS_T offset = 0;
-            if( val[0] == '#' )
+            if (val[0] == '#')
                offset = 1;
             std::string r = "0x"+val.substr(offset,2);
             std::string g = "0x"+val.substr(offset+2,2);

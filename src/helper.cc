@@ -41,7 +41,7 @@ void split_string
 {
 	std::string::size_type pos = 0, endpos;
 
-	while(pos != std::string::npos) {
+	while (pos != std::string::npos) {
 		pos = in.find_first_not_of(separators, pos);
 		if (pos == std::string::npos)
 			break;
@@ -58,10 +58,10 @@ void split_string
  * remove spaces at the beginning or the end of a string
  */
 void remove_spaces(std::string* in) {
-	while(((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n')
+	while (((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n')
 		in->erase(0, 1);
 
-	while(((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n')
+	while (((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n')
 		in->erase(in->size()-1, 1);
 }
 

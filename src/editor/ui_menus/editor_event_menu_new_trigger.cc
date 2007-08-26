@@ -52,7 +52,7 @@ m_parent(parent)
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
    uint i=0;
-   for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
+   for (i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
 		Trigger_Descr & d = *Trigger_Factory::get_trigger_descr(i);
 		m_trigger_list->add(i18n::translate(d.name).c_str(), d);
 	}
@@ -113,7 +113,7 @@ void Editor_Event_Menu_New_Trigger::clicked_ok() {
    // Create new trigger
 	Trigger * const trig = Trigger_Factory::make_trigger_with_option_dialog
 		(m_trigger_list->get_selected().id.c_str(), m_parent, 0);
-   if(!trig) {
+   if (!trig) {
       // No trigger created, don't close us. let user choose other trigger
       return;
 	}

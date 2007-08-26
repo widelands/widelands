@@ -45,7 +45,7 @@ class Event_Unhide_Objective : public Event {
 
       inline void set_objective(MapObjective* objective) { m_objective=objective; }
       inline MapObjective* get_objective(void) { return m_objective; }
-      inline void set_dounhide( bool t ) { m_dounhide=t; }
+      inline void set_dounhide(bool t) { m_dounhide=t; }
 	bool get_dounhide() const {return m_dounhide;}
 
    private:

@@ -176,7 +176,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 {
 	LAN_Game_Info info;
 	std::list<std::string>::iterator it;
-	for(it = tables.begin(); it != tables.end(); it++)
+	for (it = tables.begin(); it != tables.end(); it++)
 	{
 		strncpy(info.hostname, "(ggz)", sizeof(info.hostname));
 		strncpy(info.map, (*it).c_str(), sizeof(info.map));
@@ -186,7 +186,7 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 }
 
 void Fullscreen_Menu_NetSetup::toggle_networktype() {
-	if(internetgame)
+	if (internetgame)
 	{
 		NetGGZ::ref()->deinitcore();
 	}
@@ -195,7 +195,7 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 
 	opengames.clear();
 
-	if(internetgame)
+	if (internetgame)
 	{
 		Section *s;
 		const char *defaultserver;
@@ -205,7 +205,7 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 
 		NetGGZ::ref()->initcore(hostname.get_text(), playername.get_text());
 		networktype.set_title(_("GGZ games").c_str());
-		if(NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
+		if (NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
 	}
 	else
 	{
@@ -217,7 +217,7 @@ void Fullscreen_Menu_NetSetup::toggle_networktype() {
 
 void Fullscreen_Menu_NetSetup::toggle_hostname()
 {
-	if(internetgame)
+	if (internetgame)
 	{
 		Section *s;
 		s = g_options.pull_section("network");
@@ -227,14 +227,14 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 		NetGGZ::ref()->deinitcore();
 		NetGGZ::ref()->initcore(hostname.get_text(), playername.get_text());
 		networktype.set_title(_("GGZ games").c_str());
-		if(NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
+		if (NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
 	}
 }
 
 //bool Fullscreen_Menu_NetSetup::is_internetgame() {return internetgame;}
 
 void Fullscreen_Menu_NetSetup::clicked_joingame() {
-	if(NetGGZ::ref()->usedcore())
+	if (NetGGZ::ref()->usedcore())
 	{
 		NetGGZ::ref()->join
 			(opengames.get_selected_record().get_string(1).c_str());
@@ -244,6 +244,6 @@ void Fullscreen_Menu_NetSetup::clicked_joingame() {
 }
 
 void Fullscreen_Menu_NetSetup::clicked_hostgame() {
-	if(NetGGZ::ref()->usedcore()) end_modal(HOSTGGZGAME);
+	if (NetGGZ::ref()->usedcore()) end_modal(HOSTGGZGAME);
 	else end_modal(HOSTGAME);
 }

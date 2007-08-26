@@ -50,7 +50,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 {
 	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
-	for(uint idx = 0; ; ++idx) {
+	for (uint idx = 0; ; ++idx) {
 		try
 		{
 			char buf[32];
@@ -70,7 +70,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 			Worker::Action act;
 			uint mapidx;
 
-			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
 				if (cmd[0] == s_parsemap[mapidx].name)
 					break;
 
@@ -81,7 +81,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 
 			m_actions.push_back(act);
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			throw wexception("Line %i: %s", idx, e.what());
 		}
@@ -132,7 +132,7 @@ void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
    char* endp;
    act->iparam1 = strtol(cmd[2].c_str(),&endp, 0);
 
-   if(endp && *endp)
+   if (endp && *endp)
       throw wexception("Bad area '%s'", cmd[2].c_str());
 
 }
@@ -155,7 +155,7 @@ void WorkerProgram::parse_setdescription(Worker_Descr *, Worker::Action * act,
 
 	act->function = &Worker::run_setdescription;
 
-	for(uint i = 1; i < cmd.size(); i++)
+	for (uint i = 1; i < cmd.size(); i++)
 		act->sparamv.push_back(cmd[i]);
 }
 
@@ -177,7 +177,7 @@ void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act
 
 	act->function = &Worker::run_setbobdescription;
 
-	for(uint i = 1; i < cmd.size(); i++)
+	for (uint i = 1; i < cmd.size(); i++)
 		act->sparamv.push_back(cmd[i]);
 }
 
@@ -214,7 +214,7 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
 	act->sparam1 = "immovable";
 
 	// Parse predicates
-	for(i = 1; i < cmd.size(); i++) {
+	for (i = 1; i < cmd.size(); i++) {
 		uint idx = cmd[i].find(':');
 		std::string key = cmd[i].substr(0, idx);
 		std::string value = cmd[i].substr(idx+1);
@@ -275,7 +275,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 	act->sparam1 = "";
 
 	// Parse predicates
-	for(i = 1; i < cmd.size(); i++) {
+	for (i = 1; i < cmd.size(); i++) {
 		uint idx = cmd[i].find(':');
 		std::string key = cmd[i].substr(0, idx);
 		std::string value = cmd[i].substr(idx+1);
@@ -304,7 +304,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 
 			int index;
 
-			for(index = 0; sizenames[index].name; ++index)
+			for (index = 0; sizenames[index].name; ++index)
 				if (value == sizenames[index].name)
 					break;
 
@@ -312,7 +312,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 				throw wexception("Bad findspace size '%s'", value.c_str());
 
 			act->iparam2 = sizenames[index].val;
-		} else if(key == "resource") {
+		} else if (key == "resource") {
 			act->sparam1 = value;
 		} else
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
@@ -370,7 +370,7 @@ void WorkerProgram::parse_animation(Worker_Descr* descr, Worker::Action* act,
 
 	act->function = &Worker::run_animation;
 
-	if(!descr->is_animation_known(cmd[1].c_str())) {
+	if (!descr->is_animation_known(cmd[1].c_str())) {
 		// dynamically allocate animations here
 		Section* s = parser->prof->get_safe_section(cmd[1].c_str());
 		descr->add_animation(cmd[1].c_str(),

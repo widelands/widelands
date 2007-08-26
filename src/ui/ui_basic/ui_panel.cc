@@ -124,17 +124,17 @@ int Panel::run()
 	app->set_mouse_lock(false); // more paranoia :-)
 
 	Panel *forefather = this;
-	while(forefather->_parent)
+	while (forefather->_parent)
 		forefather = forefather->_parent;
 
-	s_default_cursor = g_gr->get_picture( PicMod_UI,  "pics/cursor.png" );
+	s_default_cursor = g_gr->get_picture(PicMod_UI,  "pics/cursor.png");
 
 	// Loop
 	_running = true;
 	start();
 	g_gr->update_fullscreen();
 	assert(_running); //  Testing if this ever gets changed by the any of the 2 function calls above.
-	while(_running)
+	while (_running)
 	{
 		static InputCallback icb = {
 			Panel::ui_mousepress,
@@ -421,7 +421,7 @@ void Panel::set_cache(bool)
  */
 void Panel::think()
 {
-	for(Panel *child = _fchild; child; child = child->_next) {
+	for (Panel *child = _fchild; child; child = child->_next) {
 		if (child->get_think())
 			child->think();
 	}
@@ -584,7 +584,7 @@ void Panel::die()
 {
    _flags |= pf_die;
 
-	for(Panel *p = _parent; p; p = p->_parent) {
+	for (Panel *p = _parent; p; p = p->_parent) {
 		p->_flags |= pf_child_die;
 		if (p == _modal)
 			break;
@@ -606,7 +606,7 @@ void Panel::play_click()
 void Panel::check_child_death()
 {
 	Panel *next = _fchild;
-	while(next) {
+	while (next) {
 		Panel *p = next;
 		next = p->_next;
 
@@ -648,7 +648,7 @@ void Panel::do_draw(RenderTarget* dst)
 				draw(dst);
 
 				// draw back to front
-				for(Panel *child = _lchild; child; child = child->_prev)
+				for (Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
 
 				draw_overlay(*dst);
@@ -670,7 +670,7 @@ void Panel::do_draw(RenderTarget* dst)
 			if (inner) {
 				draw(inner);
 
-				for(Panel *child = _lchild; child; child = child->_prev)
+				for (Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(inner);
 
 				inner->leave_window();
@@ -798,7 +798,7 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 
 	*x -= mousein->_x;
 	*y -= mousein->_y;
-	for(Panel *p = mousein->_parent; p; p = p->_parent) {
+	for (Panel *p = mousein->_parent; p; p = p->_parent) {
 		*x -= p->_lborder + p->_x;
 		*y -= p->_tborder + p->_y;
 	}

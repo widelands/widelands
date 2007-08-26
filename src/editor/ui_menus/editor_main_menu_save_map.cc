@@ -160,25 +160,25 @@ called when the ok button has been clicked
 void Main_Menu_Save_Map::clicked_ok() {
       std::string filename=m_editbox->get_text();
 
-      if(filename=="") {
+      if (filename=="") {
          // Maybe a dir is selected
 			filename = m_ls->get_selected();
 		}
 
-      if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
+      if (g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
 	      m_curdir=g_fs->FS_CanonicalizeName(filename);
          m_ls->clear();
          m_mapfiles.clear();
          fill_list();
 		} else {
          // Ok, save this map
-         if(save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
+         if (save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
             die();
 		}
 }
 void Main_Menu_Save_Map::clicked_make_directory() {
 	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed").c_str());
-	if(md.run()) {
+	if (md.run()) {
          g_fs->EnsureDirectoryExists(m_basedir);
          // Create directory
          std::string fullname=m_curdir;
@@ -197,7 +197,7 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 void Main_Menu_Save_Map::selected(uint) {
    const char * const name = m_ls->get_selected();
 
-   if(Widelands_Map_Loader::is_widelands_map(name)) {
+   if (Widelands_Map_Loader::is_widelands_map(name)) {
 		Map map;
 		Map_Loader * const m_ml = map.get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
@@ -259,11 +259,11 @@ void Main_Menu_Save_Map::fill_list(void) {
 		 ++pname)
 	{
       const char *name = pname->c_str();
-      if(!strcmp(FileSystem::FS_Filename(name),".")) continue;
-      if(!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-      if(!strcmp(FileSystem::FS_Filename(name),"CVS")) continue;
-      if(!g_fs->IsDirectory(name)) continue;
-      if(Widelands_Map_Loader::is_widelands_map(name)) continue;
+      if (!strcmp(FileSystem::FS_Filename(name),".")) continue;
+      if (!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
+      if (!strcmp(FileSystem::FS_Filename(name),"CVS")) continue;
+      if (!g_fs->IsDirectory(name)) continue;
+      if (Widelands_Map_Loader::is_widelands_map(name)) continue;
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -281,13 +281,13 @@ void Main_Menu_Save_Map::fill_list(void) {
       const char *name = pname->c_str();
 
 		Map_Loader* m_ml = map.get_correct_loader(name);
-      if(!m_ml) continue;
-      if(m_ml->get_type()==Map_Loader::S2ML) continue; // we do not list s2 files since we only write wlmf
+      if (!m_ml) continue;
+      if (m_ml->get_type()==Map_Loader::S2ML) continue; // we do not list s2 files since we only write wlmf
 
 		try {
          m_ml->preload_map(true);
          std::string pic="";
-         switch(m_ml->get_type()) {
+         switch (m_ml->get_type()) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
 			}
@@ -295,7 +295,7 @@ void Main_Menu_Save_Map::fill_list(void) {
 				(FileSystem::FS_Filename(name),
 				 name,
 				 g_gr->get_picture(PicMod_Game, pic.c_str()));
-		} catch(_wexception& ) {
+		} catch (_wexception&) {
          // we simply skip illegal entries
 		}
       delete m_ml;
@@ -325,13 +325,13 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
    // ok, first check if the extension matches (ignoring case)
    bool assign_extension=true;
-   if(filename.size() >= strlen(WLMF_SUFFIX)) {
+   if (filename.size() >= strlen(WLMF_SUFFIX)) {
       char buffer[10]; // enough for the extension
       filename.copy(buffer, sizeof(WLMF_SUFFIX), filename.size()-strlen(WLMF_SUFFIX));
-      if(!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
+      if (!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
          assign_extension=false;
 	}
-   if(assign_extension)
+   if (assign_extension)
       filename+=WLMF_SUFFIX;
 
    // Now append directory name
@@ -340,31 +340,31 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
    complete_filename+=filename;
 
    // Check if file exists, if it does, show a warning
-   if(g_fs->FileExists(complete_filename)) {
+   if (g_fs->FileExists(complete_filename)) {
       std::string s=_("A File with the name ");
       s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" exists already. Overwrite?");
 		UI::Modal_Message_Box mbox
 		   (m_parent, _("Save Map Error!!"), s, UI::Modal_Message_Box::YESNO);
-		if(not mbox.run()) return false;
+		if (not mbox.run()) return false;
 
       // Delete this
-      g_fs->Unlink( complete_filename );
+      g_fs->Unlink(complete_filename);
 	}
 
    FileSystem* fs = 0;
-   if( !binary ) {
+   if (!binary) {
    // Make a filesystem out of this
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::DIR );
+      fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
 	} else {
       // Make a zipfile
-      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
+      fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
 	Widelands_Map_Saver wms(*fs, &m_parent->editor());
    try {
 		wms.save();
       m_parent->set_need_save(false);
-	} catch(std::exception& exe) {
+	} catch (std::exception& exe) {
       std::string s=_("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
 		UI::Modal_Message_Box  mbox

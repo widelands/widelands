@@ -47,7 +47,7 @@ struct Event {
       virtual ~Event(void) { };
 
       // virtual functions, implemented by the real events
-      virtual State run( Game* )       = 0;
+      virtual State run(Game*)       = 0;
       virtual void reinitialize(Game*) = 0;             // can be overwritten to reintialize stuff in the child class
 	virtual const char * get_id() const = 0; // this function is needed to recreate the correct option window
 
@@ -61,13 +61,13 @@ struct Event {
       virtual void Read(Section*, Editor_Game_Base*)=0;
 
       // Reference this event
-      void reference( EventReferencer* ref );
-      void unreference( EventReferencer* ref);
+      void reference(EventReferencer* ref);
+      void unreference(EventReferencer* ref);
 	typedef std::map<EventReferencer *, uint> EventReferencerMap;
 	inline const EventReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 
-      inline State get_state( void ) { return m_state; }
+      inline State get_state(void) { return m_state; }
 
 protected:
       State        m_state;

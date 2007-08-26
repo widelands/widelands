@@ -35,7 +35,7 @@ throw (_wexception)
 {
 	FileRead fr;
 
-	fr.Open( fs, "binary/game_class" );
+	fr.Open(fs, "binary/game_class");
 
 	// read packet version
 	const Uint16 packet_version = fr.Unsigned16();
@@ -94,5 +94,5 @@ throw (_wexception)
 
 	// Track pointers are not saved in save games
 
-	fw.Write( fs, "binary/game_class" );
+	fw.Write(fs, "binary/game_class");
 }

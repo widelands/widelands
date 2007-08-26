@@ -47,7 +47,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	}
 
 private:
-	void encode( uchar plyr, const RGBColor* );
+	void encode(uchar plyr, const RGBColor*);
 
 	Frames   * m_plrframes;
 	EncodeData m_encodedata;

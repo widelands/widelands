@@ -43,17 +43,17 @@ throw (_wexception)
 {
    FileRead fr;
 
-   fr.Open( fs, "binary/player_economies" );
+   fr.Open(fs, "binary/player_economies");
 
    // read packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       // DONE
       Map* map=game->get_map();
-      for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
+      for (uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
          Player* plr=game->get_safe_player(i);
-         if(!plr) continue;
+         if (!plr) continue;
 
          uint nr_economies=fr.Unsigned16();
          assert(nr_economies == plr->m_economies.size());
@@ -61,14 +61,14 @@ throw (_wexception)
          std::vector<Economy*> ecos;
          ecos.resize(nr_economies);
 
-         for(uint j=0; j<plr->m_economies.size(); j++) {
+         for (uint j=0; j<plr->m_economies.size(); j++) {
             int x=fr.Unsigned16();
             int y=fr.Unsigned16();
             Flag* flag=static_cast<Flag*>(map->get_field(Coords(x,y))->get_immovable());
             assert(flag);
             ecos[j]=flag->get_economy();
 			}
-         for(uint j=0; j<ecos.size(); j++) {
+         for (uint j=0; j<ecos.size(); j++) {
             plr->m_economies[j]=ecos[j];
             ecos[j]->balance_requestsupply(); // Issue first balance
 			}
@@ -94,34 +94,34 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    bool done=false;
-   for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
+   for (uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
       Player* plr=game->get_player(i);
-      if(!plr) continue;
+      if (!plr) continue;
       fw.Unsigned16(plr->m_economies.size());
-      for(uint j=0; j<plr->m_economies.size(); j++) {
+      for (uint j=0; j<plr->m_economies.size(); j++) {
          done=false;
          // Walk the map so that we find a representant
          Map* map=game->get_map();
-         for(ushort y=0; y<map->get_height(); y++) {
-            for(ushort x=0; x<map->get_width(); x++) {
+         for (ushort y=0; y<map->get_height(); y++) {
+            for (ushort x=0; x<map->get_width(); x++) {
                BaseImmovable* imm=map->get_field(Coords(x,y))->get_immovable();
-               if(!imm) continue;
+               if (!imm) continue;
 
-               if(imm->get_type()==Map_Object::FLAG) {
+               if (imm->get_type()==Map_Object::FLAG) {
                   Flag* flag=static_cast<Flag*>(imm);
-                  if(flag->get_economy() == plr->m_economies[j]) {
+                  if (flag->get_economy() == plr->m_economies[j]) {
                      fw.Unsigned16(x);
                      fw.Unsigned16(y);
                      done=true;
 						}
 					}
-               if(done) break;
+               if (done) break;
 				}
-            if(done) break;
+            if (done) break;
 			}
-         if(done) continue;
+         if (done) continue;
 		}
 	}
 
-   fw.Write( fs, "binary/player_economies" );
+   fw.Write(fs, "binary/player_economies");
 }

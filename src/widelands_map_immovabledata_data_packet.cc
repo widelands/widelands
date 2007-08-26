@@ -53,13 +53,13 @@ void Widelands_Map_Immovabledata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if( skip )
+	if (skip)
 		return;
 
 	FileRead fr;
 	try {
-		fr.Open( fs, "binary/immovable_data" );
-	} catch ( ... ) {
+		fr.Open(fs, "binary/immovable_data");
+	} catch (...) {
 		// not there, so skip
 		return ;
 	}
@@ -67,10 +67,10 @@ throw (_wexception)
 	// First packet version
 	int packet_version=fr.Unsigned16();
 
-	if(packet_version==CURRENT_PACKET_VERSION) {
-		while(1) {
+	if (packet_version==CURRENT_PACKET_VERSION) {
+		while (1) {
 			uint reg=fr.Unsigned32();
-			if(reg==0xffffffff) break; // Last immovable
+			if (reg==0xffffffff) break; // Last immovable
 
 			assert(ol->is_object_known(reg));
 			Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
@@ -80,7 +80,7 @@ throw (_wexception)
 			try {
 				imm->m_anim = imm->descr().get_animation(animname);
 			}
-			catch(Map_Object_Descr::Animation_Nonexistent&) {
+			catch (Map_Object_Descr::Animation_Nonexistent&) {
 				imm->m_anim = imm->descr().main_animation();
 				log("Warning: Animation '%s' not found, using animation '%s').\n",
 					animname, imm->descr().get_animation_name(imm->m_anim).c_str());
@@ -88,7 +88,7 @@ throw (_wexception)
 			imm->m_animstart=fr.Signed32();
 
 			// Programm
-			if(fr.Unsigned8())
+			if (fr.Unsigned8())
 				imm->m_program=imm->descr().get_program(fr.CString());
 			else
 				imm->m_program=0;
@@ -115,7 +115,7 @@ throw (_wexception)
 	}
 	throw wexception("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!\n", packet_version);
 
-	assert( 0 );
+	assert(0);
 }
 
 
@@ -134,12 +134,12 @@ throw (_wexception)
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	Map* map=egbase->get_map();
-	for(ushort y=0; y<map->get_height(); y++) {
-		for(ushort x=0; x<map->get_width(); x++) {
+	for (ushort y=0; y<map->get_height(); y++) {
+		for (ushort x=0; x<map->get_width(); x++) {
 			BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
 
 			// We do not write player immovables
-			if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
+			if (immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
 				assert(os->is_object_known(immovable));
 				Immovable* imm=static_cast<Immovable*>(immovable);
 
@@ -152,7 +152,7 @@ throw (_wexception)
 				fw.Signed32(imm->m_animstart);
 
 				// Program Stuff
-				if(imm->m_program) {
+				if (imm->m_program) {
 					fw.Unsigned8(1);
 					fw.CString(imm->m_program->get_name().c_str());
 				} else
@@ -167,6 +167,6 @@ throw (_wexception)
 
 	fw.Unsigned32(0xffffffff);
 
-	fw.Write( fs, "binary/immovable_data" );
+	fw.Write(fs, "binary/immovable_data");
 	// DONE
 }

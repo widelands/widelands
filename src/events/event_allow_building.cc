@@ -56,13 +56,13 @@ void Event_Allow_Building::reinitialize(Game *) {}
 void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
    int version = s->get_safe_int("version");
 
-   if(version == EVENT_VERSION) {
-      int player= s->get_safe_int( "player" );
+   if (version == EVENT_VERSION) {
+      int player= s->get_safe_int("player");
       set_player(player);
-      set_building( s->get_safe_string("building") );
-      set_allow( s->get_safe_bool("allow"));
+      set_building(s->get_safe_string("building"));
+      set_allow(s->get_safe_bool("allow"));
 
-      if(player<=0 || player>egbase->get_map()->get_nrplayers() || m_building=="<undefined>") {
+      if (player<=0 || player>egbase->get_map()->get_nrplayers() || m_building=="<undefined>") {
          // give a warning
          log("Conquer Area Event with illegal player orbuilding name: (Player: %i, Building: %s) deleted!\n", m_player, m_building.c_str());
 		}
@@ -78,7 +78,7 @@ void Event_Allow_Building::Write
 	s.set_int   ("version",  EVENT_VERSION);
 	s.set_int   ("player",   get_player());
 	s.set_string("building", m_building.c_str());
-	s.set_bool  ("allow",    m_allow );
+	s.set_bool  ("allow",    m_allow);
 }
 
 /*
@@ -93,7 +93,7 @@ Event::State Event_Allow_Building::run(Game* game) {
 
 	const Tribe_Descr & tribe = plr->tribe();
    int index=tribe.get_building_index(m_building.c_str());
-   if(index==-1)
+   if (index==-1)
 	   throw wexception("Event Allow Building asks for building: %s, which doesn't exist in tribe %s\n", m_building.c_str(), tribe.name().c_str());
 
    plr->allow_building(index, m_allow);

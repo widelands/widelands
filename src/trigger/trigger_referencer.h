@@ -30,8 +30,8 @@ struct TriggerReferencer {
 	virtual const char * get_type() const = 0;
 	virtual const char * get_name() const = 0;
 
-      void reference_trigger( Trigger* );
-      void unreference_trigger( Trigger* );
+      void reference_trigger(Trigger*);
+      void unreference_trigger(Trigger*);
 };
 
 #endif // __S__TRIGGER_REFERENCER_H

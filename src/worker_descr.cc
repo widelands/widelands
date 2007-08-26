@@ -46,7 +46,7 @@ Worker_Descr::~Worker_Descr()
 	if (m_menu_pic_fname)
 		free(m_menu_pic_fname);
 
-	while(m_programs.size()) {
+	while (m_programs.size()) {
 		delete m_programs.begin()->second;
 		m_programs.erase(m_programs.begin());
 	}
@@ -58,7 +58,7 @@ Worker_Descr::~Worker_Descr()
  */
 void Worker_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture( PicMod_Game,  m_menu_pic_fname );
+	m_menu_pic = g_gr->get_picture(PicMod_Game,  m_menu_pic_fname);
 }
 
 
@@ -115,7 +115,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 	m_menu_pic_fname = strdup(fname);
 
 	// Read the costs of building
-	if(get_worker_type() == CARRIER || get_worker_type() == SOLDIER)
+	if (get_worker_type() == CARRIER || get_worker_type() == SOLDIER)
 		m_buildable = sglobal->get_bool("buildable", false);
 	else
 		m_buildable = sglobal->get_bool("buildable", true);
@@ -136,7 +136,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 	m_walk_anims.parse(this, directory, prof, "walk_??",
 	                   prof->get_section("walk"), encdata);
 
-	if(get_worker_type()!=SOLDIER) // Soldier have no walkload
+	if (get_worker_type()!=SOLDIER) // Soldier have no walkload
 		m_walkload_anims.parse(this, directory, prof, "walkload_??",
 		                       prof->get_section("walkload"), encdata);
 
@@ -148,26 +148,26 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 	m_becomes = sglobal->get_string("becomes","");
 	std::string exp=sglobal->get_string("experience", "");
 	m_min_experience=m_max_experience=-1;
-	if(exp.size()) {
+	if (exp.size()) {
 		std::vector<std::string> list;
 		split_string(exp, list, "-");
-		if(list.size()!=2)
+		if (list.size()!=2)
 			throw wexception("Parse error in experience string: \"%s\" (must be \"min-max\")", exp.c_str());
 		uint i=0;
-		for(i=0; i<list.size(); i++)
+		for (i=0; i<list.size(); i++)
 			remove_spaces(&list[i]);
 
 		char* endp;
 		m_min_experience = strtol(list[0].c_str(),&endp, 0);
-		if(endp && *endp)
+		if (endp && *endp)
 			throw wexception("Parse error in experience string: %s is a bad value", list[0].c_str());
 		m_max_experience = strtol(list[1].c_str(),&endp, 0);
-		if(endp && *endp)
+		if (endp && *endp)
 			throw wexception("Parse error in experience string: %s is a bad value", list[1].c_str());
 	}
 
 	// Read programs
-	while(sglobal->get_next_string("program", &string)) {
+	while (sglobal->get_next_string("program", &string)) {
 		WorkerProgram* prog = 0;
 
 		try {
@@ -183,7 +183,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 			m_programs[prog->get_name()] = prog;
 		}
 
-		catch(std::exception& e) {
+		catch (std::exception& e) {
 			delete prog;
 			throw wexception("Parse error in program %s: %s", string, e.what());
 		}
@@ -248,11 +248,11 @@ Worker_Descr *Worker_Descr::create_from_dir(const Tribe_Descr & tribe,
 
 		descr->parse(directory, &prof, encdata);
 	}
-	catch(std::exception &e) {
+	catch (std::exception &e) {
 			delete descr;
 		throw wexception("Error reading worker %s: %s", name, e.what());
 	}
-	catch(...) {
+	catch (...) {
 			delete descr;
 		throw;
 	}

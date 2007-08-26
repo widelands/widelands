@@ -36,12 +36,12 @@ template <typename T> struct Button;
  * before it can return
  */
 struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
-      Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive*, TriggerConditional*, EventChain*  );
+      Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive*, TriggerConditional*, EventChain*);
       ~Editor_Event_Menu_Edit_TriggerConditional();
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
-      TriggerConditional* get_trigcond( void ) { return m_given_cond; }
+      TriggerConditional* get_trigcond(void) { return m_given_cond; }
 
    private:
 	void clicked_cancel     ();

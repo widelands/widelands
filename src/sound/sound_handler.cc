@@ -293,7 +293,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 		// Note: SDL_RWFromFP is not available under windows
 		target = SDL_RWFromFP(f, 0);
-		if(!target) {
+		if (!target) {
 			fclose(f);
 			log("SDL_RWFromFP failed miserably on %s: %s.\n",
 			    tempfile, SDL_GetError());
@@ -486,7 +486,7 @@ bool Sound_Handler::play_or_not
 	//printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX %s ticks: %i ev: %f prob: %f\n", fx_name.c_str(), ticks_since_last_play, evaluation, probability);
 
 	//finally: the decision
-	if ( (m_rng.rand()%255)/255.0 <= probability ) //float division! not integer
+	if ((m_rng.rand()%255)/255.0 <= probability) //float division! not integer
 		return true;
 	else
 		return false;

@@ -41,8 +41,8 @@ Event_Message_Box::Event_Message_Box() : Event(_("Message Box")) {
 	set_text(_("No text defined").c_str());
 	set_window_title(_("Window Title").c_str());
    set_is_modal(false);
-   set_dimensions( 400, 300 );
-   set_pos( -1, -1 );
+   set_dimensions(400, 300);
+   set_pos(-1, -1);
 
    set_nr_buttons(1);
    m_buttons[0].name=_("Continue");
@@ -53,8 +53,8 @@ Event_Message_Box::Event_Message_Box() : Event(_("Message Box")) {
 
 Event_Message_Box::~Event_Message_Box(void) {
   uint i=0;
-   for(i=0; i<m_buttons.size(); i++)
-      if(m_buttons[i].trigger) {
+   for (i=0; i<m_buttons.size(); i++)
+      if (m_buttons[i].trigger) {
          set_button_trigger(i, 0);
 		}
    m_buttons.resize(0);
@@ -72,19 +72,19 @@ void Event_Message_Box::reinitialize(Game *) {}
 void Event_Message_Box::set_nr_buttons(int i) {
    int oldsize=m_buttons.size();
    m_buttons.resize(i);
-   for(uint j=oldsize; j<m_buttons.size(); j++)
+   for (uint j=oldsize; j<m_buttons.size(); j++)
       m_buttons[j].trigger=0;
 }
 
 
 void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t) {
    assert(i<get_nr_buttons());
-   if(m_buttons[i].trigger==t) return;
+   if (m_buttons[i].trigger==t) return;
 
-   if(m_buttons[i].trigger)
-      unreference_trigger( m_buttons[i].trigger) ;
+   if (m_buttons[i].trigger)
+      unreference_trigger(m_buttons[i].trigger) ;
 
-   if(t)
+   if (t)
       reference_trigger(t);
    m_buttons[i].trigger=t;
 }
@@ -105,39 +105,39 @@ const char* Event_Message_Box::get_button_name(int i) {
  * File Read, File Write
  */
 void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
-   int version = s->get_safe_int( "version" );
+   int version = s->get_safe_int("version");
 
-   if( version == EVENT_VERSION ) {
-      set_name( s->get_name() );
-      set_text( s->get_safe_string( "text" ) );
-      set_window_title( s->get_safe_string( "window_title" ) );
-      set_is_modal( s->get_safe_bool( "is_modal" ));
+   if (version == EVENT_VERSION) {
+      set_name(s->get_name());
+      set_text(s->get_safe_string("text"));
+      set_window_title(s->get_safe_string("window_title"));
+      set_is_modal(s->get_safe_bool("is_modal"));
 
-      m_posx = s->get_int( "posx", -1 );
-      m_posy = s->get_int( "posy", -1 );
-      m_width = s->get_int( "width", 400 );
-      m_height = s->get_int( "height", 300 );
+      m_posx = s->get_int("posx", -1);
+      m_posy = s->get_int("posy", -1);
+      m_width = s->get_int("width", 400);
+      m_height = s->get_int("height", 300);
 
-      uint nr_buttons = s->get_safe_int( "number_of_buttons" );
-      set_nr_buttons( nr_buttons );
+      uint nr_buttons = s->get_safe_int("number_of_buttons");
+      set_nr_buttons(nr_buttons);
       char buf[256];
-      for(uint i=0; i<nr_buttons; i++) {
-         sprintf( buf, "button_%02i_name", i );
-         set_button_name( i, s->get_safe_string( buf ) );
+      for (uint i=0; i<nr_buttons; i++) {
+         sprintf(buf, "button_%02i_name", i);
+         set_button_name(i, s->get_safe_string(buf));
 
-         sprintf( buf, "button_%02i_has_trigger", i );
-         bool trigger = s->get_safe_bool( buf );
+         sprintf(buf, "button_%02i_has_trigger", i);
+         bool trigger = s->get_safe_bool(buf);
 
-         if( trigger ) {
-            sprintf( buf, "button_%02i_trigger", i );
+         if (trigger) {
+            sprintf(buf, "button_%02i_trigger", i);
             Trigger * const t = egbase->get_map()->get_mtm().get_trigger(s->get_safe_string(buf)); // Hopefully it is a null trigger
-            set_button_trigger( i, static_cast<Trigger_Null*>(t));
+            set_button_trigger(i, static_cast<Trigger_Null*>(t));
 			} else
-            set_button_trigger( i, 0);
+            set_button_trigger(i, 0);
 		}
       return;
 	}
-   throw wexception("Unknown Version in Event_Message_Box::Read: %i\n", version );
+   throw wexception("Unknown Version in Event_Message_Box::Read: %i\n", version);
 }
 
 void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
@@ -153,14 +153,14 @@ void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
 
    char buf[256];
 	for (int i=0; i < get_nr_buttons(); ++i) {
-      sprintf( buf, "button_%02i_name", i );
+      sprintf(buf, "button_%02i_name", i);
 		s.set_string(buf, m_buttons[i].name.c_str());
 
 
-      sprintf( buf, "button_%02i_has_trigger", i );
+      sprintf(buf, "button_%02i_has_trigger", i);
 		s.set_bool(buf, m_buttons[i].trigger == 0 ? 0 : 1);
-      if(m_buttons[i].trigger) {
-         sprintf( buf, "button_%02i_trigger", i );
+      if (m_buttons[i].trigger) {
+         sprintf(buf, "button_%02i_trigger", i);
 			s.set_string(buf, m_buttons[i].trigger->get_name());
 		}
 	}
@@ -172,7 +172,7 @@ void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
 Event::State Event_Message_Box::run(Game* game) {
 
    Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this, get_posx(), get_posy(), get_w(), get_h());
-   if(get_is_modal()) {
+   if (get_is_modal()) {
       mb->run();
       delete mb;
 	}

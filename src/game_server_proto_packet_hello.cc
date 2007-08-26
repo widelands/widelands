@@ -45,8 +45,8 @@ ushort Game_Server_Protocol_Packet_Hello::get_id(void) {
  * Write To network
  */
 void Game_Server_Protocol_Packet_Hello::send(Network_Buffer* buffer) {
-   buffer->put_8( FEATURES_NONE );
-   buffer->put_string( m_name );
+   buffer->put_8(FEATURES_NONE);
+   buffer->put_string(m_name);
 }
 
 /*

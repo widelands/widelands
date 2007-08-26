@@ -39,7 +39,7 @@ static const int EVENT_VERSION = 1;
 Event_Set_Null_Trigger::Event_Set_Null_Trigger(void) {
    set_name(_("Set Null Trigger").c_str());
    m_trigger = 0;
-   set_setto( true );
+   set_setto(true);
 }
 
 
@@ -77,7 +77,7 @@ void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
 
 void Event_Set_Null_Trigger::Write(Section & s, const Editor_Game_Base &) const
 {
-   assert( m_trigger );
+   assert(m_trigger);
 	s.set_int   ("version", EVENT_VERSION);
 	s.set_string("trigger", m_trigger->get_name());
 	s.set_bool  ("setto",   get_setto());
@@ -87,10 +87,10 @@ void Event_Set_Null_Trigger::Write(Section & s, const Editor_Game_Base &) const
  * Run this trigger
  */
 Event::State Event_Set_Null_Trigger::run(Game* game) {
-   assert( m_trigger );
+   assert(m_trigger);
 
-   m_trigger->set_trigger_manually( get_setto() );
-   m_trigger->check_set_conditions( game ); // forcefully update this trigger
+   m_trigger->set_trigger_manually(get_setto());
+   m_trigger->check_set_conditions(game); // forcefully update this trigger
 
    m_state = DONE;
    return m_state;

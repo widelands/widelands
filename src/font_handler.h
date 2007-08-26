@@ -68,7 +68,7 @@ enum Widget_Cache {
  *
  * This class generates font Pictures out of strings and returns them
  */
-typedef std::string (*Varibale_Callback)( std::string, void* data );
+typedef std::string (*Varibale_Callback)(std::string, void* data);
 class Font_Handler {
 public:
 	Font_Handler();
@@ -104,7 +104,7 @@ public:
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
-	void flush_cache( void );
+	void flush_cache(void);
 	void delete_widget_cache(uint widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,
@@ -118,8 +118,8 @@ public:
 	void get_size_from_cache(const uint widget_cache_id, uint & w, uint & h);
 
 	// Register a callback which is used whenever the tag <variable name="kljdf"> appears
-	void register_variable_callback( Varibale_Callback, void* cbdata );
-	void unregister_variable_callback( );
+	void register_variable_callback(Varibale_Callback, void* cbdata);
+	void unregister_variable_callback();
 
 private:
 	struct _Cache_Infos {
@@ -132,7 +132,7 @@ private:
 		uint      h;
 
 		inline bool operator== (const _Cache_Infos& who) const {
-			return ( str == who.str &&
+			return (str == who.str &&
 			         f == who.f &&
 			         fg == who.fg &&
 			         bg == who.bg);

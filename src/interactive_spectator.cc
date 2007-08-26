@@ -174,7 +174,7 @@ void Interactive_Spectator::field_action()
  */
 bool Interactive_Spectator::handle_key(bool down, int code, char /* c */)
 {
-	switch(code) {
+	switch (code) {
 	case KEY_m:
 		if (down)
 			toggle_minimap();

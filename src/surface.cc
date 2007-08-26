@@ -26,8 +26,8 @@
 
 
 Surface::~Surface() {
-	if( m_surface )
-		SDL_FreeSurface( m_surface );
+	if (m_surface)
+		SDL_FreeSurface(m_surface);
 	m_surface = 0;
 }
 
@@ -59,21 +59,21 @@ void * Surface::get_pixels() const throw () {
 }
 
 void Surface::lock() {
-	if( SDL_MUSTLOCK( m_surface ))
-		SDL_LockSurface( m_surface );
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_LockSurface(m_surface);
 }
 
 void Surface::unlock() {
-	if( SDL_MUSTLOCK( m_surface ))
-		SDL_UnlockSurface( m_surface );
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_UnlockSurface(m_surface);
 }
 
 ulong Surface::get_pixel(uint x, uint y) {
 	x+= m_offsx;
 	y+= m_offsy;
 
-	assert( x < get_w() && y < get_h() );
-	assert( m_surface );
+	assert(x < get_w() && y < get_h());
+	assert(m_surface);
 
 	// Locking not needed: reading only
 	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
@@ -102,10 +102,10 @@ void Surface::set_pixel(uint x, uint y, const Uint32 clr) {
 
 	assert(x < get_w());
 	assert(y < get_h());
-        assert( m_surface );
+        assert(m_surface);
 
-        if( SDL_MUSTLOCK( m_surface ))
-		SDL_LockSurface( m_surface );
+        if (SDL_MUSTLOCK(m_surface))
+		SDL_LockSurface(m_surface);
 
 	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
 	Uint8 * const pix =
@@ -121,11 +121,11 @@ void Surface::set_pixel(uint x, uint y, const Uint32 clr) {
 			break;
 	}
 
-	if( SDL_MUSTLOCK( m_surface ))
-		SDL_UnlockSurface( m_surface );
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_UnlockSurface(m_surface);
 }
 
-void Surface::set_subwin( Rect r ) {
+void Surface::set_subwin(Rect r) {
 	m_offsx = r.x;
 	m_offsy = r.y;
 	m_w =r.w;
@@ -159,7 +159,7 @@ void Surface::draw_field
  const Texture &  f_r_texture,
 bool draw_all)
 {
-	set_subwin( subwin );
+	set_subwin(subwin);
 
 	switch (get_format()->BytesPerPixel) {
 	    case 2:

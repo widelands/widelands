@@ -45,7 +45,7 @@ m_parent(parent)
 
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text( trigger->get_name() );
+   m_name->set_text(trigger->get_name());
 
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
@@ -93,7 +93,7 @@ bool Trigger_Null_Option_Menu::handle_mouserelease(const Uint8, int, int)
  * a button has been clicked
  */
 void Trigger_Null_Option_Menu::clicked_ok() {
-      if(m_name->get_text())
-         m_trigger->set_name(m_name->get_text() );
+      if (m_name->get_text())
+         m_trigger->set_name(m_name->get_text());
       end_modal(1);
 }

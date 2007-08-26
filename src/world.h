@@ -93,8 +93,8 @@ struct Terrain_Descr {
 
 	bool is_resource_valid(const int res) const throw () {
          int i=0;
-         for(i=0; i<m_nr_valid_resources; i++)
-            if(m_valid_resources[i]==res) return true;
+         for (i=0; i<m_nr_valid_resources; i++)
+            if (m_valid_resources[i]==res) return true;
          return false;
 		}
 	char get_default_resources() const

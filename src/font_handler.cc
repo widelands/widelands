@@ -41,7 +41,7 @@
  * Plain Constructor
  */
 Font_Handler::Font_Handler(void) {
-	if(TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
 	m_font_loader = new Font_Loader();
 	m_varcallback = 0;
 	m_cbdata = 0;
@@ -74,7 +74,7 @@ uint Font_Handler::get_fontheight(const std::string & name, const int size) {
  * The whole text block is rendered in one Surface, this surface is cached
  * for reuse.
  * This is a really fast approach for static texts, but for text areas which keep changing
- * (like Multiline editboxes or chat windows, debug windows ... ) this is the death, for a whole new
+ * (like Multiline editboxes or chat windows, debug windows ...) this is the death, for a whole new
  * surface is rendered with everything that has been written so far.
  */
 // TODO: rename this to draw text
@@ -130,7 +130,7 @@ void Font_Handler::draw_string
 			ci.f = &font;
 			m_cache.push_front (ci);
 
-			while( m_cache.size() > CACHE_ARRAY_SIZE) {
+			while (m_cache.size() > CACHE_ARRAY_SIZE) {
 				g_gr->free_surface(m_cache.back().surface_id);
 				m_cache.pop_back();
 			}
@@ -187,7 +187,7 @@ SDL_Surface* Font_Handler::create_single_line_text_surface
 	SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
 	SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
 
-	if( !text.size() )
+	if (!text.size())
 		text = " ";
 
 	if
@@ -219,8 +219,8 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
  std::string text, const Align align, const int wrap, const int line_spacing,
  int caret)
 {
-	assert( wrap > 0);
-	assert( text.size() > 0 );
+	assert(wrap > 0);
+	assert(text.size() > 0);
 
 	int global_surface_width  = wrap > 0 ? wrap : 0;
 	int global_surface_height = 0;
@@ -236,7 +236,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	uint cur_text_pos = 0;
 	uint i = 0;
 
-	for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
+	for (std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
 		std::string line = *it;
 		if (line.empty())
 			line = " ";
@@ -262,7 +262,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 
 		m_rendered_lines.push_back(surface);
 		global_surface_height += surface->h + line_spacing;
-		if( global_surface_width < surface->w)
+		if (global_surface_width < surface->w)
 			global_surface_width = surface->w;
 		} else {
 			log
@@ -274,7 +274,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	}
 
 	// blit all this together in one Surface
-	return join_sdl_surfaces( global_surface_width, global_surface_height,
+	return join_sdl_surfaces(global_surface_width, global_surface_height,
 				  m_rendered_lines, bg, align, line_spacing);
 
 }
@@ -416,7 +416,7 @@ void Font_Handler::draw_richtext
 			int text_width_left = (wrap - img_surf_w) - h_space;
 
 			//Iterate over text blocks of current richtext block
-			for(std::vector<Text_Block>::iterator text_it = cur_text_blocks.begin(); text_it != cur_text_blocks.end(); text_it++) {
+			for (std::vector<Text_Block>::iterator text_it = cur_text_blocks.begin(); text_it != cur_text_blocks.end(); text_it++) {
 				std::vector<std::string> words = text_it->get_words();
 				std::vector<std::vector<std::string>::size_type> line_breaks =
 					text_it->get_line_breaks();
@@ -537,7 +537,7 @@ void Font_Handler::draw_richtext
 					text_pos.x = img_surf_w + h_space;
 
 				SDL_Surface* block_surface = create_empty_sdl_surface(wrap,(block_h > img_surf_h ? block_h : img_surf_h));
-				SDL_FillRect( block_surface, 0, SDL_MapRGB( block_surface->format,  107,87,55  )); // Set background to colorkey
+				SDL_FillRect(block_surface, 0, SDL_MapRGB(block_surface->format,  107,87,55)); // Set background to colorkey
 				SDL_BlitSurface(block_images,0,block_surface,&img_pos);
 
 				{
@@ -607,12 +607,12 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 		(h ? w : 0, w ? h + spacing * surfaces.size() : 0);
 	assert(global_surface);
 
-	SDL_FillRect( global_surface, 0, SDL_MapRGB( global_surface->format, bg.r(), bg.g(), bg.b()));
+	SDL_FillRect(global_surface, 0, SDL_MapRGB(global_surface->format, bg.r(), bg.g(), bg.b()));
 
 	int y = 0;
 	int x = 0;
 
-	for( uint i = 0; i < surfaces.size(); i++) {
+	for (uint i = 0; i < surfaces.size(); i++) {
 		SDL_Surface* s = surfaces[i];
 		SDL_Rect r;
 
@@ -635,7 +635,7 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 		y += s->h + spacing;
 		x += s->w + (vertical ? spacing : 0);
 		if (!keep_surfaces)
-			SDL_FreeSurface( s );
+			SDL_FreeSurface(s);
 	}
 	return global_surface;
 }
@@ -684,7 +684,7 @@ void Font_Handler::do_align(Align align, int *dstx, int *dsty, int w, int h) {
 /*
  * Flushes the cached picture ids
  */
-void Font_Handler::flush_cache( void ) {
+void Font_Handler::flush_cache(void) {
 	while (!m_cache.empty()) {
 		g_gr->free_surface (m_cache.front().surface_id);
 		m_cache.pop_front();
@@ -709,7 +709,7 @@ std::string Font_Handler::word_wrap_text
 	std::string cur_word; // including start-whitespace
 	std::string cur_line; // the whole line so far
 
-	for(size_t c = 0; c < unwrapped_text.length(); c++) {
+	for (size_t c = 0; c < unwrapped_text.length(); c++) {
 		// Find the next word
 		bool forced_line_break = false;
 		if (c == unwrapped_text.length() - 1) {
@@ -802,7 +802,7 @@ void Font_Handler::get_size
 
 	*w = 0;
 	*h = 0;
-	for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
+	for (std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
 		std::string line = *it;
 		if (line.empty())
 			line = " ";
@@ -827,11 +827,11 @@ int Font_Handler::calc_linewidth(TTF_Font & font, const std::string & text) {
  * Registers the variable callback which is used (currently, 11.05)
  * for rendering map variables.
  */
-void Font_Handler::register_variable_callback( Varibale_Callback cb, void* cbdata ) {
+void Font_Handler::register_variable_callback(Varibale_Callback cb, void* cbdata) {
 	m_varcallback=cb;
 	m_cbdata=cbdata;
 }
-void Font_Handler::unregister_variable_callback( ) {
+void Font_Handler::unregister_variable_callback() {
 	m_varcallback = 0;
 	m_cbdata = 0;
 }

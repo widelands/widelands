@@ -57,5 +57,5 @@ void Trigger_Null::check_set_conditions(Game *) {
 void Trigger_Null::reset_trigger(Game *) {
    m_should_toggle = false;
    m_value = false;
-   set_trigger( false );
+   set_trigger(false);
 }

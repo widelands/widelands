@@ -37,12 +37,12 @@ Trigger_Time::Trigger_Time()
 {set_trigger(false);}
 
 
-void Trigger_Time::Read(Section* s, Editor_Game_Base* ) {
-   int version= s->get_safe_int( "version" );
+void Trigger_Time::Read(Section* s, Editor_Game_Base*) {
+   int version= s->get_safe_int("version");
 
-   if(version == TRIGGER_VERSION) {
-      m_wait_time = s->get_safe_int( "wait_time" );
-      m_last_start_time = s->get_safe_int( "last_start_time" );
+   if (version == TRIGGER_VERSION) {
+      m_wait_time = s->get_safe_int("wait_time");
+      m_last_start_time = s->get_safe_int("last_start_time");
       return;
 	}
    throw wexception("Time Trigger with unknown/unhandled version %i in map!\n", version);
@@ -58,7 +58,7 @@ void Trigger_Time::Write(Section & s) const {
  * check if trigger conditions are done
  */
 void Trigger_Time::check_set_conditions(Game* game) {
-   if(((game->get_gametime()-m_last_start_time)/1000) < m_wait_time) return;
+   if (((game->get_gametime()-m_last_start_time)/1000) < m_wait_time) return;
 
    // Time has come. Set us
    set_trigger(true);

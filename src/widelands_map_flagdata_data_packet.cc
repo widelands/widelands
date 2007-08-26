@@ -51,13 +51,13 @@ void Widelands_Map_Flagdata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/flag_data" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/flag_data");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
@@ -65,11 +65,11 @@ throw (_wexception)
    // First packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(1) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
+      while (1) {
          uint ser=fr.Unsigned32();
 
-         if(ser==0xffffffff) break; // end of flags
+         if (ser==0xffffffff) break; // end of flags
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG);
 
@@ -82,7 +82,7 @@ throw (_wexception)
          flag->m_position.y=fr.Unsigned16();
          flag->m_animstart=fr.Unsigned16();
          int building=fr.Unsigned32();
-         if(building) {
+         if (building) {
             assert(ol->is_object_known(building));
             flag->m_building=static_cast<Building*>(ol->get_object_by_file_index(building));
 			} else
@@ -91,20 +91,20 @@ throw (_wexception)
 
          // Roads are set somewhere else
 
-         for(uint i=0; i<6; i++)
+         for (uint i=0; i<6; i++)
             flag->m_items_pending[i]=fr.Unsigned32();
          flag->m_item_capacity=fr.Unsigned32();
          flag->m_item_filled=fr.Unsigned32();
 
          // items
-         for(int i=0; i<flag->m_item_filled; i++) {
+         for (int i=0; i<flag->m_item_filled; i++) {
             flag->m_items[i].pending=fr.Unsigned8();
             uint item=fr.Unsigned32();
             assert(ol->is_object_known(item));
             flag->m_items[i].item=static_cast<WareInstance*>(ol->get_object_by_file_index(item));
 
             uint nextstep=fr.Unsigned32();
-            if(nextstep) {
+            if (nextstep) {
                assert(ol->is_object_known(nextstep));
                flag->m_items[i].nextstep=static_cast<PlayerImmovable*>(ol->get_object_by_file_index(nextstep));
 				} else {
@@ -114,7 +114,7 @@ throw (_wexception)
 
          // always call
          uint always_call=fr.Unsigned32();
-         if(always_call) {
+         if (always_call) {
             assert(ol->is_object_known(always_call));
             flag->m_always_call_for_flag=static_cast<Flag*>(ol->get_object_by_file_index(always_call));
 			} else
@@ -123,7 +123,7 @@ throw (_wexception)
          // Workers waiting
          uint nr_workers=fr.Unsigned16();
          flag->m_capacity_wait.resize(nr_workers);
-         for(uint i=0; i<nr_workers; i++) {
+         for (uint i=0; i<nr_workers; i++) {
             uint id=fr.Unsigned32();
             assert(ol->is_object_known(id));
             flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
@@ -132,10 +132,10 @@ throw (_wexception)
          // Flag jobs
          uint nr_jobs=fr.Unsigned16();
          assert(!flag->m_flag_jobs.size());
-         for(uint i=0; i<nr_jobs; i++) {
+         for (uint i=0; i<nr_jobs; i++) {
             Flag::FlagJob f;
             bool request=fr.Unsigned8();
-            if(!request)
+            if (!request)
                f.request=0;
             else {
                f.request = new Request(flag, 1,
@@ -152,7 +152,7 @@ throw (_wexception)
 //         flag->mpf_heapindex=fr.Signed32();
 //         flag->mpf_realcost=fr.Signed32();
 //         uint backlink=fr.Unsigned32();
-//         if(backlink) {
+//         if (backlink) {
 //            assert(ol->is_object_known(backlink));
 //            flag->mpf_backlink=static_cast<Flag*>(ol->get_object_by_file_index(backlink));
 //         } else
@@ -168,7 +168,7 @@ throw (_wexception)
 	}
    throw wexception("Unknown version %i in Widelands_Map_Flagdata_Data_Packet!\n", packet_version);
 
-   assert( 0 );
+   assert(0);
 }
 
 
@@ -187,13 +187,13 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x,y));
          BaseImmovable* imm=f->get_immovable();
-         if(!imm) continue;
+         if (!imm) continue;
 
-         if(imm->get_type()==Map_Object::FLAG) {
+         if (imm->get_type()==Map_Object::FLAG) {
             Flag* flag=static_cast<Flag*>(imm);
 
             assert(os->is_object_known(flag));
@@ -213,7 +213,7 @@ throw (_wexception)
 
             // Building is not used, it is set by Building_Data packet through
             // attach building.
-            if(flag->m_building) {
+            if (flag->m_building) {
                assert(os->is_object_known(flag->m_building));
                fw.Unsigned32(os->get_object_file_index(flag->m_building));
 				} else {
@@ -223,7 +223,7 @@ throw (_wexception)
             // Roads are not saved, they are set on load
 
             // Pending items
-            for(uint i=0; i<6; i++)
+            for (uint i=0; i<6; i++)
                   fw.Unsigned32(flag->m_items_pending[i]);
 
             // Capacity
@@ -233,18 +233,18 @@ throw (_wexception)
             fw.Unsigned32(flag->m_item_filled);
 
             // items
-            for(int i=0; i<flag->m_item_filled; i++) {
+            for (int i=0; i<flag->m_item_filled; i++) {
                fw.Unsigned8(flag->m_items[i].pending);
                assert(os->is_object_known(flag->m_items[i].item));
                fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));
-               if(os->is_object_known(flag->m_items[i].nextstep))
+               if (os->is_object_known(flag->m_items[i].nextstep))
                   fw.Unsigned32(os->get_object_file_index(flag->m_items[i].nextstep));
                else
                   fw.Unsigned32(0);
 				}
 
             // always call
-            if(flag->m_always_call_for_flag) {
+            if (flag->m_always_call_for_flag) {
                assert(os->is_object_known(flag->m_always_call_for_flag));
                fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
 				} else {
@@ -253,7 +253,7 @@ throw (_wexception)
 
             // Worker waiting for capacity
             fw.Unsigned16(flag->m_capacity_wait.size());
-            for(uint i=0; i<flag->m_capacity_wait.size(); i++) {
+            for (uint i=0; i<flag->m_capacity_wait.size(); i++) {
                Map_Object* obj=flag->m_capacity_wait[i].get(egbase);
                assert(os->is_object_known(obj));
                fw.Unsigned32(os->get_object_file_index(obj));
@@ -261,9 +261,9 @@ throw (_wexception)
 
             // Flag jobs
             fw.Unsigned16(flag->m_flag_jobs.size());
-            for(std::list<Flag::FlagJob>::iterator i=flag->m_flag_jobs.begin();
+            for (std::list<Flag::FlagJob>::iterator i=flag->m_flag_jobs.begin();
                   i!=flag->m_flag_jobs.end(); i++) {
-               if(i->request) {
+               if (i->request) {
                   fw.Unsigned8(1);
                   i->request->Write(&fw,egbase,os);
 					} else fw.Unsigned8(0);
@@ -278,7 +278,7 @@ throw (_wexception)
             //fw.Unsigned32(flag->mpf_cycle);
             //fw.Signed32(flag->mpf_heapindex);
             //fw.Signed32(flag->mpf_realcost);
-            //if(flag->mpf_backlink) {
+            //if (flag->mpf_backlink) {
             //   assert(os->is_object_known(flag->mpf_backlink));
             //   fw.Unsigned32(os->get_object_file_index(flag->mpf_backlink));
             //} else
@@ -290,6 +290,6 @@ throw (_wexception)
 
    fw.Unsigned32(0xffffffff); // End of flags
 
-   fw.Write( fs, "binary/flag_data" );
+   fw.Write(fs, "binary/flag_data");
    // DONE
 }

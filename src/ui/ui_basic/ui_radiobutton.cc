@@ -62,7 +62,7 @@ Radiobutton::Radiobutton(Panel *parent, int x, int y, uint picid, Radiogroup *gr
  */
 Radiobutton::~Radiobutton()
 {
-	for(Radiobutton **pp = &m_group->m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
+	for (Radiobutton **pp = &m_group->m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
 		if (*pp == this) {
 			*pp = m_nextbtn;
 			break;
@@ -133,7 +133,7 @@ void Radiogroup::set_state(int state)
 		return;
 	}
 
-	for(Radiobutton *btn = m_buttons; btn; btn = btn->m_nextbtn)
+	for (Radiobutton *btn = m_buttons; btn; btn = btn->m_nextbtn)
 		btn->set_state(btn->m_id == state);
 	m_state = state;
 	changed.call();

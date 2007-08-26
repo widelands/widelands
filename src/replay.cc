@@ -58,7 +58,7 @@ ReplayReader::ReplayReader(Game* game, const std::string filename)
 		if (magic != REPLAY_MAGIC)
 			throw wexception("%s apparently not a valid replay file", filename.c_str());
 	}
-	catch(...) {
+	catch (...) {
 		delete m_cmdlog;
 		throw;
 	}
@@ -93,7 +93,7 @@ PlayerCommand* ReplayReader::GetPlayerCommand(uint time)
 	try {
 		unsigned char pkt = m_cmdlog->Unsigned8();
 
-		switch(pkt) {
+		switch (pkt) {
 		case pkt_playercommand_old:
 		{
 			log("REPLAY: WARNING: Old playercommand packet\n");
@@ -126,7 +126,7 @@ PlayerCommand* ReplayReader::GetPlayerCommand(uint time)
 			throw wexception("Unknown packet %u", pkt);
 		}
 	}
-	catch(_wexception& e) {
+	catch (_wexception& e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = 0;

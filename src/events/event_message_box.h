@@ -58,10 +58,10 @@ class Event_Message_Box : public Event, public TriggerReferencer {
 	const char * get_window_title() const {return m_window_title.c_str();}
       inline void set_is_modal(bool t) {  m_is_modal=t; }
 	bool get_is_modal() const {return m_is_modal;}
-      inline void set_pos( int posx, int posy ) { m_posx=posx; m_posy=posy; }
+      inline void set_pos(int posx, int posy) { m_posx=posx; m_posy=posy; }
 	int get_posx() const {return m_posx;}
 	int get_posy() const {return m_posy;}
-      inline void set_dimensions( int w, int h ) { m_width = w; m_height = h; }
+      inline void set_dimensions(int w, int h) { m_width = w; m_height = h; }
 	int get_w() const {return m_width;}
 	int get_h() const {return m_height;}
       void set_button_trigger(int i, Trigger_Null* t);

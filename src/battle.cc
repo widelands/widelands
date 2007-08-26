@@ -136,7 +136,7 @@ void Battle::act (Game * g, uint)
 	if (hit > defender->get_evade()) {
 		uint attack = attacker->get_min_attack() +
 					  (g->logic_rand() % (attacker->get_max_attack() -
-										  attacker->get_min_attack() -1 ) );
+										  attacker->get_min_attack() -1));
 
 		uint defend = defender->get_defense();
 		defend = (attack * defend) / 100;

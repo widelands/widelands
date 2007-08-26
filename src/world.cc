@@ -54,7 +54,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
    m_is_detectable=s->get_bool("detectable", true);
 
    m_max_amount = s->get_safe_int("max_amount");
-   while(s->get_next_string("editor_pic", &string))
+   while (s->get_next_string("editor_pic", &string))
    {
       std::vector<std::string> args;
       Editor_Pic i;
@@ -86,7 +86,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
       m_editor_pics.push_back(i);
 	}
-   if(!m_editor_pics.size())
+   if (!m_editor_pics.size())
       throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
 }
 
@@ -99,7 +99,7 @@ const std::string & Resource_Descr::get_editor_pic(const uint amount) const {
 
 	assert(m_editor_pics.size());
 
-	for(uint i = 1; i < m_editor_pics.size(); ++i)
+	for (uint i = 1; i < m_editor_pics.size(); ++i)
 	{
 		int diff1 = m_editor_pics[bestmatch].upperlimit - (int)amount;
 		int diff2 = m_editor_pics[i].upperlimit - (int)amount;
@@ -169,7 +169,7 @@ World::World(const std::string name) : m_basedir("worlds/"+name)
 
 		i18n::release_textdomain();
 	}
-	catch(std::exception &e)
+	catch (std::exception &e)
 	{
 		// tag with world name
 		throw wexception("Error loading world %s: %s",
@@ -202,7 +202,7 @@ void World::load_graphics()
 	int i;
 
 	// Load terrain graphics
-	for(i = 0; i < ters.get_nitems(); i++)
+	for (i = 0; i < ters.get_nitems(); i++)
 		ters.get(i)->load_graphics();
 
 	// TODO: load more graphics
@@ -242,7 +242,7 @@ void World::parse_root_conf(const char *name)
 
 		prof.check_used();
 	}
-	catch(std::exception &e) {
+	catch (std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
 	}
 }
@@ -259,13 +259,13 @@ void World::parse_resources()
       Section* section;
 
       Resource_Descr* descr;
-      while((section=prof.get_next_section(0))) {
+      while ((section=prof.get_next_section(0))) {
          descr=new Resource_Descr();
          descr->parse(section,m_basedir);
          m_resources.add(descr);
 		}
 	}
-	catch(std::exception &e) {
+	catch (std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
 	}
 }
@@ -289,7 +289,7 @@ void World::parse_terrains()
 
 		prof.check_used();
 	}
-	catch(std::exception &e) {
+	catch (std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
 	}
 }
@@ -303,7 +303,7 @@ void World::parse_bobs()
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		char fname[256];
 
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
@@ -338,9 +338,9 @@ void World::parse_bobs()
 				descr->parse(it->c_str(), &prof);
 				immovables.add(descr);
 			}
-		} catch(std::exception &e) {
+		} catch (std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-		} catch(...) {
+		} catch (...) {
 			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
 		}
 	}
@@ -371,10 +371,10 @@ void World::get_all_worlds(std::vector<std::string>* retval) {
    // get all worlds
    filenameset_t m_worlds;
    g_fs->FindFiles("worlds", "*", &m_worlds);
-   for(filenameset_t::iterator pname = m_worlds.begin(); pname != m_worlds.end(); pname++) {
+   for (filenameset_t::iterator pname = m_worlds.begin(); pname != m_worlds.end(); pname++) {
       std::string world=*pname;
       world.erase(0,7); // remove worlds/
-      if(World::exists_world(world.c_str()))
+      if (World::exists_world(world.c_str()))
          retval->push_back(world);
 	}
 }
@@ -408,7 +408,7 @@ m_texture           (0)
       int amount;
 	   str1 >> resource >> amount;
       int res=resources->get_index(resource.c_str());;
-      if(res==-1)
+      if (res==-1)
          throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
       m_default_resources=res;
       m_default_amount=amount;
@@ -416,24 +416,24 @@ m_texture           (0)
 
    // Parse valid resources
    std::string str1=s->get_string("resources", "");
-   if(str1!="") {
+   if (str1!="") {
       int nres=1;
       uint i=0;
-      while(i < str1.size()) { if(str1[i]==',') { nres++; }  i++; }
+      while (i < str1.size()) { if (str1[i]==',') { nres++; }  i++; }
 
       m_nr_valid_resources=nres;
-      if(nres==1)
+      if (nres==1)
          m_valid_resources=new uchar;
       else
          m_valid_resources=new uchar[nres];
       std::string curres;
       i=0;
       int cur_res=0;
-      while(i<=str1.size()) {
-         if(str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') { ++i; continue; }
-         if(str1[i]==',' || i==str1.size()) {
+      while (i<=str1.size()) {
+         if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') { ++i; continue; }
+         if (str1[i]==',' || i==str1.size()) {
             int res=resources->get_index(curres.c_str());;
-            if(res==-1)
+            if (res==-1)
                throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
             m_valid_resources[cur_res++]=res;
             curres="";
@@ -451,19 +451,19 @@ m_texture           (0)
 	// switch is
 	str = s->get_safe_string("is");
 
-	if(!strcasecmp(str, "dry")) {
+	if (!strcasecmp(str, "dry")) {
 		m_is = TERRAIN_DRY;
-	} else if(!strcasecmp(str, "green")) {
+	} else if (!strcasecmp(str, "green")) {
 		m_is = 0;
-	} else if(!strcasecmp(str, "water")) {
+	} else if (!strcasecmp(str, "water")) {
 		m_is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	} else if(!strcasecmp(str, "acid")) {
+	} else if (!strcasecmp(str, "acid")) {
 		m_is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	} else if(!strcasecmp(str, "mountain")) {
+	} else if (!strcasecmp(str, "mountain")) {
 		m_is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
-	} else if(!strcasecmp(str, "dead")) {
+	} else if (!strcasecmp(str, "dead")) {
 		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
-	} else if(!strcasecmp(str, "unpassable")) {
+	} else if (!strcasecmp(str, "unpassable")) {
 		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
 	} else throw wexception("%s: invalid type '%s'", m_name.c_str(), str);
 
@@ -484,10 +484,10 @@ Terrain_Descr::~Terrain_Descr()
 {
 	if (m_picnametempl)
 		free(m_picnametempl);
-   if(m_nr_valid_resources==1) {
+   if (m_nr_valid_resources==1) {
       delete m_valid_resources;
 	}
-   if(m_nr_valid_resources>1) {
+   if (m_nr_valid_resources>1) {
       delete[] m_valid_resources;
 	}
    m_nr_valid_resources=0;

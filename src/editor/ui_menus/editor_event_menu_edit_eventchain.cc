@@ -52,15 +52,15 @@ m_event_chain(chain)
    const int ls_width = 200;
 
    // Name
-   new UI::Textarea( this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
-   m_name = new UI::Edit_Box( this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( m_event_chain->get_name() );
+   new UI::Textarea(this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
+   m_name = new UI::Edit_Box(this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
+   m_name->set_text(m_event_chain->get_name());
    posy += 20 + spacing;
 
    // More then once
-   new UI::Textarea( this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
-   m_morethanonce = new UI::Checkbox( this, posx, posy );
-   m_morethanonce->set_state( m_event_chain->get_repeating() );
+   new UI::Textarea(this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
+   m_morethanonce = new UI::Checkbox(this, posx, posy);
+   m_morethanonce->set_state(m_event_chain->get_repeating());
    posy += STATEBOX_HEIGHT + spacing;
    const int lsoffsy = posy;
 
@@ -166,7 +166,7 @@ m_event_chain(chain)
 		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
 		 _("Cancel"));
 
-   for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
+   for (uint i = 0; i < m_event_chain->get_nr_events(); i++) {
 		Event & event = *m_event_chain->get_event(i);
 		m_events->add(event.name().c_str(), event);
 	}
@@ -208,9 +208,9 @@ void Editor_Event_Menu_Edit_EventChain::think()
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Name
-      m_event_chain->set_name( m_name->get_text() );
+      m_event_chain->set_name(m_name->get_text());
       // Repeating
-      m_event_chain->set_repeating( m_morethanonce->get_state() );
+      m_event_chain->set_repeating(m_morethanonce->get_state());
       // Trigger Conditional is always updated
       // Events
       m_event_chain->clear_events();
@@ -228,8 +228,8 @@ void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 	Editor_Event_Menu_Edit_TriggerConditional menu
 		(m_parent, m_event_chain->get_trigcond(), m_event_chain);
 	if (menu.run()) {
-         if( m_event_chain->get_trigcond() ) {
-            m_event_chain->get_trigcond()->unreference_triggers( m_event_chain );
+         if (m_event_chain->get_trigcond()) {
+            m_event_chain->get_trigcond()->unreference_triggers(m_event_chain);
             delete m_event_chain->get_trigcond();
 			}
 		m_event_chain->set_trigcond(menu.get_trigcond());
@@ -245,9 +245,9 @@ void Editor_Event_Menu_Edit_EventChain::clicked_ins_event() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_del_event() {
 	m_events->remove_selected();
-      m_mvup_btn->set_enabled( false );
-      m_mvdown_btn->set_enabled( false );
-      m_delete_btn->set_enabled( false );
+      m_mvup_btn->set_enabled(false);
+      m_mvdown_btn->set_enabled(false);
+      m_delete_btn->set_enabled(false);
 }
 
 
@@ -255,7 +255,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_up() {
 	assert(m_events->has_selection());  //  Button should have been disabled.
 	const uint n = m_events->selection_index();
 	assert(n != 0);  //  Button should have been disabled.
-         m_events->switch_entries( n, n - 1);
+         m_events->switch_entries(n, n - 1);
 }
 
 
@@ -263,19 +263,19 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
 	assert(m_events->has_selection());  //  Button should have been disabled.
 	const uint n = m_events->selection_index();
 	assert(n < m_events->size() - 1);  //  Button should have been disabled.
-         m_events->switch_entries( n, n + 1);
+         m_events->switch_entries(n, n + 1);
 }
 
 /*
  * the listbox got selected
  */
 void Editor_Event_Menu_Edit_EventChain::tl_selected(uint) {
-   m_insert_btn->set_enabled( true );
+   m_insert_btn->set_enabled(true);
 }
 void Editor_Event_Menu_Edit_EventChain::cs_selected(uint) {
-   m_mvdown_btn->set_enabled( true );
-   m_mvup_btn->set_enabled( true );
-   m_delete_btn->set_enabled( true );
+   m_mvdown_btn->set_enabled(true);
+   m_mvup_btn->set_enabled(true);
+   m_delete_btn->set_enabled(true);
 }
 
 /*

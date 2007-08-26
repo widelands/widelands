@@ -386,7 +386,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list(void)
 	mapsection += number;
 
 	// Add all visible entries to the list.
-	while((s = prof.get_section(mapsection.c_str()))) {
+	while ((s = prof.get_section(mapsection.c_str()))) {
 		if (s->get_bool("visible")){
 		list.add(
 			s->get_string("name", _("[No value found]").c_str()),

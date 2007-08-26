@@ -54,20 +54,20 @@ void Widelands_Map_Attack_Controller_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if( skip )
+	if (skip)
 		return;
 
 	FileRead fr;
 	try {
-		fr.Open( fs, "binary/attackcontroller" );
-	} catch ( ... ) {
+		fr.Open(fs, "binary/attackcontroller");
+	} catch (...) {
 		// not there, so skip
 		return ;
 	}
 	// First packet version
 	int packet_version=fr.Unsigned16();
 
-	if(packet_version == CURRENT_PACKET_VERSION) {
+	if (packet_version == CURRENT_PACKET_VERSION) {
 		uint nrControllers = fr.Unsigned32();
 		for (uint i=0;i<nrControllers;i++) {
 			AttackController* ctrl = egbase->create_attack_controller();
@@ -194,5 +194,5 @@ throw (_wexception) {
 	}
 
 	fw.Unsigned32(0xffffffff);
-	fw.Write( fs, "binary/attackcontroller" );
+	fw.Write(fs, "binary/attackcontroller");
 }

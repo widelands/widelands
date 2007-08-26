@@ -26,7 +26,7 @@
 #include <types.h>
 
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))
+#define PRINTF_FORMAT(b,c) __attribute__ ((__format__ (__printf__,b,c)))
 #else
 #define PRINTF_FORMAT(b,c)
 #endif
@@ -50,7 +50,7 @@ public:
 	virtual const char *what() const throw();
 };
 
-#define wexception( ... ) _wexception( __FILE__, __LINE__, __VA_ARGS__ )
+#define wexception(...) _wexception(__FILE__, __LINE__, __VA_ARGS__)
 
 
 #endif

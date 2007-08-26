@@ -55,8 +55,8 @@ throw (_wexception)
 	if (not skip) {
 		FileRead fr;
 		try {
-			fr.Open( fs, "binary/building" );
-		} catch ( ... ) {
+			fr.Open(fs, "binary/building");
+		} catch (...) {
 			// not there, so skip
 			return ;
 		}
@@ -83,7 +83,7 @@ throw (_wexception)
 					assert(player); // He must be there FIXME Never use assert to validate input!
 					const Tribe_Descr & tribe = player->tribe();
 					int index= tribe.get_building_index(name);
-					if(index==-1)
+					if (index==-1)
 						throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
 							name, tribe.name().c_str());
 
@@ -143,14 +143,14 @@ throw (_wexception)
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
 	Map* map=egbase->get_map();
-	for(ushort y=0; y<map->get_height(); y++) {
-		for(ushort x=0; x<map->get_width(); x++) {
+	for (ushort y=0; y<map->get_height(); y++) {
+		for (ushort x=0; x<map->get_width(); x++) {
 			BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
 			// We only write Buildings
-			if(immovable && immovable->get_type()==Map_Object::BUILDING) {
+			if (immovable && immovable->get_type()==Map_Object::BUILDING) {
 				Building* building=static_cast<Building*>(immovable);
 
-				if(building->get_position()!=Coords(x,y)) {
+				if (building->get_position()!=Coords(x,y)) {
 					// This is not this buildings main position
 					fw.Unsigned8('\0');
 					continue;
@@ -179,7 +179,7 @@ throw (_wexception)
 		}
 	}
 
-	fw.Write( fs, "binary/building" );
+	fw.Write(fs, "binary/building");
 	// DONE
 }
 

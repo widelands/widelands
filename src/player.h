@@ -318,7 +318,7 @@ public:
 		return m_fields[i].vision;
 	}
 
-	bool has_view_changed( void ) {
+	bool has_view_changed(void) {
 		bool t = m_view_changed;
 		m_view_changed = false;
 		return t;
@@ -438,9 +438,9 @@ public:
 	void WriteStatistics(FileWrite& fw);
 	void sample_statistics();
 	void ware_produced(uint id);
-	void next_ware_production_period( void );
-	void gain_immovable(PlayerImmovable* );
-	void lose_immovable(PlayerImmovable* );
+	void next_ware_production_period(void);
+	void gain_immovable(PlayerImmovable*);
+	void lose_immovable(PlayerImmovable*);
 
 private:
 	/**

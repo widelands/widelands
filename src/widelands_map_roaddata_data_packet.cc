@@ -54,13 +54,13 @@ void Widelands_Map_Roaddata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/road_data" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/road_data");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
@@ -68,10 +68,10 @@ throw (_wexception)
    // Firsst packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(1) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
+      while (1) {
          uint ser=fr.Unsigned32();
-         if(ser==0xffffffff) // end of roaddata
+         if (ser==0xffffffff) // end of roaddata
             break;
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::ROAD);
@@ -111,7 +111,7 @@ throw (_wexception)
          r->m_desire_carriers=fr.Unsigned32();
          assert(!r->m_carrier.get(egbase));
          uint carrierid=fr.Unsigned32();
-         if(carrierid) {
+         if (carrierid) {
             assert(ol->is_object_known(carrierid));
             r->m_carrier=ol->get_object_by_file_index(carrierid);
 			} else
@@ -121,7 +121,7 @@ throw (_wexception)
             r->m_carrier_request=0;
 
          bool request_exists=fr.Unsigned8();
-         if(request_exists) {
+         if (request_exists) {
             if (dynamic_cast<const Game * const>(egbase)) {
                r->m_carrier_request = new Request(r, 0,
                      &Road::request_carrier_callback, r, Request::WORKER);
@@ -138,7 +138,7 @@ throw (_wexception)
 	}
    throw wexception("Unknown version %i in Widelands_Map_Roaddata_Data_Packet!\n", packet_version);
 
-   assert( 0 );
+   assert(0);
 }
 
 
@@ -158,16 +158,16 @@ throw (_wexception)
 
    // We walk the map again for roads
    Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x,y));
          BaseImmovable* imm=f->get_immovable();
-         if(!imm) continue;
+         if (!imm) continue;
 
-         if(imm->get_type()==Map_Object::ROAD) {
+         if (imm->get_type()==Map_Object::ROAD) {
             Road* r=static_cast<Road*>(imm);
             assert(os->is_object_known(r));
-            if(os->is_object_saved(r))
+            if (os->is_object_saved(r))
                continue;
             uint ser=os->get_object_file_index(r);
 
@@ -209,7 +209,7 @@ throw (_wexception)
             fw.Unsigned32(r->m_desire_carriers);
 
             // Carrier
-            if(r->m_carrier.get(egbase)) {
+            if (r->m_carrier.get(egbase)) {
                assert(os->is_object_known(r->m_carrier.get(egbase)));
                fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
 				} else {
@@ -217,7 +217,7 @@ throw (_wexception)
 				}
 
             // Request
-            if(r->m_carrier_request) {
+            if (r->m_carrier_request) {
                fw.Unsigned8(1);
                r->m_carrier_request->Write(&fw, egbase, os);
 				} else
@@ -231,5 +231,5 @@ throw (_wexception)
    fw.Unsigned32(0xFFFFFFFF); // End of roads
    // DONE
 
-   fw.Write( fs, "binary/road_data" );
+   fw.Write(fs, "binary/road_data");
 }

@@ -22,9 +22,9 @@
 #include "trigger.h"
 
 
-void TriggerReferencer::reference_trigger( Trigger* tr ) {
-   tr->reference( this );
+void TriggerReferencer::reference_trigger(Trigger* tr) {
+   tr->reference(this);
 }
-void TriggerReferencer::unreference_trigger( Trigger* tr) {
-   tr->unreference( this );
+void TriggerReferencer::unreference_trigger(Trigger* tr) {
+   tr->unreference(this);
 }

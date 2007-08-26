@@ -34,7 +34,7 @@
 /*
  * Run this event chain
  */
-EventChain::State EventChain::run( Game* g ) {
+EventChain::State EventChain::run(Game* g) {
    m_state = RUNNING;
 
 	while (m_curevent < m_events.size()) {
@@ -47,14 +47,14 @@ EventChain::State EventChain::run( Game* g ) {
 		if (get_repeating()) {
          // This eventchain will repeat in due time
          m_curevent = 0;
-         m_trigconditional->reset_triggers( g );
+         m_trigconditional->reset_triggers(g);
          m_state = INIT;
 		} else {
          // This eventchain is completly done
          m_state = DONE;
 		}
 	} else {
-      assert( m_events[m_curevent]->get_state() == Event::RUNNING );
+      assert(m_events[m_curevent]->get_state() == Event::RUNNING);
 	}
 
    return m_state;
@@ -63,9 +63,9 @@ EventChain::State EventChain::run( Game* g ) {
 /*
  * Clear all events, events are not delted.
  */
-void EventChain::clear_events( void ) {
-   for( uint i = 0; i < m_events.size(); i++)
-      m_events[i]->unreference( this );
+void EventChain::clear_events(void) {
+   for (uint i = 0; i < m_events.size(); i++)
+      m_events[i]->unreference(this);
 
    m_events.resize(0);
 }
@@ -73,9 +73,9 @@ void EventChain::clear_events( void ) {
 /*
  * Add an event
  */
-void EventChain::add_event( Event* ev ) {
-   m_events.push_back( ev );
-   ev->reference( this );
+void EventChain::add_event(Event* ev) {
+   m_events.push_back(ev);
+   ev->reference(this);
 }
 
 #include "cmd_check_eventchain.h"

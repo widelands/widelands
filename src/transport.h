@@ -21,7 +21,7 @@
 #define included_transport_h
 
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))
+#define PRINTF_FORMAT(b,c) __attribute__ ((__format__ (__printf__,b,c)))
 #else
 #define PRINTF_FORMAT(b,c)
 #endif
@@ -664,10 +664,10 @@ struct Economy {
 	}
 
    // Informations over this economy
-   int stock_ware( int id ) { return m_wares.stock(id); }
-   int stock_worker( int id ) { return m_workers.stock(id); }
-   const WareList& get_wares( void ) { return m_wares; }
-   const WareList& get_workers( void ) { return m_workers; }
+   int stock_ware(int id) { return m_wares.stock(id); }
+   int stock_worker(int id) { return m_workers.stock(id); }
+   const WareList& get_wares(void) { return m_wares; }
+   const WareList& get_workers(void) { return m_workers; }
 
    // Called by cmd queue
    void balance_requestsupply();

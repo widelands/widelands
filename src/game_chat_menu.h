@@ -35,7 +35,7 @@ class GameChatMenu : public UI::UniqueWindow {
 public:
 	GameChatMenu(Interactive_Player &, UI::UniqueWindow::Registry &, NetGame *);
 
-   void  think( void );
+   void  think(void);
 
 private:
 	Interactive_Player & m_player;

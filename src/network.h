@@ -137,7 +137,7 @@ struct NetHost:public NetGame {
 
     private:
 	void send_game_message (const char*);
-	void send_chat_message_int ( const Chat_Message );
+	void send_chat_message_int (const Chat_Message);
 	void send_player_info ();
 	void update_network_delay ();
 

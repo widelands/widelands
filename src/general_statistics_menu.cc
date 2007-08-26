@@ -114,14 +114,14 @@ m_parent(&parent)
 		if (game.get_player(i)) ++plr_in_game;
 
    posx = spacing;
-   int button_size = ( get_inner_w()- ( spacing* (plr_in_game+1) ) ) / plr_in_game;
+   int button_size = (get_inner_w()- (spacing* (plr_in_game+1))) / plr_in_game;
 	for (uint i = 1; i <= nr_players; ++i) {
       m_cbs[i] = 0;
 		if (not game.get_player(i)) continue;
 
       char buffer[1024];
       sprintf(buffer, "pics/genstats_enable_plr_%02i.png", i);
-      UI::Checkbox* cb = new UI::Checkbox(this, posx, posy, g_gr->get_picture( PicMod_Game,  buffer ));
+      UI::Checkbox* cb = new UI::Checkbox(this, posx, posy, g_gr->get_picture(PicMod_Game,  buffer));
       cb->set_size(button_size, 25);
       cb->set_id(i);
       cb->set_state(1);
@@ -135,7 +135,7 @@ m_parent(&parent)
 
    // Below, Radiobuttons for what to display
    m_radiogroup = new UI::Radiogroup();
-   button_size = ( get_inner_w()-(spacing*8) ) / 7;
+   button_size = (get_inner_w()-(spacing*8)) / 7;
    m_radiogroup->add_button
 		(this,
 		 posx, posy,
@@ -184,7 +184,7 @@ m_parent(&parent)
 
 
    // Below, time buttons
-   button_size = ( get_inner_w()-(spacing*5) ) / 4;
+   button_size = (get_inner_w()-(spacing*5)) / 4;
    posx = spacing;
    posy +=spacing+spacing;
 
@@ -292,18 +292,18 @@ void General_Statistics_Menu::clicked_help() {
  */
 void General_Statistics_Menu::cb_changed_to(int id, bool what) {
    // This represents our player number
-   m_plot->show_plot( (id-1)* NR_DIFFERENT_DATASETS + m_selected_information, what);
+   m_plot->show_plot((id-1)* NR_DIFFERENT_DATASETS + m_selected_information, what);
 }
 
 /*
  * The radiogroup has changed
  */
 void General_Statistics_Menu::radiogroup_changed(int id) {
-   for(uint i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
-      if(!m_cbs[i]) continue;
+   for (uint i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
+      if (!m_cbs[i]) continue;
 
-      m_plot->show_plot( i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());
-      m_plot->show_plot( i* NR_DIFFERENT_DATASETS + m_selected_information, false);
+      m_plot->show_plot(i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());
+      m_plot->show_plot(i* NR_DIFFERENT_DATASETS + m_selected_information, false);
 	}
    m_selected_information = id;
 };

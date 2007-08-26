@@ -264,7 +264,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 	}
 
 	//empty commandline means there were _unhandled_ syntax errors
-	//(commandline should at least contain "EXENAME"=="widelands" ! )
+	//(commandline should at least contain "EXENAME"=="widelands" !)
 	//in the commandline. They should've been handled though.
 	//TODO: bail out gracefully instead
 	assert(!m_commandline.empty());
@@ -349,16 +349,16 @@ void WLApplication::run()
 		}
 
 		//TODO: what does this do? where does it belong? read up on GGZ! #fweber
-		if(NetGGZ::ref()->used())
+		if (NetGGZ::ref()->used())
 		{
-			if(NetGGZ::ref()->connect())
+			if (NetGGZ::ref()->connect())
 			{
 				NetGame *netgame;
 
-				if(NetGGZ::ref()->host()) netgame = new NetHost();
+				if (NetGGZ::ref()->host()) netgame = new NetHost();
 				else
 				{
-					while(!NetGGZ::ref()->ip())
+					while (!NetGGZ::ref()->ip())
 						NetGGZ::ref()->data();
 
 					IPaddress peer;
@@ -383,13 +383,13 @@ void WLApplication::run()
 	//----------------------------------------------------------------------
 	//everything below here is unfinished work. please don't modify #fweber
 
-	while(!m_should_die) {
+	while (!m_should_die) {
 		SDL_Event e;
 
-		if(journal->is_recording()) journal->record_event(&e);
+		if (journal->is_recording()) journal->record_event(&e);
 		//TODO: playback
 
-		switch(e.type) {
+		switch (e.type) {
 		case SDL_MOUSEMOTION:
 			break;
 		case SDL_KEYDOWN:
@@ -400,7 +400,7 @@ void WLApplication::run()
 			m_should_die=true;
 			break;
 		case SDL_USEREVENT:
-			switch(e.user.code) {
+			switch (e.user.code) {
 			case CHANGE_MUSIC:
 				g_sound_handler.change_music();
 				break;
@@ -435,7 +435,7 @@ restart:
 		try {
 			haveevent=journal->read_event(ev);
 		}
-		catch(Journalfile_error& e) {
+		catch (Journalfile_error& e) {
 			// An error might occur here when playing back a file that
 			// was not finalized due to a crash etc.
 			// Since playbacks are intended precisely for debugging such
@@ -450,7 +450,7 @@ restart:
 			// We edit mouse motion events in here, so that
 			// differences caused by GrabInput or mouse speed
 			// settings are invisible to the rest of the code
-			switch(ev->type) {
+			switch (ev->type) {
 			case SDL_MOUSEMOTION:
 				ev->motion.xrel += m_mouse_internal_comp_position.x;
 				ev->motion.yrel += m_mouse_internal_comp_position.y;
@@ -500,7 +500,7 @@ restart:
 			// Eliminate any unhandled events to make sure record
 			// and playback are _really_ the same.
 			// Yes I know, it's overly paranoid but hey...
-			switch(ev->type) {
+			switch (ev->type) {
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
 			case SDL_MOUSEBUTTONDOWN:
@@ -542,8 +542,8 @@ void WLApplication::handle_input(const InputCallback *cb)
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
 	if (journal->is_playingback()) {
-		while(SDL_PollEvent(&ev)) {
-			switch(ev.type) {
+		while (SDL_PollEvent(&ev)) {
+			switch (ev.type) {
 			case SDL_KEYDOWN:
 				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
 					m_should_die = true;
@@ -556,7 +556,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 	}
 
 	// Usual event queue
-	while(poll_event(&ev, !gotevents)) {
+	while (poll_event(&ev, !gotevents)) {
 
 		gotevents = true;
 
@@ -565,7 +565,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 		// code so that it uses previously unused fields in SDL_Event,
 		// please also take a look at Journal::read_event and Journal::record_event
 
-		switch(ev.type) {
+		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
@@ -753,7 +753,7 @@ void WLApplication::init_graphics(const int w, const int h,
 	m_gfx_fullscreen = fullscreen;
 
 	// If we are not to be shut down
-	if( w && h ) {
+	if (w && h) {
 		g_gr = new Graphic(w, h, bpp, fullscreen);
 		set_max_mouse_coords(w, h);
 	}
@@ -775,7 +775,7 @@ const bool WLApplication::init_settings()
 	s=g_options.pull_section("global");
 
 	// Set Locale and grab default domain
-	i18n::set_locale( s->get_string("language", "en_EN"));
+	i18n::set_locale(s->get_string("language", "en_EN"));
 	i18n::grab_textdomain("widelands");
 
 	//then parse the commandline - overwrites conffile settings
@@ -845,7 +845,7 @@ const bool WLApplication::init_hardware()
 	Section *s = g_options.pull_section("global");
 
 	//Start the SDL core
-	if(s->get_bool("coredump", false))
+	if (s->get_bool("coredump", false))
 		sdl_flags=SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE;
 	else
 		sdl_flags=SDL_INIT_VIDEO;
@@ -901,26 +901,26 @@ void WLApplication::shutdown_hardware()
 */
 void WLApplication::parse_command_line() throw(Parameter_error)
 {
-	if(m_commandline.count("help")>0 || m_commandline.count("version")>0) {
+	if (m_commandline.count("help")>0 || m_commandline.count("version")>0) {
 		throw Parameter_error(); //no message on purpose
 	}
 
-	if(m_commandline.count("ggz")>0) {
+	if (m_commandline.count("ggz")>0) {
 		NetGGZ::ref()->init();
 		m_commandline.erase("ggz");
 	}
 
-	if(m_commandline.count("nosound")>0) {
+	if (m_commandline.count("nosound")>0) {
 		g_sound_handler.m_nosound=true;
 		m_commandline.erase("nosound");
 	}
 
-	if(m_commandline.count("nozip")>0) {
+	if (m_commandline.count("nozip")>0) {
 		g_options.pull_section("global")->create_val("nozip","true");
 		m_commandline.erase("nozip");
 	}
 
-	if(m_commandline.count("double")>0) {
+	if (m_commandline.count("double")>0) {
 		#ifdef DEBUG
 		#ifndef __WIN32__
 		init_double_game();
@@ -935,7 +935,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 		m_commandline.erase("double");
 	}
 
-	if(m_commandline.count("editor")>0) {
+	if (m_commandline.count("editor")>0) {
 		m_editor_filename = m_commandline["editor"];
 		editor_commandline=1;
 		m_commandline.erase("editor");
@@ -953,7 +953,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
-	if(m_commandline.count("record")>0) {
+	if (m_commandline.count("record")>0) {
 		if (m_commandline["record"].empty())
 			throw Parameter_error("ERROR: --record needs a filename!");
 
@@ -967,7 +967,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 		m_commandline.erase("record");
 	}
 
-	if(m_commandline.count("playback")>0) {
+	if (m_commandline.count("playback")>0) {
 		if (m_commandline["playback"].empty())
 			throw Parameter_error("ERROR: --playback needs a filename!");
 
@@ -1118,7 +1118,7 @@ void WLApplication::mainmenu()
 {
 	bool done=false;
 
-	while(!done) {
+	while (!done) {
 		Fullscreen_Menu_Main mm;
 		switch (mm.run()) {
 		case Fullscreen_Menu_Main::mm_singleplayer:
@@ -1191,7 +1191,7 @@ void WLApplication::mainmenu_singleplayer()
 
 		m_game = new Game;
 
-		switch(code) {
+		switch (code) {
 		case Fullscreen_Menu_SinglePlayer::New_Game:
 			if (m_game->run_single_player())
 				done=true;
@@ -1266,7 +1266,7 @@ void WLApplication::mainmenu_multiplayer()
 
 			try {
 				csc.connect();
-			} catch(...) {
+			} catch (...) {
 				// TODO: error handling here
 				throw;
 			}
@@ -1283,10 +1283,10 @@ void WLApplication::mainmenu_multiplayer()
 		NetGGZ::ref()->launch();
 		//  fallthrough
 	case Fullscreen_Menu_NetSetup::JOINGGZGAME: {
-		if(NetGGZ::ref()->host()) netgame = new NetHost();
+		if (NetGGZ::ref()->host()) netgame = new NetHost();
 
 		else {
-			while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+			while (!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
 
 			IPaddress peer;
 			SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);

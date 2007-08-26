@@ -57,13 +57,13 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
  */
 Event* Event_Factory::get_correct_event(const char* id) {
    std::string str = id;
-   if( str == "message_box" ) return new Event_Message_Box();
-   else if( str == "move_view" ) return new Event_Move_View();
-   else if( str == "unhide_area" ) return new Event_Unhide_Area();
-   else if( str == "conquer_area" ) return new Event_Conquer_Area();
-   else if( str == "allow_building" ) return new Event_Allow_Building();
-   else if( str == "set_null_trigger" ) return new Event_Set_Null_Trigger();
-   else if( str == "unhide_objective" ) return new Event_Unhide_Objective();
+   if (str == "message_box") return new Event_Message_Box();
+   else if (str == "move_view") return new Event_Move_View();
+   else if (str == "unhide_area") return new Event_Unhide_Area();
+   else if (str == "conquer_area") return new Event_Conquer_Area();
+   else if (str == "allow_building") return new Event_Allow_Building();
+   else if (str == "set_null_trigger") return new Event_Set_Null_Trigger();
+   else if (str == "unhide_objective") return new Event_Unhide_Objective();
    else
       throw wexception("Event_Factory::get_correct_event: Unknown event id found: %s\n", id);
    // never here
@@ -78,7 +78,7 @@ Event* Event_Factory::get_correct_event(const char* id) {
  */
 Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Interactive* m_parent, Event* gevent) {
    Event* event=gevent;
-   if(!event)
+   if (!event)
       event=get_correct_event(id);
 
 	int retval;
@@ -107,9 +107,9 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 		("Event_Factory::make_event_with_option_dialog: Unknown event id found: "
 		 "%s\n",
 		 id);
-   if(retval)
+   if (retval)
       return event;
-   if(!gevent) {
+   if (!gevent) {
       delete event;
       return 0;
 	} else return gevent;
@@ -120,10 +120,10 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
  * Get the correct event descriptions and names from the
  * id header
  */
-Event_Descr* Event_Factory::get_correct_event_descr( const char* id ) {
+Event_Descr* Event_Factory::get_correct_event_descr(const char* id) {
    std::string str = id;
-   for( uint i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
-      if( EVENT_DESCRIPTIONS[i].id == str )
+   for (uint i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
+      if (EVENT_DESCRIPTIONS[i].id == str)
          return &EVENT_DESCRIPTIONS[i];
 
    assert(0); // never here

@@ -135,7 +135,7 @@ Interactive_Base(e), m_editor(e)
    std::vector<std::string> tribes;
 	Tribe_Descr::get_all_tribenames(tribes);
    uint i=0;
-   for(i=0; i<tribes.size(); i++)
+   for (i=0; i<tribes.size(); i++)
 		e.manually_load_tribe(tribes[i].c_str());
 
    m_need_save=false;
@@ -232,7 +232,7 @@ void Editor_Interactive::toolsize_menu_btn() {
 
 
 bool Editor_Interactive::handle_key(bool down, int code, char) {
-   if(code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
+   if (code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
 
 	if (down) {
       // only on down events
@@ -296,7 +296,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
             return true;
 
          case KEY_f:
-            if( down )
+            if (down)
                g_gr->toggle_fullscreen();
             return true;
 
@@ -313,7 +313,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
             return true;
 
          case KEY_l:
-            if(m_ctrl_down)
+            if (m_ctrl_down)
                new Main_Menu_Load_Map(this);
             return true;
 
@@ -322,7 +322,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
             return true;
 
          case KEY_s:
-            if(m_ctrl_down)
+            if (m_ctrl_down)
                new Main_Menu_Save_Map(this);
             return true;
 
@@ -398,15 +398,15 @@ void Editor_Interactive::unreference_player_tribe
    assert(data);
 
    int i=0;
-   if(player>0) {
-      for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++)
-         if(m_player_tribe_references[i].player==player && m_player_tribe_references[i].object==data) break;
+   if (player>0) {
+      for (i=0; i<static_cast<int>(m_player_tribe_references.size()); i++)
+         if (m_player_tribe_references[i].player==player && m_player_tribe_references[i].object==data) break;
 
       m_player_tribe_references.erase(m_player_tribe_references.begin() + i);
 	} else {
       // Player is invalid, remove all references from this object
-      for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) {
-         if(m_player_tribe_references[i].object==data) {
+      for (i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) {
+         if (m_player_tribe_references[i].object==data) {
             m_player_tribe_references.erase(m_player_tribe_references.begin() + i); i=-1;
 			}
 		}
@@ -418,8 +418,8 @@ bool Editor_Interactive::is_player_tribe_referenced(int player) {
 	assert    (player <= m_editor.map().get_nrplayers());
 
    uint i=0;
-   for(i=0; i<m_player_tribe_references.size(); i++)
-         if(m_player_tribe_references[i].player==player) return true;
+   for (i=0; i<m_player_tribe_references.size(); i++)
+         if (m_player_tribe_references[i].player==player) return true;
 
    return false;
 }

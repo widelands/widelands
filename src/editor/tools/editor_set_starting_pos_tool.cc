@@ -51,7 +51,7 @@ int Editor_Tool_Set_Starting_Pos_Callback
 	}
 
 	const int caps = c.field->get_caps();
-   if((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG)
+   if ((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG)
       return caps;
 
 

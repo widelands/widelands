@@ -264,7 +264,7 @@ void Window::draw_border(RenderTarget* dst)
 
 			//  rigt bar
 			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
-			for(; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
+			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst->blitrect
 				(Point(right_border_x, pos),
 				 m_pic_rborder,

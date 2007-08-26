@@ -48,14 +48,14 @@ extern "C"
 
 		return 0;
 	}
-	catch(Parameter_error &e) { //handle wrong commandline parameters
+	catch (Parameter_error &e) { //handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
 			delete g_app;
 
 		return 0;
 	}
-	catch(_wexception &e) {
+	catch (_wexception &e) {
 		cerr<<endl<<
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<
@@ -68,7 +68,7 @@ extern "C"
 
 		return 1;
 	}
-	catch(std::exception &e) {
+	catch (std::exception &e) {
 		cerr<<endl<<
 		"Caught exception (of type '"<<typeid(e).name()<<
 		"') in outermost handler!"<<endl<<
@@ -81,7 +81,7 @@ extern "C"
 
 		return 1;
 	}
-	catch(...) {
+	catch (...) {
 		cerr<<endl<<
 		"Caught unknown exception in outermost handler!"<<endl<<endl<<
 		"This should not happen. Please file a bug report "<<

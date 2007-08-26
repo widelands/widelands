@@ -46,27 +46,27 @@ void Widelands_Map_Extradata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    Profile prof;
    try {
-      prof.read( "extra_data", 0, fs );
-	} catch( ... ) {
+      prof.read("extra_data", 0, fs);
+	} catch (...) {
       // not found, skip it
       return;
 	}
-   Section* s = prof.get_section( "global" );
+   Section* s = prof.get_section("global");
 
    // read packet version
    int packet_version=s->get_int("packet_version");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       // Nothing more. But read all pics
 		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
          filenameset_t pictures;
 			fs.FindFiles("pics", "*", &pictures);
-         for(filenameset_t::iterator pname = pictures.begin(); pname != pictures.end(); pname++) {
+         for (filenameset_t::iterator pname = pictures.begin(); pname != pictures.end(); pname++) {
 				if (fs.IsDirectory((*pname).c_str())) // Might be some dir, maybe CVS
                continue;
 
@@ -79,7 +79,7 @@ throw (_wexception)
 				Surface & picsurf = *new Surface();
 				picsurf.set_sdl_surface(*surf);
 
-	    std::string picname = FileSystem::FS_Filename( (*pname).c_str() );
+	    std::string picname = FileSystem::FS_Filename((*pname).c_str());
             picname = "map:" + picname;
 
 				const uint data =
@@ -91,7 +91,7 @@ throw (_wexception)
             info.type = Map::Extradata_Info::PIC;
             info.filename = *pname;
             info.data = (void*)data;
-            egbase->get_map()->m_extradatainfos.push_back( info );
+            egbase->get_map()->m_extradatainfos.push_back(info);
 			}
 		}
       return;
@@ -116,18 +116,18 @@ throw (_wexception)
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
    // Nothing more. All pics in the dir pic are loaded as pictures
-   for( uint i = 0; i < egbase->get_map()->m_extradatainfos.size(); i++) {
+   for (uint i = 0; i < egbase->get_map()->m_extradatainfos.size(); i++) {
       Map::Extradata_Info& edi = egbase->get_map()->m_extradatainfos[i];
-      assert( edi.type == Map::Extradata_Info::PIC );
+      assert(edi.type == Map::Extradata_Info::PIC);
 
 		fs.EnsureDirectoryExists("pics");
       FileWrite fw;
 
-      g_gr->save_png( (ulong)edi.data, &fw );
+      g_gr->save_png((ulong)edi.data, &fw);
 
-      fw.Write( fs, edi.filename.c_str() );
+      fw.Write(fs, edi.filename.c_str());
 	}
 
    // Write out
-   prof.write("extra_data", false, fs );
+   prof.write("extra_data", false, fs);
 }

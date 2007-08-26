@@ -44,36 +44,36 @@ void Widelands_Map_Trigger_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    // Skip, if no triggers saved
    FileRead fr;
-   if( !fr.TryOpen( fs, "trigger" ))
+   if (!fr.TryOpen(fs, "trigger"))
       return;
 
    Profile prof;
-   prof.read( "trigger", 0, fs );
+   prof.read("trigger", 0, fs);
 
-   Section* s = prof.get_section( "global" );
+   Section* s = prof.get_section("global");
 
    // check packet version
-   int packet_version=s->get_int( "packet_version" );
-   if(packet_version == CURRENT_PACKET_VERSION) {
-      while(( s = prof.get_next_section(0)) ) {
+   int packet_version=s->get_int("packet_version");
+   if (packet_version == CURRENT_PACKET_VERSION) {
+      while ((s = prof.get_next_section(0))) {
          std::string name = s->get_name();
          std::string type = s->get_safe_string("type");
          bool set = s->get_safe_bool("set");
-         Trigger* t = Trigger_Factory::get_correct_trigger( type.c_str());
-         t->set_name( name.c_str() );
-         t->set_trigger( set );
-         t->Read( s, egbase );
+         Trigger* t = Trigger_Factory::get_correct_trigger(type.c_str());
+         t->set_name(name.c_str());
+         t->set_trigger(set);
+         t->Read(s, egbase);
 
-         egbase->get_map()->get_mtm().register_new_trigger( t );
+         egbase->get_map()->get_mtm().register_new_trigger(t);
 		}
       return;
 	}
-   throw wexception("Unknown version in Map Trigger Packet: %i\n", packet_version );
+   throw wexception("Unknown version in Map Trigger Packet: %i\n", packet_version);
 }
 
 /*
@@ -101,7 +101,7 @@ throw (_wexception)
 		t.Write(s);
 	}
 
-   prof.write("trigger", false, fs );
+   prof.write("trigger", false, fs);
 
    // done
 }

@@ -108,9 +108,9 @@ Mix_Music *Songset::get_song()
 	char* tempfile = tempfilebuf;
 	tempfile = mktemp(tempfilebuf);
 
-	FILE* f = fopen( tempfile, "w" );
+	FILE* f = fopen(tempfile, "w");
 	fwrite(m_fr.Data(0), m_fr.GetSize(), 1, f);
-	fclose( f );
+	fclose(f);
 
 	m_m = Mix_LoadMUS(tempfile);
 	//TODO: this should use a RWopsified version!

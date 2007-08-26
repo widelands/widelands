@@ -149,7 +149,7 @@ called when the ok button has been clicked
 void Main_Menu_Load_Map::clicked_ok() {
 	std::string filename(m_ls->get_selected());
 
-      if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename)) {
+      if (g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
 	      m_curdir=g_fs->FS_CanonicalizeName(filename);
          m_ls->clear();
          m_mapfiles.clear();
@@ -168,7 +168,7 @@ void Main_Menu_Load_Map::selected(uint) {
 
    m_ok_btn->set_enabled(true);
 
-   if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
+   if (!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map(name)) {
 		Map map;
 		Map_Loader * const m_ml = map.get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
@@ -224,11 +224,11 @@ void Main_Menu_Load_Map::fill_list(void) {
 		 ++pname)
 	{
       const char *name = pname->c_str();
-      if(!strcmp(FileSystem::FS_Filename(name),".")) continue;
-      if(!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-      if(!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
-      if(!g_fs->IsDirectory(name)) continue;
-      if(Widelands_Map_Loader::is_widelands_map( name )) continue;
+      if (!strcmp(FileSystem::FS_Filename(name),".")) continue;
+      if (!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
+      if (!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
+      if (!g_fs->IsDirectory(name)) continue;
+      if (Widelands_Map_Loader::is_widelands_map(name)) continue;
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -246,12 +246,12 @@ void Main_Menu_Load_Map::fill_list(void) {
       const char *name = pname->c_str();
 
 		Map_Loader * const m_ml = map.get_correct_loader(name);
-      if(!m_ml) continue;
+      if (!m_ml) continue;
 
 		try {
          m_ml->preload_map(true);
          std::string pic="";
-         switch(m_ml->get_type()) {
+         switch (m_ml->get_type()) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
 			}
@@ -259,14 +259,14 @@ void Main_Menu_Load_Map::fill_list(void) {
 				(FileSystem::FS_Filename(name),
 				 name,
 				 g_gr->get_picture(PicMod_Game, pic.c_str()));
-		} catch(_wexception& ) {
+		} catch (_wexception&) {
          // we simply skip illegal entries
 		}
       delete m_ml;
 
 	}
 
-	if(m_ls->size()) m_ls->select(0);
+	if (m_ls->size()) m_ls->select(0);
 }
 
 /*
@@ -275,7 +275,7 @@ void Main_Menu_Load_Map::fill_list(void) {
 void Main_Menu_Load_Map::load_map(std::string filename) {
 	Map & map = m_parent->editor().map();
 
-   if(filename!="") {
+   if (filename!="") {
 		m_parent->editor().cleanup_for_load(true, false);
 
 		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
@@ -288,7 +288,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 		 loader_ui.step (_("Loading world data"));
 		ml->load_world();
 		ml->load_map_complete(&m_parent->editor(), true);
-/*      }  catch(std::exception& exe) {
+/*      }  catch (std::exception& exe) {
          // This really shoudn't fail since maps are already preloaded (in map preview)
          // and therefore valid, but if it does, a valid map must be displayed, therefore
          // we create an empty one from scratch

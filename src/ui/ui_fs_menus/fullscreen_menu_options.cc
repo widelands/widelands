@@ -130,38 +130,38 @@ m_label_autosave
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
    fmt->BitsPerPixel = 16;
-   SDL_Rect** modes = SDL_ListModes( fmt, SDL_SWSURFACE | SDL_FULLSCREEN );
-   if( modes )
-      for( uint i = 0; modes[i]; i++ ) {
-         if(modes[i]->w < 640) continue;
+   SDL_Rect** modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+   if (modes)
+      for (uint i = 0; modes[i]; i++) {
+         if (modes[i]->w < 640) continue;
 	 res this_res = {
             modes[i]->w,
             modes[i]->h,
             16
 			};
-         if( !m_resolutions.size() ||
+         if (!m_resolutions.size() ||
                this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
                this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
             m_resolutions.push_back(this_res);
 		}
    fmt->BitsPerPixel = 32;
-   modes = SDL_ListModes( fmt, SDL_SWSURFACE | SDL_FULLSCREEN );
-   if( modes )
-      for( uint i = 0; modes[i]; i++ ) {
-         if(modes[i]->w < 640) continue;
+   modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+   if (modes)
+      for (uint i = 0; modes[i]; i++) {
+         if (modes[i]->w < 640) continue;
          res this_res = {
             modes[i]->w,
             modes[i]->h,
             32
 			};
-         if( !m_resolutions.size() ||
+         if (!m_resolutions.size() ||
                this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
                this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
             m_resolutions.push_back(this_res);
 		}
 
 	bool did_select_a_res=false;
-	for(uint i = 0; i < m_resolutions.size(); i++) {
+	for (uint i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =
@@ -173,7 +173,7 @@ m_label_autosave
 	}
 	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
 
-   available_languages[0].name = _( "System default language" );
+   available_languages[0].name = _("System default language");
 	for (uint i = 0; i < NR_LANGUAGES; ++i) m_language_list.add
 		(available_languages[i].name.c_str(),
 		 available_languages[i].abbrev,
@@ -233,7 +233,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.dock_windows_to_edges= s->get_bool("dock_windows_to_edges", false);
 	opt.language = s->get_string("language", "");
    opt.music = !s->get_bool("disable_music", false);
-   opt.fx = !s->get_bool("disable_fx", false );
+   opt.fx = !s->get_bool("disable_fx", false);
    opt.autosave = s->get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL*60);
    return opt;
 }
@@ -254,7 +254,7 @@ void Options_Ctrl::save_options(){
    m_opt_section->set_string("language", opt.language.c_str());
    m_opt_section->set_int("autosave", opt.autosave*60);
    WLApplication::get()->set_input_grab(opt.inputgrab);
-   i18n::set_locale( opt.language.c_str() );
-   g_sound_handler.set_disable_music( !opt.music );
-   g_sound_handler.set_disable_fx( !opt.fx );
+   i18n::set_locale(opt.language.c_str());
+   g_sound_handler.set_disable_music(!opt.music);
+   g_sound_handler.set_disable_fx(!opt.fx);
 }

@@ -104,7 +104,7 @@ void PlayerCommand::PlayerCmdWrite(FileWrite *fw, Editor_Game_Base* egbase, Wide
 }
 void PlayerCommand::PlayerCmdRead(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_COMMAND_VERSION) {
+	if (version==PLAYER_COMMAND_VERSION) {
 		BaseCommand::BaseCmdRead(fr,egbase,mol);
 		sender=fr->Unsigned8();
 	} else
@@ -185,7 +185,7 @@ void Cmd_Build::serialize (StreamWrite* ser)
 void Cmd_Build::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
 {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_BUILD_VERSION) {
+	if (version==PLAYER_CMD_BUILD_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 		// id
@@ -317,7 +317,7 @@ void Cmd_BuildRoad::serialize (StreamWrite* ser)
 #define PLAYER_CMD_BUILDROAD_VERSION 1
 void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_BUILDROAD_VERSION) {
+	if (version==PLAYER_CMD_BUILDROAD_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 		// Start Coords
@@ -375,7 +375,7 @@ void Cmd_FlagAction::serialize (StreamWrite* ser)
 #define PLAYER_CMD_FLAGACTION_VERSION 1
 void Cmd_FlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_FLAGACTION_VERSION) {
+	if (version==PLAYER_CMD_FLAGACTION_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 
@@ -429,7 +429,7 @@ void Cmd_StartStopBuilding::serialize (StreamWrite* ser)
 void Cmd_StartStopBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
 {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_STOPBUILDING_VERSION) {
+	if (version==PLAYER_CMD_STOPBUILDING_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 
@@ -481,7 +481,7 @@ void Cmd_EnhanceBuilding::serialize (StreamWrite* ser)
 void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
 {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_ENHANCEBUILDING_VERSION) {
+	if (version==PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 
@@ -547,7 +547,7 @@ void Cmd_ChangeTrainingOptions::serialize (StreamWrite* ser)
 void Cmd_ChangeTrainingOptions::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
 {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
+	if (version==PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 
@@ -615,7 +615,7 @@ void Cmd_DropSoldier::serialize (StreamWrite* ser)
 #define PLAYER_CMD_DROPSOLDIER_VERSION 1
 void Cmd_DropSoldier::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_DROPSOLDIER_VERSION) {
+	if (version==PLAYER_CMD_DROPSOLDIER_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 
@@ -680,7 +680,7 @@ void Cmd_ChangeSoldierCapacity::serialize (StreamWrite* ser)
 void Cmd_ChangeSoldierCapacity::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
 {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
+	if (version==PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
       // Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 
@@ -759,7 +759,7 @@ void Cmd_EnemyFlagAction::serialize (StreamWrite* ser)
 void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
 {
 	int version=fr->Unsigned16();
-	if(version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
+	if (version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
 

@@ -162,7 +162,7 @@ public:
 	Interactive_Player* get_ipl();
 
 	// If this has a netgame, return it
-	NetGame* get_netgame( void ) { return m_netgame; }
+	NetGame* get_netgame(void) { return m_netgame; }
 
 	SaveHandler* get_save_handler() { return &m_savehandler; }
 

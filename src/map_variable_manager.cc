@@ -26,26 +26,26 @@
 
 MapVariableManager::MapVariableManager() {
    // Create a default variable
-   String_MapVariable* smv = new String_MapVariable( 1 );
+   String_MapVariable* smv = new String_MapVariable(1);
    smv->set_name(_("Next scenario").c_str());
    smv->set_value(_("<undefined>").c_str());
-   register_new_variable( smv );
+   register_new_variable(smv);
 }
 
 
 MapVariableManager::~MapVariableManager() {
-   for( uint i = 0; i < m_variables.size(); i++)
+   for (uint i = 0; i < m_variables.size(); i++)
       delete m_variables[i];
-   m_variables.resize( 0 );
+   m_variables.resize(0);
 }
 
 
-bool MapVariableManager::register_new_variable( MapVariable* mv ) {
+bool MapVariableManager::register_new_variable(MapVariable* mv) {
    // check if this variable is already known
-   if( get_variable( mv->get_name() ) )
+   if (get_variable(mv->get_name()))
          return 0;
 
-   m_variables.push_back( mv );
+   m_variables.push_back(mv);
    return true;
 }
 
@@ -55,8 +55,8 @@ bool MapVariableManager::register_new_variable( MapVariable* mv ) {
 Int_MapVariable * MapVariableManager::get_int_variable
 (const char * const name) const
 {
-   MapVariable* v = get_variable( name );
-   if( v && v->get_type() != MapVariable::MVT_INT)
+   MapVariable* v = get_variable(name);
+   if (v && v->get_type() != MapVariable::MVT_INT)
       return 0;
 
    return static_cast<Int_MapVariable*>(v);
@@ -64,8 +64,8 @@ Int_MapVariable * MapVariableManager::get_int_variable
 String_MapVariable * MapVariableManager::get_string_variable
 (const char * const name) const
 {
-   MapVariable* v = get_variable( name );
-   if( v && v->get_type() != MapVariable::MVT_STRING)
+   MapVariable* v = get_variable(name);
+   if (v && v->get_type() != MapVariable::MVT_STRING)
       return 0;
    return static_cast<String_MapVariable*>(v);
 }
@@ -75,8 +75,8 @@ MapVariable* MapVariableManager::get_variable
 {
    uint i;
    MapVariable* retval = 0;
-   for( i = 0; i < m_variables.size(); i++) {
-      if( !strcmp( m_variables[i]->get_name(), name ) ) {
+   for (i = 0; i < m_variables.size(); i++) {
+      if (!strcmp(m_variables[i]->get_name(), name)) {
          retval = m_variables[i];
          break;
 		}
@@ -88,12 +88,12 @@ MapVariable* MapVariableManager::get_variable
 /*
  * Remove a variable
  */
-void MapVariableManager::delete_variable( const char* name ) {
-   for( uint i = 0; i < m_variables.size(); i++) {
-      if( !strcmp( m_variables[i]->get_name(), name ) ) {
+void MapVariableManager::delete_variable(const char* name) {
+   for (uint i = 0; i < m_variables.size(); i++) {
+      if (!strcmp(m_variables[i]->get_name(), name)) {
          delete m_variables[i];
          m_variables[i] = m_variables[m_variables.size() - 1];
-         m_variables.resize( m_variables.size() - 1 );
+         m_variables.resize(m_variables.size() - 1);
          break;
 		}
 	}

@@ -28,18 +28,18 @@ MapEventChainManager::MapEventChainManager() {}
 
 
 MapEventChainManager::~MapEventChainManager() {
-   for( uint i = 0; i < m_eventchains.size(); i++)
+   for (uint i = 0; i < m_eventchains.size(); i++)
       delete m_eventchains[i];
-   m_eventchains.resize( 0 );
+   m_eventchains.resize(0);
 }
 
 
-bool MapEventChainManager::register_new_eventchain( EventChain* mv ) {
+bool MapEventChainManager::register_new_eventchain(EventChain* mv) {
    // check if this eventchain is already known
-   if( get_eventchain( mv->get_name() ) )
+   if (get_eventchain(mv->get_name()))
          return 0;
 
-   m_eventchains.push_back( mv );
+   m_eventchains.push_back(mv);
    return true;
 }
 
@@ -50,8 +50,8 @@ EventChain* MapEventChainManager::get_eventchain(const char * const name) const
 {
    uint i;
    EventChain* retval = 0;
-   for( i = 0; i < m_eventchains.size(); i++) {
-      if( !strcmp( m_eventchains[i]->get_name(), name ) ) {
+   for (i = 0; i < m_eventchains.size(); i++) {
+      if (!strcmp(m_eventchains[i]->get_name(), name)) {
          retval = m_eventchains[i];
          break;
 		}
@@ -63,15 +63,15 @@ EventChain* MapEventChainManager::get_eventchain(const char * const name) const
 /*
  * Remove a eventchain
  */
-void MapEventChainManager::delete_eventchain( const char* name ) {
-   for( uint i = 0; i < m_eventchains.size(); i++) {
-      if( !strcmp( m_eventchains[i]->get_name(), name ) ) {
-         assert( m_eventchains[i]->get_trigcond() );
-         m_eventchains[i]->get_trigcond()->unreference_triggers( m_eventchains[i] );
+void MapEventChainManager::delete_eventchain(const char* name) {
+   for (uint i = 0; i < m_eventchains.size(); i++) {
+      if (!strcmp(m_eventchains[i]->get_name(), name)) {
+         assert(m_eventchains[i]->get_trigcond());
+         m_eventchains[i]->get_trigcond()->unreference_triggers(m_eventchains[i]);
          m_eventchains[i]->clear_events();
          delete m_eventchains[i];
          m_eventchains[i] = m_eventchains[m_eventchains.size() - 1];
-         m_eventchains.resize( m_eventchains.size() - 1 );
+         m_eventchains.resize(m_eventchains.size() - 1);
          break;
 		}
 	}

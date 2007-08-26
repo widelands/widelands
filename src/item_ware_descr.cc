@@ -52,7 +52,7 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
  */
 void Item_Ware_Descr::load_graphics()
 {
-	m_icon = g_gr->get_picture( PicMod_Game, m_icon_fname.c_str() );
+	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname.c_str());
 }
 
 
@@ -76,7 +76,7 @@ Item_Ware_Descr* Item_Ware_Descr::create_from_dir(const char* name,
 		Profile prof(fname);
 		descr->parse(dir, &prof);
 	}
-	catch(...) {
+	catch (...) {
 		delete descr;
 		throw;
 	}

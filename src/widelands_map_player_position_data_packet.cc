@@ -42,8 +42,8 @@ void Widelands_Map_Player_Position_Data_Packet::Read
 throw (_wexception)
 {
    Profile prof;
-   prof.read( "player_position", 0, fs );
-   Section* s = prof.get_section( "global" );
+   prof.read("player_position", 0, fs);
+   Section* s = prof.get_section("global");
 
    // read packet version
 	const int packet_version=s->get_int("packet_version");
@@ -95,5 +95,5 @@ throw (_wexception)
 		s->set_Coords(buffer, map.get_starting_pos(i));
 	}
 
-   prof.write("player_position", false, fs );
+   prof.write("player_position", false, fs);
 }

@@ -58,22 +58,22 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 {
 
    Profile prof;
-   prof.read( "player_names", 0, fs );
-   Section* s = prof.get_section( "global" );
+   prof.read("player_names", 0, fs);
+   Section* s = prof.get_section("global");
 
    // First packet version
-   int packet_version=s->get_int( "packet_version" );
+   int packet_version=s->get_int("packet_version");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
      std::string name, tribe;
      char buf[256];
       int i;
-      for(i=1; i<=map->get_nrplayers(); i++) {
-         sprintf(buf, "player_%i", i );
-         s = prof.get_section( buf );
+      for (i=1; i<=map->get_nrplayers(); i++) {
+         sprintf(buf, "player_%i", i);
+         s = prof.get_section(buf);
          name = s->get_string("name");
          tribe = s->get_string("tribe");
-         if(!skip) {
+         if (!skip) {
             map->set_scenario_player_name(i,name);
             map->set_scenario_player_tribe(i,tribe);
 			}
@@ -82,7 +82,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 	}
    throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version);
 
-   assert( 0 );
+   assert(0);
 }
 
 /*
@@ -105,16 +105,16 @@ throw (_wexception)
    int i=0;
    Map* map=egbase->get_map();
    std::string name, tribe;
-   for(i=1; i<=map->get_nrplayers(); i++) {
+   for (i=1; i<=map->get_nrplayers(); i++) {
       tribe=map->get_scenario_player_tribe(i);
       name=map->get_scenario_player_name(i);
 
-      sprintf(buf, "player_%i", i );
-      s = prof.create_section( buf );
+      sprintf(buf, "player_%i", i);
+      s = prof.create_section(buf);
       s->set_string("name", name.c_str());
       s->set_string("tribe", tribe.c_str());
 	}
 
-   prof.write("player_names", false, fs );
+   prof.write("player_names", false, fs);
    // DONE
 }

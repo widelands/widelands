@@ -46,22 +46,22 @@ void Widelands_Map_Road_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/road" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/road");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
    // First packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       uint ser;
-      while((ser=fr.Unsigned32())!=0xffffffff) {
+      while ((ser=fr.Unsigned32())!=0xffffffff) {
          // If this is already known, get it
          // Road data is read somewhere else
          assert(!ol->is_object_known(ser));
@@ -73,7 +73,7 @@ throw (_wexception)
       return;
 	}
    throw wexception("Unknown version %i in Widelands_Map_Road_Data_Packet!\n", packet_version);
-   assert( 0 );
+   assert(0);
 }
 
 
@@ -92,16 +92,16 @@ throw (_wexception)
    // Write roads, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
          // We only write Roads
-         if(immovable && immovable->get_type()==Map_Object::ROAD) {
+         if (immovable && immovable->get_type()==Map_Object::ROAD) {
             Road* road=static_cast<Road*>(immovable);
 
             // Roads can life on multiple positions
             uint serial=0;
-            if(os->is_object_known(road)) continue;
+            if (os->is_object_known(road)) continue;
 
             serial=os->register_object(road);
             // write id
@@ -113,6 +113,6 @@ throw (_wexception)
 	}
    fw.Unsigned32(0xffffffff);
 
-   fw.Write( fs, "binary/road" );
+   fw.Write(fs, "binary/road");
    // DONE
 }

@@ -41,12 +41,12 @@ Tab_Panel::Tab_Panel(Panel* parent, int x, int y, uint background)
 	m_active = 0;
 	m_snapparent = false;
 
-	switch(background) {
+	switch (background) {
 	default:
-	case 0: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but0.png" ); break;
-	case 1: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but1.png" ); break;
-	case 2: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but2.png" ); break;
-	case 3: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but3.png" ); break;
+	case 0: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but0.png"); break;
+	case 1: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but1.png"); break;
+	case 2: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but2.png"); break;
+	case 3: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but3.png"); break;
 	}
 
 	m_highlight = -1;
@@ -163,7 +163,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 
 
 	// draw the buttons
-	for(idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
+	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
 		if (m_highlight == static_cast<const int>(idx)) dst->brighten_rect
 			(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
 			 MOUSE_OVER_BRIGHT_FACTOR);

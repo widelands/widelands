@@ -84,7 +84,7 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
 
    mp.Pre_Read(m_fs, m_map);
 
-   if(!World::exists_world(m_map->get_world_name())) {
+   if (!World::exists_world(m_map->get_world_name())) {
       //TODO: throw something more meaningful than wexception and handle the
       //actual problem instead of ignoring it
       //(e.g. in fullscreen_menu_mapselect.cc::285)
@@ -116,7 +116,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    //hosts do world loading while creating the game and the states
    //are not available outside this class to make a conditional load.
    //if You know a better way to fix this, DO IT! -- Alexia Death
-   if(get_state() == STATE_PRELOADED){
+   if (get_state() == STATE_PRELOADED){
       this->load_world();
 	}
 	assert(get_state() == STATE_WORLD_LOADED);
@@ -379,7 +379,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 	}
    log("done!\n ");
 
-   if(m_mol->get_nr_unloaded_objects())
+   if (m_mol->get_nr_unloaded_objects())
       log("WARNING: There are %i unloaded objects. This is a bug, please consider committing!\n", m_mol->get_nr_unloaded_objects());
 
    m_map->recalc_whole_map();

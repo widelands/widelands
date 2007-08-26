@@ -42,37 +42,37 @@ void Widelands_Map_Objective_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if(skip)
+   if (skip)
       return;
 
    Profile prof;
    try {
-      prof.read( "objective", 0, fs );
-	} catch( ... ) {
+      prof.read("objective", 0, fs);
+	} catch (...) {
       // might not be there
       return;
 	}
 	MapObjectiveManager & mom = egbase->get_map()->get_mom();
 	MapTriggerManager   & mtm = egbase->get_map()->get_mtm();
 
-   Section* s = prof.get_section( "global" );
+   Section* s = prof.get_section("global");
 
    // read packet version
    int packet_version=s->get_int("packet_version");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(( s = prof.get_next_section(0))) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
+      while ((s = prof.get_next_section(0))) {
          MapObjective* o = new MapObjective();
-         o->set_name( s->get_name() );
-         o->set_descr( s->get_safe_string("descr"));
-         o->set_is_visible( s->get_safe_bool("visible"));
-         o->set_is_optional( s->get_safe_bool("optional"));
+         o->set_name(s->get_name());
+         o->set_descr(s->get_safe_string("descr"));
+         o->set_is_visible(s->get_safe_bool("visible"));
+         o->set_is_optional(s->get_safe_bool("optional"));
 
          const char* trigname = s->get_safe_string("trigger");
          Trigger * const trig = mtm.get_trigger(trigname);
-         if( !trig )
-            throw wexception("Unknown trigger referenced in Objective: %s\n", trigname );
-         o->set_trigger( static_cast<Trigger_Null*>(trig) ); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
+         if (!trig)
+            throw wexception("Unknown trigger referenced in Objective: %s\n", trigname);
+         o->set_trigger(static_cast<Trigger_Null*>(trig)); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
 
          mom.register_new_objective(o);
 		}
@@ -108,5 +108,5 @@ throw (_wexception)
 		s.set_string("trigger",  o.get_trigger()->get_name());
 	}
 
-   prof.write("objective", false, fs );
+   prof.write("objective", false, fs);
 }

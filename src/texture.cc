@@ -44,14 +44,14 @@ Texture::Texture
 	// Load the pictures one by one
 	char fname[256];
 
-	for(;;) {
+	for (;;) {
 		int nr = m_nrframes;
 		char *p;
 
 		// create the file name by reverse-scanning for '?' and replacing
 		snprintf(fname, sizeof(fname), "%s", &fnametmpl);
 		p = fname + strlen(fname);
-		while(p > fname) {
+		while (p > fname) {
 			if (*--p != '?')
 				continue;
 
@@ -75,7 +75,7 @@ Texture::Texture
 		{
 			surf = LoadImage(fname);
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			log("WARNING: Failed to load texture frame %s: %s\n", fname, e.what());
 			break;
@@ -129,7 +129,7 @@ Texture::Texture
 
 		SDL_LockSurface(cv);
 
-		for(int y = 0; y < TEXTURE_HEIGHT; y++)
+		for (int y = 0; y < TEXTURE_HEIGHT; y++)
 			memcpy(m_curframe + y*TEXTURE_WIDTH, (Uint8*)cv->pixels + y*cv->pitch, TEXTURE_WIDTH);
 
 		SDL_UnlockSurface(cv);
@@ -176,6 +176,6 @@ void Texture::animate(uint time)
 	uchar* lastframe = m_curframe;
 
 	m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*frame];
-	if( lastframe != m_curframe )
+	if (lastframe != m_curframe)
 		m_was_animated = true;
 }

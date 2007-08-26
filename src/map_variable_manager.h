@@ -47,12 +47,12 @@ struct MapVariable {
          MVT_STRING,
 		};
 
-      MapVariable( bool t ) { m_delete_protected = t; }
-      virtual ~MapVariable( void ) { }
+      MapVariable(bool t) { m_delete_protected = t; }
+      virtual ~MapVariable(void) { }
 
 	bool is_delete_protected() const {return m_delete_protected;}
 	const char * get_name() const {return m_name.c_str();}
-      inline void set_name( const char* name ) { m_name = name; }
+      inline void set_name(const char* name) { m_name = name; }
 
 	virtual std::string get_string_representation() const = 0;
 	virtual Type get_type() const = 0;
@@ -63,15 +63,15 @@ struct MapVariable {
 };
 
 struct Int_MapVariable : public MapVariable {
-      Int_MapVariable( bool t ) : MapVariable( t ) { m_value = 0; }
+      Int_MapVariable(bool t) : MapVariable(t) { m_value = 0; }
 
 	Type get_type() const {return MVT_INT;}
 
 	long get_value() const {return m_value;}
-      void set_value( long t ) { m_value = t; }
+      void set_value(long t) { m_value = t; }
 	std::string get_string_representation() const {
          char buffer[256];
-         sprintf( buffer, "%li", m_value );
+         sprintf(buffer, "%li", m_value);
          return buffer;
 		}
 
@@ -80,12 +80,12 @@ struct Int_MapVariable : public MapVariable {
 };
 
 struct String_MapVariable : public MapVariable {
-      String_MapVariable( bool t ) : MapVariable( t ) { m_value = ""; }
+      String_MapVariable(bool t) : MapVariable(t) { m_value = ""; }
 
 	Type get_type() const {return MVT_STRING;}
 
 	const char * get_value() const {return m_value.c_str();}
-      void set_value( const char* t ) { m_value = t; }
+      void set_value(const char* t) { m_value = t; }
 	std::string get_string_representation() const {return m_value;}
 
    private:
@@ -100,13 +100,13 @@ struct String_MapVariable : public MapVariable {
  * But it is better this way.
  */
 struct MapVariableManager {
-      MapVariableManager( void );
-      ~MapVariableManager( void );
+      MapVariableManager(void);
+      ~MapVariableManager(void);
 
       /*
        * Register a new variable
        */
-      bool register_new_variable( MapVariable* );
+      bool register_new_variable(MapVariable*);
 
       /*
        * This prevents casting
@@ -118,7 +118,7 @@ struct MapVariableManager {
        * Get a variable
        */
 	MapVariable* get_variable(const char * const name) const;
-      void delete_variable( const char* name );
+      void delete_variable(const char* name);
 
 	typedef std::vector<MapVariable *> variable_vector;
 	typedef variable_vector::size_type Index;

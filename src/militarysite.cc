@@ -176,14 +176,14 @@ void MilitarySite::set_economy(Economy* e)
 	uint i;
 
 	if (old) {
-		for(i = 0; i < m_input_queues.size(); i++)
+		for (i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
 	Building::set_economy(e);
 
 	if (e) {
-		for(i = 0; i < m_input_queues.size(); i++)
+		for (i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->add_to_economy(e);
 	}
 	*/
@@ -229,7 +229,7 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 	}
 
    uint i;
-   for(i=0; i < m_soldiers.size(); i++)
+   for (i=0; i < m_soldiers.size(); i++)
    {
       Soldier* s = m_soldiers[i];
 
@@ -320,8 +320,8 @@ void MilitarySite::request_soldier_callback
    msite->m_didconquer = true;
 
    uint i=0;
-   for(i=0; i<msite->m_soldier_requests.size(); i++)
-      if(rq==msite->m_soldier_requests[i]) break;
+   for (i=0; i<msite->m_soldier_requests.size(); i++)
+      if (rq==msite->m_soldier_requests[i]) break;
 
    msite->m_soldier_requests.erase(msite->m_soldier_requests.begin() + i);
 
@@ -511,7 +511,7 @@ void MilitarySite::change_soldier_capacity(int how)
             if (m_soldier_requests.size())
             {
 	       std::vector<Request*>::iterator it = m_soldier_requests.begin();
-	       for ( ; it != m_soldier_requests.end() && !(*it)->is_open(); ++it);
+	       for (; it != m_soldier_requests.end() && !(*it)->is_open(); ++it);
 
 	       if (it == m_soldier_requests.end())
 		  (*--it)->cancel_transfer(0);
@@ -537,7 +537,7 @@ void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldie
 		  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())));
    m_didconquer = true;
    m_soldiers.insert(m_soldiers.begin(),soldiers->begin(),soldiers->end());
-   /*for(uint i=0; i<soldiers->size(); i++)
+   /*for (uint i=0; i<soldiers->size(); i++)
       m_soldiers.push_back((*soldies)[i]);*/
 }
 
@@ -565,7 +565,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
 	}
    log("removed all soldier requests.\n");
    uint i;
-   for(i=0; i < m_soldiers.size(); i++)
+   for (i=0; i < m_soldiers.size(); i++)
    {
       Soldier* s = m_soldiers[i];
 
@@ -678,7 +678,7 @@ uint MilitarySite::nr_not_marked_soldiers() {
 
 uint MilitarySite::nr_attack_soldiers() {
    uint not_marked = nr_not_marked_soldiers();
-   if(not_marked > 1)
+   if (not_marked > 1)
       return not_marked-1;
    return 0;
 }

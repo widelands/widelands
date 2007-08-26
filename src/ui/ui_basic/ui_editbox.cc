@@ -93,8 +93,8 @@ bool Edit_Box::handle_mouserelease(const Uint8 btn, int, int)
 a key event must be handled
 */
 bool Edit_Box::handle_key(bool down, int code, char c) {
-   if(down) {
-      switch(code) {
+   if (down) {
+      switch (code) {
          case KEY_ESCAPE:
             set_text(m_lasttext.c_str());
 			Basic_Button::handle_mouserelease(0, 0, 0);
@@ -114,7 +114,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             return true;
 
          case KEY_BACKSPACE:
-            if(m_text.size()) {
+            if (m_text.size()) {
                m_text.erase(m_text.end() - 1);
                set_title(m_text.c_str());
 				}
@@ -126,7 +126,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             return true;
 
          default:
-            if(c && m_text.size()<m_maxchars) m_text+=c;
+            if (c && m_text.size()<m_maxchars) m_text+=c;
             set_title(m_text.c_str());
             return true;
 		}
@@ -152,7 +152,7 @@ Handles mouseins or rather mouse outs.
 Hides a mouseout event from the underlying button
 */
 void Edit_Box::handle_mousein(bool inside) {
-   if(m_keyboard_grabbed) return;
+   if (m_keyboard_grabbed) return;
    Basic_Button::handle_mousein(inside);
 }
 };

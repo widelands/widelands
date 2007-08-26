@@ -42,9 +42,9 @@ Game_Server_Connection::Game_Server_Connection(std::string host, uint port) {
 
 
 Game_Server_Connection::~Game_Server_Connection() {
-   if(m_socket) {
+   if (m_socket) {
       SDLNet_TCP_Close(m_socket);
-      SDLNet_FreeSocketSet( m_socketset );
+      SDLNet_FreeSocketSet(m_socketset);
 	}
 
    m_socket = 0;
@@ -65,10 +65,10 @@ void Game_Server_Connection::connect(void) {
 		throw wexception("Game_Server_Connection::connect: SDLNet_TCP_Open failed: %s", SDLNet_GetError());
 
    // Create the socket set and add this socket
-   m_socketset = SDLNet_AllocSocketSet( 1 );
-   if( !m_socketset )
+   m_socketset = SDLNet_AllocSocketSet(1);
+   if (!m_socketset)
 		throw wexception("Game_Server_Connection::connect: SDLNet_AllocSocketSet failed: %s", SDLNet_GetError());
-   SDLNet_TCP_AddSocket( m_socketset, m_socket );
+   SDLNet_TCP_AddSocket(m_socketset, m_socket);
 
 }
 
@@ -80,7 +80,7 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
    uint   index = m_last_packet_index++;
    ushort flags = 0;
 
-   if(m_last_packet_index > LAST_CLIENT_PACKET_INDEX) // Hopefully this wrap never occures
+   if (m_last_packet_index > LAST_CLIENT_PACKET_INDEX) // Hopefully this wrap never occures
       m_last_packet_index = FIRST_CLIENT_PACKET_INDEX;
 
    // This packet is replied to
@@ -103,17 +103,17 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
  * Check if there is incomming data and if so, handle it
  * accordingly
  */
-void Game_Server_Connection::handle_data( void ) {
+void Game_Server_Connection::handle_data(void) {
    // Check if data is available,
    // we only handle one packet per call
-   if( SDLNet_CheckSockets( m_socketset, 0 ) > 0) {
+   if (SDLNet_CheckSockets(m_socketset, 0) > 0) {
       // There is data
 
 
       Network_Buffer buf;
-      if(buf.fill( m_socket ) == -1) {
+      if (buf.fill(m_socket) == -1) {
          // Upsy, no data. But rather a disconnect
-         (*m_dch)( m_dchd );
+         (*m_dch)(m_dchd);
          return;
 		}
 
@@ -123,41 +123,41 @@ void Game_Server_Connection::handle_data( void ) {
       uint   index = buf.get_32();
       ushort flags = buf.get_16();
 
-      if( IS_ANSWER(flags)) {
-         if( !m_pending_packets.count( index )) {
+      if (IS_ANSWER(flags)) {
+         if (!m_pending_packets.count(index)) {
             log("Game_Server_Connection: WARNING Unknown response packet with id %i, dropped\n", index);
             return;
 			}
 
          Game_Server_Protocol_Packet* pp = m_pending_packets[index];
 
-         if( pp->get_id() != id)  {
+         if (pp->get_id() != id)  {
             log("Game_Server_Connection: WARNING Response packet with wrong id (has: %i, should: %i), dropped\n", pp->get_id(), id);
             return;
 			}
 
-         pp->handle_reply( this, &buf );
+         pp->handle_reply(this, &buf);
 
          delete pp;
-         m_pending_packets.erase( m_pending_packets.find( index ) );
+         m_pending_packets.erase(m_pending_packets.find(index));
 		} else {
          // server requests
          Game_Server_Protocol_Packet* pp = 0;
-         switch( id ) {
+         switch (id) {
             case GGSPP_USERENTERED: pp = new Game_Server_Protocol_Packet_UserEntered(); break;
             case GGSPP_CHATMESSAGE: pp = new Game_Server_Protocol_Packet_ChatMessage(0, ""); break;
             case GGSPP_PING: pp = new Game_Server_Protocol_Packet_Ping(); break;
             default: log("Game_Server_Connection: WARNING unknown protocol packet id in server request, dropped!\n"); break;
 			}
-         if(pp) {
-            pp->recv( this, &buf );
+         if (pp) {
+            pp->recv(this, &buf);
 
             log("Received a server packet: %i, %i\n", id, index);
             Network_Buffer reply;
             reply.put_16(id);
             reply.put_32(index);
             reply.put_16(GSP_ANSWER);
-            pp->write_reply( &reply );
+            pp->write_reply(&reply);
             reply.finish();
 
             SDLNet_TCP_Send(m_socket, reply.get_data(), reply.size());
@@ -217,7 +217,7 @@ void Game_Server_Connection::set_get_user_info_handler(UserInfo_Handler uih, voi
    m_uih = uih;
    m_uihd = data;
 }
-void Game_Server_Connection::get_user_info( std::string username, std::string game, std::string room) {
+void Game_Server_Connection::get_user_info(std::string username, std::string game, std::string room) {
    (*m_uih)(username, game, room, m_uihd);
 }
 
@@ -225,11 +225,11 @@ void Game_Server_Connection::set_chat_message_handler(ChatMessage_Handler cmh, v
    m_cmh = cmh;
    m_cmhd = data;
 }
-void Game_Server_Connection::chat_message( std::string user, std::string msg, uchar flags) {
+void Game_Server_Connection::chat_message(std::string user, std::string msg, uchar flags) {
    (*m_cmh)(user, msg, flags, m_cmhd);
 }
 
-void Game_Server_Connection::set_disconnect_handler( Disconnet_Handler dch, void* data ) {
+void Game_Server_Connection::set_disconnect_handler(Disconnet_Handler dch, void* data) {
    m_dch = dch;
    m_dchd = data;
 }

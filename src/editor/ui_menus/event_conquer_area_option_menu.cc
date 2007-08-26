@@ -264,7 +264,7 @@ bool Event_Conquer_Area_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 
 void Event_Conquer_Area_Option_Menu::clicked_ok() {
-	if(m_name->get_text()) m_event->set_name(m_name->get_text());
+	if (m_name->get_text()) m_event->set_name(m_name->get_text());
 	m_event->m_player_area = m_player_area;
 	end_modal(1);
 }

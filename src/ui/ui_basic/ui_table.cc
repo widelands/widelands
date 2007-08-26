@@ -98,7 +98,7 @@ void Table<void *>::add_column(const std::string & name, const uint width) {
 		    name)
 	};
    m_columns.push_back(c);
-   if(!m_scrollbar) {
+   if (!m_scrollbar) {
       m_scrollbar=new Scrollbar(get_parent(), get_x()+get_w()-24, get_y()+m_columns[0].btn->get_h(), 24, get_h()-m_columns[0].btn->get_h(), false);
       m_scrollbar->moved.set(this, &Table::set_scrollpos);
       m_scrollbar->set_steps(1);
@@ -124,7 +124,7 @@ Table<void *>::Entry_Record * Table<void *>::find
  * A header button has been clicked
  */
 void Table<void *>::header_button_clicked(Columns::size_type n) {
-   if(get_sort_colum()==n) {
+   if (get_sort_colum()==n) {
       // Change sort direction
 		set_sort_descending(not get_sort_descending());
       sort();
@@ -204,7 +204,7 @@ void Table<void *>::draw(RenderTarget * dst)
             x = curx + (curw>>1);
          else {
             // Pictures are always left aligned, leave some space here
-            if(m_max_pic_width && i==0)
+            if (m_max_pic_width && i==0)
                x= curx + m_max_pic_width + 10;
             else
                x= curx + 1;
@@ -291,18 +291,18 @@ Table<void *>::Entry_Record & Table<void *>::add
 		uint w, h;
 		g_gr->get_picture_size(picid, w, h);
 	   entry_height = std::max<uint>(entry_height, h);
-      if(m_max_pic_width<w) m_max_pic_width=w;
+      if (m_max_pic_width<w) m_max_pic_width=w;
 	}
-   if(entry_height>m_lineheight) m_lineheight=entry_height;
+   if (entry_height>m_lineheight) m_lineheight=entry_height;
 
 	Entry_Record & result = *new Entry_Record(entry, picid);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(get_nr_columns());
 
-	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2 ));
+	m_scrollbar->set_steps(m_entry_records.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2));
 
-   if( do_select )
-      select( m_entry_records.size() - 1 );
+   if (do_select)
+      select(m_entry_records.size() - 1);
 
    update(0, 0, get_eff_w(), get_h());
 	return result;

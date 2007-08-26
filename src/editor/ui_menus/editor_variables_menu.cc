@@ -44,7 +44,7 @@ struct New_Variable_Window : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-      MapVariable* get_variable( void ) { return m_variable; }
+      MapVariable* get_variable(void) { return m_variable; }
 
    private:
       Editor_Interactive* m_parent;
@@ -117,11 +117,11 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
    std::string name = buffer;
 	switch (i) {
 	case Integer_Type:
-         m_variable = new Int_MapVariable( 0 );
+         m_variable = new Int_MapVariable(0);
          break;
 
 	case String_Type:
-         m_variable = new String_MapVariable( 0 );
+         m_variable = new String_MapVariable(0);
          break;
 	}
 

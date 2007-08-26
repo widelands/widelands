@@ -46,7 +46,7 @@ void Box::resize()
 	totaldepth = 0;
 	maxbreadth = 0;
 
-	for(idx = 0; idx < m_items.size(); idx++)
+	for (idx = 0; idx < m_items.size(); idx++)
 		{
 		int depth, breadth;
 
@@ -65,7 +65,7 @@ void Box::resize()
 	// Position the children
 	totaldepth = 0;
 
-	for(idx = 0; idx < m_items.size(); idx++)
+	for (idx = 0; idx < m_items.size(); idx++)
 		{
 		int depth;
 
@@ -121,7 +121,7 @@ void Box::get_item_size(uint idx, int* pdepth, int* pbreadth)
 	const Item& it = m_items[idx];
 	int depth, breadth;
 
-	switch(it.type)
+	switch (it.type)
 		{
 		case Item::ItemPanel:
 			if (m_orientation == Horizontal)
@@ -163,7 +163,7 @@ void Box::set_item_pos(uint idx, int pos)
 
 	const Item& it = m_items[idx];
 
-	switch(it.type)
+	switch (it.type)
 		{
 		case Item::ItemPanel:
 			{
@@ -180,7 +180,7 @@ void Box::set_item_pos(uint idx, int pos)
 				maxbreadth = get_w();
 				}
 
-			switch(it.u.panel.align)
+			switch (it.u.panel.align)
 				{
 				case AlignLeft:
 				default:

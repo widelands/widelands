@@ -220,9 +220,9 @@ void Interactive_Base::think()
 	egbase().think();
 
    // Update everythink so and so many milliseconds, to make sure the whole
-   // screen is synced ( another user may have done something, and the screen was
-   // not redrawn )
-   if( curframe & 1023 ) // % 1024
+   // screen is synced (another user may have done something, and the screen was
+   // not redrawn)
+   if (curframe & 1023) // % 1024
       need_complete_redraw();
 
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
@@ -635,7 +635,7 @@ void Interactive_Base::roadb_add_overlay()
 
 	assert(m_road_buildhelp_overlay_jobid.isNull());
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
-	for(int dir = 1; dir <= 6; dir++) {
+	for (int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
 		int caps;
 
@@ -667,7 +667,7 @@ void Interactive_Base::roadb_add_overlay()
 			icon = 3;
 
       std::string name="";
-      switch(icon) {
+      switch (icon) {
          case 1: name="pics/roadb_green.png"; break;
          case 2: name="pics/roadb_yellow.png"; break;
          case 3: name="pics/roadb_red.png"; break;

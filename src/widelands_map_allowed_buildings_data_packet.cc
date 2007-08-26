@@ -48,13 +48,13 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    Profile prof;
    try {
-      prof.read("allowed_buildings", 0, fs );
-	} catch( ... ) {
+      prof.read("allowed_buildings", 0, fs);
+	} catch (...) {
       // Packet wasn't save. Same as skip
       return;
 	}
@@ -64,17 +64,17 @@ throw (_wexception)
    int packet_version = s->get_int("packet_version");
 
    char buf[256];
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
       if (dynamic_cast<Game * const>(egbase)) {
          int i=0;
-         for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
+         for (i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
             Player* plr=egbase->get_player(i);
-            if(!plr) continue;
+            if (!plr) continue;
             const Tribe_Descr* t=&plr->tribe();
 
             int b;
-            for(b=0; b<t->get_nrbuildings(); b++) {
+            for (b=0; b<t->get_nrbuildings(); b++) {
                plr->allow_building(b, false);
 				}
 			}
@@ -82,23 +82,23 @@ throw (_wexception)
 
       // Now read all players and buildings
       int i=0;
-      for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
+      for (i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
          Player* plr=egbase->get_safe_player(i);
-         if(!plr) continue; // skip this player, is data can not be saved
+         if (!plr) continue; // skip this player, is data can not be saved
          const Tribe_Descr* t;
 
          assert(plr);
          t=&plr->tribe();
 
-         sprintf( buf, "player_%i", i );
-         s = prof.get_safe_section( buf );
+         sprintf(buf, "player_%i", i);
+         s = prof.get_safe_section(buf);
 
          // Write for all buildings if it is enabled
          const char* name;
-         while( (name=s->get_next_bool(0,0))) {
+         while ((name=s->get_next_bool(0,0))) {
             bool allowed = s->get_bool(name);
             int index=t->get_building_index(name);
-            if(index==-1)
+            if (index==-1)
                throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->name().c_str());
             plr->allow_building(index, allowed);
 			}
@@ -142,6 +142,6 @@ throw (_wexception)
 			 plr->is_building_allowed(b));
 	}
 
-   prof.write("allowed_buildings", false, fs );
+   prof.write("allowed_buildings", false, fs);
    // Done
 }

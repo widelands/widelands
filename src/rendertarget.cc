@@ -795,7 +795,7 @@ void RenderTarget::rendermap
 	}
 
 	// Copy ground where it belongs: on the screen
-	m_surface->blit(Point( m_rect.x, m_rect.y), m_ground_surface, m_rect);
+	m_surface->blit(Point(m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
 	{
 		const int dx2 = maxfx - minfx + 1;

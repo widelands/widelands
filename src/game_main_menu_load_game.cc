@@ -123,7 +123,7 @@ void Game_Main_Menu_Load_Game::clicked_cancel() {
 void Game_Main_Menu_Load_Game::selected(uint) {
 	const char * const name = m_ls->get_selected();
 
-   FileSystem* fs = g_fs->MakeSubFileSystem( name );
+   FileSystem* fs = g_fs->MakeSubFileSystem(name);
 
 	Game_Loader gl(*fs, m_parent->get_game());
    Game_Preload_Data_Packet gpdp;
@@ -163,13 +163,13 @@ void Game_Main_Menu_Load_Game::fill_list(void)
 
    Game_Preload_Data_Packet gpdp;
 
-   for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
+   for (filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
 
 
       FileSystem* fs = 0;
       try {
-         fs = g_fs->MakeSubFileSystem( name );
+         fs = g_fs->MakeSubFileSystem(name);
 			Game_Loader gl(*fs, m_parent->get_game());
 			gl.preload_game(&gpdp);
 
@@ -178,7 +178,7 @@ void Game_Main_Menu_Load_Game::fill_list(void)
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
          free(fname);
 
-		} catch(_wexception& ) {
+		} catch (_wexception&) {
          // we simply skip illegal entries
 		}
          delete fs;
@@ -205,14 +205,14 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
    FileSystem* fs = 0;
 	try {
 		UI::ProgressWindow loader_ui;
-		fs = g_fs->MakeSubFileSystem( filename );
+		fs = g_fs->MakeSubFileSystem(filename);
 		Game_Loader gl(*fs, m_parent->get_game());
 		m_parent->get_game()->cleanup_for_load(true,true);
 		gl.load_game();
 		m_parent->get_game()->postload();
 		m_parent->get_game()->load_graphics(loader_ui);
 		m_parent->get_game()->m_state = gs_running;
-	} catch(std::exception& exe) {
+	} catch (std::exception& exe) {
 		std::string s=_("Game Loading Error!\nReason given:\n");
 		s+=exe.what();
 		log("%s\n", s.c_str());

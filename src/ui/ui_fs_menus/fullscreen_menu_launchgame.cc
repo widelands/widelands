@@ -132,17 +132,17 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	else m_mapname.set_text(_("(no map)"));
 
 	// update the player description groups
-	for(uint i = 0; i < MAX_PLAYERS; i++) {
+	for (uint i = 0; i < MAX_PLAYERS; i++) {
 		m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		m_players[i]->set_enabled(i < maxplayers);
-		if(m_is_scenario && (i<maxplayers) && map) {
+		if (m_is_scenario && (i<maxplayers) && map) {
 			// set player to the by the map given
 			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_NOTHING);
 			m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
 			m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
-		} else if(i<maxplayers && map ) {
+		} else if (i<maxplayers && map) {
 			std::string name=_("Player ");
-			if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
+			if ((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
 			name.append(1, static_cast<char>(((i+1)%10) + 0x30));
 			m_players[i]->set_player_name(name);
 			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);

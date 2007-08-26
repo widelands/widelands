@@ -21,7 +21,7 @@
 #define __S__TRIBEDATA_H
 
 #ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) (  (ushort) (((uchar) (major))<<8) | (((uchar) (minor))) )
+#define PACK_VERSION(major, minor) ((ushort) (((uchar) (major))<<8) | (((uchar) (minor))))
 #endif
 
 #ifndef VERSION_MAJOR

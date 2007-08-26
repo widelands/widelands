@@ -88,7 +88,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 	const Resource_Descr::Index res =
 		map.get_world()->get_resource(action->sparam1.c_str());
-	if(static_cast<signed char>(res)==-1)
+	if (static_cast<signed char>(res)==-1)
 		throw wexception(" Worker::run_mine: Should mine resource %s, which "
                          "doesn't exist in world. Tribe is not compatible with "
                          "world!!\n",  action->sparam1.c_str());
@@ -180,7 +180,7 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 	std::vector<std::string> list;
 	split_string(action->sparamv[idx], list, ":");
 	std::string bob;
-	if(list.size()==1) {
+	if (list.size()==1) {
 		state->svar1 = "world";
 		bob=list[0];
 	} else {
@@ -188,7 +188,7 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 		bob=list[1];
 	}
 
-	if(state->svar1 == "world")
+	if (state->svar1 == "world")
 		state->ivar2 = g->get_map()->get_world()->get_immovable_index(bob.c_str());
 	else
 		state->ivar2 = descr().get_tribe()->get_immovable_index(bob.c_str());
@@ -223,7 +223,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 	std::vector<std::string> list;
 	split_string(action->sparamv[idx], list, ":");
 	std::string bob;
-	if(list.size()==1) {
+	if (list.size()==1) {
 		state->svar1 = "world";
 		bob=list[0];
 	} else {
@@ -231,7 +231,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 		bob=list[1];
 	}
 
-	if(state->svar1 == "world")
+	if (state->svar1 == "world")
 		state->ivar2 = g->get_map()->get_world()->get_bob(bob.c_str());
 	else
 		state->ivar2 = descr().get_tribe()->get_bob(bob.c_str());
@@ -359,19 +359,19 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	CheckStepDefault cstep(get_movecaps());
 
 	int res=-1;
-	if(action->sparam1.size())
+	if (action->sparam1.size())
 		res=w->get_resource(action->sparam1.c_str());
 
 	Area<FCoords> area(map.get_fcoords(get_position()), action->iparam1);
 	int retval=0;
-	if(res!=-1)
+	if (res!=-1)
 		retval=map.find_reachable_fields(area, &list, cstep,
                FindNodeSizeResource((FindNodeSize::Size)action->iparam2,res));
 	else
 		retval=map.find_reachable_fields(area, &list, cstep,
 							FindNodeSize((FindNodeSize::Size)action->iparam2));
 
-	if(!retval) {
+	if (!retval) {
 		molog("  no space found\n");
 		set_signal("fail");
 		pop_task();
@@ -423,7 +423,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 	}
 
 	// Determine the coords we need to walk towards
-	switch(action->iparam1) {
+	switch (action->iparam1) {
 	case Action::walkObject: {
 		Map_Object* obj = state->objvar1.get(g);
 
@@ -538,14 +538,14 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 
 	if (obj->get_type() == IMMOVABLE)
 		((Immovable*)obj)->switch_program(g, action->sparam1);
-	else if(obj->get_type() == BOB) {
+	else if (obj->get_type() == BOB) {
 		Bob* bob=((Bob*)(obj));
-		if(bob->get_bob_type() == Bob::CRITTER) {
+		if (bob->get_bob_type() == Bob::CRITTER) {
 			Critter_Bob* crit= ((Critter_Bob*)bob);
 			crit->send_signal(g, "interrupt_now");
 			crit->start_task_program(action->sparam1);
 
-		} else if((bob->get_type() == Bob::WORKER) ||
+		} else if ((bob->get_type() == Bob::WORKER) ||
 		          (bob->get_type() == Bob::SOLDIER)) {
 
 			Worker* w= ((Worker*)bob);
@@ -585,7 +585,7 @@ bool Worker::run_plant(Game * g, State * state, const Action *)
 		return true;
 	}
 
-	if(state->svar1 == "world")
+	if (state->svar1 == "world")
 		g->create_immovable(pos, state->ivar2, 0);
 	else
 		g->create_immovable(pos, state->ivar2, descr().get_tribe());
@@ -606,7 +606,7 @@ bool Worker::run_create_bob(Game * g, State * state, const Action *)
 
 	molog("  Create Bob: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
 
-	if(state->svar1 == "world")
+	if (state->svar1 == "world")
 		g->create_bob(pos, state->ivar2, 0);
 	else
 		g->create_bob(pos, state->ivar2, descr().get_tribe());
@@ -682,7 +682,7 @@ bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 		int idx;
 		Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
 
-		if(rdescr->is_detectable() && amount)
+		if (rdescr->is_detectable() && amount)
 			idx = descr().get_tribe()->get_resource_indicator(rdescr, amount);
 		else
 			idx = descr().get_tribe()->get_resource_indicator(0, 0); // not detectable
@@ -735,7 +735,7 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 	PlayerImmovable* loc=static_cast<PlayerImmovable*>(m_location.get(egbase));
 
 	molog("m_location: %p\n", loc);
-	if(loc) {
+	if (loc) {
 		molog("* Owner: (%p)\n", loc->get_owner());
 		molog("** Owner (plrnr): %i\n", loc->get_owner()->get_player_number());
 		molog("* Economy: %p\n", loc->get_economy());
@@ -745,7 +745,7 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 
 	WareInstance* ware=static_cast<WareInstance*>(m_carried_item.get(egbase));
 	molog("m_carried_item: %p\n", ware);
-	if(ware) {
+	if (ware) {
 		molog("* m_carried_item->get_ware() (id): %i\n", ware->descr_index());
 		molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
 	}
@@ -855,7 +855,7 @@ void Worker::cleanup(Editor_Game_Base *g)
 	m_supply = 0;
 
 	if (item)
-		if(g->objects().object_still_available(item))
+		if (g->objects().object_still_available(item))
 			item->destroy(g);
 
 	// We are destoryed, but we were maybe idling
@@ -949,7 +949,7 @@ void Worker::incorporate(Game *g)
  */
 void Worker::create_needed_experience(Game* g)
 {
-	if(descr().get_min_exp()==-1 && descr().get_max_exp()==-1) {
+	if (descr().get_min_exp()==-1 && descr().get_max_exp()==-1) {
 		m_needed_exp=m_current_exp=-1;
 		return;
 	}
@@ -970,12 +970,12 @@ void Worker::create_needed_experience(Game* g)
  */
 void Worker::gain_experience(Game* g)
 {
-	if(m_needed_exp==-1)
+	if (m_needed_exp==-1)
 		return; // This worker can not level
 
 	++m_current_exp;
 
-	if(m_current_exp==m_needed_exp)
+	if (m_current_exp==m_needed_exp)
 		level(g);
 }
 
@@ -1524,7 +1524,7 @@ void Worker::program_update(Game* g, State* state)
 {
 	const Action* action;
 
-	for(;;) {
+	for (;;) {
 		const WorkerProgram* program =
 				static_cast<const WorkerProgram*>(state->program);
 
@@ -1833,7 +1833,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	molog("[fetchfromflag]: back home\n");
 
 	item = fetch_carried_item(g);
-	if(item) {
+	if (item) {
 		item->set_location(g, location);
 		item->update(g); // this might remove the item and ack any requests
 	}
@@ -2103,7 +2103,7 @@ void Worker::fugitive_update(Game* g, State* state)
 
 		molog("[fugitive]: found warehouse(s)\n");
 
-		for(uint i = 0; i < warehouses.size(); i++) {
+		for (uint i = 0; i < warehouses.size(); i++) {
 			Warehouse *wh = (Warehouse*)warehouses[i].object;
 
 			// Only walk into one of our warehouses
@@ -2121,7 +2121,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		if (best) {
 			bool use = false;
 
-			if ( (int)((g->logic_rand() % 30)) <= (30 - bestdist))
+			if ((int)((g->logic_rand() % 30)) <= (30 - bestdist))
 				use = true;
 
 			// okay, move towards the flag of this warehouse
@@ -2266,12 +2266,12 @@ void Worker::geologist_update(Game* g, State* state)
 					world.terrain_descr(target.field->terrain_r()).get_is()
 					&
 					TERRAIN_MOUNTAIN;
-				if(i==0) i=list.size();
+				if (i==0) i=list.size();
 				--i;
 				--n;
-			} while( (is_center_mountain != is_target_mountain) && n );
+			} while ((is_center_mountain != is_target_mountain) && n);
 
-			if(!n) {
+			if (!n) {
 				// no suitable field found, this is no fail, there's just
 				// nothing else to do so let's go home
 				// FALLTHROUGH TO RETURN HOME

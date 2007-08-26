@@ -42,13 +42,13 @@ void Widelands_Map_Seen_Fields_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/seen_fields" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/seen_fields");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
@@ -119,5 +119,5 @@ throw (_wexception)
 		fw.Unsigned32(data);
 	}
 
-   fw.Write( fs, "binary/seen_fields" );
+   fw.Write(fs, "binary/seen_fields");
 }

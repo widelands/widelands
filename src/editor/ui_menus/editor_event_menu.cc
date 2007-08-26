@@ -356,14 +356,14 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
          int n = 1;
 		Map & map = m_parent->egbase().map();
-         while( 1 ) {
+         while (1) {
 		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))
                break;
             ++n;
 			}
 
-         ev->set_name( buffer );
+         ev->set_name(buffer);
          map.get_mecm().register_new_eventchain(ev);
 			m_eventchain_list->add(_("Unnamed").c_str(), ev, -1, true);
          m_eventchain_list->sort();
@@ -380,8 +380,8 @@ void Editor_Event_Menu::clicked_del_eventchain() {
 	m_parent->egbase().map().get_mecm().delete_eventchain
 		(m_eventchain_list->get_selected()->get_name());
 	m_eventchain_list->remove_selected();
-      m_btn_del_eventchain->set_enabled( false );
-      m_btn_edit_eventchain->set_enabled( false );
+      m_btn_del_eventchain->set_enabled(false);
+      m_btn_edit_eventchain->set_enabled(false);
       update();
 }
 

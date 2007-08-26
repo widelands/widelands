@@ -53,17 +53,17 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 
 	if (m_horizontal)
 	{
-		m_pic_minus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" );
-		m_pic_plus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" );
+		m_pic_minus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_left.png");
+		m_pic_plus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_right.png");
 	}
 	else
 	{
-		m_pic_minus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" );
-		m_pic_plus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" );
+		m_pic_minus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_up.png");
+		m_pic_plus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_down.png");
 	}
 
-	m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_background.png" );
-	m_pic_buttons = g_gr->get_picture( PicMod_UI,  "pics/but3.png" );
+	m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_background.png");
+	m_pic_buttons = g_gr->get_picture(PicMod_UI,  "pics/but3.png");
 
 	m_time_nextact = 0;
    m_force_draw = false;
@@ -209,7 +209,7 @@ void Scrollbar::action(Area area)
 	int diff;
 	int pos;
 
-	switch(area) {
+	switch (area) {
 	case Minus: diff = -1; break;
 	case MinusPage: diff = -m_pagesize; break;
 	case Plus: diff = 1; break;
@@ -290,7 +290,7 @@ void Scrollbar::draw(RenderTarget* dst)
 {
 	uint knobpos = get_knob_pos();
 
-   if(m_steps==1 && !m_force_draw) return; // don't draw a not doing scrollbar
+   if (m_steps==1 && !m_force_draw) return; // don't draw a not doing scrollbar
 
 	if (m_horizontal)
 	{

@@ -113,7 +113,7 @@ building_ui.cc).
 */
 void Map_Object::create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs)
 {
-	tabs->add(g_gr->get_picture( PicMod_Game,  "pics/menu_debug.png" ),
+	tabs->add(g_gr->get_picture(PicMod_Game,  "pics/menu_debug.png"),
 			new MapObjectDebugPanel(tabs, egbase, this));
 }
 
@@ -392,7 +392,7 @@ void FieldDebugWindow::think()
 	if (imm) {
 		std::string name;
 
-		switch(imm->get_type()) {
+		switch (imm->get_type()) {
 		case Map_Object::IMMOVABLE: name = ((Immovable*)imm)->name(); break;
 		case Map_Object::BUILDING: name = ((Building*)imm)->name(); break;
 		case Map_Object::FLAG: name = "flag"; break;
@@ -415,7 +415,7 @@ void FieldDebugWindow::think()
 	m_ui_bobs.clear();
 
 	m_map.find_bobs(Area<FCoords>(m_coords, 0), &bobs);
-	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
+	for (std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
 		snprintf
 			(buffer, sizeof(buffer),
 			 "%s (%u)", (*it)->name().c_str(), (*it)->get_serial());

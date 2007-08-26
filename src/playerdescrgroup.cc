@@ -97,7 +97,7 @@ m_btnPlayerTribe
  */
 void PlayerDescriptionGroup::set_enabled(bool enable)
 {
-	if(!m_allow_changes) return;
+	if (!m_allow_changes) return;
 
 	if (enable == m_enabled)
 		return;
@@ -169,7 +169,7 @@ void PlayerDescriptionGroup::toggle_playertribe(void)
 		return;
 
 	++m_current_tribe;
-	if(m_current_tribe==m_tribes.size()) m_current_tribe=0;
+	if (m_current_tribe==m_tribes.size()) m_current_tribe=0;
 	m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
 
 	// set the player
@@ -187,8 +187,8 @@ void PlayerDescriptionGroup::toggle_playertribe(void)
  */
 void PlayerDescriptionGroup::set_player_tribe(std::string str) {
    uint i=0;
-   for(i=0; i<m_tribes.size(); i++) {
-      if(m_tribes[i]==str) {
+   for (i=0; i<m_tribes.size(); i++) {
+      if (m_tribes[i]==str) {
          m_current_tribe=i;
 			m_btnPlayerTribe.set_title(m_tribes[m_current_tribe].c_str());
          // set the player

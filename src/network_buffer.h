@@ -45,14 +45,14 @@ struct Network_Buffer {
       void put_8(uchar);
       void put_16(ushort);
       void put_32(uint);
-      void put_string( std::string );
+      void put_string(std::string);
 
       // Return value must not be freed by user
       uchar* get_data() { return m_buffer; }
 
       // Fill this network buffer with all the incoming data
       int fill(TCPsocket);
-      void finish( void );
+      void finish(void);
 
 private:
       void grow_buffer();

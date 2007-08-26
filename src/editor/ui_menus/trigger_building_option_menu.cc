@@ -58,12 +58,12 @@ m_player_area(trigger->m_player_area)
 		 (m_parent->egbase().map()
 		  .get_scenario_player_tribe(m_player_area.player_number).c_str()))
 	{
-	   for(i=0; i<tribe->get_nrbuildings(); i++) {
+	   for (i=0; i<tribe->get_nrbuildings(); i++) {
          Building_Descr* b=tribe->get_building_descr(i);
-         if(!b->get_buildable() && !b->get_enhanced_building()) continue;
+         if (!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->name();
          std::string trig_name= m_trigger->get_building();
-         if(name==trig_name) m_building=m_buildings.size();
+         if (name==trig_name) m_building=m_buildings.size();
          m_buildings.push_back(name);
 		}
 	}
@@ -71,7 +71,7 @@ m_player_area(trigger->m_player_area)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( trigger->get_name() );
+   m_name->set_text(trigger->get_name());
    posy+=20+spacing;
 
    // Player
@@ -396,9 +396,9 @@ void Trigger_Building_Option_Menu::update(void) {
 
 	if (m_player_area.radius < 1) m_player_area.radius = 1;
 
-   if(m_count<1) m_count=1;
+   if (m_count<1) m_count=1;
 
-   if(m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
+   if (m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
 
    std::string curbuild=_("<invalid player tribe>");
 	if (not m_buildings.size()) {

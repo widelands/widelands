@@ -47,13 +47,13 @@ void Widelands_Map_Flag_Data_Packet::Read
 throw
 (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/flag");
-	} catch( ... ) {
+      fr.Open(fs, "binary/flag");
+	} catch (...) {
       // Not found -> not saved
       // so skip
       return;
@@ -63,11 +63,11 @@ throw
 
    // First packet version
    int packet_version=fr.Unsigned16();
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      for(ushort y=0; y<map->get_height(); y++) {
-         for(ushort x=0; x<map->get_width(); x++) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
+      for (ushort y=0; y<map->get_height(); y++) {
+         for (ushort x=0; x<map->get_width(); x++) {
             uchar exists=fr.Unsigned8();
-            if(exists) {
+            if (exists) {
                // Ok, now read all the additional data
                uchar owner=fr.Unsigned8();
                uint serial=fr.Unsigned32();
@@ -96,7 +96,7 @@ throw
 	}
    throw wexception("Unknown version %i in Widelands_Map_Flag_Data_Packet!\n", packet_version);
 
-   assert( 0 );
+   assert(0);
 }
 
 
@@ -117,11 +117,11 @@ throw (_wexception)
    // Write flags and owner, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
          // We only write flags
-         if(immovable && immovable->get_type()==Map_Object::FLAG) {
+         if (immovable && immovable->get_type()==Map_Object::FLAG) {
             Flag* flag=static_cast<Flag*>(immovable);
 
             // Flags can't life on multiply positions, therefore

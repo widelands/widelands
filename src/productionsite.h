@@ -92,7 +92,7 @@ public:
 	virtual ~ProductionSite();
 
 	virtual std::string get_statistics_string();
-   char get_statistics_percent( void ) { return m_last_stat_percent; }
+   char get_statistics_percent(void) { return m_last_stat_percent; }
 
 	virtual int get_building_type() const throw ()
 	{return Building::PRODUCTIONSITE;}

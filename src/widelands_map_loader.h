@@ -40,8 +40,8 @@ struct Widelands_Map_Loader : public Map_Loader {
 
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }
 
-      static bool is_widelands_map( std::string filename ) {
-         if( !strcasecmp( &filename.c_str()[filename.size()-4], WLMF_SUFFIX))
+      static bool is_widelands_map(std::string filename) {
+         if (!strcasecmp(&filename.c_str()[filename.size()-4], WLMF_SUFFIX))
             return true;
          return false;
 		}

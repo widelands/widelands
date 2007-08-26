@@ -24,9 +24,9 @@
 /*
  * Reference a event
  */
-void EventReferencer::reference_event( Event* tr ) {
-   tr->reference( this );
+void EventReferencer::reference_event(Event* tr) {
+   tr->reference(this);
 }
-void EventReferencer::unreference_event( Event* tr) {
-   tr->unreference( this );
+void EventReferencer::unreference_event(Event* tr) {
+   tr->unreference(this);
 }

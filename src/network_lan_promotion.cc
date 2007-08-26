@@ -143,7 +143,7 @@ LAN_Game_Promoter::LAN_Game_Promoter ()
     gameinfo.version=LAN_PROMOTION_PROTOCOL_VERSION;
     gameinfo.state=LAN_GAME_OPEN;
 
-    strncpy (gameinfo.gameversion, BUILD_ID, sizeof(gameinfo.gameversion) );
+    strncpy (gameinfo.gameversion, BUILD_ID, sizeof(gameinfo.gameversion));
 
     gethostname (gameinfo.hostname, sizeof(gameinfo.hostname));
 }

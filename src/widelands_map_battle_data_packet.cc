@@ -89,7 +89,7 @@ throw (_wexception)
 
          assert (s1);
          assert (s2);
-            // Here are needed more checks (map_object -> bob -> worker -> soldier ... )
+            // Here are needed more checks (map_object -> bob -> worker -> soldier ...)
 
          battle->soldiers((Soldier*)s1, (Soldier*)s2);
 
@@ -170,5 +170,5 @@ throw (_wexception)
    fw.Unsigned32(battles, filepos);
    // DONE
 
-   fw.Write( fs, "binary/battle" );
+   fw.Write(fs, "binary/battle");
 }

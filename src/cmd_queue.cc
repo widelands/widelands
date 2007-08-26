@@ -50,7 +50,7 @@ Cmd_Queue::~Cmd_Queue(void)
  * game loading (while in game)
  */
 void Cmd_Queue::flush(void) {
-	while(!m_cmds.empty()) {
+	while (!m_cmds.empty()) {
 		delete m_cmds.top().cmd;
 		m_cmds.pop();
 	}
@@ -87,7 +87,7 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 	int cnt = 0;
 
 
-	while(!m_cmds.empty()) {
+	while (!m_cmds.empty()) {
 		BaseCommand* c = m_cmds.top().cmd;
 		if (final - c->get_duetime() <= 0)
 			break;

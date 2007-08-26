@@ -28,27 +28,27 @@ MapTriggerManager::MapTriggerManager() {}
 
 
 MapTriggerManager::~MapTriggerManager() {
-   for( uint i = 0; i < m_triggers.size(); i++)
+   for (uint i = 0; i < m_triggers.size(); i++)
       delete m_triggers[i];
-   m_triggers.resize( 0 );
+   m_triggers.resize(0);
 }
 
 
-bool MapTriggerManager::register_new_trigger( Trigger* mv ) {
+bool MapTriggerManager::register_new_trigger(Trigger* mv) {
    // check if this trigger is already known
-   if( get_trigger( mv->get_name() ) )
+   if (get_trigger(mv->get_name()))
          return 0;
 
-   m_triggers.push_back( mv );
+   m_triggers.push_back(mv);
    return true;
 }
 
 
-Trigger* MapTriggerManager::get_trigger( const char* name ) {
+Trigger* MapTriggerManager::get_trigger(const char* name) {
    uint i;
    Trigger* retval = 0;
-   for( i = 0; i < m_triggers.size(); i++) {
-      if( !strcmp( m_triggers[i]->get_name(), name ) ) {
+   for (i = 0; i < m_triggers.size(); i++) {
+      if (!strcmp(m_triggers[i]->get_name(), name)) {
          retval = m_triggers[i];
          break;
 		}
@@ -58,12 +58,12 @@ Trigger* MapTriggerManager::get_trigger( const char* name ) {
 }
 
 
-void MapTriggerManager::delete_trigger( const char* name ) {
-   for( uint i = 0; i < m_triggers.size(); i++) {
-      if( !strcmp( m_triggers[i]->get_name(), name ) ) {
+void MapTriggerManager::delete_trigger(const char* name) {
+   for (uint i = 0; i < m_triggers.size(); i++) {
+      if (!strcmp(m_triggers[i]->get_name(), name)) {
          delete m_triggers[i];
          m_triggers[i] = m_triggers[m_triggers.size() - 1];
-         m_triggers.resize( m_triggers.size() - 1 );
+         m_triggers.resize(m_triggers.size() - 1);
          break;
 		}
 	}
@@ -72,9 +72,9 @@ void MapTriggerManager::delete_trigger( const char* name ) {
 
 void MapTriggerManager::delete_unreferenced_triggers() {
    uint i = 0;
-   while( i < m_triggers.size() ) {
+   while (i < m_triggers.size()) {
       Trigger* tr = m_triggers[i];
-      if( tr->get_referencers().empty() ) {
+      if (tr->get_referencers().empty()) {
          delete_trigger(tr->get_name());
          i = 0;
          continue;

@@ -54,7 +54,7 @@ void Widelands_Map_Map_Object_Loader::register_object(Editor_Game_Base* egbase, 
 Map_Object* Widelands_Map_Map_Object_Loader::get_object_by_file_index(uint n) {
    // This check should rather be an assert(), but we get more information
    // from a throw and time's not soo much an issue here
-   if(!is_object_known(n))
+   if (!is_object_known(n))
       throw wexception("Widelands_Map_Map_Object_Loader::get_object_by_file_index(): Map Object %i is not known!\n", n);
 
    return m_objects[n];
@@ -73,8 +73,8 @@ void Widelands_Map_Map_Object_Loader::mark_object_as_loaded(Map_Object* obj) {
 int Widelands_Map_Map_Object_Loader::get_nr_unloaded_objects(void) {
    std::map<Map_Object*,bool>::iterator i=m_loaded_obj.begin();
    int retval=0;
-   while(i!=m_loaded_obj.end()) {
-      if(!i->second) retval++;
+   while (i!=m_loaded_obj.end()) {
+      if (!i->second) retval++;
       ++i;
 	}
    return retval;

@@ -65,13 +65,13 @@ bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
    index += x / (WARE_MENU_PIC_WIDTH +4) + 1;
    std::string str;
 
-   assert( m_warelists.size() );
+   assert(m_warelists.size());
 
-   if(index > (m_warelists[0]->get_nrwareids())) {
+   if (index > (m_warelists[0]->get_nrwareids())) {
       m_curware->set_text("");
 	}
    else {
-      if(m_type == WORKER) {
+      if (m_type == WORKER) {
          index--;
          str=m_player->tribe().get_worker_descr(index)->descname();
          m_curware->set_text(str.c_str());
@@ -115,7 +115,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 /*
  * Delete all ware lists
  */
-void WaresDisplay::remove_all_warelists( void ) {
+void WaresDisplay::remove_all_warelists(void) {
    m_warelists.clear();
 }
 
@@ -133,14 +133,14 @@ void WaresDisplay::draw(RenderTarget* dst)
    int number = m_player->tribe().get_nrwares();
    bool is_worker = false;
 
-   if( m_type == WORKER ) {
+   if (m_type == WORKER) {
       number = m_player->tribe().get_nrworkers();
       is_worker = true;
 	}
    int totid=0;
 	for (int id = 0; id < number; ++id, ++totid) {
       uint totalstock = 0;
-      for( uint i = 0; i < m_warelists.size(); i++)
+      for (uint i = 0; i < m_warelists.size(); i++)
          totalstock += m_warelists[i]->stock(id);
 
 		draw_ware(*dst, p, id, totalstock, is_worker);

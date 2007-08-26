@@ -81,11 +81,11 @@ int S2_Map_Loader::preload_map(bool scenario) {
 
    load_s2mf_header();
 
-   if(!World::exists_world(m_map->get_world_name())) {
+   if (!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
 	}
 
-   if(scenario) {
+   if (scenario) {
       // Load this as scenario.
       // there is no such a think as S2 scenarios, therefore
       // set the tribes and some default names
@@ -102,7 +102,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
          "Rufus",
 		};
 
-      for(int i=1; i<=m_map->get_nrplayers(); i++) {
+      for (int i=1; i<=m_map->get_nrplayers(); i++) {
          m_map->set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
          m_map->set_scenario_player_name(i, names[i-1]);
 		}
@@ -206,7 +206,7 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
 			file->Data(dw); // more alignment junk
 	      y++;
 		}
-	} catch(...) {
+	} catch (...) {
 		free(section);
 		throw;
 	}
@@ -246,7 +246,7 @@ void S2_Map_Loader::load_s2mf_header()
 	m_map->set_description(_("Bluebyte Settlers II Map. No comment defined!").c_str());
 
     // This is not the name, this is the directory of the world, so please do not translate it.
-	switch(header.uses_world) {
+	switch (header.uses_world) {
 		case 0: m_map->set_world_name("greenland"); break;
 		case 1: m_map->set_world_name("blackland"); break;
 		case 2: m_map->set_world_name("winterland"); break;
@@ -319,7 +319,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
-				switch((int)c) {
+				switch ((int)c) {
 					case 0x00: c=0; break;
 					case 0x01: c=1; break;
 					case 0x02: c=2; break;
@@ -362,7 +362,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
-				switch((int)c) {
+				switch ((int)c) {
 					case 0x00: c=0; break;
 					case 0x01: c=1; break;
 					case 0x02: c=2; break;
@@ -432,7 +432,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			uint i = y * mapwidth;
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				// ignore everything but HQs
-				if(section[i]==0x80) {
+				if (section[i]==0x80) {
 					if (bobs[i] < m_map->get_nrplayers())
 						m_map->set_starting_pos(bobs[i]+1, Coords(x, y));
 				}
@@ -461,7 +461,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				const char *bobname = 0;
 
-				switch(section[i]) {
+				switch (section[i]) {
 					case 0:
 						break;
 					case 0x01: bobname = "bunny"; break;
@@ -482,7 +482,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					int idx = m_map->m_world->get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
-					for(uint z=0; z<CRITTER_PER_DEFINITION; z++)
+					for (uint z=0; z<CRITTER_PER_DEFINITION; z++)
 						game->create_bob(Coords(x, y), idx);
 				}
 			}
@@ -505,7 +505,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
         /*
           SWD-SECTION 9: Buildings
 		   What kind of buildings can be build?
-		     0x01 == flags (?? )
+		     0x01 == flags (??)
 		     0x02 == buildings (small) (??)
 		     0x04 == buildings
 		     0x09 == flags
@@ -566,7 +566,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 
-				switch(c & 0xF8) {
+				switch (c & 0xF8) {
 				case 0x40: res = "coal"; amount=c&7; break;
 				case 0x48: res = "iron"; amount=c&7; break;
 				case 0x50: res = "gold"; amount=c&7; break;
@@ -575,9 +575,9 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 
             uchar nres=0;
-            if(res!="") {
+            if (res!="") {
                nres=m_map->get_world()->get_resource(res.c_str());
-               if(static_cast<signed char>(nres)==-1)
+               if (static_cast<signed char>(nres)==-1)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
 				}
             int real_amount=((int)(2.86*(float)amount));
@@ -634,7 +634,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				const Map::Index index = Map::get_index(location, mapwidth);
 				c = bobs[index];
 				if (buildings[index] == 0x78) {
-					switch(c) {
+					switch (c) {
 						case BOB_STONE1: bobname = "stones1"; break;
 						case BOB_STONE2: bobname = "stones2"; break;
 						case BOB_STONE3: bobname = "stones3"; break;
@@ -756,7 +756,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 			}
 	}
-	catch(...)
+	catch (...)
 	{
 		if (section)
 			free(section);

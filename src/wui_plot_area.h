@@ -58,11 +58,11 @@ struct WUIPlot_Area : public UI::Panel {
       void set_sample_rate(uint id); // in milliseconds
 
       // set what to plot
-      void register_plot_data( uint id, const std::vector<uint>* data , RGBColor clr);
-      void show_plot( uint id, bool t );
+      void register_plot_data(uint id, const std::vector<uint>* data , RGBColor clr);
+      void show_plot(uint id, bool t);
 
       // set plotmode
-      void set_plotmode( int id ) { m_plotmode = id; }
+      void set_plotmode(int id) { m_plotmode = id; }
 
    private:
       struct __plotdata {

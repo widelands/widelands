@@ -205,10 +205,10 @@ m_event_chain(chain)
 		 _("Cancel"));
 
    // Add conditional
-   if( cond ) {
-      std::vector< TriggerConditional_Factory::Token >* tokens = cond->get_infix_tokenlist( );
-      for( uint i = 0; i < tokens->size(); i++) {
-         TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token( (*tokens)[i] );
+   if (cond) {
+      std::vector< TriggerConditional_Factory::Token >* tokens = cond->get_infix_tokenlist();
+      for (uint i = 0; i < tokens->size(); i++) {
+         TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token((*tokens)[i]);
 	      assert(t.token <= TriggerConditional_Factory::TRIGGER);
 			m_construction->add
 		      (t.token == TriggerConditional_Factory::TRIGGER ?
@@ -251,16 +251,16 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
       std::vector<TriggerConditional_Factory::Token> tok;
 
 	const uint construction_size = m_construction->size();
-	for(uint i = 0; i < construction_size; ++i)
+	for (uint i = 0; i < construction_size; ++i)
 		tok.push_back((*m_construction)[i]);
 
       try {
-         if( !tok.size() ) throw TriggerConditional_Factory::SyntaxError();
-         TriggerConditional* cond = TriggerConditional_Factory::create_from_infix( m_event_chain, tok );
-         assert( cond );
+         if (!tok.size()) throw TriggerConditional_Factory::SyntaxError();
+         TriggerConditional* cond = TriggerConditional_Factory::create_from_infix(m_event_chain, tok);
+         assert(cond);
          m_given_cond = cond;
-         end_modal( 1 );
-		} catch(  TriggerConditional_Factory::SyntaxError err ) {
+         end_modal(1);
+		} catch (TriggerConditional_Factory::SyntaxError err) {
 			UI::Modal_Message_Box mb
 				(m_parent,
 				 _("Syntax Error"),
@@ -296,9 +296,9 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger() {
 	delete &m_construction->get_selected();
 
 	m_construction->remove_selected();
-      m_mvup_btn->set_enabled( false );
-      m_mvdown_btn->set_enabled( false );
-      m_delete_btn->set_enabled( false );
+      m_mvup_btn->set_enabled(false);
+      m_mvdown_btn->set_enabled(false);
+      m_delete_btn->set_enabled(false);
 }
 
 
@@ -319,12 +319,12 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
  * the listbox got selected
  */
 void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint) {
-   m_insert_btn->set_enabled( true );
+   m_insert_btn->set_enabled(true);
 }
 void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint i) {
 	m_mvdown_btn->set_enabled(i + 1 < m_construction->size());
 	m_mvup_btn->set_enabled(i > 0);
-   m_delete_btn->set_enabled( true );
+   m_delete_btn->set_enabled(true);
 }
 
 /*

@@ -83,7 +83,7 @@ m_remove_last_player
    m_posy=posy;
 
    int i=0;
-   for(i=0; i<MAX_PLAYERS; i++) {
+   for (i=0; i<MAX_PLAYERS; i++) {
       m_plr_names[i]=0;
       m_plr_set_pos_buts[i]=0;
       m_plr_set_tribes_buts[i]=0;
@@ -117,14 +117,14 @@ void Editor_Player_Menu::update(void) {
 		dynamic_cast<const Editor_Interactive &>(*get_parent()).egbase().map();
 	const Player_Number nr_players = map.get_nrplayers();
    std::string text="";
-   if(nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
+   if (nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
    text+=static_cast<char>((nr_players%10) + 0x30);
 
    m_nr_of_players_ta->set_text(text.c_str());
 
    // Now remove all the unneeded stuff
    int i=0;
-   for(i=nr_players; i<MAX_PLAYERS; i++) {
+   for (i=nr_players; i<MAX_PLAYERS; i++) {
          delete m_plr_names[i];
          m_plr_names[i]=0;
          delete m_plr_set_pos_buts[i];
@@ -144,21 +144,21 @@ void Editor_Player_Menu::update(void) {
 
 
    // And recreate the needed
-   for(i=0; i<nr_players; i++) {
+   for (i=0; i<nr_players; i++) {
       // Check if starting position is valid
       bool start_pos_valid=true;
 		const Coords start_pos = map.get_starting_pos(i + 1);
 		if (start_pos.isNull()) start_pos_valid = false;
 
 		int posx = spacing;
-      if(!m_plr_names[i]) {
+      if (!m_plr_names[i]) {
           m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
           posx+=140+spacing;
 			m_plr_names[i]->set_text(map.get_scenario_player_name(i + 1).c_str());
 		}
 
-      if(!m_plr_set_tribes_buts[i]) {
+      if (!m_plr_set_tribes_buts[i]) {
 			m_plr_set_tribes_buts[i] =
 				new UI::IDButton<Editor_Player_Menu, const Player_Number>
 				(this,
@@ -177,7 +177,7 @@ void Editor_Player_Menu::update(void) {
 		}
 
       // Set Starting pos button
-      if(!m_plr_set_pos_buts[i]) {
+      if (!m_plr_set_pos_buts[i]) {
 			m_plr_set_pos_buts[i] =
 				new UI::IDButton<Editor_Player_Menu, const Player_Number>
 				(this,
@@ -192,10 +192,10 @@ void Editor_Player_Menu::update(void) {
       text+=static_cast<char>(((i+1)/10) + 0x30);
       text+=static_cast<char>(((i+1)%10) + 0x30);
       text+="_pos.png";
-      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture( PicMod_Game,  text.c_str() ));
+      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game,  text.c_str()));
 #if 0
       // Build infrastructure but
-      if(!m_plr_make_infrastructure_buts[i]) {
+      if (!m_plr_make_infrastructure_buts[i]) {
 			m_plr_make_infrastructure_buts[i] =
 				new UI::IDButton<Editor_Player_Menu, const Player_Number>
 				(this,
@@ -209,7 +209,7 @@ void Editor_Player_Menu::update(void) {
 		m_plr_make_infrastructure_buts[i]->set_enabled(start_pos_valid);
 
       // Allowed buildings
-      if(!m_plr_allowed_buildings[i]) {
+      if (!m_plr_allowed_buildings[i]) {
 			m_plr_allowed_buildings[i] =
 				new UI::IDButton<Editor_Player_Menu, const Player_Number>
 				(this,
@@ -238,7 +238,7 @@ void Editor_Player_Menu::clicked_add_player() {
       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
       char c2= (nr_players%10) + 0x30;
       std::string name=_("Player ");
-      if(c1) name.append(1,c1);
+      if (c1) name.append(1,c1);
       name.append(1,c2);
 		map.set_nrplayers(nr_players);
 		map.set_scenario_player_name(nr_players, name);
@@ -311,12 +311,12 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
    // Tribe button has been clicked
 	if (not parent.is_player_tribe_referenced(n + 1)) {
       std::string t = m_plr_set_tribes_buts[n]->get_title();
-      if(!Tribe_Descr::exists_tribe(t))
+      if (!Tribe_Descr::exists_tribe(t))
          throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
       uint i;
-      for(i=0; i<m_tribes.size(); i++)
-         if(m_tribes[i]==t) break;
-      if(i==m_tribes.size()-1) t=m_tribes[0];
+      for (i=0; i<m_tribes.size(); i++)
+         if (m_tribes[i]==t) break;
+      if (i==m_tribes.size()-1) t=m_tribes[0];
       else t=m_tribes[++i];
 		parent.egbase().map().set_scenario_player_tribe(n+1,t);
 		parent.set_need_save(true);
@@ -380,7 +380,7 @@ void Editor_Player_Menu::name_changed(int m) {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
 	Map & map = parent.egbase().map();
-   if(text=="") {
+   if (text=="") {
 		text = map.get_scenario_player_name(m + 1);
       m_plr_names[m]->set_text(text.c_str());
 	}
@@ -405,7 +405,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
    assert(start_pos.is_valid());
 
 	Player * p = editor.get_player(n);
-   if(!p) {
+   if (!p) {
       // This player is unknown, register it, place a hq and reference the tribe
       // so that this tribe can not be changed
 		editor.add_player
@@ -445,7 +445,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
       picsname+=static_cast<char>((n/10) + 0x30);
       picsname+=static_cast<char>((n%10) + 0x30);
       picsname+="_starting_pos.png";
-      int picid=g_gr->get_picture( PicMod_Game,  picsname.c_str() );
+      int picid=g_gr->get_picture(PicMod_Game,  picsname.c_str());
       // Remove old overlay if any
 		overlay_manager.remove_overlay(start_pos,picid);
 	}

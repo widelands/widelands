@@ -112,7 +112,7 @@ bool Game::can_start()
 
 	// we need exactly one local player
 	local_num = -1;
-	for(i = 1; i <= MAX_PLAYERS; i++) {
+	for (i = 1; i <= MAX_PLAYERS; i++) {
 		if (!get_player(i))
 			continue;
 
@@ -138,14 +138,14 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	Map *m = new Map();
 	set_map(m);
 
-	FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
+	FileSystem* fs = g_fs->MakeSubFileSystem(mapname);
 	m_maploader = new Widelands_Map_Loader(*fs, m);
 	UI::ProgressWindow loaderUI;
 	GameTips tips (loaderUI);
 
 	// Loading the locals for the campaign
 	std::string camp_textdomain("");
-	if( scenario )
+	if (scenario)
 		{
 		loaderUI.step (_("Preloading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 		camp_textdomain.append(mapname);
@@ -182,14 +182,14 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	loaderUI.step (_("Loading a map")); // Must be printed before loading the scenarios textdomain, else it won't be translated.
 
 	// Reload campaign textdomain
-	if( scenario )
+	if (scenario)
 		i18n::grab_textdomain(camp_textdomain.c_str());
 
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
 
-	if( scenario )
+	if (scenario)
 		i18n::release_textdomain();
 
 	return run(loaderUI);
@@ -410,7 +410,7 @@ void Game::postload()
  * The setup and loading of a game happens (or rather: will happen) in three
  * stages.
  * 1.  First of all, the host (or single player) configures the game. During this
- *     time, only short descriptions of the game data (such as map headers )are
+ *     time, only short descriptions of the game data (such as map headers)are
  *     loaded to minimize loading times.
  * 2a. Once the game is about to start and the configuration screen is finished,
  *     all logic data (map, tribe information, building information) is loaded
@@ -565,7 +565,7 @@ void Game::think(void)
 			frametime = 1000;
 
 		if (m_replayreader) {
-			for(;;) {
+			for (;;) {
 				PlayerCommand* cmd = m_replayreader->GetPlayerCommand(get_gametime() + frametime);
 				if (!cmd)
 					break;
@@ -640,7 +640,7 @@ void Game::cleanup_for_load
 		delete *it;
 	m_tribes.resize(0);
 	get_cmdqueue()->flush();
-	while(cpl.size()) {
+	while (cpl.size()) {
 		delete cpl[cpl.size()-1];
 		cpl.pop_back();
 	}
@@ -756,20 +756,20 @@ void Game::sample_statistics()
 {
 	// Update general stats
 	Map* m = get_map();
-	std::vector< uint > land_size; land_size.resize( m->get_nrplayers() );
-	std::vector< uint > nr_buildings; nr_buildings.resize( m->get_nrplayers() );
-	std::vector< uint > nr_kills; nr_kills.resize( m->get_nrplayers() );
-	std::vector< uint > miltary_strength; miltary_strength.resize( m->get_nrplayers() );
-	std::vector< uint > nr_workers; nr_workers.resize( m->get_nrplayers() );
-	std::vector< uint > nr_wares; nr_wares.resize( m->get_nrplayers() );
-	std::vector< uint > productivity; productivity.resize( m->get_nrplayers() );
+	std::vector< uint > land_size; land_size.resize(m->get_nrplayers());
+	std::vector< uint > nr_buildings; nr_buildings.resize(m->get_nrplayers());
+	std::vector< uint > nr_kills; nr_kills.resize(m->get_nrplayers());
+	std::vector< uint > miltary_strength; miltary_strength.resize(m->get_nrplayers());
+	std::vector< uint > nr_workers; nr_workers.resize(m->get_nrplayers());
+	std::vector< uint > nr_wares; nr_wares.resize(m->get_nrplayers());
+	std::vector< uint > productivity; productivity.resize(m->get_nrplayers());
 
-	std::vector< uint > nr_production_sites; nr_production_sites.resize( m->get_nrplayers() );
+	std::vector< uint > nr_production_sites; nr_production_sites.resize(m->get_nrplayers());
 
 	// We walk the map, to gain all needed informations
-	for(ushort y = 0; y < m->get_height(); y++) {
-		for(ushort x = 0; x < m->get_width(); x++) {
-			Field* f = m->get_field( Coords( x, y ) );
+	for (ushort y = 0; y < m->get_height(); y++) {
+		for (ushort x = 0; x < m->get_width(); x++) {
+			Field* f = m->get_field(Coords(x, y));
 
 			// First, ownership of this field
 			if (f->get_owned_by())
@@ -784,21 +784,21 @@ void Game::sample_statistics()
 					nr_buildings[ build->get_owner()->get_player_number() - 1 ]++;
 
 					// If it is a productionsite, add its productivity
-					if( build->get_building_type() == Building::PRODUCTIONSITE ) {
+					if (build->get_building_type() == Building::PRODUCTIONSITE) {
 						nr_production_sites[  build->get_owner()->get_player_number() - 1 ]++;
-						productivity[ build->get_owner()->get_player_number() - 1 ] += static_cast<ProductionSite*>( build )->get_statistics_percent();
+						productivity[ build->get_owner()->get_player_number() - 1 ] += static_cast<ProductionSite*>(build)->get_statistics_percent();
 					}
 				}
 			}
 
 			// Now, walk the bobs
-			if( f->get_first_bob() ) {
+			if (f->get_first_bob()) {
 				Bob* b = f->get_first_bob();
 				do {
-					if( b->get_bob_type() == Bob::WORKER ) {
+					if (b->get_bob_type() == Bob::WORKER) {
 						Worker* w = static_cast<Worker*>(b);
 
-						switch( w->get_worker_type() ) {
+						switch (w->get_worker_type()) {
 							case Worker_Descr::SOLDIER:
 							{
 								Soldier* s = static_cast<Soldier*>(w);
@@ -810,27 +810,27 @@ void Game::sample_statistics()
 							default: break;
 						}
 					}
-				} while( (b = b->get_next_bob() ) );
+				} while ((b = b->get_next_bob()));
 			}
 		}
 	}
 
 	// Number of workers / wares
-	for(uint i = 0; i < m->get_nrplayers(); i++) {
+	for (uint i = 0; i < m->get_nrplayers(); i++) {
 		Player* plr = get_player(i+1);
 
 		uint wostock = 0;
 		uint wastock = 0;
 
-		for(uint j = 0; plr && j < plr->get_nr_economies(); j++) {
-			Economy* eco = plr->get_economy_by_number( j );
+		for (uint j = 0; plr && j < plr->get_nr_economies(); j++) {
+			Economy* eco = plr->get_economy_by_number(j);
 
-			for( int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
-				wastock += eco->stock_ware( wareid );
-			for( int workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
-				if( plr->tribe().get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER)
+			for (int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
+				wastock += eco->stock_ware(wareid);
+			for (int workerid = 0; workerid < plr->tribe().get_nrworkers(); workerid++) {
+				if (plr->tribe().get_worker_descr(workerid)->get_worker_type() == Worker_Descr::CARRIER)
 					continue;
-				wostock += eco->stock_worker( workerid );
+				wostock += eco->stock_worker(workerid);
 			}
 		}
 		nr_wares[ i ] = wastock;
@@ -838,21 +838,21 @@ void Game::sample_statistics()
 	}
 
 	// Now, divide the statistics
-	for(uint i = 0; i < m->get_nrplayers(); i++) {
+	for (uint i = 0; i < m->get_nrplayers(); i++) {
 		if (productivity[ i ])
 			productivity[ i ] /= nr_production_sites[ i ];
 	}
 
 	// Now, push this on the general statistics
-	m_general_stats.resize( m->get_nrplayers() );
-	for( uint i = 0; i < m->get_nrplayers(); i++) {
-		m_general_stats[i].land_size.push_back( land_size[i] );
-		m_general_stats[i].nr_buildings.push_back( nr_buildings[i] );
-		m_general_stats[i].nr_kills.push_back( nr_kills[i] );
-		m_general_stats[i].miltary_strength.push_back( miltary_strength[i] );
-		m_general_stats[i].nr_workers.push_back( nr_workers[i] );
-		m_general_stats[i].nr_wares.push_back( nr_wares[i]  );
-		m_general_stats[i].productivity.push_back( productivity[i] );
+	m_general_stats.resize(m->get_nrplayers());
+	for (uint i = 0; i < m->get_nrplayers(); i++) {
+		m_general_stats[i].land_size.push_back(land_size[i]);
+		m_general_stats[i].nr_buildings.push_back(nr_buildings[i]);
+		m_general_stats[i].nr_kills.push_back(nr_kills[i]);
+		m_general_stats[i].miltary_strength.push_back(miltary_strength[i]);
+		m_general_stats[i].nr_workers.push_back(nr_workers[i]);
+		m_general_stats[i].nr_wares.push_back(nr_wares[i]);
+		m_general_stats[i].productivity.push_back(productivity[i]);
 	}
 }
 
@@ -862,7 +862,7 @@ void Game::sample_statistics()
  *
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (from the time when statistics were kept in
- *       \ref Interactive_Player )
+ *       \ref Interactive_Player)
  *   1 - current version
  */
 void Game::ReadStatistics(FileRead& fr, uint version)
@@ -876,7 +876,7 @@ void Game::ReadStatistics(FileRead& fr, uint version)
 		uint entries = fr.Unsigned16();
 		m_general_stats.resize(get_map()->get_nrplayers());
 
-		for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+		for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
 			if (get_player(i+1)) {
 				m_general_stats[i].land_size.resize(entries);
 				m_general_stats[i].nr_workers.resize(entries);
@@ -888,11 +888,11 @@ void Game::ReadStatistics(FileRead& fr, uint version)
 			}
 		}
 
-		for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+		for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
 			if (!get_player(i+1))
 				continue;
 
-			for(uint j = 0; j < m_general_stats[i].land_size.size(); j++) {
+			for (uint j = 0; j < m_general_stats[i].land_size.size(); j++) {
 				m_general_stats[i].land_size[j] = fr.Unsigned32();
 				m_general_stats[i].nr_workers[j] = fr.Unsigned32();
 				m_general_stats[i].nr_buildings[j] = fr.Unsigned32();
@@ -918,7 +918,7 @@ void Game::WriteStatistics(FileWrite& fw)
 	// First, we write the size of the statistics arrays
 	uint entries = 0;
 
-	for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+	for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
 		if (get_player(i+1) && m_general_stats.size()) {
 			entries = m_general_stats[i].land_size.size();
 			break;
@@ -927,11 +927,11 @@ void Game::WriteStatistics(FileWrite& fw)
 
 	fw.Unsigned16(entries);
 
-	for(uint i = 0; i < get_map()->get_nrplayers(); i++) {
+	for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
 		if (!get_player(i+1))
 			continue;
 
-		for( uint j = 0; j < entries; j++) {
+		for (uint j = 0; j < entries; j++) {
 			fw.Unsigned32(m_general_stats[i].land_size[j]);
 			fw.Unsigned32(m_general_stats[i].nr_workers[j]);
 			fw.Unsigned32(m_general_stats[i].nr_buildings[j]);

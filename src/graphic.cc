@@ -195,7 +195,7 @@ void Graphic::flush(int mod)
 
 	// Flush pictures
 
-	for(i = 0; i < m_pictures.size(); i++) {
+	for (i = 0; i < m_pictures.size(); i++) {
 		Picture* pic = &m_pictures[i];
 
 		//      NoLog("Flushing picture: %i while flushing all!\n", i);
@@ -228,12 +228,12 @@ void Graphic::flush(int mod)
 
 	// Flush game items
 	if (!mod || mod & PicMod_Game) {
-		for(i = 0; i < m_maptextures.size(); i++)
+		for (i = 0; i < m_maptextures.size(); i++)
 			delete m_maptextures[i];
 
 		m_maptextures.resize(0);
 
-		for(i = 0; i < m_animations.size(); i++)
+		for (i = 0; i < m_animations.size(); i++)
 			delete m_animations[i];
 
 		m_animations.resize(0);
@@ -254,7 +254,7 @@ void Graphic::flush(int mod)
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-uint Graphic::get_picture(int mod, const char* fname )
+uint Graphic::get_picture(int mod, const char* fname)
 {
 	std::vector<Picture>::size_type id;
 
@@ -268,8 +268,8 @@ uint Graphic::get_picture(int mod, const char* fname )
 
 		try {
 			bmp = LoadImage(fname);
-			//log( "Graphic::get_picture(): loading picture '%s'\n", fname);
-		} catch(std::exception& e) {
+			//log("Graphic::get_picture(): loading picture '%s'\n", fname);
+		} catch (std::exception& e) {
 			log("WARNING: Couldn't open %s: %s\n", fname, e.what());
 			return 0;
 		}
@@ -423,7 +423,7 @@ void Graphic::get_picture_size(const uint pic, uint & w, uint & h)
 
 void Graphic::save_png(uint pic_index, FileWrite* fw)
 {
-	Surface* surf = get_picture_surface( pic_index );
+	Surface* surf = get_picture_surface(pic_index);
 
 	// Save a png
 	png_structp png_ptr = png_create_write_struct
@@ -434,7 +434,7 @@ void Graphic::save_png(uint pic_index, FileWrite* fw)
 		throw wexception("Graphic::save_png: Couldn't create png struct!\n");
 
 	// Set another write function
-	png_set_write_fn( png_ptr, fw, &Graphic::m_png_write_function, 0);
+	png_set_write_fn(png_ptr, fw, &Graphic::m_png_write_function, 0);
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 
@@ -462,15 +462,15 @@ void Graphic::save_png(uint pic_index, FileWrite* fw)
 	// Strip data down
 	png_set_filler(png_ptr, 0, PNG_FILLER_AFTER);
 
-	png_set_packing( png_ptr );
+	png_set_packing(png_ptr);
 
 	png_bytep row = new png_byte[4*surf->get_w()];
 
 	// Write each row
-	for( uint y = 0; y < surf->get_h(); y++ ) {
+	for (uint y = 0; y < surf->get_h(); y++) {
 		uint i = 0;
 
-		for( uint x = 0; x < surf->get_w(); x++ ) {
+		for (uint x = 0; x < surf->get_w(); x++) {
 			uchar r, g, b, a;
 			SDL_GetRGBA
 			(surf->get_pixel(x, y),
@@ -483,13 +483,13 @@ void Graphic::save_png(uint pic_index, FileWrite* fw)
 			i += 4;
 		}
 
-		png_write_row( png_ptr, row );
+		png_write_row(png_ptr, row);
 	}
 
 	delete row;
 
 	// End write
-	png_write_end(png_ptr, info_ptr );
+	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
@@ -526,7 +526,7 @@ uint Graphic::create_surface(int w, int h)
 void Graphic::free_surface(uint picid)
 {
 	assert(picid < m_pictures.size() &&
-			( m_pictures[picid].mod == -1 ||
+			(m_pictures[picid].mod == -1 ||
 			  m_pictures[picid].mod == PicMod_Font));
 
 	Picture* pic = &m_pictures[picid];
@@ -567,7 +567,7 @@ uint Graphic::get_maptexture(const char & fnametempl, const uint frametime)
 	try {
 		m_maptextures.push_back
 		(new Texture(fnametempl, frametime, m_screen.format()));
-	} catch(std::exception& e) {
+	} catch (std::exception& e) {
 		log("Failed to load maptexture %s: %s\n", &fnametempl, e.what());
 		return 0;
 	}
@@ -580,16 +580,16 @@ uint Graphic::get_maptexture(const char & fnametempl, const uint frametime)
 */
 void Graphic::animate_maptextures(uint time)
 {
-	for(uint i = 0; i < m_maptextures.size(); i++)
+	for (uint i = 0; i < m_maptextures.size(); i++)
 		m_maptextures[i]->animate(time);
 }
 
 /**
  * reset that the map texture have been animated
  */
-void Graphic::reset_texture_animation_reminder( void )
+void Graphic::reset_texture_animation_reminder(void)
 {
-	for(uint i = 0; i < m_maptextures.size(); i++)
+	for (uint i = 0; i < m_maptextures.size(); i++)
 		m_maptextures[i]->reset_was_animated();
 }
 
@@ -669,11 +669,11 @@ const char* Graphic::get_maptexture_picture(uint id)
 /**
  * Save and load pictures
  */
-void Graphic::m_png_write_function( png_structp png_ptr, png_bytep data,
-				    png_size_t length )
+void Graphic::m_png_write_function(png_structp png_ptr, png_bytep data,
+				    png_size_t length)
 {
 	FileWrite* fw = static_cast<FileWrite*>(png_get_io_ptr(png_ptr));
-	fw->Data( data, length );
+	fw->Data(data, length);
 }
 
 /**
@@ -733,15 +733,15 @@ Texture* Graphic::get_maptexture_data(uint id)
 /**
  * \return The road textures
 */
-Surface* Graphic::get_road_texture( int roadtex)
+Surface* Graphic::get_road_texture(int roadtex)
 {
 	if (not m_roadtextures) {
 		// Load the road textures
 		m_roadtextures = new Road_Textures();
 		m_roadtextures->pic_road_normal = get_picture(PicMod_Game, ROAD_NORMAL_PIC);
-		m_roadtextures->pic_road_busy   = get_picture(PicMod_Game, ROAD_BUSY_PIC  );
-		get_picture_surface( m_roadtextures->pic_road_normal )->force_disable_alpha();
-		get_picture_surface( m_roadtextures->pic_road_busy )->force_disable_alpha();
+		m_roadtextures->pic_road_busy   = get_picture(PicMod_Game, ROAD_BUSY_PIC);
+		get_picture_surface(m_roadtextures->pic_road_normal)->force_disable_alpha();
+		get_picture_surface(m_roadtextures->pic_road_busy)->force_disable_alpha();
 	}
 
 	return get_picture_surface

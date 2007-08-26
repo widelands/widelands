@@ -53,11 +53,11 @@ Basic_Button::Basic_Button
 
 	switch (background_picture_id) {
 	default:
-	case 0: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but0.png" ); break;
-	case 1: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but1.png" ); break;
-	case 2: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but2.png" ); break;
-	case 3: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but3.png" ); break;
-	case 4: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but4.png" ); break;
+	case 0: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but0.png"); break;
+	case 1: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but1.png"); break;
+	case 2: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but2.png"); break;
+	case 3: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but3.png"); break;
+	case 4: m_pic_background = g_gr->get_picture(PicMod_UI,  "pics/but4.png"); break;
 	}
 
 }
@@ -152,7 +152,7 @@ void Basic_Button::draw(RenderTarget* dst)
 	// or the button stays pressed when it is pressed once
    RGBColor black(0,0,0);
 
-   if(!m_flat)
+   if (!m_flat)
 	{
 		assert(2 <= get_w());
 		assert(2 <= get_h());

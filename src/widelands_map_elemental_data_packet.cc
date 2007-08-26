@@ -44,34 +44,34 @@ throw(_wexception)
     i18n::grab_textdomain("maps");
 
    Profile prof;
-   prof.read( "elemental", 0, fs );
-   Section* s = prof.get_section( "global" );
+   prof.read("elemental", 0, fs);
+   Section* s = prof.get_section("global");
 
    // check packet version
-   int packet_version=s->get_int( "packet_version" );
+   int packet_version=s->get_int("packet_version");
 
-   if(packet_version == CURRENT_PACKET_VERSION) {
-      map->m_width= s->get_int( "map_w" );
-      map->m_height= s->get_int( "map_h" );
-      map->set_nrplayers( s->get_int("nr_players"));
+   if (packet_version == CURRENT_PACKET_VERSION) {
+      map->m_width= s->get_int("map_w");
+      map->m_height= s->get_int("map_h");
+      map->set_nrplayers(s->get_int("nr_players"));
 
       // World name
-      map->set_world_name( s->get_string("world"));
+      map->set_world_name(s->get_string("world"));
 
       // Name
-      map->set_name( s->get_string( "name" ));
+      map->set_name(s->get_string("name"));
 
       // Author
-      map->set_author( s->get_string( "author" ));
+      map->set_author(s->get_string("author"));
 
       // Descr
-      map->set_description( s->get_string( "descr" ));
+      map->set_description(s->get_string("descr"));
 
 	  // Loader background
       map->set_background(s->get_string("background"));
 
     // Release maps textdomain
-    i18n::release_textdomain( );
+    i18n::release_textdomain();
 
        return;
 	}
@@ -102,24 +102,24 @@ throw (_wexception)
 {
 
    Profile prof;
-   Section* s = prof.create_section( "global" );
+   Section* s = prof.create_section("global");
 
    // Packet version
-   s->set_int( "packet_version", CURRENT_PACKET_VERSION );
+   s->set_int("packet_version", CURRENT_PACKET_VERSION);
    // Map Dimension
    Map* map=egbase->get_map();
-   s->set_int( "map_w", map->get_width());
-   s->set_int( "map_h", map->get_height());
+   s->set_int("map_w", map->get_width());
+   s->set_int("map_h", map->get_height());
    // NR players
-   s->set_int( "nr_players", map->get_nrplayers());
+   s->set_int("nr_players", map->get_nrplayers());
    // Worldname
-   s->set_string( "world", map->get_world_name());
+   s->set_string("world", map->get_world_name());
    // Map Name
-   s->set_string( "name", map->get_name());
+   s->set_string("name", map->get_name());
    // Author
-   s->set_string( "author", map->get_author());
+   s->set_string("author", map->get_author());
    // Descr
-   s->set_string( "descr", map->get_description());
+   s->set_string("descr", map->get_description());
 
-   prof.write("elemental", false, fs );
+   prof.write("elemental", false, fs);
 }

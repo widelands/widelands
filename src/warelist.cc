@@ -31,7 +31,7 @@
  */
 WareList::~WareList()
 {
-	for(uint id = 0; id < m_wares.size(); id++) {
+	for (uint id = 0; id < m_wares.size(); id++) {
 		if (m_wares[id])
 			log("WareList: %i items of %i left.\n", m_wares[id], id);
 	}
@@ -60,7 +60,7 @@ void WareList::add(const WareList &wl)
 	if (wl.m_wares.size() > m_wares.size())
 		m_wares.reserve(wl.m_wares.size());
 
-	for(uint id = 0; id < wl.m_wares.size(); id++)
+	for (uint id = 0; id < wl.m_wares.size(); id++)
 		if (wl.m_wares[id])
 			add(id, wl.m_wares[id]);
 }
@@ -82,7 +82,7 @@ void WareList::remove(int id, int count)
 
 void WareList::remove(const WareList &wl)
 {
-	for(uint id = 0; id < wl.m_wares.size(); id++)
+	for (uint id = 0; id < wl.m_wares.size(); id++)
 		if (wl.m_wares[id])
 			remove(id, wl.m_wares[id]);
 }
@@ -108,7 +108,7 @@ bool WareList::operator==(const WareList &wl) const
 {
 	uint i = 0;
 
-	while(i < wl.m_wares.size()) {
+	while (i < wl.m_wares.size()) {
 		int count = wl.m_wares[i];
 		if (i < this->m_wares.size()) {
 			if (count != this->m_wares[i])
@@ -120,7 +120,7 @@ bool WareList::operator==(const WareList &wl) const
 		i++;
 	}
 
-	while(i < this->m_wares.size()) {
+	while (i < this->m_wares.size()) {
 		if (this->m_wares[i]) // wl1 has 0 stock per definition
 			return false;
 		i++;

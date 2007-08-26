@@ -161,7 +161,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 	p.directory = directory;
 	p.prof = prof;
 
-	for(line = 0; ; line++)
+	for (line = 0; ; line++)
 	{
 		try
 		{
@@ -181,7 +181,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			if (!command.size())
 				continue;
 
-			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
 				if (command[0] == s_parsemap[mapidx].name)
 					break;
 
@@ -192,7 +192,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 
 			m_actions.push_back(action);
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			log("WARNING: %s:%s:%i: %s\n", directory.c_str(), m_name.c_str(), line, e.what());
 		}
@@ -249,7 +249,7 @@ Cleanup
 */
 Immovable_Descr::~Immovable_Descr()
 {
-	while(m_programs.size()) {
+	while (m_programs.size()) {
 		delete m_programs.begin()->second;
 		m_programs.erase(m_programs.begin());
 	}
@@ -335,7 +335,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 
 	// Parse attributes
-	while(global->get_next_string("attrib", &string)) {
+	while (global->get_next_string("attrib", &string)) {
 		uint attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
@@ -349,7 +349,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 
 	// Parse the programs
-	while(global->get_next_string("program", &string))
+	while (global->get_next_string("program", &string))
 		parse_program(directory, prof, string);
 
 	if (m_programs.find("program") == m_programs.end()) {
@@ -398,7 +398,7 @@ void Immovable_Descr::parse_program(std::string directory, Profile* prof,
 		prog->parse(this, directory, prof);
 		m_programs[programname] = prog;
 	}
-	catch(...)
+	catch (...)
 	{
 			delete prog;
 
@@ -617,7 +617,7 @@ void Immovable::run_program(Game* g, bool killable)
 		if ((this->*action.function)(g, killable, action))
 			return;
 	}
-	while(origptr != m_program_ptr);
+	while (origptr != m_program_ptr);
 
 	molog("WARNING: %s has infinite loop in program %s\n", descr().name().c_str(),
 					m_program->get_name().c_str());
@@ -735,7 +735,7 @@ void ImmovableProgram::parse_transform
    std::vector<std::string> list;
 
 	split_string(cmd[1], list, ":");
-   if(list.size()==1) {
+   if (list.size()==1) {
       act->sparam1 = cmd[1];
       act->sparam2 = "world";
 	} else {
@@ -750,7 +750,7 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 {
 	Coords c = m_position;
 
-   if(!descr().get_owner_tribe() && (action.sparam2 != "world"))
+   if (!descr().get_owner_tribe() && (action.sparam2 != "world"))
       throw wexception("Should create tribe-immovable %s, but we are no tribe immovable!\n", action.sparam1.c_str());
 
 	if (!killable) { // we need to reschedule and remove self from act()
@@ -761,7 +761,7 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 
 	const Tribe_Descr* tribe=0;
 
-   if(action.sparam2 != "world")
+   if (action.sparam2 != "world")
       tribe=descr().get_owner_tribe(); // Not a world bob?
 
 	remove(g);
@@ -844,7 +844,7 @@ void PlayerImmovable::set_economy(Economy *e)
 	if (m_economy == e)
 		return;
 
-	for(uint i = 0; i < m_workers.size(); i++)
+	for (uint i = 0; i < m_workers.size(); i++)
 		m_workers[i]->set_economy(e);
 
 	m_economy = e;
@@ -875,7 +875,7 @@ This should only be called from Worker::set_location.
 */
 void PlayerImmovable::remove_worker(Worker *w)
 {
-	for(uint i = 0; i < m_workers.size(); i++) {
+	for (uint i = 0; i < m_workers.size(); i++) {
 		if (m_workers[i] == w) {
 			if (i < m_workers.size()-1)
 				m_workers[i] = m_workers[m_workers.size()-1];
@@ -929,7 +929,7 @@ Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
-	while(m_workers.size())
+	while (m_workers.size())
 		m_workers[0]->set_location(0);
 
 	if (m_owner) m_owner->egbase().player_immovable_notification

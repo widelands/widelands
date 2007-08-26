@@ -172,7 +172,7 @@ local int unzlocal_getByte OF((
     voidpf filestream,
     int *pi));
 
-local int unzlocal_getByte( const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, int* pi)
+local int unzlocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, int* pi)
 {
     unsigned char c;
     int err = (int)ZREAD(*pzlib_filefunc_def,filestream,&c,1);
@@ -1634,7 +1634,7 @@ local linkedlist_datablock_internal* allocate_new_datablock()
     return ldi;
 }
 
-local void free_datablock( linkedlist_datablock_internal* ldi)
+local void free_datablock(linkedlist_datablock_internal* ldi)
 {
     while (ldi!=NULL)
     {
@@ -1657,7 +1657,7 @@ local void init_linkedlist(linkedlist_data* ll)
 }
 */
 
-local int add_data_in_datablock( linkedlist_data* ll, const void* buf, uLong len)
+local int add_data_in_datablock(linkedlist_data* ll, const void* buf, uLong len)
 {
     linkedlist_datablock_internal* ldi;
     const unsigned char* from_copy;
@@ -2308,7 +2308,7 @@ extern int ZEXPORT zipOpenNewFileInZip (zipFile file, const char* filename, cons
                                  comment, method, level, 0);
 }
 
-local int zipFlushWriteBuffer( zip_internal* zi)
+local int zipFlushWriteBuffer(zip_internal* zi)
 {
     int err=ZIP_OK;
 
@@ -2346,7 +2346,7 @@ extern int ZEXPORT zipWriteInFileInZip (zipFile file, const void* buf, unsigned 
         }
 
 
-        if(err != ZIP_OK)
+        if (err != ZIP_OK)
             break;
 
         if ((zi->ci.method == Z_DEFLATED) && (!zi->ci.raw))
@@ -2476,7 +2476,7 @@ extern int ZEXPORT zipCloseFileInZip (zipFile file)
     return zipCloseFileInZipRaw (file,0,0);
 }
 
-extern int ZEXPORT zipClose ( zipFile file, const char* global_comment)
+extern int ZEXPORT zipClose (zipFile file, const char* global_comment)
 {
     zip_internal* zi;
     int err = 0;
@@ -2507,7 +2507,7 @@ extern int ZEXPORT zipClose ( zipFile file, const char* global_comment)
             if ((err==ZIP_OK) && (ldi->filled_in_this_block>0))
                 if (ZWRITE(zi->z_filefunc,zi->filestream,
                            ldi->data,ldi->filled_in_this_block)
-                              !=ldi->filled_in_this_block )
+                              !=ldi->filled_in_this_block)
                     err = ZIP_ERRNO;
 
             size_centraldir += ldi->filled_in_this_block;

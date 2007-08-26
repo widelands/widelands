@@ -230,7 +230,7 @@ void Journal::start_recording(std::string filename)
 
 	//TODO: m_recordname=FileSystem::FS_CanonicalizeName(filename);
 	m_recordname=filename;
-	if(m_recordname.empty())
+	if (m_recordname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
 	try{
@@ -240,7 +240,7 @@ void Journal::start_recording(std::string filename)
 		m_record=true;
 		log("Recording into %s\n", m_recordname.c_str());
 	}
-	catch(std::ofstream::failure e){
+	catch (std::ofstream::failure e){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Problem while opening record file %s for writing.\n",
@@ -276,7 +276,7 @@ void Journal::start_playback(std::string filename)
 
 	//TODO: m_playbackname=FileSystem::FS_CanonicalizeName(filename);
 	m_playbackname=filename;
-	if(m_playbackname.empty())
+	if (m_playbackname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
 	try{
@@ -289,7 +289,7 @@ void Journal::start_playback(std::string filename)
 		m_playback=true;
 		log("Playing back from %s\n", m_playbackname.c_str());
 	}
-	catch(std::ifstream::failure e){
+	catch (std::ifstream::failure e){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("ERROR: problem while opening playback file for reading. "
@@ -308,7 +308,7 @@ void Journal::stop_playback()
 {
 	m_playback=false;
 
-	if(m_playbackstream.is_open()) {
+	if (m_playbackstream.is_open()) {
 		m_playbackstream.close();
 	}
 }
@@ -331,7 +331,7 @@ void Journal::record_event(SDL_Event *e)
 		//If they were outside, they'd get executed on every mainloop
 		//iteration, which would yield a) huge files and b) lots of
 		//completely unneccessary overhad.
-		switch(e->type) {
+		switch (e->type) {
 		case SDL_KEYDOWN:
 			write((unsigned char)RFC_EVENT);
 			write((unsigned char)RFC_KEYDOWN);
@@ -386,7 +386,7 @@ void Journal::record_event(SDL_Event *e)
 			break;
 		}
 	}
-	catch(std::ofstream::failure f){
+	catch (std::ofstream::failure f){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to write to record file. Recording deactivated.\n");
@@ -413,11 +413,11 @@ bool Journal::read_event(SDL_Event *e)
 	try {
 		read(recordtype);
 
-		switch(recordtype) {
+		switch (recordtype) {
 		case RFC_EVENT:
 			read(eventtype);
 
-			switch(eventtype) {
+			switch (eventtype) {
 			case RFC_KEYDOWN:
 				e->type=SDL_KEYDOWN;
 				read(e->key.keysym.mod);
@@ -471,7 +471,7 @@ bool Journal::read_event(SDL_Event *e)
 
 		return haveevent;
 	}
-	catch(std::ifstream::failure f){
+	catch (std::ifstream::failure f){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");

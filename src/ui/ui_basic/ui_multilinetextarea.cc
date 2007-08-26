@@ -159,7 +159,7 @@ void Multiline_Textarea::draw_scrollbar() {
 
 		uint m_width = 0;
       //update(0, 0, get_eff_w(), get_h());
-      if( m_cache_id )
+      if (m_cache_id)
 			g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
 
       if (setbottom || m_textpos > m_textheight - get_h())

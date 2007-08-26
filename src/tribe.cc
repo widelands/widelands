@@ -49,8 +49,8 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
 		char directory[256];
 
       // Grab the localisation text domain
-		sprintf( directory, "tribes/%s", tribename.c_str() );
-      i18n::grab_textdomain( directory );
+		sprintf(directory, "tribes/%s", tribename.c_str());
+      i18n::grab_textdomain(directory);
 
 		snprintf(directory, sizeof(directory), "tribes/%s", tribename.c_str());
 
@@ -61,9 +61,9 @@ Tribe_Descr::Tribe_Descr(const std::string & tribename, const World & the_world)
       parse_bobs(directory);
       parse_root_conf(directory);
 
-      i18n::release_textdomain( );
+      i18n::release_textdomain();
 	}
-	catch(std::exception &e)
+	catch (std::exception &e)
 	{throw wexception("Error loading tribe %s: %s", tribename.c_str(), e.what());}
 }
 
@@ -90,13 +90,13 @@ void Tribe_Descr::load_graphics()
 {
 	int i;
 
-	for(i = 0; i < m_workers.get_nitems(); i++)
+	for (i = 0; i < m_workers.get_nitems(); i++)
 		m_workers.get(i)->load_graphics();
 
-   for(i = 0; i < m_wares.get_nitems(); i++)
+   for (i = 0; i < m_wares.get_nitems(); i++)
 		m_wares.get(i)->load_graphics();
 
-	for(i = 0; i < m_buildings.get_nitems(); i++)
+	for (i = 0; i < m_buildings.get_nitems(); i++)
 		m_buildings.get(i)->load_graphics();
 }
 
@@ -156,7 +156,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       s = prof.get_safe_section("startwares");
 	   Section::Value* value;
 
-      while((value=s->get_next_val(0))) {
+      while ((value=s->get_next_val(0))) {
          if (not m_wares.exists(value->get_name()))
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
@@ -166,8 +166,8 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
       // default workers
       s = prof.get_safe_section("startworkers");
-      while((value=s->get_next_val(0))) {
-         if(!strcmp(value->get_name(),"soldier")) continue; // Ignore soldiers here
+      while ((value=s->get_next_val(0))) {
+         if (!strcmp(value->get_name(),"soldier")) continue; // Ignore soldiers here
          if (not m_workers.exists(value->get_name()))
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
@@ -177,13 +177,13 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
       // default soldiers
       s = prof.get_safe_section("startsoldiers");
-      while((value=s->get_next_val(0))) {
+      while ((value=s->get_next_val(0))) {
          // NOTE: no check here, since we do not know about max levels and so on
          std::string soldier=value->get_name();
          m_startsoldiers[soldier]=value->get_int();
 		}
 	}
-   catch(std::exception &e) {
+   catch (std::exception &e) {
       throw wexception("%s: %s", fname, e.what());
 	}
 }
@@ -205,15 +205,15 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		Building_Descr *descr = 0;
 
 		try {
 			descr = Building_Descr::create_from_dir
 				(*this, it->c_str(), &m_default_encdata);
-		} catch(std::exception &e) {
+		} catch (std::exception &e) {
 			log("Building %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
-		} catch(...) {
+		} catch (...) {
 			log("Building %s failed: unknown exception (garbage directory?)\n", it->c_str());
 		}
 
@@ -294,14 +294,14 @@ void Tribe_Descr::parse_workers(const char *directory)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		Worker_Descr *descr = 0;
 
 		try {
 			descr = Worker_Descr::create_from_dir(*this, it->c_str(), &m_default_encdata);
-		} catch(std::exception &e) {
+		} catch (std::exception &e) {
 			log("Worker %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
-		} catch(...) {
+		} catch (...) {
 			log("Worker %s failed: unknown exception (garbage directory?)\n", it->c_str());
 		}
 
@@ -328,7 +328,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		char fname[256];
 
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
@@ -357,11 +357,11 @@ void Tribe_Descr::parse_wares(const char* directory)
 		{
 			descr = Item_Ware_Descr::create_from_dir(warename, it->c_str());
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
 		}
-		catch(...)
+		catch (...)
 		{
 			cerr << it->c_str() << ": Unknown exception" << endl;
 		}
@@ -382,7 +382,7 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 
 	g_fs->FindFiles(subdir, "*", &dirs);
 
-	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+	for (filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		char fname[256];
 
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
@@ -417,9 +417,9 @@ void Tribe_Descr::parse_bobs(const char* directory) {
 				descr->parse(it->c_str(), &prof);
 				m_immovables.add(descr);
 			}
-		} catch(std::exception &e) {
+		} catch (std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-		} catch(...) {
+		} catch (...) {
 			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
 		}
 	}
@@ -469,16 +469,16 @@ void Tribe_Descr::load_warehouse_with_start_wares
 
       char* endp;
       int hplvl=strtol(list[0].c_str(),&endp, 0);
-      if(endp && *endp)
+      if (endp && *endp)
          throw wexception("Bad hp level '%s'", list[0].c_str());
       int attacklvl=strtol(list[1].c_str(),&endp, 0);
-      if(endp && *endp)
+      if (endp && *endp)
          throw wexception("Bad attack level '%s'", list[1].c_str());
       int defenselvl=strtol(list[2].c_str(),&endp, 0);
-      if(endp && *endp)
+      if (endp && *endp)
          throw wexception("Bad defense level '%s'", list[2].c_str());
       int evadelvl=strtol(list[3].c_str(),&endp, 0);
-      if(endp && *endp)
+      if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
 			if (Game * const game = dynamic_cast<Game * const>(&egbase))
@@ -516,7 +516,7 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
    // get all tribes
    filenameset_t m_tribes;
    g_fs->FindFiles("tribes", "*", &m_tribes);
-   for(filenameset_t::iterator pname = m_tribes.begin(); pname != m_tribes.end(); pname++) {
+   for (filenameset_t::iterator pname = m_tribes.begin(); pname != m_tribes.end(); pname++) {
 		const std::string name = pname->substr(7);
 		if (Tribe_Descr::exists_tribe(name)) target.push_back(name);
 	}
@@ -532,9 +532,9 @@ Find the best matching indicator for the given amount.
 uint Tribe_Descr::get_resource_indicator
 (const Resource_Descr * const res, const uint amount) const
 {
-   if(!res || !amount) {
+   if (!res || !amount) {
       int idx=get_immovable_index("resi_none");
-      if(idx==-1)
+      if (idx==-1)
 	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", name().c_str());
       return idx;
 	}
@@ -543,9 +543,9 @@ uint Tribe_Descr::get_resource_indicator
 
    int i=1;
    int num_indicators=0;
-   while(true) {
+   while (true) {
       sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
-      if(get_immovable_index(buffer)==-1)
+      if (get_immovable_index(buffer)==-1)
          break;
       ++i;
       ++num_indicators;
@@ -556,8 +556,8 @@ uint Tribe_Descr::get_resource_indicator
 		 name().c_str(),
 		 res->name().c_str());
 
-   uint bestmatch = (uint) (( static_cast<float>(amount)/res->get_max_amount() ) * num_indicators);
-   if(((int)amount)<res->get_max_amount())
+   uint bestmatch = (uint) ((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
+   if (((int)amount)<res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
 	sprintf(buffer, "resi_%s%i", res->name().c_str(), bestmatch);
@@ -576,7 +576,7 @@ uint Tribe_Descr::get_resource_indicator
 int Tribe_Descr::get_safe_ware_index(const char * const warename) const {
    int retval=get_ware_index(warename);
 
-   if(retval==-1)
+   if (retval==-1)
       throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!",
 							  warename);
    return retval;
@@ -588,7 +588,7 @@ int Tribe_Descr::get_safe_ware_index(const char * const warename) const {
 int Tribe_Descr::get_safe_worker_index(const char * const workername) const {
    int retval=get_worker_index(workername);
 
-   if(retval==-1)
+   if (retval==-1)
       throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!",
 							  workername);
    return retval;
@@ -600,7 +600,7 @@ int Tribe_Descr::get_safe_worker_index(const char * const workername) const {
 int Tribe_Descr::get_safe_building_index(const char *buildingname) const {
    int retval=get_building_index(buildingname);
 
-   if(retval==-1)
+   if (retval==-1)
       throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!",
 							  buildingname);
    return retval;

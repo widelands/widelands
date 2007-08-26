@@ -63,7 +63,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 {
 	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
-	for(uint idx = 0; ; ++idx) {
+	for (uint idx = 0; ; ++idx) {
 		try
 		{
 			char buffer[32];
@@ -82,7 +82,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			Critter_BobAction act;
 			uint mapidx;
 
-			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
 				if (cmd[0] == s_parsemap[mapidx].name)
 					break;
 
@@ -93,7 +93,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 
 			m_actions.push_back(act);
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			throw wexception("Line %i: %s", idx, e.what());
 		}
@@ -205,7 +205,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 	Section *sglobal = prof->get_safe_section("global");
    const char* string;
    // Read programs
-	while(sglobal->get_next_string("program", &string)) {
+	while (sglobal->get_next_string("program", &string)) {
 		Critter_BobProgram* prog = 0;
 
 		try
@@ -221,7 +221,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 			prog->parse(&parser, string);
 			m_programs[prog->get_name()] = prog;
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 				delete prog;
 
@@ -305,7 +305,7 @@ void Critter_Bob::program_update(Game* g, State* state)
 {
 	const Critter_BobAction* action;
 
-	for(;;)
+	for (;;)
 	{
       const Critter_BobProgram* program=static_cast<const Critter_BobProgram*>(state->program);
 

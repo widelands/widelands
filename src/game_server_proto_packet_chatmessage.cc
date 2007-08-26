@@ -59,12 +59,12 @@ void Game_Server_Protocol_Packet_ChatMessage::send(Network_Buffer* buffer) {
 void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
    uchar answer = buf->get_8();
 
-   if( answer != CM_ACK ) {
+   if (answer != CM_ACK) {
       char buffer[1024];
 
       snprintf(buffer, 1024, _("Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored").c_str(), CM_ACK, answer);
 
-      gsc->server_message( buffer );
+      gsc->server_message(buffer);
 	}
 }
 
@@ -76,12 +76,12 @@ void Game_Server_Protocol_Packet_ChatMessage::recv(Game_Server_Connection* gsc, 
    std::string user = buffer->get_string();
    std::string msg = buffer->get_string();
 
-   gsc->chat_message( user, msg, m_flags );
+   gsc->chat_message(user, msg, m_flags);
 }
 
 /*
  * Write reply
  */
-void Game_Server_Protocol_Packet_ChatMessage::write_reply( Network_Buffer* buf ) {
-   buf->put_8( CM_ACK );
+void Game_Server_Protocol_Packet_ChatMessage::write_reply(Network_Buffer* buf) {
+   buf->put_8(CM_ACK);
 }

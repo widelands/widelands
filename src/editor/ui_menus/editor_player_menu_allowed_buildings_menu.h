@@ -33,7 +33,7 @@ class Player;
  * to advance technology slowly through the missions
  */
 struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
-      Editor_Player_Menu_Allowed_Buildings_Menu(UI::Panel* parent, Player* player, UI::UniqueWindow::Registry* );
+      Editor_Player_Menu_Allowed_Buildings_Menu(UI::Panel* parent, Player* player, UI::UniqueWindow::Registry*);
       virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
 
    private:

@@ -46,9 +46,9 @@ Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
 Trigger* Trigger_Factory::get_correct_trigger(const char* id) {
    std::string str = id;
 
-   if( str == "time" ) return new Trigger_Time();
-   else if( str == "null" ) return new Trigger_Null();
-   else if( str == "building" ) return new Trigger_Building();
+   if (str == "time") return new Trigger_Time();
+   else if (str == "null") return new Trigger_Null();
+   else if (str == "building") return new Trigger_Building();
    else
       throw wexception("Trigger_Factory::get_correct_trigger: Unknown trigger id found: %s\n", id);
 
@@ -64,7 +64,7 @@ Trigger* Trigger_Factory::get_correct_trigger(const char* id) {
  */
 Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor_Interactive* m_parent, Trigger* gtrig) {
    Trigger* trig=gtrig;
-   if(!trig)
+   if (!trig)
       trig=get_correct_trigger(id);
 
 	int retval;
@@ -84,9 +84,9 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
 		("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id "
 		 "found: %s\n",
 		 id);
-   if(retval)
+   if (retval)
       return trig;
-   if(!gtrig) {
+   if (!gtrig) {
       delete trig;
       return 0;
 	} else return gtrig;
@@ -97,10 +97,10 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
  * Get the correct trigger descriptions and names from the
  * id header
  */
-Trigger_Descr* Trigger_Factory::get_correct_trigger_descr( const char* id ) {
+Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(const char* id) {
    std::string str = id;
-   for( uint i = 0; i < Trigger_Factory::get_nr_of_available_triggers(); i++)
-      if( TRIGGER_DESCRIPTIONS[i].id == str )
+   for (uint i = 0; i < Trigger_Factory::get_nr_of_available_triggers(); i++)
+      if (TRIGGER_DESCRIPTIONS[i].id == str)
          return &TRIGGER_DESCRIPTIONS[i];
 
    assert(0); // never here
@@ -110,8 +110,8 @@ Trigger_Descr* Trigger_Factory::get_correct_trigger_descr( const char* id ) {
 /*
  * Get the trigger descriptions
  */
-Trigger_Descr* Trigger_Factory::get_trigger_descr( uint id ) {
-   assert( id < Trigger_Factory::get_nr_of_available_triggers());
+Trigger_Descr* Trigger_Factory::get_trigger_descr(uint id) {
+   assert(id < Trigger_Factory::get_nr_of_available_triggers());
 
    return &TRIGGER_DESCRIPTIONS[id];
 }

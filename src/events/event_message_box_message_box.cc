@@ -35,7 +35,7 @@
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Game* game, Event_Message_Box* event,
       int gposx, int gposy, int w, int h) :
-UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
+UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
 
    m_game = game;
 
@@ -49,8 +49,8 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
    set_inner_size(w,h);
    m_text=new UI::Multiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
-   if(m_text)
-      m_text->set_text( event->get_text());
+   if (m_text)
+      m_text->set_text(event->get_text());
 
    // Buttons
    int but_width=80;
@@ -60,7 +60,7 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
    posx=spacing;
    posy=get_inner_h()-30;
    m_trigger.resize(event->get_nr_buttons());
-   for(int i=0; i<event->get_nr_buttons(); i++) {
+   for (int i=0; i<event->get_nr_buttons(); i++) {
       posx+=space;
 		new UI::IDButton<Message_Box_Event_Message_Box, int>
 			(this,
@@ -101,9 +101,9 @@ bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int, int)
  * clicked
  */
 void Message_Box_Event_Message_Box::clicked(int i) {
-   if(i==-1) {
+   if (i==-1) {
       // we should end this dialog
-      if(m_is_modal) {
+      if (m_is_modal) {
          end_modal(0);
          return;
 		} else {
@@ -114,9 +114,9 @@ void Message_Box_Event_Message_Box::clicked(int i) {
       // One of the buttons has been pressed
 //      NoLog("Button %i has been pressed, nr of buttons: %i!\n", i, event->get_nr_buttons());
       Trigger_Null* t=m_trigger[i];
-      if(t) {
+      if (t) {
          t->set_trigger_manually(true);
-         t->check_set_conditions( m_game ); // forcefully update this trigger
+         t->check_set_conditions(m_game); // forcefully update this trigger
 		}
       clicked(-1);
       return;

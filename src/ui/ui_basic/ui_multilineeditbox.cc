@@ -63,11 +63,11 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
    m_needs_update=true;
 
-   if(down) {
+   if (down) {
       std::string txt= g_fh->word_wrap_text(m_fontname,m_fontsize,get_text(),get_eff_w());
-      switch(code) {
+      switch (code) {
          case KEY_BACKSPACE:
-            if(txt.size() && m_cur_pos) {
+            if (txt.size() && m_cur_pos) {
                m_cur_pos--;
 				} else {
                break;
@@ -75,7 +75,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
             // Fallthrough
 
          case KEY_DELETE:
-            if(txt.size() && m_cur_pos<txt.size()) {
+            if (txt.size() && m_cur_pos<txt.size()) {
                txt.erase(txt.begin() + m_cur_pos);
                Multiline_Textarea::set_text(txt.c_str());
 				}
@@ -83,31 +83,31 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
          case KEY_LEFT:
             m_cur_pos-=1;
-            if(static_cast<int>(m_cur_pos)<0) m_cur_pos=0;
+            if (static_cast<int>(m_cur_pos)<0) m_cur_pos=0;
             break;
 
          case KEY_RIGHT:
             m_cur_pos+=1;
-            if(m_cur_pos>=txt.size()) m_cur_pos=txt.size();
+            if (m_cur_pos>=txt.size()) m_cur_pos=txt.size();
             break;
 
          case KEY_DOWN:
-            if(m_cur_pos<txt.size()-1) {
+            if (m_cur_pos<txt.size()-1) {
                uint begin_of_line=m_cur_pos;
-               if(txt[begin_of_line]=='\n') --begin_of_line;
-               while(begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
-               if(begin_of_line!=0) ++begin_of_line;
+               if (txt[begin_of_line]=='\n') --begin_of_line;
+               while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
+               if (begin_of_line!=0) ++begin_of_line;
                uint begin_of_next_line=m_cur_pos;
-               while(txt[begin_of_next_line]!='\n' && begin_of_next_line<txt.size())
+               while (txt[begin_of_next_line]!='\n' && begin_of_next_line<txt.size())
                   ++begin_of_next_line;
-               if(begin_of_next_line==txt.size())
+               if (begin_of_next_line==txt.size())
                   --begin_of_next_line;
                 else
                   ++begin_of_next_line;
                uint end_of_next_line=begin_of_next_line;
-               while(txt[end_of_next_line]!='\n' && end_of_next_line<txt.size())
+               while (txt[end_of_next_line]!='\n' && end_of_next_line<txt.size())
                   ++end_of_next_line;
-               if(begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line)
+               if (begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line)
                   m_cur_pos=end_of_next_line;
                else
                   m_cur_pos=begin_of_next_line+m_cur_pos-begin_of_line;
@@ -115,18 +115,18 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
             break;
 
          case KEY_UP:
-            if(m_cur_pos>0) {
+            if (m_cur_pos>0) {
                uint begin_of_line=m_cur_pos;
-               if(txt[begin_of_line]=='\n') --begin_of_line;
-               while(begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
-               if(begin_of_line!=0) ++begin_of_line;
+               if (txt[begin_of_line]=='\n') --begin_of_line;
+               while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
+               if (begin_of_line!=0) ++begin_of_line;
                uint end_of_last_line=begin_of_line;
-               if(begin_of_line!=0) --end_of_last_line;
+               if (begin_of_line!=0) --end_of_last_line;
                uint begin_of_lastline=end_of_last_line;
-               if(txt[begin_of_lastline]=='\n') --begin_of_lastline;
-               while(begin_of_lastline>0 && txt[begin_of_lastline]!='\n') --begin_of_lastline;
-               if(begin_of_lastline!=0) ++begin_of_lastline;
-               if(begin_of_lastline+(m_cur_pos-begin_of_line) > end_of_last_line)
+               if (txt[begin_of_lastline]=='\n') --begin_of_lastline;
+               while (begin_of_lastline>0 && txt[begin_of_lastline]!='\n') --begin_of_lastline;
+               if (begin_of_lastline!=0) ++begin_of_lastline;
+               if (begin_of_lastline+(m_cur_pos-begin_of_line) > end_of_last_line)
                   m_cur_pos=end_of_last_line;
                else
                   m_cur_pos=begin_of_lastline+(m_cur_pos-begin_of_line);
@@ -137,7 +137,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
             c='\n';
             // fallthrough
          default:
-            if(c && txt.size()<m_maxchars) {
+            if (c && txt.size()<m_maxchars) {
                txt.insert(m_cur_pos,1,c);
                m_cur_pos++;
 				}
@@ -198,7 +198,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
  * position
  */
 void Multiline_Editbox::set_text(const char* str) {
-   if(strlen(str))
+   if (strlen(str))
       m_cur_pos=strlen(str);
    else
       m_cur_pos=0;

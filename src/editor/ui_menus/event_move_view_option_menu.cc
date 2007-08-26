@@ -52,7 +52,7 @@ m_parent  (parent)
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UI::Edit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( event->name().c_str());
+   m_name->set_text(event->name().c_str());
    posy+=20+spacing;
 
    // Set Field Buttons
@@ -199,14 +199,14 @@ bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 
 void Event_Move_View_Option_Menu::clicked_ok() {
-	if(m_name->get_text()) m_event->set_name( m_name->get_text());
+	if (m_name->get_text()) m_event->set_name(m_name->get_text());
 	m_event->set_coords(Coords(m_x,m_y));
 	end_modal(1);
 }
 
 
 void Event_Move_View_Option_Menu::clicked(int i) {
-   switch(i) {
+   switch (i) {
       case 3: m_x+=100; break;
       case 4: m_x-=100; break;
       case 5: m_x+=10; break;
@@ -227,8 +227,8 @@ void Event_Move_View_Option_Menu::clicked(int i) {
  * update function: update all UI elements
  */
 void Event_Move_View_Option_Menu::update(void) {
-   if(m_x<0) m_x=0;
-   if(m_y<0) m_y=0;
+   if (m_x<0) m_x=0;
+   if (m_y<0) m_y=0;
 	const Map & map = m_parent->egbase().map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();

@@ -39,36 +39,36 @@ void Widelands_Map_Variable_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if(skip)
+   if (skip)
       return;
 
    Profile prof;
    try {
-      prof.read( "variable", 0, fs );
-	} catch( ... ) {
+      prof.read("variable", 0, fs);
+	} catch (...) {
       // might not be there
       return;
 	}
    MapVariableManager & mvm = egbase->get_map()->get_mvm();
 
-   Section* s = prof.get_section( "global" );
+   Section* s = prof.get_section("global");
 
    // read packet version
    int packet_version=s->get_int("packet_version");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
 
-      while(( s = prof.get_next_section(0))) {
+      while ((s = prof.get_next_section(0))) {
          std::string type = s->get_safe_string("type");
-         if( type == "int" ) {
-            Int_MapVariable* v = new Int_MapVariable( s->get_safe_bool( "delete_protected" ) );
-            v->set_name( s->get_name() );
-            v->set_value( s->get_safe_int("value"));
+         if (type == "int") {
+            Int_MapVariable* v = new Int_MapVariable(s->get_safe_bool("delete_protected"));
+            v->set_name(s->get_name());
+            v->set_value(s->get_safe_int("value"));
             mvm.register_new_variable(v);
-			} else if( type == "string" ) {
-            String_MapVariable* v = new String_MapVariable( s->get_safe_bool( "delete_protected" ) );
-            v->set_name( s->get_name() );
-            v->set_value( s->get_safe_string("value") );
+			} else if (type == "string") {
+            String_MapVariable* v = new String_MapVariable(s->get_safe_bool("delete_protected"));
+            v->set_name(s->get_name());
+            v->set_value(s->get_safe_string("value"));
             mvm.register_new_variable(v);
 			} else
             throw wexception("Unknown Map Variable type %s\n", type.c_str());
@@ -121,5 +121,5 @@ throw (_wexception)
 		}
 	}
 
-   prof.write("variable", false, fs );
+   prof.write("variable", false, fs);
 }

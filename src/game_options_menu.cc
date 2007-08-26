@@ -174,9 +174,9 @@ void GameOptionsMenu::clicked_exit_game() {m_player.end_modal(0);}
  * One of the checkboxes have been toggled
  */
 void GameOptionsMenu::changed_ingame_music(bool t) {
-   g_sound_handler.set_disable_music( !t );
+   g_sound_handler.set_disable_music(!t);
 }
 
 void GameOptionsMenu::changed_ingame_sound(bool t) {
-   g_sound_handler.set_disable_fx( !t );
+   g_sound_handler.set_disable_fx(!t);
 }

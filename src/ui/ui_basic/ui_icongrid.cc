@@ -146,7 +146,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	x = 0;
 	y = 0;
 
-	for(uint idx = 0; idx < m_items.size(); idx++)
+	for (uint idx = 0; idx < m_items.size(); idx++)
 	{
 		uint picid = m_items[idx].picid;
 		uint w, h;
@@ -188,7 +188,7 @@ void Icon_Grid::draw(RenderTarget* dst)
 	if (highlight) {
       int w, h;
       g_fh->get_size(UI_FONT_SMALL,  m_items[m_highlight].descr.c_str(), &w, &h);
-      if(w>get_inner_w())
+      if (w>get_inner_w())
          set_inner_size(w, get_inner_h());
 		g_fh->draw_string
 			(*dst,

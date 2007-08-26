@@ -121,7 +121,7 @@ last few cleanups
 Editor_Game_Base::~Editor_Game_Base() {
    int i;
 
-   for(i = 1; i <= MAX_PLAYERS; i++)
+   for (i = 1; i <= MAX_PLAYERS; i++)
       if (m_players[i-1])
          remove_player(i);
 
@@ -421,7 +421,7 @@ Player * Editor_Game_Base::add_player
 
 	manually_load_tribe(tribe.c_str());
 
-   for(i = 0; i < m_tribes.size(); i++)
+   for (i = 0; i < m_tribes.size(); i++)
 		if (m_tribes[i]->name() == tribe) break;
 
    if (i == m_tribes.size())
@@ -445,7 +445,7 @@ Player * Editor_Game_Base::add_player
 void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
 	uint i;
 
-	for(i = 0; i < m_tribes.size(); i++)
+	for (i = 0; i < m_tribes.size(); i++)
 		if (m_tribes[i]->name() == tribe) break;
 
 	if (i == m_tribes.size())
@@ -457,7 +457,7 @@ void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
  */
 Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
 	uint i;
-   for(i = 0; i < m_tribes.size(); i++) {
+   for (i = 0; i < m_tribes.size(); i++) {
 		if (not strcmp(m_tribes[i]->name().c_str(), tribe))
 			return m_tribes[i];
 	}
@@ -500,7 +500,7 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	m_map = new_map;
 
    // Register map_variable callback
-   g_fh->register_variable_callback( g_MapVariableCallback, m_map);
+   g_fh->register_variable_callback(g_MapVariableCallback, m_map);
 }
 
 
@@ -526,8 +526,8 @@ void Editor_Game_Base::postload()
 
 	// Postload tribes
 	id = 0;
-	while(id < m_tribes.size()) {
-		for(pid = 1; pid <= MAX_PLAYERS; pid++) {
+	while (id < m_tribes.size()) {
+		for (pid = 1; pid <= MAX_PLAYERS; pid++) {
 			Player* plr = get_player(pid);
 
 			if (plr && &plr->tribe() == m_tribes[id])
@@ -638,7 +638,7 @@ Bob * Editor_Game_Base::create_bob
 {
 	Bob::Descr *descr;
 
-   if(!tribe)
+   if (!tribe)
       descr = m_map->get_world()->get_bob_descr(idx);
    else
       descr=tribe->get_bob_descr(idx);
@@ -663,7 +663,7 @@ Immovable *Editor_Game_Base::create_immovable
 {
 	Immovable_Descr *descr;
 
-   if(!tribe)
+   if (!tribe)
       descr = m_map->get_world()->get_immovable_descr(idx);
    else
       descr = tribe->get_immovable_descr(idx);
@@ -678,7 +678,7 @@ Immovable* Editor_Game_Base::create_immovable
 {
 	int idx;
 
-   if(!tribe)
+   if (!tribe)
       idx = m_map->get_world()->get_immovable_index(name.c_str());
    else {
       idx = tribe->get_immovable_index(name.c_str());
@@ -723,7 +723,7 @@ AttackController* Editor_Game_Base::create_attack_controller() {
 }
 
 void Editor_Game_Base::remove_attack_controller(uint serial) {
-   for(uint i=0;i<m_attack_serials.size();i++) {
+   for (uint i=0;i<m_attack_serials.size();i++) {
       if (m_attack_serials[i] == serial) {
          log("Editor_Game_Base: Destroying battle with serial %i \n",serial);
 			static_cast<AttackController * const>(this->objects().get_object(serial))->destroy(this);
@@ -813,13 +813,13 @@ void Editor_Game_Base::cleanup_for_load
    // We do not flush the animations in the editor since all tribes are loaded and
    // animations can not change a lot, or?
    // TODO: check this when another world is needed
-   if(flush_animations)
+   if (flush_animations)
       g_anim.flush();
-   if(flush_graphics)
+   if (flush_graphics)
       g_gr->flush(0);
 
    int i;
-   for(i=1; i<=MAX_PLAYERS; i++)
+   for (i=1; i<=MAX_PLAYERS; i++)
       if (m_players[i-1]) {
          remove_player(i);
          m_players[i-1] = 0;

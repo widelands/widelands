@@ -81,10 +81,10 @@ struct FileSystem {
 	 */
 	virtual StreamWrite* OpenStreamWrite(const std::string fname) = 0;
 
-	virtual FileSystem* MakeSubFileSystem( const std::string dirname ) = 0;
-	virtual FileSystem* CreateSubFileSystem( const std::string dirname,
-	      const Type ) = 0;
-	virtual void Unlink( const std::string ) = 0;
+	virtual FileSystem* MakeSubFileSystem(const std::string dirname) = 0;
+	virtual FileSystem* CreateSubFileSystem(const std::string dirname,
+	      const Type) = 0;
+	virtual void Unlink(const std::string) = 0;
 	virtual void Rename(const std::string&, const std::string&) = 0;
 
 	static FileSystem *Create(const std::string root)

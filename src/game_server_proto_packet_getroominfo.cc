@@ -58,12 +58,12 @@ void Game_Server_Protocol_Packet_GetRoomInfo::send(Network_Buffer* buffer) {
 void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
    uchar flags = buf->get_8();
 
-   if(flags == RI_NONEXISTANT) {
+   if (flags == RI_NONEXISTANT) {
       char buffer[1024];
 
       snprintf(buffer, 1024, _("The Room %s is currently not logged in or unknown to the server.\n").c_str(), m_roomname.c_str());
 
-      gsc->server_message( buffer );
+      gsc->server_message(buffer);
       return;
 	}
 
@@ -73,9 +73,9 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    std::vector< std::string > users;
 
-   for(uint i = 0; i < nrusers; i++) {
-      users.push_back( buf->get_string() );
+   for (uint i = 0; i < nrusers; i++) {
+      users.push_back(buf->get_string());
 	}
 
-   gsc->get_room_info( users );
+   gsc->get_room_info(users);
 }

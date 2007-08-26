@@ -76,7 +76,7 @@ void Bob::Descr::parse(const char *directory, Profile *prof,
 	const char* string;
 	global= prof->get_safe_section("global");
 
-	while(global->get_next_string("attrib", &string)) {
+	while (global->get_next_string("attrib", &string)) {
 		uint attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
@@ -122,11 +122,11 @@ Bob::Descr *Bob::Descr::create_from_dir(const char *name,
 
 		bob->parse(directory, prof, 0);
 	}
-	catch(std::exception &e) {
+	catch (std::exception &e) {
 		delete bob;
 		throw wexception("Error reading bob %s: %s", directory, e.what());
 	}
-	catch(...) {
+	catch (...) {
 		delete bob;
 		throw;
 	}
@@ -244,7 +244,7 @@ void Bob::init(Editor_Game_Base* gg)
  */
 void Bob::cleanup(Editor_Game_Base *gg)
 {
-	while(m_stack.size()) {
+	while (m_stack.size()) {
 		pop_task();
 		m_stack_dirty = false;
 	}
@@ -312,7 +312,7 @@ void Bob::do_act(Game* g, bool signalhandling)
 	assert(!m_in_act);
 	m_in_act = true;
 
-	for(;;) {
+	for (;;) {
 		uint origactid;
 
 		origactid = m_actid;
@@ -380,7 +380,7 @@ void Bob::do_act(Game* g, bool signalhandling)
 					return;
 				}
 			}
-		} while(m_stack_dirty);
+		} while (m_stack_dirty);
 
 		signalhandling = false; // next pass will be a normal, non-signal handling pass
 	}
@@ -479,7 +479,7 @@ Bob::State* Bob::get_state(Task* task)
 {
 	std::vector<State>::iterator it = m_stack.end();
 
-	while(it != m_stack.begin()) {
+	while (it != m_stack.begin()) {
 		--it;
 
 		if (it->task == task)
@@ -499,7 +499,7 @@ void Bob::send_signal(Game* g, std::string sig)
 
 	m_signal = sig;
 
-	for(uint i = 0; i < m_stack.size(); i++) {
+	for (uint i = 0; i < m_stack.size(); i++) {
 		State* state = &m_stack[i];
 
 		if (state->task->mask) {
@@ -523,7 +523,7 @@ void Bob::send_signal(Game* g, std::string sig)
  */
 void Bob::reset_tasks(Game* g)
 {
-	while(m_stack.size()) {
+	while (m_stack.size()) {
 		m_stack_dirty = false;
 		pop_task();
 	}
@@ -741,7 +741,7 @@ void Bob::movepath_update(Game* g, State* state)
 		pop_task(); // success
 		return;
 
-	} else if(state->ivar1==state->ivar3) {
+	} else if (state->ivar1==state->ivar3) {
       // We have stepped all steps that we were asked for.
       // This is some kind of success, though we do not are were we wanted
       // to go
@@ -775,7 +775,7 @@ void Bob::movepath_update(Game* g, State* state)
 
 void Bob::movepath_signal(Game *, State *)
 {
-	if(get_signal()=="interrupt_now")
+	if (get_signal()=="interrupt_now")
 		// User requests an immediate interrupt.
 		// Well, he better nows what he's doing
 		pop_task();
@@ -834,7 +834,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 	FCoords start;
 	Point spos = pos, epos = pos;
 
-	switch(m_walking) {
+	switch (m_walking) {
 	case WALK_NW:
 		map.get_brn(end, &start);
 		spos.x += TRIANGLE_WIDTH / 2;
@@ -1026,7 +1026,7 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 
 	molog("Stack size: %i\n", m_stack.size());
 
-	for(uint i=0; i<m_stack.size(); i++) {
+	for (uint i=0; i<m_stack.size(); i++) {
 		molog("Stack dump %i/%i\n", i+1, m_stack.size());
 
 		molog("* task->name: %s\n", m_stack[i].task->name);

@@ -40,16 +40,16 @@ void Game_Player_Info_Data_Packet::Read
 throw (_wexception)
 {
 	FileRead fr;
-	fr.Open( fs, "binary/player_info" );
+	fr.Open(fs, "binary/player_info");
 
 	// read packet version
 	int packet_version=fr.Unsigned16();
 
 	if (packet_version==CURRENT_PACKET_VERSION || packet_version == 1) {
 		uint max_players = fr.Unsigned16();
-		for(uint i=1; i<=max_players; i++) {
+		for (uint i=1; i<=max_players; i++) {
 			game->remove_player(i);
-			if(fr.Unsigned8()) {
+			if (fr.Unsigned8()) {
 				bool see_all = fr.Unsigned8();
 				int type = fr.Signed32();
 				int plnum = fr.Signed32();
@@ -57,7 +57,7 @@ throw (_wexception)
 
 				RGBColor rgb[4];
 
-				for(uint j=0; j<4; j++) {
+				for (uint j=0; j<4; j++) {
 					uchar r = fr.Unsigned8();
 					uchar g = fr.Unsigned8();
 					uchar b = fr.Unsigned8();
@@ -70,7 +70,7 @@ throw (_wexception)
 				Player* plr = game->get_player(plnum);
 				plr->set_see_all(see_all);
 
-				for(uint j=0; j<4; j++)
+				for (uint j=0; j<4; j++)
 					plr->m_playercolor[j] = rgb[j];
 
 				if (packet_version >= 2)
@@ -101,10 +101,10 @@ throw (_wexception)
 
 	// Number of (potential) players
 	fw.Unsigned16(game->get_map()->get_nrplayers());
-	for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
+	for (uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
 		Player* plr = game->get_player(i);
 
-		if(!plr) {
+		if (!plr) {
 			fw.Unsigned8(0);
 			continue;
 		}
@@ -120,7 +120,7 @@ throw (_wexception)
 
 		fw.CString(plr->m_tribe.name().c_str());
 
-		for(uint j=0; j<4; j++) {
+		for (uint j=0; j<4; j++) {
 			fw.Unsigned8(plr->m_playercolor[j].r());
 			fw.Unsigned8(plr->m_playercolor[j].g());
 			fw.Unsigned8(plr->m_playercolor[j].b());
@@ -138,5 +138,5 @@ throw (_wexception)
 
 	game->WriteStatistics(fw);
 
-	fw.Write( fs, "binary/player_info" );
+	fw.Write(fs, "binary/player_info");
 }

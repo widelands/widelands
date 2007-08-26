@@ -35,15 +35,15 @@ throw(_wexception)
 {
 
    Profile prof;
-   prof.read( "preload", 0, fs );
-   Section* s = prof.get_section( "global" );
+   prof.read("preload", 0, fs);
+   Section* s = prof.get_section("global");
 
    // read packet version
    int packet_version= s->get_int("packet_version");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      m_gametime = s->get_safe_int( "gametime" );
-      m_mapname = s->get_safe_string( "mapname" );
+   if (packet_version==CURRENT_PACKET_VERSION) {
+      m_gametime = s->get_safe_int("gametime");
+      m_mapname = s->get_safe_string("mapname");
 
       // DONE
       return;
@@ -62,14 +62,14 @@ throw (_wexception)
 {
 
    Profile prof;
-   Section* s = prof.create_section( "global" );
+   Section* s = prof.create_section("global");
 
    // packet version
-   s->set_int( "packet_version", CURRENT_PACKET_VERSION );
+   s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
    // save some kind of header.
    s->set_int("gametime", game->get_gametime()); // Time in milliseconds of elapsed game time (without pauses)
    s->set_string("mapname", game->get_map()->get_name());  // Name of map
 
-   prof.write("preload", false, fs );
+   prof.write("preload", false, fs);
 }

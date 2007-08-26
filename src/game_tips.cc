@@ -64,7 +64,7 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 									GAMETIPS_FONT_COLOR_FG);
 		}
 
-		while(( s = prof.get_next_section(0)) ) {
+		while ((s = prof.get_next_section(0))) {
 
 
 			const char *text = s->get_string("text", NULL);
@@ -77,7 +77,7 @@ GameTips::GameTips(UI::ProgressWindow & progressWindow)
 			m_tips.push_back (tip);
 		}
 	}
-	catch(std::exception &) {
+	catch (std::exception &) {
 		// just ignore - tips do not impact game
 		return;
 	}

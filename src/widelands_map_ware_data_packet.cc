@@ -50,13 +50,13 @@ void Widelands_Map_Ware_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/ware" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/ware");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
@@ -64,12 +64,12 @@ throw (_wexception)
    // First packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       // Now the rest data len
       uint nr_files=fr.Unsigned32();
 
       WareInstance* w;
-      for(uint i=0; i<nr_files; i++) {
+      for (uint i=0; i<nr_files; i++) {
          w=new WareInstance(0,0); // data is read somewhere else
          w->init(egbase);
          ol->register_object(egbase, fr.Unsigned32(), w);
@@ -79,7 +79,7 @@ throw (_wexception)
 	}
    throw wexception("Unknown version %i in Widelands_Map_Ware_Data_Packet!\n", packet_version);
 
-   assert( 0 );
+   assert(0);
 }
 
 
@@ -101,15 +101,15 @@ throw (_wexception)
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint> ids;
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x,y));
 
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
-         if(imm && imm->get_type()==Map_Object::FLAG) {
+         if (imm && imm->get_type()==Map_Object::FLAG) {
             Flag* fl=static_cast<Flag*>(imm);
-            for(int i=0; i<fl->m_item_filled; i++) {
+            for (int i=0; i<fl->m_item_filled; i++) {
                assert(!os->is_object_known(fl->m_items[i].item));
                ids.push_back(os->register_object(fl->m_items[i].item));
 				}
@@ -117,11 +117,11 @@ throw (_wexception)
 
          // Now, check for workers
          Bob* b=f->get_first_bob();
-         while(b) {
-            if(b->get_bob_type()==Bob::WORKER) {
+         while (b) {
+            if (b->get_bob_type()==Bob::WORKER) {
                Worker* w=static_cast<Worker*>(b);
                WareInstance* ware=w->get_carried_item(egbase);
-               if(ware) {
+               if (ware) {
                   assert(!os->is_object_known(ware));
                   ids.push_back(os->register_object(ware));
 					}
@@ -133,9 +133,9 @@ throw (_wexception)
 
    // All checked, we only need to save those stuff to disk
    fw.Unsigned32(ids.size());
-   for(uint i=0; i<ids.size(); i++)
+   for (uint i=0; i<ids.size(); i++)
       fw.Unsigned32(ids[i]);
 
-   fw.Write( fs, "binary/ware" );
+   fw.Write(fs, "binary/ware");
    // DONE
 }

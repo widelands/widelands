@@ -39,7 +39,7 @@ close_button
  _("Close"))
 
 {
-	i18n::grab_textdomain( "texts" );
+	i18n::grab_textdomain("texts");
 
    Profile prof(filename.c_str(), "global"); // section-less file
 	Section & section = *prof.get_section("global");
@@ -74,7 +74,7 @@ private:
 FileViewWindow::FileViewWindow(UI::Panel* parent, UI::UniqueWindow::Registry* reg, std::string filename)
 : UI::UniqueWindow(parent, reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
 {
-	i18n::grab_textdomain( "texts" );
+	i18n::grab_textdomain("texts");
 
    Profile prof(filename.c_str(), "global"); // section-less file
    Section* s = prof.get_section("global");

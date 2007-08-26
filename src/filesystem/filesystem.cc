@@ -89,7 +89,7 @@ const char *FileSystem::FS_StripExtension(char * const fname)
 	char *p;
 	char *dot = 0;
 
-	for(p = fname; *p; p++) {
+	for (p = fname; *p; p++) {
 		if (*p == '/' || *p == '\\')
 			dot = 0;
 		else if (*p == '.')
@@ -119,7 +119,7 @@ const char *FileSystem::FS_RelativePath(char *buf, const int buflen, const char 
 
 	// find the end of the basefile name
 	endbase = 0;
-	for(p = basefile; *p; p++) {
+	for (p = basefile; *p; p++) {
 		if (*p == '/' || *p == '\\')
 			endbase = p-basefile+1;
 	}
@@ -194,7 +194,7 @@ const std::string FileSystem::getTempDirectory()
 	tmpdir="/tmp";
 #endif
 
-	if(!FileExists(tmpdir))
+	if (!FileExists(tmpdir))
 		throw FileNotFound_error("FileSystem::getTempDirectory", tmpdir);
 
 	return tmpdir;
@@ -274,7 +274,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 	components=FS_Tokenize(path);
 
 	//tilde expansion
-	if(*components.begin()=="~") {
+	if (*components.begin()=="~") {
 		components.erase(components.begin());
 
 		std::vector<std::string> homecomponents;
@@ -300,7 +300,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 	}
 
 	//clean up the path
-	for(i=components.begin(); i!=components.end(); ) {
+	for (i=components.begin(); i!=components.end();) {
 		bool erase = false;
 		bool erase_prev = false;
 
@@ -312,20 +312,20 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 
 		//remove double dot and the preceding component (if any)
 		if (*i=="..") {
-			if(i!=components.begin())
+			if (i!=components.begin())
 				erase_prev = true;
 			erase = true;
 		}
 
 		std::vector<std::string>::iterator nexti = i;
 
-		if( erase_prev && erase ) {
-			components.erase( i-1, i+1);
+		if (erase_prev && erase) {
+			components.erase(i-1, i+1);
 			i = components.begin();
 			continue;
 		}
-		if( erase ) {
-			components.erase( i );
+		if (erase) {
+			components.erase(i);
 			i = components.begin();
 			continue;
 		}
@@ -339,7 +339,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 	else
 		canonpath="./";
 
-	for(i=components.begin(); i!=components.end(); i++)
+	for (i=components.begin(); i!=components.end(); i++)
 		canonpath+=*i+"/";
 
 #else
@@ -369,7 +369,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 		canonpath=canonpath+"\\"; //and of course an ending backslash
 	}
 
-	for(i=components.begin(); i!=components.end(); i++)
+	for (i=components.begin(); i!=components.end(); i++)
 		canonpath+=*i+"\\";
 
 #endif
@@ -383,8 +383,8 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
  */
 const char *FileSystem::FS_Filename(const char* buf) {
 	int i=strlen(buf)-1;
-	while(i>=0) {
-		if(buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
+	while (i>=0) {
+		if (buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
 		--i;
 	}
 	return buf;
@@ -408,25 +408,25 @@ FileSystem *FileSystem::Create(std::string root) throw(FileType_error,
 	struct stat statinfo;
 
 	if (stat(root.c_str(), &statinfo) == -1) {
-		if ( errno==EBADF ||
+		if (errno==EBADF ||
 		      errno==ENOENT ||
 		      errno==ENOTDIR ||
 #ifdef ELOOP
 		      errno==ELOOP || //MinGW does not support ELOOP (yet)
 #endif
-		      errno==ENAMETOOLONG )
+		      errno==ENAMETOOLONG)
 		{
 			throw FileNotFound_error("FileSystem::Create", root);
 		}
-		if ( errno==EACCES ) {
+		if (errno==EACCES) {
 			throw FileAccessDenied_error("FileSystem::Create", root);
 		}
 	}
 
-	if(S_ISDIR(statinfo.st_mode)) {
+	if (S_ISDIR(statinfo.st_mode)) {
 		return new RealFSImpl(root);
 	}
-	if(S_ISREG(statinfo.st_mode)) { //TODO: ensure root is a zipfile
+	if (S_ISREG(statinfo.st_mode)) { //TODO: ensure root is a zipfile
 		return new ZipFilesystem(root);
 	}
 

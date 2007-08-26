@@ -58,8 +58,8 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
 			  s->get_safe_int("area")));
 		egbase->get_iabase()
 			->reference_player_tribe(m_player_area.player_number, this);
-      set_building_count( s->get_int( "count" ));
-      set_building( s->get_safe_string( "building" ));
+      set_building_count(s->get_int("count"));
+      set_building(s->get_safe_string("building"));
 	} else throw wexception
 		("Building Trigger with unknown/unhandled version %i in map!\n",
 		 trigger_version);
@@ -102,17 +102,17 @@ void Trigger_Building::check_set_conditions(Game* game) {
 			++count;
 	while (mr.advance(map));
 
-   if(count>=m_count) set_trigger(true);
+   if (count>=m_count) set_trigger(true);
 
    // Set MapVariable inttemp
 	MapVariableManager & mvm = game->map().get_mvm();
 	Int_MapVariable * inttemp = mvm.get_int_variable("inttemp");
-   if( !inttemp ) {
-      inttemp = new Int_MapVariable( false );
-      inttemp->set_name( "inttemp" );
+   if (!inttemp) {
+      inttemp = new Int_MapVariable(false);
+      inttemp->set_name("inttemp");
       mvm.register_new_variable(inttemp);
 	}
-   inttemp->set_value( count );
+   inttemp->set_value(count);
 
    return;
 }

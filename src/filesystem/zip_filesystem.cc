@@ -32,7 +32,7 @@
  */
 ZipFilesystem::ZipFilesystem(const std::string zipfile)
 {
-   m_basename = FS_Filename( zipfile.c_str() );
+   m_basename = FS_Filename(zipfile.c_str());
    m_zipfilename = zipfile;
    m_zipfile = m_unzipfile = 0;
 
@@ -73,35 +73,35 @@ const int ZipFilesystem::FindFiles
 {
    m_OpenUnzip();
 
-   assert( pattern == "*" ); // If you need something else, implement a proper glob() here. I do not want to! -- Holger
+   assert(pattern == "*"); // If you need something else, implement a proper glob() here. I do not want to! -- Holger
 
-   if( path[path.size()-1] != '/' )
+   if (path[path.size()-1] != '/')
       path += '/';
-   if( path[0] != '/' )
+   if (path[0] != '/')
       path = '/'+path;
 
-   unzCloseCurrentFile( m_unzipfile );
-   unzGoToFirstFile( m_unzipfile );
+   unzCloseCurrentFile(m_unzipfile);
+   unzGoToFirstFile(m_unzipfile);
 
    unz_file_info file_info;
    char filename_inzip[256];
-   while(1) {
+   while (1) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
                             sizeof(filename_inzip),NULL,0,NULL,0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
-      std::string filename = FS_Filename( complete_filename.c_str() );
-      std::string filepath = complete_filename.substr( 0,
+      std::string filename = FS_Filename(complete_filename.c_str());
+      std::string filepath = complete_filename.substr(0,
                                                        complete_filename.size()-
                                                        filename.size());
 
       //TODO: sth. strange is going on wrt the leading slash! This is just an ugly
       //workaround and does not solve the real problem (which remains undiscovered)
-      if ( (( '/'+path==filepath ) || (path==filepath))&& ( filename != "" ) ) {
-         results->insert( complete_filename );
+      if ((('/'+path==filepath) || (path==filepath))&& (filename != "")) {
+         results->insert(complete_filename);
 		}
 
-      if( unzGoToNextFile( m_unzipfile ) == UNZ_END_OF_LIST_OF_FILE )
+      if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
          break;
 	}
 
@@ -117,31 +117,31 @@ const bool ZipFilesystem::FileExists(std::string path)
    try {
       m_OpenUnzip();
       //TODO: check return code
-	} catch( ... ) {
+	} catch (...) {
       return false;
 	}
 
-   unzGoToFirstFile( m_unzipfile );
+   unzGoToFirstFile(m_unzipfile);
    unz_file_info file_info;
    char filename_inzip[256];
    memset(filename_inzip, ' ', 256);
 
-   if( path[0] != '/' )
+   if (path[0] != '/')
       path = '/' + path;
 
-   while(1) {
+   while (1) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
                             sizeof(filename_inzip),NULL,0,NULL,0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
-      if( complete_filename[ complete_filename.size() - 1 ] == '/' )
-         complete_filename.resize( complete_filename.size() - 1 );
+      if (complete_filename[ complete_filename.size() - 1 ] == '/')
+         complete_filename.resize(complete_filename.size() - 1);
 
-      if( path == complete_filename ) {
+      if (path == complete_filename) {
          return true;
 		}
 
-      if( unzGoToNextFile( m_unzipfile ) == UNZ_END_OF_LIST_OF_FILE )
+      if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
          break;
 	}
 
@@ -155,7 +155,7 @@ const bool ZipFilesystem::FileExists(std::string path)
 const bool ZipFilesystem::IsDirectory(const std::string path)
 {
 
-   if( !FileExists( path )) {
+   if (!FileExists(path)) {
       return false;
 	}
 
@@ -165,7 +165,7 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
    unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
 								 sizeof(filename_inzip),NULL,0,NULL,0);
 
-   if( filename_inzip[ strlen( filename_inzip ) - 1 ] == '/' ) {
+   if (filename_inzip[ strlen(filename_inzip) - 1 ] == '/') {
       return true;
 	}
 
@@ -175,16 +175,16 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path )
+FileSystem* ZipFilesystem::MakeSubFileSystem(std::string path)
 {
    m_OpenUnzip();
 
-   assert( FileExists( path ));
-   assert( IsDirectory( path ));
+   assert(FileExists(path));
+   assert(IsDirectory(path));
 
    m_Close();
 
-   ZipFilesystem* newfs = new ZipFilesystem( m_zipfilename );
+   ZipFilesystem* newfs = new ZipFilesystem(m_zipfilename);
    newfs->m_basename = m_basename + '/' + path;
 
    return newfs;
@@ -195,21 +195,20 @@ FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path )
  * \todo type should be recognized automatically, \see Filesystem::Create
  * \throw ZipOperation_error
  */
-FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type )
+FileSystem* ZipFilesystem::CreateSubFileSystem(std::string path, Type type)
 {
-   assert( !FileExists( path ));
+   assert(!FileExists(path));
 
-   if( type != FileSystem::DIR )
-      throw (ZipOperation_error("ZipFilesystem::CreateSubFileSystem",
-                                path, m_zipfilename,
-                                "can't create ZipFilesystem inside another ZipFilesystem")
-	    );
+	if (type != FileSystem::DIR) throw ZipOperation_error
+		("ZipFilesystem::CreateSubFileSystem",
+		 path, m_zipfilename,
+		 "can't create ZipFilesystem inside another ZipFilesystem");
 
-   EnsureDirectoryExists( path );
+   EnsureDirectoryExists(path);
 
    m_Close();
 
-   ZipFilesystem* newfs = new ZipFilesystem( *this );
+   ZipFilesystem* newfs = new ZipFilesystem(*this);
    newfs->m_basename = m_basename + '/' + path;
 
    return newfs;
@@ -233,10 +232,10 @@ void ZipFilesystem::Unlink(const std::string filename)
  */
 void ZipFilesystem::EnsureDirectoryExists(const std::string dirname)
 {
-   if( FileExists( dirname ) && IsDirectory( dirname ))
+   if (FileExists(dirname) && IsDirectory(dirname))
       return;
 
-   MakeDirectory( dirname );
+   MakeDirectory(dirname);
 }
 
 /**
@@ -258,7 +257,7 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
    zi.internal_fa = 0;
    zi.external_fa = 0;
 
-   if( dirname[ dirname.size() - 1] != '/' )
+   if (dirname[ dirname.size() - 1] != '/')
       dirname += '/';
 
    std::string complete_file = m_basename + '/' + dirname;
@@ -278,10 +277,10 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
 		 Z_DEFAULT_STRATEGY,
 		 0,
 		 0);
-   assert( err == ZIP_OK );
+   assert(err == ZIP_OK);
 
    // CloseFile
-   zipCloseFileInZip( m_zipfile );
+   zipCloseFileInZip(m_zipfile);
 }
 
 /**
@@ -289,7 +288,7 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
  * \throw FileNotFound_error if the file couldn't be opened.
  */
 void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
-   if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
+   if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
 		throw ZipOperation_error
 			("ZipFilesystem::Load",
 			 fname,
@@ -298,17 +297,17 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 
    char buffer[1024];
 	size_t totallen = 0;
-   unzOpenCurrentFile( m_unzipfile );
+   unzOpenCurrentFile(m_unzipfile);
 	while
 		(const size_t len =
 		  unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer)))
 		totallen += len;
-   unzCloseCurrentFile( m_unzipfile );
+   unzCloseCurrentFile(m_unzipfile);
 
-   void* retdata = malloc( totallen );
-   unzOpenCurrentFile( m_unzipfile );
-   unzReadCurrentFile( m_unzipfile, retdata, totallen );
-   unzCloseCurrentFile( m_unzipfile );
+   void* retdata = malloc(totallen);
+   unzOpenCurrentFile(m_unzipfile);
+   unzReadCurrentFile(m_unzipfile, retdata, totallen);
+   unzCloseCurrentFile(m_unzipfile);
 
    length = totallen;
 
@@ -340,14 +339,14 @@ void ZipFilesystem::Write(const std::string fname, const void * const data,
          Z_BEST_COMPRESSION,0,
          -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
          0, 0);
-   assert( err == ZIP_OK );
+   assert(err == ZIP_OK);
 
    // Write File
    err = zipWriteInFileInZip (m_zipfile,data,length);
-   assert( err == ZIP_OK ) ;
+   assert(err == ZIP_OK) ;
 
    // CloseFile
-   zipCloseFileInZip( m_zipfile );
+   zipCloseFileInZip(m_zipfile);
 }
 
 StreamRead* ZipFilesystem::OpenStreamRead(const std::string fname)
@@ -364,11 +363,11 @@ StreamWrite* ZipFilesystem::OpenStreamWrite(const std::string fname)
 /**
  * Private Functions below
  */
-void ZipFilesystem::m_Close( void ) {
-   if( m_state == STATE_ZIPPING ) {
-      zipClose( m_zipfile, 0 );
-	} else if( m_state == STATE_UNZIPPPING ) {
-      unzClose( m_unzipfile );
+void ZipFilesystem::m_Close(void) {
+   if (m_state == STATE_ZIPPING) {
+      zipClose(m_zipfile, 0);
+	} else if (m_state == STATE_UNZIPPPING) {
+      unzClose(m_unzipfile);
 	}
 
    m_state = STATE_IDLE;
@@ -377,16 +376,16 @@ void ZipFilesystem::m_Close( void ) {
 /**
  * Open a zipfile for compressing
  */
-void ZipFilesystem::m_OpenZip( void ) {
-   if( m_state == STATE_ZIPPING )
+void ZipFilesystem::m_OpenZip(void) {
+   if (m_state == STATE_ZIPPING)
       return;
 
    m_Close();
 
-   m_zipfile = zipOpen( m_zipfilename.c_str(), APPEND_STATUS_ADDINZIP );
-   if( !m_zipfile ) {
+   m_zipfile = zipOpen(m_zipfilename.c_str(), APPEND_STATUS_ADDINZIP);
+   if (!m_zipfile) {
       // Couldn't open for append, so create new
-      m_zipfile = zipOpen( m_zipfilename.c_str(), APPEND_STATUS_CREATE );
+      m_zipfile = zipOpen(m_zipfilename.c_str(), APPEND_STATUS_CREATE);
 	}
 
    m_state = STATE_ZIPPING;
@@ -396,14 +395,14 @@ void ZipFilesystem::m_OpenZip( void ) {
  * Open a zipfile for extraction
  * \throw FileType_error
  */
-void ZipFilesystem::m_OpenUnzip( void ) {
-   if( m_state == STATE_UNZIPPPING )
+void ZipFilesystem::m_OpenUnzip(void) {
+   if (m_state == STATE_UNZIPPPING)
       return;
 
    m_Close();
 
-   m_unzipfile = unzOpen( m_zipfilename.c_str() );
-   if( !m_unzipfile )
+   m_unzipfile = unzOpen(m_zipfilename.c_str());
+   if (!m_unzipfile)
       throw FileType_error("ZipFilesystem::m_OpenUnzip", m_zipfilename,
 								   "not a .zip file");
 

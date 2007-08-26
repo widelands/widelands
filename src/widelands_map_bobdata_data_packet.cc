@@ -64,13 +64,13 @@ void Widelands_Map_Bobdata_Data_Packet::Read
 throw
 (_wexception)
 {
-   if( skip )
+   if (skip)
       return;
 
    FileRead fr;
    try {
-      fr.Open( fs, "binary/bob_data" );
-	} catch ( ... ) {
+      fr.Open(fs, "binary/bob_data");
+	} catch (...) {
       // not there, so skip
       return ;
 	}
@@ -78,17 +78,17 @@ throw
    // First packet version
    int packet_version=fr.Unsigned16();
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      while(1) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
+      while (1) {
          uint reg=fr.Unsigned32();
-         if(reg==0xffffffff) break; // No more bobs
+         if (reg==0xffffffff) break; // No more bobs
 
          assert(ol->is_object_known(reg));
          Bob* bob=static_cast<Bob*>(ol->get_object_by_file_index(reg));
 
          uchar read_owner=fr.Unsigned8();
          Player* plr_owner=0;
-         if(read_owner) {
+         if (read_owner) {
             plr_owner=egbase->get_safe_player(read_owner);
             assert(plr_owner); // He must be there
 			}
@@ -105,18 +105,18 @@ throw
          bool have_transfer=fr.Unsigned8();
 
          Transfer* trans=0;
-         if(have_transfer) {
+         if (have_transfer) {
             trans=bob->m_stack[0].transfer;
             assert(trans);
 			}
 
-         //         if(!have_transfer)
+         //         if (!have_transfer)
          //           bob->reset_tasks(static_cast<Game*>(egbase));
          //
          bob->m_actid=fr.Unsigned32();
 
          // Animation
-         if(fr.Unsigned8()) {
+         if (fr.Unsigned8()) {
             bob->m_anim=bob->descr().get_animation(fr.CString());
 			} else
             bob->m_anim=0;
@@ -129,36 +129,36 @@ throw
 
          uint oldstacksize=bob->m_stack.size();
          bob->m_stack.resize(fr.Unsigned16());
-         for(uint i=0; i<bob->m_stack.size(); i++) {
+         for (uint i=0; i<bob->m_stack.size(); i++) {
             Bob::State* s=&bob->m_stack[i];
             Bob::Task* task;
 
             // Task
             std::string taskname=fr.CString();
-            if(taskname=="idle") task=&Bob::taskIdle;
-            else if(taskname=="movepath") task=&Bob::taskMovepath;
-            else if(taskname=="forcemove") task=&Bob::taskForcemove;
-            else if(taskname=="roam") task=&Critter_Bob::taskRoam;
-            else if(taskname=="program") {
-               if(bob->get_bob_type()==Bob::WORKER)
+            if (taskname=="idle") task=&Bob::taskIdle;
+            else if (taskname=="movepath") task=&Bob::taskMovepath;
+            else if (taskname=="forcemove") task=&Bob::taskForcemove;
+            else if (taskname=="roam") task=&Critter_Bob::taskRoam;
+            else if (taskname=="program") {
+               if (bob->get_bob_type()==Bob::WORKER)
                   task=&Worker::taskProgram;
                else
                   task=&Critter_Bob::taskProgram;
-				} else if(taskname=="transfer") task=&Worker::taskTransfer;
-            else if(taskname=="buildingwork") task=&Worker::taskBuildingwork;
-            else if(taskname=="return") task=&Worker::taskReturn;
-            else if(taskname=="gowarehouse") task=&Worker::taskGowarehouse;
-            else if(taskname=="dropoff") task=&Worker::taskDropoff;
-            else if(taskname=="fetchfromflag") task=&Worker::taskFetchfromflag;
-            else if(taskname=="waitforcapacity") task=&Worker::taskWaitforcapacity;
-            else if(taskname=="leavebuilding") task=&Worker::taskLeavebuilding;
-            else if(taskname=="fugitive") task=&Worker::taskFugitive;
-            else if(taskname=="geologist") task=&Worker::taskGeologist;
-            else if(taskname=="road") task=&Carrier::taskRoad;
-            else if(taskname=="transport") task=&Carrier::taskTransport;
-            else if(taskname=="moveToBattle") task=&Soldier::taskMoveToBattle;
-            else if(taskname=="moveHome") task=&Soldier::taskMoveHome;
-            else if(taskname=="") continue; // Skip task
+				} else if (taskname=="transfer") task=&Worker::taskTransfer;
+            else if (taskname=="buildingwork") task=&Worker::taskBuildingwork;
+            else if (taskname=="return") task=&Worker::taskReturn;
+            else if (taskname=="gowarehouse") task=&Worker::taskGowarehouse;
+            else if (taskname=="dropoff") task=&Worker::taskDropoff;
+            else if (taskname=="fetchfromflag") task=&Worker::taskFetchfromflag;
+            else if (taskname=="waitforcapacity") task=&Worker::taskWaitforcapacity;
+            else if (taskname=="leavebuilding") task=&Worker::taskLeavebuilding;
+            else if (taskname=="fugitive") task=&Worker::taskFugitive;
+            else if (taskname=="geologist") task=&Worker::taskGeologist;
+            else if (taskname=="road") task=&Carrier::taskRoad;
+            else if (taskname=="transport") task=&Carrier::taskTransport;
+            else if (taskname=="moveToBattle") task=&Soldier::taskMoveToBattle;
+            else if (taskname=="moveHome") task=&Soldier::taskMoveHome;
+            else if (taskname=="") continue; // Skip task
             else
                throw wexception("Unknown task %s in file!\n", taskname.c_str());
 
@@ -171,7 +171,7 @@ throw
             s->transfer=0;
 
             int obj=fr.Unsigned32();
-            if(obj) {
+            if (obj) {
                assert(ol->is_object_known(obj));
                s->objvar1=ol->get_object_by_file_index(obj);
 				} else
@@ -181,7 +181,7 @@ throw
             s->coords.y=fr.Signed32();
 
             bool diranims=fr.Unsigned8();
-            if(diranims) {
+            if (diranims) {
                const Bob::Descr & bob_descr = bob->descr();
                const uint anims[6] = {
                   bob_descr.get_animation(fr.CString()),
@@ -197,43 +197,43 @@ throw
                s->diranims=0;
 
             uint pathsteps=fr.Unsigned16();
-            if(s->path && i<oldstacksize)
+            if (s->path && i<oldstacksize)
                delete s->path;
-            if(pathsteps) {
+            if (pathsteps) {
                Coords start;
                start.x=fr.Unsigned16();
                start.y=fr.Unsigned16();
 					Path * const path = new Path(start);
-               for(uint step=0; step<pathsteps; step++)
+               for (uint step=0; step<pathsteps; step++)
 						path->append(egbase->map(), fr.Unsigned8());
                s->path=path;
 				} else
                s->path=0;
 
-            if(s->transfer && i<oldstacksize && !trans)
+            if (s->transfer && i<oldstacksize && !trans)
                delete s->transfer;
 
-            if(s->task==&Worker::taskGowarehouse || s->task==&Worker::taskTransfer)
+            if (s->task==&Worker::taskGowarehouse || s->task==&Worker::taskTransfer)
                s->transfer=trans;
             else
                s->transfer=0;
 
             bool route=fr.Unsigned8();
-            if(s->route && i<oldstacksize)
-               if(!route)
+            if (s->route && i<oldstacksize)
+               if (!route)
                   delete s->route;
                else
                   s->route->clear();
 
-            if(route) {
+            if (route) {
                Route* r;
-               if(!s->route)
+               if (!s->route)
                   r=new Route();
                else
                   r=s->route;
                r->m_totalcost=fr.Signed32();
                int nsteps=fr.Unsigned16();
-               for(int step=0; step<nsteps; step++) {
+               for (int step=0; step<nsteps; step++) {
                   int idx=fr.Unsigned32();
                   assert(ol->is_object_known(idx));
                   Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(idx));
@@ -245,9 +245,9 @@ throw
 
             // Now programm
             bool program=fr.Unsigned8();
-            if(program) {
+            if (program) {
                std::string progname=fr.CString();
-               if(bob->get_bob_type()==Bob::WORKER)
+               if (bob->get_bob_type()==Bob::WORKER)
                   s->program=static_cast<Worker*>(bob)->descr().get_program(progname);
                else
                   s->program=static_cast<Critter_Bob*>(bob)->descr().get_program(progname);
@@ -260,7 +260,7 @@ throw
          bob->m_sched_init_task=fr.Unsigned8();
          bob->m_signal=fr.CString();
 
-         switch(bob->get_bob_type()) {
+         switch (bob->get_bob_type()) {
             case Bob::CRITTER: read_critter_bob(&fr,egbase,ol,static_cast<Critter_Bob*>(bob)); break;
             case Bob::WORKER: read_worker_bob(&fr,egbase,ol,static_cast<Worker*>(bob)); break;
             default: throw wexception("Unknown sub bob type %i in Widelands_Map_Bobdata_Data_Packet::Read\n", bob->get_bob_type());
@@ -279,7 +279,7 @@ throw
 void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, Critter_Bob*) {
    int version=fr->Unsigned16();
 
-   if(version==CRITTER_BOB_PACKET_VERSION) {
+   if (version==CRITTER_BOB_PACKET_VERSION) {
       // No data for critter bob currently
 	} else
       throw wexception("Unknown version %i in Critter Bob Subpacket!\n", version);
@@ -288,7 +288,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Ga
 void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol, Worker* worker) {
    int version=fr->Unsigned16();
 
-   if(version==WORKER_BOB_PACKET_VERSION) {
+   if (version==WORKER_BOB_PACKET_VERSION) {
 		if (Soldier * const soldier = dynamic_cast<Soldier * const>(worker)) {
 			const Uint16 soldier_worker_bob_packet_version = fr->Unsigned16();
 			if
@@ -352,7 +352,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 
       // location
       uint reg=fr->Unsigned32();
-      if(reg) {
+      if (reg) {
          assert(ol->is_object_known(reg));
          worker->set_location(static_cast<PlayerImmovable*>(ol->get_object_by_file_index(reg)));
          assert(worker->m_location.get(egbase));
@@ -362,7 +362,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 
       // Carried item
       reg=fr->Unsigned32();
-      if(reg) {
+      if (reg) {
          assert(ol->is_object_known(reg));
          worker->m_carried_item=ol->get_object_by_file_index(reg);
 		} else
@@ -374,11 +374,11 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
       worker->m_current_exp=fr->Signed32();
 
       Economy* eco=0;
-      if(worker->m_location.get(egbase))
+      if (worker->m_location.get(egbase))
          eco=static_cast<PlayerImmovable*>(worker->m_location.get(egbase))->get_economy();
 
       worker->set_economy(eco);
-      if(worker->m_carried_item.get(egbase))
+      if (worker->m_carried_item.get(egbase))
          static_cast<WareInstance*>(worker->m_carried_item.get(egbase))->set_economy(eco);
 
 
@@ -401,18 +401,18 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    Map* map=egbase->get_map();
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
+   for (ushort y=0; y<map->get_height(); y++) {
+      for (ushort x=0; x<map->get_width(); x++) {
 
          std::vector<Bob*> bobarr;
 
 		map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr);
 
-         for(uint i=0; i<bobarr.size(); i++) {
+         for (uint i=0; i<bobarr.size(); i++) {
             Bob* ibob=bobarr[i];
-            for(uint j=i; j<bobarr.size(); j++) {
+            for (uint j=i; j<bobarr.size(); j++) {
                Bob* jbob=bobarr[j];
-               if(ibob->get_file_serial() < jbob->get_file_serial()) {
+               if (ibob->get_file_serial() < jbob->get_file_serial()) {
                   bobarr[i] = jbob;
                   bobarr[j] = ibob;
                   ibob=jbob;
@@ -420,7 +420,7 @@ throw (_wexception)
 				}
 			}
 
-         for(uint i=0; i<bobarr.size(); i++) {
+         for (uint i=0; i<bobarr.size(); i++) {
             Bob* bob=bobarr[i];
             assert(os->is_object_known(bob));
             uint reg=os->get_object_file_index(bob);
@@ -428,7 +428,7 @@ throw (_wexception)
             fw.Unsigned32(reg);
             // BOB STUFF
 
-            if(bob->m_owner)
+            if (bob->m_owner)
                fw.Unsigned8(bob->m_owner->get_player_number());
             else
                fw.Unsigned8(0);
@@ -441,7 +441,7 @@ throw (_wexception)
             // m_linknext, linkpprev are handled automatically
 
             // Are we currently transfering?
-            if(bob->m_stack.size() && bob->m_stack[0].transfer)
+            if (bob->m_stack.size() && bob->m_stack[0].transfer)
                fw.Unsigned8(1);
             else
                fw.Unsigned8(0);
@@ -449,7 +449,7 @@ throw (_wexception)
             fw.Unsigned32(bob->m_actid);
 
             // Animation
-            if(bob->m_anim) {
+            if (bob->m_anim) {
                fw.Unsigned8(1);
                fw.CString(bob->descr().get_animation_name(bob->m_anim).c_str());
 				} else
@@ -467,7 +467,7 @@ throw (_wexception)
 
             // Nr of States
             fw.Unsigned16(bob->m_stack.size());
-            for(uint index=0; index<bob->m_stack.size(); index++) {
+            for (uint index=0; index<bob->m_stack.size(); index++) {
                Bob::State* s=&bob->m_stack[index];
 
                // Write name, enough to reconstruct the
@@ -479,7 +479,7 @@ throw (_wexception)
                fw.Signed32(s->ivar3);
 
                Map_Object* obj=s->objvar1.get(egbase);
-               if(obj) {
+               if (obj) {
                   assert(os->is_object_known(obj));
                   fw.Unsigned32(os->get_object_file_index(obj));
 					} else
@@ -491,7 +491,7 @@ throw (_wexception)
                fw.Signed32(s->coords.x);
                fw.Signed32(s->coords.y);
 
-               if(s->diranims) {
+               if (s->diranims) {
                   fw.Unsigned8(1);
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(1)).c_str());
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(2)).c_str());
@@ -519,11 +519,11 @@ throw (_wexception)
                   fw.Unsigned16(0);
 
                // Route
-               if(s->route) {
+               if (s->route) {
                   fw.Unsigned8(1);
                   fw.Signed32(s->route->get_totalcost());
                   fw.Unsigned16(s->route->get_nrsteps());
-                  for(int idx=0; idx<s->route->get_nrsteps(); idx++) {
+                  for (int idx=0; idx<s->route->get_nrsteps(); idx++) {
                      Flag* f=s->route->get_flag(egbase, idx);
                      assert(os->is_object_known(f));
                      fw.Unsigned32(os->get_object_file_index(f));
@@ -532,7 +532,7 @@ throw (_wexception)
                   fw.Unsigned8(0);
 
                // Programm
-               if(s->program) {
+               if (s->program) {
                   fw.Unsigned8(1);
                   fw.CString(s->program->get_name().c_str());
 					} else
@@ -545,7 +545,7 @@ throw (_wexception)
             fw.Unsigned8(bob->m_sched_init_task);
             fw.CString(bob->m_signal.c_str());
 
-            switch(bob->get_bob_type()) {
+            switch (bob->get_bob_type()) {
                case Bob::CRITTER: write_critter_bob(&fw,egbase,os,static_cast<Critter_Bob*>(bob)); break;
                case Bob::WORKER: write_worker_bob(&fw,egbase,os,static_cast<Worker*>(bob)); break;
                default: throw wexception("Unknown sub bob type %i in Widelands_Map_Bobdata_Data_Packet::Write\n", bob->get_bob_type());
@@ -559,7 +559,7 @@ throw (_wexception)
 	}
    fw.Unsigned32(0xffffffff); // No more bobs
 
-   fw.Write( fs, "binary/bob_data" );
+   fw.Write(fs, "binary/bob_data");
    // DONE
 }
 
@@ -572,7 +572,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_critter_bob
 void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, Worker* worker) {
    fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
 
-   switch(worker->get_worker_type()) {
+   switch (worker->get_worker_type()) {
       case Worker_Descr::NORMAL: break;
       case Worker_Descr::SOLDIER:
       {
@@ -606,7 +606,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
 
    // location
    Map_Object* loca=worker->m_location.get(egbase);
-   if(loca) {
+   if (loca) {
       assert(os->is_object_known(loca));
       fw->Unsigned32(os->get_object_file_index(loca));
 	} else
@@ -616,7 +616,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
 
    // Carried item
    Map_Object* carried_item=worker->m_carried_item.get(egbase);
-   if(carried_item) {
+   if (carried_item) {
       assert(os->is_object_known(carried_item));
       fw->Unsigned32(os->get_object_file_index(carried_item));
 	} else
@@ -624,7 +624,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
 
    //This is not needed
    // Write if a idle supply is to be created
-   //if(worker->m_supply)
+   //if (worker->m_supply)
    //   fw->Unsigned8(1);
    //else
    //   fw->Unsigned8(0);

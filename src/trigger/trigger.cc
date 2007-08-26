@@ -30,14 +30,14 @@
 /*
  * reference or unrefereence this Trigger
  */
-void Trigger::reference( TriggerReferencer* ref ) {
+void Trigger::reference(TriggerReferencer* ref) {
    m_referencers[ ref ] ++;
 }
-void Trigger::unreference( TriggerReferencer* ref) {
-   std::map<TriggerReferencer*, uint>::iterator cur = m_referencers.find( ref );
-     if( cur != m_referencers.end() ) {
+void Trigger::unreference(TriggerReferencer* ref) {
+   std::map<TriggerReferencer*, uint>::iterator cur = m_referencers.find(ref);
+     if (cur != m_referencers.end()) {
         cur->second--;
-        if( cur->second == 0)
-           m_referencers.erase( cur );
+        if (cur->second == 0)
+           m_referencers.erase(cur);
 	}
 }

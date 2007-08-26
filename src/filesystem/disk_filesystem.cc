@@ -46,7 +46,7 @@ RealFSImpl::RealFSImpl(const std::string Directory)
 	m_root=Directory;
 #else
 	m_root = "";
-	m_root=FS_CanonicalizeName( Directory );
+	m_root=FS_CanonicalizeName(Directory);
 #endif
 }
 
@@ -97,7 +97,7 @@ const int RealFSImpl::FindFiles(std::string path,
 
 	do {
 		results->insert(std::string(path)+'/'+c_file.name);
-	} while(_findnext(hFile, &c_file) == 0);
+	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
 
@@ -123,7 +123,7 @@ const int RealFSImpl::FindFiles(std::string path,
 
 	count = gl.gl_pathc;
 
-	for(i = 0; i < count; i++) {
+	for (i = 0; i < count; i++) {
 		results->insert(&gl.gl_pathv[i][ofs]);
 	}
 
@@ -158,7 +158,7 @@ const bool RealFSImpl::IsDirectory(const std::string path)
 {
 	struct stat st;
 
-	if(!FileExists(path))
+	if (!FileExists(path))
 		return false;
 	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
 		return false;
@@ -171,16 +171,16 @@ const bool RealFSImpl::IsDirectory(const std::string path)
  */
 FileSystem* RealFSImpl::MakeSubFileSystem(const std::string path)
 {
-	assert( FileExists( path )); //TODO: throw an exception instead
+	assert(FileExists(path)); //TODO: throw an exception instead
 	std::string fullname;
 
 	fullname=FS_CanonicalizeName(path);
 	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
 
-	if( IsDirectory( path )) {
-		return new RealFSImpl( fullname );
+	if (IsDirectory(path)) {
+		return new RealFSImpl(fullname);
 	} else {
-		FileSystem* s =  new ZipFilesystem( fullname );
+		FileSystem* s =  new ZipFilesystem(fullname);
 		return s;
 	}
 }
@@ -191,18 +191,18 @@ FileSystem* RealFSImpl::MakeSubFileSystem(const std::string path)
 FileSystem* RealFSImpl::CreateSubFileSystem(const std::string path,
       const Type fs)
 {
-	if( FileExists( path ))
-		throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
+	if (FileExists(path))
+		throw wexception("Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
 
 	std::string fullname;
 
 	fullname=FS_CanonicalizeName(path);
 
-	if( fs == FileSystem::DIR ) {
-		EnsureDirectoryExists( path );
-		return new RealFSImpl( fullname );
+	if (fs == FileSystem::DIR) {
+		EnsureDirectoryExists(path);
+		return new RealFSImpl(fullname);
 	} else {
-		FileSystem* s =  new ZipFilesystem( fullname );
+		FileSystem* s =  new ZipFilesystem(fullname);
 		return s;
 	}
 }
@@ -212,13 +212,13 @@ FileSystem* RealFSImpl::CreateSubFileSystem(const std::string path,
  */
 void RealFSImpl::Unlink(const std::string file)
 {
-	if( !FileExists( file ))
+	if (!FileExists(file))
 		return;
 
-	if(IsDirectory( file ))
-		m_unlink_directory( file );
+	if (IsDirectory(file))
+		m_unlink_directory(file);
 	else
-		m_unlink_file( file );
+		m_unlink_file(file);
 }
 
 /**
@@ -226,17 +226,17 @@ void RealFSImpl::Unlink(const std::string file)
  */
 void RealFSImpl::m_unlink_file(const std::string file)
 {
-	assert( FileExists( file ));  //TODO: throw an exception instead
-	assert(!IsDirectory( file )); //TODO: throw an exception instead
+	assert(FileExists(file));  //TODO: throw an exception instead
+	assert(!IsDirectory(file)); //TODO: throw an exception instead
 
 	std::string fullname;
 
 	fullname=FS_CanonicalizeName(file);
 
 #ifndef __WIN32__
-	unlink( fullname.c_str());
+	unlink(fullname.c_str());
 #else
-	DeleteFile( fullname.c_str() );
+	DeleteFile(fullname.c_str());
 #endif
 }
 
@@ -245,26 +245,26 @@ void RealFSImpl::m_unlink_file(const std::string file)
  */
 void RealFSImpl::m_unlink_directory(const std::string file)
 {
-	assert( FileExists( file ));  //TODO: throw an exception instead
-	assert( IsDirectory( file ));  //TODO: throw an exception instead
+	assert(FileExists(file));  //TODO: throw an exception instead
+	assert(IsDirectory(file));  //TODO: throw an exception instead
 
 	filenameset_t files;
 
-	FindFiles( file, "*", &files );
+	FindFiles(file, "*", &files);
 
-	for(filenameset_t::iterator pname = files.begin(); pname != files.end(); pname++) {
-		std::string filename = FS_Filename( (*pname).c_str());
-		if( filename == ".svn" ) // HACK: ignore SVN directory for this might be a campaign directory or similar
+	for (filenameset_t::iterator pname = files.begin(); pname != files.end(); pname++) {
+		std::string filename = FS_Filename((*pname).c_str());
+		if (filename == ".svn") // HACK: ignore SVN directory for this might be a campaign directory or similar
 			continue;
-		if( filename == ".." )
+		if (filename == "..")
 			continue;
-		if( filename == "." )
+		if (filename == ".")
 			continue;
 
-		if( IsDirectory( *pname ) )
-			m_unlink_directory( *pname );
+		if (IsDirectory(*pname))
+			m_unlink_directory(*pname);
 		else
-			m_unlink_file( *pname );
+			m_unlink_file(*pname);
 	}
 
 	// NOTE: this might fail if this directory contains CVS dir,
@@ -273,9 +273,9 @@ void RealFSImpl::m_unlink_directory(const std::string file)
 
 	fullname=FS_CanonicalizeName(file);
 #ifndef __WIN32__
-	rmdir( fullname.c_str() );
+	rmdir(fullname.c_str());
 #else
-	RemoveDirectory( fullname.c_str());
+	RemoveDirectory(fullname.c_str());
 #endif
 }
 
@@ -285,8 +285,8 @@ void RealFSImpl::m_unlink_directory(const std::string file)
  */
 void RealFSImpl::EnsureDirectoryExists(const std::string dirname)
 {
-	if(FileExists(dirname)) {
-		if(IsDirectory(dirname)) return; // ok, dir is already there
+	if (FileExists(dirname)) {
+		if (IsDirectory(dirname)) return; // ok, dir is already there
 	}
 	MakeDirectory(dirname);
 }
@@ -301,7 +301,7 @@ void RealFSImpl::EnsureDirectoryExists(const std::string dirname)
  */
 void RealFSImpl::MakeDirectory(const std::string dirname)
 {
-	if(FileExists(dirname))
+	if (FileExists(dirname))
 		throw wexception("A File with the name %s already exists\n", dirname.c_str());
 
 	std::string fullname;
@@ -314,7 +314,7 @@ void RealFSImpl::MakeDirectory(const std::string dirname)
 #else
 	retval=mkdir(fullname.c_str(), 0x1FF);
 #endif
-	if(retval==-1)
+	if (retval==-1)
 		throw wexception("Couldn't create directory %s: %s\n", dirname.c_str(), strerror(errno));
 }
 
@@ -369,7 +369,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 		return data;
 	}
-	catch(...)
+	catch (...)
 	{
 		if (file)
 			fclose(file);

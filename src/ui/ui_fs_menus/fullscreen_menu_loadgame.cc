@@ -81,7 +81,7 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 
 void Fullscreen_Menu_LoadGame::map_selected(uint) {
 	if (const char * const name = list.get_selected()) {
-      FileSystem* fs = g_fs->MakeSubFileSystem( name );
+      FileSystem* fs = g_fs->MakeSubFileSystem(name);
 		Game_Loader gl(*fs, &game);
       Game_Preload_Data_Packet gpdp;
       gl.preload_game(&gpdp); // This has worked before, no problem
@@ -124,13 +124,13 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 
    Game_Preload_Data_Packet gpdp;
 
-   for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
+   for (filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
 
       FileSystem* fs = 0;
 
       try {
-         fs = g_fs->MakeSubFileSystem( name );
+         fs = g_fs->MakeSubFileSystem(name);
 			Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);
 
@@ -139,7 +139,7 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 			list.add(fname, name);
          free(fname);
 
-		} catch(_wexception& ) {
+		} catch (_wexception&) {
          // we simply skip illegal entries
 		}
          delete fs;

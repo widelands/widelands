@@ -21,7 +21,7 @@
 #define ERROR_H
 
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))
+#define PRINTF_FORMAT(b,c) __attribute__ ((__format__ (__printf__,b,c)))
 #else
 #define PRINTF_FORMAT(b,c)
 #endif
@@ -62,11 +62,11 @@ void log(const char *, ...) PRINTF_FORMAT(1,2);
       extern int graph_is_init;
 
       inline void myassert(int line, const char* file, int cond, const char* condt) {
-         if(!cond) {
+         if (!cond) {
             char buf[200];
             sprintf(buf, "%s (%i): assertion \"%s\" failed!\n", file, line, condt);
 
-            if(graph_is_init) {
+            if (graph_is_init) {
                critical_error(buf);
                // User chooses, if it goes on
 				} else {
@@ -79,7 +79,7 @@ void log(const char *, ...) PRINTF_FORMAT(1,2);
 		void myassert(int line, const char* file, const char* condt) throw(_wexception);
 
       #define assert(condition) \
-			do { if (!(condition)) myassert(__LINE__, __FILE__, #condition); } while(0)
+			do { if (!(condition)) myassert(__LINE__, __FILE__, #condition); } while (0)
 
 	#endif
 #else

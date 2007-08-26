@@ -53,7 +53,7 @@ m_parent(parent)
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
    uint i=0;
-   for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
+   for (i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
 		Event_Descr & d = *Event_Factory::get_event_descr(i);
 		m_event_list->add(_(d.name).c_str(), d);
 	}
@@ -114,7 +114,7 @@ void Editor_Event_Menu_New_Event::clicked_ok() {
    // Create new event
 	Event * const event = Event_Factory::make_event_with_option_dialog
 		(m_event_list->get_selected().id.c_str(), m_parent, 0);
-   if(!event) {
+   if (!event) {
       // No event created, choose another, user
       return;
 	}

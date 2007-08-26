@@ -110,7 +110,7 @@ Interactive_Base(g), m_game(&g)
 		(this,
 		 x + 136, y, 34, 34,
 		 2,
-		 g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ),
+		 g_gr->get_picture(PicMod_Game,  "pics/menu_help.png"),
 		 &Interactive_Player::open_encyclopedia, this,
 		 _("Tribe's ware encyclopedia"));
 
@@ -158,42 +158,42 @@ void Interactive_Player::think()
 
 	// Check for chatmessages
 	NetGame* ng = m_game->get_netgame();
-	if(ng && ng->have_chat_message()) {
+	if (ng && ng->have_chat_message()) {
 		NetGame::Chat_Message t = ng->get_chat_message();
-		m_chatmsges.push_back( t );
+		m_chatmsges.push_back(t);
 
 		Overlay_Chat_Messages ov;
 		ov.msg =  t;
 		ov.starttime = WLApplication::get()->get_time();
-		m_show_chatmsg.push_back( ov );
+		m_show_chatmsg.push_back(ov);
 	}
 
 	// If we have chat messages to overlay, show them now
 	m_chat_messages->set_text("");
-	if( m_show_chatmsg.size() && m_do_chat_overlays ) {
+	if (m_show_chatmsg.size() && m_do_chat_overlays) {
 		std::string str;
-		for( uint i = 0; i < m_show_chatmsg.size(); i++) {
+		for (uint i = 0; i < m_show_chatmsg.size(); i++) {
 			const NetGame::Chat_Message& t = m_show_chatmsg[i].msg;
 			str += get_game()->get_player(t.plrnum)->get_name();
 			str += ": ";
 			str += t.msg;
 			str += "\n";
 
-			if( WLApplication::get()->get_time() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME ) {
-				m_show_chatmsg.erase( m_show_chatmsg.begin() + i);
+			if (WLApplication::get()->get_time() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME) {
+				m_show_chatmsg.erase(m_show_chatmsg.begin() + i);
 				i--;
 			}
 		}
 
-		m_chat_messages->set_text( str.c_str() );
+		m_chat_messages->set_text(str.c_str());
 	}
 
 	// Is the user typing a message?
 	m_type_message->set_text("");
-	if( m_is_typing_msg ) {
+	if (m_is_typing_msg) {
 		std::string text = _("Message: ");
 		text += m_typed_message;
-		m_type_message->set_text( text.c_str() );
+		m_type_message->set_text(text.c_str());
 	}
 }
 
@@ -308,14 +308,14 @@ F5: reveal map
 */
 bool Interactive_Player::handle_key(bool down, int code, char c)
 {
-	if( m_is_typing_msg && down ) {
-		if(c & 0x7f) {
+	if (m_is_typing_msg && down) {
+		if (c & 0x7f) {
 			m_typed_message.append(1, c);
 			return true;
 		}
 	}
 
-	switch(code) {
+	switch (code) {
 	case KEY_SPACE:
 		if (down)
 			toggle_buildhelp();
@@ -337,7 +337,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		return true;
 
 	case KEY_f:
-		if( down )
+		if (down)
 			g_gr->toggle_fullscreen();
 		return true;
 
@@ -362,17 +362,17 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		return true;
 
 	case KEY_BACKSPACE:
-		if( down ) {
-			if( m_is_typing_msg && m_typed_message.size() ) {
-				m_typed_message.erase( m_typed_message.begin() + m_typed_message.size() - 1);
+		if (down) {
+			if (m_is_typing_msg && m_typed_message.size()) {
+				m_typed_message.erase(m_typed_message.begin() + m_typed_message.size() - 1);
 				return true;
 			}
 		}
 		break;
 
 	case KEY_ESCAPE:
-		if( down ) {
-			if( m_is_typing_msg ) {
+		if (down) {
+			if (m_is_typing_msg) {
 				m_is_typing_msg = false;
 				m_typed_message.clear();
 				return true;
@@ -381,14 +381,14 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		break;
 
 	case KEY_RETURN:
-		if( down ) {
-			if( m_is_typing_msg && m_typed_message.size() ) {
-				if( m_game->get_netgame() ) {
+		if (down) {
+			if (m_is_typing_msg && m_typed_message.size()) {
+				if (m_game->get_netgame()) {
 					NetGame::Chat_Message t;
 
 					t.plrnum = get_player_number();
 					t.msg = m_typed_message;
-					m_game->get_netgame()->send_chat_message( t );
+					m_game->get_netgame()->send_chat_message(t);
 				}
 				m_typed_message.clear();
 				m_is_typing_msg = false;

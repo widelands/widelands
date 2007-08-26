@@ -320,7 +320,7 @@ WaresQueueDisplay::WaresQueueDisplay
 UI::Panel(parent, x, y, 0, Height),
 m_queue(queue),
 m_max_width(maxw),
-m_pic_background(g_gr->get_picture( PicMod_Game, pic_queue_background)),
+m_pic_background(g_gr->get_picture(PicMod_Game, pic_queue_background)),
 m_cache_size(queue->get_size()),
 m_cache_filled(queue->get_filled()),
 m_display_size(0)
@@ -654,7 +654,7 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
-   if(m_capscache & (1 << Building::PCap_Enhancable)) {
+   if (m_capscache & (1 << Building::PCap_Enhancable)) {
 		const std::vector<char *> & buildings = m_building->enhances_to();
 	   const Tribe_Descr & tribe = m_player->get_player()->tribe();
 		const std::vector<char *>::const_iterator buildings_end = buildings.end();
@@ -664,10 +664,10 @@ void Building_Window::setup_capsbuttons()
 			 ++it)
 		{
          int id = tribe.get_building_index(*it);
-         if(id==-1)
+         if (id==-1)
             throw wexception("Should enhance to unknown building: %s\n", *it);
 
-         if(!m_player->get_player()->is_building_allowed(id)) {
+         if (!m_player->get_player()->is_building_allowed(id)) {
             // This buildings is disabled for this scenario, sorry.
             // Try again later!!
             continue;
@@ -722,7 +722,7 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
-   if( x == 0 ) {
+   if (x == 0) {
       // no capsbutton is in this window
       // resize us, so that we do not take space
       m_capsbuttons->set_inner_size(0,0);
@@ -892,7 +892,7 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	box->add_space(8);
 
 	// Add the wares queue
-	for(uint i = 0; i < cs->get_nrwaresqueues(); i++)
+	for (uint i = 0; i < cs->get_nrwaresqueues(); i++)
 	{
 		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
 					cs->get_waresqueue(i), parent->get_game());
@@ -1036,7 +1036,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    posx = 0;
    UI::Panel* caps = create_capsbuttons(this);
 	caps->set_pos(Point(spacing, posy));
-   if( caps->get_h() )
+   if (caps->get_h())
       posy += caps->get_h() + spacing;
 
    set_inner_size(get_inner_w(), posy);
@@ -1070,12 +1070,12 @@ void Warehouse_Window::clicked_goto() {
  * wares -> workers -> soldier
  */
 void Warehouse_Window::clicked_switchpage() {
-   if(m_curpage == 0) {
+   if (m_curpage == 0) {
       // Showing wares, should show workers
       m_waresdisplay->remove_all_warelists();
       m_waresdisplay->add_warelist(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
       m_curpage = 1;
-	} else if( m_curpage == 1) {
+	} else if (m_curpage == 1) {
       // Showing workers, should show soldiers
       //TODO currently switches back to wares
       m_waresdisplay->remove_all_warelists();
@@ -1218,7 +1218,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
    std::vector<Worker*>* workers=m_ps->get_workers();
 
    uint i;
-   for(i=0; i<workers->size(); i++) {
+   for (i=0; i<workers->size(); i++) {
 		Worker* worker = (*workers)[i];
 		m_ls->add(worker->descname().c_str(), worker, worker->get_menu_pic());
 	}
@@ -1236,23 +1236,23 @@ void ProductionSite_Window_ListWorkerWindow::update(void)
 	if (m_ls->has_selection()) {
 		const Worker& worker = *m_ls->get_selected();
 
-		m_type->set_text( worker.descname() );
+		m_type->set_text(worker.descname());
 
-		if ( worker.get_current_experience() != -1 and
-			 worker.get_needed_experience () != -1 )
+		if (worker.get_current_experience() != -1 and
+			 worker.get_needed_experience () != -1)
 		{
 			// Fill upgrade status
 			char buffer[7];
 			sprintf(buffer, "%i/%i", worker.get_current_experience(),
-							worker.get_needed_experience() );
-			m_experience->set_text( buffer );
+							worker.get_needed_experience());
+			m_experience->set_text(buffer);
 
 			// Get the descriptive name of the ongoing upgrade
 			uint index = worker.get_tribe()->get_safe_worker_index(
-							worker.get_becomes() );
+							worker.get_becomes());
 			const Worker_Descr *descr = worker.get_tribe()->get_worker_descr(
 														index);
-			m_becomes->set_text( descr->descname() );
+			m_becomes->set_text(descr->descname());
 
 		} else {
 			// Worker is not upgradeable
@@ -1441,7 +1441,7 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 
 	// Add the wares queue
 	std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
-	for(uint i = 0; i < warequeues->size(); i++) {
+	for (uint i = 0; i < warequeues->size(); i++) {
 		create_ware_queue_panel (box, ps, (*warequeues)[i]);
 	}
 
@@ -2077,7 +2077,7 @@ Convenience function: Adds a new tab to the main tab panel
 */
 void TrainingSite_Window::add_tab(const char* picname, UI::Panel* panel)
 {
-	m_tabpanel->add(g_gr->get_picture(   PicMod_Game,   picname ), panel );
+	m_tabpanel->add(g_gr->get_picture(PicMod_Game,   picname), panel);
 }
 
 

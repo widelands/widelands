@@ -42,7 +42,7 @@
 /**
  * Callback function for font renderer.
  */
-std::string g_MapVariableCallback( std::string str, void* data ) {
+std::string g_MapVariableCallback(std::string str, void* data) {
 	if (const Map * const map = static_cast<const Map * const>(data))
 		if
 			(const MapVariable * const var =
@@ -248,7 +248,7 @@ void Map::recalc_default_resources(void) {
          FCoords f,f1;
          f=get_fcoords(Coords(x,y));
          // only on unset fields
-         if(f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
+         if (f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
          std::map<int,int> m;
          int amount=0;
 
@@ -325,8 +325,8 @@ void Map::recalc_default_resources(void) {
          int lv=0;
          int res=0;
          std::map<int,int>::iterator i=m.begin();
-         while(i!=m.end()) {
-            if(i->second>lv) {
+         while (i!=m.end()) {
+            if (i->second>lv) {
                lv=i->second;
                res=i->first;
 				}
@@ -334,7 +334,7 @@ void Map::recalc_default_resources(void) {
 			}
          amount/=6;
 
-         if(res==-1 || !amount) {
+         if (res==-1 || !amount) {
             f.field->set_resources(0,0);
             f.field->set_starting_res_amount(0);
 			} else {
@@ -373,7 +373,7 @@ void Map::cleanup(void) {
    m_scenario_tribes.clear();
    m_scenario_names.clear();
 
-   if(m_overlay_manager)
+   if (m_overlay_manager)
       m_overlay_manager->reset();
 
    delete m_mom;
@@ -398,11 +398,11 @@ void Map::cleanup(void) {
 
    // Remove all extra datas. Pay attention here, maybe some freeing would be needed
 #ifdef DEBUG
-   for( uint i = 0; i < m_extradatainfos.size(); i++) {
-      assert( m_extradatainfos[i].type == Extradata_Info::PIC ) ;
+   for (uint i = 0; i < m_extradatainfos.size(); i++) {
+      assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
 	}
 #endif
-   m_extradatainfos.resize( 0 );
+   m_extradatainfos.resize(0);
 }
 
 /*
@@ -513,7 +513,7 @@ void Map::set_nrplayers(const Uint8 nrplayers) {
 	}
 
 	m_starting_pos = (Coords*)realloc(m_starting_pos, sizeof(Coords)*nrplayers);
-	while(m_nrplayers < nrplayers)
+	while (m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 
 	m_nrplayers = nrplayers; // in case the number players got less
@@ -635,7 +635,7 @@ void Map::find_reachable
 
 	queue.push_back(area.field);
 
-	while(queue.size()) {
+	while (queue.size()) {
 		Pathfield* curpf;
 		FCoords cur;
 
@@ -713,7 +713,7 @@ struct FindBobsCallback {
 	void operator()(const Map &, const FCoords cur) {
 		Bob *bob;
 
-		for(bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+		for (bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 			if (m_list && std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
 				continue;
 
@@ -1236,12 +1236,12 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 				(Area<FCoords>(f, 2),
 				 &objectlist,
 				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-	for(uint i = 0; i < objectlist.size(); i++) {
+	for (uint i = 0; i < objectlist.size(); i++) {
 		BaseImmovable *obj = objectlist[i].object;
 		Coords objpos = objectlist[i].coords;
 		int dist = calc_distance(f, objpos);
 
-		switch(obj->get_size()) {
+		switch (obj->get_size()) {
 		case BaseImmovable::SMALL:
 			if (dist == 1) {
 				if (building > BUILDCAPS_MEDIUM) {
@@ -1427,7 +1427,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 
 	// end and start are on the same row
 	if (!dy) {
-		switch(dx) {
+		switch (dx) {
 		case -1: return Map_Object::WALK_W;
 		case 0: return -1;
 		case 1: return Map_Object::WALK_E;
@@ -1445,7 +1445,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		if (start.y & 1)
 			dx--;
 
-		switch(dx) {
+		switch (dx) {
 		case -1: return Map_Object::WALK_SW;
 		case 0: return Map_Object::WALK_SE;
 		default: return 0;
@@ -1457,7 +1457,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		if (start.y & 1)
 			dx--;
 
-		switch(dx) {
+		switch (dx) {
 		case -1: return Map_Object::WALK_NW;
 		case 0: return Map_Object::WALK_NE;
 		default: return 0;
@@ -1609,7 +1609,7 @@ Get a field's neighbour by direction
 void Map::get_neighbour
 (const Coords f, const Direction dir, Coords * const o) const
 {
-	switch(dir) {
+	switch (dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
 	case Map_Object::WALK_NE: get_trn(f, o); break;
 	case Map_Object::WALK_E: get_rn(f, o); break;
@@ -1622,7 +1622,7 @@ void Map::get_neighbour
 void Map::get_neighbour
 (const FCoords f, const Direction dir, FCoords * const o) const
 {
-	switch(dir) {
+	switch (dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
 	case Map_Object::WALK_NE: get_trn(f, o); break;
 	case Map_Object::WALK_E: get_rn(f, o); break;
@@ -1637,14 +1637,14 @@ void Map::get_neighbour
 */
 Map_Loader* Map::get_correct_loader(const char* filename) {
    Map_Loader* retval=0;
-   if(strlen(filename)<strlen(WLMF_SUFFIX) || strlen(filename)<strlen(S2MF_SUFFIX)) return 0;
+   if (strlen(filename)<strlen(WLMF_SUFFIX) || strlen(filename)<strlen(S2MF_SUFFIX)) return 0;
 
-   if(!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+   if (!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
       try {
-         FileSystem* fs = g_fs->MakeSubFileSystem( filename );
+         FileSystem* fs = g_fs->MakeSubFileSystem(filename);
 			retval = new Widelands_Map_Loader(*fs, this);
-		} catch( ... ) {
+		} catch (...) {
          // If this fails, it is an illegal file (maybe old plain binary map format)
          //TODO: catchall hides real errors! Replace with more specific code
 		}
@@ -1688,7 +1688,7 @@ public:
 
 		unsigned nsize = m_data.size()-1;
 		unsigned fix = 0;
-		while(fix < nsize) {
+		while (fix < nsize) {
 			unsigned l = fix*2 + 1;
 			unsigned r = fix*2 + 2;
 			if (l >= nsize) {
@@ -1743,7 +1743,7 @@ public:
 		unsigned slot = m_data.size();
 		m_data.push_back(0);
 
-		while(slot > 0) {
+		while (slot > 0) {
 			unsigned parent = (slot - 1) / 2;
 
 			if (m_data[parent]->cost() < t->cost())
@@ -1768,7 +1768,7 @@ public:
 
 		assert(m_data[slot] == t);
 
-		while(slot > 0) {
+		while (slot > 0) {
 			unsigned parent = (slot - 1) / 2;
 
 			if (m_data[parent]->cost() <= t->cost())
@@ -1905,7 +1905,7 @@ int Map::findpath
 
 	Open.push(curpf);
 
-	while((curpf = Open.pop()))
+	while ((curpf = Open.pop()))
 	{
 		cur.field = m_fields + (curpf-m_pathfields);
 		get_coords(*cur.field, cur);
@@ -1928,7 +1928,7 @@ int Map::findpath
 			direction = order2;
 
 		// Check all the 6 neighbours
-		for(uint i = 6; i; i--, direction++) {
+		for (uint i = 6; i; i--, direction++) {
 			Pathfield *neighbpf;
 			FCoords neighb;
 			int cost;
@@ -1993,7 +1993,7 @@ int Map::findpath
 
 	path.m_path.clear();
 
-	while(curpf->backlink != Map_Object::IDLE) {
+	while (curpf->backlink != Map_Object::IDLE) {
 		path.m_path.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
@@ -2280,7 +2280,7 @@ void FindNodeAnd::add(const FindNode* findfield, bool negate)
 }
 
 bool FindNodeAnd::accept(const Map & map, const FCoords coord) const {
-	for(std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
+	for (std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
 	    it != m_subfunctors.end();
 		 ++it)
 	{
@@ -2312,7 +2312,7 @@ bool FindNodeSize::accept(const Map &, const FCoords coord) const {
 	if (hasrobust)
 		return false;
 
-	switch(m_size) {
+	switch (m_size) {
 	default:
 	case sizeAny:    return true;
 	case sizeBuild:  return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
@@ -2326,7 +2326,7 @@ bool FindNodeSize::accept(const Map &, const FCoords coord) const {
 
 bool FindNodeSizeResource::accept(const Map & map, const FCoords coord) const {
 	if (FindNodeSize::accept(map, coord)) {
-   if(coord.field->get_resources()==m_res &&
+   if (coord.field->get_resources()==m_res &&
          coord.field->get_resources_amount())
       return true;
 	}
@@ -2340,7 +2340,7 @@ bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {
 	if (imm)
 		size = imm->get_size();
 
-	switch(size) {
+	switch (size) {
 	case BaseImmovable::NONE: return m_sizes & sizeNone;
 	case BaseImmovable::SMALL: return m_sizes & sizeSmall;
 	case BaseImmovable::MEDIUM: return m_sizes & sizeMedium;
@@ -2488,7 +2488,7 @@ bool CheckStepRoad::allowed
 	// Is the field forbidden?
 	if (m_forbidden) {
 		int c = m_forbidden->size()-1;
-		while(c >= 0 && end != (*m_forbidden)[c])
+		while (c >= 0 && end != (*m_forbidden)[c])
 			c--;
 		if (c >= 0)
 			return false;
@@ -2546,7 +2546,7 @@ void Path::reverse()
 	std::swap(m_start, m_end);
 	std::reverse(m_path.begin(), m_path.end());
 
-	for(uint i = 0; i < m_path.size(); i++)
+	for (uint i = 0; i < m_path.size(); i++)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
 
@@ -2599,7 +2599,7 @@ Return -1 if field is not part of this path.
 */
 int CoordPath::get_index(Coords field) const
 {
-	for(uint i = 0; i < m_coords.size(); i++)
+	for (uint i = 0; i < m_coords.size(); i++)
 		if (m_coords[i] == field)
 			return i;
 
@@ -2619,7 +2619,7 @@ void CoordPath::reverse()
 	std::reverse(m_path.begin(), m_path.end());
 	std::reverse(m_coords.begin(), m_coords.end());
 
-	for(uint i = 0; i < m_path.size(); i++)
+	for (uint i = 0; i < m_path.size(); i++)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
 
@@ -2675,7 +2675,7 @@ void CoordPath::append(const Map & map, const Path & tail) {
 
 	// debug
 	//log("CoordPath; start %i %i\n", m_coords[0].x, m_coords[0].y);
-	//for(uint i = 0; i < m_path.size(); i++)
+	//for (uint i = 0; i < m_path.size(); i++)
 	//log("  %i -> %i %i\n", m_path[i], m_coords[i+1].x, m_coords[i+1].y);
 }
 

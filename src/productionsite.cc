@@ -58,7 +58,7 @@ ProductionSite_Descr::ProductionSite_Descr
 
 ProductionSite_Descr::~ProductionSite_Descr()
 {
-	while(m_programs.size()) {
+	while (m_programs.size()) {
 		delete m_programs.begin()->second;
 		m_programs.erase(m_programs.begin());
 	}
@@ -91,7 +91,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 	if (s) {
 		// This house obviously requests wares and works on them
 		Section::Value* val;
-		while((val=s->get_next_val(0))) {
+		while ((val=s->get_next_val(0))) {
 			int idx=tribe().get_ware_index(val->get_name());
 			if (idx == -1)
 				throw wexception("Error in [inputs], ware %s is unknown!",
@@ -116,12 +116,12 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 	split_string(workerstr, workers, ",");
    uint i;
    std::vector<std::string> amounts;
-   for(i=0; i<workers.size(); i++) {
+   for (i=0; i<workers.size(); i++) {
       amounts.resize(0);
       remove_spaces(&workers[i]);
 		split_string(workers[i], amounts, "*");
       uint j;
-      for(j=0; j<amounts.size(); j++)
+      for (j=0; j<amounts.size(); j++)
          remove_spaces(&amounts[j]);
 
       int amount=1;
@@ -136,7 +136,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 	}
 
 	// Get programs
-	while(sglobal->get_next_string("program", &string)) {
+	while (sglobal->get_next_string("program", &string)) {
 		ProductionProgram* program = 0;
 
 		try
@@ -145,7 +145,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 			program->parse(directory, prof, string, this, encdata);
 			m_programs[program->get_name()] = program;
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			delete program;
 			throw wexception("Error in program %s: %s", string, e.what());
@@ -254,7 +254,7 @@ void ProductionSite::calc_statistics()
 	uint ok = 0;
 	uint lastOk = 0;
 
-	for(pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
+	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
 		if (m_statistics[pos]) {
 			ok++;
 			if (pos >= STATISTICS_VECTOR_LENGTH / 2)
@@ -309,15 +309,15 @@ void ProductionSite::init(Editor_Game_Base* g)
 			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();
          uint i;
          int j;
-         for(i=0; i<info->size(); i++)
-            for(j=0; j< ((*info)[i]).how_many; j++)
+         for (i=0; i<info->size(); i++)
+            for (j=0; j< ((*info)[i]).how_many; j++)
 					request_worker(((*info)[i]).name.c_str());
 	}
 
 		// Init input ware queues
 		const std::vector<Input>* inputs = descr().get_inputs();
 
-		for(uint i = 0; i < inputs->size(); i++) {
+		for (uint i = 0; i < inputs->size(); i++) {
 			WaresQueue* wq = new WaresQueue(this);
 
 			m_input_queues.push_back(wq);
@@ -341,7 +341,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ProductionSite::set_economy(Economy* e)
 {
 	if (Economy * const old = get_economy()) {
-		for(uint i = 0; i < m_input_queues.size(); i++)
+		for (uint i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
@@ -379,7 +379,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	// Release worker
 	if (m_worker_requests.size()) {
 		uint i=0;
-		for(i=0; i<m_worker_requests.size(); i++) {
+		for (i=0; i<m_worker_requests.size(); i++) {
 			delete m_worker_requests[i];
 			m_worker_requests[i]=0;
 		}
@@ -388,7 +388,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 
 	if (m_workers.size()) {
 		uint i=0;
-		for(i=0; i<m_workers.size(); i++) {
+		for (i=0; i<m_workers.size(); i++) {
 			Worker* w = m_workers[i];
 
 			// Ensure we don't re-request the worker when remove_worker is called
@@ -402,7 +402,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	// Cleanup the wares queues
-	for(uint i = 0; i < m_input_queues.size(); i++) {
+	for (uint i = 0; i < m_input_queues.size(); i++) {
 		m_input_queues[i]->cleanup();
 		delete m_input_queues[i];
 	}
@@ -423,7 +423,7 @@ Intercept remove_worker() calls to unassign our worker, if necessary.
 void ProductionSite::remove_worker(Worker* w)
 {
 	uint i=0;
-	for(i=0; i<m_workers.size(); i++) {
+	for (i=0; i<m_workers.size(); i++) {
 		if (m_workers[i] == w) {
 			m_workers[i] = 0;
 			request_worker(w->name().c_str());
@@ -558,7 +558,7 @@ void ProductionSite::program_act(Game* g)
 		m_program_time = schedule_act(g,20000);
 		return;
 	}
-	switch(action->type) {
+	switch (action->type) {
 		case ProductionAction::actSleep:
 			molog("  Sleep(%i)\n", action->iparam1);
 
@@ -589,7 +589,7 @@ void ProductionSite::program_act(Game* g)
 
 			uint j=0;
 			bool consumed=false;
-			for(j=0; j<wares.size(); j++) {
+			for (j=0; j<wares.size(); j++) {
 				molog("  Consuming(%s)\n", wares[j].c_str());
 				const std::vector<Input> & inputs = *descr().get_inputs();
 				const std::vector<Input>::size_type inputs_size =
@@ -637,7 +637,7 @@ void ProductionSite::program_act(Game* g)
 
 			uint j=0;
 			bool found=false;
-			for(j=0; j<wares.size(); j++) {
+			for (j=0; j<wares.size(); j++) {
 				molog("  Checking(%s)\n", wares[j].c_str());
 				const std::vector<Input> & inputs = *descr().get_inputs();
 				const std::vector<Input>::size_type inputs_size =
@@ -695,7 +695,7 @@ void ProductionSite::program_act(Game* g)
 			molog("  Mine '%s'", action->sparam1.c_str());
 
 			res = map.get_world()->get_resource(action->sparam1.c_str());
-			if(static_cast<signed char>(res)==-1)
+			if (static_cast<signed char>(res)==-1)
 				throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
 					" with world!!\n",  action->sparam1.c_str());
 
@@ -1155,7 +1155,7 @@ void ProductionSite::program_end(Game* g, bool success)
 
 		if (caught)
 			break;
-	} while(m_program.size());
+	} while (m_program.size());
 
 	if (dostats)
 		add_statistics_value(success);
@@ -1163,7 +1163,7 @@ void ProductionSite::program_end(Game* g, bool success)
 	// if succesfull, the workers gain experience
 	if (success) {
 		uint i=0;
-		for(i=0; i<m_workers.size(); i++)
+		for (i=0; i<m_workers.size(); i++)
 			m_workers[i]->gain_experience(g);
 	}
 

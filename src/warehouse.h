@@ -129,8 +129,8 @@ struct WarehouseSupply : public Supply {
 
 	void set_economy(Economy* e);
 
-   void set_nrworkers( int i );
-   void set_nrwares( int i );
+   void set_nrworkers(int i);
+   void set_nrwares(int i);
 
 
 	const WareList &get_wares() const { return m_wares; }

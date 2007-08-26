@@ -83,7 +83,7 @@ WUIPlot_Area::WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h) :
 /*
  * Destructor
  */
-WUIPlot_Area::~WUIPlot_Area( void ) {
+WUIPlot_Area::~WUIPlot_Area(void) {
 }
 
 /*
@@ -117,7 +117,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    float sub = xline_length / how_many_ticks[m_time];
    float posx = get_inner_w()-space_at_right;
    char buffer[200];
-   for(int i = 0; i <= how_many_ticks[m_time]; i++) {
+   for (int i = 0; i <= how_many_ticks[m_time]; i++) {
       dst->draw_line((int)posx, get_inner_h()-space_at_bottom, (int) posx, get_inner_h()-space_at_bottom+3, LINE_COLOR);
 
 		snprintf
@@ -145,28 +145,28 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    uint max = 0;
    // Find the maximum value
-   if( m_plotmode == PLOTMODE_ABSOLUTE )  {
-      for(uint i = 0; i < m_plotdata.size(); i++) {
-         if(!m_plotdata[i].showplot) continue;
-         for(uint l = 0; l < m_plotdata[i].dataset->size(); l++)
-            if( max < (*m_plotdata[i].dataset)[l])
+   if (m_plotmode == PLOTMODE_ABSOLUTE)  {
+      for (uint i = 0; i < m_plotdata.size(); i++) {
+         if (!m_plotdata[i].showplot) continue;
+         for (uint l = 0; l < m_plotdata[i].dataset->size(); l++)
+            if (max < (*m_plotdata[i].dataset)[l])
                max = (*m_plotdata[i].dataset)[l];
 		}
 	} else {
-      for(uint plot = 0; plot < m_plotdata.size(); plot++) {
-         if(!m_plotdata[plot].showplot) continue;
+      for (uint plot = 0; plot < m_plotdata.size(); plot++) {
+         if (!m_plotdata[plot].showplot) continue;
 
          const std::vector<uint>* dataset = m_plotdata[plot].dataset;
 
          // How many do we take together
-         int how_many = (int)( ((float)time_in_ms[m_time] / (float)NR_SAMPLES) /(float)m_sample_rate);
+         int how_many = (int)(((float)time_in_ms[m_time] / (float)NR_SAMPLES) /(float)m_sample_rate);
 
          uint add = 0;
          // Relative data, first entry is always zero
-         for(uint i = 0; i < dataset->size(); i++) {
+         for (uint i = 0; i < dataset->size(); i++) {
             add += (*dataset)[i];
-            if( ! ( (i+1) % how_many ) ) {
-               if(add > max) max = add;
+            if (! ((i+1) % how_many)) {
+               if (add > max) max = add;
                add = 0;
 				}
 			}
@@ -187,23 +187,23 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // Now, plot the pixels
    sub = xline_length / ((float)time_in_ms[m_time] / (float)m_sample_rate);
-   for(uint plot = 0; plot < m_plotdata.size(); plot++) {
-      if(!m_plotdata[plot].showplot) continue;
+   for (uint plot = 0; plot < m_plotdata.size(); plot++) {
+      if (!m_plotdata[plot].showplot) continue;
 
       RGBColor color = m_plotdata[plot].plotcolor;
       const std::vector<uint>* dataset = m_plotdata[plot].dataset;
 
       std::vector<uint> m_data;
-      if( m_plotmode == PLOTMODE_RELATIVE ) {
+      if (m_plotmode == PLOTMODE_RELATIVE) {
          // How many do we take together
-         int how_many = (int)( ((float)time_in_ms[m_time] / (float)NR_SAMPLES) /(float)m_sample_rate);
+         int how_many = (int)(((float)time_in_ms[m_time] / (float)NR_SAMPLES) /(float)m_sample_rate);
 
          uint add = 0;
          // Relative data, first entry is always zero
          m_data.push_back(0);
-         for(uint i = 0; i < dataset->size(); i++) {
+         for (uint i = 0; i < dataset->size(); i++) {
             add += (*dataset)[i];
-            if( ! ( (i+1) % how_many ) ) {
+            if (! ((i+1) % how_many)) {
                m_data.push_back(add);
                add = 0;
 				}
@@ -217,12 +217,12 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
       int lx = get_inner_w()-space_at_right;
       int ly = get_inner_h()-space_at_bottom;
-      for(int i = dataset->size()-1; i > 0 && posx > spacing; i--) {
+      for (int i = dataset->size()-1; i > 0 && posx > spacing; i--) {
          int value = (*dataset)[i];
 
          int curx = (int)posx;
          int cury = get_inner_h()-space_at_bottom;
-         if(value) {
+         if (value) {
             float length_y = yline_length / ((float)max / (float)value);
             cury -= (int)length_y;
 			}
@@ -239,8 +239,8 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 /*
  * Register a new plot data stream
  */
-void WUIPlot_Area::register_plot_data( uint id, const std::vector<uint>* data, RGBColor color ) {
-   if(id >= m_plotdata.size()) {
+void WUIPlot_Area::register_plot_data(uint id, const std::vector<uint>* data, RGBColor color) {
+   if (id >= m_plotdata.size()) {
       m_plotdata.resize(id+1);
 	}
 
@@ -252,7 +252,7 @@ void WUIPlot_Area::register_plot_data( uint id, const std::vector<uint>* data, R
 /*
  * Show this plot data?
  */
-void WUIPlot_Area::show_plot( uint id, bool t ) {
+void WUIPlot_Area::show_plot(uint id, bool t) {
    assert(id < m_plotdata.size());
    m_plotdata[id].showplot = t;
 };
@@ -265,6 +265,6 @@ void WUIPlot_Area::set_time(TIME id) {m_time = id;}
 /*
  * Set sample rate the data uses
  */
-void WUIPlot_Area::set_sample_rate( uint id ) {
+void WUIPlot_Area::set_sample_rate(uint id) {
    m_sample_rate = id;
 }
