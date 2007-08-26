@@ -572,7 +572,7 @@ void Font_Handler::draw_richtext
 SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int style) {
 	SDL_Surface *rend_space = 0;
 	rend_space = draw_string_sdl_surface(block.get_font_face(), block.get_font_size(), block.get_font_color(),
-	                                     bg," ", Align_Left, -1, style, block.get_line_spacing());
+	                                     bg, " ", Align_Left, -1, style, block.get_line_spacing());
 	return rend_space;
 }
 

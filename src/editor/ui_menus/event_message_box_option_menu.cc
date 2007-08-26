@@ -97,7 +97,7 @@ m_parent(parent)
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease,
 		 this);
 
-	m_nr_buttons_ta=new UI::Textarea(this, spacing+160+spacing, posy, 15, 20,"1", Align_CenterLeft);
+	m_nr_buttons_ta=new UI::Textarea(this, spacing+160+spacing, posy, 15, 20, "1", Align_CenterLeft);
 
 	new UI::Button<Event_Message_Box_Option_Menu>
 		(this,

@@ -263,7 +263,7 @@ void AttackController::soldierWon(Soldier* soldier) {
 	for (uint i=0;i<involvedSoldiers.size();i++) {
 		//involvedSoldiers[i].soldier->set_economy(0);
 		involvedSoldiers[i].soldier->set_location(involvedSoldiers[i].origin);
-		involvedSoldiers[i].soldier->send_signal(game,"return_home");
+		involvedSoldiers[i].soldier->send_signal(game, "return_home");
 	}
 
    log("battle finished. removing attack controller.\n");

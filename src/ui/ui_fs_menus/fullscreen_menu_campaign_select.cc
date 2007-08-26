@@ -391,7 +391,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 		list.add(
 			s->get_string("name", _("[No value found]").c_str()),
 			s->get_string("path"),
-			g_gr->get_picture(PicMod_Game,"pics/ls_wlmap.png"));
+			g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
 		}
 
 		i++;

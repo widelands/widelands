@@ -167,7 +167,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       // default workers
       s = prof.get_safe_section("startworkers");
       while ((value=s->get_next_val(0))) {
-         if (!strcmp(value->get_name(),"soldier")) continue; // Ignore soldiers here
+         if (!strcmp(value->get_name(), "soldier")) continue; // Ignore soldiers here
          if (not m_workers.exists(value->get_name()))
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 

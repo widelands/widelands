@@ -172,7 +172,7 @@ void LAN_Game_Promoter::run ()
 
 	printf ("Received %s packet\n", magic);
 
-	if (!strncmp(magic,"QUERY", 6) && magic[6]==LAN_PROMOTION_PROTOCOL_VERSION)
+	if (!strncmp(magic, "QUERY", 6) && magic[6]==LAN_PROMOTION_PROTOCOL_VERSION)
 	    send (&gameinfo, sizeof(gameinfo), &addr);
 	}
 }

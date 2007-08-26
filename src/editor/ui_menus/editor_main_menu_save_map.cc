@@ -259,9 +259,9 @@ void Main_Menu_Save_Map::fill_list() {
 		 ++pname)
 	{
       const char *name = pname->c_str();
-      if (!strcmp(FileSystem::FS_Filename(name),".")) continue;
-      if (!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-      if (!strcmp(FileSystem::FS_Filename(name),"CVS")) continue;
+      if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
+      if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
+      if (!strcmp(FileSystem::FS_Filename(name), "CVS")) continue;
       if (!g_fs->IsDirectory(name)) continue;
       if (Widelands_Map_Loader::is_widelands_map(name)) continue;
 

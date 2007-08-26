@@ -244,10 +244,10 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//TODO: but skip uncompressed maps (which look like directories)
 	for (filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
-		if (!strcmp(FileSystem::FS_Filename(name),".")) continue;
-		if (!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-		if (!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
-		if (!strcmp(FileSystem::FS_Filename(name),".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
+		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
+		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue; // Upsy, appeared again. ignore
+		if (!strcmp(FileSystem::FS_Filename(name), "CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
+		if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue; // HACK: we skip .svn dir (which is in normal checkout present) for aesthetic reasons
 		if (!g_fs->IsDirectory(name)) continue;
 		if (Widelands_Map_Loader::is_widelands_map(name)) continue;
 
