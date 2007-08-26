@@ -68,7 +68,7 @@ const int ZipFilesystem::FindFiles
 #ifndef NDEBUG
  pattern
 #endif
- ,
+,
  filenameset_t * results, uint)
 {
    m_OpenUnzip();
@@ -87,7 +87,7 @@ const int ZipFilesystem::FindFiles
    char filename_inzip[256];
    while (1) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
-                            sizeof(filename_inzip),NULL,0,NULL,0);
+                            sizeof(filename_inzip), NULL, 0, NULL, 0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
       std::string filename = FS_Filename(complete_filename.c_str());
@@ -131,7 +131,7 @@ const bool ZipFilesystem::FileExists(std::string path)
 
    while (1) {
       unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
-                            sizeof(filename_inzip),NULL,0,NULL,0);
+                            sizeof(filename_inzip), NULL, 0, NULL, 0);
 
       std::string complete_filename = &filename_inzip[ m_basename.size() ];
       if (complete_filename[ complete_filename.size() - 1 ] == '/')
@@ -163,7 +163,7 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
    char filename_inzip[256];
 
    unzGetCurrentFileInfo(m_unzipfile, &file_info, filename_inzip,
-								 sizeof(filename_inzip),NULL,0,NULL,0);
+								 sizeof(filename_inzip), NULL, 0, NULL, 0);
 
    if (filename_inzip[ strlen(filename_inzip) - 1 ] == '/') {
       return true;
@@ -334,15 +334,15 @@ void ZipFilesystem::Write(const std::string fname, const void * const data,
    // Create File
    std::string complete_file = m_basename + '/' + fname;
    int err = zipOpenNewFileInZip3(m_zipfile, complete_file.c_str(), &zi,
-         NULL,0,NULL,0,NULL /* comment*/,
+         NULL, 0, NULL, 0, NULL /* comment*/,
          Z_DEFLATED,
-         Z_BEST_COMPRESSION,0,
+         Z_BEST_COMPRESSION, 0,
          -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
          0, 0);
    assert(err == ZIP_OK);
 
    // Write File
-   err = zipWriteInFileInZip (m_zipfile,data,length);
+   err = zipWriteInFileInZip (m_zipfile, data, length);
    assert(err == ZIP_OK) ;
 
    // CloseFile

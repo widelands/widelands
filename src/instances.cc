@@ -50,7 +50,7 @@ void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widela
  int version=fr->Unsigned16();
    if (version==CMD_DESTROY_MAP_OBJECT_VERSION) {
       // Read Base Commands
-      BaseCommand::BaseCmdRead(fr,egbase,mol);
+      BaseCommand::BaseCmdRead(fr, egbase, mol);
 
       // Serial
       int fileserial=fr->Unsigned32();
@@ -95,7 +95,7 @@ void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
  int version=fr->Unsigned16();
    if (version==CMD_ACT_VERSION) {
       // Read Base Commands
-      BaseCommand::BaseCmdRead(fr,egbase,mol);
+      BaseCommand::BaseCmdRead(fr, egbase, mol);
 
       // Serial
       int fileserial=fr->Unsigned32();
@@ -243,7 +243,7 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
  * Add this animation for this map object under this name
  */
 bool Map_Object_Descr::is_animation_known(const char* name) {
-   std::map<std::string,uint>::iterator i=m_anims.begin();
+   std::map<std::string, uint>::iterator i=m_anims.begin();
    while (i!=m_anims.end()) {
       if (i->first==name)
          return true;
@@ -254,13 +254,13 @@ bool Map_Object_Descr::is_animation_known(const char* name) {
 
 void Map_Object_Descr::add_animation(const char* name, uint anim) {
    std::string use_name=name;
-   std::map<std::string,uint>::iterator i=m_anims.begin();
+   std::map<std::string, uint>::iterator i=m_anims.begin();
 
    while (i!=m_anims.end()) {
       assert(i->first!=name);
       ++i;
 	}
-   m_anims.insert(std::pair<std::string,uint>(use_name,anim));
+   m_anims.insert(std::pair<std::string, uint>(use_name, anim));
 
 }
 std::string Map_Object_Descr::get_animation_name(uint anim) const {

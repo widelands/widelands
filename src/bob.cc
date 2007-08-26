@@ -141,7 +141,7 @@ Bob::Descr *Bob::Descr::create_from_dir(const char *name,
 Bob::Bob(const Bob::Descr &_descr) :
 		Map_Object       (&_descr),
 		m_owner          (0),
-		m_position       (FCoords(Coords(0,0), 0)), // not linked anywhere
+		m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
 		m_linknext       (0),
 		m_linkpprev      (0),
 		m_actid          (0),
@@ -1010,7 +1010,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 void Bob::log_general_info(Editor_Game_Base* egbase)
 {
 	molog("Owner: %p\n", m_owner);
-	molog("Postition: (%i,%i)\n", m_position.x, m_position.y);
+	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);
 	molog("ActID: %i\n", m_actid);
 	molog("Animation: %s\n",
 		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
@@ -1038,15 +1038,15 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 		molog("* object pointer: %p\n", m_stack[i].objvar1.get(egbase));
 		molog("* svar1: %s\n", m_stack[i].svar1.c_str());
 
-		molog("* coords: (%i,%i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
+		molog("* coords: (%i, %i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
 		molog("* diranims: %p\n",  m_stack[i].diranims);
 		molog("* path: %p\n",  m_stack[i].path);
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
 			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
 			molog("** Path length: %i\n", nr_steps);
-			molog("** Start: (%i,%i)\n", path.get_start().x, path.get_start().y);
-			molog("** End: (%i,%i)\n", path.get_end().x, path.get_end().y);
+			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
+			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
 				molog("** Step %i/%i: %i\n", j + 1, nr_steps, path[j]);
 		}

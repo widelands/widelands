@@ -66,7 +66,7 @@ throw(_wexception)
 
             uint i=0;
 
-            assert(!egbase->get_map()->get_field(Coords(x,y))->get_first_bob());
+            assert(!egbase->get_map()->get_field(Coords(x, y))->get_first_bob());
 
             for (i=0;i<nr_bobs;i++) {
                std::string owner=fr.CString();
@@ -86,7 +86,7 @@ throw(_wexception)
                   int idx=egbase->get_map()->get_world()->get_bob(name.c_str());
                   if (idx==-1)
                      throw wexception("Map defines Bob %s, but world doesn't deliver!\n", name.c_str());
-                  bob=egbase->create_bob(Coords(x,y),idx);
+                  bob=egbase->create_bob(Coords(x, y), idx);
 					} else {
                   if (skip) continue; // We do no load player bobs when no scenario
                   egbase->manually_load_tribe(owner.c_str()); // Make sure that the correct tribe is known and loaded
@@ -99,13 +99,13 @@ throw(_wexception)
                         throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
                      Worker_Descr* descr=tribe->get_worker_descr(idx);
                      bob=descr->create_object();
-                     bob->set_position(egbase, Coords(x,y));
+                     bob->set_position(egbase, Coords(x, y));
                      bob->init(egbase);
 						} else if (subtype==Bob::CRITTER) {
                      int idx=tribe->get_bob(name.c_str());
                      if (idx==-1)
                         throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
-                     bob=egbase->create_bob(Coords(x,y),idx,tribe);
+                     bob=egbase->create_bob(Coords(x, y), idx, tribe);
 						}
 					}
 

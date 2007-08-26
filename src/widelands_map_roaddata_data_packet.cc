@@ -160,7 +160,7 @@ throw (_wexception)
    Map* map=egbase->get_map();
    for (ushort y=0; y<map->get_height(); y++) {
       for (ushort x=0; x<map->get_width(); x++) {
-         Field* f=map->get_field(Coords(x,y));
+         Field* f=map->get_field(Coords(x, y));
          BaseImmovable* imm=f->get_immovable();
          if (!imm) continue;
 

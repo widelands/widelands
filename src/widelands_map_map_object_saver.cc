@@ -62,7 +62,7 @@ uint Widelands_Map_Map_Object_Saver::register_object
 
    assert(obj->get_file_serial());
 
-   m_objects.insert(std::pair<const Map_Object*, uint>(obj,obj->get_file_serial()));
+   m_objects.insert(std::pair<const Map_Object*, uint>(obj, obj->get_file_serial()));
    m_saved_obj[obj]=false;
 
    return obj->get_file_serial();

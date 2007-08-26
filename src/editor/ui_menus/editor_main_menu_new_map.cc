@@ -165,7 +165,7 @@ void Main_Menu_New_Map::clicked_create_map() {
 	// Clean all the stuff up, so we can load
 	editor.cleanup_for_load(true, false);
 
-	map.create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
+	map.create_empty_map(MAP_DIMENSIONS[m_w], MAP_DIMENSIONS[m_h], (*m_worlds)[m_currentworld]);
 
 	// Postload the world which provides all the immovables found on a map
 	map.get_world()->postload(&editor);

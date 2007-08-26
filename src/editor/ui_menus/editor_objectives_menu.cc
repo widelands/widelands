@@ -284,7 +284,7 @@ void Editor_Objectives_Menu::clicked_del() {
 
 	if (not obj.get_trigger()->get_referencers().empty()) {
             std::string str=_("Can't delete Objective, because it's trigger is in use by ");
-		std::map<TriggerReferencer*,uint>::const_iterator i =
+		std::map<TriggerReferencer*, uint>::const_iterator i =
 			obj.get_trigger()->get_referencers().begin();
 		while (i != obj.get_trigger()->get_referencers().end()) {
                str += i->first->get_type();

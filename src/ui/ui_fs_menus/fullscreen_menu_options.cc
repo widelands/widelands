@@ -79,14 +79,14 @@ m_label_resolution(this, 85, 95, _("In-game resolution"), Align_VCenter),
 
    // Available locales
 m_label_language(this, MENU_XRES / 2 + 85, 95, _("Language"), Align_VCenter),
-m_language_list(this, MENU_XRES / 2 + 75, 110, 210, 150,Align_Left,true),
+m_language_list(this, MENU_XRES / 2 + 75, 110, 210, 150, Align_Left, true),
 
 m_label_game_options
 (this, MENU_XRES / 2, 300, _("In-game Options"), Align_HCenter),
 
    // Toggle Options
 
-m_single_watchwin(this,85,355),
+m_single_watchwin(this, 85, 355),
 m_label_single_watchwin
 (this, 110, 365, _("Use single Watchwindow Mode"), Align_VCenter),
 
@@ -100,7 +100,7 @@ m_label_snap_windows_only_when_overlapping
 
 m_dock_windows_to_edges(this, 85, 445),
 m_label_dock_windows_to_edges
-(this,110,455,_("Dock windows to edges"), Align_VCenter),
+(this, 110, 455, _("Dock windows to edges"), Align_VCenter),
 
 m_autosave(this, 85, 475),
 m_label_autosave
@@ -222,13 +222,13 @@ Options_Ctrl::~Options_Ctrl() {
 
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	Options_Struct opt;
-	opt.xres = s->get_int("xres",640);
-	opt.yres = s->get_int("yres",480);
-	opt.depth = s->get_int("depth",16);
+	opt.xres = s->get_int("xres", 640);
+	opt.yres = s->get_int("yres", 480);
+	opt.depth = s->get_int("depth", 16);
 	opt.inputgrab = s->get_bool("inputgrab", false);
 	opt.fullscreen = s->get_bool("fullscreen", false);
-	opt.single_watchwin = s->get_bool("single_watchwin",false);
-	opt.show_warea= s->get_bool("workareapreview",false);
+	opt.single_watchwin = s->get_bool("single_watchwin", false);
+	opt.show_warea= s->get_bool("workareapreview", false);
 	opt.snap_windows_only_when_overlapping= s->get_bool("snap_windows_only_when_overlapping", false);
 	opt.dock_windows_to_edges= s->get_bool("dock_windows_to_edges", false);
 	opt.language = s->get_string("language", "");
@@ -244,8 +244,8 @@ void Options_Ctrl::save_options() {
 	m_opt_section->set_int("yres", opt.yres);
 	m_opt_section->set_bool("fullscreen", opt.fullscreen);
 	m_opt_section->set_bool("inputgrab", opt.inputgrab);
-	m_opt_section->set_bool("single_watchwin",opt.single_watchwin);
-	m_opt_section->set_bool("workareapreview",opt.show_warea);
+	m_opt_section->set_bool("single_watchwin", opt.single_watchwin);
+	m_opt_section->set_bool("workareapreview", opt.show_warea);
 	m_opt_section->set_bool("snap_windows_only_when_overlapping", opt.snap_windows_only_when_overlapping);
 	m_opt_section->set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
 	m_opt_section->set_int("depth", opt.depth);

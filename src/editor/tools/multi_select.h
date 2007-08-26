@@ -41,7 +41,7 @@ class MultiSelect {
 
       void enable(int n, bool t) {
 		if (static_cast<const int>(m_enabled.size()) < n + 1)
-            m_enabled.resize(n+1,false);
+            m_enabled.resize(n+1, false);
 
          if (m_enabled[n]==t) return;
          m_enabled[n]=t;

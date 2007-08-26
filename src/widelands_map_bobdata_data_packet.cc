@@ -261,8 +261,8 @@ throw
          bob->m_signal=fr.CString();
 
          switch (bob->get_bob_type()) {
-            case Bob::CRITTER: read_critter_bob(&fr,egbase,ol,static_cast<Critter_Bob*>(bob)); break;
-            case Bob::WORKER: read_worker_bob(&fr,egbase,ol,static_cast<Worker*>(bob)); break;
+            case Bob::CRITTER: read_critter_bob(&fr, egbase, ol, static_cast<Critter_Bob*>(bob)); break;
+            case Bob::WORKER: read_worker_bob(&fr, egbase, ol, static_cast<Worker*>(bob)); break;
             default: throw wexception("Unknown sub bob type %i in Widelands_Map_Bobdata_Data_Packet::Read\n", bob->get_bob_type());
 			}
 
@@ -546,8 +546,8 @@ throw (_wexception)
             fw.CString(bob->m_signal.c_str());
 
             switch (bob->get_bob_type()) {
-               case Bob::CRITTER: write_critter_bob(&fw,egbase,os,static_cast<Critter_Bob*>(bob)); break;
-               case Bob::WORKER: write_worker_bob(&fw,egbase,os,static_cast<Worker*>(bob)); break;
+               case Bob::CRITTER: write_critter_bob(&fw, egbase, os, static_cast<Critter_Bob*>(bob)); break;
+               case Bob::WORKER: write_worker_bob(&fw, egbase, os, static_cast<Worker*>(bob)); break;
                default: throw wexception("Unknown sub bob type %i in Widelands_Map_Bobdata_Data_Packet::Write\n", bob->get_bob_type());
 
 				}

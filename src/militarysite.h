@@ -101,7 +101,7 @@ public:
    inline void set_in_battle(bool in_battle) {m_in_battle = in_battle;};
 
    virtual bool has_soldiers() {return m_soldiers.size() > 0;}
-   virtual MilitarySite* conquered_by (Game*,Player*);
+   virtual MilitarySite* conquered_by (Game*, Player*);
    virtual void init_after_conquering (Game* g, std::vector<Soldier*>* soldiers);
 
 protected:

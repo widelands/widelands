@@ -159,7 +159,7 @@ throw (_wexception)
    std::vector<uint> ids;
    for (ushort y=0; y<map->get_height(); y++) {
       for (ushort x=0; x<map->get_width(); x++) {
-         Field* f=map->get_field(Coords(x,y));
+         Field* f=map->get_field(Coords(x, y));
 
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
@@ -167,7 +167,7 @@ throw (_wexception)
             Flag* fl=static_cast<Flag*>(imm);
             for (int i=0; i<fl->m_item_filled; i++) {
                assert(os->is_object_known(fl->m_items[i].item));
-               write_ware(&fw,egbase,os,fl->m_items[i].item);
+               write_ware(&fw, egbase, os, fl->m_items[i].item);
 				}
 			}
 
@@ -179,7 +179,7 @@ throw (_wexception)
                WareInstance* ware=w->get_carried_item(egbase);
                if (ware) {
                   assert(os->is_object_known(ware));
-                  write_ware(&fw,egbase,os,ware);
+                  write_ware(&fw, egbase, os, ware);
 					}
 				}
             b=b->get_next_bob();

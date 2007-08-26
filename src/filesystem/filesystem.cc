@@ -141,7 +141,7 @@ const char *FileSystem::FS_RelativePath(char *buf, const int buflen, const char 
  */
 const bool FileSystem::pathIsAbsolute(const std::string path) const
 {
-	if (path.substr(0,m_root.size())!=m_root)
+	if (path.substr(0, m_root.size())!=m_root)
 		return false;
 
 	if (path[m_root.size()]!=m_filesep)

@@ -581,7 +581,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
 				}
             int real_amount=((int)(2.86*(float)amount));
-            f->set_resources(nres,real_amount);
+            f->set_resources(nres, real_amount);
             f->set_starting_res_amount(real_amount);
 			}
 

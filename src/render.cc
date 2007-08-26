@@ -138,7 +138,7 @@ void Surface::brighten_rect(const Rect rc, const int factor) {
 	for (int y = rc.y; y < bl.y; ++y) for (int x = rc.x; x < bl.x; ++x) {
          uchar gr, gg, gb;
          short r, g, b;
-         ulong clr = get_pixel(x,y);
+         ulong clr = get_pixel(x, y);
          SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
          r = gr + factor;
          g = gg + factor;
@@ -382,7 +382,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
          // create the file name by reverse-scanning for '?' and replacing
          nr=frames.size();
-         snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(),extensions[i]);
+         snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(), extensions[i]);
          p = fname + strlen(fname);
          while (p > fname) {
             if (*--p != '?')

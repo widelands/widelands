@@ -44,7 +44,7 @@ class Surface {
 	uint m_w, m_h;
 
 public:
-	Surface() : m_surface(0), m_offsx(0) ,m_offsy(0) {}
+	Surface() : m_surface(0), m_offsx(0), m_offsy(0) {}
 	Surface(const Surface&);
 	~Surface();
 

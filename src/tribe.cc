@@ -468,16 +468,16 @@ void Tribe_Descr::load_warehouse_with_start_wares
 				 it->first.c_str());
 
       char* endp;
-      int hplvl=strtol(list[0].c_str(),&endp, 0);
+      int hplvl=strtol(list[0].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad hp level '%s'", list[0].c_str());
-      int attacklvl=strtol(list[1].c_str(),&endp, 0);
+      int attacklvl=strtol(list[1].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad attack level '%s'", list[1].c_str());
-      int defenselvl=strtol(list[2].c_str(),&endp, 0);
+      int defenselvl=strtol(list[2].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad defense level '%s'", list[2].c_str());
-      int evadelvl=strtol(list[3].c_str(),&endp, 0);
+      int evadelvl=strtol(list[3].c_str(), &endp, 0);
       if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
@@ -487,7 +487,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 				Soldier & soldier = static_cast<Soldier &>
 					(*soldierd->create
 					 (game, wh.get_owner(), &wh, wh.get_position()));
-            soldier.set_level(hplvl,attacklvl,defenselvl,evadelvl);
+            soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
 				wh.incorporate_worker(game, &soldier);
 			}
       //TODO: What to do in editor

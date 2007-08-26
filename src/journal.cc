@@ -29,40 +29,40 @@
  */
 void Journal::write(char v)
 {
-	m_recordstream.write(&v,sizeof(v));
+	m_recordstream.write(&v, sizeof(v));
 }
 
 /// \overload
 void Journal::write(unsigned char v)
 {
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /// \overload
 void Journal::write(Sint16 v)
 {
 	v = Little16(v);
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 /// \overload
 void Journal::write(Uint16 v)
 {
 	v = Little16(v);
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /// \overload
 void Journal::write(Sint32 v)
 {
 	v = Little32(v);
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /// \overload
 void Journal::write(Uint32 v)
 {
 	v = Little32(v);
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /**
@@ -83,7 +83,7 @@ void Journal::write(SDLKey v)
 	Uint32 vv;
 
 	vv = Little32((Uint32)v);
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /**
@@ -95,7 +95,7 @@ void Journal::write(SDLMod v)
 	Uint32 vv;
 
 	vv = Little32((Uint32)v);
-	m_recordstream.write((char*)&v,sizeof(v));
+	m_recordstream.write((char*)&v, sizeof(v));
 }
 
 /**
@@ -104,7 +104,7 @@ void Journal::write(SDLMod v)
  */
 void Journal::read(char &v)
 {
-	m_playbackstream.read((char*)&v,sizeof(char));
+	m_playbackstream.read((char*)&v, sizeof(char));
 }
 
 /**
@@ -112,7 +112,7 @@ void Journal::read(char &v)
  */
 void Journal::read(unsigned char &v)
 {
-	m_playbackstream.read((char*)&v,sizeof(unsigned char));
+	m_playbackstream.read((char*)&v, sizeof(unsigned char));
 }
 
 /**
@@ -120,7 +120,7 @@ void Journal::read(unsigned char &v)
  */
 void Journal::read(Sint16 &v)
 {
-	m_playbackstream.read((char*)&v,sizeof(Sint16));
+	m_playbackstream.read((char*)&v, sizeof(Sint16));
 	v=Little16(v);
 }
 
@@ -129,7 +129,7 @@ void Journal::read(Sint16 &v)
  */
 void Journal::read(Uint16 &v)
 {
-	m_playbackstream.read((char*)&v,sizeof(Uint16));
+	m_playbackstream.read((char*)&v, sizeof(Uint16));
 	v=Little16(v);
 }
 
@@ -138,7 +138,7 @@ void Journal::read(Uint16 &v)
  */
 void Journal::read(Sint32 &v)
 {
-	m_playbackstream.read((char*)&v,sizeof(Sint32));
+	m_playbackstream.read((char*)&v, sizeof(Sint32));
 	v=Little32(v);
 }
 
@@ -147,7 +147,7 @@ void Journal::read(Sint32 &v)
  */
 void Journal::read(Uint32 &v)
 {
-	m_playbackstream.read((char*)&v,sizeof(Uint32));
+	m_playbackstream.read((char*)&v, sizeof(Uint32));
 	v=Little32(v);
 }
 
@@ -162,7 +162,7 @@ void Journal::read(SDLKey &v)
 
 	Uint32 vv;
 
-	m_playbackstream.read((char*)&vv,sizeof(Uint32));
+	m_playbackstream.read((char*)&vv, sizeof(Uint32));
 	v=(SDLKey)Little32(vv);
 }
 
@@ -177,7 +177,7 @@ void Journal::read(SDLMod &v)
 
 	Uint32 vv;
 
-	m_playbackstream.read((char*)&vv,sizeof(Uint32));
+	m_playbackstream.read((char*)&vv, sizeof(Uint32));
 	v=(SDLMod)Little32(vv);
 }
 

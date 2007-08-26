@@ -21,9 +21,9 @@
 #define included_transport_h
 
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b,c) __attribute__ ((__format__ (__printf__,b,c)))
+#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
 #else
-#define PRINTF_FORMAT(b,c)
+#define PRINTF_FORMAT(b, c)
 #endif
 
 #include "immovable.h"
@@ -377,7 +377,7 @@ public: // called by the controlled ware or worker
 	void has_failed();
 
 private:
-	void tlog(const char* fmt, ...) PRINTF_FORMAT(2,3);
+	void tlog(const char* fmt, ...) PRINTF_FORMAT(2, 3);
 
 	Game         * m_game;
 	Request      * m_request;

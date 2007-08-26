@@ -260,7 +260,7 @@ bool Game::run_campaign()
 	}
 
 	// Load selected campaign-map-file
-	return run_splayer_map_direct(campmapfile.c_str(),true);
+	return run_splayer_map_direct(campmapfile.c_str(), true);
 }
 
 
@@ -669,7 +669,7 @@ void Game::send_player_command (PlayerCommand* pc)
  *
  * \note In a network game, player commands are only allowed to enter the
  * command queue after being accepted by the networking logic via
- * \ref send_player_command , so you must never enqueue a player command directly.
+ * \ref send_player_command, so you must never enqueue a player command directly.
  */
 void Game::enqueue_command (BaseCommand * const cmd)
 {
@@ -779,7 +779,7 @@ void Game::sample_statistics()
 			BaseImmovable* imm = f->get_immovable();
 			if (imm && imm->get_type() == Map_Object::BUILDING) {
 				Building* build = static_cast<Building*>(imm);
-				if (build->get_position() == Coords(x,y)) { // only main location is intresting
+				if (build->get_position() == Coords(x, y)) { // only main location is intresting
 					// Ok, count the building
 					nr_buildings[ build->get_owner()->get_player_number() - 1 ]++;
 

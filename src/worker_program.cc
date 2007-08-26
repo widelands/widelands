@@ -130,7 +130,7 @@ void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
    act->function = &Worker::run_mine;
    act->sparam1 = cmd[1];
    char* endp;
-   act->iparam1 = strtol(cmd[2].c_str(),&endp, 0);
+   act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
    if (endp && *endp)
       throw wexception("Bad area '%s'", cmd[2].c_str());

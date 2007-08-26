@@ -32,7 +32,7 @@ void Cmd_Incorporate::Read(FileRead* fr, Editor_Game_Base* egbase,
 
 	if (version == CMD_INCORPORATE_VERSION) {
 		// Read Base Commands
-		BaseCommand::BaseCmdRead(fr,egbase,mol);
+		BaseCommand::BaseCmdRead(fr, egbase, mol);
 
 		// Serial of worker
 		int fileserial=fr->Unsigned32();

@@ -99,7 +99,7 @@ public:
 		 const int max_width);
 	std::string word_wrap_text
 		(const std::string & font, const int size,
-		 const std::string & unwrapped_text,const int max_width);
+		 const std::string & unwrapped_text, const int max_width);
 	void do_align(Align align, int *dstx, int *dsty, int w, int h);
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,

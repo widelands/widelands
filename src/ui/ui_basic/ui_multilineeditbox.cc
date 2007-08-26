@@ -64,7 +64,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
    m_needs_update=true;
 
    if (down) {
-      std::string txt= g_fh->word_wrap_text(m_fontname,m_fontsize,get_text(),get_eff_w());
+      std::string txt= g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
       switch (code) {
          case KEY_BACKSPACE:
             if (txt.size() && m_cur_pos) {
@@ -138,7 +138,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
             // fallthrough
          default:
             if (c && txt.size()<m_maxchars) {
-               txt.insert(m_cur_pos,1,c);
+               txt.insert(m_cur_pos, 1, c);
                m_cur_pos++;
 				}
             Multiline_Textarea::set_text(txt.c_str());
@@ -180,7 +180,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 m_fontname,
 			 m_fontsize,
 			 m_fcolor,
-			 RGBColor(107,87,55),
+			 RGBColor(107, 87, 55),
 			 Point(Multiline_Editbox::get_halign(), 0 - m_textpos),
 			 get_text().c_str(),
 			 m_align,

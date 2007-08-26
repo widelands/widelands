@@ -186,7 +186,7 @@ void Table<void *>::draw(RenderTarget * dst)
 
       // First draw pictures
 		if (er.get_picid() != -1) {
-			uint w,h;
+			uint w, h;
 			g_gr->get_picture_size(er.get_picid(), w, h);
 			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.get_picid());
 		}

@@ -48,7 +48,7 @@ struct Map_Object_Descr {
 
 		struct Animation_Nonexistent {};
 		uint get_animation(const char * const name) const {
-			std::map<std::string,uint>::const_iterator it = m_anims.find(name);
+			std::map<std::string, uint>::const_iterator it = m_anims.find(name);
 			if (it == m_anims.end()) throw Animation_Nonexistent();
 			return it->second;
 		}
@@ -76,7 +76,7 @@ struct Map_Object_Descr {
 		Map_Object_Descr            (const Map_Object_Descr &);
 
 		std::vector<uint>           m_attributes;
-		std::map<std::string,uint>  m_anims;
+		std::map<std::string, uint>  m_anims;
 		static uint                 s_dyn_attribhigh; //  highest attribute ID used
 		static AttribMap            s_dyn_attribs;
 
@@ -205,7 +205,7 @@ protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
 
-	void molog(const char* fmt, ...) const __attribute__((format(printf,2,3)));
+	void molog(const char* fmt, ...) const __attribute__((format(printf, 2, 3)));
 
 protected:
 	const Map_Object_Descr * m_descr;

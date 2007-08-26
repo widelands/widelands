@@ -82,7 +82,7 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
  */
 bool Worker::run_mine(Game* g, State* state, const Action* action)
 {
-   molog("  Mine(%s,%i)\n", action->sparam1.c_str(), action->iparam1);
+   molog("  Mine(%s, %i)\n", action->sparam1.c_str(), action->iparam1);
 
 	Map & map = *g->get_map();
 
@@ -145,7 +145,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 			amount--;
 
-			mr.location().field->set_resources(res,amount);
+			mr.location().field->set_resources(res, amount);
 			break;
 		}
 	} while (mr.advance(map));
@@ -271,7 +271,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
  */
 bool Worker::run_findobject(Game* g, State* state, const Action* action)
 {
-	molog("  FindObject(%i, %i,%s)\n", action->iparam1, action->iparam2,
+	molog("  FindObject(%i, %i, %s)\n", action->iparam1, action->iparam2,
 		 action->sparam1.c_str());
 
 	PlayerImmovable* location = get_location(g);
@@ -366,7 +366,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 	int retval=0;
 	if (res!=-1)
 		retval=map.find_reachable_fields(area, &list, cstep,
-               FindNodeSizeResource((FindNodeSize::Size)action->iparam2,res));
+               FindNodeSizeResource((FindNodeSize::Size)action->iparam2, res));
 	else
 		retval=map.find_reachable_fields(area, &list, cstep,
 							FindNodeSize((FindNodeSize::Size)action->iparam2));
@@ -383,7 +383,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 	state->coords = list[sel];
 
-	molog("  selected %i,%i\n", state->coords.x, state->coords.y);
+	molog("  selected %i, %i\n", state->coords.x, state->coords.y);
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -448,7 +448,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 		break;
 	}
 	case Action::walkCoords: {
-		molog("  coords(%i,%i)\n", state->coords.x, state->coords.y);
+		molog("  coords(%i, %i)\n", state->coords.x, state->coords.y);
 		dest = state->coords;
 		break;
 	}
@@ -573,7 +573,7 @@ bool Worker::run_plant(Game * g, State * state, const Action *)
 {
 	Coords pos = get_position();
 
-	molog("  Plant: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
+	molog("  Plant: %i at %i, %i\n", state->ivar2, pos.x, pos.y);
 
 	// Check if the map is still free here
 	BaseImmovable* imm = g->get_map()->get_immovable(pos);
@@ -604,7 +604,7 @@ bool Worker::run_create_bob(Game * g, State * state, const Action *)
 {
 	Coords pos = get_position();
 
-	molog("  Create Bob: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
+	molog("  Create Bob: %i at %i, %i\n", state->ivar2, pos.x, pos.y);
 
 	if (state->svar1 == "world")
 		g->create_bob(pos, state->ivar2, 0);
@@ -999,7 +999,7 @@ void Worker::level(Game* g)
 
 	// Inform the economy, that something has changed
 	m_economy->remove_workers(descr().get_tribe()->get_worker_index(descr().name().c_str()), 1);
-	m_economy->add_workers(new_descr->get_tribe()->get_worker_index(new_descr->name().c_str()),1);
+	m_economy->add_workers(new_descr->get_tribe()->get_worker_index(new_descr->name().c_str()), 1);
 
 	m_descr=new_descr;
 

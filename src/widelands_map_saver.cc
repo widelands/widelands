@@ -274,7 +274,7 @@ void Widelands_Map_Saver::save() throw(_wexception) {
    log("Writing Attack Controller Data ... ");
 	{
 		Widelands_Map_Attack_Controller_Data_Packet p;
-		p.Write(m_fs,m_egbase,m_mos);
+		p.Write(m_fs, m_egbase, m_mos);
 	}
    log("done\n");
 

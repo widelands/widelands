@@ -32,7 +32,7 @@
 #define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
 #endif
 
-#define WLTF_VERSION     PACK_VERSION(1,0)
+#define WLTF_VERSION     PACK_VERSION(1, 0)
 
 #define SITDIG            0
 #define SEARCHER          1

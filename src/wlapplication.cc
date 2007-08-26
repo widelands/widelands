@@ -237,9 +237,9 @@ WLApplication::WLApplication(const int argc, const char **argv):
 		SSS_T pos;
 
 		//are we looking at an option at all?
-		if (opt.substr(0,2)=="--") {
+		if (opt.substr(0, 2)=="--") {
 			//yes. remove the leading "--", just for cosmetics
-			opt.erase(0,2);
+			opt.erase(0, 2);
 		} else {
 			//no. mark the commandline as faulty and stop parsing
 			m_commandline.clear();
@@ -626,7 +626,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 		case SDL_MOUSEMOTION:
 			// All the interesting stuff is now in Sys_PollEvent()
 
-			m_mouse_position = Point(ev.motion.x,ev.motion.y);
+			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
 				cb->mouse_move
@@ -863,11 +863,11 @@ const bool WLApplication::init_hardware()
 	uint yres = 600;
 	if (m_loadgame_filename.size() or m_tutorial_filename.size()) {
 		// main menu will not be shown, so set in-game resolution
-		xres = s->get_int("xres",xres);
-		yres = s->get_int("yres",yres);
+		xres = s->get_int("xres", xres);
+		yres = s->get_int("yres", yres);
 	}
 
-	init_graphics(xres, yres, s->get_int("depth",16), m_gfx_fullscreen);
+	init_graphics(xres, yres, s->get_int("depth", 16), m_gfx_fullscreen);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!

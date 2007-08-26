@@ -115,7 +115,7 @@ throw (_wexception)
 			if
 				(ConstructionSite * const constructionsite =
 				 dynamic_cast<ConstructionSite * const>(building))
-				read_constructionsite(*constructionsite, fr,egbase,ol);
+				read_constructionsite(*constructionsite, fr, egbase, ol);
 			else if
 				(Warehouse * const warehouse =
 				 dynamic_cast<Warehouse * const>(building))
@@ -195,7 +195,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 		}
       constructionsite.m_wares.resize(size);
       for (uint i=0; i<constructionsite.m_wares.size(); i++) {
-         constructionsite.m_wares[i]->Read(&fr,egbase,ol);
+         constructionsite.m_wares[i]->Read(&fr, egbase, ol);
 		}
 
       constructionsite.m_fetchfromflag=fr.Signed32();
@@ -357,7 +357,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 				 ProductionSite::request_worker_callback,
 				 &productionsite,
 				 Request::WORKER);
-			req.Read(&fr,egbase,ol);
+			req.Read(&fr, egbase, ol);
 			productionsite.m_worker_requests[i] = &req;
 		}
 
@@ -392,7 +392,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 		if (nr_queues != productionsite.m_input_queues.size())
          throw wexception("Productionsite has wrong number of input queues!\n");
       for (uint i=0; i<productionsite.m_input_queues.size(); i++)
-         productionsite.m_input_queues[i]->Read(&fr,egbase,ol);
+         productionsite.m_input_queues[i]->Read(&fr, egbase, ol);
 
       // Statistics
       uint stats_size = fr.Unsigned16();
@@ -432,7 +432,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 				 TrainingSite::request_soldier_callback,
 				 &trainingsite,
 				 Request::SOLDIER);
-			req.Read(&fr,egbase,ol);
+			req.Read(&fr, egbase, ol);
 			trainingsite.m_soldier_requests[i] = &req;
 		}
 
@@ -618,7 +618,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
    // ware queues
    fw.Unsigned16(constructionsite.m_wares.size());
    for (uint i=0; i<constructionsite.m_wares.size(); i++) {
-      constructionsite.m_wares[i]->Write(&fw,egbase,os);
+      constructionsite.m_wares[i]->Write(&fw, egbase, os);
 	}
 
    fw.Signed32(constructionsite.m_fetchfromflag);
@@ -659,7 +659,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
    // Request
    fw.Unsigned16(warehouse.m_requests.size());
    for (uint i=0; i<warehouse.m_requests.size(); i++) {
-      warehouse.m_requests[i]->Write(&fw,egbase,os);
+      warehouse.m_requests[i]->Write(&fw, egbase, os);
 	}
 
    // Incorporated workers, write sorted after file-serial
@@ -712,7 +712,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_militarysite
    // Request
    fw.Unsigned16(militarysite.m_soldier_requests.size());
    for (uint i=0; i<militarysite.m_soldier_requests.size(); i++)
-      militarysite.m_soldier_requests[i]->Write(&fw,egbase,os);
+      militarysite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
    // Soldier
@@ -745,7 +745,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
    // Requests
    fw.Unsigned16(productionsite.m_worker_requests.size());
    for (uint i=0; i<productionsite.m_worker_requests.size(); i++)
-      productionsite.m_worker_requests[i]->Write(&fw,egbase,os);
+      productionsite.m_worker_requests[i]->Write(&fw, egbase, os);
 
    // Workers
    fw.Unsigned16(productionsite.m_workers.size());
@@ -771,7 +771,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
    // Wares Queues
    fw.Unsigned16(productionsite.m_input_queues.size());
    for (uint i=0; i<productionsite.m_input_queues.size(); i++)
-      productionsite.m_input_queues[i]->Write(&fw,egbase,os);
+      productionsite.m_input_queues[i]->Write(&fw, egbase, os);
 
    // Statistics
    fw.Unsigned16(productionsite.m_statistics.size());
@@ -799,7 +799,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
 	//  requests
    fw.Unsigned16(trainingsite.m_soldier_requests.size());
    for (uint i=0; i<trainingsite.m_soldier_requests.size(); i++)
-      trainingsite.m_soldier_requests[i]->Write(&fw,egbase,os);
+      trainingsite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
 	//  soldiers

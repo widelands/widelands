@@ -48,8 +48,8 @@ EncodeData::parse
 
 Parse color codes from section, the following keys are currently known:
 
-clrkey_[r,g,b]     color key
-shadowclr_[r,g,b]  color for shadow pixels
+clrkey_[r, g, b]     color key
+shadowclr_[r, g, b]  color for shadow pixels
 ===============
 */
 void EncodeData::parse(Section *s)

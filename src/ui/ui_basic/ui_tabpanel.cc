@@ -177,7 +177,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 			 m_tabs[idx].picid);
 
 		// Draw top part of border
-		RGBColor black(0,0,0);
+		RGBColor black(0, 0, 0);
 
 		dst->brighten_rect
 			(Rect(Point(x, 0), TP_BUTTON_WIDTH, 2), BUTTON_EDGE_BRIGHT_FACTOR);

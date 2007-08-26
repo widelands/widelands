@@ -110,7 +110,7 @@ void Statebox::set_state(bool on)
 	m_state = on;
 	changed.call();
 	changedto.call(on);
-	if (m_id!=-1) changedtoid.call(m_id,on);
+	if (m_id!=-1) changedtoid.call(m_id, on);
    update(0, 0, get_w(), get_h());
 }
 

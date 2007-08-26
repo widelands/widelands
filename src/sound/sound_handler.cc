@@ -391,9 +391,9 @@ void Sound_Handler::load_one_fx
 */
 int Sound_Handler::stereo_position(const Coords position)
 {
-	//screen x,y (without clipping applied, might well be invisible)
+	//screen x, y (without clipping applied, might well be invisible)
 	int sx, sy;
-	//x,y resolutions of game window
+	//x, y resolutions of game window
 	int xres, yres;
 	FCoords fposition;
 	Point vp;
@@ -426,7 +426,7 @@ int Sound_Handler::stereo_position(const Coords position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-(const std::string fx_name,const int stereo_pos, const uint priority)
+(const std::string fx_name, const int stereo_pos, const uint priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -533,7 +533,7 @@ void Sound_Handler::play_fx
 	if (Mix_Chunk * const m = m_fxs[fx_name]->get_fx()) {
 		const int chan = Mix_PlayChannel(-1, m, 0);
 		//TODO: complain if this didn't work due to out-of-channels
-		Mix_SetPanning(chan,254-stereo_pos, stereo_pos);
+		Mix_SetPanning(chan, 254-stereo_pos, stereo_pos);
 		m_active_fx[chan]=fx_name;
 	} else
 		log("Sound_Handler: sound effect \"%s\" exists but contains no "

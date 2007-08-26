@@ -85,11 +85,11 @@ typedef voidp zipFile;
 /* tm_zip contain date/time info */
 typedef struct tm_zip_s
 {
-    uInt tm_sec;            /* seconds after the minute - [0,59] */
-    uInt tm_min;            /* minutes after the hour - [0,59] */
-    uInt tm_hour;           /* hours since midnight - [0,23] */
-    uInt tm_mday;           /* day of the month - [1,31] */
-    uInt tm_mon;            /* months since January - [0,11] */
+    uInt tm_sec;            /* seconds after the minute - [0, 59] */
+    uInt tm_min;            /* minutes after the hour - [0, 59] */
+    uInt tm_hour;           /* hours since midnight - [0, 23] */
+    uInt tm_mday;           /* day of the month - [1, 31] */
+    uInt tm_mon;            /* months since January - [0, 11] */
     uInt tm_year;           /* years - [1980..2044] */
 } tm_zip;
 
@@ -194,7 +194,7 @@ extern int ZEXPORT zipOpenNewFileInZip3 OF((zipFile file,
 
 /*
   Same than zipOpenNewFileInZip2, except
-    windowBits,memLevel,,strategy : see parameter strategy in deflateInit2
+    windowBits, memLevel, strategy : see parameter strategy in deflateInit2
     password : crypting password (NULL for no crypting)
     crcForCtypting : crc of file to compress (needed for crypting)
  */

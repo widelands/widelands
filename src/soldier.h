@@ -30,7 +30,7 @@ class Editor_Game_Base;
 class AttackController;
 class RGBColor;
 
-#define HP_FRAMECOLOR RGBColor(255,255,255)
+#define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
 struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr(const Tribe_Descr &, const std::string & soldier_name);

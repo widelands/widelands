@@ -43,7 +43,7 @@
 #define WINDOW_WIDTH  600
 #define WINDOW_HEIGHT 550
 
-EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr,UI::UniqueWindow::Registry& registry) :
+EncyclopediaWindow::EncyclopediaWindow (Interactive_Player& plr, UI::UniqueWindow::Registry& registry) :
 
 UI::UniqueWindow
 (&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware encyclopedia")),
@@ -57,7 +57,7 @@ prodSites(this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140),
 condTable
 (this, WINDOW_WIDTH / 2, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 2 - 5, 140),
 
-descrTxt(this,5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, ""),
+descrTxt(this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, ""),
 
 tribe(&interactivePlayer.get_player()->tribe())
 
@@ -155,14 +155,14 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 	if (programIt != program_map.end()) {
       std::vector<ProductionAction> actions = programIt->second->get_all_actions();
 
-      std::map<std::string,WareCondition> waresConsumed;
-      std::map<std::string,WareCondition> waresChecked;
+      std::map<std::string, WareCondition> waresConsumed;
+      std::map<std::string, WareCondition> waresChecked;
 
       int consumeGroup = 0;
       int checkGroup = 0;
 
       for (i=0; i<actions.size(); i++) {
-         //some actions are noted as "consume ware1,ware2"
+         //some actions are noted as "consume ware1, ware2"
          std::vector<std::string> splitWares;
 			split_string(actions[i].sparam1, splitWares, ",");
 
@@ -200,11 +200,11 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 		}
 
       i = 0;
-      for (std::map<std::string,WareCondition>::iterator waresCheckedIt=waresChecked.begin();
+      for (std::map<std::string, WareCondition>::iterator waresCheckedIt=waresChecked.begin();
             waresCheckedIt!=waresChecked.end(); waresCheckedIt++) {
 
-         std::map<std::string,WareCondition>::iterator waresConsumedIt = waresConsumed.find(waresCheckedIt->first);
-         createCondTableEntry(i,waresCheckedIt->first.c_str(),(waresConsumedIt != waresConsumed.end()),&waresCheckedIt->second);
+         std::map<std::string, WareCondition>::iterator waresConsumedIt = waresConsumed.find(waresCheckedIt->first);
+         createCondTableEntry(i, waresCheckedIt->first.c_str(), (waresConsumedIt != waresConsumed.end()), &waresCheckedIt->second);
 
          if (waresConsumedIt != waresConsumed.end()) {
             waresConsumed.erase(waresConsumedIt);
@@ -212,10 +212,10 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
          i++;
 		}
 
-      for (std::map<std::string,WareCondition>::iterator waresConsumedIt=waresConsumed.begin();
+      for (std::map<std::string, WareCondition>::iterator waresConsumedIt=waresConsumed.begin();
             waresConsumedIt!=waresConsumed.end(); waresConsumedIt++) {
 
-         createCondTableEntry(i,waresConsumedIt->first.c_str(),true,&waresConsumedIt->second);
+         createCondTableEntry(i, waresConsumedIt->first.c_str(), true, &waresConsumedIt->second);
          i++;
 		}
 	}

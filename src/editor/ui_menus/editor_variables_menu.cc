@@ -405,7 +405,7 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
 	t.set_string(0, var.get_name());
 	t.set_string(1, val.c_str());
 
-	if (var.is_delete_protected()) t.set_color(RGBColor(255,0,0));
+	if (var.is_delete_protected()) t.set_color(RGBColor(255, 0, 0));
 
 	m_table.sort();
 }

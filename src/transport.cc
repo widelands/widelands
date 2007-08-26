@@ -2649,7 +2649,7 @@ void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Ma
    fw->Signed32(m_consume_interval);
    if (m_request) {
       fw->Unsigned8(1);
-      m_request->Write(fw,egbase,os);
+      m_request->Write(fw, egbase, os);
 	} else
       fw->Unsigned8(0);
 }
@@ -2665,7 +2665,7 @@ void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_
          delete m_request;
       if (request) {
          m_request = new Request(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
-         m_request->Read(fr,egbase,ol);
+         m_request->Read(fr, egbase, ol);
 		} else {
          m_request=0;
 		}
@@ -2936,7 +2936,7 @@ public:
  * For two flags from the same economy, this function should always be
  * successful, except for when it's called from \ref check_split()
  *
- * \param start,end start and endpoint of the route
+ * \param start, end start and endpoint of the route
  * \param route the calculated route
  * \param cost_cutoff maximum cost for desirable routes. If no route cheaper
  * than this can be found, return false
@@ -3808,7 +3808,7 @@ void Cmd_Call_Economy_Balance::Read(FileRead* fr, Editor_Game_Base* egbase, Wide
 
    if (version==CURRENT_CMD_CALL_ECONOMY_VERSION) {
       // Read Base Commands
-      BaseCommand::BaseCmdRead(fr,egbase,mol);
+      BaseCommand::BaseCmdRead(fr, egbase, mol);
 
       m_player= fr->Unsigned8();
       bool exists=fr->Unsigned8();
@@ -3825,7 +3825,7 @@ void Cmd_Call_Economy_Balance::Write(FileWrite* fw, Editor_Game_Base* egbase, Wi
    fw->Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 
    // Write Base Commands
-   BaseCommand::BaseCmdWrite(fw,egbase,mos);
+   BaseCommand::BaseCmdWrite(fw, egbase, mos);
 
    fw->Unsigned8(m_player);
 

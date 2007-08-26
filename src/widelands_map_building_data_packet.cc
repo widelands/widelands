@@ -145,12 +145,12 @@ throw (_wexception)
 	Map* map=egbase->get_map();
 	for (ushort y=0; y<map->get_height(); y++) {
 		for (ushort x=0; x<map->get_width(); x++) {
-			BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
+			BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
 			// We only write Buildings
 			if (immovable && immovable->get_type()==Map_Object::BUILDING) {
 				Building* building=static_cast<Building*>(immovable);
 
-				if (building->get_position()!=Coords(x,y)) {
+				if (building->get_position()!=Coords(x, y)) {
 					// This is not this buildings main position
 					fw.Unsigned8('\0');
 					continue;

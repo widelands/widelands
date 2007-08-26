@@ -94,7 +94,7 @@ throw (_wexception)
    Map* map=egbase->get_map();
    for (ushort y=0; y<map->get_height(); y++) {
       for (ushort x=0; x<map->get_width(); x++) {
-         BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
+         BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
          // We only write Roads
          if (immovable && immovable->get_type()==Map_Object::ROAD) {
             Road* road=static_cast<Road*>(immovable);
@@ -107,7 +107,7 @@ throw (_wexception)
             // write id
             fw.Unsigned32(serial);
 
-            log("ROAD: writing at (%i,%i): %i\n", x, y, serial);
+            log("ROAD: writing at (%i, %i): %i\n", x, y, serial);
 			}
 		}
 	}

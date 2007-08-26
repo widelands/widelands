@@ -52,7 +52,7 @@ public:
 	 */
 	virtual void Flush();
 
-	void Printf(const char *fmt, ...) __attribute__((format(printf,2,3)));
+	void Printf(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 
 	void Signed8(const Sint8 x)
 	{

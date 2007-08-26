@@ -337,7 +337,7 @@ void BaseListselect::draw(RenderTarget* dst)
 			(*dst,
 			 UI_FONT_SMALL,
 			 col,
-			 RGBColor(107,87,55),
+			 RGBColor(107, 87, 55),
 			 Point
 			 (x, y + (get_lineheight() - g_fh->get_fontheight(UI_FONT_SMALL)) / 2),
 			 er.name, m_align,
@@ -416,7 +416,7 @@ void BaseListselect::remove(const uint i)
 void BaseListselect::remove(const char * const str)
 {
 	for (uint i=0; i<m_entry_records.size(); i++) {
-		if (!strcmp(m_entry_records[i]->name,str)) {
+		if (!strcmp(m_entry_records[i]->name, str)) {
 			remove(i);
 			return;
 		}

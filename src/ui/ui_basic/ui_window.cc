@@ -366,7 +366,7 @@ void Window::minimize() {
       _oldh=get_inner_h();
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
       set_size(get_w(), TP_B_PIXMAP_THICKNESS);
-		set_pos(Point(get_x(),get_y())); // If on border, this feels more natural
+		set_pos(Point(get_x(), get_y())); // If on border, this feels more natural
 	_is_minimal = true;
 }
 

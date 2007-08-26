@@ -103,7 +103,7 @@ void MapviewPixelFunctions::get_pix
 {get_pix(map.get_fcoords(c), px, py);}
 
 // fx and fy might be out of range, must be normalized for the field
-// theres no need for such a function for FCoords, since x,y out of range
+// theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
 inline void MapviewPixelFunctions::get_save_pix
 (const Map & map, const Coords c, int & px, int & py)

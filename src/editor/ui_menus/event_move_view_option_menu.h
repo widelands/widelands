@@ -50,7 +50,7 @@ struct Event_Move_View_Option_Menu : public UI::Window {
 
       UI::Edit_Box* m_name;
       int         m_x, m_y;
-      UI::Textarea* m_x_ta,*m_y_ta;
+      UI::Textarea* m_x_ta, *m_y_ta;
 };
 
 #endif

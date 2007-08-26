@@ -60,7 +60,7 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	void clicked_jump(Jump_Targets);
 	void table_changed(uint);
       void update();
-      int validate_pointer(int*,int);
+      int validate_pointer(int*, int);
 };
 
 #endif

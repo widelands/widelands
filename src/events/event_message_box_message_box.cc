@@ -46,7 +46,7 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
    int posx=offsx;
    int posy=offsy;
 
-   set_inner_size(w,h);
+   set_inner_size(w, h);
    m_text=new UI::Multiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
    if (m_text)

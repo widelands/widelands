@@ -245,11 +245,11 @@ void Map::recalc_default_resources() {
 	const World & w = world();
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
-         FCoords f,f1;
-         f=get_fcoords(Coords(x,y));
+         FCoords f, f1;
+         f=get_fcoords(Coords(x, y));
          // only on unset fields
          if (f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
-         std::map<int,int> m;
+         std::map<int, int> m;
          int amount=0;
 
          // This field
@@ -324,7 +324,7 @@ void Map::recalc_default_resources() {
 
          int lv=0;
          int res=0;
-         std::map<int,int>::iterator i=m.begin();
+         std::map<int, int>::iterator i=m.begin();
          while (i!=m.end()) {
             if (i->second>lv) {
                lv=i->second;
@@ -335,10 +335,10 @@ void Map::recalc_default_resources() {
          amount/=6;
 
          if (res==-1 || !amount) {
-            f.field->set_resources(0,0);
+            f.field->set_resources(0, 0);
             f.field->set_starting_res_amount(0);
 			} else {
-            f.field->set_resources(res,amount);
+            f.field->set_resources(res, amount);
             f.field->set_starting_res_amount(amount);
 			}
 
@@ -418,7 +418,7 @@ void Map::create_empty_map
 {
 	set_world_name(worldname.c_str());
 	load_world();
-	set_size(w,h);
+	set_size(w, h);
 	set_name(_("No Name").c_str());
 	set_author(_("Unknown").c_str());
 	set_description(_("no description defined").c_str());

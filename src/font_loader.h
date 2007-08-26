@@ -43,7 +43,7 @@ class Font_Loader {
 		TTF_Font* get_font(std::string name, int size);
 		void clear_fonts();
 	private:
-		std::map<std::string,TTF_Font*> m_font_table;
+		std::map<std::string, TTF_Font*> m_font_table;
       std::vector<FileRead*> m_freads;
 };
 

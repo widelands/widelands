@@ -71,7 +71,7 @@ void Widelands_Map_Map_Object_Loader::mark_object_as_loaded(Map_Object* obj) {
  * Return the number of unsaved objects
  */
 int Widelands_Map_Map_Object_Loader::get_nr_unloaded_objects() {
-   std::map<Map_Object*,bool>::iterator i=m_loaded_obj.begin();
+   std::map<Map_Object*, bool>::iterator i=m_loaded_obj.begin();
    int retval=0;
    while (i!=m_loaded_obj.end()) {
       if (!i->second) retval++;

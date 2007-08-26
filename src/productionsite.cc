@@ -99,7 +99,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 
 			Item_Ware_Descr* ware= tribe().get_ware_descr(idx);
 
-			Input input(ware,val->get_int());
+			Input input(ware, val->get_int());
 			m_inputs.push_back(input);
 		}
 	}
@@ -288,7 +288,7 @@ Add a value to statistic vector.
 void ProductionSite::add_statistics_value(bool val)
 {
 	m_statistics_changed = true;
-	m_statistics.erase(m_statistics.begin(),m_statistics.begin() + 1);
+	m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 	m_statistics.push_back(val);
 }
 
@@ -553,9 +553,9 @@ void ProductionSite::program_act(Game* g)
 	molog("PSITE: program %s#%i\n", state->program->get_name().c_str(), state->ip);
 
 	if (m_stop) {
-		program_end(g,false);
+		program_end(g, false);
 		m_program_timer = true;
-		m_program_time = schedule_act(g,20000);
+		m_program_time = schedule_act(g, 20000);
 		return;
 	}
 	switch (action->type) {
@@ -568,7 +568,7 @@ void ProductionSite::program_act(Game* g)
 			return;
 
 		case ProductionAction::actAnimate:
-			molog("  Animate(%i,%i)\n", action->iparam1, action->iparam2);
+			molog("  Animate(%i, %i)\n", action->iparam1, action->iparam2);
 
 			start_animation(g, action->iparam1);
 
@@ -777,7 +777,7 @@ void ProductionSite::program_act(Game* g)
 
 							--amount;
 
-							mr.location().field->set_resources(res,amount);
+							mr.location().field->set_resources(res, amount);
 							break;
 						}
 					} while (mr.advance(map));
@@ -891,7 +891,7 @@ void ProductionSite::program_act(Game* g)
 			std::vector<Soldier *>::const_iterator it = soldiers.begin();
 
 			molog ("  Training soldier's %s (%d to %d)",
-				action->sparam1.c_str(),action->iparam1, action->iparam2);
+				action->sparam1.c_str(), action->iparam1, action->iparam2);
 
 			for (;; ++it) {
 				if (it == soldiers_end) {

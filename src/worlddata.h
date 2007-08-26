@@ -32,7 +32,7 @@
 #define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
 #endif
 
-#define WLWF_VERSION PACK_VERSION(1,0)
+#define WLWF_VERSION PACK_VERSION(1, 0)
 
 
 #define TERRAIN_DRY        1

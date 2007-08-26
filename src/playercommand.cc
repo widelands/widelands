@@ -98,14 +98,14 @@ void PlayerCommand::PlayerCmdWrite(FileWrite *fw, Editor_Game_Base* egbase, Wide
 	// First, write version
 	fw->Unsigned16(PLAYER_COMMAND_VERSION);
 
-	BaseCommand::BaseCmdWrite(fw,egbase,mos);
+	BaseCommand::BaseCmdWrite(fw, egbase, mos);
 	// Now sender
 	fw->Unsigned8(sender);
 }
 void PlayerCommand::PlayerCmdRead(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
 	int version=fr->Unsigned16();
 	if (version==PLAYER_COMMAND_VERSION) {
-		BaseCommand::BaseCmdRead(fr,egbase,mol);
+		BaseCommand::BaseCmdRead(fr, egbase, mol);
 		sender=fr->Unsigned8();
 	} else
 		throw wexception("Unknown version in PlayerCommand::PlayerCmdRead: %i", version);
@@ -140,7 +140,7 @@ void Cmd_Bulldoze::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Ma
 
 	if (version==PLAYER_CMD_BULLDOZE_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 		int fileserial=fr->Unsigned32();
 		assert(mol->is_object_known(fileserial));
 		serial=mol->get_object_by_file_index(fileserial)->get_serial();
@@ -187,7 +187,7 @@ void Cmd_Build::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_O
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_BUILD_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 		// id
 		id=fr->Unsigned16();
 		// Coords
@@ -238,7 +238,7 @@ void Cmd_BuildFlag::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_M
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_BUILDFLAG_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 		// Coords
 		coords.x=fr->Unsigned16();
 		coords.y=fr->Unsigned16();
@@ -319,7 +319,7 @@ void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_M
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_BUILDROAD_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 		// Start Coords
 		start.x=fr->Unsigned16();
 		start.y=fr->Unsigned16();
@@ -377,7 +377,7 @@ void Cmd_FlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_FLAGACTION_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// action
 		action=fr->Unsigned8();
@@ -431,7 +431,7 @@ void Cmd_StartStopBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelan
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_STOPBUILDING_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
 		int fileserial=fr->Unsigned32();
@@ -483,7 +483,7 @@ void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
 		int fileserial=fr->Unsigned32();
@@ -549,7 +549,7 @@ void Cmd_ChangeTrainingOptions::Read(FileRead* fr, Editor_Game_Base* egbase, Wid
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
 		int fileserial=fr->Unsigned32();
@@ -617,7 +617,7 @@ void Cmd_DropSoldier::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_DROPSOLDIER_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
 		int fileserial=fr->Unsigned32();
@@ -682,7 +682,7 @@ void Cmd_ChangeSoldierCapacity::Read(FileRead* fr, Editor_Game_Base* egbase, Wid
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
       // Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
       // Serial
 		int fileserial=fr->Unsigned32();
@@ -761,7 +761,7 @@ void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
 	int version=fr->Unsigned16();
 	if (version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// action
 		action=fr->Unsigned8();

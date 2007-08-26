@@ -57,7 +57,7 @@ void getCloseMilitarySites
 			 dynamic_cast<MilitarySite * const>(it->object))
 			if (ms->owner().get_player_number() == player) {
 				militarySites.insert(ms);
-            log("getCloseMilitarySite(): military site at: %i,%i\n",ms->get_base_flag()->get_position().x,ms->get_base_flag()->get_position().y);
+            log("getCloseMilitarySite(): military site at: %i, %i\n", ms->get_base_flag()->get_position().x, ms->get_base_flag()->get_position().y);
 			}
 	}
 }
@@ -77,7 +77,7 @@ uint getMaxAttackSoldiers
 		 it != militarySites_end;
 		 ++it)
       maxAttackSoldiers+= (*it)->nr_attack_soldiers();
-   log("Got %i attackers available for attack.\n",maxAttackSoldiers);
+   log("Got %i attackers available for attack.\n", maxAttackSoldiers);
    return maxAttackSoldiers;
 }
 
@@ -120,9 +120,9 @@ void AttackController::cleanup (Editor_Game_Base* eg)
 //end inherited
 
 void AttackController::launchAttack(uint nrAttackers) {
-   launchAllSoldiers(true,nrAttackers);
+   launchAllSoldiers(true, nrAttackers);
    //always try to launch two more defenders than attackers
-   if (!launchAllSoldiers(false,nrAttackers+2)) {
+   if (!launchAllSoldiers(false, nrAttackers+2)) {
       attackedMsEmpty = true;
 	}
 }
@@ -150,7 +150,7 @@ bool AttackController::launchAllSoldiers(bool attackers, int max) {
 
 		launchedSoldier = true;
 
-      launchSoldiersOfMilitarySite(*it,nrLaunch,attackers);
+      launchSoldiersOfMilitarySite(*it, nrLaunch, attackers);
 
       if (max > -1) {
          max-=nrLaunch;
@@ -185,7 +185,7 @@ void AttackController::launchSoldiersOfMilitarySite(MilitarySite* militarySite, 
 
 bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers) {
    if (!soldier->is_marked()) {
-      log("Launching soldier %d to flag %i,%i, is attacker %i\n", soldier->get_serial(),flag->get_position().x,flag->get_position().y,attackers);
+      log("Launching soldier %d to flag %i, %i, is attacker %i\n", soldier->get_serial(), flag->get_position().x, flag->get_position().y, attackers);
       soldier->set_attack_ctrl(this);
       soldier->mark(true);
       soldier->reset_tasks(this->game);
@@ -199,7 +199,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
          false,
 		};
 
-      calcBattleGround(&bs,totallyLaunched);
+      calcBattleGround(&bs, totallyLaunched);
 
       soldier->startTaskMoveToBattle(this->game, this->flag, bs.battleGround);
 
@@ -215,9 +215,9 @@ void AttackController::moveToReached(Soldier* soldier) {
       soldierWon(soldier);
 	}
    else {
-      startBattle(soldier,true);
+      startBattle(soldier, true);
 	}
-   log("Soldier %dP reached flag.\n",soldier->get_serial());
+   log("Soldier %dP reached flag.\n", soldier->get_serial());
 }
 
 void AttackController::soldierDied(Soldier* soldier) {
@@ -230,7 +230,7 @@ void AttackController::soldierWon(Soldier* soldier) {
    involvedSoldiers[idx].fighting = false;
 
    if (opponentsLeft(soldier)) {
-      startBattle(soldier,true);
+      startBattle(soldier, true);
       return;
 	}
 
@@ -282,10 +282,10 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived) {
          Battle* battle = game->create_battle();
          uint rnd = game->logic_rand() % 11;
          if (rnd <= 5)
-            battle->soldiers(involvedSoldiers[i].soldier,involvedSoldiers[s1Index].soldier);
+            battle->soldiers(involvedSoldiers[i].soldier, involvedSoldiers[s1Index].soldier);
          else
-            battle->soldiers(involvedSoldiers[s1Index].soldier,involvedSoldiers[i].soldier);
-         log("Created battle, rnd was: %i\n",rnd);
+            battle->soldiers(involvedSoldiers[s1Index].soldier, involvedSoldiers[i].soldier);
+         log("Created battle, rnd was: %i\n", rnd);
          return true;
 		}
 	}
@@ -340,16 +340,16 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
    FCoords prevCoords = map->get_fcoords(flag->get_position());
    FCoords newCoords = map->get_fcoords(flag->get_position());
 
-   int walkDir[] = {Map_Object::WALK_NE,Map_Object::WALK_E,Map_Object::WALK_SE,
-                    Map_Object::WALK_SW,Map_Object::WALK_W};
+   int walkDir[] = {Map_Object::WALK_NE, Map_Object::WALK_E, Map_Object::WALK_SE,
+                    Map_Object::WALK_SW, Map_Object::WALK_W};
    int walkDirIndex = soldierNr % 5;
 
    CheckStepDefault step(battleSoldier->soldier->get_movecaps());
 
    for (uint i=0;i<20;i++) {
-      map->get_neighbour(prevCoords,walkDir[walkDirIndex], &newCoords);
+      map->get_neighbour(prevCoords, walkDir[walkDirIndex], &newCoords);
 
-      if (step.allowed(map,prevCoords,newCoords,walkDir[walkDirIndex],CheckStep::stepNormal)) {
+      if (step.allowed(map, prevCoords, newCoords, walkDir[walkDirIndex], CheckStep::stepNormal)) {
          if (!battleGroundOccupied(newCoords)) {
             battleSoldier->battleGround = newCoords;
             return;

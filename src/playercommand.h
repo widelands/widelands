@@ -57,7 +57,7 @@ private:
 
 public:
 	Cmd_Bulldoze() : PlayerCommand() {} // For savegame loading
-	Cmd_Bulldoze (int t, int p, PlayerImmovable* pi):PlayerCommand(t,p)
+	Cmd_Bulldoze (int t, int p, PlayerImmovable* pi):PlayerCommand(t, p)
 	{serial=pi->get_serial();}
 
 	Cmd_Bulldoze (StreamRead*);
@@ -79,7 +79,7 @@ private:
 
 public:
 	Cmd_Build() : PlayerCommand() {} // For savegame loading
-	Cmd_Build (int t, int p, const Coords& c, int i):PlayerCommand(t,p)
+	Cmd_Build (int t, int p, const Coords& c, int i):PlayerCommand(t, p)
 	{coords=c; id=i;}
 
 	Cmd_Build (StreamRead*);
@@ -100,7 +100,7 @@ private:
 
 public:
 	Cmd_BuildFlag() : PlayerCommand() {} // For savegame loading
-	Cmd_BuildFlag (int t, int p, const Coords& c):PlayerCommand(t,p)
+	Cmd_BuildFlag (int t, int p, const Coords& c):PlayerCommand(t, p)
 	{coords=c;}
 
 	Cmd_BuildFlag (StreamRead*);
@@ -147,7 +147,7 @@ private:
 
 public:
 	Cmd_FlagAction() : PlayerCommand() {} // For savegame loading
-	Cmd_FlagAction (int t, int p, Flag* f, int a):PlayerCommand(t,p)
+	Cmd_FlagAction (int t, int p, Flag* f, int a):PlayerCommand(t, p)
 	{serial=f->get_serial(); action=a;}
 
 	// Write these commands to a file (for savegames)
@@ -169,7 +169,7 @@ private:
 
 public:
 	Cmd_StartStopBuilding() : PlayerCommand() {} // For savegame loading
-	Cmd_StartStopBuilding (int t, int p, Building* b):PlayerCommand(t,p)
+	Cmd_StartStopBuilding (int t, int p, Building* b):PlayerCommand(t, p)
 	{serial=b->get_serial();}
 
 	// Write these commands to a file (for savegames)
@@ -191,7 +191,7 @@ private:
 
 public:
 	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
-	Cmd_EnhanceBuilding (int t, int p, Building* b, int i):PlayerCommand(t,p)
+	Cmd_EnhanceBuilding (int t, int p, Building* b, int i):PlayerCommand(t, p)
 	{serial=b->get_serial(); id=i;}
 
 	// Write these commands to a file (for savegames)
@@ -215,7 +215,7 @@ private:
 
 public:
 	Cmd_ChangeTrainingOptions() : PlayerCommand() {} // For savegame loading
-	Cmd_ChangeTrainingOptions(int t, int p, Building* b, int at, int val):PlayerCommand(t,p)
+	Cmd_ChangeTrainingOptions(int t, int p, Building* b, int at, int val):PlayerCommand(t, p)
 	{serial=b->get_serial(); attribute=at; value=val;}
 
 	// Write these commands to a file (for savegames)
@@ -237,7 +237,7 @@ private:
 
 public:
 	Cmd_DropSoldier ():PlayerCommand() {} ; // For savegames
-	Cmd_DropSoldier(int t, int p, Building* b, int _soldier):PlayerCommand(t,p)
+	Cmd_DropSoldier(int t, int p, Building* b, int _soldier):PlayerCommand(t, p)
 	{serial=b->get_serial(); soldier=_soldier;}
 
 	// Write these commands to a file (for savegames)
@@ -259,7 +259,7 @@ private:
 
 public:
 	Cmd_ChangeSoldierCapacity ():PlayerCommand() {} ; // For savegames
-	Cmd_ChangeSoldierCapacity (int t, int p, Building* b, int i):PlayerCommand(t,p)
+	Cmd_ChangeSoldierCapacity (int t, int p, Building* b, int i):PlayerCommand(t, p)
 	{serial=b->get_serial(); val=i;}
 
 	// Write these commands to a file (for savegames)
@@ -294,7 +294,7 @@ public:
 		 int num,
 		 int ty)
 		:
-		PlayerCommand(t,p)
+		PlayerCommand(t, p)
 	{serial=f->get_serial(); action=a; attacker=at; number=num; type=ty;}
 
 	// Write these commands to a file (for savegames)

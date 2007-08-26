@@ -61,7 +61,7 @@ throw (_wexception)
             nr_res, world->get_nr_resources());
 
       // construct ids and map
-      std::map<uchar,int> smap;
+      std::map<uchar, int> smap;
       char* buffer;
       for (int i=0; i<nr_res; i++) {
          int id=fr.Unsigned16();
@@ -93,11 +93,11 @@ throw (_wexception)
                set_start_amount=start_amount;
 				}
 
-            // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
+            // NoLog("[Map Loader] Setting resource of (%i, %i) to '%s'\n", x, y, smap[id]->get_name());
             if (set_id==-1)
                throw("Unkown resource in map file. It is not in world!\n");
-            egbase->get_map()->get_field(Coords(x,y))->set_resources(set_id,set_amount);
-            egbase->get_map()->get_field(Coords(x,y))->set_starting_res_amount(set_start_amount);
+            egbase->get_map()->get_field(Coords(x, y))->set_resources(set_id, set_amount);
+            egbase->get_map()->get_field(Coords(x, y))->set_starting_res_amount(set_start_amount);
 			}
 		}
       return;
@@ -136,7 +136,7 @@ throw (_wexception)
    fw.Unsigned16(nr_res);
 
    // Write all resources names and their id's
-   std::map<std::string,uchar> smap;
+   std::map<std::string, uchar> smap;
    for (int i=0; i<nr_res; i++) {
       Resource_Descr* res=world->get_resource(i);
       smap[res->name().c_str()]=i;
@@ -150,9 +150,9 @@ throw (_wexception)
    Map* map=egbase->get_map();
    for (ushort y=0; y<map->get_height(); y++) {
       for (ushort x=0; x<map->get_width(); x++) {
-         int res=map->get_field(Coords(x,y))->get_resources();
-         int amount=map->get_field(Coords(x,y))->get_resources_amount();
-         int start_amount=map->get_field(Coords(x,y))->get_starting_res_amount();
+         int res=map->get_field(Coords(x, y))->get_resources();
+         int amount=map->get_field(Coords(x, y))->get_resources_amount();
+         int start_amount=map->get_field(Coords(x, y))->get_starting_res_amount();
          if (!amount)
             res=0;
          fw.Unsigned8(res);

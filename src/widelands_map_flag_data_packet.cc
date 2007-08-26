@@ -83,7 +83,7 @@ throw
                // later again, if it isn't wanted
                Player* plr = egbase->get_safe_player(owner);
                assert(plr);
-               Flag* flag=Flag::create(egbase, plr, Coords(x,y));
+               Flag* flag=Flag::create(egbase, plr, Coords(x, y));
 
                // and register it with the object loader for further loading
                ol->register_object(egbase, serial, flag);
@@ -119,7 +119,7 @@ throw (_wexception)
    Map* map=egbase->get_map();
    for (ushort y=0; y<map->get_height(); y++) {
       for (ushort x=0; x<map->get_width(); x++) {
-         BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
+         BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
          // We only write flags
          if (immovable && immovable->get_type()==Map_Object::FLAG) {
             Flag* flag=static_cast<Flag*>(immovable);

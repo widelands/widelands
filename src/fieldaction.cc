@@ -229,13 +229,16 @@ private:
 
 static const char* const pic_tab_buildroad = "pics/menu_tab_buildroad.png";
 static const char* const pic_tab_watch = "pics/menu_tab_watch.png";
-static const char* const pic_tab_buildhouse[3] = {
+static const char* const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png"
 };
-static const std::string tooltip_tab_build[3] =
-{_("Build small buildings"), _("Build medium buildings"), _("Build large buildings"),};
+static const std::string tooltip_tab_build[] = {
+	_("Build small buildings"),
+	_("Build medium buildings"),
+	_("Build large buildings")
+};
 
 static const char* const pic_tab_buildmine = "pics/menu_tab_buildmine.png";
 

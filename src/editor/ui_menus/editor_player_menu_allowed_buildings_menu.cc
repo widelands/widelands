@@ -100,9 +100,9 @@ m_allow_button
 
 {
 	m_allowed.selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
-	m_allowed.double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
+	m_allowed.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
 	m_forbidden.selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
-	m_forbidden.double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
+	m_forbidden.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
 
    // Fill the lists
 	const Tribe_Descr & tribe = player->tribe();

@@ -84,7 +84,7 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
       m_last_packet_index = FIRST_CLIENT_PACKET_INDEX;
 
    // This packet is replied to
-   m_pending_packets.insert(std::pair<uint,Game_Server_Protocol_Packet*>(index, packet));
+   m_pending_packets.insert(std::pair<uint, Game_Server_Protocol_Packet*>(index, packet));
 
    // Write this data onto the stream
    Network_Buffer buf;
@@ -186,7 +186,7 @@ void Game_Server_Connection::set_server_message_handler(ServerMessage_Handler fu
    m_smhd = data;
 }
 void Game_Server_Connection::server_message(std::string msg) {
-   (*m_smh)(msg,m_smhd);
+   (*m_smh)(msg, m_smhd);
 }
 
 void Game_Server_Connection::set_user_entered_handler(UserEntered_Handler func, void* data) {
@@ -194,7 +194,7 @@ void Game_Server_Connection::set_user_entered_handler(UserEntered_Handler func, 
    m_uehd = data;
 }
 void Game_Server_Connection::user_entered(std::string name, std::string room, uchar b) {
-   (*m_ueh)(name,room,b,m_uehd);
+   (*m_ueh)(name, room, b, m_uehd);
 }
 
 void Game_Server_Connection::set_critical_error_handler(CriticalError_Handler func, void* data) {
@@ -202,7 +202,7 @@ void Game_Server_Connection::set_critical_error_handler(CriticalError_Handler fu
    m_cehd= data;
 }
 void Game_Server_Connection::critical_error(std::string msg) {
-   (*m_ceh)(msg,m_cehd);
+   (*m_ceh)(msg, m_cehd);
 }
 
 void Game_Server_Connection::set_get_room_info_handler(RoomInfo_Handler rih, void* data) {

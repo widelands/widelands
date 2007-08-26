@@ -200,7 +200,7 @@ bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 void Event_Move_View_Option_Menu::clicked_ok() {
 	if (m_name->get_text()) m_event->set_name(m_name->get_text());
-	m_event->set_coords(Coords(m_x,m_y));
+	m_event->set_coords(Coords(m_x, m_y));
 	end_modal(1);
 }
 

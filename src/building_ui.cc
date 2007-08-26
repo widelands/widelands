@@ -725,7 +725,7 @@ void Building_Window::setup_capsbuttons()
    if (x == 0) {
       // no capsbutton is in this window
       // resize us, so that we do not take space
-      m_capsbuttons->set_inner_size(0,0);
+      m_capsbuttons->set_inner_size(0, 0);
 	}
 }
 
@@ -2035,7 +2035,7 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
    box->add
 		(new UI::Button<TrainingSite_Window>
 		 (box,
-		  32, 0, 32,32,
+		  32, 0, 32, 32,
 		  4,
 		  g_gr->get_picture(PicMod_Game, pic_train_options),
 		  &TrainingSite_Window::options_button_clicked, this),

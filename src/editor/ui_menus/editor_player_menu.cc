@@ -225,7 +225,7 @@ void Editor_Player_Menu::update() {
 #endif
       posy+=size+spacing;
 	}
-   set_inner_size(get_inner_w(),posy+spacing);
+   set_inner_size(get_inner_w(), posy+spacing);
 }
 
 void Editor_Player_Menu::clicked_add_player() {
@@ -238,8 +238,8 @@ void Editor_Player_Menu::clicked_add_player() {
       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
       char c2= (nr_players%10) + 0x30;
       std::string name=_("Player ");
-      if (c1) name.append(1,c1);
-      name.append(1,c2);
+      if (c1) name.append(1, c1);
+      name.append(1, c2);
 		map.set_nrplayers(nr_players);
 		map.set_scenario_player_name(nr_players, name);
 		map.set_scenario_player_tribe(nr_players, m_tribes[0]);
@@ -318,7 +318,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
          if (m_tribes[i]==t) break;
       if (i==m_tribes.size()-1) t=m_tribes[0];
       else t=m_tribes[++i];
-		parent.egbase().map().set_scenario_player_tribe(n+1,t);
+		parent.egbase().map().set_scenario_player_tribe(n+1, t);
 		parent.set_need_save(true);
 	} else {
 		UI::Modal_Message_Box mmb
@@ -447,7 +447,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
       picsname+="_starting_pos.png";
       int picid=g_gr->get_picture(PicMod_Game,  picsname.c_str());
       // Remove old overlay if any
-		overlay_manager.remove_overlay(start_pos,picid);
+		overlay_manager.remove_overlay(start_pos, picid);
 	}
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);

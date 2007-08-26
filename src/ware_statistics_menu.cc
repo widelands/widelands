@@ -511,5 +511,5 @@ void Ware_Statistics_Menu::clicked_help() {
  * Cb has been changed to this state
  */
 void Ware_Statistics_Menu::cb_changed_to(int id, bool what) {
-   m_plot->show_plot(id,what);
+   m_plot->show_plot(id, what);
 }

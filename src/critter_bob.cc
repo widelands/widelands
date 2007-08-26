@@ -134,7 +134,7 @@ bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
 {
 
 	state->ivar1++;
-	// Bye,bye cruel world
+	// Bye, bye cruel world
    schedule_destroy(g);
    return true;
 }

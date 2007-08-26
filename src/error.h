@@ -21,9 +21,9 @@
 #define ERROR_H
 
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b,c) __attribute__ ((__format__ (__printf__,b,c)))
+#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
 #else
-#define PRINTF_FORMAT(b,c)
+#define PRINTF_FORMAT(b, c)
 #endif
 
 /*
@@ -43,11 +43,11 @@ ERROR HANDLING FUNCTIONS
 
 // Critical errors, displayed to the user.
 // Does not return (unless the user is really daring)
-void critical_error(const char *, ...) PRINTF_FORMAT(1,2);
+void critical_error(const char *, ...) PRINTF_FORMAT(1, 2);
 
 // Informational messages that can aid in debugging
 #define ALIVE() log("Alive in %s line %i\n", __FILE__, __LINE__)
-void log(const char *, ...) PRINTF_FORMAT(1,2);
+void log(const char *, ...) PRINTF_FORMAT(1, 2);
 
 #ifdef DEBUG
    #ifndef KEEP_STANDART_ASSERT

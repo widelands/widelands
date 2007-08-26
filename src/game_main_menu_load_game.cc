@@ -44,7 +44,7 @@ Create all the buttons etc...
 */
 Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
 :
-UniqueWindow(parent,registry,400,270,_("Load Game")) {
+UniqueWindow(parent, registry, 400, 270, _("Load Game")) {
    m_parent=parent;
 
    int spacing=5;
@@ -207,7 +207,7 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 		UI::ProgressWindow loader_ui;
 		fs = g_fs->MakeSubFileSystem(filename);
 		Game_Loader gl(*fs, m_parent->get_game());
-		m_parent->get_game()->cleanup_for_load(true,true);
+		m_parent->get_game()->cleanup_for_load(true, true);
 		gl.load_game();
 		m_parent->get_game()->postload();
 		m_parent->get_game()->load_graphics(loader_ui);

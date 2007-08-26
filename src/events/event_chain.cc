@@ -155,7 +155,7 @@ void Cmd_CheckEventChain::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
 	const Uint16 cmd_check_eventchain_version = fr->Unsigned16();
 	if (cmd_check_eventchain_version == CMD_CHECK_EVENTCHAIN_VERSION) {
       // Read Base Commands
-      BaseCommand::BaseCmdRead(fr,egbase,mol);
+      BaseCommand::BaseCmdRead(fr, egbase, mol);
 
       // eventchain id
       m_eventchain_id=fr->Unsigned16();

@@ -94,7 +94,7 @@ m_tool(tool)
 			g_gr->get_picture_size
 				(g_gr->get_picture
 				 (PicMod_Game, g_gr->get_maptexture_picture(i + 1)), picw, pich);
-         uint surface=g_gr->create_surface(picw,pich);
+         uint surface=g_gr->create_surface(picw, pich);
 
          // Get the rendertarget for this
          RenderTarget* target=g_gr->get_surface_renderer(surface);
@@ -134,7 +134,7 @@ m_tool(tool)
          // Save this surface, so we can free it later on
          m_surfaces.push_back(surface);
 
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos.x , pos.y, surface);
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos.x, pos.y, surface);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));

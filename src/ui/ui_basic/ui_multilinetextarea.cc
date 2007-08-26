@@ -128,7 +128,7 @@ void Multiline_Textarea::draw(RenderTarget* dst)
       // Let the font handler worry about all the complicated stuff..
       if (is_richtext(m_text)) g_fh->draw_richtext
 	      (*dst,
-	       RGBColor(107,87,55),
+	       RGBColor(107, 87, 55),
 	       Point(get_halign(), 0 - m_textpos),
 	       m_text,
 	       get_eff_w(),
@@ -137,7 +137,7 @@ void Multiline_Textarea::draw(RenderTarget* dst)
 			(*dst,
 			 m_fontname,
 			 m_fontsize,
-			 m_fcolor, RGBColor(107,87,55),
+			 m_fcolor, RGBColor(107, 87, 55),
 			 Point(get_halign(), 0 - m_textpos),
 			 m_text.c_str(),
 			 m_align,

@@ -1111,10 +1111,10 @@ void Warehouse::create_worker(Game *g, int worker)
 			int id_w;
 			id_w = get_owner()->tribe().get_ware_index((*bc)[i].name.c_str());
          if (id_w!=-1) {
-            remove_wares(id_w , (*bc)[i].amount);
+            remove_wares(id_w, (*bc)[i].amount);
 			} else {
             id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
-            remove_workers(id_w , (*bc)[i].amount);
+            remove_workers(id_w, (*bc)[i].amount);
 			}
 		}
 

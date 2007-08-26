@@ -668,7 +668,7 @@ void ImmovableProgram::parse_animation(ImmovableAction* act, const ProgramParser
 		throw wexception("duration out of range (-1, 1..+inf) '%s'", cmd[2].c_str());
 }
 
-bool Immovable::run_animation(Game* g, bool , const ImmovableAction & action)
+bool Immovable::run_animation(Game* g, bool, const ImmovableAction & action)
 {
 	m_anim = action.iparam1;
 	m_animstart = g->get_gametime();

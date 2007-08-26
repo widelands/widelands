@@ -95,7 +95,7 @@ throw (_wexception)
 
          // Write for all buildings if it is enabled
          const char* name;
-         while ((name=s->get_next_bool(0,0))) {
+         while ((name=s->get_next_bool(0, 0))) {
             bool allowed = s->get_bool(name);
             int index=t->get_building_index(name);
             if (index==-1)

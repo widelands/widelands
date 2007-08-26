@@ -39,7 +39,7 @@ class RenderTarget;
 namespace UI {
 /**
  * Panel is a basic rectangular UI element.
- * The outer rectangle is defined by (_x,_y,_w,_h) and encloses the entire panel,
+ * The outer rectangle is defined by (_x, _y, _w, _h) and encloses the entire panel,
  * including both border and inner area/rectangle.
  * The inner rectangle is the outer rectangle minus the border sizes.
  * Child panel coordinates are always relative to the inner rectangle.

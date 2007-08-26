@@ -261,7 +261,7 @@ void World::parse_resources()
       Resource_Descr* descr;
       while ((section=prof.get_next_section(0))) {
          descr=new Resource_Descr();
-         descr->parse(section,m_basedir);
+         descr->parse(section, m_basedir);
          m_resources.add(descr);
 		}
 	}
@@ -373,7 +373,7 @@ void World::get_all_worlds(std::vector<std::string>* retval) {
    g_fs->FindFiles("worlds", "*", &m_worlds);
    for (filenameset_t::iterator pname = m_worlds.begin(); pname != m_worlds.end(); pname++) {
       std::string world=*pname;
-      world.erase(0,7); // remove worlds/
+      world.erase(0, 7); // remove worlds/
       if (World::exists_world(world.c_str()))
          retval->push_back(world);
 	}
@@ -419,7 +419,7 @@ m_texture           (0)
    if (str1!="") {
       int nres=1;
       uint i=0;
-      while (i < str1.size()) {if (str1[i]==',') {nres++;}  i++;}
+      while (i < str1.size()) {if (str1[i]==', ') {nres++;}  i++;}
 
       m_nr_valid_resources=nres;
       if (nres==1)
@@ -431,7 +431,7 @@ m_texture           (0)
       int cur_res=0;
       while (i<=str1.size()) {
          if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}
-         if (str1[i]==',' || i==str1.size()) {
+         if (str1[i]==', ' || i==str1.size()) {
             int res=resources->get_index(curres.c_str());;
             if (res==-1)
                throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());

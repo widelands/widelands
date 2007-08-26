@@ -312,7 +312,7 @@ void NetHost::begin_game ()
 void NetHost::handle_network ()
 {
 	TCPsocket sock;
-	unsigned int i,j;
+	unsigned int i, j;
 
 	if (promoter!=0) {
 	    promoter->run ();
@@ -705,7 +705,7 @@ void NetClient::handle_network ()
 		    case NETCMD_SELECTMAP:
 			{
 				char buffer[256];
-				deserializer->getstr (buffer,sizeof(buffer));
+				deserializer->getstr (buffer, sizeof(buffer));
 				log ("[Client] Map '%s' selected\n", buffer);
 
 				game->load_map (buffer);
@@ -941,7 +941,7 @@ Deserializer::~Deserializer ()
 int Deserializer::read_packet (TCPsocket sock)
 {
 	unsigned char buffer[256];
-	int length,amount,i;
+	int length, amount, i;
 
 	// read packet length (including length field)
 	if (SDLNet_TCP_Recv(sock, buffer, 2) < 2)

@@ -64,7 +64,7 @@ throw (_wexception)
          for (uint j=0; j<plr->m_economies.size(); j++) {
             int x=fr.Unsigned16();
             int y=fr.Unsigned16();
-            Flag* flag=static_cast<Flag*>(map->get_field(Coords(x,y))->get_immovable());
+            Flag* flag=static_cast<Flag*>(map->get_field(Coords(x, y))->get_immovable());
             assert(flag);
             ecos[j]=flag->get_economy();
 			}
@@ -104,7 +104,7 @@ throw (_wexception)
          Map* map=game->get_map();
          for (ushort y=0; y<map->get_height(); y++) {
             for (ushort x=0; x<map->get_width(); x++) {
-               BaseImmovable* imm=map->get_field(Coords(x,y))->get_immovable();
+               BaseImmovable* imm=map->get_field(Coords(x, y))->get_immovable();
                if (!imm) continue;
 
                if (imm->get_type()==Map_Object::FLAG) {

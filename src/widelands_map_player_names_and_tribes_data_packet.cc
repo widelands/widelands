@@ -74,8 +74,8 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
          name = s->get_string("name");
          tribe = s->get_string("tribe");
          if (!skip) {
-            map->set_scenario_player_name(i,name);
-            map->set_scenario_player_tribe(i,tribe);
+            map->set_scenario_player_name(i, name);
+            map->set_scenario_player_tribe(i, tribe);
 			}
 		}
       return;

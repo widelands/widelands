@@ -33,7 +33,7 @@ m_callback(0)
 #ifndef NDEBUG
  //  No need to initialize (see comment for get_a_job_id) other than to shut up
  //  Valgrind.
-,m_current_job_id(Job_Id::Null())
+, m_current_job_id(Job_Id::Null())
 #endif
 {}
 

@@ -242,7 +242,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 	}
 
 	// Draw border
-   RGBColor black(0,0,0);
+   RGBColor black(0, 0, 0);
 
 	if (area != m_pressed)
 	{

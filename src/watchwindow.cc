@@ -393,15 +393,15 @@ void show_watch_window(Interactive_Player *parent, Coords coords)
 {
 	Section *s = g_options.pull_section("global");
 	WatchWindow* win;
-   if (s->get_bool("single_watchwin",false)) {
+   if (s->get_bool("single_watchwin", false)) {
 		if (g_watch_window != NULL)
 			g_watch_window->add_view(coords);
 		else
-			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords,true);
+			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords, true);
       win = g_watch_window;
 	}
 	else
-		win = new WatchWindow(parent, 250, 150, 200, 200, coords,false);
+		win = new WatchWindow(parent, 250, 150, 200, 200, coords, false);
    win->closed.set(parent, &Interactive_Player::need_complete_redraw);
 
 }

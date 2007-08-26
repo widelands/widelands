@@ -70,7 +70,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 		} else if (cmd[0] == "consume") {
          if (cmd.size() != 2 && cmd.size() != 3)
-            throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
+            throw wexception("Line %i: Usage: consume <ware>[, <ware>, <ware>..] [number] (no blanks between wares)", idx);
 
          std::vector<std::string> wares;
 			split_string(cmd[1], wares, ",");
@@ -95,7 +95,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
          act.iparam1 = how_many;
 		}  else if (cmd[0] == "check") {
 			if (cmd.size() != 2 && cmd.size() != 3)
-				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
+				throw wexception("Line %i: Usage: checking <ware>[, <ware>, <ware>..] [number] (no blanks between wares)", idx);
 
          std::vector<std::string> wares;
 			split_string(cmd[1], wares, ",");
@@ -182,7 +182,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
          if (!building->is_animation_known(cmd[1].c_str())) {
             Section* s = prof->get_safe_section(cmd[1].c_str());
             act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
-            building->add_animation(cmd[1].c_str(),act.iparam1);
+            building->add_animation(cmd[1].c_str(), act.iparam1);
 			} else
             act.iparam1 = building->get_animation(cmd[1].c_str());
 
@@ -204,13 +204,13 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.type = ProductionAction::actMine;
 			act.sparam1=cmd[1]; // what to mine
-         act.iparam1=strtol(cmd[2].c_str(),&endp, 0);
+         act.iparam1=strtol(cmd[2].c_str(), &endp, 0);
          if (endp && *endp)
             throw wexception("Bad area '%s'", cmd[2].c_str());
-         act.iparam2=strtol(cmd[3].c_str(),&endp, 0);
+         act.iparam2=strtol(cmd[3].c_str(), &endp, 0);
          if (endp && *endp || act.iparam2>100)
             throw wexception("Bad maximum amount: '%s'", cmd[3].c_str());
-         act.iparam3=strtol(cmd[4].c_str(),&endp, 0);
+         act.iparam3=strtol(cmd[4].c_str(), &endp, 0);
          if (endp && *endp || act.iparam3>100)
             throw wexception("Bad chance after maximum amount is empty: '%s'", cmd[4].c_str());
 

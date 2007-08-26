@@ -39,7 +39,7 @@
  */
 static void user_entered(std::string name, std::string room, bool enters, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
-   lob->user_entered(name,room,enters);
+   lob->user_entered(name, room, enters);
 }
 static void server_message(std::string str, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
@@ -132,7 +132,7 @@ void Fullscreen_Menu_InetLobby::changed() {
    m_chatbox->set_text("");
 
    // TODO: check here if this is a Server message
-   Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0,text);
+   Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0, text);
    m_gsc->send(cm);
 }
 

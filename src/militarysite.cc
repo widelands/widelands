@@ -62,7 +62,7 @@ void MilitarySite_Descr::parse(const char* directory, Profile* prof,
 {
 	Section* sglobal = prof->get_section("global");
 
-	ProductionSite_Descr::parse(directory,prof,encdata);
+	ProductionSite_Descr::parse(directory, prof, encdata);
 	m_stopable = false; //  Militarysites are not stopable.
 
 	m_conquer_radius=sglobal->get_safe_int("conquers");
@@ -345,7 +345,7 @@ void MilitarySite::act(Game* g, uint data)
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
 	// Maybe a new queueing system like MilitaryAct could be introduced.
-   ProductionSite::act(g,data);
+   ProductionSite::act(g, data);
 
 	uint numMedics = 0; // FIX THIS when medics were added
       uint i = 0;
@@ -536,7 +536,7 @@ void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldie
 		 (owner().get_player_number(),
 		  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())));
    m_didconquer = true;
-   m_soldiers.insert(m_soldiers.begin(),soldiers->begin(),soldiers->end());
+   m_soldiers.insert(m_soldiers.begin(), soldiers->begin(), soldiers->end());
    /*for (uint i=0; i<soldiers->size(); i++)
       m_soldiers.push_back((*soldies)[i]);*/
 }
@@ -601,7 +601,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
    who->get_economy_by_number(who->get_player_number())->add_flag(f);
    log("flag added economy\n");
 
-   g->conquer_area(get_owner()->get_player_number(),get_position(), get_descr());
+   g->conquer_area(get_owner()->get_player_number(), get_position(), get_descr());
 
    // unconquer land
 

@@ -27,8 +27,8 @@
 #define GAMETIPS_DEFAULT_INTERVAL     5
 #define GAMETIPS_DEFAULT_TEXTAREA_W   250
 #define GAMETIPS_DEFAULT_TEXTAREA_H   150
-#define GAMETIPS_TEXTAREA_COLOR_BG    RGBColor(196,196,255)
-#define GAMETIPS_FONT_COLOR_FG        RGBColor(0,0,32)
+#define GAMETIPS_TEXTAREA_COLOR_BG    RGBColor(196, 196, 255)
+#define GAMETIPS_FONT_COLOR_FG        RGBColor(0, 0, 32)
 #define GAMETIPS_TEXTAREA_BORDER      2
 #define GAMETIPS_DEFAULT_PADDING      15
 
@@ -224,7 +224,7 @@ void GameTips::show_tip(int index) {
 				 text_area.y + text_area.h / 2);
 
 	g_fh->draw_string(rt, UI_FONT_NAME, m_font_size,
-					  m_color, m_bgcolor,//RGBColor(107,87,55),
+					  m_color, m_bgcolor, //RGBColor(107, 87, 55),
 					  center, m_tips[index].text.c_str(),
 					  Align_Center, text_area.w);
 	g_gr->update_rectangle(tips_area);

@@ -22,8 +22,8 @@
 #include "font_handler.h"
 #include "i18n.h"
 
-#define PROGRESS_FONT_COLOR_FG        RGBColor(128,128,255)
-#define PROGRESS_FONT_COLOR_BG        RGBColor(64,64,0)
+#define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
+#define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
 #define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2

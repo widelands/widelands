@@ -29,7 +29,7 @@ class Editor_Game_Base;
 /*
  * This event is able to set a null trigger to a certain state
  */
-class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
+class Event_Set_Null_Trigger : public Event, public TriggerReferencer {
    public:
      Event_Set_Null_Trigger();
       ~Event_Set_Null_Trigger();

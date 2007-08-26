@@ -211,7 +211,7 @@ void Editor_Event_Menu::update() {
 			m_trigger_list->add(trigger->get_name(), trigger);
 			if (trigger->get_referencers().empty())
 				m_trigger_list->set_entry_color
-				(m_trigger_list->size() - 1, RGBColor(255,0,0));
+				(m_trigger_list->size() - 1, RGBColor(255, 0, 0));
 		}
 	}
 
@@ -224,7 +224,7 @@ void Editor_Event_Menu::update() {
 			m_event_list->add(event->name().c_str(), event);
 			if (event->get_referencers().empty())
 				m_event_list->set_entry_color
-				(m_event_list->size()-1, RGBColor(255,0,0));
+				(m_event_list->size()-1, RGBColor(255, 0, 0));
 		}
 	}
 

@@ -306,12 +306,12 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	for (i=0; i<list.size(); i++)
 		remove_spaces(&list[i]);
 	char* endp;
-	m_min_hp= strtol(list[0].c_str(),&endp, 0);
+	m_min_hp= strtol(list[0].c_str(), &endp, 0);
 	if (endp and *endp)
 		throw wexception("Parse error in hp string: %s is a bad value", list[0].c_str());
 	if (0 == m_min_hp) throw wexception
 		("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
-	m_max_hp = strtol(list[1].c_str(),&endp, 0);
+	m_max_hp = strtol(list[1].c_str(), &endp, 0);
 	if (endp and *endp)
 		throw wexception("Parse error in hp string: %s is a bad value", list[1].c_str());
 	if (m_max_hp < m_min_hp) throw wexception
@@ -326,10 +326,10 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 		throw wexception("Parse error in attack string: \"%s\" (must be \"min-max\")", attack.c_str());
 	for (i=0; i<list.size(); i++)
 		remove_spaces(&list[i]);
-	m_min_attack= strtol(list[0].c_str(),&endp, 0);
+	m_min_attack= strtol(list[0].c_str(), &endp, 0);
 	if (endp and *endp)
 		throw wexception("Parse error in attack string: %s is a bad value", list[0].c_str());
-	m_max_attack = strtol(list[1].c_str(),&endp, 0);
+	m_max_attack = strtol(list[1].c_str(), &endp, 0);
 	if (endp and *endp)
 		throw wexception("Parse error in attack string: %s is a bad value", list[1].c_str());
 
@@ -583,7 +583,7 @@ void Soldier::draw
 		else if (fraction <= 0.5)
 			color = RGBColor(255, 255, 0);
 		else
-			color = RGBColor(17,192,17);*/
+			color = RGBColor(17, 192, 17);*/
 		assert(2 <= r.w);
 		assert(2 <= r.h);
 		dst.fill_rect
@@ -676,10 +676,10 @@ void Soldier::moveToBattleUpdate(Game* g, State* state) {
 			if (state->ivar1 != 3)
 				m_attack_ctrl->moveToReached(this);
 			state->ivar1 = 3;
-			start_task_idle(g,descr().get_animation("idle"),1000);
+			start_task_idle(g, descr().get_animation("idle"), 1000);
 			return;
 		}
-		if (!start_task_movepath(g,state->coords,0,descr().get_right_walk_anims(does_carry_ware()))) {
+		if (!start_task_movepath(g, state->coords, 0, descr().get_right_walk_anims(does_carry_ware()))) {
 			molog("[moveToBattleUpdate]: Couldn't find path to flag!\n");
 			set_signal("fail");
 			mark(false);
@@ -693,7 +693,7 @@ void Soldier::moveToBattleSignal(Game * g, State *) {
 	std::string signal = get_signal();
 	set_signal("");
 
-	log("moveToBattleSignal got signal: %s",signal.c_str());
+	log("moveToBattleSignal got signal: %s", signal.c_str());
 
 	if (signal == "won_battle") {
 		m_attack_ctrl->soldierWon(this);
@@ -732,7 +732,7 @@ void Soldier::moveHomeUpdate(Game* g, State* state) {
 	// Move home
 	if (state->ivar1 == 1) {
 		state->ivar1 = 2;
-		start_task_return(g,false);
+		start_task_return(g, false);
 		return;
 	}
 	else {
@@ -745,7 +745,7 @@ void Soldier::moveHomeSignal(Game *, State *) {
 	std::string signal = get_signal();
 	set_signal("");
 
-	log("moveToSignal got signal, don't know what to do with it.: %s",signal.c_str());
+	log("moveToSignal got signal, don't know what to do with it.: %s", signal.c_str());
 }
 
 void Soldier::log_general_info(Editor_Game_Base* egbase)

@@ -23,7 +23,7 @@
 #include "font_handler.h"
 
 inline bool is_richtext(std::string text) {
-   return (text.substr(0,3) == "<rt");
+   return (text.substr(0, 3) == "<rt");
 }
 
 class Text_Block {

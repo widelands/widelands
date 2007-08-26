@@ -48,8 +48,8 @@ template<typename T> static void render_top_triangle
  int y2)
 {
 	int y, y1, ix1, ix2, count;
-	int x1,x2,dx1,dx2;
-	int b1,db1, tx1,dtx1, ty1,dty1;
+	int x1, x2, dx1, dx2;
+	int b1, db1, tx1, dtx1, ty1, dty1;
 	int b, tx, ty;
 	float lambda, mu;
 	unsigned char *texpixels;
@@ -135,9 +135,9 @@ template<typename T> static void render_bottom_triangle
  int y1)
 {
 	int y, y2, ix1, ix2, count;
-	int x1,x2,dx1,dx2;
-	int b1,db1, tx1,dtx1, ty1,dty1;
-	int b ,tx, ty;
+	int x1, x2, dx1, dx2;
+	int b1, db1, tx1, dtx1, ty1, dty1;
+	int b, tx, ty;
 	float lambda, mu;
 	unsigned char *texpixels;
 	T *texcolormap;
@@ -231,7 +231,7 @@ template<typename T> static void render_triangle
 (Surface & dst, Vertex & p1, Vertex & p2, Vertex & p3, const Texture & tex)
 {
 	Vertex * p[3]= {&p1, &p2, &p3};
-	int top,bot,mid,y,ym,i;
+	int top, bot, mid, y, ym, i;
 
 	top=bot=0; // to avoid compiler warning
 
@@ -290,7 +290,7 @@ template<typename T> static void dither_edge_horiz
 	bpixels = btex.get_curpixels();
 	bcolormap = static_cast<T * const>(btex.get_colormap());
 
-	int tx,ty,b,dtx,dty,db,tx0,ty0;
+	int tx, ty, b, dtx, dty, db, tx0, ty0;
 
 	tx=ITOFIX(start.tx);
 	ty=ITOFIX(start.ty);
@@ -368,7 +368,7 @@ template<typename T> static void dither_edge_vert
 	rpixels = rtex.get_curpixels();
 	rcolormap = static_cast<T * const>(rtex.get_colormap());
 
-	int tx,ty,b,dtx,dty,db,tx0,ty0;
+	int tx, ty, b, dtx, dty, db, tx0, ty0;
 
 	tx=ITOFIX(start.tx);
 	ty=ITOFIX(start.ty);

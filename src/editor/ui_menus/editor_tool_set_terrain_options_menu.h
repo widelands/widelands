@@ -41,8 +41,8 @@ struct Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Me
       std::vector<uint> m_surfaces;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
-      void selected(int,bool);
-      void do_nothing(int,bool);
+      void selected(int, bool);
+      void do_nothing(int, bool);
       std::vector<UI::Checkbox*> m_checkboxes;
 };
 

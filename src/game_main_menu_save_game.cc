@@ -46,7 +46,7 @@ Create all the buttons etc...
 */
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UI::UniqueWindow::Registry* registry)
 :
-UI::UniqueWindow(parent,registry,400,270,_("Save Game")),
+UI::UniqueWindow(parent, registry, 400, 270, _("Save Game")),
 m_parent(parent)
 
 {

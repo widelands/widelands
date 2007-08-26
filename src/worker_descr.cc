@@ -158,10 +158,10 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 			remove_spaces(&list[i]);
 
 		char* endp;
-		m_min_experience = strtol(list[0].c_str(),&endp, 0);
+		m_min_experience = strtol(list[0].c_str(), &endp, 0);
 		if (endp && *endp)
 			throw wexception("Parse error in experience string: %s is a bad value", list[0].c_str());
-		m_max_experience = strtol(list[1].c_str(),&endp, 0);
+		m_max_experience = strtol(list[1].c_str(), &endp, 0);
 		if (endp && *endp)
 			throw wexception("Parse error in experience string: %s is a bad value", list[1].c_str());
 	}

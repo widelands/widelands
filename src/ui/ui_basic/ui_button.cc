@@ -150,7 +150,7 @@ void Basic_Button::draw(RenderTarget* dst)
 	// a pressed but not highlighted button occurs when the user has pressed
 	// the left mouse button and then left the area of the button
 	// or the button stays pressed when it is pressed once
-   RGBColor black(0,0,0);
+   RGBColor black(0, 0, 0);
 
    if (!m_flat)
 	{

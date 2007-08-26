@@ -536,7 +536,7 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 		switch (action) {
 		case ENEMYFLAGACTION_ATTACK:
 		{
-			game->create_attack_controller(flag,attacker,flag->get_owner()->get_player_number(),(uint)num);
+			game->create_attack_controller(flag, attacker, flag->get_owner()->get_player_number(), (uint)num);
 			break;
 		}
 

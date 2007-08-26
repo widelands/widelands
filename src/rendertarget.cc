@@ -93,7 +93,7 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
  */
 bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
 {
-	Point newofs(0,0);
+	Point newofs(0, 0);
 	Rect newrect = rc;
 
 	if (clip(newrect)) {
@@ -199,7 +199,7 @@ void RenderTarget::clear()
 		and
 		m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
 		m_surface->clear();
-	else m_surface->fill_rect(m_rect, RGBColor(0,0,0));
+	else m_surface->fill_rect(m_rect, RGBColor(0, 0, 0));
 }
 
 /**

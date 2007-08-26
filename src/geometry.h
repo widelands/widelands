@@ -93,7 +93,7 @@ struct Vertex:public Point {
 	Vertex
 		(const int vx, const int vy, const int vb, const int vtx, const int vty)
 		throw ()
-		: Point(vx,vy), b(vb), tx(vtx), ty(vty)
+		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
 	{}
 
 	int b, tx, ty;

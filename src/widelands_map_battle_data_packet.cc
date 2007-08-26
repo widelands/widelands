@@ -136,7 +136,7 @@ throw (_wexception)
       Battle* b = (Battle*) obj;
 
 		assert(not os->is_object_known(b));
-		log("Loggi: registering battle with type: %i",b->get_type());
+		log("Loggi: registering battle with type: %i", b->get_type());
 		fw.Unsigned32(os->register_object(b));  // Something like serial ..
 
          // Write time to next assault

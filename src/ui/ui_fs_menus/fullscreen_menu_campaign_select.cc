@@ -207,7 +207,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 			list.add(
 				s->get_string(cname, _("[No value found]").c_str()),
 				s->get_string(csection),
-				g_gr->get_picture(PicMod_Game,difficulty.c_str()));
+				g_gr->get_picture(PicMod_Game, difficulty.c_str()));
 
 		} // if (s->get_int(cvisible) == 1)
 

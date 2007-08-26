@@ -70,7 +70,7 @@ throw (_wexception)
 
       WareInstance* w;
       for (uint i=0; i<nr_files; i++) {
-         w=new WareInstance(0,0); // data is read somewhere else
+         w=new WareInstance(0, 0); // data is read somewhere else
          w->init(egbase);
          ol->register_object(egbase, fr.Unsigned32(), w);
 		}
@@ -103,7 +103,7 @@ throw (_wexception)
    std::vector<uint> ids;
    for (ushort y=0; y<map->get_height(); y++) {
       for (ushort x=0; x<map->get_width(); x++) {
-         Field* f=map->get_field(Coords(x,y));
+         Field* f=map->get_field(Coords(x, y));
 
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();

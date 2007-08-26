@@ -79,20 +79,20 @@ TTF_Font* Font_Loader::get_font(std::string name, int size) {
 	snprintf(buffer, sizeof(buffer), "%i", size);
 
 	const std::string key_name = name + '-' + buffer;
-	const std::map<std::string,TTF_Font*>::iterator it = m_font_table.find(key_name);
+	const std::map<std::string, TTF_Font*>::iterator it = m_font_table.find(key_name);
 	if (it != m_font_table.end()) {
-		TTF_SetFontStyle(it->second,TTF_STYLE_BOLD);
+		TTF_SetFontStyle(it->second, TTF_STYLE_BOLD);
 		return it->second;
 	}
 
-	TTF_Font* font = open_font(name,size);
+	TTF_Font* font = open_font(name, size);
 
 	if (font == NULL)
 		return NULL;
 
-	TTF_SetFontStyle(font,TTF_STYLE_BOLD);
+	TTF_SetFontStyle(font, TTF_STYLE_BOLD);
 
-	m_font_table.insert(std::pair<std::string,TTF_Font*>(key_name,font));
+	m_font_table.insert(std::pair<std::string, TTF_Font*>(key_name, font));
 
    return font;
 }
@@ -101,7 +101,7 @@ TTF_Font* Font_Loader::get_font(std::string name, int size) {
 * Clears the font cache.
 */
 void Font_Loader::clear_fonts() {
-	for (std::map<std::string,TTF_Font*>::iterator i = m_font_table.begin(); i != m_font_table.end(); i++) {
+	for (std::map<std::string, TTF_Font*>::iterator i = m_font_table.begin(); i != m_font_table.end(); i++) {
 		TTF_CloseFont(i->second);
 	}
 	m_font_table.clear();

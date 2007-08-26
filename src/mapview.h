@@ -36,7 +36,7 @@ struct Map_View : public UI::Panel {
 		 const int x, const int y, const uint w, const uint h,
 		 Interactive_Base &);
 
-	UI::Signal2<int,int> warpview; // x/y in screen coordinates
+	UI::Signal2<int, int> warpview; // x/y in screen coordinates
 	UI::Signal fieldclicked;
 
 	void warp_mouse_to_field(Coords c);

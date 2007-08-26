@@ -67,7 +67,7 @@ static const uint time_in_ms[] = {
 #define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
 
 #define BG_PIC "pics/plot_area_bg.png"
-#define LINE_COLOR RGBColor(0,0,0)
+#define LINE_COLOR RGBColor(0, 0, 0)
 
 /*
  * Constructor
@@ -105,10 +105,10 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // Draw coordinate system
    // X Axis
-   dst->draw_line(spacing,get_inner_h()-space_at_bottom,get_inner_w()-space_at_right,get_inner_h()-space_at_bottom, LINE_COLOR);
+   dst->draw_line(spacing, get_inner_h()-space_at_bottom, get_inner_w()-space_at_right, get_inner_h()-space_at_bottom, LINE_COLOR);
    // Arrow
-   dst->draw_line(spacing,get_inner_h()-space_at_bottom, spacing + 5, get_inner_h()-space_at_bottom-3, LINE_COLOR);
-   dst->draw_line(spacing,get_inner_h()-space_at_bottom, spacing + 5, get_inner_h()-space_at_bottom+3, LINE_COLOR);
+   dst->draw_line(spacing, get_inner_h()-space_at_bottom, spacing + 5, get_inner_h()-space_at_bottom-3, LINE_COLOR);
+   dst->draw_line(spacing, get_inner_h()-space_at_bottom, spacing + 5, get_inner_h()-space_at_bottom+3, LINE_COLOR);
    // Y Axis
    dst->draw_line(get_inner_w()-space_at_right, spacing, get_inner_w()-space_at_right, get_inner_h()-space_at_bottom, LINE_COLOR);
    // No Arrow here, since this doesn't continue
@@ -129,7 +129,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		g_fh->draw_string
 			(*dst,
 			 UI_FONT_SMALL,
-			 RGBColor(255,0,0), RGBColor(255,255,255),
+			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
 			 Point
 			 (static_cast<const int>(posx - w / 2),
 			  get_inner_h() - space_at_bottom + 4),
@@ -180,7 +180,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    g_fh->draw_string
 		(*dst,
 		 UI_FONT_SMALL,
-		 RGBColor(120,255,0), RGBColor(255,255,255),
+		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
 		 Point(get_inner_w() - space_at_right - w - 2, spacing),
 		 buffer, Align_CenterLeft, -1,
 		 Widget_Cache_None, 0, -1, false);

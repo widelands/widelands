@@ -70,8 +70,8 @@ class TriggerConditional_Factory {
  *
  * Each conditional either works on the following:
  *  - 1 conditional or trigger (NOT)
- *  - 2 conditionals or triggers (OR,AND,XOR)
- *  - 1 conditional AND 1 trigger (OR,AND,XOR)
+ *  - 2 conditionals or triggers (OR, AND, XOR)
+ *  - 1 conditional AND 1 trigger (OR, AND, XOR)
  */
 class TriggerConditional {
    public:

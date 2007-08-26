@@ -40,7 +40,7 @@ Network_Buffer::~Network_Buffer() {free(m_buffer);}
  * the size entry
  */
 void Network_Buffer::finish() {
-   SDLNet_Write16(m_buffer_len-2 , m_buffer);
+   SDLNet_Write16(m_buffer_len-2, m_buffer);
 }
 
 /*

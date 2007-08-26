@@ -141,7 +141,7 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
 		}
 	}
 
-	m_pit.enable(n,t);
+	m_pit.enable(n, t);
    select_correct_tool();
 }
 

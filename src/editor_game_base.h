@@ -109,7 +109,7 @@ struct Editor_Game_Base {
 	Immovable* create_immovable
 		(const Coords c, const std::string & name, const Tribe_Descr*);
       Battle*    create_battle ();
-      AttackController* create_attack_controller(Flag* flag,int attacker, int defender, uint num);
+      AttackController* create_attack_controller(Flag* flag, int attacker, int defender, uint num);
       AttackController* create_attack_controller();
       void remove_attack_controller(uint serial);
       std::vector<uint> get_attack_controller_serials() const {return m_attack_serials;}

@@ -82,7 +82,7 @@ class Game_Server_Connection {
 
    private:
       // Connection data
-      std::map<uint,Game_Server_Protocol_Packet*> m_pending_packets;
+      std::map<uint, Game_Server_Protocol_Packet*> m_pending_packets;
       TCPsocket m_socket;
       SDLNet_SocketSet m_socketset;
       std::string m_host;
