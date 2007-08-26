@@ -28,11 +28,13 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "maphollowregion.h"
+#include "militarysite.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
+#include "warehouse.h"
 #include "watchwindow.h"
 
 #include "ui_box.h"
@@ -438,17 +440,12 @@ void FieldActionWindow::add_buttons_attack ()
 		if
 			(Building * const building =
 			 dynamic_cast<Building * const>(m_map->get_immovable(m_field)))
-		{
-            //Add flag actions
-			//const Flag * const flag = building->get_base_flag();
-
-			//Building *building = flag->get_building();
-         if (building &&
-				 dynamic_cast<const Game * const>(&m_iabase->egbase())
+			if
+				(dynamic_cast<const Game * const>(&m_iabase->egbase())
 				 and
-               ((building->get_building_type() == Building::MILITARYSITE) ||
-                (building->get_building_type() == Building::WAREHOUSE))
-            )
+				 (dynamic_cast<const MilitarySite * const>(building)
+				  or
+				  dynamic_cast<const Warehouse * const>(building)))
          {
             m_attackers = 0;
             m_attackers_type = STRONGEST;
@@ -465,7 +462,6 @@ void FieldActionWindow::add_buttons_attack ()
             add_button(attackbox, pic_attack, &FieldActionWindow::act_attack, _("Start attack"));
             act_attack_more();
          }
-      }
    }
 
       // Add tab
