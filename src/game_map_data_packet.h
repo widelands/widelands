@@ -30,7 +30,7 @@ class Widelands_Map_Loader;
  */
 class Game_Map_Data_Packet : public Game_Data_Packet {
    public:
-      Game_Map_Data_Packet(void) { m_mos = 0; m_mol = 0; m_wms = 0; m_wml = 0; }
+      Game_Map_Data_Packet() {m_mos = 0; m_mol = 0; m_wms = 0; m_wml = 0;}
       virtual ~Game_Map_Data_Packet();
 
 
@@ -45,8 +45,8 @@ class Game_Map_Data_Packet : public Game_Data_Packet {
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
 		throw (_wexception);
 
-      inline Widelands_Map_Map_Object_Saver* get_map_object_saver(void) { return m_mos; }
-      inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }
+      inline Widelands_Map_Map_Object_Saver* get_map_object_saver() {return m_mos;}
+      inline Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 
    private:
       Widelands_Map_Map_Object_Saver* m_mos;

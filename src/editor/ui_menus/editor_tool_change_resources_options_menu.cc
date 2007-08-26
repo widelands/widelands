@@ -192,7 +192,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(const Button n) {
 /*
  * called when a resource has been selected
  */
-void Editor_Tool_Change_Resources_Options_Menu::selected(void) {
+void Editor_Tool_Change_Resources_Options_Menu::selected() {
 	const int n = m_radiogroup.get_state();
 
 	m_increase_tool.set_tool().set_cur_res(n);
@@ -215,7 +215,7 @@ Editor_Tool_Change_Resources_Options_Menu::update()
 Update all the textareas, so that they represent the correct values
 ===========
 */
-void Editor_Tool_Change_Resources_Options_Menu::update(void) {
+void Editor_Tool_Change_Resources_Options_Menu::update() {
    char buf[250];
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);

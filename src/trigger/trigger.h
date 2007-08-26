@@ -39,7 +39,7 @@ struct Trigger {
    friend class Widelands_Map_Trigger_Data_Packet;
 
 	Trigger(const std::string & Name) : m_name(Name) {}
-      virtual ~Trigger(void) { }
+      virtual ~Trigger() {}
 
       // virtual functions, implemented by the real triggers
       virtual void check_set_conditions(Game*) = 0;
@@ -50,7 +50,7 @@ struct Trigger {
       virtual void reset_trigger(Game*) = 0;
 
       // Functions needed by all
-      void set_name(const char* name) { m_name=name; }
+      void set_name(const char* name) {m_name=name;}
 	const char * get_name() const {return m_name.c_str();}
 	bool is_set() const {return m_is_set;}
 
@@ -67,7 +67,7 @@ struct Trigger {
 
    protected:
       // This is only for child classes to toggle the trigger
-      inline void set_trigger(bool t) { m_is_set=t; }
+      inline void set_trigger(bool t) {m_is_set=t;}
 
    private:
       std::string                m_name;

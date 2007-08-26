@@ -40,7 +40,7 @@ Game_Server_Protocol_Packet_ChatMessage::
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_ChatMessage::get_id(void) {
+ushort Game_Server_Protocol_Packet_ChatMessage::get_id() {
    return GGSPP_CHATMESSAGE;
 }
 

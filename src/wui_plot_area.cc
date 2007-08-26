@@ -83,7 +83,7 @@ WUIPlot_Area::WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h) :
 /*
  * Destructor
  */
-WUIPlot_Area::~WUIPlot_Area(void) {
+WUIPlot_Area::~WUIPlot_Area() {
 }
 
 /*

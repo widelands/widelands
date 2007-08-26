@@ -349,7 +349,7 @@ void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *p
 	}
 
 	for (int dir = 1; dir <= 6; dir++) {
-		static const char *dirstrings[6] = { "ne", "e", "se", "sw", "w", "nw" };
+		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
 		Section *s;
 

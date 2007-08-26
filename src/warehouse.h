@@ -50,7 +50,7 @@ struct Warehouse_Descr : public Building_Descr {
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building * create_object() const;
 
-	inline int get_subtype() const { return m_subtype; }
+	inline int get_subtype() const {return m_subtype;}
 	virtual uint get_conquers() const {return m_conquers;}
 
 private:
@@ -133,10 +133,10 @@ struct WarehouseSupply : public Supply {
    void set_nrwares(int i);
 
 
-	const WareList &get_wares() const { return m_wares; }
-	const WareList &get_workers() const { return m_workers; }
-	int stock_wares(int id) const { return m_wares.stock(id); }
-	int stock_workers(int id) const { return m_workers.stock(id); }
+	const WareList &get_wares() const {return m_wares;}
+	const WareList &get_workers() const {return m_workers;}
+	int stock_wares(int id) const {return m_wares.stock(id);}
+	int stock_workers(int id) const {return m_workers.stock(id);}
 	void add_wares(int id, int count);
 	void remove_wares(int id, int count);
    void add_workers(int id, int count);

@@ -238,7 +238,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
    return opt;
 }
 
-void Options_Ctrl::save_options(){
+void Options_Ctrl::save_options() {
 	Options_Ctrl::Options_Struct opt = m_opt_dialog->get_values();
 	m_opt_section->set_int("xres", opt.xres);
 	m_opt_section->set_int("yres", opt.yres);

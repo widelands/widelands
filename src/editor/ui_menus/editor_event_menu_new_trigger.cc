@@ -89,7 +89,7 @@ m_parent(parent)
 /*
  * cleanup
  */
-Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger(void) {
+Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger() {
 }
 
 /*

@@ -43,11 +43,11 @@ class Event_Allow_Building : public Event {
       void Read(Section*, Editor_Game_Base*);
 
 	int get_player() const {return m_player;}
-      inline void set_player(int i) { m_player=i; }
-      const char* get_building(void) { return m_building.c_str(); }
-      void set_building(const char* b) { m_building=b; }
-      inline void set_allow(bool t) { m_allow=t; }
-      inline bool get_allow(void) { return m_allow; }
+      inline void set_player(int i) {m_player=i;}
+      const char* get_building() {return m_building.c_str();}
+      void set_building(const char* b) {m_building=b;}
+      inline void set_allow(bool t) {m_allow=t;}
+      inline bool get_allow() {return m_allow;}
 
    private:
       bool m_allow;

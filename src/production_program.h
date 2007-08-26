@@ -76,15 +76,15 @@ Holds a series of actions to perform for production.
 struct ProductionProgram {
 	ProductionProgram(const std::string & name);
 
-	std::string get_name() const { return m_name; }
-	int get_size() const { return m_actions.size(); }
+	std::string get_name() const {return m_name;}
+	int get_size() const {return m_actions.size();}
 	const ProductionAction* get_action(int idx) const {
 		assert(idx >= 0);
 		assert(static_cast<const uint>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 
-	const std::vector<ProductionAction>& get_all_actions() { return m_actions;};
+	const std::vector<ProductionAction>& get_all_actions() {return m_actions;};
 
 	void parse(std::string directory, Profile* prof, std::string name,
 		ProductionSite_Descr* building, const EncodeData* encdata);

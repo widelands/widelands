@@ -132,7 +132,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_button(const Button n) {
 }
 
 /// Update all the textareas, so that they represent the correct values.
-void Editor_Tool_Change_Height_Options_Menu::update(void) {
+void Editor_Tool_Change_Height_Options_Menu::update() {
    char buf[250];
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);

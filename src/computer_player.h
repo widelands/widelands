@@ -47,7 +47,7 @@ class Computer_Player {
 
 	const Game & game() const throw () {return m_game;}
 	Game       & game()       throw () {return m_game;}
-		inline uchar get_player_number(void) { return player_number; }
+		inline uchar get_player_number() {return player_number;}
 	Player * get_player() const {return game().get_player(player_number);}
 
 	private:
@@ -111,7 +111,7 @@ class Computer_Player {
 		Economy         * economy;
 		std::list<Flag *> flags;
 
-			EconomyObserver (Economy* e) { economy=e; }
+			EconomyObserver (Economy* e) {economy=e;}
 		};
 
 		struct BuildingObserver {
@@ -141,7 +141,7 @@ class Computer_Player {
 		int                                 cnt_under_construction;
 
 			int get_total_count()
-			{ return cnt_built + cnt_under_construction; }
+			{return cnt_built + cnt_under_construction;}
 		};
 
 		struct ProductionSiteObserver {

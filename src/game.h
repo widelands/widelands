@@ -82,8 +82,8 @@ public:
 	// at least after summer 2008, maybe even earlier.
 	friend class Game_Interactive_Player_Data_Packet;
 
-	Game(void);
-	~Game(void);
+	Game();
+	~Game();
 
 	// life cycle
 	bool run_splayer_map_direct(const char* mapname, bool scenario);
@@ -103,13 +103,13 @@ public:
 	void load_map (const char*);
 
 	virtual void postload();
-	void think(void);
+	void think();
 
 	/**
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
-	bool is_loaded() { return m_state == gs_running; }
+	bool is_loaded() {return m_state == gs_running;}
 
 	bool can_start();
 
@@ -130,7 +130,7 @@ public:
 
 	void logic_rand_seed (const uint seed) {rng.seed (seed);}
 
-	int get_speed() const { return m_speed; }
+	int get_speed() const {return m_speed;}
 	void set_speed(int speed);
 
 	bool get_allow_cheats();
@@ -162,9 +162,9 @@ public:
 	Interactive_Player* get_ipl();
 
 	// If this has a netgame, return it
-	NetGame* get_netgame(void) { return m_netgame; }
+	NetGame* get_netgame() {return m_netgame;}
 
-	SaveHandler* get_save_handler() { return &m_savehandler; }
+	SaveHandler* get_save_handler() {return &m_savehandler;}
 
 	// Statistics
 	const General_Stats_vector & get_general_statistics() const {

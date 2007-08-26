@@ -154,7 +154,7 @@ void Game_Main_Menu_Load_Game::double_clicked(uint) {clicked_ok();}
 /**
  * fill the file list
  */
-void Game_Main_Menu_Load_Game::fill_list(void)
+void Game_Main_Menu_Load_Game::fill_list()
 {
 	filenameset_t m_gamefiles;
 
@@ -190,7 +190,7 @@ void Game_Main_Menu_Load_Game::fill_list(void)
 /*
  * The editbox was changed. Enable ok button
  */
-void Game_Main_Menu_Load_Game::edit_box_changed(void) {
+void Game_Main_Menu_Load_Game::edit_box_changed() {
    m_ok_btn->set_enabled(true);
 }
 

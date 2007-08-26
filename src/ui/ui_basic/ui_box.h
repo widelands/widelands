@@ -45,7 +45,7 @@ public:
 
 	void resize();
 
-	int get_nritems() const { return m_items.size(); }
+	int get_nritems() const {return m_items.size();}
 
 	void add(Panel* panel, uint align);
 	void add_space(uint space);

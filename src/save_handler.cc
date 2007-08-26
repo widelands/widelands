@@ -55,7 +55,7 @@ void SaveHandler::think(Game *g, int realtime) {
 
 	if (!save_game(g, complete_filename)) {
 		log("Autosave: ERROR\n");
-		
+
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
 			if (g_fs->FileExists(complete_filename)) {

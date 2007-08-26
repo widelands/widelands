@@ -57,7 +57,7 @@ struct MapEventManager {
       /*
        * Delete all unreferenced events
        */
-      void delete_unreferenced_events(void);
+      void delete_unreferenced_events();
 
 	typedef std::vector<Event *> event_vector;
 	typedef event_vector::size_type Index;

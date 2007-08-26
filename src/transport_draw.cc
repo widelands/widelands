@@ -28,15 +28,15 @@ void Flag::draw
  const FCoords,
  const Point pos)
 {
-	static struct { int x, y; } ware_offsets[8] = {
-		{ -5,  1 },
-		{ -1,  3 },
-		{  3,  3 },
-		{  7,  1 },
-		{ -6, -3 },
-		{ -1, -2 },
-		{  3, -2 },
-		{  8, -3 }
+	static struct {int x, y;} ware_offsets[8] = {
+		{-5,  1},
+		{-1,  3},
+		{3,  3},
+		{7,  1},
+		{-6, -3},
+		{-1, -2},
+		{3, -2},
+		{8, -3}
 	};
 
 	dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, get_owner());

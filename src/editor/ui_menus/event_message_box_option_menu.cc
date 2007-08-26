@@ -186,7 +186,7 @@ m_parent(parent)
 /*
  * cleanup
  */
-Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu(void) {
+Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu() {
 }
 
 /*
@@ -262,7 +262,7 @@ void Event_Message_Box_Option_Menu::clicked_trigger_sel_increase() {
 /*
  * update function: update all UI elements
  */
-void Event_Message_Box_Option_Menu::update(void) {
+void Event_Message_Box_Option_Menu::update() {
    if (m_ls_selected>=m_nr_buttons) m_buttons_ls->select(0);
 
    if (!m_null_triggers.size()) {

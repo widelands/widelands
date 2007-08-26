@@ -481,7 +481,7 @@ Add buttons for house building.
 */
 void FieldActionWindow::add_buttons_build(int buildcaps)
 {
-	BuildGrid* bbg_house[3] = { 0, 0, 0 };
+	BuildGrid* bbg_house[3] = {0, 0, 0};
 	BuildGrid* bbg_mine = 0;
 
 	const Tribe_Descr & tribe = m_plr->tribe();

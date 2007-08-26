@@ -41,7 +41,7 @@
 /*
  * Destructor
  */
-Widelands_Map_Roaddata_Data_Packet::~Widelands_Map_Roaddata_Data_Packet(void) {
+Widelands_Map_Roaddata_Data_Packet::~Widelands_Map_Roaddata_Data_Packet() {
 }
 
 /*

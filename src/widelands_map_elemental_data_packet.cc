@@ -31,7 +31,7 @@
 /*
  * Destructor
  */
-Widelands_Map_Elemental_Data_Packet::~Widelands_Map_Elemental_Data_Packet(void) {
+Widelands_Map_Elemental_Data_Packet::~Widelands_Map_Elemental_Data_Packet() {
 }
 
 /*

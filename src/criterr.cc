@@ -51,7 +51,7 @@ class Critical_Error : public UI::Panel {
 public:
 	Critical_Error(const char *text);
 
-	__attribute__ ((noreturn)) void exit() { ::exit(-1); }
+	__attribute__ ((noreturn)) void exit() {::exit(-1);}
 	__attribute__ ((noreturn)) void crash();
 
 	void draw(RenderTarget* dst);

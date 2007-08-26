@@ -53,7 +53,7 @@ struct NetGame {
 	NetGame ();
 	virtual ~NetGame ();
 
-	uint get_playernum () { return playernum; }
+	uint get_playernum () {return playernum;}
 
 	bool get_players_changed ()
 	{
@@ -125,7 +125,7 @@ struct NetHost:public NetGame {
 
 	void update_map ();
 
-	virtual bool is_host () { return true; }
+	virtual bool is_host () {return true;}
 	virtual void begin_game ();
 
 	virtual void handle_network ();
@@ -174,7 +174,7 @@ class NetClient:public NetGame {
 	NetClient (IPaddress*);
 	virtual ~NetClient ();
 
-	virtual bool is_host () { return false; }
+	virtual bool is_host () {return false;}
 	virtual void begin_game ();
 
 	virtual void handle_network ();
@@ -238,7 +238,7 @@ struct Deserializer : public StreamRead {
 	int read_packet (TCPsocket);
 
 	bool avail ()
-	{ return !queue.empty(); }
+	{return !queue.empty();}
 
 	size_t Data(void* const data, const size_t bufsize);
 	bool EndOfFile();

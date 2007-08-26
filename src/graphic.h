@@ -99,7 +99,7 @@ public:
 
 	uint get_maptexture(const char & fnametempl, const uint frametime);
 	void animate_maptextures(uint time);
-	void reset_texture_animation_reminder(void);
+	void reset_texture_animation_reminder();
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(const uint anim=0) const;

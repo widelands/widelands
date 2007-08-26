@@ -217,7 +217,7 @@ m_parent(parent)
 /*
  * cleanup
  */
-Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu(void) {
+Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu() {
 }
 
 /*
@@ -259,7 +259,7 @@ void Trigger_Time_Option_Menu::clicked(int i) {
 /*
  * Update the Textareas
  */
-void Trigger_Time_Option_Menu::update(void) {
+void Trigger_Time_Option_Menu::update() {
    int i;
    for (i=0; i<6; i++) {
       std::string str;

@@ -50,7 +50,7 @@ public:
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
-	SDL_Surface* get_sdl_surface() { return m_surface; }
+	SDL_Surface* get_sdl_surface() {return m_surface;}
 
 	/// Get width and height
 	uint get_w() const {return m_w;}

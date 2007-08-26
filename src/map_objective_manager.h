@@ -55,18 +55,18 @@ struct MapObjective : public TriggerReferencer {
 		m_is_visible (true),
 		m_is_optional(false)
 	{}
-      virtual ~MapObjective(void) {
+      virtual ~MapObjective() {
          if (m_trigger)
             unreference_trigger(m_trigger);
 		}
 
 
 	const char * get_name() const {return m_name.c_str();}
-      inline void set_name(const char* name) { m_name = name; }
+      inline void set_name(const char* name) {m_name = name;}
 	const char * get_descr() const {return m_descr.c_str();}
-      inline void set_descr(const char* descr) { m_descr = descr; }
+      inline void set_descr(const char* descr) {m_descr = descr;}
 	bool get_is_visible() const {return m_is_visible;}
-      inline void set_is_visible(bool t) { m_is_visible = t; }
+      inline void set_is_visible(bool t) {m_is_visible = t;}
 	bool get_is_optional() const {return m_is_optional;}
 
       // For trigger referncer
@@ -85,7 +85,7 @@ struct MapObjective : public TriggerReferencer {
             reference_trigger(tr);
          m_trigger = tr;
 		}
-      inline void set_is_optional(bool t) { m_is_optional = t; }
+      inline void set_is_optional(bool t) {m_is_optional = t;}
 
    private:
       std::string   m_name;
@@ -103,8 +103,8 @@ struct MapObjective : public TriggerReferencer {
  * But it is better this way.
  */
 struct MapObjectiveManager {
-      MapObjectiveManager(void);
-      ~MapObjectiveManager(void);
+      MapObjectiveManager();
+      ~MapObjectiveManager();
 
       /*
        * Register a new objective

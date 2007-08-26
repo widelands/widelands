@@ -41,7 +41,7 @@ struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
-      TriggerConditional* get_trigcond(void) { return m_given_cond; }
+      TriggerConditional* get_trigcond() {return m_given_cond;}
 
    private:
 	void clicked_cancel     ();

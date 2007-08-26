@@ -24,7 +24,7 @@
 
 class Cmd_Incorporate: public BaseCommand {
 	public:
-		Cmd_Incorporate() : BaseCommand(0) { } // For savegame loading
+		Cmd_Incorporate() : BaseCommand(0) {} // For savegame loading
 		Cmd_Incorporate (int t, Worker* w): BaseCommand(t) {worker=w;}
 
 
@@ -37,7 +37,7 @@ class Cmd_Incorporate: public BaseCommand {
 		                  Widelands_Map_Map_Object_Loader*);
 
 		/// Get this command ID
-		virtual int get_id(void) {return QUEUE_CMD_INCORPORATE;}
+		virtual int get_id() {return QUEUE_CMD_INCORPORATE;}
 
 
 	private:

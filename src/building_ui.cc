@@ -479,8 +479,8 @@ public:
 	Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry);
 	virtual ~Building_Window();
 
-	Interactive_Player* get_player() { return m_player; }
-	Building* get_building() { return m_building; }
+	Interactive_Player* get_player() {return m_player;}
+	Building* get_building() {return m_building;}
 
 	virtual void draw(RenderTarget* dst);
 	virtual void think();
@@ -861,7 +861,7 @@ public:
 	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, UI::Window** registry);
 	virtual ~ConstructionSite_Window();
 
-	ConstructionSite* get_constructionsize() { return (ConstructionSite*)get_building(); }
+	ConstructionSite* get_constructionsize() {return (ConstructionSite*)get_building();}
 
 	virtual void think();
 
@@ -963,7 +963,7 @@ public:
 	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry);
 	virtual ~Warehouse_Window();
 
-	Warehouse* get_warehouse() { return (Warehouse*)get_building(); }
+	Warehouse* get_warehouse() {return (Warehouse*)get_building();}
 
 	virtual void think();
 
@@ -1119,7 +1119,7 @@ ProductionSite UI IMPLEMENTATION
 /*
  * ProductionSite_Window_ListWorkerWindow
  */
-class ProductionSite_Window_ListWorkerWindow : public UI::Window{
+class ProductionSite_Window_ListWorkerWindow : public UI::Window {
    public:
       ProductionSite_Window_ListWorkerWindow(Interactive_Player*, ProductionSite* ps);
       virtual ~ProductionSite_Window_ListWorkerWindow();
@@ -1127,8 +1127,8 @@ class ProductionSite_Window_ListWorkerWindow : public UI::Window{
       virtual void think();
 
    private:
-      void update(void);
-      void fill_list(void);
+      void update();
+      void fill_list();
 
       Coords          m_ps_location;
       ProductionSite* m_ps;
@@ -1186,13 +1186,13 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing").c_str())
 /*
  * desctructor
  */
-ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow(void) {
+ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow() {
 }
 
 /*
  * think()
  */
-void ProductionSite_Window_ListWorkerWindow::think(void) {
+void ProductionSite_Window_ListWorkerWindow::think() {
 	const BaseImmovable * const base_immovable =
 		m_parent->egbase().map()[m_ps_location].get_immovable();
 	if
@@ -1212,7 +1212,7 @@ void ProductionSite_Window_ListWorkerWindow::think(void) {
 /*
  * fill list()
  */
-void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
+void ProductionSite_Window_ListWorkerWindow::fill_list() {
 	const uint m_last_select = m_ls->selection_index();
    m_ls->clear();
    std::vector<Worker*>* workers=m_ps->get_workers();
@@ -1231,7 +1231,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
 /**
  * \brief Update worker info subwindow, following user selection
  */
-void ProductionSite_Window_ListWorkerWindow::update(void)
+void ProductionSite_Window_ListWorkerWindow::update()
 {
 	if (m_ls->has_selection()) {
 		const Worker& worker = *m_ls->get_selected();
@@ -1293,7 +1293,7 @@ public:
 	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry);
 	virtual ~ProductionSite_Window();
 
-	inline ProductionSite* get_productionsite() { return (ProductionSite*)get_building(); }
+	inline ProductionSite* get_productionsite() {return (ProductionSite*)get_building();}
 
 	virtual void think();
 
@@ -1302,7 +1302,7 @@ private:
    UI::Window** m_reg;
 	std::list<PriorityButtonHelper> m_priority_helpers;
 public:
-   void list_worker_clicked(void);
+   void list_worker_clicked();
 protected:
 	UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
 
@@ -1478,7 +1478,7 @@ ProductionSite_Window::~ProductionSite_Window()
 /*
  * List worker button has been clicked
  */
-void ProductionSite_Window::list_worker_clicked(void) {
+void ProductionSite_Window::list_worker_clicked() {
    assert(*m_reg==this);
 
    *m_reg=new ProductionSite_Window_ListWorkerWindow(m_parent, get_productionsite());
@@ -1524,14 +1524,14 @@ public:
 	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UI::Window** registry);
 	virtual ~MilitarySite_Window();
 
-	inline MilitarySite* get_militarysite() { return (MilitarySite*)get_building(); }
+	inline MilitarySite* get_militarysite() {return (MilitarySite*)get_building();}
 
 	virtual void think();
 private:
    void update();
 	void drop_button_clicked ();
-	void soldier_capacity_up () { act_change_soldier_capacity (1); }
-	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
+	void soldier_capacity_up () {act_change_soldier_capacity (1);}
+	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
 
    Coords          m_ms_location;
    Interactive_Player* m_parent;
@@ -1655,7 +1655,7 @@ FIXME What if a soldier has been removed and another added? This needs review.
 soldiers
 =============
 */
-void MilitarySite_Window::update(void) {
+void MilitarySite_Window::update() {
 	const std::vector<Soldier *> & soldiers = get_militarysite()->get_soldiers();
 
    char buf[200];
@@ -1720,7 +1720,7 @@ public:
 	TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps);
 	virtual ~TrainingSite_Options_Window();
 
-	inline TrainingSite* get_trainingsite() { return m_trainingsite; }
+	inline TrainingSite* get_trainingsite() {return m_trainingsite;}
 
 	void think();
 private:
@@ -1937,13 +1937,13 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UI::Window** registry);
 	virtual ~TrainingSite_Window();
 
-	inline TrainingSite* get_trainingsite() { return (TrainingSite*)get_building(); }
+	inline TrainingSite* get_trainingsite() {return (TrainingSite*)get_building();}
 
 	virtual void think();
 	void options_button_clicked ();
 	void drop_button_clicked ();
-	void soldier_capacity_up () { act_change_soldier_capacity (1); }
-	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
+	void soldier_capacity_up () {act_change_soldier_capacity (1);}
+	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
    UI::Box* create_military_box (UI::Panel*);
 private:
 	void update();
@@ -2114,7 +2114,7 @@ Update the listselect, maybe there are new soldiers
 FIXME What if a soldier have been removed and another added? This needs review.
 =============
 */
-void TrainingSite_Window::update(void) {
+void TrainingSite_Window::update() {
 	const std::vector<Soldier*> & soldiers = get_trainingsite()->get_soldiers();
 
 	char buffer[200];

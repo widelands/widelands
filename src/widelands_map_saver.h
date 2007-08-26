@@ -41,10 +41,10 @@ debugability
 */
 struct Widelands_Map_Saver {
 	Widelands_Map_Saver(FileSystem &, Editor_Game_Base*);
-      ~Widelands_Map_Saver(void);
+      ~Widelands_Map_Saver();
 
       void save() throw(_wexception) ;
-      inline Widelands_Map_Map_Object_Saver* get_map_object_saver(void) { return m_mos; }
+      inline Widelands_Map_Map_Object_Saver* get_map_object_saver() {return m_mos;}
 
    private:
       Editor_Game_Base* m_egbase;

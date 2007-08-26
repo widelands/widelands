@@ -31,9 +31,9 @@ class Network_Buffer;
  */
 class Game_Server_Protocol_Packet {
    public:
-      virtual ~Game_Server_Protocol_Packet(void) { }
+      virtual ~Game_Server_Protocol_Packet() {}
 
-      virtual ushort get_id(void) = 0;
+      virtual ushort get_id() = 0;
 
 	virtual void recv(Game_Server_Connection*, Network_Buffer *) = 0;
 	virtual void send(Network_Buffer *) = 0;

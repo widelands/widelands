@@ -42,7 +42,7 @@ Event_Allow_Building::Event_Allow_Building() : Event(_("Allow Building")) {
    set_allow(true);
 }
 
-Event_Allow_Building::~Event_Allow_Building(void) {
+Event_Allow_Building::~Event_Allow_Building() {
 }
 
 /*

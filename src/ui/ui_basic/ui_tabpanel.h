@@ -41,7 +41,7 @@ struct Tab_Panel : public Panel {
 	void resize();
 
 	void set_snapparent(bool snapparent);
-	bool get_snapparent() const { return m_snapparent; }
+	bool get_snapparent() const {return m_snapparent;}
 
 	uint add
 		(uint picid, Panel* panel, const std::string & tooltip = std::string());

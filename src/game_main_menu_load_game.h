@@ -33,7 +33,7 @@ template <typename T> struct Listselect;
 
 struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
       Game_Main_Menu_Load_Game(Interactive_Player* plr, UI::UniqueWindow::Registry* registry) ;
-      virtual ~Game_Main_Menu_Load_Game(void);
+      virtual ~Game_Main_Menu_Load_Game();
 
    private:
 	void clicked_ok    ();
@@ -42,7 +42,7 @@ struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
 	void double_clicked(uint);
       void edit_box_changed();
 
-      void fill_list(void);
+      void fill_list();
 	bool load_game(const std::string & filename);
 
       Interactive_Player* m_parent;

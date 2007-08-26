@@ -58,7 +58,7 @@
 /*
  * Destructor
  */
-Widelands_Map_Buildingdata_Data_Packet::~Widelands_Map_Buildingdata_Data_Packet(void) {
+Widelands_Map_Buildingdata_Data_Packet::~Widelands_Map_Buildingdata_Data_Packet() {
 }
 
 /*

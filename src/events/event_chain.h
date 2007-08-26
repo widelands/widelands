@@ -56,22 +56,22 @@ class EventChain : public EventReferencer, public TriggerReferencer {
         m_state = INIT;
         m_curevent = 0;
 		}
-      virtual ~EventChain(void) { }
+      virtual ~EventChain() {}
 
 	const char * get_name() const {return m_name.c_str();}
 	const char * get_type() const {return "EventChain";}
-      inline void set_name(const char* name) { m_name = name; }
-      inline bool get_repeating(void) { return m_repeating; }
-      inline TriggerConditional* get_trigcond(void) { return m_trigconditional; }
-      inline void set_trigcond(TriggerConditional* t) { m_trigconditional = t; }
+      inline void set_name(const char* name) {m_name = name;}
+      inline bool get_repeating() {return m_repeating;}
+      inline TriggerConditional* get_trigcond() {return m_trigconditional;}
+      inline void set_trigcond(TriggerConditional* t) {m_trigconditional = t;}
 
-      inline State get_state(void) { return m_state; }
+      inline State get_state() {return m_state;}
 
       // Below is only good idea in editor
-      void set_repeating(bool t) { m_repeating = t; }
-      uint get_nr_events(void) { return m_events.size(); }
-      Event* get_event(uint i) { assert(i < m_events.size()); return m_events[i]; }
-      void clear_events(void);
+      void set_repeating(bool t) {m_repeating = t;}
+      uint get_nr_events() {return m_events.size();}
+      Event* get_event(uint i) {assert(i < m_events.size()); return m_events[i];}
+      void clear_events();
       void add_event(Event* ev);
 
 

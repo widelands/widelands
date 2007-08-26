@@ -37,10 +37,10 @@ private:
 
     public:
 	PlayerCommand (int, char);
-	PlayerCommand(void) : BaseCommand(0) { } // For savegame loading
+	PlayerCommand() : BaseCommand(0) {} // For savegame loading
 	virtual ~PlayerCommand ();
 
-	char get_sender() const { return sender; }
+	char get_sender() const {return sender;}
 
 	virtual void serialize (StreamWrite*)=0;
 	static PlayerCommand* deserialize (StreamRead*);
@@ -56,9 +56,9 @@ private:
 	int serial;
 
 public:
-	Cmd_Bulldoze(void) : PlayerCommand() { } // For savegame loading
+	Cmd_Bulldoze() : PlayerCommand() {} // For savegame loading
 	Cmd_Bulldoze (int t, int p, PlayerImmovable* pi):PlayerCommand(t,p)
-	{ serial=pi->get_serial(); }
+	{serial=pi->get_serial();}
 
 	Cmd_Bulldoze (StreamRead*);
 
@@ -66,7 +66,7 @@ public:
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_BULLDOZE; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_BULLDOZE;} // Get this command id
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite*);
@@ -78,9 +78,9 @@ private:
 	int id;
 
 public:
-	Cmd_Build(void) : PlayerCommand() { } // For savegame loading
+	Cmd_Build() : PlayerCommand() {} // For savegame loading
 	Cmd_Build (int t, int p, const Coords& c, int i):PlayerCommand(t,p)
-	{ coords=c; id=i; }
+	{coords=c; id=i;}
 
 	Cmd_Build (StreamRead*);
 
@@ -88,7 +88,7 @@ public:
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_BUILD; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_BUILD;} // Get this command id
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite*);
@@ -99,9 +99,9 @@ private:
 	Coords coords;
 
 public:
-	Cmd_BuildFlag(void) : PlayerCommand() { } // For savegame loading
+	Cmd_BuildFlag() : PlayerCommand() {} // For savegame loading
 	Cmd_BuildFlag (int t, int p, const Coords& c):PlayerCommand(t,p)
-	{ coords=c; }
+	{coords=c;}
 
 	Cmd_BuildFlag (StreamRead*);
 
@@ -109,7 +109,7 @@ public:
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_FLAG; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_FLAG;} // Get this command id
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite*);
@@ -124,7 +124,7 @@ private:
 	char* steps;
 
 public:
-	Cmd_BuildRoad(void) : PlayerCommand() { } // For savegame loading
+	Cmd_BuildRoad() : PlayerCommand() {} // For savegame loading
 	Cmd_BuildRoad (int, int, Path &);
 	Cmd_BuildRoad (StreamRead*);
 
@@ -134,7 +134,7 @@ public:
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_BUILDROAD; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_BUILDROAD;} // Get this command id
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite*);
@@ -146,15 +146,15 @@ private:
 	int action;
 
 public:
-	Cmd_FlagAction(void) : PlayerCommand() { } // For savegame loading
+	Cmd_FlagAction() : PlayerCommand() {} // For savegame loading
 	Cmd_FlagAction (int t, int p, Flag* f, int a):PlayerCommand(t,p)
-	{ serial=f->get_serial(); action=a; }
+	{serial=f->get_serial(); action=a;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_FLAGACTION; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_FLAGACTION;} // Get this command id
 
 
 	Cmd_FlagAction (StreamRead*);
@@ -168,15 +168,15 @@ private:
 	int serial;
 
 public:
-	Cmd_StartStopBuilding(void) : PlayerCommand() { } // For savegame loading
+	Cmd_StartStopBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_StartStopBuilding (int t, int p, Building* b):PlayerCommand(t,p)
-	{ serial=b->get_serial(); }
+	{serial=b->get_serial();}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_STOPBUILDING; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_STOPBUILDING;} // Get this command id
 
 	Cmd_StartStopBuilding (StreamRead*);
 
@@ -190,15 +190,15 @@ private:
 	int id;
 
 public:
-	Cmd_EnhanceBuilding(void) : PlayerCommand() { } // For savegame loading
+	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_EnhanceBuilding (int t, int p, Building* b, int i):PlayerCommand(t,p)
-	{ serial=b->get_serial(); id=i; }
+	{serial=b->get_serial(); id=i;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_ENHANCEBUILDING; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_ENHANCEBUILDING;} // Get this command id
 
 	Cmd_EnhanceBuilding (StreamRead*);
 
@@ -214,15 +214,15 @@ private:
 	int value;
 
 public:
-	Cmd_ChangeTrainingOptions(void) : PlayerCommand() { } // For savegame loading
+	Cmd_ChangeTrainingOptions() : PlayerCommand() {} // For savegame loading
 	Cmd_ChangeTrainingOptions(int t, int p, Building* b, int at, int val):PlayerCommand(t,p)
-	{ serial=b->get_serial(); attribute=at; value=val; }
+	{serial=b->get_serial(); attribute=at; value=val;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_CHANGETRAININGOPTIONS; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_CHANGETRAININGOPTIONS;} // Get this command id
 
 	Cmd_ChangeTrainingOptions (StreamRead*);
 
@@ -236,15 +236,15 @@ private:
 	int soldier;
 
 public:
-	Cmd_DropSoldier (void):PlayerCommand() { } ; // For savegames
+	Cmd_DropSoldier ():PlayerCommand() {} ; // For savegames
 	Cmd_DropSoldier(int t, int p, Building* b, int _soldier):PlayerCommand(t,p)
-	{ serial=b->get_serial(); soldier=_soldier; }
+	{serial=b->get_serial(); soldier=_soldier;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_DROPSOLDIER; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_DROPSOLDIER;} // Get this command id
 
 	Cmd_DropSoldier(StreamRead*);
 
@@ -258,15 +258,15 @@ private:
 	int val;
 
 public:
-	Cmd_ChangeSoldierCapacity (void):PlayerCommand() { } ; // For savegames
+	Cmd_ChangeSoldierCapacity ():PlayerCommand() {} ; // For savegames
 	Cmd_ChangeSoldierCapacity (int t, int p, Building* b, int i):PlayerCommand(t,p)
-	{ serial=b->get_serial(); val=i; }
+	{serial=b->get_serial(); val=i;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_CHANGESOLDIERCAPACITY; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_CHANGESOLDIERCAPACITY;} // Get this command id
 
 	Cmd_ChangeSoldierCapacity (StreamRead*);
 
@@ -284,7 +284,7 @@ private:
 	int type;
 
 public:
-	Cmd_EnemyFlagAction(void) : PlayerCommand() { } // For savegame loading
+	Cmd_EnemyFlagAction() : PlayerCommand() {} // For savegame loading
 	Cmd_EnemyFlagAction
 		(int t,
 		 int p,
@@ -295,13 +295,13 @@ public:
 		 int ty)
 		:
 		PlayerCommand(t,p)
-	{ serial=f->get_serial(); action=a; attacker=at; number=num; type=ty; }
+	{serial=f->get_serial(); action=a; attacker=at; number=num; type=ty;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_ENEMYFLAGACTION; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_ENEMYFLAGACTION;} // Get this command id
 
 	Cmd_EnemyFlagAction (StreamRead*);
 

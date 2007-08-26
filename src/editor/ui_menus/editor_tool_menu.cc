@@ -118,7 +118,7 @@ Editor_Tool_Menu::changed_to()
 called when the radiogroup changes or is reclicked
 ===========
 */
-void Editor_Tool_Menu::changed_to(void) {
+void Editor_Tool_Menu::changed_to() {
 	const int n = m_radioselect.get_state();
 
 	Editor_Interactive & parent =

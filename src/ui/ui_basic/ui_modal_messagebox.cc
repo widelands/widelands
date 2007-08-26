@@ -67,7 +67,7 @@ Modal_Message_Box::Modal_Message_Box
 	}
 }
 
-Modal_Message_Box::~Modal_Message_Box(void) {
+Modal_Message_Box::~Modal_Message_Box() {
 }
 
 /*

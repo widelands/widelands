@@ -32,10 +32,10 @@
  * network. Data is removed if not requested on read.
  */
 struct Network_Buffer {
-      Network_Buffer(void);
-      ~Network_Buffer(void);
+      Network_Buffer();
+      ~Network_Buffer();
 
-      ushort size(void) { return m_buffer_len; }
+      ushort size() {return m_buffer_len;}
 
       uchar get_8(bool = true);
       ushort get_16(bool = true);
@@ -48,11 +48,11 @@ struct Network_Buffer {
       void put_string(std::string);
 
       // Return value must not be freed by user
-      uchar* get_data() { return m_buffer; }
+      uchar* get_data() {return m_buffer;}
 
       // Fill this network buffer with all the incoming data
       int fill(TCPsocket);
-      void finish(void);
+      void finish();
 
 private:
       void grow_buffer();

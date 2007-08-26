@@ -41,8 +41,8 @@ struct Multiline_Editbox : public Multiline_Textarea {
 
       // Drawing and event handlers
       void draw(RenderTarget* dst);
-      void set_maximum_chars(int n) { m_maxchars=n; }
-      int get_maximum_chars(void) { return m_maxchars; }
+      void set_maximum_chars(int n) {m_maxchars=n;}
+      int get_maximum_chars() {return m_maxchars;}
 
       // Event functions
 	bool handle_mousepress  (const Uint8 btn, int x, int y);

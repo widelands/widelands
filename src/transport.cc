@@ -1969,7 +1969,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 
 	  if (version == REQUEST_VERSION) {
 		  m_last_request_time = fr->Unsigned32();
-	  }
+	}
 
       assert(!m_transfers.size());
 
@@ -1984,10 +1984,10 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
             if (what_is==WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, ware);
-				} else if (what_is==WORKER){
+				} else if (what_is==WORKER) {
                Worker* worker=static_cast<Worker*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, worker);
-				} else if (what_is==SOLDIER){
+				} else if (what_is==SOLDIER) {
                Soldier* soldier=static_cast<Soldier*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, soldier);
 				}
@@ -2051,10 +2051,10 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
       if (trans->m_item) {
          assert(mos->is_object_known(trans->m_item));
          fw->Unsigned32(mos->get_object_file_index(trans->m_item));
-		} else if (trans->m_worker){
+		} else if (trans->m_worker) {
          assert(mos->is_object_known(trans->m_worker));
          fw->Unsigned32(mos->get_object_file_index(trans->m_worker));
-		} else if (trans->m_soldier){
+		} else if (trans->m_soldier) {
          assert(mos->is_object_known(trans->m_soldier));
          fw->Unsigned32(mos->get_object_file_index(trans->m_soldier));
 		}
@@ -2776,10 +2776,10 @@ class FlagQueue {
 	std::vector<Flag*> m_data;
 
 public:
-	FlagQueue() { }
-	~FlagQueue() { }
+	FlagQueue() {}
+	~FlagQueue() {}
 
-	void flush() { m_data.clear(); }
+	void flush() {m_data.clear();}
 
 	// Return the best node and readjust the tree
 	// Basic idea behind the algorithm:

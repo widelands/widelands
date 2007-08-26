@@ -30,11 +30,11 @@ struct Game_Server_Protocol_Packet_Connect : public Game_Server_Protocol_Packet
 	Game_Server_Protocol_Packet_Connect();
       virtual ~Game_Server_Protocol_Packet_Connect();
 
-      virtual ushort get_id(void);
+      virtual ushort get_id();
 
 	virtual void recv(Game_Server_Connection *, Network_Buffer *) {}
 	virtual void send(Network_Buffer *);
-      virtual void write_reply(Network_Buffer*) { }
+      virtual void write_reply(Network_Buffer*) {}
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 };
 

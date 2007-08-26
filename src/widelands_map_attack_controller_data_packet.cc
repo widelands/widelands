@@ -44,7 +44,7 @@
 
 #define CURRENT_PACKET_VERSION 1
 
-Widelands_Map_Attack_Controller_Data_Packet::~Widelands_Map_Attack_Controller_Data_Packet(void) {
+Widelands_Map_Attack_Controller_Data_Packet::~Widelands_Map_Attack_Controller_Data_Packet() {
 }
 
 void Widelands_Map_Attack_Controller_Data_Packet::Read

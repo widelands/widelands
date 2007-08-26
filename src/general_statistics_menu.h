@@ -33,7 +33,7 @@ class WUIPlot_Area;
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
 	General_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
-      virtual ~General_Statistics_Menu(void);
+      virtual ~General_Statistics_Menu();
 
 
    private:

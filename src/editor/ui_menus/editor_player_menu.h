@@ -39,7 +39,7 @@ template <typename T, typename ID> struct IDButton;
 struct Editor_Player_Menu : public UI::UniqueWindow {
 	Editor_Player_Menu
 		(Editor_Interactive &, UI::UniqueWindow::Registry *);
-      virtual ~Editor_Player_Menu() { }
+      virtual ~Editor_Player_Menu() {}
 
    private:
       UI::UniqueWindow::Registry m_allow_buildings_menu;

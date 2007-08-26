@@ -29,7 +29,7 @@ struct Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
 	Game_Server_Protocol_Packet_Ping();
       virtual ~Game_Server_Protocol_Packet_Ping();
 
-      virtual ushort get_id(void);
+      virtual ushort get_id();
 
 	virtual void recv(Game_Server_Connection*, Network_Buffer *);
 	virtual void send(Network_Buffer *) {}

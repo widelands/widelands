@@ -31,7 +31,7 @@
 /*
  * Destructor
  */
-Game_Player_Economies_Data_Packet::~Game_Player_Economies_Data_Packet(void) {
+Game_Player_Economies_Data_Packet::~Game_Player_Economies_Data_Packet() {
 }
 
 /*

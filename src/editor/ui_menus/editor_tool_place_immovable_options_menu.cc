@@ -116,7 +116,7 @@ m_pit     (pit)
 /*
  * Cleanup
  */
-Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu(void) {
+Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu() {
 }
 
 /*

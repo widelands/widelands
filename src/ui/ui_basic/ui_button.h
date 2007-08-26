@@ -43,7 +43,7 @@ struct Basic_Button : public Panel {
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 	void set_enabled(bool on);
-	void set_draw_caret(bool draw_caret) { m_draw_caret = draw_caret;}
+	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers

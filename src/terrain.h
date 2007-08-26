@@ -237,11 +237,11 @@ template<typename T> static void render_triangle
 
 	y=0x7fffffff;
 	for (i=0;i<3;i++)
-		if (p[i]->y<y) { top=i; y=p[i]->y; }
+		if (p[i]->y<y) {top=i; y=p[i]->y;}
 
 	y=-0x7fffffff;
 	for (i=0;i<3;i++)
-		if (p[i]->y>y) { bot=i; y=p[i]->y; }
+		if (p[i]->y>y) {bot=i; y=p[i]->y;}
 
 	for (mid=0;mid==top || mid==bot;mid++);
 	ym=p[mid]->y;

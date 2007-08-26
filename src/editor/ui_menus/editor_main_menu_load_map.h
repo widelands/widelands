@@ -51,7 +51,7 @@ struct Main_Menu_Load_Map : public UI::Window {
 	void selected      (uint);
 	void double_clicked(uint);
 
-      void fill_list(void);
+      void fill_list();
       void load_map(std::string);
 
       UI::Textarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;

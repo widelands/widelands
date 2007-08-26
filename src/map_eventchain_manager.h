@@ -39,8 +39,8 @@ class EventChain;
  * But it is better this way.
  */
 struct MapEventChainManager {
-      MapEventChainManager(void);
-      ~MapEventChainManager(void);
+      MapEventChainManager();
+      ~MapEventChainManager();
 
       /*
        * Register a new eventchain

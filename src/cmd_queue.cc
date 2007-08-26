@@ -40,7 +40,7 @@ Cmd_Queue::Cmd_Queue(Game *g)
 	nextserial = 0;
 }
 
-Cmd_Queue::~Cmd_Queue(void)
+Cmd_Queue::~Cmd_Queue()
 {
 	flush();
 }
@@ -49,7 +49,7 @@ Cmd_Queue::~Cmd_Queue(void)
  * flushs all commands from the queue. Needed for
  * game loading (while in game)
  */
-void Cmd_Queue::flush(void) {
+void Cmd_Queue::flush() {
 	while (!m_cmds.empty()) {
 		delete m_cmds.top().cmd;
 		m_cmds.pop();

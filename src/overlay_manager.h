@@ -123,8 +123,8 @@ struct Overlay_Manager {
 	unsigned char get_overlays
 		(const TCoords<>, Overlay_Info * const overlays) const;
 
-      void show_buildhelp(bool t) { m_showbuildhelp= t; }
-      void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; }
+      void show_buildhelp(bool t) {m_showbuildhelp= t;}
+      void toggle_buildhelp() {m_showbuildhelp=!m_showbuildhelp;}
 
 	void recalc_field_overlays(const FCoords);
 

@@ -227,7 +227,7 @@ m_event_chain(chain)
 /*
  * cleanup
  */
-Editor_Event_Menu_Edit_TriggerConditional::~Editor_Event_Menu_Edit_TriggerConditional(void) {
+Editor_Event_Menu_Edit_TriggerConditional::~Editor_Event_Menu_Edit_TriggerConditional() {
 }
 
 /*

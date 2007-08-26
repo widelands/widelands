@@ -46,7 +46,7 @@ struct Interactive_Base : public Map_View {
 		};
 
 	Interactive_Base(Editor_Game_Base &);
-		virtual ~Interactive_Base(void);
+		virtual ~Interactive_Base();
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
@@ -90,8 +90,8 @@ struct Interactive_Base : public Map_View {
 		void set_display_flag(uint flag, bool on);
 
       // Road building
-		inline bool is_building_road() const { return m_buildroad; }
-		inline CoordPath *get_build_road() { return m_buildroad; }
+		inline bool is_building_road() const {return m_buildroad;}
+		inline CoordPath *get_build_road() {return m_buildroad;}
 		void start_build_road(Coords start, int player);
 		void abort_build_road();
 		void finish_build_road();
@@ -101,7 +101,7 @@ struct Interactive_Base : public Map_View {
 	Direction get_build_road_end_dir() const throw ();
 
       // for loading
-      virtual void cleanup_for_load() { };
+      virtual void cleanup_for_load() {};
 
    private:
       void roadb_add_overlay();

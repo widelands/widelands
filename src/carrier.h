@@ -32,7 +32,7 @@ class Carrier : public Worker
 			Descr(const Tribe_Descr &t, const std::string & carrier_name):
 					Worker_Descr(t, carrier_name) {};
 
-			virtual Worker_Type get_worker_type(void) const {return CARRIER;}
+			virtual Worker_Type get_worker_type() const {return CARRIER;}
 
 			protected:
 				virtual Bob * create_object() const {return new Carrier(*this);}

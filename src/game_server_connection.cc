@@ -54,7 +54,7 @@ Game_Server_Connection::~Game_Server_Connection() {
  * Connect to the server,
  * throws wexception on error
  */
-void Game_Server_Connection::connect(void) {
+void Game_Server_Connection::connect() {
    IPaddress myaddr;
 
    // Connect to the server
@@ -103,7 +103,7 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
  * Check if there is incomming data and if so, handle it
  * accordingly
  */
-void Game_Server_Connection::handle_data(void) {
+void Game_Server_Connection::handle_data() {
    // Check if data is available,
    // we only handle one packet per call
    if (SDLNet_CheckSockets(m_socketset, 0) > 0) {

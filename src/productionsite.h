@@ -68,8 +68,8 @@ struct ProductionSite_Descr : public Building_Descr {
 	{return &m_workers;}
 	bool is_output(const std::string & warename) const throw ()
 	{return m_output.find(warename) != m_output.end();}
-	const std::set<std::string>* get_outputs() const { return &m_output; }
-	const std::vector<Input>* get_inputs() const { return &m_inputs; }
+	const std::set<std::string>* get_outputs() const {return &m_output;}
+	const std::vector<Input>* get_inputs() const {return &m_inputs;}
 	const ProductionProgram * get_program(const std::string &) const;
 	const ProgramMap & get_all_programs() const throw () {return m_programs;}
 
@@ -92,7 +92,7 @@ public:
 	virtual ~ProductionSite();
 
 	virtual std::string get_statistics_string();
-   char get_statistics_percent(void) { return m_last_stat_percent; }
+   char get_statistics_percent() {return m_last_stat_percent;}
 
 	virtual int get_building_type() const throw ()
 	{return Building::PRODUCTIONSITE;}
@@ -107,10 +107,10 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	inline std::vector<WaresQueue*>* get_warequeues(void) {
+	inline std::vector<WaresQueue*>* get_warequeues() {
 		return &m_input_queues;
 	}
-   inline std::vector<Worker*>* get_workers(void) {
+   inline std::vector<Worker*>* get_workers() {
       return &m_workers;
 	}
 
@@ -132,7 +132,7 @@ protected:
 	static void request_worker_callback(Game* g, Request* rq, int ware,
 		Worker* w, void* data);
 
-	State* get_current_program() { return m_program.size() ? &*m_program.rbegin() : 0; }
+	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
 	void program_act(Game* g);
 	void program_step(const uint phase = 0);
 	void program_start(Game* g, std::string name);
@@ -141,7 +141,7 @@ protected:
 
 	void calc_statistics();
 	bool can_start_working() const throw ();
-	void set_post_timer (int t) { m_post_timer = t; }
+	void set_post_timer (int t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
    std::vector<Request*> m_worker_requests;
@@ -177,7 +177,7 @@ out of a building
 class Input {
 public:
 	Input(Item_Ware_Descr* ware, int max) : m_ware(ware), m_max(max) {}
-	~Input(void) {}
+	~Input() {}
 
 	const Item_Ware_Descr & ware_descr() const throw () {return *m_ware;}
 	uint get_max() const throw () {return m_max;}

@@ -283,7 +283,7 @@ Soldier_Descr::Soldier_Descr
 	add_attribute(Map_Object::SOLDIER);
 }
 
-Soldier_Descr::~Soldier_Descr(void)
+Soldier_Descr::~Soldier_Descr()
 {
    m_hp_pics_fn.resize(0);
    m_attack_pics_fn.resize(0);
@@ -384,7 +384,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 /**
  * Load the graphics
  */
-void Soldier_Descr::load_graphics(void) {
+void Soldier_Descr::load_graphics() {
 	m_hp_pics.resize(m_max_hp_level+1);
 	m_attack_pics.resize(m_max_attack_level+1);
 	m_defense_pics.resize(m_max_defense_level+1);

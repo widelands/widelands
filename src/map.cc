@@ -76,7 +76,7 @@ struct Map::Pathfield {
 	ushort cycle;
 	uchar  backlink;   //  how we got here (Map_Object::WALK_*)
 
-	inline int cost() { return real_cost + estim_cost; }
+	inline int cost() {return real_cost + estim_cost;}
 };
 
 
@@ -204,7 +204,7 @@ a map has been loaded or newly created or in the editor that
 the overlays have completly changed
 ===========
 */
-void Map::recalc_whole_map(void)
+void Map::recalc_whole_map()
 {
    assert(m_overlay_manager);
 
@@ -241,7 +241,7 @@ void Map::recalc_whole_map(void)
  * the editor. Since there, default resources
  * are not shown.
  */
-void Map::recalc_default_resources(void) {
+void Map::recalc_default_resources() {
 	const World & w = world();
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
@@ -353,7 +353,7 @@ remove your world, remove your data
 go back to your initial state
 ===============
 */
-void Map::cleanup(void) {
+void Map::cleanup() {
 	m_nrplayers = 0;
 	m_width = m_height = 0;
 	m_pathcycle = 0;
@@ -427,7 +427,7 @@ void Map::create_empty_map
 	// <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"
 	std::vector<std::string> tribes;
 	Tribe_Descr::get_all_tribenames(tribes);
-	set_scenario_player_tribe(1, tribes[0]); 
+	set_scenario_player_tribe(1, tribes[0]);
 	set_scenario_player_name(1, _("Player 1"));
 
 	{
@@ -708,7 +708,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 */
 struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob*>* list, const FindBob& functor)
-		: m_list(list), m_functor(functor), m_found(0) { }
+		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		Bob *bob;
@@ -790,7 +790,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 */
 struct FindImmovablesCallback {
 	FindImmovablesCallback(std::vector<ImmovableFound>* list, const FindImmovable& functor)
-		: m_list(list), m_functor(functor), m_found(0) { }
+		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		BaseImmovable *imm = cur.field->get_immovable();
@@ -873,7 +873,7 @@ The actual logic behind find_fields and find_reachable_fields.
 */
 struct FindNodesCallback {
 	FindNodesCallback(std::vector<Coords>* list, const FindNode& functor)
-		: m_list(list), m_functor(functor), m_found(0) { }
+		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
 		if (m_functor.accept(map, cur)) {
@@ -1665,7 +1665,7 @@ class StarQueue {
 	std::vector<Map::Pathfield*> m_data;
 
 public:
-	void flush() { m_data.clear(); }
+	void flush() {m_data.clear();}
 
 	// Return the best node and readjust the tree
 	// Basic idea behind the algorithm:
@@ -1916,10 +1916,10 @@ int Map::findpath
 			break; // found our target
 
 		// avoid bias by using different orders when pathfinding
-		static const char order1[6] = { Map_Object::WALK_NW, Map_Object::WALK_NE,
-			Map_Object::WALK_E, Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W };
-		static const char order2[6] = { Map_Object::WALK_NW, Map_Object::WALK_W,
-			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE };
+		static const char order1[6] = {Map_Object::WALK_NW, Map_Object::WALK_NE,
+			Map_Object::WALK_E, Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W};
+		static const char order2[6] = {Map_Object::WALK_NW, Map_Object::WALK_W,
+			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE};
 		const char *direction;
 
 		if ((cur.x+cur.y) & 1)
@@ -2159,7 +2159,7 @@ void Map::check_neighbour_heights(FCoords coords, uint & area)
 	assert            (coords.field < m_fields + max_index());
 
    int height = coords.field->get_height();
-   bool check[6] = { false, false, false, false, false, false };
+   bool check[6] = {false, false, false, false, false, false};
 
 	const FCoords n[6] = {
 		tl_n(coords),

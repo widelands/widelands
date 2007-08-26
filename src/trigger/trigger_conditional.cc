@@ -171,7 +171,7 @@ void TriggerConditional::reset_triggers(Game* g) {
 TriggerConditional_OneArg::TriggerConditional_OneArg(TriggerConditional* cond) {
    m_conditional = cond;
 }
-TriggerConditional_OneArg::~TriggerConditional_OneArg(void) {
+TriggerConditional_OneArg::~TriggerConditional_OneArg() {
    if (m_conditional)
       delete m_conditional;
 }
@@ -182,7 +182,7 @@ bool TriggerConditional_OneArg::eval(Game* g) {
 
    return do_eval(result);
 }
-std::vector< TriggerConditional_Factory::Token >* TriggerConditional_OneArg::get_infix_tokenlist(void) {
+std::vector< TriggerConditional_Factory::Token >* TriggerConditional_OneArg::get_infix_tokenlist() {
    std::vector< TriggerConditional_Factory::Token >* retval = new std::vector< TriggerConditional_Factory::Token >;
 
    TriggerConditional_Factory::Token tok;
@@ -216,7 +216,7 @@ bool TriggerConditional_Const::eval(Game* g) {
    m_trigger->check_set_conditions(g);
    return m_trigger->is_set();
 }
-std::vector< TriggerConditional_Factory::Token>* TriggerConditional_Const::get_infix_tokenlist(void) {
+std::vector< TriggerConditional_Factory::Token>* TriggerConditional_Const::get_infix_tokenlist() {
    std::vector< TriggerConditional_Factory::Token >* retval = new std::vector< TriggerConditional_Factory::Token >;
 
    TriggerConditional_Factory::Token tok;
@@ -234,7 +234,7 @@ TriggerConditional_TwoArg::TriggerConditional_TwoArg(TriggerConditional* l, Trig
    m_lconditional = l;
    m_rconditional = r;
 }
-TriggerConditional_TwoArg::~TriggerConditional_TwoArg(void) {
+TriggerConditional_TwoArg::~TriggerConditional_TwoArg() {
    if (m_lconditional)
       delete m_lconditional;
    if (m_rconditional)
@@ -249,7 +249,7 @@ bool TriggerConditional_TwoArg::eval(Game* g) {
 
    return do_eval(l_result, r_result);
 }
-std::vector< TriggerConditional_Factory::Token >* TriggerConditional_TwoArg::get_infix_tokenlist(void) {
+std::vector< TriggerConditional_Factory::Token >* TriggerConditional_TwoArg::get_infix_tokenlist() {
    std::vector< TriggerConditional_Factory::Token >* retval = new std::vector< TriggerConditional_Factory::Token >;
 
    TriggerConditional_Factory::Token tok;

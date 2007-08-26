@@ -62,7 +62,7 @@ private:
 	Rect  m_label_rectangle;
 	VisualizationArray m_visualizations;
 	std::string m_background;
-	
+
 	void draw_background(RenderTarget & rt,
 						 const uint xres,
 						 const uint yres);

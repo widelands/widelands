@@ -40,7 +40,7 @@ private:
 		Set_To_Increase,    Set_To_Decrease
 	};
 	void clicked_button(const Button);
-      void update(void);
+      void update();
 	UI::Textarea                  m_change_by_label;
 	UI::IDButton<Editor_Tool_Change_Height_Options_Menu, const Button>
 		m_change_by_increase, m_change_by_decrease;

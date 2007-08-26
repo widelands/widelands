@@ -42,7 +42,7 @@ class Trackable {
 		Trackable * m_ptr;
 
 	public:
-		Tracker(Trackable* p) : m_refcount(0), m_ptr(p) { }
+		Tracker(Trackable* p) : m_refcount(0), m_ptr(p) {}
 
 		void addref() {
 			++m_refcount;
@@ -60,16 +60,16 @@ class Trackable {
 				delete this;
 		}
 
-		Trackable* get() { return m_ptr; }
+		Trackable* get() {return m_ptr;}
 
 	protected: // putting private here causes a compiler warning, even though
 	           // we use delete this
-		~Tracker() { }
+		~Tracker() {}
 	};
 
 public:
-	Trackable() { m_tracker = new Tracker(this); }
-	virtual ~Trackable() { m_tracker->clear(); }
+	Trackable() {m_tracker = new Tracker(this);}
+	virtual ~Trackable() {m_tracker->clear();}
 
 private:
 	Tracker * m_tracker;
@@ -86,7 +86,7 @@ class BaseTrackPtr {
 	mutable Trackable::Tracker * m_tracker;
 
 protected:
-	BaseTrackPtr() : m_tracker(0) { }
+	BaseTrackPtr() : m_tracker(0) {}
 	~BaseTrackPtr() {
 		if (m_tracker)
 			m_tracker->deref();
@@ -151,17 +151,17 @@ derived from Trackable.
 template<class T>
 class TrackPtr : BaseTrackPtr {
 public:
-	TrackPtr() { }
-	~TrackPtr() { }
+	TrackPtr() {}
+	~TrackPtr() {}
 
-	TrackPtr(T* ptr) : BaseTrackPtr(ptr) { }
-	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) { }
+	TrackPtr(T* ptr) : BaseTrackPtr(ptr) {}
+	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {}
 
-	TrackPtr& operator=(const TrackPtr<T>& o) { set(o); return *this; }
-	TrackPtr& operator=(T* ptr) { set(ptr); return *this; }
+	TrackPtr& operator=(const TrackPtr<T>& o) {set(o); return *this;}
+	TrackPtr& operator=(T* ptr) {set(ptr); return *this;}
 
-	operator T*() const { return static_cast<T*>(get()); }
-	T* operator->() const { return static_cast<T*>(get()); }
+	operator T*() const {return static_cast<T*>(get());}
+	T* operator->() const {return static_cast<T*>(get());}
 };
 
 

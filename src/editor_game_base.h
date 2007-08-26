@@ -57,7 +57,7 @@ struct Editor_Game_Base {
 
       void set_map(Map* map);
 	Map & map() const throw () {return *m_map;}
-      inline Map *get_map() { return m_map; }
+      inline Map *get_map() {return m_map;}
       Map & get_map() const {return *m_map;}
 	const Object_Manager & objects() const {return m_objects;}
 	Object_Manager       & objects()       {return m_objects;}
@@ -142,7 +142,7 @@ struct Editor_Game_Base {
 	void inform_players_about_road
 		(const FCoords, const Map_Object_Descr * const);
 
-	enum losegain_t { LOSE=0, GAIN };
+	enum losegain_t {LOSE=0, GAIN};
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t)=0;
 	virtual void player_field_notification (const FCoords&, losegain_t)=0;
 
@@ -153,8 +153,8 @@ protected:
 
       // next function is used to update the current gametime,
       // for queue runs e.g.
-      inline int* get_game_time_pointer(void) { return &m_gametime; }
-      inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
+      inline int* get_game_time_pointer() {return &m_gametime;}
+      inline void set_iabase(Interactive_Base* b) {m_iabase=b;}
 
 	virtual void do_conquer_area
 		(Player_Area<Area<FCoords> > player_area,

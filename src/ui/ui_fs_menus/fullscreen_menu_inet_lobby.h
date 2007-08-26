@@ -40,7 +40,7 @@ struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 		Fullscreen_Menu_InetLobby(Game_Server_Connection*);
 		~Fullscreen_Menu_InetLobby();
 
-      void think(void);
+      void think();
 
       void server_message(std::string str);
       void user_entered(std::string name, std::string room, bool enters) ;
@@ -48,7 +48,7 @@ struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
       void room_info(std::vector< std::string > users);
       void chat_message(std::string user, std::string room, bool is_action);
       void critical_error(std::string str);
-      void disconnect(void);
+      void disconnect();
 
 	private:
       Game_Server_Connection* m_gsc;
@@ -58,7 +58,7 @@ struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
       bool  m_disconnect_expected;
 
    private:
-      void changed(void);
+      void changed();
 	void clicked_back();
 };
 

@@ -92,7 +92,7 @@ Interactive_Base::~Interactive_Base
 cleanups
 ===============
 */
-Interactive_Base::~Interactive_Base(void)
+Interactive_Base::~Interactive_Base()
 {
 	if (m_buildroad)
 		abort_build_road();
@@ -147,7 +147,7 @@ void Interactive_Base::set_sel_picture(const char * const file) {
    m_sel.pic = g_gr->get_picture(PicMod_Game, file);
    set_sel_pos(get_sel_pos()); //  redraw
 }
-void Interactive_Base::unset_sel_picture(void) {
+void Interactive_Base::unset_sel_picture() {
    set_sel_picture("pics/fsel.png");
 }
 

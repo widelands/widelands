@@ -32,7 +32,7 @@ class Widelands_Map_Map_Object_Saver;
 */
 class Widelands_Map_Data_Packet {
    public:
-      virtual ~Widelands_Map_Data_Packet() { m_skip=false; }
+      virtual ~Widelands_Map_Data_Packet() {m_skip=false;}
 
 	virtual void Read
 		(FileSystem &,

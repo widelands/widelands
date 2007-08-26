@@ -238,7 +238,7 @@ void Main_Menu_Save_Map::double_clicked(uint) {clicked_ok();}
 /*
  * fill the file list
  */
-void Main_Menu_Save_Map::fill_list(void) {
+void Main_Menu_Save_Map::fill_list() {
    // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
 
@@ -308,7 +308,7 @@ void Main_Menu_Save_Map::fill_list(void) {
 /*
  * The editbox was changed. Enable ok button
  */
-void Main_Menu_Save_Map::edit_box_changed(void) {
+void Main_Menu_Save_Map::edit_box_changed() {
    m_ok_btn->set_enabled(true);
 }
 

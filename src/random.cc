@@ -47,7 +47,7 @@ uint RNG::rand ()
 // this is a nonlinear sbox used for mixing the state
 // note that it consists of 4 parallel permutations
 
-const uint rng_sbox[256]={
+const uint rng_sbox[256]= {
 	0x2FC5C487, 0x721E317E, 0x46337246, 0xD3A14DD5,
 	0x336D4A5F, 0x076C9EAE, 0x4843031E, 0x68C3C945,
 	0x0AB927B9, 0x5479614C, 0x11917750, 0xA52E5A97,

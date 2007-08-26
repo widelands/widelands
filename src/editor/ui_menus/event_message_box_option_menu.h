@@ -50,7 +50,7 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
    private:
       static const int MAX_BUTTONS=4;
 
-      void update(void);
+      void update();
 	void clicked_ok                        ();
 	void clicked_number_of_buttons_decrease();
 	void clicked_number_of_buttons_increase();

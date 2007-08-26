@@ -587,7 +587,7 @@ void Graphic::animate_maptextures(uint time)
 /**
  * reset that the map texture have been animated
  */
-void Graphic::reset_texture_animation_reminder(void)
+void Graphic::reset_texture_animation_reminder()
 {
 	for (uint i = 0; i < m_maptextures.size(); i++)
 		m_maptextures[i]->reset_was_animated();

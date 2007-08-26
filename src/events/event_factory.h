@@ -45,7 +45,7 @@ class Event_Factory {
 
       static Event_Descr* get_correct_event_descr(const char* id);
       static Event_Descr* get_event_descr(uint id);
-      static const uint get_nr_of_available_events(void);
+      static const uint get_nr_of_available_events();
 };
 
 #endif

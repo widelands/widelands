@@ -120,7 +120,7 @@ Editor_Tool_Noise_Height_Options_Menu::update()
 Update all textareas
 ===============
 */
-void Editor_Tool_Noise_Height_Options_Menu::update(void) {
+void Editor_Tool_Noise_Height_Options_Menu::update() {
    char buffer[200];
 	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
 	sprintf(buffer, _("Minimum: %u").c_str(), height_interval.min);

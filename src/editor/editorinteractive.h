@@ -101,7 +101,7 @@ struct Editor_Interactive : public Interactive_Base {
 	void   reference_player_tribe(const Player_Number, const void * const);
 	void unreference_player_tribe(const Player_Number, const void * const);
       bool is_player_tribe_referenced(int);
-      void set_need_save(bool t) { m_need_save=t; }
+      void set_need_save(bool t) {m_need_save=t;}
 
    private:
       void toggle_buildhelp();

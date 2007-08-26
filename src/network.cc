@@ -75,7 +75,7 @@ class Cmd_NetCheckSync:public BaseCommand {
 	NetGame * netgame;
 
     public:
-	Cmd_NetCheckSync (int dt, NetGame* ng) : BaseCommand (dt) { netgame=ng; }
+	Cmd_NetCheckSync (int dt, NetGame* ng) : BaseCommand (dt) {netgame=ng;}
 
 	virtual void execute (Game* g);
 
@@ -83,7 +83,7 @@ class Cmd_NetCheckSync:public BaseCommand {
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*) __attribute__ ((noreturn));
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_NETCHECKSYNC; }
+	virtual int get_id() {return QUEUE_CMD_NETCHECKSYNC;}
 };
 
 
@@ -314,7 +314,7 @@ void NetHost::handle_network ()
 	TCPsocket sock;
 	unsigned int i,j;
 
-	if (promoter!=0){
+	if (promoter!=0) {
 	    promoter->run ();
 
 	}

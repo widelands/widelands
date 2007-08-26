@@ -136,7 +136,7 @@ void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
  *
  * Remove all map objects
  */
-Object_Manager::~Object_Manager(void)
+Object_Manager::~Object_Manager()
 {
 	// better not throw an exception in a destructor...
 	if (!m_objects.empty())

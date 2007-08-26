@@ -150,7 +150,7 @@ m_building(-1) //  FIXME negative value!
 /*
  * cleanup
  */
-Event_Allow_Building_Option_Menu::~Event_Allow_Building_Option_Menu(void) {
+Event_Allow_Building_Option_Menu::~Event_Allow_Building_Option_Menu() {
 }
 
 /*
@@ -199,7 +199,7 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
 /*
  * update function: update all UI elements
  */
-void Event_Allow_Building_Option_Menu::update(void) {
+void Event_Allow_Building_Option_Menu::update() {
    if (m_player<=0) m_player=1;
 	const Player_Number nr_players = m_parent->egbase().map().get_nrplayers();
 	if (m_player > nr_players) m_player = nr_players;

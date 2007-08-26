@@ -43,7 +43,7 @@ struct Event_Unhide_Area_Option_Menu : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
 private:
-      void update(void);
+      void update();
 	void clicked_ok();
       void clicked(int);
 

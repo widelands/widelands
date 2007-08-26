@@ -40,7 +40,7 @@
 /**
  * Plain Constructor
  */
-Font_Handler::Font_Handler(void) {
+Font_Handler::Font_Handler() {
 	if (TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
 	m_font_loader = new Font_Loader();
 	m_varcallback = 0;
@@ -50,7 +50,7 @@ Font_Handler::Font_Handler(void) {
 /**
  * Plain Destructor
  */
-Font_Handler::~Font_Handler(void) {
+Font_Handler::~Font_Handler() {
 	delete m_font_loader;
 	TTF_Quit();
 }
@@ -184,8 +184,8 @@ SDL_Surface* Font_Handler::create_single_line_text_surface
  const int caret)
 {
 	// render this block in a SDL Surface
-	SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
-	SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
+	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(),0};
+	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(),0};
 
 	if (!text.size())
 		text = " ";
@@ -230,8 +230,8 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	text = word_wrap_text(font, text, wrap);
 	split_string(text, lines, "\n");
 
-	SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
-	SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
+	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(),0};
+	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(),0};
 
 	uint cur_text_pos = 0;
 	uint i = 0;
@@ -684,7 +684,7 @@ void Font_Handler::do_align(Align align, int *dstx, int *dsty, int w, int h) {
 /*
  * Flushes the cached picture ids
  */
-void Font_Handler::flush_cache(void) {
+void Font_Handler::flush_cache() {
 	while (!m_cache.empty()) {
 		g_gr->free_surface (m_cache.front().surface_id);
 		m_cache.pop_front();

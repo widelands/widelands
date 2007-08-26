@@ -80,9 +80,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 	int get_size() const throw () {return m_size;}
-   inline const char* get_picture(void) const { return m_picture.c_str(); }
+   inline const char* get_picture() const {return m_picture.c_str();}
 	const ImmovableProgram* get_program(std::string programname) const;
-	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
+	inline const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
 	void parse(const char *directory, Profile *s);
 	void parse_program(std::string directory, Profile* prof, std::string programname);
@@ -113,7 +113,7 @@ public:
 	Immovable(const Immovable_Descr &);
 	~Immovable();
 
-	Coords get_position() const { return m_position; }
+	Coords get_position() const {return m_position;}
 
 	virtual int  get_type    () const throw ();
 	virtual int  get_size    () const throw ();
@@ -167,7 +167,7 @@ struct PlayerImmovable : public BaseImmovable {
 	PlayerImmovable(const Map_Object_Descr &);
 	virtual ~PlayerImmovable();
 
-	inline Player *get_owner() const { return m_owner; }
+	inline Player *get_owner() const {return m_owner;}
 	Player & owner() const {return *m_owner;}
 	Economy * get_economy() const throw () {return m_economy;}
 	Economy & economy() const throw () {return *m_economy;}
@@ -179,7 +179,7 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void add_worker(Worker *w);
 	virtual void remove_worker(Worker *w);
 
-	const std::vector<Worker*>& get_workers() const { return m_workers; }
+	const std::vector<Worker*>& get_workers() const {return m_workers;}
 
    void log_general_info(Editor_Game_Base*);
 

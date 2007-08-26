@@ -38,8 +38,8 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 		(FileSystem &, Game*, Widelands_Map_Map_Object_Saver * const = 0)
 		throw (_wexception);
 
-      const char* get_mapname(void) { return m_mapname.c_str(); }
-      uint get_gametime(void) { return m_gametime; }
+      const char* get_mapname() {return m_mapname.c_str();}
+      uint get_gametime() {return m_gametime;}
 
    private:
       std::string m_mapname;

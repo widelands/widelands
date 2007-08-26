@@ -181,7 +181,7 @@ m_parent  (parent)
 /*
  * cleanup
  */
-Event_Move_View_Option_Menu::~Event_Move_View_Option_Menu(void) {
+Event_Move_View_Option_Menu::~Event_Move_View_Option_Menu() {
 }
 
 /*
@@ -226,7 +226,7 @@ void Event_Move_View_Option_Menu::clicked(int i) {
 /*
  * update function: update all UI elements
  */
-void Event_Move_View_Option_Menu::update(void) {
+void Event_Move_View_Option_Menu::update() {
    if (m_x<0) m_x=0;
    if (m_y<0) m_y=0;
 	const Map & map = m_parent->egbase().map();

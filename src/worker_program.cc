@@ -39,7 +39,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"geologist-find",    &WorkerProgram::parse_geologist_find},
 	{"playFX",            &WorkerProgram::parse_playFX},
 
-	{ 0, 0 }
+	{0, 0}
 };
 
 
@@ -299,7 +299,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 				{"big",    FindNodeSize::sizeBig},
 				{"mine",   FindNodeSize::sizeMine},
 				{"port",   FindNodeSize::sizePort},
-				{ 0, 0 }
+				{0, 0}
 			};
 
 			int index;

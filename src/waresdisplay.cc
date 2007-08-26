@@ -115,7 +115,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 /*
  * Delete all ware lists
  */
-void WaresDisplay::remove_all_warelists(void) {
+void WaresDisplay::remove_all_warelists() {
    m_warelists.clear();
 }
 

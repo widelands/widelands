@@ -35,7 +35,7 @@
 /*
  * Destructor
  */
-Game_Interactive_Player_Data_Packet::~Game_Interactive_Player_Data_Packet(void) {
+Game_Interactive_Player_Data_Packet::~Game_Interactive_Player_Data_Packet() {
 }
 
 /*

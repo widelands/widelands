@@ -99,7 +99,7 @@ m_remove_last_player
  * Think function. Some things may change while this window
  * is open
  */
-void Editor_Player_Menu::think(void) {
+void Editor_Player_Menu::think() {
    update();
 }
 
@@ -110,7 +110,7 @@ Editor_Player_Menu::update()
 Update all
 ===============
 */
-void Editor_Player_Menu::update(void) {
+void Editor_Player_Menu::update() {
 	if (is_minimal()) return;
 
 	Map & map =

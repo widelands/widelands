@@ -31,7 +31,7 @@
 #define CURRENT_PACKET_VERSION 2
 
 
-Game_Player_Info_Data_Packet::~Game_Player_Info_Data_Packet(void) {
+Game_Player_Info_Data_Packet::~Game_Player_Info_Data_Packet() {
 }
 
 

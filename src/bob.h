@@ -102,7 +102,7 @@ struct Bob : public Map_Object {
 				Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
 				bool is_world_bob() const {return not m_owner_tribe;}
 
-				inline const char* get_picture(void) const
+				inline const char* get_picture() const
 						{return m_picture.c_str();}
 
 				inline const EncodeData& get_default_encodedata() const
@@ -154,7 +154,7 @@ struct Bob : public Map_Object {
 		Bob * get_next_bob() const throw () {return m_linknext;}
 		bool is_world_bob() const throw () {return descr().is_world_bob();}
 
-		uint vision_range() const { return descr().vision_range(); }
+		uint vision_range() const {return descr().vision_range();}
 
 		virtual void draw(const Editor_Game_Base &, RenderTarget &,
 		                  const Point) const;
@@ -223,7 +223,7 @@ struct Bob : public Map_Object {
 
 	protected:
 		Bob(const Descr & descr);
-		virtual ~Bob(void);
+		virtual ~Bob();
 
 
 	private:

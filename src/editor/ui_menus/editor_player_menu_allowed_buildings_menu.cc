@@ -127,7 +127,7 @@ Updates all UI::Textareas in the UI::Window to represent currently
 set values
 ==============
 */
-void Editor_Player_Menu_Allowed_Buildings_Menu::update(void) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::update() {
 }
 
 /*

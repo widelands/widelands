@@ -85,8 +85,8 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	uint get_nrwaresqueues() { return m_wares.size(); }
-	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
+	uint get_nrwaresqueues() {return m_wares.size();}
+	WaresQueue* get_waresqueue(uint idx) {return m_wares[idx];}
 
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);

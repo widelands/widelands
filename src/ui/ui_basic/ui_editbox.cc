@@ -66,7 +66,7 @@ Edit_Box::Edit_Box
 /**
 destructor
 */
-Edit_Box::~Edit_Box(void) {
+Edit_Box::~Edit_Box() {
    grab_mouse(false);
    set_can_focus(false);
 }

@@ -121,7 +121,7 @@ const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
 	{"remove",    &ImmovableProgram::parse_remove},
 	{"playFX",    &ImmovableProgram::parse_playFX},
 
-	{ 0, 0 }
+	{0, 0}
 };
 
 

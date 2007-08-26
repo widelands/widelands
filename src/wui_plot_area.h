@@ -48,7 +48,7 @@ struct WUIPlot_Area : public UI::Panel {
 
    public:
       WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h);
-      ~WUIPlot_Area(void);
+      ~WUIPlot_Area();
 
       // Functions from the User Interface
       virtual void draw(RenderTarget* dst);
@@ -62,7 +62,7 @@ struct WUIPlot_Area : public UI::Panel {
       void show_plot(uint id, bool t);
 
       // set plotmode
-      void set_plotmode(int id) { m_plotmode = id; }
+      void set_plotmode(int id) {m_plotmode = id;}
 
    private:
       struct __plotdata {

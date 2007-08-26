@@ -32,7 +32,7 @@ struct Textarea;
 
 struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       Game_Main_Menu_Save_Game(Interactive_Player* plr, UI::UniqueWindow::Registry* registry) ;
-      virtual ~Game_Main_Menu_Save_Game(void);
+      virtual ~Game_Main_Menu_Save_Game();
 
    private:
 	void clicked_ok    ();
@@ -40,7 +40,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	void double_clicked(uint);
       void edit_box_changed();
 
-      void fill_list(void);
+      void fill_list();
       bool save_game(std::string);
 
       Interactive_Player* m_parent;

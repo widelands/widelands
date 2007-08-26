@@ -120,14 +120,14 @@ Fullscreen_Menu_InetLobby::~Fullscreen_Menu_InetLobby()
 /*
  * Check if there is network data for us
  */
-void Fullscreen_Menu_InetLobby::think(void) {
+void Fullscreen_Menu_InetLobby::think() {
    m_gsc->handle_data();
 }
 
 /*
  * The editbox has changed, this is to send something over the net
  */
-void Fullscreen_Menu_InetLobby::changed(void) {
+void Fullscreen_Menu_InetLobby::changed() {
    std::string text = m_chatbox->get_text();
    m_chatbox->set_text("");
 
@@ -236,7 +236,7 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
 /*
  * A disconnect occured
  */
-void Fullscreen_Menu_InetLobby::disconnect(void) {
+void Fullscreen_Menu_InetLobby::disconnect() {
    if (!m_disconnect_expected) {
 		UI::Modal_Message_Box mmb
 			(this,

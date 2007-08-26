@@ -34,11 +34,11 @@ class RGBColor;
 
 struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr(const Tribe_Descr &, const std::string & soldier_name);
-	virtual ~Soldier_Descr(void);
+	virtual ~Soldier_Descr();
 
-   virtual Worker_Type get_worker_type(void) const {return SOLDIER;}
+   virtual Worker_Type get_worker_type() const {return SOLDIER;}
 
-   virtual void load_graphics(void);
+   virtual void load_graphics();
 
 	uint get_max_hp_level          () const {return m_max_hp_level;}
 	uint get_max_attack_level      () const {return m_max_attack_level;}
@@ -179,7 +179,7 @@ public: // Worker-specific redefinitions
 
    void log_general_info(Editor_Game_Base* egbase);
 
-   inline void set_attack_ctrl(AttackController* ctrl) { m_attack_ctrl = ctrl; };
+   inline void set_attack_ctrl(AttackController* ctrl) {m_attack_ctrl = ctrl;};
 
 private:
    void moveToBattleUpdate (Game*, State*);

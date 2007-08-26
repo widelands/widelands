@@ -32,7 +32,7 @@
 /*
  * Destructor
  */
-Widelands_Map_Player_Names_And_Tribes_Data_Packet::~Widelands_Map_Player_Names_And_Tribes_Data_Packet(void) {
+Widelands_Map_Player_Names_And_Tribes_Data_Packet::~Widelands_Map_Player_Names_And_Tribes_Data_Packet() {
 }
 
 /*

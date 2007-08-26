@@ -104,7 +104,7 @@ public:
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
-	void flush_cache(void);
+	void flush_cache();
 	void delete_widget_cache(uint widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,

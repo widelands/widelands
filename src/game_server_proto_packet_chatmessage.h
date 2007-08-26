@@ -34,7 +34,7 @@ public Game_Server_Protocol_Packet
 		(const uchar flags, const std::string & msg);
       virtual ~Game_Server_Protocol_Packet_ChatMessage();
 
-      virtual ushort get_id(void);
+      virtual ushort get_id();
 
       virtual void recv(Game_Server_Connection*, Network_Buffer* buffer);
       virtual void send(Network_Buffer* buffer);

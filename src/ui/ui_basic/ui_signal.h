@@ -41,16 +41,16 @@ class Signal : public Object {
 	Object *_obj;
 	fnT _fn;
 public:
-	Signal() { _obj = 0; _fn = 0; }
+	Signal() {_obj = 0; _fn = 0;}
 	template<class T>
 		void set(Object *p, void (T::*f)()) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-   void unset(void) {
+   void unset() {
       _fn = 0;
 	}
-   inline void call() { if (_fn) (_obj->*_fn)(); }
+   inline void call() {if (_fn) (_obj->*_fn)();}
 };
 
 /**
@@ -62,16 +62,16 @@ class Signal1 : public Object {
 	Object *_obj;
 	fnT _fn;
 public:
-	Signal1() { _obj = 0; _fn = 0; }
+	Signal1() {_obj = 0; _fn = 0;}
 	template<class T>
 	void set(Object *p, void (T::*f)(T1)) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-   void unset(void) {
+   void unset() {
       _fn = 0;
 	}
-	inline void call(T1 t1) { if (_fn) (_obj->*_fn)(t1); }
+	inline void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
 };
 
 /*
@@ -83,16 +83,16 @@ class Signal2 : public Object {
 	Object *_obj;
 	fnT _fn;
 public:
-	Signal2() { _obj = 0; _fn = 0; }
+	Signal2() {_obj = 0; _fn = 0;}
 	template<class T>
 	void set(Object * p, void (T::*f)(T1, T2)) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-   void unset(void) {
+   void unset() {
       _fn = 0;
 	}
-   inline void call(T1 t1, T2 t2) { if (_fn) (_obj->*_fn)(t1, t2); }
+   inline void call(T1 t1, T2 t2) {if (_fn) (_obj->*_fn)(t1, t2);}
 };
 };
 

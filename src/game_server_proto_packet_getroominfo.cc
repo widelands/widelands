@@ -41,7 +41,7 @@ Game_Server_Protocol_Packet_GetRoomInfo::
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_GetRoomInfo::get_id(void) {
+ushort Game_Server_Protocol_Packet_GetRoomInfo::get_id() {
    return GGSPP_GETROOMINFO;
 }
 

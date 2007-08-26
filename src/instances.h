@@ -43,8 +43,8 @@ struct Map_Object_Descr {
 	friend class DirAnimations;
 	public:
 		typedef Uint8 Index;
-		Map_Object_Descr(void) {}
-		virtual ~Map_Object_Descr(void) {m_anims.clear();}
+		Map_Object_Descr() {}
+		virtual ~Map_Object_Descr() {m_anims.clear();}
 
 		struct Animation_Nonexistent {};
 		uint get_animation(const char * const name) const {
@@ -119,7 +119,7 @@ public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);
 
 // would be necessary for virtual inheritance stuff
 //#define MO_VIRTUAL_DESCR(type)
-//protected: type* m_descr; inline type* get_descr() const { return m_descr; }
+//protected: type* m_descr; inline type* get_descr() const {return m_descr;}
 
 class Map_Object {
    friend class Object_Manager;
@@ -180,8 +180,8 @@ protected:
 public:
 	virtual int get_type() const throw () = 0;
 
-   inline uint get_file_serial(void) const { return m_file_serial; }
-	inline uint get_serial(void) const { return m_serial; }
+   inline uint get_file_serial() const {return m_file_serial;}
+	inline uint get_serial() const {return m_serial;}
 	bool has_attribute(const uint attr) const throw ()
 	{return descr().has_attribute(attr);}
 
@@ -197,7 +197,7 @@ public:
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs);
 
-	LogSink* get_logsink() { return m_logsink; }
+	LogSink* get_logsink() {return m_logsink;}
 	void set_logsink(LogSink* sink);
    virtual void log_general_info(Editor_Game_Base*); // Called when a new logsink is set, used to give general informations
 protected:
@@ -218,7 +218,7 @@ private:
 	Map_Object            (const Map_Object &);
 };
 
-inline int get_reverse_dir(int dir) { return 1 + ((dir-1)+3)%6; }
+inline int get_reverse_dir(int dir) {return 1 + ((dir-1)+3)%6;}
 
 
 /** class Object_Manager
@@ -229,7 +229,7 @@ class Object_Manager {
 	typedef std::map<uint, Map_Object *> objmap_t;
 
 public:
-	Object_Manager() { m_lastserial = m_last_file_serial = 0; }
+	Object_Manager() {m_lastserial = m_last_file_serial = 0;}
 	~Object_Manager();
 
 	void cleanup(Editor_Game_Base *g);
@@ -283,7 +283,7 @@ struct Object_Ptr {
 	bool operator<(const Object_Ptr other) const throw ()
 	{return m_serial < other.m_serial;}
 
-	uint get_serial() const { return m_serial; }
+	uint get_serial() const {return m_serial;}
 
 private:
 	uint m_serial;
@@ -302,7 +302,7 @@ struct OPtr {
 		return *this;
 	}
 
-	bool is_set() const { return m.is_set(); }
+	bool is_set() const {return m.is_set();}
 
 	T* get(const Editor_Game_Base* const g)
 	{
@@ -319,7 +319,7 @@ struct OPtr {
 		return m < other.m;
 	}
 
-	uint get_serial() const { return m.get_serial(); }
+	uint get_serial() const {return m.get_serial();}
 
 private:
 	Object_Ptr m;
@@ -330,7 +330,7 @@ private:
 	int obj_serial;
 
 public:
-	Cmd_Destroy_Map_Object(void) : BaseCommand(0) { } // For savegame loading
+	Cmd_Destroy_Map_Object() : BaseCommand(0) {} // For savegame loading
 	Cmd_Destroy_Map_Object (int t, Map_Object* o);
 	virtual void execute (Game* g);
 
@@ -338,7 +338,7 @@ public:
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_DESTROY_MAPOBJECT; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
 };
 
 class Cmd_Act:public BaseCommand {
@@ -347,7 +347,7 @@ private:
 	int arg;
 
 public:
-	Cmd_Act(void) : BaseCommand(0) { } // For savegame loading
+	Cmd_Act() : BaseCommand(0) {} // For savegame loading
 	Cmd_Act (int t, Map_Object* o, int a);
 
 	virtual void execute (Game* g);
@@ -356,7 +356,7 @@ public:
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
 
-	virtual int get_id(void) { return QUEUE_CMD_ACT; } // Get this command id
+	virtual int get_id() {return QUEUE_CMD_ACT;} // Get this command id
 };
 
 #endif // __S__INSTANCE_H

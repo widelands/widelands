@@ -44,7 +44,7 @@
 /*
  * Destructor
  */
-Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet(void)
+Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet()
 {
 }
 

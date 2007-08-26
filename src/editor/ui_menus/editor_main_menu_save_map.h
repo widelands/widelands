@@ -52,7 +52,7 @@ struct Main_Menu_Save_Map : public UI::Window {
 	void double_clicked(uint);
       void edit_box_changed();
 
-      void fill_list(void);
+      void fill_list();
       bool save_map(std::string, bool);
 
 	UI::Edit_Box * m_editbox;

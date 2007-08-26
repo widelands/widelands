@@ -90,7 +90,7 @@ m_parent(parent)
 /*
  * cleanup
  */
-Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event(void) {
+Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event() {
 }
 
 /*

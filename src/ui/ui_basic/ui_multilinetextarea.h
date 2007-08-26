@@ -51,8 +51,8 @@ public:
 		 const bool always_show_scrollbar = false);
       ~Multiline_Textarea();
 
-      std::string get_text() const { return m_text; }
-      ScrollMode get_scrollmode() const { return m_scrollmode; }
+      std::string get_text() const {return m_text;}
+      ScrollMode get_scrollmode() const {return m_scrollmode;}
 
 	void set_text(const std::string &text);
       void set_align(Align align);
@@ -62,16 +62,16 @@ public:
 	uint scrollbar_w() const throw () {return 24;}
 	uint get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
-      inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str()); }
+      inline void set_font(std::string name, int size, RGBColor fg) {m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str());}
 
       // Drawing and event handlers
       void draw(RenderTarget* dst);
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 
-      inline const char* get_font_name() { return m_fontname.c_str(); }
-      inline const int get_font_size() { return m_fontsize; }
-      inline RGBColor& get_font_clr() { return m_fcolor; }
+      inline const char* get_font_name() {return m_fontname.c_str();}
+      inline const int get_font_size() {return m_fontsize;}
+      inline RGBColor& get_font_clr() {return m_fcolor;}
 
    private:
 	std::string  m_text;
@@ -91,7 +91,7 @@ public:
 		uint m_textheight;  ///< total height of wrapped text, in pixels
 		uint m_textpos;     ///< current scrolling position in pixels (0 is top)
 
-      inline int get_m_textpos(void) { return m_textpos; }
+      inline int get_m_textpos() {return m_textpos;}
       void draw_scrollbar();
       int get_halign();
 };

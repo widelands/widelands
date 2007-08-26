@@ -35,7 +35,7 @@ Game_Server_Protocol_Packet_Connect::~Game_Server_Protocol_Packet_Connect() {}
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_Connect::get_id(void) {
+ushort Game_Server_Protocol_Packet_Connect::get_id() {
    return GGSPP_CONNECT;
 }
 

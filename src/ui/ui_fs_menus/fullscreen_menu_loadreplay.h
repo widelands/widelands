@@ -37,7 +37,7 @@ public:
 	Fullscreen_Menu_LoadReplay(Game*);
 	~Fullscreen_Menu_LoadReplay();
 
-	const std::string& filename() { return m_filename; }
+	const std::string& filename() {return m_filename;}
 
 	void clicked_ok();
 	void replay_selected(uint);

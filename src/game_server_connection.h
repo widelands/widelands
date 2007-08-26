@@ -48,12 +48,12 @@ typedef void (*Disconnet_Handler)(void*);
 class Game_Server_Connection {
    public:
       Game_Server_Connection(std::string host, uint port);
-      ~Game_Server_Connection(void);
+      ~Game_Server_Connection();
 
-      void connect(void);
+      void connect();
 
       void send(Game_Server_Protocol_Packet*);
-      void handle_data(void);
+      void handle_data();
 
       // Set callback functions (handlers)
       void set_server_message_handler(ServerMessage_Handler, void*);
@@ -73,12 +73,12 @@ class Game_Server_Connection {
       void critical_error(std::string str);
 
       // Set user data
-      void set_username(const char* name) { m_username = name; }
-      const char* get_username(void) { return m_username.c_str(); }
-      void set_group(const char* name) { m_group = name; }
-      const char* get_group(void) { return m_group.c_str(); }
+      void set_username(const char* name) {m_username = name;}
+      const char* get_username() {return m_username.c_str();}
+      void set_group(const char* name) {m_group = name;}
+      const char* get_group() {return m_group.c_str();}
       void set_room(const char* name);
-      const char* get_room(void) { return m_room.c_str(); }
+      const char* get_room() {return m_room.c_str();}
 
    private:
       // Connection data

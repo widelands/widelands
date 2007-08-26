@@ -233,14 +233,14 @@ void Journal::start_recording(std::string filename)
 	if (m_recordname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
-	try{
+	try {
 		m_recordstream.open(m_recordname.c_str(), std::ios::binary|std::ios::trunc);
 		write(RFC_MAGIC);
 		m_recordstream<<std::flush;
 		m_record=true;
 		log("Recording into %s\n", m_recordname.c_str());
 	}
-	catch (std::ofstream::failure e){
+	catch (std::ofstream::failure e) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Problem while opening record file %s for writing.\n",
@@ -279,7 +279,7 @@ void Journal::start_playback(std::string filename)
 	if (m_playbackname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
-	try{
+	try {
 		Uint32 magic;
 
 		m_playbackstream.open(m_playbackname.c_str(), std::ios::binary);
@@ -289,7 +289,7 @@ void Journal::start_playback(std::string filename)
 		m_playback=true;
 		log("Playing back from %s\n", m_playbackname.c_str());
 	}
-	catch (std::ifstream::failure e){
+	catch (std::ifstream::failure e) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("ERROR: problem while opening playback file for reading. "
@@ -386,7 +386,7 @@ void Journal::record_event(SDL_Event *e)
 			break;
 		}
 	}
-	catch (std::ofstream::failure f){
+	catch (std::ofstream::failure f) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to write to record file. Recording deactivated.\n");
@@ -471,7 +471,7 @@ bool Journal::read_event(SDL_Event *e)
 
 		return haveevent;
 	}
-	catch (std::ifstream::failure f){
+	catch (std::ifstream::failure f) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");

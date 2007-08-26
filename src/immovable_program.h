@@ -58,9 +58,9 @@ class ImmovableProgram {
 public:
 	ImmovableProgram(std::string name);
 
-	std::string get_name() const { return m_name; }
-	uint get_size() const { return m_actions.size(); }
-	const ImmovableAction& get_action(uint idx) const { assert(idx < m_actions.size()); return m_actions[idx]; }
+	std::string get_name() const {return m_name;}
+	uint get_size() const {return m_actions.size();}
+	const ImmovableAction& get_action(uint idx) const {assert(idx < m_actions.size()); return m_actions[idx];}
 
 	void add_action(const ImmovableAction& act);
 	void parse(Immovable_Descr* descr, std::string directory, Profile* prof);

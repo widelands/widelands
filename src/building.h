@@ -57,21 +57,21 @@ struct Building_Descr : public Map_Object_Descr {
 	typedef std::vector<CostItem> BuildCost;
 
 	Building_Descr(const Tribe_Descr &, const std::string & name);
-	virtual ~Building_Descr(void);
+	virtual ~Building_Descr();
 
 	const std::string & name    () const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 	const std::string & descname() const throw () {return m_descname;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
-	inline bool get_buildable(void) const { return m_buildable; }
-   inline bool get_enhanced_building(void) const { return m_enhanced_building; }
-	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
-	inline uint get_buildicon() const { return m_buildicon; }
+	inline bool get_buildable() const {return m_buildable;}
+   inline bool get_enhanced_building() const {return m_enhanced_building;}
+	inline const BuildCost* get_buildcost() const {return &m_buildcost;}
+	inline uint get_buildicon() const {return m_buildicon;}
 	int get_size() const throw () {return m_size;}
-	inline bool get_ismine() const { return m_mine; }
+	inline bool get_ismine() const {return m_mine;}
 	virtual uint get_ui_anim() const throw () {return get_animation("idle");}
 
-	inline bool get_stopable() const { return m_stopable;}
+	inline bool get_stopable() const {return m_stopable;}
 	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
 	const std::string & get_continue_icon() const throw ()
 	{return m_continue_icon;}
@@ -193,7 +193,7 @@ public:
 	bool get_stop() const throw () {return m_stop;}
 	virtual void set_stop(bool stop);
 
-	int get_base_priority() const { return m_priority; }
+	int get_base_priority() const {return m_priority;}
 	int get_priority(int type, int ware_index, bool adjust = true) const;
 	void set_priority(int new_priority);
 	void set_priority(int type, int ware_index, int new_priority);
@@ -206,16 +206,16 @@ public:
    void log_general_info(Editor_Game_Base* egbase);
 
     // Use on military and training sites
-   virtual void drop_soldier(uint) { };
+   virtual void drop_soldier(uint) {};
 	virtual void soldier_capacity_up   () {}
 	virtual void soldier_capacity_down () {}
 
     // Use on training sites only
-   virtual void change_train_priority(uint, int) { };
-	virtual void switch_train_mode () { };
+   virtual void change_train_priority(uint, int) {};
+	virtual void switch_train_mode () {};
 
    /// Testing stuff
-   virtual bool has_soldiers() { return false; };
+   virtual bool has_soldiers() {return false;};
    virtual void conquered_by (Player*);
 
 	///  Stores the Player_Number of the player who has defeated this building.

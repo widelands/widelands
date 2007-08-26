@@ -100,7 +100,7 @@ void Stock_Menu::think()
 /*
  * Fills the waresdisplay with wares
  */
-void Stock_Menu::fill_waredisplay_with_wares(void) {
+void Stock_Menu::fill_waredisplay_with_wares() {
 	waresdisplay.remove_all_warelists();
 	const Player & player = *m_player.get_player();
 	const uint nrecos = player.get_nr_economies();
@@ -111,7 +111,7 @@ void Stock_Menu::fill_waredisplay_with_wares(void) {
 /*
  * Fill it with workers
  */
-void Stock_Menu::fill_waredisplay_with_workers(void) {
+void Stock_Menu::fill_waredisplay_with_workers() {
 	waresdisplay.remove_all_warelists();
 	const Player & player = *m_player.get_player();
 	const uint nrecos = player.get_nr_economies();

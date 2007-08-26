@@ -46,7 +46,7 @@ struct Main_Menu_Map_Options : public UI::Window {
 
    private:
       void changed(int);
-      void editbox_changed(void);
+      void editbox_changed();
       Editor_Interactive  *m_parent;
       UI::Multiline_Editbox* m_descr;
       UI::Textarea* m_world, *m_nrplayers, *m_size;

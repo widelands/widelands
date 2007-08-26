@@ -363,7 +363,7 @@ StreamWrite* ZipFilesystem::OpenStreamWrite(const std::string fname)
 /**
  * Private Functions below
  */
-void ZipFilesystem::m_Close(void) {
+void ZipFilesystem::m_Close() {
    if (m_state == STATE_ZIPPING) {
       zipClose(m_zipfile, 0);
 	} else if (m_state == STATE_UNZIPPPING) {
@@ -376,7 +376,7 @@ void ZipFilesystem::m_Close(void) {
 /**
  * Open a zipfile for compressing
  */
-void ZipFilesystem::m_OpenZip(void) {
+void ZipFilesystem::m_OpenZip() {
    if (m_state == STATE_ZIPPING)
       return;
 
@@ -395,7 +395,7 @@ void ZipFilesystem::m_OpenZip(void) {
  * Open a zipfile for extraction
  * \throw FileType_error
  */
-void ZipFilesystem::m_OpenUnzip(void) {
+void ZipFilesystem::m_OpenUnzip() {
    if (m_state == STATE_UNZIPPPING)
       return;
 

@@ -163,7 +163,7 @@ void PlayerDescriptionGroup::toggle_playertype()
 /*
  * toggles the tribe the player will play
  */
-void PlayerDescriptionGroup::toggle_playertribe(void)
+void PlayerDescriptionGroup::toggle_playertribe()
 {
 	if (!(m_allow_changes&CHANGE_TRIBE))
 		return;

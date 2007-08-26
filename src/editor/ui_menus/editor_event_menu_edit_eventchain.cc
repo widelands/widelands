@@ -179,7 +179,7 @@ m_event_chain(chain)
 /*
  * cleanup
  */
-Editor_Event_Menu_Edit_EventChain::~Editor_Event_Menu_Edit_EventChain(void) {
+Editor_Event_Menu_Edit_EventChain::~Editor_Event_Menu_Edit_EventChain() {
 }
 
 /*

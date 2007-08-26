@@ -54,7 +54,7 @@ public:
 	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
 
    void add_warelist(const WareList*, wdType);
-   void remove_all_warelists(void);
+   void remove_all_warelists();
 
 protected:
 	virtual void draw(RenderTarget* dst);

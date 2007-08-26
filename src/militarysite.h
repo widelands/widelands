@@ -83,7 +83,7 @@ public:
    */
    void set_requeriments (Requeriments*);
    void  clear_requeriments ();
-   Requeriments get_requeriments () { return m_soldier_requeriments; }
+   Requeriments get_requeriments () {return m_soldier_requeriments;}
 
    /*
       So, to set a new requeriment to the request you should do something like:
@@ -98,9 +98,9 @@ public:
    /// Testing stuff
    uint nr_not_marked_soldiers();
    uint nr_attack_soldiers();
-   inline void set_in_battle(bool in_battle) { m_in_battle = in_battle;};
+   inline void set_in_battle(bool in_battle) {m_in_battle = in_battle;};
 
-   virtual bool has_soldiers() { return m_soldiers.size() > 0; }
+   virtual bool has_soldiers() {return m_soldiers.size() > 0;}
    virtual MilitarySite* conquered_by (Game*,Player*);
    virtual void init_after_conquering (Game* g, std::vector<Soldier*>* soldiers);
 

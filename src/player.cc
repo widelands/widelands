@@ -396,7 +396,7 @@ void Player::flagaction(Flag* flag, int action)
 					(game, tribe().get_worker_index("geologist"), "expedition");
 			/*} catch (Descr_Maintainer<Worker_Descr>::Nonexistent) {
 				log("Tribe defines no geologist\n");
-			}*/
+			} */
 			break;
 		default:
 			log("Player sent bad flagaction = %i\n", action);

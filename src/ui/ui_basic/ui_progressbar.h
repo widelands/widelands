@@ -41,9 +41,9 @@ struct Progress_Bar : public Panel {
 public:
 	Progress_Bar(Panel* parent, int x, int y, int w, int h, uint orientation);
 
-	uint get_state() { return m_state; }
+	uint get_state() {return m_state;}
 	void set_state(uint state);
-	uint get_total() { return m_total; }
+	uint get_total() {return m_total;}
 	void set_total(uint total);
 
 protected:

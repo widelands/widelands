@@ -41,7 +41,7 @@ Game_Server_Protocol_Packet_GetUserInfo::
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_GetUserInfo::get_id(void) {
+ushort Game_Server_Protocol_Packet_GetUserInfo::get_id() {
    return GGSPP_GETUSERINFO;
 }
 

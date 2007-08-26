@@ -159,7 +159,7 @@ void Fullscreen_Menu_CampaignSelect::double_clicked(uint)
 /**
  * fill the campaign list
  */
-void Fullscreen_Menu_CampaignSelect::fill_list(void)
+void Fullscreen_Menu_CampaignSelect::fill_list()
 {
 	// Load maps textdomain to translate the strings from cconfig
 	i18n::grab_textdomain("maps");
@@ -354,7 +354,7 @@ void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint)
 /**
  * fill the campaign-map list
  */
-void Fullscreen_Menu_CampaignMapSelect::fill_list(void)
+void Fullscreen_Menu_CampaignMapSelect::fill_list()
 {
 	// Load maps textdomain to translate the strings from cconfig
 	i18n::grab_textdomain("maps");
@@ -387,7 +387,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list(void)
 
 	// Add all visible entries to the list.
 	while ((s = prof.get_section(mapsection.c_str()))) {
-		if (s->get_bool("visible")){
+		if (s->get_bool("visible")) {
 		list.add(
 			s->get_string("name", _("[No value found]").c_str()),
 			s->get_string("path"),

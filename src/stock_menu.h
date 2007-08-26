@@ -44,8 +44,8 @@ private:
 	UI::Button<Stock_Menu> help;
 	UI::Button<Stock_Menu> switchpage;
 	enum {Wares, Workers} current_page;
-   void fill_waredisplay_with_wares(void);
-   void fill_waredisplay_with_workers(void);
+   void fill_waredisplay_with_wares();
+   void fill_waredisplay_with_workers();
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint hspacing() const {return 5;};

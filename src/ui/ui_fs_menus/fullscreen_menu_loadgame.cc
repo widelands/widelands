@@ -118,7 +118,7 @@ void Fullscreen_Menu_LoadGame::double_clicked(uint) {
 /*
  * fill the file list
  */
-void Fullscreen_Menu_LoadGame::fill_list(void) {
+void Fullscreen_Menu_LoadGame::fill_list() {
    // Fill it with all files we find.
    g_fs->FindFiles("ssave", "*", &m_gamefiles, 1);
 

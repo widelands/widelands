@@ -50,7 +50,7 @@ const ushort NUMBER_OF_MAP_DIMENSIONS=29;
 const ushort MAP_DIMENSIONS[] = {
    64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256,
    272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480,
-   496, 512 };
+   496, 512};
 
 
 class Path;
@@ -116,7 +116,7 @@ struct FindBobAlwaysTrue : public FindBob {
    virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint attrib) : m_attrib(attrib) { }
+	FindBobAttribute(uint attrib) : m_attrib(attrib) {}
 
 	virtual bool accept(Bob *imm) const;
 
@@ -164,14 +164,14 @@ struct Map {
    ~Map();
 
    // For overlays
-   inline Overlay_Manager* get_overlay_manager() { return m_overlay_manager; }
+   inline Overlay_Manager* get_overlay_manager() {return m_overlay_manager;}
 	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
    // For loading
    Map_Loader* get_correct_loader(const char*);
-   void cleanup(void);
+   void cleanup();
 
    // for editor
 	void create_empty_map
@@ -182,7 +182,7 @@ struct Map {
    void load_graphics();
    void recalc_whole_map();
    void recalc_for_field_area(const Area<FCoords>);
-   void recalc_default_resources(void);
+   void recalc_default_resources();
 
 	void set_nrplayers(const Uint8 nrplayers);
 
@@ -426,7 +426,7 @@ private:
 
 // FindImmovable functor
 struct FindImmovableSize : public FindImmovable {
-	FindImmovableSize(int min, int max) : m_min(min), m_max(max) { }
+	FindImmovableSize(int min, int max) : m_min(min), m_max(max) {}
    virtual ~FindImmovableSize() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
@@ -434,7 +434,7 @@ struct FindImmovableSize : public FindImmovable {
 	int m_min, m_max;
 };
 struct FindImmovableType : public FindImmovable {
-	FindImmovableType(int type) : m_type(type) { }
+	FindImmovableType(int type) : m_type(type) {}
    virtual ~FindImmovableType() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
@@ -442,7 +442,7 @@ struct FindImmovableType : public FindImmovable {
 	int m_type;
 };
 struct FindImmovableAttribute : public FindImmovable {
-	FindImmovableAttribute(uint attrib) : m_attrib(attrib) { }
+	FindImmovableAttribute(uint attrib) : m_attrib(attrib) {}
    virtual ~FindImmovableAttribute() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
@@ -450,14 +450,14 @@ struct FindImmovableAttribute : public FindImmovable {
 	int m_attrib;
 };
 struct FindImmovablePlayerImmovable : public FindImmovable {
-	FindImmovablePlayerImmovable() { }
+	FindImmovablePlayerImmovable() {}
    virtual ~FindImmovablePlayerImmovable() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable* imm) const;
 };
 
 struct FindNodeCaps : public FindNode {
-	FindNodeCaps(uchar mincaps) : m_mincaps(mincaps) { }
+	FindNodeCaps(uchar mincaps) : m_mincaps(mincaps) {}
    virtual ~FindNodeCaps() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
@@ -467,8 +467,8 @@ struct FindNodeCaps : public FindNode {
 
 // Accepts fields if they are accepted by all subfunctors.
 struct FindNodeAnd : public FindNode {
-	FindNodeAnd() { }
-	virtual ~FindNodeAnd() { }
+	FindNodeAnd() {}
+	virtual ~FindNodeAnd() {}
 
 	void add(const FindNode* findfield, bool negate = false);
 
@@ -494,7 +494,7 @@ struct FindNodeSize : public FindNode {
 		sizePort,         //  can build a port on this field
 	};
 
-	FindNodeSize(Size size) : m_size(size) { }
+	FindNodeSize(Size size) : m_size(size) {}
    virtual ~FindNodeSize() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
@@ -505,7 +505,7 @@ struct FindNodeSize : public FindNode {
 // Accepts a field for a certain size if it has
 // a valid resource and amount on it
 struct FindNodeSizeResource : public FindNodeSize {
-   FindNodeSizeResource(Size size, int res) : FindNodeSize(size) { m_res=res; }
+   FindNodeSizeResource(Size size, int res) : FindNodeSize(size) {m_res=res;}
    virtual ~FindNodeSizeResource() {}  // make gcc shut up
 
    virtual bool accept(const Map &, const FCoords coord) const;
@@ -522,7 +522,7 @@ struct FindNodeImmovableSize : public FindNode {
 		sizeBig    = 1 << 3
 	};
 
-	FindNodeImmovableSize(uint sizes) : m_sizes(sizes) { }
+	FindNodeImmovableSize(uint sizes) : m_sizes(sizes) {}
    virtual ~FindNodeImmovableSize() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
@@ -532,7 +532,7 @@ struct FindNodeImmovableSize : public FindNode {
 
 // Accepts a field if it has an immovable with a given attribute
 struct FindNodeImmovableAttribute : public FindNode {
-	FindNodeImmovableAttribute(uint attrib) : m_attribute(attrib) { }
+	FindNodeImmovableAttribute(uint attrib) : m_attribute(attrib) {}
    virtual ~FindNodeImmovableAttribute() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
@@ -543,7 +543,7 @@ struct FindNodeImmovableAttribute : public FindNode {
 
 // Accepts a field if it has the given resource
 struct FindNodeResource : public FindNode {
-	FindNodeResource(uchar res) : m_resource(res) { }
+	FindNodeResource(uchar res) : m_resource(res) {}
    virtual ~FindNodeResource() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
@@ -563,7 +563,7 @@ moving onto the shore).
 */
 class CheckStepDefault : public CheckStep {
 public:
-	CheckStepDefault(uchar movecaps) : m_movecaps(movecaps) { }
+	CheckStepDefault(uchar movecaps) : m_movecaps(movecaps) {}
    virtual ~CheckStepDefault() {}  // make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
@@ -583,7 +583,7 @@ If onlyend is true, we can only do this on the final step.
 */
 class CheckStepWalkOn : public CheckStep {
 public:
-	CheckStepWalkOn(uchar movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) { }
+	CheckStepWalkOn(uchar movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
    virtual ~CheckStepWalkOn() {}  // make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
@@ -608,7 +608,7 @@ forbidden is an array of coordinates that must not be crossed by the road.
 class CheckStepRoad : public CheckStep {
 public:
 	CheckStepRoad(Player* player, uchar movecaps, const std::vector<Coords>* forbidden)
-		: m_player(player), m_movecaps(movecaps), m_forbidden(forbidden) { }
+		: m_player(player), m_movecaps(movecaps), m_forbidden(forbidden) {}
    virtual ~CheckStepRoad() {}  // make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
@@ -633,7 +633,7 @@ class Path {
 
 public:
 	Path() {}
-	Path(Coords c) : m_start(c), m_end(c) { }
+	Path(Coords c) : m_start(c), m_end(c) {}
 	Path(CoordPath &o);
 
 	void reverse();
@@ -663,7 +663,7 @@ public:
 
 	Coords get_start() const throw () {return m_coords.front();}
 	Coords get_end  () const throw () {return m_coords.back ();}
-	inline const std::vector<Coords> &get_coords() const { return m_coords; }
+	inline const std::vector<Coords> &get_coords() const {return m_coords;}
 
 	typedef std::vector<Direction> Step_Vector;
 	Step_Vector::size_type get_nsteps() const throw () {return m_path.size();}

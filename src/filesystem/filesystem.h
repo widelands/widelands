@@ -45,7 +45,7 @@ struct FileSystem {
 	   ZIP
 	};
 
-	virtual ~FileSystem() { }
+	virtual ~FileSystem() {}
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
 	                            filenameset_t *results, uint depth=0) = 0;

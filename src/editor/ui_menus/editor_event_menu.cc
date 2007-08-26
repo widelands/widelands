@@ -199,7 +199,7 @@ Editor_Event_Menu::~Editor_Event_Menu()
 /*
  * update all lists and stuff
  */
-void Editor_Event_Menu::update(void) {
+void Editor_Event_Menu::update() {
 	const Map & map = m_parent->egbase().map();
 
 	m_trigger_list->clear();

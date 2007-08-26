@@ -63,7 +63,7 @@ struct Panel : public Object {
 		 const std::string & tooltip_text = std::string());
 	virtual ~Panel();
 
-	inline Panel *get_parent() const { return _parent; }
+	inline Panel *get_parent() const {return _parent;}
 
 	void free_children();
 
@@ -80,10 +80,10 @@ struct Panel : public Object {
 	void set_pos(const Point);
 	virtual void move_inside_parent();
 
-	inline int get_x() const { return _x; }
-	inline int get_y() const { return _y; }
-	inline int get_w() const { return _w; }
-	inline int get_h() const { return _h; }
+	inline int get_x() const {return _x;}
+	inline int get_y() const {return _y;}
+	inline int get_w() const {return _w;}
+	inline int get_h() const {return _h;}
 
 	virtual bool is_snap_target() const {return false;}
 	ushort get_border_snap_distance() const {return _border_snap_distance;}
@@ -98,13 +98,13 @@ struct Panel : public Object {
 	void fit_inner(Panel* inner);
 	void set_border(uint l, uint r, uint t, uint b);
 
-	inline uint get_lborder() const { return _lborder; }
-	inline uint get_rborder() const { return _rborder; }
-	inline uint get_tborder() const { return _tborder; }
-	inline uint get_bborder() const { return _bborder; }
+	inline uint get_lborder() const {return _lborder;}
+	inline uint get_rborder() const {return _rborder;}
+	inline uint get_tborder() const {return _tborder;}
+	inline uint get_bborder() const {return _bborder;}
 
-	inline int get_inner_w() const { return _w-(_lborder+_rborder); }
-	inline int get_inner_h() const { return _h-(_tborder+_bborder); }
+	inline int get_inner_w() const {return _w-(_lborder+_rborder);}
+	inline int get_inner_h() const {return _h-(_tborder+_bborder);}
 
 	const Panel * get_next_sibling () const {return _next;}
 	const Panel * get_prev_sibling () const {return _prev;}
@@ -114,7 +114,7 @@ struct Panel : public Object {
 	void move_to_top();
 
 	// Drawing, visibility
-	inline bool get_visible() const { return (_flags & pf_visible) ? true : false; }
+	inline bool get_visible() const {return (_flags & pf_visible) ? true : false;}
 	void set_visible(bool on);
 
 	virtual void draw(RenderTarget* dst);
@@ -139,27 +139,27 @@ struct Panel : public Object {
 	virtual bool handle_key(bool down, int code, char c);
 
 	void set_handle_mouse(bool yes);
-	inline bool get_handle_mouse() const { return (_flags & pf_handle_mouse) ? true : false; }
+	inline bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
-	inline bool get_can_focus() const { return (_flags & pf_can_focus) ? true : false; }
-	inline bool has_focus() const { assert(get_can_focus()); return (_parent->_focus == this); }
+	inline bool get_can_focus() const {return (_flags & pf_can_focus) ? true : false;}
+	inline bool has_focus() const {assert(get_can_focus()); return (_parent->_focus == this);}
    void focus();
 
 	void set_think(bool yes);
-	inline bool get_think() const { return (_flags & pf_think) ? true : false; }
+	inline bool get_think() const {return (_flags & pf_think) ? true : false;}
 
 	inline void set_top_on_click(bool on) {
 		if (on) _flags |= pf_top_on_click;
 		else _flags &= ~pf_top_on_click;
 	}
-	inline bool get_top_on_click() const { return (_flags & pf_top_on_click) ? true : false; }
+	inline bool get_top_on_click() const {return (_flags & pf_top_on_click) ? true : false;}
 
 protected:
 	void die();
 
-   bool keyboard_free(void) { return !(_focus); }
+   bool keyboard_free() {return !(_focus);}
 
 	void play_click();
 

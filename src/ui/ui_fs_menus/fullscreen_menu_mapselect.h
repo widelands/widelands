@@ -75,7 +75,7 @@ public:
 	void map_selected  (uint);
 	void changed(bool);
 	void double_clicked(uint);
-	void fill_list(void);
+	void fill_list();
 
 	std::string m_curdir;
 	std::string m_basedir;

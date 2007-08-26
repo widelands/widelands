@@ -36,8 +36,8 @@ This is a helper class, no Editor Tool (might be usable in game too)
 */
 class MultiSelect {
    public:
-      MultiSelect() { m_nr_enabled=0; }
-      ~MultiSelect() { }
+      MultiSelect() {m_nr_enabled=0;}
+      ~MultiSelect() {}
 
       void enable(int n, bool t) {
 		if (static_cast<const int>(m_enabled.size()) < n + 1)
@@ -53,7 +53,7 @@ class MultiSelect {
 		if (static_cast<const int>(m_enabled.size()) < n + 1) return false;
          return m_enabled[n];
 		}
-      inline int get_nr_enabled(void) { return m_nr_enabled; }
+      inline int get_nr_enabled() {return m_nr_enabled;}
 	int get_random_enabled() {
 		const int rand_value = static_cast<const int>
 			(static_cast<const double>(get_nr_enabled())
@@ -61,7 +61,7 @@ class MultiSelect {
 			 rand() / (RAND_MAX + 1.0));
          int i=0;
          int j=rand_value+1;
-         while (j) { if (is_enabled(i)) j--; ++i; }
+         while (j) {if (is_enabled(i)) j--; ++i;}
          return i-1;
 		}
 

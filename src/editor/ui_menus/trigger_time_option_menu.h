@@ -44,7 +44,7 @@ struct Trigger_Time_Option_Menu : public UI::Window {
    private:
 	void clicked_ok();
       void clicked(int);
-      void update(void);
+      void update();
 
       Trigger_Time* m_trigger;
       Editor_Interactive* m_parent;

@@ -31,10 +31,10 @@ class Game_Preload_Data_Packet;
  */
 struct Game_Loader {
 	Game_Loader(FileSystem &, Game* game);
-      ~Game_Loader(void);
+      ~Game_Loader();
 
       int preload_game(Game_Preload_Data_Packet*);
-      int load_game(void);
+      int load_game();
 
    private:
 	FileSystem & m_fs;

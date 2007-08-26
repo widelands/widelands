@@ -35,7 +35,7 @@
 #define CURRENT_PACKET_VERSION 1
 
 
-Widelands_Map_Extradata_Data_Packet::~Widelands_Map_Extradata_Data_Packet(void)
+Widelands_Map_Extradata_Data_Packet::~Widelands_Map_Extradata_Data_Packet()
 {}
 
 

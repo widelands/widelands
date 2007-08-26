@@ -23,7 +23,7 @@
 #include "wexception.h"
 
 
-Network_Buffer::Network_Buffer(void) {
+Network_Buffer::Network_Buffer() {
    m_buffer_real_len = 1000;
    m_buffer_len = 0; // To correct for size entry
    m_buffer = (uchar*) malloc(1000);
@@ -39,7 +39,7 @@ Network_Buffer::~Network_Buffer() {free(m_buffer);}
  * finish this buffer, this basically corrects
  * the size entry
  */
-void Network_Buffer::finish(void) {
+void Network_Buffer::finish() {
    SDLNet_Write16(m_buffer_len-2 , m_buffer);
 }
 
@@ -169,7 +169,7 @@ int Network_Buffer::fill(TCPsocket sock) {
 /*
  * Make the m_buffer bigger
  */
-void Network_Buffer::grow_buffer(void) {
+void Network_Buffer::grow_buffer() {
    m_buffer_real_len += 1000;
    m_buffer = (uchar*) realloc(m_buffer, m_buffer_real_len);
 }

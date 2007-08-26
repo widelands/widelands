@@ -56,16 +56,16 @@ public:
 	Texture(const char & fnametempl, const uint frametime, const SDL_PixelFormat &);
 	~Texture();
 
-	const char* get_texture_picture(void) { return m_texture_picture.c_str(); }
+	const char* get_texture_picture() {return m_texture_picture.c_str();}
 
-	unsigned char *get_pixels () const { return m_pixels; }
-	unsigned char* get_curpixels() const { return m_curframe; }
-	void* get_colormap () const { return m_colormap->get_colormap(); }
+	unsigned char *get_pixels () const {return m_pixels;}
+	unsigned char* get_curpixels() const {return m_curframe;}
+	void* get_colormap () const {return m_colormap->get_colormap();}
 
 	Uint32 get_minimap_color(const char shade);
 
 	void animate(uint time);
-	void reset_was_animated(void) { m_was_animated = false; }
+	void reset_was_animated() {m_was_animated = false;}
 	bool was_animated() const throw () {return m_was_animated;}
 };
 

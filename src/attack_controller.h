@@ -55,7 +55,7 @@ struct AttackController : public BaseImmovable {
       virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
       virtual int  get_size    () const throw () {return SMALL;}
       virtual bool get_passable() const throw () {return false;}
-      virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point){}
+      virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
       virtual void act (Game*, uint);
       virtual void cleanup (Editor_Game_Base*);
       //end inherited
@@ -64,10 +64,10 @@ struct AttackController : public BaseImmovable {
       void soldierDied(Soldier* soldier);
       void soldierWon(Soldier* soldier);
 
-      inline int getAttackingPlayer() { return attackingPlayer; };
-      inline int getDefendingPlayer() { return defendingPlayer; };
-      inline Flag* getFlag() { return flag; };
-      inline Game* getGame() { return game; };
+      inline int getAttackingPlayer() {return attackingPlayer;};
+      inline int getDefendingPlayer() {return defendingPlayer;};
+      inline Flag* getFlag() {return flag;};
+      inline Game* getGame() {return game;};
    private:
       struct BattleSoldier {
          Soldier* soldier;

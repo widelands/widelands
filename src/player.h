@@ -86,9 +86,9 @@ public:
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-		inline int get_type() const { return m_type; }
+		inline int get_type() const {return m_type;}
 	Player_Number get_player_number() const throw () {return m_plnum;}
-		inline const RGBColor* get_playercolor() const { return m_playercolor; }
+		inline const RGBColor* get_playercolor() const {return m_playercolor;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &tribe();}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
@@ -100,7 +100,7 @@ public:
 	FieldCaps get_buildcaps(const FCoords) const;
 
 	// For cheating
-	void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }
+	void set_see_all(bool t) {m_see_all=t; m_view_changed = true;}
 	bool see_all() const throw () {return m_see_all;}
 
 	/// Per-player field information.
@@ -318,7 +318,7 @@ public:
 		return m_fields[i].vision;
 	}
 
-	bool has_view_changed(void) {
+	bool has_view_changed() {
 		bool t = m_view_changed;
 		m_view_changed = false;
 		return t;
@@ -438,7 +438,7 @@ public:
 	void WriteStatistics(FileWrite& fw);
 	void sample_statistics();
 	void ware_produced(uint id);
-	void next_ware_production_period(void);
+	void next_ware_production_period();
 	void gain_immovable(PlayerImmovable*);
 	void lose_immovable(PlayerImmovable*);
 

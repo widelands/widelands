@@ -39,8 +39,8 @@ class Trigger;
  * But it is better this way.
  */
 struct MapTriggerManager {
-      MapTriggerManager(void);
-      ~MapTriggerManager(void);
+      MapTriggerManager();
+      ~MapTriggerManager();
 
       /*
        * Register a new trigger
@@ -50,7 +50,7 @@ struct MapTriggerManager {
       /*
        * Delete unused trigger
        */
-      void delete_unreferenced_triggers(void);
+      void delete_unreferenced_triggers();
 
       /*
        * Get a trigger

@@ -39,7 +39,7 @@ struct Trigger_Null : public Trigger {
 	void Write(Section &) const;
       void Read(Section*, Editor_Game_Base*);
 
-      void set_trigger_manually(bool t) { m_should_toggle=true; m_value=t; }
+      void set_trigger_manually(bool t) {m_should_toggle=true; m_value=t;}
 
 private:
 	bool m_should_toggle;

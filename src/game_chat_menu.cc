@@ -88,7 +88,7 @@ show_as_overlays(this, get_inner_w() - STATEBOX_WIDTH - 5, 250)
 /*
  * think: updates the chat area
  */
-void GameChatMenu::think(void) {
+void GameChatMenu::think() {
 	const std::vector<NetGame::Chat_Message>* msges = m_player.get_chatmsges();
    std::string str;
 

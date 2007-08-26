@@ -54,12 +54,12 @@ public:
 	void set_pagesize(int pagesize);
 	void set_pos(int pos);
 
-	uint get_pagesize() const { return m_pagesize; }
-	uint get_pos() const { return m_pos; }
+	uint get_pagesize() const {return m_pagesize;}
+	uint get_pos() const {return m_pos;}
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 
-   void set_force_draw(bool t) { m_force_draw=t; }
+   void set_force_draw(bool t) {m_force_draw=t;}
 
 private:
 	Area get_area_for_point(int x, int y);

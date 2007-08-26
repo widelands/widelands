@@ -44,15 +44,15 @@ struct Map_Loader {
          S2ML  // S2 Map Loader
 		};
 
-      Map_Loader(const char* filename, Map* map) { m_s=STATE_INIT; m_map=map; m_map->set_filename(filename); }
-      virtual ~Map_Loader() { };
+      Map_Loader(const char* filename, Map* map) {m_s=STATE_INIT; m_map=map; m_map->set_filename(filename);}
+      virtual ~Map_Loader() {};
 
-      virtual int get_type(void) = 0;
+      virtual int get_type() = 0;
       virtual int preload_map(bool as_scenario)=0;
 	virtual void load_world() = 0;
       virtual int load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
 
-      inline Map* get_map() { return m_map; }
+      inline Map* get_map() {return m_map;}
 
    protected:
       enum State {
@@ -61,8 +61,8 @@ struct Map_Loader {
 		STATE_WORLD_LOADED,
          STATE_LOADED
 		};
-      void set_state(State s) { m_s=s; }
-      State get_state(void) { return m_s; }
+      void set_state(State s) {m_s=s;}
+      State get_state() {return m_s;}
       Map* m_map;
 
    private:

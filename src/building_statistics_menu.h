@@ -33,9 +33,9 @@ struct Textarea;
 
 struct Building_Statistics_Menu : public UI::UniqueWindow {
 	Building_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
-      virtual ~Building_Statistics_Menu(void);
+      virtual ~Building_Statistics_Menu();
 
-      void think(void);
+      void think();
       void draw(RenderTarget*);
 
    private:

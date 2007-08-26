@@ -52,10 +52,10 @@ ProgressWindow::~ProgressWindow() {
 
 void ProgressWindow::draw_background(
 		RenderTarget & rt, const uint xres, const uint yres) {
-	
+
 	m_label_center.x = xres / 2;
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
-	
+
 	// Load background graphics
 	Rect wnd_rect(Point(0, 0), xres, yres);
 	const uint pic_tile =
@@ -64,7 +64,7 @@ void ProgressWindow::draw_background(
 		rt.tile(wnd_rect, pic_tile, Point(0, 0));
 		g_gr->update_fullscreen();
 	}
-	
+
 	const uint pic_background =
 		g_gr->get_resized_picture(
 			g_gr->get_picture(PicMod_Menu, m_background.c_str()),
@@ -79,22 +79,22 @@ void ProgressWindow::draw_background(
 		rt.blitrect(pt, pic_background, wnd_rect);
 		g_gr->update_fullscreen();
 	}
-	
+
 	const uint h = g_fh->get_fontheight (UI_FONT_SMALL);
 	m_label_rectangle.x = xres / 4;
 	m_label_rectangle.w = xres / 2;
 	m_label_rectangle.y =
 		m_label_center.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
 	m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
-	
+
 	Rect border_rect = m_label_rectangle;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
-	
+
 	rt.draw_rect(border_rect, PROGRESS_FONT_COLOR_FG);
-	
+
 	// remember last resolution
 	m_xres = xres;
 	m_yres = yres;
@@ -163,7 +163,7 @@ void ProgressWindow::remove_visualization(
 	// remove
 	for (VisualizationArray::iterator it = m_visualizations.begin();
 		 it != m_visualizations.end(); ++it) {
-		
+
 		if ((*it) == instance) {
 			m_visualizations.erase (it, it+1);
 			break;

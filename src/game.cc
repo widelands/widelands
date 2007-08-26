@@ -516,7 +516,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
  * Depending on the current state we advance game logic and stuff,
  * running the cmd queue etc.
  */
-void Game::think(void)
+void Game::think()
 {
 	if (m_netgame!=0)
 	    m_netgame->handle_network ();

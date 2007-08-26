@@ -132,7 +132,7 @@ Interactive_Player::~Interactive_Player
 cleanups
 ===============
 */
-Interactive_Player::~Interactive_Player(void)
+Interactive_Player::~Interactive_Player()
 {
 }
 
@@ -252,7 +252,7 @@ void Interactive_Player::main_menu_btn()
 //
 // Toggles buildhelp rendering in the main MapView
 //
-void Interactive_Player::toggle_buildhelp(void)
+void Interactive_Player::toggle_buildhelp()
 {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
@@ -260,7 +260,7 @@ void Interactive_Player::toggle_buildhelp(void)
 //
 // Shows wares encyclopedia for wares
 //
-void Interactive_Player::open_encyclopedia(void)
+void Interactive_Player::open_encyclopedia()
 {
 	if (m_encyclopedia.window)
 		delete m_encyclopedia.window;

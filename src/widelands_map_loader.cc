@@ -116,7 +116,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    //hosts do world loading while creating the game and the states
    //are not available outside this class to make a conditional load.
    //if You know a better way to fix this, DO IT! -- Alexia Death
-   if (get_state() == STATE_PRELOADED){
+   if (get_state() == STATE_PRELOADED) {
       this->load_world();
 	}
 	assert(get_state() == STATE_WORLD_LOADED);

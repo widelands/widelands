@@ -29,15 +29,15 @@
 struct Game_Server_Protocol_Packet_UserEntered :
 public Game_Server_Protocol_Packet
 {
-      Game_Server_Protocol_Packet_UserEntered(void);
+      Game_Server_Protocol_Packet_UserEntered();
       virtual ~Game_Server_Protocol_Packet_UserEntered();
 
-      virtual ushort get_id(void);
+      virtual ushort get_id();
 
 	virtual void send(Network_Buffer *) {}
 	virtual void recv(Game_Server_Connection*, Network_Buffer *);
 	virtual void write_reply(Network_Buffer *);
-      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) { };
+      virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) {};
 
 private:
       std::string m_name;

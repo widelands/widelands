@@ -51,7 +51,7 @@ class Item_Ware_Descr : public Map_Object_Descr
 				m_name       (ware_name),
 				m_icon       (0)
 				{}
-				
+
 		virtual ~Item_Ware_Descr() {};
 
 		/// \return index to ware's icon inside picture stack

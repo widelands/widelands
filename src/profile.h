@@ -62,7 +62,7 @@ public:
 
 		Value &operator=(const Value &o);
 
-		inline const char *get_name() const { return m_name; }
+		inline const char *get_name() const {return m_name;}
 
 		bool is_used() const;
 		void mark_used();
@@ -94,7 +94,7 @@ public:
 
 	Value *get_val(const char *name);
 	Value *get_next_val(const char *name);
-	uint get_num_values() const { return m_values.size(); }
+	uint get_num_values() const {return m_values.size();}
 
 	const char *get_name() const;
 

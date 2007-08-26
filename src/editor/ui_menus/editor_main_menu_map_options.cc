@@ -79,7 +79,7 @@ Updates all UI::Textareas in the UI::Window to represent currently
 set values
 ==============
 */
-void Main_Menu_Map_Options::update(void) {
+void Main_Menu_Map_Options::update() {
 	const Map & map = m_parent->egbase().map();
 
    char buf[200];

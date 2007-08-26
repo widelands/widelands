@@ -36,7 +36,7 @@ template <typename T, typename ID> struct IDButton;
 struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
       Main_Menu_Save_Map_Make_Directory(UI::Panel*, const char*);
 
-      const char* get_dirname(void) { return m_dirname.c_str(); }
+      const char* get_dirname() {return m_dirname.c_str();}
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
@@ -45,7 +45,7 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
       std::string m_dirname;
       UI::Edit_Box* m_edit;
       UI::IDButton<Main_Menu_Save_Map_Make_Directory, int> * m_ok_button;
-      void edit_changed(void);
+      void edit_changed();
 };
 
 #endif

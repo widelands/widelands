@@ -203,7 +203,7 @@ void Main_Menu_Load_Map::double_clicked(uint) {clicked_ok();}
 /*
  * fill the file list
  */
-void Main_Menu_Load_Map::fill_list(void) {
+void Main_Menu_Load_Map::fill_list() {
    // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
 

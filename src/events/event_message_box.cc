@@ -51,7 +51,7 @@ Event_Message_Box::Event_Message_Box() : Event(_("Message Box")) {
    m_window = 0;
 }
 
-Event_Message_Box::~Event_Message_Box(void) {
+Event_Message_Box::~Event_Message_Box() {
   uint i=0;
    for (i=0; i<m_buttons.size(); i++)
       if (m_buttons[i].trigger) {

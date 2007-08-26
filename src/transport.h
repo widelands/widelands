@@ -80,7 +80,7 @@ public:
 
 	virtual int get_type() const throw ();
 
-	Map_Object* get_location(Editor_Game_Base* g) { return m_location.get(g); }
+	Map_Object* get_location(Editor_Game_Base* g) {return m_location.get(g);}
 	Economy* get_economy() const throw () {return m_economy;}
 	Item_Ware_Descr::Index descr_index() const throw () {return m_descr_index;}
 	__attribute__ ((deprecated)) const Item_Ware_Descr * get_ware_descr() const throw () {assert(m_ware_descr); return m_ware_descr;}
@@ -161,15 +161,15 @@ public:
 
 	virtual Flag *get_base_flag();
 
-	inline const Coords &get_position() const { return m_position; }
+	inline const Coords &get_position() const {return m_position;}
 
 	virtual void set_economy(Economy *e);
 
-	inline Building *get_building() { return m_building; }
+	inline Building *get_building() {return m_building;}
 	void attach_building(Editor_Game_Base *g, Building *building);
 	void detach_building(Editor_Game_Base *g);
 
-	inline Road *get_road(int dir) { return m_roads[dir-1]; }
+	inline Road *get_road(int dir) {return m_roads[dir-1];}
 	void attach_road(int dir, Road *road);
 	void detach_road(int dir);
 
@@ -190,7 +190,7 @@ public:
 
 	void add_flag_job(Game* g, int workerware, std::string programname);
 
-   void conquered_by (Player* who) { assert(who); set_owner(who); }
+   void conquered_by (Player* who) {assert(who); set_owner(who);}
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
@@ -231,7 +231,7 @@ private:
 	Flag                  * mpf_backlink; //  flag where we came from
 	int                     mpf_estimate; //  estimate of cost to destination
 
-	inline int cost() const { return mpf_realcost+mpf_estimate; }
+	inline int cost() const {return mpf_realcost+mpf_estimate;}
 };
 
 /**
@@ -263,7 +263,7 @@ struct Road : public PlayerImmovable {
 
 	static Road* create(Editor_Game_Base *g, int type, Flag* start, Flag* end, const Path &path);
 
-	inline Flag* get_flag(FlagId flag) const { return m_flags[flag]; }
+	inline Flag* get_flag(FlagId flag) const {return m_flags[flag];}
 
 	virtual int  get_type    () const throw ();
 	virtual int  get_size    () const throw ();
@@ -274,8 +274,8 @@ struct Road : public PlayerImmovable {
 	virtual void set_economy(Economy *e);
 
 	int get_cost(FlagId fromflag);
-	inline const Path &get_path() const { return m_path; }
-	inline int get_idle_index() const { return m_idle_index; }
+	inline const Path &get_path() const {return m_path;}
+	inline int get_idle_index() const {return m_idle_index;}
 
 	void presplit(Editor_Game_Base *g, Coords split);
 	void postsplit(Editor_Game_Base *g, Flag *flag);
@@ -332,8 +332,8 @@ struct Route {
 
 	void clear();
 
-	inline int get_totalcost() const { return m_totalcost; }
-	inline int get_nrsteps() const { return m_route.size()-1; }
+	inline int get_totalcost() const {return m_totalcost;}
+	inline int get_nrsteps() const {return m_route.size()-1;}
 	Flag * get_flag
 		(Editor_Game_Base * const, const std::vector<Flag *>::size_type) const;
 
@@ -366,8 +366,8 @@ struct Transfer {
 	Transfer(Game* g, Request* req, Soldier* s);
 	~Transfer();
 
-	Request* get_request() const { return m_request; }
-	bool is_idle() const { return m_idle; }
+	Request* get_request() const {return m_request;}
+	bool is_idle() const {return m_idle;}
 
 	void set_idle(bool idle);
 
@@ -449,8 +449,8 @@ struct SupplyList {
 	void add_supply(Supply* supp);
 	void remove_supply(Supply* supp);
 
-	inline int get_nrsupplies() const { return m_supplies.size(); }
-	inline Supply* get_supply(int idx) const { return m_supplies[idx]; }
+	inline int get_nrsupplies() const {return m_supplies.size();}
+	inline Supply* get_supply(int idx) const {return m_supplies[idx];}
 
 private:
 	std::vector<Supply *> m_supplies;
@@ -484,15 +484,15 @@ struct Request : public Trackable {
 	~Request();
 
 	PlayerImmovable * get_target() const throw () {return m_target;}
-	int get_index() const { return m_index; }
-   int get_type() const { return m_type; }
-	bool is_idle() const { return m_idle; }
-	int get_count() const { return m_count; }
+	int get_index() const {return m_index;}
+   int get_type() const {return m_type;}
+	bool is_idle() const {return m_idle;}
+	int get_count() const {return m_count;}
 	bool is_open() const
 	{return m_idle || m_count > static_cast<const int>(m_transfers.size());}
 	Economy * get_economy() const throw () {return m_economy;}
 	int get_required_time();
-	int get_last_request_time() { return m_last_request_time; }
+	int get_last_request_time() {return m_last_request_time;}
 	int get_priority(int cost);
 
 	Flag * get_target_flag();
@@ -503,7 +503,7 @@ struct Request : public Trackable {
 	void set_required_time(int time);
 	void set_required_interval(int interval);
 
-	void set_last_request_time(int time) { m_last_request_time = time; }
+	void set_last_request_time(int time) {m_last_request_time = time;}
 
 	void start_transfer(Game *g, Supply* supp, int ware);
 
@@ -511,7 +511,7 @@ struct Request : public Trackable {
    // For savegames
    void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
    void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-   Worker* get_transfer_worker(void);
+   Worker* get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
 	void transfer_finish(Game* g, Transfer* t);
@@ -525,11 +525,11 @@ private:
 	void remove_transfer(uint idx);
 	uint find_transfer(Transfer* t);
 
-	bool has_requeriments () { return (m_requeriments != 0); }
+	bool has_requeriments () {return (m_requeriments != 0);}
 public:
-	void set_requeriments (Requeriments* r) { m_requeriments = r; }
+	void set_requeriments (Requeriments* r) {m_requeriments = r;}
 private:
-	Requeriments* get_requeriments () { return m_requeriments;  }
+	Requeriments* get_requeriments () {return m_requeriments;}
 
 	typedef std::vector<Transfer*> TransferList;
 
@@ -567,7 +567,7 @@ struct WaresQueue {
 	WaresQueue(PlayerImmovable* bld);
 	~WaresQueue();
 
-	int get_ware() const { return m_ware; }
+	int get_ware() const {return m_ware;}
 	uint get_size            () const throw () {return m_size;}
 	uint get_filled          () const throw () {return m_filled;}
 	uint get_consume_interval() const throw () {return m_consume_interval;}
@@ -618,8 +618,8 @@ struct Economy {
 	~Economy();
 
 	Player & owner() const throw () {return *m_owner;}
-	inline Player *get_owner() const { return m_owner; }
-	uint get_serial() const { return m_trackserial; }
+	inline Player *get_owner() const {return m_owner;}
+	uint get_serial() const {return m_trackserial;}
 
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
@@ -627,7 +627,7 @@ struct Economy {
 	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff = -1);
 	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 
-	inline int get_nrflags() const { return m_flags.size(); }
+	inline int get_nrflags() const {return m_flags.size();}
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
 
@@ -639,7 +639,7 @@ struct Economy {
 
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
-	uint get_nr_warehouses() const { return m_warehouses.size(); }
+	uint get_nr_warehouses() const {return m_warehouses.size();}
 
 	void add_request(Request* req);
 	bool have_request(Request* req);
@@ -664,15 +664,15 @@ struct Economy {
 	}
 
    // Informations over this economy
-   int stock_ware(int id) { return m_wares.stock(id); }
-   int stock_worker(int id) { return m_workers.stock(id); }
-   const WareList& get_wares(void) { return m_wares; }
-   const WareList& get_workers(void) { return m_workers; }
+   int stock_ware(int id) {return m_wares.stock(id);}
+   int stock_worker(int id) {return m_workers.stock(id);}
+   const WareList& get_wares() {return m_wares;}
+   const WareList& get_workers() {return m_workers;}
 
    // Called by cmd queue
    void balance_requestsupply();
 
-   void rebalance_supply() { start_request_timer(); }
+   void rebalance_supply() {start_request_timer();}
 
 private:
 	void do_remove_flag(Flag *f);
@@ -711,7 +711,7 @@ private:
 };
 
 struct Cmd_Call_Economy_Balance : public BaseCommand {
-      Cmd_Call_Economy_Balance (void) : BaseCommand (0) { } // For load and save
+      Cmd_Call_Economy_Balance () : BaseCommand (0) {} // For load and save
 
       Cmd_Call_Economy_Balance (int starttime, int player, Economy* economy) :
          BaseCommand(starttime)
@@ -723,7 +723,7 @@ struct Cmd_Call_Economy_Balance : public BaseCommand {
 
       void execute (Game* g);
 
-      virtual int get_id(void) { return QUEUE_CMD_CALL_ECONOMY_BALANCE; }
+      virtual int get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
       virtual void Write(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);

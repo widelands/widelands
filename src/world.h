@@ -39,8 +39,8 @@ struct World_Descr_Header {
 
 struct Resource_Descr {
 	typedef Uint8 Index;
-	Resource_Descr() { }
-	~Resource_Descr() { }
+	Resource_Descr() {}
+	~Resource_Descr() {}
 
 	void parse(Section* s, std::string);
 
@@ -77,7 +77,7 @@ struct Terrain_Descr {
 
 	typedef Uint8 Index;
       Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>*);
-      ~Terrain_Descr(void);
+      ~Terrain_Descr();
 
 		void load_graphics();
 
@@ -150,18 +150,18 @@ struct World {
 	{assert(i < ters.get_nitems()); return *ters.get(i);}
 	const Terrain_Descr * get_ter(const char * const name) const
 	{const int i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
-      inline int get_nr_terrains(void) const { return ters.get_nitems(); }
-      inline int get_bob(const char* l) { return bobs.get_index(l); }
-      inline Bob::Descr* get_bob_descr(ushort index) const{ return bobs.get(index); }
-      inline int get_nr_bobs(void) const{ return bobs.get_nitems(); }
-      inline int get_immovable_index(const char* l)const { return immovables.get_index(l); }
-      inline int get_nr_immovables(void) const{ return immovables.get_nitems(); }
-		inline Immovable_Descr* get_immovable_descr(int index) const{ return immovables.get(index); }
+      inline int get_nr_terrains() const {return ters.get_nitems();}
+      inline int get_bob(const char* l) {return bobs.get_index(l);}
+      inline Bob::Descr* get_bob_descr(ushort index) const {return bobs.get(index);}
+      inline int get_nr_bobs() const {return bobs.get_nitems();}
+      inline int get_immovable_index(const char* l)const {return immovables.get_index(l);}
+      inline int get_nr_immovables() const {return immovables.get_nitems();}
+		inline Immovable_Descr* get_immovable_descr(int index) const {return immovables.get(index);}
 
 	int get_resource(const char * const name) const {return m_resources.get_index(name);}
 	Resource_Descr * get_resource(const Resource_Descr::Index res) const throw ()
-		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
-      inline int get_nr_resources(void) const{ return m_resources.get_nitems(); }
+		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
+      inline int get_nr_resources() const {return m_resources.get_nitems();}
 
    private:
 	std::string m_basedir; //  base directory, where the main conf file resides

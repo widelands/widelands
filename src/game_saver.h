@@ -36,9 +36,9 @@ class FileSystem;
 
 struct Game_Saver {
 	Game_Saver(FileSystem &, Game* game);
-      ~Game_Saver(void);
+      ~Game_Saver();
 
-      void save(void) throw(_wexception);
+      void save() throw(_wexception);
 
    private:
 	FileSystem & m_fs;

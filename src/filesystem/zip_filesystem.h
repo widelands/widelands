@@ -59,9 +59,9 @@ public:
 	virtual const std::string getBasename() {return m_zipfilename;};
 
 private:
-	void m_OpenUnzip(void);
-	void m_OpenZip(void);
-	void m_Close(void);
+	void m_OpenUnzip();
+	void m_OpenZip();
+	void m_Close();
 
 private:
 	enum State {

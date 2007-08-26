@@ -37,7 +37,7 @@ Game_Server_Protocol_Packet_Hello::~Game_Server_Protocol_Packet_Hello() {}
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_Hello::get_id(void) {
+ushort Game_Server_Protocol_Packet_Hello::get_id() {
    return GGSPP_HELLO;
 }
 

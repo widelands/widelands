@@ -33,7 +33,7 @@
 /*
  * Destructor
  */
-Widelands_Map_Resources_Data_Packet::~Widelands_Map_Resources_Data_Packet(void) {
+Widelands_Map_Resources_Data_Packet::~Widelands_Map_Resources_Data_Packet() {
 }
 
 /*

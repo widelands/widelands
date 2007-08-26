@@ -44,7 +44,7 @@ struct Event {
 
 	Event(const std::string & Name = std::string()) : m_state(INIT), m_name(Name)
 	{}
-      virtual ~Event(void) { };
+      virtual ~Event() {};
 
       // virtual functions, implemented by the real events
       virtual State run(Game*)       = 0;
@@ -67,7 +67,7 @@ struct Event {
 	inline const EventReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 
-      inline State get_state(void) { return m_state; }
+      inline State get_state() {return m_state;}
 
 protected:
       State        m_state;

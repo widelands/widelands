@@ -29,7 +29,7 @@
 /*
  * Destructor
  */
-Game_Map_Data_Packet::~Game_Map_Data_Packet(void) {
+Game_Map_Data_Packet::~Game_Map_Data_Packet() {
       delete m_wms;
       delete m_wml;
 }

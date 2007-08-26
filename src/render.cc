@@ -50,7 +50,7 @@ Surface::Surface(const Surface& surf) {
 /*
  * Updating the whole Surface
  */
-void Surface::update(void) {
+void Surface::update() {
    SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 }
 
@@ -68,7 +68,7 @@ void Surface::save_bmp(const char & fname) const {
  * by direct pixel access. For example for road
  * textures
  */
-void Surface::force_disable_alpha(void) {
+void Surface::force_disable_alpha() {
    SDL_Surface* newsur = SDL_DisplayFormat(m_surface);
    SDL_FreeSurface(m_surface);
    m_surface = newsur;
@@ -117,7 +117,7 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 	assert(rc.h >= 1);
 	const ulong color = clr.map(format());
 
-   SDL_Rect r = { rc.x, rc.y, rc.w, rc.h };
+   SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
    SDL_FillRect(m_surface, &r, color);
 }
 
@@ -172,8 +172,8 @@ Blit this given source bitmap to this bitmap.
 */
 void Surface::blit(Point dst, Surface* src, Rect srcrc)
 {
-   SDL_Rect srcrect = { srcrc.x, srcrc.y, srcrc.w, srcrc.h };
-   SDL_Rect dstrect = { dst.x, dst.y, 0, 0 };
+   SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
+   SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
    SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
 }
@@ -400,7 +400,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
          // is the frame actually there?
          if (!g_fs->FileExists(fname)) {
-            if (i==(nextensions-1)) { alldone=true; break; }
+            if (i==(nextensions-1)) {alldone=true; break;}
             continue;
 			}
 

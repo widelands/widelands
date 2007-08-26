@@ -40,7 +40,7 @@ public:
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game (Game* g, std::string filename, std::string *error = NULL);
 
-	static std::string get_base_dir() { return "ssave"; }
+	static std::string get_base_dir() {return "ssave";}
 };
 
 #endif

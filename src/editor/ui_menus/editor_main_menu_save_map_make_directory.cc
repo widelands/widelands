@@ -84,7 +84,7 @@ bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
 /*
  * Editbox changed
  */
-void Main_Menu_Save_Map_Make_Directory::edit_changed(void) {
+void Main_Menu_Save_Map_Make_Directory::edit_changed() {
    std::string text=m_edit->get_text();
    if (text.size()) {
       m_ok_button->set_enabled(true);

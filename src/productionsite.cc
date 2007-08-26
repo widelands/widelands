@@ -131,7 +131,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 			if (endp && *endp)
 				throw wexception("Bad amount in worker line: %s", amounts[1].c_str());
 		}
-      Worker_Info m= { amounts[0], amount };
+      Worker_Info m= {amounts[0], amount};
       m_workers.push_back(m);
 	}
 

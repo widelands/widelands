@@ -205,7 +205,7 @@ void Editor_Interactive::set_sel_pos(const Node_and_Triangle<> sel) {
 }
 
 
-void Editor_Interactive::toggle_buildhelp(void)
+void Editor_Interactive::toggle_buildhelp()
 {egbase().map().overlay_manager().toggle_buildhelp();}
 
 

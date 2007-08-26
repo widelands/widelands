@@ -377,7 +377,7 @@ void Trigger_Building_Option_Menu::clicked(int i) {
 /*
  * update function: update all UI elements
  */
-void Trigger_Building_Option_Menu::update(void) {
+void Trigger_Building_Option_Menu::update() {
 	if (m_player_area.x < 0) m_player_area.x = 0;
 	if (m_player_area.y < 0) m_player_area.y = 0;
 	const Map & map = m_parent->egbase().map();

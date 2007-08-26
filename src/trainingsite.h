@@ -98,13 +98,13 @@ class TrainingSite:public ProductionSite {
 	virtual void cleanup(Editor_Game_Base * g);
 	virtual void act(Game * g, uint data);
 
-	inline bool get_build_heros(void) {
+	inline bool get_build_heros() {
 		return m_build_heros;
 	}
 	inline void set_build_heros(bool b_heros) {
 		m_build_heros = b_heros;
 	}
-	inline void switch_heros(void) {
+	inline void switch_heros() {
 		m_build_heros = !m_build_heros;
 		molog("BUILD_HEROS: %s", m_build_heros ? "TRUE" : "FALSE");
 	}

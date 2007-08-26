@@ -105,7 +105,7 @@ struct Vertex:public Point {
 // it was, but i'll try to find other opts first
 struct Vector {
 	Vector() : x(0), y(0), z(0) {}
-	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z){}
+	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z) {}
 
 	void normalize() {
 		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));

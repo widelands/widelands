@@ -42,10 +42,10 @@ struct Statebox : public Panel {
 
 	void set_enabled(bool enabled);
 
-	inline bool get_state() const { return m_state; }
+	inline bool get_state() const {return m_state;}
 	void set_state(bool on);
 
-   inline void set_id(int n) { m_id=n; }
+   inline void set_id(int n) {m_id=n;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
@@ -79,7 +79,7 @@ private:
 */
 class Checkbox : public Statebox {
 public:
-	Checkbox(Panel *parent, int x, int y, int picid=0) : Statebox(parent, x, y, picid) { }
+	Checkbox(Panel *parent, int x, int y, int picid=0) : Statebox(parent, x, y, picid) {}
 
 private:
 	void clicked();

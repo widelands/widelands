@@ -88,13 +88,13 @@ public:
 	void set_player_number(uint plrn);
 
 	// For load
-	virtual void cleanup_for_load(void);
+	virtual void cleanup_for_load();
 	void postload();
 
 	// Chat messages
-	bool show_chat_overlay(void) { return m_do_chat_overlays; }
-	void set_show_chat_overlay(bool t) { m_do_chat_overlays = t; }
-	const std::vector< NetGame::Chat_Message >* get_chatmsges(void) {
+	bool show_chat_overlay() {return m_do_chat_overlays;}
+	void set_show_chat_overlay(bool t) {m_do_chat_overlays = t;}
+	const std::vector< NetGame::Chat_Message >* get_chatmsges() {
 		return &m_chatmsges;
 	}
 

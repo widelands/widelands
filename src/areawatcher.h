@@ -34,7 +34,7 @@ struct AreaWatcher_Descr;
  * an area to a player for a limited time. When act is called, the area watcher
  * is destroyed. Use schedule_act to determine the area watcher's lifetime.
  */
-struct AreaWatcher : public Map_Object, private Player_Area<>{
+struct AreaWatcher : public Map_Object, private Player_Area<> {
 	friend struct Player;
 	friend struct Widelands_Map_Players_AreaWatchers_Data_Packet;
 	AreaWatcher(const Player_Area<>);

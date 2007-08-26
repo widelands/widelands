@@ -51,8 +51,8 @@ struct Critter_BobProgram : public BobProgramBase {
 	Critter_BobProgram(const std::string & name) : m_name(name) {}
 	virtual ~Critter_BobProgram() {}
 
-	std::string get_name() const { return m_name; }
-	int get_size() const { return m_actions.size(); }
+	std::string get_name() const {return m_name;}
+	int get_size() const {return m_actions.size();}
 	const Critter_BobAction* get_action(int idx) const {
 		assert(idx >= 0);
 		assert(static_cast<const uint>(idx) < m_actions.size());

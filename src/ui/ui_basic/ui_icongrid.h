@@ -53,14 +53,14 @@ struct Icon_Grid : public Panel {
 	Signal1<int> mouseout;
 	Signal1<int> mousein;
 
-	bool is_persistant() const { return m_flags & Grid_Persistant; }
-	uint get_orientation() const { return m_flags & Grid_Orientation_Mask; }
+	bool is_persistant() const {return m_flags & Grid_Persistant;}
+	uint get_orientation() const {return m_flags & Grid_Orientation_Mask;}
 
 	int add(uint picid, void* data, std::string descr = std::string());
 	void* get_data(int idx);
 
 	void set_selection(int idx);
-	int get_selection() const { return m_selected; }
+	int get_selection() const {return m_selected;}
 
 	void set_selectbox_color(RGBColor clr);
 

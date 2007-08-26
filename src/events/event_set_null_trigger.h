@@ -51,8 +51,8 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
             reference_trigger(trig);
          m_trigger=trig;
 		}
-      inline Trigger_Null* get_trigger(void) { return m_trigger; }
-      inline void set_setto(bool t) { m_setto = t; }
+      inline Trigger_Null* get_trigger() {return m_trigger;}
+      inline void set_setto(bool t) {m_setto = t;}
 	bool get_setto() const {return m_setto;}
 
       // For Trigger referencer

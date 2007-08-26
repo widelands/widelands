@@ -193,7 +193,7 @@ Building_Statistics_Menu::~Building_Statistics_Menu()
  *
  * Update this statistic
  */
-void Building_Statistics_Menu::think(void) {
+void Building_Statistics_Menu::think() {
    int gs = m_parent->get_game()->get_speed();
 
    if (gs==0) gs = 1;
@@ -343,7 +343,7 @@ void Building_Statistics_Menu::table_changed(uint) {update();}
 /*
  * Update table
  */
-void Building_Statistics_Menu::update(void) {
+void Building_Statistics_Menu::update() {
    m_owned->set_text("");
    m_build->set_text("");
    m_progbar->set_state(0);

@@ -76,7 +76,7 @@ Building_Descr::~Building_Descr
 Cleanup
 ===============
 */
-Building_Descr::~Building_Descr(void)
+Building_Descr::~Building_Descr()
 {
       free(m_buildicon_fname);
    for (uint i=0; i<m_enhances_to.size(); i++)

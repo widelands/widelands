@@ -73,7 +73,7 @@ m_parent(parent)
 /*
  * cleanup
  */
-Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu(void) {
+Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu() {
 }
 
 /*

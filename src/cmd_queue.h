@@ -67,14 +67,14 @@ public:
 
 	virtual void execute (Game*)=0;
 
-	int get_duetime() const { return duetime; }
-	void set_duetime(int t) { duetime=t; }
+	int get_duetime() const {return duetime;}
+	void set_duetime(int t) {duetime=t;}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*)=0;
 	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)=0;
 
-	virtual int get_id(void) = 0; // Get this command id
+	virtual int get_id() = 0; // Get this command id
 
 	// Write commands for BaseCommand. Must be called from upper classes
 	void BaseCmdWrite(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
@@ -99,12 +99,12 @@ class Cmd_Queue {
 
 public:
 	Cmd_Queue(Game *g);
-	~Cmd_Queue(void);
+	~Cmd_Queue();
 
 	void enqueue (BaseCommand*);
 	int run_queue (int interval, int* game_time_var);
 
-	void flush(void); // delete all commands in the queue now
+	void flush(); // delete all commands in the queue now
 
 private:
 	Game *                       m_game;

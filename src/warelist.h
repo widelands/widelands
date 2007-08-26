@@ -36,7 +36,7 @@ class WareList
 		void clear() {m_wares.clear();};
 
 		/// \return Highest possible ware id
-		const int get_nrwareids() const {return m_wares.size();} 
+		const int get_nrwareids() const {return m_wares.size();}
 
 		void add(int id, int count = 1);
 		void add(const WareList &wl);

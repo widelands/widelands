@@ -68,7 +68,7 @@ class Worker_Descr : public Bob::Descr
 		const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
 		const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
 		const std::string & descname() const throw () {return m_descname;}
-		inline std::string get_helptext() const { return m_helptext; }
+		inline std::string get_helptext() const {return m_helptext;}
 
 		uint get_menu_pic() const throw () {return m_menu_pic;}
 		const DirAnimations & get_walk_anims() const throw ()
@@ -78,7 +78,7 @@ class Worker_Descr : public Bob::Descr
 				{return carries_ware ? m_walkload_anims : m_walk_anims;}
 		const WorkerProgram* get_program(std::string programname) const;
 
-		virtual Worker_Type get_worker_type(void) const {return NORMAL;}
+		virtual Worker_Type get_worker_type() const {return NORMAL;}
 
 		// For leveling
 		int get_max_exp() const throw () {return m_max_experience;}

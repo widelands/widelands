@@ -41,10 +41,10 @@ class CheckStepRoadAI : public CheckStep {
 public:
 	CheckStepRoadAI(Player* pl, uchar mc, bool oe)
 		: player(pl), movecaps(mc), openend(oe)
-	{ }
+	{}
 
 	void set_openend (bool oe)
-	{ openend=oe; }
+	{openend=oe;}
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
@@ -973,18 +973,18 @@ struct NearFlag {
 	long   distance;
 
     NearFlag (Flag* f, long c, long d)
-    { flag=f; cost=c; distance=d; }
+    {flag=f; cost=c; distance=d;}
 
     bool operator< (const NearFlag& f) const
-    { return cost>f.cost; }
+    {return cost>f.cost;}
 
     bool operator== (const Flag* f) const
-    { return flag==f; }
+    {return flag==f;}
 };
 
 struct CompareDistance {
     bool operator() (const NearFlag& a, const NearFlag& b) const
-    { return a.distance < b.distance; }
+    {return a.distance < b.distance;}
 };
 
 bool Computer_Player::improve_roads (Flag* flag)

@@ -44,8 +44,8 @@ struct Trigger_Building : public Trigger {
       void Read(Section*, Editor_Game_Base*);
 
 	const char* get_building() const {return m_building.c_str();}
-      void set_building(const char* b) { m_building=b; }
-      void set_building_count(int n) { m_count=n; }
+      void set_building(const char* b) {m_building=b;}
+      void set_building_count(int n) {m_count=n;}
 	int get_building_count() const {return m_count;}
 
 private:

@@ -59,7 +59,7 @@ class Critter_Bob : public Bob {
 
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
-	virtual ~Critter_Bob(void);
+	virtual ~Critter_Bob();
 
 	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
 	uint get_movecaps() const throw ();

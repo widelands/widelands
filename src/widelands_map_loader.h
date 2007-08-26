@@ -30,15 +30,15 @@ class Widelands_Map_Map_Object_Loader;
 /// Takes ownership of the filesystem that is passed to it.
 struct Widelands_Map_Loader : public Map_Loader {
 	Widelands_Map_Loader(FileSystem &, Map*);
-      virtual ~Widelands_Map_Loader(void);
+      virtual ~Widelands_Map_Loader();
 
-      virtual int get_type(void) { return Map_Loader::WLML; }
+      virtual int get_type() {return Map_Loader::WLML;}
 
       virtual int preload_map(bool);
 	void load_world();
       virtual int load_map_complete(Editor_Game_Base*, bool);
 
-      inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }
+      inline Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 
       static bool is_widelands_map(std::string filename) {
          if (!strcasecmp(&filename.c_str()[filename.size()-4], WLMF_SUFFIX))
