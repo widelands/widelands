@@ -398,29 +398,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (imm && imm->get_type() == Map_Object::ROAD)
 				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad, _("Destroy a road"));
 		}
-	}
-      // There goes actions that can be done to non-owner fields ;)
-   else
-   {
-      add_buttons_attack (); //FIXME disabled until attack works
-/*      BaseImmovable *imm = m_map->get_immovable(m_field);
-      // The box with road-building buttons
-      buildbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
-
-      if (imm && imm->get_type() == Map_Object::FLAG)
-      {
-         //Add flag actions
-         Flag *flag = (Flag*)imm;
-
-         Building *building = flag->get_building();
-         if (building &&
-               dynamic_cast<const Game * const>(m_iabase->get_egbase()) and
-               ((building->get_building_type() == Building::MILITARYSITE) ||
-                (building->get_building_type() == Building::WAREHOUSE))
-            )
-            add_button(buildbox, pic_attack, &FieldActionWindow::act_attack);
-      }*/
-   }
+	} else add_buttons_attack ();
 
 	// Watch actions, only when game (no use in editor)
    // same for statistics. census is ok
