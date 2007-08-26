@@ -69,7 +69,7 @@ const int ZipFilesystem::FindFiles
  pattern
 #endif
  ,
- filenameset_t * results, uint depth)
+ filenameset_t * results, uint)
 {
    m_OpenUnzip();
 
@@ -410,7 +410,7 @@ void ZipFilesystem::m_OpenUnzip() {
 }
 
 void ZipFilesystem::Rename
-(const std::string & old_name, const std::string & new_name)
+(const std::string &, const std::string &)
 {
 	assert (false and "rename inside zip FS is not implemented yet");
 }
