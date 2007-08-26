@@ -186,11 +186,11 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
 			FileSystem::FS_StripExtension(fname);
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
          free(fname);
-      } catch(_wexception& ) {
+		} catch(_wexception& ) {
          // we simply skip illegal entries
-      }
+		}
          delete fs;
-   }
+	}
 
 	if (m_ls->size()) m_ls->select(0);
 }
@@ -223,7 +223,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 
       // Delete this
       g_fs->Unlink( complete_filename );
-   }
+	}
 
    std::string error;
    if (!savehandler->save_game(m_parent->get_game(), complete_filename, &error)) {
@@ -232,7 +232,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Save Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
-   }
+	}
 
    return true;
 }

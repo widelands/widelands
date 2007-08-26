@@ -57,10 +57,10 @@ throw (_wexception)
    FileRead fr;
    try {
       fr.Open( fs, "binary/flag_data" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
 
    // First packet version
    int packet_version=fr.Unsigned16();
@@ -85,7 +85,7 @@ throw (_wexception)
          if(building) {
             assert(ol->is_object_known(building));
             flag->m_building=static_cast<Building*>(ol->get_object_by_file_index(building));
-         } else
+			} else
             flag->m_building=0;
 
 
@@ -107,17 +107,17 @@ throw (_wexception)
             if(nextstep) {
                assert(ol->is_object_known(nextstep));
                flag->m_items[i].nextstep=static_cast<PlayerImmovable*>(ol->get_object_by_file_index(nextstep));
-            } else {
+				} else {
                flag->m_items[i].nextstep=0;
-            }
-         }
+				}
+			}
 
          // always call
          uint always_call=fr.Unsigned32();
          if(always_call) {
             assert(ol->is_object_known(always_call));
             flag->m_always_call_for_flag=static_cast<Flag*>(ol->get_object_by_file_index(always_call));
-         } else
+			} else
             flag->m_always_call_for_flag=0;
 
          // Workers waiting
@@ -127,7 +127,7 @@ throw (_wexception)
             uint id=fr.Unsigned32();
             assert(ol->is_object_known(id));
             flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
-         }
+			}
 
          // Flag jobs
          uint nr_jobs=fr.Unsigned16();
@@ -141,10 +141,10 @@ throw (_wexception)
                f.request = new Request(flag, 1,
 	                        &Flag::flag_job_request_callback, flag, Request::WORKER);
                f.request->Read(&fr, egbase, ol);
-            }
+				}
             f.program=fr.CString();
             flag->m_flag_jobs.push_back(f);
-         }
+			}
 
          // Path finding variables are not saved
 //
@@ -160,12 +160,12 @@ throw (_wexception)
 //         flag->mpf_estimate=fr.Signed32();
 
          ol->mark_object_as_loaded(flag);
-      }
+		}
 
 
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown version %i in Widelands_Map_Flagdata_Data_Packet!\n", packet_version);
 
    assert( 0 );
@@ -216,9 +216,9 @@ throw (_wexception)
             if(flag->m_building) {
                assert(os->is_object_known(flag->m_building));
                fw.Unsigned32(os->get_object_file_index(flag->m_building));
-            } else {
+				} else {
                fw.Unsigned32(0);
-            }
+				}
 
             // Roads are not saved, they are set on load
 
@@ -241,15 +241,15 @@ throw (_wexception)
                   fw.Unsigned32(os->get_object_file_index(flag->m_items[i].nextstep));
                else
                   fw.Unsigned32(0);
-            }
+				}
 
             // always call
             if(flag->m_always_call_for_flag) {
                assert(os->is_object_known(flag->m_always_call_for_flag));
                fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
-            } else {
+				} else {
                fw.Unsigned32(0);
-            }
+				}
 
             // Worker waiting for capacity
             fw.Unsigned16(flag->m_capacity_wait.size());
@@ -257,7 +257,7 @@ throw (_wexception)
                Map_Object* obj=flag->m_capacity_wait[i].get(egbase);
                assert(os->is_object_known(obj));
                fw.Unsigned32(os->get_object_file_index(obj));
-            }
+				}
 
             // Flag jobs
             fw.Unsigned16(flag->m_flag_jobs.size());
@@ -266,11 +266,11 @@ throw (_wexception)
                if(i->request) {
                   fw.Unsigned8(1);
                   i->request->Write(&fw,egbase,os);
-               } else fw.Unsigned8(0);
+					} else fw.Unsigned8(0);
 
 
                fw.CString(i->program.c_str());
-            }
+				}
 
             os->mark_object_as_saved(flag);
 
@@ -284,9 +284,9 @@ throw (_wexception)
             //} else
             //   fw.Unsigned32(0);
             //fw.Signed32(flag->mpf_estimate);
-         }
-      }
-   }
+			}
+		}
+	}
 
    fw.Unsigned32(0xffffffff); // End of flags
 

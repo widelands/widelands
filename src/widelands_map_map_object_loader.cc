@@ -76,6 +76,6 @@ int Widelands_Map_Map_Object_Loader::get_nr_unloaded_objects(void) {
    while(i!=m_loaded_obj.end()) {
       if(!i->second) retval++;
       ++i;
-   }
+	}
    return retval;
 }

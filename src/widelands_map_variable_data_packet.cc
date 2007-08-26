@@ -45,10 +45,10 @@ throw (_wexception)
    Profile prof;
    try {
       prof.read( "variable", 0, fs );
-   } catch( ... ) {
+	} catch( ... ) {
       // might not be there
       return;
-   }
+	}
    MapVariableManager & mvm = egbase->get_map()->get_mvm();
 
    Section* s = prof.get_section( "global" );
@@ -65,18 +65,18 @@ throw (_wexception)
             v->set_name( s->get_name() );
             v->set_value( s->get_safe_int("value"));
             mvm.register_new_variable(v);
-         } else if( type == "string" ) {
+			} else if( type == "string" ) {
             String_MapVariable* v = new String_MapVariable( s->get_safe_bool( "delete_protected" ) );
             v->set_name( s->get_name() );
             v->set_value( s->get_safe_string("value") );
             mvm.register_new_variable(v);
-         } else
+			} else
             throw wexception("Unknown Map Variable type %s\n", type.c_str());
 
-      }
+		}
 
       return;
-   }
+	}
    assert(0); // never here
 }
 
@@ -118,8 +118,8 @@ throw (_wexception)
 				("Unknown Variable type in Widelands_Map_Variable_Data_Packet: "
 				 "%i\n",
 				 v.get_type());
-      }
-   }
+		}
+	}
 
    prof.write("variable", false, fs );
 }

@@ -61,7 +61,7 @@ void Event_Move_View::Read(Section * s, Editor_Game_Base *) {
 			:
 			s->get_safe_Coords("point");
       return;
-   }
+	}
    throw wexception("Move View Event with unknown/unhandled version %i in map!\n", version);
 }
 

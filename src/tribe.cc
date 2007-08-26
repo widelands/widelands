@@ -162,7 +162,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
          std::string valuename=value->get_name();
          m_startwares[valuename]=value->get_int();
-      }
+		}
 
       // default workers
       s = prof.get_safe_section("startworkers");
@@ -173,7 +173,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
          std::string valuename=value->get_name();
          m_startworkers[valuename]=value->get_int();
-      }
+		}
 
       // default soldiers
       s = prof.get_safe_section("startsoldiers");
@@ -181,11 +181,11 @@ void Tribe_Descr::parse_root_conf(const char *directory)
          // NOTE: no check here, since we do not know about max levels and so on
          std::string soldier=value->get_name();
          m_startsoldiers[soldier]=value->get_int();
-      }
-   }
+		}
+	}
    catch(std::exception &e) {
       throw wexception("%s: %s", fname, e.what());
-   }
+	}
 }
 
 
@@ -489,9 +489,9 @@ void Tribe_Descr::load_warehouse_with_start_wares
 					 (game, wh.get_owner(), &wh, wh.get_position()));
             soldier.set_level(hplvl,attacklvl,defenselvl,evadelvl);
 				wh.incorporate_worker(game, &soldier);
-         }
+			}
       //TODO: What to do in editor
-   }
+	}
 	}
 }
 
@@ -519,7 +519,7 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
    for(filenameset_t::iterator pname = m_tribes.begin(); pname != m_tribes.end(); pname++) {
 		const std::string name = pname->substr(7);
 		if (Tribe_Descr::exists_tribe(name)) target.push_back(name);
-   }
+	}
 }
 
 /*
@@ -537,7 +537,7 @@ uint Tribe_Descr::get_resource_indicator
       if(idx==-1)
 	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", name().c_str());
       return idx;
-   }
+	}
 
    char buffer[256];
 
@@ -549,7 +549,7 @@ uint Tribe_Descr::get_resource_indicator
          break;
       ++i;
       ++num_indicators;
-   }
+	}
 
 	if (not num_indicators) throw wexception
 		("Tribe %s doesn't declar a resource indicator for resource %s!\n",

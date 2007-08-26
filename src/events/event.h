@@ -40,7 +40,7 @@ struct Event {
          INIT,
          RUNNING,
          DONE
-      };
+		};
 
 	Event(const std::string & Name = std::string()) : m_state(INIT), m_name(Name)
 	{}

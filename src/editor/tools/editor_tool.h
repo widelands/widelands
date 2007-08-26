@@ -48,11 +48,11 @@ struct Editor_Tool {
 	{
 		return (i == First ? *this : i == Second ? m_second : m_third)
 			.handle_click_impl(map, center, parent);
-      }
+		}
 	const char * get_sel(const Tool_Index i) {
 		return
 			(i == First ? *this : i == Second ? m_second : m_third).get_sel_impl();
-      }
+		}
 
 	virtual int handle_click_impl
 		(Map &, const Node_and_Triangle<>, Editor_Interactive & parent) = 0;

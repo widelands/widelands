@@ -62,7 +62,7 @@ private:
    struct Editor_Pic {
       std::string    picname;
       int            upperlimit;
-   };
+	};
 
    bool                    m_is_detectable;
    int                     m_max_amount;
@@ -96,7 +96,7 @@ struct Terrain_Descr {
          for(i=0; i<m_nr_valid_resources; i++)
             if(m_valid_resources[i]==res) return true;
          return false;
-      }
+		}
 	char get_default_resources() const
 		throw ()
 	{return m_default_resources;}
@@ -126,7 +126,7 @@ struct World {
       enum {
          OK = 0,
          ERR_WRONGVERSION
-      };
+		};
 
       World(const std::string name);
 

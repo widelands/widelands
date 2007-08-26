@@ -154,10 +154,10 @@ void Main_Menu_Load_Map::clicked_ok() {
          m_ls->clear();
          m_mapfiles.clear();
          fill_list();
-      } else {
+		} else {
          load_map(filename);
          die();
-      }
+		}
 }
 
 /*
@@ -185,14 +185,14 @@ void Main_Menu_Load_Map::selected(uint) {
 
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
       m_size->set_text(buf);
-   } else {
+	} else {
       m_name->set_text("");
       m_author->set_text("");
       m_descr->set_text("");
       m_world->set_text("");
       m_nrplayers->set_text("");
       m_size->set_text("");
-   }
+	}
 }
 
 /*
@@ -215,7 +215,7 @@ void Main_Menu_Load_Map::fill_list(void) {
 			("<parent>",
 			 m_parentdir.c_str(),
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
-   }
+	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
 	for
@@ -234,7 +234,7 @@ void Main_Menu_Load_Map::fill_list(void) {
 			(FileSystem::FS_Filename(name),
 			 name,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
-   }
+	}
 
 	Map map;
 
@@ -254,17 +254,17 @@ void Main_Menu_Load_Map::fill_list(void) {
          switch(m_ml->get_type()) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
-         }
+			}
 			m_ls->add
 				(FileSystem::FS_Filename(name),
 				 name,
 				 g_gr->get_picture(PicMod_Game, pic.c_str()));
-      } catch(_wexception& ) {
+		} catch(_wexception& ) {
          // we simply skip illegal entries
-      }
+		}
       delete m_ml;
 
-   }
+	}
 
 	if(m_ls->size()) m_ls->select(0);
 }
@@ -300,7 +300,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          UI::Modal_Message_Box mbox
             (m_parent, "Load Map Error!!", s, UI::Modal_Message_Box::OK);
          mbox.run();
-      }
+		}
 */
 		m_parent->editor().postload();
 		m_parent->editor().load_graphics(loader_ui);
@@ -324,7 +324,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 			if (not dynamic_cast<const Building * const>(map[fc].get_immovable()))
 				map.overlay_manager().register_overlay
 				(fc,picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
-      }
+		}
 
       /* Resources. we do not calculate default resources, therefore we do
        * not expect to meet them here. */
@@ -343,8 +343,8 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 						(Coords(x, y),
 						 g_gr->get_picture(PicMod_Game, immname.c_str()),
 						 4);
-            }
-         }
+				}
+			}
 
       // Tell the interactive that the map is saved and all
       m_parent->set_need_save(false);
@@ -353,5 +353,5 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
       m_parent->need_complete_redraw();
 
       delete ml;
-   }
+	}
 }

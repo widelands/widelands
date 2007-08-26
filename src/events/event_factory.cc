@@ -112,7 +112,7 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
    if(!gevent) {
       delete event;
       return 0;
-   } else return gevent;
+	} else return gevent;
    // never here
 }
 

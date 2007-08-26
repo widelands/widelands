@@ -47,7 +47,7 @@ class EventChain : public EventReferencer, public TriggerReferencer {
          INIT,
          RUNNING,
          DONE,
-      };
+		};
 
    public:
       EventChain( ) {
@@ -55,7 +55,7 @@ class EventChain : public EventReferencer, public TriggerReferencer {
         m_trigconditional = 0;
         m_state = INIT;
         m_curevent = 0;
-      }
+		}
       virtual ~EventChain( void ) { }
 
 	const char * get_name() const {return m_name.c_str();}

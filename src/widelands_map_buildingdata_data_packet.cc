@@ -97,15 +97,15 @@ throw (_wexception)
 					if (ser) {
                assert(ol->is_object_known(ser));
                building->m_leave_queue[i]=ol->get_object_by_file_index(ser);
-            } else
+				} else
                building->m_leave_queue[i]=0;
-         }
+			}
          building->m_leave_time=fr.Unsigned32();
          ser=fr.Unsigned32();
 				if (ser) {
             assert(ol->is_object_known(ser));
             building->m_leave_allow=ol->get_object_by_file_index(ser);
-         } else
+			} else
             building->m_leave_allow=0;
          building->m_stop=fr.Unsigned8();
 
@@ -137,11 +137,11 @@ throw (_wexception)
 				assert(false);
 				//  Type of building is not one of (or derived from)
 				//  {ConstructionSite, Warehouse, ProductionSite}.
-         }
+			}
 
 
          ol->mark_object_as_loaded(building);
-      }
+		}
 		} else throw wexception
 			("Unknown version %i in Widelands_Map_Buildingdata_Data_Packet!\n",
 			 packet_version);
@@ -160,7 +160,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
       bool prevb=fr.Unsigned8();
       if(prevb) {
          constructionsite.m_prev_building=constructionsite.get_owner()->tribe().get_building_descr(constructionsite.get_owner()->tribe().get_safe_building_index(fr.CString()));
-      } else
+		} else
          constructionsite.m_prev_building=0;
 
       // Builder request
@@ -174,7 +174,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 				 &constructionsite,
 				 Request::WORKER);
 			constructionsite.m_builder_request->Read(&fr, egbase, ol);
-      } else
+		} else
          constructionsite.m_builder_request=0;
 
       // Builder
@@ -182,7 +182,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 		if (reg) {
          assert(ol->is_object_known(reg));
          constructionsite.m_builder=static_cast<Worker*>(ol->get_object_by_file_index(reg));
-      } else
+		} else
          constructionsite.m_builder=0;
 
       // Wares queues
@@ -192,11 +192,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
 			if (dynamic_cast<Game * const>(egbase))
 				constructionsite.m_wares[i]->cleanup();
          delete constructionsite.m_wares[i];
-      }
+		}
       constructionsite.m_wares.resize(size);
       for(uint i=0; i<constructionsite.m_wares.size(); i++) {
          constructionsite.m_wares[i]->Read(&fr,egbase,ol);
-      }
+		}
 
       constructionsite.m_fetchfromflag=fr.Signed32();
 
@@ -226,12 +226,12 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
 			const int id = tribe.get_safe_ware_index(fr.CString());
          warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
 			warehouse.insert_wares(id, fr.Unsigned16());
-      }
+		}
 		while (fr.Unsigned8()) {
 			const int id = tribe.get_safe_worker_index(fr.CString());
          warehouse.remove_workers(id, warehouse.m_supply->stock_workers(id));
 			warehouse.insert_workers(id, fr.Unsigned16());
-      }
+		}
 
       // Request
       for(uint i=0; i<warehouse.m_requests.size(); i++)
@@ -246,14 +246,14 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
 				 Request::WORKER);
 			req.Read(&fr, egbase, ol);
 			warehouse.m_requests[i] = &req;
-      }
+		}
 
       // Incorporated Workers
 		while(warehouse.m_incorporated_workers.size()) {assert(false); //  FIXME why this loop?
          std::vector<Object_Ptr>::iterator i=warehouse.m_incorporated_workers.begin();
          static_cast<Worker*>(i->get(egbase))->remove(egbase);
          warehouse.m_incorporated_workers.erase(i);
-      }
+		}
       warehouse.m_incorporated_workers.resize(0);
 		Player & player = warehouse.owner();
       int nrworkers=fr.Unsigned16();
@@ -267,7 +267,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
             throw wexception("Unknown worker %s in incorporated workers in Widelands_Map_Buildingdata_Data_Packet!\n", name.c_str());
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          warehouse.sort_worker_in(egbase, name, w);
-      }
+		}
 		if (nrworkers) {
 			Map & map = egbase->map();
 			player.see_area
@@ -325,7 +325,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
             uint reg = fr.Unsigned32();
             assert(ol->is_object_known(reg));
             militarysite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
-         }
+			}
 
          // did conquer
          militarysite.m_didconquer = fr.Unsigned8();
@@ -333,7 +333,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
 			// capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
          // DONE
-      } else
+		} else
          throw wexception("Unknown MilitarySite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
 }
 
@@ -359,7 +359,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 				 Request::WORKER);
 			req.Read(&fr,egbase,ol);
 			productionsite.m_worker_requests[i] = &req;
-      }
+		}
 
       // Workers
       uint nr_workers = fr.Unsigned16();
@@ -369,7 +369,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
          uint reg = fr.Unsigned32();
          assert(ol->is_object_known(reg));
          productionsite.m_workers[i] = static_cast<Worker*>(ol->get_object_by_file_index(reg));
-      }
+		}
 
       // Items from flags
       productionsite.m_fetchfromflag = fr.Signed32();
@@ -383,7 +383,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
          productionsite.m_program[i].ip = fr.Signed32();
          productionsite.m_program[i].phase = fr.Signed32();
          productionsite.m_program[i].flags = fr.Unsigned32();
-      }
+		}
       productionsite.m_program_timer = fr.Unsigned8();
       productionsite.m_program_time = fr.Signed32();
 
@@ -512,7 +512,7 @@ throw (_wexception)
 			if (Map::get_index(building->get_position(), mapwidth) != i) {
                // This is not this buildings main position
                continue;
-            }
+				}
 
 			fw.Unsigned32(os->get_object_file_index(building));
 
@@ -522,7 +522,7 @@ throw (_wexception)
 			if (building->m_anim) {
                fw.Unsigned8(1);
                fw.CString(building->descr().get_animation_name(building->m_anim).c_str());
-            } else
+				} else
                fw.Unsigned8(0);
 
 			fw.Unsigned32(building->m_animstart);
@@ -532,12 +532,12 @@ throw (_wexception)
             for(uint idx=0; idx<building->m_leave_queue.size(); idx++) {
                assert(os->is_object_known(building->m_leave_queue[idx].get(egbase)));
                fw.Unsigned32(os->get_object_file_index(building->m_leave_queue[idx].get(egbase)));
-            }
+				}
             fw.Unsigned32(building->m_leave_time);
 			if (building->m_leave_allow.get(egbase)) {
                assert(os->is_object_known(building->m_leave_allow.get(egbase)));
                fw.Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
-            } else
+				} else
                fw.Unsigned32(0);
             fw.Unsigned8(building->m_stop);
 
@@ -566,12 +566,12 @@ throw (_wexception)
 				assert(false);
 				//  Type of building is not one of (or derived from)
 				//  {ConstructionSite, Warehouse, ProductionSite}.
-            }
+				}
 
             os->mark_object_as_saved(building);
-         }
+			}
 
-   }
+	}
 
    fw.Unsigned32(0xffffffff); // End of buildings
 
@@ -597,14 +597,14 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
 	if (constructionsite.m_prev_building) {
       fw.Unsigned8(1);
       fw.CString(constructionsite.m_prev_building->name().c_str());
-   } else
+	} else
       fw.Unsigned8(0);
 
    // builder request
 	if (constructionsite.m_builder_request) {
       fw.Unsigned8(1);
       constructionsite.m_builder_request->Write(&fw, egbase, os);
-   } else
+	} else
       fw.Unsigned8(0);
 
 	// builder
@@ -619,7 +619,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
    fw.Unsigned16(constructionsite.m_wares.size());
    for(uint i=0; i<constructionsite.m_wares.size(); i++) {
       constructionsite.m_wares[i]->Write(&fw,egbase,os);
-   }
+	}
 
    fw.Signed32(constructionsite.m_fetchfromflag);
 
@@ -646,21 +646,21 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
       fw.Unsigned8(1);
       fw.CString(warehouse.get_owner()->tribe().get_ware_descr(i)->name().c_str());
       fw.Unsigned16(wares.stock(i));
-   }
+	}
    fw.Unsigned8(0);
    const WareList& workers=warehouse.m_supply->get_workers();
    for(int i=0; i<workers.get_nrwareids(); i++) {
       fw.Unsigned8(1);
       fw.CString(warehouse.get_owner()->tribe().get_worker_descr(i)->name().c_str());
       fw.Unsigned16(workers.stock(i));
-   }
+	}
    fw.Unsigned8(0);
 
    // Request
    fw.Unsigned16(warehouse.m_requests.size());
    for(uint i=0; i<warehouse.m_requests.size(); i++) {
       warehouse.m_requests[i]->Write(&fw,egbase,os);
-   }
+	}
 
    // Incorporated workers, write sorted after file-serial
    fw.Unsigned16(warehouse.m_incorporated_workers.size());
@@ -678,7 +678,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 			(std::pair<uint, const Worker *>
 			 (os->get_object_file_index(it->get(egbase)),
 			  static_cast<const Worker * const>(it->get(egbase))));
-   }
+	}
 
 	for
 		(std::map<uint, const Worker *>::const_iterator it = workermap.begin();
@@ -688,7 +688,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 		assert(os->is_object_known(it->second));
 		fw.Unsigned32(os->get_object_file_index(it->second));
 		fw.CString(it->second->name().c_str());
-   }
+	}
 
    // Carrier spawn
    fw.Unsigned32(warehouse.m_next_carrier_spawn);
@@ -720,7 +720,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_militarysite
    for(uint i=0; i<militarysite.m_soldiers.size(); i++) {
       assert(os->is_object_known(militarysite.m_soldiers[i]));
       fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
-   }
+	}
 
    // did conquer
 	fw.Unsigned8(militarysite.m_didconquer);
@@ -752,7 +752,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
    for(uint i=0; i<productionsite.m_workers.size(); i++) {
       assert(os->is_object_known(productionsite.m_workers[i]));
       fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
-   }
+	}
 
    // Items from flag
    fw.Signed32(productionsite.m_fetchfromflag);
@@ -764,7 +764,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
       fw.Signed32(productionsite.m_program[i].ip);
       fw.Signed32(productionsite.m_program[i].phase);
       fw.Unsigned32(productionsite.m_program[i].flags);
-   }
+	}
    fw.Unsigned8(productionsite.m_program_timer);
    fw.Signed32(productionsite.m_program_time);
 
@@ -807,7 +807,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
    for(uint i=0; i<trainingsite.m_soldiers.size(); i++) {
       assert(os->is_object_known(trainingsite.m_soldiers[i]));
       fw.Unsigned32(os->get_object_file_index(trainingsite.m_soldiers[i]));
-   }
+	}
 
 	// Don't save m_list_upgrades (remake at load)
 

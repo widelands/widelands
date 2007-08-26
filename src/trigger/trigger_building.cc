@@ -111,7 +111,7 @@ void Trigger_Building::check_set_conditions(Game* game) {
       inttemp = new Int_MapVariable( false );
       inttemp->set_name( "inttemp" );
       mvm.register_new_variable(inttemp);
-   }
+	}
    inttemp->set_value( count );
 
    return;

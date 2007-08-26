@@ -178,11 +178,11 @@ void Game_Main_Menu_Load_Game::fill_list(void)
 			m_ls->add(strdup(fname), strdup(name)); //FIXME: the strdup()ing is leaking memory like hell, but without it hte list elements would vanihs outside of fill_list()
          free(fname);
 
-      } catch(_wexception& ) {
+		} catch(_wexception& ) {
          // we simply skip illegal entries
-      }
+		}
          delete fs;
-   }
+	}
 
 	if (m_ls->size()) m_ls->select(0);
 }
@@ -212,14 +212,14 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 		m_parent->get_game()->postload();
 		m_parent->get_game()->load_graphics(loader_ui);
 		m_parent->get_game()->m_state = gs_running;
-   } catch(std::exception& exe) {
+	} catch(std::exception& exe) {
 		std::string s=_("Game Loading Error!\nReason given:\n");
 		s+=exe.what();
 		log("%s\n", s.c_str());
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
-   }
+	}
       delete fs;
    die();
 

@@ -478,7 +478,7 @@ struct Request : public Trackable {
       WARE = 0,
       WORKER = 1,
 	   SOLDIER = 2
-   };
+	};
 
 	Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type);
 	~Request();
@@ -661,7 +661,7 @@ struct Economy {
    inline bool should_run_balance_check(int gametime) {
       if (m_request_timer && (gametime == m_request_timer_time)) return true;
       return false;
-   }
+	}
 
    // Informations over this economy
    int stock_ware( int id ) { return m_wares.stock(id); }
@@ -719,7 +719,7 @@ struct Cmd_Call_Economy_Balance : public BaseCommand {
          m_player=player;
          m_economy=economy;
          m_force_balance = false;
-      }
+		}
 
       void execute (Game* g);
 

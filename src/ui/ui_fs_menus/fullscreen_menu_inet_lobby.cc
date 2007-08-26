@@ -167,7 +167,7 @@ void Fullscreen_Menu_InetLobby::room_info( std::vector<std::string > users ) {
       // Get User Informations
       Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(users[i]);
       m_gsc->send(gui);
-   }
+	}
    m_userlist->sort();
 }
 
@@ -191,7 +191,7 @@ void Fullscreen_Menu_InetLobby::chat_message( std::string user, std::string msg,
       buffer="** "+user+" "+msg+"\n";
       server_message( buffer.c_str() );
       return;
-   }
+	}
 
    std::string text = m_chatbox->get_text();
    buffer=user+": "+msg+"\n";
@@ -244,7 +244,7 @@ void Fullscreen_Menu_InetLobby::disconnect( void ) {
 			 _("Server disconnected unexpectedly!"),
 			 UI::Modal_Message_Box::OK);
 		mmb.run();
-   }
+	}
    end_modal(0);
    return;
 }

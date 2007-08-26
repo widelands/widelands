@@ -126,7 +126,7 @@ void Network_Buffer::put_string( std::string string ) {
 
    for(uint i=0; i<string.size(); i++) {
       put_16(string[i]);
-   }
+	}
 }
 
 /*
@@ -139,7 +139,7 @@ int Network_Buffer::fill( TCPsocket sock ) {
    if( SDLNet_TCP_Recv(sock, m_buffer, 2) < 2) {
       // Some error.
       return -1;
-   }
+	}
 
    // we reset the data pointer
    m_buffer_pointer = 0;
@@ -160,7 +160,7 @@ int Network_Buffer::fill( TCPsocket sock ) {
       if(retval <= 0)
          throw wexception("Network_Buffer::fill: SDLNet_TCP_Recv brought up an error!: %s\n", SDLNet_GetError());
       received += retval;
-   }
+	}
 
    m_buffer_len += s;
    return 0;

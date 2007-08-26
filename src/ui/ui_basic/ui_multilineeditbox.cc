@@ -69,16 +69,16 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
          case KEY_BACKSPACE:
             if(txt.size() && m_cur_pos) {
                m_cur_pos--;
-            } else {
+				} else {
                break;
-            }
+				}
             // Fallthrough
 
          case KEY_DELETE:
             if(txt.size() && m_cur_pos<txt.size()) {
                txt.erase(txt.begin() + m_cur_pos);
                Multiline_Textarea::set_text(txt.c_str());
-            }
+				}
             break;
 
          case KEY_LEFT:
@@ -111,7 +111,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
                   m_cur_pos=end_of_next_line;
                else
                   m_cur_pos=begin_of_next_line+m_cur_pos-begin_of_line;
-            }
+				}
             break;
 
          case KEY_UP:
@@ -130,7 +130,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
                   m_cur_pos=end_of_last_line;
                else
                   m_cur_pos=begin_of_lastline+(m_cur_pos-begin_of_line);
-            }
+				}
             break;
 
          case KEY_RETURN:
@@ -140,14 +140,14 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
             if(c && txt.size()<m_maxchars) {
                txt.insert(m_cur_pos,1,c);
                m_cur_pos++;
-            }
+				}
             Multiline_Textarea::set_text(txt.c_str());
             break;
-      }
+		}
       Multiline_Textarea::set_text(txt.c_str());
       changed.call();
       return true;
-   }
+	}
 
    return false;
 }
@@ -161,7 +161,7 @@ bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int x, int y) {
       Multiline_Textarea::set_text(get_text().c_str());
       changed.call();
       return true;
-   }
+	}
 	return Multiline_Textarea::handle_mousepress(btn, x, y);
 }
 bool Multiline_Editbox::handle_mouserelease(const Uint8, int, int)
@@ -189,7 +189,7 @@ void Multiline_Editbox::draw(RenderTarget* dst)
 			 &m_cache_id,
 			 (has_focus() ? static_cast<const int>(m_cur_pos) : -1)); //explicit cast is neccessary to avoid a compiler warning
       m_cache_mode = Widget_Cache_Use;
-   }
+	}
    Multiline_Textarea::draw_scrollbar();
 }
 

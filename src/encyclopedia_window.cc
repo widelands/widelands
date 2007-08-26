@@ -85,7 +85,7 @@ void EncyclopediaWindow::fillWares() {
    for (i=0;i<nrWares;i++) {
       Item_Ware_Descr* ware = tribe->get_ware_descr(i);
 		wares.add(ware->descname().c_str(), i, ware->get_icon());
-   }
+	}
 }
 
 void EncyclopediaWindow::wareSelected(uint) {
@@ -118,8 +118,8 @@ void EncyclopediaWindow::wareSelected(uint) {
 				prodSites.add
 					(curProdSite->descname().c_str(), i, curProdSite->get_buildicon());
             found = true;
-         }
-      }
+			}
+		}
    if (found) prodSites.select(0);
 
 }
@@ -174,7 +174,7 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
                checkGroup++;
             else if (actions[i].type == ProductionAction::actConsume)
                consumeGroup++;
-         }
+			}
 
          uint j;
          if (actions[i].type == ProductionAction::actConsume) {
@@ -183,21 +183,21 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
                   actions[i].iparam1,
                   isGrouped,
                   consumeGroup
-               };
+					};
                waresConsumed[splitWares[j]] = wc;
-            }
-         }
+				}
+			}
          else if (actions[i].type == ProductionAction::actCheck) {
             for (j=0;j<splitWares.size();j++) {
                WareCondition wc = {
                   actions[i].iparam1,
                   isGrouped,
                   checkGroup
-               };
+					};
                waresChecked[splitWares[j]] = wc;
-            }
-         }
-      }
+				}
+			}
+		}
 
       i = 0;
       for (std::map<std::string,WareCondition>::iterator waresCheckedIt=waresChecked.begin();
@@ -208,17 +208,17 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 
          if (waresConsumedIt != waresConsumed.end()) {
             waresConsumed.erase(waresConsumedIt);
-         }
+			}
          i++;
-      }
+		}
 
       for (std::map<std::string,WareCondition>::iterator waresConsumedIt=waresConsumed.begin();
             waresConsumedIt!=waresConsumed.end(); waresConsumedIt++) {
 
          createCondTableEntry(i,waresConsumedIt->first.c_str(),true,&waresConsumedIt->second);
          i++;
-      }
-   }
+		}
+	}
 
 }
 
@@ -235,14 +235,14 @@ void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, b
 		char buffer[5];
 		snprintf(buffer, sizeof(buffer), "%i", wareCondition->amount);
 		consumeAmount = buffer;
-   }
+	}
 
    if (wareCondition->isGrouped) {
       int k;
       for (k=0;k<wareCondition->groupId;k++) {
          groupId+="*";
-      }
-   }
+		}
+	}
 
 	tableEntry.set_string(0, rowText);
 	tableEntry.set_string(1, consumeAmount);

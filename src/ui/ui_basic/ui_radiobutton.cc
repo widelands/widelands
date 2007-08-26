@@ -131,7 +131,7 @@ void Radiogroup::set_state(int state)
 	if (state == m_state) {
       clicked.call();
 		return;
-   }
+	}
 
 	for(Radiobutton *btn = m_buttons; btn; btn = btn->m_nextbtn)
 		btn->set_state(btn->m_id == state);

@@ -49,7 +49,7 @@ public:
 	}
    void unset( void ) {
       _fn = 0;
-   }
+	}
    inline void call() { if (_fn) (_obj->*_fn)(); }
 };
 
@@ -70,7 +70,7 @@ public:
 	}
    void unset( void ) {
       _fn = 0;
-   }
+	}
 	inline void call(T1 t1) { if (_fn) (_obj->*_fn)(t1); }
 };
 
@@ -91,7 +91,7 @@ public:
 	}
    void unset( void ) {
       _fn = 0;
-   }
+	}
    inline void call(T1 t1, T2 t2) { if (_fn) (_obj->*_fn)(t1, t2); }
 };
 };

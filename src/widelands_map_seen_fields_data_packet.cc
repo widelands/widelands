@@ -48,10 +48,10 @@ throw (_wexception)
    FileRead fr;
    try {
       fr.Open( fs, "binary/seen_fields" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
 
    // read packet version
    int packet_version=fr.Unsigned16();
@@ -117,7 +117,7 @@ throw (_wexception)
 				data |= ((0 < player->vision(i)) << j);
 		}
 		fw.Unsigned32(data);
-   }
+	}
 
    fw.Write( fs, "binary/seen_fields" );
 }

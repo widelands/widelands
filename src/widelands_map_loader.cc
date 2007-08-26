@@ -89,7 +89,7 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
       //actual problem instead of ignoring it
       //(e.g. in fullscreen_menu_mapselect.cc::285)
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
-   }
+	}
 
    Widelands_Map_Player_Names_And_Tribes_Data_Packet* dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
    dp->Pre_Read(m_fs, m_map, !scenario);
@@ -118,7 +118,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    //if You know a better way to fix this, DO IT! -- Alexia Death
    if(get_state() == STATE_PRELOADED){
       this->load_world();
-   }
+	}
 	assert(get_state() == STATE_WORLD_LOADED);
 
    // Postload the world which provides all the immovables found on a map

@@ -69,7 +69,7 @@ throw (_wexception)
          int res=world->get_resource(buffer);
          if(res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
          smap[id]=res;
-      }
+		}
 
       // Now get all the the resources
       for(ushort y=0; y<map->get_height(); y++) {
@@ -87,21 +87,21 @@ throw (_wexception)
                set_id=0;
                set_amount=0;
                set_start_amount=0;
-            } else {
+				} else {
                set_id=smap[id];
                set_amount=amount;
                set_start_amount=start_amount;
-            }
+				}
 
             // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
             if(set_id==-1)
                throw("Unkown resource in map file. It is not in world!\n");
             egbase->get_map()->get_field(Coords(x,y))->set_resources(set_id,set_amount);
             egbase->get_map()->get_field(Coords(x,y))->set_starting_res_amount(set_start_amount);
-         }
-      }
+			}
+		}
       return;
-   }
+	}
    assert(0); // never here
 }
 
@@ -142,7 +142,7 @@ throw (_wexception)
       smap[res->name().c_str()]=i;
       fw.Unsigned16(i);
       fw.CString(res->name().c_str());
-   }
+	}
 
    // Now, all resouces as unsigned chars in order
    //  - resource id
@@ -158,8 +158,8 @@ throw (_wexception)
          fw.Unsigned8(res);
          fw.Unsigned8(amount);
          fw.Unsigned8(start_amount);
-      }
-   }
+		}
+	}
 
    fw.Write( fs, "binary/resource" );
 }

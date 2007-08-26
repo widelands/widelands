@@ -50,7 +50,7 @@ class Event_Set_Null_Trigger : public Event,public TriggerReferencer {
          if( trig )
             reference_trigger( trig );
          m_trigger=trig;
-      }
+		}
       inline Trigger_Null* get_trigger( void ) { return m_trigger; }
       inline void set_setto( bool t ) { m_setto = t; }
 	bool get_setto() const {return m_setto;}

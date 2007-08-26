@@ -51,7 +51,7 @@ struct Tribe_Descr {
       enum {
          OK = 0,
          ERR_WRONGVERSION
-      };
+		};
 
 	Tribe_Descr(const std::string & tribename, const World &);
 

@@ -58,7 +58,7 @@ struct MapObjective : public TriggerReferencer {
       virtual ~MapObjective( void ) {
          if( m_trigger )
             unreference_trigger( m_trigger );
-      }
+		}
 
 
 	const char * get_name() const {return m_name.c_str();}
@@ -84,7 +84,7 @@ struct MapObjective : public TriggerReferencer {
          if( tr )
             reference_trigger( tr );
          m_trigger = tr;
-      }
+		}
       inline void set_is_optional( bool t ) { m_is_optional = t; }
 
    private:

@@ -161,7 +161,7 @@ m_parent(parent)
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		if (strcmp(mtm.get_trigger_by_nr(i).get_id(), "null") == 0)
          m_null_triggers.push_back(i);
-   }
+	}
 
    for(int i=0; i<m_event->get_nr_buttons(); i++) {
       m_buttons[i].name=m_event->get_button_name(i);
@@ -172,12 +172,12 @@ m_parent(parent)
             if (&mtm.get_trigger_by_nr(x) == m_event->get_button_trigger(i)) {
                foundidx = x;
                break;
-            }
+				}
 
          if(foundidx==m_null_triggers[j])
             m_buttons[i].trigger=j;
-      }
-   }
+		}
+	}
 
    center_to_parent();
    update();
@@ -221,10 +221,10 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
                       static_cast<Trigger_Null*>
                       (&mtm.get_trigger_by_nr
                        (m_null_triggers[m_buttons[b].trigger])));
-               } else {
+					} else {
                   m_event->set_button_trigger(b, 0);
-               }
-            }
+					}
+				}
             end_modal(1);
             return;
 }
@@ -268,7 +268,7 @@ void Event_Message_Box_Option_Menu::update(void) {
    if(!m_null_triggers.size()) {
       // No triggers, no other buttons
       m_nr_buttons=1;
-   }
+	}
 
    m_buttons_ls->clear();
    int i;
@@ -289,10 +289,10 @@ void Event_Message_Box_Option_Menu::update(void) {
 			 :
 			 m_parent->egbase().map().get_mtm().get_trigger_by_nr
 			 (m_null_triggers[m_buttons[m_ls_selected].trigger]).get_name());
-   } else {
+	} else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;
-   }
+	}
 }
 
 /*

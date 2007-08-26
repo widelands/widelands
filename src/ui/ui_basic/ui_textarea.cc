@@ -123,7 +123,7 @@ void Textarea::collapse()
          x += w >> 1;
       else if (m_align & Align_Right)
          x += w;
-   }
+	}
 
    if (m_align & Align_VCenter)
       y += h >> 1;
@@ -155,7 +155,7 @@ void Textarea::expand()
          x -= w >> 1;
       else if (m_align & Align_Right)
          x -= w;
-   }
+	}
 
    if (m_align & Align_VCenter)
       y -= h >> 1;

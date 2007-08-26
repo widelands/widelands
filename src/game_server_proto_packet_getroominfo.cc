@@ -65,7 +65,7 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
       gsc->server_message( buffer );
       return;
-   }
+	}
 
    assert(flags == RI_ACK) ;
 
@@ -75,7 +75,7 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    for(uint i = 0; i < nrusers; i++) {
       users.push_back( buf->get_string() );
-   }
+	}
 
    gsc->get_room_info( users );
 }

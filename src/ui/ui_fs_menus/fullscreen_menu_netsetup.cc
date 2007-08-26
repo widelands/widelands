@@ -109,7 +109,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 			addr = game.address;
 			port = game.port;
 		return true;
-	    }
+		}
 	}
 
 	hostent* he=gethostbyname(host);
@@ -169,7 +169,7 @@ void Fullscreen_Menu_NetSetup::discovery_callback (int type, const LAN_Open_Game
 	    break;
 	default:
 	    abort ();
-    }
+	}
 }
 
 void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)

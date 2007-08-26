@@ -230,7 +230,7 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
 			act->iparam2 = Map_Object_Descr::get_attribute_id(value);
 		} else if (key == "type") {
 			act->sparam1 = value;
-      } else
+		} else
 			throw wexception("Bad findobject predicate %s:%s",
 			                 key.c_str(), value.c_str());
 	}
@@ -314,7 +314,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 			act->iparam2 = sizenames[index].val;
 		} else if(key == "resource") {
 			act->sparam1 = value;
-      } else
+		} else
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 	}
 

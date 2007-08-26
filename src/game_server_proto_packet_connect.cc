@@ -77,5 +77,5 @@ void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* g
          gsc->critical_error(buffer);
          break;
 
-   }
+	}
 }

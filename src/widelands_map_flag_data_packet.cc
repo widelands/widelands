@@ -53,11 +53,11 @@ throw
    FileRead fr;
    try {
       fr.Open( fs, "binary/flag");
-   } catch( ... ) {
+	} catch( ... ) {
       // Not found -> not saved
       // so skip
       return;
-   }
+	}
 
    Map* map=egbase->get_map();
 
@@ -87,13 +87,13 @@ throw
 
                // and register it with the object loader for further loading
                ol->register_object(egbase, serial, flag);
-            }
-         }
+				}
+			}
 
-      }
+		}
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown version %i in Widelands_Map_Flag_Data_Packet!\n", packet_version);
 
    assert( 0 );
@@ -135,12 +135,12 @@ throw (_wexception)
             // write id
             fw.Unsigned32(serial);
 
-         } else {
+			} else {
             // No existance, no owner
             fw.Unsigned8(0);
-         }
-      }
-   }
+			}
+		}
+	}
 
    fw.Write(fs, "binary/flag");
    // DONE

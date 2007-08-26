@@ -64,7 +64,7 @@ int Editor_Info_Tool::handle_click_impl
       case BUILDCAPS_MEDIUM: buf+=_("medium"); break;
       case BUILDCAPS_BIG: buf+=_("big"); break;
       default: break;
-   }
+	}
    if(f->get_caps() & BUILDCAPS_FLAG) buf+=_(" flag");
    if(f->get_caps() & BUILDCAPS_MINE) buf+=_(" mine");
    if(f->get_caps() & BUILDCAPS_PORT) buf+=_(" port");

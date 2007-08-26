@@ -201,7 +201,7 @@ void Building_Statistics_Menu::think( void ) {
    if((m_parent->get_game()->get_gametime() - m_lastupdate)/gs > UPDATE_TIME ) {
       update();
       m_lastupdate = m_parent->get_game()->get_gametime();
-   }
+	}
 }
 
 /*
@@ -268,7 +268,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
             int curindex = m_last_building_index;
             while( validate_pointer(&(--m_last_building_index), vec.size()) != curindex )
                if( vec[m_last_building_index].is_constructionsite ) break;
-         }
+			}
          break;
 
 	case Next_Construction:
@@ -277,7 +277,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
             int curindex = m_last_building_index;
             while( validate_pointer(&(++m_last_building_index), vec.size()) != curindex )
                if( vec[m_last_building_index].is_constructionsite ) break;
-         }
+			}
          break;
 
 	case Prev_Unproductive:
@@ -291,16 +291,16 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
                      if(((ProductionSite*)b)->get_statistics_percent() <= LOW_PROD ) {
                         found = true;
                         break;
-                     }
-                  }
-               }
+							}
+						}
+					}
             if(!found) { // Now look at the old
                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
                if( b->get_building_type() == Building::PRODUCTIONSITE)
                   if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD )
                      found = true;
-            }
-         }
+				}
+			}
          break;
 
 	case Next_Unproductive:
@@ -314,21 +314,21 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
                      if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD ) {
                         found = true;
                         break;
-                     }
-                  }
-               }
+							}
+						}
+					}
             if(!found) { // Now look at the old
                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
                if( b->get_building_type() == Building::PRODUCTIONSITE)
                      if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD )
                         found = true;
-               }
-         }
+					}
+			}
          break;
 
 
 
-   }
+	}
 
    validate_pointer(&m_last_building_index, vec.size());
 
@@ -368,15 +368,15 @@ void Building_Statistics_Menu::update( void ) {
 			if (UI::Table<const uintptr_t>::get(er) == i) {
 				te = &er;
             break;
-         }
-      }
+			}
+		}
 
       // If not in list, add new one, as long as this building is
       // enabled
       if(!te) {
          if(! m_parent->get_player()->is_building_allowed(i) ) continue;
 			te = &m_table.add(i, building.get_buildicon());
-      }
+		}
 
 		uint nr_owned   = 0;
 		uint nr_build   = 0;
@@ -392,8 +392,8 @@ void Building_Statistics_Menu::update( void ) {
 					(*map.get_field(vec[l].pos)->get_immovable())
 					.get_statistics_percent();
 
-             }
-          }
+			}
+		}
 
           // Is this entry selected?
 		const bool is_selected =
@@ -443,7 +443,7 @@ void Building_Statistics_Menu::update( void ) {
           te->set_string(3, buffer);
           if(is_selected)
             m_build->set_text(buffer);
-   }
+	}
 
    // Disable all buttons, if nothing to select
 	if (not m_table.has_selection()) {

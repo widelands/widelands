@@ -158,7 +158,7 @@ void MilitarySite::init(Editor_Game_Base* g)
       //    Should schedule because all stuff related to healing and removing own
       // soldiers should be scheduled.
 		schedule_act(game, 1000);
-   }
+	}
 }
 
 /**
@@ -204,8 +204,8 @@ void MilitarySite::set_economy(Economy* e)
       for (uint i = 0; i < m_soldier_requests.size(); i++) {
          if (m_soldier_requests[i])
             m_soldier_requests[i]->set_economy(e);
-      }
-   }
+		}
+	}
 }
 
 /**
@@ -224,9 +224,9 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
       {
          delete m_soldier_requests[i];
          m_soldier_requests[i] = 0;
-      }
+		}
       m_soldier_requests.resize(0);
-   }
+	}
 
    uint i;
    for(i=0; i < m_soldiers.size(); i++)
@@ -236,7 +236,7 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
       m_soldiers[i] = 0;
 		if (g->objects().object_still_available(s))
          s->set_location(0);
-   }
+	}
 	// unconquer land
 	if (m_didconquer) g->unconquer_area
 		(Player_Area<Area<FCoords> >
@@ -366,7 +366,7 @@ void MilitarySite::act(Game* g, uint data)
             m_soldiers.pop_back();
             i--;
             continue;
-         }
+			}
 
             // Fighting soldiers couldn't be healed !
          if (s->is_marked())
@@ -378,8 +378,8 @@ void MilitarySite::act(Game* g, uint data)
          if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
             s->heal (total_heal);
 				total_heal -= total_heal / 3;
-      }
-   }
+		}
+	}
 	if (not m_in_battle) call_soldiers();
 
       // Schedule the next wakeup at 1 second
@@ -419,7 +419,7 @@ molog ("**Dropping soldier (%d)\n", serial);
          molog ("Serial: %d -- \n!", s->get_serial());
          i++;
          s = m_soldiers[i];
-      }
+		}
       if (s)
          molog ("Serial: %d -- \n!", s->get_serial());
 
@@ -427,10 +427,10 @@ molog ("**Dropping soldier (%d)\n", serial);
       {
 molog ("**--Sodier localized!\n");
          drop_soldier(game, i);
-      }
+		}
       else
          molog ("--Soldier NOT localized!\n");
-   }
+	}
 }
 
 /*
@@ -496,7 +496,7 @@ void MilitarySite::change_soldier_capacity(int how)
          if (m_capacity > (uint) descr().get_max_number_of_soldiers())
             m_capacity = (uint) descr().get_max_number_of_soldiers();
 			call_soldiers();
-      }
+		}
       else
       {
          how = -how;
@@ -519,15 +519,15 @@ void MilitarySite::change_soldier_capacity(int how)
 		  (*it)->get_economy()->remove_request(*it);
 
 	       m_soldier_requests.erase(it, it+1);
-            }
+				}
             else if (m_soldiers.size())
             {
                Soldier *s = m_soldiers[m_soldiers.size()-1];
                drop_soldier (s->get_serial());
-	    }
-	 }
-      }
-   }
+				}
+			}
+		}
+	}
 }
 
 void MilitarySite::init_after_conquering (Game* g, std::vector<Soldier*>* soldiers) {
@@ -560,9 +560,9 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
       {
          delete m_soldier_requests[i];
          m_soldier_requests[i] = 0;
-      }
+		}
       m_soldier_requests.resize(0);
-   }
+	}
    log("removed all soldier requests.\n");
    uint i;
    for(i=0; i < m_soldiers.size(); i++)
@@ -572,7 +572,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
       m_soldiers[i] = 0;
 		if (g->objects().object_still_available(s))
          s->set_location(0);
-   }
+	}
    log("removed all remainig soldiers\n");
 
    if (m_didconquer)
@@ -667,12 +667,12 @@ void MilitarySite::clear_requeriments ()
 uint MilitarySite::nr_not_marked_soldiers() {
    if (m_soldiers.size() <= 0) {
       return 0;
-   }
+	}
    uint nr_soldiers = 0;
    for (uint i = 0; (uint) i < m_soldiers.size(); i++) {
       if (!m_soldiers[i]->is_marked())
          nr_soldiers++;
-   }
+	}
    return nr_soldiers;
 }
 

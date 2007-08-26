@@ -65,7 +65,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
       {
          log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
          continue;
-      }
+		}
 
       i.picname = basedir + "/pics/";
       i.picname += args[0];
@@ -81,11 +81,11 @@ void Resource_Descr::parse(Section *s, std::string basedir)
          {
             log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
             continue;
-         }
-      }
+			}
+		}
 
       m_editor_pics.push_back(i);
-   }
+	}
    if(!m_editor_pics.size())
       throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
 }
@@ -263,7 +263,7 @@ void World::parse_resources()
          descr=new Resource_Descr();
          descr->parse(section,m_basedir);
          m_resources.add(descr);
-      }
+		}
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
@@ -376,7 +376,7 @@ void World::get_all_worlds(std::vector<std::string>* retval) {
       world.erase(0,7); // remove worlds/
       if(World::exists_world(world.c_str()))
          retval->push_back(world);
-   }
+	}
 }
 
 
@@ -412,7 +412,7 @@ m_texture           (0)
          throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
       m_default_resources=res;
       m_default_amount=amount;
-   }
+	}
 
    // Parse valid resources
    std::string str1=s->get_string("resources", "");
@@ -437,12 +437,12 @@ m_texture           (0)
                throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
             m_valid_resources[cur_res++]=res;
             curres="";
-         } else {
+			} else {
             curres.append(1, str1[i]);
-         }
+			}
          i++;
-      }
-   }
+		}
+	}
 
 	int fps = s->get_int("fps");
 	if (fps > 0)
@@ -486,10 +486,10 @@ Terrain_Descr::~Terrain_Descr()
 		free(m_picnametempl);
    if(m_nr_valid_resources==1) {
       delete m_valid_resources;
-   }
+	}
    if(m_nr_valid_resources>1) {
       delete[] m_valid_resources;
-   }
+	}
    m_nr_valid_resources=0;
    m_valid_resources=0;
 }

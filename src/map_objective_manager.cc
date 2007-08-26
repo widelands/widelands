@@ -49,8 +49,8 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
       if( !strcmp( m_objectives[i]->get_name(), name ) ) {
          retval = m_objectives[i];
          break;
-      }
-   }
+		}
+	}
 
    return retval;
 }
@@ -63,6 +63,6 @@ void MapObjectiveManager::delete_objective( const char* name ) {
          m_objectives[i] = m_objectives[m_objectives.size() - 1];
          m_objectives.resize( m_objectives.size() - 1 );
          break;
-      }
-   }
+		}
+	}
 }

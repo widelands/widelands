@@ -76,10 +76,10 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
          if(!skip) {
             map->set_scenario_player_name(i,name);
             map->set_scenario_player_tribe(i,tribe);
-         }
-      }
+			}
+		}
       return;
-   }
+	}
    throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version);
 
    assert( 0 );
@@ -113,7 +113,7 @@ throw (_wexception)
       s = prof.create_section( buf );
       s->set_string("name", name.c_str());
       s->set_string("tribe", tribe.c_str());
-   }
+	}
 
    prof.write("player_names", false, fs );
    // DONE

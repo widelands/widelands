@@ -70,7 +70,7 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 			 event->get_button_name(i));
       posx+=but_width;
       m_trigger[i]=event->get_button_trigger(i);
-   }
+	}
 
    m_is_modal = event->get_is_modal();
 
@@ -106,19 +106,19 @@ void Message_Box_Event_Message_Box::clicked(int i) {
       if(m_is_modal) {
          end_modal(0);
          return;
-      } else {
+		} else {
          die();
          return;
-      }
-   } else {
+		}
+	} else {
       // One of the buttons has been pressed
 //      NoLog("Button %i has been pressed, nr of buttons: %i!\n", i, event->get_nr_buttons());
       Trigger_Null* t=m_trigger[i];
       if(t) {
          t->set_trigger_manually(true);
          t->check_set_conditions( m_game ); // forcefully update this trigger
-      }
+		}
       clicked(-1);
       return;
-   }
+	}
 }

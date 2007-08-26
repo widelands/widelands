@@ -85,16 +85,16 @@ throw (_wexception)
                   throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name, owner);
 					ol->register_object
 						(egbase, reg, egbase->create_immovable(position, idx, tribe));
-            }
-         } else {
+				}
+			} else {
             // World immovable
             int idx=world.get_immovable_index(name);
             if(idx==-1)
                throw wexception("Unknown world immovable %s in map!\n", name);
 				Immovable & immovable = *egbase->create_immovable(position, idx, 0);
 				if (not skip) ol->register_object(egbase, reg, &immovable);
-         }
-      }
+			}
+		}
 	} else throw wexception
 		("Unknown version %i in Widelands_Map_Immovable_Data_Packet!\n",
 		 packet_version);
@@ -134,8 +134,8 @@ throw (_wexception)
 
 				fw.CString(immovable->name().c_str());
 				fw.Coords32(position);
-         }
-      }
+			}
+		}
 
    fw.Unsigned32(0xffffffff);
 

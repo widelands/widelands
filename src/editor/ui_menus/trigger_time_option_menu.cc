@@ -265,5 +265,5 @@ void Trigger_Time_Option_Menu::update(void) {
       std::string str;
       str.append(1, static_cast<char>(m_values[i]+0x30));
       m_textareas[i]->set_text(str);
-   }
+	}
 }

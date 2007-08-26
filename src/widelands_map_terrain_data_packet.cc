@@ -70,7 +70,7 @@ throw (_wexception)
 			if (not world.get_ter(name)) throw wexception
 				("Terrain '%s' exists in map, not in world!", name);
 			smap[id] = world.index_of_terrain(name);
-      }
+		}
 
       // Now get all the terrains
 		const Map::Index max_index = map.max_index();
@@ -78,9 +78,9 @@ throw (_wexception)
 			Field & f = map[i];
 			f.set_terrain_r(smap[fr.Unsigned8()]);
 			f.set_terrain_d(smap[fr.Unsigned8()]);
-      }
+		}
       return;
-   }
+	}
    assert(0); // never here
 }
 
@@ -116,7 +116,7 @@ throw (_wexception)
 		smap[name] = i;
       fw.Unsigned16(i);
 		fw.CString(name);
-   }
+	}
 
    // Now, all terrains as unsigned chars in order
 	const Map::Index max_index = map.max_index();
@@ -124,7 +124,7 @@ throw (_wexception)
 		Field & f = map[i];
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
-   }
+	}
 
    fw.Write( fs, "binary/terrain");
    // DONE

@@ -40,7 +40,7 @@ struct Multiline_Textarea : public Panel {
       enum ScrollMode {
          ScrollNormal = 0,    ///< (default) only explicit or forced scrolling
          ScrollLog = 1,       ///< follow the bottom of the text
-      };
+		};
 
 public:
 	Multiline_Textarea

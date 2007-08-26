@@ -608,12 +608,12 @@ void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
 		} else
 			log("Sound_Handler: songset \"%s\" exists but contains "
 			    "no files!\n", songset_name.c_str());
-        }
+	}
 #ifdef __WIN32__
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
 #endif
 
-    }
+}
 
 /** Stop playing a songset.
  * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms milliseconds

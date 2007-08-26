@@ -58,8 +58,8 @@ void getCloseMilitarySites
 			if (ms->owner().get_player_number() == player) {
 				militarySites.insert(ms);
             log("getCloseMilitarySite(): military site at: %i,%i\n",ms->get_base_flag()->get_position().x,ms->get_base_flag()->get_position().y);
-         }
-   }
+			}
+	}
 }
 
 uint getMaxAttackSoldiers
@@ -124,7 +124,7 @@ void AttackController::launchAttack(uint nrAttackers) {
    //always try to launch two more defenders than attackers
    if (!launchAllSoldiers(false,nrAttackers+2)) {
       attackedMsEmpty = true;
-   }
+	}
 }
 
 bool AttackController::launchAllSoldiers(bool attackers, int max) {
@@ -156,9 +156,9 @@ bool AttackController::launchAllSoldiers(bool attackers, int max) {
          max-=nrLaunch;
          if (max <= 0)
             break;
-      }
+		}
 
-   }
+	}
    return launchedSoldier;
 }
 
@@ -180,7 +180,7 @@ void AttackController::launchSoldiersOfMilitarySite(MilitarySite* militarySite, 
    if (launched > 0) {
 		involvedMilitarySites.insert(militarySite);
       militarySite->set_in_battle(true);
-   }
+	}
 }
 
 bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers) {
@@ -197,7 +197,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
          attackers,
          false,
          false,
-      };
+		};
 
       calcBattleGround(&bs,totallyLaunched);
 
@@ -206,17 +206,17 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
       involvedSoldiers.push_back(bs);
       totallyLaunched++;
       return true;
-   }
+	}
    return false;
 }
 
 void AttackController::moveToReached(Soldier* soldier) {
    if (this->attackedMsEmpty) {
       soldierWon(soldier);
-   }
+	}
    else {
       startBattle(soldier,true);
-   }
+	}
    log("Soldier %dP reached flag.\n",soldier->get_serial());
 }
 
@@ -232,7 +232,7 @@ void AttackController::soldierWon(Soldier* soldier) {
    if (opponentsLeft(soldier)) {
       startBattle(soldier,true);
       return;
-   }
+	}
 
    //if the last remaing was an attacker, check for
    //remaining soldiers in the building
@@ -243,7 +243,7 @@ void AttackController::soldierWon(Soldier* soldier) {
 		if (const uint n = ms->nr_not_marked_soldiers()) {
 			launchSoldiersOfMilitarySite(ms, n, false);
          return;
-      }
+		}
 
    log("finishing battle...\n");
 
@@ -271,16 +271,16 @@ void AttackController::soldierWon(Soldier* soldier) {
             entryingSoldiers.push_back(involvedSoldiers[i].soldier);
             involvedSoldiers[i].origin->drop_soldier(involvedSoldiers[i].soldier->get_serial());
             involvedSoldiers[i].origin = newMs;
-         }
-      }
+			}
+		}
       newMs->init_after_conquering(game,&entryingSoldiers);*/
-   }
+	}
 
 	for(uint i=0;i<involvedSoldiers.size();i++) {
 		//involvedSoldiers[i].soldier->set_economy(0);
 		involvedSoldiers[i].soldier->set_location(involvedSoldiers[i].origin);
 		involvedSoldiers[i].soldier->send_signal(game,"return_home");
-   }
+	}
 
    log("battle finished. removing attack controller.\n");
    game->remove_attack_controller(this->get_serial());
@@ -303,8 +303,8 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived) {
             battle->soldiers(involvedSoldiers[s1Index].soldier,involvedSoldiers[i].soldier);
          log("Created battle, rnd was: %i\n",rnd);
          return true;
-      }
-   }
+		}
+	}
    log("Could not create battle. No opponents found.\n");
    return false;
 }
@@ -314,7 +314,7 @@ bool AttackController::opponentsLeft(Soldier* soldier) {
    for(uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].attacker != involvedSoldiers[idx].attacker)
          return true;
-   }
+	}
    return false;
 }
 
@@ -322,7 +322,7 @@ uint AttackController::getBattleSoldierIndex(Soldier* soldier) {
   for(uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].soldier == soldier)
          return i;
-   }
+	}
    throw wexception("No BattleSoldier structure found for %dP!\n", soldier->get_serial());
 }
 
@@ -331,7 +331,7 @@ void AttackController::removeSoldier(Soldier* soldier) {
    involvedSoldiers[idx].battleGround = Coords::Null();
    if (idx < (involvedSoldiers.size()-1)) {
       involvedSoldiers[idx] = involvedSoldiers[involvedSoldiers.size() -1];
-   }
+	}
    involvedSoldiers.pop_back();
 }
 
@@ -339,8 +339,8 @@ bool AttackController::battleGroundOccupied(Coords coords) {
    for(uint i=0;i<involvedSoldiers.size();i++) {
       if (involvedSoldiers[i].battleGround == coords) {
          return true;
-      }
-   }
+		}
+	}
    return false;
 }
 
@@ -349,7 +349,7 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
    if (soldierNr == 0) {
       battleSoldier->battleGround = flag->get_position();
       return;
-   }
+	}
 
    Map* map = game->get_map();
 
@@ -369,12 +369,12 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
          if (!battleGroundOccupied(newCoords)) {
             battleSoldier->battleGround = newCoords;
             return;
-         }
+			}
          prevCoords = newCoords;
-      }
+		}
       else {
          walkDirIndex = (soldierNr+1) % 5;
-      }
-   }
+		}
+	}
    battleSoldier->battleGround = flag->get_position();
 }

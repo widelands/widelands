@@ -146,7 +146,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
    while(global->get_next_string("enhances_to", &string)) {
       if(string)
          m_enhances_to.push_back(strdup(string));
-   }
+	}
    m_enhanced_building=global->get_bool("enhanced_building", false);
 	if (m_buildable || m_enhanced_building)
 		{

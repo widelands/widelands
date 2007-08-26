@@ -39,5 +39,5 @@ void Trigger::unreference( TriggerReferencer* ref) {
         cur->second--;
         if( cur->second == 0)
            m_referencers.erase( cur );
-     }
+	}
 }

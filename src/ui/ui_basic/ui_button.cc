@@ -171,7 +171,7 @@ void Basic_Button::draw(RenderTarget* dst)
          // right edge
 	      dst->fill_rect(Rect(Point(get_w() - 2, 2), 1, get_h() - 2), black);
 	      dst->fill_rect(Rect(Point(get_w() - 1, 1), 1, get_h() - 1), black);
-      }
+		}
       else
       {
          // bottom edge
@@ -188,15 +188,15 @@ void Basic_Button::draw(RenderTarget* dst)
          // left edge
 	      dst->fill_rect(Rect(Point(0, 0), 1, get_h() - 1), black);
 	      dst->fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
-      }
-   }
+		}
+	}
 	else
 	{
       // Button is flat, do not draw borders, instead, if it is pressed, draw
       // a box around it
 		if (m_pressed && m_highlighted)
 			dst->draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
-   }
+	}
 }
 
 
@@ -222,7 +222,7 @@ bool Basic_Button::handle_mousepress(const Uint8 btn, int, int) {
 	if (m_enabled) {
 		grab_mouse(true);
 		m_pressed = true;
-   }
+	}
 	update(0, 0, get_w(), get_h());
 
 	return true;

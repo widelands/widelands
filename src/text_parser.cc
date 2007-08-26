@@ -67,10 +67,10 @@ Text_Block::Text_Block(const Text_Block &src) {
 	m_font_decoration = src.m_font_decoration;
 	m_font_face = src.m_font_face;
 	m_line_spacing = src.m_line_spacing;
-      }
+		}
 
 Text_Parser::Text_Parser(){
-      }
+		}
 
 Text_Parser::~Text_Parser(){
 }
@@ -109,7 +109,7 @@ void Text_Parser::parse
 			new_block.set_words(words);
 			new_block.set_line_breaks(line_breaks);
 			text_blocks.push_back(new_block);
-      }
+		}
 		new_richtext_block.set_text_blocks(text_blocks);
 		blocks.push_back(new_richtext_block);
 	}
@@ -138,8 +138,8 @@ bool Text_Parser::parse_textblock
             std::string name = block_text.substr(offset+15, end-(offset+15));
             std::string str = vcb( name, vcdata );
             block_text.replace( offset, end-offset+1, str );
-         }
-      }
+			}
+		}
 
 	//Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
@@ -155,7 +155,7 @@ bool Text_Parser::parse_textblock
 			if (next_break) words.push_back(line.substr(0, next_break));
 			line_breaks.push_back(words.size());
 			line.erase(0,next_break + 4);
-   }
+	}
 		if (line.size()) words.push_back(line);
 	}
 	return extract_more;
@@ -294,15 +294,15 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 				int green = strtol(g.c_str(),&ptr,0);
 				int blue = strtol(b.c_str(),&ptr,0);
 				element->set_font_color(RGBColor(red,green,blue));
-         }
+			}
          else if (key == "font-weight")
 				element->set_font_weight(val);
          else if (key == "font-style")
 				element->set_font_style(val);
          else if (key == "font-decoration")
 				element->set_font_decoration(val);
-      }
-   }
+		}
+	}
 }
 
 Align Text_Parser::set_align(std::string align) {

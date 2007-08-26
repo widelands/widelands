@@ -89,7 +89,7 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
    if(!gtrig) {
       delete trig;
       return 0;
-   } else return gtrig;
+	} else return gtrig;
    // never here
 }
 

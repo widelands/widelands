@@ -160,7 +160,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
       molog("* Size: %i\n", m_wares[i]->get_size());
       molog("* Filled: %i\n", m_wares[i]->get_filled());
       molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());
-   }
+	}
 }
 
 /*
@@ -602,7 +602,7 @@ void ConstructionSite::draw
 			 a,
 			 (g_gr->nr_frames(a) - 1) * FRAME_LENGTH,
 			 get_owner());
-   }
+	}
 
 	assert(lines <= h);
 	dst.drawanimrect

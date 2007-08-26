@@ -48,11 +48,11 @@ class MultiSelect {
          if(t) ++m_nr_enabled;
          else --m_nr_enabled;
          assert(m_nr_enabled>=0);
-      }
+		}
       inline bool is_enabled(int n) {
 		if (static_cast<const int>(m_enabled.size()) < n + 1) return false;
          return m_enabled[n];
-      }
+		}
       inline int get_nr_enabled(void) { return m_nr_enabled; }
 	int get_random_enabled() {
 		const int rand_value = static_cast<const int>
@@ -63,7 +63,7 @@ class MultiSelect {
          int j=rand_value+1;
          while(j) { if(is_enabled(i)) j--; ++i; }
          return i-1;
-      }
+		}
 
    private:
       int m_nr_enabled;

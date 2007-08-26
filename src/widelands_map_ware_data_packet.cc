@@ -56,10 +56,10 @@ throw (_wexception)
    FileRead fr;
    try {
       fr.Open( fs, "binary/ware" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
 
    // First packet version
    int packet_version=fr.Unsigned16();
@@ -73,10 +73,10 @@ throw (_wexception)
          w=new WareInstance(0,0); // data is read somewhere else
          w->init(egbase);
          ol->register_object(egbase, fr.Unsigned32(), w);
-      }
+		}
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown version %i in Widelands_Map_Ware_Data_Packet!\n", packet_version);
 
    assert( 0 );
@@ -112,8 +112,8 @@ throw (_wexception)
             for(int i=0; i<fl->m_item_filled; i++) {
                assert(!os->is_object_known(fl->m_items[i].item));
                ids.push_back(os->register_object(fl->m_items[i].item));
-            }
-         }
+				}
+			}
 
          // Now, check for workers
          Bob* b=f->get_first_bob();
@@ -124,12 +124,12 @@ throw (_wexception)
                if(ware) {
                   assert(!os->is_object_known(ware));
                   ids.push_back(os->register_object(ware));
-               }
-            }
+					}
+				}
             b=b->get_next_bob();
-         }
-      }
-   }
+			}
+		}
+	}
 
    // All checked, we only need to save those stuff to disk
    fw.Unsigned32(ids.size());

@@ -52,10 +52,10 @@ throw (_wexception)
    FileRead fr;
    try {
       fr.Open( fs, "binary/road" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
    // First packet version
    int packet_version=fr.Unsigned16();
 
@@ -68,10 +68,10 @@ throw (_wexception)
          Road* road=new Road();
          road->init(egbase);
          ol->register_object(egbase, ser, road);
-      }
+		}
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown version %i in Widelands_Map_Road_Data_Packet!\n", packet_version);
    assert( 0 );
 }
@@ -108,9 +108,9 @@ throw (_wexception)
             fw.Unsigned32(serial);
 
             log("ROAD: writing at (%i,%i): %i\n", x, y, serial);
-         }
-      }
-   }
+			}
+		}
+	}
    fw.Unsigned32(0xffffffff);
 
    fw.Write( fs, "binary/road" );

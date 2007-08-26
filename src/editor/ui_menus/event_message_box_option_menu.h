@@ -65,7 +65,7 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
       struct Button_Descr {
          std::string name;
          int trigger;
-      } m_buttons[MAX_BUTTONS];
+		} m_buttons[MAX_BUTTONS];
 
       UI::Checkbox* m_is_modal;
       UI::Edit_Box* m_caption;

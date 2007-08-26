@@ -136,7 +136,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 			 buffer, Align_CenterLeft, -1,
 			 Widget_Cache_None, 0, -1, false);
       posx -= sub;
-   }
+	}
 
    // draw yticks, one at full, one at half
    dst->draw_line(get_inner_w()-space_at_right, spacing, get_inner_w()-space_at_right-3, spacing, LINE_COLOR);
@@ -151,8 +151,8 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
          for(uint l = 0; l < m_plotdata[i].dataset->size(); l++)
             if( max < (*m_plotdata[i].dataset)[l])
                max = (*m_plotdata[i].dataset)[l];
-      }
-   } else {
+		}
+	} else {
       for(uint plot = 0; plot < m_plotdata.size(); plot++) {
          if(!m_plotdata[plot].showplot) continue;
 
@@ -168,10 +168,10 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
             if( ! ( (i+1) % how_many ) ) {
                if(add > max) max = add;
                add = 0;
-            }
-         }
-      }
-   }
+				}
+			}
+		}
+	}
 
    // Print the maximal value
    sprintf(buffer, "%i", max);
@@ -206,12 +206,12 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
             if( ! ( (i+1) % how_many ) ) {
                m_data.push_back(add);
                add = 0;
-            }
-         }
+				}
+			}
 
          dataset = &m_data;
          sub = xline_length /  (float)NR_SAMPLES;
-      }
+		}
 
       posx = get_inner_w()-space_at_right;
 
@@ -225,15 +225,15 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
          if(value) {
             float length_y = yline_length / ((float)max / (float)value);
             cury -= (int)length_y;
-         }
+			}
          dst->draw_line(lx, ly, curx, cury, color);
 
          posx -= sub;
 
          lx = curx;
          ly = cury;
-      }
-   }
+		}
+	}
 }
 
 /*
@@ -242,7 +242,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 void WUIPlot_Area::register_plot_data( uint id, const std::vector<uint>* data, RGBColor color ) {
    if(id >= m_plotdata.size()) {
       m_plotdata.resize(id+1);
-   }
+	}
 
    m_plotdata[id].dataset = data;
    m_plotdata[id].showplot = false;

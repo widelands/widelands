@@ -213,7 +213,7 @@ void Editor_Event_Menu::update(void) {
 				m_trigger_list->set_entry_color
 				(m_trigger_list->size() - 1, RGBColor(255,0,0));
 		}
-   }
+	}
 
    m_event_list->clear();
 	{
@@ -226,7 +226,7 @@ void Editor_Event_Menu::update(void) {
 				m_event_list->set_entry_color
 				(m_event_list->size()-1, RGBColor(255,0,0));
 		}
-   }
+	}
 
    m_eventchain_list->clear();
 	{
@@ -237,7 +237,7 @@ void Editor_Event_Menu::update(void) {
 			EventChain* evc = &mecm.get_eventchain_by_nr(i);
 			m_eventchain_list->add(evc->get_name(), evc);
 		}
-   }
+	}
 
 
    m_trigger_list->sort();
@@ -246,11 +246,11 @@ void Editor_Event_Menu::update(void) {
 	if (not m_trigger_list->has_selection()) {
       m_btn_del_trigger->set_enabled(false);
       m_btn_edit_trigger->set_enabled(false);
-   }
+	}
 	if (not m_event_list->has_selection()) {
       m_btn_del_event->set_enabled(false);
       m_btn_edit_event->set_enabled(false);
-   }
+	}
 }
 
 
@@ -260,7 +260,7 @@ void Editor_Event_Menu::clicked_new_event() {
 	if (ntm.run()) {
          update();
          m_parent->set_need_save(true);
-      }
+		}
 }
 
 
@@ -305,7 +305,7 @@ void Editor_Event_Menu::clicked_new_trigger() {
 	if (ntm.run())  {
          update();
          m_parent->set_need_save(true);
-      }
+		}
 	}
 
 
@@ -361,18 +361,18 @@ void Editor_Event_Menu::clicked_new_eventchain() {
             if (not map.get_mecm().get_eventchain(buffer))
                break;
             ++n;
-         }
+			}
 
          ev->set_name( buffer );
          map.get_mecm().register_new_eventchain(ev);
 			m_eventchain_list->add(_("Unnamed").c_str(), ev, -1, true);
          m_eventchain_list->sort();
 		clicked_edit_eventchain();
-      } else {
+		} else {
          // TriggerConditional was not accepted. Remove this EventChain straithly.
          // No dereferencing of triggers is needed, since they are not referenced at all on cancel
          delete ev;
-      }
+		}
 }
 
 

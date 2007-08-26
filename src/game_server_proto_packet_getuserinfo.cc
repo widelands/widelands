@@ -65,7 +65,7 @@ void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connectio
 
       gsc->server_message( buffer );
       return;
-   }
+	}
 
    assert(flags == UI_ACK);
 

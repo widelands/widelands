@@ -73,7 +73,7 @@ m_pit     (pit)
 			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
       if(w>width) width=w;
       if(h>height) height=h;
-   }
+	}
 
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart, (immovables_in_row)*(height+1+space)+ystart+yend);
 	const uint tab_icon =
@@ -91,7 +91,7 @@ m_pit     (pit)
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
          box->resize();
 			m_tabpanel.add(tab_icon, box);
-      }
+		}
 
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box, xpos, ypos,
@@ -106,7 +106,7 @@ m_pit     (pit)
 		box->add(&cb, Align_Left);
       box->add_space(space);
       xpos+=width+1+space;
-   }
+	}
    ypos+=height+1+space+5;
 
 	m_tabpanel.activate(0);

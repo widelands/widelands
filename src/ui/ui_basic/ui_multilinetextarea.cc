@@ -81,7 +81,7 @@ void Multiline_Textarea::set_text(const std::string & text) {
       m_textheight = 0;
       m_textpos = 0;
 		m_scrollbar.set_steps(1);
-   }
+	}
    if (m_cache_mode != Widget_Cache_New)
       m_cache_mode = Widget_Cache_Update;
    update(0, 0, get_eff_w(), get_h());
@@ -145,7 +145,7 @@ void Multiline_Textarea::draw(RenderTarget* dst)
 			 m_cache_mode, &m_cache_id);
       draw_scrollbar();
       m_cache_mode = Widget_Cache_Use;
-   }
+	}
 }
 
 void Multiline_Textarea::draw_scrollbar() {
@@ -155,7 +155,7 @@ void Multiline_Textarea::draw_scrollbar() {
       if (m_scrollmode == ScrollLog) {
          if (m_textpos >= m_textheight - get_h() - g_fh->get_fontheight(m_fontname, m_fontsize))
             setbottom = true;
-      }
+		}
 
 		uint m_width = 0;
       //update(0, 0, get_eff_w(), get_h());
@@ -167,7 +167,7 @@ void Multiline_Textarea::draw_scrollbar() {
 
 		m_scrollbar.set_steps(m_textheight - get_h());
 		m_scrollbar.set_pos(m_textpos);
-   }
+	}
 }
 
 bool Multiline_Textarea::handle_mousepress(const Uint8 btn, int x, int y) {

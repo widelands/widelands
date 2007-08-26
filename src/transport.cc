@@ -1227,7 +1227,7 @@ void Road::init(Editor_Game_Base *gg)
 
    if(m_path.get_nsteps() >=2 ) {
       link_into_flags(gg);
-   }
+	}
 
 }
 
@@ -1269,8 +1269,8 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
          // This happens after a road split. Tell the carrier what's going on
          carrier->set_location(this);
          carrier->update_task_road(game);
-      }
-   }
+		}
+	}
 }
 
 /**
@@ -1864,7 +1864,7 @@ void Requeriments::Read
 
 		// DONE
       return;
-   }
+	}
    throw wexception("Unknown requeriment version %i in file!\n", version);
 }
 
@@ -1984,13 +1984,13 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
             if(what_is==WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, ware);
-            } else if (what_is==WORKER){
+				} else if (what_is==WORKER){
                Worker* worker=static_cast<Worker*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, worker);
-            } else if (what_is==SOLDIER){
+				} else if (what_is==SOLDIER){
                Soldier* soldier=static_cast<Soldier*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, soldier);
-            }
+				}
             trans->set_idle(fr->Unsigned8());
             m_transfers.push_back(trans);
 
@@ -2000,15 +2000,15 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 					m_requeriments = new Requeriments();
 					m_requeriments->Read (fr, egbase, mol);
 				}
-         }
-      }
+			}
+		}
 
       if(!is_open() && m_economy)
          m_economy->remove_request(this);
 
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown request version %i in file!\n", version);
 }
 
@@ -2051,13 +2051,13 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
       if(trans->m_item) {
          assert(mos->is_object_known(trans->m_item));
          fw->Unsigned32(mos->get_object_file_index(trans->m_item));
-      } else if (trans->m_worker){
+		} else if (trans->m_worker){
          assert(mos->is_object_known(trans->m_worker));
          fw->Unsigned32(mos->get_object_file_index(trans->m_worker));
-      } else if (trans->m_soldier){
+		} else if (trans->m_soldier){
          assert(mos->is_object_known(trans->m_soldier));
          fw->Unsigned32(mos->get_object_file_index(trans->m_soldier));
-      }
+		}
       // Write idle
       fw->Unsigned8(trans->is_idle());
 
@@ -2070,7 +2070,7 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
 		}
 		else
 			fw->Unsigned8(false);
-   }
+	}
    // DONE
 }
 
@@ -2650,7 +2650,7 @@ void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Ma
    if(m_request) {
       fw->Unsigned8(1);
       m_request->Write(fw,egbase,os);
-   } else
+	} else
       fw->Unsigned8(0);
 }
 void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
@@ -2666,14 +2666,14 @@ void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_
       if(request) {
          m_request = new Request(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
          m_request->Read(fr,egbase,ol);
-      } else {
+		} else {
          m_request=0;
-      }
+		}
 
       // Now Economy stuff. We have to add our filled items to the economy
       add_to_economy(m_owner->get_economy());
       return;
-   }
+	}
    throw wexception("WaresQueue::Read: Unknown WaresQueueVersion %i!\n", version);
 }
 
@@ -3186,8 +3186,8 @@ void Economy::remove_warehouse(Warehouse *wh)
          if (i < m_warehouses.size()-1)
             m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
          break;
-      }
-   }
+		}
+	}
    /*
     * This assert was modified, since on
     * loading, warehouses might try to remove
@@ -3818,7 +3818,7 @@ void Cmd_Call_Economy_Balance::Read(FileRead* fr, Editor_Game_Base* egbase, Wide
          m_economy=egbase->get_player(m_player)->get_economy_by_number(fr->Unsigned16());
 
       m_force_balance = true; // on load, the first balance has to been forced
-   } else
+	} else
       throw wexception("Unknown version %i in Cmd_Call_Economy_Balance::Read()!\n", version);
 }
 void Cmd_Call_Economy_Balance::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {

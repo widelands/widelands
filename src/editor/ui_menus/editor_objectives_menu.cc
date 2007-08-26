@@ -275,7 +275,7 @@ void Editor_Objectives_Menu::clicked_edit() {
 	if (evw.run()) {
 		m_table.sort();
 		m_trigger->set_text(m_table.get_selected().get_trigger()->get_name());
-         }
+			}
 }
 
 void Editor_Objectives_Menu::clicked_del() {
@@ -291,12 +291,12 @@ void Editor_Objectives_Menu::clicked_del() {
                str += ":";
                str += i->first->get_name();
                str += " ";
-            }
+				}
 		UI::Modal_Message_Box mmb
 			(m_parent, _("Error!"), str.c_str(), UI::Modal_Message_Box::OK);
 		mmb.run();
             return;
-         }
+			}
 
 	Map & map = m_parent->egbase().map();
 	map.get_mtm().delete_trigger(obj.get_trigger()->get_name());

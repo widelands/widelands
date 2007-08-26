@@ -113,7 +113,7 @@ m_allow_button
 			continue;
 		(m_player->is_building_allowed(i) ? m_allowed : m_forbidden).add
 			(building.descname().c_str(), i, building.get_buildicon());
-   }
+	}
 	m_forbidden.sort();
 	m_allowed  .sort();
    update();

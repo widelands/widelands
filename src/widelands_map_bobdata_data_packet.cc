@@ -70,10 +70,10 @@ throw
    FileRead fr;
    try {
       fr.Open( fs, "binary/bob_data" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
 
    // First packet version
    int packet_version=fr.Unsigned16();
@@ -91,7 +91,7 @@ throw
          if(read_owner) {
             plr_owner=egbase->get_safe_player(read_owner);
             assert(plr_owner); // He must be there
-         }
+			}
 
          Coords pos;
          pos.x=fr.Unsigned16();
@@ -108,7 +108,7 @@ throw
          if(have_transfer) {
             trans=bob->m_stack[0].transfer;
             assert(trans);
-         }
+			}
 
          //         if(!have_transfer)
          //           bob->reset_tasks(static_cast<Game*>(egbase));
@@ -118,7 +118,7 @@ throw
          // Animation
          if(fr.Unsigned8()) {
             bob->m_anim=bob->descr().get_animation(fr.CString());
-         } else
+			} else
             bob->m_anim=0;
          bob->m_animstart=fr.Signed32();
 
@@ -144,7 +144,7 @@ throw
                   task=&Worker::taskProgram;
                else
                   task=&Critter_Bob::taskProgram;
-            } else if(taskname=="transfer") task=&Worker::taskTransfer;
+				} else if(taskname=="transfer") task=&Worker::taskTransfer;
             else if(taskname=="buildingwork") task=&Worker::taskBuildingwork;
             else if(taskname=="return") task=&Worker::taskReturn;
             else if(taskname=="gowarehouse") task=&Worker::taskGowarehouse;
@@ -174,7 +174,7 @@ throw
             if(obj) {
                assert(ol->is_object_known(obj));
                s->objvar1=ol->get_object_by_file_index(obj);
-            } else
+				} else
                s->objvar1=0;
             s->svar1=fr.CString();
             s->coords.x=fr.Signed32();
@@ -190,10 +190,10 @@ throw
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString())
-               };
+					};
                s->diranims = new DirAnimations
                   (anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
-            } else
+				} else
                s->diranims=0;
 
             uint pathsteps=fr.Unsigned16();
@@ -207,7 +207,7 @@ throw
                for(uint step=0; step<pathsteps; step++)
 						path->append(egbase->map(), fr.Unsigned8());
                s->path=path;
-            } else
+				} else
                s->path=0;
 
             if(s->transfer && i<oldstacksize && !trans)
@@ -238,9 +238,9 @@ throw
                   assert(ol->is_object_known(idx));
                   Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(idx));
                   r->m_route.push_back(flag);
-               }
+					}
                s->route=r;
-            } else
+				} else
                s->route=0;
 
             // Now programm
@@ -251,9 +251,9 @@ throw
                   s->program=static_cast<Worker*>(bob)->descr().get_program(progname);
                else
                   s->program=static_cast<Critter_Bob*>(bob)->descr().get_program(progname);
-            } else
+				} else
                s->program=0;
-         }
+			}
 
          // Rest of bob stuff
          bob->m_stack_dirty=fr.Unsigned8();
@@ -264,13 +264,13 @@ throw
             case Bob::CRITTER: read_critter_bob(&fr,egbase,ol,static_cast<Critter_Bob*>(bob)); break;
             case Bob::WORKER: read_worker_bob(&fr,egbase,ol,static_cast<Worker*>(bob)); break;
             default: throw wexception("Unknown sub bob type %i in Widelands_Map_Bobdata_Data_Packet::Read\n", bob->get_bob_type());
-         }
+			}
 
          ol->mark_object_as_loaded(bob);
-      }
+		}
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown version %i in Widelands_Map_Bobdata_Data_Packet!\n", packet_version);
 
    assert(0); // Never here
@@ -281,7 +281,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Ga
 
    if(version==CRITTER_BOB_PACKET_VERSION) {
       // No data for critter bob currently
-   } else
+	} else
       throw wexception("Unknown version %i in Critter Bob Subpacket!\n", version);
 }
 
@@ -348,7 +348,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 				 "worker bob packet version %u",
 				 fr->GetPrevPos(),
 				 worker, worker->get_serial(), carrier_worker_bob_packet_version);
-      }
+		}
 
       // location
       uint reg=fr->Unsigned32();
@@ -356,7 +356,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
          assert(ol->is_object_known(reg));
          worker->set_location(static_cast<PlayerImmovable*>(ol->get_object_by_file_index(reg)));
          assert(worker->m_location.get(egbase));
-      } else
+		} else
          worker->m_location=0;
 
 
@@ -365,7 +365,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
       if(reg) {
          assert(ol->is_object_known(reg));
          worker->m_carried_item=ol->get_object_by_file_index(reg);
-      } else
+		} else
          worker->m_carried_item=0;
 
       // Skip supply
@@ -382,7 +382,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
          static_cast<WareInstance*>(worker->m_carried_item.get(egbase))->set_economy(eco);
 
 
-   } else
+	} else
       throw wexception("Unknown version %i in Worker Bob Subpacket!\n", version);
 }
 
@@ -416,9 +416,9 @@ throw (_wexception)
                   bobarr[i] = jbob;
                   bobarr[j] = ibob;
                   ibob=jbob;
-               }
-            }
-         }
+					}
+				}
+			}
 
          for(uint i=0; i<bobarr.size(); i++) {
             Bob* bob=bobarr[i];
@@ -452,7 +452,7 @@ throw (_wexception)
             if(bob->m_anim) {
                fw.Unsigned8(1);
                fw.CString(bob->descr().get_animation_name(bob->m_anim).c_str());
-            } else
+				} else
                fw.Unsigned8(0);
             fw.Signed32(bob->m_animstart);
 
@@ -482,7 +482,7 @@ throw (_wexception)
                if(obj) {
                   assert(os->is_object_known(obj));
                   fw.Unsigned32(os->get_object_file_index(obj));
-               } else
+					} else
                   fw.Unsigned32(0);
 
                fw.CString(s->svar1.c_str());
@@ -499,7 +499,7 @@ throw (_wexception)
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(4)).c_str());
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(5)).c_str());
                   fw.CString(bob->descr().get_animation_name(s->diranims->get_animation(6)).c_str());
-               } else
+					} else
                   fw.Unsigned8(0);
 
                // Path
@@ -515,7 +515,7 @@ throw (_wexception)
 							 idx < nr_steps;
 							 ++idx)
 							fw.Unsigned8((*path)[idx]);
-               } else
+					} else
                   fw.Unsigned16(0);
 
                // Route
@@ -527,19 +527,19 @@ throw (_wexception)
                      Flag* f=s->route->get_flag(egbase, idx);
                      assert(os->is_object_known(f));
                      fw.Unsigned32(os->get_object_file_index(f));
-                  }
-               } else
+						}
+					} else
                   fw.Unsigned8(0);
 
                // Programm
                if(s->program) {
                   fw.Unsigned8(1);
                   fw.CString(s->program->get_name().c_str());
-               } else
+					} else
                   fw.Unsigned8(0);
 
 
-            }
+				}
 
             fw.Unsigned8(bob->m_stack_dirty);
             fw.Unsigned8(bob->m_sched_init_task);
@@ -550,13 +550,13 @@ throw (_wexception)
                case Bob::WORKER: write_worker_bob(&fw,egbase,os,static_cast<Worker*>(bob)); break;
                default: throw wexception("Unknown sub bob type %i in Widelands_Map_Bobdata_Data_Packet::Write\n", bob->get_bob_type());
 
-            }
+				}
 
             os->mark_object_as_saved(bob);
-         }
+			}
 
-      }
-   }
+		}
+	}
    fw.Unsigned32(0xffffffff); // No more bobs
 
    fw.Write( fs, "binary/bob_data" );
@@ -590,7 +590,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
          fw->Unsigned32(soldier->m_defense_level);
          fw->Unsigned32(soldier->m_evade_level);
          fw->Unsigned8 (soldier->m_marked);
-      }
+		}
       break;
 
       case Worker_Descr::CARRIER:
@@ -599,17 +599,17 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
          Carrier* c=static_cast<Carrier*>(worker);
 
          fw->Signed32(c->m_acked_ware);
-      }
+		}
       break;
       default: throw wexception("Unknown Worker %i in Widelands_Map_Bobdata_Data_Packet::write_worker_bob()\n", worker->get_worker_type());
-   }
+	}
 
    // location
    Map_Object* loca=worker->m_location.get(egbase);
    if(loca) {
       assert(os->is_object_known(loca));
       fw->Unsigned32(os->get_object_file_index(loca));
-   } else
+	} else
       fw->Unsigned32(0);
 
    // Economy is not our beer
@@ -619,7 +619,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
    if(carried_item) {
       assert(os->is_object_known(carried_item));
       fw->Unsigned32(os->get_object_file_index(carried_item));
-   } else
+	} else
       fw->Unsigned32(0);
 
    //This is not needed

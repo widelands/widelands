@@ -40,7 +40,7 @@ EventChain::State EventChain::run( Game* g ) {
 	while (m_curevent < m_events.size()) {
 		if (m_events[m_curevent]->run(g) == Event::DONE) ++m_curevent;
       else break;
-   }
+	}
 
 	if (m_curevent == m_events.size()) {
       // Last event has been run. This is finished
@@ -49,13 +49,13 @@ EventChain::State EventChain::run( Game* g ) {
          m_curevent = 0;
          m_trigconditional->reset_triggers( g );
          m_state = INIT;
-      } else {
+		} else {
          // This eventchain is completly done
          m_state = DONE;
-      }
-   } else {
+		}
+	} else {
       assert( m_events[m_curevent]->get_state() == Event::RUNNING );
-   }
+	}
 
    return m_state;
 }
@@ -107,7 +107,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 		else
 			return g->enqueue_command
 			(new Cmd_CheckEventChain(g->get_gametime() + 30000, -1));
-   }
+	}
 
 	EventChain & evchain = mecm.get_eventchain_by_nr(m_eventchain_id);
 
@@ -118,31 +118,31 @@ void Cmd_CheckEventChain::execute (Game* g)
          if (evchain.get_trigcond()->eval(g)) {
             // Hooray, we can start the shit off
             evchain.run(g);
-         }
-      }
+			}
+		}
       break;
 
       case EventChain::RUNNING:
       {
          // This chain is currently running. Continue to run it
          evchain.run(g);
-      }
+		}
       break;
 
       case EventChain::DONE:
       {
          // This shouldn't happen!
          throw wexception("Cmd_CheckEventChain: Done event chain found. no good no good!\n");
-      }
+		}
       break;
-   }
+	}
 
 	if (evchain.get_state() == EventChain::DONE) {
 		mecm.delete_eventchain(evchain.get_name());
 		nr_eventchains = mecm.get_nr_eventchains();
 		map.get_mem().delete_unreferenced_events();
 		map.get_mtm().delete_unreferenced_triggers();
-   }
+	}
 
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds
 	const int delay = nr_eventchains ? 1000 / nr_eventchains : 30000;

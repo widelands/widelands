@@ -123,7 +123,7 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
 	case String_Type:
          m_variable = new String_MapVariable( 0 );
          break;
-   }
+	}
 
 	m_variable->set_name(buffer);
 	mvm.register_new_variable(m_variable);
@@ -232,22 +232,22 @@ void Edit_Variable_Window::clicked_ok() {
 					(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
             mb.run();
             return;
-         }
+			}
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%li", ivar);
 
 			static_cast<Int_MapVariable &>(var).set_value(ivar);
 			m_te.set_string(1, buffer);
-      }
+		}
       break;
 
       case MapVariable::MVT_STRING:
       {
 			static_cast<String_MapVariable &>(var).set_value(m_value.get_text());
 			m_te.set_string(1, m_value.get_text());
-      }
+		}
       break;
-   }
+	}
 
 	var.set_name(m_name.get_text());
 	m_te.set_string(0, var.get_name());
@@ -379,7 +379,7 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
       case MapVariable::MVT_INT: pic = "pics/map_variable_int.png"; break;
       case MapVariable::MVT_STRING: pic = "pics/map_variable_string.png"; break;
       default: pic = "nothing";
-   };
+	};
 
 	UI::Table<MapVariable &>::Entry_Record & t = m_table.add
 		(var, g_gr->get_picture(PicMod_UI, pic), true);
@@ -393,7 +393,7 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable &>(var).get_value());
          val = buffer;
-      }
+		}
       break;
 
       case MapVariable::MVT_STRING:
@@ -401,7 +401,7 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
       break;
 
       default: val = "";
-   }
+	}
 	t.set_string(0, var.get_name());
 	t.set_string(1, val.c_str());
 

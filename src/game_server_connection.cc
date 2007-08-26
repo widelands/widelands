@@ -45,7 +45,7 @@ Game_Server_Connection::~Game_Server_Connection() {
    if(m_socket) {
       SDLNet_TCP_Close(m_socket);
       SDLNet_FreeSocketSet( m_socketset );
-   }
+	}
 
    m_socket = 0;
 }
@@ -115,7 +115,7 @@ void Game_Server_Connection::handle_data( void ) {
          // Upsy, no data. But rather a disconnect
          (*m_dch)( m_dchd );
          return;
-      }
+		}
 
       log("Read %i bytes from the net!\n", buf.size());
       // Get the header
@@ -127,20 +127,20 @@ void Game_Server_Connection::handle_data( void ) {
          if( !m_pending_packets.count( index )) {
             log("Game_Server_Connection: WARNING Unknown response packet with id %i, dropped\n", index);
             return;
-         }
+			}
 
          Game_Server_Protocol_Packet* pp = m_pending_packets[index];
 
          if( pp->get_id() != id)  {
             log("Game_Server_Connection: WARNING Response packet with wrong id (has: %i, should: %i), dropped\n", pp->get_id(), id);
             return;
-         }
+			}
 
          pp->handle_reply( this, &buf );
 
          delete pp;
          m_pending_packets.erase( m_pending_packets.find( index ) );
-      } else {
+		} else {
          // server requests
          Game_Server_Protocol_Packet* pp = 0;
          switch( id ) {
@@ -148,7 +148,7 @@ void Game_Server_Connection::handle_data( void ) {
             case GGSPP_CHATMESSAGE: pp = new Game_Server_Protocol_Packet_ChatMessage(0, ""); break;
             case GGSPP_PING: pp = new Game_Server_Protocol_Packet_Ping(); break;
             default: log("Game_Server_Connection: WARNING unknown protocol packet id in server request, dropped!\n"); break;
-         }
+			}
          if(pp) {
             pp->recv( this, &buf );
 
@@ -162,9 +162,9 @@ void Game_Server_Connection::handle_data( void ) {
 
             SDLNet_TCP_Send(m_socket, reply.get_data(), reply.size());
 
-         }
-      }
-   }
+			}
+		}
+	}
 }
 
 /*

@@ -65,7 +65,7 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
       snprintf(buffer, 1024, _("Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored").c_str(), CM_ACK, answer);
 
       gsc->server_message( buffer );
-   }
+	}
 }
 
 /*

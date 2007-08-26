@@ -55,7 +55,7 @@ m_parent(parent)
    for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
 		Trigger_Descr & d = *Trigger_Factory::get_trigger_descr(i);
 		m_trigger_list->add(i18n::translate(d.name).c_str(), d);
-   }
+	}
    m_trigger_list->sort();
 
    // Descr List
@@ -116,7 +116,7 @@ void Editor_Event_Menu_New_Trigger::clicked_ok() {
    if(!trig) {
       // No trigger created, don't close us. let user choose other trigger
       return;
-   }
+	}
 	m_parent->egbase().map().get_mtm().register_new_trigger(trig);
    end_modal(1);
    return;

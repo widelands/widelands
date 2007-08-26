@@ -89,5 +89,5 @@ void Main_Menu_Save_Map_Make_Directory::edit_changed(void) {
    if(text.size()) {
       m_ok_button->set_enabled(true);
       m_dirname=text;
-   }
+	}
 }

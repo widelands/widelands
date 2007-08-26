@@ -34,7 +34,7 @@ struct Modal_Message_Box : public Window {
       enum MB_Type {
          OK,
          YESNO
-      };
+		};
 	Modal_Message_Box
 		(Panel * const parent,
 		 const std::string & caption,

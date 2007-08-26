@@ -106,7 +106,7 @@ void Font_Handler::draw_string
 		                       bg,
 		                       0,
 		                       0,
-		                   };
+		};
 
 		std::list<_Cache_Infos>::iterator i=find(m_cache.begin(), m_cache.end(), ci);
 

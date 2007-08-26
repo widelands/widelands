@@ -483,7 +483,7 @@ bool Computer_Player::construct_building ()
 			    prio-=spots_avail[BUILDCAPS_BIG]/2;
 			    prio-=spots_avail[BUILDCAPS_MEDIUM]/4;
 			    prio-=spots_avail[BUILDCAPS_SMALL]/8;
-		    }
+			}
 
 		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
 			    if (j->need_trees)
@@ -519,10 +519,10 @@ bool Computer_Player::construct_building ()
 				    prio+=4*wares[j->production_hint].consumers;
 				    prio+=2*wares[j->production_hint].preciousness;
 				}
-			    }
+				}
 
 			    prio-=2*j->cnt_under_construction*(j->cnt_under_construction+1);
-		    }
+			}
 
 		    if (bf->preferred)
 			prio+=prio/2 + 1;
@@ -536,7 +536,7 @@ bool Computer_Player::construct_building ()
 			    proposed_building=j->id;
 			    proposed_priority=prio;
 			    proposed_coords=bf->coords;
-		    }
+			}
 		}
 	}
 
@@ -600,7 +600,7 @@ void Computer_Player::check_productionsite (ProductionSiteObserver& site)
 
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
-	
+
 	const Workarea_Info & workarea_info = site.bo->desc->m_recursive_workarea_info;
 	for
 		(Workarea_Info::const_iterator it = workarea_info.begin();
@@ -726,7 +726,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 				    field->military_influence+=v*(v+2)*6;
 				    field->avoid_military=true;
 				}
-			    }
+				}
 
 				if
 					(const ProductionSite_Descr * const target_productionsite_descr =
@@ -1001,7 +1001,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 	    if (f!=nearflags.end()) {
 		queue.pop ();
 		continue;
-	    }
+		}
 
 	    nearflags.push_back (queue.top());
 	    queue.pop ();
@@ -1023,7 +1023,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 		    continue;
 
 		queue.push (NearFlag(endflag, nf.cost+road->get_path().get_nsteps(), dist));
-	    }
+		}
 	}
 
 	std::sort (nearflags.begin(), nearflags.end(), CompareDistance());
@@ -1176,7 +1176,7 @@ void Computer_Player::construct_roads ()
 		spots.back().cost=0;
 		spots.back().eco=(*i)->economy;
 		spots.back().from=-1;
-	    }
+		}
 
 	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
 		spots.push_back(WalkableSpot());
@@ -1232,7 +1232,7 @@ void Computer_Player::construct_roads ()
 			break;
 
 		spots[i].neighbours[j]=(k<(int) spots.size()) ? k : -1;
-	    }
+		}
 
 	log
 		("Computer_Player(%u): %u spots for road building (%f seconds) \n", player_number, spots.size(), static_cast<const double>(clock() - time_before) / CLOCKS_PER_SEC);
@@ -1251,7 +1251,7 @@ void Computer_Player::construct_roads ()
 
 			queue.push (&to - &spots.front());
 			continue;
-		    }
+			}
 
 			if (from.eco != to.eco and to.cost > 0) {
 			std::list<Coords> pc;
@@ -1301,7 +1301,7 @@ void Computer_Player::construct_roads ()
 
 				game().send_player_build_road (player_number, path);
 			return;
-		    }
+			}
 		}
 	}
 }

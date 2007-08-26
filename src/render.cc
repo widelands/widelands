@@ -148,7 +148,7 @@ void Surface::brighten_rect(const Rect rc, const int factor) {
          if (r & 0xFF00) r = (~r) >> 24;
          clr = SDL_MapRGB( m_surface->format, r, g, b );
          set_pixel( x, y, clr );
-   }
+	}
 }
 
 
@@ -392,7 +392,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
             *p = '0' + (nr % 10);
             nr = nr / 10;
-         }
+			}
 
          if (nr) // cycled up to maximum possible frame number
             break;
@@ -402,7 +402,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
          if (!g_fs->FileExists(fname)) {
             if(i==(nextensions-1)) { alldone=true; break; }
             continue;
-         }
+			}
 
 			try {
 				SDL_Surface & bmp = *LoadImage(fname);
@@ -411,20 +411,20 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				Surface & frame = *new Surface();
 				frames.push_back(&frame);
 				frame.set_sdl_surface(bmp);
-         }
+			}
          catch(std::exception& e)
          {
             log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
             continue;
-         }
+			}
 
 
          if(!cycling) alldone=true;
 			break;
-      }
+		}
 
       if(alldone==true) break;
-   }
+	}
 
    m_plrframes[0] = frames;
 
@@ -447,8 +447,8 @@ AnimationGfx::~AnimationGfx()
       std::vector<Surface*>& frames = m_plrframes[i];
       for( uint j = 0; j < frames.size(); j++) {
          delete frames[j];
-      }
-   }
+		}
+	}
    delete[] m_plrframes;
 }
 
@@ -494,10 +494,10 @@ void AnimationGfx::encode( uchar plr, const RGBColor* plrclrs )
 				else if (clr == plrclr2) newsurface.set_pixel(x, y, new_plrclr2);
 				else if (clr == plrclr3) newsurface.set_pixel(x, y, new_plrclr3);
 				else if (clr == plrclr4) newsurface.set_pixel(x, y, new_plrclr4);
-         }
-      }
+			}
+		}
 
       // Add to the framse
 		frames.push_back(&newsurface);
-   }
+	}
 }

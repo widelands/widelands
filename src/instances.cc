@@ -57,9 +57,9 @@ void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widela
       if( fileserial ) {
          assert(mol->is_object_known(fileserial));
          obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
-      } else
+		} else
          obj_serial = 0;
-   } else
+	} else
       throw wexception("Unknown version in Cmd_Destroy_Map_Object::Read: %i", version);
 }
 void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
@@ -74,7 +74,7 @@ void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Wide
    if(obj) { // The object might have vanished
       assert(mos->is_object_known(obj));
       fw->Unsigned32(mos->get_object_file_index(obj));
-   } else
+	} else
       fw->Unsigned32( 0 );
 
 }
@@ -103,13 +103,13 @@ void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
       if( fileserial ) {
          assert(mol->is_object_known(fileserial));
          obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
-      } else
+		} else
          obj_serial = 0;
 
       // arg
       arg=fr->Unsigned32();
 
-   } else
+	} else
       throw wexception("Unknown version in Cmd_Act::Read: %i", version);
 }
 void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
@@ -124,7 +124,7 @@ void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    if( obj ) { // Object might have dissappeared
       assert(mos->is_object_known(obj));
       fw->Unsigned32(mos->get_object_file_index(obj));
-   } else
+	} else
       fw->Unsigned32( 0 );
 
    // And arg
@@ -177,7 +177,7 @@ void Object_Manager::insert(Map_Object *obj)
    if(obj->m_file_serial==0) {
       m_last_file_serial++;
       obj->m_file_serial = m_last_file_serial;
-   }
+	}
 	m_objects[m_lastserial] = obj;
 }
 
@@ -248,7 +248,7 @@ bool Map_Object_Descr::is_animation_known(const char* name) {
       if(i->first==name)
          return true;
       ++i;
-   }
+	}
    return false;
 }
 
@@ -259,7 +259,7 @@ void Map_Object_Descr::add_animation(const char* name, uint anim) {
    while(i!=m_anims.end()) {
       assert(i->first!=name);
       ++i;
-   }
+	}
    m_anims.insert(std::pair<std::string,uint>(use_name,anim));
 
 }

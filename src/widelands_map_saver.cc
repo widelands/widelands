@@ -145,21 +145,21 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       log("Writing Trigger Data ... ");
 		Widelands_Map_Trigger_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
-   }
+	}
 
    // Events
 	if (map.get_mem().get_nr_events()) {
       log("Writing Event Data ... ");
 		Widelands_Map_Event_Data_Packet        p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
-   }
+	}
 
    // Event Chains
 	if (map.get_mecm().get_nr_eventchains()) {
       log("Writing Event Chain Data ... ");
 		Widelands_Map_EventChain_Data_Packet   p; p.Write(m_fs, m_egbase, m_mos);
       log("done!\n ");
-   }
+	}
 
    // Allowed buildings
 	const Player_Number nr_players = map.get_nrplayers();
@@ -204,13 +204,13 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
       log("Writing Flagdata Data ... ");
 		{Widelands_Map_Flagdata_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
-   }
+	}
 
 	if (m_mos->get_nr_roads()) {
       log("Writing Roaddata Data ... ");
 		{Widelands_Map_Roaddata_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
-   }
+	}
 
 
 	if (m_mos->get_nr_buildings()) {
@@ -220,20 +220,20 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
 			p.Write(m_fs, m_egbase, m_mos);
 		}
       log("done!\n ");
-   }
+	}
 
 
 	if (m_mos->get_nr_wares()) {
       log("Writing Waredata Data ... ");
 		{Widelands_Map_Waredata_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
-   }
+	}
 
 	if (m_mos->get_nr_bobs()) {
       log("Writing Bobdata Data ... ");
 	   {Widelands_Map_Bobdata_Data_Packet     p; p.Write(m_fs, m_egbase, m_mos);}
       log("done!\n ");
-   }
+	}
 
 	if (m_mos->get_nr_immovables()) {
       log("Writing Immovabledata Data ... ");
@@ -242,7 +242,7 @@ void Widelands_Map_Saver::save(void) throw(_wexception) {
 			p.Write(m_fs, m_egbase, m_mos);
 		}
       log("done!\n ");
-   }
+	}
 
    log("Writing Owned-Fields Data ... ");
 	{Widelands_Map_Owned_Fields_Data_Packet   p; p.Write(m_fs, m_egbase, m_mos);}

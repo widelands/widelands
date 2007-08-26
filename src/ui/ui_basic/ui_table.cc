@@ -96,13 +96,13 @@ void Table<void *>::add_column(const std::string & name, const uint width) {
 		    3,
 		    &Table::header_button_clicked, this, m_columns.size(),
 		    name)
-   };
+	};
    m_columns.push_back(c);
    if(!m_scrollbar) {
       m_scrollbar=new Scrollbar(get_parent(), get_x()+get_w()-24, get_y()+m_columns[0].btn->get_h(), 24, get_h()-m_columns[0].btn->get_h(), false);
       m_scrollbar->moved.set(this, &Table::set_scrollpos);
       m_scrollbar->set_steps(1);
-   }
+	}
 
 }
 
@@ -129,7 +129,7 @@ void Table<void *>::header_button_clicked(Columns::size_type n) {
 		set_sort_descending(not get_sort_descending());
       sort();
       return;
-   }
+	}
 
    set_sort_column(n);
    sort();
@@ -182,14 +182,14 @@ void Table<void *>::draw(RenderTarget * dst)
 			dst->brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
-      }
+		}
 
       // First draw pictures
 		if (er.get_picid() != -1) {
 			uint w,h;
 			g_gr->get_picture_size(er.get_picid(), w, h);
 			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.get_picid());
-      }
+		}
 
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
@@ -208,7 +208,7 @@ void Table<void *>::draw(RenderTarget * dst)
                x= curx + m_max_pic_width + 10;
             else
                x= curx + 1;
-         }
+			}
 
          // Horizontal center the string
 			g_fh->draw_string
@@ -223,11 +223,11 @@ void Table<void *>::draw(RenderTarget * dst)
 				 -1);
 
          curx+=curw;
-      }
+		}
 
       y += lineheight;
       idx++;
-   }
+	}
 }
 
 /**
@@ -292,7 +292,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 		g_gr->get_picture_size(picid, w, h);
 	   entry_height = std::max<uint>(entry_height, h);
       if(m_max_pic_width<w) m_max_pic_width=w;
-   }
+	}
    if(entry_height>m_lineheight) m_lineheight=entry_height;
 
 	Entry_Record & result = *new Entry_Record(entry, picid);

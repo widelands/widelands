@@ -163,7 +163,7 @@ void Overlay_Manager::register_overlay
 		uint picture_width, picture_height;
 		g_gr->get_picture_size(picid, picture_width, picture_height);
 		hotspot = Point(picture_width / 2, picture_height / 2);
-   }
+	}
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
 	for

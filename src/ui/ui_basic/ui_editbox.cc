@@ -83,7 +83,7 @@ bool Edit_Box::handle_mousepress(const Uint8 btn, int x, int y) {
       m_keyboard_grabbed=true;
       m_lasttext=m_text;
       return true;
-   }
+	}
 	return m_keyboard_grabbed;
 }
 bool Edit_Box::handle_mouserelease(const Uint8 btn, int, int)
@@ -117,7 +117,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             if(m_text.size()) {
                m_text.erase(m_text.end() - 1);
                set_title(m_text.c_str());
-            }
+				}
             return true;
 
          case KEY_DELETE:
@@ -129,8 +129,8 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             if(c && m_text.size()<m_maxchars) m_text+=c;
             set_title(m_text.c_str());
             return true;
-      }
-   }
+		}
+	}
 
    return false;
 }

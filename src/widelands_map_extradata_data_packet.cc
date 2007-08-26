@@ -52,10 +52,10 @@ throw (_wexception)
    Profile prof;
    try {
       prof.read( "extra_data", 0, fs );
-   } catch( ... ) {
+	} catch( ... ) {
       // not found, skip it
       return;
-   }
+	}
    Section* s = prof.get_section( "global" );
 
    // read packet version
@@ -92,10 +92,10 @@ throw (_wexception)
             info.filename = *pname;
             info.data = (void*)data;
             egbase->get_map()->m_extradatainfos.push_back( info );
-         }
-      }
+			}
+		}
       return;
-   }
+	}
    assert(0); // never here
 }
 
@@ -126,7 +126,7 @@ throw (_wexception)
       g_gr->save_png( (ulong)edi.data, &fw );
 
       fw.Write( fs, edi.filename.c_str() );
-   }
+	}
 
    // Write out
    prof.write("extra_data", false, fs );

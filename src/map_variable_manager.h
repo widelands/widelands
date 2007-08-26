@@ -45,7 +45,7 @@ struct MapVariable {
       enum Type {
          MVT_INT,
          MVT_STRING,
-      };
+		};
 
       MapVariable( bool t ) { m_delete_protected = t; }
       virtual ~MapVariable( void ) { }
@@ -73,7 +73,7 @@ struct Int_MapVariable : public MapVariable {
          char buffer[256];
          sprintf( buffer, "%li", m_value );
          return buffer;
-      }
+		}
 
    private:
       long            m_value;

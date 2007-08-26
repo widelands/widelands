@@ -55,10 +55,10 @@ throw (_wexception)
    FileRead fr;
    try {
       fr.Open( fs, "binary/ware_data" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
 
 	const Uint16 packet_version=fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
@@ -119,7 +119,7 @@ throw (_wexception)
          if(reg) {
             assert(ol->is_object_known(reg));
             ware->m_transfer_nextstep=ol->get_object_by_file_index(reg);
-         } else
+			} else
             ware->m_transfer_nextstep=(Map_Object*)(0);
 
          // Do some kind of init
@@ -168,8 +168,8 @@ throw (_wexception)
             for(int i=0; i<fl->m_item_filled; i++) {
                assert(os->is_object_known(fl->m_items[i].item));
                write_ware(&fw,egbase,os,fl->m_items[i].item);
-            }
-         }
+				}
+			}
 
          // Now, check for workers
          Bob* b=f->get_first_bob();
@@ -180,12 +180,12 @@ throw (_wexception)
                if(ware) {
                   assert(os->is_object_known(ware));
                   write_ware(&fw,egbase,os,ware);
-               }
-            }
+					}
+				}
             b=b->get_next_bob();
-         }
-      }
-   }
+			}
+		}
+	}
    fw.Unsigned32(0xffffffff); // End of wares
 
    fw.Write( fs, "binary/ware_data" );
@@ -204,7 +204,7 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
    if(obj) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
-   } else
+	} else
       fw->Unsigned32(0);
 
    // Economy is set by set_location()
@@ -225,7 +225,7 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
    if(obj) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
-   } else
+	} else
       fw->Unsigned32(0);
 
    os->mark_object_as_saved(ware);

@@ -171,7 +171,7 @@ public:
 	struct LogSink {
 		virtual void log(std::string str) = 0;
 	   virtual ~LogSink() {}
-   };
+	};
 
 protected:
 	Map_Object(const Map_Object_Descr * const descr);

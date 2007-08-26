@@ -69,18 +69,18 @@ bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
 
    if(index > (m_warelists[0]->get_nrwareids())) {
       m_curware->set_text("");
-   }
+	}
    else {
       if(m_type == WORKER) {
          index--;
          str=m_player->tribe().get_worker_descr(index)->descname();
          m_curware->set_text(str.c_str());
-      } else {
+		} else {
          index--;
          str=m_player->tribe().get_ware_descr(index)->descname();
          m_curware->set_text(str.c_str());
-      }
-   }
+		}
+	}
 
    return true;
 }
@@ -136,7 +136,7 @@ void WaresDisplay::draw(RenderTarget* dst)
    if( m_type == WORKER ) {
       number = m_player->tribe().get_nrworkers();
       is_worker = true;
-   }
+	}
    int totid=0;
 	for (int id = 0; id < number; ++id, ++totid) {
       uint totalstock = 0;
@@ -147,7 +147,7 @@ void WaresDisplay::draw(RenderTarget* dst)
 
 		if ((totid + 1) % WaresPerRow) {p.x += WARE_MENU_PIC_WIDTH + 3;}
 		else {p.x = 2; p.y += WARE_MENU_PIC_HEIGHT + 8 + 3;}
-   }
+	}
 }
 
 

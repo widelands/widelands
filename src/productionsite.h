@@ -54,7 +54,7 @@ struct ProductionSite_Descr : public Building_Descr {
    struct Worker_Info {
       std::string name;
       int how_many;
-   };
+	};
 
 	ProductionSite_Descr
 		(const Tribe_Descr & tribe, const std::string & productionsite_name);
@@ -112,7 +112,7 @@ public:
 	}
    inline std::vector<Worker*>* get_workers(void) {
       return &m_workers;
-   }
+	}
 
 	__attribute__ ((noreturn)) virtual const std::vector<Soldier *> & get_soldiers() const
 	{throw wexception ("ProductionSite::get_soldiers makes no sense");}

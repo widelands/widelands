@@ -52,8 +52,8 @@ Event* MapEventManager::get_event( const char* name ) {
       if( !strcmp( m_events[i]->name().c_str(), name ) ) {
          retval = m_events[i];
          break;
-      }
-   }
+		}
+	}
 
    return retval;
 }
@@ -68,8 +68,8 @@ void MapEventManager::delete_event( const char* name ) {
          m_events[i] = m_events[m_events.size() - 1];
          m_events.resize( m_events.size() - 1 );
          break;
-      }
-   }
+		}
+	}
 }
 
 /*
@@ -83,7 +83,7 @@ void MapEventManager::delete_unreferenced_events( void ) {
          delete_event(tr->name().c_str());
          i = 0;
          continue;
-      }
+		}
       ++i;
-   }
+	}
 }

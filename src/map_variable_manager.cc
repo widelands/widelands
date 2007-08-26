@@ -79,8 +79,8 @@ MapVariable* MapVariableManager::get_variable
       if( !strcmp( m_variables[i]->get_name(), name ) ) {
          retval = m_variables[i];
          break;
-      }
-   }
+		}
+	}
 
    return retval;
 }
@@ -95,6 +95,6 @@ void MapVariableManager::delete_variable( const char* name ) {
          m_variables[i] = m_variables[m_variables.size() - 1];
          m_variables.resize( m_variables.size() - 1 );
          break;
-      }
-   }
+		}
+	}
 }

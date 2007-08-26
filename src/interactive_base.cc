@@ -213,7 +213,7 @@ void Interactive_Base::think()
 			set_rel_viewpoint(Point(-scrollval, 0));
 		if (app->get_key_state(KEY_RIGHT))
 			set_rel_viewpoint(Point (scrollval, 0));
-   }
+	}
 
    // Call game logic here
    // The game advances
@@ -257,7 +257,7 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 	   snprintf(buf, 100, "%3i %3i %s", m_sel.pos.triangle.x, m_sel.pos.triangle.y, triangle_string[m_sel.pos.triangle.t]);
 		g_fh->draw_string
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 25), buf, Align_Left);
-   }
+	}
 
    if (get_display_flag(dfDebug))
    {
@@ -290,7 +290,7 @@ void Interactive_Base::mainview_move(int x, int y)
 
 
       m_mm->set_view_pos(x, y);
-   }
+	}
 }
 
 
@@ -356,7 +356,7 @@ Open the minimap or close it if it's open
 void Interactive_Base::toggle_minimap() {
 	if (m_minimap.window) {
 		delete m_minimap.window;
-   }
+	}
 	else {
 		m_mm = new MiniMap(*this, &m_minimap);
 		m_mm->warpview.set(this, &Interactive_Base::minimap_warp);
@@ -498,7 +498,7 @@ void Interactive_Base::finish_build_road()
 		else {
 			egbase().get_player(m_road_build_player)->build_road(path);
 			delete &path;
-      }
+		}
 	}
 
 	delete m_buildroad;
@@ -671,7 +671,7 @@ void Interactive_Base::roadb_add_overlay()
          case 1: name="pics/roadb_green.png"; break;
          case 2: name="pics/roadb_yellow.png"; break;
          case 3: name="pics/roadb_red.png"; break;
-      };
+		};
 
       assert(name!="");
 

@@ -76,7 +76,7 @@ class Event_Message_Box : public Event, public TriggerReferencer {
          Left,
          Center_under,
          Center_over,
-      };
+		};
 
    protected:
 
@@ -84,7 +84,7 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       struct Button_Descr {
          std::string name;
          Trigger_Null *trigger;
-      };
+		};
 
       std::string m_text;
       std::string m_window_title;

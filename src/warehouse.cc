@@ -409,17 +409,17 @@ void Warehouse::init(Editor_Game_Base* gg)
          req->set_idle(true);
 
          m_requests.push_back(req);
-      }
+		}
       for(int i = 0; i < get_owner()->tribe().get_nrworkers(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WORKER);
 
          req->set_idle(true);
 
          m_requests.push_back(req);
-      }
+		}
 		m_next_carrier_spawn = schedule_act(game, CARRIER_SPAWN_INTERVAL);
 		m_next_military_act  = schedule_act(game, 1000);
-   }
+	}
 }
 
 
@@ -440,7 +440,7 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
          m_requests.pop_back();
 
          delete req;
-      }
+		}
 
       // all cached workers are unbound and freed
       while(m_incorporated_workers.size()) {
@@ -449,8 +449,8 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
          // already be deleted. So do not try and free him
          if (w) w->reset_tasks(game);
          m_incorporated_workers.erase(m_incorporated_workers.begin());
-      }
-   }
+		}
+	}
 	if (const uint conquer_raduis = get_conquers()) gg->unconquer_area
 		(Player_Area<Area<FCoords> >
 		 (owner().get_player_number(),
@@ -529,12 +529,12 @@ void Warehouse::act(Game* g, uint data)
                m_incorporated_workers.erase(i);
                m_supply->remove_workers(ware, 1);
                continue;
-            }
+				}
                // If warehouse can heal, this is the place to put it
-         }
-      }
+			}
+		}
       m_next_military_act = schedule_act (g, 1000);
-   }
+	}
    Building::act(g, data);
 }
 
@@ -696,13 +696,13 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
    if(i==m_incorporated_workers.end()) {
       // None found, create a new one (if available)
       worker = workerdescr->create(g, get_owner(), this, m_position);
-   } else {
+	} else {
       // one found, make him available
       worker = static_cast<Worker*>(i->get(g));
       worker->reset_tasks(g); // Forget everything you did
       worker->set_location( this ); // Back in a economy
       m_incorporated_workers.erase(i);
-   }
+	}
 
    m_supply->remove_workers(ware, 1);
 
@@ -844,7 +844,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
    {
       w->remove(g);
       w=0;
-   }
+	}
    else
    {
          // This is to prevent having soldiers that only are used one time and become allways 'marked'
@@ -854,7 +854,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
       sort_worker_in(g, w->name(), w);
       w->set_location(0); // No more in a economy
       w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
-   }
+	}
 
    m_supply->add_workers(index, 1);
 
@@ -875,7 +875,7 @@ void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string workername, Work
       if(i==m_incorporated_workers.end()) {
          m_incorporated_workers.insert(i, w);
          return;
-      }
+		}
 
       while(i!=m_incorporated_workers.end() && w->get_serial() <= static_cast<Worker*>(i->get(g))->get_serial()) ++i;
 
@@ -1046,7 +1046,7 @@ bool Warehouse::can_create_worker(Game *, int worker) {
 	if (worker >= m_supply->get_workers().get_nrwareids()) {
 		throw wexception ("Worker type %d doesn't exists! (max is %d)", worker,
             m_supply->get_workers().get_nrwareids());
-   }
+	}
 
    w_desc=get_owner()->tribe().get_worker_descr(worker);
 
@@ -1073,14 +1073,14 @@ bool Warehouse::can_create_worker(Game *, int worker) {
             {
                molog (" %s: Need more %s for creation\n", w_desc->name().c_str(), (*bc)[i].name.c_str());
                enought_wares = false;
-            }
-         } else {
+				}
+			} else {
             id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
             if (m_supply->stock_workers(id_w) < (*bc)[i].amount) {
                molog (" %s: Need more %s for creation\n", w_desc->name().c_str(), (*bc)[i].name.c_str());
                enought_wares = false;
-            }
-         }
+				}
+			}
 		}
 		return enought_wares;
 	}
@@ -1112,10 +1112,10 @@ void Warehouse::create_worker(Game *g, int worker)
 			id_w = get_owner()->tribe().get_ware_index((*bc)[i].name.c_str());
          if(id_w!=-1) {
             remove_wares(id_w , (*bc)[i].amount);
-         } else {
+			} else {
             id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
             remove_workers(id_w , (*bc)[i].amount);
-         }
+			}
 		}
 
 		// This is needed to have a 0 level soldiers

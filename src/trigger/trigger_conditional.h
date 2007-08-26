@@ -45,12 +45,12 @@ class TriggerConditional_Factory {
 		LPAREN,
 		RPAREN,
 		TRIGGER,  // not an operator
-      };
+		};
 	static const char * const operators[];
       struct Token {
          TokenNames token;
          void* data;
-      };
+		};
 
       class SyntaxError {};
 

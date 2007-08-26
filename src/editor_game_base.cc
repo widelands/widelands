@@ -272,7 +272,7 @@ void Editor_Game_Base::do_conquer_area
 				mr.location().field->set_owned_by(player_area.player_number);
 				inform_players_about_ownership(index, player_area.player_number);
 				player_field_notification (mr.location(), GAIN);
-         }
+			}
 		} else if
 			(not (conquering_player.military_influence(index) -= influence)
 			 and
@@ -325,8 +325,8 @@ void Editor_Game_Base::do_conquer_area
 				mr.location().field->set_owned_by (best_player);
 				inform_players_about_ownership(index, best_player);
 				if (best_player) player_field_notification (mr.location(), GAIN);
-         }
-      }
+			}
+		}
 	} while (mr.advance(map()));
 
 	//  This must reach one step beyond the conquered area to adjust the borders
@@ -460,7 +460,7 @@ Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
    for(i = 0; i < m_tribes.size(); i++) {
 		if (not strcmp(m_tribes[i]->name().c_str(), tribe))
 			return m_tribes[i];
-   }
+	}
    return 0;
 }
 
@@ -682,7 +682,7 @@ Immovable* Editor_Game_Base::create_immovable
       idx = m_map->get_world()->get_immovable_index(name.c_str());
    else {
       idx = tribe->get_immovable_index(name.c_str());
-   }
+	}
 
 	if (idx < 0)
 		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for %s",
@@ -706,8 +706,8 @@ AttackController* Editor_Game_Base::create_attack_controller(Flag* flag,int atta
       if (curCtrl->getFlag() == flag) {
          curCtrl->launchAttack(num);
          return curCtrl;
-      }
-   }
+		}
+	}
 
    AttackController* ctrl = new AttackController((Game*)this,flag,attacker,defender);
    ctrl->launchAttack(num);
@@ -732,8 +732,8 @@ void Editor_Game_Base::remove_attack_controller(uint serial) {
 				m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];
 			m_attack_serials.pop_back();
 			return;
-      }
-   }
+		}
+	}
 }
 
 /*
@@ -823,7 +823,7 @@ void Editor_Game_Base::cleanup_for_load
       if (m_players[i-1]) {
          remove_player(i);
          m_players[i-1] = 0;
-      }
+		}
 
    m_map->cleanup();
 }

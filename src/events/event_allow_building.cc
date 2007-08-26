@@ -65,10 +65,10 @@ void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
       if(player<=0 || player>egbase->get_map()->get_nrplayers() || m_building=="<undefined>") {
          // give a warning
          log("Conquer Area Event with illegal player orbuilding name: (Player: %i, Building: %s) deleted!\n", m_player, m_building.c_str());
-      }
+		}
 		egbase->get_iabase()->reference_player_tribe(player, this);
       return;
-   }
+	}
    throw wexception("Allow Building Event with unknown/unhandled version %i in map!\n", version);
 }
 

@@ -74,7 +74,7 @@ throw(_wexception)
     i18n::release_textdomain( );
 
        return;
-   }
+	}
    assert(0); // should never be here
 }
 

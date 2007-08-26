@@ -60,7 +60,7 @@ m_tool(tool)
       TERRAIN_DRY|TERRAIN_UNPASSABLE, // "unpassable"
       TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE, // "dead" or "acid"
       TERRAIN_UNPASSABLE|TERRAIN_DRY|TERRAIN_WATER,
-   };
+	};
 
    m_checkboxes.resize(nr_terrains);
 
@@ -144,7 +144,7 @@ m_tool(tool)
 
 			pos.x += TEXTURE_WIDTH + hspacing();
          ++cur_x;
-      }
+		}
 	pos.y += TEXTURE_HEIGHT + vspacing();
 
 	set_inner_size
@@ -159,7 +159,7 @@ m_tool(tool)
          buf+=" ";
 		buf += world.get_ter(i).name();
          --j;
-   }
+	}
 	m_cur_selection.set_text(buf);
 }
 

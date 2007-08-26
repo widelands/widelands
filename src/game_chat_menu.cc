@@ -97,7 +97,7 @@ void GameChatMenu::think( void ) {
       str += ": ";
       str += (*msges)[i].msg;
       str += "\n";
-   }
+	}
 
 	chatbox.set_text(str.c_str());
 }
@@ -118,5 +118,5 @@ void GameChatMenu::clicked_send() {
       t.msg = str;
       m_netgame->send_chat_message( t );
       editbox.set_text("");
-   }
+	}
 }

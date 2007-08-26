@@ -56,7 +56,7 @@ Event_Message_Box::~Event_Message_Box(void) {
    for(i=0; i<m_buttons.size(); i++)
       if(m_buttons[i].trigger) {
          set_button_trigger(i, 0);
-      }
+		}
    m_buttons.resize(0);
 
 }
@@ -132,11 +132,11 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
             sprintf( buf, "button_%02i_trigger", i );
             Trigger * const t = egbase->get_map()->get_mtm().get_trigger(s->get_safe_string(buf)); // Hopefully it is a null trigger
             set_button_trigger( i, static_cast<Trigger_Null*>(t));
-         } else
+			} else
             set_button_trigger( i, 0);
-      }
+		}
       return;
-   }
+	}
    throw wexception("Unknown Version in Event_Message_Box::Read: %i\n", version );
 }
 
@@ -162,8 +162,8 @@ void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
       if(m_buttons[i].trigger) {
          sprintf( buf, "button_%02i_trigger", i );
 			s.set_string(buf, m_buttons[i].trigger->get_name());
-      }
-   }
+		}
+	}
 }
 
 /*
@@ -175,7 +175,7 @@ Event::State Event_Message_Box::run(Game* game) {
    if(get_is_modal()) {
       mb->run();
       delete mb;
-   }
+	}
 
    m_state = DONE;
    return m_state;

@@ -220,13 +220,13 @@ void Map::recalc_whole_map(void)
          recalc_brightness(f);
          recalc_border(f);
          recalc_fieldcaps_pass1(f);
-      }
+		}
 
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
          recalc_fieldcaps_pass2(f);
-      }
+		}
 
    // Now only recaluclate the overlays
 	for (Y_Coordinate y = 0; y < m_height; ++y)
@@ -329,20 +329,20 @@ void Map::recalc_default_resources(void) {
             if(i->second>lv) {
                lv=i->second;
                res=i->first;
-            }
+				}
             i++;
-         }
+			}
          amount/=6;
 
          if(res==-1 || !amount) {
             f.field->set_resources(0,0);
             f.field->set_starting_res_amount(0);
-         } else {
+			} else {
             f.field->set_resources(res,amount);
             f.field->set_starting_res_amount(amount);
-         }
+			}
 
-      }
+		}
 }
 
 /*
@@ -400,7 +400,7 @@ void Map::cleanup(void) {
 #ifdef DEBUG
    for( uint i = 0; i < m_extradatainfos.size(); i++) {
       assert( m_extradatainfos[i].type == Extradata_Info::PIC ) ;
-   }
+	}
 #endif
    m_extradatainfos.resize( 0 );
 }
@@ -1094,7 +1094,7 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
       if (!imm->get_passable())
          caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
       goto end;
-   }
+	}
 
    // 4) Flags
    //    We can build flags on anything that's walkable and buildable, with some
@@ -1106,7 +1106,7 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 			 (Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
          goto end;
       caps |= BUILDCAPS_FLAG;
-   }
+	}
 end:
 	f.field->caps = static_cast<const FieldCaps>(caps);
 }
@@ -1644,16 +1644,16 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
       try {
          FileSystem* fs = g_fs->MakeSubFileSystem( filename );
 			retval = new Widelands_Map_Loader(*fs, this);
-      } catch( ... ) {
+		} catch( ... ) {
          // If this fails, it is an illegal file (maybe old plain binary map format)
          //TODO: catchall hides real errors! Replace with more specific code
-      }
-   }
+		}
+	}
    else if (!strcasecmp(filename+(strlen(filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
       // it is a S2 Map file. load it as such
       retval=new S2_Map_Loader(filename, this);
-   }
+	}
 
    return retval;
 }

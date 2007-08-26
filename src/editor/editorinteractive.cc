@@ -161,7 +161,7 @@ void Editor_Interactive::exit() {
 			 _("The Map is unsaved, do you really want to quit?"),
 			 UI::Modal_Message_Box::YESNO);
 		if (mmb.run() == 0) return;
-   }
+	}
    end_modal(0);
 }
 
@@ -220,7 +220,7 @@ void Editor_Interactive::toggle_playermenu() {
 	else {
 		select_tool(tools.set_starting_pos, Editor_Tool::First);
 		new Editor_Player_Menu(*this, &m_playermenu);
-   }
+	}
 
 }
 
@@ -331,7 +331,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
             return true;
 
 
-      }
+		}
 	} else {
       // key up events
 		switch (code) {
@@ -343,8 +343,8 @@ bool Editor_Interactive::handle_key(bool down, int code, char) {
 			if (tools.use_tool != Editor_Tool::First)
 				select_tool(tools.current(), Editor_Tool::First);
             return true;
-      }
-   }
+		}
+	}
    return false;
 }
 
@@ -359,7 +359,7 @@ void Editor_Interactive::select_tool
 		map.overlay_manager().register_overlay_callback_function(0, 0);
 		map.recalc_whole_map();
 
-   }
+	}
 	tools.current_pointer = &primary;
    tools.use_tool=which;
 
@@ -403,14 +403,14 @@ void Editor_Interactive::unreference_player_tribe
          if(m_player_tribe_references[i].player==player && m_player_tribe_references[i].object==data) break;
 
       m_player_tribe_references.erase(m_player_tribe_references.begin() + i);
-   } else {
+	} else {
       // Player is invalid, remove all references from this object
       for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) {
          if(m_player_tribe_references[i].object==data) {
             m_player_tribe_references.erase(m_player_tribe_references.begin() + i); i=-1;
-         }
-      }
-   }
+			}
+		}
+	}
 }
 
 bool Editor_Interactive::is_player_tribe_referenced(int player) {

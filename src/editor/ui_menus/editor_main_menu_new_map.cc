@@ -123,7 +123,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    posy+=height+spacing;
 
 
-   }
+	}
 
 
 /*
@@ -144,7 +144,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
               if(m_currentworld==m_worlds->size()) m_currentworld=0;
               m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());
               break;
-   }
+	}
 
    char buf[200];
    if(m_w<0) m_w=0;

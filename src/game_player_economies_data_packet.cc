@@ -67,15 +67,15 @@ throw (_wexception)
             Flag* flag=static_cast<Flag*>(map->get_field(Coords(x,y))->get_immovable());
             assert(flag);
             ecos[j]=flag->get_economy();
-         }
+			}
          for(uint j=0; j<ecos.size(); j++) {
             plr->m_economies[j]=ecos[j];
             ecos[j]->balance_requestsupply(); // Issue first balance
-         }
-      }
+			}
+		}
 
       return;
-   } else
+	} else
       throw wexception("Unknown version in Game_Player_Economies_Data_Packet: %i\n", packet_version);
 
    assert(0); // never here
@@ -113,15 +113,15 @@ throw (_wexception)
                      fw.Unsigned16(x);
                      fw.Unsigned16(y);
                      done=true;
-                  }
-               }
+						}
+					}
                if(done) break;
-            }
+				}
             if(done) break;
-         }
+			}
          if(done) continue;
-      }
-   }
+		}
+	}
 
    fw.Write( fs, "binary/player_economies" );
 }

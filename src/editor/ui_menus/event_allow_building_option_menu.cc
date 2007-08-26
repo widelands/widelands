@@ -66,8 +66,8 @@ m_building(-1) //  FIXME negative value!
 			const std::string & name = b->name();
 			if (name == m_event->get_building()) m_building = m_buildings.size();
          m_buildings.push_back(name);
-      }
-   }
+		}
+	}
 
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
@@ -177,7 +177,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
             if(m_event->get_player()!=m_player) {
                m_event->set_player(m_player);
                m_parent->reference_player_tribe(m_player, m_event);
-            }
+				}
             m_event->set_building(m_buildings[m_building].c_str());
             m_event->set_allow(m_allow->get_state());
             m_parent->set_need_save(true);
@@ -192,7 +192,7 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
 
       case 23: m_building++; break;
       case 24: m_building--; break;
-   }
+	}
    update();
 }
 
@@ -211,9 +211,9 @@ void Event_Allow_Building_Option_Menu::update(void) {
    if(!m_buildings.size()) {
       m_player=-1;
       m_building=-1;
-   } else {
+	} else {
       curbuild=m_buildings[m_building];
-   }
+	}
 
    char buf[200];
    sprintf(buf, "%i", m_player);

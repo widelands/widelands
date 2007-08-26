@@ -69,12 +69,12 @@ void log(const char *, ...) PRINTF_FORMAT(1,2);
             if(graph_is_init) {
                critical_error(buf);
                // User chooses, if it goes on
-            } else {
+				} else {
                tell_user(buf);
                exit(-1);
-            }
-         }
-      }
+				}
+			}
+		}
 */
 		void myassert(int line, const char* file, const char* condt) throw(_wexception);
 

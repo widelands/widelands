@@ -64,7 +64,7 @@ Modal_Message_Box::Modal_Message_Box
 			 1,
 			 &Modal_Message_Box::end_modal, this, 0,
 			 _("No"));
-   }
+	}
 }
 
 Modal_Message_Box::~Modal_Message_Box(void) {

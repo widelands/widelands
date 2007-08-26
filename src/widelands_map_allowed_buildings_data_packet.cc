@@ -54,10 +54,10 @@ throw (_wexception)
    Profile prof;
    try {
       prof.read("allowed_buildings", 0, fs );
-   } catch( ... ) {
+	} catch( ... ) {
       // Packet wasn't save. Same as skip
       return;
-   }
+	}
    Section* s = prof.get_section("global");
 
    // read packet version
@@ -76,9 +76,9 @@ throw (_wexception)
             int b;
             for(b=0; b<t->get_nrbuildings(); b++) {
                plr->allow_building(b, false);
-            }
-         }
-      }
+				}
+			}
+		}
 
       // Now read all players and buildings
       int i=0;
@@ -101,14 +101,14 @@ throw (_wexception)
             if(index==-1)
                throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->name().c_str());
             plr->allow_building(index, allowed);
-         }
-      }
+			}
+		}
 
       // DONE
       return;
-   } else {
+	} else {
       throw wexception("Unknown version %i Allowed_Building_Data_Packet in map!\n", packet_version);
-   }
+	}
    assert(0); // never here
 }
 
@@ -140,7 +140,7 @@ throw (_wexception)
 		for (Building_Descr::Index b = 0; b < nr_buildings; ++b) section.set_bool
 			(tribe.get_building_descr(b)->name().c_str(),
 			 plr->is_building_allowed(b));
-   }
+	}
 
    prof.write("allowed_buildings", false, fs );
    // Done

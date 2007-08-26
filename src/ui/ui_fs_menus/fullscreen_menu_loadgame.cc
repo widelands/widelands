@@ -100,10 +100,10 @@ void Fullscreen_Menu_LoadGame::map_selected(uint) {
 		tagametime.set_text(buf);
 
       delete fs;
-   } else {
+	} else {
 		tamapname .set_text("");
 		tagametime.set_text("");
-   }
+	}
 }
 
 /*
@@ -139,11 +139,11 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
 			list.add(fname, name);
          free(fname);
 
-      } catch(_wexception& ) {
+		} catch(_wexception& ) {
          // we simply skip illegal entries
-      }
+		}
          delete fs;
-   }
+	}
 
 	if (list.size()) list.select(0);
 }

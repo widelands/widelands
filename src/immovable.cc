@@ -71,7 +71,7 @@ void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 
       other->cleanup(g);
       delete other;
-   }
+	}
 
 	f->immovable = this;
 
@@ -738,10 +738,10 @@ void ImmovableProgram::parse_transform
    if(list.size()==1) {
       act->sparam1 = cmd[1];
       act->sparam2 = "world";
-   } else {
+	} else {
       act->sparam1 = list[1];
       act->sparam2 = list[0];
-   }
+	}
 
 	act->function = &Immovable::run_transform;
 }

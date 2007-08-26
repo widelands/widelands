@@ -101,21 +101,21 @@ throw (_wexception)
                if( !trig )
                   throw wexception( "Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
                tok.data = trig;
-            } else if ( type == ")" ) {
+				} else if ( type == ")" ) {
                tok.token = TriggerConditional_Factory::RPAREN;
-            } else if ( type == "(" ) {
+				} else if ( type == "(" ) {
                tok.token = TriggerConditional_Factory::LPAREN;
-            } else if ( type == "XOR" ) {
+				} else if ( type == "XOR" ) {
                tok.token = TriggerConditional_Factory::XOR;
-            } else if ( type == "OR" ) {
+				} else if ( type == "OR" ) {
                tok.token = TriggerConditional_Factory::OR;
-            } else if ( type == "AND" ) {
+				} else if ( type == "AND" ) {
                tok.token = TriggerConditional_Factory::AND;
-            } else if ( type == "NOT" ) {
+				} else if ( type == "NOT" ) {
                tok.token = TriggerConditional_Factory::NOT;
-            }
+				}
             toklist.push_back( tok );
-         }
+			}
          e->set_trigcond( TriggerConditional_Factory::create_from_infix( e, toklist ));
 
          // Events
@@ -127,7 +127,7 @@ throw (_wexception)
             if( !event )
                throw wexception( "Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
             e->add_event( event );
-         }
+			}
 
          // Current event
          e->m_curevent = s->get_safe_int( "current_event" );
@@ -139,9 +139,9 @@ throw (_wexception)
          else if( state == "done") e->m_state = EventChain::DONE;
 
          egbase->get_map()->get_mecm().register_new_eventchain(e);
-      }
+		}
       return;
-   }
+	}
    throw wexception("Unknown version in Map EventChain Packet: %i\n", packet_version );
 }
 
@@ -177,8 +177,8 @@ throw (_wexception)
 			if (tok.token == TriggerConditional_Factory::TRIGGER) {
                sprintf(buf, "conditional_element_%02i_data", t);
                s.set_string(buf, static_cast<Trigger*>(tok.data)->get_name());
-         }
-      }
+			}
+		}
       delete toklist;
 
 
@@ -189,7 +189,7 @@ throw (_wexception)
 		for (EventChain::event_vector::size_type eventnum = 0; eventnum < size; ++eventnum) {
 			sprintf(buf, "event_%02u", eventnum);
 			s.set_string(buf, e.m_events[eventnum]->name().c_str());
-      }
+		}
 
       // Which is the current event
 		s.set_int("current_event", e.m_curevent);
@@ -199,8 +199,8 @@ throw (_wexception)
 		case EventChain::INIT:    s.set_string("state", "init");    break;
 		case EventChain::RUNNING: s.set_string("state", "running"); break;
 		case EventChain::DONE:    s.set_string("state", "done");    break;
-      }
-   }
+		}
+	}
 
 
    prof.write("event_chain", false, fs );

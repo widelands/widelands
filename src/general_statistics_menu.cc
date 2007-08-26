@@ -104,7 +104,7 @@ m_parent(&parent)
 			(i * NR_DIFFERENT_DATASETS + 6, &genstats[i].miltary_strength, color);
 		if (game.get_player(i + 1)) // Show area plot
          m_plot->show_plot(i*NR_DIFFERENT_DATASETS, 1);
-   }
+	}
 
 
    // Buttons
@@ -128,7 +128,7 @@ m_parent(&parent)
       cb->changedtoid.set(this, &General_Statistics_Menu::cb_changed_to);
       m_cbs[i-1] = cb;
       posx+= button_size + spacing;
-   }
+	}
 
    posx = spacing;
    posy += 25+spacing+spacing;
@@ -304,6 +304,6 @@ void General_Statistics_Menu::radiogroup_changed(int id) {
 
       m_plot->show_plot( i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());
       m_plot->show_plot( i* NR_DIFFERENT_DATASETS + m_selected_information, false);
-   }
+	}
    m_selected_information = id;
 };

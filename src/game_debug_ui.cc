@@ -197,7 +197,7 @@ void MapObjectDebugWindow::think()
       m_log_general_info = false;
 		}
 		UI::Window::think();
-   } else {
+	} else {
 		char buffer[128];
 
 		snprintf(buffer, sizeof(buffer), "DEAD: %u", m_serial);

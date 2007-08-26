@@ -99,11 +99,11 @@ const int ZipFilesystem::FindFiles
       //workaround and does not solve the real problem (which remains undiscovered)
       if ( (( '/'+path==filepath ) || (path==filepath))&& ( filename != "" ) ) {
          results->insert( complete_filename );
-      }
+		}
 
       if( unzGoToNextFile( m_unzipfile ) == UNZ_END_OF_LIST_OF_FILE )
          break;
-   }
+	}
 
    return results->size();
 }
@@ -117,9 +117,9 @@ const bool ZipFilesystem::FileExists(std::string path)
    try {
       m_OpenUnzip();
       //TODO: check return code
-   } catch( ... ) {
+	} catch( ... ) {
       return false;
-   }
+	}
 
    unzGoToFirstFile( m_unzipfile );
    unz_file_info file_info;
@@ -139,11 +139,11 @@ const bool ZipFilesystem::FileExists(std::string path)
 
       if( path == complete_filename ) {
          return true;
-      }
+		}
 
       if( unzGoToNextFile( m_unzipfile ) == UNZ_END_OF_LIST_OF_FILE )
          break;
-   }
+	}
 
    return false;
 }
@@ -157,7 +157,7 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
 
    if( !FileExists( path )) {
       return false;
-   }
+	}
 
    unz_file_info file_info;
    char filename_inzip[256];
@@ -167,7 +167,7 @@ const bool ZipFilesystem::IsDirectory(const std::string path)
 
    if( filename_inzip[ strlen( filename_inzip ) - 1 ] == '/' ) {
       return true;
-   }
+	}
 
    return false;
 }
@@ -367,9 +367,9 @@ StreamWrite* ZipFilesystem::OpenStreamWrite(const std::string fname)
 void ZipFilesystem::m_Close( void ) {
    if( m_state == STATE_ZIPPING ) {
       zipClose( m_zipfile, 0 );
-   } else if( m_state == STATE_UNZIPPPING ) {
+	} else if( m_state == STATE_UNZIPPPING ) {
       unzClose( m_unzipfile );
-   }
+	}
 
    m_state = STATE_IDLE;
 }
@@ -387,7 +387,7 @@ void ZipFilesystem::m_OpenZip( void ) {
    if( !m_zipfile ) {
       // Couldn't open for append, so create new
       m_zipfile = zipOpen( m_zipfilename.c_str(), APPEND_STATUS_CREATE );
-   }
+	}
 
    m_state = STATE_ZIPPING;
 }

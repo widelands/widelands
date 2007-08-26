@@ -68,7 +68,7 @@ m_pit                   (pit)
 			 (PicMod_Game, world.get_bob_descr(j)->get_picture()), w, h);
       if(w>width) width=w;
       if(h>height) height=h;
-   }
+	}
 
 	const uint tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
@@ -85,7 +85,7 @@ m_pit                   (pit)
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
          box->resize();
 			m_tabpanel.add(tab_icon, box);
-      }
+		}
 
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
@@ -103,7 +103,7 @@ m_pit                   (pit)
       xpos+=width+1+space;
       ++cur_x;
       ++i;
-   }
+	}
    ypos+=height+1+space+5;
 
 	m_tabpanel.activate(0);
@@ -138,8 +138,8 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::do_nothing);
          m_checkboxes[i]->set_state(false);
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
-      }
-   }
+		}
+	}
 
 	m_pit.enable(n,t);
    select_correct_tool();

@@ -60,10 +60,10 @@ throw (_wexception)
    FileRead fr;
    try {
       fr.Open( fs, "binary/road_data" );
-   } catch ( ... ) {
+	} catch ( ... ) {
       // not there, so skip
       return ;
-   }
+	}
 
    // Firsst packet version
    int packet_version=fr.Unsigned16();
@@ -114,7 +114,7 @@ throw (_wexception)
          if(carrierid) {
             assert(ol->is_object_known(carrierid));
             r->m_carrier=ol->get_object_by_file_index(carrierid);
-         } else
+			} else
             r->m_carrier=0;
 
             delete r->m_carrier_request;
@@ -126,16 +126,16 @@ throw (_wexception)
                r->m_carrier_request = new Request(r, 0,
                      &Road::request_carrier_callback, r, Request::WORKER);
                r->m_carrier_request->Read(&fr, egbase, ol);
-            }
-         } else {
+				}
+			} else {
             r->m_carrier_request=0;
-         }
+			}
 
          ol->mark_object_as_loaded(r);
-      }
+		}
       // DONE
       return;
-   }
+	}
    throw wexception("Unknown version %i in Widelands_Map_Roaddata_Data_Packet!\n", packet_version);
 
    assert( 0 );
@@ -212,21 +212,21 @@ throw (_wexception)
             if(r->m_carrier.get(egbase)) {
                assert(os->is_object_known(r->m_carrier.get(egbase)));
                fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
-            } else {
+				} else {
                fw.Unsigned32(0);
-            }
+				}
 
             // Request
             if(r->m_carrier_request) {
                fw.Unsigned8(1);
                r->m_carrier_request->Write(&fw, egbase, os);
-            } else
+				} else
                fw.Unsigned8(0);
 
             os->mark_object_as_saved(r);
-         }
-      }
-   }
+			}
+		}
+	}
 
    fw.Unsigned32(0xFFFFFFFF); // End of roads
    // DONE

@@ -44,6 +44,6 @@ BaseCommand* Queue_Cmd_Factory::create_correct_queue_command(uint id) {
       case QUEUE_CMD_INCORPORATE: return new Cmd_Incorporate(); break;
       case QUEUE_CMD_CALL_ECONOMY_BALANCE: return new Cmd_Call_Economy_Balance();
       default: throw wexception("Unknown Queue_Cmd_Id in file: %i\n", id);
-   }
+	}
    return 0; // Never here
 }

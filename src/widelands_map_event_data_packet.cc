@@ -68,7 +68,7 @@ throw (_wexception)
 
          e->Read( s, egbase );
          egbase->get_map()->get_mem().register_new_event(e);
-      }
+		}
 			} else throw wexception
 				("Unknown version in Map Event Packet: %i\n", packet_version);
 		}
@@ -99,9 +99,9 @@ throw (_wexception)
 		case Event::INIT:    s.set_string("state", "init");    break;
 		case Event::RUNNING: s.set_string("state", "running"); break;
 		case Event::DONE:    s.set_string("state", "done");    break;
-      }
+		}
 		e.Write(s, *egbase);
-   }
+	}
 
    prof.write("event", false, fs );
 

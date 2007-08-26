@@ -56,7 +56,7 @@ m_parent(parent)
    for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
 		Event_Descr & d = *Event_Factory::get_event_descr(i);
 		m_event_list->add(_(d.name).c_str(), d);
-   }
+	}
    m_event_list->sort();
 
    // Descr List
@@ -117,7 +117,7 @@ void Editor_Event_Menu_New_Event::clicked_ok() {
    if(!event) {
       // No event created, choose another, user
       return;
-   }
+	}
 	m_parent->egbase().map().get_mem().register_new_event(event);
    end_modal(1);
    return;

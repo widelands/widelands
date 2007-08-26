@@ -53,11 +53,11 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
                ALIVE();
                log( "Missmatched parenthesis!\n");
                throw SyntaxError();
-            }
+				}
 				if (tempstack.back().token == LPAREN) break;
             postfix.push_back( tempstack.back() );
             tempstack.pop_back();
-         }
+			}
          tempstack.pop_back(); // Pop the last left paranthesis
 			break;
 		case TRIGGER: postfix.push_back(*it); break;
@@ -69,11 +69,11 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
 				assert(tempstack.back().token < TRIGGER); //  Is operator
 				postfix.push_back(tempstack.back());
 				tempstack.pop_back();
-         }
+			}
 			tempstack.push_back(*it);
 			break;
 		default: assert(false);
-      }
+		}
 
    // Unload all operators which are left on stack
    while( tempstack.size() ) {
@@ -82,10 +82,10 @@ TriggerConditional* TriggerConditional_Factory::create_from_infix( EventChain* e
          ALIVE();
          log( "Unmatched parenthesis!\n");
          throw SyntaxError();
-      }
+		}
       postfix.push_back( tempstack.back() );
       tempstack.pop_back();
-   }
+	}
 
    return create_from_postfix(evchain, postfix);
 }
@@ -128,7 +128,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_postfix( EventChain*
 		}
 			break;
 		default: assert(0);
-      }
+		}
 	assert(stk.size() == 1);
    return stk.back();
 }
@@ -143,8 +143,8 @@ void TriggerConditional::unreference_triggers( EventChain* ev ) {
       if( (*vec)[i].token == TriggerConditional_Factory::TRIGGER ) {
          Trigger* trig = static_cast<Trigger*>((*vec)[i].data);
          trig->unreference( ev );
-      }
-   }
+		}
+	}
 }
 
 /*
@@ -157,8 +157,8 @@ void TriggerConditional::reset_triggers( Game* g ) {
       if( (*vec)[i].token == TriggerConditional_Factory::TRIGGER ) {
          Trigger* trig = static_cast<Trigger*>((*vec)[i].data);
          trig->reset_trigger( g );
-      }
-   }
+		}
+	}
 }
 
 /*

@@ -44,7 +44,7 @@ struct Widelands_Map_Loader : public Map_Loader {
          if( !strcasecmp( &filename.c_str()[filename.size()-4], WLMF_SUFFIX))
             return true;
          return false;
-      }
+		}
 
    private:
 	FileSystem & m_fs;

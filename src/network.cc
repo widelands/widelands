@@ -620,7 +620,7 @@ void NetHost::syncreport (uint sync)
 	    // TODO: handle this more gracefully
 
 	clients[i].syncreports.pop();
-    }
+	}
 
     log("[Host] synchronization is good so far\n");
 }

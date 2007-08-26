@@ -219,7 +219,7 @@ void Event_Move_View_Option_Menu::clicked(int i) {
       case 12: m_y-=10; break;
       case 13: m_y+=1; break;
       case 14: m_y-=1; break;
-   }
+	}
    update();
 }
 

@@ -39,12 +39,12 @@ struct WUIPlot_Area : public UI::Panel {
          TIME_FOUR_HOURS,
          TIME_EIGHT_HOURS,
          TIME_16_HOURS,
-      };
+		};
       enum PLOTMODE {
          PLOTMODE_RELATIVE, // Always take the samples of some times together,
                             // so that the graph is not completly zigg-zagged
          PLOTMODE_ABSOLUTE
-      };
+		};
 
    public:
       WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h);
@@ -69,7 +69,7 @@ struct WUIPlot_Area : public UI::Panel {
          const std::vector<uint>* dataset;
          bool  showplot;
          RGBColor plotcolor;
-      };
+		};
       std::vector<__plotdata> m_plotdata;
       int m_time;  // How much do you want to list
       int m_sample_rate;

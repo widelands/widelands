@@ -45,7 +45,7 @@ struct WaresDisplay : public UI::Panel {
    enum wdType {
       WORKER,
       WARE
-   };
+	};
 
 public:
 	WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player);

@@ -95,7 +95,7 @@ throw (_wexception)
 
          // and register it with the object loader for further loading
 			ol->register_object(egbase, serial, battle);
-      }
+		}
       if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
 		} else throw wexception
@@ -150,7 +150,7 @@ throw (_wexception)
       {
 			assert(os->is_object_known(b->m_first));
 			fw.Unsigned32(os->get_object_file_index(b->m_first));
-      }
+		}
       else
          fw.Unsigned32 (0);
 
@@ -158,12 +158,12 @@ throw (_wexception)
       {
 			assert(os->is_object_known(b->m_second));
 			fw.Unsigned32(os->get_object_file_index(b->m_second));
-      }
+		}
       else
          fw.Unsigned32 (0);
       os->mark_object_as_saved(b);
       battles++;
-   }
+	}
 
    // Now, write the number of battles
    fw.Unsigned32(0xffffffff);

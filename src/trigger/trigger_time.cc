@@ -44,7 +44,7 @@ void Trigger_Time::Read(Section* s, Editor_Game_Base* ) {
       m_wait_time = s->get_safe_int( "wait_time" );
       m_last_start_time = s->get_safe_int( "last_start_time" );
       return;
-   }
+	}
    throw wexception("Time Trigger with unknown/unhandled version %i in map!\n", version);
 }
 

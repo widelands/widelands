@@ -79,7 +79,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 			// sel pointer is the only thing that stays wrong, but this is not
 			// important
          m_current_player=1;
-      }
+		}
 
 		const Coords starting_pos = map.get_starting_pos(m_current_player);
 
@@ -117,8 +117,8 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
          // And set new player pos
 			map.set_starting_pos(m_current_player, center.node);
 
-      }
-   }
+		}
+	}
    return 1;
 }
 

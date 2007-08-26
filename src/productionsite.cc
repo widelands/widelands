@@ -130,10 +130,10 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 			amount = strtol(amounts[1].c_str(), &endp, 0);
 			if (endp && *endp)
 				throw wexception("Bad amount in worker line: %s", amounts[1].c_str());
-      }
+		}
       Worker_Info m= { amounts[0], amount };
       m_workers.push_back(m);
-   }
+	}
 
 	// Get programs
 	while(sglobal->get_next_string("program", &string)) {

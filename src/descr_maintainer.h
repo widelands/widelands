@@ -50,7 +50,7 @@ template <class T> struct Descr_Maintainer {
       T * get(const int idx) const {
          if (idx >= 0 and idx < static_cast<int>(nitems)) return items[idx];
          else return 0;
-      }
+		}
 
    private:
 	typename T::Index capacity;
@@ -72,7 +72,7 @@ int Descr_Maintainer<T>::add(T* item) {
    nitems++;
 	if (nitems >= capacity) {
       reserve(nitems);
-   }
+	}
    items[nitems-1]=item;
 	return nitems-1;
 }

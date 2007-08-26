@@ -51,8 +51,8 @@ Trigger* MapTriggerManager::get_trigger( const char* name ) {
       if( !strcmp( m_triggers[i]->get_name(), name ) ) {
          retval = m_triggers[i];
          break;
-      }
-   }
+		}
+	}
 
    return retval;
 }
@@ -65,8 +65,8 @@ void MapTriggerManager::delete_trigger( const char* name ) {
          m_triggers[i] = m_triggers[m_triggers.size() - 1];
          m_triggers.resize( m_triggers.size() - 1 );
          break;
-      }
-   }
+		}
+	}
 }
 
 
@@ -78,7 +78,7 @@ void MapTriggerManager::delete_unreferenced_triggers() {
          delete_trigger(tr->get_name());
          i = 0;
          continue;
-      }
+		}
       ++i;
-   }
+	}
 }

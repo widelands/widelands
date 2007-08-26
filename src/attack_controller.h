@@ -76,7 +76,7 @@ struct AttackController : public BaseImmovable {
          bool attacker;
          bool arrived;
          bool fighting;
-      };
+		};
 
       bool battleGroundOccupied(Coords coords);
       void calcBattleGround(BattleSoldier*, int);

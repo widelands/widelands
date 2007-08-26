@@ -58,7 +58,7 @@ uint Widelands_Map_Map_Object_Saver::register_object
       case Map_Object::BATTLE: ++m_nr_battles; break;
       case Map_Object::ATTACKCONTROLLER: ++m_nr_attack_controllers; break;
       default: throw wexception("Widelands_Map_Map_Object_Saver: Unknown MapObject type : %i\n", obj->get_type());
-   }
+	}
 
    assert(obj->get_file_serial());
 
@@ -99,6 +99,6 @@ uint Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
    while(i!=m_saved_obj.end()) {
       if(!i->second) retval++;
       ++i;
-   }
+	}
    return retval;
 }

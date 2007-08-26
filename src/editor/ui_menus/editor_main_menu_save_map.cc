@@ -163,18 +163,18 @@ void Main_Menu_Save_Map::clicked_ok() {
       if(filename=="") {
          // Maybe a dir is selected
 			filename = m_ls->get_selected();
-      }
+		}
 
       if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
 	      m_curdir=g_fs->FS_CanonicalizeName(filename);
          m_ls->clear();
          m_mapfiles.clear();
          fill_list();
-      } else {
+		} else {
          // Ok, save this map
          if(save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
             die();
-      }
+		}
 }
 void Main_Menu_Save_Map::clicked_make_directory() {
 	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed").c_str());
@@ -188,7 +188,7 @@ void Main_Menu_Save_Map::clicked_make_directory() {
          m_ls->clear();
          m_mapfiles.clear();
          fill_list();
-      }
+		}
 }
 
 /*
@@ -218,7 +218,7 @@ void Main_Menu_Save_Map::selected(uint) {
 
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
       m_size->set_text(buf);
-   } else {
+	} else {
       m_name->set_text("");
       m_author->set_text("");
       m_descr->set_text("");
@@ -227,7 +227,7 @@ void Main_Menu_Save_Map::selected(uint) {
       m_size->set_text("");
       m_editbox->set_text("");
       m_ok_btn->set_enabled(false);
-   }
+	}
 }
 
 /*
@@ -250,7 +250,7 @@ void Main_Menu_Save_Map::fill_list(void) {
 			("<parent>",
 			 m_parentdir.c_str(),
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
-   }
+	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
 	for
@@ -269,7 +269,7 @@ void Main_Menu_Save_Map::fill_list(void) {
 			(FileSystem::FS_Filename(name),
 			 name,
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
-   }
+	}
 
 	Map map;
 
@@ -290,17 +290,17 @@ void Main_Menu_Save_Map::fill_list(void) {
          switch(m_ml->get_type()) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
-         }
+			}
 			m_ls->add
 				(FileSystem::FS_Filename(name),
 				 name,
 				 g_gr->get_picture(PicMod_Game, pic.c_str()));
-      } catch(_wexception& ) {
+		} catch(_wexception& ) {
          // we simply skip illegal entries
-      }
+		}
       delete m_ml;
 
-   }
+	}
 
 	if (m_ls->size()) m_ls->select(0);
 }
@@ -330,7 +330,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       filename.copy(buffer, sizeof(WLMF_SUFFIX), filename.size()-strlen(WLMF_SUFFIX));
       if(!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
          assign_extension=false;
-   }
+	}
    if(assign_extension)
       filename+=WLMF_SUFFIX;
 
@@ -350,27 +350,27 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
       // Delete this
       g_fs->Unlink( complete_filename );
-   }
+	}
 
    FileSystem* fs = 0;
    if( !binary ) {
    // Make a filesystem out of this
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::DIR );
-   } else {
+	} else {
       // Make a zipfile
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::ZIP );
-   }
+	}
 	Widelands_Map_Saver wms(*fs, &m_parent->editor());
    try {
 		wms.save();
       m_parent->set_need_save(false);
-   } catch(std::exception& exe) {
+	} catch(std::exception& exe) {
       std::string s=_("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
 		UI::Modal_Message_Box  mbox
 		   (m_parent, _("Save Map Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
-   }
+	}
    delete fs;
    die();
 

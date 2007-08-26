@@ -118,7 +118,7 @@ struct Editor_Interactive : public Interactive_Base {
       struct Player_References {
          int player;
          const void *object;
-      };
+		};
       std::vector<Player_References> m_player_tribe_references;
       bool m_ctrl_down;
 

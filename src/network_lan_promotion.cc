@@ -58,7 +58,7 @@ LAN_Base::LAN_Base ()
 		broadcast_addresses.push_back
 			(reinterpret_cast<sockaddr_in * const>(&ifr.ifr_broadaddr)
 			 ->sin_addr.s_addr);
-    }
+	}
 
     if_freenameindex (ifnames);
 #else
@@ -126,7 +126,7 @@ void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
 			 0,
 			 reinterpret_cast<const sockaddr * const>(&addr),
 			 sizeof(addr));
-    }
+	}
 }
 
 /*** class LAN_Game_Promoter ***/
@@ -161,7 +161,7 @@ void LAN_Game_Promoter::run ()
 	needupdate=false;
 
 	broadcast (&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT);
-    }
+	}
 
     while (avail()) {
 	char magic[8];
@@ -174,7 +174,7 @@ void LAN_Game_Promoter::run ()
 
 	if (!strncmp(magic,"QUERY",6) && magic[6]==LAN_PROMOTION_PROTOCOL_VERSION)
 	    send (&gameinfo, sizeof(gameinfo), &addr);
-    }
+	}
 }
 
 void LAN_Game_Promoter::set_map (const char* map)
@@ -236,7 +236,7 @@ void LAN_Game_Finder::run ()
 
 		callback (GameUpdated, *i, userdata);
 		break;
-	    }
+		}
 
 	// otherwise just append it to the list
 	if (i==opengames.end()) {
@@ -248,7 +248,7 @@ void LAN_Game_Finder::run ()
 
 	    callback (GameOpened, opengames.back(), userdata);
 	}
-    }
+	}
 }
 
 void LAN_Game_Finder::set_callback (void (*cb)(int, const LAN_Open_Game*, void*), void* ud)

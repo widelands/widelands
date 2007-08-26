@@ -47,7 +47,7 @@ throw(_wexception)
 
       // DONE
       return;
-   } else
+	} else
       throw wexception("Unknown version in Game_Preload_Data_Packet: %i\n", packet_version);
 
    assert(0); // never here

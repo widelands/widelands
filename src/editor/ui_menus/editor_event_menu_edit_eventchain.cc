@@ -144,7 +144,7 @@ m_event_chain(chain)
 	for (MapEventManager::Index i = 0; i < nr_events; ++i) {
 		Event & event = mem.get_event_by_nr(i);
 		m_available_events->add(event.name().c_str(), event);
-   }
+	}
    m_available_events->sort();
 
    posy=get_inner_h()-30;
@@ -169,7 +169,7 @@ m_event_chain(chain)
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
 		Event & event = *m_event_chain->get_event(i);
 		m_events->add(event.name().c_str(), event);
-   }
+	}
 
    m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
 
@@ -231,9 +231,9 @@ void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
          if( m_event_chain->get_trigcond() ) {
             m_event_chain->get_trigcond()->unreference_triggers( m_event_chain );
             delete m_event_chain->get_trigcond();
-         }
+			}
 		m_event_chain->set_trigcond(menu.get_trigcond());
-      }
+		}
 }
 
 

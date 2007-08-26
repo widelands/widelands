@@ -407,7 +407,7 @@ void FieldActionWindow::add_buttons_auto()
 	if (dynamic_cast<const Game * const>(&m_iabase->egbase())) {
       add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch, _("Watch field in a separate window"));
       add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics, _("Toggle building statistics display"));
-   }
+	}
 	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census, _("Toggle building label display"));
 
 	if (m_iabase->get_display_flag(Interactive_Base::dfDebug))
@@ -461,15 +461,15 @@ void FieldActionWindow::add_buttons_attack ()
 
             add_button(attackbox, pic_attack, &FieldActionWindow::act_attack, _("Start attack"));
             act_attack_more();
-         }
-   }
+			}
+	}
 
       // Add tab
    if (attackbox && attackbox->get_nritems())
    {
       attackbox->resize();
 	   add_tab(pic_tab_attack, attackbox, _("Attack"));
-   }
+	}
 }
 
 /*
@@ -711,7 +711,7 @@ void FieldActionWindow::act_ripflag()
          return;
 
       show_bulldoze_confirm(m_iabase, building, flag);
-   }
+	}
 	else {
 		if (Game * const game = dynamic_cast<Game * const>(&m_iabase->egbase())) {
          m_iabase->need_complete_redraw();
@@ -719,8 +719,8 @@ void FieldActionWindow::act_ripflag()
 		} else {// Editor
 			imm->remove(&m_iabase->egbase());
          m_iabase->need_complete_redraw();
-      }
-   }
+		}
+	}
 }
 
 
@@ -769,7 +769,7 @@ void FieldActionWindow::act_removeroad()
 		if (Game * const game = dynamic_cast<Game * const>(&m_iabase->egbase()))
 			game->send_player_bulldoze(road);
 		else road->get_owner()->bulldoze(road);
-   }
+	}
    m_iabase->need_complete_redraw();
    okdialog();
 }
@@ -914,7 +914,7 @@ void FieldActionWindow::act_attack ()
                m_player->get_player_number(),
                m_attackers,  // Number of soldiers
                m_attackers_type); // Type of soldiers
-   }
+	}
 
    okdialog();
 }

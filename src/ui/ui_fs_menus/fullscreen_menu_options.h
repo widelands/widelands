@@ -72,7 +72,7 @@ public:
    enum {
       om_cancel = 0,
       om_ok = 1
-   };
+	};
 
 private:
 	UI::IDButton<Fullscreen_Menu_Options, int> m_cancel, m_apply;

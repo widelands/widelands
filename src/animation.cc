@@ -368,5 +368,5 @@ void DirAnimations::parse(Map_Object_Descr* b, const char *directory, Profile *p
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
       m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
       b->add_animation(anim_name.c_str(), m_animations[dir-1]);
-   }
+	}
 }

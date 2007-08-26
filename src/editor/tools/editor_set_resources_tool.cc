@@ -64,7 +64,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
          if(!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
-         } else {
+			} else {
 				mr.location().field->set_resources(m_cur_res,amount);
 				mr.location().field->set_starting_res_amount(amount);
             // set new overlay
@@ -73,8 +73,8 @@ int Editor_Set_Resources_Tool::handle_click_impl
 					 world.get_resource(m_cur_res)->get_editor_pic(amount).c_str());
 				overlay_manager.register_overlay(mr.location(), picid, 4);
 				map.recalc_for_field_area(Area<FCoords>(mr.location(), 0));
-         }
-      }
+			}
+		}
 	} while (mr.advance(map));
 	return mr.radius();
 }

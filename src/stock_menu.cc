@@ -78,7 +78,7 @@ void Stock_Menu::clicked_switch_page() {
 		switchpage.set_tooltip(_("Show workers").c_str());
 		break;
 	default: assert(false);
-   }
+	}
 }
 
 /*

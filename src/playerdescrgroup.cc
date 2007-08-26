@@ -42,7 +42,7 @@ static const std::string default_names[MAX_PLAYERS + 1] = {
 	_("Player 6"),
 	_("Player 7"),
 	_("Player 8"),
-   };
+	};
 
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
    m_allow_changes=t;
@@ -119,7 +119,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 				 m_tribes[m_current_tribe],
 				 default_names[m_plnum]);
 			m_game->get_player(m_plnum)->init(false); // Small initializes
-      }
+		}
 
 		m_btnPlayerType.set_title
 			(m_playertype == Player::AI ? _("Computer") : _("Human"));
@@ -147,7 +147,7 @@ void PlayerDescriptionGroup::enable_player(bool on)
 			 m_tribes[m_current_tribe],
 			 default_names[m_plnum]);
 		m_game->get_player(m_plnum)->init(false); // Small initializes
-   } else
+	} else
 		m_game->remove_player(m_plnum);
 
 	m_btnPlayerType .set_visible(on);
@@ -200,8 +200,8 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 				 default_names[m_plnum]);
          m_game->get_player(m_plnum)->init(false); // Small initializes
          return;
-      }
-   }
+		}
+	}
    // never here
    throw wexception("Map defines tribe %s, but it doens't exist!\n", str.c_str());
 }

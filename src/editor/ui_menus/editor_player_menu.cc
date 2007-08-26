@@ -89,7 +89,7 @@ m_remove_last_player
       m_plr_set_tribes_buts[i]=0;
 //       m_plr_make_infrastructure_buts[i]=0;
 //       m_plr_allowed_buildings[i]=0;
-   }
+	}
    update();
 
    set_think(true);
@@ -137,7 +137,7 @@ void Editor_Player_Menu::update(void) {
          delete m_plr_allowed_buildings[i];
          m_plr_allowed_buildings[i]=0;
 #endif
-   }
+	}
    int posy=m_posy;
    int spacing=5;
    int size=20;
@@ -156,7 +156,7 @@ void Editor_Player_Menu::update(void) {
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
           posx+=140+spacing;
 			m_plr_names[i]->set_text(map.get_scenario_player_name(i + 1).c_str());
-      }
+		}
 
       if(!m_plr_set_tribes_buts[i]) {
 			m_plr_set_tribes_buts[i] =
@@ -167,14 +167,14 @@ void Editor_Player_Menu::update(void) {
 				 &Editor_Player_Menu::player_tribe_clicked, this, i,
 				 std::string());
          posx+=140+spacing;
-      }
+		}
 		if (map.get_scenario_player_tribe(i + 1) != "<undefined>")
 			m_plr_set_tribes_buts[i]->set_title
 				(map.get_scenario_player_tribe(i + 1).c_str());
       else {
          m_plr_set_tribes_buts[i]->set_title(m_tribes[0].c_str());
 			map.set_scenario_player_tribe(i + 1, m_tribes[0]);
-      }
+		}
 
       // Set Starting pos button
       if(!m_plr_set_pos_buts[i]) {
@@ -187,7 +187,7 @@ void Editor_Player_Menu::update(void) {
 				 &Editor_Player_Menu::set_starting_pos_clicked, this, i + 1,
 				 std::string());
           posx+=size+spacing;
-      }
+		}
       text="pics/fsel_editor_set_player_";
       text+=static_cast<char>(((i+1)/10) + 0x30);
       text+=static_cast<char>(((i+1)%10) + 0x30);
@@ -205,7 +205,7 @@ void Editor_Player_Menu::update(void) {
 				 _("I"), //  TODO come up with a picture for this
 				 _("Make infrastructure"));
          posx+=size+spacing;
-      }
+		}
 		m_plr_make_infrastructure_buts[i]->set_enabled(start_pos_valid);
 
       // Allowed buildings
@@ -220,11 +220,11 @@ void Editor_Player_Menu::update(void) {
 				 _("Allow/forbid buildidngs"),
 				start_pos_valid);
          posx+=size+spacing;
-      }
+		}
 	   m_plr_allowed_buildings[i]->set_enabled(start_pos_valid);
 #endif
       posy+=size+spacing;
-   }
+	}
    set_inner_size(get_inner_w(),posy+spacing);
 }
 
@@ -289,7 +289,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			//  reselecting the tool.
 			set_starting_pos_clicked(nr_players); //  This calls update().
 		else update();
-      } else {
+		} else {
 			UI::Modal_Message_Box mmb
 				(&parent,
 				 _("Error!"),
@@ -298,7 +298,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 				   "player and try again"),
 				 UI::Modal_Message_Box::OK);
 			mmb.run();
-      }
+		}
 }
 
 
@@ -320,7 +320,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
       else t=m_tribes[++i];
 		parent.egbase().map().set_scenario_player_tribe(n+1,t);
 		parent.set_need_save(true);
-   } else {
+	} else {
 		UI::Modal_Message_Box mmb
 			(&parent,
 			 _("Error!"),
@@ -329,7 +329,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 			   "tribe and try again"),
 			 UI::Modal_Message_Box::OK);
 		mmb.run();
-   }
+	}
    update();
 }
 
@@ -354,8 +354,8 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 				(dynamic_cast<const Building * const>
 				 (map[map.get_starting_pos(n)].get_immovable()))
 				return;
-      }
-   }
+		}
+	}
 
    // Select tool set mplayer
 	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
@@ -383,7 +383,7 @@ void Editor_Player_Menu::name_changed(int m) {
    if(text=="") {
 		text = map.get_scenario_player_name(m + 1);
       m_plr_names[m]->set_text(text.c_str());
-   }
+	}
 	map.set_scenario_player_name(m + 1, text);
 	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1).c_str());
 	parent.set_need_save(true);
@@ -416,7 +416,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
 
 		p = editor.get_player(n);
       p->init(false);
-   }
+	}
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
@@ -448,7 +448,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
       int picid=g_gr->get_picture( PicMod_Game,  picsname.c_str() );
       // Remove old overlay if any
 		overlay_manager.remove_overlay(start_pos,picid);
-   }
+	}
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
 	parent.tools.make_infrastructure.set_player(n);
@@ -470,12 +470,12 @@ void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
 	if (not editor.get_player(n)) {
       // The player is not yet really on the map, call make infrastructure button first
       make_infrastructure_clicked(n);
-   }
+	}
 
    // Create the menu
    if (m_allow_buildings_menu.window) {
       delete m_allow_buildings_menu.window;
-   }
+	}
 	else new Editor_Player_Menu_Allowed_Buildings_Menu
 		(&parent, editor.get_player(n), &m_allow_buildings_menu);
 }

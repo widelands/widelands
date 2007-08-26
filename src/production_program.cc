@@ -68,7 +68,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			if (endp && *endp)
             throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-      } else if (cmd[0] == "consume") {
+		} else if (cmd[0] == "consume") {
          if(cmd.size() != 2 && cmd.size() != 3)
             throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
@@ -80,7 +80,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             if(!s->get_string(wares[i].c_str(), 0))
                throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
                      cmd[1].c_str());
-         }
+			}
 
          act.type = ProductionAction::actConsume;
          act.sparam1 = cmd[1];
@@ -91,9 +91,9 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             if (endp && *endp)
                throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
-         }
+			}
          act.iparam1 = how_many;
-      }  else if (cmd[0] == "check") {
+		}  else if (cmd[0] == "check") {
 			if(cmd.size() != 2 && cmd.size() != 3)
 				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
@@ -105,7 +105,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             if(!s->get_string(wares[i].c_str(), 0))
                throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
                      cmd[1].c_str());
-         }
+			}
 			act.type = ProductionAction::actCheck;
 			act.sparam1 = cmd[1];
          int how_many=1;
@@ -115,7 +115,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             if (endp && *endp)
                throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 
-         }
+			}
          act.iparam1 = how_many;
 
 		} else if (cmd[0] == "produce") {
@@ -183,7 +183,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             Section* s = prof->get_safe_section(cmd[1].c_str());
             act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
             building->add_animation(cmd[1].c_str(),act.iparam1);
-         } else
+			} else
             act.iparam1 = building->get_animation(cmd[1].c_str());
 
 			if (cmd[1] == "idle")

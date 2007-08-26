@@ -48,10 +48,10 @@ throw (_wexception)
    Profile prof;
    try {
       prof.read( "objective", 0, fs );
-   } catch( ... ) {
+	} catch( ... ) {
       // might not be there
       return;
-   }
+	}
 	MapObjectiveManager & mom = egbase->get_map()->get_mom();
 	MapTriggerManager   & mtm = egbase->get_map()->get_mtm();
 
@@ -75,9 +75,9 @@ throw (_wexception)
          o->set_trigger( static_cast<Trigger_Null*>(trig) ); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
 
          mom.register_new_objective(o);
-      }
+		}
       return;
-   }
+	}
    assert(0); // never here
 }
 
@@ -106,7 +106,7 @@ throw (_wexception)
 		s.set_bool  ("visible",  o.get_is_visible());
 		s.set_bool  ("optional", o.get_is_optional());
 		s.set_string("trigger",  o.get_trigger()->get_name());
-   }
+	}
 
    prof.write("objective", false, fs );
 }

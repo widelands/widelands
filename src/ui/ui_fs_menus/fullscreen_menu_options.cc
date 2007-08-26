@@ -138,12 +138,12 @@ m_label_autosave
             modes[i]->w,
             modes[i]->h,
             16
-         };
+			};
          if( !m_resolutions.size() ||
                this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
                this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
             m_resolutions.push_back(this_res);
-      }
+		}
    fmt->BitsPerPixel = 32;
    modes = SDL_ListModes( fmt, SDL_SWSURFACE | SDL_FULLSCREEN );
    if( modes )
@@ -153,12 +153,12 @@ m_label_autosave
             modes[i]->w,
             modes[i]->h,
             32
-         };
+			};
          if( !m_resolutions.size() ||
                this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
                this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
             m_resolutions.push_back(this_res);
-      }
+		}
 
 	bool did_select_a_res=false;
 	for(uint i = 0; i < m_resolutions.size(); i++) {

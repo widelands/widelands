@@ -132,7 +132,7 @@ exit_game
 	if (g_sound_handler.m_lock_audio_disabling) {
 		ingame_music.set_enabled(false);
 		ingame_sound.set_enabled(false);
-   }
+	}
 
 	set_inner_size
 		(hmargin()

@@ -231,8 +231,8 @@ void BulldozeConfirm::bulldoze()
          Player* plr=todestroy->get_owner();
          plr->bulldoze(todestroy);
          m_iabase->need_complete_redraw();
-      }
-   }
+		}
+	}
 
 	die();
 }
@@ -671,7 +671,7 @@ void Building_Window::setup_capsbuttons()
             // This buildings is disabled for this scenario, sorry.
             // Try again later!!
             continue;
-         }
+			}
 
          const Building_Descr & building = *tribe.get_building_descr(id);
          char buffer[128];
@@ -686,8 +686,8 @@ void Building_Window::setup_capsbuttons()
 				 &Building_Window::act_enhance, this, id, // Button id = building id
 				 buffer);
          x += 34;
-      }
-   }
+		}
+	}
 
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
 		new UI::Button<Building_Window>
@@ -726,7 +726,7 @@ void Building_Window::setup_capsbuttons()
       // no capsbutton is in this window
       // resize us, so that we do not take space
       m_capsbuttons->set_inner_size(0,0);
-   }
+	}
 }
 
 
@@ -1075,13 +1075,13 @@ void Warehouse_Window::clicked_switchpage() {
       m_waresdisplay->remove_all_warelists();
       m_waresdisplay->add_warelist(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
       m_curpage = 1;
-   } else if( m_curpage == 1) {
+	} else if( m_curpage == 1) {
       // Showing workers, should show soldiers
       //TODO currently switches back to wares
       m_waresdisplay->remove_all_warelists();
       m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
       m_curpage = 0;
-   }
+	}
 }
 /*
 ===============
@@ -1203,7 +1203,7 @@ void ProductionSite_Window_ListWorkerWindow::think(void) {
       // The Productionsite has been removed. Die quickly.
       die();
       return;
-   }
+	}
 
    fill_list();
    UI::Window::think();
@@ -1221,7 +1221,7 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
    for(i=0; i<workers->size(); i++) {
 		Worker* worker = (*workers)[i];
 		m_ls->add(worker->descname().c_str(), worker, worker->get_menu_pic());
-   }
+	}
 	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
 	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
 
@@ -1359,7 +1359,7 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
        prod_box = create_production_box (this, ps);
       fit_inner(prod_box);
       move_inside_parent();
-   }
+	}
 }
 
 UI::Basic_Button * ProductionSite_Window::create_priority_button
@@ -1642,7 +1642,7 @@ void MilitarySite_Window::think()
       // The Site has been removed. Die quickly.
       die();
       return;
-   }
+	}
    update();
 }
 

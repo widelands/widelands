@@ -54,8 +54,8 @@ EventChain* MapEventChainManager::get_eventchain(const char * const name) const
       if( !strcmp( m_eventchains[i]->get_name(), name ) ) {
          retval = m_eventchains[i];
          break;
-      }
-   }
+		}
+	}
 
    return retval;
 }
@@ -73,6 +73,6 @@ void MapEventChainManager::delete_eventchain( const char* name ) {
          m_eventchains[i] = m_eventchains[m_eventchains.size() - 1];
          m_eventchains.resize( m_eventchains.size() - 1 );
          break;
-      }
-   }
+		}
+	}
 }

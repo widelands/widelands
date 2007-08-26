@@ -149,7 +149,7 @@ public:
       MILITARYSITE,
       WAREHOUSE,
 		TRAININGSITE
-   };
+	};
 
 	Building(const Building_Descr &);
 	virtual ~Building();

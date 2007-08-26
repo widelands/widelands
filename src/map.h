@@ -401,11 +401,11 @@ private:
    struct Extradata_Info {
       enum Type {
          PIC,
-      };
+		};
       void*       data;
       std::string filename;
       Type        type;
-   };
+	};
    std::vector<Extradata_Info> m_extradatainfos; // Only for caching of extradata for writing and reading
 
 	void recalc_brightness(FCoords);

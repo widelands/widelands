@@ -83,7 +83,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
 
    if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
-   }
+	}
 
    if(scenario) {
       // Load this as scenario.
@@ -100,13 +100,13 @@ int S2_Map_Loader::preload_map(bool scenario) {
          "Maximus",
          "Titus",
          "Rufus",
-      };
+		};
 
       for(int i=1; i<=m_map->get_nrplayers(); i++) {
          m_map->set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
          m_map->set_scenario_player_name(i, names[i-1]);
-      }
-   }
+		}
+	}
 
 
    set_state(STATE_PRELOADED);
@@ -178,7 +178,7 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
          (buffer[5] != 0x00)) {
       cerr << "Section marker not found" << endl;
       return 0;
-   }
+	}
 
    dw = file->Unsigned16();
    dh = file->Unsigned16();
@@ -191,7 +191,7 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
    if (dw < width || dh < height) {
       cerr << "Section not big enough" << endl;
       return 0;
-   }
+	}
 
    uchar *section = (uchar *)malloc(dw * dh);
 
@@ -201,7 +201,7 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
 			uchar *ptr = (uchar*)file->Data(width);
 			memcpy(section + y*width, ptr, width);
 			file->Data(dw - width); //  skip the alignment junk
-	   }
+		}
 		while (y < dh) {
 			file->Data(dw); // more alignment junk
 	      y++;
@@ -579,7 +579,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
                nres=m_map->get_world()->get_resource(res.c_str());
                if(static_cast<signed char>(nres)==-1)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
-            }
+				}
             int real_amount=((int)(2.86*(float)amount));
             f->set_resources(nres,real_amount);
             f->set_starting_res_amount(real_amount);

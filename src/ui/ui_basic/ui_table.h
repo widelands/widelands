@@ -209,7 +209,7 @@ private:
    struct Column {
       std::string name;
 		IDButton<Table, Columns::size_type> * btn;
-   };
+	};
 
 	static const int ms_darken_value=-20;
 	static const int DOUBLE_CLICK_INTERVAL=500; // half a second //  FIXME such values should not be defined separately for a particular widget type. They should be defined in one place for the whole UI or even better, a variable that is read from system settings (.kde/share/config/kdeglobals:DoubleClickInterval=...)

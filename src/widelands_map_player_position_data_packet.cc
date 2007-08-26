@@ -67,9 +67,9 @@ throw (_wexception)
 				snprintf(buffer, sizeof(buffer), "player_%i", i);
 				map.set_starting_pos(i, s->get_Coords(buffer));
 			}
-      }
+		}
       return;
-   }
+	}
    assert(0); // never here
 }
 
@@ -93,7 +93,7 @@ throw (_wexception)
 		char buffer[64];
 		snprintf(buffer, sizeof(buffer), "player_%i", i);
 		s->set_Coords(buffer, map.get_starting_pos(i));
-   }
+	}
 
    prof.write("player_position", false, fs );
 }

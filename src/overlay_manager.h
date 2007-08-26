@@ -80,7 +80,7 @@ struct Overlay_Manager {
       // register callback function (see data below for description)
       void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int iparam1 = 0) {
          m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1;
-      }
+		}
 
 	//  Get a job id that is hopefully unused. This function is guaranteed to
 	//  never return Job_Id::Null(). All other values are valid and may be returned.

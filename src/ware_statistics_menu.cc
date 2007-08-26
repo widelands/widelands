@@ -397,9 +397,9 @@ m_parent(&parent)
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
          m_plot->register_plot_data(cur_ware, parent.get_player()->get_ware_production_statistics(cur_ware), colors[cur_ware]);
-      }
+		}
       posy += dposy;
-   }
+	}
 
    m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
 

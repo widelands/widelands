@@ -65,8 +65,8 @@ m_player_area(trigger->m_player_area)
          std::string trig_name= m_trigger->get_building();
          if(name==trig_name) m_building=m_buildings.size();
          m_buildings.push_back(name);
-      }
-   }
+		}
+	}
 
    // Name editbox
    new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
@@ -370,7 +370,7 @@ void Trigger_Building_Option_Menu::clicked(int i) {
 
       case 25: m_count++; break;
       case 26: m_count--; break;
-   }
+	}
    update();
 }
 
@@ -404,9 +404,9 @@ void Trigger_Building_Option_Menu::update(void) {
 	if (not m_buildings.size()) {
 		m_player_area.player_number = 0;
       m_building=-1;
-   } else {
+	} else {
       curbuild=m_buildings[m_building];
-   }
+	}
 
    char buf[200];
 	sprintf(buf, "%i", m_player_area.x);

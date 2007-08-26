@@ -70,9 +70,9 @@ throw (_wexception)
          t->Read( s, egbase );
 
          egbase->get_map()->get_mtm().register_new_trigger( t );
-      }
+		}
       return;
-   }
+	}
    throw wexception("Unknown version in Map Trigger Packet: %i\n", packet_version );
 }
 
@@ -99,7 +99,7 @@ throw (_wexception)
 		s.set_string("type", t.get_id());
 		s.set_bool  ("set",  t.is_set());
 		t.Write(s);
-   }
+	}
 
    prof.write("trigger", false, fs );
 

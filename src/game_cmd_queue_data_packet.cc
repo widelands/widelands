@@ -71,10 +71,10 @@ throw (_wexception)
 
          cmdq->m_cmds.push(item);
          ++i;
-      }
+		}
       // DONE
       return;
-   } else
+	} else
       throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i\n", packet_version);
 
    assert(0); // never here
@@ -122,7 +122,7 @@ throw (_wexception)
 		p.top().cmd->Write(&fw, game, os);
       // DONE: next command
       p.pop();
-   }
+	}
 
    fw.Write( fs, "binary/cmd_queue" );
 }

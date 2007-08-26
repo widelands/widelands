@@ -182,7 +182,7 @@ m_event_chain(chain)
 	for (MapTriggerManager::Index i = 0; i < nr_triggers; ++i) {
 		Trigger & tr = mtm.get_trigger_by_nr(i);
 		m_trigger_list->add(tr.get_name(), tr);
-   }
+	}
    m_trigger_list->sort();
 
    posy=get_inner_h()-30;
@@ -218,8 +218,8 @@ m_event_chain(chain)
 		       t,
 				 -1,
 		       true);
-      }
-   }
+		}
+	}
 
    center_to_parent();
 }
@@ -260,7 +260,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
          assert( cond );
          m_given_cond = cond;
          end_modal( 1 );
-      } catch(  TriggerConditional_Factory::SyntaxError err ) {
+		} catch(  TriggerConditional_Factory::SyntaxError err ) {
 			UI::Modal_Message_Box mb
 				(m_parent,
 				 _("Syntax Error"),
@@ -269,7 +269,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 				 UI::Modal_Message_Box::OK);
 			mb.run();
          return;
-      }
+		}
 }
 
 
@@ -289,7 +289,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
       t.data = &trigger;
       t.token = TriggerConditional_Factory::TRIGGER;
 	m_construction->add(trigger.get_name(), t, -1, true);
-   }
+	}
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger() {
