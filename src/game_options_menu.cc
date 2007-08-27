@@ -22,6 +22,7 @@
 #include "building_statistics_menu.h"
 #include "fullscreen_menu_fileview.h"
 #include "game_options_menu.h"
+#include "game_options_sound_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
 #include "general_statistics_menu.h"
@@ -42,7 +43,7 @@ UI::UniqueWindow
 (&plr, &registry,
  102,
  vmargin()
- + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()) +
+ + 4 * (20 + vspacing()) + 2 * vgap() +
  35 + vspacing() + 35 +
  vmargin(),
  _("Options")),
@@ -52,7 +53,7 @@ m_windows(windows),
 readme
 (this,
  posx(0, 1),
- vmargin() + 0 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
  buttonw(1), 20,
  4,
  &GameOptionsMenu::clicked_readme, this,
@@ -61,7 +62,7 @@ readme
 license
 (this,
  posx(0, 1),
- vmargin() + 1 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
  buttonw(1), 20,
  4,
  &GameOptionsMenu::clicked_license, this,
@@ -70,31 +71,25 @@ license
 authors
 (this,
  posx(0, 1),
- vmargin() + 2 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
+ vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
  buttonw(1), 20,
  4,
  &GameOptionsMenu::clicked_authors, this,
  _("Authors")),
 
-ingame_music
-(this, hmargin(),
- vmargin() + 3 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing())),
-ingame_music_label
-(this, hmargin () + STATEBOX_WIDTH + hspacing(),
- vmargin() + 3 * (20 + vspacing()) + 0 * (STATEBOX_HEIGHT + vspacing()),
- _("Ingame Music")),
-ingame_sound
-(this, hmargin(),
- vmargin() + 3 * (20 + vspacing()) + 1 * (STATEBOX_HEIGHT + vspacing())),
-ingame_sound_label
-(this, hmargin () + STATEBOX_WIDTH + hspacing(),
- vmargin() + 3 * (20 + vspacing()) + 1 * (STATEBOX_HEIGHT + vspacing()),
- _("Sound FX")),
+sound
+(this,
+ posx(0, 1),
+ vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
+ buttonw(1), 20,
+ 4,
+ &GameOptionsMenu::clicked_sound, this,
+ _("Sound options")),
 
 save_game
 (this,
  posx(0, 2),
- vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()),
+ vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
  buttonw(2), 35,
  4,
  g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
@@ -104,7 +99,7 @@ save_game
 load_game
 (this,
  posx(1, 2),
- vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()),
+ vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
  buttonw(2), 35,
  4,
  g_gr->get_picture(PicMod_Game, "pics/menu_load_game.png"),
@@ -114,7 +109,7 @@ load_game
 exit_game
 (this,
  posx(0, 1),
- vmargin() + 3 * (20 + vspacing()) + 2 * (STATEBOX_HEIGHT + vspacing()) +
+ vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
  35 + vspacing(),
  buttonw(1), 35,
  4,
@@ -123,25 +118,8 @@ exit_game
  _("Exit game"))
 
 {
-	ingame_music.changedto.set(this, &GameOptionsMenu::changed_ingame_music);
-	ingame_sound.changedto.set(this, &GameOptionsMenu::changed_ingame_sound);
-
-	ingame_music.set_state(not g_sound_handler.get_disable_music());
-	ingame_sound.set_state(not g_sound_handler.get_disable_fx());
-
-	if (g_sound_handler.m_lock_audio_disabling) {
-		ingame_music.set_enabled(false);
-		ingame_sound.set_enabled(false);
-	}
-
 	set_inner_size
-		(hmargin()
-		 + STATEBOX_WIDTH + hspacing() +
-		 std::max
-		 (get_inner_w(),
-		  std::max(ingame_music_label.get_w(), ingame_sound_label.get_w()))
-		 +
-		 hmargin(),
+		(hmargin() + std::max(get_inner_w(), readme.get_w()) + hmargin(),
 		 get_inner_h());
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -157,6 +135,11 @@ void GameOptionsMenu::clicked_license()
 void GameOptionsMenu::clicked_authors()
 {fileview_window(&m_player, &m_windows.authors, "txts/developers");}
 
+void GameOptionsMenu::clicked_sound() {
+	if (m_windows.sound_options.window) delete m_windows.sound_options.window;
+	else new GameOptionsSoundMenu(m_player, m_windows.sound_options);
+}
+
 void GameOptionsMenu::clicked_save_game() {
 	new Game_Main_Menu_Save_Game(&m_player, &m_windows.savegame);
 	die();
@@ -168,15 +151,3 @@ void GameOptionsMenu::clicked_load_game() {
 }
 
 void GameOptionsMenu::clicked_exit_game() {m_player.end_modal(0);}
-
-
-/*
- * One of the checkboxes have been toggled
- */
-void GameOptionsMenu::changed_ingame_music(bool t) {
-   g_sound_handler.set_disable_music(!t);
-}
-
-void GameOptionsMenu::changed_ingame_sound(bool t) {
-   g_sound_handler.set_disable_fx(!t);
-}

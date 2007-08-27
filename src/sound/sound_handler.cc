@@ -38,6 +38,9 @@
 #include <windows.h>
 #endif
 
+#define DEFAULT_MUSIC_VOLUME  64
+#define DEFAULT_FX_VOLUME    128
+
 /** The global \ref Sound_Handler object
  * The sound handler is a static object because otherwise it'd be quite
  * difficult to pass the --nosound command line option
@@ -118,6 +121,7 @@ void Sound_Handler::init()
 		Mix_HookMusicFinished(Sound_Handler::music_finished_callback);
 		Mix_ChannelFinished(Sound_Handler::fx_finished_callback);
 		load_system_sounds();
+		Mix_VolumeMusic(m_music_volume); //  can not do this before InitSubSystem
 	}
 }
 
@@ -153,7 +157,9 @@ void Sound_Handler::read_config()
 		set_disable_fx(true);
 	} else {
 		set_disable_music(s->get_bool("disable_music", false));
-		set_disable_fx(s->get_bool("disable_fx", false));
+		set_disable_fx   (s->get_bool("disable_fx",    false));
+		m_music_volume = s->get_int("music_volume", DEFAULT_MUSIC_VOLUME);
+		m_fx_volume    = s->get_int("fx_volume",    DEFAULT_FX_VOLUME);
 	}
 
 	m_random_order = s->get_bool("sound_random_order", true);
@@ -532,9 +538,12 @@ void Sound_Handler::play_fx
 	//  retrieve the fx and play it if it's valid
 	if (Mix_Chunk * const m = m_fxs[fx_name]->get_fx()) {
 		const int chan = Mix_PlayChannel(-1, m, 0);
-		//TODO: complain if this didn't work due to out-of-channels
-		Mix_SetPanning(chan, 254-stereo_pos, stereo_pos);
-		m_active_fx[chan]=fx_name;
+		if (chan == -1) log("Sound_Handler: Mix_PlayChannel failed\n");
+		else {
+			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
+			Mix_Volume(chan, get_fx_volume());
+			m_active_fx[chan] = fx_name;
+		}
 	} else
 		log("Sound_Handler: sound effect \"%s\" exists but contains no "
 		    "files!\n", fx_name.c_str());
@@ -609,10 +618,6 @@ void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
 			log("Sound_Handler: songset \"%s\" exists but contains "
 			    "no files!\n", songset_name.c_str());
 	}
-#ifdef __WIN32__
-	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
-#endif
-
 }
 
 /** Stop playing a songset.
@@ -655,22 +660,17 @@ void Sound_Handler::change_music
 		start_music(s, fadein_ms);
 }
 
-/// Normal get_* function
-bool Sound_Handler::get_disable_music()
-{
-	return m_disable_music;
-}
 
-/// Normal get_* function
-bool Sound_Handler::get_disable_fx()
-{
-	return m_disable_fx;
-}
+bool Sound_Handler::get_disable_music() const throw () {return m_disable_music;}
+bool Sound_Handler::get_disable_fx   () const throw () {return m_disable_fx;}
+int  Sound_Handler::get_music_volume () const throw () {return m_music_volume;}
+int  Sound_Handler::get_fx_volume    () const throw () {return m_fx_volume;}
+
 
 /** Normal set_* function, but the music must be started/stopped accordingly
  * Also, the new value is written back to the config file right away. It might
  * get lost otherwise.
-*/
+ */
 void Sound_Handler::set_disable_music(bool disable)
 {
 	if (m_lock_audio_disabling || m_disable_music == disable)
@@ -701,6 +701,36 @@ void Sound_Handler::set_disable_fx(bool disable)
 
 	g_options.pull_section("global")->set_bool("disable_fx", disable,
 	      false);
+}
+
+/**
+ * Normal set_* function.
+ * Set the music volume between 0 (muted) and \ref get_max_volume().
+ * The new value is written back to the config file.
+ *
+ * \param volume The new music volume.
+ */
+void Sound_Handler::set_music_volume(int volume) {
+	if (not m_lock_audio_disabling) {
+		m_music_volume = volume;
+		Mix_VolumeMusic(volume);
+		g_options.pull_section("global")->set_int("music_volume", volume, false);
+	}
+}
+
+/**
+ * Normal set_* function
+ * Set the FX sound volume between 0 (muted) and \ref get_max_volume().
+ * The new value is written back to the config file.
+ *
+ * \param volume The new music volume.
+ */
+void Sound_Handler::set_fx_volume(int volume) {
+	if (not m_lock_audio_disabling) {
+		m_fx_volume = volume;
+		Mix_Volume(-1, volume);
+		g_options.pull_section("global")->set_int("fx_volume", volume, false);
+	}
 }
 
 /** Callback to notify \ref Sound_Handler that a song has finished playing.

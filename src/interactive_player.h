@@ -49,6 +49,7 @@ public:
 		UI::UniqueWindow::Registry authors;
 		UI::UniqueWindow::Registry licence;
 		UI::UniqueWindow::Registry options;
+		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
 		UI::UniqueWindow::Registry general_stats;

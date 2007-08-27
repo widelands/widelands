@@ -200,10 +200,20 @@ public:
 	static void fx_finished_callback(int channel);
 	void handle_channel_finished(uint channel);
 
-	bool get_disable_music();
-	bool get_disable_fx();
+	bool get_disable_music() const throw ();
+	bool get_disable_fx   () const throw ();
+	int  get_music_volume () const throw ();
+	int  get_fx_volume    () const throw ();
 	void set_disable_music(bool disable);
-	void set_disable_fx(bool disable);
+	void set_disable_fx   (bool disable);
+	void set_music_volume (int volume);
+	void set_fx_volume    (int volume);
+
+	/**
+	 * Return the max value for volume settings. We use a function to hide
+	 * SDL_mixer constants outside of sound_handler.
+	 */
+	int get_max_volume() const throw () {return MIX_MAX_VOLUME;}
 
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
@@ -237,6 +247,10 @@ protected:
 	bool m_disable_music;
 	/// Whether to disable sound effects
 	bool m_disable_fx;
+	/// Volume of music (from 0 to \ref get_max_volume())
+	int m_music_volume;
+	/// Volume of sound effects (from 0 to \ref get_max_volume())
+	int m_fx_volume;
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside

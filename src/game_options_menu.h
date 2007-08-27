@@ -21,7 +21,6 @@
 #define __S__GAME_OPTIONS_MENU_H
 
 #include "interactive_player.h"
-#include "ui_checkbox.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
@@ -40,10 +39,7 @@ private:
 	UI::Button<GameOptionsMenu> readme;
 	UI::Button<GameOptionsMenu> license;
 	UI::Button<GameOptionsMenu> authors;
-	UI::Checkbox ingame_music;
-	UI::Textarea ingame_music_label;
-	UI::Checkbox ingame_sound;
-	UI::Textarea ingame_sound_label;
+	UI::Button<GameOptionsMenu> sound;
 	UI::Button<GameOptionsMenu> save_game;
 	UI::Button<GameOptionsMenu> load_game;
 	UI::Button<GameOptionsMenu> exit_game;
@@ -55,6 +51,7 @@ private:
 	/** Returns the horizontal/vertical margin between edge and buttons. */
 	uint hmargin() const {return 2 * hspacing();}
 	uint vmargin() const {return 2 * vspacing();}
+	uint vgap()    const {return 8;}
 
 	/** Returns the width of a button in a row with nr_buttons buttons. */
 	uint buttonw(const uint nr_buttons) const {
@@ -69,11 +66,10 @@ private:
 	uint posx(const uint nr, const uint nr_buttons) const
 	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
 
-	void changed_ingame_music(bool);
-	void changed_ingame_sound(bool);
 	void clicked_readme   ();
 	void clicked_license  ();
 	void clicked_authors  ();
+	void clicked_sound    ();
 	void clicked_save_game();
 	void clicked_load_game();
 	void clicked_exit_game();
