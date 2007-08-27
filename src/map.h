@@ -25,6 +25,7 @@
 #include "interval.h"
 #include "world.h"
 
+#include <set>
 #include <string>
 #include <vector>
 
@@ -561,10 +562,9 @@ normal bobs.
 Simply check whether the movecaps are matching (basic exceptions for water bobs
 moving onto the shore).
 */
-class CheckStepDefault : public CheckStep {
-public:
+struct CheckStepDefault : public CheckStep {
 	CheckStepDefault(uchar movecaps) : m_movecaps(movecaps) {}
-   virtual ~CheckStepDefault() {}  // make gcc shut up
+	virtual ~CheckStepDefault() {} //  make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
@@ -581,10 +581,9 @@ Implements the default step checking behaviours with one exception: we can move
 from a walkable field onto an unwalkable one.
 If onlyend is true, we can only do this on the final step.
 */
-class CheckStepWalkOn : public CheckStep {
-public:
+struct CheckStepWalkOn : public CheckStep {
 	CheckStepWalkOn(uchar movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
-   virtual ~CheckStepWalkOn() {}  // make gcc shut up
+	virtual ~CheckStepWalkOn() {} //  make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
@@ -605,19 +604,26 @@ movecaps are the capabilities with which the road is to be built (swimming
 for boats, walking for normal roads).
 forbidden is an array of coordinates that must not be crossed by the road.
 */
-class CheckStepRoad : public CheckStep {
-public:
-	CheckStepRoad(Player* player, uchar movecaps, const std::vector<Coords>* forbidden)
-		: m_player(player), m_movecaps(movecaps), m_forbidden(forbidden) {}
-   virtual ~CheckStepRoad() {}  // make gcc shut up
+struct CheckStepRoad : public CheckStep {
+	CheckStepRoad
+		(const Player & player,
+		 const uchar movecaps,
+		 const std::set<Coords, Coords::ordering_functor> * const
+		 forbidden_locations = 0)
+		:
+		m_player           (player),
+		m_forbidden_locations(forbidden_locations),
+		m_movecaps         (movecaps)
+	{}
+	virtual ~CheckStepRoad() {} //  make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	Player                    * m_player;
-	uchar                       m_movecaps;
-	const std::vector<Coords> * m_forbidden;
+	const Player                                     &       m_player;
+	const std::set<Coords, Coords::ordering_functor> * const m_forbidden_locations;
+	const Uint8                                              m_movecaps;
 };
 
 
@@ -628,10 +634,9 @@ private:
  */
 class CoordPath;
 
-class Path {
+struct Path {
 	friend class Map;
 
-public:
 	Path() {}
 	Path(Coords c) : m_start(c), m_end(c) {}
 	Path(CoordPath &o);
@@ -655,8 +660,7 @@ private:
 };
 
 // CoordPath is an extended path that also caches related Coords
-class CoordPath {
-public:
+struct CoordPath {
 	CoordPath() {}
 	CoordPath(Coords c) {m_coords.push_back(c);}
 	CoordPath(const Map & map, const Path & path);

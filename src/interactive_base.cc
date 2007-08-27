@@ -518,6 +518,8 @@ bool Interactive_Base::append_build_road(Coords field)
 {
 	assert(m_buildroad);
 
+	Map & map = egbase().map();
+	const Player & player = *egbase().get_player(m_road_build_player);
 	int idx = m_buildroad->get_index(field);
 
 	if (idx >= 0) {
@@ -529,23 +531,27 @@ bool Interactive_Base::append_build_road(Coords field)
 		return true;
 	}
 
-	// Find a path to the clicked-on field
-	Map & map = egbase().map();
-	Path path;
-	CheckStepRoad cstep
-		(m_egbase.get_player(m_road_build_player),
-		 MOVECAPS_WALK,
-		 &m_buildroad->get_coords());
-
+	{
+		Path path;
+		std::set<Coords, Coords::ordering_functor> forbidden_locations;
+		const std::vector<Coords> & road_cp = m_buildroad->get_coords();
+		const std::vector<Coords>::const_iterator road_cp_end = road_cp.end();
+		for
+			(std::vector<Coords>::const_iterator it = road_cp.begin();
+			 it != road_cp_end;
+			 ++it)
+			forbidden_locations.insert(*it);
+		CheckStepRoad cstep(player, MOVECAPS_WALK, &forbidden_locations);
 	if
 		(map.findpath
 		 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
 		 <
 		 0)
 		return false; // couldn't find a path
+		m_buildroad->append(map, path);
+	}
 
 	roadb_remove_overlay();
-	m_buildroad->append(map, path);
 	roadb_add_overlay();
 	need_complete_redraw();
 

@@ -2464,15 +2464,17 @@ CheckStepRoad
 bool CheckStepRoad::allowed
 (Map* map, FCoords start, FCoords end, int, StepId id) const
 {
-	uchar endcaps = m_player->get_buildcaps(end);
+	const Uint8 endcaps = m_player.get_buildcaps(end);
 
 	// Calculate cost and passability
-	if (!(endcaps & m_movecaps)) {
-		uchar startcaps = m_player->get_buildcaps(start);
-
-		if (!((endcaps & MOVECAPS_WALK) && (startcaps & m_movecaps & MOVECAPS_SWIM)))
-			return false;
-	}
+	if
+		(not (endcaps & m_movecaps)
+		 and
+		 not
+		 ((endcaps & MOVECAPS_WALK)
+		  and
+		  (m_player.get_buildcaps(start) & m_movecaps & MOVECAPS_SWIM)))
+		return false;
 
 	// Check for blocking immovables
 	BaseImmovable *imm = map->get_immovable(end);
@@ -2485,16 +2487,10 @@ bool CheckStepRoad::allowed
 			return false;
 	}
 
-	// Is the field forbidden?
-	if (m_forbidden) {
-		int c = m_forbidden->size()-1;
-		while (c >= 0 && end != (*m_forbidden)[c])
-			c--;
-		if (c >= 0)
-			return false;
-	}
-
-	return true;
+	return //  Is the field forbidden?
+		not m_forbidden_locations
+		or
+		m_forbidden_locations->find(end) == m_forbidden_locations->end();
 }
 
 bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
