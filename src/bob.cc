@@ -984,13 +984,12 @@ void Bob::set_owner(Player* player)
  */
 void Bob::set_position(Editor_Game_Base* g, Coords coords)
 {
+	FCoords oldposition = m_position;
+
 	if (m_position.field) {
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
-
-		if (m_owner != 0)
-			m_owner->unsee_area(Area<FCoords>(get_position(), vision_range()));
 	}
 
 	m_position = g->map().get_fcoords(coords);
@@ -1000,8 +999,12 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	if (m_linknext) m_linknext->m_linkpprev = &m_linknext;
 	*m_linkpprev = this;
 
-	if (m_owner != 0)
+	if (m_owner != 0) {
 		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
+
+		if (oldposition.field)
+			m_owner->unsee_area(Area<FCoords>(oldposition, vision_range()));
+	}
 }
 
 /**
