@@ -26,6 +26,7 @@
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
+#include "i18n.h"
 #include <string>
 
 /*
@@ -60,6 +61,14 @@ private:
 	int                                               campaign;
 };
 
+// Pictures, showing the difficulty of a campaign
+	static const char * const dif_picture_filenames[] = {
+	"pics/novalue.png",
+	"pics/big.png",
+	"pics/medium.png",
+	"pics/small.png"
+	};
+
 /*
  * UI 2 - Selection of a map
  *
@@ -73,7 +82,6 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	void fill_list();
 	std::string get_map();
 	void set_campaign(uint);
-	int get_campaign();
 
 private:
 	UI::Textarea                                         title;

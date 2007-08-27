@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "error.h"
 #include "graphic.h"
-#include "i18n.h"
 #include "profile.h"
 
 
@@ -121,7 +120,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 		sprintf(cdescription, "campdesc%i", i);
 
 		// Convert difficulty level to something understandable
-		const char * const dif_picture_filenames[] = {
+		const char * const dif_descriptions[] = {
 		_("[No value found]").c_str(),
 		_("Easy living").c_str(),
 		_("Be vigilant").c_str(),
@@ -129,9 +128,9 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 		};
 
 		uint dif = s->get_int(cdifficulty);
-		if (sizeof(dif_picture_filenames) / sizeof(*dif_picture_filenames) <= dif)
+		if (sizeof(dif_descriptions) / sizeof(*dif_descriptions) <= dif)
 			dif = 0;
-		difficulty = dif_picture_filenames[dif];
+		difficulty = dif_descriptions[dif];
 
 		// Print informations
 		tacampname.set_text(s->get_string(cname, _("[No value found]").c_str()));
@@ -192,13 +191,6 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 		if (s->get_bool(cvisible)) {
 
 			// convert difficulty level to the fitting picture
-			const char * const dif_picture_filenames[] = {
-			"pics/novalue.png",
-			"pics/big.png",
-			"pics/medium.png",
-			"pics/small.png"
-			};
-
 			uint dif = s->get_int(cdifficulty);
 			if (sizeof(dif_picture_filenames) / sizeof(*dif_picture_filenames) <= dif)
 				dif = 0;
@@ -279,10 +271,8 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 {
 	return campmapfile;
 }
-int Fullscreen_Menu_CampaignMapSelect::get_campaign()
-{
-	return campaign;
-}
+
+
 //telling this class what campaign we have and since we know what campaign we have, fill it.
 void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint i)
 {

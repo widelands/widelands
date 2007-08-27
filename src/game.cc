@@ -253,7 +253,7 @@ bool Game::run_campaign()
 		// Than start UI for the selected campaign
 		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
-		if (select_campaignmap.run()) {
+		if (select_campaignmap.run() > 0) {
 			campmapfile = select_campaignmap.get_map();
 			loop=0;
 		}
