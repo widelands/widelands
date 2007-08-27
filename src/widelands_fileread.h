@@ -70,22 +70,22 @@ struct WidelandsFileRead : public FileRead {
 };
 
 inline Coords WidelandsFileRead::Coords32(const Extent extent) {
-	const Uint16 x = Little16(Deref16(Data(2)));
-	const Uint16 y = Little16(Deref16(Data(2)));
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
 	if (extent.w <= x) throw Width_Exceeded (GetPos() - 4, extent.w, x);
 	if (extent.h <= y) throw Height_Exceeded(GetPrevPos(), extent.h, y);
 	return Coords(x, y);
 }
 
 inline Coords WidelandsFileRead::Coords32_allow_null(const Extent extent) {
-	const Uint16 x = Little16(Deref16(Data(2)));
-	const Uint16 y = Little16(Deref16(Data(2)));
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
 	const Coords result(x, y);
 	if (not result.isNull()) {
 		if (extent.w <= x) throw Width_Exceeded (GetPos() - 4, extent.w, x);
 		if (extent.h <= y) throw Height_Exceeded(GetPrevPos(), extent.h, y);
 	}
-	return Coords(x, y);
+	return result;
 }
 
 #endif
