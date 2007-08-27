@@ -384,20 +384,26 @@ void Font_Handler::draw_richtext
 			int img_surf_w = 0;
 
 			//First render all images of this richtext block
-			for (std::vector<std::string>::iterator img_it = cur_block_images.begin(); img_it != cur_block_images.end(); img_it++) {
+			for
+				(std::vector<std::string>::const_iterator img_it =
+				 cur_block_images.begin();
+				 img_it != cur_block_images.end();
+				 ++img_it)
+			{
 				SDL_Rect img_pos;
 				img_pos.x = img_surf_w;
 				img_pos.y = 0;
-
-				Surface* image =
-					g_gr->get_picture_surface(
-						g_gr->get_picture(PicMod_Game, img_it->c_str()));
-					// Not Font, but game.
-
-				img_surf_h = img_surf_h < static_cast<const int>(image->get_h()) ?
-					image->get_h() : img_surf_h;
-				img_surf_w = img_surf_w + image->get_w();
-				rend_cur_images.push_back(image->m_surface);
+				if
+					(Surface * const image =
+					 g_gr->get_picture_surface //  Not Font, but Game.
+					 (g_gr->get_picture(PicMod_Game, img_it->c_str())))
+				{
+					img_surf_h =
+						img_surf_h < static_cast<const int>(image->get_h()) ?
+						image->get_h() : img_surf_h;
+					img_surf_w = img_surf_w + image->get_w();
+					rend_cur_images.push_back(image->m_surface);
+				}
 			}
 			SDL_Surface * const block_images = rend_cur_images.size() ?
 				join_sdl_surfaces
