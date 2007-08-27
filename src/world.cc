@@ -419,7 +419,7 @@ m_texture           (0)
    if (str1!="") {
       int nres=1;
       uint i=0;
-      while (i < str1.size()) {if (str1[i]==', ') {nres++;}  i++;}
+      while (i < str1.size()) {if (str1[i]==',') {nres++;}  i++;}
 
       m_nr_valid_resources=nres;
       if (nres==1)
@@ -431,7 +431,7 @@ m_texture           (0)
       int cur_res=0;
       while (i<=str1.size()) {
          if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}
-         if (str1[i]==', ' || i==str1.size()) {
+         if (str1[i]==',' || i==str1.size()) {
             int res=resources->get_index(curres.c_str());;
             if (res==-1)
                throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());

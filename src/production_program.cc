@@ -70,7 +70,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 		} else if (cmd[0] == "consume") {
          if (cmd.size() != 2 && cmd.size() != 3)
-            throw wexception("Line %i: Usage: consume <ware>[, <ware>, <ware>..] [number] (no blanks between wares)", idx);
+            throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
          std::vector<std::string> wares;
 			split_string(cmd[1], wares, ",");
@@ -95,7 +95,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
          act.iparam1 = how_many;
 		}  else if (cmd[0] == "check") {
 			if (cmd.size() != 2 && cmd.size() != 3)
-				throw wexception("Line %i: Usage: checking <ware>[, <ware>, <ware>..] [number] (no blanks between wares)", idx);
+				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
          std::vector<std::string> wares;
 			split_string(cmd[1], wares, ",");
