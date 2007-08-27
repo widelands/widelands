@@ -26,7 +26,6 @@
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
-#include "i18n.h"
 #include <string>
 
 /*
@@ -60,15 +59,6 @@ private:
 // Variables used for exchange between the two Campaign UIs and Game::run_campaign
 	int                                               campaign;
 };
-
-// Pictures, showing the difficulty of a campaign
-	static const char * const dif_picture_filenames[] = {
-	"pics/novalue.png",
-	"pics/big.png",
-	"pics/medium.png",
-	"pics/small.png"
-	};
-
 /*
  * UI 2 - Selection of a map
  *

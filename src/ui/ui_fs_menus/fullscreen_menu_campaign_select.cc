@@ -22,6 +22,7 @@
 #include "constants.h"
 #include "error.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "profile.h"
 
 
@@ -191,6 +192,13 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 		if (s->get_bool(cvisible)) {
 
 			// convert difficulty level to the fitting picture
+			static const char * const dif_picture_filenames[] = {
+			"pics/novalue.png",
+			"pics/big.png",
+			"pics/medium.png",
+			"pics/small.png"
+			};
+
 			uint dif = s->get_int(cdifficulty);
 			if (sizeof(dif_picture_filenames) / sizeof(*dif_picture_filenames) <= dif)
 				dif = 0;
