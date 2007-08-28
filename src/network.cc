@@ -213,7 +213,9 @@ NetHost::NetHost ()
 {
 	IPaddress myaddr;
 	int i;
-        log("[Host] starting up.\n");
+
+	log("[Host] starting up.\n");
+
 	// create a listening socket
 	SDLNet_ResolveHost (&myaddr, NULL, WIDELANDS_PORT);
 	svsock=SDLNet_TCP_Open(&myaddr);
@@ -261,7 +263,8 @@ void NetHost::update_map ()
 		serializer->send (clients[i].sock);
 
 	playerdescr[0]->set_player_type (Player::Local);
-        log("[Host] updating map.\n");
+
+	log("[Host] updating map.\n");
 	send_player_info ();
 }
 
@@ -297,7 +300,8 @@ void NetHost::begin_game ()
 {
 	delete promoter;
 	promoter=0;
-        log("[Host] Brodcasting begin pregame.");
+
+	log("[Host] Brodcasting begin pregame.");
 	SDLNet_TCP_Close (svsock);
 	svsock=0;
 
@@ -321,19 +325,19 @@ void NetHost::handle_network ()
 	TCPsocket sock;
 	unsigned int i, j;
 
-	if (promoter!=0) {
+	if (promoter!=0)
 	    promoter->run ();
 
-	}
 	// if we are in the game initiation phase, check for new connections
 	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {
 		Player* pl=0;
 
 		for (i=1;i<=MAX_PLAYERS;i++)
-			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI) break;
+			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI)
+				break;
 
 		if (pl==0) {
-		        log("[Host] Map Full...\n");
+			log("[Host] Map Full...\n");
 			// sorry, but there no room on this map for any more players
 			SDLNet_TCP_Close (sock);
 			continue;
@@ -401,7 +405,7 @@ void NetHost::handle_network ()
 	for (i=0;i<clients.size();i++)
 		while (clients[i].deserializer->avail())
 			switch (clients[i].deserializer->getchar()) {
-			    case NETCMD_READY:
+			case NETCMD_READY:
 				assert (phase==PH_PREGAME);
 				assert (statuswnd!=0);
 
@@ -428,11 +432,12 @@ void NetHost::handle_network ()
 				for (j=0;j<clients.size();j++)
 				    serializer->send (clients[j].sock);
 				break;
-			    case NETCMD_PONG:
-			        log ("[Host] Pong received\n");
+
+			case NETCMD_PONG:
+				log ("[Host] Pong received\n");
 				if (clients[i].lag>0) {
-				    log ("[Host] Duplicate pong!\n");
-				    continue;
+					log ("[Host] Duplicate pong!\n");
+					continue;
 				}
 
 				clients[i].lag=std::max((SDL_GetTicks() - last_ping_sent), (ulong)1);
@@ -442,18 +447,21 @@ void NetHost::handle_network ()
 					update_network_delay ();
 
 				break;
-			    case NETCMD_PLAYERCOMMAND:
-			        log ("[Host] Player command in\n");
+
+			case NETCMD_PLAYERCOMMAND:
+				log ("[Host] Player command in\n");
 				cmds.push (PlayerCommand::deserialize(*clients[i].deserializer));
 				break;
-			    case NETCMD_SYNCREPORT:
-			        log ("[Host] Player syncreport in\n");
+
+			case NETCMD_SYNCREPORT:
+				log ("[Host] Player syncreport in\n");
 				clients[i].syncreports.push (
-					clients[i].deserializer->getlong());
+				clients[i].deserializer->getlong());
 				break;
-			    case NETCMD_CHATMESSAGE:
+
+			case NETCMD_CHATMESSAGE:
 				{
-				log ("[Host] Chat recived\n");
+					log ("[Host] Chat recived\n");
 					char buffer[256];
 					Chat_Message msg;
 					//uchar plrnum =  clients[i].deserializer->getchar();
@@ -466,7 +474,8 @@ void NetHost::handle_network ()
 					send_chat_message_int (msg);
 				}
 				break;
-			    default: //no need to faint on invalid data...
+
+			default: //no need to faint on invalid data...
 				log("[Host]Invalid network data received");
 			}
 
@@ -531,7 +540,8 @@ void NetHost::handle_network ()
 void NetHost::send_chat_message_int (const Chat_Message msg)
 {
 	unsigned int i;
-        log("[Host] Sending chat\n");
+
+	log("[Host] Sending chat\n");
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
 	serializer->putchar (msg.plrnum);
@@ -550,19 +560,19 @@ void NetHost::update_network_delay ()
 	unsigned int i;
 
 	for (i=7;i>0;i--)
-	    net_delay_history[i]=net_delay_history[i-1];
+		net_delay_history[i]=net_delay_history[i-1];
 
 	net_delay_history[0]=MINIMUM_NETWORK_DELAY;
 
 	for (i=0;i<clients.size();i++)
 		if (clients[i].lag>net_delay_history[0])
-		    net_delay_history[0]=clients[i].lag;
+			net_delay_history[0]=clients[i].lag;
 
 	// add a safety margin (25%)
 	net_delay_history[0]+=net_delay_history[0]/4;
 
 	for (i=0;i<8;i++)
-	    tmp[i]=net_delay_history[i];
+		tmp[i]=net_delay_history[i];
 
 	std::sort (tmp, tmp+8);
 
@@ -572,7 +582,7 @@ void NetHost::update_network_delay ()
 	net_delay=0;
 
 	for (i=2;i<6;i++)
-	    net_delay+=tmp[i];
+		net_delay+=tmp[i];
 
 	net_delay/=4;
 
@@ -604,32 +614,32 @@ void NetHost::send_game_message (const char* msg)
 
 void NetHost::syncreport (uint sync)
 {
-    unsigned int i;
+	unsigned int i;
 
-    mysyncreports.push (sync);
+	mysyncreports.push (sync);
 
-    // TODO: Check whether the list of pending syncreports is getting too
-    // long. This might happen if a client is not sending syncreports.
+	// TODO: Check whether the list of pending syncreports is getting too
+	// long. This might happen if a client is not sending syncreports.
 
-    // Now look whether there is at least one syncreport from everyone.
-    // If so, make sure they match.
-    for (i=0;i<clients.size();i++)
-	if (clients[i].syncreports.empty())
-	    return;
+	// Now look whether there is at least one syncreport from everyone.
+	// If so, make sure they match.
+	for (i=0;i<clients.size();i++)
+		if (clients[i].syncreports.empty())
+			return;
 
-    sync=mysyncreports.front();
-    mysyncreports.pop();
+	sync=mysyncreports.front();
+	mysyncreports.pop();
 
-    for (i=0;i<clients.size();i++) {
-	if (clients[i].syncreports.front()!=sync)
-	    log("[Host] Synchro lost\n");
-	    //throw wexception("Synchronization lost");
-	    // TODO: handle this more gracefully
+	for (i=0;i<clients.size();i++) {
+		if (clients[i].syncreports.front()!=sync)
+			log("[Host] Synchro lost\n");
+		//throw wexception("Synchronization lost");
+		// TODO: handle this more gracefully
 
-	clients[i].syncreports.pop();
+		clients[i].syncreports.pop();
 	}
 
-    log("[Host] synchronization is good so far\n");
+	log("[Host] synchronization is good so far\n");
 }
 
 /*** class NetClient ***/
@@ -686,7 +696,7 @@ void NetClient::handle_network ()
 	// check if data is available on the socket
 	while (sock!=0 && SDLNet_CheckSockets(sockset, 0) > 0) {
 		if (!deserializer->read_packet(sock))
-		    continue;
+			continue;
 
 		// lost network connection
 		SDLNet_TCP_DelSocket (sockset, sock);
@@ -698,18 +708,20 @@ void NetClient::handle_network ()
 
 	while (deserializer->avail())
 		switch (deserializer->getchar()) {
-		    case NETCMD_DISCONNECT:
+		case NETCMD_DISCONNECT:
 			SDLNet_TCP_DelSocket (sockset, sock);
 			SDLNet_TCP_Close (sock);
 			sock=0;
 			log("[Client]Disconnect recived\n");
 			disconnect ();
 			break;
-		    case NETCMD_DISCONNECT_PLAYER:
+
+		case NETCMD_DISCONNECT_PLAYER:
 			disconnect_player (deserializer->getchar());
 			log("[Client] A player has left\n");
 			break;
-		    case NETCMD_SELECTMAP:
+
+		case NETCMD_SELECTMAP:
 			{
 				char buffer[256];
 				deserializer->getstr (buffer, sizeof(buffer));
@@ -720,33 +732,38 @@ void NetClient::handle_network ()
 				launch_menu->refresh ();
 			}
 			break;
-		    case NETCMD_PLAYERINFO:
+
+		case NETCMD_PLAYERINFO:
 			player_enabled=deserializer->getchar();
 			player_human=deserializer->getchar();
 			log("[Client] Playerinfo recived\n");
-			for (i=0;i<MAX_PLAYERS;i++)
-			    if (i!=playernum-1)
-				if (player_enabled & (1<<i)) {
-					playerdescr[i]->set_player_type
-						(player_human & 1 << i ? Player::Remote : Player::AI);
-				    playerdescr[i]->enable_player (true);
-				}
-				else
+			for (i=0;i<MAX_PLAYERS;i++) {
+				if (i!=playernum-1) {
+					if (player_enabled & (1<<i)) {
+						playerdescr[i]->set_player_type
+							(player_human & 1 << i ? Player::Remote : Player::AI);
+						playerdescr[i]->enable_player (true);
+					}
+				} else {
 				    playerdescr[i]->enable_player (false);
-			break;
-		    case NETCMD_PREGAME_STATUS:
-			{
-			    uchar ready=deserializer->getchar();
-			    log("[Client]Pregame status recived\n");
-			    assert (phase==PH_PREGAME);
-			    assert (statuswnd!=0);
-
-			    for (i=0;i<MAX_PLAYERS;i++)
-				if (ready & ~player_ready & (1<<i))
-				    statuswnd->set_ready (i+1);
+				}
 			}
 			break;
-		    case NETCMD_BEGIN_PREGAME:
+
+		case NETCMD_PREGAME_STATUS:
+			{
+				uchar ready=deserializer->getchar();
+				log("[Client]Pregame status recived\n");
+				assert (phase==PH_PREGAME);
+				assert (statuswnd!=0);
+
+				for (i=0;i<MAX_PLAYERS;i++)
+					if (ready & ~player_ready & (1<<i))
+						statuswnd->set_ready (i+1);
+			}
+			break;
+
+		case NETCMD_BEGIN_PREGAME:
 			common_rand_seed=deserializer->getlong();
 			game->logic_rand_seed (common_rand_seed);
 
@@ -755,27 +772,31 @@ void NetClient::handle_network ()
 			log("[Client] Begin pregame.\n");
 			phase=PH_PREGAME;
 			break;
-		    case NETCMD_BEGIN_GAME:
+
+		case NETCMD_BEGIN_GAME:
 			assert (statuswnd!=0);
 			delete statuswnd;
 			statuswnd=0;
 
 			phase=PH_INGAME;
 			break;
+
 		case NETCMD_PING: //  got a ping, reply with a pong
 			serializer->begin_packet ();
 			serializer->putchar (NETCMD_PONG);
 			serializer->end_packet ();
 
 			if (sock!=0)
-			    serializer->send (sock);
+				serializer->send (sock);
 
 			log ("[Client] Pong!\n");
 			break;
-		    case NETCMD_ADVANCETIME:
+
+		case NETCMD_ADVANCETIME:
 			net_game_time=deserializer->getlong();
 			break;
-		    case NETCMD_PLAYERCOMMAND:
+
+		case NETCMD_PLAYERCOMMAND:
 			{
 				PlayerCommand* cmd=PlayerCommand::deserialize(*deserializer);
 				cmd->set_duetime(net_game_time);
@@ -783,7 +804,8 @@ void NetClient::handle_network ()
 				log("[Client] Player command recived\n");
 			}
 			break;
-		    case NETCMD_CHATMESSAGE:
+
+		case NETCMD_CHATMESSAGE:
 			{
 				char buffer[256];
 				uchar player;
@@ -797,7 +819,8 @@ void NetClient::handle_network ()
 				chat_msg_queue.push (msg);
 			}
 			break;
-		    default:
+
+		default:
 			log("[Client] Invalid network data received");
 		}
 }
@@ -869,23 +892,24 @@ table(this, 0, 0, 256, 192)
 
 void NetStatusWindow::add_player (int num)
 {
-    char buffer[64];
+	char buffer[64];
 
-    snprintf (buffer, 64, "%s %d", _("Player").c_str(), num);
+	snprintf (buffer, 64, "%s %d", _("Player").c_str(), num);
 
 	Entry entry = {&table.add(), num};
 	entry.entry->set_string (0, buffer);
 	entry.entry->set_string (1, _("Waiting"));
 
-    entries.push_back (entry);
+	entries.push_back (entry);
 }
 
 void NetStatusWindow::set_ready (int num)
 {
-    unsigned int i;
+	unsigned int i;
 
-    for (i=0;i<entries.size();i++)
-	if (entries[i].plnum == num) entries[i].entry->set_string (1, _("Ready"));
+	for (i=0;i<entries.size();i++)
+		if (entries[i].plnum == num)
+			entries[i].entry->set_string (1, _("Ready"));
 }
 
 /*** class Serializer ***/
@@ -1051,4 +1075,5 @@ void Cmd_NetCheckSync::Write
 
 void Cmd_NetCheckSync::Read
 (WidelandsFileRead &, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
-{}
+{
+}
