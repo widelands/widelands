@@ -301,7 +301,7 @@ void NetHost::begin_game ()
 	delete promoter;
 	promoter=0;
 
-	log("[Host] Brodcasting begin pregame.");
+	log("[Host] Broadcasting begin pregame.\n");
 	SDLNet_TCP_Close (svsock);
 	svsock=0;
 
@@ -312,7 +312,7 @@ void NetHost::begin_game ()
 	serializer->putchar (NETCMD_BEGIN_PREGAME);
 	serializer->putlong (common_rand_seed);
 	serializer->end_packet ();
-	log("[Host] Intiating pregame.\n");
+	log("[Host] Initiating pregame.\n");
 
 	for (unsigned int i=0;i<clients.size();i++)
 		serializer->send (clients[i].sock);
@@ -331,6 +331,8 @@ void NetHost::handle_network ()
 	// if we are in the game initiation phase, check for new connections
 	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {
 		Player* pl=0;
+
+		log("[Host] Received a connection request\n");
 
 		for (i=1;i<=MAX_PLAYERS;i++)
 			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI)
@@ -586,7 +588,7 @@ void NetHost::update_network_delay ()
 
 	net_delay/=4;
 
-	printf ("network delay is now %dms\n", (int) net_delay);
+	log ("network delay is now %dms\n", (int) net_delay);
 }
 
 void NetHost::send_player_command (PlayerCommand* cmd)
