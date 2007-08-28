@@ -1441,9 +1441,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 
 	// end is one row below start
 	if (dy == 1) {
-		if (start.y & 1)
-			dx--;
-
+		if (start.y & 1) --dx;
 		switch (dx) {
 		case -1: return Map_Object::WALK_SW;
 		case 0: return Map_Object::WALK_SE;
@@ -1453,9 +1451,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 
 	// end is one row above start
 	if (dy == -1) {
-		if (start.y & 1)
-			dx--;
-
+		if (start.y & 1) --dx;
 		switch (dx) {
 		case -1: return Map_Object::WALK_NW;
 		case 0: return Map_Object::WALK_NE;
