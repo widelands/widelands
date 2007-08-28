@@ -820,7 +820,7 @@ inline void Map::get_rn(const Coords f, Coords * const o) const
 	assert(0 <= f.y);
 	assert(f.y < m_height);
 	o->y = f.y;
-	o->x = f.x - 1;
+	o->x = f.x + 1;
 	if (o->x == m_width) o->x = 0;
 	assert(0 <= o->x);
 	assert(o->x < m_width);
