@@ -38,48 +38,53 @@ void Game_Cmd_Queue_Data_Packet::Read
 throw (_wexception)
 {
 	WidelandsFileRead fr;
-   fr.Open(fs, "binary/cmd_queue");
+	fr.Open(fs, "binary/cmd_queue");
 
-   // read packet version
-   int packet_version=fr.Unsigned16();
+	// read packet version
+	int packet_version=fr.Unsigned16();
 
-   if (packet_version >= 1) {
-      Cmd_Queue* cmdq=game->get_cmdqueue();
+	if (packet_version >= 1) {
+		try {
+			Cmd_Queue* cmdq=game->get_cmdqueue();
 
-      // nothing to be done for m_game
+			// nothing to be done for m_game
 
-      // Next serial
-      cmdq->nextserial=fr.Unsigned32();
+			// Next serial
+			cmdq->nextserial=fr.Unsigned32();
 
-      // Erase all currently pending commands in the queue
-      while (!cmdq->m_cmds.empty())
-         cmdq->m_cmds.pop();
+			// Erase all currently pending commands in the queue
+			while (!cmdq->m_cmds.empty())
+				cmdq->m_cmds.pop();
 
-      // Number of cmds
-      uint ncmds=fr.Unsigned16();
+			// Number of cmds
+			uint ncmds=fr.Unsigned16();
 
-      uint i=0;
-      while (i<ncmds) {
-			Cmd_Queue::cmditem item;
-			if (packet_version == CURRENT_PACKET_VERSION)
-				item.category = fr.Signed32();
-			else
-				item.category = Cmd_Queue::cat_gamelogic;
-			item.serial = fr.Unsigned32();
+			uint i=0;
+			while (i<ncmds) {
+				Cmd_Queue::cmditem item;
+				if (packet_version == CURRENT_PACKET_VERSION)
+					item.category = fr.Signed32();
+				else
+					item.category = Cmd_Queue::cat_gamelogic;
+				item.serial = fr.Unsigned32();
 
-         uint packet_id=fr.Unsigned16();
-         GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-			cmd->Read(fr, *game, *ol);
+				uint packet_id=fr.Unsigned16();
+				GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+				cmd->Read(fr, *game, *ol);
 
-         item.cmd=cmd;
+				item.cmd=cmd;
 
-         cmdq->m_cmds.push(item);
-         ++i;
+				cmdq->m_cmds.push(item);
+				++i;
+			}
+			// DONE
+			return;
 		}
-      // DONE
-      return;
+		catch(std::exception& e) {
+			throw wexception("Error loading Cmd_Queue_Data_Packet: %s", e.what());
+		}
 	} else
-      throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i\n", packet_version);
+      throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i", packet_version);
 
    assert(0); // never here
 }
