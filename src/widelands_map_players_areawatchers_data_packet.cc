@@ -72,10 +72,11 @@ throw (_wexception)
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			while (not fr.IsEOF()) {
 				const Uint32 reg = fr.Unsigned32();
-				if (ol->is_object_known(reg)) throw wexception
-					("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player "
-					 "%u: in \"%s\":%u: read object with reg %u, but an object with "
-					 "that reg has already been loaded",
+				if (ol->is_object_known(reg))
+					throw wexception
+						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
+						 "player %u: in \"%s\":%u: read object with reg %u, but an "
+						 "object with that reg has already been loaded",
 					 plnum, filename, fr.GetPrevPos(), reg);
 				Coords c;
 				try {c = fr.Coords32(extent);}
@@ -98,10 +99,11 @@ throw (_wexception)
 					 &player.add_areawatcher
 					 (Player_Area<>(plnum, Area<>(c, fr.Unsigned16()))));
 			}
-		} else throw wexception
-			("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player %u: "
-			 "in \"%s\":0: unknown packet version %u",
-			 plnum, filename, packet_version);
+		} else
+			throw wexception
+				("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player %u: "
+				 "in \"%s\":0: unknown packet version %u",
+				 plnum, filename, packet_version);
 	}
 }
 

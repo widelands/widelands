@@ -286,8 +286,9 @@ void Widelands_Map_Saver::save() throw(_wexception) {
 	{Widelands_Map_Objective_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
-	if (m_mos->get_nr_unsaved_objects()) throw wexception
-		("There are %i unsaved objects. This is a bug, please consider "
-		 "committing!\n",
-		 m_mos->get_nr_unsaved_objects());
+	if (m_mos->get_nr_unsaved_objects())
+		throw wexception
+			("There are %i unsaved objects. This is a bug, please consider "
+			 "committing!",
+			 m_mos->get_nr_unsaved_objects());
 }

@@ -143,11 +143,12 @@ bool IdleWareSupply::is_active()  const throw ()
  * The item is already "launched", so we only need to return it.
 */
 WareInstance* IdleWareSupply::launch_item(Game *, int ware) {
-	if (ware != m_ware->descr_index()) throw wexception
-		("IdleWareSupply: ware(%u) (type = %i) requested for %i",
-		 m_ware->get_serial(),
-		 m_ware->descr_index(),
-		 ware);
+	if (ware != m_ware->descr_index())
+		throw wexception
+			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
+			 m_ware->get_serial(),
+			 m_ware->descr_index(),
+			 ware);
 
 	return m_ware;
 }
@@ -3820,9 +3821,10 @@ void Cmd_Call_Economy_Balance::Read
 			reinterpret_cast<Economy *>(0xffffffff); //  FIXME ?!?!?!
 
       m_force_balance = true; // on load, the first balance has to been forced
-	} else throw wexception
-		("Unknown version %i in Cmd_Call_Economy_Balance::Read()!\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version %u in Cmd_Call_Economy_Balance::Read()!",
+			 packet_version);
 }
 void Cmd_Call_Economy_Balance::Write
 (WidelandsFileWrite             & fw,

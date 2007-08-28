@@ -462,10 +462,11 @@ void Tribe_Descr::load_warehouse_with_start_wares
       std::vector<std::string> list;
 		split_string(it->first, list, "/");
 
-			if (list.size() != 4) throw wexception
-				("Error in tribe (%s), startsoldier %s is not valid!",
-				 name().c_str(),
-				 it->first.c_str());
+			if (list.size() != 4)
+				throw wexception
+					("Error in tribe (%s), startsoldier %s is not valid!",
+					 name().c_str(),
+					 it->first.c_str());
 
       char* endp;
       int hplvl=strtol(list[0].c_str(), &endp, 0);
@@ -551,10 +552,11 @@ uint Tribe_Descr::get_resource_indicator
       ++num_indicators;
 	}
 
-	if (not num_indicators) throw wexception
-		("Tribe %s doesn't declar a resource indicator for resource %s!\n",
-		 name().c_str(),
-		 res->name().c_str());
+	if (not num_indicators)
+		throw wexception
+			("Tribe %s doesn't declar a resource indicator for resource %s!",
+			 name().c_str(),
+			 res->name().c_str());
 
    uint bestmatch = (uint) ((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
    if (((int)amount)<res->get_max_amount())

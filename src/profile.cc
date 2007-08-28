@@ -880,8 +880,9 @@ void Profile::read
 					// Note: comments are killed by walking backwards into the string
 					rtrim(p);
 					while (*line != '\'' && *line != '"') {
-						if (*line == 0) throw wexception
-							("line %i: runaway multiline string", linenr);
+						if (*line == 0)
+							throw wexception
+								("line %i: runaway multiline string", linenr);
 						if (*line == '_')
 							translate_line = true;
 						line++;

@@ -165,8 +165,9 @@ const ProductionProgram * ProductionSite_Descr::get_program
 (const std::string & program_name) const
 {
 	const ProgramMap::const_iterator it = m_programs.find(program_name);
-	if (it == m_programs.end()) throw wexception
-		("%s has no program '%s'", name().c_str(), program_name.c_str());
+	if (it == m_programs.end())
+		throw wexception
+			("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second;
 }
 

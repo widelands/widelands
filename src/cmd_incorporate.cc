@@ -39,8 +39,9 @@ void Cmd_Incorporate::Read
 		const Uint32 fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		worker = dynamic_cast<Worker *>(mol.get_object_by_file_index(fileserial)); //  FIXME check
-	} else throw wexception
-		("Unknown version in Cmd_Incorporate::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_Incorporate::Read: %u", packet_version);
 }
 
 

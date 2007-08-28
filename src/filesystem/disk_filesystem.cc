@@ -347,19 +347,21 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		size_t size;
 		{
 			const long ftell_pos = ftell(file);
-			if (ftell_pos < 0) throw wexception
-				("RealFSImpl::Load: error when loading \"%s\" (\"%s\"): file size "
-				 "calculation yieded negative value %li",
-				 fname.c_str(), fullname.c_str(), ftell_pos);
+			if (ftell_pos < 0)
+				throw wexception
+					("RealFSImpl::Load: error when loading \"%s\" (\"%s\"): file "
+					 "size calculation yieded negative value %li",
+					 fname.c_str(), fullname.c_str(), ftell_pos);
 			size = ftell_pos;
 		}
 		fseek(file, 0, SEEK_SET);
 
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1); //  FIXME memory leak!
-		if (size and fread(data, size, 1, file) != 1) throw wexception
-			("RealFSImpl::Load: read failed for %s (%s) with size %u",
-			 fname.c_str(), fullname.c_str(), size);
+		if (size and fread(data, size, 1, file) != 1)
+			throw wexception
+				("RealFSImpl::Load: read failed for %s (%s) with size %u",
+				 fname.c_str(), fullname.c_str(), size);
 		((char *)data)[size] = 0;
 
 		fclose(file);

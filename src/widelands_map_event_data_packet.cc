@@ -69,8 +69,9 @@ throw (_wexception)
          e->Read(s, egbase);
          egbase->get_map()->get_mem().register_new_event(e);
 		}
-			} else throw wexception
-				("Unknown version in Map Event Packet: %i\n", packet_version);
+			} else
+				throw wexception
+					("Unknown version in Map Event Packet: %u", packet_version);
 		}
 	}
 }

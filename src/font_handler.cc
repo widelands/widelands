@@ -41,7 +41,9 @@
  * Plain Constructor
  */
 Font_Handler::Font_Handler() {
-	if (TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init()==-1)
+		throw wexception
+			("True Type library did not initialize: %s\n", TTF_GetError());
 	m_font_loader = new Font_Loader();
 	m_varcallback = 0;
 	m_cbdata = 0;
@@ -62,9 +64,10 @@ Font_Handler::~Font_Handler() {
 uint Font_Handler::get_fontheight(const std::string & name, const int size) {
 	TTF_Font* f = m_font_loader->get_font(name, size);
 	const int fontheight = TTF_FontHeight(f);
-	if (fontheight < 0) throw wexception
-		("TTF_FontHeight returned a negative value, which does not have a known "
-		 "meaning.");
+	if (fontheight < 0)
+		throw wexception
+			("TTF_FontHeight returned a negative value, which does not have a "
+			 "known meaning.");
 	return fontheight;
 }
 

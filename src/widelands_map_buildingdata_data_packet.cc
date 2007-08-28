@@ -142,9 +142,10 @@ throw (_wexception)
 
          ol->mark_object_as_loaded(building);
 		}
-		} else throw wexception
-			("Unknown version %i in Widelands_Map_Buildingdata_Data_Packet!\n",
-			 packet_version);
+		} else
+			throw wexception
+				("Unknown version %u in Widelands_Map_Buildingdata_Data_Packet!",
+				 packet_version);
 	}
 }
 
@@ -205,10 +206,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
       constructionsite.m_work_completed=fr.Unsigned32();
       constructionsite.m_work_steps=fr.Unsigned32();
 
-	} else throw wexception
-		("Unknown Constructionsite-Version %i in "
-		 "Widelands_Map_Buildingdata_Data_Packet!\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown Constructionsite-Version %u in "
+			 "Widelands_Map_Buildingdata_Data_Packet!",
+			 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
@@ -280,10 +282,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
       warehouse.m_next_carrier_spawn=fr.Unsigned32();
 
       log("Read warehouse stuff for %p\n", &warehouse);
-	} else throw wexception
-		("Unknown Warehouse-Version %i in Widelands_Map_Buildingdata_Data_Packet!"
-		 "\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown Warehouse-Version %u "
+			 "in Widelands_Map_Buildingdata_Data_Packet!",
+			 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
@@ -401,10 +404,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
          productionsite.m_statistics[i] = fr.Unsigned8();
       productionsite.m_statistics_changed = fr.Unsigned8();
       memcpy(productionsite.m_statistics_buf, fr.Data(sizeof(productionsite.m_statistics_buf)), sizeof(productionsite.m_statistics_buf));
-	} else throw wexception
-		("Unknown ProductionSite-Version %i in "
-		 "Widelands_Map_Buildingdata_Data_Packet!\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown ProductionSite-Version %u in "
+			 "Widelands_Map_Buildingdata_Data_Packet!\n",
+			 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
@@ -472,12 +476,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 
 		//m_total_soldiers is just a convenience variable and not saved, recalculate it
 		trainingsite.m_total_soldiers=trainingsite.m_soldiers.size()+trainingsite.m_soldier_requests.size();
-
-		// DONE
-	} else throw wexception
-		("Unknown TrainingSite-Version %i in "
-		 "Widelands_Map_Buildingdata_Data_Packet!\n",
-		 trainingsite_packet_version);
+	} else
+		throw wexception
+			("Unknown TrainingSite-Version %u in "
+			 "Widelands_Map_Buildingdata_Data_Packet!",
+			 trainingsite_packet_version);
 }
 
 

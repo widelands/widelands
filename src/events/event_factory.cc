@@ -103,10 +103,11 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 		Event_Allow_Building_Option_Menu t
 			(m_parent, static_cast<Event_Allow_Building * const>(event));
 		retval = t.run();
-	} else throw wexception
-		("Event_Factory::make_event_with_option_dialog: Unknown event id found: "
-		 "%s\n",
-		 id);
+	} else
+		throw wexception
+			("Event_Factory::make_event_with_option_dialog: Unknown event id "
+			 "found: %s",
+			 id);
    if (retval)
       return event;
    if (!gevent) {

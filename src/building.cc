@@ -275,8 +275,9 @@ Building * Building_Descr::create_constructionsite
 		if (old) csite.set_previous_building(old);
 
 		return &csite;
-	} else throw wexception
-		("Tribe %s has no constructionsite", m_tribe.name().c_str());
+	} else
+		throw wexception
+			("Tribe %s has no constructionsite", m_tribe.name().c_str());
 }
 
 

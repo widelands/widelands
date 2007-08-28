@@ -177,8 +177,9 @@ const Critter_BobProgram* Critter_Bob_Descr::get_program(std::string programname
 		const
 {
 	const ProgramMap::const_iterator it = m_programs.find(programname);
-	if (it == m_programs.end()) throw wexception
-		("%s has no program '%s'", name().c_str(), programname.c_str());
+	if (it == m_programs.end())
+		throw wexception
+			("%s has no program '%s'", name().c_str(), programname.c_str());
 	return it->second;
 }
 

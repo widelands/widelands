@@ -440,8 +440,10 @@ void Bob::force_skip_act()
  */
 void Bob::push_task(const Task & task)
 {
-	if (m_stack_dirty && m_stack.size()) throw wexception
-		("MO(%u): push_task(%s): stack already dirty", get_serial(), task.name);
+	if (m_stack_dirty && m_stack.size())
+		throw wexception
+			("MO(%u): push_task(%s): stack already dirty",
+			 get_serial(), task.name);
 	m_stack.push_back(State(&task));
 	m_stack_dirty = true;
 }

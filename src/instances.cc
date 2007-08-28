@@ -62,8 +62,10 @@ void Cmd_Destroy_Map_Object::Read
 			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
 		} else
 			obj_serial = 0;
-	} else throw wexception
-		("Unknown version in Cmd_Destroy_Map_Object::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_Destroy_Map_Object::Read: %u",
+			 packet_version);
 }
 void Cmd_Destroy_Map_Object::Write
 (WidelandsFileWrite             & fw,
@@ -118,8 +120,8 @@ void Cmd_Act::Read
       // arg
 		arg = fr.Unsigned32();
 
-	} else throw wexception
-		("Unknown version in Cmd_Act::Read: %u", packet_version);
+	} else
+		throw wexception("Unknown version in Cmd_Act::Read: %u", packet_version);
 }
 void Cmd_Act::Write
 (WidelandsFileWrite             & fw,

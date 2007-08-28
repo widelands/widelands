@@ -308,30 +308,38 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	char* endp;
 	m_min_hp= strtol(list[0].c_str(), &endp, 0);
 	if (endp and *endp)
-		throw wexception("Parse error in hp string: %s is a bad value", list[0].c_str());
-	if (0 == m_min_hp) throw wexception
-		("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
+		throw wexception
+			("Parse error in hp string: %s is a bad value", list[0].c_str());
+	if (0 == m_min_hp)
+		throw wexception
+			("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
 	m_max_hp = strtol(list[1].c_str(), &endp, 0);
 	if (endp and *endp)
-		throw wexception("Parse error in hp string: %s is a bad value", list[1].c_str());
-	if (m_max_hp < m_min_hp) throw wexception
-		("Parse error in hp string: \"%s\" < \"%s\"",
-		 list[1].c_str(), list[0].c_str());
+		throw wexception
+			("Parse error in hp string: %s is a bad value", list[1].c_str());
+	if (m_max_hp < m_min_hp)
+		throw wexception
+			("Parse error in hp string: \"%s\" < \"%s\"",
+			 list[1].c_str(), list[0].c_str());
 
 	// Parse attack
 	std::string attack=sglobal->get_safe_string("attack");
 	list.resize(0);
 	split_string(attack, list, "-");
 	if (list.size() != 2)
-		throw wexception("Parse error in attack string: \"%s\" (must be \"min-max\")", attack.c_str());
+		throw wexception
+			("Parse error in attack string: \"%s\" (must be \"min-max\")",
+			 attack.c_str());
 	for (i=0; i<list.size(); i++)
 		remove_spaces(&list[i]);
 	m_min_attack= strtol(list[0].c_str(), &endp, 0);
 	if (endp and *endp)
-		throw wexception("Parse error in attack string: %s is a bad value", list[0].c_str());
+		throw wexception
+			("Parse error in attack string: %s is a bad value", list[0].c_str());
 	m_max_attack = strtol(list[1].c_str(), &endp, 0);
 	if (endp and *endp)
-		throw wexception("Parse error in attack string: %s is a bad value", list[1].c_str());
+		throw wexception
+			("Parse error in attack string: %s is a bad value", list[1].c_str());
 
 	// Parse defend
 	m_defense=sglobal->get_safe_int("defense");
@@ -525,7 +533,7 @@ uint Soldier::get_level(const tAttribute at)
 		case atrEvade:     return m_evade_level;
       case atrTotal: return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	}
-	throw wexception ("Soldier::get_level attribute not identified.)");
+	throw wexception ("Soldier::get_level attribute not identified.");
 }
 
 // Unsignedness ensures that we can only heal, don't hurt throught this method.

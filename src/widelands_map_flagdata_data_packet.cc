@@ -159,9 +159,10 @@ throw (_wexception)
 
          ol->mark_object_as_loaded(flag);
 		}
-	} else throw wexception
-		("Unknown version %u in Widelands_Map_Flagdata_Data_Packet!",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Flagdata_Data_Packet!",
+			 packet_version);
 }
 
 

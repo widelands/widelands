@@ -119,9 +119,10 @@ throw (_wexception)
 					}
 				}
 			}
-		} else throw wexception
-			("Unknown version %u in Widelands_Map_Building_Data_Packet!\n",
-			 packet_version);
+		} else
+			throw wexception
+				("Unknown version %u in Widelands_Map_Building_Data_Packet!",
+				 packet_version);
 	}
 }
 

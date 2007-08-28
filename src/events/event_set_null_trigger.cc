@@ -67,12 +67,14 @@ void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
 			// Bit Hackish, hopefully the user paid attention
 			set_trigger(trig);
 			set_setto(s->get_bool("setto"));
-		} else throw wexception
-			("Set Null Trigger event with unknown trigger %s in map!\n",
-			 triggername.c_str());
-	} else throw wexception
-		("Set Null Trigger Event with unknown/unhandled version %i in map!\n",
-		 event_version);
+		} else
+			throw wexception
+				("Set Null Trigger event with unknown trigger %s in map!",
+				 triggername.c_str());
+	} else
+		throw wexception
+			("Set Null Trigger Event with unknown/unhandled version %u in map!",
+			 event_version);
 }
 
 void Event_Set_Null_Trigger::Write(Section & s, const Editor_Game_Base &) const

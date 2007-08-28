@@ -312,10 +312,11 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 						broken_hp_compensation + fr->Unsigned32();
 					soldier->m_hp_max = broken_hp_compensation + fr->Unsigned32();
 				}
-				if (soldier->m_hp_max < min_hp) throw wexception
-					("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
-					 "binary/bob_data:%u: soldier %p (serial %u): m_hp_max = %u but "
-					 "must be at least %u",
+				if (soldier->m_hp_max < min_hp)
+					throw wexception
+						("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+						 "binary/bob_data:%u: soldier %p (serial %u): m_hp_max = %u "
+						 "but must be at least %u",
 					 fr->GetPrevPos(), worker, worker->get_serial(),
 					 soldier->m_hp_max, min_hp);
                soldier->m_min_attack=fr->Unsigned32();
@@ -327,12 +328,14 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
                soldier->m_defense_level=fr->Unsigned32();
                soldier->m_evade_level=fr->Unsigned32();
                soldier->m_marked=fr->Unsigned8();
-			} else throw wexception
-				("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
-				 "binary/bob_data:%u: soldier %p (serial %u): unknown soldier "
-				 "worker bob packet version %u",
-				 fr->GetPrevPos(),
-				 worker, worker->get_serial(), soldier_worker_bob_packet_version);
+			} else
+				throw wexception
+					("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+					 "binary/bob_data:%u: soldier %p (serial %u): unknown soldier "
+					 "worker bob packet version %u",
+					 fr->GetPrevPos(),
+					 worker, worker->get_serial(),
+					 soldier_worker_bob_packet_version);
 		} else if
 			(Carrier * const carrier = dynamic_cast<Carrier * const>(worker))
 		{
@@ -342,12 +345,14 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 				 ==
 				 CARRIER_WORKER_BOB_PACKET_VERSION)
 				carrier->m_acked_ware = fr->Signed32();
-			else throw wexception
-				("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
-				 "binary/bob_data:%u: carrier %p (serial %u): unknown carrier "
-				 "worker bob packet version %u",
-				 fr->GetPrevPos(),
-				 worker, worker->get_serial(), carrier_worker_bob_packet_version);
+			else
+				throw wexception
+					("Widelands_Map_Bobdata_Data_Packet::read_worker_bob: "
+					 "binary/bob_data:%u: carrier %p (serial %u): unknown carrier "
+					 "worker bob packet version %u",
+					 fr->GetPrevPos(),
+					 worker, worker->get_serial(),
+					 carrier_worker_bob_packet_version);
 		}
 
       // location

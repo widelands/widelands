@@ -80,10 +80,11 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
 		Trigger_Building_Option_Menu t
 			(m_parent, static_cast<Trigger_Building*>(trig));
 		retval = t.run();
-	} else throw wexception
-		("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id "
-		 "found: %s\n",
-		 id);
+	} else
+		throw wexception
+			("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger "
+			 "id found: %s",
+			 id);
    if (retval)
       return trig;
    if (!gtrig) {

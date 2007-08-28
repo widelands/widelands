@@ -139,6 +139,7 @@ void BaseCommand::BaseCmdRead
 {
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == BASE_CMD_VERSION) duetime = fr.Unsigned32();
-	else throw wexception
-		("BaseCommand::BaseCmdRead: unknown version %u\n", packet_version);
+	else
+		throw wexception
+			("BaseCommand::BaseCmdRead: unknown version %u\n", packet_version);
 }

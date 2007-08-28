@@ -199,10 +199,11 @@ FileSystem* ZipFilesystem::CreateSubFileSystem(std::string path, Type type)
 {
    assert(!FileExists(path));
 
-	if (type != FileSystem::DIR) throw ZipOperation_error
-		("ZipFilesystem::CreateSubFileSystem",
-		 path, m_zipfilename,
-		 "can't create ZipFilesystem inside another ZipFilesystem");
+	if (type != FileSystem::DIR)
+		throw ZipOperation_error
+			("ZipFilesystem::CreateSubFileSystem",
+			 path, m_zipfilename,
+			 "can't create ZipFilesystem inside another ZipFilesystem");
 
    EnsureDirectoryExists(path);
 

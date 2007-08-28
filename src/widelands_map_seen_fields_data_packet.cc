@@ -86,9 +86,10 @@ throw (_wexception)
 					 i);
 			}
 		}
-	else throw wexception
-		("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %i\n",
-		 packet_version);
+	else
+		throw wexception
+			("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %u",
+			 packet_version);
 }
 
 /*

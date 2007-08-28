@@ -95,17 +95,19 @@ throw (_wexception)
 				Coords battleGround;
 				if (packet_version == 1) {
 					const Uint32 x = fr.Unsigned32();
-					if (extent.w <= x) throw wexception
-						("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
-						 "binary/attackcontroller:%u: battleGround has x "
-						 "coordinate %i, but the map width is only %u",
-						 fr.GetPrevPos(), x, extent.w);
+					if (extent.w <= x)
+						throw wexception
+							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
+							 "binary/attackcontroller:%u: battleGround has x "
+							 "coordinate %i, but the map width is only %u",
+							 fr.GetPrevPos(), x, extent.w);
 					const Uint32 y = fr.Unsigned32();
-					if (extent.h <= y) throw wexception
-						("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
-						 "binary/attackcontroller:%u: battleGround has y "
-						 "coordinate %i, but the map height is only %u",
-						 fr.GetPrevPos(), y, extent.h);
+					if (extent.h <= y)
+						throw wexception
+							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
+							 "binary/attackcontroller:%u: battleGround has y "
+							 "coordinate %i, but the map height is only %u",
+							 fr.GetPrevPos(), y, extent.h);
 					battleGround = Coords(x, y);
 				} else {
 					try {battleGround = fr.Coords32(extent);}

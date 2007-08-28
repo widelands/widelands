@@ -163,8 +163,9 @@ void Cmd_CheckEventChain::Read
 
       // eventchain id
 		m_eventchain_id = fr.Unsigned16();
-	} else throw wexception
-		("Unknown version in Cmd_CheckEventChain::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_CheckEventChain::Read: %u", packet_version);
 }
 void Cmd_CheckEventChain::Write
 (WidelandsFileWrite             & fw,

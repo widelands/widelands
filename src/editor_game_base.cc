@@ -684,9 +684,11 @@ Immovable* Editor_Game_Base::create_immovable
       idx = tribe->get_immovable_index(name.c_str());
 	}
 
-	if (idx < 0) throw wexception
-		("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for %s",
-		 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
+	if (idx < 0)
+		throw wexception
+			("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for "
+			 "%s",
+			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
 
 	return create_immovable(c, idx, tribe);
 }

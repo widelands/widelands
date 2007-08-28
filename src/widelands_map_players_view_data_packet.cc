@@ -134,30 +134,34 @@ static inline const Map_Object_Descr * read_unseen_immovable
 					 egbase.get_tribe(tribename))
 				{
 					const int index = owner_tribe->get_immovable_index(type_name);
-					if (index == -1) throw wexception
+					if (index == -1)
+						throw wexception
+							("Widelands_Map_Players_View_Data_Packet::Read: player "
+							 "%u: in \"%s\":%u: (%i, %i) t = %u: player thinks that "
+							 "there is an immovable, defined in the tribe \"%s\", of "
+							 "the nonexistent type \"%s\" at this location",
+							 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+							 tcoords.x, tcoords.y, tcoords.t, tribename, type_name);
+					map_object_descr = owner_tribe->get_immovable_descr(index);
+				} else
+					throw wexception
 						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
 						 "in \"%s\":%u: (%i, %i) t = %u: player thinks that there is "
-						 "an immovable, defined in the tribe \"%s\", of the "
-						 "nonexistent type \"%s\" at this location",
-						 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-						 tcoords.x, tcoords.y, tcoords.t, tribename, type_name);
-					map_object_descr = owner_tribe->get_immovable_descr(index);
-				} else throw wexception
-					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is an "
-					 "immovable, defined in the nonexistent tribe \"%s\" at this "
-					 "location",
-					 plnum, &immovables_filename, tribename_filepos,
-					 tcoords.x, tcoords.y, tcoords.t, tribename);
+						 "an immovable, defined in the nonexistent tribe \"%s\" at "
+						 "this location",
+						 plnum, &immovables_filename, tribename_filepos,
+						 tcoords.x, tcoords.y, tcoords.t, tribename);
 			else {//  it is a world immovable
 				const int index = world.get_immovable_index(type_name);
-				if (index == -1) throw wexception
-					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-					 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is an "
-					 "immovable, defined in the world (%s), of the nonexistent type "
-					 "\"%s\" at this location",
-					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-					 tcoords.x, tcoords.y, tcoords.t, world.get_name(), type_name);
+				if (index == -1)
+					throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+						 "in \"%s\":%u: (%i, %i) t = %u: player thinks that there is "
+						 "an immovable, defined in the world (%s), of the "
+						 "nonexistent type \"%s\" at this location",
+						 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+						 tcoords.x, tcoords.y, tcoords.t,
+						 world.get_name(), type_name);
 				map_object_descr = world.get_immovable_descr(index);
 			}
 		} break;
@@ -188,21 +192,23 @@ static inline const Map_Object_Descr * read_unseen_immovable
 						 tcoords.x, tcoords.y, tcoords.t);
 				}
 				const int index = owner_tribe->get_building_index(buildname);
-				if (index == -1) throw wexception
+				if (index == -1)
+					throw wexception
+						("Widelands_Map_Players_View_Data_Packet::Read: player %u: "
+						 "in \"%s\":%u: (%i, %i) t = %u: player thinks that there is "
+						 "a building, defined in the tribe \"%s\", of the "
+						 "nonexistent type \"%s\" at this location",
+						 plnum, &immovables_filename, immovables_file.GetPrevPos(),
+						 tcoords.x, tcoords.y, tcoords.t, tribename, buildname);
+				map_object_descr = owner_tribe->get_building_descr(index);
+			} else
+				throw wexception
 					("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
 					 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is a "
-					 "building, defined in the tribe \"%s\", of the nonexistent "
-					 "type \"%s\" at this location",
+					 "building, defined in the nonexistent tribe \"%s\" at this "
+					 "location",
 					 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-					 tcoords.x, tcoords.y, tcoords.t, tribename, buildname);
-				map_object_descr = owner_tribe->get_building_descr(index);
-			} else throw wexception
-				("Widelands_Map_Players_View_Data_Packet::Read: player %u: in "
-				 "\"%s\":%u: (%i, %i) t = %u: player thinks that there is a "
-				 "building, defined in the nonexistent tribe \"%s\" at this "
-				 "location",
-				 plnum, &immovables_filename, immovables_file.GetPrevPos(),
-				 tcoords.x, tcoords.y, tcoords.t, tribename);
+					 tcoords.x, tcoords.y, tcoords.t, tribename);
 		}
 		}
 	} catch (const FileRead::File_Boundary_Exceeded) {
@@ -226,13 +232,14 @@ static inline const Map_Object_Descr * read_unseen_immovable
 			 "not open \"%s\" for reading. This file should exist when \"%s\" "   \
 			 "exists",                                                            \
 			 plnum, filename, unseen_times_filename);                             \
-	}
+	}                                                                           \
 
 #define CHECK_TRAILING_BYTES(file, filename)                                   \
-	if (not (file).IsEOF()) throw wexception                                    \
-		("Widelands_Map_Players_View_Data_Packet::Read: player %u:"              \
-		 "Found %u trailing bytes in \"%s\"",                                    \
-		 plnum, (file).GetSize() - (file).GetPos(), filename);
+	if (not (file).IsEOF())                                                     \
+		throw wexception                                                         \
+			("Widelands_Map_Players_View_Data_Packet::Read: player %u:"           \
+			 "Found %u trailing bytes in \"%s\"",                                 \
+			 plnum, (file).GetSize() - (file).GetPos(), filename);                \
 
 void Widelands_Map_Players_View_Data_Packet::Read
 (FileSystem       & fs,
@@ -473,11 +480,12 @@ throw (_wexception)
 						 plnum, unseen_times_filename, unseen_times_file.GetPrevPos(),
 						 f.x, f.y);
 					}
-					if (nr_players < owner) throw wexception
-						("Widelands_Map_Players_View_Data_Packet::Read: "
-						 "player %u: in \"%s\":%i & 0xf: node (%i, %i): Player "
-						 "thinks that this node is owned by player %u, but there are "
-						 "only %u players",
+					if (nr_players < owner)
+						throw wexception
+							("Widelands_Map_Players_View_Data_Packet::Read: "
+							 "player %u: in \"%s\":%i & 0xf: node (%i, %i): Player "
+							 "thinks that this node is owned by player %u, but there "
+							 "are only %u players",
 						 plnum, owners_filename, owners_file.GetPrevPos(), f.x, f.y,
 						 owner, nr_players);
 

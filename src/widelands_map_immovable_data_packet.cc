@@ -95,9 +95,10 @@ throw (_wexception)
 				if (not skip) ol->register_object(egbase, reg, &immovable);
 			}
 		}
-	} else throw wexception
-		("Unknown version %i in Widelands_Map_Immovable_Data_Packet!\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version %i in Widelands_Map_Immovable_Data_Packet!",
+			 packet_version);
 }
 
 /*

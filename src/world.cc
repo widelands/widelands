@@ -451,21 +451,22 @@ m_texture           (0)
 	// switch is
 	str = s->get_safe_string("is");
 
-	if (!strcasecmp(str, "dry")) {
+	if      (not strcasecmp(str, "dry"))
 		m_is = TERRAIN_DRY;
-	} else if (!strcasecmp(str, "green")) {
+	else if (not strcasecmp(str, "green"))
 		m_is = 0;
-	} else if (!strcasecmp(str, "water")) {
+	else if (not strcasecmp(str, "water"))
 		m_is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	} else if (!strcasecmp(str, "acid")) {
+	else if (not strcasecmp(str, "acid"))
 		m_is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	} else if (!strcasecmp(str, "mountain")) {
+	else if (not strcasecmp(str, "mountain"))
 		m_is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
-	} else if (!strcasecmp(str, "dead")) {
+	else if (not strcasecmp(str, "dead"))
 		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
-	} else if (!strcasecmp(str, "unpassable")) {
+	else if (not strcasecmp(str, "unpassable"))
 		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
-	} else throw wexception("%s: invalid type '%s'", m_name.c_str(), str);
+	else
+		throw wexception("%s: invalid type '%s'", m_name.c_str(), str);
 
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];

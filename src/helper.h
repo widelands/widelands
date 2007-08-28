@@ -61,6 +61,7 @@ void split_string
  const char * const separators);
 void remove_spaces(std::string* in);
 void log(const char *fmt, ...);
-void myassert(int line, const char* file, const char* condt) throw(_wexception) __attribute__ ((noreturn));
+void myassert(int line, const char* file, const char* condt) throw(_wexception)
+__attribute__ ((noreturn));
 
 #endif

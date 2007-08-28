@@ -89,29 +89,31 @@ throw (_wexception)
 						const Tribe_Descr & tribe = player_immovable->owner().tribe();
 						if (tribe.get_nrwares() <= (int)ware_index_from_file)
 							throw wexception
-							("Widelands_Map_Waredata_Data_Packet: ware index out "
-							 "of range: %i\n",
-							 ware_index_from_file);
+								("Widelands_Map_Waredata_Data_Packet: ware index out "
+								 "of range: %i\n",
+								 ware_index_from_file);
 						ware->m_ware_descr =
 							tribe.get_ware_descr(ware->descr_index());
 						ware->set_economy(player_immovable->get_economy());
-					} else throw wexception
-						("Widelands_Map_Waredata_Data_Packet: location is "
-						 "PlayerImmovable but not Building or Flag\n");
+					} else
+						throw wexception
+							("Widelands_Map_Waredata_Data_Packet: location is "
+							 "PlayerImmovable but not Building or Flag\n");
 				} else if
 					(Worker * const worker = dynamic_cast<Worker * const>(location))
 				{
 					const Tribe_Descr & tribe = *worker->get_tribe();
 					if (tribe.get_nrwares() <= (int)ware_index_from_file)
 						throw wexception
-						("Widelands_Map_Waredata_Data_Packet: ware index out of "
-						 "range: %i\n",
-						 ware_index_from_file);
+							("Widelands_Map_Waredata_Data_Packet: ware index out of "
+							 "range: %i\n",
+							 ware_index_from_file);
 					ware->m_ware_descr = tribe.get_ware_descr(ware->descr_index());
 					ware->m_economy = 0; //  The worker sets our economy.
-				} else throw wexception
-					("Widelands_Map_Waredata_Data_Packet: location is not "
-					 "PlayerImmovable or Worker\n");
+				} else
+					throw wexception
+						("Widelands_Map_Waredata_Data_Packet: location is not "
+						 "PlayerImmovable or Worker\n");
          // Do not touch supply or transfer
 
          // m_transfer_nextstep
@@ -126,17 +128,20 @@ throw (_wexception)
 				if (Game * const game = dynamic_cast<Game * const>(egbase))
 					ware->set_location(game, location);
          ol->mark_object_as_loaded(ware);
-			} else throw wexception
-				("Widelands_Map_Waredata_Data_Packet: location with serial "
-				 "number %u is not known\n",
+			} else
+				throw wexception
+					("Widelands_Map_Waredata_Data_Packet: location with serial "
+					 "number %u is not known",
+					 reg);
+		} else
+			throw wexception
+				("Widelands_Map_Waredata_Data_Packet: ware with serial number %u "
+				 "is not known",
 				 reg);
-		} else throw wexception
-			("Widelands_Map_Waredata_Data_Packet: ware with serial number %u "
-			 "is not known\n",
-			 reg);
-	} else throw wexception
-		("Unknown version %u in Widelands_Map_Waredata_Data_Packet!\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Waredata_Data_Packet!",
+			 packet_version);
 }
 
 

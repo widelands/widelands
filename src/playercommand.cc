@@ -115,8 +115,10 @@ void PlayerCommand::PlayerCmdRead
 	if (packet_version == PLAYER_COMMAND_VERSION) {
 		BaseCommand::BaseCmdRead(fr, egbase, mol);
 		sender = fr.Unsigned8 ();
-	} else throw wexception
-		("Unknown version in PlayerCommand::PlayerCmdRead: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in PlayerCommand::PlayerCmdRead: %u",
+			 packet_version);
 }
 
 /*** class Cmd_Bulldoze ***/
@@ -155,8 +157,9 @@ void Cmd_Bulldoze::Read
 		const Uint32 fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
-	} else throw wexception
-		("Unknown version in Cmd_Bulldoze::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_Bulldoze::Read: %u", packet_version);
 }
 void Cmd_Bulldoze::Write
 (WidelandsFileWrite             & fw,
@@ -216,8 +219,9 @@ void Cmd_Build::Read
 				("Cmd_Build::Read: reading coords: height (%u) exceeded (y = %i)",
 				 e.h, e.y);
 		}
-	} else throw wexception
-		("Unknown version in Cmd_Build::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_Build::Read: %u", packet_version);
 }
 
 void Cmd_Build::Write
@@ -277,8 +281,9 @@ void Cmd_BuildFlag::Read
 				 "%i)",
 				 e.h, e.y);
 		}
-	} else throw wexception
-		("Unknown version in Cmd_BuildFlag::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_BuildFlag::Read: %u", packet_version);
 }
 void Cmd_BuildFlag::Write
 (WidelandsFileWrite             & fw,
@@ -365,8 +370,9 @@ void Cmd_BuildRoad::Read
 
 		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 			steps[i]=fr.Unsigned8();
-	} else throw wexception
-		("Unknown version in Cmd_BuildRoad::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_BuildRoad::Read: %u", packet_version);
 }
 void Cmd_BuildRoad::Write
 (WidelandsFileWrite             & fw,
@@ -426,8 +432,9 @@ void Cmd_FlagAction::Read
 		const Uint32 fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
-	} else throw wexception
-		("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
 }
 void Cmd_FlagAction::Write
 (WidelandsFileWrite             & fw,
@@ -485,8 +492,9 @@ void Cmd_StartStopBuilding::Read
 		const Uint32 fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
-	} else throw wexception
-		("Unknown version in Cmd_StartStopBuilding::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_StartStopBuilding::Read: %u", packet_version);
 }
 void Cmd_StartStopBuilding::Write
 (WidelandsFileWrite             & fw,
@@ -545,8 +553,9 @@ void Cmd_EnhanceBuilding::Read
 		serial =mol.get_object_by_file_index(fileserial)->get_serial();
 
 		id = fr.Unsigned16();
-	} else throw wexception
-		("Unknown version in Cmd_EnhanceBuilding::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_EnhanceBuilding::Read: %u", packet_version);
 }
 void Cmd_EnhanceBuilding::Write
 (WidelandsFileWrite             & fw,
@@ -618,9 +627,10 @@ void Cmd_ChangeTrainingOptions::Read
 
 		attribute = fr.Unsigned16();
 		value     = fr.Unsigned16();
-	} else throw wexception
-		("Unknown version in Cmd_ChangeTrainingOptions::Read: %u",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_ChangeTrainingOptions::Read: %u",
+			 packet_version);
 }
 
 void Cmd_ChangeTrainingOptions::Write
@@ -691,8 +701,9 @@ void Cmd_DropSoldier::Read
 		int soldierserial=fr.Unsigned32();
 		assert(mol.is_object_known(soldierserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		soldier=mol.get_object_by_file_index(soldierserial)->get_serial();
-	} else throw wexception
-		("Unknown version in Cmd_DropSoldier::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_DropSoldier::Read: %u", packet_version);
 }
 
 void Cmd_DropSoldier::Write
@@ -766,9 +777,10 @@ void Cmd_ChangeSoldierCapacity::Read
 
       // Now new capacity
 		val = fr.Unsigned16();
-	} else throw wexception
-		("Unknown version in Cmd_ChangeSoldierCapacity::Read: %u",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_ChangeSoldierCapacity::Read: %u",
+			 packet_version);
 }
 
 void Cmd_ChangeSoldierCapacity::Write
@@ -857,8 +869,9 @@ void Cmd_EnemyFlagAction::Read
 		attacker = fr.Unsigned8 ();
 		number   = fr.Unsigned8 ();
 		type     = fr.Unsigned8 ();
-	} else throw wexception
-		("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
 }
 
 void Cmd_EnemyFlagAction::Write

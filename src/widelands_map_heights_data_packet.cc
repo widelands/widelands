@@ -52,9 +52,10 @@ throw (_wexception)
 		const Map::Index max_index = map.max_index();
 		for (Map::Index i = 0; i < max_index; ++i)
 			map[i].set_height(fr.Unsigned8());
-	} else throw wexception
-		("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n",
-		 packet_version);
+	} else
+		throw wexception
+			("Unknown version in Widelands_Map_Heights_Data_Packet: %u",
+			 packet_version);
 }
 
 

@@ -56,9 +56,10 @@ void Event_Player_Area::Read(Section* s, Editor_Game_Base* egbase) {
 				 m_player_area.x, m_player_area.y,
 				 m_player_area.radius,
 				 m_player_area.player_number);
-	} else throw wexception
-		("Player Area Event with unknown/unhandled version %i in map!\n",
-		 event_version);
+	} else
+		throw wexception
+			("Player Area Event with unknown/unhandled version %u in map!",
+			 event_version);
 }
 
 

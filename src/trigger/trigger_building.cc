@@ -60,9 +60,10 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
 			->reference_player_tribe(m_player_area.player_number, this);
       set_building_count(s->get_int("count"));
       set_building(s->get_safe_string("building"));
-	} else throw wexception
-		("Building Trigger with unknown/unhandled version %i in map!\n",
-		 trigger_version);
+	} else
+		throw wexception
+			("Building Trigger with unknown/unhandled version %u in map!",
+			 trigger_version);
 }
 
 void Trigger_Building::Write(Section & s) const {
