@@ -69,8 +69,9 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 		m_rect.x = 0;
 	}
 
-	if (m_rect.x + m_rect.w > m_surface->get_w()) m_rect.w =
-				std::max(static_cast<const int>(m_surface->get_w()) - m_rect.x, 0);
+	if (m_rect.x + m_rect.w > m_surface->get_w())
+		m_rect.w =
+			std::max(static_cast<const int>(m_surface->get_w()) - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
@@ -78,8 +79,9 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 		m_rect.y = 0;
 	}
 
-	if (m_rect.y + m_rect.h > m_surface->get_h()) m_rect.h =
-				std::max(static_cast<const int>(m_surface->get_h()) - m_rect.y, 0);
+	if (m_rect.y + m_rect.h > m_surface->get_h())
+		m_rect.h =
+			std::max(static_cast<const int>(m_surface->get_h()) - m_rect.y, 0);
 }
 
 /**
@@ -564,18 +566,19 @@ void RenderTarget::rendermap
 							 it < end;
 							 ++it)
 							blit(f_pos - it->hotspot, it->picid);
-					} else if (f_vision == 1) if
-						(const Map_Object_Descr * const map_object_descr =
-						 f_player_field.map_object_descr[TCoords<>::None])
-					{
-						if (const uint picid = map_object_descr->main_animation())
-							drawanim(f_pos, picid, 0);
-						else if (map_object_descr == &g_flag_descr) {
-							const Player & owner = egbase.player(f_owner_number);
-							drawanim
-								(f_pos, owner.tribe().get_flag_anim(), 0, &owner);
+					} else if (f_vision == 1)
+						if
+							(const Map_Object_Descr * const map_object_descr =
+							 f_player_field.map_object_descr[TCoords<>::None])
+						{
+							if (const uint picid = map_object_descr->main_animation())
+								drawanim(f_pos, picid, 0);
+							else if (map_object_descr == &g_flag_descr) {
+								const Player & owner = egbase.player(f_owner_number);
+								drawanim
+									(f_pos, owner.tribe().get_flag_anim(), 0, &owner);
+							}
 						}
-					}
 				}
 			}
 

@@ -131,33 +131,39 @@ m_label_autosave
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
    fmt->BitsPerPixel = 16;
    SDL_Rect** modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-   if (modes)
-      for (uint i = 0; modes[i]; i++) {
+	if (modes)
+		for (uint i = 0; modes[i]; ++i) {
          if (modes[i]->w < 640) continue;
 	 res this_res = {
             modes[i]->w,
             modes[i]->h,
             16
 			};
-         if (!m_resolutions.size() ||
-               this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
-               this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
-            m_resolutions.push_back(this_res);
+			if
+				(not m_resolutions.size()
+				 or
+				 this_res.xres != m_resolutions[m_resolutions.size()-1].xres
+				 or
+				 this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
+				m_resolutions.push_back(this_res);
 		}
    fmt->BitsPerPixel = 32;
    modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-   if (modes)
-      for (uint i = 0; modes[i]; i++) {
+	if (modes)
+		for (uint i = 0; modes[i]; ++i) {
          if (modes[i]->w < 640) continue;
          res this_res = {
             modes[i]->w,
             modes[i]->h,
             32
 			};
-         if (!m_resolutions.size() ||
-               this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
-               this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
-            m_resolutions.push_back(this_res);
+			if
+				(not m_resolutions.size()
+				 or
+				 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
+				 or
+				 this_res.yres != m_resolutions[m_resolutions.size() - 1].yres)
+				m_resolutions.push_back(this_res);
 		}
 
 	bool did_select_a_res=false;
@@ -174,11 +180,12 @@ m_label_autosave
 	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
 
    available_languages[0].name = _("System default language");
-	for (uint i = 0; i < NR_LANGUAGES; ++i) m_language_list.add
-		(available_languages[i].name.c_str(),
-		 available_languages[i].abbrev,
-		 -1, //  FIXME this should be a flag
-		 available_languages[i].abbrev == opt.language);
+	for (uint i = 0; i < NR_LANGUAGES; ++i)
+		m_language_list.add
+			(available_languages[i].name.c_str(),
+			 available_languages[i].abbrev,
+			 -1, //  FIXME this should be a flag
+			 available_languages[i].abbrev == opt.language);
 
 
 	m_label_game_options.set_font(UI_FONT_BIG, UI_FONT_CLR_FG);

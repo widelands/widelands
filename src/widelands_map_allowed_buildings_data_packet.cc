@@ -127,19 +127,19 @@ throw (_wexception)
 		->set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	const Player_Number nr_players = egbase->map().get_nrplayers();
-	for (Player_Number i = 1; i <= nr_players; ++i) if
-		(Player * const plr = egbase->get_player(i))
-	{
-		const Tribe_Descr & tribe = plr->tribe();
-		char buffer[10];
-		snprintf(buffer, sizeof(buffer), "player_%u", i);
-		Section & section = *prof.create_section(buffer);
+	for (Player_Number i = 1; i <= nr_players; ++i)
+		if (Player * const plr = egbase->get_player(i)) {
+			const Tribe_Descr & tribe = plr->tribe();
+			char buffer[10];
+			snprintf(buffer, sizeof(buffer), "player_%u", i);
+			Section & section = *prof.create_section(buffer);
 
       // Write for all buildings if it is enabled
-		const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
-		for (Building_Descr::Index b = 0; b < nr_buildings; ++b) section.set_bool
-			(tribe.get_building_descr(b)->name().c_str(),
-			 plr->is_building_allowed(b));
+			const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
+			for (Building_Descr::Index b = 0; b < nr_buildings; ++b)
+				section.set_bool
+					(tribe.get_building_descr(b)->name().c_str(),
+					 plr->is_building_allowed(b));
 	}
 
    prof.write("allowed_buildings", false, fs);

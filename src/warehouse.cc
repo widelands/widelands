@@ -451,11 +451,13 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
          m_incorporated_workers.erase(m_incorporated_workers.begin());
 		}
 	}
-	if (const uint conquer_raduis = get_conquers()) gg->unconquer_area
-		(Player_Area<Area<FCoords> >
-		 (owner().get_player_number(),
-		  Area<FCoords>(gg->map().get_fcoords(get_position()), conquer_raduis)),
-		 m_defeating_player);
+	if (const uint conquer_raduis = get_conquers())
+		gg->unconquer_area
+			(Player_Area<Area<FCoords> >
+			 (owner().get_player_number(),
+			  Area<FCoords>
+			  (gg->map().get_fcoords(get_position()), conquer_raduis)),
+			 m_defeating_player);
 	Building::cleanup(gg);
 }
 

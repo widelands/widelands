@@ -268,9 +268,10 @@ void ProductionSite::calc_statistics()
 	const std::string trend =
 		lastPercOk > percOk ? _("UP") : lastPercOk < percOk ? _("DOWN") : "=";
 
-	if (0 < percOk and percOk < 100) snprintf
-		(m_statistics_buf, sizeof(m_statistics_buf),
-		 "%.0f%% %s", percOk, trend.c_str());
+	if (0 < percOk and percOk < 100)
+		snprintf
+			(m_statistics_buf, sizeof(m_statistics_buf),
+			 "%.0f%% %s", percOk, trend.c_str());
 	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
 
 	m_last_stat_percent = (char)percOk;

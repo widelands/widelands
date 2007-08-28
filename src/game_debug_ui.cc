@@ -448,10 +448,11 @@ Open the bob debug window for the bob of the given index in the list
 ===============
 */
 void FieldDebugWindow::open_bob(const uint index) {
-	if (index != UI::Listselect<uintptr_t>::no_selection_index()) if
-		(Map_Object * const object =
-		 get_iabase()->egbase().objects().get_object(m_ui_bobs.get_selected()))
-		show_mapobject_debug(get_iabase(), object);
+	if (index != UI::Listselect<uintptr_t>::no_selection_index())
+		if
+			(Map_Object * const object =
+			 get_iabase()->egbase().objects().get_object(m_ui_bobs.get_selected()))
+			show_mapobject_debug(get_iabase(), object);
 }
 
 

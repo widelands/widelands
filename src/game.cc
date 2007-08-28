@@ -428,16 +428,15 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		std::string step_description = _("Creating player infrastructure");
 		// Prepare the players (i.e. place HQs)
 		const Player_Number nr_players = map().get_nrplayers();
-		for (Player_Number i = 1; i <= nr_players; ++i) if
-			(Player * const plr = get_player(i))
-		{
-			step_description += ".";
-			loader_ui.step(step_description);
-			plr->init(true);
+		for (Player_Number i = 1; i <= nr_players; ++i)
+			if (Player * const plr = get_player(i)) {
+				step_description += ".";
+				loader_ui.step(step_description);
+				plr->init(true);
 
-			if (plr->get_type() == Player::Local)
-				get_ipl()->move_view_to(map().get_starting_pos(i));
-		}
+				if (plr->get_type() == Player::Local)
+					get_ipl()->move_view_to(map().get_starting_pos(i));
+			}
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
@@ -525,8 +524,11 @@ void Game::think()
 		for (unsigned int i=0;i<cpl.size();i++)
 			cpl[i]->think();
 
-		if (!m_general_stats.size() ||
-		    get_gametime() - m_last_stats_update > STATISTICS_SAMPLE_TIME) {
+		if
+			(not m_general_stats.size()
+			 or
+			 get_gametime() - m_last_stats_update > STATISTICS_SAMPLE_TIME)
+		{
 			sample_statistics();
 
 			for (Player_Number curplr = 1; curplr <= get_map()->get_nrplayers(); ++curplr) {

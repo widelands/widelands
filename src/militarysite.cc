@@ -238,11 +238,12 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
          s->set_location(0);
 	}
 	// unconquer land
-	if (m_didconquer) g->unconquer_area
-		(Player_Area<Area<FCoords> >
-		 (owner().get_player_number(),
-		  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())),
-		 m_defeating_player);
+	if (m_didconquer)
+		g->unconquer_area
+			(Player_Area<Area<FCoords> >
+			 (owner().get_player_number(),
+			  Area<FCoords>(g->map().get_fcoords(get_position()), get_conquers())),
+			 m_defeating_player);
 
 	ProductionSite::cleanup(g);
 }
@@ -311,12 +312,13 @@ void MilitarySite::request_soldier_callback
    assert(s);
    assert(s->get_location(g) == msite);
 
-	if (not msite->m_didconquer) g->conquer_area
-		(Player_Area<Area<FCoords> >
-		 (msite->owner().get_player_number(),
-		  Area<FCoords>
-		  (g->map().get_fcoords(msite->get_position()),
-		   msite->descr().get_conquers())));
+	if (not msite->m_didconquer)
+		g->conquer_area
+			(Player_Area<Area<FCoords> >
+			 (msite->owner().get_player_number(),
+			  Area<FCoords>
+			  (g->map().get_fcoords(msite->get_position()),
+			   msite->descr().get_conquers())));
    msite->m_didconquer = true;
 
    uint i=0;

@@ -104,10 +104,12 @@ void Sound_Handler::init()
 	const ushort bufsize = 1024;
 #endif
 
-	if ((SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) ||
-	      (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
-	                     MIX_DEFAULT_FORMAT, 2,
-	                     bufsize) == -1))
+	if
+		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
+		 or
+		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize)
+		 ==
+		 -1)
 	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 		log("WARNING: Failed to initialize sound system: %s\n",

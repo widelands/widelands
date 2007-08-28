@@ -469,25 +469,53 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 	for (uint i = 0; i < m_soldiers.size(); i++) {
 		uint count;
 		count = 0;
-		if (((m_soldiers[i]->get_level(atrHP) < (uint) descr().get_min_level(atrHP)) ||
-		     (m_soldiers[i]->get_level(atrHP) > (uint) descr().get_max_level(atrHP)))
-		    && (descr().get_train_hp()))
-			count++;
+		if
+			((m_soldiers[i]->get_level(atrHP)
+			  <
+			  static_cast<uint>(descr().get_min_level(atrHP))
+			  or
+			  m_soldiers[i]->get_level(atrHP)
+			  >
+			  static_cast<uint>(descr().get_max_level(atrHP)))
+			 and
+			 (descr().get_train_hp()))
+			++count;
 
-		if (((m_soldiers[i]->get_level(atrAttack) < (uint) descr().get_min_level(atrAttack)) ||
-		     (m_soldiers[i]->get_level(atrAttack) > (uint) descr().get_max_level(atrAttack)))
-		    && (descr().get_train_attack()))
-			count++;
+		if
+			((m_soldiers[i]->get_level(atrAttack)
+			  <
+			  static_cast<uint>(descr().get_min_level(atrAttack))
+			  or
+			  m_soldiers[i]->get_level(atrAttack)
+			  >
+			  static_cast<uint>(descr().get_max_level(atrAttack)))
+			 and
+			 (descr().get_train_attack()))
+			++count;
 
-		if (((m_soldiers[i]->get_level(atrDefense) < (uint) descr().get_min_level(atrDefense)) ||
-		     (m_soldiers[i]->get_level(atrDefense) > (uint) descr().get_max_level(atrDefense)))
-		    && (descr().get_train_defense()))
-			count++;
+		if
+			((m_soldiers[i]->get_level(atrDefense)
+			  <
+			  static_cast<uint>(descr().get_min_level(atrDefense))
+			  or
+			  m_soldiers[i]->get_level(atrDefense)
+			  >
+			  static_cast<uint>(descr().get_max_level(atrDefense)))
+		    and
+			 (descr().get_train_defense()))
+			++count;
 
-		if (((m_soldiers[i]->get_level(atrEvade) < (uint) descr().get_min_level(atrEvade)) ||
-		     (m_soldiers[i]->get_level(atrEvade) > (uint) descr().get_max_level(atrEvade)))
-		    && (descr().get_train_evade()))
-			count++;
+		if
+			((m_soldiers[i]->get_level(atrEvade)
+			  <
+			  static_cast<uint>(descr().get_min_level(atrEvade))
+			  or
+			  m_soldiers[i]->get_level(atrEvade)
+			  >
+			  static_cast<uint>(descr().get_max_level(atrEvade)))
+			 and
+			 descr().get_train_evade())
+			++count;
 
 		if (count >= count_upgrades)
 			drop_soldier(g, i);

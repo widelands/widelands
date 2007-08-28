@@ -164,9 +164,10 @@ void Tab_Panel::draw(RenderTarget* dst)
 
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
-		if (m_highlight == static_cast<const int>(idx)) dst->brighten_rect
-			(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
-			 MOUSE_OVER_BRIGHT_FACTOR);
+		if (m_highlight == static_cast<const int>(idx))
+			dst->brighten_rect
+				(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
+				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
 		uint cpw, cph;
@@ -192,9 +193,10 @@ void Tab_Panel::draw(RenderTarget* dst)
 			 black);
 
 		// Draw bottom part
-		if (m_active != idx) dst->brighten_rect
-			(Rect(Point(x, TP_BUTTON_HEIGHT - 2), TP_BUTTON_WIDTH, 2),
-			 2 * BUTTON_EDGE_BRIGHT_FACTOR);
+		if (m_active != idx)
+			dst->brighten_rect
+				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), TP_BUTTON_WIDTH, 2),
+				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
 			dst->brighten_rect
 				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), 2, 2),

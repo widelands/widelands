@@ -93,17 +93,18 @@ void Textarea::set_align(const Align align) {
   */
 void Textarea::draw(RenderTarget* dst)
 {
-	if (m_text.length()) g_fh->draw_string
-		(*dst,
-		 m_fontname, m_fontsize, m_fcolor, RGBColor(107, 87, 55),
-		 Point
-		 (m_align & Align_HCenter ?
-		  get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
-		  m_align & Align_VCenter ?
-		  get_h() / 2 : m_align & Align_Bottom ? get_h() : 0),
-		 m_text.c_str(),
-		 m_align,
-		 m_multiline ? get_w() : -1);
+	if (m_text.length())
+		g_fh->draw_string
+			(*dst,
+			 m_fontname, m_fontsize, m_fcolor, RGBColor(107, 87, 55),
+			 Point
+			 (m_align & Align_HCenter ?
+			  get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
+			  m_align & Align_VCenter ?
+			  get_h() / 2 : m_align & Align_Bottom ? get_h() : 0),
+			 m_text.c_str(),
+			 m_align,
+			 m_multiline ? get_w() : -1);
 }
 
 

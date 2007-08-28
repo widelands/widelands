@@ -300,8 +300,9 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	std::string hp=sglobal->get_safe_string("hp");
 	std::vector<std::string> list;
 	split_string(hp, list, "-");
-	if (list.size() != 2) throw wexception
-		("Parse error in hp string: \"%s\" (must be \"min-max\")", hp.c_str());
+	if (list.size() != 2)
+		throw wexception
+			("Parse error in hp string: \"%s\" (must be \"min-max\")", hp.c_str());
 	uint i=0;
 	for (i=0; i<list.size(); i++)
 		remove_spaces(&list[i]);

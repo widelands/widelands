@@ -539,12 +539,16 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 
 	// Add all necessary tabs
 	for (int i = 0; i < 3; i++)
-		if (bbg_house[i]) m_tabpanel->activate
-			(m_best_tab = add_tab
-			 (pic_tab_buildhouse[i], bbg_house[i], i18n::translate(tooltip_tab_build[i])));
+		if (bbg_house[i])
+			m_tabpanel->activate
+				(m_best_tab = add_tab
+				 (pic_tab_buildhouse[i],
+				  bbg_house[i],
+				  i18n::translate(tooltip_tab_build[i])));
 
-	if (bbg_mine) m_tabpanel->activate
-		(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine, _("Build mines")));
+	if (bbg_mine)
+		m_tabpanel->activate
+			(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine, _("Build mines")));
 }
 
 
@@ -1003,8 +1007,10 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		faw = new FieldActionWindow(iabase, player, registry);
 
 		bool flag = false;
-		if (target != iabase->get_build_road_start() &&
-		    player->get_buildcaps(target) & BUILDCAPS_FLAG)
+		if
+			(target != iabase->get_build_road_start()
+			 and
+			 player->get_buildcaps(target) & BUILDCAPS_FLAG)
 			flag = true;
 		faw->add_buttons_road(flag);
 		faw->init();

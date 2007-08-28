@@ -76,13 +76,14 @@ int Editor_Info_Tool::handle_click_impl
    sprintf(buf1, " %s: %s (TODO: more informations)\n", _("Has bobs").c_str(), f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
    int res=f->get_resources();
    int amount=f->get_resources_amount();
-	if (res or amount) snprintf
-		(buf1, sizeof(buf1),
-	    " %s, %i %s '%s'\n",
-	    _("Has resources: Yes").c_str(),
-		 amount,
-		 _("amount of").c_str(),
-		 world.get_resource(res)->name().c_str());
+	if (res or amount)
+		snprintf
+			(buf1, sizeof(buf1),
+			 " %s, %i %s '%s'\n",
+			 _("Has resources: Yes").c_str(),
+			 amount,
+			 _("amount of").c_str(),
+			 world.get_resource(res)->name().c_str());
    else snprintf
 		(buf1, sizeof(buf1),
 		 _(" Has resources: No\n").c_str());

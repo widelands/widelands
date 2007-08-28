@@ -55,10 +55,13 @@ throw (_wexception)
    Map* map=egbase->get_map();
    World* world=egbase->get_map()->get_world();
 
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	if (packet_version == CURRENT_PACKET_VERSION) {
       int nr_res=fr.Unsigned16();
-      if (nr_res>world->get_nr_resources()) log("WARNING: Number of resources in map (%i) is bigger than in world (%i)",
-            nr_res, world->get_nr_resources());
+		if (nr_res > world->get_nr_resources())
+			log
+				("WARNING: Number of resources in map (%i) is bigger than in world "
+				 "(%i)",
+				 nr_res, world->get_nr_resources());
 
       // construct ids and map
       std::map<uchar, int> smap;

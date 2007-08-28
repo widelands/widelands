@@ -282,8 +282,9 @@ void World::parse_terrains()
 		Section* s;
 
 		for (Terrain_Descr::Index i = 0; (s = prof.get_next_section(0)); ++i) {
-			if (i == 0x10) throw wexception
-				("%s: too many terrain types, can not be more than 16\n", fname);
+			if (i == 0x10)
+				throw wexception
+					("%s: too many terrain types, can not be more than 16\n", fname);
 			ters.add(new Terrain_Descr(m_basedir.c_str(), s, &m_resources));
 		}
 

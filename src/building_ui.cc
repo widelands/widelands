@@ -1238,7 +1238,9 @@ void ProductionSite_Window_ListWorkerWindow::update()
 
 		m_type->set_text(worker.descname());
 
-		if (worker.get_current_experience() != -1 and
+		if
+			(worker.get_current_experience() != -1
+			 and
 			 worker.get_needed_experience () != -1)
 		{
 			// Fill upgrade status

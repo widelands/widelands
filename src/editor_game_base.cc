@@ -366,16 +366,18 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area) {
 	}
 
 	// Fix all immovables
-	if (Game * const game = dynamic_cast<Game * const>(this)) for
-		(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
-		 it != burnset.end();
-		 ++it)
-		(*it)->schedule_destroy(game);
-	else for
-		(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
-		 it != burnset.end();
-		 ++it)
-		(*it)->remove(this);
+	if (Game * const game = dynamic_cast<Game * const>(this))
+		for
+			(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
+			 it != burnset.end();
+			 ++it)
+			(*it)->schedule_destroy(game);
+	else
+		for
+			(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
+			 it != burnset.end();
+			 ++it)
+			(*it)->remove(this);
 }
 
 
@@ -476,13 +478,13 @@ void Editor_Game_Base::inform_players_about_ownership
 void Editor_Game_Base::inform_players_about_immovable
 (const Map::Index i, const Map_Object_Descr * const descr)
 {
-	if (descr != &g_road_descr) for
-		(Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
-		if (Player * const p = m_players[plnum]) {
-			Player::Field & player_field = p->m_fields[i];
-			if (1 < player_field.vision)
-				player_field.map_object_descr[TCoords<>::None] = descr;
-		}
+	if (descr != &g_road_descr)
+		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
+			if (Player * const p = m_players[plnum]) {
+				Player::Field & player_field = p->m_fields[i];
+				if (1 < player_field.vision)
+					player_field.map_object_descr[TCoords<>::None] = descr;
+			}
 }
 
 /*

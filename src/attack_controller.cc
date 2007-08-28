@@ -234,14 +234,15 @@ void AttackController::soldierWon(Soldier* soldier) {
 
    //if the last remaing was an attacker, check for
    //remaining soldiers in the building
-	if (involvedSoldiers[idx].attacker) if
-		(MilitarySite * const ms =
-		 dynamic_cast<MilitarySite * const>(flag->get_building()))
+	if (involvedSoldiers[idx].attacker)
+		if
+			(MilitarySite * const ms =
+			 dynamic_cast<MilitarySite * const>(flag->get_building()))
       //There are defending soldiers left in the building.
-		if (const uint n = ms->nr_not_marked_soldiers()) {
-			launchSoldiersOfMilitarySite(ms, n, false);
-         return;
-		}
+			if (const uint n = ms->nr_not_marked_soldiers()) {
+				launchSoldiersOfMilitarySite(ms, n, false);
+				return;
+			}
 
    log("finishing battle...\n");
 

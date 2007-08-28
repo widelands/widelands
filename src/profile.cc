@@ -234,10 +234,12 @@ void Section::check_used()
 	const Value_list::const_iterator values_end = m_values.end();
 	for
 		(Value_list::const_iterator it = m_values.begin(); it != values_end; ++it)
-		if (not it->is_used()) m_profile->error
-			("Section [%s], key '%s' not used (did you spell the name correctly?)",
-			 get_name(),
-			 it->get_name());
+		if (not it->is_used())
+			m_profile->error
+				("Section [%s], key '%s' not used (did you spell the name "
+				 "correctly?)",
+				 get_name(),
+				 it->get_name());
 }
 
 /** Section::get_val(const char *name)
@@ -914,9 +916,13 @@ void Profile::read
 					rtrim(p);
 
 					// first, check for multiline string
-					if (strlen(tail) >= 2 &&
-					        ((tail[0] == '\'' || tail[0] == '\"') &&
-					         (tail[1] == '\'' || tail[1] == '\"'))) {
+					if
+						(strlen(tail) >= 2
+						 and
+						 ((tail[0] == '\'' or tail[0] == '\"')
+						  and
+						  (tail[1] == '\'' or tail[1] == '\"')))
+					{
 						reading_multiline = true;
 						tail += 2;
 					}

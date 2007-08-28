@@ -144,11 +144,12 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 
    uint i;
 
-	if (programIt == program_map.end()) programIt =
-		program_map.find(std::string("smelt_") + selectedWare->name());
+	if (programIt == program_map.end())
+		programIt =
+			program_map.find(std::string("smelt_") + selectedWare->name());
 
-	if (programIt == program_map.end()) programIt =
-		program_map.find(std::string("prog_") + selectedWare->name());
+	if (programIt == program_map.end())
+		programIt = program_map.find(std::string("prog_") + selectedWare->name());
 
 	if (programIt == program_map.end()) programIt = program_map.find("work");
 

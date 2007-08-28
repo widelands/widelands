@@ -170,12 +170,14 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
    long size;
 
    memcpy(buffer, file->Data(6), 6);
-   if ((buffer[0] != 0x10) ||
-         (buffer[1] != 0x27) ||
-         (buffer[2] != 0x00) ||
-         (buffer[3] != 0x00) ||
-         (buffer[4] != 0x00) ||
-         (buffer[5] != 0x00)) {
+	if
+		(buffer[0] != 0x10 or
+		 buffer[1] != 0x27 or
+		 buffer[2] != 0x00 or
+		 buffer[3] != 0x00 or
+		 buffer[4] != 0x00 or
+		 buffer[5] != 0x00)
+	{
       cerr << "Section marker not found" << endl;
       return 0;
 	}

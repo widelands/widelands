@@ -203,11 +203,12 @@ void Window::draw_border(RenderTarget* dst)
 	}
 
 	// draw the title if we have one
-	if (m_title.length()) g_fh->draw_string
-		(*dst,
-		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
-		 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-		 m_title.c_str(), Align_Center);
+	if (m_title.length())
+		g_fh->draw_string
+			(*dst,
+			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
+			 m_title.c_str(), Align_Center);
 
 	if (not _is_minimal) {
 		const int vt_bar_end = get_h() - (_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;

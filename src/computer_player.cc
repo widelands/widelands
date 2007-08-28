@@ -735,8 +735,9 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 					-
 					map.calc_distance(field->coords, immovables[i].coords);
 
-				if (v > 0) field->military_influence +=
-					v * v * militarysite->get_capacity();
+				if (v > 0)
+					field->military_influence +=
+						v * v * militarysite->get_capacity();
 			}
 
 			if (dynamic_cast<const ProductionSite * const>(building))

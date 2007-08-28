@@ -349,9 +349,10 @@ void Panel::draw_overlay(RenderTarget &) {}
  */
 void Panel::update(int x, int y, int w, int h)
 {
-	if (x >= static_cast<const int>(_w) or x + w <= 0
-	    or
-	    y >= static_cast<const int>(_h) or y + h <= 0)
+	if
+		(x >= static_cast<const int>(_w) or x + w <= 0
+		 or
+		 y >= static_cast<const int>(_h) or y + h <= 0)
 		return;
 
 	_needdraw = true;

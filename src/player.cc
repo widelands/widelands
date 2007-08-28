@@ -142,13 +142,14 @@ FieldCaps Player::get_buildcaps(const FCoords fc) const {
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
 
 		//  Prevent big buildings that would swell over borders.
-		if ((buildcaps & BUILDCAPS_BIG) == BUILDCAPS_BIG
-		    and
-		    (not map.tr_n(fc).field->is_interior(player_number)
-		     or
-		     not map.tl_n(fc).field->is_interior(player_number)
-		     or
-		     not map. l_n(fc).field->is_interior(player_number)))
+		if
+			((buildcaps & BUILDCAPS_BIG) == BUILDCAPS_BIG
+			 and
+			 (not map.tr_n(fc).field->is_interior(player_number)
+			  or
+			  not map.tl_n(fc).field->is_interior(player_number)
+			  or
+			  not map. l_n(fc).field->is_interior(player_number)))
 			buildcaps &= ~BUILDCAPS_SMALL;
 	}
 
@@ -495,8 +496,11 @@ Forces the drop of given soldier at given house
 void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
 	if (imm->get_owner() != this)
 		return;
-	if ((soldier->get_worker_type() == Worker_Descr::SOLDIER) &&
-	    (imm->get_type() >= Map_Object::BUILDING)) {
+	if
+		(soldier->get_worker_type() == Worker_Descr::SOLDIER
+		 and
+		 imm->get_type() >= Map_Object::BUILDING)
+	{
 			Building* ms= static_cast<Building*>(imm);
 			ms->drop_soldier (soldier->get_serial());
 	}

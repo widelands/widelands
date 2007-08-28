@@ -62,13 +62,14 @@ throw (_wexception)
 			const Uint16       id   = fr.Unsigned16();
          const char * const name = fr.CString   ();
 			const terrain_id_map::const_iterator it = smap.find(id);
-			if (it != smap.end()) log
-				("Widelands_Map_Terrain_Data_Packet::Read: WARNING: Found "
-				 "duplicate terrain id %i: Previously defined as \"%s\", now as "
-				 "\"%s\".\n",
-				 id, world.terrain_descr(it->second).name().c_str(), name);
-			if (not world.get_ter(name)) throw wexception
-				("Terrain '%s' exists in map, not in world!", name);
+			if (it != smap.end())
+				log
+					("Widelands_Map_Terrain_Data_Packet::Read: WARNING: Found "
+					 "duplicate terrain id %i: Previously defined as \"%s\", now as "
+					 "\"%s\".",
+					 id, world.terrain_descr(it->second).name().c_str(), name);
+			if (not world.get_ter(name))
+				throw wexception("Terrain '%s' exists in map, not in world!", name);
 			smap[id] = world.index_of_terrain(name);
 		}
 

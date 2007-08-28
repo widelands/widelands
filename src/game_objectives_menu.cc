@@ -41,8 +41,8 @@ objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 		if (obj.get_trigger()->is_set()) continue;
 
 		list.add(obj.get_name(), obj);
-		if (obj.get_is_optional()) list.set_entry_color
-			(list.size() - 1, RGBColor(255, 0, 0));
+		if (obj.get_is_optional())
+			list.set_entry_color(list.size() - 1, RGBColor(255, 0, 0));
 	}
    list.selected.set(this, &GameObjectivesMenu::selected);
 

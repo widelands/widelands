@@ -932,8 +932,9 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
 	while (m_workers.size())
 		m_workers[0]->set_location(0);
 
-	if (m_owner) m_owner->egbase().player_immovable_notification
-		(this, Editor_Game_Base::LOSE);
+	if (m_owner)
+		m_owner->egbase().player_immovable_notification
+			(this, Editor_Game_Base::LOSE);
 
 	BaseImmovable::cleanup(g);
 }

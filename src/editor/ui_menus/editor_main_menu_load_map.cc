@@ -323,10 +323,11 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 				if (const uchar amount = f.get_resources_amount()) {
 					const std::string & immname =
 						world.get_resource(f.get_resources())->get_editor_pic(amount);
-					if (immname.size()) overlay_manager.register_overlay
-						(Coords(x, y),
-						 g_gr->get_picture(PicMod_Game, immname.c_str()),
-						 4);
+					if (immname.size())
+						overlay_manager.register_overlay
+							(Coords(x, y),
+							 g_gr->get_picture(PicMod_Game, immname.c_str()),
+							 4);
 				}
 			}
 

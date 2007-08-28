@@ -112,13 +112,15 @@ Redraw the button
 void Basic_Button::draw(RenderTarget* dst)
 {
 	// Draw the background
-	if (not m_flat) dst->tile
-		(Rect(Point(0, 0), get_w(), get_h()),
-		 m_pic_background,
-		 Point(get_x(), get_y()));
+	if (not m_flat)
+		dst->tile
+			(Rect(Point(0, 0), get_w(), get_h()),
+			 m_pic_background,
+			 Point(get_x(), get_y()));
 
-	if (m_enabled and m_highlighted) dst->brighten_rect
-		(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+	if (m_enabled and m_highlighted)
+		dst->brighten_rect
+			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	if (m_pic_custom) {// if we got a picture, draw it centered
 		uint cpw, cph;

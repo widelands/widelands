@@ -561,14 +561,13 @@ template<typename T> static void draw_field_int
 			default: assert(false); break; //  never here
 			}
 		}
-		else {
-			if
-				(draw_all
-				 or
-				 f_r_texture.was_animated() or tr_d_texture.was_animated())
-				if (&f_r_texture != &tr_d_texture) dither_edge_horiz<T>
-					(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
-		}
+		else if
+			((draw_all
+			  or
+			  f_r_texture.was_animated() or tr_d_texture.was_animated())
+			 and
+			 &f_r_texture != &tr_d_texture)
+			dither_edge_horiz<T>(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
 	}
 
 	road = (roads >> Road_SouthEast) & Road_Mask;
@@ -585,14 +584,11 @@ template<typename T> static void draw_field_int
 					assert(0); break; // never here
 			}
 		}
-		else {
-			if
-				(draw_all
-				 or
-				 f_r_texture.was_animated() or f_d_texture.was_animated())
-				if (&f_r_texture != &f_d_texture) dither_edge_vert<T>
-					(dst, f_vert, br_vert, f_r_texture, f_d_texture);
-		}
+		else if
+			((draw_all or f_r_texture.was_animated() or f_d_texture.was_animated())
+			 and
+			 &f_r_texture != &f_d_texture)
+			dither_edge_vert<T>(dst, f_vert, br_vert, f_r_texture, f_d_texture);
 	}
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
@@ -609,14 +605,11 @@ template<typename T> static void draw_field_int
 					assert(0); break; // never here
 			}
 		}
-		else {
-			if
-				(draw_all
-				 or
-				 f_d_texture.was_animated() or l_r_texture.was_animated())
-				if (&l_r_texture != &f_d_texture) dither_edge_vert<T>
-					(dst, f_vert, bl_vert, f_d_texture, l_r_texture);
-		}
+		else if
+			((draw_all or f_d_texture.was_animated() or l_r_texture.was_animated())
+			 and
+			 &l_r_texture != &f_d_texture)
+			dither_edge_vert<T>(dst, f_vert, bl_vert, f_d_texture, l_r_texture);
 	}
 
 	// FIXME: similar textures may not need dithering

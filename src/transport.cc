@@ -1642,8 +1642,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	Flag* destflag;
 
 	// Catch the simplest cases
-	if (location->get_economy() !=
-         destination->get_economy()) {
+	if (location->get_economy() != destination->get_economy()) {
 		tlog("Economy mismatch -> fail\n");
 
 		*psuccess = false;
@@ -1821,14 +1820,12 @@ bool Requeriments::check (int hp, int attack, int defense, int evade)
 
    int total = hp + attack + defense + evade;
 
-	if (((m_hp.min <= hp)           && (hp <= m_hp.max)) &&
-	   ((m_attack.min <= attack)   && (attack <= m_attack.max)) &&
-		((m_defense.min <= defense) && (defense <= m_defense.max)) &&
-		((m_evade.min <= evade)     && (evade <= m_evade.max)) &&
-      ((m_total.min <= total)     && (total <= m_total.max)))
-			result = true;
-
-	return result;
+	return
+		m_hp     .min <= hp      and hp      <= m_hp     .max and
+		m_attack .min <= attack  and attack  <= m_attack .max and
+		m_defense.min <= defense and defense <= m_defense.max and
+		m_evade  .min <= evade   and evade   <= m_evade  .max and
+		m_total  .min <= total   and total   <= m_total  .max;
 }
 
 // Modified to allow Requeriments and Soldiers

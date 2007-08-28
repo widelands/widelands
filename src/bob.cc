@@ -940,12 +940,16 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	// temporarily land.
 	const uint movecaps = get_movecaps();
 
-	if (!force) {
-		if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM &&
-		      newf.field->get_caps() & MOVECAPS_WALK) &&
-		    !(newf.field->get_caps() & movecaps))
-			return -1;
-	}
+	if
+		(not force
+		 and
+		 (not
+		  (m_position.field->get_caps() & movecaps & MOVECAPS_SWIM
+		   and
+		   newf.field->get_caps() & MOVECAPS_WALK)
+		  and
+		  not (newf.field->get_caps() & movecaps)))
+		 return -1;
 
 	// Move is go
 	int tdelta = g->get_map()->calc_cost(m_position, dir);

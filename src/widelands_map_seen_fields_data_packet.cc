@@ -66,11 +66,11 @@ throw (_wexception)
 				bool see = data & (1 << j);
 				if (Player * const player = egbase->get_player(j+1))
 					player->m_fields[i].vision = see ? 1 : 0;
-				else if (see) log
-					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
-					 "%i, which does not exist, sees field %i.\n",
-					 j+1,
-					 i);
+				else if (see)
+					log
+						("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: "
+						 "Player %u, which does not exist, sees field %u.\n",
+						 j + 1, i);
 			}
 	} else if (packet_version == CURRENT_PACKET_VERSION)
 		for (Map::Index i = 0; i < max_index; ++i) {
@@ -79,11 +79,11 @@ throw (_wexception)
 				bool see = data & (1 << j);
 				if (Player * const player = egbase->get_player(j+1))
 					player->m_fields[i].vision = see ? 1 : 0;
-				else if (see) log
-					("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: Player "
-					 "%i, which does not exist, sees field %i.\n",
-					 j+1,
-					 i);
+				else if (see)
+					log
+						("Widelands_Map_Seen_Fields_Data_Packet::Read: WARNING: "
+						 "Player %u, which does not exist, sees field %u.\n",
+						 j + 1, i);
 			}
 		}
 	else

@@ -37,6 +37,7 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "profile.h"
+#include "transport.h"
 #include "wlapplication.h"
 
 Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
@@ -658,8 +659,11 @@ void Interactive_Base::roadb_add_overlay()
 		//  can't build on robusts
 		BaseImmovable * const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-			if (!(imm->get_type() == Map_Object::FLAG ||
-					(imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))
+			if
+				(not
+				 (dynamic_cast<const Flag *>(imm)
+				  or
+				  (dynamic_cast<const Road *>(imm) and caps & BUILDCAPS_FLAG)))
 				continue;
 		}
 

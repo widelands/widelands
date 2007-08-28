@@ -2476,8 +2476,11 @@ bool CheckStepRoad::allowed
 		if (id != stepLast)
 			return false;
 
-		if (!((imm->get_type() == Map_Object::FLAG) ||
-			   (imm->get_type() == Map_Object::ROAD && endcaps & BUILDCAPS_FLAG)))
+		if
+			(not
+			 (dynamic_cast<const Flag *>(imm)
+			  or
+			  (dynamic_cast<const Road *>(imm) and endcaps & BUILDCAPS_FLAG)))
 			return false;
 	}
 

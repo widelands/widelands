@@ -545,8 +545,9 @@ bool Worker::run_object(Game* g, State* state, const Action* action)
 			crit->send_signal(g, "interrupt_now");
 			crit->start_task_program(action->sparam1);
 
-		} else if ((bob->get_type() == Bob::WORKER) ||
-		          (bob->get_type() == Bob::SOLDIER)) {
+		} else if
+			(bob->get_type() == Bob::WORKER or bob->get_type() == Bob::SOLDIER)
+		{
 
 			Worker* w= ((Worker*)bob);
 			w->send_signal(g, "interrupt_now");
@@ -1177,11 +1178,13 @@ void Worker::transfer_update(Game* g, State* state)
 		if (nextstep->get_type() == ROAD) {
 			Road* road = (Road*)nextstep;
 
-			if (road->get_flag(Road::FlagStart) != location &&
-			    road->get_flag(Road::FlagEnd) != location)
-
-				throw wexception("MO(%u): [transfer]: nextstep is road, but "
-				                 "we're nowhere near", get_serial());
+			if
+				(road->get_flag(Road::FlagStart) != location
+				 and
+				 road->get_flag(Road::FlagEnd)   != location)
+				throw wexception
+					("MO(%u): [transfer]: nextstep is road, but we are nowhere near",
+					 get_serial());
 
 			molog("[transfer]: set location to road %u\n", road->get_serial());
 			set_location(road);
@@ -1579,8 +1582,11 @@ void Worker::gowarehouse_update(Game* g, State* state)
 
 	assert(location); // 'location' signal expected otherwise
 
-	if (location->get_type() == BUILDING &&
-	    location->has_attribute(WAREHOUSE)) {
+	if
+		(dynamic_cast<const Building *>(location)
+		 and
+		 location->has_attribute(WAREHOUSE))
+	{
 
 		molog("[gowarehouse]: Back in warehouse, schedule incorporate\n");
 
@@ -2073,8 +2079,13 @@ void Worker::fugitive_update(Game* g, State* state)
 		Flag *flag = (Flag*)imm;
 		Building *building = flag->get_building();
 
-		if (building && building->has_attribute(WAREHOUSE) &&
-		    building->get_owner() == get_owner()) {
+		if
+			(building
+			 and
+			 building->has_attribute(WAREHOUSE)
+			 and
+			 building->get_owner() == get_owner())
+		{
 
 			molog("[fugitive]: move into warehouse\n");
 			start_task_forcemove
@@ -2217,8 +2228,13 @@ void Worker::geologist_update(Game* g, State* state)
 		// Check to see if we're on suitable terrain
 		BaseImmovable * const imm = map.get_immovable(get_position());
 
-		if (!imm || (imm->get_size() == BaseImmovable::NONE &&
-		             !imm->has_attribute(RESI))) {
+		if
+			(not imm
+			 or
+			 (imm->get_size() == BaseImmovable::NONE
+			  and
+			  not imm->has_attribute(RESI)))
+		{
 
 			molog("[geologist]: Starting program '%s'\n", state->svar1.c_str());
 

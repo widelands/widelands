@@ -266,11 +266,19 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.iparam1 = act.iparam2 = 0;
 
-			if ((cmd[1] == "hp") || (cmd[1] == "attack") ||
-				 (cmd[1] == "defense") || (cmd[1] == "evade"))
+			if
+				(cmd[1] == "hp"
+				 or
+				 cmd[1] == "attack"
+				 or
+				 cmd[1] == "defense"
+				 or
+				 cmd[1] == "evade")
 				act.sparam1 = cmd[1];
 			else
-				throw wexception ("check_soldier needs 'hp', 'attack', 'defense' or 'evade' parameter");
+				throw wexception
+					("check_soldier needs 'hp', 'attack', 'defense' or 'evade' "
+					 "parameter");
 
 		  int how_many=1;
 		  char* endp;
@@ -290,13 +298,18 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.iparam1 = act.iparam2 = 0;
 
-			if ((cmd[1] == "hp") || (cmd[1] == "attack") ||
-				 (cmd[1] == "defense") || (cmd[1] == "evade"))
-			{
+			if
+				(cmd[1] == "hp"
+				 or
+				 cmd[1] == "attack"
+				 or
+				 cmd[1] == "defense"
+				 or
+				 cmd[1] == "evade")
 				act.sparam1 = cmd[1];
-			}
 			else
-				throw wexception ("train needs 'hp', 'attack', 'defense' or 'evade' parameter");
+				throw wexception
+					("train needs 'hp', 'attack', 'defense' or 'evade' parameter");
 
 			int how_many=1;
 			char* endp;
