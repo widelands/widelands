@@ -64,9 +64,6 @@ throw (_wexception)
 	// Packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	// Can't save netgames (TODO)
-	assert(!game->m_netgame);
-
 	// State is running, we do not need to save this
 	// Save speed
 	fw.Signed16(game->m_speed);
