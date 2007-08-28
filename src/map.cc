@@ -1365,7 +1365,7 @@ uint Map::calc_distance(const Coords a, const Coords b) const
 	// This means we round UP for even rows, and we round DOWN for odd rows.
 	int lx, rx;
 
-	lx = a.x - ((dist + (~a.y & 1))>>1); // div 2
+	lx = a.x - ((dist + (~a.y & 1)) >> 1); // div 2
 	rx = lx + dist;
 
 	// Allow for wrap-around
@@ -1378,8 +1378,7 @@ uint Map::calc_distance(const Coords a, const Coords b) const
 	// Normal, non-wrapping case
 	if (lx <= rx)
 	{
-		if (b.x < lx)
-		{
+		if (b.x < lx) {
 			int dx1 = lx - b.x;
 			int dx2 = b.x - (rx - m_width);
 			dist += std::min(dx1, dx2);
@@ -1923,10 +1922,7 @@ int Map::findpath
 			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE};
 		const char *direction;
 
-		if ((cur.x+cur.y) & 1)
-			direction = order1;
-		else
-			direction = order2;
+		direction = (cur.x + cur.y) & 1 ? order1 : order2;
 
 		// Check all the 6 neighbours
 		for (uint i = 6; i; i--, direction++) {
@@ -1957,10 +1953,11 @@ int Map::findpath
 				continue;
 
 			// Calculate cost
-			if (flags & fpBidiCost)
-				cost = curpf->real_cost + calc_bidi_cost(Coords(cur.x, cur.y), *direction);
-			else
-				cost = curpf->real_cost + calc_cost(Coords(cur.x, cur.y), *direction);
+			cost =
+				curpf->real_cost
+				+
+				(flags & fpBidiCost) ?
+				calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
 
 			if (neighbpf->cycle != m_pathcycle) {
 				// add to open list
@@ -2199,11 +2196,11 @@ Military_Influence Map::calc_influence
 	const Y_Coordinate h = get_height();
 	Military_Influence influence = std::max
 		(std::min
-		 (std::min
-		  (abs(a.x - area.x), abs(a.x - area.x + w)), abs(a.x - area.x - w)),
+		 (std::min(abs(a.x - area.x), abs(a.x - area.x + w)),
+		  abs(a.x - area.x - w)),
 		 std::min
-		 (std::min
-		  (abs(a.y - area.y), abs(a.y - area.y + h)), abs(a.y - area.y - h)));
+		 (std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
+		  abs(a.y - area.y - h)));
 
 	//  This method makes a "parabola" like x^4, but the maxium radius is
 	//  MAX_RADIUS,
