@@ -56,27 +56,49 @@ throw (_wexception)
 			while (!cmdq->m_cmds.empty())
 				cmdq->m_cmds.pop();
 
-			// Number of cmds
-			uint ncmds=fr.Unsigned16();
+			if (packet_version == CURRENT_PACKET_VERSION)
+			{
+				for(;;) {
+					uint packet_id = fr.Unsigned16();
 
-			uint i=0;
-			while (i<ncmds) {
-				Cmd_Queue::cmditem item;
-				if (packet_version == CURRENT_PACKET_VERSION)
+					if (!packet_id)
+						break;
+
+					Cmd_Queue::cmditem item;
 					item.category = fr.Signed32();
-				else
-					item.category = Cmd_Queue::cat_gamelogic;
-				item.serial = fr.Unsigned32();
+					item.serial = fr.Unsigned32();
 
-				uint packet_id=fr.Unsigned16();
-				GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-				cmd->Read(fr, *game, *ol);
+					GameLogicCommand* cmd =
+							Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+					cmd->Read(fr, *game, *ol);
 
-				item.cmd=cmd;
+					item.cmd=cmd;
 
-				cmdq->m_cmds.push(item);
-				++i;
+					cmdq->m_cmds.push(item);
+				}
 			}
+			else
+			{
+				// Old-style (version 1) command list
+				uint ncmds=fr.Unsigned16();
+
+				uint i=0;
+				while (i<ncmds) {
+					Cmd_Queue::cmditem item;
+					item.category = Cmd_Queue::cat_gamelogic;
+					item.serial = fr.Unsigned32();
+
+					uint packet_id=fr.Unsigned16();
+					GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+					cmd->Read(fr, *game, *ol);
+
+					item.cmd=cmd;
+
+					cmdq->m_cmds.push(item);
+					++i;
+				}
+			}
+
 			// DONE
 			return;
 		}
@@ -108,9 +130,6 @@ throw (_wexception)
 	// Next serial
 	fw.Unsigned32(cmdq->nextserial);
 
-	// Number of cmds
-	fw.Unsigned16(cmdq->m_cmds.size());
-
 	// Write all commands
 	std::priority_queue<Cmd_Queue::cmditem> p;
 
@@ -124,12 +143,13 @@ throw (_wexception)
 		const Cmd_Queue::cmditem& it = p.top();
 
 		if (GameLogicCommand* cmd = dynamic_cast<GameLogicCommand*>(it.cmd)) {
+			// The id (aka command type)
+			assert(0 < cmd->get_id() < 0x8000);
+			fw.Unsigned16(cmd->get_id());
+
 			// Serial number
 			fw.Signed32(it.category);
 			fw.Unsigned32(it.serial);
-
-			// Now the id
-			fw.Unsigned16(cmd->get_id());
 
 			// Now the command itself
 			cmd->Write(fw, *game, *os);
@@ -138,6 +158,8 @@ throw (_wexception)
 		// DONE: next command
 		p.pop();
 	}
+
+	fw.Unsigned16(0); // end of command queue
 
 	fw.Write(fs, "binary/cmd_queue");
 }

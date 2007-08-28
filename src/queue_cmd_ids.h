@@ -31,6 +31,9 @@
  * writing to files
  */
 
+/* ID zero is reserved and must never be used */
+#define QUEUE_CMD_NONE                   0
+
 /* PLAYER COMMANDS BELOW */
 #define QUEUE_CMD_BUILD                  1
 #define QUEUE_CMD_FLAG                   2
