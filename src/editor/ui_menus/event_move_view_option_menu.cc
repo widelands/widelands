@@ -205,17 +205,17 @@ void Event_Move_View_Option_Menu::clicked_ok() {
 
 void Event_Move_View_Option_Menu::clicked(int i) {
 	switch (i) {
-	case  3: m_location.x +=                        100;  break;
+	case  3: m_location.x +=                                      100;  break;
 	case  4: m_location.x -= std::min<X_Coordinate>(m_location.x, 100); break;
-	case  5: m_location.x +=                         10;  break;
+	case  5: m_location.x +=                                       10;  break;
 	case  6: m_location.x -= std::min<X_Coordinate>(m_location.x,  10); break;
-	case  7: m_location.x +=                          1;  break;
+	case  7: m_location.x +=                                        1;  break;
 	case  8: m_location.x -= std::min<X_Coordinate>(m_location.x,   1); break;
-	case  9: m_location.y +=                        100;  break;
+	case  9: m_location.y +=                                      100;  break;
 	case 10: m_location.y -= std::min<Y_Coordinate>(m_location.y, 100); break;
-	case 11: m_location.y +=                         10;  break;
+	case 11: m_location.y +=                                       10;  break;
 	case 12: m_location.y -= std::min<Y_Coordinate>(m_location.y,  10); break;
-	case 13: m_location.y +=                          1;  break;
+	case 13: m_location.y +=                                        1;  break;
 	case 14: m_location.y -= std::min<Y_Coordinate>(m_location.y,   1); break;
 	}
    update();
