@@ -223,8 +223,6 @@ void Computer_Player::think ()
 
 		// check whether we can still construct regular buildings on the field
 		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK)==0) {
-			log ("ComputerPlayer(%d): field (%d, %d) can no longer be built upon\n", player_number, bf->coords.x, bf->coords.y);
-
 			unusable_fields.push_back (bf->coords);
 			delete bf;
 
@@ -249,16 +247,12 @@ void Computer_Player::think ()
 
 		// check whether we lost ownership of the field
 		if (mf->coords.field->get_owned_by()!=player_number) {
-			log ("ComputerPlayer(%d): lost field (%d, %d)\n", player_number, mf->coords.x, mf->coords.y);
-
 			mineable_fields.pop_front();
 			continue;
 		}
 
 		// check whether we can still construct regular buildings on the field
 		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE)==0) {
-			log ("ComputerPlayer(%d): field (%d, %d) can no longer be mined upon\n", player_number, mf->coords.x, mf->coords.y);
-
 			unusable_fields.push_back (mf->coords);
 			delete mf;
 
@@ -276,7 +270,6 @@ void Computer_Player::think ()
 	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end();) {
 		// check whether we lost ownership of the field
 		if (i->field->get_owned_by()!=player_number) {
-			log ("ComputerPlayer(%d): lost field (%d, %d)\n", player_number, i->x, i->y);
 			i=unusable_fields.erase(i);
 			continue;
 		}
@@ -340,8 +333,6 @@ void Computer_Player::think ()
 		// check if any flag has changed its economy
 		for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end();) {
 			if ((*i)->economy!=(*j)->get_economy()) {
-				log ("ComputerPlayer(%d): flag at (%d, %d) changed economy\n", player_number, (*j)->get_position().x, (*j)->get_position().y);
-
 				get_economy_observer((*j)->get_economy())->flags.push_back (*j);
 				j=(*i)->flags.erase(j);
 				continue;
@@ -1283,9 +1274,6 @@ void Computer_Player::construct_roads ()
 					("Computer_Player(%u): New road has length %u\n",
 					 player_number,
 					 pc.size());
-			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++)
-				log ("Computer_Player: (%d, %d)\n", c->x, c->y);
-
 				Path & path = *new Path(pc.front());
 			pc.pop_front();
 
