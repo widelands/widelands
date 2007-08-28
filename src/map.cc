@@ -1349,9 +1349,9 @@ uint Map::calc_distance(const Coords a, const Coords b) const
 
 	// do we fly up or down?
 	dy = b.y - a.y;
-	if (dy > (int)(m_height>>1)) // wrap-around!
+	if (dy > static_cast<const int>(m_height >> 1)) //  wrap-around!
 		dy -= m_height;
-	else if (dy < -(int)(m_height>>1))
+	else if (dy < -static_cast<const int>(m_height >> 1))
 		dy += m_height;
 
 	dist = abs(dy);
@@ -1372,7 +1372,7 @@ uint Map::calc_distance(const Coords a, const Coords b) const
 	// Yes, the second is an else if; see the above if (dist >= m_width)
 	if (lx < 0)
 		lx += m_width;
-	else if (rx >= (int)m_width)
+	else if (rx >= static_cast<const int>(m_width))
 		rx -= m_width;
 
 	// Normal, non-wrapping case
@@ -1420,9 +1420,9 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 
 	dy = end.y - start.y;
 	dx = end.x - start.x;
-	if (dx > (int)(m_width>>1))
+	if (dx > static_cast<const int>(m_width >> 1))
 		dx -= m_width;
-	else if (dx < -(int)(m_width>>1))
+	else if (dx < -static_cast<const int>(m_width >> 1))
 		dx += m_width;
 
 	// end and start are on the same row
@@ -1435,9 +1435,9 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		}
 	}
 
-	if (dy > (int)(m_height>>1))
+	if (dy > static_cast<const int>(m_height >> 1))
 		dy -= m_height;
-	else if (dy < -(int)(m_height>>1))
+	else if (dy < -static_cast<const int>(m_height >> 1))
 		dy += m_height;
 
 	// end is one row below start
@@ -1516,7 +1516,8 @@ static inline float calc_cost_d(int slope)
 
 int Map::calc_cost(int slope) const
 {
-	return (int)(BASE_COST_PER_FIELD * (CALC_COST_BASE + calc_cost_d(slope)));
+	return static_cast<const int>
+		(BASE_COST_PER_FIELD * (CALC_COST_BASE + calc_cost_d(slope)));
 }
 
 
@@ -1789,7 +1790,7 @@ public:
 	{
 		unsigned l = node*2 + 1;
 		unsigned r = node*2 + 2;
-		if (m_data[node]->heap_index != (int)node) {
+		if (m_data[node]->heap_index != static_cast<const int>(node)) {
 			fprintf(stderr, "%s: heap_index integrity!\n", str);
 			exit(-1);
 		}
