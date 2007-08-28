@@ -396,9 +396,12 @@ public:
 	// Economy stuff
 	void add_economy(Economy*);
 	void remove_economy(Economy*);
-	bool has_economy(Economy*);
-	int get_economy_number(Economy*); // for savegames
-	Economy * get_economy_by_number(const int i) const {return m_economies[i];} // for loading
+	bool has_economy(Economy * const) const throw ();
+	std::vector<Economy *>::size_type get_economy_number(Economy * const) const
+		throw (); //  for savegames
+	Economy * get_economy_by_number(const std::vector<Economy *>::size_type i)
+		const //  for loading
+	{return m_economies[i];}
 	uint get_nr_economies() const {return m_economies.size();}
 
 	// Military stuff

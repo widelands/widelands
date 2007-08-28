@@ -332,7 +332,7 @@ void Player::enhance_building
 
       // Get workers and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
-		//  The building.
+		//  the building.
 		const std::vector<Worker  *> workers  = building->get_workers();
 		const std::vector<Soldier *> soldiers = building->has_soldiers() ?
 			dynamic_cast<ProductionSite &>(*building).get_soldiers()
@@ -345,8 +345,6 @@ void Player::enhance_building
 		building = egbase().warp_constructionsite
 			(position, m_plnum, index_of_new_building, index_of_old_building);
 		//  Hereafter building points to the new building.
-
-		Game & game = dynamic_cast<Game &>(egbase());
 
 		// Reassign the workers and soldiers.
 		// Note that this will make sure they stay within the economy;
@@ -440,23 +438,28 @@ void Player::remove_economy(Economy* eco) {
 	assert(0); // Never here
 }
 
-bool Player::has_economy(Economy* eco) {
-	std::vector<Economy*>::iterator  i = m_economies.begin();
-	while (i!=m_economies.end()) {
-		if (*i == eco) return true;
-		++i;
-	}
+bool Player::has_economy(Economy * const economy) const throw () {
+	const std::vector<Economy *>::const_iterator economies_end =
+		m_economies.end();
+	for
+		(std::vector<Economy *>::const_iterator it = m_economies.begin();
+		 it != economies_end;
+		 ++it)
+		if (*it == economy) return true;
 	return false;
 }
 
-int Player::get_economy_number(Economy* eco) {
-	assert(has_economy(eco));
-
-	std::vector<Economy*>::iterator  i = m_economies.begin();
-	while (i!=m_economies.end()) {
-		if (*i == eco) return (i - m_economies.begin());
-		++i;
-	}
+std::vector<Economy *>::size_type Player::get_economy_number
+(Economy * const economy) const
+throw ()
+{
+	const std::vector<Economy *>::const_iterator
+		economies_end = m_economies.end(), economies_begin = m_economies.begin();
+	for
+		(std::vector<Economy *>::const_iterator it = economies_begin;
+		 it != economies_end;
+		 ++it)
+		if (*it == economy) return it - economies_begin;
 	assert(0); // never here
 	return 0;
 }
