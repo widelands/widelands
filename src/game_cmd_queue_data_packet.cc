@@ -84,9 +84,9 @@ throw (_wexception)
 			throw wexception("Error loading Cmd_Queue_Data_Packet: %s", e.what());
 		}
 	} else
-      throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i", packet_version);
+		throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i", packet_version);
 
-   assert(0); // never here
+	assert(0); // never here
 }
 
 /*
@@ -98,29 +98,29 @@ throw (_wexception)
 {
 	WidelandsFileWrite fw;
 
-   // Now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
+	// Now packet version
+	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   Cmd_Queue* cmdq=game->get_cmdqueue();
+	Cmd_Queue* cmdq=game->get_cmdqueue();
 
-   // nothing to be done for m_game
+	// nothing to be done for m_game
 
-   // Next serial
-   fw.Unsigned32(cmdq->nextserial);
+	// Next serial
+	fw.Unsigned32(cmdq->nextserial);
 
-   // Number of cmds
-   fw.Unsigned16(cmdq->m_cmds.size());
+	// Number of cmds
+	fw.Unsigned16(cmdq->m_cmds.size());
 
-   // Write all commands
-   std::priority_queue<Cmd_Queue::cmditem> p;
+	// Write all commands
+	std::priority_queue<Cmd_Queue::cmditem> p;
 
-   // Make a copy, so we can pop stuff
-   p=cmdq->m_cmds;
+	// Make a copy, so we can pop stuff
+	p=cmdq->m_cmds;
 
-   assert(p.top().serial==cmdq->m_cmds.top().serial);
-   assert(p.top().cmd==cmdq->m_cmds.top().cmd);
+	assert(p.top().serial==cmdq->m_cmds.top().serial);
+	assert(p.top().cmd==cmdq->m_cmds.top().cmd);
 
-   while (p.size()) {
+	while (p.size()) {
 		const Cmd_Queue::cmditem& it = p.top();
 
 		if (GameLogicCommand* cmd = dynamic_cast<GameLogicCommand*>(it.cmd)) {
@@ -139,5 +139,5 @@ throw (_wexception)
 		p.pop();
 	}
 
-   fw.Write(fs, "binary/cmd_queue");
+	fw.Write(fs, "binary/cmd_queue");
 }
