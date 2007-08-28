@@ -991,6 +991,16 @@ bool Deserializer::EndOfFile()
 	return !avail();
 }
 
+char Deserializer::getchar()
+{
+	if (!avail())
+		throw wexception("Unexpected end of network packet");
+
+	char v=queue.front();
+	queue.pop();
+	return v;
+}
+
 short Deserializer::getshort ()
 {
 	short val;

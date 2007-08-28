@@ -242,15 +242,7 @@ struct Deserializer : public WidelandsStreamRead {
 	size_t Data(void* const data, const size_t bufsize);
 	bool EndOfFile();
 
-	char getchar ()
-	{
-		assert (avail());
-
-		char v=queue.front();
-		queue.pop();
-		return v;
-	}
-
+	char getchar ();
 	short getshort ();
 	long getlong ();
 
