@@ -21,6 +21,7 @@
 #define FILEREAD_H
 
 #include "machdep.h"
+#include <exception>
 #include <limits>
 #include <cassert>
 #include <string>
@@ -36,9 +37,13 @@ struct FileRead {
 	typedef size_t Pos;
 	static Pos NoPos() throw () {return std::numeric_limits<size_t>::max();}
 
-	struct FileRead_Exception {};
-	struct File_Boundary_Exceeded : public FileRead_Exception {};
-	struct Buffer_Overflow        : public FileRead_Exception {};
+	struct FileRead_Exception : public std::exception {};
+	struct File_Boundary_Exceeded : public FileRead_Exception {
+		virtual const char* what() const throw() { return "File boundary exceeded"; }
+	};
+	struct Buffer_Overflow : public FileRead_Exception {
+		virtual const char* what() const throw() { return "Buffer overflow"; }
+	};
 
 	FileRead (); /// Create the object with nothing to read.
 	~FileRead(); /// Close the file if open.
