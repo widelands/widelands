@@ -249,7 +249,7 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
       // Show sel coordinates
       char buf[100];
 
-	   snprintf(buf, 100, "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
+		snprintf(buf, sizeof(buf), "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
 		g_fh->draw_string
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, Align_Left);
 	   assert(m_sel.pos.triangle.t < 2);
