@@ -49,7 +49,7 @@ struct Event_Move_View_Option_Menu : public UI::Window {
       Editor_Interactive* m_parent;
 
       UI::Edit_Box* m_name;
-      int         m_x, m_y;
+	Coords m_location;
       UI::Textarea* m_x_ta, *m_y_ta;
 };
 

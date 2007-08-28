@@ -38,11 +38,9 @@
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
 UI::Window(parent, 0, 0, 180, 200, _("Move View Event Options").c_str()),
 m_event   (event),
-m_parent  (parent)
+m_parent  (parent),
+m_location(event->get_coords())
 {
-   Coords pt=event->get_coords();
-   m_x=pt.x;
-   m_y=pt.y;
    const int offsx=5;
    const int offsy=25;
    int spacing=5;
@@ -200,25 +198,25 @@ bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int, int)
 
 void Event_Move_View_Option_Menu::clicked_ok() {
 	if (m_name->get_text()) m_event->set_name(m_name->get_text());
-	m_event->set_coords(Coords(m_x, m_y));
+	m_event->set_coords(m_location);
 	end_modal(1);
 }
 
 
 void Event_Move_View_Option_Menu::clicked(int i) {
-   switch (i) {
-      case 3: m_x+=100; break;
-      case 4: m_x-=100; break;
-      case 5: m_x+=10; break;
-      case 6: m_x-=10; break;
-      case 7: m_x+=1; break;
-      case 8: m_x-=1; break;
-      case 9: m_y+=100; break;
-      case 10: m_y-=100; break;
-      case 11: m_y+=10; break;
-      case 12: m_y-=10; break;
-      case 13: m_y+=1; break;
-      case 14: m_y-=1; break;
+	switch (i) {
+	case  3: m_location.x +=                        100;  break;
+	case  4: m_location.x -= std::min<X_Coordinate>(m_location.x, 100); break;
+	case  5: m_location.x +=                         10;  break;
+	case  6: m_location.x -= std::min<X_Coordinate>(m_location.x,  10); break;
+	case  7: m_location.x +=                          1;  break;
+	case  8: m_location.x -= std::min<X_Coordinate>(m_location.x,   1); break;
+	case  9: m_location.y +=                        100;  break;
+	case 10: m_location.y -= std::min<Y_Coordinate>(m_location.y, 100); break;
+	case 11: m_location.y +=                         10;  break;
+	case 12: m_location.y -= std::min<Y_Coordinate>(m_location.y,  10); break;
+	case 13: m_location.y +=                          1;  break;
+	case 14: m_location.y -= std::min<Y_Coordinate>(m_location.y,   1); break;
 	}
    update();
 }
@@ -227,17 +225,15 @@ void Event_Move_View_Option_Menu::clicked(int i) {
  * update function: update all UI elements
  */
 void Event_Move_View_Option_Menu::update() {
-   if (m_x<0) m_x=0;
-   if (m_y<0) m_y=0;
-	const Map & map = m_parent->egbase().map();
-	const X_Coordinate mapwidth  = map.get_width ();
-	const Y_Coordinate mapheight = map.get_height();
-	if (m_x >= static_cast<const int>(mapwidth))  m_x = mapwidth  - 1;
-	if (m_y >= static_cast<const int>(mapheight)) m_y = mapheight - 1;
+	const Extent extent = m_parent->egbase().map().extent();
+	if (extent.w <= static_cast<const Uint16>(m_location.x))
+		m_location.x = extent.w - 1;
+	if (extent.h <= static_cast<const Uint16>(m_location.y))
+		m_location.y = extent.h - 1;
 
-   char buf[200];
-   sprintf(buf, "%i", m_x);
+   char buf[6];
+	snprintf(buf, sizeof(buf), "%i", m_location.x);
    m_x_ta->set_text(buf);
-   sprintf(buf, "%i", m_y);
+   snprintf(buf, sizeof(buf), "%i", m_location.y);
    m_y_ta->set_text(buf);
 }
