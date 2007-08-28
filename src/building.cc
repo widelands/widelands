@@ -832,7 +832,9 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
 
    molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
    molog("m_flag: %p\n", m_flag);
-   molog("* position: (%i, %i)\n", m_flag->get_position().x, m_flag->get_position().y);
+	molog
+		("* position: (%i, %i)\n",
+		 m_flag->get_position().x, m_flag->get_position().y);
 
 	molog("m_anim: %s\n", descr().get_animation_name(m_anim).c_str());
    molog("m_animstart: %i\n", m_animstart);
