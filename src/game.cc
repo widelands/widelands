@@ -311,8 +311,8 @@ bool Game::run_multi_player (NetGame* ng)
 	const int code = lgm.run();
 	m_netgame->set_launch_menu (0);
 
-	if (code==0 || get_map()==0)
-	    return false;
+	if (code <= 0 || get_map() == 0)
+		return false;
 
 	UI::ProgressWindow loaderUI;
 	g_gr->flush(PicMod_Menu);
