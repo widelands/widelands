@@ -23,11 +23,11 @@
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -54,7 +54,7 @@ throw (_wexception)
    if (skip)
       return;
 
-   FileRead fr;
+	WidelandsFileRead fr;
    try {
       fr.Open(fs, "binary/flag_data");
 	} catch (...) {
@@ -62,11 +62,10 @@ throw (_wexception)
       return ;
 	}
 
-   // First packet version
-   int packet_version=fr.Unsigned16();
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
-      while (1) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		const Extent extent = egbase->map().extent();
+		for (;;) {
          uint ser=fr.Unsigned32();
 
          if (ser==0xffffffff) break; // end of flags
@@ -78,8 +77,20 @@ throw (_wexception)
          // The owner is already set, nothing to do from
          // PlayerImmovable
 
-         flag->m_position.x=fr.Unsigned16();
-         flag->m_position.y=fr.Unsigned16();
+			try {flag->m_position = fr.Coords32(extent);}
+			catch (const WidelandsFileRead::Width_Exceeded e) {
+				throw wexception
+					("Widelands_Map_Flagdata_Data_Packet::Read: in "
+					 "binary/flag_data:%u: flag %u has x coordinate %i, but the map "
+					 "width is only %u",
+					 e.position, ser, e.x, e.w);
+			} catch (const WidelandsFileRead::Height_Exceeded e) {
+				throw wexception
+					("Widelands_Map_Flagdata_Data_Packet::Read: in "
+					 "binary/flag_data:%u: flag %u has y coordinate %i, but the map "
+					 "height is only %u",
+					 e.position, ser, e.y, e.h);
+			}
          flag->m_animstart=fr.Unsigned16();
          int building=fr.Unsigned32();
          if (building) {
@@ -148,14 +159,9 @@ throw (_wexception)
 
          ol->mark_object_as_loaded(flag);
 		}
-
-
-      // DONE
-      return;
-	}
-   throw wexception("Unknown version %i in Widelands_Map_Flagdata_Data_Packet!\n", packet_version);
-
-   assert(0);
+	} else throw wexception
+		("Unknown version %u in Widelands_Map_Flagdata_Data_Packet!",
+		 packet_version);
 }
 
 
@@ -168,21 +174,17 @@ void Widelands_Map_Flagdata_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	WidelandsFileWrite fw;
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   Map* map=egbase->get_map();
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
-         Field* f=map->get_field(Coords(x, y));
-         BaseImmovable* imm=f->get_immovable();
-         if (!imm) continue;
-
-         if (imm->get_type()==Map_Object::FLAG) {
-            Flag* flag=static_cast<Flag*>(imm);
-
+	const Map & map = egbase->map();
+	const Field & fields_end = map[map.max_index()];
+	for (Field * field = &map[0]; field < &fields_end; ++field) if //  FIXME field should be "const Field *"
+		(Flag * const flag =
+		 dynamic_cast<Flag * const>(field->get_immovable()))
+	{
             assert(os->is_object_known(flag));
             assert(!os->is_object_saved(flag));
 
@@ -191,9 +193,7 @@ throw (_wexception)
 
             // Owner is already written in the existanz packet
 
-            // Write position
-            fw.Unsigned16(flag->m_position.x);
-            fw.Unsigned16(flag->m_position.y);
+		fw.Coords32  (flag->m_position);
 
             // Animation is set by creator
             fw.Unsigned16(flag->m_animstart);
@@ -261,22 +261,9 @@ throw (_wexception)
 
             os->mark_object_as_saved(flag);
 
-            // Path finding variables are not saved.
-            //fw.Unsigned32(flag->mpf_cycle);
-            //fw.Signed32(flag->mpf_heapindex);
-            //fw.Signed32(flag->mpf_realcost);
-            //if (flag->mpf_backlink) {
-            //   assert(os->is_object_known(flag->mpf_backlink));
-            //   fw.Unsigned32(os->get_object_file_index(flag->mpf_backlink));
-            //} else
-            //   fw.Unsigned32(0);
-            //fw.Signed32(flag->mpf_estimate);
-			}
-		}
 	}
 
    fw.Unsigned32(0xffffffff); // End of flags
 
    fw.Write(fs, "binary/flag_data");
-   // DONE
 }
