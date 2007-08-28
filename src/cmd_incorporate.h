@@ -22,9 +22,9 @@
 
 #define CMD_INCORPORATE_VERSION 1
 
-struct Cmd_Incorporate: public BaseCommand {
-		Cmd_Incorporate() : BaseCommand(0) {} // For savegame loading
-		Cmd_Incorporate (int t, Worker* w): BaseCommand(t) {worker=w;}
+struct Cmd_Incorporate : public GameLogicCommand {
+		Cmd_Incorporate() : GameLogicCommand(0) {} // For savegame loading
+		Cmd_Incorporate (int t, Worker* w): GameLogicCommand(t) {worker=w;}
 
 
 		void execute (Game* g) {worker->incorporate(g);}

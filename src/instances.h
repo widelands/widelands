@@ -325,12 +325,12 @@ private:
 	Object_Ptr m;
 };
 
-class Cmd_Destroy_Map_Object:public BaseCommand {
+class Cmd_Destroy_Map_Object : public GameLogicCommand {
 private:
 	int obj_serial;
 
 public:
-	Cmd_Destroy_Map_Object() : BaseCommand(0) {} // For savegame loading
+	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_Destroy_Map_Object (int t, Map_Object* o);
 	virtual void execute (Game* g);
 
@@ -346,13 +346,13 @@ public:
 	virtual int get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
 };
 
-class Cmd_Act:public BaseCommand {
+class Cmd_Act : public GameLogicCommand {
 private:
 	int obj_serial;
 	int arg;
 
 public:
-	Cmd_Act() : BaseCommand(0) {} // For savegame loading
+	Cmd_Act() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_Act (int t, Map_Object* o, int a);
 
 	virtual void execute (Game* g);

@@ -27,7 +27,7 @@
 #include "widelands_filewrite.h"
 
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet() {}
@@ -43,7 +43,7 @@ throw (_wexception)
    // read packet version
    int packet_version=fr.Unsigned16();
 
-   if (packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version >= 1) {
       Cmd_Queue* cmdq=game->get_cmdqueue();
 
       // nothing to be done for m_game
@@ -60,11 +60,15 @@ throw (_wexception)
 
       uint i=0;
       while (i<ncmds) {
-         Cmd_Queue::cmditem item;
-         item.serial=fr.Unsigned32();
+			Cmd_Queue::cmditem item;
+			if (packet_version == CURRENT_PACKET_VERSION)
+				item.category = fr.Signed32();
+			else
+				item.category = Cmd_Queue::cat_gamelogic;
+			item.serial = fr.Unsigned32();
 
          uint packet_id=fr.Unsigned16();
-         BaseCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+         GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
 			cmd->Read(fr, *game, *ol);
 
          item.cmd=cmd;
@@ -112,16 +116,22 @@ throw (_wexception)
    assert(p.top().cmd==cmdq->m_cmds.top().cmd);
 
    while (p.size()) {
-      // Serial number
-      fw.Unsigned32(p.top().serial);
+		const Cmd_Queue::cmditem& it = p.top();
 
-      // Now the id
-      fw.Unsigned16(p.top().cmd->get_id());
+		if (GameLogicCommand* cmd = dynamic_cast<GameLogicCommand*>(it.cmd)) {
+			// Serial number
+			fw.Signed32(it.category);
+			fw.Unsigned32(it.serial);
 
-      // Now the command itself
-		p.top().cmd->Write(fw, *game, *os);
-      // DONE: next command
-      p.pop();
+			// Now the id
+			fw.Unsigned16(cmd->get_id());
+
+			// Now the command itself
+			cmd->Write(fw, *game, *os);
+		}
+
+		// DONE: next command
+		p.pop();
 	}
 
    fw.Write(fs, "binary/cmd_queue");

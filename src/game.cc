@@ -673,7 +673,7 @@ void Game::send_player_command (PlayerCommand* pc)
  * command queue after being accepted by the networking logic via
  * \ref send_player_command, so you must never enqueue a player command directly.
  */
-void Game::enqueue_command (BaseCommand * const cmd)
+void Game::enqueue_command (Command * const cmd)
 {
 	if (m_replaywriter) {
 		PlayerCommand* plcmd = dynamic_cast<PlayerCommand*>(cmd);

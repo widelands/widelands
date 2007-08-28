@@ -35,9 +35,12 @@
 #include <stdio.h>
 
 
-Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int t, Map_Object* o) : BaseCommand(t) {
-   obj_serial=o->get_serial();
+Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int t, Map_Object* o)
+	: GameLogicCommand(t)
+{
+	obj_serial = o->get_serial();
 }
+
 void Cmd_Destroy_Map_Object::execute(Game* g) {
    Map_Object* obj = g->objects().get_object(obj_serial);
 
@@ -53,8 +56,8 @@ void Cmd_Destroy_Map_Object::Read
 {
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
-      // Read Base Commands
-      BaseCommand::BaseCmdRead(fr, egbase, mol);
+		// Read Base Commands
+		GameLogicCommand::Read(fr, egbase, mol);
 
       // Serial
 		if (const Uint32 fileserial = fr.Unsigned32()) {
@@ -75,8 +78,8 @@ void Cmd_Destroy_Map_Object::Write
    // First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
 
-   // Write base classes
-   BaseCommand::BaseCmdWrite(fw, egbase, mos);
+	// Write base classes
+	GameLogicCommand::Write(fw, egbase, mos);
 
    // Now serial
 	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
@@ -88,7 +91,8 @@ void Cmd_Destroy_Map_Object::Write
 
 }
 
-Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : BaseCommand(t) {
+Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : GameLogicCommand(t)
+{
    obj_serial=o->get_serial();
    arg=a;
 }
@@ -107,8 +111,8 @@ void Cmd_Act::Read
 {
  const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CMD_ACT_VERSION) {
-      // Read Base Commands
-      BaseCommand::BaseCmdRead(fr, egbase, mol);
+		// Read Base Commands
+		GameLogicCommand::Read(fr, egbase, mol);
 
       // Serial
 		if (const Uint32 fileserial = fr.Unsigned32()) {
@@ -131,8 +135,8 @@ void Cmd_Act::Write
    // First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
 
-   // Write base classes
-   BaseCommand::BaseCmdWrite(fw, egbase, mos);
+	// Write base classes
+	GameLogicCommand::Write(fw, egbase, mos);
 
    // Now serial
 	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {

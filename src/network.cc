@@ -70,25 +70,14 @@ enum {
 };
 
 
-class Cmd_NetCheckSync:public BaseCommand {
-    private:
+class Cmd_NetCheckSync : public Command {
+private:
 	NetGame * netgame;
 
-    public:
-	Cmd_NetCheckSync (int dt, NetGame* ng) : BaseCommand (dt) {netgame=ng;}
+public:
+	Cmd_NetCheckSync (int dt, NetGame* ng) : Command (dt) {netgame=ng;}
 
 	virtual void execute (Game* g);
-
-	// Write these commands to a file (for savegames)
-	virtual void Write
-		(WidelandsFileWrite             &,
-		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &)
-		__attribute__ ((noreturn));
-	virtual void Read
-		(WidelandsFileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_NETCHECKSYNC;}
 };
@@ -1066,16 +1055,4 @@ void Cmd_NetCheckSync::execute (Game* g)
 	netgame->syncreport (g->logic_rand());
 
 	g->enqueue_command (new Cmd_NetCheckSync(get_duetime()+CHECK_SYNC_INTERVAL, netgame));
-}
-
-void Cmd_NetCheckSync::Write
-(WidelandsFileWrite &, Editor_Game_Base &, Widelands_Map_Map_Object_Saver &)
-{
-	// this command should not be written to a file
-	throw wexception("Cmd_NetCheckSync is not supposed to be written to a file");
-}
-
-void Cmd_NetCheckSync::Read
-(WidelandsFileRead &, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
-{
 }

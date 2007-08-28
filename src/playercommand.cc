@@ -50,7 +50,7 @@ enum {
 
 /*** class PlayerCommand ***/
 
-PlayerCommand::PlayerCommand (int t, char s):BaseCommand (t)
+PlayerCommand::PlayerCommand (int t, char s) : GameLogicCommand (t)
 {
 	sender=s;
 }
@@ -94,7 +94,7 @@ PlayerCommand* PlayerCommand::deserialize (WidelandsStreamRead & des)
  * Write this player command to a file. Call this from base classes
  */
 #define PLAYER_COMMAND_VERSION 1
-void PlayerCommand::PlayerCmdWrite
+void PlayerCommand::Write
 (WidelandsFileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
@@ -102,22 +102,22 @@ void PlayerCommand::PlayerCmdWrite
 	// First, write version
 	fw.Unsigned16(PLAYER_COMMAND_VERSION);
 
-	BaseCommand::BaseCmdWrite(fw, egbase, mos);
+	GameLogicCommand::Write(fw, egbase, mos);
 	// Now sender
 	fw.Unsigned8 (sender);
 }
-void PlayerCommand::PlayerCmdRead
+void PlayerCommand::Read
 (WidelandsFileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_COMMAND_VERSION) {
-		BaseCommand::BaseCmdRead(fr, egbase, mol);
+		GameLogicCommand::Read(fr, egbase, mol);
 		sender = fr.Unsigned8 ();
 	} else
 		throw wexception
-			("Unknown version in PlayerCommand::PlayerCmdRead: %u",
+			("Unknown version in PlayerCommand::Read: %u",
 			 packet_version);
 }
 
@@ -153,7 +153,7 @@ void Cmd_Bulldoze::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BULLDOZE_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 		const Uint32 fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 		serial=mol.get_object_by_file_index(fileserial)->get_serial();
@@ -169,7 +169,7 @@ void Cmd_Bulldoze::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
@@ -206,7 +206,7 @@ void Cmd_Build::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 		id          = fr.Unsigned16();
 		try {coords = fr.Coords32  (egbase.map().extent());}
 		catch (const WidelandsStreamRead::Width_Exceeded e) {
@@ -232,7 +232,7 @@ void Cmd_Build::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 	fw.Unsigned16(id);
 	fw.Coords32  (coords);
 }
@@ -267,7 +267,7 @@ void Cmd_BuildFlag::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 		try {coords = fr.Coords32(egbase.map().extent());}
 		catch (const WidelandsStreamRead::Width_Exceeded e) {
 			throw wexception
@@ -293,7 +293,7 @@ void Cmd_BuildFlag::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 	fw.Coords32  (coords);
 }
 
@@ -363,7 +363,7 @@ void Cmd_BuildRoad::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_BUILDROAD_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 		start  = fr.Coords32  (egbase.map().extent());
 		nsteps = fr.Unsigned16();
 		steps= new char[nsteps];
@@ -382,7 +382,7 @@ void Cmd_BuildRoad::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 	fw.Coords32  (start);
 	fw.Unsigned16(nsteps);
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
@@ -424,7 +424,7 @@ void Cmd_FlagAction::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_FLAGACTION_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
 		action = fr.Unsigned8 ();
 
@@ -444,7 +444,7 @@ void Cmd_FlagAction::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 	// Now action
 	fw.Unsigned8 (action);
 
@@ -486,7 +486,7 @@ void Cmd_StartStopBuilding::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_STOPBUILDING_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
 		// Serial
 		const Uint32 fileserial = fr.Unsigned32();
@@ -504,7 +504,7 @@ void Cmd_StartStopBuilding::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
@@ -546,7 +546,7 @@ void Cmd_EnhanceBuilding::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
 		const Uint32 fileserial = fr.Unsigned32();
 		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
@@ -565,7 +565,7 @@ void Cmd_EnhanceBuilding::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
@@ -618,7 +618,7 @@ void Cmd_ChangeTrainingOptions::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
 		// Serial
 		const Uint32 fileserial = fr.Unsigned32();
@@ -641,7 +641,7 @@ void Cmd_ChangeTrainingOptions::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
@@ -690,7 +690,7 @@ void Cmd_DropSoldier::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
 		// Serial
   const Uint32 fileserial = fr.Unsigned32();
@@ -714,7 +714,7 @@ void Cmd_DropSoldier::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
 	{
@@ -768,7 +768,7 @@ void Cmd_ChangeSoldierCapacity::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
       // Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
       // Serial
 		const Uint32 fileserial = fr.Unsigned32();
@@ -791,7 +791,7 @@ void Cmd_ChangeSoldierCapacity::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
 	const Map_Object * const obj = egbase.objects().get_object(serial);
@@ -855,7 +855,7 @@ void Cmd_EnemyFlagAction::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
 		// Read Player Command
-		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
+		PlayerCommand::Read(fr, egbase, mol);
 
 		// action
 		action   = fr.Unsigned8 ();
@@ -882,7 +882,7 @@ void Cmd_EnemyFlagAction::Write
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
 	// Write base classes
-	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+	PlayerCommand::Write(fw, egbase, mos);
 	// Now action
 	fw.Unsigned8 (action);
 

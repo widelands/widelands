@@ -83,7 +83,7 @@ void EventChain::add_event(Event* ev) {
 /*
  * Check trigger cmd
  */
-Cmd_CheckEventChain::Cmd_CheckEventChain (int t, int tid):BaseCommand (t)
+Cmd_CheckEventChain::Cmd_CheckEventChain (int t, int tid) : GameLogicCommand (t)
 {
 	m_eventchain_id=tid;
 }
@@ -158,8 +158,8 @@ void Cmd_CheckEventChain::Read
 {
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CMD_CHECK_EVENTCHAIN_VERSION) {
-      // Read Base Commands
-      BaseCommand::BaseCmdRead(fr, egbase, mol);
+		// Read Base Commands
+		GameLogicCommand::Read(fr, egbase, mol);
 
       // eventchain id
 		m_eventchain_id = fr.Unsigned16();
@@ -174,8 +174,8 @@ void Cmd_CheckEventChain::Write
 {
    // First, write version
 	fw.Unsigned16(CMD_CHECK_EVENTCHAIN_VERSION);
-   // Write base classes
-   BaseCommand::BaseCmdWrite(fw, egbase, mos);
+	// Write base classes
+	GameLogicCommand::Write(fw, egbase, mos);
 
    // Now eventchain id
 	fw.Unsigned16(m_eventchain_id);

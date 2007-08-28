@@ -33,7 +33,7 @@ void Cmd_Incorporate::Read
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CMD_INCORPORATE_VERSION) {
 		// Read Base Commands
-		BaseCommand::BaseCmdRead(fr, egbase, mol);
+		GameLogicCommand::Read(fr, egbase, mol);
 
 		// Serial of worker
 		const Uint32 fileserial = fr.Unsigned32();
@@ -54,7 +54,7 @@ void Cmd_Incorporate::Write
 	fw.Unsigned16(CMD_INCORPORATE_VERSION);
 
 	// Write base classes
-	BaseCommand::BaseCmdWrite(fw, egbase, mos);
+	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
 	assert(mos.is_object_known(worker));

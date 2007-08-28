@@ -29,7 +29,7 @@
 #include "wexception.h"
 
 
-BaseCommand* Queue_Cmd_Factory::create_correct_queue_command(uint id) {
+GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint id) {
    switch (id) {
       case QUEUE_CMD_BUILD: return new Cmd_Build(); break;
       case QUEUE_CMD_FLAG: return new Cmd_BuildFlag(); break;

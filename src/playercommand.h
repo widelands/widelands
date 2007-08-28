@@ -31,13 +31,13 @@ struct WidelandsStreamWrite;
 
 // PlayerCommand is for commands issued by players. It has the additional
 // ability to send itself over the network
-class PlayerCommand:public BaseCommand {
+class PlayerCommand : public GameLogicCommand {
 private:
 	char sender;
 
-    public:
+public:
 	PlayerCommand (int, char);
-	PlayerCommand() : BaseCommand(0) {} // For savegame loading
+	PlayerCommand() : GameLogicCommand(0) {} // For savegame loading
 	virtual ~PlayerCommand ();
 
 	char get_sender() const {return sender;}
@@ -45,13 +45,12 @@ private:
 	virtual void serialize (WidelandsStreamWrite &) = 0;
 	static PlayerCommand * deserialize (WidelandsStreamRead &);
 
-protected:
 	// Call these from child classes
-	void PlayerCmdWrite
+	void Write
 		(WidelandsFileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
-	void PlayerCmdRead
+	void Read
 		(WidelandsFileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);

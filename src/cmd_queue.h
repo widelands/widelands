@@ -57,39 +57,49 @@ enum {
 //
 class Game;
 
-class BaseCommand {
+/**
+ * A command that is supposed to be executed at a certain gametime.
+ *
+ * Unlike \ref GameLogicCommand objects, base Command object may be used to
+ * orchestrate network synchronization and other things that are outside the
+ * game simulation itself.
+ *
+ * Therefore, base Commands are not saved in savegames and do not need to be
+ * the same for all parallel simulation.
+ */
+class Command {
 private:
-	int duetime;
+	int m_duetime;
 
 public:
-	BaseCommand (int);
-	virtual ~BaseCommand ();
+	Command (int);
+	virtual ~Command ();
 
-	virtual void execute (Game*)=0;
+	virtual void execute (Game*) = 0;
+	virtual int get_id() = 0;
 
-	int get_duetime() const {return duetime;}
-	void set_duetime(int t) {duetime=t;}
+	int get_duetime() const { return m_duetime; }
+	void set_duetime(int t) { m_duetime = t; }
+};
+
+
+/**
+ * All commands that affect the game simulation (e.g. acting of \ref Bob
+ * objects), players' commands, etc. must be derived from this class.
+ *
+ * GameLogicCommands are stored in savegames, and they must run in parallel
+ * for all instances of a game to ensure parallel simulation.
+ */
+class GameLogicCommand : public Command {
+public:
+	GameLogicCommand (int duetime);
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
 		(WidelandsFileWrite             &,
 		 Editor_Game_Base               &,
-		 Widelands_Map_Map_Object_Saver &)
-		= 0;
-	virtual void Read
-		(WidelandsFileRead               &,
-		 Editor_Game_Base                &,
-		 Widelands_Map_Map_Object_Loader &)
-		= 0;
-
-	virtual int get_id() = 0; // Get this command id
-
-	// Write commands for BaseCommand. Must be called from upper classes
-	void BaseCmdWrite
-		(WidelandsFileWrite             &,
-		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
-	void BaseCmdRead
+	virtual void Read
 		(WidelandsFileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
@@ -98,16 +108,30 @@ public:
 class Cmd_Queue {
 	friend class Game_Cmd_Queue_Data_Packet;
 
+	enum {
+		cat_nongamelogic = 0,
+		cat_gamelogic
+	};
+
 	struct cmditem {
-		BaseCommand * cmd;
+		Command * cmd;
+
+		/**
+		 * category and serial are used to sort commands such that
+		 * commands will be executed in the same order on all systems
+		 * independent of details of the priority_queue implementation.
+		 */
+		int category;
 		unsigned long serial;
 
 		bool operator< (const cmditem& c) const
 		{
-			if (cmd->get_duetime()==c.cmd->get_duetime())
-				return serial > c.serial;
-			else
+			if (cmd->get_duetime() != c.cmd->get_duetime())
 				return cmd->get_duetime() > c.cmd->get_duetime();
+			else if (category != c.category)
+				return category > c.category;
+			else
+				return serial > c.serial;
 		}
 	};
 
@@ -115,7 +139,7 @@ public:
 	Cmd_Queue(Game *g);
 	~Cmd_Queue();
 
-	void enqueue (BaseCommand*);
+	void enqueue (Command*);
 	int run_queue (int interval, int* game_time_var);
 
 	void flush(); // delete all commands in the queue now

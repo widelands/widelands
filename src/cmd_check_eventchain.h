@@ -23,12 +23,12 @@
 #include "cmd_queue.h"
 #include "map_eventchain_manager.h"
 
-class Cmd_CheckEventChain :public BaseCommand {
+class Cmd_CheckEventChain : public GameLogicCommand {
 private:
 	MapEventChainManager::Index m_eventchain_id;
 
 public:
-	Cmd_CheckEventChain() : BaseCommand(0) {} // For savegame loading
+	Cmd_CheckEventChain() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_CheckEventChain(int, int);
 
 	// Write these commands to a file (for savegames)

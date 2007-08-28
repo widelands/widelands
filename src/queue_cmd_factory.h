@@ -22,14 +22,14 @@
 
 #include "types.h"
 
-class BaseCommand;
+class GameLogicCommand;
 
 /*
  * This creates the correct queue commands
  * from the queue command file ids
  */
 struct Queue_Cmd_Factory {
-      static BaseCommand* create_correct_queue_command(uint id);
+	static GameLogicCommand* create_correct_queue_command(uint id);
 };
 
 #endif

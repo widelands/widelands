@@ -712,11 +712,11 @@ private:
 	uint mpf_cycle;       //  pathfinding cycle, see Flag::mpf_cycle
 };
 
-struct Cmd_Call_Economy_Balance : public BaseCommand {
-      Cmd_Call_Economy_Balance () : BaseCommand (0) {} // For load and save
+struct Cmd_Call_Economy_Balance : public GameLogicCommand {
+      Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} // For load and save
 
       Cmd_Call_Economy_Balance (int starttime, int player, Economy* economy) :
-         BaseCommand(starttime)
+         GameLogicCommand(starttime)
       {
          m_player=player;
          m_economy=economy;

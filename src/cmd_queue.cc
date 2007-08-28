@@ -63,12 +63,22 @@ Cmd_Queue::queue
 Insert a new command into the queue; it will be executed at the given time
 ===============
 */
-void Cmd_Queue::enqueue (BaseCommand* cmd)
+void Cmd_Queue::enqueue (Command* cmd)
 {
 	cmditem ci;
 
-	ci.cmd=cmd;
-	ci.serial=nextserial++;
+	ci.cmd = cmd;
+	if (dynamic_cast<GameLogicCommand*>(cmd)) {
+		ci.category = cat_gamelogic;
+		ci.serial = nextserial++;
+	} else {
+		// the order of non-gamelogic commands matters only with respect to
+		// gamelogic commands; the order of non-gamelogic commands wrt other
+		// non-gamelogic commands shouldn't matter, so we can assign a
+		// constant serial number.
+		ci.category = cat_nongamelogic;
+		ci.serial = 0;
+	}
 
 	m_cmds.push(ci);
 }
@@ -86,9 +96,8 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 	int final = *game_time_var + interval;
 	int cnt = 0;
 
-
 	while (!m_cmds.empty()) {
-		BaseCommand* c = m_cmds.top().cmd;
+		Command* c = m_cmds.top().cmd;
 		if (final - c->get_duetime() <= 0)
 			break;
 
@@ -114,32 +123,50 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 }
 
 
-BaseCommand::BaseCommand (int t)
+Command::Command (int t)
 {
-	duetime = t;
+	m_duetime = t;
 }
 
-BaseCommand::~BaseCommand ()
+Command::~Command ()
+{
+}
+
+
+GameLogicCommand::GameLogicCommand (int duetime)
+	: Command(duetime)
 {
 }
 
 #define BASE_CMD_VERSION 1
-void BaseCommand::BaseCmdWrite
+
+/**
+ * Write variables from the base command to a file.
+ *
+ * \note This function must be called by deriving objects that override it.
+ */
+void GameLogicCommand::Write
 (WidelandsFileWrite & fw, Editor_Game_Base &, Widelands_Map_Map_Object_Saver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);
 
 	// Write duetime
-	fw.Unsigned32(duetime);
+	fw.Unsigned32(get_duetime());
 }
 
-void BaseCommand::BaseCmdRead
+/**
+ * Read variables for the base command from a file.
+ *
+ * \note This function must be called by deriving objects that override it.
+ */
+void GameLogicCommand::Read
 (WidelandsFileRead & fr, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
 {
 	const Uint16 packet_version = fr.Unsigned16();
-	if (packet_version == BASE_CMD_VERSION) duetime = fr.Unsigned32();
+	if (packet_version == BASE_CMD_VERSION)
+		set_duetime(fr.Unsigned32());
 	else
 		throw wexception
-			("BaseCommand::BaseCmdRead: unknown version %u\n", packet_version);
+			("GameLogicCommand::Read: unknown version %u\n", packet_version);
 }

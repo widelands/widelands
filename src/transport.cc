@@ -3808,8 +3808,8 @@ void Cmd_Call_Economy_Balance::Read
 {
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
-      // Read Base Commands
-      BaseCommand::BaseCmdRead(fr, egbase, mol);
+		// Read Base Commands
+		GameLogicCommand::Read(fr, egbase, mol);
 
 		m_player  = fr.Unsigned8 ();
 		m_economy = fr.Unsigned8 () ?
@@ -3830,8 +3830,8 @@ void Cmd_Call_Economy_Balance::Write
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 
-   // Write Base Commands
-   BaseCommand::BaseCmdWrite(fw, egbase, mos);
+	// Write Base Commands
+	GameLogicCommand::Write(fw, egbase, mos);
 
 	fw.Unsigned8 (m_player);
 
