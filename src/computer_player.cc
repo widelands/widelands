@@ -217,8 +217,6 @@ void Computer_Player::think ()
 
 		// check whether we lost ownership of the field
 		if (bf->coords.field->get_owned_by()!=player_number) {
-			log ("ComputerPlayer(%d): lost field (%d, %d)\n", player_number, bf->coords.x, bf->coords.y);
-
 			buildable_fields.pop_front();
 			continue;
 		}
