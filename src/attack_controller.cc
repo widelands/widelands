@@ -57,7 +57,6 @@ void getCloseMilitarySites
 			 dynamic_cast<MilitarySite * const>(it->object))
 			if (ms->owner().get_player_number() == player) {
 				militarySites.insert(ms);
-            log("getCloseMilitarySite(): military site at: %i, %i\n", ms->get_base_flag()->get_position().x, ms->get_base_flag()->get_position().y);
 			}
 	}
 }
@@ -185,7 +184,6 @@ void AttackController::launchSoldiersOfMilitarySite(MilitarySite* militarySite, 
 
 bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers) {
    if (!soldier->is_marked()) {
-      log("Launching soldier %d to flag %i, %i, is attacker %i\n", soldier->get_serial(), flag->get_position().x, flag->get_position().y, attackers);
       soldier->set_attack_ctrl(this);
       soldier->mark(true);
       soldier->reset_tasks(this->game);
