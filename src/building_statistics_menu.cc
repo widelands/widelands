@@ -383,7 +383,7 @@ void Building_Statistics_Menu::update() {
 		uint nr_build   = 0;
 		uint total_prod = 0;
 		const ProductionSite_Descr * const productionsite =
-			dynamic_cast<const ProductionSite_Descr * const>(&building);
+			dynamic_cast<const ProductionSite_Descr *>(&building);
 		for (uint l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite) ++nr_build;
 			else {
@@ -415,10 +415,8 @@ void Building_Statistics_Menu::update() {
 
           // Product
 		if (productionsite and nr_owned) {
-			const uint percent = static_cast<const uint>
-				(static_cast<const float>(total_prod)
-				 /
-				 static_cast<const float>(nr_owned));
+			const uint percent = static_cast<uint>
+				(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 			snprintf(buffer, sizeof(buffer), "%i", percent);
 			if (is_selected)  {
 				m_progbar->set_state(percent);

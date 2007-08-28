@@ -305,7 +305,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 			g_gr->get_picture_size(picid, w, h);
          // only register, when theres no building there
          // no building, place overlay
-			if (not dynamic_cast<const Building * const>(map[fc].get_immovable()))
+			if (not dynamic_cast<const Building *>(map[fc].get_immovable()))
 				map.overlay_manager().register_overlay
 				(fc, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 		}

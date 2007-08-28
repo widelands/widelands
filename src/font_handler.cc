@@ -402,7 +402,7 @@ void Font_Handler::draw_richtext
 					 (g_gr->get_picture(PicMod_Game, img_it->c_str())))
 				{
 					img_surf_h =
-						img_surf_h < static_cast<const int>(image->get_h()) ?
+						img_surf_h < static_cast<int>(image->get_h()) ?
 						image->get_h() : img_surf_h;
 					img_surf_w = img_surf_w + image->get_w();
 					rend_cur_images.push_back(image->m_surface);

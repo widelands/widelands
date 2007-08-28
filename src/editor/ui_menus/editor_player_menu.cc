@@ -351,7 +351,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	if (parent.editor().get_player(n)) {
 		if (not map.get_starting_pos(n).isNull()) {
 			if
-				(dynamic_cast<const Building * const>
+				(dynamic_cast<const Building *>
 				 (map[map.get_starting_pos(n)].get_immovable()))
 				return;
 		}

@@ -39,7 +39,7 @@ static int m_current_player;
 int Editor_Tool_Set_Starting_Pos_Callback
 (const TCoords<FCoords> c, void * data, int)
 {
-	const Map & map = *static_cast<const Map * const>(data);
+	const Map & map = *static_cast<const Map *>(data);
 
 	// Area around already placed players
 	const unsigned short nrplayers = map.get_nrplayers();
@@ -89,7 +89,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 		if (parent.editor().get_player(m_current_player))
 			if (not starting_pos.isNull())
 				if
-					(dynamic_cast<Building * const>
+					(dynamic_cast<Building *>
 					 (map.get_field(starting_pos)->get_immovable()))
 					return 1;
 

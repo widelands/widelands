@@ -57,8 +57,8 @@ m_pit     (pit)
 	const World & world = parent.egbase().map().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
 	const uint immovables_in_row = std::min
-		(static_cast<const uint>
-		 (ceil(sqrt(static_cast<const float>(nr_immovables)))),
+		(static_cast<uint>
+		 (ceil(sqrt(static_cast<float>(nr_immovables)))),
 		 6U);
 
 

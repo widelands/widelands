@@ -245,7 +245,7 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 	if
 		(get_display_flag(dfDebug)
 		 or
-		 not dynamic_cast<const Game * const>(&egbase()))
+		 not dynamic_cast<const Game *>(&egbase()))
 	{
       // Show sel coordinates
       char buf[100];
@@ -448,10 +448,10 @@ void Interactive_Base::start_build_road(Coords _start, int player)
 
    // If we are a game, we obviously build for the Interactive Player
    assert
-		(not dynamic_cast<const Game * const>(&m_egbase)
+		(not dynamic_cast<const Game *>(&m_egbase)
 		 or
 		 player ==
-		 static_cast<const Interactive_Player * const>(this)->
+		 static_cast<const Interactive_Player *>(this)->
 		 get_player_number());
 
 	roadb_add_overlay();
@@ -498,7 +498,7 @@ void Interactive_Base::finish_build_road()
 		// awkward... path changes ownership
 		Path & path = *new Path(*m_buildroad);
 		// Build the path as requested
-		if (Game * const game = dynamic_cast<Game * const>(&egbase()))
+		if (Game * const game = dynamic_cast<Game *>(&egbase()))
 			game->send_player_build_road (m_road_build_player, path);
 		else {
 			egbase().get_player(m_road_build_player)->build_road(path);

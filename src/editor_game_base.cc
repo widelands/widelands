@@ -358,7 +358,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area) {
 		(std::vector<ImmovableFound>::const_iterator it = immovables.begin();
 		 it != immovables.end(); ++it) {
 			 PlayerImmovable & imm =
-				 *static_cast<PlayerImmovable * const>(it->object);
+				 *static_cast<PlayerImmovable *>(it->object);
 		if
 			(not m.get_field(it->coords)->is_interior
 			 (imm.get_owner()->get_player_number()))
@@ -366,7 +366,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area) {
 	}
 
 	// Fix all immovables
-	if (Game * const game = dynamic_cast<Game * const>(this))
+	if (Game * const game = dynamic_cast<Game *>(this))
 		for
 			(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
 			 it != burnset.end();
@@ -539,7 +539,7 @@ void Editor_Game_Base::postload()
 		if
 			(pid <= MAX_PLAYERS
 			 or
-			 not dynamic_cast<const Game * const>(this))
+			 not dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			m_tribes[id]->postload(this);
@@ -730,7 +730,7 @@ void Editor_Game_Base::remove_attack_controller(uint serial) {
    for (uint i=0;i<m_attack_serials.size();i++) {
       if (m_attack_serials[i] == serial) {
          log("Editor_Game_Base: Destroying battle with serial %i \n", serial);
-			static_cast<AttackController * const>(this->objects().get_object(serial))->destroy(this);
+			static_cast<AttackController *>(this->objects().get_object(serial))->destroy(this);
 
 			if (i < m_attack_serials.size() - 1)
 				m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];

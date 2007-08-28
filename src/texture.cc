@@ -159,10 +159,10 @@ Uint32 Texture::get_minimap_color(const char shade) {
 	uint table = (uchar)shade;
 
 	return is_32bit ?
-		static_cast<const Uint32 * const>(m_colormap->get_colormap())
+		static_cast<const Uint32 *>(m_colormap->get_colormap())
 		[clr | (table << 8)]
 		:
-		static_cast<const Uint16 * const>(m_colormap->get_colormap())
+		static_cast<const Uint16 *>(m_colormap->get_colormap())
 		[clr | (table << 8)];
 }
 

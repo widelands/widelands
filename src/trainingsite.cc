@@ -396,7 +396,7 @@ void TrainingSite::call_soldiers()
  */
 void TrainingSite::drop_soldier(uint serial)
 {
-	Game * const g = dynamic_cast<Game * const>(&owner().egbase());
+	Game * const g = dynamic_cast<Game *>(&owner().egbase());
 
 	assert(g);
 

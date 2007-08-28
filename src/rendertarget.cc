@@ -65,23 +65,23 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 
 	if (m_rect.x < 0) {
 		m_offset.x += m_rect.x;
-		m_rect.w = std::max(static_cast<const int>(m_rect.w) + m_rect.x, 0);
+		m_rect.w = std::max(static_cast<int>(m_rect.w) + m_rect.x, 0);
 		m_rect.x = 0;
 	}
 
 	if (m_rect.x + m_rect.w > m_surface->get_w())
 		m_rect.w =
-			std::max(static_cast<const int>(m_surface->get_w()) - m_rect.x, 0);
+			std::max(static_cast<int>(m_surface->get_w()) - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
-		m_rect.h = std::max(static_cast<const int>(m_rect.h) + m_rect.y, 0);
+		m_rect.h = std::max(static_cast<int>(m_rect.h) + m_rect.y, 0);
 		m_rect.y = 0;
 	}
 
 	if (m_rect.y + m_rect.h > m_surface->get_h())
 		m_rect.h =
-			std::max(static_cast<const int>(m_surface->get_h()) - m_rect.y, 0);
+			std::max(static_cast<int>(m_surface->get_h()) - m_rect.y, 0);
 }
 
 /**
@@ -1185,7 +1185,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 	r += m_offset;
 
 	if (r.x < 0) {
-		if (r.w <= static_cast<const uint>(-r.x)) return false;
+		if (r.w <= static_cast<uint>(-r.x)) return false;
 
 		r.w += r.x;
 
@@ -1193,18 +1193,18 @@ bool RenderTarget::clip(Rect & r) const throw ()
 	}
 
 	if (r.x + r.w > m_rect.w) {
-		if (static_cast<const int>(m_rect.w) <= r.x) return false;
+		if (static_cast<int>(m_rect.w) <= r.x) return false;
 		r.w = m_rect.w - r.x;
 	}
 
 	if (r.y < 0) {
-		if (r.h <= static_cast<const uint>(-r.y)) return false;
+		if (r.h <= static_cast<uint>(-r.y)) return false;
 		r.h += r.y;
 		r.y = 0;
 	}
 
 	if (r.y + r.h > m_rect.h) {
-		if (static_cast<const int>(m_rect.h) <= r.y) return false;
+		if (static_cast<int>(m_rect.h) <= r.y) return false;
 		r.h = m_rect.h - r.y;
 	}
 
@@ -1225,7 +1225,7 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 	// Clipping
 
 	if (dst.x < 0) {
-		if (srcrc.w <= static_cast<const uint>(-dst.x)) return;
+		if (srcrc.w <= static_cast<uint>(-dst.x)) return;
 
 		srcrc.x -= dst.x;
 
@@ -1235,19 +1235,19 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 	}
 
 	if (dst.x + srcrc.w > m_rect.w) {
-		if (static_cast<const int>(m_rect.w) <= dst.x) return;
+		if (static_cast<int>(m_rect.w) <= dst.x) return;
 		srcrc.w = m_rect.w - dst.x;
 	}
 
 	if (dst.y < 0) {
-		if (srcrc.h <= static_cast<const uint>(-dst.y)) return;
+		if (srcrc.h <= static_cast<uint>(-dst.y)) return;
 		srcrc.y -= dst.y;
 		srcrc.h += dst.y;
 		dst.y = 0;
 	}
 
 	if (dst.y + srcrc.h > m_rect.h) {
-		if (static_cast<const int>(m_rect.h) <= dst.y) return;
+		if (static_cast<int>(m_rect.h) <= dst.y) return;
 		srcrc.h = m_rect.h - dst.y;
 	}
 
@@ -1267,8 +1267,8 @@ Sint8 RenderTarget::node_brightness(const Editor_Game_Base::Time gametime,
 		assert(last_seen <= gametime);
 		const Editor_Game_Base::Duration time_ago = gametime - last_seen;
 		result =
-				static_cast<const Sint16>
-				(((static_cast<const Sint16>(result) + 128) >> 1)
+				static_cast<Sint16>
+				(((static_cast<Sint16>(result) + 128) >> 1)
 				*
 				(1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
 				-

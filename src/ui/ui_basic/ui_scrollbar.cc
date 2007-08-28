@@ -305,7 +305,7 @@ void Scrollbar::draw(RenderTarget* dst)
 			 MinusPage,
 			 Rect(Point(Size, 0), knobpos - 3 * Size / 2, get_h()));
 		assert(0 <= get_w());
-		assert(knobpos + 3 * Size / 2 <= static_cast<const uint>(get_w()));
+		assert(knobpos + 3 * Size / 2 <= static_cast<uint>(get_w()));
 		draw_area
 			(*dst,
 			 PlusPage,
@@ -326,7 +326,7 @@ void Scrollbar::draw(RenderTarget* dst)
 			 MinusPage,
 			 Rect(Point(0, Size), get_w(), knobpos - 3 * Size / 2));
 		assert(0 <= get_h());
-		assert(knobpos + 3 * Size / 2 <= static_cast<const uint>(get_h()));
+		assert(knobpos + 3 * Size / 2 <= static_cast<uint>(get_h()));
 		draw_area
 			(*dst,
 			 PlusPage,

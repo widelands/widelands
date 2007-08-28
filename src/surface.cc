@@ -51,7 +51,7 @@ const SDL_PixelFormat & Surface::format() const {
 void * Surface::get_pixels() const throw () {
 	assert(m_surface);
 	return
-		static_cast<uchar * const>(m_surface->pixels)
+		static_cast<uchar *>(m_surface->pixels)
 		+
 		m_offsy * m_surface->pitch
 		+
@@ -78,18 +78,18 @@ ulong Surface::get_pixel(uint x, uint y) {
 	// Locking not needed: reading only
 	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
 	Uint8 * const pix =
-		static_cast<Uint8 * const>(m_surface->pixels) +
+		static_cast<Uint8 *>(m_surface->pixels) +
 		y * m_surface->pitch + x * bytes_per_pixel;
 
 	switch (bytes_per_pixel) {
 		case 1:
 			return *pix; //  Maybe needed for save_png.
 		case 2:
-			return *reinterpret_cast<const Uint16 * const>(pix);
+			return *reinterpret_cast<const Uint16 *>(pix);
 		case 3: //Needed for save_png.
 			//fallthrough
 		case 4:
-			return *reinterpret_cast<const Uint32 * const>(pix);
+			return *reinterpret_cast<const Uint32 *>(pix);
 	}
 	assert(0);
 
@@ -109,15 +109,15 @@ void Surface::set_pixel(uint x, uint y, const Uint32 clr) {
 
 	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
 	Uint8 * const pix =
-		static_cast<Uint8 * const>(m_surface->pixels) +
+		static_cast<Uint8 *>(m_surface->pixels) +
 		y * m_surface->pitch + x * bytes_per_pixel;
 	switch (bytes_per_pixel) {
 		case 2:
-			*reinterpret_cast<Uint16 * const>(pix) =
-					static_cast<const Uint16>(clr);
+			*reinterpret_cast<Uint16 *>(pix) =
+					static_cast<Uint16>(clr);
 			break;
 		case 4:
-			*reinterpret_cast<Uint32 * const>(pix) = clr;
+			*reinterpret_cast<Uint32 *>(pix) = clr;
 			break;
 	}
 

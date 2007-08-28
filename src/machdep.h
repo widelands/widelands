@@ -44,42 +44,42 @@
 
 inline Uint16 Swap16(const Uint16 x) {
 	Uint16 s;
-	reinterpret_cast<Uint8 * const>(&s)[0] =
-		reinterpret_cast<const Uint8 * const>(&x)[1];
-	reinterpret_cast<Uint8 * const>(&s)[1] =
-		reinterpret_cast<const Uint8 * const>(&x)[0];
+	reinterpret_cast<Uint8 *>(&s)[0] =
+		reinterpret_cast<const Uint8 *>(&x)[1];
+	reinterpret_cast<Uint8 *>(&s)[1] =
+		reinterpret_cast<const Uint8 *>(&x)[0];
 	return s;
 }
 
 inline Uint32 Swap32(const Uint32 x) {
 	Uint32 s;
-	reinterpret_cast<Uint8 * const>(&s)[0] =
-		reinterpret_cast<const Uint8 * const>(&x)[3];
-	reinterpret_cast<Uint8 * const>(&s)[1] =
-		reinterpret_cast<const Uint8 * const>(&x)[2];
-	reinterpret_cast<Uint8 * const>(&s)[2] =
-		reinterpret_cast<const Uint8 * const>(&x)[1];
-	reinterpret_cast<Uint8 * const>(&s)[3] =
-		reinterpret_cast<const Uint8 * const>(&x)[0];
+	reinterpret_cast<Uint8 *>(&s)[0] =
+		reinterpret_cast<const Uint8 *>(&x)[3];
+	reinterpret_cast<Uint8 *>(&s)[1] =
+		reinterpret_cast<const Uint8 *>(&x)[2];
+	reinterpret_cast<Uint8 *>(&s)[2] =
+		reinterpret_cast<const Uint8 *>(&x)[1];
+	reinterpret_cast<Uint8 *>(&s)[3] =
+		reinterpret_cast<const Uint8 *>(&x)[0];
 	return s;
 }
 
 inline float SwapFloat(const float x)
 {
 	float s;
-	reinterpret_cast<Uint8 * const>(&s)[0] =
-		reinterpret_cast<const Uint8 * const>(&x)[3];
-	reinterpret_cast<uchar * const>(&s)[1] =
-		reinterpret_cast<const Uint8 * const>(&x)[2];
-	reinterpret_cast<uchar * const>(&s)[2] =
-		reinterpret_cast<const Uint8 * const>(&x)[1];
-	reinterpret_cast<Uint8 * const>(&s)[3] =
-		reinterpret_cast<const Uint8 * const>(&x)[0];
+	reinterpret_cast<Uint8 *>(&s)[0] =
+		reinterpret_cast<const Uint8 *>(&x)[3];
+	reinterpret_cast<uchar *>(&s)[1] =
+		reinterpret_cast<const Uint8 *>(&x)[2];
+	reinterpret_cast<uchar *>(&s)[2] =
+		reinterpret_cast<const Uint8 *>(&x)[1];
+	reinterpret_cast<Uint8 *>(&s)[3] =
+		reinterpret_cast<const Uint8 *>(&x)[0];
 	return s;
 }
 
 inline Uint8 Deref8(const void * const ptr)
-{return *reinterpret_cast<const Uint8 * const>(ptr);}
+{return *reinterpret_cast<const Uint8 *>(ptr);}
 
 inline Uint16 Deref16(const void * const ptr) {
 	Uint16 r;

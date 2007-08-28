@@ -272,7 +272,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			list.add(map.get_name(),
 			         name,
 			         g_gr->get_picture(PicMod_Game,
-			         dynamic_cast<const Widelands_Map_Loader * const>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			         dynamic_cast<const Widelands_Map_Loader *>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 
 			delete ml;
 		}

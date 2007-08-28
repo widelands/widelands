@@ -54,7 +54,7 @@ void getCloseMilitarySites
    for (std::vector<ImmovableFound>::const_iterator it=immovables.begin();it != immovables.end();++it) {
 		if
 			(MilitarySite * const ms =
-			 dynamic_cast<MilitarySite * const>(it->object))
+			 dynamic_cast<MilitarySite *>(it->object))
 			if (ms->owner().get_player_number() == player) {
 				militarySites.insert(ms);
 			}
@@ -237,7 +237,7 @@ void AttackController::soldierWon(Soldier* soldier) {
 	if (involvedSoldiers[idx].attacker)
 		if
 			(MilitarySite * const ms =
-			 dynamic_cast<MilitarySite * const>(flag->get_building()))
+			 dynamic_cast<MilitarySite *>(flag->get_building()))
       //There are defending soldiers left in the building.
 			if (const uint n = ms->nr_not_marked_soldiers()) {
 				launchSoldiersOfMilitarySite(ms, n, false);
@@ -250,7 +250,7 @@ void AttackController::soldierWon(Soldier* soldier) {
 		(std::set<Object_Ptr>::const_iterator it = involvedMilitarySites.begin();
 		 it != involvedMilitarySites.end();
 		 ++it)
-		static_cast<MilitarySite * const>(static_cast<Object_Ptr>(*it).get(game))->set_in_battle(false);
+		static_cast<MilitarySite *>(static_cast<Object_Ptr>(*it).get(game))->set_in_battle(false);
 
 	if (involvedSoldiers[idx].attacker) {
       log("attackers won, destroying building.\n");

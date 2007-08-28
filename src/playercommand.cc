@@ -526,7 +526,7 @@ void Cmd_EnhanceBuilding::execute (Game* g)
 {
 	if
 		(Building * const building =
-		 dynamic_cast<Building * const>(g->objects().get_object(serial)))
+		 dynamic_cast<Building *>(g->objects().get_object(serial)))
 		g->get_player(get_sender())->enhance_building(building, id);
 }
 

@@ -323,7 +323,7 @@ throw (_wexception)
 								map_object_descr = 0;
 							else if
 								(const Building * const building =
-								 dynamic_cast<const Building * const>(base_immovable))
+								 dynamic_cast<const Building *>(base_immovable))
 								if (building->get_position() != f)
 									//  TODO This is not the buildidng's main position
 									//  TODO so we can not see it. But it should be
@@ -515,7 +515,7 @@ throw (_wexception)
 						if (map_object_descr == &g_road_descr) map_object_descr = 0;
 						else if
 							(const Building * const building =
-							 dynamic_cast<const Building * const>(base_immovable))
+							 dynamic_cast<const Building *>(base_immovable))
 							if (building->get_position() != f)
 								//  TODO This is not the buildidng's main position so we
 								//  TODO can not see it. But it should be possible to
@@ -726,7 +726,7 @@ static inline void write_unseen_immovable
 		immovable_kind = 0;
 	else if
 		(const Immovable_Descr * const immovable_descr =
-		 dynamic_cast<const Immovable_Descr * const>
+		 dynamic_cast<const Immovable_Descr *>
 		 (map_object_descr))
 	{
 		immovable_kind = 1;
@@ -741,7 +741,7 @@ static inline void write_unseen_immovable
 		immovable_kind = 2;
 	else if
 		(const Building_Descr * const building_descr =
-		 dynamic_cast<const Building_Descr * const>
+		 dynamic_cast<const Building_Descr *>
 		 (map_object_descr))
 	{
 		immovable_kind = 3;

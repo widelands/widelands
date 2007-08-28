@@ -41,7 +41,7 @@ int Editor_Delete_Immovable_Tool::handle_click_impl
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do if
 		(Immovable * const immovable =
-		 dynamic_cast<Immovable * const>(mr.location().field->get_immovable()))
+		 dynamic_cast<Immovable *>(mr.location().field->get_immovable()))
 		immovable->remove(&parent.editor()); //  Delete no buildings or stuff.
 	while (mr.advance(map));
 	return mr.radius() + 2;

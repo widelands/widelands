@@ -102,7 +102,7 @@ void EncyclopediaWindow::wareSelected(uint) {
 	for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
 		if
 			(const ProductionSite_Descr * const curProdSite =
-		    dynamic_cast<const ProductionSite_Descr * const>
+		    dynamic_cast<const ProductionSite_Descr *>
 			 (tribe->get_building_descr(i)))
 		{
 

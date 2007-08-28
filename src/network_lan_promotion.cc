@@ -56,7 +56,7 @@ LAN_Base::LAN_Base ()
 	    continue;
 
 		broadcast_addresses.push_back
-			(reinterpret_cast<sockaddr_in * const>(&ifr.ifr_broadaddr)
+			(reinterpret_cast<sockaddr_in *>(&ifr.ifr_broadaddr)
 			 ->sin_addr.s_addr);
 	}
 
@@ -80,7 +80,7 @@ void LAN_Base::bind (unsigned short port)
     addr.sin_addr.s_addr=INADDR_ANY;
     addr.sin_port=htons(port);
 
-	::bind (sock, reinterpret_cast<sockaddr * const>(&addr), sizeof(addr));
+	::bind (sock, reinterpret_cast<sockaddr *>(&addr), sizeof(addr));
 }
 
 bool LAN_Base::avail ()
@@ -124,7 +124,7 @@ void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
 			 static_cast<const DATATYPE>(buf),
 			 len,
 			 0,
-			 reinterpret_cast<const sockaddr * const>(&addr),
+			 reinterpret_cast<const sockaddr *>(&addr),
 			 sizeof(addr));
 	}
 }

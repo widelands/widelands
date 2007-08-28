@@ -167,12 +167,12 @@ throw (_wexception)
 				fw.Unsigned32(serial);
 
 				const ConstructionSite * const constructionsite =
-					dynamic_cast<const ConstructionSite * const>(building);
+					dynamic_cast<const ConstructionSite *>(building);
 				fw.CString
 					((constructionsite ?
 					  constructionsite->building() : building->descr())
 					 .name().c_str());
-				fw.Unsigned8(static_cast<const bool>(constructionsite));
+				fw.Unsigned8(static_cast<bool>(constructionsite));
 
 				write_priorities(*building, fw);
 

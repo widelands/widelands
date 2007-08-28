@@ -241,15 +241,15 @@ static inline ulong calc_minimap_color
 
 	if (see_details) {
 	const PlayerImmovable * const immovable =
-		dynamic_cast<const PlayerImmovable * const>(f.field->get_immovable());
-	if (flags & MiniMap::Roads and dynamic_cast<const Road * const>(immovable))
+		dynamic_cast<const PlayerImmovable *>(f.field->get_immovable());
+	if (flags & MiniMap::Roads and dynamic_cast<const Road *>(immovable))
 		pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
 	if
-		((flags & MiniMap::Flags and dynamic_cast<const Flag * const>(immovable))
+		((flags & MiniMap::Flags and dynamic_cast<const Flag *>(immovable))
 		 or
 		 (flags & MiniMap::Bldns
 		  and
-		  dynamic_cast<const Building * const>(immovable)))
+		  dynamic_cast<const Building *>(immovable)))
 		pixelcolor = SDL_MapRGB
 		(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
 	}
@@ -283,7 +283,7 @@ static void draw_minimap_int
 		Map::Index i = Map::get_index(f, mapwidth);
 		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
-			*reinterpret_cast<T * const>(pix) = static_cast<const T>
+			*reinterpret_cast<T *>(pix) = static_cast<T>
 				(calc_minimap_color
 				 (format, egbase, f, flags, f.field->get_owned_by(), true));
 		}
@@ -299,7 +299,7 @@ static void draw_minimap_int
 			move_r(mapwidth, f, i);
 				const Player::Field & player_field = player_fields[i];
 				const Vision vision = player_field.vision;
-				*reinterpret_cast<T * const>(pix) = static_cast<const T>
+				*reinterpret_cast<T *>(pix) = static_cast<T>
 					(vision ?
 					 calc_minimap_color
 					 (format, egbase, f, flags, player_field.owner, 1 < vision)
@@ -324,7 +324,7 @@ void Surface::draw_minimap
  const uint                flags)
 {
 	//TODO: this const_cast is evil and should be exorcised.
-	Uint8 * const pixels = const_cast<Uint8 * const>(static_cast<const Uint8 * const>(get_pixels()));
+	Uint8 * const pixels = const_cast<Uint8 *>(static_cast<const Uint8 *>(get_pixels()));
 	const ushort pitch = get_pitch();
 	const X_Coordinate w = egbase.map().get_width();
 	switch (format().BytesPerPixel) {

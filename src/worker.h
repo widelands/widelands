@@ -81,14 +81,14 @@ class Worker : public Bob
 		virtual uint get_movecaps() const throw ();
 
 		PlayerImmovable * get_location(Editor_Game_Base * egbase)
-		{return reinterpret_cast<PlayerImmovable * const>(m_location.get(egbase));}
+		{return reinterpret_cast<PlayerImmovable *>(m_location.get(egbase));}
 	Economy * get_economy() const throw () {return m_economy;}
 
 		void set_location(PlayerImmovable *location);
 		void set_economy(Economy *economy);
 
 		WareInstance * get_carried_item(Editor_Game_Base * egbase)
-		{return reinterpret_cast<WareInstance * const>(m_carried_item.get(egbase));}
+		{return reinterpret_cast<WareInstance *>(m_carried_item.get(egbase));}
 		const WareInstance * get_carried_item(const Editor_Game_Base * game) const
 		{return reinterpret_cast<const WareInstance *>(m_carried_item.get(game));}
 		void set_carried_item(Game* g, WareInstance* item);

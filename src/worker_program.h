@@ -49,7 +49,7 @@ class WorkerProgram : public BobProgramBase
 		int get_size() const {return m_actions.size();}
 		const Worker::Action* get_action(int idx) const {
 			assert(idx >= 0);
-			assert(static_cast<const uint>(idx) < m_actions.size());
+			assert(static_cast<uint>(idx) < m_actions.size());
 			return &m_actions[idx];
 		}
 

@@ -305,7 +305,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (Game * const game = dynamic_cast<Game * const>(g)) {
+	if (Game * const game = dynamic_cast<Game *>(g)) {
 		// Request worker
 		if (!m_workers.size()) {
 			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();
@@ -605,7 +605,7 @@ void ProductionSite::program_act(Game* g)
 					{
 						WaresQueue* wq = m_input_queues[i];
 						if
-							(static_cast<const int>(wq->get_filled())
+							(static_cast<int>(wq->get_filled())
 								>=
 								action->iparam1)
 						{
@@ -654,7 +654,7 @@ void ProductionSite::program_act(Game* g)
 					{
 						WaresQueue* wq = m_input_queues[i];
 						if
-							(static_cast<const int>(wq->get_filled())
+							(static_cast<int>(wq->get_filled())
 								>=
 								action->iparam1)
 						{
@@ -799,7 +799,7 @@ void ProductionSite::program_act(Game* g)
 				if
 					(g->logic_rand() % 100
 					 >=
-					 static_cast<const uint>(action->iparam3))
+					 static_cast<uint>(action->iparam3))
 				{
 					// Not successfull
 					molog("  Not successful this time in fallback programm\n");
@@ -854,25 +854,25 @@ void ProductionSite::program_act(Game* g)
 					if
 						((*it)->get_hp_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "attack") {
 					if
 						((*it)->get_attack_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "defense") {
 					if
 						((*it)->get_defense_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "evade") {
 					if
 						((*it)->get_evade_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				}
 			}
@@ -905,25 +905,25 @@ void ProductionSite::program_act(Game* g)
 					if
 						((*it)->get_hp_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "attack") {
 					if
 						((*it)->get_attack_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "defense") {
 					if
 						((*it)->get_defense_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "evade") {
 					if
 						((*it)->get_evade_level()
 							==
-							static_cast<const uint>(action->iparam1))
+							static_cast<uint>(action->iparam1))
 						break;
 				}
 			}

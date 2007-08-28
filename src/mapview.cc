@@ -94,7 +94,7 @@ void Map_View::draw(RenderTarget* dst)
 	egbase.map().overlay_manager().load_graphics();
 	if
 		(const Interactive_Player * const interactive_player =
-		 dynamic_cast<const Interactive_Player * const>(&intbase()))
+		 dynamic_cast<const Interactive_Player *>(&intbase()))
 		dst->rendermap
 		(egbase,
 		 interactive_player->player(),

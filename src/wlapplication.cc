@@ -595,7 +595,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 				cb->key
 				(ev.type == SDL_KEYDOWN,
 				 ev.key.keysym.sym,
-				 static_cast<const char>(c));
+				 static_cast<char>(c));
 			}
 			break;
 		case SDL_MOUSEBUTTONDOWN:

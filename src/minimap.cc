@@ -93,8 +93,8 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int x, int y) {
 
 	m_iabase.egbase().map().normalize_coords(&c);
 
-	assert(dynamic_cast<const MiniMap * const>(get_parent()));
-	static_cast<const MiniMap * const>(get_parent())->warpview.call
+	assert(dynamic_cast<const MiniMap *>(get_parent()));
+	static_cast<const MiniMap *>(get_parent())->warpview.call
 		(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;

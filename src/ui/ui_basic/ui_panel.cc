@@ -350,9 +350,9 @@ void Panel::draw_overlay(RenderTarget &) {}
 void Panel::update(int x, int y, int w, int h)
 {
 	if
-		(x >= static_cast<const int>(_w) or x + w <= 0
+		(x >= static_cast<int>(_w) or x + w <= 0
 		 or
-		 y >= static_cast<const int>(_h) or y + h <= 0)
+		 y >= static_cast<int>(_h) or y + h <= 0)
 		return;
 
 	_needdraw = true;
@@ -693,9 +693,9 @@ inline Panel * Panel::child_at_mouse_cursor(int x, int y, Panel * child) {
 		if (!child->get_handle_mouse() || !child->get_visible())
 			continue;
 		if
-			(x < child->_x + static_cast<const int>(child->_w) and x >= child->_x
+			(x < child->_x + static_cast<int>(child->_w) and x >= child->_x
 			 and
-			 y < child->_y + static_cast<const int>(child->_h) and y >= child->_y)
+			 y < child->_y + static_cast<int>(child->_h) and y >= child->_y)
 			break;
 	}
 
@@ -805,9 +805,9 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 	}
 
 	if
-		(*x >= 0 and *x < static_cast<const int>(mousein->_w)
+		(*x >= 0 and *x < static_cast<int>(mousein->_w)
 		 and
-		 *y >= 0 and *y < static_cast<const int>(mousein->_h))
+		 *y >= 0 and *y < static_cast<int>(mousein->_h))
 		rcv = mousein;
 	else
 		mousein = 0;

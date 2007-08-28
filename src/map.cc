@@ -43,7 +43,7 @@
  * Callback function for font renderer.
  */
 std::string g_MapVariableCallback(std::string str, void* data) {
-	if (const Map * const map = static_cast<const Map * const>(data))
+	if (const Map * const map = static_cast<const Map *>(data))
 		if
 			(const MapVariable * const var =
 			 map->get_mvm().get_variable(str.c_str()))
@@ -1108,7 +1108,7 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
       caps |= BUILDCAPS_FLAG;
 	}
 end:
-	f.field->caps = static_cast<const FieldCaps>(caps);
+	f.field->caps = static_cast<FieldCaps>(caps);
 }
 
 
@@ -1282,7 +1282,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	{
 		// 4b) Check the mountain slope
 		if
-			(static_cast<const int>(br.field->get_height()) - f.field->get_height()
+			(static_cast<int>(br.field->get_height()) - f.field->get_height()
 			 <
 			 4)
 			caps |= BUILDCAPS_MINE;
@@ -1334,7 +1334,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 		}
 	}
 end: //  9) That's it, store the collected information.
-	f.field->caps = static_cast<const FieldCaps>(caps);
+	f.field->caps = static_cast<FieldCaps>(caps);
 }
 
 
@@ -1349,14 +1349,14 @@ uint Map::calc_distance(const Coords a, const Coords b) const
 
 	// do we fly up or down?
 	dy = b.y - a.y;
-	if (dy > static_cast<const int>(m_height >> 1)) //  wrap-around!
+	if (dy > static_cast<int>(m_height >> 1)) //  wrap-around!
 		dy -= m_height;
-	else if (dy < -static_cast<const int>(m_height >> 1))
+	else if (dy < -static_cast<int>(m_height >> 1))
 		dy += m_height;
 
 	dist = abs(dy);
 
-	if (static_cast<const X_Coordinate>(dist) >= m_width) // no need to worry about x movement at all
+	if (static_cast<X_Coordinate>(dist) >= m_width) // no need to worry about x movement at all
 		return dist;
 
 	// [lx..rx] is the x-range we can cover simply by walking vertically
@@ -1372,7 +1372,7 @@ uint Map::calc_distance(const Coords a, const Coords b) const
 	// Yes, the second is an else if; see the above if (dist >= m_width)
 	if (lx < 0)
 		lx += m_width;
-	else if (rx >= static_cast<const int>(m_width))
+	else if (rx >= static_cast<int>(m_width))
 		rx -= m_width;
 
 	// Normal, non-wrapping case
@@ -1419,9 +1419,9 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 
 	dy = end.y - start.y;
 	dx = end.x - start.x;
-	if (dx > static_cast<const int>(m_width >> 1))
+	if (dx > static_cast<int>(m_width >> 1))
 		dx -= m_width;
-	else if (dx < -static_cast<const int>(m_width >> 1))
+	else if (dx < -static_cast<int>(m_width >> 1))
 		dx += m_width;
 
 	// end and start are on the same row
@@ -1434,9 +1434,9 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		}
 	}
 
-	if (dy > static_cast<const int>(m_height >> 1))
+	if (dy > static_cast<int>(m_height >> 1))
 		dy -= m_height;
-	else if (dy < -static_cast<const int>(m_height >> 1))
+	else if (dy < -static_cast<int>(m_height >> 1))
 		dy += m_height;
 
 	// end is one row below start
@@ -1511,7 +1511,7 @@ static inline float calc_cost_d(int slope)
 
 int Map::calc_cost(int slope) const
 {
-	return static_cast<const int>
+	return static_cast<int>
 		(BASE_COST_PER_FIELD * (CALC_COST_BASE + calc_cost_d(slope)));
 }
 
@@ -1785,7 +1785,7 @@ public:
 	{
 		unsigned l = node*2 + 1;
 		unsigned r = node*2 + 2;
-		if (m_data[node]->heap_index != static_cast<const int>(node)) {
+		if (m_data[node]->heap_index != static_cast<int>(node)) {
 			fprintf(stderr, "%s: heap_index integrity!\n", str);
 			exit(-1);
 		}
@@ -2072,12 +2072,12 @@ uint Map::change_height(Area<FCoords> area, const Sint16 difference) {
 			    and
 				 mr.location().field->height
 				 <
-				 static_cast<const Uint8>(-difference))
+				 static_cast<Uint8>(-difference))
 				mr.location().field->height = 0;
 			else if
-				(static_cast<const Sint16>(MAX_FIELD_HEIGHT) - difference
+				(static_cast<Sint16>(MAX_FIELD_HEIGHT) - difference
 				 <
-				 static_cast<const Sint16>(mr.location().field->height))
+				 static_cast<Sint16>(mr.location().field->height))
 				mr.location().field->height = MAX_FIELD_HEIGHT;
 			else  mr.location().field->height += difference;
 		} while (mr.advance(*this));

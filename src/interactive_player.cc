@@ -58,7 +58,7 @@ int Int_Player_overlay_callback_function
 (const TCoords<FCoords> c, void* data, int)
 {
 	return
-		static_cast<const Interactive_Player * const>(data)->get_player()->
+		static_cast<const Interactive_Player *>(data)->get_player()->
 		get_buildcaps(c);
 }
 

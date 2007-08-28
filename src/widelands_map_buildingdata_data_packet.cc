@@ -114,23 +114,23 @@ throw (_wexception)
 
 			if
 				(ConstructionSite * const constructionsite =
-				 dynamic_cast<ConstructionSite * const>(building))
+				 dynamic_cast<ConstructionSite *>(building))
 				read_constructionsite(*constructionsite, fr, egbase, ol);
 			else if
 				(Warehouse * const warehouse =
-				 dynamic_cast<Warehouse * const>(building))
+				 dynamic_cast<Warehouse *>(building))
 				read_warehouse(*warehouse, fr, egbase, ol);
 			else if
 				(ProductionSite * const productionsite =
-				 dynamic_cast<ProductionSite * const>(building))
+				 dynamic_cast<ProductionSite *>(building))
 			{
 				if
 					(MilitarySite * const militarysite =
-					 dynamic_cast<MilitarySite * const>(productionsite))
+					 dynamic_cast<MilitarySite *>(productionsite))
 					read_militarysite(*militarysite, fr, egbase, ol);
 				else if
 					(TrainingSite * const trainingsite =
-					 dynamic_cast<TrainingSite * const>(productionsite))
+					 dynamic_cast<TrainingSite *>(productionsite))
 					read_trainingsite(*trainingsite, fr, egbase, ol);
 				else read_productionsite(*productionsite, fr, egbase, ol);
 			} else {
@@ -190,7 +190,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
       uint size=fr.Unsigned16();
       assert(constructionsite.m_wares.size()>=size);
       for (uint i=size; i<constructionsite.m_wares.size(); i++) {
-			if (dynamic_cast<Game * const>(egbase))
+			if (dynamic_cast<Game *>(egbase))
 				constructionsite.m_wares[i]->cleanup();
          delete constructionsite.m_wares[i];
 		}
@@ -507,7 +507,7 @@ throw (_wexception)
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		const Building * const building =
-			dynamic_cast<const Building * const>(map[i].get_immovable());
+			dynamic_cast<const Building *>(map[i].get_immovable());
 
 		if (building) {
             assert(os->is_object_known(building));
@@ -546,23 +546,23 @@ throw (_wexception)
 
 			if
 				(const ConstructionSite * const constructionsite =
-				 dynamic_cast<const ConstructionSite * const>(building))
+				 dynamic_cast<const ConstructionSite *>(building))
 				write_constructionsite(*constructionsite, fw, egbase, os);
 			else if
 				(const Warehouse * const warehouse =
-				 dynamic_cast<const Warehouse * const>(building))
+				 dynamic_cast<const Warehouse *>(building))
 				write_warehouse(*warehouse, fw, egbase, os);
 			else if
 				(const ProductionSite * const productionsite =
-				 dynamic_cast<const ProductionSite * const>(building))
+				 dynamic_cast<const ProductionSite *>(building))
 			{
 				if
 					(const MilitarySite * const militarysite =
-					 dynamic_cast<const MilitarySite * const>(productionsite))
+					 dynamic_cast<const MilitarySite *>(productionsite))
 						write_militarysite(*militarysite, fw, egbase, os);
 				else if
 					(const TrainingSite * const trainingsite =
-					 dynamic_cast<const TrainingSite * const>(productionsite))
+					 dynamic_cast<const TrainingSite *>(productionsite))
 					write_trainingsite(*trainingsite, fw, egbase, os);
 				else write_productionsite(*productionsite, fw, egbase, os);
 			} else {
@@ -680,7 +680,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 		workermap.insert
 			(std::pair<uint, const Worker *>
 			 (os->get_object_file_index(it->get(egbase)),
-			  static_cast<const Worker * const>(it->get(egbase))));
+			  static_cast<const Worker *>(it->get(egbase))));
 	}
 
 	for

@@ -54,7 +54,7 @@ m_pit                   (pit)
 	const uint bobs_in_row =
 		std::max
 		(std::min
-		 (static_cast<const uint>(ceil(sqrt(static_cast<const float>(nr_bobs)))),
+		 (static_cast<uint>(ceil(sqrt(static_cast<const float>(nr_bobs)))),
 		  24U),
 		 12U);
 

@@ -224,7 +224,7 @@ void BulldozeConfirm::bulldoze()
 	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
-		if (Game * const game = dynamic_cast<Game * const>(egbase)) {
+		if (Game * const game = dynamic_cast<Game *>(egbase)) {
 			game->send_player_bulldoze (todestroy);
          m_iabase->need_complete_redraw();
 		} else {// Editor
@@ -559,7 +559,7 @@ Add to registry
 Building_Window::~Building_Window()
 {
 	if (not m_workarea_job_id.isNull())
-		static_cast<Interactive_Player * const>(get_parent())
+		static_cast<Interactive_Player *>(get_parent())
 		->egbase().map().overlay_manager().remove_overlay(m_workarea_job_id);
 	*m_registry = 0;
 }
@@ -813,7 +813,7 @@ void Building_Window::act_debug()
 
 void Building_Window::toggle_workarea() {
 	Map & map =
-		static_cast<Interactive_Player * const>(get_parent())->egbase().map();
+		static_cast<Interactive_Player *>(get_parent())->egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id.isNull()) {
 		m_workarea_job_id = overlay_manager.get_a_job_id();
@@ -1196,9 +1196,9 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 	const BaseImmovable * const base_immovable =
 		m_parent->egbase().map()[m_ps_location].get_immovable();
 	if
-		(not dynamic_cast<const Building * const>(base_immovable)
+		(not dynamic_cast<const Building *>(base_immovable)
 		 or
-		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
       // The Productionsite has been removed. Die quickly.
       die();
@@ -1637,9 +1637,9 @@ void MilitarySite_Window::think()
 	const BaseImmovable * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
 	if
-		(not dynamic_cast<const Building * const>(base_immovable)
+		(not dynamic_cast<const Building *>(base_immovable)
 		 or
-		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
       // The Site has been removed. Die quickly.
       die();
@@ -1887,9 +1887,9 @@ void TrainingSite_Options_Window::think()
 	const BaseImmovable * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
 	if
-		(not dynamic_cast<const Building * const>(base_immovable)
+		(not dynamic_cast<const Building *>(base_immovable)
 		 or
-		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
 		die();
@@ -2097,9 +2097,9 @@ void TrainingSite_Window::think()
 	const BaseImmovable * const base_immovable =
 		m_parent->egbase().map()[m_ms_location].get_immovable();
 	if
-		(not dynamic_cast<const Building * const>(base_immovable)
+		(not dynamic_cast<const Building *>(base_immovable)
 		 or
-		 dynamic_cast<const ConstructionSite * const>(base_immovable))
+		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
 		die();

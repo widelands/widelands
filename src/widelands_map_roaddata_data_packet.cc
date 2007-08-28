@@ -122,7 +122,7 @@ throw (_wexception)
 
          bool request_exists=fr.Unsigned8();
          if (request_exists) {
-            if (dynamic_cast<const Game * const>(egbase)) {
+            if (dynamic_cast<const Game *>(egbase)) {
                r->m_carrier_request = new Request(r, 0,
                      &Road::request_carrier_callback, r, Request::WORKER);
                r->m_carrier_request->Read(&fr, egbase, ol);

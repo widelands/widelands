@@ -65,7 +65,7 @@ template<typename T> static void render_top_triangle
 	const int h = dst.get_h();
 
 	texpixels = tex.get_curpixels();
-	texcolormap = static_cast<T * const>(tex.get_colormap());
+	texcolormap = static_cast<T *>(tex.get_colormap());
 
 	y1 = p1.y;
 
@@ -102,8 +102,8 @@ template<typename T> static void render_top_triangle
 			count=ix2-ix1;
 
 			T * scanline =
-				reinterpret_cast<T * const>
-				(static_cast<Uint8 * const>(dst.get_pixels())
+				reinterpret_cast<T *>
+				(static_cast<Uint8 *>(dst.get_pixels())
 				 +
 				 y * dst.get_pitch())
 				+
@@ -152,7 +152,7 @@ template<typename T> static void render_bottom_triangle
 	const int h = dst.get_h();
 
 	texpixels = tex.get_curpixels();
-	texcolormap = static_cast<T * const>(tex.get_colormap());
+	texcolormap = static_cast<T *>(tex.get_colormap());
 
 	y2 = p3.y;
 
@@ -193,8 +193,8 @@ template<typename T> static void render_bottom_triangle
 			count=ix2-ix1;
 
 			T * scanline =
-				reinterpret_cast<T * const>
-				(static_cast<Uint8 * const>(dst.get_pixels())
+				reinterpret_cast<T *>
+				(static_cast<Uint8 *>(dst.get_pixels())
 				 +
 				 y * dst.get_pitch())
 				+
@@ -286,9 +286,9 @@ template<typename T> static void dither_edge_horiz
 	T *tcolormap, *bcolormap;
 
 	tpixels = ttex.get_curpixels();
-	tcolormap = static_cast<T * const>(ttex.get_colormap());
+	tcolormap = static_cast<T *>(ttex.get_colormap());
 	bpixels = btex.get_curpixels();
-	bcolormap = static_cast<T * const>(btex.get_colormap());
+	bcolormap = static_cast<T *>(btex.get_colormap());
 
 	int tx, ty, b, dtx, dty, db, tx0, ty0;
 
@@ -364,9 +364,9 @@ template<typename T> static void dither_edge_vert
 	T* lcolormap, *rcolormap;
 
 	lpixels = ltex.get_curpixels();
-	lcolormap = static_cast<T * const>(ltex.get_colormap());
+	lcolormap = static_cast<T *>(ltex.get_colormap());
 	rpixels = rtex.get_curpixels();
-	rcolormap = static_cast<T * const>(rtex.get_colormap());
+	rcolormap = static_cast<T *>(rtex.get_colormap());
 
 	int tx, ty, b, dtx, dty, db, tx0, ty0;
 
@@ -400,8 +400,8 @@ template<typename T> static void dither_edge_vert
 			// dither on left side
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
-					T * const pix = reinterpret_cast<T * const>
-						(static_cast<Uint8 * const>(dst.get_pixels())
+					T * const pix = reinterpret_cast<T *>
+						(static_cast<Uint8 *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						+
@@ -418,8 +418,8 @@ template<typename T> static void dither_edge_vert
 			// dither on right side
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
-					T * const pix = reinterpret_cast<T * const>
-						(static_cast<Uint8 * const>(dst.get_pixels())
+					T * const pix = reinterpret_cast<T *>
+						(static_cast<Uint8 *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						+
@@ -456,13 +456,13 @@ template<typename T> static void render_road_horiz
 		int y = (centery >> 16) - 2;
 
 		for (int i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
-			*(reinterpret_cast<T * const>
-			  (static_cast<uchar * const>(dst.get_pixels()) + y * dst.get_pitch())
+			*(reinterpret_cast<T *>
+			  (static_cast<uchar *>(dst.get_pixels()) + y * dst.get_pitch())
 			  +
 			  x)
 			=
-			*(reinterpret_cast<const T * const>
-			  (static_cast<const uchar * const>(src.get_pixels())
+			*(reinterpret_cast<const T *>
+			  (static_cast<const uchar *>(src.get_pixels())
 			   +
 			   i * src.get_pitch())
 			  +
@@ -486,13 +486,13 @@ template<typename T> static void render_road_vert
 		int x = (centerx >> 16) - 2;
 
 		for (int i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
-			*(reinterpret_cast<T * const>
-			  (static_cast<uchar * const>(dst.get_pixels()) +  y * dst.get_pitch())
+			*(reinterpret_cast<T *>
+			  (static_cast<uchar *>(dst.get_pixels()) +  y * dst.get_pitch())
 			  +
 			  x)
 			=
-			*(reinterpret_cast<const T * const>
-			  (static_cast<const uchar * const>(src.get_pixels())
+			*(reinterpret_cast<const T *>
+			  (static_cast<const uchar *>(src.get_pixels())
 			   +
 			   sy * src.get_pitch())
 			  +

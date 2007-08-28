@@ -151,7 +151,7 @@ void MilitarySite::init(Editor_Game_Base* g)
 {
    ProductionSite::init(g);
 
-	if (Game * const game = dynamic_cast<Game * const>(g)) {
+	if (Game * const game = dynamic_cast<Game *>(g)) {
       // Request soldiers
 		call_soldiers();
 
@@ -411,7 +411,7 @@ void MilitarySite::drop_soldier (uint serial)
 {
 molog ("**Dropping soldier (%d)\n", serial);
 
-	if (Game * const game = dynamic_cast<Game * const>(&owner().egbase()))
+	if (Game * const game = dynamic_cast<Game *>(&owner().egbase()))
 		if (m_soldiers.size()) {
       int i = 0;
       Soldier* s = m_soldiers[i];
@@ -547,7 +547,7 @@ MilitarySite* MilitarySite::conquered_by (Game* g, Player* winner) {
    //NOT WORKING IMPLEMENTATION FOR CREATING A COMPLETLY NEW BUILDING
    cleanup(g);
    get_base_flag()->schedule_destroy(g);
-	return static_cast<MilitarySite * const>
+	return static_cast<MilitarySite *>
 		(static_cast<const MilitarySite_Descr &>(*m_descr)
 		 .create(*g, *winner, m_position, false));
 

@@ -71,7 +71,7 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
    std::string str = id;
 	if        (str == "time") {
 		Trigger_Time_Option_Menu t
-			(m_parent, static_cast<Trigger_Time * const>(trig));
+			(m_parent, static_cast<Trigger_Time *>(trig));
 		retval = t.run();
 	} else if (str == "null") {
 		Trigger_Null_Option_Menu t(m_parent, static_cast<Trigger_Null*>(trig));

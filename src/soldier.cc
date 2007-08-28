@@ -465,7 +465,7 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_max_attack=descr().get_max_attack();
 	m_defense=descr().get_defense();
 	m_evade=descr().get_evade();
-	if (Game * const game = dynamic_cast<Game * const>(gg)) {
+	if (Game * const game = dynamic_cast<Game *>(gg)) {
 		const uint min_hp = descr().get_min_hp();
 		assert(min_hp);
 		assert(min_hp <= descr().get_max_hp());
@@ -628,7 +628,7 @@ void Soldier::draw
 void Soldier::start_animation
 (Editor_Game_Base* gg, const char * const animname, const uint time)
 {
-	if (Game * const game = dynamic_cast<Game * const>(gg))
+	if (Game * const game = dynamic_cast<Game *>(gg))
 		start_task_idle (game, descr().get_rand_anim(animname), time);
 }
 

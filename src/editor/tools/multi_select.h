@@ -40,7 +40,7 @@ class MultiSelect {
       ~MultiSelect() {}
 
       void enable(int n, bool t) {
-		if (static_cast<const int>(m_enabled.size()) < n + 1)
+		if (static_cast<int>(m_enabled.size()) < n + 1)
             m_enabled.resize(n+1, false);
 
          if (m_enabled[n]==t) return;
@@ -50,13 +50,13 @@ class MultiSelect {
          assert(m_nr_enabled>=0);
 		}
       inline bool is_enabled(int n) {
-		if (static_cast<const int>(m_enabled.size()) < n + 1) return false;
+		if (static_cast<int>(m_enabled.size()) < n + 1) return false;
          return m_enabled[n];
 		}
       inline int get_nr_enabled() {return m_nr_enabled;}
 	int get_random_enabled() {
-		const int rand_value = static_cast<const int>
-			(static_cast<const double>(get_nr_enabled())
+		const int rand_value = static_cast<int>
+			(static_cast<double>(get_nr_enabled())
 			 *
 			 rand() / (RAND_MAX + 1.0));
          int i=0;

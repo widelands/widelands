@@ -66,7 +66,7 @@ throw (_wexception)
    char buf[256];
    if (packet_version==CURRENT_PACKET_VERSION) {
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
-      if (dynamic_cast<Game * const>(egbase)) {
+      if (dynamic_cast<Game *>(egbase)) {
          int i=0;
          for (i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
             Player* plr=egbase->get_player(i);

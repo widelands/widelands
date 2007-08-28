@@ -214,7 +214,7 @@ throw (_wexception) {
 		//write involved military sites
 		fw.Unsigned32(ctrl->involvedMilitarySites.size());
 		for (std::set<Object_Ptr>::iterator it=ctrl->involvedMilitarySites.begin();it!=ctrl->involvedMilitarySites.end();it++) {
-			MilitarySite* ms = static_cast<MilitarySite *const>(static_cast<Object_Ptr>(*it).get(egbase));
+			MilitarySite* ms = static_cast<MilitarySite *>(static_cast<Object_Ptr>(*it).get(egbase));
 			assert(os->is_object_known(ms));
 			fw.Unsigned32(os->get_object_file_index(ms));
 		}

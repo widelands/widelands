@@ -269,7 +269,7 @@ Building * Building_Descr::create_constructionsite
 	    (m_tribe.get_building_index("constructionsite")))
 	{
 
-		ConstructionSite & csite = *static_cast<ConstructionSite * const>
+		ConstructionSite & csite = *static_cast<ConstructionSite *>
 			(descr->create_object());
 		csite.set_building(*this);
 		if (old) csite.set_previous_building(old);

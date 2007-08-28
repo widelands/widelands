@@ -153,7 +153,7 @@ FieldCaps Player::get_buildcaps(const FCoords fc) const {
 			buildcaps &= ~BUILDCAPS_SMALL;
 	}
 
-	return static_cast<const FieldCaps>(buildcaps);
+	return static_cast<FieldCaps>(buildcaps);
 }
 
 
@@ -386,7 +386,7 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag* flag, int action)
 {
-	if (Game * const game = dynamic_cast<Game * const>(&egbase()))
+	if (Game * const game = dynamic_cast<Game *>(&egbase()))
 		if (flag->get_owner() == this) {// Additional security check.
 		switch (action) {
 		case FLAGACTION_GEOLOGIST:
@@ -531,7 +531,7 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 	if (attacker != get_player_number())
 		throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
 
-	if (Game * const game = dynamic_cast<Game * const>(&egbase())) {
+	if (Game * const game = dynamic_cast<Game *>(&egbase())) {
 		assert (num >= 0);
 
 		log("++Player::EnemyFlagAction()\n");
@@ -583,7 +583,7 @@ throw ()
 				if (map_object_descr == &g_road_descr) map_object_descr = 0;
 				else if
 					(const Building * const building =
-					 dynamic_cast<const Building * const>(base_immovable))
+					 dynamic_cast<const Building *>(base_immovable))
 					if (building->get_position() != f)
 						//  TODO This is not the buildidng's main position so we can
 						//  TODO not see it. But it should be possible to see it from
@@ -702,10 +702,10 @@ const std::vector<uint> * Player::get_ware_production_statistics
 void Player::gain_immovable(PlayerImmovable* imm) {
 	if
 	(const Building * const building =
-		dynamic_cast<const Building * const>(imm))
+		dynamic_cast<const Building *>(imm))
 	{
 		const ConstructionSite * const constructionsite =
-				dynamic_cast<const ConstructionSite * const>(building);
+				dynamic_cast<const ConstructionSite *>(building);
 		const std::string & building_name = constructionsite ?
 				constructionsite->building().name() : building->name();
 
@@ -732,10 +732,10 @@ void Player::lose_immovable(PlayerImmovable* imm)
 {
 	if
 	(const Building * const building =
-		dynamic_cast<const Building * const>(imm))
+		dynamic_cast<const Building *>(imm))
 	{
 		const ConstructionSite * const constructionsite =
-				dynamic_cast<const ConstructionSite * const>(building);
+				dynamic_cast<const ConstructionSite *>(building);
 		const std::string & building_name = constructionsite ?
 				constructionsite->building().name() : building->name();
 

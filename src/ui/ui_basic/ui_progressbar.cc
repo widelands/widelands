@@ -74,7 +74,7 @@ void Progress_Bar::draw(RenderTarget* dst)
 	assert(0 < get_h());
 	assert(m_total);
 	const float fraction =
-		m_state < m_total ? static_cast<const float>(m_state) / m_total : 1.0;
+		m_state < m_total ? static_cast<float>(m_state) / m_total : 1.0;
 	assert(0 <= fraction);
 	assert     (fraction <= 1);
 
@@ -86,8 +86,8 @@ void Progress_Bar::draw(RenderTarget* dst)
 	// Draw the actual bar
 	if (m_orientation == Horizontal)
 	{
-		const uint w = static_cast<const uint>(get_w() * fraction);
-		assert(w <= static_cast<const uint>(get_w()));
+		const uint w = static_cast<uint>(get_w() * fraction);
+		assert(w <= static_cast<uint>(get_w()));
 
 		dst->fill_rect(Rect(Point(0, 0), w, get_h()), color);
 		dst->fill_rect
@@ -95,7 +95,7 @@ void Progress_Bar::draw(RenderTarget* dst)
 	}
 	else
 	{
-		const uint h = static_cast<const uint>(get_h() * (1.0 - fraction));
+		const uint h = static_cast<uint>(get_h() * (1.0 - fraction));
 
 		dst->fill_rect(Rect(Point(0, 0), get_w(), h), RGBColor(0, 0, 0));
 		dst->fill_rect(Rect(Point(0, h), get_w(), get_h() - h), color);
@@ -105,7 +105,7 @@ void Progress_Bar::draw(RenderTarget* dst)
 	char buffer[30];
 
 	snprintf
-		(buffer, sizeof(buffer), "%u%%", static_cast<const uint>(fraction * 100));
+		(buffer, sizeof(buffer), "%u%%", static_cast<uint>(fraction * 100));
 
 	g_fh->draw_string
 		(*dst,

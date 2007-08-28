@@ -94,7 +94,7 @@ void Trigger_Building::check_set_conditions(Game* game) {
 	uint count = 0;
 	MapRegion<Area<FCoords> > mr (map, m_player_area);
 	do if
-		(const Building * const building = dynamic_cast<const Building * const>
+		(const Building * const building = dynamic_cast<const Building *>
 		 (mr.location().field->get_immovable()))
 		if
 			(building->owner().get_player_number() == m_player_area.player_number

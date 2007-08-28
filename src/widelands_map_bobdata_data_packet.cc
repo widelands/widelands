@@ -289,7 +289,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
    int version=fr->Unsigned16();
 
    if (version==WORKER_BOB_PACKET_VERSION) {
-		if (Soldier * const soldier = dynamic_cast<Soldier * const>(worker)) {
+		if (Soldier * const soldier = dynamic_cast<Soldier *>(worker)) {
 			const Uint16 soldier_worker_bob_packet_version = fr->Unsigned16();
 			if
 				(2 <= soldier_worker_bob_packet_version
@@ -337,7 +337,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 					 worker, worker->get_serial(),
 					 soldier_worker_bob_packet_version);
 		} else if
-			(Carrier * const carrier = dynamic_cast<Carrier * const>(worker))
+			(Carrier * const carrier = dynamic_cast<Carrier *>(worker))
 		{
 			const Uint16 carrier_worker_bob_packet_version = fr->Unsigned16();
 			if

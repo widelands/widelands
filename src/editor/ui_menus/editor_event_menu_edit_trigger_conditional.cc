@@ -212,7 +212,7 @@ m_event_chain(chain)
 	      assert(t.token <= TriggerConditional_Factory::TRIGGER);
 			m_construction->add
 		      (t.token == TriggerConditional_Factory::TRIGGER ?
-		       static_cast<Trigger * const>(t.data)->get_name()
+		       static_cast<Trigger *>(t.data)->get_name()
 		       :
 		       TriggerConditional_Factory::operators[t.token],
 		       t,

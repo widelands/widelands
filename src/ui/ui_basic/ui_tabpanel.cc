@@ -164,7 +164,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
-		if (m_highlight == static_cast<const int>(idx))
+		if (m_highlight == static_cast<int>(idx))
 			dst->brighten_rect
 				(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
 				 MOUSE_OVER_BRIGHT_FACTOR);

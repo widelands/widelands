@@ -250,17 +250,17 @@ template <typename Entry>
 		 const bool select_this = false)
 	{
 		return
-			Base::add(const_cast<Entry * const>(entry), picid, select_this);
+			Base::add(const_cast<Entry *>(entry), picid, select_this);
 	}
 
 	const Entry * operator[](const uint i) const throw ()
-	{return static_cast<const Entry * const>(Base::operator[](i));}
+	{return static_cast<const Entry *>(Base::operator[](i));}
 
 	static const Entry * const get(const Entry_Record & er)
-	{return static_cast<const Entry * const>(er.entry());}
+	{return static_cast<const Entry *>(er.entry());}
 
 	const Entry * const get_selected() const
-	{return static_cast<const Entry * const>(Base::get_selected());}
+	{return static_cast<const Entry *>(Base::get_selected());}
 };
 
 template <typename Entry> struct Table<Entry * const> : public Table<void *> {
@@ -280,13 +280,13 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 	{return Base::add(entry, picid, select_this);}
 
 	Entry * operator[](const uint i) const throw ()
-	{return static_cast<Entry * const>(Base::operator[](i));}
+	{return static_cast<Entry *>(Base::operator[](i));}
 
 	static Entry * const get(const Entry_Record & er)
-	{return static_cast<Entry * const>(er.entry());}
+	{return static_cast<Entry *>(er.entry());}
 
 	Entry * const get_selected() const
-	{return static_cast<Entry * const>(Base::get_selected());}
+	{return static_cast<Entry *>(Base::get_selected());}
 };
 
 template <typename Entry> struct Table<const Entry &> : public Table<void *> {
@@ -306,16 +306,16 @@ template <typename Entry> struct Table<const Entry &> : public Table<void *> {
 	{return Base::add(&const_cast<Entry &>(entry), picid, select_this);}
 
 	const Entry & operator[](const uint i) const throw ()
-	{return *static_cast<const Entry * const>(Base::operator[](i));}
+	{return *static_cast<const Entry *>(Base::operator[](i));}
 
 	static const Entry & get(const Entry_Record & er)
-	{return *static_cast<const Entry * const>(er.entry());}
+	{return *static_cast<const Entry *>(er.entry());}
 
 	Entry_Record * find(const Entry & entry) const throw ()
 	{return Base::find(&entry);}
 
 	const Entry & get_selected() const
-	{return *static_cast<const Entry * const>(Base::get_selected());}
+	{return *static_cast<const Entry *>(Base::get_selected());}
 };
 
 template <typename Entry> struct Table<Entry &> : public Table<void *> {
@@ -335,16 +335,16 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 	{return Base::add(&entry, picid, select_this);}
 
 	Entry & operator[](const uint i) const throw ()
-	{return *static_cast<Entry * const>(Base::operator[](i));}
+	{return *static_cast<Entry *>(Base::operator[](i));}
 
 	static Entry & get(const Entry_Record & er)
-	{return *static_cast<Entry * const>(er.entry());}
+	{return *static_cast<Entry *>(er.entry());}
 
 	Entry_Record * find(Entry & entry) const throw ()
 	{return Base::find(&entry);}
 
 	Entry & get_selected() const
-	{return *static_cast<Entry * const>(Base::get_selected());}
+	{return *static_cast<Entry *>(Base::get_selected());}
 };
 
 compile_assert(sizeof(void *) == sizeof(uintptr_t));
@@ -364,19 +364,19 @@ template <> struct Table<uintptr_t> : public Table<void *> {
 		 const bool select_this = false)
 	{
 		return Base::add
-			(reinterpret_cast<void * const>(entry), picid, select_this);
+			(reinterpret_cast<void *>(entry), picid, select_this);
 	}
 
 	uintptr_t operator[](const uint i) const throw ()
-	{return reinterpret_cast<const uintptr_t>(Base::operator[](i));}
+	{return reinterpret_cast<uintptr_t>(Base::operator[](i));}
 	static uintptr_t get(const Entry_Record & er)
-	{return reinterpret_cast<const uintptr_t>(er.entry());}
+	{return reinterpret_cast<uintptr_t>(er.entry());}
 
 	Entry_Record * find(const uintptr_t entry) const throw ()
-	{return Base::find(reinterpret_cast<const void * const>(entry));}
+	{return Base::find(reinterpret_cast<const void *>(entry));}
 
 	uintptr_t get_selected() const
-	{return reinterpret_cast<const uintptr_t>(Base::get_selected());}
+	{return reinterpret_cast<uintptr_t>(Base::get_selected());}
 };
 template <> struct Table<const uintptr_t> : public Table<uintptr_t> {
 	typedef Table<uintptr_t> Base;

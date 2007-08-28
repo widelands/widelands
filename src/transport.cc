@@ -228,7 +228,7 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 		delete m_supply;
 		m_supply = 0;
 
-	if (Game * const game = dynamic_cast<Game * const>(g)) {
+	if (Game * const game = dynamic_cast<Game *>(g)) {
 		cancel_moving();
 		set_location(game, 0);
 	}
@@ -822,7 +822,7 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 		m_item_filled--;
 		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
 
-		if (Game * const game = dynamic_cast<Game * const>(g))
+		if (Game * const game = dynamic_cast<Game *>(g))
 			wake_up_capacity_queue(game);
 
 		return;
@@ -1261,9 +1261,9 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	// Mark Fields
 	mark_map(gg);
 
-	if (Game * const game = dynamic_cast<Game * const>(gg)) {
+	if (Game * const game = dynamic_cast<Game *>(gg)) {
 		Carrier * const carrier =
-			static_cast<Carrier * const>(m_carrier.get(game));
+			static_cast<Carrier *>(m_carrier.get(game));
       m_desire_carriers = 1;
 		if (not carrier) {if (not m_carrier_request) request_carrier(game);}
 		else {
@@ -1352,12 +1352,12 @@ void Road::request_carrier_callback
 void Road::remove_worker(Worker *w)
 {
 	Editor_Game_Base & egbase = owner().egbase();
-	Carrier* carrier = dynamic_cast<Carrier * const>(m_carrier.get(&egbase));
+	Carrier* carrier = dynamic_cast<Carrier *>(m_carrier.get(&egbase));
 
 	if (carrier == w)
 		m_carrier = carrier = 0;
 
-	Game * const game = dynamic_cast<Game * const>(&egbase);
+	Game * const game = dynamic_cast<Game *>(&egbase);
 	if (not carrier and not m_carrier_request and m_desire_carriers and game)
 		request_carrier(game);
 
@@ -1391,7 +1391,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	int index = path.get_index(flag->get_position());
 
 	assert(index > 0);
-	assert(static_cast<const uint>(index) < path.get_nsteps() - 1);
+	assert(static_cast<uint>(index) < path.get_nsteps() - 1);
 
 	path.truncate(index);
 	secondpath.starttrim(index);
@@ -1460,7 +1460,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		}
 
 		// Cause a worker update in any case
-		if (Game * const game = dynamic_cast<Game * const>(g))
+		if (Game * const game = dynamic_cast<Game *>(g))
 			w->send_signal(game, "road");
 	}
 
@@ -1473,7 +1473,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		(*it)->set_location(newroad);
 
 	// Do the following only if in game
-	if (Game * const game = dynamic_cast<Game * const>(g)) {
+	if (Game * const game = dynamic_cast<Game *>(g)) {
 
 		// Request a new carrier for this road if necessary
 		// This must be done _after_ the new road initializes, otherwise request
@@ -1977,7 +1977,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
          uint what_is=fr->Unsigned8();
          uint reg=fr->Unsigned32();
          Transfer* trans=0;
-			if (Game * const game = dynamic_cast<Game * const>(egbase)) {
+			if (Game * const game = dynamic_cast<Game *>(egbase)) {
             assert(mol->is_object_known(reg));
             if (what_is==WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
@@ -2133,7 +2133,7 @@ int Request::get_priority (int cost)
 	int modifier = DEFAULT_PRIORITY;
 	bool is_construction_site = false;
 	const Building * const building =
-		dynamic_cast<const Building * const>(get_target());
+		dynamic_cast<const Building *>(get_target());
 
 	if (0x0 != building) {
 		if (building->get_stop())
@@ -3443,7 +3443,7 @@ void Economy::do_split(Flag *f)
 */
 void Economy::start_request_timer(int delta)
 {
-	if (Game * const game = dynamic_cast<Game * const>(&m_owner->egbase())) {
+	if (Game * const game = dynamic_cast<Game *>(&m_owner->egbase())) {
 		const int gametime = game->get_gametime();
 
 		if (m_request_timer and m_request_timer_time - (gametime + delta) <= 0)
@@ -3459,7 +3459,7 @@ void Economy::start_request_timer(int delta)
 	cq->queue
 		(m_request_timer_time,
 		 SENDER_MAPOBJECT, CMD_CALL,
-		 static_cast<const long>(&Economy::request_timer_cb),
+		 static_cast<long>(&Economy::request_timer_cb),
 		 m_trackserial,
 		 0);
 #endif
@@ -3731,7 +3731,7 @@ void Economy::balance_requestsupply()
 
 	rsps.nexttimer = -1;
 
-	if (Game *const game = dynamic_cast<Game * const>(&m_owner->egbase())) {
+	if (Game *const game = dynamic_cast<Game *>(&m_owner->egbase())) {
 
 	// Try to fulfill non-idle Requests
 	process_requests(game, &rsps);

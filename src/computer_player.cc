@@ -682,28 +682,28 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 
 	for (unsigned int i=0;i<immovables.size();i++) {
 		const BaseImmovable & base_immovable = *immovables[i].object;
-		if (dynamic_cast<const Flag * const>(&base_immovable))
+		if (dynamic_cast<const Flag *>(&base_immovable))
 			field->reachable=true;
 		if
 			(const PlayerImmovable * const player_immovable =
-			 dynamic_cast<const PlayerImmovable * const>(&base_immovable))
+			 dynamic_cast<const PlayerImmovable *>(&base_immovable))
 			if (player_immovable->owner().get_player_number() != player_number)
 				continue;
 
 		if
 			(const Building * const building =
-			 dynamic_cast<const Building * const>(&base_immovable))
+			 dynamic_cast<const Building *>(&base_immovable))
 		{
 
 			if
 				(const ConstructionSite * const constructionsite =
-				 dynamic_cast<const ConstructionSite * const>(building))
+				 dynamic_cast<const ConstructionSite *>(building))
 			{
 				const Building_Descr & target_descr = constructionsite->building();
 
 				if
 					(const MilitarySite_Descr * const target_militarysite_descr =
-					 dynamic_cast<const MilitarySite_Descr * const>(&target_descr))
+					 dynamic_cast<const MilitarySite_Descr *>(&target_descr))
 				{
 
 					const int v =
@@ -719,7 +719,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 
 				if
 					(const ProductionSite_Descr * const target_productionsite_descr =
-					 dynamic_cast<const ProductionSite_Descr * const>(&target_descr))
+					 dynamic_cast<const ProductionSite_Descr *>(&target_descr))
 					consider_productionsite_influence
 					(field,
 					 immovables[i].coords,
@@ -728,7 +728,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 
 			if
 				(const MilitarySite * const militarysite =
-				 dynamic_cast<const MilitarySite * const>(building))
+				 dynamic_cast<const MilitarySite *>(building))
 			{
 				const int v =
 					militarysite->get_conquers()
@@ -740,7 +740,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 						v * v * militarysite->get_capacity();
 			}
 
-			if (dynamic_cast<const ProductionSite * const>(building))
+			if (dynamic_cast<const ProductionSite *>(building))
 				consider_productionsite_influence
 					(field,
 					 immovables[i].coords,
@@ -787,7 +787,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 
 		if
 			(const Building * const bld =
-			 dynamic_cast<const Building * const>(immovables[i].object))
+			 dynamic_cast<const Building *>(immovables[i].object))
 			if
 				(player->get_buildcaps(map.get_fcoords(immovables[i].coords))
 				 &
@@ -942,7 +942,7 @@ bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 	assert(closest_distance != std::numeric_limits<int>::max());
 
 	// if we join a road and there is no flag yet, build one
-	if (dynamic_cast<const Road * const> (map[closest].get_immovable()))
+	if (dynamic_cast<const Road *> (map[closest].get_immovable()))
 		game().send_player_build_flag (player_number, closest);
 
 	// and finally build the road
@@ -1033,7 +1033,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 			 >=
 			 0
 			 and
-			 static_cast<const int>(2 * path.get_nsteps() + 2) < nf.cost)
+			 static_cast<int>(2 * path.get_nsteps() + 2) < nf.cost)
 		{
 			game().send_player_build_road (player_number, path);
 			return true;
@@ -1182,7 +1182,7 @@ void Computer_Player::construct_roads ()
 		    continue;
 
 		if (BaseImmovable * const imm = map.get_immovable(*i)) {
-			if (Road * const road = dynamic_cast<Road * const>(imm)) {
+			if (Road * const road = dynamic_cast<Road *>(imm)) {
 		    if ((player->get_buildcaps(*i)&BUILDCAPS_FLAG)==0)
 			continue;
 
@@ -1225,7 +1225,7 @@ void Computer_Player::construct_roads ()
 		}
 
 	log
-		("Computer_Player(%u): %u spots for road building (%f seconds) \n", player_number, spots.size(), static_cast<const double>(clock() - time_before) / CLOCKS_PER_SEC);
+		("Computer_Player(%u): %u spots for road building (%f seconds) \n", player_number, spots.size(), static_cast<double>(clock() - time_before) / CLOCKS_PER_SEC);
 
 	while (!queue.empty()) {
 	    WalkableSpot &from=spots[queue.front()];

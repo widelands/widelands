@@ -33,7 +33,7 @@
 int Editor_Change_Resource_Tool_Callback
 (const TCoords<FCoords> c, void * data, int curres)
 {
-	Map & map = *static_cast<Map * const>(data);
+	Map & map = *static_cast<Map *>(data);
 	const World & world = map.world();
 	FCoords f = FCoords(c, map.get_field(c));
 

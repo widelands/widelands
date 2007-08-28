@@ -402,7 +402,7 @@ void Warehouse::init(Editor_Game_Base* gg)
    m_supply->set_nrwares(get_owner()->tribe().get_nrwares());
    m_supply->set_nrworkers(get_owner()->tribe().get_nrworkers());
 
-	if (Game * const game = dynamic_cast<Game * const>(gg)) {
+	if (Game * const game = dynamic_cast<Game *>(gg)) {
       for (int i = 0; i < get_owner()->tribe().get_nrwares(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
 
@@ -432,7 +432,7 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base* gg)
 {
-	if (Game * const game = dynamic_cast<Game * const>(gg)) {
+	if (Game * const game = dynamic_cast<Game *>(gg)) {
 
       while (m_requests.size()) {
          Request* req = m_requests[m_requests.size()-1];
@@ -1148,7 +1148,7 @@ bool Warehouse::has_soldiers()
 		 m_incorporated_workers.begin();
 		 it != end;
 		 ++it)
-		if (dynamic_cast<const Soldier * const>(it->get(&egbase))) return true;
+		if (dynamic_cast<const Soldier *>(it->get(&egbase))) return true;
 	return false;
 }
 

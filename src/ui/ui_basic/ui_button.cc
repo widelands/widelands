@@ -130,8 +130,8 @@ void Basic_Button::draw(RenderTarget* dst)
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
 		dst->blit
 			(Point
-			 (get_w() - static_cast<const int>(cpw) >> 1,
-			  get_h() - static_cast<const int>(cph) >> 1),
+			 (get_w() - static_cast<int>(cpw) >> 1,
+			  get_h() - static_cast<int>(cph) >> 1),
 			 m_pic_custom);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered

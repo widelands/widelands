@@ -383,9 +383,9 @@ void Trigger_Building_Option_Menu::update() {
 	const Map & map = m_parent->egbase().map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
-	if (m_player_area.x >= static_cast<const int>(mapwidth))
+	if (m_player_area.x >= static_cast<int>(mapwidth))
 		m_player_area.x = mapwidth  - 1;
-	if (m_player_area.y >= static_cast<const int>(mapheight))
+	if (m_player_area.y >= static_cast<int>(mapheight))
 		m_player_area.y = mapheight - 1;
 	m_player_area.field = map.get_field(m_player_area);
 

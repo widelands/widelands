@@ -33,7 +33,7 @@ int Editor_Make_Infrastructure_Tool_Callback
 (const TCoords<FCoords> c, void * data, int player)
 {
 	return
-		static_cast<const Editor * const>(data)->player(player).get_buildcaps(c);
+		static_cast<const Editor *>(data)->player(player).get_buildcaps(c);
 }
 
 

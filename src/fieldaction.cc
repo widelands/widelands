@@ -384,7 +384,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (!building || building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag, _("Destroy this flag"));
 
-			if (dynamic_cast<const Game * const>(&m_iabase->egbase()))
+			if (dynamic_cast<const Game *>(&m_iabase->egbase()))
             add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
 			// No geologist in editor
 		}
@@ -407,7 +407,7 @@ void FieldActionWindow::add_buttons_auto()
 
 	// Watch actions, only when game (no use in editor)
    // same for statistics. census is ok
-	if (dynamic_cast<const Game * const>(&m_iabase->egbase())) {
+	if (dynamic_cast<const Game *>(&m_iabase->egbase())) {
       add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch, _("Watch field in a separate window"));
       add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics, _("Toggle building statistics display"));
 	}
@@ -442,13 +442,13 @@ void FieldActionWindow::add_buttons_attack ()
 
 		if
 			(Building * const building =
-			 dynamic_cast<Building * const>(m_map->get_immovable(m_field)))
+			 dynamic_cast<Building *>(m_map->get_immovable(m_field)))
 			if
-				(dynamic_cast<const Game * const>(&m_iabase->egbase())
+				(dynamic_cast<const Game *>(&m_iabase->egbase())
 				 and
-				 (dynamic_cast<const MilitarySite * const>(building)
+				 (dynamic_cast<const MilitarySite *>(building)
 				  or
-				  dynamic_cast<const Warehouse * const>(building)))
+				  dynamic_cast<const Warehouse *>(building)))
          {
             m_attackers = 0;
             m_attackers_type = STRONGEST;
@@ -499,7 +499,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 		// Some buildings cannot be built (i.e. construction site, HQ)
       // and not allowed buildings. The rules are different in editor
       // and game: enhanced buildings _are_ buildable in the editor
-		if (dynamic_cast<const Game * const>(&m_iabase->egbase())) {
+		if (dynamic_cast<const Game *>(&m_iabase->egbase())) {
          if (!descr->get_buildable() || !m_plr->is_building_allowed(id))
             continue;
 		} else {
@@ -629,7 +629,7 @@ Open a watch window for the given field and delete self.
 */
 void FieldActionWindow::act_watch()
 {
-	assert(dynamic_cast<const Game * const>(&m_iabase->egbase()));
+	assert(dynamic_cast<const Game *>(&m_iabase->egbase()));
 
    show_watch_window(static_cast<Interactive_Player*>(m_iabase), m_field);
 	okdialog();
@@ -682,7 +682,7 @@ Build a flag at this field
 void FieldActionWindow::act_buildflag()
 {
 	// Game: send command
-	if (Game * const game = dynamic_cast<Game * const>(&m_iabase->egbase()))
+	if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase()))
 		game->send_player_build_flag(m_plr->get_player_number(), m_field);
 	// Editor: Just plain build this flag
 	else m_plr->build_flag(m_field);
@@ -720,7 +720,7 @@ void FieldActionWindow::act_ripflag()
       show_bulldoze_confirm(m_iabase, building, flag);
 	}
 	else {
-		if (Game * const game = dynamic_cast<Game * const>(&m_iabase->egbase())) {
+		if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase())) {
          m_iabase->need_complete_redraw();
 			game->send_player_bulldoze (flag);
 		} else {// Editor
@@ -770,10 +770,10 @@ Remove the road at the given field
 void FieldActionWindow::act_removeroad()
 {
 	if
-		(Road * const road = dynamic_cast<Road * const>
+		(Road * const road = dynamic_cast<Road *>
 		 (m_iabase->egbase().map().get_immovable(m_field)))
 	{
-		if (Game * const game = dynamic_cast<Game * const>(&m_iabase->egbase()))
+		if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase()))
 			game->send_player_bulldoze(road);
 		else road->get_owner()->bulldoze(road);
 	}
@@ -792,7 +792,7 @@ Start construction of the building with the give description index
 void FieldActionWindow::act_build(long idx)
 {
 	Editor_Game_Base & egbase = m_iabase->egbase();
-	if (Game * const game = dynamic_cast<Game * const>(&egbase))
+	if (Game * const game = dynamic_cast<Game *>(&egbase))
 		game->send_player_build
 		(static_cast<Interactive_Player*>(m_iabase)->get_player_number(),
 		 m_field,
@@ -888,7 +888,7 @@ void FieldActionWindow::act_geologist()
 	Game & game = dynamic_cast<Game &>(m_iabase->egbase());
 	if
 		(Flag * const flag =
-		 dynamic_cast<Flag * const>(game.map().get_immovable(m_field)))
+		 dynamic_cast<Flag *>(game.map().get_immovable(m_field)))
 		game.send_player_flagaction (flag, FLAGACTION_GEOLOGIST);
 
    okdialog();
@@ -907,13 +907,13 @@ void FieldActionWindow::act_attack ()
 
 	if
 		(Building * const building =
-		 dynamic_cast<Building * const>(game.map().get_immovable(m_field)))
+		 dynamic_cast<Building *>(game.map().get_immovable(m_field)))
 	{
       log ("FieldActionWindow::act_attack () %d\n", m_attackers);
 
 		if
 			(const Flag * const flag =
-			 dynamic_cast<const Flag * const>(building->get_base_flag()))
+			 dynamic_cast<const Flag *>(building->get_base_flag()))
 			if (m_attackers > 0)
 				game.send_player_enemyflagaction
 				(flag,
@@ -1032,7 +1032,7 @@ void show_field_action(Interactive_Base *iabase, Player* player, UI::UniqueWindo
 		case Map_Object::ROAD:
 			if (!(player->get_buildcaps(target) & BUILDCAPS_FLAG))
 				break;
-			if (Game * const game = dynamic_cast<Game * const>(&iabase->egbase()))
+			if (Game * const game = dynamic_cast<Game *>(&iabase->egbase()))
 				game->send_player_build_flag(player->get_player_number(), target);
 
 		case Map_Object::FLAG:

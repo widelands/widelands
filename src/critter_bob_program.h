@@ -55,7 +55,7 @@ struct Critter_BobProgram : public BobProgramBase {
 	int get_size() const {return m_actions.size();}
 	const Critter_BobAction* get_action(int idx) const {
 		assert(idx >= 0);
-		assert(static_cast<const uint>(idx) < m_actions.size());
+		assert(static_cast<uint>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 

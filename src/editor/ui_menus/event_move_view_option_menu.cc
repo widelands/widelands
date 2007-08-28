@@ -226,9 +226,9 @@ void Event_Move_View_Option_Menu::clicked(int i) {
  */
 void Event_Move_View_Option_Menu::update() {
 	const Extent extent = m_parent->egbase().map().extent();
-	if (extent.w <= static_cast<const Uint16>(m_location.x))
+	if (extent.w <= static_cast<Uint16>(m_location.x))
 		m_location.x = extent.w - 1;
-	if (extent.h <= static_cast<const Uint16>(m_location.y))
+	if (extent.h <= static_cast<Uint16>(m_location.y))
 		m_location.y = extent.h - 1;
 
    char buf[6];

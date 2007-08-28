@@ -316,9 +316,9 @@ void Event_Conquer_Area_Option_Menu::clicked(int i) {
 void Event_Conquer_Area_Option_Menu::update() {
 	const Map & map = m_parent->egbase().map();
 	const Extent extent = map.extent();
-	if (extent.w <= static_cast<const Uint16>(m_player_area.x))
+	if (extent.w <= static_cast<Uint16>(m_player_area.x))
 		m_player_area.x = extent.w  - 1;
-	if (extent.h <= static_cast<const Uint16>(m_player_area.y))
+	if (extent.h <= static_cast<Uint16>(m_player_area.y))
 		m_player_area.y = extent.h - 1;
 
 	if (m_player_area.player_number < 1) m_player_area.player_number = 1;

@@ -80,15 +80,15 @@ struct FileRead {
 	Sint8    Signed8 (const Pos pos = NoPos())
 	{return                                       Deref8    (Data(1, pos));}
 	Uint8  Unsigned8 (const Pos pos = NoPos())
-	{return static_cast<const Uint8>             (Deref8    (Data(1, pos)));}
+	{return static_cast<Uint8>             (Deref8    (Data(1, pos)));}
 	Sint16   Signed16(const Pos pos = NoPos())
 	{return                           Little16   (Deref16   (Data(2, pos)));}
 	Uint16 Unsigned16(const Pos pos = NoPos())
-	{return static_cast<const Uint16>(Little16   (Deref16   (Data(2, pos))));}
+	{return static_cast<Uint16>(Little16   (Deref16   (Data(2, pos))));}
 	Sint32   Signed32(const Pos pos = NoPos())
 	{return                           Little32   (Deref32   (Data(4, pos)));}
 	Uint32 Unsigned32(const Pos pos = NoPos())
-	{return static_cast<const Uint32>(Little32   (Deref32   (Data(4, pos))));}
+	{return static_cast<Uint32>(Little32   (Deref32   (Data(4, pos))));}
 	float       Float(const Pos pos = NoPos())
 	{return                           LittleFloat(DerefFloat(Data(4, pos)));}
 	char * CString(const Pos pos = NoPos()); /// Read a zero-terminated string.
@@ -114,7 +114,7 @@ struct FileRead {
 			}
 		if (i+bytes > length) throw File_Boundary_Exceeded();
 
-			return static_cast<char * const>(data) + i;
+			return static_cast<char *>(data) + i;
 		}
 
 	void * data;

@@ -231,7 +231,7 @@ void Bob::init(Editor_Game_Base* gg)
 
 	m_sched_init_task = true;
 
-	if (Game * const game = dynamic_cast<Game * const>(gg))
+	if (Game * const game = dynamic_cast<Game *>(gg))
 		schedule_act(game, 1);
 	else
 		// In editor: play idle task forever

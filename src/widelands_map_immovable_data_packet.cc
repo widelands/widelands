@@ -125,7 +125,7 @@ throw (_wexception)
          // We do not write player immovables
 			if
 				(const Immovable * const immovable =
-				 dynamic_cast<const Immovable * const>(map[i].get_immovable()))
+				 dynamic_cast<const Immovable *>(map[i].get_immovable()))
 			{
 				assert(not os->is_object_known(immovable));
 				fw.Unsigned32(os->register_object(immovable));

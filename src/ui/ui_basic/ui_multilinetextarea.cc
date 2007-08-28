@@ -93,7 +93,7 @@ Change alignment of the textarea
 void Multiline_Textarea::set_align(Align align)
 {
    // don't allow vertical alignment as it doesn't make sense
-   m_align = static_cast<const Align>(align & Align_Horizontal);
+   m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
 

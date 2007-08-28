@@ -307,7 +307,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (Game * const game = dynamic_cast<Game * const>(g)) {
+	if (Game * const game = dynamic_cast<Game *>(g)) {
 		uint i;
 
 		// TODO: figure out whether planing is necessary

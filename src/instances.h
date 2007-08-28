@@ -114,7 +114,7 @@ Note that convenient creation functions are defined in class Game.
 // If you find a better way to do this that doesn't cost a virtual function or additional
 // member variable, go ahead
 #define MO_DESCR(type) \
-public: __attribute__ ((deprecated)) inline const type* get_descr() const {return dynamic_cast<const type * const>(m_descr);}\
+public: __attribute__ ((deprecated)) inline const type* get_descr() const {return dynamic_cast<const type *>(m_descr);}\
 public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
 
 // would be necessary for virtual inheritance stuff

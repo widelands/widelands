@@ -85,23 +85,23 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
    std::string str = id;
 	if        (str == "message_box")    {
 		Event_Message_Box_Option_Menu t
-			(m_parent, static_cast<Event_Message_Box    * const>(event));
+			(m_parent, static_cast<Event_Message_Box *>(event));
 		retval = t.run();
 	} else if (str == "move_view")      {
 		Event_Move_View_Option_Menu t
-			(m_parent, static_cast<Event_Move_View      * const>(event));
+			(m_parent, static_cast<Event_Move_View *>(event));
 		retval = t.run();
 	} else if (str == "unhide_area")    {
 		Event_Unhide_Area_Option_Menu t
-			(m_parent, static_cast<Event_Unhide_Area    * const>(event));
+			(m_parent, static_cast<Event_Unhide_Area *>(event));
 		retval = t.run();
 	} else if (str == "conquer_area")   {
 		Event_Conquer_Area_Option_Menu t
-			(m_parent, static_cast<Event_Conquer_Area   * const>(event));
+			(m_parent, static_cast<Event_Conquer_Area *>(event));
 		retval = t.run();
 	} else if (str == "allow_building") {
 		Event_Allow_Building_Option_Menu t
-			(m_parent, static_cast<Event_Allow_Building * const>(event));
+			(m_parent, static_cast<Event_Allow_Building *>(event));
 		retval = t.run();
 	} else
 		throw wexception

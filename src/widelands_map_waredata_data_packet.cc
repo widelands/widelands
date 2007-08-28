@@ -65,7 +65,7 @@ throw (_wexception)
          uint reg=fr.Unsigned32();
          if (reg==0xffffffff) break; // end of wares
 		if
-			(WareInstance * const ware = dynamic_cast<WareInstance * const>
+			(WareInstance * const ware = dynamic_cast<WareInstance *>
 			 (ol->get_object_by_file_index(reg)))
 		{
 			reg = fr.Unsigned32();
@@ -75,12 +75,12 @@ throw (_wexception)
 				ware->m_descr_index = ware_index_from_file;
 				if
 					(PlayerImmovable * const player_immovable =
-					 dynamic_cast<PlayerImmovable * const>(location))
+					 dynamic_cast<PlayerImmovable *>(location))
 				{
 					if
-						(dynamic_cast<const Building * const>(player_immovable)
+						(dynamic_cast<const Building *>(player_immovable)
 						 or
-						 dynamic_cast<const Flag     * const>(player_immovable))
+						 dynamic_cast<const Flag *>(player_immovable))
 					{
 						//  We didn't know what kind of ware we were till now, so no
 						//  economy might have a clue of us.
@@ -100,7 +100,7 @@ throw (_wexception)
 							("Widelands_Map_Waredata_Data_Packet: location is "
 							 "PlayerImmovable but not Building or Flag\n");
 				} else if
-					(Worker * const worker = dynamic_cast<Worker * const>(location))
+					(Worker * const worker = dynamic_cast<Worker *>(location))
 				{
 					const Tribe_Descr & tribe = *worker->get_tribe();
 					if (tribe.get_nrwares() <= (int)ware_index_from_file)
@@ -125,7 +125,7 @@ throw (_wexception)
             ware->m_transfer_nextstep=(Map_Object*)(0);
 
          // Do some kind of init
-				if (Game * const game = dynamic_cast<Game * const>(egbase))
+				if (Game * const game = dynamic_cast<Game *>(egbase))
 					ware->set_location(game, location);
          ol->mark_object_as_loaded(ware);
 			} else

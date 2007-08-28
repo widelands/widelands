@@ -49,8 +49,8 @@ m_tool(tool)
 {
 	World & world = parent.egbase().map().world();
 	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
-	const uint terrains_in_row = static_cast<const uint>
-		(ceil(sqrt(static_cast<const float>(nr_terrains))));
+	const uint terrains_in_row = static_cast<uint>
+		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
 
    int check[] = {

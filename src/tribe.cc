@@ -482,7 +482,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
       if (endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
 
-			if (Game * const game = dynamic_cast<Game * const>(&egbase))
+			if (Game * const game = dynamic_cast<Game *>(&egbase))
 		for (int i = 0; i < it->second; ++i) {
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
 				Soldier & soldier = static_cast<Soldier &>

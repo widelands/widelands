@@ -131,7 +131,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 			 UI_FONT_SMALL,
 			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
 			 Point
-			 (static_cast<const int>(posx - w / 2),
+			 (static_cast<int>(posx - w / 2),
 			  get_inner_h() - space_at_bottom + 4),
 			 buffer, Align_CenterLeft, -1,
 			 Widget_Cache_None, 0, -1, false);

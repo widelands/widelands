@@ -116,13 +116,13 @@ TriggerConditional* TriggerConditional_Factory::create_from_postfix(EventChain* 
 				new TriggerAND(r, l)
 				:
 				(token == OR ?
-				 static_cast<TriggerConditional * const>(new TriggerOR(r, l))
+				 static_cast<TriggerConditional *>(new TriggerOR(r, l))
 				 :
 				 new TriggerXOR(r, l));
 		}
 			break;
 		case TRIGGER: {
-			Trigger & trigger = *static_cast<Trigger * const>(it->data);
+			Trigger & trigger = *static_cast<Trigger *>(it->data);
 			trigger.reference(evchain);
 			stk.push_back(new TriggerConditional_Const(&trigger));
 		}

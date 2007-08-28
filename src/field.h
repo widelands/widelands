@@ -251,7 +251,7 @@ public:
     * This function is not private, because the loader will use them directly
     * But realize, most of the times you will need Map::set_field_height()*/
 	void set_height(Height h) {
-		if (static_cast<const signed char>(h) < 0) h = 0;
+		if (static_cast<signed char>(h) < 0) h = 0;
 		if (h > MAX_FIELD_HEIGHT) h = MAX_FIELD_HEIGHT;
 		height = h;
 	}

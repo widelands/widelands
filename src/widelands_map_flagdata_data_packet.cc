@@ -184,7 +184,7 @@ throw (_wexception)
 	const Field & fields_end = map[map.max_index()];
 	for (Field * field = &map[0]; field < &fields_end; ++field) if //  FIXME field should be "const Field *"
 		(Flag * const flag =
-		 dynamic_cast<Flag * const>(field->get_immovable()))
+		 dynamic_cast<Flag *>(field->get_immovable()))
 	{
             assert(os->is_object_known(flag));
             assert(!os->is_object_saved(flag));

@@ -61,7 +61,7 @@ void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
 	if (event_version == EVENT_VERSION) {
 		const std::string triggername = s->get_safe_string("trigger");
 		if
-			(Trigger_Null * const trig = static_cast<Trigger_Null * const>
+			(Trigger_Null * const trig = static_cast<Trigger_Null *>
 			 (egbase->map().get_mtm().get_trigger(triggername.c_str())))
 		{
 			// Bit Hackish, hopefully the user paid attention

@@ -114,7 +114,7 @@ void BaseListselect::add
  const int picid,
  const bool sel)
 {
-	Entry_Record & er = *static_cast<Entry_Record * const>
+	Entry_Record & er = *static_cast<Entry_Record *>
 		(malloc(sizeof(Entry_Record) + strlen(name)));
 
 	er.m_entry = entry;
@@ -192,7 +192,7 @@ Set the list alignment (only horizontal alignment works)
 */
 void BaseListselect::set_align(const Align align)
 {
-	m_align = static_cast<const Align>(align & Align_Horizontal);
+	m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
 
@@ -375,7 +375,7 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int, int y)
 	play_click();
 
 	y = (y + m_scrollpos) / get_lineheight();
-	if (y >= 0 and y < static_cast<const int>(m_entry_records.size()))
+	if (y >= 0 and y < static_cast<int>(m_entry_records.size()))
 		select(y);
 
 	// check if doubleclicked
