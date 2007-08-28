@@ -48,6 +48,8 @@ class Transfer;
 class Warehouse;
 class Widelands_Map_Map_Object_Loader;
 class Widelands_Map_Map_Object_Saver;
+class WidelandsFileRead;
+class WidelandsFileWrite;
 
 struct Neighbour {
 	Flag * flag;
@@ -725,8 +727,14 @@ struct Cmd_Call_Economy_Balance : public BaseCommand {
 
       virtual int get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
-      virtual void Write(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	virtual void Write
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &);
+	virtual void Read
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &);
 
    private:
       bool     m_force_balance;

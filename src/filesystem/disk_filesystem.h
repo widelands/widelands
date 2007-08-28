@@ -43,8 +43,10 @@ struct RealFSImpl : public FileSystem {
 	virtual void Write(const std::string fname, const void * const data,
 	                   const int length);
 
-	virtual StreamRead* OpenStreamRead(const std::string fname);
-	virtual StreamWrite* OpenStreamWrite(const std::string fname);
+	virtual WidelandsStreamRead  * OpenWidelandsStreamRead
+		(const std::string & fname);
+	virtual WidelandsStreamWrite * OpenWidelandsStreamWrite
+		(const std::string & fname);
 
 	virtual FileSystem* MakeSubFileSystem(const std::string dirname);
 	virtual FileSystem* CreateSubFileSystem(const std::string dirname,

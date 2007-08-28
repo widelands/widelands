@@ -21,11 +21,11 @@
 
 #include "cmd_queue.h"
 #include "error.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_ids.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
@@ -46,36 +46,43 @@ void Cmd_Destroy_Map_Object::execute(Game* g) {
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
-void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
- int version=fr->Unsigned16();
-   if (version==CMD_DESTROY_MAP_OBJECT_VERSION) {
+void Cmd_Destroy_Map_Object::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr, egbase, mol);
 
       // Serial
-      int fileserial=fr->Unsigned32();
-      if (fileserial) {
-         assert(mol->is_object_known(fileserial));
-         obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
+		if (const Uint32 fileserial = fr.Unsigned32()) {
+			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
 		} else
-         obj_serial = 0;
-	} else
-      throw wexception("Unknown version in Cmd_Destroy_Map_Object::Read: %i", version);
+			obj_serial = 0;
+	} else throw wexception
+		("Unknown version in Cmd_Destroy_Map_Object::Read: %u", packet_version);
 }
-void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Cmd_Destroy_Map_Object::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
    // First, write version
-   fw->Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
+	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
 
    // Write base classes
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
 
    // Now serial
-   Map_Object* obj=egbase->objects().get_object(obj_serial);
-   if (obj) { // The object might have vanished
-      assert(mos->is_object_known(obj));
-      fw->Unsigned32(mos->get_object_file_index(obj));
+	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
+		// The object might have vanished
+		assert(mos.is_object_known(obj));
+		fw.Unsigned32(mos.get_object_file_index(obj));
 	} else
-      fw->Unsigned32(0);
+		fw.Unsigned32(0);
 
 }
 
@@ -91,44 +98,50 @@ void Cmd_Act::execute(Game* g) {
 }
 
 #define CMD_ACT_VERSION 1
-void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
- int version=fr->Unsigned16();
-   if (version==CMD_ACT_VERSION) {
+void Cmd_Act::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+ const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CMD_ACT_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr, egbase, mol);
 
       // Serial
-      int fileserial=fr->Unsigned32();
-
-      if (fileserial) {
-         assert(mol->is_object_known(fileserial));
-         obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
+		if (const Uint32 fileserial = fr.Unsigned32()) {
+			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
 		} else
          obj_serial = 0;
 
       // arg
-      arg=fr->Unsigned32();
+		arg = fr.Unsigned32();
 
-	} else
-      throw wexception("Unknown version in Cmd_Act::Read: %i", version);
+	} else throw wexception
+		("Unknown version in Cmd_Act::Read: %u", packet_version);
 }
-void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Cmd_Act::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
    // First, write version
-   fw->Unsigned16(CMD_ACT_VERSION);
+	fw.Unsigned16(CMD_ACT_VERSION);
 
    // Write base classes
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
 
    // Now serial
-   Map_Object* obj=egbase->objects().get_object(obj_serial);
-   if (obj) { // Object might have dissappeared
-      assert(mos->is_object_known(obj));
-      fw->Unsigned32(mos->get_object_file_index(obj));
+	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
+		// Object might have dissappeared
+		assert(mos.is_object_known(obj));
+		fw.Unsigned32(mos.get_object_file_index(obj));
 	} else
-      fw->Unsigned32(0);
+      fw.Unsigned32(0);
 
    // And arg
-   fw->Unsigned32(arg);
+	fw.Unsigned32(arg);
 }
 
 

@@ -33,8 +33,6 @@ TODO: split this up into two files per class (.h and .cc)
 #include "building.h"
 #include "carrier.h"
 #include "editor_game_base.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
@@ -42,6 +40,8 @@ TODO: split this up into two files per class (.h and .cc)
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
@@ -3803,38 +3803,42 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
  * Read and write
  */
 #define CURRENT_CMD_CALL_ECONOMY_VERSION 1
-void Cmd_Call_Economy_Balance::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-   int version=fr->Unsigned16();
-
-   if (version==CURRENT_CMD_CALL_ECONOMY_VERSION) {
+void Cmd_Call_Economy_Balance::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr, egbase, mol);
 
-      m_player= fr->Unsigned8();
-      bool exists=fr->Unsigned8();
-      if (!exists)
-         m_economy=((Economy*) 0xffffffff);
-      else
-         m_economy=egbase->get_player(m_player)->get_economy_by_number(fr->Unsigned16());
+		m_player  = fr.Unsigned8 ();
+		m_economy = fr.Unsigned8 () ?
+			egbase.get_player(m_player)->get_economy_by_number(fr.Unsigned16())
+			:
+			reinterpret_cast<Economy *>(0xffffffff); //  FIXME ?!?!?!
 
       m_force_balance = true; // on load, the first balance has to been forced
-	} else
-      throw wexception("Unknown version %i in Cmd_Call_Economy_Balance::Read()!\n", version);
+	} else throw wexception
+		("Unknown version %i in Cmd_Call_Economy_Balance::Read()!\n",
+		 packet_version);
 }
-void Cmd_Call_Economy_Balance::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
-   fw->Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
+void Cmd_Call_Economy_Balance::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 
    // Write Base Commands
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
 
-   fw->Unsigned8(m_player);
+	fw.Unsigned8 (m_player);
 
    // Economy
-   Player* plr = egbase->get_player(m_player);
-   bool has_eco=plr->has_economy(m_economy);
-
-   fw->Unsigned8(has_eco);
-
-   if (has_eco)
-      fw->Unsigned16(plr->get_economy_number(m_economy));
+	const Player & player = egbase.player(m_player);
+	const bool has_eco = player.has_economy(m_economy);
+	fw.Unsigned8 (has_eco);
+	if (has_eco) fw.Unsigned16(player.get_economy_number(m_economy));
 }

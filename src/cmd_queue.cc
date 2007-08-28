@@ -20,14 +20,14 @@
 #include "cmd_queue.h"
 
 #include "error.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "machdep.h"
 #include "player.h"
 #include "trigger/trigger.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "worker.h"
 
 
@@ -124,19 +124,21 @@ BaseCommand::~BaseCommand ()
 }
 
 #define BASE_CMD_VERSION 1
-void BaseCommand::BaseCmdWrite(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*) {
+void BaseCommand::BaseCmdWrite
+(WidelandsFileWrite & fw, Editor_Game_Base &, Widelands_Map_Map_Object_Saver &)
+{
 	// First version
-	fw->Unsigned16(BASE_CMD_VERSION);
+	fw.Unsigned16(BASE_CMD_VERSION);
 
 	// Write duetime
-	fw->Unsigned32(duetime);
+	fw.Unsigned32(duetime);
 }
 
-void BaseCommand::BaseCmdRead(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)  {
-	int version=fr->Unsigned16();
-	if (version == BASE_CMD_VERSION) {
-		// Read duetime
-		duetime=fr->Unsigned32();
-	} else
-		throw wexception("BaseCommand::BaseCmdRead: unknown version %i\n", version);
+void BaseCommand::BaseCmdRead
+(WidelandsFileRead & fr, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == BASE_CMD_VERSION) duetime = fr.Unsigned32();
+	else throw wexception
+		("BaseCommand::BaseCmdRead: unknown version %u\n", packet_version);
 }

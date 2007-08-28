@@ -22,19 +22,21 @@
 
 #define CMD_INCORPORATE_VERSION 1
 
-class Cmd_Incorporate: public BaseCommand {
-	public:
+struct Cmd_Incorporate: public BaseCommand {
 		Cmd_Incorporate() : BaseCommand(0) {} // For savegame loading
 		Cmd_Incorporate (int t, Worker* w): BaseCommand(t) {worker=w;}
 
 
 		void execute (Game* g) {worker->incorporate(g);}
 
-		// Write these commands to a file (for savegames)
-		virtual void Write(FileWrite*, Editor_Game_Base*,
-						   Widelands_Map_Map_Object_Saver*);
-		virtual void Read(FileRead*, Editor_Game_Base*,
-		                  Widelands_Map_Map_Object_Loader*);
+	virtual void Write
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &);
+	virtual void Read
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &);
 
 		/// Get this command ID
 		virtual int get_id() {return QUEUE_CMD_INCORPORATE;}

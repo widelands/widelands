@@ -20,17 +20,17 @@
 #include "playercommand.h"
 
 #include "error.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
-#include "streamread.h"
-#include "streamwrite.h"
 #include "player.h"
 #include "soldier.h"
 #include "wexception.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_map_object_loader.h"
+#include "widelands_streamread.h"
+#include "widelands_streamwrite.h"
 
 enum {
 	PLCMD_UNUSED=0,
@@ -59,9 +59,9 @@ PlayerCommand::~PlayerCommand ()
 {
 }
 
-PlayerCommand* PlayerCommand::deserialize (StreamRead* des)
+PlayerCommand* PlayerCommand::deserialize (WidelandsStreamRead & des)
 {
-	switch (des->Unsigned8()) {
+	switch (des.Unsigned8()) {
 		case PLCMD_BULLDOZE:
 			return new Cmd_Bulldoze(des);
 		case PLCMD_BUILD:
@@ -94,28 +94,37 @@ PlayerCommand* PlayerCommand::deserialize (StreamRead* des)
  * Write this player command to a file. Call this from base classes
  */
 #define PLAYER_COMMAND_VERSION 1
-void PlayerCommand::PlayerCmdWrite(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void PlayerCommand::PlayerCmdWrite
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
 	// First, write version
-	fw->Unsigned16(PLAYER_COMMAND_VERSION);
+	fw.Unsigned16(PLAYER_COMMAND_VERSION);
 
 	BaseCommand::BaseCmdWrite(fw, egbase, mos);
 	// Now sender
-	fw->Unsigned8(sender);
+	fw.Unsigned8 (sender);
 }
-void PlayerCommand::PlayerCmdRead(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_COMMAND_VERSION) {
+void PlayerCommand::PlayerCmdRead
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_COMMAND_VERSION) {
 		BaseCommand::BaseCmdRead(fr, egbase, mol);
-		sender=fr->Unsigned8();
-	} else
-		throw wexception("Unknown version in PlayerCommand::PlayerCmdRead: %i", version);
+		sender = fr.Unsigned8 ();
+	} else throw wexception
+		("Unknown version in PlayerCommand::PlayerCmdRead: %u", packet_version);
 }
 
 /*** class Cmd_Bulldoze ***/
 
-Cmd_Bulldoze::Cmd_Bulldoze (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_Bulldoze::Cmd_Bulldoze (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	serial=des->Unsigned32();
+	serial = des.Unsigned32();
 }
 
 void Cmd_Bulldoze::execute (Game* g)
@@ -127,44 +136,50 @@ void Cmd_Bulldoze::execute (Game* g)
 		player->bulldoze(static_cast<PlayerImmovable*>(obj));
 }
 
-void Cmd_Bulldoze::serialize (StreamWrite* ser)
+void Cmd_Bulldoze::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_BULLDOZE);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned32(serial);
+	ser.Unsigned8 (PLCMD_BULLDOZE);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(serial);
 }
 #define PLAYER_CMD_BULLDOZE_VERSION 1
-void Cmd_Bulldoze::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_Bulldoze::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-
-	if (version==PLAYER_CMD_BULLDOZE_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_BULLDOZE_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
-	} else
-		throw wexception("Unknown version in Cmd_Bulldoze::Read: %i", version);
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial=mol.get_object_by_file_index(fileserial)->get_serial();
+	} else throw wexception
+		("Unknown version in Cmd_Bulldoze::Read: %u", packet_version);
 }
-void Cmd_Bulldoze::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Cmd_Bulldoze::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
+	fw.Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
 /*** class Cmd_Build ***/
 
-Cmd_Build::Cmd_Build (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_Build::Cmd_Build (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	id=des->Signed16();
-	coords.x=des->Unsigned16();
-	coords.y=des->Unsigned16();
+	id     = des.Signed16  ();
+	coords = des.Coords32  ();
 }
 
 void Cmd_Build::execute (Game* g)
@@ -173,50 +188,58 @@ void Cmd_Build::execute (Game* g)
 	player->build(coords, id);
 }
 
-void Cmd_Build::serialize (StreamWrite* ser)
-{
-	ser->Unsigned8(PLCMD_BUILD);
-	ser->Unsigned8(get_sender());
-	ser->Signed16(id);
-	ser->Unsigned16(coords.x);
-	ser->Unsigned16(coords.y);
+void Cmd_Build::serialize (WidelandsStreamWrite & ser) {
+	ser.Unsigned8 (PLCMD_BUILD);
+	ser.Unsigned8 (get_sender());
+	ser.Signed16  (id);
+	ser.Coords32  (coords);
 }
 #define PLAYER_CMD_BUILD_VERSION 1
-void Cmd_Build::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_Build::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_BUILD_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
-		// id
-		id=fr->Unsigned16();
-		// Coords
-		coords.x=fr->Unsigned16();
-		coords.y=fr->Unsigned16();
-	} else
-		throw wexception("Unknown version in Cmd_Build::Read: %i", version);
+		id          = fr.Unsigned16();
+		try {coords = fr.Coords32  (egbase.map().extent());}
+		catch (const WidelandsStreamRead::Width_Exceeded e) {
+			throw wexception
+				("Cmd_Build::Read: reading coords: width (%u) exceeded (x = %i)",
+				 e.w, e.x);
+		}
+		catch (const WidelandsStreamRead::Height_Exceeded e) {
+			throw wexception
+				("Cmd_Build::Read: reading coords: height (%u) exceeded (y = %i)",
+				 e.h, e.y);
+		}
+	} else throw wexception
+		("Unknown version in Cmd_Build::Read: %u", packet_version);
 }
 
-void Cmd_Build::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_Build::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_BUILD_VERSION);
+	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
-	// Now id
-	fw->Unsigned16(id);
-	// Now Coords
-	fw->Unsigned16(coords.x);
-	fw->Unsigned16(coords.y);
+	fw.Unsigned16(id);
+	fw.Coords32  (coords);
 }
 
 
 /*** class Cmd_BuildFlag ***/
 
-Cmd_BuildFlag::Cmd_BuildFlag (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_BuildFlag::Cmd_BuildFlag (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	coords.x=des->Unsigned16();
-	coords.y=des->Unsigned16();
+	coords = des.Coords32  ();
 }
 
 void Cmd_BuildFlag::execute (Game* g)
@@ -225,35 +248,48 @@ void Cmd_BuildFlag::execute (Game* g)
 	player->build_flag(coords);
 }
 
-void Cmd_BuildFlag::serialize (StreamWrite* ser)
+void Cmd_BuildFlag::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_BUILDFLAG);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned16(coords.x);
-	ser->Unsigned16(coords.y);
+	ser.Unsigned8 (PLCMD_BUILDFLAG);
+	ser.Unsigned8 (get_sender());
+	ser.Coords32  (coords);
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
-void Cmd_BuildFlag::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_BuildFlag::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_BUILDFLAG_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
-		// Coords
-		coords.x=fr->Unsigned16();
-		coords.y=fr->Unsigned16();
-	} else
-		throw wexception("Unknown version in Cmd_BuildFlag::Read: %i", version);
+		try {coords = fr.Coords32(egbase.map().extent());}
+		catch (const WidelandsStreamRead::Width_Exceeded e) {
+			throw wexception
+				("Cmd_BuildFlag::Read: reading coords: width (%u) exceeded (x = "
+				 "%i)",
+				 e.w, e.x);
+		}
+		catch (const WidelandsStreamRead::Height_Exceeded e) {
+			throw wexception
+				("Cmd_BuildFlag::Read: reading coords: height (%u) exceeded (y = "
+				 "%i)",
+				 e.h, e.y);
+		}
+	} else throw wexception
+		("Unknown version in Cmd_BuildFlag::Read: %u", packet_version);
 }
-void Cmd_BuildFlag::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_BuildFlag::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
+	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
-	// Now Coords
-	fw->Unsigned16(coords.x);
-	fw->Unsigned16(coords.y);
+	fw.Coords32  (coords);
 }
 
 /*** class Cmd_BuildRoad ***/
@@ -266,18 +302,18 @@ nsteps       (pa.get_nsteps()),
 steps        (0)
 {}
 
-Cmd_BuildRoad::Cmd_BuildRoad (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_BuildRoad::Cmd_BuildRoad (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	start.x=des->Unsigned16();
-	start.y=des->Unsigned16();
-	nsteps=des->Unsigned16();
+	start  = des.Coords32  ();
+	nsteps = des.Unsigned16();
 
 	// we cannot completely deserialize the path here because we don't have a Map
 	path=0;
 	steps=new char[nsteps];
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-		steps[i]=des->Unsigned8();
+		steps[i] = des.Unsigned8();
 }
 
 Cmd_BuildRoad::~Cmd_BuildRoad ()
@@ -301,58 +337,59 @@ void Cmd_BuildRoad::execute (Game* g)
 	player->build_road(*path);
 }
 
-void Cmd_BuildRoad::serialize (StreamWrite* ser)
+void Cmd_BuildRoad::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_BUILDROAD);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned16(start.x);
-	ser->Unsigned16(start.y);
-	ser->Unsigned16(nsteps);
+	ser.Unsigned8 (PLCMD_BUILDROAD);
+	ser.Unsigned8 (get_sender());
+	ser.Coords32  (start);
+	ser.Unsigned16(nsteps);
 
 	assert (path!=0 || steps!=0);
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-		ser->Unsigned8(path ? (*path)[i] : steps[i]);
+		ser.Unsigned8(path ? (*path)[i] : steps[i]);
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
-void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_BUILDROAD_VERSION) {
+void Cmd_BuildRoad::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_BUILDROAD_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
-		// Start Coords
-		start.x=fr->Unsigned16();
-		start.y=fr->Unsigned16();
-		// Now read nsteps
-		nsteps=fr->Unsigned16();
+		start  = fr.Coords32  (egbase.map().extent());
+		nsteps = fr.Unsigned16();
 		steps= new char[nsteps];
 
 		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-			steps[i]=fr->Unsigned8();
-	} else
-		throw wexception("Unknown version in Cmd_BuildRoad::Read: %i", version);
+			steps[i]=fr.Unsigned8();
+	} else throw wexception
+		("Unknown version in Cmd_BuildRoad::Read: %u", packet_version);
 }
-void Cmd_BuildRoad::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Cmd_BuildRoad::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
+	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
-	// Now Start Coords
-	fw->Unsigned16(start.x);
-	fw->Unsigned16(start.y);
-
-	// Now nsteps
-	fw->Unsigned16(nsteps);
+	fw.Coords32  (start);
+	fw.Unsigned16(nsteps);
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-		fw->Unsigned8(path ? (*path)[i] : steps[i]);
+		fw.Unsigned8(path ? (*path)[i] : steps[i]);
 }
 
 
 /*** Cmd_FlagAction ***/
-Cmd_FlagAction::Cmd_FlagAction (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_FlagAction::Cmd_FlagAction (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	action=des->Unsigned8();
-	serial=des->Unsigned32();
+	action = des.Unsigned8 ();
+	serial = des.Unsigned32();
 }
 
 void Cmd_FlagAction::execute (Game* g)
@@ -364,50 +401,58 @@ void Cmd_FlagAction::execute (Game* g)
 		player->flagaction (static_cast<Flag*>(obj), action);
 }
 
-void Cmd_FlagAction::serialize (StreamWrite* ser)
+void Cmd_FlagAction::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_FLAGACTION);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned8(action);
-	ser->Unsigned32(serial);
+	ser.Unsigned8 (PLCMD_FLAGACTION);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (action);
+	ser.Unsigned32(serial);
 }
 
 #define PLAYER_CMD_FLAGACTION_VERSION 1
-void Cmd_FlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_FLAGACTION_VERSION) {
+void Cmd_FlagAction::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_FLAGACTION_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
-		// action
-		action=fr->Unsigned8();
+		action = fr.Unsigned8 ();
 
 		// Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
-	} else
-		throw wexception("Unknown version in Cmd_FlagAction::Read: %i", version);
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial=mol.get_object_by_file_index(fileserial)->get_serial();
+	} else throw wexception
+		("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
 }
-void Cmd_FlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+void Cmd_FlagAction::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
+{
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
+	fw.Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 	// Now action
-	fw->Unsigned8(action);
+	fw.Unsigned8 (action);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
 /*** Cmd_StartStopBuilding ***/
 
-Cmd_StartStopBuilding::Cmd_StartStopBuilding (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_StartStopBuilding::Cmd_StartStopBuilding (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	serial=des->Unsigned32();
+	serial=des.Unsigned32();
 }
 
 void Cmd_StartStopBuilding::execute (Game* g)
@@ -419,47 +464,54 @@ void Cmd_StartStopBuilding::execute (Game* g)
 		player->start_stop_building(static_cast<PlayerImmovable*>(obj));
 }
 
-void Cmd_StartStopBuilding::serialize (StreamWrite* ser)
+void Cmd_StartStopBuilding::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_STARTSTOPBUILDING);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned32(serial);
+	ser.Unsigned8 (PLCMD_STARTSTOPBUILDING);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(serial);
 }
 #define PLAYER_CMD_STOPBUILDING_VERSION 1
-void Cmd_StartStopBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_StartStopBuilding::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_STOPBUILDING_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_STOPBUILDING_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
-	} else
-		throw wexception("Unknown version in Cmd_StartStopBuilding::Read: %i", version);
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial=mol.get_object_by_file_index(fileserial)->get_serial();
+	} else throw wexception
+		("Unknown version in Cmd_StartStopBuilding::Read: %u", packet_version);
 }
-void Cmd_StartStopBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_StartStopBuilding::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
+	fw.Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
 
 /*** Cmd_EnhanceBuilding ***/
 
-Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	serial=des->Unsigned32();
-	id=des->Unsigned16();
+	serial = des.Unsigned32();
+	id     = des.Unsigned16();
 }
 
 void Cmd_EnhanceBuilding::execute (Game* g)
@@ -470,55 +522,61 @@ void Cmd_EnhanceBuilding::execute (Game* g)
 		g->get_player(get_sender())->enhance_building(building, id);
 }
 
-void Cmd_EnhanceBuilding::serialize (StreamWrite* ser)
+void Cmd_EnhanceBuilding::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_ENHANCEBUILDING);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned32(serial);
-	ser->Unsigned16(id);
+	ser.Unsigned8 (PLCMD_ENHANCEBUILDING);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(serial);
+	ser.Unsigned16(id);
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
-void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_EnhanceBuilding::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_ENHANCEBUILDING_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
-		// Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial =mol.get_object_by_file_index(fileserial)->get_serial();
 
-		// id
-		id=fr->Unsigned16();
-
-	} else
-		throw wexception("Unknown version in Cmd_EnhanceBuilding::Read: %i", version);
+		id = fr.Unsigned16();
+	} else throw wexception
+		("Unknown version in Cmd_EnhanceBuilding::Read: %u", packet_version);
 }
-void Cmd_EnhanceBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_EnhanceBuilding::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
+	fw.Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now id
-	fw->Unsigned16(id);
+	fw.Unsigned16(id);
 }
 
 
 /*** class Cmd_ChangeTrainingOptions ***/
-Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions
+(WidelandsStreamRead & des)
+:
+PlayerCommand (0, des.Unsigned8())
 {
-	serial=des->Unsigned32();      // Serial of the building
-	attribute=des->Unsigned16();  // Attribute to modify
-	value=des->Unsigned16();      // New vale
+	serial    = des.Unsigned32();  //  Serial of the building
+	attribute = des.Unsigned16();  //  Attribute to modify
+	value     = des.Unsigned16();  //  New vale
 }
 
 void Cmd_ChangeTrainingOptions::execute (Game* g)
@@ -533,63 +591,64 @@ void Cmd_ChangeTrainingOptions::execute (Game* g)
 
 }
 
-void Cmd_ChangeTrainingOptions::serialize (StreamWrite* ser)
-{
-	ser->Unsigned8(PLCMD_CHANGETRAININGOPTIONS);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned32(serial);
-	ser->Unsigned16(attribute);
-	ser->Unsigned16(value);
+void Cmd_ChangeTrainingOptions::serialize (WidelandsStreamWrite & ser) {
+	ser.Unsigned8 (PLCMD_CHANGETRAININGOPTIONS);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(serial);
+	ser.Unsigned16(attribute);
+	ser.Unsigned16(value);
 }
 
 
 #define PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION 1
-void Cmd_ChangeTrainingOptions::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_ChangeTrainingOptions::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
-		// Attibute
-		attribute=fr->Unsigned16();
-
-		// Attibute
-		value=fr->Unsigned16();
-	} else
-		throw wexception("Unknown version in Cmd_ChangeTrainingOptions::Read: %i", version);
+		attribute = fr.Unsigned16();
+		value     = fr.Unsigned16();
+	} else throw wexception
+		("Unknown version in Cmd_ChangeTrainingOptions::Read: %u",
+		 packet_version);
 }
 
-void Cmd_ChangeTrainingOptions::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_ChangeTrainingOptions::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
+	fw.Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 
-	// Now attribute
-	fw->Unsigned16(attribute);
-
-	// Now value
-	fw->Unsigned16(value);
+	fw.Unsigned16(attribute);
+	fw.Unsigned16(value);
 }
 
 /*** class Cmd_DropSoldier ***/
 
-Cmd_DropSoldier::Cmd_DropSoldier(StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_DropSoldier::Cmd_DropSoldier(WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	serial=des->Unsigned32();      // Serial of the building
-	soldier=des->Unsigned32();     // Serial of soldier
+	serial  = des.Unsigned32(); //  Serial of the building
+	soldier = des.Unsigned32(); //  Serial of soldier
 }
 
 void Cmd_DropSoldier::execute (Game* g)
@@ -604,59 +663,72 @@ void Cmd_DropSoldier::execute (Game* g)
 	}
 }
 
-void Cmd_DropSoldier::serialize (StreamWrite* ser)
+void Cmd_DropSoldier::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_DROPSOLDIER);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned32(serial);
-	ser->Unsigned32(soldier);
+	ser.Unsigned8 (PLCMD_DROPSOLDIER);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(serial);
+	ser.Unsigned32(soldier);
 }
 
 #define PLAYER_CMD_DROPSOLDIER_VERSION 1
-void Cmd_DropSoldier::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_DROPSOLDIER_VERSION) {
+void Cmd_DropSoldier::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
+{
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+  const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial=mol.get_object_by_file_index(fileserial)->get_serial();
 
 		// Soldier serial
-		int soldierserial=fr->Unsigned32();
-		assert(mol->is_object_known(soldierserial));
-		soldier=mol->get_object_by_file_index(soldierserial)->get_serial();
-	} else
-		throw wexception("Unknown version in Cmd_DropSoldier::Read: %i", version);
+		int soldierserial=fr.Unsigned32();
+		assert(mol.is_object_known(soldierserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		soldier=mol.get_object_by_file_index(soldierserial)->get_serial();
+	} else throw wexception
+		("Unknown version in Cmd_DropSoldier::Read: %u", packet_version);
 }
 
-void Cmd_DropSoldier::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_DropSoldier::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
+	fw.Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	{
+		const Map_Object * const obj = egbase.objects().get_object(serial);
+		assert(mos.is_object_known(obj));
+		fw.Unsigned32(mos.get_object_file_index(obj));
+	}
 
 	// Now soldier serial
-	obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned16(mos->get_object_file_index(obj));
+	{
+		const Map_Object * const obj = egbase.objects().get_object(serial);
+		assert(mos.is_object_known(obj));
+		fw.Unsigned16(mos.get_object_file_index(obj));
+	}
 
 }
 
 /*** Cmd_ChangeSoldierCapacity ***/
 
-Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(WidelandsStreamRead & des)
+:
+PlayerCommand (0, des.Unsigned8())
 {
-	serial=des->Unsigned32();
-	val=des->Unsigned16();
+	serial = des.Unsigned32();
+	val    = des.Unsigned16();
 }
 
 void Cmd_ChangeSoldierCapacity::execute (Game* g)
@@ -668,60 +740,68 @@ void Cmd_ChangeSoldierCapacity::execute (Game* g)
 		player->change_soldier_capacity(static_cast<PlayerImmovable*>(obj), val);
 }
 
-void Cmd_ChangeSoldierCapacity::serialize (StreamWrite* ser)
+void Cmd_ChangeSoldierCapacity::serialize (WidelandsStreamWrite & ser)
 {
-	ser->Unsigned8(PLCMD_CHANGESOLDIERCAPACITY);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned32(serial);
-	ser->Unsigned16(val);
+	ser.Unsigned8 (PLCMD_CHANGESOLDIERCAPACITY);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned32(serial);
+	ser.Unsigned16(val);
 }
 
 #define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
-void Cmd_ChangeSoldierCapacity::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_ChangeSoldierCapacity::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
       // Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
       // Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
       // Now new capacity
-		val=fr->Unsigned16();
-	} else
-		throw wexception("Unknown version in Cmd_ChangeSoldierCapacity::Read: %i", version);
+		val = fr.Unsigned16();
+	} else throw wexception
+		("Unknown version in Cmd_ChangeSoldierCapacity::Read: %u",
+		 packet_version);
 }
 
-void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_ChangeSoldierCapacity::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
+	fw.Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now capacity
-	fw->Unsigned16(val);
+	fw.Unsigned16(val);
 
 }
 
 /// TESTING STUFF
 /*** Cmd_EnemyFlagAction ***/
 
-Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead* des):PlayerCommand (0, des->Unsigned8())
+Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (WidelandsStreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
 {
-	action=des->Unsigned8();
-	serial=des->Unsigned32();
-	attacker=des->Unsigned8();
-	number=des->Unsigned8();
-	type=des->Unsigned8();
+	action   = des.Unsigned8 ();
+	serial   = des.Unsigned32();
+	attacker = des.Unsigned8 ();
+	number   = des.Unsigned8 ();
+	type     = des.Unsigned8 ();
 }
 
 void Cmd_EnemyFlagAction::execute (Game* g)
@@ -745,56 +825,61 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 		log ("Cmd_EnemyFlagAction Player invalid.\n");
 }
 
-void Cmd_EnemyFlagAction::serialize (StreamWrite* ser)
-{
-	ser->Unsigned8(PLCMD_ENEMYFLAGACTION);
-	ser->Unsigned8(get_sender());
-	ser->Unsigned8(action);
-	ser->Unsigned32(serial);
-	ser->Unsigned8(attacker);
-	ser->Unsigned8(number);
-	ser->Unsigned8(type);
+void Cmd_EnemyFlagAction::serialize (WidelandsStreamWrite & ser) {
+	ser.Unsigned8 (PLCMD_ENEMYFLAGACTION);
+	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (action);
+	ser.Unsigned32(serial);
+	ser.Unsigned8 (attacker);
+	ser.Unsigned8 (number);
+	ser.Unsigned8 (type);
 }
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
-void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+void Cmd_EnemyFlagAction::Read
+(WidelandsFileRead               & fr,
+ Editor_Game_Base                & egbase,
+ Widelands_Map_Map_Object_Loader & mol)
 {
-	int version=fr->Unsigned16();
-	if (version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version == PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
 		// Read Player Command
 		PlayerCommand::PlayerCmdRead(fr, egbase, mol);
 
 		// action
-		action=fr->Unsigned8();
+		action   = fr.Unsigned8 ();
 
 		// Serial
-		int fileserial=fr->Unsigned32();
-		assert(mol->is_object_known(fileserial));
-		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+		const Uint32 fileserial = fr.Unsigned32();
+		assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
 		// param
-		attacker=fr->Unsigned8();
-		number=fr->Unsigned8();
-		type=fr->Unsigned8();
-	} else
-		throw wexception("Unknown version in Cmd_FlagAction::Read: %i", version);
+		attacker = fr.Unsigned8 ();
+		number   = fr.Unsigned8 ();
+		type     = fr.Unsigned8 ();
+	} else throw wexception
+		("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
 }
 
-void Cmd_EnemyFlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+void Cmd_EnemyFlagAction::Write
+(WidelandsFileWrite             & fw,
+ Editor_Game_Base               & egbase,
+ Widelands_Map_Map_Object_Saver & mos)
 {
 	// First, write version
-	fw->Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
+	fw.Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
 	// Write base classes
 	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
 	// Now action
-	fw->Unsigned8(action);
+	fw.Unsigned8 (action);
 
 	// Now serial
-	Map_Object* obj=egbase->objects().get_object(serial);
-	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj));
+	const Map_Object * const obj = egbase.objects().get_object(serial);
+	assert(mos.is_object_known(obj));
+	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now param
-	fw->Unsigned8(attacker);
-	fw->Unsigned8(number);
-	fw->Unsigned8(type);
+	fw.Unsigned8 (attacker);
+	fw.Unsigned8 (number);
+	fw.Unsigned8 (type);
 }

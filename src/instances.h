@@ -334,9 +334,14 @@ public:
 	Cmd_Destroy_Map_Object (int t, Map_Object* o);
 	virtual void execute (Game* g);
 
-	// Write these commands to a file (for savegames)
-	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	virtual void Write
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &);
+	virtual void Read
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} // Get this command id
 };
@@ -352,9 +357,14 @@ public:
 
 	virtual void execute (Game* g);
 
-	// Write these commands to a file (for savegames)
-	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	virtual void Write
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &);
+	virtual void Read
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_ACT;} // Get this command id
 };

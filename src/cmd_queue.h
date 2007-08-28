@@ -24,11 +24,11 @@
 
 #include <queue>
 
-class FileRead;
-class FileWrite;
 class Editor_Game_Base;
 class Widelands_Map_Map_Object_Saver;
 class Widelands_Map_Map_Object_Loader;
+class WidelandsFileRead;
+class WidelandsFileWrite;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
@@ -71,14 +71,28 @@ public:
 	void set_duetime(int t) {duetime=t;}
 
 	// Write these commands to a file (for savegames)
-	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*)=0;
-	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)=0;
+	virtual void Write
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &)
+		= 0;
+	virtual void Read
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &)
+		= 0;
 
 	virtual int get_id() = 0; // Get this command id
 
 	// Write commands for BaseCommand. Must be called from upper classes
-	void BaseCmdWrite(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-	void BaseCmdRead(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	void BaseCmdWrite
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &);
+	void BaseCmdRead
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &);
 };
 
 class Cmd_Queue {

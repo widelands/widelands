@@ -22,9 +22,9 @@
 #include "cmd_queue.h"
 #include "error.h"
 #include "game.h"
-#include "fileread.h"
-#include "filewrite.h"
 #include "queue_cmd_factory.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
 
 #define CURRENT_PACKET_VERSION 1
@@ -37,7 +37,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   FileRead fr;
+	WidelandsFileRead fr;
    fr.Open(fs, "binary/cmd_queue");
 
    // read packet version
@@ -65,7 +65,7 @@ throw (_wexception)
 
          uint packet_id=fr.Unsigned16();
          BaseCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-			cmd->Read(&fr, game, ol);
+			cmd->Read(fr, *game, *ol);
 
          item.cmd=cmd;
 
@@ -87,7 +87,7 @@ void Game_Cmd_Queue_Data_Packet::Write
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-   FileWrite fw;
+	WidelandsFileWrite fw;
 
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
@@ -119,7 +119,7 @@ throw (_wexception)
       fw.Unsigned16(p.top().cmd->get_id());
 
       // Now the command itself
-		p.top().cmd->Write(&fw, game, os);
+		p.top().cmd->Write(fw, *game, *os);
       // DONE: next command
       p.pop();
 	}

@@ -80,8 +80,15 @@ class Cmd_NetCheckSync:public BaseCommand {
 	virtual void execute (Game* g);
 
 	// Write these commands to a file (for savegames)
-	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*) __attribute__ ((noreturn));
-	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+	virtual void Write
+		(WidelandsFileWrite             &,
+		 Editor_Game_Base               &,
+		 Widelands_Map_Map_Object_Saver &)
+		__attribute__ ((noreturn));
+	virtual void Read
+		(WidelandsFileRead               &,
+		 Editor_Game_Base                &,
+		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_NETCHECKSYNC;}
 };
@@ -437,7 +444,7 @@ void NetHost::handle_network ()
 				break;
 			    case NETCMD_PLAYERCOMMAND:
 			        log ("[Host] Player command in\n");
-				cmds.push (PlayerCommand::deserialize(clients[i].deserializer));
+				cmds.push (PlayerCommand::deserialize(*clients[i].deserializer));
 				break;
 			    case NETCMD_SYNCREPORT:
 			        log ("[Host] Player syncreport in\n");
@@ -481,7 +488,7 @@ void NetHost::handle_network ()
 			log ("[Host] player command from player %d\n", cmd->get_sender());
 
 			serializer->putchar (NETCMD_PLAYERCOMMAND);
-			cmd->serialize (serializer);
+			cmd->serialize (*serializer);
 
 			cmd->set_duetime (net_game_time);
 			game->enqueue_command (cmd);
@@ -770,7 +777,7 @@ void NetClient::handle_network ()
 			break;
 		    case NETCMD_PLAYERCOMMAND:
 			{
-				PlayerCommand* cmd=PlayerCommand::deserialize(deserializer);
+				PlayerCommand* cmd=PlayerCommand::deserialize(*deserializer);
 				cmd->set_duetime(net_game_time);
 				game->enqueue_command (cmd);
 				log("[Client] Player command recived\n");
@@ -800,7 +807,7 @@ void NetClient::send_player_command (PlayerCommand* cmd)
 	// send the packet to the server instead of queuing it locally
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_PLAYERCOMMAND);
-	cmd->serialize (serializer);
+	cmd->serialize (*serializer);
 	serializer->end_packet ();
 
 	if (sock!=0)
@@ -1026,12 +1033,12 @@ void Cmd_NetCheckSync::execute (Game* g)
 }
 
 void Cmd_NetCheckSync::Write
-(FileWrite *, Editor_Game_Base *, Widelands_Map_Map_Object_Saver *)
+(WidelandsFileWrite &, Editor_Game_Base &, Widelands_Map_Map_Object_Saver &)
 {
 	// this command should not be written to a file
 	throw wexception("Cmd_NetCheckSync is not supposed to be written to a file");
 }
 
 void Cmd_NetCheckSync::Read
-(FileRead *, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
+(WidelandsFileRead &, Editor_Game_Base &, Widelands_Map_Map_Object_Loader &)
 {}

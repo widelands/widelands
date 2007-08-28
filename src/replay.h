@@ -33,8 +33,8 @@
 #define REPLAY_DIR "replays/"
 #define REPLAY_SUFFIX ".wrpl"
 
-class StreamRead;
-class StreamWrite;
+class WidelandsStreamRead;
+class WidelandsStreamWrite;
 
 
 /**
@@ -50,7 +50,7 @@ public:
 
 private:
 	Game* m_game;
-	StreamRead* m_cmdlog;
+	WidelandsStreamRead* m_cmdlog;
 
 	uint m_replaytime;
 };
@@ -67,7 +67,7 @@ public:
 
 private:
 	Game* m_game;
-	StreamWrite* m_cmdlog;
+	WidelandsStreamWrite* m_cmdlog;
 };
 
 

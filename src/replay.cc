@@ -23,9 +23,9 @@
 #include "playercommand.h"
 #include "replay.h"
 #include "save_handler.h"
-#include "streamread.h"
-#include "streamwrite.h"
 #include "wexception.h"
+#include "widelands_streamread.h"
+#include "widelands_streamwrite.h"
 
 
 // File format definitions
@@ -51,7 +51,7 @@ ReplayReader::ReplayReader(Game* game, const std::string filename)
 	gl.load_game();
 	delete fs;
 
-	m_cmdlog = g_fs->OpenStreamRead(filename);
+	m_cmdlog = g_fs->OpenWidelandsStreamRead(filename);
 
 	try {
 		Uint32 magic = m_cmdlog->Unsigned32();
@@ -99,7 +99,7 @@ PlayerCommand* ReplayReader::GetPlayerCommand(uint time)
 			log("REPLAY: WARNING: Old playercommand packet\n");
 
 			m_replaytime = m_cmdlog->Unsigned32();
-			PlayerCommand* cmd = PlayerCommand::deserialize(m_cmdlog);
+			PlayerCommand* cmd = PlayerCommand::deserialize(*m_cmdlog);
 			cmd->set_duetime(m_replaytime);
 			return cmd;
 		}
@@ -109,7 +109,7 @@ PlayerCommand* ReplayReader::GetPlayerCommand(uint time)
 			m_replaytime = m_cmdlog->Unsigned32();
 
 			uint duetime = m_cmdlog->Unsigned32();
-			PlayerCommand* cmd = PlayerCommand::deserialize(m_cmdlog);
+			PlayerCommand* cmd = PlayerCommand::deserialize(*m_cmdlog);
 			cmd->set_duetime(duetime);
 
 			return cmd;
@@ -162,7 +162,7 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	if (!savehandler->save_game(m_game, filename + WLGF_SUFFIX, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
-	m_cmdlog = g_fs->OpenStreamWrite(filename);
+	m_cmdlog = g_fs->OpenWidelandsStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 }
 
@@ -190,7 +190,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
 	// given time".
 	m_cmdlog->Unsigned32(m_game->get_gametime());
 	m_cmdlog->Unsigned32(cmd->get_duetime());
-	cmd->serialize(m_cmdlog);
+	cmd->serialize(*m_cmdlog);
 
 	m_cmdlog->Flush();
 }

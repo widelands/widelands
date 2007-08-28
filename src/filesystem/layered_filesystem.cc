@@ -187,13 +187,14 @@ void LayeredFileSystem::Write(const std::string fname, const void * const data,
  * Analogously to Read, open the file from the first sub-filesystem where
  * it exists.
  */
-StreamRead* LayeredFileSystem::OpenStreamRead(const std::string fname)
+WidelandsStreamRead * LayeredFileSystem::OpenWidelandsStreamRead
+(const std::string & fname)
 {
 	for (FileSystem_rit it = m_filesystems.rbegin();
 	    it != m_filesystems.rend(); it++)
 	{
 		if ((*it)->FileExists(fname))
-			return (*it)->OpenStreamRead(fname);
+			return (*it)->OpenWidelandsStreamRead(fname);
 	}
 
 	throw FileNotFound_error("Could not find file", fname);
@@ -202,13 +203,14 @@ StreamRead* LayeredFileSystem::OpenStreamRead(const std::string fname)
 /**
  * Analogously to Write, create the file in the first writable sub-FS.
  */
-StreamWrite* LayeredFileSystem::OpenStreamWrite(const std::string fname)
+WidelandsStreamWrite * LayeredFileSystem::OpenWidelandsStreamWrite
+(const std::string & fname)
 {
 	for (FileSystem_rit it = m_filesystems.rbegin();
 	    it != m_filesystems.rend(); it++)
 	{
 		if ((*it)->IsWritable())
-			return (*it)->OpenStreamWrite(fname);
+			return (*it)->OpenWidelandsStreamWrite(fname);
 	}
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
