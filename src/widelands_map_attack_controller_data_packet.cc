@@ -115,12 +115,11 @@ throw (_wexception)
 							 "binary/attackcontroller:%u: battleGround has x "
 							 "coordinate %i, but the map width is only %u",
 							 e.position, e.x, e.w);
-					}
-					catch (const WidelandsFileRead::Height_Exceeded e) {
+					} catch (const WidelandsFileRead::Height_Exceeded e) {
 						throw wexception
 							("Widelands_Map_Attack_Controller_Data_Packet::Read: in "
-							 "binary/attackcontroller:%u: battleGround has x "
-							 "coordinate %i, but the map width is only %u",
+							 "binary/attackcontroller:%u: battleGround has y "
+							 "coordinate %i, but the map height is only %u",
 							 e.position, e.y, e.h);
 					}
 				}
