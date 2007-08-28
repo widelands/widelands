@@ -74,7 +74,7 @@ public: // implementation of Supply
 
 	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req) __attribute__ ((noreturn));
 	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r) __attribute__ ((noreturn));
-	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
+	virtual void mark_as_used (Game* g, int ware, Requeriments* r) __attribute__ ((noreturn));
 private:
 	WareInstance * m_ware;
 	Economy      * m_economy;
