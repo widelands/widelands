@@ -254,7 +254,11 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, Align_Left);
 	   assert(m_sel.pos.triangle.t < 2);
 	   const char * const triangle_string[] = {"down", "right"};
-	   snprintf(buf, 100, "%3i %3i %s", m_sel.pos.triangle.x, m_sel.pos.triangle.y, triangle_string[m_sel.pos.triangle.t]);
+		snprintf
+			(buf, sizeof(buf),
+			 "%3i %3i %s",
+			 m_sel.pos.triangle.x, m_sel.pos.triangle.y,
+			 triangle_string[m_sel.pos.triangle.t]);
 		g_fh->draw_string
 			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 25), buf, Align_Left);
 	}
