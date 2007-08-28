@@ -88,11 +88,8 @@ Left-press: warp the view point to the new position
 bool MiniMap::View::handle_mousepress(const Uint8 btn, int x, int y) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
-		Coords c;
-
 		// calculates the coordinates corresponding to the mouse position
-      c.x = m_viewx + 1 - (get_w() / 2) + x;
-      c.y = m_viewy + 1 - (get_h() / 2) + y;
+	Coords c(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
 
 	m_iabase.egbase().map().normalize_coords(&c);
 
