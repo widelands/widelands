@@ -1464,8 +1464,8 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 
 
 #define BASE_COST_PER_FIELD 1800
-#define SLOPE_COST_FACTOR      0.02
-#define SLOPE_COST_STEPS       8
+#define SLOPE_COST_DIVISOR  50
+#define SLOPE_COST_STEPS    8
 
 /*
 ===============
@@ -1481,6 +1481,15 @@ int Map::calc_cost_estimate(const Coords a, const Coords b) const
 }
 
 
+/**
+ * \return a lower bound on the time required to walk from \p a to \p b
+ */
+int Map::calc_cost_lowerbound(const Coords a, const Coords b) const
+{
+	return calc_distance(a, b) * calc_cost(-SLOPE_COST_STEPS);
+}
+
+
 /*
 ===============
 Map::calc_cost
@@ -1491,17 +1500,18 @@ The cost is in milliseconds it takes to walk.
 
 The time is calculated as BASE_COST_PER_FIELD * f, where
 
-f = base + d(Slope)
-d = SLOPE_COST_FACTOR * (Slope + SLOPE_COST_STEPS)*(Slope + SLOPE_COST_STEPS - 1) / 2
-base = 1.0 - d(0)
+f = 1.0 + d(Slope) - d(0)
+d = (Slope + SLOPE_COST_STEPS)*(Slope + SLOPE_COST_STEPS - 1) / (2*SLOPE_COST_DIVISOR)
+
+Note that the actual calculations multiply through by (2*SLOPE_COST_DIVISOR)
+to avoid using floating point numbers in game logic code.
 
 Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
 ===============
 */
-#define CALC_COST_D(slope) (SLOPE_COST_FACTOR * ((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1) * 0.5)
-#define CALC_COST_BASE     (1.0 - CALC_COST_D(0))
+#define CALC_COST_D(slope) (((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1))
 
-static inline float calc_cost_d(int slope)
+static int calc_cost_d(int slope)
 {
 	if (slope < -SLOPE_COST_STEPS)
 		slope = -SLOPE_COST_STEPS;
@@ -1511,8 +1521,9 @@ static inline float calc_cost_d(int slope)
 
 int Map::calc_cost(int slope) const
 {
-	return static_cast<int>
-		(BASE_COST_PER_FIELD * (CALC_COST_BASE + calc_cost_d(slope)));
+	int f = 2*SLOPE_COST_DIVISOR + calc_cost_d(slope) - CALC_COST_D(0);
+
+	return (BASE_COST_PER_FIELD * f) / (2*SLOPE_COST_DIVISOR);
 }
 
 
@@ -1896,7 +1907,7 @@ int Map::findpath
 	curpf = m_pathfields + (start.field-m_fields);
 	curpf->cycle = m_pathcycle;
 	curpf->real_cost = 0;
-	curpf->estim_cost = calc_cost_estimate(start, end);
+	curpf->estim_cost = calc_cost_lowerbound(start, end);
 	curpf->backlink = Map_Object::IDLE;
 
 	Open.push(curpf);
@@ -1949,18 +1960,16 @@ int Map::findpath
 				continue;
 
 			// Calculate cost
-			cost =
-				curpf->real_cost
-				+
-				(flags & fpBidiCost) ?
-				calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
+			const int stepcost = (flags & fpBidiCost) ?
+					calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
+
+			cost = curpf->real_cost + stepcost;
 
 			if (neighbpf->cycle != m_pathcycle) {
 				// add to open list
 				neighbpf->cycle = m_pathcycle;
 				neighbpf->real_cost = cost;
-				// use a slightly lower estimate for better accuracy
-				neighbpf->estim_cost = calc_cost_estimate(neighb, end) >> 1;
+				neighbpf->estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf->backlink = *direction;
 				Open.push(neighbpf);
 			} else if (neighbpf->cost() > cost+neighbpf->estim_cost) {

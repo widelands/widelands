@@ -265,6 +265,7 @@ struct Map {
 	int is_neighbour(const Coords, const Coords) const;
 
 	int calc_cost_estimate(const Coords, const Coords) const;
+	int calc_cost_lowerbound(const Coords, const Coords) const;
 	int calc_cost(const int slope) const;
 	int calc_cost(const Coords, const int dir) const;
 	int calc_bidi_cost(const Coords, const int dir) const;
