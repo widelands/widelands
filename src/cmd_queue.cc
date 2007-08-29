@@ -108,6 +108,8 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 
 		if (dynamic_cast<GameLogicCommand*>(c)) {
 			StreamWrite& ss(m_game->syncstream());
+			static const Uint8 tag[] = { 0xde, 0xad, 0x00 };
+			ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
 			ss.Unsigned32(c->get_duetime());
 			ss.Unsigned32(c->get_id());
 		}
