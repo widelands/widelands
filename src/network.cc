@@ -327,7 +327,7 @@ void NetHost::handle_network ()
 			if ((pl = game->get_player(i)) and pl->get_type() == Player::AI)
 				break;
 
-		if (pl==0) {
+		if (!pl) {
 			log("[Host] Map Full...\n");
 			// sorry, but there no room on this map for any more players
 			SDLNet_TCP_Close (sock);
@@ -336,9 +336,14 @@ void NetHost::handle_network ()
 
 		SDLNet_TCP_AddSocket (sockset, sock);
 
+		log("[Host] Setting up player for new connection\n");
+
+		std::string tribename = pl->tribe().name();
 		game->remove_player (i);
+		pl = 0;
+
 		game->add_player
-			(i, Player::Remote, pl->tribe().name().c_str(), _("I have no name"));
+			(i, Player::Remote, tribename.c_str(), _("I have no name"));
 
 		Client peer;
 		peer.sock=sock;
@@ -452,7 +457,7 @@ void NetHost::handle_network ()
 
 			case NETCMD_CHATMESSAGE:
 				{
-					log ("[Host] Chat recived\n");
+					log ("[Host] Chat received\n");
 					char buffer[256];
 					Chat_Message msg;
 					//uchar plrnum =  clients[i].deserializer->getchar();
@@ -703,7 +708,7 @@ void NetClient::handle_network ()
 			SDLNet_TCP_DelSocket (sockset, sock);
 			SDLNet_TCP_Close (sock);
 			sock=0;
-			log("[Client]Disconnect recived\n");
+			log("[Client] Disconnect received\n");
 			disconnect ();
 			break;
 
@@ -727,7 +732,7 @@ void NetClient::handle_network ()
 		case NETCMD_PLAYERINFO:
 			player_enabled=deserializer->getchar();
 			player_human=deserializer->getchar();
-			log("[Client] Playerinfo recived\n");
+			log("[Client] Playerinfo received\n");
 			for (i=0;i<MAX_PLAYERS;i++) {
 				if (i!=playernum-1) {
 					if (player_enabled & (1<<i)) {
@@ -746,7 +751,7 @@ void NetClient::handle_network ()
 		case NETCMD_PREGAME_STATUS:
 			{
 				uchar ready=deserializer->getchar();
-				log("[Client]Pregame status recived\n");
+				log("[Client] Pregame status received\n");
 				assert (phase==PH_PREGAME);
 				assert (statuswnd!=0);
 
@@ -794,7 +799,7 @@ void NetClient::handle_network ()
 				PlayerCommand* cmd=PlayerCommand::deserialize(*deserializer);
 				cmd->set_duetime(net_game_time);
 				game->enqueue_command (cmd);
-				log("[Client] Player command recived\n");
+				log("[Client] Player command received\n");
 			}
 			break;
 
