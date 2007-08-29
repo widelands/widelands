@@ -109,6 +109,8 @@ public:
 	virtual void postload();
 	void think();
 
+	ReplayWriter* get_replaywriter() { return m_replaywriter; }
+
 	/**
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.

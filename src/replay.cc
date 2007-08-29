@@ -20,6 +20,7 @@
 #include "game.h"
 #include "game_loader.h"
 #include "layered_filesystem.h"
+#include "md5.h"
 #include "playercommand.h"
 #include "replay.h"
 #include "save_handler.h"
@@ -34,7 +35,40 @@
 enum {
 	pkt_playercommand_old = 1,
 	pkt_end = 2,
-	pkt_playercommand = 3
+	pkt_playercommand = 3,
+	pkt_syncreport = 4
+};
+
+#define SYNC_INTERVAL 200
+
+
+class Cmd_ReplaySyncRead : public Command {
+public:
+	Cmd_ReplaySyncRead(uint time, const md5_checksum& hash)
+		: Command(time), m_hash(hash)
+	{
+	}
+
+	int get_id() { return QUEUE_CMD_REPLAYSYNCREAD; }
+
+	void execute(Game* g)
+	{
+		md5_checksum myhash = g->get_sync_hash();
+
+		if (m_hash != myhash) {
+			log("REPLAY: Lost synchronization at time %u\n"
+			    "I have:     %s\n"
+			    "Replay has: %s\n",
+			    get_duetime(), myhash.str().c_str(), m_hash.str().c_str());
+
+			g->set_speed(0);
+		} else {
+			log("REPLAY: Sync checked successfully.\n");
+		}
+	}
+
+private:
+	md5_checksum m_hash;
 };
 
 
@@ -76,13 +110,13 @@ ReplayReader::~ReplayReader()
 
 
 /**
- * Retrieve the next player command, until no more player commands before
- * the given timestamp are available.
+ * Retrieve the next command, until no more commands before the given
+ * timestamp are available.
  *
- * \return a \ref PlayerCommand that should be enqueued in the command queue
+ * \return a \ref Command that should be enqueued in the command queue
  * or 0 if there are no remaining commands before the given time.
  */
-PlayerCommand* ReplayReader::GetPlayerCommand(uint time)
+Command* ReplayReader::GetNextCommand(uint time)
 {
 	if (!m_cmdlog)
 		return 0;
@@ -115,6 +149,15 @@ PlayerCommand* ReplayReader::GetPlayerCommand(uint time)
 			return cmd;
 		}
 
+		case pkt_syncreport:
+		{
+			uint duetime = m_cmdlog->Unsigned32();
+			md5_checksum hash;
+			m_cmdlog->Data(hash.data, sizeof(hash.data));
+
+			return new Cmd_ReplaySyncRead(duetime, hash);
+		}
+
 		case pkt_end:
 			log("REPLAY: End of replay\n");
 			delete m_cmdlog;
@@ -145,6 +188,25 @@ bool ReplayReader::EndOfReplay()
 
 
 /**
+ * Command / timer that regularly inserts synchronization hashes into
+ * the replay.
+ */
+class Cmd_ReplaySyncWrite : public Command {
+public:
+	Cmd_ReplaySyncWrite(uint t) : Command(t) { }
+
+	int get_id() { return QUEUE_CMD_REPLAYSYNCWRITE; }
+
+	void execute(Game* g) {
+		if (ReplayWriter* rw = g->get_replaywriter()) {
+			rw->SendSync (g->get_sync_hash());
+
+			g->enqueue_command (new Cmd_ReplaySyncWrite(get_duetime()+SYNC_INTERVAL));
+		}
+	}
+};
+
+/**
  * Start a replay at the given filename (the caller must add the suffix).
  *
  * This will immediately save the given game.
@@ -164,6 +226,8 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 
 	m_cmdlog = g_fs->OpenWidelandsStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
+
+	game->enqueue_command(new Cmd_ReplaySyncWrite(game->get_gametime() + SYNC_INTERVAL));
 }
 
 
@@ -192,5 +256,17 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
 	m_cmdlog->Unsigned32(cmd->get_duetime());
 	cmd->serialize(*m_cmdlog);
 
+	m_cmdlog->Flush();
+}
+
+
+/**
+ * Store a synchronization hash for the current game time in the replay.
+ */
+void ReplayWriter::SendSync(const md5_checksum& hash)
+{
+	m_cmdlog->Unsigned8(pkt_syncreport);
+	m_cmdlog->Unsigned32(m_game->get_gametime());
+	m_cmdlog->Data(hash.data, sizeof(hash.data));
 	m_cmdlog->Flush();
 }

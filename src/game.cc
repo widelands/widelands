@@ -636,7 +636,7 @@ void Game::think()
 
 		if (m_replayreader) {
 			for (;;) {
-				PlayerCommand* cmd = m_replayreader->GetPlayerCommand(get_gametime() + frametime);
+				Command* cmd = m_replayreader->GetNextCommand(get_gametime() + frametime);
 				if (!cmd)
 					break;
 

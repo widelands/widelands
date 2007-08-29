@@ -33,6 +33,8 @@
 #define REPLAY_DIR "replays/"
 #define REPLAY_SUFFIX ".wrpl"
 
+struct md5_checksum;
+
 class WidelandsStreamRead;
 class WidelandsStreamWrite;
 
@@ -45,7 +47,7 @@ public:
 	ReplayReader(Game* game, const std::string filename);
 	~ReplayReader();
 
-	PlayerCommand* GetPlayerCommand(uint time);
+	Command* GetNextCommand(uint time);
 	bool EndOfReplay();
 
 private:
@@ -64,6 +66,7 @@ public:
 	~ReplayWriter();
 
 	void SendPlayerCommand(PlayerCommand* cmd);
+	void SendSync(const md5_checksum& hash);
 
 private:
 	Game* m_game;
