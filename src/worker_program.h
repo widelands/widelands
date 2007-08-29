@@ -42,8 +42,8 @@ class WorkerProgram : public BobProgramBase
 											   Parser* parser,
 											   const std::vector<std::string>&);
 
-		WorkerProgram(std::string name) {m_name = name;}
-		virtual ~WorkerProgram() {}
+	WorkerProgram(const std::string & name) : m_name(name) {}
+	virtual ~WorkerProgram() {}
 
 		std::string get_name() const {return m_name;}
 		int get_size() const {return m_actions.size();}
@@ -101,7 +101,7 @@ class WorkerProgram : public BobProgramBase
 		void parse_playFX(Worker_Descr*, Worker::Action* act, Parser* parser,
 		                  const std::vector<std::string>& cmd);
 
-		std::string                 m_name;
+	const std::string                 m_name;
 		std::vector<Worker::Action> m_actions;
 		static const ParseMap       s_parsemap[];
 };
