@@ -106,11 +106,6 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 		assert(c->get_duetime() - *game_time_var >= 0);
 		*game_time_var = c->get_duetime();
 
-		// Modify RNG state depending on the command. This
-		// will make detecting loss of synchronization easier
-		// and adds some entropy to the state.
-		m_game->logic_rand_seed (*game_time_var);
-
 		if (dynamic_cast<GameLogicCommand*>(c)) {
 			StreamWrite& ss(m_game->syncstream());
 			ss.Unsigned32(c->get_duetime());
