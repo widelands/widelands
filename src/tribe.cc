@@ -558,8 +558,8 @@ uint Tribe_Descr::get_resource_indicator
 			 name().c_str(),
 			 res->name().c_str());
 
-   uint bestmatch = (uint) ((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
-   if (((int)amount)<res->get_max_amount())
+   uint bestmatch = static_cast<uint>((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
+	if (static_cast<int>(amount) < res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
 	sprintf(buffer, "resi_%s%i", res->name().c_str(), bestmatch);

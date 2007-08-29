@@ -22,29 +22,33 @@
 
 #include <vector>
 
+#include <SDL.h>
+
 /**
  * WareList is a simple wrapper around an array of ware types.
  * It is useful for warehouses and for economy-wide inventory.
  */
-class WareList
-{
-	public:
+struct WareList {
 		WareList() {};
 		~WareList();
 
 		/// Clear the storage
 		void clear() {m_wares.clear();};
 
+	typedef Uint32 count_type;
+	typedef std::vector<count_type> vector_type;
+	typedef vector_type::size_type size_type;
+
 		/// \return Highest possible ware id
-		const int get_nrwareids() const {return m_wares.size();}
+	const size_type get_nrwareids() const {return m_wares.size();}
 
-		void add(int id, int count = 1);
+	void add   (const size_type id, const count_type count = 1);
 		void add(const WareList &wl);
-		void remove(int id, int count = 1);
+	void remove(const size_type id, const count_type count = 1);
 		void remove(const WareList &wl);
-		int stock(int id) const;
+	int stock(size_type id) const;
 
-		void set_nrwares(int i) {
+	void set_nrwares(const size_type i) {
 			assert(m_wares.size()==0);
 			m_wares.resize(i, 0);
 		}
@@ -52,8 +56,8 @@ class WareList
 		bool operator==(const WareList &wl) const;
 		bool operator!=(const WareList &wl) const {return not (*this==wl);}
 
-	private:
-		std::vector<int> m_wares;
+private:
+	vector_type m_wares;
 };
 
 

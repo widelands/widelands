@@ -21,15 +21,15 @@
 #define __S__TRIBEDATA_H
 
 #ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) ((ushort) (((uchar) (major))<<8) | (((uchar) (minor))))
+#define PACK_VERSION(major, minor) (static_cast<ushort>((static_cast<uchar>(major))<<8) | ((static_cast<uchar>(minor))))
 #endif
 
 #ifndef VERSION_MAJOR
-#define VERSION_MAJOR(vers) ((ushort) (((ushort) (vers)>>8) & 0xff))
+#define VERSION_MAJOR(vers) (static_cast<ushort>((static_cast<ushort>(vers)>>8) & 0xff))
 #endif
 
 #ifndef VERSION_MINOR
-#define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
+#define VERSION_MINOR(vers) (static_cast<ushort>((static_cast<ushort>(vers)) & 0xff))
 #endif
 
 #define WLWF_VERSION PACK_VERSION(1, 0)

@@ -239,7 +239,7 @@ void Tab_Panel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-bool Tab_Panel::handle_mousemove(const Uint8 state, int x, int y, int, int) {
+bool Tab_Panel::handle_mousemove(const Uint8, int x, int y, int, int) {
 	int hl;
 
 	if (y < 0 || y >= TP_BUTTON_HEIGHT)
@@ -248,7 +248,7 @@ bool Tab_Panel::handle_mousemove(const Uint8 state, int x, int y, int, int) {
 		{
 		hl = x / TP_BUTTON_WIDTH;
 
-		if (hl < 0 || hl >= (int)m_tabs.size())
+			if (static_cast<size_t>(hl) >= m_tabs.size())
 			hl = -1;
 		}
 
@@ -285,8 +285,7 @@ bool Tab_Panel::handle_mousepress(const Uint8 btn, int x, int y) {
 
 		id = x / TP_BUTTON_WIDTH;
 
-		if (id >= 0 && id < (int)m_tabs.size())
-			{
+		if (static_cast<size_t>(id) < m_tabs.size()) {
 			activate(id);
 
 			return true;

@@ -80,8 +80,7 @@ void Scrollbar::set_steps(int steps)
 	if (steps < 1)
 		steps = 1;
 
-	if (m_pos >= (uint)steps)
-		set_pos(steps - 1);
+	if (m_pos >= static_cast<uint>(steps)) set_pos(steps - 1);
 
 	m_steps = steps;
 
@@ -108,11 +107,9 @@ void Scrollbar::set_pos(int pos)
 {
 	if (pos < 0)
 		pos = 0;
-	if ((uint)pos >= m_steps)
-		pos = m_steps - 1;
+	if (static_cast<uint>(pos) >= m_steps) pos = m_steps - 1;
 
-	if (m_pos == (uint)pos)
-		return;
+	if (m_pos == static_cast<uint>(pos)) return;
 
 	m_pos = pos;
 	moved.call(pos);
@@ -196,7 +193,7 @@ void Scrollbar::set_knob_pos(int pos)
 	extent -= 3 * Size;
 	pos -= 3 * Size / 2;
 
-	pos = (pos * (int)m_steps) / extent;
+	pos = (pos * static_cast<int>(m_steps)) / extent;
 	set_pos(pos);
 }
 
@@ -217,7 +214,7 @@ void Scrollbar::action(Area area)
 	default: return;
 	}
 
-	pos = (int)m_pos + diff;
+	pos = static_cast<int>(m_pos) + diff;
 	set_pos(pos);
 }
 

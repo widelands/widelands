@@ -1211,17 +1211,17 @@ void Computer_Player::construct_roads ()
 
 	const clock_t time_before = clock();
 	int i, j, k;
-	for (i=0;i<(int) spots.size();i++)
-	    for (j=0;j<6;j++) {
+	for (i=0;i<static_cast<int>(spots.size());i++)
+		for (j=0;j<6;j++) {
 		Coords nc;
 
 		map.get_neighbour (spots[i].coords, j + 1, &nc);
 
-		for (k=0;k<(int) spots.size();k++)
+			for (k=0;k<static_cast<int>(spots.size());k++)
 		    if (spots[k].coords==nc)
 			break;
 
-		spots[i].neighbours[j]=(k<(int) spots.size()) ? k : -1;
+			spots[i].neighbours[j]=(k<static_cast<int>(spots.size())) ? k : -1;
 		}
 
 	log

@@ -144,7 +144,7 @@ bool AttackController::launchAllSoldiers(bool attackers, int max) {
 		 ++it)
 	{
       uint soldiersOfMs = (*it)->nr_attack_soldiers();
-      uint nrLaunch = ((max > -1) && (soldiersOfMs > (uint)max) ? (uint)max : soldiersOfMs);
+		const uint nrLaunch = (max > -1 and (soldiersOfMs > static_cast<uint>(max)) ? static_cast<uint>(max) : soldiersOfMs);
 		if (nrLaunch == 0) continue;
 
 		launchedSoldier = true;

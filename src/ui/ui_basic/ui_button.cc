@@ -145,7 +145,8 @@ void Basic_Button::draw(RenderTarget* dst)
 				 -1,
 				 Widget_Cache_None,
 				 0,
-				 (m_draw_caret ? m_title.length() : (uint)-1));
+				 (m_draw_caret ?
+				  m_title.length() : std::numeric_limits<uint>::max()));
 		}
 
 	// draw border

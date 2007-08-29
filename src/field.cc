@@ -39,5 +39,5 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 
 	if (b < -128) b = -128;
 	else if (b > 127) b = 127;
-	brightness = (char)b;
+	brightness = static_cast<char>(b);
 }

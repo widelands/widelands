@@ -94,7 +94,7 @@ Returns the user-defined data of the icon with the given index.
 */
 void* Icon_Grid::get_data(int idx)
 {
-	assert((uint)idx < m_items.size());
+	assert(static_cast<uint>(idx) < m_items.size());
 
 	return m_items[idx].data;
 }
@@ -106,7 +106,7 @@ Set the currently selected icon for persistant grids.
 void Icon_Grid::set_selection(int idx)
 {
 	assert(is_persistant());
-	assert((uint)idx < m_items.size());
+	assert(static_cast<uint>(idx) < m_items.size());
 
 	if (m_selected >= 0)
 		update_for_index(m_selected);
@@ -215,10 +215,9 @@ int Icon_Grid::index_for_point(int x, int y)
 	if (x < 0 || x >= m_columns * w || y < 0)
 		return -1;
 
-	int index = m_columns * (y / h) + (x / w);
+	const int index = m_columns * (y / h) + (x / w);
 
-	if (index < 0 || index >= (int)m_items.size())
-		return -1;
+	if (static_cast<size_t>(index) >= m_items.size()) return -1;
 
 	return index;
 }
@@ -247,7 +246,7 @@ Issue an update() call for the cell with the given idx.
 */
 void Icon_Grid::update_for_index(int idx)
 {
-	if (idx >= 0 && idx < (int)m_items.size()) {
+	if (static_cast<size_t>(idx) < m_items.size()) {
 		int x, y;
 
 		get_cell_position(idx, &x, &y);

@@ -247,8 +247,7 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int, int y) {
       m_last_click_time=time;
 
       y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
-      if (y >= 0 && y < (int)m_entry_records.size())
-         select(y);
+	if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
 
       // check if doubleclicked
 	if

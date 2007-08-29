@@ -420,11 +420,10 @@ molog ("**Dropping soldier (%d)\n", serial);
 
 	if (Game * const game = dynamic_cast<Game *>(&owner().egbase()))
 		if (m_soldiers.size()) {
-      int i = 0;
+			size_t i = 0;
       Soldier* s = m_soldiers[i];
 
-      while ((s) && (s->get_serial() != serial) && (i < (int)m_soldiers.size()))
-      {
+			while (s and s->get_serial() != serial and i < m_soldiers.size()) {
          molog ("Serial: %d -- \n!", s->get_serial());
          i++;
          s = m_soldiers[i];
@@ -456,8 +455,7 @@ void MilitarySite::drop_soldier (Game *g, int nr)
       Soldier *s;
 
       // Check if its out of bounds
-      if ((nr < 0) || (nr > (int) m_soldiers.size()))
-         return;
+	if (nr < 0 or nr > static_cast<int>(m_soldiers.size())) return;
 
       s = m_soldiers.at(nr);
 
@@ -496,24 +494,20 @@ Changes the soldiers capacity.
 */
 void MilitarySite::change_soldier_capacity(int how)
 {
-   if (how)
-   {
-      if (how > 0)
-      {
+	if (how) {
+		if (how > 0) {
          m_capacity += how;
 
-         if (m_capacity > (uint) descr().get_max_number_of_soldiers())
-            m_capacity = (uint) descr().get_max_number_of_soldiers();
+			if
+				(m_capacity > static_cast<uint>(descr().get_max_number_of_soldiers()))
+				m_capacity = static_cast<uint>(descr().get_max_number_of_soldiers());
 			call_soldiers();
 		}
-      else
-      {
+		else {
          how = -how;
 
-         if (how >= (int) m_capacity)
-            m_capacity = 1;
-         else
-            m_capacity -= how;
+			if (how >= static_cast<int>(m_capacity)) m_capacity  = 1;
+			else                                     m_capacity -= how;
 
          while (m_capacity < m_soldiers.size() + m_soldier_requests.size())
          {
@@ -678,7 +672,7 @@ uint MilitarySite::nr_not_marked_soldiers() {
       return 0;
 	}
    uint nr_soldiers = 0;
-   for (uint i = 0; (uint) i < m_soldiers.size(); i++) {
+	for (uint i = 0; i < m_soldiers.size(); ++i) {
       if (!m_soldiers[i]->is_marked())
          nr_soldiers++;
 	}

@@ -1539,7 +1539,7 @@ Flag * Route::get_flag
 */
 void Route::starttrim(int count)
 {
-	assert(count < (int)m_route.size());
+	assert(count < static_cast<int>(m_route.size()));
 
 	m_route.erase(m_route.begin(), m_route.begin()+count);
 }
@@ -1549,7 +1549,7 @@ void Route::starttrim(int count)
 */
 void Route::truncate(int count)
 {
-	assert(count < (int)m_route.size());
+	assert(count < static_cast<int>(m_route.size()));
 
 	m_route.erase(m_route.begin()+count+1, m_route.end());
 }
@@ -1816,8 +1816,6 @@ void Requeriments::set (tAttribute at, int min, int max)
 
 bool Requeriments::check (int hp, int attack, int defense, int evade)
 {
-	bool result = false;
-
    int total = hp + attack + defense + evade;
 
 	return
@@ -2220,7 +2218,7 @@ void Request::set_count(int count)
 	// Cancel unneeded transfers. This should be more clever about which
 	// transfers to cancel. Then again, this loop shouldn't execute during
 	// normal play anyway
-	while (m_count < (int)m_transfers.size())
+	while (m_count < static_cast<int>(m_transfers.size()))
 		cancel_transfer(m_transfers.size() - 1);
 
 	// Update the economy
@@ -2903,7 +2901,7 @@ public:
 	{
 		unsigned l = node*2 + 1;
 		unsigned r = node*2 + 2;
-		if (m_data[node]->mpf_heapindex != (int)node) {
+		if (m_data[node]->mpf_heapindex != static_cast<int>(node)) {
 			fprintf(stderr, "%s: mpf_heapindex integrity!\n", str);
 			abort();
 		}
@@ -3254,8 +3252,7 @@ void Economy::add_worker_supply(int ware, Supply* supp)
 {
 	//log("add_worker_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= (int)m_worker_supplies.size())
-		m_worker_supplies.resize(ware+1);
+	if (ware >= static_cast<int>(m_worker_supplies.size())) m_worker_supplies.resize(ware + 1);
 
 	m_worker_supplies[ware].add_supply(supp);
 
@@ -3268,8 +3265,7 @@ void Economy::add_worker_supply(int ware, Supply* supp)
 */
 bool Economy::have_worker_supply(int ware, Supply* supp)
 {
-	if (ware >= (int)m_worker_supplies.size())
-		return false;
+	if (ware >= static_cast<int>(m_worker_supplies.size())) return false;
 
 	for (int i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
 		if (m_worker_supplies[ware].get_supply(i) == supp)
@@ -3295,8 +3291,7 @@ void Economy::add_soldier_supply(int ware, Supply* supp)
 {
 	//log("add_soldier_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= (int)m_worker_supplies.size())
-		m_worker_supplies.resize(ware+1);
+	if (ware >= static_cast<int>(m_worker_supplies.size())) m_worker_supplies.resize(ware + 1);
 
 	m_worker_supplies[ware].add_supply(supp);
 
@@ -3307,8 +3302,7 @@ void Economy::add_soldier_supply(int ware, Supply* supp)
  * Return true if the given soldier_supply is registered with the economy.
 */
 bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments *) {
-	if (ware >= (int)m_worker_supplies.size())
-		return false;
+	if (ware >= static_cast<int>(m_worker_supplies.size())) return false;
 
 	for (int i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
 		if (m_worker_supplies[ware].get_supply(i) == supp)
@@ -3334,8 +3328,7 @@ void Economy::add_ware_supply(int ware, Supply* supp)
 {
 	//log("add_ware_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= (int)m_ware_supplies.size())
-		m_ware_supplies.resize(ware+1);
+	if (ware >= static_cast<int>(m_ware_supplies.size())) m_ware_supplies.resize(ware + 1);
 
 	m_ware_supplies[ware].add_supply(supp);
 
@@ -3347,8 +3340,7 @@ void Economy::add_ware_supply(int ware, Supply* supp)
 */
 bool Economy::have_ware_supply(int ware, Supply* supp)
 {
-	if (ware >= (int)m_ware_supplies.size())
-		return false;
+	if (ware >= static_cast<int>(m_ware_supplies.size())) return false;
 
 	for (int i = 0; i < m_ware_supplies[ware].get_nrsupplies(); i++)
 		if (m_ware_supplies[ware].get_supply(i) == supp)
@@ -3498,7 +3490,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int* pware, int* pcost,
 	Flag * const target_flag = req->get_target_flag();
 
 	// Look for matches in all possible supplies in this economy
-	if (*pware >= (int)use_supply->size())
+	if (*pware >= static_cast<int>(use_supply->size()))
 		return false; // tough luck, we have definitely no supplies for this ware
 
 	// if there are no resources of requested ware, try a substitute

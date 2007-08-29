@@ -41,15 +41,11 @@ WareList::~WareList()
 /**
  * Add the given number of items (default = 1) to the storage.
  */
-void WareList::add(int id, int count)
-{
+void WareList::add(const size_type id, const count_type count) {
 	if (!count)
 		return;
 
-	assert(id >= 0);
-
-	if (id >= (int)m_wares.size())
-		m_wares.resize(id+1, 0);
+	if (id >= m_wares.size()) m_wares.resize(id + 1, 0);
 	m_wares[id] += count;
 	assert(m_wares[id] >= count);
 }
@@ -69,12 +65,11 @@ void WareList::add(const WareList &wl)
 /**
  * Remove the given number of items (default = 1) from the storage.
  */
-void WareList::remove(int id, int count)
-{
+void WareList::remove(const size_type id, const count_type count) {
 	if (!count)
 		return;
 
-	assert(id >= 0 && id < (int)m_wares.size());
+	assert(id < m_wares.size());
    assert(m_wares[id] >= count);
 	m_wares[id] -= count;
 }
@@ -90,13 +85,8 @@ void WareList::remove(const WareList &wl)
 /**
  * Return the number of wares of a given type stored in this storage.
  */
-int WareList::stock(int id) const
-{
-	assert(id >= 0);
-
-	if (id >= (int)m_wares.size())
-		return 0;
-	return m_wares[id];
+int WareList::stock(const size_type id) const {
+	return id < m_wares.size() ? m_wares[id] : 0;
 }
 
 
@@ -109,7 +99,7 @@ bool WareList::operator==(const WareList &wl) const
 	uint i = 0;
 
 	while (i < wl.m_wares.size()) {
-		int count = wl.m_wares[i];
+		const count_type count = wl.m_wares[i];
 		if (i < this->m_wares.size()) {
 			if (count != this->m_wares[i])
 				return false;

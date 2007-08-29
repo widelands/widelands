@@ -81,13 +81,13 @@ void WarehouseSupply::set_economy(Economy* e)
 		return;
 
 	if (m_economy) {
-		for (int i = 0; i < m_wares.get_nrwareids(); i++) {
+		for (size_t i = 0; i < m_wares.get_nrwareids(); ++i) {
 			if (m_wares.stock(i)) {
 				m_economy->remove_wares(i, m_wares.stock(i));
 				m_economy->remove_ware_supply(i, this);
 			}
 		}
-		for (int i = 0; i < m_workers.get_nrwareids(); i++) {
+		for (size_t i = 0; i < m_workers.get_nrwareids(); ++i) {
 			if (m_workers.stock(i)) {
 				m_economy->remove_workers(i, m_workers.stock(i));
 				m_economy->remove_worker_supply(i, this);
@@ -98,13 +98,13 @@ void WarehouseSupply::set_economy(Economy* e)
 	m_economy = e;
 
 	if (m_economy) {
-		for (int i = 0; i < m_wares.get_nrwareids(); i++) {
+		for (size_t i = 0; i < m_wares.get_nrwareids(); ++i) {
 			if (m_wares.stock(i)) {
 				m_economy->add_wares(i, m_wares.stock(i));
 				m_economy->add_ware_supply(i, this);
 			}
 		}
-		for (int i = 0; i < m_workers.get_nrwareids(); i++) {
+		for (size_t i = 0; i < m_workers.get_nrwareids(); ++i) {
 			if (m_workers.stock(i)) {
 				m_economy->add_workers(i, m_workers.stock(i));
 				m_economy->add_worker_supply(i, this);
@@ -1045,7 +1045,7 @@ Warehouse::can_create_worker
 bool Warehouse::can_create_worker(Game *, int worker) {
 	Worker_Descr *w_desc = 0;
 
-	if (worker >= m_supply->get_workers().get_nrwareids()) {
+	if (worker >= static_cast<int>(m_supply->get_workers().get_nrwareids())) {
 		throw wexception ("Worker type %d doesn't exists! (max is %d)", worker,
             m_supply->get_workers().get_nrwareids());
 	}

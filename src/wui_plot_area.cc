@@ -117,12 +117,15 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    float sub = xline_length / how_many_ticks[m_time];
    float posx = get_inner_w()-space_at_right;
    char buffer[200];
-   for (int i = 0; i <= how_many_ticks[m_time]; i++) {
-      dst->draw_line((int)posx, get_inner_h()-space_at_bottom, (int) posx, get_inner_h()-space_at_bottom+3, LINE_COLOR);
+	for (size_t i = 0; static_cast<int>(i) <= how_many_ticks[m_time]; ++i) {
+		dst->draw_line
+			(static_cast<int>(posx), get_inner_h() - space_at_bottom,
+			 static_cast<int>(posx), get_inner_h() - space_at_bottom + 3,
+			 LINE_COLOR);
 
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%i", max_x[m_time] / how_many_ticks[m_time] * i);
+			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
 
       int w, h;
       g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
@@ -153,13 +156,18 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
                max = (*m_plotdata[i].dataset)[l];
 		}
 	} else {
-      for (uint plot = 0; plot < m_plotdata.size(); plot++) {
+		for (uint plot = 0; plot < m_plotdata.size(); ++plot) {
          if (!m_plotdata[plot].showplot) continue;
 
          const std::vector<uint>* dataset = m_plotdata[plot].dataset;
 
          // How many do we take together
-         int how_many = (int)(((float)time_in_ms[m_time] / (float)NR_SAMPLES) /(float)m_sample_rate);
+			const int how_many = static_cast<int>
+				((static_cast<float>(time_in_ms[m_time])
+				  /
+				  static_cast<float>(NR_SAMPLES))
+				 /
+				 static_cast<float>(m_sample_rate));
 
          uint add = 0;
          // Relative data, first entry is always zero
@@ -186,7 +194,12 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		 Widget_Cache_None, 0, -1, false);
 
    // Now, plot the pixels
-   sub = xline_length / ((float)time_in_ms[m_time] / (float)m_sample_rate);
+	sub =
+		xline_length
+		/
+		(static_cast<float>(time_in_ms[m_time])
+		 /
+		 static_cast<float>(m_sample_rate));
 	for (uint plot = 0; plot < m_plotdata.size(); ++plot) {
       if (!m_plotdata[plot].showplot) continue;
 
@@ -215,7 +228,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 			}
 
          dataset = &m_data;
-         sub = xline_length /  (float)NR_SAMPLES;
+			sub = xline_length / static_cast<float>(NR_SAMPLES);
 		}
 
       posx = get_inner_w()-space_at_right;

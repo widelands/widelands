@@ -321,7 +321,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
-				switch ((int)c) {
+				switch (static_cast<int>(c)) {
 					case 0x00: c=0; break;
 					case 0x01: c=1; break;
 					case 0x02: c=2; break;
@@ -364,7 +364,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				char c = *pc;
 				c &= 0x1f;
-				switch ((int)c) {
+				switch (static_cast<int>(c)) {
 					case 0x00: c=0; break;
 					case 0x01: c=1; break;
 					case 0x02: c=2; break;
@@ -476,7 +476,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case 0x08: bobname = "duck"; break;
 					// case 0x09: bobname = "donkey"; break; -> Not implemented, yet.
 					default:
-						cerr << "Unsupported animal: " << (int)section[i] << endl;
+					cerr << "Unsupported animal: " << static_cast<int>(section[i]) << endl;
 						break;
 				}
 
@@ -582,7 +582,8 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
                if (static_cast<signed char>(nres)==-1)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
 				}
-            int real_amount=((int)(2.86*(float)amount));
+				const int real_amount = static_cast<int>
+					(2.86 * static_cast<float>(amount));
             f->set_resources(nres, real_amount);
             f->set_starting_res_amount(real_amount);
 			}
@@ -745,9 +746,9 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case BOB_BUSH4: bobname = "bush4"; break;
 					case BOB_BUSH5: bobname = "bush5"; break;
 
-					default:
-						cerr << "Unknown bob " << (uint)c << endl;
-						break;
+				default:
+					cerr << "Unknown bob " << static_cast<uint>(c) << endl;
+					break;
 				}
 
 				if (bobname) {

@@ -213,12 +213,11 @@ LAN_Game_Finder::~LAN_Game_Finder ()
 
 void LAN_Game_Finder::run ()
 {
-    while (avail()) {
+	while (avail()) {
 	LAN_Game_Info info;
 	sockaddr_in addr;
 
-	if (recv(&info, sizeof(info), &addr) < (int)sizeof(info))
-	    continue;
+		if (recv(&info, sizeof(info), &addr) < static_cast<int>(sizeof(info))) continue;
 
 	printf ("Received %s packet\n", info.magic);
 

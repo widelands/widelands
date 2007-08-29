@@ -542,10 +542,12 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 
 		switch (action) {
 		case ENEMYFLAGACTION_ATTACK:
-		{
-			game->create_attack_controller(flag, attacker, flag->get_owner()->get_player_number(), (uint)num);
+			game->create_attack_controller
+				(flag,
+				 attacker,
+				 flag->get_owner()->get_player_number(),
+				 static_cast<uint>(num));
 			break;
-		}
 
 		default:
 			log("Player sent bad enemyflagaction = %i\n", action);
@@ -656,7 +658,7 @@ throw ()
  */
 void Player::sample_statistics()
 {
-	if (m_ware_productions.size() != (uint)tribe().get_nrwares()) {
+	if (m_ware_productions.size() != static_cast<uint>(tribe().get_nrwares())) {
 		m_ware_productions.resize(tribe().get_nrwares());
 		m_current_statistics.resize(tribe().get_nrwares());
 	}
@@ -673,12 +675,12 @@ void Player::sample_statistics()
  */
 void Player::ware_produced(uint wareid)
 {
-	if (m_ware_productions.size() != (uint)tribe().get_nrwares()) {
+	if (m_ware_productions.size() != static_cast<uint>(tribe().get_nrwares())) {
 		m_ware_productions.resize(tribe().get_nrwares());
 		m_current_statistics.resize(tribe().get_nrwares());
 	}
 
-	assert(wareid < (uint)tribe().get_nrwares());
+	assert(wareid < static_cast<uint>(tribe().get_nrwares()));
 
 	m_current_statistics[wareid]++;
 }
@@ -690,7 +692,7 @@ void Player::ware_produced(uint wareid)
 const std::vector<uint> * Player::get_ware_production_statistics
 		(const int ware) const
 {
-	assert(ware < (int)m_ware_productions.size()) ;
+	assert(ware < static_cast<int>(m_ware_productions.size()));
 
 	return &m_ware_productions[ware];
 }

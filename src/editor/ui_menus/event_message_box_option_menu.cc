@@ -163,9 +163,9 @@ m_parent(parent)
          m_null_triggers.push_back(i);
 	}
 
-   for (int i=0; i<m_event->get_nr_buttons(); i++) {
+	for (int i = 0; i < m_event->get_nr_buttons(); ++i) {
       m_buttons[i].name=m_event->get_button_name(i);
-      for (int j=0; j<((int)m_null_triggers.size()); j++) {
+		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
          // Get this triggers index
          int foundidx = -1;
          for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)

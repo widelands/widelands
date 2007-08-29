@@ -133,7 +133,7 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
 		for (uint i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
       // Disable all checkboxes
       // TODO: the uint cast is ugly!
-		for (uint i = 0; i < m_checkboxes.size(); ++i, i += i == (uint)n) {
+		for (uint i = 0; i < m_checkboxes.size(); ++i, i += i == static_cast<uint>(n)) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::do_nothing);
          m_checkboxes[i]->set_state(false);
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);

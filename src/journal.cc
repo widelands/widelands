@@ -82,8 +82,8 @@ void Journal::write(SDLKey v)
 {
 	Uint32 vv;
 
-	vv = Little32((Uint32)v);
-	m_recordstream.write((char*)&v, sizeof(v));
+	vv = Little32(static_cast<Uint32>(v));
+	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
 }
 
 /**
@@ -94,8 +94,8 @@ void Journal::write(SDLMod v)
 {
 	Uint32 vv;
 
-	vv = Little32((Uint32)v);
-	m_recordstream.write((char*)&v, sizeof(v));
+	vv = Little32(static_cast<Uint32>(v));
+	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
 }
 
 /**
@@ -104,7 +104,7 @@ void Journal::write(SDLMod v)
  */
 void Journal::read(char &v)
 {
-	m_playbackstream.read((char*)&v, sizeof(char));
+	m_playbackstream.read(static_cast<char *>(&v), sizeof(char));
 }
 
 /**

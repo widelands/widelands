@@ -121,7 +121,7 @@ Command* ReplayReader::GetNextCommand(uint time)
 	if (!m_cmdlog)
 		return 0;
 
-	if ((int)(m_replaytime - time) > 0)
+	if (static_cast<int>(m_replaytime - time) > 0)
 		return 0;
 
 	try {

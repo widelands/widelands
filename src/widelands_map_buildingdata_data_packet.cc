@@ -645,14 +645,14 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 
    // Supply
    const WareList& wares=warehouse.m_supply->get_wares();
-   for (int i=0; i<wares.get_nrwareids(); i++) {
+	for (size_t i = 0; i < wares.get_nrwareids(); ++i) {
       fw.Unsigned8(1);
       fw.CString(warehouse.get_owner()->tribe().get_ware_descr(i)->name().c_str());
       fw.Unsigned16(wares.stock(i));
 	}
    fw.Unsigned8(0);
    const WareList& workers=warehouse.m_supply->get_workers();
-   for (int i=0; i<workers.get_nrwareids(); i++) {
+	for (size_t i = 0; i < workers.get_nrwareids(); ++i) {
       fw.Unsigned8(1);
       fw.CString(warehouse.get_owner()->tribe().get_worker_descr(i)->name().c_str());
       fw.Unsigned16(workers.stock(i));

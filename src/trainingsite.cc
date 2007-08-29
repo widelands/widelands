@@ -401,18 +401,20 @@ void TrainingSite::drop_soldier(uint serial)
 	assert(g);
 
 	if (m_soldiers.size()) {
-		int i = 0;
+		size_t i = 0;
 		Soldier *s = m_soldiers[i];
-		while ((s->get_serial() != serial) && (i < (int) m_soldiers.size())) {
+		while (s->get_serial() != serial and i < m_soldiers.size()) {
 			i++;
 			s = m_soldiers.at(i);
 		}
-		if ((i < (int) m_soldiers.size()) && (s->get_serial() == serial)) {
+		if (i < m_soldiers.size() and s->get_serial() == serial) {
 			drop_soldier(g, i);
 		}
 	} else
-		molog("TrainingSite::drop_soldier(uint serial): trying to drop non-existant serial number %i !!",
-		      serial);
+		molog
+			("TrainingSite::drop_soldier(uint serial): trying to drop nonexistent "
+			 "serial number %i !!",
+			 serial);
 }
 
 /**
@@ -534,7 +536,7 @@ void TrainingSite::act(Game * g, uint data)
 
 	Building::act(g, data);
 
-	if (m_program_timer && (int) (g->get_gametime() - m_program_time) >= 0) {
+	if (m_program_timer && static_cast<int>(g->get_gametime() - m_program_time) >= 0) {
 		m_program_timer = false;
 
 		if (!m_program.size()) {
@@ -606,8 +608,8 @@ void TrainingSite::find_and_start_next_program(Game * g)
 
 				while ((min_level < max_level) && (!done)) {
 
-					for (j = 0; j < (int) m_soldiers.size(); j++)
-						if ((int) m_soldiers[j]->get_level(attrib) == max_level)
+					for (j = 0; j < static_cast<int>(m_soldiers.size()); j++)
+						if (static_cast<int>(m_soldiers[j]->get_level(attrib)) == max_level)
 							done = true;
 
 					if (!done)
@@ -617,8 +619,8 @@ void TrainingSite::find_and_start_next_program(Game * g)
 
 				while ((min_level < max_level) && (!done)) {
 
-					for (j = 0; j < (int) m_soldiers.size(); j++)
-						if ((int) m_soldiers[j]->get_level(attrib) == min_level)
+					for (j = 0; j < static_cast<int>(m_soldiers.size()); ++j)
+						if (static_cast<int>(m_soldiers[j]->get_level(attrib)) == min_level)
 							done = true;
 
 					if (!done)
