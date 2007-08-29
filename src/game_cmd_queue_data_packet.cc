@@ -40,10 +40,8 @@ throw (_wexception)
 	WidelandsFileRead fr;
 	fr.Open(fs, "binary/cmd_queue");
 
-	// read packet version
-	int packet_version=fr.Unsigned16();
-
-	if (packet_version >= 1) {
+	const Uint16 packet_version = fr.Unsigned16();
+	if (packet_version >= 1)
 		try {
 			Cmd_Queue* cmdq=game->get_cmdqueue();
 
@@ -98,17 +96,12 @@ throw (_wexception)
 					++i;
 				}
 			}
-
-			// DONE
-			return;
-		}
-		catch(std::exception& e) {
+		} catch(std::exception& e) {
 			throw wexception("Error loading Cmd_Queue_Data_Packet: %s", e.what());
 		}
-	} else
-		throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i", packet_version);
-
-	assert(0); // never here
+	else
+		throw wexception
+			("Unknown version in Game_Cmd_Queue_Data_Packet: %u", packet_version);
 }
 
 /*
