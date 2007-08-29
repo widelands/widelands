@@ -135,8 +135,8 @@ throw (_wexception)
 				else read_productionsite(*productionsite, fr, egbase, ol);
 			} else {
 				assert(false);
-				//  Type of building is not one of (or derived from)
-				//  {ConstructionSite, Warehouse, ProductionSite}.
+				//  type of building is not one of (or derived from)
+				//  {ConstructionSite, Warehouse, ProductionSite}
 			}
 
 
@@ -567,8 +567,8 @@ throw (_wexception)
 				else write_productionsite(*productionsite, fw, egbase, os);
 			} else {
 				assert(false);
-				//  Type of building is not one of (or derived from)
-				//  {ConstructionSite, Warehouse, ProductionSite}.
+				//  type of building is not one of (or derived from)
+				//  {ConstructionSite, Warehouse, ProductionSite}
 				}
 
             os->mark_object_as_saved(building);

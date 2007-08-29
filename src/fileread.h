@@ -39,10 +39,11 @@ struct FileRead {
 
 	struct FileRead_Exception : public std::exception {};
 	struct File_Boundary_Exceeded : public FileRead_Exception {
-		virtual const char* what() const throw() { return "File boundary exceeded"; }
+		virtual const char * what() const throw()
+		{return "File boundary exceeded";}
 	};
 	struct Buffer_Overflow : public FileRead_Exception {
-		virtual const char* what() const throw() { return "Buffer overflow"; }
+		virtual const char * what() const throw() {return "Buffer overflow";}
 	};
 
 	FileRead (); /// Create the object with nothing to read.

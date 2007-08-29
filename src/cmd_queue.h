@@ -78,8 +78,8 @@ public:
 	virtual void execute (Game*) = 0;
 	virtual int get_id() = 0;
 
-	int get_duetime() const { return m_duetime; }
-	void set_duetime(int t) { m_duetime = t; }
+	int get_duetime() const {return m_duetime;}
+	void set_duetime(int t) {m_duetime = t;}
 };
 
 

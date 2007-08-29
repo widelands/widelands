@@ -58,10 +58,15 @@ void Game_Server_Protocol_Packet_GetUserInfo::send(Network_Buffer* buffer) {
 void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
    uchar flags = buf->get_8();
 
-   if (flags == UI_UNKNOWN) {
+	if (flags == UI_UNKNOWN) {
       char buffer[1024];
 
-      snprintf(buffer, 1024, _("The User %s is currently not logged in or unknown to the server.\n").c_str(), m_username.c_str());
+		snprintf
+			(buffer, sizeof(buffer),
+			 _("The User %s is currently not logged in or unknown to the "
+			   "server.\n")
+			 .c_str(),
+			 m_username.c_str());
 
       gsc->server_message(buffer);
       return;

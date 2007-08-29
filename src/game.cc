@@ -74,8 +74,8 @@ public:
 		assert(m_target);
 
 		log("[sync:%08u]", m_counter);
-		for(size_t i = 0; i < size; ++i)
-			log(" %02x", ((const Uint8*)data)[i]);
+		for (size_t i = 0; i < size; ++i)
+			log(" %02x", (static_cast<const Uint8 *>(data))[i]);
 		log("\n");
 
 		m_target->Data(data, size);

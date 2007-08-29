@@ -56,7 +56,7 @@ throw (_wexception)
 
 			if (packet_version == CURRENT_PACKET_VERSION)
 			{
-				for(;;) {
+				for (;;) {
 					uint packet_id = fr.Unsigned16();
 
 					if (!packet_id)
@@ -96,7 +96,7 @@ throw (_wexception)
 					++i;
 				}
 			}
-		} catch(std::exception& e) {
+		} catch (const std::exception & e) {
 			throw wexception("Error loading Cmd_Queue_Data_Packet: %s", e.what());
 		}
 	else

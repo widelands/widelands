@@ -130,13 +130,20 @@ Display number of soldiers.
 */
 std::string MilitarySite::get_statistics_string()
 {
-	char str[255];
+	char buffer[255];
 	if (m_soldier_requests.size())
-		snprintf (str, 255, ngettext("%d soldier (+%d)", "%d soldiers (+%d)", (int)m_soldiers.size()), (int)m_soldiers.size(), (int)m_soldier_requests.size());
+		snprintf
+			(buffer, sizeof(buffer),
+			 ngettext
+			 ("%u soldier (+%u)", "%u soldiers (+%u)",
+			  m_soldiers.size()), m_soldiers.size(), m_soldier_requests.size());
 	else
-		snprintf (str, 255, ngettext("%d soldier", "%d soldiers", (int)m_soldiers.size()), (int)m_soldiers.size());
+		snprintf
+			(buffer, sizeof(buffer),
+			 ngettext
+			 ("%u soldier", "%u soldiers", m_soldiers.size()), m_soldiers.size());
 
-	return str;
+	return buffer;
 }
 
 

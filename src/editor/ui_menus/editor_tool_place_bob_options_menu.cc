@@ -54,8 +54,7 @@ m_pit                   (pit)
 	const uint bobs_in_row =
 		std::max
 		(std::min
-		 (static_cast<uint>(ceil(sqrt(static_cast<const float>(nr_bobs)))),
-		  24U),
+		 (static_cast<uint>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U),
 		 12U);
 
 	m_tabpanel.set_snapparent(true);

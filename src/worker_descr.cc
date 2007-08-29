@@ -145,7 +145,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 		g_sound_handler.load_fx(directory, string);
 
 	// Read the becomes and experience
-	m_becomes = sglobal->get_string("becomes","");
+	m_becomes = sglobal->get_string("becomes", "");
 	std::string exp=sglobal->get_string("experience", "");
 	m_min_experience=m_max_experience=-1;
 	if (exp.size()) {

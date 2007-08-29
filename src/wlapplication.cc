@@ -916,7 +916,7 @@ void WLApplication::parse_command_line() throw(Parameter_error)
 	}
 
 	if (m_commandline.count("nozip")>0) {
-		g_options.pull_section("global")->create_val("nozip","true");
+		g_options.pull_section("global")->create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
 

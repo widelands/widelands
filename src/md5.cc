@@ -41,7 +41,7 @@ std::string md5_checksum::str() const
 {
 	std::string s;
 
-	for(uint i = 0; i < sizeof(data); ++i) {
+	for (uint i = 0; i < sizeof(data); ++i) {
 		char buf[3];
 		snprintf(buf, sizeof(buf), "%02x", data[i]);
 		s += buf;
@@ -127,7 +127,7 @@ const md5_checksum& MD5Checksum::GetChecksum() const
  * From GNU textutils. md5.c
  *******************************************************************/
 
-static const unsigned char fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
+static const unsigned char fillbuf[64] = {0x80, 0/*, 0, 0, ... 0 */};
 
 /* Process the remaining bytes in the internal buffer and the usual
    prolog according to the standard and write the result to RESBUF.
@@ -256,15 +256,13 @@ static void md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
 		before the computation.  To reduce the work for the next steps
 		we store the swapped words in the array CORRECT_WORDS.  */
 
-#define OP(a, b, c, d, s, T)						\
-	do								\
-	{								\
-		a += FF (b, c, d) + (*cwp++ = (*words)) + T;		\
-		++words;							\
-		CYCLIC (a, s);						\
-		a += b;							\
-	}								\
-	while (0)
+#define OP(a, b, c, d, s, T)                                                   \
+	do {                                                                        \
+		a += FF (b, c, d) + (*cwp++ = (*words)) + T;                             \
+		++words;                                                                 \
+		CYCLIC (a, s);                                                           \
+		a += b;                                                                  \
+	} while (0)                                                                 \
 
 		/* It is unfortunate that C does not provide an operator for
 		cyclic rotation.  Hope the C compiler is smart enough.  */
@@ -298,14 +296,12 @@ static void md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
 		in CORRECT_WORDS.  Redefine the macro to take an additional first
 		argument specifying the function to use.  */
 #undef OP
-#define OP(f, a, b, c, d, k, s, T)					\
-	do 								\
-	{								\
-		a += f (b, c, d) + correct_words[k] + T;			\
-		CYCLIC (a, s);						\
-		a += b;							\
-	}								\
-	while (0)
+#define OP(f, a, b, c, d, k, s, T)                                             \
+	do {                                                                        \
+		a += f (b, c, d) + correct_words[k] + T;                                 \
+		CYCLIC (a, s);                                                           \
+		a += b;                                                                  \
+	} while (0)                                                                 \
 
 		/* Round 2.  */
 		OP (FG, A, B, C, D,  1,  5, 0xf61e2562);

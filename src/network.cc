@@ -619,7 +619,7 @@ void NetHost::syncreport (const md5_checksum& newsync)
 
 	mysyncreports.push (newsync);
 
-	while(mysyncreports.size()) {
+	while (mysyncreports.size()) {
 		// Now look whether there is at least one syncreport from everyone.
 		// If so, make sure they match.
 		for (i=0;i<clients.size();i++) {
@@ -906,7 +906,7 @@ void NetStatusWindow::add_player (int num)
 {
 	char buffer[64];
 
-	snprintf (buffer, 64, "%s %d", _("Player").c_str(), num);
+	snprintf (buffer, sizeof(buffer), "%s %d", _("Player").c_str(), num);
 
 	Entry entry = {&table.add(), num};
 	entry.entry->set_string (0, buffer);

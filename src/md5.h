@@ -51,7 +51,7 @@ struct md5_checksum {
 		return memcmp(data, o.data, sizeof(data)) == 0;
 	}
 
-	bool operator!=(const md5_checksum& o) const { return !(*this == o); }
+	bool operator!=(const md5_checksum& o) const {return not (*this == o);}
 };
 
 /**

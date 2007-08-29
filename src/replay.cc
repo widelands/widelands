@@ -49,7 +49,7 @@ public:
 	{
 	}
 
-	int get_id() { return QUEUE_CMD_REPLAYSYNCREAD; }
+	int get_id() {return QUEUE_CMD_REPLAYSYNCREAD;}
 
 	void execute(Game* g)
 	{
@@ -193,9 +193,9 @@ bool ReplayReader::EndOfReplay()
  */
 class Cmd_ReplaySyncWrite : public Command {
 public:
-	Cmd_ReplaySyncWrite(uint t) : Command(t) { }
+	Cmd_ReplaySyncWrite(uint t) : Command(t) {}
 
-	int get_id() { return QUEUE_CMD_REPLAYSYNCWRITE; }
+	int get_id() {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
 	void execute(Game* g) {
 		if (ReplayWriter* rw = g->get_replaywriter()) {
