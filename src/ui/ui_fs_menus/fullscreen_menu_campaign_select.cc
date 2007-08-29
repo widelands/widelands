@@ -102,7 +102,6 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 		char cname[12];
 		char cdifficulty[12];
 		char cdescription[12];
-		std::string difficulty;
 
 		// Load maps textdomain to translate the strings from cconfig
 		i18n::grab_textdomain("maps");
@@ -121,21 +120,20 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 		sprintf(cdescription, "campdesc%i", i);
 
 		// Convert difficulty level to something understandable
-		const char * const dif_descriptions[] = {
-		_("[No value found]").c_str(),
-		_("Easy living").c_str(),
-		_("Be vigilant").c_str(),
-		_("Hard struggle").c_str()
+		static const std::string dif_descriptions[] = {
+			_("[No value found]"),
+			_("Easy living"),
+			_("Be vigilant"),
+			_("Hard struggle")
 		};
 
 		uint dif = s->get_int(cdifficulty);
 		if (sizeof(dif_descriptions) / sizeof(*dif_descriptions) <= dif)
 			dif = 0;
-		difficulty = dif_descriptions[dif];
 
 		// Print informations
 		tacampname.set_text(s->get_string(cname, _("[No value found]").c_str()));
-		tadifficulty.set_text(difficulty);
+		tadifficulty.set_text(dif_descriptions[dif]);
 		tacampdescr.set_text(s->get_string(cdescription, _("[No value found]").c_str()));
 
 	} else { // normally never here
