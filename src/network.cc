@@ -450,10 +450,13 @@ void NetHost::handle_network ()
 				break;
 
 			case NETCMD_SYNCREPORT:
-				log ("[Host] Player syncreport in\n");
-				clients[i].syncreports.push (
-				clients[i].deserializer->getlong());
+			{
+				log ("[Host] Client %u syncreport in\n", i);
+				md5_checksum sync;
+				clients[i].deserializer->Data(sync.data, sizeof(sync.data));
+				clients[i].syncreports.push (sync);
 				break;
+			}
 
 			case NETCMD_CHATMESSAGE:
 				{
@@ -608,34 +611,45 @@ void NetHost::send_game_message (const char* msg)
 	send_chat_message_int (cm);
 }
 
-void NetHost::syncreport (uint sync)
+void NetHost::syncreport (const md5_checksum& newsync)
 {
 	unsigned int i;
 
-	mysyncreports.push (sync);
+	log("[Host] got local sync report\n");
 
-	// TODO: Check whether the list of pending syncreports is getting too
-	// long. This might happen if a client is not sending syncreports.
+	mysyncreports.push (newsync);
 
-	// Now look whether there is at least one syncreport from everyone.
-	// If so, make sure they match.
-	for (i=0;i<clients.size();i++)
-		if (clients[i].syncreports.empty())
-			return;
+	while(mysyncreports.size()) {
+		// Now look whether there is at least one syncreport from everyone.
+		// If so, make sure they match.
+		for (i=0;i<clients.size();i++) {
+			if (clients[i].syncreports.empty()) {
+				// Complain if we get too far ahead
+				if (mysyncreports.size() > 1)
+					log("[Host] no sync reports from client %u (my queue has %u entries)\n",
+						i, mysyncreports.size());
+				return;
+			}
+		}
 
-	sync=mysyncreports.front();
-	mysyncreports.pop();
+		md5_checksum sync = mysyncreports.front();
+		mysyncreports.pop();
 
-	for (i=0;i<clients.size();i++) {
-		if (clients[i].syncreports.front()!=sync)
-			log("[Host] Synchro lost\n");
-		//throw wexception("Synchronization lost");
-		// TODO: handle this more gracefully
+		for (i=0;i<clients.size();i++) {
+			if (clients[i].syncreports.front() != sync) {
+				log("[Host] lost synchronization with client %u!\n"
+				    "I have:     %s\n"
+				    "Client has: %s\n",
+				    i, sync.str().c_str(), clients[i].syncreports.front().str().c_str());
 
-		clients[i].syncreports.pop();
+				// TODO: Actually handle the desync here
+			}
+
+			clients[i].syncreports.pop();
+		}
+
+		log("[Host] verified one synchronization report\n");
 	}
-
-	log("[Host] synchronization is good so far\n");
 }
 
 /*** class NetClient ***/
@@ -853,11 +867,11 @@ void NetClient::send_chat_message (Chat_Message msg)
 		serializer->send (sock);
 }
 
-void NetClient::syncreport (uint sync)
+void NetClient::syncreport (const md5_checksum& sync)
 {
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_SYNCREPORT);
-	serializer->putlong (sync);
+	serializer->Data(sync.data, sizeof(sync.data));
 	serializer->end_packet ();
 
 	if (sock!=0)
@@ -1056,10 +1070,7 @@ void Deserializer::getstr (char* buffer, int maxlength)
 
 void Cmd_NetCheckSync::execute (Game* g)
 {
-	// because the random number generator is made dependant
-	// on the command queue, it is a good indicator for synchronization
-
-	netgame->syncreport (g->logic_rand());
+	netgame->syncreport (g->get_sync_hash());
 
 	g->enqueue_command (new Cmd_NetCheckSync(get_duetime()+CHECK_SYNC_INTERVAL, netgame));
 }

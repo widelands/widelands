@@ -1011,6 +1011,20 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 		if (oldposition.field)
 			m_owner->unsee_area(Area<FCoords>(oldposition, vision_range()));
 	}
+
+	// Since pretty much everything in Widelands eventually results in the
+	// movement of a worker (e.g. transporting wares etc.), this should
+	// help us to find desyncs pretty rapidly.
+	// In particular, I wanted to add something to set_position because
+	// it involves coordinates and will thus additionally highlight desyncs
+	// in pathfinding even when two paths have the same length, and in
+	// randomly generated movements.
+	if (Game* game = dynamic_cast<Game*>(g)) {
+		StreamWrite& ss = game->syncstream();
+		ss.Unsigned32(get_serial());
+		ss.Signed16(coords.x);
+		ss.Signed16(coords.y);
+	}
 }
 
 /**

@@ -111,6 +111,12 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 		// and adds some entropy to the state.
 		m_game->logic_rand_seed (*game_time_var);
 
+		if (dynamic_cast<GameLogicCommand*>(c)) {
+			StreamWrite& ss(m_game->syncstream());
+			ss.Unsigned32(c->get_duetime());
+			ss.Unsigned32(c->get_id());
+		}
+
 		c->execute (m_game);
 
 		delete c;

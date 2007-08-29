@@ -22,6 +22,7 @@
 
 #include "constants.h"
 #include "error.h"
+#include "md5.h"
 #include "types.h"
 #include "widelands_streamread.h"
 #include "widelands_streamwrite.h"
@@ -87,7 +88,7 @@ struct NetGame {
 	bool have_chat_message();
 	Chat_Message get_chat_message();
 
-	virtual void syncreport (uint)=0;
+	virtual void syncreport (const md5_checksum&)=0;
 
     protected:
 	void disconnect_player (int);
@@ -133,7 +134,7 @@ struct NetHost:public NetGame {
 	virtual void send_player_command (PlayerCommand*);
 	virtual void send_chat_message (Chat_Message);
 
-	virtual void syncreport (uint);
+	virtual void syncreport (const md5_checksum&);
 
     private:
 	void send_game_message (const char*);
@@ -145,7 +146,7 @@ struct NetHost:public NetGame {
 		TCPsocket        sock;
 		Deserializer   * deserializer;
 		int              playernum;
-		std::queue<uint> syncreports;
+		std::queue<md5_checksum> syncreports;
 		ulong            lag;
 	};
 
@@ -159,7 +160,7 @@ struct NetHost:public NetGame {
 
 	Serializer                * serializer;
 
-	std::queue<uint>            mysyncreports;
+	std::queue<md5_checksum>    mysyncreports;
 
 	ulong                       net_delay;
 	ulong                       net_delay_history[8];
@@ -182,7 +183,7 @@ class NetClient:public NetGame {
 	virtual void send_player_command (PlayerCommand*);
 	virtual void send_chat_message (Chat_Message);
 
-	virtual void syncreport (uint);
+	virtual void syncreport (const md5_checksum&);
 
     private:
 	void disconnect ();

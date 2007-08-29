@@ -22,6 +22,7 @@
 
 #include "cmd_queue.h"
 #include "editor_game_base.h"
+#include "md5.h"
 #include "random.h"
 #include "save_handler.h"
 
@@ -57,6 +58,7 @@ class PlayerCommand;
 class NetGame;
 class ReplayReader;
 class ReplayWriter;
+class StreamWrite;
 
 struct Game : public Editor_Game_Base {
 public:
@@ -130,6 +132,19 @@ public:
 
 	void logic_rand_seed (const uint seed) {rng.seed (seed);}
 
+	/**
+	 * Game logic code may write to the synchronization
+	 * token stream. All written data will be hashed and can be used to
+	 * check for network or replay desyncs.
+	 *
+	 * \return the synchronization token stream
+	 *
+	 * \note This is returned as a \ref StreamWrite object to prevent
+	 * the caller from messing with the checksumming process.
+	 */
+	StreamWrite& syncstream() { return m_synchash; }
+	md5_checksum get_sync_hash() const;
+
 	int get_speed() const {return m_speed;}
 	void set_speed(int speed);
 
@@ -187,6 +202,7 @@ private:
 	int                            m_speed; //  frametime multiplier
 
 	RNG                            rng;
+	MD5Checksum                    m_synchash;
 
 	std::vector<Computer_Player *> cpl;
 	Cmd_Queue                      cmdqueue;

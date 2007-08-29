@@ -401,6 +401,8 @@ void Game::postload()
 	}
 
 	get_iabase()->postload();
+
+	m_synchash.Reset();
 }
 
 
@@ -656,6 +658,23 @@ void Game::cleanup_for_load
 	m_last_stats_update = 0;
 	m_general_stats.clear();
 }
+
+
+/**
+ * Calculate the current synchronization checksum and copy
+ * it into the given array, without affecting the subsequent
+ * checksumming process.
+ *
+ * \return the checksum
+ */
+md5_checksum Game::get_sync_hash() const
+{
+	MD5Checksum copy(m_synchash);
+
+	copy.FinishChecksum();
+	return copy.GetChecksum();
+}
+
 
 /**
  * All player-issued commands must enter the queue through this function.

@@ -41,11 +41,14 @@ Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int t, Map_Object* o)
 	obj_serial = o->get_serial();
 }
 
-void Cmd_Destroy_Map_Object::execute(Game* g) {
-   Map_Object* obj = g->objects().get_object(obj_serial);
+void Cmd_Destroy_Map_Object::execute(Game* g)
+{
+	g->syncstream().Unsigned32(obj_serial);
 
-   if (obj)
-      obj->destroy (g);
+	Map_Object* obj = g->objects().get_object(obj_serial);
+
+	if (obj)
+		obj->destroy (g);
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
@@ -96,11 +99,16 @@ Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : GameLogicCommand(t)
    obj_serial=o->get_serial();
    arg=a;
 }
-void Cmd_Act::execute(Game* g) {
-   Map_Object* obj = g->objects().get_object(obj_serial);
-   if (obj)
-      obj->act(g, arg);
-   // the object must queue the next CMD_ACT itself if necessary
+
+
+void Cmd_Act::execute(Game* g)
+{
+	g->syncstream().Unsigned32(obj_serial);
+
+	Map_Object* obj = g->objects().get_object(obj_serial);
+	if (obj)
+		obj->act(g, arg);
+	// the object must queue the next CMD_ACT itself if necessary
 }
 
 #define CMD_ACT_VERSION 1
