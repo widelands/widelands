@@ -736,7 +736,9 @@ void NetClient::handle_network ()
 						playerdescr[i]->enable_player (true);
 					}
 				} else {
-				    playerdescr[i]->enable_player (false);
+					if (!(player_enabled & (1<<i)))
+						throw wexception("Local player not enabled by host");
+					playerdescr[i]->enable_player (true);
 				}
 			}
 			break;
