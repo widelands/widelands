@@ -60,6 +60,8 @@ class ReplayReader;
 class ReplayWriter;
 class StreamWrite;
 
+struct GameInternals;
+
 struct Game : public Editor_Game_Base {
 public:
 	struct General_Stats {
@@ -132,17 +134,7 @@ public:
 
 	void logic_rand_seed (const uint seed) {rng.seed (seed);}
 
-	/**
-	 * Game logic code may write to the synchronization
-	 * token stream. All written data will be hashed and can be used to
-	 * check for network or replay desyncs.
-	 *
-	 * \return the synchronization token stream
-	 *
-	 * \note This is returned as a \ref StreamWrite object to prevent
-	 * the caller from messing with the checksumming process.
-	 */
-	StreamWrite& syncstream() { return m_synchash; }
+	StreamWrite& syncstream();
 	md5_checksum get_sync_hash() const;
 
 	int get_speed() const {return m_speed;}
@@ -194,6 +186,8 @@ private:
 	void sample_statistics();
 
 private:
+	GameInternals* m;
+
 	Map_Loader                   * m_maploader;
 
 	NetGame                      * m_netgame;
@@ -202,7 +196,6 @@ private:
 	int                            m_speed; //  frametime multiplier
 
 	RNG                            rng;
-	MD5Checksum                    m_synchash;
 
 	std::vector<Computer_Player *> cpl;
 	Cmd_Queue                      cmdqueue;

@@ -52,7 +52,65 @@
 
 #include <string>
 
+/// Define this to get lots of debugging output concerned with syncs
+//#define SYNC_DEBUG
+
+#ifdef SYNC_DEBUG
+class SyncDebugWrapper : public StreamWrite {
+public:
+	SyncDebugWrapper()
+	{
+		m_target = 0;
+		m_counter = 0;
+	}
+
+	void SetTarget(StreamWrite* target)
+	{
+		m_target = target;
+	}
+
+	void Data(const void * const data, const size_t size)
+	{
+		assert(m_target);
+
+		log("[sync:%08u]", m_counter);
+		for(size_t i = 0; i < size; ++i)
+			log(" %02x", ((const Uint8*)data)[i]);
+		log("\n");
+
+		m_target->Data(data, size);
+	}
+
+	void Flush()
+	{
+		assert(m_target);
+
+		m_target->Flush();
+	}
+
+private:
+	StreamWrite* m_target;
+	uint m_counter;
+};
+#endif
+
+struct GameInternals {
+	MD5Checksum synchash;
+#ifdef SYNC_DEBUG
+	SyncDebugWrapper syncwrapper;
+#endif
+
+	GameInternals()
+	{
+#ifdef SYNC_DEBUG
+		syncwrapper.SetTarget(&synchash);
+#endif
+	}
+};
+
+
 Game::Game() :
+m(new GameInternals),
 m_state   (gs_none),
 m_speed   (1),
 cmdqueue  (this),
@@ -75,6 +133,9 @@ Game::~Game()
 		m_replaywriter = 0;
 	}
 	g_sound_handler.m_the_game = NULL;
+
+	delete m;
+	m = 0;
 }
 
 
@@ -135,11 +196,10 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
 	assert(!get_map());
 
-	Map *m = new Map();
-	set_map(m);
+	set_map(new Map);
 
 	FileSystem* fs = g_fs->MakeSubFileSystem(mapname);
-	m_maploader = new Widelands_Map_Loader(*fs, m);
+	m_maploader = new Widelands_Map_Loader(*fs, &map());
 	UI::ProgressWindow loaderUI;
 	GameTips tips (loaderUI);
 
@@ -160,21 +220,21 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 		m_maploader->preload_map(scenario);
 		}
 
-	const std::string background = m->get_background();
+	const std::string background = map().get_background();
 	if (background.size() > 0)
 		loaderUI.set_background(background);
 	loaderUI.step (_("Loading a world"));
 	m_maploader->load_world();
 
     // We have to create the players here
-	const Player_Number nr_players = m->get_nrplayers();
+	const Player_Number nr_players = map().get_nrplayers();
 	for (Player_Number i = 1; i <= nr_players; ++i) {
 		loaderUI.stepf (_("Adding player %u"), i);
 		add_player
 			(i,
 			 i == 1 ? Player::Local : Player::AI,
-			 m->get_scenario_player_tribe(i),
-			 m->get_scenario_player_name(i));
+			 map().get_scenario_player_tribe(i),
+			 map().get_scenario_player_name(i));
 	}
 
 	set_iabase(new Interactive_Player(*this, 0));
@@ -402,7 +462,8 @@ void Game::postload()
 
 	get_iabase()->postload();
 
-	m_synchash.Reset();
+	m->synchash.Reset();
+	log("[sync] Reset\n");
 }
 
 
@@ -661,6 +722,26 @@ void Game::cleanup_for_load
 
 
 /**
+ * Game logic code may write to the synchronization
+ * token stream. All written data will be hashed and can be used to
+ * check for network or replay desyncs.
+ *
+ * \return the synchronization token stream
+ *
+ * \note This is returned as a \ref StreamWrite object to prevent
+ * the caller from messing with the checksumming process.
+ */
+StreamWrite& Game::syncstream()
+{
+#ifdef SYNC_DEBUG
+	return m->syncwrapper;
+#else
+	return m->synchash;
+#endif
+}
+
+
+/**
  * Calculate the current synchronization checksum and copy
  * it into the given array, without affecting the subsequent
  * checksumming process.
@@ -669,7 +750,7 @@ void Game::cleanup_for_load
  */
 md5_checksum Game::get_sync_hash() const
 {
-	MD5Checksum copy(m_synchash);
+	MD5Checksum copy(m->synchash);
 
 	copy.FinishChecksum();
 	return copy.GetChecksum();
@@ -781,21 +862,20 @@ void Game::send_player_enemyflagaction
 void Game::sample_statistics()
 {
 	// Update general stats
-	Map* m = get_map();
-	std::vector< uint > land_size; land_size.resize(m->get_nrplayers());
-	std::vector< uint > nr_buildings; nr_buildings.resize(m->get_nrplayers());
-	std::vector< uint > nr_kills; nr_kills.resize(m->get_nrplayers());
-	std::vector< uint > miltary_strength; miltary_strength.resize(m->get_nrplayers());
-	std::vector< uint > nr_workers; nr_workers.resize(m->get_nrplayers());
-	std::vector< uint > nr_wares; nr_wares.resize(m->get_nrplayers());
-	std::vector< uint > productivity; productivity.resize(m->get_nrplayers());
+	std::vector< uint > land_size; land_size.resize(map().get_nrplayers());
+	std::vector< uint > nr_buildings; nr_buildings.resize(map().get_nrplayers());
+	std::vector< uint > nr_kills; nr_kills.resize(map().get_nrplayers());
+	std::vector< uint > miltary_strength; miltary_strength.resize(map().get_nrplayers());
+	std::vector< uint > nr_workers; nr_workers.resize(map().get_nrplayers());
+	std::vector< uint > nr_wares; nr_wares.resize(map().get_nrplayers());
+	std::vector< uint > productivity; productivity.resize(map().get_nrplayers());
 
-	std::vector< uint > nr_production_sites; nr_production_sites.resize(m->get_nrplayers());
+	std::vector< uint > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
 
 	// We walk the map, to gain all needed informations
-	for (ushort y = 0; y < m->get_height(); y++) {
-		for (ushort x = 0; x < m->get_width(); x++) {
-			Field* f = m->get_field(Coords(x, y));
+	for (ushort y = 0; y < map().get_height(); y++) {
+		for (ushort x = 0; x < map().get_width(); x++) {
+			Field* f = map().get_field(Coords(x, y));
 
 			// First, ownership of this field
 			if (f->get_owned_by())
@@ -842,7 +922,7 @@ void Game::sample_statistics()
 	}
 
 	// Number of workers / wares
-	for (uint i = 0; i < m->get_nrplayers(); i++) {
+	for (uint i = 0; i < map().get_nrplayers(); i++) {
 		Player* plr = get_player(i+1);
 
 		uint wostock = 0;
@@ -864,14 +944,14 @@ void Game::sample_statistics()
 	}
 
 	// Now, divide the statistics
-	for (uint i = 0; i < m->get_nrplayers(); i++) {
+	for (uint i = 0; i < map().get_nrplayers(); i++) {
 		if (productivity[ i ])
 			productivity[ i ] /= nr_production_sites[ i ];
 	}
 
 	// Now, push this on the general statistics
-	m_general_stats.resize(m->get_nrplayers());
-	for (uint i = 0; i < m->get_nrplayers(); i++) {
+	m_general_stats.resize(map().get_nrplayers());
+	for (uint i = 0; i < map().get_nrplayers(); i++) {
 		m_general_stats[i].land_size.push_back(land_size[i]);
 		m_general_stats[i].nr_buildings.push_back(nr_buildings[i]);
 		m_general_stats[i].nr_kills.push_back(nr_kills[i]);
