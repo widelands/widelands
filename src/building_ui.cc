@@ -384,10 +384,10 @@ Compare the current WaresQueue state with the cached state; update if necessary.
 */
 void WaresQueueDisplay::think()
 {
-	if ((uint)m_queue->get_size() != m_cache_size)
+	if (static_cast<uint>(m_queue->get_size()) != m_cache_size)
 		recalc_size();
 
-	if ((uint)m_queue->get_filled() != m_cache_filled)
+	if (static_cast<uint>(m_queue->get_filled()) != m_cache_filled)
 		update(0, 0, get_w(), get_h());
 }
 

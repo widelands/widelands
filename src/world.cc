@@ -101,8 +101,9 @@ const std::string & Resource_Descr::get_editor_pic(const uint amount) const {
 
 	for (uint i = 1; i < m_editor_pics.size(); ++i)
 	{
-		int diff1 = m_editor_pics[bestmatch].upperlimit - (int)amount;
-		int diff2 = m_editor_pics[i].upperlimit - (int)amount;
+		const int diff1 =
+			m_editor_pics[bestmatch].upperlimit - static_cast<int>(amount);
+		const int diff2 = m_editor_pics[i].upperlimit - static_cast<int>(amount);
 
 		// This is a catch-all for high amounts
 		if (m_editor_pics[i].upperlimit < 0)

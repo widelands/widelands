@@ -488,7 +488,7 @@ void NetHost::handle_network ()
 
 		// send any outstanding player commands
 		while (!cmds.empty()) {
-			log ("[Host] %d player commands queued\n", (int)cmds.size());
+			log ("[Host] %u player commands queued\n", cmds.size());
 
 			PlayerCommand* cmd=cmds.front();
 			cmds.pop ();
@@ -585,7 +585,7 @@ void NetHost::update_network_delay ()
 
 	net_delay/=4;
 
-	log ("network delay is now %dms\n", (int) net_delay);
+	log ("network delay is now %ums\n", net_delay);
 }
 
 void NetHost::send_player_command (PlayerCommand* cmd)

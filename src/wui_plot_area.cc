@@ -187,16 +187,21 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // Now, plot the pixels
    sub = xline_length / ((float)time_in_ms[m_time] / (float)m_sample_rate);
-   for (uint plot = 0; plot < m_plotdata.size(); plot++) {
+	for (uint plot = 0; plot < m_plotdata.size(); ++plot) {
       if (!m_plotdata[plot].showplot) continue;
 
       RGBColor color = m_plotdata[plot].plotcolor;
       const std::vector<uint>* dataset = m_plotdata[plot].dataset;
 
       std::vector<uint> m_data;
-      if (m_plotmode == PLOTMODE_RELATIVE) {
+		if (m_plotmode == PLOTMODE_RELATIVE) {
          // How many do we take together
-         int how_many = (int)(((float)time_in_ms[m_time] / (float)NR_SAMPLES) /(float)m_sample_rate);
+			const int how_many = static_cast<int>
+				((static_cast<float>(time_in_ms[m_time])
+				  /
+				  static_cast<float>(NR_SAMPLES))
+				 /
+				 static_cast<float>(m_sample_rate));
 
          uint add = 0;
          // Relative data, first entry is always zero
@@ -217,14 +222,17 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 
       int lx = get_inner_w()-space_at_right;
       int ly = get_inner_h()-space_at_bottom;
-      for (int i = dataset->size()-1; i > 0 && posx > spacing; i--) {
+		for (int i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
          int value = (*dataset)[i];
 
-         int curx = (int)posx;
+			int curx = static_cast<int>(posx);
          int cury = get_inner_h()-space_at_bottom;
-         if (value) {
-            float length_y = yline_length / ((float)max / (float)value);
-            cury -= (int)length_y;
+			if (value) {
+				const float length_y =
+					yline_length
+					/
+					(static_cast<float>(max) / static_cast<float>(value));
+				cury -= static_cast<int>(length_y);
 			}
          dst->draw_line(lx, ly, curx, cury, color);
 

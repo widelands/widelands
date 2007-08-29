@@ -273,7 +273,7 @@ static void md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
 		/* Before we start, one word to the strange constants.
 		They are defined in RFC 1321 as
 
-		T[i] = (int) (4294967296.0 * fabs (sin (i))), i=1..64
+		T[i] = static_cast<int>(4294967296.0 * fabs (sin (i))), i=1..64
 		*/
 
 		/* Round 1.  */

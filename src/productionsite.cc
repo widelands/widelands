@@ -229,7 +229,7 @@ std::string ProductionSite::get_statistics_string()
 		return _("(not occupied)");
 	else if (m_worker_requests.size()) {
 		char buf[1000];
-		sprintf(buf, "Waiting for %i workers!", (int)m_worker_requests.size());
+		sprintf(buf, "Waiting for %u workers!", m_worker_requests.size());
 		return buf;
 	}
 
@@ -274,7 +274,7 @@ void ProductionSite::calc_statistics()
 			 "%.0f%% %s", percOk, trend.c_str());
 	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
 
-	m_last_stat_percent = (char)percOk;
+	m_last_stat_percent = static_cast<char>(percOk);
 
 	m_statistics_changed = false;
 }
@@ -509,7 +509,11 @@ void ProductionSite::act(Game* g, uint data)
 {
 	Building::act(g, data);
 
-	if (m_program_timer && (int)(g->get_gametime() - m_program_time) >= 0) {
+	if
+		(m_program_timer
+		 and
+		 static_cast<int>(g->get_gametime() - m_program_time) >= 0)
+	{
 		m_program_timer = false;
 
 		if (!m_program.size())

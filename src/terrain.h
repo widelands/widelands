@@ -34,7 +34,7 @@
 /**
  * \todo Dangerous: casting, assumptions for sizeof(X), bitshifting
  */
-#define FTOFIX(f) ((int) ((f)*0x10000))
+#define FTOFIX(f) (static_cast<int>((f) * 0x10000))
 #define ITOFIX(i) ((i)<<16)
 #define FIXTOI(f) ((f)>>16)
 

@@ -627,7 +627,7 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 
 	if (!m_leave_queue.size())
 	{
-		if ((int)(time - m_leave_time) >= 0) {
+		if (static_cast<int>(time - m_leave_time) >= 0) {
 			m_leave_time = time + BUILDING_LEAVE_INTERVAL;
 			return true;
 		}
@@ -651,7 +651,7 @@ void Building::act(Game* g, uint data)
 {
 	uint time = g->get_gametime();
 
-	if ((int)(time - m_leave_time) >= 0)
+	if (static_cast<int>(time - m_leave_time) >= 0)
 	{
 		bool wakeup = false;
 

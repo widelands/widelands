@@ -28,11 +28,14 @@ template <typename T> class Singleton {
 		  static T* ms;
 
 		  public:
-		  Singleton() {
+	Singleton() {
 					 assert (!ms) ;
-					 int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
-					 ms=(T*)((int)this+offset);
-		}
+		const int offset =
+			static_cast<int>                            (static_cast<T *>(1))
+			-
+			static_cast<int>(static_cast<Singleton<T> *>(static_cast<T *>(1)));
+		ms = static_cast<T *>(static_cast<int>(this) + offset);
+	}
 		  ~Singleton() {assert(ms); ms=0;}
 		  static inline T& get_singleton() {assert (ms); return *ms;}
 		  static inline T* get_ptsingleton() {assert(ms); return ms;}

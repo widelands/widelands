@@ -175,10 +175,10 @@ local int unzlocal_getByte OF((
 local int unzlocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, int* pi)
 {
     unsigned char c;
-    int err = (int)ZREAD(*pzlib_filefunc_def, filestream, &c, 1);
-    if (err==1)
-    {
-        *pi = (int)c;
+	const int err =
+		static_cast<int>(ZREAD(*pzlib_filefunc_def, filestream, &c, 1));
+	if (err == 1) {
+		*pi = static_cast<int>(c);
         return UNZ_OK;
 	}
     else
@@ -1060,8 +1060,8 @@ extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method, int* level, i
 
     pfile_in_zip_read_info->stream_initialised=0;
 
-    if (method!=NULL)
-        *method = (int)s->cur_file_info.compression_method;
+	if (method != NULL)
+		*method = static_cast<int>(s->cur_file_info.compression_method);
 
     if (level!=NULL)
     {
@@ -1375,8 +1375,7 @@ extern int ZEXPORT unzGetLocalExtrafield (unzFile file, voidp buf, unsigned len)
     size_to_read = (pfile_in_zip_read_info->size_local_extrafield -
                 pfile_in_zip_read_info->pos_local_extrafield);
 
-    if (buf==NULL)
-        return (int)size_to_read;
+	if (buf == NULL) return static_cast<int>(size_to_read);
 
     if (len>size_to_read)
         read_now = (uInt)size_to_read;
@@ -1398,7 +1397,7 @@ extern int ZEXPORT unzGetLocalExtrafield (unzFile file, voidp buf, unsigned len)
               buf, read_now)!=read_now)
         return UNZ_ERRNO;
 
-    return (int)read_now;
+	return static_cast<int>(read_now);
 }
 
 /*
@@ -1473,7 +1472,7 @@ extern int ZEXPORT unzGetGlobalComment (unzFile file, char* szComment, uLong uSi
 
     if ((szComment != NULL) && (uSizeBuf > s->gi.size_comment))
         *(szComment+s->gi.size_comment)='\0';
-    return (int)uReadThis;
+	return static_cast<int>(uReadThis);
 }
 
 /* Additions by RX '2004 */
@@ -1820,10 +1819,10 @@ local int ziplocal_getByte OF((
 local int ziplocal_getByte(const zlib_filefunc_def* pzlib_filefunc_def, voidpf filestream, int* pi)
 {
     unsigned char c;
-    int err = (int)ZREAD(*pzlib_filefunc_def, filestream, &c, 1);
-    if (err==1)
-    {
-        *pi = (int)c;
+	const int err =
+		static_cast<int>(ZREAD(*pzlib_filefunc_def, filestream, &c, 1));
+	if (err == 1) {
+		*pi = static_cast<int>(c);
         return ZIP_OK;
 	}
     else

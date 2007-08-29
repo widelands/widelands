@@ -467,7 +467,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 
 	// Check if one step has completed
 	if (m_working) {
-		if ((int)(g->get_gametime() - m_work_steptime) < 0) {
+		if (static_cast<int>(g->get_gametime() - m_work_steptime) < 0) {
 			w->start_task_idle(g, w->get_animation("idle"), m_work_steptime - g->get_gametime());
 			return true;
 		} else {
