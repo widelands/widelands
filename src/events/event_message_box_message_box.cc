@@ -84,16 +84,25 @@ UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
 /*
  * Handle mouse button events
  *
- * we might be a modal, therefore, if we are, we delete ourself through end_modal()
- * otherwise through die()
- * We are not closable by right clicking so that we are not closed by accidental
- * scrolling.
+ * If the dialog has only one button, then it can be closed by right-clicking,
+ * which will perform the same thing as pressing the button.
+ * If there is more than one button, the player has to make a choice by
+ * explicitly clicking one of the buttons, and closing via right-click is not
+ * possible.
+ *
  * We are not draggable.
  */
-bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int) {
-	if (btn == SDL_BUTTON_RIGHT) {play_click(); end_modal(0); return true;}
+bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int, int)
+{
+	if (btn == SDL_BUTTON_RIGHT && m_trigger.size() == 1) {
+		play_click();
+		clicked(0);
+		return true;
+	}
 	return false;
 }
+
+
 bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int, int)
 {return false;}
 
