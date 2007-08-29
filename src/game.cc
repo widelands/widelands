@@ -483,6 +483,11 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 		std::string fname(REPLAY_DIR);
 		fname += time_string;
+		if (m_netgame) {
+			char buf[100];
+			snprintf(buf, sizeof(buf), " - network game, player %u", m_netgame->get_playernum());
+			fname += buf;
+		}
 		fname += REPLAY_SUFFIX;
 
 		m_replaywriter = new ReplayWriter(this, fname);
