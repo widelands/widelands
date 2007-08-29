@@ -366,7 +366,8 @@ void Cmd_BuildRoad::Read
 		PlayerCommand::Read(fr, egbase, mol);
 		start  = fr.Coords32  (egbase.map().extent());
 		nsteps = fr.Unsigned16();
-		steps= new char[nsteps];
+		path = 0;
+		steps = new char[nsteps];
 
 		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 			steps[i]=fr.Unsigned8();
