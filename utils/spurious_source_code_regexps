@@ -12,4 +12,5 @@
 (for|if|while) \((/[^/*]|[^/])*\) (/[^/*]|[^/])*[^){};\\]$
 _cast<const( +[_a-zA-Z][_a-zA-Z0-9]*)* *>
 _cast<( *[_a-zA-Z][_a-zA-Z0-9]*)* *\* *const *>
+\( *(void|float|double|u?(char|short|int)|[US]int(8|16|32)) *\) *[^ :;{)=]
 snprintf *\( *[_a-zA-Z][_a-zA-Z0-9]* *, *[[:digit:]]+
