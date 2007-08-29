@@ -20,7 +20,10 @@
 #ifndef __S__WIDELANDS_MAP_BOB_DATA_PACKET_H
 #define __S__WIDELANDS_MAP_BOB_DATA_PACKET_H
 
+#include "geometry.h"
 #include "widelands_map_data_packet.h"
+
+class FileRead;
 
 /*
  * This data packet contains the various bobs on
@@ -30,7 +33,7 @@
  * written
  */
 struct Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
-      virtual ~Widelands_Map_Bob_Data_Packet();
+	virtual ~Widelands_Map_Bob_Data_Packet();
 
 	virtual void Read
 		(FileSystem &,
@@ -44,8 +47,13 @@ struct Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
 		 Widelands_Map_Map_Object_Saver * const  = 0)
 		throw (_wexception);
 
-   private:
-      void read_packet_version_1(FileSystem*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader*);
+private:
+	void ReadBob
+		(FileRead& fr,
+		 Editor_Game_Base* egbase,
+		 bool skip,
+		 Widelands_Map_Map_Object_Loader * ol,
+		 Coords coords);
 };
 
 
