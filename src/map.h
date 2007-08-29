@@ -1280,5 +1280,11 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f, Map::Index & i) {
 }
 
 
+#define iterate_Map_FCoords(map, extent, fc)                                   \
+	FCoords fc(map.get_fcoords(Coords(0, 0)));                                  \
+	for (fc.y = 0; fc.y < extent.h; ++fc.y)                                     \
+		for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                      \
+
+
 std::string g_MapVariableCallback(std::string str, void* data);
 #endif // __S__MAP_H

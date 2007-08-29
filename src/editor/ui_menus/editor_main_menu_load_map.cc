@@ -275,7 +275,7 @@ void Main_Menu_Load_Map::fill_list() {
 void Main_Menu_Load_Map::load_map(std::string filename) {
 	Map & map = m_parent->editor().map();
 
-   if (filename!="") {
+	if (filename != "") {
 		m_parent->editor().cleanup_for_load(true, false);
 
 		Map_Loader * const ml = map.get_correct_loader(filename.c_str());
@@ -314,18 +314,14 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
        * not expect to meet them here. */
 		const World & world = map.world();
 		Overlay_Manager & overlay_manager = map.overlay_manager();
-		const X_Coordinate mapwidth  = map.get_width ();
-		const Y_Coordinate mapheight = map.get_height();
-		Map::Index i = 0;
-		for (Y_Coordinate y = 0; y < mapheight; ++y)
-			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
-				Field f = map[i];
-				if (const uchar amount = f.get_resources_amount()) {
+		const Extent extent = map.extent();
+		iterate_Map_FCoords(map, extent, fc) {
+				if (const uchar amount = fc.field->get_resources_amount()) {
 					const std::string & immname =
-						world.get_resource(f.get_resources())->get_editor_pic(amount);
+						world.get_resource(fc.field->get_resources())->get_editor_pic(amount);
 					if (immname.size())
 						overlay_manager.register_overlay
-							(Coords(x, y),
+							(fc,
 							 g_gr->get_picture(PicMod_Game, immname.c_str()),
 							 4);
 				}

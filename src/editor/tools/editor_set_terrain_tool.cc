@@ -32,6 +32,7 @@ int Editor_Set_Terrain_Tool::handle_click_impl
 	const Uint16 radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
 		int max = 0;
+		const World & world = map.world();
 		MapTriangleRegion<TCoords<FCoords> > mr
 			(map,
 			 Area<TCoords<FCoords> >
