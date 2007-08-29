@@ -414,18 +414,6 @@ throw (_wexception)
 		map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr);
 
          for (uint i=0; i<bobarr.size(); i++) {
-            Bob* ibob=bobarr[i];
-            for (uint j=i; j<bobarr.size(); j++) {
-               Bob* jbob=bobarr[j];
-               if (ibob->get_file_serial() < jbob->get_file_serial()) {
-                  bobarr[i] = jbob;
-                  bobarr[j] = ibob;
-                  ibob=jbob;
-					}
-				}
-			}
-
-         for (uint i=0; i<bobarr.size(); i++) {
             Bob* bob=bobarr[i];
             assert(os->is_object_known(bob));
             uint reg=os->get_object_file_index(bob);

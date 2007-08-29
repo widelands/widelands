@@ -180,7 +180,6 @@ protected:
 public:
 	virtual int get_type() const throw () = 0;
 
-   inline uint get_file_serial() const {return m_file_serial;}
 	inline uint get_serial() const {return m_serial;}
 	bool has_attribute(const uint attr) const throw ()
 	{return descr().has_attribute(attr);}
@@ -210,7 +209,6 @@ protected:
 protected:
 	const Map_Object_Descr * m_descr;
 	uint                     m_serial;
-	uint                     m_file_serial;
 	LogSink                * m_logsink;
 
 private:
@@ -229,7 +227,7 @@ class Object_Manager {
 	typedef std::map<uint, Map_Object *> objmap_t;
 
 public:
-	Object_Manager() {m_lastserial = m_last_file_serial = 0;}
+	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
 
 	void cleanup(Editor_Game_Base *g);
@@ -251,11 +249,8 @@ public:
 		return false;
 	}
 
-	void overwrite_file_serial(Map_Object*, uint);
-
 private:
 	uint m_lastserial;
-	uint m_last_file_serial;
 	objmap_t m_objects;
 
 	Object_Manager & operator=(const Object_Manager &);

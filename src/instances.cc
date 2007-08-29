@@ -183,10 +183,9 @@ void Object_Manager::cleanup(Editor_Game_Base *g)
 {
 	while (!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
-      it->second->remove(g);
+		it->second->remove(g);
 	}
-   m_lastserial = 0;
-   m_last_file_serial = 0;
+	m_lastserial = 0;
 }
 
 /*
@@ -199,23 +198,9 @@ Insert the given Map_Object into the object manager
 void Object_Manager::insert(Map_Object *obj)
 {
 	m_lastserial++;
-   assert(m_lastserial);
+	assert(m_lastserial);
 	obj->m_serial = m_lastserial;
-   if (obj->m_file_serial==0) {
-      m_last_file_serial++;
-      obj->m_file_serial = m_last_file_serial;
-	}
 	m_objects[m_lastserial] = obj;
-}
-
-/*
- * Overwrite the file serial for this object
- * The file serial number is a unique number
- * for a file which is used in various sortings
- */
-void Object_Manager::overwrite_file_serial(Map_Object* obj, uint new_serial) {
-   if (new_serial>m_last_file_serial) m_last_file_serial=new_serial;
-   obj->m_file_serial = new_serial;
 }
 
 /*
@@ -380,7 +365,7 @@ Zero-initialize a map object
 ===============
 */
 Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
-m_descr(the_descr), m_serial(0), m_file_serial(0), m_logsink(0)
+m_descr(the_descr), m_serial(0), m_logsink(0)
 {}
 
 

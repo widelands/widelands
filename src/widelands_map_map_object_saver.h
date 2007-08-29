@@ -67,6 +67,7 @@ private:
 	uint m_nr_immovables;
 	uint m_nr_battles;
 	uint m_nr_attack_controllers;
+	uint m_lastserial;
 };
 
 

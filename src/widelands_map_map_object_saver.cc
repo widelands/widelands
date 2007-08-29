@@ -29,7 +29,8 @@ m_nr_flags     (0),
 m_nr_buildings (0),
 m_nr_bobs      (0),
 m_nr_wares     (0),
-m_nr_immovables(0)
+m_nr_immovables(0),
+m_lastserial   (0)
 {}
 
 
@@ -60,12 +61,12 @@ uint Widelands_Map_Map_Object_Saver::register_object
 		default: throw wexception("Widelands_Map_Map_Object_Saver: Unknown MapObject type : %i\n", obj->get_type());
 	}
 
-	assert(obj->get_file_serial());
+	uint fileserial = ++m_lastserial;
 
-	m_objects.insert(std::pair<const Map_Object*, uint>(obj, obj->get_file_serial()));
-	m_saved_obj[obj]=false;
+	m_objects.insert(std::pair<const Map_Object*, uint>(obj, fileserial));
+	m_saved_obj[obj] = false;
 
-	return obj->get_file_serial();
+	return fileserial;
 }
 
 /*
