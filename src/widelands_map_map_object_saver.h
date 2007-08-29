@@ -29,10 +29,8 @@ class Map_Object;
  *   - keep track of map objects on the map
  *   - translate Map_Object* Pointer into the index used in the saved file
  */
-typedef std::map<const Map_Object *, const uint> Map_Object_Map;
-
 class Widelands_Map_Map_Object_Saver {
-   public:
+public:
 	Widelands_Map_Map_Object_Saver();
 
 	bool is_object_known(const Map_Object * const) const;
@@ -42,7 +40,7 @@ class Widelands_Map_Map_Object_Saver {
 
 	void mark_object_as_saved(const Map_Object * const);
 
-      // Information functions
+	// Information functions
 	uint get_nr_unsaved_objects() const throw ();
 	uint get_nr_roads          () const throw () {return m_nr_roads;}
 	uint get_nr_flags          () const throw () {return m_nr_flags;}
@@ -53,16 +51,22 @@ class Widelands_Map_Map_Object_Saver {
 	uint get_nr_battles        () const throw () {return m_nr_battles;}
 	uint get_nr_attack_controllers() const throw () {return m_nr_attack_controllers;}
 
-
-
 	bool is_object_saved(const Map_Object * const obj) throw ()
 	{return m_saved_obj[obj];}
 
-   private:
+private:
+	typedef std::map<const Map_Object *, const uint> Map_Object_Map;
+
 	std::map<const Map_Object *, bool> m_saved_obj;
-      Map_Object_Map m_objects;
-      uint m_nr_roads, m_nr_flags, m_nr_buildings, m_nr_bobs,
-           m_nr_wares, m_nr_immovables, m_nr_battles, m_nr_attack_controllers;
+	Map_Object_Map m_objects;
+	uint m_nr_roads;
+	uint m_nr_flags;
+	uint m_nr_buildings;
+	uint m_nr_bobs;
+	uint m_nr_wares;
+	uint m_nr_immovables;
+	uint m_nr_battles;
+	uint m_nr_attack_controllers;
 };
 
 

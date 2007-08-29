@@ -29,53 +29,66 @@
 /*
  * Returns true if this object has already been inserted
  */
-bool Widelands_Map_Map_Object_Loader::is_object_known(uint n) {
-   Reverse_Map_Object_Map::iterator i;
-   i=m_objects.find(n);
-   return (i!=m_objects.end());
+bool Widelands_Map_Map_Object_Loader::is_object_known(uint n)
+{
+	Reverse_Map_Object_Map::iterator i;
+	i = m_objects.find(n);
+	return (i != m_objects.end());
 }
 
 /*
  * Registers this object as a new one
  */
-void Widelands_Map_Map_Object_Loader::register_object(Editor_Game_Base* egbase, uint n, Map_Object* obj) {
-   assert(!is_object_known(n));
+void Widelands_Map_Map_Object_Loader::register_object
+		(Editor_Game_Base* egbase,
+		 uint n,
+		 Map_Object* obj)
+{
+	assert(!is_object_known(n));
 
-   egbase->objects().overwrite_file_serial(obj, n);
+	egbase->objects().overwrite_file_serial(obj, n);
 
-   m_objects.insert(std::pair<uint, Map_Object*>(n, obj));
-   m_loaded_obj[obj]=false;
+	m_objects.insert(std::pair<uint, Map_Object*>(n, obj));
+	m_loaded_obj[obj]=false;
 }
 
 /*
  * Returns the file index for this map object. This is used on load
  * to regenerate the depencies between the objects
  */
-Map_Object* Widelands_Map_Map_Object_Loader::get_object_by_file_index(uint n) {
-   // This check should rather be an assert(), but we get more information
-   // from a throw and time's not soo much an issue here
-   if (!is_object_known(n))
-      throw wexception("Widelands_Map_Map_Object_Loader::get_object_by_file_index(): Map Object %i is not known!\n", n);
+Map_Object* Widelands_Map_Map_Object_Loader::get_object_by_file_index(uint n)
+{
+	// This check should rather be an assert(), but we get more information
+	// from a throw and time's not soo much an issue here
+	if (!is_object_known(n))
+		throw wexception
+				("Widelands_Map_Map_Object_Loader::get_object_by_file_index(): "
+				 "Map Object %i is not known!\n",
+				 n);
 
-   return m_objects[n];
+	return m_objects[n];
 }
 
 /*
  * mark this object as saved
  */
-void Widelands_Map_Map_Object_Loader::mark_object_as_loaded(Map_Object* obj) {
-   m_loaded_obj[obj]=true;
+void Widelands_Map_Map_Object_Loader::mark_object_as_loaded(Map_Object* obj)
+{
+   m_loaded_obj[obj] = true;
 }
 
 /*
  * Return the number of unsaved objects
  */
-int Widelands_Map_Map_Object_Loader::get_nr_unloaded_objects() {
-   std::map<Map_Object*, bool>::iterator i=m_loaded_obj.begin();
-   int retval=0;
-   while (i!=m_loaded_obj.end()) {
-      if (!i->second) retval++;
-      ++i;
+int Widelands_Map_Map_Object_Loader::get_nr_unloaded_objects()
+{
+	std::map<Map_Object*, bool>::iterator i = m_loaded_obj.begin();
+	int retval = 0;
+
+	while (i != m_loaded_obj.end()) {
+		if (!i->second)
+			retval++;
+		++i;
 	}
-   return retval;
+	return retval;
 }
