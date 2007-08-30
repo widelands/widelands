@@ -24,6 +24,10 @@
 #include "interactive_base.h"
 #include "network.h" // For chat
 
+#include "ui_button.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+
 #include <vector>
 
 class Player;
@@ -39,8 +43,7 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-class Interactive_Player : public Interactive_Base {
-public:
+struct Interactive_Player : public Interactive_Base {
 	struct Game_Main_Menu_Windows {
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
@@ -61,7 +64,6 @@ public:
 		UI::UniqueWindow::Registry objectives;
 	};
 
-public:
 	Interactive_Player(Game &, const uchar pln);
 	~Interactive_Player();
 
@@ -69,9 +71,10 @@ public:
 
 	void start();
 
-	void main_menu_btn();
+	void toggle_main_menu();
 	void toggle_buildhelp();
-	void open_encyclopedia();
+	void toggle_resources();
+	void toggle_help     ();
 
 	void field_action();
 
@@ -109,9 +112,14 @@ private:
 	Game                     * m_game;
 	Player_Number m_player_number;
 
-	UI::Textarea             * m_label_speed;
-	UI::Multiline_Textarea   * m_chat_messages;
-	UI::Textarea             * m_type_message;
+	UI::Textarea                   m_label_speed;
+	UI::Multiline_Textarea         m_chat_messages;
+	UI::Textarea                   m_type_message;
+	UI::Button<Interactive_Player> m_toggle_main_menu;
+	UI::Button<Interactive_Player> m_toggle_minimap;
+	UI::Button<Interactive_Player> m_toggle_buildhelp;
+	UI::Button<Interactive_Player> m_toggle_resources;
+	UI::Button<Interactive_Player> m_toggle_help;
 
 	UI::UniqueWindow::Registry m_mainmenu;
 	UI::UniqueWindow::Registry m_fieldaction;

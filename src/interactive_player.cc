@@ -45,9 +45,6 @@
 #include "wlapplication.h"
 
 #include "ui_editbox.h"
-#include "ui_button.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
 #include "ui_unique_window.h"
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
@@ -71,58 +68,67 @@ Initialize
 ===============
 */
 Interactive_Player::Interactive_Player(Game & g, const uchar plyn) :
-Interactive_Base(g), m_game(&g)
+Interactive_Base(g), m_game(&g),
+
+m_label_speed(this, get_w(), 0, 0, 0, "", Align_TopRight),
+
+m_chat_messages(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft),
+m_type_message
+(this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft),
+
+
+#define BUTTON_WIDTH  34
+#define BUTTON_HEIGHT 34
+
+m_toggle_main_menu
+(this,
+ get_w() - 5 * BUTTON_WIDTH >> 1, get_h() - BUTTON_HEIGHT,
+ BUTTON_WIDTH, BUTTON_HEIGHT,
+ 2,
+ g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png"),
+ &Interactive_Player::toggle_main_menu, this,
+ _("Menu")),
+
+m_toggle_minimap
+(this,
+ m_toggle_main_menu.get_x() + BUTTON_WIDTH, m_toggle_main_menu.get_y(),
+ BUTTON_WIDTH, BUTTON_HEIGHT,
+ 2,
+ g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
+ &Interactive_Player::toggle_minimap, this,
+ _("Minimap")),
+
+m_toggle_buildhelp
+(this,
+ m_toggle_minimap.get_x() + BUTTON_WIDTH, m_toggle_minimap.get_y(),
+ BUTTON_WIDTH, BUTTON_HEIGHT,
+ 2,
+ g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
+ &Interactive_Player::toggle_buildhelp, this,
+ _("Buildhelp")),
+
+m_toggle_resources
+(this,
+ m_toggle_buildhelp.get_x() + BUTTON_WIDTH, m_toggle_buildhelp.get_y(),
+ BUTTON_WIDTH, BUTTON_HEIGHT,
+ 2,
+ g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_resources.png"),
+ &Interactive_Player::toggle_resources, this,
+ _("Geologic survey information")),
+
+m_toggle_help
+(this,
+ m_toggle_resources.get_x()/* + BUTTON_WIDTH "hide the geologic survey button until it does something"*/, m_toggle_resources.get_y(),
+ BUTTON_WIDTH, BUTTON_HEIGHT,
+ 2,
+ g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+ &Interactive_Player::toggle_help, this,
+ _("Tribe's ware encyclopedia")),
+
+m_do_chat_overlays(true), m_is_typing_msg(false)
 {
-	// Setup all screen elements
 	set_player_number(plyn);
-
 	fieldclicked.set(this, &Interactive_Player::field_action);
-
-	// user interface buttons
-	int x = (get_w() - (4*34)) >> 1;
-	int y = get_h() - 34;
-
-	new UI::Button<Interactive_Player>
-		(this,
-		 x + 34, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png"),
-		 &Interactive_Player::main_menu_btn, this,
-		 _("Menu"));
-
-	new UI::Button<Interactive_Player>
-		(this,
-		 x + 68, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png"),
-		 &Interactive_Player::toggle_minimap, this,
-		 _("Minimap"));
-
-	new UI::Button<Interactive_Player>
-		(this,
-		 x + 102, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png"),
-		 &Interactive_Player::toggle_buildhelp, this,
-		 _("Buildhelp"));
-
-	new UI::Button<Interactive_Player>
-		(this,
-		 x + 136, y, 34, 34,
-		 2,
-		 g_gr->get_picture(PicMod_Game,  "pics/menu_help.png"),
-		 &Interactive_Player::open_encyclopedia, this,
-		 _("Tribe's ware encyclopedia"));
-
-	// Speed info
-	m_label_speed = new UI::Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
-
-	// Chat Messages
-	m_chat_messages = new UI::Multiline_Textarea(this, 10, 25, get_inner_w(), get_inner_h(), "", Align_TopLeft);
-	m_type_message = new UI::Textarea(this, 10, get_inner_h()-50, get_inner_w(), 50, "", Align_TopLeft);
-
-	m_is_typing_msg = false;
-	m_do_chat_overlays = true;
 }
 
 /*
@@ -153,7 +159,7 @@ void Interactive_Player::think()
 		if (uint speed = m_game->get_speed())
 			snprintf(buffer, sizeof(buffer), _("%ux").c_str(), speed);
 		else strncpy (buffer, _("PAUSE").c_str(), sizeof(buffer));
-		m_label_speed->set_text(buffer);
+		m_label_speed.set_text(buffer);
 	}
 
 	// Check for chatmessages
@@ -169,7 +175,7 @@ void Interactive_Player::think()
 	}
 
 	// If we have chat messages to overlay, show them now
-	m_chat_messages->set_text("");
+	m_chat_messages.set_text("");
 	if (m_show_chatmsg.size() && m_do_chat_overlays) {
 		std::string str;
 		for (uint i = 0; i < m_show_chatmsg.size(); i++) {
@@ -185,15 +191,15 @@ void Interactive_Player::think()
 			}
 		}
 
-		m_chat_messages->set_text(str.c_str());
+		m_chat_messages.set_text(str.c_str());
 	}
 
 	// Is the user typing a message?
-	m_type_message->set_text("");
+	m_type_message.set_text("");
 	if (m_is_typing_msg) {
 		std::string text = _("Message: ");
 		text += m_typed_message;
-		m_type_message->set_text(text.c_str());
+		m_type_message.set_text(text.c_str());
 	}
 }
 
@@ -241,8 +247,7 @@ Interactive_Player::main_menu_btn
 Bring up or close the main menu
 ===============
 */
-void Interactive_Player::main_menu_btn()
-{
+void Interactive_Player::toggle_main_menu() {
 	if (m_mainmenu.window)
 		delete m_mainmenu.window;
 	else
@@ -257,11 +262,15 @@ void Interactive_Player::toggle_buildhelp()
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
 
+
+void Interactive_Player::toggle_resources() {
+}
+
+
 //
 // Shows wares encyclopedia for wares
 //
-void Interactive_Player::open_encyclopedia()
-{
+void Interactive_Player::toggle_help() {
 	if (m_encyclopedia.window)
 		delete m_encyclopedia.window;
 	else
