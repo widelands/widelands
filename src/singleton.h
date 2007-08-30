@@ -20,28 +20,49 @@
 #ifndef __S__SINGLETON_H
 #define __S__SINGLETON_H
 
-/* Referenz: Game Programming Gems I, P. 38
- * Excellent code!!
+
+#include <cassert>
+
+/* The original code seems to have come from Game Programming Gems I, P. 38
+ * but the current version probably doesn't really resemble it any more.
  */
 
+/**
+ * Singleton class, to be used in
+ *
+ * class SomeClass : public Singleton<SomeClass> {
+ *   etc.
+ * };
+ *
+ * The singleton must be explicitly instantiated using
+ *  new SomeClass;
+ * and explicitly deleted using
+ *  delete SomeClass::get_ptsingleton();
+ *
+ * \note There is a weakness here because the implementation doesn't
+ * enforce that T equals the derived class. Unfortunately, using dynamic_cast
+ * (or any other kind of RTTI) in the constructor doesn't work.
+ */
 template <typename T> class Singleton {
-		  static T* ms;
+	static T* ms;
 
-		  public:
+protected:
 	Singleton() {
-					 assert (!ms) ;
-		const int offset =
-			static_cast<int>                            (static_cast<T *>(1))
-			-
-			static_cast<int>(static_cast<Singleton<T> *>(static_cast<T *>(1)));
-		ms = static_cast<T *>(static_cast<int>(this) + offset);
+		assert(!ms);
+		ms = static_cast<T*>(this);
 	}
-		  ~Singleton() {assert(ms); ms=0;}
-		  static inline T& get_singleton() {assert (ms); return *ms;}
-		  static inline T* get_ptsingleton() {assert(ms); return ms;}
+
+	~Singleton() {
+		assert(ms);
+		ms = 0;
+	}
+
+public:
+	static inline T& get_singleton() {assert(ms); return *ms;}
+	static inline T* get_ptsingleton() {assert(ms); return ms;}
 };
 
-template <typename T> T* Singleton <T>::ms=0;
+template <typename T> T* Singleton <T>::ms = 0;
 
 
 #endif
