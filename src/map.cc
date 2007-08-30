@@ -1836,29 +1836,24 @@ void Map::increase_pathcycle()
 }
 
 
-/*
-===============
-Map::findpath
-
-Pathfinding entry-point.
-Finds a path from start to end for a Map_Object with the given movecaps.
-
-The path is stored in path, in terms of Map_Object::MOVE_* constants.
-persist tells the function how hard it should try to find a path:
-If persist is 0, the function will never give up early. Otherwise, the
-function gives up when it becomes clear that the path must be longer than
-persist*bird's distance fields long.
-[not implement right now]: If the terrain contains lots of hills, the cost
-calculation will cause the search to terminate earlier than this. If persist==1,
-findpath() can only find a path if the terrain is completely flat.
-
-findpath() calls the checkstep functor-like to determine whether moving from
-one field to another is legal.
-
-The function returns the cost of the path (in milliseconds of normal walking
-speed) or -1 if no path has been found.
-===============
-*/
+/**
+ * Finds a path from start to end for a Map_Object with the given movecaps.
+ *
+ * The path is stored in \p path, in terms of \ref Map_Object::WALK_* constants.
+ * \param persist tells the function how hard it should try to find a path:
+ * If \p persist is \c 0, the function will never give up early. Otherwise, the
+ * function gives up when it becomes clear that the path takes longer than
+ * persist*bird's distance of flat terrain.
+ * Note that if the terrain contains steep hills, the cost calculation will
+ * cause the search to terminate earlier than you may think. If persist==1,
+ * \ref findpath can only find a path if the terrain is completely flat.
+ *
+ * \param checkstep findpath() calls this checkstep functor-like to determine
+ * whether moving from one field to another is legal.
+ *
+ * \return the cost of the path (in milliseconds of normal walking
+ * speed) or -1 if no path has been found.
+ */
 int Map::findpath
 (Coords instart,
  Coords inend,
