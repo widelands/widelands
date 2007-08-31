@@ -513,3 +513,69 @@ void Map_Object::molog(const char* fmt, ...) const
 
 	log("MO(%u): %s", m_serial, buffer);
 }
+
+
+#define CURRENT_SAVEGAME_VERSION 1
+
+/**
+ * Load the entire data package from the given file.
+ * This will be called from the Map_Object's derived class static load function.
+ *
+ * Derived functions must read all data into member variables, even if
+ * it is used only later in \ref load_pointers or \ref load_finish .
+ *
+ * Derived functions must call ancestor's function in the appropriate place.
+ */
+void Map_Object::Loader::load(FileRead& fr)
+{
+	Uint8 header = fr.Unsigned8();
+	if (header != header_Map_Object)
+		throw wexception("Header %u expected (got %u)", header_Map_Object, header);
+
+	Uint8 version = fr.Unsigned8();
+	if (version != CURRENT_SAVEGAME_VERSION)
+		throw wexception("Map_Object: Unknown version %u", version);
+
+	Uint32 fileindex = fr.Unsigned32();
+	mol().register_object(&egbase(), fileindex, get_object());
+
+	egbase().objects().insert(get_object());
+}
+
+
+/**
+ * This will be called after all instances have been loaded.
+ *
+ * This is where pointers to other instances should be established, possibly
+ * using data that was previously stored in a member variable by \ref load .
+ *
+ * Derived functions must call ancestor's function in the appropriate place.
+ */
+void Map_Object::Loader::load_pointers()
+{
+}
+
+
+/**
+ * This will be called after all instances have been load_pointer'ed.
+ *
+ * This is where dependent data (e.g. ware requests) should be checked and
+ * configured.
+ *
+ * Derived functions must call ancestor's function in the appropriate place.
+ */
+void Map_Object::Loader::load_finish()
+{
+}
+
+
+/**
+ * Save the Map_Object to the given file.
+ */
+void Map_Object::save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver* mos, FileWrite& fw)
+{
+	fw.Unsigned8(header_Map_Object);
+	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
+
+	fw.Unsigned32(mos->get_object_file_index(this));
+}

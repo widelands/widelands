@@ -55,7 +55,7 @@ throw (_wexception)
 	assert(ol);
 
 	FileRead fr;
-   fr.Open(fs, "binary/immovable");
+	fr.Open(fs, "binary/immovable");
 
 	Map        & map        = egbase->map();
 	World      & world      = map.world  ();
@@ -105,41 +105,10 @@ throw (_wexception)
  * Write Function
  */
 void Widelands_Map_Immovable_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+(FileSystem &,
+ Editor_Game_Base*,
+ Widelands_Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-	FileWrite fw;
-
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-	const Map & map = egbase->map();
-	const X_Coordinate mapwidth  = map.get_width ();
-	const Y_Coordinate mapheight = map.get_height();
-	Map::Index i = 0;
-	Coords position;
-	for (position.y = 0; position.y < mapheight; ++position.y)
-		for (position.x = 0; position.x < mapwidth; ++position.x, ++i) {
-         // We do not write player immovables
-			if
-				(const Immovable * const immovable =
-				 dynamic_cast<const Immovable *>(map[i].get_immovable()))
-			{
-				assert(not os->is_object_known(immovable));
-				fw.Unsigned32(os->register_object(immovable));
-				if (const Tribe_Descr * const tribe = immovable->get_owner_tribe())
-					fw.CString(tribe->name().c_str());
-				else fw.CString("world");
-
-				fw.CString(immovable->name().c_str());
-				fw.Coords32(position);
-			}
-		}
-
-   fw.Unsigned32(0xffffffff);
-
-   fw.Write(fs, "binary/immovable");
-   // DONE
+	throw wexception("Immovable_Data_Packet is obsolete");
 }

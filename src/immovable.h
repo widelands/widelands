@@ -152,6 +152,22 @@ protected:
 	const ImmovableProgram * m_program;
 	uint m_program_ptr; //  index of next instruction to execute
 	int                      m_program_step; //  time of next step
+
+
+	// Load/save support
+protected:
+	struct Loader : public BaseImmovable::Loader {
+		virtual void load(FileRead&);
+		virtual void load_pointers();
+		virtual void load_finish();
+	};
+
+public:
+	// Remove as soon as we fully support the new system
+	virtual bool has_new_save_support() { return true; }
+
+	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
+	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
 };
 
 

@@ -47,6 +47,7 @@
 #include "widelands_map_immovable_data_packet.h"
 #include "widelands_map_immovabledata_data_packet.h"
 #include "widelands_map_map_object_saver.h"
+#include "widelands_map_object_packet.h"
 #include "widelands_map_objective_data_packet.h"
 #include "widelands_map_owned_fields_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
@@ -107,11 +108,6 @@ void Widelands_Map_Saver::save() throw(_wexception) {
    // and terrains
    log("Writing Terrain Data ... ");
 	{Widelands_Map_Terrain_Data_Packet        p; p.Write(m_fs, m_egbase, m_mos);}
-   log("done!\n ");
-
-   // now immovables
-   log("Writing Immovable Data ... ");
-	{Widelands_Map_Immovable_Data_Packet      p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
    // now player pos
@@ -199,6 +195,13 @@ void Widelands_Map_Saver::save() throw(_wexception) {
 	{Widelands_Map_Ware_Data_Packet           p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
+	log("Writing Map Objects ... ");
+	{
+		Widelands_Map_Object_Packet p;
+		p.Write(m_fs, m_egbase, m_mos);
+	}
+	log("done!\n ");
+
    // DATA PACKETS
 	if (m_mos->get_nr_flags()) {
       log("Writing Flagdata Data ... ");
@@ -232,15 +235,6 @@ void Widelands_Map_Saver::save() throw(_wexception) {
 	if (m_mos->get_nr_bobs()) {
       log("Writing Bobdata Data ... ");
 	   {Widelands_Map_Bobdata_Data_Packet     p; p.Write(m_fs, m_egbase, m_mos);}
-      log("done!\n ");
-	}
-
-	if (m_mos->get_nr_immovables()) {
-      log("Writing Immovabledata Data ... ");
-		{
-			Widelands_Map_Immovabledata_Data_Packet p;
-			p.Write(m_fs, m_egbase, m_mos);
-		}
       log("done!\n ");
 	}
 

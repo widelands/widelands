@@ -22,6 +22,8 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "field.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "helper.h"
 #include "immovable_program.h"
@@ -30,6 +32,7 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "sound/sound_handler.h"
+#include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
 
@@ -642,10 +645,163 @@ void Immovable::draw
 /*
 ==============================
 
-Immovable commands
+Load/save support
 
 ==============================
 */
+
+#define IMMOVABLE_SAVEGAME_VERSION 1
+
+void Immovable::Loader::load(FileRead& fr)
+{
+	BaseImmovable::Loader::load(fr);
+
+	Immovable* imm = dynamic_cast<Immovable*>(get_object());
+
+	// Position
+	imm->m_position = fr.Coords32(egbase().map().extent());
+	imm->set_position(&egbase(), imm->m_position);
+
+	// Animation
+	const char* animname = fr.CString();
+	try {
+		imm->m_anim = imm->descr().get_animation(animname);
+	}
+	catch (Map_Object_Descr::Animation_Nonexistent&) {
+		imm->m_anim = imm->descr().main_animation();
+		log("Warning: Animation '%s' not found, using animation '%s').\n",
+			animname, imm->descr().get_animation_name(imm->m_anim).c_str());
+	}
+	imm->m_animstart = fr.Signed32();
+
+	// Programm
+	if (fr.Unsigned8())
+		imm->m_program = imm->descr().get_program(fr.CString());
+	else
+		imm->m_program = 0;
+	imm->m_program_ptr = fr.Unsigned32();
+
+	if (!imm->m_program) {
+		imm->m_program_ptr = 0;
+	} else {
+		if (imm->m_program_ptr >= imm->m_program->get_size()) {
+			// Try to not fail if the program of some immovable has changed
+			// significantly.
+			// Note that in some cases, the immovable may end up broken despite
+			// the fixup, but there isn't really anything we can do against that.
+			log("Warning: Immovable '%s', size of program '%s' seems to have changed.\n",
+				imm->descr().name().c_str(), imm->m_program->get_name().c_str());
+			imm->m_program_ptr = 0;
+		}
+	}
+
+	imm->m_program_step = fr.Signed32();
+}
+
+void Immovable::Loader::load_pointers()
+{
+	BaseImmovable::Loader::load_pointers();
+}
+
+void Immovable::Loader::load_finish()
+{
+	BaseImmovable::Loader::load_finish();
+
+	Immovable* imm = dynamic_cast<Immovable*>(get_object());
+
+	egbase().inform_players_about_immovable
+			(Map::get_index(imm->m_position, egbase().map().get_width()),
+			 &imm->descr());
+}
+
+void Immovable::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, FileWrite& fw)
+{
+	// This is in front because it is required to obtain the descriptiong
+	// necessary to create the Immovable
+	fw.Unsigned8(header_Immovable);
+	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
+
+	if (const Tribe_Descr * const tribe = get_owner_tribe())
+		fw.CString(tribe->name().c_str());
+	else
+		fw.CString("world");
+
+	fw.CString(name().c_str());
+
+	// The main loading data follows
+	BaseImmovable::save(eg, mos, fw);
+
+	fw.Coords32(m_position);
+
+	// Animations
+	fw.CString(descr().get_animation_name(m_anim).c_str());
+	fw.Signed32(m_animstart);
+
+	// Program Stuff
+	if (m_program) {
+		fw.Unsigned8(1);
+		fw.CString(m_program->get_name().c_str());
+	} else {
+		fw.Unsigned8(0);
+	}
+
+	fw.Unsigned32(m_program_ptr);
+	fw.Signed32(m_program_step);
+}
+
+Map_Object::Loader* Immovable::load
+		(Editor_Game_Base* eg, Widelands_Map_Map_Object_Loader* mol, FileRead& fr)
+{
+	Loader* loader = new Loader;
+
+	try {
+		// The header has been peeled away by the caller
+
+		Uint8 version = fr.Unsigned8();
+		if (version != IMMOVABLE_SAVEGAME_VERSION)
+			throw wexception("Unknown version %u", version);
+
+		const char * const owner = fr.CString ();
+		const char * const name  = fr.CString ();
+		Immovable* imm = 0;
+
+		if (strcmp(owner, "world")) {
+			// It is a tribe immovable
+			eg->manually_load_tribe(owner);
+
+			Tribe_Descr* tribe = eg->get_tribe(owner);
+			if (!tribe)
+				throw wexception("Unknown tribe %s!\n", owner);
+
+			int idx = tribe->get_immovable_index(name);
+			if (idx == -1)
+				throw wexception
+						("Unknown tribe-immovable %s in map, asked for tribe: %s!\n",
+						 name, owner);
+
+			imm = new Immovable(*tribe->get_immovable_descr(idx));
+		} else {
+			// World immovable
+			int idx = eg->map().world().get_immovable_index(name);
+			if (idx == -1)
+				throw wexception("Unknown world immovable %s in map!\n", name);
+
+			imm = new Immovable(*eg->map().world().get_immovable_descr(idx));
+		}
+
+		loader->init(eg, mol, imm);
+		loader->load(fr);
+	} catch(const std::exception& e) {
+		delete loader;
+		throw wexception("Loading Immovable: %s", e.what());
+	} catch(...) {
+		delete loader;
+		throw;
+	}
+
+	return loader;
+}
+
 
 /*
 ===============

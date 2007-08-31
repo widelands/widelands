@@ -33,6 +33,7 @@
 class RenderTarget;
 class Path;
 class Player;
+struct Widelands_Map_Map_Object_Loader;
 namespace UI {struct Tab_Panel;};
 
 //
@@ -109,6 +110,12 @@ DO NOT allocate/free Map_Objects directly.
 Use the appropriate type-dependent create() function for creation, and call die()
 for removal.
 Note that convenient creation functions are defined in class Game.
+
+When you do create a new object yourself (i.e. when you're implementing one
+of the create() functions), you need to allocate the object using new,
+potentially set it up by calling basic functions like set_position, set_owner,
+etc. and then call init(). After that, the object is supposed to be fully
+created.
 */
 
 // If you find a better way to do this that doesn't cost a virtual function or additional
@@ -200,6 +207,68 @@ public:
 	void set_logsink(LogSink* sink);
 	virtual void log_general_info(Editor_Game_Base*); // Called when a new logsink is set, used to give general informations
 
+	// saving and loading
+	/**
+	 * Header bytes to distinguish between data packages for the different
+	 * Map_Object classes.
+	 *
+	 * Be careful in changing those, since they are written to files.
+	 */
+	enum {
+		header_Map_Object = 1,
+		header_Immovable = 2
+	};
+
+	/**
+	 * Static load functions of derived classes will return a pointer to
+	 * a Loader class. The caller needs to call the virtual functions
+	 * \ref load for all instances loaded that way, after that call
+	 * \ref load_pointers for all instances loaded that way and finally
+	 * call \ref load_finish for all instances loaded that way.
+	 * Those are the three phases of loading. After the last phase,
+	 * all Loader objects should be deleted.
+	 */
+	class Loader {
+		Editor_Game_Base* m_egbase;
+		Widelands_Map_Map_Object_Loader* m_mol;
+		Map_Object* m_object;
+
+	protected:
+		Loader() : m_egbase(0), m_mol(0), m_object(0) { }
+
+	public:
+		virtual ~Loader() { }
+
+		void init
+				(Editor_Game_Base* e,
+				 Widelands_Map_Map_Object_Loader* m,
+				 Map_Object* object)
+		{
+			m_egbase = e;
+			m_mol = m;
+			m_object = object;
+		}
+
+		Editor_Game_Base& egbase() { return *m_egbase; }
+		Widelands_Map_Map_Object_Loader& mol() { return *m_mol; }
+		Map_Object* get_object() { return m_object; }
+
+	protected:
+		virtual void load(FileRead&);
+
+	public:
+		virtual void load_pointers();
+		virtual void load_finish();
+	};
+
+	// This is just a fail-safe guard for the time until we fully transition
+	// to the new Map_Object saving system
+	virtual bool has_new_save_support() { return false; }
+
+	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
+	// Pure Map_Objects cannot be loaded
+	//static Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
 protected:
 	// init for editor and game
 	virtual void init(Editor_Game_Base*);
@@ -225,9 +294,9 @@ inline int get_reverse_dir(int dir) {return 1 + ((dir-1)+3)%6;}
  * Keeps the list of all objects currently in the game.
  */
 class Object_Manager {
+public:
 	typedef std::map<uint, Map_Object *> objmap_t;
 
-public:
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
 
@@ -249,6 +318,12 @@ public:
 		}
 		return false;
 	}
+
+	/**
+	 * Get the map of all objects for the purpose of iterating over it.
+	 * Only provide a const version of the map!
+	 */
+	const objmap_t& get_objects() { return m_objects; }
 
 private:
 	uint m_lastserial;

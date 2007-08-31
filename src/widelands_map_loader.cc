@@ -43,6 +43,7 @@
 #include "widelands_map_immovable_data_packet.h"
 #include "widelands_map_immovabledata_data_packet.h"
 #include "widelands_map_map_object_loader.h"
+#include "widelands_map_object_packet.h"
 #include "widelands_map_objective_data_packet.h"
 #include "widelands_map_owned_fields_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
@@ -166,12 +167,21 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    log("done!\n ");
 
    // now immovables
-   log("Reading Immovable Data ... ");
-	{
+	bool have_immovables = m_fs.FileExists("binary/immovable");
+	if (have_immovables) {
+		log("Reading Immovable Data ... ");
 		Widelands_Map_Immovable_Data_Packet p;
 		p.Read(m_fs, egbase, !scenario, m_mol);
+		log("done!\n ");
+
+		if (m_fs.FileExists("binary/mapobjects"))
+			log("Warning: Map has both binary/immovable and binary/mapobjects\n");
+	} else {
+		log("Reading Map Objects ... ");
+		Widelands_Map_Object_Packet p;
+		p.Read(m_fs, egbase, m_mol);
+		log("done\n");
 	}
-   log("done!\n ");
 
    // now player pos
    log("Reading Player Start Position Data ... ");
@@ -341,6 +351,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 
    log("Reading Immovabledata Data ... ");
 	{
+		// We do this only for binary compatibility
 		Widelands_Map_Immovabledata_Data_Packet p;
 		p.Read(m_fs, egbase, !scenario, m_mol);
 	}
