@@ -32,8 +32,8 @@
 #include <glob.h>
 #endif
 
-#include "widelands_streamread.h"
-#include "widelands_streamwrite.h"
+#include "streamread.h"
+#include "streamwrite.h"
 
 /**
  * Initialize the real file-system
@@ -425,7 +425,7 @@ Implementation of OpenStreamRead
 
 namespace {
 
-class RealFSStreamRead : public WidelandsStreamRead {
+class RealFSStreamRead : public StreamRead {
 public:
 	RealFSStreamRead(const std::string fname)
 	{
@@ -455,7 +455,7 @@ private:
 
 } // anonymous namespace
 
-WidelandsStreamRead * RealFSImpl::OpenWidelandsStreamRead
+StreamRead * RealFSImpl::OpenStreamRead
 (const std::string & fname)
 {
 	const std::string fullname = FS_CanonicalizeName(fname);
@@ -472,8 +472,8 @@ Implementation of OpenStreamWrite
 
 namespace {
 
-struct RealFSWidelandsStreamWrite : public WidelandsStreamWrite {
-	RealFSWidelandsStreamWrite(const std::string fname)
+struct RealFSStreamWrite : public StreamWrite {
+	RealFSStreamWrite(const std::string fname)
 	: m_filename(fname)
 	{
 		m_file = fopen(fname.c_str(), "wb");
@@ -481,7 +481,7 @@ struct RealFSWidelandsStreamWrite : public WidelandsStreamWrite {
 			throw wexception("Couldn't open %s for writing", fname.c_str());
 	}
 
-	~RealFSWidelandsStreamWrite() {fclose(m_file);}
+	~RealFSStreamWrite() {fclose(m_file);}
 
 	void Data(const void * const data, const size_t size)
 	{
@@ -503,10 +503,10 @@ private:
 
 } // anonymous namespace
 
-WidelandsStreamWrite * RealFSImpl::OpenWidelandsStreamWrite
+StreamWrite * RealFSImpl::OpenStreamWrite
 (const std::string & fname)
 {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
-	return new RealFSWidelandsStreamWrite(fullname);
+	return new RealFSStreamWrite(fullname);
 }

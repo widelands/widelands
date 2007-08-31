@@ -21,10 +21,10 @@
 
 #include "cmd_queue.h"
 #include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_factory.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 
 
 #define CURRENT_PACKET_VERSION 2
@@ -37,7 +37,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	WidelandsFileRead fr;
+	FileRead fr;
 	fr.Open(fs, "binary/cmd_queue");
 
 	const Uint16 packet_version = fr.Unsigned16();
@@ -111,7 +111,7 @@ void Game_Cmd_Queue_Data_Packet::Write
 (FileSystem & fs, Game* game, Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-	WidelandsFileWrite fw;
+	FileWrite fw;
 
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);

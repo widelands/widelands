@@ -350,13 +350,13 @@ void ZipFilesystem::Write(const std::string fname, const void * const data,
    zipCloseFileInZip(m_zipfile);
 }
 
-WidelandsStreamRead * ZipFilesystem::OpenWidelandsStreamRead
+StreamRead * ZipFilesystem::OpenStreamRead
 (const std::string & fname)
 {
 	throw wexception("OpenStreamRead(%s) not yet supported in ZipFilesystem", fname.c_str());
 }
 
-WidelandsStreamWrite * ZipFilesystem::OpenWidelandsStreamWrite
+StreamWrite * ZipFilesystem::OpenStreamWrite
 (const std::string & fname)
 {
 	throw wexception("OpenStreamWrite(%s) not yet supported in ZipFilesystem", fname.c_str());

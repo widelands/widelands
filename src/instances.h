@@ -331,11 +331,11 @@ public:
 	virtual void execute (Game* g);
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
@@ -354,11 +354,11 @@ public:
 	virtual void execute (Game* g);
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 

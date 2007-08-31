@@ -27,8 +27,8 @@
 class Editor_Game_Base;
 class Widelands_Map_Map_Object_Saver;
 class Widelands_Map_Map_Object_Loader;
-class WidelandsFileRead;
-class WidelandsFileWrite;
+class FileRead;
+class FileWrite;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
@@ -96,11 +96,11 @@ public:
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 };

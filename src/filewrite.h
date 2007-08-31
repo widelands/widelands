@@ -20,10 +20,11 @@
 #ifndef FILEWRITE_H
 #define FILEWRITE_H
 
+#include "geometry.h"
 #include "machdep.h"
 
-#include <limits>
 #include <cassert>
+#include <limits>
 
 struct FileSystem;
 
@@ -101,6 +102,8 @@ struct FileWrite {
 	void CString(const char * const x, const Pos pos = NoPos())
 	{Data(x, strlen(x) + 1, pos);}
 
+	void  Coords32(const Coords);
+
 private:
 	void * data;
 	size_t length;
@@ -110,5 +113,12 @@ private:
 	FileWrite & operator=(const FileWrite &);
 	FileWrite            (const FileWrite &);
 };
+
+inline void FileWrite::Coords32(const Coords c) {
+	assert(static_cast<Uint16>(c.x) < 0x8000 or c.x == -1);
+	assert(static_cast<Uint16>(c.y) < 0x8000 or c.y == -1);
+	{const Uint16 x = Little16(c.x); Data(&x, 2);}
+	{const Uint16 y = Little16(c.y); Data(&y, 2);}
+}
 
 #endif

@@ -20,10 +20,10 @@
 #include "widelands_map_players_areawatchers_data_packet.h"
 
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "map.h"
 #include "player.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
@@ -54,7 +54,7 @@ throw (_wexception)
 		Player & player = egbase->player(plnum);
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, plnum);
-		WidelandsFileRead fr;
+		FileRead fr;
 		struct Not_Found {};
 		try {
 			try {fr.Open(fs, filename);}
@@ -80,13 +80,13 @@ throw (_wexception)
 					 plnum, filename, fr.GetPrevPos(), reg);
 				Coords c;
 				try {c = fr.Coords32(extent);}
-				catch  (const WidelandsFileRead::Width_Exceeded e) {
+				catch  (const FileRead::Width_Exceeded e) {
 					throw wexception
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
 						 "player %u: in \"%s\":%u: area watcher %u: x-cordinate (%u) "
 						 "exceeds the witdh of the map (%u)\n",
 						 plnum, filename, e.position, reg, e.x, e.w);
-				} catch (const WidelandsFileRead::Height_Exceeded e) {
+				} catch (const FileRead::Height_Exceeded e) {
 					throw wexception
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
 						 "player %u: in \"%s\":%u: area watcher %u: y-cordinate (%u) "
@@ -121,7 +121,7 @@ throw (_wexception)
 		Player * player = egbase->get_player(plnum);
 		if (NULL == player) // valid condition in editor
 			continue;
-		WidelandsFileWrite fw;
+		FileWrite fw;
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
 		const Player::AreaWatchers::const_iterator areawatchers_end =

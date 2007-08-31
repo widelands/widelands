@@ -23,11 +23,11 @@
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
@@ -54,7 +54,7 @@ throw (_wexception)
    if (skip)
       return;
 
-	WidelandsFileRead fr;
+	FileRead fr;
    try {
       fr.Open(fs, "binary/flag_data");
 	} catch (...) {
@@ -78,13 +78,13 @@ throw (_wexception)
          // PlayerImmovable
 
 			try {flag->m_position = fr.Coords32(extent);}
-			catch (const WidelandsFileRead::Width_Exceeded e) {
+			catch (const FileRead::Width_Exceeded e) {
 				throw wexception
 					("Widelands_Map_Flagdata_Data_Packet::Read: in "
 					 "binary/flag_data:%u: flag %u has x coordinate %i, but the map "
 					 "width is only %u",
 					 e.position, ser, e.x, e.w);
-			} catch (const WidelandsFileRead::Height_Exceeded e) {
+			} catch (const FileRead::Height_Exceeded e) {
 				throw wexception
 					("Widelands_Map_Flagdata_Data_Packet::Read: in "
 					 "binary/flag_data:%u: flag %u has y coordinate %i, but the map "
@@ -175,7 +175,7 @@ void Widelands_Map_Flagdata_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-	WidelandsFileWrite fw;
+	FileWrite fw;
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);

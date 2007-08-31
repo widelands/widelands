@@ -20,17 +20,17 @@
 #include "playercommand.h"
 
 #include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
 #include "soldier.h"
+#include "streamread.h"
+#include "streamwrite.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_map_object_loader.h"
-#include "widelands_streamread.h"
-#include "widelands_streamwrite.h"
 
 enum {
 	PLCMD_UNUSED=0,
@@ -59,7 +59,7 @@ PlayerCommand::~PlayerCommand ()
 {
 }
 
-PlayerCommand* PlayerCommand::deserialize (WidelandsStreamRead & des)
+PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 {
 	switch (des.Unsigned8()) {
 		case PLCMD_BULLDOZE:
@@ -95,7 +95,7 @@ PlayerCommand* PlayerCommand::deserialize (WidelandsStreamRead & des)
  */
 #define PLAYER_COMMAND_VERSION 1
 void PlayerCommand::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -107,7 +107,7 @@ void PlayerCommand::Write
 	fw.Unsigned8 (sender);
 }
 void PlayerCommand::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -123,7 +123,7 @@ void PlayerCommand::Read
 
 /*** class Cmd_Bulldoze ***/
 
-Cmd_Bulldoze::Cmd_Bulldoze (WidelandsStreamRead & des) :
+Cmd_Bulldoze::Cmd_Bulldoze (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
@@ -138,7 +138,7 @@ void Cmd_Bulldoze::execute (Game* g)
 		player->bulldoze(static_cast<PlayerImmovable*>(obj));
 }
 
-void Cmd_Bulldoze::serialize (WidelandsStreamWrite & ser)
+void Cmd_Bulldoze::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BULLDOZE);
 	ser.Unsigned8 (get_sender());
@@ -146,7 +146,7 @@ void Cmd_Bulldoze::serialize (WidelandsStreamWrite & ser)
 }
 #define PLAYER_CMD_BULLDOZE_VERSION 1
 void Cmd_Bulldoze::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -162,7 +162,7 @@ void Cmd_Bulldoze::Read
 			("Unknown version in Cmd_Bulldoze::Read: %u", packet_version);
 }
 void Cmd_Bulldoze::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -178,7 +178,7 @@ void Cmd_Bulldoze::Write
 
 /*** class Cmd_Build ***/
 
-Cmd_Build::Cmd_Build (WidelandsStreamRead & des) :
+Cmd_Build::Cmd_Build (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	id     = des.Signed16  ();
@@ -191,7 +191,7 @@ void Cmd_Build::execute (Game* g)
 	player->build(coords, id);
 }
 
-void Cmd_Build::serialize (WidelandsStreamWrite & ser) {
+void Cmd_Build::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_BUILD);
 	ser.Unsigned8 (get_sender());
 	ser.Signed16  (id);
@@ -199,7 +199,7 @@ void Cmd_Build::serialize (WidelandsStreamWrite & ser) {
 }
 #define PLAYER_CMD_BUILD_VERSION 1
 void Cmd_Build::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -209,12 +209,12 @@ void Cmd_Build::Read
 		PlayerCommand::Read(fr, egbase, mol);
 		id          = fr.Unsigned16();
 		try {coords = fr.Coords32  (egbase.map().extent());}
-		catch (const WidelandsStreamRead::Width_Exceeded e) {
+		catch (const StreamRead::Width_Exceeded e) {
 			throw wexception
 				("Cmd_Build::Read: reading coords: width (%u) exceeded (x = %i)",
 				 e.w, e.x);
 		}
-		catch (const WidelandsStreamRead::Height_Exceeded e) {
+		catch (const StreamRead::Height_Exceeded e) {
 			throw wexception
 				("Cmd_Build::Read: reading coords: height (%u) exceeded (y = %i)",
 				 e.h, e.y);
@@ -225,7 +225,7 @@ void Cmd_Build::Read
 }
 
 void Cmd_Build::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -240,7 +240,7 @@ void Cmd_Build::Write
 
 /*** class Cmd_BuildFlag ***/
 
-Cmd_BuildFlag::Cmd_BuildFlag (WidelandsStreamRead & des) :
+Cmd_BuildFlag::Cmd_BuildFlag (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	coords = des.Coords32  ();
@@ -252,7 +252,7 @@ void Cmd_BuildFlag::execute (Game* g)
 	player->build_flag(coords);
 }
 
-void Cmd_BuildFlag::serialize (WidelandsStreamWrite & ser)
+void Cmd_BuildFlag::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDFLAG);
 	ser.Unsigned8 (get_sender());
@@ -260,7 +260,7 @@ void Cmd_BuildFlag::serialize (WidelandsStreamWrite & ser)
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
 void Cmd_BuildFlag::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -269,13 +269,13 @@ void Cmd_BuildFlag::Read
 		// Read Player Command
 		PlayerCommand::Read(fr, egbase, mol);
 		try {coords = fr.Coords32(egbase.map().extent());}
-		catch (const WidelandsStreamRead::Width_Exceeded e) {
+		catch (const StreamRead::Width_Exceeded e) {
 			throw wexception
 				("Cmd_BuildFlag::Read: reading coords: width (%u) exceeded (x = "
 				 "%i)",
 				 e.w, e.x);
 		}
-		catch (const WidelandsStreamRead::Height_Exceeded e) {
+		catch (const StreamRead::Height_Exceeded e) {
 			throw wexception
 				("Cmd_BuildFlag::Read: reading coords: height (%u) exceeded (y = "
 				 "%i)",
@@ -286,7 +286,7 @@ void Cmd_BuildFlag::Read
 			("Unknown version in Cmd_BuildFlag::Read: %u", packet_version);
 }
 void Cmd_BuildFlag::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -307,7 +307,7 @@ nsteps       (pa.get_nsteps()),
 steps        (0)
 {}
 
-Cmd_BuildRoad::Cmd_BuildRoad (WidelandsStreamRead & des) :
+Cmd_BuildRoad::Cmd_BuildRoad (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	start  = des.Coords32  ();
@@ -342,7 +342,7 @@ void Cmd_BuildRoad::execute (Game* g)
 	player->build_road(*path);
 }
 
-void Cmd_BuildRoad::serialize (WidelandsStreamWrite & ser)
+void Cmd_BuildRoad::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDROAD);
 	ser.Unsigned8 (get_sender());
@@ -356,7 +356,7 @@ void Cmd_BuildRoad::serialize (WidelandsStreamWrite & ser)
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
 void Cmd_BuildRoad::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -376,7 +376,7 @@ void Cmd_BuildRoad::Read
 			("Unknown version in Cmd_BuildRoad::Read: %u", packet_version);
 }
 void Cmd_BuildRoad::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -392,7 +392,7 @@ void Cmd_BuildRoad::Write
 
 
 /*** Cmd_FlagAction ***/
-Cmd_FlagAction::Cmd_FlagAction (WidelandsStreamRead & des) :
+Cmd_FlagAction::Cmd_FlagAction (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	action = des.Unsigned8 ();
@@ -408,7 +408,7 @@ void Cmd_FlagAction::execute (Game* g)
 		player->flagaction (static_cast<Flag*>(obj), action);
 }
 
-void Cmd_FlagAction::serialize (WidelandsStreamWrite & ser)
+void Cmd_FlagAction::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_FLAGACTION);
 	ser.Unsigned8 (get_sender());
@@ -418,7 +418,7 @@ void Cmd_FlagAction::serialize (WidelandsStreamWrite & ser)
 
 #define PLAYER_CMD_FLAGACTION_VERSION 1
 void Cmd_FlagAction::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -438,7 +438,7 @@ void Cmd_FlagAction::Read
 			("Unknown version in Cmd_FlagAction::Read: %u", packet_version);
 }
 void Cmd_FlagAction::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -457,7 +457,7 @@ void Cmd_FlagAction::Write
 
 /*** Cmd_StartStopBuilding ***/
 
-Cmd_StartStopBuilding::Cmd_StartStopBuilding (WidelandsStreamRead & des) :
+Cmd_StartStopBuilding::Cmd_StartStopBuilding (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial=des.Unsigned32();
@@ -472,7 +472,7 @@ void Cmd_StartStopBuilding::execute (Game* g)
 		player->start_stop_building(static_cast<PlayerImmovable*>(obj));
 }
 
-void Cmd_StartStopBuilding::serialize (WidelandsStreamWrite & ser)
+void Cmd_StartStopBuilding::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_STARTSTOPBUILDING);
 	ser.Unsigned8 (get_sender());
@@ -480,7 +480,7 @@ void Cmd_StartStopBuilding::serialize (WidelandsStreamWrite & ser)
 }
 #define PLAYER_CMD_STOPBUILDING_VERSION 1
 void Cmd_StartStopBuilding::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -498,7 +498,7 @@ void Cmd_StartStopBuilding::Read
 			("Unknown version in Cmd_StartStopBuilding::Read: %u", packet_version);
 }
 void Cmd_StartStopBuilding::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -516,7 +516,7 @@ void Cmd_StartStopBuilding::Write
 
 /*** Cmd_EnhanceBuilding ***/
 
-Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (WidelandsStreamRead & des) :
+Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
@@ -531,7 +531,7 @@ void Cmd_EnhanceBuilding::execute (Game* g)
 		g->get_player(get_sender())->enhance_building(building, id);
 }
 
-void Cmd_EnhanceBuilding::serialize (WidelandsStreamWrite & ser)
+void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_ENHANCEBUILDING);
 	ser.Unsigned8 (get_sender());
@@ -540,7 +540,7 @@ void Cmd_EnhanceBuilding::serialize (WidelandsStreamWrite & ser)
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
 void Cmd_EnhanceBuilding::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -559,7 +559,7 @@ void Cmd_EnhanceBuilding::Read
 			("Unknown version in Cmd_EnhanceBuilding::Read: %u", packet_version);
 }
 void Cmd_EnhanceBuilding::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -580,7 +580,7 @@ void Cmd_EnhanceBuilding::Write
 
 /*** class Cmd_ChangeTrainingOptions ***/
 Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions
-(WidelandsStreamRead & des)
+(StreamRead & des)
 :
 PlayerCommand (0, des.Unsigned8())
 {
@@ -601,7 +601,7 @@ void Cmd_ChangeTrainingOptions::execute (Game* g)
 
 }
 
-void Cmd_ChangeTrainingOptions::serialize (WidelandsStreamWrite & ser) {
+void Cmd_ChangeTrainingOptions::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_CHANGETRAININGOPTIONS);
 	ser.Unsigned8 (get_sender());
 	ser.Unsigned32(serial);
@@ -612,7 +612,7 @@ void Cmd_ChangeTrainingOptions::serialize (WidelandsStreamWrite & ser) {
 
 #define PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION 1
 void Cmd_ChangeTrainingOptions::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -635,7 +635,7 @@ void Cmd_ChangeTrainingOptions::Read
 }
 
 void Cmd_ChangeTrainingOptions::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -655,7 +655,7 @@ void Cmd_ChangeTrainingOptions::Write
 
 /*** class Cmd_DropSoldier ***/
 
-Cmd_DropSoldier::Cmd_DropSoldier(WidelandsStreamRead & des) :
+Cmd_DropSoldier::Cmd_DropSoldier(StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial  = des.Unsigned32(); //  Serial of the building
@@ -674,7 +674,7 @@ void Cmd_DropSoldier::execute (Game* g)
 	}
 }
 
-void Cmd_DropSoldier::serialize (WidelandsStreamWrite & ser)
+void Cmd_DropSoldier::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_DROPSOLDIER);
 	ser.Unsigned8 (get_sender());
@@ -684,7 +684,7 @@ void Cmd_DropSoldier::serialize (WidelandsStreamWrite & ser)
 
 #define PLAYER_CMD_DROPSOLDIER_VERSION 1
 void Cmd_DropSoldier::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -708,7 +708,7 @@ void Cmd_DropSoldier::Read
 }
 
 void Cmd_DropSoldier::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -735,7 +735,7 @@ void Cmd_DropSoldier::Write
 
 /*** Cmd_ChangeSoldierCapacity ***/
 
-Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(WidelandsStreamRead & des)
+Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(StreamRead & des)
 :
 PlayerCommand (0, des.Unsigned8())
 {
@@ -752,7 +752,7 @@ void Cmd_ChangeSoldierCapacity::execute (Game* g)
 		player->change_soldier_capacity(static_cast<PlayerImmovable*>(obj), val);
 }
 
-void Cmd_ChangeSoldierCapacity::serialize (WidelandsStreamWrite & ser)
+void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_CHANGESOLDIERCAPACITY);
 	ser.Unsigned8 (get_sender());
@@ -762,7 +762,7 @@ void Cmd_ChangeSoldierCapacity::serialize (WidelandsStreamWrite & ser)
 
 #define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
 void Cmd_ChangeSoldierCapacity::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -785,7 +785,7 @@ void Cmd_ChangeSoldierCapacity::Read
 }
 
 void Cmd_ChangeSoldierCapacity::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -807,7 +807,7 @@ void Cmd_ChangeSoldierCapacity::Write
 /// TESTING STUFF
 /*** Cmd_EnemyFlagAction ***/
 
-Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (WidelandsStreamRead & des) :
+Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	action   = des.Unsigned8 ();
@@ -838,7 +838,7 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 		log ("Cmd_EnemyFlagAction Player invalid.\n");
 }
 
-void Cmd_EnemyFlagAction::serialize (WidelandsStreamWrite & ser) {
+void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_ENEMYFLAGACTION);
 	ser.Unsigned8 (get_sender());
 	ser.Unsigned8 (action);
@@ -849,7 +849,7 @@ void Cmd_EnemyFlagAction::serialize (WidelandsStreamWrite & ser) {
 }
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
 void Cmd_EnemyFlagAction::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -876,7 +876,7 @@ void Cmd_EnemyFlagAction::Read
 }
 
 void Cmd_EnemyFlagAction::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {

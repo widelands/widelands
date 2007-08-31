@@ -20,6 +20,7 @@
 #ifndef STREAMREAD_H
 #define STREAMREAD_H
 
+#include "geometry.h"
 #include "machdep.h"
 
 #include <limits>
@@ -64,7 +65,68 @@ public:
 	Sint32 Signed32();
 	Uint32 Unsigned32();
 	std::string String();
+
+	struct Data_Error {};
+	struct Extent_Exceeded : public Data_Error {};
+	struct Width_Exceeded : public Extent_Exceeded {
+		Width_Exceeded(const Uint16 W, const X_Coordinate X) : w(W), x(X) {}
+		Uint16       w;
+		X_Coordinate x;
+	};
+	struct Height_Exceeded : public Extent_Exceeded {
+		Height_Exceeded(const Uint16 H, const Y_Coordinate Y) : h(H), y(Y) {}
+		Uint16       h;
+		Y_Coordinate y;
+	};
+
+	/**
+	 * Read a Coords from the stream. Use this when the result can only be a node
+	 * coordinate. Will throw an exception if the width is <= the x coordinate or
+	 * the height is <= the y coordinate. Both coordinates are read from the
+	 * stream before checking and possibly throwing, so in case such an exception
+	 * is thrown, it is guaranteed that the whole coordinate pair has been read.
+	 */
+	Coords Coords32(const Extent extent);
+
+	Coords Coords32();
+
+	/**
+	 * Read Coords from the stream. Use this when the result can only be a node
+	 * coordinate or the special value indicating invalidity, as defined by
+	 * Coords::isNull. Unless the read Coords is null, this will throw an
+	 * exception if the width is <= the x coordinate or the height is <= the y
+	 * coordinate. Both coordinates are read from the stream before checking and
+	 * possibly throwing, so in case such an exception is thrown, it is
+	 * guaranteed that the whole coordinate pair has been read.
+	 */
+	Coords Coords32_allow_null(const Extent extent);
 };
+
+
+inline Coords StreamRead::Coords32() {
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
+	return Coords(x, y);
+}
+
+inline Coords StreamRead::Coords32(const Extent extent) {
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
+	if (extent.w <= x) throw Width_Exceeded (extent.w, x);
+	if (extent.h <= y) throw Height_Exceeded(extent.h, y);
+	return Coords(x, y);
+}
+
+inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
+	const Coords result(x, y);
+	if (not result.isNull()) {
+		if (extent.w <= x) throw Width_Exceeded (extent.w, x);
+		if (extent.h <= y) throw Height_Exceeded(extent.h, y);
+	}
+	return result;
+}
 
 #endif
 

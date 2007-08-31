@@ -20,6 +20,8 @@
 #include "event_chain.h"
 
 #include "event.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "map_event_manager.h"
@@ -27,8 +29,6 @@
 #include "map_trigger_manager.h"
 #include "trigger/trigger_conditional.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 
 
 /*
@@ -152,7 +152,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 
 #define CMD_CHECK_EVENTCHAIN_VERSION 1
 void Cmd_CheckEventChain::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -168,7 +168,7 @@ void Cmd_CheckEventChain::Read
 			("Unknown version in Cmd_CheckEventChain::Read: %u", packet_version);
 }
 void Cmd_CheckEventChain::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {

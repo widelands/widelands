@@ -20,6 +20,7 @@
 #ifndef FILEREAD_H
 #define FILEREAD_H
 
+#include "geometry.h"
 #include "machdep.h"
 #include <exception>
 #include <limits>
@@ -124,6 +125,48 @@ struct FileRead {
 		}
 
 	void * data;
+
+	struct Data_Error {
+		Data_Error(const Pos pos) : position(pos) {}
+		Pos position;
+	};
+	struct Extent_Exceeded : public Data_Error
+	{Extent_Exceeded(const Pos pos) : Data_Error(pos) {}};
+	struct Width_Exceeded : public Extent_Exceeded {
+		Width_Exceeded(const Pos pos, const Uint16 W, const X_Coordinate X) :
+			Extent_Exceeded(pos), w(W), x(X)
+		{}
+		Uint16       w;
+		X_Coordinate x;
+	};
+	struct Height_Exceeded : public Extent_Exceeded {
+		Height_Exceeded(const Pos pos, const Uint16 H, const Y_Coordinate Y) :
+			Extent_Exceeded(pos), h(H), y(Y)
+		{}
+		Uint16       h;
+		Y_Coordinate y;
+	};
+
+	/**
+	 * Read a Coords from the file. Use this when the result can only be a node
+	 * coordinate. Will throw an exception if the width is <= the x coordinate or
+	 * the height is <= the y coordinate. Both coordinates are read from the file
+	 * before checking and possibly throwing, so in case such an exception is
+	 * thrown, it is guaranteed that the whole coordinate pair has been read.
+	 */
+	Coords Coords32(const Extent extent);
+
+	/**
+	 * Read Coords from the file. Use this when the result can only be a node
+	 * coordinate or the special value indicating invalidity, as defined by
+	 * Coords::isNull. Unless the read Coords is null, this will throw an
+	 * exception if the width is <= the x coordinate or the height is <= the y
+	 * coordinate. Both coordinates are read from the file before checking and
+	 * possibly throwing, so in case such an exception is thrown, it is
+	 * guaranteed that the whole coordinate pair has been read.
+	 */
+	Coords Coords32_allow_null(const Extent extent);
+
 private:
 	Pos    filepos;
 	Pos    prevpos;
@@ -132,5 +175,24 @@ private:
 	FileRead & operator=(const FileRead &);
 	FileRead            (const FileRead &);
 };
+
+inline Coords FileRead::Coords32(const Extent extent) {
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
+	if (extent.w <= x) throw Width_Exceeded (GetPos() - 4, extent.w, x);
+	if (extent.h <= y) throw Height_Exceeded(GetPos() - 4, extent.h, y);
+	return Coords(x, y);
+}
+
+inline Coords FileRead::Coords32_allow_null(const Extent extent) {
+	const Uint16 x = Unsigned16();
+	const Uint16 y = Unsigned16();
+	const Coords result(x, y);
+	if (not result.isNull()) {
+		if (extent.w <= x) throw Width_Exceeded (GetPos() - 4, extent.w, x);
+		if (extent.h <= y) throw Height_Exceeded(GetPos() - 4, extent.h, y);
+	}
+	return result;
+}
 
 #endif

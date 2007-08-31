@@ -18,15 +18,15 @@
  */
 
 #include "cmd_incorporate.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "wexception.h"
 
 
 void Cmd_Incorporate::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -46,7 +46,7 @@ void Cmd_Incorporate::Read
 
 
 void Cmd_Incorporate::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {

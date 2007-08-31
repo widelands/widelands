@@ -19,9 +19,9 @@
 
 #include "widelands_map_immovable_data_packet.h"
 
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "immovable.h"
 #include "map.h"
 #include "tribe.h"
@@ -54,7 +54,7 @@ throw (_wexception)
 {
 	assert(ol);
 
-	WidelandsFileRead fr;
+	FileRead fr;
    fr.Open(fs, "binary/immovable");
 
 	Map        & map        = egbase->map();
@@ -110,7 +110,7 @@ void Widelands_Map_Immovable_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
-	WidelandsFileWrite fw;
+	FileWrite fw;
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);

@@ -34,8 +34,8 @@
 
 struct md5_checksum;
 
-class WidelandsStreamRead;
-class WidelandsStreamWrite;
+class StreamRead;
+class StreamWrite;
 
 
 /**
@@ -51,7 +51,7 @@ public:
 
 private:
 	Game* m_game;
-	WidelandsStreamRead* m_cmdlog;
+	StreamRead* m_cmdlog;
 
 	uint m_replaytime;
 };
@@ -69,7 +69,7 @@ public:
 
 private:
 	Game* m_game;
-	WidelandsStreamWrite* m_cmdlog;
+	StreamWrite* m_cmdlog;
 };
 
 

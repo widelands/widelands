@@ -23,9 +23,9 @@
 #include "constants.h"
 #include "error.h"
 #include "md5.h"
+#include "streamread.h"
+#include "streamwrite.h"
 #include "types.h"
-#include "widelands_streamread.h"
-#include "widelands_streamwrite.h"
 
 #include <SDL_net.h>
 
@@ -195,7 +195,7 @@ class NetClient:public NetGame {
 	Deserializer   * deserializer;
 };
 
-struct Serializer : public WidelandsStreamWrite {
+struct Serializer : public StreamWrite {
 	Serializer ();
 	~Serializer ();
 
@@ -231,7 +231,7 @@ private:
 	std::vector<unsigned char> buffer;
 };
 
-struct Deserializer : public WidelandsStreamRead {
+struct Deserializer : public StreamRead {
 	Deserializer ();
 	~Deserializer ();
 

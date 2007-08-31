@@ -25,8 +25,8 @@
 #include "building.h"
 #include "transport.h"
 
-struct WidelandsStreamRead;
-struct WidelandsStreamWrite;
+struct StreamRead;
+struct StreamWrite;
 
 
 // PlayerCommand is for commands issued by players. It has the additional
@@ -42,16 +42,16 @@ public:
 
 	char get_sender() const {return sender;}
 
-	virtual void serialize (WidelandsStreamWrite &) = 0;
-	static PlayerCommand * deserialize (WidelandsStreamRead &);
+	virtual void serialize (StreamWrite &) = 0;
+	static PlayerCommand * deserialize (StreamRead &);
 
 	// Call these from child classes
 	void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 };
@@ -65,21 +65,21 @@ public:
 	Cmd_Bulldoze (int t, int p, PlayerImmovable* pi):PlayerCommand(t, p)
 	{serial=pi->get_serial();}
 
-	Cmd_Bulldoze (WidelandsStreamRead &);
+	Cmd_Bulldoze (StreamRead &);
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_BULLDOZE;} // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_Build:public PlayerCommand {
@@ -92,21 +92,21 @@ public:
 	Cmd_Build (int t, int p, const Coords& c, int i):PlayerCommand(t, p)
 	{coords=c; id=i;}
 
-	Cmd_Build (WidelandsStreamRead &);
+	Cmd_Build (StreamRead &);
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_BUILD;} // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_BuildFlag:public PlayerCommand {
@@ -118,21 +118,21 @@ public:
 	Cmd_BuildFlag (int t, int p, const Coords& c):PlayerCommand(t, p)
 	{coords=c;}
 
-	Cmd_BuildFlag (WidelandsStreamRead &);
+	Cmd_BuildFlag (StreamRead &);
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_FLAG;} // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_BuildRoad:public PlayerCommand {
@@ -146,23 +146,23 @@ private:
 public:
 	Cmd_BuildRoad() : PlayerCommand() {} // For savegame loading
 	Cmd_BuildRoad (int, int, Path &);
-	Cmd_BuildRoad (WidelandsStreamRead &);
+	Cmd_BuildRoad (StreamRead &);
 
 	virtual ~Cmd_BuildRoad ();
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_BUILDROAD;} // Get this command id
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_FlagAction:public PlayerCommand {
@@ -176,21 +176,21 @@ public:
 	{serial=f->get_serial(); action=a;}
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_FLAGACTION;} // Get this command id
 
 
-	Cmd_FlagAction (WidelandsStreamRead &);
+	Cmd_FlagAction (StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_StartStopBuilding:public PlayerCommand {
@@ -203,20 +203,20 @@ public:
 	{serial=b->get_serial();}
 
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_STOPBUILDING;} // Get this command id
 
-	Cmd_StartStopBuilding (WidelandsStreamRead &);
+	Cmd_StartStopBuilding (StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_EnhanceBuilding:public PlayerCommand {
@@ -231,20 +231,20 @@ public:
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_ENHANCEBUILDING;} // Get this command id
 
-	Cmd_EnhanceBuilding (WidelandsStreamRead &);
+	Cmd_EnhanceBuilding (StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 
@@ -261,20 +261,20 @@ public:
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_CHANGETRAININGOPTIONS;} // Get this command id
 
-	Cmd_ChangeTrainingOptions (WidelandsStreamRead &);
+	Cmd_ChangeTrainingOptions (StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_DropSoldier:public PlayerCommand {
@@ -289,20 +289,20 @@ public:
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_DROPSOLDIER;} // Get this command id
 
-	Cmd_DropSoldier(WidelandsStreamRead &);
+	Cmd_DropSoldier(StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 class Cmd_ChangeSoldierCapacity:public PlayerCommand {
@@ -317,20 +317,20 @@ public:
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_CHANGESOLDIERCAPACITY;} // Get this command id
 
-	Cmd_ChangeSoldierCapacity (WidelandsStreamRead &);
+	Cmd_ChangeSoldierCapacity (StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 /////////////TESTING STUFF
@@ -358,20 +358,20 @@ public:
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(WidelandsFileWrite             &,
+		(FileWrite             &,
 		 Editor_Game_Base               &,
 		 Widelands_Map_Map_Object_Saver &);
 	virtual void Read
-		(WidelandsFileRead               &,
+		(FileRead               &,
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
 	virtual int get_id() {return QUEUE_CMD_ENEMYFLAGACTION;} // Get this command id
 
-	Cmd_EnemyFlagAction (WidelandsStreamRead &);
+	Cmd_EnemyFlagAction (StreamRead &);
 
 	virtual void execute (Game* g);
-	virtual void serialize (WidelandsStreamWrite &);
+	virtual void serialize (StreamWrite &);
 };
 
 

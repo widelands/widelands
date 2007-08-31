@@ -21,11 +21,11 @@
 
 #include "cmd_queue.h"
 #include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_ids.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
@@ -53,7 +53,7 @@ void Cmd_Destroy_Map_Object::execute(Game* g)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void Cmd_Destroy_Map_Object::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -74,7 +74,7 @@ void Cmd_Destroy_Map_Object::Read
 			 packet_version);
 }
 void Cmd_Destroy_Map_Object::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
@@ -113,7 +113,7 @@ void Cmd_Act::execute(Game* g)
 
 #define CMD_ACT_VERSION 1
 void Cmd_Act::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -135,7 +135,7 @@ void Cmd_Act::Read
 		throw wexception("Unknown version in Cmd_Act::Read: %u", packet_version);
 }
 void Cmd_Act::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {

@@ -33,6 +33,8 @@ TODO: split this up into two files per class (.h and .cc)
 #include "building.h"
 #include "carrier.h"
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
@@ -40,8 +42,6 @@ TODO: split this up into two files per class (.h and .cc)
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
@@ -3794,7 +3794,7 @@ void Cmd_Call_Economy_Balance::execute(Game* g) {
  */
 #define CURRENT_CMD_CALL_ECONOMY_VERSION 1
 void Cmd_Call_Economy_Balance::Read
-(WidelandsFileRead               & fr,
+(FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
@@ -3816,7 +3816,7 @@ void Cmd_Call_Economy_Balance::Read
 			 packet_version);
 }
 void Cmd_Call_Economy_Balance::Write
-(WidelandsFileWrite             & fw,
+(FileWrite             & fw,
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {

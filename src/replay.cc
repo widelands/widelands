@@ -24,9 +24,9 @@
 #include "playercommand.h"
 #include "replay.h"
 #include "save_handler.h"
+#include "streamread.h"
+#include "streamwrite.h"
 #include "wexception.h"
-#include "widelands_streamread.h"
-#include "widelands_streamwrite.h"
 
 
 // File format definitions
@@ -85,7 +85,7 @@ ReplayReader::ReplayReader(Game* game, const std::string filename)
 	gl.load_game();
 	delete fs;
 
-	m_cmdlog = g_fs->OpenWidelandsStreamRead(filename);
+	m_cmdlog = g_fs->OpenStreamRead(filename);
 
 	try {
 		Uint32 magic = m_cmdlog->Unsigned32();
@@ -224,7 +224,7 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	if (!savehandler->save_game(m_game, filename + WLGF_SUFFIX, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
-	m_cmdlog = g_fs->OpenWidelandsStreamWrite(filename);
+	m_cmdlog = g_fs->OpenStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 
 	game->enqueue_command(new Cmd_ReplaySyncWrite(game->get_gametime() + SYNC_INTERVAL));

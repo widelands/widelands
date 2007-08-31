@@ -62,9 +62,9 @@ struct LayeredFileSystem : public FileSystem {
 	virtual void Write(const std::string fname, const void * const data,
 	                   const int length);
 
-	virtual WidelandsStreamRead  * OpenWidelandsStreamRead
+	virtual StreamRead  * OpenStreamRead
 		(const std::string & fname);
-	virtual WidelandsStreamWrite * OpenWidelandsStreamWrite
+	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname);
 
 	virtual FileSystem* MakeSubFileSystem(const std::string dirname);

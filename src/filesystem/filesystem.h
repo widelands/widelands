@@ -30,8 +30,8 @@
 
 typedef std::set<std::string> filenameset_t;
 
-class WidelandsStreamRead;
-class WidelandsStreamWrite;
+class StreamRead;
+class StreamWrite;
 
 
 /**
@@ -68,7 +68,7 @@ struct FileSystem {
 	 * \return a \ref StreamRead object for the file. The caller must delete this
 	 * object when done to close the file.
 	 */
-	virtual WidelandsStreamRead * OpenWidelandsStreamRead
+	virtual StreamRead * OpenStreamRead
 		(const std::string & fname)
 		= 0;
 
@@ -78,11 +78,11 @@ struct FileSystem {
 	 *
 	 * Throws an exception if the file couldn't be opened.
 	 *
-	 * \return a \ref WidelandsStreamWrite object for the file. The caller must
+	 * \return a \ref StreamWrite object for the file. The caller must
 	 * delete this object when done to close the file (which will implicitly
 	 * flush unwritten data).
 	 */
-	virtual WidelandsStreamWrite * OpenWidelandsStreamWrite
+	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname)
 		= 0;
 
