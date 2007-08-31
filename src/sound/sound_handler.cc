@@ -620,6 +620,7 @@ void Sound_Handler::start_music(const std::string songset_name, int fadein_ms) {
 			log("Sound_Handler: songset \"%s\" exists but contains "
 			    "no files!\n", songset_name.c_str());
 	}
+    Mix_VolumeMusic(m_music_volume);
 }
 
 /** Stop playing a songset.
