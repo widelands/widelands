@@ -585,7 +585,7 @@ void NetHost::update_network_delay ()
 
 	net_delay/=4;
 
-	log ("network delay is now %ums\n", net_delay);
+	log ("network delay is now %lums\n", net_delay);
 }
 
 void NetHost::send_player_command (PlayerCommand* cmd)
