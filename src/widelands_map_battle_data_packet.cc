@@ -105,71 +105,11 @@ throw (_wexception)
 	}
 }
 
-/*
- * Write Function.
- * This writes ALL the information about battles !
- */
 void Widelands_Map_Battle_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
+(FileSystem &,
+ Editor_Game_Base*,
+ Widelands_Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   FileWrite fw;
-
-   // now packet version
-   fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-   std::vector<int> serials = egbase->get_battle_serials();
-
-	//  Here we will insert skip data (number of battles) later.
-	const FileWrite::Pos filepos = fw.Reserve(4);
-   int battles = 0;
-
-
-   for (uint i = 0; i < serials.size(); i++)
-   {
-      Map_Object* obj = egbase->objects().get_object(serials[i]);
-
-      if (!obj || (obj->get_type() != Map_Object::BATTLE))
-         continue;
-
-      Battle* b = (Battle*) obj;
-
-		assert(not os->is_object_known(b));
-		log("Loggi: registering battle with type: %i", b->get_type());
-		fw.Unsigned32(os->register_object(b));  // Something like serial ..
-
-         // Write time to next assault
-      fw.Unsigned32(b->m_next_assault);
-
-         // Write the last try
-      fw.Unsigned32(b->m_last_try);
-
-         // And now, the serials of the soldiers !
-      if (b->m_first)
-      {
-			assert(os->is_object_known(b->m_first));
-			fw.Unsigned32(os->get_object_file_index(b->m_first));
-		}
-      else
-         fw.Unsigned32 (0);
-
-      if (b->m_second)
-      {
-			assert(os->is_object_known(b->m_second));
-			fw.Unsigned32(os->get_object_file_index(b->m_second));
-		}
-      else
-         fw.Unsigned32 (0);
-      os->mark_object_as_saved(b);
-      battles++;
-	}
-
-   // Now, write the number of battles
-   fw.Unsigned32(0xffffffff);
-   fw.Unsigned32(battles, filepos);
-   // DONE
-
-   fw.Write(fs, "binary/battle");
+	throw wexception("Widelands_Map_Battle_Data_Packet::Write is obsolete");
 }

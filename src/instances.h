@@ -216,7 +216,9 @@ public:
 	 */
 	enum {
 		header_Map_Object = 1,
-		header_Immovable = 2
+		header_Immovable = 2,
+		header_Battle = 3,
+		header_AttackController = 4
 	};
 
 	/**

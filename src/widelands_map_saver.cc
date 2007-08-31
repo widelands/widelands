@@ -257,21 +257,6 @@ void Widelands_Map_Saver::save() throw(_wexception) {
 	{Widelands_Map_Players_View_Data_Packet p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");
 
-
-   // This should be at least after loading Soldiers (Bobs)
-   // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
-   log("Writing Battle Data ... ");
-	{Widelands_Map_Battle_Data_Packet         p; p.Write(m_fs, m_egbase, m_mos);}
-   log("done!\n ");
-
-   //This should be done after loading of soldiers and military sites
-   log("Writing Attack Controller Data ... ");
-	{
-		Widelands_Map_Attack_Controller_Data_Packet p;
-		p.Write(m_fs, m_egbase, m_mos);
-	}
-   log("done\n");
-
    log("Writing Variable Data ... ");
 	{Widelands_Map_Variable_Data_Packet       p; p.Write(m_fs, m_egbase, m_mos);}
    log("done!\n ");

@@ -713,17 +713,19 @@ AttackController* Editor_Game_Base::create_attack_controller(Flag* flag, int att
 		}
 	}
 
-   AttackController* ctrl = new AttackController((Game*)this, flag, attacker, defender);
-   ctrl->launchAttack(num);
-   m_attack_serials.push_back(ctrl->get_serial());
-   return ctrl;
+	AttackController* ctrl = new AttackController((Game*)this, flag, attacker, defender);
+	ctrl->init(this);
+	ctrl->launchAttack(num);
+	m_attack_serials.push_back(ctrl->get_serial());
+	return ctrl;
 }
 
 AttackController* Editor_Game_Base::create_attack_controller() {
 	AttackController * const ctrl =
 		new AttackController(static_cast<Game &>(*this));
-   m_attack_serials.push_back(ctrl->get_serial());
-   return ctrl;
+	ctrl->init(this);
+	m_attack_serials.push_back(ctrl->get_serial());
+	return ctrl;
 }
 
 void Editor_Game_Base::remove_attack_controller(uint serial) {
@@ -738,6 +740,14 @@ void Editor_Game_Base::remove_attack_controller(uint serial) {
 			return;
 		}
 	}
+}
+
+void Editor_Game_Base::register_attack_controller(AttackController* ctrl)
+{
+	assert(std::find(m_attack_serials.begin(), m_attack_serials.end(), ctrl->get_serial())
+			== m_attack_serials.end());
+
+	m_attack_serials.push_back(ctrl->get_serial());
 }
 
 /*

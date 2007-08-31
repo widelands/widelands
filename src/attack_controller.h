@@ -28,7 +28,7 @@
 
 #include <types.h>
 
-class Game;
+class Editor_Game_Base;
 class Flag;
 class MilitarySite;
 class Soldier;
@@ -37,17 +37,17 @@ class Widelands_Map_Attack_Controller_Data_Packet;
 
 
 void getCloseMilitarySites
-(const Game &,
+(const Editor_Game_Base &,
  const Flag &,
  const Player_Number player,
  std::set<MilitarySite *> & militarySites);
-uint getMaxAttackSoldiers(const Game &, const Flag &, const Player_Number);
+uint getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Player_Number);
 
 struct AttackController : public BaseImmovable {
 	friend class Widelands_Map_Attack_Controller_Data_Packet;
 
-	AttackController(Game* game, Flag* flag, int attacker, int defender);
-	AttackController(Game &);
+	AttackController(Editor_Game_Base* eg, Flag* flag, int attacker, int defender);
+	AttackController(Editor_Game_Base &);
 	~AttackController();
 	void launchAttack(uint nrAttackers);
 
@@ -57,6 +57,7 @@ struct AttackController : public BaseImmovable {
 	virtual bool get_passable() const throw () {return false;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
 	virtual void act (Game*, uint);
+	virtual void init(Editor_Game_Base*);
 	virtual void cleanup (Editor_Game_Base*);
 	//end inherited
 
@@ -67,7 +68,7 @@ struct AttackController : public BaseImmovable {
 	inline int getAttackingPlayer() {return attackingPlayer;};
 	inline int getDefendingPlayer() {return defendingPlayer;};
 	inline Flag* getFlag() {return flag;};
-	inline Game* getGame() {return game;};
+	inline Editor_Game_Base& egbase() { return *m_egbase; }
 
 private:
 	struct BattleSoldier {
@@ -92,15 +93,39 @@ private:
 	bool opponentsLeft(Soldier* soldier);
 
 	std::vector<BattleSoldier> involvedSoldiers;
-	std::set<Object_Ptr> involvedMilitarySites;
+
+	typedef std::set<OPtr<MilitarySite> > MilitarySiteSet;
+	MilitarySiteSet involvedMilitarySites;
 
 	int attackingPlayer;
 	int defendingPlayer;
 	uint totallyLaunched;
 	bool attackedMsEmpty;
 	Flag* flag;
-	Game* game;
+	Editor_Game_Base* m_egbase;
 
+	// Load/save support
+protected:
+	struct Loader : public BaseImmovable::Loader {
+		virtual void load(FileRead&);
+		virtual void load_pointers();
+
+		struct BattleSoldierData {
+			uint soldier;
+			uint origin;
+		};
+
+		uint flag;
+		std::vector<BattleSoldierData> soldiers;
+		std::vector<uint> militarySites;
+	};
+
+public:
+	// Remove as soon as we fully support the new system
+	virtual bool has_new_save_support() { return true; }
+
+	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
+	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
 };
 
 #endif

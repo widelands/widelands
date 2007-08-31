@@ -941,7 +941,7 @@ void FieldActionWindow::act_attack_more() {
 
 uint FieldActionWindow::get_max_attackers() {
 	return getMaxAttackSoldiers
-		(dynamic_cast<const Game &>(m_iabase->egbase()),
+		(m_iabase->egbase(),
 		 dynamic_cast<const Flag &>
 		 (*dynamic_cast<Building &>(*m_map->get_immovable(m_field))
 		  .get_base_flag()),

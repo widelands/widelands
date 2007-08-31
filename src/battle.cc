@@ -16,12 +16,14 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// TODO: Create the load/save code, networkcode isn't needed (I think)
 
 #include "battle.h"
 
-//#include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 
 
 Battle::Descr g_Battle_Descr;
@@ -30,7 +32,8 @@ Battle::Descr g_Battle_Descr;
 Battle::Battle (): BaseImmovable(g_Battle_Descr),
                    m_first      (0),
                    m_second     (0),
-                   m_last_try   (0)
+                   m_last_try   (0),
+                   m_next_assault(0)
 {}
 
 
@@ -153,4 +156,104 @@ void Battle::act (Game * g, uint)
 		//defender->start_animation(g, "evade", 1000);
 	}
 	m_next_assault = schedule_act(g, 1000);
+}
+
+
+/*
+==============================
+
+Load/Save support
+
+==============================
+*/
+
+#define BATTLE_SAVEGAME_VERSION 1
+
+void Battle::Loader::load(FileRead& fr)
+{
+	BaseImmovable::Loader::load(fr);
+
+	Battle* b = dynamic_cast<Battle*>(get_object());
+
+	b->m_next_assault = fr.Unsigned32();
+	b->m_last_try = fr.Unsigned32();
+
+	m_first = fr.Unsigned32();
+	m_second = fr.Unsigned32();
+}
+
+void Battle::Loader::load_pointers()
+{
+	BaseImmovable::Loader::load_pointers();
+
+	Battle* b = dynamic_cast<Battle*>(get_object());
+
+	if (m_first) {
+		b->m_first = dynamic_cast<Soldier*>(mol().get_object_by_file_index(m_first));
+		if (!b->m_first)
+			throw wexception
+					("Serial %u of first soldier doesn't point to Soldier object",
+					 m_first);
+	}
+
+	if (m_second) {
+		b->m_second = dynamic_cast<Soldier*>(mol().get_object_by_file_index(m_second));
+		if (!b->m_first)
+			throw wexception
+					("Serial %u of second soldier doesn't point to Soldier object",
+					 m_second);
+	}
+}
+
+void Battle::save(Editor_Game_Base* eg, Widelands_Map_Map_Object_Saver* mos, FileWrite& fw)
+{
+	fw.Unsigned8(header_Battle);
+	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
+
+	BaseImmovable::save(eg, mos, fw);
+
+	// Write time to next assault
+	fw.Unsigned32(m_next_assault);
+
+	// Write the last try
+	fw.Unsigned32(m_last_try);
+
+	// And now, the serials of the soldiers !
+	if (m_first)
+		fw.Unsigned32(mos->get_object_file_index(m_first));
+	else
+		fw.Unsigned32(0);
+
+	if (m_second)
+		fw.Unsigned32(mos->get_object_file_index(m_second));
+	else
+		fw.Unsigned32(0);
+}
+
+
+Map_Object::Loader* Battle::load
+		(Editor_Game_Base* eg,
+		 Widelands_Map_Map_Object_Loader* mol,
+		 FileRead& fr)
+{
+	Loader* loader = new Loader;
+
+	try {
+		// Header has been peeled away by caller
+
+		Uint8 version = fr.Unsigned8();
+		if (version != BATTLE_SAVEGAME_VERSION)
+			throw wexception("Unknown version %u", version);
+
+		loader->init(eg, mol, new Battle);
+		loader->load(fr);
+	} catch(const std::exception& e) {
+		delete loader;
+		throw wexception("Loading Battle: %s", e.what());
+	} catch(...) {
+		delete loader;
+		throw;
+	}
+
+	return loader;
 }

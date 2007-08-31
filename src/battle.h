@@ -51,6 +51,23 @@ private:
 	Soldier* m_second;
 	int      m_last_try;
 	int      m_next_assault;
+
+	// Load/save support
+protected:
+	struct Loader : public BaseImmovable::Loader {
+		virtual void load(FileRead&);
+		virtual void load_pointers();
+
+		uint m_first;
+		uint m_second;
+	};
+
+public:
+	// Remove as soon as we fully support the new system
+	virtual bool has_new_save_support() { return true; }
+
+	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
+	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
 };
 
 #endif

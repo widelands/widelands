@@ -111,8 +111,9 @@ struct Editor_Game_Base {
       Battle*    create_battle ();
       AttackController* create_attack_controller(Flag* flag, int attacker, int defender, uint num);
       AttackController* create_attack_controller();
-      void remove_attack_controller(uint serial);
-      std::vector<uint> get_attack_controller_serials() const {return m_attack_serials;}
+	void remove_attack_controller(uint serial);
+	void register_attack_controller(AttackController* ctrl);
+	const std::vector<uint>& get_attack_controller_serials() const {return m_attack_serials;}
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}
 	typedef int Time;

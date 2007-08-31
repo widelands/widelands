@@ -163,65 +163,10 @@ throw (_wexception)
  * This writes ALL the information about battles !
  */
 void Widelands_Map_Attack_Controller_Data_Packet::Write
-(FileSystem & fs,
- Editor_Game_Base* egbase,
- Widelands_Map_Map_Object_Saver * const os)
-throw (_wexception) {
-	FileWrite fw;
-
-	// now packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-	std::vector<uint> serials = egbase->get_attack_controller_serials();
-
-	fw.Unsigned32(serials.size());
-
-	for (uint i=0;i<serials.size();i++) {
-		AttackController* ctrl = (AttackController*)egbase->objects().get_object(serials[i]);
-		assert(not os->is_object_known(ctrl));
-
-		fw.Unsigned32(os->register_object(ctrl));  // Something like serial ..
-
-		//save the flag against which the attack is launched
-		assert(os->is_object_known(ctrl->flag));
-		uint flagFilePos = os->get_object_file_index(ctrl->flag);
-		fw.Unsigned32(flagFilePos);
-
-		fw.Unsigned32(ctrl->attackingPlayer);
-		fw.Unsigned32(ctrl->defendingPlayer);
-		fw.Unsigned32(ctrl->totallyLaunched);
-		fw.Unsigned8(ctrl->attackedMsEmpty);
-
-		//write battle soldier structure of involved soldiers
-		fw.Unsigned32(ctrl->involvedSoldiers.size());
-
-		for (uint j=0;j<ctrl->involvedSoldiers.size();j++) {
-			AttackController::BattleSoldier bs = ctrl->involvedSoldiers[j];
-
-			assert(os->is_object_known(bs.soldier));
-			fw.Unsigned32(os->get_object_file_index(bs.soldier));
-
-			assert(os->is_object_known(bs.origin));
-			fw.Unsigned32(os->get_object_file_index(bs.origin));
-
-			fw.Coords32  (bs.battleGround);
-
-			fw.Unsigned8(bs.attacker);
-			fw.Unsigned8(bs.arrived);
-			fw.Unsigned8(bs.fighting);
-		}
-
-		//write involved military sites
-		fw.Unsigned32(ctrl->involvedMilitarySites.size());
-		for (std::set<Object_Ptr>::iterator it=ctrl->involvedMilitarySites.begin();it!=ctrl->involvedMilitarySites.end();it++) {
-			MilitarySite* ms = static_cast<MilitarySite *>(static_cast<Object_Ptr>(*it).get(egbase));
-			assert(os->is_object_known(ms));
-			fw.Unsigned32(os->get_object_file_index(ms));
-		}
-
-		os->mark_object_as_saved(ctrl);
-	}
-
-	fw.Unsigned32(0xffffffff);
-	fw.Write(fs, "binary/attackcontroller");
+(FileSystem &,
+ Editor_Game_Base*,
+ Widelands_Map_Map_Object_Saver * const)
+throw (_wexception)
+{
+	throw wexception("Widelands_Map_Attack_Controller_Data_Packet::Write is obsolete");
 }

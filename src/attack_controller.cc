@@ -21,6 +21,8 @@
 
 #include "battle.h"
 #include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "geometry.h"
 #include "immovable.h"
@@ -30,20 +32,22 @@
 #include "player.h"
 #include "soldier.h"
 #include "transport.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 
 
 void getCloseMilitarySites
-(const Game & game,
+(const Editor_Game_Base & eg,
  const Flag & flag,
  const Player_Number player,
  std::set<MilitarySite *> & militarySites)
 {
-	Map & map = game.map();
+	Map & map = eg.map();
 
 	std::vector<ImmovableFound> immovables;
 
 	map.find_reachable_immovables
-		(Area<FCoords>(game.map().get_fcoords(flag.get_position()), 25),
+		(Area<FCoords>(eg.map().get_fcoords(flag.get_position()), 25),
 		 &immovables,
 		 CheckStepWalkOn(MOVECAPS_WALK, false));
 
@@ -62,12 +66,12 @@ void getCloseMilitarySites
 }
 
 uint getMaxAttackSoldiers
-(const Game & game, const Flag & flag, const Player_Number player)
+(const Editor_Game_Base & eg, const Flag & flag, const Player_Number player)
 {
 	uint maxAttackSoldiers = 0;
 
 	std::set<MilitarySite *> militarySites;
-	getCloseMilitarySites(game, flag, player, militarySites);
+	getCloseMilitarySites(eg, flag, player, militarySites);
 
 	const std::set<MilitarySite *>::const_iterator militarySites_end =
 		militarySites.end();
@@ -85,20 +89,17 @@ uint getMaxAttackSoldiers
 
 Map_Object_Descr globalAttackControllerDescr;
 
-AttackController::AttackController(Game & the_game) :
+AttackController::AttackController(Editor_Game_Base & eg) :
 	BaseImmovable  (globalAttackControllerDescr),
 	attackedMsEmpty(false),
-	game           (&the_game)
+	m_egbase(&eg)
 {
-	Map_Object::init(&the_game);
 }
 
-AttackController::AttackController(Game* _game, Flag* _flag, int _attacker, int _defender) :
+AttackController::AttackController(Editor_Game_Base* eg, Flag* _flag, int _attacker, int _defender) :
 	BaseImmovable(globalAttackControllerDescr)
 {
-	Map_Object::init(_game);
-
-	this->game = _game;
+	this->m_egbase = eg;
 	this->flag = _flag;
 	this->attackingPlayer = _attacker;
 	this->defendingPlayer = _defender;
@@ -110,8 +111,13 @@ AttackController::~AttackController() {
 }
 
 //Methods inherited by BaseImmovable
-void AttackController::act (Game*, uint) {
+void AttackController::act (Game* game, uint) {
 	schedule_act(game, 10000); // Check every 10sec if the battle is deadlocked
+}
+
+void AttackController::init(Editor_Game_Base* eg)
+{
+	Map_Object::init(eg);
 }
 
 void AttackController::cleanup (Editor_Game_Base* eg)
@@ -132,7 +138,7 @@ void AttackController::launchAttack(uint nrAttackers) {
 bool AttackController::launchAllSoldiers(bool attackers, int max) {
 	std::set<MilitarySite *> militarySites;
 	getCloseMilitarySites
-		(*game,
+		(egbase(),
 		 *flag,
 		 (attackers ? attackingPlayer : defendingPlayer),
 		 militarySites);
@@ -195,7 +201,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 	if (!soldier->is_marked()) {
 		soldier->set_attack_ctrl(this);
 		soldier->mark(true);
-		soldier->reset_tasks(this->game);
+		soldier->reset_tasks(dynamic_cast<Game*>(&egbase()));
 
 		BattleSoldier bs = {
 			soldier,
@@ -208,7 +214,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 
 		calcBattleGround(&bs, totallyLaunched);
 
-		soldier->startTaskMoveToBattle(this->game, this->flag, bs.battleGround);
+		soldier->startTaskMoveToBattle(dynamic_cast<Game*>(&egbase()), this->flag, bs.battleGround);
 
 		involvedSoldiers.push_back(bs);
 		totallyLaunched++;
@@ -231,7 +237,7 @@ void AttackController::moveToReached(Soldier* soldier)
 void AttackController::soldierDied(Soldier* soldier)
 {
 	removeSoldier(soldier);
-	soldier->schedule_destroy(game);
+	soldier->schedule_destroy(dynamic_cast<Game*>(&egbase()));
 }
 
 void AttackController::soldierWon(Soldier* soldier)
@@ -262,26 +268,29 @@ void AttackController::soldierWon(Soldier* soldier)
 	log("finishing battle...\n");
 
 	for
-		(std::set<Object_Ptr>::const_iterator it = involvedMilitarySites.begin();
+		(MilitarySiteSet::iterator it = involvedMilitarySites.begin();
 		 it != involvedMilitarySites.end();
 		 ++it)
-		static_cast<MilitarySite *>(static_cast<Object_Ptr>(*it).get(game))->set_in_battle(false);
+	{
+		OPtr<MilitarySite> ptr = *it;
+		ptr.get(&egbase())->set_in_battle(false);
+	}
 
 	if (involvedSoldiers[idx].attacker) {
 		log("attackers won, destroying building.\n");
 		Building & building = *flag->get_building();
 		building.set_defeating_player(attackingPlayer);
-		building.destroy(game);
+		building.destroy(&egbase());
 	}
 
 	for (uint i=0;i<involvedSoldiers.size();i++) {
 		//involvedSoldiers[i].soldier->set_economy(0);
 		involvedSoldiers[i].soldier->set_location(involvedSoldiers[i].origin);
-		involvedSoldiers[i].soldier->send_signal(game, "return_home");
+		involvedSoldiers[i].soldier->send_signal(dynamic_cast<Game*>(&egbase()), "return_home");
 	}
 
 	log("battle finished. removing attack controller.\n");
-	game->remove_attack_controller(this->get_serial());
+	egbase().remove_attack_controller(this->get_serial());
 }
 
 bool AttackController::startBattle(Soldier* soldier, bool isArrived)
@@ -294,8 +303,8 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived)
 			involvedSoldiers[i].fighting = true;
 			involvedSoldiers[s1Index].fighting = true;
 
-			Battle* battle = game->create_battle();
-			uint rnd = game->logic_rand() % 11;
+			Battle* battle = egbase().create_battle();
+			uint rnd = dynamic_cast<Game*>(&egbase())->logic_rand() % 11;
 			if (rnd <= 5)
 				battle->soldiers(involvedSoldiers[i].soldier, involvedSoldiers[s1Index].soldier);
 			else
@@ -356,7 +365,7 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
 		return;
 	}
 
-	Map* map = game->get_map();
+	Map* map = egbase().get_map();
 
 	FCoords prevCoords = map->get_fcoords(flag->get_position());
 	FCoords newCoords = map->get_fcoords(flag->get_position());
@@ -382,4 +391,184 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
 	}
 
 	battleSoldier->battleGround = flag->get_position();
+}
+
+
+/*
+=============================
+
+Load/save support
+
+=============================
+*/
+
+#define ATTACKCONTROLLER_SAVEGAME_VERSION 1
+
+void AttackController::Loader::load(FileRead& fr)
+{
+	BaseImmovable::Loader::load(fr);
+
+	AttackController* ctrl = dynamic_cast<AttackController*>(get_object());
+
+	egbase().register_attack_controller(ctrl);
+
+	flag = fr.Unsigned32();
+
+	ctrl->attackingPlayer = fr.Unsigned8();
+	ctrl->defendingPlayer = fr.Unsigned8();
+	ctrl->totallyLaunched = fr.Unsigned32();
+	ctrl->attackedMsEmpty = fr.Unsigned8();
+
+	uint numBs = fr.Unsigned32();
+
+	for (uint j = 0; j < numBs; ++j) {
+		uint soldier = fr.Unsigned32();
+		uint origin = fr.Unsigned32();
+
+		Coords battleGround;
+		try {
+			battleGround = fr.Coords32(egbase().map().extent());
+		} catch (const FileRead::Width_Exceeded e) {
+			throw wexception
+					("AttackController::load: in "
+					 "binary/mapobjects:%u: battleGround has x "
+					 "coordinate %i, but the map width is only %u",
+					  e.position, e.x, e.w);
+		} catch (const FileRead::Height_Exceeded e) {
+			throw wexception
+					("AttackController::load: in "
+					 "binary/mapobjects:%u: battleGround has y "
+					 "coordinate %i, but the map height is only %u",
+					 e.position, e.y, e.h);
+		}
+
+		bool attacker = fr.Unsigned8();
+		bool arrived = fr.Unsigned8();
+		bool fighting = fr.Unsigned8();
+
+		BattleSoldierData bsd = {
+			soldier,
+			origin
+		};
+		BattleSoldier bs = {
+			0,
+			0,
+			battleGround,
+			attacker,
+			arrived,
+			fighting
+		};
+
+		ctrl->involvedSoldiers.push_back(bs);
+		soldiers.push_back(bsd);
+	}
+
+	uint numInMs = fr.Unsigned32();
+	for (uint j = 0; j < numInMs; ++j)
+		militarySites.push_back(fr.Unsigned32());
+}
+
+
+void AttackController::Loader::load_pointers()
+{
+	BaseImmovable::Loader::load_pointers();
+
+	AttackController* ctrl = dynamic_cast<AttackController*>(get_object());
+
+	ctrl->flag = dynamic_cast<Flag*>(mol().get_object_by_file_index(flag));
+	assert(ctrl->flag);
+
+	for(uint j = 0; j < soldiers.size(); ++j) {
+		const BattleSoldierData& bsd = soldiers[j];
+		BattleSoldier& bs = ctrl->involvedSoldiers[j];
+
+		bs.soldier = dynamic_cast<Soldier*>(mol().get_object_by_file_index(bsd.soldier));
+		assert(bs.soldier);
+		bs.origin = dynamic_cast<MilitarySite*>(mol().get_object_by_file_index(bsd.origin));
+		assert(bs.origin);
+
+		bs.soldier->set_attack_ctrl(ctrl);
+	}
+
+	for(uint j = 0; j < militarySites.size(); ++j) {
+		MilitarySite* ms =
+				dynamic_cast<MilitarySite*>
+				(mol().get_object_by_file_index(militarySites[j]));
+
+		assert(ms);
+		ctrl->involvedMilitarySites.insert(ms);
+		ms->set_in_battle(true);
+	}
+}
+
+
+void AttackController::save
+		(Editor_Game_Base* eg,
+		 Widelands_Map_Map_Object_Saver* mos,
+		 FileWrite& fw)
+{
+	fw.Unsigned8(header_AttackController);
+	fw.Unsigned8(ATTACKCONTROLLER_SAVEGAME_VERSION);
+
+	BaseImmovable::save(eg, mos, fw);
+
+	fw.Unsigned32(mos->get_object_file_index(flag));
+
+	fw.Unsigned8(attackingPlayer);
+	fw.Unsigned8(defendingPlayer);
+	fw.Unsigned32(totallyLaunched);
+	fw.Unsigned8(attackedMsEmpty);
+
+	//write battle soldier structure of involved soldiers
+	fw.Unsigned32(involvedSoldiers.size());
+
+	for (uint j = 0; j < involvedSoldiers.size(); ++j) {
+		BattleSoldier bs = involvedSoldiers[j];
+
+		fw.Unsigned32(mos->get_object_file_index(bs.soldier));
+		fw.Unsigned32(mos->get_object_file_index(bs.origin));
+
+		fw.Coords32(bs.battleGround);
+
+		fw.Unsigned8(bs.attacker);
+		fw.Unsigned8(bs.arrived);
+		fw.Unsigned8(bs.fighting);
+	}
+
+	//write involved military sites
+	fw.Unsigned32(involvedMilitarySites.size());
+	for (MilitarySiteSet::iterator it = involvedMilitarySites.begin();
+	     it != involvedMilitarySites.end();
+	     ++it)
+	{
+		OPtr<MilitarySite> ptr = *it;
+		MilitarySite* ms = ptr.get(eg);
+		fw.Unsigned32(mos->get_object_file_index(ms));
+	}
+}
+
+
+Map_Object::Loader* AttackController::load
+		(Editor_Game_Base* egbase,
+		 Widelands_Map_Map_Object_Loader* mol,
+		 FileRead& fr)
+{
+	Loader* loader = new Loader;
+
+	try {
+		Uint8 version = fr.Unsigned8();
+		if (version != ATTACKCONTROLLER_SAVEGAME_VERSION)
+			throw wexception("Unknown version %u", version);
+
+		loader->init(egbase, mol, new AttackController(*dynamic_cast<Game*>(egbase)));
+		loader->load(fr);
+	} catch(const std::exception& e) {
+		delete loader;
+		throw wexception("Loading AttackController: %s", e.what());
+	} catch(...) {
+		delete loader;
+		throw;
+	}
+
+	return loader;
 }

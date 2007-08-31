@@ -19,6 +19,8 @@
 
 #include "widelands_map_object_packet.h"
 
+#include "attack_controller.h"
+#include "battle.h"
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"
@@ -65,6 +67,14 @@ void Widelands_Map_Object_Packet::Read
 			switch(header) {
 			case Map_Object::header_Immovable:
 				loaders.insert(Immovable::load(egbase, ol, fr));
+				break;
+
+			case Map_Object::header_AttackController:
+				loaders.insert(AttackController::load(egbase, ol, fr));
+				break;
+
+			case Map_Object::header_Battle:
+				loaders.insert(Battle::load(egbase, ol, fr));
 				break;
 
 			default:
