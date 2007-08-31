@@ -78,13 +78,13 @@ void Cmd_Destroy_Map_Object::Write
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
-   // First, write version
+	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
 
 	// Write base classes
 	GameLogicCommand::Write(fw, egbase, mos);
 
-   // Now serial
+	// Now serial
 	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
 		// The object might have vanished
 		assert(mos.is_object_known(obj));
@@ -96,8 +96,8 @@ void Cmd_Destroy_Map_Object::Write
 
 Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : GameLogicCommand(t)
 {
-   obj_serial=o->get_serial();
-   arg=a;
+	obj_serial = o->get_serial();
+	arg = a;
 }
 
 
@@ -117,21 +117,20 @@ void Cmd_Act::Read
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
- const Uint16 packet_version = fr.Unsigned16();
+	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CMD_ACT_VERSION) {
 		// Read Base Commands
 		GameLogicCommand::Read(fr, egbase, mol);
 
-      // Serial
+		// Serial
 		if (const Uint32 fileserial = fr.Unsigned32()) {
 			assert(mol.is_object_known(fileserial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
 			obj_serial = mol.get_object_by_file_index(fileserial)->get_serial();
 		} else
-         obj_serial = 0;
+			obj_serial = 0;
 
-      // arg
+		// arg
 		arg = fr.Unsigned32();
-
 	} else
 		throw wexception("Unknown version in Cmd_Act::Read: %u", packet_version);
 }
@@ -140,21 +139,21 @@ void Cmd_Act::Write
  Editor_Game_Base               & egbase,
  Widelands_Map_Map_Object_Saver & mos)
 {
-   // First, write version
+	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
 
 	// Write base classes
 	GameLogicCommand::Write(fw, egbase, mos);
 
-   // Now serial
+	// Now serial
 	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
 		// Object might have dissappeared
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));
 	} else
-      fw.Unsigned32(0);
+		fw.Unsigned32(0);
 
-   // And arg
+	// And arg
 	fw.Unsigned32(arg);
 }
 
@@ -255,35 +254,39 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
  * Add this animation for this map object under this name
  */
 bool Map_Object_Descr::is_animation_known(const char* name) {
-   std::map<std::string, uint>::iterator i=m_anims.begin();
-   while (i!=m_anims.end()) {
-      if (i->first==name)
-         return true;
-      ++i;
+	std::map<std::string, uint>::iterator i=m_anims.begin();
+	while (i!=m_anims.end()) {
+		if (i->first==name)
+			return true;
+		++i;
 	}
-   return false;
+	return false;
 }
 
 void Map_Object_Descr::add_animation(const char* name, uint anim) {
-   std::string use_name=name;
-   std::map<std::string, uint>::iterator i=m_anims.begin();
+	std::string use_name=name;
+	std::map<std::string, uint>::iterator i=m_anims.begin();
 
-   while (i!=m_anims.end()) {
-      assert(i->first!=name);
-      ++i;
+	while (i!=m_anims.end()) {
+		assert(i->first!=name);
+		++i;
 	}
-   m_anims.insert(std::pair<std::string, uint>(use_name, anim));
-
+	m_anims.insert(std::pair<std::string, uint>(use_name, anim));
 }
+
 std::string Map_Object_Descr::get_animation_name(uint anim) const {
 	for
 		(std::map<std::string, uint>::const_iterator it = m_anims.begin();
 		 it != m_anims.end();
 		 ++it)
-		if (it->second == anim) return it->first;
-   // Never here
-   assert(0);
-   return "";
+	{
+		if (it->second == anim)
+			return it->first;
+	}
+
+	// Never here
+	assert(0);
+	return "";
 }
 
 
@@ -467,7 +470,9 @@ Map_Object::act
 Called when a CMD_ACT triggers.
 ===============
 */
-void Map_Object::act(Game *, uint) {}
+void Map_Object::act(Game *, uint)
+{
+}
 
 
 /*

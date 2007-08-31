@@ -122,7 +122,7 @@ public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);
 //protected: type* m_descr; inline type* get_descr() const {return m_descr;}
 
 class Map_Object {
-   friend class Object_Manager;
+	friend class Object_Manager;
 	friend class Object_Ptr;
 
 	MO_DESCR(Map_Object_Descr);
@@ -137,8 +137,8 @@ public:
 
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
-      BATTLE,
-      ATTACKCONTROLLER,
+		BATTLE,
+		ATTACKCONTROLLER,
 
 		// everything below is at least a PlayerImmovable
 		BUILDING,
@@ -150,7 +150,7 @@ public:
 	enum Attribute {
 		WAREHOUSE        = 1, //  assume BUILDING
 		CONSTRUCTIONSITE, // assume BUILDING
-      WORKER,               //  assume BOB
+		WORKER,               //  assume BOB
 		SOLDIER,              //  assume WORKER
 		RESI,                 //  resource indicator, assume IMMOVABLE
 
@@ -170,7 +170,7 @@ public:
 
 	struct LogSink {
 		virtual void log(std::string str) = 0;
-	   virtual ~LogSink() {}
+		virtual ~LogSink() {}
 	};
 
 protected:
@@ -198,9 +198,10 @@ public:
 
 	LogSink* get_logsink() {return m_logsink;}
 	void set_logsink(LogSink* sink);
-   virtual void log_general_info(Editor_Game_Base*); // Called when a new logsink is set, used to give general informations
+	virtual void log_general_info(Editor_Game_Base*); // Called when a new logsink is set, used to give general informations
+
 protected:
-   // init for editor and game
+	// init for editor and game
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
 
