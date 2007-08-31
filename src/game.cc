@@ -23,6 +23,7 @@
 #include "computer_player.h"
 #include "events/event_chain.h"
 #include "fileread.h"
+#include "filesystem.h"
 #include "filewrite.h"
 #include "interactive_player.h"
 #include "interactive_spectator.h"
@@ -58,27 +59,24 @@
 #ifdef SYNC_DEBUG
 class SyncDebugWrapper : public StreamWrite {
 public:
-	SyncDebugWrapper()
+	SyncDebugWrapper(Game* g, StreamWrite* target)
 	{
-		m_target = 0;
-		m_counter = 0;
-	}
-
-	void SetTarget(StreamWrite* target)
-	{
+		m_game = g;
 		m_target = target;
+		m_counter = 0;
 	}
 
 	void Data(const void * const data, const size_t size)
 	{
 		assert(m_target);
 
-		log("[sync:%08u]", m_counter);
+		log("[sync:%08u t=%6u]", m_counter, m_game->get_gametime());
 		for (size_t i = 0; i < size; ++i)
 			log(" %02x", (static_cast<const Uint8 *>(data))[i]);
 		log("\n");
 
 		m_target->Data(data, size);
+		m_counter += size;
 	}
 
 	void Flush()
@@ -89,6 +87,7 @@ public:
 	}
 
 private:
+	Game* m_game;
 	StreamWrite* m_target;
 	uint m_counter;
 };
@@ -100,17 +99,18 @@ struct GameInternals {
 	SyncDebugWrapper syncwrapper;
 #endif
 
-	GameInternals()
-	{
+	GameInternals(Game* g)
 #ifdef SYNC_DEBUG
-		syncwrapper.SetTarget(&synchash);
+		: syncwrapper(g, &synchash)
 #endif
+	{
+		(void)g;
 	}
 };
 
 
 Game::Game() :
-m(new GameInternals),
+m(new GameInternals(this)),
 m_state   (gs_none),
 m_speed   (1),
 cmdqueue  (this),
