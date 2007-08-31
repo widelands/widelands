@@ -20,6 +20,10 @@
 #ifndef __S__WIDELANDS_MAP_OBJECT_PACKET_H
 #define __S__WIDELANDS_MAP_OBJECT_PACKET_H
 
+#include "instances.h"
+
+#include <set>
+
 class FileSystem;
 class Editor_Game_Base;
 class Widelands_Map_Map_Object_Loader;
@@ -32,10 +36,18 @@ class Widelands_Map_Map_Object_Saver;
  * are in this packet.
  */
 struct Widelands_Map_Object_Packet {
+	typedef std::set<Map_Object::Loader*> LoaderSet;
+	LoaderSet loaders;
+
+	~Widelands_Map_Object_Packet();
+
 	void Read
 		(FileSystem &,
 		 Editor_Game_Base*,
 		 Widelands_Map_Map_Object_Loader * const);
+
+	void LoadFinish();
+
 	void Write
 		(FileSystem &,
 		 Editor_Game_Base*,

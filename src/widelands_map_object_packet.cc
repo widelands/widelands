@@ -34,14 +34,20 @@
 #define CURRENT_PACKET_VERSION 1
 
 
+Widelands_Map_Object_Packet::~Widelands_Map_Object_Packet()
+{
+	while(loaders.size()) {
+		delete *loaders.begin();
+		loaders.erase(loaders.begin());
+	}
+}
+
+
 void Widelands_Map_Object_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base* egbase,
  Widelands_Map_Map_Object_Loader * const ol)
 {
-	typedef std::set<Map_Object::Loader*> LoaderSet;
-	LoaderSet loaders;
-
 	try {
 		FileRead fr;
 		fr.Open(fs, "binary/mapobjects");
@@ -65,33 +71,23 @@ void Widelands_Map_Object_Packet::Read
 				throw wexception("Unknown object header %u", header);
 			}
 		}
-
-		// load_pointer stage
-		for(LoaderSet::const_iterator cit = loaders.begin(); cit != loaders.end(); ++cit)
-			(*cit)->load_pointers();
-
-		// load_finish stage
-		for(LoaderSet::const_iterator cit = loaders.begin(); cit != loaders.end(); ++cit)
-			(*cit)->load_finish();
-
-		// Cleanup
-		while(loaders.size()) {
-			delete *loaders.begin();
-			loaders.erase(loaders.begin());
-		}
 	} catch(const std::exception& e) {
-		while(loaders.size()) {
-			delete *loaders.begin();
-			loaders.erase(loaders.begin());
-		}
 		throw wexception("Loading map objects: %s", e.what());
 	} catch(...) {
-		while(loaders.size()) {
-			delete *loaders.begin();
-			loaders.erase(loaders.begin());
-		}
 		throw;
 	}
+}
+
+
+void Widelands_Map_Object_Packet::LoadFinish()
+{
+	// load_pointer stage
+	for(LoaderSet::const_iterator cit = loaders.begin(); cit != loaders.end(); ++cit)
+		(*cit)->load_pointers();
+
+	// load_finish stage
+	for(LoaderSet::const_iterator cit = loaders.begin(); cit != loaders.end(); ++cit)
+		(*cit)->load_finish();
 }
 
 

@@ -168,6 +168,8 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 
    // now immovables
 	bool have_immovables = m_fs.FileExists("binary/immovable");
+	Widelands_Map_Object_Packet mapobjects;
+
 	if (have_immovables) {
 		log("Reading Immovable Data ... ");
 		Widelands_Map_Immovable_Data_Packet p;
@@ -178,8 +180,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 			log("Warning: Map has both binary/immovable and binary/mapobjects\n");
 	} else {
 		log("Reading Map Objects ... ");
-		Widelands_Map_Object_Packet p;
-		p.Read(m_fs, egbase, m_mol);
+		mapobjects.Read(m_fs, egbase, m_mol);
 		log("done\n");
 	}
 
@@ -357,6 +358,9 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
 	}
    log("done!\n ");
 
+	log("Second and third phase loading Map Objects ... ");
+	mapobjects.LoadFinish();
+	log("done\n");
 
    // This should be at least after loading Soldiers (Bobs)
    // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
