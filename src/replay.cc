@@ -227,6 +227,20 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	m_cmdlog = g_fs->OpenStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 
+	log("Reloading the game from replay\n");
+	FileSystem* fs = g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX);
+	try {
+		Game_Loader gl(*fs, game);
+		game->cleanup_for_load(true, true);
+		gl.load_game();
+		game->postload();
+	} catch(...) {
+		delete fs;
+		throw;
+	}
+	delete fs;
+	log("Done reloading the game from replay\n");
+
 	game->enqueue_command(new Cmd_ReplaySyncWrite(game->get_gametime() + SYNC_INTERVAL));
 }
 

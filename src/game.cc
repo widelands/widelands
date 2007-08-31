@@ -550,20 +550,6 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 		m_replaywriter = new ReplayWriter(this, fname);
 		log("Replay writer has started\n");
-
-		log("Reloading the game from replay\n");
-		FileSystem* fs = g_fs->MakeSubFileSystem(fname + WLGF_SUFFIX);
-		try {
-			Game_Loader gl(*fs, this);
-			cleanup_for_load(true, true);
-			gl.load_game();
-			postload();
-		} catch(...) {
-			delete fs;
-			throw;
-		}
-		delete fs;
-		log("Done reloading the game from replay\n");
 	}
 
 	load_graphics(loader_ui);
