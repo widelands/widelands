@@ -32,7 +32,7 @@ Stock_Menu::Stock_Menu
 :
 UI::UniqueWindow(&plr, &registry, 640, 480, _("Stock")),
 m_player(plr),
-waresdisplay(this, 0, 0, plr.get_game(), plr.get_player()),
+waresdisplay(this, 0, 0, plr.player().tribe()),
 
 help
 (this,

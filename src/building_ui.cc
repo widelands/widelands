@@ -991,7 +991,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    m_parent = parent;
 
 	// Add wares display
-	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->get_game(), parent->get_player());
+	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->player().tribe());
 	m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
 
    set_inner_size(m_waresdisplay->get_w(), 0);

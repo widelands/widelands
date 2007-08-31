@@ -20,9 +20,10 @@
 #ifndef __WARELIST_H
 #define __WARELIST_H
 
-#include <vector>
-
 #include <SDL.h>
+
+#include <cassert>
+#include <vector>
 
 /**
  * WareList is a simple wrapper around an array of ware types.

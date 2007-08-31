@@ -26,62 +26,48 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "tribe.h"
-#include "ui_textarea.h"
 #include "worker.h"
 
 #include <stdio.h>
 
 
-WaresDisplay::WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player)
-	: UI::Panel(parent, x, y, Width, 0)
-{
+WaresDisplay::WaresDisplay
+(UI::Panel * const parent, const int x, const int y, const Tribe_Descr & tribe)
+:
+UI::Panel(parent, x, y, Width, 0),
+m_tribe (tribe),
 
-	m_game = game;
-	m_player = player;
+m_curware
+(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Stock"), Align_Center)
 
-   set_size(Width, 100);
-   m_curware = new UI::Textarea(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Stock"), Align_Center);
-}
+{set_size(Width, 100);}
 
 
-/*
-===============
-WaresDisplay::~WaresDisplay
-
-Cleanup
-===============
-*/
 WaresDisplay::~WaresDisplay()
 {
    remove_all_warelists();
 }
 
-/*
- * handles mouse move
- */
-bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
-   int row = y / (WARE_MENU_PIC_HEIGHT + 8 + 3);
-   int index=row*WaresPerRow;
-   index += x / (WARE_MENU_PIC_WIDTH +4) + 1;
-   std::string str;
 
+bool WaresDisplay::handle_mousemove(const Uint8, int x, int y, int, int) {
    assert(m_warelists.size());
 
-   if (index > (m_warelists[0]->get_nrwareids())) {
-      m_curware->set_text("");
-	}
-   else {
-      if (m_type == WORKER) {
-         index--;
-         str=m_player->tribe().get_worker_descr(index)->descname();
-         m_curware->set_text(str.c_str());
-		} else {
-         index--;
-         str=m_player->tribe().get_ware_descr(index)->descname();
-         m_curware->set_text(str.c_str());
-		}
-	}
-
+	const vector_type::size_type index =
+		x < 0 | y < 0 ?
+		std::numeric_limits<vector_type::size_type>::max()
+		:
+		y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
+		+
+		x / (WARE_MENU_PIC_WIDTH + 4);
+	m_curware.set_text
+		(index < m_warelists[0]->get_nrwareids() ?
+		 (m_type == WORKER ?
+		  m_tribe.get_worker_descr(index)->descname()
+		  :
+		  m_tribe.get_ware_descr(index)->descname())
+		 .c_str()
+		 :
+		 "");
    return true;
 }
 
@@ -103,8 +89,8 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
 	set_size(get_inner_w(), height+30);
-	m_curware->set_pos(Point(0, get_inner_h() - 25));
-   m_curware->set_size(get_inner_w(), 20);
+	m_curware.set_pos(Point(0, get_inner_h() - 25));
+	m_curware.set_size(get_inner_w(), 20);
 
    m_type = type;
 
@@ -130,11 +116,11 @@ void WaresDisplay::draw(RenderTarget* dst)
 {
 	Point p(2, 2);
 
-   int number = m_player->tribe().get_nrwares();
+	int number = m_tribe.get_nrwares();
    bool is_worker = false;
 
-   if (m_type == WORKER) {
-      number = m_player->tribe().get_nrworkers();
+	if (m_type == WORKER) {
+		number = m_tribe.get_nrworkers();
       is_worker = true;
 	}
    int totid=0;
@@ -161,17 +147,6 @@ Draw one ware icon + additional information.
 void WaresDisplay::draw_ware
 (RenderTarget & dst, const Point p, const uint id, const uint stock, const bool worker)
 {
-	uint pic;
-
-	// Get the picture
-	if (worker)
-	{
-		Worker_Descr* w = m_player->tribe().get_worker_descr(id);
-		pic = w->get_menu_pic();
-	}
-	else
-		pic = m_player->tribe().get_ware_descr(id)->get_icon();
-
    // Draw a background
 	const uint picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
 	uint w, h;
@@ -181,7 +156,12 @@ void WaresDisplay::draw_ware
 
 	const Point pos = p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1);
 	// Draw it
-	dst.blit(pos, pic);
+	dst.blit
+		(pos,
+		 worker ?
+		 m_tribe.get_worker_descr(id)->get_menu_pic()
+		 :
+		 m_tribe.get_ware_descr(id)->get_icon());
 	dst.fill_rect
 		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
 		 RGBColor(0, 0, 0));

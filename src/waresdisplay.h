@@ -20,14 +20,14 @@
 #ifndef include_waresdisplay_h
 #define include_waresdisplay_h
 
-#include "ui_panel.h"
 #include "warelist.h"
+
+#include "ui_textarea.h"
 
 #include <vector>
 
-class Editor_Game_Base;
-class Player;
-class WareList;
+struct Tribe_Descr;
+struct WareList;
 namespace UI {struct Textarea;};
 
 /*
@@ -48,7 +48,8 @@ struct WaresDisplay : public UI::Panel {
 	};
 
 public:
-	WaresDisplay(UI::Panel* parent, int x, int y, Editor_Game_Base* game, Player* player);
+	WaresDisplay
+		(UI::Panel * const parent, const int x, const int y, const Tribe_Descr &);
 	virtual ~WaresDisplay();
 
 	bool handle_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff);
@@ -65,11 +66,12 @@ protected:
 		 const bool worker);
 
 private:
-	UI::Textarea*       m_curware;
-   Editor_Game_Base            * m_game;
-	Player                      * m_player;
-   wdType            m_type;
-   std::vector< const WareList* > m_warelists;
+	typedef std::vector<const WareList *> vector_type;
+
+	const Tribe_Descr & m_tribe;
+	UI::Textarea        m_curware;
+	wdType              m_type;
+	vector_type         m_warelists;
 };
 
 
