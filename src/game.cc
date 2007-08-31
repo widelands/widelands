@@ -545,6 +545,12 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		}
 
 		std::string fname(REPLAY_DIR);
+		#ifndef __WIN32__
+		fname += '/';
+		#else
+		fname += '\\';
+		#endif
+
 		fname += time_string;
 		if (m_netgame) {
 			char buf[100];

@@ -5,8 +5,8 @@
 #define NEW_SDL_MIXER 1
 #define USE_RWOPS 1
 
-#define INSTALL_PREFIX "/mingw"
-#define INSTALL_BINDIR "/l/WiLa/Setup"
-#define INSTALL_DATADIR "/l/WiLa/Setup"
+#define INSTALL_PREFIX ".\\"
+#define INSTALL_BINDIR ".\\"
+#define INSTALL_DATADIR ".\\"
 
 #endif

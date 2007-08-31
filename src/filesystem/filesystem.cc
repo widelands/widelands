@@ -53,7 +53,7 @@ FileSystem::FileSystem()
 {
 #ifdef __WIN32__
 	//TODO: this probably needs to be overwritten later
-	m_root="C:\\";
+	m_root="C:";
 	m_filesep='\\';
 #else
 	m_root="/";
@@ -159,12 +159,6 @@ const std::string FileSystem::AbsolutePath(const std::string path) const
 {
 	if (pathIsAbsolute(path))
 		return path;
-
-#ifdef __WIN32__
-	//For "nearly" absoute paths, just append drive letter
-	if (path[0]==m_filesep)
-		return m_root+path;
-#endif
 
 	return getWorkingDirectory()+m_filesep+path;
 }
@@ -342,38 +336,31 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 	for (i=components.begin(); i!=components.end(); i++)
 		canonpath+=*i+"/";
 
-#else
+    canonpath.erase(canonpath.end() - 1); //remove trailing slash
+    
+#else // ifndef __WIN32__
+	// Still a stupid workaround: some paths still might be relative,
+	// but this is acceptable on windows, as long as all data is stored
+	// in the working directory.
 
-	/*===============================================
-	Windows-filesystems work different than Unix-FS
-	so here is a solution, to get it run.
+	bool absolute=false;
+	std::string canonpath;
 
-	Every path will be absolute afterwards.
+	 // Is a ":" at the second position? If yes, it is allready absolute ( like "C:\...")
+	if (path[1] == ':')
+		absolute=true;
 
-	Only problem:
-	Widelands will be started in the directory, the
-	the executable is in, even if you run it from
-	different directory. (Real problem???)
-	===============================================*/
+	if (absolute == true) {
+		canonpath = path;
 
-	bool absolutewin32=false;
-	components=FS_Tokenize(path);
-	if (path[0]=='\\') //Is a backslash in path? If yes, the path is allready absolute.
-		absolutewin32=true;
-
-	std::string canonpath="";
-	if (absolutewin32==true)
-		canonpath=""; //if the path is allready absolute, nothing has to be added.
-	else   {
-		canonpath=m_root.c_str();   //We simply add the root folder
-		canonpath=canonpath+"\\"; //and of course an ending backslash
+	} else {
+		if (m_root.empty())
+			canonpath = getWorkingDirectory() + "\\" + path;
+		else
+			canonpath = m_root + "\\" + path;
 	}
 
-	for (i=components.begin(); i!=components.end(); i++)
-		canonpath+=*i+"\\";
-
-#endif
-	canonpath.erase(canonpath.end() - 1); //remove trailing slash
+#endif // ifndef __WIN32__
 	return canonpath;
 }
 

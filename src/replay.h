@@ -29,8 +29,7 @@
  */
 
 #include <string>
-
-#define REPLAY_DIR "replays/"
+#define REPLAY_DIR "replays"
 #define REPLAY_SUFFIX ".wrpl"
 
 struct md5_checksum;
