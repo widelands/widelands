@@ -28,29 +28,29 @@ class Battle : public BaseImmovable
 {
 	friend class Widelands_Map_Battle_Data_Packet;
 
-	public:
-		typedef Map_Object_Descr Descr;
+public:
+	typedef Map_Object_Descr Descr;
 
-		Battle();
-		~Battle();
-		virtual int  get_type    () const throw () {return BATTLE;}
-		virtual int  get_size    () const throw () {return SMALL;}
-		virtual bool get_passable() const throw () {return false;}
+	Battle();
+	~Battle();
+	virtual int  get_type    () const throw () {return BATTLE;}
+	virtual int  get_size    () const throw () {return SMALL;}
+	virtual bool get_passable() const throw () {return false;}
 
-		virtual void draw(const Editor_Game_Base &, RenderTarget &,
-		                  const FCoords, const Point) {}
+	virtual void draw(const Editor_Game_Base &, RenderTarget &,
+						const FCoords, const Point) {}
 
-		void init (Editor_Game_Base*);
-		void init (Editor_Game_Base*, Soldier*, Soldier*);
-		void soldiers (Soldier*, Soldier*);
-		virtual void cleanup (Editor_Game_Base*);
-		virtual void act (Game*, uint);
+	void init (Editor_Game_Base*);
+	void init (Editor_Game_Base*, Soldier*, Soldier*);
+	void soldiers (Soldier*, Soldier*);
+	virtual void cleanup (Editor_Game_Base*);
+	virtual void act (Game*, uint);
 
-	private:
-		Soldier* m_first;
-		Soldier* m_second;
-		int      m_last_try;
-		int      m_next_assault;
+private:
+	Soldier* m_first;
+	Soldier* m_second;
+	int      m_last_try;
+	int      m_next_assault;
 };
 
 #endif

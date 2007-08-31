@@ -44,61 +44,62 @@ void getCloseMilitarySites
 uint getMaxAttackSoldiers(const Game &, const Flag &, const Player_Number);
 
 struct AttackController : public BaseImmovable {
-   friend class Widelands_Map_Attack_Controller_Data_Packet;
+	friend class Widelands_Map_Attack_Controller_Data_Packet;
 
-      AttackController(Game* game, Flag* flag, int attacker, int defender);
+	AttackController(Game* game, Flag* flag, int attacker, int defender);
 	AttackController(Game &);
-      ~AttackController();
-      void launchAttack(uint nrAttackers);
+	~AttackController();
+	void launchAttack(uint nrAttackers);
 
-      //Methods inherited by BaseImmovable
-      virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
-      virtual int  get_size    () const throw () {return SMALL;}
-      virtual bool get_passable() const throw () {return false;}
-      virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
-      virtual void act (Game*, uint);
-      virtual void cleanup (Editor_Game_Base*);
-      //end inherited
+	//Methods inherited by BaseImmovable
+	virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
+	virtual int  get_size    () const throw () {return SMALL;}
+	virtual bool get_passable() const throw () {return false;}
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
+	virtual void act (Game*, uint);
+	virtual void cleanup (Editor_Game_Base*);
+	//end inherited
 
-      void moveToReached(Soldier* soldier);
-      void soldierDied(Soldier* soldier);
-      void soldierWon(Soldier* soldier);
+	void moveToReached(Soldier* soldier);
+	void soldierDied(Soldier* soldier);
+	void soldierWon(Soldier* soldier);
 
-      inline int getAttackingPlayer() {return attackingPlayer;};
-      inline int getDefendingPlayer() {return defendingPlayer;};
-      inline Flag* getFlag() {return flag;};
-      inline Game* getGame() {return game;};
-   private:
-      struct BattleSoldier {
-         Soldier* soldier;
-         MilitarySite* origin;
-         Coords battleGround;
-         bool attacker;
-         bool arrived;
-         bool fighting;
-		};
+	inline int getAttackingPlayer() {return attackingPlayer;};
+	inline int getDefendingPlayer() {return defendingPlayer;};
+	inline Flag* getFlag() {return flag;};
+	inline Game* getGame() {return game;};
 
-      bool battleGroundOccupied(Coords coords);
-      void calcBattleGround(BattleSoldier*, int);
+private:
+	struct BattleSoldier {
+		Soldier* soldier;
+		MilitarySite* origin;
+		Coords battleGround;
+		bool attacker;
+		bool arrived;
+		bool fighting;
+	};
 
-      bool launchAllSoldiers(bool attackers, int nrLaunch);
-      void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers);
-      bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
+	bool battleGroundOccupied(Coords coords);
+	void calcBattleGround(BattleSoldier*, int);
 
-      bool startBattle(Soldier*, bool);
-      void removeSoldier(Soldier*);
-      uint getBattleSoldierIndex(Soldier*);
-      bool opponentsLeft(Soldier* soldier);
+	bool launchAllSoldiers(bool attackers, int nrLaunch);
+	void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers);
+	bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
 
-      std::vector<BattleSoldier> involvedSoldiers;
-      std::set<Object_Ptr> involvedMilitarySites;
+	bool startBattle(Soldier*, bool);
+	void removeSoldier(Soldier*);
+	uint getBattleSoldierIndex(Soldier*);
+	bool opponentsLeft(Soldier* soldier);
 
-      int attackingPlayer;
-      int defendingPlayer;
-      uint totallyLaunched;
-      bool attackedMsEmpty;
-      Flag* flag;
-      Game* game;
+	std::vector<BattleSoldier> involvedSoldiers;
+	std::set<Object_Ptr> involvedMilitarySites;
+
+	int attackingPlayer;
+	int defendingPlayer;
+	uint totallyLaunched;
+	bool attackedMsEmpty;
+	Flag* flag;
+	Game* game;
 
 };
 
