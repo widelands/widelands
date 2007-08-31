@@ -522,12 +522,6 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
 	}
 
-	load_graphics(loader_ui);
-
-	g_sound_handler.change_music("ingame", 1000, 0);
-
-	m_state = gs_running;
-
 	if (!m_replayreader) {
 		log("Starting replay writer\n");
 
@@ -556,7 +550,27 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 		m_replaywriter = new ReplayWriter(this, fname);
 		log("Replay writer has started\n");
+
+		log("Reloading the game from replay\n");
+		FileSystem* fs = g_fs->MakeSubFileSystem(fname + WLGF_SUFFIX);
+		try {
+			Game_Loader gl(*fs, this);
+			cleanup_for_load(true, true);
+			gl.load_game();
+			postload();
+		} catch(...) {
+			delete fs;
+			throw;
+		}
+		delete fs;
+		log("Done reloading the game from replay\n");
 	}
+
+	load_graphics(loader_ui);
+
+	g_sound_handler.change_music("ingame", 1000, 0);
+
+	m_state = gs_running;
 
 	get_iabase()->run();
 
