@@ -38,7 +38,7 @@ struct Widelands_Map_Immovabledata_Data_Packet : public Widelands_Map_Data_Packe
 		(FileSystem &,
 		 Editor_Game_Base*,
 		 Widelands_Map_Map_Object_Saver * const  = 0)
-		throw (_wexception);
+		throw (_wexception) __attribute__ ((noreturn));
 };
 
 
