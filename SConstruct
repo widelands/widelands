@@ -161,14 +161,16 @@ if env['PLATFORM']!='win32':
 
 #TODO: should be detected automagically
 if env['PLATFORM']=='darwin':
-	# this is where DarwinPorts puts stuff by default
-	env.Append(CPPPATH='/opt/local/include')
-	env.Append(LIBPATH='/opt/local/lib')
-	env.Append(PATH='/opt/local/bin')
-	# and here's for fink
-	env.Append(CPPPATH='/sw/include')
-	env.Append(LIBPATH='/sw/lib')
-	env.Append(PATH='/sw/bin')
+	if os.path.exists("/opt/local") :
+		# this is where DarwinPorts puts stuff by default
+		env.Append(CPPPATH='/opt/local/include')
+		env.Append(LIBPATH='/opt/local/lib')
+		env.Append(PATH='/opt/local/bin')
+	if os.path.exists("/sw") :
+		# and here's for fink
+		env.Append(CPPPATH='/sw/include')
+		env.Append(LIBPATH='/sw/lib')
+		env.Append(PATH='/sw/bin')
 
 ################################################################################
 # Autoconfiguration
