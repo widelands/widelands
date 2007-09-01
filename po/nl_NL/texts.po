@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2407\n"
+"Project-Id-Version: Widelands svn2576\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-21 14:31+0000\n"
-"PO-Revision-Date: 2007-08-19 21:37+0100\n"
+"POT-Creation-Date: 2007-08-31 21:59+0000\n"
+"PO-Revision-Date: 2007-09-01 00:13+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
@@ -352,19 +352,19 @@ msgstr "Geluidseffecten"
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
-#: ../../txts/developers:110
+#: ../../txts/developers:109
 msgid "Barbarian Campaign Story"
 msgstr "Campagneverhaal van de Barbaren"
 
-#: ../../txts/developers:116
+#: ../../txts/developers:115
 msgid "Translators"
 msgstr "Vertalers"
 
-#: ../../txts/developers:120
+#: ../../txts/developers:119
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../../txts/developers:126
+#: ../../txts/developers:125
 msgid "Dutch"
 msgstr "Nederlands"
 
@@ -416,6 +416,10 @@ msgstr "Zweeds"
 msgid "Packagers"
 msgstr "Pakketmakers"
 
+#: ../../txts/developers:212
+msgid "Other"
+msgstr "Overige"
+
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
 msgstr "LEESMIJ voor de Widelands Editor"
@@ -424,7 +428,8 @@ msgstr "LEESMIJ voor de Widelands Editor"
 msgid "README for the Editor"
 msgstr "LEESMIJ voor de Editor"
 
-#: ../../txts/editor_readme:7 ../../txts/README:9
+#: ../../txts/editor_readme:7
+#: ../../txts/README:9
 msgid "Introduction"
 msgstr "Introductie"
 
@@ -535,3 +540,4 @@ msgstr "Nog meer vragen? Bezoek ons op www.widelands.org. Daar zijn onze veelges
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
 msgstr "Gebruik de prioriteitsknoppen in het gebouwvenster om de levering van specifieke goederen aan te passen."
+

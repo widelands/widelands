@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2407\n"
+"Project-Id-Version: Widelands svn2576\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-21 14:31+0000\n"
-"PO-Revision-Date: 2007-08-19 15:43+0100\n"
+"POT-Creation-Date: 2007-08-31 21:59+0000\n"
+"PO-Revision-Date: 2007-09-01 00:09+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,3 +157,4 @@ msgstr "Water"
 #: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Vis"
+

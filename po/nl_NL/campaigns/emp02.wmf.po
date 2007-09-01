@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2407\n"
+"Project-Id-Version: Widelands svn2576\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-21 14:31+0000\n"
-"PO-Revision-Date: 2007-08-20 19:58+0100\n"
+"POT-Creation-Date: 2007-08-31 21:59+0000\n"
+"PO-Revision-Date: 2007-09-01 00:05+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,8 @@ msgstr "Keizerrijk leerschool 2 - Een voorpost in ballingschap"
 msgid "Second mission of the Empire campaign"
 msgstr "Tweede missie van de Keizerrijk campagne"
 
-#: ../../../campaigns/emp02.wmf/event:11 ../../../campaigns/emp02.wmf/event:45
+#: ../../../campaigns/emp02.wmf/event:11
+#: ../../../campaigns/emp02.wmf/event:45
 #: ../../../campaigns/emp02.wmf/event:88
 #: ../../../campaigns/emp02.wmf/event:427
 #: ../../../campaigns/emp02.wmf/event:446
@@ -35,7 +36,7 @@ msgstr "Dagboek van Lutius"
 
 #: ../../../campaigns/emp02.wmf/event:13
 msgid "Finally!<br>This island seems to be made for us, it is a present of the Gods to my people and me.<br>Until now, we have only seen a small part of this island, but this part is allready leading sunbeams to my mind, feeling as if we found an unpayable treasure, a land like paradise.<br>On this island, we will start our new life, we will build up an outpost for our exile, which perhaps will become a new, beautiful home to everyone of us."
-msgstr "Eindelijk!<br>Dit eiland lijkt wel voor ons gemaakt. het is een geschenk van de goden aan mij en mijn stam.<br>We hebben tot nu slechts een klein deel van dit eiland gezien, maar dit deel laat de zon in mijn hoofd al schijnen. Het voelt alsof we een onbetaalbare schat hebben gevonden, een klein paradijs.<br>Op dit eiland zullen we ons nieuwe leven beginnen. We zullen een thuishaven in ballingschap bouwen, die wellicht ooit een nieuw en mooi thuis zal bieden voor eenieder van ons."
+msgstr "Eindelijk!<br>Dit eiland lijkt wel voor ons gemaakt. Het is een geschenk van de goden aan mij en mijn volk.<br>We hebben tot nu slechts een klein deel van dit eiland gezien, maar dit deel laat de zon in mijn hoofd al schijnen. Het voelt alsof we een onbetaalbare schat hebben gevonden, een klein paradijs.<br>Op dit eiland zullen we ons nieuwe leven beginnen. We zullen een thuishaven in ballingschap bouwen, die wellicht ooit een nieuw en mooi thuis zal bieden voor eenieder van ons."
 
 #: ../../../campaigns/emp02.wmf/event:15
 msgid "A new islands"
@@ -201,3 +202,4 @@ msgstr "Hé mijn vriend,<br>net op bezoek geweest in onze nieuwe taverne 'Onder 
 #: ../../../campaigns/emp02.wmf/event:1020
 msgid "A drink at 'At the palms'"
 msgstr "Een drankje in 'Onder de palmen'"
+
