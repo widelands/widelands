@@ -22,6 +22,7 @@
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
+#include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
