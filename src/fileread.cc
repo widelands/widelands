@@ -100,24 +100,27 @@ bool FileRead::ReadLine(char * buf, const char * const buf_end) {
 	if (filepos >= length)
 		return false;
 
-	do {
-		if (buf == buf_end) {
-			buf[-1] = 0;
-			throw Buffer_Overflow();
-		}
-		char c = ((char *)data)[filepos];
-		filepos++;
+	for (;;) {
+		const char c = static_cast<char *>(data)[filepos];
+		++filepos;
 
 		if (c == '\r') // not perfectly correct, but it should work
 			continue;
 		if (c == '\n') {
 			*buf = 0;
-			++buf;
 			break;
 		}
 
 		*buf = c;
 		++buf;
-	} while (filepos < length);
+		if (buf == buf_end) {
+			buf[-1] = 0;
+			throw Buffer_Overflow();
+		}
+		if (filepos == length) {
+			*buf = 0;
+			break;
+		}
+	};
 	return true;
 }
