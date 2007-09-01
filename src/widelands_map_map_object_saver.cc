@@ -50,15 +50,18 @@ uint Widelands_Map_Map_Object_Saver::register_object
 	assert(!is_object_known(obj));
 
 	switch (obj->get_type()) {
-		case Map_Object::FLAG: ++m_nr_flags; break;
-		case Map_Object::ROAD: ++m_nr_roads; break;
-		case Map_Object::BUILDING: ++m_nr_buildings; break;
-		case Map_Object::IMMOVABLE: ++m_nr_immovables; break;
-		case Map_Object::WARE: ++m_nr_wares; break;
-		case Map_Object::BOB: ++m_nr_bobs; break;
-		case Map_Object::BATTLE: ++m_nr_battles; break;
-		case Map_Object::ATTACKCONTROLLER: ++m_nr_attack_controllers; break;
-		default: throw wexception("Widelands_Map_Map_Object_Saver: Unknown MapObject type : %i\n", obj->get_type());
+	case Map_Object::FLAG:             ++m_nr_flags;              break;
+	case Map_Object::ROAD:             ++m_nr_roads;              break;
+	case Map_Object::BUILDING:         ++m_nr_buildings;          break;
+	case Map_Object::IMMOVABLE:        ++m_nr_immovables;         break;
+	case Map_Object::WARE:             ++m_nr_wares;              break;
+	case Map_Object::BOB:              ++m_nr_bobs;               break;
+	case Map_Object::BATTLE:           ++m_nr_battles;            break;
+	case Map_Object::ATTACKCONTROLLER: ++m_nr_attack_controllers; break;
+	default:
+		throw wexception
+			("Widelands_Map_Map_Object_Saver: Unknown MapObject type : %i",
+			 obj->get_type());
 	}
 
 	uint fileserial = ++m_lastserial;

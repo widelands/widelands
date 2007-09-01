@@ -124,7 +124,7 @@ public:
 
 	// in-game logic
 	Cmd_Queue * get_cmdqueue() {return &cmdqueue;}
-	RNG* get_rng() { return &rng; }
+	RNG* get_rng() {return &rng;}
 
 	uint logic_rand();
 

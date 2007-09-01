@@ -48,7 +48,7 @@ struct Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet
 		 Widelands_Map_Map_Object_Saver * const  = 0)
 		throw (_wexception);
 
-   private:
+private:
 	virtual void read_constructionsite
 		(ConstructionSite &,
 		 FileRead &,

@@ -49,8 +49,8 @@ public:
 	virtual ~PlayerCommand ();
 
 	char get_sender() const {return sender;}
-	uint get_cmdserial() const { return cmdserial; }
-	void set_cmdserial(uint s) { cmdserial = s; }
+	uint get_cmdserial() const {return cmdserial;}
+	void set_cmdserial(uint s) {cmdserial = s;}
 
 	virtual void serialize (StreamWrite &) = 0;
 	static PlayerCommand * deserialize (StreamRead &);

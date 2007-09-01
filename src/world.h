@@ -102,7 +102,7 @@ struct Terrain_Descr {
 	{return m_default_resources;}
 	int get_default_resources_amount() const throw () {return m_default_amount;}
 
-   private:
+private:
 	const std::string m_name;
 	char  * m_picnametempl;
 	uint    m_frametime;
@@ -163,7 +163,7 @@ struct World {
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
       inline int get_nr_resources() const {return m_resources.get_nitems();}
 
-   private:
+private:
 	std::string m_basedir; //  base directory, where the main conf file resides
 	World_Descr_Header                hd;
 

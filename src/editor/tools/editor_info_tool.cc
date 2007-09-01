@@ -59,11 +59,10 @@ int Editor_Info_Tool::handle_click_impl
 	buf += buf1;
    sprintf(buf1, " %s %i\n", _("Height").c_str(), f->get_height()); buf+=buf1;
    buf+=_(" Caps: ");
-   switch ((f->get_caps() & BUILDCAPS_SIZEMASK)) {
-      case BUILDCAPS_SMALL: buf+=_("small"); break;
-      case BUILDCAPS_MEDIUM: buf+=_("medium"); break;
-      case BUILDCAPS_BIG: buf+=_("big"); break;
-      default: break;
+	switch ((f->get_caps() & BUILDCAPS_SIZEMASK)) {
+	case BUILDCAPS_SMALL:  buf+=_("small");  break;
+	case BUILDCAPS_MEDIUM: buf+=_("medium"); break;
+	case BUILDCAPS_BIG:    buf+=_("big");    break;
 	}
    if (f->get_caps() & BUILDCAPS_FLAG) buf+=_(" flag");
    if (f->get_caps() & BUILDCAPS_MINE) buf+=_(" mine");

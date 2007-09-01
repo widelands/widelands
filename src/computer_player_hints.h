@@ -30,7 +30,7 @@ struct BuildingHints {
 	const char * get_need_map_resource() const throw ()
 	{return need_map_resource;}
 
-    private:
+private:
 	char * need_map_resource;
 };
 

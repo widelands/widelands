@@ -299,13 +299,12 @@ static const RGBColor colors[] = {
  * a small rectangle on it with the color
  * of the graph and it needs a picture
  */
-class WSM_Checkbox : public UI::Checkbox {
-   public:
+struct WSM_Checkbox : public UI::Checkbox {
       WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint picid, RGBColor color);
 
       virtual void draw(RenderTarget* dst);
 
-   private:
+private:
       int      m_pic;
       RGBColor m_color;
 };

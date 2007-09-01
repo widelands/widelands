@@ -163,47 +163,39 @@ void Box::set_item_pos(uint idx, int pos)
 
 	const Item& it = m_items[idx];
 
-	switch (it.type)
-		{
-		case Item::ItemPanel:
-			{
+	switch (it.type) {
+	case Item::ItemPanel: {
 			int breadth, maxbreadth;
 
-			if (m_orientation == Horizontal)
-				{
+		if (m_orientation == Horizontal) {
 				breadth = it.u.panel.panel->get_h();
 				maxbreadth = get_h();
-				}
-			else
-				{
+		} else {
 				breadth = it.u.panel.panel->get_w();
 				maxbreadth = get_w();
 				}
-
-			switch (it.u.panel.align)
-				{
-				case AlignLeft:
-				default:
+		switch (it.u.panel.align) {
+		case AlignLeft:
+		default:
 					breadth = 0;
-					break;
+			break;
 
-				case AlignCenter:
+		case AlignCenter:
 					breadth = (maxbreadth - breadth) / 2;
-					break;
+			break;
 
-				case AlignRight:
+		case AlignRight:
 					breadth = maxbreadth - breadth;
-					break;
-				}
+			break;
+		}
 
 			if (m_orientation == Horizontal)
 				it  .u.panel.panel->set_pos(Point(pos, breadth));
 			else it.u.panel.panel->set_pos(Point(breadth, pos));
-			}
-			break;
+	}
+		break;
 
-		case Item::ItemSpace:
-			break; // no need to do anything
-		}
+	case Item::ItemSpace:; //  no need to do anything
+	}
 }
 };

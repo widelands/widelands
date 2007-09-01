@@ -38,8 +38,7 @@ struct Event_Descr {
  * ids and creates the correct option dialog and (of course) event
  * for each event-id
  */
-class Event_Factory {
-   public:
+struct Event_Factory {
       static Event* get_correct_event(const char* id);
       static Event* make_event_with_option_dialog(const char* id, Editor_Interactive*, Event*);
 

@@ -30,8 +30,7 @@ class Widelands_Map_Map_Object_Saver;
 /** This class represents a data packet in a widelands map file. it is an
  * abstract base class
 */
-class Widelands_Map_Data_Packet {
-   public:
+struct Widelands_Map_Data_Packet {
       virtual ~Widelands_Map_Data_Packet() {m_skip=false;}
 
 	virtual void Read
@@ -48,7 +47,7 @@ class Widelands_Map_Data_Packet {
 		throw (_wexception)
 		= 0;
 
-   private:
+private:
       bool m_skip;
 };
 

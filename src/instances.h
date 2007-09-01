@@ -42,7 +42,6 @@ namespace UI {struct Tab_Panel;};
 //
 struct Map_Object_Descr {
 	friend class DirAnimations;
-	public:
 		typedef Uint8 Index;
 		Map_Object_Descr() {}
 		virtual ~Map_Object_Descr() {m_anims.clear();}
@@ -55,8 +54,7 @@ struct Map_Object_Descr {
 		}
 
 		uint main_animation() const throw () {
-			return (m_anims.begin() != m_anims.end()) ?
-					m_anims.begin()->second : 0;
+			return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
 		}
 
 		std::string get_animation_name(const uint anim) const; // This is needed for save games and debug
@@ -236,10 +234,10 @@ public:
 		Map_Object* m_object;
 
 	protected:
-		Loader() : m_egbase(0), m_mol(0), m_object(0) { }
+		Loader() : m_egbase(0), m_mol(0), m_object(0) {}
 
 	public:
-		virtual ~Loader() { }
+		virtual ~Loader() {}
 
 		void init
 				(Editor_Game_Base* e,
@@ -251,9 +249,9 @@ public:
 			m_object = object;
 		}
 
-		Editor_Game_Base& egbase() { return *m_egbase; }
-		Widelands_Map_Map_Object_Loader& mol() { return *m_mol; }
-		Map_Object* get_object() { return m_object; }
+		Editor_Game_Base& egbase() {return *m_egbase;}
+		Widelands_Map_Map_Object_Loader& mol() {return *m_mol;}
+		Map_Object * get_object() {return m_object;}
 
 	protected:
 		virtual void load(FileRead&);
@@ -265,7 +263,7 @@ public:
 
 	// This is just a fail-safe guard for the time until we fully transition
 	// to the new Map_Object saving system
-	virtual bool has_new_save_support() { return false; }
+	virtual bool has_new_save_support() {return false;}
 
 	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
 	// Pure Map_Objects cannot be loaded
@@ -295,8 +293,7 @@ inline int get_reverse_dir(int dir) {return 1 + ((dir-1)+3)%6;}
  *
  * Keeps the list of all objects currently in the game.
  */
-class Object_Manager {
-public:
+struct Object_Manager {
 	typedef std::map<uint, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
@@ -325,7 +322,7 @@ public:
 	 * Get the map of all objects for the purpose of iterating over it.
 	 * Only provide a const version of the map!
 	 */
-	const objmap_t& get_objects() { return m_objects; }
+	const objmap_t & get_objects() const throw () {return m_objects;}
 
 private:
 	uint m_lastserial;

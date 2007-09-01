@@ -45,7 +45,7 @@ struct Main_Menu_Save_Map : public UI::Window {
       Main_Menu_Save_Map(Editor_Interactive*);
       virtual ~Main_Menu_Save_Map();
 
-   private:
+private:
 	void clicked_ok            ();
 	void clicked_make_directory();
 	void selected      (uint);

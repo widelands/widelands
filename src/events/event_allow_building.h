@@ -27,8 +27,7 @@ class Editor_Game_Base;
 /*
  * Allows/denies the player to build a certain building
  */
-class Event_Allow_Building : public Event {
-   public:
+struct Event_Allow_Building : public Event {
      Event_Allow_Building();
       ~Event_Allow_Building();
 
@@ -49,7 +48,7 @@ class Event_Allow_Building : public Event {
       inline void set_allow(bool t) {m_allow=t;}
       inline bool get_allow() {return m_allow;}
 
-   private:
+private:
       bool m_allow;
       std::string m_building;
       int m_player;

@@ -251,9 +251,9 @@ void Main_Menu_Load_Map::fill_list() {
 		try {
          m_ml->preload_map(true);
          std::string pic="";
-         switch (m_ml->get_type()) {
-            case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
-            case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
+			switch (m_ml->get_type()) {
+			case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
+			case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
 			}
 			m_ls->add
 				(FileSystem::FS_Filename(name),

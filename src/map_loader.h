@@ -54,7 +54,7 @@ struct Map_Loader {
 
       inline Map* get_map() {return m_map;}
 
-   protected:
+protected:
       enum State {
          STATE_INIT,
          STATE_PRELOADED,
@@ -65,7 +65,7 @@ struct Map_Loader {
       State get_state() {return m_s;}
       Map* m_map;
 
-   private:
+private:
       State m_s;
 };
 

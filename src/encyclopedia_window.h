@@ -41,11 +41,10 @@ struct WareCondition {
    int groupId;
 };
 
-class EncyclopediaWindow : public UI::UniqueWindow {
-   public:
+struct EncyclopediaWindow : public UI::UniqueWindow {
 	  EncyclopediaWindow(Interactive_Player&, UI::UniqueWindow::Registry&);
 	  ~EncyclopediaWindow();
-   private:
+private:
 	  Interactive_Player& interactivePlayer;
 	UI::Listselect<uintptr_t> wares;
 	UI::Listselect<uintptr_t> prodSites;

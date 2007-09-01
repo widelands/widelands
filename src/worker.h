@@ -35,8 +35,7 @@
  *  - Idle: the worker is at his job but idling
  *  - Work: the worker is running his working schedule
  */
-class Worker : public Bob
-{
+class Worker : public Bob {
 	friend class Soldier; //  allow access to m_supply
 	friend class WorkerProgram;
 	friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
@@ -61,7 +60,7 @@ class Worker : public Bob
 	};
 
 
-	public:
+public:
 		Worker(const Worker_Descr &);
 		virtual ~Worker();
 
@@ -136,7 +135,7 @@ class Worker : public Bob
 								  const std::string & subcommand);
 
 
-	protected:
+protected:
 		void draw_inner(const Editor_Game_Base &, RenderTarget &,
 		                const Point) const;
 		virtual void draw(const Editor_Game_Base &, RenderTarget &,
@@ -158,7 +157,7 @@ class Worker : public Bob
 		static Task taskGeologist;
 
 
-	private:
+private:
 		// task details
 		void transfer_update(Game* g, State* state);
 		void transfer_signal(Game* g, State* state);

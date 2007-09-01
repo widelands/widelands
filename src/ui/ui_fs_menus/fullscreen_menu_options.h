@@ -56,7 +56,7 @@ struct Options_Ctrl {
 		~Options_Ctrl();
 		Options_Ctrl::Options_Struct options_struct(Section *s);
 		void save_options();
-	private:
+private:
 		Fullscreen_Menu_Options *m_opt_dialog;
 		Section *m_opt_section;
 };

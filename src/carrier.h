@@ -23,23 +23,21 @@
 /**
  * Carrier is a worker who is employed by a Road.
  */
-class Carrier : public Worker
-{
+struct Carrier : public Worker {
 	friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 
-	public:
-		struct Descr : public Worker_Descr {
+	struct Descr : public Worker_Descr {
 			Descr(const Tribe_Descr &t, const std::string & carrier_name):
 					Worker_Descr(t, carrier_name) {};
 
 			virtual Worker_Type get_worker_type() const {return CARRIER;}
 
-			protected:
+	protected:
 				virtual Bob * create_object() const {return new Carrier(*this);}
 				virtual void parse(const char *directory, Profile *prof,
 								   const EncodeData *encdata)
 						{Worker_Descr::parse(directory, prof, encdata);}
-		};
+	};
 
 
 	Carrier(const Descr & carrier_descr): Worker(carrier_descr), m_acked_ware(-1)
@@ -54,7 +52,7 @@ class Carrier : public Worker
 		bool start_task_walktoflag(Game* g, int flag, bool offset = false);
 
 
-	private:
+private:
 		MO_DESCR(Descr);
 
 		void find_pending_item(Game* g);

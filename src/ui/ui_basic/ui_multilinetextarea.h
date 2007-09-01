@@ -73,12 +73,12 @@ public:
       inline const int get_font_size() {return m_fontsize;}
       inline RGBColor& get_font_clr() {return m_fcolor;}
 
-   private:
+private:
 	std::string  m_text;
 	Scrollbar    m_scrollbar;
 		ScrollMode     m_scrollmode;
 
-   protected:
+protected:
 	Align        m_align;
 	uint         m_cache_id; ///picid of the whole textarea surface
 

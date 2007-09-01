@@ -50,7 +50,7 @@ struct Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
 
       inline uint get_version() {return m_version;}
 
-   private:
+private:
       uint m_version;
 };
 

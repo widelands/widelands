@@ -45,8 +45,8 @@ struct LAN_Open_Game {
     LAN_Game_Info info;
 };
 
-class LAN_Base {
-    protected:
+struct LAN_Base {
+protected:
 	LAN_Base ();
 	~LAN_Base ();
 
@@ -59,14 +59,13 @@ class LAN_Base {
 	void send (const void*, size_t, const sockaddr_in*);
 	void broadcast (const void*, size_t, unsigned short);
 
-    private:
+private:
 	int                  sock;
 
 	std::list<in_addr_t> broadcast_addresses;
 };
 
-class LAN_Game_Promoter:LAN_Base {
-    public:
+struct LAN_Game_Promoter : public LAN_Base {
 	LAN_Game_Promoter ();
 	~LAN_Game_Promoter ();
 
@@ -74,13 +73,12 @@ class LAN_Game_Promoter:LAN_Base {
 
 	void set_map (const char*);
 
-    private:
+private:
 	LAN_Game_Info gameinfo;
 	bool          needupdate;
 };
 
-class LAN_Game_Finder:LAN_Base {
-    public:
+struct LAN_Game_Finder:LAN_Base {
 	enum {
 	    GameOpened,
 	    GameClosed,
@@ -95,7 +93,7 @@ class LAN_Game_Finder:LAN_Base {
 
 	void set_callback (void(*)(int, const LAN_Open_Game*, void*), void*);
 
-    private:
+private:
 	std::list<LAN_Open_Game *> opengames;
 
 	void (*callback) (int, const LAN_Open_Game*, void*);

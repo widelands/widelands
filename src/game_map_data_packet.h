@@ -28,8 +28,7 @@ class Widelands_Map_Loader;
 /*
  * This is just a wrapper around Widelands_Map_Saver and Widelands_Map_Loader
  */
-class Game_Map_Data_Packet : public Game_Data_Packet {
-   public:
+struct Game_Map_Data_Packet : public Game_Data_Packet {
       Game_Map_Data_Packet() {m_mos = 0; m_mol = 0; m_wms = 0; m_wml = 0;}
       virtual ~Game_Map_Data_Packet();
 
@@ -48,7 +47,7 @@ class Game_Map_Data_Packet : public Game_Data_Packet {
       inline Widelands_Map_Map_Object_Saver* get_map_object_saver() {return m_mos;}
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader() {return m_mol;}
 
-   private:
+private:
       Widelands_Map_Map_Object_Saver* m_mos;
       Widelands_Map_Map_Object_Loader* m_mol;
       Widelands_Map_Saver* m_wms;

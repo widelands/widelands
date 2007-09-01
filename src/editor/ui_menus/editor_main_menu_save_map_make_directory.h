@@ -41,7 +41,7 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
       std::string m_dirname;
       UI::Edit_Box* m_edit;
       UI::IDButton<Main_Menu_Save_Map_Make_Directory, int> * m_ok_button;

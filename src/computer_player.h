@@ -32,8 +32,7 @@ class Tribe_Descr;
 class Road;
 class ProductionSite;
 
-class Computer_Player {
-	public:
+struct Computer_Player {
 	Computer_Player(Game &, const Player_Number);
 		~Computer_Player ();
 
@@ -50,7 +49,7 @@ class Computer_Player {
 		inline uchar get_player_number() {return player_number;}
 	Player * get_player() const {return game().get_player(player_number);}
 
-	private:
+private:
 		void gain_building (Building*);
 		void lose_building (Building*);
 

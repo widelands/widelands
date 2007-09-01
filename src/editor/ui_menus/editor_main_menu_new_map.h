@@ -46,7 +46,7 @@ struct Main_Menu_New_Map : public UI::Window {
       Main_Menu_New_Map(Editor_Interactive*);
       virtual ~Main_Menu_New_Map();
 
-   private:
+private:
       Editor_Interactive *m_parent;
       UI::Textarea *m_width, *m_height;
 	UI::IDButton<Main_Menu_New_Map, int> * m_world;

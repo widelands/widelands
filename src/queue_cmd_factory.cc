@@ -30,20 +30,20 @@
 
 
 GameLogicCommand* Queue_Cmd_Factory::create_correct_queue_command(uint id) {
-   switch (id) {
-      case QUEUE_CMD_BUILD: return new Cmd_Build(); break;
-      case QUEUE_CMD_FLAG: return new Cmd_BuildFlag(); break;
-      case QUEUE_CMD_BUILDROAD: return new Cmd_BuildRoad(); break;
-      case QUEUE_CMD_FLAGACTION: return new Cmd_FlagAction(); break;
-      case QUEUE_CMD_STOPBUILDING: return new Cmd_StartStopBuilding(); break;
-      case QUEUE_CMD_ENHANCEBUILDING: return new Cmd_EnhanceBuilding(); break;
-      case QUEUE_CMD_BULLDOZE: return new Cmd_Bulldoze(); break;
-      case QUEUE_CMD_DESTROY_MAPOBJECT: return new Cmd_Destroy_Map_Object(); break;
-      case QUEUE_CMD_ACT: return new Cmd_Act(); break;
-      case QUEUE_CMD_CHECK_EVENTCHAIN: return new Cmd_CheckEventChain(); break;
-      case QUEUE_CMD_INCORPORATE: return new Cmd_Incorporate(); break;
-      case QUEUE_CMD_CALL_ECONOMY_BALANCE: return new Cmd_Call_Economy_Balance();
-      default: throw wexception("Unknown Queue_Cmd_Id in file: %i\n", id);
+	switch (id) {
+	case QUEUE_CMD_BUILD:                return new Cmd_Build               ();
+	case QUEUE_CMD_FLAG:                 return new Cmd_BuildFlag           ();
+	case QUEUE_CMD_BUILDROAD:            return new Cmd_BuildRoad           ();
+	case QUEUE_CMD_FLAGACTION:           return new Cmd_FlagAction          ();
+	case QUEUE_CMD_STOPBUILDING:         return new Cmd_StartStopBuilding   ();
+	case QUEUE_CMD_ENHANCEBUILDING:      return new Cmd_EnhanceBuilding     ();
+	case QUEUE_CMD_BULLDOZE:             return new Cmd_Bulldoze            ();
+	case QUEUE_CMD_DESTROY_MAPOBJECT:    return new Cmd_Destroy_Map_Object  ();
+	case QUEUE_CMD_ACT:                  return new Cmd_Act                 ();
+	case QUEUE_CMD_CHECK_EVENTCHAIN:     return new Cmd_CheckEventChain     ();
+	case QUEUE_CMD_INCORPORATE:          return new Cmd_Incorporate         ();
+	case QUEUE_CMD_CALL_ECONOMY_BALANCE: return new Cmd_Call_Economy_Balance();
+	default: throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}
    return 0; // Never here
 }

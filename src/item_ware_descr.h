@@ -44,9 +44,7 @@
  * different "version" of a worker must perform the same job, but they can
  * look differently.
 */
-class Item_Ware_Descr : public Map_Object_Descr
-{
-	public:
+struct Item_Ware_Descr : public Map_Object_Descr {
 		Item_Ware_Descr(const std::string & ware_name):
 				m_name       (ware_name),
 				m_icon       (0)
@@ -69,7 +67,7 @@ class Item_Ware_Descr : public Map_Object_Descr
 		virtual void load_graphics();
 		static Item_Ware_Descr* create_from_dir(const char*, const char*);
 
-	private:
+private:
 		void parse(const char *directory, Profile *prof);
 
 		std::string m_name;       //< Ware's unique name into tribe

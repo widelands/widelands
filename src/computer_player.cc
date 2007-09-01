@@ -1049,13 +1049,13 @@ bool Computer_Player::improve_roads (Flag* flag)
 void Computer_Player::gain_immovable (PlayerImmovable* pi)
 {
 	switch (pi->get_type()) {
-	    case BaseImmovable::BUILDING:
+	case BaseImmovable::BUILDING:
 		gain_building (static_cast<Building*>(pi));
 		break;
-	    case BaseImmovable::FLAG:
+	case BaseImmovable::FLAG:
 		new_flags.push_back (static_cast<Flag*>(pi));
 		break;
-	    case BaseImmovable::ROAD:
+	case BaseImmovable::ROAD:
 		roads.push_front (static_cast<Road*>(pi));
 		break;
 	}
@@ -1065,10 +1065,10 @@ void Computer_Player::gain_immovable (PlayerImmovable* pi)
 void Computer_Player::lose_immovable (PlayerImmovable* pi)
 {
 	switch (pi->get_type()) {
-	    case BaseImmovable::BUILDING:
+	case BaseImmovable::BUILDING:
 		lose_building (static_cast<Building*>(pi));
 		break;
-	    case BaseImmovable::FLAG:
+	case BaseImmovable::FLAG:
 		for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
 		    for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end(); j++)
 			if (*j==pi) {
@@ -1077,7 +1077,7 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 			}
 
 		break;
-	    case BaseImmovable::ROAD:
+	case BaseImmovable::ROAD:
 		roads.remove (static_cast<Road*>(pi));
 		break;
 	}

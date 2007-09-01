@@ -42,6 +42,6 @@ struct Cmd_Incorporate : public GameLogicCommand {
 		virtual int get_id() {return QUEUE_CMD_INCORPORATE;}
 
 
-	private:
+private:
 		Worker* worker;
 };

@@ -48,7 +48,7 @@ class Worker_Descr : public Bob::Descr
 
 	typedef std::vector<CostItem> BuildCost;
 
-	public:
+public:
 		enum Worker_Type {
 			NORMAL = 0,
 			CARRIER,
@@ -91,7 +91,7 @@ class Worker_Descr : public Bob::Descr
 		               PlayerImmovable *location, Coords coords);
 
 
-	protected:
+protected:
 		virtual void parse(const char *directory, Profile *prof,
 		                   const EncodeData *encdata);
 		static Worker_Descr * create_from_dir(const Tribe_Descr &,

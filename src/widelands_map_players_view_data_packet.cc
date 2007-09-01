@@ -451,7 +451,7 @@ throw (_wexception)
 				Uint8         roads = 0;
 				Player_Number owner;
 
-				switch (f_vision) {//  owner and map_object_descr
+				switch (f_vision) { //  owner and map_object_descr
 				case 0:
 					//  The player has never seen this node, so he has no information
 					//  about it. Neither should he be be informed about it now.

@@ -134,8 +134,7 @@ struct S2MapDescrHeader {
 #define BOB_GRASS3          0x0f
 
 
-class S2_Map_Loader : public Map_Loader {
-   public:
+struct S2_Map_Loader : public Map_Loader {
       S2_Map_Loader(const char*, Map*);
       virtual ~S2_Map_Loader();
 
@@ -144,7 +143,7 @@ class S2_Map_Loader : public Map_Loader {
 	void load_world();
       virtual int load_map_complete(Editor_Game_Base*, bool scenario);
 
-   private:
+private:
       char  m_filename[256];
 
       uchar *load_s2mf_section(FileRead *, int width, int height);

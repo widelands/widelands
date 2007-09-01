@@ -93,9 +93,9 @@ bool Edit_Box::handle_mouserelease(const Uint8 btn, int, int)
 a key event must be handled
 */
 bool Edit_Box::handle_key(bool down, int code, char c) {
-   if (down) {
-      switch (code) {
-         case KEY_ESCAPE:
+	if (down) {
+		switch (code) {
+		case KEY_ESCAPE:
             set_text(m_lasttext.c_str());
 			Basic_Button::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
@@ -103,7 +103,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             grab_mouse(false);
             return true;
 
-         case KEY_RETURN:
+		case KEY_RETURN:
             m_lasttext=m_text;
 			Basic_Button::handle_mouserelease(0, 0, 0);
             set_can_focus(false);
@@ -113,19 +113,19 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             changedid.call(m_id);
             return true;
 
-         case KEY_BACKSPACE:
+		case KEY_BACKSPACE:
             if (m_text.size()) {
                m_text.erase(m_text.end() - 1);
                set_title(m_text.c_str());
 				}
             return true;
 
-         case KEY_DELETE:
+		case KEY_DELETE:
             m_text.resize(0);
             set_title(m_text.c_str());
             return true;
 
-         default:
+		default:
             if (c && m_text.size()<m_maxchars) m_text+=c;
             set_title(m_text.c_str());
             return true;

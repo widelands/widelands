@@ -87,7 +87,7 @@ struct MapObjective : public TriggerReferencer {
 		}
       inline void set_is_optional(bool t) {m_is_optional = t;}
 
-   private:
+private:
       std::string   m_name;
       std::string   m_descr;
       Trigger_Null*  m_trigger;
@@ -123,7 +123,7 @@ struct MapObjectiveManager {
 	MapObjective & get_objective_by_nr(const Index i) const
 	{assert(i < m_objectives.size()); return *m_objectives[i];}
 
-   private:
+private:
 	objective_vector m_objectives;
 };
 

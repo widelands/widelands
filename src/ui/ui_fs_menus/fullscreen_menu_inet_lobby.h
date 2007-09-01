@@ -50,14 +50,14 @@ struct Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
       void critical_error(std::string str);
       void disconnect();
 
-	private:
+private:
       Game_Server_Connection* m_gsc;
 	UI::Edit_Box           * m_chatbox;
       UI::Multiline_Textarea* m_chatarea;
       UI::Listselect<void *> * m_userlist;
       bool  m_disconnect_expected;
 
-   private:
+private:
       void changed();
 	void clicked_back();
 };

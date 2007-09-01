@@ -118,7 +118,7 @@ struct Bob : public Map_Object {
 
 				uint vision_range() const;
 
-			protected:
+		protected:
 				virtual Bob * create_object() const = 0;
 				virtual void parse(const char *directory, Profile *prof,
 								   const EncodeData *encdata);
@@ -221,12 +221,12 @@ struct Bob : public Map_Object {
 		bool is_walking() {return m_walking != IDLE;}
 
 
-	protected:
+protected:
 		Bob(const Descr & descr);
 		virtual ~Bob();
 
 
-	private:
+private:
 		void do_act(Game* g, bool signalhandling);
 		void idle_update(Game* g, State* state);
 		void idle_signal(Game* g, State* state);

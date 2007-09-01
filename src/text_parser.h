@@ -26,8 +26,7 @@ inline bool is_richtext(std::string text) {
    return (text.substr(0, 3) == "<rt");
 }
 
-class Text_Block {
-   public:
+struct Text_Block {
 	Text_Block();
 	Text_Block(const Text_Block & src);
 
@@ -67,7 +66,7 @@ class Text_Block {
 	const std::vector<std::vector<std::string>::size_type> & get_line_breaks
 		() const throw ()
 	{return m_line_breaks;}
-   private:
+private:
 	int                      m_font_size;
 		RGBColor m_font_color;
 		std::string m_font_weight;
@@ -79,8 +78,7 @@ class Text_Block {
 	std::vector<std::vector<std::string>::size_type> m_line_breaks;
 };
 
-class Richtext_Block {
-	public:
+struct Richtext_Block {
 		Richtext_Block();
 		Richtext_Block(const Richtext_Block &src);
 
@@ -108,15 +106,14 @@ private:
 		Align m_text_align;
 };
 
-class Text_Parser {
-   public:
+struct Text_Parser {
       Text_Parser();
       ~Text_Parser();
 	void parse
 		(std::string & text,
 		 std::vector<Richtext_Block> & blocks,
 		 Varibale_Callback, void * const);
-   private:
+private:
 		void parse_richtexttext_attributes(std::string format, Richtext_Block *element);
 	bool parse_textblock
 		(std::string                                       & block,

@@ -22,9 +22,7 @@
 
 #include "transport.h"
 
-class IdleWorkerSupply : public Supply
-{
-	public:
+struct IdleWorkerSupply : public Supply {
 		IdleWorkerSupply(Worker* w);
 		~IdleWorkerSupply();
 
@@ -46,7 +44,7 @@ class IdleWorkerSupply : public Supply
 		virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 
 
-	private:
+private:
 		Worker  * m_worker;
 		Economy * m_economy;
 };

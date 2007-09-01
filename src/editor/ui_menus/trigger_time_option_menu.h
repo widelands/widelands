@@ -41,7 +41,7 @@ struct Trigger_Time_Option_Menu : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
 	void clicked_ok();
       void clicked(int);
       void update();

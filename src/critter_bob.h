@@ -43,7 +43,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 
       const Critter_BobProgram* get_program(std::string programname) const;
 
-   private:
+private:
 	std::string   m_descname;
 	DirAnimations m_walk_anims;
 	bool          m_swimming;

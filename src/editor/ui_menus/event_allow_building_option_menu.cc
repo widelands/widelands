@@ -186,12 +186,12 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 
 
 void Event_Allow_Building_Option_Menu::clicked(int i) {
-   switch (i) {
-      case 15: m_player++; break;
-      case 16: m_player--; break;
+	switch (i) {
+	case 15: ++m_player;   break;
+	case 16: --m_player;   break;
 
-      case 23: m_building++; break;
-      case 24: m_building--; break;
+	case 23: ++m_building; break;
+	case 24: --m_building; break;
 	}
    update();
 }

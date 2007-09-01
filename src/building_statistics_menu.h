@@ -38,7 +38,7 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
       void think();
       void draw(RenderTarget*);
 
-   private:
+private:
 	enum Jump_Targets {
 		Prev_Owned,        Next_Owned,
 		Prev_Construction, Next_Construction,
@@ -55,7 +55,6 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	UI::IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
       int                 m_last_building_index;
 
-   private:
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
 	void table_changed(uint);

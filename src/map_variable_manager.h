@@ -57,7 +57,7 @@ struct MapVariable {
 	virtual std::string get_string_representation() const = 0;
 	virtual Type get_type() const = 0;
 
-   private:
+private:
       std::string   m_name;
       bool           m_delete_protected;
 };
@@ -75,7 +75,7 @@ struct Int_MapVariable : public MapVariable {
          return buffer;
 		}
 
-   private:
+private:
       long            m_value;
 };
 
@@ -88,7 +88,7 @@ struct String_MapVariable : public MapVariable {
       void set_value(const char* t) {m_value = t;}
 	std::string get_string_representation() const {return m_value;}
 
-   private:
+private:
       std::string            m_value;
 };
 
@@ -126,7 +126,7 @@ struct MapVariableManager {
 	MapVariable & get_variable_by_nr(const Index i) const
 	{assert(i < m_variables.size()); return *m_variables[i];}
 
-   private:
+private:
 	variable_vector      m_variables;
 };
 

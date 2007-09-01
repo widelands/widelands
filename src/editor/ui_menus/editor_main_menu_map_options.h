@@ -44,7 +44,7 @@ struct Main_Menu_Map_Options : public UI::Window {
       Main_Menu_Map_Options(Editor_Interactive*);
       virtual ~Main_Menu_Map_Options();
 
-   private:
+private:
       void changed(int);
       void editbox_changed();
       Editor_Interactive  *m_parent;

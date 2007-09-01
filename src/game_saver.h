@@ -40,7 +40,7 @@ struct Game_Saver {
 
       void save() throw(_wexception);
 
-   private:
+private:
 	FileSystem & m_fs;
       Game* m_game;
 };

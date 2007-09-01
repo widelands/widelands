@@ -82,16 +82,16 @@ ulong Surface::get_pixel(uint x, uint y) {
 		y * m_surface->pitch + x * bytes_per_pixel;
 
 	switch (bytes_per_pixel) {
-		case 1:
+	case 1:
 			return *pix; //  Maybe needed for save_png.
-		case 2:
-			return *reinterpret_cast<const Uint16 *>(pix);
-		case 3: //Needed for save_png.
+	case 2:
+		return *reinterpret_cast<const Uint16 *>(pix);
+	case 3: //Needed for save_png.
 			//fallthrough
-		case 4:
+	case 4:
 			return *reinterpret_cast<const Uint32 *>(pix);
 	}
-	assert(0);
+	assert(false);
 
 	return 0; // Should never be here
 }
@@ -112,13 +112,8 @@ void Surface::set_pixel(uint x, uint y, const Uint32 clr) {
 		static_cast<Uint8 *>(m_surface->pixels) +
 		y * m_surface->pitch + x * bytes_per_pixel;
 	switch (bytes_per_pixel) {
-		case 2:
-			*reinterpret_cast<Uint16 *>(pix) =
-					static_cast<Uint16>(clr);
-			break;
-		case 4:
-			*reinterpret_cast<Uint32 *>(pix) = clr;
-			break;
+	case 2: *reinterpret_cast<Uint16 *>(pix) = static_cast<Uint16>(clr); break;
+	case 4: *reinterpret_cast<Uint32 *>(pix) = clr;                      break;
 	}
 
 	if (SDL_MUSTLOCK(m_surface))
@@ -162,7 +157,7 @@ bool draw_all)
 	set_subwin(subwin);
 
 	switch (get_format()->BytesPerPixel) {
-	    case 2:
+	case 2:
 		draw_field_int<Uint16>
 		    (*this,
 		     f, rf, fl, rfl,
@@ -172,7 +167,7 @@ bool draw_all)
 		     tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
 		     draw_all);
 		break;
-	    case 4:
+	case 4:
 		draw_field_int<Uint32>
 		    (*this,
 		     f, rf, fl, rfl,
@@ -182,8 +177,7 @@ bool draw_all)
 		     tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
 		     draw_all);
 		break;
-	    default:
-		assert (0);
+	default: assert(false);
 	}
 
 	unset_subwin();

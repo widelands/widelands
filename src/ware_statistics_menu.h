@@ -30,11 +30,10 @@ struct Ware_Statistics_Menu : public UI::UniqueWindow {
       virtual ~Ware_Statistics_Menu();
 
 
-   private:
+private:
       Interactive_Player* m_parent;
       WUIPlot_Area*       m_plot;
 
-   private:
 	void clicked_help();
       void cb_changed_to(int, bool);
 };

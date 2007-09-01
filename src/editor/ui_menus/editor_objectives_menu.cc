@@ -52,7 +52,7 @@ struct Edit_Objective_Window : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
       Editor_Interactive  *m_parent;
 	UI::Table<MapObjective &>::Entry_Record & m_te;
       UI::Edit_Box          *m_name;
@@ -60,7 +60,6 @@ struct Edit_Objective_Window : public UI::Window {
       UI::Checkbox          *m_visible;
       UI::Checkbox          *m_optional;
 
-   private:
 	void clicked_ok();
 };
 

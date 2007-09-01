@@ -1428,8 +1428,8 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 	if (!dy) {
 		switch (dx) {
 		case -1: return Map_Object::WALK_W;
-		case 0: return -1;
-		case 1: return Map_Object::WALK_E;
+		case  0: return -1;
+		case  1: return Map_Object::WALK_E;
 		default: return 0;
 		}
 	}
@@ -1444,7 +1444,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		if (start.y & 1) --dx;
 		switch (dx) {
 		case -1: return Map_Object::WALK_SW;
-		case 0: return Map_Object::WALK_SE;
+		case  0: return Map_Object::WALK_SE;
 		default: return 0;
 		}
 	}
@@ -1454,7 +1454,7 @@ int Map::is_neighbour(const Coords start, const Coords end) const
 		if (start.y & 1) --dx;
 		switch (dx) {
 		case -1: return Map_Object::WALK_NW;
-		case 0: return Map_Object::WALK_NE;
+		case  0: return Map_Object::WALK_NE;
 		default: return 0;
 		}
 	}
@@ -1619,10 +1619,10 @@ void Map::get_neighbour
 	switch (dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
 	case Map_Object::WALK_NE: get_trn(f, o); break;
-	case Map_Object::WALK_E: get_rn(f, o); break;
+	case Map_Object::WALK_E:  get_rn (f, o); break;
 	case Map_Object::WALK_SE: get_brn(f, o); break;
 	case Map_Object::WALK_SW: get_bln(f, o); break;
-	case Map_Object::WALK_W: get_ln(f, o); break;
+	case Map_Object::WALK_W:  get_ln (f, o); break;
 	}
 }
 
@@ -1632,10 +1632,10 @@ void Map::get_neighbour
 	switch (dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
 	case Map_Object::WALK_NE: get_trn(f, o); break;
-	case Map_Object::WALK_E: get_rn(f, o); break;
+	case Map_Object::WALK_E:  get_rn (f, o); break;
 	case Map_Object::WALK_SE: get_brn(f, o); break;
 	case Map_Object::WALK_SW: get_bln(f, o); break;
-	case Map_Object::WALK_W: get_ln(f, o); break;
+	case Map_Object::WALK_W:  get_ln (f, o); break;
 	}
 }
 
@@ -2339,10 +2339,10 @@ bool FindNodeImmovableSize::accept(const Map &, const FCoords coord) const {
 		size = imm->get_size();
 
 	switch (size) {
-	case BaseImmovable::NONE: return m_sizes & sizeNone;
-	case BaseImmovable::SMALL: return m_sizes & sizeSmall;
+	case BaseImmovable::NONE:   return m_sizes & sizeNone;
+	case BaseImmovable::SMALL:  return m_sizes & sizeSmall;
 	case BaseImmovable::MEDIUM: return m_sizes & sizeMedium;
-	case BaseImmovable::BIG: return m_sizes & sizeBig;
+	case BaseImmovable::BIG:    return m_sizes & sizeBig;
 	default: throw wexception("FindNodeImmovableSize: bad size = %i", size);
 	}
 }

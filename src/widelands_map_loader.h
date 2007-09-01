@@ -46,7 +46,7 @@ struct Widelands_Map_Loader : public Map_Loader {
          return false;
 		}
 
-   private:
+private:
 	FileSystem & m_fs;
       std::string m_filename;
       Widelands_Map_Map_Object_Loader* m_mol;

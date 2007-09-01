@@ -1787,8 +1787,7 @@ Requeriments::Requeriments ()
 
 void Requeriments::set (tAttribute at, int min, int max)
 {
-	switch (at)
-	{
+	switch (at) {
 	case atrHP:
 		m_hp.min = min;
 								m_hp.max = max;
@@ -3629,8 +3628,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		rsp.is_worker = false;
 		rsp.is_soldier = false;
 
-		switch (req->get_type())
-		{
+		switch (req->get_type()) {
 		case Request::WARE:    rsp.is_item    = true; break;
 		case Request::WORKER:  rsp.is_worker  = true; break;
 		case Request::SOLDIER: rsp.is_soldier = true; break;

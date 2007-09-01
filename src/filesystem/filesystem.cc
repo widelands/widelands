@@ -337,7 +337,7 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 		canonpath+=*i+"/";
 
     canonpath.erase(canonpath.end() - 1); //remove trailing slash
-    
+
 #else // ifndef __WIN32__
 	// Still a stupid workaround: some paths still might be relative,
 	// but this is acceptable on windows, as long as all data is stored
@@ -346,7 +346,8 @@ const std::string FileSystem::FS_CanonicalizeName(const std::string path) const
 	bool absolute=false;
 	std::string canonpath;
 
-	 // Is a ":" at the second position? If yes, it is allready absolute ( like "C:\...")
+	//  Is a ":" at the second position? If yes, it is allready absolute (like
+	//  "C:\...").
 	if (path[1] == ':')
 		absolute=true;
 

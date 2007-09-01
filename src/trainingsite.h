@@ -40,7 +40,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 
 	int get_min_level(const tAttribute) const;
 	int get_max_level(const tAttribute) const;
-      private:
+private:
 	/** Maximum number of soldiers for a training site*/
 	int m_num_soldiers;
 	/** Whether this site can train hitpoints*/
@@ -86,7 +86,7 @@ class TrainingSite:public ProductionSite {
 	friend class Widelands_Map_Buildingdata_Data_Packet;
 	 MO_DESCR(TrainingSite_Descr);
 	friend class TrainingSite_Window;
-      public:
+public:
 	 TrainingSite(const TrainingSite_Descr &);
 	 virtual ~ TrainingSite();
 
@@ -125,11 +125,11 @@ class TrainingSite:public ProductionSite {
 	virtual void soldier_capacity_down() {
 		change_soldier_capacity(-1);
 	}
-      protected:
+protected:
 	virtual void change_soldier_capacity(int);
 	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);
 
-      private:
+private:
 	void request_soldier();
 	static void request_soldier_callback(Game * g, Request * rq, int ware, Worker * w, void *data);
 
@@ -143,7 +143,7 @@ class TrainingSite:public ProductionSite {
 	void drop_unupgradable_soldiers(Game * g);
 
 	void modif_priority(enum tAttribute, int);
-      private:
+private:
 	/** Open requests for soldiers. The soldiers can be under way or unavailable*/
 	std::vector < Request * >m_soldier_requests;
 

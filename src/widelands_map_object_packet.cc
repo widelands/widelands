@@ -38,7 +38,7 @@
 
 Widelands_Map_Object_Packet::~Widelands_Map_Object_Packet()
 {
-	while(loaders.size()) {
+	while (loaders.size()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
 	}
@@ -64,7 +64,7 @@ void Widelands_Map_Object_Packet::Read
 			if (!header)
 				break;
 
-			switch(header) {
+			switch (header) {
 			case Map_Object::header_Immovable:
 				loaders.insert(Immovable::load(egbase, ol, fr));
 				break;
@@ -81,9 +81,9 @@ void Widelands_Map_Object_Packet::Read
 				throw wexception("Unknown object header %u", header);
 			}
 		}
-	} catch(const std::exception& e) {
+	} catch (const std::exception & e) {
 		throw wexception("Loading map objects: %s", e.what());
-	} catch(...) {
+	} catch (...) {
 		throw;
 	}
 }
@@ -92,11 +92,17 @@ void Widelands_Map_Object_Packet::Read
 void Widelands_Map_Object_Packet::LoadFinish()
 {
 	// load_pointer stage
-	for(LoaderSet::const_iterator cit = loaders.begin(); cit != loaders.end(); ++cit)
+	for
+		(LoaderSet::const_iterator cit = loaders.begin();
+		 cit != loaders.end();
+		 ++cit)
 		(*cit)->load_pointers();
 
 	// load_finish stage
-	for(LoaderSet::const_iterator cit = loaders.begin(); cit != loaders.end(); ++cit)
+	for
+		(LoaderSet::const_iterator cit = loaders.begin();
+		 cit != loaders.end();
+		 ++cit)
 		(*cit)->load_finish();
 }
 
@@ -111,7 +117,11 @@ void Widelands_Map_Object_Packet::Write
 	fw.Unsigned8(CURRENT_PACKET_VERSION);
 
 	const Object_Manager::objmap_t& objs = egbase->objects().get_objects();
-	for(Object_Manager::objmap_t::const_iterator cit = objs.begin(); cit != objs.end(); ++cit) {
+	for
+		(Object_Manager::objmap_t::const_iterator cit = objs.begin();
+		 cit != objs.end();
+		 ++cit)
+	{
 		Map_Object* obj = cit->second;
 
 		// These checks can be eliminated and the object saver simplified

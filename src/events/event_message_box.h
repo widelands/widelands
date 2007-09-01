@@ -33,8 +33,7 @@ namespace UI {struct Panel;};
 /*
  * This event shows a message box
  */
-class Event_Message_Box : public Event, public TriggerReferencer {
-   public:
+struct Event_Message_Box : public Event, public TriggerReferencer {
      Event_Message_Box();
       ~Event_Message_Box();
 
@@ -78,9 +77,7 @@ class Event_Message_Box : public Event, public TriggerReferencer {
          Center_over,
 		};
 
-   protected:
-
-   private:
+private:
       struct Button_Descr {
          std::string name;
          Trigger_Null *trigger;

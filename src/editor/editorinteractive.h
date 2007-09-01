@@ -103,7 +103,7 @@ struct Editor_Interactive : public Interactive_Base {
       bool is_player_tribe_referenced(int);
       void set_need_save(bool t) {m_need_save=t;}
 
-   private:
+private:
       void toggle_buildhelp();
       void tool_menu_btn();
       void toolsize_menu_btn();

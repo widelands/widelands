@@ -38,14 +38,14 @@ struct Editor_Variables_Menu : public UI::UniqueWindow {
       Editor_Variables_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Variables_Menu();
 
-   private:
+private:
       Editor_Interactive *m_parent;
 	UI::Table<MapVariable &>          m_table;
 	UI::Button<Editor_Variables_Menu> m_button_new;
 	UI::Button<Editor_Variables_Menu> m_button_edit;
 	UI::Button<Editor_Variables_Menu> m_button_del;
 
-   private:
+private:
 	void insert_variable(MapVariable &);
 	void clicked_new ();
 	void clicked_edit();

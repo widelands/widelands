@@ -37,7 +37,7 @@ struct Editor_Main_Menu : public UI::UniqueWindow {
       Editor_Main_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Main_Menu();
 
-   private:
+private:
       Editor_Interactive *m_parent;
 
 	UI::UniqueWindow::Registry m_window_readme;

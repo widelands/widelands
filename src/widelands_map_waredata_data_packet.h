@@ -42,7 +42,7 @@ struct Widelands_Map_Waredata_Data_Packet : public Widelands_Map_Data_Packet {
 		 Editor_Game_Base*,
 		 Widelands_Map_Map_Object_Saver * const  = 0)
 		throw (_wexception);
-   private:
+private:
       void write_ware(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*, WareInstance*);
 };
 

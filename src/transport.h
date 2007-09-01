@@ -736,7 +736,7 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 		 Editor_Game_Base                &,
 		 Widelands_Map_Map_Object_Loader &);
 
-   private:
+private:
       bool     m_force_balance;
       int      m_player;
       Economy* m_economy;

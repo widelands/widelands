@@ -249,9 +249,9 @@ void S2_Map_Loader::load_s2mf_header()
 
     // This is not the name, this is the directory of the world, so please do not translate it.
 	switch (header.uses_world) {
-		case 0: m_map->set_world_name("greenland"); break;
-		case 1: m_map->set_world_name("blackland"); break;
-		case 2: m_map->set_world_name("winterland"); break;
+	case 0: m_map->set_world_name("greenland");  break;
+	case 1: m_map->set_world_name("blackland");  break;
+	case 2: m_map->set_world_name("winterland"); break;
 	}
 }
 
@@ -322,28 +322,31 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				char c = *pc;
 				c &= 0x1f;
 				switch (static_cast<int>(c)) {
-					case 0x00: c=0; break;
-					case 0x01: c=1; break;
-					case 0x02: c=2; break;
-					case 0x03: c=3; break;
-					case 0x04: c=4; break;
-					case 0x05: c=5; break;
+				case 0x00: c = 0; break;
+				case 0x01: c = 1; break;
+				case 0x02: c = 2; break;
+				case 0x03: c = 3; break;
+				case 0x04: c = 4; break;
+				case 0x05: c = 5; break;
 
-					case 0x08: c=6; break;
-					case 0x09: c=7; break;
-					case 0x0a: c=8; break;
-					case 0x0b: c=9; break;
-					case 0x0c: c=10; break;
-					case 0x0d: c=11; break;
-					case 0x0e: c=12; break;
-					case 0x0f: c=13; break;
+				case 0x08: c = 6; break;
+				case 0x09: c = 7; break;
+				case 0x0a: c = 8; break;
+				case 0x0b: c = 9; break;
+				case 0x0c: c = 10; break;
+				case 0x0d: c = 11; break;
+				case 0x0e: c = 12; break;
+				case 0x0f: c = 13; break;
 
-					case 0x10: c=14; break;
-					case 0x12: c=15; break;
+				case 0x10: c = 14; break;
+				case 0x12: c = 15; break;
 
-					case 0x07: c=4; break; // Unknown texture
-					case 0x13: c=4; break; // unknown texture!
-					default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
+				case 0x07: c = 4; break; // Unknown texture
+				case 0x13: c = 4; break; // unknown texture!
+				default:   c = 7;
+					cerr
+						<< "ERROR: Unknown texture1: " << hex << c << dec << " ("
+						<< x << "," << y << ") (defaults to water!)" << endl;
 				}
 				f->set_terrain_d(c);
 			}
@@ -365,28 +368,31 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				char c = *pc;
 				c &= 0x1f;
 				switch (static_cast<int>(c)) {
-					case 0x00: c=0; break;
-					case 0x01: c=1; break;
-					case 0x02: c=2; break;
-					case 0x03: c=3; break;
-					case 0x04: c=4; break;
-					case 0x05: c=5; break;
+				case 0x00: c =  0; break;
+				case 0x01: c =  1; break;
+				case 0x02: c =  2; break;
+				case 0x03: c =  3; break;
+				case 0x04: c =  4; break;
+				case 0x05: c =  5; break;
 
-					case 0x08: c=6; break;
-					case 0x09: c=7; break;
-					case 0x0a: c=8; break;
-					case 0x0b: c=9; break;
-					case 0x0c: c=10; break;
-					case 0x0d: c=11; break;
-					case 0x0e: c=12; break;
-					case 0x0f: c=13; break;
+				case 0x08: c =  6; break;
+				case 0x09: c =  7; break;
+				case 0x0a: c =  8; break;
+				case 0x0b: c =  9; break;
+				case 0x0c: c = 10; break;
+				case 0x0d: c = 11; break;
+				case 0x0e: c = 12; break;
+				case 0x0f: c = 13; break;
 
-					case 0x10: c=14; break;
-					case 0x12: c=15; break;
+				case 0x10: c = 14; break;
+				case 0x12: c = 15; break;
 
-					case 0x07: c=4; break; // Unknown texture
-					case 0x13: c=4; break; // unknown texture!
-					default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
+				case 0x07: c = 4; break; // Unknown texture
+				case 0x13: c = 4; break; // unknown texture!
+				default:   c = 7;
+					cerr
+						<< "ERROR: Unknown texture1: " << hex << c << dec << " ("
+						<< x << "," << y << ") (defaults to water!)" << endl;
 				}
 				f->set_terrain_r(c);
 			}
@@ -464,18 +470,17 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				const char *bobname = 0;
 
 				switch (section[i]) {
-					case 0:
-						break;
-					case 0x01: bobname = "bunny"; break;
-					case 0x02: bobname = "fox"; break;
-					case 0x03: bobname = "reindeer"; break;
-					case 0x04: bobname = "deer"; break;
-					case 0x05: bobname = "duck"; break;
-					case 0x06: bobname = "sheep"; break;
-					case 0x07: bobname = "deer"; break;
-					case 0x08: bobname = "duck"; break;
+				case 0: break;
+				case 0x01: bobname = "bunny";    break;
+				case 0x02: bobname = "fox";      break;
+				case 0x03: bobname = "reindeer"; break;
+				case 0x04: bobname = "deer";     break;
+				case 0x05: bobname = "duck";     break;
+				case 0x06: bobname = "sheep";    break;
+				case 0x07: bobname = "deer";     break;
+				case 0x08: bobname = "duck";     break;
 					// case 0x09: bobname = "donkey"; break; -> Not implemented, yet.
-					default:
+				default:
 					cerr << "Unsupported animal: " << static_cast<int>(section[i]) << endl;
 						break;
 				}
@@ -569,11 +574,11 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				char c = *pc;
 
 				switch (c & 0xF8) {
-				case 0x40: res = "coal"; amount=c&7; break;
-				case 0x48: res = "iron"; amount=c&7; break;
-				case 0x50: res = "gold"; amount=c&7; break;
-				case 0x59: res = "granit"; amount=c&7; break;
-				default: res = ""; amount=0;
+				case 0x40: res = "coal";   amount = c & 7; break;
+				case 0x48: res = "iron";   amount = c & 7; break;
+				case 0x50: res = "gold";   amount = c & 7; break;
+				case 0x59: res = "granit"; amount = c & 7; break;
+				default:   res = "";       amount = 0;
 				}
 
             uchar nres=0;
@@ -638,12 +643,12 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				c = bobs[index];
 				if (buildings[index] == 0x78) {
 					switch (c) {
-						case BOB_STONE1: bobname = "stones1"; break;
-						case BOB_STONE2: bobname = "stones2"; break;
-						case BOB_STONE3: bobname = "stones3"; break;
-						case BOB_STONE4: bobname = "stones4"; break;
-						case BOB_STONE5: bobname = "stones5"; break;
-						case BOB_STONE6: bobname = "stones6"; break;
+					case BOB_STONE1:        bobname = "stones1"; break;
+					case BOB_STONE2:        bobname = "stones2"; break;
+					case BOB_STONE3:        bobname = "stones3"; break;
+					case BOB_STONE4:        bobname = "stones4"; break;
+					case BOB_STONE5:        bobname = "stones5"; break;
+					case BOB_STONE6:        bobname = "stones6"; break;
 						default: break;
 					}
 					if (bobname) {
@@ -656,24 +661,22 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				}
 
 				switch (c) {
-					case BOB_NONE :
-						// DO nothing
-						break;
+				case BOB_NONE : break; // DO nothing
 
-					case BOB_PEBBLE1: bobname = "pebble1"; break;
-					case BOB_PEBBLE2: bobname = "pebble2"; break;
-					case BOB_PEBBLE3: bobname = "pebble3"; break;
-					case BOB_PEBBLE4: bobname = "pebble4"; break;
-					case BOB_PEBBLE5: bobname = "pebble5"; break;
-					case BOB_PEBBLE6: bobname = "pebble6"; break;
+				case BOB_PEBBLE1:          bobname = "pebble1";   break;
+				case BOB_PEBBLE2:          bobname = "pebble2";   break;
+				case BOB_PEBBLE3:          bobname = "pebble3";   break;
+				case BOB_PEBBLE4:          bobname = "pebble4";   break;
+				case BOB_PEBBLE5:          bobname = "pebble5";   break;
+				case BOB_PEBBLE6:          bobname = "pebble6";   break;
 
-					case BOB_MUSHROOM1: bobname = "mushroom1"; break;
-					case BOB_MUSHROOM2: bobname = "mushroom2"; break;
+				case BOB_MUSHROOM1:        bobname = "mushroom1"; break;
+				case BOB_MUSHROOM2:        bobname = "mushroom2"; break;
 
-					case BOB_DEADTREE1: bobname = "deadtree1"; break;
-					case BOB_DEADTREE2: bobname = "deadtree2"; break;
-					case BOB_DEADTREE3: bobname = "deadtree3"; break;
-					case BOB_DEADTREE4: bobname = "deadtree4"; break;
+				case BOB_DEADTREE1:        bobname = "deadtree1"; break;
+				case BOB_DEADTREE2:        bobname = "deadtree2"; break;
+				case BOB_DEADTREE3:        bobname = "deadtree3"; break;
+				case BOB_DEADTREE4:        bobname = "deadtree4"; break;
 
                     // May it be, that here are the different growing stats?
                     // BOB_TREE1 = tiny tree1
@@ -681,70 +684,70 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
                     // BOB_TREE3 = medium tree1
                     // BOB_TREE4 = tree1
                     // ?????????????????
-					case BOB_TREE1:
-					case BOB_TREE2:
-					case BOB_TREE3:
-					case BOB_TREE4: bobname = "tree1"; break;
+				case BOB_TREE1:
+				case BOB_TREE2:
+				case BOB_TREE3:
+				case BOB_TREE4:            bobname = "tree1";     break;
 
-					case BOB_TREE5:
-					case BOB_TREE6:
-					case BOB_TREE7:
-					case BOB_TREE8: bobname = "tree2"; break;
+				case BOB_TREE5:
+				case BOB_TREE6:
+				case BOB_TREE7:
+				case BOB_TREE8:            bobname = "tree2";     break;
 
-					case BOB_TREE9:
-					case BOB_TREE10:
-					case BOB_TREE11:
-					case BOB_TREE12: bobname = "tree3"; break;
+				case BOB_TREE9:
+				case BOB_TREE10:
+				case BOB_TREE11:
+				case BOB_TREE12:           bobname = "tree3";     break;
 
-					case BOB_TREE13:
-					case BOB_TREE14:
-					case BOB_TREE15:
-					case BOB_TREE16: bobname = "tree4"; break;
+				case BOB_TREE13:
+				case BOB_TREE14:
+				case BOB_TREE15:
+				case BOB_TREE16:           bobname = "tree4";     break;
 
-					case BOB_TREE17:
-					case BOB_TREE18:
-					case BOB_TREE19:
-					case BOB_TREE20: bobname = "tree6"; break;
+				case BOB_TREE17:
+				case BOB_TREE18:
+				case BOB_TREE19:
+				case BOB_TREE20:           bobname = "tree6";     break;
 
-					case BOB_TREE21:
-					case BOB_TREE22:
-					case BOB_TREE23:
-					case BOB_TREE24: bobname = "tree6"; break;
+				case BOB_TREE21:
+				case BOB_TREE22:
+				case BOB_TREE23:
+				case BOB_TREE24:           bobname = "tree6";     break;
 
-					case BOB_TREE25:
-					case BOB_TREE26:
-					case BOB_TREE27:
-					case BOB_TREE28: bobname = "tree7"; break;
+				case BOB_TREE25:
+				case BOB_TREE26:
+				case BOB_TREE27:
+				case BOB_TREE28:           bobname = "tree7";     break;
 
-					case BOB_TREE29:
-					case BOB_TREE30:
-					case BOB_TREE31:
-					case BOB_TREE32: bobname = "tree8"; break;
+				case BOB_TREE29:
+				case BOB_TREE30:
+				case BOB_TREE31:
+				case BOB_TREE32:           bobname = "tree8";     break;
 
-					case BOB_GRASS1: bobname = "grass1"; break;
-					case BOB_GRASS2: bobname = "grass2"; break;
-					case BOB_GRASS3: bobname = "grass3"; break;
+				case BOB_GRASS1:           bobname = "grass1";    break;
+				case BOB_GRASS2:           bobname = "grass2";    break;
+				case BOB_GRASS3:           bobname = "grass3";    break;
 
-					case BOB_STANDING_STONES1: bobname = "sstones1"; break;
-					case BOB_STANDING_STONES2: bobname = "sstones2"; break;
-					case BOB_STANDING_STONES3: bobname = "sstones3"; break;
-					case BOB_STANDING_STONES4: bobname = "sstones4"; break;
-					case BOB_STANDING_STONES5: bobname = "sstones5"; break;
-					case BOB_STANDING_STONES6: bobname = "sstones6"; break;
-					case BOB_STANDING_STONES7: bobname = "sstones7"; break;
+				case BOB_STANDING_STONES1: bobname = "sstones1";  break;
+				case BOB_STANDING_STONES2: bobname = "sstones2";  break;
+				case BOB_STANDING_STONES3: bobname = "sstones3";  break;
+				case BOB_STANDING_STONES4: bobname = "sstones4";  break;
+				case BOB_STANDING_STONES5: bobname = "sstones5";  break;
+				case BOB_STANDING_STONES6: bobname = "sstones6";  break;
+				case BOB_STANDING_STONES7: bobname = "sstones7";  break;
 
-					case BOB_SKELETON1: bobname = "skeleton1"; break;
-					case BOB_SKELETON2: bobname = "skeleton2"; break;
-					case BOB_SKELETON3: bobname = "skeleton3"; break;
+				case BOB_SKELETON1:        bobname = "skeleton1"; break;
+				case BOB_SKELETON2:        bobname = "skeleton2"; break;
+				case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
-					case BOB_CACTUS1: bobname = "cactus1"; break;
-					case BOB_CACTUS2: bobname = "cactus2"; break;
+				case BOB_CACTUS1:          bobname = "cactus1";   break;
+				case BOB_CACTUS2:          bobname = "cactus2";   break;
 
-					case BOB_BUSH1: bobname = "bush1"; break;
-					case BOB_BUSH2: bobname = "bush2"; break;
-					case BOB_BUSH3: bobname = "bush3"; break;
-					case BOB_BUSH4: bobname = "bush4"; break;
-					case BOB_BUSH5: bobname = "bush5"; break;
+				case BOB_BUSH1:            bobname = "bush1";     break;
+				case BOB_BUSH2:            bobname = "bush2";     break;
+				case BOB_BUSH3:            bobname = "bush3";     break;
+				case BOB_BUSH4:            bobname = "bush4";     break;
+				case BOB_BUSH5:            bobname = "bush5";     break;
 
 				default:
 					cerr << "Unknown bob " << static_cast<uint>(c) << endl;

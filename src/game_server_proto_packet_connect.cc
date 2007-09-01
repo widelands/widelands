@@ -58,7 +58,7 @@ void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* g
    char buffer[1024];
 
 	switch (retcode) {
-      case WELCOME: // Everything is ok
+	case WELCOME: // Everything is ok
          break;
 
 	case PROTOCOL_TO_OLD:

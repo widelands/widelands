@@ -791,10 +791,10 @@ Map_Object::Loader* Immovable::load
 
 		loader->init(eg, mol, imm);
 		loader->load(fr);
-	} catch(const std::exception& e) {
+	} catch (const std::exception & e) {
 		delete loader;
 		throw wexception("Loading Immovable: %s", e.what());
-	} catch(...) {
+	} catch (...) {
 		delete loader;
 		throw;
 	}

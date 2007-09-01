@@ -142,7 +142,7 @@ struct Overlay_Manager {
 		return 0;
 	}
 
-   private:
+private:
 	struct Registered_Overlays {
 		Registered_Overlays
 			(const Job_Id Jobid,

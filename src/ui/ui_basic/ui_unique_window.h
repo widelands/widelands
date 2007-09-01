@@ -45,7 +45,7 @@ struct UniqueWindow : public Window {
 
       inline bool get_usedefaultpos() {return m_usedefaultpos;}
 
-   private:
+private:
 	Registry * m_registry;
 	bool       m_usedefaultpos;
 };

@@ -1119,14 +1119,13 @@ ProductionSite UI IMPLEMENTATION
 /*
  * ProductionSite_Window_ListWorkerWindow
  */
-class ProductionSite_Window_ListWorkerWindow : public UI::Window {
-   public:
+struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
       ProductionSite_Window_ListWorkerWindow(Interactive_Player*, ProductionSite* ps);
       virtual ~ProductionSite_Window_ListWorkerWindow();
 
       virtual void think();
 
-   private:
+private:
       void update();
       void fill_list();
 

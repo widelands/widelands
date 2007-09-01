@@ -34,7 +34,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
       Game_Main_Menu_Save_Game(Interactive_Player* plr, UI::UniqueWindow::Registry* registry) ;
       virtual ~Game_Main_Menu_Save_Game();
 
-   private:
+private:
 	void clicked_ok    ();
 	void selected      (uint);
 	void double_clicked(uint);

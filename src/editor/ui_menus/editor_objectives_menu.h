@@ -42,14 +42,13 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
       Editor_Objectives_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Objectives_Menu();
 
-   private:
+private:
       Editor_Interactive *m_parent;
 	UI::Table<MapObjective &>            m_table;
 	UI::Button<Editor_Objectives_Menu> * m_edit_button;
 	UI::Button<Editor_Objectives_Menu> * m_delete_button;
       UI::Textarea         *m_trigger;
 
-   private:
 	void insert_objective(MapObjective &);
 	void clicked_ok  ();
 	void clicked_new ();

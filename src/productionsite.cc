@@ -565,7 +565,7 @@ void ProductionSite::program_act(Game* g)
 		return;
 	}
 	switch (action->type) {
-		case ProductionAction::actSleep:
+	case ProductionAction::actSleep:
 			molog("  Sleep(%i)\n", action->iparam1);
 
 			program_step();
@@ -573,7 +573,7 @@ void ProductionSite::program_act(Game* g)
 			m_program_time = schedule_act(g, action->iparam1);
 			return;
 
-		case ProductionAction::actAnimate:
+	case ProductionAction::actAnimate:
 			molog("  Animate(%i, %i)\n", action->iparam1, action->iparam2);
 
 			start_animation(g, action->iparam1);
@@ -583,13 +583,13 @@ void ProductionSite::program_act(Game* g)
 			m_program_time = schedule_act(g, action->iparam2);
 			return;
 
-		case ProductionAction::actWorker:
+	case ProductionAction::actWorker:
 			molog("  Worker(%s)\n", action->sparam1.c_str());
 
 			m_workers[0]->update_task_buildingwork(g);  // Always main worker is doing stuff
 			return;
 
-		case ProductionAction::actConsume: {
+	case ProductionAction::actConsume: {
 			std::vector<std::string> wares;
 			split_string(action->sparam1, wares, ",");
 
@@ -637,7 +637,7 @@ void ProductionSite::program_act(Game* g)
 			return;
 		}
 
-		case ProductionAction::actCheck: {
+	case ProductionAction::actCheck: {
 			std::vector<std::string> wares;
 			split_string(action->sparam1, wares, ",");
 
@@ -685,16 +685,16 @@ void ProductionSite::program_act(Game* g)
 			m_program_timer = true;
 			m_program_time = schedule_act(g, 10);
 			return;
-		}
+	}
 
-		case ProductionAction::actProduce: {
+	case ProductionAction::actProduce: {
 			molog("  Produce(%s)\n", action->sparam1.c_str());
 
 			m_workers[0]->update_task_buildingwork(g);
 			return;
-		}
+	}
 
-		case ProductionAction::actMine: {
+	case ProductionAction::actMine: {
 			Map & map = *g->get_map();
 			uchar res;
 
@@ -817,16 +817,16 @@ void ProductionSite::program_act(Game* g)
 			m_program_timer = true;
 			m_program_time = schedule_act(g, 10);
 			return;
-		}
+	}
 
-		case ProductionAction::actCall:
+	case ProductionAction::actCall:
 			molog("  Call %s\n", action->sparam1.c_str());
 
 			program_step();
 			program_start(g, action->sparam1);
 			return;
 
-		case ProductionAction::actSet:
+	case ProductionAction::actSet:
 			molog("  Set %08X, unset %08X\n", action->iparam1, action->iparam2);
 
 			state->flags = (state->flags | action->iparam1) & ~action->iparam2;
@@ -836,7 +836,7 @@ void ProductionSite::program_act(Game* g)
 			m_program_time = schedule_act(g, 10);
 			return;
 
-		case ProductionAction::actCheckSoldier: {
+	case ProductionAction::actCheckSoldier: {
 			const std::vector<Soldier *> & soldiers = get_soldiers();
 			const std::vector<Soldier *>::const_iterator soldiers_end =
 				soldiers.end();
@@ -890,7 +890,7 @@ void ProductionSite::program_act(Game* g)
 			return;
 		}
 
-		case ProductionAction::actTrain: {
+	case ProductionAction::actTrain: {
 			const std::vector<Soldier *> & soldiers = get_soldiers();
 			const std::vector<Soldier *>::const_iterator soldiers_end =
 				soldiers.end();
@@ -955,10 +955,9 @@ void ProductionSite::program_act(Game* g)
 			m_program_timer = true;
 			m_program_time = schedule_act(g, 10);
 			return;
-		}
+	}
 
-		case ProductionAction::actPlayFX:
-		{
+	case ProductionAction::actPlayFX: {
 			g_sound_handler.play_fx(action->sparam1, m_position, action->iparam1);
 
 			program_step();

@@ -134,12 +134,12 @@ called, when button get clicked
 ===========
 */
 void Main_Menu_New_Map::button_clicked(int n) {
-   switch (n) {
-      case 0: m_w++; break;
-      case 1: m_w--; break;
-      case 2: m_h++; break;
-      case 3: m_h--; break;
-      case 4:
+	switch (n) {
+	case 0: ++m_w; break;
+	case 1: --m_w; break;
+	case 2: ++m_h; break;
+	case 3: --m_h; break;
+	case 4:
               ++m_currentworld;
               if (m_currentworld==m_worlds->size()) m_currentworld=0;
               m_world->set_title(World::World((*m_worlds)[m_currentworld].c_str()).get_name());

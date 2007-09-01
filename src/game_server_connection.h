@@ -45,8 +45,7 @@ typedef void (*UserInfo_Handler)(std::string, std::string, std::string, void*);
 typedef void (*ChatMessage_Handler)(std::string, std::string, uchar, void*);
 typedef void (*Disconnet_Handler)(void*);
 
-class Game_Server_Connection {
-   public:
+struct Game_Server_Connection {
       Game_Server_Connection(std::string host, uint port);
       ~Game_Server_Connection();
 
@@ -80,7 +79,7 @@ class Game_Server_Connection {
       void set_room(const char* name);
       const char* get_room() {return m_room.c_str();}
 
-   private:
+private:
       // Connection data
       std::map<uint, Game_Server_Protocol_Packet*> m_pending_packets;
       TCPsocket m_socket;

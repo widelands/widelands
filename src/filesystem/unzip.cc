@@ -1063,14 +1063,12 @@ extern int ZEXPORT unzOpenCurrentFile3 (unzFile file, int* method, int* level, i
 	if (method != NULL)
 		*method = static_cast<int>(s->cur_file_info.compression_method);
 
-    if (level!=NULL)
-    {
+	if (level != NULL) {
         *level = 6;
-        switch (s->cur_file_info.flag & 0x06)
-        {
-          case 6 : *level = 1; break;
-          case 4 : *level = 2; break;
-          case 2 : *level = 9; break;
+		switch (s->cur_file_info.flag & 0x06) {
+		case 6 : *level = 1; break;
+		case 4 : *level = 2; break;
+		case 2 : *level = 9; break;
 		}
 	}
 
@@ -2739,18 +2737,17 @@ long ZCALLBACK fseek_file_func (voidpf, voidpf stream, uLong offset, int origin)
 {
     int fseek_origin=0;
     long ret;
-    switch (origin)
-    {
-    case ZLIB_FILEFUNC_SEEK_CUR :
+	switch (origin) {
+	case ZLIB_FILEFUNC_SEEK_CUR :
         fseek_origin = SEEK_CUR;
         break;
-    case ZLIB_FILEFUNC_SEEK_END :
+	case ZLIB_FILEFUNC_SEEK_END :
         fseek_origin = SEEK_END;
         break;
-    case ZLIB_FILEFUNC_SEEK_SET :
+	case ZLIB_FILEFUNC_SEEK_SET :
         fseek_origin = SEEK_SET;
         break;
-    default: return -1;
+	default: return -1;
 	}
     ret = 0;
     fseek((FILE *)stream, offset, fseek_origin);

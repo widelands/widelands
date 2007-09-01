@@ -46,7 +46,6 @@ struct WUIPlot_Area : public UI::Panel {
          PLOTMODE_ABSOLUTE
 		};
 
-   public:
       WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h);
       ~WUIPlot_Area();
 
@@ -64,7 +63,7 @@ struct WUIPlot_Area : public UI::Panel {
       // set plotmode
       void set_plotmode(int id) {m_plotmode = id;}
 
-   private:
+private:
       struct __plotdata {
          const std::vector<uint>* dataset;
          bool  showplot;

@@ -47,7 +47,7 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
       static const int MAX_BUTTONS=4;
 
       void update();

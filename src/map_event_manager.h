@@ -65,7 +65,7 @@ struct MapEventManager {
 	Event & get_event_by_nr(const Index i) const
 	{assert(i < m_events.size()); return *m_events[i];}
 
-   private:
+private:
 	event_vector m_events;
 };
 

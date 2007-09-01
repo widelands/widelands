@@ -42,7 +42,7 @@ Here, you can select the tool you wish to use the next time
 struct Editor_Toolsize_Menu : public UI::UniqueWindow {
       Editor_Toolsize_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
 
-   private:
+private:
 	void change_radius(const bool increase);
 
 	UI::Textarea                                   m_textarea;

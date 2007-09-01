@@ -51,7 +51,7 @@ struct Edit_Box : private Basic_Button {
 protected:
 	void send_signal_clicked() const {};
 
-   private:
+private:
      bool m_keyboard_grabbed;
      uint m_maxchars;
      std::string m_text, m_lasttext;

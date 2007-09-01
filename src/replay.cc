@@ -141,8 +141,7 @@ Command* ReplayReader::GetNextCommand(uint time)
 		unsigned char pkt = m_cmdlog->Unsigned8();
 
 		switch (pkt) {
-		case pkt_playercommand:
-		{
+		case pkt_playercommand: {
 			m_replaytime = m_cmdlog->Unsigned32();
 
 			uint duetime = m_cmdlog->Unsigned32();
@@ -154,8 +153,7 @@ Command* ReplayReader::GetNextCommand(uint time)
 			return cmd;
 		}
 
-		case pkt_syncreport:
-		{
+		case pkt_syncreport: {
 			uint duetime = m_cmdlog->Unsigned32();
 			md5_checksum hash;
 			m_cmdlog->Data(hash.data, sizeof(hash.data));
@@ -163,8 +161,7 @@ Command* ReplayReader::GetNextCommand(uint time)
 			return new Cmd_ReplaySyncRead(duetime, hash);
 		}
 
-		case pkt_end:
-		{
+		case pkt_end: {
 			uint endtime = m_cmdlog->Unsigned32();
 			log("REPLAY: End of replay (gametime: %u)\n", endtime);
 			delete m_cmdlog;
@@ -239,7 +236,7 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 		game->cleanup_for_load(true, true);
 		gl.load_game();
 		game->postload();
-	} catch(...) {
+	} catch (...) {
 		delete fs;
 		throw;
 	}

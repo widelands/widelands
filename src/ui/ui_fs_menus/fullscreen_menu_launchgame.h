@@ -34,8 +34,18 @@ class Map_Loader;
 /**
  * Fullscreen menu to select map and to set map options.
  */
-class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
-    private:
+struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
+	Fullscreen_Menu_LaunchGame(Game *, NetGame*, Map_Loader**);
+
+	void think();
+
+	void refresh();
+
+	void select_map();
+	void back_clicked();
+	void start_clicked();
+
+private:
 	Game                                 * m_game;
 	NetGame                              * m_netgame;
 	Map_Loader *                         * m_ml;
@@ -48,17 +58,6 @@ class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
 
 	bool                    m_is_scenario;
-
-    public:
-	Fullscreen_Menu_LaunchGame(Game *, NetGame*, Map_Loader**);
-
-	void think();
-
-	void refresh();
-
-	void select_map();
-	void back_clicked();
-	void start_clicked();
 };
 
 

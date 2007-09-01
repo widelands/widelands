@@ -100,7 +100,7 @@ struct DirAnimations {
 	uint get_animation(const int dir) const throw ()
 			{return m_animations[dir - 1];}
 
-	private:
+private:
 		uint m_animations[6];
 };
 

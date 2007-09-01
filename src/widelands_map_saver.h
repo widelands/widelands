@@ -46,7 +46,7 @@ struct Widelands_Map_Saver {
       void save() throw(_wexception) ;
       inline Widelands_Map_Map_Object_Saver* get_map_object_saver() {return m_mos;}
 
-   private:
+private:
       Editor_Game_Base* m_egbase;
 	FileSystem & m_fs;
       Widelands_Map_Map_Object_Saver* m_mos;

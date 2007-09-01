@@ -39,8 +39,7 @@ struct Trigger_Descr {
  * ids and creates the correct option dialog and (of course) trigger
  * for each trigger-id
  */
-class Trigger_Factory {
-   public:
+struct Trigger_Factory {
       static Trigger* get_correct_trigger(const char* id);
       static Trigger* make_trigger_with_option_dialog(const char* id, Editor_Interactive*, Trigger*);
 

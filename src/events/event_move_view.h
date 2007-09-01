@@ -28,8 +28,7 @@ class Editor_Game_Base;
 /*
  * This event shows a message box
  */
-class Event_Move_View : public Event {
-   public:
+struct Event_Move_View : public Event {
      Event_Move_View();
       ~Event_Move_View();
 
@@ -46,7 +45,7 @@ class Event_Move_View : public Event {
       inline void set_coords(Coords pt) {m_pt=pt;}
       inline Coords get_coords() {return m_pt;}
 
-   private:
+private:
       Coords m_pt;
 };
 

@@ -24,8 +24,7 @@
 
 class Editor_Interactive;
 
-class Editor : public Editor_Game_Base {
-      public:
+struct Editor : public Editor_Game_Base {
          Editor();
          ~Editor();
 
@@ -37,7 +36,7 @@ class Editor : public Editor_Game_Base {
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t) {}
 	virtual void player_field_notification (const FCoords&, losegain_t) {}
 
-      private:
+private:
          int m_realtime;
 };
 

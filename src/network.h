@@ -90,7 +90,7 @@ struct NetGame {
 
 	virtual void syncreport (const md5_checksum&)=0;
 
-    protected:
+protected:
 	void disconnect_player (int);
 
 	enum {
@@ -136,7 +136,7 @@ struct NetHost:public NetGame {
 
 	virtual void syncreport (const md5_checksum&);
 
-    private:
+private:
 	void send_game_message (const char*);
 	void send_chat_message_int (const Chat_Message);
 	void send_player_info ();
@@ -170,8 +170,7 @@ struct NetHost:public NetGame {
 	uint                        pongs_received;
 };
 
-class NetClient:public NetGame {
-    public:
+struct NetClient:public NetGame {
 	NetClient (IPaddress*);
 	virtual ~NetClient ();
 
@@ -185,7 +184,7 @@ class NetClient:public NetGame {
 
 	virtual void syncreport (const md5_checksum&);
 
-    private:
+private:
 	void disconnect ();
 
 	TCPsocket        sock;
@@ -249,7 +248,7 @@ struct Deserializer : public StreamRead {
 
 	void getstr (char*, int);
 
-    private:
+private:
 	std::queue<unsigned char> queue;
 };
 

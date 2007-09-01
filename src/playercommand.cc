@@ -63,31 +63,21 @@ PlayerCommand::~PlayerCommand ()
 PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 {
 	switch (des.Unsigned8()) {
-		case PLCMD_BULLDOZE:
-			return new Cmd_Bulldoze(des);
-		case PLCMD_BUILD:
-			return new Cmd_Build(des);
-		case PLCMD_BUILDFLAG:
-			return new Cmd_BuildFlag(des);
-		case PLCMD_BUILDROAD:
-			return new Cmd_BuildRoad(des);
-		case PLCMD_FLAGACTION:
-			return new Cmd_FlagAction(des);
-		case PLCMD_STARTSTOPBUILDING:
-			return new Cmd_StartStopBuilding(des);
-		case PLCMD_ENHANCEBUILDING:
-			return new Cmd_EnhanceBuilding(des);
-		case PLCMD_CHANGETRAININGOPTIONS:
-			return new Cmd_ChangeTrainingOptions(des);
-		case PLCMD_DROPSOLDIER:
-			return new Cmd_DropSoldier(des);
-		case PLCMD_CHANGESOLDIERCAPACITY:
-			return new Cmd_ChangeSoldierCapacity(des);
+	case PLCMD_BULLDOZE:              return new Cmd_Bulldoze             (des);
+	case PLCMD_BUILD:                 return new Cmd_Build                (des);
+	case PLCMD_BUILDFLAG:             return new Cmd_BuildFlag            (des);
+	case PLCMD_BUILDROAD:             return new Cmd_BuildRoad            (des);
+	case PLCMD_FLAGACTION:            return new Cmd_FlagAction           (des);
+	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding    (des);
+	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding      (des);
+	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
+	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
+	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
    ///   TESTING STUFF
-      case PLCMD_ENEMYFLAGACTION:
-			return new Cmd_EnemyFlagAction(des);
-		default:
-			throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction      (des);
+	default:
+		throw wexception
+			("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
 }
 

@@ -143,28 +143,26 @@ void NetGGZ::data()
 		return;
 	}
 
-	switch (op)
-	{
-		case op_greeting:
+	switch (op) {
+	case op_greeting:
 			ggz_read_string_alloc(fd, &greeter);
 			ggz_read_int(fd, &greeterversion);
 			log("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
 			ggz_free(greeter);
-			break;
-		case op_request_ip:
+		break;
+	case op_request_ip:
 			log("GGZ ## ip request!\n");
 			snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
 			ggz_write_int(fd, op_reply_ip);
 			ggz_write_string(fd, ipaddress);
-			break;
-		case op_broadcast_ip:
+		break;
+	case op_broadcast_ip:
 			ggz_read_string_alloc(fd, &ipstring);
 			log("GGZ ## ip broadcast: '%s'\n", ipstring);
 			ip_address = ggz_strdup(ipstring);
 			ggz_free(ipstring);
-			break;
-		default:
-			log("GGZ ## opcode unknown!\n");
+		break;
+	default: log("GGZ ## opcode unknown!\n");
 	}
 #endif
 }
@@ -329,27 +327,26 @@ void NetGGZ::event_server(unsigned int id, const void *cbdata) {
 	int num, i;
 	int joined;
 
-	switch (id)
-	{
-		case GGZ_CONNECTED:
+	switch (id) {
+	case GGZ_CONNECTED:
 			log("GGZCORE ## -- connected\n");
 			break;
-		case GGZ_NEGOTIATED:
+	case GGZ_NEGOTIATED:
 			log("GGZCORE ## -- negotiated\n");
 			ggzcore_server_login(ggzserver);
-			break;
-		case GGZ_LOGGED_IN:
+		break;
+	case GGZ_LOGGED_IN:
 			log("GGZCORE ## -- logged in\n");
 			ggzcore_server_list_gametypes(ggzserver, 0);
 			ggzcore_server_list_rooms(ggzserver, -1, 1);
-			break;
-		case GGZ_ENTERED:
+		break;
+	case GGZ_ENTERED:
 			log("GGZCORE ## -- entered\n");
 			room = ggzcore_server_get_cur_room(ggzserver);
 			ggzcore_room_add_event_hook(room, GGZ_TABLE_LIST, &NetGGZ::callback_room);
 			ggzcore_room_list_tables(room, -1, 0);
-			break;
-		case GGZ_ROOM_LIST:
+		break;
+	case GGZ_ROOM_LIST:
 			log("GGZCORE ## -- (room list)\n");
 			num = ggzcore_server_get_num_rooms(ggzserver);
 			joined = 0;
@@ -375,30 +372,30 @@ void NetGGZ::event_server(unsigned int id, const void *cbdata) {
 			{
 				log("GGZCORE ## couldn't find room! :(\n");
 			}
-			break;
-		case GGZ_TYPE_LIST:
+		break;
+	case GGZ_TYPE_LIST:
 			log("GGZCORE ## -- (type list)\n");
-			break;
-		case GGZ_CHANNEL_CONNECTED:
+		break;
+	case GGZ_CHANNEL_CONNECTED:
 			log("GGZCORE ## -- channel connected\n");
 			channelfd = ggzcore_server_get_channel(ggzserver);
-			break;
+		break;
 		case GGZ_CHANNEL_READY:
 			log("GGZCORE ## -- channel ready\n");
 			game = ggzcore_server_get_cur_game(ggzserver);
 			ggzcore_game_set_server_fd(game, channelfd);
 			channelfd = -1;
-			break;
-		case GGZ_CONNECT_FAIL:
-		case GGZ_NEGOTIATE_FAIL:
-		case GGZ_LOGIN_FAIL:
-		case GGZ_ENTER_FAIL:
-		case GGZ_CHANNEL_FAIL:
-		case GGZ_NET_ERROR:
-		case GGZ_PROTOCOL_ERROR:
+		break;
+	case GGZ_CONNECT_FAIL:
+	case GGZ_NEGOTIATE_FAIL:
+	case GGZ_LOGIN_FAIL:
+	case GGZ_ENTER_FAIL:
+	case GGZ_CHANNEL_FAIL:
+	case GGZ_NET_ERROR:
+	case GGZ_PROTOCOL_ERROR:
 			log("GGZCORE ## -- error! (%s) :(\n", (char*)cbdata);
 			ggzcore_login = false;
-			break;
+		break;
 	}
 #endif
 }
@@ -410,9 +407,8 @@ void NetGGZ::event_room(unsigned int id, const void *cbdata) {
 	GGZTable *table;
 	const char *desc;
 
-	switch (id)
-	{
-		case GGZ_TABLE_LIST:
+	switch (id) {
+	case GGZ_TABLE_LIST:
 			log("GGZCORE/room ## -- table list\n");
 			room = ggzcore_server_get_cur_room(ggzserver);
 			num = ggzcore_room_get_num_tables(room);
@@ -426,7 +422,7 @@ void NetGGZ::event_room(unsigned int id, const void *cbdata) {
 			}
 			ggzcore_login = false;
 			ggzcore_ready = true;
-			break;
+		break;
 	}
 #endif
 }
@@ -438,9 +434,8 @@ void NetGGZ::event_game(unsigned int id, const void *cbdata) {
 	GGZTable *table;
 	GGZGameType *gametype;
 
-	switch (id)
-	{
-		case GGZ_GAME_PLAYING:
+	switch (id) {
+	case GGZ_GAME_PLAYING:
 			log("GGZCORE/game ## -- playing\n");
 			room = ggzcore_server_get_cur_room(ggzserver);
 			if (tableid == -1)
@@ -455,19 +450,19 @@ void NetGGZ::event_game(unsigned int id, const void *cbdata) {
 			}
 			else ggzcore_room_join_table(room, tableid, 0);
 			break;
-		case GGZ_GAME_LAUNCHED:
+	case GGZ_GAME_LAUNCHED:
 			log("GGZCORE/game ## -- launched\n");
 			game = ggzcore_server_get_cur_game(ggzserver);
 			gamefd = ggzcore_game_get_control_fd(game);
 			init();
 			connect();
 			break;
-		case GGZ_GAME_NEGOTIATED:
+	case GGZ_GAME_NEGOTIATED:
 			log("GGZCORE/game ## -- negotiated\n");
 			ggzcore_server_create_channel(ggzserver);
 			break;
-		case GGZ_GAME_LAUNCH_FAIL:
-		case GGZ_GAME_NEGOTIATE_FAIL:
+	case GGZ_GAME_LAUNCH_FAIL:
+	case GGZ_GAME_NEGOTIATE_FAIL:
 			log("GGZCORE/game ## -- error! (%s) :(\n", (char*)cbdata);
 			break;
 	}

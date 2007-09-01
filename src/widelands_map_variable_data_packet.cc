@@ -103,20 +103,19 @@ throw (_wexception)
       Section & s = *prof.create_section(v.get_name());
       s.set_bool("delete_protected", v.is_delete_protected());
 		switch (v.get_type()) {
-         case MapVariable::MVT_INT:
+		case MapVariable::MVT_INT:
 			s.set_string("type", "int");
 			s.set_int("value", static_cast<const Int_MapVariable &>(v).get_value());
          break;
 
-         case MapVariable::MVT_STRING:
+		case MapVariable::MVT_STRING:
 			s.set_string("type", "string");
 			s.set_string("value", static_cast<const String_MapVariable &>(v).get_value());
          break;
 
-         default:
+		default:
 			throw wexception
-				("Unknown Variable type in Widelands_Map_Variable_Data_Packet: "
-				 "%i\n",
+				("Unknown Variable type in Widelands_Map_Variable_Data_Packet: %i",
 				 v.get_type());
 		}
 	}

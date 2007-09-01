@@ -143,11 +143,17 @@ void Game_Server_Connection::handle_data() {
 		} else {
          // server requests
          Game_Server_Protocol_Packet* pp = 0;
-         switch (id) {
-            case GGSPP_USERENTERED: pp = new Game_Server_Protocol_Packet_UserEntered(); break;
-            case GGSPP_CHATMESSAGE: pp = new Game_Server_Protocol_Packet_ChatMessage(0, ""); break;
-            case GGSPP_PING: pp = new Game_Server_Protocol_Packet_Ping(); break;
-            default: log("Game_Server_Connection: WARNING unknown protocol packet id in server request, dropped!\n"); break;
+			switch (id) {
+			case GGSPP_USERENTERED:
+				pp = new Game_Server_Protocol_Packet_UserEntered();      break;
+			case GGSPP_CHATMESSAGE:
+				pp = new Game_Server_Protocol_Packet_ChatMessage(0, ""); break;
+			case GGSPP_PING:
+				pp = new Game_Server_Protocol_Packet_Ping();             break;
+			default:
+				log
+					("Game_Server_Connection: WARNING unknown protocol packet id in "
+					 "server request, dropped!\n");
 			}
          if (pp) {
             pp->recv(this, &buf);

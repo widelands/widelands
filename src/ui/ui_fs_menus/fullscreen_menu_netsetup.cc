@@ -157,16 +157,16 @@ void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game * game)
 
 void Fullscreen_Menu_NetSetup::discovery_callback (int type, const LAN_Open_Game* game, void* userdata)
 {
-    switch (type) {
+	switch (type) {
 	case LAN_Game_Finder::GameOpened:
 	    static_cast<Fullscreen_Menu_NetSetup*>(userdata)->game_opened (game);
-	    break;
+		break;
 	case LAN_Game_Finder::GameClosed:
 	    static_cast<Fullscreen_Menu_NetSetup*>(userdata)->game_closed (game);
-	    break;
+		break;
 	case LAN_Game_Finder::GameUpdated:
 	    static_cast<Fullscreen_Menu_NetSetup*>(userdata)->game_updated (game);
-	    break;
+		break;
 	default:
 	    abort ();
 	}

@@ -29,8 +29,7 @@ class Editor_Game_Base;
 /*
  * This event is able to set a null trigger to a certain state
  */
-class Event_Set_Null_Trigger : public Event, public TriggerReferencer {
-   public:
+struct Event_Set_Null_Trigger : public Event, public TriggerReferencer {
      Event_Set_Null_Trigger();
       ~Event_Set_Null_Trigger();
 
@@ -59,7 +58,7 @@ class Event_Set_Null_Trigger : public Event, public TriggerReferencer {
 	const char* get_name() const {return Event::name().c_str();}
 	const char* get_type() const {return "Event Set Null Trigger";}
 
-   private:
+private:
       Trigger_Null* m_trigger;
       bool          m_setto;
 };

@@ -35,7 +35,7 @@ struct Editor_Event_Menu : public UI::UniqueWindow {
       Editor_Event_Menu(Editor_Interactive*, UI::UniqueWindow::Registry*);
       virtual ~Editor_Event_Menu();
 
-   private:
+private:
       Editor_Interactive *m_parent;
 
 	UI::Listselect<Event*      > *m_event_list;

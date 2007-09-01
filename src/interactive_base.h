@@ -103,7 +103,7 @@ struct Interactive_Base : public Map_View {
       // for loading
       virtual void cleanup_for_load() {};
 
-   private:
+private:
       void roadb_add_overlay();
       void roadb_remove_overlay();
 

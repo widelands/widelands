@@ -63,10 +63,10 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
    m_needs_update=true;
 
-   if (down) {
+	if (down) {
       std::string txt= g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
-      switch (code) {
-         case KEY_BACKSPACE:
+		switch (code) {
+		case KEY_BACKSPACE:
             if (txt.size() && m_cur_pos) {
                m_cur_pos--;
 				} else {
@@ -74,24 +74,24 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 				}
             // Fallthrough
 
-         case KEY_DELETE:
+		case KEY_DELETE:
             if (txt.size() && m_cur_pos<txt.size()) {
                txt.erase(txt.begin() + m_cur_pos);
                Multiline_Textarea::set_text(txt.c_str());
 				}
-            break;
+			break;
 
-         case KEY_LEFT:
+		case KEY_LEFT:
             m_cur_pos-=1;
             if (static_cast<int>(m_cur_pos)<0) m_cur_pos=0;
             break;
 
-         case KEY_RIGHT:
+		case KEY_RIGHT:
             m_cur_pos+=1;
             if (m_cur_pos>=txt.size()) m_cur_pos=txt.size();
             break;
 
-         case KEY_DOWN:
+		case KEY_DOWN:
             if (m_cur_pos<txt.size()-1) {
                uint begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
@@ -112,9 +112,9 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
                else
                   m_cur_pos=begin_of_next_line+m_cur_pos-begin_of_line;
 				}
-            break;
+			break;
 
-         case KEY_UP:
+		case KEY_UP:
             if (m_cur_pos>0) {
                uint begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
@@ -131,12 +131,12 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
                else
                   m_cur_pos=begin_of_lastline+(m_cur_pos-begin_of_line);
 				}
-            break;
+			break;
 
-         case KEY_RETURN:
+		case KEY_RETURN:
             c='\n';
             // fallthrough
-         default:
+		default:
             if (c && txt.size()<m_maxchars) {
                txt.insert(m_cur_pos, 1, c);
                m_cur_pos++;

@@ -257,7 +257,7 @@ void AttackController::soldierWon(Soldier* soldier)
 			(MilitarySite * const ms =
 			 dynamic_cast<MilitarySite *>(flag->get_building()))
 		{
-     		 //There are defending soldiers left in the building.
+			//  There are defending soldiers left in the building.
 			if (const uint n = ms->nr_not_marked_soldiers()) {
 				launchSoldiersOfMilitarySite(ms, n, false);
 				return;
@@ -478,7 +478,7 @@ void AttackController::Loader::load_pointers()
 	ctrl->flag = dynamic_cast<Flag*>(mol().get_object_by_file_index(flag));
 	assert(ctrl->flag);
 
-	for(uint j = 0; j < soldiers.size(); ++j) {
+	for (uint j = 0; j < soldiers.size(); ++j) {
 		const BattleSoldierData& bsd = soldiers[j];
 		BattleSoldier& bs = ctrl->involvedSoldiers[j];
 
@@ -490,7 +490,7 @@ void AttackController::Loader::load_pointers()
 		bs.soldier->set_attack_ctrl(ctrl);
 	}
 
-	for(uint j = 0; j < militarySites.size(); ++j) {
+	for (uint j = 0; j < militarySites.size(); ++j) {
 		MilitarySite* ms =
 				dynamic_cast<MilitarySite*>
 				(mol().get_object_by_file_index(militarySites[j]));
@@ -562,10 +562,10 @@ Map_Object::Loader* AttackController::load
 
 		loader->init(egbase, mol, new AttackController(*dynamic_cast<Game*>(egbase)));
 		loader->load(fr);
-	} catch(const std::exception& e) {
+	} catch (const std::exception& e) {
 		delete loader;
 		throw wexception("Loading AttackController: %s", e.what());
-	} catch(...) {
+	} catch (...) {
 		delete loader;
 		throw;
 	}

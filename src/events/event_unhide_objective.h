@@ -28,8 +28,7 @@ class MapObjective;
 /*
  * This event unhides or hides an objective.
  */
-class Event_Unhide_Objective : public Event {
-   public:
+struct Event_Unhide_Objective : public Event {
      Event_Unhide_Objective();
       ~Event_Unhide_Objective();
 
@@ -48,7 +47,7 @@ class Event_Unhide_Objective : public Event {
       inline void set_dounhide(bool t) {m_dounhide=t;}
 	bool get_dounhide() const {return m_dounhide;}
 
-   private:
+private:
       MapObjective* m_objective;
       bool          m_dounhide;
 };

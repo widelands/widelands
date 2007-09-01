@@ -83,14 +83,13 @@ public:
 };
 
 
-class NetStatusWindow:public UI::Window {
-    public:
+struct NetStatusWindow : public UI::Window {
 	NetStatusWindow (UI::Panel*);
 
 	void add_player (int);
 	void set_ready (int);
 
-    private:
+private:
 	struct Entry {
 		UI::Table<void *>::Entry_Record * entry;
 		int                               plnum;

@@ -50,7 +50,7 @@ struct Multiline_Editbox : public Multiline_Textarea {
       bool handle_key(bool down, int code, char c);
       void set_text(const char* str);
 
-   private:
+private:
 	   static const int ms_darken_value=-20;
       uint m_cur_pos;
       uint m_char_pos;

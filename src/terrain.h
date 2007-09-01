@@ -552,13 +552,13 @@ template<typename T> static void draw_field_int
 	if (-128 < f_brightness or -128 < r_brightness) {
 		if (road) {
 			switch (road) {
-				case Road_Normal:
-					render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
-					break;
-				case Road_Busy:
-					render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
-					break;
-			default: assert(false); break; //  never here
+			case Road_Normal:
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
+				break;
+			case Road_Busy:
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
+				break;
+			default: assert(false);
 			}
 		}
 		else if
@@ -574,14 +574,13 @@ template<typename T> static void draw_field_int
 	if (-128 < f_brightness or -128 < br_brightness) {
 		if (road) {
 			switch (road) {
-				case Road_Normal:
-					render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
-					break;
-				case Road_Busy:
-					render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
-					break;
-				default:
-					assert(0); break; // never here
+			case Road_Normal:
+				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
+				break;
+			case Road_Busy:
+				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
+				break;
+			default: assert(false);
 			}
 		}
 		else if
@@ -595,14 +594,13 @@ template<typename T> static void draw_field_int
 	if (-128 < f_brightness or -128 < bl_brightness) {
 		if (road) {
 			switch (road) {
-				case Road_Normal:
-					render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
-					break;
-				case Road_Busy:
-					render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
-					break;
-				default:
-					assert(0); break; // never here
+			case Road_Normal:
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
+				break;
+			case Road_Busy:
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
+				break;
+			default: assert(false);
 			}
 		}
 		else if

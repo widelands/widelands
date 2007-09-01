@@ -39,17 +39,15 @@ class TriggerConditional;
  * in order as soon as the eventchains trigger conditional is
  * true.
  */
-class EventChain : public EventReferencer, public TriggerReferencer {
+struct EventChain : public EventReferencer, public TriggerReferencer {
    friend class Widelands_Map_EventChain_Data_Packet;
 
-   public:
       enum State {
          INIT,
          RUNNING,
          DONE,
 		};
 
-   public:
       EventChain() {
         m_repeating = false;
         m_trigconditional = 0;
@@ -78,7 +76,7 @@ class EventChain : public EventReferencer, public TriggerReferencer {
       // Run this event queue
       State run(Game* g);
 
-   private:
+private:
       std::string        m_name;
       bool                m_repeating;
       TriggerConditional* m_trigconditional;

@@ -41,7 +41,7 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
       const char* get_mapname() {return m_mapname.c_str();}
       uint get_gametime() {return m_gametime;}
 
-   private:
+private:
       std::string m_mapname;
       uint m_gametime;
 };

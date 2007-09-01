@@ -34,8 +34,7 @@ thing. Like more than one texture, more than one map object
 This is a helper class, no Editor Tool (might be usable in game too)
 =============================
 */
-class MultiSelect {
-   public:
+struct MultiSelect {
       MultiSelect() {m_nr_enabled=0;}
       ~MultiSelect() {}
 
@@ -65,7 +64,7 @@ class MultiSelect {
          return i-1;
 		}
 
-   private:
+private:
       int m_nr_enabled;
       std::vector<bool> m_enabled;
 };

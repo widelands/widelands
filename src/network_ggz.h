@@ -37,8 +37,7 @@
 #include <io.h>
 #endif
 
-class NetGGZ {
-    public:
+struct NetGGZ {
 	static NetGGZ* ref();
 
 	void init();
@@ -66,7 +65,7 @@ class NetGGZ {
 	void launch    ();
 	void join(const char *tablename);
 
-    private:
+private:
 	NetGGZ();
 #ifdef HAVE_GGZ
 	static void ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata);

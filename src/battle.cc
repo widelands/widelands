@@ -247,10 +247,10 @@ Map_Object::Loader* Battle::load
 
 		loader->init(eg, mol, new Battle);
 		loader->load(fr);
-	} catch(const std::exception& e) {
+	} catch (const std::exception & e) {
 		delete loader;
 		throw wexception("Loading Battle: %s", e.what());
-	} catch(...) {
+	} catch (...) {
 		delete loader;
 		throw;
 	}

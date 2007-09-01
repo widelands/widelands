@@ -65,11 +65,11 @@ struct Trigger {
 	const TriggerReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 
-   protected:
+protected:
       // This is only for child classes to toggle the trigger
       inline void set_trigger(bool t) {m_is_set=t;}
 
-   private:
+private:
       std::string                m_name;
       bool                        m_is_set;
 	TriggerReferencerMap m_referencers;

@@ -445,8 +445,8 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 
 		max_steps=1; // Only take one step, then rethink (object may have moved)
 		forceonlast = true;
-		break;
 	}
+		break;
 	case Action::walkCoords: {
 		molog("  coords(%i, %i)\n", state->coords.x, state->coords.y);
 		dest = state->coords;

@@ -29,8 +29,7 @@ class Network_Buffer;
  * This is the abstract base class
  * of a Game Server Protocoll packet
  */
-class Game_Server_Protocol_Packet {
-   public:
+struct Game_Server_Protocol_Packet {
       virtual ~Game_Server_Protocol_Packet() {}
 
       virtual ushort get_id() = 0;

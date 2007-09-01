@@ -104,7 +104,7 @@ struct GameInternals {
 		: syncwrapper(g, &synchash)
 #endif
 	{
-		(void)g;
+		static_cast<void>(g);
 	}
 
 	void SyncReset()

@@ -681,10 +681,10 @@ void Interactive_Base::roadb_add_overlay()
 			icon = 3;
 
       std::string name="";
-      switch (icon) {
-         case 1: name="pics/roadb_green.png"; break;
-         case 2: name="pics/roadb_yellow.png"; break;
-         case 3: name="pics/roadb_red.png"; break;
+		switch (icon) {
+		case 1: name = "pics/roadb_green.png";  break;
+		case 2: name = "pics/roadb_yellow.png"; break;
+		case 3: name = "pics/roadb_red.png";    break;
 		};
 
       assert(name!="");

@@ -46,7 +46,7 @@ struct Main_Menu_Load_Map : public UI::Window {
       Main_Menu_Load_Map(Editor_Interactive*);
       virtual ~Main_Menu_Load_Map();
 
-   private:
+private:
 	void clicked_ok();
 	void selected      (uint);
 	void double_clicked(uint);

@@ -28,9 +28,7 @@
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (Chicken-and-egg problem)
 class Worker_Descr;
 
-class WorkerProgram : public BobProgramBase
-{
-	public:
+struct WorkerProgram : public BobProgramBase {
 		struct Parser {
 			Worker_Descr     * descr;
 			std::string        directory;
@@ -57,7 +55,7 @@ class WorkerProgram : public BobProgramBase
 		const Workarea_Info & get_workarea_info() const
 				{return m_workarea_info;}
 
-	private:
+private:
 		Workarea_Info m_workarea_info;
 		struct ParseMap {
 			const char * name;

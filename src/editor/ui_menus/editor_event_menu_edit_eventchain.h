@@ -44,7 +44,7 @@ struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
       void think();
 
-   private:
+private:
 	void clicked_ok                      ();
 	void clicked_new_event               ();
 	void clicked_edit_trigger_contitional();

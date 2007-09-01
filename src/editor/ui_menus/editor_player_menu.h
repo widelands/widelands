@@ -41,7 +41,7 @@ struct Editor_Player_Menu : public UI::UniqueWindow {
 		(Editor_Interactive &, UI::UniqueWindow::Registry *);
       virtual ~Editor_Player_Menu() {}
 
-   private:
+private:
       UI::UniqueWindow::Registry m_allow_buildings_menu;
       UI::Textarea *m_nr_of_players_ta;
       UI::Edit_Box* m_plr_names[MAX_PLAYERS];

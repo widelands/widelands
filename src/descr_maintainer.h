@@ -52,7 +52,7 @@ template <class T> struct Descr_Maintainer {
          else return 0;
 		}
 
-   private:
+private:
 	typename T::Index capacity;
 	typename T::Index nitems;
 	T * * items;

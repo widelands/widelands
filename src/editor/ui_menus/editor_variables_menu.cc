@@ -46,7 +46,7 @@ struct New_Variable_Window : public UI::Window {
 
       MapVariable* get_variable() {return m_variable;}
 
-   private:
+private:
       Editor_Interactive* m_parent;
       MapVariable* m_variable;
 	enum Variable_Type {Integer_Type, String_Type};
@@ -54,7 +54,6 @@ struct New_Variable_Window : public UI::Window {
 	UI::IDButton<New_Variable_Window, const Variable_Type> button_string;
 	UI::IDButton<New_Variable_Window, int>                 button_back;
 
-   private:
 	void clicked_new(const Variable_Type);
 };
 
@@ -142,7 +141,7 @@ struct Edit_Variable_Window : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
 	Editor_Interactive                     & m_parent;
 	UI::Table<MapVariable &>::Entry_Record & m_te;
 	UI::Textarea                             m_label_name;
@@ -152,7 +151,6 @@ struct Edit_Variable_Window : public UI::Window {
 	UI::Button<Edit_Variable_Window>         m_ok;
 	UI::IDButton<Edit_Variable_Window, int>  m_back;
 
-   private:
 	void clicked_ok();
 };
 
@@ -216,8 +214,7 @@ void Edit_Variable_Window::clicked_ok() {
 	MapVariable & var = UI::Table<MapVariable &>::get(m_te);
 
 	switch (var.get_type()) {
-      case MapVariable::MVT_INT:
-      {
+	case MapVariable::MVT_INT: {
          char* endp;
 			const long ivar = strtol(m_value.get_text(), &endp, 0);
 
@@ -238,14 +235,13 @@ void Edit_Variable_Window::clicked_ok() {
 
 			static_cast<Int_MapVariable &>(var).set_value(ivar);
 			m_te.set_string(1, buffer);
-		}
-      break;
+	}
+		break;
 
-      case MapVariable::MVT_STRING:
-      {
+	case MapVariable::MVT_STRING: {
 			static_cast<String_MapVariable &>(var).set_value(m_value.get_text());
 			m_te.set_string(1, m_value.get_text());
-		}
+	}
       break;
 	}
 
@@ -376,9 +372,9 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
 
 	const MapVariable::Type type = var.get_type();
 	switch (type) {
-      case MapVariable::MVT_INT: pic = "pics/map_variable_int.png"; break;
-      case MapVariable::MVT_STRING: pic = "pics/map_variable_string.png"; break;
-      default: pic = "nothing";
+	case MapVariable::MVT_INT:    pic = "pics/map_variable_int.png";    break;
+	case MapVariable::MVT_STRING: pic = "pics/map_variable_string.png"; break;
+	default:                      pic = "nothing";
 	};
 
 	UI::Table<MapVariable &>::Entry_Record & t = m_table.add
@@ -388,19 +384,18 @@ void Editor_Variables_Menu::insert_variable(MapVariable & var) {
    std::string val;
 
 	switch (type) {
-      case MapVariable::MVT_INT:
-      {
+	case MapVariable::MVT_INT: {
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable &>(var).get_value());
          val = buffer;
-		}
-      break;
+	}
+		break;
 
-      case MapVariable::MVT_STRING:
+	case MapVariable::MVT_STRING:
       val = static_cast<String_MapVariable &>(var).get_value();
       break;
 
-      default: val = "";
+	default: val = "";
 	}
 	t.set_string(0, var.get_name());
 	t.set_string(1, val.c_str());

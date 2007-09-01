@@ -36,7 +36,7 @@ struct Game_Loader {
       int preload_game(Game_Preload_Data_Packet*);
       int load_game();
 
-   private:
+private:
 	FileSystem & m_fs;
       Game* m_game;
 };

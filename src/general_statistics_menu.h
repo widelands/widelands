@@ -36,14 +36,12 @@ struct General_Statistics_Menu : public UI::UniqueWindow {
       virtual ~General_Statistics_Menu();
 
 
-   private:
+private:
       Interactive_Player* m_parent;
       WUIPlot_Area*       m_plot;
       UI::Radiogroup*       m_radiogroup;
       int                 m_selected_information;
       UI::Checkbox*         m_cbs[MAX_PLAYERS];
-
-   private:
 
 	void clicked_help();
       void cb_changed_to(int, bool);

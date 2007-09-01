@@ -41,7 +41,7 @@ struct Editor_Event_Menu_New_Trigger : public UI::Window {
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
-   private:
+private:
 	void clicked_ok();
 	void selected      (uint);
 	void double_clicked(uint);

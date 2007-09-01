@@ -35,7 +35,7 @@ struct Game_Main_Menu_Load_Game : public UI::UniqueWindow {
       Game_Main_Menu_Load_Game(Interactive_Player* plr, UI::UniqueWindow::Registry* registry) ;
       virtual ~Game_Main_Menu_Load_Game();
 
-   private:
+private:
 	void clicked_ok    ();
 	void clicked_cancel();
 	void selected      (uint);

@@ -24,11 +24,9 @@
 #include "soldier.h"
 
 
-class Battle : public BaseImmovable
-{
+struct Battle : public BaseImmovable {
 	friend class Widelands_Map_Battle_Data_Packet;
 
-public:
 	typedef Map_Object_Descr Descr;
 
 	Battle();
@@ -64,7 +62,7 @@ protected:
 
 public:
 	// Remove as soon as we fully support the new system
-	virtual bool has_new_save_support() { return true; }
+	virtual bool has_new_save_support() {return true;}
 
 	virtual void save(Editor_Game_Base*, Widelands_Map_Map_Object_Saver*, FileWrite&);
 	static Map_Object::Loader* load(Editor_Game_Base*, Widelands_Map_Map_Object_Loader*, FileRead&);
