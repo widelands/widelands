@@ -26,6 +26,7 @@
 #include "instances.h"
 #include "machdep.h"
 #include "player.h"
+#include "playercommand.h"
 #include "trigger/trigger.h"
 #include "wexception.h"
 #include "worker.h"
@@ -68,7 +69,10 @@ void Cmd_Queue::enqueue (Command* cmd)
 	cmditem ci;
 
 	ci.cmd = cmd;
-	if (dynamic_cast<GameLogicCommand*>(cmd)) {
+	if (PlayerCommand* plcmd = dynamic_cast<PlayerCommand*>(cmd)) {
+		ci.category = cat_playercommand;
+		ci.serial = plcmd->get_cmdserial();
+	} else if (dynamic_cast<GameLogicCommand*>(cmd)) {
 		ci.category = cat_gamelogic;
 		ci.serial = nextserial++;
 	} else {

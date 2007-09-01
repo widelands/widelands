@@ -110,7 +110,8 @@ class Cmd_Queue {
 
 	enum {
 		cat_nongamelogic = 0,
-		cat_gamelogic
+		cat_gamelogic,
+		cat_playercommand
 	};
 
 	struct cmditem {

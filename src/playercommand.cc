@@ -52,7 +52,8 @@ enum {
 
 PlayerCommand::PlayerCommand (int t, char s) : GameLogicCommand (t)
 {
-	sender=s;
+	sender = s;
+	cmdserial = 0;
 }
 
 PlayerCommand::~PlayerCommand ()
@@ -93,7 +94,7 @@ PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
 /*
  * Write this player command to a file. Call this from base classes
  */
-#define PLAYER_COMMAND_VERSION 1
+#define PLAYER_COMMAND_VERSION 2
 void PlayerCommand::Write
 (FileWrite             & fw,
  Editor_Game_Base               & egbase,
@@ -105,16 +106,23 @@ void PlayerCommand::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 	// Now sender
 	fw.Unsigned8 (sender);
+	fw.Unsigned32 (cmdserial);
 }
+
 void PlayerCommand::Read
 (FileRead               & fr,
  Editor_Game_Base                & egbase,
  Widelands_Map_Map_Object_Loader & mol)
 {
 	const Uint16 packet_version = fr.Unsigned16();
-	if (packet_version == PLAYER_COMMAND_VERSION) {
+	if (packet_version == PLAYER_COMMAND_VERSION || packet_version == 1) {
 		GameLogicCommand::Read(fr, egbase, mol);
 		sender = fr.Unsigned8 ();
+		if (packet_version > 1) {
+			cmdserial = fr.Unsigned32 ();
+		} else {
+			cmdserial = 0;
+		}
 	} else
 		throw wexception
 			("Unknown version in PlayerCommand::Read: %u",

@@ -32,7 +32,7 @@
 
 // File format definitions
 #define REPLAY_MAGIC 0x2E21A101
-#define REPLAY_VERSION 1
+#define REPLAY_VERSION 2
 
 enum {
 	pkt_end = 2,
@@ -98,6 +98,8 @@ ReplayReader::ReplayReader(Game* game, const std::string filename)
 			throw wexception("%s apparently not a valid replay file", filename.c_str());
 
 		Uint8 version = m_cmdlog->Unsigned8();
+		if (version < REPLAY_VERSION)
+			throw wexception("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
 			throw wexception("Unknown version %u", version);
 
@@ -144,8 +146,10 @@ Command* ReplayReader::GetNextCommand(uint time)
 			m_replaytime = m_cmdlog->Unsigned32();
 
 			uint duetime = m_cmdlog->Unsigned32();
+			uint cmdserial = m_cmdlog->Unsigned32();
 			PlayerCommand* cmd = PlayerCommand::deserialize(*m_cmdlog);
 			cmd->set_duetime(duetime);
+			cmd->set_cmdserial(cmdserial);
 
 			return cmd;
 		}
@@ -276,6 +280,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
 	// given time".
 	m_cmdlog->Unsigned32(m_game->get_gametime());
 	m_cmdlog->Unsigned32(cmd->get_duetime());
+	m_cmdlog->Unsigned32(cmd->get_cmdserial());
 	cmd->serialize(*m_cmdlog);
 
 	m_cmdlog->Flush();

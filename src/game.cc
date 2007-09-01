@@ -130,6 +130,7 @@ m_realtime(WLApplication::get()->get_time())
 {
 	g_sound_handler.m_the_game = this;
 	m_last_stats_update = 0;
+	m_player_cmdserial = 0;
 }
 
 Game::~Game()
@@ -788,10 +789,13 @@ uint Game::logic_rand()
  */
 void Game::send_player_command (PlayerCommand* pc)
 {
-	if (m_netgame and get_player(pc->get_sender())->get_type() == Player::Local)
+	// TODO: How are playercommand serials assigned in network games?
+	if (m_netgame and get_player(pc->get_sender())->get_type() == Player::Local) {
 		m_netgame->send_player_command (pc);
-	else
+	} else {
+		pc->set_cmdserial(++m_player_cmdserial);
 		enqueue_command (pc);
+	}
 }
 
 

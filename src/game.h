@@ -208,6 +208,8 @@ private:
 
 	uint m_last_stats_update;
 	General_Stats_vector m_general_stats;
+
+	uint m_player_cmdserial;
 };
 
 inline Coords Game::random_location(Coords location, uchar radius) {

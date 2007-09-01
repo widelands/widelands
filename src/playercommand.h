@@ -29,18 +29,28 @@ struct StreamRead;
 struct StreamWrite;
 
 
-// PlayerCommand is for commands issued by players. It has the additional
-// ability to send itself over the network
+/**
+ * PlayerCommand is for commands issued by players. It has the additional
+ * ability to send itself over the network
+ *
+ * PlayerCommands are given serial numbers once they become authoritative
+ * (e.g. after being acked by the server). The serial numbers must then be
+ * reasonably unique (to be precise, they must be unique per duetime) and
+ * the same across all hosts, to ensure parallel simulation.
+ */
 class PlayerCommand : public GameLogicCommand {
 private:
 	char sender;
+	uint cmdserial;
 
 public:
 	PlayerCommand (int, char);
-	PlayerCommand() : GameLogicCommand(0) {} // For savegame loading
+	PlayerCommand() : GameLogicCommand(0), sender(0), cmdserial(0) {} // For savegame loading
 	virtual ~PlayerCommand ();
 
 	char get_sender() const {return sender;}
+	uint get_cmdserial() const { return cmdserial; }
+	void set_cmdserial(uint s) { cmdserial = s; }
 
 	virtual void serialize (StreamWrite &) = 0;
 	static PlayerCommand * deserialize (StreamRead &);
