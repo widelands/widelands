@@ -24,6 +24,9 @@
 
 extern const uint rng_sbox[256];
 
+class StreamRead;
+class StreamWrite;
+
 struct RNG {
 	RNG ();
 
@@ -31,7 +34,10 @@ struct RNG {
 
 	uint rand ();
 
-    private:
+	void ReadState(StreamRead&);
+	void WriteState(StreamWrite&);
+
+private:
 	uint state0;
 	uint state1;
 };

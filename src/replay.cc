@@ -22,6 +22,7 @@
 #include "layered_filesystem.h"
 #include "md5.h"
 #include "playercommand.h"
+#include "random.h"
 #include "replay.h"
 #include "save_handler.h"
 #include "streamread.h"
@@ -30,10 +31,10 @@
 
 
 // File format definitions
-#define REPLAY_MAGIC 0x2E21A100
+#define REPLAY_MAGIC 0x2E21A101
+#define REPLAY_VERSION 1
 
 enum {
-	pkt_playercommand_old = 1,
 	pkt_end = 2,
 	pkt_playercommand = 3,
 	pkt_syncreport = 4
@@ -89,8 +90,18 @@ ReplayReader::ReplayReader(Game* game, const std::string filename)
 
 	try {
 		Uint32 magic = m_cmdlog->Unsigned32();
+		if (magic == 0x2E21A100) // Note: This was never released as part of a build
+			throw wexception
+					("%s is a replay from a version that is known to have desync problems",
+					 filename.c_str());
 		if (magic != REPLAY_MAGIC)
 			throw wexception("%s apparently not a valid replay file", filename.c_str());
+
+		Uint8 version = m_cmdlog->Unsigned8();
+		if (version != REPLAY_VERSION)
+			throw wexception("Unknown version %u", version);
+
+		game->get_rng()->ReadState(*m_cmdlog);
 	}
 	catch (...) {
 		delete m_cmdlog;
@@ -128,16 +139,6 @@ Command* ReplayReader::GetNextCommand(uint time)
 		unsigned char pkt = m_cmdlog->Unsigned8();
 
 		switch (pkt) {
-		case pkt_playercommand_old:
-		{
-			log("REPLAY: WARNING: Old playercommand packet\n");
-
-			m_replaytime = m_cmdlog->Unsigned32();
-			PlayerCommand* cmd = PlayerCommand::deserialize(*m_cmdlog);
-			cmd->set_duetime(m_replaytime);
-			return cmd;
-		}
-
 		case pkt_playercommand:
 		{
 			m_replaytime = m_cmdlog->Unsigned32();
@@ -159,11 +160,14 @@ Command* ReplayReader::GetNextCommand(uint time)
 		}
 
 		case pkt_end:
-			log("REPLAY: End of replay\n");
+		{
+			uint endtime = m_cmdlog->Unsigned32();
+			log("REPLAY: End of replay (gametime: %u)\n", endtime);
 			delete m_cmdlog;
 			m_cmdlog = 0;
 			return 0;
 			break;
+		}
 
 		default:
 			throw wexception("Unknown packet %u", pkt);
@@ -224,9 +228,6 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	if (!savehandler->save_game(m_game, filename + WLGF_SUFFIX, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
-	m_cmdlog = g_fs->OpenStreamWrite(filename);
-	m_cmdlog->Unsigned32(REPLAY_MAGIC);
-
 	log("Reloading the game from replay\n");
 	FileSystem* fs = g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX);
 	try {
@@ -242,6 +243,12 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 	log("Done reloading the game from replay\n");
 
 	game->enqueue_command(new Cmd_ReplaySyncWrite(game->get_gametime() + SYNC_INTERVAL));
+
+	m_cmdlog = g_fs->OpenStreamWrite(filename);
+	m_cmdlog->Unsigned32(REPLAY_MAGIC);
+	m_cmdlog->Unsigned8(REPLAY_VERSION);
+
+	game->get_rng()->WriteState(*m_cmdlog);
 }
 
 
@@ -251,6 +258,7 @@ ReplayWriter::ReplayWriter(Game* game, const std::string filename)
 ReplayWriter::~ReplayWriter()
 {
 	m_cmdlog->Unsigned8(pkt_end);
+	m_cmdlog->Unsigned32(m_game->get_gametime());
 
 	delete m_cmdlog;
 	m_cmdlog = 0;

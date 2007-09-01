@@ -18,6 +18,9 @@
  */
 
 #include "random.h"
+#include "streamread.h"
+#include "streamwrite.h"
+#include "wexception.h"
 
 #include <stdio.h>
 
@@ -113,3 +116,25 @@ const uint rng_sbox[256]= {
 	0xC4CBEF3D, 0xDD3A14AF, 0xC69B82FA, 0xC029B1BF,
 	0xEE51E8E4, 0x0493CB60, 0x572CC720, 0x8EEED424
 };
+
+
+#define RNG_SAVE_MAGIC 0xf0057763
+
+void RNG::ReadState(StreamRead& sr)
+{
+	Uint32 magic = sr.Unsigned32();
+	if (magic != RNG_SAVE_MAGIC)
+		throw wexception
+				("Different RNG version (magic = %08x, expected %08x)",
+				 magic, RNG_SAVE_MAGIC);
+
+	state0 = sr.Unsigned32();
+	state1 = sr.Unsigned32();
+}
+
+void RNG::WriteState(StreamWrite& sw)
+{
+	sw.Unsigned32(RNG_SAVE_MAGIC);
+	sw.Unsigned32(state0);
+	sw.Unsigned32(state1);
+}

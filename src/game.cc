@@ -86,7 +86,7 @@ public:
 		m_target->Flush();
 	}
 
-private:
+public:
 	Game* m_game;
 	StreamWrite* m_target;
 	uint m_counter;
@@ -105,6 +105,16 @@ struct GameInternals {
 #endif
 	{
 		(void)g;
+	}
+
+	void SyncReset()
+	{
+#ifdef SYNC_DEBUG
+		syncwrapper.m_counter = 0;
+#endif
+
+		synchash.Reset();
+		log("[sync] Reset\n");
 	}
 };
 
@@ -461,9 +471,6 @@ void Game::postload()
 	}
 
 	get_iabase()->postload();
-
-	m->synchash.Reset();
-	log("[sync] Reset\n");
 }
 
 
@@ -551,6 +558,8 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		m_replaywriter = new ReplayWriter(this, fname);
 		log("Replay writer has started\n");
 	}
+
+	m->SyncReset();
 
 	load_graphics(loader_ui);
 
@@ -755,6 +764,20 @@ md5_checksum Game::get_sync_hash() const
 
 	copy.FinishChecksum();
 	return copy.GetChecksum();
+}
+
+
+/**
+ * Return a random value that can be used in parallel game logic
+ * simulation.
+ *
+ * \note Do NOT use for random events in the UI or other display code.
+ */
+uint Game::logic_rand()
+{
+	uint r = rng.rand();
+	syncstream().Unsigned32(r);
+	return r;
 }
 
 

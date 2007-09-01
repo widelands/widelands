@@ -124,12 +124,9 @@ public:
 
 	// in-game logic
 	Cmd_Queue * get_cmdqueue() {return &cmdqueue;}
+	RNG* get_rng() { return &rng; }
 
-	// Start using logic_rand() for the actual gamelogic (e.g. critter).
-	// Do NOT use for random events in the UI or other display code.
-	// This will allow us to plug another PRNG in here for game playbacks
-	// and other fancy stuff.
-	uint logic_rand() {return rng.rand();}
+	uint logic_rand();
 
 	/// Generate a random location within radius from location.
 	Coords random_location(Coords location, uchar radius);
