@@ -27,6 +27,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <SDL_main.h>
+
 
 using std::cerr;
 using std::endl;
@@ -35,8 +37,7 @@ using std::flush;
 /**
  * Cross-platform entry point for SDL applications.
  */
-extern "C"
-	int main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	WLApplication *g_app=0;
 	try {
