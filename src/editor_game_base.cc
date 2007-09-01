@@ -341,14 +341,12 @@ void Editor_Game_Base::do_conquer_area
 Editor_Game_Base::cleanup_playerimmovables_area
 
 Make sure that buildings cannot exist outside their owner's territory.
-TODO: By now something goes wrong at unconquer_area and this function, because
-the game crashes a bit time after unconquer an area with some buildings.
-TODO: Document why there are 2 loops instead of destroying in the 1st.
 ===============
 */
-void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area) {
+void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area)
+{
 	std::vector<ImmovableFound> immovables;
-	std::set<PlayerImmovable*> burnset;
+	std::vector<PlayerImmovable*> burnlist;
 	Map & m = *m_map;
 
 	// Find all immovables that need fixing
@@ -356,26 +354,30 @@ void Editor_Game_Base::cleanup_playerimmovables_area(const Area<FCoords> area) {
 
 	for
 		(std::vector<ImmovableFound>::const_iterator it = immovables.begin();
-		 it != immovables.end(); ++it) {
-			 PlayerImmovable & imm =
+		 it != immovables.end(); ++it)
+	{
+		PlayerImmovable & imm =
 				 *static_cast<PlayerImmovable *>(it->object);
 		if
 			(not m.get_field(it->coords)->is_interior
 			 (imm.get_owner()->get_player_number()))
-			burnset.insert(&imm);
+		{
+			if (std::find(burnlist.begin(), burnlist.end(), &imm) == burnlist.end())
+				burnlist.push_back(&imm);
+		}
 	}
 
 	// Fix all immovables
 	if (Game * const game = dynamic_cast<Game *>(this))
 		for
-			(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
-			 it != burnset.end();
+			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
+			 it != burnlist.end();
 			 ++it)
 			(*it)->schedule_destroy(game);
 	else
 		for
-			(std::set<PlayerImmovable *>::const_iterator it = burnset.begin();
-			 it != burnset.end();
+			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
+			 it != burnlist.end();
 			 ++it)
 			(*it)->remove(this);
 }
