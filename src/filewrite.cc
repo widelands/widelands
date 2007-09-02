@@ -71,14 +71,37 @@ void FileWrite::Data(const void *buf, const size_t size, const Pos pos) {
 
 void FileWrite::Printf(const char *fmt, ...)
 {
+	// Try to do formatting on the stack first, but fallback
+	// to heap allocations to accomodate strings of arbitrary length
 	char buffer[2048];
 	va_list va;
 
 	va_start(va, fmt);
-	const int i = vsnprintf(buffer, sizeof(buffer), fmt, va);
+	int i = vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (i < 0) throw Buffer_Overflow();
+	if ((uint)i < sizeof(buffer)) {
+		Data(buffer, i);
+	} else {
+		uint size = sizeof(buffer);
+		char* heapbuf = 0;
 
-	Data(buffer, i);
+		do {
+			if (i < 0)
+				size = 2*size; // old vsnprintf
+			else
+				size = i+1; // C99-compatible vsnprintf
+
+			delete[] heapbuf;
+			heapbuf = new char[size];
+
+			va_start(va, fmt);
+			i = vsnprintf(heapbuf, i+1, fmt, va);
+			va_end(va);
+		} while((uint)i >= size);
+
+		Data(heapbuf, i);
+
+		delete[] heapbuf;
+	}
 }
