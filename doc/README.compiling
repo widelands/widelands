@@ -69,6 +69,11 @@ install anyway.
 
 Several other build targets are available :-) but not documented yet :-(
 
+If you choose to install widelands, you might like to take care of proper
+l10n setup. You find a LOCALE_PATH #define in src/constants.h that must be
+set to point to the place of the installed locales. You might as well
+place the locale files manually to the directory LOCALE_PATH points to.
+This is not yet handled by scons itself.
 
 make
 ------------------
