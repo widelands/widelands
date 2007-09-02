@@ -103,7 +103,10 @@ void Widelands_Map_Object_Packet::LoadFinish()
 		(LoaderSet::const_iterator cit = loaders.begin();
 		 cit != loaders.end();
 		 ++cit)
+	{
 		(*cit)->load_finish();
+		(*cit)->mol().mark_object_as_loaded((*cit)->get_object());
+	}
 }
 
 
