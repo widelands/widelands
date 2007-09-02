@@ -826,6 +826,9 @@ void Editor_Game_Base::cleanup_for_load
    // Clean all the stuff up, so we can load
 	cleanup_objects();
 
+	m_battle_serials.clear();
+	m_attack_serials.clear();
+
    // We do not flush the animations in the editor since all tribes are loaded and
    // animations can not change a lot, or?
    // TODO: check this when another world is needed
