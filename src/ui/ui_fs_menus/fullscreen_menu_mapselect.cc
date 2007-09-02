@@ -265,14 +265,21 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			const char *name = pname->c_str();
 
 			Map_Loader * const ml = map.get_correct_loader(name);
-			if (!ml) continue;
+			if (!ml)
+				continue;
 
-			map.set_filename(name);
-			ml->preload_map(true);
-			list.add(map.get_name(),
-			         name,
-			         g_gr->get_picture(PicMod_Game,
-			         dynamic_cast<const Widelands_Map_Loader *>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			try {
+				map.set_filename(name);
+				ml->preload_map(true);
+				list.add(map.get_name(),
+				         name,
+				         g_gr->get_picture(PicMod_Game,
+				         dynamic_cast<const Widelands_Map_Loader *>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			} catch(const std::exception& e) {
+				log("Mapselect: Skip %s due to preload error: %s\n", name, e.what());
+			} catch(...) {
+				log("Mapselect: Skip %s due to unknown exception\n", name);
+			}
 
 			delete ml;
 		}
