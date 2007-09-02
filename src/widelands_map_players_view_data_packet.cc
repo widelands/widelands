@@ -70,6 +70,9 @@ extern const Map_Object_Descr g_road_descr;
 #define SURVEY_TIMES_CURRENT_PACKET_VERSION             1
 #define SURVEY_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/survey_times_%u"
 
+#define VISION_CURRENT_PACKET_VERSION             1
+#define VISION_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/vision_%u"
+
 #define FILENAME_SIZE 48
 
 //  The map is traversed by row and column. In each step we process of one map
@@ -369,6 +372,46 @@ throw (_wexception)
 			return;
 		}
 
+		// Verify the vision values
+		FileRead vision_file;
+		bool have_vision = false;
+
+		try {
+			char fname[FILENAME_SIZE];
+			snprintf(fname, sizeof(fname), VISION_FILENAME_TEMPLATE,
+			         plnum, VISION_CURRENT_PACKET_VERSION);
+			vision_file.Open(fs, fname);
+			have_vision = true;
+		} catch (...) {
+		}
+
+		if (have_vision) {
+			for
+				(FCoords first_in_row(Coords(0, 0), &first_field);
+				 first_in_row.y < mapheight;
+				 ++first_in_row.y, first_in_row.field += mapwidth)
+			{
+				FCoords r = first_in_row;
+				Map::Index r_index = r.field - &first_field;
+				Player::Field * r_player_field = player_fields + r_index;
+				do {
+					const FCoords f = r;
+					Player::Field & f_player_field = *r_player_field;
+					move_r(mapwidth, r, r_index);
+					r_player_field  = player_fields + r_index;
+
+					uint file_vision = vision_file.Unsigned32();
+					if (file_vision != f_player_field.vision)
+						throw wexception
+								("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
+								 plnum, f.x, f.y, f_player_field.vision, file_vision);
+				} while (r.x);
+			}
+
+			log("Vision check successful for player %u\n", plnum);
+		}
+
+		// Read the player's knowledge about all fields
 		OPEN_INPUT_FILE
 			(BitInBuffer<2>, node_immovable_kinds_file,
 			 node_immovable_kinds_filename,
@@ -782,6 +825,7 @@ throw (_wexception)
 				BitOutBuffer<1>                  surveys_file;
 				BitOutBuffer<4>           survey_amounts_file;
 				FileWrite                   survey_times_file;
+				FileWrite                         vision_file;
 				for
 					(FCoords first_in_row(Coords(0, 0), &first_field);
 					 first_in_row.y < mapheight;
@@ -807,6 +851,8 @@ throw (_wexception)
 						br_vision = br_player_field->vision;
 						r_everseen  =  r_vision,  r_seen = 1 <  r_vision;
 						br_everseen = br_vision, br_seen = 1 < br_vision;
+
+						vision_file.Unsigned32(f_player_field.vision);
 
 						if (not f_seen) {
 
@@ -940,5 +986,10 @@ throw (_wexception)
 					(survey_times_file,
 					 SURVEY_TIMES_FILENAME_TEMPLATE,
 					 SURVEY_TIMES_CURRENT_PACKET_VERSION);
+
+				WRITE
+					(vision_file,
+					 VISION_FILENAME_TEMPLATE,
+					 VISION_CURRENT_PACKET_VERSION);
 			}
 }
