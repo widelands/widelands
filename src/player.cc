@@ -68,6 +68,9 @@ m_fields (0)
 	m_allowed_buildings.resize(m_tribe.get_nrbuildings());
 	for (i=0; i<m_tribe.get_nrbuildings(); i++)
 		m_allowed_buildings[i]=true;
+
+	m_ware_productions.resize(tribe().get_nrwares());
+	m_current_statistics.resize(tribe().get_nrwares());
 }
 
 
@@ -658,10 +661,7 @@ throw ()
  */
 void Player::sample_statistics()
 {
-	if (m_ware_productions.size() != static_cast<uint>(tribe().get_nrwares())) {
-		m_ware_productions.resize(tribe().get_nrwares());
-		m_current_statistics.resize(tribe().get_nrwares());
-	}
+	assert (m_ware_productions.size() == static_cast<uint>(tribe().get_nrwares()));
 
 	for (uint i = 0; i < m_ware_productions.size(); i++) {
 		m_ware_productions[i].push_back(m_current_statistics[i]);
@@ -675,11 +675,7 @@ void Player::sample_statistics()
  */
 void Player::ware_produced(uint wareid)
 {
-	if (m_ware_productions.size() != static_cast<uint>(tribe().get_nrwares())) {
-		m_ware_productions.resize(tribe().get_nrwares());
-		m_current_statistics.resize(tribe().get_nrwares());
-	}
-
+	assert (m_ware_productions.size() == static_cast<uint>(tribe().get_nrwares()));
 	assert(wareid < static_cast<uint>(tribe().get_nrwares()));
 
 	m_current_statistics[wareid]++;
@@ -785,8 +781,8 @@ void Player::ReadStatistics(FileRead& fr, uint version)
 						get_player_number(),
 						nr_wares, tribe().get_nrwares());
 
-			m_current_statistics.resize(nr_wares);
-			m_ware_productions.resize(nr_wares);
+			assert(m_ware_productions.size() == nr_wares);
+			assert(m_current_statistics.size() == nr_wares);
 
 			for (uint i = 0; i < m_current_statistics.size(); i++) {
 				m_current_statistics[i] = fr.Unsigned32();
@@ -806,17 +802,12 @@ void Player::ReadStatistics(FileRead& fr, uint version)
  */
 void Player::WriteStatistics(FileWrite& fw)
 {
-	if (m_current_statistics.size()) {
-		fw.Unsigned16(m_current_statistics.size());
-		fw.Unsigned16(m_ware_productions[0].size());
+	fw.Unsigned16(m_current_statistics.size());
+	fw.Unsigned16(m_ware_productions[0].size());
 
-		for (uint i = 0; i < m_current_statistics.size(); i++) {
-			fw.Unsigned32(m_current_statistics[i]);
-			for (uint j = 0; j < m_ware_productions[i].size(); j++)
-				fw.Unsigned32(m_ware_productions[i][j]);
-		}
-	} else {
-		fw.Unsigned16(0);
-		fw.Unsigned16(0);
+	for (uint i = 0; i < m_current_statistics.size(); i++) {
+		fw.Unsigned32(m_current_statistics[i]);
+		for (uint j = 0; j < m_ware_productions[i].size(); j++)
+			fw.Unsigned32(m_ware_productions[i][j]);
 	}
 }
