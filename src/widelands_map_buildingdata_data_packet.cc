@@ -270,13 +270,6 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
          Worker* w=static_cast<Worker*>(ol->get_object_by_file_index(id));
          warehouse.sort_worker_in(egbase, name, w);
 		}
-		if (nrworkers) {
-			Map & map = egbase->map();
-			player.see_area
-				(Area<FCoords>
-				 (map.get_fcoords(warehouse.get_position()),
-				  warehouse.vision_range()));
-		}
 
       // Carrier spawn
       warehouse.m_next_carrier_spawn=fr.Unsigned32();

@@ -102,9 +102,6 @@ public:
    virtual bool has_soldiers();
    virtual void conquered_by (Player*);
 
-	void    add_worker(Worker *);
-	void remove_worker(Worker *);
-
 protected:
 	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);
 
