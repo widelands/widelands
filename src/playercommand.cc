@@ -738,7 +738,7 @@ Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(StreamRead & des)
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
-	val    = des.Unsigned16();
+	val    = des.Signed16();
 }
 
 void Cmd_ChangeSoldierCapacity::execute (Game* g)
@@ -755,7 +755,7 @@ void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_CHANGESOLDIERCAPACITY);
 	ser.Unsigned8 (get_sender());
 	ser.Unsigned32(serial);
-	ser.Unsigned16(val);
+	ser.Signed16(val);
 }
 
 #define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
@@ -775,7 +775,7 @@ void Cmd_ChangeSoldierCapacity::Read
 		serial = mol.get_object_by_file_index(fileserial)->get_serial();
 
       // Now new capacity
-		val = fr.Unsigned16();
+		val = fr.Signed16();
 	} else
 		throw wexception
 			("Unknown version in Cmd_ChangeSoldierCapacity::Read: %u",
@@ -798,7 +798,7 @@ void Cmd_ChangeSoldierCapacity::Write
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now capacity
-	fw.Unsigned16(val);
+	fw.Signed16(val);
 
 }
 
