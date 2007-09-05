@@ -16,7 +16,7 @@ program=upgrade_evade_0 # This is needed to run the scripts
 
 [evade]
 min_level=0
-max_level=1
+max_level=0
 
 [upgrade_evade_0]
 0=check bread
