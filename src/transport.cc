@@ -3580,6 +3580,13 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		Supply* supp;
 		int cost; // estimated time in milliseconds to fulfill Request
 
+		// We somehow get desynced request lists that don't trigger desync
+		// alerts, so add info to the sync stream here.
+		StreamWrite& ss = g->syncstream();
+		ss.Unsigned8(req->get_type());
+		ss.Unsigned8(req->get_index());
+		ss.Unsigned32(req->get_target()->get_serial());
+
 		int ware_index = req->get_index();
 		if (req->get_type()==Request::WARE)
 			supp = find_best_supply(g, req, &ware_index, &cost, &m_ware_supplies);
