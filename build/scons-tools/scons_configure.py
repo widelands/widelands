@@ -238,8 +238,7 @@ def do_configure(config_h_file, conf, env):
 		print 'Could not find the SDL_mixer library! Is it installed?'
 		env.Exit(1)
 
-	if conf.TryLink(""" #include <SDL.h>
-			#define USE_RWOPS
+	if conf.TryLink(""" #define USE_RWOPS
 			#include <SDL_mixer.h>
 			int main(){
 				Mix_LoadMUS_RW("foo.ogg");
