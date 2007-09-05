@@ -40,7 +40,7 @@ void getCloseMilitarySites
 (const Editor_Game_Base & eg,
  const Flag & flag,
  const Player_Number player,
- std::set<MilitarySite *> & militarySites)
+ std::set<OPtr<MilitarySite> > & militarySites)
 {
 	Map & map = eg.map();
 
@@ -70,17 +70,18 @@ uint getMaxAttackSoldiers
 {
 	uint maxAttackSoldiers = 0;
 
-	std::set<MilitarySite *> militarySites;
+	std::set<OPtr<MilitarySite> > militarySites;
 	getCloseMilitarySites(eg, flag, player, militarySites);
 
-	const std::set<MilitarySite *>::const_iterator militarySites_end =
+	const std::set<OPtr<MilitarySite> >::iterator militarySites_end =
 		militarySites.end();
 	for
-		(std::set<MilitarySite *>::const_iterator it = militarySites.begin();
+		(std::set<OPtr<MilitarySite> >::iterator it = militarySites.begin();
 		 it != militarySites_end;
 		 ++it)
 	{
-		maxAttackSoldiers+= (*it)->nr_attack_soldiers();
+		MilitarySite* ms = OPtr<MilitarySite>(*it).get(&eg);
+		maxAttackSoldiers+= ms->nr_attack_soldiers();
 	}
 
 	log("Got %i attackers available for attack.\n", maxAttackSoldiers);
@@ -136,7 +137,10 @@ void AttackController::launchAttack(uint nrAttackers) {
 }
 
 bool AttackController::launchAllSoldiers(bool attackers, int max) {
-	std::set<MilitarySite *> militarySites;
+	// Use an OPtr instead of a plain pointer because they sort
+	// according to serial numbers and are therefore in sync under
+	// parallel simulation.
+	std::set<OPtr<MilitarySite> > militarySites;
 	getCloseMilitarySites
 		(egbase(),
 		 *flag,
@@ -145,20 +149,21 @@ bool AttackController::launchAllSoldiers(bool attackers, int max) {
 
 	bool launchedSoldier = false;
 
-	const std::set<MilitarySite *>::const_iterator militarySites_end =
+	const std::set<OPtr<MilitarySite> >::iterator militarySites_end =
 		militarySites.end();
 	for
-		(std::set<MilitarySite *>::const_iterator it = militarySites.begin();
+		(std::set<OPtr<MilitarySite> >::iterator it = militarySites.begin();
 		 it != militarySites_end;
 		 ++it)
 	{
-		uint soldiersOfMs = (*it)->nr_attack_soldiers();
+		MilitarySite* ms = OPtr<MilitarySite>(*it).get(&egbase());
+		uint soldiersOfMs = ms->nr_attack_soldiers();
 		const uint nrLaunch = (max > -1 and (soldiersOfMs > static_cast<uint>(max)) ? static_cast<uint>(max) : soldiersOfMs);
 		if (nrLaunch == 0) continue;
 
 		launchedSoldier = true;
 
-		launchSoldiersOfMilitarySite(*it, nrLaunch, attackers);
+		launchSoldiersOfMilitarySite(ms, nrLaunch, attackers);
 
 		if (max > -1) {
 			max-=nrLaunch;

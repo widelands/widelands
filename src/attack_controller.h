@@ -36,11 +36,6 @@ class Coords;
 class Widelands_Map_Attack_Controller_Data_Packet;
 
 
-void getCloseMilitarySites
-(const Editor_Game_Base &,
- const Flag &,
- const Player_Number player,
- std::set<MilitarySite *> & militarySites);
 uint getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Player_Number);
 
 struct AttackController : public BaseImmovable {
