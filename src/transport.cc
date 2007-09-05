@@ -3400,12 +3400,16 @@ void Economy::do_split(Flag *f)
 	m_rebuilding = true;
 	e->m_rebuilding = true;
 
-	std::set<Flag*> open;
+	// Use a vector instead of a set to ensure parallel simulation
+	std::vector<Flag*> open;
 
-	open.insert(f);
+	open.push_back(f);
 	while (open.size()) {
-		f = *open.begin();
-		open.erase(open.begin());
+		f = *open.rbegin();
+		open.pop_back();
+
+		if (f->get_economy() != this)
+			continue;
 
 		// move this flag to the new economy
 		remove_flag(f);
@@ -3420,7 +3424,7 @@ void Economy::do_split(Flag *f)
 			Flag *n = neighbours[i].flag;
 
 			if (n->get_economy() == this)
-				open.insert(n);
+				open.push_back(n);
 		}
 	}
 
