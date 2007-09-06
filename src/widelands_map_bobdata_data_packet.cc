@@ -197,7 +197,7 @@ throw
                s->diranims=0;
 
             uint pathsteps=fr.Unsigned16();
-            if (s->path && i<oldstacksize)
+            if (i < oldstacksize)
                delete s->path;
             if (pathsteps) {
                Coords start;
@@ -210,7 +210,7 @@ throw
 				} else
                s->path=0;
 
-            if (s->transfer && i<oldstacksize && !trans)
+            if (i < oldstacksize && !trans)
                delete s->transfer;
 
             if (s->task==&Worker::taskGowarehouse || s->task==&Worker::taskTransfer)
@@ -219,7 +219,7 @@ throw
                s->transfer=0;
 
             bool route=fr.Unsigned8();
-            if (s->route && i<oldstacksize)
+            if (i < oldstacksize && s->route)
                if (!route)
                   delete s->route;
                else
