@@ -20,6 +20,8 @@
 #include "colormap.h"
 
 #include <assert.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * Create a new Colormap, taking the palette as a parameter.
