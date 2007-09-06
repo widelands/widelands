@@ -37,6 +37,7 @@ class Map_Loader;
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchGame(Game *, NetGame*, Map_Loader**);
 
+	void start();
 	void think();
 
 	void refresh();

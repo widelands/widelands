@@ -131,9 +131,10 @@ int Panel::run()
 
 	// Loop
 	_running = true;
+
+	// Panel-specific startup code. Note that this might call end_modal()!
 	start();
 	g_gr->update_fullscreen();
-	assert(_running); //  Testing if this ever gets changed by the any of the 2 function calls above.
 	while (_running)
 	{
 		static InputCallback icb = {

@@ -88,11 +88,23 @@ m_is_scenario(false)
 	}
 
 	if (not m_netgame) m_players[0]->set_player_type(Player::Local);
-
-	// Directly go selecting a map
-	if (m_netgame==0 || m_netgame->is_host())
-		select_map();
 }
+
+
+/**
+ * Select a map as a first step in launching a game, before
+ * showing the actual setup menu.
+ */
+void Fullscreen_Menu_LaunchGame::start()
+{
+	if (m_netgame == 0 || m_netgame->is_host()) {
+		select_map();
+
+		if (!m_game->get_map())
+			back_clicked();
+	}
+}
+
 
 void Fullscreen_Menu_LaunchGame::think()
 {
