@@ -7,5 +7,6 @@
 #define INSTALL_PREFIX "/mingw"
 #define INSTALL_BINDIR "/l/WiLa/Setup"
 #define INSTALL_DATADIR "/l/WiLa/Setup"
+#define INSTALL_LOCALEDIR "/l/WiLa/Setup/locale"
 
 #endif

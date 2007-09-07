@@ -87,12 +87,14 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
 	opts.Add('build', 'debug / profile / release(default)', 'release')
-	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', 'build11')
+	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', 'build11') #change this before/after preparing a release
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
 	opts.Add('bindir', '(absolute or relative to install_prefix)', 'games')
 	opts.Add('datadir', '(absolute or relative to install_prefix)', 'share/games/widelands')
+	#change next line to 'share/games/widelands/locale' for release and to "." after release is over
+	opts.Add('localedir', '(absolute or relative to install_prefix)', 'share/games/widelands/locale')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
 	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')
@@ -230,6 +232,11 @@ if os.path.isabs(env['datadir']):
 else:
 	DATADIR=os.path.join(env['install_prefix'], env['datadir'])
 
+if os.path.isabs(env['localedir']):
+	LOCALEDIR=env['localedir']
+else:
+	LOCALEDIR=os.path.join(env['install_prefix'], env['localedir'])
+
 ################################################################################
 
 #build_id must be saved *before* it might be set to a fixed date
@@ -243,7 +250,7 @@ print 'Build ID:          '+env['build_id']
 
 config_h=write_configh_header()
 do_configure(config_h, conf, env)
-write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
+write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR, LOCALEDIR)
 write_buildid(env['build_id'])
 
 env=conf.Finish()

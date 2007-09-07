@@ -16,10 +16,11 @@ def write_configh_header():
 
 ################################################################################
 
-def write_configh_footer(config_h_file, install_prefix, bindir, datadir):
+def write_configh_footer(config_h_file, install_prefix, bindir, datadir, localedir):
 	config_h_file.write("#define INSTALL_PREFIX \""+install_prefix+"\"\n")
 	config_h_file.write("#define INSTALL_BINDIR \""+bindir+"\"\n")
-	config_h_file.write("#define INSTALL_DATADIR \""+datadir+"\"\n\n")
+	config_h_file.write("#define INSTALL_DATADIR \""+datadir+"\"\n")
+	config_h_file.write("#define INSTALL_LOCALEDIR \""+localedir+"\"\n\n")
 
 	config_h_file.write("\n#endif\n")
 	config_h_file.close()
@@ -244,8 +245,8 @@ def do_configure(config_h_file, conf, env):
 				Mix_LoadMUS_RW("foo.ogg");
 			}
 			""", '.c'):
-		config_h_file.write("//second line is needed by SDL_mixer\n");
 		config_h_file.write("#define NEW_SDL_MIXER 1\n");
+		config_h_file.write("//next line is needed by SDL_mixer\n");
 		config_h_file.write("#define USE_RWOPS\n");
 		print 'SDL_mixer supports Mix_LoadMUS_RW(). Good'
 	else:

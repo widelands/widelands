@@ -28,15 +28,6 @@
  * Lots more are scattered through header files
  */
 
-/**
- * locale path: This would be needed to be changed by a packager
- *
- * The default search path for locales is in the locale directory
- * but if widelands is installed, this changes to something like
- * /usr/locale/share/... If so, change here
- */
-#define LOCALE_PATH "locale"
-
 /* \name Textures
  * textures have a fixed size and are squares
  * TEXTURE_HEIGHT is just defined for easier understandement of the code*/

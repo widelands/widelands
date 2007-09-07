@@ -17,10 +17,8 @@
  *
  */
 
-#include "constants.h" //for LOCALE_PATH
+#include "config.h"
 #include "i18n.h"
-#include "config.h"  // this might override the local path (e.g. MacOS X)
-
 #include <libintl.h>
 
 
@@ -49,7 +47,7 @@ void i18n::grab_textdomain(const std::string domain)
 	const char* dom=domain.c_str();
 
 	bind_textdomain_codeset(dom, "UTF-8");
-	bindtextdomain(dom, LOCALE_PATH);
+	bindtextdomain(dom, INSTALL_LOCALEDIR);
 	textdomain(dom);
 	m_textdomains.push_back(dom);
 }
@@ -67,7 +65,7 @@ void i18n::release_textdomain()
 		const char * const domain=m_textdomains.back().c_str();
 
 		bind_textdomain_codeset(domain, "UTF-8");
-		bindtextdomain(domain, LOCALE_PATH);
+		bindtextdomain(domain, INSTALL_LOCALEDIR);
 		textdomain(domain);
 	}
 }
@@ -98,7 +96,7 @@ void i18n::set_locale(const std::string str) {
 	if (m_textdomains.size()) {
 		const char * const domain = m_textdomains.back().c_str();
 		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain(domain, LOCALE_PATH);
+		bindtextdomain(domain, INSTALL_LOCALEDIR);
 		textdomain(domain);
 	}
 }

@@ -67,24 +67,32 @@ wrapper around a minimal version of scons that we deliver together with
 widelands. You can even use this for development, but we recommend a full
 install anyway.
 
-Several other build targets are available :-) but not documented yet :-(
-
-If you choose to install widelands, you might like to take care of proper
-l10n setup. You find a LOCALE_PATH #define in src/constants.h that must be
-set to point to the place of the installed locales. You might as well
-place the locale files manually to the directory LOCALE_PATH points to.
-This is not yet handled by scons itself.
-
-Unless you are doing a release build, you will also have to manually call
-"scons locale"
+Several other build targets are available :-) but mostly not documented yet :-(
 
 make
 ------------------
 Edit src/config.h.default to your liking and check the Makefile for more
 user definable variables. If everything is good, simply run GNU make in the
-widelands directory.
+widelands directory. Unlike scons, the make infrastructure does not support
+installation or creation of distribution tarballs.
 
 Once again: there's a strong possibility that make support is on it's way out.
+
+
+localization
+------------
+If you choose to install widelands, you'll probably want to take care of proper
+l10n setup. Widelands will normally look for it's locale definitions in
+<install_prefix>/<localedir> (see "scons -h"). To change this setting, use a
+commandline like "scons localedir=foo/bar/baz" (relative to install_prefix)
+or "scons localedir=/foo/bar/baz" (absolute path). If you aren't using scons,
+set INSTALL_LOCALEDIR in src/config.h before starting the compile.
+
+Unless you are doing a release build, you will have to manually call
+"scons locale" to create the message catalogs. Release builds do this by default.
+
+Be aware that our installer does not yet put the files in the correct location.
+You will have to move/copy them yourself!
 
 
 
