@@ -91,8 +91,8 @@ def cli_options():
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
-	opts.Add('bindir', '(relative to install_prefix)', 'games')
-	opts.Add('datadir', '(relative to install_prefix)', 'share/games/widelands')
+	opts.Add('bindir', '(absolute or relative to install_prefix)', 'games')
+	opts.Add('datadir', '(absolute or relative to install_prefix)', 'share/games/widelands')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
 	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')
@@ -220,8 +220,15 @@ env.Append(LIBPATH=env['extra_lib_path'])
 env.AppendUnique(CCFLAGS=Split(env['extra_compile_flags']))
 env.AppendUnique(LINKFLAGS=env['extra_link_flags'])
 
-BINDIR=os.path.join(env['install_prefix'], env['bindir'])
-DATADIR=os.path.join(env['install_prefix'], env['datadir'])
+if os.path.isabs(env['bindir']):
+	BINDIR=env['bindir']
+else:
+	BINDIR=os.path.join(env['install_prefix'], env['bindir'])
+
+if os.path.isabs(env['datadir']):
+	DATADIR=env['datadir']
+else:
+	DATADIR=os.path.join(env['install_prefix'], env['datadir'])
 
 ################################################################################
 
