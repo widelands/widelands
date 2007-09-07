@@ -8,6 +8,6 @@
 #define INSTALL_PREFIX ".\\"
 #define INSTALL_BINDIR ".\\"
 #define INSTALL_DATADIR ".\\"
-#define INSTALL_LOCALEDIR ".\locale\"
+#define INSTALL_LOCALEDIR ".\\locale"
 
 #endif
