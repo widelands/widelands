@@ -86,8 +86,8 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
-	opts.Add('build', 'debug(default) / profile / release', 'debug')
-	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '')
+	opts.Add('build', 'debug / profile / release(default)', 'release')
+	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', 'build11')
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
@@ -220,7 +220,7 @@ env.Append(LIBPATH=env['extra_lib_path'])
 env.AppendUnique(CCFLAGS=Split(env['extra_compile_flags']))
 env.AppendUnique(LINKFLAGS=env['extra_link_flags'])
 
-BINDIR= os.path.join(env['install_prefix'], env['bindir'])
+BINDIR=os.path.join(env['install_prefix'], env['bindir'])
 DATADIR=os.path.join(env['install_prefix'], env['datadir'])
 
 ################################################################################
