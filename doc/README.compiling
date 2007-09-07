@@ -75,6 +75,9 @@ set to point to the place of the installed locales. You might as well
 place the locale files manually to the directory LOCALE_PATH points to.
 This is not yet handled by scons itself.
 
+Unless you are doing a release build, you will also have to manually call
+"scons locale"
+
 make
 ------------------
 Edit src/config.h.default to your liking and check the Makefile for more
