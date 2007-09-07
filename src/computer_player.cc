@@ -182,6 +182,31 @@ granitmine="marblemine";
 	next_road_due=0;
 	next_productionsite_check_due=0;
 	inhibit_road_building=0;
+
+	// Add all fields that we own
+	Map& map = game().map();
+	std::set<OPtr<PlayerImmovable> > found_immovables;
+
+	for(int y = 0; y < map.get_height(); ++y) {
+		for(int x = 0; x < map.get_width(); ++x) {
+			FCoords f = map.get_fcoords(Coords(x,y));
+
+			if (f.field->get_owned_by() != player_number)
+				continue;
+
+			unusable_fields.push_back (map.get_fcoords(Coords(x,y)));
+
+			PlayerImmovable* imm = dynamic_cast<PlayerImmovable*>(f.field->get_immovable());
+
+			if (imm && imm->get_owner() == player) {
+				// Guard by a set because immovables might be on several fields at once
+				if (found_immovables.find(imm) == found_immovables.end()) {
+					found_immovables.insert(imm);
+					gain_immovable(imm);
+				}
+			}
+		}
+	}
 }
 
 Computer_Player::~Computer_Player ()
