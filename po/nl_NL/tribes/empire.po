@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2576\n"
+"Project-Id-Version: Widelands svn2614\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-31 21:59+0000\n"
-"PO-Revision-Date: 2007-09-01 00:06+0100\n"
+"POT-Creation-Date: 2007-09-07 22:00+0000\n"
+"PO-Revision-Date: 2007-09-01 21:52+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
@@ -248,7 +248,7 @@ msgstr "Brood"
 
 #: ../../../tribes/empire/wares/bread/conf:3
 msgid "The backers of the Empire make really tasty bread."
-msgstr "De bakkers van het Keizerrijk bakken heel lekker brood."
+msgstr "De bakkers van het Keizerrijk bakken zeer lekker brood."
 
 #: ../../../tribes/empire/wares/chain_armour/conf:2
 msgid "Chain-Armour"
@@ -320,7 +320,7 @@ msgstr "Goud"
 
 #: ../../../tribes/empire/wares/gold/conf:3
 msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-msgstr "Goud is het meet waardevolle metaal; alleen heel belangrijke zakern worden ermee opgeluisterd."
+msgstr "Goud is het meest waardevolle metaal; alleen heel belangrijke zaken worden ermee opgeluisterd."
 
 #: ../../../tribes/empire/wares/goldstone/conf:2
 msgid "Goldstone"
@@ -657,4 +657,3 @@ msgstr "Wapensmid"
 #: ../../../tribes/empire/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Wever"
-

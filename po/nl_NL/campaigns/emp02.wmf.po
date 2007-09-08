@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2576\n"
+"Project-Id-Version: Widelands svn2614\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-31 21:59+0000\n"
-"PO-Revision-Date: 2007-09-01 00:05+0100\n"
+"POT-Creation-Date: 2007-09-07 22:00+0000\n"
+"PO-Revision-Date: 2007-09-01 21:45+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,8 +22,7 @@ msgstr "Keizerrijk leerschool 2 - Een voorpost in ballingschap"
 msgid "Second mission of the Empire campaign"
 msgstr "Tweede missie van de Keizerrijk campagne"
 
-#: ../../../campaigns/emp02.wmf/event:11
-#: ../../../campaigns/emp02.wmf/event:45
+#: ../../../campaigns/emp02.wmf/event:11 ../../../campaigns/emp02.wmf/event:45
 #: ../../../campaigns/emp02.wmf/event:88
 #: ../../../campaigns/emp02.wmf/event:427
 #: ../../../campaigns/emp02.wmf/event:446
@@ -202,4 +201,3 @@ msgstr "Hé mijn vriend,<br>net op bezoek geweest in onze nieuwe taverne 'Onder 
 #: ../../../campaigns/emp02.wmf/event:1020
 msgid "A drink at 'At the palms'"
 msgstr "Een drankje in 'Onder de palmen'"
-

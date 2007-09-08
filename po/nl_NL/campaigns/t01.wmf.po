@@ -4,20 +4,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2576\n"
+"Project-Id-Version: Widelands svn2614\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-31 21:59+0000\n"
-"PO-Revision-Date: 2007-09-01 00:02+0100\n"
+"POT-Creation-Date: 2007-09-07 22:00+0000\n"
+"PO-Revision-Date: 2007-09-01 21:44+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../campaigns/t01.wmf/event:11
-#: ../../../campaigns/t01.wmf/event:608
-#: ../../../campaigns/t01.wmf/event:627
-#: ../../../campaigns/t01.wmf/event:646
+#: ../../../campaigns/t01.wmf/event:11 ../../../campaigns/t01.wmf/event:608
+#: ../../../campaigns/t01.wmf/event:627 ../../../campaigns/t01.wmf/event:646
 #: ../../../campaigns/t01.wmf/event:665
 msgid "Thron speaks..."
 msgstr "Thron spreekt..."
@@ -26,29 +24,19 @@ msgstr "Thron spreekt..."
 msgid "It's been months and we are still hiding where the forests are old and dark. My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr "Het was maanden geleden, en nog steeds schuilen we in de oude en donkere bossen. Mijn strijders jagen overdag en liggen 's nachts wakker - luisterend naar de geluid van het wrede slachten dat van ver langs de oude bomen weergalmt."
 
-#: ../../../campaigns/t01.wmf/event:15
-#: ../../../campaigns/t01.wmf/event:32
-#: ../../../campaigns/t01.wmf/event:49
-#: ../../../campaigns/t01.wmf/event:66
+#: ../../../campaigns/t01.wmf/event:15 ../../../campaigns/t01.wmf/event:32
+#: ../../../campaigns/t01.wmf/event:49 ../../../campaigns/t01.wmf/event:66
 msgid "The Story begins..."
 msgstr "Het verhaal begint..."
 
-#: ../../../campaigns/t01.wmf/event:22
-#: ../../../campaigns/t01.wmf/event:39
-#: ../../../campaigns/t01.wmf/event:56
-#: ../../../campaigns/t01.wmf/event:73
-#: ../../../campaigns/t01.wmf/event:465
-#: ../../../campaigns/t01.wmf/event:484
-#: ../../../campaigns/t01.wmf/event:503
-#: ../../../campaigns/t01.wmf/event:523
-#: ../../../campaigns/t01.wmf/event:542
-#: ../../../campaigns/t01.wmf/event:562
-#: ../../../campaigns/t01.wmf/event:581
-#: ../../../campaigns/t01.wmf/event:619
-#: ../../../campaigns/t01.wmf/event:638
-#: ../../../campaigns/t01.wmf/event:657
-#: ../../../campaigns/t01.wmf/event:676
-#: ../../../campaigns/t01.wmf/event:723
+#: ../../../campaigns/t01.wmf/event:22 ../../../campaigns/t01.wmf/event:39
+#: ../../../campaigns/t01.wmf/event:56 ../../../campaigns/t01.wmf/event:73
+#: ../../../campaigns/t01.wmf/event:465 ../../../campaigns/t01.wmf/event:484
+#: ../../../campaigns/t01.wmf/event:503 ../../../campaigns/t01.wmf/event:523
+#: ../../../campaigns/t01.wmf/event:542 ../../../campaigns/t01.wmf/event:562
+#: ../../../campaigns/t01.wmf/event:581 ../../../campaigns/t01.wmf/event:619
+#: ../../../campaigns/t01.wmf/event:638 ../../../campaigns/t01.wmf/event:657
+#: ../../../campaigns/t01.wmf/event:676 ../../../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "OK"
 
@@ -72,12 +60,9 @@ msgstr "Een oudere man spreekt je aan..."
 msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
 msgstr "\"Gegroet, leider. Ik ben Khantrukh en heb veel winters gezien. Laat me je alstublieft door deze donkere dagen heen helpen met mijn advies.\""
 
-#: ../../../campaigns/t01.wmf/event:458
-#: ../../../campaigns/t01.wmf/event:477
-#: ../../../campaigns/t01.wmf/event:496
-#: ../../../campaigns/t01.wmf/event:516
-#: ../../../campaigns/t01.wmf/event:535
-#: ../../../campaigns/t01.wmf/event:555
+#: ../../../campaigns/t01.wmf/event:458 ../../../campaigns/t01.wmf/event:477
+#: ../../../campaigns/t01.wmf/event:496 ../../../campaigns/t01.wmf/event:516
+#: ../../../campaigns/t01.wmf/event:535 ../../../campaigns/t01.wmf/event:555
 #: ../../../campaigns/t01.wmf/event:574
 msgid "Advisor"
 msgstr "Adviseur"
@@ -173,4 +158,3 @@ msgstr "Goed zo, leider. We hebben nu alles wat we nodig hebben voor de winter e
 #: ../../../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Missie voltooid"
-
