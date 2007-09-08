@@ -14,8 +14,8 @@ A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "WL.ico"
 // TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
 //
 1 VERSIONINFO
-FILEVERSION 0,0,0,10
-PRODUCTVERSION 0,0,0,10
+FILEVERSION 0,0,0,11
+PRODUCTVERSION 0,0,0,11
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
@@ -23,7 +23,7 @@ FILETYPE VFT_APP
 		 BLOCK "080904E4"
 		 {
 			 VALUE "CompanyName", "The Widelands Development Team"
-			 VALUE "FileVersion", "SVNbuild"
+			 VALUE "FileVersion", "Build11"
 			 VALUE "FileDescription", "Widelands - realtime strategy game"
 			 VALUE "InternalName", "WL"
 			 VALUE "LegalCopyright", "GPL v2"
@@ -31,7 +31,7 @@ FILETYPE VFT_APP
              VALUE "License", "Gnu GPL v2"
 			 VALUE "OriginalFilename", "widelands"
 			 VALUE "ProductName", "Widelands - an Open-Source realtime strategy game"
-			 VALUE "ProductVersion", "SVNbuild"
+			 VALUE "ProductVersion", "Build11"
 		 }
 	 }
   BLOCK "VarFileInfo"

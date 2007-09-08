@@ -23,14 +23,14 @@
 
 ;Version String
 #define XAppName "Widelands"
-#define XAppVerName "Widelands SVNbuild"
-#define XAppVerNumber "0.10.0.1"
-#define XAppID "{WIDELAND-ddmm-yyyy-SVN-INOFFICIAL}"
+#define XAppVerName "Widelands Build11"
+#define XAppVerNumber "0.11.0.1"
+#define XAppID "{WIDELAND-BUILD11-2007}"
 
 ;General String
 #define XAppPublisher "Widelands Development Team"
 #define XAppURL "http://www.widelands.org"
-#define HelpURL "http://xoops.widelands.org/modules/mediawiki/wiki/Main_Page#Help"
+#define HelpURL "http://xoops.widelands.org/modules/mediawiki/wiki/Main_Page"
 #define XAppExeName "widelands.exe"
 #define XAppUrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
