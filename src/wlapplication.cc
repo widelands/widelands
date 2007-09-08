@@ -76,7 +76,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
 #ifdef __APPLE__
-		// on mac, the default Data Dir ist Relative to the current directory
+		// on mac, the default data dir is relative to the current directory
 		g_fs->AddFileSystem(FileSystem::Create("Widelands.app/Contents/Resources/"));
 #else
 		// first, try the data directory used in the last scons invocation
@@ -204,7 +204,7 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * Initialize an instance of WLApplication.
  *
  * This constructor is protected \e on \e purpose !
- * Use \ref WLApplication::get() instead and look at the class description.
+ * Use WLApplication::get() instead and look at the class description.
  *
  * For easier access, we repackage argc/argv into an STL map here. If you specify
  * the same option more than once, only the last occurrence is effective.
@@ -214,72 +214,28 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  */
 WLApplication::WLApplication(const int argc, const char **argv):
 		m_commandline(std::map<std::string, std::string>()),
-		journal               (0),
-		m_input_grab          (false),
-		m_mouse_swapped       (false),
-		m_mouse_speed         (0.0),
-		m_mouse_position              (0,                     0),
-		m_mouse_maxx          (0),     m_mouse_maxy          (0),
-		m_mouse_locked        (0),
-		m_mouse_internal_x    (0),     m_mouse_internal_y    (0),
-		m_mouse_internal_comp_position(0,                     0),
-		m_should_die          (false),
-		m_gfx_w               (0),     m_gfx_h               (0),
-		m_gfx_fullscreen      (false),
-		m_game                (0)
+		journal(0),
+		m_input_grab(false),
+		m_mouse_swapped(false),
+		m_mouse_speed(0.0),
+		m_mouse_position(0, 0),
+		m_mouse_maxx(0), m_mouse_maxy(0),
+		m_mouse_locked(0),
+		m_mouse_internal_x(0), m_mouse_internal_y(0),
+		m_mouse_internal_comp_position(0, 0),
+		m_should_die(false),
+		m_gfx_w(0), m_gfx_h(0),
+		m_gfx_fullscreen(false),
+		m_game(0)
 {
-	//TODO: EXENAME gets written out on windows!
-	m_commandline["EXENAME"]=argv[0];
-
-	for (int i=1; i<argc; ++i) {
-		std::string opt=argv[i];
-		std::string value;
-		SSS_T pos;
-
-		//are we looking at an option at all?
-		if (opt.substr(0, 2)=="--") {
-			//yes. remove the leading "--", just for cosmetics
-			opt.erase(0, 2);
-		} else {
-			//no. mark the commandline as faulty and stop parsing
-			m_commandline.clear();
-			cout << _("Malformed option: ") << opt << endl << endl;
-			break;
-		}
-
-		//look if this option has a value
-		pos=opt.find("=");
-
-		if (pos==std::string::npos) { //if no equals sign found
-			value="";
-		} else {
-			//extract option value
-			value=opt.substr(pos+1, opt.size()-pos);
-
-			//remove value from option name
-			opt.erase(pos, opt.size()-pos);
-		}
-
-		m_commandline[opt]=value;
-	}
-
-	//empty commandline means there were _unhandled_ syntax errors
-	//(commandline should at least contain "EXENAME"=="widelands" !)
-	//in the commandline. They should've been handled though.
-	//TODO: bail out gracefully instead
-	assert(!m_commandline.empty());
-
-	//Now that we now what the user wants, initialize the application
-
-	//create the filesystem abstraction first - we wouldn't even find the
-	//config file without this
 	g_fs=new LayeredFileSystem();
-	setup_searchpaths(m_commandline["EXENAME"]);
+	g_fh=new Font_Handler();
 
+	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
+
+	setup_searchpaths(m_commandline["EXENAME"]);
 	init_settings();
 	init_hardware();
-
-	g_fh = new Font_Handler();
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
@@ -769,7 +725,7 @@ const bool WLApplication::init_settings()
 {
 	Section *s=0;
 
-	//create a journal so that parse_command_line can open the journal files
+	//create a journal so that handle_commandline_parameters can open the journal files
 	journal=new Journal();
 
 	//read in the configuration file
@@ -781,7 +737,7 @@ const bool WLApplication::init_settings()
 	i18n::grab_textdomain("widelands");
 
 	//then parse the commandline - overwrites conffile settings
-	parse_command_line();
+	handle_commandline_parameters();
 
 	// Input
 	m_should_die = false;
@@ -896,12 +852,57 @@ void WLApplication::shutdown_hardware()
 }
 
 /**
+ * Parse the commandline and translate the options into name/value pairs
+ *
+ * The format for commandline parameters is --paramname[=value], that means:
+ * \li starts with "--", i.e. all parameters are "long options"
+ * \li arguments are passed with "="
+ *
+ * \param argc The number of command line arguments
+ * \param argv Array of command line arguments
+ */
+void WLApplication::parse_commandline(const int argc, const char **argv)
+{
+	//TODO: EXENAME gets written out on windows!
+	m_commandline["EXENAME"]=argv[0];
+
+	for (int i=1; i<argc; ++i) {
+		std::string opt=argv[i];
+		std::string value;
+		SSS_T pos;
+
+		//are we looking at an option at all?
+		if (opt.substr(0, 2)=="--") {
+			//yes. remove the leading "--", just for cosmetics
+			opt.erase(0, 2);
+		} else {
+			throw Parameter_error();
+		}
+
+		//look if this option has a value
+		pos=opt.find("=");
+
+		if (pos==std::string::npos) { //if no equals sign found
+			value="";
+		} else {
+			//extract option value
+			value=opt.substr(pos+1, opt.size()-pos);
+
+			//remove value from option name
+			opt.erase(pos, opt.size()-pos);
+		}
+
+		m_commandline[opt]=value;
+	}
+}
+
+/**
  * Parse the command line given in m_commandline
  *
  * \return false if there were errors during parsing \e or if "--help" was given,
  * true otherwise.
 */
-void WLApplication::parse_command_line() throw(Parameter_error)
+void WLApplication::handle_commandline_parameters() throw(Parameter_error)
 {
 	if (m_commandline.count("help")>0 || m_commandline.count("version")>0) {
 		throw Parameter_error(); //no message on purpose

@@ -231,12 +231,18 @@ protected:
 	const bool init_hardware();
 	void shutdown_hardware();
 
-	void parse_command_line() throw(Parameter_error);
+	void parse_commandline(const int argc, const char **argv);
+	void handle_commandline_parameters() throw(Parameter_error);
 
 	void setup_searchpaths(std::string argv0);
 
-	///The commandline, conveniently repackaged
+	/**
+	 * The commandline, conveniently repackaged
+	 * This is usually not empty, it contains at least the tuple
+	 * {"EXENAME", argv0}
+	 */
 	std::map<std::string, std::string> m_commandline;
+
 	std::string m_loadgame_filename, m_tutorial_filename, m_editor_filename;
 
 	///the event recorder object
