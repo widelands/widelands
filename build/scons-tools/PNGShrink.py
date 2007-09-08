@@ -21,21 +21,17 @@ def shrink_command(source, target, env, for_signature):
 
 	s=source[0].path
 	commands.append(env.Action(del_temp_png()))
-	commands.append(env.Action(env['PNGREWRITECOM']))
+	commands.append(env.Action('$PNGREWRITE '+s+' temp.png'))
 	commands.append(env.Action(move_temp_png(s)))
-	commands.append(env.Action(env['OPTIPNGCOM']))
+	commands.append(env.Action('$OPTIPNG $OPTIPNGFLAGS '+s))
 
 	return commands
 
 def generate(env):
 	env['PNGREWRITE']=find_pngrewrite(env)
-	if env['PNGREWRITE']!=None:
-		env['PNGREWRITECOM']='$PNGREWRITE $SOURCE temp.png'
 
 	env['OPTIPNG']=find_optipng(env)
-	if env['OPTIPNG']!=None:
-		env['OPTIPNGFLAGS']='-q -zc1-9 -zm1-9 -zs0-3 -f0-5'
-		env['OPTIPNGCOM']='$OPTIPNG $OPTIPNGFLAGS $SOURCE'
+	env['OPTIPNGFLAGS']='-q -zc1-9 -zm1-9 -zs0-3 -f0-5'
 
 	env['BUILDERS']['PNGShrink']=SCons.Builder.Builder(generator=shrink_command, single_source=1)
 
