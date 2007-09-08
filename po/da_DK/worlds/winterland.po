@@ -1,0 +1,150 @@
+# Widelands po/da_DK/worlds/winterland.po
+# Copyright (C) 2005-2007 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn2611\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-07 09:30+0000\n"
+"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../worlds/winterland/bobs/bunny/conf:1
+msgid "Bunny"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/bush1/conf:1
+#: ../../../worlds/winterland/bobs/bush2/conf:1
+#: ../../../worlds/winterland/bobs/bush3/conf:1
+#: ../../../worlds/winterland/bobs/bush4/conf:1
+#: ../../../worlds/winterland/bobs/bush5/conf:1
+msgid "Bush"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/deadtree1/conf:1
+#: ../../../worlds/winterland/bobs/deadtree2/conf:1
+#: ../../../worlds/winterland/bobs/deadtree3/conf:1
+#: ../../../worlds/winterland/bobs/deadtree4/conf:1
+msgid "Dead Tree"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/deer/conf:1
+msgid "Deer"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/duck/conf:1
+msgid "Duck"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/fox/conf:1
+msgid "Fox"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/grass1/conf:1
+#: ../../../worlds/winterland/bobs/grass2/conf:1
+#: ../../../worlds/winterland/bobs/grass3/conf:1
+msgid "Grass"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/mushroom1/conf:1
+#: ../../../worlds/winterland/bobs/mushroom2/conf:1
+msgid "Mushroom"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/pebble1/conf:1
+#: ../../../worlds/winterland/bobs/pebble2/conf:1
+#: ../../../worlds/winterland/bobs/pebble3/conf:1
+#: ../../../worlds/winterland/bobs/pebble4/conf:1
+#: ../../../worlds/winterland/bobs/pebble5/conf:1
+#: ../../../worlds/winterland/bobs/pebble6/conf:1
+msgid "Pebble"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/reindeer/conf:1
+msgid "Reindeer"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/sheep/conf:1
+msgid "Sheep"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/skeleton1/conf:1
+#: ../../../worlds/winterland/bobs/skeleton2/conf:1
+#: ../../../worlds/winterland/bobs/skeleton3/conf:1
+msgid "Skeleton"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/sstones1/conf:1
+#: ../../../worlds/winterland/bobs/sstones2/conf:1
+#: ../../../worlds/winterland/bobs/sstones3/conf:1
+#: ../../../worlds/winterland/bobs/sstones4/conf:1
+#: ../../../worlds/winterland/bobs/sstones5/conf:1
+#: ../../../worlds/winterland/bobs/sstones6/conf:1
+#: ../../../worlds/winterland/bobs/sstones7/conf:1
+msgid "Standing Stones"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/stones1/conf:1
+#: ../../../worlds/winterland/bobs/stones2/conf:1
+#: ../../../worlds/winterland/bobs/stones3/conf:1
+#: ../../../worlds/winterland/bobs/stones4/conf:1
+#: ../../../worlds/winterland/bobs/stones5/conf:1
+#: ../../../worlds/winterland/bobs/stones6/conf:1
+msgid "Stones"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/tree1/conf:4
+#: ../../../worlds/winterland/bobs/tree2/conf:4
+#: ../../../worlds/winterland/bobs/tree3/conf:4
+#: ../../../worlds/winterland/bobs/tree4/conf:4
+#: ../../../worlds/winterland/bobs/tree5/conf:4
+#: ../../../worlds/winterland/bobs/tree6/conf:4
+#: ../../../worlds/winterland/bobs/tree7/conf:4
+#: ../../../worlds/winterland/bobs/tree8/conf:4
+msgid "Tree"
+msgstr ""
+
+#: ../../../worlds/winterland/bobs/wolf/conf:1
+msgid "Wolf"
+msgstr ""
+
+#: ../../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr ""
+
+#: ../../../worlds/winterland/conf:4
+msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
+msgstr ""
+
+#: ../../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr ""
+
+#: ../../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr ""
+
+#: ../../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr ""
+
+#: ../../../worlds/winterland/resconf:28
+msgid "Granit"
+msgstr ""
+
+#: ../../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr ""
+
+#: ../../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr ""

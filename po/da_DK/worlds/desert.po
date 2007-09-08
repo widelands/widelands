@@ -1,0 +1,162 @@
+# Widelands po/da_DK/worlds/desert.po
+# Copyright (C) 2005-2007 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn2611\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-07 09:30+0000\n"
+"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../worlds/desert/bobs/bunny/conf:1
+msgid "Bunny"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/bush1/conf:1
+#: ../../../worlds/desert/bobs/bush4/conf:1
+#: ../../../worlds/desert/bobs/bush5/conf:1
+msgid "Bush"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/cactus1/conf:1
+#: ../../../worlds/desert/bobs/cactus2/conf:1
+#: ../../../worlds/desert/bobs/cactus3/conf:1
+#: ../../../worlds/desert/bobs/cactus4/conf:1
+msgid "Cactus"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/deadtree1/conf:1
+#: ../../../worlds/desert/bobs/deadtree2/conf:1
+#: ../../../worlds/desert/bobs/deadtree3/conf:1
+#: ../../../worlds/desert/bobs/deadtree4/conf:1
+msgid "Dead Tree"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/deer/conf:1
+msgid "Deer"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/duck/conf:1
+msgid "Duck"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/fox/conf:1
+msgid "Fox"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/grass1/conf:1
+#: ../../../worlds/desert/bobs/grass2/conf:1
+#: ../../../worlds/desert/bobs/grass3/conf:1
+msgid "Grass"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/mushroom1/conf:1
+#: ../../../worlds/desert/bobs/mushroom2/conf:1
+msgid "Mushroom"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/pebble1/conf:1
+#: ../../../worlds/desert/bobs/pebble2/conf:1
+#: ../../../worlds/desert/bobs/pebble3/conf:1
+#: ../../../worlds/desert/bobs/pebble4/conf:1
+#: ../../../worlds/desert/bobs/pebble5/conf:1
+#: ../../../worlds/desert/bobs/pebble6/conf:1
+msgid "Pebble"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/ruin1/conf:1
+#: ../../../worlds/desert/bobs/ruin2/conf:1
+#: ../../../worlds/desert/bobs/ruin3/conf:1
+#: ../../../worlds/desert/bobs/ruin4/conf:1
+#: ../../../worlds/desert/bobs/ruin5/conf:1
+msgid "ruins"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/sheep/conf:1
+msgid "Sheep"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/skeleton1/conf:1
+#: ../../../worlds/desert/bobs/skeleton2/conf:1
+#: ../../../worlds/desert/bobs/skeleton3/conf:1
+msgid "Skeleton"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/skeleton4/conf:1
+msgid "Shell"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/sstones1/conf:1
+#: ../../../worlds/desert/bobs/sstones2/conf:1
+#: ../../../worlds/desert/bobs/sstones3/conf:1
+#: ../../../worlds/desert/bobs/sstones4/conf:1
+#: ../../../worlds/desert/bobs/sstones5/conf:1
+#: ../../../worlds/desert/bobs/sstones6/conf:1
+#: ../../../worlds/desert/bobs/sstones7/conf:1
+msgid "Standing Stones"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/stones1/conf:1
+#: ../../../worlds/desert/bobs/stones2/conf:1
+#: ../../../worlds/desert/bobs/stones3/conf:1
+#: ../../../worlds/desert/bobs/stones4/conf:1
+#: ../../../worlds/desert/bobs/stones5/conf:1
+#: ../../../worlds/desert/bobs/stones6/conf:1
+msgid "Stones"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/tree1/conf:4
+msgid "Palm"
+msgstr ""
+
+#: ../../../worlds/desert/bobs/tree2/conf:4
+#: ../../../worlds/desert/bobs/tree3/conf:4
+#: ../../../worlds/desert/bobs/tree4/conf:4
+#: ../../../worlds/desert/bobs/tree5/conf:4
+#: ../../../worlds/desert/bobs/tree6/conf:4
+#: ../../../worlds/desert/bobs/tree7/conf:4
+#: ../../../worlds/desert/bobs/tree8/conf:4
+msgid "Tree"
+msgstr ""
+
+#: ../../../worlds/desert/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../../worlds/desert/conf:3
+msgid "Desert"
+msgstr ""
+
+#: ../../../worlds/desert/conf:4
+msgid "This is the wide and sandy country of the bedouins"
+msgstr ""
+
+#: ../../../worlds/desert/resconf:4
+msgid "Coal"
+msgstr ""
+
+#: ../../../worlds/desert/resconf:12
+msgid "Gold"
+msgstr ""
+
+#: ../../../worlds/desert/resconf:20
+msgid "Iron"
+msgstr ""
+
+#: ../../../worlds/desert/resconf:28
+msgid "Granit"
+msgstr ""
+
+#: ../../../worlds/desert/resconf:36
+msgid "Water"
+msgstr ""
+
+#: ../../../worlds/desert/resconf:41
+msgid "Fish"
+msgstr ""
