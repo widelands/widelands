@@ -226,10 +226,10 @@ if not os.path.isabs(env['bindir']):
 	env['bindir']=os.path.join(env['install_prefix'], env['bindir'])
 
 if not os.path.isabs(env['datadir']):
-	=os.path.join(env['install_prefix'], env['datadir'])
+	env['datadir']=os.path.join(env['install_prefix'], env['datadir'])
 
 if not os.path.isabs(env['localedir']):
-	=os.path.join(env['install_prefix'], env['localedir'])
+	env['localedir']=os.path.join(env['install_prefix'], env['localedir'])
 
 ################################################################################
 
