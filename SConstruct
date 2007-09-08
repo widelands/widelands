@@ -222,20 +222,14 @@ env.Append(LIBPATH=env['extra_lib_path'])
 env.AppendUnique(CCFLAGS=Split(env['extra_compile_flags']))
 env.AppendUnique(LINKFLAGS=env['extra_link_flags'])
 
-if os.path.isabs(env['bindir']):
-	BINDIR=env['bindir']
-else:
-	BINDIR=os.path.join(env['install_prefix'], env['bindir'])
+if not os.path.isabs(env['bindir']):
+	env['bindir']=os.path.join(env['install_prefix'], env['bindir'])
 
-if os.path.isabs(env['datadir']):
-	DATADIR=env['datadir']
-else:
-	DATADIR=os.path.join(env['install_prefix'], env['datadir'])
+if not os.path.isabs(env['datadir']):
+	=os.path.join(env['install_prefix'], env['datadir'])
 
-if os.path.isabs(env['localedir']):
-	LOCALEDIR=env['localedir']
-else:
-	LOCALEDIR=os.path.join(env['install_prefix'], env['localedir'])
+if not os.path.isabs(env['localedir']):
+	=os.path.join(env['install_prefix'], env['localedir'])
 
 ################################################################################
 
@@ -250,7 +244,7 @@ print 'Build ID:          '+env['build_id']
 
 config_h=write_configh_header()
 do_configure(config_h, conf, env)
-write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR, LOCALEDIR)
+write_configh_footer(config_h, env['install_prefix'], env['bindir'], env['datadir'], env['localedir'])
 write_buildid(env['build_id'])
 
 env=conf.Finish()

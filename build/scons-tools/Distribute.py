@@ -91,9 +91,9 @@ def doinst(target, source, env):
 			name=zipfilename
 
 		if filetype=='data':
-			prefix=os.path.join(env['install_prefix'], env['datadir'], os.path.dirname(location))
+			prefix=os.path.join(env['datadir'], os.path.dirname(location))
 		if filetype=='binary':
-			prefix=os.path.join(env['install_prefix'], env['bindir'], os.path.dirname(location))
+			prefix=os.path.join(env['bindir'], os.path.dirname(location))
 
 		if not os.path.exists(prefix):
 				os.makedirs(prefix, 0755)
@@ -111,11 +111,11 @@ def douninst(target, source, env):
 	datadir=os.path.join(env['install_prefix'], env['datadir'])
 	executable=os.path.join(env['install_prefix'], env['bindir'], 'widelands')
 
-	print "Removing data directory", datadir
-	if os.path.exists(datadir):
-		shutil.rmtree(datadir)
+	print "Removing data directory", env['datadir']
+	if os.path.exists(env['datadir']):
+		shutil.rmtree(env['datadir'])
 	else:
-		print "        %s does not exist" % (datadir,)
+		print "        %s does not exist" % (env['datadir'],)
 
 	print "Removing executable", executable
 	if os.path.exists(executable):
