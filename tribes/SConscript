@@ -2,6 +2,6 @@ Import('*')
 
 from Distribute import distadd, instadd
 
-instadd(env, 'tribes/*', 'tribes')
+instadd(env, 'tribes/*')
 
 distadd(env, 'tribes/*')

@@ -2,7 +2,7 @@ Import('*')
 from Distribute import distadd, instadd
 
 distadd(env, 'po/*')
-instadd(env, 'locale/*', 'locale')
+instadd(env, 'locale/*', filetype='locale')
 
 #will be executed from base dir!
 buildlocale=PhonyTarget("buildlocale", 'utils/buildlocale.py')

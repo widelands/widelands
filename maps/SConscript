@@ -2,7 +2,7 @@ Import('env')
 from Distribute import *
 import glob
 
-instadd(env, 'maps/*.wmf', 'maps', True)
+instadd(env, 'maps/*.wmf', compress=True)
 
 distadd(env, 'maps/SConscript')
 distadd(env, 'maps/*.wmf', True)

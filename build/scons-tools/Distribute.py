@@ -49,61 +49,74 @@ def dodist(target, source, env):
 	tarbz2file.close()
 	shutil.rmtree(tmpdir)
 
-def instadd(env, source, prefix=None, compress=False, filetype='data'):
-	if prefix==None:
-		if os.path.isdir(source):
-			prefix=source
-		else:
-			prefix=''
+def instadd(env, sourcestring, targetdir=None, compress=False, filetype='data'):
+	sourcebase=os.path.basename(sourcestring)
+	sourcedir=os.path.dirname(sourcestring)
 
-	for s in glob.glob(os.path.basename(source)):
-		if s=='SConscript':
+	if targetdir==None:
+		targetdir=sourcedir
+
+	for filename in glob.glob(sourcebase):
+		if filename=='SConscript':
 			continue
-		head,tail=os.path.split(source)
-		env['INSTFILES']+=[(os.path.join(head, s), os.path.join(prefix, tail), compress, filetype)]
+
+		env['INSTFILES']+=[(os.path.join(sourcedir,filename), os.path.join(targetdir, filename), compress, filetype)]
 
 def doinst(target, source, env):
 	tmpdir=tempfile.mkdtemp(prefix='widelands-inst.')
 
-	for (name, location, compress, filetype) in set(env['INSTFILES']):  #the set is there to ensure uniqueness
+	for (source, target, compress, filetype) in set(env['INSTFILES']):  #the set is there to ensure uniqueness
+		sourcebase=os.path.basename(source)
+		sourcedir=os.path.dirname(source)
+		targetbase=os.path.basename(target)
+		targetdir=os.path.dirname(target)
+
 		if compress:
-			head,tail=os.path.split(name)
 			try:
-				os.makedirs(os.path.join(tmpdir, head))
+				shutil.rmtree(tmpdir)
 			except:
 				pass
-			zipfilename=os.path.join(tmpdir, name)
+			os.makedirs(tmpdir)
+
+			zipfilename=os.path.join(tmpdir, sourcebase)
 			zipfile=ZipFile(zipfilename, mode='w')
 
-			if os.path.isfile(name):
-				zipfile.write(name)
+			if os.path.isfile(source):
+				zipfile.write(source)
 
-			if os.path.isdir(name):
-				for root, dirs, files in os.walk(name):
+			if os.path.isdir(source):
+				for root, dirs, files in os.walk(source):
 					for f in files:
 						realname=os.path.join(root, f)
-						head,virtualname=realname.split(os.sep, 1)
-						zipfile.write(realname, virtualname)
+						realdir,realbase=realname.split(os.sep, 1)
+						zipfile.write(realname, realbase)
 					if '.svn' in dirs:
 						dirs.remove('.svn')  # don't visit subversion directories
 
 			zipfile.close()
-			name=zipfilename
+
+			source=zipfilename
+			sourcebase=os.path.basename(source)
+			sourcedir=os.path.dirname(source)
 
 		if filetype=='data':
-			prefix=os.path.join(env['datadir'], os.path.dirname(location))
+			targetprefix=os.path.join(env['datadir'], targetdir)
 		if filetype=='binary':
-			prefix=os.path.join(env['bindir'], os.path.dirname(location))
+			targetprefix=os.path.join(env['bindir'], targetdir)
+		if filetype=='locale':
+			targetprefix=os.path.join(env['localedir'], targetdir)
 
-		if not os.path.exists(prefix):
-				os.makedirs(prefix, 0755)
+		if not os.path.exists(targetprefix):
+			os.makedirs(targetprefix, 0755)
 
-		if os.path.isfile(name):
-			shutil.copy(name, prefix)
+		if os.path.isfile(source):
+			shutil.copy(source, targetprefix)
 			if filetype=='binary':
-				os.chmod(os.path.join(prefix, name), 0755)
-		elif os.path.isdir(name):
-			distutils.dir_util.copy_tree(name, os.path.join(prefix, os.path.basename(name)))
+				os.chmod(os.path.join(targetprefix, sourcebase), 0755)
+			else:
+				os.chmod(os.path.join(targetprefix, sourcebase), 0644)
+		elif os.path.isdir(source):
+			distutils.dir_util.copy_tree(source, os.path.join(targetprefix, targetbase))
 
 	shutil.rmtree(tmpdir)
 
@@ -116,6 +129,7 @@ def douninst(target, source, env):
 		shutil.rmtree(env['datadir'])
 	else:
 		print "        %s does not exist" % (env['datadir'],)
+	print "If you installed your locales somewhere else than here, they have not been deleted!"
 
 	print "Removing executable", executable
 	if os.path.exists(executable):

@@ -2,9 +2,9 @@ Import('env')
 
 from Distribute import distadd, instadd
 
-instadd(env, 'campaigns/*.wmf', 'campaigns')
-instadd(env, 'campaigns/cconfig', 'campaigns')
+instadd(env, 'campaigns/*.wmf')
+instadd(env, 'campaigns/cconfig')
 
 distadd(env, 'campaigns/SConscript')
 distadd(env, 'campaigns/*.wmf')
-distadd(env, 'campaigns/cconfig', 'campaigns')
+distadd(env, 'campaigns/cconfig')

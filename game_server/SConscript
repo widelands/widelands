@@ -2,6 +2,6 @@ Import('*')
 
 from Distribute import distadd, instadd
 
-instadd(env, 'game_server/*', 'game_server')
+instadd(env, 'game_server/*')
 
 distadd(env, 'game_server/*')

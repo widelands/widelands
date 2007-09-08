@@ -2,6 +2,6 @@ Import('*')
 
 from Distribute import distadd, instadd
 
-instadd(env, 'txts/*', 'txts')
+instadd(env, 'txts/*')
 
 distadd(env, 'txts/*')

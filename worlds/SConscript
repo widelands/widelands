@@ -2,7 +2,7 @@ Import('*')
 
 from Distribute import distadd, instadd
 
-instadd(env, 'worlds/*', 'worlds')
+instadd(env, 'worlds/*')
 
 distadd(env, 'worlds/*')
 
