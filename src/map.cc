@@ -1819,12 +1819,8 @@ public:
 };
 
 
-/*
-===============
-Map::increase_pathcycle
-
-Increment pathcycle and clear the pathfields array if necessary.
-===============
+/**
+ * Increment pathcycle and clear the pathfields array if necessary.
 */
 void Map::increase_pathcycle()
 {
@@ -1839,20 +1835,28 @@ void Map::increase_pathcycle()
 /**
  * Finds a path from start to end for a Map_Object with the given movecaps.
  *
- * The path is stored in \p path, in terms of \ref Map_Object::WALK_* constants.
+ * The path is stored in \p path, as a series of Map_Object::WalkingDir entries.
+ *
  * \param persist tells the function how hard it should try to find a path:
  * If \p persist is \c 0, the function will never give up early. Otherwise, the
  * function gives up when it becomes clear that the path takes longer than
  * persist*bird's distance of flat terrain.
  * Note that if the terrain contains steep hills, the cost calculation will
  * cause the search to terminate earlier than you may think. If persist==1,
- * \ref findpath can only find a path if the terrain is completely flat.
+ * findpath() can only find a path if the terrain is completely flat.
  *
  * \param checkstep findpath() calls this checkstep functor-like to determine
  * whether moving from one field to another is legal.
  *
+ * \param instart UNDOCUMENTED
+ * \param inend UNDOCUMENTED
+ * \param path UNDOCUMENTED
+ * \param flags UNDOCUMENTED
+ *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
+ *
+ * \todo Document parameters instart, inend, path, flags
  */
 int Map::findpath
 (Coords instart,

@@ -30,7 +30,6 @@
 namespace UI {
 
 /**
- * \class Slider
  * \brief This class defines a generic slide bar.
  *
  * The callbacks for the slider value are done by two signal instances.
@@ -100,7 +99,6 @@ protected:
 
 
 /**
- * \struct HorizontalSlider
  * \brief This class defines an horizontal slide bar.
  */
 struct HorizontalSlider : public Slider {
@@ -128,14 +126,13 @@ struct HorizontalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget * dst);
-	bool handle_mousemove(const Uint8, int x, int y, int, int);
+	bool handle_mousemove(const Uint8 btn, int x, int y, int, int);
 	bool handle_mousepress(const Uint8 btn, int x, int y);
 };
 
 
 
 /**
- * \struct VerticalSlider
  * \brief This class defines a verical slide bar.
  */
 struct VerticalSlider : public Slider {
@@ -163,7 +160,7 @@ struct VerticalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget * dst);
-	bool handle_mousemove(const Uint8, int x, int y, int, int);
+	bool handle_mousemove(const Uint8 btn, int x, int y, int, int);
 	bool handle_mousepress(const Uint8 btn, int x, int y);
 };
 

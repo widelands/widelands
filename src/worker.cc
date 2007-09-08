@@ -37,7 +37,7 @@
 
 
 /**
- * createitem <waretype>
+ * createitem \<waretype\>
  *
  * The worker will create and carry an item of the given type.
  *
@@ -72,7 +72,7 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
 
 
 /**
- * mine <resource> <area>
+ * mine \<resource\> \<area\>
  *
  * Mine on the current coordinates (from walk or so) for resources decrease,
  * go home
@@ -164,7 +164,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 
 
 /**
- * setdescription <immovable name> <immovable name> ...
+ * setdescription \<immovable name\> \<immovable name\> ...
  *
  * Randomly select an immovable name that can be used in subsequent commands
  * (e.g. plant).
@@ -207,7 +207,7 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 
 
 /**
- * setbobdescription <bob name> <bob name> ...
+ * setbobdescription \<bob name\> \<bob name\> ...
  *
  * Randomly select a bob name that can be used in subsequent commands
  * (e.g. create_bob).
@@ -256,13 +256,13 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
  * The object can be used in other commands like walk or object.
  *
  * Predicates:
- * radius:<dist>
+ * radius:\<dist\>
  * Find objects within the given radius
  *
- * attrib:<attribute>  (optional)
+ * attrib:\<attribute\>  (optional)
  * Find objects with the given attribute
  *
- * type:<what>         (optional, defaults to immovable)
+ * type:\<what\>         (optional, defaults to immovable)
  * Find only objects of this type
  *
  * iparam1 = radius predicate
@@ -336,13 +336,13 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
  * The field can later be used in other commands, e.g. walk.
  *
  * Predicates:
- * radius:<dist>
+ * radius:\<dist\>
  * Search for fields within the given radius around the worker.
  *
  * size:[any|build|small|medium|big|mine|port]
  * Search for fields with the given amount of space.
  *
- * resource:<resname>
+ * resource:\<resname\>
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
  *
@@ -392,7 +392,7 @@ bool Worker::run_findspace(Game* g, State* state, const Action* action)
 
 
 /**
- *walk <where>
+ *walk \<where\>
  *
  * Walk to a previously selected destination. where can be one of:
  * object  walk to a previously found and selected object
@@ -479,7 +479,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 
 
 /**
- * animation <name> <duration>
+ * animation \<name\> \<duration\>
  *
  * Play the given animation for the given amount of time.
  *
@@ -513,7 +513,7 @@ bool Worker::run_return(Game* g, State* state, const Action* action)
 
 
 /**
- * object <command>
+ * object \<command\>
  *
  * Cause the currently selected object to execute the given program.
  *
@@ -638,7 +638,7 @@ bool Worker::run_removeobject(Game * g, State * state, const Action *)
 
 
 /**
- * geologist <repeat #> <radius> <subcommand>
+ * geologist \<repeat #\> \<radius\> \<subcommand\>
  *
  * Walk around the starting point randomly within a certain radius, and
  * execute the subcommand for some of the fields.
@@ -699,7 +699,7 @@ bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 
 
 /**
- * Demand from the \ref g_sound_handler to play a certain sound effect.
+ * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playFX(Game* g, State* state, const Action* action)
@@ -763,9 +763,9 @@ uint Worker::get_movecaps() const throw () {return MOVECAPS_WALK;}
 
 /**
  * Change the location. This should be called in the following situations:
- * - worker creation (usually, location is a warehouse)
- * - worker moves along a route (location is a road and finally building)
- * - current location is destroyed (building burnt down etc...)
+ * \li worker creation (usually, location is a warehouse)
+ * \li worker moves along a route (location is a road and finally building)
+ * \li current location is destroyed (building burnt down etc...)
  */
 void Worker::set_location(PlayerImmovable *location)
 {
@@ -805,8 +805,8 @@ void Worker::set_location(PlayerImmovable *location)
 
 /**
  * Change the worker's current economy. This is called:
- * - by set_location() when appropriate
- * - by the current location, when the location's economy changes
+ * \li by set_location() when appropriate
+ * \li by the current location, when the location's economy changes
  */
 void Worker::set_economy(Economy *economy)
 {

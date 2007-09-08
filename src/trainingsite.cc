@@ -131,9 +131,8 @@ Building * TrainingSite_Descr::create_object() const
 {return new TrainingSite(*this);}
 
 /**
- * Returns the minimum level to which this building can downgrade a specified attribute
- * \param at  the attribute to investigate
- * \return  the minimum level to be attained at this site
+ * \param at the attribute to investigate
+ * \return  the minimum level to which this building can downgrade a specified attribute
  */
 int TrainingSite_Descr::get_min_level(const tAttribute at) const {
 	switch (at) {
@@ -705,7 +704,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 /**
  * Change the priorities for training
  */
-void TrainingSite::modif_priority(tAttribute atr, int value)
+void TrainingSite::modif_priority(enum tAttribute atr, int value)
 {
 	switch (atr) {
 	case atrHP:
@@ -930,8 +929,8 @@ void TrainingSite::calc_list_upgrades(Game *) {
 
 /**
  * Start a training program
- * \param game  the current game object
- * \param name  the program to start
+ * \param g             the current game object
+ * \param program_name  the program to start
  */
 void TrainingSite::program_start(Game * g, std::string program_name)
 {
@@ -945,7 +944,7 @@ void TrainingSite::program_start(Game * g, std::string program_name)
 /**
  * Clean up after the end of a training program and find the next program that should
  * be run at this training site
- * \param game     the current game object
+ * \param g        the current game object
  * \param success  whether the program was finished successfully
  */
 void TrainingSite::program_end(Game * g, bool success)

@@ -24,7 +24,7 @@
 
 /**
  * Producer/Coroutine struct that returns every triangle which can be reached by
- * crossing at most <radius> edges.
+ * crossing at most \a radius edges.
  *
  * Each such location is returned exactly once via next(). But this does not
  * guarantee that a location is returned at most once when the radius is so
@@ -45,15 +45,18 @@ struct MapTriangleRegion
 	const Coords_type & location() const throw ();
 
 	/**
-	 * Moves on to the next location. The return value indicates whether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done and location is the same as it was before the first
-	 * call to advance. The iteration can then be redone by calling advance
-	 * again, which will return true util it reaches the first location the next
-	 * time around, and so on.
+	 * Moves on to the next location, traversing the region by row.
+	 *
+	 * \return Whether the new location has not yet been reached during this
+	 * iteration.
+	 *
+	 * \note When the area is so large that it overlaps itself because of
+	 * wrapping, the same location may be reached several times during an
+	 * iteration, while advance keeps returning true. When finally advance
+	 * returns false, it means that the iteration is done and location is
+	 * the same as it was before the first call to advance. The iteration
+	 * can then be redone by calling advance again, which will return true
+	 * until it reaches the first location the next time around, and so on.
 	 */
 	bool advance(const Map &) throw ();
 };

@@ -58,38 +58,38 @@ struct InputCallback {
  * WLAppplication bundles all initialization and shutdown code in one neat
  * package. It also includes all (well, most) system abstractions, notably
  * i18n, input handling, timing, low level networking and graphics setup (the
- * actual graphics work is done by \ref class Graphic).
+ * actual graphics work is done by Graphic).
  *
- * \todo Is the above part about i18n still true? #bedouin
+ * \todo Is the above part about i18n still true? \#bedouin
  *
  * Equally important, the main event loop is chugging along in this class. [not
- * yet but some time in the future #fweber5nov2006]
+ * yet but some time in the future \#bedouin8sep2007]
  *
  * \par WLApplication is a singleton
  *
  * Because of it's special purpose, having more than one WLApplication is
  * useless. So we implement singleton semantics:
  * \li A private(!) static class variable (--> unique for the whole program,
- *     although nobody can get at it) \ref the_singleton holds a pointer to the
+ *     although nobody can get at it) the_singleton holds a pointer to the
  *     only instance of WLApplication. It's private because it wouldn't be a
  *     class variable otherwise.
  * \li There is no public constructor. If there was, you'd be able to create
  *     more WLApplications. So constructor access must be encapsulated too.
  * \li The only way to get at the WLApplication object is to call
- *     \ref WLApplication::get(), which is static as well. Because of this,
- *     \ref get() can access \ref the_singleton even if no WLApplication object
+ *     WLApplication::get(), which is static as well. Because of this,
+ *     get() can access the_singleton even if no WLApplication object
  *     has been instantiated yet.
- *     \ref get() will \e always give you a valid WLApplication. If one doesn't
+ *     get() will \e always give you a valid WLApplication. If one doesn't
  *     exist yet, it will be created.
- * \li A destructor does not make sense. Just make sure you call \ref shutdown()
- *     when you're done - in a sense, it's a destructor without the destruction
- *     part ;-)
+ * \li A destructor does not make sense. Just make sure you call
+ *     shutdown_settings() and shutdown_hardware() when you're done - in a
+ *     sense, it's a destructor without the destruction part ;-)
  *
  * These measures \e guarantee that there are no stray WLApplication objects
  * floating around by accident.
  *
  * For testing purposes, we can spawn a second process with widelands running in
- * it (see \ref init_double_game()). The fact that WLApplication is a singleton
+ * it (see init_double_game()). The fact that WLApplication is a singleton
  * is not touched by this: the processes start out as a byte exact memory copy,
  * so the two instances can't know (except for fork()'s return value) that they
  * are (or are not) a primary thread. Each WLApplication singleton really *is* a

@@ -1089,7 +1089,7 @@ void RenderTarget::renderminimap(const Editor_Game_Base & egbase,
 
 /**
  * Draws a frame of an animation at the given location
- * Plays sound effect that is registered with this frame (the \ref Sound_Handler
+ * Plays sound effect that is registered with this frame (the Sound_Handler
  * decides if the fx really does get played)
  *
  * \par dstx, dsty

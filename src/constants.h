@@ -28,7 +28,7 @@
  * Lots more are scattered through header files
  */
 
-/* \name Textures
+/** \name Textures
  * textures have a fixed size and are squares
  * TEXTURE_HEIGHT is just defined for easier understandement of the code*/
 //@{
@@ -52,7 +52,7 @@
 //@}
 
 /// \name Font colors
-/// No background color
+/// A background color is not explicitly defined
 //@{
 
 /// Global UI font color
@@ -65,7 +65,7 @@
 /** \name Text colors
  * User interface text color constants
  *
- * Defined as "<fontcolor>, <background color>".
+ * Defined as "\<fontcolor\>, \<background color\>".
  * The background colors are chosen to match the user interface
  * backgrounds.
  */
@@ -88,9 +88,9 @@
 #define STATISTICS_SAMPLE_TIME 30000
 
 /** Shorthand because the original is a lot to type \e and harder to read.
- * Use #define and not typedef so that we don't need to #include<string> here.
- * This would cause <string> to be included in every constants.h "user" ...
- * instead of just every SSS_T user.
+ * Use \#define and not typedef so that we don't need to \#include \<string\>
+ * here. This would cause \<string\> to be included in every constants.h
+ * user instead of just every SSS_T user.
  */
 #define SSS_T std::string::size_type
 

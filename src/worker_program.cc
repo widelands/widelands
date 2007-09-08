@@ -94,7 +94,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 
 
 /**
- * createitem <waretype>
+ * createitem \<waretype\>
  *
  * The worker will create and carry an item of the given type.
  *
@@ -113,7 +113,7 @@ void WorkerProgram::parse_createitem(Worker_Descr *, Worker::Action * act,
 
 
 /**
- * mine <resource> <area>
+ * mine \<resource\> \<area\>
  *
  * Mine on the current coordinates (from walk or so) for resources decrease,
  * go home
@@ -139,7 +139,7 @@ void WorkerProgram::parse_mine(Worker_Descr *, Worker::Action * act, Parser *,
 
 
 /**
- * setdescription <immovable name> <immovable name> ...
+ * setdescription \<immovable name\> \<immovable name\> ...
  *
  * Randomly select an immovable name that can be used in subsequent commands
  * (e.g. plant).
@@ -161,7 +161,7 @@ void WorkerProgram::parse_setdescription(Worker_Descr *, Worker::Action * act,
 
 
 /**
- * setbobdescription <bob name> <bob name> ...
+ * setbobdescription \<bob name\> \<bob name\> ...
  *
  * Randomly select a bob name that can be used in subsequent commands
  * (e.g. create_bob).
@@ -189,13 +189,13 @@ void WorkerProgram::parse_setbobdescription(Worker_Descr *, Worker::Action * act
  * The object can be used in other commands like walk or object.
  *
  * Predicates:
- * radius:<dist>
+ * radius:\<dist\>
  * Find objects within the given radius
  *
- * attrib:<attribute>  (optional)
+ * attrib:\<attribute\>  (optional)
  * Find objects with the given attribute
  *
- * type:<what>         (optional, defaults to immovable)
+ * type:\<what\>         (optional, defaults to immovable)
  * Find only objects of this type
  *
  * iparam1 = radius predicate
@@ -249,13 +249,13 @@ void WorkerProgram::parse_findobject(Worker_Descr *, Worker::Action * act,
  * The field can later be used in other commands, e.g. walk.
  *
  * Predicates:
- * radius:<dist>
+ * radius:\<dist\>
  * Search for fields within the given radius around the worker.
  *
  * size:[any|build|small|medium|big|mine|port]
  * Search for fields with the given amount of space.
  *
- * resource:<resname>
+ * resource:\<resname\>
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
  *
@@ -326,7 +326,7 @@ void WorkerProgram::parse_findspace(Worker_Descr *, Worker::Action * act,
 }
 
 /**
- * walk <where>
+ * walk \<where\>
  *
  * Walk to a previously selected destination. where can be one of:
  * object  walk to a previously found and selected object
@@ -351,7 +351,7 @@ void WorkerProgram::parse_walk(Worker_Descr *, Worker::Action * act, Parser *,
 }
 
 /**
- * animation <name> <duration>
+ * animation \<name\> \<duration\>
  *
  * Play the given animation for the given amount of time.
  *
@@ -402,7 +402,7 @@ void WorkerProgram::parse_return(Worker_Descr *, Worker::Action * act, Parser *,
 
 
 /**
- * object <command>
+ * object \<command\>
  *
  * Cause the currently selected object to execute the given program.
  *
@@ -454,7 +454,7 @@ void WorkerProgram::parse_removeobject(Worker_Descr *, Worker::Action * act,
 
 
 /**
- * geologist <repeat #> <radius> <subcommand>
+ * geologist \<repeat #\> \<radius\> \<subcommand\>
  *
  * Walk around the starting point randomly within a certain radius,
  * and execute the subcommand for some of the fields.

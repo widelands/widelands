@@ -767,7 +767,12 @@ void Player::lose_immovable(PlayerImmovable* imm)
  *
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (from the time when statistics were kept in
- *       \ref Interactive_Player)
+ *       Interactive_Player)
+ * \param fr UNDOCUMENTED
+ *
+ * \todo Is the documentation for parameter version complete? Doesn't look like
+ * it.
+ * \todo Document parameter fr
  */
 void Player::ReadStatistics(FileRead& fr, uint version)
 {

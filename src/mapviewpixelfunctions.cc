@@ -91,10 +91,6 @@ unsigned int MapviewPixelFunctions::calc_pix_distance
 }
 
 
-/**
- * Documentation exists in HTML-format with figures. If you want it and can not
- * find it, ask Erik Sigra.
- */
 Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 (const Map & map, unsigned int x, unsigned int y)
 {

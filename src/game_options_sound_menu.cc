@@ -112,7 +112,6 @@ ingame_sound_volume
 }
 
 /**
- * \fn changed_ingame_music
  * \brief The music checkbox has been toggled.
  */
 void GameOptionsSoundMenu::changed_ingame_music(bool on) {
@@ -121,7 +120,6 @@ void GameOptionsSoundMenu::changed_ingame_music(bool on) {
 }
 
 /**
- * \fn changed_ingame_sound
  * \brief The FX checkbox has been toggled.
  */
 void GameOptionsSoundMenu::changed_ingame_sound(bool on) {
@@ -131,7 +129,6 @@ void GameOptionsSoundMenu::changed_ingame_sound(bool on) {
 
 
 /**
- * \fn music_volume_changed
  * \brief Callback for the music volume slider.
  *
  * \param value The new music volume.
@@ -142,7 +139,6 @@ void GameOptionsSoundMenu::music_volume_changed(int value) {
 
 
 /**
- * \fn sound_volume_changed
  * \brief Callback for the sound volume slider.
  *
  * \param value The new sound volume value.

@@ -26,8 +26,7 @@
 #include "ui_slider.h"
 
 /**
- * \class GameOptionsSoundMenu
- * \brief The GameOptionsSoundMenu is a window with all sound options.
+ * A window with all sound options.
  */
 struct GameOptionsSoundMenu : public UI::UniqueWindow {
 	GameOptionsSoundMenu(Interactive_Player &, UI::UniqueWindow::Registry &);

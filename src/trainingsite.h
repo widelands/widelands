@@ -133,7 +133,7 @@ private:
 	void request_soldier();
 	static void request_soldier_callback(Game * g, Request * rq, int ware, Worker * w, void *data);
 
-	void program_start(Game * g, std::string name);
+	void program_start(Game * g, std::string program_name);
 	void program_end(Game * g, bool success);
 	void find_and_start_next_program(Game * g);
 	void calc_list_upgrades(Game * g);
@@ -182,16 +182,16 @@ private:
 	 * \sa m_pri_hp, m_pri_attack, m_pri_defense*/
 	uint m_pri_evade;
 
-	/** Modificator for \ref m_pri_hp, needed to prevent infinite loop when upgrading is not
+	/** Modificator for m_pri_hp, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
 	int m_pri_hp_mod;
-	/** Modificator for \ref m_pri_attack, needed to prevent infinite loop when upgrading is not
+	/** Modificator for m_pri_attack, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
 	int m_pri_attack_mod;
-	/** Modificator for \ref m_pri_defense, needed to prevent infinite loop when upgrading is not
+	/** Modificator for m_pri_defense, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
 	int m_pri_defense_mod;
-	/** Modificator for \ref m_pri_evade, needed to prevent infinite loop when upgrading is not
+	/** Modificator for m_pri_evade, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/
 	int m_pri_evade_mod;
 

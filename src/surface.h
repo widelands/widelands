@@ -29,7 +29,7 @@ struct Player;
 
 /**
  * This was formerly called struct Bitmap. But now it manages an
- * \ref SDL_Surface as it's core.
+ * SDL_Surface as it's core.
  *
  * Represents a simple bitmap without managing its memory. The rendering
  * functions do NOT perform any clipping; this is up to the caller.

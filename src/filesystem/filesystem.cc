@@ -220,7 +220,6 @@ std::string FileSystem::GetHomedir()
  * Split a string into components seperated by a certain character
  *
  * \param path The path to parse
- * \param filesep A character seperating the components
  * \return a list of path components
  *
  * \todo This does not really belong into a filesystem class

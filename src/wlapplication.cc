@@ -422,7 +422,9 @@ void WLApplication::run()
  *
  * \param ev the retrieved event will be put here
  * \param throttle Limit recording to 100fps max (not the event loop itself!)
- * \return true if an event was returned inside \ref ev, false otherwise
+ *
+ * \return true if an event was returned inside ev, false otherwise
+ *
  * \todo Catch Journalfile_error
  */
 const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
@@ -894,7 +896,7 @@ void WLApplication::shutdown_hardware()
 }
 
 /**
- * Parse the command line given in \ref m_commandline
+ * Parse the command line given in m_commandline
  *
  * \return false if there were errors during parsing \e or if "--help" was given,
  * true otherwise.

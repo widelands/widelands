@@ -24,10 +24,10 @@
 
 /**
  * Producer/Coroutine struct that iterates over every node for which the
- * distance to the center point is greater than <hollow_area>.hole_radius and at
- * most <hollow_area>.radius.
+ * distance to the center point is greater than hollow_area.hole_radius and
+ * at most hollow_area.radius.
  *
- * Note that the order in which fields are returned is not guarantueed.
+ * \note The order in which fields are returned is not guarantueed.
  */
 template <typename Area_type = Area<> > struct MapHollowRegion {
 	MapHollowRegion(Map & map, const HollowArea<Area_type> hollow_area);
@@ -36,12 +36,19 @@ template <typename Area_type = Area<> > struct MapHollowRegion {
 	{return m_hollow_area;}
 
 	/**
-	 * Moves on to the next location. The return value indicates whether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done.
+	 * Moves on to the next location, traversing the region by row.
+	 *
+	 * I hope traversing by row results in slightly better cache behaviour
+	 * than other algorithms (e.g. one could also walk concentric "circles"
+	 * / hexagons).
+	 *
+	 * \return Whether the new location has not yet been reached during this
+	 * iteration.
+	 *
+	 * \note When the area is so large that it overlaps itself because of
+	 * wrapping, the same location may be reached several times during an
+	 * iteration, while advance keeps returning true. When finally advance
+	 * returns false, it means that the iteration is done.
 	 */
 	bool advance(const Map &) throw ();
 

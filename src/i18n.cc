@@ -53,7 +53,7 @@ void i18n::grab_textdomain(const std::string domain)
 }
 
 /**
- * See \ref grab_textdomain()
+ * See grab_textdomain()
  */
 void i18n::release_textdomain()
 {

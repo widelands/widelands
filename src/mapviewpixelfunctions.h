@@ -42,6 +42,11 @@ unsigned int get_map_end_screen_y(const Map &);
  * the 2 neighbouring nodes whose screen coordinates define the rectangle that
  * the point is in. But this should be fully correct for all but the most
  * bizarre triangle shapes, and acceptable even for them.
+ *
+ * \note More documentation exists in HTML-format with figures. If you want it
+ * and can not find it, ask Erik Sigra.
+ *
+ * \todo Distribute this documentation with Widelands and link to it from here
  */
 Node_and_Triangle<> calc_node_and_triangle(const Map &, unsigned int x, unsigned int y);
 

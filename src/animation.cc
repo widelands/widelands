@@ -142,7 +142,7 @@ void AnimationManager::flush()
  * This function looks for pictures in this order:
  *    key 'pics', if present
  *    picnametempl, if not null
- *    <sectionname>_??.bmp
+ *    \<sectionname\>_??.bmp
  *
  * \param directory     which directory to look in for image and sound files
  * \param s             conffile section to search for data on this animation

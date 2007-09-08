@@ -17,15 +17,16 @@
  *
  */
 
-/*
-The entire transport subsystem comes into this file.
-
-What does _not_ belong in here: road renderer, client-side road building.
-
-What _does_ belong in here:
-Flags, Roads, the logic behind ware pulls and pushes.
-
-TODO: split this up into two files per class (.h and .cc)
+/**
+ * @file
+ * The entire transport subsystem comes into this file.
+ *
+ * What does _not_ belong in here: road renderer, client-side road building.
+ *
+ * What _does_ belong in here:
+ * Flags, Roads, the logic behind ware pulls and pushes.
+ *
+ * \todo split this up into two files per class (.h and .cc)
 */
 
 #include "transport.h"
@@ -711,7 +712,7 @@ void Flag::add_item(Game* g, WareInstance* item)
 /**
  * \return true if an item is currently waiting for a carrier to the given Flag.
  *
- * \note Due to \ref fetch_from_flag() semantics, this function makes no sense
+ * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
 */
 bool Flag::has_pending_item(Game *, Flag * dest) {
@@ -842,8 +843,8 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
  * nextstep is compared with the cached data, and a new carrier is only called
  * if that data hasn't changed.
  *
- * This behaviour is overriden by \ref m_always_call_for_step, which is set by
- * \ref update_items() to ensure that new carriers are called when roads are
+ * This behaviour is overriden by m_always_call_for_step, which is set by
+ * update_items() to ensure that new carriers are called when roads are
  * split, for example.
 */
 void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
@@ -1729,7 +1730,7 @@ void Transfer::has_finished()
 
 /**
  * Transfer failed for reasons beyond our control.
- * This Transfer object will be deleted indirectly by \ref fail().
+ * This Transfer object will be deleted indirectly by m_request->transfer_fail().
 */
 void Transfer::has_failed()
 {
@@ -2925,18 +2926,22 @@ public:
 /**
  * Calcaluate a route between two flags.
  *
- * Store the route in \ref route if it exists. Note that route will be cleared
- * before storing the result.
+ * The calculated route is stored in route if it exists.
  *
  * For two flags from the same economy, this function should always be
- * successful, except for when it's called from \ref check_split()
+ * successful, except when it's called from check_split()
+ *
+ * \note route will be cleared before storing the result.
  *
  * \param start, end start and endpoint of the route
  * \param route the calculated route
+ * \param wait UNDOCUMENTED
  * \param cost_cutoff maximum cost for desirable routes. If no route cheaper
  * than this can be found, return false
  *
  * \return true if a route has been found, false otherwise
+ *
+ * \todo Document parameter wait
 */
 bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int cost_cutoff)
 {
@@ -3141,12 +3146,11 @@ void Economy::remove_wares(int id, int count)
 
 	m_wares.remove(id, count);
 
-
 	// TODO: remove from global player inventory?
 }
 
 /**
- * Call this whenever a worker is destroyed..
+ * Call this whenever a worker is destroyed.
  * This is also called when a worker is removed from the economy through
  * a split of the Economy.
  */

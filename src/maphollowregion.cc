@@ -36,12 +36,6 @@ m_left        (hollow_area)
 	m_left = m_hollow_area;
 }
 
-
-/**
- * Traverse the region by row.
- * I hope this results in slightly better cache behaviour than other algorithms
- * (e.g. one could also walk concentric "circles"/hexagons).
- */
 template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
 	if (m_phase == None) return false;
 	++m_rowpos;

@@ -165,7 +165,7 @@ struct FileRead {
 	Coords Coords32(const Extent extent);
 
 	/**
-	 * Like \ref Coords32 but the result can have the special value indicating
+	 * Like Coords32 but the result can have the special value indicating
 	 * invalidity, as defined by Coords::isNull.
 	 */
 	Coords Coords32_allow_null(const Extent extent);

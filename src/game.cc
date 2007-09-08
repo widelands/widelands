@@ -994,10 +994,14 @@ void Game::sample_statistics()
 /**
  * Read statistics data from a file.
  *
+ * \param fr UNDOCUMENTED
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (from the time when statistics were kept in
- *       \ref Interactive_Player)
+ *       Interactive_Player)
  *   1 - current version
+ *
+ * \todo Document parameter fr
+ * \todo Would it make sense to not support the old style anymore?
  */
 void Game::ReadStatistics(FileRead& fr, uint version)
 {

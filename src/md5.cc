@@ -82,13 +82,13 @@ void MD5Checksum::Reset()
  * one MD5 block when the buffer is full.
  *
  * \param data data to compute chksum for
- * \param length len of data
+ * \param size size of data
  */
-void MD5Checksum::Data(const void * const data, const size_t length)
+void MD5Checksum::Data(const void * const data, const size_t size)
 {
 	assert(can_handle_data);
 
-	md5_process_bytes(data, length, &ctx);
+	md5_process_bytes(data, size, &ctx);
 }
 
 

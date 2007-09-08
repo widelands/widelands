@@ -183,8 +183,11 @@ void Carrier::transport_update(Game* g, State* state)
  * Deliver all wares addressed to the building the carrier is already into
  *
  * \param g Game the carrier lives on
+ * \param state UNDOCUMENTED
+ *
+ * \todo Upgrade this function to really support many-wares-at-a-time
+ * \todo Document parameter state
  */
-/// \todo Upgrade this function to really support many-wares-at-a-time
 void Carrier::deliver_to_building(Game* g, State* state)
 {
 	BaseImmovable* pos = g->get_map()->get_immovable(get_position());

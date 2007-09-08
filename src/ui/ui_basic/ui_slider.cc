@@ -88,7 +88,6 @@ Slider::Slider
 
 
 /**
- * \fn draw_cursor
  * \brief Draw the cursor.
  *
  * \param dst Graphic target.
@@ -141,14 +140,12 @@ Slider::draw_cursor(RenderTarget* dst, int x, int y, int w, int h)
 
 
 /**
- * \fn send_value_changed
  * \brief Send an event when the slider is moved by used.
  */
 void Slider::send_value_changed() {changed.call(); changedto.call(m_value);}
 
 
 /**
- * \fn
  * \brief Enable/Disable the slider.
  *
  * Disabled slider can't be clicked. Sliders are enabled by default.
@@ -162,7 +159,6 @@ void Slider::set_enabled(const bool enabled) {
 
 
 /**
- * \fn handle_mousein
  * \brief Mouse entered and exited events.
  *
  * Change the cursor style.
@@ -174,7 +170,6 @@ void Slider::handle_mousein(bool inside) {
 
 
 /**
- * \fn handle_mouserelease
  * \brief Mouse released event.
  *
  * Update pressed status.
@@ -197,10 +192,9 @@ bool Slider::handle_mouserelease(const Uint8 btn, int, int) {
 
 
 /**
- * \fn cursor_moved
  * \brief Update the value when the cursor is moved.
  *
- * \param cursor The relative position of the mouse pointer.
+ * \param pointer The relative position of the mouse pointer.
  * \param x The x position of the mouse pointer.
  * \param y The y position of the mouse pointer.
  */
@@ -237,7 +231,6 @@ void Slider::cursor_moved(int pointer, int x, int y) {
 
 
 /**
- * \fn cursor_pressed
  * \brief Event when the cursor is presed.
  *
  * \param pointer The relative position of the mouse pointer.
@@ -257,7 +250,6 @@ void Slider::cursor_pressed(int pointer) {
 
 
 /**
- * \fn bar_pressed
  * \brief Event when the bar is pressed.
  *
  * \param pointer The relative position of the mouse pointer.
@@ -295,7 +287,6 @@ void Slider::bar_pressed(int pointer, int ofs) {
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * \fn draw
  * \brief Redraw the slide bar. The horizontal bar is painted.
  *
  * \param dst The graphic destination.
@@ -325,22 +316,24 @@ void HorizontalSlider::draw(RenderTarget * dst) {
 
 
 /**
- * \fn handle_mousemove
  * \brief Mouse move event
  *
+ * \param btn The new stat of the mouse buttons (unused)
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
+ *
+ * \todo Can the three unused parameters be removed?
  */
-bool HorizontalSlider::handle_mousemove(const Uint8, int x, int y, int, int) {
+bool HorizontalSlider::handle_mousemove(const Uint8 btn, int x, int y, int, int) {
 	cursor_moved(x, x, y);
 	return true;
 }
 
 
 /**
- * \fn handle_mousepress
  * \brief Mouse pressed event.
  *
+ * \param btn The new stat of the mouse buttons.
  * \param x The X position of mouse pointer.
  * \param y The Y position of mouse pointer.
  */
@@ -368,7 +361,6 @@ bool HorizontalSlider::handle_mousepress(const Uint8 btn, int x, int y) {
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * \fn draw
  * \brief Redraw the slide bar. The vertical bar is painted.
  *
  * \param dst The graphic destination.
@@ -398,22 +390,22 @@ void VerticalSlider::draw(RenderTarget * dst) {
 
 
 /**
- * \fn handle_mousemove
  * \brief Mouse move event
  *
+ * \param btn The new stat of the mouse buttons (unused)
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
  */
-bool VerticalSlider::handle_mousemove(const Uint8, int x, int y, int, int) {
+bool VerticalSlider::handle_mousemove(const Uint8 btn, int x, int y, int, int) {
 	cursor_moved(y, x, y);
 	return true;
 }
 
 
 /**
- * \fn handle_mousepress
  * \brief Mouse pressed event.
  *
+ * \param btn The new stat of the mouse buttons (unused)
  * \param x The X position of mouse pointer.
  * \param y The Y position of mouse pointer.
  */

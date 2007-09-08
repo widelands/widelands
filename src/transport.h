@@ -359,6 +359,8 @@ private:
  * completed. Call finish() if success is true, fail() otherwise.
  * Call fail() if something really bad has happened (e.g. the worker
  * or ware was destroyed).
+ *
+ * \todo The mentioned function fail() does not exist!
  */
 struct Transfer {
 	friend class Request;

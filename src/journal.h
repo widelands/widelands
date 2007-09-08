@@ -33,7 +33,7 @@
  * might (or might not) be recorded/played back. Whether a recording / playback
  * is actually being performed is internal to Journal.
  *
- * \note If you are hacking this class, throw a \ref Journalfile_exception only
+ * \note If you are hacking this class, throw a Journalfile_exception only
  * and always if there is a nonrecoverable error and you have already dealt with
  * it.
  *

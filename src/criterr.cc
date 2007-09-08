@@ -34,14 +34,6 @@
 #include <windows.h>
 #endif
 
-/*
-==============================================================================
-
-Critical_Error
-
-==============================================================================
-*/
-
 enum {
 	ce_continue,
 	ce_exit
@@ -106,12 +98,10 @@ void Critical_Error::crash()
 }
 
 
-/** void critical_error(const char* str)
+/**
+ * A critical error occurred in the program. It will quite surely die.
  *
- * this is a critical error in the program. It will quite surely die.
- *
- * Args: str  String to give to the user
- * Returns: nothing, but may die (through exit())
+ * \param str String to give to the user
  */
 void critical_error(const char* str, ...)
 {

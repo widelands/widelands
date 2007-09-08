@@ -39,14 +39,6 @@
 #include <stdio.h>
 
 
-/*
-===============
-BaseImmovable::BaseImmovable
-BaseImmovable::~BaseImmovable
-
-Base immovable creation and destruction
-===============
-*/
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
 Map_Object(&mo_descr)
 {}
@@ -56,13 +48,10 @@ BaseImmovable::~BaseImmovable()
 }
 
 
-/*
-===============
-BaseImmovable::set_position
-
-Associate the given field with this immovable. Recalculate if necessary.
-Only call this during init.
-===============
+/**
+ * Associate the given field with this immovable. Recalculate if necessary.
+ *
+ * Only call this during init.
 */
 void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 {
@@ -84,13 +73,10 @@ void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 	}
 }
 
-/*
-===============
-BaseImmovable::unset_position
-
-Remove the link to the given field.
-Only call this during cleanup.
-===============
+/**
+ * Remove the link to the given field.
+ *
+ * Only call this during cleanup.
 */
 void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 {
@@ -117,7 +103,7 @@ ImmovableProgram IMPLEMENTATION
 ==============================================================================
 */
 
-// Command name -> parser function mapping
+/// Command name -> parser function mapping
 const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
 	{"animation", &ImmovableProgram::parse_animation},
 	{"transform", &ImmovableProgram::parse_transform},
@@ -134,12 +120,8 @@ ImmovableProgram::ImmovableProgram(std::string name)
 }
 
 
-/*
-===============
-ImmovableProgram::add_action
-
-Append the given action
-===============
+/**
+ * Append the given action
 */
 void ImmovableProgram::add_action(const ImmovableAction& act)
 {
@@ -147,12 +129,8 @@ void ImmovableProgram::add_action(const ImmovableAction& act)
 }
 
 
-/*
-===============
-ImmovableProgram::parse
-
-Actually parse a program
-===============
+/**
+ * Actually parse a program
 */
 void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Profile* prof)
 {
@@ -229,12 +207,8 @@ Immovable_Descr IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-Immovable_Descr::Immovable_Descr
-
-Initialize with sane defaults
-===============
+/**
+ * Initialize with sane defaults
 */
 Immovable_Descr::Immovable_Descr
 (const Tribe_Descr * const owner_tribe, const std::string & immovable_name)
@@ -243,12 +217,8 @@ m_name(immovable_name), m_size(BaseImmovable::NONE), m_owner_tribe(owner_tribe)
 {m_default_encodedata.clear();}
 
 
-/*
-===============
-Immovable_Descr::~Immovable_Descr
-
-Cleanup
-===============
+/**
+ * Cleanup
 */
 Immovable_Descr::~Immovable_Descr()
 {
@@ -259,12 +229,8 @@ Immovable_Descr::~Immovable_Descr()
 }
 
 
-/*
-===============
-Immovable_Descr::get_program
-
-Find the program of the given name.
-===============
+/**
+ * Find the program of the given name.
 */
 const ImmovableProgram* Immovable_Descr::get_program(std::string programname)
 		const
@@ -279,24 +245,20 @@ const ImmovableProgram* Immovable_Descr::get_program(std::string programname)
 }
 
 
-/*
-===============
-Immovable_Descr::parse
-
-Parse an immovable from its conf file.
-
-Section [global]:
-picture (default = $NAME_00.bmp): name of picture used in editor
-size = none|small|medium|big (default = none): influences build options
-EncodeData (default for all animations)
-
-Section [program] (optional)
-step = animation [animation name] [duration]
-       transform [immovable name]
-
-Default:
-0=animation idle -1
-===============
+/**
+ * Parse an immovable from its conf file.
+ *
+ * Section [global]:
+ * picture (default = $NAME_00.bmp): name of picture used in editor
+ * size = none|small|medium|big (default = none): influences build options
+ * EncodeData (default for all animations)
+ *
+ * Section [program] (optional)
+ * step = animation [animation name] [duration]
+ *        transform [immovable name]
+ *
+ * Default:
+ * 0=animation idle -1
 */
 void Immovable_Descr::parse(const char *directory, Profile *prof)
 {
@@ -380,12 +342,8 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 }
 
 
-/*
-===============
-Immovable_Descr::parse_program
-
-Parse a program.
-===============
+/**
+ * Parse a program.
 */
 void Immovable_Descr::parse_program(std::string directory, Profile* prof,
 												std::string programname)
@@ -410,12 +368,8 @@ void Immovable_Descr::parse_program(std::string directory, Profile* prof,
 }
 
 
-/*
-===============
-Immovable_Descr::parse_animation
-
-Parse the animation of the given name.
-===============
+/**
+ * Parse the animation of the given name.
 */
 uint Immovable_Descr::parse_animation
 (std::string directory, Profile* s, std::string animation_name)
@@ -455,12 +409,8 @@ uint Immovable_Descr::parse_animation
 }
 
 
-/*
-===============
-Immovable_Descr::create
-
-Create an immovable of this type
-===============
+/**
+ * Create an immovable of this type
 */
 Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords)
 {
@@ -479,12 +429,6 @@ IMPLEMENTATION
 ==============================
 */
 
-/*
-===============
-Immovable::Immovable
-Immovable::~Immovable
-===============
-*/
 Immovable::Immovable(const Immovable_Descr & imm_descr) :
 BaseImmovable (imm_descr),
 m_anim        (0),
@@ -497,13 +441,6 @@ Immovable::~Immovable()
 {
 }
 
-/*
-===============
-Immovable::get_type
-Immovable::get_size
-Immovable::get_passable
-===============
-*/
 int Immovable::get_type() const throw () {return IMMOVABLE;}
 
 int Immovable::get_size() const throw () {return descr().get_size();}
@@ -511,12 +448,8 @@ int Immovable::get_size() const throw () {return descr().get_size();}
 bool Immovable::get_passable() const throw ()
 {return descr().get_size() < BIG;}
 
-/*
-===============
-Immovable::init
-
-Actually initialize the immovable.
-===============
+/**
+ * Actually initialize the immovable.
 */
 void Immovable::init(Editor_Game_Base *g)
 {
@@ -531,12 +464,8 @@ void Immovable::init(Editor_Game_Base *g)
 }
 
 
-/*
-===============
-Immovable::cleanup
-
-Cleanup before destruction
-===============
+/**
+ * Cleanup before destruction
 */
 void Immovable::cleanup(Editor_Game_Base *g)
 {
@@ -546,12 +475,8 @@ void Immovable::cleanup(Editor_Game_Base *g)
 }
 
 
-/*
-===============
-Immovable::set_program_animation
-
-Set animation data according to current program state.
-===============
+/**
+ * Set animation data according to current program state.
 */
 void Immovable::set_program_animation(Editor_Game_Base* g)
 {
@@ -569,12 +494,8 @@ void Immovable::set_program_animation(Editor_Game_Base* g)
 }
 
 
-/*
-===============
-Immovable::switch_program
-
-Switch the currently running program.
-===============
+/**
+ * Switch the currently running program.
 */
 void Immovable::switch_program(Game* g, std::string programname)
 {
@@ -585,12 +506,8 @@ void Immovable::switch_program(Game* g, std::string programname)
 }
 
 
-/*
-===============
-Immovable::act
-
-Run program timer.
-===============
+/**
+ * Run program timer.
 */
 void Immovable::act(Game *g, uint data)
 {
@@ -601,13 +518,9 @@ void Immovable::act(Game *g, uint data)
 }
 
 
-/*
-===============
-Immovable::run_program
-
-Execute the next step(s) in the program until we need to schedule_act().
-If killable is true, the immovable could kill itself in this function.
-===============
+/**
+ * Execute the next step(s) in the program until we need to schedule_act().
+ * If killable is true, the immovable could kill itself in this function.
 */
 void Immovable::run_program(Game* g, bool killable)
 {
@@ -626,13 +539,9 @@ void Immovable::run_program(Game* g, bool killable)
 					m_program->get_name().c_str());
 }
 
-/*
-===============
-Immovable::draw
-
-Draw the immovable at the given position.
-coords is the field that draw() was called for.
-===============
+/**
+ * Draw the immovable at the given position.
+ * coords is the field that draw() was called for.
 */
 void Immovable::draw
 (const Editor_Game_Base & game,
@@ -803,12 +712,8 @@ Map_Object::Loader* Immovable::load
 }
 
 
-/*
-===============
-
-animation <name> <duration>
-
-===============
+/**
+ * animation \<name\> \<duration\>
 */
 void ImmovableProgram::parse_animation(ImmovableAction* act, const ProgramParser* parser,
 																	const std::vector<std::string>& cmd)
@@ -837,12 +742,8 @@ bool Immovable::run_animation(Game* g, bool, const ImmovableAction & action)
 	return true;
 }
 
-/*
-===============
-
-playFX <name>
-
-===============
+/**
+ * playFX \<name\>
 */
 
 void ImmovableProgram::parse_playFX
@@ -861,7 +762,7 @@ void ImmovableProgram::parse_playFX
 		act->iparam1=atoi(cmd[2].c_str());
 }
 
-/** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
+/** Demand from the g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
 bool Immovable::run_playFX(Game *, bool, const ImmovableAction & action)
 {
@@ -873,12 +774,8 @@ bool Immovable::run_playFX(Game *, bool, const ImmovableAction & action)
 }
 
 
-/*
-===============
-
-transform <name of immovable>
-
-===============
+/**
+ * transform \<name of immovable\>
 */
 void ImmovableProgram::parse_transform
 (ImmovableAction* act,
@@ -927,12 +824,8 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 }
 
 
-/*
-===============
-
-remove
-
-===============
+/**
+ * remove
 */
 void ImmovableProgram::parse_remove
 (ImmovableAction * act,
@@ -964,23 +857,15 @@ PlayerImmovable IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-PlayerImmovable::PlayerImmovable
-
-Zero-initialize
-===============
+/**
+ * Zero-initialize
 */
 PlayerImmovable::PlayerImmovable(const Map_Object_Descr & mo_descr) :
 BaseImmovable(mo_descr), m_owner(0), m_economy(0)
 {}
 
-/*
-===============
-PlayerImmovable::~PlayerImmovable
-
-Cleanup
-===============
+/**
+ * Cleanup
 */
 PlayerImmovable::~PlayerImmovable()
 {
@@ -988,12 +873,8 @@ PlayerImmovable::~PlayerImmovable()
 		log("Building::~Building: %u workers left!\n", m_workers.size());
 }
 
-/*
-===============
-PlayerImmovable::set_economy
-
-Change the economy, transfer the workers
-===============
+/**
+ * Change the economy, transfer the workers
 */
 void PlayerImmovable::set_economy(Economy *e)
 {
@@ -1006,28 +887,22 @@ void PlayerImmovable::set_economy(Economy *e)
 	m_economy = e;
 }
 
-/*
-===============
-PlayerImmovable::add_worker
-
-Associate the given worker with this immovable.
-The worker will be transferred along to another economy, and it will be
-released when the immovable is destroyed.
-This should only be called from Worker::set_location.
-===============
+/**
+ * Associate the given worker with this immovable.
+ * The worker will be transferred along to another economy, and it will be
+ * released when the immovable is destroyed.
+ *
+ * This should only be called from Worker::set_location.
 */
 void PlayerImmovable::add_worker(Worker *w)
 {
 	m_workers.push_back(w);
 }
 
-/*
-===============
-PlayerImmovable::remove_worker
-
-Disassociate the given worker with this building.
-This should only be called from Worker::set_location.
-===============
+/**
+ * Disassociate the given worker with this building.
+ *
+ * This should only be called from Worker::set_location.
 */
 void PlayerImmovable::remove_worker(Worker *w)
 {
@@ -1044,12 +919,8 @@ void PlayerImmovable::remove_worker(Worker *w)
 }
 
 
-/*
-===============
-PlayerImmovable::set_owner
-
-Set the immovable's owner. Currently, it can only be set once.
-===============
+/**
+ * Set the immovable's owner. Currently, it can only be set once.
 */
 void PlayerImmovable::set_owner(Player * const new_owner) {
 	// Change these asserts once you've made really sure that changing owners
@@ -1064,24 +935,16 @@ void PlayerImmovable::set_owner(Player * const new_owner) {
 		(this, Editor_Game_Base::GAIN);
 }
 
-/*
-===============
-PlayerImmovable::init
-
-Initialize the immovable.
-===============
+/**
+ * Initialize the immovable.
 */
 void PlayerImmovable::init(Editor_Game_Base *g)
 {
 	BaseImmovable::init(g);
 }
 
-/*
-===============
-PlayerImmovable::cleanup
-
-Release workers
-===============
+/**
+ * Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
@@ -1095,7 +958,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
 	BaseImmovable::cleanup(g);
 }
 
-/*
+/**
  * Dump general information
  */
 void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)  {
