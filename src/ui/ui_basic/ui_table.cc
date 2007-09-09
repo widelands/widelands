@@ -202,7 +202,7 @@ void Table<void *>::draw(RenderTarget * dst)
             x = curx + (curw - 1);
          else if (m_align & Align_HCenter)
             x = curx + (curw>>1);
-         else {
+			else {
             // Pictures are always left aligned, leave some space here
             if (m_max_pic_width && i==0)
                x= curx + m_max_pic_width + 10;

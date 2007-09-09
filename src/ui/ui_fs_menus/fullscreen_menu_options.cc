@@ -152,7 +152,7 @@ m_label_autosave
 	if (modes)
 		for (uint i = 0; modes[i]; ++i) {
          if (modes[i]->w < 640) continue;
-         res this_res = {
+			res this_res = {
             modes[i]->w,
             modes[i]->h,
             32

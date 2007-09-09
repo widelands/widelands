@@ -67,18 +67,15 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
       std::string txt= g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
 		switch (code) {
 		case KEY_BACKSPACE:
-            if (txt.size() && m_cur_pos) {
-               m_cur_pos--;
-				} else {
-               break;
-				}
+			if (txt.size() and m_cur_pos) --m_cur_pos;
+			else break;
             // Fallthrough
 
 		case KEY_DELETE:
-            if (txt.size() && m_cur_pos<txt.size()) {
+			if (txt.size() and m_cur_pos < txt.size()) {
                txt.erase(txt.begin() + m_cur_pos);
                Multiline_Textarea::set_text(txt.c_str());
-				}
+			}
 			break;
 
 		case KEY_LEFT:
@@ -92,7 +89,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
             break;
 
 		case KEY_DOWN:
-            if (m_cur_pos<txt.size()-1) {
+			if (m_cur_pos < txt.size() - 1) {
                uint begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
                while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
@@ -115,7 +112,7 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 			break;
 
 		case KEY_UP:
-            if (m_cur_pos>0) {
+			if (m_cur_pos > 0) {
                uint begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
                while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
@@ -130,17 +127,17 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
                   m_cur_pos=end_of_last_line;
                else
                   m_cur_pos=begin_of_lastline+(m_cur_pos-begin_of_line);
-				}
+			}
 			break;
 
 		case KEY_RETURN:
             c='\n';
             // fallthrough
 		default:
-            if (c && txt.size()<m_maxchars) {
+			if (c and txt.size() < m_maxchars) {
                txt.insert(m_cur_pos, 1, c);
                m_cur_pos++;
-				}
+			}
             Multiline_Textarea::set_text(txt.c_str());
             break;
 		}

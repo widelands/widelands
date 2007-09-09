@@ -114,10 +114,10 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
             return true;
 
 		case KEY_BACKSPACE:
-            if (m_text.size()) {
+			if (m_text.size()) {
                m_text.erase(m_text.end() - 1);
                set_title(m_text.c_str());
-				}
+			}
             return true;
 
 		case KEY_DELETE:
