@@ -1,13 +1,12 @@
-# translation of world_greenland_ru_RU.po to russian
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Widelands po/ru_RU/worlds/greenland.po
+# Copyright (C) 2007 Widelands Development Team.
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: world_greenland_ru_RU\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2006-05-05 21:23+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
@@ -16,132 +15,147 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: ../worlds/greenland/bobs/bunny/conf:1
+#: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Кролик"
 
-#: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
-#: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
-#: ../worlds/greenland/bobs/bush5/conf:1
+#: ../../../worlds/greenland/bobs/bush1/conf:1
+#: ../../../worlds/greenland/bobs/bush2/conf:1
+#: ../../../worlds/greenland/bobs/bush3/conf:1
+#: ../../../worlds/greenland/bobs/bush4/conf:1
+#: ../../../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Куст"
 
-#: ../worlds/greenland/bobs/cactus1/conf:1
-#: ../worlds/greenland/bobs/cactus2/conf:1
+#: ../../../worlds/greenland/bobs/cactus1/conf:1
+#: ../../../worlds/greenland/bobs/cactus2/conf:1
 msgid "Cactus"
 msgstr "Кактус "
 
-#: ../worlds/greenland/bobs/deadtree1/conf:1
-#: ../worlds/greenland/bobs/deadtree2/conf:1
-#: ../worlds/greenland/bobs/deadtree3/conf:1
-#: ../worlds/greenland/bobs/deadtree4/conf:1
+#: ../../../worlds/greenland/bobs/deadtree1/conf:1
+#: ../../../worlds/greenland/bobs/deadtree2/conf:1
+#: ../../../worlds/greenland/bobs/deadtree3/conf:1
+#: ../../../worlds/greenland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Сухостой "
 
-#: ../worlds/greenland/bobs/deer/conf:1
+#: ../../../worlds/greenland/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Олень "
 
-#: ../worlds/greenland/bobs/duck/conf:1
+#: ../../../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Утка "
 
-#: ../worlds/greenland/bobs/fox/conf:1
+#: ../../../worlds/greenland/bobs/fallentree/conf:2
+#, fuzzy
+msgid "Dead tree"
+msgstr "Сухостой "
+
+#: ../../../worlds/greenland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Лиса "
 
-#: ../worlds/greenland/bobs/grass1/conf:1
-#: ../worlds/greenland/bobs/grass2/conf:1
-#: ../worlds/greenland/bobs/grass3/conf:1
+#: ../../../worlds/greenland/bobs/grass1/conf:1
+#: ../../../worlds/greenland/bobs/grass2/conf:1
+#: ../../../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Трава"
 
-#: ../worlds/greenland/bobs/mushroom1/conf:1
-#: ../worlds/greenland/bobs/mushroom2/conf:1
+#: ../../../worlds/greenland/bobs/mushroom1/conf:1
+#: ../../../worlds/greenland/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Гриб"
 
-#: ../worlds/greenland/bobs/pebble1/conf:1
-#: ../worlds/greenland/bobs/pebble2/conf:1
-#: ../worlds/greenland/bobs/pebble3/conf:1
-#: ../worlds/greenland/bobs/pebble4/conf:1
-#: ../worlds/greenland/bobs/pebble5/conf:1
-#: ../worlds/greenland/bobs/pebble6/conf:1
+#: ../../../worlds/greenland/bobs/pebble1/conf:1
+#: ../../../worlds/greenland/bobs/pebble2/conf:1
+#: ../../../worlds/greenland/bobs/pebble3/conf:1
+#: ../../../worlds/greenland/bobs/pebble4/conf:1
+#: ../../../worlds/greenland/bobs/pebble5/conf:1
+#: ../../../worlds/greenland/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Галька"
 
-#: ../worlds/greenland/bobs/reindeer/conf:1
+#: ../../../worlds/greenland/bobs/reindeer/conf:1
 msgid "Reindeer"
 msgstr "Мох"
 
-#: ../worlds/greenland/bobs/sheep/conf:1
+#: ../../../worlds/greenland/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Овца"
 
-#: ../worlds/greenland/bobs/skeleton1/conf:1
-#: ../worlds/greenland/bobs/skeleton2/conf:1
-#: ../worlds/greenland/bobs/skeleton3/conf:1
+#: ../../../worlds/greenland/bobs/skeleton1/conf:1
+#: ../../../worlds/greenland/bobs/skeleton2/conf:1
+#: ../../../worlds/greenland/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Скелет"
 
-#: ../worlds/greenland/bobs/sstones1/conf:1
-#: ../worlds/greenland/bobs/sstones2/conf:1
-#: ../worlds/greenland/bobs/sstones3/conf:1
-#: ../worlds/greenland/bobs/sstones4/conf:1
-#: ../worlds/greenland/bobs/sstones5/conf:1
-#: ../worlds/greenland/bobs/sstones6/conf:1
-#: ../worlds/greenland/bobs/sstones7/conf:1
+#: ../../../worlds/greenland/bobs/sstones1/conf:1
+#: ../../../worlds/greenland/bobs/sstones2/conf:1
+#: ../../../worlds/greenland/bobs/sstones3/conf:1
+#: ../../../worlds/greenland/bobs/sstones4/conf:1
+#: ../../../worlds/greenland/bobs/sstones5/conf:1
+#: ../../../worlds/greenland/bobs/sstones6/conf:1
+#: ../../../worlds/greenland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Скалы"
 
-#: ../worlds/greenland/bobs/stones1/conf:1
-#: ../worlds/greenland/bobs/stones2/conf:1
-#: ../worlds/greenland/bobs/stones3/conf:1
-#: ../worlds/greenland/bobs/stones4/conf:1
-#: ../worlds/greenland/bobs/stones5/conf:1
-#: ../worlds/greenland/bobs/stones6/conf:1
+#: ../../../worlds/greenland/bobs/stones1/conf:1
+#: ../../../worlds/greenland/bobs/stones2/conf:1
+#: ../../../worlds/greenland/bobs/stones3/conf:1
+#: ../../../worlds/greenland/bobs/stones4/conf:1
+#: ../../../worlds/greenland/bobs/stones5/conf:1
+#: ../../../worlds/greenland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Камни"
 
-#: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
-#: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
-#: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
-#: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
+#: ../../../worlds/greenland/bobs/tree1/conf:4
+#: ../../../worlds/greenland/bobs/tree2/conf:4
+#: ../../../worlds/greenland/bobs/tree3/conf:4
+#: ../../../worlds/greenland/bobs/tree4/conf:4
+#: ../../../worlds/greenland/bobs/tree5/conf:4
+#: ../../../worlds/greenland/bobs/tree6/conf:4
+#: ../../../worlds/greenland/bobs/tree7/conf:4
+#: ../../../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Дерево"
 
-#: ../worlds/greenland/conf:2
+#: ../../../worlds/greenland/bobs/wolf/conf:1
+msgid "Wolf"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
 msgstr "Команда разработчиков Widelands"
 
-#: ../worlds/greenland/conf:3
+#: ../../../worlds/greenland/conf:3
 msgid "Greenland"
 msgstr "Луга"
 
-#: ../worlds/greenland/conf:4
+#: ../../../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
 msgstr "Это прекрасная и богатая страна варваров"
 
-#: ../worlds/greenland/resconf:4
+#: ../../../worlds/greenland/resconf:4
 msgid "Coal"
 msgstr "Уголь"
 
-#: ../worlds/greenland/resconf:12
+#: ../../../worlds/greenland/resconf:12
 msgid "Gold"
 msgstr "Золото"
 
-#: ../worlds/greenland/resconf:20
+#: ../../../worlds/greenland/resconf:20
 msgid "Iron"
 msgstr "Железо"
 
-#: ../worlds/greenland/resconf:28
+#: ../../../worlds/greenland/resconf:28
 msgid "Granit"
 msgstr " Гранит"
 
-#: ../worlds/greenland/resconf:36
+#: ../../../worlds/greenland/resconf:36
 msgid "Water"
 msgstr "Вода"
 
-#: ../worlds/greenland/resconf:41
+#: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Рыба"

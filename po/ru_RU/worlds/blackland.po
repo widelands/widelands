@@ -1,13 +1,12 @@
-# translation of world_blackland_ru_RU.po to russian
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# 
+# Widelands po/ru_RU/worlds/blackland.po
+# Copyright (C) 2007 Widelands Development Team.
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: world_blackland_ru_RU\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2006-06-26 01:02+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <en@li.org>\n"
@@ -16,132 +15,138 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: ../worlds/blackland/bobs/bunny/conf:1
+#: ../../../worlds/blackland/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Кролик"
 
-#: ../worlds/blackland/bobs/bush1/conf:1 ../worlds/blackland/bobs/bush2/conf:1
-#: ../worlds/blackland/bobs/bush3/conf:1 ../worlds/blackland/bobs/bush4/conf:1
-#: ../worlds/blackland/bobs/bush5/conf:1
+#: ../../../worlds/blackland/bobs/bush1/conf:1
+#: ../../../worlds/blackland/bobs/bush2/conf:1
+#: ../../../worlds/blackland/bobs/bush3/conf:1
+#: ../../../worlds/blackland/bobs/bush4/conf:1
+#: ../../../worlds/blackland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Куст"
 
-#: ../worlds/blackland/bobs/cactus1/conf:1
-#: ../worlds/blackland/bobs/cactus2/conf:1
+#: ../../../worlds/blackland/bobs/cactus1/conf:1
+#: ../../../worlds/blackland/bobs/cactus2/conf:1
 msgid "Cactus"
 msgstr "Кактус "
 
-#: ../worlds/blackland/bobs/deadtree1/conf:1
-#: ../worlds/blackland/bobs/deadtree2/conf:1
-#: ../worlds/blackland/bobs/deadtree3/conf:1
-#: ../worlds/blackland/bobs/deadtree4/conf:1
+#: ../../../worlds/blackland/bobs/deadtree1/conf:1
+#: ../../../worlds/blackland/bobs/deadtree2/conf:1
+#: ../../../worlds/blackland/bobs/deadtree3/conf:1
+#: ../../../worlds/blackland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Сухостой "
 
-#: ../worlds/blackland/bobs/deer/conf:1
+#: ../../../worlds/blackland/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Олень "
 
-#: ../worlds/blackland/bobs/duck/conf:1
+#: ../../../worlds/blackland/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Утка "
 
-#: ../worlds/blackland/bobs/fox/conf:1
+#: ../../../worlds/blackland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Лиса "
 
-#: ../worlds/blackland/bobs/grass1/conf:1
-#: ../worlds/blackland/bobs/grass2/conf:1
-#: ../worlds/blackland/bobs/grass3/conf:1
+#: ../../../worlds/blackland/bobs/grass1/conf:1
+#: ../../../worlds/blackland/bobs/grass2/conf:1
+#: ../../../worlds/blackland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Трава"
 
-#: ../worlds/blackland/bobs/mushroom1/conf:1
-#: ../worlds/blackland/bobs/mushroom2/conf:1
+#: ../../../worlds/blackland/bobs/mushroom1/conf:1
+#: ../../../worlds/blackland/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Гриб"
 
-#: ../worlds/blackland/bobs/pebble1/conf:1
-#: ../worlds/blackland/bobs/pebble2/conf:1
-#: ../worlds/blackland/bobs/pebble3/conf:1
-#: ../worlds/blackland/bobs/pebble4/conf:1
-#: ../worlds/blackland/bobs/pebble5/conf:1
-#: ../worlds/blackland/bobs/pebble6/conf:1
+#: ../../../worlds/blackland/bobs/pebble1/conf:1
+#: ../../../worlds/blackland/bobs/pebble2/conf:1
+#: ../../../worlds/blackland/bobs/pebble3/conf:1
+#: ../../../worlds/blackland/bobs/pebble4/conf:1
+#: ../../../worlds/blackland/bobs/pebble5/conf:1
+#: ../../../worlds/blackland/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Галька"
 
-#: ../worlds/blackland/bobs/reindeer/conf:1
+#: ../../../worlds/blackland/bobs/reindeer/conf:1
 msgid "Reindeer"
 msgstr "Мох"
 
-#: ../worlds/blackland/bobs/sheep/conf:1
+#: ../../../worlds/blackland/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Овца"
 
-#: ../worlds/blackland/bobs/skeleton1/conf:1
-#: ../worlds/blackland/bobs/skeleton2/conf:1
-#: ../worlds/blackland/bobs/skeleton3/conf:1
+#: ../../../worlds/blackland/bobs/skeleton1/conf:1
+#: ../../../worlds/blackland/bobs/skeleton2/conf:1
+#: ../../../worlds/blackland/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Скелет"
 
-#: ../worlds/blackland/bobs/sstones1/conf:1
-#: ../worlds/blackland/bobs/sstones2/conf:1
-#: ../worlds/blackland/bobs/sstones3/conf:1
-#: ../worlds/blackland/bobs/sstones4/conf:1
-#: ../worlds/blackland/bobs/sstones5/conf:1
-#: ../worlds/blackland/bobs/sstones6/conf:1
-#: ../worlds/blackland/bobs/sstones7/conf:1
+#: ../../../worlds/blackland/bobs/sstones1/conf:1
+#: ../../../worlds/blackland/bobs/sstones2/conf:1
+#: ../../../worlds/blackland/bobs/sstones3/conf:1
+#: ../../../worlds/blackland/bobs/sstones4/conf:1
+#: ../../../worlds/blackland/bobs/sstones5/conf:1
+#: ../../../worlds/blackland/bobs/sstones6/conf:1
+#: ../../../worlds/blackland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Скалы"
 
-#: ../worlds/blackland/bobs/stones1/conf:1
-#: ../worlds/blackland/bobs/stones2/conf:1
-#: ../worlds/blackland/bobs/stones3/conf:1
-#: ../worlds/blackland/bobs/stones4/conf:1
-#: ../worlds/blackland/bobs/stones5/conf:1
-#: ../worlds/blackland/bobs/stones6/conf:1
+#: ../../../worlds/blackland/bobs/stones1/conf:1
+#: ../../../worlds/blackland/bobs/stones2/conf:1
+#: ../../../worlds/blackland/bobs/stones3/conf:1
+#: ../../../worlds/blackland/bobs/stones4/conf:1
+#: ../../../worlds/blackland/bobs/stones5/conf:1
+#: ../../../worlds/blackland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Камни"
 
-#: ../worlds/blackland/bobs/tree1/conf:4 ../worlds/blackland/bobs/tree2/conf:4
-#: ../worlds/blackland/bobs/tree3/conf:4 ../worlds/blackland/bobs/tree4/conf:4
-#: ../worlds/blackland/bobs/tree5/conf:4 ../worlds/blackland/bobs/tree6/conf:4
-#: ../worlds/blackland/bobs/tree7/conf:4 ../worlds/blackland/bobs/tree8/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:4
+#: ../../../worlds/blackland/bobs/tree2/conf:4
+#: ../../../worlds/blackland/bobs/tree3/conf:4
+#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree5/conf:4
+#: ../../../worlds/blackland/bobs/tree6/conf:4
+#: ../../../worlds/blackland/bobs/tree7/conf:4
+#: ../../../worlds/blackland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Дерево"
 
-#: ../worlds/blackland/conf:2
+#: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
 msgstr "Команда разработчиков Widelands"
 
-#: ../worlds/blackland/conf:3
+#: ../../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Черные земли"
 
-#: ../worlds/blackland/conf:4
+#: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
 msgstr "Это мрачные, ужасные и опасные черные земли."
 
-#: ../worlds/blackland/resconf:4
+#: ../../../worlds/blackland/resconf:4
 msgid "Coal"
 msgstr "Уголь"
 
-#: ../worlds/blackland/resconf:12
+#: ../../../worlds/blackland/resconf:12
 msgid "Gold"
 msgstr "Золото"
 
-#: ../worlds/blackland/resconf:20
+#: ../../../worlds/blackland/resconf:20
 msgid "Iron"
 msgstr "Железо"
 
-#: ../worlds/blackland/resconf:28
+#: ../../../worlds/blackland/resconf:28
 msgid "Granit"
 msgstr " Гранит"
 
-#: ../worlds/blackland/resconf:36
+#: ../../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "Вода"
 
-#: ../worlds/blackland/resconf:41
+#: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Рыба"
