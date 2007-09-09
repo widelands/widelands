@@ -57,25 +57,6 @@ void log(const char *, ...) PRINTF_FORMAT(1, 2);
          #undef assert
       #endif
 
-/* reintroduce when we figure out a way to actually manage the beast that is autotools
-   (problem is: tools include this as well)
-      extern int graph_is_init;
-
-      inline void myassert(int line, const char* file, int cond, const char* condt) {
-         if (!cond) {
-            char buf[200];
-            sprintf(buf, "%s (%i): assertion \"%s\" failed!\n", file, line, condt);
-
-            if (graph_is_init) {
-               critical_error(buf);
-               // User chooses, if it goes on
-				} else {
-               tell_user(buf);
-               exit(-1);
-				}
-			}
-		}
-*/
 		void myassert(int line, const char* file, const char* condt) throw(_wexception);
 
       #define assert(condition) \
