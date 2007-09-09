@@ -174,10 +174,10 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
                m_event->set_name(m_name->get_text());
             if (m_event->get_player()!=m_player && m_event->get_player()!=-1)
                m_parent->unreference_player_tribe(m_event->get_player(), m_event);
-            if (m_event->get_player()!=m_player) {
+	if (m_event->get_player()!=m_player) {
                m_event->set_player(m_player);
                m_parent->reference_player_tribe(m_player, m_event);
-				}
+	}
             m_event->set_building(m_buildings[m_building].c_str());
             m_event->set_allow(m_allow->get_state());
             m_parent->set_need_save(true);

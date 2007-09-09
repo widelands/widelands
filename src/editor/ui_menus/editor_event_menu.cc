@@ -354,14 +354,12 @@ void Editor_Event_Menu::clicked_new_eventchain() {
          // Get the a name
          char buffer[256];
 
-         int n = 1;
 		Map & map = m_parent->egbase().map();
-         while (1) {
-		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
+		for (uint n = 1;; ++n) {
+			snprintf(buffer, sizeof(buffer), "%s%u", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))
                break;
-            ++n;
-			}
+		}
 
          ev->set_name(buffer);
          map.get_mecm().register_new_eventchain(ev);

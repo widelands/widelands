@@ -218,7 +218,7 @@ void Edit_Variable_Window::clicked_ok() {
          char* endp;
 			const long ivar = strtol(m_value.get_text(), &endp, 0);
 
-         if (endp && *endp) {
+		if (endp and *endp) {
             char buffer[1024];
 				snprintf
 					(buffer, sizeof(buffer),
@@ -229,7 +229,7 @@ void Edit_Variable_Window::clicked_ok() {
 					(&m_parent, _("Parse error!"), buffer, UI::Modal_Message_Box::OK);
             mb.run();
             return;
-			}
+		}
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%li", ivar);
 

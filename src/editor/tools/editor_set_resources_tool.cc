@@ -61,7 +61,7 @@ int Editor_Set_Resources_Tool::handle_click_impl
 				 (mr.location().field->get_resources_amount()).c_str());
 			overlay_manager.remove_overlay(mr.location(), picid);
 
-         if (!amount) {
+			if (not amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
 			} else {

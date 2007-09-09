@@ -168,8 +168,8 @@ m_parent(parent)
 		for (size_t j = 0; j < m_null_triggers.size(); ++j) {
          // Get this triggers index
          int foundidx = -1;
-         for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
-            if (&mtm.get_trigger_by_nr(x) == m_event->get_button_trigger(i)) {
+			for (MapTriggerManager::Index x = 0; x < nr_triggers; ++x)
+				if (&mtm.get_trigger_by_nr(x) == m_event->get_button_trigger(i)) {
                foundidx = x;
                break;
 				}
@@ -213,18 +213,16 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
 	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
-            for (int b=0; b<m_nr_buttons; b++) {
+	for (uint b = 0; b < m_nr_buttons; ++b) {
                m_event->set_button_name(b, m_buttons[b].name);
-               if (m_buttons[b].trigger!=-1) {
+		if (m_buttons[b].trigger != -1) {
                   m_event->set_button_trigger
                      (b,
                       static_cast<Trigger_Null*>
                       (&mtm.get_trigger_by_nr
                        (m_null_triggers[m_buttons[b].trigger])));
-					} else {
-                  m_event->set_button_trigger(b, 0);
-					}
-				}
+		} else m_event->set_button_trigger(b, 0);
+	}
             end_modal(1);
             return;
 }

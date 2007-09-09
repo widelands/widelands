@@ -228,12 +228,12 @@ void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 	Editor_Event_Menu_Edit_TriggerConditional menu
 		(m_parent, m_event_chain->get_trigcond(), m_event_chain);
 	if (menu.run()) {
-         if (m_event_chain->get_trigcond()) {
+		if (m_event_chain->get_trigcond()) {
             m_event_chain->get_trigcond()->unreference_triggers(m_event_chain);
             delete m_event_chain->get_trigcond();
-			}
-		m_event_chain->set_trigcond(menu.get_trigcond());
 		}
+		m_event_chain->set_trigcond(menu.get_trigcond());
+	}
 }
 
 

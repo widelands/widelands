@@ -73,7 +73,7 @@ private:
       UI::Edit_Box* m_window_title;
       UI::Edit_Box* m_button_name;
       UI::Textarea* m_nr_buttons_ta;
-      int         m_nr_buttons;
+	uint                     m_nr_buttons;
       int         m_ls_selected;
       UI::Multiline_Editbox* m_text;
       UI::Textarea* m_current_trigger_ta;
