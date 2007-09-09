@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2611\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-07 11:30+0200\n"
+"POT-Creation-Date: 2007-09-09 18:19+0200\n"
 "PO-Revision-Date: 2007-08-10 23:57+0200\n"
 "Last-Translator: Erik Soe Sorensen <eriksoe@daimi.au.dk>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
@@ -108,32 +108,28 @@ msgstr ""
 msgid "Message: "
 msgstr "Besked: "
 
-#: ../../src/wlapplication.cc:246
-msgid "Malformed option: "
-msgstr ""
-
-#: ../../src/wlapplication.cc:928
+#: ../../src/wlapplication.cc:931
 msgid "Sorry, no double-instance debugging on WIN32."
 msgstr ""
 
-#: ../../src/wlapplication.cc:932
+#: ../../src/wlapplication.cc:935
 msgid "--double is disabled. This is not a debug build!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1014
 #, c-format
 msgid "This is Widelands-%s"
 msgstr "Dette er Widelands-%s"
 
-#: ../../src/wlapplication.cc:1013
+#: ../../src/wlapplication.cc:1016
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1015
+#: ../../src/wlapplication.cc:1018
 msgid "Options:"
 msgstr "Indstillinger:"
 
-#: ../../src/wlapplication.cc:1016
+#: ../../src/wlapplication.cc:1019
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -143,11 +139,11 @@ msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1022
+#: ../../src/wlapplication.cc:1025
 msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1025
+#: ../../src/wlapplication.cc:1028
 msgid ""
 " --nosound            Starts the game with sound disabled\n"
 " --nozip              Do not save files as binary zip archives.\n"
@@ -155,15 +151,15 @@ msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1031
+#: ../../src/wlapplication.cc:1034
 msgid " --double             Start the game twice (for localhost network testing)\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1035
+#: ../../src/wlapplication.cc:1038
 msgid " --help               Show this help\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1036
+#: ../../src/wlapplication.cc:1039
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -386,23 +382,23 @@ msgstr "Hop til uproduktiv"
 msgid "Stock"
 msgstr "Lager"
 
-#: ../../src/criterr.cc:70
+#: ../../src/criterr.cc:62
 msgid "!! CRITICAL ERROR !!"
 msgstr ""
 
-#: ../../src/criterr.cc:79
+#: ../../src/criterr.cc:71
 msgid "Exit"
 msgstr "Afslut"
 
-#: ../../src/criterr.cc:86
+#: ../../src/criterr.cc:78
 msgid "!! Continue execution !!"
 msgstr ""
 
-#: ../../src/criterr.cc:95
+#: ../../src/criterr.cc:87
 msgid "Crash"
 msgstr ""
 
-#: ../../src/criterr.cc:132
+#: ../../src/criterr.cc:122
 msgid "Widelands"
 msgstr ""
 
@@ -588,11 +584,11 @@ msgstr "Computer"
 msgid "Human"
 msgstr "Menneske"
 
-#: ../../src/trainingsite.cc:215
+#: ../../src/trainingsite.cc:214
 msgid "Resting"
 msgstr "Hviler"
 
-#: ../../src/trainingsite.cc:217
+#: ../../src/trainingsite.cc:216
 msgid "Not Working"
 msgstr "Arbejder ikke"
 
