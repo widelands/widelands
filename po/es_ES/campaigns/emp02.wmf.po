@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-07-28 18:20+0000\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-02-08 18:55+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"

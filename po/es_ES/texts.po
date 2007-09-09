@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-07-28 18:20+0000\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-07-28 20:25+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -270,30 +270,50 @@ msgid "- which map you were playing"
 msgstr "- Qué mapa estabas jugando"
 
 #: ../../txts/README:97
+msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
+msgstr ""
+
+#: ../../txts/README:99
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
 msgstr "- Envianos un registro completo comprimido (zip, gzip, bzip2), si es posible, a menos que reproducir el fallo sea trivial. De hecho, puede ser una buena idea registrar siempre las sesiones, por si acaso aparece algún fallo. Para más detalles, lee a continuación."
 
-#: ../../txts/README:102
+#: ../../txts/README:104
+msgid "Replays</p>"
+msgstr ""
+
+#: ../../txts/README:107
+msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
+msgstr ""
+
+#: ../../txts/README:109
+msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
+msgstr ""
+
+#: ../../txts/README:111
+msgid "Replays are a very useful to tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
+msgstr ""
+
+#: ../../txts/README:115
 msgid "Creating a Session Record</p>"
 msgstr "Creando un Registro de Sesión</p>"
 
-#: ../../txts/README:105
+#: ../../txts/README:118
 msgid "Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems."
 msgstr "Widelands puede registrar todas las teclas que pulses y los movimientos del ratón a un fichero. Posteriormente, puede reproducir una sesión completa, desde su inicio hasta su fin. Esto es muy útil para depurar posibles problemas."
 
-#: ../../txts/README:108
+#: ../../txts/README:121
 msgid "To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr "Para registrar una sesión debes iniciar el juego con el parámetro \"--record\". Bajo Linux, simplemente inicia Widelands con algo como \"$ ./widelands --record=registro.rec\""
 
-#: ../../txts/README:111
+#: ../../txts/README:124
 msgid "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr "Bajo Windows, crea un enlace al fichero widelands.exe (pulsa con el botón derecho sobre widelands.exe y selecciona \"Crear acceso directo\"). Edita el nuevo enlace (pulsa con el botón derecho sobre él y selecciona \"Propiedades\"), y modifica el campo \"Destino\" a algo como \"C:\\...\\widelands.exe --record=registro.rec\"."
 
-#: ../../txts/README:114
+#: ../../txts/README:127
 msgid "A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback."
 msgstr "Se creará un fichero llamado \"registro.rec\". Para reproducirlo, sigue los pasos anteriores, pero sustituyendo \"--record\" con \"--playback\"."
 
-#: ../../txts/README:117
+#: ../../txts/README:130
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr "Ten en cuenta que, aunque los registros de sesión son independientes de la plataforma, generalmente no funcionarán con versiones diferentes de Widelands, ya que el interfaz de usuario y el orden en que se llaman las funciones de bajo nivel puede variar entre versiones. Los registros de sesión no están pensados para servir como ficheros de demostración; principalmente son una herramienta de depurado que nos ayuda a buscar errores."
 
@@ -353,19 +373,19 @@ msgstr "Efectos de sonido"
 msgid "Maps and Missions"
 msgstr "Mapas y Misiones"
 
-#: ../../txts/developers:110
+#: ../../txts/developers:109
 msgid "Barbarian Campaign Story"
 msgstr "Historia de las Campañas Bárbaras"
 
-#: ../../txts/developers:116
+#: ../../txts/developers:115
 msgid "Translators"
 msgstr "Traductores"
 
-#: ../../txts/developers:120
+#: ../../txts/developers:119
 msgid "Czech"
 msgstr "Checo"
 
-#: ../../txts/developers:126
+#: ../../txts/developers:125
 msgid "Dutch"
 msgstr "Holandés"
 
@@ -417,6 +437,10 @@ msgstr "Sueco"
 msgid "Packagers"
 msgstr "Empaquetadores"
 
+#: ../../txts/developers:212
+msgid "Other"
+msgstr ""
+
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
 msgstr "LEEME del Editor de Widelands"
@@ -425,8 +449,7 @@ msgstr "LEEME del Editor de Widelands"
 msgid "README for the Editor"
 msgstr "LEEME del Editor"
 
-#: ../../txts/editor_readme:7
-#: ../../txts/README:9
+#: ../../txts/editor_readme:7 ../../txts/README:9
 msgid "Introduction"
 msgstr "Introducción"
 
@@ -537,4 +560,3 @@ msgstr "¿Más preguntas? Visítanos en www.widelands.org. Allí encontrarás lo
 #: ../../txts/gametips:49
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
 msgstr "Usa los botones de prioridad en la ventana de un edificio para ajustar las entregas de un material determinado"
-
