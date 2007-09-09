@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2598\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-02 23:57+0200\n"
+"POT-Creation-Date: 2007-09-09 18:19+0200\n"
 "PO-Revision-Date: 2007-09-03 00:10+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -109,32 +109,28 @@ msgstr "Warenlexikon des Stammes"
 msgid "Message: "
 msgstr "Nachricht: "
 
-#: ../../src/wlapplication.cc:246
-msgid "Malformed option: "
-msgstr "Nicht erkannte Option: "
-
-#: ../../src/wlapplication.cc:928
+#: ../../src/wlapplication.cc:931
 msgid "Sorry, no double-instance debugging on WIN32."
 msgstr "Entschuldigung, aber der Doppelstart läuft unter Windows nicht."
 
-#: ../../src/wlapplication.cc:932
+#: ../../src/wlapplication.cc:935
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ist nicht möglich, dies ist kein Debug-Build!"
 
-#: ../../src/wlapplication.cc:1011
+#: ../../src/wlapplication.cc:1014
 #, c-format
 msgid "This is Widelands-%s"
 msgstr "Dies ist Widelands-%s"
 
-#: ../../src/wlapplication.cc:1013
+#: ../../src/wlapplication.cc:1016
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
 msgstr "Benutzung: widelands <Option0>=<Wert0> ... <OptionN>=<WertN>"
 
-#: ../../src/wlapplication.cc:1015
+#: ../../src/wlapplication.cc:1018
 msgid "Options:"
 msgstr "Optionen:"
 
-#: ../../src/wlapplication.cc:1016
+#: ../../src/wlapplication.cc:1019
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -152,11 +148,11 @@ msgstr ""
 " --coredump=[yes|no]  Erzeugt ein Speicherabbild bei Segmentfehlern.\n"
 "                      Schaltet den Mechanismus von SDL ab.\n"
 
-#: ../../src/wlapplication.cc:1022
+#: ../../src/wlapplication.cc:1025
 msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
 msgstr " --ggz                Started das Spiel als GGZ Gaming Zone Klienten (nicht benutzen!)"
 
-#: ../../src/wlapplication.cc:1025
+#: ../../src/wlapplication.cc:1028
 msgid ""
 " --nosound            Starts the game with sound disabled\n"
 " --nozip              Do not save files as binary zip archives.\n"
@@ -168,17 +164,17 @@ msgstr ""
 "\n"
 " --editor             Startet direkt den Widelands Karten Editor.\n"
 
-#: ../../src/wlapplication.cc:1031
+#: ../../src/wlapplication.cc:1034
 msgid " --double             Start the game twice (for localhost network testing)\n"
 msgstr ""
 " --double             Startet das Spiel doppelt\n"
 "                      Für Tests über das localhost Netz.\n"
 
-#: ../../src/wlapplication.cc:1035
+#: ../../src/wlapplication.cc:1038
 msgid " --help               Show this help\n"
 msgstr " --help               Zeigt diese Hilfe\n"
 
-#: ../../src/wlapplication.cc:1036
+#: ../../src/wlapplication.cc:1039
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -405,23 +401,23 @@ msgstr "Springe zum Unproduktivsten:"
 msgid "Stock"
 msgstr "Lager"
 
-#: ../../src/criterr.cc:70
+#: ../../src/criterr.cc:62
 msgid "!! CRITICAL ERROR !!"
 msgstr "Kritischer Fehler!"
 
-#: ../../src/criterr.cc:79
+#: ../../src/criterr.cc:71
 msgid "Exit"
 msgstr "Beenden"
 
-#: ../../src/criterr.cc:86
+#: ../../src/criterr.cc:78
 msgid "!! Continue execution !!"
 msgstr "Ausführung fortsetzen!"
 
-#: ../../src/criterr.cc:95
+#: ../../src/criterr.cc:87
 msgid "Crash"
 msgstr "Absturz"
 
-#: ../../src/criterr.cc:132
+#: ../../src/criterr.cc:122
 msgid "Widelands"
 msgstr "Widelands"
 
@@ -608,11 +604,11 @@ msgstr "Computer"
 msgid "Human"
 msgstr "Mensch"
 
-#: ../../src/trainingsite.cc:215
+#: ../../src/trainingsite.cc:214
 msgid "Resting"
 msgstr "Warten"
 
-#: ../../src/trainingsite.cc:217
+#: ../../src/trainingsite.cc:216
 msgid "Not Working"
 msgstr "Arbeitet nicht"
 
@@ -1313,11 +1309,11 @@ msgstr "Spiel starten"
 msgid "Select map"
 msgstr "Karte wählen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:132
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:144
 msgid "(no map)"
 msgstr "(keine Karte)"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:144
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:156
 #: ../../src/editor/ui_menus/editor_player_menu.cc:240
 msgid "Player "
 msgstr "Spieler "
@@ -2191,3 +2187,5 @@ msgstr "+"
 msgid "no descr"
 msgstr "(Keine Beschreibung vorhanden.)"
 
+#~ msgid "Malformed option: "
+#~ msgstr "Nicht erkannte Option: "
