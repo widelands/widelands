@@ -1,8 +1,12 @@
+# Widelands po/sk_SK/worlds/greenland.po
+# Copyright (C) 2007 Widelands Development Team.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Czech translation\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2006-03-02 17:51+0100\n"
 "Last-Translator: Ike <ike@zoznam.sk>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -12,132 +16,147 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 
-#: ../worlds/greenland/bobs/bunny/conf:1
+#: ../../../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Zajac"
 
-#: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
-#: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
-#: ../worlds/greenland/bobs/bush5/conf:1
+#: ../../../worlds/greenland/bobs/bush1/conf:1
+#: ../../../worlds/greenland/bobs/bush2/conf:1
+#: ../../../worlds/greenland/bobs/bush3/conf:1
+#: ../../../worlds/greenland/bobs/bush4/conf:1
+#: ../../../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Krík"
 
-#: ../worlds/greenland/bobs/cactus1/conf:1
-#: ../worlds/greenland/bobs/cactus2/conf:1
+#: ../../../worlds/greenland/bobs/cactus1/conf:1
+#: ../../../worlds/greenland/bobs/cactus2/conf:1
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../worlds/greenland/bobs/deadtree1/conf:1
-#: ../worlds/greenland/bobs/deadtree2/conf:1
-#: ../worlds/greenland/bobs/deadtree3/conf:1
-#: ../worlds/greenland/bobs/deadtree4/conf:1
+#: ../../../worlds/greenland/bobs/deadtree1/conf:1
+#: ../../../worlds/greenland/bobs/deadtree2/conf:1
+#: ../../../worlds/greenland/bobs/deadtree3/conf:1
+#: ../../../worlds/greenland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Suchý strom"
 
-#: ../worlds/greenland/bobs/deer/conf:1
+#: ../../../worlds/greenland/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Jeleň"
 
-#: ../worlds/greenland/bobs/duck/conf:1
+#: ../../../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Kačica"
 
-#: ../worlds/greenland/bobs/fox/conf:1
+#: ../../../worlds/greenland/bobs/fallentree/conf:2
+#, fuzzy
+msgid "Dead tree"
+msgstr "Suchý strom"
+
+#: ../../../worlds/greenland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Líška"
 
-#: ../worlds/greenland/bobs/grass1/conf:1
-#: ../worlds/greenland/bobs/grass2/conf:1
-#: ../worlds/greenland/bobs/grass3/conf:1
+#: ../../../worlds/greenland/bobs/grass1/conf:1
+#: ../../../worlds/greenland/bobs/grass2/conf:1
+#: ../../../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Tráva"
 
-#: ../worlds/greenland/bobs/mushroom1/conf:1
-#: ../worlds/greenland/bobs/mushroom2/conf:1
+#: ../../../worlds/greenland/bobs/mushroom1/conf:1
+#: ../../../worlds/greenland/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Huba"
 
-#: ../worlds/greenland/bobs/pebble1/conf:1
-#: ../worlds/greenland/bobs/pebble2/conf:1
-#: ../worlds/greenland/bobs/pebble3/conf:1
-#: ../worlds/greenland/bobs/pebble4/conf:1
-#: ../worlds/greenland/bobs/pebble5/conf:1
-#: ../worlds/greenland/bobs/pebble6/conf:1
+#: ../../../worlds/greenland/bobs/pebble1/conf:1
+#: ../../../worlds/greenland/bobs/pebble2/conf:1
+#: ../../../worlds/greenland/bobs/pebble3/conf:1
+#: ../../../worlds/greenland/bobs/pebble4/conf:1
+#: ../../../worlds/greenland/bobs/pebble5/conf:1
+#: ../../../worlds/greenland/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Okruhliak"
 
-#: ../worlds/greenland/bobs/reindeer/conf:1
+#: ../../../worlds/greenland/bobs/reindeer/conf:1
 msgid "Reindeer"
 msgstr "Sob"
 
-#: ../worlds/greenland/bobs/sheep/conf:1
+#: ../../../worlds/greenland/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Ovca"
 
-#: ../worlds/greenland/bobs/skeleton1/conf:1
-#: ../worlds/greenland/bobs/skeleton2/conf:1
-#: ../worlds/greenland/bobs/skeleton3/conf:1
+#: ../../../worlds/greenland/bobs/skeleton1/conf:1
+#: ../../../worlds/greenland/bobs/skeleton2/conf:1
+#: ../../../worlds/greenland/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Kostra"
 
-#: ../worlds/greenland/bobs/sstones1/conf:1
-#: ../worlds/greenland/bobs/sstones2/conf:1
-#: ../worlds/greenland/bobs/sstones3/conf:1
-#: ../worlds/greenland/bobs/sstones4/conf:1
-#: ../worlds/greenland/bobs/sstones5/conf:1
-#: ../worlds/greenland/bobs/sstones6/conf:1
-#: ../worlds/greenland/bobs/sstones7/conf:1
+#: ../../../worlds/greenland/bobs/sstones1/conf:1
+#: ../../../worlds/greenland/bobs/sstones2/conf:1
+#: ../../../worlds/greenland/bobs/sstones3/conf:1
+#: ../../../worlds/greenland/bobs/sstones4/conf:1
+#: ../../../worlds/greenland/bobs/sstones5/conf:1
+#: ../../../worlds/greenland/bobs/sstones6/conf:1
+#: ../../../worlds/greenland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Stojace kamene"
 
-#: ../worlds/greenland/bobs/stones1/conf:1
-#: ../worlds/greenland/bobs/stones2/conf:1
-#: ../worlds/greenland/bobs/stones3/conf:1
-#: ../worlds/greenland/bobs/stones4/conf:1
-#: ../worlds/greenland/bobs/stones5/conf:1
-#: ../worlds/greenland/bobs/stones6/conf:1
+#: ../../../worlds/greenland/bobs/stones1/conf:1
+#: ../../../worlds/greenland/bobs/stones2/conf:1
+#: ../../../worlds/greenland/bobs/stones3/conf:1
+#: ../../../worlds/greenland/bobs/stones4/conf:1
+#: ../../../worlds/greenland/bobs/stones5/conf:1
+#: ../../../worlds/greenland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Kamene"
 
-#: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
-#: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
-#: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
-#: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
+#: ../../../worlds/greenland/bobs/tree1/conf:4
+#: ../../../worlds/greenland/bobs/tree2/conf:4
+#: ../../../worlds/greenland/bobs/tree3/conf:4
+#: ../../../worlds/greenland/bobs/tree4/conf:4
+#: ../../../worlds/greenland/bobs/tree5/conf:4
+#: ../../../worlds/greenland/bobs/tree6/conf:4
+#: ../../../worlds/greenland/bobs/tree7/conf:4
+#: ../../../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Stromy"
 
-#: ../worlds/greenland/conf:2
+#: ../../../worlds/greenland/bobs/wolf/conf:1
+msgid "Wolf"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
 msgstr "Vývojový tím Widelands"
 
-#: ../worlds/greenland/conf:3
+#: ../../../worlds/greenland/conf:3
 msgid "Greenland"
 msgstr "Zelená krajina"
 
-#: ../worlds/greenland/conf:4
+#: ../../../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
 msgstr "Toto sú nádherné a kvitnúce zeme barbarov"
 
-#: ../worlds/greenland/resconf:4
+#: ../../../worlds/greenland/resconf:4
 msgid "Coal"
 msgstr "Uhlie"
 
-#: ../worlds/greenland/resconf:12
+#: ../../../worlds/greenland/resconf:12
 msgid "Gold"
 msgstr "Zlato"
 
-#: ../worlds/greenland/resconf:20
+#: ../../../worlds/greenland/resconf:20
 msgid "Iron"
 msgstr "Železo"
 
-#: ../worlds/greenland/resconf:28
+#: ../../../worlds/greenland/resconf:28
 msgid "Granit"
 msgstr "Žula"
 
-#: ../worlds/greenland/resconf:36
+#: ../../../worlds/greenland/resconf:36
 msgid "Water"
 msgstr "Voda"
 
-#: ../worlds/greenland/resconf:41
+#: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Ryba"
