@@ -384,7 +384,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
          nr=frames.size();
          snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(), extensions[i]);
          p = fname + strlen(fname);
-         while (p > fname) {
+			while (p > fname) {
             if (*--p != '?')
                continue;
 
@@ -399,7 +399,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
 
          // is the frame actually there?
-         if (!g_fs->FileExists(fname)) {
+			if (not g_fs->FileExists(fname)) {
             if (i==(nextensions-1)) {alldone=true; break;}
             continue;
 			}
@@ -412,8 +412,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 				frames.push_back(&frame);
 				frame.set_sdl_surface(bmp);
 			}
-         catch (std::exception& e)
-         {
+			catch (const std::exception & e) {
             log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
             continue;
 			}
