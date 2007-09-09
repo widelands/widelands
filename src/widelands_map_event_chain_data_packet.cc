@@ -71,9 +71,9 @@ throw (_wexception)
       State               m_state;
  */
    // check packet version
-   int packet_version=s->get_int("packet_version");
-   if (packet_version == CURRENT_PACKET_VERSION) {
-      while ((s = prof.get_next_section(0))) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION)
+		while ((s = prof.get_next_section(0))) {
          std::string name = s->get_name();
          EventChain* e = new EventChain();
 
@@ -88,12 +88,12 @@ throw (_wexception)
          uint nr_tokens = s->get_safe_int("nr_conditional_element");
 
          char buf[256];
-         for (uint i = 0; i < nr_tokens; i++) {
+			for (uint i = 0; i < nr_tokens; ++i) {
             sprintf(buf, "conditional_element_%02i", i);
             TriggerConditional_Factory::Token tok;
             std::string type = s->get_safe_string(buf);
             tok.data = 0;
-            if (type == "trigger") {
+				if (type == "trigger") {
                tok.token = TriggerConditional_Factory::TRIGGER;
                sprintf(buf, "conditional_element_%02i_data", i);
                std::string trigname = s->get_safe_string(buf);
@@ -120,7 +120,7 @@ throw (_wexception)
 
          // Events
          uint nr_events = s->get_safe_int("nr_events");
-         for (uint i = 0; i < nr_events; i++) {
+			for (uint i = 0; i < nr_events; ++i) {
             sprintf(buf, "event_%02i", i);
             std::string evname = s->get_safe_string(buf);
             Event * const event = egbase->get_map()->get_mem().get_event(evname.c_str());
@@ -140,8 +140,7 @@ throw (_wexception)
 
          egbase->get_map()->get_mecm().register_new_eventchain(e);
 		}
-      return;
-	}
+	else
    throw wexception("Unknown version in Map EventChain Packet: %i\n", packet_version);
 }
 
