@@ -4,16 +4,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2651\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 18:19+0200\n"
-"PO-Revision-Date: 2007-09-03 00:10+0200\n"
+"POT-Creation-Date: 2007-09-09 21:37+0200\n"
+"PO-Revision-Date: 2007-09-09 21:35+0200\n"
 "Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../../src/game_server_proto_packet_getroominfo.cc:66
@@ -99,7 +98,7 @@ msgstr "Bauhilfe"
 
 #: ../../src/interactive_player.cc:117
 msgid "Geologic survey information"
-msgstr ""
+msgstr "Bodenerkundungbericht"
 
 #: ../../src/interactive_player.cc:126
 msgid "Tribe's ware encyclopedia"
@@ -2186,6 +2185,3 @@ msgstr "+"
 #: ../../src/map_objective_manager.h:53
 msgid "no descr"
 msgstr "(Keine Beschreibung vorhanden.)"
-
-#~ msgid "Malformed option: "
-#~ msgstr "Nicht erkannte Option: "

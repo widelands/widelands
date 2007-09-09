@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2633\n"
+"Project-Id-Version: Widelands svn2651\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-09 16:19+0000\n"
-"PO-Revision-Date: 2007-08-21 17:36+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"POT-Creation-Date: 2007-09-09 19:37+0000\n"
+"PO-Revision-Date: 2007-09-09 21:35+0200\n"
+"Last-Translator: Philipp Niemann <widelands@azagtoth.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,7 +271,7 @@ msgstr "- Welche Karte Du gespielt hast"
 
 #: ../../txts/README:97
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
-msgstr ""
+msgstr "- Trat der Fehler während eines laufenden Spiels auf, so sende uns eine komprimierte Aufnahme. Mehr Informationen zu Aufnahmen findest Du im Abschnitt zu Aufnahmen weiter unten."
 
 #: ../../txts/README:99
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
@@ -279,19 +279,19 @@ msgstr "- Sende uns, wenn möglich, ein verpacktes Spielprotokoll (zip, gzip, bz
 
 #: ../../txts/README:104
 msgid "Replays</p>"
-msgstr ""
+msgstr "Aufnahmen</p>"
 
 #: ../../txts/README:107
 msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
-msgstr ""
+msgstr "Jedes von Dir gespielte Spiel nimmt Widelands in zwei Dateien auf. Eine dieser Dateien endet mit .wrpl.wgf und enthält einen initialen Speicherstand. Die zweite Datei endet mit .wrpl und enthält alle Kommandos die von den Spielern abgegeben wurden. Dazu gehören auch Gebäude oder der Angriff auf einen Gegner. Der übrige Teil der Dateinamen zeigt die Startzeit des aufgezeichneten Spiels."
 
 #: ../../txts/README:109
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
-msgstr ""
+msgstr "Über den Aufnahmeknopf im Hauptmenü kannst Du Dir ein vorher gespieltes Spiel in einer genauen Ablaufrekonstruktion ansehen. Beachte aber, dass selbst kleine Änderungen an den Spieldaten oder der ausführbaren Widelandsdatei dazu führen können, dass die Spielaufnahmen unbrauchbar werden und die nicht mehr synchron laufen. Dieser Effekt ähnelt dem Fehlverhalten bei Netzwerkspielen in denen einer der Spieler einer andere Version des Spiels verwendet."
 
 #: ../../txts/README:111
 msgid "Replays are a very useful to tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
-msgstr ""
+msgstr "Aufnahmen sind nützliche Instrumente um Fehler in der Logik des Spiels zu finden. Daher bitten wir Dich die Aufnahmedateien an jeden Deiner Fehlerberichte anzuhängen. Die Dateien sind unter Linux im Verzeichnis ~/.widelands/replays im Heimatverzeichnis gespeichert. Unter Windows finden sie sich im replays Unterverzeichnis der Widelands Installation."
 
 #: ../../txts/README:115
 msgid "Creating a Session Record</p>"
@@ -439,7 +439,7 @@ msgstr "Packer"
 
 #: ../../txts/developers:212
 msgid "Other"
-msgstr ""
+msgstr "Andere"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
