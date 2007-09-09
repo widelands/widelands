@@ -663,15 +663,11 @@ void Building_Window::setup_capsbuttons()
 			 it != buildings_end;
 			 ++it)
 		{
-         int id = tribe.get_building_index(*it);
-         if (id==-1)
-            throw wexception("Should enhance to unknown building: %s\n", *it);
+			const int id = tribe.get_building_index(*it);
+			if (id == -1)
+				throw wexception("Should enhance to unknown building: %s", *it);
 
-         if (!m_player->get_player()->is_building_allowed(id)) {
-            // This buildings is disabled for this scenario, sorry.
-            // Try again later!!
-            continue;
-			}
+			if (not m_player->player().is_building_allowed(id)) continue;
 
          const Building_Descr & building = *tribe.get_building_descr(id);
          char buffer[128];
