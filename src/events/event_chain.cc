@@ -112,28 +112,19 @@ void Cmd_CheckEventChain::execute (Game* g)
 	EventChain & evchain = mecm.get_eventchain_by_nr(m_eventchain_id);
 
 	switch (evchain.get_state()) {
-      case EventChain::INIT:
-      {
+	case EventChain::INIT:
          // This is initialized, look if it needs running
-         if (evchain.get_trigcond()->eval(g)) {
-            // Hooray, we can start the shit off
+		if (evchain.get_trigcond()->eval(g)) // Hooray, we can start the shit off
             evchain.run(g);
-			}
-		}
-      break;
-
-      case EventChain::RUNNING:
-      {
+		break;
+	case EventChain::RUNNING:
          // This chain is currently running. Continue to run it
          evchain.run(g);
-		}
-      break;
-
-      case EventChain::DONE:
-      {
+		break;
+	case EventChain::DONE:
          // This shouldn't happen!
-         throw wexception("Cmd_CheckEventChain: Done event chain found. no good no good!\n");
-		}
+		throw wexception
+			("Cmd_CheckEventChain: Done event chain found. no good no good!");
       break;
 	}
 

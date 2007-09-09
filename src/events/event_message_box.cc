@@ -105,9 +105,8 @@ const char* Event_Message_Box::get_button_name(int i) {
  * File Read, File Write
  */
 void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
-   int version = s->get_safe_int("version");
-
-   if (version == EVENT_VERSION) {
+	const int version = s->get_safe_int("version");
+	if (version == EVENT_VERSION) {
       set_name(s->get_name());
       set_text(s->get_safe_string("text"));
       set_window_title(s->get_safe_string("window_title"));
@@ -121,14 +120,14 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
       uint nr_buttons = s->get_safe_int("number_of_buttons");
       set_nr_buttons(nr_buttons);
       char buf[256];
-      for (uint i=0; i<nr_buttons; i++) {
+		for (uint i = 0; i < nr_buttons; ++i) {
          sprintf(buf, "button_%02i_name", i);
          set_button_name(i, s->get_safe_string(buf));
 
          sprintf(buf, "button_%02i_has_trigger", i);
          bool trigger = s->get_safe_bool(buf);
 
-         if (trigger) {
+			if (trigger) {
             sprintf(buf, "button_%02i_trigger", i);
             Trigger * const t = egbase->get_map()->get_mtm().get_trigger(s->get_safe_string(buf)); // Hopefully it is a null trigger
             set_button_trigger(i, static_cast<Trigger_Null*>(t));
@@ -137,7 +136,7 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
 		}
       return;
 	}
-   throw wexception("Unknown Version in Event_Message_Box::Read: %i\n", version);
+   throw wexception("Unknown Version in Event_Message_Box::Read: %i", version);
 }
 
 void Event_Message_Box::Write(Section & s, const Editor_Game_Base &) const {
