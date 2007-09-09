@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2576\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-08-31 21:59+0000\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-09-01 00:14+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,4 +197,3 @@ msgstr "Oorlog der Valleien"
 #: ../../maps/War of the Valleys.wmf/elemental:11
 msgid "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr "Er wordt gefluisterd dat zelfs de zon en de maan hun weg moeten zoeken tussen deze bergpieken. HINT: Monolieten markeren delfstoffen. Doe geen moeite om geologen elders te sturen."
-

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2614\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2007-09-07 22:00+0000\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-09-01 21:54+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -125,6 +125,11 @@ msgstr "Houtverharder"
 #: ../../../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
 msgstr "Hoofdkwartier"
+
+#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../../../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmsmid"
 
 #: ../../../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
@@ -585,11 +590,6 @@ msgstr "Jachtopzichter"
 #: ../../../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Geoloog"
-
-#: ../../../tribes/barbarians/workers/helmsmith/conf:2
-#: ../../../tribes/barbarians/buildings/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Helmsmid"
 
 #: ../../../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
