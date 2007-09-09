@@ -639,11 +639,9 @@ local int unzlocal_GetCurrentFileInfoInternal (unzFile file,
         err=UNZ_ERRNO;
 
     lSeek+=file_info.size_filename;
-    if ((err==UNZ_OK) && (szFileName!=NULL))
-    {
+	if (err == UNZ_OK and szFileName != NULL) {
         uLong uSizeRead ;
-        if (file_info.size_filename<fileNameBufferSize)
-        {
+		if (file_info.size_filename < fileNameBufferSize) {
             *(szFileName+file_info.size_filename)='\0';
             uSizeRead = file_info.size_filename;
 		}
@@ -679,8 +677,7 @@ local int unzlocal_GetCurrentFileInfoInternal (unzFile file,
         lSeek+=file_info.size_file_extra;
 
 
-    if ((err==UNZ_OK) && (szComment!=NULL))
-    {
+	if (err == UNZ_OK and szComment != NULL) {
         uLong uSizeRead ;
         if (file_info.size_file_comment<commentBufferSize)
         {
@@ -821,14 +818,12 @@ extern int ZEXPORT unzLocateFile (unzFile file, const char* szFileName, int iCas
 
     err = unzGoToFirstFile(file);
 
-    while (err == UNZ_OK)
-    {
+	while (err == UNZ_OK) {
         char szCurrentFileName[UNZ_MAXFILENAMEINZIP+1];
         err = unzGetCurrentFileInfo(file, NULL,
                                     szCurrentFileName, sizeof(szCurrentFileName)-1,
                                     NULL, 0, NULL, 0);
-        if (err == UNZ_OK)
-        {
+		if (err == UNZ_OK) {
             if (unzStringFileNameCompare(szCurrentFileName,
                                             szFileName, iCaseSensitivity)==0)
                 return UNZ_OK;
@@ -1254,9 +1249,7 @@ extern int ZEXPORT unzReadCurrentFile  (unzFile file, voidp buf, unsigned len)
             pfile_in_zip_read_info->stream.next_in += uDoCopy;
             pfile_in_zip_read_info->stream.total_out += uDoCopy;
             iRead += uDoCopy;
-		}
-        else
-        {
+		} else {
             uLong uTotalOutBefore, uTotalOutAfter;
             const Bytef *bufBefore;
             uLong uOutThis;
@@ -1705,14 +1698,12 @@ local int add_data_in_datablock(linkedlist_data* ll, const void* buf, uLong len)
     ldi = ll->last_block;
     from_copy = (unsigned char*)buf;
 
-    while (len>0)
-    {
+	while (len > 0) {
         uInt copy_this;
         uInt i;
         unsigned char* to_copy;
 
-        if (ldi->avail_in_this_block==0)
-        {
+		if (ldi->avail_in_this_block == 0) {
             ldi->next_datablock = allocate_new_datablock();
             if (ldi->next_datablock == NULL)
                 return ZIP_INTERNALERROR;
@@ -1754,18 +1745,12 @@ local int ziplocal_putValue (const zlib_filefunc_def* pzlib_filefunc_def, voidpf
 {
     unsigned char buf[4];
     int n;
-    for (n = 0; n < nbByte; n++)
-    {
+	for (n = 0; n < nbByte; ++n) {
         buf[n] = (unsigned char)(x & 0xff);
         x >>= 8;
 	}
-    if (x != 0)
-      {     /* data overflow - hack for ZIP64 (X Roche) */
-      for (n = 0; n < nbByte; n++)
-        {
-          buf[n] = 0xff;
-		}
-	}
+	// data overflow - hack for ZIP64 (X Roche)
+	if (x != 0) for (n = 0; n < nbByte; ++n) buf[n] = 0xff;
 
     if (ZWRITE(*pzlib_filefunc_def, filestream, buf, nbByte)!=(uLong)nbByte)
         return ZIP_ERRNO;
@@ -2124,7 +2109,7 @@ extern zipFile ZEXPORT zipOpen2
                                 (offset_central_dir+size_central_dir);
         ziinit.add_position_when_writting_offset = byte_before_the_zipfile ;
 
-        {
+		{
             uLong size_central_dir_to_read = size_central_dir;
             size_t buf_size = SIZEDATA_INDATABLOCK;
             void* buf_read = (void*)ALLOC(buf_size);
@@ -2133,8 +2118,7 @@ extern zipFile ZEXPORT zipOpen2
                   ZLIB_FILEFUNC_SEEK_SET) != 0)
                   err=ZIP_ERRNO;
 
-            while ((size_central_dir_to_read>0) && (err==ZIP_OK))
-            {
+			while (size_central_dir_to_read > 0 and err == ZIP_OK) {
                 uLong read_this = SIZEDATA_INDATABLOCK;
                 if (read_this > size_central_dir_to_read)
                     read_this = size_central_dir_to_read;
@@ -2407,10 +2391,8 @@ extern int ZEXPORT zipWriteInFileInZip (zipFile file, const void* buf, unsigned 
     zi->ci.stream.avail_in = len;
     zi->ci.crc32 = crc32(zi->ci.crc32, (const Bytef*) buf, len);
 
-    while ((err==ZIP_OK) && (zi->ci.stream.avail_in>0))
-    {
-        if (zi->ci.stream.avail_out == 0)
-        {
+	while (err == ZIP_OK and zi->ci.stream.avail_in > 0) {
+		if (zi->ci.stream.avail_out == 0) {
             if (zipFlushWriteBuffer(zi) == ZIP_ERRNO)
                 err = ZIP_ERRNO;
             zi->ci.stream.avail_out = (uInt)Z_BUFSIZE;
@@ -2421,24 +2403,21 @@ extern int ZEXPORT zipWriteInFileInZip (zipFile file, const void* buf, unsigned 
         if (err != ZIP_OK)
             break;
 
-        if ((zi->ci.method == Z_DEFLATED) && (!zi->ci.raw))
-        {
+		if (zi->ci.method == Z_DEFLATED and not zi->ci.raw) {
             uLong uTotalOutBefore = zi->ci.stream.total_out;
             err=deflate(&zi->ci.stream,  Z_NO_FLUSH);
             zi->ci.pos_in_buffered_data += (uInt)(zi->ci.stream.total_out - uTotalOutBefore) ;
 
-		}
-        else
-        {
+		} else {
             uInt copy_this, i;
-            if (zi->ci.stream.avail_in < zi->ci.stream.avail_out)
+			if (zi->ci.stream.avail_in < zi->ci.stream.avail_out)
                 copy_this = zi->ci.stream.avail_in;
-            else
+			else
                 copy_this = zi->ci.stream.avail_out;
-            for (i=0;i<copy_this;i++)
-                *(((char*)zi->ci.stream.next_out)+i) =
-                    *(((const char*)zi->ci.stream.next_in)+i);
-            {
+			for (i = 0; i < copy_this; ++i)
+				*(reinterpret_cast<char *>(zi->ci.stream.next_out) + i) =
+				*(reinterpret_cast<const char *>(zi->ci.stream.next_in) + i);
+			{
                 zi->ci.stream.avail_in -= copy_this;
                 zi->ci.stream.avail_out-= copy_this;
                 zi->ci.stream.next_in+= copy_this;
@@ -2467,13 +2446,10 @@ extern int ZEXPORT zipCloseFileInZipRaw (zipFile file, uLong uncompressed_size, 
         return ZIP_PARAMERROR;
     zi->ci.stream.avail_in = 0;
 
-    if ((zi->ci.method == Z_DEFLATED) && (!zi->ci.raw))
-        while (err==ZIP_OK)
-    {
+	if (zi->ci.method == Z_DEFLATED and not zi->ci.raw) while (err == ZIP_OK) {
         uLong uTotalOutBefore;
-        if (zi->ci.stream.avail_out == 0)
-        {
-            if (zipFlushWriteBuffer(zi) == ZIP_ERRNO)
+		if (zi->ci.stream.avail_out == 0) {
+			if (zipFlushWriteBuffer(zi) == ZIP_ERRNO)
                 err = ZIP_ERRNO;
             zi->ci.stream.avail_out = (uInt)Z_BUFSIZE;
             zi->ci.stream.next_out = zi->ci.buffered_data;
@@ -2571,15 +2547,16 @@ extern int ZEXPORT zipClose (zipFile file, const char* global_comment)
 
 
     centraldir_pos_inzip = ZTELL(zi->z_filefunc, zi->filestream);
-    if (err==ZIP_OK)
-    {
+	if (err == ZIP_OK) {
         linkedlist_datablock_internal* ldi = zi->central_dir.first_block ;
-        while (ldi!=NULL)
-        {
-            if ((err==ZIP_OK) && (ldi->filled_in_this_block>0))
-                if (ZWRITE(zi->z_filefunc, zi->filestream,
-                           ldi->data, ldi->filled_in_this_block)
-                              !=ldi->filled_in_this_block)
+		while (ldi != NULL) {
+			if (err == ZIP_OK and ldi->filled_in_this_block > 0)
+				if
+					(ZWRITE
+					 (zi->z_filefunc, zi->filestream,
+					  ldi->data, ldi->filled_in_this_block)
+					 !=
+					 ldi->filled_in_this_block)
                     err = ZIP_ERRNO;
 
             size_centraldir += ldi->filled_in_this_block;
