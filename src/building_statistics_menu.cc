@@ -249,86 +249,76 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	assert(m_table.has_selection());
 	const std::vector<Player::Building_Stats> & vec =
 		m_parent->get_player()->get_building_statistics(m_table.get_selected());
+	const Map & map = m_parent->egbase().map();
 
    bool found = true; // We think, we always find a proper building
 
 	switch (id) {
 	case Prev_Owned:
-         /* jump prev building */
-         m_last_building_index--;
-         break;
-
+		--m_last_building_index;
+		break;
 	case Next_Owned:
-         /* Jump next building */
-         m_last_building_index++;
-         break;
-
-	case Prev_Construction:
-         /* Jump to prev constructionsite */
-         {
+		++m_last_building_index;
+		break;
+	case Prev_Construction: {
             int curindex = m_last_building_index;
             while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
                if (vec[m_last_building_index].is_constructionsite) break;
-			}
-         break;
-
-	case Next_Construction:
-         /* Jump to next constructionsite */
-         {
+	}
+		break;
+	case Next_Construction: {
             int curindex = m_last_building_index;
             while (validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
                if (vec[m_last_building_index].is_constructionsite) break;
-			}
-         break;
-
-	case Prev_Unproductive:
-         {
+	}
+		break;
+	case Prev_Unproductive: {
             int curindex = m_last_building_index;
             found = false;
-            while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
-               if (!vec[m_last_building_index].is_constructionsite) {
-                  Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-                  if (b->get_building_type() == Building::PRODUCTIONSITE) {
-                     if (((ProductionSite*)b)->get_statistics_percent() <= LOW_PROD) {
+		while
+			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
+			if (not vec[m_last_building_index].is_constructionsite) {
+				if
+					(ProductionSite * const productionsite =
+					 dynamic_cast<ProductionSite *>
+					 (map[vec[m_last_building_index].pos].get_immovable()))
+					if (productionsite->get_statistics_percent() < LOW_PROD) {
                         found = true;
                         break;
-							}
-						}
 					}
-            if (!found) { // Now look at the old
-               Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-               if (b->get_building_type() == Building::PRODUCTIONSITE)
-                  if (((ProductionSite*)b)->get_statistics_percent() < LOW_PROD)
+			}
+		if (not found) // Now look at the old
+			if
+				(ProductionSite * const productionsite =
+				 dynamic_cast<ProductionSite *>
+				 (map[vec[m_last_building_index].pos].get_immovable()))
+				if (productionsite->get_statistics_percent() < LOW_PROD)
                      found = true;
-				}
-			}
+	}
          break;
-
-	case Next_Unproductive:
-         {
+	case Next_Unproductive: {
             int curindex = m_last_building_index;
             found = false;
-            while (validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
-               if (!vec[m_last_building_index].is_constructionsite) {
-                  Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-                  if (b->get_building_type() == Building::PRODUCTIONSITE) {
-                     if (((ProductionSite*)b)->get_statistics_percent() < LOW_PROD) {
+		while
+			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
+			if (not vec[m_last_building_index].is_constructionsite) {
+				if
+					(ProductionSite * const productionsite =
+					 dynamic_cast<ProductionSite *>
+					 (map[vec[m_last_building_index].pos].get_immovable()))
+					if (productionsite->get_statistics_percent() < LOW_PROD) {
                         found = true;
                         break;
-							}
-						}
-					}
-            if (!found) { // Now look at the old
-               Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-               if (b->get_building_type() == Building::PRODUCTIONSITE)
-                     if (((ProductionSite*)b)->get_statistics_percent() < LOW_PROD)
-                        found = true;
 					}
 			}
-         break;
-
-
-
+		if (not found) // Now look at the old
+			if
+				(ProductionSite * const productionsite =
+				 dynamic_cast<ProductionSite *>
+				 (map[vec[m_last_building_index].pos].get_immovable()))
+				if (productionsite->get_statistics_percent() < LOW_PROD)
+                        found = true;
+	}
 	}
 
    validate_pointer(&m_last_building_index, vec.size());
