@@ -1,11 +1,12 @@
-# Widelands - Finnish language
+# Widelands po/fi_FI/tribes/empire.po
+# Copyright (C) 2007 Widelands Development Team.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id: tribe_empire_fi_FI.po 2161 2007-03-25 20:08:46Z "
-"nasenbaer_peter $\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-03-24 06:09+0200\n"
 "Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
@@ -16,700 +17,655 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../tribes/empire/conf:18
-msgid "The Widelands Development Team"
-msgstr "Widelands-projektin tekijätiimi"
-
-#: ../tribes/empire/conf:19
-msgid "The Empire"
-msgstr "Imperiumi"
-
-#: ../tribes/empire/conf:20
-msgid "This is the culture of the roman Empire."
-msgstr ""
-
-#: ../tribes/empire/buildings/arena/conf:2
+#: ../../../tribes/empire/buildings/arena/conf:2
 msgid "Arena"
 msgstr "Areena"
 
-#: ../tribes/empire/buildings/armoursmith/conf:2
-#: ../tribes/empire/workers/armoursmith/conf:2
+#: ../../../tribes/empire/buildings/armoursmith/conf:2
+#: ../../../tribes/empire/workers/armoursmith/conf:2
 msgid "Armoursmith"
 msgstr "Haarniskaseppä"
 
-#: ../tribes/empire/buildings/bakery/conf:2
+#: ../../../tribes/empire/buildings/bakery/conf:2
 msgid "Bakery"
 msgstr "Leipomo"
 
-#: ../tribes/empire/buildings/barracks/conf:2
+#: ../../../tribes/empire/buildings/barracks/conf:2
 msgid "Barracks"
 msgstr "Parakit"
 
-#: ../tribes/empire/buildings/barrier/conf:2
+#: ../../../tribes/empire/buildings/barrier/conf:2
 msgid "Barrier"
 msgstr "Este"
 
-#: ../tribes/empire/buildings/brewery/conf:2
+#: ../../../tribes/empire/buildings/brewery/conf:2
 msgid "Brewery"
 msgstr "Panimotyöläinen"
 
-#: ../tribes/empire/buildings/burner/conf:2
+#: ../../../tribes/empire/buildings/burner/conf:2
 msgid "Charcoal Burner"
 msgstr ""
 
-#: ../tribes/empire/buildings/carpenter/conf:2
+#: ../../../tribes/empire/buildings/carpenter/conf:2
 #, fuzzy
 msgid "Carpenter's workshop"
 msgstr "Kantaja"
 
-#: ../tribes/empire/buildings/castle/conf:2
+#: ../../../tribes/empire/buildings/castle/conf:2
 msgid "Castle"
 msgstr "Linna"
 
-#: ../tribes/empire/buildings/coalmine/conf:2
+#: ../../../tribes/empire/buildings/coalmine/conf:2
 msgid "Coal mine"
 msgstr "Hiilikaivos"
 
-#: ../tribes/empire/buildings/colosseum/conf:2
+#: ../../../tribes/empire/buildings/colosseum/conf:2
 msgid "Colosseum"
 msgstr "Kolosseumi"
 
-#: ../tribes/empire/buildings/constructionsite/conf:5
+#: ../../../tribes/empire/buildings/constructionsite/conf:5
 msgid "Construction Site"
 msgstr "Rakennustyömaa"
 
-#: ../tribes/empire/buildings/deep_coalmine/conf:2
+#: ../../../tribes/empire/buildings/deep_coalmine/conf:2
 msgid "Deep Coal Mine"
 msgstr "Syvä hiilikaivos"
 
-#: ../tribes/empire/buildings/deep_goldmine/conf:2
+#: ../../../tribes/empire/buildings/deep_goldmine/conf:2
 msgid "Deep Gold Mine"
 msgstr "Syvä kultakaivos"
 
-#: ../tribes/empire/buildings/deep_marblemine/conf:2
+#: ../../../tribes/empire/buildings/deep_marblemine/conf:2
 #, fuzzy
 msgid "Deep Marble Mine"
 msgstr "Syvä hiilikaivos"
 
-#: ../tribes/empire/buildings/deep_oremine/conf:2
+#: ../../../tribes/empire/buildings/deep_oremine/conf:2
 msgid "Deep Iron Ore Mine"
 msgstr ""
 
-#: ../tribes/empire/buildings/farm/conf:2
+#: ../../../tribes/empire/buildings/farm/conf:2
 msgid "Farm"
 msgstr "Maatila"
 
-#: ../tribes/empire/buildings/fisher/conf:2
+#: ../../../tribes/empire/buildings/fisher/conf:2
 msgid "Fisher Hut"
 msgstr "Kalastajan maja"
 
-#: ../tribes/empire/buildings/forester/conf:2
+#: ../../../tribes/empire/buildings/forester/conf:2
 msgid "Forester Hut"
 msgstr "Puunistuttaja"
 
-#: ../tribes/empire/buildings/fortress/conf:2
+#: ../../../tribes/empire/buildings/fortress/conf:2
 msgid "Fortress"
 msgstr "Linnoitus"
 
-#: ../tribes/empire/buildings/goldmine/conf:2
+#: ../../../tribes/empire/buildings/goldmine/conf:2
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../tribes/empire/buildings/headquarters/conf:2
+#: ../../../tribes/empire/buildings/headquarters/conf:2
 msgid "Headquarters"
 msgstr "Päämaja"
 
-#: ../tribes/empire/buildings/hunter/conf:2
+#: ../../../tribes/empire/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Saalistajan maja"
 
-#: ../tribes/empire/buildings/inn/conf:2
+#: ../../../tribes/empire/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Majatalo"
 
-#: ../tribes/empire/buildings/lumberjack/conf:2
+#: ../../../tribes/empire/buildings/lumberjack/conf:2
 #, fuzzy
 msgid "Lumberjack's Hut"
 msgstr "Puunhakkaaja"
 
-#: ../tribes/empire/buildings/marblemine/conf:2
+#: ../../../tribes/empire/buildings/marblemine/conf:2
 #, fuzzy
 msgid "Marble Mine"
 msgstr "Mestarikaivostyöläinen"
 
-#: ../tribes/empire/buildings/mill/conf:2
+#: ../../../tribes/empire/buildings/mill/conf:2
 msgid "Mill"
 msgstr "Mylly"
 
-#: ../tribes/empire/buildings/oremine/conf:2
+#: ../../../tribes/empire/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
 msgstr "Tautakaivos"
 
-#: ../tribes/empire/buildings/outpost/conf:2
+#: ../../../tribes/empire/buildings/outpost/conf:2
 msgid "Outpost"
 msgstr ""
 
-#: ../tribes/empire/buildings/piggery/conf:2
+#: ../../../tribes/empire/buildings/piggery/conf:2
 msgid "Piggery"
 msgstr ""
 
-#: ../tribes/empire/buildings/quarry/conf:2
+#: ../../../tribes/empire/buildings/quarry/conf:2
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../tribes/empire/buildings/sawmill/conf:2
+#: ../../../tribes/empire/buildings/sawmill/conf:2
 msgid "Sawmill"
 msgstr "Saha"
 
-#: ../tribes/empire/buildings/sentry/conf:2
+#: ../../../tribes/empire/buildings/sentry/conf:2
 msgid "Sentry"
 msgstr "Vartio"
 
-#: ../tribes/empire/buildings/sheepfarm/conf:2
+#: ../../../tribes/empire/buildings/sheepfarm/conf:2
 msgid "Sheepfarm"
 msgstr "Lammasfarmi"
 
-#: ../tribes/empire/buildings/smelting_works/conf:2
+#: ../../../tribes/empire/buildings/smelting_works/conf:2
 msgid "Smelting Works"
 msgstr "Sulattamo"
 
-#: ../tribes/empire/buildings/stonemason/conf:2
-#: ../tribes/empire/workers/stonemason/conf:2
+#: ../../../tribes/empire/buildings/stonemason/conf:2
+#: ../../../tribes/empire/workers/stonemason/conf:2
 msgid "Stonemason"
 msgstr "Kivenhakkaaja"
 
-#: ../tribes/empire/buildings/tavern/conf:2
+#: ../../../tribes/empire/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr "Taverna"
 
-#: ../tribes/empire/buildings/tower/conf:2
+#: ../../../tribes/empire/buildings/tower/conf:2
 msgid "Tower"
 msgstr "Torni"
 
-#: ../tribes/empire/buildings/trainingscamp/conf:2
+#: ../../../tribes/empire/buildings/trainingscamp/conf:2
 msgid "Trainingscamp"
 msgstr "Harjoitteluleiri"
 
-#: ../tribes/empire/buildings/vineyard/conf:2
+#: ../../../tribes/empire/buildings/vineyard/conf:2
 msgid "Vineyard"
 msgstr "Viinitarha"
 
-#: ../tribes/empire/buildings/vintagery/conf:2
+#: ../../../tribes/empire/buildings/vintagery/conf:2
 msgid "Vintagery"
 msgstr ""
 
-#: ../tribes/empire/buildings/warehouse/conf:2
+#: ../../../tribes/empire/buildings/warehouse/conf:2
 msgid "Warehouse"
 msgstr "Varasto"
 
-#: ../tribes/empire/buildings/weaponsmith/conf:2
-#: ../tribes/empire/workers/weaponsmith/conf:2
+#: ../../../tribes/empire/buildings/weaponsmith/conf:2
+#: ../../../tribes/empire/workers/weaponsmith/conf:2
 msgid "Weaponsmith"
 msgstr "Aseseppä"
 
-#: ../tribes/empire/buildings/weaving-mill/conf:2
+#: ../../../tribes/empire/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
 msgstr "Paino"
 
-#: ../tribes/empire/buildings/well/conf:2
+#: ../../../tribes/empire/buildings/well/conf:2
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../tribes/empire/wares/advanced_lance/conf:2
+#: ../../../tribes/empire/conf:18
+msgid "The Widelands Development Team"
+msgstr "Widelands-projektin tekijätiimi"
+
+#: ../../../tribes/empire/conf:19
+msgid "The Empire"
+msgstr "Imperiumi"
+
+#: ../../../tribes/empire/conf:20
+msgid "This is the culture of the roman Empire."
+msgstr ""
+
+#: ../../../tribes/empire/wares/advanced_lance/conf:2
 msgid "Advanced Lance"
 msgstr ""
 
-#: ../tribes/empire/wares/advanced_lance/conf:3
+#: ../../../tribes/empire/wares/advanced_lance/conf:3
 msgid "This is an advanced lance, with steel top."
 msgstr ""
 
-#: ../tribes/empire/wares/armour/conf:2
+#: ../../../tribes/empire/wares/armour/conf:2
 msgid "Armour"
 msgstr ""
 
-#: ../tribes/empire/wares/armour/conf:3
+#: ../../../tribes/empire/wares/armour/conf:3
 msgid "Basic armour for Empire soldiers."
 msgstr ""
 
-#: ../tribes/empire/wares/axe/conf:2
+#: ../../../tribes/empire/wares/axe/conf:2
 msgid "Axe"
 msgstr "Kirves"
 
-#: ../tribes/empire/wares/axe/conf:3
-msgid ""
-"The Axe is the tool for the lumberjack. It is produced by the carpenter."
+#: ../../../tribes/empire/wares/axe/conf:3
+msgid "The Axe is the tool for the lumberjack. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/bakingtray/conf:2
+#: ../../../tribes/empire/wares/bakingtray/conf:2
 msgid "Bakingtray"
 msgstr "Tarjotin"
 
-#: ../tribes/empire/wares/bakingtray/conf:3
-msgid ""
-"The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced by the carpenter."
+#: ../../../tribes/empire/wares/bakingtray/conf:3
+msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/basket/conf:2
+#: ../../../tribes/empire/wares/basket/conf:2
 msgid "Basket"
 msgstr "Kori"
 
-#: ../tribes/empire/wares/basket/conf:3
-msgid ""
-"This basket is needed by the wine-grower, for harvesting the wine-grapes. It "
-"is produced by the carpenter."
+#: ../../../tribes/empire/wares/basket/conf:3
+msgid "This basket is needed by the wine-grower, for harvesting the wine-grapes. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/beer/conf:2
+#: ../../../tribes/empire/wares/beer/conf:2
 msgid "Beer"
 msgstr "Kaljaa"
 
-#: ../tribes/empire/wares/beer/conf:3
-msgid ""
-"Young soldiers and miners need some encouragement. This drink makes a man "
-"fearless and strong."
+#: ../../../tribes/empire/wares/beer/conf:3
+msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
 msgstr ""
 
-#: ../tribes/empire/wares/bread/conf:2
+#: ../../../tribes/empire/wares/bread/conf:2
 msgid "Bread"
 msgstr "Leipä"
 
-#: ../tribes/empire/wares/bread/conf:3
+#: ../../../tribes/empire/wares/bread/conf:3
 msgid "The backers of the Empire make really tasty bread."
 msgstr ""
 
-#: ../tribes/empire/wares/chain_armour/conf:2
+#: ../../../tribes/empire/wares/chain_armour/conf:2
 msgid "Chain-Armour"
 msgstr ""
 
-#: ../tribes/empire/wares/chain_armour/conf:3
+#: ../../../tribes/empire/wares/chain_armour/conf:3
 msgid "This is a medium armour for Empire soldiers"
 msgstr ""
 
-#: ../tribes/empire/wares/cloth/conf:2
+#: ../../../tribes/empire/wares/cloth/conf:2
 msgid "Cloth"
 msgstr "Vaate"
 
-#: ../tribes/empire/wares/cloth/conf:3
-msgid ""
-"Cloth is needed for Empire ships and few bigger buildings. It is produced "
-"out of wool."
+#: ../../../tribes/empire/wares/cloth/conf:3
+msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
 msgstr ""
 
-#: ../tribes/empire/wares/coal/conf:2
+#: ../../../tribes/empire/wares/coal/conf:2
 msgid "Coal"
 msgstr "Hiiltä"
 
-#: ../tribes/empire/wares/coal/conf:3
-msgid ""
-"The fires of the Empire are usually fed with wood, but sometimes, wood just "
-"does not burn hot enough. Then, coal is used."
+#: ../../../tribes/empire/wares/coal/conf:3
+msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 msgstr ""
 
-#: ../tribes/empire/wares/coalearth/conf:2
+#: ../../../tribes/empire/wares/coalearth/conf:2
 msgid "Coalearth"
 msgstr "Kivihiili"
 
-#: ../tribes/empire/wares/coalearth/conf:3
-msgid ""
-"This earth is found in the deep coal mines. It needs to be enhanced to get "
-"proper coal"
+#: ../../../tribes/empire/wares/coalearth/conf:3
+msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 msgstr ""
 
-#: ../tribes/empire/wares/fire_tongs/conf:2
+#: ../../../tribes/empire/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
 msgstr "Tongit"
 
-#: ../tribes/empire/wares/fire_tongs/conf:3
-msgid ""
-"The fire tongs are the tool of the smelter, working in the Smelting works. "
-"They are produced by the carpenter."
+#: ../../../tribes/empire/wares/fire_tongs/conf:3
+msgid "The fire tongs are the tool of the smelter, working in the Smelting works. They are produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/fish/conf:2
+#: ../../../tribes/empire/wares/fish/conf:2
 msgid "Fish"
 msgstr "Kala"
 
-#: ../tribes/empire/wares/fish/conf:3
+#: ../../../tribes/empire/wares/fish/conf:3
 msgid "Besides bread and meat, fish is also a food deliverer for the Empire."
 msgstr ""
 
-#: ../tribes/empire/wares/fishing_rod/conf:2
+#: ../../../tribes/empire/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
 msgstr "Onki"
 
-#: ../tribes/empire/wares/fishing_rod/conf:3
-msgid ""
-"Fishing rods are needed by fishers, to catch fish. Produced by the carpenter."
+#: ../../../tribes/empire/wares/fishing_rod/conf:3
+msgid "Fishing rods are needed by fishers, to catch fish. Produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/flour/conf:2
+#: ../../../tribes/empire/wares/flour/conf:2
 msgid "Flour"
 msgstr "Jauhoja"
 
-#: ../tribes/empire/wares/flour/conf:3
-msgid ""
-"Flour is produced out of wheat and is needed for the tasty Empire bread."
+#: ../../../tribes/empire/wares/flour/conf:3
+msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
 msgstr ""
 
-#: ../tribes/empire/wares/gold/conf:2
+#: ../../../tribes/empire/wares/gold/conf:2
 msgid "Gold"
 msgstr "Kulta"
 
-#: ../tribes/empire/wares/gold/conf:3
-msgid ""
-"Gold is the most valuable of all metals; only very important things are "
-"garnished with it."
+#: ../../../tribes/empire/wares/gold/conf:3
+msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
 msgstr ""
 
-#: ../tribes/empire/wares/goldstone/conf:2
+#: ../../../tribes/empire/wares/goldstone/conf:2
 msgid "Goldstone"
 msgstr ""
 
-#: ../tribes/empire/wares/goldstone/conf:3
+#: ../../../tribes/empire/wares/goldstone/conf:3
 msgid "This is the yellow goldstone."
 msgstr ""
 
-#: ../tribes/empire/wares/grape/conf:2
+#: ../../../tribes/empire/wares/grape/conf:2
 msgid "Grape"
 msgstr "Rypäle"
 
-#: ../tribes/empire/wares/grape/conf:3
+#: ../../../tribes/empire/wares/grape/conf:3
 msgid "These grapes are the basic for future, tasty wine."
 msgstr ""
 
-#: ../tribes/empire/wares/hammer/conf:2
+#: ../../../tribes/empire/wares/hammer/conf:2
 msgid "Hammer"
 msgstr "Vasara"
 
-#: ../tribes/empire/wares/hammer/conf:3
-msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the worker, "
-"the carpenter and both blacksmiths. Make sure you always got some in "
-"reserve! It is produced by the carpenter."
+#: ../../../tribes/empire/wares/hammer/conf:3
+msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the carpenter and both blacksmiths. Make sure you always got some in reserve! It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/heavy_lance/conf:2
+#: ../../../tribes/empire/wares/heavy_lance/conf:2
 msgid "Heavy Lance"
 msgstr ""
 
-#: ../tribes/empire/wares/heavy_lance/conf:3
+#: ../../../tribes/empire/wares/heavy_lance/conf:3
 msgid "This is a good warrior lance, with a steel-top and a little blade."
 msgstr ""
 
-#: ../tribes/empire/wares/helm/conf:2
+#: ../../../tribes/empire/wares/helm/conf:2
 msgid "Helm"
 msgstr "Kypärä"
 
-#: ../tribes/empire/wares/helm/conf:3
+#: ../../../tribes/empire/wares/helm/conf:3
 msgid "Basic defence of a warrior"
 msgstr ""
 
-#: ../tribes/empire/wares/hunting_spear/conf:2
+#: ../../../tribes/empire/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
 msgstr "Metsästysseiväs"
 
-#: ../tribes/empire/wares/hunting_spear/conf:3
-msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters."
+#: ../../../tribes/empire/wares/hunting_spear/conf:3
+msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
 msgstr ""
 
-#: ../tribes/empire/wares/iron/conf:2
+#: ../../../tribes/empire/wares/iron/conf:2
 msgid "Iron"
 msgstr "Rauta"
 
-#: ../tribes/empire/wares/iron/conf:3
+#: ../../../tribes/empire/wares/iron/conf:3
 msgid "Weapons and Tools are made of iron."
 msgstr ""
 
-#: ../tribes/empire/wares/ironore/conf:2
+#: ../../../tribes/empire/wares/ironore/conf:2
 msgid "Ironore"
 msgstr "Rautamalmi"
 
-#: ../tribes/empire/wares/ironore/conf:3
+#: ../../../tribes/empire/wares/ironore/conf:3
 msgid "This is the red ironore."
 msgstr ""
 
-#: ../tribes/empire/wares/kitchen_tools/conf:2
+#: ../../../tribes/empire/wares/kitchen_tools/conf:2
 msgid "Kitchen Tools"
 msgstr "Keittiövälineet"
 
-#: ../tribes/empire/wares/kitchen_tools/conf:3
+#: ../../../tribes/empire/wares/kitchen_tools/conf:3
 msgid "How to create a meal, snack or ration, if there are no kitchentools?"
 msgstr ""
 
-#: ../tribes/empire/wares/lance/conf:2
+#: ../../../tribes/empire/wares/lance/conf:2
 msgid "Lance"
 msgstr "Keihäs"
 
-#: ../tribes/empire/wares/lance/conf:3
+#: ../../../tribes/empire/wares/lance/conf:3
 msgid "This wooden lance has an iron spike."
 msgstr ""
 
-#: ../tribes/empire/wares/marble/conf:2
+#: ../../../tribes/empire/wares/marble/conf:2
 #, fuzzy
 msgid "Marble"
 msgstr "Annos"
 
-#: ../tribes/empire/wares/marble/conf:3
-msgid ""
-"Marble is the beautiful stone, which is cutted out of the mountains and "
-"which is used for beautiful buildings and columns."
+#: ../../../tribes/empire/wares/marble/conf:3
+msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
 msgstr ""
 
-#: ../tribes/empire/wares/marblecolumn/conf:2
+#: ../../../tribes/empire/wares/marblecolumn/conf:2
 msgid "Marblecolumn"
 msgstr ""
 
-#: ../tribes/empire/wares/marblecolumn/conf:3
-msgid ""
-"Marblecolumns present the high culture of the Empire, so they are needed for "
-"nearly every bigger building."
+#: ../../../tribes/empire/wares/marblecolumn/conf:3
+msgid "Marblecolumns present the high culture of the Empire, so they are needed for nearly every bigger building."
 msgstr ""
 
-#: ../tribes/empire/wares/meal/conf:2
+#: ../../../tribes/empire/wares/meal/conf:2
 msgid "Meal"
 msgstr "Annos"
 
-#: ../tribes/empire/wares/meal/conf:3
+#: ../../../tribes/empire/wares/meal/conf:3
 msgid "A real meal which satisfies all miners needs."
 msgstr ""
 
-#: ../tribes/empire/wares/meat/conf:2
+#: ../../../tribes/empire/wares/meat/conf:2
 msgid "Meat"
 msgstr "Liha"
 
-#: ../tribes/empire/wares/meat/conf:3
-msgid ""
-"Meat contains a lot of energy. It is used in the Inns and Taverns to fix "
-"lunch for the miners and in the soldier trainingcamps to keep warriors "
-"strong."
+#: ../../../tribes/empire/wares/meat/conf:3
+msgid "Meat contains a lot of energy. It is used in the Inns and Taverns to fix lunch for the miners and in the soldier trainingcamps to keep warriors strong."
 msgstr ""
 
-#: ../tribes/empire/wares/pick/conf:2
+#: ../../../tribes/empire/wares/pick/conf:2
 msgid "Pick"
 msgstr "Poimi"
 
-#: ../tribes/empire/wares/pick/conf:3
-msgid ""
-"This pick is used by the stonemasons and the miners. It is produced by the "
-"carpenter."
+#: ../../../tribes/empire/wares/pick/conf:3
+msgid "This pick is used by the stonemasons and the miners. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/plate_armour/conf:2
+#: ../../../tribes/empire/wares/plate_armour/conf:2
 msgid "Plate-Armour"
 msgstr ""
 
-#: ../tribes/empire/wares/plate_armour/conf:3
+#: ../../../tribes/empire/wares/plate_armour/conf:3
 msgid "The strongest armour existing, for the Empire soldiers."
 msgstr ""
 
-#: ../tribes/empire/wares/ration/conf:2
+#: ../../../tribes/empire/wares/ration/conf:2
 msgid "Ration"
 msgstr "Annos"
 
-#: ../tribes/empire/wares/ration/conf:3
+#: ../../../tribes/empire/wares/ration/conf:3
 msgid "A small bite to keep miners strong and working."
 msgstr ""
 
-#: ../tribes/empire/wares/saw/conf:2
+#: ../../../tribes/empire/wares/saw/conf:2
 msgid "Saw"
 msgstr "Saha"
 
-#: ../tribes/empire/wares/saw/conf:3
-msgid ""
-"This saw is needed by the carpenter, to create all the usefull tools. It is "
-"produced by the carpenter."
+#: ../../../tribes/empire/wares/saw/conf:3
+msgid "This saw is needed by the carpenter, to create all the usefull tools. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/scythe/conf:2
+#: ../../../tribes/empire/wares/scythe/conf:2
 msgid "Scythe"
 msgstr "Viikate"
 
-#: ../tribes/empire/wares/scythe/conf:3
+#: ../../../tribes/empire/wares/scythe/conf:3
 msgid "The Scythe is the tool of the farmers. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/shovel/conf:2
+#: ../../../tribes/empire/wares/shovel/conf:2
 msgid "Shovel"
 msgstr "Lapio"
 
-#: ../tribes/empire/wares/shovel/conf:3
-msgid ""
-"The shovel is needed for proper handling of plants. Therefore the forester "
-"use it. It is produced by the carpenter."
+#: ../../../tribes/empire/wares/shovel/conf:3
+msgid "The shovel is needed for proper handling of plants. Therefore the forester use it. It is produced by the carpenter."
 msgstr ""
 
-#: ../tribes/empire/wares/stone/conf:2
+#: ../../../tribes/empire/wares/stone/conf:2
 msgid "Stones"
 msgstr "Kiviä"
 
-#: ../tribes/empire/wares/stone/conf:3 ../tribes/empire/wares/wood/conf:3
+#: ../../../tribes/empire/wares/stone/conf:3
+#: ../../../tribes/empire/wares/wood/conf:3
 msgid "Stones and wood are the basic build ware of the Empire."
 msgstr ""
 
-#: ../tribes/empire/wares/trunk/conf:2
+#: ../../../tribes/empire/wares/trunk/conf:2
 msgid "Trunk"
 msgstr "Tukki"
 
-#: ../tribes/empire/wares/trunk/conf:3
+#: ../../../tribes/empire/wares/trunk/conf:3
 msgid "Trunks are one important build ware of the Empire."
 msgstr ""
 
-#: ../tribes/empire/wares/war_lance/conf:2
+#: ../../../tribes/empire/wares/war_lance/conf:2
 msgid "War-Lance"
 msgstr ""
 
-#: ../tribes/empire/wares/war_lance/conf:3
-msgid ""
-"This is the best and sharpest weapon, the romans weaponsmith create for "
-"their warriors"
+#: ../../../tribes/empire/wares/war_lance/conf:3
+msgid "This is the best and sharpest weapon, the romans weaponsmith create for their warriors"
 msgstr ""
 
-#: ../tribes/empire/wares/water/conf:2
+#: ../../../tribes/empire/wares/water/conf:2
 msgid "Water"
 msgstr "Vettä"
 
-#: ../tribes/empire/wares/water/conf:3
-msgid ""
-"Water is the most essential essence for life! This water is used in many "
-"places, be it to make bread or beer."
+#: ../../../tribes/empire/wares/water/conf:3
+msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
 msgstr ""
 
-#: ../tribes/empire/wares/wheat/conf:2
+#: ../../../tribes/empire/wares/wheat/conf:2
 msgid "Wheat"
 msgstr "Viljaa"
 
-#: ../tribes/empire/wares/wheat/conf:3
-msgid ""
-"Wheat is essential for surviving, good bread and strong ales can be made of "
-"this wheat."
+#: ../../../tribes/empire/wares/wheat/conf:3
+msgid "Wheat is essential for surviving, good bread and strong ales can be made of this wheat."
 msgstr ""
 
-#: ../tribes/empire/wares/wine/conf:2
+#: ../../../tribes/empire/wares/wine/conf:2
 msgid "Wine"
 msgstr "Viini"
 
-#: ../tribes/empire/wares/wine/conf:3
-msgid ""
-"This wine gives enough power, to mine marble or gold. And furthermore, our "
-"soldiers like it, too."
+#: ../../../tribes/empire/wares/wine/conf:3
+msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
 msgstr ""
 
-#: ../tribes/empire/wares/wood/conf:2
+#: ../../../tribes/empire/wares/wood/conf:2
 msgid "Wood"
 msgstr "Puuta"
 
-#: ../tribes/empire/wares/wood_lance/conf:2
+#: ../../../tribes/empire/wares/wood_lance/conf:2
 msgid "Wood Lance"
 msgstr "Puukeihäs"
 
-#: ../tribes/empire/wares/wood_lance/conf:3
-msgid ""
-"This is a wooden lance, which is the basic of the romans military system."
+#: ../../../tribes/empire/wares/wood_lance/conf:3
+msgid "This is a wooden lance, which is the basic of the romans military system."
 msgstr ""
 
-#: ../tribes/empire/wares/wool/conf:2
+#: ../../../tribes/empire/wares/wool/conf:2
 msgid "Wool"
 msgstr ""
 
-#: ../tribes/empire/wares/wool/conf:3
+#: ../../../tribes/empire/wares/wool/conf:3
 msgid "Wool is the hair of sheeps. Empire weavingmills use it to make cloth."
 msgstr ""
 
-#: ../tribes/empire/workers/baker/conf:2
+#: ../../../tribes/empire/workers/baker/conf:2
 msgid "Baker"
 msgstr "Leipomo"
 
-#: ../tribes/empire/workers/brewer/conf:2
+#: ../../../tribes/empire/workers/brewer/conf:2
 msgid "Brewer"
 msgstr "Panimo"
 
-#: ../tribes/empire/workers/builder/conf:2
+#: ../../../tribes/empire/workers/builder/conf:2
 msgid "Builder"
 msgstr "Rakentaja"
 
-#: ../tribes/empire/workers/burner/conf:2
+#: ../../../tribes/empire/workers/burner/conf:2
 msgid "Burner"
 msgstr "Polttaja"
 
-#: ../tribes/empire/workers/carpenter/conf:2
+#: ../../../tribes/empire/workers/carpenter/conf:2
 #, fuzzy
 msgid "Carpenter"
 msgstr "Kantaja"
 
-#: ../tribes/empire/workers/carrier/conf:2
+#: ../../../tribes/empire/workers/carrier/conf:2
 msgid "Carrier"
 msgstr "Kantaja"
 
-#: ../tribes/empire/workers/farmer/conf:2
+#: ../../../tribes/empire/workers/farmer/conf:2
 msgid "Farmer"
 msgstr "Farmari"
 
-#: ../tribes/empire/workers/fisher/conf:2
+#: ../../../tribes/empire/workers/fisher/conf:2
 msgid "Fisher"
 msgstr "Kalastaja"
 
-#: ../tribes/empire/workers/forester/conf:2
+#: ../../../tribes/empire/workers/forester/conf:2
 msgid "Forester"
 msgstr "Puunistuttaja"
 
-#: ../tribes/empire/workers/geologist/conf:2
+#: ../../../tribes/empire/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Geologi"
 
-#: ../tribes/empire/workers/herdsman/conf:2
+#: ../../../tribes/empire/workers/herdsman/conf:2
 msgid "Herdsman"
 msgstr ""
 
-#: ../tribes/empire/workers/hunter/conf:2
+#: ../../../tribes/empire/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Saalistaja"
 
-#: ../tribes/empire/workers/innkeeper/conf:2
+#: ../../../tribes/empire/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Majatalonpitäjä"
 
-#: ../tribes/empire/workers/lumberjack/conf:2
+#: ../../../tribes/empire/workers/lumberjack/conf:2
 msgid "Lumberjack"
 msgstr "Puunhakkaaja"
 
-#: ../tribes/empire/workers/master-miner/conf:2
+#: ../../../tribes/empire/workers/master-miner/conf:2
 msgid "Master Miner"
 msgstr "Mestarikaivostyöläinen"
 
-#: ../tribes/empire/workers/miller/conf:2
+#: ../../../tribes/empire/workers/miller/conf:2
 #, fuzzy
 msgid "Miller"
 msgstr "Kaivostyöläinen"
 
-#: ../tribes/empire/workers/miner/conf:2
+#: ../../../tribes/empire/workers/miner/conf:2
 msgid "Miner"
 msgstr "Kaivostyöläinen"
 
-#: ../tribes/empire/workers/pig-breeder/conf:2
+#: ../../../tribes/empire/workers/pig-breeder/conf:2
 msgid "Pig-breeder"
 msgstr ""
 
-#: ../tribes/empire/workers/smelter/conf:2
+#: ../../../tribes/empire/workers/smelter/conf:2
 msgid "Smelter"
 msgstr "Sulattaja"
 
-#: ../tribes/empire/workers/soldier/conf:2
+#: ../../../tribes/empire/workers/soldier/conf:2
 msgid "Soldier"
 msgstr "Sotilas"
 
-#: ../tribes/empire/workers/trainer/conf:2
+#: ../../../tribes/empire/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Valmentaja"
 
-#: ../tribes/empire/workers/vinefarmer/conf:2
+#: ../../../tribes/empire/workers/vinefarmer/conf:2
 #, fuzzy
 msgid "Vinefarmer"
 msgstr "Farmari"
 
-#: ../tribes/empire/workers/weaver/conf:2
+#: ../../../tribes/empire/workers/weaver/conf:2
 #, fuzzy
 msgid "Weaver"
 msgstr "Vettä"
