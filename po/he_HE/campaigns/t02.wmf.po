@@ -1,533 +1,276 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+# Widelands po/he_HE/campaigns/t02.wmf.po
+# Copyright (C) 2007 Widelands Development Team.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
+"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../campaigns/t02.wmf/objective:8
-msgid ""
-"<p>Build military buildings (like Sentries and Strongholds) to expand your "
-"territory. Get to the rocks north-east from you and build a Quarry there.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:16
-msgid ""
-"<p>When you click at a flag you can send Geologists to said flag. If that "
-"flag is in mountains, the Geologists will search the mountain for ores; "
-"otherwise, they will search it for water. Place a flag up on the mountains "
-"flank to the east (on mountain terrain though, not mountain meadow) and send "
-"a Gelogist there. Build then a mine for both kinds of ore he will find, "
-"choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron "
-"ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on "
-"mountain terrain. Suitable places for mines are displayed with a light grey "
-"dot.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:24 ../campaigns/t02.wmf/objective:32
-msgid ""
-"<p>In order to work, your miners need food. A hunter can hunt down animals, "
-"while a gamekeeper prevents them from becoming extinct. The meat is then "
-"processed in a tavern into lunches for your miners.<br>This is only the "
-"first example of a ware which has to be refined before being used in a "
-"secondary building - others will follow.<br>Build a hunter, a gamekeeper and "
-"a tavern.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:40
-msgid ""
-"<p>Other ways to produce food - different kinds of food though - are fishers "
-"and farms. The wheat of the latter has to be processed with water in a "
-"bakery before it becomes edible. You can obtain water by building a well at "
-"a spot where your Geologists find a water source. Build a well, a farm and a "
-"bakery.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:48
-msgid ""
-"<p>The ore your miners bring up is not usable yet - it has to be melted into "
-"iron first. Build a Smelter. Likewise, the coalearth from your coalmines "
-"must be refined into coal - for that, build a Coal Burner.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:56
-msgid ""
-"<p>A normal mine can only dig up about one third of all ressources lying "
-"beneath. Then it must be enhanced to a deep mine in order to keep it working "
-"properly. To enhance a building, click it and then the appropriate button in "
-"the appearing menu.<br>Workers gain experience by successful work. With "
-"enough experience they become more advanced workers, who are necessary to "
-"operate enhanced buildings. Do not enhance a building before you have enough "
-"advanced workers to operate the advanced building! Such buildings usually "
-"have greater demands than the basic kind of that building - for instance, "
-"deep mines need rations instead of snacks. You will have to enhance your "
-"tavern to an inn in order to produce rations out of pittabread AND a second "
-"kind of food (meat or fish). Note that the existance of inns does not make "
-"taverns obsolete - normal mines still require snacks instead of rations. You "
-"may of course enhance all mines to deep mines instantly - bigger mines work "
-"a bit faster, smaller mines need cheaper food. It is up to you which you "
-"prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of "
-"their buildings respectively.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:64
-msgid ""
-"<p>Bigger and better buildings - including all militarian ones - require "
-"better building materials. They cannot be built of simple trunks - the wood "
-"has to be refined to blackwood by a Woodhardener first. Always remember to "
-"build a Woodhardener before you run out of blackwood, for without that you "
-"cannot expand.<br>Build a Woodhardener.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:72
-msgid ""
-"<p>Better buildings may require also other improved materials besides "
-"blackwood. One of those is grindstone, which is produced out of water and "
-"raw stone by a Stonegrinder. You can obtain water by building a Well upon a "
-"water source, which your Geologists can discover when you send them to any "
-"flag that is not on a mountain by clicking said flag and the Geologist-"
-"symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a "
-"Well.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/objective:80
-msgid ""
-"<p>The third material necessary for improved buildings is reed, used to "
-"cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
-msgstr ""
-
-#: ../campaigns/t02.wmf/event:10 ../campaigns/t02.wmf/event:685
-#: ../campaigns/t02.wmf/event:807 ../campaigns/t02.wmf/event:822
+#: ../../../campaigns/t02.wmf/event:10 ../../../campaigns/t02.wmf/event:685
+#: ../../../campaigns/t02.wmf/event:807 ../../../campaigns/t02.wmf/event:822
 msgid "Thron speaks..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:12
-msgid ""
-" \"The war goes on. More and more of our brothers and sisters flee the "
-"brutal war raging in the capital beneath the trees. The stories they tell "
-"about the deeds of our kin are sad to hear. I've spent nights laying awake, "
-"restless, more tired I ever believed one could be. Yet whenever I close my "
-"eyes I see the fortress my father built consumed by flames. The throne "
-"between the trees, the symbol of unity and peace among our kin became the "
-"wedge that drives us apart.\" "
+#: ../../../campaigns/t02.wmf/event:12
+msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees. The stories they tell about the deeds of our kin are sad to hear. I've spent nights laying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:14
+#: ../../../campaigns/t02.wmf/event:14
 msgid "The Story goes on..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:17 ../campaigns/t02.wmf/event:30
-#: ../campaigns/t02.wmf/event:43 ../campaigns/t02.wmf/event:506
-#: ../campaigns/t02.wmf/event:521 ../campaigns/t02.wmf/event:536
-#: ../campaigns/t02.wmf/event:551 ../campaigns/t02.wmf/event:566
-#: ../campaigns/t02.wmf/event:582 ../campaigns/t02.wmf/event:597
-#: ../campaigns/t02.wmf/event:613 ../campaigns/t02.wmf/event:629
-#: ../campaigns/t02.wmf/event:645 ../campaigns/t02.wmf/event:660
-#: ../campaigns/t02.wmf/event:676 ../campaigns/t02.wmf/event:692
-#: ../campaigns/t02.wmf/event:708 ../campaigns/t02.wmf/event:724
-#: ../campaigns/t02.wmf/event:741 ../campaigns/t02.wmf/event:757
-#: ../campaigns/t02.wmf/event:773 ../campaigns/t02.wmf/event:789
-#: ../campaigns/t02.wmf/event:814 ../campaigns/t02.wmf/event:829
-#: ../campaigns/t02.wmf/event:914
+#: ../../../campaigns/t02.wmf/event:17 ../../../campaigns/t02.wmf/event:30
+#: ../../../campaigns/t02.wmf/event:43 ../../../campaigns/t02.wmf/event:506
+#: ../../../campaigns/t02.wmf/event:521 ../../../campaigns/t02.wmf/event:536
+#: ../../../campaigns/t02.wmf/event:551 ../../../campaigns/t02.wmf/event:566
+#: ../../../campaigns/t02.wmf/event:582 ../../../campaigns/t02.wmf/event:597
+#: ../../../campaigns/t02.wmf/event:613 ../../../campaigns/t02.wmf/event:629
+#: ../../../campaigns/t02.wmf/event:645 ../../../campaigns/t02.wmf/event:660
+#: ../../../campaigns/t02.wmf/event:676 ../../../campaigns/t02.wmf/event:692
+#: ../../../campaigns/t02.wmf/event:708 ../../../campaigns/t02.wmf/event:724
+#: ../../../campaigns/t02.wmf/event:741 ../../../campaigns/t02.wmf/event:757
+#: ../../../campaigns/t02.wmf/event:773 ../../../campaigns/t02.wmf/event:789
+#: ../../../campaigns/t02.wmf/event:814 ../../../campaigns/t02.wmf/event:829
+#: ../../../campaigns/t02.wmf/event:914
 msgid "Continue"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:25
-msgid ""
-" \"Today my hunters brought men, women and little children who had hidden "
-"out there in the forests, trying to escape war, hate and revenge that rage "
-"among the tribes fighting each other like in old times, when we were no more "
-"but the wild beasts driven and controlled by instincts. None of my brothers "
-"will ever gain and hold control over the wooden throne, none of the tribes "
-"will be strong enough to subdue the other. There will be no end to this "
-"slaughtering, unless... is this it? As father told me? Rise against whoever "
-"threatens our very existance may it even be one of your blood or mind?\" "
+#: ../../../campaigns/t02.wmf/event:25
+msgid " \"Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?\" "
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:27 ../campaigns/t02.wmf/event:40
+#: ../../../campaigns/t02.wmf/event:27 ../../../campaigns/t02.wmf/event:40
 msgid "The Story continues..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:38
-msgid ""
-" \"Boldreth seems more and more torn as the days go by. The spirits of my "
-"fellows sink as the cold season approaches and we are still living in no "
-"more than huts and barracks. I never intended to stay out here in the "
-"wilderness for so long - but I never thought my brothers would engage in "
-"this senseless battle for so long.<br>Perhaps it's time to make ourselves "
-"feel a little more at ease here. Perhaps it's time to give those who still "
-"live and think united a new home, replacing what is now lost to us? Until we "
-"can return to the place we once called our home...\" "
+#: ../../../campaigns/t02.wmf/event:38
+msgid " \"Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...\" "
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:499
+#: ../../../campaigns/t02.wmf/event:499
 msgid "Brave Boldreth steps aside you..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:501
-msgid ""
-" \"So you want to prepare us for a longer stay in these forests, Thron? "
-"Well, I see the wisdom in doing so, yet my heart is yearning for a glorious "
-"return to Al'thunran. Too long have we waited while our brethren fought on "
-"the battlefield, and our axes and swords have turned rusty over time.\"</p>"
+#: ../../../campaigns/t02.wmf/event:501
+msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time.\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:503 ../campaigns/t02.wmf/event:518
-#: ../campaigns/t02.wmf/event:533 ../campaigns/t02.wmf/event:548
-#: ../campaigns/t02.wmf/event:563 ../campaigns/t02.wmf/event:579
-#: ../campaigns/t02.wmf/event:594 ../campaigns/t02.wmf/event:610
-#: ../campaigns/t02.wmf/event:626 ../campaigns/t02.wmf/event:657
-#: ../campaigns/t02.wmf/event:673 ../campaigns/t02.wmf/event:705
-#: ../campaigns/t02.wmf/event:721 ../campaigns/t02.wmf/event:738
-#: ../campaigns/t02.wmf/event:754 ../campaigns/t02.wmf/event:770
-#: ../campaigns/t02.wmf/event:786
+#: ../../../campaigns/t02.wmf/event:503 ../../../campaigns/t02.wmf/event:518
+#: ../../../campaigns/t02.wmf/event:533 ../../../campaigns/t02.wmf/event:548
+#: ../../../campaigns/t02.wmf/event:563 ../../../campaigns/t02.wmf/event:579
+#: ../../../campaigns/t02.wmf/event:594 ../../../campaigns/t02.wmf/event:610
+#: ../../../campaigns/t02.wmf/event:626 ../../../campaigns/t02.wmf/event:657
+#: ../../../campaigns/t02.wmf/event:673 ../../../campaigns/t02.wmf/event:705
+#: ../../../campaigns/t02.wmf/event:721 ../../../campaigns/t02.wmf/event:738
+#: ../../../campaigns/t02.wmf/event:754 ../../../campaigns/t02.wmf/event:770
+#: ../../../campaigns/t02.wmf/event:786
 msgid "Advisor"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:514
+#: ../../../campaigns/t02.wmf/event:514
 msgid "Khantrukh joins the both of you"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:516
-msgid ""
-" \"I beg your forgiveness, chieftain, but I have a grief concern to discuss "
-"with you. The rocks close to our camp are shrinking fast under our workers' "
-"tools and it is only a matter of little time before they are all gone.\"</p>"
+#: ../../../campaigns/t02.wmf/event:516
+msgid " \"I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone.\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:529
+#: ../../../campaigns/t02.wmf/event:529
 msgid "Boldreth jumps up."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:531
-msgid ""
-" \"While it is certainly no worthy task for a warrior, at least it is "
-"something to be done! Thron, what do you say about me taking a few of our "
-"most restless warriors and venturing somewhat closer to the great mountain "
-"of Kal'mavrath - maybe we will find some more big stones to please the old "
-"man?\" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like "
-"Sentries and Strongholds) to expand your territory. Get to the rocks north-"
-"east from you and build a Quarry there.</p>"
+#: ../../../campaigns/t02.wmf/event:531
+msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like Sentries and Strongholds) to expand your territory. Get to the rocks north-east from you and build a Quarry there.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:544
+#: ../../../campaigns/t02.wmf/event:544
 msgid "Khantrukh grumbles..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:546
+#: ../../../campaigns/t02.wmf/event:546
 msgid " \"Old man? Disrespectful youth...\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:559
+#: ../../../campaigns/t02.wmf/event:559
 msgid "Khantrukh nods satisfied."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:561
+#: ../../../campaigns/t02.wmf/event:561
 msgid " \"At least. These rocks should last for a while.\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:575
+#: ../../../campaigns/t02.wmf/event:575
 msgid "Boldreth exclaims..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:577
-msgid ""
-" \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
-"treasures nature might have hidden beneath its majestic flanks!<br>Now "
-"that's a chance for the elderly to become useful once in a while! Let us "
-"send out some of those who understand the stone's tongue to unravel the "
-"mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a "
-"flag you can send Geologists to said flag. If that flag is in mountains, the "
-"Geologists will search the mountain for ores; otherwise, they will search it "
-"for water. Place a flag up on the mountains flank to the east (on mountain "
-"terrain though, not mountain meadow) and send a Gelogist there. Build then a "
-"mine for both kinds of ore he will find, choosing the mine to be built "
-"appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - "
-"granite<br>Mines may only be built on mountain terrain. Suitable places for "
-"mines are displayed with a light grey dot.</p>"
+#: ../../../campaigns/t02.wmf/event:577
+msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:590
+#: ../../../campaigns/t02.wmf/event:590
 msgid "Boldreth laughs..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:592
-msgid ""
-" \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
-"this coal and iron ore for! It might even be enough to -\"</p>"
+#: ../../../campaigns/t02.wmf/event:592
+msgid " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to -\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:606
+#: ../../../campaigns/t02.wmf/event:606
 msgid "Khantrukh interrupts..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:608
-msgid ""
-" \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definately demand greater rations for working "
-"high up on the mountain in this bitter cold, and providing these supplies "
-"may not prove easy.\"</p>"
+#: ../../../campaigns/t02.wmf/event:608
+msgid " \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy.\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:621
+#: ../../../campaigns/t02.wmf/event:621
 msgid "Boldreth nods..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:623
-msgid ""
-" \"I have to give it to you, you are right here, old man.<br>There seem to "
-"be quite many animals in the forests here - we might just hunt down more of "
-"them. And, of course, the people would cheer to a new tavern - hey, we might "
-"call it 'Thron's Pride' or so if you want!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:623
+msgid " \"I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:624
-msgid ""
-"--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter "
-"can hunt down animals, while a gamekeeper prevents them from becoming "
-"extinct. The meat is then processed in a tavern into lunches for your miners."
-"<br>This is only the first example of a ware which has to be refined before "
-"being used in a secondary building - others will follow.<br>Build a hunter, "
-"a gamekeeper and a tavern.</p>"
+#: ../../../campaigns/t02.wmf/event:624
+msgid "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:637
+#: ../../../campaigns/t02.wmf/event:637
 msgid "The elder laughs..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:639
-msgid ""
-" \"Wisdom commands to seek variety. North of the great mountain is a big "
-"plane - why don't we use the space Mother Nature gave us and build a farm? I "
-"sure would enjoy a freshly baken pittabread for a change...\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:639
+msgid " \"Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change...\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:640
-msgid ""
-"--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food "
-"though - are fishers and farms. The wheat of the latter has to be processed "
-"with water in a bakery before it becomes edible. You can obtain water by "
-"building a well at a spot where your Geologists find a water source. Build a "
-"well, a farm and a bakery.</p>"
+#: ../../../campaigns/t02.wmf/event:640
+msgid "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:653
+#: ../../../campaigns/t02.wmf/event:653
 msgid "Boldreth cheers up..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:655
-msgid ""
-" \"Our hunters are out in the forests, Thron. I promise you, before the sun "
-"sets today you will have a feast as magnificent as is right for the "
-"chieftain of all clans!\"</p>"
+#: ../../../campaigns/t02.wmf/event:655
+msgid " \"Our hunters are out in the forests, Thron. I promise you, before the sun sets today you will have a feast as magnificent as is right for the chieftain of all clans!\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:669
+#: ../../../campaigns/t02.wmf/event:669
 msgid "Khantrukh gazes over the plains..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:671
-msgid ""
-" \"Isn't it lovely, the view of golden fields, growing peacefully, dancing "
-"to the wind? And I believe the baker is just on his way here, with his most "
-"delicious bread for our chieftain alone!\"</p>"
+#: ../../../campaigns/t02.wmf/event:671
+msgid " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:687
-msgid ""
-" \"The new tavern opened yesterday. While I am hardly in the mood for "
-"celebration, I noticed how much this tiny bit of home meant to my people. "
-"Their songs sounded until the deep night and they were in higher spirit the "
-"day after.<br>Maybe we actually are slowly creating a place here which we "
-"can... call home.\"</p>"
+#: ../../../campaigns/t02.wmf/event:687
+msgid " \"The new tavern opened yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home.\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:689
+#: ../../../campaigns/t02.wmf/event:689
 msgid "A beautiful morning..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:700
+#: ../../../campaigns/t02.wmf/event:700
 msgid "Boldreth remarks..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:702
-msgid ""
-" \"So now that we have both the mines and the food to sustain them, we "
-"should bring what our brave miners gain for us into a more useful state. We "
-"have the iron ore to be melt into steel ready to be forged into whatever we "
-"see fit and the coal to keep the smelter's ovens burning.\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:702
+msgid " \"So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into steel ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning.\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:703
-msgid ""
-"--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it "
-"has to be melted into iron first. Build a Smelter. Likewise, the coalearth "
-"from your coalmines must be refined into coal - for that, build a Coal "
-"Burner.</p>"
+#: ../../../campaigns/t02.wmf/event:703
+msgid "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:716
+#: ../../../campaigns/t02.wmf/event:716
 msgid "Khantrukh speaks..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:718
-msgid ""
-" \"Our miners are digging up less and less by day! We have to go deeper, "
-"closer to the mountain's roots, if we want more of its treasures!<br>Of "
-"course, it is dark and cold in such depths and only few venture voluntarily "
-"into these places. We should reward this bravery with greater rations for "
-"them.\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:718
+msgid " \"Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's roots, if we want more of its treasures!<br>Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them.\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:719
-msgid ""
-"--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all "
-"ressources lying beneath. Then it must be enhanced to a deep mine in order "
-"to keep it working properly. To enhance a building, click it and then the "
-"appropriate button in the appearing menu.<br>Workers gain experience by "
-"successful work. With enough experience they become more advanced workers, "
-"who are necessary to operate enhanced buildings. Do not enhance a building "
-"before you have enough advanced workers to operate the advanced building! "
-"Such buildings usually have greater demands than the basic kind of that "
-"building - for instance, deep mines need rations instead of snacks. You will "
-"have to enhance your tavern to an inn in order to produce rations out of "
-"pittabread AND a second kind of food (meat or fish). Note that the existance "
-"of inns does not make taverns obsolete - normal mines still require snacks "
-"instead of rations. You may of course enhance all mines to deep mines "
-"instantly - bigger mines work a bit faster, smaller mines need cheaper food. "
-"It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to "
-"the better versions of their buildings respectively.</p>"
+#: ../../../campaigns/t02.wmf/event:719
+msgid "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:733
+#: ../../../campaigns/t02.wmf/event:733
 msgid "Boldreth seems concerned..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:735
-msgid ""
-" \"As I just discovered, we are running short on blackwood! We cannot put "
-"our warriors into some crumbling huts, and even more not so in times as "
-"dangerous as ours! We need a woodhardener, and we need one now!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:735
+msgid " \"As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a woodhardener, and we need one now!\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:736
-msgid ""
-"--NEW OBJECTIVES--<br>- Bigger and better buildings - including all "
-"militarian ones - require better building materials. They cannot be built of "
-"simple trunks - the wood has to be refined to blackwood by a Woodhardener "
-"first. Always remember to build a Woodhardener before you run out of "
-"blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
+#: ../../../campaigns/t02.wmf/event:736
+msgid "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:749
+#: ../../../campaigns/t02.wmf/event:749
 msgid "Boldreth smiles..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:751
-msgid ""
-" \"Well, old friend, this should ensure that our fortifications do not break "
-"down with our foes first battle cry! Now we can expand safely!<br>Still, it "
-"could not hurt to assemble some grindstone for our further campaign; thus we "
-"could, in times of need, build a fortress as the world has not seen before!"
-"\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:751
+msgid " \"Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br>Still, it could not hurt to assemble some grindstone for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:752
-msgid ""
-"--NEW OBJECTIVES--<br>- Better buildings may require also other improved "
-"materials besides blackwood. One of those is grindstone, which is produced "
-"out of water and raw stone by a Stonegrinder. You can obtain water by "
-"building a Well upon a water source, which your Geologists can discover when "
-"you send them to any flag that is not on a mountain by clicking said flag "
-"and the Geologist-symbol in the consecutively appearing menu.<br>Build a "
-"Stonegrinder and a Well.</p>"
+#: ../../../campaigns/t02.wmf/event:752
+msgid "--NEW OBJECTIVES--<br>- Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:765
+#: ../../../campaigns/t02.wmf/event:765
 msgid "Khantrukh steps in..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:767
-msgid ""
-" \"Chieftain, this is a disgrace! It is well that we can produce grindstone "
-"for mighty fortifications and great buildings now - only, this does not "
-"prevent our roofs from becoming leaky! Maybe the young ones like spending "
-"their nights in the rain, but I just can't find any sleep with these "
-"raindrops dripping onto my face! Now there is a problem we should do "
-"something about!\"<br><br>"
+#: ../../../campaigns/t02.wmf/event:767
+msgid " \"Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!\"<br><br>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:768
-msgid ""
-"--NEW OBJECTIVES--<br>- The third material necessary for improved buildings "
-"is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a "
-"Fernery.</p>"
+#: ../../../campaigns/t02.wmf/event:768
+msgid "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:782
+#: ../../../campaigns/t02.wmf/event:782
 msgid "Khantrukh seems reliefed..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:784
-msgid ""
-" \"Wonderful! Our roofs are not dripping anymore, and we have all the "
-"material we need for, well, whichever monumental building we see fit!\"</p>"
+#: ../../../campaigns/t02.wmf/event:784
+msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:809
-msgid ""
-" \"One night, when the moon shone brightly, I climbed to the peak of "
-"Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker "
-"in the distance. It is incredible with how much passion my brethren fight "
-"this war. I fear the moment I see Al'thunran again - will there be anything "
-"but ashes and wasted ruins left of our once beautiful capital when we get "
-"there?\"</p>"
+#: ../../../campaigns/t02.wmf/event:809
+msgid " \"One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:811
+#: ../../../campaigns/t02.wmf/event:811
 msgid "One fullmoon night..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:824
-msgid ""
-" \"The winter is upon us. Many of us are suffering from the cold, yet we "
-"must endure. The day we may return cannot be far anymore - it must not be "
-"far anymore. I prayed it might get warmer again, as I prayed the war would "
-"finally come to an end.<br>So far, it does not seem either of my prayers was "
-"fulfilled.\"</p>"
+#: ../../../campaigns/t02.wmf/event:824
+msgid " \"The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore. I prayed it might get warmer again, as I prayed the war would finally come to an end.<br>So far, it does not seem either of my prayers was fulfilled.\"</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:826
+#: ../../../campaigns/t02.wmf/event:826
 msgid "Another cold day..."
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:907
+#: ../../../campaigns/t02.wmf/event:907
 msgid "Victory!"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:909
-msgid ""
-"Thron speaks:<br>\"The other day Boldreth talked me into accompanying him to "
-"the new inn. It would cheer me up, he said.<br>When I looked around I saw "
-"faithful faces, trusting I could guide them through these dark days. Yet "
-"before I could speak any words of gratitude or encouragement, one of my "
-"warriors ran into the inn. He had been far out in the forest for the past "
-"days and I could see how weary he was.<br>The news he brought were to change "
-"everything...\"<br><br>----------------------VICTORY!-----------------------"
-"<br><br> You have completed this mission. You may continue playing if you "
-"wish, otherwise move on to the next mission.</p>"
+#: ../../../campaigns/t02.wmf/event:909
+msgid "Thron speaks:<br>\"The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br>When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything...\"<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.</p>"
 msgstr ""
 
-#: ../campaigns/t02.wmf/event:911
+#: ../../../campaigns/t02.wmf/event:911
 msgid "Mission Complete!"
 msgstr ""
