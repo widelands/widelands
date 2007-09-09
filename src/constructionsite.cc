@@ -153,7 +153,8 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 	molog("m_work_steps: %i\n", m_work_steps);
 
    molog("WaresQueue size: %i\n", m_wares.size());
-   for (uint i=0; i<m_wares.size(); i++) {
+	const std::vector<WaresQueue *>::size_type nr_wares = m_wares.size();
+	for (std::vector<WaresQueue *>::size_type i = 0; i < nr_wares; ++i) {
       molog("Dumping WaresQueue %i/%i\n", i+1, m_wares.size());
       molog("* Owner: %i (player nr)\n", m_wares[i]->get_owner()->get_player_number());
       molog("* Ware: %i (index)\n", m_wares[i]->get_ware());
@@ -308,31 +309,34 @@ void ConstructionSite::init(Editor_Game_Base* g)
 	Building::init(g);
 
 	if (Game * const game = dynamic_cast<Game *>(g)) {
-		uint i;
-
+		const Tribe_Descr & tribe = owner().tribe();
 		// TODO: figure out whether planing is necessary
 
 		// Initialize the wares queues
-		const Building_Descr::BuildCost* bc = m_building->get_buildcost();
+		const Building_Descr::BuildCost & buildcost = m_building->get_buildcost();
+		const Building_Descr::BuildCost::size_type buildcost_size =
+			buildcost.size();
+		m_wares.resize(buildcost_size);
 
-		m_wares.resize(bc->size());
-
-		for (i = 0; i < bc->size(); i++) {
+		for (Building_Descr::BuildCost::size_type i = 0; i < buildcost_size; ++i)
+		{
 			WaresQueue* wq = new WaresQueue(this);
 
 			m_wares[i] = wq;
 
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq->init(get_owner()->tribe().get_safe_ware_index((*bc)[i].name.c_str()), (*bc)[i].amount);
+			wq->init
+				(tribe.get_safe_ware_index(buildcost[i].name.c_str()),
+				 buildcost[i].amount);
 
-			m_work_steps += (*bc)[i].amount;
+			m_work_steps += buildcost[i].amount;
 		}
 
 		request_builder(game);
 
 		//TODO: should this fx be played for AI players too?
-		if (get_owner()->get_type() == Player::Local)
+		if (owner().get_type() == Player::Local)
 			g_sound_handler.play_fx("create_construction_site", m_position, 255);
 	}
 }
@@ -593,7 +597,7 @@ void ConstructionSite::draw
       // draw the prev pic from top to where next image will be drawing
       dst.drawanimrect
         (pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
-    else if (m_prev_building) {
+	else if (m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead
 		const uint a = m_prev_building->get_animation("build");

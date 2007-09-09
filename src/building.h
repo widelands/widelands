@@ -65,7 +65,7 @@ struct Building_Descr : public Map_Object_Descr {
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return m_descname.c_str();}
 	inline bool get_buildable() const {return m_buildable;}
    inline bool get_enhanced_building() const {return m_enhanced_building;}
-	inline const BuildCost* get_buildcost() const {return &m_buildcost;}
+	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
 	inline uint get_buildicon() const {return m_buildicon;}
 	int get_size() const throw () {return m_size;}
 	inline bool get_ismine() const {return m_mine;}
@@ -247,10 +247,11 @@ protected:
 	uint m_anim;
 	int  m_animstart;
 
-	std::vector<Object_Ptr> m_leave_queue; // FIFO queue of workers leaving the building
-	uint                    m_leave_time;  // when to wake the next one from leave queue
-	Object_Ptr              m_leave_allow; // worker that is allowed to leave now
-	bool m_stop;
+	typedef std::vector<Object_Ptr> Leave_Queue;
+	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
+	uint        m_leave_time;  //  when to wake the next one from leave queue
+	Object_Ptr  m_leave_allow; //  worker that is allowed to leave now
+	bool        m_stop;
 
 	//  The player who has defeated this building.
 	Player_Number           m_defeating_player;
