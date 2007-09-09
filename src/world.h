@@ -59,7 +59,7 @@ private:
 		std::string bobname;
 		int         upperlimit;
 	};
-   struct Editor_Pic {
+	struct Editor_Pic {
       std::string    picname;
       int            upperlimit;
 	};
@@ -123,10 +123,10 @@ private:
 struct World {
 	friend class Game;
 
-      enum {
+	enum {
          OK = 0,
          ERR_WRONGVERSION
-		};
+	};
 
       World(const std::string name);
 
