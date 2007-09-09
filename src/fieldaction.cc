@@ -449,7 +449,7 @@ void FieldActionWindow::add_buttons_attack ()
 				 (dynamic_cast<const MilitarySite *>(building)
 				  or
 				  dynamic_cast<const Warehouse *>(building)))
-         {
+			{
             m_attackers = 0;
             m_attackers_type = STRONGEST;
             add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less, _("Send less soldiers"));
