@@ -395,20 +395,17 @@ void Editor_Interactive::unreference_player_tribe
 	assert(player <= m_editor.map().get_nrplayers());
    assert(data);
 
-   int i=0;
-   if (player>0) {
-      for (i=0; i<static_cast<int>(m_player_tribe_references.size()); i++)
-         if (m_player_tribe_references[i].player==player && m_player_tribe_references[i].object==data) break;
-
-      m_player_tribe_references.erase(m_player_tribe_references.begin() + i);
-	} else {
-      // Player is invalid, remove all references from this object
-      for (i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) {
-         if (m_player_tribe_references[i].object==data) {
-            m_player_tribe_references.erase(m_player_tribe_references.begin() + i); i=-1;
-			}
-		}
-	}
+	std::vector<Player_References> & references = m_player_tribe_references;
+	std::vector<Player_References>::iterator it = references.begin();
+	std::vector<Player_References>::const_iterator references_end =
+		references.end();
+	if (player > 0) {
+		for (; it < references_end; ++it)
+			if (it->player == player and it->object == data) break;
+		references.erase(it);
+	} else //  Player is invalid. Remove all references from this object.
+		for (; it < references_end; ++it)
+			if (it->object == data) {references.erase(it); --it, --references_end;}
 }
 
 bool Editor_Interactive::is_player_tribe_referenced(int player) {
