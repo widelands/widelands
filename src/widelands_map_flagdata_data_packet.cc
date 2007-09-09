@@ -93,7 +93,7 @@ throw (_wexception)
 			}
          flag->m_animstart=fr.Unsigned16();
          int building=fr.Unsigned32();
-         if (building) {
+			if (building) {
             assert(ol->is_object_known(building));
             flag->m_building=static_cast<Building*>(ol->get_object_by_file_index(building));
 			} else
@@ -102,8 +102,8 @@ throw (_wexception)
 
          // Roads are set somewhere else
 
-         for (uint i=0; i<6; i++)
-            flag->m_items_pending[i]=fr.Unsigned32();
+			for (uint i = 0; i < 6; ++i)
+				flag->m_items_pending[i] = fr.Unsigned32();
          flag->m_item_capacity=fr.Unsigned32();
          flag->m_item_filled=fr.Unsigned32();
 
@@ -115,7 +115,7 @@ throw (_wexception)
             flag->m_items[i].item=static_cast<WareInstance*>(ol->get_object_by_file_index(item));
 
             uint nextstep=fr.Unsigned32();
-            if (nextstep) {
+				if (nextstep) {
                assert(ol->is_object_known(nextstep));
                flag->m_items[i].nextstep=static_cast<PlayerImmovable*>(ol->get_object_by_file_index(nextstep));
 				} else {
@@ -125,14 +125,14 @@ throw (_wexception)
 
          // always call
          uint always_call=fr.Unsigned32();
-         if (always_call) {
+			if (always_call) {
             assert(ol->is_object_known(always_call));
             flag->m_always_call_for_flag=static_cast<Flag*>(ol->get_object_by_file_index(always_call));
 			} else
             flag->m_always_call_for_flag=0;
 
          // Workers waiting
-         uint nr_workers=fr.Unsigned16();
+			const Uint16 nr_workers = fr.Unsigned16();
          flag->m_capacity_wait.resize(nr_workers);
          for (uint i=0; i<nr_workers; i++) {
             uint id=fr.Unsigned32();
@@ -141,14 +141,14 @@ throw (_wexception)
 			}
 
          // Flag jobs
-         uint nr_jobs=fr.Unsigned16();
+			const Uint16 nr_jobs = fr.Unsigned16();
          assert(!flag->m_flag_jobs.size());
-         for (uint i=0; i<nr_jobs; i++) {
+			for (Uint16 i = 0; i < nr_jobs; ++i) {
             Flag::FlagJob f;
             bool request=fr.Unsigned8();
             if (!request)
                f.request=0;
-            else {
+				else {
                f.request = new Request(flag, 1,
 	                        &Flag::flag_job_request_callback, flag, Request::WORKER);
                f.request->Read(&fr, egbase, ol);
@@ -201,12 +201,10 @@ throw (_wexception)
 
             // Building is not used, it is set by Building_Data packet through
             // attach building.
-            if (flag->m_building) {
+		if (flag->m_building) {
                assert(os->is_object_known(flag->m_building));
                fw.Unsigned32(os->get_object_file_index(flag->m_building));
-				} else {
-               fw.Unsigned32(0);
-				}
+		} else fw.Unsigned32(0);
 
             // Roads are not saved, they are set on load
 
@@ -232,33 +230,44 @@ throw (_wexception)
 				}
 
             // always call
-            if (flag->m_always_call_for_flag) {
+		if (flag->m_always_call_for_flag) {
                assert(os->is_object_known(flag->m_always_call_for_flag));
                fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
-				} else {
-               fw.Unsigned32(0);
-				}
+		} else fw.Unsigned32(0);
 
             // Worker waiting for capacity
-            fw.Unsigned16(flag->m_capacity_wait.size());
-            for (uint i=0; i<flag->m_capacity_wait.size(); i++) {
-               Map_Object* obj=flag->m_capacity_wait[i].get(egbase);
+		const std::vector<Object_Ptr> & capacity_wait = flag->m_capacity_wait;
+		const std::vector<Object_Ptr>::const_iterator capacity_wait_end =
+			capacity_wait.end();
+		fw.Unsigned16(capacity_wait.size());
+		for
+			(std::vector<Object_Ptr>::const_iterator it = capacity_wait.begin();
+			 it != capacity_wait_end;
+			 ++it)
+		{
+			const Map_Object * const obj = it->get(egbase);
                assert(os->is_object_known(obj));
                fw.Unsigned32(os->get_object_file_index(obj));
-				}
+		}
 
             // Flag jobs
-            fw.Unsigned16(flag->m_flag_jobs.size());
-            for (std::list<Flag::FlagJob>::iterator i=flag->m_flag_jobs.begin();
-                  i!=flag->m_flag_jobs.end(); i++) {
-               if (i->request) {
+		const std::list<Flag::FlagJob> & flag_jobs = flag->m_flag_jobs;
+		const std::list<Flag::FlagJob>::const_iterator flag_jobs_end =
+			flag_jobs.end();
+		fw.Unsigned16(flag_jobs.size());
+		for
+			(std::list<Flag::FlagJob>::const_iterator it = flag_jobs.begin();
+			 it != flag_jobs_end;
+			 ++it)
+		{
+			if (it->request) {
                   fw.Unsigned8(1);
-                  i->request->Write(&fw, egbase, os);
-					} else fw.Unsigned8(0);
+				it->request->Write(&fw, egbase, os);
+			} else fw.Unsigned8(0);
 
 
-               fw.CString(i->program.c_str());
-				}
+			fw.CString(it->program.c_str());
+		}
 
             os->mark_object_as_saved(flag);
 
