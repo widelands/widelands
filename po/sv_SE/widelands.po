@@ -1,398 +1,232 @@
-# translation of widelands_sv_SE.po to Swedish
-# translation of widelands_sv_SE.po to
-# Swedish translation of widelands.
-# Copyright (C) 2006 THE widelands'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the widelands package.
+# Widelands po/sv_SE/widelands.po
+# Copyright (C) 2007 Widelands Development Team.
 # Daniel Nylander <po@danielnylander.se>, 2005.
-# Fredrik Pettersson <luno@iaofredde.net>, 2006.
-# 
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands_sv_SE\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-07 19:56+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 18:19+0200\n"
 "PO-Revision-Date: 2006-04-05 19:49+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
-"Language-Team: Swedish\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: ../src/building_statistics_menu.cc:54
-msgid "Building Statistics"
-msgstr "Byggstatistik"
-
-#: ../src/building_statistics_menu.cc:72 ../src/building_ui.cc:1426
-#: ../src/building_ui.cc:1879 ../src/editor/tools/editor_info_tool.cc:105
-#: ../src/editor/tools/editor_info_tool.cc:119
-#: ../src/editor/tools/editor_info_tool.cc:129
-#: ../src/editor/tools/editor_info_tool.cc:139
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:79
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:176
-#: ../src/editor/ui_menus/editor_variables_menu.cc:168
-msgid "Name"
-msgstr "Namn"
-
-#: ../src/building_statistics_menu.cc:73
-msgid "Prod"
-msgstr "Prod"
-
-#: ../src/building_statistics_menu.cc:74
-msgid "Owned"
-msgstr "Äger"
-
-#: ../src/building_statistics_menu.cc:75
-msgid "Build"
-msgstr "Bygg"
-
-#: ../src/building_statistics_menu.cc:85
-msgid "Total Productivity: "
-msgstr "Total produktivitet: "
-
-#: ../src/building_statistics_menu.cc:91
-msgid "Owned: "
-msgstr "Äger: "
-
-#: ../src/building_statistics_menu.cc:101
-#: ../src/building_statistics_menu.cc:126
-#: ../src/building_statistics_menu.cc:149
-msgid "Snow previous"
-msgstr ""
-
-#: ../src/building_statistics_menu.cc:110
-#: ../src/building_statistics_menu.cc:135
-#: ../src/building_statistics_menu.cc:158
-msgid "Snow next"
-msgstr ""
-
-#: ../src/building_statistics_menu.cc:116
-msgid "In Build: "
-msgstr "Bygger: "
-
-#: ../src/building_statistics_menu.cc:141
-msgid "Jump to unproductive: "
-msgstr "Hoppa till improduktiv: "
-
-#: ../src/building_ui.cc:148
-msgid "Destroy building?"
-msgstr "Förstör byggnad?"
-
-#: ../src/building_ui.cc:162
-msgid "Do you really want to destroy this "
-msgstr "Vill du verkligen förstöra denna "
-
-#: ../src/building_ui.cc:164
-msgid "?"
-msgstr ""
-
-#: ../src/building_ui.cc:639 ../src/event_message_box.cc:48
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:54
-msgid "Continue"
-msgstr "Fortsätt"
-
-#: ../src/building_ui.cc:639
-#, fuzzy
-msgid "Stop"
-msgstr "Lager"
-
-#: ../src/building_ui.cc:666
+#: ../../src/game_server_proto_packet_getroominfo.cc:66
 #, c-format
-msgid "Enhance to %s"
-msgstr ""
+msgid "The Room %s is currently not logged in or unknown to the server.\n"
+msgstr "Rummet %s är inte inloggat eller okänt för Servern.\n"
 
-#: ../src/building_ui.cc:685
+#: ../../src/interactive_spectator.cc:60 ../../src/interactive_player.cc:90
+#: ../../src/editor/editorinteractive.cc:68
 #, fuzzy
-msgid "Destroy"
-msgstr "Beskr"
-
-#: ../src/building_ui.cc:696 ../src/building_ui.cc:833
-#, fuzzy
-msgid "Show workarea"
-msgstr "Arbetare lista"
-
-#: ../src/building_ui.cc:707
-#, fuzzy
-msgid "Debug"
-msgstr "Debugfält"
-
-#: ../src/building_ui.cc:829
-msgid "Hide workarea"
-msgstr ""
-
-#: ../src/building_ui.cc:1132 ../src/building_ui.cc:1139
-msgid "Worker Listing"
-msgstr "Arbetare lista"
-
-#: ../src/building_ui.cc:1154
-msgid "Type: "
-msgstr "Typ: "
-
-#: ../src/building_ui.cc:1159
-msgid "Experience: "
-msgstr "Erfarenhet: "
-
-#: ../src/building_ui.cc:1164
-msgid "Trying to become: "
-msgstr "Försöker att bli: "
-
-#: ../src/building_ui.cc:1325
-#, fuzzy
-msgid "Show worker listing"
-msgstr "Arbetare lista"
-
-#: ../src/building_ui.cc:1427 ../src/building_ui.cc:1880
-msgid "HP"
-msgstr "HP"
-
-#: ../src/building_ui.cc:1428 ../src/building_ui.cc:1881
-msgid "AT"
-msgstr "AT"
-
-#: ../src/building_ui.cc:1429 ../src/building_ui.cc:1882
-msgid "DE"
-msgstr "FS"
-
-#: ../src/building_ui.cc:1430 ../src/building_ui.cc:1883
-msgid "EV"
-msgstr "PA"
-
-#: ../src/building_ui.cc:1431 ../src/building_ui.cc:1884
-msgid "Level"
-msgstr "Nivå"
-
-#: ../src/building_ui.cc:1452 ../src/building_ui.cc:1908
-msgid "Capacity"
-msgstr "Kapacitet"
-
-#: ../src/building_ui.cc:1617
-msgid "Training Options"
-msgstr "Träningsinställningar"
-
-#: ../src/building_ui.cc:1644
-msgid "Training mode : "
-msgstr "Träningssätt : "
-
-#: ../src/building_ui.cc:1645
-msgid "Balanced"
-msgstr "Balanserad"
-
-#: ../src/building_ui.cc:1674
-msgid "Hit Points"
-msgstr "Hälso Poäng"
-
-#: ../src/building_ui.cc:1691 ../src/fieldaction.cc:503
-msgid "Attack"
-msgstr "Attack"
-
-#: ../src/building_ui.cc:1708
-msgid "Defense"
-msgstr "Försvar"
-
-#: ../src/building_ui.cc:1726
-msgid "Evade"
-msgstr "Parera"
-
-#: ../src/building_ui.cc:1770
-msgid "Make heroes"
-msgstr "Skapa hjältar"
-
-#: ../src/building_ui.cc:1772
-msgid "Balanced army"
-msgstr "Balanserad armé"
-
-#: ../src/building_ui.cc:1919
-msgid "xx"
-msgstr "xx"
-
-#: ../src/constructionsite.cc:210
-msgid "built"
-msgstr "byggt"
-
-#: ../src/criterr.cc:69
-msgid "!! CRITICAL ERROR !!"
-msgstr "!! KRITISKT FEL !!"
-
-#: ../src/criterr.cc:78
-msgid "Exit"
-msgstr "Avsluta"
-
-#: ../src/criterr.cc:85
-msgid "!! Continue execution !!"
-msgstr "!! Fortsätt exekvering !!"
-
-#: ../src/criterr.cc:94
-msgid "Crash"
-msgstr "Krasch"
-
-#: ../src/criterr.cc:131
-msgid "Widelands"
-msgstr "Widelands"
-
-#: ../src/encyclopedia_window.cc:47
-msgid "Tribe ware encyclopedia"
-msgstr ""
-
-#: ../src/encyclopedia_window.cc:67
-msgid "Needs Ware"
-msgstr ""
-
-#: ../src/encyclopedia_window.cc:68
-#, fuzzy
-msgid "Consumed"
-msgstr "Stängd"
-
-#: ../src/encyclopedia_window.cc:69
-msgid "Group"
-msgstr ""
-
-#: ../src/event_allow_building.cc:38
-msgid "Allow Building"
-msgstr "Tillåt byggnation"
-
-#: ../src/event_message_box.cc:40
-msgid "Message Box"
-msgstr "Meddelanderuta"
-
-#: ../src/event_message_box.cc:41
-msgid "No text defined"
-msgstr "Ingen text definierad"
-
-#: ../src/event_message_box.cc:42
-msgid "Window Title"
-msgstr "Fönstertitel"
-
-#: ../src/event_move_view.cc:37 ../src/event_unhide_objective.cc:38
-msgid "Move View"
-msgstr "Flytta Vy"
-
-#: ../src/event_set_null_trigger.cc:39
-#, fuzzy
-msgid "Set Null Trigger"
-msgstr "Sätt Nollställa Utlösare"
-
-#: ../src/fieldaction.cc:275
-msgid "Action"
-msgstr "Åtgärd"
-
-#: ../src/fieldaction.cc:446 ../src/fieldaction.cc:598
-#, fuzzy
-msgid "Build roads"
-msgstr "Bygg"
-
-#: ../src/fieldaction.cc:450 ../src/watchwindow.cc:102
-msgid "Watch"
-msgstr "Se"
-
-#: ../src/fieldaction.cc:576
-#, fuzzy
-msgid "Build mines"
-msgstr "Byggnad: "
-
-#: ../src/game_chat_menu.cc:56
-msgid "Chat Menu"
+msgid "Menu"
 msgstr "Chatmeny"
 
-#: ../src/game_chat_menu.cc:67
-msgid "Send"
-msgstr "Skicka"
-
-#: ../src/game_chat_menu.cc:72
-msgid "Show messages as overlays:"
-msgstr "Visa meddelande som överlagringar:"
-
-#: ../src/game_debug_ui.cc:269
-msgid "Debug Field"
-msgstr "Debugfält"
-
-#: ../src/game_debug_ui.cc:316
-msgid "height:"
-msgstr "höjd:"
-
-#: ../src/game_main_menu.cc:40 ../src/editor/ui_menus/editor_main_menu.cc:41
-msgid "Main Menu"
-msgstr "Huvudmeny"
-
-#: ../src/game_main_menu.cc:50
+#: ../../src/interactive_spectator.cc:68 ../../src/interactive_player.cc:99
+#: ../../src/editor/editorinteractive.cc:92
 #, fuzzy
-msgid "General statistics"
-msgstr "Allmän statistik"
+msgid "Minimap"
+msgstr "Minimum"
 
-#: ../src/game_main_menu.cc:58
-#, fuzzy
-msgid "Ware statistics"
+#: ../../src/interactive_spectator.cc:119 ../../src/interactive_player.cc:160
+#, c-format
+msgid "%ux"
+msgstr ""
+
+#: ../../src/interactive_spectator.cc:122 ../../src/interactive_player.cc:161
+msgid "PAUSE"
+msgstr "PAUS"
+
+#: ../../src/ware_statistics_menu.cc:351
+msgid "Ware Statistics"
 msgstr "Varu statistik"
 
-#: ../src/game_main_menu.cc:66
+#: ../../src/ware_statistics_menu.cc:416
+#: ../../src/general_statistics_menu.cc:196
+msgid "15 m"
+msgstr "15 m"
+
+#: ../../src/ware_statistics_menu.cc:425
+#: ../../src/general_statistics_menu.cc:205
+msgid "30 m"
+msgstr "30 m"
+
+#: ../../src/ware_statistics_menu.cc:434
+#: ../../src/general_statistics_menu.cc:214
+msgid "1 h"
+msgstr "1 h"
+
+#: ../../src/ware_statistics_menu.cc:443
+#: ../../src/general_statistics_menu.cc:223
+msgid "2 h"
+msgstr "2 h"
+
+#: ../../src/ware_statistics_menu.cc:454
+#: ../../src/general_statistics_menu.cc:234
+msgid "Help"
+msgstr ""
+
+#: ../../src/ware_statistics_menu.cc:463
+#: ../../src/general_statistics_menu.cc:243
+msgid "4 h"
+msgstr "4 h"
+
+#: ../../src/ware_statistics_menu.cc:472
+#: ../../src/general_statistics_menu.cc:251
+msgid "8 h"
+msgstr "8 h"
+
+#: ../../src/ware_statistics_menu.cc:481
+#: ../../src/general_statistics_menu.cc:260
+msgid "16 h"
+msgstr "16 h"
+
+#: ../../src/map_variable_manager.cc:30
+msgid "Next scenario"
+msgstr "Nästa scenario"
+
+#: ../../src/map_variable_manager.cc:31
+msgid "<undefined>"
+msgstr "<odefinierad>"
+
+#: ../../src/interactive_player.cc:108
+#: ../../src/editor/editorinteractive.cc:100
 #, fuzzy
-msgid "Building statistics"
-msgstr "Byggstatistik"
+msgid "Buildhelp"
+msgstr "Bygg"
 
-#: ../src/game_main_menu.cc:74 ../src/stock_menu.cc:31
-#: ../src/waresdisplay.cc:56
-msgid "Stock"
-msgstr "Lager"
+#: ../../src/interactive_player.cc:117
+msgid "Geologic survey information"
+msgstr ""
 
-#: ../src/game_main_menu.cc:82 ../src/editor/editorinteractive.cc:132
+#: ../../src/interactive_player.cc:126
+msgid "Tribe's ware encyclopedia"
+msgstr ""
+
+#: ../../src/interactive_player.cc:200
+msgid "Message: "
+msgstr "Meddelande: "
+
+#: ../../src/wlapplication.cc:931
+msgid "Sorry, no double-instance debugging on WIN32."
+msgstr ""
+
+#: ../../src/wlapplication.cc:935
+msgid "--double is disabled. This is not a debug build!"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1014
+#, fuzzy, c-format
+msgid "This is Widelands-%s"
+msgstr "Widelands"
+
+#: ../../src/wlapplication.cc:1016
+msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1018
 #, fuzzy
-msgid "Objectives"
-msgstr "Menyn Mål"
-
-#: ../src/game_main_menu.cc:90
-#, fuzzy
-msgid "Chat"
-msgstr "Chatmeny"
-
-#: ../src/game_main_menu.cc:98 ../src/game_options_menu.cc:46
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
-msgid "Options"
+msgid "Options:"
 msgstr "Inställningar"
 
-#: ../src/game_main_menu_load_game.cc:43
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:45
+#: ../../src/wlapplication.cc:1019
+msgid ""
+" --<config-entry-name>=value overwrites any config file setting\n"
+"\n"
+" --record=FILENAME    Record all events to the given filename for later playback\n"
+" --playback=FILENAME  Playback given filename (see --record)\n"
+"\n"
+" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1025
+msgid " --ggz                Starts game as GGZ Gaming Zone client (don't use!)"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1028
+msgid ""
+" --nosound            Starts the game with sound disabled\n"
+" --nozip              Do not save files as binary zip archives.\n"
+"\n"
+" --editor             Directly starts the Widelands editor.\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1034
+msgid " --double             Start the game twice (for localhost network testing)\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1038
+msgid " --help               Show this help\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1039
+msgid ""
+"Bug reports? Suggestions? Check out the project website:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Hope you enjoy this game!\n"
+msgstr ""
+
+#: ../../src/item_ware_descr.cc:39 ../../src/worker_descr.cc:110
+msgid "Doh... someone forgot the help text!"
+msgstr "Doh.. någon har glömt hjälptexten!"
+
+#: ../../src/game_main_menu_load_game.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:46
 msgid "Load Game"
 msgstr "Ladda spel"
 
-#: ../src/game_main_menu_load_game.cc:61 ../src/game_main_menu_save_game.cc:68
+#: ../../src/game_main_menu_load_game.cc:65
+#: ../../src/game_main_menu_save_game.cc:71
 msgid "Map Name: "
 msgstr "Kartnamn: "
 
-#: ../src/game_main_menu_load_game.cc:66 ../src/game_main_menu_save_game.cc:73
+#: ../../src/game_main_menu_load_game.cc:70
+#: ../../src/game_main_menu_save_game.cc:76
 msgid "Game Time: "
 msgstr "Speltid: "
 
-#: ../src/game_main_menu_load_game.cc:78 ../src/game_main_menu_save_game.cc:85
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:113
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:108
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:88
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:48
+#: ../../src/game_main_menu_load_game.cc:82
+#: ../../src/game_main_menu_save_game.cc:88
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:253
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:50
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:82
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:42
+#: ../../src/ui/ui_basic/ui_modal_messagebox.cc:52
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:116
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:113
 msgid "OK"
 msgstr "OK"
 
-#: ../src/game_main_menu_load_game.cc:86 ../src/game_main_menu_save_game.cc:93
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:81
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:209
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:240
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:82
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:122
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:172
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:65
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:155
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:302
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:242
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:166
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:117
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:140
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:205
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
+#: ../../src/game_main_menu_load_game.cc:90
+#: ../../src/game_main_menu_save_game.cc:96
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:48
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:67
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:173
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:242
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:85
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:205
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:125
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:84
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:122
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:244
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:143
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:157
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:304
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:211
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:167
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../src/game_main_menu_load_game.cc:210
+#: ../../src/game_main_menu_load_game.cc:216
 msgid ""
 "Game Loading Error!\n"
 "Reason given:\n"
@@ -400,29 +234,301 @@ msgstr ""
 "Fel vid laddning av spel!\n"
 "Anledning:\n"
 
-#: ../src/game_main_menu_load_game.cc:213
+#: ../../src/game_main_menu_load_game.cc:220
 msgid "Load Game Error!!"
 msgstr "Fel vid laddning av spel!!"
 
-#: ../src/game_main_menu_save_game.cc:46
+#: ../../src/watchwindow.cc:99 ../../src/fieldaction.cc:427
+msgid "Watch"
+msgstr "Se"
+
+#: ../../src/watchwindow.cc:113
+msgid "Follow"
+msgstr ""
+
+#: ../../src/watchwindow.cc:121
+msgid "Center mainview on this"
+msgstr ""
+
+#: ../../src/watchwindow.cc:139
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:39
+msgid "Close"
+msgstr "Stäng"
+
+#: ../../src/game.cc:221 ../../src/game.cc:230
+msgid "Preloading a map"
+msgstr ""
+
+#: ../../src/game.cc:237
+msgid "Loading a world"
+msgstr ""
+
+#: ../../src/game.cc:243
+#, fuzzy, c-format
+msgid "Adding player %u"
+msgstr "Spelare"
+
+#: ../../src/game.cc:253 ../../src/game.cc:290 ../../src/game.cc:396
+#, fuzzy
+msgid "Loading a map"
+msgstr "Ladda karta"
+
+#: ../../src/game.cc:367 ../../src/game.cc:430
+msgid "Loading..."
+msgstr ""
+
+#: ../../src/game.cc:401
+#, fuzzy
+msgid "Initializing a network game"
+msgstr "Startar nätverksspel"
+
+#: ../../src/game.cc:499
+#, fuzzy
+msgid "Creating player infrastructure"
+msgstr "Skapa mapp"
+
+#: ../../src/game_objectives_menu.cc:32
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:172
+msgid "Objectives Menu"
+msgstr "Menyn Mål"
+
+#: ../../src/map.cc:422
+msgid "No Name"
+msgstr "Inget namn"
+
+#: ../../src/map.cc:423
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:141
+msgid "Unknown"
+msgstr "Okänd"
+
+#: ../../src/map.cc:424
+msgid "no description defined"
+msgstr "ingen beskrivning angiven"
+
+#: ../../src/map.cc:431 ../../src/playerdescrgroup.cc:37
+#: ../../src/playerdescrgroup.cc:65
+msgid "Player 1"
+msgstr "Spelare 1"
+
+#: ../../src/game_server_proto_packet_getuserinfo.cc:66
+#, c-format
+msgid "The User %s is currently not logged in or unknown to the server.\n"
+msgstr "Användaren %s är för närvarande inte inloggad eller okänd för Servern.\n"
+
+#: ../../src/game_server_proto_packet_connect.cc:67
+#, c-format
+msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
+msgstr "Servern angav ett anslutningsfel. Det protokoll (%i.%02i) du använder är för gammalt. Servern körs %i.%02i\n"
+
+#: ../../src/game_server_proto_packet_connect.cc:76
+#, c-format
+msgid "Server is full!\n"
+msgstr "Servern är full!\n"
+
+#: ../../src/game_server_proto_packet_connect.cc:83
+#, fuzzy, c-format
+msgid "This server doesn't serve widelands!\n"
+msgstr "Denna Servern fungerar inte med widelands!\n"
+
+#: ../../src/building_statistics_menu.cc:56
+msgid "Building Statistics"
+msgstr "Byggstatistik"
+
+#: ../../src/building_statistics_menu.cc:74 ../../src/building_ui.cc:1563
+#: ../../src/building_ui.cc:2016
+#: ../../src/editor/tools/editor_info_tool.cc:104
+#: ../../src/editor/tools/editor_info_tool.cc:114
+#: ../../src/editor/tools/editor_info_tool.cc:123
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:168
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:80
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:177
+msgid "Name"
+msgstr "Namn"
+
+#: ../../src/building_statistics_menu.cc:75
+msgid "Prod"
+msgstr "Prod"
+
+#: ../../src/building_statistics_menu.cc:76
+msgid "Owned"
+msgstr "Äger"
+
+#: ../../src/building_statistics_menu.cc:77
+msgid "Build"
+msgstr "Bygg"
+
+#: ../../src/building_statistics_menu.cc:87
+msgid "Total Productivity: "
+msgstr "Total produktivitet: "
+
+#: ../../src/building_statistics_menu.cc:93
+msgid "Owned: "
+msgstr "Äger: "
+
+#: ../../src/building_statistics_menu.cc:103
+#: ../../src/building_statistics_menu.cc:128
+#: ../../src/building_statistics_menu.cc:151
+msgid "Snow previous"
+msgstr ""
+
+#: ../../src/building_statistics_menu.cc:112
+#: ../../src/building_statistics_menu.cc:137
+#: ../../src/building_statistics_menu.cc:160
+msgid "Snow next"
+msgstr ""
+
+#: ../../src/building_statistics_menu.cc:118
+msgid "In Build: "
+msgstr "Bygger: "
+
+#: ../../src/building_statistics_menu.cc:143
+msgid "Jump to unproductive: "
+msgstr "Hoppa till improduktiv: "
+
+#: ../../src/waresdisplay.cc:41 ../../src/stock_menu.cc:33
+#: ../../src/game_main_menu.cc:77
+msgid "Stock"
+msgstr "Lager"
+
+#: ../../src/criterr.cc:62
+msgid "!! CRITICAL ERROR !!"
+msgstr "!! KRITISKT FEL !!"
+
+#: ../../src/criterr.cc:71
+msgid "Exit"
+msgstr "Avsluta"
+
+#: ../../src/criterr.cc:78
+msgid "!! Continue execution !!"
+msgstr "!! Fortsätt exekvering !!"
+
+#: ../../src/criterr.cc:87
+msgid "Crash"
+msgstr "Krasch"
+
+#: ../../src/criterr.cc:122
+msgid "Widelands"
+msgstr "Widelands"
+
+#: ../../src/minimap.cc:134
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
+msgid "Map"
+msgstr "Karta"
+
+#: ../../src/minimap.cc:143
+#, fuzzy
+msgid "Terrain"
+msgstr "Terrängval"
+
+#: ../../src/minimap.cc:151
+#, fuzzy
+msgid "Owner"
+msgstr "Äger"
+
+#: ../../src/minimap.cc:159
+#, fuzzy
+msgid "Flags"
+msgstr " flagga"
+
+#: ../../src/minimap.cc:167
+#, fuzzy
+msgid "Roads"
+msgstr "Klar"
+
+#: ../../src/minimap.cc:175 ../../src/general_statistics_menu.cc:155
+#, fuzzy
+msgid "Buildings"
+msgstr "Byggnad: "
+
+#: ../../src/stock_menu.cc:73
+msgid "Show wares"
+msgstr ""
+
+#: ../../src/stock_menu.cc:78
+msgid "Show workers"
+msgstr ""
+
+#: ../../src/productionsite.cc:229
+msgid "(not occupied)"
+msgstr "(ej ockuperad)"
+
+#: ../../src/productionsite.cc:240
+#, fuzzy
+msgid "(stopped)"
+msgstr "(ej ockuperad)"
+
+#: ../../src/productionsite.cc:269
+msgid "UP"
+msgstr "UPP"
+
+#: ../../src/productionsite.cc:269
+msgid "DOWN"
+msgstr "NER"
+
+#: ../../src/graphic.cc:602
+#, c-format
+msgid "Loading animations: %d%% complete"
+msgstr ""
+
+#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:87
+#, fuzzy
+msgid "Sound options"
+msgstr "Inställningar"
+
+#: ../../src/game_options_sound_menu.cc:32
+msgid "Ingame Music"
+msgstr "Spel musik"
+
+#: ../../src/game_options_sound_menu.cc:40
+msgid "Sound FX"
+msgstr "Ljudeffekter"
+
+#: ../../src/game_options_sound_menu.cc:45
+#, fuzzy
+msgid "Ingame Music Volume"
+msgstr "Spel musik"
+
+#: ../../src/game_options_sound_menu.cc:61
+#, fuzzy
+msgid "Sound FX Volume"
+msgstr "Ljudeffekter"
+
+#: ../../src/encyclopedia_window.cc:49
+msgid "Tribe ware encyclopedia"
+msgstr ""
+
+#: ../../src/encyclopedia_window.cc:69
+msgid "Needs Ware"
+msgstr ""
+
+#: ../../src/encyclopedia_window.cc:70
+#, fuzzy
+msgid "Consumed"
+msgstr "Stängd"
+
+#: ../../src/encyclopedia_window.cc:71
+msgid "Group"
+msgstr ""
+
+#: ../../src/game_main_menu_save_game.cc:49
 msgid "Save Game"
 msgstr "Spara spel"
 
-#: ../src/game_main_menu_save_game.cc:231
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:341
+#: ../../src/game_main_menu_save_game.cc:217
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:344
 msgid "A File with the name "
 msgstr "En fil med namnet "
 
-#: ../src/game_main_menu_save_game.cc:233
+#: ../../src/game_main_menu_save_game.cc:219
 msgid " already exists. Overwrite?"
 msgstr " finns redan. Skriva över?"
 
-#: ../src/game_main_menu_save_game.cc:235
-#: ../src/game_main_menu_save_game.cc:255
+#: ../../src/game_main_menu_save_game.cc:221
+#: ../../src/game_main_menu_save_game.cc:233
 msgid "Save Game Error!!"
 msgstr "Fel vid sparning av spel!!"
 
-#: ../src/game_main_menu_save_game.cc:252
+#: ../../src/game_main_menu_save_game.cc:230
 msgid ""
 "Game Saving Error!\n"
 "Saved Game-File may be corrupt!\n"
@@ -434,933 +540,1407 @@ msgstr ""
 "\n"
 "Anledning:\n"
 
-#: ../src/game_objectives_menu.cc:31
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:171
-msgid "Objectives Menu"
-msgstr "Menyn Mål"
-
-#: ../src/game_options_menu.cc:57
-msgid "README"
-msgstr "README"
-
-#: ../src/game_options_menu.cc:66
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
-msgid "License"
-msgstr "Licens"
-
-#: ../src/game_options_menu.cc:75
-msgid "Authors"
-msgstr "Upphovsmän"
-
-#: ../src/game_options_menu.cc:83
-msgid "Ingame Music"
-msgstr "Spel musik"
-
-#: ../src/game_options_menu.cc:90
-msgid "Sound FX"
-msgstr "Ljudeffekter"
-
-#: ../src/game_options_menu.cc:100
-#, fuzzy
-msgid "Save game"
-msgstr "Spara spel"
-
-#: ../src/game_options_menu.cc:110
-#, fuzzy
-msgid "Load game"
-msgstr "Ladda spel"
-
-#: ../src/game_options_menu.cc:121
-#, fuzzy
-msgid "Exit game"
-msgstr "Avsluta spel"
-
-#: ../src/game_server_proto_packet_chatmessage.cc:69
+#: ../../src/game_server_proto_packet_chatmessage.cc:67
 #, c-format
-msgid ""
-"Server replied illegally to ChatMessage package. Should have sent %i but "
-"sent %i. Ignored"
-msgstr ""
-"Servern svarade felaktigt mot ett ChattMeddelande paket. Borde ha skickat %i "
-"men skickade %i. Ignorerar"
+msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
+msgstr "Servern svarade felaktigt mot ett ChattMeddelande paket. Borde ha skickat %i men skickade %i. Ignorerar"
 
-#: ../src/game_server_proto_packet_connect.cc:72
-#, c-format
-msgid ""
-"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
-"Server runs %i.%02i\n"
-msgstr ""
-"Servern angav ett anslutningsfel. Det protokoll (%i.%02i) du använder är för "
-"gammalt. Servern körs %i.%02i\n"
-
-#: ../src/game_server_proto_packet_connect.cc:78
-#, c-format
-msgid "Server is full!\n"
-msgstr "Servern är full!\n"
-
-#: ../src/game_server_proto_packet_connect.cc:83
-#, fuzzy, c-format
-msgid "This server doesn't serve widelands!\n"
-msgstr "Denna Servern fungerar inte med widelands!\n"
-
-#: ../src/game_server_proto_packet_getroominfo.cc:66
-#, c-format
-msgid "The Room %s is currently not logged in or unknown to the server.\n"
-msgstr "Rummet %s är inte inloggat eller okänt för Servern.\n"
-
-#: ../src/game_server_proto_packet_getuserinfo.cc:66
-#, c-format
-msgid "The User %s is currently not logged in or unknown to the server.\n"
-msgstr ""
-"Användaren %s är för närvarande inte inloggad eller okänd för Servern.\n"
-
-#: ../src/general_statistics_menu.cc:60
-msgid "General Statistics"
-msgstr "Allmän statistik"
-
-#: ../src/general_statistics_menu.cc:139
-msgid "Land"
-msgstr ""
-
-#: ../src/general_statistics_menu.cc:145
-#, fuzzy
-msgid "Workers"
-msgstr "Arbetare lista"
-
-#: ../src/general_statistics_menu.cc:151 ../src/minimap.cc:191
-#, fuzzy
-msgid "Buildings"
-msgstr "Byggnad: "
-
-#: ../src/general_statistics_menu.cc:157
-msgid "Wares"
-msgstr ""
-
-#: ../src/general_statistics_menu.cc:163
-#, fuzzy
-msgid "Productivity"
-msgstr "Total produktivitet: "
-
-#: ../src/general_statistics_menu.cc:169
-msgid "Kills"
-msgstr ""
-
-#: ../src/general_statistics_menu.cc:175
-msgid "Military"
-msgstr ""
-
-#: ../src/general_statistics_menu.cc:192 ../src/ware_statistics_menu.cc:416
-msgid "15 m"
-msgstr "15 m"
-
-#: ../src/general_statistics_menu.cc:201 ../src/ware_statistics_menu.cc:425
-msgid "30 m"
-msgstr "30 m"
-
-#: ../src/general_statistics_menu.cc:210 ../src/ware_statistics_menu.cc:434
-msgid "1 h"
-msgstr "1 h"
-
-#: ../src/general_statistics_menu.cc:219 ../src/ware_statistics_menu.cc:443
-msgid "2 h"
-msgstr "2 h"
-
-#: ../src/general_statistics_menu.cc:230 ../src/ware_statistics_menu.cc:454
-msgid "Help"
-msgstr ""
-
-#: ../src/general_statistics_menu.cc:239 ../src/ware_statistics_menu.cc:463
-msgid "4 h"
-msgstr "4 h"
-
-#: ../src/general_statistics_menu.cc:247 ../src/ware_statistics_menu.cc:472
-msgid "8 h"
-msgstr "8 h"
-
-#: ../src/general_statistics_menu.cc:256 ../src/ware_statistics_menu.cc:481
-msgid "16 h"
-msgstr "16 h"
-
-#: ../src/interactive_player.cc:103 ../src/editor/editorinteractive.cc:68
-#, fuzzy
-msgid "Menu"
-msgstr "Chatmeny"
-
-#: ../src/interactive_player.cc:111 ../src/editor/editorinteractive.cc:92
-#, fuzzy
-msgid "Minimap"
-msgstr "Minimum"
-
-#: ../src/interactive_player.cc:119 ../src/editor/editorinteractive.cc:100
-#, fuzzy
-msgid "Buildhelp"
-msgstr "Bygg"
-
-#: ../src/interactive_player.cc:127
-msgid "Tribe's ware encyclopedia"
-msgstr ""
-
-#: ../src/interactive_player.cc:283
-msgid "PAUSE"
-msgstr "PAUS"
-
-#: ../src/interactive_player.cc:328
-msgid "Message: "
-msgstr "Meddelande: "
-
-#: ../src/map.cc:415
-msgid "No Name"
-msgstr "Inget namn"
-
-#: ../src/map.cc:416 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
-msgid "Unknown"
-msgstr "Okänd"
-
-#: ../src/map.cc:417
-msgid "no description defined"
-msgstr "ingen beskrivning angiven"
-
-#: ../src/map.cc:419 ../src/map_variable_manager.cc:31
-msgid "<undefined>"
-msgstr "<odefinierad>"
-
-#: ../src/map.cc:420 ../src/playerdescrgroup.cc:34
-#: ../src/playerdescrgroup.cc:62
-msgid "Player 1"
-msgstr "Spelare 1"
-
-#: ../src/map_variable_manager.cc:30
-msgid "Next scenario"
-msgstr "Nästa scenario"
-
-#: ../src/militarysite.cc:79
+#: ../../src/militarysite.cc:74
 #, fuzzy
 msgid " conquer"
 msgstr "Erövra område"
 
-#: ../src/militarysite.cc:140
-#, c-format
-msgid "%d soldier (+%d)"
-msgid_plural "%d soldiers (+%d)"
+#: ../../src/militarysite.cc:138
+#, fuzzy, c-format
+msgid "%u soldier (+%u)"
+msgid_plural "%u soldiers (+%u)"
 msgstr[0] "%d soldat (+%d)"
 msgstr[1] "%d soldater (+%d)"
 
-#: ../src/militarysite.cc:142
-#, c-format
-msgid "%d soldier"
-msgid_plural "%d soldiers"
+#: ../../src/militarysite.cc:144
+#, fuzzy, c-format
+msgid "%u soldier"
+msgid_plural "%u soldiers"
 msgstr[0] "%d soldat"
 msgstr[1] "%d soldater"
 
-#: ../src/minimap.cc:150 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:87
-msgid "Map"
-msgstr "Karta"
-
-#: ../src/minimap.cc:159
-#, fuzzy
-msgid "Terrain"
-msgstr "Terrängval"
-
-#: ../src/minimap.cc:167
-#, fuzzy
-msgid "Owner"
-msgstr "Äger"
-
-#: ../src/minimap.cc:175
-#, fuzzy
-msgid "Flags"
-msgstr " flagga"
-
-#: ../src/minimap.cc:183
-#, fuzzy
-msgid "Roads"
-msgstr "Klar"
-
-#: ../src/network.cc:332
-msgid "I have no name"
-msgstr "Jag har inget namn"
-
-#: ../src/network.cc:831
-msgid "Starting network game"
-msgstr "Startar nätverksspel"
-
-#: ../src/network.cc:834 ../src/network.cc:842
-msgid "Player"
-msgstr "Spelare"
-
-#: ../src/network.cc:835
-msgid "Status"
-msgstr "Status"
-
-#: ../src/network.cc:846
-msgid "Waiting"
-msgstr "Väntar"
-
-#: ../src/network.cc:856
-msgid "Ready"
-msgstr "Klar"
-
-#: ../src/playerdescrgroup.cc:35
-msgid "Player 2"
-msgstr "Spelare 2"
-
-#: ../src/playerdescrgroup.cc:36
-msgid "Player 3"
-msgstr "Spelare 3"
-
-#: ../src/playerdescrgroup.cc:37
-msgid "Player 4"
-msgstr "Spelare 4"
-
-#: ../src/playerdescrgroup.cc:38
-msgid "Player 5"
-msgstr "Spelare 5"
-
-#: ../src/playerdescrgroup.cc:39
-msgid "Player 6"
-msgstr "Spelare 6"
-
-#: ../src/playerdescrgroup.cc:40
-msgid "Player 7"
-msgstr "Spelare 7"
-
-#: ../src/playerdescrgroup.cc:41
-msgid "Player 8"
-msgstr "Spelare 8"
-
-#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
-msgid "Computer"
-msgstr "Dator"
-
-#: ../src/playerdescrgroup.cc:122 ../src/playerdescrgroup.cc:221
-msgid "Human"
-msgstr "Mänsklig"
-
-#: ../src/productionsite.cc:227
-msgid "(not occupied)"
-msgstr "(ej ockuperad)"
-
-#: ../src/productionsite.cc:238
-#, fuzzy
-msgid "(stopped)"
-msgstr "(ej ockuperad)"
-
-#: ../src/productionsite.cc:266
-msgid "UP"
-msgstr "UPP"
-
-#: ../src/productionsite.cc:266
-msgid "DOWN"
-msgstr "NER"
-
-#: ../src/profile.cc:1018
-msgid "Usage: "
-msgstr "Användning: "
-
-#: ../src/s2map.cc:250
+#: ../../src/s2map.cc:248
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II Karta. Ingen kommentar angiven!"
 
-#: ../src/stock_menu.cc:71
-msgid "Show wares"
-msgstr ""
+#: ../../src/playerdescrgroup.cc:38
+msgid "Player 2"
+msgstr "Spelare 2"
 
-#: ../src/stock_menu.cc:76
-msgid "Show workers"
-msgstr ""
+#: ../../src/playerdescrgroup.cc:39
+msgid "Player 3"
+msgstr "Spelare 3"
 
-#: ../src/trainingsite.cc:213
+#: ../../src/playerdescrgroup.cc:40
+msgid "Player 4"
+msgstr "Spelare 4"
+
+#: ../../src/playerdescrgroup.cc:41
+msgid "Player 5"
+msgstr "Spelare 5"
+
+#: ../../src/playerdescrgroup.cc:42
+msgid "Player 6"
+msgstr "Spelare 6"
+
+#: ../../src/playerdescrgroup.cc:43
+msgid "Player 7"
+msgstr "Spelare 7"
+
+#: ../../src/playerdescrgroup.cc:44
+msgid "Player 8"
+msgstr "Spelare 8"
+
+#: ../../src/playerdescrgroup.cc:125 ../../src/playerdescrgroup.cc:224
+msgid "Computer"
+msgstr "Dator"
+
+#: ../../src/playerdescrgroup.cc:125 ../../src/playerdescrgroup.cc:224
+msgid "Human"
+msgstr "Mänsklig"
+
+#: ../../src/trainingsite.cc:214
 msgid "Resting"
 msgstr "Vilar"
 
-#: ../src/trainingsite.cc:215
+#: ../../src/trainingsite.cc:216
 msgid "Not Working"
 msgstr "Arbetar inte"
 
-#: ../src/trigger_building.cc:38
-msgid "Building Trigger"
-msgstr "Bygga Utlösare"
+#: ../../src/game_options_menu.cc:49 ../../src/game_main_menu.cc:101
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
+msgid "Options"
+msgstr "Inställningar"
 
-#: ../src/trigger_building.cc:40
-msgid "<unset>"
-msgstr "<odefinierad>"
+#: ../../src/game_options_menu.cc:60
+msgid "README"
+msgstr "README"
 
-#: ../src/trigger_null.cc:31
+#: ../../src/game_options_menu.cc:69
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
+msgid "License"
+msgstr "Licens"
+
+#: ../../src/game_options_menu.cc:78
+msgid "Authors"
+msgstr "Upphovsmän"
+
+#: ../../src/game_options_menu.cc:97
 #, fuzzy
-msgid "Null Trigger"
-msgstr "Nollställa Utlösare"
+msgid "Save game"
+msgstr "Spara spel"
 
-#: ../src/trigger_time.cc:34
-msgid "Time Trigger"
-msgstr "Tids Utlösare"
+#: ../../src/game_options_menu.cc:107
+#, fuzzy
+msgid "Load game"
+msgstr "Ladda spel"
 
-#: ../src/ware.cc:71 ../src/worker.cc:1550
-msgid "Doh... someone forgot the help text!"
-msgstr "Doh.. någon har glömt hjälptexten!"
+#: ../../src/game_options_menu.cc:118
+#, fuzzy
+msgid "Exit game"
+msgstr "Avsluta spel"
 
-#: ../src/ware_statistics_menu.cc:350
-msgid "Ware Statistics"
+#: ../../src/editor_game_base.cc:571
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:286
+msgid "Loading world data"
+msgstr ""
+
+#: ../../src/editor_game_base.cc:580
+#, c-format
+msgid "Loading tribe: %s"
+msgstr ""
+
+#: ../../src/general_statistics_menu.cc:64
+msgid "General Statistics"
+msgstr "Allmän statistik"
+
+#: ../../src/general_statistics_menu.cc:143
+msgid "Land"
+msgstr ""
+
+#: ../../src/general_statistics_menu.cc:149
+#, fuzzy
+msgid "Workers"
+msgstr "Arbetare lista"
+
+#: ../../src/general_statistics_menu.cc:161
+msgid "Wares"
+msgstr ""
+
+#: ../../src/general_statistics_menu.cc:167
+#, fuzzy
+msgid "Productivity"
+msgstr "Total produktivitet: "
+
+#: ../../src/general_statistics_menu.cc:173
+msgid "Kills"
+msgstr ""
+
+#: ../../src/general_statistics_menu.cc:179
+msgid "Military"
+msgstr ""
+
+#: ../../src/game_debug_ui.cc:263
+msgid "Debug Field"
+msgstr "Debugfält"
+
+#: ../../src/game_debug_ui.cc:321
+msgid "height:"
+msgstr "höjd:"
+
+#: ../../src/building_ui.cc:148
+msgid "Destroy building?"
+msgstr "Förstör byggnad?"
+
+#: ../../src/building_ui.cc:162
+msgid "Do you really want to destroy this "
+msgstr "Vill du verkligen förstöra denna "
+
+#: ../../src/building_ui.cc:164
+msgid "?"
+msgstr ""
+
+#: ../../src/building_ui.cc:653 ../../src/events/event_message_box.cc:48
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:56
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: ../../src/building_ui.cc:653
+#, fuzzy
+msgid "Stop"
+msgstr "Lager"
+
+#: ../../src/building_ui.cc:680
+#, c-format
+msgid "Enhance to %s"
+msgstr ""
+
+#: ../../src/building_ui.cc:699
+#, fuzzy
+msgid "Destroy"
+msgstr "Beskr"
+
+#: ../../src/building_ui.cc:710 ../../src/building_ui.cc:846
+#, fuzzy
+msgid "Show workarea"
+msgstr "Arbetare lista"
+
+#: ../../src/building_ui.cc:721
+#, fuzzy
+msgid "Debug"
+msgstr "Debugfält"
+
+#: ../../src/building_ui.cc:842
+msgid "Hide workarea"
+msgstr ""
+
+#: ../../src/building_ui.cc:1144 ../../src/building_ui.cc:1151
+msgid "Worker Listing"
+msgstr "Arbetare lista"
+
+#: ../../src/building_ui.cc:1166
+msgid "Type: "
+msgstr "Typ: "
+
+#: ../../src/building_ui.cc:1171
+msgid "Experience: "
+msgstr "Erfarenhet: "
+
+#: ../../src/building_ui.cc:1176
+msgid "Trying to become: "
+msgstr "Försöker att bli: "
+
+#: ../../src/building_ui.cc:1412
+msgid "Highest priority"
+msgstr ""
+
+#: ../../src/building_ui.cc:1420
+msgid "Normal priority"
+msgstr ""
+
+#: ../../src/building_ui.cc:1428
+msgid "Lowest priority"
+msgstr ""
+
+#: ../../src/building_ui.cc:1462
+#, fuzzy
+msgid "Show worker listing"
+msgstr "Arbetare lista"
+
+#: ../../src/building_ui.cc:1564 ../../src/building_ui.cc:2017
+msgid "HP"
+msgstr "HP"
+
+#: ../../src/building_ui.cc:1565 ../../src/building_ui.cc:2018
+msgid "AT"
+msgstr "AT"
+
+#: ../../src/building_ui.cc:1566 ../../src/building_ui.cc:2019
+msgid "DE"
+msgstr "FS"
+
+#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:2020
+msgid "EV"
+msgstr "PA"
+
+#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:2021
+msgid "Level"
+msgstr "Nivå"
+
+#: ../../src/building_ui.cc:1589 ../../src/building_ui.cc:2045
+msgid "Capacity"
+msgstr "Kapacitet"
+
+#: ../../src/building_ui.cc:1754
+msgid "Training Options"
+msgstr "Träningsinställningar"
+
+#: ../../src/building_ui.cc:1781
+msgid "Training mode : "
+msgstr "Träningssätt : "
+
+#: ../../src/building_ui.cc:1782
+msgid "Balanced"
+msgstr "Balanserad"
+
+#: ../../src/building_ui.cc:1811
+msgid "Hit Points"
+msgstr "Hälso Poäng"
+
+#: ../../src/building_ui.cc:1828 ../../src/fieldaction.cc:474
+msgid "Attack"
+msgstr "Attack"
+
+#: ../../src/building_ui.cc:1845
+msgid "Defense"
+msgstr "Försvar"
+
+#: ../../src/building_ui.cc:1863
+msgid "Evade"
+msgstr "Parera"
+
+#: ../../src/building_ui.cc:1907
+msgid "Make heroes"
+msgstr "Skapa hjältar"
+
+#: ../../src/building_ui.cc:1909
+msgid "Balanced army"
+msgstr "Balanserad armé"
+
+#: ../../src/building_ui.cc:2056
+msgid "xx"
+msgstr "xx"
+
+#: ../../src/network.cc:345
+msgid "I have no name"
+msgstr "Jag har inget namn"
+
+#: ../../src/network.cc:897
+msgid "Starting network game"
+msgstr "Startar nätverksspel"
+
+#: ../../src/network.cc:900 ../../src/network.cc:908
+msgid "Player"
+msgstr "Spelare"
+
+#: ../../src/network.cc:901
+msgid "Status"
+msgstr "Status"
+
+#: ../../src/network.cc:912
+msgid "Waiting"
+msgstr "Väntar"
+
+#: ../../src/network.cc:923
+msgid "Ready"
+msgstr "Klar"
+
+#: ../../src/game_chat_menu.cc:56
+msgid "Chat Menu"
+msgstr "Chatmeny"
+
+#: ../../src/game_chat_menu.cc:67
+msgid "Send"
+msgstr "Skicka"
+
+#: ../../src/game_chat_menu.cc:72
+msgid "Show messages as overlays:"
+msgstr "Visa meddelande som överlagringar:"
+
+#: ../../src/game_main_menu.cc:43
+#: ../../src/editor/ui_menus/editor_main_menu.cc:42
+msgid "Main Menu"
+msgstr "Huvudmeny"
+
+#: ../../src/game_main_menu.cc:53
+#, fuzzy
+msgid "General statistics"
+msgstr "Allmän statistik"
+
+#: ../../src/game_main_menu.cc:61
+#, fuzzy
+msgid "Ware statistics"
 msgstr "Varu statistik"
 
-#: ../src/watchwindow.cc:116
-msgid "Follow"
+#: ../../src/game_main_menu.cc:69
+#, fuzzy
+msgid "Building statistics"
+msgstr "Byggstatistik"
+
+#: ../../src/game_main_menu.cc:85 ../../src/editor/editorinteractive.cc:132
+#, fuzzy
+msgid "Objectives"
+msgstr "Menyn Mål"
+
+#: ../../src/game_main_menu.cc:93
+#, fuzzy
+msgid "Chat"
+msgstr "Chatmeny"
+
+#: ../../src/constructionsite.cc:212
+msgid "built"
+msgstr "byggt"
+
+#: ../../src/fieldaction.cc:238
+#, fuzzy
+msgid "Build small buildings"
+msgstr "Byggnad: "
+
+#: ../../src/fieldaction.cc:239
+#, fuzzy
+msgid "Build medium buildings"
+msgstr "Tillåtna byggnader"
+
+#: ../../src/fieldaction.cc:240
+#, fuzzy
+msgid "Build large buildings"
+msgstr "Tillåtna byggnader"
+
+#: ../../src/fieldaction.cc:274
+msgid "Action"
+msgstr "Åtgärd"
+
+#: ../../src/fieldaction.cc:380
+#, fuzzy
+msgid "Build road"
+msgstr "Bygg"
+
+#: ../../src/fieldaction.cc:385
+#, fuzzy
+msgid "Destroy this flag"
+msgstr "Förstör byggnad?"
+
+#: ../../src/fieldaction.cc:388
+msgid "Send geologist to explore site"
 msgstr ""
 
-#: ../src/watchwindow.cc:124
-msgid "Center mainview on this"
+#: ../../src/fieldaction.cc:401
+#, fuzzy
+msgid "Put a flag"
+msgstr " flagga"
+
+#: ../../src/fieldaction.cc:404
+#, fuzzy
+msgid "Destroy a road"
+msgstr "Beskr"
+
+#: ../../src/fieldaction.cc:411
+msgid "Watch field in a separate window"
 msgstr ""
 
-#: ../src/watchwindow.cc:142
-#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:37
-msgid "Close"
-msgstr "Stäng"
+#: ../../src/fieldaction.cc:412
+#, fuzzy
+msgid "Toggle building statistics display"
+msgstr "Byggstatistik"
 
-#: ../src/editor/editorinteractive.cc:76
+#: ../../src/fieldaction.cc:414
+msgid "Toggle building label display"
+msgstr ""
+
+#: ../../src/fieldaction.cc:417
+#, fuzzy
+msgid "Debug window"
+msgstr "Debugfält"
+
+#: ../../src/fieldaction.cc:423 ../../src/fieldaction.cc:573
+#, fuzzy
+msgid "Build roads"
+msgstr "Bygg"
+
+#: ../../src/fieldaction.cc:455
+#, fuzzy
+msgid "Send less soldiers"
+msgstr "%d soldat"
+
+#: ../../src/fieldaction.cc:460
+#, fuzzy
+msgid "Send more soldiers"
+msgstr "%d soldat"
+
+#: ../../src/fieldaction.cc:462
+msgid "Most agressive attack"
+msgstr ""
+
+#: ../../src/fieldaction.cc:463
+msgid "Cautious attack"
+msgstr ""
+
+#: ../../src/fieldaction.cc:465
+#, fuzzy
+msgid "Start attack"
+msgstr "Starta spel"
+
+#: ../../src/fieldaction.cc:551
+#, fuzzy
+msgid "Build mines"
+msgstr "Byggnad: "
+
+#: ../../src/fieldaction.cc:567
+#, fuzzy
+msgid "Build flag"
+msgstr "Bygg"
+
+#: ../../src/fieldaction.cc:569
+#, fuzzy
+msgid "Cancel road"
+msgstr "Avbryt"
+
+#: ../../src/editor/editorinteractive.cc:76
 #, fuzzy
 msgid "Tool"
 msgstr "Verktygsmeny"
 
-#: ../src/editor/editorinteractive.cc:84
+#: ../../src/editor/editorinteractive.cc:84
 #, fuzzy
 msgid "Toolsize"
 msgstr "Verktygs storleks menyn"
 
-#: ../src/editor/editorinteractive.cc:108
+#: ../../src/editor/editorinteractive.cc:108
 #, fuzzy
 msgid "Players"
 msgstr "Spelare:"
 
-#: ../src/editor/editorinteractive.cc:116
+#: ../../src/editor/editorinteractive.cc:116
 #, fuzzy
 msgid "Events"
 msgstr "Händelser: "
 
-#: ../src/editor/editorinteractive.cc:124
+#: ../../src/editor/editorinteractive.cc:124
 #, fuzzy
 msgid "Variables"
 msgstr "Variabel"
 
-#: ../src/editor/editorinteractive.cc:160
+#: ../../src/editor/editorinteractive.cc:160
 msgid "Map unsaved"
 msgstr "Karta inte sparad"
 
-#: ../src/editor/editorinteractive.cc:161
+#: ../../src/editor/editorinteractive.cc:161
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Kartan är inte sparad, vill du verkligen avsluta?"
 
-#: ../src/editor/tools/editor_info_tool.cc:48
+#: ../../src/events/event_allow_building.cc:39
+#: ../../src/events/event_factory.cc:49
+msgid "Allow Building"
+msgstr "Tillåt byggnation"
+
+#: ../../src/events/event_message_box.cc:40
+#: ../../src/events/event_factory.cc:45
+msgid "Message Box"
+msgstr "Meddelanderuta"
+
+#: ../../src/events/event_message_box.cc:41
+msgid "No text defined"
+msgstr "Ingen text definierad"
+
+#: ../../src/events/event_message_box.cc:42
+msgid "Window Title"
+msgstr "Fönstertitel"
+
+#: ../../src/events/event_move_view.cc:38
+#: ../../src/events/event_unhide_objective.cc:39
+#: ../../src/events/event_factory.cc:46
+msgid "Move View"
+msgstr "Flytta Vy"
+
+#: ../../src/events/event_factory.cc:45
+#, fuzzy
+msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
+msgstr "Denna Händelse visar en meddelanderuta. Användaren kan välja att göra den modal/inte-modal och lägga till en bild. Händelser kan hänvisas till varje knapp för användaren att använda detta som en Välj Dialog."
+
+#: ../../src/events/event_factory.cc:46
+msgid "This Event centers the Players View on a certain field"
+msgstr "Denna händelsen centrerar spelarens vy på ett särskilt fält"
+
+#: ../../src/events/event_factory.cc:47
+#: ../../src/events/event_unhide_area.h:39
+msgid "Unhide Area"
+msgstr "Visa area"
+
+#: ../../src/events/event_factory.cc:47
+#, fuzzy
+msgid "This Event makes a user definable part of the map visible for a selectable user"
+msgstr "Denna Händelse gör en användardefinierad del av kartan synlig för en valbar användare"
+
+#: ../../src/events/event_factory.cc:48
+#: ../../src/events/event_conquer_area.h:32
+msgid "Conquer Area"
+msgstr "Erövra område"
+
+#: ../../src/events/event_factory.cc:48
+msgid "This Event conquers a user definable part of the map for one player if there isn't a player already there"
+msgstr "Denna händelsen övertar en användar definierad del av kartan för en spelare, om där inte finns en spelare där redan"
+
+#: ../../src/events/event_factory.cc:49
+msgid "Allows/Disables a certain building for a player so that it can be build or it can't any longer"
+msgstr "Tillåter/Nekar en spelare att bygga en viss byggnad"
+
+#: ../../src/events/event_set_null_trigger.cc:40
+#, fuzzy
+msgid "Set Null Trigger"
+msgstr "Sätt Nollställa Utlösare"
+
+#: ../../src/trigger/trigger_null.cc:32
+#: ../../src/trigger/trigger_factory.cc:37
+#, fuzzy
+msgid "Null Trigger"
+msgstr "Nollställa Utlösare"
+
+#: ../../src/trigger/trigger_building.cc:38
+#: ../../src/trigger/trigger_factory.cc:38
+msgid "Building Trigger"
+msgstr "Bygga Utlösare"
+
+#: ../../src/trigger/trigger_building.cc:40
+msgid "<unset>"
+msgstr "<odefinierad>"
+
+#: ../../src/trigger/trigger_time.cc:35
+#: ../../src/trigger/trigger_factory.cc:36
+msgid "Time Trigger"
+msgstr "Tids Utlösare"
+
+#: ../../src/trigger/trigger_factory.cc:36
+msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
+msgstr "Denna Utlösare väntar en viss tid innan den blir aktiv. Den kan konfigureras att starta om sig själv när tiden är ute, för att repetera händelsen"
+
+#: ../../src/trigger/trigger_factory.cc:37
+#, fuzzy
+msgid "This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers"
+msgstr "Denna utlösare ändrar aldrig sin egen status. Den kan vara bra att använda till händelser som ändrar utlösare"
+
+#: ../../src/trigger/trigger_factory.cc:38
+msgid "This trigger gets set when a number of a building type of one player is available in an area."
+msgstr "Denna Utlösare sätts på när ett visst antal byggnader finns inom en viss area."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:78
+msgid "Lobby"
+msgstr "Lobby"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:98
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:65
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:258
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:46
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:43
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:75
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:38
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:87
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:185
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:118
+msgid "Back"
+msgstr "Tillbaka"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:182
+#, c-format
+msgid "User %s is using \"%s\" in room \"%s\"\n"
+msgstr "Användaren %s använder \"%s\" i rummet \"%s\"\n"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
+#, c-format
+msgid "User %s has entered the room %s !\n"
+msgstr "Användaren %s har kommit in i rummet %s !\n"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
+#, c-format
+msgid "User %s has left the room %s !\n"
+msgstr "Användaren %s har lämnat rummet %s !\n"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:234
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:246
+msgid "Critical Connection Error!"
+msgstr "Kritiskt anslutningsfel!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:247
+msgid "Server disconnected unexpectedly!"
+msgstr "Servern tappade kontakten!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:55
+msgid "Apply"
+msgstr "Verkställ"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+msgid "General Options"
+msgstr "Alternativ"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
+msgid "Fullscreen"
+msgstr "Fullskärm"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+msgid "Grab Input"
+msgstr "Fäst musen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
+msgid "Enable Music"
+msgstr "Aktivera musik"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
+msgid "Enable Sound"
+msgstr "Aktivera ljud"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
+msgid "In-game resolution"
+msgstr "Upplösning under spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:81
+msgid "Language"
+msgstr "Språk"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:85
+msgid "In-game Options"
+msgstr "I spel, alternativ"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:91
+msgid "Use single Watchwindow Mode"
+msgstr "Använd ett Se-fönster"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:95
+msgid "Show buildings area preview"
+msgstr "Visa effektiv area"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
+msgid "Snap windows only when overlapping"
+msgstr "Fäst endast fönster vid överlappning"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:103
+msgid "Dock windows to edges"
+msgstr "Fäst fönster på kanter"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:126
+#, c-format
+msgid "Autosave game every %d minute"
+msgid_plural "Autosave game every %d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:182
+msgid "System default language"
+msgstr "Systemets förvalda språk"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:30
+msgid "Single Player Menu"
+msgstr "Menyn En spelare"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:39
+#, fuzzy
+msgid "New Game"
+msgstr "Spara spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:53
+#, fuzzy
+msgid "Campaigns"
+msgstr "Lärdig Kampanj"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
+#, fuzzy
+msgid "Select a campaign"
+msgstr "Välj karta"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:49
+#, fuzzy
+msgid "Campaign:"
+msgstr "Lärdig Kampanj"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:51
+msgid "Difficulty:"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:53
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:246
+#, fuzzy
+msgid "Description:"
+msgstr "Beskrivning: "
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:124
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:135
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:137
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:206
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:328
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:329
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:330
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:388
+msgid "[No value found]"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:125
+msgid "Easy living"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:126
+msgid "Be vigilant"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:127
+msgid "Hard struggle"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:141
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:334
+msgid "[Invalid entry]"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:236
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:42
+msgid "Choose your map!"
+msgstr "Välj din karta!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:242
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:57
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:46
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:51
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:51
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:53
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:73
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:64
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:72
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:58
+msgid "Name:"
+msgstr "Namn:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:244
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:59
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:65
+msgid "Author:"
+msgstr "Upphovsman:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:30
+msgid "Internet Options"
+msgstr "Internet-inställningar"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:39
+msgid "Run Game"
+msgstr "Starta spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:54
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
+msgid "nobody"
+msgstr "ingen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:40
+msgid "Launch Game"
+msgstr "Starta spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:54
+msgid "Start game"
+msgstr "Starta spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:65
+msgid "Select map"
+msgstr "Välj karta"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:144
+msgid "(no map)"
+msgstr "(ingen karta)"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:156
+#: ../../src/editor/ui_menus/editor_player_menu.cc:240
+msgid "Player "
+msgstr "Spelare "
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
+msgid "Begin Network Game"
+msgstr "Börja nätverksspel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
+msgid "Join a Game"
+msgstr "Anslut till spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:46
+msgid "Host a New Game"
+msgstr "Var värd för nytt spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:53
+msgid "Play in Internet"
+msgstr "Spela på Internet"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:77
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:214
+msgid "LAN games"
+msgstr "Nätverks-spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:86
+msgid "Host"
+msgstr "Värd"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:88
+msgid "State"
+msgstr "Status"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
+msgid "Open"
+msgstr "Öppen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
+msgid "Closed"
+msgstr "Stängd"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:207
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:229
+msgid "GGZ games"
+msgstr "GGZ spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:57
+msgid "Choose saved game!"
+msgstr "Välj sparat spel!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:60
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:52
+msgid "Map Name:"
+msgstr "Kartnamn:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:62
+msgid "Gametime:"
+msgstr "Speltid:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:46
+msgid "Load Map as scenario: "
+msgstr "Ladda karta som scenario: "
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:56
+msgid "Size:"
+msgstr "Storlek:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:62
+msgid "World:"
+msgstr "Värld:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:65
+msgid "Players:"
+msgstr "Spelare:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:67
+msgid "Descr:"
+msgstr "Beskr:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
+msgid "Single Player"
+msgstr "En spelare"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Multi Player"
+msgstr "Flera spelare"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:56
+msgid "Watch Replay"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:70
+msgid "Editor"
+msgstr "Redigera"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:77
+#: ../../src/editor/ui_menus/editor_main_menu.cc:104
+msgid "View Readme"
+msgstr "Läs Readme"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
+msgid "Exit Game"
+msgstr "Avsluta spel"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:94
+msgid "Version"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:98
+#, fuzzy
+msgid "(C) 2002-2007 by the Widelands Development Team"
+msgstr "(C) 2002-2006 av Widelands utvecklingslag"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:47
+#, fuzzy
+msgid "Choose a replay!"
+msgstr "Välj sparat spel!"
+
+#: ../../src/ui/ui_basic/ui_modal_messagebox.cc:59
+msgid "Yes"
+msgstr ""
+
+#: ../../src/ui/ui_basic/ui_modal_messagebox.cc:66
+msgid "No"
+msgstr ""
+
+#: ../../src/ui/ui_basic/ui_progresswindow.cc:42
+msgid "Preparing..."
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
 msgstr "Fältinformation"
 
-#: ../src/editor/tools/editor_info_tool.cc:56
+#: ../../src/editor/tools/editor_info_tool.cc:53
 msgid "1) Field Infos"
 msgstr "1) Fältinfo"
 
-#: ../src/editor/tools/editor_info_tool.cc:60
+#: ../../src/editor/tools/editor_info_tool.cc:57
 msgid "Coordinates"
 msgstr "Koordinater"
 
-#: ../src/editor/tools/editor_info_tool.cc:63
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:76
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:151
+#: ../../src/editor/tools/editor_info_tool.cc:60
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
 msgid "Height"
 msgstr "Höjd"
 
-#: ../src/editor/tools/editor_info_tool.cc:64
+#: ../../src/editor/tools/editor_info_tool.cc:61
 #, fuzzy
 msgid " Caps: "
 msgstr " Caps: "
 
-#: ../src/editor/tools/editor_info_tool.cc:66
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "small"
 msgstr "liten"
 
-#: ../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "medium"
 msgstr "medel"
 
-#: ../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:65
 msgid "big"
 msgstr "stor"
 
-#: ../src/editor/tools/editor_info_tool.cc:71
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " flag"
 msgstr " flagga"
 
-#: ../src/editor/tools/editor_info_tool.cc:72
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " mine"
 msgstr " gruva"
 
-#: ../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " port"
 msgstr " port"
 
-#: ../src/editor/tools/editor_info_tool.cc:74
+#: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " walk"
 msgstr " gå"
 
-#: ../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:71
 msgid " swim"
 msgstr " simma"
 
-#: ../src/editor/tools/editor_info_tool.cc:77
+#: ../../src/editor/tools/editor_info_tool.cc:73
 msgid "Owned by"
 msgstr "ägs av"
 
-#: ../src/editor/tools/editor_info_tool.cc:78
+#: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "Has base immovable"
 msgstr "Har oflyttbar bas"
 
-#: ../src/editor/tools/editor_info_tool.cc:79
+#: ../../src/editor/tools/editor_info_tool.cc:75
 msgid "Has bobs"
 msgstr "Har bobs"
 
-#: ../src/editor/tools/editor_info_tool.cc:85
+#: ../../src/editor/tools/editor_info_tool.cc:82
 msgid "Has resources: Yes"
 msgstr "Har resurser: Ja"
 
-#: ../src/editor/tools/editor_info_tool.cc:87
+#: ../../src/editor/tools/editor_info_tool.cc:84
 msgid "amount of"
 msgstr "antal"
 
-#: ../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
 msgid " Has resources: No\n"
 msgstr " Har resurser: Nej\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:94
+#: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "Start resources amount"
 msgstr "Resurser att starta med"
 
-#: ../src/editor/tools/editor_info_tool.cc:97
+#: ../../src/editor/tools/editor_info_tool.cc:94
 #, c-format
 msgid " Roads: TODO!\n"
 msgstr " Vägar: ATT GÖRA!\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:100
-msgid "2) Right Terrain Info\n"
+#: ../../src/editor/tools/editor_info_tool.cc:97
+#, fuzzy
+msgid "2) Terrain Info\n"
 msgstr "2) Höger terräng info\n"
 
-#: ../src/editor/tools/editor_info_tool.cc:109
-#: ../src/editor/tools/editor_info_tool.cc:123
+#: ../../src/editor/tools/editor_info_tool.cc:108
 msgid "Texture Number"
 msgstr "Textur-nummer"
 
-#: ../src/editor/tools/editor_info_tool.cc:114
-msgid "3) Down Terrain Info\n"
-msgstr "3) Nedre terräng info\n"
-
-#: ../src/editor/tools/editor_info_tool.cc:128
+#: ../../src/editor/tools/editor_info_tool.cc:113
 msgid "4) Map Info"
 msgstr "4) Kartinfo"
 
-#: ../src/editor/tools/editor_info_tool.cc:130
+#: ../../src/editor/tools/editor_info_tool.cc:115
 msgid "Size"
 msgstr "Storlek"
 
-#: ../src/editor/tools/editor_info_tool.cc:131
-#: ../src/editor/tools/editor_info_tool.cc:141
+#: ../../src/editor/tools/editor_info_tool.cc:116
+#: ../../src/editor/tools/editor_info_tool.cc:125
 msgid "Author"
 msgstr "Upphovsman"
 
-#: ../src/editor/tools/editor_info_tool.cc:132
-#: ../src/editor/tools/editor_info_tool.cc:143
+#: ../../src/editor/tools/editor_info_tool.cc:117
+#: ../../src/editor/tools/editor_info_tool.cc:127
 msgid "Descr"
 msgstr "Beskr"
 
-#: ../src/editor/tools/editor_info_tool.cc:133
-#: ../src/editor/ui_menus/editor_player_menu.cc:73
+#: ../../src/editor/tools/editor_info_tool.cc:118
+#: ../../src/editor/ui_menus/editor_player_menu.cc:74
 msgid "Number of Players"
 msgstr "Antal spelare"
 
-#: ../src/editor/tools/editor_info_tool.cc:134
+#: ../../src/editor/tools/editor_info_tool.cc:119
 msgid " TODO: more information (number of resources, number of terrains...)"
 msgstr " TODO: mer information (mängd resurser, terränger...)"
 
-#: ../src/editor/tools/editor_info_tool.cc:138
+#: ../../src/editor/tools/editor_info_tool.cc:122
 msgid "5) World Info"
 msgstr "5) Världs info"
 
-#: ../src/editor/tools/editor_info_tool.cc:145
+#: ../../src/editor/tools/editor_info_tool.cc:129
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
 msgstr " TODO -- Mer information (antal varor...)\n"
 
-#: ../src/editor/ui_menus/editor_tool_menu.cc:44
-msgid "Tool Menu"
-msgstr "Verktygsmeny"
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:35
+msgid "Null Trigger Options"
+msgstr "Nollställ Utlösare Alternativ"
 
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
-#: ../src/editor/ui_menus/editor_event_menu.cc:157
-msgid "New Trigger"
-msgstr "Ny Utlösare"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:47
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:176
-msgid "Available Triggers: "
-msgstr "Tillgängliga Utlösare"
-
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:59
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:60
-msgid "Description: "
-msgstr "Beskrivning: "
-
-#: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:70
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:200
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:231
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:71
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:110
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:163
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:56
-#: ../src/editor/ui_menus/editor_variables_menu.cc:179
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:148
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:294
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:233
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:157
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:131
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:196
+#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:58
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:164
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:233
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:74
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:196
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:73
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:235
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:179
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:134
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:150
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:111
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:202
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:158
 msgid "Ok"
 msgstr "Ok"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:59
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
-msgid "New Map"
-msgstr "Ny karta"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:70
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:52
-msgid "Load Map"
-msgstr "Ladda karta"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:81
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:52
-msgid "Save Map"
-msgstr "Spara karta"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:92
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:38
-msgid "Map Options"
-msgstr "Kart Alternativ"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:103
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:70
-msgid "View Readme"
-msgstr "Läs Readme"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:114
-msgid "Exit Editor"
-msgstr "Stäng Redigerare"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:42
-msgid "Player Options"
-msgstr "Spelar inställningar"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:50
-#, fuzzy
-msgid "Add player"
-msgstr "Spelare"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:59
-msgid "Remove last player"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:204
-msgid "I"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:205
-#, fuzzy
-msgid "Make infrastructure"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
+msgid "Make Directory"
 msgstr "Skapa mapp"
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:218
-msgid "B"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
+msgid "Enter Directory Name: "
+msgstr "Ange mappnamn: "
 
-#: ../src/editor/ui_menus/editor_player_menu.cc:219
-#, fuzzy
-msgid "Allow/forbid buildidngs"
-msgstr "Tillåtna byggnader"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:241
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:150
-msgid "Player "
-msgstr "Spelare "
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:296
-#: ../src/editor/ui_menus/editor_player_menu.cc:327
-#: ../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../src/editor/ui_menus/editor_event_menu.cc:329
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:294
-msgid "Error!"
-msgstr "Fel!"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:297
-#, fuzzy
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend on this player and try again"
-msgstr ""
-"Kan inte ta bort spelare. Spelaren är refererad på någon plats. Ta bort alla "
-"byggnader, bobs, utlösare och händelser som berör denna spelaren och försök "
-"igen"
-
-#: ../src/editor/ui_menus/editor_player_menu.cc:328
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Kan inte ändra spelarens stam. Spelaren är refererad på någon plats. Ta bort "
-"alla byggnader, bobs, utlösare och händelser som berör denna spelaren och "
-"försök igen"
-
-#: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:55
-#, fuzzy
-msgid "Immovable Bobs Menu"
-msgstr "Oflyttbar Bobs meny"
-
-#: ../src/editor/ui_menus/editor_event_menu.cc:56
+#: ../../src/editor/ui_menus/editor_event_menu.cc:57
 msgid "Event Menu"
 msgstr "Händelsemeny"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:67
+#: ../../src/editor/ui_menus/editor_event_menu.cc:68
 msgid "Event Chains: "
 msgstr "Händelsekedjor: "
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:74
+#: ../../src/editor/ui_menus/editor_event_menu.cc:75
 msgid "Registered Events: "
 msgstr "Registrerade händelser: "
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:81
+#: ../../src/editor/ui_menus/editor_event_menu.cc:82
 msgid "Registered Triggers"
 msgstr "Registrerade Utlösare"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:94
+#: ../../src/editor/ui_menus/editor_event_menu.cc:95
 msgid "New Event Chain"
 msgstr "Ny kedja"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:103
-#: ../src/editor/ui_menus/editor_event_menu.cc:134
-#: ../src/editor/ui_menus/editor_event_menu.cc:166
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:199
-#: ../src/editor/ui_menus/editor_variables_menu.cc:285
+#: ../../src/editor/ui_menus/editor_event_menu.cc:104
+#: ../../src/editor/ui_menus/editor_event_menu.cc:135
+#: ../../src/editor/ui_menus/editor_event_menu.cc:167
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:283
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:200
 msgid "Edit"
 msgstr "Ändra"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:114
-#: ../src/editor/ui_menus/editor_event_menu.cc:145
-#: ../src/editor/ui_menus/editor_event_menu.cc:177
+#: ../../src/editor/ui_menus/editor_event_menu.cc:115
+#: ../../src/editor/ui_menus/editor_event_menu.cc:146
+#: ../../src/editor/ui_menus/editor_event_menu.cc:178
 msgid "Del"
 msgstr "Bort"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:125
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:90
+#: ../../src/editor/ui_menus/editor_event_menu.cc:126
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:39
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:91
 msgid "New Event"
 msgstr "Ny händelse"
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:274
+#: ../../src/editor/ui_menus/editor_event_menu.cc:158
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:39
+msgid "New Trigger"
+msgstr "Ny Utlösare"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:277
 msgid "Can't delete Event. It is in use by "
 msgstr "Kan inte ta bort händelse. Används av "
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:319
+#: ../../src/editor/ui_menus/editor_event_menu.cc:287
+#: ../../src/editor/ui_menus/editor_event_menu.cc:332
+#: ../../src/editor/ui_menus/editor_player_menu.cc:295
+#: ../../src/editor/ui_menus/editor_player_menu.cc:326
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:295
+msgid "Error!"
+msgstr "Fel!"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:322
 msgid "Can't delete Trigger. It is in use by "
 msgstr "Kan inte ta bort Utlösare. Används av "
 
-#: ../src/editor/ui_menus/editor_event_menu.cc:357
-#: ../src/editor/ui_menus/editor_event_menu.cc:365
-#: ../src/editor/ui_menus/editor_variables_menu.cc:113
+#: ../../src/editor/ui_menus/editor_event_menu.cc:360
+#: ../../src/editor/ui_menus/editor_event_menu.cc:368
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:114
 msgid "Unnamed"
 msgstr "Okänd"
 
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:34
-#, fuzzy
-msgid "Trigger Option Menu"
-msgstr "Menyn, Utlösare Alternativ"
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:39
+msgid "Move View Event Options"
+msgstr "Alternativ, Flytta Vy Händelse"
 
-#: ../src/editor/ui_menus/trigger_time_option_menu.cc:56
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:50
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:44
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:62
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:70
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:51
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:70
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:63
-msgid "Name:"
-msgstr "Namn:"
-
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:36
-msgid "Unhide Area Event Options"
-msgstr "Alternativ, Visa område händelse"
-
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:55
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:56
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:137
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:57
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:57
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:139
 msgid "Current position: "
 msgstr "Nuvarande position: "
 
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:156
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:76
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:158
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:76
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:38
+msgid "Unhide Area Event Options"
+msgstr "Alternativ, Visa område händelse"
+
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:158
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:160
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:79
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
 msgid "Player: "
 msgstr "Spelare: "
 
-#: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:175
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:238
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:177
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:177
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:179
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:240
 msgid "Area: "
 msgstr "Område: "
 
-#: ../src/editor/ui_menus/editor_event_menu_new_event.cc:47
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:137
-msgid "Available Events: "
-msgstr "Tillgängliga händelser: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:69
-msgid "Edit Objective"
-msgstr "Redigera Mål"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:84
-msgid "Visible at Begin: "
-msgstr "Synlig vid start: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:89
-msgid "Optional Objective: "
-msgstr "Valfria Mål"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:95
-msgid "Objective text: "
-msgstr "Mål: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:117
-#: ../src/editor/ui_menus/editor_variables_menu.cc:86
-#: ../src/editor/ui_menus/editor_variables_menu.cc:185
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:88
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:81
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:59
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:60
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:53
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:41
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:97
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:45
-msgid "Back"
-msgstr "Tillbaka"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:177
-msgid "Optional"
-msgstr "Valfri"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:178
-msgid "Visible"
-msgstr "Synlig"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:190
-#: ../src/editor/ui_menus/editor_variables_menu.cc:278
-msgid "New"
-msgstr "Ny"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:210
-#: ../src/editor/ui_menus/editor_variables_menu.cc:294
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:110
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:149
-msgid "Delete"
-msgstr "Ta bort"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:217
-msgid "Trigger: "
-msgstr "Utlösare: "
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:254
-#, fuzzy, c-format
-msgid "Unnamed%u"
-msgstr "Okänd"
-
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:284
-#, fuzzy
-msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "Kan inte ta bort Mål, målets utlösare används av "
-
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:41
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:43
 msgid "Resources Tools Options"
 msgstr "Resurs verktygs alternativ"
 
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:46
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:42
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
 #, fuzzy
 msgid "In-/Decrease Value"
 msgstr "Öka/minska värde"
 
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:76
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:82
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 msgid "Set Value"
 msgstr "Sätt värde"
 
-#: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:106
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
 msgstr "Nuvarande val"
 
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:42
-msgid "Terrain Select"
-msgstr "Terrängval"
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:54
+msgid "Allowed Buildings"
+msgstr "Tillåtna byggnader"
 
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:153
-#: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:202
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:60
 #, fuzzy
-msgid "Current:"
-msgstr "Nuvarande: "
+msgid "Allowed Buildings:"
+msgstr "Tillåtna byggnader: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:74
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:54
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:71
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
+#, fuzzy
+msgid "Forbidden Buildings:"
+msgstr "Förbjudna byggnader: "
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:87
+msgid "Forbid"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:138
+msgid "<-"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:98
+msgid "Allow"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:48
+#: ../../src/editor/ui_menus/editor_main_menu.cc:60
+msgid "New Map"
+msgstr "Ny karta"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:62
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
+msgid "Width"
+msgstr "Bredd"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:121
+msgid "Create Map"
+msgstr "Skapa karta"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:50
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:138
+msgid "Available Events: "
+msgstr "Tillgängliga händelser: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:63
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:62
+msgid "Description: "
+msgstr "Beskrivning: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:39
+msgid "Edit Trigger Conditional"
+msgstr "Redigera Utlösare Villkorlig"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:53
+msgid "Trigger Conditional: "
+msgstr "Utlösare Villkorlig: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:69
+msgid "("
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:81
+msgid ")"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:93
+msgid "AND"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:105
+msgid "OR"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:117
+msgid "XOR"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:129
+msgid "NOT"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:139
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:101
+#, fuzzy
+msgid "Insert"
+msgstr "<odefinierad>"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:149
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:292
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:211
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:111
+msgid "Delete"
+msgstr "Ta bort"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:176
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:50
+msgid "Available Triggers: "
+msgstr "Tillgängliga Utlösare"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
+msgid "Syntax Error"
+msgstr "Syntaxfel"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:267
+msgid "Your conditional contains at least one syntax error. Please correct!\n"
+msgstr "Ditt villkor innehåller minst ett syntax fel. Var vänlig, rätta till det!\n"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:41
+#: ../../src/editor/ui_menus/editor_main_menu.cc:93
+msgid "Map Options"
+msgstr "Kart Alternativ"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:59
+msgid "Nr Players:"
+msgstr "Antal spelare:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
+msgid "Nothing defined!"
+msgstr "Ingenting definierat!"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu.cc:82
+msgid "Save Map"
+msgstr "Spara karta"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:77
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
 msgid "Name: "
 msgstr "Namn: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:79
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:82
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:81
 msgid "Author: "
 msgstr "Upphovsman: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:84
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:87
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 msgid "Size: "
 msgstr "Storlek: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:89
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:92
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
 msgid "World: "
 msgstr "Värld: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:94
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:96
 msgid "Players: "
 msgstr "Spelare: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:100
-#: ../src/editor/ui_menus/editor_main_menu_load_map.cc:97
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:103
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:102
 msgid "Descr: "
 msgstr "Beskr: "
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:129
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
-msgid "Make Directory"
-msgstr "Skapa mapp"
-
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:177
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:180
 msgid "unnamed"
 msgstr "okänd"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:343
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:346
 msgid " exists already. Overwrite?"
 msgstr " finns redan. Skriva över?"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:345
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:368
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:348
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:371
 msgid "Save Map Error!!"
 msgstr "Fel vid sparning av karta!!"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:365
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:368
 msgid ""
 "Map Saving Error!\n"
 "Saved Map-File may be corrupt!\n"
@@ -1372,569 +1952,327 @@ msgstr ""
 "\n"
 "Anledning:\n"
 
-#: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-msgid "Enter Directory Name: "
-msgstr "Ange mappnamn: "
-
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:36
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:37
 msgid "Toolsize Menu"
 msgstr "Verktygs storleks menyn"
 
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:56
-#: ../src/editor/ui_menus/editor_toolsize_menu.cc:79
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:57
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:80
 #, fuzzy, c-format
 msgid "Current Size: %u"
 msgstr "Nuvarande storlek"
 
-#: ../src/editor/ui_menus/event_move_view_option_menu.cc:36
-msgid "Move View Event Options"
-msgstr "Alternativ, Flytta Vy Händelse"
-
-#: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
-msgid "Null Trigger Options"
-msgstr "Nollställ Utlösare Alternativ"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:60
-msgid "New Variable"
-msgstr "Ny variabel"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:72
-msgid "Integer"
-msgstr "Integer"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:79
-msgid "String"
-msgstr "Sträng"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:162
-msgid "Edit Variable"
-msgstr "Redigera variabel"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:171
-#: ../src/editor/ui_menus/editor_variables_menu.cc:301
-msgid "Value"
-msgstr "Värde"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:228
-msgid "is not a valid integer!"
-msgstr "Är inte en giltig integer!"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:230
-#, fuzzy
-msgid "Parse error!"
-msgstr "Parse fel!"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:267
-msgid "Variables Menu"
-msgstr "Variabelmeny"
-
-#: ../src/editor/ui_menus/editor_variables_menu.cc:300
-msgid "Variable"
-msgstr "Variabel"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:41
-msgid "Message Box Event Options"
-msgstr "Händelse alternativ, meddelanderuta"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:55
-msgid "Button 1"
-msgstr "Knapp 1"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:56
-msgid "Button 2"
-msgstr "Knapp 2"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:57
-msgid "Button 3"
-msgstr "Knapp 3"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:68
-#, fuzzy
-msgid "Is Modal: "
-msgstr "Är Modal: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:75
-msgid "Window Title:"
-msgstr "Fönstertitel:"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:81
-msgid "Text:"
-msgstr "Text:"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:88
-msgid "Number of Buttons: "
-msgstr "Antal knappar: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:110
-msgid "Button Name: "
-msgstr "Knappnamn: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:120
-msgid "Select Trigger: "
-msgstr "Välj utlösare"
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:138
-msgid "Current: "
-msgstr "Nuvarande: "
-
-#: ../src/editor/ui_menus/event_message_box_option_menu.cc:139
-msgid "No trigger selected!"
-msgstr "Ingen utlösare vald!"
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:39
-#, fuzzy
-msgid "Building Trigger Options"
-msgstr "Byggnads Utlösare Alternativ"
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:96
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:96
-msgid "Building: "
-msgstr "Byggnad: "
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:113
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:113
-msgid "Headquarters"
-msgstr "Huvudkvarter"
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:117
-msgid "How many: "
-msgstr "Hur många: "
-
-#: ../src/editor/ui_menus/trigger_building_option_menu.cc:400
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:207
-msgid "<invalid player tribe>"
-msgstr "<otillåten stam>"
-
-#: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:38
-msgid "Conquer Area Event Options"
-msgstr "Erövra område Händelse Alternativ"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:49
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:58
-msgid "Map Name:"
-msgstr "Kartnamn:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:53
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:67
-msgid "Size:"
-msgstr "Storlek:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:56
-msgid "Nr Players:"
-msgstr "Antal spelare:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:59
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:69
-msgid "World:"
-msgstr "Värld:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:62
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:65
-msgid "Author:"
-msgstr "Upphovsman:"
-
-#: ../src/editor/ui_menus/editor_main_menu_map_options.cc:66
-msgid "Nothing defined!"
-msgstr "Ingenting definierat!"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:42
-msgid "Edit Event Chain"
-msgstr "Redigera händelsekedja"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:60
-msgid "Runs multiple times"
-msgstr "Körs flera gånger"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:67
-msgid "Events: "
-msgstr "Händelser: "
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:81
-#, fuzzy
-msgid "Conditional"
-msgstr "Villkorlig"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:100
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:139
-#, fuzzy
-msgid "Insert"
-msgstr "<odefinierad>"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:122
-msgid "Up"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:57
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:149
-msgid "Width"
-msgstr "Bredd"
-
-#: ../src/editor/ui_menus/editor_main_menu_new_map.cc:116
-msgid "Create Map"
-msgstr "Skapa karta"
-
-#: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:41
-#, fuzzy
-msgid "Bobs Menu"
-msgstr "Bobs Meny"
-
-#: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:37
-msgid "Height Tools Options"
-msgstr "Höjdverktygs Alternativ"
-
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:37
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:40
 msgid "Noise Height Options"
 msgstr "Höjd brus alternativ"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:123
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:126
 #, fuzzy, c-format
 msgid "Minimum: %u"
 msgstr "Minimum"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:125
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:128
 #, fuzzy, c-format
 msgid "Maximum: %u"
 msgstr "Maximum"
 
-#: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:133
 #, fuzzy, c-format
 msgid "Set value: %u"
 msgstr "Sätt värde"
 
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:40
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:57
+#: ../../src/editor/ui_menus/editor_main_menu.cc:71
+msgid "Load Map"
+msgstr "Ladda karta"
+
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
+msgid "Height Tools Options"
+msgstr "Höjdverktygs Alternativ"
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:41
+msgid "Conquer Area Event Options"
+msgstr "Erövra område Händelse Alternativ"
+
+#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:50
+#, fuzzy
+msgid "Immovable Bobs Menu"
+msgstr "Oflyttbar Bobs meny"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:43
+msgid "Player Options"
+msgstr "Spelar inställningar"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:51
+#, fuzzy
+msgid "Add player"
+msgstr "Spelare"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:60
+msgid "Remove last player"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:205
+msgid "I"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:206
+#, fuzzy
+msgid "Make infrastructure"
+msgstr "Skapa mapp"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:219
+msgid "B"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:220
+#, fuzzy
+msgid "Allow/forbid buildidngs"
+msgstr "Tillåtna byggnader"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:296
+#, fuzzy
+msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again"
+msgstr "Kan inte ta bort spelare. Spelaren är refererad på någon plats. Ta bort alla byggnader, bobs, utlösare och händelser som berör denna spelaren och försök igen"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:327
+msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr "Kan inte ändra spelarens stam. Spelaren är refererad på någon plats. Ta bort alla byggnader, bobs, utlösare och händelser som berör denna spelaren och försök igen"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:61
+msgid "New Variable"
+msgstr "Ny variabel"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:73
+msgid "Integer"
+msgstr "Integer"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:80
+msgid "String"
+msgstr "Sträng"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:162
+msgid "Edit Variable"
+msgstr "Redigera variabel"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:171
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:299
+msgid "Value"
+msgstr "Värde"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:227
+msgid "is not a valid integer!"
+msgstr "Är inte en giltig integer!"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:229
+#, fuzzy
+msgid "Parse error!"
+msgstr "Parse fel!"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:265
+msgid "Variables Menu"
+msgstr "Variabelmeny"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:276
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:191
+msgid "New"
+msgstr "Ny"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:298
+msgid "Variable"
+msgstr "Variabel"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:45
+msgid "Tool Menu"
+msgstr "Verktygsmeny"
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:43
 #, fuzzy
 msgid "Allow Building Event Options"
 msgstr "Alternativ för: tillåt konstruktion Händelse"
 
-#: ../src/editor/ui_menus/event_allow_building_option_menu.cc:117
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:99
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:98
+msgid "Building: "
+msgstr "Byggnad: "
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:116
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:115
+msgid "Headquarters"
+msgstr "Huvudkvarter"
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:120
 msgid "Allow Building: "
 msgstr "Tillåt Byggnad: "
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:39
-msgid "Edit Trigger Conditional"
-msgstr "Redigera Utlösare Villkorlig"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:210
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:403
+msgid "<invalid player tribe>"
+msgstr "<otillåten stam>"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:53
-msgid "Trigger Conditional: "
-msgstr "Utlösare Villkorlig: "
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:43
+msgid "Message Box Event Options"
+msgstr "Händelse alternativ, meddelanderuta"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:69
-msgid "("
-msgstr ""
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:57
+msgid "Button 1"
+msgstr "Knapp 1"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:81
-msgid ")"
-msgstr ""
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:58
+msgid "Button 2"
+msgstr "Knapp 2"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:93
-msgid "AND"
-msgstr ""
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:59
+msgid "Button 3"
+msgstr "Knapp 3"
 
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:105
-msgid "OR"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:117
-msgid "XOR"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:129
-msgid "NOT"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:138
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:96
-msgid "<-"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:266
-msgid "Syntax Error"
-msgstr "Syntaxfel"
-
-#: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:267
-msgid "Your conditional contains at least one syntax error. Please correct!\n"
-msgstr ""
-"Ditt villkor innehåller minst ett syntax fel. Var vänlig, rätta till det!\n"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:53
-msgid "Allowed Buildings"
-msgstr "Tillåtna byggnader"
-
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:59
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:70
 #, fuzzy
-msgid "Allowed Buildings:"
-msgstr "Tillåtna byggnader: "
+msgid "Is Modal: "
+msgstr "Är Modal: "
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:77
+msgid "Window Title:"
+msgstr "Fönstertitel:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:83
+msgid "Text:"
+msgstr "Text:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:90
+msgid "Number of Buttons: "
+msgstr "Antal knappar: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:112
+msgid "Button Name: "
+msgstr "Knappnamn: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:122
+msgid "Select Trigger: "
+msgstr "Välj utlösare"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:140
+msgid "Current: "
+msgstr "Nuvarande: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:141
+msgid "No trigger selected!"
+msgstr "Ingen utlösare vald!"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:115
+msgid "Exit Editor"
+msgstr "Stäng Redigerare"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:45
+msgid "Terrain Select"
+msgstr "Terrängval"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:205
 #, fuzzy
-msgid "Forbidden Buildings:"
-msgstr "Förbjudna byggnader: "
+msgid "Current:"
+msgstr "Nuvarande: "
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:86
-msgid "Forbid"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:70
+msgid "Edit Objective"
+msgstr "Redigera Mål"
 
-#: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:97
-msgid "Allow"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:85
+msgid "Visible at Begin: "
+msgstr "Synlig vid start: "
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:59
-msgid "Apply"
-msgstr "Verkställ"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:90
+msgid "Optional Objective: "
+msgstr "Valfria Mål"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
-msgid "General Options"
-msgstr "Alternativ"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:96
+msgid "Objective text: "
+msgstr "Mål: "
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
-msgid "Fullscreen"
-msgstr "Fullskärm"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:178
+msgid "Optional"
+msgstr "Valfri"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:70
-msgid "Grab Input"
-msgstr "Fäst musen"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:179
+msgid "Visible"
+msgstr "Synlig"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
-msgid "Enable Music"
-msgstr "Aktivera musik"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:218
+msgid "Trigger: "
+msgstr "Utlösare: "
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
-msgid "Enable Sound"
-msgstr "Aktivera ljud"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:255
+#, fuzzy, c-format
+msgid "Unnamed%u"
+msgstr "Okänd"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
-msgid "In-game resolution"
-msgstr "Upplösning under spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:85
-msgid "Language"
-msgstr "Språk"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:89
-msgid "In-game Options"
-msgstr "I spel, alternativ"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:95
-msgid "Use single Watchwindow Mode"
-msgstr "Använd ett Se-fönster"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
-msgid "Show buildings area preview"
-msgstr "Visa effektiv area"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:103
-msgid "Snap windows only when overlapping"
-msgstr "Fäst endast fönster vid överlappning"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:107
-msgid "Dock windows to edges"
-msgstr "Fäst fönster på kanter"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:169
-msgid "System default language"
-msgstr "Systemets förvalda språk"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:42
-msgid "Tutorial Campaign: A new Kingdom"
-msgstr "Lärdig Kampanj: Ett nytt kungadöme"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:51
-msgid "Mission 1: Eyes in the Darkness - Game Basics"
-msgstr "Uppdrag 1: Ögon i mörkret - Spelgrunder"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:58
-msgid ""
-"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
-msgstr ""
-"Uppdrag 2: En plats att kalla hem - Gruvdrift, Expansion, Avancerade "
-"produktioner"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:65
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:285
 #, fuzzy
-msgid "Empire Tutorial Campaign"
-msgstr "Lärdig Kampanj"
+msgid "Can't delete Objective, because it's trigger is in use by "
+msgstr "Kan inte ta bort Mål, målets utlösare används av "
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:74
-msgid "Empire 1: The Strands of Malac' Mor"
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:41
+#, fuzzy
+msgid "Building Trigger Options"
+msgstr "Byggnads Utlösare Alternativ"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:119
+msgid "How many: "
+msgstr "Hur många: "
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:36
+#, fuzzy
+msgid "Trigger Option Menu"
+msgstr "Menyn, Utlösare Alternativ"
+
+#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:44
+#, fuzzy
+msgid "Bobs Menu"
+msgstr "Bobs Meny"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:43
+msgid "Edit Event Chain"
+msgstr "Redigera händelsekedja"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:61
+msgid "Runs multiple times"
+msgstr "Körs flera gånger"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:68
+msgid "Events: "
+msgstr "Händelser: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:82
+#, fuzzy
+msgid "Conditional"
+msgstr "Villkorlig"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:123
+msgid "Up"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:81
-msgid "Empire 2: An outpost for exile"
-msgstr ""
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:48
-msgid "Choose your map!"
-msgstr "Välj din karta!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:52
-msgid "Load Map as scenario: "
-msgstr "Ladda karta som scenario: "
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:71
-msgid "Players:"
-msgstr "Spelare:"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:73
-msgid "Descr:"
-msgstr "Beskr:"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:29
-msgid "Single Player Menu"
-msgstr "Menyn En spelare"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
-#, fuzzy
-msgid "New Game"
-msgstr "Spara spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
-#, fuzzy
-msgid "Campaigns"
-msgstr "Lärdig Kampanj"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
-msgid "Begin Network Game"
-msgstr "Börja nätverksspel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
-msgid "Join a Game"
-msgstr "Anslut till spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:46
-msgid "Host a New Game"
-msgstr "Var värd för nytt spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:53
-msgid "Play in Internet"
-msgstr "Spela på Internet"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:77
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:213
-msgid "LAN games"
-msgstr "Nätverks-spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:85
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:53
-msgid "nobody"
-msgstr "ingen"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:86
-msgid "Host"
-msgstr "Värd"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:88
-msgid "State"
-msgstr "Status"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:138
-msgid "Open"
-msgstr "Öppen"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
-msgid "Closed"
-msgstr "Stängd"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:206
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:228
-msgid "GGZ games"
-msgstr "GGZ spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:46
-msgid "Launch Game"
-msgstr "Starta spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:60
-msgid "Start game"
-msgstr "Starta spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:71
-msgid "Select map"
-msgstr "Välj karta"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:138
-msgid "(no map)"
-msgstr "(ingen karta)"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:55
-msgid "Choose saved game!"
-msgstr "Välj sparat spel!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:60
-msgid "Gametime:"
-msgstr "Speltid:"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
-msgid "Single Player"
-msgstr "En spelare"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
-msgid "Multi Player"
-msgstr "Flera spelare"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-msgid "Editor"
-msgstr "Redigera"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:84
-msgid "Exit Game"
-msgstr "Avsluta spel"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:87
-msgid "Version"
-msgstr ""
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:91
-#, fuzzy
-msgid "(C) 2002-2007 by the Widelands Development Team"
-msgstr "(C) 2002-2006 av Widelands utvecklingslag"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
-msgid "Lobby"
-msgstr "Lobby"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:181
-#, c-format
-msgid "User %s is using \"%s\" in room \"%s\"\n"
-msgstr "Användaren %s använder \"%s\" i rummet \"%s\"\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:216
-#, c-format
-msgid "User %s has entered the room %s !\n"
-msgstr "Användaren %s har kommit in i rummet %s !\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:216
-#, c-format
-msgid "User %s has left the room %s !\n"
-msgstr "Användaren %s har lämnat rummet %s !\n"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:232
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:244
-msgid "Critical Connection Error!"
-msgstr "Kritiskt anslutningsfel!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:245
-msgid "Server disconnected unexpectedly!"
-msgstr "Servern tappade kontakten!"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
-msgid "Internet Options"
-msgstr "Internet-inställningar"
-
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:38
-msgid "Run Game"
-msgstr "Starta spel"
-
-#: ../src/event_conquer_area.h:32
-msgid "Conquer Area"
-msgstr "Erövra område"
-
-#: ../src/event_unhide_area.h:32
-msgid "Unhide Area"
-msgstr "Visa area"
-
-#: ../src/map_objective_manager.h:52
+#: ../../src/map_objective_manager.h:53
 msgid "no descr"
 msgstr "ingen beskr"
+
+#~ msgid "Usage: "
+#~ msgstr "Användning: "
+
+#~ msgid "3) Down Terrain Info\n"
+#~ msgstr "3) Nedre terräng info\n"
+
+#~ msgid "Tutorial Campaign: A new Kingdom"
+#~ msgstr "Lärdig Kampanj: Ett nytt kungadöme"
+
+#~ msgid "Mission 1: Eyes in the Darkness - Game Basics"
+#~ msgstr "Uppdrag 1: Ögon i mörkret - Spelgrunder"
+
+#~ msgid "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+#~ msgstr "Uppdrag 2: En plats att kalla hem - Gruvdrift, Expansion, Avancerade produktioner"
+
+#, fuzzy
+#~ msgid "Empire Tutorial Campaign"
+#~ msgstr "Lärdig Kampanj"
 
 #~ msgid "Testtext"
 #~ msgstr "Testtext"
@@ -1981,30 +2319,6 @@ msgstr "ingen beskr"
 #~ msgid "Set Tool Size Menu"
 #~ msgstr "Ställ in verktygsstorleks meny"
 
-#~ msgid ""
-#~ "This Trigger waits a certain time before it is true. It can be configured "
-#~ "to constantly restart itself when the wait time is over for repeating "
-#~ "events"
-#~ msgstr ""
-#~ "Denna Utlösare väntar en viss tid innan den blir aktiv. Den kan "
-#~ "konfigureras att starta om sig själv när tiden är ute, för att repetera "
-#~ "händelsen"
-
-#, fuzzy
-#~ msgid ""
-#~ "This Trigger never changes its state by itself. It is useful to pass it "
-#~ "to some event which changes triggers"
-#~ msgstr ""
-#~ "Denna utlösare ändrar aldrig sin egen status. Den kan vara bra att "
-#~ "använda till händelser som ändrar utlösare"
-
-#~ msgid ""
-#~ "This trigger gets set when a number of a building type of one player is "
-#~ "available in an area."
-#~ msgstr ""
-#~ "Denna Utlösare sätts på när ett visst antal byggnader finns inom en viss "
-#~ "area."
-
 #~ msgid "greenland"
 #~ msgstr "grönland"
 
@@ -2013,39 +2327,6 @@ msgstr "ingen beskr"
 
 #~ msgid "winterland"
 #~ msgstr "vinterland"
-
-#, fuzzy
-#~ msgid ""
-#~ "This Event shows a messagebox. The user can choose to make it modal/non-"
-#~ "modal and to add a picture. Events can be assigned to each button to use "
-#~ "this as a Choose Dialog for the user"
-#~ msgstr ""
-#~ "Denna Händelse visar en meddelanderuta. Användaren kan välja att göra den "
-#~ "modal/inte-modal och lägga till en bild. Händelser kan hänvisas till "
-#~ "varje knapp för användaren att använda detta som en Välj Dialog."
-
-#~ msgid "This Event centers the Players View on a certain field"
-#~ msgstr "Denna händelsen centrerar spelarens vy på ett särskilt fält"
-
-#, fuzzy
-#~ msgid ""
-#~ "This Event makes a user definable part of the map visible for a "
-#~ "selectable user"
-#~ msgstr ""
-#~ "Denna Händelse gör en användardefinierad del av kartan synlig för en "
-#~ "valbar användare"
-
-#~ msgid ""
-#~ "This Event conquers a user definable part of the map for one player if "
-#~ "there isn't a player already there"
-#~ msgstr ""
-#~ "Denna händelsen övertar en användar definierad del av kartan för en "
-#~ "spelare, om där inte finns en spelare där redan"
-
-#~ msgid ""
-#~ "Allows/Disables a certain building for a player so that it can be build "
-#~ "or it can't any longer"
-#~ msgstr "Tillåter/Nekar en spelare att bygga en viss byggnad"
 
 #~ msgid "Manually set a Null Trigger to a given value"
 #~ msgstr "Sätt manuellt en Nollställa Utlösare till ett givet värde"

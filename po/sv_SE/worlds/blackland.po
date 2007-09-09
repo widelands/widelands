@@ -1,17 +1,12 @@
-# translation of world_blackland_sv_SE.po to swedish
-# translation of world_greenland_sv_SE.po to Swedish
-# Swedish translation of widelands.
-# Copyright (C) 2005 THE widelands'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the widelands package.
+# Widelands po/sv_SE/worlds/blackland.po
+# Copyright (C) 2007 Widelands Development Team.
 # Daniel Nylander <po@danielnylander.se>, 2005.
-# Fredrik Pettersson <luno@iaofredde.net>, 2006.
-# 
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: world_blackland_sv_SE\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2006-07-02 00:40+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -22,132 +17,138 @@ msgstr ""
 "X-Poedit-Country: swe\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: ../worlds/blackland/bobs/bunny/conf:1
+#: ../../../worlds/blackland/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Kanin"
 
-#: ../worlds/blackland/bobs/bush1/conf:1 ../worlds/blackland/bobs/bush2/conf:1
-#: ../worlds/blackland/bobs/bush3/conf:1 ../worlds/blackland/bobs/bush4/conf:1
-#: ../worlds/blackland/bobs/bush5/conf:1
+#: ../../../worlds/blackland/bobs/bush1/conf:1
+#: ../../../worlds/blackland/bobs/bush2/conf:1
+#: ../../../worlds/blackland/bobs/bush3/conf:1
+#: ../../../worlds/blackland/bobs/bush4/conf:1
+#: ../../../worlds/blackland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Buske"
 
-#: ../worlds/blackland/bobs/cactus1/conf:1
-#: ../worlds/blackland/bobs/cactus2/conf:1
+#: ../../../worlds/blackland/bobs/cactus1/conf:1
+#: ../../../worlds/blackland/bobs/cactus2/conf:1
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../worlds/blackland/bobs/deadtree1/conf:1
-#: ../worlds/blackland/bobs/deadtree2/conf:1
-#: ../worlds/blackland/bobs/deadtree3/conf:1
-#: ../worlds/blackland/bobs/deadtree4/conf:1
+#: ../../../worlds/blackland/bobs/deadtree1/conf:1
+#: ../../../worlds/blackland/bobs/deadtree2/conf:1
+#: ../../../worlds/blackland/bobs/deadtree3/conf:1
+#: ../../../worlds/blackland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Dött träd"
 
-#: ../worlds/blackland/bobs/deer/conf:1
+#: ../../../worlds/blackland/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Hjort"
 
-#: ../worlds/blackland/bobs/duck/conf:1
+#: ../../../worlds/blackland/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Anka"
 
-#: ../worlds/blackland/bobs/fox/conf:1
+#: ../../../worlds/blackland/bobs/fox/conf:1
 msgid "Fox"
 msgstr "Räv"
 
-#: ../worlds/blackland/bobs/grass1/conf:1
-#: ../worlds/blackland/bobs/grass2/conf:1
-#: ../worlds/blackland/bobs/grass3/conf:1
+#: ../../../worlds/blackland/bobs/grass1/conf:1
+#: ../../../worlds/blackland/bobs/grass2/conf:1
+#: ../../../worlds/blackland/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Gräs"
 
-#: ../worlds/blackland/bobs/mushroom1/conf:1
-#: ../worlds/blackland/bobs/mushroom2/conf:1
+#: ../../../worlds/blackland/bobs/mushroom1/conf:1
+#: ../../../worlds/blackland/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Svamp"
 
-#: ../worlds/blackland/bobs/pebble1/conf:1
-#: ../worlds/blackland/bobs/pebble2/conf:1
-#: ../worlds/blackland/bobs/pebble3/conf:1
-#: ../worlds/blackland/bobs/pebble4/conf:1
-#: ../worlds/blackland/bobs/pebble5/conf:1
-#: ../worlds/blackland/bobs/pebble6/conf:1
+#: ../../../worlds/blackland/bobs/pebble1/conf:1
+#: ../../../worlds/blackland/bobs/pebble2/conf:1
+#: ../../../worlds/blackland/bobs/pebble3/conf:1
+#: ../../../worlds/blackland/bobs/pebble4/conf:1
+#: ../../../worlds/blackland/bobs/pebble5/conf:1
+#: ../../../worlds/blackland/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Småsten"
 
-#: ../worlds/blackland/bobs/reindeer/conf:1
+#: ../../../worlds/blackland/bobs/reindeer/conf:1
 msgid "Reindeer"
 msgstr "Ren"
 
-#: ../worlds/blackland/bobs/sheep/conf:1
+#: ../../../worlds/blackland/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Får"
 
-#: ../worlds/blackland/bobs/skeleton1/conf:1
-#: ../worlds/blackland/bobs/skeleton2/conf:1
-#: ../worlds/blackland/bobs/skeleton3/conf:1
+#: ../../../worlds/blackland/bobs/skeleton1/conf:1
+#: ../../../worlds/blackland/bobs/skeleton2/conf:1
+#: ../../../worlds/blackland/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Skelett"
 
-#: ../worlds/blackland/bobs/sstones1/conf:1
-#: ../worlds/blackland/bobs/sstones2/conf:1
-#: ../worlds/blackland/bobs/sstones3/conf:1
-#: ../worlds/blackland/bobs/sstones4/conf:1
-#: ../worlds/blackland/bobs/sstones5/conf:1
-#: ../worlds/blackland/bobs/sstones6/conf:1
-#: ../worlds/blackland/bobs/sstones7/conf:1
+#: ../../../worlds/blackland/bobs/sstones1/conf:1
+#: ../../../worlds/blackland/bobs/sstones2/conf:1
+#: ../../../worlds/blackland/bobs/sstones3/conf:1
+#: ../../../worlds/blackland/bobs/sstones4/conf:1
+#: ../../../worlds/blackland/bobs/sstones5/conf:1
+#: ../../../worlds/blackland/bobs/sstones6/conf:1
+#: ../../../worlds/blackland/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Stående stenar"
 
-#: ../worlds/blackland/bobs/stones1/conf:1
-#: ../worlds/blackland/bobs/stones2/conf:1
-#: ../worlds/blackland/bobs/stones3/conf:1
-#: ../worlds/blackland/bobs/stones4/conf:1
-#: ../worlds/blackland/bobs/stones5/conf:1
-#: ../worlds/blackland/bobs/stones6/conf:1
+#: ../../../worlds/blackland/bobs/stones1/conf:1
+#: ../../../worlds/blackland/bobs/stones2/conf:1
+#: ../../../worlds/blackland/bobs/stones3/conf:1
+#: ../../../worlds/blackland/bobs/stones4/conf:1
+#: ../../../worlds/blackland/bobs/stones5/conf:1
+#: ../../../worlds/blackland/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Stenar"
 
-#: ../worlds/blackland/bobs/tree1/conf:4 ../worlds/blackland/bobs/tree2/conf:4
-#: ../worlds/blackland/bobs/tree3/conf:4 ../worlds/blackland/bobs/tree4/conf:4
-#: ../worlds/blackland/bobs/tree5/conf:4 ../worlds/blackland/bobs/tree6/conf:4
-#: ../worlds/blackland/bobs/tree7/conf:4 ../worlds/blackland/bobs/tree8/conf:4
+#: ../../../worlds/blackland/bobs/tree1/conf:4
+#: ../../../worlds/blackland/bobs/tree2/conf:4
+#: ../../../worlds/blackland/bobs/tree3/conf:4
+#: ../../../worlds/blackland/bobs/tree4/conf:4
+#: ../../../worlds/blackland/bobs/tree5/conf:4
+#: ../../../worlds/blackland/bobs/tree6/conf:4
+#: ../../../worlds/blackland/bobs/tree7/conf:4
+#: ../../../worlds/blackland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Trä"
 
-#: ../worlds/blackland/conf:2
+#: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
 msgstr "Widelands utvecklingslag"
 
-#: ../worlds/blackland/conf:3
+#: ../../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Svartland"
 
-#: ../worlds/blackland/conf:4
+#: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
 msgstr "Detta är de gråa, hemska och farliga Svartland"
 
-#: ../worlds/blackland/resconf:4
+#: ../../../worlds/blackland/resconf:4
 msgid "Coal"
 msgstr "Kol"
 
-#: ../worlds/blackland/resconf:12
+#: ../../../worlds/blackland/resconf:12
 msgid "Gold"
 msgstr "Guld"
 
-#: ../worlds/blackland/resconf:20
+#: ../../../worlds/blackland/resconf:20
 msgid "Iron"
 msgstr "Järn"
 
-#: ../worlds/blackland/resconf:28
+#: ../../../worlds/blackland/resconf:28
 msgid "Granit"
 msgstr "Sten"
 
-#: ../worlds/blackland/resconf:36
+#: ../../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "Vatten"
 
-#: ../worlds/blackland/resconf:41
+#: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Fisk"

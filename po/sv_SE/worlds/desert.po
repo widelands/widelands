@@ -1,17 +1,12 @@
-# translation of world_desert_sv_SE.po to swedish
-# translation of world_greenland_sv_SE.po to Swedish
-# Swedish translation of widelands.
-# Copyright (C) 2005 THE widelands'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the widelands package.
+# Widelands po/sv_SE/worlds/desert.po
+# Copyright (C) 2007 Widelands Development Team.
 # Daniel Nylander <po@danielnylander.se>, 2005.
-# Fredrik Pettersson <luno@iaofredde.net>, 2006.
-# 
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: world_desert_sv_SE\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2006-07-02 00:42+0200\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -22,131 +17,152 @@ msgstr ""
 "X-Poedit-Country: swe\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: ../worlds/desert/bobs/bunny/conf:1
+#: ../../../worlds/desert/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Kanin"
 
-#: ../worlds/desert/bobs/bush1/conf:1 ../worlds/desert/bobs/bush4/conf:1
-#: ../worlds/desert/bobs/bush5/conf:1
+#: ../../../worlds/desert/bobs/bush1/conf:1
+#: ../../../worlds/desert/bobs/bush4/conf:1
+#: ../../../worlds/desert/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Buske"
 
-#: ../worlds/desert/bobs/cactus1/conf:1 ../worlds/desert/bobs/cactus2/conf:1
-#: ../worlds/desert/bobs/cactus3/conf:1 ../worlds/desert/bobs/cactus4/conf:1
+#: ../../../worlds/desert/bobs/cactus1/conf:1
+#: ../../../worlds/desert/bobs/cactus2/conf:1
+#: ../../../worlds/desert/bobs/cactus3/conf:1
+#: ../../../worlds/desert/bobs/cactus4/conf:1
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../worlds/desert/bobs/deadtree1/conf:1
-#: ../worlds/desert/bobs/deadtree2/conf:1
-#: ../worlds/desert/bobs/deadtree3/conf:1
-#: ../worlds/desert/bobs/deadtree4/conf:1
+#: ../../../worlds/desert/bobs/deadtree1/conf:1
+#: ../../../worlds/desert/bobs/deadtree2/conf:1
+#: ../../../worlds/desert/bobs/deadtree3/conf:1
+#: ../../../worlds/desert/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Dött träd"
 
-#: ../worlds/desert/bobs/deer/conf:1
+#: ../../../worlds/desert/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Hjort"
 
-#: ../worlds/desert/bobs/duck/conf:1
+#: ../../../worlds/desert/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Anka"
 
-#: ../worlds/desert/bobs/fox/conf:1
-msgid "Desert Fox"
-msgstr "Ökenräv"
+#: ../../../worlds/desert/bobs/fox/conf:1
+msgid "Fox"
+msgstr ""
 
-#: ../worlds/desert/bobs/grass1/conf:1 ../worlds/desert/bobs/grass2/conf:1
-#: ../worlds/desert/bobs/grass3/conf:1
+#: ../../../worlds/desert/bobs/grass1/conf:1
+#: ../../../worlds/desert/bobs/grass2/conf:1
+#: ../../../worlds/desert/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Gräs"
 
-#: ../worlds/desert/bobs/mushroom1/conf:1
-#: ../worlds/desert/bobs/mushroom2/conf:1
+#: ../../../worlds/desert/bobs/mushroom1/conf:1
+#: ../../../worlds/desert/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Svamp"
 
-#: ../worlds/desert/bobs/pebble1/conf:1 ../worlds/desert/bobs/pebble2/conf:1
-#: ../worlds/desert/bobs/pebble3/conf:1 ../worlds/desert/bobs/pebble4/conf:1
-#: ../worlds/desert/bobs/pebble5/conf:1 ../worlds/desert/bobs/pebble6/conf:1
+#: ../../../worlds/desert/bobs/pebble1/conf:1
+#: ../../../worlds/desert/bobs/pebble2/conf:1
+#: ../../../worlds/desert/bobs/pebble3/conf:1
+#: ../../../worlds/desert/bobs/pebble4/conf:1
+#: ../../../worlds/desert/bobs/pebble5/conf:1
+#: ../../../worlds/desert/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Småsten"
 
-#: ../worlds/desert/bobs/ruin1/conf:1 ../worlds/desert/bobs/ruin2/conf:1
-#: ../worlds/desert/bobs/ruin3/conf:1 ../worlds/desert/bobs/ruin4/conf:1
-#: ../worlds/desert/bobs/ruin5/conf:1
+#: ../../../worlds/desert/bobs/ruin1/conf:1
+#: ../../../worlds/desert/bobs/ruin2/conf:1
+#: ../../../worlds/desert/bobs/ruin3/conf:1
+#: ../../../worlds/desert/bobs/ruin4/conf:1
+#: ../../../worlds/desert/bobs/ruin5/conf:1
 msgid "ruins"
 msgstr "ruiner"
 
-#: ../worlds/desert/bobs/sheep/conf:1
+#: ../../../worlds/desert/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Får"
 
-#: ../worlds/desert/bobs/skeleton1/conf:1
-#: ../worlds/desert/bobs/skeleton2/conf:1
-#: ../worlds/desert/bobs/skeleton3/conf:1
+#: ../../../worlds/desert/bobs/skeleton1/conf:1
+#: ../../../worlds/desert/bobs/skeleton2/conf:1
+#: ../../../worlds/desert/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Skelett"
 
-#: ../worlds/desert/bobs/skeleton4/conf:1
+#: ../../../worlds/desert/bobs/skeleton4/conf:1
 msgid "Shell"
 msgstr "Snäckskal"
 
-#: ../worlds/desert/bobs/sstones1/conf:1 ../worlds/desert/bobs/sstones2/conf:1
-#: ../worlds/desert/bobs/sstones3/conf:1 ../worlds/desert/bobs/sstones4/conf:1
-#: ../worlds/desert/bobs/sstones5/conf:1 ../worlds/desert/bobs/sstones6/conf:1
-#: ../worlds/desert/bobs/sstones7/conf:1
+#: ../../../worlds/desert/bobs/sstones1/conf:1
+#: ../../../worlds/desert/bobs/sstones2/conf:1
+#: ../../../worlds/desert/bobs/sstones3/conf:1
+#: ../../../worlds/desert/bobs/sstones4/conf:1
+#: ../../../worlds/desert/bobs/sstones5/conf:1
+#: ../../../worlds/desert/bobs/sstones6/conf:1
+#: ../../../worlds/desert/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Stående stenar"
 
-#: ../worlds/desert/bobs/stones1/conf:1 ../worlds/desert/bobs/stones2/conf:1
-#: ../worlds/desert/bobs/stones3/conf:1 ../worlds/desert/bobs/stones4/conf:1
-#: ../worlds/desert/bobs/stones5/conf:1 ../worlds/desert/bobs/stones6/conf:1
+#: ../../../worlds/desert/bobs/stones1/conf:1
+#: ../../../worlds/desert/bobs/stones2/conf:1
+#: ../../../worlds/desert/bobs/stones3/conf:1
+#: ../../../worlds/desert/bobs/stones4/conf:1
+#: ../../../worlds/desert/bobs/stones5/conf:1
+#: ../../../worlds/desert/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Stenar"
 
-#: ../worlds/desert/bobs/tree1/conf:4
+#: ../../../worlds/desert/bobs/tree1/conf:4
 msgid "Palm"
 msgstr "Palm"
 
-#: ../worlds/desert/bobs/tree2/conf:4 ../worlds/desert/bobs/tree3/conf:4
-#: ../worlds/desert/bobs/tree4/conf:4 ../worlds/desert/bobs/tree5/conf:4
-#: ../worlds/desert/bobs/tree6/conf:4 ../worlds/desert/bobs/tree7/conf:4
-#: ../worlds/desert/bobs/tree8/conf:4
+#: ../../../worlds/desert/bobs/tree2/conf:4
+#: ../../../worlds/desert/bobs/tree3/conf:4
+#: ../../../worlds/desert/bobs/tree4/conf:4
+#: ../../../worlds/desert/bobs/tree5/conf:4
+#: ../../../worlds/desert/bobs/tree6/conf:4
+#: ../../../worlds/desert/bobs/tree7/conf:4
+#: ../../../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Trä"
 
-#: ../worlds/desert/conf:2
+#: ../../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
 msgstr "Widelands utvecklingslag"
 
-#: ../worlds/desert/conf:3
+#: ../../../worlds/desert/conf:3
 msgid "Desert"
 msgstr "Öken"
 
-#: ../worlds/desert/conf:4
+#: ../../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
 msgstr "Detta är Bedouinernas vida och torra land"
 
-#: ../worlds/desert/resconf:4
+#: ../../../worlds/desert/resconf:4
 msgid "Coal"
 msgstr "Kol"
 
-#: ../worlds/desert/resconf:12
+#: ../../../worlds/desert/resconf:12
 msgid "Gold"
 msgstr "Guld"
 
-#: ../worlds/desert/resconf:20
+#: ../../../worlds/desert/resconf:20
 msgid "Iron"
 msgstr "Järn"
 
-#: ../worlds/desert/resconf:28
+#: ../../../worlds/desert/resconf:28
 msgid "Granit"
 msgstr "Sten"
 
-#: ../worlds/desert/resconf:36
+#: ../../../worlds/desert/resconf:36
 msgid "Water"
 msgstr "Vatten"
 
-#: ../worlds/desert/resconf:41
+#: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "Fisk"
+
+#~ msgid "Desert Fox"
+#~ msgstr "Ökenräv"
