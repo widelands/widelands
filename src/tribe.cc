@@ -459,8 +459,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 			 it != startsoldiers_end;
 			 ++it)
 		{
-      std::vector<std::string> list;
-		split_string(it->first, list, "/");
+			const std::vector<std::string> list(split_string(it->first, "/"));
 
 			if (list.size() != 4)
 				throw wexception
@@ -486,8 +485,7 @@ void Tribe_Descr::load_warehouse_with_start_wares
 		for (int i = 0; i < it->second; ++i) {
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
 				Soldier & soldier = static_cast<Soldier &>
-					(*soldierd->create
-					 (game, wh.get_owner(), &wh, wh.get_position()));
+					(soldierd->create(*game, wh.owner(), wh, wh.get_position()));
             soldier.set_level(hplvl, attacklvl, defenselvl, evadelvl);
 				wh.incorporate_worker(game, &soldier);
 			}

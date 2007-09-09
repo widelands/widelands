@@ -80,14 +80,18 @@ const WorkerProgram* Worker_Descr::get_program(std::string programname) const
 /**
  * Custom creation routing that accounts for the location.
  */
-Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner,
-                             PlayerImmovable *location, Coords coords)
+Worker & Worker_Descr::create
+(Editor_Game_Base & egbase,
+ Player           & owner,
+ PlayerImmovable  & location,
+ const Coords       coords)
+const
 {
-	Worker *worker = (Worker*)create_object();
-	worker->set_owner(owner);
-	worker->set_location(location);
-	worker->set_position(gg, coords);
-	worker->init(gg);
+	Worker & worker = dynamic_cast<Worker &>(*create_object());
+	worker.set_owner(&owner);
+	worker.set_location(&location);
+	worker.set_position(&egbase, coords);
+	worker.init(&egbase);
 	return worker;
 }
 
@@ -149,13 +153,11 @@ void Worker_Descr::parse(const char *directory, Profile *prof,
 	std::string exp=sglobal->get_string("experience", "");
 	m_min_experience=m_max_experience=-1;
 	if (exp.size()) {
-		std::vector<std::string> list;
-		split_string(exp, list, "-");
+		std::vector<std::string> list(split_string(exp, "-"));
 		if (list.size()!=2)
 			throw wexception("Parse error in experience string: \"%s\" (must be \"min-max\")", exp.c_str());
-		uint i=0;
-		for (i=0; i<list.size(); i++)
-			remove_spaces(&list[i]);
+		remove_spaces(list[0]);
+		remove_spaces(list[1]);
 
 		char* endp;
 		m_min_experience = strtol(list[0].c_str(), &endp, 0);

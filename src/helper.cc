@@ -34,35 +34,32 @@ using std::cout;
 /**
  * split a string by whitespace
  */
-void split_string
-(const std::string & in,
- std::vector<std::string> & plist,
- const char * const separators)
+std::vector<std::string> split_string
+(const std::string & s, const char * const separators)
 {
-	std::string::size_type pos = 0, endpos;
-
-	while (pos != std::string::npos) {
-		pos = in.find_first_not_of(separators, pos);
-		if (pos == std::string::npos)
-			break;
-
-		endpos = in.find_first_of(separators, pos);
-
-		plist.push_back(in.substr(pos, endpos - pos));
-
-		pos = endpos;
+	std::vector<std::string> result;
+	for
+		(std::string::size_type pos = 0, endpos;
+		 (pos = s.find_first_not_of(separators, pos)) != std::string::npos;
+		 pos = endpos)
+	{
+		endpos = s.find_first_of(separators, pos);
+		result.push_back(s.substr(pos, endpos - pos));
 	}
+	return result;
 }
 
 /**
  * remove spaces at the beginning or the end of a string
  */
-void remove_spaces(std::string* in) {
-	while (((*in)[0])==' ' || ((*in)[0])=='\t' || ((*in)[0])=='\n')
-		in->erase(0, 1);
+void remove_spaces(std::string & s) {
+	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n') s.erase(0, 1);
 
-	while (((*in)[in->size()-1])==' ' || ((*in)[in->size()-1])=='\t' || ((*in)[in->size()-1])=='\n')
-		in->erase(in->size()-1, 1);
+	while
+		(s[s.size() - 1] == ' '  or
+		 s[s.size() - 1] == '\t' or
+		 s[s.size() - 1] == '\n')
+		s.erase(s.size() - 1, 1);
 }
 
 /**

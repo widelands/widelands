@@ -177,8 +177,7 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 
 	molog("  SetDescription: %s\n", action->sparamv[idx].c_str());
 
-	std::vector<std::string> list;
-	split_string(action->sparamv[idx], list, ":");
+	const std::vector<std::string> list(split_string(action->sparamv[idx], ":"));
 	std::string bob;
 	if (list.size()==1) {
 		state->svar1 = "world";
@@ -220,8 +219,7 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 
 	molog("  SetBobDescription: %s\n", action->sparamv[idx].c_str());
 
-	std::vector<std::string> list;
-	split_string(action->sparamv[idx], list, ":");
+	const std::vector<std::string> list(split_string(action->sparamv[idx], ":"));
 	std::string bob;
 	if (list.size()==1) {
 		state->svar1 = "world";

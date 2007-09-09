@@ -54,15 +54,11 @@ void Resource_Descr::parse(Section *s, std::string basedir)
    m_is_detectable=s->get_bool("detectable", true);
 
    m_max_amount = s->get_safe_int("max_amount");
-   while (s->get_next_string("editor_pic", &string))
-   {
-      std::vector<std::string> args;
+	while (s->get_next_string("editor_pic", &string)) {
       Editor_Pic i;
 
-		split_string(string, args, " \t");
-
-      if (args.size() != 1 && args.size() != 2)
-      {
+		const std::vector<std::string> args(split_string(string, " \t"));
+		if (args.size() != 1 and args.size() != 2) {
          log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
          continue;
 		}
@@ -71,14 +67,12 @@ void Resource_Descr::parse(Section *s, std::string basedir)
       i.picname += args[0];
       i.upperlimit = -1;
 
-      if (args.size() >= 2)
-      {
+		if (args.size() >= 2) {
          char* endp;
 
          i.upperlimit = strtol(args[1].c_str(), &endp, 0);
 
-         if (endp && *endp)
-         {
+			if (endp && *endp) {
             log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
             continue;
 			}
@@ -418,10 +412,11 @@ m_texture           (0)
 
    // Parse valid resources
    std::string str1=s->get_string("resources", "");
-   if (str1!="") {
+	if (str1 != "") {
       int nres=1;
-      uint i=0;
-      while (i < str1.size()) {if (str1[i]==',') {nres++;}  i++;}
+		const std::string::const_iterator str1_end = str1.end();
+		for (std::string::const_iterator it = str1.begin(); it != str1_end; ++it)
+			if (*it == ',') ++nres;
 
       m_nr_valid_resources=nres;
       if (nres==1)
@@ -429,9 +424,9 @@ m_texture           (0)
       else
          m_valid_resources=new uchar[nres];
       std::string curres;
-      i=0;
+		uint i = 0;
       int cur_res=0;
-      while (i<=str1.size()) {
+		while (i <= str1.size()) {
          if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}
          if (str1[i]==',' || i==str1.size()) {
             int res=resources->get_index(curres.c_str());;

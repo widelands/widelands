@@ -50,8 +50,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 		if (!string)
 			break;
 
-		std::vector<std::string> cmd;
-		split_string(string, cmd, " \t\r\n");
+		const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
 		if (!cmd.size())
 			continue;
 
@@ -72,20 +71,25 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
          if (cmd.size() != 2 && cmd.size() != 3)
             throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
-         std::vector<std::string> wares;
-			split_string(cmd[1], wares, ",");
-         uint i;
-         for (i=0; i<wares.size(); i++) {
-            Section* s=prof->get_safe_section("inputs");
-            if (!s->get_string(wares[i].c_str(), 0))
-               throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
-                     cmd[1].c_str());
+			{
+				Section * const section = prof->get_safe_section("inputs");
+				const std::vector<std::string> wares(split_string(cmd[1], ","));
+				const std::vector<std::string>::const_iterator wares_end =
+					wares.end();
+				for
+					(std::vector<std::string>::const_iterator it = wares.begin();
+					 it != wares_end;
+					 ++it)
+					if (not section->get_string(it->c_str(), 0))
+						throw wexception
+							("Line %i: Ware %s is not in [inputs]",
+							 idx, cmd[1].c_str());
 			}
 
          act.type = ProductionAction::actConsume;
          act.sparam1 = cmd[1];
          int how_many=1;
-         if (cmd.size()==3) {
+			if (cmd.size() == 3) {
             char* endp;
             how_many = strtol(cmd[2].c_str(), &endp, 0);
             if (endp && *endp)
@@ -97,19 +101,24 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			if (cmd.size() != 2 && cmd.size() != 3)
 				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
-         std::vector<std::string> wares;
-			split_string(cmd[1], wares, ",");
-         uint i;
-         for (i=0; i<wares.size(); i++) {
-            Section* s=prof->get_safe_section("inputs");
-            if (!s->get_string(wares[i].c_str(), 0))
-               throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
-                     cmd[1].c_str());
+			{
+				Section * const section = prof->get_safe_section("inputs");
+				const std::vector<std::string> wares(split_string(cmd[1], ","));
+				const std::vector<std::string>::const_iterator wares_end =
+					wares.end();
+				for
+					(std::vector<std::string>::const_iterator it = wares.begin();
+					 it != wares_end;
+					 ++it)
+					if (not section->get_string(it->c_str(), 0))
+						throw wexception
+							("Line %i: Ware %s is not in [inputs]",
+							 idx, cmd[1].c_str());
 			}
 			act.type = ProductionAction::actCheck;
 			act.sparam1 = cmd[1];
          int how_many=1;
-         if (cmd.size()==3) {
+			if (cmd.size() == 3) {
             char* endp;
             how_many = strtol(cmd[2].c_str(), &endp, 0);
             if (endp && *endp)
@@ -179,7 +188,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			act.type = ProductionAction::actAnimate;
 
 			// dynamically allocate animations here
-         if (!building->is_animation_known(cmd[1].c_str())) {
+			if (not building->is_animation_known(cmd[1].c_str())) {
             Section* s = prof->get_safe_section(cmd[1].c_str());
             act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
             building->add_animation(cmd[1].c_str(), act.iparam1);

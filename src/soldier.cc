@@ -296,51 +296,61 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	Worker_Descr::parse(directory, prof, encdata);
 	Section* sglobal=prof->get_section("global");
 
-	// Parse hitpoints
-	std::string hp=sglobal->get_safe_string("hp");
-	std::vector<std::string> list;
-	split_string(hp, list, "-");
-	if (list.size() != 2)
-		throw wexception
-			("Parse error in hp string: \"%s\" (must be \"min-max\")", hp.c_str());
-	uint i=0;
-	for (i=0; i<list.size(); i++)
-		remove_spaces(&list[i]);
-	char* endp;
-	m_min_hp= strtol(list[0].c_str(), &endp, 0);
-	if (endp and *endp)
-		throw wexception
-			("Parse error in hp string: %s is a bad value", list[0].c_str());
-	if (0 == m_min_hp)
-		throw wexception
-			("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
-	m_max_hp = strtol(list[1].c_str(), &endp, 0);
-	if (endp and *endp)
-		throw wexception
-			("Parse error in hp string: %s is a bad value", list[1].c_str());
-	if (m_max_hp < m_min_hp)
-		throw wexception
-			("Parse error in hp string: \"%s\" < \"%s\"",
-			 list[1].c_str(), list[0].c_str());
+	{ //  hitpoints
+		const char * const hp = sglobal->get_safe_string("hp");
+		std::vector<std::string> list(split_string(hp, "-"));
+		if (list.size() != 2)
+			throw wexception
+				("Parse error in hp string: \"%s\" (must be \"min-max\")", hp);
+		const std::vector<std::string>::const_iterator list_end = list.end();
+		for
+			(std::vector<std::string>::iterator it = list.begin();
+			 it != list_end;
+			 ++it)
+			remove_spaces(*it);
+		char * endp;
+		m_min_hp= strtol(list[0].c_str(), &endp, 0);
+		if (endp and *endp)
+			throw wexception
+				("Parse error in hp string: %s is a bad value", list[0].c_str());
+		if (0 == m_min_hp)
+			throw wexception
+				("Parse error in hp string: \"%s\" is not positive", list[0].c_str());
+		m_max_hp = strtol(list[1].c_str(), &endp, 0);
+		if (endp and *endp)
+			throw wexception
+				("Parse error in hp string: %s is a bad value", list[1].c_str());
+		if (m_max_hp < m_min_hp)
+			throw wexception
+				("Parse error in hp string: \"%s\" < \"%s\"",
+				 list[1].c_str(), list[0].c_str());
+	}
 
-	// Parse attack
-	std::string attack=sglobal->get_safe_string("attack");
-	list.resize(0);
-	split_string(attack, list, "-");
-	if (list.size() != 2)
-		throw wexception
-			("Parse error in attack string: \"%s\" (must be \"min-max\")",
-			 attack.c_str());
-	for (i=0; i<list.size(); i++)
-		remove_spaces(&list[i]);
-	m_min_attack= strtol(list[0].c_str(), &endp, 0);
-	if (endp and *endp)
-		throw wexception
-			("Parse error in attack string: %s is a bad value", list[0].c_str());
-	m_max_attack = strtol(list[1].c_str(), &endp, 0);
-	if (endp and *endp)
-		throw wexception
-			("Parse error in attack string: %s is a bad value", list[1].c_str());
+	{ //  parse attack
+		const char * const attack = sglobal->get_safe_string("attack");
+		std::vector<std::string> list(split_string(attack, "-"));
+		if (list.size() != 2)
+			throw wexception
+				("Parse error in attack string: \"%s\" (must be \"min-max\")",
+				 attack);
+		const std::vector<std::string>::const_iterator list_end = list.end();
+		for
+			(std::vector<std::string>::iterator it = list.begin();
+			 it != list_end;
+			 ++it)
+			remove_spaces(*it);
+		char * endp;
+		m_min_attack= strtol(list[0].c_str(), &endp, 0);
+		if (endp and *endp)
+			throw wexception
+				("Parse error in attack string: %s is a bad value",
+				 list[0].c_str());
+		m_max_attack = strtol(list[1].c_str(), &endp, 0);
+		if (endp and *endp)
+			throw wexception
+				("Parse error in attack string: %s is a bad value",
+				 list[1].c_str());
+	}
 
 	// Parse defend
 	m_defense=sglobal->get_safe_int("defense");
@@ -368,23 +378,23 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	char buffer[256];
 	std::string dir=directory;
 	dir+="/";
-	for (i=0; i<=m_max_hp_level; i++) {
-		sprintf(buffer, "hp_level_%i_pic", i);
+	for (uint i = 0; i <= m_max_hp_level;      ++i) {
+		snprintf(buffer, sizeof(buffer), "hp_level_%u_pic",      i);
 		m_hp_pics_fn[i]=dir;
 		m_hp_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for (i=0; i<=m_max_attack_level; i++) {
-		sprintf(buffer, "attack_level_%i_pic", i);
+	for (uint i = 0; i <= m_max_attack_level;  ++i) {
+		snprintf(buffer, sizeof(buffer), "attack_level_%u_pic",  i);
 		m_attack_pics_fn[i]=dir;
 		m_attack_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for (i=0; i<=m_max_defense_level; i++) {
-		sprintf(buffer, "defense_level_%i_pic", i);
+	for (uint i = 0; i <= m_max_defense_level; ++i) {
+		snprintf(buffer, sizeof(buffer), "defense_level_%u_pic", i);
 		m_defense_pics_fn[i]=dir;
 		m_defense_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for (i=0; i<=m_max_evade_level; i++) {
-		sprintf(buffer, "evade_level_%i_pic", i);
+	for (uint i = 0; i <= m_max_evade_level;   ++i) {
+		snprintf(buffer, sizeof(buffer), "evade_level_%i_pic",   i);
 		m_evade_pics_fn[i]=dir;
 		m_evade_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}

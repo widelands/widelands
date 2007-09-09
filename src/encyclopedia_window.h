@@ -36,9 +36,9 @@ class Item_Ware_Descr;
 class Tribe_Descr;
 
 struct WareCondition {
-   int amount;
+	uint amount;
    bool isGrouped;
-   int groupId;
+	uint groupId;
 };
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
@@ -55,6 +55,10 @@ private:
 	void fillWares();
 	void wareSelected(uint);
 	void prodSiteSelected(uint);
-	  void createCondTableEntry(int index, std::string wareName, bool consumed, WareCondition* wareCondition);
+	void createCondTableEntry
+		(const uint            index,
+		 const std::string   & wareName,
+		 const bool            consumed,
+		 const WareCondition & wareCondition);
 };
 #endif

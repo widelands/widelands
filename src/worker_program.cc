@@ -55,14 +55,13 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 		{
 			char buf[32];
 			const char* string;
-			std::vector<std::string> cmd;
 
 			snprintf(buf, sizeof(buf), "%i", idx);
 			string = sprogram->get_string(buf, 0);
 			if (!string)
 				break;
 
-			split_string(string, cmd, " \t\r\n");
+			const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
 			if (!cmd.size())
 				continue;
 

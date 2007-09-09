@@ -63,7 +63,7 @@ public:
 		virtual void load_graphics();
 
 		inline bool get_buildable() {return m_buildable;}
-		inline const BuildCost* get_buildcost() {return &m_buildcost;}
+	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
 
 		const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
 		const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
@@ -87,8 +87,8 @@ public:
 		int get_becomes_index() const throw ();
 		bool can_act_as(int ware) const;
 
-		Worker *create(Editor_Game_Base *g, Player *owner,
-		               PlayerImmovable *location, Coords coords);
+	Worker & create
+		(Editor_Game_Base &, Player &, PlayerImmovable &, const Coords) const;
 
 
 protected:

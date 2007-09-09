@@ -369,11 +369,10 @@ void MilitarySite::act(Game* g, uint data)
          s = m_soldiers[i];
 
             // This is for clean up the soldier killed out of the building
-         if (!s ||(s->get_current_hitpoints() == 0))
-         {
+			if (not s or s->get_current_hitpoints() == 0) {
             m_soldiers[i] = m_soldiers[m_soldiers.size() - 1];
             m_soldiers.pop_back();
-            i--;
+            --i;
             continue;
 			}
 
@@ -384,7 +383,7 @@ void MilitarySite::act(Game* g, uint data)
             // Heal action
 
             // I don't like this 'healing' method, but I don't have any idea to do differently ...
-         if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
+			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
             s->heal (total_heal);
 				total_heal -= total_heal / 3;
 		}
@@ -509,10 +508,8 @@ void MilitarySite::change_soldier_capacity(int how)
 			if (how >= static_cast<int>(m_capacity)) m_capacity  = 1;
 			else                                     m_capacity -= how;
 
-         while (m_capacity < m_soldiers.size() + m_soldier_requests.size())
-         {
-            if (m_soldier_requests.size())
-            {
+			while (m_capacity < m_soldiers.size() + m_soldier_requests.size()) {
+				if (m_soldier_requests.size()) {
 	       std::vector<Request*>::iterator it = m_soldier_requests.begin();
 	       for (; it != m_soldier_requests.end() && !(*it)->is_open(); ++it);
 
@@ -523,8 +520,7 @@ void MilitarySite::change_soldier_capacity(int how)
 
 	       m_soldier_requests.erase(it, it+1);
 				}
-            else if (m_soldiers.size())
-            {
+				else if (m_soldiers.size()) {
                Soldier *s = m_soldiers[m_soldiers.size()-1];
                drop_soldier (s->get_serial());
 				}

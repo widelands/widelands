@@ -106,7 +106,7 @@ void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
 void Game_Server_Connection::handle_data() {
    // Check if data is available,
    // we only handle one packet per call
-   if (SDLNet_CheckSockets(m_socketset, 0) > 0) {
+	if (SDLNet_CheckSockets(m_socketset, 0) > 0) {
       // There is data
 
 
@@ -123,15 +123,15 @@ void Game_Server_Connection::handle_data() {
       uint   index = buf.get_32();
       ushort flags = buf.get_16();
 
-      if (IS_ANSWER(flags)) {
-         if (!m_pending_packets.count(index)) {
+		if (IS_ANSWER(flags)) {
+			if (not m_pending_packets.count(index)) {
             log("Game_Server_Connection: WARNING Unknown response packet with id %i, dropped\n", index);
             return;
 			}
 
          Game_Server_Protocol_Packet* pp = m_pending_packets[index];
 
-         if (pp->get_id() != id)  {
+			if (pp->get_id() != id)  {
             log("Game_Server_Connection: WARNING Response packet with wrong id (has: %i, should: %i), dropped\n", pp->get_id(), id);
             return;
 			}
@@ -155,7 +155,7 @@ void Game_Server_Connection::handle_data() {
 					("Game_Server_Connection: WARNING unknown protocol packet id in "
 					 "server request, dropped!\n");
 			}
-         if (pp) {
+			if (pp) {
             pp->recv(this, &buf);
 
             log("Received a server packet: %i, %i\n", id, index);

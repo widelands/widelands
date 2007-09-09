@@ -142,8 +142,6 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 	std::map<std::string, ProductionProgram*>::const_iterator programIt =
 		program_map.find(std::string("produce_") + selectedWare->name());
 
-   uint i;
-
 	if (programIt == program_map.end())
 		programIt =
 			program_map.find(std::string("smelt_") + selectedWare->name());
@@ -162,68 +160,82 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
       int consumeGroup = 0;
       int checkGroup = 0;
 
-      for (i=0; i<actions.size(); i++) {
+		const std::vector<ProductionAction>::const_iterator actions_end =
+			actions.end();
+		for
+			(std::vector<ProductionAction>::const_iterator it = actions.begin();
+			 it != actions_end;
+			 ++it)
+		{
          //some actions are noted as "consume ware1, ware2"
-         std::vector<std::string> splitWares;
-			split_string(actions[i].sparam1, splitWares, ",");
+			const std::vector<std::string> splitWares
+				(split_string(it->sparam1, ","));
+			const std::vector<std::string>::const_iterator splitWares_end =
+				splitWares.end();
 
          bool isGrouped = false;
 
-         if (splitWares.size() > 1) {
+			if (splitWares.size() > 1) {
             isGrouped = true;
-            if (actions[i].type == ProductionAction::actCheck)
-               checkGroup++;
-            else if (actions[i].type == ProductionAction::actConsume)
-               consumeGroup++;
+				if      (it->type == ProductionAction::actCheck)   ++checkGroup;
+				else if (it->type == ProductionAction::actConsume) ++consumeGroup;
 			}
 
-         uint j;
-         if (actions[i].type == ProductionAction::actConsume) {
-            for (j=0;j<splitWares.size();j++) {
-               WareCondition wc = {
-                  actions[i].iparam1,
-                  isGrouped,
-                  consumeGroup
-					};
-               waresConsumed[splitWares[j]] = wc;
+			if
+				(std::map<std::string, WareCondition> * const m =
+				 it->type == ProductionAction::actConsume ?
+				 &waresConsumed
+				 :
+				 it->type == ProductionAction::actCheck ? &waresChecked : 0)
+				for
+					(std::vector<std::string>::const_iterator jt =
+					 splitWares.begin();
+					 jt != splitWares_end;
+					 ++jt)
+				{
+					WareCondition wc = {it->iparam1, isGrouped, checkGroup};
+					(*m)[*jt] = wc;
 				}
-			}
-         else if (actions[i].type == ProductionAction::actCheck) {
-            for (j=0;j<splitWares.size();j++) {
-               WareCondition wc = {
-                  actions[i].iparam1,
-                  isGrouped,
-                  checkGroup
-					};
-               waresChecked[splitWares[j]] = wc;
-				}
-			}
 		}
 
-      i = 0;
-      for (std::map<std::string, WareCondition>::iterator waresCheckedIt=waresChecked.begin();
-            waresCheckedIt!=waresChecked.end(); waresCheckedIt++) {
-
-         std::map<std::string, WareCondition>::iterator waresConsumedIt = waresConsumed.find(waresCheckedIt->first);
-         createCondTableEntry(i, waresCheckedIt->first.c_str(), (waresConsumedIt != waresConsumed.end()), &waresCheckedIt->second);
-
-         if (waresConsumedIt != waresConsumed.end()) {
-            waresConsumed.erase(waresConsumedIt);
-			}
-         i++;
+		uint i = 0;
+		const std::map<std::string, WareCondition>::const_iterator
+			waresChecked_end = waresChecked.end();
+		for
+			(std::map<std::string, WareCondition>::const_iterator waresCheckedIt =
+			 waresChecked.begin();
+			 waresCheckedIt != waresChecked_end;
+			 ++waresCheckedIt, ++i)
+		{
+			const std::map<std::string, WareCondition>::iterator
+				waresConsumedIt = waresConsumed.find(waresCheckedIt->first);
+			const bool consumed = waresConsumedIt != waresConsumed.end();
+			createCondTableEntry
+				(i,
+				 waresCheckedIt->first.c_str(),
+				 consumed,
+				 waresCheckedIt->second);
+			if (consumed) waresConsumed.erase(waresConsumedIt);
 		}
 
-      for (std::map<std::string, WareCondition>::iterator waresConsumedIt=waresConsumed.begin();
-            waresConsumedIt!=waresConsumed.end(); waresConsumedIt++) {
-
-         createCondTableEntry(i, waresConsumedIt->first.c_str(), true, &waresConsumedIt->second);
-         i++;
-		}
+		const std::map<std::string, WareCondition>::const_iterator
+			waresConsumed_end = waresConsumed.end();
+		for
+			(std::map<std::string, WareCondition>::const_iterator waresConsumedIt =
+			 waresConsumed.begin();
+			 waresConsumedIt != waresConsumed_end;
+			 ++waresConsumedIt, ++i)
+			createCondTableEntry
+				(i, waresConsumedIt->first.c_str(), true, waresConsumedIt->second);
 	}
-
 }
 
-void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, bool consumed, WareCondition* wareCondition) {
+void EncyclopediaWindow::createCondTableEntry
+(const uint            index,
+ const std::string   & wareName,
+ const bool            consumed,
+ const WareCondition & wareCondition)
+{
    Item_Ware_Descr* curWare = tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
 
 	UI::Table<uintptr_t>::Entry_Record & tableEntry =
@@ -234,16 +246,12 @@ void EncyclopediaWindow::createCondTableEntry(int index, std::string wareName, b
 
 	if (consumed) {
 		char buffer[5];
-		snprintf(buffer, sizeof(buffer), "%i", wareCondition->amount);
+		snprintf(buffer, sizeof(buffer), "%i", wareCondition.amount);
 		consumeAmount = buffer;
 	}
 
-   if (wareCondition->isGrouped) {
-      int k;
-      for (k=0;k<wareCondition->groupId;k++) {
-         groupId+="*";
-		}
-	}
+	if (wareCondition.isGrouped)
+		for (uint k = 0; k < wareCondition.groupId; ++k) groupId += '*';
 
 	tableEntry.set_string(0, rowText);
 	tableEntry.set_string(1, consumeAmount);

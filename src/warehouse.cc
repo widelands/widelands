@@ -491,9 +491,9 @@ Or maybe I should just stop writing comments that late at night ;-)
 */
 void Warehouse::act(Game* g, uint data)
 {
-	if (g->get_gametime() - m_next_carrier_spawn >= 0)
-	{
-		int id = get_owner()->tribe().get_safe_worker_index("carrier");
+	const Tribe_Descr & tribe = owner().tribe();
+	if (g->get_gametime() - m_next_carrier_spawn >= 0) {
+		const int id = tribe.get_safe_worker_index("carrier");
 		int stock = m_supply->stock_workers(id);
 		int tdelta = CARRIER_SPAWN_INTERVAL;
 
@@ -511,27 +511,22 @@ void Warehouse::act(Game* g, uint data)
 	}
 
       // Military stuff: Kill the soldiers that are dead
-   if (g->get_gametime() - m_next_military_act >= 0)
-   {
-      int ware = get_owner()->tribe().get_safe_worker_index("soldier");
-
-      Worker_Descr* workerdescr;
-      Soldier* soldier;
-
-      workerdescr = get_owner()->tribe().get_worker_descr(ware);
+	if (g->get_gametime() - m_next_military_act >= 0) {
+		const int ware = tribe.get_safe_worker_index("soldier");
+		const Worker_Descr & workerdescr = *tribe.get_worker_descr(ware);
+		const std::string & workername = workerdescr.name();
          // Look if we got one in stock of those
-      std::string workername=workerdescr->name();
-      std::vector<Object_Ptr>::iterator i;
-      for (i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
-      {
-         if (static_cast<Worker*>(i->get(g))->name()==workername)
-         {
-            soldier = static_cast<Soldier*>(i->get(g));
+		for
+			(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
+			 it != m_incorporated_workers.end();
+			 ++it)
+		{
+			if (static_cast<Worker *>(it->get(g))->name() == workername) {
+				const Soldier * const soldier = dynamic_cast<Soldier *>(it->get(g));
 
                // Soldier dead ...
-            if (!soldier || (soldier->get_current_hitpoints() == 0))
-            {
-               m_incorporated_workers.erase(i);
+				if (not soldier or soldier->get_current_hitpoints() == 0) {
+					m_incorporated_workers.erase(it);
                m_supply->remove_workers(ware, 1);
                continue;
 				}
@@ -686,13 +681,12 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 {
 	assert(m_supply->stock_workers(ware));
 
-	Worker_Descr* workerdescr;
 	Worker* worker;
 
-	workerdescr = get_owner()->tribe().get_worker_descr(ware);
+	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
 
    // Look if we got one in stock of those
-   std::string workername=workerdescr->name();
+	const std::string & workername = workerdescr.name();
    std::vector<Object_Ptr>::iterator i;
    for (i=m_incorporated_workers.begin();
          i!=m_incorporated_workers.end(); i++)
@@ -700,7 +694,7 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 
    if (i==m_incorporated_workers.end()) {
       // None found, create a new one (if available)
-      worker = workerdescr->create(g, get_owner(), this, m_position);
+		worker = &workerdescr.create(*g, owner(), *this, m_position);
 	} else {
       // one found, make him available
       worker = static_cast<Worker*>(i->get(g));
@@ -727,12 +721,11 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 {
 	assert(m_supply->stock_workers(ware));
 
-	Worker_Descr* workerdescr;
 	Soldier* soldier;
 
-	workerdescr = get_owner()->tribe().get_worker_descr(ware);
+	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(ware);
    // Look if we got one in stock of those
-	std::string workername=workerdescr->name();
+	const std::string & workername = workerdescr.name();
 	std::vector<Object_Ptr>::iterator i;
 	for (i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
 	{
@@ -757,7 +750,8 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 	if (i==m_incorporated_workers.end())
 	{
       // None found, create a new one (if available)
-		soldier = (Soldier*)workerdescr->create(g, get_owner(), this, m_position);
+		soldier = &dynamic_cast<Soldier &>
+			(workerdescr.create(*g, owner(), *this, m_position));
 	}
 	else
 	{
@@ -921,22 +915,19 @@ Get a carrier to actually move this item out of the warehouse.
 */
 void Warehouse::do_launch_item(Game* g, WareInstance* item)
 {
-	int carrierid;
-	Worker_Descr* workerdescr;
-	Worker* worker;
-
 	// Create a carrier
-	carrierid = get_owner()->tribe().get_worker_index("carrier");
-	workerdescr = get_owner()->tribe().get_worker_descr(carrierid);
+	const Tribe_Descr & tribe = owner().tribe();
+	const int carrierid = tribe.get_worker_index("carrier");
+	const Worker_Descr & workerdescr = *tribe.get_worker_descr(carrierid);
 
-	worker = workerdescr->create(g, get_owner(), this, m_position);
+	Worker & worker = workerdescr.create(*g, owner(), *this, m_position);
 
 	// Yup, this is cheating.
 	if (m_supply->stock_workers(carrierid))
 		m_supply->remove_workers(carrierid, 1);
 
 	// Setup the carrier
-	worker->start_task_dropoff(g, item);
+	worker.start_task_dropoff(g, item);
 }
 
 
@@ -1057,9 +1048,7 @@ bool Warehouse::can_create_worker(Game *, int worker) {
 
 	if (w_desc)
 	{
-		uint i;
 		bool enought_wares;
-		const Worker_Descr::BuildCost* bc = w_desc->get_buildcost();
 
 		// First watch if we can build it
 		if (!w_desc->get_buildable())
@@ -1067,22 +1056,32 @@ bool Warehouse::can_create_worker(Game *, int worker) {
 		enought_wares = true;
 
 		// Now see if we have the resources
-		for (i = 0; i < bc->size(); i++)
+		const char & worker_name = *w_desc->name().c_str();
+		const Tribe_Descr & tribe = owner().tribe();
+		const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
+		const Worker_Descr::BuildCost::const_iterator buildcost_end =
+			buildcost.end();
+		for
+			(Worker_Descr::BuildCost::const_iterator it = buildcost.begin();
+			 it != buildcost.end();
+			 ++it)
 		{
-			int id_w;
-
-
-			id_w = get_owner()->tribe().get_ware_index((*bc)[i].name.c_str());
-         if (id_w!=-1) {
-            if (m_supply->stock_wares(id_w) < (*bc)[i].amount)
-            {
-               molog (" %s: Need more %s for creation\n", w_desc->name().c_str(), (*bc)[i].name.c_str());
+			const char * input_name = it->name.c_str();
+			int id_w = tribe.get_ware_index(input_name);
+			if (id_w != -1) {
+				if (m_supply->stock_wares(id_w) < it->amount) {
+					molog
+						(" %s: Need more %s for creation\n",
+						 &worker_name, input_name);
                enought_wares = false;
 				}
 			} else {
-            id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
-            if (m_supply->stock_workers(id_w) < (*bc)[i].amount) {
-               molog (" %s: Need more %s for creation\n", w_desc->name().c_str(), (*bc)[i].name.c_str());
+				input_name = it->name.c_str();
+				id_w = tribe.get_safe_worker_index(input_name);
+				if (m_supply->stock_workers(id_w) < it->amount) {
+					molog
+						(" %s: Need more %s for creation\n",
+						 &worker_name, input_name);
                enought_wares = false;
 				}
 			}
@@ -1100,40 +1099,33 @@ Warehouse::create_worker
 */
 void Warehouse::create_worker(Game *g, int worker)
 {
-	Worker_Descr *w_desc = 0;
-
 	if (!can_create_worker (g, worker))
 		throw wexception ("Warehouse::create_worker WE CANN'T CREATE A %d WORKER", worker);
 
-   w_desc=get_owner()->tribe().get_worker_descr(worker);
-
-	if (w_desc)
-	{
-		uint i;
-		const Worker_Descr::BuildCost* bc = w_desc->get_buildcost();
-
-		for (i = 0; i < bc->size(); i++) {
-			int id_w;
-			id_w = get_owner()->tribe().get_ware_index((*bc)[i].name.c_str());
-         if (id_w!=-1) {
-            remove_wares(id_w, (*bc)[i].amount);
-			} else {
-            id_w = get_owner()->tribe().get_safe_worker_index((*bc)[i].name.c_str());
-            remove_workers(id_w, (*bc)[i].amount);
+	const Tribe_Descr & tribe = owner().tribe();
+	if (const Worker_Descr * const w_desc = tribe.get_worker_descr(worker)) {
+		const Worker_Descr::BuildCost & buildcost = w_desc->get_buildcost();
+		const Worker_Descr::BuildCost::const_iterator buildcost_end =
+			buildcost.end();
+		for
+			(Worker_Descr::BuildCost::const_iterator it = buildcost.begin();
+			 it != buildcost.end();
+			 ++it)
+		{
+			const char & material_name = *it->name.c_str();
+			int id_w = tribe.get_ware_index(&material_name);
+			if (id_w != -1) remove_wares(id_w, it->amount);
+			else {
+				id_w = tribe.get_safe_worker_index(&material_name);
+				remove_workers(id_w, it->amount);
 			}
 		}
 
-		// This is needed to have a 0 level soldiers
-		Worker* w;
-
-		w = w_desc->create(g, get_owner(), this, m_position);
-
-		incorporate_worker(g, w);
+		incorporate_worker(g, &w_desc->create(*g, owner(), *this, m_position));
 
 		molog (" We have created a(n) %s\n", w_desc->name().c_str());
 
-	}
-	else
+	} else
 		throw wexception("Can not create worker of desired type : %d", worker);
 
 

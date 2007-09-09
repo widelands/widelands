@@ -67,14 +67,13 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 		try
 		{
 			char buffer[32];
-			std::vector<std::string> cmd;
 
 			snprintf(buffer, sizeof(buffer), "%i", idx);
 			const char * const string = sprogram->get_string(buffer, 0);
 			if (!string)
 				break;
 
-			split_string(string, cmd, " \t\r\n");
+			const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
 			if (!cmd.size())
 				continue;
 

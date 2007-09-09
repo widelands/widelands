@@ -228,10 +228,6 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	int global_surface_width  = wrap > 0 ? wrap : 0;
 	int global_surface_height = 0;
 	std::vector<SDL_Surface*> m_rendered_lines;
-	std::vector<std::string> lines;
-
-	text = word_wrap_text(font, text, wrap);
-	split_string(text, lines, "\n");
 
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
 	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(), 0};
@@ -239,10 +235,15 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	uint cur_text_pos = 0;
 	uint i = 0;
 
-	for (std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
-		std::string line = *it;
-		if (line.empty())
-			line = " ";
+	text = word_wrap_text(font, text, wrap);
+	const std::vector<std::string> lines(split_string(text, "\n"));
+	const std::vector<std::string>::const_iterator lines_end = lines.end();
+	for
+		(std::vector<std::string>::const_iterator it = lines.begin();
+		 it != lines_end;
+		 ++it)
+	{
+		const std::string line(it->empty() ? " " : *it);
 
 		// render this block in a SDL Surface
 		if
@@ -806,15 +807,17 @@ void Font_Handler::get_size
 
 	if (wrap > 0)
 		text = word_wrap_text(font, text, wrap);
-	std::vector<std::string> lines;
-	split_string(text, lines, "\n");
 
 	*w = 0;
 	*h = 0;
-	for (std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
-		std::string line = *it;
-		if (line.empty())
-			line = " ";
+	const std::vector<std::string> lines(split_string(text, "\n"));
+	const std::vector<std::string>::const_iterator lines_end = lines.end();
+	for
+		(std::vector<std::string>::const_iterator it = lines.begin();
+		 it != lines_end;
+		 ++it)
+	{
+		const std::string line(it->empty() ? " " : *it);
 
 		int line_w, line_h;
 		TTF_SizeUTF8(&font, line.c_str(), &line_w, &line_h);

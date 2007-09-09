@@ -146,7 +146,6 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 	{
 		try
 		{
-			std::vector<std::string> command;
 			ImmovableAction action;
 			char buffer[256];
 			const char* string;
@@ -158,7 +157,8 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			if (!string)
 				break;
 
-			split_string(string, command, " \t\r\n");
+			const std::vector<std::string> command
+				(split_string(string, " \t\r\n"));
 			if (!command.size())
 				continue;
 
@@ -785,10 +785,8 @@ void ImmovableProgram::parse_transform
 	if (cmd.size() != 2)
 		throw wexception("Syntax: transform [bob name]");
 
-   std::vector<std::string> list;
-
-	split_string(cmd[1], list, ":");
-   if (list.size()==1) {
+	const std::vector<std::string> list(split_string(cmd[1], ":"));
+	if (list.size() == 1) {
       act->sparam1 = cmd[1];
       act->sparam2 = "world";
 	} else {

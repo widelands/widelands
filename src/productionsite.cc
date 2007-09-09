@@ -112,17 +112,22 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 	else
 		workerstr = sglobal->get_string("worker", "");
 
-   std::vector<std::string> workers;
-	split_string(workerstr, workers, ",");
-   uint i;
-   std::vector<std::string> amounts;
-   for (i=0; i<workers.size(); i++) {
-      amounts.resize(0);
-      remove_spaces(&workers[i]);
-		split_string(workers[i], amounts, "*");
-      uint j;
-      for (j=0; j<amounts.size(); j++)
-         remove_spaces(&amounts[j]);
+	std::vector<std::string> workers(split_string(workerstr, ","));
+	const std::vector<std::string>::const_iterator workers_end = workers.end();
+	for
+		(std::vector<std::string>::iterator it = workers.begin();
+		 it != workers_end;
+		 ++it)
+	{
+		remove_spaces(*it);
+		std::vector<std::string> amounts(split_string(*it, "*"));
+		const std::vector<std::string>::const_iterator amounts_end =
+			amounts.end();
+		for
+			(std::vector<std::string>::iterator jt = amounts.begin();
+			 jt != amounts_end;
+			 ++jt)
+			remove_spaces(*jt);
 
       int amount=1;
 		if (amounts.size() == 2) {
@@ -590,13 +595,15 @@ void ProductionSite::program_act(Game* g)
 			return;
 
 	case ProductionAction::actConsume: {
-			std::vector<std::string> wares;
-			split_string(action->sparam1, wares, ",");
-
-			uint j=0;
-			bool consumed=false;
-			for (j=0; j<wares.size(); j++) {
-				molog("  Consuming(%s)\n", wares[j].c_str());
+		bool consumed = false;
+		const std::vector<std::string> wares(split_string(action->sparam1, ","));
+		const std::vector<std::string>::const_iterator wares_end = wares.end();
+		for
+			(std::vector<std::string>::const_iterator jt = wares.begin();
+			 jt != wares_end;
+			 ++jt)
+		{
+				molog("  Consuming(%s)\n", jt->c_str());
 				const std::vector<Input> & inputs = *descr().get_inputs();
 				const std::vector<Input>::size_type inputs_size =
 					inputs.size();
@@ -605,8 +612,7 @@ void ProductionSite::program_act(Game* g)
 						i < inputs_size;
 						++i)
 				{
-					if (inputs[i].ware_descr().name() == wares[j])
-					{
+					if (inputs[i].ware_descr().name() == *jt) {
 						WaresQueue* wq = m_input_queues[i];
 						if
 							(static_cast<int>(wq->get_filled())
@@ -638,24 +644,23 @@ void ProductionSite::program_act(Game* g)
 		}
 
 	case ProductionAction::actCheck: {
-			std::vector<std::string> wares;
-			split_string(action->sparam1, wares, ",");
-
-			uint j=0;
-			bool found=false;
-			for (j=0; j<wares.size(); j++) {
-				molog("  Checking(%s)\n", wares[j].c_str());
-				const std::vector<Input> & inputs = *descr().get_inputs();
-				const std::vector<Input>::size_type inputs_size =
-					inputs.size();
-
+		bool found = false;
+		std::vector<std::string> wares(split_string(action->sparam1, ","));
+		const std::vector<std::string>::const_iterator wares_end = wares.end();
+		for
+			(std::vector<std::string>::const_iterator jt = wares.begin();
+			 jt != wares_end;
+			 ++jt)
+		{
+			molog("  Checking(%s)\n", jt->c_str());
+			const std::vector<Input> & inputs = *descr().get_inputs();
+			const std::vector<Input>::size_type inputs_size = inputs.size();
 				for
 					(std::vector<std::string>::size_type i = 0;
-						i < inputs_size;
-						++i)
+					 i < inputs_size;
+					 ++i)
 				{
-					if (inputs[i].ware_descr().name() == wares[j])
-					{
+					if (inputs[i].ware_descr().name() == *jt) {
 						WaresQueue* wq = m_input_queues[i];
 						if
 							(static_cast<int>(wq->get_filled())

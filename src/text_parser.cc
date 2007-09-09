@@ -129,11 +129,13 @@ bool Text_Parser::parse_textblock
 
       // Serch for map variables
       SSS_T offset;
-      while ((offset = block_text.find("<variable name=")) != std::string::npos) {
+	for
+		(std::string::size_type offset;
+		 (offset = block_text.find("<variable name=")) != std::string::npos;)
+	{
          SSS_T end = block_text.find(">");
-         if (end == std::string::npos) {
+		if (end == std::string::npos)
             log("WARNING: <variable> tag not closed!\n");
-		}
 		else {
             std::string name = block_text.substr(offset+15, end-(offset+15));
             std::string str = vcb(name, vcdata);
@@ -243,14 +245,12 @@ void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Blo
             val_end = format.size();
          std::string val = format.substr(0, val_end);
          format.erase(0, val_end+1);
-			if (key == "image") {
-				std::vector<std::string> images;
-				split_string(val, images, ";");
+			if        (key == "image") {
+				const std::vector<std::string> images(split_string(val, ";"));
 				element->set_images(images);
-			}
-			else if (key == "image-align")
+			} else if (key == "image-align")
 				element->set_image_align(set_align(val));
-			else if (key == "text-align")
+			else if   (key == "text-align")
 				element->set_text_align(set_align(val));
 		}
 	}
@@ -281,7 +281,7 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 				element->set_font_face(val+".ttf");
 			else if (key == "line-spacing")
 				element->set_line_spacing(atoi(val.c_str()));
-         else if (key == "font-color") {
+			else if (key == "font-color") {
             SSS_T offset = 0;
             if (val[0] == '#')
                offset = 1;

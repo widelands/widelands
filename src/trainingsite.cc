@@ -66,8 +66,6 @@ TrainingSite_Descr::~TrainingSite_Descr()
 void TrainingSite_Descr::parse(const char *directory, Profile * prof, const EncodeData * encdata)
 {
 	Section *sglobal;
-	std::string trainable;
-	std::vector < std::string > str_list;
 
 	assert(directory);
 	assert(prof);
@@ -79,22 +77,20 @@ void TrainingSite_Descr::parse(const char *directory, Profile * prof, const Enco
 	m_stopable = true; // (defaults to false)
 	m_num_soldiers = sglobal->get_safe_int("max_soldiers");
 
-	trainable = sglobal->get_safe_string("train");
-	split_string(trainable, str_list, ",");
-
-	while (str_list.size()) {
-		if (str_list[0] == "hp")
-			m_train_hp = true;
-		else if (str_list[0] == "attack")
-			m_train_attack = true;
-		else if (str_list[0] == "defense")
-			m_train_defense = true;
-		else if (str_list[0] == "evade")
-			m_train_evade = true;
+	const std::vector<std::string> str_list
+		(split_string(sglobal->get_safe_string("train"), ","));
+	const std::vector<std::string>::const_iterator str_list_end = str_list.end();
+	for
+		(std::vector<std::string>::const_iterator it = str_list.begin();
+		 it != str_list_end;
+		 ++it)
+		if      (*it == "hp")      m_train_hp      = true;
+		else if (*it == "attack")  m_train_attack  = true;
+		else if (*it == "defense") m_train_defense = true;
+		else if (*it == "evade")   m_train_evade   = true;
 		else
-			throw wexception("Attribute %s isn't known as a valid attribute", str_list[0].c_str());
-		str_list.erase(str_list.begin());
-	}
+			throw wexception
+				("Attribute %s isn't known as a valid attribute", it->c_str());
 
 	// Read the range of levels that can update this building
 	if (m_train_hp) {
@@ -581,9 +577,7 @@ void TrainingSite::find_and_start_next_program(Game * g)
 		int level = 0;
 		int MAX_level = 0;
 		bool done = false;
-		std::vector < std::string > str;
-
-		split_string(m_list_upgrades[i], str, "_");
+		std::vector < std::string > str(split_string(m_list_upgrades[i], "_"));
 
 		molog(m_list_upgrades[i].c_str());
 		assert(str.size() == 2); //  upgrade what

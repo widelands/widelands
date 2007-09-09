@@ -325,8 +325,8 @@ void Map::recalc_default_resources() {
          int lv=0;
          int res=0;
          std::map<int, int>::iterator i=m.begin();
-         while (i!=m.end()) {
-            if (i->second>lv) {
+			while (i != m.end()) {
+				if (i->second > lv) {
                lv=i->second;
                res=i->first;
 				}
@@ -334,7 +334,7 @@ void Map::recalc_default_resources() {
 			}
          amount/=6;
 
-         if (res==-1 || !amount) {
+			if (res == -1 or not amount) {
             f.field->set_resources(0, 0);
             f.field->set_starting_res_amount(0);
 			} else {

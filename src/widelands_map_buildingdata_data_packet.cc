@@ -71,16 +71,14 @@ void Widelands_Map_Buildingdata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if (not skip) {
+	if (skip) return;
 
 		FileRead fr;
 		try {fr.Open(fs, "binary/building_data");} catch (...) {return;}
 
 		const Uint16 packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
-			for (;;) {
-         uint ser=fr.Unsigned32();
-				if (ser == 0xffffffff) break; // Last building
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		for (Uint32 ser; (ser = fr.Unsigned32()) != 0xffffffff;) {
 
          assert(ol->is_object_known(ser));
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::BUILDING);
@@ -91,20 +89,25 @@ throw (_wexception)
 					building->descr().get_animation(fr.CString()) : 0;
          building->m_animstart=fr.Unsigned32();
 
-         building->m_leave_queue.resize(fr.Unsigned16());
-         for (uint i=0; i<building->m_leave_queue.size(); i++) {
-            ser=fr.Unsigned32();
-					if (ser) {
-               assert(ol->is_object_known(ser));
-               building->m_leave_queue[i]=ol->get_object_by_file_index(ser);
-				} else
-               building->m_leave_queue[i]=0;
+			{
+				Building::Leave_Queue & leave_queue = building->m_leave_queue;
+				leave_queue.resize(fr.Unsigned16());
+				const Building::Leave_Queue::const_iterator leave_queue_end =
+					leave_queue.end();
+				for
+					(Building::Leave_Queue::iterator it = leave_queue.begin();
+					 it != leave_queue_end;
+					 ++it)
+					if (const Uint32 serial = fr.Unsigned32()) {
+						assert(ol->is_object_known(serial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+						*it = ol->get_object_by_file_index(serial);
+					} else
+						*it = 0;
 			}
          building->m_leave_time=fr.Unsigned32();
-         ser=fr.Unsigned32();
-				if (ser) {
-            assert(ol->is_object_known(ser));
-            building->m_leave_allow=ol->get_object_by_file_index(ser);
+			if (Uint32 serial = fr.Unsigned32()) {
+				assert(ol->is_object_known(serial)); //  FIXME NEVER USE assert TO VALIDATE INPUT!!!
+				building->m_leave_allow=ol->get_object_by_file_index(serial);
 			} else
             building->m_leave_allow=0;
          building->m_stop=fr.Unsigned8();
@@ -142,11 +145,10 @@ throw (_wexception)
 
          ol->mark_object_as_loaded(building);
 		}
-		} else
-			throw wexception
-				("Unknown version %u in Widelands_Map_Buildingdata_Data_Packet!",
-				 packet_version);
-	}
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Buildingdata_Data_Packet!",
+			 packet_version);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
@@ -257,7 +259,6 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
          warehouse.m_incorporated_workers.erase(i);
 		}
       warehouse.m_incorporated_workers.resize(0);
-		Player & player = warehouse.owner();
       int nrworkers=fr.Unsigned16();
       for (int i=0; i<nrworkers; i++) {
          uint id=fr.Unsigned32();
@@ -317,7 +318,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
          uint nr_soldiers = fr.Unsigned16();
          assert(!militarysite.m_soldiers.size());
          militarysite.m_soldiers.resize(nr_soldiers);
-         for (uint i=0; i<nr_soldiers; i++) {
+		for (uint i = 0; i < nr_soldiers; ++i) {
             uint reg = fr.Unsigned32();
             assert(ol->is_object_known(reg));
             militarysite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
@@ -523,12 +524,20 @@ throw (_wexception)
 
 			fw.Unsigned32(building->m_animstart);
 
-            // Leave queue time
-            fw.Unsigned16(building->m_leave_queue.size());
-            for (uint idx=0; idx<building->m_leave_queue.size(); idx++) {
-               assert(os->is_object_known(building->m_leave_queue[idx].get(egbase)));
-               fw.Unsigned32(os->get_object_file_index(building->m_leave_queue[idx].get(egbase)));
+			{
+				const Building::Leave_Queue & leave_queue = building->m_leave_queue;
+				const Building::Leave_Queue::const_iterator leave_queue_end =
+					leave_queue.end();
+				fw.Unsigned16(leave_queue.size());
+				for
+					(Building::Leave_Queue::const_iterator jt = leave_queue.begin();
+					 jt != leave_queue_end;
+					 ++jt)
+				{
+					assert(os->is_object_known(jt->get(egbase)));
+					fw.Unsigned32(os->get_object_file_index(jt->get(egbase)));
 				}
+			}
             fw.Unsigned32(building->m_leave_time);
 			if (building->m_leave_allow.get(egbase)) {
                assert(os->is_object_known(building->m_leave_allow.get(egbase)));
