@@ -104,8 +104,8 @@ bool FileRead::ReadLine(char * buf, const char * const buf_end) {
 		const char c = static_cast<char *>(data)[filepos];
 		++filepos;
 
-		if (c == '\r') continue; // not perfectly correct, but it should work
 		if (c == '\n') break;
+		if (c == '\r') continue; // not perfectly correct, but it should work
 
 		*buf = c;
 		++buf;
