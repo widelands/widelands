@@ -278,7 +278,7 @@ def do_header_check(filename, filehandle, lines):
 	re_compiled_array=[
 		re.compile(r"^# Widelands " + filename + r"$"),
 		re.compile(r"^# Copyright \(C\) 200[0-9](-200[56789])* Widelands Development Team$"),
-		re.compile(r"^# [^\s<>]+( [^\s<>]+)+ <[^\s]+@[^\s]+>, 20[0-9]{2}\.$"),
+		re.compile(r"^# [^\s<>]+( [^\s<>]+)* <[^\s]+@[^\s]+>, 20[0-9]{2}\.$"),
 		re.compile(r"^#$"),
 		re.compile(r"^msgid \"\"$"),
 		re.compile(r"^msgstr \"\"$"),
