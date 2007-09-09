@@ -74,7 +74,7 @@ public:
 	inline void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
 };
 
-/*
+/**
  * See Signal
  */
 template<class T1, class T2>

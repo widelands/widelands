@@ -86,15 +86,15 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 
 def cli_options():
 	opts=Options('build/scons-config.py', ARGUMENTS)
-	opts.Add('build', 'debug / profile / release(default)', 'release')
-	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', 'build11') #change this before/after preparing a release
+	opts.Add('build', 'debug / profile / release(default)', 'debug')
+	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '') #change this before/after preparing a release
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
 	opts.Add('bindir', '(absolute or relative to install_prefix)', 'games')
 	opts.Add('datadir', '(absolute or relative to install_prefix)', 'share/games/widelands')
 	#change next line to 'share/games/widelands/locale' for release and to "." after release is over
-	opts.Add('localedir', '(absolute or relative to install_prefix)', 'share/games/widelands/locale')
+	opts.Add('localedir', '(absolute or relative to install_prefix)', '.')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
 	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')

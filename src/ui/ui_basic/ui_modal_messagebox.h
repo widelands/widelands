@@ -23,12 +23,8 @@
 #include "ui_window.h"
 
 namespace UI {
-/*
-==========================
-
-Shows a modal messagebox, user must click something
-
-==========================
+/**
+ * Shows a modal messagebox, user must click something
 */
 struct Modal_Message_Box : public Window {
       enum MB_Type {
