@@ -61,19 +61,17 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
    prof.read("player_names", 0, fs);
    Section* s = prof.get_section("global");
 
-   // First packet version
-   int packet_version=s->get_int("packet_version");
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
+   const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
      std::string name, tribe;
      char buf[256];
-      int i;
-      for (i=1; i<=map->get_nrplayers(); i++) {
-         sprintf(buf, "player_%i", i);
+		const Player_Number nr_players = map->get_nrplayers();
+		for (Player_Number i = 1; i <= nr_players; ++i) {
+			sprintf(buf, "player_%u", i);
          s = prof.get_section(buf);
          name = s->get_string("name");
          tribe = s->get_string("tribe");
-         if (!skip) {
+			if (not skip) {
             map->set_scenario_player_name(i, name);
             map->set_scenario_player_tribe(i, tribe);
 			}
