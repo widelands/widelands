@@ -1977,7 +1977,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
          Transfer* trans=0;
 			if (Game * const game = dynamic_cast<Game *>(egbase)) {
             assert(mol->is_object_known(reg));
-            if (what_is==WARE) {
+				if        (what_is == WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
                trans = new Transfer(game, this, ware);
 				} else if (what_is==WORKER) {
