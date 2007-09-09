@@ -60,56 +60,42 @@ throw (_wexception)
 	}
    Section* s = prof.get_section("global");
 
-   // read packet version
-   int packet_version = s->get_int("packet_version");
-
-   char buf[256];
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		const Player_Number nr_players = egbase->map().get_nrplayers();
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
-      if (dynamic_cast<Game *>(egbase)) {
-         int i=0;
-         for (i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
-            Player* plr=egbase->get_player(i);
-            if (!plr) continue;
-            const Tribe_Descr* t=&plr->tribe();
-
-            int b;
-            for (b=0; b<t->get_nrbuildings(); b++) {
-               plr->allow_building(b, false);
+		if (dynamic_cast<Game *>(egbase))
+			for (Player_Number i = 1; i <= nr_players; ++i)
+				if (Player * const player = egbase->get_player(i)) {
+					const int nr_buildings = player->tribe().get_nrbuildings();
+					for (int b = 0; b < nr_buildings; ++b)
+						player->allow_building(b, false);
 				}
-			}
-		}
 
       // Now read all players and buildings
-      int i=0;
-      for (i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
-         Player* plr=egbase->get_safe_player(i);
-         if (!plr) continue; // skip this player, is data can not be saved
-         const Tribe_Descr* t;
-
-         assert(plr);
-         t=&plr->tribe();
-
-         sprintf(buf, "player_%i", i);
+		for (Player_Number i = 1; i <= nr_players; ++i)
+			if (Player * const player = egbase->get_safe_player(i)) {
+				const Tribe_Descr & tribe = player->tribe();
+				char buf[10];
+				snprintf(buf, sizeof(buf), "player_%i", i);
          s = prof.get_safe_section(buf);
 
          // Write for all buildings if it is enabled
-         const char* name;
-         while ((name=s->get_next_bool(0, 0))) {
+				while (const char * const name = s->get_next_bool(0, 0)) {
             bool allowed = s->get_bool(name);
-            int index=t->get_building_index(name);
-            if (index==-1)
-               throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->name().c_str());
-            plr->allow_building(index, allowed);
+					const int index = tribe.get_building_index(name);
+					if (index == -1)
+						throw wexception
+							("Unknown building found in map (Allowed_Buildings_Data): "
+							 "%s is not in tribe %s",
+							 name, tribe.name().c_str());
+					player->allow_building(index, allowed);
 			}
 		}
-
-      // DONE
-      return;
-	} else {
-      throw wexception("Unknown version %i Allowed_Building_Data_Packet in map!\n", packet_version);
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Unknown version %i Allowed_Building_Data_Packet in map!",
+			 packet_version);
 }
 
 
