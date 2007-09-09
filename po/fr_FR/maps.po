@@ -1,13 +1,12 @@
 # Widelands po/fr_FR/maps.po
-# Widelands po/fr_FR/maps.po
 # Copyright (C) 2007 Widelands Development Team.
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn2611\n"
+"Project-Id-Version: Widelands svn2633\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-02-24 18:30+0100\n"
 "Last-Translator: Pierre Salagnac <pierre.salagnac@free.fr>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"

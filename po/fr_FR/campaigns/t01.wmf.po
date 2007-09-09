@@ -1,418 +1,176 @@
-# French translation of WIDELANDS.
-# Copyright (C) 2006 THE WIDELANDS'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the WIDELANDS package.
+# Widelands po/fr_FR/campaigns/t01.wmf.po
+# Copyright (C) 2007 Widelands Development Team.
 # Emmanuel Andry <eandry@free.fr>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WIDELANDS VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-02-25 19:16+0100\n"
 "Last-Translator: Emmanuel Andry <eandry@mandriva.org>\n"
-"Language-Team: French\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: French\n"
 
-#: ../campaigns/t01.wmf/objective:8
-msgid ""
-"- press SPACE to see where you can build. The red spots show you, where a "
-"small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
-"at the red spot directly right of your headquarters by clicking at it and "
-"selecting a Lumberjack.<br>- Build a road between your headquarters and the "
-"Lumberjack. You do so by clicking the flag of either building and then the "
-"road-button. Around the flag should appear symbols, showing how steep the "
-"way in this direction would be. The steepier the way, the harder it will be "
-"for your people to walk on it. When you click such a symbol, you build a "
-"part of the road and must choose the next direction then. Build a road "
-"between the flags in front of the two buildings. Try to keep it short and "
-"even."
-msgstr ""
-"- pressez ESPACE pour voir les emplacements constructibles. Les point rouges "
-"vous indiquent où un petit bâtiment - comme une hutte de bûcheron - peut "
-"être construit.<br>- construisez une hutte de bûcheron sur le point rouge à "
-"droite de votre Quartier Général en cliquant dessus puis en sélectionnant le "
-"bûcheron.<br>- Construisez une route entre votre Quartier Général et le "
-"bûcheron. Faites cela en cliquant sur le drapeau de l'un des bâtiments puis "
-"sélectionnez le bouton route. Autour du drapeau apparaissent des symboles, "
-"vous montrant le niveau d'inclinaison de chaque direction. Plus le chemin "
-"est escarpé, plus vos gens auront du mal à marcher. Lorsque vous cliquez sur "
-"un l'un de ces symboles, vous construisez une partie de la route et devez "
-"choisir la prochaine direction. Construisez une route entre les drapeaux "
-"devant les deux bâtiments. Essayez de le faire court et simple.       "
-
-#: ../campaigns/t01.wmf/objective:16
-msgid ""
-"- There is a flag symbol in the mid of the way you just built. By clicking "
-"it and, in the consecutively opening menu, clicking the flag-button, you "
-"place a flag there, thus splitting the work of carrying the wood between two "
-"carriers. When much wares are being transported between two points, "
-"additional flags in between make them get faster to their destination, thus "
-"improving your infrastructure. Place a flag in the mid of the road.<br>- "
-"Place a Lumberjack directly south of the flag you are about to place on the "
-"road. Connect said flag with the new Lumberjack afterwards. Note that, "
-"instead of building a road step by step, you may also directly click at the "
-"destination to build the entire road at once."
-msgstr ""
-"- Il y a un symbole de drapeau au milieu du chemin que vous avez construit. "
-"En cliquant dessus, dans le menu qui vient de s'ouvrir, cliquez sur le "
-"bouton de drapeau, plantez un drapeau. Ceci répartira le travail de "
-"transport du bois entre deux porteurs. Quand beaucoup de ressources sont "
-"transportées entre deux points, des drapeaux additionnels leur font aller "
-"plus vite vers leur destination, ceci améliorant votre infrastructure. "
-"Placez un drapeau au milieu de la route.<br>- Placez un bûcheron directement "
-"au sud du drapeau que vous allez placer sur la route. Reliez le drapeau au "
-"nouveau bûcheron. Veuillez noter que, au lieu de construire une route pas à "
-"pas, vous pouvez aussi cliquer sur le drapeau de destination pour construire "
-"la route d'un seul coup."
-
-#: ../campaigns/t01.wmf/objective:24
-msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr "- Construisez une hutte de garde forestier à l'est du bûcheron."
-
-#: ../campaigns/t01.wmf/objective:32
-msgid "- Build two Quarries south-west of your headquarters."
-msgstr "- Construisez deux carrières au sud ouest de votre quartier général."
-
-#: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
-#: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
-#: ../campaigns/t01.wmf/event:665
+#: ../../../campaigns/t01.wmf/event:11 ../../../campaigns/t01.wmf/event:608
+#: ../../../campaigns/t01.wmf/event:627 ../../../campaigns/t01.wmf/event:646
+#: ../../../campaigns/t01.wmf/event:665
 msgid "Thron speaks..."
 msgstr "Thron parle..."
 
-#: ../campaigns/t01.wmf/event:13
-msgid ""
-"It's been months and we are still hiding where the forests are old and dark. "
-"My warriors hunt at day and lay awake at night - listening to the sounds of "
-"the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
-"Cela fait des mois et nous sommes toujours cachés dans l'ancienne et sombre "
-"forêt. Mes guerriers chassent le jour et ne dorment que d'un œil la nuit - "
-"écoutant les sons du cruel carnage ressurgissant des arbres anciens. "
+#: ../../../campaigns/t01.wmf/event:13
+msgid "It's been months and we are still hiding where the forests are old and dark. My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees."
+msgstr "Cela fait des mois et nous sommes toujours cachés dans l'ancienne et sombre forêt. Mes guerriers chassent le jour et ne dorment que d'un œil la nuit - écoutant les sons du cruel carnage ressurgissant des arbres anciens. "
 
-#: ../campaigns/t01.wmf/event:15 ../campaigns/t01.wmf/event:32
-#: ../campaigns/t01.wmf/event:49 ../campaigns/t01.wmf/event:66
+#: ../../../campaigns/t01.wmf/event:15 ../../../campaigns/t01.wmf/event:32
+#: ../../../campaigns/t01.wmf/event:49 ../../../campaigns/t01.wmf/event:66
 msgid "The Story begins..."
 msgstr "L'histoire commence..."
 
-#: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
-#: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
-#: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
-#: ../campaigns/t01.wmf/event:503 ../campaigns/t01.wmf/event:523
-#: ../campaigns/t01.wmf/event:542 ../campaigns/t01.wmf/event:562
-#: ../campaigns/t01.wmf/event:581 ../campaigns/t01.wmf/event:619
-#: ../campaigns/t01.wmf/event:638 ../campaigns/t01.wmf/event:657
-#: ../campaigns/t01.wmf/event:676 ../campaigns/t01.wmf/event:723
+#: ../../../campaigns/t01.wmf/event:22 ../../../campaigns/t01.wmf/event:39
+#: ../../../campaigns/t01.wmf/event:56 ../../../campaigns/t01.wmf/event:73
+#: ../../../campaigns/t01.wmf/event:465 ../../../campaigns/t01.wmf/event:484
+#: ../../../campaigns/t01.wmf/event:503 ../../../campaigns/t01.wmf/event:523
+#: ../../../campaigns/t01.wmf/event:542 ../../../campaigns/t01.wmf/event:562
+#: ../../../campaigns/t01.wmf/event:581 ../../../campaigns/t01.wmf/event:619
+#: ../../../campaigns/t01.wmf/event:638 ../../../campaigns/t01.wmf/event:657
+#: ../../../campaigns/t01.wmf/event:676 ../../../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr "D'accord"
 
-#: ../campaigns/t01.wmf/event:30
-msgid ""
-"We can see the raging flames that swallow Al'thunran, miles away, from here. "
-"The red lights flash in the darkness and dance to the rhythm of the wardrums "
-"that haunt me even in my nightmares."
-msgstr ""
-"Nous pouvons voir les flammes déchaînées qui avalent Al'thunran, à des "
-"kilomètres d'ici.Les lumières rouges illuminent les ténèbres et dansent au "
-"rythme des tambours de guerre qui me hantent même dans mes cauchemars."
+#: ../../../campaigns/t01.wmf/event:30
+msgid "We can see the raging flames that swallow Al'thunran, miles away, from here. The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares."
+msgstr "Nous pouvons voir les flammes déchaînées qui avalent Al'thunran, à des kilomètres d'ici.Les lumières rouges illuminent les ténèbres et dansent au rythme des tambours de guerre qui me hantent même dans mes cauchemars."
 
-#: ../campaigns/t01.wmf/event:47
-msgid ""
-"My father's bones lay peacefully in the grounds he cleared from the "
-"senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal "
-"companion and friend is a source of peace and comfort to me in these dark "
-"times. He keeps my spirits high and those of my warriors awake, not to let "
-"greed or despair destroy our bonds as well"
-msgstr ""
-"Les ossements de mon père reposent en paix dans le sol qu'il a libéré du fou "
-"sanguinaire qui une fois s'est élevé parmi nous.<br>Boldreth, mon loyal "
-"compagnon et ami est une source de paix et de tranquillité pour moi en ces "
-"temps ténébreux. Il me remonte le moral et celui de mes guerriers à l'affût, "
-"afin de ne pas laisser la cupidité et le désespoir détruire nos liens."
+#: ../../../campaigns/t01.wmf/event:47
+msgid "My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well"
+msgstr "Les ossements de mon père reposent en paix dans le sol qu'il a libéré du fou sanguinaire qui une fois s'est élevé parmi nous.<br>Boldreth, mon loyal compagnon et ami est une source de paix et de tranquillité pour moi en ces temps ténébreux. Il me remonte le moral et celui de mes guerriers à l'affût, afin de ne pas laisser la cupidité et le désespoir détruire nos liens."
 
-#: ../campaigns/t01.wmf/event:64
-msgid ""
-"As father told me, there will be times to fight and times to lay and wait, "
-"trying not to sleep or die before the right time comes. And so I do... wait."
-msgstr ""
-"Comme Père me l'a dit, il y aura un temps pour le combat et un temps pour le "
-"repos et l'attente, tout en essayant de ne pas dormir ou mourir avant le bon "
-"moment. Alors c'est ce que je fais... j'attends."
+#: ../../../campaigns/t01.wmf/event:64
+msgid "As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait."
+msgstr "Comme Père me l'a dit, il y aura un temps pour le combat et un temps pour le repos et l'attente, tout en essayant de ne pas dormir ou mourir avant le bon moment. Alors c'est ce que je fais... j'attends."
 
-#: ../campaigns/t01.wmf/event:454
+#: ../../../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
 msgstr "Un vieil homme approche de vous..."
 
-#: ../campaigns/t01.wmf/event:456
-msgid ""
-" \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
-"allow me to aid you with my council through these darkened days.\" "
-msgstr ""
-" \"Salut à toi, Chef. Je suis Khantrukh et j'ai vu passer de nombreux "
-"hivers. Permettez moi de vous aider avec mon Conseil à travers ces jours de "
-"ténèbres.\" "
+#: ../../../campaigns/t01.wmf/event:456
+msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
+msgstr " \"Salut à toi, Chef. Je suis Khantrukh et j'ai vu passer de nombreux hivers. Permettez moi de vous aider avec mon Conseil à travers ces jours de ténèbres.\" "
 
-#: ../campaigns/t01.wmf/event:458 ../campaigns/t01.wmf/event:477
-#: ../campaigns/t01.wmf/event:496 ../campaigns/t01.wmf/event:516
-#: ../campaigns/t01.wmf/event:535 ../campaigns/t01.wmf/event:555
-#: ../campaigns/t01.wmf/event:574
+#: ../../../campaigns/t01.wmf/event:458 ../../../campaigns/t01.wmf/event:477
+#: ../../../campaigns/t01.wmf/event:496 ../../../campaigns/t01.wmf/event:516
+#: ../../../campaigns/t01.wmf/event:535 ../../../campaigns/t01.wmf/event:555
+#: ../../../campaigns/t01.wmf/event:574
 msgid "Advisor"
 msgstr "Conseiller"
 
-#: ../campaigns/t01.wmf/event:473
+#: ../../../campaigns/t01.wmf/event:473
 msgid "Khantrukh continues..."
 msgstr "Khantrukh poursuit..."
 
-#: ../campaigns/t01.wmf/event:475
-msgid ""
-" \"None but the gods know how long we have to remain hidden here. The "
-"warriors hope we may march back gloriously any day now, but I strongly doubt "
-"that will happen soon. And the days are already getting shorter and colder..."
-"<br>We should prepare, in case we have to face the winter in these harsh "
-"lands. I believe to the east of our campside are a few places where we could "
-"raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE "
-"to see where you can build. The red spots show you, where a small building - "
-"like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot "
-"directly right of your headquarters by clicking at it and selecting a "
-"Lumberjack."
-msgstr ""
-" \"Personne hormis les dieux savent combien de temps nous devons rester "
-"cachés ici. Les guerriers espèrent que nous pourrons nous mettre en route "
-"glorieusement d'ici quelques jours, mais je doute fortement que cela arrive "
-"bientôt. Et les jours sont de plus en plus courts et froids...  <br>Nous "
-"devons nous préparer, au cas où nous devrions affronter l'hiver dans ces "
-"contrées hostiles. Je crois qu'à l'est du campement nous pourrions bâtir "
-"quelques huttes de bûcheron.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- pressez "
-"ESPACE pour voir les emplacements constructibles. Les point rouges vous "
-"indiquent où un petit bâtiment - comme une hutte de bûcheron - peut être "
-"construit.<br>- construisez une hutte de bûcheron sur le point rouge à "
-"droite de votre Quartier Général en cliquant dessus puis en sélectionnant le "
-"bûcheron."
+#: ../../../campaigns/t01.wmf/event:475
+msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br>We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack."
+msgstr " \"Personne hormis les dieux savent combien de temps nous devons rester cachés ici. Les guerriers espèrent que nous pourrons nous mettre en route glorieusement d'ici quelques jours, mais je doute fortement que cela arrive bientôt. Et les jours sont de plus en plus courts et froids...  <br>Nous devons nous préparer, au cas où nous devrions affronter l'hiver dans ces contrées hostiles. Je crois qu'à l'est du campement nous pourrions bâtir quelques huttes de bûcheron.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- pressez ESPACE pour voir les emplacements constructibles. Les point rouges vous indiquent où un petit bâtiment - comme une hutte de bûcheron - peut être construit.<br>- construisez une hutte de bûcheron sur le point rouge à droite de votre Quartier Général en cliquant dessus puis en sélectionnant le bûcheron."
 
-#: ../campaigns/t01.wmf/event:492
+#: ../../../campaigns/t01.wmf/event:492
 msgid "The elder remarks..."
 msgstr "L'ancien remarque..."
 
-#: ../campaigns/t01.wmf/event:494
-msgid ""
-" \"Obviously, it would be too draining for our people to walk all the way to "
-"the Lumberjack through the wilderness. We will have to make a path between "
-"our hall and the Lumberjack. It's not a hard guess that the men would "
-"appreciate a possibly short and even way - the wood surely will be heavy "
-"enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your "
-"headquarters and the Lumberjack. You do so by clicking the flag of either "
-"building and then the road-button. Around the flag should appear symbols, "
-"showing how steep the way in this direction would be. The steepier the way, "
-"the harder it will be for your people to walk on it. When you click such a "
-"symbol, you build a part of the road and must choose the next direction "
-"then. Build a road between the flags in front of the two buildings. Try to "
-"keep it short and even."
-msgstr ""
-" \"Evidemment, ce serait trop épuisant pour nos gens de marcher dans la "
-"nature jusqu'au bûcheron. Nous devrons placer un chemin entre notre Quartier "
-"Général et le bûcheron. Il n'est pas difficile de deviner que les hommes "
-"apprécieront un chemin le plus court possible - le bois sera certainement "
-"assez lourd.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Construisez une route "
-"entre votre Quartier Général et le bûcheron. Faites cela en cliquant sur le "
-"drapeau de l'un des bâtiments puis sélectionnez le bouton route. Autour du "
-"drapeau apparaissent des symboles, vous montrant le niveau d'inclinaison de "
-"chaque direction. Plus le chemin est escarpé, plus vos gens auront du mal à "
-"marcher. Lorsque vous cliquez sur un l'un de ces symboles, vous construisez "
-"une partie de la route et devez choisir la prochaine direction. Construisez "
-"une route entre les drapeaux devant les deux bâtiments. Essayez de le faire "
-"court et simple.       "
+#: ../../../campaigns/t01.wmf/event:494
+msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+msgstr " \"Evidemment, ce serait trop épuisant pour nos gens de marcher dans la nature jusqu'au bûcheron. Nous devrons placer un chemin entre notre Quartier Général et le bûcheron. Il n'est pas difficile de deviner que les hommes apprécieront un chemin le plus court possible - le bois sera certainement assez lourd.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Construisez une route entre votre Quartier Général et le bûcheron. Faites cela en cliquant sur le drapeau de l'un des bâtiments puis sélectionnez le bouton route. Autour du drapeau apparaissent des symboles, vous montrant le niveau d'inclinaison de chaque direction. Plus le chemin est escarpé, plus vos gens auront du mal à marcher. Lorsque vous cliquez sur un l'un de ces symboles, vous construisez une partie de la route et devez choisir la prochaine direction. Construisez une route entre les drapeaux devant les deux bâtiments. Essayez de le faire court et simple.       "
 
-#: ../campaigns/t01.wmf/event:512
+#: ../../../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh parle..."
 
-#: ../campaigns/t01.wmf/event:514
-msgid ""
-" \"There is an old saying: 'A burden divided is easier to endure.' A "
-"crossroad on the way between our site and the lumberjack would ease the work "
-"of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in "
-"the mid of the way you just built. By clicking it and, in the consecutively "
-"opening menu, clicking the flag-button, you place a flag there, thus "
-"splitting the work of carrying the wood between two carriers. When much "
-"wares are being transported between two points, additional flags in between "
-"make them get faster to their destination, thus improving your "
-"infrastructure. Place a flag in the mid of the road."
-msgstr ""
-" \"Il y a un vieux dicton qui dit : \"Un fardeau divisé est plus facile à "
-"endurer.\" Un carrefour sur le chemin entre notre site et le bûcheron "
-"facilitera le travail de nos porteurs.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- "
-"Il y a un symbole de drapeau au milieu du chemin que vous avez construit. En "
-"cliquant dessus, dans le menu qui vient de s'ouvrir, cliquez sur le bouton "
-"de drapeau, cela plantera un drapeau. Ceci répartira le travail de transport "
-"du bois entre deux porteurs. Quand beaucoup de ressources sont transportées "
-"entre deux points, des drapeaux additionnels leur font aller plus vite vers "
-"leur destination, ceci améliorant votre infrastructure. Placez un drapeau au "
-"milieu de la route."
+#: ../../../campaigns/t01.wmf/event:514
+msgid " \"There is an old saying: 'A burden divided is easier to endure.' A crossroad on the way between our site and the lumberjack would ease the work of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road."
+msgstr " \"Il y a un vieux dicton qui dit : \"Un fardeau divisé est plus facile à endurer.\" Un carrefour sur le chemin entre notre site et le bûcheron facilitera le travail de nos porteurs.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Il y a un symbole de drapeau au milieu du chemin que vous avez construit. En cliquant dessus, dans le menu qui vient de s'ouvrir, cliquez sur le bouton de drapeau, cela plantera un drapeau. Ceci répartira le travail de transport du bois entre deux porteurs. Quand beaucoup de ressources sont transportées entre deux points, des drapeaux additionnels leur font aller plus vite vers leur destination, ceci améliorant votre infrastructure. Placez un drapeau au milieu de la route."
 
-#: ../campaigns/t01.wmf/event:531
+#: ../../../campaigns/t01.wmf/event:531
 msgid "The old man looks to the sky..."
 msgstr "Le vieil homme regarde vers le ciel..."
 
-#: ../campaigns/t01.wmf/event:533
-msgid ""
-" \"The northern winds tell us, the coming winter will be a long and cruel "
-"one. One Lumberjack will not be enough to still the needs of our people. "
-"More trees await our axes south of our new crossroads - let us raise a "
-"second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack "
-"directly south of the flag you are about to place on the road. Connect said "
-"flag with the new Lumberjack afterwards. Note that, instead of building a "
-"road step by step, you may also directly click at the destination to build "
-"the entire road at once."
-msgstr ""
-" \"Le vent du nord nous dit que l'hiver à venir sera long et cruel. Un "
-"bûcheron ne sera pas suffisant pour satisfaire les besoins de notre peuple. "
-"D'autres arbres attendent nos haches au sud de notre nouveau carrefour - "
-"construisons y une nouvelle hutte de bûcheron !\"<br><br>--NOUVEAUX "
-"OBJECTIFS--<br>- Placez un bûcheron directement au sud du drapeau que vous "
-"allez placer sur la route. Reliez le drapeau au nouveau bûcheron. Veuillez "
-"noter que, au lieu de construire une route pas à pas, vous pouvez aussi "
-"cliquer sur le drapeau de destination pour construire la route d'un seul "
-"coup."
+#: ../../../campaigns/t01.wmf/event:533
+msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+msgstr " \"Le vent du nord nous dit que l'hiver à venir sera long et cruel. Un bûcheron ne sera pas suffisant pour satisfaire les besoins de notre peuple. D'autres arbres attendent nos haches au sud de notre nouveau carrefour - construisons y une nouvelle hutte de bûcheron !\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Placez un bûcheron directement au sud du drapeau que vous allez placer sur la route. Reliez le drapeau au nouveau bûcheron. Veuillez noter que, au lieu de construire une route pas à pas, vous pouvez aussi cliquer sur le drapeau de destination pour construire la route d'un seul coup."
 
-#: ../campaigns/t01.wmf/event:551
+#: ../../../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr "Khantrukh·acquiesce..."
 
-#: ../campaigns/t01.wmf/event:553
-msgid ""
-" \"Of course, if we intended to build a bigger settlement much more "
-"Lumberjacks would be advisable, but this should do for now.<br>But never "
-"forget - these forests are our legacy, entrusted to us by our ancestors. We "
-"must always respect and nourish them. What we take, we must give again."
-"<br>So, in order to replace the trees we chop down, we should build a "
-"Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--"
-"<br>- Build a Ranger's Hut to the east of the first Lumberjack."
-msgstr ""
-" \"Bien sûr, si nous avions l'intention de construire une installation plus "
-"grande, avoir beaucoup plus de bûcherons serait conseillé, mais cela fera "
-"l'affaire pour l'instant.<br>Mais n'oubliez jamais - ces forêts sont notre "
-"héritage, confié par nos ancêtres. Nous devons toujours les respecter et les "
-"nourrir. Ce que nous prenons, nous devons le rendre.<br>Donc, pour remplacer "
-"les arbres que nous abattons, nous devrions construire une hutte de garde "
-"forestier, de préférence près du bûcheron.\"<br><br>--NOUVEAUX OBJECTIFS--"
-"<br>- Construisez une hutte de garde forestier à l'est du premier "
-"bûcheron.   "
+#: ../../../campaigns/t01.wmf/event:553
+msgid " \"Of course, if we intended to build a bigger settlement much more Lumberjacks would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give again.<br>So, in order to replace the trees we chop down, we should build a Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--<br>- Build a Ranger's Hut to the east of the first Lumberjack."
+msgstr " \"Bien sûr, si nous avions l'intention de construire une installation plus grande, avoir beaucoup plus de bûcherons serait conseillé, mais cela fera l'affaire pour l'instant.<br>Mais n'oubliez jamais - ces forêts sont notre héritage, confié par nos ancêtres. Nous devons toujours les respecter et les nourrir. Ce que nous prenons, nous devons le rendre.<br>Donc, pour remplacer les arbres que nous abattons, nous devrions construire une hutte de garde forestier, de préférence près du bûcheron.\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Construisez une hutte de garde forestier à l'est du premier bûcheron.   "
 
-#: ../campaigns/t01.wmf/event:570
+#: ../../../campaigns/t01.wmf/event:570
 msgid "The elder speaks..."
 msgstr "L'ancien parle..."
 
-#: ../campaigns/t01.wmf/event:572
-msgid ""
-" \"I am well aware, chieftain, that neither you nor your warriors have the "
-"desire to stay in this forsaken place for long. But even so, our war to "
-"conquer back our home might take a long time and it would seem wise to make "
-"preparations. I would advise that we store stones for the future - who knows "
-"what fortifications we might be forced to build very soon? And - like a gift "
-"of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW "
-"OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
-msgstr ""
-" \"Je suis bien conscient, Chef, que ni vous ni vos guerriers désirent "
-"rester dans cet endroit abandonné plus longtemps. Mais même ainsi, la guerre "
-"de reconquête de notre foyer peut prendre longtemps et il semblerait sage de "
-"se préparer. Je vous conseille de stocker des pierres pour l'avenir - qui "
-"sait quelles fortifications nous seront obligés de construire très bientôt ? "
-"Et - tel un cadeau du destin - il y a beaucoup de rochers tout près..."
-"\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Construisez deux carrières au sud "
-"ouest de votre Quartier Général. "
+#: ../../../campaigns/t01.wmf/event:572
+msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
+msgstr " \"Je suis bien conscient, Chef, que ni vous ni vos guerriers désirent rester dans cet endroit abandonné plus longtemps. Mais même ainsi, la guerre de reconquête de notre foyer peut prendre longtemps et il semblerait sage de se préparer. Je vous conseille de stocker des pierres pour l'avenir - qui sait quelles fortifications nous seront obligés de construire très bientôt ? Et - tel un cadeau du destin - il y a beaucoup de rochers tout près...\"<br><br>--NOUVEAUX OBJECTIFS--<br>- Construisez deux carrières au sud ouest de votre Quartier Général. "
 
-#: ../campaigns/t01.wmf/event:610
-msgid ""
-"In another sleepless night I went up to the hill and gazed to the north. The "
-"fires are still burning, stilling their hunger upon my father's legacy."
-"<br>They are a constant reminder why we had to hide here.<br>And a constant "
-"reminder why we must return in the end."
-msgstr ""
-"Durant une autre nuit sans sommeil, je suis allé sur la colline et regardé "
-"vers le nord. Le feu brûle encore, instillant sa faim sur l'héritage de mon "
-"père.<br>C'est un rappel constant sur la raison pour laquelle nous devons "
-"nous cacher ici.<br>Et un rappel constant de la raison pour laquelle nous "
-"devons finalement y retourner."
+#: ../../../campaigns/t01.wmf/event:610
+msgid "In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br>They are a constant reminder why we had to hide here.<br>And a constant reminder why we must return in the end."
+msgstr "Durant une autre nuit sans sommeil, je suis allé sur la colline et regardé vers le nord. Le feu brûle encore, instillant sa faim sur l'héritage de mon père.<br>C'est un rappel constant sur la raison pour laquelle nous devons nous cacher ici.<br>Et un rappel constant de la raison pour laquelle nous devons finalement y retourner."
 
-#: ../campaigns/t01.wmf/event:612
+#: ../../../campaigns/t01.wmf/event:612
 msgid "In the night..."
 msgstr "Pendant la nuit..."
 
-#: ../campaigns/t01.wmf/event:629
-msgid ""
-"Once again I went up to my father's tomb, in a sacred grove at the feet of "
-"the great spire of Kal'mavrath. I just stood there and did not feel neither "
-"the hours pass nor the cold rain pouring down from a darkened sky..."
-"<br>Somehow it felt like farewell. For the first time I wondered what the "
-"future might hold for me..."
-msgstr ""
-"Une fois de plus je suis allé sur la tombe de mon père, sous un bosquet "
-"sacré au pied de la grande flèche de Kal'mavrath. Je suis juste resté debout "
-"et n'ai vu ni les heures passer ni senti la froide pluie tombant d'un ciel "
-"obscurci...<br>Cela ressemblait d'une certaine manière à un adieu. Pour la "
-"première fois je me suis demandé ce que l'avenir me réservait...   "
+#: ../../../campaigns/t01.wmf/event:629
+msgid "Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br>Somehow it felt like farewell. For the first time I wondered what the future might hold for me..."
+msgstr "Une fois de plus je suis allé sur la tombe de mon père, sous un bosquet sacré au pied de la grande flèche de Kal'mavrath. Je suis juste resté debout et n'ai vu ni les heures passer ni senti la froide pluie tombant d'un ciel obscurci...<br>Cela ressemblait d'une certaine manière à un adieu. Pour la première fois je me suis demandé ce que l'avenir me réservait...   "
 
-#: ../campaigns/t01.wmf/event:631
+#: ../../../campaigns/t01.wmf/event:631
 msgid "At the grave"
 msgstr "Sur la tombe"
 
-#: ../campaigns/t01.wmf/event:648
-msgid ""
-"Some time ago, Boldreth came to me. His advise was to move to some place "
-"closer home - to strike at the first sign of my brothers forces wavering."
-"<br>But I look over the forests and I still see black smoke rising to the "
-"sky and I know - it is too early yet and what he hopes for will not happen "
-"any time soon. He might still be right, but I fear the bloodshed a too rash "
-"return would cause both on our and the other side..."
-msgstr ""
-"Il y a quelques temps, Boldreth et venu me voir. Son conseil était de se "
-"déplacer à un endroit plus proche de notre foyer - pour frapper au premier "
-"signe de vacillement des forces de mes frères.<br>Mais je regarde par delà "
-"les forêts et je vois toujours la fumée noire s'élevant vers le ciel et je "
-"sais - il est encore trop tôt et ce qu'il espère n'arrivera pas avant "
-"longtemps. Il peut avoir raison, mais j'ai peur de l'effusion de sang qu'un "
-"retour trop rapide causerait dans les deux camps..."
+#: ../../../campaigns/t01.wmf/event:648
+msgid "Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br>But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side..."
+msgstr "Il y a quelques temps, Boldreth et venu me voir. Son conseil était de se déplacer à un endroit plus proche de notre foyer - pour frapper au premier signe de vacillement des forces de mes frères.<br>Mais je regarde par delà les forêts et je vois toujours la fumée noire s'élevant vers le ciel et je sais - il est encore trop tôt et ce qu'il espère n'arrivera pas avant longtemps. Il peut avoir raison, mais j'ai peur de l'effusion de sang qu'un retour trop rapide causerait dans les deux camps..."
 
-#: ../campaigns/t01.wmf/event:650
+#: ../../../campaigns/t01.wmf/event:650
 msgid "The other day..."
 msgstr "L'autre jour..."
 
-#: ../campaigns/t01.wmf/event:667
-msgid ""
-"Today, my warriors picked up an old man, wandering sick and wounded through "
-"the dark forest. We listened in horror when he told us of the atrocities "
-"taking place in Al'thunran.<br>I hereby renew my oath - I will stop this "
-"madness at any cost!"
-msgstr ""
-"Aujourd'hui, mes guerriers on ramené un vieil homme, errant malade et blessé "
-"dans la sombre forêt. Nous avons écouté avec respect quand il nous a parlé "
-"des atrocités se déroulant à Al'thunran.<br>Sur ces dires je renouvelais mon "
-"serment - J'arrêterais cette folie à n'importe quel prix ! "
+#: ../../../campaigns/t01.wmf/event:667
+msgid "Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br>I hereby renew my oath - I will stop this madness at any cost!"
+msgstr "Aujourd'hui, mes guerriers on ramené un vieil homme, errant malade et blessé dans la sombre forêt. Nous avons écouté avec respect quand il nous a parlé des atrocités se déroulant à Al'thunran.<br>Sur ces dires je renouvelais mon serment - J'arrêterais cette folie à n'importe quel prix ! "
 
-#: ../campaigns/t01.wmf/event:669
+#: ../../../campaigns/t01.wmf/event:669
 msgid "Another evening..."
 msgstr "Un autre soir..."
 
-#: ../campaigns/t01.wmf/event:712
+#: ../../../campaigns/t01.wmf/event:712
 msgid "Victory!"
 msgstr "Victoire !"
 
-#: ../campaigns/t01.wmf/event:714
-msgid ""
-"Very well done, chieftain. We now have all we need to face the winter and "
-"may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may "
-"continue if you wish. Otherwise, move on to the next mission."
-msgstr ""
-"Bien joué, Chef. Nous avons maintenant tout ce dont nous avons besoin pour "
-"faire face à l'hiver et nous préparer aux batailles à venir."
-"<br><br>VICTOIRE !<br><br>·Vous pouvez continuer si vous le désirez."
-"·Autrement,·passez à la mission suivante."
+#: ../../../campaigns/t01.wmf/event:714
+msgid "Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may continue if you wish. Otherwise, move on to the next mission."
+msgstr "Bien joué, Chef. Nous avons maintenant tout ce dont nous avons besoin pour faire face à l'hiver et nous préparer aux batailles à venir.<br><br>VICTOIRE !<br><br>·Vous pouvez continuer si vous le désirez.·Autrement,·passez à la mission suivante."
 
-#: ../campaigns/t01.wmf/event:716
+#: ../../../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr "Mission Accomplie"
+
+#~ msgid "- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- build a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack.<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+#~ msgstr "- pressez ESPACE pour voir les emplacements constructibles. Les point rouges vous indiquent où un petit bâtiment - comme une hutte de bûcheron - peut être construit.<br>- construisez une hutte de bûcheron sur le point rouge à droite de votre Quartier Général en cliquant dessus puis en sélectionnant le bûcheron.<br>- Construisez une route entre votre Quartier Général et le bûcheron. Faites cela en cliquant sur le drapeau de l'un des bâtiments puis sélectionnez le bouton route. Autour du drapeau apparaissent des symboles, vous montrant le niveau d'inclinaison de chaque direction. Plus le chemin est escarpé, plus vos gens auront du mal à marcher. Lorsque vous cliquez sur un l'un de ces symboles, vous construisez une partie de la route et devez choisir la prochaine direction. Construisez une route entre les drapeaux devant les deux bâtiments. Essayez de le faire court et simple.       "
+
+#~ msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+#~ msgstr "- Il y a un symbole de drapeau au milieu du chemin que vous avez construit. En cliquant dessus, dans le menu qui vient de s'ouvrir, cliquez sur le bouton de drapeau, plantez un drapeau. Ceci répartira le travail de transport du bois entre deux porteurs. Quand beaucoup de ressources sont transportées entre deux points, des drapeaux additionnels leur font aller plus vite vers leur destination, ceci améliorant votre infrastructure. Placez un drapeau au milieu de la route.<br>- Placez un bûcheron directement au sud du drapeau que vous allez placer sur la route. Reliez le drapeau au nouveau bûcheron. Veuillez noter que, au lieu de construire une route pas à pas, vous pouvez aussi cliquer sur le drapeau de destination pour construire la route d'un seul coup."
+
+#~ msgid "- Build a Ranger's Hut to the east of the Lumberjack."
+#~ msgstr "- Construisez une hutte de garde forestier à l'est du bûcheron."
+
+#~ msgid "- Build two Quarries south-west of your headquarters."
+#~ msgstr "- Construisez deux carrières au sud ouest de votre quartier général."
 
 #~ msgid "Order3"
 #~ msgstr "Ordre3"
