@@ -1,13 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Widelands po/cz_CZ/campaigns/emp01.wmf.po
+# Copyright (C) 2007 Widelands Development Team.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Czech translation\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2007-05-05 02:16+0100\n"
 "Last-Translator: Matej Svrcek <matej@svrcek.org>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -17,151 +16,144 @@ msgstr ""
 "X-Poedit-Language: cs\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 
-#: ../campaigns/emp01.wmf/objective:7
-msgid "Build a barrack at the red point in the east of the forest."
-msgstr "Postav kasárna na červeném bodu na východ od lesa."
-
-#: ../campaigns/emp01.wmf/objective:13
-msgid "Build a lumberjack, at the red point at the south of your headquarters."
-msgstr "Postav chatu dřevorubce na červeném bodu na jih od své základny."
-
-#: ../campaigns/emp01.wmf/objective:19
-msgid "Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
-msgstr "Postav další dvě chaty dřevorubce a pilu hned jak pro ně bude místo."
-
-#: ../campaigns/emp01.wmf/objective:25
-msgid "Build a forester hut, to save the wood resources of this island."
-msgstr "Postav chatu lesníka, aby ochraňoval lesy na tomto ostrově."
-
-#: ../campaigns/emp01.wmf/objective:31
-msgid "Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "Otevři lom na jihu pro těžbu kamení a mramoru ve skalách. Později budou užitečné při stavbě budov."
-
-#: ../campaigns/emp01.wmf/elemental:9
+#: ../../../campaigns/emp01.wmf/elemental:9
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Císařství trénink - Mělčiny u Malac' Mor"
 
-#: ../campaigns/emp01.wmf/elemental:11
+#: ../../../campaigns/emp01.wmf/elemental:11
 msgid "First mission of the Empire campaign"
 msgstr "První mise Císařské kampaně"
 
-#: ../campaigns/emp01.wmf/event:11
-#: ../campaigns/emp01.wmf/event:30
-#: ../campaigns/emp01.wmf/event:49
-#: ../campaigns/emp01.wmf/event:647
+#: ../../../campaigns/emp01.wmf/event:11 ../../../campaigns/emp01.wmf/event:30
+#: ../../../campaigns/emp01.wmf/event:49
+#: ../../../campaigns/emp01.wmf/event:647
 msgid "Diary of Lutius"
 msgstr "Deník Lucia"
 
 # A king in the Empire? It should be an Emperor!
-#: ../campaigns/emp01.wmf/event:13
+#: ../../../campaigns/emp01.wmf/event:13
 msgid "What has become of our Empire? I really ask this question, while my king disallowed me to fight against that monster of a barbarian tribe, that first acted like a peaceful friend and than attacked my army in the darkest night. <br>I got the the task to patrol on our northern frontier, which lies on the north of Galdin Mountains in a great, beautiful and ancient forest, with an army of 150 men. Soon we met a barbarian tribe, which at first was nice and friendly.  A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons. But in our fifth night in that region, they attacked us without reason. I lost hundreds of good men, was enprisoned and finally was brought to the chieftain. He spit at me, laughed about me and told me to leave this land forever. He told me he doesn't want new land and doesn't want our land, but THIS forest was their land and will stay theirs until the ghosts take the last man of his folk!<br>Three weeks later, I came back to Fremil, to speak with our king. He was furious at the Barbarians, but disallowed an attack of these tribes anyway. He believed, that our army was too weak to resist in a war against the barbarians.<br>I saw no way, how I could erase my guilt, without fighting against the Barbarians and so I left Fremil by boat, to find a new world and a new life for me somewhere in the south. And now I am sailing southwards on the perl-gulf with my family, a few of my friends and a few of my best warriors."
 msgstr "Co se to stalo s naším Císařstvím? Musím se sám sebe ptát, když mi Císař zakázal zakročit proti té bestii, těm barbarům, kteří se k nám vlísali jako přátelé a pak zaútočili v noci na mou armádu. <br>Dostal jsem za úkol strážit severní hranici, která se táhne na sever od pohoří Galdin rozlehlým, prastarým a nádherným hvozdem s armádou 150 mužů. Nedlouho tomu jsme se setkali s barbarským kmenem, který se zpočátku choval přátelsky a mile. Někteří muži s nimi dokonce obchodovali a jejich děti se k nám přišly podívat na naše čisté a upravené uniformy a zbraně. Ale o páté noci v oblasti na nás bez varování zaútočili. Ztratil jsem desítky mužů, byl uvězněn a nakonec předveden před jejich náčelníka. Plivl na mě, vysmál se mi a vyhnal se slovy, ať se v těchto zemích už nikdy neukazuji. Řekl, že nechce novou zemi, nechce naši zemi, ale TENTO les patří odedávna jim a jejich zůstane dokud si duchové nevezmou duši posledního z jeho národa! <br> Po třech týdnech jsem dorazil do Fremilu, abych mluvil před Císařem. Zuřil nad barbary, ale stejně zakázal na jejich kmeny zaútočit. Věřil, že má armáda je příliš slabá, aby vydržela válku s barbary. <br>Nevěděl jsem, jak jinak bych mohl odčinit svou vinu, než bojem s barbary, a proto jsem Fremil opustil na malé loďce. Rozhodl jsem se hledat na jihu nové země, kde bych mohl začít nový život. Teď tedy pluji na jih perlovou zátokou s mou rodinou, několika svými přáteli a hrstkou svých nejlepších bojovníků."
 
-#: ../campaigns/emp01.wmf/event:15
+#: ../../../campaigns/emp01.wmf/event:15
 msgid "A dark night"
 msgstr "Temná noc"
 
-#: ../campaigns/emp01.wmf/event:32
+#: ../../../campaigns/emp01.wmf/event:32
 msgid "Seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us in a dark, wild storm. I really don't know how many hours have passed, since the waves got higher than our boat, but still it would be suicide to go outside.<br>Our ship is badly damaged and is taking more and more water. We can thank the Gods if we survive this black night with just our lifes."
 msgstr "Vypadá to, že přeplutí perlové zátoky byla naše největší chyba. Příroda se proti nám postavila a zahnala nás do černé, divoké bouře. Opravdu už ani nevím, kolik hodin mohlo uplynout od chvíle, kdy se vlny začaly vzpínat výše než naše loď. Vyjít ven je stále rovno sebevraždě.<br>Naše loď je těžce poškozena a nabírá stále více vody. Můžeme jen děkovat Všemohoucímu, jestli přečkáme tuhle noc jen s našimi holými životy."
 
-#: ../campaigns/emp01.wmf/event:34
+#: ../../../campaigns/emp01.wmf/event:34
 msgid "The rough sea"
 msgstr "Rozbouřené moře"
 
 # the God is only one, the gods are many, beware of capital G
-#: ../campaigns/emp01.wmf/event:51
+#: ../../../campaigns/emp01.wmf/event:51
 msgid "Finally the Gods were with us. We landed on an unknown coast and found a peaceful sleep under the palms growing at the strand. But that is about as good as it gets.<br>The truth is, when I woke up this morning, I saw nothing more than sand around us. It really seems as if we landed under the only palms existing in this far sandy desert. I fear, we won't find the help we need, to get our ship repaired in good time."
 msgstr "Konečně se nad námi bozi smilovali. Přirazili jsme k neznámému břehu a konečně v klidu usnuli pod ochranou palem rostoucích na pláži. Ale to je tak vše, čeho se nám dostalo.<br>Pravdou je, že když jsem se ráno probudil, nebylo vidět nic víc, než písek okolo nás. Opravdu to vypadalo, jako bychom přistáli pod jedinými palmami rostoucími v písečné poušti. Obávám se, že včas nenajdeme potřebnou pomoc pro opravu lodi."
 
-#: ../campaigns/emp01.wmf/event:53
+#: ../../../campaigns/emp01.wmf/event:53
 msgid "Survivor"
 msgstr "Přeživší"
 
-#: ../campaigns/emp01.wmf/event:448
-#: ../campaigns/emp01.wmf/event:480
+#: ../../../campaigns/emp01.wmf/event:448
+#: ../../../campaigns/emp01.wmf/event:480
 msgid "Saledus speaks..."
 msgstr "Saledius promluvil..."
 
 # forest in the desert? how does it look?
-#: ../campaigns/emp01.wmf/event:450
+#: ../../../campaigns/emp01.wmf/event:450
 msgid "Sire, I fear we are not safe in this foreign land.<br>Who knows, what cruel creatures live behind this forest in that mighty desert?<br>And what if that creatures crawl in the woods and wait for the time to attack us?<br><br>Well, perhaps my fear is wrong, but it can't be wrong to watch out in the forests, so that we can be sure to see any potential enemies before they can see us.<br>We really should build a barrack in the easter-center of the forest. Than one of us will watch out in the darkness and will keep us save from evil attacks of these creatures.<br><br>- build a barrack at the red point on the east side of the forests right of your headquarters."
 msgstr "Veličenstvo, obávám se, že v těchto cizích zemích nejsme bezpečni.<br>Kdoví, co za divoké stvoření žijí v lesích téhle pustiny.<br>A co když tato stvoření se už plíží stíny k nám a čekají na chvíli, kdy na nás zaútočí?<br><br>Budiž, možná jsou mé obavy plané, ale co tím ztratíme, když budeme v lesích držet hlídky, abychom si byli jistí, že uvidíme blížícího se nepřítele dříve, než na nás zaútočí?<br>Bude jen rozumné, abychom postavili kasárna ve východní části lesa. Odtud bude někdo sledovat pustinu a včas nás varovat před útoky bestií, které se v ní ukrávají.<br><br>- postav kasárna na červeném bodu ve východní části lesa, napravo od základny."
 
 # double
-#: ../campaigns/emp01.wmf/event:452
-#: ../campaigns/emp01.wmf/event:484
+#: ../../../campaigns/emp01.wmf/event:452
+#: ../../../campaigns/emp01.wmf/event:484
 msgid "A visitor"
 msgstr "Návštěvník"
 
-#: ../campaigns/emp01.wmf/event:459
-#: ../campaigns/emp01.wmf/event:491
-#: ../campaigns/emp01.wmf/event:510
-#: ../campaigns/emp01.wmf/event:536
-#: ../campaigns/emp01.wmf/event:570
-#: ../campaigns/emp01.wmf/event:604
-#: ../campaigns/emp01.wmf/event:638
+#: ../../../campaigns/emp01.wmf/event:459
+#: ../../../campaigns/emp01.wmf/event:491
+#: ../../../campaigns/emp01.wmf/event:510
+#: ../../../campaigns/emp01.wmf/event:536
+#: ../../../campaigns/emp01.wmf/event:570
+#: ../../../campaigns/emp01.wmf/event:604
+#: ../../../campaigns/emp01.wmf/event:638
 msgid "OK"
 msgstr "OK"
 
-#: ../campaigns/emp01.wmf/event:482
+#: ../../../campaigns/emp01.wmf/event:482
 msgid "Sire, I saw that the construction of the barrack is completed, so I sent one of my best soldiers to it, to watch out in the deserts.<br>It is great. Now we can feel a bit more safe again and can look ahead to the next things waiting to be done."
 msgstr "Veličenstvo, všiml jsem si, že stavba kasáren je dokončena a tak jsem do nich poslal jednoho z mých nejlepších mužů, aby hlídal, co se blíží z pouště.<br>Výborně. Teď se konečně můžeme cítit zase trochu bezpečně a připravit se na budoucnost."
 
-#: ../campaigns/emp01.wmf/event:499
-#: ../campaigns/emp01.wmf/event:525
+#: ../../../campaigns/emp01.wmf/event:499
+#: ../../../campaigns/emp01.wmf/event:525
 msgid "Amalea smiles..."
 msgstr "Amalea se usmívá..."
 
-#: ../campaigns/emp01.wmf/event:501
+#: ../../../campaigns/emp01.wmf/event:501
 msgid "Hey Lutius, I just met Saledus outside. He told me about construction of the barracks. Well, I am not one of those girls, who think we need more barracks, but on the other hand, we might concentrate on other stuff now.<br>It is absolutely clear that we need wood, for repairing our ship. So I walked through the forest, yesterday and found a nice place for a lumberjack south of our headquarters.<br><br>- build a lumberjack at the red point, south of your headquarters"
 msgstr "Ahoj Lucie. Teď jsem se venku potkala se Saledem. Pověděl mi o stavbě kasáren. Víš, nejsem z těch holek, co si myslí, že potřebujeme další kasárna. Na druhou stranu bychom se mohli soustředit i na jiné věci.<br>Bez debaty potřebujeme dřevo, abychom mohli opravit naši loď. Včera jsem prošla les a našla pěkné místo pro dřevorubce, na jih od základny.<br><br>- postav chatu dřevorubce na červeném bodě, na jih od základny"
 
-#: ../campaigns/emp01.wmf/event:503
-#: ../campaigns/emp01.wmf/event:529
-#: ../campaigns/emp01.wmf/event:563
+#: ../../../campaigns/emp01.wmf/event:503
+#: ../../../campaigns/emp01.wmf/event:529
+#: ../../../campaigns/emp01.wmf/event:563
 msgid "Young Amalea"
 msgstr "Mladá Amalea"
 
-#: ../campaigns/emp01.wmf/event:527
+#: ../../../campaigns/emp01.wmf/event:527
 msgid "Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjacks, so that we can faster harvest the trunks.<br>But unfortunally the trunks are useless for repairing our ship - We need refined wood, like every ship and every bigger building needs, too - so we should build up a sawmill, as soon as we have got enough space for this.<br><br>- Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
 msgstr "Ahoj Lucie. Dostala jsem zprávu, že první dřevorubec dnes začal svou práci. Asi bude dobré chvíli počkat, až udělá v lese trochu místa, abychom mohli postavit další chaty pro dřevorubce. Tak asi dvě. Budeme pak moci těžit dřevo rychleji.<br>Bohužel, takhle je dřevo na opravy k ničemu, musíme ho nařezat na desky, jaké se používají na stavbu lodí i větších budov. No, musíme postavit i pilu, hned jak na ni bude dost místa.<br><br>- postav dvě chaty pro dřevorubce a pilu hned jak se pro ně uvolní dost místa"
 
-#: ../campaigns/emp01.wmf/event:559
+#: ../../../campaigns/emp01.wmf/event:559
 msgid "Amalea comes in..."
 msgstr "Amalea vchází..."
 
-#: ../campaigns/emp01.wmf/event:561
+#: ../../../campaigns/emp01.wmf/event:561
 msgid "Hi Lutius,<br>I've got two important things to talk about:<br>First the positive thing: I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting, to wood.<br>But that's just the only positive thing I know to talk about. The negative is, that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br>Lutius, this trees keep us safe from sandstorms out of the desert, they provide shade for the hot days and they are the home of so many smart little animals. We shouldn't leave this island as complete desert.<br>Lutius, I beg you: build a forester hut, so that someone cares about planting new trees.<br><br>- Build a forester hut, to save the wood resources of this island."
 msgstr "Ahoj Lucie!<br>Chci si s tebou promluvit o dvou dost důležitých věcech.<br>První dobrá zpráva: Všimla jsem si, že stavba pily je dokončena, takže může začít zpracovávat dřevo od dřevorubců.<br>To je bohužel jediná dobrá zpráva, kterou pro tebe mám. Teď tu špatnou: naši dřevorubci jsou velmi výkonní, vymýtili už skoro všechno dřevo na ostrově.<br>Lucie, tyhle stromy nás chráci před písečnými bouřemi přicházejícími z pouště, poskytují nám stín za parných dnů a jsou domovem mnoha malým zvířátkům. Nesmíme proměnit celý ostrov v poušť.<br>Prosím tě, Lucie, postav dům lesníkovi, aby se mohl někdo věnovat sázení stromů.<br><br>- postav chatu lesníka pro ochranu lesů na ostrově "
 
-#: ../campaigns/emp01.wmf/event:593
-#: ../campaigns/emp01.wmf/event:627
+#: ../../../campaigns/emp01.wmf/event:593
+#: ../../../campaigns/emp01.wmf/event:627
 msgid "Saledus smiles..."
 msgstr "Saledus se usmívá..."
 
-#: ../campaigns/emp01.wmf/event:595
+#: ../../../campaigns/emp01.wmf/event:595
 msgid "Hey my good old friend, I just thought about the rocks, standing on the south strand of this land. Perhaps we could cut out some usefull stones and beautiful marble.<br>The repair of our ship will take a few weeks anyway and the resources we harvest now might be the base of strong and big buildings in another land.<br><br>- Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
 msgstr "Vítej příteli, rád tě vidím. Zrovna jsem myslel na skály, co jsou na jižním konci této země. Co myslíš, možná bychom v nich mohli najím vhodné kameny a snad dokonce i kousek mramoru na nějakou stavbu?<br>Vypadá to, že oprava lodi se určitě na pár týdnů protáhne a s tím, co teď máme, bychom mohli dát dohromady materiál na stavbu pevných a velkých budov v nové zemi.<br><br>- postav lom na jihu, ve skalách nalámej kamení a mramor, bude se používat na stavbu budov"
 
-#: ../campaigns/emp01.wmf/event:597
-#: ../campaigns/emp01.wmf/event:631
+#: ../../../campaigns/emp01.wmf/event:597
+#: ../../../campaigns/emp01.wmf/event:631
 msgid "A Visitor"
 msgstr "Návštěvník"
 
-#: ../campaigns/emp01.wmf/event:629
+#: ../../../campaigns/emp01.wmf/event:629
 msgid "Hey Lutius,<br>today we got a big piece closer to our first castle. The quarry to the south began it's work today and will soon provide us with hard stones and beautiful marble. Now we really can look forward to settle down on another island."
 msgstr "Vitej Lucie!<br>Dnes jsme udělali velký krok k našemu prvnímu hradu. Lom na jihu začal s těžbou dnes a brzy pro nás vyprodukuje dost tvrdého kamene a mramoru. Už se můžeme začít těšit, až se usadíme na nějakém ostrově."
 
-#: ../campaigns/emp01.wmf/event:649
+#: ../../../campaigns/emp01.wmf/event:649
 msgid "Today I got the message that our ship is completely repaired. At the moment my people load everything on to this new repaired ship, hoping it will save us better than last time.<br> This night will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br>I still wonder if we will ever see Fremil again.<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 msgstr "Dnes jsem dostal zprávu, že naše loď je úplně opravena. Mojí lidé právě nakládají všechno, co máme, na novou loď. Doufají, že nás ochrání lépe, než posledně.<br>Tahle noc může být naší poslední na tomto ostrově. Zítra ráno ostrov opustíme a budeme opět hledat nové místo pro náš exil.<br>Pořád musím myslet na to, jestli ještě někdy spatřím Fremil.<br><br>----------------------VÍTĚZSTVÍ!-----------------------<br><br>Splnil si tuto misi. Jestli chceš, můžeš pokračovat v hraní, nebo se přesuň k další misi."
 
-#: ../campaigns/emp01.wmf/event:651
+#: ../../../campaigns/emp01.wmf/event:651
 msgid "Mission Complete"
 msgstr "Mise splněna"
 
-#: ../campaigns/emp01.wmf/event:654
+#: ../../../campaigns/emp01.wmf/event:654
 msgid "Continue"
 msgstr "Pokračování"
 
+#~ msgid "Build a barrack at the red point in the east of the forest."
+#~ msgstr "Postav kasárna na červeném bodu na východ od lesa."
+
+#~ msgid "Build a lumberjack, at the red point at the south of your headquarters."
+#~ msgstr "Postav chatu dřevorubce na červeném bodu na jih od své základny."
+
+#~ msgid "Build two further lumberjack huts and a sawmill as soon as there is enough space for them."
+#~ msgstr "Postav další dvě chaty dřevorubce a pilu hned jak pro ně bude místo."
+
+#~ msgid "Build a forester hut, to save the wood resources of this island."
+#~ msgstr "Postav chatu lesníka, aby ochraňoval lesy na tomto ostrově."
+
+#~ msgid "Build a quarry in the south, to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "Otevři lom na jihu pro těžbu kamení a mramoru ve skalách. Později budou užitečné při stavbě budov."

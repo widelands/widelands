@@ -1,8 +1,12 @@
+# Widelands po/cz_CZ/worlds/desert.po
+# Copyright (C) 2007 Widelands Development Team.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Czech translation\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"Project-Id-Version: Widelands svn2633\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2007-09-09 16:19+0000\n"
 "PO-Revision-Date: 2006-06-27 13:54+0100\n"
 "Last-Translator: Prometheus <mmatej@yahoo.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -12,137 +16,155 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 
-#: ../worlds/desert/bobs/bunny/conf:1
+#: ../../../worlds/desert/bobs/bunny/conf:1
 msgid "Bunny"
 msgstr "Zajíc"
 
-#: ../worlds/desert/bobs/bush1/conf:1 ../worlds/desert/bobs/bush4/conf:1
-#: ../worlds/desert/bobs/bush5/conf:1
+#: ../../../worlds/desert/bobs/bush1/conf:1
+#: ../../../worlds/desert/bobs/bush4/conf:1
+#: ../../../worlds/desert/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Keř"
 
-#: ../worlds/desert/bobs/cactus1/conf:1 ../worlds/desert/bobs/cactus2/conf:1
-#: ../worlds/desert/bobs/cactus3/conf:1 ../worlds/desert/bobs/cactus4/conf:1
+#: ../../../worlds/desert/bobs/cactus1/conf:1
+#: ../../../worlds/desert/bobs/cactus2/conf:1
+#: ../../../worlds/desert/bobs/cactus3/conf:1
+#: ../../../worlds/desert/bobs/cactus4/conf:1
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../worlds/desert/bobs/deadtree1/conf:1
-#: ../worlds/desert/bobs/deadtree2/conf:1
-#: ../worlds/desert/bobs/deadtree3/conf:1
-#: ../worlds/desert/bobs/deadtree4/conf:1
+#: ../../../worlds/desert/bobs/deadtree1/conf:1
+#: ../../../worlds/desert/bobs/deadtree2/conf:1
+#: ../../../worlds/desert/bobs/deadtree3/conf:1
+#: ../../../worlds/desert/bobs/deadtree4/conf:1
 msgid "Dead Tree"
 msgstr "Uschlý strom"
 
-#: ../worlds/desert/bobs/deer/conf:1
+#: ../../../worlds/desert/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Jelen"
 
-#: ../worlds/desert/bobs/duck/conf:1
+#: ../../../worlds/desert/bobs/duck/conf:1
 msgid "Duck"
 msgstr "Kachna"
 
-#: ../worlds/desert/bobs/fox/conf:1
-msgid "Desert Fox"
-msgstr "Pouštní liška"
+#: ../../../worlds/desert/bobs/fox/conf:1
+msgid "Fox"
+msgstr "Liška"
 
-#: ../worlds/desert/bobs/grass1/conf:1 ../worlds/desert/bobs/grass2/conf:1
-#: ../worlds/desert/bobs/grass3/conf:1
+#: ../../../worlds/desert/bobs/grass1/conf:1
+#: ../../../worlds/desert/bobs/grass2/conf:1
+#: ../../../worlds/desert/bobs/grass3/conf:1
 msgid "Grass"
 msgstr "Tráva"
 
-#: ../worlds/desert/bobs/mushroom1/conf:1
-#: ../worlds/desert/bobs/mushroom2/conf:1
+#: ../../../worlds/desert/bobs/mushroom1/conf:1
+#: ../../../worlds/desert/bobs/mushroom2/conf:1
 msgid "Mushroom"
 msgstr "Houba"
 
-#: ../worlds/desert/bobs/pebble1/conf:1 ../worlds/desert/bobs/pebble2/conf:1
-#: ../worlds/desert/bobs/pebble3/conf:1 ../worlds/desert/bobs/pebble4/conf:1
-#: ../worlds/desert/bobs/pebble5/conf:1 ../worlds/desert/bobs/pebble6/conf:1
+#: ../../../worlds/desert/bobs/pebble1/conf:1
+#: ../../../worlds/desert/bobs/pebble2/conf:1
+#: ../../../worlds/desert/bobs/pebble3/conf:1
+#: ../../../worlds/desert/bobs/pebble4/conf:1
+#: ../../../worlds/desert/bobs/pebble5/conf:1
+#: ../../../worlds/desert/bobs/pebble6/conf:1
 msgid "Pebble"
 msgstr "Oblázek"
 
-#: ../worlds/desert/bobs/ruin1/conf:1 ../worlds/desert/bobs/ruin2/conf:1
-#: ../worlds/desert/bobs/ruin3/conf:1 ../worlds/desert/bobs/ruin4/conf:1
-#: ../worlds/desert/bobs/ruin5/conf:1
+#: ../../../worlds/desert/bobs/ruin1/conf:1
+#: ../../../worlds/desert/bobs/ruin2/conf:1
+#: ../../../worlds/desert/bobs/ruin3/conf:1
+#: ../../../worlds/desert/bobs/ruin4/conf:1
+#: ../../../worlds/desert/bobs/ruin5/conf:1
 msgid "ruins"
 msgstr "zřícenina"
 
-#: ../worlds/desert/bobs/sheep/conf:1
+#: ../../../worlds/desert/bobs/sheep/conf:1
 msgid "Sheep"
 msgstr "Ovce"
 
-#: ../worlds/desert/bobs/skeleton1/conf:1
-#: ../worlds/desert/bobs/skeleton2/conf:1
-#: ../worlds/desert/bobs/skeleton3/conf:1
+#: ../../../worlds/desert/bobs/skeleton1/conf:1
+#: ../../../worlds/desert/bobs/skeleton2/conf:1
+#: ../../../worlds/desert/bobs/skeleton3/conf:1
 msgid "Skeleton"
 msgstr "Kostlivec"
 
-#: ../worlds/desert/bobs/skeleton4/conf:1
+#: ../../../worlds/desert/bobs/skeleton4/conf:1
 msgid "Shell"
 msgstr "Mušle"
 
-#: ../worlds/desert/bobs/sstones1/conf:1 ../worlds/desert/bobs/sstones2/conf:1
-#: ../worlds/desert/bobs/sstones3/conf:1 ../worlds/desert/bobs/sstones4/conf:1
-#: ../worlds/desert/bobs/sstones5/conf:1 ../worlds/desert/bobs/sstones6/conf:1
-#: ../worlds/desert/bobs/sstones7/conf:1
+#: ../../../worlds/desert/bobs/sstones1/conf:1
+#: ../../../worlds/desert/bobs/sstones2/conf:1
+#: ../../../worlds/desert/bobs/sstones3/conf:1
+#: ../../../worlds/desert/bobs/sstones4/conf:1
+#: ../../../worlds/desert/bobs/sstones5/conf:1
+#: ../../../worlds/desert/bobs/sstones6/conf:1
+#: ../../../worlds/desert/bobs/sstones7/conf:1
 msgid "Standing Stones"
 msgstr "Menhiry"
 
-#: ../worlds/desert/bobs/stones1/conf:1 ../worlds/desert/bobs/stones2/conf:1
-#: ../worlds/desert/bobs/stones3/conf:1 ../worlds/desert/bobs/stones4/conf:1
-#: ../worlds/desert/bobs/stones5/conf:1 ../worlds/desert/bobs/stones6/conf:1
+#: ../../../worlds/desert/bobs/stones1/conf:1
+#: ../../../worlds/desert/bobs/stones2/conf:1
+#: ../../../worlds/desert/bobs/stones3/conf:1
+#: ../../../worlds/desert/bobs/stones4/conf:1
+#: ../../../worlds/desert/bobs/stones5/conf:1
+#: ../../../worlds/desert/bobs/stones6/conf:1
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../worlds/desert/bobs/tree1/conf:4
+#: ../../../worlds/desert/bobs/tree1/conf:4
 msgid "Palm"
 msgstr "Palma"
 
-#: ../worlds/desert/bobs/tree2/conf:4 ../worlds/desert/bobs/tree3/conf:4
-#: ../worlds/desert/bobs/tree4/conf:4 ../worlds/desert/bobs/tree5/conf:4
-#: ../worlds/desert/bobs/tree6/conf:4 ../worlds/desert/bobs/tree7/conf:4
-#: ../worlds/desert/bobs/tree8/conf:4
+#: ../../../worlds/desert/bobs/tree2/conf:4
+#: ../../../worlds/desert/bobs/tree3/conf:4
+#: ../../../worlds/desert/bobs/tree4/conf:4
+#: ../../../worlds/desert/bobs/tree5/conf:4
+#: ../../../worlds/desert/bobs/tree6/conf:4
+#: ../../../worlds/desert/bobs/tree7/conf:4
+#: ../../../worlds/desert/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Stromy"
 
-#: ../worlds/desert/conf:2
+#: ../../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
 msgstr "Vývojový tým Widelands"
 
-#: ../worlds/desert/conf:3
+#: ../../../worlds/desert/conf:3
 msgid "Desert"
 msgstr "Poušť"
 
-#: ../worlds/desert/conf:4
+#: ../../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
 msgstr "Toto jsou otevřené a písečné země beduínů."
 
-#: ../worlds/desert/resconf:4
+#: ../../../worlds/desert/resconf:4
 msgid "Coal"
 msgstr "Uhlí"
 
-#: ../worlds/desert/resconf:12
+#: ../../../worlds/desert/resconf:12
 msgid "Gold"
 msgstr "Zlato"
 
-#: ../worlds/desert/resconf:20
+#: ../../../worlds/desert/resconf:20
 msgid "Iron"
 msgstr "Železo"
 
-#: ../worlds/desert/resconf:28
+#: ../../../worlds/desert/resconf:28
 msgid "Granit"
 msgstr "Žula"
 
-#: ../worlds/desert/resconf:36
+#: ../../../worlds/desert/resconf:36
 msgid "Water"
 msgstr "Voda"
 
-#: ../worlds/desert/resconf:41
+#: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "Ryba"
 
-#~ msgid "Fox"
-#~ msgstr "Liška"
+#~ msgid "Desert Fox"
+#~ msgstr "Pouštní liška"
 
 #~ msgid "Reindeer"
 #~ msgstr "Sob"
