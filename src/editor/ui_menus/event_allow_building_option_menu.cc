@@ -19,7 +19,7 @@
 
 #include "event_allow_building_option_menu.h"
 
-#include "editor.h"
+#include "editor_game_base.h"
 #include "editorinteractive.h"
 #include "error.h"
 #include "events/event_allow_building.h"
@@ -54,7 +54,7 @@ m_building(-1) //  FIXME negative value!
    if (m_player<1) m_player=1;
 
    // Fill the building infos
-	Editor & editor = m_parent->editor();
+	Editor_Game_Base & editor = m_parent->editor();
 	if
 		(const Tribe_Descr * const tribe = editor.get_tribe
 		 (editor.map().get_scenario_player_tribe(m_player).c_str()))

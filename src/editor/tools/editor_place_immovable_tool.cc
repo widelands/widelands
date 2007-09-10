@@ -19,7 +19,7 @@
 
 #include "editor_place_immovable_tool.h"
 
-#include "editor.h"
+#include "editor_game_base.h"
 #include "editorinteractive.h"
 #include "field.h"
 #include "immovable.h"
@@ -38,7 +38,7 @@ int Editor_Place_Immovable_Tool::handle_click_impl
 {
 	const int radius = parent.get_sel_radius();
 	if (not get_nr_enabled()) return radius;
-	Editor & editor = parent.editor();
+	Editor_Game_Base & editor = parent.editor();
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(center.node), radius));
 	do if

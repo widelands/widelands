@@ -20,8 +20,6 @@
 #include "widelands_map_flagdata_data_packet.h"
 
 #include "building.h"
-#include "editor.h"
-#include "editorinteractive.h"
 #include "editor_game_base.h"
 #include "fileread.h"
 #include "filewrite.h"

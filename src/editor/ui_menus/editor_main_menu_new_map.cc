@@ -25,7 +25,7 @@
 #include "map.h"
 #include "world.h"
 #include "error.h"
-#include "editor.h"
+#include "editor_game_base.h"
 #include "ui_progresswindow.h"
 
 #include "ui_window.h"
@@ -159,7 +159,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
 
 void Main_Menu_New_Map::clicked_create_map() {
 	Map & map = m_parent->egbase().map();
-	Editor & editor = m_parent->editor();
+	Editor_Game_Base & editor = m_parent->editor();
 	UI::ProgressWindow loader;
 
 	// Clean all the stuff up, so we can load

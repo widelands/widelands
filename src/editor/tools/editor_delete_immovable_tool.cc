@@ -21,7 +21,6 @@
 
 #include "field.h"
 #include "editorinteractive.h"
-#include "editor.h"
 #include "immovable.h"
 #include "mapregion.h"
 

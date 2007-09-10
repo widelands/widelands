@@ -19,7 +19,6 @@
 
 #include "editor_player_menu.h"
 
-#include "editor.h"
 #include "editorinteractive.h"
 #include "editor_set_starting_pos_tool.h"
 #include "error.h"

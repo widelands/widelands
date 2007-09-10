@@ -68,7 +68,7 @@ struct Editor_Game_Base {
 	void conquer_area_no_building(const Player_Area<Area<FCoords> >);
 
 	// logic handler func
-	virtual void think() = 0;
+	virtual void think();
 
 	// Player commands
 	void remove_player(int plnum);
@@ -144,19 +144,19 @@ struct Editor_Game_Base {
 		(const FCoords, const Map_Object_Descr * const);
 
 	enum losegain_t {LOSE=0, GAIN};
-	virtual void player_immovable_notification (PlayerImmovable*, losegain_t)=0;
-	virtual void player_field_notification (const FCoords&, losegain_t)=0;
+	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);
+	virtual void player_field_notification (const FCoords&, losegain_t);
 
-protected:
 	void cleanup_objects() throw () {
 		objects().cleanup(this);
 	}
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	inline int* get_game_time_pointer() {return &m_gametime;}
-	inline void set_iabase(Interactive_Base* b) {m_iabase=b;}
+	int* get_game_time_pointer() {return &m_gametime;}
+	void set_iabase(Interactive_Base* b) {m_iabase=b;}
 
+protected:
 	virtual void do_conquer_area
 		(Player_Area<Area<FCoords> > player_area,
 		 const bool conquer,

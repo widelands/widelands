@@ -17,7 +17,6 @@
  *
  */
 
-#include "editor.h"
 #include "editorinteractive.h"
 #include "editor_delete_immovable_tool.h"
 #include "editor_event_menu.h"
@@ -39,10 +38,11 @@
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_modal_messagebox.h"
+#include "ui_progresswindow.h"
 #include "wlapplication.h"
 
 
-Editor_Interactive::Editor_Interactive(Editor & e) :
+Editor_Interactive::Editor_Interactive(Editor_Game_Base & e) :
 Interactive_Base(e), m_editor(e)
 {
 
@@ -52,6 +52,8 @@ Interactive_Base(e), m_editor(e)
 #else
    set_display_flag(Interactive_Base::dfDebug, true);
 #endif
+
+	m_realtime = WLApplication::get()->get_time();
 
 	fieldclicked.set(this, &Editor_Interactive::map_clicked);
 
@@ -151,6 +153,28 @@ Editor_Interactive::~Editor_Interactive() {unset_sel_picture();}
 /// Called just before the editor starts, after postload, init and gfxload.
 void Editor_Interactive::start()
 {egbase().map().overlay_manager().show_buildhelp(true);}
+
+
+/**
+ * Called every frame.
+ *
+ * Advance the timecounter and animate textures.
+ */
+void Editor_Interactive::think()
+{
+	Interactive_Base::think();
+
+	int lasttime = m_realtime;
+	int frametime;
+
+	m_realtime = WLApplication::get()->get_time();
+	frametime = m_realtime - lasttime;
+
+	*editor().get_game_time_pointer() += frametime;
+
+	g_gr->animate_maptextures(editor().get_gametime());
+}
+
 
 
 void Editor_Interactive::exit() {
@@ -418,3 +442,35 @@ bool Editor_Interactive::is_player_tribe_referenced(int player) {
 
    return false;
 }
+
+
+/**
+ * Public static method to create an instance of the editor
+ * and run it. This takes care of all the setup and teardown.
+ */
+void Editor_Interactive::run_editor()
+{
+	Editor_Game_Base editor;
+	UI::ProgressWindow loader_ui;
+
+	Map* m = new Map;
+	m->create_empty_map();
+	editor.set_map(m);
+
+	g_gr->flush(PicMod_Menu);
+
+	Editor_Interactive eia(editor);
+	editor.set_iabase(&eia); //TODO: get rid of this
+
+	editor.postload();
+	editor.load_graphics(loader_ui);
+
+	eia.start();
+	eia.run();
+
+	editor.cleanup_objects();
+
+	g_gr->flush(PicMod_Game);
+	g_anim.flush();
+}
+

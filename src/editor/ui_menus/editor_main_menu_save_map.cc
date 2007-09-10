@@ -20,7 +20,6 @@
 #include "editor_main_menu_save_map.h"
 
 #include "constants.h"
-#include "editor.h"
 #include "editorinteractive.h"
 #include "editor_main_menu_save_map_make_directory.h"
 #include "error.h"

@@ -22,7 +22,6 @@
 #include "field.h"
 #include "mapregion.h"
 #include "editorinteractive.h"
-#include "editor.h"
 #include "bob.h"
 
 /*

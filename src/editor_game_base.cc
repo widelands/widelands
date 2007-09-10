@@ -135,6 +135,22 @@ Editor_Game_Base::~Editor_Game_Base() {
 		delete *it;
 }
 
+void Editor_Game_Base::think()
+{
+	//TODO: Get rid of this; replace by a function that just advances gametime
+	// by a given number of milliseconds
+}
+
+void Editor_Game_Base::player_immovable_notification (PlayerImmovable*, losegain_t)
+{
+	//TODO: Get rid of this; replace by general notification system
+}
+
+void Editor_Game_Base::player_field_notification (const FCoords&, losegain_t)
+{
+	//TODO: Get rid of this; replace by general notification system
+}
+
 /*
 ===============
 This unconquers a area. This is only possible, when there

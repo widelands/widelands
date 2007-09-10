@@ -21,7 +21,7 @@
 #include "field.h"
 #include "mapregion.h"
 #include "editorinteractive.h"
-#include "editor.h"
+#include "editor_game_base.h"
 #include "bob.h"
 
 /*
@@ -35,7 +35,7 @@ and places this on the current field
 int Editor_Place_Bob_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	Editor & editor = parent.editor();
+	Editor_Game_Base & editor = parent.editor();
 	MapRegion<Area<FCoords> > mr
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));

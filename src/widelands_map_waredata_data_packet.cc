@@ -22,8 +22,6 @@
 #include "bob.h"
 #include "fileread.h"
 #include "filewrite.h"
-#include "editor.h"
-#include "editorinteractive.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "map.h"

@@ -20,8 +20,6 @@
 #include "widelands_map_buildingdata_data_packet.h"
 
 #include "constructionsite.h"
-#include "editor.h"
-#include "editorinteractive.h"
 #include "editor_game_base.h"
 #include "error.h"
 #include "fileread.h"

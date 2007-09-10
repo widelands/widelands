@@ -30,7 +30,6 @@
 #include "error.h"
 #include "map.h"
 #include "graphic.h"
-#include "editor.h"
 #include "player.h"
 #include "tribe.h"
 

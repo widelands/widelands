@@ -20,7 +20,7 @@
 #include "wlapplication.h"
 
 #include "build_id.h"
-#include "editor.h"
+#include "editorinteractive.h"
 #include "error.h"
 #include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
@@ -277,12 +277,8 @@ void WLApplication::run()
 {
 	if (editor_commandline) {
 		g_sound_handler.start_music("ingame");
-		//  FIXME if m_editor_filename.size(), load that file in the editor.
-		//  FIXME The editor loading code is unfortunately complicated and hidden
-		//  FIXME in Main_Menu_Load_Map::load_map, which is UI code.
-		Editor * const e = new Editor(); //  Local variable does not work (sig11).
-		e->run();
-		delete e;
+		//  FIXME add the ability to load a map directly
+		Editor_Interactive::run_editor();
 	} else if (m_loadgame_filename.size()) {
 		assert(not m_game);
 		m_game = new Game;
@@ -1158,12 +1154,8 @@ void WLApplication::mainmenu()
 			break;
 
 		case Fullscreen_Menu_Main::mm_editor:
-			{
-				Editor* e=new Editor(); //  Local variable does not work (sig11).
-				e->run();
-				delete e;
-				break;
-			}
+			Editor_Interactive::run_editor();
+			break;
 
 		default:
 		case Fullscreen_Menu_Main::mm_exit:

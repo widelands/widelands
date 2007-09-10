@@ -41,14 +41,20 @@ class Editor_Tool;
  */
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
-	Editor_Interactive(Editor &);
-      ~Editor_Interactive();
 
-	const Editor & editor() const throw () {return m_editor;}
-	Editor       & editor()       throw () {return m_editor;}
+	static void run_editor();
 
-      // leaf functions from base class
-      void start();
+private:
+	Editor_Interactive(Editor_Game_Base &);
+	~Editor_Interactive();
+
+public:
+	const Editor_Game_Base & editor() const throw () {return m_editor;}
+	Editor_Game_Base       & editor()       throw () {return m_editor;}
+
+	// leaf functions from base class
+	void start();
+	void think();
 
 	void map_clicked();
 	virtual void set_sel_pos(Node_and_Triangle<>);
@@ -122,8 +128,10 @@ private:
       std::vector<Player_References> m_player_tribe_references;
       bool m_ctrl_down;
 
+	int m_realtime;
+
       // UI ownings
-	Editor & m_editor;
+	Editor_Game_Base & m_editor;
 	UI::UniqueWindow::Registry m_toolmenu;
 	UI::UniqueWindow::Registry m_toolsizemenu;
 	UI::UniqueWindow::Registry m_playermenu;

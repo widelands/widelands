@@ -23,7 +23,6 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
-#include "editor.h"
 #include "editorinteractive.h"
 #include "widelands_map_loader.h"
 #include "wexception.h"

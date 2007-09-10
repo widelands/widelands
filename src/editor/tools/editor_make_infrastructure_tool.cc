@@ -19,7 +19,7 @@
 
 #include "editor_make_infrastructure_tool.h"
 
-#include "editor.h"
+#include "editor_game_base.h"
 #include "editorinteractive.h"
 #include "field.h"
 #include "fieldaction.h"
@@ -33,7 +33,7 @@ int Editor_Make_Infrastructure_Tool_Callback
 (const TCoords<FCoords> c, void * data, int player)
 {
 	return
-		static_cast<const Editor *>(data)->player(player).get_buildcaps(c);
+		static_cast<const Editor_Game_Base *>(data)->player(player).get_buildcaps(c);
 }
 
 
