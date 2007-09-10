@@ -705,13 +705,16 @@ Battle* Editor_Game_Base::create_battle ()
    return b;
 }
 
-AttackController* Editor_Game_Base::create_attack_controller(Flag* flag, int attacker, int defender, uint num) {
-   uint i;
-   for (i=0;i<m_attack_serials.size();i++) {
-      AttackController* curCtrl = (AttackController*)this->objects().get_object(m_attack_serials[i]);
-      if (curCtrl->getFlag() == flag) {
-         curCtrl->launchAttack(num);
-         return curCtrl;
+AttackController* Editor_Game_Base::create_attack_controller
+		(Flag* flag, int attacker, int defender, uint num)
+{
+	uint i;
+	for (i=0;i<m_attack_serials.size();i++) {
+		AttackController* curCtrl =
+				(AttackController*)this->objects().get_object(m_attack_serials[i]);
+		if (curCtrl->getFlag() == flag) {
+			curCtrl->launchAttack(num);
+			return curCtrl;
 		}
 	}
 
@@ -722,7 +725,8 @@ AttackController* Editor_Game_Base::create_attack_controller(Flag* flag, int att
 	return ctrl;
 }
 
-AttackController* Editor_Game_Base::create_attack_controller() {
+AttackController* Editor_Game_Base::create_attack_controller()
+{
 	AttackController * const ctrl =
 		new AttackController(static_cast<Game &>(*this));
 	ctrl->init(this);
@@ -730,10 +734,11 @@ AttackController* Editor_Game_Base::create_attack_controller() {
 	return ctrl;
 }
 
-void Editor_Game_Base::remove_attack_controller(uint serial) {
-   for (uint i=0;i<m_attack_serials.size();i++) {
-      if (m_attack_serials[i] == serial) {
-         log("Editor_Game_Base: Destroying battle with serial %i \n", serial);
+void Editor_Game_Base::remove_attack_controller(uint serial)
+{
+	for (uint i=0;i<m_attack_serials.size();i++) {
+		if (m_attack_serials[i] == serial) {
+			log("Editor_Game_Base: Destroying battle with serial %i \n", serial);
 			static_cast<AttackController *>(this->objects().get_object(serial))->destroy(this);
 
 			if (i < m_attack_serials.size() - 1)
@@ -761,7 +766,10 @@ In the game, this is the same as get_player(). If it returns
 zero it means that this player is disabled in the game.
 ================
 */
-Player * Editor_Game_Base::get_safe_player(const int n) {return get_player(n);}
+Player * Editor_Game_Base::get_safe_player(const int n)
+{
+	return get_player(n);
+}
 
 /*
 ===============
@@ -821,7 +829,7 @@ void Editor_Game_Base::remove_trackpointer(uint serial)
  * make this object ready to load new data
  */
 void Editor_Game_Base::cleanup_for_load
-(const bool flush_graphics, const bool flush_animations)
+		(const bool flush_graphics, const bool flush_animations)
 {
    // Clean all the stuff up, so we can load
 	cleanup_objects();
@@ -829,27 +837,28 @@ void Editor_Game_Base::cleanup_for_load
 	m_battle_serials.clear();
 	m_attack_serials.clear();
 
-   // We do not flush the animations in the editor since all tribes are loaded and
-   // animations can not change a lot, or?
-   // TODO: check this when another world is needed
-   if (flush_animations)
-      g_anim.flush();
-   if (flush_graphics)
-      g_gr->flush(0);
+	// We do not flush the animations in the editor since all tribes are loaded and
+	// animations can not change a lot, or?
+	// TODO: check this when another world is needed
+	if (flush_animations)
+		g_anim.flush();
+	if (flush_graphics)
+		g_gr->flush(0);
 
-   int i;
-   for (i=1; i<=MAX_PLAYERS; i++)
-      if (m_players[i-1]) {
-         remove_player(i);
-         m_players[i-1] = 0;
+	int i;
+	for (i=1; i<=MAX_PLAYERS; i++) {
+		if (m_players[i-1]) {
+			remove_player(i);
+			m_players[i-1] = 0;
 		}
+	}
 
-   m_map->cleanup();
+	m_map->cleanup();
 }
 
 
 void Editor_Game_Base::set_road
-(const FCoords f, const Uint8 direction, const Uint8 roadtype)
+		(const FCoords f, const Uint8 direction, const Uint8 roadtype)
 {
 	const Map & m = map();
 	const Field & first_field = m[0];
@@ -890,7 +899,7 @@ void Editor_Game_Base::set_road
 	const Uint8 road = f.field->get_roads() & mask;
 	const Map::Index           i = f        .field - &first_field;
 	const Map::Index neighbour_i = neighbour.field - &first_field;
-	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
+	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum) {
 		if (Player * const p = m_players[plnum]) {
 			Player::Field & first_player_field = *p->m_fields;
 			Player::Field & player_field = (&first_player_field)[i];
@@ -903,4 +912,5 @@ void Editor_Game_Base::set_road
 				player_field.roads |= road;
 			}
 		}
-};
+	}
+}
