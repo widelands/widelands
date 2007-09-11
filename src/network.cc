@@ -1012,7 +1012,8 @@ int Deserializer::read_packet (TCPsocket sock)
 
 size_t Deserializer::Data(void* const data, const size_t bufsize)
 {
-	for (size_t read = 0; read < bufsize && avail(); ++read)
+	size_t read = 0;
+	for (; read < bufsize && avail(); ++read)
 		static_cast<char *>(data)[read] = getchar();
 	return read;
 }
