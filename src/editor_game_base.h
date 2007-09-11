@@ -157,34 +157,40 @@ struct Editor_Game_Base {
 	void set_iabase(Interactive_Base* b) {m_iabase=b;}
 
 protected:
+	/**
+	 *
+	 * \param preferred_player
+	 *  When conquer is false, this can be used to prefer a player over other
+	 *  players, when lost land is reassigned. This can for example be used
+	 *  to reward the player who actually destroyed a MilitarySite by giving
+	 *  an unconquered location that he has influence over to him, instead of
+	 *  some other player who has higher influence over that location. If 0,
+	 *  land is simply assigned by influence.
+	 *
+	 * \param neutral_when_no_influence
+	 *  If true and the player completely loses influence over a location, it
+	 *  becomes neutral unless some other player claims it by having
+	 *  positive influence.
+	 *
+	 * \param neutral_when_competing_influence
+	 *  If true and the player completely loses influence over a location and
+	 *  several players have positive and equal influence, the location
+	 *  becomes neutral unless some other player claims it by having higher
+	 *  influence.
+	 *
+	 * \param conquer_guarded_location_by_superior_influence
+	 *  If true, the conquering player will (automatically, without actually
+	 *  attacking) conquer a location even if another player already owns and
+	 *  covers the location with a militarysite, if the conquering player's
+	 *  influence becomes greater than the owner's influence.
+	 */
 	virtual void do_conquer_area
 		(Player_Area<Area<FCoords> > player_area,
 		 const bool conquer,
-
-	//  When conquer is false, this can be used to prefer a player over other
-	//  players, when lost land is reassigned. This can for example be used
-	//  to reward the player who actually destroyed a MilitarySite by giving
-	//  an unconquered location that he has influence over to him, instead of
-	//  some other player who has higher influence over that location. If 0,
-	//  land is simply assigned by influence.
-	const Player_Number preferred_player                      = 0,
-
-	//  If true and the player completely loses influence over a location, it
-	//  becomes neutral unless some other player claims it by having
-	//  positive influence.
-	const bool neutral_when_no_influence                      = false,
-
-	//  If true and the player completely loses influence over a location and
-	//  several players have positive and equal influence, the location
-	//  becomes neutral unless some other player claims it by having higher
-	//  influence.
-	const bool neutral_when_competing_influence               = false,
-
-	//  If true, the conquering player will (automatically, without actually
-	//  attacking) conquer a location even if another player already owns and
-	//  covers the location with a militarysite, if the conquering player's
-	//  influence becomes greater than the owner's influence.
-	const bool conquer_guarded_location_by_superior_influence = false);
+		 const Player_Number preferred_player = 0,
+		 const bool neutral_when_no_influence = false,
+		 const bool neutral_when_competing_influence = false,
+		 const bool conquer_guarded_location_by_superior_influence = false);
 
 private:
 	void cleanup_playerimmovables_area(const Area<FCoords>);
