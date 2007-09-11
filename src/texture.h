@@ -21,7 +21,7 @@
 #define TEXTURE_H
 
 #include "colormap.h"
-#include "types.h"
+
 #include <string>
 
 /**

@@ -60,14 +60,7 @@ throw (_wexception)
 			try {fr.Open(fs, filename);}
 			catch (const File_error         &) {throw Not_Found();}
 			catch (const ZipOperation_error &) {throw Not_Found();}
-		} catch (const Not_Found) {
-			log
-				("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player %u: "
-				 "WARNING: could not open \"%s\" for reading. No area watchers for "
-				 "this player\n",
-				 plnum, filename);
-			continue;
-		}
+		} catch (const Not_Found) {continue;}
 		const Uint16 packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			while (not fr.IsEOF()) {

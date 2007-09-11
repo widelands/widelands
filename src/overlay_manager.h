@@ -22,7 +22,6 @@
 
 #include "field.h"
 #include "geometry.h"
-#include "types.h"
 
 #include <map>
 #include <set>

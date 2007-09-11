@@ -17,16 +17,15 @@
  *
  */
 
-#include "font_handler.h"
-#include "types.h"
 #include "ui_multilineeditbox.h"
+
+#include "font_handler.h"
 #include "ui_multilinetextarea.h"
 #include "ui_scrollbar.h"
 #include "constants.h"
 #include "font_handler.h"
 #include "keycodes.h"
 #include "rendertarget.h"
-#include "error.h"
 #include "wlapplication.h"
 
 namespace UI {

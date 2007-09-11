@@ -19,9 +19,9 @@
 
 #include "network_buffer.h"
 
-#include "error.h"
 #include "wexception.h"
 
+#include <cassert>
 
 Network_Buffer::Network_Buffer() {
    m_buffer_real_len = 1000;

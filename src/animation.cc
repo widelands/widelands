@@ -20,7 +20,6 @@
 #include "animation.h"
 
 #include "bob.h"
-#include "error.h"
 #include "constants.h"
 #include "profile.h"
 #include "sound/sound_handler.h"

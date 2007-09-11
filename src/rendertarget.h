@@ -23,7 +23,8 @@
 #include "editor_game_base.h" //TODO: replace, only needed for "Time"
 #include "geometry.h"
 #include "rgbcolor.h"
-#include "types.h"
+
+#include "widelands.h"
 
 #include <vector>
 
@@ -118,9 +119,8 @@ protected:
 
 	void doblit(Point dst, Surface * const src, Rect srcrc);
 
-	Sint8 node_brightness(const Editor_Game_Base::Time gametime,
-			      Editor_Game_Base::Time last_seen,
-			      const Vision vision, Sint8 result);
+	Sint8 node_brightness
+		(const Time gametime, const Time last_seen, const Vision, Sint8 result);
 
 	///Only needed, when this is a mapview
 	Surface* m_ground_surface;

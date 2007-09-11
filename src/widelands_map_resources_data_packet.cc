@@ -24,21 +24,14 @@
 #include "map.h"
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
-#include "error.h"
 
-// VERSION 1: initiale version
+#include "log.h"
 
 #define CURRENT_PACKET_VERSION 1
 
-/*
- * Destructor
- */
-Widelands_Map_Resources_Data_Packet::~Widelands_Map_Resources_Data_Packet() {
-}
+Widelands_Map_Resources_Data_Packet::~Widelands_Map_Resources_Data_Packet() {}
 
-/*
- * Read Function
- */
+
 void Widelands_Map_Resources_Data_Packet::Read
 (FileSystem & fs,
  Editor_Game_Base * egbase,
@@ -110,8 +103,6 @@ throw (_wexception)
 
 
 /*
- * Write Function
- *
  * Ok, when we're called from the editor, the default resources
  * are not set, which is ok.
  * When we are called from a game, the default resources are set

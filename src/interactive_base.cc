@@ -21,7 +21,6 @@
 
 #include "cmd_queue.h"
 #include "constants.h"
-#include "error.h"
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"

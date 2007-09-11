@@ -17,8 +17,8 @@
  *
  */
 
-#include "error.h"
 #include "fullscreen_menu_loadreplay.h"
+
 #include "game.h"
 #include "game_loader.h"
 #include "game_preload_data_packet.h"

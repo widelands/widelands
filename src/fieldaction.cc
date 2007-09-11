@@ -23,7 +23,6 @@
 #include "interactive_player.h"
 #include "cmd_queue.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "game_debug_ui.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -908,9 +907,6 @@ void FieldActionWindow::act_attack ()
 	if
 		(Building * const building =
 		 dynamic_cast<Building *>(game.map().get_immovable(m_field)))
-	{
-      log ("FieldActionWindow::act_attack () %d\n", m_attackers);
-
 		if
 			(const Flag * const flag =
 			 dynamic_cast<const Flag *>(building->get_base_flag()))
@@ -921,7 +917,6 @@ void FieldActionWindow::act_attack ()
                m_player->get_player_number(),
                m_attackers,  // Number of soldiers
                m_attackers_type); // Type of soldiers
-	}
 
    okdialog();
 }

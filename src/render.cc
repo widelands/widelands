@@ -23,7 +23,6 @@ Rendering functions of the 16-bit software renderer.
 
 #include "building.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "filesystem.h"
 #include "layered_filesystem.h"
 #include "map.h"
@@ -34,6 +33,8 @@ Rendering functions of the 16-bit software renderer.
 #include "transport.h"
 #include "wexception.h"
 #include "world.h"
+
+#include "log.h"
 
 #include <SDL.h>
 

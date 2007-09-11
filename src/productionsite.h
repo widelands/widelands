@@ -21,7 +21,6 @@
 #define PRODUCTIONSITE_H
 
 #include "building.h"
-#include "types.h"
 #include "wexception.h"
 
 #include <map>

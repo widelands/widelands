@@ -22,7 +22,7 @@
 #include "attack_controller.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
-#include "error.h"
+#include "log.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
@@ -115,11 +115,9 @@ void Player::init(const bool place_headquarters) {
 void Player::allocate_map()
 {
 	const Map & map = egbase().map();
-	log("Player::init(&map=%p)\n", &map);
 	assert(map.get_width ());
 	assert(map.get_height());
 	m_fields = new Field[map.max_index()];
-	log("Player::allocate_map: %p\n", m_fields);
 }
 
 
@@ -631,7 +629,7 @@ void Player::see_node
 (const Map                  & map,
  const ::Field              & first_map_field,
  const FCoords                f,
- const Editor_Game_Base::Time gametime,
+ const Time    gametime,
  const bool                   lasting)
 throw ()
 {

@@ -17,12 +17,12 @@
  *
  */
 
-#include <cassert>
-#include "graphic.h"
-#include "rendertarget.h"
-#include "types.h"
 #include "ui_tabpanel.h"
 
+#include "graphic.h"
+#include "rendertarget.h"
+
+#include <cassert>
 
 namespace UI {
 #define TP_BUTTON_WIDTH     34

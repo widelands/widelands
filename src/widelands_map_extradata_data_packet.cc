@@ -20,7 +20,6 @@
 #include "widelands_map_extradata_data_packet.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "fileread.h"
 #include "filesystem.h"
 #include "filewrite.h"

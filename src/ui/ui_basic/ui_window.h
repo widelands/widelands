@@ -20,9 +20,9 @@
 #ifndef __S__WINDOW_H
 #define __S__WINDOW_H
 
-#include <string>
-#include "types.h"
 #include "ui_panel.h"
+
+#include <string>
 
 namespace UI {
 /**

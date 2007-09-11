@@ -31,6 +31,7 @@
 #include "filesystem.h"
 #include "zip_exceptions.h"
 
+#include "log.h"
 
 extern const Map_Object_Descr g_road_descr;
 

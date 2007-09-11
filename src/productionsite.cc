@@ -20,7 +20,6 @@
 #include "productionsite.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "game.h"
 #include "helper.h"
 #include "i18n.h"

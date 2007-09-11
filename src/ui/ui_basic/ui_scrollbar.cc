@@ -17,12 +17,13 @@
  *
  */
 
-#include <algorithm>
+#include "ui_scrollbar.h"
+
 #include "graphic.h"
 #include "rendertarget.h"
-#include "types.h"
-#include "ui_scrollbar.h"
 #include "wlapplication.h"
+
+#include <algorithm>
 
 namespace UI {
 #define SCROLLBAR_AUTOREPEAT_DELAY 200

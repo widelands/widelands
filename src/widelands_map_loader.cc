@@ -20,7 +20,6 @@
 #include "widelands_map_loader.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "filesystem.h"
 #include "map.h"
 #include "player.h"
@@ -60,6 +59,8 @@
 #include "widelands_map_ware_data_packet.h"
 #include "widelands_map_waredata_data_packet.h"
 #include "world.h"
+
+#include "log.h"
 
 Widelands_Map_Loader::Widelands_Map_Loader(FileSystem & fs, Map* map) :
 Map_Loader("", map), m_fs(fs), m_mol(0)

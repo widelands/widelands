@@ -20,8 +20,7 @@
 #ifndef __S__MULTI_SELECT_H
 #define __S__MULTI_SELECT_H
 
-#include "error.h"
-
+#include <cassert>
 #include <vector>
 
 /*

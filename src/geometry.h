@@ -28,8 +28,6 @@
 #include <cmath>
 #include <limits>
 
-#include <types.h>
-
 struct Point {
 	Point() throw () {}
 	Point(const int px, const int py) throw () : x(px), y(py) {}

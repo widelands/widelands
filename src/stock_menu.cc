@@ -19,7 +19,6 @@
 
 #include "stock_menu.h"
 
-#include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
@@ -58,7 +57,7 @@ current_page(Wares)
 }
 
 
-void Stock_Menu::clicked_help() {log("TODO: Implement help!\n");}
+void Stock_Menu::clicked_help() {}
 
 
 /*

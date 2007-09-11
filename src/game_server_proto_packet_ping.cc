@@ -19,7 +19,6 @@
 
 #include "game_server_proto_packet_ping.h"
 
-#include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "network_buffer.h"

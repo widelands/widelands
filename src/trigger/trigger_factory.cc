@@ -20,7 +20,6 @@
 #include "trigger/trigger_factory.h"
 
 #include "editorinteractive.h"
-#include "error.h"
 #include "i18n.h"
 #include "trigger/trigger_time.h"
 #include "trigger/trigger_null.h"

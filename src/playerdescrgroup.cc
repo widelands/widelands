@@ -23,7 +23,6 @@
 #include "game.h"
 #include "i18n.h"
 #include "player.h"
-#include "types.h"
 #include "tribe.h"
 #include "wexception.h"
 

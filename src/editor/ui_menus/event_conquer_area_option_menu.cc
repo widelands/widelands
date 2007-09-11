@@ -21,7 +21,6 @@
 
 #include "events/event_conquer_area.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"

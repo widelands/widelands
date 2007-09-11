@@ -20,8 +20,7 @@
 #ifndef __S__EVENT_MANAGER_H
 #define __S__EVENT_MANAGER_H
 
-#include "error.h"
-
+#include <cassert>
 #include <string>
 #include <vector>
 

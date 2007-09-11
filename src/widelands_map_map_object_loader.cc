@@ -20,7 +20,6 @@
 
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "instances.h"
 #include "widelands_map_map_object_loader.h"
 #include "wexception.h"

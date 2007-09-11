@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "editorinteractive.h"
 #include "editor_main_menu_save_map_make_directory.h"
-#include "error.h"
 #include "filesystem.h"
 #include "graphic.h"
 #include "i18n.h"

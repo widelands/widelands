@@ -26,6 +26,7 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "log.h"
 
 Battle::Descr g_Battle_Descr;
 

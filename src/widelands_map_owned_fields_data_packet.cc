@@ -25,8 +25,6 @@
 #include "map.h"
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
-#include "error.h"
-
 
 #define CURRENT_PACKET_VERSION 1
 

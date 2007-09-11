@@ -19,9 +19,11 @@
 
 #include "journal.h"
 
-#include "error.h"
+#include "log.h"
 #include "filesystem.h"
 #include "machdep.h"
+
+#include <cassert>
 
 /**
  * Write a signed char value to the recording file.

@@ -19,7 +19,7 @@
 
 #include "playercommand.h"
 
-#include "error.h"
+#include "log.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"

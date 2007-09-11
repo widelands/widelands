@@ -20,7 +20,6 @@
 #include "fullscreen_menu_mapselect.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "layered_filesystem.h"
@@ -29,6 +28,8 @@
 #include "s2map.h"
 #include "wexception.h"
 #include "widelands_map_loader.h"
+
+#include "log.h"
 
 #include <stdio.h>
 

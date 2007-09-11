@@ -26,6 +26,8 @@
 #include "mapregion.h"
 #include "rgbcolor.h"
 
+#include "widelands.h"
+
 class Economy;
 class FileRead;
 class FileWrite;
@@ -117,8 +119,8 @@ public:
 			//  error in Descr_Maintainer<Terrain_Descr>::get(const Terrain_Index).
 			terrains.d = terrains.r = 0;
 
-			time_triangle_last_surveyed[0] = Editor_Game_Base::Never();
-			time_triangle_last_surveyed[1] = Editor_Game_Base::Never();
+			time_triangle_last_surveyed[0] = Never();
+			time_triangle_last_surveyed[1] = Never();
 
 			//  Initialized for debug purpouses only.
 			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = 0;
@@ -204,10 +206,8 @@ public:
 		/**
 		 * The amount of resource at each of the triangles, as far as this player
 		 * knows.
-		 * The d component is only valid when
-		 * time_last_surveyed[0] != Editor_Game_Base::Never().
-		 * The r component is only valid when
-		 * time_last_surveyed[1] != Editor_Game_Base::Never().
+		 * The d component is only valid when time_last_surveyed[0] != Never().
+		 * The r component is only valid when time_last_surveyed[1] != Never().
 		 */
 		::Field::Resource_Amounts resource_amounts;
 
@@ -253,7 +253,7 @@ public:
 		 *
 		 * Is Editor_Game_Base::Never() when never surveyed.
 		 */
-		Editor_Game_Base::Time time_triangle_last_surveyed[2];
+		Time time_triangle_last_surveyed[2];
 
 		/**
 		 * The last time when this player saw this node.
@@ -276,7 +276,7 @@ public:
 		 * least one of them has been seen at least once.
 		 *
 		 */
-		Editor_Game_Base::Time time_node_last_unseen;
+		Time time_node_last_unseen;
 
 		/**
 		 * The type of immovable on this node, as far as this player knows.
@@ -334,14 +334,12 @@ public:
 		(const Map                  &,
 		 const ::Field              & first_map_field,
 		 const FCoords,
-		 const Editor_Game_Base::Time,
+		 const Time,
 		 const bool                   lasting = true)
 		throw ();
 
 	/// Decrement this player's vision for a node.
-	void unsee_node(const Map::Index i, const Editor_Game_Base::Time gametime)
-		throw ()
-	{
+	void unsee_node(const Map::Index i, const Time gametime) throw () {
 		Field & field = m_fields[i];
 		assert(1 < field.vision);
 		--field.vision;
@@ -353,7 +351,7 @@ public:
 	void see_area(const Area<FCoords> area, const bool lasting = true)
 		throw ()
 	{
-		const Editor_Game_Base::Time gametime = egbase().get_gametime();
+		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
 		const ::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
@@ -364,7 +362,7 @@ public:
 
 	/// Decrement this player's vision for each node in an area.
 	void unsee_area(const Area<FCoords> area) throw () {
-		const Editor_Game_Base::Time gametime = egbase().get_gametime();
+		const Time gametime = egbase().get_gametime();
 		const Map &                  map      = egbase().map         ();
 		const ::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);

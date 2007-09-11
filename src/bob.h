@@ -22,6 +22,7 @@
 
 #include "animation.h"
 
+#include <cassert>
 
 /// \todo (Antonio Trueba#1#): Get rid of forward declarations (cleanup of other headers needed)
 class Map;

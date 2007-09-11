@@ -22,15 +22,14 @@
 #include "graphic.h"
 #include "events/event_move_view.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "i18n.h"
 #include "map.h"
 
-#include "ui_window.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 #include <stdio.h>
 

@@ -19,7 +19,6 @@
 
 #include "sound_handler.h"
 
-#include "error.h"
 #include "fileread.h"
 #include "game.h"
 #include "i18n.h"
@@ -30,6 +29,8 @@
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
 #include "songset.h"
+
+#include "log.h"
 
 #include <SDL.h>
 

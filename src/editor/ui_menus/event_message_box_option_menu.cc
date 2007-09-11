@@ -22,7 +22,6 @@
 #include "events/event_message_box.h"
 #include "i18n.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "graphic.h"
 #include "map.h"
 #include "map_trigger_manager.h"

@@ -21,7 +21,6 @@
 
 #include "editorinteractive.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "map.h"

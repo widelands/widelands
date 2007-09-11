@@ -20,7 +20,6 @@
 #include "text_parser.h"
 
 #include "constants.h"
-#include "error.h"
 #include "graphic.h"
 #include "helper.h"
 

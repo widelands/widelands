@@ -23,8 +23,9 @@
 #include "geometry.h"
 #include "compile_assert.h"
 #include "constants.h"
-#include "types.h"
 #include "world.h"
+
+#include "widelands.h"
 
 #include <cassert>
 #include <limits>

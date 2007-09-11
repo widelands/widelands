@@ -771,8 +771,6 @@ Callback for bulldozing request
 */
 void Building_Window::act_drop_soldier(uint serial) {
 	 Game* g = m_player->get_game();
-log ("m_building = %d\n", m_building ? 1 : 0);
-log ("sold serial = %d\n", serial);
 
 	 if (m_building && (serial > 0))
 		  g->send_player_drop_soldier (m_building, serial);
@@ -1052,7 +1050,6 @@ Warehouse_Window::~Warehouse_Window()
 }
 
 void Warehouse_Window::clicked_help() {
-         log("TODO: Implement help!\n");
 }
 
 

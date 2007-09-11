@@ -17,7 +17,6 @@
  *
  */
 
-#include "error.h"
 #include "events/event_chain.h"
 #include "layered_filesystem.h"
 #include "mapfringeregion.h"

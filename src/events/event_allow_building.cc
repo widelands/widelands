@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "i18n.h"
@@ -30,6 +29,8 @@
 #include "profile.h"
 #include "tribe.h"
 #include "wexception.h"
+
+#include "log.h"
 
 static const int EVENT_VERSION = 1;
 

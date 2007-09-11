@@ -17,13 +17,13 @@
  *
  */
 
+#include "ui_table.h"
+
 #include "constants.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include "types.h"
 #include "ui_button.h"
 #include "ui_scrollbar.h"
-#include "ui_table.h"
 #include "wlapplication.h"
 
 namespace UI {

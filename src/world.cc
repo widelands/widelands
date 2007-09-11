@@ -20,7 +20,6 @@
 #include "world.h"
 
 #include "constants.h"
-#include "error.h"
 #include "fileread.h"
 #include "graphic.h"
 #include "helper.h"

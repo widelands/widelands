@@ -59,7 +59,5 @@ std::vector<std::string> split_string
 (const std::string &, const char * const separators);
 void remove_spaces(std::string &);
 void log(const char *fmt, ...);
-void myassert(int line, const char* file, const char* condt) throw(_wexception)
-__attribute__ ((noreturn));
 
 #endif

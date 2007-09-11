@@ -25,7 +25,6 @@
 #include "editorinteractive.h"
 #include "world.h"
 #include "map.h"
-#include "error.h"
 #include "overlay_manager.h"
 #include "worlddata.h"
 

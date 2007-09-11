@@ -21,7 +21,6 @@
 #define CONSTRUCTIONSITE_H
 
 #include "building.h"
-#include "types.h"
 
 #include <vector>
 

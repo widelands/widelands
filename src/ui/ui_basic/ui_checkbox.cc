@@ -17,10 +17,10 @@
  *
  */
 
+#include "ui_checkbox.h"
+
 #include "graphic.h"
 #include "rendertarget.h"
-#include "types.h"
-#include "ui_checkbox.h"
 
 namespace UI {
 /*

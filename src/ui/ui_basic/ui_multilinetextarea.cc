@@ -17,9 +17,9 @@
  *
  */
 
-#include "font_handler.h"
-#include "types.h"
 #include "ui_multilinetextarea.h"
+
+#include "font_handler.h"
 #include "constants.h"
 #include "graphic.h"
 #include "text_parser.h"

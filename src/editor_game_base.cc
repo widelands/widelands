@@ -23,7 +23,6 @@
 #include "attack_controller.h"
 #include "battle.h"
 #include "building.h"
-#include "error.h"
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
@@ -320,17 +319,6 @@ void Editor_Game_Base::do_conquer_area
 							best_player = plnum;
 						} else if (value == highest_military_influence) {
 							const Coords c = map().get_fcoords(map()[index]);
-							log
-								("Editor_Game_Base::do_conquer_area: Player %u "
-								 "completely lost influence over (%i, %i). Players %u "
-								 "and %u, both have influence %i there. Depending on "
-								 "game rules, the location will not change ownership "
-								 "or it will become neutral (unless another player has "
-								 "higher influence).\n",
-								 player_area.player_number,
-								 c.x, c.y,
-								 best_player, plnum,
-								 value);
 							best_player = neutral_when_competing_influence ?
 								0 : player_area.player_number;
 						}
@@ -754,7 +742,6 @@ void Editor_Game_Base::remove_attack_controller(uint serial)
 {
 	for (uint i=0;i<m_attack_serials.size();i++) {
 		if (m_attack_serials[i] == serial) {
-			log("Editor_Game_Base: Destroying battle with serial %i \n", serial);
 			static_cast<AttackController *>(this->objects().get_object(serial))->destroy(this);
 
 			if (i < m_attack_serials.size() - 1)

@@ -20,8 +20,6 @@
 #ifndef MACHDEP_H
 #define MACHDEP_H
 
-#include "types.h"
-
 #include <SDL_endian.h>
 
 #include <string>

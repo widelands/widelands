@@ -25,7 +25,6 @@
 
 #include "network.h"
 
-#include "error.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "i18n.h"
@@ -41,6 +40,8 @@
 
 #include "ui_table.h"
 #include "ui_window.h"
+
+#include "log.h"
 
 #include <algorithm>
 

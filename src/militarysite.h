@@ -21,7 +21,6 @@
 #define MILITARYSITE_H
 
 #include "productionsite.h"
-#include "types.h"
 #include "transport.h"
 
 class Soldier;

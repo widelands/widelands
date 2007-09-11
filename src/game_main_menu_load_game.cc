@@ -215,7 +215,6 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 	} catch (std::exception& exe) {
 		std::string s=_("Game Loading Error!\nReason given:\n");
 		s+=exe.what();
-		log("%s\n", s.c_str());
 		UI::Modal_Message_Box mbox
 			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();

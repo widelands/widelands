@@ -19,7 +19,6 @@
 
 #include "game_saver.h"
 
-#include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "game_cmd_queue_data_packet.h"
@@ -30,6 +29,7 @@
 #include "game_player_economies_data_packet.h"
 #include "game_player_info_data_packet.h"
 
+#include "log.h"
 
 Game_Saver::Game_Saver(FileSystem & fs, Game* game) : m_fs(fs), m_game(game) {}
 

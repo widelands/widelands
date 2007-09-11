@@ -51,6 +51,8 @@
 
 #include "ui_progresswindow.h"
 
+#include "log.h"
+
 #include <string>
 
 /// Define this to get lots of debugging output concerned with syncs

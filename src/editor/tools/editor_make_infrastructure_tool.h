@@ -21,6 +21,9 @@
 #define __S__EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 
 #include "editor_tool.h"
+
+#include "widelands.h"
+
 #include "ui_unique_window.h"
 
 /*

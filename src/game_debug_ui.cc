@@ -337,7 +337,7 @@ void FieldDebugWindow::think()
 			snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
 			str += buffer;
 			{
-				const Editor_Game_Base::Time time_last_surveyed =
+				const Time time_last_surveyed =
 					player_field.time_triangle_last_surveyed[TCoords<>::D];
 				if (time_last_surveyed != Editor_Game_Base::Never()) {
 					snprintf
@@ -348,7 +348,7 @@ void FieldDebugWindow::think()
 				} else str += "  D triangle never surveyed\n";
 			}
 			{
-				const Editor_Game_Base::Time time_last_surveyed =
+				const Time time_last_surveyed =
 					player_field.time_triangle_last_surveyed[TCoords<>::R];
 				if (time_last_surveyed != Editor_Game_Base::Never()) {
 					snprintf

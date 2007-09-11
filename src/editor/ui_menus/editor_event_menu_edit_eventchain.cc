@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "editorinteractive.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
-#include "error.h"
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "graphic.h"

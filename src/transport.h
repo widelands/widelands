@@ -29,6 +29,7 @@
 #include "immovable.h"
 #include "item_ware_descr.h"
 #include "map.h"
+#include "tattribute.h"
 #include "trackptr.h"
 #include "warelist.h"
 
@@ -393,6 +394,11 @@ private:
 	bool m_idle; //  an idle transfer can be fail()ed if the item feels like it
 };
 
+
+struct MinMax {
+	int min;
+	int max;
+};
 
 struct Requeriments {
 	Requeriments (); //  init to allow all

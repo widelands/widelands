@@ -21,7 +21,7 @@
 #define __S__INSTANCE_H
 
 #include "cmd_queue.h"
-#include "error.h"
+
 #include "types.h"
 
 #include <SDL_types.h>

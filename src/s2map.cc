@@ -26,7 +26,6 @@
 #include "layered_filesystem.h"
 #include "map.h"
 #include "map_loader.h"
-#include "types.h"
 #include "wexception.h"
 #include "world.h"
 

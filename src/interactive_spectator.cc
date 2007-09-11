@@ -165,7 +165,6 @@ void Interactive_Spectator::exit_btn()
  */
 void Interactive_Spectator::field_action()
 {
-	log("Interactive_Spectator::field_action not implemented.\n");
 }
 
 

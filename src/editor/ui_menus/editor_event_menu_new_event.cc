@@ -21,18 +21,17 @@
 
 #include "constants.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "events/event.h"
 #include "events/event_factory.h"
 #include "i18n.h"
 #include "map.h"
 #include "map_event_manager.h"
 
-#include "ui_window.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* parent) :

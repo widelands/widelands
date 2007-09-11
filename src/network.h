@@ -21,10 +21,10 @@
 #define __NETWORK_H__
 
 #include "constants.h"
-#include "error.h"
 #include "md5.h"
 #include "streamread.h"
 #include "streamwrite.h"
+
 #include "types.h"
 
 #include <SDL_net.h>

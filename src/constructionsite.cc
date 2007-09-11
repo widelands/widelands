@@ -21,7 +21,6 @@
 
 #include "animation.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "game.h"
 #include "graphic.h"
 #include "i18n.h"

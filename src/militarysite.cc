@@ -20,7 +20,6 @@
 #include "militarysite.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "game.h"
 #include "i18n.h"
 #include "player.h"
@@ -29,6 +28,8 @@
 #include "transport.h"
 #include "tribe.h"
 #include "worker.h"
+
+#include "log.h"
 
 #include <libintl.h>
 #include <locale.h>

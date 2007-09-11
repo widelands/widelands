@@ -22,7 +22,6 @@
 #include "i18n.h"
 #include "events/event_unhide_area.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "map.h"
 #include "graphic.h"
 

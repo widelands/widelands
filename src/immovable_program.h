@@ -25,7 +25,6 @@
  */
 
 #include "immovable.h"
-#include "types.h"
 
 #include <string>
 

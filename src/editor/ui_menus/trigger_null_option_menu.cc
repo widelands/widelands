@@ -22,7 +22,6 @@
 #include "i18n.h"
 #include "trigger/trigger_null.h"
 #include "editorinteractive.h"
-#include "error.h"
 
 #include "ui_window.h"
 #include "ui_textarea.h"

@@ -17,13 +17,14 @@
  *
  */
 
-#include <cassert>
+#include "ui_icongrid.h"
+
 #include "graphic.h"
 #include "rendertarget.h"
-#include "types.h"
-#include "ui_icongrid.h"
 #include "font_handler.h"
 #include "constants.h"
+
+#include <cassert>
 
 namespace UI {
 /**

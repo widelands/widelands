@@ -25,7 +25,8 @@
 #include "map.h"
 #include "player.h"
 #include "widelands_map_data_packet_ids.h"
-#include "error.h"
+
+#include "log.h"
 
 
 #define CURRENT_PACKET_VERSION 2

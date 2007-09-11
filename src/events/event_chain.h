@@ -21,10 +21,11 @@
 #define __S__EVENT_CHAIN_H
 
 #include "event_referencer.h"
-#include "error.h"
 #include "trigger/trigger_referencer.h"
+
 #include "types.h"
 
+#include <cassert>
 #include <string>
 #include <vector>
 

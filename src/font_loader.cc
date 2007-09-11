@@ -19,7 +19,6 @@
 
 #include "font_loader.h"
 
-#include "error.h"
 #include "fileread.h"
 #include "font_handler.h"
 #include "graphic.h"

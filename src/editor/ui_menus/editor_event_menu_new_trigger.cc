@@ -26,13 +26,12 @@
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"
 #include "map.h"
-#include "error.h"
 
-#include "ui_window.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :

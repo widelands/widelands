@@ -17,10 +17,10 @@
  *
  */
 
-#include "bob.h"
-#include "error.h"
-#include "instances.h"
 #include "widelands_map_map_object_saver.h"
+
+#include "bob.h"
+#include "instances.h"
 #include "wexception.h"
 
 Widelands_Map_Map_Object_Saver::Widelands_Map_Map_Object_Saver() :

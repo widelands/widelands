@@ -17,12 +17,11 @@
  *
  */
 
+#include "ui_button.h"
+
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include "types.h"
-#include "ui_button.h"
-#include "error.h"
 #include "constants.h"
 
 namespace UI {

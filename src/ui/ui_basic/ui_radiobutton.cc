@@ -17,9 +17,9 @@
  *
  */
 
-#include "types.h"
-#include "ui_checkbox.h"
 #include "ui_radiobutton.h"
+
+#include "ui_checkbox.h"
 
 namespace UI {
 /*

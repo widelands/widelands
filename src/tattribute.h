@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,15 @@
  *
  */
 
-#ifndef TYPES_H
-#define TYPES_H
+#ifndef __S__TATTRIBUTE_H
+#define __S__TATTRIBUTE_H
 
-//TODO: use SDL types instead
-typedef unsigned char uchar;
-typedef unsigned short ushort;
-typedef unsigned int uint;
-typedef unsigned long ulong;
+enum tAttribute {
+	atrHP = 0,
+	atrAttack,
+	atrDefense,
+	atrEvade,
+	atrTotal = 100
+};
 
 #endif

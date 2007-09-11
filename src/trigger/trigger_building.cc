@@ -21,7 +21,6 @@
 
 #include "building.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "i18n.h"

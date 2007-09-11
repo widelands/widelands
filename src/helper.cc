@@ -19,17 +19,11 @@
 
 #include "helper.h"
 
-#include "error.h"
 #include "wexception.h"
 
 #include <cstdarg>
-#include <iostream>
-#include <sstream>
-#include <vector>
 
 //TODO: move wexception code into it's own file
-
-using std::cout;
 
 /**
  * split a string by whitespace
@@ -62,24 +56,6 @@ void remove_spaces(std::string & s) {
 		s.erase(s.size() - 1, 1);
 }
 
-/**
- * print a formatted log messages to cout.
- */
-void log(const char *fmt, ...)
-{
-	char buffer[2048];
-	va_list va;
-
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
-
-	//TODO: use iostreams instead of vprintf because other parts of Widelands use iostreams
-	cout << buffer;
-	cout.flush();
-}
-
-
 
 /*
 ==============================================================================
@@ -106,9 +82,3 @@ _wexception::~_wexception() throw()
 }
 
 const char *_wexception::what() const throw() {return m_what.c_str();}
-
-void myassert(int line, const char* file, const char* condt) throw(_wexception)
-{
-	critical_error("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
-	throw _wexception(__FILE__, __LINE__, "Assertion %s:%i (%s) has been ignored", file, line, condt);
-}

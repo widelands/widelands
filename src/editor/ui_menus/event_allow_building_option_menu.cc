@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "events/event_allow_building.h"
 #include "graphic.h"
 #include "i18n.h"

@@ -20,7 +20,6 @@
 #include "tribe.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "fileread.h"
 #include "game.h"
 #include "helper.h"

@@ -32,7 +32,6 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
-#include "error.h"
 
 #define CURRENT_PACKET_VERSION 1
 

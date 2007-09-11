@@ -17,6 +17,7 @@
  *
  */
 
+#include "log.h"
 #include "game.h"
 #include "wexception.h"
 #include "wlapplication.h"

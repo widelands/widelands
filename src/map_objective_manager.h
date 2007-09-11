@@ -20,11 +20,11 @@
 #ifndef __S__OBJECTIVE_MANAGER_H
 #define __S__OBJECTIVE_MANAGER_H
 
-#include "error.h"
 #include "i18n.h"
 #include "trigger/trigger_null.h"
 #include "trigger/trigger_referencer.h"
 
+#include <cassert>
 #include <string>
 
 /*

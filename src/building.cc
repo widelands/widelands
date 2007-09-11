@@ -20,7 +20,6 @@
 #include "building.h"
 #include "constructionsite.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "filesystem.h"
 #include "font_handler.h"
 #include "game.h"

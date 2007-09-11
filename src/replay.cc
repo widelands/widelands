@@ -29,6 +29,7 @@
 #include "streamwrite.h"
 #include "wexception.h"
 
+#include "log.h"
 
 // File format definitions
 #define REPLAY_MAGIC 0x2E21A101

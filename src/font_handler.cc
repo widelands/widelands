@@ -21,7 +21,6 @@
 
 #include "font_handler.h"
 
-#include "error.h"
 #include "filesystem.h"
 #include "font_loader.h"
 #include "graphic.h"

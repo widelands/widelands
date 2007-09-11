@@ -23,15 +23,15 @@
 #include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
-#include "world.h"
 #include "widelands_map_data_packet_ids.h"
-#include "error.h"
+#include "world.h"
+
+#include "log.h"
 
 #include <map>
 
 
 #define CURRENT_PACKET_VERSION 1
-
 
 Widelands_Map_Terrain_Data_Packet::~Widelands_Map_Terrain_Data_Packet() {}
 
@@ -86,9 +86,6 @@ throw (_wexception)
 }
 
 
-/*
- * Write Function
- */
 void Widelands_Map_Terrain_Data_Packet::Write
 (FileSystem & fs,
  Editor_Game_Base* egbase,
@@ -128,5 +125,4 @@ throw (_wexception)
 	}
 
    fw.Write(fs, "binary/terrain");
-   // DONE
 }

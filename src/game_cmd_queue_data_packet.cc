@@ -20,7 +20,6 @@
 #include "game_cmd_queue_data_packet.h"
 
 #include "cmd_queue.h"
-#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"

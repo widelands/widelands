@@ -19,12 +19,12 @@
 
 #include "game_server_proto_packet_hello.h"
 
-#include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "network_buffer.h"
 #include "wexception.h"
 
+#include <cassert>
 
 Game_Server_Protocol_Packet_Hello::Game_Server_Protocol_Packet_Hello
 (const std::string & name)

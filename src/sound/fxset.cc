@@ -17,11 +17,13 @@
  *
  */
 
-#include "error.h"
 #include "fxset.h"
+
 #include "sound_handler.h"
 
 #include <SDL.h>
+
+#include <cassert>
 
 /** Create an FXset and set it's \ref m_priority
  * \param[in] prio  The desired priority (optional)

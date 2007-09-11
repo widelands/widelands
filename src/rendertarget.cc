@@ -25,6 +25,7 @@
 #include "surface.h"
 #include "tribe.h"
 
+#include "log.h"
 
 /**
  * Build a render target for the given bitmap.
@@ -326,7 +327,7 @@ void RenderTarget::rendermap
 	RENDERMAP_INITIALIZANTONS;
 
 	const Player::Field * const first_player_field = player.fields();
-	const Editor_Game_Base::Time gametime = egbase.get_gametime();
+	const Time gametime = egbase.get_gametime();
 
 	while (dy--) {
 		const int posy = b_posy;
@@ -1258,9 +1259,8 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 }
 
 ///\todo Rename the _in_ parameter "result" to reflect it's real meaning
-Sint8 RenderTarget::node_brightness(const Editor_Game_Base::Time gametime,
-				    Editor_Game_Base::Time last_seen,
-				    const Vision vision, Sint8 result)
+Sint8 RenderTarget::node_brightness
+(const Time gametime, const Time last_seen, const Vision vision, Sint8 result)
 {
 	if      (vision == 0) result = -128;
 	else if (vision == 1) {

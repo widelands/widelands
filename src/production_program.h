@@ -20,9 +20,11 @@
 #ifndef __S__PRODUCTION_PROGRAM_H
 #define __S__PRODUCTION_PROGRAM_H
 
-#include "error.h"
+#include "log.h"
+
 #include "types.h"
 
+#include <cassert>
 #include <string>
 #include <vector>
 

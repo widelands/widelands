@@ -20,7 +20,6 @@
 #include "editor_objectives_menu.h"
 
 #include "editorinteractive.h"
-#include "error.h"
 #include "i18n.h"
 #include "map.h"
 #include "map_objective_manager.h"

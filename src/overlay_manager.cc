@@ -19,7 +19,6 @@
 
 #include "overlay_manager.h"
 
-#include "error.h"
 #include "field.h"
 #include "graphic.h"
 

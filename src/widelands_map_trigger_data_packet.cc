@@ -20,7 +20,6 @@
 #include "widelands_map_trigger_data_packet.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "fileread.h"
 #include "map.h"
 #include "map_trigger_manager.h"

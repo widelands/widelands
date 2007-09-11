@@ -20,7 +20,6 @@
 #include "general_statistics_menu.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "game.h"
 #include "graphic.h"
 #include "i18n.h"
@@ -283,7 +282,6 @@ called when the help button was clicked
 ===========
 */
 void General_Statistics_Menu::clicked_help() {
-      log("TODO: help not implemented\n");
 }
 
 

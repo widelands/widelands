@@ -21,7 +21,6 @@
 #include "computer_player.h"
 
 #include "computer_player_hints.h"
-#include "error.h"
 #include "map.h"
 #include "world.h"
 #include "transport.h"
@@ -30,6 +29,8 @@
 #include "constructionsite.h"
 #include "productionsite.h"
 #include "militarysite.h"
+
+#include "log.h"
 
 #include <algorithm>
 #include <queue>

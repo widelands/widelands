@@ -23,10 +23,10 @@
 #include "immovable.h"
 #include "instances.h"
 
+#include "widelands.h"
+
 #include <set>
 #include <vector>
-
-#include <types.h>
 
 class Editor_Game_Base;
 class Flag;

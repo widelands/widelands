@@ -17,7 +17,6 @@
  *
  */
 
-#include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "profile.h"
@@ -26,6 +25,8 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_panel.h"
+
+#include "log.h"
 
 #include <stdarg.h>
 #include <stdio.h>

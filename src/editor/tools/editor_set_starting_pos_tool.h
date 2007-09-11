@@ -22,6 +22,8 @@
 
 #include "editor_tool.h"
 
+#include "widelands.h"
+
 #include <string>
 
 // How much place should be left around a player position

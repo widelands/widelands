@@ -20,7 +20,6 @@
 #include "warehouse.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "game.h"
 #include "player.h"
 #include "profile.h"
@@ -30,6 +29,7 @@
 #include "worker.h"
 #include "tribe.h"
 
+#include "log.h"
 
 static const int CARRIER_SPAWN_INTERVAL = 2500;
 

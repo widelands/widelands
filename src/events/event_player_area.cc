@@ -24,6 +24,8 @@
 #include "profile.h"
 #include "wexception.h"
 
+#include "log.h"
+
 void Event_Player_Area::reinitialize(Game *) {}
 
 #define EVENT_VERSION 2

@@ -19,7 +19,6 @@
 
 #include "game_server_connection.h"
 
-#include "error.h"
 #include "game_server_proto.h"
 #include "game_server_proto_packet.h"
 #include "game_server_proto_packet_getroominfo.h"
@@ -29,6 +28,7 @@
 #include "network_buffer.h"
 #include "wexception.h"
 
+#include "log.h"
 
 Game_Server_Connection::Game_Server_Connection(std::string host, uint port) {
    m_host = host;

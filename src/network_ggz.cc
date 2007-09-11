@@ -19,7 +19,7 @@
 
 #include "network_ggz.h"
 
-#include "error.h"
+#include "log.h"
 
 static NetGGZ *ggzobj = 0;
 #ifdef HAVE_GGZ

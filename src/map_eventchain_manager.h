@@ -20,7 +20,7 @@
 #ifndef __S__EVENTCHAIN_MANAGER_H
 #define __S__EVENTCHAIN_MANAGER_H
 
-#include "error.h"
+#include <cassert>
 
 class Event;
 class EventChain;

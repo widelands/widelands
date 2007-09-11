@@ -21,7 +21,6 @@
 
 #include "editorinteractive.h"
 #include "editor_set_starting_pos_tool.h"
-#include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "map.h"

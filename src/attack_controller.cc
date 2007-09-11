@@ -20,7 +20,6 @@
 #include "attack_controller.h"
 
 #include "battle.h"
-#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
@@ -35,6 +34,7 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
+#include "log.h"
 
 void getCloseMilitarySites
 (const Editor_Game_Base & eg,

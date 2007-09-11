@@ -27,7 +27,6 @@
 #include "datafile.h"
 #endif
 #include "disk_filesystem.h"
-#include "error.h"
 #include "layered_filesystem.h"
 #include "zip_exceptions.h"
 #include "zip_filesystem.h"

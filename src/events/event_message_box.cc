@@ -20,7 +20,6 @@
 #include "event_message_box.h"
 
 #include "editor_game_base.h"
-#include "error.h"
 #include "event_message_box_message_box.h"
 #include "filesystem.h"
 #include "game.h"

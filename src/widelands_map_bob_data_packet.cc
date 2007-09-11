@@ -22,7 +22,6 @@
 #include "fileread.h"
 #include "filewrite.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"

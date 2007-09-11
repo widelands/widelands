@@ -21,14 +21,13 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
-#include "error.h"
 #include "geometry.h"
-#include "types.h"
 #include "ui_object.h"
 
 #include <SDL_types.h>
 #include <stdint.h> //  Because old version of SDL_types.h do not include this.
 
+#include <cassert>
 #include <string>
 
 class RenderTarget;

@@ -21,7 +21,8 @@
 #define __S__PLAYER_AREA_H
 
 #include "geometry.h"
-#include "types.h"
+
+#include "widelands.h"
 
 template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 	Player_Area() {}

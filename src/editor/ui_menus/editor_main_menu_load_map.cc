@@ -26,7 +26,6 @@
 #include "editorinteractive.h"
 #include "widelands_map_loader.h"
 #include "wexception.h"
-#include "error.h"
 #include "editor_game_base.h"
 #include "editor_set_starting_pos_tool.h"
 #include "overlay_manager.h"

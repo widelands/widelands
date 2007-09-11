@@ -19,11 +19,11 @@
 
 #include "zip_filesystem.h"
 
-#include "error.h"
 #include "filesystem_exceptions.h"
 #include "zip_exceptions.h"
 #include "wexception.h"
 
+#include <cassert>
 #include <string>
 
 

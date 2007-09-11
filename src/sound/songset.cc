@@ -19,10 +19,11 @@
 
 #include "songset.h"
 
-#include "error.h"
 #include "fileread.h"
 #include "layered_filesystem.h"
 #include "sound_handler.h"
+
+#include "log.h"
 
 /// Prepare infrastructure for reading song files from disk
 Songset::Songset() : m_m(0), m_rwops(0) {}

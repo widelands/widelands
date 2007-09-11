@@ -19,7 +19,6 @@
 
 #include "game_server_proto_packet_connect.h"
 
-#include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "i18n.h"

@@ -23,7 +23,6 @@
 #include "editor_main_menu_new_map.h"
 #include "editor_main_menu_save_map.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "fullscreen_menu_fileview.h"
 #include "i18n.h"
 

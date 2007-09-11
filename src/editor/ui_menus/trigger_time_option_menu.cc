@@ -23,13 +23,12 @@
 #include "i18n.h"
 #include "trigger/trigger_time.h"
 #include "editorinteractive.h"
-#include "error.h"
 
-#include "ui_window.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, Trigger_Time* trigger) :

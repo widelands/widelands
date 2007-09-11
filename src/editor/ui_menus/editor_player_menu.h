@@ -21,6 +21,9 @@
 #define __S__EDITOR_PLAYER_MENU_H
 
 #include "constants.h"
+
+#include "widelands.h"
+
 #include "types.h"
 
 #include "ui_button.h"

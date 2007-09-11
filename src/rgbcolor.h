@@ -20,8 +20,6 @@
 #ifndef RGBCOLOR_H
 #define RGBCOLOR_H
 
-#include "types.h"
-
 #include <SDL.h>
 
 

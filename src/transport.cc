@@ -47,6 +47,8 @@
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
+#include "log.h"
+
 #include <cstdarg>
 
 #include <stdio.h>

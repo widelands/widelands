@@ -19,13 +19,13 @@
 
 #include "game_server_proto_packet_getroominfo.h"
 
-#include "error.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "i18n.h"
 #include "network_buffer.h"
 #include "wexception.h"
 
+#include <cassert>
 
 Game_Server_Protocol_Packet_GetRoomInfo::Game_Server_Protocol_Packet_GetRoomInfo
 (const std::string & roomname)

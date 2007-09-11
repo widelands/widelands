@@ -25,7 +25,6 @@
 #include "constants.h"
 #include "map.h"
 #include "player_area.h"
-#include "types.h"
 
 #include <cassert>
 #include <map>

@@ -21,10 +21,10 @@
 #include "trigger_conditional.h"
 
 #include "compile_assert.h"
-#include "error.h"
 #include "events/event_chain.h"
 #include "trigger.h"
 
+#include "log.h"
 
 const char * const TriggerConditional_Factory::operators[] =
 {"NOT", "AND", "OR", "XOR", "(", ")", "trigger"};

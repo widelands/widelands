@@ -20,7 +20,6 @@
 #include "attack_controller.h"
 #include "battle.h"
 #include "editor_game_base.h"
-#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "geometry.h"

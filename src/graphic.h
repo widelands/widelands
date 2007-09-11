@@ -22,7 +22,6 @@
 
 #include "animation_gfx.h"
 #include "picture.h"
-#include "types.h"
 
 #include <vector>
 

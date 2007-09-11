@@ -17,9 +17,9 @@
  *
  */
 
-#include "building.h"
 #include "building_statistics_menu.h"
-#include "error.h"
+
+#include "building.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
@@ -241,7 +241,6 @@ called when the ok button has been clicked
 ===========
 */
 void Building_Statistics_Menu::clicked_help() {
-      log("TODO: help not implemented\n");
 }
 
 

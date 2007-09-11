@@ -20,8 +20,7 @@
 #ifndef __S__TRIGGER_MANAGER_H
 #define __S__TRIGGER_MANAGER_H
 
-#include "error.h"
-
+#include <cassert>
 #include <vector>
 
 class Trigger;

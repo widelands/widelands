@@ -17,10 +17,11 @@
  *
  */
 
-#include <cassert>
-#include "types.h"
 #include "ui_box.h"
+
 #include "wexception.h"
+
+#include <cassert>
 
 namespace UI {
 /**

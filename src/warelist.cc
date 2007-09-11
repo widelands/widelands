@@ -17,8 +17,10 @@
  *
  */
 
-#include "error.h"
 #include "warelist.h"
+
+#include "log.h"
+
 #include "types.h"
 
 

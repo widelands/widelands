@@ -24,6 +24,8 @@
 #include "immovable.h"
 #include "workarea_info.h"
 
+#include "widelands.h"
+
 #include <string>
 #include <vector>
 

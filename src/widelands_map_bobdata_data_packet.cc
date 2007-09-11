@@ -23,7 +23,6 @@
 #include "carrier.h"
 #include "critter_bob.h"
 #include "critter_bob_program.h"
-#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"

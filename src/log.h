@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef __S_LOG_H
+#define __S_LOG_H
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
@@ -26,46 +26,10 @@
 #define PRINTF_FORMAT(b, c)
 #endif
 
-/*
-==============================================================================
-
-ERROR HANDLING FUNCTIONS
-
-==============================================================================
-*/
-
-#define RET_OK             0
-#define RET_EXIT           1
-#define ERR_NOT_IMPLEMENTED -1
-#define ERR_INVAL_ARG -2
-#define ERR_FAILED -255
-
-
-// Critical errors, displayed to the user.
-// Does not return (unless the user is really daring)
-void critical_error(const char *, ...) PRINTF_FORMAT(1, 2);
-
 // Informational messages that can aid in debugging
 #define ALIVE() log("Alive in %s line %i\n", __FILE__, __LINE__)
+
+/// Print a formatted log messages to std::cout.
 void log(const char *, ...) PRINTF_FORMAT(1, 2);
-
-#ifdef DEBUG
-   #ifndef KEEP_STANDART_ASSERT
-		#include "wexception.h"
-
-      #ifdef assert
-         #undef assert
-      #endif
-
-		void myassert(int line, const char* file, const char* condt) throw(_wexception);
-
-      #define assert(condition) \
-			do {if (!(condition)) myassert(__LINE__, __FILE__, #condition);} while (0)
-
-	#endif
-#else
-      #define NDEBUG 1
-      #include <assert.h>
-#endif
 
 #endif

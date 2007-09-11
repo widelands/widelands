@@ -21,7 +21,6 @@
 
 #include "build_id.h"
 #include "editorinteractive.h"
-#include "error.h"
 #include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
@@ -43,6 +42,8 @@
 #include "profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
+
+#include "log.h"
 
 #include <iostream>
 #include <stdexcept>

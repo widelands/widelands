@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
+ * Copyright (C) 2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,26 @@
  *
  */
 
-#ifndef TYPES_H
-#define TYPES_H
+#ifndef __S__WIDELANDS_H
+#define __S__WIDELANDS_H
 
-//TODO: use SDL types instead
-typedef unsigned char uchar;
-typedef unsigned short ushort;
-typedef unsigned int uint;
-typedef unsigned long ulong;
+#include <SDL.h>
+
+//  Type definitions for the game logic.
+
+typedef Uint32 Military_Influence; //  FIXME should be Uint16
+
+typedef Uint8  Player_Number; /// 5 bits used, so 0 .. 31
+inline Player_Number Neutral() throw () {return 0;}
+
+typedef Uint8  Resource_Amount; /// 4 bits used, so 0 .. 15.
+
+typedef Uint16 Vision;
+
+typedef Sint32 Time; // FIXME should be unsigned
+inline Time Never() throw () {return 0xffffffff;}
+
+typedef Uint32 Duration;
+inline Duration Forever() throw () {return 0xffffffff;}
 
 #endif

@@ -17,9 +17,9 @@
  *
  */
 
-#include "keycodes.h"
-#include "types.h"
 #include "ui_editbox.h"
+
+#include "keycodes.h"
 
 namespace UI {
 /*

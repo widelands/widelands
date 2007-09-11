@@ -20,7 +20,6 @@
 #include "fullscreen_menu_campaign_select.h"
 
 #include "constants.h"
-#include "error.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "profile.h"

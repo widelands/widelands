@@ -24,13 +24,12 @@
 #include "editorinteractive.h"
 #include "map.h"
 #include "world.h"
-#include "error.h"
 #include "editor_game_base.h"
-#include "ui_progresswindow.h"
 
-#include "ui_window.h"
-#include "ui_textarea.h"
 #include "ui_button.h"
+#include "ui_progresswindow.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 
 #include <string>
 #include <vector>

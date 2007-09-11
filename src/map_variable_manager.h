@@ -20,9 +20,7 @@
 #ifndef __S__VARIABLE_MANAGER_H
 #define __S__VARIABLE_MANAGER_H
 
-#include "error.h"
-#include "types.h"
-
+#include <cassert>
 #include <string>
 #include <vector>
 

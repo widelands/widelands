@@ -30,6 +30,8 @@
 
 #include "ui_progresswindow.h"
 
+#include "log.h"
+
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
 

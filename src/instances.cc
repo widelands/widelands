@@ -20,7 +20,6 @@
 #include "instances.h"
 
 #include "cmd_queue.h"
-#include "error.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "game.h"
@@ -28,6 +27,8 @@
 #include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
+
+#include "log.h"
 
 #include <cstdarg>
 #include <string>
@@ -459,7 +460,7 @@ uint Map_Object::schedule_act(Game* g, uint tdelta, uint data)
 
 		return time;
 	} else
-		return Editor_Game_Base::Never();
+		return Never();
 }
 
 

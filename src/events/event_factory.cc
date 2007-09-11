@@ -35,8 +35,6 @@
 /* EVENTS BELOW HAVE NO OPTION MENU YET */
 #include "event_set_null_trigger.h"
 #include "event_unhide_objective.h"
-#include "error.h"
-#include "i18n.h"
 #include "wexception.h"
 
 
