@@ -45,12 +45,17 @@ hostgame
  &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
  _("Host a New Game")),
 
+// Internetgaming via game_server protocol does not work at the moment.
+// So I took the button out of the menu, to avoid crashes and confusion
+// for the players --Nasenbaer
+/*
 playinternet
 (this,
  90, 300, 200, 26,
  1,
  &Fullscreen_Menu_NetSetup::end_modal, this, INTERNETGAME,
  _("Play in Internet")),
+ */
 
 back
 (this,

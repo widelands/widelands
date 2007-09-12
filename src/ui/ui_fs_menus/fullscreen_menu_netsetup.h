@@ -61,7 +61,7 @@ private:
 	UI::Textarea                                title;
 	UI::Button<Fullscreen_Menu_NetSetup>        joingame;
 	UI::Button<Fullscreen_Menu_NetSetup>        hostgame;
-	UI::IDButton<Fullscreen_Menu_NetSetup, int> playinternet;
+	//UI::IDButton<Fullscreen_Menu_NetSetup, int> playinternet;
 	UI::IDButton<Fullscreen_Menu_NetSetup, int> back;
 	UI::Edit_Box                                hostname;
 	UI::Edit_Box                                playername;
