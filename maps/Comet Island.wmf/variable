@@ -1,0 +1,10 @@
+# Automatically created by Widelands SVNBuild
+
+[global]
+packet_version=1
+
+[Nächstes Szenario]
+delete_protected=true
+type=string
+value=<undefiniert>
+

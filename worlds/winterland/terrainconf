@@ -49,8 +49,8 @@ resources=coal, iron, gold, granit
 is=mountain
 
 [ice]
-def_resources=water 30
-is=green
+is=dry
+#### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
 
 [taiga]
 def_resources=water 10
@@ -60,5 +60,5 @@ is=green
 is=acid
 
 [snow]
-is=dry
-#### of course snow is not dry, but this disallows the users, to build on snow. only flags are allowed.
+def_resources=water 30
+is=green

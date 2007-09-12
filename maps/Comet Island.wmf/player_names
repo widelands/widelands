@@ -1,0 +1,17 @@
+# Automatically created by Widelands SVNBuild
+
+[global]
+packet_version=1
+
+[player_1]
+name=Ergon
+tribe=barbarians
+
+[player_2]
+name=Artorius
+tribe=empire
+
+[player_3]
+name=Armin
+tribe=barbarians
+
