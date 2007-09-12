@@ -738,17 +738,17 @@ void Bob::movepath_update(Game* g, State* state)
 		 >=
 		 path->get_nsteps())
 	{
-
 		assert(not path or m_position == path->get_end());
 		pop_task(); // success
 		return;
-
-	} else if (state->ivar1==state->ivar3) {
-      // We have stepped all steps that we were asked for.
-      // This is some kind of success, though we do not are were we wanted
-      // to go
-      pop_task();
-      return;
+	}
+	else if (state->ivar1==state->ivar3)
+	{
+		// We have stepped all steps that we were asked for.
+		// This is some kind of success, though we do not are were we wanted
+		// to go
+		pop_task();
+		return;
 	}
 
 	const Direction dir = (*path)[state->ivar1];
@@ -757,8 +757,9 @@ void Bob::movepath_update(Game* g, State* state)
 	if (state->ivar2 and
 		static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1 ==
 		path->get_nsteps())
-
+	{
 		forcemove = true;
+	}
 
 	int tdelta = start_walk(g, (WalkingDir)dir,
 	                        state->diranims->get_animation(dir), forcemove);
@@ -874,11 +875,10 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
 		float f = static_cast<float>(game.get_gametime() - m_walkstart) /
-			      (m_walkend - m_walkstart);
+		          (m_walkend - m_walkstart);
 
 		if (f < 0)
 			f = 0;
-
 		else if (f > 1)
 			f = 1;
 
@@ -949,7 +949,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 		   newf.field->get_caps() & MOVECAPS_WALK)
 		  and
 		  not (newf.field->get_caps() & movecaps)))
-		 return -1;
+		return -1;
 
 	// Move is go
 	int tdelta = g->get_map()->calc_cost(m_position, dir);
