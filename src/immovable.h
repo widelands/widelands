@@ -69,7 +69,7 @@ struct ImmovableAction;
 Immovable represents a standard immovable such as trees or stones.
 */
 struct Immovable_Descr : public Map_Object_Descr {
-   friend class Widelands_Map_Immovabledata_Data_Packet; // For writing (get_program)
+	friend class Widelands_Map_Immovabledata_Data_Packet; // For writing (get_program)
 
 	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
 
@@ -80,7 +80,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name() const throw () {return m_name.c_str();}
 	int get_size() const throw () {return m_size;}
-   inline const char* get_picture() const {return m_picture.c_str();}
+	inline const char* get_picture() const {return m_picture.c_str();}
 	const ImmovableProgram* get_program(std::string programname) const;
 	inline const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
 
@@ -93,7 +93,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const Tribe_Descr* get_owner_tribe() const throw () {return m_owner_tribe;}
 
 protected:
-   std::string m_picture;
+	std::string m_picture;
 	const std::string         m_name;
 	int           m_size;
 	EncodeData    m_default_encodedata;
@@ -105,7 +105,7 @@ protected:
 class Immovable : public BaseImmovable {
 	friend class Immovable_Descr;
 	friend class ImmovableProgram;
-   friend class Widelands_Map_Immovabledata_Data_Packet; // For writing
+	friend class Widelands_Map_Immovabledata_Data_Packet; // for writing (obsolete since build-11)
 
 	MO_DESCR(Immovable_Descr);
 
@@ -197,7 +197,7 @@ struct PlayerImmovable : public BaseImmovable {
 
 	const std::vector<Worker*>& get_workers() const {return m_workers;}
 
-   void log_general_info(Editor_Game_Base*);
+	void log_general_info(Editor_Game_Base*);
 
 protected:
 	void set_owner(Player *owner);

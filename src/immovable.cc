@@ -55,13 +55,13 @@ BaseImmovable::~BaseImmovable()
 void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 {
 	Field *f = g->get_map()->get_field(c);
-   if (f->immovable && f->immovable!=this) {
-      BaseImmovable *other = f->immovable;
+	if (f->immovable && f->immovable!=this) {
+		BaseImmovable *other = f->immovable;
 
 	   assert(other->get_size() == NONE);
 
-      other->cleanup(g);
-      delete other;
+		other->cleanup(g);
+		delete other;
 	}
 
 	f->immovable = this;
@@ -271,7 +271,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	snprintf
 		(picname, sizeof(picname),
 		 "%s/%s", directory, global->get_string("picture", buffer));
-   m_picture = picname;
+	m_picture = picname;
 
 	m_default_encodedata.parse(global);
 
@@ -344,8 +344,9 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 /**
  * Parse a program.
 */
-void Immovable_Descr::parse_program(std::string directory, Profile* prof,
-												std::string programname)
+void Immovable_Descr::parse_program
+		(std::string directory, Profile* prof,
+		 std::string programname)
 {
 	ImmovableProgram* prog = 0;
 
@@ -360,7 +361,7 @@ void Immovable_Descr::parse_program(std::string directory, Profile* prof,
 	}
 	catch (...)
 	{
-			delete prog;
+		delete prog;
 
 		throw;
 	}
@@ -371,7 +372,7 @@ void Immovable_Descr::parse_program(std::string directory, Profile* prof,
  * Parse the animation of the given name.
 */
 uint Immovable_Descr::parse_animation
-(std::string directory, Profile* s, std::string animation_name)
+		(std::string directory, Profile* s, std::string animation_name)
 {
 	// Load the animation
 	Section * anim = s->get_section(animation_name.c_str());
@@ -400,7 +401,7 @@ uint Immovable_Descr::parse_animation
 	}
 
 	if (not is_animation_known(animation_name.c_str())) {
-      animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
+		animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
 		add_animation(animation_name.c_str(), animid);
 	} else animid = get_animation(animation_name.c_str());
 
@@ -440,12 +441,20 @@ Immovable::~Immovable()
 {
 }
 
-int Immovable::get_type() const throw () {return IMMOVABLE;}
+int Immovable::get_type() const throw ()
+{
+	return IMMOVABLE;
+}
 
-int Immovable::get_size() const throw () {return descr().get_size();}
+int Immovable::get_size() const throw ()
+{
+	return descr().get_size();
+}
 
 bool Immovable::get_passable() const throw ()
-{return descr().get_size() < BIG;}
+{
+	return descr().get_size() < BIG;
+}
 
 /**
  * Actually initialize the immovable.
@@ -468,7 +477,7 @@ void Immovable::init(Editor_Game_Base *g)
 */
 void Immovable::cleanup(Editor_Game_Base *g)
 {
-   unset_position(g, m_position);
+	unset_position(g, m_position);
 
 	BaseImmovable::cleanup(g);
 }
@@ -547,7 +556,10 @@ void Immovable::draw
  RenderTarget & dst,
  const FCoords,
  const Point pos)
-{if (m_anim) dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);}
+{
+	if (m_anim)
+		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
+}
 
 
 /*
@@ -786,11 +798,11 @@ void ImmovableProgram::parse_transform
 
 	const std::vector<std::string> list(split_string(cmd[1], ":"));
 	if (list.size() == 1) {
-      act->sparam1 = cmd[1];
-      act->sparam2 = "world";
+		act->sparam1 = cmd[1];
+		act->sparam2 = "world";
 	} else {
-      act->sparam1 = list[1];
-      act->sparam2 = list[0];
+		act->sparam1 = list[1];
+		act->sparam2 = list[0];
 	}
 
 	act->function = &Immovable::run_transform;
@@ -800,8 +812,10 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 {
 	Coords c = m_position;
 
-   if (!descr().get_owner_tribe() && (action.sparam2 != "world"))
-      throw wexception("Should create tribe-immovable %s, but we are no tribe immovable!\n", action.sparam1.c_str());
+	if (!descr().get_owner_tribe() && (action.sparam2 != "world"))
+		throw wexception
+			("Should create tribe-immovable %s, but we are no tribe immovable!\n",
+			 action.sparam1.c_str());
 
 	if (!killable) { // we need to reschedule and remove self from act()
 		m_program_step = schedule_act(g, 1);
@@ -811,8 +825,8 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 
 	const Tribe_Descr* tribe=0;
 
-   if (action.sparam2 != "world")
-      tribe=descr().get_owner_tribe(); // Not a world bob?
+	if (action.sparam2 != "world")
+		tribe=descr().get_owner_tribe(); // Not a world bob?
 
 	remove(g);
 	// Only use variables on the stack below this point!
@@ -835,7 +849,8 @@ void ImmovableProgram::parse_remove
 	act->function = &Immovable::run_remove;
 }
 
-bool Immovable::run_remove(Game* g, bool killable, const ImmovableAction &) {
+bool Immovable::run_remove(Game* g, bool killable, const ImmovableAction &)
+{
 	if (!killable) {
 		m_program_step = schedule_act(g, 1);
 		return true;
@@ -858,8 +873,9 @@ PlayerImmovable IMPLEMENTATION
  * Zero-initialize
 */
 PlayerImmovable::PlayerImmovable(const Map_Object_Descr & mo_descr) :
-BaseImmovable(mo_descr), m_owner(0), m_economy(0)
-{}
+	BaseImmovable(mo_descr), m_owner(0), m_economy(0)
+{
+}
 
 /**
  * Cleanup
@@ -958,11 +974,12 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
 /**
  * Dump general information
  */
-void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)  {
-   BaseImmovable::log_general_info(egbase);
+void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)
+{
+	BaseImmovable::log_general_info(egbase);
 
-   molog("this: %p\n", this);
-   molog("m_owner: %p\n", m_owner);
-   molog("* player nr: %i\n", m_owner->get_player_number());
-   molog("m_economy: %p\n", m_economy);
+	molog("this: %p\n", this);
+	molog("m_owner: %p\n", m_owner);
+	molog("* player nr: %i\n", m_owner->get_player_number());
+	molog("m_economy: %p\n", m_economy);
 }
