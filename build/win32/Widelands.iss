@@ -91,7 +91,6 @@ Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription
 [Files]
 Source: ..\..\campaigns\*; DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\fonts\*; DestDir: {app}\fonts\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\game_server\*; DestDir: {app}\game_server\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\locale\*; DestDir: {app}\locale\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\maps\*; DestDir: {app}\maps\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Components: " Maps"
 Source: ..\..\music\*; DestDir: {app}\music\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Components: " Music"
@@ -102,7 +101,6 @@ Source: ..\..\txts\*; DestDir: {app}\txts\; Flags: recursesubdirs ignoreversion;
 Source: ..\..\worlds\*; DestDir: {app}\worlds\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\*.dll; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
 Source: ..\..\widelands.exe; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
-Source: ..\..\config; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
 Source: ..\..\ChangeLog; DestDir: {app}; Flags: ignoreversion; DestName: ChangeLog.txt; Components: " Widelands"
 Source: ..\..\COPYING; DestDir: {app}; Flags: ignoreversion; DestName: COPYING.txt; Components: " Widelands"
 Source: ..\..\CREDITS; DestDir: {app}; Flags: ignoreversion; DestName: CREDITS.txt; Components: " Widelands"

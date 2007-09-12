@@ -20,7 +20,7 @@
 #include "map_variable_manager.h"
 
 #include "i18n.h"
-
+#include "types.h"
 #include <vector>
 
 

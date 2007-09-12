@@ -22,6 +22,7 @@
 
 #include <string>
 #include <exception>
+#include "types.h"
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))

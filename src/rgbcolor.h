@@ -21,6 +21,7 @@
 #define RGBCOLOR_H
 
 #include <SDL.h>
+#include "types.h"
 
 
 struct RGBColor : protected SDL_Color {
