@@ -123,7 +123,7 @@ int main(int argc, char **argv){return argc==0 && argv==0;}
 
 def CheckCompilerFlag(context, compiler_flag, env):
 	context.Message( 'Trying to enable compiler flag %s ... ' % compiler_flag)
-	lastCCFLAGS = context.env['CCFLAGS']
+	lastCCFLAGS = context.env['CCFLAGS'][:]
 	context.env.Append(CCFLAGS = compiler_flag)
 	ret = context.TryLink("""int main(int argc, char **argv) {return argc==0 && argv==0;}
 			\n""", ".cc") #must _use_ both arguments, otherwise -Werror will break
@@ -134,7 +134,7 @@ def CheckCompilerFlag(context, compiler_flag, env):
 
 def CheckLinkerFlag(context, link_flag, env):
 	context.Message( 'Trying to enable linker   flag %s ... ' % link_flag)
-	lastLINKFLAGS = context.env['LINKFLAGS']
+	lastLINKFLAGS = context.env['LINKFLAGS'][:]
 	context.env.Append(LINKFLAGS = link_flag)
 	ret = context.TryLink("""int main(int argc, char **argv) {return argc==0 && argv==0;}
 			\n""", ".cc") #must _use_ both arguments, otherwise -Werror will break
