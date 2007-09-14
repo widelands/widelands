@@ -230,15 +230,9 @@ throw
                   r=new Route();
                else
                   r=s->route;
-               r->m_totalcost=fr.Signed32();
-               int nsteps=fr.Unsigned16();
-               for (int step=0; step<nsteps; step++) {
-                  int idx=fr.Unsigned32();
-                  assert(ol->is_object_known(idx));
-                  Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(idx));
-                  r->m_route.push_back(flag);
-					}
-               s->route=r;
+					Route::LoadData* ld = r->load(fr);
+					r->load_pointers(ld, ol);
+					s->route = r;
 				} else
                s->route=0;
 
@@ -513,13 +507,7 @@ throw (_wexception)
                // Route
                if (s->route) {
                   fw.Unsigned8(1);
-                  fw.Signed32(s->route->get_totalcost());
-                  fw.Unsigned16(s->route->get_nrsteps());
-                  for (int idx=0; idx<s->route->get_nrsteps(); idx++) {
-                     Flag* f=s->route->get_flag(egbase, idx);
-                     assert(os->is_object_known(f));
-                     fw.Unsigned32(os->get_object_file_index(f));
-						}
+						s->route->save(fw, egbase, os);
 					} else
                   fw.Unsigned8(0);
 

@@ -1558,6 +1558,69 @@ void Route::truncate(int count)
 }
 
 
+/**
+ * Preliminarily load the route from the given file.
+ * \return pointer to a \ref LoadData structure that must be passed to
+ * \ref load_pointers in a subsequent call during the load_pointers phase
+ * of loading.
+ */
+Route::LoadData* Route::load(FileRead& fr)
+{
+	LoadData* data = 0;
+
+	m_route.clear();
+
+	try {
+		m_totalcost = fr.Signed32();
+		uint nsteps = fr.Unsigned16();
+		for (uint step = 0; step < nsteps; ++step)
+			data->flags.push_back(fr.Unsigned32());
+	} catch(...) {
+		delete data;
+		throw;
+	}
+
+	return data;
+}
+
+
+/**
+ * load_pointers phase of loading: This is responsible for filling
+ * in the \ref Flag pointers. Must be called after \ref load.
+ */
+void Route::load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol)
+{
+	try {
+		for(uint i = 0; i < data->flags.size(); ++i) {
+			uint idx = data->flags.size();
+			Flag* flag = dynamic_cast<Flag*>(mol->get_object_by_file_index(idx));
+			if (!flag)
+				throw wexception("Route step %u expected flag %u", i, idx);
+			m_route.push_back(flag);
+		}
+	} catch(...) {
+		delete data;
+		throw;
+	}
+	delete data;
+}
+
+
+/**
+ * Save the route to the given file.
+ */
+void Route::save(FileWrite& fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+{
+	fw.Signed32(get_totalcost());
+	fw.Unsigned16(m_route.size());
+	for (int idx = 0; idx < m_route.size(); ++idx) {
+		Flag* f = get_flag(egbase, idx);
+		assert(mos->is_object_known(f));
+		fw.Unsigned32(mos->get_object_file_index(f));
+	}
+}
+
+
 /*
 ==============================================================================
 

@@ -328,8 +328,7 @@ private:
  */
 struct Route {
 	friend class Economy;
-   friend class Request;
-   friend class Widelands_Map_Bobdata_Data_Packet; // This is in the state structure
+	friend class Request;
 
 	Route();
 
@@ -342,6 +341,14 @@ struct Route {
 
 	void starttrim(int count);
 	void truncate(int count);
+
+	struct LoadData {
+		std::vector<uint> flags;
+	};
+
+	LoadData* load(FileRead& fr);
+	void load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol);
+	void save(FileWrite& fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos);
 
 private:
 	int                     m_totalcost;
