@@ -98,7 +98,6 @@ void Critical_Error::crash()
 	abort();
 }
 
-
 /**
  * A critical error occurred in the program. It will quite surely die.
  *

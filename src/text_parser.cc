@@ -127,7 +127,6 @@ bool Text_Parser::parse_textblock
 		extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
 
       // Serch for map variables
-      SSS_T offset;
 	for
 		(std::string::size_type offset;
 		 (offset = block_text.find("<variable name=")) != std::string::npos;)

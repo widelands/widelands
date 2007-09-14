@@ -45,15 +45,15 @@ struct ZipFilesystem : public FileSystem {
 	virtual void MakeDirectory(const std::string dirname);
 
 	virtual StreamRead  * OpenStreamRead
-		(const std::string & fname);
+		(const std::string & fname) __attribute__ ((noreturn));
 	virtual StreamWrite * OpenStreamWrite
-		(const std::string & fname);
+		(const std::string & fname) __attribute__ ((noreturn));
 
 	virtual FileSystem*  MakeSubFileSystem(const std::string dirname);
 	virtual FileSystem*  CreateSubFileSystem(const std::string dirname,
                                                  const Type);
 	virtual void Unlink(const std::string filename) __attribute__ ((noreturn));
-	virtual void Rename(const std::string&, const std::string&);
+	virtual void Rename(const std::string&, const std::string&) __attribute__ ((noreturn));
 
 public:
 	static FileSystem *CreateFromDirectory(const std::string directory);

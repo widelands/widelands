@@ -38,19 +38,18 @@
 #include "filewrite.h"
 #include "game.h"
 #include "instances.h"
+#include "log.h"
 #include "player.h"
 #include "soldier.h"
 #include "tribe.h"
+#include <vector>
 #include "warehouse.h"
 #include "wexception.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
-#include "log.h"
-
 #include <cstdarg>
-
 #include <stdio.h>
 
 
@@ -1613,7 +1612,7 @@ void Route::save(FileWrite& fw, Editor_Game_Base* egbase, Widelands_Map_Map_Obje
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
-	for (int idx = 0; idx < m_route.size(); ++idx) {
+	for (std::vector<Object_Ptr>::size_type idx = 0; idx < m_route.size(); ++idx) {
 		Flag* f = get_flag(egbase, idx);
 		assert(mos->is_object_known(f));
 		fw.Unsigned32(mos->get_object_file_index(f));
