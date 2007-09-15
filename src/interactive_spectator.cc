@@ -162,6 +162,7 @@ void Interactive_Spectator::exit_btn()
 
 /**
  * Observer has clicked on the given field; bring up the context menu.
+ * \todo Implement
  */
 void Interactive_Spectator::field_action()
 {

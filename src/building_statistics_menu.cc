@@ -235,10 +235,8 @@ int Building_Statistics_Menu::validate_pointer(int* id, int size) {
    return *id;
 }
 
-/*
-===========
-called when the ok button has been clicked
-===========
+/**
+ * \todo Implement help
 */
 void Building_Statistics_Menu::clicked_help() {
 }

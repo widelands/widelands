@@ -1049,6 +1049,9 @@ Warehouse_Window::~Warehouse_Window()
 {
 }
 
+/**
+ * \todo Implement help
+ */
 void Warehouse_Window::clicked_help() {
 }
 

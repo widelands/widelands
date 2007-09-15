@@ -56,7 +56,9 @@ current_page(Wares)
 		(waresdisplay.get_w(), waresdisplay.get_h() + 30 + vmargin());
 }
 
-
+/**
+ * \todo Implement help
+ */
 void Stock_Menu::clicked_help() {}
 
 

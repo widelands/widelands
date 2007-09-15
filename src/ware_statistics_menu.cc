@@ -496,10 +496,9 @@ Ware_Statistics_Menu::~Ware_Statistics_Menu()
 {
 }
 
-/*
-===========
-called when the ok button has been clicked
-===========
+/** 
+ * Called when the ok button has been clicked
+ * \todo Implement help
 */
 void Ware_Statistics_Menu::clicked_help() {
 }

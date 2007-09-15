@@ -208,6 +208,7 @@ public:
 		 * knows.
 		 * The d component is only valid when time_last_surveyed[0] != Never().
 		 * The r component is only valid when time_last_surveyed[1] != Never().
+		 * \todo Check this on access, at least in debug builds
 		 */
 		::Field::Resource_Amounts resource_amounts;
 

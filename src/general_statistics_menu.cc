@@ -276,10 +276,9 @@ General_Statistics_Menu::~General_Statistics_Menu()
    delete m_radiogroup;
 }
 
-/*
-===========
-called when the help button was clicked
-===========
+/** 
+ * called when the help button was clicked
+ * \todo Implement help
 */
 void General_Statistics_Menu::clicked_help() {
 }
