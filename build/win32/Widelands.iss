@@ -22,50 +22,53 @@
 
 
 ;Version String
-#define XAppName "Widelands"
-#define XAppVerName "Widelands Build11"
-#define XAppVerNumber "0.11.0.1"
-#define XAppID "{WIDELAND-BUILD11-2007}"
+#define Name "Widelands"
+#define VerName "Widelands Build11"
+#define VerNumber "0.11.0.1"
+#define ID "{WIDELAND-BUILD11-2007}"
+#define Copyright "Widelands Development Team 2001-2007"
+#define SetupFileName "Widelands-Build11-win32"
 
 ;General String
-#define XAppPublisher "Widelands Development Team"
-#define XAppURL "http://www.widelands.org"
+#define Publisher "Widelands Development Team"
+#define URL "http://www.widelands.org"
 #define HelpURL "http://xoops.widelands.org/modules/mediawiki/wiki/Main_Page"
-#define XAppExeName "widelands.exe"
-#define XAppUrlName "Widelands.url"
+#define ExeName "widelands.exe"
+#define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
 #define HelpNameName "Widelands-Onlinehelp"
 
 [Setup]
-AppName={#XAppName}
-AppVerName={#XAppVerName}
-AppPublisher={#XAppPublisher}
-AppPublisherURL={#XAppURL}
-AppSupportURL={#XAppURL}
-AppUpdatesURL={#XAppURL}
-DefaultDirName={pf}\{#XAppName}
-DefaultGroupName={#XAppName}
+AppName={#Name}
+AppVerName={#VerName}
+AppPublisher={#Publisher}
+AppPublisherURL={#URL}
+AppSupportURL={#URL}
+AppUpdatesURL={#URL}
+DefaultDirName={pf}\{#Name}
+DefaultGroupName={#Name}
 AllowNoIcons=true
 LicenseFile=..\..\COPYING
 InfoAfterFile=..\..\ChangeLog
 OutputDir=..\..\..\
-OutputBaseFilename=Widelands-SVN-Setup
+OutputBaseFilename={#SetupFileName}
 SetupIconFile=.\WL.ico
 Compression=lzma/ultra
 SolidCompression=true
-VersionInfoVersion={#XAppVerNumber}
-VersionInfoCompany={#XAppPublisher}
-VersionInfoDescription={#XAppVerName} Setup
+VersionInfoVersion={#VerNumber}
+VersionInfoCompany={#Publisher}
+VersionInfoDescription={#VerName} Setup
 ShowLanguageDialog=yes
 WizardImageFile=.\innosetup-files\WL.bmp
 WizardSmallImageFile=.\innosetup-files\WLsmall.bmp
-AppVersion={#XAppVerName}
+AppVersion={#VerName}
 UninstallDisplayIcon={app}\unins000.exe
-UninstallDisplayName={#XAppVerName}
-VersionInfoCopyright={#XAppPublisher}
+UninstallDisplayName={#VerName}
+VersionInfoCopyright={#Publisher}
 InternalCompressLevel=max
-AppID={{#XAppID}
-AppCopyright=Widelands Development Team 2001-2007
+AppID={{#ID}
+AppCopyright={#Copyright}
+ChangesAssociations=yes
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
@@ -106,27 +109,26 @@ Source: ..\..\COPYING; DestDir: {app}; Flags: ignoreversion; DestName: COPYING.t
 Source: ..\..\CREDITS; DestDir: {app}; Flags: ignoreversion; DestName: CREDITS.txt; Components: " Widelands"
 Source: .\innosetup-files\WL-Editor.ico; DestDir: {app}; Flags: ignoreversion; Components: " Widelands"
 
-
 [INI]
-Filename: {app}\{#XAppUrlName}; Section: InternetShortcut; Key: URL; String: {#XAppURL}
+Filename: {app}\{#UrlName}; Section: InternetShortcut; Key: URL; String: {#URL}
 Filename: {app}\{#HelpName}; Section: InternetShortcut; Key: URL; String: {#HelpURL}
 
 [Icons]
-Name: {app}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
-Name: {group}\{#XAppName}; Filename: {app}\{#XAppExeName}; WorkingDir: {app}; IconFilename: {app}\widelands.exe; Flags: useapppaths; Tasks: ; Languages:
-Name: {group}\{cm:ProgramOnTheWeb,{#XAppName}}; Filename: {app}\{#XAppUrlName}
-Name: {group}\{cm:UninstallProgram,{#XAppName}}; Filename: {uninstallexe}
-Name: {group}\{#HelpNameName}; Filename: {app}\{#HelpName}; Tasks: ; Languages:
-Name: {group}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
-Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: quicklaunchicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
-Name: {userdesktop}\{#XAppName}; Filename: {app}\{#XAppExeName}; Tasks: desktopicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
-Name: {userdesktop}\{#XAppName} - Mapeditor; Filename: {app}\{#XAppExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {app}\{#Name} - Mapeditor; Filename: {app}\{#ExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {group}\{#Name}; Filename: {app}\{#ExeName}; WorkingDir: {app}; IconFilename: {app}\widelands.exe; Flags: useapppaths; Tasks: ; Languages: 
+Name: {group}\{cm:ProgramOnTheWeb,{#Name}}; Filename: {app}\{#UrlName}
+Name: {group}\{cm:UninstallProgram,{#Name}}; Filename: {uninstallexe}
+Name: {group}\{#HelpNameName}; Filename: {app}\{#HelpName}; Tasks: ; Languages: 
+Name: {group}\{#Name} - Mapeditor; Filename: {app}\{#ExeName}; Parameters: " --editor"; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#Name}; Filename: {app}\{#ExeName}; Tasks: quicklaunchicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
+Name: {userdesktop}\{#Name}; Filename: {app}\{#ExeName}; Tasks: desktopicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
+Name: {userdesktop}\{#Name} - Mapeditor; Filename: {app}\{#ExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
 
 [Run]
-Filename: {app}\{#XAppExeName}; Description: {cm:LaunchProgram,{#XAppName}}; Flags: nowait postinstall skipifsilent
+Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-Type: files; Name: {app}\{#XAppUrlName}
+Type: files; Name: {app}\{#UrlName}
 Type: files; Name: {app}\{#HelpName}
 Type: files; Name: {app}\stdout.txt
 Type: files; Name: {app}\stderr.txt
@@ -135,3 +137,13 @@ Type: files; Name: {app}\stderr.txt
 Name: Widelands; Description: Widelands Core; Flags: fixed checkablealone; Types: custom compact full
 Name: Music; Description: Widelands Background Music; Types: full
 Name: Maps; Description: Widelands Maps; Types: compact full
+
+[Registry]
+Root: HKCR; Subkey: .wgf; ValueType: string; ValueName: ; ValueData: WidelandsSavegame; Flags: uninsdeletevalue
+Root: HKCR; Subkey: WidelandsSavegame; ValueType: string; ValueName: ; ValueData: Widelands Savegame; Flags: uninsdeletekey
+Root: HKCR; Subkey: WidelandsSavegame\DefaultIcon; ValueType: string; ValueName: ; ValueData: {app}\{#ExeName},0
+Root: HKCR; Subkey: WidelandsSavegame\shell\open\command; ValueType: string; ValueName: ; ValueData: """{app}\{#ExeName}"" ""--loadgame=%1"""
+
+Root: HKCR; Subkey: .wmf; ValueType: string; ValueName: ; ValueData: WidelandsMapFile; Flags: uninsdeletevalue
+Root: HKCR; Subkey: WidelandsMapFile; ValueType: string; ValueName: ; ValueData: Widelands Mapfile; Flags: uninsdeletekey
+Root: HKCR; Subkey: WidelandsMapFile\DefaultIcon; ValueType: string; ValueName: ; ValueData: {app}\WL-Editor.ico
