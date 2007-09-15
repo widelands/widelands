@@ -93,16 +93,16 @@ def cli_options():
 	opts.Add('install_prefix', '', '/usr/local')
 	opts.Add('bindir', '(absolute or relative to install_prefix)', 'games')
 	opts.Add('datadir', '(absolute or relative to install_prefix)', 'share/games/widelands')
-	#change next line to 'share/games/widelands/locale' for release and to "." after release is over
-	opts.Add('localedir', '(absolute or relative to install_prefix)', '.')
+	opts.Add('localedir', '(absolute or relative to install_prefix)', 'share/games/widelands/locale')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
 	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')
 	opts.Add('extra_link_flags', '(does not work with build-widelands.sh!)', '')
 	opts.AddOptions(
-		BoolOption('enable_sdl_parachute', 'Enable SDL parachute?', 0),
-		BoolOption('enable_efence', 'Use the efence memory debugger?', 0),
-		BoolOption('enable_ggz', 'Use the GGZ Gamingzone?', 0),
+		BoolOption('enable_sdl_parachute', 'Enable SDL parachute?', False),
+		BoolOption('enable_efence', 'Use the efence memory debugger?', False),
+		BoolOption('enable_ggz', 'Use the GGZ Gamingzone?', False),
+		BoolOption('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
 		)
 	return opts
 
@@ -222,15 +222,6 @@ env.Append(LIBPATH=env['extra_lib_path'])
 env.AppendUnique(CCFLAGS=Split(env['extra_compile_flags']))
 env.AppendUnique(LINKFLAGS=env['extra_link_flags'])
 
-if not os.path.isabs(env['bindir']):
-	env['bindir']=os.path.join(env['install_prefix'], env['bindir'])
-
-if not os.path.isabs(env['datadir']):
-	env['datadir']=os.path.join(env['install_prefix'], env['datadir'])
-
-if not os.path.isabs(env['localedir']):
-	env['localedir']=os.path.join(env['install_prefix'], env['localedir'])
-
 ################################################################################
 
 #build_id must be saved *before* it might be set to a fixed date
@@ -244,7 +235,8 @@ print 'Build ID:          '+env['build_id']
 
 config_h=write_configh_header()
 do_configure(config_h, conf, env)
-write_configh_footer(config_h, env['install_prefix'], env['bindir'], env['datadir'], env['localedir'])
+write_configh(config_h, env)
+write_configh_footer(config_h)
 write_buildid(env['build_id'])
 
 env=conf.Finish()

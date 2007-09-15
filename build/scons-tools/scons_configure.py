@@ -16,12 +16,35 @@ def write_configh_header():
 
 ################################################################################
 
-def write_configh_footer(config_h_file, install_prefix, bindir, datadir, localedir):
-	config_h_file.write("#define INSTALL_PREFIX \""+install_prefix+"\"\n")
-	config_h_file.write("#define INSTALL_BINDIR \""+bindir+"\"\n")
-	config_h_file.write("#define INSTALL_DATADIR \""+datadir+"\"\n")
-	config_h_file.write("#define INSTALL_LOCALEDIR \""+localedir+"\"\n\n")
+# TODO: split this up and write the data where it originates
+def write_configh(config_h_file, env):
+	if os.path.isabs(env['bindir']):
+		bindir=env['bindir']
+	else:
+		bindir=os.path.join(env['install_prefix'], env['bindir'])
 
+	if os.path.isabs(env['datadir']):
+		datadir=env['datadir']
+	else:
+		datadir=os.path.join(env['install_prefix'], env['datadir'])
+
+	if os.path.isabs(env['localedir']):
+		localedir=env['localedir']
+	else:
+		localedir=os.path.join(env['install_prefix'], env['localedir'])
+
+	if env['build'] != 'release' and env['prefer_localdata']:
+		config_h_file.write("#define INSTALL_PREFIX \".\"\n")
+		config_h_file.write("#define INSTALL_BINDIR \".\"\n")
+		config_h_file.write("#define INSTALL_DATADIR \".\"\n")
+		config_h_file.write("#define INSTALL_LOCALEDIR \"locale\"\n\n")
+	else:
+		config_h_file.write("#define INSTALL_PREFIX \""+env['install_prefix']+"\"\n")
+		config_h_file.write("#define INSTALL_BINDIR \""+env['bindir']+"\"\n")
+		config_h_file.write("#define INSTALL_DATADIR \""+env['datadir']+"\"\n")
+		config_h_file.write("#define INSTALL_LOCALEDIR \""+env['localedir']+"\"\n\n")
+
+def write_configh_footer(config_h_file):
 	config_h_file.write("\n#endif\n")
 	config_h_file.close()
 
