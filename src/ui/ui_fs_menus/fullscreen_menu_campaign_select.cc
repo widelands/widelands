@@ -18,12 +18,11 @@
  */
 
 #include "fullscreen_menu_campaign_select.h"
-
+#include "campvis.h"
 #include "constants.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "profile.h"
-
 
 
 /*
@@ -161,7 +160,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 	// Load maps textdomain to translate the strings from cconfig
 	i18n::grab_textdomain("maps");
 
-	// read in the campaign config
+	// Read in the campaign config
 	Profile prof("campaigns/cconfig");
 	Section *s;
 	s = prof.get_section("global");
@@ -169,13 +168,18 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 	// Release maps texdoamin
 	i18n::release_textdomain();
 
+	// Read in campvis-file
+	Campaign_visiblity_save cvs;
+	Profile campvis(cvs.get_path().c_str());
+	Section *c;
+	c = campvis.get_section("campaigns");
+
 	int i = 0;
 
 	// predefine variables, used in while-loop
 	char cname[12];
 	char csection[12];
 	char cdifficulty[12];
-	char cvisible[12];
 	std::string difficulty;
 
 	sprintf(csection, "campsect%i", i);
@@ -183,10 +187,9 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 		// add i to the other strings the UI will search for
 		sprintf(cname, "campname%i", i);
 		sprintf(cdifficulty, "campdiff%i", i);
-		sprintf(cvisible, "campvisi%i", i);
 
 		// Only list visible campaigns
-		if (s->get_bool(cvisible)) {
+		if (c->get_bool(csection)) {
 
 			// convert difficulty level to the fitting picture
 			static const char * const dif_picture_filenames[] = {
@@ -206,7 +209,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 				s->get_string(csection),
 				g_gr->get_picture(PicMod_Game, difficulty.c_str()));
 
-		} // if (s->get_int(cvisible) == 1)
+		}
 
 		i++;
 
@@ -362,7 +365,13 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	// Release maps texdoamin
 	i18n::release_textdomain();
 
-	// Set title of title of the page
+	// Read in campvis-file
+	Campaign_visiblity_save cvs;
+	Profile campvis(cvs.get_path().c_str());
+	Section *c;
+	c = campvis.get_section("campmaps");
+
+	// Set title of the page
 	char cname[12];
 	sprintf(cname, "campname%i", campaign);
 	title.set_text(s->get_string(cname));
@@ -382,7 +391,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 
 	// Add all visible entries to the list.
 	while ((s = prof.get_section(mapsection.c_str()))) {
-		if (s->get_bool("visible")) {
+		if (c->get_bool(mapsection.c_str())) {
 		list.add(
 			s->get_string("name", _("[No value found]").c_str()),
 			s->get_string("path"),
