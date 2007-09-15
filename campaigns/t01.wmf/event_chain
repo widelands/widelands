@@ -137,8 +137,9 @@ conditional_element_06=AND
 conditional_element_07=trigger
 conditional_element_07_data=Built Ranger
 conditional_element_08=)
-nr_events=1
+nr_events=2
 event_00=Mission Complete
+event_01=Unhide Barbariantut01
 current_event=0
 state=init
 

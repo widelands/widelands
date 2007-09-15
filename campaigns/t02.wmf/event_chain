@@ -288,8 +288,9 @@ conditional_element_10=trigger
 conditional_element_10_data=Built Deep Coal Mine
 conditional_element_11=)
 conditional_element_12=)
-nr_events=1
+nr_events=2
 event_00=Mission Complete
+event_01=Unhide Empiretut
 current_event=0
 state=init
 

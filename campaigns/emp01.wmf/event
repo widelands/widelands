@@ -654,3 +654,10 @@ number_of_buttons=1
 button_00_name=_Continue
 button_00_has_trigger=false
 
+[Unhide Empiretut02]
+type=set_visiblity
+state=init
+version=1
+entry=empiretut01
+vcase=2
+

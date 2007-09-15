@@ -156,8 +156,9 @@ conditional_element_00_data=End Trigger
 conditional_element_01=AND
 conditional_element_02=trigger
 conditional_element_02_data=Quarry complete
-nr_events=1
+nr_events=2
 event_00=Diary page 4
+event_01=Unhide Empiretut02
 current_event=0
 state=init
 

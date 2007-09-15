@@ -915,3 +915,10 @@ button_00_name=_Continue
 button_00_has_trigger=true
 button_00_trigger=Enhance Buildings
 
+[Unhide Empiretut]
+type=set_visiblity
+state=init
+version=1
+entry=campsect1
+vcase=0
+
