@@ -20,6 +20,7 @@
 #ifndef __CAMPVIS_H
 #define __CAMPVIS_H
 
+#include "types.h"
 #include <string>
 
 struct Campaign_visiblity_save {
