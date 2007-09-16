@@ -20,7 +20,7 @@
 #include "maphollowregion.h"
 
 template <> MapHollowRegion<Area<> >::MapHollowRegion
-(Map & map, const HollowArea<Area<> > hollow_area)
+(const Map & map, const HollowArea<Area<> > hollow_area)
 :
 m_hollow_area (hollow_area),
 m_phase       (Top),

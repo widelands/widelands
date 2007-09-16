@@ -30,7 +30,7 @@
  * \note The order in which fields are returned is not guarantueed.
  */
 template <typename Area_type = Area<> > struct MapHollowRegion {
-	MapHollowRegion(Map & map, const HollowArea<Area_type> hollow_area);
+	MapHollowRegion(const Map & map, const HollowArea<Area_type> hollow_area);
 
 	const typename Area_type::Coords_type & location() const throw ()
 	{return m_hollow_area;}
