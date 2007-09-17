@@ -321,10 +321,8 @@ void HorizontalSlider::draw(RenderTarget * dst) {
  * \param btn The new stat of the mouse buttons (unused)
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
- *
- * \todo Can the three unused parameters be removed?
  */
-bool HorizontalSlider::handle_mousemove(const Uint8 btn, int x, int y, int, int) {
+bool HorizontalSlider::handle_mousemove(const Uint8, int x, int y, int, int) {
 	cursor_moved(x, x, y);
 	return true;
 }
@@ -396,7 +394,7 @@ void VerticalSlider::draw(RenderTarget * dst) {
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
  */
-bool VerticalSlider::handle_mousemove(const Uint8 btn, int x, int y, int, int) {
+bool VerticalSlider::handle_mousemove(const Uint8, int x, int y, int, int) {
 	cursor_moved(y, x, y);
 	return true;
 }

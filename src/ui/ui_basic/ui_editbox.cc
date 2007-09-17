@@ -74,7 +74,7 @@ Edit_Box::~Edit_Box() {
 /**
 the mouse was clicked on this editbox
 */
-bool Edit_Box::handle_mousepress(const Uint8 btn, int x, int y) {
+bool Edit_Box::handle_mousepress(const Uint8 btn, int, int) {
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 	if (not m_keyboard_grabbed) {
