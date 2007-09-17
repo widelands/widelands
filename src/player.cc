@@ -803,8 +803,7 @@ void Player::ReadStatistics(FileRead& fr, uint version)
 /**
  * Write statistics data to the give file
  */
-void Player::WriteStatistics(FileWrite& fw)
-{
+void Player::WriteStatistics(FileWrite& fw) const {
 	fw.Unsigned16(m_current_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());
 

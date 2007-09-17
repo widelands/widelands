@@ -372,6 +372,9 @@ public:
 		m_view_changed = true;
 	}
 
+	Military_Influence military_influence(const Map::Index i) const throw ()
+	{return m_fields[i].military_influence;}
+
 	Military_Influence & military_influence(const Map::Index i) throw ()
 	{return m_fields[i].military_influence;}
 
@@ -437,7 +440,7 @@ public:
 	const std::vector<uint> * get_ware_production_statistics(const int ware) const;
 
 	void ReadStatistics(FileRead& fr, uint version);
-	void WriteStatistics(FileWrite& fw);
+	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(uint id);
 	void next_ware_production_period();
