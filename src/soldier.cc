@@ -621,10 +621,13 @@ void Soldier::draw
 		g_gr->get_picture_size(defensepic, dew, deh);
 		g_gr->get_picture_size(evadepic,   evw, evh);
 
-		dst.blit(r + Point(r.w / 2 - atw, -(hph + ath)), attackpic);
-		dst.blit(r + Point(r.w / 2      , -(evh + deh)), defensepic);
-		dst.blit(r + Point(r.w / 2 - hpw, -        hph), hppic);
-		dst.blit(r + Point(r.w / 2      , -        evh), evadepic);
+		{
+			const uint w_half = r.w >> 1;
+			dst.blit(r + Point(w_half - atw, -(hph + ath)), attackpic);
+			dst.blit(r + Point(w_half,       -(evh + deh)), defensepic);
+			dst.blit(r + Point(w_half - hpw, -hph),         hppic);
+			dst.blit(r + Point(w_half,       -evh),         evadepic);
+		}
 
 		draw_inner(game, dst, drawpos);
 	}

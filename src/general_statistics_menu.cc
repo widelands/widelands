@@ -108,9 +108,8 @@ m_parent(&parent)
 
    // Buttons
    uint plr_in_game = 0;
-	const uint nr_players = game.get_map().get_nrplayers();
-	for (uint i = 1; i <= nr_players; ++i)
-		if (game.get_player(i)) ++plr_in_game;
+	const Player_Number nr_players = game.map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
 
    posx = spacing;
    int button_size = (get_inner_w()- (spacing* (plr_in_game+1))) / plr_in_game;
@@ -276,7 +275,7 @@ General_Statistics_Menu::~General_Statistics_Menu()
    delete m_radiogroup;
 }
 
-/** 
+/**
  * called when the help button was clicked
  * \todo Implement help
 */

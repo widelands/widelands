@@ -471,13 +471,13 @@ void Map::set_size(const uint w, const uint h)
 /*
  * The scenario get/set functions
  */
-std::string Map::get_scenario_player_tribe(uint i) {
+const std::string & Map::get_scenario_player_tribe(const Player_Number i) {
    assert(m_scenario_tribes.size()==m_nrplayers);
 
    return m_scenario_tribes[i-1];
 }
 
-std::string Map::get_scenario_player_name(uint i) {
+const std::string & Map::get_scenario_player_name(const Player_Number i) {
    assert(m_scenario_names.size()==m_nrplayers);
 
    return m_scenario_names[i-1];

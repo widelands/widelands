@@ -159,8 +159,7 @@ void Widelands_Map_Saver::save() throw(_wexception) {
 
    // Allowed buildings
 	const Player_Number nr_players = map.get_nrplayers();
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		if (const Player * const player = m_egbase->get_player(plnum)) {
+	iterate_players_existing_const(plnum, nr_players, *m_egbase, player) {
 			const Building_Descr::Index nr_buildings =
 				player->tribe().get_nrbuildings();
 			for (Building_Descr::Index i = 0; i < nr_buildings; ++i)
@@ -171,7 +170,6 @@ void Widelands_Map_Saver::save() throw(_wexception) {
 					log("done!\n ");
 					goto end_outer_loop;
 				}
-		}
 	} end_outer_loop:
 
    // !!!!!!!!!! NOTE

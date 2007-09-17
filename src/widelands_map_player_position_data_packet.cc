@@ -54,18 +54,18 @@ throw (_wexception)
       // is not set (this is possible in the editor), is also
       // -1, -1
 		Map & map = *egbase->get_map();
-		const ushort nrplayers = map.get_nrplayers();
-		for (ushort i = 1; i <= nrplayers; ++i) {
+		const Player_Number nr_players = map.get_nrplayers();
+		iterate_player_numbers(p, nr_players) {
 			if (packet_version == 1) {
-				char buf_x[64], buf_y[64];
-				snprintf(buf_x, sizeof(buf_x), "player_%i_x", i);
-				snprintf(buf_y, sizeof(buf_y), "player_%i_y", i);
+				char buf_x[12], buf_y[12];
+				snprintf(buf_x, sizeof(buf_x), "player_%u_x", p);
+				snprintf(buf_y, sizeof(buf_y), "player_%u_y", p);
 				map.set_starting_pos
-					(i, Coords(s->get_int(buf_x), s->get_int(buf_y)));
+					(p, Coords(s->get_int(buf_x), s->get_int(buf_y)));
 			} else {
-				char buffer[64];
-				snprintf(buffer, sizeof(buffer), "player_%i", i);
-				map.set_starting_pos(i, s->get_Coords(buffer));
+				char buffer[10];
+				snprintf(buffer, sizeof(buffer), "player_%u", p);
+				map.set_starting_pos(p, s->get_Coords(buffer));
 			}
 		}
       return;
@@ -88,11 +88,11 @@ throw (_wexception)
 
 	// Now, all positions in order
 	const Map & map = *egbase->get_map();
-	const ushort nrplayers = map.get_nrplayers();
-	for (ushort i = 1; i <= nrplayers; ++i) {
-		char buffer[64];
-		snprintf(buffer, sizeof(buffer), "player_%i", i);
-		s->set_Coords(buffer, map.get_starting_pos(i));
+	const Player_Number nr_players = map.get_nrplayers();
+	iterate_player_numbers(p, nr_players) {
+		char buffer[10];
+		snprintf(buffer, sizeof(buffer), "player_%u", p);
+		s->set_Coords(buffer, map.get_starting_pos(p));
 	}
 
    prof.write("player_position", false, fs);

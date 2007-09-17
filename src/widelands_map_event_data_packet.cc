@@ -42,11 +42,11 @@ void Widelands_Map_Event_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-	if (not skip) {
+	if (skip) return;
 
    // Skip, if no events saved
 		FileRead fr;
-		if (fr.TryOpen(fs, "event")) {
+	try {fr.Open(fs, "event");} catch (...) {return;}
 
    Profile prof;
    prof.read("event", 0, fs);
@@ -54,8 +54,8 @@ throw (_wexception)
 
    // check packet version
 			const int packet_version=s->get_int("packet_version");
-			if (packet_version == CURRENT_PACKET_VERSION) {
-      while ((s = prof.get_next_section(0))) {
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		while ((s = prof.get_next_section(0))) {
          std::string name = s->get_name();
          std::string type = s->get_safe_string("type");
          std::string state = s->get_safe_string("state");
@@ -68,11 +68,9 @@ throw (_wexception)
          e->Read(s, egbase);
          egbase->get_map()->get_mem().register_new_event(e);
 		}
-			} else
-				throw wexception
-					("Unknown version in Map Event Packet: %u", packet_version);
-		}
-	}
+	} else
+		throw wexception
+			("Unknown version in Map Event Packet: %u", packet_version);
 }
 
 /*

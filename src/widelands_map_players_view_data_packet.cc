@@ -258,13 +258,10 @@ throw (_wexception)
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	Field & first_field = map[0];
-	const Player_Number nr_players = map.get_nrplayers();
 	const World & world = map.world();
-
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		Player & player = egbase->player(plnum);
-		if (not &player) continue; //  happens in the editor
-		Player::Field * const player_fields = player.m_fields;
+	const Player_Number nr_players = map.get_nrplayers();
+	iterate_players_existing_const(plnum, nr_players, *egbase, player) {
+		Player::Field * const player_fields = player->m_fields;
 		const Uint32 gametime = egbase->get_gametime();
 
 		char unseen_times_filename[FILENAME_SIZE];
@@ -812,8 +809,7 @@ throw (_wexception)
 	const Y_Coordinate mapheight = map.get_height();
 	Field & first_field = map[0]; //  FIXME make this const when FCoords has been templatized so it can have "const Field * field;"
 	const Player_Number nr_players = map.get_nrplayers();
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
-		if (const Player * player = egbase->get_player(plnum))
+	iterate_players_existing_const(plnum, nr_players, *egbase, player)
 			if (const Player::Field * const player_fields = player->m_fields) {
 				FileWrite                   unseen_times_file;
 				BitOutBuffer<2>     node_immovable_kinds_file;

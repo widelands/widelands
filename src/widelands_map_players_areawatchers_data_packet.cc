@@ -50,10 +50,9 @@ throw (_wexception)
 	const Map & map = egbase->map();
 	const Extent extent = egbase->map().extent();
 	const Player_Number nr_players = map.get_nrplayers();
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		Player & player = egbase->player(plnum);
+	iterate_players_existing(p, nr_players, *egbase, player) {
 		char filename[FILENAME_SIZE];
-		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, plnum);
+		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 		FileRead fr;
 		struct Not_Found {};
 		try {
@@ -70,7 +69,7 @@ throw (_wexception)
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
 						 "player %u: in \"%s\":%u: read object with reg %u, but an "
 						 "object with that reg has already been loaded",
-					 plnum, filename, fr.GetPrevPos(), reg);
+						 p, filename, fr.GetPrevPos(), reg);
 				Coords c;
 				try {c = fr.Coords32(extent);}
 				catch  (const FileRead::Width_Exceeded e) {
@@ -78,25 +77,25 @@ throw (_wexception)
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
 						 "player %u: in \"%s\":%u: area watcher %u: x-cordinate (%u) "
 						 "exceeds the witdh of the map (%u)\n",
-						 plnum, filename, e.position, reg, e.x, e.w);
+						 p, filename, e.position, reg, e.x, e.w);
 				} catch (const FileRead::Height_Exceeded e) {
 					throw wexception
 						("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: "
 						 "player %u: in \"%s\":%u: area watcher %u: y-cordinate (%u) "
 						 "exceeds the height of the map (%u)\n",
-						 plnum, filename, e.position, reg, e.y, e.h);
+						 p, filename, e.position, reg, e.y, e.h);
 				}
 				ol->register_object
 					(egbase,
 					 reg,
-					 &player.add_areawatcher
-					 (Player_Area<>(plnum, Area<>(c, fr.Unsigned16()))));
+					 &player->add_areawatcher
+					 (Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
 			}
 		} else
 			throw wexception
 				("Widelands_Map_Players_AreaWatchers_Data_Packet::Read: player %u: "
 				 "in \"%s\":0: unknown packet version %u",
-				 plnum, filename, packet_version);
+				 p, filename, packet_version);
 	}
 }
 
@@ -110,10 +109,7 @@ throw (_wexception)
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase->map();
 	const Player_Number nr_players = map.get_nrplayers();
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-		Player * player = egbase->get_player(plnum);
-		if (NULL == player) // valid condition in editor
-			continue;
+	iterate_players_existing_const(p, nr_players, *egbase, player) {
 		FileWrite fw;
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
@@ -131,11 +127,11 @@ throw (_wexception)
 			fw.Unsigned16(areawatcher.radius);
 		}
 		char filename[FILENAME_SIZE];
-		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE,  plnum);
+		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
 		fs.EnsureDirectoryExists(filename);
-		snprintf(filename, sizeof(filename),       DIRNAME_TEMPLATE,  plnum);
+		snprintf(filename, sizeof(filename),       DIRNAME_TEMPLATE, p);
 		fs.EnsureDirectoryExists(filename);
-		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, plnum);
+		snprintf(filename, sizeof(filename),      FILENAME_TEMPLATE, p);
 		fw.Write(fs, filename);
 	}
 }

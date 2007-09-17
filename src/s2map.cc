@@ -84,7 +84,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
 	}
 
-   if (scenario) {
+	if (scenario) {
       // Load this as scenario.
       // there is no such a think as S2 scenarios, therefore
       // set the tribes and some default names
@@ -101,8 +101,9 @@ int S2_Map_Loader::preload_map(bool scenario) {
          "Rufus",
 		};
 
-      for (int i=1; i<=m_map->get_nrplayers(); i++) {
-         m_map->set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
+		const Player_Number nr_players = m_map->get_nrplayers();
+		iterate_player_numbers(i, nr_players) {
+	      m_map->set_scenario_player_tribe(i, "empire"); // Even if AI doesn't work for the empire, yet - this will only be used, if you select scenario-mode
          m_map->set_scenario_player_name(i, names[i-1]);
 		}
 	}

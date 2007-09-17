@@ -94,9 +94,8 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    bool done=false;
-   for (uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
-      Player* plr=game->get_player(i);
-      if (!plr) continue;
+	const Player_Number nr_players = game->map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, *game, plr) {
       fw.Unsigned16(plr->m_economies.size());
       for (uint j=0; j<plr->m_economies.size(); j++) {
          done=false;

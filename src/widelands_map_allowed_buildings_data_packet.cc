@@ -64,20 +64,18 @@ throw (_wexception)
 		const Player_Number nr_players = egbase->map().get_nrplayers();
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
 		if (dynamic_cast<Game *>(egbase))
-			for (Player_Number i = 1; i <= nr_players; ++i)
-				if (Player * const player = egbase->get_player(i)) {
+			iterate_players_existing(p, nr_players, *egbase, player) {
 					const int nr_buildings = player->tribe().get_nrbuildings();
 					for (int b = 0; b < nr_buildings; ++b)
 						player->allow_building(b, false);
 				}
 
       // Now read all players and buildings
-		for (Player_Number i = 1; i <= nr_players; ++i)
-			if (Player * const player = egbase->get_safe_player(i)) {
+		iterate_players_existing(p, nr_players, *egbase, player) {
 				const Tribe_Descr & tribe = player->tribe();
-				char buf[10];
-				snprintf(buf, sizeof(buf), "player_%i", i);
-         s = prof.get_safe_section(buf);
+			char buffer[10];
+			snprintf(buffer, sizeof(buffer), "player_%u", p);
+         s = prof.get_safe_section(buffer);
 
          // Write for all buildings if it is enabled
 				while (const char * const name = s->get_next_bool(0, 0)) {
@@ -112,19 +110,18 @@ throw (_wexception)
 		->set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	const Player_Number nr_players = egbase->map().get_nrplayers();
-	for (Player_Number i = 1; i <= nr_players; ++i)
-		if (Player * const plr = egbase->get_player(i)) {
-			const Tribe_Descr & tribe = plr->tribe();
+	iterate_players_existing_const(p, nr_players, *egbase, player) {
+		const Tribe_Descr & tribe = player->tribe();
 			char buffer[10];
-			snprintf(buffer, sizeof(buffer), "player_%u", i);
+		snprintf(buffer, sizeof(buffer), "player_%u", p);
 			Section & section = *prof.create_section(buffer);
 
       // Write for all buildings if it is enabled
 			const Building_Descr::Index nr_buildings = tribe.get_nrbuildings();
-			for (Building_Descr::Index b = 0; b < nr_buildings; ++b)
-				section.set_bool
-					(tribe.get_building_descr(b)->name().c_str(),
-					 plr->is_building_allowed(b));
+		for (Building_Descr::Index b = 0; b < nr_buildings; ++b)
+			section.set_bool
+				(tribe.get_building_descr(b)->name().c_str(),
+				 player->is_building_allowed(b));
 	}
 
    prof.write("allowed_buildings", false, fs);

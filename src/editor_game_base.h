@@ -214,6 +214,14 @@ private:
 	Editor_Game_Base            (const Editor_Game_Base &);
 };
 
+#define iterate_players_existing(p, nr_players, egbase, player)                \
+	iterate_player_numbers(p, nr_players)                                       \
+		if (Player * const player = (egbase).get_player(p))                      \
+
+#define iterate_players_existing_const(p, nr_players, egbase, player)          \
+	iterate_player_numbers(p, nr_players)                                       \
+		if (const Player * const player = (egbase).get_player(p))                \
+
 extern const uchar g_playercolors[MAX_PLAYERS][12];
 
 #endif // __S__EDITOR_GAME_BASE_H

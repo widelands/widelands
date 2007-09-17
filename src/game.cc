@@ -241,13 +241,13 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
     // We have to create the players here
 	const Player_Number nr_players = map().get_nrplayers();
-	for (Player_Number i = 1; i <= nr_players; ++i) {
-		loaderUI.stepf (_("Adding player %u"), i);
+	iterate_player_numbers(p, nr_players) {
+		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
-			(i,
-			 i == 1 ? Player::Local : Player::AI,
-			 map().get_scenario_player_tribe(i),
-			 map().get_scenario_player_name(i));
+			(p,
+			 p == 1 ? Player::Local : Player::AI, //  FIXME allow the user to contorol another player than 1, and allow the computer to control player 1
+			 map().get_scenario_player_tribe(p),
+			 map().get_scenario_player_name (p));
 	}
 
 	set_iabase(new Interactive_Player(*this, 0));
@@ -463,14 +463,12 @@ void Game::postload()
 	// unless we're watching a replay
 	if (Interactive_Player* ipl = dynamic_cast<Interactive_Player*>(get_iabase())) {
 		const Player_Number nr_players = map().get_nrplayers();
-		for (Player_Number i = 1; i <= nr_players; ++i)
-			if (const Player * const p = get_player(i)) {
-				if (p->get_type() == Player::AI) {
-					cpl.push_back (new Computer_Player(*this, i));
-				} else if (p->get_type() == Player::Local) {
-					ipl->set_player_number(i);
-				}
-			}
+		iterate_players_existing(p, nr_players, *this, plr) {
+			if      (plr->get_type() == Player::AI)
+				cpl.push_back (new Computer_Player(*this, p));
+			else if (plr->get_type() == Player::Local)
+				ipl->set_player_number(p);
+		}
 	}
 
 	get_iabase()->postload();
@@ -501,15 +499,14 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 		std::string step_description = _("Creating player infrastructure");
 		// Prepare the players (i.e. place HQs)
 		const Player_Number nr_players = map().get_nrplayers();
-		for (Player_Number i = 1; i <= nr_players; ++i)
-			if (Player * const plr = get_player(i)) {
+		iterate_players_existing(p, nr_players, *this, player) {
 				step_description += ".";
 				loader_ui.step(step_description);
-				plr->init(true);
+			player->init(true);
 
-				if (plr->get_type() == Player::Local)
-					get_ipl()->move_view_to(map().get_starting_pos(i));
-			}
+			if (player->get_type() == Player::Local)
+					get_ipl()->move_view_to(map().get_starting_pos(p));
+		}
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
@@ -518,13 +515,13 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
-		for (Player_Number curplr = 1; curplr <= nr_players; ++curplr) {
-			const Player * const plr = get_player(curplr);
+		iterate_player_numbers(p, nr_players) {
+			const Player * const plr = get_player(p);
 			const std::string                                             no_name;
 			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name = plr ? plr->    get_name() : no_name;
-			map().set_scenario_player_tribe(curplr,  tribe_name);
-			map().set_scenario_player_name (curplr, player_name);
+			map().set_scenario_player_tribe(p,  tribe_name);
+			map().set_scenario_player_name (p, player_name);
 		}
 
 		// Everything prepared, send the first trigger event
@@ -612,11 +609,9 @@ void Game::think()
 		{
 			sample_statistics();
 
-			for (Player_Number curplr = 1; curplr <= get_map()->get_nrplayers(); ++curplr) {
-				Player* plr = get_player(curplr);
-				if (plr)
-					plr->sample_statistics();
-			}
+			const Player_Number nr_players = map().get_nrplayers();
+			iterate_players_existing(p, nr_players, *this, player)
+				player->sample_statistics();
 
 			m_last_stats_update = get_gametime();
 		}

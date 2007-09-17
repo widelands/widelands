@@ -307,16 +307,13 @@ void Editor_Game_Base::do_conquer_area
 					neutral_when_no_influence ? 0 : player_area.player_number;
 				Military_Influence highest_military_influence = 0;
 				const Player_Number nr_players = map().get_nrplayers();
-				for (Player_Number plnum = 1; plnum <= nr_players; ++plnum) {
-					if (NULL == get_player(plnum))
-						continue; // player might be inactive (unchecked on creation)
-
+				iterate_players_existing_const(p, nr_players, *this, plr) {
 					if
 						(const Military_Influence value =
-						 player(plnum).military_influence(index))
+						 plr->military_influence(index))
 						if        (value >  highest_military_influence) {
 							highest_military_influence = value;
-							best_player = plnum;
+							best_player = p;
 						} else if (value == highest_military_influence) {
 							const Coords c = map().get_fcoords(map()[index]);
 							best_player = neutral_when_competing_influence ?

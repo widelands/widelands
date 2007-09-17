@@ -213,8 +213,8 @@ struct Map {
 	World * get_world() const {return m_world;}
    // The next few functions are only valid
    // when the map is loaded as an scenario.
-   std::string get_scenario_player_tribe(uint i);
-   std::string get_scenario_player_name(uint i);
+	const std::string & get_scenario_player_tribe(Player_Number);
+	const std::string & get_scenario_player_name (Player_Number);
    void set_scenario_player_tribe(uint i, std::string);
    void set_scenario_player_name(uint i, std::string);
 

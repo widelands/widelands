@@ -100,15 +100,9 @@ throw (_wexception)
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	// Number of (potential) players
-	fw.Unsigned16(game->get_map()->get_nrplayers());
-	for (uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
-		Player* plr = game->get_player(i);
-
-		if (!plr) {
-			fw.Unsigned8(0);
-			continue;
-		}
-
+	const Player_Number nr_players = game->map().get_nrplayers();
+	fw.Unsigned16(nr_players);
+	iterate_players_existing_const(p, nr_players, *game, plr) {
 		// Player is in game
 		fw.Unsigned8(1);
 
@@ -134,7 +128,7 @@ throw (_wexception)
 		fw.CString(plr->m_name.c_str());
 
 		plr->WriteStatistics(fw);
-	}
+	} else fw.Unsigned8(0); //  Player is NOT in game.
 
 	game->WriteStatistics(fw);
 

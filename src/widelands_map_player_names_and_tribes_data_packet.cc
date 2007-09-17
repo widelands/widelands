@@ -55,6 +55,7 @@ throw (_wexception)
 void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 (FileSystem & fs, Map* map, const bool skip)
 {
+	if (skip) return;
 
    Profile prof;
    prof.read("player_names", 0, fs);
@@ -62,24 +63,18 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 
    const int packet_version = s->get_int("packet_version");
 	if (packet_version == CURRENT_PACKET_VERSION) {
-     std::string name, tribe;
-     char buf[256];
 		const Player_Number nr_players = map->get_nrplayers();
-		for (Player_Number i = 1; i <= nr_players; ++i) {
-			sprintf(buf, "player_%u", i);
-         s = prof.get_section(buf);
-         name = s->get_string("name");
-         tribe = s->get_string("tribe");
-			if (not skip) {
-            map->set_scenario_player_name(i, name);
-            map->set_scenario_player_tribe(i, tribe);
-			}
+		iterate_player_numbers(p, nr_players) {
+			char buffer[10];
+			snprintf(buffer, sizeof(buffer), "player_%u", p);
+			s = prof.get_section(buffer);
+			map->set_scenario_player_name (p, s->get_string("name", ""));
+			map->set_scenario_player_tribe(p, s->get_string("tribe", ""));
 		}
-      return;
-	}
-   throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version);
-
-   assert(0);
+	} else
+		throw wexception
+			("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i",
+			 packet_version);
 }
 
 /*
@@ -91,27 +86,22 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write
  Widelands_Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-   char buf[256];
-
    Profile prof;
    Section* s = prof.create_section("global");
 
    // packet version
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
-   int i=0;
    Map* map=egbase->get_map();
    std::string name, tribe;
-   for (i=1; i<=map->get_nrplayers(); i++) {
-      tribe=map->get_scenario_player_tribe(i);
-      name=map->get_scenario_player_name(i);
-
-      sprintf(buf, "player_%i", i);
-      s = prof.create_section(buf);
-      s->set_string("name", name.c_str());
-      s->set_string("tribe", tribe.c_str());
+	const Player_Number nr_players = map->get_nrplayers();
+	iterate_player_numbers(p, nr_players) {
+		char buffer[10];
+		snprintf(buffer, sizeof(buffer), "player_%u", p);
+		s = prof.create_section(buffer);
+		s->set_string("name",  map->get_scenario_player_name (p).c_str());
+		s->set_string("tribe", map->get_scenario_player_tribe(p).c_str());
 	}
 
    prof.write("player_names", false, fs);
-   // DONE
 }

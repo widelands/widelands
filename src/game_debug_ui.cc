@@ -324,8 +324,7 @@ void FieldDebugWindow::think()
 	const Editor_Game_Base & egbase =
 		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
 	const Player_Number nr_players = m_map.get_nrplayers();
-	for (Player_Number plnum = 1; plnum <= nr_players; ++plnum)
-		if (const Player * const player = egbase.get_player(plnum)) {
+	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 			const Player::Field & player_field = player->fields()[i];
 			snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
 			str += buffer;

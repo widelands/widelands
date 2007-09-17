@@ -289,7 +289,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
       // Player positions
       std::string text;
 		const Player_Number nr_players = map.get_nrplayers();
-		for (Player_Number p = 1; p <= nr_players; ++p)
+		iterate_player_numbers(p, nr_players)
 			if (const Coords sp = map.get_starting_pos(p))
 				//  Have overlay on starting position only when it has no building.
 				if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
