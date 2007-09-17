@@ -306,7 +306,7 @@ Free allocated resources, remove from registry.
 */
 FieldActionWindow::~FieldActionWindow()
 {
-	if (not m_workarea_preview_job_id.isNull())
+	if (m_workarea_preview_job_id)
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_sel_freeze(false);
       delete m_text_attackers;
@@ -811,7 +811,7 @@ The mouse pointer has moved away from the icon for the building with the index i
 ===============
 */
 void FieldActionWindow::building_icon_mouse_out(long) {
-	if (not m_workarea_preview_job_id.isNull()) {
+	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
 	}
@@ -827,7 +827,7 @@ The mouse pointer has moved to the icon for the building with the index idx.
 */
 void FieldActionWindow::building_icon_mouse_in(long idx) {
 	if (m_iabase->m_show_workarea_preview) {
-		assert(m_workarea_preview_job_id.isNull());
+		assert(not m_workarea_preview_job_id);
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
 		HollowArea<> hollow_area(Area<>(m_field, 0), 0);
 		const Workarea_Info & workarea_info =

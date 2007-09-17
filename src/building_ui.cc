@@ -558,7 +558,7 @@ Add to registry
 */
 Building_Window::~Building_Window()
 {
-	if (not m_workarea_job_id.isNull())
+	if (m_workarea_job_id)
 		static_cast<Interactive_Player *>(get_parent())
 		->egbase().map().overlay_manager().remove_overlay(m_workarea_job_id);
 	*m_registry = 0;
@@ -809,7 +809,11 @@ void Building_Window::toggle_workarea() {
 	Map & map =
 		static_cast<Interactive_Player *>(get_parent())->egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
-	if (m_workarea_job_id.isNull()) {
+	if (m_workarea_job_id) {
+		overlay_manager.remove_overlay(m_workarea_job_id);
+		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
+		m_toggle_workarea->set_tooltip(_("Show workarea").c_str());
+	} else {
 		m_workarea_job_id = overlay_manager.get_a_job_id();
 		HollowArea<> hollow_area(Area<>(m_building->get_position(), 0), 0);
 		const Workarea_Info & workarea_info =
@@ -834,10 +838,6 @@ void Building_Window::toggle_workarea() {
 			hollow_area.hole_radius = hollow_area.radius;
 		}
 		m_toggle_workarea->set_tooltip(_("Hide workarea").c_str());
-	} else {
-		overlay_manager.remove_overlay(m_workarea_job_id);
-		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
-		m_toggle_workarea->set_tooltip(_("Show workarea").c_str());
 	}
 }
 

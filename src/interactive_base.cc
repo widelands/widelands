@@ -105,7 +105,7 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle<> center)
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 
 	// Remove old sel pointer
-	if (not m_sel.jobid.isNull()) overlay_manager.remove_overlay(m_sel.jobid);
+	if (m_sel.jobid) overlay_manager.remove_overlay(m_sel.jobid);
 	const Overlay_Manager::Job_Id jobid =
 		m_sel.jobid = overlay_manager.get_a_job_id();
 
@@ -621,7 +621,7 @@ void Interactive_Base::roadb_add_overlay()
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
-	assert(m_jobid.isNull());
+	assert(not m_jobid);
 	m_jobid = overlay_manager.get_a_job_id();
 	const CoordPath::Step_Vector::size_type nr_steps = m_buildroad->get_nsteps();
 	for (CoordPath::Step_Vector::size_type idx = 0; idx < nr_steps; ++idx) {
@@ -643,7 +643,7 @@ void Interactive_Base::roadb_add_overlay()
 	// build hints
 	FCoords endpos = map.get_fcoords(m_buildroad->get_end());
 
-	assert(m_road_buildhelp_overlay_jobid.isNull());
+	assert(not m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
 	for (int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
@@ -712,11 +712,11 @@ void Interactive_Base::roadb_remove_overlay()
 
    // preview of the road
 	Overlay_Manager & overlay_manager = egbase().map().overlay_manager();
-	if (not m_jobid.isNull()) overlay_manager.remove_road_overlay(m_jobid);
+	if (m_jobid) overlay_manager.remove_road_overlay(m_jobid);
 	m_jobid = Overlay_Manager::Job_Id::Null();
 
 	// build hints
-	if (not m_road_buildhelp_overlay_jobid.isNull())
+	if (m_road_buildhelp_overlay_jobid)
 		overlay_manager.remove_overlay(m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
 }
