@@ -1,0 +1,18 @@
+descname=_ Chamois #chamois(mountain coat) for greenlands
+type="critter" #graphics: Toralf Bethke 
+swimming=0
+attrib=eatable
+program=remove
+
+[remove]
+0=remove
+
+[idle]
+hotspot=5 9
+pics=chamois_idle_sw_??.png
+fps=20
+
+[walk]
+hotspot=5 9
+dirpics=chamois_walk_!!_??.png
+fps=20
