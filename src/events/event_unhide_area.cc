@@ -24,7 +24,7 @@
 #include "profile.h"
 
 Event::State Event_Unhide_Area::run(Game* game) {
-	assert(!m_player_area.isNull());
+	assert(m_player_area);
 	assert(0 < m_player_area.player_number);
 	assert    (m_player_area.player_number <= game->map().get_nrplayers());
 

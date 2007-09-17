@@ -73,7 +73,7 @@ void Event_Move_View::Write(Section & s, const Editor_Game_Base &) const {
  * check if trigger conditions are done
  */
 Event::State Event_Move_View::run(Game* game) {
-   assert(!m_pt.isNull());
+	assert(m_pt);
 
    Interactive_Base* iab=game->get_iabase();
    iab->move_view_to(m_pt);

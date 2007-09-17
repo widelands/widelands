@@ -409,7 +409,7 @@ int Sound_Handler::stereo_position(const Coords position)
 	Interactive_Base *ia;
 
 	assert(m_the_game);
-	assert(!position.isNull());
+	assert(position);
 
 	ia = m_the_game->get_iabase();
 	assert(ia);

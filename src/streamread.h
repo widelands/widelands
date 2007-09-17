@@ -93,11 +93,11 @@ public:
 	/**
 	 * Read Coords from the stream. Use this when the result can only be a node
 	 * coordinate or the special value indicating invalidity, as defined by
-	 * Coords::isNull. Unless the read Coords is null, this will throw an
-	 * exception if the width is <= the x coordinate or the height is <= the y
-	 * coordinate. Both coordinates are read from the stream before checking and
-	 * possibly throwing, so in case such an exception is thrown, it is
-	 * guaranteed that the whole coordinate pair has been read.
+	 * Coords::Null. Unless the read Coords is null, this will throw an exception
+	 * if the width is <= the x coordinate or the height is <= the y coordinate.
+	 * Both coordinates are read from the stream before checking and possibly
+	 * throwing, so in case such an exception is thrown, it is guaranteed that
+	 * the whole coordinate pair has been read.
 	 */
 	Coords Coords32_allow_null(const Extent extent);
 };
@@ -121,7 +121,7 @@ inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
 	const Uint16 x = Unsigned16();
 	const Uint16 y = Unsigned16();
 	const Coords result(x, y);
-	if (not result.isNull()) {
+	if (result) {
 		if (extent.w <= x) throw Width_Exceeded (extent.w, x);
 		if (extent.h <= y) throw Height_Exceeded(extent.h, y);
 	}

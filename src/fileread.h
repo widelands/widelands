@@ -166,7 +166,7 @@ struct FileRead {
 
 	/**
 	 * Like Coords32 but the result can have the special value indicating
-	 * invalidity, as defined by Coords::isNull.
+	 * invalidity, as defined by Coords::Null.
 	 */
 	Coords Coords32_allow_null(const Extent extent);
 
@@ -193,7 +193,7 @@ inline Coords FileRead::Coords32_allow_null(const Extent extent) {
 	const Uint16 y = Unsigned16();
 	const Coords result(x, y);
 	prevpos = filepos - 4;
-	if (not result.isNull()) {
+	if (result) {
 		if (extent.w <= x) throw Width_Exceeded (prevpos, extent.w, x);
 		if (extent.h <= y) throw Height_Exceeded(prevpos, extent.h, y);
 	}

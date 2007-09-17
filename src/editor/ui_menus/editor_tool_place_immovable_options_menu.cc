@@ -65,10 +65,10 @@ m_pit     (pit)
 
 	uint width = 0, height = 0;
    for (int j=0; j<nr_immovables; j++) {
+		const Immovable_Descr & descr = *world.get_immovable_descr(j);
 		uint w, h;
-		Immovable_Descr* descr = world.get_immovable_descr(j);
 		g_gr->get_picture_size
-			(g_gr->get_picture(PicMod_Game, descr->get_picture()), w, h);
+			(g_gr->get_picture(PicMod_Game, descr.get_picture()), w, h);
       if (w>width) width=w;
       if (h>height) height=h;
 	}

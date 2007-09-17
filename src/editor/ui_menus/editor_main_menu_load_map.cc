@@ -40,8 +40,6 @@
 #include "ui_progresswindow.h"
 #include "ui_textarea.h"
 
-#include <string>
-
 #include <stdio.h>
 
 /*
@@ -290,23 +288,20 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
       // Now update all the visualisations
       // Player positions
       std::string text;
-		for (Uint8 i = 1; i <= map.get_nrplayers(); ++i) {
-         text="pics/editor_player_";
-         text+=static_cast<char>(((i)/10) + 0x30);
-         text+=static_cast<char>(((i)%10) + 0x30);
-         text+="_starting_pos.png";
-			const Coords fc = map.get_starting_pos(i);
-
-			if (fc.isNull()) continue;
-			uint w, h;
-			const uint picid=g_gr->get_picture(PicMod_Game,  text.c_str());
-			g_gr->get_picture_size(picid, w, h);
-         // only register, when theres no building there
-         // no building, place overlay
-			if (not dynamic_cast<const Building *>(map[fc].get_immovable()))
-				map.overlay_manager().register_overlay
-				(fc, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
-		}
+		const Player_Number nr_players = map.get_nrplayers();
+		for (Player_Number p = 1; p <= nr_players; ++p)
+			if (const Coords sp = map.get_starting_pos(p))
+				//  Have overlay on starting position only when it has no building.
+				if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
+					char picname[] ="pics/editor_player_??_starting_pos.png";
+					picname[19] = static_cast<char>(p / 10 + 0x30);
+					picname[20] = static_cast<char>(p % 10 + 0x30);
+					const uint picid = g_gr->get_picture(PicMod_Game, picname);
+					uint w, h;
+					g_gr->get_picture_size(picid, w, h);
+					map.overlay_manager().register_overlay
+						(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+				}
 
       /* Resources. we do not calculate default resources, therefore we do
        * not expect to meet them here. */

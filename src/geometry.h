@@ -148,7 +148,7 @@ struct Coords {
 	__attribute__((deprecated)) bool is_valid () const throw ()
 	{return x != -1 and y != -1;}
 
-	bool isNull() const throw () {return *this == Null();}
+	operator bool() const throw () {return *this != Null();}
 
 	/**
 	 * For use with standard containers.

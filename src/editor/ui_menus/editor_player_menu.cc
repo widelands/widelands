@@ -143,11 +143,6 @@ void Editor_Player_Menu::update() {
 
    // And recreate the needed
    for (i=0; i<nr_players; i++) {
-      // Check if starting position is valid
-      bool start_pos_valid=true;
-		const Coords start_pos = map.get_starting_pos(i + 1);
-		if (start_pos.isNull()) start_pos_valid = false;
-
 		int posx = spacing;
       if (!m_plr_names[i]) {
           m_plr_names[i]=new UI::Edit_Box(this, posx, posy, 140, size, 0, i);
@@ -191,36 +186,6 @@ void Editor_Player_Menu::update() {
       text+=static_cast<char>(((i+1)%10) + 0x30);
       text+="_pos.png";
       m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game,  text.c_str()));
-#if 0
-      // Build infrastructure but
-      if (!m_plr_make_infrastructure_buts[i]) {
-			m_plr_make_infrastructure_buts[i] =
-				new UI::IDButton<Editor_Player_Menu, const Player_Number>
-				(this,
-				 posx, posy, size, size,
-				 0,
-				 &Editor_Player_Menu::make_infrastructure_clicked, this, i + 1,
-				 _("I"), //  TODO come up with a picture for this
-				 _("Make infrastructure"));
-         posx+=size+spacing;
-		}
-		m_plr_make_infrastructure_buts[i]->set_enabled(start_pos_valid);
-
-      // Allowed buildings
-      if (!m_plr_allowed_buildings[i]) {
-			m_plr_allowed_buildings[i] =
-				new UI::IDButton<Editor_Player_Menu, const Player_Number>
-				(this,
-				 posx, posy, size, size,
-				 0,
-				 &Editor_Player_Menu::allowed_buildings_clicked, this, i + 1,
-				 _("B"), //  TODO come up with a picture for this
-				 _("Allow/forbid buildidngs"),
-				start_pos_valid);
-         posx+=size+spacing;
-		}
-	   m_plr_allowed_buildings[i]->set_enabled(start_pos_valid);
-#endif
       posy+=size+spacing;
 	}
    set_inner_size(get_inner_w(), posy+spacing);
@@ -256,17 +221,13 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	const Player_Number nr_players = old_nr_players - 1;
 	assert(1 <= nr_players);
 	if (not parent.is_player_tribe_referenced(nr_players)) {
-		{
-			const Coords starting_pos = map.get_starting_pos(old_nr_players);
-			if (not starting_pos.isNull()) {
-				//  Remove starting position marker.
-				std::string picsname = "pics/editor_player_";
-				picsname += static_cast<char>(old_nr_players / 10 + 0x30);
-				picsname += static_cast<char>(old_nr_players % 10 + 0x30);
-				picsname += "_starting_pos.png";
-				map.overlay_manager().remove_overlay
-					(starting_pos, g_gr->get_picture(PicMod_Game, picsname.c_str()));
-			}
+		if (const Coords sp = map.get_starting_pos(old_nr_players)) {
+			//  Remove starting position marker.
+			char picsname[] = "pics/editor_player_??_starting_pos.png";
+			picsname[19] = static_cast<char>(old_nr_players / 10 + 0x30);
+			picsname[20] = static_cast<char>(old_nr_players % 10 + 0x30);
+			map.overlay_manager().remove_overlay
+				(sp, g_gr->get_picture(PicMod_Game, picsname));
 		}
 			std::string name  = map.get_scenario_player_name (nr_players);
 			std::string tribe = map.get_scenario_player_tribe(nr_players);
@@ -340,20 +301,14 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 		dynamic_cast<Editor_Interactive &>(*get_parent());
    // jump to the current field
 	Map & map =parent.egbase().map();
-	const Coords c = map.get_starting_pos(n);
-   if (not c.isNull()) parent.move_view_to(c);
+   if (const Coords sp = map.get_starting_pos(n)) parent.move_view_to(sp);
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-	if (parent.editor().get_player(n)) {
-		if (not map.get_starting_pos(n).isNull()) {
-			if
-				(dynamic_cast<const Building *>
-				 (map[map.get_starting_pos(n)].get_immovable()))
-				return;
-		}
-	}
+	if (parent.editor().get_player(n))
+		if (const Coords sp = map.get_starting_pos(n))
+			if (dynamic_cast<const Building *> (map[sp].get_immovable())) return;
 
    // Select tool set mplayer
 	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
@@ -386,95 +341,3 @@ void Editor_Player_Menu::name_changed(int m) {
 	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1).c_str());
 	parent.set_need_save(true);
 }
-
-#if 0
-/*
- * Make infrastructure button clicked
- */
-void Editor_Player_Menu::make_infrastructure_clicked(const Uint8 n) {
-	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
-   // Check if starting position is valid (was checked before
-   // so must be true)
-	Editor & editor = parent.editor();
-	Map             & map             = editor.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
-	const Coords start_pos = map.get_starting_pos(n);
-   assert(start_pos.is_valid());
-
-	Player * p = editor.get_player(n);
-   if (!p) {
-      // This player is unknown, register it, place a hq and reference the tribe
-      // so that this tribe can not be changed
-		editor.add_player
-			(n,
-			 Player::Local,
-			 m_plr_set_tribes_buts[n - 1]->get_title(),
-			 m_plr_names[n - 1]->get_text());
-
-		p = editor.get_player(n);
-      p->init(false);
-	}
-
-   // If the player is already created in the editor, this means
-   // that there might be already a hq placed somewhere. This needs to be
-   // deleted before a starting position change can occure
-	const Player_Number player_number = p->get_player_number();
-	const Coords starting_pos = map.get_starting_pos(player_number);
-	BaseImmovable * const imm = map[starting_pos].get_immovable();
-	if (not imm) {
-      // place HQ
-		const Tribe_Descr & tribe = p->tribe();
-      const int idx = tribe.get_building_index("headquarters");
-      if (idx < 0)
-         throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
-		Warehouse & headquarter = dynamic_cast<Warehouse &>
-			(*editor.warp_building(starting_pos, player_number, idx));
-		editor.conquer_area
-			(Player_Area
-			 (player_number, Area(starting_pos, headquarter.get_conquers())));
-		tribe.load_warehouse_with_start_wares(editor, headquarter);
-
-		parent.reference_player_tribe(n, &tribe);
-
-      // Remove the player overlay from this starting pos.
-      // A HQ is overlay enough
-      std::string picsname="pics/editor_player_";
-      picsname+=static_cast<char>((n/10) + 0x30);
-      picsname+=static_cast<char>((n%10) + 0x30);
-      picsname+="_starting_pos.png";
-      int picid=g_gr->get_picture(PicMod_Game,  picsname.c_str());
-      // Remove old overlay if any
-		overlay_manager.remove_overlay(start_pos, picid);
-	}
-
-	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
-	parent.tools.make_infrastructure.set_player(n);
-	overlay_manager.register_overlay_callback_function
-		(&Editor_Make_Infrastructure_Tool_Callback,
-		 static_cast<void *>(&editor),
-		 n);
-	map.recalc_whole_map();
-}
-
-/*
- * Allowed building button clicked
- */
-void Editor_Player_Menu::allowed_buildings_clicked(const Uint8 n) {
-	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
-	Editor & editor = parent.editor();
-
-	if (not editor.get_player(n)) {
-      // The player is not yet really on the map, call make infrastructure button first
-      make_infrastructure_clicked(n);
-	}
-
-   // Create the menu
-   if (m_allow_buildings_menu.window) {
-      delete m_allow_buildings_menu.window;
-	}
-	else new Editor_Player_Menu_Allowed_Buildings_Menu
-		(&parent, editor.get_player(n), &m_allow_buildings_menu);
-}
-#endif

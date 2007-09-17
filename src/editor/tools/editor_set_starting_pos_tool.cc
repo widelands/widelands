@@ -26,8 +26,6 @@
 #include "map.h"
 #include "overlay_manager.h"
 
-#include <string>
-
 
 // global variable to pass data from callback to class
 static int m_current_player;
@@ -41,12 +39,13 @@ int Editor_Tool_Set_Starting_Pos_Callback
 	const Map & map = *static_cast<const Map *>(data);
 
 	// Area around already placed players
-	const unsigned short nrplayers = map.get_nrplayers();
-	for (unsigned short i = 1; i <= nrplayers; ++i) {
-		if (i == m_current_player) continue;
-		const Coords sp = map.get_starting_pos(i);
-		if (sp.isNull()) continue;
-		if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) return 0;
+	const Player_Number nr_players = map.get_nrplayers();
+	for (Player_Number p = 1, last = m_current_player - 1;; ++p) {
+		for (; p <= last; ++p)
+			if (const Coords sp = map.get_starting_pos(p))
+				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) return 0;
+		if (last == nr_players) break;
+		last = nr_players;
 	}
 
 	const int caps = c.field->get_caps();
@@ -80,24 +79,24 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
          m_current_player=1;
 		}
 
-		const Coords starting_pos = map.get_starting_pos(m_current_player);
+		const Coords old_sp = map.get_starting_pos(m_current_player);
 
       // If the player is already created in the editor, this means
       // that there might be already a hq placed somewhere. This needs to be
       // deleted before a starting position change can occure
-		if (parent.editor().get_player(m_current_player))
-			if (not starting_pos.isNull())
-				if
-					(dynamic_cast<Building *>
-					 (map.get_field(starting_pos)->get_immovable()))
-					return 1;
+		if
+			(parent.editor().get_player(m_current_player)
+			 and
+			 old_sp
+			 and
+			 dynamic_cast<const Building *>(map[old_sp].get_immovable()))
+			return 1;
 
-      std::string picsname="pics/editor_player_";
-      picsname+=static_cast<char>((m_current_player/10) + 0x30);
-      picsname+=static_cast<char>((m_current_player%10) + 0x30);
-      picsname+="_starting_pos.png";
+		char picname[] = "pics/editor_player_??_starting_pos.png";
+		picname[19] = static_cast<char>(m_current_player / 10 + 0x30);
+		picname[20] = static_cast<char>(m_current_player % 10 + 0x30);
+		const uint picid = g_gr->get_picture(PicMod_Game,  picname);
 		uint w, h;
-		const uint picid = g_gr->get_picture(PicMod_Game,  picsname.c_str());
 		g_gr->get_picture_size(picid, w, h);
 
       // check if field is valid
@@ -106,8 +105,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
          // Remove old overlay if any
-			if (!starting_pos.isNull())
-				overlay_manager.remove_overlay(starting_pos, picid);
+			overlay_manager.remove_overlay(old_sp, picid);
 
          // Add new overlay
 			overlay_manager.register_overlay

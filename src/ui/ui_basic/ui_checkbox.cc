@@ -43,7 +43,6 @@ Statebox::Statebox(Panel *parent, int x, int y, uint picid)
 	if (picid)
 	{
 		uint w, h;
-
 		g_gr->get_picture_size(picid, w, h);
 		set_size(w, h);
 
@@ -124,7 +123,6 @@ void Statebox::draw(RenderTarget* dst)
 	{
 		// center picture
 		uint w, h;
-
 		g_gr->get_picture_size(m_pic_graphics, w, h);
 
 		dst->blit
