@@ -154,7 +154,7 @@ int Network_Buffer::fill(TCPsocket sock) {
    // TODO: This should have some timeout variable, otherwise
    // the game can lock here (when some, but not all data arrives)
    uint received = 0;
-   while (received != s) {
+	while (received != s) {
       uint retval = SDLNet_TCP_Recv(sock, m_buffer+m_buffer_pointer+received, s - received);
 
       if (retval <= 0)
