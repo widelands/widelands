@@ -65,11 +65,10 @@ private:
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
-public:
+struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
-   enum {
+	enum {
       om_cancel = 0,
       om_ok = 1
 	};

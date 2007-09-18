@@ -124,12 +124,18 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 
    Game_Preload_Data_Packet gpdp;
 
-   for (filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
+	const filenameset_t & gamefiles = m_gamefiles;
+	const filenameset_t::const_iterator gamefiles_end = gamefiles.end();
+	for
+		(filenameset_t::const_iterator pname = gamefiles.begin();
+		 pname != gamefiles.end();
+		 ++pname)
+	{
       const char *name = pname->c_str();
 
       FileSystem* fs = 0;
 
-      try {
+		try {
          fs = g_fs->MakeSubFileSystem(name);
 			Game_Loader gl(*fs, &game);
 			gl.preload_game(&gpdp);

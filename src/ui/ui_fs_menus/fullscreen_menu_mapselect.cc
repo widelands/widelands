@@ -275,9 +275,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				         name,
 				         g_gr->get_picture(PicMod_Game,
 				         dynamic_cast<const Widelands_Map_Loader *>(ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch(const std::exception& e) {
+			} catch (const std::exception & e) {
 				log("Mapselect: Skip %s due to preload error: %s\n", name, e.what());
-			} catch(...) {
+			} catch (...) {
 				log("Mapselect: Skip %s due to unknown exception\n", name);
 			}
 

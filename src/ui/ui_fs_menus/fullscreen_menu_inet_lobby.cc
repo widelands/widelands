@@ -190,7 +190,7 @@ void Fullscreen_Menu_InetLobby::user_info(std::string user, std::string game, st
 void Fullscreen_Menu_InetLobby::chat_message(std::string user, std::string msg, bool is_action) {
    std::string buffer;
 
-   if (is_action) {
+	if (is_action) {
       buffer="** "+user+" "+msg+"\n";
       server_message(buffer.c_str());
       return;
@@ -240,7 +240,7 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
  * A disconnect occured
  */
 void Fullscreen_Menu_InetLobby::disconnect() {
-   if (!m_disconnect_expected) {
+	if (not m_disconnect_expected) {
 		UI::Modal_Message_Box mmb
 			(this,
 			 _("Critical Connection Error!"),
