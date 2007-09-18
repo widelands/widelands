@@ -55,10 +55,7 @@ struct MapObjective : public TriggerReferencer {
 		m_is_visible (true),
 		m_is_optional(false)
 	{}
-      virtual ~MapObjective() {
-         if (m_trigger)
-            unreference_trigger(m_trigger);
-		}
+	virtual ~MapObjective() {if (m_trigger) unreference_trigger(m_trigger);}
 
 
 	const char * get_name() const {return m_name.c_str();}
@@ -77,15 +74,13 @@ struct MapObjective : public TriggerReferencer {
 	Trigger_Null * get_trigger() const {return m_trigger;}
 
       // Setting the values below is only a good idea in editor
-      inline void set_trigger(Trigger_Null* tr) {
+	void set_trigger(Trigger_Null * const tr) {
          assert(!m_trigger);
-         if (m_trigger)
-            unreference_trigger(m_trigger);
          if (tr)
             reference_trigger(tr);
          m_trigger = tr;
-		}
-      inline void set_is_optional(bool t) {m_is_optional = t;}
+	}
+	void set_is_optional(const bool t) {m_is_optional = t;}
 
 private:
       std::string   m_name;
