@@ -431,10 +431,7 @@ void FieldActionWindow::add_buttons_attack ()
    UI::Box* attackbox = 0;
 
       // Add attack button
-   if (m_field.field->get_owned_by() != m_plr->get_player_number())
-   {
-
-      ;
+	if (m_field.field->get_owned_by() != m_plr->get_player_number()) {
 
          // The box with attack buttons
       attackbox = new UI::Box(m_tabpanel, 0, 0, UI::Box::Horizontal);
@@ -467,8 +464,7 @@ void FieldActionWindow::add_buttons_attack ()
 	}
 
       // Add tab
-   if (attackbox && attackbox->get_nritems())
-   {
+	if (attackbox and attackbox->get_nritems()) {
       attackbox->resize();
 	   add_tab(pic_tab_attack, attackbox, _("Attack"));
 	}
@@ -711,14 +707,12 @@ void FieldActionWindow::act_ripflag()
    flag = (Flag*)imm;
    building = flag->get_building();
 
-   if (building)
-   {
+	if (building) {
       if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
          return;
 
       show_bulldoze_confirm(m_iabase, building, flag);
-	}
-	else {
+	} else {
 		if (Game * const game = dynamic_cast<Game *>(&m_iabase->egbase())) {
          m_iabase->need_complete_redraw();
 			game->send_player_bulldoze (flag);
