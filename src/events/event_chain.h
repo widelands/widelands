@@ -43,11 +43,11 @@ class TriggerConditional;
 struct EventChain : public EventReferencer, public TriggerReferencer {
    friend class Widelands_Map_EventChain_Data_Packet;
 
-      enum State {
+	enum State {
          INIT,
          RUNNING,
          DONE,
-		};
+	};
 
       EventChain() {
         m_repeating = false;
