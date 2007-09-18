@@ -45,28 +45,35 @@ bool MapTriggerManager::register_new_trigger(Trigger* mv) {
 
 
 Trigger* MapTriggerManager::get_trigger(const char* name) {
-   uint i;
    Trigger* retval = 0;
-   for (i = 0; i < m_triggers.size(); i++) {
-      if (!strcmp(m_triggers[i]->get_name(), name)) {
-         retval = m_triggers[i];
+	trigger_vector & triggers = m_triggers;
+	const trigger_vector::const_iterator triggers_end = triggers.end();
+	for
+		(trigger_vector::const_iterator it = triggers.begin();
+		 it != triggers_end;
+		 ++it)
+		if (not strcmp((*it)->get_name(), name)) {
+         retval = *it;
          break;
 		}
-	}
 
    return retval;
 }
 
 
 void MapTriggerManager::delete_trigger(const char* name) {
-   for (uint i = 0; i < m_triggers.size(); i++) {
-      if (!strcmp(m_triggers[i]->get_name(), name)) {
-         delete m_triggers[i];
-         m_triggers[i] = m_triggers[m_triggers.size() - 1];
-         m_triggers.resize(m_triggers.size() - 1);
+	trigger_vector & triggers = m_triggers;
+	const trigger_vector::const_iterator triggers_end = triggers.end();
+	for
+		(trigger_vector::iterator it = triggers.begin();
+		 it != triggers_end;
+		 ++it)
+		if (not strcmp((*it)->get_name(), name)) {
+			delete *it;
+			*it = triggers.back();
+			triggers.pop_back();
          break;
 		}
-	}
 }
 
 

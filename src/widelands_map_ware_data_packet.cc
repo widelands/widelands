@@ -51,32 +51,22 @@ throw (_wexception)
       return;
 
    FileRead fr;
-   try {
-      fr.Open(fs, "binary/ware");
-	} catch (...) {
-      // not there, so skip
-      return ;
-	}
+	try {fr.Open(fs, "binary/ware");} catch (...) {return;}
 
    // First packet version
-   int packet_version=fr.Unsigned16();
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       // Now the rest data len
-      uint nr_files=fr.Unsigned32();
-
-      WareInstance* w;
-      for (uint i=0; i<nr_files; i++) {
-         w=new WareInstance(0, 0); // data is read somewhere else
-         w->init(egbase);
-         ol->register_object(egbase, fr.Unsigned32(), w);
+      const uint32_t nr_files = fr.Unsigned32();
+		for (uint32_t i = 0; i < nr_files; ++i) {
+			WareInstance & w = *new WareInstance(0, 0); // data is read elsewhere
+			w.init(egbase);
+			ol->register_object(egbase, fr.Unsigned32(), &w);
 		}
-      // DONE
-      return;
-	}
-   throw wexception("Unknown version %i in Widelands_Map_Ware_Data_Packet!\n", packet_version);
-
-   assert(0);
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Ware_Data_Packet!",
+			 packet_version);
 }
 
 
@@ -96,36 +86,32 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
-   Map* map=egbase->get_map();
+	const Map & map = egbase->map();
    std::vector<uint> ids;
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
-         Field* f=map->get_field(Coords(x, y));
+	Field * field = &map[0];
+	const Field * const fields_end = field + map.max_index();
+	for (; field < fields_end; ++field) {
 
          // First, check for Flags
-         BaseImmovable* imm=f->get_immovable();
-         if (imm && imm->get_type()==Map_Object::FLAG) {
-            Flag* fl=static_cast<Flag*>(imm);
-            for (int i=0; i<fl->m_item_filled; i++) {
-               assert(!os->is_object_known(fl->m_items[i].item));
-               ids.push_back(os->register_object(fl->m_items[i].item));
-				}
+		if
+			(const Flag * const flag =
+			 dynamic_cast<const Flag *>(field->get_immovable()))
+		{
+			const Flag::PendingItem * item = flag->m_items;
+			const Flag::PendingItem & items_end =  *(item + flag->m_item_filled);
+			for (; item < &items_end; ++item) {
+				assert(not os->is_object_known(item->item));
+				ids.push_back(os->register_object(item->item));
 			}
+		}
 
          // Now, check for workers
-         Bob* b=f->get_first_bob();
-         while (b) {
-            if (b->get_bob_type()==Bob::WORKER) {
-               Worker* w=static_cast<Worker*>(b);
-               WareInstance* ware=w->get_carried_item(egbase);
-               if (ware) {
+		for (const Bob * b = field->get_first_bob(); b; b = b->get_next_bob())
+			if (const Worker * const w = dynamic_cast<const Worker *>(b))
+				if (const WareInstance * const ware = w->get_carried_item(egbase)) {
                   assert(!os->is_object_known(ware));
                   ids.push_back(os->register_object(ware));
 					}
-				}
-            b=b->get_next_bob();
-			}
-		}
 	}
 
    // All checked, we only need to save those stuff to disk
@@ -134,5 +120,4 @@ throw (_wexception)
       fw.Unsigned32(ids[i]);
 
    fw.Write(fs, "binary/ware");
-   // DONE
 }
