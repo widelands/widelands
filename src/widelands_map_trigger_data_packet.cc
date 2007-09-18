@@ -56,10 +56,9 @@ throw (_wexception)
 
    Section* s = prof.get_section("global");
 
-   // check packet version
-   int packet_version=s->get_int("packet_version");
-   if (packet_version == CURRENT_PACKET_VERSION) {
-      while ((s = prof.get_next_section(0))) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		while ((s = prof.get_next_section(0))) {
          std::string name = s->get_name();
          std::string type = s->get_safe_string("type");
          bool set = s->get_safe_bool("set");
@@ -70,9 +69,9 @@ throw (_wexception)
 
          egbase->get_map()->get_mtm().register_new_trigger(t);
 		}
-      return;
-	}
-   throw wexception("Unknown version in Map Trigger Packet: %i\n", packet_version);
+	} else
+		throw wexception
+			("Unknown version in Map Trigger Packet: %i", packet_version);
 }
 
 /*
