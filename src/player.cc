@@ -437,7 +437,7 @@ void Player::remove_economy(Economy* eco) {
 		}
 		++i;
 	}
-	assert(0); // Never here
+	assert(false); // Never here
 }
 
 bool Player::has_economy(Economy * const economy) const throw () {
@@ -462,7 +462,7 @@ throw ()
 		 it != economies_end;
 		 ++it)
 		if (*it == economy) return it - economies_begin;
-	assert(0); // never here
+	assert(false); // never here
 	return 0;
 }
 
