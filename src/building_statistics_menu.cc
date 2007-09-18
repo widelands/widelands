@@ -361,7 +361,7 @@ void Building_Statistics_Menu::update() {
 
       // If not in list, add new one, as long as this building is
       // enabled
-      if (!te) {
+		if (not te) {
          if (! m_parent->get_player()->is_building_allowed(i)) continue;
 			te = &m_table.add(i, building.get_buildicon());
 		}
