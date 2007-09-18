@@ -654,7 +654,7 @@ void Building_Window::setup_capsbuttons()
 		x += 34;
 	}
 
-   if (m_capscache & (1 << Building::PCap_Enhancable)) {
+	if (m_capscache & 1 << Building::PCap_Enhancable) {
 		const std::vector<char *> & buildings = m_building->enhances_to();
 	   const Tribe_Descr & tribe = m_player->get_player()->tribe();
 		const std::vector<char *>::const_iterator buildings_end = buildings.end();
