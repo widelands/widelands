@@ -36,7 +36,7 @@ class Game;
 class TriggerConditional;
 struct TriggerConditional_Factory {
       // Note: these are ordered for easy precendence parsing
-      enum TokenNames {
+	enum TokenNames {
 		NOT,
 		AND,
 		OR,
@@ -44,12 +44,12 @@ struct TriggerConditional_Factory {
 		LPAREN,
 		RPAREN,
 		TRIGGER,  // not an operator
-		};
+	};
 	static const char * const operators[];
-      struct Token {
+	struct Token {
          TokenNames token;
          void* data;
-		};
+	};
 
       class SyntaxError {};
 
