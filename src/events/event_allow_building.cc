@@ -55,9 +55,8 @@ void Event_Allow_Building::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
-   int version = s->get_safe_int("version");
-
-   if (version == EVENT_VERSION) {
+	const int packet_version = s->get_safe_int("version");
+	if (packet_version == EVENT_VERSION) {
       int player= s->get_safe_int("player");
       set_player(player);
       set_building(s->get_safe_string("building"));
@@ -68,9 +67,10 @@ void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
          log("Conquer Area Event with illegal player orbuilding name: (Player: %i, Building: %s) deleted!\n", m_player, m_building.c_str());
 		}
 		egbase->get_iabase()->reference_player_tribe(player, this);
-      return;
-	}
-   throw wexception("Allow Building Event with unknown/unhandled version %i in map!\n", version);
+	} else
+		throw wexception
+			("Allow Building Event with unknown/unhandled version %i in map!",
+			 packet_version);
 }
 
 void Event_Allow_Building::Write
