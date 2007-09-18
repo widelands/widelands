@@ -46,9 +46,8 @@ throw (_wexception)
    fr.Open(fs, "binary/player_economies");
 
    // read packet version
-   int packet_version=fr.Unsigned16();
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       // DONE
       Map* map=game->get_map();
       for (uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
@@ -73,12 +72,10 @@ throw (_wexception)
             ecos[j]->balance_requestsupply(); // Issue first balance
 			}
 		}
-
-      return;
 	} else
-      throw wexception("Unknown version in Game_Player_Economies_Data_Packet: %i\n", packet_version);
-
-   assert(0); // never here
+		throw wexception
+			("Unknown version in Game_Player_Economies_Data_Packet: %u",
+			 packet_version);
 }
 
 /*
