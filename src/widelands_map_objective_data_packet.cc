@@ -45,22 +45,15 @@ throw (_wexception)
       return;
 
    Profile prof;
-   try {
-      prof.read("objective", 0, fs);
-	} catch (...) {
-      // might not be there
-      return;
-	}
+	try {prof.read("objective", 0, fs);} catch (...) {return;}
 	MapObjectiveManager & mom = egbase->get_map()->get_mom();
 	MapTriggerManager   & mtm = egbase->get_map()->get_mtm();
 
    Section* s = prof.get_section("global");
 
-   // read packet version
-   int packet_version=s->get_int("packet_version");
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
-      while ((s = prof.get_next_section(0))) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		while ((s = prof.get_next_section(0))) {
          MapObjective* o = new MapObjective();
          o->set_name(s->get_name());
          o->set_descr(s->get_safe_string("descr"));
@@ -68,16 +61,22 @@ throw (_wexception)
          o->set_is_optional(s->get_safe_bool("optional"));
 
          const char* trigname = s->get_safe_string("trigger");
-         Trigger * const trig = mtm.get_trigger(trigname);
-         if (!trig)
-            throw wexception("Unknown trigger referenced in Objective: %s\n", trigname);
-         o->set_trigger(static_cast<Trigger_Null*>(trig)); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
+			if (Trigger * const trig = mtm.get_trigger(trigname))
+				if (Trigger_Null * const tn = dynamic_cast<Trigger_Null *>(trig))
+					o->set_trigger(tn);
+				else
+					throw wexception
+						("Trigger referenced is not Trigger_Null: %s", trigname);
+			else
+				throw wexception
+					("Unknown trigger referenced in Objective: %s", trigname);
 
          mom.register_new_objective(o);
 		}
-      return;
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Unknown version %i in Widelands_Map_Objective_Data_Packet!",
+			 packet_version);
 }
 
 
