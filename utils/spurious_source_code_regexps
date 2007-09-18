@@ -14,3 +14,6 @@ _cast<const( +[_a-zA-Z][_a-zA-Z0-9]*)* *>
 _cast<( *[_a-zA-Z][_a-zA-Z0-9]*)* *\* *const *>
 \( *(void|float|double|u?(char|short|int)|[US]int(8|16|32)) *\) *[^ :;{)=]
 snprintf *\( *[_a-zA-Z][_a-zA-Z0-9]* *, *[[:digit:]]+
+^DISABLED_STILL_TOO_MANY_ERRORS	* +.*{$
+assert *\( *0 *\)
+[^_a-zA-Z0-9]this->[^*]

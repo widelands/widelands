@@ -709,7 +709,8 @@ AttackController* Editor_Game_Base::create_attack_controller
 	uint i;
 	for (i=0;i<m_attack_serials.size();i++) {
 		AttackController* curCtrl =
-				(AttackController*)this->objects().get_object(m_attack_serials[i]);
+			dynamic_cast<AttackController *>
+			(objects().get_object(m_attack_serials[i]));
 		if (curCtrl->getFlag() == flag) {
 			curCtrl->launchAttack(num);
 			return curCtrl;
@@ -736,7 +737,8 @@ void Editor_Game_Base::remove_attack_controller(uint serial)
 {
 	for (uint i=0;i<m_attack_serials.size();i++) {
 		if (m_attack_serials[i] == serial) {
-			static_cast<AttackController *>(this->objects().get_object(serial))->destroy(this);
+			dynamic_cast<AttackController *>(objects().get_object(serial))
+				->destroy(this);
 
 			if (i < m_attack_serials.size() - 1)
 				m_attack_serials[i] = m_attack_serials[m_attack_serials.size() - 1];

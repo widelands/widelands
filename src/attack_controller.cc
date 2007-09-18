@@ -98,14 +98,14 @@ AttackController::AttackController(Editor_Game_Base & eg) :
 }
 
 AttackController::AttackController(Editor_Game_Base* eg, Flag* _flag, int _attacker, int _defender) :
-	BaseImmovable(globalAttackControllerDescr)
+BaseImmovable  (globalAttackControllerDescr),
+attackingPlayer(_attacker),
+defendingPlayer(_defender),
+totallyLaunched(0),
+attackedMsEmpty(false),
+flag           (_flag),
+m_egbase       (eg)
 {
-	this->m_egbase = eg;
-	this->flag = _flag;
-	this->attackingPlayer = _attacker;
-	this->defendingPlayer = _defender;
-	this->totallyLaunched = 0;
-	this->attackedMsEmpty = false;
 }
 
 AttackController::~AttackController() {
@@ -219,7 +219,8 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 
 		calcBattleGround(&bs, totallyLaunched);
 
-		soldier->startTaskMoveToBattle(dynamic_cast<Game*>(&egbase()), this->flag, bs.battleGround);
+		soldier->startTaskMoveToBattle
+			(dynamic_cast<Game *>(&egbase()), flag, bs.battleGround);
 
 		involvedSoldiers.push_back(bs);
 		totallyLaunched++;
@@ -231,7 +232,7 @@ bool AttackController::moveToBattle(Soldier* soldier, MilitarySite* militarySite
 
 void AttackController::moveToReached(Soldier* soldier)
 {
-	if (this->attackedMsEmpty) {
+	if (attackedMsEmpty) {
 		soldierWon(soldier);
 	} else {
 		startBattle(soldier, true);
@@ -295,7 +296,7 @@ void AttackController::soldierWon(Soldier* soldier)
 	}
 
 	log("battle finished. removing attack controller.\n");
-	egbase().remove_attack_controller(this->get_serial());
+	egbase().remove_attack_controller(get_serial());
 }
 
 bool AttackController::startBattle(Soldier* soldier, bool isArrived)

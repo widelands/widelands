@@ -102,8 +102,8 @@ bool WareList::operator==(const WareList &wl) const
 
 	while (i < wl.m_wares.size()) {
 		const count_type count = wl.m_wares[i];
-		if (i < this->m_wares.size()) {
-			if (count != this->m_wares[i])
+		if (i < m_wares.size()) {
+			if (count != m_wares[i])
 				return false;
 		} else {
 			if (count) // wl2 has 0 stock per definition
@@ -112,8 +112,8 @@ bool WareList::operator==(const WareList &wl) const
 		i++;
 	}
 
-	while (i < this->m_wares.size()) {
-		if (this->m_wares[i]) // wl1 has 0 stock per definition
+	while (i < m_wares.size()) {
+		if (m_wares[i]) // wl1 has 0 stock per definition
 			return false;
 		i++;
 	}
