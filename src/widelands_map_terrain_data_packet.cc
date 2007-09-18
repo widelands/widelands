@@ -49,9 +49,7 @@ throw (_wexception)
 	Map & map = egbase->map();
 	World & world = map.world();
 
-   // first packet version
-   int packet_version=fr.Unsigned16();
-
+	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version==CURRENT_PACKET_VERSION) {
 		const Uint16 nr_terrains = fr.Unsigned16();
 
@@ -80,9 +78,10 @@ throw (_wexception)
 			f.set_terrain_r(smap[fr.Unsigned8()]);
 			f.set_terrain_d(smap[fr.Unsigned8()]);
 		}
-      return;
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Map Terrain Data Packet with unknown/unhandled version %u in map!",
+			 packet_version);
 }
 
 
