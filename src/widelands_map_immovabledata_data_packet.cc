@@ -109,12 +109,10 @@ throw (_wexception)
 
 			ol->mark_object_as_loaded(imm);
 		}
-		// DONE
-		return;
-	}
-	throw wexception("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!\n", packet_version);
-
-	assert(0);
+	} else
+		throw wexception
+			("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!",
+			 packet_version);
 }
 
 
