@@ -42,24 +42,16 @@ throw (_wexception)
       return;
 
    Profile prof;
-   try {
-      prof.read("variable", 0, fs);
-	} catch (...) {
-      // might not be there
-      return;
-	}
+	try {prof.read("variable", 0, fs);} catch (...) {return;}
    MapVariableManager & mvm = egbase->get_map()->get_mvm();
 
    Section* s = prof.get_section("global");
 
-   // read packet version
-   int packet_version=s->get_int("packet_version");
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
-
-      while ((s = prof.get_next_section(0))) {
+   const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
+		while ((s = prof.get_next_section(0))) {
          std::string type = s->get_safe_string("type");
-         if (type == "int") {
+			if (type == "int") {
             Int_MapVariable* v = new Int_MapVariable(s->get_safe_bool("delete_protected"));
             v->set_name(s->get_name());
             v->set_value(s->get_safe_int("value"));
@@ -70,13 +62,12 @@ throw (_wexception)
             v->set_value(s->get_safe_string("value"));
             mvm.register_new_variable(v);
 			} else
-            throw wexception("Unknown Map Variable type %s\n", type.c_str());
+            throw wexception("Unknown Map Variable type %s", type.c_str());
 
 		}
-
-      return;
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Unknown version in Map Variable Data Packet: %i", packet_version);
 }
 
 
