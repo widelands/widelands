@@ -1228,10 +1228,7 @@ void Road::init(Editor_Game_Base *gg)
 {
    PlayerImmovable::init(gg);
 
-   if (m_path.get_nsteps() >=2) {
-      link_into_flags(gg);
-	}
-
+	if (m_path.get_nsteps() >=2 ) link_into_flags(gg);
 }
 
 /**
@@ -1574,7 +1571,7 @@ Route::LoadData* Route::load(FileRead& fr)
 		uint nsteps = fr.Unsigned16();
 		for (uint step = 0; step < nsteps; ++step)
 			data->flags.push_back(fr.Unsigned32());
-	} catch(...) {
+	} catch (...) {
 		delete data;
 		throw;
 	}
@@ -1597,7 +1594,7 @@ void Route::load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol)
 				throw wexception("Route step %u expected flag %u", i, idx);
 			m_route.push_back(flag);
 		}
-	} catch(...) {
+	} catch (...) {
 		delete data;
 		throw;
 	}
@@ -2707,23 +2704,22 @@ void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Ma
    fw->Signed32(m_size);
    fw->Signed32(m_filled);
    fw->Signed32(m_consume_interval);
-   if (m_request) {
+	if (m_request) {
       fw->Unsigned8(1);
       m_request->Write(fw, egbase, os);
 	} else
       fw->Unsigned8(0);
 }
 void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
-   int version=fr->Unsigned16();
-
-   if (version==WARES_QUEUE_DATA_PACKET_VERSION) {
+	const uint16_t packet_version = fr->Unsigned16();
+	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
       m_ware=m_owner->get_owner()->tribe().get_ware_index(fr->CString());
       m_size=fr->Signed32();
       m_filled=fr->Signed32();
       m_consume_interval=fr->Signed32();
       bool request=fr->Unsigned8();
          delete m_request;
-      if (request) {
+		if (request) {
          m_request = new Request(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
          m_request->Read(fr, egbase, ol);
 		} else {
@@ -2732,9 +2728,9 @@ void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_
 
       // Now Economy stuff. We have to add our filled items to the economy
       add_to_economy(m_owner->get_economy());
-      return;
-	}
-   throw wexception("WaresQueue::Read: Unknown WaresQueueVersion %i!\n", version);
+	} else
+		throw wexception
+			("WaresQueue::Read: Unknown WaresQueueVersion %u!", packet_version);
 }
 
 /*
