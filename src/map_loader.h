@@ -39,10 +39,10 @@ must be deleted, a new one must be selected
 =============================
 */
 struct Map_Loader {
-      enum Type {
+	enum Type {
          WLML, // Widelands Map Loader
          S2ML  // S2 Map Loader
-		};
+	};
 
       Map_Loader(const char* filename, Map* map) {m_s=STATE_INIT; m_map=map; m_map->set_filename(filename);}
       virtual ~Map_Loader() {};
@@ -55,12 +55,12 @@ struct Map_Loader {
       inline Map* get_map() {return m_map;}
 
 protected:
-      enum State {
+	enum State {
          STATE_INIT,
          STATE_PRELOADED,
 		STATE_WORLD_LOADED,
          STATE_LOADED
-		};
+	};
       void set_state(State s) {m_s=s;}
       State get_state() {return m_s;}
       Map* m_map;
