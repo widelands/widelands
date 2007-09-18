@@ -136,7 +136,7 @@ Event_Descr* Event_Factory::get_correct_event_descr(const char* id)
 		if (EVENT_DESCRIPTIONS[i].id == str)
 			return &EVENT_DESCRIPTIONS[i];
 
-	assert(0); // never here
+	assert(false); // never here
 	return 0;
 }
 
