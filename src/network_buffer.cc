@@ -136,10 +136,7 @@ void Network_Buffer::put_string(std::string string) {
  */
 int Network_Buffer::fill(TCPsocket sock) {
    // Ok, there is data on this socket. This is assumed
-   if (SDLNet_TCP_Recv(sock, m_buffer, 2) < 2) {
-      // Some error.
-      return -1;
-	}
+	if (SDLNet_TCP_Recv(sock, m_buffer, 2) < 2) return -1; // Some error.
 
    // we reset the data pointer
    m_buffer_pointer = 0;
