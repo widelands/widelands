@@ -400,8 +400,8 @@ private:
 	MapEventChainManager* m_mecm; // The mapeventchain manager has a list of all event chains in this map
 	MapObjectiveManager*  m_mom;  // The mapobjective manager lists all scenarios objectives.
 
-   struct Extradata_Info {
-      enum Type {
+	struct Extradata_Info {
+		enum Type {
          PIC,
 		};
       void*       data;
