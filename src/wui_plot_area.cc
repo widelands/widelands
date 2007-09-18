@@ -69,22 +69,17 @@ static const uint time_in_ms[] = {
 #define BG_PIC "pics/plot_area_bg.png"
 #define LINE_COLOR RGBColor(0, 0, 0)
 
-/*
- * Constructor
- */
-WUIPlot_Area::WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h) :
-   UI::Panel(parent, x, y, w, h) {
 
-   m_time = TIME_ONE_HOUR;  // defaults to one hour
+WUIPlot_Area::WUIPlot_Area(UI::Panel * parent, int x, int y, int w, int h)
+:
+UI::Panel (parent, x, y, w, h),
+m_time    (TIME_ONE_HOUR),
+m_plotmode(PLOTMODE_ABSOLUTE)
+{}
 
-   m_plotmode = PLOTMODE_ABSOLUTE;
-}
 
-/*
- * Destructor
- */
-WUIPlot_Area::~WUIPlot_Area() {
-}
+WUIPlot_Area::~WUIPlot_Area() {}
+
 
 /*
  * Draw this. This is the main function

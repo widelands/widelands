@@ -31,7 +31,7 @@
  * and the Y Axis some Data
  */
 struct WUIPlot_Area : public UI::Panel {
-      enum TIME {
+	enum TIME {
          TIME_15_MINS = 0,
          TIME_30_MINS,
          TIME_ONE_HOUR,
@@ -39,12 +39,12 @@ struct WUIPlot_Area : public UI::Panel {
          TIME_FOUR_HOURS,
          TIME_EIGHT_HOURS,
          TIME_16_HOURS,
-		};
-      enum PLOTMODE {
+	};
+	enum PLOTMODE {
          PLOTMODE_RELATIVE, // Always take the samples of some times together,
                             // so that the graph is not completly zigg-zagged
          PLOTMODE_ABSOLUTE
-		};
+	};
 
       WUIPlot_Area(UI::Panel* parent, int x, int y, int w, int h);
       ~WUIPlot_Area();
@@ -64,11 +64,11 @@ struct WUIPlot_Area : public UI::Panel {
       void set_plotmode(int id) {m_plotmode = id;}
 
 private:
-      struct __plotdata {
+	struct __plotdata {
          const std::vector<uint>* dataset;
          bool  showplot;
          RGBColor plotcolor;
-		};
+	};
       std::vector<__plotdata> m_plotdata;
       int m_time;  // How much do you want to list
       int m_sample_rate;
