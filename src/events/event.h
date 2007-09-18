@@ -36,11 +36,11 @@ class EventReferencer;
 struct Event {
    friend class Widelands_Map_Event_Data_Packet;
 
-      enum State {
+	enum State {
          INIT,
          RUNNING,
          DONE
-		};
+	};
 
 	Event(const std::string & Name = std::string()) : m_state(INIT), m_name(Name)
 	{}
