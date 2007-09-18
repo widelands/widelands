@@ -286,7 +286,7 @@ std::string Map_Object_Descr::get_animation_name(uint anim) const {
 	}
 
 	// Never here
-	assert(0);
+	assert(false);
 	return "";
 }
 
