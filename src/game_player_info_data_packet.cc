@@ -42,10 +42,8 @@ throw (_wexception)
 	FileRead fr;
 	fr.Open(fs, "binary/player_info");
 
-	// read packet version
-	int packet_version=fr.Unsigned16();
-
-	if (packet_version==CURRENT_PACKET_VERSION || packet_version == 1) {
+	const uint16_t packet_version = fr.Unsigned16();
+	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 		uint max_players = fr.Unsigned16();
 		for (uint i=1; i<=max_players; i++) {
 			game->remove_player(i);
@@ -80,13 +78,10 @@ throw (_wexception)
 
 		if (packet_version >= 2)
 			game->ReadStatistics(fr, 1);
-
-		// DONE
-		return;
 	} else
-		throw wexception("Unknown version in Game_Player_Info_Data_Packet: %i\n", packet_version);
-
-	assert(0); // never here
+		throw wexception
+			("Unknown version in Game_Player_Info_Data_Packet: %u",
+			 packet_version);
 }
 
 
