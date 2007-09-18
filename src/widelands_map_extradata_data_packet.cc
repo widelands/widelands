@@ -45,22 +45,15 @@ void Widelands_Map_Extradata_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-   if (skip)
-      return;
+	if (skip) return;
 
    Profile prof;
-   try {
-      prof.read("extra_data", 0, fs);
-	} catch (...) {
-      // not found, skip it
-      return;
-	}
+	try {prof.read("extra_data", 0, fs);} catch (...) {return;}
    Section* s = prof.get_section("global");
 
    // read packet version
-   int packet_version=s->get_int("packet_version");
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
       // Nothing more. But read all pics
 		if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
          filenameset_t pictures;
@@ -93,9 +86,10 @@ throw (_wexception)
             egbase->get_map()->m_extradatainfos.push_back(info);
 			}
 		}
-      return;
-	}
-   assert(0); // never here
+	} else
+		throw wexception
+			("Map Terrain Extradata Data Packet with unknown version %u in map!",
+			 packet_version);
 }
 
 
