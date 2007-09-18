@@ -52,19 +52,23 @@ void Event_Unhide_Objective::reinitialize(Game *) {}
  * File Read, File Write
  */
 void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
-   int version=s->get_safe_int("version");
-   if (version == EVENT_VERSION) {
+	const int packet_version = s->get_safe_int("version");
+	if (packet_version == EVENT_VERSION) {
       std::string objectivename = s->get_safe_string("objective");
-      MapObjective * const obj = egbase->get_map()->get_mom().get_objective(objectivename.c_str());
-      if (!obj) {
-         throw wexception("Unhide Objective event with unknown objecive %s in map!\n",
-								  objectivename.c_str());
-		}
+		if
+			(MapObjective * const obj =
+			 egbase->map().get_mom().get_objective(objectivename.c_str()))
+		{
       set_objective(obj);
       set_dounhide(s->get_bool("dounhide"));
-      return;
-	}
-   throw wexception("Unhide Objective Event with unknown/unhandled version %i in map!\n", version);
+		} else
+			throw wexception
+				("Unhide Objective event with unknown objecive %s in map!",
+				 objectivename.c_str());
+	} else
+		throw wexception
+			("Unhide Objective Event with unknown/unhandled version %i in map!",
+			 packet_version);
 }
 
 void Event_Unhide_Objective::Write(Section & s, const Editor_Game_Base &) const
