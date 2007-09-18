@@ -43,11 +43,15 @@ ProgressWindow::ProgressWindow(const std::string & background)
 }
 
 ProgressWindow::~ProgressWindow() {
-	for (VisualizationArray::iterator it = m_visualizations.begin();
-		 it != m_visualizations.end(); ++it) {
+	const VisualizationArray & visualizations = m_visualizations;
+	const VisualizationArray::const_iterator visualizations_end =
+		visualizations.end();
+	for
+		(VisualizationArray::iterator it = m_visualizations.begin();
+		 it != visualizations_end;
+		 ++it)
 		// inform visualizations
 		(*it)->stop();
-	}
 }
 
 void ProgressWindow::draw_background(
@@ -128,13 +132,15 @@ void ProgressWindow::step(const std::string & description) {
 }
 
 void ProgressWindow::update(bool repaint) {
-	if (m_visualizations.size() > 0) {
-		for (VisualizationArray::iterator it = m_visualizations.begin();
-			 it != m_visualizations.end(); ++it) {
+	VisualizationArray & visualizations = m_visualizations;
+	const VisualizationArray::const_iterator visualizations_end =
+		visualizations.end();
+	for
+		(VisualizationArray::iterator it = visualizations.begin();
+		 it != visualizations_end;
+		 ++it)
 			// let visualizations do their work
 			(*it)->update(repaint);
-		}
-	}
 
 	g_gr->refresh(false);
 }
@@ -158,17 +164,18 @@ void ProgressWindow::add_visualization(
 	m_visualizations.push_back(instance);
 }
 
-void ProgressWindow::remove_visualization(
-		IProgressVisualization * instance) {
-	// remove
-	for (VisualizationArray::iterator it = m_visualizations.begin();
-		 it != m_visualizations.end(); ++it) {
-
-		if ((*it) == instance) {
-			m_visualizations.erase (it, it+1);
+void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
+	VisualizationArray & visualizations = m_visualizations;
+	const VisualizationArray::const_iterator visualizations_end =
+		visualizations.end();
+	for
+		(VisualizationArray::iterator it = visualizations.begin();
+		 it != visualizations_end;
+		 ++it)
+		if (*it == instance) {
+			m_visualizations.erase (it);
 			break;
 		}
-	}
 }
 
 };

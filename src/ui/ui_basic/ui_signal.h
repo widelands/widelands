@@ -47,7 +47,7 @@ public:
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-   void unset() {
+	void unset() {
       _fn = 0;
 	}
    inline void call() {if (_fn) (_obj->*_fn)();}
@@ -68,7 +68,7 @@ public:
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-   void unset() {
+	void unset() {
       _fn = 0;
 	}
 	inline void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
@@ -89,7 +89,7 @@ public:
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-   void unset() {
+	void unset() {
       _fn = 0;
 	}
    inline void call(T1 t1, T2 t2) {if (_fn) (_obj->*_fn)(t1, t2);}

@@ -118,8 +118,7 @@ void Textarea::collapse()
    int w = get_w();
    int h = get_h();
 
-   if (!m_multiline)
-   {
+	if (not m_multiline) {
       if (m_align & Align_HCenter)
          x += w >> 1;
       else if (m_align & Align_Right)
@@ -150,8 +149,7 @@ void Textarea::expand()
 
    g_fh->get_size(m_fontname, m_fontsize, m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
 
-   if (!m_multiline)
-   {
+	if (not m_multiline) {
       if (m_align & Align_HCenter)
          x -= w >> 1;
       else if (m_align & Align_Right)

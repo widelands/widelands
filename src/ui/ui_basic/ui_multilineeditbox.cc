@@ -32,16 +32,17 @@ namespace UI {
 /**
 Initialize a edibox that supports multiline strings.
 */
-Multiline_Editbox::Multiline_Editbox(Panel *parent, int x, int y, uint w, uint h,
-                                       const char *text)
-   : Multiline_Textarea(parent, x, y, w, h, text, Align_Left, true) {
-   m_maxchars=0xffff;
-
+Multiline_Editbox::Multiline_Editbox
+	(Panel * parent,
+	 int x, int y, uint w, uint h,
+	 const char * text)
+	:
+	Multiline_Textarea(parent, x, y, w, h, text, Align_Left, true),
+	m_cur_pos         (get_text().size()),
+	m_maxchars        (0xffff),
+	m_needs_update    (false)
+{
    set_scrollmode(ScrollLog);
-
-   m_needs_update=false;
-   m_cur_pos=get_text().size();
-
    set_handle_mouse(true);
    set_can_focus(true);
 	set_think(false);

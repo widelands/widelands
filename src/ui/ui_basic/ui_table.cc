@@ -88,7 +88,7 @@ void Table<void *>::add_column(const std::string & name, const uint width) {
 	for (Columns::const_iterator it = m_columns.begin(); it != columns_end; ++it)
 		complete_width += it->btn->get_w();
 
-   Column c = {
+	Column c = {
 		name,
 		new IDButton<Table, Columns::size_type>
 		   (this,
@@ -98,7 +98,7 @@ void Table<void *>::add_column(const std::string & name, const uint width) {
 		    name)
 	};
    m_columns.push_back(c);
-   if (!m_scrollbar) {
+	if (not m_scrollbar) {
       m_scrollbar=new Scrollbar(get_parent(), get_x()+get_w()-24, get_y()+m_columns[0].btn->get_h(), 24, get_h()-m_columns[0].btn->get_h(), false);
       m_scrollbar->moved.set(this, &Table::set_scrollpos);
       m_scrollbar->set_steps(1);
@@ -124,7 +124,7 @@ Table<void *>::Entry_Record * Table<void *>::find
  * A header button has been clicked
  */
 void Table<void *>::header_button_clicked(Columns::size_type n) {
-   if (get_sort_colum()==n) {
+	if (get_sort_colum() == n) {
       // Change sort direction
 		set_sort_descending(not get_sort_descending());
       sort();
@@ -286,7 +286,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 	(void * const entry, const int picid, const bool do_select)
 {
    int entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
-   if (picid != -1) {
+	if (picid != -1) {
 		uint w, h;
 		g_gr->get_picture_size(picid, w, h);
 	   entry_height = std::max<uint>(entry_height, h);

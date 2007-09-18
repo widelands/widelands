@@ -534,7 +534,7 @@ void Panel::set_can_focus(bool yes)
 {
 
 	if (yes) _flags |= pf_can_focus;
-   else {
+	else {
 		_flags &= ~pf_can_focus;
 
 		if (_parent && _parent->_focus == this)

@@ -159,13 +159,11 @@ void Basic_Button::draw(RenderTarget* dst)
 	// or the button stays pressed when it is pressed once
    RGBColor black(0, 0, 0);
 
-   if (!m_flat)
-	{
+	if (not m_flat) {
 		assert(2 <= get_w());
 		assert(2 <= get_h());
       // button is a normal one, not flat
-      if (!m_pressed || !m_highlighted)
-      {
+		if (not m_pressed or not m_highlighted) {
          // top edge
 	      dst->brighten_rect
 		      (Rect(Point(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -178,9 +176,7 @@ void Basic_Button::draw(RenderTarget* dst)
          // right edge
 	      dst->fill_rect(Rect(Point(get_w() - 2, 2), 1, get_h() - 2), black);
 	      dst->fill_rect(Rect(Point(get_w() - 1, 1), 1, get_h() - 1), black);
-		}
-      else
-      {
+		} else {
          // bottom edge
 	      dst->brighten_rect
 		      (Rect(Point(0, get_h() - 2), get_w(), 2),

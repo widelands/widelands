@@ -27,10 +27,10 @@ namespace UI {
  * Shows a modal messagebox, user must click something
 */
 struct Modal_Message_Box : public Window {
-      enum MB_Type {
+	enum MB_Type {
          OK,
          YESNO
-		};
+	};
 	Modal_Message_Box
 		(Panel * const parent,
 		 const std::string & caption,

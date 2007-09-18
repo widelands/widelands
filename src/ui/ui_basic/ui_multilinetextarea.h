@@ -37,12 +37,11 @@ struct Scrollbar;
  * simplifies this class.
  */
 struct Multiline_Textarea : public Panel {
-      enum ScrollMode {
+	enum ScrollMode {
          ScrollNormal = 0,    ///< (default) only explicit or forced scrolling
          ScrollLog = 1,       ///< follow the bottom of the text
-		};
+	};
 
-public:
 	Multiline_Textarea
 		(Panel * const parent,
 		 const int x, const int y, const uint w, const uint h,

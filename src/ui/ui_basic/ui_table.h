@@ -206,7 +206,7 @@ public:
 private:
 	struct Column;
 	typedef std::vector<Column> Columns;
-   struct Column {
+	struct Column {
       std::string name;
 		IDButton<Table, Columns::size_type> * btn;
 	};
