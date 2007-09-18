@@ -38,19 +38,13 @@ throw(_wexception)
    prof.read("preload", 0, fs);
    Section* s = prof.get_section("global");
 
-   // read packet version
-   int packet_version= s->get_int("packet_version");
-
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
       m_gametime = s->get_safe_int("gametime");
       m_mapname = s->get_safe_string("mapname");
-
-      // DONE
-      return;
 	} else
-      throw wexception("Unknown version in Game_Preload_Data_Packet: %i\n", packet_version);
-
-   assert(0); // never here
+		throw wexception
+			("Unknown version in Game_Preload_Data_Packet: %i", packet_version);
 }
 
 /**
