@@ -103,7 +103,7 @@ Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(const char* id) {
       if (TRIGGER_DESCRIPTIONS[i].id == str)
          return &TRIGGER_DESCRIPTIONS[i];
 
-   assert(0); // never here
+	assert(false); // never here
    return 0;
 }
 
