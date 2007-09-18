@@ -681,14 +681,11 @@ Immovable *Editor_Game_Base::create_immovable
 Immovable* Editor_Game_Base::create_immovable
 (const Coords c, const std::string & name, const Tribe_Descr* tribe)
 {
-	int idx;
-
-   if (!tribe)
-      idx = m_map->get_world()->get_immovable_index(name.c_str());
-   else {
-      idx = tribe->get_immovable_index(name.c_str());
-	}
-
+	const int idx =
+		tribe ?
+		tribe->get_immovable_index(name.c_str())
+		:
+		m_map->get_world()->get_immovable_index(name.c_str());
 	if (idx < 0)
 		throw wexception
 			("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for "
