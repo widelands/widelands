@@ -43,20 +43,13 @@ void Widelands_Map_Road_Data_Packet::Read
  Widelands_Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-   if (skip)
-      return;
+	if (skip) return;
 
    FileRead fr;
-   try {
-      fr.Open(fs, "binary/road");
-	} catch (...) {
-      // not there, so skip
-      return ;
-	}
-   // First packet version
-   int packet_version=fr.Unsigned16();
+	try {fr.Open(fs, "binary/road");} catch (...) {return;}
 
-   if (packet_version==CURRENT_PACKET_VERSION) {
+   const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       uint ser;
       while ((ser=fr.Unsigned32())!=0xffffffff) {
          // If this is already known, get it
@@ -66,11 +59,10 @@ throw (_wexception)
          road->init(egbase);
          ol->register_object(egbase, ser, road);
 		}
-      // DONE
-      return;
-	}
-   throw wexception("Unknown version %i in Widelands_Map_Road_Data_Packet!\n", packet_version);
-   assert(0);
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Road_Data_Packet!",
+			 packet_version);
 }
 
 
