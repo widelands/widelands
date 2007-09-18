@@ -53,7 +53,7 @@ m_tool(tool)
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
 
-   int check[] = {
+	int check[] = {
       0,                   // "green"
       TERRAIN_DRY,         // "dry"
       TERRAIN_DRY|TERRAIN_MOUNTAIN,   // "mountain"

@@ -259,8 +259,7 @@ void Trigger_Time_Option_Menu::clicked(int i) {
  * Update the Textareas
  */
 void Trigger_Time_Option_Menu::update() {
-   int i;
-   for (i=0; i<6; i++) {
+	for (size_t i = 0; i < 6; ++i) {
       std::string str;
       str.append(1, static_cast<char>(m_values[i]+0x30));
       m_textareas[i]->set_text(str);

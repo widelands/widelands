@@ -62,10 +62,10 @@ private:
       Event_Message_Box* m_event;
       Editor_Interactive* m_parent;
 
-      struct Button_Descr {
+	struct Button_Descr {
          std::string name;
          int trigger;
-		} m_buttons[MAX_BUTTONS];
+	} m_buttons[MAX_BUTTONS];
 
       UI::Checkbox* m_is_modal;
       UI::Edit_Box* m_caption;

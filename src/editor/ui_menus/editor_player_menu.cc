@@ -164,7 +164,7 @@ void Editor_Player_Menu::update() {
 		if (map.get_scenario_player_tribe(i + 1) != "<undefined>")
 			m_plr_set_tribes_buts[i]->set_title
 				(map.get_scenario_player_tribe(i + 1).c_str());
-      else {
+	   else {
          m_plr_set_tribes_buts[i]->set_title(m_tribes[0].c_str());
 			map.set_scenario_player_tribe(i + 1, m_tribes[0]);
 		}
