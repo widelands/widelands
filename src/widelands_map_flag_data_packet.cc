@@ -50,19 +50,12 @@ throw
       return;
 
    FileRead fr;
-   try {
-      fr.Open(fs, "binary/flag");
-	} catch (...) {
-      // Not found -> not saved
-      // so skip
-      return;
-	}
+	try {fr.Open(fs, "binary/flag");} catch (...) {return;}
 
    Map* map=egbase->get_map();
 
-   // First packet version
-   int packet_version=fr.Unsigned16();
-   if (packet_version==CURRENT_PACKET_VERSION) {
+	const uint16_t packet_version = fr.Unsigned16();
+	if (packet_version == CURRENT_PACKET_VERSION) {
       for (ushort y=0; y<map->get_height(); y++) {
          for (ushort x=0; x<map->get_width(); x++) {
             uchar exists=fr.Unsigned8();
@@ -90,12 +83,10 @@ throw
 			}
 
 		}
-      // DONE
-      return;
-	}
-   throw wexception("Unknown version %i in Widelands_Map_Flag_Data_Packet!\n", packet_version);
-
-   assert(0);
+	} else
+		throw wexception
+			("Unknown version %u in Widelands_Map_Flag_Data_Packet!",
+			 packet_version);
 }
 
 
