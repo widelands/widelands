@@ -39,8 +39,8 @@ std::string Campaign_visiblity_save::get_path()
 		g_fs->EnsureDirectoryExists(savepath);
 	} else {
 		// If the user has NO homedirectory (singleusers-system) but can
-		// start widelands,(s)he/it hopefully has write-access to the
-		// widelands-directory, so we keep the path at [widelands]/ssave.
+		// start Widelands, (s)he/it hopefully has write-access to the
+		// Widelands-directory, so we keep the path at [widelands]/ssave.
 	}
 #else
 	// Until now, Widelands doesn't use home directories of the users under
