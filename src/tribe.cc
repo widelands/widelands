@@ -240,7 +240,7 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 				const std::vector<char*> & enhancements =
 					considered_building_descr.enhances_to();
 				const std::vector<char *>::const_iterator enhancements_end =
-					enhancements_end;
+					enhancements.end();
 				for
 					(std::vector<char*>::const_iterator it = enhancements.begin();
 					 it != enhancements_end;
