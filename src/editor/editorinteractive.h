@@ -121,10 +121,10 @@ private:
 
       // State variables
       bool m_need_save;
-      struct Player_References {
+	struct Player_References {
          int player;
          const void *object;
-		};
+	};
       std::vector<Player_References> m_player_tribe_references;
       bool m_ctrl_down;
 
