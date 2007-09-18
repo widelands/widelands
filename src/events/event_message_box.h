@@ -70,18 +70,18 @@ struct Event_Message_Box : public Event, public TriggerReferencer {
       void set_nr_buttons(int i);
 	int get_nr_buttons() const {return m_buttons.size();}
 
-      enum {
+	enum {
          Right = 0,
          Left,
          Center_under,
          Center_over,
-		};
+	};
 
 private:
-      struct Button_Descr {
+	struct Button_Descr {
          std::string name;
          Trigger_Null *trigger;
-		};
+	};
 
       std::string m_text;
       std::string m_window_title;
