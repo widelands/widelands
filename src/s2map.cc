@@ -80,9 +80,8 @@ int S2_Map_Loader::preload_map(bool scenario) {
 
    load_s2mf_header();
 
-   if (!World::exists_world(m_map->get_world_name())) {
-      throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
-	}
+	if (not World::exists_world(m_map->get_world_name()))
+		throw wexception("%s: World doesn't exist!", m_map->get_world_name());
 
 	if (scenario) {
       // Load this as scenario.
@@ -90,7 +89,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
       // set the tribes and some default names
 
       // Just for fun: some roman names
-      const char* names[] = {
+		const char * const names[] = {
          "Marius",
          "Avitus",
          "Silvanus",
