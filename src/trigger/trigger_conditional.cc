@@ -127,7 +127,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_postfix(EventChain* 
 			stk.push_back(new TriggerConditional_Const(&trigger));
 		}
 			break;
-		default: assert(0);
+		default: assert(false);
 		}
 	assert(stk.size() == 1);
    return stk.back();
