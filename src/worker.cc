@@ -1212,9 +1212,13 @@ void Worker::transfer_update(Game* g, State* state)
 			      road->get_serial(), nextstep->get_serial(), index);
 
 			if (index >= 0) {
-				if (start_task_movepath(g->map(), path, index,
-					  descr().get_right_walk_anims(does_carry_ware()))) {
-
+				if
+					(start_task_movepath
+					 (g->map(),
+					  path,
+					  index,
+					  descr().get_right_walk_anims(does_carry_ware())))
+				{
 					molog("[transfer]: from road %u to flag %u nextstep %u\n",
 					      get_serial(), road->get_serial(),
 					      nextstep->get_serial());
