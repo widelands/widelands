@@ -208,12 +208,11 @@ void MilitarySite::set_economy(Economy* e)
    // TODO: SoldiersQueue migration
    ProductionSite::set_economy(e);
 
-   if (e) {
+	if (e)
       for (uint i = 0; i < m_soldier_requests.size(); i++) {
          if (m_soldier_requests[i])
             m_soldier_requests[i]->set_economy(e);
 		}
-	}
 }
 
 /**
