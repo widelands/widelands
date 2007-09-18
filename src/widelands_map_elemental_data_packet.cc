@@ -47,10 +47,8 @@ throw(_wexception)
    prof.read("elemental", 0, fs);
    Section* s = prof.get_section("global");
 
-   // check packet version
-   int packet_version=s->get_int("packet_version");
-
-   if (packet_version == CURRENT_PACKET_VERSION) {
+	const int packet_version = s->get_int("packet_version");
+	if (packet_version == CURRENT_PACKET_VERSION) {
       map->m_width= s->get_int("map_w");
       map->m_height= s->get_int("map_h");
       map->set_nrplayers(s->get_int("nr_players"));
@@ -73,9 +71,10 @@ throw(_wexception)
     // Release maps textdomain
     i18n::release_textdomain();
 
-       return;
-	}
-   assert(0); // should never be here
+	} else
+		throw wexception
+			("Map Elemental Data with unknown/unhandled version %i in map!",
+			 packet_version);
 }
 
 
