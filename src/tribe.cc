@@ -155,7 +155,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       s = prof.get_safe_section("startwares");
 	   Section::Value* value;
 
-      while ((value=s->get_next_val(0))) {
+		while ((value = s->get_next_val(0))) {
          if (not m_wares.exists(value->get_name()))
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
@@ -165,7 +165,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
       // default workers
       s = prof.get_safe_section("startworkers");
-      while ((value=s->get_next_val(0))) {
+		while ((value = s->get_next_val(0))) {
          if (!strcmp(value->get_name(), "soldier")) continue; // Ignore soldiers here
          if (not m_workers.exists(value->get_name()))
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
@@ -176,13 +176,12 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
       // default soldiers
       s = prof.get_safe_section("startsoldiers");
-      while ((value=s->get_next_val(0))) {
+		while ((value = s->get_next_val(0))) {
          // NOTE: no check here, since we do not know about max levels and so on
          std::string soldier=value->get_name();
          m_startsoldiers[soldier]=value->get_int();
 		}
-	}
-   catch (std::exception &e) {
+	} catch (const std::exception & e) {
       throw wexception("%s: %s", fname, e.what());
 	}
 }
@@ -240,9 +239,13 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 			{  //  Enhancements from the considered building
 				const std::vector<char*> & enhancements =
 					considered_building_descr.enhances_to();
+				const std::vector<char *>::const_iterator enhancements_end =
+					enhancements_end;
 				for
 					(std::vector<char*>::const_iterator it = enhancements.begin();
-					 it != enhancements.end(); ++it) {
+					 it != enhancements_end;
+					 ++it)
+				{
 					const int index = m_buildings.get_index(*it);
 					if (index < 0) {
 						log
@@ -259,16 +262,20 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 			{
 				//  Merge collected info.
 				const Workarea_Info & ci = considered_building_descr.m_workarea_info;
+				const Workarea_Info::const_iterator ci_end = ci.end();
 				for
-					(Workarea_Info::const_iterator it = ci.begin(); it != ci.end(); ++it)
-					{
+					(Workarea_Info::const_iterator it = ci.begin();
+					 it != ci_end;
+					 ++it)
+				{
 					const int radius = it->first;
 					const std::set<std::string> & descriptions = it->second;
 					for
-						(std::set<std::string>::const_iterator di = descriptions.begin();
-						 di != descriptions.end(); ++di) {
+						(std::set<std::string>::const_iterator di =
+						 descriptions.begin();
+						 di != descriptions.end();
+						 ++di)
 						collected_info[radius].insert(*di);
-					}
 				}
 			}
 		}
@@ -530,7 +537,7 @@ Find the best matching indicator for the given amount.
 uint Tribe_Descr::get_resource_indicator
 (const Resource_Descr * const res, const uint amount) const
 {
-   if (!res || !amount) {
+	if (not res or not amount) {
       int idx=get_immovable_index("resi_none");
       if (idx==-1)
 	      throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", name().c_str());
@@ -541,7 +548,7 @@ uint Tribe_Descr::get_resource_indicator
 
    int i=1;
    int num_indicators=0;
-   while (true) {
+	for (;;) {
       sprintf(buffer, "resi_%s%i", res->name().c_str(), i);
       if (get_immovable_index(buffer)==-1)
          break;

@@ -48,10 +48,10 @@ buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
 struct Tribe_Descr {
-      enum {
+	enum {
          OK = 0,
          ERR_WRONGVERSION
-		};
+	};
 
 	Tribe_Descr(const std::string & tribename, const World &);
 
