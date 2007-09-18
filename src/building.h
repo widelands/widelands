@@ -145,7 +145,7 @@ public:
 	};
 
 public:
-   enum Type {
+	enum Type {
       PRODUCTIONSITE=0,
       CONSTRUCTIONSITE,
       MILITARYSITE,
