@@ -113,20 +113,18 @@ m_parent(&parent)
 
    posx = spacing;
    int button_size = (get_inner_w()- (spacing* (plr_in_game+1))) / plr_in_game;
-	for (uint i = 1; i <= nr_players; ++i) {
-      m_cbs[i] = 0;
-		if (not game.get_player(i)) continue;
-
-      char buffer[1024];
-      sprintf(buffer, "pics/genstats_enable_plr_%02i.png", i);
+	iterate_players_existing_const(p, nr_players, game, player) {
+		char buffer[36];
+		snprintf(buffer, sizeof(buffer), "pics/genstats_enable_plr_%02u.png", p);
       UI::Checkbox* cb = new UI::Checkbox(this, posx, posy, g_gr->get_picture(PicMod_Game,  buffer));
       cb->set_size(button_size, 25);
-      cb->set_id(i);
+		cb->set_id(p);
       cb->set_state(1);
       cb->changedtoid.set(this, &General_Statistics_Menu::cb_changed_to);
-      m_cbs[i-1] = cb;
+		m_cbs[p - 1] = cb;
       posx+= button_size + spacing;
-	}
+	} else //  player nr p does not exist
+		m_cbs[p - 1] = 0;
 
    posx = spacing;
    posy += 25+spacing+spacing;
