@@ -21,6 +21,7 @@
 #define __S__EVENTCHAIN_MANAGER_H
 
 #include <cassert>
+#include <string>
 
 class Event;
 class EventChain;
@@ -51,7 +52,7 @@ struct MapEventChainManager {
        * Get a eventchain
        */
 	EventChain * get_eventchain(const char * const name) const;
-      void delete_eventchain(const char* name);
+	void delete_eventchain(const std::string & name);
 
 	typedef std::vector<EventChain *> eventchain_vector;
 	typedef eventchain_vector::size_type Index;

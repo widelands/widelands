@@ -33,7 +33,7 @@ MapObjectiveManager::~MapObjectiveManager() {
 
 bool MapObjectiveManager::register_new_objective(MapObjective* mv) {
    // check if this objective is already known
-   if (get_objective(mv->get_name()))
+	if (get_objective(mv->name().c_str()))
          return 0;
 
    m_objectives.push_back(mv);
@@ -46,7 +46,7 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
    uint i;
    MapObjective* retval = 0;
    for (i = 0; i < m_objectives.size(); i++) {
-      if (!strcmp(m_objectives[i]->get_name(), name)) {
+      if (!strcmp(m_objectives[i]->name().c_str(), name)) {
          retval = m_objectives[i];
          break;
 		}
@@ -56,9 +56,9 @@ MapObjective* MapObjectiveManager::get_objective(const char * const name) const
 }
 
 
-void MapObjectiveManager::delete_objective(const char* name) {
+void MapObjectiveManager::delete_objective(const std::string & name) {
    for (uint i = 0; i < m_objectives.size(); i++) {
-      if (!strcmp(m_objectives[i]->get_name(), name)) {
+      if (m_objectives[i]->name() == name) {
          delete m_objectives[i];
          m_objectives[i] = m_objectives[m_objectives.size() - 1];
          m_objectives.resize(m_objectives.size() - 1);

@@ -381,7 +381,7 @@ void Map::cleanup() {
 	{
 		MapEventChainManager & mecm = *m_mecm;
 		while (mecm.get_nr_eventchains())
-			mecm.delete_eventchain(mecm.get_eventchain_by_nr(0).get_name());
+			mecm.delete_eventchain(mecm.get_eventchain_by_nr(0).name());
 	}
 	m_mem->delete_unreferenced_events();
 	m_mtm->delete_unreferenced_triggers();

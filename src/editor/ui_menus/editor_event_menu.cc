@@ -234,7 +234,7 @@ void Editor_Event_Menu::update() {
 			mecm.get_nr_eventchains();
 		for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
 			EventChain* evc = &mecm.get_eventchain_by_nr(i);
-			m_eventchain_list->add(evc->get_name(), evc);
+			m_eventchain_list->add(evc->name().c_str(), evc);
 		}
 	}
 
@@ -281,7 +281,7 @@ void Editor_Event_Menu::clicked_del_event() {
 			 event_referencers.begin();
 			 it != event_referencers_end;
 			 ++it)
-			s << it->first->get_type() << ':' << it->first->get_name() << '\n';
+			s << it->first->get_type() << ':' << it->first->name().c_str() << '\n';
 		UI::Modal_Message_Box mmb
 			(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
 		mmb.run();
@@ -326,7 +326,7 @@ void Editor_Event_Menu::clicked_del_trigger() {
 			 trigger_referencers.begin();
 			 it != trigger_referencers_end;
 			 ++it)
-			s << it->first->get_type() << ':' << it->first->get_name() << '\n';
+			s << it->first->get_type() << ':' << it->first->name().c_str() << '\n';
 		UI::Modal_Message_Box messagebox
 			(m_parent, _("Error!"), s.str(), UI::Modal_Message_Box::OK);
 		messagebox.run();
@@ -375,7 +375,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
 void Editor_Event_Menu::clicked_del_eventchain() {
 	m_parent->egbase().map().get_mecm().delete_eventchain
-		(m_eventchain_list->get_selected()->get_name());
+		(m_eventchain_list->get_selected()->name());
 	m_eventchain_list->remove_selected();
       m_btn_del_eventchain->set_enabled(false);
       m_btn_edit_eventchain->set_enabled(false);

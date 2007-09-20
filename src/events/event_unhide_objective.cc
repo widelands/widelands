@@ -75,7 +75,7 @@ void Event_Unhide_Objective::Write(Section & s, const Editor_Game_Base &) const
 {
    assert(m_objective);
 	s.set_int   ("version",  EVENT_VERSION);
-	s.set_string("objective", m_objective->get_name());
+	s.set_string("objective", m_objective->name().c_str());
 	s.set_bool  ("dounhide",  get_dounhide());
 }
 

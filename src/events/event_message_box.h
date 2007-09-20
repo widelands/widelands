@@ -23,7 +23,6 @@
 #include "event.h"
 #include "trigger/trigger_referencer.h"
 
-#include <string>
 #include <vector>
 
 class Trigger_Null;
@@ -39,7 +38,7 @@ struct Event_Message_Box : public Event, public TriggerReferencer {
 
       // For trigger referenecer
 	const char * get_type() const {return "Event:MessageBox";}
-	const char * get_name() const {return Event::name().c_str();}
+	const std::string & name() const {return Event::name();}
 
       // one liner functions
 	const char * get_id() const {return "message_box";}

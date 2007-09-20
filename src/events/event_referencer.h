@@ -20,6 +20,8 @@
 #ifndef __S__EVENT_REFERENCER_H
 #define __S__EVENT_REFERENCER_H
 
+#include <string>
+
 struct Event;
 
 /*
@@ -28,7 +30,7 @@ struct Event;
 struct EventReferencer {
       virtual ~EventReferencer() {}
 	virtual const char * get_type() const = 0;
-	virtual const char * get_name() const = 0;
+	virtual const std::string & name() const throw () = 0;
 
       void reference_event(Event*);
       void unreference_event(Event*);

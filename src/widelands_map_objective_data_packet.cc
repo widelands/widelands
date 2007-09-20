@@ -62,11 +62,7 @@ throw (_wexception)
 
          const char* trigname = s->get_safe_string("trigger");
 			if (Trigger * const trig = mtm.get_trigger(trigname))
-				if (Trigger_Null * const tn = dynamic_cast<Trigger_Null *>(trig))
-					o->set_trigger(tn);
-				else
-					throw wexception
-						("Trigger referenced is not Trigger_Null: %s", trigname);
+				o->set_trigger(trig);
 			else
 				throw wexception
 					("Unknown trigger referenced in Objective: %s", trigname);
@@ -99,8 +95,8 @@ throw (_wexception)
 		mom.get_nr_objectives();
 	for (MapObjectiveManager::Index i = 0; i < nr_objectives; ++i) {
 		const MapObjective & o = mom.get_objective_by_nr(i);
-		Section & s = *prof.create_section(o.get_name());
-		s.set_string("descr",    o.get_descr());
+		Section & s = *prof.create_section(o.name().c_str());
+		s.set_string("descr",    o.descr().c_str());
 		s.set_bool  ("visible",  o.get_is_visible());
 		s.set_bool  ("optional", o.get_is_optional());
 		s.set_string("trigger",  o.get_trigger()->get_name());

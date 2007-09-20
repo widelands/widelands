@@ -21,32 +21,28 @@
 #define __S__OBJECTIVE_MANAGER_H
 
 #include "i18n.h"
-#include "trigger/trigger_null.h"
+#include "trigger/trigger.h"
 #include "trigger/trigger_referencer.h"
 
 #include <cassert>
 #include <string>
 
-/*
- * The Map Objective manager keeps all objectives
- * in Order.
- *
- * A Map (or scenario) objective is a objectives that has to be
- * fullfilled to end a scenario successfull.
- * Optional objectives are available, which usually do not need to be fullfilled.
- * Each objectives has a NULL trigger assigned to it, which is used to check
- * the objectives condition.
- * But note, the objectives itself doesn't check it's conditions,
- * the map designer is responsible of checking it and setting it's trigger up.
- *
- * Usually, the win trigger is only set, when all of the objectives triggers are
- * going up.
- *
- * Also note, that each game has objectives. These might be in a network game
- * something like "Crush you enemy" or "Have the most points at the end of the game".
- * Depending on choosen game type.
- */
-
+/// The Map Objective manager keeps all objectives in order.
+///
+/// A Map (or scenario) objective is a objectives that has to be fulfilled to
+/// end a scenario successfully. Optional objectives are available, which
+/// usually do not need to be fulfilled.
+/// Each objectives has a trigger assigned to it, which is used to check the
+/// objective's condition.
+/// But note, the objectives itself doesn't check it's conditions, the map
+/// designer is responsible for checking it and setting it's trigger up.
+///
+/// Usually, the win trigger is only set, when all of the objectives triggers
+/// are going up.
+///
+/// Also note, that each game has objectives. These might be in a network game
+/// something like "Crush you enemy" or "Have the most points at the end of the
+/// game". Depending on choosen game type.
 struct MapObjective : public TriggerReferencer {
 	MapObjective()
 		:
@@ -58,23 +54,23 @@ struct MapObjective : public TriggerReferencer {
 	virtual ~MapObjective() {if (m_trigger) unreference_trigger(m_trigger);}
 
 
-	const char * get_name() const {return m_name.c_str();}
-      inline void set_name(const char* name) {m_name = name;}
-	const char * get_descr() const {return m_descr.c_str();}
-      inline void set_descr(const char* descr) {m_descr = descr;}
-	bool get_is_visible() const {return m_is_visible;}
-      inline void set_is_visible(bool t) {m_is_visible = t;}
-	bool get_is_optional() const {return m_is_optional;}
+	const std::string & name()  const throw ()    {return m_name;}
+	void set_name(const std::string & new_name)   {m_name = new_name;}
+	const std::string & descr() const throw ()    {return m_descr;}
+	void set_descr(const std::string & new_descr) {m_descr = new_descr;}
+	bool get_is_visible()       const throw ()    {return m_is_visible;}
+	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
+	bool get_is_optional()      const throw ()    {return m_is_optional;}
 
       // For trigger referncer
 	const char * get_type() const {return "Map Objective";}
 
       // Get the trigger that is attached to this
       // Trigger is created by Editor or on load
-	Trigger_Null * get_trigger() const {return m_trigger;}
+	Trigger * get_trigger() const {return m_trigger;}
 
       // Setting the values below is only a good idea in editor
-	void set_trigger(Trigger_Null * const tr) {
+	void set_trigger(Trigger * const tr) {
          assert(!m_trigger);
          if (tr)
             reference_trigger(tr);
@@ -83,11 +79,11 @@ struct MapObjective : public TriggerReferencer {
 	void set_is_optional(const bool t) {m_is_optional = t;}
 
 private:
-      std::string   m_name;
-      std::string   m_descr;
-      Trigger_Null*  m_trigger;
-      bool           m_is_visible;
-      bool           m_is_optional;
+	std::string m_name;
+	std::string m_descr;
+	Trigger *   m_trigger;
+	bool        m_is_visible;
+	bool        m_is_optional;
 };
 
 /*
@@ -110,7 +106,7 @@ struct MapObjectiveManager {
        * Get a objective
        */
 	MapObjective * get_objective(const char * const name) const;
-      void delete_objective(const char* name);
+	void delete_objective(const std::string & name);
 
 	typedef std::vector<MapObjective *> objective_vector;
 	typedef objective_vector::size_type Index;

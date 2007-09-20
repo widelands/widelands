@@ -57,9 +57,9 @@ struct EventChain : public EventReferencer, public TriggerReferencer {
 		}
       virtual ~EventChain() {}
 
-	const char * get_name() const {return m_name.c_str();}
+	const std::string & name() const throw () {return m_name;}
 	const char * get_type() const {return "EventChain";}
-      inline void set_name(const char* name) {m_name = name;}
+	void set_name(const std::string & new_name) {m_name = new_name;}
       inline bool get_repeating() {return m_repeating;}
       inline TriggerConditional* get_trigcond() {return m_trigconditional;}
       inline void set_trigcond(TriggerConditional* t) {m_trigconditional = t;}

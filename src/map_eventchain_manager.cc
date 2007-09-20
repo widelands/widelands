@@ -36,7 +36,7 @@ MapEventChainManager::~MapEventChainManager() {
 
 bool MapEventChainManager::register_new_eventchain(EventChain* mv) {
    // check if this eventchain is already known
-   if (get_eventchain(mv->get_name()))
+	if (get_eventchain(mv->name().c_str()))
          return 0;
 
    m_eventchains.push_back(mv);
@@ -51,7 +51,7 @@ EventChain* MapEventChainManager::get_eventchain(const char * const name) const
    uint i;
    EventChain* retval = 0;
    for (i = 0; i < m_eventchains.size(); i++) {
-      if (!strcmp(m_eventchains[i]->get_name(), name)) {
+      if (!strcmp(m_eventchains[i]->name().c_str(), name)) {
          retval = m_eventchains[i];
          break;
 		}
@@ -63,9 +63,9 @@ EventChain* MapEventChainManager::get_eventchain(const char * const name) const
 /*
  * Remove a eventchain
  */
-void MapEventChainManager::delete_eventchain(const char* name) {
+void MapEventChainManager::delete_eventchain(const std::string & name) {
    for (uint i = 0; i < m_eventchains.size(); i++) {
-      if (!strcmp(m_eventchains[i]->get_name(), name)) {
+      if (m_eventchains[i]->name() == name) {
          assert(m_eventchains[i]->get_trigcond());
          m_eventchains[i]->get_trigcond()->unreference_triggers(m_eventchains[i]);
          m_eventchains[i]->clear_events();

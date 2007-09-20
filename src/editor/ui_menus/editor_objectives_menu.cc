@@ -78,7 +78,7 @@ m_te      (te)
    // What type
    new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
    m_name = new UI::Edit_Box(this, 120, 5, 120, 20, 0, 0);
-	m_name->set_text(obj.get_name());
+	m_name->set_text(obj.name().c_str());
    posy += 20 + spacing;
 
    new UI::Textarea(this, 5, posy, 120, STATEBOX_HEIGHT, _("Visible at Begin: "), Align_CenterLeft);
@@ -99,7 +99,7 @@ m_te      (te)
 	m_descr = new UI::Multiline_Editbox
 		(this,
 		 5, posy, get_inner_w() - 2 * spacing, editbox_height,
-		 obj.get_descr());
+		 obj.descr().c_str());
    posy+= editbox_height + spacing + spacing;
 
 	new UI::Button<Edit_Objective_Window>
@@ -147,7 +147,7 @@ void Edit_Objective_Window::clicked_ok() {
 	obj.set_is_optional(m_optional->get_state());
 	obj.set_is_visible(m_visible->get_state());
 	obj.set_descr(m_descr->get_text().c_str());
-	m_te.set_string(0, obj.get_name());
+	m_te.set_string(0, obj.name());
 	m_te.set_string(1, obj.get_is_optional() ? "Yes" : "No");
 	m_te.set_string(2, obj.get_is_visible() ? "Yes" : "No");
 
@@ -287,7 +287,7 @@ void Editor_Objectives_Menu::clicked_del() {
 		while (i != obj.get_trigger()->get_referencers().end()) {
                str += i->first->get_type();
                str += ":";
-               str += i->first->get_name();
+               str += i->first->name();
                str += " ";
 				}
 		UI::Modal_Message_Box mmb
@@ -298,7 +298,7 @@ void Editor_Objectives_Menu::clicked_del() {
 
 	Map & map = m_parent->egbase().map();
 	map.get_mtm().delete_trigger(obj.get_trigger()->get_name());
-	map.get_mom().delete_objective(obj.get_name());
+	map.get_mom().delete_objective(obj.name().c_str());
 	m_table.remove_selected();
 
          m_edit_button->set_enabled(false);
@@ -328,7 +328,7 @@ void Editor_Objectives_Menu::table_dblclicked(uint) {clicked_edit();}
 void Editor_Objectives_Menu::insert_objective(MapObjective & var) {
 	UI::Table<MapObjective &>::Entry_Record & t = m_table.add(var, -1, true);
 
-	t.set_string(0, var.get_name());
+	t.set_string(0, var.name());
 	t.set_string(1, var.get_is_optional() ? "Yes" : "No");
 	t.set_string(2, var.get_is_visible() ? "Yes" : "No");
 

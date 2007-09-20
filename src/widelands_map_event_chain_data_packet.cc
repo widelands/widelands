@@ -162,7 +162,7 @@ throw (_wexception)
 		mecm.get_nr_eventchains();
 	for (MapEventChainManager::Index i = 0; i < nr_eventchains; ++i) {
 		const EventChain & e = mecm.get_eventchain_by_nr(i);
-		Section & s = *prof.create_section(e.get_name());
+		Section & s = *prof.create_section(e.name().c_str());
 		s.set_bool("repeating", e.m_repeating);
 		std::vector< TriggerConditional_Factory::Token >* toklist =
 			e.m_trigconditional->get_infix_tokenlist();

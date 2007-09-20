@@ -129,7 +129,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 	}
 
 	if (evchain.get_state() == EventChain::DONE) {
-		mecm.delete_eventchain(evchain.get_name());
+		mecm.delete_eventchain(evchain.name());
 		nr_eventchains = mecm.get_nr_eventchains();
 		map.get_mem().delete_unreferenced_events();
 		map.get_mtm().delete_unreferenced_triggers();
