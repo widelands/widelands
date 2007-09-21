@@ -25,6 +25,7 @@
 #include <exception>
 #include <limits>
 #include <cassert>
+#include <stdint.h>
 #include <string>
 
 struct FileSystem;
@@ -111,7 +112,7 @@ struct FileRead {
 	 */
 	bool ReadLine(char *buf, const char * const buf_end);
 
-	void * Data(const uint bytes, const Pos pos = NoPos()) {
+	void * Data(const uint32_t bytes, const Pos pos = NoPos()) {
 			assert(data);
 
 			Pos i = pos;

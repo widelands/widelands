@@ -161,11 +161,11 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base * game, bool) {
  * failed.
  * If successful, you must free the returned pointer.
  */
-uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
+uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
 {
-   ushort dw, dh;
+   uint16_t dw, dh;
    char buffer[256];
-   ushort one;
+   uint16_t one;
    long size;
 
    memcpy(buffer, file->Data(6), 6);
@@ -194,12 +194,12 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
       return 0;
 	}
 
-   uchar *section = (uchar *)malloc(dw * dh);
+   uint8_t *section = (uint8_t *)malloc(dw * dh);
 
 	try {
 		int y = 0;
 		for (; y < height; ++y) {
-			uchar *ptr = (uchar*)file->Data(width);
+			uint8_t *ptr = (uint8_t*)file->Data(width);
 			memcpy(section + y*width, ptr, width);
 			file->Data(dw - width); //  skip the alignment junk
 		}
@@ -262,11 +262,11 @@ void S2_Map_Loader::load_s2mf_header()
  */
 void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 {
-   uchar *section = 0;
-	uchar *bobs = 0;
-	uchar *buildings = 0;
+   uint8_t *section = 0;
+	uint8_t *bobs = 0;
+	uint8_t *buildings = 0;
 
-	uchar *pc;
+	uint8_t *pc;
 
 	try
 	{
@@ -436,7 +436,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			throw wexception("Section 6 (Ways) not found");
 
 		for (Y_Coordinate y = 0; y < mapheight; ++y) {
-			uint i = y * mapwidth;
+			uint32_t i = y * mapwidth;
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				// ignore everything but HQs
 				if (section[i]==0x80) {
@@ -464,7 +464,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			throw wexception("Section 7 (Animals) not found");
 
 		for (Y_Coordinate y = 0; y < mapheight; ++y) {
-			uint i = y * mapwidth;
+			uint32_t i = y * mapwidth;
 			for (X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				const char *bobname = 0;
 
@@ -488,7 +488,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					int idx = m_map->m_world->get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
-					for (uint z=0; z<CRITTER_PER_DEFINITION; z++)
+					for (uint32_t z=0; z<CRITTER_PER_DEFINITION; z++)
 						game->create_bob(Coords(x, y), idx);
 				}
 			}
@@ -580,7 +580,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				default:   res = "";       amount = 0;
 				}
 
-            uchar nres=0;
+            uint8_t nres=0;
             if (res!="") {
                nres=m_map->get_world()->get_resource(res.c_str());
                if (static_cast<signed char>(nres)==-1)
@@ -632,7 +632,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
           Map is completely read into memory.
           Now try to convert the last stuff to Widelands-format
         */
-		uchar c;
+		uint8_t c;
 		for (Y_Coordinate y = 0; y < mapheight; ++y)
 			for (X_Coordinate x = 0; x < mapwidth; ++x) {
 				const char *bobname = 0;
@@ -749,7 +749,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				case BOB_BUSH5:            bobname = "bush5";     break;
 
 				default:
-					cerr << "Unknown bob " << static_cast<uint>(c) << endl;
+					cerr << "Unknown bob " << static_cast<uint32_t>(c) << endl;
 					break;
 				}
 

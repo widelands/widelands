@@ -22,6 +22,7 @@
 
 #include "warelist.h"
 
+#include <stdint.h>
 #include "ui_textarea.h"
 
 #include <vector>
@@ -61,8 +62,8 @@ protected:
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_ware
 		(RenderTarget &, const Point,
-		 const uint id,
-		 const uint stock,
+		 const uint32_t id,
+		 const uint32_t stock,
 		 const bool worker);
 
 private:

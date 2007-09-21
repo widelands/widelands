@@ -35,7 +35,7 @@ void Journal::write(char v)
 }
 
 /// \overload
-void Journal::write(unsigned char v)
+void Journal::write(uint8_t v)
 {
 	m_recordstream.write((char*)&v, sizeof(v));
 }
@@ -112,9 +112,9 @@ void Journal::read(char &v)
 /**
  * \overload
  */
-void Journal::read(unsigned char &v)
+void Journal::read(uint8_t &v)
 {
-	m_playbackstream.read((char*)&v, sizeof(unsigned char));
+	m_playbackstream.read((char*)&v, sizeof(uint8_t));
 }
 
 /**
@@ -186,9 +186,9 @@ void Journal::read(SDLMod &v)
 /**
  * \todo Document me
  */
-void Journal::ensure_code(unsigned char code)
+void Journal::ensure_code(uint8_t code)
 {
-	unsigned char filecode;
+	uint8_t filecode;
 
 	read(filecode);
 	if (filecode != code) {
@@ -335,24 +335,24 @@ void Journal::record_event(SDL_Event *e)
 		//completely unneccessary overhad.
 		switch (e->type) {
 		case SDL_KEYDOWN:
-			write((unsigned char)RFC_EVENT);
-			write((unsigned char)RFC_KEYDOWN);
+			write((uint8_t)RFC_EVENT);
+			write((uint8_t)RFC_KEYDOWN);
 			write(e->key.keysym.mod);
 			write(e->key.keysym.sym);
 			write(e->key.keysym.unicode);
 			m_recordstream<<std::flush;
 			break;
 		case SDL_KEYUP:
-			write((unsigned char)RFC_EVENT);
-			write((unsigned char)RFC_KEYUP);
+			write((uint8_t)RFC_EVENT);
+			write((uint8_t)RFC_KEYUP);
 			write(e->key.keysym.mod);
 			write(e->key.keysym.sym);
 			write(e->key.keysym.unicode);
 			m_recordstream<<std::flush;
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			write((unsigned char)RFC_EVENT);
-			write((unsigned char)RFC_MOUSEBUTTONDOWN);
+			write((uint8_t)RFC_EVENT);
+			write((uint8_t)RFC_MOUSEBUTTONDOWN);
 			write(e->button.button);
 			write(e->button.x);
 			write(e->button.y);
@@ -360,8 +360,8 @@ void Journal::record_event(SDL_Event *e)
 			m_recordstream<<std::flush;
 			break;
 		case SDL_MOUSEBUTTONUP:
-			write((unsigned char)RFC_EVENT);
-			write((unsigned char)RFC_MOUSEBUTTONUP);
+			write((uint8_t)RFC_EVENT);
+			write((uint8_t)RFC_MOUSEBUTTONUP);
 			write(e->button.button);
 			write(e->button.x);
 			write(e->button.y);
@@ -369,8 +369,8 @@ void Journal::record_event(SDL_Event *e)
 			m_recordstream<<std::flush;
 			break;
 		case SDL_MOUSEMOTION:
-			write((unsigned char)RFC_EVENT);
-			write((unsigned char)RFC_MOUSEMOTION);
+			write((uint8_t)RFC_EVENT);
+			write((uint8_t)RFC_MOUSEMOTION);
 			write(e->motion.state);
 			write(e->motion.x);
 			write(e->motion.y);
@@ -379,8 +379,8 @@ void Journal::record_event(SDL_Event *e)
 			m_recordstream<<std::flush;
 			break;
 		case SDL_QUIT:
-			write((unsigned char)RFC_EVENT);
-			write((unsigned char)RFC_QUIT);
+			write((uint8_t)RFC_EVENT);
+			write((uint8_t)RFC_QUIT);
 			m_recordstream<<std::flush;
 			break;
 		default:
@@ -406,7 +406,7 @@ void Journal::record_event(SDL_Event *e)
  */
 bool Journal::read_event(SDL_Event *e)
 {
-	unsigned char recordtype, eventtype;
+	uint8_t recordtype, eventtype;
 	bool haveevent=false;
 
 	if (!m_playback)
@@ -491,12 +491,12 @@ bool Journal::read_event(SDL_Event *e)
 void Journal::timestamp_handler(Uint32 *stamp)
 {
 	if (m_record) {
-		write((unsigned char)RFC_GETTIME);
+		write((uint8_t)RFC_GETTIME);
 		write(*stamp);
 	}
 
 	if (m_playback) {
-		ensure_code((unsigned char)RFC_GETTIME);
+		ensure_code((uint8_t)RFC_GETTIME);
 		read(*stamp);
 	}
 }
@@ -506,5 +506,5 @@ void Journal::timestamp_handler(Uint32 *stamp)
  */
 void Journal::set_idle_mark()
 {
-	write((unsigned char)RFC_ENDEVENTS);
+	write((uint8_t)RFC_ENDEVENTS);
 }

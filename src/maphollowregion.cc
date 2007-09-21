@@ -43,8 +43,8 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
 		map.get_rn(m_hollow_area, &m_hollow_area);
 		if ((m_phase & (Upper|Lower)) and m_rowpos == m_delta_radius) {
 			//  Jump over the hole.
-			const unsigned int holewidth = m_rowwidth - 2 * m_delta_radius;
-			for (unsigned int i = 0; i < holewidth; ++i)
+			const uint32_t holewidth = m_rowwidth - 2 * m_delta_radius;
+			for (uint32_t i = 0; i < holewidth; ++i)
 				map.get_rn(m_hollow_area, &m_hollow_area);
 			m_rowpos += holewidth;
 		}

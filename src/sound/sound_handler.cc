@@ -100,9 +100,9 @@ void Sound_Handler::init()
 	//than 4k, but other systems work fine with less, some crash
 	//with big buffers.
 #ifdef __WIN32__
-	const ushort bufsize = 4096;
+	const uint16_t bufsize = 4096;
 #else
-	const ushort bufsize = 1024;
+	const uint16_t bufsize = 1024;
 #endif
 
 	if
@@ -435,7 +435,7 @@ int Sound_Handler::stereo_position(const Coords position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-(const std::string fx_name, const int stereo_pos, const uint priority)
+(const std::string fx_name, const int stereo_pos, const uint32_t priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
@@ -462,10 +462,10 @@ bool Sound_Handler::play_or_not
 
 	//find out if an fx called fx_name is already running
 	bool already_running=false;
-	const std::map<uint, std::string>::const_iterator active_fx_end =
+	const std::map<uint32_t, std::string>::const_iterator active_fx_end =
 	   m_active_fx.end();
 	for
-	(std::map<uint, std::string>::const_iterator it = m_active_fx.begin();
+	(std::map<uint32_t, std::string>::const_iterator it = m_active_fx.begin();
 	      it != active_fx_end;
 	      ++it)
 	{
@@ -482,7 +482,7 @@ bool Sound_Handler::play_or_not
 	//TODO: high general frequency reduces weighted priority
 	//TODO: deal with "coupled" effects like throw_net and retrieve_net
 
-	uint ticks_since_last_play=SDL_GetTicks()-m_fxs[fx_name]->m_last_used;
+	uint32_t ticks_since_last_play=SDL_GetTicks()-m_fxs[fx_name]->m_last_used;
 
 	if (ticks_since_last_play>SLIDING_WINDOW_SIZE) { //reward an fx for being silent
 		evaluation=1; //arbitrary value; 0->no change, 1->probability=1
@@ -509,7 +509,7 @@ bool Sound_Handler::play_or_not
  *         (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(const std::string & fx_name, const Coords map_position, const uint priority)
+(const std::string & fx_name, const Coords map_position, const uint32_t priority)
 {play_fx(fx_name, stereo_position(map_position), priority);}
 
 /** \overload
@@ -520,7 +520,7 @@ void Sound_Handler::play_fx
  *                         played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-(const std::string fx_name, const int stereo_pos, const uint priority)
+(const std::string fx_name, const int stereo_pos, const uint32_t priority)
 {
 	assert(stereo_pos >= -1);
 	assert(stereo_pos <= 254);
@@ -770,13 +770,13 @@ void Sound_Handler::fx_finished_callback(int channel)
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
 	assert(channel>=0);
-	g_sound_handler.handle_channel_finished(static_cast<uint>(channel));
+	g_sound_handler.handle_channel_finished(static_cast<uint32_t>(channel));
 }
 
 /** Remove a finished sound fx from the list of currently playing ones
  * This is part of \ref fx_finished_callback
  */
-void Sound_Handler::handle_channel_finished(uint channel)
+void Sound_Handler::handle_channel_finished(uint32_t channel)
 {
 	m_active_fx.erase(channel);
 }

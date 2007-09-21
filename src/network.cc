@@ -180,9 +180,9 @@ NetGame::Chat_Message NetGame::get_chat_message ()
 // Return the maximum amount of time the game logic is allowed to advance.
 // After that, new player commands may be scheduled and must be taken
 // into account.
-uint NetGame::get_max_frametime ()
+uint32_t NetGame::get_max_frametime ()
 {
-	uint game_time=game->get_gametime();
+	uint32_t game_time=game->get_gametime();
 
 	assert (game_time<=net_game_time);
 
@@ -231,7 +231,7 @@ NetHost::~NetHost ()
 	if (svsock!=0)
 		SDLNet_TCP_Close (svsock);
 
-	for (unsigned int i=0;i<clients.size();i++)
+	for (uint32_t i=0;i<clients.size();i++)
 		SDLNet_TCP_Close (clients[i].sock);
 }
 
@@ -248,7 +248,7 @@ void NetHost::update_map ()
 	serializer->putstr (map?map->get_filename():"");
 	serializer->end_packet ();
 
-	for (unsigned int i=0;i<clients.size();i++)
+	for (uint32_t i=0;i<clients.size();i++)
 		serializer->send (clients[i].sock);
 
 	playerdescr[0]->set_player_type (Player::Local);
@@ -279,7 +279,7 @@ void NetHost::send_player_info ()
 	serializer->putchar (player_human);
 	serializer->end_packet ();
 
-	for (uint j=0;j<clients.size();j++)
+	for (uint32_t j=0;j<clients.size();j++)
 		serializer->send (clients[j].sock);
 }
 
@@ -303,7 +303,7 @@ void NetHost::begin_game ()
 	serializer->end_packet ();
 	log("[Host] Initiating pregame.\n");
 
-	for (unsigned int i=0;i<clients.size();i++)
+	for (uint32_t i=0;i<clients.size();i++)
 		serializer->send (clients[i].sock);
 
 	NetGame::begin_game ();
@@ -312,7 +312,7 @@ void NetHost::begin_game ()
 void NetHost::handle_network ()
 {
 	TCPsocket sock;
-	unsigned int i, j;
+	uint32_t i, j;
 
 	if (promoter!=0)
 	    promoter->run ();
@@ -436,7 +436,7 @@ void NetHost::handle_network ()
 					continue;
 				}
 
-				clients[i].lag=std::max((SDL_GetTicks() - last_ping_sent), (ulong)1);
+				clients[i].lag=std::max((SDL_GetTicks() - last_ping_sent), (uint32_t)1);
 				pongs_received++;
 
 				if (pongs_received==clients.size())
@@ -463,7 +463,7 @@ void NetHost::handle_network ()
 					log ("[Host] Chat received\n");
 					char buffer[256];
 					Chat_Message msg;
-					//uchar plrnum =  clients[i].deserializer->getchar();
+					//uint8_t plrnum =  clients[i].deserializer->getchar();
 
 					clients[i].deserializer->getstr (buffer, 256);
 
@@ -538,7 +538,7 @@ void NetHost::handle_network ()
 
 void NetHost::send_chat_message_int (const Chat_Message msg)
 {
-	unsigned int i;
+	uint32_t i;
 
 	log("[Host] Sending chat\n");
 	serializer->begin_packet ();
@@ -555,8 +555,8 @@ void NetHost::send_chat_message_int (const Chat_Message msg)
 
 void NetHost::update_network_delay ()
 {
-	ulong tmp[8];
-	unsigned int i;
+	uint32_t tmp[8];
+	uint32_t i;
 
 	for (i=7;i>0;i--)
 		net_delay_history[i]=net_delay_history[i-1];
@@ -585,7 +585,7 @@ void NetHost::update_network_delay ()
 
 	net_delay/=4;
 
-	log ("network delay is now %lums\n", net_delay);
+	log ("network delay is now %ims\n", net_delay);
 }
 
 void NetHost::send_player_command (PlayerCommand* cmd)
@@ -613,7 +613,7 @@ void NetHost::send_game_message (const char* msg)
 
 void NetHost::syncreport (const md5_checksum& newsync)
 {
-	unsigned int i;
+	uint32_t i;
 
 	log("[Host] got local sync report\n");
 
@@ -698,7 +698,7 @@ void NetClient::begin_game ()
 
 void NetClient::handle_network ()
 {
-	uint i;
+	uint32_t i;
 
 	// What does this do here? It probably doesn't belong here.
 	NetGGZ::ref()->data();
@@ -764,7 +764,7 @@ void NetClient::handle_network ()
 
 		case NETCMD_PREGAME_STATUS:
 			{
-				uchar ready=deserializer->getchar();
+				uint8_t ready=deserializer->getchar();
 				log("[Client] Pregame status received\n");
 				assert (phase==PH_PREGAME);
 				assert (statuswnd!=0);
@@ -820,7 +820,7 @@ void NetClient::handle_network ()
 		case NETCMD_CHATMESSAGE:
 			{
 				char buffer[256];
-				uchar player;
+				uint8_t player;
 				Chat_Message msg;
 
 				player=deserializer->getchar();
@@ -881,7 +881,7 @@ void NetClient::syncreport (const md5_checksum& sync)
 
 void NetClient::disconnect ()
 {
-	for (uint i = 1; i <= MAX_PLAYERS; ++i)
+	for (uint32_t i = 1; i <= MAX_PLAYERS; ++i)
 		if (const Player * const player = game->get_player(i))
 			 if (player->get_type() == Player::Remote) disconnect_player (i);
 	log("[Client] Disconnect has happened\n");
@@ -917,7 +917,7 @@ void NetStatusWindow::add_player (int num)
 
 void NetStatusWindow::set_ready (int num)
 {
-	unsigned int i;
+	uint32_t i;
 
 	for (i=0;i<entries.size();i++)
 		if (entries[i].plnum == num)
@@ -983,7 +983,7 @@ Deserializer::~Deserializer ()
 
 int Deserializer::read_packet (TCPsocket sock)
 {
-	unsigned char buffer[256];
+	uint8_t buffer[256];
 	int length, amount, i;
 
 	// read packet length (including length field)

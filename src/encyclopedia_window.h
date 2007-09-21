@@ -30,15 +30,16 @@
 #include "ui_table.h"
 #include "ui_multilinetextarea.h"
 
+#include <stdint.h>
 #include <string>
 
 class Item_Ware_Descr;
 class Tribe_Descr;
 
 struct WareCondition {
-	uint amount;
+	uint32_t amount;
    bool isGrouped;
-	uint groupId;
+	uint32_t groupId;
 };
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
@@ -46,17 +47,17 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	  ~EncyclopediaWindow();
 private:
 	  Interactive_Player& interactivePlayer;
-	UI::Listselect<uintptr_t> wares;
-	UI::Listselect<uintptr_t> prodSites;
-	UI::Table     <uintptr_t> condTable;
+	UI::Listselect<intptr_t> wares;
+	UI::Listselect<intptr_t> prodSites;
+	UI::Table     <intptr_t> condTable;
 	UI::Multiline_Textarea    descrTxt;
 	  const Item_Ware_Descr* selectedWare;
 	  const Tribe_Descr* tribe;
 	void fillWares();
-	void wareSelected(uint);
-	void prodSiteSelected(uint);
+	void wareSelected(uint32_t);
+	void prodSiteSelected(uint32_t);
 	void createCondTableEntry
-		(const uint            index,
+		(const uint32_t            index,
 		 const std::string   & wareName,
 		 const bool            consumed,
 		 const WareCondition & wareCondition);

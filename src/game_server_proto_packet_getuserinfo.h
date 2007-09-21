@@ -22,6 +22,7 @@
 
 #include "game_server_proto_packet.h"
 
+#include <stdint.h>
 #include <string>
 
 /*
@@ -33,7 +34,7 @@ public Game_Server_Protocol_Packet
 	Game_Server_Protocol_Packet_GetUserInfo(const std::string & username);
       virtual ~Game_Server_Protocol_Packet_GetUserInfo();
 
-      virtual ushort get_id();
+      virtual uint16_t get_id();
 
 	virtual void recv(Game_Server_Connection *, Network_Buffer *) {}
       virtual void send(Network_Buffer* buffer);

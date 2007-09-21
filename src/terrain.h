@@ -23,6 +23,7 @@
 #include "graphic.h"
 #include "mapviewpixelconstants.h"
 #include "random.h"
+#include <stdint.h>
 #include "surface.h"
 
 ///Must be a power of two
@@ -52,7 +53,7 @@ template<typename T> static void render_top_triangle
 	int b1, db1, tx1, dtx1, ty1, dty1;
 	int b, tx, ty;
 	float lambda, mu;
-	unsigned char *texpixels;
+	uint8_t *texpixels;
 	T *texcolormap;
 
 	get_horiz_linearcomb
@@ -139,7 +140,7 @@ template<typename T> static void render_bottom_triangle
 	int b1, db1, tx1, dtx1, ty1, dty1;
 	int b, tx, ty;
 	float lambda, mu;
-	unsigned char *texpixels;
+	uint8_t *texpixels;
 	T *texcolormap;
 
 	get_horiz_linearcomb
@@ -282,7 +283,7 @@ template<typename T> static void dither_edge_horiz
  const Vertex & start, const Vertex & end,
  const Texture & ttex, const Texture & btex)
 {
-	unsigned char *tpixels, *bpixels;
+	uint8_t *tpixels, *bpixels;
 	T *tcolormap, *bcolormap;
 
 	tpixels = ttex.get_curpixels();
@@ -300,7 +301,7 @@ template<typename T> static void dither_edge_horiz
 	db=(ITOFIX(end.b)-b) / (end.x-start.x+1);
 
 	// TODO: seed this depending on field coordinates
-	uint rnd=0;
+	uint32_t rnd=0;
 
 	const int dstw = dst.get_w();
 	const int dsth = dst.get_h();
@@ -317,12 +318,12 @@ template<typename T> static void dither_edge_horiz
 			tx0=tx - DITHER_WIDTH*dty;
 			ty0=ty + DITHER_WIDTH*dtx;
 
-			unsigned long rnd0=rnd;
+			uint32_t rnd0=rnd;
 
 			// dither above the edge
-			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
+			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
-					T * const pix = (T*) ((uchar*)dst.get_pixels() + y*dst.get_pitch()) + x;
+					T * const pix = (T*) ((uint8_t*)dst.get_pixels() + y*dst.get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = tcolormap[tpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -333,9 +334,9 @@ template<typename T> static void dither_edge_horiz
 			}
 
 			// dither below the edge
-			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
+			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
-					T * const pix = (T*) ((uchar*)dst.get_pixels() + y*dst.get_pitch()) + x;
+					T * const pix = (T*) ((uint8_t*)dst.get_pixels() + y*dst.get_pitch()) + x;
 					int texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
 					*pix = bcolormap[bpixels[texel] | ((b >> 8) & 0xFF00)];
 				}
@@ -360,7 +361,7 @@ template<typename T> static void dither_edge_vert
  const Vertex & start, const Vertex & end,
  const Texture & ltex, const Texture & rtex)
 {
-	unsigned char *lpixels, *rpixels;
+	uint8_t *lpixels, *rpixels;
 	T* lcolormap, *rcolormap;
 
 	lpixels = ltex.get_curpixels();
@@ -378,7 +379,7 @@ template<typename T> static void dither_edge_vert
 	db=(ITOFIX(end.b)-b) / (end.y-start.y+1);
 
 	// TODO: seed this depending on field coordinates
-	uint rnd=0;
+	uint32_t rnd=0;
 
 	const int dstw = dst.get_w();
 	const int dsth = dst.get_h();
@@ -395,10 +396,10 @@ template<typename T> static void dither_edge_vert
 			tx0=tx - DITHER_WIDTH*dty;
 			ty0=ty + DITHER_WIDTH*dtx;
 
-			unsigned long rnd0=rnd;
+			uint32_t rnd0=rnd;
 
 			// dither on left side
-			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
+			for (uint32_t i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
 					T * const pix = reinterpret_cast<T *>
 						(static_cast<Uint8 *>(dst.get_pixels())
@@ -416,7 +417,7 @@ template<typename T> static void dither_edge_vert
 			}
 
 			// dither on right side
-			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
+			for (uint32_t i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
 					T * const pix = reinterpret_cast<T *>
 						(static_cast<Uint8 *>(dst.get_pixels())
@@ -457,12 +458,12 @@ template<typename T> static void render_road_horiz
 
 		for (int i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
 			*(reinterpret_cast<T *>
-			  (static_cast<uchar *>(dst.get_pixels()) + y * dst.get_pitch())
+			  (static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 			  +
 			  x)
 			=
 			*(reinterpret_cast<const T *>
-			  (static_cast<const uchar *>(src.get_pixels())
+			  (static_cast<const uint8_t *>(src.get_pixels())
 			   +
 			   i * src.get_pitch())
 			  +
@@ -487,12 +488,12 @@ template<typename T> static void render_road_vert
 
 		for (int i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
 			*(reinterpret_cast<T *>
-			  (static_cast<uchar *>(dst.get_pixels()) +  y * dst.get_pitch())
+			  (static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
 			  +
 			  x)
 			=
 			*(reinterpret_cast<const T *>
-			  (static_cast<const uchar *>(src.get_pixels())
+			  (static_cast<const uint8_t *>(src.get_pixels())
 			   +
 			   sy * src.get_pitch())
 			  +
@@ -512,7 +513,7 @@ template<typename T> static void draw_field_int
  const int     blposx,
  const int     rblposx,
  const int     blposy,
- uchar         roads,
+ uint8_t         roads,
  Sint8            f_brightness,
  Sint8            r_brightness,
  Sint8           bl_brightness,
@@ -546,7 +547,7 @@ template<typename T> static void draw_field_int
 	}
 
 	// Render roads and dither polygon edges
-	uchar road;
+	uint8_t road;
 
 	road = (roads >> Road_East) & Road_Mask;
 	if (-128 < f_brightness or -128 < r_brightness) {

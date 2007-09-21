@@ -29,6 +29,7 @@
 #include "immovable.h"
 #include "item_ware_descr.h"
 #include "map.h"
+#include <stdint.h>
 #include "tattribute.h"
 #include "trackptr.h"
 #include "warelist.h"
@@ -90,7 +91,7 @@ public:
 
 	void init(Editor_Game_Base* g);
 	void cleanup(Editor_Game_Base* g);
-	void act(Game*, uint data);
+	void act(Game*, uint32_t data);
 	void update(Game*);
 
 	void set_location(Editor_Game_Base* g, Map_Object* loc);
@@ -208,7 +209,7 @@ protected:
 
 private:
 	Coords                  m_position;
-	uint                    m_anim;
+	uint32_t                    m_anim;
 	int                     m_animstart;
 
 	Building * m_building; //  attached building (replaces road WALK_NW)
@@ -228,7 +229,7 @@ private:
 	std::list<FlagJob>      m_flag_jobs;
 
 	// The following are only used during pathfinding
-	uint                    mpf_cycle;
+	uint32_t                    mpf_cycle;
 	int                     mpf_heapindex;
 	int                     mpf_realcost; //  real cost of getting to this flag
 	Flag                  * mpf_backlink; //  flag where we came from
@@ -315,7 +316,7 @@ private:
 	int        m_idle_index; //  index into path where carriers should idle
 
 	//  total # of carriers we want (currently limited to 0 or 1)
-	uint       m_desire_carriers;
+	uint32_t       m_desire_carriers;
 
 	Object_Ptr m_carrier;    //  our carrier
 	Request *  m_carrier_request;
@@ -343,7 +344,7 @@ struct Route {
 	void truncate(int count);
 
 	struct LoadData {
-		std::vector<uint> flags;
+		std::vector<uint32_t> flags;
 	};
 
 	LoadData* load(FileRead& fr);
@@ -537,10 +538,10 @@ struct Request : public Trackable {
 private:
 	int get_base_required_time(Editor_Game_Base* g, int nr);
 public:
-	void cancel_transfer(uint idx);
+	void cancel_transfer(uint32_t idx);
 private:
-	void remove_transfer(uint idx);
-	uint find_transfer(Transfer* t);
+	void remove_transfer(uint32_t idx);
+	uint32_t find_transfer(Transfer* t);
 
 	bool has_requeriments () {return (m_requeriments != 0);}
 public:
@@ -585,11 +586,11 @@ struct WaresQueue {
 	~WaresQueue();
 
 	int get_ware() const {return m_ware;}
-	uint get_size            () const throw () {return m_size;}
-	uint get_filled          () const throw () {return m_filled;}
-	uint get_consume_interval() const throw () {return m_consume_interval;}
+	uint32_t get_size            () const throw () {return m_size;}
+	uint32_t get_filled          () const throw () {return m_filled;}
+	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
-	void init(const int ware, const uint size);
+	void init(const int ware, const uint32_t size);
 	void cleanup();
 	void update();
 
@@ -598,9 +599,9 @@ struct WaresQueue {
 	void remove_from_economy(Economy* e);
 	void add_to_economy(Economy* e);
 
-	void set_size            (const uint) throw ();
-	void set_filled          (const uint) throw ();
-	void set_consume_interval(const uint) throw ();
+	void set_size            (const uint32_t) throw ();
+	void set_filled          (const uint32_t) throw ();
+	void set_consume_interval(const uint32_t) throw ();
 
 	Player * get_owner() const throw () {return m_owner->get_owner();}
 
@@ -613,9 +614,9 @@ private:
 
 	PlayerImmovable * m_owner;
 	int               m_ware; //  ware ID
-	uint m_size;             // # of items that fit into the queue
-	uint m_filled;           // # of items that are currently in the queue
-	uint m_consume_interval; // time in ms between consumption at full speed
+	uint32_t m_size;             // # of items that fit into the queue
+	uint32_t m_filled;           // # of items that are currently in the queue
+	uint32_t m_consume_interval; // time in ms between consumption at full speed
 	Request         * m_request; //  currently pending request
 
 	callback_t      * m_callback_fn;
@@ -636,7 +637,7 @@ struct Economy {
 
 	Player & owner() const throw () {return *m_owner;}
 	inline Player *get_owner() const {return m_owner;}
-	uint get_serial() const {return m_trackserial;}
+	uint32_t get_serial() const {return m_trackserial;}
 
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
@@ -656,7 +657,7 @@ struct Economy {
 
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
-	uint get_nr_warehouses() const {return m_warehouses.size();}
+	uint32_t get_nr_warehouses() const {return m_warehouses.size();}
 
 	void add_request(Request* req);
 	bool have_request(Request* req);
@@ -707,7 +708,7 @@ private:
 	typedef std::vector<Request*> RequestList;
 
 	Player*   m_owner;
-	uint      m_trackserial;
+	uint32_t      m_trackserial;
 
 	//  true while rebuilding Economies (i.e. during split/merge)
 	bool m_rebuilding;
@@ -724,7 +725,7 @@ private:
 	bool m_request_timer; //  true if we started the request timer
 	int                      m_request_timer_time;
 
-	uint mpf_cycle;       //  pathfinding cycle, see Flag::mpf_cycle
+	uint32_t mpf_cycle;       //  pathfinding cycle, see Flag::mpf_cycle
 };
 
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {

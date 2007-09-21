@@ -23,6 +23,7 @@
 #include "animation.h"
 
 #include <cassert>
+#include <stdint.h>
 
 /// \todo (Antonio Trueba#1#): Get rid of forward declarations (cleanup of other headers needed)
 class Map;
@@ -116,7 +117,7 @@ struct Bob : public Map_Object {
 				 Profile *prof,
 				 Tribe_Descr* tribe);
 
-		uint vision_range() const;
+		uint32_t vision_range() const;
 
 	protected:
 		virtual Bob * create_object() const = 0;
@@ -132,19 +133,19 @@ struct Bob : public Map_Object {
 
 	MO_DESCR(Descr);
 
-	uint get_current_anim() const {return m_anim;}
+	uint32_t get_current_anim() const {return m_anim;}
 	int get_animstart() const {return m_animstart;}
 
 	virtual int get_type() const throw () {return BOB;}
 	virtual Type get_bob_type() const throw () = 0;
-	virtual uint get_movecaps() const throw () {return 0;}
+	virtual uint32_t get_movecaps() const throw () {return 0;}
 	const std::string & name() const throw () {return descr().name();}
 
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
-	virtual void act(Game*, uint data);
+	virtual void act(Game*, uint32_t data);
 	void schedule_destroy(Game* g);
-	void schedule_act(Game* g, uint tdelta);
+	void schedule_act(Game* g, uint32_t tdelta);
 	void skip_act();
 	void force_skip_act();
 	Point calc_drawpos(const Editor_Game_Base &, const Point) const;
@@ -155,7 +156,7 @@ struct Bob : public Map_Object {
 	Bob * get_next_bob() const throw () {return m_linknext;}
 	bool is_world_bob() const throw () {return descr().is_world_bob();}
 
-	uint vision_range() const {return descr().vision_range();}
+	uint32_t vision_range() const {return descr().vision_range();}
 
 	virtual void draw(const Editor_Game_Base &, RenderTarget &,
 	                  const Point) const;
@@ -167,7 +168,7 @@ struct Bob : public Map_Object {
 	// default tasks
 	void reset_tasks(Game*);
 	void send_signal(Game*, std::string sig);
-	void start_task_idle(Game*, uint anim, int timeout);
+	void start_task_idle(Game*, uint32_t anim, int timeout);
 
 	bool start_task_movepath(Game*, const Coords dest, const int persist,
 							 const DirAnimations &,
@@ -209,8 +210,8 @@ struct Bob : public Map_Object {
 	virtual void init_auto_task(Game*) {};
 
 	// low level animation and walking handling
-	void set_animation(Editor_Game_Base* g, uint anim);
-	int start_walk(Game* g, WalkingDir dir, uint anim, bool force = false);
+	void set_animation(Editor_Game_Base* g, uint32_t anim);
+	int start_walk(Game* g, WalkingDir dir, uint32_t anim, bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after
@@ -243,8 +244,8 @@ private:
 	FCoords    m_position; // where are we right now?
 	Bob      * m_linknext; // next object on this field
 	Bob    * * m_linkpprev;
-	uint       m_actid; // CMD_ACT counter, used to eliminate spurious act()s
-	uint       m_anim;
+	uint32_t       m_actid; // CMD_ACT counter, used to eliminate spurious act()s
+	uint32_t       m_anim;
 	int        m_animstart; ///< gametime when the animation was started
 	WalkingDir m_walking;
 	int        m_walkstart; ///< start time (used for interpolation)

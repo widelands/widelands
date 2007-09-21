@@ -125,8 +125,8 @@ void WaresDisplay::draw(RenderTarget* dst)
 	}
    int totid=0;
 	for (int id = 0; id < number; ++id, ++totid) {
-      uint totalstock = 0;
-      for (uint i = 0; i < m_warelists.size(); i++)
+      uint32_t totalstock = 0;
+      for (uint32_t i = 0; i < m_warelists.size(); i++)
          totalstock += m_warelists[i]->stock(id);
 
 		draw_ware(*dst, p, id, totalstock, is_worker);
@@ -145,11 +145,11 @@ Draw one ware icon + additional information.
 ===============
 */
 void WaresDisplay::draw_ware
-(RenderTarget & dst, const Point p, const uint id, const uint stock, const bool worker)
+(RenderTarget & dst, const Point p, const uint32_t id, const uint32_t stock, const bool worker)
 {
    // Draw a background
-	const uint picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
-	uint w, h;
+	const uint32_t picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
+	uint32_t w, h;
 	g_gr->get_picture_size(picid, w, h);
 
 	dst.blit(p, picid);

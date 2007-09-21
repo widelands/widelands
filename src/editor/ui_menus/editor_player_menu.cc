@@ -26,6 +26,7 @@
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
@@ -272,7 +273,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
       std::string t = m_plr_set_tribes_buts[n]->get_title();
       if (!Tribe_Descr::exists_tribe(t))
          throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
-      uint i;
+      uint32_t i;
       for (i=0; i<m_tribes.size(); i++)
          if (m_tribes[i]==t) break;
       if (i==m_tribes.size()-1) t=m_tribes[0];

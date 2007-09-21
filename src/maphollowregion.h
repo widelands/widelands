@@ -21,6 +21,7 @@
 #define __S__MAPHOLLOWREGION_H
 
 #include "map.h"
+#include <stdint.h>
 
 /**
  * Producer/Coroutine struct that iterates over every node for which the
@@ -63,10 +64,10 @@ private:
 
 	HollowArea<Area_type> m_hollow_area;
 	Phase m_phase;
-	const unsigned int m_delta_radius;
-	unsigned int m_row; // # of rows completed in this phase
-	unsigned int m_rowwidth; // # of fields to return per row
-	unsigned int m_rowpos; // # of fields we have returned in this row
+	const uint32_t m_delta_radius;
+	uint32_t m_row; // # of rows completed in this phase
+	uint32_t m_rowwidth; // # of fields to return per row
+	uint32_t m_rowpos; // # of fields we have returned in this row
 	typename Area_type::Coords_type m_left; //  left-most node of current row
 };
 

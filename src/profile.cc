@@ -855,7 +855,7 @@ void Profile::read
 		const char * const buf_end = buffer + sizeof(buffer);
 		char * line = buffer;
 		char *p = 0;
-		uint linenr = 0;
+		uint32_t linenr = 0;
 		Section *s = 0;
 
 		bool reading_multiline = 0;
@@ -1001,7 +1001,7 @@ void Profile::write
 
          const char* str = v->get_string();
          bool multiline = false;
-         for (uint i = 0; i < strlen(str); i++)
+         for (uint32_t i = 0; i < strlen(str); i++)
             if (str[i] == '\n')
                multiline = true;
 

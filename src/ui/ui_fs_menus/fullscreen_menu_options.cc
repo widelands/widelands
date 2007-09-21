@@ -31,6 +31,7 @@
 #include "wlapplication.h"
 
 #include <libintl.h>
+#include <stdint.h>
 #include <stdio.h>
 
 
@@ -132,7 +133,7 @@ m_label_autosave
    fmt->BitsPerPixel = 16;
    SDL_Rect** modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
 	if (modes)
-		for (uint i = 0; modes[i]; ++i) {
+		for (uint32_t i = 0; modes[i]; ++i) {
          if (modes[i]->w < 640) continue;
 			res this_res = {modes[i]->w, modes[i]->h, 16};
 			if
@@ -146,7 +147,7 @@ m_label_autosave
    fmt->BitsPerPixel = 32;
    modes = SDL_ListModes(fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
 	if (modes)
-		for (uint i = 0; modes[i]; ++i) {
+		for (uint32_t i = 0; modes[i]; ++i) {
          if (modes[i]->w < 640) continue;
 			res this_res = {
             modes[i]->w,
@@ -163,7 +164,7 @@ m_label_autosave
 		}
 
 	bool did_select_a_res=false;
-	for (uint i = 0; i < m_resolutions.size(); i++) {
+	for (uint32_t i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =
@@ -176,7 +177,7 @@ m_label_autosave
 	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
 
    available_languages[0].name = _("System default language");
-	for (uint i = 0; i < NR_LANGUAGES; ++i)
+	for (uint32_t i = 0; i < NR_LANGUAGES; ++i)
 		m_language_list.add
 			(available_languages[i].name.c_str(),
 			 available_languages[i].abbrev,
@@ -188,7 +189,7 @@ m_label_autosave
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
-	const uint res_index = m_reslist.selection_index();
+	const uint32_t res_index = m_reslist.selection_index();
 	Options_Ctrl::Options_Struct opt = {
 		m_resolutions[res_index].xres,
 		m_resolutions[res_index].yres,

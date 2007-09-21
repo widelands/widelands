@@ -34,7 +34,7 @@ void Event::reference(EventReferencer* ref) {
    m_referencers[ ref ] ++;
 }
 void Event::unreference(EventReferencer* ref) {
-   std::map<EventReferencer*, uint>::iterator cur = m_referencers.find(ref);
+   std::map<EventReferencer*, uint32_t>::iterator cur = m_referencers.find(ref);
    if (cur != m_referencers.end()) {
       cur->second--;
       if (cur->second == 0)

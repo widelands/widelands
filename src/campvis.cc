@@ -133,7 +133,7 @@ void Campaign_visiblity_save::make_campvis(std::string savepath)
  *   2 = make campaign map visible
  *   3 = make campaign map invisible
  */
-void Campaign_visiblity_save::set_visiblity(std::string entry, uint vcase)
+void Campaign_visiblity_save::set_visiblity(std::string entry, uint32_t vcase)
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());

@@ -22,6 +22,7 @@
 
 #include "game_server_proto_packet.h"
 
+#include <stdint.h>
 #include <string>
 
 /*
@@ -31,10 +32,10 @@ struct Game_Server_Protocol_Packet_ChatMessage :
 public Game_Server_Protocol_Packet
 {
 	Game_Server_Protocol_Packet_ChatMessage
-		(const uchar flags, const std::string & msg);
+		(const uint8_t flags, const std::string & msg);
       virtual ~Game_Server_Protocol_Packet_ChatMessage();
 
-      virtual ushort get_id();
+      virtual uint16_t get_id();
 
       virtual void recv(Game_Server_Connection*, Network_Buffer* buffer);
       virtual void send(Network_Buffer* buffer);
@@ -42,7 +43,7 @@ public Game_Server_Protocol_Packet
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 
 private:
-	uchar m_flags;
+	uint8_t m_flags;
 	const std::string m_msg;
 };
 

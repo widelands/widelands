@@ -206,7 +206,7 @@ m_event_chain(chain)
    // Add conditional
    if (cond) {
       std::vector< TriggerConditional_Factory::Token >* tokens = cond->get_infix_tokenlist();
-      for (uint i = 0; i < tokens->size(); i++) {
+      for (uint32_t i = 0; i < tokens->size(); i++) {
          TriggerConditional_Factory::Token & t = *new TriggerConditional_Factory::Token((*tokens)[i]);
 	      assert(t.token <= TriggerConditional_Factory::TRIGGER);
 			m_construction->add
@@ -249,8 +249,8 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
       // construct token list
       std::vector<TriggerConditional_Factory::Token> tok;
 
-	const uint construction_size = m_construction->size();
-	for (uint i = 0; i < construction_size; ++i)
+	const uint32_t construction_size = m_construction->size();
+	for (uint32_t i = 0; i < construction_size; ++i)
 		tok.push_back((*m_construction)[i]);
 
       try {
@@ -309,7 +309,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up() {
 }
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
 	assert(m_construction->has_selection()); //  Button should be disabled.
-	const uint n = m_construction->selection_index();
+	const uint32_t n = m_construction->selection_index();
 	assert(n + 1 < m_construction->size()); //  Button should be disabled.
 	m_construction->switch_entries(n, n + 1);
 }
@@ -317,10 +317,10 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down() {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint) {
+void Editor_Event_Menu_Edit_TriggerConditional::tl_selected(uint32_t) {
    m_insert_btn->set_enabled(true);
 }
-void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint i) {
+void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint32_t i) {
 	m_mvdown_btn->set_enabled(i + 1 < m_construction->size());
 	m_mvup_btn->set_enabled(i > 0);
    m_delete_btn->set_enabled(true);
@@ -329,7 +329,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint i) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(uint)
+void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(uint32_t)
 {clicked_ins_trigger();}
-void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(uint)
+void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(uint32_t)
 {clicked_del_trigger();}

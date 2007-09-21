@@ -22,6 +22,7 @@
 
 #include "compile_assert.h"
 #include "events/event_chain.h"
+#include <stdint.h>
 #include "trigger.h"
 
 #include "log.h"
@@ -139,7 +140,7 @@ TriggerConditional* TriggerConditional_Factory::create_from_postfix(EventChain* 
 void TriggerConditional::unreference_triggers(EventChain* ev) {
    std::vector< TriggerConditional_Factory::Token >* vec = get_infix_tokenlist();
 
-   for (uint i = 0; i < vec->size(); i++) {
+   for (uint32_t i = 0; i < vec->size(); i++) {
       if ((*vec)[i].token == TriggerConditional_Factory::TRIGGER) {
          Trigger* trig = static_cast<Trigger*>((*vec)[i].data);
          trig->unreference(ev);
@@ -153,7 +154,7 @@ void TriggerConditional::unreference_triggers(EventChain* ev) {
 void TriggerConditional::reset_triggers(Game* g) {
    std::vector< TriggerConditional_Factory::Token >* vec = get_infix_tokenlist();
 
-   for (uint i = 0; i < vec->size(); i++) {
+   for (uint32_t i = 0; i < vec->size(); i++) {
       if ((*vec)[i].token == TriggerConditional_Factory::TRIGGER) {
          Trigger* trig = static_cast<Trigger*>((*vec)[i].data);
          trig->reset_trigger(g);
@@ -196,7 +197,7 @@ std::vector< TriggerConditional_Factory::Token >* TriggerConditional_OneArg::get
 
    // Now add our conditionals tokenlist
    std::vector< TriggerConditional_Factory::Token >* l = m_conditional->get_infix_tokenlist();
-   for (uint i = 0; i < l->size(); i++)
+   for (uint32_t i = 0; i < l->size(); i++)
       retval->push_back((*l)[i]);
    delete l;
 
@@ -260,7 +261,7 @@ std::vector< TriggerConditional_Factory::Token >* TriggerConditional_TwoArg::get
 
    // Now add our lefts conditionals tokenlist
    std::vector< TriggerConditional_Factory::Token >* l = m_lconditional->get_infix_tokenlist();
-   for (uint i = 0; i < l->size(); i++)
+   for (uint32_t i = 0; i < l->size(); i++)
       retval->push_back((*l)[i]);
    delete l;
 
@@ -269,7 +270,7 @@ std::vector< TriggerConditional_Factory::Token >* TriggerConditional_TwoArg::get
 
    // Now add our right conditionals tokenlist
    std::vector< TriggerConditional_Factory::Token >* r = m_rconditional->get_infix_tokenlist();
-   for (uint i = 0; i < r->size(); i++)
+   for (uint32_t i = 0; i < r->size(); i++)
       retval->push_back((*r)[i]);
    delete r;
 

@@ -28,6 +28,7 @@
 #include "ui_table.h"
 
 #include <list>
+#include <stdint.h>
 #include <string>
 
 #include "fullscreen_menu_base.h"
@@ -49,7 +50,7 @@ struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 
 		virtual void think();
 
-		bool get_host_address (ulong&, ushort&);
+		bool get_host_address (uint32_t&, uint16_t&);
 		// return true if the selected or entered hostname is valid
 
 		//bool is_internetgame();
@@ -70,7 +71,7 @@ private:
 	UI::Button<Fullscreen_Menu_NetSetup>        networktype;
 	bool                                        internetgame;
 
-	void game_selected (uint);
+	void game_selected (uint32_t);
 
 		static void discovery_callback (int, const LAN_Open_Game*, void*);
 

@@ -99,7 +99,7 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
  */
 Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(const char* id) {
    std::string str = id;
-   for (uint i = 0; i < Trigger_Factory::get_nr_of_available_triggers(); i++)
+   for (uint32_t i = 0; i < Trigger_Factory::get_nr_of_available_triggers(); i++)
       if (TRIGGER_DESCRIPTIONS[i].id == str)
          return &TRIGGER_DESCRIPTIONS[i];
 
@@ -110,7 +110,7 @@ Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(const char* id) {
 /*
  * Get the trigger descriptions
  */
-Trigger_Descr* Trigger_Factory::get_trigger_descr(uint id) {
+Trigger_Descr* Trigger_Factory::get_trigger_descr(uint32_t id) {
    assert(id < Trigger_Factory::get_nr_of_available_triggers());
 
    return &TRIGGER_DESCRIPTIONS[id];
@@ -120,6 +120,6 @@ Trigger_Descr* Trigger_Factory::get_trigger_descr(uint id) {
 /*
  * return the nummer of available triggers
  */
-const uint Trigger_Factory::get_nr_of_available_triggers() {
+const uint32_t Trigger_Factory::get_nr_of_available_triggers() {
    return nr_of_triggers;
 }

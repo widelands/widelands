@@ -43,11 +43,11 @@ namespace UI {
  */
 Slider::Slider
 	(Panel * const parent,
-	 const int x, const int y, const uint w, const uint h,
+	 const int x, const int y, const uint32_t w, const uint32_t h,
 	 const int min_value, const int max_value, const int value,
-	 const uint background_picture_id,
+	 const uint32_t background_picture_id,
 	 const std::string & tooltip_text,
-	 const uint cursor_size,
+	 const uint32_t cursor_size,
 	 const bool enabled,
 	 const int x_gap, const int y_gap, const int bar_size)
 	:

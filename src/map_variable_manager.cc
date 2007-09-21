@@ -20,7 +20,7 @@
 #include "map_variable_manager.h"
 
 #include "i18n.h"
-#include "types.h"
+#include <stdint.h>
 #include <vector>
 
 
@@ -34,7 +34,7 @@ MapVariableManager::MapVariableManager() {
 
 
 MapVariableManager::~MapVariableManager() {
-   for (uint i = 0; i < m_variables.size(); i++)
+   for (uint32_t i = 0; i < m_variables.size(); i++)
       delete m_variables[i];
    m_variables.resize(0);
 }
@@ -73,7 +73,7 @@ String_MapVariable * MapVariableManager::get_string_variable
 MapVariable* MapVariableManager::get_variable
 (const char * const name) const
 {
-   uint i;
+   uint32_t i;
    MapVariable* retval = 0;
    for (i = 0; i < m_variables.size(); i++) {
       if (!strcmp(m_variables[i]->get_name(), name)) {
@@ -89,7 +89,7 @@ MapVariable* MapVariableManager::get_variable
  * Remove a variable
  */
 void MapVariableManager::delete_variable(const char* name) {
-   for (uint i = 0; i < m_variables.size(); i++) {
+   for (uint32_t i = 0; i < m_variables.size(); i++) {
       if (!strcmp(m_variables[i]->get_name(), name)) {
          delete m_variables[i];
          m_variables[i] = m_variables[m_variables.size() - 1];

@@ -20,6 +20,7 @@
 #ifndef __S__SCROLLBAR_H
 #define __S__SCROLLBAR_H
 
+#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
 
@@ -46,7 +47,7 @@ struct Scrollbar : public Panel {
 	};
 
 public:
-	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
+	Scrollbar(Panel *parent, int x, int y, uint32_t w, uint32_t h, bool horiz);
 
 	Signal1<int> moved;
 
@@ -54,8 +55,8 @@ public:
 	void set_pagesize(int pagesize);
 	void set_pos(int pos);
 
-	uint get_pagesize() const {return m_pagesize;}
-	uint get_pos() const {return m_pos;}
+	uint32_t get_pagesize() const {return m_pagesize;}
+	uint32_t get_pos() const {return m_pos;}
 
 	bool handle_mousepress  (const Uint8 btn, int x, int y);
 
@@ -81,18 +82,18 @@ private:
 	bool m_horizontal;
    bool     m_force_draw; // draw this scrollbar, even if it can't do anything
 
-	uint m_pos;            ///< from 0 to m_range - 1
-	uint m_pagesize;
-	uint m_steps;
+	uint32_t m_pos;            ///< from 0 to m_range - 1
+	uint32_t m_pagesize;
+	uint32_t m_steps;
 
 	Area m_pressed;        ///< area that the user clicked on (None if mouse is up)
 	int  m_time_nextact;
 	int  m_knob_grabdelta; ///< only while m_pressed == Knob
 
-	uint m_pic_minus;      ///< left/up
-	uint m_pic_plus;       ///< right/down
-	uint m_pic_background;
-	uint m_pic_buttons;
+	uint32_t m_pic_minus;      ///< left/up
+	uint32_t m_pic_plus;       ///< right/down
+	uint32_t m_pic_background;
+	uint32_t m_pic_buttons;
 };
 };
 

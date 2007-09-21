@@ -20,10 +20,9 @@
 #ifndef __S__NETWORK_BUFFER_H
 #define __S__NETWORK_BUFFER_H
 
-#include "types.h"
-
 #include <SDL_net.h>
 
+#include <stdint.h>
 #include <string>
 
 /*
@@ -35,20 +34,20 @@ struct Network_Buffer {
       Network_Buffer();
       ~Network_Buffer();
 
-      ushort size() {return m_buffer_len;}
+      uint16_t size() {return m_buffer_len;}
 
-      uchar get_8(bool = true);
-      ushort get_16(bool = true);
-      uint get_32(bool = true);
+      uint8_t get_8(bool = true);
+      uint16_t get_16(bool = true);
+      uint32_t get_32(bool = true);
       std::string get_string(bool = true);
 
-      void put_8(uchar);
-      void put_16(ushort);
-      void put_32(uint);
+      void put_8(uint8_t);
+      void put_16(uint16_t);
+      void put_32(uint32_t);
       void put_string(std::string);
 
       // Return value must not be freed by user
-      uchar* get_data() {return m_buffer;}
+      uint8_t* get_data() {return m_buffer;}
 
       // Fill this network buffer with all the incoming data
       int fill(TCPsocket);
@@ -56,10 +55,10 @@ struct Network_Buffer {
 
 private:
       void grow_buffer();
-      uint m_buffer_real_len;
-      uint m_buffer_len;
-      uint m_buffer_pointer;
-      uchar* m_buffer;
+      uint32_t m_buffer_real_len;
+      uint32_t m_buffer_len;
+      uint32_t m_buffer_pointer;
+      uint8_t* m_buffer;
 };
 
 

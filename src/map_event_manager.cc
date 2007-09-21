@@ -21,13 +21,14 @@
 
 #include "events/event.h"
 
+#include <stdint.h>
 #include <vector>
 
 
 MapEventManager::MapEventManager() {}
 
 MapEventManager::~MapEventManager() {
-   for (uint i = 0; i < m_events.size(); i++)
+   for (uint32_t i = 0; i < m_events.size(); i++)
       delete m_events[i];
    m_events.resize(0);
 }
@@ -46,7 +47,7 @@ bool MapEventManager::register_new_event(Event* mv) {
  * Get events
  */
 Event* MapEventManager::get_event(const char* name) {
-   uint i;
+   uint32_t i;
    Event* retval = 0;
    for (i = 0; i < m_events.size(); i++) {
       if (!strcmp(m_events[i]->name().c_str(), name)) {
@@ -62,7 +63,7 @@ Event* MapEventManager::get_event(const char* name) {
  * Remove a event
  */
 void MapEventManager::delete_event(const char* name) {
-   for (uint i = 0; i < m_events.size(); i++) {
+   for (uint32_t i = 0; i < m_events.size(); i++) {
       if (!strcmp(m_events[i]->name().c_str(), name)) {
          delete m_events[i];
          m_events[i] = m_events[m_events.size() - 1];
@@ -76,7 +77,7 @@ void MapEventManager::delete_event(const char* name) {
  * Delete all unreferenced events
  */
 void MapEventManager::delete_unreferenced_events() {
-   uint i = 0;
+   uint32_t i = 0;
    while (i < m_events.size()) {
       Event* tr = m_events[i];
       if (tr->get_referencers().empty()) {

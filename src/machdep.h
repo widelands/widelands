@@ -22,6 +22,7 @@
 
 #include <SDL_endian.h>
 
+#include <stdint.h>
 #include <string>
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
@@ -67,9 +68,9 @@ inline float SwapFloat(const float x)
 	float s;
 	reinterpret_cast<Uint8 *>(&s)[0] =
 		reinterpret_cast<const Uint8 *>(&x)[3];
-	reinterpret_cast<uchar *>(&s)[1] =
+	reinterpret_cast<uint8_t *>(&s)[1] =
 		reinterpret_cast<const Uint8 *>(&x)[2];
-	reinterpret_cast<uchar *>(&s)[2] =
+	reinterpret_cast<uint8_t *>(&s)[2] =
 		reinterpret_cast<const Uint8 *>(&x)[1];
 	reinterpret_cast<Uint8 *>(&s)[3] =
 		reinterpret_cast<const Uint8 *>(&x)[0];

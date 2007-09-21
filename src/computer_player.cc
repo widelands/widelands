@@ -40,7 +40,7 @@
 
 class CheckStepRoadAI : public CheckStep {
 public:
-	CheckStepRoadAI(Player* pl, uchar mc, bool oe)
+	CheckStepRoadAI(Player* pl, uint8_t mc, bool oe)
 		: player(pl), movecaps(mc), openend(oe)
 	{}
 
@@ -52,7 +52,7 @@ public:
 
 //private:
 	Player * player;
-	uchar    movecaps;
+	uint8_t    movecaps;
 	bool     openend;
 };
 
@@ -514,12 +514,12 @@ bool Computer_Player::construct_building ()
 				if (j->cnt_built+j->cnt_under_construction==0)
 				    prio+=2;
 
-				for (unsigned int k=0; k<j->inputs.size(); k++) {
+				for (uint32_t k=0; k<j->inputs.size(); k++) {
 				    prio+=8*wares[j->inputs[k]].producers;
 				    prio-=4*wares[j->inputs[k]].consumers;
 				}
 
-				for (unsigned int k=0; k<j->outputs.size(); k++) {
+				for (uint32_t k=0; k<j->outputs.size(); k++) {
 				    prio-=12*wares[j->outputs[k]].producers;
 				    prio+=8*wares[j->outputs[k]].consumers;
 				    prio+=4*wares[j->outputs[k]].preciousness;
@@ -706,7 +706,7 @@ void Computer_Player::update_buildable_field (BuildableField* field)
 		field->preferred=true;
 	}
 
-	for (unsigned int i=0;i<immovables.size();i++) {
+	for (uint32_t i=0;i<immovables.size();i++) {
 		const BaseImmovable & base_immovable = *immovables[i].object;
 		if (dynamic_cast<const Flag *>(&base_immovable))
 			field->reachable=true;
@@ -807,7 +807,7 @@ void Computer_Player::update_mineable_field (MineableField* field)
 		field->preferred=true;
 	}
 
-	for (unsigned int i=0;i<immovables.size();i++) {
+	for (uint32_t i=0;i<immovables.size();i++) {
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
 			field->reachable=true;
 
@@ -869,10 +869,10 @@ void Computer_Player::gain_building (Building* b)
 			productionsites.back().site=static_cast<ProductionSite*>(b);
 			productionsites.back().bo=&bo;
 
-			for (unsigned int i=0;i<bo.outputs.size();i++)
+			for (uint32_t i=0;i<bo.outputs.size();i++)
 				++wares[bo.outputs[i]].producers;
 
-			for (unsigned int i=0;i<bo.inputs.size();i++)
+			for (uint32_t i=0;i<bo.inputs.size();i++)
 				wares[bo.inputs[i]].consumers++;
 		}
 	}
@@ -899,10 +899,10 @@ void Computer_Player::lose_building (Building* b)
 					break;
 				}
 
-			for (unsigned int i=0;i<bo.outputs.size();i++)
+			for (uint32_t i=0;i<bo.outputs.size();i++)
 				wares[bo.outputs[i]].producers--;
 
-			for (unsigned int i=0;i<bo.inputs.size();i++)
+			for (uint32_t i=0;i<bo.inputs.size();i++)
 				wares[bo.inputs[i]].consumers--;
 		}
 	}
@@ -1007,7 +1007,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 {
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
-	unsigned int i;
+	uint32_t i;
 
 	queue.push (NearFlag(flag, 0, 0));
 	Map & map = game().map();
@@ -1123,12 +1123,12 @@ void Computer_Player::lose_field (const FCoords &) {}
 bool CheckStepRoadAI::allowed
 (Map * map, FCoords, FCoords end, int, StepId id) const
 {
-	uchar endcaps = player->get_buildcaps(end);
+	uint8_t endcaps = player->get_buildcaps(end);
 
 	// Calculate cost and passability
 	if (!(endcaps & movecaps)) {
 		return false;
-		//uchar startcaps = player->get_buildcaps(start);
+		//uint8_t startcaps = player->get_buildcaps(start);
 
 		//if (!((endcaps & MOVECAPS_WALK) && (startcaps & movecaps & MOVECAPS_SWIM)))
 			//return false;
@@ -1152,7 +1152,7 @@ bool CheckStepRoadAI::allowed
 
 bool CheckStepRoadAI::reachabledest(Map* map, FCoords dest) const
 {
-	uchar caps = dest.field->get_caps();
+	uint8_t caps = dest.field->get_caps();
 
 	if (!(caps & movecaps)) {
 		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))

@@ -23,7 +23,7 @@
 #include "player.h"
 
 
-void AreaWatcher::act(Game * game, uint)
+void AreaWatcher::act(Game * game, uint32_t)
 {game->player(player_number).remove_areawatcher(*this); remove(game);}
 
 

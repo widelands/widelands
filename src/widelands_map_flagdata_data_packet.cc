@@ -25,6 +25,7 @@
 #include "filewrite.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
@@ -63,7 +64,7 @@ throw (_wexception)
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		const Extent extent = egbase->map().extent();
 		for (;;) {
-         uint ser=fr.Unsigned32();
+         uint32_t ser=fr.Unsigned32();
 
          if (ser==0xffffffff) break; // end of flags
          assert(ol->is_object_known(ser));
@@ -99,7 +100,7 @@ throw (_wexception)
 
          // Roads are set somewhere else
 
-			for (uint i = 0; i < 6; ++i)
+			for (uint32_t i = 0; i < 6; ++i)
 				flag->m_items_pending[i] = fr.Unsigned32();
          flag->m_item_capacity=fr.Unsigned32();
          flag->m_item_filled=fr.Unsigned32();
@@ -107,11 +108,11 @@ throw (_wexception)
          // items
          for (int i=0; i<flag->m_item_filled; i++) {
             flag->m_items[i].pending=fr.Unsigned8();
-            uint item=fr.Unsigned32();
+            uint32_t item=fr.Unsigned32();
             assert(ol->is_object_known(item));
             flag->m_items[i].item=static_cast<WareInstance*>(ol->get_object_by_file_index(item));
 
-            uint nextstep=fr.Unsigned32();
+            uint32_t nextstep=fr.Unsigned32();
 				if (nextstep) {
                assert(ol->is_object_known(nextstep));
                flag->m_items[i].nextstep=static_cast<PlayerImmovable*>(ol->get_object_by_file_index(nextstep));
@@ -121,7 +122,7 @@ throw (_wexception)
 			}
 
          // always call
-         uint always_call=fr.Unsigned32();
+         uint32_t always_call=fr.Unsigned32();
 			if (always_call) {
             assert(ol->is_object_known(always_call));
             flag->m_always_call_for_flag=static_cast<Flag*>(ol->get_object_by_file_index(always_call));
@@ -131,8 +132,8 @@ throw (_wexception)
          // Workers waiting
 			const Uint16 nr_workers = fr.Unsigned16();
          flag->m_capacity_wait.resize(nr_workers);
-         for (uint i=0; i<nr_workers; i++) {
-            uint id=fr.Unsigned32();
+         for (uint32_t i=0; i<nr_workers; i++) {
+            uint32_t id=fr.Unsigned32();
             assert(ol->is_object_known(id));
             flag->m_capacity_wait[i]=ol->get_object_by_file_index(id);
 			}
@@ -206,7 +207,7 @@ throw (_wexception)
             // Roads are not saved, they are set on load
 
             // Pending items
-            for (uint i=0; i<6; i++)
+            for (uint32_t i=0; i<6; i++)
                   fw.Unsigned32(flag->m_items_pending[i]);
 
             // Capacity

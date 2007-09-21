@@ -377,22 +377,22 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 	char buffer[256];
 	std::string dir=directory;
 	dir+="/";
-	for (uint i = 0; i <= m_max_hp_level;      ++i) {
+	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
 		snprintf(buffer, sizeof(buffer), "hp_level_%u_pic",      i);
 		m_hp_pics_fn[i]=dir;
 		m_hp_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for (uint i = 0; i <= m_max_attack_level;  ++i) {
+	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
 		snprintf(buffer, sizeof(buffer), "attack_level_%u_pic",  i);
 		m_attack_pics_fn[i]=dir;
 		m_attack_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for (uint i = 0; i <= m_max_defense_level; ++i) {
+	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
 		snprintf(buffer, sizeof(buffer), "defense_level_%u_pic", i);
 		m_defense_pics_fn[i]=dir;
 		m_defense_pics_fn[i]+=sglobal->get_safe_string(buffer);
 	}
-	for (uint i = 0; i <= m_max_evade_level;   ++i) {
+	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
 		snprintf(buffer, sizeof(buffer), "evade_level_%i_pic",   i);
 		m_evade_pics_fn[i]=dir;
 		m_evade_pics_fn[i]+=sglobal->get_safe_string(buffer);
@@ -407,7 +407,7 @@ void Soldier_Descr::load_graphics() {
 	m_attack_pics.resize(m_max_attack_level+1);
 	m_defense_pics.resize(m_max_defense_level+1);
 	m_evade_pics.resize(m_max_evade_level+1);
-	uint i;
+	uint32_t i;
 	for (i=0; i<=m_max_hp_level; i++) {
 		m_hp_pics[i]=g_gr->get_picture(PicMod_Game,  m_hp_pics_fn[i].c_str());
 	}
@@ -427,7 +427,7 @@ void Soldier_Descr::load_graphics() {
 /**
  * Get random animation of specified type
  */
-uint Soldier_Descr::get_rand_anim(const char * const animation_name) const {
+uint32_t Soldier_Descr::get_rand_anim(const char * const animation_name) const {
 	// Todo: This is thought to get a random animation like attack_1 attack_2 attack_3 ...
 	// Randimly trhought this method. By now only gets attack, but isn't very difficult
 	// to remake allowing the attack_1 and so.
@@ -475,7 +475,7 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_defense=descr().get_defense();
 	m_evade=descr().get_evade();
 	if (Game * const game = dynamic_cast<Game *>(gg)) {
-		const uint min_hp = descr().get_min_hp();
+		const uint32_t min_hp = descr().get_min_hp();
 		assert(min_hp);
 		assert(min_hp <= descr().get_max_hp());
 		m_hp_max = min_hp + game->logic_rand() % (descr().get_max_hp() - min_hp);
@@ -491,14 +491,14 @@ void Soldier::init(Editor_Game_Base* gg) {
  * Set this soldiers level. Automatically sets the new values
  */
 void Soldier::set_level
-(const uint hp, const uint attack, const uint defense, const uint evade)
+(const uint32_t hp, const uint32_t attack, const uint32_t defense, const uint32_t evade)
 {
 	set_hp_level(hp);
 	set_attack_level(attack);
 	set_defense_level(defense);
 	set_evade_level(evade);
 }
-void Soldier::set_hp_level(const uint hp) {
+void Soldier::set_hp_level(const uint32_t hp) {
 	assert(hp>=m_hp_level && hp<=descr().get_max_hp_level());
 
 	while (m_hp_level<hp) {
@@ -507,7 +507,7 @@ void Soldier::set_hp_level(const uint hp) {
 		m_hp_current+=descr().get_hp_incr_per_level();
 	}
 }
-void Soldier::set_attack_level(const uint attack) {
+void Soldier::set_attack_level(const uint32_t attack) {
 	assert(attack>=m_attack_level && attack<=descr().get_max_attack_level());
 
 	while (m_attack_level<attack) {
@@ -516,7 +516,7 @@ void Soldier::set_attack_level(const uint attack) {
 		m_max_attack+=descr().get_attack_incr_per_level();
 	}
 }
-void Soldier::set_defense_level(const uint defense) {
+void Soldier::set_defense_level(const uint32_t defense) {
 	assert(defense>=m_defense_level && defense<=descr().get_max_defense_level());
 
 	while (m_defense_level<defense) {
@@ -524,7 +524,7 @@ void Soldier::set_defense_level(const uint defense) {
 		m_defense+=descr().get_defense_incr_per_level();
 	}
 }
-void Soldier::set_evade_level(const uint evade) {
+void Soldier::set_evade_level(const uint32_t evade) {
 	assert(evade>=m_evade_level && evade<=descr().get_max_evade_level());
 
 	while (m_evade_level<evade) {
@@ -533,7 +533,7 @@ void Soldier::set_evade_level(const uint evade) {
 	}
 }
 
-uint Soldier::get_level(const tAttribute at)
+uint32_t Soldier::get_level(const tAttribute at)
 {
 	switch (at) {
 	case atrHP:      return m_hp_level;
@@ -547,7 +547,7 @@ uint Soldier::get_level(const tAttribute at)
 }
 
 // Unsignedness ensures that we can only heal, don't hurt throught this method.
-void Soldier::heal (const uint hp) {
+void Soldier::heal (const uint32_t hp) {
 	molog ("healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
 	m_hp_current += hp;
 
@@ -558,7 +558,7 @@ void Soldier::heal (const uint hp) {
 /**
  * This only subs the specified number of hitpoints, don't do anything more.
  */
-void Soldier::damage (const uint value)
+void Soldier::damage (const uint32_t value)
 {
 	assert (m_hp_current > 0);
 
@@ -575,11 +575,11 @@ void Soldier::damage (const uint value)
 void Soldier::draw
 (const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
 {
-	if (const uint anim = get_current_anim()) {
+	if (const uint32_t anim = get_current_anim()) {
 
 		const Point drawpos = calc_drawpos(game, pos);
 
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_animation_size(anim, game.get_gametime() - get_animstart(), w, h);
 
 	// Draw energy bar
@@ -611,18 +611,18 @@ void Soldier::draw
 
 	// Draw information fields about levels
 	// first, gather informations
-		const uint hppic = get_hp_level_pic();
-		const uint attackpic = get_attack_level_pic();
-		const uint defensepic = get_defense_level_pic();
-		const uint evadepic = get_evade_level_pic();
-		uint hpw, hph, atw, ath, dew, deh, evw, evh;
+		const uint32_t hppic = get_hp_level_pic();
+		const uint32_t attackpic = get_attack_level_pic();
+		const uint32_t defensepic = get_defense_level_pic();
+		const uint32_t evadepic = get_evade_level_pic();
+		uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
 		g_gr->get_picture_size(hppic,      hpw, hph);
 		g_gr->get_picture_size(attackpic,  atw, ath);
 		g_gr->get_picture_size(defensepic, dew, deh);
 		g_gr->get_picture_size(evadepic,   evw, evh);
 
 		{
-			const uint w_half = r.w >> 1;
+			const uint32_t w_half = r.w >> 1;
 			dst.blit(r + Point(w_half - atw, -(hph + ath)), attackpic);
 			dst.blit(r + Point(w_half,       -(evh + deh)), defensepic);
 			dst.blit(r + Point(w_half - hpw, -hph),         hppic);
@@ -638,7 +638,7 @@ void Soldier::draw
  *
  */
 void Soldier::start_animation
-(Editor_Game_Base* gg, const char * const animname, const uint time)
+(Editor_Game_Base* gg, const char * const animname, const uint32_t time)
 {
 	if (Game * const game = dynamic_cast<Game *>(gg))
 		start_task_idle (game, descr().get_rand_anim(animname), time);

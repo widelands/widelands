@@ -43,7 +43,7 @@
 extern Map_Object_Descr g_road_descr;
 
 // hard-coded playercolors
-const uchar g_playercolors[MAX_PLAYERS][12] = {
+const uint8_t g_playercolors[MAX_PLAYERS][12] = {
 	{ // blue
 		  2,   2,  74,
 		  2,   2, 112,
@@ -422,7 +422,7 @@ Player * Editor_Game_Base::add_player
    if (m_players[player_number - 1]) remove_player(player_number);
 
    // Get the player's tribe
-   uint i;
+   uint32_t i;
 
 	manually_load_tribe(tribe.c_str());
 
@@ -448,7 +448,7 @@ Player * Editor_Game_Base::add_player
  * Load the given tribe into structure
  */
 void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
-	uint i;
+	uint32_t i;
 
 	for (i = 0; i < m_tribes.size(); i++)
 		if (m_tribes[i]->name() == tribe) break;
@@ -461,7 +461,7 @@ void Editor_Game_Base::manually_load_tribe(const std::string & tribe) {
  * Returns a tribe description from the internally loaded list
  */
 Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
-	uint i;
+	uint32_t i;
    for (i = 0; i < m_tribes.size(); i++) {
 		if (not strcmp(m_tribes[i]->name().c_str(), tribe))
 			return m_tribes[i];
@@ -526,7 +526,7 @@ graphics are loaded.
 */
 void Editor_Game_Base::postload()
 {
-	uint id;
+	uint32_t id;
 	int pid;
 
 	// Postload tribes
@@ -704,9 +704,9 @@ Battle* Editor_Game_Base::create_battle ()
 }
 
 AttackController* Editor_Game_Base::create_attack_controller
-		(Flag* flag, int attacker, int defender, uint num)
+		(Flag* flag, int attacker, int defender, uint32_t num)
 {
-	uint i;
+	uint32_t i;
 	for (i=0;i<m_attack_serials.size();i++) {
 		AttackController* curCtrl =
 			dynamic_cast<AttackController *>
@@ -733,9 +733,9 @@ AttackController* Editor_Game_Base::create_attack_controller()
 	return ctrl;
 }
 
-void Editor_Game_Base::remove_attack_controller(uint serial)
+void Editor_Game_Base::remove_attack_controller(uint32_t serial)
 {
-	for (uint i=0;i<m_attack_serials.size();i++) {
+	for (uint32_t i=0;i<m_attack_serials.size();i++) {
 		if (m_attack_serials[i] == serial) {
 			dynamic_cast<AttackController *>(objects().get_object(serial))
 				->destroy(this);
@@ -778,7 +778,7 @@ Add a registered pointer.
 Returns the serial number that can be used to retrieve or remove the pointer.
 ===============
 */
-uint Editor_Game_Base::add_trackpointer(void* ptr)
+uint32_t Editor_Game_Base::add_trackpointer(void* ptr)
 {
 	m_lasttrackserial++;
 
@@ -798,9 +798,9 @@ Retrieve a previously stored pointer using the serial number.
 Returns 0 if the pointer has been removed.
 ===============
 */
-void* Editor_Game_Base::get_trackpointer(uint serial)
+void* Editor_Game_Base::get_trackpointer(uint32_t serial)
 {
-	std::map<uint, void*>::iterator it = m_trackpointers.find(serial);
+	std::map<uint32_t, void*>::iterator it = m_trackpointers.find(serial);
 
 	if (it != m_trackpointers.end())
 		return it->second;
@@ -817,7 +817,7 @@ Remove the registered track pointer. Subsequent calls to get_trackpointer()
 using this serial number will return 0.
 ===============
 */
-void Editor_Game_Base::remove_trackpointer(uint serial)
+void Editor_Game_Base::remove_trackpointer(uint32_t serial)
 {
 	m_trackpointers.erase(serial);
 }

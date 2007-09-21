@@ -20,6 +20,7 @@
 #ifndef __S__GAME_TIPS_H
 #define __S__GAME_TIPS_H
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 #include "ui_progresswindow.h"
@@ -40,22 +41,22 @@ private:
 
 	void show_tip(int index);
 	const RGBColor color_from_hex(const char * hexcode, const RGBColor & def);
-	const uint colorvalue_from_hex(const char c1, const char c2);
+	const uint32_t colorvalue_from_hex(const char c1, const char c2);
 
 	Uint32               m_lastUpdated;
 	Uint32               m_updateAfter;
 	UI::ProgressWindow & m_progressWindow;
 	bool                 m_registered;
-	uint                 m_lastTip;
+	uint32_t                 m_lastTip;
 
 	std::vector<Tip>     m_tips;
 	std::string          m_background_picture;
-	uint                 m_width;
-	uint                 m_height;
-	uint                 m_pading_l;
-	uint                 m_pading_r;
-	uint                 m_pading_t;
-	uint                 m_pading_b;
+	uint32_t                 m_width;
+	uint32_t                 m_height;
+	uint32_t                 m_pading_l;
+	uint32_t                 m_pading_r;
+	uint32_t                 m_pading_t;
+	uint32_t                 m_pading_b;
 	int                  m_font_size;
 	RGBColor             m_bgcolor;
 	RGBColor             m_color;

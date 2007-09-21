@@ -20,9 +20,8 @@
 #ifndef included_ui_radiobutton_h
 #define included_ui_radiobutton_h
 
+#include <stdint.h>
 #include "ui_signal.h"
-
-#include "types.h"
 
 namespace UI {
 struct Panel;
@@ -46,7 +45,7 @@ struct Radiogroup {
 	int add_button
 		(Panel * parent,
 		 const int x, const int y,
-		 const uint picid, const char * const tooltip = 0);
+		 const uint32_t picid, const char * const tooltip = 0);
 
 	inline int get_state() const {return m_state;}
 	void set_state(int state);

@@ -22,9 +22,8 @@
 
 #include "log.h"
 
-#include "types.h"
-
 #include <cassert>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -82,7 +81,7 @@ struct ProductionProgram {
 	int get_size() const {return m_actions.size();}
 	const ProductionAction* get_action(int idx) const {
 		assert(idx >= 0);
-		assert(static_cast<uint>(idx) < m_actions.size());
+		assert(static_cast<uint32_t>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 

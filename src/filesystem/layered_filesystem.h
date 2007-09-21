@@ -21,6 +21,7 @@
 #define LAYEREDFILESYSTEM_H
 
 #include "filesystem.h"
+#include <stdint.h>
 
 /**
  * LayeredFileSystem is a file system which basically merges several layered
@@ -50,7 +51,7 @@ struct LayeredFileSystem : public FileSystem {
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
 	                            filenameset_t *results,
-	                            uint depth=0);
+	                            uint32_t depth=0);
 
 	virtual const bool IsWritable() const;
 	virtual const bool FileExists(const std::string path);

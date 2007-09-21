@@ -21,6 +21,7 @@
 #include "wexception.h"
 
 #include <stdarg.h>
+#include <stdint.h>
 
 StreamWrite::~StreamWrite()
 {
@@ -42,10 +43,10 @@ void StreamWrite::Printf(const char *fmt, ...)
 	int i = vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if ((uint)i < sizeof(buffer)) {
+	if ((uint32_t)i < sizeof(buffer)) {
 		Data(buffer, i);
 	} else {
-		uint size = sizeof(buffer);
+		uint32_t size = sizeof(buffer);
 		char* heapbuf = 0;
 
 		do {
@@ -60,7 +61,7 @@ void StreamWrite::Printf(const char *fmt, ...)
 			va_start(va, fmt);
 			i = vsnprintf(heapbuf, i+1, fmt, va);
 			va_end(va);
-		} while((uint)i >= size);
+		} while((uint32_t)i >= size);
 
 		Data(heapbuf, i);
 

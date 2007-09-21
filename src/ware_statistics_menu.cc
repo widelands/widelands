@@ -25,6 +25,7 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "warelist.h"
 #include "wui_plot_area.h"
@@ -299,7 +300,7 @@ static const RGBColor colors[] = {
  * of the graph and it needs a picture
  */
 struct WSM_Checkbox : public UI::Checkbox {
-      WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint picid, RGBColor color);
+      WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint32_t picid, RGBColor color);
 
       virtual void draw(RenderTarget* dst);
 
@@ -311,7 +312,7 @@ private:
 /*
  * Constructor
  */
-WSM_Checkbox::WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint picid, RGBColor color) :
+WSM_Checkbox::WSM_Checkbox(UI::Panel* parent, int x, int y, int id, uint32_t picid, RGBColor color) :
    UI::Checkbox(parent, x, y, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)) {
 
    m_pic = picid;
@@ -352,9 +353,9 @@ m_parent(&parent)
 {
    // First, we must decide about the size
 	const int nr_wares = parent.get_player()->tribe().get_nrwares();
-	uint wares_per_row = MIN_WARES_PER_LINE;
+	uint32_t wares_per_row = MIN_WARES_PER_LINE;
    while (nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
-	const uint nr_rows =
+	const uint32_t nr_rows =
 		nr_wares / wares_per_row + (nr_wares % wares_per_row ? 1 : 0);
 
    int spacing=5;
@@ -378,10 +379,10 @@ m_parent(&parent)
    int dposy = 0;
    posy += PLOT_HEIGHT+ 2*spacing;
 	const Tribe_Descr & tribe = parent.get_player()->tribe();
-	for (uint y = 0; y < nr_rows; ++y) {
+	for (uint32_t y = 0; y < nr_rows; ++y) {
       posx = spacing;
 		for
-			(uint x = 0;
+			(uint32_t x = 0;
 			 x < wares_per_row and cur_ware < nr_wares;
 			 ++x, ++cur_ware)
 		{

@@ -35,6 +35,7 @@
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_modal_messagebox.h"
@@ -136,7 +137,7 @@ Interactive_Base(e), m_editor(e)
    // Load all tribes into memory
    std::vector<std::string> tribes;
 	Tribe_Descr::get_all_tribenames(tribes);
-   uint i=0;
+   uint32_t i=0;
    for (i=0; i<tribes.size(); i++)
 		e.manually_load_tribe(tribes[i].c_str());
 
@@ -436,7 +437,7 @@ bool Editor_Interactive::is_player_tribe_referenced(int player) {
 	assert(0 < player);
 	assert    (player <= m_editor.map().get_nrplayers());
 
-   uint i=0;
+   uint32_t i=0;
    for (i=0; i<m_player_tribe_references.size(); i++)
          if (m_player_tribe_references[i].player==player) return true;
 

@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 #define __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
+#include <stdint.h>
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_textarea.h"
@@ -39,13 +40,13 @@ struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
 private:
       Player* m_player;
 	UI::Textarea              m_allowed_label, m_forbidden_label;
-	UI::Listselect<uintptr_t> m_allowed,       m_forbidden;
+	UI::Listselect<intptr_t> m_allowed,       m_forbidden;
 	UI::IDButton<Editor_Player_Menu_Allowed_Buildings_Menu, const bool>
 		m_forbid_button, m_allow_button;
-	void allowed_selected        (uint);
-	void forbidden_selected      (uint);
-	void allowed_double_clicked  (uint);
-	void forbidden_double_clicked(uint);
+	void allowed_selected        (uint32_t);
+	void forbidden_selected      (uint32_t);
+	void allowed_double_clicked  (uint32_t);
+	void forbidden_double_clicked(uint32_t);
 	void clicked                 (const bool allow);
       void update();
 };

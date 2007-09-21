@@ -29,6 +29,7 @@
 #include "player.h"
 #include "productionsite.h"
 #include "production_program.h"
+#include <stdint.h>
 #include "soldier.h"
 #include "trainingsite.h"
 #include "transport.h"
@@ -178,7 +179,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
          constructionsite.m_builder_request=0;
 
       // Builder
-      uint reg=fr.Unsigned32();
+      uint32_t reg=fr.Unsigned32();
 		if (reg) {
          assert(ol->is_object_known(reg));
          constructionsite.m_builder=static_cast<Worker*>(ol->get_object_by_file_index(reg));
@@ -186,15 +187,15 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite
          constructionsite.m_builder=0;
 
       // Wares queues
-      uint size=fr.Unsigned16();
+      uint32_t size=fr.Unsigned16();
       assert(constructionsite.m_wares.size()>=size);
-      for (uint i=size; i<constructionsite.m_wares.size(); i++) {
+      for (uint32_t i=size; i<constructionsite.m_wares.size(); i++) {
 			if (dynamic_cast<Game *>(egbase))
 				constructionsite.m_wares[i]->cleanup();
          delete constructionsite.m_wares[i];
 		}
       constructionsite.m_wares.resize(size);
-      for (uint i=0; i<constructionsite.m_wares.size(); i++) {
+      for (uint32_t i=0; i<constructionsite.m_wares.size(); i++) {
          constructionsite.m_wares[i]->Read(&fr, egbase, ol);
 		}
 
@@ -235,10 +236,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
 		}
 
       // Request
-      for (uint i=0; i<warehouse.m_requests.size(); i++)
+      for (uint32_t i=0; i<warehouse.m_requests.size(); i++)
          delete warehouse.m_requests[i];
       warehouse.m_requests.resize(fr.Unsigned16());
-      for (uint i=0; i<warehouse.m_requests.size(); i++) {
+      for (uint32_t i=0; i<warehouse.m_requests.size(); i++) {
 			Request & req = *new Request
 				(&warehouse,
 				 0,
@@ -258,7 +259,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse
       warehouse.m_incorporated_workers.resize(0);
       int nrworkers=fr.Unsigned16();
       for (int i=0; i<nrworkers; i++) {
-         uint id=fr.Unsigned32();
+         uint32_t id=fr.Unsigned32();
          std::string name=fr.CString();
          assert(ol->is_object_known(id));
          // Worker might not yet be loaded so that get ware won't work
@@ -287,20 +288,20 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
  Widelands_Map_Map_Object_Loader * const ol)
 {
       // read the version
-      uint version=fr.Unsigned16();
+      uint32_t version=fr.Unsigned16();
 
 	if (version == CURRENT_MILITARYSITE_PACKET_VERSION) {
          // Read productionsite
 		read_productionsite(militarysite, fr, egbase, ol);
 
          // Request
-			uint nr_requests=fr.Unsigned16();
+			uint32_t nr_requests=fr.Unsigned16();
 
-			for (uint i=0; i<militarysite.m_soldier_requests.size(); i++)
+			for (uint32_t i=0; i<militarysite.m_soldier_requests.size(); i++)
 	         delete militarysite.m_soldier_requests[i];
 		militarysite.m_soldier_requests.resize(nr_requests);
 
-			for (uint i=0; i<nr_requests; i++) {
+			for (uint32_t i=0; i<nr_requests; i++) {
 				Request & req = *new Request
 					(&militarysite,
 					 0,
@@ -312,11 +313,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite
 			}
 
          // Soldier
-         uint nr_soldiers = fr.Unsigned16();
+         uint32_t nr_soldiers = fr.Unsigned16();
          assert(!militarysite.m_soldiers.size());
          militarysite.m_soldiers.resize(nr_soldiers);
-		for (uint i = 0; i < nr_soldiers; ++i) {
-            uint reg = fr.Unsigned32();
+		for (uint32_t i = 0; i < nr_soldiers; ++i) {
+            uint32_t reg = fr.Unsigned32();
             assert(ol->is_object_known(reg));
             militarysite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
 			}
@@ -340,11 +341,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 	const Uint16 packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
       // Requests
-      uint nr_requests=fr.Unsigned16();
-      for (uint i=0; i<productionsite.m_worker_requests.size(); i++)
+      uint32_t nr_requests=fr.Unsigned16();
+      for (uint32_t i=0; i<productionsite.m_worker_requests.size(); i++)
          delete productionsite.m_worker_requests[i];
       productionsite.m_worker_requests.resize(nr_requests);
-      for (uint i=0; i<nr_requests; i++) {
+      for (uint32_t i=0; i<nr_requests; i++) {
 			Request & req = *new Request
 				(&productionsite,
 				 0,
@@ -356,11 +357,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
 		}
 
       // Workers
-      uint nr_workers = fr.Unsigned16();
+      uint32_t nr_workers = fr.Unsigned16();
       assert(!productionsite.m_workers.size());
       productionsite.m_workers.resize(nr_workers);
-      for (uint i=0; i<nr_workers; i++) {
-         uint reg = fr.Unsigned32();
+      for (uint32_t i=0; i<nr_workers; i++) {
+         uint32_t reg = fr.Unsigned32();
          assert(ol->is_object_known(reg));
          productionsite.m_workers[i] = static_cast<Worker*>(ol->get_object_by_file_index(reg));
 		}
@@ -369,9 +370,9 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       productionsite.m_fetchfromflag = fr.Signed32();
 
       // State
-      uint nr_progs = fr.Unsigned16();
+      uint32_t nr_progs = fr.Unsigned16();
       productionsite.m_program.resize(nr_progs);
-      for (uint i=0; i<nr_progs; i++) {
+      for (uint32_t i=0; i<nr_progs; i++) {
          std::string prog = fr.CString();
          productionsite.m_program[i].program = productionsite.descr().get_program(prog.c_str());
          productionsite.m_program[i].ip = fr.Signed32();
@@ -382,16 +383,16 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite
       productionsite.m_program_time = fr.Signed32();
 
       // Wares
-      uint nr_queues = fr.Unsigned16();
+      uint32_t nr_queues = fr.Unsigned16();
 		if (nr_queues != productionsite.m_input_queues.size())
          throw wexception("Productionsite has wrong number of input queues!\n");
-      for (uint i=0; i<productionsite.m_input_queues.size(); i++)
+      for (uint32_t i=0; i<productionsite.m_input_queues.size(); i++)
          productionsite.m_input_queues[i]->Read(&fr, egbase, ol);
 
       // Statistics
-      uint stats_size = fr.Unsigned16();
+      uint32_t stats_size = fr.Unsigned16();
       productionsite.m_statistics.resize(stats_size);
-      for (uint i=0; i<productionsite.m_statistics.size(); i++)
+      for (uint32_t i=0; i<productionsite.m_statistics.size(); i++)
          productionsite.m_statistics[i] = fr.Unsigned8();
       productionsite.m_statistics_changed = fr.Unsigned8();
       memcpy(productionsite.m_statistics_buf, fr.Data(sizeof(productionsite.m_statistics_buf)), sizeof(productionsite.m_statistics_buf));
@@ -414,13 +415,13 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 		read_productionsite(trainingsite, fr, egbase, ol);
 
          // Requests
-		uint nr_requests=fr.Unsigned16();
+		uint32_t nr_requests=fr.Unsigned16();
 
-		for (uint i=0; i<trainingsite.m_soldier_requests.size(); i++)
+		for (uint32_t i=0; i<trainingsite.m_soldier_requests.size(); i++)
 			delete trainingsite.m_soldier_requests[i];
 		trainingsite.m_soldier_requests.resize(nr_requests);
 
-		for (uint i=0; i<nr_requests; i++) {
+		for (uint32_t i=0; i<nr_requests; i++) {
 			Request & req = *new Request
 				(&trainingsite,
 				 0,
@@ -432,11 +433,11 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite
 		}
 
          // Soldiers
-		uint nr_soldiers = fr.Unsigned16();
+		uint32_t nr_soldiers = fr.Unsigned16();
 		assert(!trainingsite.m_soldiers.size());
 		trainingsite.m_soldiers.resize(nr_soldiers);
-		for (uint i=0; i<nr_soldiers; i++) {
-			uint reg = fr.Unsigned32();
+		for (uint32_t i=0; i<nr_soldiers; i++) {
+			uint32_t reg = fr.Unsigned32();
 			assert(ol->is_object_known(reg));
 			trainingsite.m_soldiers[i] = static_cast<Soldier*>(ol->get_object_by_file_index(reg));
 		}
@@ -494,7 +495,7 @@ throw (_wexception)
 
    // Walk the map again
 	Map & map = egbase->map();
-	const uint mapwidth = map.get_width();
+	const uint32_t mapwidth = map.get_width();
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		const Building * const building =
@@ -619,7 +620,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_constructionsite
 
    // ware queues
    fw.Unsigned16(constructionsite.m_wares.size());
-   for (uint i=0; i<constructionsite.m_wares.size(); i++) {
+   for (uint32_t i=0; i<constructionsite.m_wares.size(); i++) {
       constructionsite.m_wares[i]->Write(&fw, egbase, os);
 	}
 
@@ -660,13 +661,13 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 
    // Request
    fw.Unsigned16(warehouse.m_requests.size());
-   for (uint i=0; i<warehouse.m_requests.size(); i++) {
+   for (uint32_t i=0; i<warehouse.m_requests.size(); i++) {
       warehouse.m_requests[i]->Write(&fw, egbase, os);
 	}
 
    // Incorporated workers, write sorted after file-serial
    fw.Unsigned16(warehouse.m_incorporated_workers.size());
-	std::map<uint, const Worker *> workermap;
+	std::map<uint32_t, const Worker *> workermap;
 	const std::vector<Object_Ptr>::const_iterator iw_end =
 		warehouse.m_incorporated_workers.end();
 	for
@@ -677,13 +678,13 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse
 	{
 		assert(os->is_object_known(it->get(egbase)));
 		workermap.insert
-			(std::pair<uint, const Worker *>
+			(std::pair<uint32_t, const Worker *>
 			 (os->get_object_file_index(it->get(egbase)),
 			  static_cast<const Worker *>(it->get(egbase))));
 	}
 
 	for
-		(std::map<uint, const Worker *>::const_iterator it = workermap.begin();
+		(std::map<uint32_t, const Worker *>::const_iterator it = workermap.begin();
 		 it != workermap.end();
 		++it)
 	{
@@ -713,13 +714,13 @@ void Widelands_Map_Buildingdata_Data_Packet::write_militarysite
 
    // Request
    fw.Unsigned16(militarysite.m_soldier_requests.size());
-   for (uint i=0; i<militarysite.m_soldier_requests.size(); i++)
+   for (uint32_t i=0; i<militarysite.m_soldier_requests.size(); i++)
       militarysite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
    // Soldier
    fw.Unsigned16(militarysite.m_soldiers.size());
-   for (uint i=0; i<militarysite.m_soldiers.size(); i++) {
+   for (uint32_t i=0; i<militarysite.m_soldiers.size(); i++) {
       assert(os->is_object_known(militarysite.m_soldiers[i]));
       fw.Unsigned32(os->get_object_file_index(militarysite.m_soldiers[i]));
 	}
@@ -746,12 +747,12 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
 
    // Requests
    fw.Unsigned16(productionsite.m_worker_requests.size());
-   for (uint i=0; i<productionsite.m_worker_requests.size(); i++)
+   for (uint32_t i=0; i<productionsite.m_worker_requests.size(); i++)
       productionsite.m_worker_requests[i]->Write(&fw, egbase, os);
 
    // Workers
    fw.Unsigned16(productionsite.m_workers.size());
-   for (uint i=0; i<productionsite.m_workers.size(); i++) {
+   for (uint32_t i=0; i<productionsite.m_workers.size(); i++) {
       assert(os->is_object_known(productionsite.m_workers[i]));
       fw.Unsigned32(os->get_object_file_index(productionsite.m_workers[i]));
 	}
@@ -761,7 +762,7 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
 
    // State
    fw.Unsigned16(productionsite.m_program.size());
-   for (uint i=0; i<productionsite.m_program.size(); i++) {
+   for (uint32_t i=0; i<productionsite.m_program.size(); i++) {
       fw.CString(productionsite.m_program[i].program->get_name().c_str());
       fw.Signed32(productionsite.m_program[i].ip);
       fw.Signed32(productionsite.m_program[i].phase);
@@ -772,12 +773,12 @@ void Widelands_Map_Buildingdata_Data_Packet::write_productionsite
 
    // Wares Queues
    fw.Unsigned16(productionsite.m_input_queues.size());
-   for (uint i=0; i<productionsite.m_input_queues.size(); i++)
+   for (uint32_t i=0; i<productionsite.m_input_queues.size(); i++)
       productionsite.m_input_queues[i]->Write(&fw, egbase, os);
 
    // Statistics
    fw.Unsigned16(productionsite.m_statistics.size());
-   for (uint i=0; i<productionsite.m_statistics.size(); i++)
+   for (uint32_t i=0; i<productionsite.m_statistics.size(); i++)
       fw.Unsigned8(productionsite.m_statistics[i]);
    fw.Unsigned8(productionsite.m_statistics_changed);
    fw.Data(productionsite.m_statistics_buf, sizeof(productionsite.m_statistics_buf));
@@ -800,13 +801,13 @@ void Widelands_Map_Buildingdata_Data_Packet::write_trainingsite
 
 	//  requests
    fw.Unsigned16(trainingsite.m_soldier_requests.size());
-   for (uint i=0; i<trainingsite.m_soldier_requests.size(); i++)
+   for (uint32_t i=0; i<trainingsite.m_soldier_requests.size(); i++)
       trainingsite.m_soldier_requests[i]->Write(&fw, egbase, os);
 
 
 	//  soldiers
    fw.Unsigned16(trainingsite.m_soldiers.size());
-   for (uint i=0; i<trainingsite.m_soldiers.size(); i++) {
+   for (uint32_t i=0; i<trainingsite.m_soldiers.size(); i++) {
       assert(os->is_object_known(trainingsite.m_soldiers[i]));
       fw.Unsigned32(os->get_object_file_index(trainingsite.m_soldiers[i]));
 	}

@@ -22,11 +22,12 @@
 
 #include <map>
 #include <set>
+#include <stdint.h>
 #include <string>
 
 //  This type is used to store information about workareas. It stores radii and
 //  for each radius a set of strings. Each string contains a description of an
 //  activity (or similar) that can be performed within the radius.
-typedef std::map<unsigned int, std::set<std::string> > Workarea_Info;
+typedef std::map<uint32_t, std::set<std::string> > Workarea_Info;
 
 #endif /* __S_WORKAREA_INFO_H */

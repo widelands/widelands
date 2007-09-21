@@ -102,12 +102,12 @@ void Fullscreen_Menu_NetSetup::think ()
 	if (not NetGGZ::ref()->usedcore()) discovery.run();
 }
 
-bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
+bool Fullscreen_Menu_NetSetup::get_host_address (uint32_t& addr, uint16_t& port)
 {
 	const char * const host = hostname.get_text();
 
-	const uint opengames_size = opengames.size();
-	for (uint i = 0; i < opengames_size; ++i) {
+	const uint32_t opengames_size = opengames.size();
+	for (uint32_t i = 0; i < opengames_size; ++i) {
 		const LAN_Open_Game & game = *opengames[i];
 
 		if (not strcmp(game.info.hostname, host)) {
@@ -127,7 +127,7 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 	return true;
 }
 
-void Fullscreen_Menu_NetSetup::game_selected (uint) {
+void Fullscreen_Menu_NetSetup::game_selected (uint32_t) {
 	if (const LAN_Open_Game * const game = opengames.get_selected())
 		hostname.set_text(game->info.hostname);
 		joingame.set_enabled(true);

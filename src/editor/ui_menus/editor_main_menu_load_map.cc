@@ -159,7 +159,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 /*
  * called when a item is selected
  */
-void Main_Menu_Load_Map::selected(uint) {
+void Main_Menu_Load_Map::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
    m_ok_btn->set_enabled(true);
@@ -194,7 +194,7 @@ void Main_Menu_Load_Map::selected(uint) {
 /*
  * An Item has been doubleclicked
  */
-void Main_Menu_Load_Map::double_clicked(uint) {clicked_ok();}
+void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
 
 /*
  * fill the file list
@@ -296,8 +296,8 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 					char picname[] ="pics/editor_player_??_starting_pos.png";
 					picname[19] = static_cast<char>(p / 10 + 0x30);
 					picname[20] = static_cast<char>(p % 10 + 0x30);
-					const uint picid = g_gr->get_picture(PicMod_Game, picname);
-					uint w, h;
+					const uint32_t picid = g_gr->get_picture(PicMod_Game, picname);
+					uint32_t w, h;
 					g_gr->get_picture_size(picid, w, h);
 					map.overlay_manager().register_overlay
 						(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
@@ -309,7 +309,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 		Overlay_Manager & overlay_manager = map.overlay_manager();
 		const Extent extent = map.extent();
 		iterate_Map_FCoords(map, extent, fc) {
-				if (const uchar amount = fc.field->get_resources_amount()) {
+				if (const uint8_t amount = fc.field->get_resources_amount()) {
 					const std::string & immname =
 						world.get_resource(fc.field->get_resources())->get_editor_pic(amount);
 					if (immname.size())

@@ -25,6 +25,7 @@
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
+#include <stdint.h>
 #include "wlapplication.h"
 #include "world.h"
 
@@ -51,17 +52,17 @@ m_pit                   (pit)
    const int ystart=15;
 	const World & world = parent.egbase().map().world();
    int nr_bobs = world.get_nr_bobs();
-	const uint bobs_in_row =
+	const uint32_t bobs_in_row =
 		std::max
 		(std::min
-		 (static_cast<uint>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U),
+		 (static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_bobs)))), 24U),
 		 12U);
 
 	m_tabpanel.set_snapparent(true);
 
-	uint width = 0, height = 0;
+	uint32_t width = 0, height = 0;
    for (int j=0; j<nr_bobs; j++) {
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture
 			 (PicMod_Game, world.get_bob_descr(j)->get_picture()), w, h);
@@ -69,11 +70,11 @@ m_pit                   (pit)
       if (h>height) height=h;
 	}
 
-	const uint tab_icon =
+	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
    int ypos=ystart;
    int xpos=xstart;
-	uint cur_x = bobs_in_row;
+	uint32_t cur_x = bobs_in_row;
    int i=0;
    while (i<nr_bobs) {
 		UI::Box * box;
@@ -130,10 +131,10 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
 	}
 
 	if (not multiselect) {
-		for (uint i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
+		for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
       // Disable all checkboxes
-      // TODO: the uint cast is ugly!
-		for (uint i = 0; i < m_checkboxes.size(); ++i, i += i == static_cast<uint>(n)) {
+      // TODO: the uint32_t cast is ugly!
+		for (uint32_t i = 0; i < m_checkboxes.size(); ++i, i += i == static_cast<uint32_t>(n)) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::do_nothing);
          m_checkboxes[i]->set_state(false);
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);

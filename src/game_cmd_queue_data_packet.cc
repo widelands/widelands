@@ -24,6 +24,7 @@
 #include "filewrite.h"
 #include "game.h"
 #include "queue_cmd_factory.h"
+#include <stdint.h>
 
 
 #define CURRENT_PACKET_VERSION 2
@@ -56,7 +57,7 @@ throw (_wexception)
 			if (packet_version == CURRENT_PACKET_VERSION)
 			{
 				for (;;) {
-					uint packet_id = fr.Unsigned16();
+					uint32_t packet_id = fr.Unsigned16();
 
 					if (!packet_id)
 						break;
@@ -77,15 +78,15 @@ throw (_wexception)
 			else
 			{
 				// Old-style (version 1) command list
-				uint ncmds=fr.Unsigned16();
+				uint32_t ncmds=fr.Unsigned16();
 
-				uint i=0;
+				uint32_t i=0;
 				while (i<ncmds) {
 					Cmd_Queue::cmditem item;
 					item.category = Cmd_Queue::cat_gamelogic;
 					item.serial = fr.Unsigned32();
 
-					uint packet_id=fr.Unsigned16();
+					uint32_t packet_id=fr.Unsigned16();
 					GameLogicCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
 					cmd->Read(fr, *game, *ol);
 

@@ -69,7 +69,7 @@ const int ZipFilesystem::FindFiles
  pattern
 #endif
 ,
- filenameset_t * results, uint)
+ filenameset_t * results, uint32_t)
 {
    m_OpenUnzip();
 

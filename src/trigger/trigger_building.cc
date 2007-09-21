@@ -90,7 +90,7 @@ void Trigger_Building::check_set_conditions(Game* game) {
 		return;
 
 
-	uint count = 0;
+	uint32_t count = 0;
 	MapRegion<Area<FCoords> > mr (map, m_player_area);
 	do if
 		(const Building * const building = dynamic_cast<const Building *>

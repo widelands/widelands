@@ -131,7 +131,7 @@ void Interactive_Base::set_sel_pos(const Node_and_Triangle<> center)
 /*
  * Set the current sel selection radius.
  */
-void Interactive_Base::set_sel_radius(const uint n) {
+void Interactive_Base::set_sel_radius(const uint32_t n) {
 	if (n != m_sel.radius) {
 		m_sel.radius = n;
 		set_sel_pos(get_sel_pos()); //  redraw
@@ -192,7 +192,7 @@ Called once per frame by the UI code
 void Interactive_Base::think()
 {
 	// Timing
-	uint curframe = WLApplication::get()->get_time();
+	uint32_t curframe = WLApplication::get()->get_time();
 
 	m_frametime = curframe - m_lastframe;
 	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;
@@ -200,7 +200,7 @@ void Interactive_Base::think()
 
    // If one of the arrow keys is pressed,
    // scroll here
-   const uint scrollval = 10;
+   const uint32_t scrollval = 10;
 
    WLApplication *app=WLApplication::get();
 
@@ -390,7 +390,7 @@ Interactive_Base::get_display_flags
 Return display flags (dfXXX) that modify the view of the map.
 ===============
 */
-uint Interactive_Base::get_display_flags()
+uint32_t Interactive_Base::get_display_flags()
 {
 	return m_display_flags;
 }
@@ -403,7 +403,7 @@ Interactive_Base::set_display_flags
 Change the display flags that modify the view of the map.
 ===============
 */
-void Interactive_Base::set_display_flags(uint flags)
+void Interactive_Base::set_display_flags(uint32_t flags)
 {
 	m_display_flags = flags;
 }
@@ -417,12 +417,12 @@ Interactive_Base::set_display_flag
 Get and set one individual flag of the display flags.
 ===============
 */
-bool Interactive_Base::get_display_flag(uint flag)
+bool Interactive_Base::get_display_flag(uint32_t flag)
 {
 	return m_display_flags & flag;
 }
 
-void Interactive_Base::set_display_flag(uint flag, bool on)
+void Interactive_Base::set_display_flag(uint32_t flag, bool on)
 {
 	m_display_flags &= ~flag;
 
@@ -635,7 +635,7 @@ void Interactive_Base::roadb_add_overlay()
 
 		int shift = 2*(dir - Map_Object::WALK_E);
 
-		uchar set_to = overlay_manager.get_road_overlay(c);
+		uint8_t set_to = overlay_manager.get_road_overlay(c);
       set_to|=  Road_Normal << shift;
 		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}

@@ -26,6 +26,7 @@
 #include "mapview.h"
 #include "overlay_manager.h"
 
+#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 
@@ -73,10 +74,10 @@ struct Interactive_Base : public Map_View {
 	bool get_sel_triangles() const throw () {return m_sel.triangles;}
 	void set_sel_triangles(const bool yes) throw () {m_sel.triangles = yes;}
 
-	uint get_sel_radius() const throw () {return m_sel.radius;}
+	uint32_t get_sel_radius() const throw () {return m_sel.radius;}
 	virtual void set_sel_pos(const Node_and_Triangle<>);
 	void set_sel_freeze(const bool yes) throw () {m_sel.freeze = yes;}
-	void set_sel_radius(const uint n);
+	void set_sel_radius(const uint32_t n);
 
 	void move_view_to(const Coords);
 		void move_view_to_point(Point pos);
@@ -84,10 +85,10 @@ struct Interactive_Base : public Map_View {
       virtual void start() = 0;
 
       // Display flags
-		uint get_display_flags();
-		void set_display_flags(uint flags);
-		bool get_display_flag(uint flag);
-		void set_display_flag(uint flag, bool on);
+		uint32_t get_display_flags();
+		void set_display_flags(uint32_t flags);
+		bool get_display_flag(uint32_t flag);
+		void set_display_flag(uint32_t flag, bool on);
 
       // Road building
 		inline bool is_building_road() const {return m_buildroad;}
@@ -115,7 +116,7 @@ private:
 			 const Node_and_Triangle<> Pos       =
 			 Node_and_Triangle<>
 			 (Coords(0, 0), TCoords<>(Coords(0, 0), TCoords<>::D)),
-			 const uint Radius                   = 0,
+			 const uint32_t Radius                   = 0,
 			 const int Pic                       = 0,
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
 			:
@@ -125,16 +126,16 @@ private:
 		bool              freeze; // don't change m_sel even if mouse moves
 		bool              triangles; //  otherwise nodes
 		Node_and_Triangle<>     pos;
-		uint              radius;
+		uint32_t              radius;
 		int               pic;
 		Overlay_Manager::Job_Id jobid;
 	} m_sel;
 
-	uint m_display_flags;
+	uint32_t m_display_flags;
 
-	uint                    m_lastframe;         //  system time (milliseconds)
-	uint                    m_frametime;         //  in millseconds
-	uint                    m_avg_usframetime;   //  in microseconds!
+	uint32_t                    m_lastframe;         //  system time (milliseconds)
+	uint32_t                    m_frametime;         //  in millseconds
+	uint32_t                    m_avg_usframetime;   //  in microseconds!
 
 	Overlay_Manager::Job_Id m_jobid;
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;

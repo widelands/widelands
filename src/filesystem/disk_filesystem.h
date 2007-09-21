@@ -22,6 +22,7 @@
 
 #include "filesystem.h"
 
+#include <stdint.h>
 #include <string>
 
 /// \todo const correctness
@@ -31,7 +32,7 @@ struct RealFSImpl : public FileSystem {
 
 	virtual const int FindFiles(std::string path,
 	                            const std::string pattern,
-	                            filenameset_t *results, uint depth=0);
+	                            filenameset_t *results, uint32_t depth=0);
 
 	virtual const bool IsWritable() const;
 	virtual const bool FileExists(const std::string path);

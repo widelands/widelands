@@ -20,10 +20,12 @@
 #ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
 #define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
 
+#include <stdint.h>
+
 /*
  * This file contains the ids (the magic bytes) of all data packets
  * so that the packet creation fabric can create the right packet
- * reader, all IDs are ushorts
+ * reader, all IDs are uint16_ts
  */
 #define PACKET_HEIGHTS            1
 #define PACKET_TERRAINS           2

@@ -30,8 +30,8 @@
 // a wrapper around these functions, which have been taken basically
 // verbatim (with some whitespace changes) from the GNU tools; see below.
 static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf);
-static void md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* ctx);
-static void md5_process_block (const void* buffer, ulong len, md5_ctx* ctx);
+static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx);
+static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx);
 
 
 /**
@@ -41,7 +41,7 @@ std::string md5_checksum::str() const
 {
 	std::string s;
 
-	for (uint i = 0; i < sizeof(data); ++i) {
+	for (uint32_t i = 0; i < sizeof(data); ++i) {
 		char buf[3];
 		snprintf(buf, sizeof(buf), "%02x", data[i]);
 		s += buf;
@@ -127,7 +127,7 @@ const md5_checksum& MD5Checksum::GetChecksum() const
  * From GNU textutils. md5.c
  *******************************************************************/
 
-static const unsigned char fillbuf[64] = {0x80, 0/*, 0, 0, ... 0 */};
+static const uint8_t fillbuf[64] = {0x80, 0/*, 0, 0, ... 0 */};
 
 /* Process the remaining bytes in the internal buffer and the usual
    prolog according to the standard and write the result to RESBUF.
@@ -137,8 +137,8 @@ static const unsigned char fillbuf[64] = {0x80, 0/*, 0, 0, ... 0 */};
 static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 {
 	/* Take yet unprocessed bytes into account.  */
-	ulong bytes = ctx->buflen;
-	ulong pad;
+	uint32_t bytes = ctx->buflen;
+	uint32_t pad;
 
 	/* Now count remaining bytes.  */
 	ctx->total[0] += bytes;
@@ -149,32 +149,32 @@ static void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 	memcpy (&ctx->buffer[bytes], fillbuf, pad);
 
 	/* Put the 64-bit file length in *bits* at the end of the buffer.  */
-	*(ulong *) &ctx->buffer[bytes + pad] = (ctx->total[0] << 3);
-	*(ulong *) &ctx->buffer[bytes + pad + 4] =
+	*(uint32_t *) &ctx->buffer[bytes + pad] = (ctx->total[0] << 3);
+	*(uint32_t *) &ctx->buffer[bytes + pad + 4] =
 			((ctx->total[1] << 3) | (ctx->total[0] >> 29));
 
 	/* Process last bytes.  */
 	md5_process_block (ctx->buffer, bytes + pad + 8, ctx);
 
 
-	((ulong *) resbuf)[0] = (ctx->A);
-	((ulong *) resbuf)[1] = (ctx->B);
-	((ulong *) resbuf)[2] = (ctx->C);
-	((ulong *) resbuf)[3] = (ctx->D);
+	((uint32_t *) resbuf)[0] = (ctx->A);
+	((uint32_t *) resbuf)[1] = (ctx->B);
+	((uint32_t *) resbuf)[2] = (ctx->C);
+	((uint32_t *) resbuf)[3] = (ctx->D);
 
 
 	return resbuf;
 }
 
 /* Processes some bytes in the internal buffer */
-static void md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* ctx)
+static void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx)
 {
 	/* When we already have some bits in our internal buffer concatenate
 		both inputs first.  */
 	if (ctx->buflen != 0)
 	{
-		ulong left_over = ctx->buflen;
-		ulong add = 128 - left_over > len ? len : 128 - left_over;
+		uint32_t left_over = ctx->buflen;
+		uint32_t add = 128 - left_over > len ? len : 128 - left_over;
 
 		memcpy (&ctx->buffer[left_over], buffer, add);
 		ctx->buflen += add;
@@ -221,16 +221,16 @@ static void md5_process_bytes (const void* buffer, ulong len, struct md5_ctx* ct
 /* Process LEN bytes of BUFFER, accumulating context into CTX.
    It is assumed that LEN % 64 == 0.  */
 
-static void md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
+static void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
 {
-	ulong correct_words[16];
-	const ulong *words = (ulong*) buffer;
-	ulong nwords = len / sizeof (ulong);
-	const ulong *endp = words + nwords;
-	ulong A = ctx->A;
-	ulong B = ctx->B;
-	ulong C = ctx->C;
-	ulong D = ctx->D;
+	uint32_t correct_words[16];
+	const uint32_t *words = (uint32_t*) buffer;
+	uint32_t nwords = len / sizeof (uint32_t);
+	const uint32_t *endp = words + nwords;
+	uint32_t A = ctx->A;
+	uint32_t B = ctx->B;
+	uint32_t C = ctx->C;
+	uint32_t D = ctx->D;
 
 	/* First increment the byte count.  RFC 1321 specifies the possible
 		length of the file up to 2^64 bits.  Here we only compute the
@@ -243,11 +243,11 @@ static void md5_process_block (const void* buffer, ulong len, md5_ctx* ctx)
 		the loop.  */
 	while (words < endp)
 	{
-		ulong *cwp = correct_words;
-		ulong A_save = A;
-		ulong B_save = B;
-		ulong C_save = C;
-		ulong D_save = D;
+		uint32_t *cwp = correct_words;
+		uint32_t A_save = A;
+		uint32_t B_save = B;
+		uint32_t C_save = C;
+		uint32_t D_save = D;
 
 		/* First round: using the given function, the context and a constant
 		the next context is computed.  Because the algorithms processing

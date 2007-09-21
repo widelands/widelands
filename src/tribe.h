@@ -29,6 +29,7 @@
 #include "worker.h"
 
 #include <map>
+#include <stdint.h>
 #include <vector>
 
 class Building_Descr;
@@ -65,7 +66,7 @@ struct Tribe_Descr {
 	const World & world() const throw () {return m_world;}
 
 		inline int get_nrworkers() const {return m_workers.get_nitems();}
-		Worker_Descr * get_worker_descr(const uint idx) const
+		Worker_Descr * get_worker_descr(const uint32_t idx) const
 		{return m_workers.get(idx);}
 		int get_worker_index(const char * const workername) const
 		{return m_workers.get_index(workername);}
@@ -73,27 +74,27 @@ struct Tribe_Descr {
 		int get_safe_ware_index(const char * const warename) const;
 		int get_ware_index(const char * const warename) const
 		{return m_wares.get_index(warename);}
-      inline Item_Ware_Descr* get_ware_descr(uint idx) const {return m_wares.get(idx);}
+      inline Item_Ware_Descr* get_ware_descr(uint32_t idx) const {return m_wares.get(idx);}
 		int get_safe_worker_index(const char * const workername) const;
 		int get_nrbuildings() const {return m_buildings.get_nitems();}
 		int get_safe_building_index(const char *name) const;
 	int get_building_index(const char * const buildingname) const
 	{return m_buildings.get_index(buildingname);}
-		Building_Descr *get_building_descr(uint idx) const {return m_buildings.get(idx);}
+		Building_Descr *get_building_descr(uint32_t idx) const {return m_buildings.get(idx);}
       inline int get_immovable_index(const char* l) const {return m_immovables.get_index(l);}
       inline int get_nr_immovables() {return m_immovables.get_nitems();}
 		inline Immovable_Descr* get_immovable_descr(int index) const {return m_immovables.get(index);}
       inline int get_bob(const char* l) const {return m_bobs.get_index(l);}
-		inline Bob::Descr* get_bob_descr(ushort index) const {return m_bobs.get(index);}
+		inline Bob::Descr* get_bob_descr(uint16_t index) const {return m_bobs.get(index);}
       inline int get_nr_bobs() {return m_bobs.get_nitems();}
 
-	uint get_frontier_anim() const throw () {return m_anim_frontier;}
-	uint get_flag_anim    () const throw () {return m_anim_flag;}
+	uint32_t get_frontier_anim() const throw () {return m_anim_frontier;}
+	uint32_t get_flag_anim    () const throw () {return m_anim_flag;}
 
-	uint get_bob_vision_range() const throw() {return m_bob_vision_range;}
+	uint32_t get_bob_vision_range() const throw() {return m_bob_vision_range;}
 
-	uint get_resource_indicator
-		(const Resource_Descr * const res, const uint amount) const;
+	uint32_t get_resource_indicator
+		(const Resource_Descr * const res, const uint32_t amount) const;
 
 		void postload(Editor_Game_Base*);
 		void load_graphics();
@@ -105,9 +106,9 @@ struct Tribe_Descr {
 private:
 	const std::string m_name;
 	const World & m_world;
-	uint m_anim_frontier;
-	uint m_anim_flag;
-	uint m_bob_vision_range;
+	uint32_t m_anim_frontier;
+	uint32_t m_anim_flag;
+	uint32_t m_bob_vision_range;
 
       Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> m_buildings;

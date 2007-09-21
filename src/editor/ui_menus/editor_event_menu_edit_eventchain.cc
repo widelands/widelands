@@ -165,7 +165,7 @@ m_event_chain(chain)
 		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
 		 _("Cancel"));
 
-   for (uint i = 0; i < m_event_chain->get_nr_events(); i++) {
+   for (uint32_t i = 0; i < m_event_chain->get_nr_events(); i++) {
 		Event & event = *m_event_chain->get_event(i);
 		m_events->add(event.name().c_str(), event);
 	}
@@ -213,8 +213,8 @@ void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
       // Trigger Conditional is always updated
       // Events
       m_event_chain->clear_events();
-	const uint nr_events = m_events->size();
-	for (uint i = 0; i < nr_events; i++)
+	const uint32_t nr_events = m_events->size();
+	for (uint32_t i = 0; i < nr_events; i++)
 		m_event_chain->add_event(&(*m_events)[i]);
       end_modal(1);
 }
@@ -252,7 +252,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_del_event() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_move_up() {
 	assert(m_events->has_selection());  //  Button should have been disabled.
-	const uint n = m_events->selection_index();
+	const uint32_t n = m_events->selection_index();
 	assert(n != 0);  //  Button should have been disabled.
          m_events->switch_entries(n, n - 1);
 }
@@ -260,7 +260,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_up() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
 	assert(m_events->has_selection());  //  Button should have been disabled.
-	const uint n = m_events->selection_index();
+	const uint32_t n = m_events->selection_index();
 	assert(n < m_events->size() - 1);  //  Button should have been disabled.
          m_events->switch_entries(n, n + 1);
 }
@@ -268,10 +268,10 @@ void Editor_Event_Menu_Edit_EventChain::clicked_move_down() {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_Edit_EventChain::tl_selected(uint) {
+void Editor_Event_Menu_Edit_EventChain::tl_selected(uint32_t) {
    m_insert_btn->set_enabled(true);
 }
-void Editor_Event_Menu_Edit_EventChain::cs_selected(uint) {
+void Editor_Event_Menu_Edit_EventChain::cs_selected(uint32_t) {
    m_mvdown_btn->set_enabled(true);
    m_mvup_btn->set_enabled(true);
    m_delete_btn->set_enabled(true);
@@ -280,8 +280,8 @@ void Editor_Event_Menu_Edit_EventChain::cs_selected(uint) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(uint)
+void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(uint32_t)
 {clicked_ins_event();}
 
-void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(uint)
+void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(uint32_t)
 {clicked_del_event();}

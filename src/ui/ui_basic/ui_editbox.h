@@ -20,6 +20,7 @@
 #ifndef included_ui_editbox_h
 #define included_ui_editbox_h
 
+#include <stdint.h>
 #include <string>
 #include "ui_button.h"
 
@@ -31,7 +32,7 @@ editbox is unfocused, the keyboard released and
 a callback function is called
 */
 struct Edit_Box : private Basic_Button {
-     Edit_Box(Panel *parent, int x, int y, uint w, uint h, uint background, int id);
+     Edit_Box(Panel *parent, int x, int y, uint32_t w, uint32_t h, uint32_t background, int id);
      virtual ~Edit_Box();
 
      Signal changed;
@@ -53,7 +54,7 @@ protected:
 
 private:
      bool m_keyboard_grabbed;
-     uint m_maxchars;
+     uint32_t m_maxchars;
      std::string m_text, m_lasttext;
      int m_id;
 };

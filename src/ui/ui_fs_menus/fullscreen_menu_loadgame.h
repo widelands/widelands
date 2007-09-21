@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
+#include <stdint.h>
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_listselect.h"
@@ -43,8 +44,8 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	const std::string & filename() {return m_filename;}
 
 	void clicked_ok    ();
-	void map_selected  (uint);
-	void double_clicked(uint);
+	void map_selected  (uint32_t);
+	void double_clicked(uint32_t);
    void fill_list     ();
 
 private:

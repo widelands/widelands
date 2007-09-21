@@ -20,6 +20,7 @@
 #define __S__SLIDER_H
 
 
+#include <stdint.h>
 #include <string>
 #include "rgbcolor.h"
 #include "ui_panel.h"
@@ -39,11 +40,11 @@ class Slider : public Panel {
 protected:
 	Slider
 		(Panel * const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 const int min_value, const int max_value, const int value,
-		 const uint background_picture_id,
+		 const uint32_t background_picture_id,
 		 const std::string & tooltip_text,
-		 const uint cursor_size,
+		 const uint32_t cursor_size,
 		 const bool enabled,
 		 const int x_gap, const int y_gap, const int bar_size);
 
@@ -86,7 +87,7 @@ private:
 	bool m_pressed;           //  the cursor is pressed
 	bool m_enabled;           //  enabled widget
 
-	uint m_pic_background;    //  background texture (picture ID)
+	uint32_t m_pic_background;    //  background texture (picture ID)
 
 	int m_x_gap;              //  draw positions
 	int m_y_gap;
@@ -104,11 +105,11 @@ protected:
 struct HorizontalSlider : public Slider {
 	HorizontalSlider
 		(Panel * const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 const int min_value, const int max_value, const int value,
-		 const uint background_picture_id,
+		 const uint32_t background_picture_id,
 		 const std::string & tooltip_text = std::string(),
-		 const uint cursor_size = 20,
+		 const uint32_t cursor_size = 20,
 		 const bool enabled = true)
 		:
 		Slider
@@ -138,10 +139,10 @@ protected:
 struct VerticalSlider : public Slider {
 	VerticalSlider
 		(Panel * const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 const int min_value, const int max_value, const int value,
-		 const uint background_picture_id,
-		 const uint cursor_size = 20,
+		 const uint32_t background_picture_id,
+		 const uint32_t cursor_size = 20,
 		 const std::string & tooltip_text = std::string(),
 		 const bool enabled = true)
 		:

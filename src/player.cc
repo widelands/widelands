@@ -49,7 +49,7 @@ Player::Player
  const Player_Number plnum,
  const Tribe_Descr & tribe_descr,
  const std::string & name,
- const uchar * const playercolor)
+ const uint8_t * const playercolor)
 :
 m_see_all(false),
 m_egbase (the_egbase),
@@ -130,8 +130,8 @@ Return filtered buildcaps that take the player's territory into account.
 */
 FieldCaps Player::get_buildcaps(const FCoords fc) const {
 	const Map & map = egbase().map();
-	uchar buildcaps = fc.field->get_caps();
-	const uchar player_number = m_plnum;
+	uint8_t buildcaps = fc.field->get_caps();
+	const uint8_t player_number = m_plnum;
 
 	if (not fc.field->is_interior(player_number)) buildcaps = 0;
 
@@ -547,7 +547,7 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int)
 				(flag,
 				 attacker,
 				 flag->get_owner()->get_player_number(),
-				 static_cast<uint>(num));
+				 static_cast<uint32_t>(num));
 			break;
 
 		default:
@@ -659,9 +659,9 @@ throw ()
  */
 void Player::sample_statistics()
 {
-	assert (m_ware_productions.size() == static_cast<uint>(tribe().get_nrwares()));
+	assert (m_ware_productions.size() == static_cast<uint32_t>(tribe().get_nrwares()));
 
-	for (uint i = 0; i < m_ware_productions.size(); i++) {
+	for (uint32_t i = 0; i < m_ware_productions.size(); i++) {
 		m_ware_productions[i].push_back(m_current_statistics[i]);
 		m_current_statistics[i] = 0;
 	}
@@ -671,10 +671,10 @@ void Player::sample_statistics()
 /**
  * A ware was produced. Update the corresponding statistics.
  */
-void Player::ware_produced(uint wareid)
+void Player::ware_produced(uint32_t wareid)
 {
-	assert (m_ware_productions.size() == static_cast<uint>(tribe().get_nrwares()));
-	assert(wareid < static_cast<uint>(tribe().get_nrwares()));
+	assert (m_ware_productions.size() == static_cast<uint32_t>(tribe().get_nrwares()));
+	assert(wareid < static_cast<uint32_t>(tribe().get_nrwares()));
 
 	m_current_statistics[wareid]++;
 }
@@ -683,7 +683,7 @@ void Player::ware_produced(uint wareid)
 /**
  * Get current ware production statistics
  */
-const std::vector<uint> * Player::get_ware_production_statistics
+const std::vector<uint32_t> * Player::get_ware_production_statistics
 		(const int ware) const
 {
 	assert(ware < static_cast<int>(m_ware_productions.size()));
@@ -745,7 +745,7 @@ void Player::lose_immovable(PlayerImmovable* imm)
 				m_building_stats[tribe().get_building_index(building_name.c_str())];
 
 		const Coords building_position = building->get_position();
-		for (uint i = 0; i < stat.size(); i++) {
+		for (uint32_t i = 0; i < stat.size(); i++) {
 			if (stat[i].pos == building_position) {
 				stat.erase(stat.begin() + i);
 				return;
@@ -772,11 +772,11 @@ void Player::lose_immovable(PlayerImmovable* imm)
  * it.
  * \todo Document parameter fr
  */
-void Player::ReadStatistics(FileRead& fr, uint version)
+void Player::ReadStatistics(FileRead& fr, uint32_t version)
 {
 	if (version == 0) {
-		ushort nr_wares = fr.Unsigned16();
-		ushort nr_entries = fr.Unsigned16();
+		uint16_t nr_wares = fr.Unsigned16();
+		uint16_t nr_entries = fr.Unsigned16();
 
 		if (nr_wares > 0) {
 			if (nr_wares != tribe().get_nrwares())
@@ -787,11 +787,11 @@ void Player::ReadStatistics(FileRead& fr, uint version)
 			assert(m_ware_productions.size() == nr_wares);
 			assert(m_current_statistics.size() == nr_wares);
 
-			for (uint i = 0; i < m_current_statistics.size(); i++) {
+			for (uint32_t i = 0; i < m_current_statistics.size(); i++) {
 				m_current_statistics[i] = fr.Unsigned32();
 				m_ware_productions[i].resize(nr_entries);
 
-				for (uint j = 0; j < m_ware_productions[i].size(); j++)
+				for (uint32_t j = 0; j < m_ware_productions[i].size(); j++)
 					m_ware_productions[i][j] = fr.Unsigned32();
 			}
 		}
@@ -807,9 +807,9 @@ void Player::WriteStatistics(FileWrite& fw) const {
 	fw.Unsigned16(m_current_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());
 
-	for (uint i = 0; i < m_current_statistics.size(); i++) {
+	for (uint32_t i = 0; i < m_current_statistics.size(); i++) {
 		fw.Unsigned32(m_current_statistics[i]);
-		for (uint j = 0; j < m_ware_productions[i].size(); j++)
+		for (uint32_t j = 0; j < m_ware_productions[i].size(); j++)
 			fw.Unsigned32(m_ware_productions[i][j]);
 	}
 }

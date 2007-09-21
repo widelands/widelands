@@ -30,7 +30,7 @@
 
 #include "log.h"
 
-Game_Server_Connection::Game_Server_Connection(std::string host, uint port) {
+Game_Server_Connection::Game_Server_Connection(std::string host, uint32_t port) {
    m_host = host;
    m_port = port;
    m_socket = 0;
@@ -76,15 +76,15 @@ void Game_Server_Connection::connect() {
  * Send this packet over the line
  */
 void Game_Server_Connection::send(Game_Server_Protocol_Packet* packet) {
-   ushort id = packet->get_id();
-   uint   index = m_last_packet_index++;
-   ushort flags = 0;
+   uint16_t id = packet->get_id();
+   uint32_t   index = m_last_packet_index++;
+   uint16_t flags = 0;
 
    if (m_last_packet_index > LAST_CLIENT_PACKET_INDEX) // Hopefully this wrap never occures
       m_last_packet_index = FIRST_CLIENT_PACKET_INDEX;
 
    // This packet is replied to
-   m_pending_packets.insert(std::pair<uint, Game_Server_Protocol_Packet*>(index, packet));
+   m_pending_packets.insert(std::pair<uint32_t, Game_Server_Protocol_Packet*>(index, packet));
 
    // Write this data onto the stream
    Network_Buffer buf;
@@ -119,9 +119,9 @@ void Game_Server_Connection::handle_data() {
 
       log("Read %i bytes from the net!\n", buf.size());
       // Get the header
-      ushort id = buf.get_16();
-      uint   index = buf.get_32();
-      ushort flags = buf.get_16();
+      uint16_t id = buf.get_16();
+      uint32_t   index = buf.get_32();
+      uint16_t flags = buf.get_16();
 
 		if (IS_ANSWER(flags)) {
 			if (not m_pending_packets.count(index)) {
@@ -199,7 +199,7 @@ void Game_Server_Connection::set_user_entered_handler(UserEntered_Handler func, 
    m_ueh = func;
    m_uehd = data;
 }
-void Game_Server_Connection::user_entered(std::string name, std::string room, uchar b) {
+void Game_Server_Connection::user_entered(std::string name, std::string room, uint8_t b) {
    (*m_ueh)(name, room, b, m_uehd);
 }
 
@@ -231,7 +231,7 @@ void Game_Server_Connection::set_chat_message_handler(ChatMessage_Handler cmh, v
    m_cmh = cmh;
    m_cmhd = data;
 }
-void Game_Server_Connection::chat_message(std::string user, std::string msg, uchar flags) {
+void Game_Server_Connection::chat_message(std::string user, std::string msg, uint8_t flags) {
    (*m_cmh)(user, msg, flags, m_cmhd);
 }
 

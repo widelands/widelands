@@ -296,7 +296,7 @@ void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 /**
  * Callback for the return-to-warehouse timer.
 */
-void WareInstance::act(Game *, uint)
+void WareInstance::act(Game *, uint32_t)
 {}
 
 /**
@@ -474,7 +474,7 @@ m_item_filled(0),
 m_items(new PendingItem[m_item_capacity]),
 m_always_call_for_flag(0)
 {
-	for (uint i = 0; i < 6; ++i) m_roads[i] = 0;
+	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = 0;
 }
 
 /**
@@ -1390,7 +1390,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	int index = path.get_index(flag->get_position());
 
 	assert(index > 0);
-	assert(static_cast<uint>(index) < path.get_nsteps() - 1);
+	assert(static_cast<uint32_t>(index) < path.get_nsteps() - 1);
 
 	path.truncate(index);
 	secondpath.starttrim(index);
@@ -1568,8 +1568,8 @@ Route::LoadData* Route::load(FileRead& fr)
 
 	try {
 		m_totalcost = fr.Signed32();
-		uint nsteps = fr.Unsigned16();
-		for (uint step = 0; step < nsteps; ++step)
+		uint32_t nsteps = fr.Unsigned16();
+		for (uint32_t step = 0; step < nsteps; ++step)
 			data->flags.push_back(fr.Unsigned32());
 	} catch (...) {
 		delete data;
@@ -1587,8 +1587,8 @@ Route::LoadData* Route::load(FileRead& fr)
 void Route::load_pointers(LoadData* data, Widelands_Map_Map_Object_Loader* mol)
 {
 	try {
-		for(uint i = 0; i < data->flags.size(); ++i) {
-			uint idx = data->flags.size();
+		for(uint32_t i = 0; i < data->flags.size(); ++i) {
+			uint32_t idx = data->flags.size();
 			Flag* flag = dynamic_cast<Flag*>(mol->get_object_by_file_index(idx));
 			if (!flag)
 				throw wexception("Route step %u expected flag %u", i, idx);
@@ -1803,7 +1803,7 @@ void Transfer::tlog(const char* fmt, ...)
 	char buffer[1024];
 	va_list va;
 	char id;
-	uint serial;
+	uint32_t serial;
 
 	va_start(va, fmt);
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
@@ -1899,7 +1899,7 @@ bool Requeriments::check (int hp, int attack, int defense, int evade)
 void Requeriments::Read
 (FileRead * fr, Editor_Game_Base *, Widelands_Map_Map_Object_Loader *)
 {
-   uint version=fr->Unsigned16();
+   uint32_t version=fr->Unsigned16();
 
    if (version==REQUERIMENTS_VERSION) {
 
@@ -2014,7 +2014,7 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
-   uint version=fr->Unsigned16();
+   uint32_t version=fr->Unsigned16();
 
    if (version >= REQUEST_SUPPORTED_VERSION) {
       m_type=static_cast<Type>(fr->Unsigned8());
@@ -2030,11 +2030,11 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 
       assert(!m_transfers.size());
 
-      uint nr_transfers=fr->Unsigned16();
-      uint i=0;
+      uint32_t nr_transfers=fr->Unsigned16();
+      uint32_t i=0;
       for (i=0; i<nr_transfers; i++) {
-         uint what_is=fr->Unsigned8();
-         uint reg=fr->Unsigned32();
+         uint32_t what_is=fr->Unsigned8();
+         uint32_t reg=fr->Unsigned32();
          Transfer* trans=0;
 			if (Game * const game = dynamic_cast<Game *>(egbase)) {
             assert(mol->is_object_known(reg));
@@ -2099,7 +2099,7 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
 
    // Write number of current transfers
    fw->Unsigned16(m_transfers.size());
-   uint i=0;
+   uint32_t i=0;
    for (i=0; i<m_transfers.size(); i++) {
       Transfer* trans=m_transfers[i];
       // Is this a ware (or a worker)
@@ -2436,7 +2436,7 @@ void Request::transfer_fail(Game *, Transfer * t) {
  * \note This does *not* update whether the \ref Request is registered with the
  * \ref Economy or not.
 */
-void Request::cancel_transfer(uint idx)
+void Request::cancel_transfer(uint32_t idx)
 {
 	remove_transfer(idx);
 }
@@ -2446,7 +2446,7 @@ void Request::cancel_transfer(uint idx)
  * This does not update the Transfer's worker or item, and it does not update
  * whether the Request is registered with the Economy.
  */
-void Request::remove_transfer(uint idx)
+void Request::remove_transfer(uint32_t idx)
 {
 	Transfer* t = m_transfers[idx];
 
@@ -2459,7 +2459,7 @@ void Request::remove_transfer(uint idx)
  * Lookup a \ref Transfer in the transfers array.
  * \throw wexception if the \ref Transfer is not registered with us.
  */
-uint Request::find_transfer(Transfer* t)
+uint32_t Request::find_transfer(Transfer* t)
 {
 	TransferList::iterator it = std::find(m_transfers.begin(), m_transfers.end(), t);
 
@@ -2501,7 +2501,7 @@ void SupplyList::add_supply(Supply* supp)
 */
 void SupplyList::remove_supply(Supply* supp)
 {
-	for (uint idx = 0; idx < m_supplies.size(); idx++) {
+	for (uint32_t idx = 0; idx < m_supplies.size(); idx++) {
 		if (m_supplies[idx] == supp) {
 			if (idx != m_supplies.size()-1)
 				m_supplies[idx] = m_supplies[m_supplies.size()-1];
@@ -2549,7 +2549,7 @@ WaresQueue::~WaresQueue()
 /**
  * Initialize the queue. This also issues the first request, if necessary.
 */
-void WaresQueue::init(const int ware, const uint size) {
+void WaresQueue::init(const int ware, const uint32_t size) {
 	assert(m_ware == -1);
 
 	m_ware = ware;
@@ -2662,7 +2662,7 @@ void WaresQueue::add_to_economy(Economy* e)
  * \warning You must call \ref update() after this!
  * \todo Why not call update from here?
 */
-void WaresQueue::set_size(const uint size) throw ()
+void WaresQueue::set_size(const uint32_t size) throw ()
 {
 	m_size = size;
 }
@@ -2673,7 +2673,7 @@ void WaresQueue::set_size(const uint size) throw ()
  * \warning You must call \ref update() after this!
  * \todo Why not call update from here?
  */
-void WaresQueue::set_filled(const uint filled) throw() {
+void WaresQueue::set_filled(const uint32_t filled) throw() {
 	if (filled > m_filled)
 		m_owner->get_economy()->add_wares(m_ware, filled - m_filled);
 	else if (filled < m_filled)
@@ -2688,7 +2688,7 @@ void WaresQueue::set_filled(const uint filled) throw() {
  *
  * This interval is merely a hint for the Supply/Request balancing code.
 */
-void WaresQueue::set_consume_interval(const uint time) throw ()
+void WaresQueue::set_consume_interval(const uint32_t time) throw ()
 {m_consume_interval = time;}
 
 /**
@@ -2853,11 +2853,11 @@ public:
 
 		Flag* head = m_data[0];
 
-		unsigned nsize = m_data.size()-1;
-		unsigned fix = 0;
+		uint32_t nsize = m_data.size()-1;
+		uint32_t fix = 0;
 		while (fix < nsize) {
-			unsigned l = fix*2 + 1;
-			unsigned r = fix*2 + 2;
+			uint32_t l = fix*2 + 1;
+			uint32_t r = fix*2 + 2;
 			if (l >= nsize) {
 				m_data[fix] = m_data[nsize];
 				m_data[fix]->mpf_heapindex = fix;
@@ -2908,11 +2908,11 @@ public:
 	// Note that I rearranged this a bit so swap isn't necessary
 	void push(Flag *t)
 	{
-		unsigned slot = m_data.size();
+		uint32_t slot = m_data.size();
 		m_data.push_back(0);
 
 		while (slot > 0) {
-			unsigned parent = (slot - 1) / 2;
+			uint32_t parent = (slot - 1) / 2;
 
 			if (m_data[parent]->cost() < t->cost())
 				break;
@@ -2932,13 +2932,13 @@ public:
 	// Pushing algorithm is basically the same as in push()
 	void boost(Flag *t)
 	{
-		unsigned slot = t->mpf_heapindex;
+		uint32_t slot = t->mpf_heapindex;
 
 		assert(slot < m_data.size());
 		assert(m_data[slot] == t);
 
 		while (slot > 0) {
-			unsigned parent = (slot - 1) / 2;
+			uint32_t parent = (slot - 1) / 2;
 
 			if (m_data[parent]->cost() <= t->cost())
 				break;
@@ -2954,10 +2954,10 @@ public:
 	}
 
 	// Recursively check integrity
-	void debug(unsigned node, const char *str)
+	void debug(uint32_t node, const char *str)
 	{
-		unsigned l = node*2 + 1;
-		unsigned r = node*2 + 2;
+		uint32_t l = node*2 + 1;
+		uint32_t r = node*2 + 2;
 		if (m_data[node]->mpf_heapindex != static_cast<int>(node)) {
 			fprintf(stderr, "%s: mpf_heapindex integrity!\n", str);
 			abort();
@@ -3010,7 +3010,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int co
 	// advance the path-finding cycle
 	mpf_cycle++;
 	if (!mpf_cycle) { // reset all cycle fields
-		for (uint i = 0; i < m_flags.size(); i++)
+		for (uint32_t i = 0; i < m_flags.size(); i++)
 			m_flags[i]->mpf_cycle = 0;
 		mpf_cycle++;
 	}
@@ -3039,7 +3039,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int co
 
 		current->get_neighbours(&neighbours);
 
-		for (uint i = 0; i < neighbours.size(); i++) {
+		for (uint32_t i = 0; i < neighbours.size(); i++) {
 			Flag *neighbour = neighbours[i].flag;
 			int cost;
 			int wait_cost = 0;
@@ -3104,7 +3104,7 @@ Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 
 	assert(start->get_economy() == this);
 
-	for (uint i = 0; i < m_warehouses.size(); i++) {
+	for (uint32_t i = 0; i < m_warehouses.size(); i++) {
 		Warehouse *wh = m_warehouses[i];
 		Route buf_route;
 
@@ -3156,7 +3156,7 @@ void Economy::do_remove_flag(Flag *flag)
 	flag->set_economy(0);
 
 	// fast remove
-	uint i;
+	uint32_t i;
 	for (i = 0; i < m_flags.size(); i++) {
 		if (m_flags[i] == flag) {
 			if (i < m_flags.size()-1)
@@ -3236,7 +3236,7 @@ void Economy::add_warehouse(Warehouse *wh)
 void Economy::remove_warehouse(Warehouse *wh)
 {
    // fast remove
-   uint i;
+   uint32_t i;
    for (i = 0; i < m_warehouses.size(); i++) {
       if (m_warehouses[i] == wh) {
          if (i < m_warehouses.size()-1)
@@ -3481,7 +3481,7 @@ void Economy::do_split(Flag *f)
 		Neighbour_list neighbours;
 		f->get_neighbours(&neighbours);
 
-		for (uint i = 0; i < neighbours.size(); i++) {
+		for (uint32_t i = 0; i < neighbours.size(); i++) {
 			Flag *n = neighbours[i].flag;
 
 			if (n->get_economy() == this)
@@ -3766,7 +3766,7 @@ void Economy::create_requested_workers(Game* g)
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
 
-					uint n_wh = 0;
+					uint32_t n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
 						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
 log("Economy::process_request-- Created a '%s' needed\n", w_desc->name().c_str());

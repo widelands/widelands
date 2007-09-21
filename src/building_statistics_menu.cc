@@ -326,7 +326,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 /*
  * The table has been selected
  */
-void Building_Statistics_Menu::table_changed(uint) {update();}
+void Building_Statistics_Menu::table_changed(uint32_t) {update();}
 
 /*
  * Update table
@@ -349,11 +349,11 @@ void Building_Statistics_Menu::update() {
       const std::vector< Player::Building_Stats >& vec = m_parent->get_player()->get_building_statistics(i);
 
       // walk all entries, add new ones if needed
-		UI::Table<const uintptr_t>::Entry_Record * te = 0;
-		const uint table_size = m_table.size();
-		for (uint l = 0; l < table_size; ++l) {
-			UI::Table<const uintptr_t>::Entry_Record & er = m_table.get_record(l);
-			if (UI::Table<const uintptr_t>::get(er) == i) {
+		UI::Table<const intptr_t>::Entry_Record * te = 0;
+		const uint32_t table_size = m_table.size();
+		for (uint32_t l = 0; l < table_size; ++l) {
+			UI::Table<const intptr_t>::Entry_Record & er = m_table.get_record(l);
+			if (UI::Table<const intptr_t>::get(er) == i) {
 				te = &er;
             break;
 			}
@@ -366,12 +366,12 @@ void Building_Statistics_Menu::update() {
 			te = &m_table.add(i, building.get_buildicon());
 		}
 
-		uint nr_owned   = 0;
-		uint nr_build   = 0;
-		uint total_prod = 0;
+		uint32_t nr_owned   = 0;
+		uint32_t nr_build   = 0;
+		uint32_t total_prod = 0;
 		const ProductionSite_Descr * const productionsite =
 			dynamic_cast<const ProductionSite_Descr *>(&building);
-		for (uint l = 0; l < vec.size(); ++l) {
+		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite) ++nr_build;
 			else {
 				++nr_owned;
@@ -402,7 +402,7 @@ void Building_Statistics_Menu::update() {
 
           // Product
 		if (productionsite and nr_owned) {
-			const uint percent = static_cast<uint>
+			const uint32_t percent = static_cast<uint32_t>
 				(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 			snprintf(buffer, sizeof(buffer), "%i", percent);
 			if (is_selected)  {

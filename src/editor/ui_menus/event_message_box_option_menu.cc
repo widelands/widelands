@@ -212,7 +212,7 @@ void Event_Message_Box_Option_Menu::clicked_ok() {
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
 	const MapTriggerManager & mtm = m_parent->egbase().map().get_mtm();
-	for (uint b = 0; b < m_nr_buttons; ++b) {
+	for (uint32_t b = 0; b < m_nr_buttons; ++b) {
                m_event->set_button_name(b, m_buttons[b].name);
 		if (m_buttons[b].trigger != -1) {
                   m_event->set_button_trigger
@@ -268,11 +268,11 @@ void Event_Message_Box_Option_Menu::update() {
 	}
 
    m_buttons_ls->clear();
-   for (uint i=0; i<m_nr_buttons; i++)
+   for (uint32_t i=0; i<m_nr_buttons; i++)
 		m_buttons_ls->add(m_buttons[i].name.c_str(), 0);
 
    std::string text;
-   text.append(1, static_cast<uchar>(m_nr_buttons+0x30));
+   text.append(1, static_cast<uint8_t>(m_nr_buttons+0x30));
    m_nr_buttons_ta->set_text(text.c_str());
 
 
@@ -294,7 +294,7 @@ void Event_Message_Box_Option_Menu::update() {
 /*
  * Listbox got selected
  */
-void Event_Message_Box_Option_Menu::ls_selected(uint i) {
+void Event_Message_Box_Option_Menu::ls_selected(uint32_t i) {
    m_ls_selected=i;
    update();
 }

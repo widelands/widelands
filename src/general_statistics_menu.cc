@@ -27,6 +27,7 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "warelist.h"
 #include "wui_plot_area.h"
@@ -64,10 +65,10 @@ UI::UniqueWindow(&parent, &registry, 400, 400, _("General Statistics")),
 m_parent(&parent)
 {
 
-   uint offsy = 35;
-   uint spacing = 5;
-   uint posx = spacing;
-   uint posy = offsy;
+   uint32_t offsy = 35;
+   uint32_t spacing = 5;
+   uint32_t posx = spacing;
+   uint32_t posy = offsy;
 
    // Plotter
    m_plot = new WUIPlot_Area(this, spacing, offsy+spacing, get_inner_w()-2*spacing, PLOT_HEIGHT);
@@ -85,7 +86,7 @@ m_parent(&parent)
 		 i < general_statistics_size;
 		 ++i)
 	{
-		const uchar * colors = g_playercolors[i];
+		const uint8_t * colors = g_playercolors[i];
 		const RGBColor color(colors[9], colors[10], colors[11]);
 		m_plot->register_plot_data
 			(i * NR_DIFFERENT_DATASETS + 0, &genstats[i].land_size,        color);
@@ -107,7 +108,7 @@ m_parent(&parent)
 
 
    // Buttons
-   uint plr_in_game = 0;
+   uint32_t plr_in_game = 0;
 	const Player_Number nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
 
@@ -293,7 +294,7 @@ void General_Statistics_Menu::cb_changed_to(int id, bool what) {
  * The radiogroup has changed
  */
 void General_Statistics_Menu::radiogroup_changed(int id) {
-   for (uint i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
+   for (uint32_t i = 0; i < m_parent->get_game()->get_general_statistics().size(); i++) {
       if (!m_cbs[i]) continue;
 
       m_plot->show_plot(i* NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());

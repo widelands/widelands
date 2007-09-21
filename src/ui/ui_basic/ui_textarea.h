@@ -20,6 +20,7 @@
 #ifndef __S__TEXTAREA_H
 #define __S__TEXTAREA_H
 
+#include <stdint.h>
 #include <string>
 #include "constants.h"
 #include "font_handler.h"
@@ -46,12 +47,12 @@ struct Textarea : public Panel {
 
 	Textarea
 		(Panel *  const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 const Align align = Align_Left, const bool multiline = false);
 
 	Textarea
 		(Panel *  const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 const std::string & text,
 		 const Align align = Align_Left, const bool multiline = false);
 

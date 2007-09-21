@@ -26,6 +26,7 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
@@ -142,8 +143,8 @@ throw (_wexception)
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
 	Map* map=egbase->get_map();
-	for (ushort y=0; y<map->get_height(); y++) {
-		for (ushort x=0; x<map->get_width(); x++) {
+	for (uint16_t y=0; y<map->get_height(); y++) {
+		for (uint16_t x=0; x<map->get_width(); x++) {
 			BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
 			// We only write Buildings
 			if (immovable && immovable->get_type()==Map_Object::BUILDING) {
@@ -157,7 +158,7 @@ throw (_wexception)
 
 				// Buildings can life on only one main position
 				assert(!os->is_object_known(building));
-				uint serial=os->register_object(building);
+				uint32_t serial=os->register_object(building);
 
 				fw.Unsigned8(1);
 				fw.Unsigned8(building->get_owner()->get_player_number());
@@ -244,8 +245,8 @@ void Widelands_Map_Building_Data_Packet::read_priorities
 	// read ware type
 	while (0xff != (ware_type = fr.Unsigned8())) {
 		// read count of priorities assigned for this ware type
-		const unsigned char count = fr.Unsigned8();
-		for (unsigned char i = 0; i < count; i++) {
+		const uint8_t count = fr.Unsigned8();
+		for (uint8_t i = 0; i < count; i++) {
 			int idx = -1;
 			if (Request::WARE == ware_type)
 				idx = tribe.get_safe_ware_index(fr.CString());

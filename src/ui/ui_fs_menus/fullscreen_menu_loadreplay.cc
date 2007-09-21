@@ -62,13 +62,13 @@ void Fullscreen_Menu_LoadReplay::clicked_ok()
 	end_modal(1);
 }
 
-void Fullscreen_Menu_LoadReplay::double_clicked(uint)
+void Fullscreen_Menu_LoadReplay::double_clicked(uint32_t)
 {
 	clicked_ok();
 }
 
 
-void Fullscreen_Menu_LoadReplay::replay_selected(uint)
+void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t)
 {
 	// TODO: Extract quick info about the replay
 }

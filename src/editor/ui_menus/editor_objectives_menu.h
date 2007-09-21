@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_OBJECTIVES_MENU_H
 #define __S__EDITOR_OBJECTIVES_MENU_H
 
+#include <stdint.h>
 #include "ui_table.h"
 #include "ui_unique_window.h"
 
@@ -54,8 +55,8 @@ private:
 	void clicked_new ();
 	void clicked_edit();
 	void clicked_del ();
-	void table_selected  (uint);
-	void table_dblclicked(uint);
+	void table_selected  (uint32_t);
+	void table_dblclicked(uint32_t);
 };
 
 

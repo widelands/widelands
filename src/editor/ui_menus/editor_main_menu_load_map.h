@@ -22,6 +22,7 @@
 
 #include "filesystem.h"
 
+#include <stdint.h>
 #include "ui_window.h"
 
 class Editor_Interactive;
@@ -48,8 +49,8 @@ struct Main_Menu_Load_Map : public UI::Window {
 
 private:
 	void clicked_ok();
-	void selected      (uint);
-	void double_clicked(uint);
+	void selected      (uint32_t);
+	void double_clicked(uint32_t);
 
       void fill_list();
       void load_map(std::string);

@@ -24,6 +24,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
@@ -50,9 +51,9 @@ void Widelands_Map_Bob_Data_Packet::ReadBob
 {
 	std::string owner = fr.CString();
 	std::string name = fr.CString();
-	uchar subtype = fr.Unsigned8();
+	uint8_t subtype = fr.Unsigned8();
 
-	uint reg = fr.Unsigned32();
+	uint32_t reg = fr.Unsigned32();
 	assert(not ol->is_object_known(reg));
 
 	Bob* bob = 0;
@@ -131,13 +132,13 @@ throw(_wexception)
 
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		// Now get all the the bobs
-		for (ushort y = 0; y < map->get_height(); y++) {
-			for (ushort x = 0; x < map->get_width(); x++) {
-				uint nr_bobs = fr.Unsigned32();
+		for (uint16_t y = 0; y < map->get_height(); y++) {
+			for (uint16_t x = 0; x < map->get_width(); x++) {
+				uint32_t nr_bobs = fr.Unsigned32();
 
 				assert(!egbase->get_map()->get_field(Coords(x, y))->get_first_bob());
 
-				for (uint i = 0; i < nr_bobs; i++) {
+				for (uint32_t i = 0; i < nr_bobs; i++) {
 					ReadBob(fr, egbase, skip, ol, Coords(x, y));
 				}
 			}
@@ -168,23 +169,23 @@ throw (_wexception)
 	// Now, all bob id and registerd it
 	// A Field can have more
 	// than one bob, we have to take this into account
-	//  uchar   numbers of bob for field
+	//  uint8_t   numbers of bob for field
 	//      bob1
 	//      bob2
 	//      ...
 	//      bobn
 	Map* map=egbase->get_map();
-	for (ushort y=0; y<map->get_height(); y++) {
-		for (ushort x=0; x<map->get_width(); x++) {
+	for (uint16_t y=0; y<map->get_height(); y++) {
+		for (uint16_t x=0; x<map->get_width(); x++) {
 			std::vector<Bob*> bobarr;
 
 			map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr); //  FIXME clean up this mess!
 			fw.Unsigned32(bobarr.size());
 
-			for (uint i=0;i<bobarr.size(); i++) {
+			for (uint32_t i=0;i<bobarr.size(); i++) {
 				// write serial number
 				assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
-				const uint reg = os->register_object(bobarr[i]);
+				const uint32_t reg = os->register_object(bobarr[i]);
 
 				// Write its owner
 				std::string owner_tribe = bobarr[i]->descr().get_owner_tribe() ? bobarr[i]->descr().get_owner_tribe()->name() : "world";

@@ -49,7 +49,7 @@ m_tool(tool)
 {
 	World & world = parent.egbase().map().world();
 	const Terrain_Descr::Index nr_terrains = world.get_nr_terrains();
-	const uint terrains_in_row = static_cast<uint>
+	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
 
@@ -64,23 +64,23 @@ m_tool(tool)
 
    m_checkboxes.resize(nr_terrains);
 
-	const uint green = g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
-	const uint water = g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
-	const uint mountain =
+	const uint32_t green = g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
+	const uint32_t water = g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
+	const uint32_t mountain =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png");
-	const uint dead =  g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
-	const uint unpassable =
+	const uint32_t dead =  g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
+	const uint32_t unpassable =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
-	const uint dry =   g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
-	uint small_picw, small_pich;
+	const uint32_t dry =   g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
+	uint32_t small_picw, small_pich;
 	g_gr->get_picture_size(dry, small_picw, small_pich);
 
-	uint cur_x = 0;
+	uint32_t cur_x = 0;
 	Point pos(hmargin(), vmargin());
 	for (size_t checkfor = 0; checkfor < 6; ++checkfor)
 		for (Terrain_Descr::Index i  = 0; i < nr_terrains; ++i) {
 
-			const uchar ter_is = world.get_ter(i).get_is();
+			const uint8_t ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor]) continue;
 
 			if (cur_x == terrains_in_row) {
@@ -90,11 +90,11 @@ m_tool(tool)
 			}
 
          // Create a surface for this
-			uint picw, pich;
+			uint32_t picw, pich;
 			g_gr->get_picture_size
 				(g_gr->get_picture
 				 (PicMod_Game, g_gr->get_maptexture_picture(i + 1)), picw, pich);
-         uint surface=g_gr->create_surface(picw, pich);
+         uint32_t surface=g_gr->create_surface(picw, pich);
 
          // Get the rendertarget for this
          RenderTarget* target=g_gr->get_surface_renderer(surface);
@@ -154,7 +154,7 @@ m_tool(tool)
 	m_cur_selection.set_pos(pos);
 
    std::string buf=_("Current:");
-	uint j = m_tool.get_nr_enabled();
+	uint32_t j = m_tool.get_nr_enabled();
 	for (Terrain_Descr::Index i = 0; j; ++i) if (m_tool.is_enabled(i)) {
          buf+=" ";
 		buf += world.get_ter(i).name();
@@ -165,9 +165,9 @@ m_tool(tool)
 
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
-	const std::vector<uint>::const_iterator surfaces_end = m_surfaces.end();
+	const std::vector<uint32_t>::const_iterator surfaces_end = m_surfaces.end();
 	for
-		(std::vector<uint>::const_iterator it = m_surfaces.begin();
+		(std::vector<uint32_t>::const_iterator it = m_surfaces.begin();
 		 it != surfaces_end;
 		 ++it)
 		g_gr->free_surface(*it);
@@ -188,11 +188,11 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
 		m_checkboxes[n]->set_state(true);
 	else {
 		if (not multiselect) {
-			for (uint i = 0; m_tool.get_nr_enabled(); ++i) m_tool.enable(i, false);
+			for (uint32_t i = 0; m_tool.get_nr_enabled(); ++i) m_tool.enable(i, false);
       // Disable all checkboxes
-			const uint size = m_checkboxes.size();
-			//TODO: the uint cast is ugly!
-			for (uint i = 0; i < size; ++i, i += i == static_cast<uint>(n)) {
+			const uint32_t size = m_checkboxes.size();
+			//TODO: the uint32_t cast is ugly!
+			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::do_nothing);
          m_checkboxes[i]->set_state(false);
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
@@ -206,7 +206,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
 		const World & world =
 			dynamic_cast<Editor_Interactive &>(*get_parent())
 			.egbase().map().world();
-		uint j = m_tool.get_nr_enabled();
+		uint32_t j = m_tool.get_nr_enabled();
 		for (Terrain_Descr::Index i = 0; j; ++i) if (m_tool.is_enabled(i)) {
          buf+=" ";
 			buf += world.get_ter(i).name();

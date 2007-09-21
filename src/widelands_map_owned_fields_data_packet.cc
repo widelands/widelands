@@ -72,7 +72,7 @@ throw (_wexception)
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Now, all owned_fields as unsigned chars in order
+   // Now, all owned_fields as uint8_ts in order
 	Map & map = egbase->map();
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i)

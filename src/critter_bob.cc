@@ -63,7 +63,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 {
 	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
-	for (uint idx = 0; ; ++idx) {
+	for (uint32_t idx = 0; ; ++idx) {
 		try
 		{
 			char buffer[32];
@@ -79,7 +79,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 
          // Find the appropriate parser
 			Critter_BobAction act;
-			uint mapidx;
+			uint32_t mapidx;
 
 			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
 				if (cmd[0] == s_parsemap[mapidx].name)
@@ -254,7 +254,7 @@ Critter_Bob::~Critter_Bob()
 {
 }
 
-uint Critter_Bob::get_movecaps() const throw ()
+uint32_t Critter_Bob::get_movecaps() const throw ()
 {return descr().is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;}
 
 

@@ -290,7 +290,7 @@ void NetGGZ::datacore()
 }
 
 #ifdef HAVE_GGZ
-GGZHookReturn NetGGZ::callback_server(unsigned id, const void *cbdata, const void *user)
+GGZHookReturn NetGGZ::callback_server(uint32_t id, const void *cbdata, const void *user)
 {
 	log("GGZCORE ## callback: %i\n", id);
 	ggzobj->event_server(id, cbdata);
@@ -300,7 +300,7 @@ GGZHookReturn NetGGZ::callback_server(unsigned id, const void *cbdata, const voi
 #endif
 
 #ifdef HAVE_GGZ
-GGZHookReturn NetGGZ::callback_room(unsigned id, const void *cbdata, const void *user)
+GGZHookReturn NetGGZ::callback_room(uint32_t id, const void *cbdata, const void *user)
 {
 	log("GGZCORE/room ## callback: %i\n", id);
 	ggzobj->event_room(id, cbdata);
@@ -310,7 +310,7 @@ GGZHookReturn NetGGZ::callback_room(unsigned id, const void *cbdata, const void 
 #endif
 
 #ifdef HAVE_GGZ
-GGZHookReturn NetGGZ::callback_game(unsigned id, const void *cbdata, const void *user)
+GGZHookReturn NetGGZ::callback_game(uint32_t id, const void *cbdata, const void *user)
 {
 	log("GGZCORE/game ## callback: %i\n", id);
 	ggzobj->event_game(id, cbdata);
@@ -319,7 +319,7 @@ GGZHookReturn NetGGZ::callback_game(unsigned id, const void *cbdata, const void 
 }
 #endif
 
-void NetGGZ::event_server(unsigned int id, const void *cbdata) {
+void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGameType *type;
@@ -400,7 +400,7 @@ void NetGGZ::event_server(unsigned int id, const void *cbdata) {
 #endif
 }
 
-void NetGGZ::event_room(unsigned int id, const void *cbdata) {
+void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	int i, num;
@@ -427,7 +427,7 @@ void NetGGZ::event_room(unsigned int id, const void *cbdata) {
 #endif
 }
 
-void NetGGZ::event_game(unsigned int id, const void *cbdata) {
+void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 #ifdef HAVE_GGZ
 	GGZRoom *room;
 	GGZGame *game;

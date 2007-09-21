@@ -28,6 +28,7 @@
  * playercommands.
  */
 
+#include <stdint.h>
 #include <string>
 #define REPLAY_DIR "replays"
 #define REPLAY_SUFFIX ".wrpl"
@@ -46,14 +47,14 @@ public:
 	ReplayReader(Game* game, const std::string filename);
 	~ReplayReader();
 
-	Command* GetNextCommand(uint time);
+	Command* GetNextCommand(uint32_t time);
 	bool EndOfReplay();
 
 private:
 	Game* m_game;
 	StreamRead* m_cmdlog;
 
-	uint m_replaytime;
+	uint32_t m_replaytime;
 };
 
 /**

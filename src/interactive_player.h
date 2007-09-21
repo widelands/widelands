@@ -24,6 +24,7 @@
 #include "interactive_base.h"
 #include "network.h" // For chat
 
+#include <stdint.h>
 #include "ui_button.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
@@ -64,7 +65,7 @@ struct Interactive_Player : public Interactive_Base {
 		UI::UniqueWindow::Registry objectives;
 	};
 
-	Interactive_Player(Game &, const uchar pln);
+	Interactive_Player(Game &, const uint8_t pln);
 	~Interactive_Player();
 
 	virtual void think();
@@ -81,7 +82,7 @@ struct Interactive_Player : public Interactive_Base {
 	bool handle_key(bool down, int code, char c);
 
 	Game * get_game() const {return m_game;}
-	uchar get_player_number() const {return m_player_number;}
+	uint8_t get_player_number() const {return m_player_number;}
 	Player & player() const throw () {return m_game->player(m_player_number);}
 	Player * get_player() const throw () {
 		assert(m_game);
@@ -89,7 +90,7 @@ struct Interactive_Player : public Interactive_Base {
 	}
 
 	// for savegames
-	void set_player_number(uint plrn);
+	void set_player_number(uint32_t plrn);
 
 	// For load
 	virtual void cleanup_for_load();
@@ -105,7 +106,7 @@ struct Interactive_Player : public Interactive_Base {
 private:
 	struct Overlay_Chat_Messages {
 		NetGame::Chat_Message msg;
-		uint starttime;
+		uint32_t starttime;
 	};
 
 private:

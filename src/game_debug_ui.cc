@@ -34,6 +34,7 @@
 #include "ui_tabpanel.h"
 #include "ui_window.h"
 
+#include <stdint.h>
 #include <stdio.h>
 
 
@@ -144,7 +145,7 @@ public:
 private:
    bool           m_log_general_info;
 	Object_Ptr      m_object;
-	uint            m_serial;
+	uint32_t            m_serial;
 	UI::Tab_Panel * m_tabs;
 };
 
@@ -238,7 +239,7 @@ public:
 	virtual void think();
 
 	void open_immovable();
-	void open_bob(const uint index);
+	void open_bob(const uint32_t index);
 
 private:
 	Map &                        m_map;
@@ -246,7 +247,7 @@ private:
 
 	UI::Multiline_Textarea       m_ui_field;
 	UI::Button<FieldDebugWindow> m_ui_immovable;
-	UI::Listselect<uintptr_t>    m_ui_bobs;
+	UI::Listselect<intptr_t>    m_ui_bobs;
 };
 
 
@@ -446,8 +447,8 @@ FieldDebugWindow::open_bob
 Open the bob debug window for the bob of the given index in the list
 ===============
 */
-void FieldDebugWindow::open_bob(const uint index) {
-	if (index != UI::Listselect<uintptr_t>::no_selection_index())
+void FieldDebugWindow::open_bob(const uint32_t index) {
+	if (index != UI::Listselect<intptr_t>::no_selection_index())
 		if
 			(Map_Object * const object =
 			 get_iabase()->egbase().objects().get_object(m_ui_bobs.get_selected()))

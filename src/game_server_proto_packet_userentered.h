@@ -20,6 +20,7 @@
 #ifndef __S__GAME_SERVER_PROTO_PACKET_USERENTERED_H
 #define __S__GAME_SERVER_PROTO_PACKET_USERENTERED_H
 
+#include <stdint.h>
 #include <string>
 #include "game_server_proto_packet.h"
 
@@ -32,7 +33,7 @@ public Game_Server_Protocol_Packet
       Game_Server_Protocol_Packet_UserEntered();
       virtual ~Game_Server_Protocol_Packet_UserEntered();
 
-      virtual ushort get_id();
+      virtual uint16_t get_id();
 
 	virtual void send(Network_Buffer *) {}
 	virtual void recv(Game_Server_Connection*, Network_Buffer *);

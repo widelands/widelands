@@ -24,17 +24,18 @@
 
 #include <string>
 
+#include <stdint.h>
 #include "streamwrite.h"
 
 /* Structure to save state of computation between the single steps.  */
 struct md5_ctx {
-	ulong A;
-	ulong B;
-	ulong C;
-	ulong D;
+	uint32_t A;
+	uint32_t B;
+	uint32_t C;
+	uint32_t D;
 
-	ulong total[2];
-	ulong buflen;
+	uint32_t total[2];
+	uint32_t buflen;
 	char buffer[128];
 };
 

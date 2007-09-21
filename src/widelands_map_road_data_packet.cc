@@ -22,6 +22,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_road_data_packet.h"
@@ -50,7 +51,7 @@ throw (_wexception)
 
    const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      uint ser;
+      uint32_t ser;
       while ((ser=fr.Unsigned32())!=0xffffffff) {
          // If this is already known, get it
          // Road data is read somewhere else
@@ -81,15 +82,15 @@ throw (_wexception)
    // Write roads, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
+   for (uint16_t y=0; y<map->get_height(); y++) {
+      for (uint16_t x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
          // We only write Roads
          if (immovable && immovable->get_type()==Map_Object::ROAD) {
             Road* road=static_cast<Road*>(immovable);
 
             // Roads can life on multiple positions
-            uint serial=0;
+            uint32_t serial=0;
             if (os->is_object_known(road)) continue;
 
             serial=os->register_object(road);

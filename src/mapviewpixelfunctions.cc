@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdint.h>
 #include "mapviewpixelfunctions.h"
 
 // sqrt(1/3)
@@ -73,18 +74,18 @@ Calculate the pixel (currently Manhattan) distance between the two points,
 taking wrap-arounds into account.
 ===============
 */
-unsigned int MapviewPixelFunctions::calc_pix_distance
+uint32_t MapviewPixelFunctions::calc_pix_distance
 (const Map & map, Point a, Point b)
 {
 	normalize_pix(map, a);
 	normalize_pix(map, b);
-	unsigned int dx = abs(a.x - b.x), dy = abs(a.y - b.y);
+	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
 	{
-		const uint map_end_screen_x = get_map_end_screen_x(map);
+		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 		if (dx > map_end_screen_x / 2) dx = -(dx - map_end_screen_x);
 	}
 	{
-		const uint map_end_screen_y = get_map_end_screen_y(map);
+		const uint32_t map_end_screen_y = get_map_end_screen_y(map);
 		if (dy > map_end_screen_y / 2) dy = -(dy - map_end_screen_y);
 	}
 	return dx + dy;
@@ -92,21 +93,21 @@ unsigned int MapviewPixelFunctions::calc_pix_distance
 
 
 Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
-(const Map & map, unsigned int x, unsigned int y)
+(const Map & map, uint32_t x, uint32_t y)
 {
-	const unsigned short mapwidth = map.get_width();
-	const unsigned short mapheight = map.get_height();
-	const uint map_end_screen_x = get_map_end_screen_x(map);
-	const uint map_end_screen_y = get_map_end_screen_y(map);
+	const uint16_t mapwidth = map.get_width();
+	const uint16_t mapheight = map.get_height();
+	const uint32_t map_end_screen_x = get_map_end_screen_x(map);
+	const uint32_t map_end_screen_y = get_map_end_screen_y(map);
 	while (x >= map_end_screen_x) x -= map_end_screen_x;
 	while (y >= map_end_screen_y) y -= map_end_screen_y;
 	Node_and_Triangle<> result;
 
-	const unsigned short col_number = x / (TRIANGLE_WIDTH / 2);
-	unsigned short row_number = y /  TRIANGLE_HEIGHT, next_row_number;
+	const uint16_t col_number = x / (TRIANGLE_WIDTH / 2);
+	uint16_t row_number = y /  TRIANGLE_HEIGHT, next_row_number;
 	assert(row_number < mapheight);
-	const unsigned int left_col = col_number / 2;
-	unsigned short right_col = (col_number + 1) / 2;
+	const uint32_t left_col = col_number / 2;
+	uint16_t right_col = (col_number + 1) / 2;
 	if (right_col == mapwidth) right_col = 0;
 	bool slash = (col_number + row_number) & 1;
 
@@ -116,7 +117,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	//  y-coordinate than the right node. This is called slash because the edge
 	//  between them goes in the direction of the '/' character. When slash is
 	//  false, the edge goes in the direction of the '\' character.
-	unsigned short screen_y_base = row_number * TRIANGLE_HEIGHT;
+	uint16_t screen_y_base = row_number * TRIANGLE_HEIGHT;
 	int upper_screen_dy, lower_screen_dy =
 		screen_y_base
 		-
@@ -146,7 +147,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	}
 
 	{//  Calculate which of the 2 nodes (x, y) is closest to.
-		unsigned short upper_x, lower_x, upper_screen_dx, lower_screen_dx;
+		uint16_t upper_x, lower_x, upper_screen_dx, lower_screen_dx;
 		if (slash) {
 			upper_x = right_col;
 			lower_x = left_col;

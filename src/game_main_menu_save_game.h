@@ -21,6 +21,7 @@
 #define __S__GAME_MAIN_MENU_SAVE_GAME_H
 
 #include "ui_unique_window.h"
+#include <stdint.h>
 
 class Interactive_Player;
 namespace UI {
@@ -36,8 +37,8 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 
 private:
 	void clicked_ok    ();
-	void selected      (uint);
-	void double_clicked(uint);
+	void selected      (uint32_t);
+	void double_clicked(uint32_t);
       void edit_box_changed();
 
       void fill_list();

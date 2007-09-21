@@ -37,7 +37,7 @@ Textarea::Textarea (Panel * const parent, const int x, const int y,
 }
 
 Textarea::Textarea (Panel *  const parent, const int x, const int y,
-						  const uint w, const uint h, const Align align,
+						  const uint32_t w, const uint32_t h, const Align align,
 						  const bool multiline)
 	:
 		Panel      (parent, x, y, w, h),
@@ -52,7 +52,7 @@ Textarea::Textarea (Panel *  const parent, const int x, const int y,
 }
 
 Textarea:: Textarea (Panel *  const parent, const int x, const int y,
-							const uint w, const uint h, const std::string & text,
+							const uint32_t w, const uint32_t h, const std::string & text,
 							const Align align, const bool multiline)
 	:
 		Panel      (parent, x, y, w, h),

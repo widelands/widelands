@@ -23,6 +23,7 @@
 #include "geometry.h"
 #include "layered_filesystem.h" //TODO: as soon as g_fs is not needed anymore, this can be changed to filesystem.h
 
+#include <stdint.h>
 #include <vector>
 
 extern class Profile g_options;
@@ -93,7 +94,7 @@ public:
 
 	Value *get_val(const char *name);
 	Value *get_next_val(const char *name);
-	uint get_num_values() const {return m_values.size();}
+	uint32_t get_num_values() const {return m_values.size();}
 
 	const char *get_name() const;
 

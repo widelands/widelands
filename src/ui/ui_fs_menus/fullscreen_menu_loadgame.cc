@@ -79,7 +79,7 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
    end_modal(1);
 }
 
-void Fullscreen_Menu_LoadGame::map_selected(uint) {
+void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = list.get_selected()) {
       FileSystem* fs = g_fs->MakeSubFileSystem(name);
 		Game_Loader gl(*fs, &game);
@@ -90,7 +90,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint) {
 		tamapname.set_text(gpdp.get_mapname());
 
       char buf[200];
-      uint gametime = gpdp.get_gametime();
+      uint32_t gametime = gpdp.get_gametime();
 
       int hours = gametime / 3600000;
       gametime -= hours * 3600000;
@@ -109,7 +109,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint) {
 /*
  * listbox got double clicked
  */
-void Fullscreen_Menu_LoadGame::double_clicked(uint) {
+void Fullscreen_Menu_LoadGame::double_clicked(uint32_t) {
    // Ok
    clicked_ok();
 

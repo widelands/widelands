@@ -28,6 +28,7 @@
 
 #include <cassert>
 #include <map>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -108,11 +109,11 @@ struct Editor_Game_Base {
 	Immovable* create_immovable
 		(const Coords c, const std::string & name, const Tribe_Descr*);
 	Battle* create_battle ();
-	AttackController* create_attack_controller(Flag* flag, int attacker, int defender, uint num);
+	AttackController* create_attack_controller(Flag* flag, int attacker, int defender, uint32_t num);
 	AttackController* create_attack_controller();
-	void remove_attack_controller(uint serial);
+	void remove_attack_controller(uint32_t serial);
 	void register_attack_controller(AttackController* ctrl);
-	const std::vector<uint>& get_attack_controller_serials() const {return m_attack_serials;}
+	const std::vector<uint32_t>& get_attack_controller_serials() const {return m_attack_serials;}
 
 	std::vector<int> get_battle_serials() const {return m_battle_serials;}
 	typedef int Time;
@@ -127,9 +128,9 @@ struct Editor_Game_Base {
 	// safe system for storing pointers to non-Map_Object C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
 	// synchronized across the network, and they are not saved in savegames
-	uint add_trackpointer(void* ptr);
-	void* get_trackpointer(uint serial);
-	void remove_trackpointer(uint serial);
+	uint32_t add_trackpointer(void* ptr);
+	void* get_trackpointer(uint32_t serial);
+	void remove_trackpointer(uint32_t serial);
 
 	// Manually load a tribe into memory. Used by the editor
 	void manually_load_tribe(const std::string & tribe);
@@ -203,11 +204,11 @@ private:
 	Interactive_Base         * m_iabase;
 	Map                      * m_map;
 
-	uint                       m_lasttrackserial;
-	std::map<uint, void *>     m_trackpointers;
+	uint32_t                       m_lasttrackserial;
+	std::map<uint32_t, void *>     m_trackpointers;
 public:
 	std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
-	std::vector<uint>          m_attack_serials;
+	std::vector<uint32_t>          m_attack_serials;
 
 private:
 	Editor_Game_Base & operator=(const Editor_Game_Base &);
@@ -222,6 +223,6 @@ private:
 	iterate_player_numbers(p, nr_players)                                       \
 		if (const Player * const player = (egbase).get_player(p))                \
 
-extern const uchar g_playercolors[MAX_PLAYERS][12];
+extern const uint8_t g_playercolors[MAX_PLAYERS][12];
 
 #endif // __S__EDITOR_GAME_BASE_H

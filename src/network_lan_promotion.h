@@ -31,8 +31,8 @@
 
 struct LAN_Game_Info {
 	char          magic       [6];
-	unsigned char version;
-	unsigned char state;
+	uint8_t version;
+	uint8_t state;
 
 	char          gameversion[32];
 	char          hostname   [32];
@@ -50,14 +50,14 @@ protected:
 	LAN_Base ();
 	~LAN_Base ();
 
-	void bind (unsigned short);
+	void bind (uint16_t);
 
 	bool avail ();
 
 	ssize_t recv (void*, size_t, sockaddr_in*);
 
 	void send (const void*, size_t, const sockaddr_in*);
-	void broadcast (const void*, size_t, unsigned short);
+	void broadcast (const void*, size_t, uint16_t);
 
 private:
 	int                  sock;

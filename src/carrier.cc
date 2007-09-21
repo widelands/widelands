@@ -19,6 +19,7 @@
 
 #include "carrier.h"
 #include "game.h"
+#include <stdint.h>
 #include "wexception.h"
 
 
@@ -462,7 +463,7 @@ bool Carrier::notify_ware(Game* g, int flag)
 void Carrier::find_pending_item(Game* g)
 {
 	Road* road = (Road*)get_location(g);
-	uint haveitembits = 0;
+	uint32_t haveitembits = 0;
 
 	assert(m_acked_ware < 0);
 

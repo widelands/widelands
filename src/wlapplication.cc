@@ -46,6 +46,7 @@
 #include "log.h"
 
 #include <iostream>
+#include <stdint.h>
 #include <stdexcept>
 #include <string>
 
@@ -531,7 +532,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 			}
 			if (ev.key.keysym.sym == SDLK_F11) // take screenshot
 			{
-				if (ev.type == SDL_KEYDOWN) for (uint nr = 0; nr < 10000; ++nr) {
+				if (ev.type == SDL_KEYDOWN) for (uint32_t nr = 0; nr < 10000; ++nr) {
 					char buffer[256];
 					snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr);
 					if (g_fs->FileExists(buffer)) continue;
@@ -814,8 +815,8 @@ const bool WLApplication::init_hardware()
 	SDL_EnableUNICODE(1); // useful for e.g. chat messages
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	uint xres = 800;
-	uint yres = 600;
+	uint32_t xres = 800;
+	uint32_t yres = 600;
 	if (m_loadgame_filename.size() or m_tutorial_filename.size()) {
 		// main menu will not be shown, so set in-game resolution
 		xres = s->get_int("xres", xres);
@@ -1237,8 +1238,8 @@ void WLApplication::mainmenu_multiplayer()
 
 		//if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
 		//throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
-		ulong addr;
-		ushort port;
+		uint32_t addr;
+		uint16_t port;
 
 		if (not ns.get_host_address(addr, port))
 			throw wexception("Address of game server is no good");

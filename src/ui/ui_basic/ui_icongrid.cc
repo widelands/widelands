@@ -30,7 +30,7 @@ namespace UI {
 /**
 Initialize the grid
 */
-Icon_Grid::Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols)
+Icon_Grid::Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint32_t flags, int cols)
 	: Panel(parent, x, y, 0, 0)
 {
 	m_flags = flags;
@@ -52,7 +52,7 @@ Icon_Grid::Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint fla
 Add a new icon to the list and resize appropriately.
 Returns the index of the newly added icon.
 */
-int Icon_Grid::add(uint picid, void* data, std::string descr)
+int Icon_Grid::add(uint32_t picid, void* data, std::string descr)
 {
 	Item it;
 
@@ -95,7 +95,7 @@ Returns the user-defined data of the icon with the given index.
 */
 void* Icon_Grid::get_data(int idx)
 {
-	assert(static_cast<uint>(idx) < m_items.size());
+	assert(static_cast<uint32_t>(idx) < m_items.size());
 
 	return m_items[idx].data;
 }
@@ -107,7 +107,7 @@ Set the currently selected icon for persistant grids.
 void Icon_Grid::set_selection(int idx)
 {
 	assert(is_persistant());
-	assert(static_cast<uint>(idx) < m_items.size());
+	assert(static_cast<uint32_t>(idx) < m_items.size());
 
 	if (m_selected >= 0)
 		update_for_index(m_selected);
@@ -147,10 +147,10 @@ void Icon_Grid::draw(RenderTarget* dst)
 	x = 0;
 	y = 0;
 
-	for (uint idx = 0; idx < m_items.size(); idx++)
+	for (uint32_t idx = 0; idx < m_items.size(); idx++)
 	{
-		const uint picid = m_items[idx].picid;
-		uint w, h;
+		const uint32_t picid = m_items[idx].picid;
+		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 
 		dst->blit

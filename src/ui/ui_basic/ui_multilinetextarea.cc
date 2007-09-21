@@ -28,7 +28,7 @@ namespace UI {
 
 Multiline_Textarea::Multiline_Textarea
 	(Panel * const parent,
-	 const int x, const int y, const uint w, const uint h,
+	 const int x, const int y, const uint32_t w, const uint32_t h,
 	 const std::string & text,
 	 const Align align,
 	 const bool always_show_scrollbar)
@@ -158,7 +158,7 @@ void Multiline_Textarea::draw_scrollbar() {
             setbottom = true;
 		}
 
-		uint m_width = 0;
+		uint32_t m_width = 0;
       //update(0, 0, get_eff_w(), get_h());
       if (m_cache_id)
 			g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);

@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
+#include <stdint.h>
 #include "ui_checkbox.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
@@ -72,9 +73,9 @@ public:
 	const char * get_mapname() const throw () {return list.get_selected();}
 
 	void ok();
-	void map_selected  (uint);
+	void map_selected  (uint32_t);
 	void changed(bool);
-	void double_clicked(uint);
+	void double_clicked(uint32_t);
 	void fill_list();
 
 	std::string m_curdir;

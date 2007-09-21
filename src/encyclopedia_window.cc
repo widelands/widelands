@@ -88,7 +88,7 @@ void EncyclopediaWindow::fillWares() {
 	}
 }
 
-void EncyclopediaWindow::wareSelected(uint) {
+void EncyclopediaWindow::wareSelected(uint32_t) {
 	selectedWare = tribe->get_ware_descr(wares.get_selected());
 
 	descrTxt.set_text(selectedWare->get_helptext());
@@ -124,7 +124,7 @@ void EncyclopediaWindow::wareSelected(uint) {
 
 }
 
-void EncyclopediaWindow::prodSiteSelected(uint) {
+void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	assert(prodSites.has_selection());
 	condTable.clear();
 
@@ -198,7 +198,7 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 				}
 		}
 
-		uint i = 0;
+		uint32_t i = 0;
 		const std::map<std::string, WareCondition>::const_iterator
 			waresChecked_end = waresChecked.end();
 		for
@@ -231,14 +231,14 @@ void EncyclopediaWindow::prodSiteSelected(uint) {
 }
 
 void EncyclopediaWindow::createCondTableEntry
-(const uint            index,
+(const uint32_t            index,
  const std::string   & wareName,
  const bool            consumed,
  const WareCondition & wareCondition)
 {
    Item_Ware_Descr* curWare = tribe->get_ware_descr(tribe->get_safe_ware_index(wareName.c_str()));
 
-	UI::Table<uintptr_t>::Entry_Record & tableEntry =
+	UI::Table<intptr_t>::Entry_Record & tableEntry =
 		condTable.add(index, curWare->get_icon());
    std::string rowText = curWare->descname();
    std::string consumeAmount = "0";
@@ -251,7 +251,7 @@ void EncyclopediaWindow::createCondTableEntry
 	}
 
 	if (wareCondition.isGrouped)
-		for (uint k = 0; k < wareCondition.groupId; ++k) groupId += '*';
+		for (uint32_t k = 0; k < wareCondition.groupId; ++k) groupId += '*';
 
 	tableEntry.set_string(0, rowText);
 	tableEntry.set_string(1, consumeAmount);

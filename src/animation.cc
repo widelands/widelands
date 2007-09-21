@@ -22,6 +22,7 @@
 #include "bob.h"
 #include "constants.h"
 #include "profile.h"
+#include <stdint.h>
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
@@ -148,10 +149,10 @@ void AnimationManager::flush()
  * \param picnametempl  a template for the picture names
  * \param encdefaults   default values for player colors, see \ref EncodeData
 */
-uint AnimationManager::get(const char *directory, Section *s, const char *picnametempl,
+uint32_t AnimationManager::get(const char *directory, Section *s, const char *picnametempl,
 	                        const EncodeData *encdefaults)
 {
-	uint id;
+	uint32_t id;
 	AnimationData* ad;
 
 	m_animations.push_back(AnimationData());
@@ -221,7 +222,7 @@ AnimationManager::get
 Return the number of animations.
 ===============
 */
-uint AnimationManager::get_nranimations() const
+uint32_t AnimationManager::get_nranimations() const
 {
 	return m_animations.size();
 }
@@ -235,7 +236,7 @@ Return AnimationData for this animation.
 Returns 0 if the animation doesn't exist.
 ===============
 */
-const AnimationData* AnimationManager::get_animation(uint id) const
+const AnimationData* AnimationManager::get_animation(uint32_t id) const
 {
 	if (!id || id > m_animations.size())
 		return 0;
@@ -251,12 +252,12 @@ const AnimationData* AnimationManager::get_animation(uint id) const
  * \par animation    The animation to check.
  * \par framenumber  The framenumber currently on display.
  *
- * \note uint animation is an ID number that starts at 1, not a vector index that starts at 0 !
+ * \note uint32_t animation is an ID number that starts at 1, not a vector index that starts at 0 !
  *
  * \sa AnimationManager::get
  * \sa RenderTargetImpl::drawanim
 */
-void AnimationManager::trigger_soundfx(uint animation, uint framenumber, uint stereo_position)
+void AnimationManager::trigger_soundfx(uint32_t animation, uint32_t framenumber, uint32_t stereo_position)
 {
 	return;
 //temporarily disabled #fweber 30jan2006
@@ -285,12 +286,12 @@ DirAnimations::~DirAnimations
 ===============
 */
 DirAnimations::DirAnimations
-(const uint dir1,
- const uint dir2,
- const uint dir3,
- const uint dir4,
- const uint dir5,
- const uint dir6)
+(const uint32_t dir1,
+ const uint32_t dir2,
+ const uint32_t dir3,
+ const uint32_t dir4,
+ const uint32_t dir5,
+ const uint32_t dir6)
 {
 	m_animations[0] = dir1;
 	m_animations[1] = dir2;

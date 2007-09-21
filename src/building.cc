@@ -78,7 +78,7 @@ Cleanup
 Building_Descr::~Building_Descr()
 {
       free(m_buildicon_fname);
-   for (uint i=0; i<m_enhances_to.size(); i++)
+   for (uint32_t i=0; i<m_enhances_to.size(); i++)
       free(m_enhances_to[i]);
 }
 
@@ -217,7 +217,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
  *
  * \return the radius (in number of fields) of the conquered area.
  */
-uint Building_Descr::get_conquers() const
+uint32_t Building_Descr::get_conquers() const
 {
 	return 0;
 }
@@ -227,7 +227,7 @@ uint Building_Descr::get_conquers() const
  * \return the radius (in number of fields) of the area seen by this
  * building.
  */
-uint Building_Descr::vision_range() const throw()
+uint32_t Building_Descr::vision_range() const throw()
 {
 	if (m_vision_range > 0)
 		return m_vision_range;
@@ -404,8 +404,8 @@ The bits are (1 << PCap_XXX).
 By default, all buildable buildings can be bulldozed.
 ===============
 */
-uint Building::get_playercaps() const throw () {
-	uint caps = 0;
+uint32_t Building::get_playercaps() const throw () {
+	uint32_t caps = 0;
 	if (descr().get_buildable() or descr().get_enhanced_building())
 		caps                                |= 1 << PCap_Bulldoze;
 	if (descr().get_stopable())       caps |= 1 << PCap_Stopable;
@@ -421,7 +421,7 @@ Building::start_animation
 Start the given animation
 ===============
 */
-void Building::start_animation(Editor_Game_Base* g, uint anim)
+void Building::start_animation(Editor_Game_Base* g, uint32_t anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();
@@ -550,7 +550,7 @@ Return the animation ID that is used for the building in UI items
 (the building UI, messages, etc..)
 ===============
 */
-uint Building::get_ui_anim() const {return descr().get_ui_anim();}
+uint32_t Building::get_ui_anim() const {return descr().get_ui_anim();}
 
 
 /*
@@ -622,7 +622,7 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 	}
 
 	// Check time and queue
-	uint time = g->get_gametime();
+	uint32_t time = g->get_gametime();
 
 	if (!m_leave_queue.size())
 	{
@@ -646,9 +646,9 @@ Building::act
 Advance the leave queue.
 ===============
 */
-void Building::act(Game* g, uint data)
+void Building::act(Game* g, uint32_t data)
 {
-	uint time = g->get_gametime();
+	uint32_t time = g->get_gametime();
 
 	if (static_cast<int>(time - m_leave_time) >= 0)
 	{
@@ -740,7 +740,7 @@ void Building::draw_help
  const FCoords,
  const Point pos)
 {
-	const uint dpyflags = game.get_iabase()->get_display_flags();
+	const uint32_t dpyflags = game.get_iabase()->get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus)
 	{

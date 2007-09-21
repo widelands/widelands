@@ -144,17 +144,17 @@ void RenderTarget::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
 {
 	int dx=x2-x1;      /* the horizontal distance of the line */
 	int dy=y2-y1;      /* the vertical distance of the line */
-	const uint dxabs = abs(dx);
-	const uint dyabs = abs(dy);
+	const uint32_t dxabs = abs(dx);
+	const uint32_t dyabs = abs(dy);
 	int sdx= dx < 0 ? -1 : 1;
 	int sdy= dy < 0 ? -1 : 1;
-	uint x = dyabs / 2;
-	uint y = dxabs / 2;
+	uint32_t x = dyabs / 2;
+	uint32_t y = dxabs / 2;
 	Point p(x1, y1);
 
 	draw_rect(Rect(p, 1, 1), color);
 
-	if (dxabs >= dyabs) for (uint i = 0;i < dxabs; ++i) {
+	if (dxabs >= dyabs) for (uint32_t i = 0;i < dxabs; ++i) {
 			//  the line is more horizontal than vertical
 		y+=dyabs;
 
@@ -163,7 +163,7 @@ void RenderTarget::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
 		p.x += sdx;
 		draw_rect(Rect(p, 1, 1), color);
 	}
-	else for (uint i = 0; i < dyabs; ++i) {
+	else for (uint32_t i = 0; i < dyabs; ++i) {
 			// the line is more vertical than horizontal
 		x+=dxabs;
 
@@ -208,13 +208,13 @@ void RenderTarget::clear()
 /**
  * Blits a blitsource into this bitmap
  */
-void RenderTarget::blit(const Point dst, const uint picture)
+void RenderTarget::blit(const Point dst, const uint32_t picture)
 {
 	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
-void RenderTarget::blitrect(const Point dst, const uint picture,
+void RenderTarget::blitrect(const Point dst, const uint32_t picture,
 			    const Rect srcrc)
 {
 	assert(0 <= srcrc.x);
@@ -230,7 +230,7 @@ void RenderTarget::blitrect(const Point dst, const uint picture,
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, uint picture, Point ofs)
+void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
 {
 	Surface* src = g_gr->get_picture_surface(picture);
 
@@ -251,10 +251,10 @@ void RenderTarget::tile(Rect r, uint picture, Point ofs)
 		if (ofs.y < 0) ofs.y += src->get_h();
 
 		// Blit the picture into the rectangle
-		uint ty = 0;
+		uint32_t ty = 0;
 
 		while (ty < r.h) {
-			uint tx = 0;
+			uint32_t tx = 0;
 			int tofsx = ofs.x;
 			Rect srcrc;
 
@@ -292,7 +292,7 @@ void RenderTarget::tile(Rect r, uint picture, Point ofs)
 	const Map             & map             = egbase.map();                     \
 	const World           & world           = map.world();                      \
 	const Overlay_Manager & overlay_manager = map.get_overlay_manager();        \
-	const uint              mapwidth        = map.get_width();                  \
+	const uint32_t              mapwidth        = map.get_width();                  \
 	int minfx, minfy;                                                           \
 	int maxfx, maxfy;                                                           \
                                                                                \
@@ -362,7 +362,7 @@ void RenderTarget::rendermap
 			 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
 			 .get_texture());
 
-		uint count = dx;
+		uint32_t count = dx;
 
 		while (count--) {
 			const FCoords l = f, bl = br;
@@ -448,11 +448,11 @@ void RenderTarget::rendermap
 				map.get_tln(r, &tr);
 				map.get_ln(r, &f);
 				bool r_is_border;
-				uchar f_owner_number = f.field->get_owned_by();//  FIXME PPoV
-				uchar r_owner_number;
+				uint8_t f_owner_number = f.field->get_owned_by();//  FIXME PPoV
+				uint8_t r_owner_number;
 				r_is_border = r.field->is_border();//  FIXME PPoV
 				r_owner_number = r.field->get_owned_by();//  FIXME PPoV
-				uchar br_owner_number = br.field->get_owned_by();//  FIXME PPoV
+				uint8_t br_owner_number = br.field->get_owned_by();//  FIXME PPoV
 				const Player::Field * r_player_field = first_player_field + r_index;
 				const Player::Field * br_player_field =
 					first_player_field + br_index;
@@ -480,10 +480,10 @@ void RenderTarget::rendermap
 					move_r(mapwidth, br, br_index);
 					r_player_field  = first_player_field +  r_index;
 					br_player_field = first_player_field + br_index;
-					const uchar tr_owner_number = tr.field->get_owned_by(); //  FIXME PPoV
+					const uint8_t tr_owner_number = tr.field->get_owned_by(); //  FIXME PPoV
 					const bool f_is_border = r_is_border;
-					const uchar l_owner_number = f_owner_number;
-					const uchar bl_owner_number = br_owner_number;
+					const uint8_t l_owner_number = f_owner_number;
+					const uint8_t bl_owner_number = br_owner_number;
 					f_owner_number = r_owner_number;
 					r_is_border = r.field->is_border();         //  FIXME PPoV
 					r_owner_number = r.field->get_owned_by();   //  FIXME PPoV
@@ -503,7 +503,7 @@ void RenderTarget::rendermap
 					//  Render border markes on and halfway between border nodes.
 					if (f_is_border) {
 						const Player & owner = egbase.player(f_owner_number);
-						const uint anim = owner.tribe().get_frontier_anim();
+						const uint32_t anim = owner.tribe().get_frontier_anim();
 						if (1 < f_vision) drawanim(f_pos, anim, 0, &owner);
 						if
 							((f_vision | r_vision)
@@ -572,7 +572,7 @@ void RenderTarget::rendermap
 							(const Map_Object_Descr * const map_object_descr =
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
-							if (const uint picid = map_object_descr->main_animation())
+							if (const uint32_t picid = map_object_descr->main_animation())
 								drawanim(f_pos, picid, 0);
 							else if (map_object_descr == &g_flag_descr) {
 								const Player & owner = egbase.player(f_owner_number);
@@ -758,7 +758,7 @@ void RenderTarget::rendermap
 			g_gr->get_maptexture_data
 			(world.terrain_descr(f.field->terrain_r()).get_texture());
 
-		uint count = dx;
+		uint32_t count = dx;
 
 		while (count--) {
 			const FCoords l = f, bl = br;
@@ -780,7 +780,7 @@ void RenderTarget::rendermap
 				g_gr->get_maptexture_data
 				(world.terrain_descr(f.field->terrain_r()).get_texture());
 
-			const uchar roads =
+			const uint8_t roads =
 				f.field->get_roads() | overlay_manager.get_road_overlay(f);
 
 			m_ground_surface->draw_field //  Render ground
@@ -828,11 +828,11 @@ void RenderTarget::rendermap
 				map.get_tln(r, &tr);
 				map.get_ln(r, &f);
 				bool r_is_border;
-				uchar f_owner_number = f.field->get_owned_by();
-				uchar r_owner_number;
+				uint8_t f_owner_number = f.field->get_owned_by();
+				uint8_t r_owner_number;
 				r_is_border = r.field->is_border();
 				r_owner_number = r.field->get_owned_by();
-				uchar br_owner_number = br.field->get_owned_by();
+				uint8_t br_owner_number = br.field->get_owned_by();
 				Point r_pos
 					(linear_fx * TRIANGLE_WIDTH
 					 +
@@ -852,10 +852,10 @@ void RenderTarget::rendermap
 					move_r(mapwidth, tr);
 					move_r(mapwidth,  r,  r_index);
 					move_r(mapwidth, br, br_index);
-					const uchar tr_owner_number = tr.field->get_owned_by();
+					const uint8_t tr_owner_number = tr.field->get_owned_by();
 					const bool f_is_border = r_is_border;
-					const uchar l_owner_number = f_owner_number;
-					const uchar bl_owner_number = br_owner_number;
+					const uint8_t l_owner_number = f_owner_number;
+					const uint8_t bl_owner_number = br_owner_number;
 					f_owner_number = r_owner_number;
 					r_is_border = r.field->is_border();
 					r_owner_number = r.field->get_owned_by();
@@ -871,7 +871,7 @@ void RenderTarget::rendermap
 					//  Render border markes on and halfway between border nodes.
 					if (f_is_border) {
 						const Player & owner = egbase.player(f_owner_number);
-						const uint anim = owner.tribe().get_frontier_anim();
+						const uint32_t anim = owner.tribe().get_frontier_anim();
 						drawanim(f_pos, anim, 0, &owner);
 						if
 							(r_owner_number == f_owner_number
@@ -1082,7 +1082,7 @@ void RenderTarget::rendermap
 void RenderTarget::renderminimap(const Editor_Game_Base & egbase,
 				 const Player * const player,
 				 const Point viewpoint,
-				 const uint flags)
+				 const uint32_t flags)
 {
 	m_surface->draw_minimap
 			(egbase, player, m_rect, viewpoint - m_offset, flags);
@@ -1101,7 +1101,7 @@ void RenderTarget::renderminimap(const Editor_Game_Base & egbase,
  * \todo Document this method's parameters
  * \todo Correctly calculate the stereo position for sound effects
  */
-void RenderTarget::drawanim(Point dst, const uint animation, const uint time,
+void RenderTarget::drawanim(Point dst, const uint32_t animation, const uint32_t time,
 			    const Player * const player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
@@ -1119,7 +1119,7 @@ void RenderTarget::drawanim(Point dst, const uint animation, const uint time,
 	// Get the frame and its data
 	Surface* frame;
 
-	const uint framenumber = (time / data->frametime) % gfx->nr_frames();
+	const uint32_t framenumber = (time / data->frametime) % gfx->nr_frames();
 
 	frame = gfx->get_frame
 			(framenumber, player ? player->get_player_number() : 0, player);
@@ -1131,7 +1131,7 @@ void RenderTarget::drawanim(Point dst, const uint animation, const uint time,
 	doblit(dst, frame, srcrc);
 
 	// Look if there's a sound effect registered for this frame and trigger the effect
-	uint stereo_position=128; //see Sound_Handler::stereo_position()
+	uint32_t stereo_position=128; //see Sound_Handler::stereo_position()
 
 	g_anim.trigger_soundfx(animation, framenumber, stereo_position);
 }
@@ -1139,8 +1139,8 @@ void RenderTarget::drawanim(Point dst, const uint animation, const uint time,
 /**
  * Draws a part of a frame of an animation at the given location
  */
-void RenderTarget::drawanimrect(Point dst, const uint animation,
-				const uint time, const Player * const player,
+void RenderTarget::drawanimrect(Point dst, const uint32_t animation,
+				const uint32_t time, const Player * const player,
 				Rect srcrc)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
@@ -1186,7 +1186,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 	r += m_offset;
 
 	if (r.x < 0) {
-		if (r.w <= static_cast<uint>(-r.x)) return false;
+		if (r.w <= static_cast<uint32_t>(-r.x)) return false;
 
 		r.w += r.x;
 
@@ -1199,7 +1199,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 	}
 
 	if (r.y < 0) {
-		if (r.h <= static_cast<uint>(-r.y)) return false;
+		if (r.h <= static_cast<uint32_t>(-r.y)) return false;
 		r.h += r.y;
 		r.y = 0;
 	}
@@ -1226,7 +1226,7 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 	// Clipping
 
 	if (dst.x < 0) {
-		if (srcrc.w <= static_cast<uint>(-dst.x)) return;
+		if (srcrc.w <= static_cast<uint32_t>(-dst.x)) return;
 
 		srcrc.x -= dst.x;
 
@@ -1241,7 +1241,7 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
 	}
 
 	if (dst.y < 0) {
-		if (srcrc.h <= static_cast<uint>(-dst.y)) return;
+		if (srcrc.h <= static_cast<uint32_t>(-dst.y)) return;
 		srcrc.y -= dst.y;
 		srcrc.h += dst.y;
 		dst.y = 0;

@@ -110,9 +110,9 @@ template <typename Coords_type> struct MapTriangleRegion<TCoords<Coords_type> >
 private:
 	const bool m_radius_is_odd;
 	enum {Top, Upper, Lower, Bottom} m_phase;
-	unsigned short m_remaining_rows_in_upper_phase;
-	unsigned short m_remaining_rows_in_lower_phase;
-	unsigned short m_row_length, m_remaining_in_row;
+	uint16_t m_remaining_rows_in_upper_phase;
+	uint16_t m_remaining_rows_in_lower_phase;
+	uint16_t m_row_length, m_remaining_in_row;
 	Coords_type          m_left;
 	TCoords<Coords_type> m_location;
 };

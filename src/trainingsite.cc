@@ -233,7 +233,7 @@ void TrainingSite::set_economy(Economy * e)
 {
 	ProductionSite::set_economy(e);
 
-	for (uint i = 0; i < m_soldier_requests.size(); i++) {
+	for (uint32_t i = 0; i < m_soldier_requests.size(); i++) {
 		if (m_soldier_requests[i])
 			m_soldier_requests[i]->set_economy(e);
 	}
@@ -250,7 +250,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 	assert(g);
 
 	if (m_soldier_requests.size()) {
-		for (uint i = 0; i < m_soldier_requests.size(); i++) {
+		for (uint32_t i = 0; i < m_soldier_requests.size(); i++) {
 			delete m_soldier_requests[i];
 			m_soldier_requests[i] = 0;
 		}
@@ -258,7 +258,7 @@ void TrainingSite::cleanup(Editor_Game_Base * g)
 	}
 
 	if (m_soldiers.size()) {
-		uint i;
+		uint32_t i;
 		for (i = 0; i < m_soldiers.size(); i++) {
 			Soldier *s = m_soldiers[i];
 			m_soldiers[i] = 0;
@@ -360,7 +360,7 @@ void TrainingSite::request_soldier_callback
 		  (g->map().get_fcoords(tsite->get_position()),
 		   tsite->descr().get_conquers())));
 
-	uint i;
+	uint32_t i;
 	for (i = 0; i < tsite->m_soldier_requests.size(); i++) {
 		if (rq == tsite->m_soldier_requests[i]) {
 			tsite->m_soldier_requests.erase(tsite->m_soldier_requests.begin() + i);
@@ -389,7 +389,7 @@ void TrainingSite::call_soldiers()
  * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
  * to the economy.
  */
-void TrainingSite::drop_soldier(uint serial)
+void TrainingSite::drop_soldier(uint32_t serial)
 {
 	Game * const g = dynamic_cast<Game *>(&owner().egbase());
 
@@ -407,7 +407,7 @@ void TrainingSite::drop_soldier(uint serial)
 		}
 	} else
 		molog
-			("TrainingSite::drop_soldier(uint serial): trying to drop nonexistent "
+			("TrainingSite::drop_soldier(uint32_t serial): trying to drop nonexistent "
 			 "serial number %i !!",
 			 serial);
 }
@@ -417,9 +417,9 @@ void TrainingSite::drop_soldier(uint serial)
  * \internal
  * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
  * to the economy.
- * \note This function should \b NEVER be called directly, use \ref drop_soldier(uint serial) instead.
+ * \note This function should \b NEVER be called directly, use \ref drop_soldier(uint32_t serial) instead.
  */
-void TrainingSite::drop_soldier(Game * g, uint nr)
+void TrainingSite::drop_soldier(Game * g, uint32_t nr)
 {
 	Soldier *s;
 
@@ -431,7 +431,7 @@ void TrainingSite::drop_soldier(Game * g, uint nr)
 
 	//remove the soldier-to-be-dropped from m_soldiers (it is still alive in s) by overwriting any reference
 	//*must not* erase(), we still need the soldier
-	for (uint i = nr; i < m_soldiers.size() - 1; i++)
+	for (uint32_t i = nr; i < m_soldiers.size() - 1; i++)
 		m_soldiers[i] = m_soldiers[i + 1];
 	m_soldiers.pop_back();
 
@@ -450,7 +450,7 @@ void TrainingSite::drop_soldier(Game * g, uint nr)
  */
 void TrainingSite::drop_unupgradable_soldiers(Game * g)
 {
-	uint count_upgrades = 0;
+	uint32_t count_upgrades = 0;
 
 	assert(g);
 
@@ -463,17 +463,17 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 	if (descr().get_train_evade())
 		count_upgrades++;
 
-	for (uint i = 0; i < m_soldiers.size(); i++) {
-		uint count;
+	for (uint32_t i = 0; i < m_soldiers.size(); i++) {
+		uint32_t count;
 		count = 0;
 		if
 			((m_soldiers[i]->get_level(atrHP)
 			  <
-			  static_cast<uint>(descr().get_min_level(atrHP))
+			  static_cast<uint32_t>(descr().get_min_level(atrHP))
 			  or
 			  m_soldiers[i]->get_level(atrHP)
 			  >
-			  static_cast<uint>(descr().get_max_level(atrHP)))
+			  static_cast<uint32_t>(descr().get_max_level(atrHP)))
 			 and
 			 (descr().get_train_hp()))
 			++count;
@@ -481,11 +481,11 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 		if
 			((m_soldiers[i]->get_level(atrAttack)
 			  <
-			  static_cast<uint>(descr().get_min_level(atrAttack))
+			  static_cast<uint32_t>(descr().get_min_level(atrAttack))
 			  or
 			  m_soldiers[i]->get_level(atrAttack)
 			  >
-			  static_cast<uint>(descr().get_max_level(atrAttack)))
+			  static_cast<uint32_t>(descr().get_max_level(atrAttack)))
 			 and
 			 (descr().get_train_attack()))
 			++count;
@@ -493,11 +493,11 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 		if
 			((m_soldiers[i]->get_level(atrDefense)
 			  <
-			  static_cast<uint>(descr().get_min_level(atrDefense))
+			  static_cast<uint32_t>(descr().get_min_level(atrDefense))
 			  or
 			  m_soldiers[i]->get_level(atrDefense)
 			  >
-			  static_cast<uint>(descr().get_max_level(atrDefense)))
+			  static_cast<uint32_t>(descr().get_max_level(atrDefense)))
 		    and
 			 (descr().get_train_defense()))
 			++count;
@@ -505,11 +505,11 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 		if
 			((m_soldiers[i]->get_level(atrEvade)
 			  <
-			  static_cast<uint>(descr().get_min_level(atrEvade))
+			  static_cast<uint32_t>(descr().get_min_level(atrEvade))
 			  or
 			  m_soldiers[i]->get_level(atrEvade)
 			  >
-			  static_cast<uint>(descr().get_max_level(atrEvade)))
+			  static_cast<uint32_t>(descr().get_max_level(atrEvade)))
 			 and
 			 descr().get_train_evade())
 			++count;
@@ -525,7 +525,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
  * executed by \ref ProductionSite::program_act() like all other production
  * programs.
 */
-void TrainingSite::act(Game * g, uint data)
+void TrainingSite::act(Game * g, uint32_t data)
 {
 	assert(g);
 
@@ -721,7 +721,7 @@ void TrainingSite::modif_priority(enum tAttribute atr, int value)
 /**
  * Gets the priority of given attribute
  */
-uint TrainingSite::get_pri(tAttribute atr)
+uint32_t TrainingSite::get_pri(tAttribute atr)
 {
 	switch (atr) {
 	case atrHP:

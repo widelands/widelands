@@ -21,6 +21,7 @@
 #define __S__GAME_SERVER_PROTO_PACKET_CONNECT_H
 
 #include "game_server_proto_packet.h"
+#include <stdint.h>
 
 /*
  * Checks versioning with the game server
@@ -30,7 +31,7 @@ struct Game_Server_Protocol_Packet_Connect : public Game_Server_Protocol_Packet
 	Game_Server_Protocol_Packet_Connect();
       virtual ~Game_Server_Protocol_Packet_Connect();
 
-      virtual ushort get_id();
+      virtual uint16_t get_id();
 
 	virtual void recv(Game_Server_Connection *, Network_Buffer *) {}
 	virtual void send(Network_Buffer *);

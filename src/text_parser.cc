@@ -24,6 +24,7 @@
 #include "helper.h"
 
 #include <vector>
+#include <stdint.h>
 #include <string>
 
 Richtext_Block::Richtext_Block() {
@@ -34,9 +35,9 @@ Richtext_Block::Richtext_Block() {
 Richtext_Block::Richtext_Block(const Richtext_Block &src) {
 	m_images.clear();
 	m_text_blocks.clear();
-	for (uint i=0;i<src.m_images.size();i++)
+	for (uint32_t i=0;i<src.m_images.size();i++)
 		m_images.push_back(src.m_images[i]);
-	for (uint i=0;i<src.m_text_blocks.size();i++)
+	for (uint32_t i=0;i<src.m_text_blocks.size();i++)
 		m_text_blocks.push_back(src.m_text_blocks[i]);
 	m_image_align = src.m_image_align;
 	m_text_align = src.m_text_align;
@@ -55,9 +56,9 @@ Text_Block::Text_Block() {
 Text_Block::Text_Block(const Text_Block &src) {
 	m_words.clear();
 	m_line_breaks.clear();
-	for (uint i=0;i<src.m_words.size();i++)
+	for (uint32_t i=0;i<src.m_words.size();i++)
 		m_words.push_back(src.m_words[i]);
-	for (uint i=0;i<src.m_line_breaks.size();i++)
+	for (uint32_t i=0;i<src.m_line_breaks.size();i++)
 		m_line_breaks.push_back(src.m_line_breaks[i]);
 	m_font_size = src.m_font_size;
 	m_font_color = src.m_font_color;

@@ -171,8 +171,8 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-uint ConstructionSite::get_playercaps() const throw () {
-	uint caps = Building::get_playercaps();
+uint32_t ConstructionSite::get_playercaps() const throw () {
+	uint32_t caps = Building::get_playercaps();
 
 	caps |= 1 << PCap_Bulldoze;
 
@@ -188,7 +188,7 @@ Return the animation for the building that is in construction, as this
 should be more useful to the player.
 ===============
 */
-uint ConstructionSite::get_ui_anim() const
+uint32_t ConstructionSite::get_ui_anim() const
 {return building().get_animation("idle");}
 
 
@@ -222,11 +222,11 @@ Return the completion "percentage", where 2^16 = completely built,
 0 = nothing built.
 ===============
 */
-uint ConstructionSite::get_built_per64k()
+uint32_t ConstructionSite::get_built_per64k()
 {
-	const uint time = owner().egbase().get_gametime();
-	uint thisstep = m_working ? (CONSTRUCTIONSITE_STEP_TIME - m_work_steptime + time) : 0;
-	uint total;
+	const uint32_t time = owner().egbase().get_gametime();
+	uint32_t thisstep = m_working ? (CONSTRUCTIONSITE_STEP_TIME - m_work_steptime + time) : 0;
+	uint32_t total;
 
 	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
 	total = (thisstep + (m_work_completed << 16)) / m_work_steps;
@@ -278,7 +278,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ConstructionSite::set_economy(Economy* e)
 {
 	Economy* old = get_economy();
-	uint i;
+	uint32_t i;
 
 	if (old) {
 		for (i = 0; i < m_wares.size(); i++)
@@ -358,7 +358,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	// Cleanup the wares queues
-	for (uint i = 0; i < m_wares.size(); i++) {
+	for (uint32_t i = 0; i < m_wares.size(); i++) {
 		m_wares[i]->cleanup();
 		delete m_wares[i];
 	}
@@ -495,7 +495,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	// Check if we've got wares to consume
 	if (m_work_completed < m_work_steps)
 	{
-		for (uint i = 0; i < m_wares.size(); i++) {
+		for (uint32_t i = 0; i < m_wares.size(); i++) {
 			WaresQueue* wq = m_wares[i];
 
 			if (!wq->get_filled())
@@ -555,8 +555,8 @@ void ConstructionSite::draw
  const Point pos)
 {
 	assert(0 <= game.get_gametime());
-	const uint gametime = game.get_gametime();
-	uint tanim = gametime - m_animstart;
+	const uint32_t gametime = game.get_gametime();
+	uint32_t tanim = gametime - m_animstart;
 
 	if (coords != m_position)
 		return; // draw big buildings only once
@@ -567,8 +567,8 @@ void ConstructionSite::draw
 	// Draw the partially finished building
 
 	compile_assert(0 <= CONSTRUCTIONSITE_STEP_TIME);
-	const uint totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
-	uint completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+	const uint32_t totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	uint32_t completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
 
 	if (m_working) {
 		assert
@@ -578,16 +578,16 @@ void ConstructionSite::draw
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
-	const uint anim = building().get_animation("build");
+	const uint32_t anim = building().get_animation("build");
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
-   uint anim_pic = completedtime * nr_frames / totaltime;
+   uint32_t anim_pic = completedtime * nr_frames / totaltime;
 	// Redefine tanim
    tanim = anim_pic*FRAME_LENGTH;
 
-	uint w, h;
+	uint32_t w, h;
    g_gr->get_animation_size(anim, tanim, w, h);
 
-	uint lines = h * completedtime * nr_frames / totaltime;
+	uint32_t lines = h * completedtime * nr_frames / totaltime;
 	assert(h * anim_pic <= lines);
    lines -= h*anim_pic; // This won't work if pictures have various sizes
 
@@ -599,7 +599,7 @@ void ConstructionSite::draw
 	else if (m_prev_building) {
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead
-		const uint a = m_prev_building->get_animation("build");
+		const uint32_t a = m_prev_building->get_animation("build");
 		dst.drawanim
 			(pos,
 			 a,

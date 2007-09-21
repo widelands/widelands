@@ -23,6 +23,7 @@
 
 #include "cmd_queue.h"
 #include "building.h"
+#include <stdint.h>
 #include "transport.h"
 
 struct StreamRead;
@@ -41,7 +42,7 @@ struct StreamWrite;
 class PlayerCommand : public GameLogicCommand {
 private:
 	char sender;
-	uint cmdserial;
+	uint32_t cmdserial;
 
 public:
 	PlayerCommand (int, char);
@@ -49,8 +50,8 @@ public:
 	virtual ~PlayerCommand ();
 
 	char get_sender() const {return sender;}
-	uint get_cmdserial() const {return cmdserial;}
-	void set_cmdserial(uint s) {cmdserial = s;}
+	uint32_t get_cmdserial() const {return cmdserial;}
+	void set_cmdserial(uint32_t s) {cmdserial = s;}
 
 	virtual void serialize (StreamWrite &) = 0;
 	static PlayerCommand * deserialize (StreamRead &);

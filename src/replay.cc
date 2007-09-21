@@ -46,7 +46,7 @@ enum {
 
 class Cmd_ReplaySyncRead : public Command {
 public:
-	Cmd_ReplaySyncRead(uint time, const md5_checksum& hash)
+	Cmd_ReplaySyncRead(uint32_t time, const md5_checksum& hash)
 		: Command(time), m_hash(hash)
 	{
 	}
@@ -130,7 +130,7 @@ ReplayReader::~ReplayReader()
  * \return a \ref Command that should be enqueued in the command queue
  * or 0 if there are no remaining commands before the given time.
  */
-Command* ReplayReader::GetNextCommand(uint time)
+Command* ReplayReader::GetNextCommand(uint32_t time)
 {
 	if (!m_cmdlog)
 		return 0;
@@ -139,14 +139,14 @@ Command* ReplayReader::GetNextCommand(uint time)
 		return 0;
 
 	try {
-		unsigned char pkt = m_cmdlog->Unsigned8();
+		uint8_t pkt = m_cmdlog->Unsigned8();
 
 		switch (pkt) {
 		case pkt_playercommand: {
 			m_replaytime = m_cmdlog->Unsigned32();
 
-			uint duetime = m_cmdlog->Unsigned32();
-			uint cmdserial = m_cmdlog->Unsigned32();
+			uint32_t duetime = m_cmdlog->Unsigned32();
+			uint32_t cmdserial = m_cmdlog->Unsigned32();
 			PlayerCommand* cmd = PlayerCommand::deserialize(*m_cmdlog);
 			cmd->set_duetime(duetime);
 			cmd->set_cmdserial(cmdserial);
@@ -155,7 +155,7 @@ Command* ReplayReader::GetNextCommand(uint time)
 		}
 
 		case pkt_syncreport: {
-			uint duetime = m_cmdlog->Unsigned32();
+			uint32_t duetime = m_cmdlog->Unsigned32();
 			md5_checksum hash;
 			m_cmdlog->Data(hash.data, sizeof(hash.data));
 
@@ -163,7 +163,7 @@ Command* ReplayReader::GetNextCommand(uint time)
 		}
 
 		case pkt_end: {
-			uint endtime = m_cmdlog->Unsigned32();
+			uint32_t endtime = m_cmdlog->Unsigned32();
 			log("REPLAY: End of replay (gametime: %u)\n", endtime);
 			delete m_cmdlog;
 			m_cmdlog = 0;
@@ -199,7 +199,7 @@ bool ReplayReader::EndOfReplay()
  */
 class Cmd_ReplaySyncWrite : public Command {
 public:
-	Cmd_ReplaySyncWrite(uint t) : Command(t) {}
+	Cmd_ReplaySyncWrite(uint32_t t) : Command(t) {}
 
 	int get_id() {return QUEUE_CMD_REPLAYSYNCWRITE;}
 

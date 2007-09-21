@@ -534,8 +534,8 @@ Resource_Descr::get_indicator
 Find the best matching indicator for the given amount.
 ==============
 */
-uint Tribe_Descr::get_resource_indicator
-(const Resource_Descr * const res, const uint amount) const
+uint32_t Tribe_Descr::get_resource_indicator
+(const Resource_Descr * const res, const uint32_t amount) const
 {
 	if (not res or not amount) {
       int idx=get_immovable_index("resi_none");
@@ -562,7 +562,7 @@ uint Tribe_Descr::get_resource_indicator
 			 name().c_str(),
 			 res->name().c_str());
 
-   uint bestmatch = static_cast<uint>((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
+   uint32_t bestmatch = static_cast<uint32_t>((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
 	if (static_cast<int>(amount) < res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 

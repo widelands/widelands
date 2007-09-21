@@ -22,7 +22,7 @@
 
 #include <string>
 #include <exception>
-#include "types.h"
+#include <stdint.h>
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
@@ -39,7 +39,7 @@ class _wexception : public std::exception {
 	std::string m_what;
 
 public:
-	explicit _wexception(const char* file, uint line, const char *fmt, ...) throw() PRINTF_FORMAT(4, 5);
+	explicit _wexception(const char* file, uint32_t line, const char *fmt, ...) throw() PRINTF_FORMAT(4, 5);
 	virtual ~_wexception() throw();
 
 	/**

@@ -34,7 +34,7 @@ Game_Server_Protocol_Packet_Connect::~Game_Server_Protocol_Packet_Connect() {}
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_Connect::get_id() {
+uint16_t Game_Server_Protocol_Packet_Connect::get_id() {
    return GGSPP_CONNECT;
 }
 
@@ -42,7 +42,7 @@ ushort Game_Server_Protocol_Packet_Connect::get_id() {
  * Write To network
  */
 void Game_Server_Protocol_Packet_Connect::send(Network_Buffer* buffer) {
-   ushort version = (GSP_MAJOR_VERSION << 8) | GSP_MINOR_VERSION;
+   uint16_t version = (GSP_MAJOR_VERSION << 8) | GSP_MINOR_VERSION;
    buffer->put_16(version);
    buffer->put_string("widelands");
 }
@@ -51,8 +51,8 @@ void Game_Server_Protocol_Packet_Connect::send(Network_Buffer* buffer) {
  * Handle reply
  */
 void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uchar retcode = buf->get_8();
-   ushort version = buf->get_16();
+   uint8_t retcode = buf->get_8();
+   uint16_t version = buf->get_16();
 
    char buffer[1024];
 

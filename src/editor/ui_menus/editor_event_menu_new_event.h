@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_EVENT_MENU_NEW_EVENT_H
 #define __S__EDITOR_EVENT_MENU_NEW_EVENT_H
 
+#include <stdint.h>
 #include "ui_window.h"
 
 class Editor_Interactive;
@@ -43,8 +44,8 @@ struct Editor_Event_Menu_New_Event : public UI::Window {
 
 private:
 	void clicked_ok();
-	void selected      (uint);
-	void double_clicked(uint);
+	void selected      (uint32_t);
+	void double_clicked(uint32_t);
 
 	UI::Listselect<Event_Descr &> * m_event_list;
 	UI::Multiline_Textarea        * m_description;

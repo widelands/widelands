@@ -23,6 +23,7 @@
 #include "game.h"
 
 #include <list>
+#include <stdint.h>
 
 class BuildingHints;
 class Economy;
@@ -46,7 +47,7 @@ struct Computer_Player {
 
 	const Game & game() const throw () {return m_game;}
 	Game       & game()       throw () {return m_game;}
-		inline uchar get_player_number() {return player_number;}
+		inline uint8_t get_player_number() {return player_number;}
 	Player * get_player() const {return game().get_player(player_number);}
 
 private:
@@ -68,12 +69,12 @@ private:
 		bool          preferred;
 		bool          avoid_military;
 
-		unsigned char unowned_land_nearby;
+		uint8_t unowned_land_nearby;
 
-		unsigned char trees_nearby;
-		unsigned char stones_nearby;
-		unsigned char tree_consumers_nearby;
-		unsigned char stone_consumers_nearby;
+		uint8_t trees_nearby;
+		uint8_t stones_nearby;
+		uint8_t tree_consumers_nearby;
+		uint8_t stone_consumers_nearby;
 
 		short         military_influence;
 
@@ -149,9 +150,9 @@ private:
 		};
 
 		struct WareObserver {
-		uchar producers;
-		uchar consumers;
-		uchar preciousness;
+		uint8_t producers;
+		uint8_t consumers;
+		uint8_t preciousness;
 		};
 
 	Game                            & m_game;

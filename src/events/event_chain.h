@@ -23,9 +23,8 @@
 #include "event_referencer.h"
 #include "trigger/trigger_referencer.h"
 
-#include "types.h"
-
 #include <cassert>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -68,8 +67,8 @@ struct EventChain : public EventReferencer, public TriggerReferencer {
 
       // Below is only good idea in editor
       void set_repeating(bool t) {m_repeating = t;}
-      uint get_nr_events() {return m_events.size();}
-      Event* get_event(uint i) {assert(i < m_events.size()); return m_events[i];}
+      uint32_t get_nr_events() {return m_events.size();}
+      Event* get_event(uint32_t i) {assert(i < m_events.size()); return m_events[i];}
       void clear_events();
       void add_event(Event* ev);
 
@@ -85,7 +84,7 @@ private:
 	event_vector m_events;
 
       // For running
-      uint                m_curevent;
+      uint32_t                m_curevent;
       State               m_state;
 
 };

@@ -22,11 +22,10 @@
 
 #include "cmd_queue.h"
 
-#include "types.h"
-
 #include <SDL_types.h>
 
 #include <map>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -47,36 +46,36 @@ struct Map_Object_Descr {
 		virtual ~Map_Object_Descr() {m_anims.clear();}
 
 		struct Animation_Nonexistent {};
-		uint get_animation(const char * const name) const {
-			std::map<std::string, uint>::const_iterator it = m_anims.find(name);
+		uint32_t get_animation(const char * const name) const {
+			std::map<std::string, uint32_t>::const_iterator it = m_anims.find(name);
 			if (it == m_anims.end()) throw Animation_Nonexistent();
 			return it->second;
 		}
 
-		uint main_animation() const throw () {
+		uint32_t main_animation() const throw () {
 			return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
 		}
 
-		std::string get_animation_name(const uint anim) const; // This is needed for save games and debug
-		bool has_attribute(uint attr) const throw ();
-		static uint get_attribute_id(std::string name);
+		std::string get_animation_name(const uint32_t anim) const; // This is needed for save games and debug
+		bool has_attribute(uint32_t attr) const throw ();
+		static uint32_t get_attribute_id(std::string name);
 
 	protected:
-		void add_attribute(uint attr);
+		void add_attribute(uint32_t attr);
 
-		void add_animation(const char* name, uint anim);
+		void add_animation(const char* name, uint32_t anim);
 		bool is_animation_known(const char* name);
 
 
 	private:
-		typedef std::map<std::string, uint> AttribMap;
+		typedef std::map<std::string, uint32_t> AttribMap;
 
 		Map_Object_Descr & operator=(const Map_Object_Descr &);
 		Map_Object_Descr            (const Map_Object_Descr &);
 
-		std::vector<uint>           m_attributes;
-		std::map<std::string, uint>  m_anims;
-		static uint                 s_dyn_attribhigh; //  highest attribute ID used
+		std::vector<uint32_t>           m_attributes;
+		std::map<std::string, uint32_t>  m_anims;
+		static uint32_t                 s_dyn_attribhigh; //  highest attribute ID used
 		static AttribMap            s_dyn_attribs;
 
 };
@@ -185,8 +184,8 @@ protected:
 public:
 	virtual int get_type() const throw () = 0;
 
-	inline uint get_serial() const {return m_serial;}
-	bool has_attribute(const uint attr) const throw ()
+	inline uint32_t get_serial() const {return m_serial;}
+	bool has_attribute(const uint32_t attr) const throw ()
 	{return descr().has_attribute(attr);}
 
 	void remove(Editor_Game_Base*);
@@ -195,8 +194,8 @@ public:
    // The next functions are really only needed in games.
    // Not in Editor
 	void schedule_destroy(Game *g);
-	uint schedule_act(Game* g, uint tdelta, uint data = 0);
-	virtual void act(Game*, uint data);
+	uint32_t schedule_act(Game* g, uint32_t tdelta, uint32_t data = 0);
+	virtual void act(Game*, uint32_t data);
 
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels(Editor_Game_Base* egbase, UI::Tab_Panel* tabs);
@@ -278,7 +277,7 @@ protected:
 
 protected:
 	const Map_Object_Descr * m_descr;
-	uint                     m_serial;
+	uint32_t                     m_serial;
 	LogSink                * m_logsink;
 
 private:
@@ -294,14 +293,14 @@ inline int get_reverse_dir(int dir) {return 1 + ((dir-1)+3)%6;}
  * Keeps the list of all objects currently in the game.
  */
 struct Object_Manager {
-	typedef std::map<uint, Map_Object *> objmap_t;
+	typedef std::map<uint32_t, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
 
 	void cleanup(Editor_Game_Base *g);
 
-	Map_Object * get_object(const uint serial) const {
+	Map_Object * get_object(const uint32_t serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
 		return it != m_objects.end() ? it->second : 0;
 	}
@@ -325,7 +324,7 @@ struct Object_Manager {
 	const objmap_t & get_objects() const throw () {return m_objects;}
 
 private:
-	uint m_lastserial;
+	uint32_t m_lastserial;
 	objmap_t m_objects;
 
 	Object_Manager & operator=(const Object_Manager &);
@@ -353,10 +352,10 @@ struct Object_Ptr {
 	bool operator<(const Object_Ptr other) const throw ()
 	{return m_serial < other.m_serial;}
 
-	uint get_serial() const {return m_serial;}
+	uint32_t get_serial() const {return m_serial;}
 
 private:
-	uint m_serial;
+	uint32_t m_serial;
 };
 
 template<class T>
@@ -389,7 +388,7 @@ struct OPtr {
 		return m < other.m;
 	}
 
-	uint get_serial() const {return m.get_serial();}
+	uint32_t get_serial() const {return m.get_serial();}
 
 private:
 	Object_Ptr m;

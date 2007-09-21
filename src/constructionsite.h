@@ -22,6 +22,7 @@
 
 #include "building.h"
 
+#include <stdint.h>
 #include <vector>
 
 class Building;
@@ -67,11 +68,11 @@ public:
 	virtual int get_building_type() const throw ()
 	{return Building::CONSTRUCTIONSITE;}
 	virtual int get_size() const throw ();
-	virtual uint get_playercaps() const throw ();
-	virtual uint get_ui_anim() const;
+	virtual uint32_t get_playercaps() const throw ();
+	virtual uint32_t get_ui_anim() const;
 	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
-	uint get_built_per64k();
+	uint32_t get_built_per64k();
 
 	void set_building         (const Building_Descr &);
 	void set_previous_building(const Building_Descr * const);
@@ -84,8 +85,8 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	uint get_nrwaresqueues() {return m_wares.size();}
-	WaresQueue* get_waresqueue(uint idx) {return m_wares[idx];}
+	uint32_t get_nrwaresqueues() {return m_wares.size();}
+	WaresQueue* get_waresqueue(uint32_t idx) {return m_wares[idx];}
 
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
@@ -117,9 +118,9 @@ private:
 	int m_fetchfromflag; // # of items to fetch from flag
 
 	bool m_working;        // true if the builder is currently working
-	uint m_work_steptime;  // time when next step is completed
-	uint m_work_completed; // how many steps have we done so far?
-	uint m_work_steps;     // how many steps (= items) until we're done?
+	uint32_t m_work_steptime;  // time when next step is completed
+	uint32_t m_work_completed; // how many steps have we done so far?
+	uint32_t m_work_steps;     // how many steps (= items) until we're done?
 };
 
 #endif

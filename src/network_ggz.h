@@ -21,6 +21,7 @@
 #define __NETWORK_GGZ_H__
 
 #include <list>
+#include <stdint.h>
 #include <string>
 
 #ifdef USE_GGZ
@@ -69,13 +70,13 @@ private:
 	NetGGZ();
 #ifdef HAVE_GGZ
 	static void ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata);
-	static GGZHookReturn callback_server(unsigned int id, const void *cbdata, const void *user);
-	static GGZHookReturn callback_room(unsigned int id, const void *cbdata, const void *user);
-	static GGZHookReturn callback_game(unsigned int id, const void *cbdata, const void *user);
+	static GGZHookReturn callback_server(uint32_t id, const void *cbdata, const void *user);
+	static GGZHookReturn callback_room(uint32_t id, const void *cbdata, const void *user);
+	static GGZHookReturn callback_game(uint32_t id, const void *cbdata, const void *user);
 #endif
-	void event_server(unsigned int id, const void *cbdata);
-	void event_room(unsigned int id, const void *cbdata);
-	void event_game(unsigned int id, const void *cbdata);
+	void event_server(uint32_t id, const void *cbdata);
+	void event_room(uint32_t id, const void *cbdata);
+	void event_game(uint32_t id, const void *cbdata);
 
 	bool use_ggz;
 	int m_fd;

@@ -40,12 +40,12 @@ m_callback(0)
 /**
  * Returns the currently registered overlays and the buildhelp for a node.
  */
-unsigned char Overlay_Manager::get_overlays
+uint8_t Overlay_Manager::get_overlays
 (const FCoords c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 
-	unsigned char num_ret = 0;
+	uint8_t num_ret = 0;
 
 	const Registered_Overlays_Map & overlay_map = m_overlays[TCoords<>::None];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
@@ -57,7 +57,7 @@ unsigned char Overlay_Manager::get_overlays
 		++it;
 	}
 	if (m_showbuildhelp) {
-		const uchar buildhelp_overlay_index =
+		const uint8_t buildhelp_overlay_index =
 			c.field->get_buildhelp_overlay_index();
 		if (buildhelp_overlay_index < Field::Buildhelp_None) {
 			overlays[num_ret] = m_buildhelp_infos[buildhelp_overlay_index];
@@ -77,13 +77,13 @@ end:
 /**
  * Returns the currently registered overlays for a triangle.
  */
-unsigned char Overlay_Manager::get_overlays
+uint8_t Overlay_Manager::get_overlays
 (const TCoords<> c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
 	assert(c.t == TCoords<>::D or c.t == TCoords<>::R);
 
-	unsigned char num_ret = 0;
+	uint8_t num_ret = 0;
 
 	const Registered_Overlays_Map & overlay_map = m_overlays[c.t];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
@@ -159,7 +159,7 @@ void Overlay_Manager::register_overlay
 	assert(level!=5); // level == 5 is undefined behavior
 
 	if (hotspot == Point::invalid()) {
-		uint picture_width, picture_height;
+		uint32_t picture_width, picture_height;
 		g_gr->get_picture_size(picid, picture_width, picture_height);
 		hotspot = Point(picture_width / 2, picture_height / 2);
 	}
@@ -244,7 +244,7 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay
-(const Coords c, const uchar where, const Job_Id jobid)
+(const Coords c, const uint8_t where, const Job_Id jobid)
 {
 	const Registered_Road_Overlays overlay = {jobid, where};
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
@@ -297,7 +297,7 @@ void Overlay_Manager::load_graphics() {
 	//  Special case for flag, which has a different formula for hotspot_y.
 	buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
 	{
-		uint hotspot_x, hotspot_y;
+		uint32_t hotspot_x, hotspot_y;
 		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
 		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y - 1);
 	}
@@ -308,7 +308,7 @@ void Overlay_Manager::load_graphics() {
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end) break;
 		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
-		uint hotspot_x, hotspot_y;
+		uint32_t hotspot_x, hotspot_y;
 		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
 		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y / 2);
 	}

@@ -94,7 +94,7 @@ protected:
 	const long get_playback_offset() {return m_playbackstream.tellg();}
 
 	void write(char  v);
-	void write(unsigned char v);
+	void write(uint8_t v);
 	void write(Sint16 v);
 	void write(Uint16 v);
 	void write(Sint32 v);
@@ -103,14 +103,14 @@ protected:
 	void write(SDLMod v);
 
 	void read(char  &v);
-	void read(unsigned char &v);
+	void read(uint8_t &v);
 	void read(Sint16 &v);
 	void read(Uint16 &v);
 	void read(Sint32 &v);
 	void read(Uint32 &v);
 	void read(SDLKey &v);
 	void read(SDLMod &v);
-	void ensure_code(unsigned char code);
+	void ensure_code(uint8_t code);
 
 	///The recording file's name.
 	///\note This does \e not go through the layered filesystem on purpose!

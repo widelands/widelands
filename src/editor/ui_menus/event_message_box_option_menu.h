@@ -22,6 +22,7 @@
 
 #include "ui_window.h"
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -48,7 +49,7 @@ struct Event_Message_Box_Option_Menu : public UI::Window {
 	bool handle_mouserelease(const Uint8 btn, int x, int y);
 
 private:
-      static const uint MAX_BUTTONS=4;
+      static const uint32_t MAX_BUTTONS=4;
 
       void update();
 	void clicked_ok                        ();
@@ -56,7 +57,7 @@ private:
 	void clicked_number_of_buttons_increase();
 	void clicked_trigger_sel_decrease      ();
 	void clicked_trigger_sel_increase      ();
-	void ls_selected    (uint);
+	void ls_selected    (uint32_t);
       void edit_box_edited(int);
 
       Event_Message_Box* m_event;
@@ -73,8 +74,8 @@ private:
       UI::Edit_Box* m_window_title;
       UI::Edit_Box* m_button_name;
       UI::Textarea* m_nr_buttons_ta;
-	uint                     m_nr_buttons;
-      uint         m_ls_selected;
+	uint32_t                     m_nr_buttons;
+      uint32_t         m_ls_selected;
       UI::Multiline_Editbox* m_text;
       UI::Textarea* m_current_trigger_ta;
 	UI::Listselect<void *> * m_buttons_ls;

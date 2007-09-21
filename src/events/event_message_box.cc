@@ -28,6 +28,7 @@
 #include "map.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
+#include <stdint.h>
 #include "trigger/trigger_null.h"
 #include "wexception.h"
 
@@ -51,7 +52,7 @@ Event_Message_Box::Event_Message_Box() : Event(_("Message Box")) {
 }
 
 Event_Message_Box::~Event_Message_Box() {
-  uint i=0;
+  uint32_t i=0;
    for (i=0; i<m_buttons.size(); i++)
       if (m_buttons[i].trigger) {
          set_button_trigger(i, 0);
@@ -71,7 +72,7 @@ void Event_Message_Box::reinitialize(Game *) {}
 void Event_Message_Box::set_nr_buttons(int i) {
    int oldsize=m_buttons.size();
    m_buttons.resize(i);
-   for (uint j=oldsize; j<m_buttons.size(); j++)
+   for (uint32_t j=oldsize; j<m_buttons.size(); j++)
       m_buttons[j].trigger=0;
 }
 
@@ -116,10 +117,10 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
       m_width = s->get_int("width", 400);
       m_height = s->get_int("height", 300);
 
-      uint nr_buttons = s->get_safe_int("number_of_buttons");
+      uint32_t nr_buttons = s->get_safe_int("number_of_buttons");
       set_nr_buttons(nr_buttons);
       char buf[256];
-		for (uint i = 0; i < nr_buttons; ++i) {
+		for (uint32_t i = 0; i < nr_buttons; ++i) {
          sprintf(buf, "button_%02i_name", i);
          set_button_name(i, s->get_safe_string(buf));
 

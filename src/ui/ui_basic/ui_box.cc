@@ -27,7 +27,7 @@ namespace UI {
 /**
 Initialize an empty box
 */
-Box::Box(Panel* parent, int x, int y, uint orientation)
+Box::Box(Panel* parent, int x, int y, uint32_t orientation)
 	: Panel(parent, x, y, 0, 0)
 {
 	m_orientation = orientation;
@@ -39,7 +39,7 @@ Adjust all the children and the box's size.
 */
 void Box::resize()
 {
-	uint idx;
+	uint32_t idx;
 	int totaldepth;
 	int maxbreadth;
 
@@ -81,7 +81,7 @@ void Box::resize()
 /**
 Add a new panel to be controlled by this box
 */
-void Box::add(Panel* panel, uint align)
+void Box::add(Panel* panel, uint32_t align)
 {
 	Item it;
 
@@ -98,7 +98,7 @@ void Box::add(Panel* panel, uint align)
 /**
 Add spacing of empty pixels.
 */
-void Box::add_space(uint space)
+void Box::add_space(uint32_t space)
 {
 	Item it;
 
@@ -115,7 +115,7 @@ void Box::add_space(uint space)
 Retrieve the given item's size. depth is the size of the item along the
 orientation axis, breadth is the size perpendicular to the orientation axis.
 */
-void Box::get_item_size(uint idx, int* pdepth, int* pbreadth)
+void Box::get_item_size(uint32_t idx, int* pdepth, int* pbreadth)
 {
 	assert(idx < m_items.size());
 
@@ -158,7 +158,7 @@ Position the given item according to its parameters.
 pos is the position relative to the parent in the direction of the orientation
 axis.
 */
-void Box::set_item_pos(uint idx, int pos)
+void Box::set_item_pos(uint32_t idx, int pos)
 {
 	assert(idx < m_items.size());
 

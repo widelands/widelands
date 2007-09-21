@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdint.h>
 #include "maptriangleregion.h"
 
 template <> MapTriangleRegion<>::MapTriangleRegion
@@ -24,10 +25,10 @@ template <> MapTriangleRegion<>::MapTriangleRegion
 : m_radius_is_odd(area.radius & 1)
 {
 	assert(area.t == TCoords<>::R or area.t == TCoords<>::D);
-	const unsigned short radius_plus_1 = area.radius + 1;
-	const unsigned short half_radius_rounded_down = area.radius / 2;
+	const uint16_t radius_plus_1 = area.radius + 1;
+	const uint16_t half_radius_rounded_down = area.radius / 2;
 	m_row_length = radius_plus_1;
-	for (uint i = half_radius_rounded_down; i; --i) map.get_tln(area, &area);
+	for (uint32_t i = half_radius_rounded_down; i; --i) map.get_tln(area, &area);
 	if (area.t == TCoords<>::R) {
 		m_left = area;
 		if (area.radius) {
@@ -142,10 +143,10 @@ template <> MapTriangleRegion<TCoords<FCoords> >::MapTriangleRegion
 : m_radius_is_odd(area.radius & 1)
 {
 	assert(area.t == TCoords<FCoords>::R or area.t == TCoords<FCoords>::D);
-	const unsigned short radius_plus_1 = area.radius + 1;
-	const unsigned short half_radius_rounded_down = area.radius / 2;
+	const uint16_t radius_plus_1 = area.radius + 1;
+	const uint16_t half_radius_rounded_down = area.radius / 2;
 	m_row_length = radius_plus_1;
-	for (uint i = half_radius_rounded_down; i; --i) map.get_tln(area, &area);
+	for (uint32_t i = half_radius_rounded_down; i; --i) map.get_tln(area, &area);
 	if (area.t == TCoords<FCoords>::R) {
 		m_left = area;
 		if (area.radius) {

@@ -25,6 +25,7 @@
 #include "ui_signal.h"
 #include "ui_textarea.h"
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -63,7 +64,7 @@ private:
 
 	bool         m_enabled; //  is this player allowed at all (map-dependent)
 	int          m_playertype;
-	uint         m_current_tribe;
+	uint32_t         m_current_tribe;
 	changemode_t m_allow_changes;
 
 	std::vector<std::string> m_tribes;

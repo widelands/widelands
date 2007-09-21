@@ -37,7 +37,7 @@ Game_Server_Protocol_Packet_Hello::~Game_Server_Protocol_Packet_Hello() {}
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_Hello::get_id() {
+uint16_t Game_Server_Protocol_Packet_Hello::get_id() {
    return GGSPP_HELLO;
 }
 
@@ -54,7 +54,7 @@ void Game_Server_Protocol_Packet_Hello::send(Network_Buffer* buffer) {
  */
 void Game_Server_Protocol_Packet_Hello::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
 #ifdef DEBUG
-   uchar retcode = buf->get_8();
+   uint8_t retcode = buf->get_8();
 #else
    buf->get_8();
 #endif

@@ -31,7 +31,7 @@
 
 
 Map_View::Map_View
-(UI::Panel * parent, int x, int y, uint w, uint h, Interactive_Base & player)
+(UI::Panel * parent, int x, int y, uint32_t w, uint32_t h, Interactive_Base & player)
 :
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),

@@ -37,12 +37,12 @@ Stateboxes start out enabled and unchecked.
 If picid is non-zero, the given picture is used instead of the normal checkbox
 graphics.
 */
-Statebox::Statebox(Panel *parent, int x, int y, uint picid)
+Statebox::Statebox(Panel *parent, int x, int y, uint32_t picid)
 	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
 {
 	if (picid)
 	{
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 		set_size(w, h);
 
@@ -122,7 +122,7 @@ void Statebox::draw(RenderTarget* dst)
 	if (m_custom_picture)
 	{
 		// center picture
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size(m_pic_graphics, w, h);
 
 		dst->blit

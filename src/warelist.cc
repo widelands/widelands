@@ -21,7 +21,7 @@
 
 #include "log.h"
 
-#include "types.h"
+#include <stdint.h>
 
 
 /**
@@ -33,7 +33,7 @@
  */
 WareList::~WareList()
 {
-	for (uint id = 0; id < m_wares.size(); id++) {
+	for (uint32_t id = 0; id < m_wares.size(); id++) {
 		if (m_wares[id])
 			log("WareList: %i items of %i left.\n", m_wares[id], id);
 	}
@@ -58,7 +58,7 @@ void WareList::add(const WareList &wl)
 	if (wl.m_wares.size() > m_wares.size())
 		m_wares.reserve(wl.m_wares.size());
 
-	for (uint id = 0; id < wl.m_wares.size(); id++)
+	for (uint32_t id = 0; id < wl.m_wares.size(); id++)
 		if (wl.m_wares[id])
 			add(id, wl.m_wares[id]);
 }
@@ -79,7 +79,7 @@ void WareList::remove(const size_type id, const count_type count) {
 
 void WareList::remove(const WareList &wl)
 {
-	for (uint id = 0; id < wl.m_wares.size(); id++)
+	for (uint32_t id = 0; id < wl.m_wares.size(); id++)
 		if (wl.m_wares[id])
 			remove(id, wl.m_wares[id]);
 }
@@ -98,7 +98,7 @@ int WareList::stock(const size_type id) const {
 */
 bool WareList::operator==(const WareList &wl) const
 {
-	uint i = 0;
+	uint32_t i = 0;
 
 	while (i < wl.m_wares.size()) {
 		const count_type count = wl.m_wares[i];

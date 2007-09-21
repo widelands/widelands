@@ -33,7 +33,7 @@ Radiobutton
 struct Radiobutton : public Statebox {
 	friend class Radiogroup;
 
-	Radiobutton(Panel *parent, int x, int y, uint picid, Radiogroup *group, int id);
+	Radiobutton(Panel *parent, int x, int y, uint32_t picid, Radiogroup *group, int id);
 	~Radiobutton();
 
 private:
@@ -47,7 +47,7 @@ private:
 /**
 Initialize the radiobutton and link it into the group's linked list
 */
-Radiobutton::Radiobutton(Panel *parent, int x, int y, uint picid, Radiogroup *group, int id)
+Radiobutton::Radiobutton(Panel *parent, int x, int y, uint32_t picid, Radiogroup *group, int id)
 	: Statebox(parent, x, y, picid)
 {
 	m_group = group;
@@ -112,7 +112,7 @@ Returns the ID of the new button.
 int Radiogroup::add_button
 (Panel * parent,
  const int x, const int y,
- const uint picid, const char * const tooltip)
+ const uint32_t picid, const char * const tooltip)
 {
 	m_highestid++;
 	(new Radiobutton(parent, x, y, picid, this, m_highestid))->set_tooltip

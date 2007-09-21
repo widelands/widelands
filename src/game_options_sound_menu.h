@@ -20,6 +20,7 @@
 #define __S__GAME_OPTIONS_SOUND_MENU_H
 
 #include "interactive_player.h"
+#include <stdint.h>
 #include "ui_unique_window.h"
 #include "ui_textarea.h"
 #include "ui_checkbox.h"
@@ -43,14 +44,14 @@ private:
 	UI::HorizontalSlider ingame_sound_volume;
 
 	/// Returns the horizontal/vertical spacing between widgets.
-	uint hspacing   () const throw () {return 5;}
-	uint vspacing   () const throw () {return 5;}
-	uint vbigspacing() const throw () {return 8 + vspacing();}
-	uint slideh     () const throw () {return 28;}
+	uint32_t hspacing   () const throw () {return 5;}
+	uint32_t vspacing   () const throw () {return 5;}
+	uint32_t vbigspacing() const throw () {return 8 + vspacing();}
+	uint32_t slideh     () const throw () {return 28;}
 
 	/// Returns the horizontal/vertical margin between edge and buttons.
-	uint hmargin() const throw () {return 2 * hspacing();}
-	uint vmargin() const throw () {return 2 * vspacing();}
+	uint32_t hmargin() const throw () {return 2 * hspacing();}
+	uint32_t vmargin() const throw () {return 2 * vspacing();}
 
 	//  calbacks
 	void changed_ingame_music(bool on);

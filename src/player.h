@@ -25,6 +25,7 @@
 #include "editor_game_base.h"
 #include "mapregion.h"
 #include "rgbcolor.h"
+#include <stdint.h>
 
 #include "widelands.h"
 
@@ -81,7 +82,7 @@ public:
 		 const Player_Number plnum,
 		 const Tribe_Descr & tribe,
 		 const std::string & name,
-		 const uchar * const playercolor);
+		 const uint8_t * const playercolor);
 	~Player();
 
 	void allocate_map();
@@ -404,7 +405,7 @@ public:
 	Economy * get_economy_by_number(const std::vector<Economy *>::size_type i)
 		const //  for loading
 	{return m_economies[i];}
-	uint get_nr_economies() const {return m_economies.size();}
+	uint32_t get_nr_economies() const {return m_economies.size();}
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable* imm, Soldier* worker);
@@ -437,12 +438,12 @@ public:
 	const Building_Stats_vector & get_building_statistics(const int i) const {
 		return m_building_stats[i];
 	}
-	const std::vector<uint> * get_ware_production_statistics(const int ware) const;
+	const std::vector<uint32_t> * get_ware_production_statistics(const int ware) const;
 
-	void ReadStatistics(FileRead& fr, uint version);
+	void ReadStatistics(FileRead& fr, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
-	void ware_produced(uint id);
+	void ware_produced(uint32_t id);
 	void next_ware_production_period();
 	void gain_immovable(PlayerImmovable*);
 	void lose_immovable(PlayerImmovable*);
@@ -472,8 +473,8 @@ private:
 	std::vector<Economy*> m_economies;
 	std::string           m_name; // Player name
 
-	std::vector<uint> m_current_statistics;
-	std::vector< std::vector<uint> > m_ware_productions;
+	std::vector<uint32_t> m_current_statistics;
+	std::vector< std::vector<uint32_t> > m_ware_productions;
 	BuildingStats m_building_stats;
 };
 

@@ -43,7 +43,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 {
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
-	for (uint idx = 0; ; ++idx) {
+	for (uint32_t idx = 0; ; ++idx) {
 		char buffer[32];
 		snprintf(buffer, sizeof(buffer), "%i", idx);
 		const char * const string = sprogram->get_string(buffer, 0);
@@ -244,7 +244,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.iparam1 = act.iparam2 = 0;
 
-			for (uint i = 1; i < cmd.size(); ++i) {
+			for (uint32_t i = 1; i < cmd.size(); ++i) {
 				std::string cmdname;
 				int flag;
 				char c = cmd[i][0];

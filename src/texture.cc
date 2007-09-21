@@ -33,7 +33,7 @@
  */
 Texture::Texture
 (const char            & fnametmpl,
- const uint              frametime,
+ const uint32_t              frametime,
  const SDL_PixelFormat & format)
 {
 	m_colormap = 0;
@@ -124,7 +124,7 @@ Texture::Texture
 		SDL_Surface* cv = SDL_ConvertSurface(surf, &fmt, 0);
 
 		// Add the frame
-		m_pixels = (uchar*)realloc(m_pixels, TEXTURE_WIDTH*TEXTURE_HEIGHT*(m_nrframes+1));
+		m_pixels = (uint8_t*)realloc(m_pixels, TEXTURE_WIDTH*TEXTURE_HEIGHT*(m_nrframes+1));
 		m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*m_nrframes];
 		m_nrframes++;
 
@@ -156,8 +156,8 @@ Texture::~Texture ()
  * Return the basic terrain colour to be used in the minimap.
 */
 Uint32 Texture::get_minimap_color(const char shade) {
-	uchar clr = m_pixels[0]; // just use the top-left pixel
-	uint table = static_cast<uchar>(shade);
+	uint8_t clr = m_pixels[0]; // just use the top-left pixel
+	uint32_t table = static_cast<uint8_t>(shade);
 
 	return is_32bit ?
 		static_cast<const Uint32 *>(m_colormap->get_colormap())
@@ -170,11 +170,11 @@ Uint32 Texture::get_minimap_color(const char shade) {
 /**
  * Set the current frame according to the game time.
  */
-void Texture::animate(uint time)
+void Texture::animate(uint32_t time)
 {
 	int frame = (time / m_frametime) % m_nrframes;
 
-	uchar* lastframe = m_curframe;
+	uint8_t* lastframe = m_curframe;
 
 	m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*frame];
 	if (lastframe != m_curframe)

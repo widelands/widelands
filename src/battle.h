@@ -22,6 +22,7 @@
 
 #include "immovable.h"
 #include "soldier.h"
+#include <stdint.h>
 
 
 struct Battle : public BaseImmovable {
@@ -42,7 +43,7 @@ struct Battle : public BaseImmovable {
 	void init (Editor_Game_Base*, Soldier*, Soldier*);
 	void soldiers (Soldier*, Soldier*);
 	virtual void cleanup (Editor_Game_Base*);
-	virtual void act (Game*, uint);
+	virtual void act (Game*, uint32_t);
 
 private:
 	Soldier* m_first;
@@ -56,8 +57,8 @@ protected:
 		virtual void load(FileRead&);
 		virtual void load_pointers();
 
-		uint m_first;
-		uint m_second;
+		uint32_t m_first;
+		uint32_t m_second;
 	};
 
 public:

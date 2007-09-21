@@ -21,6 +21,7 @@
 
 #include "trigger/trigger.h"
 
+#include <stdint.h>
 #include <vector>
 
 
@@ -28,7 +29,7 @@ MapTriggerManager::MapTriggerManager() {}
 
 
 MapTriggerManager::~MapTriggerManager() {
-   for (uint i = 0; i < m_triggers.size(); i++)
+   for (uint32_t i = 0; i < m_triggers.size(); i++)
       delete m_triggers[i];
    m_triggers.resize(0);
 }
@@ -78,7 +79,7 @@ void MapTriggerManager::delete_trigger(const char* name) {
 
 
 void MapTriggerManager::delete_unreferenced_triggers() {
-   uint i = 0;
+   uint32_t i = 0;
    while (i < m_triggers.size()) {
       Trigger* tr = m_triggers[i];
       if (tr->get_referencers().empty()) {

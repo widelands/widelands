@@ -20,6 +20,8 @@
 #ifndef included_trackptr_h
 #define included_trackptr_h
 
+#include <stdint.h>
+
 class BaseTrackPtr;
 
 /*
@@ -38,7 +40,7 @@ class Trackable {
 	friend class BaseTrackPtr;
 
 	class Tracker {
-		uint        m_refcount;
+		uint32_t        m_refcount;
 		Trackable * m_ptr;
 
 	public:

@@ -25,6 +25,7 @@
 #include "game.h"
 #include "interactive_player.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 
 
@@ -44,8 +45,8 @@ throw (_wexception)
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-		uint max_players = fr.Unsigned16();
-		for (uint i=1; i<=max_players; i++) {
+		uint32_t max_players = fr.Unsigned16();
+		for (uint32_t i=1; i<=max_players; i++) {
 			game->remove_player(i);
 			if (fr.Unsigned8()) {
 				bool see_all = fr.Unsigned8();
@@ -55,10 +56,10 @@ throw (_wexception)
 
 				RGBColor rgb[4];
 
-				for (uint j=0; j<4; j++) {
-					uchar r = fr.Unsigned8();
-					uchar g = fr.Unsigned8();
-					uchar b = fr.Unsigned8();
+				for (uint32_t j=0; j<4; j++) {
+					uint8_t r = fr.Unsigned8();
+					uint8_t g = fr.Unsigned8();
+					uint8_t b = fr.Unsigned8();
 					rgb[j] = RGBColor(r, g, b);
 				}
 
@@ -68,7 +69,7 @@ throw (_wexception)
 				Player* plr = game->get_player(plnum);
 				plr->set_see_all(see_all);
 
-				for (uint j=0; j<4; j++)
+				for (uint32_t j=0; j<4; j++)
 					plr->m_playercolor[j] = rgb[j];
 
 				if (packet_version >= 2)
@@ -109,7 +110,7 @@ throw (_wexception)
 
 		fw.CString(plr->m_tribe.name().c_str());
 
-		for (uint j=0; j<4; j++) {
+		for (uint32_t j=0; j<4; j++) {
 			fw.Unsigned8(plr->m_playercolor[j].r());
 			fw.Unsigned8(plr->m_playercolor[j].g());
 			fw.Unsigned8(plr->m_playercolor[j].b());

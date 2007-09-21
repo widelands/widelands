@@ -26,6 +26,7 @@
 #include "mapview.h"
 #include "overlay_manager.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 
 
@@ -52,10 +53,10 @@ throw (_wexception)
 	const Uint16 packet_version = fr.Unsigned16();
 
 	if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
-		unsigned char player_number = fr.Unsigned8();
+		uint8_t player_number = fr.Unsigned8();
 		int x = fr.Unsigned16();
 		int y = fr.Unsigned16();
-		uint display_flags = fr.Unsigned32();
+		uint32_t display_flags = fr.Unsigned32();
 
 		if (packet_version == 1)
 			game->m_last_stats_update = fr.Unsigned32();

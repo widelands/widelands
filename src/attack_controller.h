@@ -26,6 +26,7 @@
 #include "widelands.h"
 
 #include <set>
+#include <stdint.h>
 #include <vector>
 
 class Editor_Game_Base;
@@ -36,7 +37,7 @@ class Coords;
 class Widelands_Map_Attack_Controller_Data_Packet;
 
 
-uint getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Player_Number);
+uint32_t getMaxAttackSoldiers(const Editor_Game_Base &, const Flag &, const Player_Number);
 
 struct AttackController : public BaseImmovable {
 	friend class Widelands_Map_Attack_Controller_Data_Packet;
@@ -44,14 +45,14 @@ struct AttackController : public BaseImmovable {
 	AttackController(Editor_Game_Base* eg, Flag* flag, int attacker, int defender);
 	AttackController(Editor_Game_Base &);
 	~AttackController();
-	void launchAttack(uint nrAttackers);
+	void launchAttack(uint32_t nrAttackers);
 
 	//Methods inherited by BaseImmovable
 	virtual int  get_type    () const throw () {return ATTACKCONTROLLER;}
 	virtual int  get_size    () const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return false;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
-	virtual void act (Game*, uint);
+	virtual void act (Game*, uint32_t);
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup (Editor_Game_Base*);
 	//end inherited
@@ -79,12 +80,12 @@ private:
 	void calcBattleGround(BattleSoldier*, int);
 
 	bool launchAllSoldiers(bool attackers, int nrLaunch);
-	void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint nrLaunch, bool attackers);
+	void launchSoldiersOfMilitarySite(MilitarySite* militarySite, uint32_t nrLaunch, bool attackers);
 	bool moveToBattle(Soldier* soldier, MilitarySite* militarySite, bool attackers);
 
 	bool startBattle(Soldier*, bool);
 	void removeSoldier(Soldier*);
-	uint getBattleSoldierIndex(Soldier*);
+	uint32_t getBattleSoldierIndex(Soldier*);
 	bool opponentsLeft(Soldier* soldier);
 
 	std::vector<BattleSoldier> involvedSoldiers;
@@ -94,7 +95,7 @@ private:
 
 	int attackingPlayer;
 	int defendingPlayer;
-	uint totallyLaunched;
+	uint32_t totallyLaunched;
 	bool attackedMsEmpty;
 	Flag* flag;
 	Editor_Game_Base* m_egbase;
@@ -106,13 +107,13 @@ protected:
 		virtual void load_pointers();
 
 		struct BattleSoldierData {
-			uint soldier;
-			uint origin;
+			uint32_t soldier;
+			uint32_t origin;
 		};
 
-		uint flag;
+		uint32_t flag;
 		std::vector<BattleSoldierData> soldiers;
-		std::vector<uint> militarySites;
+		std::vector<uint32_t> militarySites;
 	};
 
 public:

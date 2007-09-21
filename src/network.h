@@ -25,11 +25,10 @@
 #include "streamread.h"
 #include "streamwrite.h"
 
-#include "types.h"
-
 #include <SDL_net.h>
 
 #include <queue>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -47,14 +46,14 @@ class NetStatusWindow;
 
 struct NetGame {
 	struct Chat_Message {
-		uint plrnum;
+		uint32_t plrnum;
 		std::string msg;
 	};
 
 	NetGame ();
 	virtual ~NetGame ();
 
-	uint get_playernum () {return playernum;}
+	uint32_t get_playernum () {return playernum;}
 
 	bool get_players_changed ()
 	{
@@ -75,7 +74,7 @@ struct NetGame {
 
 	void run ();
 
-	uint get_max_frametime();
+	uint32_t get_max_frametime();
 
 	virtual bool is_host ()=0;
 	virtual void begin_game ();
@@ -101,16 +100,16 @@ protected:
 
 	Game                       * game;
 
-	uint                          playernum;
-	ulong                        net_game_time;
+	uint32_t                          playernum;
+	uint32_t                        net_game_time;
 
-	uint                         common_rand_seed;
+	uint32_t                         common_rand_seed;
 
 	bool                         players_changed;
 
-	uchar                        player_enabled;
-	uchar                        player_human;
-	uchar                        player_ready;
+	uint8_t                        player_enabled;
+	uint8_t                        player_human;
+	uint8_t                        player_ready;
 
 	PlayerDescriptionGroup     * playerdescr[MAX_PLAYERS];
 	Fullscreen_Menu_LaunchGame * launch_menu;
@@ -147,7 +146,7 @@ private:
 		Deserializer   * deserializer;
 		int              playernum;
 		std::queue<md5_checksum> syncreports;
-		ulong            lag;
+		uint32_t            lag;
 	};
 
 	LAN_Game_Promoter         * promoter;
@@ -162,12 +161,12 @@ private:
 
 	std::queue<md5_checksum>    mysyncreports;
 
-	ulong                       net_delay;
-	ulong                       net_delay_history[8];
+	uint32_t                       net_delay;
+	uint32_t                       net_delay_history[8];
 
-	ulong                       next_ping_due;
-	ulong                       last_ping_sent;
-	uint                        pongs_received;
+	uint32_t                       next_ping_due;
+	uint32_t                       last_ping_sent;
+	uint32_t                        pongs_received;
 };
 
 struct NetClient:public NetGame {
@@ -227,7 +226,7 @@ struct Serializer : public StreamWrite {
 	void putstr (const char*);
 
 private:
-	std::vector<unsigned char> buffer;
+	std::vector<uint8_t> buffer;
 };
 
 struct Deserializer : public StreamRead {
@@ -249,7 +248,7 @@ struct Deserializer : public StreamRead {
 	void getstr (char*, int);
 
 private:
-	std::queue<unsigned char> queue;
+	std::queue<uint8_t> queue;
 };
 
 #endif

@@ -20,7 +20,7 @@
 #ifndef __S__GAME_SERVER_PROTO_H
 #define __S__GAME_SERVER_PROTO_H
 
-#include "types.h"
+#include <stdint.h>
 
 /*
  * This file delivers all informations needed to understand
@@ -78,15 +78,15 @@ enum {
 /*
  * The indexs
  */
-const static uint FIRST_CLIENT_PACKET_INDEX = 0;
-const static uint LAST_CLIENT_PACKET_INDEX = 0xffff - 1;
-const static uint FIRST_SERVER_PACKET_INDEX = 0xffff0001;
-const static uint LAST_SERVER_PACKET_INDEX = 0xffffffff - 1 ;
+const static uint32_t FIRST_CLIENT_PACKET_INDEX = 0;
+const static uint32_t LAST_CLIENT_PACKET_INDEX = 0xffff - 1;
+const static uint32_t FIRST_SERVER_PACKET_INDEX = 0xffff0001;
+const static uint32_t LAST_SERVER_PACKET_INDEX = 0xffffffff - 1 ;
 
 /*
  * Standart port
  */
-const static ushort GAME_SERVER_PORT = 8128;
+const static uint16_t GAME_SERVER_PORT = 8128;
 
 /*
  * Flags
@@ -103,8 +103,8 @@ enum GSP_Flags {
 /*
  * Protocol version: currently 1.0
  */
-const static uchar GSP_MAJOR_VERSION = 1;
-const static uchar GSP_MINOR_VERSION = 0;
+const static uint8_t GSP_MAJOR_VERSION = 1;
+const static uint8_t GSP_MINOR_VERSION = 0;
 
 /*
  * Connect package
@@ -147,7 +147,7 @@ enum HP_RetVal {
  * Answer (Client):
  *  <2B id><2B index><2B FLags><1B ack = 1>
  */
-const uchar UEP_ACK = 1;
+const uint8_t UEP_ACK = 1;
 
 /*
  * ROOM INFO : send informations about the current room.
@@ -184,7 +184,7 @@ enum CM_Flags {
    CM_NONE,
    CM_ACTION = 1
 };
-const uchar CM_ACK = 1;
+const uint8_t CM_ACK = 1;
 
 /*
  * PING: keep alive ping
@@ -193,6 +193,6 @@ const uchar CM_ACK = 1;
  * Answer (Client):
  *    <2B id><2B index><2B Flags><1B ACK>
  */
-const uchar PING_ACK = 1;
+const uint8_t PING_ACK = 1;
 
 #endif // __S__GAME_SERVER_PROTO_H

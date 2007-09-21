@@ -26,6 +26,7 @@
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
+#include <stdint.h>
 #include <string>
 
 /*
@@ -40,8 +41,8 @@ struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_CampaignSelect();
 	void clicked_back();
 	void clicked_ok();
-	void campaign_selected(uint);
-	void double_clicked(uint);
+	void campaign_selected(uint32_t);
+	void double_clicked(uint32_t);
 	void fill_list();
 	int get_campaign();
 
@@ -67,11 +68,11 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_CampaignMapSelect();
 	void clicked_back();
 	void clicked_ok();
-	void map_selected(uint);
-	void double_clicked(uint);
+	void map_selected(uint32_t);
+	void double_clicked(uint32_t);
 	void fill_list();
 	std::string get_map();
-	void set_campaign(uint);
+	void set_campaign(uint32_t);
 
 private:
 	UI::Textarea                                         title;

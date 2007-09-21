@@ -91,7 +91,7 @@ public:
 public:
 	Game* m_game;
 	StreamWrite* m_target;
-	uint m_counter;
+	uint32_t m_counter;
 };
 #endif
 
@@ -575,7 +575,7 @@ bool Game::run(UI::ProgressWindow & loader_ui, bool is_savegame) {
 	delete get_iabase();
 	set_iabase(0);
 
-	for (unsigned int i=0; i<cpl.size(); i++)
+	for (uint32_t i=0; i<cpl.size(); i++)
 		delete cpl[i];
 
 	g_gr->flush(PicMod_Game);
@@ -599,7 +599,7 @@ void Game::think()
 	    m_netgame->handle_network ();
 
 	if (m_state == gs_running) {
-		for (unsigned int i=0;i<cpl.size();i++)
+		for (uint32_t i=0;i<cpl.size();i++)
 			cpl[i]->think();
 
 		if
@@ -679,7 +679,7 @@ void Game::set_speed(int speed)
 
 void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 {
-	for (unsigned int i=0;i<cpl.size();i++)
+	for (uint32_t i=0;i<cpl.size();i++)
 		if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
 			if (lg==GAIN)
 				cpl[i]->gain_immovable (pi);
@@ -694,7 +694,7 @@ void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 
 void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 {
-	for (unsigned int i=0;i<cpl.size();i++)
+	for (uint32_t i=0;i<cpl.size();i++)
 		if (cpl[i]->get_player_number()==fc.field->get_owned_by())
 			if (lg==GAIN)
 				cpl[i]->gain_field (fc);
@@ -771,9 +771,9 @@ md5_checksum Game::get_sync_hash() const
  *
  * \note Do NOT use for random events in the UI or other display code.
  */
-uint Game::logic_rand()
+uint32_t Game::logic_rand()
 {
-	uint r = rng.rand();
+	uint32_t r = rng.rand();
 	syncstream().Unsigned32(r);
 	return r;
 }
@@ -887,19 +887,19 @@ void Game::send_player_enemyflagaction
 void Game::sample_statistics()
 {
 	// Update general stats
-	std::vector< uint > land_size; land_size.resize(map().get_nrplayers());
-	std::vector< uint > nr_buildings; nr_buildings.resize(map().get_nrplayers());
-	std::vector< uint > nr_kills; nr_kills.resize(map().get_nrplayers());
-	std::vector< uint > miltary_strength; miltary_strength.resize(map().get_nrplayers());
-	std::vector< uint > nr_workers; nr_workers.resize(map().get_nrplayers());
-	std::vector< uint > nr_wares; nr_wares.resize(map().get_nrplayers());
-	std::vector< uint > productivity; productivity.resize(map().get_nrplayers());
+	std::vector< uint32_t > land_size; land_size.resize(map().get_nrplayers());
+	std::vector< uint32_t > nr_buildings; nr_buildings.resize(map().get_nrplayers());
+	std::vector< uint32_t > nr_kills; nr_kills.resize(map().get_nrplayers());
+	std::vector< uint32_t > miltary_strength; miltary_strength.resize(map().get_nrplayers());
+	std::vector< uint32_t > nr_workers; nr_workers.resize(map().get_nrplayers());
+	std::vector< uint32_t > nr_wares; nr_wares.resize(map().get_nrplayers());
+	std::vector< uint32_t > productivity; productivity.resize(map().get_nrplayers());
 
-	std::vector< uint > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
+	std::vector< uint32_t > nr_production_sites; nr_production_sites.resize(map().get_nrplayers());
 
 	// We walk the map, to gain all needed informations
-	for (ushort y = 0; y < map().get_height(); y++) {
-		for (ushort x = 0; x < map().get_width(); x++) {
+	for (uint16_t y = 0; y < map().get_height(); y++) {
+		for (uint16_t x = 0; x < map().get_width(); x++) {
 			Field* f = map().get_field(Coords(x, y));
 
 			// First, ownership of this field
@@ -933,7 +933,7 @@ void Game::sample_statistics()
 							case Worker_Descr::SOLDIER:
 							{
 								Soldier* s = static_cast<Soldier*>(w);
-								uint calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
+								uint32_t calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
 								miltary_strength[ s->get_owner()->get_player_number() -1 ] += calc_level;
 							}
 							break;
@@ -947,13 +947,13 @@ void Game::sample_statistics()
 	}
 
 	// Number of workers / wares
-	for (uint i = 0; i < map().get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < map().get_nrplayers(); i++) {
 		Player* plr = get_player(i+1);
 
-		uint wostock = 0;
-		uint wastock = 0;
+		uint32_t wostock = 0;
+		uint32_t wastock = 0;
 
-		for (uint j = 0; plr && j < plr->get_nr_economies(); j++) {
+		for (uint32_t j = 0; plr && j < plr->get_nr_economies(); j++) {
 			Economy* eco = plr->get_economy_by_number(j);
 
 			for (int wareid = 0; wareid < plr->tribe().get_nrwares(); wareid++)
@@ -969,14 +969,14 @@ void Game::sample_statistics()
 	}
 
 	// Now, divide the statistics
-	for (uint i = 0; i < map().get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < map().get_nrplayers(); i++) {
 		if (productivity[ i ])
 			productivity[ i ] /= nr_production_sites[ i ];
 	}
 
 	// Now, push this on the general statistics
 	m_general_stats.resize(map().get_nrplayers());
-	for (uint i = 0; i < map().get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < map().get_nrplayers(); i++) {
 		m_general_stats[i].land_size.push_back(land_size[i]);
 		m_general_stats[i].nr_buildings.push_back(nr_buildings[i]);
 		m_general_stats[i].nr_kills.push_back(nr_kills[i]);
@@ -1000,7 +1000,7 @@ void Game::sample_statistics()
  * \todo Document parameter fr
  * \todo Would it make sense to not support the old style anymore?
  */
-void Game::ReadStatistics(FileRead& fr, uint version)
+void Game::ReadStatistics(FileRead& fr, uint32_t version)
 {
 	if (version == 0 || version == 1) {
 		if (version >= 1) {
@@ -1008,10 +1008,10 @@ void Game::ReadStatistics(FileRead& fr, uint version)
 		}
 
 		// Read general statistics
-		uint entries = fr.Unsigned16();
+		uint32_t entries = fr.Unsigned16();
 		m_general_stats.resize(get_map()->get_nrplayers());
 
-		for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
+		for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
 			if (get_player(i+1)) {
 				m_general_stats[i].land_size.resize(entries);
 				m_general_stats[i].nr_workers.resize(entries);
@@ -1023,11 +1023,11 @@ void Game::ReadStatistics(FileRead& fr, uint version)
 			}
 		}
 
-		for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
+		for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
 			if (!get_player(i+1))
 				continue;
 
-			for (uint j = 0; j < m_general_stats[i].land_size.size(); j++) {
+			for (uint32_t j = 0; j < m_general_stats[i].land_size.size(); j++) {
 				m_general_stats[i].land_size[j] = fr.Unsigned32();
 				m_general_stats[i].nr_workers[j] = fr.Unsigned32();
 				m_general_stats[i].nr_buildings[j] = fr.Unsigned32();
@@ -1051,9 +1051,9 @@ void Game::WriteStatistics(FileWrite& fw)
 
 	// General statistics
 	// First, we write the size of the statistics arrays
-	uint entries = 0;
+	uint32_t entries = 0;
 
-	for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
 		if (get_player(i+1) && m_general_stats.size()) {
 			entries = m_general_stats[i].land_size.size();
 			break;
@@ -1062,11 +1062,11 @@ void Game::WriteStatistics(FileWrite& fw)
 
 	fw.Unsigned16(entries);
 
-	for (uint i = 0; i < get_map()->get_nrplayers(); i++) {
+	for (uint32_t i = 0; i < get_map()->get_nrplayers(); i++) {
 		if (!get_player(i+1))
 			continue;
 
-		for (uint j = 0; j < entries; j++) {
+		for (uint32_t j = 0; j < entries; j++) {
 			fw.Unsigned32(m_general_stats[i].land_size[j]);
 			fw.Unsigned32(m_general_stats[i].nr_workers[j]);
 			fw.Unsigned32(m_general_stats[i].nr_buildings[j]);

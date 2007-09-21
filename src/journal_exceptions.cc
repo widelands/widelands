@@ -36,8 +36,8 @@ BadMagic_error::BadMagic_error(const std::string _filename) throw():
 }
 
 BadRecord_error::BadRecord_error(const std::string _filename,
-                                 const unsigned char _code,
-                                 const unsigned char _expectedcode) throw():
+                                 const uint8_t _code,
+                                 const uint8_t _expectedcode) throw():
 		Journalfile_error(_filename),
 		code(_code), expectedcode(_expectedcode)
 {
@@ -47,7 +47,7 @@ BadRecord_error::BadRecord_error(const std::string _filename,
 }
 
 BadEvent_error::BadEvent_error(const std::string _filename,
-                               const unsigned char _type) throw()
+                               const uint8_t _type) throw()
 		: Journalfile_error(_filename), type(_type)
 {
 	text="Journal file '"+_filename+"' contains record with unknown event type "+

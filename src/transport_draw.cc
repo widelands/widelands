@@ -21,6 +21,7 @@
 
 #include "editor_game_base.h"
 #include "rendertarget.h"
+#include <stdint.h>
 
 void Flag::draw
 (const Editor_Game_Base & game,
@@ -41,8 +42,8 @@ void Flag::draw
 
 	dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
 
-	const uint item_filled = m_item_filled;
-	for (uint i = 0; i < item_filled; ++i) {// draw wares
+	const uint32_t item_filled = m_item_filled;
+	for (uint32_t i = 0; i < item_filled; ++i) {// draw wares
 		Point warepos = pos;
 		if (i < 8) {
 			warepos.x += ware_offsets[i].x;

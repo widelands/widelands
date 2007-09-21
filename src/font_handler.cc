@@ -60,7 +60,7 @@ Font_Handler::~Font_Handler() {
 /*
  * Returns the height of the font, in pixels.
 */
-uint Font_Handler::get_fontheight(const std::string & name, const int size) {
+uint32_t Font_Handler::get_fontheight(const std::string & name, const int size) {
 	TTF_Font* f = m_font_loader->get_font(name, size);
 	const int fontheight = TTF_FontHeight(f);
 	if (fontheight < 0)
@@ -89,14 +89,14 @@ void Font_Handler::draw_string
  const Align align,
  const int wrap,
  const Widget_Cache widget_cache,
- uint * const widget_cache_id,
+ uint32_t * const widget_cache_id,
  const int caret,
  bool transparent)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	//Width and height of text, needed for alignment
-	uint w, h;
-	uint picid;
+	uint32_t w, h;
+	uint32_t picid;
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
 		// look if text is cached
@@ -164,7 +164,7 @@ void Font_Handler::draw_string
 /*
 * Creates a Widelands surface of the given text, checks if multiline or not
 */
-uint Font_Handler::create_text_surface
+uint32_t Font_Handler::create_text_surface
 (TTF_Font & f, const RGBColor fg, const RGBColor bg,
  const std::string & text, const Align align, const int wrap,
  const int caret, bool transparent)
@@ -231,8 +231,8 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
 	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(), 0};
 
-	uint cur_text_pos = 0;
-	uint i = 0;
+	uint32_t cur_text_pos = 0;
+	uint32_t i = 0;
 
 	text = word_wrap_text(font, text, wrap);
 	const std::vector<std::string> lines(split_string(text, "\n"));
@@ -249,7 +249,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface
 			(SDL_Surface * const surface = TTF_RenderUTF8_Shaded
 			 (&font, line.c_str(), sdl_fg, sdl_bg))
 		{
-		uint new_text_pos = cur_text_pos + line.size();
+		uint32_t new_text_pos = cur_text_pos + line.size();
 		if (caret != -1) {
 			if (new_text_pos >= caret - i) {
 				int caret_line_pos = caret - cur_text_pos - i;
@@ -349,10 +349,10 @@ void Font_Handler::draw_richtext
  std::string text,
  int wrap,
  Widget_Cache widget_cache,
- uint * const widget_cache_id,
+ uint32_t * const widget_cache_id,
  bool transparent)
 {
-	uint picid;
+	uint32_t picid;
 	if (widget_cache == Widget_Cache_Use) {
 		//g_gr->get_picture_size(*widget_cache_id, &w, &h);
 		picid = *widget_cache_id;
@@ -431,7 +431,7 @@ void Font_Handler::draw_richtext
 					text_it->get_line_breaks();
 
 				//Iterate over words of current text block
-				uint word_cnt = 0;
+				uint32_t word_cnt = 0;
 				for (std::vector<std::string>::iterator word_it = words.begin(); word_it != words.end(); word_it++) {
 					std::string str_word = *word_it;
 
@@ -587,11 +587,11 @@ SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int styl
 
 //gets size of picid
 void Font_Handler::get_size_from_cache
-(const uint widget_cache_id, uint & w, uint & h)
+(const uint32_t widget_cache_id, uint32_t & w, uint32_t & h)
 {g_gr->get_picture_size(widget_cache_id, w, h);}
 
 //creates an empty sdl surface of given size
-SDL_Surface* Font_Handler::create_empty_sdl_surface(uint w, uint h) {
+SDL_Surface* Font_Handler::create_empty_sdl_surface(uint32_t w, uint32_t h) {
 	SDL_Surface *mask_surf = draw_string_sdl_surface("FreeSans.ttf", 10, RGBColor(0, 0, 0), RGBColor(0, 0, 0), " ", Align_Left, -1);
 	SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 16,
 									mask_surf->format->Rmask,
@@ -604,7 +604,7 @@ SDL_Surface* Font_Handler::create_empty_sdl_surface(uint w, uint h) {
 
 //joins a vectror of surfaces in one big surface
 SDL_Surface * Font_Handler::join_sdl_surfaces
-(const uint w, const uint h,
+(const uint32_t w, const uint32_t h,
  const std::vector<SDL_Surface *> & surfaces,
  const RGBColor bg,
  const Align align,
@@ -621,7 +621,7 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 	int y = 0;
 	int x = 0;
 
-	for (uint i = 0; i < surfaces.size(); i++) {
+	for (uint32_t i = 0; i < surfaces.size(); i++) {
 		SDL_Surface* s = surfaces[i];
 		SDL_Rect r;
 
@@ -654,7 +654,7 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
  *
  * If transparent is true, background is transparent
  */
-uint Font_Handler::convert_sdl_surface
+uint32_t Font_Handler::convert_sdl_surface
 (SDL_Surface & surface, const RGBColor bg, bool transparent)
 {
 	Surface & surf = *new Surface();
@@ -667,7 +667,7 @@ uint Font_Handler::convert_sdl_surface
 
 	surf.set_sdl_surface(surface);
 
-	uint picid = g_gr->get_picture(PicMod_Font, surf);
+	uint32_t picid = g_gr->get_picture(PicMod_Font, surf);
 	return picid;
 }
 
@@ -700,7 +700,7 @@ void Font_Handler::flush_cache() {
 	}
 }
 //Deletes widget controlled surface
-void Font_Handler::delete_widget_cache(uint widget_cache_id) {
+void Font_Handler::delete_widget_cache(uint32_t widget_cache_id) {
 	g_gr->free_surface(widget_cache_id);
 }
 
@@ -744,7 +744,7 @@ std::string Font_Handler::word_wrap_text
 			if (calc_linewidth(font, cur_word) > (max_width /*/ 2*/)) {
 				// The last word is too big to fit in a nice way, split it on a char basis
 				//std::vector<std::string> split_word = split_utf8_string(cur_word);
-				for (uint i=0;i<cur_word.length();i++) {
+				for (uint32_t i=0;i<cur_word.length();i++) {
 					tmp_str = cur_line + cur_word[i];
 					if (calc_linewidth(font, tmp_str) > max_width) {
 						wrapped_text += cur_line + '\n';

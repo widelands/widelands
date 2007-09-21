@@ -22,13 +22,14 @@
 
 #include "editorinteractive.h"
 
+#include <stdint.h>
 #include "ui_unique_window.h"
 
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
 	Editor_Tool_Options_Menu
 		(Editor_Interactive         &       parent,
 		 UI::UniqueWindow::Registry &,
-		 const uint widht, const uint height,
+		 const uint32_t widht, const uint32_t height,
 		 const char                 * const title);
 
 	/**
@@ -37,11 +38,11 @@ struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
 	 */
 	void select_correct_tool();
 
-	uint  spacing() const throw () {return 5;}
-	uint hspacing() const throw () {return spacing();}
-	uint vspacing() const throw () {return spacing();}
-	uint hmargin () const throw () {return spacing();}
-	uint vmargin () const throw () {return spacing();}
+	uint32_t  spacing() const throw () {return 5;}
+	uint32_t hspacing() const throw () {return spacing();}
+	uint32_t vspacing() const throw () {return spacing();}
+	uint32_t hmargin () const throw () {return spacing();}
+	uint32_t vmargin () const throw () {return spacing();}
 
 private:
 	Editor_Tool * m_current_pointer;

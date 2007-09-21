@@ -22,6 +22,7 @@
 
 #include "animation.h"
 #include "instances.h"
+#include <stdint.h>
 
 class Economy;
 class Flag;
@@ -86,7 +87,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	void parse(const char *directory, Profile *s);
 	void parse_program(std::string directory, Profile* prof, std::string programname);
-	uint parse_animation(std::string directory, Profile* prof, std::string name);
+	uint32_t parse_animation(std::string directory, Profile* prof, std::string name);
 	void parse_playFX(std::string directory, Profile* prof, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
@@ -123,7 +124,7 @@ public:
 
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);
-	void act(Game *g, uint data);
+	void act(Game *g, uint32_t data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
@@ -146,11 +147,11 @@ private:
 protected:
 	Coords                   m_position;
 
-	uint                     m_anim;
+	uint32_t                     m_anim;
 	int                      m_animstart;
 
 	const ImmovableProgram * m_program;
-	uint m_program_ptr; //  index of next instruction to execute
+	uint32_t m_program_ptr; //  index of next instruction to execute
 	int                      m_program_step; //  time of next step
 
 

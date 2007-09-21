@@ -26,6 +26,7 @@
 #include <vector>
 
 #include <png.h>
+#include <stdint.h>
 
 /**
  * Names of road terrains
@@ -73,14 +74,14 @@ public:
 	void refresh(bool force = true);
 
 	void flush(int mod);
-	uint get_picture(int mod, const char* fname);
-	void get_picture_size(const uint pic, uint & w, uint & h);
-	uint get_picture(const int mod, Surface &, const char * const name = 0);
-	Surface* get_picture_surface(uint id);
-	void save_png(uint, FileWrite*);
-	uint create_surface(int w, int h);
-	void free_surface(uint pic);
-	RenderTarget* get_surface_renderer(uint pic);
+	uint32_t get_picture(int mod, const char* fname);
+	void get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h);
+	uint32_t get_picture(const int mod, Surface &, const char * const name = 0);
+	Surface* get_picture_surface(uint32_t id);
+	void save_png(uint32_t, FileWrite*);
+	uint32_t create_surface(int w, int h);
+	void free_surface(uint32_t pic);
+	RenderTarget* get_surface_renderer(uint32_t pic);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size
@@ -93,21 +94,21 @@ public:
 		ResizeMode_Average,
 	};
 
-	uint get_resized_picture(const uint, const uint w, const uint h, ResizeMode);
-	SDL_Surface* resize(const uint index, const uint w, const uint h);
+	uint32_t get_resized_picture(const uint32_t, const uint32_t w, const uint32_t h, ResizeMode);
+	SDL_Surface* resize(const uint32_t index, const uint32_t w, const uint32_t h);
 
-	uint get_maptexture(const char & fnametempl, const uint frametime);
-	void animate_maptextures(uint time);
+	uint32_t get_maptexture(const char & fnametempl, const uint32_t frametime);
+	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
 	void load_animations(UI::ProgressWindow & loader_ui);
-	AnimationGfx::Index nr_frames(const uint anim=0) const;
-	void get_animation_size(const uint anim, const uint time, uint & w, uint & h);
+	AnimationGfx::Index nr_frames(const uint32_t anim=0) const;
+	void get_animation_size(const uint32_t anim, const uint32_t time, uint32_t & w, uint32_t & h);
 
 	void screenshot(const char & fname) const;
-	const char* get_maptexture_picture (uint id);
-	Texture* get_maptexture_data(uint id);
-	AnimationGfx* get_animation(const uint anim) const;
+	const char* get_maptexture_picture (uint32_t id);
+	Texture* get_maptexture_data(uint32_t id);
+	AnimationGfx* get_animation(const uint32_t anim) const;
 
 	Surface* get_road_texture(int roadtex);
 

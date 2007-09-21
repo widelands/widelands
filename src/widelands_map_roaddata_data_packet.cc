@@ -25,6 +25,7 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
@@ -59,7 +60,7 @@ throw (_wexception)
 	const int packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION)
 		for (;;) {
-         uint ser=fr.Unsigned32();
+         uint32_t ser=fr.Unsigned32();
          if (ser==0xffffffff) // end of roaddata
             break;
          assert(ol->is_object_known(ser));
@@ -75,7 +76,7 @@ throw (_wexception)
          r->set_owner(plr);
          r->m_type=fr.Unsigned32();
          ser=fr.Unsigned32();
-         uint ser1=fr.Unsigned32();
+         uint32_t ser1=fr.Unsigned32();
          assert(ol->is_object_known(ser));
          assert(ol->is_object_known(ser1));
          r->m_flags[0]=static_cast<Flag*>(ol->get_object_by_file_index(ser));
@@ -99,7 +100,7 @@ throw (_wexception)
          r->m_idle_index=fr.Unsigned32();
          r->m_desire_carriers=fr.Unsigned32();
          assert(!r->m_carrier.get(egbase));
-         uint carrierid=fr.Unsigned32();
+         uint32_t carrierid=fr.Unsigned32();
          if (carrierid) {
             assert(ol->is_object_known(carrierid));
             r->m_carrier=ol->get_object_by_file_index(carrierid);
@@ -145,8 +146,8 @@ throw (_wexception)
 
    // We walk the map again for roads
    Map* map=egbase->get_map();
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
+   for (uint16_t y=0; y<map->get_height(); y++) {
+      for (uint16_t x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x, y));
          BaseImmovable* imm=f->get_immovable();
          if (!imm) continue;
@@ -156,7 +157,7 @@ throw (_wexception)
             assert(os->is_object_known(r));
             if (os->is_object_saved(r))
                continue;
-            uint ser=os->get_object_file_index(r);
+            uint32_t ser=os->get_object_file_index(r);
 
             // First, write serial
             fw.Unsigned32(ser);

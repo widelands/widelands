@@ -29,6 +29,7 @@
 #include "map_eventchain_manager.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
+#include <stdint.h>
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 #include "world.h"
@@ -66,7 +67,7 @@ throw (_wexception)
       std::vector<Event*> m_events;
 
       // For running
-      uint                m_curevent;
+      uint32_t                m_curevent;
       State               m_state;
  */
    // check packet version
@@ -84,10 +85,10 @@ throw (_wexception)
 
          // TriggerConditional
          std::vector< TriggerConditional_Factory::Token > toklist;
-         uint nr_tokens = s->get_safe_int("nr_conditional_element");
+         uint32_t nr_tokens = s->get_safe_int("nr_conditional_element");
 
          char buf[256];
-			for (uint i = 0; i < nr_tokens; ++i) {
+			for (uint32_t i = 0; i < nr_tokens; ++i) {
             sprintf(buf, "conditional_element_%02i", i);
             TriggerConditional_Factory::Token tok;
             std::string type = s->get_safe_string(buf);
@@ -118,8 +119,8 @@ throw (_wexception)
          e->set_trigcond(TriggerConditional_Factory::create_from_infix(e, toklist));
 
          // Events
-         uint nr_events = s->get_safe_int("nr_events");
-			for (uint i = 0; i < nr_events; ++i) {
+         uint32_t nr_events = s->get_safe_int("nr_events");
+			for (uint32_t i = 0; i < nr_events; ++i) {
             sprintf(buf, "event_%02i", i);
             std::string evname = s->get_safe_string(buf);
             Event * const event = egbase->get_map()->get_mem().get_event(evname.c_str());
@@ -168,7 +169,7 @@ throw (_wexception)
 			e.m_trigconditional->get_infix_tokenlist();
 		s.set_int("nr_conditional_element", toklist->size());
       char buf[256];
-      for (uint t = 0; t < toklist->size(); t++) {
+      for (uint32_t t = 0; t < toklist->size(); t++) {
          TriggerConditional_Factory::Token tok = (*toklist)[t];
          sprintf(buf, "conditional_element_%02i", t);
 			s.set_string(buf, TriggerConditional_Factory::operators[tok.token]);

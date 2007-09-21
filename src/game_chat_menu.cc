@@ -27,6 +27,7 @@
 #include "network.h"
 #include "player.h"
 #include "stock_menu.h"
+#include <stdint.h>
 
 #define CHAT_MSG_WAIT_TIME 1000
 
@@ -92,7 +93,7 @@ void GameChatMenu::think() {
 	const std::vector<NetGame::Chat_Message>* msges = m_player.get_chatmsges();
    std::string str;
 
-   for (uint i = 0; i < msges->size(); i++) {
+   for (uint32_t i = 0; i < msges->size(); i++) {
 		str += m_player.get_game()->player((*msges)[i].plrnum).get_name();
       str += ": ";
       str += (*msges)[i].msg;

@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include "fullscreen_menu_base.h"
 
+#include <stdint.h>
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_textarea.h"
@@ -40,8 +41,8 @@ public:
 	const std::string& filename() {return m_filename;}
 
 	void clicked_ok();
-	void replay_selected(uint);
-	void double_clicked(uint);
+	void replay_selected(uint32_t);
+	void double_clicked(uint32_t);
 	void fill_list();
 
 private:

@@ -23,6 +23,7 @@
 #include "editor_game_base.h" //TODO: replace, only needed for "Time"
 #include "geometry.h"
 #include "rgbcolor.h"
+#include <stdint.h>
 
 #include "widelands.h"
 
@@ -64,9 +65,9 @@ public:
 	void brighten_rect(Rect r, const int factor);
 	void clear();
 
-	void blit(Point dst, const uint picture);
-	void blitrect(Point dst, const uint picture, Rect src);
-	void tile(Rect r, const uint picture, Point ofs);
+	void blit(Point dst, const uint32_t picture);
+	void blitrect(Point dst, const uint32_t picture, Rect src);
+	void tile(Rect r, const uint32_t picture, Point ofs);
 
 	/**
 	 * Renders the map from a player's point of view into the current drawing
@@ -104,12 +105,12 @@ public:
 		(const Editor_Game_Base & egbase,
 		 const Player * const     player,
 		 const Point              viewpoint,
-		 const uint               flags);
+		 const uint32_t               flags);
 
-	void drawanim(Point dst, const uint animation, const uint time,
+	void drawanim(Point dst, const uint32_t animation, const uint32_t time,
 		      const Player * const player=0);
 
-	void drawanimrect(Point dst, const uint animation, const uint time,
+	void drawanimrect(Point dst, const uint32_t animation, const uint32_t time,
 			  const Player * const player, Rect srcrc);
 
 	void reset();

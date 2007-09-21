@@ -51,7 +51,7 @@ m_parent(parent)
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
 
-   uint i=0;
+   uint32_t i=0;
    for (i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
 		Event_Descr & d = *Event_Factory::get_event_descr(i);
 		m_event_list->add(_(d.name).c_str(), d);
@@ -122,7 +122,7 @@ void Editor_Event_Menu_New_Event::clicked_ok() {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_New_Event::selected(uint) {
+void Editor_Event_Menu_New_Event::selected(uint32_t) {
 	m_description->set_text(i18n::translate(m_event_list->get_selected().descr));
    m_ok_button->set_enabled(true);
 }
@@ -130,4 +130,4 @@ void Editor_Event_Menu_New_Event::selected(uint) {
 /*
  * listbox got double clicked
  */
-void Editor_Event_Menu_New_Event::double_clicked(uint) {clicked_ok();}
+void Editor_Event_Menu_New_Event::double_clicked(uint32_t) {clicked_ok();}

@@ -23,6 +23,7 @@
 #include "player_area.h"
 #include "trigger.h"
 
+#include <stdint.h>
 #include <string>
 /*
  * For documentation see the description in editor or trigger_factory.cc
@@ -51,7 +52,7 @@ struct Trigger_Building : public Trigger {
 private:
 	Player_Area<Area<FCoords> > m_player_area;
       std::string m_building;
-	uint m_count;
+	uint32_t m_count;
 };
 
 #endif

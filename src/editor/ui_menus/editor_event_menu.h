@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_EVENT_MENU_H
 #define __S__EDITOR_EVENT_MENU_H
 
+#include <stdint.h>
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
@@ -47,12 +48,12 @@ private:
 	UI::Button<Editor_Event_Menu> * m_btn_edit_trigger;
 	UI::Button<Editor_Event_Menu> * m_btn_del_eventchain;
 	UI::Button<Editor_Event_Menu> * m_btn_edit_eventchain;
-	void trigger_list_selected    (uint);
-	void event_list_selected      (uint);
-	void eventchain_list_selected (uint);
-	void trigger_double_clicked   (uint);
-	void event_double_clicked     (uint);
-	void eventchain_double_clicked(uint);
+	void trigger_list_selected    (uint32_t);
+	void event_list_selected      (uint32_t);
+	void eventchain_list_selected (uint32_t);
+	void trigger_double_clicked   (uint32_t);
+	void event_double_clicked     (uint32_t);
+	void eventchain_double_clicked(uint32_t);
 	void clicked_new_event      ();
 	void clicked_del_event      ();
 	void clicked_edit_event     ();

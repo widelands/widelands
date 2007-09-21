@@ -250,7 +250,7 @@ void Editor_Objectives_Menu::clicked_new() {
 
 	Map & map = m_parent->egbase().map();
          MapObjectiveManager & mom = map.get_mom();
-	for (uint n = 1;; ++n) {
+	for (uint32_t n = 1;; ++n) {
 		snprintf(buffer, sizeof(buffer), _("Unnamed%u").c_str(), n);
 		if (not mom.get_objective(buffer)) break;
 	}
@@ -282,7 +282,7 @@ void Editor_Objectives_Menu::clicked_del() {
 
 	if (not obj.get_trigger()->get_referencers().empty()) {
             std::string str=_("Can't delete Objective, because it's trigger is in use by ");
-		std::map<TriggerReferencer*, uint>::const_iterator i =
+		std::map<TriggerReferencer*, uint32_t>::const_iterator i =
 			obj.get_trigger()->get_referencers().begin();
 		while (i != obj.get_trigger()->get_referencers().end()) {
                str += i->first->get_type();
@@ -309,7 +309,7 @@ void Editor_Objectives_Menu::clicked_del() {
 /*
  * The table has been selected
  */
-void Editor_Objectives_Menu::table_selected(uint n) {
+void Editor_Objectives_Menu::table_selected(uint32_t n) {
    m_edit_button->set_enabled(true);
    m_delete_button->set_enabled(true);
 
@@ -320,7 +320,7 @@ void Editor_Objectives_Menu::table_selected(uint n) {
 /*
  * Table has been doubleclicked
  */
-void Editor_Objectives_Menu::table_dblclicked(uint) {clicked_edit();}
+void Editor_Objectives_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 
 /*
  * Insert this map variable into the table

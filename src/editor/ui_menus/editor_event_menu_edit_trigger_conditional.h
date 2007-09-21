@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 #define __S__EDITOR_EVENT_MENU_EDIT_TRIGGERCONDITIONAL_H
 
+#include <stdint.h>
 #include "trigger/trigger_conditional.h"
 
 #include "ui_window.h"
@@ -51,10 +52,10 @@ private:
 	void clicked_del_trigger();
 	void clicked_move_up    ();
 	void clicked_move_down  ();
-	void tl_selected        (uint);
-	void tl_double_clicked  (uint);
-	void cs_selected        (uint);
-	void cs_double_clicked  (uint);
+	void tl_selected        (uint32_t);
+	void tl_double_clicked  (uint32_t);
+	void cs_selected        (uint32_t);
+	void cs_double_clicked  (uint32_t);
 
       UI::Listselect<Trigger                           &> *m_trigger_list;
       UI::Listselect<TriggerConditional_Factory::Token &> *m_construction;

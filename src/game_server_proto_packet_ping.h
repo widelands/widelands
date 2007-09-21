@@ -21,6 +21,7 @@
 #define __S__GAME_SERVER_PROTO_PACKET_PING_H
 
 #include "game_server_proto_packet.h"
+#include <stdint.h>
 
 /*
  * Ping. Checks if connection is alive
@@ -29,7 +30,7 @@ struct Game_Server_Protocol_Packet_Ping : public Game_Server_Protocol_Packet {
 	Game_Server_Protocol_Packet_Ping();
       virtual ~Game_Server_Protocol_Packet_Ping();
 
-      virtual ushort get_id();
+      virtual uint16_t get_id();
 
 	virtual void recv(Game_Server_Connection*, Network_Buffer *);
 	virtual void send(Network_Buffer *) {}

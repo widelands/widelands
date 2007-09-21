@@ -98,9 +98,9 @@ GameTips::~GameTips() {
 	stop();
 }
 
-// conver 2-char hex string into uint
-const uint GameTips::colorvalue_from_hex(const char c1, const char c2) {
-	uint ret = 0;
+// conver 2-char hex string into uint32_t
+const uint32_t GameTips::colorvalue_from_hex(const char c1, const char c2) {
+	uint32_t ret = 0;
 	if (c1 >= '0' && c1 <= '9')
 		ret += (c1 - '0') * 16;
 	else if (c1 >= 'a' && c1 <= 'f')
@@ -137,9 +137,9 @@ const RGBColor GameTips::color_from_hex(
 	if (hexcode[0] == '#')
 		hexcode++;
 
-	uint red   = 0x100;
-	uint green = 0x100;
-	uint blue  = 0x100;
+	uint32_t red   = 0x100;
+	uint32_t green = 0x100;
+	uint32_t blue  = 0x100;
 	if (len == 3) {
 		// #fde -> #ffddee (by CSS standard)
 		red   = colorvalue_from_hex (hexcode[0], hexcode[0]);
@@ -161,7 +161,7 @@ const RGBColor GameTips::color_from_hex(
 void GameTips::update(bool repaint) {
 	Uint32 ticks = SDL_GetTicks();
 	if (ticks >= (m_lastUpdated + m_updateAfter)) {
-		const uint next = rand() % m_tips.size();
+		const uint32_t next = rand() % m_tips.size();
 		if (next == m_lastTip)
 			m_lastTip = (next + 1) % m_tips.size();
 		else
@@ -183,17 +183,17 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int index) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	const uint xres = g_gr->get_xres();
-	const uint yres = g_gr->get_yres();
+	const uint32_t xres = g_gr->get_xres();
+	const uint32_t yres = g_gr->get_yres();
 	Rect tips_area;
 	Rect text_area;
 
 	// try to load a background
-	const uint pic_background =
+	const uint32_t pic_background =
 		g_gr->get_picture(PicMod_Menu, m_background_picture.c_str());
 	if (pic_background > 0) {
-		uint w = 0;
-		uint h = 0;
+		uint32_t w = 0;
+		uint32_t h = 0;
 		g_gr->get_picture_size(pic_background, w, h);
 		// center picture
 		Point pt((xres - w) / 2,

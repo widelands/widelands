@@ -28,6 +28,7 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
@@ -79,13 +80,13 @@ throw
 
    if (packet_version==CURRENT_PACKET_VERSION) {
       while (1) {
-         uint reg=fr.Unsigned32();
+         uint32_t reg=fr.Unsigned32();
          if (reg==0xffffffff) break; // No more bobs
 
          assert(ol->is_object_known(reg));
          Bob* bob=static_cast<Bob*>(ol->get_object_by_file_index(reg));
 
-         uchar read_owner=fr.Unsigned8();
+         uint8_t read_owner=fr.Unsigned8();
          Player* plr_owner=0;
          if (read_owner) {
             plr_owner=egbase->get_safe_player(read_owner);
@@ -126,9 +127,9 @@ throw
          bob->m_walkstart=fr.Signed32();
          bob->m_walkend=fr.Signed32();
 
-         uint oldstacksize=bob->m_stack.size();
+         uint32_t oldstacksize=bob->m_stack.size();
          bob->m_stack.resize(fr.Unsigned16());
-         for (uint i=0; i<bob->m_stack.size(); i++) {
+         for (uint32_t i=0; i<bob->m_stack.size(); i++) {
             Bob::State* s=&bob->m_stack[i];
             Bob::Task* task;
 
@@ -182,7 +183,7 @@ throw
             bool diranims=fr.Unsigned8();
             if (diranims) {
                const Bob::Descr & bob_descr = bob->descr();
-               const uint anims[6] = {
+               const uint32_t anims[6] = {
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
                   bob_descr.get_animation(fr.CString()),
@@ -195,7 +196,7 @@ throw
 				} else
                s->diranims=0;
 
-            uint pathsteps=fr.Unsigned16();
+            uint32_t pathsteps=fr.Unsigned16();
             if (i < oldstacksize)
                delete s->path;
             if (pathsteps) {
@@ -203,7 +204,7 @@ throw
                start.x=fr.Unsigned16();
                start.y=fr.Unsigned16();
 					Path * const path = new Path(start);
-               for (uint step=0; step<pathsteps; step++)
+               for (uint32_t step=0; step<pathsteps; step++)
 						path->append(egbase->map(), fr.Unsigned8());
                s->path=path;
 				} else
@@ -349,7 +350,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
 		}
 
       // location
-      uint reg=fr->Unsigned32();
+      uint32_t reg=fr->Unsigned32();
       if (reg) {
          assert(ol->is_object_known(reg));
          worker->set_location(static_cast<PlayerImmovable*>(ol->get_object_by_file_index(reg)));
@@ -399,17 +400,17 @@ throw (_wexception)
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    Map* map=egbase->get_map();
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
+   for (uint16_t y=0; y<map->get_height(); y++) {
+      for (uint16_t x=0; x<map->get_width(); x++) {
 
          std::vector<Bob*> bobarr;
 
 		map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr);
 
-         for (uint i=0; i<bobarr.size(); i++) {
+         for (uint32_t i=0; i<bobarr.size(); i++) {
             Bob* bob=bobarr[i];
             assert(os->is_object_known(bob));
-            uint reg=os->get_object_file_index(bob);
+            uint32_t reg=os->get_object_file_index(bob);
 
             fw.Unsigned32(reg);
             // BOB STUFF
@@ -453,7 +454,7 @@ throw (_wexception)
 
             // Nr of States
             fw.Unsigned16(bob->m_stack.size());
-            for (uint index=0; index<bob->m_stack.size(); index++) {
+            for (uint32_t index=0; index<bob->m_stack.size(); index++) {
                Bob::State* s=&bob->m_stack[index];
 
                // Write name, enough to reconstruct the

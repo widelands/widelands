@@ -26,6 +26,7 @@
 #include "game_server_proto_packet_connect.h"
 #include "game_server_proto_packet_getuserinfo.h"
 #include "i18n.h"
+#include <stdint.h>
 
 #include "ui_button.h"
 #include "ui_editbox.h"
@@ -53,7 +54,7 @@ static void user_info(std::string user, std::string game, std::string room, void
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->user_info(user, game, room);
 }
-static void chat_message(std::string user, std::string msg, uchar is_action, void* data) {
+static void chat_message(std::string user, std::string msg, uint8_t is_action, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->chat_message(user, msg, is_action);
 }
@@ -160,7 +161,7 @@ void Fullscreen_Menu_InetLobby::room_info(std::vector<std::string > users) {
    /* We clear the list, and refill it */
    m_userlist->clear();
 
-   for (uint i = 0; i < users.size(); i++) {
+   for (uint32_t i = 0; i < users.size(); i++) {
       if (users[i] == m_gsc->get_username()) continue;
       std::string name = users[i];
 		m_userlist->add(name.c_str(), 0);

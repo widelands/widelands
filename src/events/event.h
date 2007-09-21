@@ -20,9 +20,8 @@
 #ifndef __S__EVENT_H
 #define __S__EVENT_H
 
-#include "types.h"
-
 #include <map>
+#include <stdint.h>
 #include <string>
 
 class Game;
@@ -63,7 +62,7 @@ struct Event {
       // Reference this event
       void reference(EventReferencer* ref);
       void unreference(EventReferencer* ref);
-	typedef std::map<EventReferencer *, uint> EventReferencerMap;
+	typedef std::map<EventReferencer *, uint32_t> EventReferencerMap;
 	inline const EventReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 

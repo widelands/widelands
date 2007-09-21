@@ -20,6 +20,7 @@
 #ifndef included_ui_progressbar_h
 #define included_ui_progressbar_h
 
+#include <stdint.h>
 #include "ui_panel.h"
 
 namespace UI {
@@ -39,20 +40,20 @@ struct Progress_Bar : public Panel {
 	};
 
 public:
-	Progress_Bar(Panel* parent, int x, int y, int w, int h, uint orientation);
+	Progress_Bar(Panel* parent, int x, int y, int w, int h, uint32_t orientation);
 
-	uint get_state() {return m_state;}
-	void set_state(uint state);
-	uint get_total() {return m_total;}
-	void set_total(uint total);
+	uint32_t get_state() {return m_state;}
+	void set_state(uint32_t state);
+	uint32_t get_total() {return m_total;}
+	void set_total(uint32_t total);
 
 protected:
 	virtual void draw(RenderTarget* dst);
 
 private:
-	uint m_orientation;
-	uint m_state; ///< m_state is [0..m_total]
-	uint m_total; ///< maximum progress
+	uint32_t m_orientation;
+	uint32_t m_state; ///< m_state is [0..m_total]
+	uint32_t m_total; ///< maximum progress
 };
 };
 

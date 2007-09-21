@@ -21,6 +21,7 @@
 #define __ITEM_WARE_DESCR_H
 
 
+#include <stdint.h>
 #include <string>
 
 
@@ -53,7 +54,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 		virtual ~Item_Ware_Descr() {};
 
 		/// \return index to ware's icon inside picture stack
-		const uint get_icon() const throw() {return m_icon;}
+		const uint32_t get_icon() const throw() {return m_icon;}
 
 		/// \return ware's unique name
 		const std::string & name() const throw() {return m_name;}
@@ -74,7 +75,7 @@ private:
 		std::string m_descname;   //< Short localized name
 		std::string m_helptext;   //< Long descriptive text
 		std::string m_icon_fname; //< Filename of ware's main picture
-		uint        m_icon;       //< Index of ware's picture in picture stack
+		uint32_t        m_icon;       //< Index of ware's picture in picture stack
 };
 
 

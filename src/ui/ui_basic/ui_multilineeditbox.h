@@ -20,6 +20,7 @@
 #ifndef __S__MULTILINE_EDITBOX_H
 #define __S__MULTILINE_EDITBOX_H
 
+#include <stdint.h>
 #include "ui_multilinetextarea.h"
 #include "ui_signal.h"
 
@@ -33,7 +34,7 @@ struct Scrollbar;
  * Shitf + del or Shift + backspace deletes all text
  */
 struct Multiline_Editbox : public Multiline_Textarea {
-      Multiline_Editbox(Panel *parent, int x, int y, uint w, uint h, const char *text);
+      Multiline_Editbox(Panel *parent, int x, int y, uint32_t w, uint32_t h, const char *text);
       ~Multiline_Editbox();
 
       // Changed event
@@ -52,10 +53,10 @@ struct Multiline_Editbox : public Multiline_Textarea {
 
 private:
 	   static const int ms_darken_value=-20;
-      uint m_cur_pos;
-      uint m_char_pos;
-      uint m_line_pos;
-      uint m_maxchars;
+      uint32_t m_cur_pos;
+      uint32_t m_char_pos;
+      uint32_t m_line_pos;
+      uint32_t m_maxchars;
       bool m_needs_update;
 };
 };

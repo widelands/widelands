@@ -35,8 +35,8 @@ constructor
 */
 Edit_Box::Edit_Box
 	(Panel * const parent,
-	 const int x, const int y, const uint w, const uint h,
-	 const uint background,
+	 const int x, const int y, const uint32_t w, const uint32_t h,
+	 const uint32_t background,
 	 const int id)
 	:
 	Basic_Button

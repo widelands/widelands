@@ -26,6 +26,7 @@
 #include "world.h"
 
 #include <set>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -47,8 +48,8 @@ class Map_Loader;
 #define S2MF_MAGIC  "WORLD_V1.0"
 
 
-const ushort NUMBER_OF_MAP_DIMENSIONS=29;
-const ushort MAP_DIMENSIONS[] = {
+const uint16_t NUMBER_OF_MAP_DIMENSIONS=29;
+const uint16_t MAP_DIMENSIONS[] = {
    64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256,
    272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480,
    496, 512};
@@ -117,7 +118,7 @@ struct FindBobAlwaysTrue : public FindBob {
    virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint attrib) : m_attrib(attrib) {}
+	FindBobAttribute(uint32_t attrib) : m_attrib(attrib) {}
 
 	virtual bool accept(Bob *imm) const;
 
@@ -176,8 +177,8 @@ struct Map {
 
    // for editor
 	void create_empty_map
-		(const uint w = 64,
-		 const uint h = 64,
+		(const uint32_t w = 64,
+		 const uint32_t h = 64,
 		 const std::string worldname = std::string("greenland"));
 
    void load_graphics();
@@ -187,8 +188,8 @@ struct Map {
 
 	void set_nrplayers(const Uint8 nrplayers);
 
-	void set_starting_pos(const uint plnum, const Coords);
-	Coords get_starting_pos(const uint plnum) const
+	void set_starting_pos(const uint32_t plnum, const Coords);
+	Coords get_starting_pos(const uint32_t plnum) const
 	{return m_starting_pos[plnum - 1];}
 
 	void set_filename(const char *string);
@@ -215,53 +216,53 @@ struct Map {
    // when the map is loaded as an scenario.
 	const std::string & get_scenario_player_tribe(Player_Number);
 	const std::string & get_scenario_player_name (Player_Number);
-   void set_scenario_player_tribe(uint i, std::string);
-   void set_scenario_player_name(uint i, std::string);
+   void set_scenario_player_tribe(uint32_t i, std::string);
+   void set_scenario_player_name(uint32_t i, std::string);
 
 	BaseImmovable * get_immovable(const Coords) const;
-	uint find_bobs
+	uint32_t find_bobs
 		(const Area<FCoords>,
 		 std::vector<Bob *> * list,
 		 const FindBob & functor = FindBobAlwaysTrue());
-	uint find_reachable_bobs
+	uint32_t find_reachable_bobs
 		(const Area<FCoords>,
 		 std::vector<Bob *> * list,
 		 const CheckStep &,
 		 const FindBob & functor = FindBobAlwaysTrue());
-	uint find_immovables
+	uint32_t find_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
-	uint find_reachable_immovables
+	uint32_t find_reachable_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
 		 const CheckStep &,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
-	uint find_fields
+	uint32_t find_fields
 		(const Area<FCoords>,
 		 std::vector<Coords> * list,
 		 const FindNode & functor);
-	uint find_reachable_fields
+	uint32_t find_reachable_fields
 		(const Area<FCoords>,
 		 std::vector<Coords>* list,
 		 const CheckStep &,
 		 const FindNode &);
 
 	// Field logic
-	typedef uint Index;
+	typedef uint32_t Index;
 	static Index get_index(const Coords c, const X_Coordinate width);
 	Index max_index() const {return m_width * m_height;}
 	Field & operator[](const Index)  const;
 	Field & operator[](const Coords) const;
 	Field * get_field(const Index) const;
 	Field * get_field(const Coords) const;
-	const Field & get_field(const uint x, const uint y) const;
+	const Field & get_field(const uint32_t x, const uint32_t y) const;
 	FCoords get_fcoords(const Coords) const;
 	void normalize_coords(Coords *) const;
 	FCoords get_fcoords(Field &) const;
 	void get_coords(Field & f, Coords & c) const;
 
-	uint calc_distance(const Coords, const Coords) const;
+	uint32_t calc_distance(const Coords, const Coords) const;
 	int is_neighbour(const Coords, const Coords) const;
 
 	int calc_cost_estimate(const Coords, const Coords) const;
@@ -308,7 +309,7 @@ struct Map {
 		 const int persist,
 		 Path &,
 		 const CheckStep &,
-		 const uint flags = 0);
+		 const uint32_t flags = 0);
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
@@ -326,10 +327,10 @@ struct Map {
 	 * so it will be terribly slow. Use set_height for Area for that purpouse
 	 * instead.
 	 */
-	uint set_height(const FCoords, const Uint8  new_value);
+	uint32_t set_height(const FCoords, const Uint8  new_value);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint change_height(Area<FCoords>, const Sint16 difference);
+	uint32_t change_height(Area<FCoords>, const Sint16 difference);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in
@@ -344,7 +345,7 @@ struct Map {
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint set_height(Area<FCoords>, interval<Field::Height> height_interval);
+	uint32_t set_height(Area<FCoords>, interval<Field::Height> height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
 	int change_terrain
@@ -369,7 +370,7 @@ struct Map {
 	Military_Influence calc_influence(const Coords a, const Area<>) const;
 
 private:
-	void set_size(const uint w, const uint h);
+	void set_size(const uint32_t w, const uint32_t h);
 	void load_world();
 	void recalc_border(const FCoords);
 
@@ -413,7 +414,7 @@ private:
 	void recalc_brightness(FCoords);
 	void recalc_fieldcaps_pass1(FCoords);
 	void recalc_fieldcaps_pass2(FCoords);
-	void check_neighbour_heights(FCoords, uint & radius);
+	void check_neighbour_heights(FCoords, uint32_t & radius);
 	void increase_pathcycle();
 
 	template<typename functorT>
@@ -444,7 +445,7 @@ struct FindImmovableType : public FindImmovable {
 	int m_type;
 };
 struct FindImmovableAttribute : public FindImmovable {
-	FindImmovableAttribute(uint attrib) : m_attrib(attrib) {}
+	FindImmovableAttribute(uint32_t attrib) : m_attrib(attrib) {}
    virtual ~FindImmovableAttribute() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
@@ -459,12 +460,12 @@ struct FindImmovablePlayerImmovable : public FindImmovable {
 };
 
 struct FindNodeCaps : public FindNode {
-	FindNodeCaps(uchar mincaps) : m_mincaps(mincaps) {}
+	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
    virtual ~FindNodeCaps() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
 
-	uchar m_mincaps;
+	uint8_t m_mincaps;
 };
 
 // Accepts fields if they are accepted by all subfunctors.
@@ -524,33 +525,33 @@ struct FindNodeImmovableSize : public FindNode {
 		sizeBig    = 1 << 3
 	};
 
-	FindNodeImmovableSize(uint sizes) : m_sizes(sizes) {}
+	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
    virtual ~FindNodeImmovableSize() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
 
-	uint m_sizes;
+	uint32_t m_sizes;
 };
 
 // Accepts a field if it has an immovable with a given attribute
 struct FindNodeImmovableAttribute : public FindNode {
-	FindNodeImmovableAttribute(uint attrib) : m_attribute(attrib) {}
+	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
    virtual ~FindNodeImmovableAttribute() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
 
-	uint m_attribute;
+	uint32_t m_attribute;
 };
 
 
 // Accepts a field if it has the given resource
 struct FindNodeResource : public FindNode {
-	FindNodeResource(uchar res) : m_resource(res) {}
+	FindNodeResource(uint8_t res) : m_resource(res) {}
    virtual ~FindNodeResource() {}  // make gcc shut up
 
 	virtual bool accept(const Map &, const FCoords coord) const;
 
-	uchar m_resource;
+	uint8_t m_resource;
 };
 
 
@@ -564,14 +565,14 @@ Simply check whether the movecaps are matching (basic exceptions for water bobs
 moving onto the shore).
 */
 struct CheckStepDefault : public CheckStep {
-	CheckStepDefault(uchar movecaps) : m_movecaps(movecaps) {}
+	CheckStepDefault(uint8_t movecaps) : m_movecaps(movecaps) {}
 	virtual ~CheckStepDefault() {} //  make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	uchar m_movecaps;
+	uint8_t m_movecaps;
 };
 
 
@@ -583,14 +584,14 @@ from a walkable field onto an unwalkable one.
 If onlyend is true, we can only do this on the final step.
 */
 struct CheckStepWalkOn : public CheckStep {
-	CheckStepWalkOn(uchar movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
+	CheckStepWalkOn(uint8_t movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
 	virtual ~CheckStepWalkOn() {} //  make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	uchar m_movecaps;
+	uint8_t m_movecaps;
 	bool  m_onlyend;
 };
 
@@ -608,7 +609,7 @@ forbidden is an array of coordinates that must not be crossed by the road.
 struct CheckStepRoad : public CheckStep {
 	CheckStepRoad
 		(const Player & player,
-		 const uchar movecaps,
+		 const uint8_t movecaps,
 		 const std::set<Coords, Coords::ordering_functor> * const
 		 forbidden_locations = 0)
 		:
@@ -709,7 +710,7 @@ inline Field * Map::get_field(const Index i) const {return &m_fields[i];}
 inline Field * Map::get_field(const Coords c) const
 {return get_field(get_index(c, m_width));}
 
-inline const Field & Map::get_field(const uint x, const uint y) const
+inline const Field & Map::get_field(const uint32_t x, const uint32_t y) const
 {return m_fields[y * m_width + x];}
 
 inline FCoords Map::get_fcoords(const Coords c) const

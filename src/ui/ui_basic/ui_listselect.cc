@@ -37,7 +37,7 @@ Args: parent  parent panel
       align   alignment of text inside the Listselect
 */
 BaseListselect::BaseListselect
-(Panel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
+(Panel *parent, int x, int y, uint32_t w, uint32_t h, Align align, bool show_check)
 :
 Panel(parent, x, y, w, h),
 m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
@@ -57,7 +57,7 @@ m_show_check(show_check)
 	m_scrollbar->set_steps(1);
 
 	if (show_check) {
-		uint pic_h;
+		uint32_t pic_h;
 		m_check_picid = g_gr->get_picture(PicMod_Game,  "pics/list_selected.png");
 		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
 		if (pic_h > m_lineheight) m_lineheight = pic_h;
@@ -110,7 +110,7 @@ Args: name   name that will be displayed
 */
 void BaseListselect::add
 (const char * const name,
- uint entry,
+ uint32_t entry,
  const int picid,
  const bool sel)
 {
@@ -122,11 +122,11 @@ void BaseListselect::add
 	er.use_clr = false;
 	strcpy(er.name, name);
 
-	uint entry_height = 0;
+	uint32_t entry_height = 0;
 	if (picid==-1) {
 		entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
 	} else {
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 		entry_height = (h >= g_fh->get_fontheight(UI_FONT_SMALL))
 			? h : g_fh->get_fontheight(UI_FONT_SMALL);
@@ -149,7 +149,7 @@ void BaseListselect::add
 /*
  * Switch two entries
  */
-void BaseListselect::switch_entries(const uint m, const uint n)
+void BaseListselect::switch_entries(const uint32_t m, const uint32_t n)
 {
 	assert(m < size());
 	assert(n < size());
@@ -172,10 +172,10 @@ void BaseListselect::switch_entries(const uint m, const uint n)
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void BaseListselect::sort(const uint Begin, uint End)
+void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 {
 	if (End > size()) End = size();
-	for (uint i = Begin; i < End; ++i) for (uint j = i; j < End; ++j) {
+	for (uint32_t i = Begin; i < End; ++i) for (uint32_t j = i; j < End; ++j) {
 		Entry_Record * const eri = m_entry_records[i];
 		Entry_Record * const erj = m_entry_records[j];
 		if (strcmp(eri->name, erj->name) > 0)  {
@@ -211,7 +211,7 @@ void BaseListselect::set_scrollpos(const int i)
  * Define a special color that will be used to display the item at the given
  * index.
  */
-void BaseListselect::set_entry_color(const uint n, const RGBColor col) throw ()
+void BaseListselect::set_entry_color(const uint32_t n, const RGBColor col) throw ()
 {
 	assert(n < m_entry_records.size());
 
@@ -226,7 +226,7 @@ void BaseListselect::set_entry_color(const uint n, const RGBColor col) throw ()
  *
  * Args: i  the entry to select
  */
-void BaseListselect::select(const uint i)
+void BaseListselect::select(const uint32_t i)
 {
 	if (m_selection == i)
 		return;
@@ -258,7 +258,7 @@ bool BaseListselect::has_selection() const throw()
  *
  * Throws an exception when no item is selected.
  */
-uint BaseListselect::get_selected() const throw (No_Selection)
+uint32_t BaseListselect::get_selected() const throw (No_Selection)
 {
 	if (m_selection == no_selection_index())
 		throw No_Selection();
@@ -280,12 +280,12 @@ void BaseListselect::remove_selected() throw (No_Selection)
 }
 
 
-uint BaseListselect::get_lineheight() const throw ()
+uint32_t BaseListselect::get_lineheight() const throw ()
 {
 	return m_lineheight + 2;
 }
 
-uint BaseListselect::get_eff_w() const throw ()
+uint32_t BaseListselect::get_eff_w() const throw ()
 {
 	return get_w();
 }
@@ -297,8 +297,8 @@ Redraw the listselect box
 void BaseListselect::draw(RenderTarget* dst)
 {
 	// draw text lines
-	const uint lineheight = get_lineheight();
-	uint idx = m_scrollpos / lineheight;
+	const uint32_t lineheight = get_lineheight();
+	uint32_t idx = m_scrollpos / lineheight;
 	int y = 1 + idx*lineheight - m_scrollpos;
 
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
@@ -345,7 +345,7 @@ void BaseListselect::draw(RenderTarget* dst)
 
 		// Now draw pictures
 		if (er.picid != -1) {
-			uint w, h;
+			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
 			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
@@ -398,7 +398,7 @@ bool BaseListselect::handle_mouserelease(const Uint8 btn, int, int)
 /*
  * Remove entry
  */
-void BaseListselect::remove(const uint i)
+void BaseListselect::remove(const uint32_t i)
 {
 	assert(i < m_entry_records.size());
 
@@ -415,7 +415,7 @@ void BaseListselect::remove(const uint i)
  */
 void BaseListselect::remove(const char * const str)
 {
-	for (uint i=0; i<m_entry_records.size(); i++) {
+	for (uint32_t i=0; i<m_entry_records.size(); i++) {
 		if (!strcmp(m_entry_records[i]->name, str)) {
 			remove(i);
 			return;

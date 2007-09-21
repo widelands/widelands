@@ -20,13 +20,13 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include "types.h"
 #include "compile_assert.h"
 
 #include <SDL_types.h>
 
 #include <cmath>
 #include <limits>
+#include <stdint.h>
 
 struct Point {
 	Point() throw () {}
@@ -72,12 +72,12 @@ inline Point middle(const Point a, const Point b) throw ()
 
 struct Rect : public Point {
 	Rect() throw () {}
-	Rect(const Point p, const uint W, const uint H) throw ()
+	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
 		: Point(p), w(W), h(H)
 	{}
 	Point bottom_left() const {return *this + Point(w, h);}
 
-	uint w, h;
+	uint32_t w, h;
 };
 
 

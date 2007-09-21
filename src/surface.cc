@@ -51,7 +51,7 @@ const SDL_PixelFormat & Surface::format() const {
 void * Surface::get_pixels() const throw () {
 	assert(m_surface);
 	return
-		static_cast<uchar *>(m_surface->pixels)
+		static_cast<uint8_t *>(m_surface->pixels)
 		+
 		m_offsy * m_surface->pitch
 		+
@@ -68,7 +68,7 @@ void Surface::unlock() {
 		SDL_UnlockSurface(m_surface);
 }
 
-ulong Surface::get_pixel(uint x, uint y) {
+uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 	x+= m_offsx;
 	y+= m_offsy;
 
@@ -96,7 +96,7 @@ ulong Surface::get_pixel(uint x, uint y) {
 	return 0; // Should never be here
 }
 
-void Surface::set_pixel(uint x, uint y, const Uint32 clr) {
+void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 	x+= m_offsx;
 	y+= m_offsy;
 
@@ -143,7 +143,7 @@ void Surface::draw_field
  Field * const f, Field * const rf, Field * const fl, Field * const rfl,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
- uchar roads,
+ uint8_t roads,
  Sint8            f_brightness,
  Sint8            r_brightness,
  Sint8           bl_brightness,

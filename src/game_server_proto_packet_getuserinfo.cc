@@ -41,7 +41,7 @@ Game_Server_Protocol_Packet_GetUserInfo::
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_GetUserInfo::get_id() {
+uint16_t Game_Server_Protocol_Packet_GetUserInfo::get_id() {
    return GGSPP_GETUSERINFO;
 }
 
@@ -56,7 +56,7 @@ void Game_Server_Protocol_Packet_GetUserInfo::send(Network_Buffer* buffer) {
  * Handle reply
  */
 void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uchar flags = buf->get_8();
+   uint8_t flags = buf->get_8();
 
 	if (flags == UI_UNKNOWN) {
       char buffer[1024];

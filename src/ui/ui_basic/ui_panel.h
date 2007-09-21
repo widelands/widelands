@@ -25,7 +25,7 @@
 #include "ui_object.h"
 
 #include <SDL_types.h>
-#include <stdint.h> //  Because old version of SDL_types.h do not include this.
+#include <stdint.h>
 
 #include <cassert>
 #include <string>
@@ -58,7 +58,7 @@ struct Panel : public Object {
 
 	Panel
 		(Panel * const nparent,
-		 const int nx, const int ny, const uint nw, const uint nh,
+		 const int nx, const int ny, const uint32_t nw, const uint32_t nh,
 		 const std::string & tooltip_text = std::string());
 	virtual ~Panel();
 
@@ -75,7 +75,7 @@ struct Panel : public Object {
 	virtual void end();
 
 	// Geometry
-	void set_size(const uint nw, const uint nh);
+	void set_size(const uint32_t nw, const uint32_t nh);
 	void set_pos(const Point);
 	virtual void move_inside_parent();
 
@@ -85,22 +85,22 @@ struct Panel : public Object {
 	inline int get_h() const {return _h;}
 
 	virtual bool is_snap_target() const {return false;}
-	ushort get_border_snap_distance() const {return _border_snap_distance;}
-	void set_border_snap_distance(const uchar value) {_border_snap_distance = value;}
-	uchar get_panel_snap_distance () const {return _panel_snap_distance;}
-	void set_panel_snap_distance(const uchar value) {_panel_snap_distance = value;}
+	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
+	void set_border_snap_distance(const uint8_t value) {_border_snap_distance = value;}
+	uint8_t get_panel_snap_distance () const {return _panel_snap_distance;}
+	void set_panel_snap_distance(const uint8_t value) {_panel_snap_distance = value;}
 	bool get_snap_windows_only_when_overlapping() const {return _flags & pf_snap_windows_only_when_overlapping;}
 	void set_snap_windows_only_when_overlapping(const bool on = true);
 	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
 	void set_dock_windows_to_edges(const bool on = true);
-	void set_inner_size(uint nw, uint nh);
+	void set_inner_size(uint32_t nw, uint32_t nh);
 	void fit_inner(Panel* inner);
-	void set_border(uint l, uint r, uint t, uint b);
+	void set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b);
 
-	inline uint get_lborder() const {return _lborder;}
-	inline uint get_rborder() const {return _rborder;}
-	inline uint get_tborder() const {return _tborder;}
-	inline uint get_bborder() const {return _bborder;}
+	inline uint32_t get_lborder() const {return _lborder;}
+	inline uint32_t get_rborder() const {return _rborder;}
+	inline uint32_t get_tborder() const {return _tborder;}
+	inline uint32_t get_bborder() const {return _bborder;}
 
 	inline int get_inner_w() const {return _w-(_lborder+_rborder);}
 	inline int get_inner_h() const {return _h-(_tborder+_bborder);}
@@ -185,14 +185,14 @@ private:
 	Panel *_mousein; // child panel the mouse is in
 	Panel *_focus; // keyboard focus
 
-	uint _flags;
-	uint _cache;
+	uint32_t _flags;
+	uint32_t _cache;
 	bool _needdraw;
 
 	int _x, _y;
-	uint _w, _h;
-	uint _lborder, _rborder, _tborder, _bborder;
-	uchar _border_snap_distance, _panel_snap_distance;
+	uint32_t _w, _h;
+	uint32_t _lborder, _rborder, _tborder, _bborder;
+	uint8_t _border_snap_distance, _panel_snap_distance;
 
 	bool _running;
 	int _retcode;
@@ -217,7 +217,7 @@ private:
 	static Panel *_modal;
 	static Panel *_g_mousegrab;
 	static Panel *_g_mousein;
-	static uint s_default_cursor;
+	static uint32_t s_default_cursor;
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

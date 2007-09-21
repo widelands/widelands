@@ -20,6 +20,7 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
+#include <stdint.h>
 #include "ui_button.h"
 #include "ui_unique_window.h"
 
@@ -51,7 +52,7 @@ private:
 		View
 			(UI::Panel & parent,
 			 const  int x, const  int y,
-			 const uint w, const uint h,
+			 const uint32_t w, const uint32_t h,
 			 Interactive_Base &);
 
 		void set_view_pos(const int x, const int y);
@@ -64,15 +65,15 @@ private:
 	private:
 		Interactive_Base & m_iabase;
 		int                m_viewx, m_viewy;
-		uint               m_pic_map_spot;
+		uint32_t               m_pic_map_spot;
 	public:
 		char flags;
 	};
 
-	uint number_of_buttons_per_row() const throw ();
-	uint number_of_button_rows    () const throw ();
-	uint but_w                    () const throw ();
-	uint but_h                    () const throw ();
+	uint32_t number_of_buttons_per_row() const throw ();
+	uint32_t number_of_button_rows    () const throw ();
+	uint32_t but_w                    () const throw ();
+	uint32_t but_h                    () const throw ();
 
 	View     m_view;
 	UI::IDButton<MiniMap, Layers> button_terrn;

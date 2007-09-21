@@ -22,6 +22,7 @@
 
 #include "bob.h"
 #include "immovable.h"
+#include <stdint.h>
 
 
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (chicked-and-egg problem)
@@ -70,7 +71,7 @@ public:
 		const std::string & descname() const throw () {return m_descname;}
 		inline std::string get_helptext() const {return m_helptext;}
 
-		uint get_menu_pic() const throw () {return m_menu_pic;}
+		uint32_t get_menu_pic() const throw () {return m_menu_pic;}
 		const DirAnimations & get_walk_anims() const throw ()
 				{return m_walk_anims;}
 		const DirAnimations & get_right_walk_anims(const bool carries_ware)
@@ -101,7 +102,7 @@ protected:
 		std::string   m_descname;       ///< Descriptive name
 		std::string   m_helptext;       ///< Short (tooltip-like) help text
 		char        * m_menu_pic_fname; ///< Filename of worker's icon
-		uint          m_menu_pic;       ///< Pointer to icon into picture stack
+		uint32_t          m_menu_pic;       ///< Pointer to icon into picture stack
 		DirAnimations m_walk_anims;
 		DirAnimations m_walkload_anims;
 		bool          m_buildable;

@@ -29,6 +29,7 @@
 #include "graphic.h"
 #include "overlay_manager.h"
 
+#include <stdint.h>
 #include <stdio.h>
 
 #define width  20
@@ -112,9 +113,9 @@ m_increase_tool(increase_tool)
 	const Resource_Descr::Index nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
-	uint resource_pic_max_width = 0, resource_pic_max_height = 0;
+	uint32_t resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Resource_Descr::Index i = 0; i < nr_resources; ++i) {
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture
 			 (PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str()),
@@ -123,7 +124,7 @@ m_increase_tool(increase_tool)
 		resource_pic_max_height = std::max(resource_pic_max_height, h);
 	}
 
-	const uint resources_in_row =
+	const uint32_t resources_in_row =
 		(get_inner_w() - 2 * hmargin() + spacing())
 		/
 		(resource_pic_max_width + spacing());
@@ -133,7 +134,7 @@ m_increase_tool(increase_tool)
 	m_radiogroup.clicked.set
 		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
 
-	uint cur_x = 0;
+	uint32_t cur_x = 0;
 	Point pos
 		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
 	for

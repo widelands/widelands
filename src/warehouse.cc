@@ -459,7 +459,7 @@ void Warehouse::cleanup(Editor_Game_Base* gg)
          m_incorporated_workers.erase(m_incorporated_workers.begin());
 		}
 	}
-	if (const uint conquer_raduis = get_conquers())
+	if (const uint32_t conquer_raduis = get_conquers())
 		gg->unconquer_area
 			(Player_Area<Area<FCoords> >
 			 (owner().get_player_number(),
@@ -489,7 +489,7 @@ killing useless tribesmen! The Borg? Or just like Soylent Green?
 Or maybe I should just stop writing comments that late at night ;-)
 ===============
 */
-void Warehouse::act(Game* g, uint data)
+void Warehouse::act(Game* g, uint32_t data)
 {
 	const Tribe_Descr & tribe = owner().tribe();
 	if (g->get_gametime() - m_next_carrier_spawn >= 0) {
@@ -559,7 +559,7 @@ void Warehouse::set_economy(Economy* e)
 	m_supply->set_economy(e);
 	Building::set_economy(e);
 
-	for (uint i = 0; i < m_requests.size(); i++)
+	for (uint32_t i = 0; i < m_requests.size(); i++)
 		m_requests[i]->set_economy(e);
 
 	if (e)

@@ -28,7 +28,7 @@
 /*
  * Returns true if this object has already been inserted
  */
-bool Widelands_Map_Map_Object_Loader::is_object_known(uint n)
+bool Widelands_Map_Map_Object_Loader::is_object_known(uint32_t n)
 {
 	Reverse_Map_Object_Map::iterator i;
 	i = m_objects.find(n);
@@ -40,12 +40,12 @@ bool Widelands_Map_Map_Object_Loader::is_object_known(uint n)
  */
 void Widelands_Map_Map_Object_Loader::register_object
 		(Editor_Game_Base* egbase,
-		 uint n,
+		 uint32_t n,
 		 Map_Object* obj)
 {
 	assert(!is_object_known(n));
 
-	m_objects.insert(std::pair<uint, Map_Object*>(n, obj));
+	m_objects.insert(std::pair<uint32_t, Map_Object*>(n, obj));
 	m_loaded_obj[obj] = false;
 }
 
@@ -53,7 +53,7 @@ void Widelands_Map_Map_Object_Loader::register_object
  * Returns the file index for this map object. This is used on load
  * to regenerate the depencies between the objects
  */
-Map_Object* Widelands_Map_Map_Object_Loader::get_object_by_file_index(uint n)
+Map_Object* Widelands_Map_Map_Object_Loader::get_object_by_file_index(uint32_t n)
 {
 	// This check should rather be an assert(), but we get more information
 	// from a throw and time's not soo much an issue here

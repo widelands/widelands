@@ -26,6 +26,7 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
@@ -59,7 +60,7 @@ throw (_wexception)
 
 	const Uint16 packet_version=fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) for (;;) {
-         uint reg=fr.Unsigned32();
+         uint32_t reg=fr.Unsigned32();
          if (reg==0xffffffff) break; // end of wares
 		if
 			(WareInstance * const ware = dynamic_cast<WareInstance *>
@@ -158,9 +159,9 @@ throw (_wexception)
 
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
-   std::vector<uint> ids;
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
+   std::vector<uint32_t> ids;
+   for (uint16_t y=0; y<map->get_height(); y++) {
+      for (uint16_t x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x, y));
 
          // First, check for Flags

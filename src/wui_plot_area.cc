@@ -54,7 +54,7 @@ static const int max_x[] = {
    16
 };
 
-static const uint time_in_ms[] = {
+static const uint32_t time_in_ms[] = {
    15*60*1000,
    30*60*1000,
    1*60*60*1000,
@@ -141,20 +141,20 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
    dst->draw_line(get_inner_w()-space_at_right, spacing + ((get_inner_h()-space_at_bottom)-spacing)/2, get_inner_w()-space_at_right-3,
          spacing + ((get_inner_h()-space_at_bottom)-spacing)/2, LINE_COLOR);
 
-   uint max = 0;
+   uint32_t max = 0;
    // Find the maximum value
    if (m_plotmode == PLOTMODE_ABSOLUTE)  {
-      for (uint i = 0; i < m_plotdata.size(); i++) {
+      for (uint32_t i = 0; i < m_plotdata.size(); i++) {
          if (!m_plotdata[i].showplot) continue;
-         for (uint l = 0; l < m_plotdata[i].dataset->size(); l++)
+         for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); l++)
             if (max < (*m_plotdata[i].dataset)[l])
                max = (*m_plotdata[i].dataset)[l];
 		}
 	} else {
-		for (uint plot = 0; plot < m_plotdata.size(); ++plot) {
+		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot) {
          if (!m_plotdata[plot].showplot) continue;
 
-         const std::vector<uint>* dataset = m_plotdata[plot].dataset;
+         const std::vector<uint32_t>* dataset = m_plotdata[plot].dataset;
 
          // How many do we take together
 			const int how_many = static_cast<int>
@@ -164,9 +164,9 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 				 /
 				 static_cast<float>(m_sample_rate));
 
-         uint add = 0;
+         uint32_t add = 0;
          // Relative data, first entry is always zero
-         for (uint i = 0; i < dataset->size(); i++) {
+         for (uint32_t i = 0; i < dataset->size(); i++) {
             add += (*dataset)[i];
             if (! ((i+1) % how_many)) {
                if (add > max) max = add;
@@ -195,13 +195,13 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 		(static_cast<float>(time_in_ms[m_time])
 		 /
 		 static_cast<float>(m_sample_rate));
-	for (uint plot = 0; plot < m_plotdata.size(); ++plot) {
+	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot) {
       if (!m_plotdata[plot].showplot) continue;
 
       RGBColor color = m_plotdata[plot].plotcolor;
-      const std::vector<uint>* dataset = m_plotdata[plot].dataset;
+      const std::vector<uint32_t>* dataset = m_plotdata[plot].dataset;
 
-      std::vector<uint> m_data;
+      std::vector<uint32_t> m_data;
 		if (m_plotmode == PLOTMODE_RELATIVE) {
          // How many do we take together
 			const int how_many = static_cast<int>
@@ -211,10 +211,10 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 				 /
 				 static_cast<float>(m_sample_rate));
 
-         uint add = 0;
+         uint32_t add = 0;
          // Relative data, first entry is always zero
          m_data.push_back(0);
-         for (uint i = 0; i < dataset->size(); i++) {
+         for (uint32_t i = 0; i < dataset->size(); i++) {
             add += (*dataset)[i];
             if (! ((i+1) % how_many)) {
                m_data.push_back(add);
@@ -255,7 +255,7 @@ void WUIPlot_Area::draw(RenderTarget* dst) {
 /*
  * Register a new plot data stream
  */
-void WUIPlot_Area::register_plot_data(uint id, const std::vector<uint>* data, RGBColor color) {
+void WUIPlot_Area::register_plot_data(uint32_t id, const std::vector<uint32_t>* data, RGBColor color) {
    if (id >= m_plotdata.size()) {
       m_plotdata.resize(id+1);
 	}
@@ -268,7 +268,7 @@ void WUIPlot_Area::register_plot_data(uint id, const std::vector<uint>* data, RG
 /*
  * Show this plot data?
  */
-void WUIPlot_Area::show_plot(uint id, bool t) {
+void WUIPlot_Area::show_plot(uint32_t id, bool t) {
    assert(id < m_plotdata.size());
    m_plotdata[id].showplot = t;
 };
@@ -281,6 +281,6 @@ void WUIPlot_Area::set_time(TIME id) {m_time = id;}
 /*
  * Set sample rate the data uses
  */
-void WUIPlot_Area::set_sample_rate(uint id) {
+void WUIPlot_Area::set_sample_rate(uint32_t id) {
    m_sample_rate = id;
 }

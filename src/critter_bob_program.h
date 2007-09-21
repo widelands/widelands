@@ -21,6 +21,7 @@
 #define __S__CRITTER_BOB_PROGRAM
 
 #include "bob.h"
+#include <stdint.h>
 
 struct Critter_BobAction {
 	typedef bool (Critter_Bob::*execute_t)(Game* g, Bob::State* state, const Critter_BobAction* act);
@@ -55,7 +56,7 @@ struct Critter_BobProgram : public BobProgramBase {
 	int get_size() const {return m_actions.size();}
 	const Critter_BobAction* get_action(int idx) const {
 		assert(idx >= 0);
-		assert(static_cast<uint>(idx) < m_actions.size());
+		assert(static_cast<uint32_t>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 

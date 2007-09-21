@@ -21,6 +21,7 @@
 #define included_animation_gfx_h
 
 #include "player.h"
+#include <stdint.h>
 
 struct Surface;
 
@@ -47,7 +48,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	}
 
 private:
-	void encode(uchar plyr, const RGBColor*);
+	void encode(uint8_t plyr, const RGBColor*);
 
 	Frames   * m_plrframes;
 	EncodeData m_encodedata;

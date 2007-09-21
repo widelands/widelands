@@ -21,6 +21,7 @@
 #define __S__WUI_PLOT_AREA__H
 
 #include "rgbcolor.h"
+#include <stdint.h>
 #include "ui_panel.h"
 
 #include <vector>
@@ -54,18 +55,18 @@ struct WUIPlot_Area : public UI::Panel {
 
       // Set the time
 	void set_time(TIME);
-      void set_sample_rate(uint id); // in milliseconds
+      void set_sample_rate(uint32_t id); // in milliseconds
 
       // set what to plot
-      void register_plot_data(uint id, const std::vector<uint>* data, RGBColor clr);
-      void show_plot(uint id, bool t);
+      void register_plot_data(uint32_t id, const std::vector<uint32_t>* data, RGBColor clr);
+      void show_plot(uint32_t id, bool t);
 
       // set plotmode
       void set_plotmode(int id) {m_plotmode = id;}
 
 private:
 	struct __plotdata {
-         const std::vector<uint>* dataset;
+         const std::vector<uint32_t>* dataset;
          bool  showplot;
          RGBColor plotcolor;
 	};

@@ -24,6 +24,7 @@
 #include "filewrite.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
@@ -56,13 +57,13 @@ throw
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-      for (ushort y=0; y<map->get_height(); y++) {
-         for (ushort x=0; x<map->get_width(); x++) {
-            uchar exists=fr.Unsigned8();
+      for (uint16_t y=0; y<map->get_height(); y++) {
+         for (uint16_t x=0; x<map->get_width(); x++) {
+            uint8_t exists=fr.Unsigned8();
             if (exists) {
                // Ok, now read all the additional data
-               uchar owner=fr.Unsigned8();
-               uint serial=fr.Unsigned32();
+               uint8_t owner=fr.Unsigned8();
+               uint32_t serial=fr.Unsigned32();
 
                // No flag lives on more than one place
                assert(!ol->is_object_known(serial));
@@ -107,8 +108,8 @@ throw (_wexception)
    // Write flags and owner, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
+   for (uint16_t y=0; y<map->get_height(); y++) {
+      for (uint16_t x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x, y))->get_immovable();
          // We only write flags
          if (immovable && immovable->get_type()==Map_Object::FLAG) {
@@ -118,7 +119,7 @@ throw (_wexception)
             // this flag shouldn't be registered.
             assert(!os->is_object_known(flag));
 
-            uint serial=os->register_object(flag);
+            uint32_t serial=os->register_object(flag);
 
             fw.Unsigned8(1);
             fw.Unsigned8(flag->get_owner()->get_player_number());

@@ -20,7 +20,7 @@
 #ifndef __S__QUEUE_CMD_FACTORY_H
 #define __S__QUEUE_CMD_FACTORY_H
 
-#include "types.h"
+#include <stdint.h>
 
 class GameLogicCommand;
 
@@ -29,7 +29,7 @@ class GameLogicCommand;
  * from the queue command file ids
  */
 struct Queue_Cmd_Factory {
-	static GameLogicCommand* create_correct_queue_command(uint id);
+	static GameLogicCommand* create_correct_queue_command(uint32_t id);
 };
 
 #endif

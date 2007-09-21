@@ -22,6 +22,7 @@
 
 #include "game_server_proto_packet.h"
 
+#include <stdint.h>
 #include <string>
 
 /*
@@ -32,7 +33,7 @@ struct Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
 	Game_Server_Protocol_Packet_Hello(const std::string & name);
       virtual ~Game_Server_Protocol_Packet_Hello();
 
-      virtual ushort get_id();
+      virtual uint16_t get_id();
 
 	virtual void recv(Game_Server_Connection *, Network_Buffer *) {}
       virtual void send(Network_Buffer* buffer);

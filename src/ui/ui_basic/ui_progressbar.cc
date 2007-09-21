@@ -31,7 +31,7 @@ namespace UI {
 /**
 Initialize the progress bar.
 */
-Progress_Bar::Progress_Bar(Panel* parent, int x, int y, int w, int h, uint orientation)
+Progress_Bar::Progress_Bar(Panel* parent, int x, int y, int w, int h, uint32_t orientation)
 	: Panel(parent, x, y, w, h)
 {
 	m_orientation = orientation;
@@ -44,7 +44,7 @@ Progress_Bar::Progress_Bar(Panel* parent, int x, int y, int w, int h, uint orien
 /**
 Set the current state of progress.
 */
-void Progress_Bar::set_state(uint state)
+void Progress_Bar::set_state(uint32_t state)
 {
 	m_state = state;
 
@@ -55,7 +55,7 @@ void Progress_Bar::set_state(uint state)
 /**
 Set the maximum state
 */
-void Progress_Bar::set_total(uint total)
+void Progress_Bar::set_total(uint32_t total)
 {
 	assert(total);
 	m_total = total;
@@ -85,8 +85,8 @@ void Progress_Bar::draw(RenderTarget* dst)
 	// Draw the actual bar
 	if (m_orientation == Horizontal)
 	{
-		const uint w = static_cast<uint>(get_w() * fraction);
-		assert(w <= static_cast<uint>(get_w()));
+		const uint32_t w = static_cast<uint32_t>(get_w() * fraction);
+		assert(w <= static_cast<uint32_t>(get_w()));
 
 		dst->fill_rect(Rect(Point(0, 0), w, get_h()), color);
 		dst->fill_rect
@@ -94,7 +94,7 @@ void Progress_Bar::draw(RenderTarget* dst)
 	}
 	else
 	{
-		const uint h = static_cast<uint>(get_h() * (1.0 - fraction));
+		const uint32_t h = static_cast<uint32_t>(get_h() * (1.0 - fraction));
 
 		dst->fill_rect(Rect(Point(0, 0), get_w(), h), RGBColor(0, 0, 0));
 		dst->fill_rect(Rect(Point(0, h), get_w(), get_h() - h), color);
@@ -104,7 +104,7 @@ void Progress_Bar::draw(RenderTarget* dst)
 	char buffer[30];
 
 	snprintf
-		(buffer, sizeof(buffer), "%u%%", static_cast<uint>(fraction * 100));
+		(buffer, sizeof(buffer), "%u%%", static_cast<uint32_t>(fraction * 100));
 
 	g_fh->draw_string
 		(*dst,

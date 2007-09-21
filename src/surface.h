@@ -22,6 +22,7 @@
 
 #include "geometry.h"
 #include "rgbcolor.h"
+#include <stdint.h>
 #include "texture.h"
 
 struct Editor_Game_Base;
@@ -41,7 +42,7 @@ class Surface {
 	SDL_Surface* m_surface;
 	int m_offsx;
 	int m_offsy;
-	uint m_w, m_h;
+	uint32_t m_w, m_h;
 
 public:
 	Surface() : m_surface(0), m_offsx(0), m_offsy(0) {}
@@ -53,8 +54,8 @@ public:
 	SDL_Surface* get_sdl_surface() {return m_surface;}
 
 	/// Get width and height
-	uint get_w() const {return m_w;}
-	uint get_h() const {return m_h;}
+	uint32_t get_w() const {return m_w;}
+	uint32_t get_h() const {return m_h;}
 	void update();
 
 	/// Save a bitmap of this to a file
@@ -65,7 +66,7 @@ public:
 	void force_disable_alpha();
 	const SDL_PixelFormat * get_format() const;
 	const SDL_PixelFormat & format() const;
-	ushort get_pitch() const {return m_surface->pitch;}
+	uint16_t get_pitch() const {return m_surface->pitch;}
 	void * get_pixels() const throw ();
 
 	/// Lock
@@ -73,8 +74,8 @@ public:
 	void unlock();
 
 	/// For the slowest: Indirect pixel access
-	ulong get_pixel(uint x, uint y);
-	void set_pixel(uint x, uint y, const Uint32 clr);
+	uint32_t get_pixel(uint32_t x, uint32_t y);
+	void set_pixel(uint32_t x, uint32_t y, const Uint32 clr);
 
 	void clear();
 	void draw_rect(const Rect, const RGBColor);
@@ -89,7 +90,7 @@ public:
 		 const Player * const,
 		 const Rect                rc,
 		 const Point               viewpoint,
-		 const uint                flags);
+		 const uint32_t                flags);
 
 
 	/// sw16_terrain.cc
@@ -98,7 +99,7 @@ public:
 		 Field * const f, Field * const rf, Field * const fl, Field * const rfl,
 		 const int posx, const int rposx, const int posy,
 		 const int blposx, const int rblposx, const int blposy,
-		 uchar roads,
+		 uint8_t roads,
 		 Sint8 f_brightness,
 		 Sint8 r_brightness,
 		 Sint8 bl_brightness,

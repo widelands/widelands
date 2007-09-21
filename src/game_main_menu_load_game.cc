@@ -120,7 +120,7 @@ void Game_Main_Menu_Load_Game::clicked_cancel() {
 /*
  * called when a item is selected
  */
-void Game_Main_Menu_Load_Game::selected(uint) {
+void Game_Main_Menu_Load_Game::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
    FileSystem* fs = g_fs->MakeSubFileSystem(name);
@@ -134,7 +134,7 @@ void Game_Main_Menu_Load_Game::selected(uint) {
    m_name->set_text(gpdp.get_mapname());
 
    char buf[200];
-   uint gametime = gpdp.get_gametime();
+   uint32_t gametime = gpdp.get_gametime();
 
    int hours = gametime / 3600000;
    gametime -= hours * 3600000;
@@ -149,7 +149,7 @@ void Game_Main_Menu_Load_Game::selected(uint) {
 /*
  * An Item has been doubleclicked
  */
-void Game_Main_Menu_Load_Game::double_clicked(uint) {clicked_ok();}
+void Game_Main_Menu_Load_Game::double_clicked(uint32_t) {clicked_ok();}
 
 /**
  * fill the file list

@@ -24,6 +24,7 @@
 #include "filewrite.h"
 #include "immovable.h"
 #include "map.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
@@ -64,7 +65,7 @@ throw (_wexception)
 	const Uint16 packet_version=fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
 		for (;;) {
-         uint reg=fr.Unsigned32();
+         uint32_t reg=fr.Unsigned32();
          if (reg==0xffffffff) break;
 			const char * const owner = fr.CString ();
 			const char * const name  = fr.CString ();

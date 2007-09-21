@@ -255,9 +255,9 @@ Calculate statistic.
 */
 void ProductionSite::calc_statistics()
 {
-	uint pos;
-	uint ok = 0;
-	uint lastOk = 0;
+	uint32_t pos;
+	uint32_t ok = 0;
+	uint32_t lastOk = 0;
 
 	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
 		if (m_statistics[pos]) {
@@ -313,7 +313,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 		// Request worker
 		if (!m_workers.size()) {
 			const std::vector<ProductionSite_Descr::Worker_Info>* info=descr().get_workers();
-         uint i;
+         uint32_t i;
          int j;
          for (i=0; i<info->size(); i++)
             for (j=0; j< ((*info)[i]).how_many; j++)
@@ -323,7 +323,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 		// Init input ware queues
 		const std::vector<Input>* inputs = descr().get_inputs();
 
-		for (uint i = 0; i < inputs->size(); i++) {
+		for (uint32_t i = 0; i < inputs->size(); i++) {
 			WaresQueue* wq = new WaresQueue(this);
 
 			m_input_queues.push_back(wq);
@@ -347,7 +347,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ProductionSite::set_economy(Economy* e)
 {
 	if (Economy * const old = get_economy()) {
-		for (uint i = 0; i < m_input_queues.size(); i++)
+		for (uint32_t i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->remove_from_economy(old);
 	}
 
@@ -384,7 +384,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
 	if (m_worker_requests.size()) {
-		uint i=0;
+		uint32_t i=0;
 		for (i=0; i<m_worker_requests.size(); i++) {
 			delete m_worker_requests[i];
 			m_worker_requests[i]=0;
@@ -393,7 +393,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	if (m_workers.size()) {
-		uint i=0;
+		uint32_t i=0;
 		for (i=0; i<m_workers.size(); i++) {
 			Worker* w = m_workers[i];
 
@@ -408,7 +408,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	// Cleanup the wares queues
-	for (uint i = 0; i < m_input_queues.size(); i++) {
+	for (uint32_t i = 0; i < m_input_queues.size(); i++) {
 		m_input_queues[i]->cleanup();
 		delete m_input_queues[i];
 	}
@@ -428,7 +428,7 @@ Intercept remove_worker() calls to unassign our worker, if necessary.
 */
 void ProductionSite::remove_worker(Worker* w)
 {
-	uint i=0;
+	uint32_t i=0;
 	for (i=0; i<m_workers.size(); i++) {
 		if (m_workers[i] == w) {
 			m_workers[i] = 0;
@@ -509,7 +509,7 @@ ProductionSite::act
 Advance the program state if applicable.
 ===============
 */
-void ProductionSite::act(Game* g, uint data)
+void ProductionSite::act(Game* g, uint32_t data)
 {
 	Building::act(g, data);
 
@@ -700,7 +700,7 @@ void ProductionSite::program_act(Game* g)
 
 	case ProductionAction::actMine: {
 			Map & map = *g->get_map();
-			uchar res;
+			uint8_t res;
 
 			molog("  Mine '%s'", action->sparam1.c_str());
 
@@ -710,9 +710,9 @@ void ProductionSite::program_act(Game* g)
 					" with world!!\n",  action->sparam1.c_str());
 
 			// Select one of the fields randomly
-			uint totalres = 0;
-			uint totalchance = 0;
-			uint totalstart = 0;
+			uint32_t totalres = 0;
+			uint32_t totalchance = 0;
+			uint32_t totalstart = 0;
 			int pick;
 
 			{
@@ -721,9 +721,9 @@ void ProductionSite::program_act(Game* g)
 					 Area<FCoords>
 					 (map.get_fcoords(get_position()), action->iparam1));
 				do {
-					uchar fres        = mr.location().field->get_resources();
-					uint amount       = mr.location().field->get_resources_amount();
-					uint start_amount =
+					uint8_t fres        = mr.location().field->get_resources();
+					uint32_t amount       = mr.location().field->get_resources_amount();
+					uint32_t start_amount =
 						mr.location().field->get_starting_res_amount();
 
 					// In the future, we might want to support amount = 0 for
@@ -775,8 +775,8 @@ void ProductionSite::program_act(Game* g)
 						 Area<FCoords>
 						 (map.get_fcoords(get_position()), action->iparam1));
 					do {
-						uchar fres  = mr.location().field->get_resources();
-						uint amount = mr.location().field->get_resources_amount();
+						uint8_t fres  = mr.location().field->get_resources();
+						uint32_t amount = mr.location().field->get_resources_amount();
 
 						if (fres != res)
 							amount = 0;
@@ -807,7 +807,7 @@ void ProductionSite::program_act(Game* g)
 				if
 					(g->logic_rand() % 100
 					 >=
-					 static_cast<uint>(action->iparam3))
+					 static_cast<uint32_t>(action->iparam3))
 				{
 					// Not successfull
 					molog("  Not successful this time in fallback programm\n");
@@ -862,25 +862,25 @@ void ProductionSite::program_act(Game* g)
 					if
 						((*it)->get_hp_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "attack") {
 					if
 						((*it)->get_attack_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "defense") {
 					if
 						((*it)->get_defense_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "evade") {
 					if
 						((*it)->get_evade_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				}
 			}
@@ -913,25 +913,25 @@ void ProductionSite::program_act(Game* g)
 					if
 						((*it)->get_hp_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "attack") {
 					if
 						((*it)->get_attack_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "defense") {
 					if
 						((*it)->get_defense_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				} else if (action->sparam1 == "evade") {
 					if
 						((*it)->get_evade_level()
 							==
-							static_cast<uint>(action->iparam1))
+							static_cast<uint32_t>(action->iparam1))
 						break;
 				}
 			}
@@ -1104,7 +1104,7 @@ ProductionSite::program_step
 Advance the program to the next step, but does not schedule anything.
 ===============
 */
-void ProductionSite::program_step(const uint phase) {
+void ProductionSite::program_step(const uint32_t phase) {
 	State* state = get_current_program();
 
 	assert(state);
@@ -1171,7 +1171,7 @@ void ProductionSite::program_end(Game* g, bool success)
 
 	// if succesfull, the workers gain experience
 	if (success) {
-		uint i=0;
+		uint32_t i=0;
 		for (i=0; i<m_workers.size(); i++)
 			m_workers[i]->gain_experience(g);
 	}

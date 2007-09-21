@@ -22,6 +22,7 @@
 #include "wexception.h"
 
 #include <cstdarg>
+#include <stdint.h>
 
 //TODO: move wexception code into it's own file
 
@@ -65,7 +66,7 @@ class _wexception implementation
 ==============================================================================
 */
 #undef wexception
-_wexception::_wexception(const char* file, uint line, const char *fmt, ...) throw()
+_wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...) throw()
 {
 	va_list va;
 	char buffer[256];

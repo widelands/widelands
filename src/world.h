@@ -22,6 +22,7 @@
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
+#include <stdint.h>
 #include "worlddata.h"
 
 class Section;
@@ -52,7 +53,7 @@ struct Resource_Descr {
 	bool is_detectable() const throw () {return m_is_detectable;}
 	int get_max_amount() const throw () {return m_max_amount;}
 
-	const std::string & get_editor_pic(const uint amount) const;
+	const std::string & get_editor_pic(const uint32_t amount) const;
 
 private:
 	struct Indicator {
@@ -81,8 +82,8 @@ struct Terrain_Descr {
 
 		void load_graphics();
 
-	uint         get_texture() const throw () {return m_texture;}
-	uchar        get_is     () const throw () {return m_is;}
+	uint32_t         get_texture() const throw () {return m_texture;}
+	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
 	__attribute__ ((deprecated)) const char * get_name   () const throw () {return m_name.c_str();}
 	int resource_value(const Resource_Descr::Index resource) const throw () {
@@ -105,14 +106,14 @@ struct Terrain_Descr {
 private:
 	const std::string m_name;
 	char  * m_picnametempl;
-	uint    m_frametime;
-	uchar   m_is;
+	uint32_t    m_frametime;
+	uint8_t   m_is;
 
-      uchar*   m_valid_resources;
-      uchar    m_nr_valid_resources;
+      uint8_t*   m_valid_resources;
+      uint8_t    m_nr_valid_resources;
       char     m_default_resources;
       int      m_default_amount;
-	uint    m_texture; //  renderer's texture
+	uint32_t    m_texture; //  renderer's texture
 };
 
 /** class World
@@ -152,7 +153,7 @@ struct World {
 	{const int i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
       inline int get_nr_terrains() const {return ters.get_nitems();}
       inline int get_bob(const char* l) {return bobs.get_index(l);}
-      inline Bob::Descr* get_bob_descr(ushort index) const {return bobs.get(index);}
+      inline Bob::Descr* get_bob_descr(uint16_t index) const {return bobs.get(index);}
       inline int get_nr_bobs() const {return bobs.get_nitems();}
       inline int get_immovable_index(const char* l)const {return immovables.get_index(l);}
       inline int get_nr_immovables() const {return immovables.get_nitems();}

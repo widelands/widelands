@@ -22,6 +22,7 @@
 
 #include "geometry.h"
 
+#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
 
@@ -33,7 +34,7 @@ class Interactive_Base;
 struct Map_View : public UI::Panel {
 	Map_View
 		(UI::Panel * const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 Interactive_Base &);
 
 	UI::Signal2<int, int> warpview; // x/y in screen coordinates

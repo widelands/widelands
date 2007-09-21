@@ -20,6 +20,8 @@
 #ifndef __S__WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define __S__WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
+#include <stdint.h>
+
 class Map_Object;
 class Editor_Game_Base;
 
@@ -29,10 +31,10 @@ class Editor_Game_Base;
  *   - translate file index pointers into Map_Objects
  */
 struct Widelands_Map_Map_Object_Loader {
-	bool is_object_known(uint);
-	void register_object(Editor_Game_Base*, uint, Map_Object*);
+	bool is_object_known(uint32_t);
+	void register_object(Editor_Game_Base*, uint32_t, Map_Object*);
 
-	Map_Object* get_object_by_file_index(uint);
+	Map_Object* get_object_by_file_index(uint32_t);
 
 	int get_nr_unloaded_objects();
 	bool is_object_loaded(Map_Object* obj) {return m_loaded_obj[obj];}
@@ -40,7 +42,7 @@ struct Widelands_Map_Map_Object_Loader {
 	void mark_object_as_loaded(Map_Object* obj);
 
 private:
-	typedef std::map<uint, Map_Object*> Reverse_Map_Object_Map;
+	typedef std::map<uint32_t, Map_Object*> Reverse_Map_Object_Map;
 
 	std::map<Map_Object*, bool> m_loaded_obj;
 	Reverse_Map_Object_Map m_objects;

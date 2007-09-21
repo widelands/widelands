@@ -26,6 +26,7 @@
 #include "graphic.h" // Since we are laying about the path of the pictures
 #include "map.h"
 #include "profile.h"
+#include <stdint.h>
 #include "widelands_map_data_packet_ids.h"
 
 #include <SDL_image.h>
@@ -74,7 +75,7 @@ throw (_wexception)
 	    std::string picname = FileSystem::FS_Filename((*pname).c_str());
             picname = "map:" + picname;
 
-				const uint data =
+				const uint32_t data =
 					g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
 
             // ok, the pic is now known to the game. But when the game is saved, this data has to be
@@ -109,14 +110,14 @@ throw (_wexception)
    s->set_int("packet_version", CURRENT_PACKET_VERSION);
 
    // Nothing more. All pics in the dir pic are loaded as pictures
-   for (uint i = 0; i < egbase->get_map()->m_extradatainfos.size(); i++) {
+   for (uint32_t i = 0; i < egbase->get_map()->m_extradatainfos.size(); i++) {
       Map::Extradata_Info& edi = egbase->get_map()->m_extradatainfos[i];
       assert(edi.type == Map::Extradata_Info::PIC);
 
 		fs.EnsureDirectoryExists("pics");
       FileWrite fw;
 
-      g_gr->save_png((ulong)edi.data, &fw);
+      g_gr->save_png((uint32_t)edi.data, &fw);
 
       fw.Write(fs, edi.filename.c_str());
 	}

@@ -22,6 +22,7 @@
 
 #include "ui_panel.h"
 
+#include <stdint.h>
 #include <string>
 
 namespace UI {
@@ -47,7 +48,7 @@ namespace UI {
  */
 
 struct Window : public Panel {
-	Window(Panel *parent, int x, int y, uint w, uint h, const char *title);
+	Window(Panel *parent, int x, int y, uint32_t w, uint32_t h, const char *title);
 	~Window();
 
 	void set_title(const char *text);
@@ -79,17 +80,17 @@ private:
 	void dock_bottom();
 	void undock_bottom();
 	bool _is_minimal;
-	uint _oldw, _oldh;  // if it is, these are the old formats
+	uint32_t _oldw, _oldh;  // if it is, these are the old formats
 	bool _dragging, _docked_left, _docked_right, _docked_bottom;
 	int _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;
 
 	std::string m_title;
 
-	uint        m_pic_lborder;
-	uint        m_pic_rborder;
-	uint        m_pic_top;
-	uint        m_pic_bottom;
-	uint        m_pic_background;
+	uint32_t        m_pic_lborder;
+	uint32_t        m_pic_rborder;
+	uint32_t        m_pic_top;
+	uint32_t        m_pic_bottom;
+	uint32_t        m_pic_background;
 };
 };
 

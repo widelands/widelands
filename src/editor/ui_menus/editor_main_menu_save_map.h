@@ -21,6 +21,7 @@
 #define __S__EDITOR_MAIN_MENU_SAVE_MAP_H
 
 #include "filesystem.h"
+#include <stdint.h>
 #include "ui_window.h"
 
 class Editor_Interactive;
@@ -48,8 +49,8 @@ struct Main_Menu_Save_Map : public UI::Window {
 private:
 	void clicked_ok            ();
 	void clicked_make_directory();
-	void selected      (uint);
-	void double_clicked(uint);
+	void selected      (uint32_t);
+	void double_clicked(uint32_t);
       void edit_box_changed();
 
       void fill_list();

@@ -87,12 +87,12 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 /*
  * Get the correct editor pic for this amount of this resource
  */
-const std::string & Resource_Descr::get_editor_pic(const uint amount) const {
-	uint bestmatch = 0;
+const std::string & Resource_Descr::get_editor_pic(const uint32_t amount) const {
+	uint32_t bestmatch = 0;
 
 	assert(m_editor_pics.size());
 
-	for (uint i = 1; i < m_editor_pics.size(); ++i)
+	for (uint32_t i = 1; i < m_editor_pics.size(); ++i)
 	{
 		const int diff1 =
 			m_editor_pics[bestmatch].upperlimit - static_cast<int>(amount);
@@ -419,11 +419,11 @@ m_texture           (0)
 
       m_nr_valid_resources=nres;
       if (nres==1)
-         m_valid_resources=new uchar;
+         m_valid_resources=new uint8_t;
       else
-         m_valid_resources=new uchar[nres];
+         m_valid_resources=new uint8_t[nres];
       std::string curres;
-		uint i = 0;
+		uint32_t i = 0;
       int cur_res=0;
 		while (i <= str1.size()) {
          if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {++i; continue;}

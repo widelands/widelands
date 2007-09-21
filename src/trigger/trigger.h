@@ -20,9 +20,8 @@
 #ifndef __S__TRIGGER_H
 #define __S__TRIGGER_H
 
-#include "types.h"
-
 #include <map>
+#include <stdint.h>
 #include <string>
 
 class Game;
@@ -61,7 +60,7 @@ struct Trigger {
       // Reference this event
       void reference(TriggerReferencer* ref);
       void unreference(TriggerReferencer* ref);
-	typedef std::map<TriggerReferencer *, uint> TriggerReferencerMap;
+	typedef std::map<TriggerReferencer *, uint32_t> TriggerReferencerMap;
 	const TriggerReferencerMap & get_referencers() const throw ()
 	{return m_referencers;}
 

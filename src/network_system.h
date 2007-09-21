@@ -26,6 +26,7 @@
 // If not, this is the right place to conditionally include what is needed.
 #include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <stdint.h>
 #include <net/if.h>
 #include <netinet/in.h>
 #include <netdb.h>
@@ -43,8 +44,8 @@
 
 #define DATATYPE    char*
 // microsoft doesn't have these
-typedef unsigned short in_port_t;
-typedef unsigned long in_addr_t;
+typedef uint16_t in_port_t;
+typedef uint32_t in_addr_t;
 
 #ifndef s_addr
 #define s_addr S_addr

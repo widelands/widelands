@@ -40,7 +40,7 @@
  *
  * \returns radius (in fields) of area that the bob can see
  */
-uint Bob::Descr::vision_range() const
+uint32_t Bob::Descr::vision_range() const
 {
 	if (m_owner_tribe)
 		return m_owner_tribe->get_bob_vision_range();
@@ -77,7 +77,7 @@ void Bob::Descr::parse(const char *directory, Profile *prof,
 	global= prof->get_safe_section("global");
 
 	while (global->get_next_string("attrib", &string)) {
-		uint attrib = get_attribute_id(string);
+		uint32_t attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
 			throw wexception("Bad attribute '%s'", string);
@@ -268,7 +268,7 @@ void Bob::cleanup(Editor_Game_Base *gg)
  *
  * Change to the next task if necessary.
  */
-void Bob::act(Game* g, uint data)
+void Bob::act(Game* g, uint32_t data)
 {
 	if (!m_stack.size()) {
 		assert(m_sched_init_task);
@@ -313,7 +313,7 @@ void Bob::do_act(Game* g, bool signalhandling)
 	m_in_act = true;
 
 	for (;;) {
-		uint origactid;
+		uint32_t origactid;
 
 		origactid = m_actid;
 
@@ -403,7 +403,7 @@ void Bob::schedule_destroy(Game* g)
  * Schedule a new act for the current task. All other pending acts are
  * cancelled.
  */
-void Bob::schedule_act(Game* g, uint tdelta)
+void Bob::schedule_act(Game* g, uint32_t tdelta)
 {
 	Map_Object::schedule_act(g, tdelta, ++m_actid);
 }
@@ -501,7 +501,7 @@ void Bob::send_signal(Game* g, std::string sig)
 
 	m_signal = sig;
 
-	for (uint i = 0; i < m_stack.size(); i++) {
+	for (uint32_t i = 0; i < m_stack.size(); i++) {
 		State* state = &m_stack[i];
 
 		if (state->task->mask) {
@@ -561,7 +561,7 @@ Bob::Task Bob::taskIdle = {
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game* g, uint anim, int timeout)
+void Bob::start_task_idle(Game* g, uint32_t anim, int timeout)
 {
 	State* state;
 
@@ -911,7 +911,7 @@ void Bob::draw(const Editor_Game_Base & game, RenderTarget & dst,
 /**
  * Set a looping animation, starting now.
  */
-void Bob::set_animation(Editor_Game_Base* g, uint anim)
+void Bob::set_animation(Editor_Game_Base* g, uint32_t anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();
@@ -928,7 +928,7 @@ void Bob::set_animation(Editor_Game_Base* g, uint anim)
  * \note Returns a negative value when we can't walk into the requested
  * direction.
  */
-int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
+int Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 {
 	FCoords newf;
 
@@ -938,7 +938,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	//
 	// The somewhat crazy check involving MOVECAPS_SWIM should allow swimming objects to
 	// temporarily land.
-	const uint movecaps = get_movecaps();
+	const uint32_t movecaps = get_movecaps();
 
 	if
 		(not force
@@ -1049,7 +1049,7 @@ void Bob::log_general_info(Editor_Game_Base* egbase)
 
 	molog("Stack size: %i\n", m_stack.size());
 
-	for (uint i=0; i<m_stack.size(); i++) {
+	for (uint32_t i=0; i<m_stack.size(); i++) {
 		molog("Stack dump %i/%i\n", i+1, m_stack.size());
 
 		molog("* task->name: %s\n", m_stack[i].task->name);

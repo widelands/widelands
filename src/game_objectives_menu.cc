@@ -57,5 +57,5 @@ objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 /*
  * Something has been selected
  */
-void GameObjectivesMenu::selected(uint t)
+void GameObjectivesMenu::selected(uint32_t t)
 {objectivetext.set_text(list[t].descr());}

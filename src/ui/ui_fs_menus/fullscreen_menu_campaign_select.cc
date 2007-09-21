@@ -88,7 +88,7 @@ int Fullscreen_Menu_CampaignSelect::get_campaign()
 /**
  * an entry of campaignlist got selected.
  */
-void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
+void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t i)
 {
 	if (list.get_selected()) { //gets false, if the selected entry has no value.
 		campaign=i;
@@ -125,7 +125,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 			_("Hard struggle")
 		};
 
-		uint dif = s->get_int(cdifficulty);
+		uint32_t dif = s->get_int(cdifficulty);
 		if (sizeof(dif_descriptions) / sizeof(*dif_descriptions) <= dif)
 			dif = 0;
 
@@ -146,7 +146,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint i)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_CampaignSelect::double_clicked(uint)
+void Fullscreen_Menu_CampaignSelect::double_clicked(uint32_t)
 {
 	clicked_ok();
 }
@@ -199,7 +199,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 			"pics/small.png"
 			};
 
-			uint dif = s->get_int(cdifficulty);
+			uint32_t dif = s->get_int(cdifficulty);
 			if (sizeof(dif_picture_filenames) / sizeof(*dif_picture_filenames) <= dif)
 				dif = 0;
 			difficulty = dif_picture_filenames[dif];
@@ -282,7 +282,7 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 
 
 //telling this class what campaign we have and since we know what campaign we have, fill it.
-void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint i)
+void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t i)
 {
    campaign=i;
    fill_list();
@@ -291,7 +291,7 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint i)
 /**
  * an entry of the maplist got selected.
  */
-void Fullscreen_Menu_CampaignMapSelect::map_selected(uint i)
+void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t i)
 {
 	if (list.get_selected()) { //gets false, if the selected entry has no value.
 		// Load maps textdomain to translate the strings from cconfig
@@ -343,7 +343,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint i)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint)
+void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint32_t)
 {
 	clicked_ok();
 }

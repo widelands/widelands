@@ -29,6 +29,7 @@
 #include <SDL_ttf.h>
 
 #include <iostream>
+#include <stdint.h>
 #include <string>
 
 Font_Handler* g_fh = 0; // the font handler
@@ -105,7 +106,7 @@ void Font_Loader::clear_fonts() {
 	}
 	m_font_table.clear();
 
-   for (uint i = 0; i < m_freads.size(); i++)
+   for (uint32_t i = 0; i < m_freads.size(); i++)
       delete m_freads[i];
    m_freads.resize(0);
 }

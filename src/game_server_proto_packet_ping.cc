@@ -33,7 +33,7 @@ Game_Server_Protocol_Packet_Ping::~Game_Server_Protocol_Packet_Ping() {}
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_Ping::get_id() {
+uint16_t Game_Server_Protocol_Packet_Ping::get_id() {
    return GGSPP_PING;
 }
 

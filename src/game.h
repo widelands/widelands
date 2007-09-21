@@ -25,6 +25,7 @@
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
+#include <stdint.h>
 
 struct Flag;
 struct Path;
@@ -65,13 +66,13 @@ struct GameInternals;
 struct Game : public Editor_Game_Base {
 public:
 	struct General_Stats {
-		std::vector< uint > land_size;
-		std::vector< uint > nr_workers;
-		std::vector< uint > nr_buildings;
-		std::vector< uint > nr_wares;
-		std::vector< uint > productivity;
-		std::vector< uint > nr_kills;
-		std::vector< uint > miltary_strength;
+		std::vector< uint32_t > land_size;
+		std::vector< uint32_t > nr_workers;
+		std::vector< uint32_t > nr_buildings;
+		std::vector< uint32_t > nr_wares;
+		std::vector< uint32_t > productivity;
+		std::vector< uint32_t > nr_kills;
+		std::vector< uint32_t > miltary_strength;
 	};
 	typedef std::vector<General_Stats> General_Stats_vector;
 
@@ -126,12 +127,12 @@ public:
 	Cmd_Queue * get_cmdqueue() {return &cmdqueue;}
 	RNG* get_rng() {return &rng;}
 
-	uint logic_rand();
+	uint32_t logic_rand();
 
 	/// Generate a random location within radius from location.
-	Coords random_location(Coords location, uchar radius);
+	Coords random_location(Coords location, uint8_t radius);
 
-	void logic_rand_seed (const uint seed) {rng.seed (seed);}
+	void logic_rand_seed (const uint32_t seed) {rng.seed (seed);}
 
 	StreamWrite& syncstream();
 	md5_checksum get_sync_hash() const;
@@ -177,7 +178,7 @@ public:
 		return m_general_stats;
 	}
 
-	void ReadStatistics(FileRead& fr, uint version);
+	void ReadStatistics(FileRead& fr, uint32_t version);
 	void WriteStatistics(FileWrite& fw);
 
 private:
@@ -206,14 +207,14 @@ private:
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 
-	uint m_last_stats_update;
+	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
 
-	uint m_player_cmdserial;
+	uint32_t m_player_cmdserial;
 };
 
-inline Coords Game::random_location(Coords location, uchar radius) {
-	const ushort s = radius * 2 + 1;
+inline Coords Game::random_location(Coords location, uint8_t radius) {
+	const uint16_t s = radius * 2 + 1;
 	location.x += logic_rand() % s - radius;
 	location.y += logic_rand() % s - radius;
 	return location;

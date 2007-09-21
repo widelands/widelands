@@ -25,6 +25,7 @@
 #include "field.h"
 #include "instances.h" //for g_flag_descr
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "tribe.h"
 
@@ -398,7 +399,7 @@ throw (_wexception)
 					move_r(mapwidth, r, r_index);
 					r_player_field  = player_fields + r_index;
 
-					uint file_vision = vision_file.Unsigned32();
+					uint32_t file_vision = vision_file.Unsigned32();
 					if (file_vision != f_player_field.vision)
 						throw wexception
 								("player %u, node (%i, %i): vision mismatch (%u vs. %u)",

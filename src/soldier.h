@@ -20,6 +20,7 @@
 #ifndef __S__SOLDIER_H
 #define __S__SOLDIER_H
 
+#include <stdint.h>
 #include "worker.h"
 
 // Constants used to launch attacks
@@ -40,64 +41,64 @@ struct Soldier_Descr : public Worker_Descr {
 
    virtual void load_graphics();
 
-	uint get_max_hp_level          () const {return m_max_hp_level;}
-	uint get_max_attack_level      () const {return m_max_attack_level;}
-	uint get_max_defense_level     () const {return m_max_defense_level;}
-	uint get_max_evade_level       () const {return m_max_evade_level;}
+	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
+	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
+	uint32_t get_max_defense_level     () const {return m_max_defense_level;}
+	uint32_t get_max_evade_level       () const {return m_max_evade_level;}
 
-	uint get_min_hp                () const {return m_min_hp;}
-	uint get_max_hp                () const {return m_max_hp;}
-	uint get_min_attack            () const {return m_min_attack;}
-	uint get_max_attack            () const {return m_max_attack;}
-	uint get_defense               () const {return m_defense;}
-	uint get_evade                 () const {return m_evade;}
+	uint32_t get_min_hp                () const {return m_min_hp;}
+	uint32_t get_max_hp                () const {return m_max_hp;}
+	uint32_t get_min_attack            () const {return m_min_attack;}
+	uint32_t get_max_attack            () const {return m_max_attack;}
+	uint32_t get_defense               () const {return m_defense;}
+	uint32_t get_evade                 () const {return m_evade;}
 
-	uint get_hp_incr_per_level     () const {return m_hp_incr;}
-	uint get_attack_incr_per_level () const {return m_attack_incr;}
-	uint get_defense_incr_per_level() const {return m_defense_incr;}
-	uint get_evade_incr_per_level  () const {return m_evade_incr;}
+	uint32_t get_hp_incr_per_level     () const {return m_hp_incr;}
+	uint32_t get_attack_incr_per_level () const {return m_attack_incr;}
+	uint32_t get_defense_incr_per_level() const {return m_defense_incr;}
+	uint32_t get_evade_incr_per_level  () const {return m_evade_incr;}
 
-	uint get_hp_level_pic     (const uint level) const
+	uint32_t get_hp_level_pic     (const uint32_t level) const
 	{assert(level <= m_max_hp_level);      return m_hp_pics     [level];}
-	uint get_attack_level_pic (const uint level) const
+	uint32_t get_attack_level_pic (const uint32_t level) const
 	{assert(level <= m_max_attack_level);  return m_attack_pics [level];}
-	uint get_defense_level_pic(const uint level) const
+	uint32_t get_defense_level_pic(const uint32_t level) const
 	{assert(level <= m_max_defense_level); return m_defense_pics[level];}
-	uint get_evade_level_pic  (const uint level) const
+	uint32_t get_evade_level_pic  (const uint32_t level) const
 	{assert(level <= m_max_evade_level);   return m_evade_pics  [level];}
 
 
 
-	uint get_rand_anim(const char * const name) const;
+	uint32_t get_rand_anim(const char * const name) const;
 protected:
 	virtual Bob * create_object() const;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
    // Start values
-   uint m_min_hp;
-   uint m_max_hp;
-   uint m_min_attack;
-   uint m_max_attack;
-   uint m_defense;
-   uint m_evade;
+   uint32_t m_min_hp;
+   uint32_t m_max_hp;
+   uint32_t m_min_attack;
+   uint32_t m_max_attack;
+   uint32_t m_defense;
+   uint32_t m_evade;
 
    // per level increases
-   uint m_hp_incr;
-   uint m_attack_incr;
-   uint m_defense_incr;
-   uint m_evade_incr;
+   uint32_t m_hp_incr;
+   uint32_t m_attack_incr;
+   uint32_t m_defense_incr;
+   uint32_t m_evade_incr;
 
    // max levels
-   uint m_max_hp_level;
-   uint m_max_attack_level;
-   uint m_max_defense_level;
-   uint m_max_evade_level;
+   uint32_t m_max_hp_level;
+   uint32_t m_max_attack_level;
+   uint32_t m_max_defense_level;
+   uint32_t m_max_evade_level;
 
    // Level pictures
-   std::vector<uint> m_hp_pics;
-   std::vector<uint> m_attack_pics;
-   std::vector<uint> m_evade_pics;
-   std::vector<uint> m_defense_pics;
+   std::vector<uint32_t> m_hp_pics;
+   std::vector<uint32_t> m_attack_pics;
+   std::vector<uint32_t> m_evade_pics;
+   std::vector<uint32_t> m_defense_pics;
    std::vector<std::string> m_hp_pics_fn;
    std::vector<std::string> m_attack_pics_fn;
    std::vector<std::string> m_evade_pics_fn;
@@ -115,58 +116,58 @@ public:
    virtual void init(Editor_Game_Base*);
 
 	void set_level
-		(const uint hp, const uint attack, const uint defense, const uint evade);
-	void set_hp_level(const uint);
-	void set_attack_level(const uint);
-	void set_defense_level(const uint);
-	void set_evade_level(const uint);
-	uint get_level (const tAttribute at);
-	uint get_hp_level     () const {return m_hp_level;}
-	uint get_attack_level () const {return m_attack_level;}
-	uint get_defense_level() const {return m_defense_level;}
-	uint get_evade_level  () const throw () {return m_evade_level;}
+		(const uint32_t hp, const uint32_t attack, const uint32_t defense, const uint32_t evade);
+	void set_hp_level(const uint32_t);
+	void set_attack_level(const uint32_t);
+	void set_defense_level(const uint32_t);
+	void set_evade_level(const uint32_t);
+	uint32_t get_level (const tAttribute at);
+	uint32_t get_hp_level     () const {return m_hp_level;}
+	uint32_t get_attack_level () const {return m_attack_level;}
+	uint32_t get_defense_level() const {return m_defense_level;}
+	uint32_t get_evade_level  () const throw () {return m_evade_level;}
 
    /// Draw this soldier
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
    // Information function from description
-	uint get_max_hp_level () const throw ()
+	uint32_t get_max_hp_level () const throw ()
 	{return descr().get_max_hp_level();}
-	uint get_max_attack_level () const throw ()
+	uint32_t get_max_attack_level () const throw ()
 	{return descr().get_max_attack_level();}
-	uint get_max_defense_level() const throw ()
+	uint32_t get_max_defense_level() const throw ()
 	{return descr().get_max_defense_level();}
-	uint get_max_evade_level  () const throw ()
+	uint32_t get_max_evade_level  () const throw ()
 	{return descr().get_max_evade_level();}
 
    // information functions
-	uint get_current_hitpoints() const {return m_hp_current;}
-	uint get_max_hitpoints    () const {return m_hp_max;}
-	uint get_min_attack       () const {return m_min_attack;}
-	uint get_max_attack       () const {return m_max_attack;}
-	uint get_defense          () const {return m_defense;}
-	uint get_evade            () const {return m_evade;}
+	uint32_t get_current_hitpoints() const {return m_hp_current;}
+	uint32_t get_max_hitpoints    () const {return m_hp_max;}
+	uint32_t get_min_attack       () const {return m_min_attack;}
+	uint32_t get_max_attack       () const {return m_max_attack;}
+	uint32_t get_defense          () const {return m_defense;}
+	uint32_t get_evade            () const {return m_evade;}
 
    // get pictures
-	uint get_hp_level_pic     () const
+	uint32_t get_hp_level_pic     () const
 	{return descr().get_hp_level_pic     (m_hp_level);}
-	uint get_attack_level_pic () const
+	uint32_t get_attack_level_pic () const
 	{return descr().get_attack_level_pic (m_attack_level);}
-	uint get_defense_level_pic() const
+	uint32_t get_defense_level_pic() const
 	{return descr().get_defense_level_pic(m_defense_level);}
-	uint get_evade_level_pic  () const
+	uint32_t get_evade_level_pic  () const
 	{return descr().get_evade_level_pic  (m_evade_level);}
 
    /// Sets a random animation of desired type and start playing it
 	void start_animation
-		(Editor_Game_Base*, const char * const animname, const uint time);
+		(Editor_Game_Base*, const char * const animname, const uint32_t time);
 
 	/// Heal quantity of hit points instantly
-	void heal (const uint);
+	void heal (const uint32_t);
 
    /// Damage quantity of hit points
-	void damage (const uint);
+	void damage (const uint32_t);
 
 	///  This are used to control Requests (only called by Warehouse)
 	bool is_marked () const throw () {return m_marked;}
@@ -193,17 +194,17 @@ protected:
 
 private:
    // Private data
-   uint m_hp_current;
-   uint m_hp_max;
-   uint m_min_attack;
-   uint m_max_attack;
-   uint m_defense;
-   uint m_evade;
+   uint32_t m_hp_current;
+   uint32_t m_hp_max;
+   uint32_t m_min_attack;
+   uint32_t m_max_attack;
+   uint32_t m_defense;
+   uint32_t m_evade;
 
-   uint m_hp_level;
-   uint m_attack_level;
-   uint m_defense_level;
-   uint m_evade_level;
+   uint32_t m_hp_level;
+   uint32_t m_attack_level;
+   uint32_t m_defense_level;
+   uint32_t m_evade_level;
 
 	bool m_marked;
 

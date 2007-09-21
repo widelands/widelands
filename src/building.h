@@ -26,6 +26,7 @@
 
 #include "widelands.h"
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -68,10 +69,10 @@ struct Building_Descr : public Map_Object_Descr {
 	inline bool get_buildable() const {return m_buildable;}
    inline bool get_enhanced_building() const {return m_enhanced_building;}
 	const BuildCost & get_buildcost() const throw () {return m_buildcost;}
-	inline uint get_buildicon() const {return m_buildicon;}
+	inline uint32_t get_buildicon() const {return m_buildicon;}
 	int get_size() const throw () {return m_size;}
 	inline bool get_ismine() const {return m_mine;}
-	virtual uint get_ui_anim() const throw () {return get_animation("idle");}
+	virtual uint32_t get_ui_anim() const throw () {return get_animation("idle");}
 
 	inline bool get_stopable() const {return m_stopable;}
 	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
@@ -91,8 +92,8 @@ struct Building_Descr : public Map_Object_Descr {
 		const EncodeData* encdata);
 	virtual void load_graphics();
 
-	virtual uint get_conquers() const;
-	virtual uint vision_range() const throw ();
+	virtual uint32_t get_conquers() const;
+	virtual uint32_t vision_range() const throw ();
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &m_tribe;}
@@ -113,14 +114,14 @@ private:
 	std::string         m_descname; // descriptive name for GUI
 	bool         m_buildable;       // the player can build this himself
 	BuildCost    m_buildcost;
-	uint         m_buildicon;       // if buildable: picture in the build dialog
+	uint32_t         m_buildicon;       // if buildable: picture in the build dialog
 	char*        m_buildicon_fname; // filename for this icon
 	int          m_size;            // size of the building
 	bool         m_mine;
 	std::vector<char*> m_enhances_to;     // building to enhance to or 0
 	bool         m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
-	uint m_vision_range; // for migration, 0 is the default, meaning get_conquers() + 4
+	uint32_t m_vision_range; // for migration, 0 is the default, meaning get_conquers() + 4
 
 public:
 	static Building_Descr* create_from_dir
@@ -161,10 +162,10 @@ public:
 	virtual int  get_type    () const throw ();
 	virtual int  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-   virtual uint get_ui_anim () const;
+   virtual uint32_t get_ui_anim () const;
 
 	virtual Flag* get_base_flag();
-	virtual uint get_playercaps() const throw ();
+	virtual uint32_t get_playercaps() const throw ();
 	virtual Coords get_position() const throw () {return m_position;}
 
 	const std::string & name    () const throw () {return descr().name    ();}
@@ -185,8 +186,8 @@ public:
 	virtual bool get_building_work(Game* g, Worker* w, bool success) __attribute__ ((noreturn));
 
 	bool leave_check_and_wait(Game* g, Worker* w);
-	uint get_conquers() const throw () {return descr().get_conquers();}
-	virtual uint vision_range() const throw () {return descr().vision_range();}
+	uint32_t get_conquers() const throw () {return descr().get_conquers();}
+	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
 
 	const std::string & get_stop_icon    () const throw ()
 	{return descr().get_stop_icon();}
@@ -208,12 +209,12 @@ public:
    void log_general_info(Editor_Game_Base* egbase);
 
     // Use on military and training sites
-   virtual void drop_soldier(uint) {};
+   virtual void drop_soldier(uint32_t) {};
 	virtual void soldier_capacity_up   () {}
 	virtual void soldier_capacity_down () {}
 
     // Use on training sites only
-   virtual void change_train_priority(uint, int) {};
+   virtual void change_train_priority(uint32_t, int) {};
 	virtual void switch_train_mode () {};
 
    /// Testing stuff
@@ -228,11 +229,11 @@ public:
 	void remove_worker(Worker *);
 
 protected:
-	void start_animation(Editor_Game_Base* g, uint anim);
+	void start_animation(Editor_Game_Base* g, uint32_t anim);
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game* g, uint data);
+	virtual void act(Game* g, uint32_t data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
@@ -246,12 +247,12 @@ protected:
 	Coords    m_position;
 	Flag*     m_flag;
 
-	uint m_anim;
+	uint32_t m_anim;
 	int  m_animstart;
 
 	typedef std::vector<Object_Ptr> Leave_Queue;
 	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
-	uint        m_leave_time;  //  when to wake the next one from leave queue
+	uint32_t        m_leave_time;  //  when to wake the next one from leave queue
 	Object_Ptr  m_leave_allow; //  worker that is allowed to leave now
 	bool        m_stop;
 

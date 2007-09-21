@@ -22,6 +22,7 @@
 
 #include "instances.h"
 #include "player_area.h"
+#include <stdint.h>
 
 struct AreaWatcher_Descr;
 
@@ -40,7 +41,7 @@ struct AreaWatcher : public Map_Object, private Player_Area<> {
 	AreaWatcher(const Player_Area<>);
 	virtual int get_type() const throw () {return AREAWATCHER;}
 	static AreaWatcher & create(Editor_Game_Base &, const Player_Area<>);
-	virtual void act(Game *, uint data);
+	virtual void act(Game *, uint32_t data);
 };
 
 #endif

@@ -25,6 +25,7 @@
 #include "graphic.h"
 #include "map.h"
 #include "overlay_manager.h"
+#include <stdint.h>
 
 
 // global variable to pass data from callback to class
@@ -95,8 +96,8 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl
 		char picname[] = "pics/editor_player_??_starting_pos.png";
 		picname[19] = static_cast<char>(m_current_player / 10 + 0x30);
 		picname[20] = static_cast<char>(m_current_player % 10 + 0x30);
-		const uint picid = g_gr->get_picture(PicMod_Game,  picname);
-		uint w, h;
+		const uint32_t picid = g_gr->get_picture(PicMod_Game,  picname);
+		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 
       // check if field is valid

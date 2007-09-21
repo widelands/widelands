@@ -185,7 +185,7 @@ void PlayerDescriptionGroup::toggle_playertribe()
  * set the current player tribe
  */
 void PlayerDescriptionGroup::set_player_tribe(std::string str) {
-   uint i=0;
+   uint32_t i=0;
    for (i=0; i<m_tribes.size(); i++) {
       if (m_tribes[i]==str) {
          m_current_tribe=i;

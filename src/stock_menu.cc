@@ -104,8 +104,8 @@ void Stock_Menu::think()
 void Stock_Menu::fill_waredisplay_with_wares() {
 	waresdisplay.remove_all_warelists();
 	const Player & player = *m_player.get_player();
-	const uint nrecos = player.get_nr_economies();
-	for (uint i = 0; i < nrecos; ++i)
+	const uint32_t nrecos = player.get_nr_economies();
+	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay.add_warelist
 			(&player.get_economy_by_number(i)->get_wares(), WaresDisplay::WARE);
 }
@@ -116,8 +116,8 @@ void Stock_Menu::fill_waredisplay_with_wares() {
 void Stock_Menu::fill_waredisplay_with_workers() {
 	waresdisplay.remove_all_warelists();
 	const Player & player = *m_player.get_player();
-	const uint nrecos = player.get_nr_economies();
-	for (uint i = 0; i < nrecos; ++i)
+	const uint32_t nrecos = player.get_nr_economies();
+	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay.add_warelist
 			(&player.get_economy_by_number(i)->get_workers(),
 			 WaresDisplay::WORKER);

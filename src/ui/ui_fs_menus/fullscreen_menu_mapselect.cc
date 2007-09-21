@@ -150,7 +150,7 @@ void Fullscreen_Menu_MapSelect::ok()
  * When this happens, the information display at the right needs to be
  * refreshed.
  */
-void Fullscreen_Menu_MapSelect::map_selected(uint)
+void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
 	const char * const name = list.get_selected();
 
@@ -204,7 +204,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_MapSelect::double_clicked(uint) {
+void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
 	ok();
 }
 

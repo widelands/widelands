@@ -22,6 +22,7 @@
 
 #include "editor_tool_options_menu.h"
 
+#include <stdint.h>
 #include "ui_textarea.h"
 
 #include <vector>
@@ -38,7 +39,7 @@ struct Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Me
       virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu() ;
 
 private:
-      std::vector<uint> m_surfaces;
+      std::vector<uint32_t> m_surfaces;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
       void selected(int, bool);

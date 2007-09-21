@@ -135,7 +135,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 {
 	ProgramParser p;
 	Section* s = prof->get_safe_section(m_name.c_str());
-	uint line=0;
+	uint32_t line=0;
 
 	p.descr = descr;
 	p.directory = directory;
@@ -148,7 +148,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			ImmovableAction action;
 			char buffer[256];
 			const char* string;
-			uint mapidx;
+			uint32_t mapidx;
 
 			snprintf(buffer, sizeof(buffer), "%i", line);
 			string = s->get_string(buffer, 0);
@@ -300,7 +300,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 	// Parse attributes
 	while (global->get_next_string("attrib", &string)) {
-		uint attrib = get_attribute_id(string);
+		uint32_t attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
 		{
@@ -371,13 +371,13 @@ void Immovable_Descr::parse_program
 /**
  * Parse the animation of the given name.
 */
-uint Immovable_Descr::parse_animation
+uint32_t Immovable_Descr::parse_animation
 		(std::string directory, Profile* s, std::string animation_name)
 {
 	// Load the animation
 	Section * anim = s->get_section(animation_name.c_str());
 	char picname[256];
-	uint animid=0;
+	uint32_t animid=0;
 
 	snprintf
 		(picname, sizeof(picname),
@@ -517,7 +517,7 @@ void Immovable::switch_program(Game* g, std::string programname)
 /**
  * Run program timer.
 */
-void Immovable::act(Game *g, uint data)
+void Immovable::act(Game *g, uint32_t data)
 {
 	BaseImmovable::act(g, data);
 
@@ -532,7 +532,7 @@ void Immovable::act(Game *g, uint data)
 */
 void Immovable::run_program(Game* g, bool killable)
 {
-	uint origptr = m_program_ptr; // avoid infinite loops
+	uint32_t origptr = m_program_ptr; // avoid infinite loops
 
 	do
 	{
@@ -894,7 +894,7 @@ void PlayerImmovable::set_economy(Economy *e)
 	if (m_economy == e)
 		return;
 
-	for (uint i = 0; i < m_workers.size(); i++)
+	for (uint32_t i = 0; i < m_workers.size(); i++)
 		m_workers[i]->set_economy(e);
 
 	m_economy = e;
@@ -919,7 +919,7 @@ void PlayerImmovable::add_worker(Worker *w)
 */
 void PlayerImmovable::remove_worker(Worker *w)
 {
-	for (uint i = 0; i < m_workers.size(); i++) {
+	for (uint32_t i = 0; i < m_workers.size(); i++) {
 		if (m_workers[i] == w) {
 			if (i < m_workers.size()-1)
 				m_workers[i] = m_workers[m_workers.size()-1];

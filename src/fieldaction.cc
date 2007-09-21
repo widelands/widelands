@@ -31,6 +31,7 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
+#include <stdint.h>
 #include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -106,7 +107,7 @@ Add a new building to the list of buildable buildings
 void BuildGrid::add(int id)
 {
 	Building_Descr* descr = m_tribe.get_building_descr(id);
-	uint picid = descr->get_buildicon();
+	uint32_t picid = descr->get_buildicon();
 
 	UI::Icon_Grid::add(picid, (void*)id, descr->descname());
 }
@@ -197,10 +198,10 @@ struct FieldActionWindow : public UI::UniqueWindow {
    void act_attack_less();    /// Decrease the number of soldiers to be launched
    void act_attack_strong();  /// Prepare to launch strongest soldiers
    void act_attack_weak();    /// Prepare to launch weakest soldiers
-   uint get_max_attackers();  /// Total number of attackers available for a specific enemy flag
+   uint32_t get_max_attackers();  /// Total number of attackers available for a specific enemy flag
 
 private:
-	uint add_tab
+	uint32_t add_tab
 		(const char * picname,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
@@ -216,13 +217,13 @@ private:
 
 	UI::Tab_Panel    * m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
-	uint m_best_tab;
+	uint32_t m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	uint32_t workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
    /// Variables to use with attack dialog
    UI::Textarea* m_text_attackers;
-   uint     m_attackers;      // 0 - Number of available soldiers.
+   uint32_t     m_attackers;      // 0 - Number of available soldiers.
    int      m_attackers_type; // STRONGEST - WEAKEST ...
 };
 
@@ -576,7 +577,7 @@ FieldActionWindow::add_tab
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
-uint FieldActionWindow::add_tab
+uint32_t FieldActionWindow::add_tab
 (const char * picname, UI::Panel * panel, const std::string & tooltip_text)
 {
 	return m_tabpanel->add
@@ -917,7 +918,7 @@ void FieldActionWindow::act_attack ()
 
 void FieldActionWindow::act_attack_more() {
    char buf[20];
-   uint available = get_max_attackers();
+   uint32_t available = get_max_attackers();
 
    if (m_attackers < available)
       m_attackers ++;
@@ -928,7 +929,7 @@ void FieldActionWindow::act_attack_more() {
    m_text_attackers->set_text (buf);
 }
 
-uint FieldActionWindow::get_max_attackers() {
+uint32_t FieldActionWindow::get_max_attackers() {
 	return getMaxAttackSoldiers
 		(m_iabase->egbase(),
 		 dynamic_cast<const Flag &>
@@ -939,7 +940,7 @@ uint FieldActionWindow::get_max_attackers() {
 
 void FieldActionWindow::act_attack_less() {
    char buf[20];
-   uint available = get_max_attackers();
+   uint32_t available = get_max_attackers();
 
    if (m_attackers > 0)
       m_attackers --;

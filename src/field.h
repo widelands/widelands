@@ -29,6 +29,7 @@
 
 #include <cassert>
 #include <limits>
+#include <stdint.h>
 
 
 #define MAX_FIELD_HEIGHT 60
@@ -124,7 +125,7 @@ private:
 
 	FieldCaps       caps                    : 7;
 	Buildhelp_Index buildhelp_overlay_index : 3;
-	uchar           roads                   : 6;
+	uint8_t           roads                   : 6;
 
 	/**
 	 * A field can be selected in one of 2 selections. This allows the user to
@@ -143,10 +144,10 @@ private:
 	 * The low bits are the player number of the owner.
 	 */
 	typedef Player_Number Owner_Info_and_Selections_Type;
-	static const uchar Selection_B_Bit =
+	static const uint8_t Selection_B_Bit =
 		std::numeric_limits<Owner_Info_and_Selections_Type>::digits - 1;
-	static const uchar Selection_A_Bit = Selection_B_Bit - 1;
-	static const uchar Border_Bit      = Selection_A_Bit - 1;
+	static const uint8_t Selection_A_Bit = Selection_B_Bit - 1;
+	static const uint8_t Border_Bit      = Selection_A_Bit - 1;
 	static const Owner_Info_and_Selections_Type Selection_B_Bitmask =
 		1 << Selection_B_Bit;
 	static const Owner_Info_and_Selections_Type Selection_A_Bitmask =
@@ -159,11 +160,11 @@ private:
 	compile_assert(MAX_PLAYERS <= Player_Number_Bitmask);
 	Owner_Info_and_Selections_Type owner_info_and_selections;
 
-	uchar m_resources;
+	uint8_t m_resources;
 
 	/** how much has there been*/
-	uchar m_starting_res_amount;
-	uchar m_res_amount;
+	uint8_t m_starting_res_amount;
+	uint8_t m_res_amount;
 
 	Terrains terrains;
 
@@ -230,7 +231,7 @@ public:
 			owner_info_and_selections & ~Border_Bitmask | b << Border_Bit;
 	}
 
-	uchar get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
+	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
 	void set_buildhelp_overlay_index(const Buildhelp_Index i)
 	{buildhelp_overlay_index = i;}
 
@@ -241,9 +242,9 @@ public:
 		roads |= type << dir;
 	}
 
-	inline uchar get_resources() const {return m_resources;}
-   inline uchar get_resources_amount() const {return m_res_amount;}
-	inline void set_resources(uchar res, uchar amount) {m_resources = res; m_res_amount=amount;}
+	inline uint8_t get_resources() const {return m_resources;}
+   inline uint8_t get_resources_amount() const {return m_res_amount;}
+	inline void set_resources(uint8_t res, uint8_t amount) {m_resources = res; m_res_amount=amount;}
    inline void set_starting_res_amount(int amount) {m_starting_res_amount=amount;}
    inline int get_starting_res_amount() {return m_starting_res_amount;}
 

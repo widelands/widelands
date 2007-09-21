@@ -67,7 +67,7 @@ Interactive_Player::Interactive_Player
 Initialize
 ===============
 */
-Interactive_Player::Interactive_Player(Game & g, const uchar plyn) :
+Interactive_Player::Interactive_Player(Game & g, const uint8_t plyn) :
 Interactive_Base(g), m_game(&g),
 
 m_label_speed(this, get_w(), 0, 0, 0, "", Align_TopRight),
@@ -156,7 +156,7 @@ void Interactive_Player::think()
 
 	{//  draw speed display
 		char buffer[32];
-		if (uint speed = m_game->get_speed())
+		if (uint32_t speed = m_game->get_speed())
 			snprintf(buffer, sizeof(buffer), _("%ux").c_str(), speed);
 		else strncpy (buffer, _("PAUSE").c_str(), sizeof(buffer));
 		m_label_speed.set_text(buffer);
@@ -178,7 +178,7 @@ void Interactive_Player::think()
 	m_chat_messages.set_text("");
 	if (m_show_chatmsg.size() && m_do_chat_overlays) {
 		std::string str;
-		for (uint i = 0; i < m_show_chatmsg.size(); i++) {
+		for (uint32_t i = 0; i < m_show_chatmsg.size(); i++) {
 			const NetGame::Chat_Message& t = m_show_chatmsg[i].msg;
 			str += get_game()->get_player(t.plrnum)->get_name();
 			str += ": ";
@@ -423,7 +423,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
  * set the player and the visibility to this
  * player
  */
-void Interactive_Player::set_player_number(uint n) {
+void Interactive_Player::set_player_number(uint32_t n) {
 	m_player_number=n;
 }
 

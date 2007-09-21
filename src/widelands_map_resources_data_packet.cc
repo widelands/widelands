@@ -22,6 +22,7 @@
 #include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
+#include <stdint.h>
 #include "world.h"
 #include "widelands_map_data_packet_ids.h"
 
@@ -57,7 +58,7 @@ throw (_wexception)
 				 nr_res, world->get_nr_resources());
 
       // construct ids and map
-      std::map<uchar, int> smap;
+      std::map<uint8_t, int> smap;
       char* buffer;
       for (int i=0; i<nr_res; i++) {
          int id=fr.Unsigned16();
@@ -68,8 +69,8 @@ throw (_wexception)
 		}
 
       // Now get all the the resources
-      for (ushort y=0; y<map->get_height(); y++) {
-         for (ushort x=0; x<map->get_width(); x++) {
+      for (uint16_t y=0; y<map->get_height(); y++) {
+         for (uint16_t x=0; x<map->get_width(); x++) {
             int id=fr.Unsigned8();
             int found_amount=fr.Unsigned8();
             int start_amount=0;
@@ -130,7 +131,7 @@ throw (_wexception)
    fw.Unsigned16(nr_res);
 
    // Write all resources names and their id's
-   std::map<std::string, uchar> smap;
+   std::map<std::string, uint8_t> smap;
    for (int i=0; i<nr_res; i++) {
       Resource_Descr* res=world->get_resource(i);
       smap[res->name().c_str()]=i;
@@ -138,12 +139,12 @@ throw (_wexception)
       fw.CString(res->name().c_str());
 	}
 
-   // Now, all resouces as unsigned chars in order
+   // Now, all resouces as uint8_ts in order
    //  - resource id
    //  - amount
    Map* map=egbase->get_map();
-   for (ushort y=0; y<map->get_height(); y++) {
-      for (ushort x=0; x<map->get_width(); x++) {
+   for (uint16_t y=0; y<map->get_height(); y++) {
+      for (uint16_t x=0; x<map->get_width(); x++) {
          int res=map->get_field(Coords(x, y))->get_resources();
          int amount=map->get_field(Coords(x, y))->get_resources_amount();
          int start_amount=map->get_field(Coords(x, y))->get_starting_res_amount();

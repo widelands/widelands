@@ -22,7 +22,7 @@
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 (Editor_Interactive         &       parent,
  UI::UniqueWindow::Registry &       registry,
- const uint width, const uint height,
+ const uint32_t width, const uint32_t height,
  const char                 * const title)
 :
 UI::UniqueWindow(&parent, &registry, width, height, title),

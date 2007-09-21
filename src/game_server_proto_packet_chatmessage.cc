@@ -27,7 +27,7 @@
 
 
 Game_Server_Protocol_Packet_ChatMessage::Game_Server_Protocol_Packet_ChatMessage
-(const uchar flags, const std::string & msg)
+(const uint8_t flags, const std::string & msg)
 : m_flags(flags), m_msg(msg)
 {}
 
@@ -39,7 +39,7 @@ Game_Server_Protocol_Packet_ChatMessage::
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_ChatMessage::get_id() {
+uint16_t Game_Server_Protocol_Packet_ChatMessage::get_id() {
    return GGSPP_CHATMESSAGE;
 }
 
@@ -56,7 +56,7 @@ void Game_Server_Protocol_Packet_ChatMessage::send(Network_Buffer* buffer) {
  * Handle reply
  */
 void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uchar answer = buf->get_8();
+   uint8_t answer = buf->get_8();
 
 	if (answer != CM_ACK) {
       char buffer[1024];

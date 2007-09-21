@@ -41,7 +41,7 @@ Game_Server_Protocol_Packet_GetRoomInfo::
 /*
  * Get this packets id
  */
-ushort Game_Server_Protocol_Packet_GetRoomInfo::get_id() {
+uint16_t Game_Server_Protocol_Packet_GetRoomInfo::get_id() {
    return GGSPP_GETROOMINFO;
 }
 
@@ -56,7 +56,7 @@ void Game_Server_Protocol_Packet_GetRoomInfo::send(Network_Buffer* buffer) {
  * Handle reply
  */
 void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connection* gsc, Network_Buffer* buf) {
-   uchar flags = buf->get_8();
+   uint8_t flags = buf->get_8();
 
 	if (flags == RI_NONEXISTANT) {
       char buffer[1024];
@@ -74,11 +74,11 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    assert(flags == RI_ACK) ;
 
-   ushort nrusers = buf->get_16();
+   uint16_t nrusers = buf->get_16();
 
    std::vector< std::string > users;
 
-   for (uint i = 0; i < nrusers; i++) {
+   for (uint32_t i = 0; i < nrusers; i++) {
       users.push_back(buf->get_string());
 	}
 

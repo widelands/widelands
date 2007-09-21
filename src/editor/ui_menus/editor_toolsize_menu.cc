@@ -23,6 +23,7 @@
 #include "i18n.h"
 #include "editor_tool.h"
 
+#include <stdint.h>
 #include <stdio.h>
 
 /*
@@ -72,8 +73,8 @@ id: 0 is up, 1 is down
 */
 void Editor_Toolsize_Menu::change_radius(const bool increase) {
 	Interactive_Base & intbase = dynamic_cast<Interactive_Base &>(*get_parent());
-	const uint val = intbase.get_sel_radius() +
-		(increase ? 1 : std::numeric_limits<uint>::max());
+	const uint32_t val = intbase.get_sel_radius() +
+		(increase ? 1 : std::numeric_limits<uint32_t>::max());
 	if (val <= MAX_TOOL_AREA) {
 		intbase.set_sel_radius(val);
    char buf[250];

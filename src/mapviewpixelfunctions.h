@@ -21,6 +21,7 @@
 #define __S__MAPVIEWPIXELFUNCTIONS_H
 
 #include "geometry.h"
+#include <stdint.h>
 
 struct Map;
 
@@ -29,10 +30,10 @@ namespace MapviewPixelFunctions {
 float calc_brightness
 	(const int l, const int r, const int tl, const int tr, const int bl, const int br);
 
-unsigned int calc_pix_distance(const Map &, Point a, Point b);
+uint32_t calc_pix_distance(const Map &, Point a, Point b);
 
-unsigned int get_map_end_screen_x(const Map &);
-unsigned int get_map_end_screen_y(const Map &);
+uint32_t get_map_end_screen_x(const Map &);
+uint32_t get_map_end_screen_y(const Map &);
 
 /**
  * Calculate the coordinates of the triangle the given point in pixels is in.
@@ -48,7 +49,7 @@ unsigned int get_map_end_screen_y(const Map &);
  *
  * \todo Distribute this documentation with Widelands and link to it from here
  */
-Node_and_Triangle<> calc_node_and_triangle(const Map &, unsigned int x, unsigned int y);
+Node_and_Triangle<> calc_node_and_triangle(const Map &, uint32_t x, uint32_t y);
 
 void normalize_pix(const Map &, Point & p);
 
@@ -77,9 +78,9 @@ void get_save_pix(const Map &, const Coords c, int & px, int & py);
 #include "map.h"
 #include "mapviewpixelconstants.h"
 
-inline unsigned int MapviewPixelFunctions::get_map_end_screen_x(const Map & map)
+inline uint32_t MapviewPixelFunctions::get_map_end_screen_x(const Map & map)
 {return map.get_width() * TRIANGLE_WIDTH;}
-inline unsigned int MapviewPixelFunctions::get_map_end_screen_y(const Map & map)
+inline uint32_t MapviewPixelFunctions::get_map_end_screen_y(const Map & map)
 {return map.get_height() * TRIANGLE_HEIGHT;}
 
 /*

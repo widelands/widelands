@@ -23,6 +23,7 @@
 #include <vector>
 #include "ui_panel.h"
 
+#include <stdint.h>
 #include <string>
 
 namespace UI {
@@ -36,17 +37,17 @@ to the top.
 The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
 struct Tab_Panel : public Panel {
-	Tab_Panel(Panel* parent, int x, int y, uint background);
+	Tab_Panel(Panel* parent, int x, int y, uint32_t background);
 
 	void resize();
 
 	void set_snapparent(bool snapparent);
 	bool get_snapparent() const {return m_snapparent;}
 
-	uint add
-		(uint picid, Panel* panel, const std::string & tooltip = std::string());
+	uint32_t add
+		(uint32_t picid, Panel* panel, const std::string & tooltip = std::string());
 
-	void activate(uint idx);
+	void activate(uint32_t idx);
 
 private:
 	// Drawing and event handlers
@@ -58,18 +59,18 @@ private:
 	void handle_mousein(bool inside);
 
 	struct Tab {
-		uint        picid;
+		uint32_t        picid;
 		std::string tooltip;
 		Panel     * panel;
 	};
 
 	std::vector<Tab> m_tabs;
-	uint             m_active;         ///< index of the currently active tab
+	uint32_t             m_active;         ///< index of the currently active tab
 	bool             m_snapparent; ///< if true, resize parent to fit this panel
 
 	int              m_highlight;      ///< index of the highlighted button
 
-	uint             m_pic_background; ///< picture used to draw background
+	uint32_t             m_pic_background; ///< picture used to draw background
 };
 };
 

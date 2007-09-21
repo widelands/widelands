@@ -24,6 +24,7 @@
 #include <vector>
 #include "compile_assert.h"
 #include "font_handler.h"
+#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
 #include <limits>
@@ -38,59 +39,59 @@ struct Scrollbar;
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
+	BaseListselect(Panel *parent, int x, int y, uint32_t w, uint32_t h, Align align = Align_Left, bool show_check = false);
 	~BaseListselect();
 
-	Signal1<uint> selected;
-	Signal1<uint> double_clicked;
+	Signal1<uint32_t> selected;
+	Signal1<uint32_t> double_clicked;
 
 	void clear();
-	void sort(const uint Begin = 0, uint End = std::numeric_limits<uint>::max());
+	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	void add
 		(const char * const name,
-		 uint value,
+		 uint32_t value,
 		 const int picid = -1,
 		 const bool select_this = false);
-	void remove(const uint i);
+	void remove(const uint32_t i);
 	void remove(const char * const name);
 
-	void switch_entries(const uint, const uint);
+	void switch_entries(const uint32_t, const uint32_t);
 
-	void set_entry_color(const uint n, const RGBColor) throw ();
+	void set_entry_color(const uint32_t n, const RGBColor) throw ();
 	void set_align(const Align);
 
-	uint size() const throw ()
+	uint32_t size() const throw ()
 	{
 		return m_entry_records.size();
 	}
 
-	uint operator[](const uint i) const throw ()
+	uint32_t operator[](const uint32_t i) const throw ()
 	{
 		assert(i < m_entry_records.size());
 		return m_entry_records[i]->m_entry;
 	}
 
-	static uint no_selection_index() throw ()
+	static uint32_t no_selection_index() throw ()
 	{
-		return std::numeric_limits<uint>::max();
+		return std::numeric_limits<uint32_t>::max();
 	}
 
-	uint selection_index() const throw ()
+	uint32_t selection_index() const throw ()
 	{
 		return m_selection;
 	}
 
-	void select(const uint i);
+	void select(const uint32_t i);
 	bool has_selection() const throw ();
 
 	struct No_Selection {};
-	uint get_selected() const throw (No_Selection);
+	uint32_t get_selected() const throw (No_Selection);
 	void remove_selected() throw (No_Selection);
 
 	///  Return the total height (text + spacing) occupied by a single line.
-	uint get_lineheight() const throw ();
+	uint32_t get_lineheight() const throw ();
 
-	uint get_eff_w     () const throw ();
+	uint32_t get_eff_w     () const throw ();
 
 	// Drawing and event handling
 	void draw(RenderTarget* dst);
@@ -106,7 +107,7 @@ private:
 	static const int ms_darken_value=-20;
 
 	struct Entry_Record {
-		uint m_entry;
+		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
 		int picid;
@@ -114,15 +115,15 @@ private:
 	};
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
 
-	uint m_max_pic_width;
-	uint m_lineheight;
+	uint32_t m_max_pic_width;
+	uint32_t m_lineheight;
 	Align m_align;
 	Entry_Record_vector m_entry_records;
 	Scrollbar* m_scrollbar;
-	uint m_scrollpos;         //  in pixels
-	uint m_selection;
+	uint32_t m_scrollpos;         //  in pixels
+	uint32_t m_selection;
 	int m_last_click_time;
-	uint m_last_selection;  // for double clicks
+	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
 	int m_check_picid;
 };
@@ -132,7 +133,7 @@ struct Listselect : public BaseListselect {
 	Listselect
 		(Panel * parent,
 		 int x, int y,
-		 uint w, uint h,
+		 uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 bool show_check = false)
 		: BaseListselect(parent, x, y, w, h, align, show_check)
@@ -148,7 +149,7 @@ struct Listselect : public BaseListselect {
 		BaseListselect::add(name, m_entry_cache.size()-1, picid, select_this);
 	}
 
-	Entry operator[](const uint i) const throw ()
+	Entry operator[](const uint32_t i) const throw ()
 	{
 		return m_entry_cache[BaseListselect::operator[](i)];
 	}
@@ -176,7 +177,7 @@ struct Listselect<Entry&> : public Listselect<Entry*> {
 	Listselect
 		(Panel * parent,
 		 int x, int y,
-		 uint w, uint h,
+		 uint32_t w, uint32_t h,
 		 Align align = Align_Left,
 		 bool show_check = false)
 		: Base(parent, x, y, w, h, align, show_check)
@@ -191,7 +192,7 @@ struct Listselect<Entry&> : public Listselect<Entry*> {
 		Base::add(name, &value, picid, select_this);
 	}
 
-	Entry& operator[](const uint i) const throw ()
+	Entry& operator[](const uint32_t i) const throw ()
 	{
 		return *Base::operator[](i);
 	}

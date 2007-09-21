@@ -24,6 +24,7 @@
 #include "instances.h"
 #include "rgbcolor.h"
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 #include <map>
@@ -41,14 +42,14 @@ struct EncodeData {
 };
 
 struct AnimationData {
-	uint frametime;
+	uint32_t frametime;
 	Point hotspot;
 	EncodeData encdata;
 	std::string picnametempl;
 
 	/** mapping of soundeffect name to frame number, indexed by frame number
 	 * \sa AnimationManager::trigger_sfx */
-	std::map<uint, std::string> sfx_cues;
+	std::map<uint32_t, std::string> sfx_cues;
 };
 
 /**
@@ -66,13 +67,13 @@ struct AnimationManager {
 	~AnimationManager();
 
 	void flush();
-	uint get(const char *directory, Section *s, const char *picnametempl = 0,
+	uint32_t get(const char *directory, Section *s, const char *picnametempl = 0,
 	         const EncodeData *encdefaults = 0);
 
 	// for use by the graphics subsystem
-	uint get_nranimations() const;
-	const AnimationData* get_animation(uint id) const;
-	void trigger_soundfx(uint animation, uint framenumber, uint stereo_position);
+	uint32_t get_nranimations() const;
+	const AnimationData* get_animation(uint32_t id) const;
+	void trigger_soundfx(uint32_t animation, uint32_t framenumber, uint32_t stereo_position);
 
 private:
 	std::vector<AnimationData> m_animations;
@@ -85,23 +86,23 @@ private:
 */
 struct DirAnimations {
 	DirAnimations
-		(const uint dir1 = 0,
-		 const uint dir2 = 0,
-		 const uint dir3 = 0,
-		 const uint dir4 = 0,
-		 const uint dir5 = 0,
-		 const uint dir6 = 0);
+		(const uint32_t dir1 = 0,
+		 const uint32_t dir2 = 0,
+		 const uint32_t dir3 = 0,
+		 const uint32_t dir4 = 0,
+		 const uint32_t dir5 = 0,
+		 const uint32_t dir6 = 0);
 	~DirAnimations();
 
 	void parse(Map_Object_Descr* b, const char *directory, Profile *prof,
 	           const char *sectnametempl, Section *defaults = 0,
 	           const EncodeData *encdefaults = 0);
 
-	uint get_animation(const int dir) const throw ()
+	uint32_t get_animation(const int dir) const throw ()
 			{return m_animations[dir - 1];}
 
 private:
-		uint m_animations[6];
+		uint32_t m_animations[6];
 };
 
 extern AnimationManager g_anim;

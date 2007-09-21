@@ -26,6 +26,7 @@
 #include <SDL_ttf.h>
 
 #include <list>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -83,7 +84,7 @@ public:
 		 const Align align = Align_CenterLeft,
 		 const int wrap = -1,
 		 const Widget_Cache widget_cache = Widget_Cache_None,
-		 uint * const widget_cache_id = 0,
+		 uint32_t * const widget_cache_id = 0,
 		 const int caret = -1,
 		 bool transparent = true);
 	void get_size
@@ -91,7 +92,7 @@ public:
 		 std::string text,
 		 int *w, int *h, int wrap = -1);
 	int calc_linewidth(TTF_Font &, const std::string & text);
-	uint get_fontheight(const std::string & name, const int size);
+	uint32_t get_fontheight(const std::string & name, const int size);
 	std::string remove_first_space(const std::string &text);
 	std::string word_wrap_text
 		(TTF_Font &,
@@ -105,7 +106,7 @@ public:
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
 	void flush_cache();
-	void delete_widget_cache(uint widget_cache_id);
+	void delete_widget_cache(uint32_t widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,
 		 const RGBColor bg,
@@ -113,9 +114,9 @@ public:
 		 std::string text,
 		 int wrap,
 		 Widget_Cache widget_cache = Widget_Cache_None,
-		 uint * const widget_cache_id = 0,
+		 uint32_t * const widget_cache_id = 0,
 		 bool transparent = true);
-	void get_size_from_cache(const uint widget_cache_id, uint & w, uint & h);
+	void get_size_from_cache(const uint32_t widget_cache_id, uint32_t & w, uint32_t & h);
 
 	// Register a callback which is used whenever the tag <variable name="kljdf"> appears
 	void register_variable_callback(Varibale_Callback, void* cbdata);
@@ -123,13 +124,13 @@ public:
 
 private:
 	struct _Cache_Infos {
-		uint surface_id;
+		uint32_t surface_id;
 		std::string str;
 		const TTF_Font * f;
 		RGBColor fg;
 		RGBColor bg;
-		uint      w;
-		uint      h;
+		uint32_t      w;
+		uint32_t      h;
 
 		inline bool operator== (const _Cache_Infos& who) const {
 			return (str == who.str &&
@@ -140,7 +141,7 @@ private:
 	};
 
 private:
-	static const uint CACHE_ARRAY_SIZE = 500;
+	static const uint32_t CACHE_ARRAY_SIZE = 500;
 
 	Font_Loader* m_font_loader;
 	std::list<_Cache_Infos> m_cache;
@@ -148,12 +149,12 @@ private:
 	void* m_cbdata;
 
 private:
-	uint create_text_surface
+	uint32_t create_text_surface
 		(TTF_Font &,
 		 const RGBColor fg, const RGBColor bg,
 		 const std::string & text, const Align, const int wrap,
 		 const int caret = -1, bool transparent = true);
-	uint convert_sdl_surface
+	uint32_t convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
 		(const std::string & fontname, const int fontsize,
@@ -174,9 +175,9 @@ private:
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,
 		 std::string text,
 		 const Align align, const int caret = -1);
-	SDL_Surface* create_empty_sdl_surface(uint w, uint h);
+	SDL_Surface* create_empty_sdl_surface(uint32_t w, uint32_t h);
 	SDL_Surface* join_sdl_surfaces
-		(const uint w, const uint h,
+		(const uint32_t w, const uint32_t h,
 		 const std::vector<SDL_Surface *> & surfaces,
 		 const RGBColor bg,
 		 const Align align        = Align_Left,

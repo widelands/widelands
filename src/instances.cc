@@ -248,14 +248,14 @@ Map_Object_Descr IMPLEMENTATION
 ==============================================================================
 */
 
-uint Map_Object_Descr::s_dyn_attribhigh = Map_Object::HIGHEST_FIXED_ATTRIBUTE;
+uint32_t Map_Object_Descr::s_dyn_attribhigh = Map_Object::HIGHEST_FIXED_ATTRIBUTE;
 Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 
 /*
  * Add this animation for this map object under this name
  */
 bool Map_Object_Descr::is_animation_known(const char* name) {
-	std::map<std::string, uint>::iterator i=m_anims.begin();
+	std::map<std::string, uint32_t>::iterator i=m_anims.begin();
 	while (i!=m_anims.end()) {
 		if (i->first==name)
 			return true;
@@ -264,20 +264,20 @@ bool Map_Object_Descr::is_animation_known(const char* name) {
 	return false;
 }
 
-void Map_Object_Descr::add_animation(const char* name, uint anim) {
+void Map_Object_Descr::add_animation(const char* name, uint32_t anim) {
 	std::string use_name=name;
-	std::map<std::string, uint>::iterator i=m_anims.begin();
+	std::map<std::string, uint32_t>::iterator i=m_anims.begin();
 
 	while (i!=m_anims.end()) {
 		assert(i->first!=name);
 		++i;
 	}
-	m_anims.insert(std::pair<std::string, uint>(use_name, anim));
+	m_anims.insert(std::pair<std::string, uint32_t>(use_name, anim));
 }
 
-std::string Map_Object_Descr::get_animation_name(uint anim) const {
+std::string Map_Object_Descr::get_animation_name(uint32_t anim) const {
 	for
-		(std::map<std::string, uint>::const_iterator it = m_anims.begin();
+		(std::map<std::string, uint32_t>::const_iterator it = m_anims.begin();
 		 it != m_anims.end();
 		 ++it)
 	{
@@ -298,8 +298,8 @@ Map_Object_Descr::has_attribute
 Search for the attribute in the attribute list
 ===============
 */
-bool Map_Object_Descr::has_attribute(uint attr) const throw () {
-	for (uint i = 0; i < m_attributes.size(); i++) {
+bool Map_Object_Descr::has_attribute(uint32_t attr) const throw () {
+	for (uint32_t i = 0; i < m_attributes.size(); i++) {
 		if (m_attributes[i] == attr)
 			return true;
 	}
@@ -315,7 +315,7 @@ Map_Object_Descr::add_attribute
 Add an attribute to the attribute list if it's not already there
 ===============
 */
-void Map_Object_Descr::add_attribute(uint attr)
+void Map_Object_Descr::add_attribute(uint32_t attr)
 {
 	if (!has_attribute(attr))
 		m_attributes.push_back(attr);
@@ -330,7 +330,7 @@ Lookup an attribute by name. If the attribute name hasn't been encountered
 before, we add it to the map.
 ===============
 */
-uint Map_Object_Descr::get_attribute_id(std::string name)
+uint32_t Map_Object_Descr::get_attribute_id(std::string name)
 {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
@@ -451,10 +451,10 @@ Queue a CMD_ACT tdelta milliseconds from now, using the given data.
 Returns the absolute gametime at which the CMD_ACT will occur.
 ===============
 */
-uint Map_Object::schedule_act(Game* g, uint tdelta, uint data)
+uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
 {
 	if (tdelta < Editor_Game_Base::Forever()) {
-		uint time = g->get_gametime() + tdelta;
+		uint32_t time = g->get_gametime() + tdelta;
 
 		g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
 
@@ -471,7 +471,7 @@ Map_Object::act
 Called when a CMD_ACT triggers.
 ===============
 */
-void Map_Object::act(Game *, uint)
+void Map_Object::act(Game *, uint32_t)
 {
 }
 

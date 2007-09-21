@@ -22,9 +22,8 @@
 
 #include "filesystem_exceptions.h"
 
-#include "types.h"
-
 #include <set>
+#include <stdint.h>
 #include <string>
 #include <stdexcept>
 #include <vector>
@@ -49,7 +48,7 @@ struct FileSystem {
 	virtual ~FileSystem() {}
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
-	                            filenameset_t *results, uint depth=0) = 0;
+	                            filenameset_t *results, uint32_t depth=0) = 0;
 
 	virtual const bool IsWritable() const = 0;
 	virtual const bool IsDirectory(std::string path) = 0;

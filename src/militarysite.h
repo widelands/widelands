@@ -21,6 +21,7 @@
 #define MILITARYSITE_H
 
 #include "productionsite.h"
+#include <stdint.h>
 #include "transport.h"
 
 class Soldier;
@@ -36,7 +37,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 
 	virtual bool is_only_production_site() const throw () {return false;}
 
-	virtual uint get_conquers() const {return m_conquer_radius;}
+	virtual uint32_t get_conquers() const {return m_conquer_radius;}
 	int get_max_number_of_soldiers () const throw () {return m_num_soldiers;}
 	int get_max_number_of_medics   () const throw () {return m_num_medics;}
 	int get_heal_per_second        () const throw () {return m_heal_per_second;}
@@ -65,15 +66,15 @@ public:
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game* g, uint data);
+	virtual void act(Game* g, uint32_t data);
 
 	virtual void set_economy(Economy* e);
 	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
 	{return m_soldiers;}
 
-	uint get_capacity () const throw () {return m_capacity;}
+	uint32_t get_capacity () const throw () {return m_capacity;}
 	// Overload of building functions
-   virtual void drop_soldier (uint serial);
+   virtual void drop_soldier (uint32_t serial);
 	virtual void soldier_capacity_up   () {change_soldier_capacity  (1);}
 	virtual void soldier_capacity_down () {change_soldier_capacity (-1);}
 
@@ -95,8 +96,8 @@ public:
    */
 
    /// Testing stuff
-   uint nr_not_marked_soldiers();
-   uint nr_attack_soldiers();
+   uint32_t nr_not_marked_soldiers();
+   uint32_t nr_attack_soldiers();
    inline void set_in_battle(bool in_battle) {m_in_battle = in_battle;};
 
    virtual bool has_soldiers() {return m_soldiers.size() > 0;}
@@ -120,7 +121,7 @@ private:
 	std::vector<Request*> m_soldier_requests;
 	std::vector<Soldier*> m_soldiers;
 	bool                   m_didconquer;
-	uint                   m_capacity;
+	uint32_t                   m_capacity;
 	bool     m_in_battle;
 };
 

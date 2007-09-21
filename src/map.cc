@@ -72,8 +72,8 @@ struct Map::Pathfield {
 	int    heap_index; //  index of this field in heap, for backlinking
 	int    real_cost;  //  true cost up to this field
 	int    estim_cost; //  estimated cost till goal
-	ushort cycle;
-	uchar  backlink;   //  how we got here (Map_Object::WALK_*)
+	uint16_t cycle;
+	uint8_t  backlink;   //  how we got here (Map_Object::WALK_*)
 
 	inline int cost() {return real_cost + estim_cost;}
 };
@@ -138,7 +138,7 @@ void Map::recalc_border(const FCoords fc) {
 	if (const Player_Number owner = fc.field->get_owned_by()) {
 		//  A node that is owned by a player and has a neighbour that is not owned
 		//  by that player is a border node.
-		for (uchar i = 1; i <= 6; ++i) {
+		for (uint8_t i = 1; i <= 6; ++i) {
 			FCoords neighbour;
 			get_neighbour(fc, i, &neighbour);
 			if (neighbour.field->get_owned_by() != owner) {
@@ -214,7 +214,7 @@ void Map::recalc_whole_map()
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
          f = get_fcoords(Coords(x, y));
-			uint radius;
+			uint32_t radius;
 			check_neighbour_heights(f, radius);
          recalc_brightness(f);
          recalc_border(f);
@@ -397,7 +397,7 @@ void Map::cleanup() {
 
    // Remove all extra datas. Pay attention here, maybe some freeing would be needed
 #ifdef DEBUG
-   for (uint i = 0; i < m_extradatainfos.size(); i++) {
+   for (uint32_t i = 0; i < m_extradatainfos.size(); i++) {
       assert(m_extradatainfos[i].type == Extradata_Info::PIC) ;
 	}
 #endif
@@ -413,7 +413,7 @@ the given data
 ===========
 */
 void Map::create_empty_map
-(const uint w, const uint h, const std::string worldname)
+(const uint32_t w, const uint32_t h, const std::string worldname)
 {
 	set_world_name(worldname.c_str());
 	load_world();
@@ -450,7 +450,7 @@ Map::set_size [private]
 Set the size of the map. This should only happen once during initial load.
 ===============
 */
-void Map::set_size(const uint w, const uint h)
+void Map::set_size(const uint32_t w, const uint32_t h)
 {
    assert(!m_fields);
 	assert(!m_pathfields);
@@ -483,12 +483,12 @@ const std::string & Map::get_scenario_player_name(const Player_Number i) {
    return m_scenario_names[i-1];
 }
 
-void Map::set_scenario_player_tribe(uint i, std::string str) {
+void Map::set_scenario_player_tribe(uint32_t i, std::string str) {
    assert(i<=m_nrplayers);
    m_scenario_tribes.resize(m_nrplayers);
    m_scenario_tribes[i-1]=str;
 }
-void Map::set_scenario_player_name(uint i, std::string str) {
+void Map::set_scenario_player_name(uint32_t i, std::string str) {
    assert(i<=m_nrplayers);
    m_scenario_names.resize(m_nrplayers);
    m_scenario_names[i-1]=str;
@@ -525,7 +525,7 @@ Map::set_starting_pos
 Set the starting coordinates of a player
 ===============
 */
-void Map::set_starting_pos(const uint plnum, const Coords c)
+void Map::set_starting_pos(const uint32_t plnum, const Coords c)
 {
 	assert(plnum >= 1 && plnum <= m_nrplayers);
 
@@ -727,7 +727,7 @@ struct FindBobsCallback {
 
 	std::vector<Bob *> * m_list;
 	const FindBob      & m_functor;
-	uint                 m_found;
+	uint32_t                 m_found;
 };
 
 
@@ -742,7 +742,7 @@ If list is non-zero, pointers to the relevant objects will be stored in the list
 Returns the number of objects found.
 ===============
 */
-unsigned int Map::find_bobs
+uint32_t Map::find_bobs
 (const Area<FCoords> area, std::vector<Bob*> * list, const FindBob & functor)
 {
 	FindBobsCallback cb(list, functor);
@@ -766,7 +766,7 @@ If list is non-zero, pointers to the relevant objects will be stored in the list
 Returns the number of objects found.
 ===============
 */
-unsigned int Map::find_reachable_bobs
+uint32_t Map::find_reachable_bobs
 (const Area<FCoords> area,
  std::vector<Bob*> * list,
  const CheckStep & checkstep,
@@ -811,7 +811,7 @@ struct FindImmovablesCallback {
 
 	std::vector<ImmovableFound> * m_list;
 	const FindImmovable         & m_functor;
-	uint                          m_found;
+	uint32_t                          m_found;
 };
 
 
@@ -825,7 +825,7 @@ Returns true if an immovable has been found.
 If list is not 0, found immovables are stored in list.
 ===============
 */
-unsigned int Map::find_immovables
+uint32_t Map::find_immovables
 (const Area<FCoords>           area,
  std::vector<ImmovableFound> * list,
  const FindImmovable & functor)
@@ -850,7 +850,7 @@ If list is not 0, found immovables are stored in list.
 Returns the number of immovables we found.
 ===============
 */
-uint Map::find_reachable_immovables
+uint32_t Map::find_reachable_immovables
 (const Area<FCoords>           area,
  std::vector<ImmovableFound> * list,
  const CheckStep & checkstep,
@@ -885,7 +885,7 @@ struct FindNodesCallback {
 
 	std::vector<Coords> * m_list;
 	const FindNode     & m_functor;
-	uint                  m_found;
+	uint32_t                  m_found;
 };
 
 
@@ -898,7 +898,7 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-unsigned int Map::find_fields
+uint32_t Map::find_fields
 (const Area<FCoords>   area,
  std::vector<Coords> * list,
  const FindNode & functor)
@@ -920,7 +920,7 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-unsigned int Map::find_reachable_fields
+uint32_t Map::find_reachable_fields
 (const Area<FCoords>   area,
  std::vector<Coords> * list,
  const CheckStep & checkstep,
@@ -1018,7 +1018,7 @@ above recalc_brightness.
 */
 void Map::recalc_fieldcaps_pass1(FCoords f)
 {
-   uchar caps = CAPS_NONE;
+   uint8_t caps = CAPS_NONE;
 
 
    // 1a) Get all the neighbours to make life easier
@@ -1037,9 +1037,9 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 	const Uint8  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
 
    // 1b) Collect some information about the neighbours
-	uchar cnt_unpassable = 0;
-	uchar cnt_water = 0;
-	uchar cnt_acid = 0;
+	uint8_t cnt_unpassable = 0;
+	uint8_t cnt_water = 0;
+	uint8_t cnt_acid = 0;
 
 	if  (tr_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
 	if  (tl_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
@@ -1185,7 +1185,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	if   (f_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
 	if   (f_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
 
-	uchar caps = f.field->caps;
+	uint8_t caps = f.field->caps;
 
 	// 2) We can only build something on fields that are
 	//     - walkable
@@ -1228,14 +1228,14 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	// Big buildings:  same as big objects
 		{
 			const FCoords bl = bl_n(f);
-	uchar building = BUILDCAPS_BIG;
+	uint8_t building = BUILDCAPS_BIG;
 	std::vector<ImmovableFound> objectlist;
 
 			find_immovables
 				(Area<FCoords>(f, 2),
 				 &objectlist,
 				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-	for (uint i = 0; i < objectlist.size(); i++) {
+	for (uint32_t i = 0; i < objectlist.size(); i++) {
 		BaseImmovable *obj = objectlist[i].object;
 		Coords objpos = objectlist[i].coords;
 		int dist = calc_distance(f, objpos);
@@ -1341,9 +1341,9 @@ end: //  9) That's it, store the collected information.
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-uint Map::calc_distance(const Coords a, const Coords b) const
+uint32_t Map::calc_distance(const Coords a, const Coords b) const
 {
-	uint dist;
+	uint32_t dist;
 	int dy;
 
 	// do we fly up or down?
@@ -1692,11 +1692,11 @@ public:
 
 		Map::Pathfield* head = m_data[0];
 
-		unsigned nsize = m_data.size()-1;
-		unsigned fix = 0;
+		uint32_t nsize = m_data.size()-1;
+		uint32_t fix = 0;
 		while (fix < nsize) {
-			unsigned l = fix*2 + 1;
-			unsigned r = fix*2 + 2;
+			uint32_t l = fix*2 + 1;
+			uint32_t r = fix*2 + 2;
 			if (l >= nsize) {
 				m_data[fix] = m_data[nsize];
 				m_data[fix]->heap_index = fix;
@@ -1746,11 +1746,11 @@ public:
 	// Note that I rearranged this a bit so swap isn't necessary
 	void push(Map::Pathfield *t)
 	{
-		unsigned slot = m_data.size();
+		uint32_t slot = m_data.size();
 		m_data.push_back(0);
 
 		while (slot > 0) {
-			unsigned parent = (slot - 1) / 2;
+			uint32_t parent = (slot - 1) / 2;
 
 			if (m_data[parent]->cost() < t->cost())
 				break;
@@ -1770,12 +1770,12 @@ public:
 	// Pushing algorithm is basically the same as in push()
 	void boost(Map::Pathfield *t)
 	{
-		unsigned slot = t->heap_index;
+		uint32_t slot = t->heap_index;
 
 		assert(m_data[slot] == t);
 
 		while (slot > 0) {
-			unsigned parent = (slot - 1) / 2;
+			uint32_t parent = (slot - 1) / 2;
 
 			if (m_data[parent]->cost() <= t->cost())
 				break;
@@ -1791,10 +1791,10 @@ public:
 	}
 
 	// Recursively check integrity
-	void debug(unsigned node, const char *str)
+	void debug(uint32_t node, const char *str)
 	{
-		unsigned l = node*2 + 1;
-		unsigned r = node*2 + 2;
+		uint32_t l = node*2 + 1;
+		uint32_t r = node*2 + 2;
 		if (m_data[node]->heap_index != static_cast<int>(node)) {
 			fprintf(stderr, "%s: heap_index integrity!\n", str);
 			exit(-1);
@@ -1863,7 +1863,7 @@ int Map::findpath
  const int persist,
  Path & path,
  const CheckStep & checkstep,
- const uint flags)
+ const uint32_t flags)
 {
 	FCoords start;
 	FCoords end;
@@ -1930,7 +1930,7 @@ int Map::findpath
 		direction = (cur.x + cur.y) & 1 ? order1 : order2;
 
 		// Check all the 6 neighbours
-		for (uint i = 6; i; i--, direction++) {
+		for (uint32_t i = 6; i; i--, direction++) {
 			Pathfield *neighbpf;
 			FCoords neighb;
 			int cost;
@@ -2059,18 +2059,18 @@ int Map::change_terrain
 }
 
 
-uint Map::set_height(const FCoords fc, const Uint8 new_value) {
+uint32_t Map::set_height(const FCoords fc, const Uint8 new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
 	assert(m_fields <= fc.field);
 	assert            (fc.field < m_fields + max_index());
 	fc.field->height = new_value;
-	uint radius = 2;
+	uint32_t radius = 2;
 	check_neighbour_heights(fc, radius);
 	recalc_for_field_area(Area<FCoords>(fc, radius));
 	return radius;
 }
 
-uint Map::change_height(Area<FCoords> area, const Sint16 difference) {
+uint32_t Map::change_height(Area<FCoords> area, const Sint16 difference) {
 	{
 		MapRegion<Area<FCoords> > mr(*this, area);
 		do {
@@ -2089,10 +2089,10 @@ uint Map::change_height(Area<FCoords> area, const Sint16 difference) {
 			else  mr.location().field->height += difference;
 		} while (mr.advance(*this));
 	}
-	uint regional_radius = 0;
+	uint32_t regional_radius = 0;
 	MapFringeRegion<Area<FCoords> > mr(*this, area);
 	do {
-		uint local_radius = 0;
+		uint32_t local_radius = 0;
 		check_neighbour_heights(mr.location(), local_radius);
 		regional_radius = std::max(regional_radius, local_radius);
 	} while (mr.advance(*this));
@@ -2101,7 +2101,7 @@ uint Map::change_height(Area<FCoords> area, const Sint16 difference) {
 	return area.radius;
 }
 
-uint Map::set_height
+uint32_t Map::set_height
 (Area<FCoords> area, interval<Field::Height> height_interval)
 {
 	assert(height_interval.valid());
@@ -2154,7 +2154,7 @@ accordingly.
 The radius of modified fields is stored in area.
 =============
 */
-void Map::check_neighbour_heights(FCoords coords, uint & area)
+void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 {
 	assert(m_fields <= coords.field);
 	assert            (coords.field < m_fields + max_index());
@@ -2294,7 +2294,7 @@ bool FindNodeAnd::accept(const Map & map, const FCoords coord) const {
 
 
 bool FindNodeCaps::accept(const Map &, const FCoords coord) const {
-	uchar fieldcaps = coord.field->get_caps();
+	uint8_t fieldcaps = coord.field->get_caps();
 
 	if ((fieldcaps & BUILDCAPS_SIZEMASK) < (m_mincaps & BUILDCAPS_SIZEMASK))
 		return false;
@@ -2308,7 +2308,7 @@ bool FindNodeCaps::accept(const Map &, const FCoords coord) const {
 bool FindNodeSize::accept(const Map &, const FCoords coord) const {
 	BaseImmovable* imm = coord.field->get_immovable();
 	bool hasrobust = (imm && imm->get_size() > BaseImmovable::NONE);
-	uchar fieldcaps = coord.field->get_caps();
+	uint8_t fieldcaps = coord.field->get_caps();
 
 	if (hasrobust)
 		return false;
@@ -2363,8 +2363,8 @@ bool FindNodeImmovableAttribute::accept(const Map &, const FCoords coord) const
 
 
 bool FindNodeResource::accept(const Map &, const FCoords coord) const {
-	uchar res = coord.field->get_resources();
-   uchar amount = coord.field->get_resources_amount();
+	uint8_t res = coord.field->get_resources();
+   uint8_t amount = coord.field->get_resources_amount();
 
 	if ((res==m_resource) && amount)
 		return false;
@@ -2390,13 +2390,13 @@ CheckStepDefault
 bool CheckStepDefault::allowed
 (Map *, FCoords start, FCoords end, int, StepId) const
 {
-	uchar endcaps = end.field->get_caps();
+	uint8_t endcaps = end.field->get_caps();
 
 	if (endcaps & m_movecaps)
 		return true;
 
 	// Swimming bobs are allowed to move from a water field to a shore field
-	uchar startcaps = start.field->get_caps();
+	uint8_t startcaps = start.field->get_caps();
 
 	if ((endcaps & MOVECAPS_WALK) && (startcaps & m_movecaps & MOVECAPS_SWIM))
 		return true;
@@ -2406,7 +2406,7 @@ bool CheckStepDefault::allowed
 
 bool CheckStepDefault::reachabledest(Map* map, FCoords dest) const
 {
-	uchar caps = dest.field->get_caps();
+	uint8_t caps = dest.field->get_caps();
 
 	if (!(caps & m_movecaps)) {
 		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
@@ -2428,8 +2428,8 @@ CheckStepWalkOn
 bool CheckStepWalkOn::allowed
 (Map *, FCoords start, FCoords end, int, StepId id) const
 {
-	uchar startcaps = start.field->get_caps();
-	uchar endcaps = end.field->get_caps();
+	uint8_t startcaps = start.field->get_caps();
+	uint8_t endcaps = end.field->get_caps();
 
 	// Make sure that we don't find paths where we walk onto an unwalkable field,
 	// then move back onto a walkable field.
@@ -2499,7 +2499,7 @@ bool CheckStepRoad::allowed
 
 bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
 {
-	uchar caps = dest.field->get_caps();
+	uint8_t caps = dest.field->get_caps();
 
 	if (!(caps & m_movecaps)) {
 		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
@@ -2546,7 +2546,7 @@ void Path::reverse()
 	std::swap(m_start, m_end);
 	std::reverse(m_path.begin(), m_path.end());
 
-	for (uint i = 0; i < m_path.size(); i++)
+	for (uint32_t i = 0; i < m_path.size(); i++)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
 
@@ -2599,7 +2599,7 @@ Return -1 if field is not part of this path.
 */
 int CoordPath::get_index(Coords field) const
 {
-	for (uint i = 0; i < m_coords.size(); i++)
+	for (uint32_t i = 0; i < m_coords.size(); i++)
 		if (m_coords[i] == field)
 			return i;
 
@@ -2619,7 +2619,7 @@ void CoordPath::reverse()
 	std::reverse(m_path.begin(), m_path.end());
 	std::reverse(m_coords.begin(), m_coords.end());
 
-	for (uint i = 0; i < m_path.size(); i++)
+	for (uint32_t i = 0; i < m_path.size(); i++)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
 
@@ -2675,7 +2675,7 @@ void CoordPath::append(const Map & map, const Path & tail) {
 
 	// debug
 	//log("CoordPath; start %i %i\n", m_coords[0].x, m_coords[0].y);
-	//for (uint i = 0; i < m_path.size(); i++)
+	//for (uint32_t i = 0; i < m_path.size(); i++)
 	//log("  %i -> %i %i\n", m_path[i], m_coords[i+1].x, m_coords[i+1].y);
 }
 

@@ -21,6 +21,7 @@
 #define __S__CRITTER_BOB_H
 
 #include "bob.h"
+#include <stdint.h>
 
 class Critter_BobAction;
 class Critter_BobProgram;
@@ -62,7 +63,7 @@ public:
 	virtual ~Critter_Bob();
 
 	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
-	uint get_movecaps() const throw ();
+	uint32_t get_movecaps() const throw ();
 
 	virtual void init_auto_task(Game* g);
 

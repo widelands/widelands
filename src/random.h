@@ -20,9 +20,9 @@
 #ifndef __RANDOM_H__
 #define __RANDOM_H__
 
-#include "types.h"
+#include <stdint.h>
 
-extern const uint rng_sbox[256];
+extern const uint32_t rng_sbox[256];
 
 class StreamRead;
 class StreamWrite;
@@ -30,16 +30,16 @@ class StreamWrite;
 struct RNG {
 	RNG ();
 
-	void seed (uint);
+	void seed (uint32_t);
 
-	uint rand ();
+	uint32_t rand ();
 
 	void ReadState(StreamRead&);
 	void WriteState(StreamWrite&);
 
 private:
-	uint state0;
-	uint state1;
+	uint32_t state0;
+	uint32_t state1;
 };
 
 #define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x) & 0xff])

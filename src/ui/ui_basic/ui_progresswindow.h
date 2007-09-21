@@ -22,6 +22,7 @@
 
 #include "graphic.h"
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -56,16 +57,16 @@ struct ProgressWindow {
 
 private:
 	typedef std::vector<IProgressVisualization*> VisualizationArray;
-	uint  m_xres;
-	uint  m_yres;
+	uint32_t  m_xres;
+	uint32_t  m_yres;
 	Point m_label_center;
 	Rect  m_label_rectangle;
 	VisualizationArray m_visualizations;
 	std::string m_background;
 
 	void draw_background(RenderTarget & rt,
-						 const uint xres,
-						 const uint yres);
+						 const uint32_t xres,
+						 const uint32_t yres);
 	void update(bool repaint);
 };
 };

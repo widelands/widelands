@@ -21,6 +21,7 @@
 #define included_ui_checkbox_h
 
 #include "rgbcolor.h"
+#include <stdint.h>
 #include "ui_panel.h"
 #include "ui_signal.h"
 
@@ -33,7 +34,7 @@ namespace UI {
  * Serves as base for Checkbox and Radiobutton.
  */
 struct Statebox : public Panel {
-	Statebox(Panel *parent, int x, int y, uint picid = 0);
+	Statebox(Panel *parent, int x, int y, uint32_t picid = 0);
 	~Statebox();
 
 	Signal changed;
@@ -60,7 +61,7 @@ private:
    int      m_id;
 
 	bool     m_custom_picture; ///< the statebox displays a custom picture
-	uint     m_pic_graphics;
+	uint32_t     m_pic_graphics;
 
 	bool     m_highlighted;
 	bool     m_enabled;        ///< true if the checkbox can be clicked

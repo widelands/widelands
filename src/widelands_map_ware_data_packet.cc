@@ -24,6 +24,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "transport.h"
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
@@ -87,7 +88,7 @@ throw (_wexception)
 
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
 	const Map & map = egbase->map();
-   std::vector<uint> ids;
+   std::vector<uint32_t> ids;
 	Field * field = &map[0];
 	const Field * const fields_end = field + map.max_index();
 	for (; field < fields_end; ++field) {
@@ -116,7 +117,7 @@ throw (_wexception)
 
    // All checked, we only need to save those stuff to disk
    fw.Unsigned32(ids.size());
-   for (uint i=0; i<ids.size(); i++)
+   for (uint32_t i=0; i<ids.size(); i++)
       fw.Unsigned32(ids[i]);
 
    fw.Write(fs, "binary/ware");

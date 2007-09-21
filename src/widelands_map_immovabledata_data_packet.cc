@@ -26,6 +26,7 @@
 #include "immovable_program.h"
 #include "map.h"
 #include "player.h"
+#include <stdint.h>
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
@@ -68,7 +69,7 @@ throw (_wexception)
 
 	if (packet_version==CURRENT_PACKET_VERSION) {
 		while (1) {
-			uint reg=fr.Unsigned32();
+			uint32_t reg=fr.Unsigned32();
 			if (reg==0xffffffff) break; // Last immovable
 
 			assert(ol->is_object_known(reg));

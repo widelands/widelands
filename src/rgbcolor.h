@@ -21,7 +21,7 @@
 #define RGBCOLOR_H
 
 #include <SDL.h>
-#include "types.h"
+#include <stdint.h>
 
 
 struct RGBColor : protected SDL_Color {
@@ -33,9 +33,9 @@ struct RGBColor : protected SDL_Color {
 	Uint8 g() const throw () {return SDL_Color::g;}
 	Uint8 b() const throw () {return SDL_Color::b;}
 
-	ulong map(const SDL_PixelFormat & fmt) const throw ()
+	uint32_t map(const SDL_PixelFormat & fmt) const throw ()
 	{return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r(), g(), b());}
-	void set(SDL_PixelFormat * const fmt, ulong clr) throw ()
+	void set(SDL_PixelFormat * const fmt, uint32_t clr) throw ()
 	{SDL_GetRGB(clr, fmt, &(SDL_Color::r), &(SDL_Color::g), &(SDL_Color::b));}
 
 	bool operator==(const RGBColor & other) const throw ()

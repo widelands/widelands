@@ -90,9 +90,9 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
 const int LayeredFileSystem::FindFiles(std::string path,
                                        const std::string pattern,
                                        filenameset_t *results,
-                                       uint depth)
+                                       uint32_t depth)
 {
-	uint i=0;
+	uint32_t i=0;
 	if (depth==0)
 		depth=10000; // Wow, if you have so many filesystem you're my hero
 

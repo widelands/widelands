@@ -32,7 +32,7 @@
 MiniMap::View::View
 (UI::Panel & parent,
  const  int x, const  int y,
- const uint w, const uint h,
+ const uint32_t w, const uint32_t h,
  Interactive_Base & iabase)
 :
 UI::Panel       (&parent, x, y, 10, 10),
@@ -124,11 +124,11 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-inline uint MiniMap::number_of_buttons_per_row() const throw () {return 3;}
-inline uint MiniMap::number_of_button_rows    () const throw () {return 2;}
-inline uint MiniMap::but_w() const throw ()
+inline uint32_t MiniMap::number_of_buttons_per_row() const throw () {return 3;}
+inline uint32_t MiniMap::number_of_button_rows    () const throw () {return 2;}
+inline uint32_t MiniMap::but_w() const throw ()
 {return m_view.get_w() / number_of_buttons_per_row();}
-inline uint MiniMap::but_h() const throw () {return 20;}
+inline uint32_t MiniMap::but_h() const throw () {return 20;}
 MiniMap::MiniMap(Interactive_Base & iabase, UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow(&iabase, registry, 0, 0, _("Map")),

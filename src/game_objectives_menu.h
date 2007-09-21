@@ -20,6 +20,7 @@
 #ifndef __S__GAME_OBJECTIVE_MENU_H
 #define __S__GAME_OBJECTIVE_MENU_H
 
+#include <stdint.h>
 #include "ui_listselect.h"
 #include "ui_multilinetextarea.h"
 #include "ui_unique_window.h"
@@ -38,7 +39,7 @@ private:
 	UI::Listselect<MapObjective &>list;
 	UI::Multiline_Textarea objectivetext;
 
-	void selected(uint);
+	void selected(uint32_t);
 };
 
 #endif

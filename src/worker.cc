@@ -95,14 +95,14 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 			 "world!!\n",  action->sparam1.c_str());
 
 	// Select one of the fields randomly
-	uint totalres = 0;
-	uint totalchance = 0;
+	uint32_t totalres = 0;
+	uint32_t totalchance = 0;
 	int pick;
 	MapRegion<Area<FCoords> > mr(map,
 			Area<FCoords>(map.get_fcoords(get_position()), action->iparam1));
 	do {
-		uchar fres  = mr.location().field->get_resources();
-		uint amount = mr.location().field->get_resources_amount();
+		uint8_t fres  = mr.location().field->get_resources();
+		uint32_t amount = mr.location().field->get_resources_amount();
 
 		// In the future, we might want to support amount = 0 for
 		// fields that can produce an infinite amount of resources.
@@ -134,8 +134,8 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 	pick = g->logic_rand() % totalchance;
 
 	do {
-		uchar fres  = mr.location().field->get_resources();
-		uint amount = mr.location().field->get_resources_amount();;
+		uint8_t fres  = mr.location().field->get_resources();
+		uint32_t amount = mr.location().field->get_resources_amount();;
 
 		if (fres != res)
 			amount = 0;
@@ -672,8 +672,8 @@ bool Worker::run_geologist_find(Game * g, State * state, const Action *)
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
 	} else {
-		uint res = position.field->get_resources();
-		uint amount = position.field->get_resources_amount();
+		uint32_t res = position.field->get_resources();
+		uint32_t amount = position.field->get_resources_amount();
 
 		int idx;
 		Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
@@ -753,7 +753,7 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 }
 
 
-uint Worker::get_movecaps() const throw ()
+uint32_t Worker::get_movecaps() const throw ()
 {
 	return MOVECAPS_WALK;
 }
@@ -2113,7 +2113,7 @@ void Worker::fugitive_update(Game* g, State* state)
 
 		molog("[fugitive]: found warehouse(s)\n");
 
-		for (uint i = 0; i < warehouses.size(); i++) {
+		for (uint32_t i = 0; i < warehouses.size(); i++) {
 			Warehouse *wh = (Warehouse*)warehouses[i].object;
 
 			// Only walk into one of our warehouses
@@ -2265,8 +2265,8 @@ void Worker::geologist_update(Game* g, State* state)
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
-			uint n=list.size();
-			uint i=g->logic_rand() % list.size();
+			uint32_t n=list.size();
+			uint32_t i=g->logic_rand() % list.size();
 			do {
 				molog("[geologist] Searching for a suitable field!\n");
 				target =

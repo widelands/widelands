@@ -21,6 +21,7 @@
 #define __S__S2MAP_H
 
 #include "map_loader.h"
+#include <stdint.h>
 
 struct S2MapDescrHeader {
 		  char   magic[10]; // "WORLD_V1.0"
@@ -146,7 +147,7 @@ struct S2_Map_Loader : public Map_Loader {
 private:
       char  m_filename[256];
 
-      uchar *load_s2mf_section(FileRead *, int width, int height);
+      uint8_t *load_s2mf_section(FileRead *, int width, int height);
       void  load_s2mf_header();
       void  load_s2mf(Editor_Game_Base*);
 };

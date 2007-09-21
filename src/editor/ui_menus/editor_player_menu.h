@@ -24,8 +24,6 @@
 
 #include "widelands.h"
 
-#include "types.h"
-
 #include "ui_button.h"
 #include "ui_unique_window.h"
 

@@ -21,6 +21,7 @@
 #define TRAININGSITE_H
 
 #include "productionsite.h"
+#include <stdint.h>
 #include "tattribute.h"
 
 class TrainingSite_Window;
@@ -97,7 +98,7 @@ public:
 
 	virtual void init(Editor_Game_Base * g);
 	virtual void cleanup(Editor_Game_Base * g);
-	virtual void act(Game * g, uint data);
+	virtual void act(Game * g, uint32_t data);
 
 	inline bool get_build_heros() {
 		return m_build_heros;
@@ -115,11 +116,11 @@ public:
 	virtual const std::vector<Soldier *> & get_soldiers() const throw ()
 	{return m_soldiers;}
 
-	virtual void drop_soldier(uint nr);
-	uint get_pri(enum tAttribute atr);
+	virtual void drop_soldier(uint32_t nr);
+	uint32_t get_pri(enum tAttribute atr);
 	void add_pri(enum tAttribute atr);
 	void sub_pri(enum tAttribute atr);
-	uint get_capacity() const throw () {return m_capacity;}
+	uint32_t get_capacity() const throw () {return m_capacity;}
 	virtual void soldier_capacity_up() {
 		change_soldier_capacity(1);
 	}
@@ -140,7 +141,7 @@ private:
 	void calc_list_upgrades(Game * g);
 
 	void call_soldiers();
-	void drop_soldier(Game * g, uint nr);
+	void drop_soldier(Game * g, uint32_t nr);
 	void drop_unupgradable_soldiers(Game * g);
 
 	void modif_priority(enum tAttribute, int);
@@ -155,10 +156,10 @@ private:
 	 * Equal or less to maximum number of soldiers supported by a training site. There is no
 	 * guarantee there really are m_capacity soldiers in the building - some of them might
 	 * still be under way or even not yet available*/
-	uint m_capacity;
+	uint32_t m_capacity;
 
 	/** Number of available soldiers + number of requested soldiers. \todo Factor out this variable?*/
-	uint m_total_soldiers;
+	uint32_t m_total_soldiers;
 
 	/** Possible upgrades to be gained at this site*/
 	std::vector < std::string > m_list_upgrades;
@@ -169,19 +170,19 @@ private:
 
 	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
 	 * \sa m_pri_attack, m_pri_defense, m_pri_evade*/
-	uint m_pri_hp;
+	uint32_t m_pri_hp;
 
 	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
 	 * \sa m_pri_hp, m_pri_defense, m_pri_evade*/
-	uint m_pri_attack;
+	uint32_t m_pri_attack;
 
 	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
 	 * \sa m_pri_hp, m_pri_attack, m_pri_evade*/
-	uint m_pri_defense;
+	uint32_t m_pri_defense;
 
 	/** Priority for upgrading hitpoints (0 to 2) 0 = don't upgrade, 2 = upgrade urgently
 	 * \sa m_pri_hp, m_pri_attack, m_pri_defense*/
-	uint m_pri_evade;
+	uint32_t m_pri_evade;
 
 	/** Modificator for m_pri_hp, needed to prevent infinite loop when upgrading is not
 	 * possible immediately*/

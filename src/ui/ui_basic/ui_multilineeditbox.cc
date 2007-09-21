@@ -34,7 +34,7 @@ Initialize a edibox that supports multiline strings.
 */
 Multiline_Editbox::Multiline_Editbox
 	(Panel * parent,
-	 int x, int y, uint w, uint h,
+	 int x, int y, uint32_t w, uint32_t h,
 	 const char * text)
 	:
 	Multiline_Textarea(parent, x, y, w, h, text, Align_Left, true),
@@ -90,18 +90,18 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
 		case KEY_DOWN:
 			if (m_cur_pos < txt.size() - 1) {
-               uint begin_of_line=m_cur_pos;
+               uint32_t begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
                while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
                if (begin_of_line!=0) ++begin_of_line;
-               uint begin_of_next_line=m_cur_pos;
+               uint32_t begin_of_next_line=m_cur_pos;
                while (txt[begin_of_next_line]!='\n' && begin_of_next_line<txt.size())
                   ++begin_of_next_line;
                if (begin_of_next_line==txt.size())
                   --begin_of_next_line;
                 else
                   ++begin_of_next_line;
-               uint end_of_next_line=begin_of_next_line;
+               uint32_t end_of_next_line=begin_of_next_line;
                while (txt[end_of_next_line]!='\n' && end_of_next_line<txt.size())
                   ++end_of_next_line;
                if (begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line)
@@ -113,13 +113,13 @@ bool Multiline_Editbox::handle_key(bool down, int code, char c) {
 
 		case KEY_UP:
 			if (m_cur_pos > 0) {
-               uint begin_of_line=m_cur_pos;
+               uint32_t begin_of_line=m_cur_pos;
                if (txt[begin_of_line]=='\n') --begin_of_line;
                while (begin_of_line>0 && txt[begin_of_line]!='\n') --begin_of_line;
                if (begin_of_line!=0) ++begin_of_line;
-               uint end_of_last_line=begin_of_line;
+               uint32_t end_of_last_line=begin_of_line;
                if (begin_of_line!=0) --end_of_last_line;
-               uint begin_of_lastline=end_of_last_line;
+               uint32_t begin_of_lastline=end_of_last_line;
                if (txt[begin_of_lastline]=='\n') --begin_of_lastline;
                while (begin_of_lastline>0 && txt[begin_of_lastline]!='\n') --begin_of_lastline;
                if (begin_of_lastline!=0) ++begin_of_lastline;

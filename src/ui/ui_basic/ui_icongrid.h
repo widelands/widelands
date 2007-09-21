@@ -20,6 +20,7 @@
 #ifndef included_ui_icongrid_h
 #define included_ui_icongrid_h
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -47,16 +48,16 @@ struct Icon_Grid : public Panel {
 		Grid_Persistant = 2,
 	};
 
-	Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
+	Icon_Grid(Panel* parent, int x, int y, int cellw, int cellh, uint32_t flags, int cols);
 
 	Signal1<int> clicked;
 	Signal1<int> mouseout;
 	Signal1<int> mousein;
 
 	bool is_persistant() const {return m_flags & Grid_Persistant;}
-	uint get_orientation() const {return m_flags & Grid_Orientation_Mask;}
+	uint32_t get_orientation() const {return m_flags & Grid_Orientation_Mask;}
 
-	int add(uint picid, void* data, std::string descr = std::string());
+	int add(uint32_t picid, void* data, std::string descr = std::string());
 	void* get_data(int idx);
 
 	void set_selection(int idx);
@@ -78,12 +79,12 @@ protected:
 
 private:
 	struct Item {
-		uint        picid;
+		uint32_t        picid;
 		void      * data;
 		std::string descr;
 	};
 
-	uint   m_flags;
+	uint32_t   m_flags;
 
 	 ///< max # of columns (or rows, depending on orientation) in the grid
 	int m_columns;

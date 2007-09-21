@@ -20,6 +20,7 @@
 #ifndef __S__BUILDING_STATISTICS_MENU_H
 #define __S__BUILDING_STATISTICS_MENU_H
 
+#include <stdint.h>
 #include "ui_table.h"
 #include "ui_unique_window.h"
 
@@ -46,18 +47,18 @@ private:
 	};
 
       Interactive_Player* m_parent;
-	UI::Table<const uintptr_t> m_table;
+	UI::Table<const intptr_t> m_table;
       UI::Progress_Bar*     m_progbar;
       UI::Textarea*         m_owned, *m_build;
-      uint                m_anim;
-      uint                m_lastupdate;
-      uint                m_end_of_table_y;
+      uint32_t                m_anim;
+      uint32_t                m_lastupdate;
+      uint32_t                m_end_of_table_y;
 	UI::IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
       int                 m_last_building_index;
 
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
-	void table_changed(uint);
+	void table_changed(uint32_t);
       void update();
       int validate_pointer(int*, int);
 };

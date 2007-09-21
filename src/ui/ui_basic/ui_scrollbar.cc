@@ -41,7 +41,7 @@ Scrollbar
 /**
 Initialize the scrollbar using default values.
 */
-Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
+Scrollbar::Scrollbar(Panel *parent, int x, int y, uint32_t w, uint32_t h, bool horiz)
 	: Panel(parent, x, y, w, h)
 {
 	m_horizontal = horiz;
@@ -81,7 +81,7 @@ void Scrollbar::set_steps(int steps)
 	if (steps < 1)
 		steps = 1;
 
-	if (m_pos >= static_cast<uint>(steps)) set_pos(steps - 1);
+	if (m_pos >= static_cast<uint32_t>(steps)) set_pos(steps - 1);
 
 	m_steps = steps;
 
@@ -108,9 +108,9 @@ void Scrollbar::set_pos(int pos)
 {
 	if (pos < 0)
 		pos = 0;
-	if (static_cast<uint>(pos) >= m_steps) pos = m_steps - 1;
+	if (static_cast<uint32_t>(pos) >= m_steps) pos = m_steps - 1;
 
-	if (m_pos == static_cast<uint>(pos)) return;
+	if (m_pos == static_cast<uint32_t>(pos)) return;
 
 	m_pos = pos;
 	moved.call(pos);
@@ -221,7 +221,7 @@ void Scrollbar::action(Area area)
 
 
 void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
-	uint pic;
+	uint32_t pic;
 
 	dst.tile(r, m_pic_buttons, Point(get_x(), get_y()));
 
@@ -233,7 +233,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 		pic = m_pic_plus;
 
 	if (pic) {
-		uint cpw, cph;
+		uint32_t cpw, cph;
 		g_gr->get_picture_size(pic, cpw, cph);
 
 		dst.blit(r + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
@@ -286,7 +286,7 @@ Draw the scrollbar.
 */
 void Scrollbar::draw(RenderTarget* dst)
 {
-	uint knobpos = get_knob_pos();
+	uint32_t knobpos = get_knob_pos();
 
    if (m_steps==1 && !m_force_draw) return; // don't draw a not doing scrollbar
 
@@ -303,7 +303,7 @@ void Scrollbar::draw(RenderTarget* dst)
 			 MinusPage,
 			 Rect(Point(Size, 0), knobpos - 3 * Size / 2, get_h()));
 		assert(0 <= get_w());
-		assert(knobpos + 3 * Size / 2 <= static_cast<uint>(get_w()));
+		assert(knobpos + 3 * Size / 2 <= static_cast<uint32_t>(get_w()));
 		draw_area
 			(*dst,
 			 PlusPage,
@@ -324,7 +324,7 @@ void Scrollbar::draw(RenderTarget* dst)
 			 MinusPage,
 			 Rect(Point(0, Size), get_w(), knobpos - 3 * Size / 2));
 		assert(0 <= get_h());
-		assert(knobpos + 3 * Size / 2 <= static_cast<uint>(get_h()));
+		assert(knobpos + 3 * Size / 2 <= static_cast<uint32_t>(get_h()));
 		draw_area
 			(*dst,
 			 PlusPage,

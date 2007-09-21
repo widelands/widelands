@@ -26,6 +26,7 @@
 #include "immovable.h"
 #include "militarysite.h"
 #include "map.h"
+#include <stdint.h>
 #include "soldier.h"
 #include "tribe.h"
 #include "widelands_map_data_packet_ids.h"
@@ -66,12 +67,12 @@ throw (_wexception)
 	const Uint16 packet_version = fr.Unsigned16();
 	if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 		const Extent extent = egbase->map().extent();
-		uint nrControllers = fr.Unsigned32();
-		for (uint i=0;i<nrControllers;i++) {
+		uint32_t nrControllers = fr.Unsigned32();
+		for (uint32_t i=0;i<nrControllers;i++) {
 			AttackController* ctrl = egbase->create_attack_controller();
 
 			fr.Unsigned32();
-			uint flagFilePos = fr.Unsigned32();
+			uint32_t flagFilePos = fr.Unsigned32();
 
 			Flag* flag = (Flag*) ol->get_object_by_file_index(flagFilePos);
 			assert(flag);
@@ -82,9 +83,9 @@ throw (_wexception)
 			ctrl->totallyLaunched = fr.Unsigned32();
 			ctrl->attackedMsEmpty = fr.Unsigned8();
 
-			uint numBs = fr.Unsigned32();
+			uint32_t numBs = fr.Unsigned32();
 
-			for (uint j=0;j<numBs;j++) {
+			for (uint32_t j=0;j<numBs;j++) {
 				Soldier* soldier = (Soldier*) ol->get_object_by_file_index(fr.Unsigned32());
 				assert(soldier);
 
@@ -140,8 +141,8 @@ throw (_wexception)
 				soldier->set_attack_ctrl(ctrl);
 			}
 
-			uint numInMs = fr.Unsigned32();
-			for (uint j=0;j<numInMs;j++) {
+			uint32_t numInMs = fr.Unsigned32();
+			for (uint32_t j=0;j<numInMs;j++) {
 			MilitarySite* ms = (MilitarySite*) ol->get_object_by_file_index(fr.Unsigned32());
 			assert(ms);
 			ctrl->involvedMilitarySites.insert(ms);

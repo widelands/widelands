@@ -30,6 +30,7 @@ Rendering functions of the 16-bit software renderer.
 #include "player.h"
 #include "rgbcolor.h"
 #include "graphic.h"
+#include <stdint.h>
 #include "transport.h"
 #include "wexception.h"
 #include "world.h"
@@ -88,7 +89,7 @@ void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-	const ulong color = clr.map(format());
+	const uint32_t color = clr.map(format());
 
 	const Point bl = rc.bottom_left() - Point(1, 1);
 
@@ -116,7 +117,7 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-	const ulong color = clr.map(format());
+	const uint32_t color = clr.map(format());
 
    SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
    SDL_FillRect(m_surface, &r, color);
@@ -137,9 +138,9 @@ void Surface::brighten_rect(const Rect rc, const int factor) {
 	assert(rc.h >= 1);
 	const Point bl = rc.bottom_left();
 	for (int y = rc.y; y < bl.y; ++y) for (int x = rc.x; x < bl.x; ++x) {
-         uchar gr, gg, gb;
+         uint8_t gr, gg, gb;
          short r, g, b;
-         ulong clr = get_pixel(x, y);
+         uint32_t clr = get_pixel(x, y);
          SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
          r = gr + factor;
          g = gg + factor;
@@ -189,9 +190,9 @@ void Surface::fast_blit(Surface* src) {
 /*
  * Blend to colors; only needed for calc_minimap_color below
  */
-static inline ulong blend_color
+static inline uint32_t blend_color
 (const SDL_PixelFormat & format,
- const ulong clr1,
+ const uint32_t clr1,
  const Uint8 r2, const Uint8 g2, const Uint8 b2)
 {
 	Uint8 r1, g1, b1;
@@ -208,15 +209,15 @@ calc_minimap_color
 Return the color to be used in the minimap for the given field.
 ===============
 */
-static inline ulong calc_minimap_color
+static inline uint32_t calc_minimap_color
 (const SDL_PixelFormat & format,
  const Editor_Game_Base & egbase,
  const FCoords f,
- const uint flags,
+ const uint32_t flags,
  const Player_Number owner,
  const bool see_details)
 {
-	ulong pixelcolor = 0;
+	uint32_t pixelcolor = 0;
 
 	if (flags & MiniMap::Terrn) {
 		pixelcolor =
@@ -266,23 +267,23 @@ static inline ulong calc_minimap_color
 template<typename T>
 static void draw_minimap_int
 (Uint8 * const             pixels,
- const ushort              pitch,
+ const uint16_t              pitch,
  const SDL_PixelFormat   & format,
- const uint                mapwidth,
+ const uint32_t                mapwidth,
  const Editor_Game_Base  & egbase,
  const Player * const     player,
  const Rect                rc,
  const Point               viewpoint,
- const uint                flags)
+ const uint32_t                flags)
 {
 	const Map & map = egbase.map();
-	if (not player or player->see_all()) for (uint y = 0; y < rc.h; ++y) {
+	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);
-		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
+		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 			*reinterpret_cast<T *>(pix) = static_cast<T>
 				(calc_minimap_color
@@ -290,13 +291,13 @@ static void draw_minimap_int
 		}
 	} else {
 		const Player::Field * const player_fields = player->fields();
-		for (uint y = 0; y < rc.h; ++y) {
+		for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		FCoords f(Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(&f);
 		f.field = &map[f];
 		Map::Index i = Map::get_index(f, mapwidth);
-		for (uint x = 0; x < rc.w; ++x, pix += sizeof(T)) {
+		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			move_r(mapwidth, f, i);
 				const Player::Field & player_field = player_fields[i];
 				const Vision vision = player_field.vision;
@@ -322,11 +323,11 @@ void Surface::draw_minimap
  const Player * const     player,
  const Rect                rc,
  const Point               viewpt,
- const uint                flags)
+ const uint32_t                flags)
 {
 	//TODO: this const_cast is evil and should be exorcised.
 	Uint8 * const pixels = const_cast<Uint8 *>(static_cast<const Uint8 *>(get_pixels()));
-	const ushort pitch = get_pitch();
+	const uint16_t pitch = get_pitch();
 	const X_Coordinate w = egbase.map().get_width();
 	switch (format().BytesPerPixel) {
 	case sizeof(Uint16):
@@ -356,7 +357,7 @@ AnimationGfx::AnimationGfx
 Load the animation
 ===============
 */
-static const uint nextensions = 4;
+static const uint32_t nextensions = 4;
 static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
 AnimationGfx::AnimationGfx(const AnimationData* data)
 {
@@ -379,7 +380,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
       bool alldone=false;
       bool cycling=false;
 
-		for (uint i = 0; i < nextensions; ++i) {
+		for (uint32_t i = 0; i < nextensions; ++i) {
 
          // create the file name by reverse-scanning for '?' and replacing
          nr=frames.size();
@@ -443,9 +444,9 @@ Free all resources
 */
 AnimationGfx::~AnimationGfx()
 {
-   for (uint i = 0; i <= MAX_PLAYERS; i++) {
+   for (uint32_t i = 0; i <= MAX_PLAYERS; i++) {
       std::vector<Surface*>& frames = m_plrframes[i];
-      for (uint j = 0; j < frames.size(); j++) {
+      for (uint32_t j = 0; j < frames.size(); j++) {
          delete frames[j];
 		}
 	}
@@ -460,12 +461,12 @@ AnimationGfx::encode
 Encodes the given surface into a frame
 ===============
 */
-void AnimationGfx::encode(uchar plr, const RGBColor* plrclrs)
+void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 {
    assert(m_encodedata.hasplrclrs);
    std::vector<Surface*>& frames = m_plrframes[plr];
 
-   for (uint i = 0; i < m_plrframes[0].size(); i++) {
+   for (uint32_t i = 0; i < m_plrframes[0].size(); i++) {
       // Copy the old surface
 		Surface & origsurface = *m_plrframes[0][i];
 		SDL_Surface & tempsurface = *SDL_ConvertSurface
@@ -476,20 +477,20 @@ void AnimationGfx::encode(uchar plr, const RGBColor* plrclrs)
 		newsurface.set_sdl_surface(tempsurface);
 		const SDL_PixelFormat & format = newsurface.format();
 
-		ulong plrclr1 = m_encodedata.plrclr[0].map(format);
-		ulong plrclr2 = m_encodedata.plrclr[1].map(format);
-		ulong plrclr3 = m_encodedata.plrclr[2].map(format);
-		ulong plrclr4 = m_encodedata.plrclr[3].map(format);
+		uint32_t plrclr1 = m_encodedata.plrclr[0].map(format);
+		uint32_t plrclr2 = m_encodedata.plrclr[1].map(format);
+		uint32_t plrclr3 = m_encodedata.plrclr[2].map(format);
+		uint32_t plrclr4 = m_encodedata.plrclr[3].map(format);
 
-		ulong new_plrclr1 = plrclrs[0].map(format);
-		ulong new_plrclr2 = plrclrs[1].map(format);
-		ulong new_plrclr3 = plrclrs[2].map(format);
-		ulong new_plrclr4 = plrclrs[3].map(format);
+		uint32_t new_plrclr1 = plrclrs[0].map(format);
+		uint32_t new_plrclr2 = plrclrs[1].map(format);
+		uint32_t new_plrclr3 = plrclrs[2].map(format);
+		uint32_t new_plrclr4 = plrclrs[3].map(format);
 
       // Walk the surface, replace all playercolors
-		for (uint y = 0; y < newsurface.get_h(); ++y) {
-			for (uint x = 0; x < newsurface.get_w(); ++x) {
-				const ulong clr = newsurface.get_pixel(x, y);
+		for (uint32_t y = 0; y < newsurface.get_h(); ++y) {
+			for (uint32_t x = 0; x < newsurface.get_w(); ++x) {
+				const uint32_t clr = newsurface.get_pixel(x, y);
 				if      (clr == plrclr1) newsurface.set_pixel(x, y, new_plrclr1);
 				else if (clr == plrclr2) newsurface.set_pixel(x, y, new_plrclr2);
 				else if (clr == plrclr3) newsurface.set_pixel(x, y, new_plrclr3);

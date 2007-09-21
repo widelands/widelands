@@ -76,7 +76,7 @@ const bool RealFSImpl::IsWritable() const
 // note: the Win32 version may be broken, feel free to fix it
 const int RealFSImpl::FindFiles(std::string path,
                                 const std::string pattern,
-                                filenameset_t *results, uint depth)
+                                filenameset_t *results, uint32_t depth)
 #ifdef _WIN32
 {
 	std::string buf;

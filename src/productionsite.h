@@ -25,6 +25,7 @@
 
 #include <map>
 #include <set>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -97,7 +98,7 @@ public:
 	{return Building::PRODUCTIONSITE;}
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game* g, uint data);
+	virtual void act(Game* g, uint32_t data);
 
 	virtual void remove_worker(Worker* w);
 
@@ -123,8 +124,8 @@ protected:
 	struct State {
 		const ProductionProgram * program; //  currently running program
 		int  ip;    //  instruction pointer
-		uint phase; //  micro-step index (instruction dependent)
-		uint flags; //  pfXXX flags
+		uint32_t phase; //  micro-step index (instruction dependent)
+		uint32_t flags; //  pfXXX flags
 	};
 
 	void request_worker(const char * const worker_name);
@@ -133,7 +134,7 @@ protected:
 
 	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
 	void program_act(Game* g);
-	void program_step(const uint phase = 0);
+	void program_step(const uint32_t phase = 0);
 	void program_start(Game* g, std::string name);
 	void program_end(Game* g, bool success);
 	void add_statistics_value(bool val);
@@ -179,7 +180,7 @@ public:
 	~Input() {}
 
 	const Item_Ware_Descr & ware_descr() const throw () {return *m_ware;}
-	uint get_max() const throw () {return m_max;}
+	uint32_t get_max() const throw () {return m_max;}
 
 private:
 	Item_Ware_Descr* m_ware;

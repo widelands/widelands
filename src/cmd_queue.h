@@ -23,6 +23,7 @@
 #include "queue_cmd_ids.h"
 
 #include <queue>
+#include <stdint.h>
 
 class Editor_Game_Base;
 class Widelands_Map_Map_Object_Saver;
@@ -123,7 +124,7 @@ class Cmd_Queue {
 		 * independent of details of the priority_queue implementation.
 		 */
 		int category;
-		unsigned long serial;
+		uint32_t serial;
 
 		bool operator< (const cmditem& c) const
 		{
@@ -148,7 +149,7 @@ public:
 private:
 	Game *                       m_game;
 	std::priority_queue<cmditem> m_cmds;
-	unsigned long                nextserial;
+	uint32_t                     nextserial;
 };
 
 #endif // __S__CMD_QUEUE_H

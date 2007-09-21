@@ -35,7 +35,7 @@ namespace UI {
 /**
 Initialize an empty Tab_Panel
 */
-Tab_Panel::Tab_Panel(Panel* parent, int x, int y, uint background)
+Tab_Panel::Tab_Panel(Panel* parent, int x, int y, uint32_t background)
 	: Panel(parent, x, y, 0, 0)
 {
 	m_active = 0;
@@ -105,13 +105,13 @@ void Tab_Panel::set_snapparent(bool snapparent)
 /**
 Add a new tab
 */
-uint Tab_Panel::add(uint picid, Panel* panel, const std::string & tooltip_text)
+uint32_t Tab_Panel::add(uint32_t picid, Panel* panel, const std::string & tooltip_text)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
 
 	Tab t;
-	uint id;
+	uint32_t id;
 
 	t.picid = picid;
 	t.tooltip = tooltip_text;
@@ -130,7 +130,7 @@ uint Tab_Panel::add(uint picid, Panel* panel, const std::string & tooltip_text)
 /**
 Make a different tab the currently active tab.
 */
-void Tab_Panel::activate(uint idx)
+void Tab_Panel::activate(uint32_t idx)
 {
 	if (m_active < m_tabs.size())
 		m_tabs[m_active].panel->set_visible(false);
@@ -148,7 +148,7 @@ Draw the buttons and the tab
 */
 void Tab_Panel::draw(RenderTarget* dst)
 {
-	uint idx;
+	uint32_t idx;
 	int x;
 
 	// draw the background
@@ -174,7 +174,7 @@ void Tab_Panel::draw(RenderTarget* dst)
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
-		uint cpw, cph;
+		uint32_t cpw, cph;
 		g_gr->get_picture_size(m_tabs[idx].picid, cpw, cph);
 
 		dst->blit

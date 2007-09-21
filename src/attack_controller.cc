@@ -65,10 +65,10 @@ void getCloseMilitarySites
 	}
 }
 
-uint getMaxAttackSoldiers
+uint32_t getMaxAttackSoldiers
 (const Editor_Game_Base & eg, const Flag & flag, const Player_Number player)
 {
-	uint maxAttackSoldiers = 0;
+	uint32_t maxAttackSoldiers = 0;
 
 	std::set<OPtr<MilitarySite> > militarySites;
 	getCloseMilitarySites(eg, flag, player, militarySites);
@@ -112,7 +112,7 @@ AttackController::~AttackController() {
 }
 
 //Methods inherited by BaseImmovable
-void AttackController::act (Game* game, uint) {
+void AttackController::act (Game* game, uint32_t) {
 	schedule_act(game, 10000); // Check every 10sec if the battle is deadlocked
 }
 
@@ -128,7 +128,7 @@ void AttackController::cleanup (Editor_Game_Base* eg)
 }
 //end inherited
 
-void AttackController::launchAttack(uint nrAttackers) {
+void AttackController::launchAttack(uint32_t nrAttackers) {
 	launchAllSoldiers(true, nrAttackers);
 	//always try to launch two more defenders than attackers
 	if (!launchAllSoldiers(false, nrAttackers+2)) {
@@ -157,8 +157,8 @@ bool AttackController::launchAllSoldiers(bool attackers, int max) {
 		 ++it)
 	{
 		MilitarySite* ms = OPtr<MilitarySite>(*it).get(&egbase());
-		uint soldiersOfMs = ms->nr_attack_soldiers();
-		const uint nrLaunch = (max > -1 and (soldiersOfMs > static_cast<uint>(max)) ? static_cast<uint>(max) : soldiersOfMs);
+		uint32_t soldiersOfMs = ms->nr_attack_soldiers();
+		const uint32_t nrLaunch = (max > -1 and (soldiersOfMs > static_cast<uint32_t>(max)) ? static_cast<uint32_t>(max) : soldiersOfMs);
 		if (nrLaunch == 0) continue;
 
 		launchedSoldier = true;
@@ -177,11 +177,11 @@ bool AttackController::launchAllSoldiers(bool attackers, int max) {
 
 void AttackController::launchSoldiersOfMilitarySite
 		(MilitarySite* militarySite,
-		 uint nrLaunch,
+		 uint32_t nrLaunch,
 		 bool attackers)
 {
 	assert(nrLaunch);
-	uint launched = 0;
+	uint32_t launched = 0;
 
 	const std::vector<Soldier *> & soldiers = militarySite->get_soldiers();
 	std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
@@ -248,7 +248,7 @@ void AttackController::soldierDied(Soldier* soldier)
 
 void AttackController::soldierWon(Soldier* soldier)
 {
-	uint idx = getBattleSoldierIndex(soldier);
+	uint32_t idx = getBattleSoldierIndex(soldier);
 	involvedSoldiers[idx].fighting = false;
 
 	if (opponentsLeft(soldier)) {
@@ -264,7 +264,7 @@ void AttackController::soldierWon(Soldier* soldier)
 			 dynamic_cast<MilitarySite *>(flag->get_building()))
 		{
 			//  There are defending soldiers left in the building.
-			if (const uint n = ms->nr_not_marked_soldiers()) {
+			if (const uint32_t n = ms->nr_not_marked_soldiers()) {
 				launchSoldiersOfMilitarySite(ms, n, false);
 				return;
 			}
@@ -289,7 +289,7 @@ void AttackController::soldierWon(Soldier* soldier)
 		building.destroy(&egbase());
 	}
 
-	for (uint i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
 		//involvedSoldiers[i].soldier->set_economy(0);
 		involvedSoldiers[i].soldier->set_location(involvedSoldiers[i].origin);
 		involvedSoldiers[i].soldier->send_signal(dynamic_cast<Game*>(&egbase()), "return_home");
@@ -301,16 +301,16 @@ void AttackController::soldierWon(Soldier* soldier)
 
 bool AttackController::startBattle(Soldier* soldier, bool isArrived)
 {
-	uint s1Index = getBattleSoldierIndex(soldier);
+	uint32_t s1Index = getBattleSoldierIndex(soldier);
 	involvedSoldiers[s1Index].arrived = isArrived;
 
-	for (uint i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
 		if (involvedSoldiers[i].arrived && !involvedSoldiers[i].fighting && (involvedSoldiers[i].attacker != involvedSoldiers[s1Index].attacker)) {
 			involvedSoldiers[i].fighting = true;
 			involvedSoldiers[s1Index].fighting = true;
 
 			Battle* battle = egbase().create_battle();
-			uint rnd = dynamic_cast<Game*>(&egbase())->logic_rand() % 11;
+			uint32_t rnd = dynamic_cast<Game*>(&egbase())->logic_rand() % 11;
 			if (rnd <= 5)
 				battle->soldiers(involvedSoldiers[i].soldier, involvedSoldiers[s1Index].soldier);
 			else
@@ -326,17 +326,17 @@ bool AttackController::startBattle(Soldier* soldier, bool isArrived)
 
 bool AttackController::opponentsLeft(Soldier* soldier)
 {
-	uint idx = getBattleSoldierIndex(soldier);
-	for (uint i=0;i<involvedSoldiers.size();i++) {
+	uint32_t idx = getBattleSoldierIndex(soldier);
+	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
 		if (involvedSoldiers[i].attacker != involvedSoldiers[idx].attacker)
 			return true;
 	}
 	return false;
 }
 
-uint AttackController::getBattleSoldierIndex(Soldier* soldier)
+uint32_t AttackController::getBattleSoldierIndex(Soldier* soldier)
 {
-	for (uint i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
 		if (involvedSoldiers[i].soldier == soldier)
 			return i;
 	}
@@ -345,7 +345,7 @@ uint AttackController::getBattleSoldierIndex(Soldier* soldier)
 
 void AttackController::removeSoldier(Soldier* soldier)
 {
-	uint idx = getBattleSoldierIndex(soldier);
+	uint32_t idx = getBattleSoldierIndex(soldier);
 	involvedSoldiers[idx].battleGround = Coords::Null();
 	if (idx < (involvedSoldiers.size()-1)) {
 		involvedSoldiers[idx] = involvedSoldiers[involvedSoldiers.size() -1];
@@ -355,7 +355,7 @@ void AttackController::removeSoldier(Soldier* soldier)
 
 bool AttackController::battleGroundOccupied(Coords coords)
 {
-	for (uint i=0;i<involvedSoldiers.size();i++) {
+	for (uint32_t i=0;i<involvedSoldiers.size();i++) {
 		if (involvedSoldiers[i].battleGround == coords) {
 			return true;
 		}
@@ -382,7 +382,7 @@ void AttackController::calcBattleGround(BattleSoldier* battleSoldier, int soldie
 
 	CheckStepDefault step(battleSoldier->soldier->get_movecaps());
 
-	for (uint i=0;i<20;i++) {
+	for (uint32_t i=0;i<20;i++) {
 		map->get_neighbour(prevCoords, walkDir[walkDirIndex], &newCoords);
 
 		if (step.allowed(map, prevCoords, newCoords, walkDir[walkDirIndex], CheckStep::stepNormal)) {
@@ -425,11 +425,11 @@ void AttackController::Loader::load(FileRead& fr)
 	ctrl->totallyLaunched = fr.Unsigned32();
 	ctrl->attackedMsEmpty = fr.Unsigned8();
 
-	uint numBs = fr.Unsigned32();
+	uint32_t numBs = fr.Unsigned32();
 
-	for (uint j = 0; j < numBs; ++j) {
-		uint soldier = fr.Unsigned32();
-		uint origin = fr.Unsigned32();
+	for (uint32_t j = 0; j < numBs; ++j) {
+		uint32_t soldier = fr.Unsigned32();
+		uint32_t origin = fr.Unsigned32();
 
 		Coords battleGround;
 		try {
@@ -469,8 +469,8 @@ void AttackController::Loader::load(FileRead& fr)
 		soldiers.push_back(bsd);
 	}
 
-	uint numInMs = fr.Unsigned32();
-	for (uint j = 0; j < numInMs; ++j)
+	uint32_t numInMs = fr.Unsigned32();
+	for (uint32_t j = 0; j < numInMs; ++j)
 		militarySites.push_back(fr.Unsigned32());
 }
 
@@ -484,7 +484,7 @@ void AttackController::Loader::load_pointers()
 	ctrl->flag = dynamic_cast<Flag*>(mol().get_object_by_file_index(flag));
 	assert(ctrl->flag);
 
-	for (uint j = 0; j < soldiers.size(); ++j) {
+	for (uint32_t j = 0; j < soldiers.size(); ++j) {
 		const BattleSoldierData& bsd = soldiers[j];
 		BattleSoldier& bs = ctrl->involvedSoldiers[j];
 
@@ -496,7 +496,7 @@ void AttackController::Loader::load_pointers()
 		bs.soldier->set_attack_ctrl(ctrl);
 	}
 
-	for (uint j = 0; j < militarySites.size(); ++j) {
+	for (uint32_t j = 0; j < militarySites.size(); ++j) {
 		MilitarySite* ms =
 				dynamic_cast<MilitarySite*>
 				(mol().get_object_by_file_index(militarySites[j]));
@@ -528,7 +528,7 @@ void AttackController::save
 	//write battle soldier structure of involved soldiers
 	fw.Unsigned32(involvedSoldiers.size());
 
-	for (uint j = 0; j < involvedSoldiers.size(); ++j) {
+	for (uint32_t j = 0; j < involvedSoldiers.size(); ++j) {
 		BattleSoldier bs = involvedSoldiers[j];
 
 		fw.Unsigned32(mos->get_object_file_index(bs.soldier));

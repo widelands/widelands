@@ -21,6 +21,7 @@
 #define __S__WORKER_H
 
 #include "idleworkersupply.h"
+#include <stdint.h>
 #include "worker_descr.h"
 
 
@@ -68,13 +69,13 @@ public:
 			{return descr().get_worker_type();}
 	virtual Bob::Type get_bob_type() const throw () {return Bob::WORKER;}
 
-	uint get_animation(const char * const str) const {return descr().get_animation(str);}
-	uint get_menu_pic() const throw () {return descr().get_menu_pic();}
+	uint32_t get_animation(const char * const str) const {return descr().get_animation(str);}
+	uint32_t get_menu_pic() const throw () {return descr().get_menu_pic();}
 	const char* get_becomes() const throw() {return descr().get_becomes ();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
 
-	virtual uint get_movecaps() const throw ();
+	virtual uint32_t get_movecaps() const throw ();
 
 	PlayerImmovable * get_location(Editor_Game_Base * egbase) {
 		return reinterpret_cast<PlayerImmovable *>(m_location.get(egbase));

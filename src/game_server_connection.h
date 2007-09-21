@@ -20,11 +20,10 @@
 #ifndef __S__META_SERVER_CONNECTION_H
 #define __S__META_SERVER_CONNECTION_H
 
-#include "types.h"
-
 #include <SDL_net.h>
 
 #include <map>
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -42,11 +41,11 @@ typedef void (*CriticalError_Handler)(std::string, void* data);
 typedef void (*UserEntered_Handler)(std::string, std::string, bool, void*);
 typedef void (*RoomInfo_Handler)(std::vector<std::string >, void*);
 typedef void (*UserInfo_Handler)(std::string, std::string, std::string, void*);
-typedef void (*ChatMessage_Handler)(std::string, std::string, uchar, void*);
+typedef void (*ChatMessage_Handler)(std::string, std::string, uint8_t, void*);
 typedef void (*Disconnet_Handler)(void*);
 
 struct Game_Server_Connection {
-      Game_Server_Connection(std::string host, uint port);
+      Game_Server_Connection(std::string host, uint32_t port);
       ~Game_Server_Connection();
 
       void connect();
@@ -65,10 +64,10 @@ struct Game_Server_Connection {
 
       // Call callback functions
       void server_message(std::string str);
-      void user_entered(std::string str, std::string, uchar);
+      void user_entered(std::string str, std::string, uint8_t);
       void get_room_info(std::vector<std::string >);
       void get_user_info(std::string, std::string, std::string);
-      void chat_message(std::string, std::string, uchar);
+      void chat_message(std::string, std::string, uint8_t);
       void critical_error(std::string str);
 
       // Set user data
@@ -81,12 +80,12 @@ struct Game_Server_Connection {
 
 private:
       // Connection data
-      std::map<uint, Game_Server_Protocol_Packet*> m_pending_packets;
+      std::map<uint32_t, Game_Server_Protocol_Packet*> m_pending_packets;
       TCPsocket m_socket;
       SDLNet_SocketSet m_socketset;
       std::string m_host;
-      uint m_port;
-      uint m_last_packet_index;
+      uint32_t m_port;
+      uint32_t m_last_packet_index;
 
       // User data
       std::string m_username;

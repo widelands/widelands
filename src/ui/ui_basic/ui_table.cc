@@ -39,7 +39,7 @@ Args: parent  parent panel
 */
 Table<void *>::Table
 	(Panel * const parent,
-	 int x, int y, uint w, uint h,
+	 int x, int y, uint32_t w, uint32_t h,
 	 const Align align,
 	 const bool descending)
 :
@@ -78,12 +78,12 @@ Table<void *>::~Table()
 /*
  * Add a new colum to this table
  */
-void Table<void *>::add_column(const std::string & name, const uint width) {
+void Table<void *>::add_column(const std::string & name, const uint32_t width) {
 
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
-	uint complete_width = 0;
+	uint32_t complete_width = 0;
 	const Columns::const_iterator columns_end = m_columns.end();
 	for (Columns::const_iterator it = m_columns.begin(); it != columns_end; ++it)
 		complete_width += it->btn->get_w();
@@ -165,7 +165,7 @@ void Table<void *>::draw(RenderTarget * dst)
 {
    // draw text lines
    int lineheight = get_lineheight();
-	uint idx = m_scrollpos / lineheight;
+	uint32_t idx = m_scrollpos / lineheight;
    int y = 1 + idx*lineheight - m_scrollpos + m_columns[0].btn->get_h();
 
 	dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
@@ -186,7 +186,7 @@ void Table<void *>::draw(RenderTarget * dst)
 
       // First draw pictures
 		if (er.get_picid() != -1) {
-			uint w, h;
+			uint32_t w, h;
 			g_gr->get_picture_size(er.get_picid(), w, h);
 			dst->blit(Point(1, y + (get_lineheight() - h) / 2), er.get_picid());
 		}
@@ -195,7 +195,7 @@ void Table<void *>::draw(RenderTarget * dst)
 
       int curx=0;
       int curw;
-		for (uint i = 0; i < get_nr_columns(); ++i) {
+		for (uint32_t i = 0; i < get_nr_columns(); ++i) {
          curw=m_columns[i].btn->get_w();
          int x;
          if (m_align & Align_Right)
@@ -268,7 +268,7 @@ bool Table<void *>::handle_mouserelease(const Uint8 btn, int, int)
  *
  * Args: i  the entry to select
  */
-void Table<void *>::select(const uint i)
+void Table<void *>::select(const uint32_t i)
 {
 	if (m_selection == i)
 		return;
@@ -287,9 +287,9 @@ Table<void *>::Entry_Record & Table<void *>::add
 {
    int entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
 	if (picid != -1) {
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
-	   entry_height = std::max<uint>(entry_height, h);
+	   entry_height = std::max<uint32_t>(entry_height, h);
       if (m_max_pic_width<w) m_max_pic_width=w;
 	}
    if (entry_height>m_lineheight) m_lineheight=entry_height;
@@ -326,7 +326,7 @@ void Table<void *>::set_align(Align align)
 }
 
 
-void Table<void *>::remove(const uint i) {
+void Table<void *>::remove(const uint32_t i) {
 	assert(i < m_entry_records.size());
 
 	const Entry_Record_vector::iterator it = m_entry_records.begin() + i;
@@ -342,11 +342,11 @@ void Table<void *>::remove(const uint i) {
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
-void Table<void *>::sort(const uint Begin, uint End) {
+void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 	assert(m_sort_column < m_columns.size());
 	if (End > size()) End = size();
 	if (get_sort_descending())
-		for (uint i = Begin; i != End; ++i) for (uint j = i; j != End; ++j) {
+		for (uint32_t i = Begin; i != End; ++i) for (uint32_t j = i; j != End; ++j) {
 			Entry_Record * const eri = m_entry_records[i];
 			Entry_Record * const erj = m_entry_records[j];
 			if (eri->get_string(m_sort_column) > erj->get_string(m_sort_column)) {
@@ -357,7 +357,7 @@ void Table<void *>::sort(const uint Begin, uint End) {
 			}
 		}
 	else
-		for (uint i = Begin; i != End; ++i) for (uint j = i; j != End; ++j) {
+		for (uint32_t i = Begin; i != End; ++i) for (uint32_t j = i; j != End; ++j) {
 			Entry_Record * const eri = m_entry_records[i];
 			Entry_Record * const erj = m_entry_records[j];
 			if (eri->get_string(m_sort_column) < erj->get_string(m_sort_column)) {
@@ -375,14 +375,14 @@ Table<void *>::Entry_Record::Entry_Record(void * const e, const int picid) :
 {}
 
 void Table<void *>::Entry_Record::set_string
-	(const uint column, const std::string & str)
+	(const uint32_t column, const std::string & str)
 {
 	assert(column < m_data.size());
 
    m_data[column].d_string = str;
 }
 const std::string & Table<void *>::Entry_Record::get_string
-	(const uint column) const
+	(const uint32_t column) const
 {
 	assert(column < m_data.size());
 

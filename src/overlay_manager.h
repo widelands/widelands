@@ -25,6 +25,7 @@
 
 #include <map>
 #include <set>
+#include <stdint.h>
 
 /*
  * The Overlay Manager is responsible for the map overlays. He
@@ -65,10 +66,10 @@ struct Overlay_Manager {
 		Job_Id operator++() throw () {++id; return *this;}
 		bool operator==(const Job_Id other) const throw ()
 		{return id == other.id;}
-		uint id;
+		uint32_t id;
 	};
 	struct Overlay_Info {
-		uint picid;
+		uint32_t picid;
 		Point hotspot;
 	};
 
@@ -118,8 +119,8 @@ struct Overlay_Manager {
 
 	void remove_overlay(const Job_Id jobid);
 
-	unsigned char get_overlays(const FCoords c, Overlay_Info * const) const;
-	unsigned char get_overlays
+	uint8_t get_overlays(const FCoords c, Overlay_Info * const) const;
+	uint8_t get_overlays
 		(const TCoords<>, Overlay_Info * const overlays) const;
 
       void show_buildhelp(bool t) {m_showbuildhelp= t;}
@@ -130,12 +131,12 @@ struct Overlay_Manager {
 	//  Road overlays are registered like normal overlays and removed like normal
 	//  overlays but they use are handled internally completly different. When a
 	//  road overlay information is requested the same data as for a field is
-	//  returned (a uchar which needs to be ANDed).
+	//  returned (a uint8_t which needs to be ANDed).
 	void register_road_overlay
-		(const Coords, const uchar where, const Job_Id jobid = Job_Id::Null());
+		(const Coords, const uint8_t where, const Job_Id jobid = Job_Id::Null());
 	void remove_road_overlay(const Coords);
 	void remove_road_overlay(const Job_Id jobid);
-	uchar get_road_overlay(const Coords c) const {
+	uint8_t get_road_overlay(const Coords c) const {
 		Registered_Road_Overlays_Map::const_iterator it = m_road_overlays.find(c);
 		if (it != m_road_overlays.end()) return it->second.where;
 		return 0;
@@ -161,7 +162,7 @@ private:
 
 	struct Registered_Road_Overlays {
 		Job_Id jobid;
-		uchar where;
+		uint8_t where;
 	};
 
 	typedef

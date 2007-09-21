@@ -25,12 +25,13 @@
 #include "mapregion.h"
 #include "field.h"
 #include "editorinteractive.h"
+#include <stdint.h>
 
 /// Sets the heights to random values. Chages surrounding nodes if necessary.
 int Editor_Noise_Height_Tool::handle_click_impl
 (Map & map, const Node_and_Triangle<> center, Editor_Interactive & parent)
 {
-	uint max = 0;
+	uint32_t max = 0;
 	MapRegion<Area<FCoords> > mr
 		(map,
 		 Area<FCoords>(map.get_fcoords(center.node), parent.get_sel_radius()));

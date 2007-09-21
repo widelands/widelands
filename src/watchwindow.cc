@@ -29,6 +29,7 @@
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
+#include <stdint.h>
 
 #include "ui_button.h"
 #include "ui_signal.h"
@@ -76,7 +77,7 @@ private:
 	Game                           * m_game;
 	Map_View                         m_mapview;
 	bool m_single_window;
-	uint last_visit;
+	uint32_t last_visit;
 	int m_cur_index;
 	UI::Button<WatchWindow>          m_follow;
 	UI::Button<WatchWindow>          m_goto;
@@ -177,9 +178,9 @@ void WatchWindow::next_view(bool first) {
 		return;
 	if (!first)
 		save_coords();
-	if (first || (static_cast<uint>(m_cur_index) == m_views.size()-1 && m_cur_index != 0))
+	if (first || (static_cast<uint32_t>(m_cur_index) == m_views.size()-1 && m_cur_index != 0))
 		m_cur_index = 0;
-	else if (static_cast<uint>(m_cur_index) < m_views.size()-1)
+	else if (static_cast<uint32_t>(m_cur_index) < m_views.size()-1)
 		m_cur_index++;
 	show_view(first);
 }
@@ -218,7 +219,7 @@ void WatchWindow::close_cur_view() {
 
 //Enables/Disables buttons for views
 void WatchWindow::toggle_buttons() {
-	for (uint i=0;i<NUM_VIEWS;i++) {
+	for (uint32_t i=0;i<NUM_VIEWS;i++) {
 		if (i<m_views.size()) {
 			char buffer[32];
 			snprintf(buffer, sizeof(buffer), "%i", i + 1);
@@ -273,7 +274,7 @@ void WatchWindow::start_tracking(Point pos)
 	int closest_dist = -1;
 	Bob* closest = 0;
 
-	for (uint i = 0; i < bobs.size(); i++) {
+	for (uint32_t i = 0; i < bobs.size(); i++) {
 		Bob* bob = bobs[i];
 		Point p;
 

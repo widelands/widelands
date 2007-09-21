@@ -132,7 +132,7 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 Event_Descr* Event_Factory::get_correct_event_descr(const char* id)
 {
 	std::string str = id;
-	for (uint i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
+	for (uint32_t i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
 		if (EVENT_DESCRIPTIONS[i].id == str)
 			return &EVENT_DESCRIPTIONS[i];
 
@@ -144,7 +144,7 @@ Event_Descr* Event_Factory::get_correct_event_descr(const char* id)
 /**
  * Get event description by number
  */
-Event_Descr* Event_Factory::get_event_descr(uint id)
+Event_Descr* Event_Factory::get_event_descr(uint32_t id)
 {
 	assert(id<Event_Factory::get_nr_of_available_events());
 
@@ -155,7 +155,7 @@ Event_Descr* Event_Factory::get_event_descr(uint id)
 /**
  * return the nummer of available events
  */
-const uint Event_Factory::get_nr_of_available_events()
+const uint32_t Event_Factory::get_nr_of_available_events()
 {
 	return nr_of_events;
 }

@@ -26,6 +26,7 @@
 #include "world.h"
 #include "map.h"
 #include "overlay_manager.h"
+#include <stdint.h>
 #include "worlddata.h"
 
 
@@ -95,7 +96,7 @@ int Editor_Increase_Resources_Tool::handle_click_impl
 			 Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
          // Ok, we're doing something. First remove the current overlays
-         uint picid = g_gr->get_picture
+         uint32_t picid = g_gr->get_picture
 				(PicMod_Menu,
 				 world.get_resource(res)->get_editor_pic
 				 (mr.location().field->get_resources_amount()).c_str());

@@ -20,7 +20,7 @@
 #ifndef __S__GAME_SERVER_PROTO_PACKET_H
 #define __S__GAME_SERVER_PROTO_PACKET_H
 
-#include "types.h"
+#include <stdint.h>
 
 class Game_Server_Connection;
 class Network_Buffer;
@@ -32,7 +32,7 @@ class Network_Buffer;
 struct Game_Server_Protocol_Packet {
       virtual ~Game_Server_Protocol_Packet() {}
 
-      virtual ushort get_id() = 0;
+      virtual uint16_t get_id() = 0;
 
 	virtual void recv(Game_Server_Connection*, Network_Buffer *) = 0;
 	virtual void send(Network_Buffer *) = 0;

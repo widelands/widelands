@@ -28,13 +28,13 @@
 RNG::RNG () : state0(0), state1(0) {}
 
 
-void RNG::seed (uint s)
+void RNG::seed (uint32_t s)
 {
     state0^=state1;
     state1=SIMPLE_RAND(state1) + s;
 }
 
-uint RNG::rand ()
+uint32_t RNG::rand ()
 {
     // apply a bijective mixing operation
     state0=SIMPLE_RAND(state0);
@@ -50,7 +50,7 @@ uint RNG::rand ()
 // this is a nonlinear sbox used for mixing the state
 // note that it consists of 4 parallel permutations
 
-const uint rng_sbox[256]= {
+const uint32_t rng_sbox[256]= {
 	0x2FC5C487, 0x721E317E, 0x46337246, 0xD3A14DD5,
 	0x336D4A5F, 0x076C9EAE, 0x4843031E, 0x68C3C945,
 	0x0AB927B9, 0x5479614C, 0x11917750, 0xA52E5A97,

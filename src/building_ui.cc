@@ -34,6 +34,7 @@ class.
 #include "maphollowregion.h"
 #include "militarysite.h"
 #include "soldier.h"
+#include <stdint.h>
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -285,7 +286,7 @@ public:
 	};
 
 public:
-	WaresQueueDisplay(UI::Panel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g);
+	WaresQueueDisplay(UI::Panel* parent, int x, int y, uint32_t maxw, WaresQueue* queue, Game* g);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -296,14 +297,14 @@ private:
 
 private:
 	WaresQueue * m_queue;
-	uint         m_max_width;
-	uint         m_icon;            //< Index to ware's picture
-	uint         m_fade_mask;       //< Mask to show faded version of icons
-	uint         m_pic_background;
+	uint32_t         m_max_width;
+	uint32_t         m_icon;            //< Index to ware's picture
+	uint32_t         m_fade_mask;       //< Mask to show faded version of icons
+	uint32_t         m_pic_background;
 
-	uint         m_cache_size;
-	uint         m_cache_filled;
-	uint         m_display_size;
+	uint32_t         m_cache_size;
+	uint32_t         m_cache_filled;
+	uint32_t         m_display_size;
 };
 
 
@@ -315,7 +316,7 @@ Initialize the panel.
 ===============
 */
 WaresQueueDisplay::WaresQueueDisplay
-(UI::Panel * parent, int x, int y, uint maxw, WaresQueue* queue, Game *)
+(UI::Panel * parent, int x, int y, uint32_t maxw, WaresQueue* queue, Game *)
 :
 UI::Panel(parent, x, y, 0, Height),
 m_queue(queue),
@@ -384,10 +385,10 @@ Compare the current WaresQueue state with the cached state; update if necessary.
 */
 void WaresQueueDisplay::think()
 {
-	if (static_cast<uint>(m_queue->get_size()) != m_cache_size)
+	if (static_cast<uint32_t>(m_queue->get_size()) != m_cache_size)
 		recalc_size();
 
-	if (static_cast<uint>(m_queue->get_filled()) != m_cache_filled)
+	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
 		update(0, 0, get_w(), get_h());
 }
 
@@ -419,7 +420,7 @@ void WaresQueueDisplay::draw(RenderTarget* dst)
 
 	compile_assert(0 <= BG_ContinueCellX);
 	compile_assert(0 <= BG_CellX);
-	for (uint cells = 0; cells < m_display_size; ++cells, x += CellWidth) {
+	for (uint32_t cells = 0; cells < m_display_size; ++cells, x += CellWidth) {
 		dst->blitrect
 			(Point(x, 0),
 			 m_pic_background,
@@ -495,7 +496,7 @@ protected:
 	void toggle_workarea();
 	void act_start_stop();
 	void act_enhance(const Building_Descr::Index);
-   void act_drop_soldier(uint);
+   void act_drop_soldier(uint32_t);
 	void act_change_soldier_capacity(int);
 
 private:
@@ -507,10 +508,10 @@ private:
 	UI::Button<Building_Window> * m_toggle_workarea;
 
 	//  capabilities that were last used in setting up the caps panel
-	uint m_capscache;
+	uint32_t m_capscache;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
-	unsigned int workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	uint32_t workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 };
 
 
@@ -574,7 +575,7 @@ Draw a picture of the building in the background.
 */
 void Building_Window::draw(RenderTarget* dst)
 {
-	uint anim = get_building()->get_ui_anim();
+	uint32_t anim = get_building()->get_ui_anim();
 
 	dst->drawanim(Point(get_inner_w() / 2, get_inner_h() / 2), anim, 0, 0);
 
@@ -769,7 +770,7 @@ Building_Window::act_drop_soldier
 Callback for bulldozing request
 ===============
 */
-void Building_Window::act_drop_soldier(uint serial) {
+void Building_Window::act_drop_soldier(uint32_t serial) {
 	 Game* g = m_player->get_game();
 
 	 if (m_building && (serial > 0))
@@ -886,7 +887,7 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	box->add_space(8);
 
 	// Add the wares queue
-	for (uint i = 0; i < cs->get_nrwaresqueues(); i++)
+	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); i++)
 	{
 		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
 					cs->get_waresqueue(i), parent->get_game());
@@ -1208,11 +1209,11 @@ void ProductionSite_Window_ListWorkerWindow::think() {
  * fill list()
  */
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
-	const uint m_last_select = m_ls->selection_index();
+	const uint32_t m_last_select = m_ls->selection_index();
    m_ls->clear();
    std::vector<Worker*>* workers=m_ps->get_workers();
 
-   uint i;
+   uint32_t i;
    for (i=0; i<workers->size(); i++) {
 		Worker* worker = (*workers)[i];
 		m_ls->add(worker->descname().c_str(), worker, worker->get_menu_pic());
@@ -1245,7 +1246,7 @@ void ProductionSite_Window_ListWorkerWindow::update()
 			m_experience->set_text(buffer);
 
 			// Get the descriptive name of the ongoing upgrade
-			uint index = worker.get_tribe()->get_safe_worker_index(
+			uint32_t index = worker.get_tribe()->get_safe_worker_index(
 							worker.get_becomes());
 			const Worker_Descr *descr = worker.get_tribe()->get_worker_descr(
 														index);
@@ -1438,7 +1439,7 @@ ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite*
 
 	// Add the wares queue
 	std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
-	for (uint i = 0; i < warequeues->size(); i++) {
+	for (uint32_t i = 0; i < warequeues->size(); i++) {
 		create_ware_queue_panel (box, ps, (*warequeues)[i]);
 	}
 
@@ -1658,14 +1659,14 @@ void MilitarySite_Window::update() {
    char buf[200];
 	if (soldiers.size() < m_table->size()) m_table->clear();
 
-	for (uint i = 0; i < soldiers.size(); ++i) {
+	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i] ;
 		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
 		if (not er)                          er = &m_table->add(s);
-		const uint hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
-		const uint al = s.get_attack_level (), mal = s.get_max_attack_level ();
-		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
-		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
+		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
+		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
+		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
+		const uint32_t el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
 		er->set_string(0, s.name().c_str());
 		sprintf(buf, "%i / %i", hl, mhl);
 		er->set_string(1, buf);
@@ -2117,14 +2118,14 @@ void TrainingSite_Window::update() {
 	char buffer[200];
 	if (soldiers.size() != m_table->size()) m_table->clear();
 
-	for (uint i = 0; i < soldiers.size(); ++i) {
+	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i] ;
 		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
 		if (not er)                           er = &m_table->add(s);
-		const uint hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
-		const uint al = s.get_attack_level (), mal = s.get_max_attack_level ();
-		const uint dl = s.get_defense_level(), mdl = s.get_max_defense_level();
-		const uint el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
+		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
+		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
+		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
+		const uint32_t el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
 		er->set_string(0, s.name().c_str());
 		snprintf(buffer, sizeof(buffer), "%i / %i", hl, mhl);
 		er->set_string(1, buffer);

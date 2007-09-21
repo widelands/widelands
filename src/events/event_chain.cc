@@ -64,7 +64,7 @@ EventChain::State EventChain::run(Game* g) {
  * Clear all events, events are not delted.
  */
 void EventChain::clear_events() {
-   for (uint i = 0; i < m_events.size(); i++)
+   for (uint32_t i = 0; i < m_events.size(); i++)
       m_events[i]->unreference(this);
 
    m_events.resize(0);

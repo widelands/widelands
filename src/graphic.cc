@@ -193,7 +193,7 @@ void Graphic::refresh(bool force)
 */
 void Graphic::flush(int mod)
 {
-	uint i;
+	uint32_t i;
 
 	// Flush pictures
 
@@ -256,7 +256,7 @@ void Graphic::flush(int mod)
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-uint Graphic::get_picture(int mod, const char* fname)
+uint32_t Graphic::get_picture(int mod, const char* fname)
 {
 	std::vector<Picture>::size_type id;
 
@@ -304,7 +304,7 @@ uint Graphic::get_picture(int mod, const char* fname)
 	return id;
 }
 
-uint Graphic::get_picture
+uint32_t Graphic::get_picture
 (const int mod, Surface & surf, const char * const fname)
 {
 	const std::vector<Picture>::size_type id = find_free_picture();
@@ -325,8 +325,8 @@ uint Graphic::get_picture
  *
  * Might return same id if dimensions are the same
  */
-uint Graphic::get_resized_picture
-(const uint index, const uint w, const uint h, ResizeMode mode)
+uint32_t Graphic::get_resized_picture
+(const uint32_t index, const uint32_t w, const uint32_t h, ResizeMode mode)
 {
 	if (index >= m_pictures.size() or !m_pictures[index].mod)
 		throw wexception("get_resized_picture(%i): picture doesn't exist", index);
@@ -335,8 +335,8 @@ uint Graphic::get_resized_picture
 	if (orig->get_w() == w and orig->get_h() == h)
 		return index;
 
-	uint width = w;
-	uint height = h;
+	uint32_t width = w;
+	uint32_t height = h;
 
 	if (mode != ResizeMode_Loose) {
 		const double ratio_x = double(w) / orig->get_w();
@@ -353,12 +353,12 @@ uint Graphic::get_resized_picture
 			else // average
 				ratio = (ratio_x + ratio_y) / 2;
 
-			width = uint(orig->get_w() * ratio);
-			height = uint(orig->get_h() * ratio);
+			width = uint32_t(orig->get_w() * ratio);
+			height = uint32_t(orig->get_h() * ratio);
 		}
 	}
 
-	const uint pic = g_gr->create_surface(w, h);
+	const uint32_t pic = g_gr->create_surface(w, h);
 
 	if (mode == ResizeMode_Loose || (width == w && height == h)) {
 		SDL_Surface * const resized = resize(index, w, h);
@@ -397,7 +397,7 @@ uint Graphic::get_resized_picture
  * \param h target height
  * \return resized version of picture
  */
-SDL_Surface* Graphic::resize(const uint index, const uint w, const uint h)
+SDL_Surface* Graphic::resize(const uint32_t index, const uint32_t w, const uint32_t h)
 {
 	Surface *orig = g_gr->get_picture_surface(index);
 	double zoomx = double(w) / orig->get_w();
@@ -411,7 +411,7 @@ SDL_Surface* Graphic::resize(const uint index, const uint w, const uint h)
  * Stores the picture size in pw and ph.
  * Throws an exception if the picture doesn't exist.
 */
-void Graphic::get_picture_size(const uint pic, uint & w, uint & h)
+void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
 {
 	if (pic >= m_pictures.size() || !m_pictures[pic].mod)
 		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
@@ -423,7 +423,7 @@ void Graphic::get_picture_size(const uint pic, uint & w, uint & h)
 	h = bmp->get_h();
 }
 
-void Graphic::save_png(uint pic_index, FileWrite* fw)
+void Graphic::save_png(uint32_t pic_index, FileWrite* fw)
 {
 	Surface* surf = get_picture_surface(pic_index);
 
@@ -469,11 +469,11 @@ void Graphic::save_png(uint pic_index, FileWrite* fw)
 	png_bytep row = new png_byte[4*surf->get_w()];
 
 	// Write each row
-	for (uint y = 0; y < surf->get_h(); y++) {
-		uint i = 0;
+	for (uint32_t y = 0; y < surf->get_h(); y++) {
+		uint32_t i = 0;
 
-		for (uint x = 0; x < surf->get_w(); x++) {
-			uchar r, g, b, a;
+		for (uint32_t x = 0; x < surf->get_w(); x++) {
+			uint8_t r, g, b, a;
 			SDL_GetRGBA
 			(surf->get_pixel(x, y),
 			 &const_cast<SDL_PixelFormat &>(surf->format()),
@@ -502,7 +502,7 @@ void Graphic::save_png(uint pic_index, FileWrite* fw)
  * A RenderTarget for the surface can be obtained using get_surface_renderer().
  * \note Surfaces do not belong to a module and must be freed explicitly.
 */
-uint Graphic::create_surface(int w, int h)
+uint32_t Graphic::create_surface(int w, int h)
 {
 	const SDL_PixelFormat & format = m_screen.format();
 	SDL_Surface & surf = *SDL_CreateRGBSurface
@@ -525,7 +525,7 @@ uint Graphic::create_surface(int w, int h)
  * Free the given surface.
  * Unlike normal pictures, surfaces are not freed by flush().
 */
-void Graphic::free_surface(uint picid)
+void Graphic::free_surface(uint32_t picid)
 {
 	assert(picid < m_pictures.size() &&
 			(m_pictures[picid].mod == -1 ||
@@ -541,7 +541,7 @@ void Graphic::free_surface(uint picid)
 /**
  * Returns the RenderTarget for the given surface
 */
-RenderTarget* Graphic::get_surface_renderer(uint pic)
+RenderTarget* Graphic::get_surface_renderer(uint32_t pic)
 {
 	assert(pic < m_pictures.size() && m_pictures[pic].mod == -1);
 
@@ -564,7 +564,7 @@ RenderTarget* Graphic::get_surface_renderer(uint pic)
  * \note Terrain textures are not reused, even if fnametempl matches.
  * These textures are freed when PicMod_Game is flushed.
 */
-uint Graphic::get_maptexture(const char & fnametempl, const uint frametime)
+uint32_t Graphic::get_maptexture(const char & fnametempl, const uint32_t frametime)
 {
 	try {
 		m_maptextures.push_back
@@ -580,9 +580,9 @@ uint Graphic::get_maptexture(const char & fnametempl, const uint frametime)
 /**
  * Advance frames for animated textures
 */
-void Graphic::animate_maptextures(uint time)
+void Graphic::animate_maptextures(uint32_t time)
 {
-	for (uint i = 0; i < m_maptextures.size(); i++)
+	for (uint32_t i = 0; i < m_maptextures.size(); i++)
 		m_maptextures[i]->animate(time);
 }
 
@@ -591,7 +591,7 @@ void Graphic::animate_maptextures(uint time)
  */
 void Graphic::reset_texture_animation_reminder()
 {
-	for (uint i = 0; i < m_maptextures.size(); i++)
+	for (uint32_t i = 0; i < m_maptextures.size(); i++)
 		m_maptextures[i]->reset_was_animated();
 }
 
@@ -602,10 +602,10 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 	assert(!m_animations.size());
 
 	const std::string step_description = _("Loading animations: %d%% complete");
-	uint last_shown = 100;
-	const uint nr_animations = g_anim.get_nranimations();
-	for (uint id = 0; id < nr_animations;) {
-		const uint percent = 100 * id / nr_animations;
+	uint32_t last_shown = 100;
+	const uint32_t nr_animations = g_anim.get_nranimations();
+	for (uint32_t id = 0; id < nr_animations;) {
+		const uint32_t percent = 100 * id / nr_animations;
 		if (percent != last_shown) {
 			last_shown = percent;
 			loader_ui.stepf(step_description, percent);
@@ -618,7 +618,7 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 /**
  * Return the number of frames in this animation
  */
-AnimationGfx::Index Graphic::nr_frames(const uint anim) const
+AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
 {
 	return get_animation(anim)->nr_frames();
 }
@@ -627,7 +627,7 @@ AnimationGfx::Index Graphic::nr_frames(const uint anim) const
  * \return the size of the animation at the given time.
 */
 void Graphic::get_animation_size
-(const uint anim, const uint time, uint & w, uint & h)
+(const uint32_t anim, const uint32_t time, uint32_t & w, uint32_t & h)
 {
 	const AnimationData* data = g_anim.get_animation(anim);
 	AnimationGfx* gfx = get_animation(anim);
@@ -658,7 +658,7 @@ void Graphic::screenshot(const char & fname) const
 /**
  * \return Filename of texture of given ID.
 */
-const char* Graphic::get_maptexture_picture(uint id)
+const char* Graphic::get_maptexture_picture(uint32_t id)
 {
 	Texture* tex = get_maptexture_data(id);
 
@@ -697,7 +697,7 @@ std::vector<Picture>::size_type Graphic::find_free_picture()
  * Returns the bitmap that belongs to the given picture ID.
  * May return 0 if the given picture does not exist.
 */
-Surface* Graphic::get_picture_surface(uint id)
+Surface* Graphic::get_picture_surface(uint32_t id)
 {
 	if (id >= m_pictures.size())
 		return 0;
@@ -711,7 +711,7 @@ Surface* Graphic::get_picture_surface(uint id)
 /**
  * Retrieve the animation graphics
 */
-AnimationGfx* Graphic::get_animation(const uint anim) const
+AnimationGfx* Graphic::get_animation(const uint32_t anim) const
 {
 	if (!anim || anim > m_animations.size())
 		return 0;
@@ -722,7 +722,7 @@ AnimationGfx* Graphic::get_animation(const uint anim) const
 /**
  * \return the actual texture data associated with the given ID.
 */
-Texture* Graphic::get_maptexture_data(uint id)
+Texture* Graphic::get_maptexture_data(uint32_t id)
 {
 	id--; // ID 1 is at m_maptextures[0]
 

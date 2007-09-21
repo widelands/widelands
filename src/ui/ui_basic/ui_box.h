@@ -21,6 +21,7 @@
 #define included_ui_box_h
 
 #include <vector>
+#include <stdint.h>
 #include "ui_panel.h"
 
 namespace UI {
@@ -41,18 +42,18 @@ struct Box : public Panel {
 		AlignBottom = 2,
 	};
 public:
-	Box(Panel* parent, int x, int y, uint orientation);
+	Box(Panel* parent, int x, int y, uint32_t orientation);
 
 	void resize();
 
 	int get_nritems() const {return m_items.size();}
 
-	void add(Panel* panel, uint align);
-	void add_space(uint space);
+	void add(Panel* panel, uint32_t align);
+	void add_space(uint32_t space);
 
 private:
-	void get_item_size(uint idx, int* depth, int* breadth);
-	void set_item_pos(uint idx, int pos);
+	void get_item_size(uint32_t idx, int* depth, int* breadth);
+	void set_item_pos(uint32_t idx, int pos);
 
 private:
 	struct Item {
@@ -66,13 +67,13 @@ private:
 		union {
 			struct {
 				Panel * panel;
-				uint    align;
+				uint32_t    align;
 			} panel;
-			uint space;
+			uint32_t space;
 		} u;
 	};
 
-	uint              m_orientation;
+	uint32_t              m_orientation;
 
 	std::vector<Item> m_items;
 };

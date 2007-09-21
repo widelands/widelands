@@ -20,8 +20,7 @@
 #ifndef __S__TRIGGER_FACTORY_H
 #define __S__TRIGGER_FACTORY_H
 
-#include "types.h"
-
+#include <stdint.h>
 #include <string>
 
 class Trigger;
@@ -44,8 +43,8 @@ struct Trigger_Factory {
       static Trigger* make_trigger_with_option_dialog(const char* id, Editor_Interactive*, Trigger*);
 
       static Trigger_Descr* get_correct_trigger_descr(const char* id);
-      static const uint get_nr_of_available_triggers();
-      static Trigger_Descr* get_trigger_descr(uint);
+      static const uint32_t get_nr_of_available_triggers();
+      static Trigger_Descr* get_trigger_descr(uint32_t);
 };
 
 #endif

@@ -62,7 +62,7 @@ namespace UI {
  *       h
  *       title   string to display in the window title
  */
-Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title) :
+Window::Window(Panel *parent, int x, int y, uint32_t w, uint32_t h, const char *title) :
 Panel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
 _is_minimal(false), _dragging(false),
 _docked_left(false), _docked_right(false), _docked_bottom(false),
@@ -168,8 +168,8 @@ void Window::draw_border(RenderTarget* dst)
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
 	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
 
-	const uint hidden_width_left  = _docked_left  ? VT_B_PIXMAP_THICKNESS : 0;
-	const uint hidden_width_right = _docked_right ? VT_B_PIXMAP_THICKNESS : 0;
+	const uint32_t hidden_width_left  = _docked_left  ? VT_B_PIXMAP_THICKNESS : 0;
+	const uint32_t hidden_width_right = _docked_right ? VT_B_PIXMAP_THICKNESS : 0;
 	const int hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
 	const int hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
 
@@ -439,13 +439,13 @@ bool Window::handle_mousemove(const Uint8, int mx, int my, int, int) {
 			int max_y_minus_h = max_y - h;
 			left = std::min(max_x_minus_w, left);
 			top  = std::min(max_y_minus_h, top);
-			const uchar psnap = parent->get_panel_snap_distance ();
-			const uchar bsnap = parent->get_border_snap_distance();
+			const uint8_t psnap = parent->get_panel_snap_distance ();
+			const uint8_t bsnap = parent->get_border_snap_distance();
 
 			//  These are needed to prefer snapping a shorter distance over a
 			//  longer distance, when there are several things to snap to.
-			uchar nearest_snap_distance_x = bsnap;
-			uchar nearest_snap_distance_y = bsnap;
+			uint8_t nearest_snap_distance_x = bsnap;
+			uint8_t nearest_snap_distance_y = bsnap;
 
 			//  Snap to parent borders.
 			if (left < nearest_snap_distance_x) {

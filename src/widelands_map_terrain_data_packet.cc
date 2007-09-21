@@ -23,6 +23,7 @@
 #include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
+#include <stdint.h>
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
 
@@ -115,7 +116,7 @@ throw (_wexception)
 		fw.CString(name);
 	}
 
-   // Now, all terrains as unsigned chars in order
+   // Now, all terrains as uint8_ts in order
 	const Map::Index max_index = map.max_index();
 	for (Map::Index i = 0; i < max_index; ++i) {
 		Field & f = map[i];

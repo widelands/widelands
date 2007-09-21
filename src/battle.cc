@@ -92,7 +92,7 @@ void Battle::cleanup (Editor_Game_Base* eg)
 }
 
 
-void Battle::act (Game * g, uint)
+void Battle::act (Game * g, uint32_t)
 {
 	log ("Battle::act\n");
 
@@ -135,15 +135,15 @@ void Battle::act (Game * g, uint)
 
 	// Put attack animation
 	//attacker->start_animation(g, "attack", 1000);
-	uint hit = g->logic_rand() % 100;
+	uint32_t hit = g->logic_rand() % 100;
 	log (" hit=%d ", hit);
 	//FIXME: correct implementaion
 	if (hit > defender->get_evade()) {
-		uint attack = attacker->get_min_attack() +
+		uint32_t attack = attacker->get_min_attack() +
 					  (g->logic_rand() % (attacker->get_max_attack() -
 										  attacker->get_min_attack() -1));
 
-		uint defend = defender->get_defense();
+		uint32_t defend = defender->get_defense();
 		defend = (attack * defend) / 100;
 
 		log (" attack(%d)=%d ", attacker->get_serial(), attack);

@@ -31,7 +31,7 @@ namespace UI {
 Panel *Panel::_modal = 0;
 Panel *Panel::_g_mousegrab = 0;
 Panel *Panel::_g_mousein = 0;
-uint Panel::s_default_cursor = 0;
+uint32_t Panel::s_default_cursor = 0;
 
 
 /**
@@ -39,7 +39,7 @@ uint Panel::s_default_cursor = 0;
  */
 Panel::Panel
 	(Panel * const nparent,
-	 const int nx, const int ny, const uint nw, const uint nh,
+	 const int nx, const int ny, const uint32_t nw, const uint32_t nh,
 	 const std::string & tooltip_text)
 	:
 _parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
@@ -211,10 +211,10 @@ void Panel::end()
 /**
  * Resizes the panel.
  */
-void Panel::set_size(const uint nw, const uint nh)
+void Panel::set_size(const uint32_t nw, const uint32_t nh)
 {
-	uint upw = _w;
-	uint uph = _h;
+	uint32_t upw = _w;
+	uint32_t uph = _h;
 	_w = nw;
 	_h = nh;
 
@@ -249,7 +249,7 @@ void Panel::move_inside_parent() {}
 /**
  * Set the size of the inner area (total area minus border)
  */
-void Panel::set_inner_size(uint nw, uint nh)
+void Panel::set_inner_size(uint32_t nw, uint32_t nh)
 {
 	set_size(nw+_lborder+_rborder, nh+_tborder+_bborder);
 }
@@ -270,7 +270,7 @@ void Panel::fit_inner(Panel* inner)
  * Note that since position and total size aren't changed, so that the size
  * and position of the inner area will change.
  */
-void Panel::set_border(uint l, uint r, uint t, uint b)
+void Panel::set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b)
 {
 	_lborder = l;
 	_rborder = r;
@@ -849,7 +849,7 @@ void Panel::ui_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff) 
 		return;
 
 	Panel *p;
-	uint w, h;
+	uint32_t w, h;
 	g_gr->get_picture_size(s_default_cursor, w, h);
 
 	g_gr->update_rectangle(x-xdiff, y-ydiff, w, h);

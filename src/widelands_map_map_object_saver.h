@@ -20,7 +20,7 @@
 #ifndef __S__WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 #define __S__WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
-#include "types.h"
+#include <stdint.h>
 #include <map>
 
 class Map_Object;
@@ -35,40 +35,40 @@ public:
 	Widelands_Map_Map_Object_Saver();
 
 	bool is_object_known(const Map_Object * const) const;
-	uint register_object(const Map_Object * const);
+	uint32_t register_object(const Map_Object * const);
 
-	uint get_object_file_index(const Map_Object * const);
+	uint32_t get_object_file_index(const Map_Object * const);
 
 	void mark_object_as_saved(const Map_Object * const);
 
 	// Information functions
-	uint get_nr_unsaved_objects() const throw ();
-	uint get_nr_roads          () const throw () {return m_nr_roads;}
-	uint get_nr_flags          () const throw () {return m_nr_flags;}
-	uint get_nr_buildings      () const throw () {return m_nr_buildings;}
-	uint get_nr_wares          () const throw () {return m_nr_wares;}
-	uint get_nr_bobs           () const throw () {return m_nr_bobs;}
-	uint get_nr_immovables     () const throw () {return m_nr_immovables;}
-	uint get_nr_battles        () const throw () {return m_nr_battles;}
-	uint get_nr_attack_controllers() const throw () {return m_nr_attack_controllers;}
+	uint32_t get_nr_unsaved_objects() const throw ();
+	uint32_t get_nr_roads          () const throw () {return m_nr_roads;}
+	uint32_t get_nr_flags          () const throw () {return m_nr_flags;}
+	uint32_t get_nr_buildings      () const throw () {return m_nr_buildings;}
+	uint32_t get_nr_wares          () const throw () {return m_nr_wares;}
+	uint32_t get_nr_bobs           () const throw () {return m_nr_bobs;}
+	uint32_t get_nr_immovables     () const throw () {return m_nr_immovables;}
+	uint32_t get_nr_battles        () const throw () {return m_nr_battles;}
+	uint32_t get_nr_attack_controllers() const throw () {return m_nr_attack_controllers;}
 
 	bool is_object_saved(const Map_Object * const obj) throw ()
 	{return m_saved_obj[obj];}
 
 private:
-	typedef std::map<const Map_Object *, const uint> Map_Object_Map;
+	typedef std::map<const Map_Object *, const uint32_t> Map_Object_Map;
 
 	std::map<const Map_Object *, bool> m_saved_obj;
 	Map_Object_Map m_objects;
-	uint m_nr_roads;
-	uint m_nr_flags;
-	uint m_nr_buildings;
-	uint m_nr_bobs;
-	uint m_nr_wares;
-	uint m_nr_immovables;
-	uint m_nr_battles;
-	uint m_nr_attack_controllers;
-	uint m_lastserial;
+	uint32_t m_nr_roads;
+	uint32_t m_nr_flags;
+	uint32_t m_nr_buildings;
+	uint32_t m_nr_bobs;
+	uint32_t m_nr_wares;
+	uint32_t m_nr_immovables;
+	uint32_t m_nr_battles;
+	uint32_t m_nr_attack_controllers;
+	uint32_t m_lastserial;
 };
 
 

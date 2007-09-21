@@ -20,6 +20,7 @@
 #ifndef __S__MULTILINE_TEXTAREA_H
 #define __S__MULTILINE_TEXTAREA_H
 
+#include <stdint.h>
 #include <string>
 #include "font_handler.h"
 #include "ui_panel.h"
@@ -44,7 +45,7 @@ struct Multiline_Textarea : public Panel {
 
 	Multiline_Textarea
 		(Panel * const parent,
-		 const int x, const int y, const uint w, const uint h,
+		 const int x, const int y, const uint32_t w, const uint32_t h,
 		 const std::string & text         = std::string(),
 		 const Align                      = Align_Left,
 		 const bool always_show_scrollbar = false);
@@ -58,8 +59,8 @@ struct Multiline_Textarea : public Panel {
       void set_scrollpos(int pixels);
       void set_scrollmode(ScrollMode mode);
 
-	uint scrollbar_w() const throw () {return 24;}
-	uint get_eff_w() const throw () {return get_w() - scrollbar_w();}
+	uint32_t scrollbar_w() const throw () {return 24;}
+	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
       inline void set_font(std::string name, int size, RGBColor fg) {m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str());}
 
@@ -79,7 +80,7 @@ private:
 
 protected:
 	Align        m_align;
-	uint         m_cache_id; ///picid of the whole textarea surface
+	uint32_t         m_cache_id; ///picid of the whole textarea surface
 
 	///set to Widget_Cache_Update if the whole textarea has to be rebuild
 	Widget_Cache m_cache_mode;
@@ -87,8 +88,8 @@ protected:
 		std::string    m_fontname;
 		int            m_fontsize;
 		RGBColor       m_fcolor;
-		uint m_textheight;  ///< total height of wrapped text, in pixels
-		uint m_textpos;     ///< current scrolling position in pixels (0 is top)
+		uint32_t m_textheight;  ///< total height of wrapped text, in pixels
+		uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
 
       inline int get_m_textpos() {return m_textpos;}
       void draw_scrollbar();

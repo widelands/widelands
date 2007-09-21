@@ -24,6 +24,7 @@
 #include "unzip.h"
 #include "zip.h"
 
+#include <stdint.h>
 #include <string>
 
 struct ZipFilesystem : public FileSystem {
@@ -33,7 +34,7 @@ struct ZipFilesystem : public FileSystem {
 	virtual const bool IsWritable() const;
 
 	virtual const int FindFiles(std::string path, const std::string pattern,
-                                    filenameset_t *results, uint depth=0);
+                                    filenameset_t *results, uint32_t depth=0);
 
 	virtual const bool IsDirectory(std::string path);
 	virtual const bool FileExists(std::string path);

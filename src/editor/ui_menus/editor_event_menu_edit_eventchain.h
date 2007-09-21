@@ -20,6 +20,7 @@
 #ifndef __S__EDITOR_EVENT_MENU_EDIT_EVENTCHAIN_H
 #define __S__EDITOR_EVENT_MENU_EDIT_EVENTCHAIN_H
 
+#include <stdint.h>
 #include "ui_window.h"
 
 class Editor_Interactive;
@@ -52,10 +53,10 @@ private:
 	void clicked_del_event               ();
 	void clicked_move_up                 ();
 	void clicked_move_down               ();
-	void tl_selected      (uint);
-	void tl_double_clicked(uint);
-	void cs_selected      (uint);
-	void cs_double_clicked(uint);
+	void tl_selected      (uint32_t);
+	void tl_double_clicked(uint32_t);
+	void cs_selected      (uint32_t);
+	void cs_double_clicked(uint32_t);
 
 	UI::Listselect<Event &> *m_available_events;
 	UI::Listselect<Event &> *m_events;

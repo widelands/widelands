@@ -25,6 +25,7 @@
 #include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
+#include <stdint.h>
 #include "wlapplication.h"
 #include "world.h"
 
@@ -56,17 +57,17 @@ m_pit     (pit)
    const int ystart=15;
 	const World & world = parent.egbase().map().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
-	const uint immovables_in_row = std::min
-		(static_cast<uint>(ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
+	const uint32_t immovables_in_row = std::min
+		(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
 
 
    m_tabpanel.set_snapparent(true);
 
 
-	uint width = 0, height = 0;
+	uint32_t width = 0, height = 0;
    for (int j=0; j<nr_immovables; j++) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
-		uint w, h;
+		uint32_t w, h;
 		g_gr->get_picture_size
 			(g_gr->get_picture(PicMod_Game, descr.get_picture()), w, h);
       if (w>width) width=w;
@@ -74,12 +75,12 @@ m_pit     (pit)
 	}
 
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart, (immovables_in_row)*(height+1+space)+ystart+yend);
-	const uint tab_icon =
+	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
    int ypos=ystart;
    int xpos=xstart;
-	uint cur_x = immovables_in_row;
+	uint32_t cur_x = immovables_in_row;
 	for (Immovable_Descr::Index i = 0; i < nr_immovables; ++cur_x, ++i) {
 		UI::Box * box;
 		if (cur_x==immovables_in_row) {
@@ -135,11 +136,11 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
 		m_checkboxes[n]->set_state(true);
 	else {
 		if (not multiselect) {
-			for (uint i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
+			for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
       // Disable all checkboxes
-			const uint size = m_checkboxes.size();
-			//TODO: the uint cast is ugly!
-			for (uint i = 0; i < size; ++i, i += i == static_cast<uint>(n)) {
+			const uint32_t size = m_checkboxes.size();
+			//TODO: the uint32_t cast is ugly!
+			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::do_nothing);
          m_checkboxes[i]->set_state(false);
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);

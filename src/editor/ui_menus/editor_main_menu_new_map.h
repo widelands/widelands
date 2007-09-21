@@ -22,6 +22,7 @@
 
 #include "ui_window.h"
 
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -51,7 +52,7 @@ private:
       UI::Textarea *m_width, *m_height;
 	UI::IDButton<Main_Menu_New_Map, int> * m_world;
       int m_w, m_h;
-      uint m_currentworld;
+      uint32_t m_currentworld;
       std::vector<std::string>* m_worlds;
 
 	void button_clicked(int);

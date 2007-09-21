@@ -55,28 +55,28 @@ ProgressWindow::~ProgressWindow() {
 }
 
 void ProgressWindow::draw_background(
-		RenderTarget & rt, const uint xres, const uint yres) {
+		RenderTarget & rt, const uint32_t xres, const uint32_t yres) {
 
 	m_label_center.x = xres / 2;
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 
 	// Load background graphics
 	Rect wnd_rect(Point(0, 0), xres, yres);
-	const uint pic_tile =
+	const uint32_t pic_tile =
 		g_gr->get_picture(PicMod_Menu, "pics/progress_bg.png");
 	if (pic_tile > 0) {
 		rt.tile(wnd_rect, pic_tile, Point(0, 0));
 		g_gr->update_fullscreen();
 	}
 
-	const uint pic_background =
+	const uint32_t pic_background =
 		g_gr->get_resized_picture(
 			g_gr->get_picture(PicMod_Menu, m_background.c_str()),
 								  xres, yres, Graphic::ResizeMode_Loose);
 
 	if (pic_background > 0) {
-		uint w = 0;
-		uint h = 0;
+		uint32_t w = 0;
+		uint32_t h = 0;
 		g_gr->get_picture_size(pic_background, w, h);
 		// center picture horizontally
 		Point pt((xres - w) / 2, 0);
@@ -84,7 +84,7 @@ void ProgressWindow::draw_background(
 		g_gr->update_fullscreen();
 	}
 
-	const uint h = g_fh->get_fontheight (UI_FONT_SMALL);
+	const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 	m_label_rectangle.x = xres / 4;
 	m_label_rectangle.w = xres / 2;
 	m_label_rectangle.y =
@@ -115,8 +115,8 @@ void ProgressWindow::set_background(const std::string & file_name) {
 void ProgressWindow::step(const std::string & description) {
 	RenderTarget & rt = *g_gr->get_render_target();
 
-	const uint xres = g_gr->get_xres();
-	const uint yres = g_gr->get_yres();
+	const uint32_t xres = g_gr->get_xres();
+	const uint32_t yres = g_gr->get_yres();
 	bool repaint = (xres != m_xres or yres != m_yres);
 
 	// if resolution is changed, repaint the background

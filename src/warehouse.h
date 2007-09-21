@@ -21,6 +21,7 @@
 #define WAREHOUSE_H
 
 #include "building.h"
+#include <stdint.h>
 #include "transport.h"
 
 class Editor_Game_Base;
@@ -51,7 +52,7 @@ struct Warehouse_Descr : public Building_Descr {
 	virtual Building * create_object() const;
 
 	inline int get_subtype() const {return m_subtype;}
-	virtual uint get_conquers() const {return m_conquers;}
+	virtual uint32_t get_conquers() const {return m_conquers;}
 
 private:
 	int m_subtype;
@@ -72,7 +73,7 @@ public:
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
-	virtual void act(Game *g, uint data);
+	virtual void act(Game *g, uint32_t data);
 
 	virtual void set_economy(Economy *e);
 

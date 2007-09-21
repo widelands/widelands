@@ -20,6 +20,7 @@
 #ifndef __S__TRIGGER_TIME_H
 #define __S__TRIGGER_TIME_H
 
+#include <stdint.h>
 #include "trigger.h"
 
 /*
@@ -44,8 +45,8 @@ struct Trigger_Time : public Trigger {
 	int get_wait_time() const {return m_wait_time;}
 
 private:
-      ulong m_wait_time; // in seconds
-      uint m_last_start_time;
+      uint32_t m_wait_time; // in seconds
+      uint32_t m_last_start_time;
 };
 
 #endif

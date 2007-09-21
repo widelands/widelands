@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include <stdint.h>
 #include <unistd.h>
 
 struct FileRead;
@@ -179,11 +180,11 @@ public:
 	void play_fx
 	(const std::string & fx_name,
 	 const Coords map_position,
-	 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx
 	(const std::string fx_name,
 	 const int stereo_position,
-	 const uint priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
+	 const uint32_t priority = PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 
 	void register_song
 	(const std::string dir,
@@ -198,7 +199,7 @@ public:
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
-	void handle_channel_finished(uint channel);
+	void handle_channel_finished(uint32_t channel);
 
 	bool get_disable_music() const throw ();
 	bool get_disable_fx   () const throw ();
@@ -241,7 +242,7 @@ protected:
 	bool play_or_not
 	(const std::string fx_name,
 	 const int stereo_position,
-	 const uint priority);
+	 const uint32_t priority);
 
 	/// Whether to disable background music
 	bool m_disable_music;
@@ -267,7 +268,7 @@ protected:
 	FXset_map m_fxs;
 
 	/// List of currently playing effects, and the channel each one is on
-	std::map<uint, std::string> m_active_fx;
+	std::map<uint32_t, std::string> m_active_fx;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now

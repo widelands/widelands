@@ -20,12 +20,12 @@
 #ifndef __CAMPVIS_H
 #define __CAMPVIS_H
 
-#include "types.h"
+#include <stdint.h>
 #include <string>
 
 struct Campaign_visiblity_save {
 	std::string get_path();
-	void set_visiblity(std::string, uint);
+	void set_visiblity(std::string, uint32_t);
 
 private:
 	void make_campvis(std::string);

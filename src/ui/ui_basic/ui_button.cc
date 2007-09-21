@@ -30,10 +30,10 @@ Initialize a Basic_Button
 */
 Basic_Button::Basic_Button
 	(Panel * const parent,
-	 const int x, const int y, const uint w, const uint h,
+	 const int x, const int y, const uint32_t w, const uint32_t h,
 	 const bool enabled, const bool flat,
-	 const uint background_picture_id,
-	 const uint foreground_picture_id,
+	 const uint32_t background_picture_id,
+	 const uint32_t foreground_picture_id,
 	 const std::string & title_text,
 	 const std::string & tooltip_text)
 	:
@@ -70,7 +70,7 @@ Basic_Button::Basic_Button
 /**
 Sets a new picture for the Basic_Button.
 */
-void Basic_Button::set_pic(uint picid)
+void Basic_Button::set_pic(uint32_t picid)
 {
 	m_title.clear();
 
@@ -127,7 +127,7 @@ void Basic_Button::draw(RenderTarget* dst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	if (m_pic_custom) {// if we got a picture, draw it centered
-		uint cpw, cph;
+		uint32_t cpw, cph;
 		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
@@ -150,7 +150,7 @@ void Basic_Button::draw(RenderTarget* dst)
 				 Widget_Cache_None,
 				 0,
 				 (m_draw_caret ?
-				  m_title.length() : std::numeric_limits<uint>::max()));
+				  m_title.length() : std::numeric_limits<uint32_t>::max()));
 		}
 
 	// draw border

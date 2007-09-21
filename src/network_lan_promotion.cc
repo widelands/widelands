@@ -73,7 +73,7 @@ LAN_Base::~LAN_Base ()
     closesocket (sock);
 }
 
-void LAN_Base::bind (unsigned short port)
+void LAN_Base::bind (uint16_t port)
 {
     sockaddr_in addr;
     addr.sin_family=AF_INET;
@@ -108,7 +108,7 @@ void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
     sendto (sock, (const DATATYPE) buf, len, 0, (const sockaddr*) addr, sizeof(sockaddr_in));
 }
 
-void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
+void LAN_Base::broadcast (const void* buf, size_t len, uint16_t port)
 {
     std::list<in_addr_t>::iterator i;
 

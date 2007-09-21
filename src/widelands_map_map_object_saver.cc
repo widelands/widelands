@@ -44,7 +44,7 @@ bool Widelands_Map_Map_Object_Saver::is_object_known
 /*
  * Registers this object as a new one
  */
-uint Widelands_Map_Map_Object_Saver::register_object
+uint32_t Widelands_Map_Map_Object_Saver::register_object
 (const Map_Object * const obj)
 {
 	assert(!is_object_known(obj));
@@ -64,9 +64,9 @@ uint Widelands_Map_Map_Object_Saver::register_object
 			 obj->get_type());
 	}
 
-	uint fileserial = ++m_lastserial;
+	uint32_t fileserial = ++m_lastserial;
 
-	m_objects.insert(std::pair<const Map_Object*, uint>(obj, fileserial));
+	m_objects.insert(std::pair<const Map_Object*, uint32_t>(obj, fileserial));
 	m_saved_obj[obj] = false;
 
 	return fileserial;
@@ -76,7 +76,7 @@ uint Widelands_Map_Map_Object_Saver::register_object
  * Returns the file index for this map object. This is used on load
  * to regenerate the depencies between the objects
  */
-uint Widelands_Map_Map_Object_Saver::get_object_file_index
+uint32_t Widelands_Map_Map_Object_Saver::get_object_file_index
 (const Map_Object * const obj)
 {
 	// This check should rather be an assert(), but we get more information
@@ -102,10 +102,10 @@ void Widelands_Map_Map_Object_Saver::mark_object_as_saved
 /*
  * Return the number of unsaved objects
  */
-uint Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects() const throw ()
+uint32_t Widelands_Map_Map_Object_Saver::get_nr_unsaved_objects() const throw ()
 {
 	std::map<const Map_Object *, bool>::const_iterator i = m_saved_obj.begin();
-	uint retval = 0;
+	uint32_t retval = 0;
 
 	while (i!=m_saved_obj.end()) {
 		if (!i->second) retval++;

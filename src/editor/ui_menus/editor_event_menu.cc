@@ -354,7 +354,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
          char buffer[256];
 
 		Map & map = m_parent->egbase().map();
-		for (uint n = 1;; ++n) {
+		for (uint32_t n = 1;; ++n) {
 			snprintf(buffer, sizeof(buffer), "%s%u", _("Unnamed").c_str(), n);
             if (not map.get_mecm().get_eventchain(buffer))
                break;
@@ -393,15 +393,15 @@ void Editor_Event_Menu::clicked_edit_eventchain() {
 /*
  * listbox was selected
  */
-void Editor_Event_Menu::trigger_list_selected(uint) {
+void Editor_Event_Menu::trigger_list_selected(uint32_t) {
    m_btn_del_trigger->set_enabled(true);
    m_btn_edit_trigger->set_enabled(true);
 }
-void Editor_Event_Menu::event_list_selected(uint) {
+void Editor_Event_Menu::event_list_selected(uint32_t) {
    m_btn_del_event->set_enabled(true);
    m_btn_edit_event->set_enabled(true);
 }
-void Editor_Event_Menu::eventchain_list_selected(uint) {
+void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
    m_btn_del_eventchain->set_enabled(true);
    m_btn_edit_eventchain->set_enabled(true);
 }
@@ -409,7 +409,7 @@ void Editor_Event_Menu::eventchain_list_selected(uint) {
 /*
  * listbox was double clicked
  */
-void Editor_Event_Menu::trigger_double_clicked(uint) {clicked_edit_trigger();}
-void Editor_Event_Menu::event_double_clicked  (uint) {clicked_edit_event  ();}
-void Editor_Event_Menu::eventchain_double_clicked(uint)
+void Editor_Event_Menu::trigger_double_clicked(uint32_t) {clicked_edit_trigger();}
+void Editor_Event_Menu::event_double_clicked  (uint32_t) {clicked_edit_event  ();}
+void Editor_Event_Menu::eventchain_double_clicked(uint32_t)
 {clicked_edit_eventchain();}

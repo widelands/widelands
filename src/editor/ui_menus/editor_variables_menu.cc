@@ -109,7 +109,7 @@ void New_Variable_Window::clicked_new(const Variable_Type i) {
    char buffer[256];
 
 	MapVariableManager & mvm = m_parent->egbase().map().get_mvm();
-	for (uint n = 1; mvm.get_variable(buffer); ++n)
+	for (uint32_t n = 1; mvm.get_variable(buffer); ++n)
 		snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
 
    std::string name = buffer;
@@ -351,7 +351,7 @@ void Editor_Variables_Menu::clicked_del()      {
 /*
  * The table has been selected
  */
-void Editor_Variables_Menu::table_selected(uint n) {
+void Editor_Variables_Menu::table_selected(uint32_t n) {
 	assert(n < UI::Table<MapVariable &>::no_selection_index());
 	m_button_edit.set_enabled(true);
 
@@ -361,7 +361,7 @@ void Editor_Variables_Menu::table_selected(uint n) {
 /*
  * Table has been doubleclicked
  */
-void Editor_Variables_Menu::table_dblclicked(uint) {clicked_edit();}
+void Editor_Variables_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 
 /*
  * Insert this map variable into the table

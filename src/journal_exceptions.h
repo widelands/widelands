@@ -62,13 +62,13 @@ public:
  */
 class BadRecord_error : public Journalfile_error {
 public:
-	explicit BadRecord_error(const std::string filename, const unsigned char code,
-	                         const unsigned char expectedcode) throw();
+	explicit BadRecord_error(const std::string filename, const uint8_t code,
+	                         const uint8_t expectedcode) throw();
 	virtual ~BadRecord_error() throw() {}
 
 	std::streamoff offset;
-	unsigned char code;
-	unsigned char expectedcode;
+	uint8_t code;
+	uint8_t expectedcode;
 };
 
 /**
@@ -78,11 +78,11 @@ public:
 class BadEvent_error : public Journalfile_error {
 public:
 	explicit BadEvent_error(const std::string filename,
-	                        const unsigned char type) throw();
+	                        const uint8_t type) throw();
 	virtual ~BadEvent_error() throw() {}
 
 	std::streamoff offset;
-	unsigned char type;
+	uint8_t type;
 };
 
 #endif

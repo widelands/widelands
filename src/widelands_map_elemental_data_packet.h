@@ -20,6 +20,7 @@
 #ifndef __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 #define __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 
+#include <stdint.h>
 #include "widelands_map_data_packet.h"
 
 struct Map;
@@ -48,10 +49,10 @@ struct Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
       // object
 	void Pre_Read(FileSystem &, Map*) throw (_wexception);
 
-      inline uint get_version() {return m_version;}
+      inline uint32_t get_version() {return m_version;}
 
 private:
-      uint m_version;
+      uint32_t m_version;
 };
 
 
