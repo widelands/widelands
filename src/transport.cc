@@ -2774,7 +2774,6 @@ Economy::~Economy()
  * merged.
  * Since we could merge into both directions, we preserve the economy that is
  * currently bigger (should be more efficient).
- * \todo Mark this function as static. WHich doxygen command??
 */
 void Economy::check_merge(Flag *f1, Flag *f2)
 {
@@ -2806,8 +2805,6 @@ void Economy::check_merge(Flag *f1, Flag *f2)
  * a country outwards, and since splits are more likely to happen outwards,
  * the economy at the end point is probably smaller in average. It's all just
  * guesswork though ;)
- *
- * * \todo Mark this function as static. WHich doxygen command??
 */
 void Economy::check_split(Flag *f1, Flag *f2)
 {
