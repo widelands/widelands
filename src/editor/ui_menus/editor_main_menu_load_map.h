@@ -48,6 +48,8 @@ struct Main_Menu_Load_Map : public UI::Window {
       virtual ~Main_Menu_Load_Map();
 
 private:
+	void die();
+
 	void clicked_ok();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);

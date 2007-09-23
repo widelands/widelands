@@ -129,20 +129,20 @@ called, when buttons get clicked
 */
 void Editor_Main_Menu::new_map_btn() {
    new Main_Menu_New_Map(m_parent);
-   die();
+   delete this;
 }
 void Editor_Main_Menu::load_btn() {
    new Main_Menu_Load_Map(m_parent);
-   die();
+   delete this;
 }
 
 void Editor_Main_Menu::save_btn() {
    new Main_Menu_Save_Map(m_parent);
-   die();
+   delete this;
 }
 void Editor_Main_Menu::map_options_btn() {
    new Main_Menu_Map_Options(m_parent);
-   die();
+   delete this;
 }
 void Editor_Main_Menu::exit_btn() {m_parent->exit();}
 void Editor_Main_Menu::readme_btn() {

@@ -111,10 +111,13 @@ Game_Main_Menu_Load_Game::~Game_Main_Menu_Load_Game()
 
 
 void Game_Main_Menu_Load_Game::clicked_ok()
-{if (load_game(m_ls->get_selected())) die();}
+{
+	load_game(m_ls->get_selected());
+	delete this;
+}
 
 void Game_Main_Menu_Load_Game::clicked_cancel() {
-      die();
+	delete this;
 }
 
 /*
@@ -200,9 +203,9 @@ void Game_Main_Menu_Load_Game::edit_box_changed() {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
+void Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
+	FileSystem* fs = 0;
 
-   FileSystem* fs = 0;
 	try {
 		UI::ProgressWindow loader_ui;
 		fs = g_fs->MakeSubFileSystem(filename);
@@ -219,8 +222,6 @@ bool Game_Main_Menu_Load_Game::load_game(const std::string & filename) {
 			(m_parent, _("Load Game Error!!"), s, UI::Modal_Message_Box::OK);
 		mbox.run();
 	}
-      delete fs;
-   die();
 
-   return true;
+	delete fs;
 }

@@ -28,6 +28,7 @@
 #include <stdint.h>
 
 #include <cassert>
+#include <list>
 #include <string>
 
 class RenderTarget;
@@ -36,6 +37,12 @@ class RenderTarget;
 #define MOUSE_OVER_BRIGHT_FACTOR 15
 
 namespace UI {
+
+struct Panel; //forward declaration for next two lines
+typedef std::list<Panel *>::iterator panellist_it;
+typedef std::list<Panel *>::const_iterator panellist_cit;
+typedef std::list<Panel *>::const_reverse_iterator panellist_crit;
+
 /**
  * Panel is a basic rectangular UI element.
  * The outer rectangle is defined by (_x, _y, _w, _h) and encloses the entire panel,
@@ -48,8 +55,6 @@ struct Panel : public Object {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
 		pf_top_on_click = 4, ///< bring panel on top when clicked inside it
-		pf_die = 8, ///< this panel needs to die
-		pf_child_die = 16, ///< a child needs to die
 		pf_visible = 32, ///< render the panel
 		pf_can_focus = 64, ///< can receive the keyboard focus
 		pf_snap_windows_only_when_overlapping = 128, ///< children should snap only when overlapping the snap target
@@ -64,6 +69,8 @@ struct Panel : public Object {
 
 	inline Panel *get_parent() const {return _parent;}
 
+	void add_child(Panel * child);
+	void remove_child(Panel * child);
 	void free_children();
 
 	// Modal
@@ -105,10 +112,8 @@ struct Panel : public Object {
 	inline int get_inner_w() const {return _w-(_lborder+_rborder);}
 	inline int get_inner_h() const {return _h-(_tborder+_bborder);}
 
-	const Panel * get_next_sibling () const {return _next;}
-	const Panel * get_prev_sibling () const {return _prev;}
-	const Panel * get_first_child  () const {return _fchild;}
-	const Panel * get_last_child   () const {return _lchild;}
+	panellist_cit get_first_child  () const {return m_children.begin();}
+	panellist_cit get_last_child  () const {return m_children.end();}
 
 	void move_to_top();
 
@@ -144,7 +149,7 @@ struct Panel : public Object {
 	void set_can_focus(bool yes);
 	inline bool get_can_focus() const {return (_flags & pf_can_focus) ? true : false;}
 	inline bool has_focus() const {assert(get_can_focus()); return (_parent->_focus == this);}
-   void focus();
+	void focus();
 
 	void set_think(bool yes);
 	inline bool get_think() const {return (_flags & pf_think) ? true : false;}
@@ -156,23 +161,14 @@ struct Panel : public Object {
 	inline bool get_top_on_click() const {return (_flags & pf_top_on_click) ? true : false;}
 
 protected:
-	void die();
-
-   bool keyboard_free() {return !(_focus);}
+	bool keyboard_free() {return !(_focus);}
 
 	void play_click();
 
 private:
-	void check_child_death();
-
 	void do_draw(RenderTarget* dst);
 
-	/**
-	 * Returns the child panel that receives mouse events at the given location.
-	 * Starts the search with child (which should usually be set to _fchild) and
-	 * returns the first match.
-	 */
-	Panel * child_at_mouse_cursor(int mouse_x, int mouse_y, Panel * child);
+	Panel * child_at_mouse_cursor(int mouse_x, int mouse_y);
 	void do_mousein(bool inside);
 	bool do_mousepress  (const Uint8 btn, int x, int y);
 	bool do_mouserelease(const Uint8 btn, int x, int y);
@@ -180,10 +176,9 @@ private:
 	bool do_key(bool down, int code, char c);
 
 	Panel *_parent;
-	Panel *_next, *_prev;
-	Panel *_fchild, *_lchild; // first, last child
-	Panel *_mousein; // child panel the mouse is in
-	Panel *_focus; // keyboard focus
+	std::list<Panel *> m_children;
+	Panel *_mousein; ///< cache child panel the mouse is in
+	Panel *_focus; ///< keyboard focus
 
 	uint32_t _flags;
 	uint32_t _cache;

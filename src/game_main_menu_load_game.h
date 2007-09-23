@@ -44,7 +44,7 @@ private:
       void edit_box_changed();
 
       void fill_list();
-	bool load_game(const std::string & filename);
+	void load_game(const std::string & filename);
 
       Interactive_Player* m_parent;
 	UI::Textarea * m_name, * m_gametime;

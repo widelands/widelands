@@ -113,11 +113,10 @@ class BulldozeConfirm
 ==============================================================================
 */
 
-/*
-class BulldozeConfirm
----------------------
-Confirm the bulldoze request for a building.
-*/
+/**
+ * Confirm the bulldoze request for a building.
+ * \todo move this into it's own set of files
+ */
 class BulldozeConfirm : public UI::Window {
 public:
 	BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy = 0);
@@ -126,6 +125,7 @@ public:
 	virtual void think();
 
 private:
+	void die() __attribute__((deprecated));
 	void bulldoze();
 
 private:
@@ -191,6 +191,10 @@ BulldozeConfirm::~BulldozeConfirm()
 {
 }
 
+void BulldozeConfirm::die()
+{
+	delete this;
+}
 
 /*
 ===============
@@ -207,7 +211,7 @@ void BulldozeConfirm::think()
 
 	if (!todestroy || !building ||
 	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-		die();
+		delete this;
 }
 
 
@@ -235,7 +239,7 @@ void BulldozeConfirm::bulldoze()
 		}
 	}
 
-	die();
+	delete this;
 }
 
 
@@ -744,7 +748,7 @@ void Building_Window::act_start_stop() {
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
 		g->send_player_start_stop_building (m_building);
 
-	die();
+	delete this;
 }
 
 /*
@@ -760,7 +764,7 @@ void Building_Window::act_enhance(const Building_Descr::Index id)
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
 		g->send_player_enhance_building (m_building, id);
 
-	die();
+	delete this;
 }
 
 /*
@@ -1196,9 +1200,8 @@ void ProductionSite_Window_ListWorkerWindow::think() {
 		 or
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
-      // The Productionsite has been removed. Die quickly.
-      die();
-      return;
+		// The Productionsite has been removed. Die quickly.
+		delete this;
 	}
 
    fill_list();
@@ -1480,7 +1483,7 @@ void ProductionSite_Window::list_worker_clicked() {
    assert(*m_reg==this);
 
    *m_reg=new ProductionSite_Window_ListWorkerWindow(m_parent, get_productionsite());
-   die();
+   delete this;
 }
 
 /*
@@ -1637,9 +1640,8 @@ void MilitarySite_Window::think()
 		 or
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
-      // The Site has been removed. Die quickly.
-      die();
-      return;
+      		// The Site has been removed. Die quickly.
+		delete this;
 	}
    update();
 }
@@ -1888,8 +1890,7 @@ void TrainingSite_Options_Window::think()
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
-		die();
-		return;
+		delete this;
 	}
 	update();
 }
@@ -2098,8 +2099,7 @@ void TrainingSite_Window::think()
 		 dynamic_cast<const ConstructionSite *>(base_immovable))
 	{
 		// The Site has been removed. Die quickly.
-		die();
-		return;
+		delete this;
 	}
 	update();
 }
@@ -2160,8 +2160,7 @@ void TrainingSite_Window::options_button_clicked () {
 	assert(*m_reg==this);
 
 	*m_reg=new TrainingSite_Options_Window(m_parent, get_trainingsite());
-	die();
-
+	delete this;
 }
 
 /*

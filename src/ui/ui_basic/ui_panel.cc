@@ -42,7 +42,7 @@ Panel::Panel
 	 const int nx, const int ny, const uint32_t nw, const uint32_t nh,
 	 const std::string & tooltip_text)
 	:
-_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
+_parent(nparent), _mousein(0), _focus(0),
 _flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
 _x(nx), _y(ny), _w(nw), _h(nh),
 _lborder(0), _rborder(0), _tborder(0), _bborder(0),
@@ -50,16 +50,10 @@ _border_snap_distance(0), _panel_snap_distance(0),
 	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
 {
 	assert(nparent != this);
-	if (_parent) {
-		_next = _parent->_fchild;
-		_prev = 0;
-		if (_next)
-			_next->_prev = this;
-		else
-			_parent->_lchild = this;
-		_parent->_fchild = this;
-	} else
-		_prev = _next = 0;
+
+	if (_parent)
+		_parent->add_child(this);
+
 	update(0, 0, _w, _h);
 }
 
@@ -89,24 +83,29 @@ Panel::~Panel()
 		if (_parent->_focus == this)
 			_parent->_focus = 0;
 
-		if (_prev)
-			_prev->_next = _next;
-		else
-			_parent->_fchild = _next;
-		if (_next)
-			_next->_prev = _prev;
-		else
-			_parent->_lchild = _prev;
+		_parent->remove_child(this);
 	}
 
 	free(_tooltip);
 }
 
+void Panel::add_child(Panel * child)
+{
+	m_children.push_front(child);
+}
+
+void Panel::remove_child(Panel * child)
+{
+	m_children.remove(child);
+}
 
 /**
-Free all of the panel's children.
-*/
-void Panel::free_children() {while (_fchild) delete _fchild;}
+ * Free all of the panel's children.
+ */
+void Panel::free_children() {
+ 	while (!m_children.empty())
+ 		delete *(m_children.begin());
+}
 
 
 /**
@@ -166,9 +165,6 @@ int Panel::run()
 
 			g_gr->refresh();
 		}
-
-		if (_flags & pf_child_die)
-			check_child_death();
 
 #ifdef DEBUG
 #ifndef __WIN32__
@@ -287,24 +283,9 @@ void Panel::move_to_top()
 	if (!_parent)
 		return;
 
-	// unlink
-	if (_prev)
-		_prev->_next = _next;
-	else
-		_parent->_fchild = _next;
-	if (_next)
-		_next->_prev = _prev;
-	else
-		_parent->_lchild = _prev;
-
-	// relink
-	_prev = 0;
-	_next = _parent->_fchild;
-	_parent->_fchild = this;
-	if (_next)
-		_next->_prev = this;
-	else
-		_parent->_lchild = this;
+	//readd ourselves at the top of stack
+	_parent->remove_child(this);
+	_parent->add_child(this);
 }
 
 /**
@@ -321,26 +302,20 @@ void Panel::set_visible(bool on)
 }
 
 /**
- * [virtual]
  * Redraw the panel. Note that all drawing coordinates are relative to the
  * inner area: you cannot overwrite the panel border in this function.
  */
 void Panel::draw(RenderTarget *) {}
 
 /**
- * [virtual]
  * Redraw the panel border.
  */
 void Panel::draw_border(RenderTarget *) {}
 
 
-/*
-===============
-Panel::draw_overlay [virtual]
-
-Draw overlays that appear over all child panels.
-This can be used e.g. for debug information.
-===============
+/**
+ * Draw overlays that appear over all child panels.
+ * This can be used e.g. for debug information.
 */
 void Panel::draw_overlay(RenderTarget &) {}
 
@@ -423,9 +398,11 @@ void Panel::set_cache(bool)
  */
 void Panel::think()
 {
-	for (Panel *child = _fchild; child; child = child->_next) {
-		if (child->get_think())
-			child->think();
+	panellist_it child;
+
+	for (child=m_children.begin(); child!=m_children.end(); ++child) {
+		if ((*child)->get_think())
+			(*child)->think();
 	}
 }
 
@@ -577,52 +554,15 @@ void Panel::set_think(bool yes)
 }
 
 /**
- * Cause this panel to be removed on the next frame.
- * Use this for a panel that needs to destroy itself after a button has
- * been pressed (e.g. non-modal dialogs).
- * Do NOT use this to delete a hierarchy of panels that have been modal.
- */
-void Panel::die()
-{
-   _flags |= pf_die;
-
-	for (Panel *p = _parent; p; p = p->_parent) {
-		p->_flags |= pf_child_die;
-		if (p == _modal)
-			break;
-	}
-}
-
-/**
  * Wrapper around Sound_Handler::play_fx() to prevent having to include
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click()
-{g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);}
-
-/** [private]
- *
- * Recursively walk the panel tree, killing panels that are marked for death
- * using die().
- */
-void Panel::check_child_death()
 {
-	Panel *next = _fchild;
-	while (next) {
-		Panel *p = next;
-		next = p->_next;
-
-		if (p->_flags & pf_die)
-			delete p;
-		else if (p->_flags & pf_child_die)
-			p->check_child_death();
-	}
-
-   _flags &= ~pf_child_die;
+	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
 }
 
 /**
- * [private]
  * dst is the RenderTarget for the parent Panel.
  * Subset for the border first and draw the border, then subset for the inner area
  * and draw the inner area.
@@ -650,8 +590,8 @@ void Panel::do_draw(RenderTarget* dst)
 				draw(dst);
 
 				// draw back to front
-				for (Panel *child = _lchild; child; child = child->_prev)
-					child->do_draw(dst);
+				for (panellist_crit i=m_children.rbegin(); i!=m_children.rend(); ++i)
+					(*i)->do_draw(dst);
 
 				draw_overlay(*dst);
 			}
@@ -672,8 +612,8 @@ void Panel::do_draw(RenderTarget* dst)
 			if (inner) {
 				draw(inner);
 
-				for (Panel *child = _lchild; child; child = child->_prev)
-					child->do_draw(inner);
+				for (panellist_crit i=m_children.rbegin(); i!=m_children.rend(); ++i)
+					(*i)->do_draw(inner);
 
 				inner->leave_window();
 			}
@@ -687,26 +627,22 @@ void Panel::do_draw(RenderTarget* dst)
 	*/
 }
 
-
-inline Panel * Panel::child_at_mouse_cursor(int x, int y, Panel * child) {
-
-	for (; child; child = child->_next) {
-		if (!child->get_handle_mouse() || !child->get_visible())
+/**
+ * \return The child panel that receives mouse events at the given location.
+ */
+inline Panel * Panel::child_at_mouse_cursor(int x, int y)
+{
+	for (panellist_it i = m_children.begin(); i!=m_children.end(); ++i) {
+		if (!(*i)->get_handle_mouse() || !(*i)->get_visible())
 			continue;
-		if
-			(x < child->_x + static_cast<int>(child->_w) and x >= child->_x
-			 and
-			 y < child->_y + static_cast<int>(child->_h) and y >= child->_y)
-			break;
+
+		if (x < (*i)->_x + static_cast<int>((*i)->_w) and x >= (*i)->_x
+		    and
+		    y < (*i)->_y + static_cast<int>((*i)->_h) and y >= (*i)->_y)
+			return (*i);
 	}
 
-	if (_mousein && _mousein != child)
-		_mousein->do_mousein(false);
-	_mousein = child;
-	if (child)
-		child->do_mousein(true);
-
-	return child;
+	return 0;
 }
 
 /**
@@ -723,48 +659,67 @@ void Panel::do_mousein(bool inside)
 }
 
 /**
- * Propagate mousepresses/-releases/-moves to the appropriate panel.
+ * Propagate mousepresses to the appropriate panel.
  *
- * Returns whether the event was processed.
+ * \return Whether the event was processed.
  */
 bool Panel::do_mousepress(const Uint8 btn, int x, int y) {
 	x -= _lborder;
 	y -= _tborder;
 	if (_flags & pf_top_on_click) move_to_top();
-	if (_g_mousegrab != this)
-		if (Panel * child = _fchild) for (;; child = child->_next) {
-			child = child_at_mouse_cursor(x, y, child);
-			if (not child) break;
+	if (_g_mousegrab != this) {
+		Panel * child = child_at_mouse_cursor(x, y);
+		if (child)
 			if (child->do_mousepress(btn, x - child->_x, y - child->_y))
 				return true;
-		}
+	}
 	return handle_mousepress(btn, x, y);
 }
+
+/**
+ * Propagate mousereleases to the appropriate panel.
+ *
+ * \return Whether the event was processed.
+ */
 bool Panel::do_mouserelease(const Uint8 btn, int x, int y) {
 	x -= _lborder;
 	y -= _tborder;
-	if (_g_mousegrab != this)
-		if (Panel * child = _fchild) for (;; child = child->_next) {
-			child = child_at_mouse_cursor(x, y, child);
-			if (not child) break;
+	if (_g_mousegrab != this) {
+		Panel * child = child_at_mouse_cursor(x, y);
+		if (child)
 			if (child->do_mouserelease(btn, x - child->_x, y - child->_y))
 				return true;
-		}
+	}
 	return handle_mouserelease(btn, x, y);
 }
+
+/**
+ * Propagate mousemoves to the appropriate panel.
+ *
+ * \return Whether the event was processed.
+ */
 bool Panel::do_mousemove(const Uint8 state, int x, int y, int xdiff, int ydiff)
 {
 	x -= _lborder;
 	y -= _tborder;
-	if (_g_mousegrab != this)
-		if (Panel * child = _fchild) for (;; child = child->_next) {
-			child = child_at_mouse_cursor(x, y, child);
-			if (not child) break;
-			if
-				(child->do_mousemove
-				 (state, x - child->_x, y - child->_y, xdiff, ydiff))
-				return true;
+	if (_g_mousegrab != this) {
+		Panel * child = child_at_mouse_cursor(x, y);
+
+		if (_mousein != child) { // is the mousecursor now over a different panel than before?
+			if (_mousein) //if we were over a subpanel before, tell it the mouse has left
+				_mousein->do_mousein(false);
+
+			if (child) //if we're over a subpanel now, tell it the mouse has entered
+				child->do_mousein(true);
+
+			_mousein = child; //remember the new panel under the mouse
 		}
+
+		if (child) {
+			if (child->do_mousemove(state, x - child->_x, y - child->_y, xdiff, ydiff))
+ 				return true;
+		}
+	}
 	return handle_mousemove(state, x, y, xdiff, ydiff);
 }
 

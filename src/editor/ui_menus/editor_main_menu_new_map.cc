@@ -177,7 +177,7 @@ void Main_Menu_New_Map::clicked_create_map() {
 	m_parent->set_need_save(true);
 	m_parent->need_complete_redraw();
 
-	die();
+	delete this;
 }
 
 

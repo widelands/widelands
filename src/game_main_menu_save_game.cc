@@ -114,16 +114,21 @@ Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game()
 {
 }
 
+void Game_Main_Menu_Save_Game::die()
+{
+	delete this;
+}
+
 /*
 ===========
 called when the ok button has been clicked
 ===========
 */
 void Game_Main_Menu_Save_Game::clicked_ok() {
-      std::string filename=m_editbox->get_text();
+	std::string filename=m_editbox->get_text();
 
-      if (save_game(filename))
-         die();
+	if (save_game(filename))
+		delete this;
 }
 
 /**

@@ -137,6 +137,11 @@ Main_Menu_Load_Map::~Main_Menu_Load_Map()
 {
 }
 
+void Main_Menu_Load_Map::die()
+{
+	delete this;
+}
+
 /*
 ===========
 called when the ok button has been clicked
@@ -152,7 +157,7 @@ void Main_Menu_Load_Map::clicked_ok() {
          fill_list();
 		} else {
          load_map(filename);
-         die();
+         delete this;
 		}
 }
 
