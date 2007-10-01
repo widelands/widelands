@@ -405,7 +405,7 @@ private:
 		enum Type {
          PIC,
 		};
-      void*       data;
+      uint32_t    data;
       std::string filename;
       Type        type;
 	};

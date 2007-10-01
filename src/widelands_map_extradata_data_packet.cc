@@ -83,7 +83,7 @@ throw (_wexception)
             Map::Extradata_Info info;
             info.type = Map::Extradata_Info::PIC;
             info.filename = *pname;
-            info.data = (void*)data;
+            info.data = data;
             egbase->get_map()->m_extradatainfos.push_back(info);
 			}
 		}
@@ -117,7 +117,7 @@ throw (_wexception)
 		fs.EnsureDirectoryExists("pics");
       FileWrite fw;
 
-      g_gr->save_png((uint32_t)edi.data, &fw);
+      g_gr->save_png(edi.data, &fw);
 
       fw.Write(fs, edi.filename.c_str());
 	}
