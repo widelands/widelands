@@ -252,14 +252,6 @@ protected:
 
 	bool   m_mouse_locked;
 
-	///the internal mouse position (sub-pixel accuracy for use with mouse
-	///speed)
-	float  m_mouse_internal_x;
-
-	///the internal mouse position (sub-pixel accuracy for use with mouse
-	///speed)
-	float  m_mouse_internal_y;
-
 	Point m_mouse_internal_comp_position;
 	//@}
 

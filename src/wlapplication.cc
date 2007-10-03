@@ -221,7 +221,6 @@ WLApplication::WLApplication(const int32_t argc, const char **argv):
 		m_mouse_swapped(false),
 		m_mouse_position(0, 0),
 		m_mouse_locked(0),
-		m_mouse_internal_x(0), m_mouse_internal_y(0),
 		m_mouse_internal_comp_position(0, 0),
 		m_should_die(false),
 		m_gfx_w(0), m_gfx_h(0),
@@ -617,8 +616,6 @@ const int32_t WLApplication::get_time()
 void WLApplication::set_mouse_pos(const Point p)
 {
 	m_mouse_position = p;
-	m_mouse_internal_x = p.x;
-	m_mouse_internal_y = p.y;
 
 	do_warp_mouse(p); // sync mouse positions
 }
@@ -635,8 +632,6 @@ void WLApplication::set_input_grab(bool grab)
 
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
-		m_mouse_internal_x = m_mouse_position.x;
-		m_mouse_internal_y = m_mouse_position.y;
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
 		do_warp_mouse(m_mouse_position);
