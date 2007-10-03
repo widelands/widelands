@@ -123,12 +123,6 @@ struct InputCallback {
  * cursor leaves the window. This means we have to grab the mouse, then relative
  * coords are always available.
  *
- * Some mouse functions deal with button mask bits. Bits are simply
- * obtained as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right
- * are pressed"
- *
- * \todo Use mousebutton names from SDL instead of hardcoded bitmasks
- *
  * \todo What happens if a playback is canceled? Does the game continue or quit?
  * \todo Can recording be canceled?
  * \todo Should we allow to trigger recording ingame, starting with a snapshot
