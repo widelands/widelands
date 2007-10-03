@@ -117,11 +117,14 @@ struct InputCallback {
  * SDL can handle a mouse cursor on it's own, but only in black'n'white. That's
  * not sufficient for a game.
  *
- * So Widelands must paint it's own cursor (even more so, as we have \e two
+ * So Widelands must paint it's own cursor (even more so as we have \e two
  * cursors: the freefloating hand and the cross that moves on nodes) and hide
- * the system cursor. Ordinarily, relative coordinates break down when the
- * cursor leaves the window. This means we have to grab the mouse, then relative
- * coords are always available.
+ * the system cursor.
+ *
+ * Ordinarily, relative coordinates break down when the cursor leaves the
+ * window. This means we have to grab the mouse, then relative coords are
+ * always available.
+ * \todo Actually do grab the mouse when it is locked
  *
  * \todo What happens if a playback is canceled? Does the game continue or quit?
  * \todo Can recording be canceled?
@@ -134,7 +137,6 @@ struct InputCallback {
  * essential for playback anyway. Additionally, we'll want several rendering
  * backends (software and OpenGL). Maybe the graphics backend loader code should
  * be in System, while the actual graphics work is done elsewhere.
- * \todo Mouse handling is not documented very well
  * \todo Refactor the mainloop
  * \todo Sensible use of exceptions (goes for whole game)
  * \todo Default filenames for recording and playback
@@ -157,24 +159,17 @@ struct WLApplication {
 		{return SDL_GetKeyState(0)[key];}
 
 	//@{
-	void set_mouse_pos(const Point);
+	void warp_mouse(const Point position);
+	void set_input_grab(const bool grab);
 
 	/// The mouse's current coordinates
 	Point get_mouse_position() const throw () {return m_mouse_position;}
 
-	void set_input_grab(const bool grab);
-
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
 
-	void set_mouse_speed(const float speed);
-
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
-
-	void set_max_mouse_coords(const int32_t x, const int32_t y);
-
-	void do_warp_mouse(const Point);
 	//@}
 
 	void init_graphics(const int32_t w, const int32_t h, const int32_t bpp,
@@ -239,21 +234,19 @@ protected:
 	///the event recorder object
 	Journal *journal;
 
-	/// Mouse handling
-	//@{
-	bool   m_input_grab; //  config options
-
 	///True if left and right mouse button should be swapped
-	bool   m_mouse_swapped;
+	bool  m_mouse_swapped;
 
-	///Current state of the mouse buttons
-
+	///The current position of the mouse pointer
 	Point m_mouse_position;
 
-	bool   m_mouse_locked;
+	///If true, the mouse cursor will \e not move with a mousemotion event:
+	///instead, the map will be scrolled
+	bool  m_mouse_locked;
 
-	Point m_mouse_internal_comp_position;
-	//@}
+	///If the mouse needs to be moved in warp_mouse(), this Point is
+	///used to cancel the resulting SDL_MouseMotionEvent.
+	Point m_mouse_compensate_warp;
 
 	///true if an external entity wants us to quit
 	bool   m_should_die;

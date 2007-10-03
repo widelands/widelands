@@ -346,7 +346,8 @@ void FieldActionWindow::init()
 
 	// Now force the mouse onto the first button
 	// TODO: should be on first tab button if we're building
-	set_mouse_pos(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
+	set_mouse_pos(Point(17 + BG_CELL_WIDTH * m_best_tab,
+	                    m_fastclick ? 51 : 17));
 }
 
 

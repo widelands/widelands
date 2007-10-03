@@ -217,11 +217,10 @@ WLApplication * const WLApplication::get(const int32_t argc, const char **argv)
 WLApplication::WLApplication(const int32_t argc, const char **argv):
 		m_commandline(std::map<std::string, std::string>()),
 		journal(0),
-		m_input_grab(false),
 		m_mouse_swapped(false),
 		m_mouse_position(0, 0),
 		m_mouse_locked(0),
-		m_mouse_internal_comp_position(0, 0),
+		m_mouse_compensate_warp(0, 0),
 		m_should_die(false),
 		m_gfx_w(0), m_gfx_h(0),
 		m_gfx_fullscreen(false),
@@ -405,12 +404,12 @@ restart:
 			// settings are invisible to the rest of the code
 			switch (ev->type) {
 			case SDL_MOUSEMOTION:
-				ev->motion.xrel += m_mouse_internal_comp_position.x;
-				ev->motion.yrel += m_mouse_internal_comp_position.y;
-				m_mouse_internal_comp_position = Point(0, 0);
+				ev->motion.xrel += m_mouse_compensate_warp.x;
+				ev->motion.yrel += m_mouse_compensate_warp.y;
+				m_mouse_compensate_warp = Point(0, 0);
 
 				if (m_mouse_locked) {
-					set_mouse_pos(m_mouse_position);
+					warp_mouse(m_mouse_position);
 
 					ev->motion.x = m_mouse_position.x;
 					ev->motion.y = m_mouse_position.y;
@@ -610,47 +609,48 @@ const int32_t WLApplication::get_time()
 }
 
 /**
- * Move the mouse cursor.
- * No mouse moved event will be issued.
+ * Instantaneously move the mouse cursor without creating a motion event.
+ *
+ * SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As a
+ * workaround, we store the delta in m_mouse_compensate_warp and use that to
+ * eliminate the motion event in poll_event()
+ * \todo Should this method have to care about playback at all???
+ *
+ * \param position The new mouse position
  */
-void WLApplication::set_mouse_pos(const Point p)
+void WLApplication::warp_mouse(const Point position)
 {
-	m_mouse_position = p;
+	m_mouse_position = position;
 
-	do_warp_mouse(p); // sync mouse positions
+	if (not journal->is_playingback()) { //  don't warp anything during playback
+		Point cur_position;
+		SDL_GetMouseState(&cur_position.x, &cur_position.y);
+		if (cur_position != position) {
+			m_mouse_compensate_warp += cur_position - position;
+			SDL_WarpMouse(position.x, position.y);
+		}
+	}
 }
 
 /**
  * Changes input grab mode.
+ *
+ * This makes sure that the mouse cannot leave our window (and also that we get
+ * mouse/keyboard input nearly unmodified, but we don't really care about that).
+ *
+ * \note This also cuts out any mouse-speed modifications that a generous window
+ * manager might be doing.
  */
 void WLApplication::set_input_grab(bool grab)
 {
 	if (journal->is_playingback())
 		return; // ignore in playback mode
 
-	m_input_grab = grab;
-
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
-		do_warp_mouse(m_mouse_position);
-	}
-}
-
-/**
- * Warp the SDL mouse cursor to the given position.
- * Store the delta mouse_internal_compx/y, so that the resulting motion
- * event can be eliminated.
- */
-void WLApplication::do_warp_mouse(const Point p) {
-	if (not journal->is_playingback()) { //  don't warp anything during playback
-		Point cur_position;
-		SDL_GetMouseState(&cur_position.x, &cur_position.y);
-		if (cur_position != p) {
-			m_mouse_internal_comp_position += cur_position - p;
-			SDL_WarpMouse(p.x, p.y);
-		}
+		warp_mouse(m_mouse_position); //TODO: is this redundant?
 	}
 }
 

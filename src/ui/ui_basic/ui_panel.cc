@@ -428,7 +428,7 @@ void Panel::set_mouse_pos(const Point p) {
 	const Point relative_p =
 		p + Point(get_x() + get_lborder(), get_y() + get_tborder());
 	if (_parent) _parent     ->set_mouse_pos(relative_p);
-	else WLApplication::get()->set_mouse_pos(relative_p);
+	else WLApplication::get()->warp_mouse(relative_p);
 }
 
 
